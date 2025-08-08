@@ -1,38 +1,38 @@
 ---
 title: tiup dm list
-summary: tiup-dm supports deploying multiple clusters using the same control machine. The "tiup dm list" command checks which clusters are deployed by the currently logged-in user. The data is stored in the ~/.tiup/storage/dm/clusters/ directory. The user can view the cluster name, deploying user, version, path, and private key.
+summary: tiup-dm は、同一の制御マシンを用いた複数のクラスタのデプロイをサポートします。「tiup dm list」コマンドは、現在ログインしているユーザーがデプロイしたクラスタを確認します。データは ~/.tiup/ storage/dm/clusters/ ディレクトリに保存されます。ユーザーはクラスタ名、デプロイしたユーザー、バージョン、パス、秘密鍵を確認できます。
 ---
 
-# tiup dm list
+# tiup dm list {#tiup-dm-list}
 
-`tiup-dm` supports deploying multiple clusters using the same control machine. You can use the `tiup dm list` command to check which clusters are deployed using the control machine by the currently logged-in user.
+`tiup-dm` `tiup dm list`同じコントロールマシンを使用して複数のクラスターをデプロイすることをサポートしています。2 コマンドを使用すると、現在ログインしているユーザーがコントロールマシンを使用してデプロイしているクラスターを確認できます。
 
-> **Note:**
+> **注記：**
 >
-> By default, the data of the deployed clusters is stored in the `~/.tiup/storage/dm/clusters/` directory. The currently logged-in user cannot view the clusters deployed by other users on the same control machine.
+> デフォルトでは、デプロイされたクラスタのデータは`~/.tiup/storage/dm/clusters/`ディレクトリに保存されます。現在ログインしているユーザーは、同じコントロールマシンに他のユーザーがデプロイしたクラスタを閲覧することはできません。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm list [flags]
 ```
 
-## Options
+## オプション {#options}
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
 
-## Output
+## 出力 {#output}
 
-A table consisting of the following fields:
+次のフィールドで構成されるテーブル:
 
-- `Name`: the cluster name.
-- `User`: the user who deployed the cluster.
-- `Version`: the cluster version.
-- `Path`: the path of the cluster deployment data on the control machine.
-- `PrivateKey`: the path of the private key to the cluster.
+-   `Name` : クラスター名。
+-   `User` : クラスターをデプロイしたユーザー。
+-   `Version` : クラスターのバージョン。
+-   `Path` : 制御マシン上のクラスター展開データのパス。
+-   `PrivateKey` : クラスターへの秘密鍵のパス。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

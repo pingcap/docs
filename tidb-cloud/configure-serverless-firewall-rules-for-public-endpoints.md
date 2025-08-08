@@ -1,58 +1,58 @@
 ---
-title: Configure {{{ .starter }}} Firewall Rules for Public Endpoints 
-summary: Learn how to configure and manage firewall rules with public access to your {{{ .starter }}} cluster securely.
+title: Configure TiDB Cloud Serverless Firewall Rules for Public Endpoints 
+summary: TiDB Cloud Serverless クラスターへのパブリック アクセスを安全に実現するファイアウォール ルールを構成および管理する方法を学びます。
 ---
 
-# Configure {{{ .starter }}} Firewall Rules for Public Endpoints
+# パブリックエンドポイント用のTiDB Cloudサーバーレス ファイアウォール ルールを構成する {#configure-tidb-cloud-serverless-firewall-rules-for-public-endpoints}
 
-This document describes the public connectivity option for {{{ .starter }}}. You will learn key concepts for securely managing a {{{ .starter }}} cluster accessible via the internet.
+このドキュメントでは、TiDB Cloud Serverless のパブリック接続オプションについて説明します。インターネット経由でアクセス可能なTiDB Cloud Serverless クラスターを安全に管理するための重要な概念を学習します。
 
-> **Note:**
+> **注記：**
 >
-> This document applies to **{{{ .starter }}}**. For instructions on configuring an IP access list for **TiDB Cloud Dedicated**, see [Configure an IP Access List for TiDB Cloud Dedicated](/tidb-cloud/configure-ip-access-list.md).
+> このドキュメントは**TiDB Cloud Serverless**に適用されます。TiDB **TiDB Cloud Dedicated**のIPアクセスリストの設定手順については、 [TiDB Cloud DedicatedのIPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)参照してください。
 
-## Public endpoints
+## パブリックエンドポイント {#public-endpoints}
 
-Configuring public access on your {{{ .starter }}} cluster allows the cluster access through a public endpoint. That is, the cluster is accessible through the internet. The public endpoint is a publicly resolvable DNS address. The term "authorized network" refers to a range of IP addresses you choose to permit access to your cluster. These permissions are enforced through **firewall rules**.
+TiDB Cloud Serverless クラスターにパブリックアクセスを設定すると、パブリックエンドポイント経由でクラスターにアクセスできるようになります。つまり、クラスターはインターネット経由でアクセス可能になります。パブリックエンドポイントとは、公開解決可能な DNS アドレスです。「承認済みネットワーク」とは、クラスターへのアクセスを許可するために選択した IP アドレスの範囲を指します。これらの権限は、**ファイアウォールルール**を通じて適用されます。
 
-### Characteristics of public access
+### パブリックアクセスの特徴 {#characteristics-of-public-access}
 
-- Only specified IP addresses can access {{{ .starter }}}.  
-    - By default, all IP addresses (`0.0.0.0 - 255.255.255.255`) are allowed.  
-    - You can update allowed IP addresses after cluster creation.  
-- Your cluster has a publicly resolvable DNS name.  
-- Network traffic to and from your cluster is routed over the **public internet** rather than a private network.
+-   指定された IP アドレスのみがTiDB Cloud Serverless にアクセスできます。
+    -   デフォルトではすべてのIPアドレス（ `0.0.0.0 - 255.255.255.255` ）が許可されます。
+    -   クラスターの作成後に、許可された IP アドレスを更新できます。
+-   クラスターにはパブリックに解決可能な DNS 名があります。
+-   クラスターとの間のネットワーク トラフィックは、プライベート ネットワークではなく**パブリック インターネット**経由でルーティングされます。
 
-### Firewall rules
+### ファイアウォールルール {#firewall-rules}
 
-Granting access to an IP address is done via **firewall rules**. If a connection attempt originates from an unapproved IP address, the client will receive an error.
+IPアドレスへのアクセスの許可は、**ファイアウォールルール**によって行われます。承認されていないIPアドレスから接続が試みられた場合、クライアントはエラーを受け取ります。
 
-You can create a maximum of 200 IP firewall rules.
+最大 200 個の IP ファイアウォール ルールを作成できます。
 
-### Allow AWS access
+### AWSアクセスを許可する {#allow-aws-access}
 
-You can enable access from **all AWS IP addresses** by referring to the official [AWS IP address list](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html).  
+公式の[AWS IPアドレスリスト](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html)を参考にして、**すべての AWS IP アドレス**からのアクセスを有効にすることができます。
 
-TiDB Cloud regularly updates this list and uses the reserved IP address **169.254.65.87** to represent all AWS IP addresses.
+TiDB Cloud はこのリストを定期的に更新し、予約済みの IP アドレス**169.254.65.87**を使用してすべての AWS IP アドレスを表します。
 
-## Create and manage a firewall rule
+## ファイアウォールルールの作成と管理 {#create-and-manage-a-firewall-rule}
 
-This section describes how to manage firewall rules for a {{{ .starter }}} cluster. With a public endpoint, the connections to the {{{ .starter }}} cluster are restricted to the IP addresses specified in the firewall rules.
+このセクションでは、 TiDB Cloud Serverless クラスターのファイアウォールルールを管理する方法について説明します。パブリックエンドポイントを使用すると、 TiDB Cloud Serverless クラスターへの接続は、ファイアウォールルールで指定された IP アドレスに制限されます。
 
-To add firewall rules to a {{{ .starter }}} cluster, take the following steps:
+TiDB Cloud Serverless クラスターにファイアウォール ルールを追加するには、次の手順を実行します。
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2. In the left navigation pane, click **Settings** > **Networking**.
+2.  左側のナビゲーション ペインで、 **[設定]** &gt; **[ネットワーク] を**クリックします。
 
-3. On the **Networking** page, enable **Public Endpoint** if it is disabled. In **Authorized Networks**, click **+ Add Current IP**. This automatically creates a firewall rule with the public IP address of your computer, as perceived by TiDB Cloud.
+3.  **「ネットワーク」**ページで、 **「パブリックエンドポイント」**が無効になっている場合は有効にします。 **「承認済みネットワーク」**で、 **「+ 現在のIPを追加」**をクリックします。これにより、 TiDB Cloudが認識したコンピューターのパブリックIPアドレスを含むファイアウォールルールが自動的に作成されます。
 
-    > **Note:**
+    > **注記：**
     >
-    > In some situations, the IP address observed by the TiDB Cloud console differs from the IP address used when accessing the internet. Therefore, you might need to change the start and end IP addresses to make the rule function as expected. You can use a search engine or other online tool to check your own IP address. For example, search for "what is my IP."
+    > 状況によっては、 TiDB Cloudコンソールで監視される IP アドレスが、インターネットへのアクセス時に使用される IP アドレスと異なる場合があります。そのため、ルールを期待どおりに機能させるには、開始 IP アドレスと終了 IP アドレスを変更する必要がある場合があります。検索エンジンなどのオンラインツールを使用して、ご自身の IP アドレスを確認できます。例えば、「what is my IP」で検索してみてください。
 
-4. Click **Add rule** to add more address ranges. In the displayed window, you can specify a single IP address or a range of IP addresses. If you want to limit the rule to a single IP address, type the same IP address in the **Start IP Address** and **End IP Address** fields. Opening the firewall enables administrators, users, and applications to access any database on your {{{ .starter }}} cluster to which they have valid credentials. Click **Submit** to add the firewall rule.
+4.  **「ルールを追加」**をクリックすると、アドレス範囲を追加できます。表示されるウィンドウで、単一のIPアドレスまたはIPアドレスの範囲を指定できます。ルールを単一のIPアドレスに限定したい場合は、 **「開始IPアドレス」**と**「終了IPアドレス」**のフィールドに同じIPアドレスを入力してください。ファイアウォールを有効にすると、管理者、ユーザー、アプリケーションは、有効な認証情報を持つTiDB Cloud Serverlessクラスター上の任意のデータベースにアクセスできるようになります。「送信」**を**クリックすると、ファイアウォールルールが追加されます。
 
-## What's next
+## 次は何？ {#what-s-next}
 
-- [Connect to {{{ .starter }}} via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
+-   [パブリックエンドポイント経由でTiDB Cloud Serverless に接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)

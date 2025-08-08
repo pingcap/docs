@@ -3,34 +3,34 @@ title: TiCDC Glossary
 summary: Learn the terms about TiCDC and their definitions.
 ---
 
-# TiCDC Glossary
+# TiCDC用語集 {#ticdc-glossary}
 
-This glossary provides TiCDC-related terms and definitions. These terms appear in TiCDC logs, monitoring metrics, configurations, and documents.
+この用語集では、TiCDC関連の用語と定義について説明します。これらの用語は、TiCDCのログ、監視メトリック、設定、およびドキュメントで使用されます。
 
-For TiDB-related terms and definitions, see [TiDB glossary](/glossary.md).
+TiDB 関連の用語と定義については、 [TiDB用語集](/glossary.md)参照してください。
 
-## C
+## C {#c}
 
-### Capture
+### 捕獲 {#capture}
 
-A single TiCDC instance on which the replication task of the cluster runs. Multiple captures form a TiCDC cluster.
+クラスターのレプリケーションタスクが実行される単一の TiCDC インスタンス。複数のキャプチャによって TiCDC クラスターが形成されます。
 
-### Changed data
+### 変更されたデータ {#changed-data}
 
-The data to be written to TiCDC from the upstream TiDB cluster, including the DML-caused data changes and the DDL-caused table schema changes.
+DML によるデータ変更と DDL によるテーブル スキーマの変更を含む、上流の TiDB クラスターから TiCDC に書き込まれるデータ。
 
-### Changefeed
+### チェンジフィード {#changefeed}
 
-An incremental replication task in TiCDC, which outputs the data change logs of several tables in a TiDB cluster to the designated downstream.
+TiCDC の増分レプリケーション タスク。TiDB クラスター内の複数のテーブルのデータ変更ログを指定されたダウンストリームに出力します。
 
-## O
+## お {#o}
 
-### Owner
+### 所有者 {#owner}
 
-A [capture](#capture) of a special role that manages the TiCDC cluster and schedules replication tasks of the cluster. An owner is elected by captures and there is at most one owner at any time.
+TiCDC クラスターを管理し、クラスターのレプリケーションタスクをスケジュールする特別なロールの[capture](#capture) 。所有者はキャプチャによって選出され、常に最大 1 人の所有者しか存在しません。
 
-## P
+## P {#p}
 
-### Processor
+### Processor {#processor}
 
-TiCDC replication tasks allocate data tables on TiCDC instances, and the processor refers to the replication processing unit of these tables. Processor tasks include pulling, sorting, restoring, and distributing changed data.
+TiCDC レプリケーションタスクは、TiCDC インスタンス上にデータテーブルを割り当てます。プロセッサとは、これらのテーブルのレプリケーション処理単位を指します。プロセッサタスクには、変更されたデータのプル、ソート、リストア、および分散が含まれます。

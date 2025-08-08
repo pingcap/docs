@@ -1,47 +1,47 @@
 ---
 title: Scale PD Microservice Nodes Using TiUP
-summary: Learn how to scale PD microservice nodes in a cluster using TiUP and how to switch the PD working mode.
+summary: TiUPを使用してクラスター内の PD マイクロサービス ノードをスケーリングする方法と、PD の動作モードを切り替える方法を学習します。
 ---
 
-# Scale PD Microservices Nodes Using TiUP
+# TiUPを使用して PD マイクロサービス ノードをスケールする {#scale-pd-microservices-nodes-using-tiup}
 
-This document describes how to scale [PD microservice](/pd-microservices.md) nodes (including TSO and Scheduling nodes) in a cluster and how to switch the PD working mode using TiUP.
+このドキュメントでは、クラスター内の[PDマイクロサービス](/pd-microservices.md)ノード (TSO ノードとスケジューリング ノードを含む) をスケーリングする方法と、 TiUPを使用して PD 動作モードを切り替える方法について説明します。
 
-To view the current cluster name list, run `tiup cluster list`.
+現在のクラスター名リストを表示するには、 `tiup cluster list`実行します。
 
-For example, the original topology of the cluster is as follows:
+たとえば、クラスターの元のトポロジは次のようになります。
 
-| Host IP   | Service   |
-|:----|:----|
-| 10.0.1.4   | TiDB + PD   |
-| 10.0.1.5   | TiKV + Monitor   |
-| 10.0.1.1   | TiKV   |
-| 10.0.1.2   | TiKV   |
-| 10.0.1.6   | TSO   |
-| 10.0.1.7   | Scheduling   |
+| ホストIP    | サービス        |
+| :------- | :---------- |
+| 10.0.1.4 | TiDB + PD   |
+| 10.0.1.5 | TiKV + モニター |
+| 10.0.1.1 | TiKV        |
+| 10.0.1.2 | TiKV        |
+| 10.0.1.6 | TSO         |
+| 10.0.1.7 | スケジュール      |
 
-## Add TSO/Scheduling nodes
+## TSO/スケジューリングノードを追加する {#add-tso-scheduling-nodes}
 
-> **Note:**
+> **注記：**
 >
-> To add TSO/Scheduling nodes to a TiDB cluster that have not enabled PD microservices yet, follow the instructions in [Switch from regular mode to microservices mode](#switch-from-regular-mode-to-microservices-mode) instead.
+> PD マイクロサービスがまだ有効になっていない TiDB クラスターに TSO/スケジューリング ノードを追加するには、代わりに[通常モードからマイクロサービスモードに切り替える](#switch-from-regular-mode-to-microservices-mode)の手順に従ってください。
 
-This section exemplifies how to add a TSO node (at IP address `10.0.1.8`) and a Scheduling node (at IP address `10.0.1.9`) to a TiDB cluster with PD microservices enabled.
+このセクションでは、PD マイクロサービスが有効になっている TiDB クラスターに TSO ノード (IP アドレス`10.0.1.8` ) とスケジューリング ノード (IP アドレス`10.0.1.9` ) を追加する方法を例示します。
 
-### 1. Configure the scale-out topology
+### 1. スケールアウトトポロジを構成する {#1-configure-the-scale-out-topology}
 
-> **Note:**
+> **注記：**
 >
-> - By default, the port and directory information is not required. However, in the case of multiple instances on a single machine, you need to allocate different ports and directories for these instances. If the ports or directories have conflicts, you will receive a notification during deployment or scaling.
-> - Starting from TiUP v1.0.0, the scale-out configuration inherits the `global` configuration of the original cluster.
+> -   デフォルトでは、ポートとディレクトリの情報は必要ありません。ただし、1台のマシンに複数のインスタンスがある場合は、各インスタンスに異なるポートとディレクトリを割り当てる必要があります。ポートまたはディレクトリが競合する場合は、デプロイまたはスケーリング中に通知が表示されます。
+> -   TiUP v1.0.0 以降、スケールアウト構成は元のクラスターの`global`構成を継承します。
 
-Add the scale-out topology configuration in the `scale-out.yml` file:
+`scale-out.yml`ファイルにスケールアウト トポロジ構成を追加します。
 
 ```shell
 vi scale-out.yml
 ```
 
-The following is the configuration example for the TSO node:
+以下は TSO ノードの構成例です。
 
 ```ini
 tso_servers:
@@ -49,7 +49,7 @@ tso_servers:
     port: 3379
 ```
 
-The following is the configuration example for the Scheduling node:
+以下はスケジューリング ノードの構成例です。
 
 ```ini
 scheduling_servers:
@@ -57,163 +57,161 @@ scheduling_servers:
     port: 3379
 ```
 
-To view the configuration of the current cluster, run `tiup cluster edit-config <cluster-name>`. Because the parameter configuration of `global` and `server_configs` is inherited by `scale-out.yml`, it also takes effect in `scale-out.yml`.
+現在のクラスターの構成を表示するには、 `tiup cluster edit-config <cluster-name>`実行します。 `global`と`server_configs`のパラメータ設定は`scale-out.yml`に継承されるため、 `scale-out.yml`でも有効になります。
 
-### 2. Run the scale-out command
+### 2.スケールアウトコマンドを実行する {#2-run-the-scale-out-command}
 
-Before you run the `scale-out` command, use the `check` and `check --apply` commands to detect and automatically repair potential risks in the cluster:
+`scale-out`コマンドを実行する前に、 `check`コマンドと`check --apply`コマンドを使用して、クラスター内の潜在的なリスクを検出し、自動的に修復します。
 
-1. Check for potential risks:
+1.  潜在的なリスクを確認します。
 
     ```shell
     tiup cluster check <cluster-name> scale-out.yml --cluster --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
-2. Enable automatic repair:
+2.  自動修復を有効にする:
 
     ```shell
     tiup cluster check <cluster-name> scale-out.yml --cluster --apply --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
-3. Run the `scale-out` command:
+3.  `scale-out`コマンドを実行します。
 
     ```shell
     tiup cluster scale-out <cluster-name> scale-out.yml [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
-In the preceding commands:
+上記のコマンドでは、
 
-- `scale-out.yml` is the scale-out configuration file.
-- `--user root` indicates logging in to the target machine as the `root` user to complete the cluster scale out. The `root` user is expected to have `ssh` and `sudo` privileges to the target machine. Alternatively, you can use other users with `ssh` and `sudo` privileges to complete the deployment.
-- `[-i]` and `[-p]` are optional. If you have configured login to the target machine without a password, these parameters are not required. If not, choose one of the two parameters. `[-i]` is the private key of the root user (or other users specified by `--user`) that has access to the target machine. `[-p]` is used to input the user password interactively.
+-   `scale-out.yml`はスケールアウト構成ファイルです。
+-   `--user root` 、クラスタのスケールアウトを完了するために、ターゲットマシンに`root`ユーザーとしてログインすることを示します。4 `root`ユーザーは、ターゲットマシンに対して`ssh`と`sudo`権限を持つことが想定されています。または、 `ssh`と`sudo`権限を持つ他のユーザーを使用してデプロイを完了することもできます。
+-   `[-i]`と`[-p]`オプションです。ターゲットマシンへのログインにパスワードを使用しない設定をしている場合は、これらのパラメータは不要です。そうでない場合は、2つのパラメータのいずれかを選択してください。4 `[-i]` 、ターゲットマシンにアクセスできるルートユーザー（または`--user`で指定された他のユーザー）の秘密鍵です。8 `[-p]` 、ユーザーパスワードを対話的に入力するために使用されます。
 
-If you see `Scaled cluster <cluster-name> out successfully`, the scale-out operation succeeds.
+`Scaled cluster <cluster-name> out successfully`表示された場合、スケールアウト操作は成功しています。
 
-### 3. Check the cluster status
+### 3. クラスターのステータスを確認する {#3-check-the-cluster-status}
 
 ```shell
 tiup cluster display <cluster-name>
 ```
 
-Access the monitoring platform at <http://10.0.1.5:3000> using your browser to monitor the status of the cluster and the new nodes.
+ブラウザを使用して[http://10.0.1.5:3000](http://10.0.1.5:3000)の監視プラットフォームにアクセスし、クラスターと新しいノードのステータスを監視します。
 
-After the scale-out, the cluster topology is as follows:
+スケールアウト後のクラスター トポロジは次のようになります。
 
-| Host IP   | Service   |
-|:----|:----|
-| 10.0.1.4   | TiDB + PD   |
-| 10.0.1.5   | TiKV + Monitor   |
-| 10.0.1.1   | TiKV   |
-| 10.0.1.2   | TiKV   |
-| 10.0.1.6   | TSO   |
-| 10.0.1.7   | Scheduling   |
-| 10.0.1.8   | TSO   |
-| 10.0.1.9   | Scheduling   |
+| ホストIP    | サービス        |
+| :------- | :---------- |
+| 10.0.1.4 | TiDB + PD   |
+| 10.0.1.5 | TiKV + モニター |
+| 10.0.1.1 | TiKV        |
+| 10.0.1.2 | TiKV        |
+| 10.0.1.6 | TSO         |
+| 10.0.1.7 | スケジュール      |
+| 10.0.1.8 | TSO         |
+| 10.0.1.9 | スケジュール      |
 
-## Remove TSO/Scheduling nodes
+## TSO/スケジューリングノードを削除する {#remove-tso-scheduling-nodes}
 
-> **Note:**
+> **注記：**
 >
-> For a cluster with PD microservices enabled, if you need to switch it to non-microservice mode, follow the instructions in [Switch from microservices mode to regular mode](#switch-from-microservices-mode-to-regular-mode) instead.
+> PD マイクロサービスが有効になっているクラスターを非マイクロサービス モードに切り替える必要がある場合は、代わりに[マイクロサービスモードから通常モードに切り替える](#switch-from-microservices-mode-to-regular-mode)の手順に従ってください。
 
-This section exemplifies how to remove a TSO node (at IP address `10.0.1.8`) and a Scheduling node (at IP address `10.0.1.9`) from a TiDB cluster with multiple TSO or Scheduling nodes.
+このセクションでは、複数の TSO ノードまたはスケジューリング ノードを持つ TiDB クラスターから TSO ノード (IP アドレス`10.0.1.8` ) とスケジューリング ノード (IP アドレス`10.0.1.9` ) を削除する方法を例示します。
 
-### 1. View the node ID information
+### 1. ノードID情報をビュー {#1-view-the-node-id-information}
 
 ```shell
 tiup cluster display <cluster-name>
 ```
 
-```
-Starting /root/.tiup/components/cluster/v1.16/cluster display <cluster-name>
+    Starting /root/.tiup/components/cluster/v1.16/cluster display <cluster-name>
 
-TiDB Cluster: <cluster-name>
+    TiDB Cluster: <cluster-name>
 
-TiDB Version: {{{ .tidb-version }}}
+    TiDB Version: v8.5.2
 
-ID       Role         Host    Ports                            Status  Data Dir        Deploy Dir
+    ID       Role         Host    Ports                            Status  Data Dir        Deploy Dir
 
---       ----         ----      -----                            ------  --------        ----------
+    --       ----         ----      -----                            ------  --------        ----------
 
-10.0.1.4:2379  pd           10.0.1.4    2379/2380                        Healthy data/pd-2379      deploy/pd-2379
+    10.0.1.4:2379  pd           10.0.1.4    2379/2380                        Healthy data/pd-2379      deploy/pd-2379
 
-10.0.1.1:20160 tikv         10.0.1.1    20160/20180                      Up      data/tikv-20160     deploy/tikv-20160
+    10.0.1.1:20160 tikv         10.0.1.1    20160/20180                      Up      data/tikv-20160     deploy/tikv-20160
 
-10.0.1.2:20160 tikv         10.0.1.2    20160/20180                      Up      data/tikv-20160     deploy/tikv-20160
+    10.0.1.2:20160 tikv         10.0.1.2    20160/20180                      Up      data/tikv-20160     deploy/tikv-20160
 
-10.0.1.5:20160 tikv        10.0.1.5    20160/20180                     Up      data/tikv-20160     deploy/tikv-20160
+    10.0.1.5:20160 tikv        10.0.1.5    20160/20180                     Up      data/tikv-20160     deploy/tikv-20160
 
-10.0.1.4:4000  tidb        10.0.1.4    4000/10080                      Up      -                 deploy/tidb-4000
+    10.0.1.4:4000  tidb        10.0.1.4    4000/10080                      Up      -                 deploy/tidb-4000
 
-10.0.1.5:9090  prometheus   10.0.1.5    9090                             Up      data/prometheus-9090  deploy/prometheus-9090
+    10.0.1.5:9090  prometheus   10.0.1.5    9090                             Up      data/prometheus-9090  deploy/prometheus-9090
 
-10.0.1.5:3000  grafana      10.0.1.5    3000                             Up      -            deploy/grafana-3000
+    10.0.1.5:3000  grafana      10.0.1.5    3000                             Up      -            deploy/grafana-3000
 
-10.0.1.5:9093  alertmanager 10.0.1.5    9093/9094                        Up      data/alertmanager-9093 deploy/alertmanager-9093
+    10.0.1.5:9093  alertmanager 10.0.1.5    9093/9094                        Up      data/alertmanager-9093 deploy/alertmanager-9093
 
-10.0.1.6:3379  tso          10.0.1.6    3379                            Up|P     data/tso-3379     deploy/tso-3379
+    10.0.1.6:3379  tso          10.0.1.6    3379                            Up|P     data/tso-3379     deploy/tso-3379
 
-10.0.1.8:3379  tso          10.0.1.8    3379                            Up       data/tso-3379    deploy/tso-3379
+    10.0.1.8:3379  tso          10.0.1.8    3379                            Up       data/tso-3379    deploy/tso-3379
 
-10.0.1.7:3379  scheduling   10.0.1.7    3379                            Up|P     data/scheduling-3379     deploy/scheduling-3379
+    10.0.1.7:3379  scheduling   10.0.1.7    3379                            Up|P     data/scheduling-3379     deploy/scheduling-3379
 
-10.0.1.9:3379  scheduling   10.0.1.9    3379                            Up       data/scheduling-3379     deploy/scheduling-3379
-```
+    10.0.1.9:3379  scheduling   10.0.1.9    3379                            Up       data/scheduling-3379     deploy/scheduling-3379
 
-### 2. Run scale-in commands
+### 2. スケールインコマンドを実行する {#2-run-scale-in-commands}
 
 ```shell
 tiup cluster scale-in <cluster-name> --node 10.0.1.8:3379
 tiup cluster scale-in <cluster-name> --node 10.0.1.9:3379
 ```
 
-The `--node` parameter is the ID of the node to be taken offline.
+`--node`パラメータは、オフラインにするノードの ID です。
 
-If you see `Scaled cluster <cluster-name> in successfully`, the scale-in operation succeeds.
+`Scaled cluster <cluster-name> in successfully`表示された場合、スケールイン操作は成功しています。
 
-### 3. Check the cluster status
+### 3. クラスターのステータスを確認する {#3-check-the-cluster-status}
 
-Run the following command to check if the nodes are successfully removed:
+次のコマンドを実行して、ノードが正常に削除されたかどうかを確認します。
 
 ```shell
 tiup cluster display <cluster-name>
 ```
 
-Access the monitoring platform at <http://10.0.1.5:3000> using your browser to monitor the status of the entire cluster.
+ブラウザを使用して[http://10.0.1.5:3000](http://10.0.1.5:3000)の監視プラットフォームにアクセスし、クラスター全体のステータスを監視します。
 
-After the scale-in, the current topology is as follows:
+スケールイン後、現在のトポロジは次のようになります。
 
-| Host IP   | Service   |
-|:----|:----|
-| 10.0.1.4   | TiDB + PD   |
-| 10.0.1.5   | TiKV + Monitor   |
-| 10.0.1.1   | TiKV   |
-| 10.0.1.2   | TiKV   |
-| 10.0.1.6   | TSO   |
-| 10.0.1.7   | Scheduling   |
+| ホストIP    | サービス        |
+| :------- | :---------- |
+| 10.0.1.4 | TiDB + PD   |
+| 10.0.1.5 | TiKV + モニター |
+| 10.0.1.1 | TiKV        |
+| 10.0.1.2 | TiKV        |
+| 10.0.1.6 | TSO         |
+| 10.0.1.7 | スケジュール      |
 
-## Switch the PD working mode
+## PD動作モードを切り替える {#switch-the-pd-working-mode}
 
-You can switch PD services between the following two working modes:
+PD サービスを次の 2 つの動作モード間で切り替えることができます。
 
-- Regular mode: provides routing service, timestamp allocation, and cluster scheduling functions solely by PD nodes.
-- Microservice mode: enables you to deploy the PD timestamp allocation function to TSO nodes (providing `tso` microservices) and the cluster scheduling function to Scheduling nodes (providing `scheduling` microservices) separately. In this way, these two functions are decoupled from the routing function of PD, which allows PD nodes to focus on the routing service for metadata.
+-   通常モード: PD ノードのみでルーティング サービス、タイムスタンプ割り当て、およびクラスター スケジューリング関数を提供します。
+-   マイクロサービスモード：PDタイムスタンプ割り当て機能をTSOノード（ `tso`マイクロサービスを提供）に、クラスタースケジューリング機能をスケジューリングノード（ `scheduling`マイクロサービスを提供）にそれぞれ個別にデプロイできます。これにより、これら2つの関数はPDのルーティング機能から分離され、PDノードはメタデータのルーティングサービスに集中できます。
 
-> **Note:**
+> **注記：**
 >
-> During the mode switching, PD services will be unavailable for a few minutes.
+> モード切り替え中は、PD サービスが数分間利用できなくなります。
 
-### Switch from regular mode to microservices mode
+### 通常モードからマイクロサービスモードに切り替える {#switch-from-regular-mode-to-microservices-mode}
 
-For a cluster that has not enabled PD microservices, you can switch it to PD microservice mode and add a TSO node (at IP address `10.0.1.8`) and a Scheduling node (at IP address `10.0.1.9`) to it as follows:
+PD マイクロサービスが有効になっていないクラスターの場合は、次のように PD マイクロサービス モードに切り替えて、TSO ノード (IP アドレス`10.0.1.8` ) とスケジューリング ノード (IP アドレス`10.0.1.9` ) を追加できます。
 
-1. Add the scale-out topology configuration in the `scale-out.yml` file:
+1.  `scale-out.yml`ファイルにスケールアウト トポロジ構成を追加します。
 
     ```shell
     vi scale-out.yml
     ```
 
-    The following is a configuration example:
+    以下は設定例です。
 
     ```ini
     tso_servers:
@@ -224,13 +222,13 @@ For a cluster that has not enabled PD microservices, you can switch it to PD mic
         port: 3379
     ```
 
-2. Modify the cluster configuration and switch the cluster to PD microservice mode:
+2.  クラスター構成を変更し、クラスターを PD マイクロサービス モードに切り替えます。
 
     ```shell
     tiup cluster edit-config <cluster-name>
     ```
 
-    Add `pd_mode: ms` to `global`:
+    `pd_mode: ms`に`global`加算します。
 
     ```ini
     global:
@@ -245,33 +243,33 @@ For a cluster that has not enabled PD microservices, you can switch it to PD mic
        pd_mode: ms
     ```
 
-3. Perform a rolling update of the PD node configuration:
+3.  PD ノード構成のローリング アップデートを実行します。
 
     ```shell
     tiup cluster reload <cluster-name> -R pd
     ```
 
-    > **Note:**
+    > **注記：**
     >
-    > The PD timestamp allocation service will be unavailable after you run the preceding `reload` command and will be available again once the `scale-out` command in the next step completes execution.
+    > 前の`reload`コマンドを実行した後、PD タイムスタンプ割り当てサービスは利用できなくなりますが、次のステップの`scale-out`コマンドの実行が完了すると再び利用できるようになります。
 
-4. Run the `scale-out` command to add PD microservice nodes:
+4.  `scale-out`コマンドを実行して PD マイクロサービス ノードを追加します。
 
     ```shell
     tiup cluster scale-out <cluster-name> scale-out.yml
     ```
 
-### Switch from microservices mode to regular mode
+### マイクロサービスモードから通常モードに切り替える {#switch-from-microservices-mode-to-regular-mode}
 
-For a cluster with PD microservices enabled (assume that it has a TSO node at IP address `10.0.1.8` and a Scheduling node at IP address `10.0.1.9`), you can switch it to non-microservice mode as follows:
+PD マイクロサービスが有効になっているクラスター (IP アドレス`10.0.1.8`に TSO ノードがあり、IP アドレス`10.0.1.9`にスケジューリング ノードがあると想定) の場合は、次のように非マイクロサービス モードに切り替えることができます。
 
-1. Modify the cluster configuration and switch the cluster to non-microservice mode:
+1.  クラスター構成を変更し、クラスターを非マイクロサービス モードに切り替えます。
 
     ```shell
     tiup cluster edit-config <cluster-name>
     ```
 
-    Remove `pd_mode: ms` from `global`:
+    `global`から`pd_mode: ms`削除します:
 
     ```ini
     global:
@@ -285,17 +283,17 @@ For a cluster with PD microservices enabled (assume that it has a TSO node at IP
        systemd_mode: system
     ```
 
-2. Run the `scale-in` command to remove all PD microservice nodes:
+2.  `scale-in`コマンドを実行して、すべての PD マイクロサービス ノードを削除します。
 
     ```shell
     tiup cluster scale-in <cluster-name> --node 10.0.1.8:3379,10.0.1.9:3379
     ```
 
-    > **Note:**
+    > **注記：**
     >
-    > The PD timestamp allocation service will be unavailable after you run the preceding `scale-in` command and will be available again once the `reload` command in the next step completes execution.
+    > 前の`scale-in`コマンドを実行した後、PD タイムスタンプ割り当てサービスは利用できなくなりますが、次のステップの`reload`コマンドの実行が完了すると再び利用できるようになります。
 
-3. Perform a rolling update of the PD node configuration:
+3.  PD ノード構成のローリング アップデートを実行します。
 
     ```shell
     tiup cluster reload <cluster-name> -R pd

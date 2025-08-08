@@ -1,10 +1,10 @@
 ---
 title: Import Snapshot Files into TiDB Cloud
-summary: Learn how to import Amazon Aurora or RDS for MySQL snapshot files into TiDB Cloud.
+summary: Amazon Auroraまたは RDS for MySQL スナップショット ファイルをTiDB Cloudにインポートする方法を学びます。
 ---
 
-# Import Snapshot Files into TiDB Cloud
+# スナップショットファイルをTiDB Cloudにインポートする {#import-snapshot-files-into-tidb-cloud}
 
-You can import Amazon Aurora or RDS for MySQL snapshot files into TiDB Cloud. Note that all source data files with the `.parquet` suffix in the `{db_name}.{table_name}/` folder must conform to the [naming convention](/tidb-cloud/naming-conventions-for-data-import.md).
+Amazon Auroraまたは RDS for MySQL のスナップショットファイルを`{db_name}.{table_name}/` TiDB Cloudにインポートできます。3 フォルダ内のサフィックスが`.parquet`であるすべてのソースデータファイルは、 [命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に準拠している必要があることに注意してください。
 
-The process of importing snapshot files is similar to that of importing Parquet files. For more information, see [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-parquet-files.md).
+スナップショットファイルのインポートプロセスは、Parquetファイルのインポートプロセスと似ています。詳細については、 [クラウドストレージからTiDB Cloud DedicatedにApache Parquetファイルをインポートする](/tidb-cloud/import-parquet-files.md)参照してください。

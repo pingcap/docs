@@ -1,15 +1,15 @@
 ---
 title: DM-master Configuration File
-summary: Learn the configuration file of DM-master.
+summary: DM-master の設定ファイルについて説明します。
 ---
 
-# DM-master Configuration File
+# DMマスターコンフィグレーションファイル {#dm-master-configuration-file}
 
-This document introduces the configuration of DM-master, including a configuration file template and a description of each configuration parameter in this file.
+このドキュメントでは、構成ファイル テンプレートと、このファイル内の各構成パラメータの説明を含む、DM-master の構成について説明します。
 
-## Configuration file template
+## コンフィグレーションファイルテンプレート {#configuration-file-template}
 
-The following is a configuration file template of DM-master.
+以下は DM-master の設定ファイル テンプレートです。
 
 ```toml
 name = "dm-master"
@@ -38,66 +38,66 @@ cert-allowed-cn = ["dm"]
 secret-key-path = "/path/to/secret/key"
 ```
 
-## Configuration parameters
+## コンフィグレーションパラメータ {#configuration-parameters}
 
-This section introduces the configuration parameters of DM-master.
+このセクションでは、DM マスターの構成パラメータについて説明します。
 
-### Global configuration
+### グローバル構成 {#global-configuration}
 
-#### `name`
+#### <code>name</code> {#code-name-code}
 
-- The name of the DM-master.
+-   DM マスターの名前。
 
-#### `log-level`
+#### <code>log-level</code> {#code-log-level-code}
 
-- Specifies a log level.
-- Default value: `info`
-- Value options: `debug`, `info`, `warn`, `error`, `fatal`
+-   ログ レベルを指定します。
+-   デフォルト値: `info`
+-   `fatal` `warn` `info` `error` `debug`
 
-#### `log-file`
+#### <code>log-file</code> {#code-log-file-code}
 
-- Specifies the log file directory. If the parameter is not specified, the logs are printed onto the standard output.
+-   ログファイルのディレクトリを指定します。パラメータが指定されていない場合、ログは標準出力に出力されます。
 
-#### `master-addr`
+#### <code>master-addr</code> {#code-master-addr-code}
 
-- Specifies the address of DM-master which provides services. You can omit the IP address and specify the port number only, such as `":8261"`.
+-   サービスを提供するDMマスターのアドレスを指定します。IPアドレスを省略し、ポート番号のみ（例： `":8261"` ）を指定することもできます。
 
-#### `advertise-addr`
+#### <code>advertise-addr</code> {#code-advertise-addr-code}
 
-- Specifies the address that DM-master advertises to the outside world.
+-   DM マスターが外部に通知するアドレスを指定します。
 
-#### `peer-urls`
+#### <code>peer-urls</code> {#code-peer-urls-code}
 
-- Specifies the peer URL of the DM-master node.
+-   DM マスター ノードのピア URL を指定します。
 
-#### `advertise-peer-urls`
+#### <code>advertise-peer-urls</code> {#code-advertise-peer-urls-code}
 
-- Specifies the peer URL that DM-master advertises to the outside world. The value of `advertise-peer-urls` is by default the same as that of [`peer-urls`](#peer-urls).
+-   DMマスターが外部にアドバタイズするピアURLを指定します。デフォルト値は`advertise-peer-urls`で、 [`peer-urls`](#peer-urls)と同じです。
 
-#### `initial-cluster`
+#### <code>initial-cluster</code> {#code-initial-cluster-code}
 
-- The value of `initial-cluster` is the combination of the [`advertise-peer-urls`](#advertise-peer-urls) value of all DM-master nodes in the initial cluster.
+-   値`initial-cluster`は、初期クラスター内のすべての DM マスター ノードの[`advertise-peer-urls`](#advertise-peer-urls)値の組み合わせです。
 
-#### `join`
+#### <code>join</code> {#code-join-code}
 
-- The value of `join` is the combination of the [`advertise-peer-urls`](#advertise-peer-urls) value of the existing DM-master nodes in the cluster. If the DM-master node is newly added, replace `initial-cluster` with `join`.
+-   `join`の値は、クラスター内の既存の DM マスターノードの[`advertise-peer-urls`](#advertise-peer-urls)値を組み合わせたものです。DM マスターノードを新たに追加する場合は、 `initial-cluster` `join`に置き換えてください。
 
-#### `ssl-ca`
+#### <code>ssl-ca</code> {#code-ssl-ca-code}
 
-- The path of the file that contains list of trusted SSL CAs for DM-master to connect with other components.
+-   DM マスターが他のコンポーネントに接続するための信頼できる SSL CA のリストが含まれるファイルのパス。
 
-#### `ssl-cert`
+#### <code>ssl-cert</code> {#code-ssl-cert-code}
 
-- The path of the file that contains X509 certificate in PEM format for DM-master to connect with other components.
+-   DM マスターが他のコンポーネントに接続するための PEM 形式の X509 証明書を含むファイルのパス。
 
-#### `ssl-key`
+#### <code>ssl-key</code> {#code-ssl-key-code}
 
-- The path of the file that contains X509 key in PEM format for DM-master to connect with other components.
+-   DM マスターが他のコンポーネントに接続するための PEM 形式の X509 キーを含むファイルのパス。
 
-#### `cert-allowed-cn`
+#### <code>cert-allowed-cn</code> {#code-cert-allowed-cn-code}
 
-- Common Name list.
+-   一般名リスト。
 
-#### `secret-key-path`
+#### <code>secret-key-path</code> {#code-secret-key-path-code}
 
-- The file path of the secret key, which is used to encrypt and decrypt upstream and downstream passwords. The file must contain a 64-character hexadecimal AES-256 secret key. One way to generate this key is by calculating SHA256 checksum of random data, such as `head -n 256 /dev/urandom | sha256sum`. For more information, see [Customize a secret key for DM encryption and decryption](/dm/dm-customized-secret-key.md).
+-   アップストリームおよびダウンストリームのパスワードの暗号化と復号化に使用される秘密鍵のファイルパス。ファイルには、64文字の16進数AES-256秘密鍵が含まれている必要があります。この鍵を生成する方法の一つは、ランダムデータ（例： `head -n 256 /dev/urandom | sha256sum` ）のSHA256チェックサムを計算することです。詳細については、 [DMの暗号化と復号化のための秘密鍵をカスタマイズする](/dm/dm-customized-secret-key.md)参照してください。

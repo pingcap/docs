@@ -1,38 +1,38 @@
 ---
 title: Optimize Resource Allocation for TiDB Cloud Dedicated
-summary: Learn about how to optimize your resource allocation for TiDB Cloud Dedicated clusters.
+summary: TiDB Cloud Dedicated クラスターのリソース割り当てを最適化する方法について説明します。
 ---
 
-# Optimize Resource Allocation for TiDB Cloud Dedicated
+# TiDB Cloud専用リソース割り当ての最適化 {#optimize-resource-allocation-for-tidb-cloud-dedicated}
 
-As a Hybrid Transactional and Analytical Processing (HTAP) database, [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters can support multiple business applications, each with different quality of service (QoS) requirements. In some cases, you might need to allocate more resources to high-priority applications to maintain acceptable latency levels.
+ハイブリッドトランザクションおよび分析処理（HTAP）データベースである[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターは、それぞれ異なるサービス品質（QoS）要件を持つ複数のビジネスアプリケーションをサポートできます。場合によっては、許容可能なレイテンシーレベルを維持するために、優先度の高いアプリケーションにさらに多くのリソースを割り当てる必要がある場合があります。
 
-TiDB Cloud Dedicated offers resource optimization features, including [Resource Control](/tidb-resource-control-ru-groups.md) and the [TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md) feature. These features help you allocate resources efficiently in multi-business scenarios.
+TiDB Cloud Dedicatedは、 [リソース管理](/tidb-resource-control-ru-groups.md)と[TiDBノードグループ](/tidb-cloud/tidb-node-group-overview.md)機能を含むリソース最適化機能を提供します。これらの機能は、複数のビジネスシナリオにおいてリソースを効率的に割り当てるのに役立ちます。
 
-## Use Resource Control
+## リソース制御を使用する {#use-resource-control}
 
-[Resource Control](/tidb-resource-control-ru-groups.md) lets you divide the storage nodes (TiKV or TiFlash) of a TiDB Cloud Dedicated cluster into multiple logical groups. In systems with mixed workloads, you can assign workloads to separate resource groups to ensure resource isolation and meet QoS requirements.
+[リソース管理](/tidb-resource-control-ru-groups.md)使用すると、 TiDB Cloud Dedicatedクラスタのstorageノード（TiKVまたはTiFlash ）を複数の論理グループに分割できます。混在ワークロードを持つシステムでは、ワークロードを個別のリソースグループに割り当てることで、リソースの分離を確保し、QoS要件を満たすことができます。
 
-If the cluster experiences unexpected SQL performance issues, you can use [SQL bindings](/sql-statements/sql-statement-create-binding.md) or [manage runaway queries](/tidb-resource-control-runaway-queries.md) alongside resource groups to temporarily limit the resource consumption of specific SQL statements.
+クラスターで予期しない SQL パフォーマンスの問題が発生した場合は、リソース グループと併せて[SQLバインディング](/sql-statements/sql-statement-create-binding.md)または[暴走クエリを管理する](/tidb-resource-control-runaway-queries.md)使用して、特定の SQL ステートメントのリソース消費を一時的に制限できます。
 
-By using Resource Control effectively, you can reduce the number of clusters, simplify operations and maintenance, and lower management costs.
+リソース制御を効果的に使用することで、クラスターの数を減らし、運用と保守を簡素化し、管理コストを削減できます。
 
-## Use TiDB Node Group
+## TiDBノードグループを使用する {#use-tidb-node-group}
 
-The [TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md) feature physically groups the computing nodes (TiDB layer) of a TiDB Cloud Dedicated cluster. Each group is configured with a specific number of TiDB nodes, ensuring the physical separation of computing resources between groups.
+[TiDBノードグループ](/tidb-cloud/tidb-node-group-overview.md)機能は、 TiDB Cloud Dedicated クラスタのコンピューティングノード（TiDBレイヤー）を物理的にグループ化します。各グループは特定の数の TiDB ノードで構成され、グループ間のコンピューティングリソースの物理的な分離を保証します。
 
-You can divide computing nodes into multiple TiDB node groups based on business requirements and assign unique connection endpoints to each group. Your applications connect to the cluster through their respective endpoints, and requests route to the corresponding node group for processing. This ensures that resource overuse in one group does not affect other groups.
+ビジネス要件に基づいてコンピューティングノードを複数のTiDBノードグループに分割し、各グループに固有の接続エンドポイントを割り当てることができます。アプリケーションはそれぞれのエンドポイントを介してクラスターに接続し、リクエストは対応するノードグループにルーティングされて処理されます。これにより、あるグループでのリソースの過剰使用が他のグループに影響を与えることを防ぎます。
 
-## Choose between Resource Control and TiDB Node Group
+## リソース制御とTiDBノードグループのいずれかを選択する {#choose-between-resource-control-and-tidb-node-group}
 
-You can use Resource Control, the TiDB Node Group feature, or a combination of both based on your application needs and budget to achieve resource isolation.
+アプリケーションのニーズと予算に基づいて、リソース制御、TiDB ノード グループ機能、またはその両方の組み合わせを使用して、リソースの分離を実現できます。
 
-The following table compares the features of Resource Control and TiDB Node Group:
+次の表は、リソース制御と TiDB ノード グループの機能を比較したものです。
 
-| Comparison item           | Resource Control         | TiDB Node Group         |
-|--------------------------|---------------------------|------------------------|
-| Isolation level   | TiKV or TiFlash logical layer    | TiDB node physical layer   |
-| Flow control        | Controls the flow of user read and write requests based on quotas set for resource groups. | Not supported. |
-| Configuration method  | Configured using SQL statements  | Configured through the TiDB Cloud console |
-| Distinguishing workloads | Supports binding resources at the following levels: <ul><li>User level.</li><li>Session level (set the resource group per session). </li><li>Statement level (set the resource group per statement).</li></ul>| Provides different connection endpoints for different workloads.   |
-| Cost       | No extra cost     | Cost associated with adding TiDB nodes, but no extra cost for creating TiDB node groups.       |
+| 比較項目         | リソース管理                                                                                                                                               | TiDBノードグループ                                                |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| 分離レベル        | TiKVまたはTiFlash論理レイヤー                                                                                                                                 | TiDBノード物理レイヤー                                              |
+| フロー制御        | リソース グループに設定されたクォータに基づいて、ユーザーの読み取りおよび書き込み要求のフローを制御します。                                                                                               | サポートされていません。                                               |
+| コンフィグレーション方法 | SQL文を使用して構成                                                                                                                                          | TiDB Cloudコンソールから設定                                        |
+| ワークロードの区別    | 次のレベルでのバインディング リソースをサポートします。<ul><li>ユーザーレベル。</li><li>セッション レベル (セッションごとにリソース グループを設定します)。</li><li>ステートメント レベル (ステートメントごとにリソース グループを設定します)。</li></ul> | さまざまなワークロードに異なる接続エンドポイントを提供します。                            |
+| 料金           | 追加料金なし                                                                                                                                               | TiDB ノードの追加に関連するコストは発生しますが、TiDB ノード グループの作成には追加コストは発生しません。 |

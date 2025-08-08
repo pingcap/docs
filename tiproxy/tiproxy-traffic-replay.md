@@ -1,162 +1,159 @@
 ---
 title: TiProxy Traffic Replay
-summary: Introduce the use cases and steps for the TiProxy traffic replay feature.
+summary: TiProxy トラフィック再生機能の使用例と手順を紹介します。
 ---
 
-# TiProxy Traffic Replay
+# TiProxy トラフィックリプレイ {#tiproxy-traffic-replay}
 
-> **Warning:**
+> **警告：**
 >
-> Currently, the TiProxy traffic replay feature is experimental. It is not recommended that you use it in production environments. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tiproxy/issues) on GitHub.
+> 現在、TiProxy トラフィックリプレイ機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tiproxy/issues)報告を行ってください。
 
-Starting from TiProxy v1.3.0, you can use TiProxy to capture access traffic in a TiDB production cluster and replay it in a test cluster at a specified rate. This feature enables you to reproduce actual workloads from the production cluster in a test environment, verifying SQL statement execution results and performance.
+TiProxy v1.3.0以降では、TiProxyを使用してTiDB本番クラスタのアクセストラフィックをキャプチャし、指定したレートでテストクラスタに再生することができます。この機能により、本番クラスタの実際のワークロードをテスト環境で再現し、SQL文の実行結果とパフォーマンスを検証できます。
 
-<img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-traffic-replay.png" alt="TiProxy traffic replay" width="800" />
+<img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-traffic-replay.png" alt="TiProxyトラフィックリプレイ" width="800" />
 
-## Use cases
+## ユースケース {#use-cases}
 
-Traffic replay is suitable for the following scenarios:
+トラフィック リプレイは、次のシナリオに適しています。
 
-- **Verify TiDB version upgrades**: Replay production traffic on a test cluster with a new TiDB version to verify that the new TiDB version can successfully execute all SQL statements.
-- **Assess change impact**: Simulate production traffic on a test cluster to verify the impact of changes on the cluster. For example, verify the effects before modifying configuration items or system variables, altering table schemas, or enabling new TiDB features.
-- **Validate performance before TiDB scaling**: Replay traffic at corresponding rates on a test cluster with a new scale to validate whether the performance meets requirements. For example, to plan a 50% cluster downscale for cost savings, replay traffic at half speed to validate if SQL latency meets requirements after scaling.
-- **Test performance limits**: Replay traffic multiple times on a test cluster of the same scale, increasing the replay rate each time to test the throughput limit of that scale and assess whether performance meets future business growth needs.
+-   **TiDB バージョンのアップグレードを確認する**: 新しい TiDB バージョンを使用してテスト クラスターで本番トラフィックを再生し、新しい TiDB バージョンがすべての SQL ステートメントを正常に実行できることを確認します。
+-   **変更の影響を評価する**：テストクラスター上で本番のトラフィックをシミュレートし、クラスターへの変更の影響を検証します。例えば、構成項目やシステム変数の変更、テーブルスキーマの変更、TiDBの新機能の有効化などを行う前に、その影響を検証します。
+-   **TiDBのスケーリング前にパフォーマンスを検証**：新しいスケールのテストクラスターで対応する速度でトラフィックを再生し、パフォーマンスが要件を満たしているかどうかを検証します。例えば、コスト削減のためにクラスターを50%縮小する計画を立てる場合、トラフィックを半分の速度で再生し、スケーリング後のSQLレイテンシーが要件を満たしているかどうかを検証します。
+-   **パフォーマンス制限のテスト**: 同じ規模のテスト クラスターでトラフィックを複数回再生し、再生レートを毎回上げてその規模のスループット制限をテストし、パフォーマンスが将来のビジネス成長のニーズを満たすかどうかを評価します。
 
-Traffic replay is not suitable for the following scenarios:
+トラフィック再生は、次のシナリオには適していません。
 
-- Verify SQL compatibility between TiDB and MySQL: TiProxy only supports reading traffic files it generates and cannot capture traffic from MySQL for replay on TiDB.
-- Compare SQL execution results between TiDB versions: TiProxy only verifies if SQL statements execute successfully but does not compare results.
+-   TiDB と MySQL 間の SQL 互換性を確認します。TiProxy は生成したトラフィック ファイルの読み取りのみをサポートしており、MySQL からのトラフィックをキャプチャして TiDB で再生することはできません。
+-   TiDB バージョン間で SQL 実行結果を比較します。TiProxy は、SQL ステートメントが正常に実行されたかどうかのみを確認し、結果を比較しません。
 
-## Usage
+## 使用法 {#usage}
 
-1. Prepare the test environment:
+1.  テスト環境を準備します。
 
-    1. Create a test cluster. For more information, see [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
-    2. Install `tiproxyctl` and ensure the host with `tiproxyctl` can connect to TiProxy instances in both production and test clusters. For more information, see [Install TiProxy Control](/tiproxy/tiproxy-command-line-flags.md#install-tiproxy-control).
-    3. Replicate data from the production cluster to the test cluster. For more information, see [Data Migration Overview](/migration-overview.md).
-    4. Run the [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) statement in the test cluster to update statistics.
+    1.  テストクラスタを作成します。詳細については、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)参照してください。
+    2.  `tiproxyctl`インストールし、 `tiproxyctl`インストールされているホストが本番とテスト環境の両方の TiProxy インスタンスに接続できることを確認します。詳細については、 [TiProxyコントロールをインストールする](/tiproxy/tiproxy-command-line-flags.md#install-tiproxy-control)参照してください。
+    3.  本番クラスタからテスト環境クラスタにデータを複製します。詳細については、 [データ移行の概要](/migration-overview.md)参照してください。
+    4.  テスト クラスターで[`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)ステートメントを実行して統計を更新します。
 
-2. Use the [`tiproxyctl traffic capture`](/tiproxy/tiproxy-command-line-flags.md#traffic-capture) command to connect to the production cluster's TiProxy instance and start capturing traffic.
+2.  [`tiproxyctl traffic capture`](/tiproxy/tiproxy-command-line-flags.md#traffic-capture)コマンドを使用して、本番クラスターの TiProxy インスタンスに接続し、トラフィックのキャプチャを開始します。
 
-    > **Note:**
+    > **注記：**
     >
-    > - TiProxy captures traffic on all connections, including existing and newly created ones.
-    > - In TiProxy primary-secondary mode, connect to the primary TiProxy instance.
-    > - If TiProxy is configured with a virtual IP, it is recommended to connect to the virtual IP address.
-    > - The higher the CPU usage of TiProxy, the greater the impact of traffic capture on QPS. To reduce the impact on the production cluster, it is recommended to reserve at least 30% of CPU capacity, which results in an approximately 3% decrease in average QPS. For detailed performance data, see [Traffic capture test](/tiproxy/tiproxy-performance-test.md#traffic-capture-test).
-    > - TiProxy does not automatically delete previous capture files when capturing traffic again. You need to manually delete them.
+    > -   TiProxy は、既存の接続と新しく作成された接続を含むすべての接続のトラフィックをキャプチャします。
+    > -   TiProxy プライマリ/セカンダリ モードで、プライマリ TiProxy インスタンスに接続します。
+    > -   TiProxy が仮想 IP で構成されている場合は、仮想 IP アドレスに接続することをお勧めします。
+    > -   TiProxyのCPU使用率が高いほど、トラフィックキャプチャによるQPSへの影響が大きくなります。本番クラスタへの影響を軽減するには、CPU容量の少なくとも30%を予約することをお勧めします。これにより、平均QPSが約3%低下します。詳細なパフォーマンスデータについては、 [トラフィックキャプチャテスト](/tiproxy/tiproxy-performance-test.md#traffic-capture-test)ご覧ください。
+    > -   TiProxyはトラフィックを再度キャプチャする際に、以前のキャプチャファイルを自動的に削除しません。手動で削除する必要があります。
 
-    For example, the following command connects to the TiProxy instance at `10.0.1.10:3080`, captures traffic for one hour, and saves it to the `/tmp/traffic` directory on the TiProxy instance:
+    たとえば、次のコマンドは、 `10.0.1.10:3080`の TiProxy インスタンスに接続し、1 時間のトラフィックをキャプチャし、それを TiProxy インスタンスの`/tmp/traffic`ディレクトリに保存します。
 
     ```shell
     tiproxyctl traffic capture --host 10.0.1.10 --port 3080 --output="/tmp/traffic" --duration=1h
     ```
 
-    Traffic files are automatically rotated and compressed. Example files in the `/tmp/traffic` directory:
+    トラフィックファイルは自動的にローテーションされ、圧縮されます。1 `/tmp/traffic`内のファイルの例:
 
     ```shell
     ls /tmp/traffic
     # meta    traffic-2024-08-29T17-37-12.477.log.gz  traffic-2024-08-29T17-43-11.166.log.gz traffic.log
     ```
 
-    For more information, see [`tiproxyctl traffic capture`](/tiproxy/tiproxy-command-line-flags.md#traffic-capture).
+    詳細については[`tiproxyctl traffic capture`](/tiproxy/tiproxy-command-line-flags.md#traffic-capture)参照してください。
 
-3. Copy the traffic file directory to the test cluster's TiProxy instance.
-4. Use [`tiproxyctl traffic replay`](/tiproxy/tiproxy-command-line-flags.md#traffic-replay) to connect to the test cluster's TiProxy instance and start replaying traffic.
+3.  トラフィック ファイル ディレクトリをテスト クラスターの TiProxy インスタンスにコピーします。
 
-    By default, SQL statements are executed at the same rate as in the production cluster, and each database connection corresponds to a connection in the production cluster to simulate the production load and ensure consistent transaction execution order.
+4.  [`tiproxyctl traffic replay`](/tiproxy/tiproxy-command-line-flags.md#traffic-replay)使用してテスト クラスターの TiProxy インスタンスに接続し、トラフィックの再生を開始します。
 
-    For example, the following command connects to the TiProxy instance at `10.0.1.10:3080` using username `u1` and password `123456`, reads traffic files from the `/tmp/traffic` directory on the TiProxy instance, and replays the traffic:
+    デフォルトでは、SQL ステートメントは本番クラスターと同じ速度で実行され、各データベース接続は本番クラスター内の接続に対応して、本番負荷をシミュレートし、一貫したトランザクション実行順序を確保します。
+
+    たとえば、次のコマンドは、ユーザー名`u1`とパスワード`123456`を使用して`10.0.1.10:3080`の TiProxy インスタンスに接続し、TiProxy インスタンスの`/tmp/traffic`ディレクトリからトラフィック ファイルを読み取り、トラフィックを再生します。
 
     ```shell
     tiproxyctl traffic replay --host 10.0.1.10 --port 3080 --username="u1" --password="123456" --input="/tmp/traffic"
     ```
 
-    Because all traffic runs under user `u1`, ensure `u1` can access all databases and tables. If no such user exists, create one.
+    すべてのトラフィックはユーザー`u1`で実行されるため、 `u1`すべてのデータベースとテーブルにアクセスできることを確認してください。該当するユーザーが存在しない場合は、作成してください。
 
-    For more information, see [`tiproxyctl traffic replay`](/tiproxy/tiproxy-command-line-flags.md#traffic-replay).
+    詳細については[`tiproxyctl traffic replay`](/tiproxy/tiproxy-command-line-flags.md#traffic-replay)参照してください。
 
-5. View the replay report.
+5.  リプレイレポートをビュー。
 
-    After replay completion, the report is stored in the `tiproxy_traffic_replay` database on the test cluster. This database contains two tables: `fail` and `other_errors`.
+    再生が完了すると、レポートはテストクラスターのデータベース`tiproxy_traffic_replay`に保存されます。このデータベースには、テーブル`fail`と`other_errors` 2つのテーブルが含まれています。
 
-    The `fail` table stores failed SQL statements, with the following fields:
+    `fail`テーブルには、次のフィールドを持つ失敗した SQL ステートメントが格納されます。
 
-    - `cmd_type`: the type of a failed command, such as `Query` (execute an ordinary statement), `Prepare` (prepare a statement), and `Execute` (execute a prepared statement).
-    - `digest`: the digest of the failed SQL statement.
-    - `sample_stmt`: the SQL text when the statement first failed.
-    - `sample_err_msg`: the error message when the SQL statement failed.
-    - `sample_conn_id`: the connection ID recorded in the traffic file for the SQL statement. You can use this to view the execution context in the traffic file.
-    - `sample_capture_time`: the execution time recorded in the traffic file for the SQL statement. You can use this to view the execution context in the traffic file.
-    - `sample_replay_time`: the time when the SQL statement failed during replay. You can use this to view error information in the TiDB log file.
-    - `count`: the number of times the SQL statement failed.
+    -   `cmd_type` : 失敗したコマンドのタイプ。例: `Query` (通常のステートメントを実行)、 `Prepare` (ステートメントを準備)、 `Execute` (プリペアドステートメントを実行)。
+    -   `digest` : 失敗した SQL ステートメントのダイジェスト。
+    -   `sample_stmt` : ステートメントが最初に失敗したときの SQL テキスト。
+    -   `sample_err_msg` : SQL ステートメントが失敗した場合のエラー メッセージ。
+    -   `sample_conn_id` : SQL文のトラフィックファイルに記録された接続ID。これを使用して、トラフィックファイル内の実行コンテキストを表示できます。
+    -   `sample_capture_time` : トラフィックファイルに記録されたSQL文の実行時間。これを使用して、トラフィックファイル内の実行コンテキストを確認できます。
+    -   `sample_replay_time` : 再生中にSQL文が失敗した時刻。これを使用して、TiDBログファイルでエラー情報を確認できます。
+    -   `count` : SQL ステートメントが失敗した回数。
 
-    The following is an example output of the `fail` table:
+    以下はテーブル`fail`の出力例です。
 
     ```sql
     SELECT * FROM tiproxy_traffic_replay.fail LIMIT 1\G
     ```
 
-    ```
-    *************************** 1. row ***************************
-               cmd_type: StmtExecute
-                 digest: 89c5c505772b8b7e8d5d1eb49f4d47ed914daa2663ed24a85f762daa3cdff43c
-            sample_stmt: INSERT INTO new_order (no_o_id, no_d_id, no_w_id) VALUES (?, ?, ?) params=[3077 6 1]
-         sample_err_msg: ERROR 1062 (23000): Duplicate entry '1-6-3077' for key 'new_order.PRIMARY'
-         sample_conn_id: 1356
-    sample_capture_time: 2024-10-17 12:59:15
-     sample_replay_time: 2024-10-17 13:05:05
-                  count: 4
-    ```
+        *************************** 1. row ***************************
+                   cmd_type: StmtExecute
+                     digest: 89c5c505772b8b7e8d5d1eb49f4d47ed914daa2663ed24a85f762daa3cdff43c
+                sample_stmt: INSERT INTO new_order (no_o_id, no_d_id, no_w_id) VALUES (?, ?, ?) params=[3077 6 1]
+             sample_err_msg: ERROR 1062 (23000): Duplicate entry '1-6-3077' for key 'new_order.PRIMARY'
+             sample_conn_id: 1356
+        sample_capture_time: 2024-10-17 12:59:15
+         sample_replay_time: 2024-10-17 13:05:05
+                      count: 4
 
-    The `other_errors` table stores unexpected errors, such as network errors or database connection errors, with the following fields:
+    `other_errors`テーブルには、ネットワーク エラーやデータベース接続エラーなどの予期しないエラーが次のフィールドに格納されます。
 
-    - `err_type`: the type of error, presented as a brief error message. For example, `i/o timeout`.
-    - `sample_err_msg`: the complete error message when the error first occurred.
-    - `sample_replay_time`: the time when the error occurred during replay. You can use this to view error information in the TiDB log file.
-    - `count`: the number of occurrences for this error.
+    -   `err_type` : エラーの種類。簡潔なエラーメッセージとして表示されます。例: `i/o timeout` 。
+    -   `sample_err_msg` : エラーが最初に発生したときの完全なエラー メッセージ。
+    -   `sample_replay_time` : 再生中にエラーが発生した時刻。これを使用して、TiDBログファイルでエラー情報を確認できます。
+    -   `count` : このエラーの発生回数。
 
-    The following is an example output of the `other_errors` table:
+    以下はテーブル`other_errors`の出力例です。
 
     ```sql
     SELECT * FROM tiproxy_traffic_replay.other_errors LIMIT 1\G
     ```
 
-    ```
-    *************************** 1. row ***************************
-              err_type: failed to read the connection: EOF
-        sample_err_msg: this is an error from the backend connection: failed to read the connection: EOF
-    sample_replay_time: 2024-10-17 12:57:39
-                 count: 1
-    ```
+        *************************** 1. row ***************************
+                  err_type: failed to read the connection: EOF
+            sample_err_msg: this is an error from the backend connection: failed to read the connection: EOF
+        sample_replay_time: 2024-10-17 12:57:39
+                     count: 1
 
-    > **Note:**
+    > **注記：**
     >
-    > - The table schema of `tiproxy_traffic_replay` might change in future versions. It is not recommended to directly read data from `tiproxy_traffic_replay` in your application or tool development.
-    > - Replay does not guarantee that the transaction execution order between connections exactly matches the capture sequence. This might lead to incorrect error reports.
-    > - TiProxy does not automatically delete the previous replay report when replaying traffic. You need to manually delete it.
+    > -   `tiproxy_traffic_replay`のテーブルスキーマは将来のバージョンで変更される可能性があります。アプリケーションやツールの開発において、 `tiproxy_traffic_replay`のデータを直接読み取ることは推奨されません。
+    > -   リプレイでは、接続間のトランザクション実行順序がキャプチャシーケンスと完全に一致することが保証されません。そのため、誤ったエラーレポートが生成される可能性があります。
+    > -   TiProxyはトラフィックを再生する際に、以前の再生レポートを自動的に削除しません。手動で削除する必要があります。
 
-## Test throughput
+## テストスループット {#test-throughput}
 
-To test cluster throughput, use the `--speed` option to adjust the replay rate.
+クラスターのスループットをテストするには、 `--speed`オプションを使用して再生レートを調整します。
 
-For example, `--speed=2` executes SQL statements at twice the rate, reducing the total replay time by half:
+たとえば、 `--speed=2` SQL ステートメントを 2 倍の速度で実行し、合計再生時間を半分に短縮します。
 
 ```shell
 tiproxyctl traffic replay --host 10.0.1.10 --port 3080 --username="u1" --password="123456" --input="/tmp/traffic" --speed=2
 ```
 
-Increasing the replay rate only reduces idle time between SQL statements and does not increase the number of connections. When session idle time is already short, increasing the speed might not effectively improve throughput. In such cases, you can deploy multiple TiProxy instances to replay the same traffic files simultaneously, increasing concurrency to improve throughput.
+再生速度を上げると、SQL文間のアイドル時間が短縮されるだけで、接続数は増加しません。セッションのアイドル時間が既に短い場合、速度を上げてもスループットが効果的に向上しない可能性があります。このような場合は、複数のTiProxyインスタンスを導入して同じトラフィックファイルを同時に再生することで、同時実行性を高め、スループットを向上させることができます。
 
-## View and manage tasks
+## タスクのビューと管理 {#view-and-manage-tasks}
 
-During capture and replay, tasks automatically stop if unknown errors occur. To view the current task progress or error information from the last task, use the [`tiproxyctl traffic show`](/tiproxy/tiproxy-command-line-flags.md#traffic-show) command:
+キャプチャと再生中に不明なエラーが発生した場合、タスクは自動的に停止します。現在のタスクの進行状況や前回のタスクのエラー情報を表示するには、 [`tiproxyctl traffic show`](/tiproxy/tiproxy-command-line-flags.md#traffic-show)コマンドを使用します。
 
 ```shell
 tiproxyctl traffic show --host 10.0.1.10 --port 3080
 ```
 
-For example, the following output indicates a running capture task:
+たとえば、次の出力は実行中のキャプチャ タスクを示します。
 
 ```json
 [
@@ -171,23 +168,23 @@ For example, the following output indicates a running capture task:
 ]
 ```
 
-For more information, see [`tiproxyctl traffic show`](/tiproxy/tiproxy-command-line-flags.md#traffic-show).
+詳細については[`tiproxyctl traffic show`](/tiproxy/tiproxy-command-line-flags.md#traffic-show)参照してください。
 
-To cancel the current capture or replay task, use the [`tiproxyctl traffic cancel`](/tiproxy/tiproxy-command-line-flags.md#traffic-cancel) command:
+現在のキャプチャまたは再生タスクをキャンセルするには、 [`tiproxyctl traffic cancel`](/tiproxy/tiproxy-command-line-flags.md#traffic-cancel)コマンドを使用します。
 
 ```shell
 tiproxyctl traffic cancel --host 10.0.1.10 --port 3080
 ```
 
-For more information, see [`tiproxyctl traffic cancel`](/tiproxy/tiproxy-command-line-flags.md#traffic-cancel).
+詳細については[`tiproxyctl traffic cancel`](/tiproxy/tiproxy-command-line-flags.md#traffic-cancel)参照してください。
 
-## Limitations
+## 制限事項 {#limitations}
 
-- TiProxy only supports replaying traffic files captured by TiProxy and does not support other file formats. Therefore, make sure to capture traffic from the production cluster using TiProxy first.
-- TiProxy traffic replay does not support filtering SQL types and DML and DDL statements are replayed. Therefore, you need to restore the cluster data to its pre-replay state before replaying again.
-- TiProxy traffic replay does not support testing [Resource Control](/tidb-resource-control-ru-groups.md) and [privilege management](/privilege-management.md) because TiProxy uses the same username to replay traffic.
-- TiProxy does not support replaying [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) statements.
+-   TiProxyは、TiProxyによってキャプチャされたトラフィックファイルの再生のみをサポートしており、他のファイル形式はサポートしていません。そのため、まずはTiProxyを使用して本番クラスタからトラフィックをキャプチャしてください。
+-   TiProxyトラフィックの再生はSQLタイプのフィルタリングをサポートしておらず、DMLおよびDDL文が再生されます。そのため、再度再生する前に、クラスターデータを再生前の状態に復元する必要があります。
+-   TiProxy トラフィック再生では、トラフィックの再生に同じユーザー名が使用されるため、テスト[リソース管理](/tidb-resource-control-ru-groups.md)と[権限管理](/privilege-management.md)サポートされません。
+-   TiProxy は[`LOAD DATA`](/sql-statements/sql-statement-load-data.md)ステートメントの再生をサポートしていません。
 
-## More resources
+## その他のリソース {#more-resources}
 
-For more information about the traffic replay of TiProxy, see the [design document](https://github.com/pingcap/tiproxy/blob/main/docs/design/2024-08-27-traffic-replay.md).
+TiProxy のトラフィック再生の詳細については、 [設計書](https://github.com/pingcap/tiproxy/blob/main/docs/design/2024-08-27-traffic-replay.md)参照してください。

@@ -1,90 +1,26 @@
 ---
 title: TiDB Lightning Requirements for the Target Database
-summary: Learn prerequisites for running TiDB Lightning.
+summary: TiDB Lightning を実行するための前提条件について説明します。
 ---
 
-# TiDB Lightning Requirements for the Target Database
+# ターゲットデータベースのTiDB Lightning要件 {#tidb-lightning-requirements-for-the-target-database}
 
-Before using TiDB Lightning, you need to check whether the environment meets the requirements. This helps reduce errors during import and ensures import success.
+TiDB Lightningを使用する前に、環境が要件を満たしているかどうかを確認する必要があります。これにより、インポート時のエラーが軽減され、インポートが確実に成功します。
 
-## Privileges of the target database
+## ターゲットデータベースの権限 {#privileges-of-the-target-database}
 
-Based on the import mode and features enabled, the target database users should be granted with different privileges. The following table provides a reference.
+インポートモードと有効な機能に基づいて、ターゲットデータベースユーザーには異なる権限を付与する必要があります。次の表にその例を示します。
 
-<table>
-   <tr>
-      <td></td>
-      <td>Feature</td>
-      <td>Scope</td>
-      <td>Required privilege</td>
-      <td>Remarks</td>
-   </tr>
-   <tr>
-      <td rowspan="2">Mandatory</td>
-      <td rowspan="2">Basic functions</td>
-      <td>Target table</td>
-      <td>CREATE, SELECT, INSERT, UPDATE, DELETE, DROP, ALTER</td>
-      <td>DROP is required only when tidb-lightning-ctl runs the checkpoint-destroy-all command</td>
-   </tr>
-   <tr>
-      <td>Target database</td>
-      <td>CREATE</td>
-      <td></td>
-   </tr>
-   <tr>
-      <td rowspan="4">Mandatory</td>
-      <td>Logical Import Mode</td>
-      <td>information_schema.columns</td>
-      <td>SELECT</td>
-      <td></td>
-   </tr>
-   <tr>
-      <td rowspan="3">Physical Import Mode</td>
-      <td>mysql.tidb</td>
-      <td>SELECT</td>
-      <td></td>
-   </tr>
-   <tr>
-      <td>-</td>
-      <td>SUPER</td>
-      <td></td>
-   </tr>
-   <tr>
-      <td>-</td>
-      <td>RESTRICTED_VARIABLES_ADMIN,RESTRICTED_TABLES_ADMIN</td>
-      <td>Required when the target TiDB enables SEM</td>
-   </tr>
-   <tr>
-      <td>Recommended</td>
-      <td>Conflict detection, max-error</td>
-      <td>Schema configured for lightning.task-info-schema-name</td>
-      <td>SELECT, INSERT, UPDATE, DELETE, CREATE, DROP</td>
-      <td>If not required, the value must be set to ""</td>
-   </tr>
-   <tr>
-      <td>Optional</td>
-      <td>Parallel import</td>
-      <td>Schema configured for lightning.meta-schema-name</td>
-      <td>SELECT, INSERT, UPDATE, DELETE, CREATE, DROP</td>
-      <td>If not required, the value must be set to ""</td>
-   </tr>
-   <tr>
-      <td>Optional</td>
-      <td>checkpoint.driver = "mysql"</td>
-      <td>checkpoint.schema setting</td>
-      <td>SELECT,INSERT,UPDATE,DELETE,CREATE,DROP</td>
-      <td>Required when checkpoint information is stored in databases, instead of files</td>
-   </tr>
-</table>
+<table><tr><td></td><td>特徴</td><td>範囲</td><td>必要な権限</td><td>備考</td></tr><tr><td rowspan="2">必須</td><td rowspan="2">基本関数</td><td>ターゲットテーブル</td><td>作成、選択、挿入、更新、削除、ドロップ、変更</td><td>DROP は、tidb-lightning-ctl が checkpoint-destroy-all コマンドを実行する場合にのみ必要です。</td></tr><tr><td>ターゲットデータベース</td><td>作成する</td><td></td></tr><tr><td rowspan="4">必須</td><td>論理インポートモード</td><td>情報スキーマ列</td><td>選択</td><td></td></tr><tr><td rowspan="3">物理インポートモード</td><td>mysql.tidb</td><td>選択</td><td></td></tr><tr><td>-</td><td>素晴らしい</td><td></td></tr><tr><td>-</td><td>制限付き変数管理者、制限付きテーブル管理者</td><td>ターゲットTiDBがSEMを有効にする場合に必要</td></tr><tr><td>推奨</td><td>競合検出、最大エラー</td><td>lightning.task-info-schema-name 用に設定されたスキーマ</td><td>選択、挿入、更新、削除、作成、削除</td><td>必要でない場合は、値を &quot;&quot; に設定する必要があります</td></tr><tr><td>オプション</td><td>並行輸入</td><td>lightning.meta-schema-name 用に設定されたスキーマ</td><td>選択、挿入、更新、削除、作成、削除</td><td>必要でない場合は、値を &quot;&quot; に設定する必要があります</td></tr><tr><td>オプション</td><td>チェックポイント.ドライバー = &quot;mysql&quot;</td><td> checkpoint.schema 設定</td><td>選択、挿入、更新、削除、作成、削除</td><td>チェックポイント情報がファイルではなくデータベースに保存される場合に必要</td></tr></table>
 
-## Storage space of the target database
+## 対象データベースのストレージスペース {#storage-space-of-the-target-database}
 
-The target TiKV cluster must have enough disk space to store the imported data. In addition to the [standard hardware requirements](/hardware-and-software-requirements.md), the storage space of the target TiKV cluster must be larger than **the size of the data source x the number of replicas x 2**. For example, if the cluster uses 3 replicas by default, the target TiKV cluster must have a storage space larger than 6 times the size of the data source. The formula has x 2 because:
+ターゲットTiKVクラスターには、インポートしたデータを保存するための十分なディスク容量が必要です。1 に加え[標準的なハードウェア要件](/hardware-and-software-requirements.md) 、ターゲットTiKVクラスターのstorage容量**は、データソースのサイズ × レプリカ数 × 2**よりも大きくなければなりません。例えば、クラスターがデフォルトで3つのレプリカを使用する場合、ターゲットTiKVクラスターにはデータソースのサイズの6倍よりも大きなstorage容量が必要です。式に x 2 が含まれているのは、以下の理由によるものです。
 
-- Indexes might take extra space.
-- RocksDB has a space amplification effect.
+-   インデックスは余分なスペースを占める可能性があります。
+-   RocksDB には空間増幅効果があります。
 
-It is difficult to calculate the exact data volume exported by Dumpling from MySQL. However, you can estimate the data volume by using the following SQL statement to summarize the `DATA_LENGTH` field in the information_schema.tables table:
+DumplingがMySQLからエクスポートするデータ量を正確に計算することは困難です。ただし、次のSQL文を使用してinformation_schema.tablesテーブルの`DATA_LENGTH`フィールドを集計することで、データ量を概算できます。
 
 ```sql
 -- Calculate the size of all schemas

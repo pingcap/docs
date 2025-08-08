@@ -1,71 +1,61 @@
 ---
 title: Stop a Data Migration Task
-summary: Learn how to stop a data migration task.
+summary: データ移行タスクを停止する方法を学びます。
 ---
 
-# Stop a Data Migration Task
+# データ移行タスクを停止する {#stop-a-data-migration-task}
 
-You can use the `stop-task` command to stop a data migration task. For differences between `stop-task` and `pause-task`, refer to [Pause a Data Migration Task](/dm/dm-pause-task.md).
-
-{{< copyable "" >}}
+`stop-task`コマンドを使用してデータ移行タスクを停止できます。3 と`stop-task` `pause-task`違いについては、 [データ移行タスクを一時停止する](/dm/dm-pause-task.md)を参照してください。
 
 ```bash
 help stop-task
 ```
 
-```
-stop a specified task
+    stop a specified task
 
-Usage:
- dmctl stop-task [-s source ...] <task-name | task-file> [flags]
+    Usage:
+     dmctl stop-task [-s source ...] <task-name | task-file> [flags]
 
-Flags:
- -h, --help   help for stop-task
+    Flags:
+     -h, --help   help for stop-task
 
-Global Flags:
- -s, --source strings   MySQL Source ID
-```
+    Global Flags:
+     -s, --source strings   MySQL Source ID
 
-## Usage example
-
-{{< copyable "" >}}
+## 使用例 {#usage-example}
 
 ```bash
 stop-task [-s "mysql-replica-01"]  task-name
 ```
 
-## Flags description
+## フラグの説明 {#flags-description}
 
-- `-s`: (Optional) Specifies the MySQL source where the subtasks of the migration task (that you want to stop) run. If it is set, only subtasks on the specified MySQL source are stopped.
-- `task-name | task-file`: (Required) Specifies the task name or task file path.
+-   `-s` : (オプション) 停止する移行タスクのサブタスクが実行されるMySQLソースを指定します。このパラメータが設定されている場合、指定されたMySQLソース上のサブタスクのみが停止されます。
+-   `task-name | task-file` : (必須) タスク名またはタスク ファイル パスを指定します。
 
-## Returned results
-
-{{< copyable "" >}}
+## 返された結果 {#returned-results}
 
 ```bash
 stop-task test
 ```
 
-```
-{
-    "op": "Stop",
-    "result": true,
-    "msg": "",
-    "sources": [
-        {
-            "result": true,
-            "msg": "",
-            "source": "mysql-replica-01",
-            "worker": "worker1"
-        }
-    ]
-}
-```
+    {
+        "op": "Stop",
+        "result": true,
+        "msg": "",
+        "sources": [
+            {
+                "result": true,
+                "msg": "",
+                "source": "mysql-replica-01",
+                "worker": "worker1"
+            }
+        ]
+    }
 
-> **Note:**
+> **注記：**
 >
-> After you stop a migration task with the `stop-task` command, running [`query-status`](/dm/dm-query-status.md) will no longer display the task. However, the checkpoint and other related information for this task is still retained in the `dm_meta` database.
+> `stop-task`コマンドで移行タスクを停止した後、 [`query-status`](/dm/dm-query-status.md)を実行してもタスクは表示されなくなります。ただし、このタスクのチェックポイントやその他の関連情報は`dm_meta`データベースに保持されます。
 >
-> + To start over the migration task, add the `--remove-meta` option when running the [`start-task`](/dm/dm-create-task.md) command.
-> + To completely remove the migration task, manually delete the four tables that use the task name as a prefix from the `dm_meta` database.
+> -   移行タスクを最初からやり直すには、 [`start-task`](/dm/dm-create-task.md)コマンドを実行するときに`--remove-meta`オプションを追加します。
+> -   移行タスクを完全に削除するには、タスク名をプレフィックスとして使用する 4 つのテーブルを`dm_meta`データベースから手動で削除します。

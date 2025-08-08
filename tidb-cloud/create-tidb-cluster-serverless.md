@@ -1,53 +1,53 @@
 ---
-title: Create a {{{ .starter }}} Cluster
-summary: Learn how to create your {{{ .starter }}} cluster.
+title: Create a TiDB Cloud Serverless Cluster
+summary: TiDB Cloud Serverless クラスターを作成する方法を学習します。
 ---
 
-# Create a {{{ .starter }}} Cluster
+# TiDB Cloudサーバーレスクラスタを作成する {#create-a-tidb-cloud-serverless-cluster}
 
-This document describes how to create a {{{ .starter }}} cluster in the [TiDB Cloud console](https://tidbcloud.com/).
+このドキュメントでは、 [TiDB Cloudコンソール](https://tidbcloud.com/)でTiDB Cloud Serverless クラスターを作成する方法について説明します。
 
-> **Tip:**
+> **ヒント：**
 >
-> To learn how to create a TiDB Cloud Dedicated cluster, see [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md).
+> TiDB Cloud Dedicated クラスターを作成する方法については、 [TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)参照してください。
 
-## Before you begin
+## 始める前に {#before-you-begin}
 
-If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/signup) to sign up for an account.
+TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidbcloud.com/signup)クリックしてアカウントを登録してください。
 
-- You can either sign up with email and password so that you can manage your password using TiDB Cloud, or sign up with your Google, GitHub, or Microsoft account.
-- For AWS Marketplace users, you can also sign up through AWS Marketplace. To do that, search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
-- For Azure Marketplace users, you can also sign up through Azure Marketplace. To do that, search for `TiDB Cloud` in [Azure Marketplace](https://azuremarketplace.microsoft.com), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
-- For Google Cloud Marketplace users, you can also sign up through Google Cloud Marketplace. To do that, search for `TiDB Cloud` in [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+-   TiDB Cloudを使用してパスワードを管理できるように、メールアドレスとパスワードでサインアップするか、Google、GitHub、または Microsoft アカウントでサインアップすることができます。
+-   AWS Marketplaceユーザーの方は、AWS Marketplaceからサインアップすることもできます。サインアップするには、 `TiDB Cloud` in [AWS マーケットプレイス](https://aws.amazon.com/marketplace)を検索し、 「TiDB Cloud」をサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定してください。
+-   Azure Marketplaceユーザーの方は、Azure Marketplaceからサインアップすることもできます。サインアップするには、 `TiDB Cloud` in [Azureマーケットプレイス](https://azuremarketplace.microsoft.com)を検索し、 「TiDB Cloud」をサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定してください。
+-   Google Cloud Marketplace ユーザーの方は、Google Cloud Marketplace からサインアップすることもできます。サインアップするには、 `TiDB Cloud` in [Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)を検索し、 「TiDB Cloud」をサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定してください。
 
-## Steps
+## 手順 {#steps}
 
-If you are in the `Organization Owner` or the `Project Owner` role, you can create a {{{ .starter }}} cluster as follows:
+ロール`Organization Owner`または`Project Owner`の場合は、次のようにしてTiDB Cloud Serverless クラスターを作成できます。
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and then navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、 [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-2. Click **Create Cluster**.
+2.  **[クラスタの作成]を**クリックします。
 
-3. On the **Create Cluster** page, **Serverless** is selected by default.
+3.  **「クラスタの作成」**ページでは、デフォルトで**「Serverless」**が選択されています。
 
-4. The cloud provider of {{{ .starter }}} is AWS. You can select an AWS region where you want to host your cluster.
+4.  TiDB Cloud Serverless のクラウドプロバイダーは AWS です。クラスターをホストする AWS リージョンを選択できます。
 
-5. Update the default cluster name if necessary.
+5.  必要に応じてデフォルトのクラスター名を更新します。
 
-6. Select a cluster plan. {{{ .starter }}} provides two [cluster plans](/tidb-cloud/select-cluster-tier.md#cluster-plans): **Free Cluster** and **Scalable Cluster**. You can start with a free cluster and later upgrade to a scalable cluster as your needs grow. To create a scalable cluster, you need to specify a **Monthly Spending Limit** and add a credit card.
+6.  クラスタープランを選択してください。TiDB TiDB Cloud Serverless は**、無料クラスタ**と**スケーラブルクラスタの**2つの[クラスター計画](/tidb-cloud/select-cluster-tier.md#cluster-plans)を提供しています。まずは無料クラスターで始め、ニーズの拡大に合わせてスケーラブルクラスターにアップグレードできます。スケーラブルクラスターを作成するには、**月間利用限度額**を指定し、クレジットカード情報を追加する必要があります。
 
-    > **Note:**
+    > **注記：**
     >
-    > For each organization in TiDB Cloud, you can create a maximum of five [free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create more {{{ .starter }}} clusters, you need to add a credit card and create [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan) for the usage.
+    > TiDB Cloudでは、組織ごとに最大5つのクラスター（デフォルトでは[フリークラスター](/tidb-cloud/select-cluster-tier.md#free-cluster-plan)を作成できます。TiDB TiDB Cloud Serverlessクラスターをさらに作成するには、クレジットカードを追加し、使用量に応じて[スケーラブルなクラスター](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan)クラスターを作成する必要があります。
 
-7. Click **Create**.
+7.  **[作成]を**クリックします。
 
-    The cluster creation process starts and your TiDB Cloud cluster will be created in approximately 30 seconds.
+    クラスター作成プロセスが開始され、約 30 秒以内にTiDB Cloudクラスターが作成されます。
 
-## What's next
+## 次は何？ {#what-s-next}
 
-After your cluster is created, follow the instructions in [Connect to {{{ .starter }}} via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) to create a password for your cluster.
+クラスターが作成されたら、 [パブリックエンドポイント経由でTiDB Cloud Serverless に接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)の手順に従ってクラスターのパスワードを作成します。
 
-> **Note:**
+> **注記：**
 >
-> If you do not set a password, you cannot connect to the cluster.
+> パスワードを設定しないと、クラスターに接続できません。

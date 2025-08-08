@@ -1,31 +1,31 @@
 ---
 title: Index Advisor
-summary: Learn how to optimize query performance with TiDB Index Advisor.
+summary: TiDB Index Advisor を使用してクエリ パフォーマンスを最適化する方法を学習します。
 ---
 
-# Index Advisor
+# インデックスアドバイザー {#index-advisor}
 
-In v8.5.0, TiDB introduces the Index Advisor feature, which helps optimize your workload by recommending indexes that improve query performance. Using the new SQL statement, `RECOMMEND INDEX`, you can generate index recommendations for a single query or an entire workload. To avoid the resource-intensive process of physically creating indexes for evaluation, TiDB supports [hypothetical indexes](#hypothetical-indexes), which are logical indexes that are not materialized.
+TiDB v8.5.0では、クエリパフォーマンスを向上させるインデックスを推奨することでワークロードの最適化を支援するIndex Advisor機能が導入されました。新しいSQL文`RECOMMEND INDEX`を使用すると、単一のクエリまたはワークロード全体に対してインデックスの推奨を生成できます。評価のためにインデックスを物理的に作成するというリソースを大量に消費するプロセスを回避するため、TiDBはマテリアライズされない論理インデックスである[仮想インデックス](#hypothetical-indexes)サポートしています。
 
-> **Note:**
+> **注記：**
 >
-> Currently, this feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 現在、この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
-The Index Advisor analyzes queries to identify indexable columns from clauses such as `WHERE`, `GROUP BY`, and `ORDER BY`. Then, it generates index candidates and estimates their performance benefits using hypothetical indexes. TiDB uses a genetic search algorithm to select the optimal set of indexes starting with single-column indexes and iteratively exploring multi-column indexes, leveraging a "What-If" analysis to evaluate potential indexes based on their impact on optimizer plan costs. The advisor recommends indexes when they reduce the overall cost compared to executing queries without them.
+インデックスアドバイザーはクエリを分析し、 `WHERE` 、 `GROUP BY` 、 `ORDER BY`などの句からインデックス可能な列を特定します。次に、インデックス候補を生成し、仮想インデックスを使用してパフォーマンスの向上を推定します。TiDBは遺伝的探索アルゴリズムを使用して最適なインデックスセットを選択します。まず、単一列インデックスから始めて複数列インデックスを反復的に探索し、「What-If」分析を活用して、オプティマイザプランのコストへの影響に基づいて潜在的なインデックスを評価します。アドバイザーは、インデックスなしでクエリを実行する場合と比較して全体的なコストが削減される場合に、インデックスを推奨します。
 
-In addition to [recommending new indexes](#recommend-indexes-using-the-recommend-index-statement), the Index Advisor also suggests [removing inactive indexes](#remove-unused-indexes) to ensure efficient index management.
+効率的なインデックス管理を確実にするために、Index Advisor は[新しいインデックスの推奨](#recommend-indexes-using-the-recommend-index-statement)に加えて[非アクティブなインデックスの削除](#remove-unused-indexes)提案します。
 
-## Recommend indexes using the `RECOMMEND INDEX` statement
+## <code>RECOMMEND INDEX</code>ステートメントを使用してインデックスを推奨する {#recommend-indexes-using-the-code-recommend-index-code-statement}
 
-TiDB introduces the `RECOMMEND INDEX` SQL statement for index advisor tasks. The `RUN` subcommand analyzes historical workloads and saves recommendations in system tables. With the `FOR` option, you can target a specific SQL statement, even if it was not executed previously. You can also use additional [options](#recommend-index-options) for advanced control. The syntax is as follows:
+TiDBでは、インデックスアドバイザータスク用のSQL文`RECOMMEND INDEX`が導入されています。サブコマンド`RUN`は、過去のワークロードを分析し、推奨事項をシステムテーブルに保存します。オプション`FOR`を使用すると、過去に実行されていないSQL文であっても、特定のSQL文をターゲットにすることができます。また、高度な制御のためにオプション[オプション](#recommend-index-options)追加することもできます。構文は次のとおりです。
 
 ```sql
 RECOMMEND INDEX RUN [ FOR <SQL> ] [<Options>] 
 ```
 
-### Recommend indexes for a single query
+### 単一のクエリに対してインデックスを推奨する {#recommend-indexes-for-a-single-query}
 
-The following example shows how to generate an index recommendation for a query on table `t`, which contains 5,000 rows. For brevity, the `INSERT` statements are omitted.
+次の例は、5,000行を含むテーブル`t`に対するクエリに対して、インデックス推奨を生成する方法を示しています。簡潔にするために、 `INSERT`ステートメントは省略されています。
 
 ```sql
 CREATE TABLE t (a INT, b INT, c INT);
@@ -41,9 +41,9 @@ RECOMMEND INDEX RUN for "SELECT a, b FROM t WHERE a = 1 AND b = 1"\G
 create_index_statement: CREATE INDEX idx_a_b ON t(a,b);
 ```
 
-The Index Advisor evaluates single-column indexes on `a` and `b` separately and ultimately combines them into a single index for optimal performance.
+インデックス アドバイザーは、 `a`と`b`単一列インデックスを個別に評価し、最終的にそれらを 1 つのインデックスに結合して、最適なパフォーマンスを実現します。
 
-The following `EXPLAIN` results compare the query execution without indexes and with the recommended two-column hypothetical index. The Index Advisor internally evaluates both cases and selects the option with the minimum cost. The Index Advisor also considers single-column hypothetical indexes on `a` and `b`, but these do not provide better performance than the combined two-column index. For brevity, the execution plans are omitted.
+以下の`EXPLAIN`の結果は、インデックスなしの場合と、推奨される2列の仮想インデックスを使用した場合のクエリ実行を比較したものです。Index Advisorは内部的に両方のケースを評価し、コストが最小となるオプションを選択します。Index Advisorは`a`と`b`についても1列の仮想インデックスを検討しますが、これらは2列の結合インデックスよりも優れたパフォーマンスを提供しません。簡潔にするため、実行プランは省略しています。
 
 ```sql
 EXPLAIN FORMAT='VERBOSE' SELECT a, b FROM t WHERE a=1 AND b=1;
@@ -65,9 +65,9 @@ EXPLAIN FORMAT='VERBOSE' SELECT /*+ HYPO_INDEX(t, idx_ab, a, b) */ a, b FROM t W
 +------------------------+---------+---------+-----------+-----------------------------+-------------------------------------------------+
 ```
 
-### Recommend indexes for a workload
+### ワークロードのインデックスを推奨する {#recommend-indexes-for-a-workload}
 
-The following example shows how to generate index recommendations for an entire workload. Assume tables `t1` and `t2` each contain 5,000 rows:
+次の例は、ワークロード全体に対してインデックスの推奨事項を生成する方法を示しています。テーブル`t1`と`t2`はそれぞれ5,000行が含まれていると仮定します。
 
 ```sql
 CREATE TABLE t1 (a INT, b INT, c INT, d INT);
@@ -88,11 +88,11 @@ RECOMMEND INDEX RUN;
 +----------+-------+------------+---------------+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------+
 ```
 
-In this case, the Index Advisor identifies optimal indexes for the entire workload rather than a single query. The workload queries are sourced from the TiDB system table `INFORMATION_SCHEMA.STATEMENTS_SUMMARY`.
+この場合、インデックスアドバイザーは単一のクエリではなく、ワークロード全体に最適なインデックスを特定します。ワークロードクエリはTiDBシステムテーブル`INFORMATION_SCHEMA.STATEMENTS_SUMMARY`から取得されます。
 
-This table can contain tens of thousands to hundreds of thousands of queries, which might affect the performance of the Index Advisor. To address this issue, the Index Advisor prioritizes the most frequently executed queries, as these queries have a greater impact on overall workload performance. By default, the Index Advisor selects the top 1,000 queries. You can adjust this value using the [`max_num_query`](#recommend-index-options) parameter.
+このテーブルには数万から数十万のクエリが含まれる場合があり、インデックスアドバイザーのパフォーマンスに影響を与える可能性があります。この問題に対処するため、インデックスアドバイザーは、ワークロード全体のパフォーマンスに大きな影響を与える、最も頻繁に実行されるクエリを優先します。デフォルトでは、インデックスアドバイザーは上位1,000件のクエリを選択します。この値は、 [`max_num_query`](#recommend-index-options)パラメータを使用して調整できます。
 
-The results of the `RECOMMEND INDEX` statements are stored in the `mysql.index_advisor_results` table. You can query this table to view the recommended indexes. The following example shows the contents of this system table after the previous two `RECOMMEND INDEX` statements are executed:
+`RECOMMEND INDEX`のステートメントの結果は`mysql.index_advisor_results`テーブルに保存されます。このテーブルをクエリすることで、推奨されるインデックスを確認できます。次の例は、前の 2 つの`RECOMMEND INDEX`ステートメントを実行した後のこのシステムテーブルの内容を示しています。
 
 ```sql
 SELECT * FROM mysql.index_advisor_results;
@@ -105,23 +105,23 @@ SELECT * FROM mysql.index_advisor_results;
 +----+---------------------+---------------------+-------------+------------+------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+-------+
 ```
 
-### `RECOMMEND INDEX` options
+### <code>RECOMMEND INDEX</code>オプション {#code-recommend-index-code-options}
 
-You can configure and view options for the `RECOMMEND INDEX` statement to fine-tune its behavior for your workloads as follows:
+次のように、 `RECOMMEND INDEX`ステートメントのオプションを設定および表示して、ワークロードに合わせてその動作を微調整できます。
 
 ```sql
 RECOMMEND INDEX SET <option> = <value>;
 RECOMMEND INDEX SHOW OPTION;
 ```
 
-The following options are available:
+利用可能なオプションは次のとおりです。
 
-- `timeout`: specifies the maximum time allowed for running the `RECOMMEND INDEX` command.
-- `max_num_index`: specifies the maximum number of indexes to include in the result of `RECOMMEND INDEX`.
-- `max_index_columns`: specifies the maximum number of columns allowed in multi-column indexes in the result.
-- `max_num_query`: specifies the maximum number of queries to select from the statement summary workload.
+-   `timeout` : `RECOMMEND INDEX`コマンドの実行に許可される最大時間を指定します。
+-   `max_num_index` : `RECOMMEND INDEX`の結果に含めるインデックスの最大数を指定します。
+-   `max_index_columns` : 結果内の複数列インデックスで許可される列の最大数を指定します。
+-   `max_num_query` : ステートメント サマリー ワークロードから選択するクエリの最大数を指定します。
 
-To check your current option settings, execute the `RECOMMEND INDEX SHOW OPTION` statement:
+現在のオプション設定を確認するには、 `RECOMMEND INDEX SHOW OPTION`ステートメントを実行します。
 
 ```sql
 RECOMMEND INDEX SHOW OPTION;
@@ -136,40 +136,40 @@ RECOMMEND INDEX SHOW OPTION;
 4 rows in set (0.00 sec)
 ```
 
-To modify an option, use the `RECOMMEND INDEX SET` statement. For example, to change the `timeout` option:
+オプションを変更するには、 `RECOMMEND INDEX SET`ステートメントを使用します。例えば、 `timeout`オプションを変更するには次のようにします。
 
 ```sql
 RECOMMEND INDEX SET timeout='20s';
 Query OK, 1 row affected (0.00 sec)
 ```
 
-### Limitations
+### 制限事項 {#limitations}
 
-The index recommendation feature has the following limitations:
+インデックス推奨機能には次の制限があります。
 
-- Currently, it does not support [prepared statements](/develop/dev-guide-prepared-statement.md). The `RECOMMEND INDEX RUN` statement cannot recommend indexes for queries executed through the `Prepare` and `Execute` protocol.
-- Currently, it does not provide recommendations for deleting indexes.
-- Currently, a user interface (UI) for the Index Advisor is not yet available.
+-   現在、 [準備された文](/develop/dev-guide-prepared-statement.md)サポートされていません。 `RECOMMEND INDEX RUN`ステートメントは、 `Prepare`および`Execute`プロトコルを介して実行されたクエリのインデックスを推奨できません。
+-   現在、インデックスを削除するための推奨事項は提供されていません。
+-   現在、Index Advisor のユーザー インターフェイス (UI) はまだ利用できません。
 
-## Remove unused indexes
+## 未使用のインデックスを削除する {#remove-unused-indexes}
 
-For v8.0.0 or later versions, you can identify inactive indexes in your workload using [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) and [`INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md). Removing these indexes can save storage space and reduce overhead. For production environments, it is highly recommended to make the target indexes invisible first and observe the impact for one complete business cycle before permanently removing them.
+v8.0.0以降のバージョンでは、 [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)と[`INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)使用してワークロード内の非アクティブなインデックスを特定できます。これらのインデックスを削除すると、storage容量を節約し、オーバーヘッドを削減できます。本番環境では、対象のインデックスをまず非表示にし、1つのビジネスサイクル全体にわたって影響を観察した後に、完全に削除することを強くお勧めします。
 
-### Use `sys.schema_unused_indexes`
+### <code>sys.schema_unused_indexes</code>を使用する {#use-code-sys-schema-unused-indexes-code}
 
-The [`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) view identifies indexes that have not been used since the last startup of all TiDB instances. This view, based on system tables containing schema, table, and column information, provides the full specification for each index, including schema, table, and index names. You can query this view to decide which indexes to make invisible or delete.
+[`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)ビューは、すべての TiDB インスタンスの前回の起動以降に使用されていないインデックスを特定します。このビューは、スキーマ、テーブル、列情報を含むシステムテーブルに基づいており、スキーマ、テーブル、インデックス名を含む各インデックスの完全な仕様を提供します。このビューをクエリすることで、どのインデックスを非表示にするか、または削除するかを決定できます。
 
-> **Warning:**
+> **警告：**
 >
-> Because the `sys.schema_unused_indexes` view shows unused indexes since the last startup of all TiDB instances, ensure that the TiDB instances have been running long enough. Otherwise, the view might show false candidates if certain workloads have not yet run. Use the following SQL query to identify the uptime of all TiDB instances.
+> `sys.schema_unused_indexes`ビューには、すべての TiDB インスタンスの前回の起動以降に使用されていないインデックスが表示されるため、TiDB インスタンスが十分な時間実行されていることを確認してください。そうでない場合、特定のワークロードがまだ実行されていない場合、ビューに誤った候補が表示される可能性があります。すべての TiDB インスタンスの稼働時間を確認するには、次の SQL クエリを使用してください。
 >
 > ```sql
 > SELECT START_TIME,UPTIME FROM INFORMATION_SCHEMA.CLUSTER_INFO WHERE TYPE='tidb';
 > ```
 
-### Use `INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`
+### <code>INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE</code>を使用する {#use-code-information-schema-cluster-tidb-index-usage-code}
 
-The [`INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) table provides metrics such as selectivity buckets, last access time, and rows accessed. The following examples show queries to identify unused or inefficient indexes based on this table:
+[`INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)テーブルは、選択性バケット、最終アクセス時刻、アクセスされた行数などの指標を提供します。次の例は、このテーブルに基づいて未使用または非効率的なインデックスを特定するクエリを示しています。
 
 ```sql
 -- Find indexes that have not been accessed in the last 30 days.
@@ -186,19 +186,19 @@ FROM information_schema.cluster_tidb_index_usage
 WHERE last_access_time IS NOT NULL AND percentage_access_0 + percentage_access_0_1 + percentage_access_1_10 + percentage_access_10_20 + percentage_access_20_50 = 0;
 ```
 
-> **Note:**
+> **注記：**
 >
-> The data in `INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE` might be delayed by up to five minutes, and the usage data is reset whenever a TiDB node restarts. Additionally, index usage is only recorded if the table has valid statistics.
+> `INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`のデータは最大 5 分遅延する可能性があり、使用状況データは TiDB ノードが再起動するたびにリセットされます。また、インデックスの使用状況は、テーブルに有効な統計情報がある場合にのみ記録されます。
 
-## Hypothetical indexes
+## 仮説指標 {#hypothetical-indexes}
 
-Hypothetical indexes (Hypo Indexes) are created using SQL comments, similar to [query hints](/optimizer-hints.md), rather than through the `CREATE INDEX` statement. This approach enables lightweight experimentation with indexes without the overhead of physically materializing them.
+仮説インデックス（Hypo Indexes）は、 `CREATE INDEX`ステートメントではなく、 [クエリヒント](/optimizer-hints.md)と同様のSQLコメントを使用して作成されます。このアプローチにより、インデックスを物理的にマテリアライズするオーバーヘッドなしに、軽量な実験が可能になります。
 
-For example, the `/*+ HYPO_INDEX(t, idx_ab, a, b) */` comment instructs the query planner to create a hypothetical index named `idx_ab` on table `t` for columns `a` and `b`. The planner generates the index's metadata but does not physically materialize it. If applicable, the planner considers this hypothetical index during query optimization without incurring the costs associated with index creation.
+例えば、 `/*+ HYPO_INDEX(t, idx_ab, a, b) */`のコメントは、クエリプランナーに、テーブル`t`列`a`と`b`に`idx_ab`という仮想インデックスを作成するよう指示します。プランナーはインデックスのメタデータを生成しますが、物理的には実現しません。該当する場合、プランナーはクエリの最適化時にこの仮想インデックスを考慮しますが、インデックス作成に伴うコストは発生しません。
 
-The `RECOMMEND INDEX` advisor uses hypothetical indexes for "What-If" analysis to evaluate potential benefits of different indexes. You can also use hypothetical indexes directly to experiment with index designs before proceeding to create them.
+`RECOMMEND INDEX`アドバイザーは、仮想インデックスを用いて「What-If」分析を行い、様々なインデックスの潜在的なメリットを評価します。また、仮想インデックスを直接使用して、インデックスの作成に進む前に様々な設計を試すこともできます。
 
-The following example shows a query using a hypothetical index:
+次の例は、仮想インデックスを使用したクエリを示しています。
 
 ```sql
 CREATE TABLE t(a INT, b INT, c INT);
@@ -222,6 +222,6 @@ EXPLAIN FORMAT='verbose' SELECT /*+ HYPO_INDEX(t, idx_ab, a, b) */ a, b FROM t W
 +------------------------+---------+---------+-----------+-----------------------------+-------------------------------------------------+
 ```
 
-In this example, the `HYPO_INDEX` comment specifies a hypothetical index. Using this index reduces the estimated cost from `392133.42` to `2.20` by enabling an index range scan (`IndexRangeScan`) instead of a full table scan (`TableFullScan`).
+この例では、 `HYPO_INDEX`のコメントは仮想インデックスを指定しています。このインデックスを使用すると、フルテーブルスキャン（ `TableFullScan` ）の代わりにインデックス範囲スキャン（ `IndexRangeScan` ）が有効になり、推定コストが`392133.42`から`2.20`に削減されます。
 
-Based on queries in your workload, TiDB can automatically generate index candidates that could benefit your workload. It uses hypothetical indexes to estimate their potential benefits and recommend the most effective ones.
+TiDBは、ワークロード内のクエリに基づいて、ワークロードにメリットをもたらす可能性のあるインデックス候補を自動的に生成します。仮想インデックスを使用して潜在的なメリットを推定し、最も効果的なインデックスを推奨します。

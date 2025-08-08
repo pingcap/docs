@@ -1,33 +1,33 @@
 ---
 title: SHOW STATS_HISTOGRAMS
-summary: An overview of the usage of SHOW STATS_HISTOGRAMS for TiDB database.
+summary: TiDB データベースの SHOW STATS_HISTOGRAMS の使用法の概要。
 ---
 
-# SHOW STATS_HISTOGRAMS
+# 統計ヒストグラムを表示 {#show-stats-histograms}
 
-This statement shows the histogram information collected by the [`ANALYZE` statement](/sql-statements/sql-statement-analyze-table.md) as part of database [statistics](/statistics.md).
+このステートメントは、データベース[統計](/statistics.md)の一部として[`ANALYZE`ステートメント](/sql-statements/sql-statement-analyze-table.md)によって収集されたヒストグラム情報を表示します。
 
-Currently, the `SHOW STATS_HISTOGRAMS` statement returns the following columns:
+現在、 `SHOW STATS_HISTOGRAMS`ステートメントは次の列を返します。
 
-| Column name | Description            |
-| -------- | ------------- |
-| `Db_name` | Database name |
-| `Table_name` | The table name |
-| `Partition_name` | The partition name |
-| `Column_name` | The column name (when `is_index` is `0`) or the index name (when `is_index` is `1`) |
-| `Is_index` | Whether it is an index column or not |
-| `Update_time` | The update time |
-| `Distinct_count` | The distinct count |
-| `Null_count` | NULL count |
-| `Avg_col_size` | The average col size |
-| `Correlation` | Pearson correlation coefficient between this column and the integer primary key column, indicating the degree of association between the two columns |
-| `Load_status` | Load status, such as `allEvicted` and `allLoaded` |
-| `Total_mem_usage` | The total memory usage |
-| `Hist_mem_usage` | The historical memory usage |
-| `Topn_mem_usage` | The TopN memory usage |
-| `Cms_mem_usage` | The CMS memory usage |
+| カラム名              | 説明                                                 |
+| ----------------- | -------------------------------------------------- |
+| `Db_name`         | データベース名                                            |
+| `Table_name`      | テーブル名                                              |
+| `Partition_name`  | パーティション名                                           |
+| `Column_name`     | 列名（ `is_index`が`0`場合）またはインデックス名（ `is_index`が`1`場合） |
+| `Is_index`        | インデックス列であるかどうか                                     |
+| `Update_time`     | 更新時間                                               |
+| `Distinct_count`  | 個別カウント                                             |
+| `Null_count`      | NULLカウント                                           |
+| `Avg_col_size`    | 平均コルサイズ                                            |
+| `Correlation`     | この列と整数主キー列の間のピアソン相関係数。2つの列間の関連の度合いを示します。           |
+| `Load_status`     | 負荷ステータス（ `allEvicted`など`allLoaded`                 |
+| `Total_mem_usage` | 総メモリ使用量                                            |
+| `Hist_mem_usage`  | 過去のメモリ使用量                                          |
+| `Topn_mem_usage`  | TopNのメモリ使用量                                        |
+| `Cms_mem_usage`   | CMSのメモリ使用量                                         |
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowStatsHistogramsStmt ::=
@@ -38,7 +38,7 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 SHOW STATS_HISTOGRAMS;
@@ -69,11 +69,11 @@ SHOW STATS_HISTOGRAMS WHERE table_name = 't2';
 2 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [ANALYZE](/sql-statements/sql-statement-analyze-table.md)
-* [Introduction to Statistics](/statistics.md)
+-   [分析](/sql-statements/sql-statement-analyze-table.md)
+-   [統計入門](/statistics.md)

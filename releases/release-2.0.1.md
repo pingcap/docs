@@ -1,49 +1,49 @@
 ---
 title: TiDB 2.0.1 Release Notes
-summary: TiDB 2.0.1 was released on May 16, 2018, with improvements in MySQL compatibility and system stability. Updates include real-time progress for 'Add Index', a new session variable for automatic statistics update, bug fixes, compatibility improvements, and behavior changes. PD added a new scheduler, optimized region balancing, and fixed various issues. TiKV fixed issues related to reading, thread calls, raftstore blocking, and split causing dirty read. Overall, the release focuses on enhancing performance, stability, and compatibility.
+summary: TiDB 2.0.1は2018年5月16日にリリースされ、MySQLとの互換性とシステムの安定性が向上しました。アップデートには、「インデックス追加」のリアルタイム進捗表示、統計情報の自動更新のための新しいセッション変数、バグ修正、互換性の向上、動作変更が含まれています。PDでは新しいスケジューラの追加、リージョンバランスの最適化、そして様々な問題の修正が行われました。TiKVでは、読み取り、スレッド呼び出し、raftstoreのブロッキング、分割によるダーティリードに関する問題が修正されました。全体として、このリリースはパフォーマンス、安定性、互換性の向上に重点を置いています。
 ---
 
-# TiDB 2.0.1 Release Notes
+# TiDB 2.0.1 リリースノート {#tidb-2-0-1-release-notes}
 
-On May 16, 2018, TiDB 2.0.1 is released. Compared with TiDB 2.0.0 (GA), this release has great improvement in MySQL compatibility and system stability.
+2018年5月16日にTiDB 2.0.1がリリースされました。TiDB 2.0.0 (GA)と比較して、このリリースではMySQLとの互換性とシステムの安定性が大幅に向上しています。
 
-## TiDB
+## TiDB {#tidb}
 
-- Update the progress of `Add Index` to the DDL job information in real time
-- Add the `tidb_auto_analyze_ratio` session variable to control the threshold value of automatic statistics update
-- Fix an issue that not all residual states are cleaned up when the transaction commit fails
-- Fix a bug about adding indexes in some conditions
-- Fix the correctness related issue when DDL modifies surface operations in some concurrent scenarios
-- Fix a bug that the result of `LIMIT` is incorrect in some conditions
-- Fix a capitalization issue of the `ADMIN CHECK INDEX` statement to make its index name case insensitive
-- Fix a compatibility issue of the `UNION` statement
-- Fix a compatibility issue when inserting data of `TIME` type
-- Fix a goroutine leak issue caused by `copIteratorTaskSender` in some conditions
-- Add an option for TiDB to control the behaviour of Binlog failure
-- Refactor the `Coprocessor` slow log to distinguish between the scenario of tasks with long processing time and long waiting time
-- Log nothing when meeting MySQL protocol handshake error, to avoid too many logs caused by the load balancer Keep Alive mechanism
-- Refine the "Out of range value for column" error message
-- Fix a bug when there is a subquery in an `Update` statement
-- Change the behaviour of handling `SIGTERM`, and do not wait for all queries to terminate anymore
+-   `Add Index`の進行状況をDDLジョブ情報にリアルタイムで更新します
+-   自動統計更新のしきい値を制御するために`tidb_auto_analyze_ratio`セッション変数を追加します。
+-   トランザクションのコミットが失敗したときに、すべての残留状態がクリーンアップされない問題を修正しました
+-   一部の条件でインデックスを追加する際のバグを修正
+-   一部の同時シナリオで DDL がサーフェス操作を変更する際の正確性に関する問題を修正しました。
+-   いくつかの条件で`LIMIT`の結果が正しくないというバグを修正しました
+-   `ADMIN CHECK INDEX`のステートメントの大文字小文字の問題を修正し、インデックス名の大文字と小文字を区別しないようにしました。
+-   `UNION`文の互換性の問題を修正
+-   `TIME`種類のデータを挿入する際の互換性の問題を修正
+-   いくつかの条件で`copIteratorTaskSender`によって発生する goroutine リークの問題を修正しました
+-   TiDBにBinlog障害の動作を制御するオプションを追加
+-   `Coprocessor`スローログをリファクタリングして、処理時間が長いタスクと待機時間が長いタスクのシナリオを区別します。
+-   MySQL プロトコル ハンドシェイク エラーが発生した場合は、ロード バランサの Keep Alive メカニズムによって大量のログが生成されるのを避けるため、何もログに記録しません。
+-   「列の値が範囲外です」というエラーメッセージを改善する
+-   `Update`文にサブクエリがある場合のバグを修正
+-   `SIGTERM`処理動作を変更し、すべてのクエリが終了するまで待たないようにします。
 
-## PD
+## PD {#pd}
 
-- Add the `Scatter Range` scheduler to balance Regions with the specified key range
-- Optimize the scheduling of Merge Region to prevent the newly split Region from being merged
-- Add Learner related metrics
-- Fix the issue that the scheduler is mistakenly deleted after restart
-- Fix the error that occurs when parsing the configuration file
-- Fix the issue that the etcd leader and the PD leader are not replicated
-- Fix the issue that Learner still appears after it is closed
-- Fix the issue that Regions fail to load because the packet size is too large
+-   指定されたキー範囲でリージョンのバランスをとるための`Scatter Range`スケジューラを追加します。
+-   新しく分割されたリージョンがマージされないように、マージリージョンのスケジュールを最適化します。
+-   Learner関連の指標を追加する
+-   再起動後にスケジューラが誤って削除される問題を修正
+-   設定ファイルの解析時に発生するエラーを修正
+-   etcdリーダーとPDリーダーが複製されない問題を修正
+-   Learnerを閉じた後も表示される問題を修正しました
+-   パケットサイズが大きすぎるためにリージョンの読み込みに失敗する問題を修正しました
 
-## TiKV
+## TiKV {#tikv}
 
-- Fix the issue that `SELECT FOR UPDATE` prevents others from reading
-- Optimize the slow query log
-- Reduce the number of `thread_yield` calls
-- Fix the bug that raftstore is accidentally blocked when generating the snapshot
-- Fix the issue that Learner cannot be successfully elected in special conditions
-- Fix the issue that split might cause dirty read in extreme conditions
-- Correct the default value of the read thread pool configuration
-- Speed up Delete Range
+-   `SELECT FOR UPDATE`他の人が読めない問題を修正
+-   スロークエリログを最適化する
+-   `thread_yield`の通話回数を減らす
+-   スナップショットを生成する際に raftstore が誤ってブロックされるバグを修正しました
+-   特別な状況でLearnerを正常に選出できない問題を修正しました
+-   極端な状況で分割によりダーティリードが発生する可能性がある問題を修正
+-   読み取りスレッドプール構成のデフォルト値を修正します
+-   範囲削除の高速化

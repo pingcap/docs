@@ -1,110 +1,101 @@
 ---
 title: Upgrade TiDB Using TiUP
-summary: Learn how to upgrade TiDB using TiUP.
+summary: TiUPを使用して TiDB をアップグレードする方法を学びます。
 ---
 
-# Upgrade TiDB Using TiUP
+# TiUPを使用して TiDB をアップグレードする {#upgrade-tidb-using-tiup}
 
-This document applies to upgrading to TiDB v8.5.x from the following versions: v6.1.x, v6.5.x, v7.1.x, v7.5.x, v8.1.x, v8.2.0, v8.3.0, and v8.4.0
+このドキュメントは、次のバージョンから TiDB v8.5.x へのアップグレードに適用されます: v6.1.x、v6.5.x、v7.1.x、v7.5.x、v8.1.x、v8.2.0、v8.3.0、および v8.4.0
 
-> **Warning:**
+> **警告：**
 >
-> 1. Before upgrading TiDB, ensure that your operating system version meets the [OS and platform requirements](/hardware-and-software-requirements.md#os-and-platform-requirements). If you plan to upgrade your cluster running on CentOS Linux 7 to v8.5, ensure you use TiDB v8.5.1 or a later version to avoid the risk of cluster unavailability. For more information, see [TiDB v8.5.1 Release Notes](/releases/release-8.5.1.md).
-> 2. You cannot upgrade TiFlash online from versions earlier than 5.3 to 5.3 or later. Instead, you must first stop all the TiFlash instances of the early version, and then upgrade the cluster offline. If other components (such as TiDB and TiKV) do not support an online upgrade, follow the instructions in warnings in [Online upgrade](#online-upgrade).
-> 3. **DO NOT** run DDL statements during the upgrade process. Otherwise, the issue of undefined behavior might occur.
-> 4. **DO NOT** upgrade a TiDB cluster when a DDL statement is being executed in the cluster (usually for the time-consuming DDL statements such as `ADD INDEX` and the column type changes). Before the upgrade, it is recommended to use the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) command to check whether the TiDB cluster has an ongoing DDL job. If the cluster has a DDL job, to upgrade the cluster, wait until the DDL execution is finished or use the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) command to cancel the DDL job before you upgrade the cluster.
-> 5. If the TiDB version before upgrade is 7.1.0 or later, you can ignore the preceding warnings 3 and 4. For more information, see [limitations on using TiDB smooth upgrade](/smooth-upgrade-tidb.md#limitations).
-> 6. Be sure to read [limitations on user operations](/smooth-upgrade-tidb.md#limitations-on-user-operations) before upgrading your TiDB cluster using TiUP.
+> 1.  TiDBをアップグレードする前に、ご使用のオペレーティングシステムのバージョンが[OS and platform requirements](/hardware-and-software-requirements.md#os-and-platform-requirements)満たしていることを確認してください。CentOS Linux 7で稼働しているクラスタをv8.5にアップグレードする場合は、クラスタが利用できなくなるリスクを回避するため、TiDB v8.5.1以降のバージョンを使用してください。詳細については、 [TiDB v8.5.1 リリースノート](/releases/release-8.5.1.md)参照してください。
+> 2.  TiFlash を5.3 より前のバージョンから 5.3 以降にオンラインでアップグレードすることはできません。まず、以前のバージョンのTiFlashインスタンスをすべて停止し、その後、クラスターをオフラインでアップグレードする必要があります。他のコンポーネント（TiDB や TiKV など）がオンラインアップグレードをサポートしていない場合は、 [オンラインアップグレード](#online-upgrade)の警告の手順に従ってください。
+> 3.  アップグレードプロセス中はDDL文を実行**しないでください**。そうしないと、未定義の動作が発生する可能性があります。
+> 4.  **DO NOT** upgrade a TiDB cluster when a DDL statement is being executed in the cluster (usually for the time-consuming DDL statements such as `ADD INDEX` and the column type changes). Before the upgrade, it is recommended to use the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) command to check whether the TiDB cluster has an ongoing DDL job. If the cluster has a DDL job, to upgrade the cluster, wait until the DDL execution is finished or use the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) command to cancel the DDL job before you upgrade the cluster.
+> 5.  アップグレード前の TiDB バージョンが 7.1.0 以降の場合は、前述の警告 3 と 4 は無視できます。詳細については、 [TiDBスムーズアップグレードの使用に関する制限](/smooth-upgrade-tidb.md#limitations)参照してください。
+> 6.  TiUPを使用して TiDB クラスターをアップグレードする前に、必ず[ユーザー操作の制限](/smooth-upgrade-tidb.md#limitations-on-user-operations)お読みください。
 
-> **Note:**
+> **注記：**
 >
-> - If your cluster to be upgraded is earlier than v6.2, the upgrade might get stuck when you upgrade the cluster to v6.2 or later versions in some scenarios. You can refer to [How to fix the issue](#how-to-fix-the-issue-that-the-upgrade-gets-stuck-when-upgrading-to-v620-or-later-versions).
-> - TiDB nodes use the value of the [`server-version`](/tidb-configuration-file.md#server-version) configuration item to verify the current TiDB version. Therefore, to avoid unexpected behaviors, before upgrading the TiDB cluster, you need to set the value of `server-version` to empty or the real version of the current TiDB cluster.
-> - Setting the [`performance.force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710) configuration item to `ON` prolongs the TiDB startup time, which might cause startup timeouts and upgrade failures. To avoid this issue, it is recommended to set a longer waiting timeout for TiUP.
->     - Scenarios that might be affected:
->         - The original cluster version is earlier than v6.5.7 and v7.1.0 (which does not support `performance.force-init-stats` yet), and the target version is v7.2.0 or later.
->         - The original cluster version is equal to or later than v6.5.7 and v7.1.0, and the `performance.force-init-stats` configuration item is set to `ON`.
+> -   アップグレード対象のクラスターがバージョン6.2より前のバージョンの場合、一部のシナリオでは、クラスターをバージョン6.2以降にアップグレードすると、アップグレードが停止する可能性があります[How to fix the issue](#how-to-fix-the-issue-that-the-upgrade-gets-stuck-when-upgrading-to-v620-or-later-versions)を参照してください。
+> -   TiDBノードは、構成項目[`server-version`](/tidb-configuration-file.md#server-version)の値を使用して現在のTiDBバージョンを確認します。そのため、予期しない動作を回避するには、TiDBクラスタをアップグレードする前に、値`server-version`を空または現在のTiDBクラスタの実際のバージョンに設定する必要があります。
+> -   設定項目[`performance.force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710) `ON`に設定すると、TiDB の起動時間が長くなり、起動タイムアウトやアップグレード失敗が発生する可能性があります。この問題を回避するには、 TiUPの待機タイムアウトを長めに設定することをお勧めします。
+>     -   Scenarios that might be affected:
+>         -   元のクラスターバージョンは v6.5.7 および v7.1.0 ( `performance.force-init-stats`はまだサポートされていません) より前であり、ターゲットバージョンは v7.2.0 以降です。
+>         -   元のクラスターのバージョンは v6.5.7 および v7.1.0 以上であり、 `performance.force-init-stats`構成項目は`ON`に設定されています。
 >
->     - Check the value of the `performance.force-init-stats` configuration item:
+>     -   `performance.force-init-stats`構成項目の値を確認します。
 >
->         ```
->         SHOW CONFIG WHERE type = 'tidb' AND name = 'performance.force-init-stats';
->         ```
+>             SHOW CONFIG WHERE type = 'tidb' AND name = 'performance.force-init-stats';
 >
->     - You can increase the TiUP waiting timeout by adding the command-line option [`--wait-timeout`](/tiup/tiup-component-cluster.md#--wait-timeout). For example, execute the following command to set the waiting timeout to 1200 seconds (20 minutes).
+>     -   You can increase the TiUP waiting timeout by adding the command-line option [`--wait-timeout`](/tiup/tiup-component-cluster.md#--wait-timeout). For example, execute the following command to set the waiting timeout to 1200 seconds (20 minutes).
 >
 >         ```shell
 >         tiup update cluster --wait-timeout 1200 [other options]
 >         ```
 >
->         Generally, a 20-minute waiting timeout is sufficient for most scenarios. For a more precise estimate, search for `init stats info time` in the TiDB log to get the statistics loading time during the previous startup as a reference. For example:
+>         一般的に、ほとんどのシナリオでは20分の待機タイムアウトで十分です。より正確な推定値を得るには、TiDBログで`init stats info time`検索し、前回の起動時の統計読み込み時間を参考にしてください。例えば、
 >
->         ```
->         [domain.go:2271] ["init stats info time"] [lite=true] ["take time"=2.151333ms]
->         ```
+>             [domain.go:2271] ["init stats info time"] [lite=true] ["take time"=2.151333ms]
 >
->          If the original cluster is v7.1.0 or earlier, when upgrading to v7.2.0 or later, because of the introduction of [`performance.lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710), the statistics loading time is greatly reduced. In this case, the `init stats info time` before the upgrade is longer than the loading time after the upgrade.
->     - If you want to shorten the rolling upgrade duration of TiDB and the potential performance impact of missing initial statistical information during the upgrade is acceptable for your cluster, you can set `performance.force-init-stats` to `OFF` before the upgrade by [modifying the configuration of the target instance with TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration). After the upgrade is completed, you can reassess and revert this setting if necessary.
+>         元のクラスターがv7.1.0以前の場合、v7.2.0以降にアップグレードすると、 [`performance.lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)の導入により統計情報の読み込み時間が大幅に短縮されます。この場合、アップグレード前の`init stats info time`アップグレード後の読み込み時間よりも長くなります。
+>
+>     -   If you want to shorten the rolling upgrade duration of TiDB and the potential performance impact of missing initial statistical information during the upgrade is acceptable for your cluster, you can set `performance.force-init-stats` to `OFF` before the upgrade by [TiUPを使用してターゲットインスタンスの構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration). After the upgrade is completed, you can reassess and revert this setting if necessary.
 
-## Upgrade caveat
+## アップグレードの注意事項 {#upgrade-caveat}
 
-- TiDB currently does not support version downgrade or rolling back to an earlier version after the upgrade.
-- Support upgrading the versions of TiCDC, TiFlash, and other components.
-- When upgrading TiFlash from versions earlier than v6.3.0 to v6.3.0 and later versions, note that the CPU must support the AVX2 instruction set under the Linux AMD64 architecture and the ARMv8 instruction set architecture under the Linux ARM64 architecture. For details, see the description in [v6.3.0 Release Notes](/releases/release-6.3.0.md#others).
-- For detailed compatibility changes of different versions, see the [Release Notes](/releases/release-notes.md) of each version. Modify your cluster configuration according to the "Compatibility Changes" section of the corresponding release notes.
-- When updating clusters from versions earlier than v5.3 to v5.3 or later versions, note that there is a time format change in the alerts generated by the default deployed Prometheus. This format change is introduced starting from Prometheus v2.27.1. For more information, see [Prometheus commit](https://github.com/prometheus/prometheus/commit/7646cbca328278585be15fa615e22f2a50b47d06).
+-   現在、TiDB は、アップグレード後のバージョンのダウングレードまたは以前のバージョンへのロールバックをサポートしていません。
+-   Support upgrading the versions of TiCDC, TiFlash, and other components.
+-   TiFlashをv6.3.0より前のバージョンからv6.3.0以降のバージョンにアップグレードする場合、CPUがLinux AMD64アーキテクチャではAVX2命令セット、Linux ARM64アーキテクチャではARMv8命令セットアーキテクチャをサポートしている必要があることに注意してください。詳細については、 [v6.3.0 リリースノート](/releases/release-6.3.0.md#others)の説明を参照してください。
+-   各バージョン間の互換性に関する変更の詳細については、各バージョンの[リリースノート](/releases/release-notes.md)ご覧ください。対応するリリースノートの「互換性の変更」セクションに従って、クラスター構成を変更してください。
+-   クラスターをv5.3より前のバージョンからv5.3以降のバージョンにアップデートする場合、デフォルトでデプロイされているPrometheusによって生成されるアラートの時刻形式が変更されていることにご注意ください。この形式の変更は、Prometheus v2.27.1から導入されています。詳細については、 [プロメテウスコミット](https://github.com/prometheus/prometheus/commit/7646cbca328278585be15fa615e22f2a50b47d06)ご覧ください。
 
-## Preparations
+## 準備 {#preparations}
 
 This section introduces the preparation works needed before upgrading your TiDB cluster, including upgrading TiUP and the TiUP Cluster component.
 
-### Step 1: Review compatibility changes
+### ステップ1: 互換性の変更を確認する {#step-1-review-compatibility-changes}
 
-Review compatibility changes in TiDB release notes. If any changes affect your upgrade, take actions accordingly.
+TiDB リリースノートで互換性の変更点をご確認ください。アップグレードに影響する変更点がある場合は、それに応じた対応を行ってください。
 
-The following provides release notes you need to know when you upgrade from v8.4.0 to the current version ({{{ .tidb-version }}}). If you are upgrading from v8.3.0 or earlier versions to the current version, you might also need to check the [release notes](/releases/release-notes.md) of the intermediate versions.
+以下は、v8.4.0から最新バージョン（v8.5.2）にアップグレードする際に知っておくべきリリースノートです。v8.3.0以前のバージョンから最新バージョンにアップグレードする場合は、中間バージョン[リリースノート](/releases/release-notes.md)確認する必要があるかもしれません。
 
-- TiDB v8.5.0 [compatibility changes](/releases/release-8.5.0.md#compatibility-changes)
-- TiDB v8.5.1 [release notes](/releases/release-8.5.1.md)
-- TiDB v8.5.2 [release notes](/releases/release-8.5.2.md)
+-   TiDB v8.5.0 [compatibility changes](/releases/release-8.5.0.md#compatibility-changes)
+-   TiDB v8.5.1 [リリースノート](/releases/release-8.5.1.md)
+-   TiDB v8.5.2 [リリースノート](/releases/release-8.5.2.md)
 
-### Step 2: Upgrade TiUP or TiUP offline mirror
+### ステップ2: TiUPまたはTiUPオフラインミラーをアップグレードする {#step-2-upgrade-tiup-or-tiup-offline-mirror}
 
-Before upgrading your TiDB cluster, you first need to upgrade TiUP or TiUP mirror.
+TiDB クラスターをアップグレードする前に、まずTiUPまたはTiUPミラーをアップグレードする必要があります。
 
-#### Upgrade TiUP and TiUP Cluster
+#### TiUPとTiUPクラスタのアップグレード {#upgrade-tiup-and-tiup-cluster}
 
-> **Note:**
+> **注記：**
 >
-> If the control machine of the cluster to upgrade cannot access `https://tiup-mirrors.pingcap.com`, skip this section and see [Upgrade TiUP offline mirror](#upgrade-tiup-offline-mirror).
+> アップグレードするクラスターの制御マシンが`https://tiup-mirrors.pingcap.com`アクセスできない場合は、このセクションをスキップして[TiUPオフラインミラーのアップグレード](#upgrade-tiup-offline-mirror)参照してください。
 
-1. Upgrade the TiUP version. It is recommended that the TiUP version is `1.11.3` or later.
-
-    {{< copyable "shell-regular" >}}
+1.  TiUPのバージョンをアップグレードしてください。TiUPのバージョンは`1.11.3`以降が推奨されます。
 
     ```shell
     tiup update --self
     tiup --version
     ```
 
-2. Upgrade the TiUP Cluster version. It is recommended that the TiUP Cluster version is `1.11.3` or later.
-
-    {{< copyable "shell-regular" >}}
+2.  TiUPクラスタのバージョンをアップグレードしてください。TiUPTiUPのバージョンは`1.11.3`以降が推奨されます。
 
     ```shell
     tiup update cluster
     tiup cluster --version
     ```
 
-#### Upgrade TiUP offline mirror
+#### TiUPオフラインミラーのアップグレード {#upgrade-tiup-offline-mirror}
 
-> **Note:**
+> **注記：**
 >
-> If the cluster to upgrade was deployed not using the offline method, skip this step.
+> アップグレードするクラスターがオフライン方式を使用せずにデプロイされた場合は、この手順をスキップします。
 
-Refer to [Deploy a TiDB Cluster Using TiUP - Deploy TiUP offline](/production-deployment-using-tiup.md#deploy-tiup-offline) to download the TiUP mirror of the new version and upload it to the control machine. After executing `local_install.sh`, TiUP will complete the overwrite upgrade.
-
-{{< copyable "shell-regular" >}}
+[TiUPを使用して TiDBクラスタをデプロイ- TiUPをオフラインでデプロイ](/production-deployment-using-tiup.md#deploy-tiup-offline)を参照して、新しいバージョンのTiUPミラーをダウンロードし、制御マシンにアップロードしてください。3 `local_install.sh`実行すると、 TiUP は上書きアップグレードを完了します。
 
 ```shell
 tar xzvf tidb-community-server-${version}-linux-amd64.tar.gz
@@ -112,9 +103,7 @@ sh tidb-community-server-${version}-linux-amd64/local_install.sh
 source /home/tidb/.bash_profile
 ```
 
-After the overwrite upgrade, run the following command to merge the server and toolkit offline mirrors to the server directory:
-
-{{< copyable "shell-regular" >}}
+上書きアップグレード後、次のコマンドを実行して、サーバーとツールキットのオフライン ミラーをサーバーディレクトリにマージします。
 
 ```bash
 tar xf tidb-community-toolkit-${version}-linux-amd64.tar.gz
@@ -124,9 +113,7 @@ cp -rp keys ~/.tiup/
 tiup mirror merge ../tidb-community-toolkit-${version}-linux-amd64
 ```
 
-After merging the mirrors, run the following command to upgrade the TiUP Cluster component:
-
-{{< copyable "shell-regular" >}}
+ミラーをマージした後、次のコマンドを実行してTiUPクラスタコンポーネントをアップグレードします。
 
 ```shell
 tiup update cluster
@@ -134,98 +121,90 @@ tiup update cluster
 
 Now, the offline mirror has been upgraded successfully. If an error occurs during TiUP operation after the overwriting, it might be that the `manifest` is not updated. You can try `rm -rf ~/.tiup/manifests/*` before running TiUP again.
 
-### Step 3: Edit TiUP topology configuration file
+### ステップ3: TiUPトポロジ構成ファイルを編集する {#step-3-edit-tiup-topology-configuration-file}
 
-> **Note:**
+> **注記：**
 >
-> Skip this step if one of the following situations applies:
+> 次のいずれかの状況に該当する場合は、この手順をスキップしてください。
 >
-> + You have not modified the configuration parameters of the original cluster. Or you have modified the configuration parameters using `tiup cluster` but no more modification is needed.
-> + After the upgrade, you want to use the default parameter values of {{{ .tidb-version }}} for the unmodified configuration items.
+> -   元のクラスタの構成パラメータを変更していません。または、 `tiup cluster`使用して構成パラメータを変更しましたが、それ以上の変更は必要ありません。
+> -   アップグレード後、変更されていない構成項目に対して、v8.5.2 のデフォルトのパラメータ値を使用します。
 
-1. Enter the `vi` editing mode to edit the topology file:
-
-    {{< copyable "shell-regular" >}}
+1.  トポロジファイルを編集するには、 `vi`編集モードに入ります。
 
     ```shell
     tiup cluster edit-config <cluster-name>
     ```
 
-2. Refer to the format of [topology](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml) configuration template and fill the parameters you want to modify in the `server_configs` section of the topology file.
+2.  [トポロジー](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)構成テンプレートの形式を参照し、トポロジ ファイルの`server_configs`セクションに変更するパラメータを入力します。
 
-3. After the modification, enter <kbd>:</kbd> + <kbd>w</kbd> + <kbd>q</kbd> to save the change and exit the editing mode. Enter <kbd>Y</kbd> to confirm the change.
+3.  変更後、 <kbd>:</kbd> + <kbd>w</kbd> + <kbd>q</kbd>と入力して変更を保存し、編集モードを終了します。Y<kbd>と</kbd>入力して変更を確定します。
 
-### Step 4: Check the DDL and backup status of the cluster
+### ステップ4: クラスターのDDLとバックアップのステータスを確認する {#step-4-check-the-ddl-and-backup-status-of-the-cluster}
 
-To avoid undefined behaviors or other unexpected problems during the upgrade, it is recommended to check the following items before the upgrade.
+アップグレード中に未定義の動作やその他の予期しない問題を回避するために、アップグレード前に次の項目を確認することをお勧めします。
 
-- Cluster DDLs:
+-   クラスタDDL:
 
-    - If you use [smooth upgrade](/smooth-upgrade-tidb.md) to upgrade TiDB to v8.1.0 or later, and the [Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md) is enabled, it is recommended to disable the DXF before upgrading. Otherwise, the indexes added during the upgrade process might be inconsistent with the data, leading to upgrade failures. 
-    - If you do not use [smooth upgrade](/smooth-upgrade-tidb.md), it is recommended to use the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) statement to check whether ongoing DDL jobs exist. If an ongoing DDL job exists, wait for the completion of its execution or cancel it using the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) statement before performing an upgrade.
+    -   [スムーズなアップグレード](/smooth-upgrade-tidb.md)使用して TiDB を v8.1.0 以降にアップグレードし、 [Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md)有効になっている場合は、アップグレード前に DXF を無効にすることをお勧めします。そうしないと、アップグレードプロセス中に追加されたインデックスがデータと不整合になり、アップグレードが失敗する可能性があります。
+    -   [スムーズなアップグレード](/smooth-upgrade-tidb.md)使用しない場合は、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)ステートメントを使用して、実行中の DDL ジョブが存在するかどうかを確認することをお勧めします。実行中の DDL ジョブが存在する場合は、アップグレードを実行する前に、その実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)ステートメントを使用してキャンセルしてください。
 
-- Cluster backup: It is recommended to execute the [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md) statement to check whether there is an ongoing backup or restore task in the cluster. If yes, wait for its completion before performing an upgrade.
+-   クラスタのバックアップ：クラスター内で実行中のバックアップまたは復元タスクがあるかどうかを確認するために、 [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md)ステートメントを実行することをお勧めします。実行中の場合は、アップグレードを実行する前に完了をお待ちください。
 
-### Step 5: Check the health status of the current cluster
+### ステップ5: 現在のクラスターのヘルスステータスを確認する {#step-5-check-the-health-status-of-the-current-cluster}
 
-To avoid the undefined behaviors or other issues during the upgrade, it is recommended to check the health status of Regions of the current cluster before the upgrade. To do that, you can use the `check` sub-command.
-
-{{< copyable "shell-regular" >}}
+アップグレード中に未定義の動作やその他の問題が発生するのを避けるため、アップグレード前に現在のクラスタのリージョンのヘルスステータスを確認することをお勧めします。そのためには、サブコマンド`check`を使用します。
 
 ```shell
 tiup cluster check <cluster-name> --cluster
 ```
 
-After the command is executed, the "Region status" check result will be output.
+コマンドを実行すると、「リージョンステータス」のチェック結果が出力されます。
 
-+ If the result is "All Regions are healthy", all Regions in the current cluster are healthy and you can continue the upgrade.
-+ If the result is "Regions are not fully healthy: m miss-peer, n pending-peer" with the "Please fix unhealthy regions before other operations." prompt, some Regions in the current cluster are abnormal. You need to troubleshoot the anomalies until the check result becomes "All Regions are healthy". Then you can continue the upgrade.
+-   結果が「すべてのリージョンが正常です」の場合、現在のクラスター内のすべてのリージョンが正常であるため、アップグレードを続行できます。
+-   結果が「リージョンが完全に正常ではありません: m 個のミスピア、n 個の保留中のピア」で、「他の操作を行う前に、異常なリージョンを修正してください。」というプロンプトが表示される場合、現在のクラスター内の一部のリージョンに異常があります。チェック結果が「すべてのリージョンが正常です」になるまで、異常をトラブルシューティングする必要があります。その後、アップグレードを続行できます。
 
-## Upgrade the TiDB cluster
+## TiDBクラスタをアップグレードする {#upgrade-the-tidb-cluster}
 
-This section describes how to upgrade the TiDB cluster and verify the version after the upgrade.
+このセクションでは、TiDB クラスターをアップグレードし、アップグレード後のバージョンを確認する方法について説明します。
 
-### Upgrade the TiDB cluster to a specified version
+### Upgrade the TiDB cluster to a specified version {#upgrade-the-tidb-cluster-to-a-specified-version}
 
-You can upgrade your cluster in one of the two ways: online upgrade and offline upgrade.
+クラスターは、オンライン アップグレードとオフライン アップグレードのいずれかの方法でアップグレードできます。
 
-By default, TiUP Cluster upgrades the TiDB cluster using the online method, which means that the TiDB cluster can still provide services during the upgrade process. With the online method, the leaders are migrated one by one on each node before the upgrade and restart. Therefore, for a large-scale cluster, it takes a long time to complete the entire upgrade operation.
+TiUP クラスタはデフォルトでオンライン方式を使用してTiDBクラスタをアップグレードします。つまり、アップグレードプロセス中もTiDBクラスタはサービスを提供し続けることができます。オンライン方式では、アップグレードと再起動の前に、各ノードのリーダーが1つずつ移行されます。そのため、大規模なクラスタでは、アップグレード操作全体を完了するのに長い時間がかかります。
 
-If your application has a maintenance window for the database to be stopped for maintenance, you can use the offline upgrade method to quickly perform the upgrade operation.
+アプリケーションに、メンテナンスのためにデータベースを停止するメンテナンス ウィンドウがある場合は、オフライン アップグレード方式を使用して、アップグレード操作を迅速に実行できます。
 
-#### Online upgrade
-
-{{< copyable "shell-regular" >}}
+#### オンラインアップグレード {#online-upgrade}
 
 ```shell
 tiup cluster upgrade <cluster-name> <version>
 ```
 
-For example, if you want to upgrade the cluster to {{{ .tidb-version }}}:
-
-{{< copyable "shell-regular" >}}
+たとえば、クラスターを v8.5.2 にアップグレードする場合は、次のようにします。
 
 ```shell
-tiup cluster upgrade <cluster-name> {{{ .tidb-version }}}
+tiup cluster upgrade <cluster-name> v8.5.2
 ```
 
-> **Note:**
+> **注記：**
 >
-> + An online upgrade upgrades all components one by one. During the upgrade of TiKV, all leaders in a TiKV instance are evicted before stopping the instance. The default timeout time is 5 minutes (300 seconds). The instance is directly stopped after this timeout time.
+> -   オンラインアップグレードでは、すべてのコンポーネントが1つずつアップグレードされます。TiKVのアップグレード中は、インスタンスを停止する前に、TiKVインスタンス内のすべてのリーダーが強制的にエビクションされます。デフォルトのタイムアウト時間は5分（300秒）です。このタイムアウト時間が経過すると、インスタンスは直ちに停止されます。
 >
-> + You can use the `--force` parameter to upgrade the cluster immediately without evicting the leader. However, the errors that occur during the upgrade will be ignored, which means that you are not notified of any upgrade failure. Therefore, use the `--force` parameter with caution.
+> -   `--force`のパラメータを使用すると、リーダーノードを退去させることなく、クラスターを直ちにアップグレードできます。ただし、アップグレード中に発生したエラーは無視されるため、アップグレードの失敗は通知されません。そのため、 `--force`パラメータは慎重に使用してください。
 >
-> + To keep a stable performance, make sure that all leaders in a TiKV instance are evicted before stopping the instance. You can set `--transfer-timeout` to a larger value, for example, `--transfer-timeout 3600` (unit: second).
+> -   安定したパフォーマンスを維持するには、TiKVインスタンスを停止する前に、すべてのリーダーが排除されていることを確認してください。1 `--transfer-timeout` `--transfer-timeout 3600` （単位：秒）などの大きな値に設定することもできます。
 >
-> + To upgrade TiFlash from versions earlier than v5.3.0 to v5.3.0 or later, you must stop TiFlash and then upgrade it, and the TiUP version must be earlier than v1.12.0. For more information, see [Upgrade TiFlash using TiUP](/tiflash-upgrade-guide.md#upgrade-tiflash-using-tiup).
+> -   TiFlashをv5.3.0より前のバージョンからv5.3.0以降にアップグレードするには、 TiFlashを停止してからアップグレードする必要があります。また、 TiUPのバージョンはv1.12.0より前である必要があります。詳細については、 [TiUPを使用してTiFlashをアップグレードする](/tiflash-upgrade-guide.md#upgrade-tiflash-using-tiup)参照してください。
 
-#### Specify the component version during upgrade
+#### アップグレード中にコンポーネントのバージョンを指定する {#specify-the-component-version-during-upgrade}
 
-Starting from tiup-cluster v1.14.0, you can specify certain components to a specific version during cluster upgrade. These components will remain at their fixed version in the subsequent upgrade unless you specify a different version.
+tiup-cluster v1.14.0以降では、クラスタのアップグレード時に特定のコンポーネントを特定のバージョンに指定できます。これらのコンポーネントは、別のバージョンを指定しない限り、以降のアップグレードでも固定バージョンのままになります。
 
-> **Note:**
+> **注記：**
 >
-> For components that share a version number, such as TiDB, TiKV, PD, and TiCDC, there are no complete tests to ensure that they work properly in a mixed-version deployment scenario. Ensure that you use this section only in test environments, or with the help of [technical support](/support.md).
+> TiDB、TiKV、PD、TiCDC など、バージョン番号を共有するコンポーネントについては、混在バージョンのデプロイメントシナリオで正常に動作することを保証するための完全なテストは用意されていません。このセクションはテスト環境でのみ使用するか、 [テクニカルサポート](/support.md)の支援を受けて使用してください。
 
 ```shell
 tiup cluster upgrade -h | grep "version"
@@ -242,114 +221,96 @@ tiup cluster upgrade -h | grep "version"
       --tiproxy-version string             Fix the version of tiproxy and no longer follows the cluster version.
 ```
 
-#### Offline upgrade
+#### オフラインアップグレード {#offline-upgrade}
 
-1. Before the offline upgrade, you first need to stop the entire cluster.
-
-    {{< copyable "shell-regular" >}}
+1.  オフライン アップグレードを行う前に、まずクラスター全体を停止する必要があります。
 
     ```shell
     tiup cluster stop <cluster-name>
     ```
 
-2. Use the `upgrade` command with the `--offline` option to perform the offline upgrade. Fill in the name of your cluster for `<cluster-name>` and the version to upgrade to for `<version>`, such as `{{{ .tidb-version }}}`.
-
-    {{< copyable "shell-regular" >}}
+2.  オフラインアップグレードを実行するには、 `upgrade`コマンドに`--offline`オプションを付けて実行します。 `<cluster-name>`にはクラスター名を、 `<version>`にはアップグレードするバージョン（例： `v8.5.2` ）を入力してください。
 
     ```shell
     tiup cluster upgrade <cluster-name> <version> --offline
     ```
 
-3. After the upgrade, the cluster will not be automatically restarted. You need to use the `start` command to restart it.
-
-    {{< copyable "shell-regular" >}}
+3.  アップグレード後、クラスターは自動的に再起動されません。再起動するには、 `start`コマンドを使用する必要があります。
 
     ```shell
     tiup cluster start <cluster-name>
     ```
 
-### Verify the cluster version
+### クラスタのバージョンを確認する {#verify-the-cluster-version}
 
-Execute the `display` command to view the latest cluster version `TiDB Version`:
-
-{{< copyable "shell-regular" >}}
+最新のクラスター バージョン`TiDB Version`表示するには、コマンド`display`を実行します。
 
 ```shell
 tiup cluster display <cluster-name>
 ```
 
-```
-Cluster type:       tidb
-Cluster name:       <cluster-name>
-Cluster version:    {{{ .tidb-version }}}
-```
+    Cluster type:       tidb
+    Cluster name:       <cluster-name>
+    Cluster version:    v8.5.2
 
-## FAQ
+## FAQ {#faq}
 
-This section describes common problems encountered when updating the TiDB cluster using TiUP.
+このセクションでは、 TiUPを使用して TiDB クラスターを更新するときに発生する一般的な問題について説明します。
 
-### If an error occurs and the upgrade is interrupted, how to resume the upgrade after fixing this error?
+### エラーが発生してアップグレードが中断された場合、このエラーを修正した後でアップグレードを再開するにはどうすればよいですか? {#if-an-error-occurs-and-the-upgrade-is-interrupted-how-to-resume-the-upgrade-after-fixing-this-error}
 
-Re-execute the `tiup cluster upgrade` command to resume the upgrade. The upgrade operation restarts the nodes that have been previously upgraded. If you do not want the upgraded nodes to be restarted, use the `replay` sub-command to retry the operation:
+アップグレードを再開するには、 `tiup cluster upgrade`コマンドを再実行してください。アップグレード操作により、以前にアップグレードされたノードが再起動されます。アップグレードされたノードを再起動したくない場合は、 `replay`番目のサブコマンドを使用して操作を再試行してください。
 
-1. Execute `tiup cluster audit` to see the operation records:
-
-    {{< copyable "shell-regular" >}}
+1.  操作記録を表示するには、 `tiup cluster audit`実行します。
 
     ```shell
     tiup cluster audit
     ```
 
-    Find the failed upgrade operation record and keep the ID of this operation record. The ID is the `<audit-id>` value in the next step.
+    失敗したアップグレード操作レコードを見つけ、その操作レコードのIDを控えておきます。このIDは次のステップで`<audit-id>`値として使用されます。
 
-2. Execute `tiup cluster replay <audit-id>` to retry the corresponding operation:
-
-    {{< copyable "shell-regular" >}}
+2.  対応する操作を再試行するには、 `tiup cluster replay <audit-id>`実行します。
 
     ```shell
     tiup cluster replay <audit-id>
     ```
 
-### How to fix the issue that the upgrade gets stuck when upgrading to v6.2.0 or later versions?
+### v6.2.0 以降のバージョンにアップグレードするときにアップグレードが停止する問題を修正するにはどうすればよいですか? {#how-to-fix-the-issue-that-the-upgrade-gets-stuck-when-upgrading-to-v6-2-0-or-later-versions}
 
-Starting from v6.2.0, TiDB enables the [concurrent DDL framework](/ddl-introduction.md#how-the-online-ddl-asynchronous-change-works-in-tidb) by default to execute concurrent DDLs. This framework changes the DDL job storage from a KV queue to a table queue. This change might cause the upgrade to get stuck in some scenarios. The following are some scenarios that might trigger this issue and the corresponding solutions:
+Starting from v6.2.0, TiDB enables the [並行DDLフレームワーク](/ddl-introduction.md#how-the-online-ddl-asynchronous-change-works-in-tidb) by default to execute concurrent DDLs. This framework changes the DDL job storage from a KV queue to a table queue. This change might cause the upgrade to get stuck in some scenarios. The following are some scenarios that might trigger this issue and the corresponding solutions:
 
-- Upgrade gets stuck due to plugin loading
+-   Upgrade gets stuck due to plugin loading
 
-    During the upgrade, loading certain plugins that require executing DDL statements might cause the upgrade to get stuck.
+    アップグレード中に、DDL ステートメントの実行を必要とする特定のプラグインをロードすると、アップグレードが停止する可能性があります。
 
-    **Solution**: avoid loading plugins during the upgrade. Instead, load plugins only after the upgrade is completed.
+    **解決策**：アップグレード中はプラグインの読み込みを避け、アップグレードが完了した後にのみプラグインを読み込みましょう。
 
-- Upgrade gets stuck due to using the `kill -9` command for offline upgrade
+-   オフラインアップグレードに`kill -9`コマンドを使用したためにアップグレードが停止する
 
-    - Precautions: avoid using the `kill -9` command to perform the offline upgrade. If it is necessary, restart the new version TiDB node after 2 minutes.
-    - If the upgrade is already stuck, restart the affected TiDB node. If the issue has just occurred, it is recommended to restart the node after 2 minutes.
+    -   注意：オフラインアップグレードを実行する際にコマンド`kill -9`使用は避けてください。必要な場合は、2分後に新しいバージョンのTiDBノードを再起動してください。
+    -   アップグレードが既に停止している場合は、影響を受けるTiDBノードを再起動してください。問題が発生した直後の場合は、2分後にノードを再起動することをお勧めします。
 
-- Upgrade gets stuck due to DDL Owner change
+-   DDL 所有者の変更によりアップグレードが停止する
 
-    In multi-instance scenarios, network or hardware failures might cause DDL Owner change. If there are unfinished DDL statements in the upgrade phase, the upgrade might get stuck.
+    複数インスタンスのシナリオでは、ネットワークまたはハードウェア障害によりDDL所有者が変更される可能性があります。アップグレードフェーズで未完了のDDLステートメントがある場合、アップグレードが停止する可能性があります。
 
     **Solution**:
 
-    1. Terminate the stuck TiDB node (avoid using `kill -9`).
-    2. Restart the new version TiDB node.
+    1.  スタックした TiDB ノードを終了します ( `kill -9`使用は避けてください)。
+    2.  Restart the new version TiDB node.
 
-### The evict leader has waited too long during the upgrade. How to skip this step for a quick upgrade?
+### アップグレード中にエビクトリーダーの待機時間が長すぎます。この手順をスキップして迅速にアップグレードするにはどうすればよいですか？ {#the-evict-leader-has-waited-too-long-during-the-upgrade-how-to-skip-this-step-for-a-quick-upgrade}
 
-You can specify `--force`. Then the processes of transferring PD leader and evicting TiKV leader are skipped during the upgrade. The cluster is directly restarted to update the version, which has a great impact on the cluster that runs online. In the following command, `<version>` is the version to upgrade to, such as `{{{ .tidb-version }}}`.
-
-{{< copyable "shell-regular" >}}
+`--force`指定することもできます。その場合、アップグレード中にPDリーダーの移行とTiKVリーダーの削除のプロセスがスキップされます。バージョンを更新するためにクラスターが直接再起動されるため、オンラインで稼働しているクラスターに大きな影響を与えます。以下のコマンドでは、 `<version>`アップグレードするバージョン（例： `v8.5.2` ）です。
 
 ```shell
 tiup cluster upgrade <cluster-name> <version> --force
 ```
 
-### How to update the version of tools such as pd-ctl after upgrading the TiDB cluster?
+### TiDB クラスターをアップグレードした後、pd-ctl などのツールのバージョンを更新するにはどうすればよいですか? {#how-to-update-the-version-of-tools-such-as-pd-ctl-after-upgrading-the-tidb-cluster}
 
-You can upgrade the tool version by using TiUP to install the `ctl` component of the corresponding version:
-
-{{< copyable "shell-regular" >}}
+TiUPを使用して対応するバージョンの`ctl`コンポーネントをインストールすることで、ツールのバージョンをアップグレードできます。
 
 ```shell
-tiup install ctl:{{{ .tidb-version }}}
+tiup install ctl:v8.5.2
 ```

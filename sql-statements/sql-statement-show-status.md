@@ -1,15 +1,15 @@
 ---
 title: SHOW [GLOBAL|SESSION] STATUS | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW [GLOBAL|SESSION] STATUS for the TiDB database.
+summary: TiDB データベースの SHOW [GLOBAL|SESSION] STATUS の使用法の概要。
 ---
 
-# SHOW [GLOBAL|SESSION] STATUS
+# [グローバル|セッション]ステータスを表示 {#show-global-session-status}
 
-This statement is included for compatibility with MySQL. TiDB uses Prometheus and Grafana for centralized metrics collection instead of `SHOW STATUS` for most metrics.
+このステートメントは、MySQL との互換性のために含まれています。TiDB は、ほとんどのメトリクスに対して`SHOW STATUS`ではなく、Prometheus と Grafana を使用して集中的なメトリクス収集を行います。
 
-A full description of the variables can be found here: [status variables](/status-variables.md)
+変数の詳細な説明は、こちらを参照してください: [ステータス変数](/status-variables.md)
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowStatusStmt ::=
@@ -23,7 +23,7 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> SHOW SESSION STATUS;
@@ -63,11 +63,11 @@ mysql> SHOW GLOBAL STATUS;
 9 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-* This statement is compatible with MySQL.
+-   このステートメントは MySQL と互換性があります。
 
-## See also
+## 参照 {#see-also}
 
-* [FLUSH STATUS](/sql-statements/sql-statement-flush-status.md)
-* [Server Status Variables](/status-variables.md)
+-   [フラッシュステータス](/sql-statements/sql-statement-flush-status.md)
+-   [サーバーステータス変数](/status-variables.md)

@@ -1,236 +1,236 @@
 ---
 title: Integrate TiDB Cloud with Zapier
-summary: Learn how to connect TiDB Cloud to 5000+ Apps with Zapier.
+summary: Zapier を使用してTiDB Cloud を5000 以上のアプリに接続する方法を学びます。
 ---
 
-# Integrate TiDB Cloud with Zapier
+# TiDB CloudとZapierを統合する {#integrate-tidb-cloud-with-zapier}
 
-[Zapier](https://zapier.com) is a no-code automation tool that lets you easily create workflows that involve thousands of apps and services.
+[ザピエール](https://zapier.com) 、何千ものアプリやサービスが関与するワークフローを簡単に作成できるコード不要の自動化ツールです。
 
-Using the [TiDB Cloud app](https://zapier.com/apps/tidb-cloud/integrations) on Zapier enables you to:
+Zapier の[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)使用すると、次のことが可能になります。
 
-- Use TiDB, a MySQL-compatible HTAP database. No need to build locally.
-- Make it easier to manage your TiDB Cloud.
-- Connect TiDB Cloud to 5000+ apps and automate your workflows.
+-   MySQL互換のHTAPデータベースであるTiDBを使用します。ローカルで構築する必要はありません。
+-   TiDB Cloudの管理が簡単になります。
+-   TiDB Cloud を5000 以上のアプリに接続し、ワークフローを自動化します。
 
-This guide gives a high-level introduction to the TiDB Cloud app on Zapier and an example of how to use it.
+このガイドでは、Zapier 上のTiDB Cloudアプリの概要と使用方法の例を示します。
 
-## Quick start with template
+## テンプレートを使ったクイックスタート {#quick-start-with-template}
 
-[Zap Templates](https://platform.zapier.com/partners/zap-templates) are ready made integrations or Zaps with the apps and core fields pre-selected, for publicly available Zapier integrations.
+[Zapテンプレート](https://platform.zapier.com/partners/zap-templates)は、公開されている Zapier 統合用に、アプリとコア フィールドが事前に選択された、すぐに使用できる統合または Zap です。
 
-In this section, we will use the **Add new Github global events to TiDB rows** template as an example to create a workflow. In this workflow, every time a new global event (any [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types) happens from or to you, on any repo) is created from your GitHub account, Zapier adds a new row to your TiDB Cloud cluster.
+このセクションでは、「**新しい Github グローバルイベントを TiDB 行に追加する」**テンプレートを例としてワークフローを作成します。このワークフローでは、GitHub アカウントで新しいグローバルイベント（任意の[GitHubイベント](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types)で、あなたまたはあなた宛てのイベント）が作成されるたびに、Zapier がTiDB Cloudクラスターに新しい行を追加します。
 
-### Prerequisites
+### 前提条件 {#prerequisites}
 
-Before you start, you need:
+始める前に、次のものが必要です。
 
-- A [Zapier account](https://zapier.com/app/login).
-- A [GitHub account](https://github.com/login).
-- A [TiDB Cloud account](https://tidbcloud.com/signup) and a {{{ .starter }}} cluster on TiDB Cloud. For more details, see [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster).
+-   A [Zapierアカウント](https://zapier.com/app/login) 。
+-   A [GitHubアカウント](https://github.com/login) 。
+-   [TiDB Cloudアカウント](https://tidbcloud.com/signup)とTiDB Cloud Serverless クラスター（TiDB Cloud上）です。詳細については[TiDB Cloudクイックスタート](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster)ご覧ください。
 
-### Step 1: Get the template
+### ステップ1: テンプレートを入手する {#step-1-get-the-template}
 
-Go to [TiDB Cloud App on Zapier](https://zapier.com/apps/tidb-cloud/integrations). Choose the **Add new Github global events to TiDB rows** template and click **Try it**. Then you will enter the editor page.
+[Zapier のTiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)に進みます。「**新しいGithubグローバルイベントをTiDB行に追加」**テンプレートを選択し、 **「試してみる」**をクリックします。すると、エディターページが表示されます。
 
-### Step 2: Set up the trigger
+### ステップ2: トリガーを設定する {#step-2-set-up-the-trigger}
 
-In the editor page, you can see the trigger and action. Click the trigger to set it up.
+エディターページでトリガーとアクションを確認できます。トリガーをクリックして設定します。
 
-1. Choose app & event
+1.  アプリとイベントを選択
 
-    The template has set the app and the event by default, so you don't need to do anything here. Click **Continue**.
+    テンプレートではアプリとイベントがデフォルトで設定されているため、ここでは何もする必要はありません。 **「続行」**をクリックしてください。
 
-2. Choose account
+2.  アカウントを選択
 
-    Choose a GitHub account that you want to connect with TiDB Cloud. You can either connect a new account or select an existing account. After you set up, click **Continue**.
+    TiDB Cloudに接続する GitHub アカウントを選択してください。新しいアカウントを接続することも、既存のアカウントを選択することもできます。設定が完了したら、 **「続行」**をクリックしてください。
 
-3. Set up trigger
+3.  トリガーを設定する
 
-    The template has set the trigger by default. Click **Continue**.
+    テンプレートではデフォルトでトリガーが設定されています。 **「続行」**をクリックしてください。
 
-4. Test trigger
+4.  テストトリガー
 
-    Click **Test trigger**. If the trigger is successfully set up, you can see the data of a new global event from the GitHub account. Click **Continue**.
+    **「テストトリガー」**をクリックします。トリガーが正常に設定されていれば、GitHubアカウントから新しいグローバルイベントのデータを確認できます。 **「続行」**をクリックします。
 
-### Step 3: Set up the `Find Table in TiDB Cloud` action
+### ステップ3: <code>Find Table in TiDB Cloud</code>アクションを設定する {#step-3-set-up-the-code-find-table-in-tidb-cloud-code-action}
 
-1. Choose app & event
+1.  アプリとイベントを選択
 
-    Keep the default value `Find Table` set by the template. Click **Continue**.
+    テンプレートで設定されたデフォルト値`Find Table`ままにし、 **「続行」**をクリックします。
 
-2. Choose account
+2.  アカウントを選択
 
-    1. Click the **Sign in** button, and you will be redirected to a new login page.
-    2. On the login page, fill in your public key and private key. To get the TiDB Cloud API key, follow the instructions in [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
-    3. Click **Continue**.
+    1.  **「サインイン」**ボタンをクリックすると、新しいログインページにリダイレクトされます。
+    2.  ログインページで、公開鍵と秘密鍵を入力してください。TiDB TiDB Cloud APIキーを取得するには、 [TiDB Cloud API ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)の手順に従ってください。
+    3.  **［続行］**をクリックします。
 
     ![Account](/media/tidb-cloud/zapier/zapier-tidbcloud-account.png)
 
-3. Set up action
+3.  アクションの設定
 
-    In this step, you need to specify a table in your TiDB Cloud cluster to store the event data. If you do not already have a table, you can create one through this step.
+    このステップでは、イベントデータを保存するTiDB Cloudクラスター内のテーブルを指定する必要があります。まだテーブルがない場合は、このステップで作成できます。
 
-    1. From the drop-down list, choose the project name and cluster name. The connection information of your cluster will be displayed automatically.
+    1.  ドロップダウンリストからプロジェクト名とクラスター名を選択します。クラスターの接続情報が自動的に表示されます。
 
         ![Set up project name and cluster name](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-project-and-cluster.png)
 
-    2. Enter your password.
+    2.  パスワードを入力してください。
 
-    3. From the drop-down list, choose the database.
+    3.  ドロップダウンリストからデータベースを選択します。
 
         ![Set up database name](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-databse.png)
 
-        Zapier queries the databases from TiDB Cloud using the password you entered. If no database is found in your cluster, re-enter your password and refresh the page.
+        Zapierは、入力したパスワードを使用してTiDB Cloudのデータベースにクエリを実行します。クラスター内にデータベースが見つからない場合は、パスワードを再入力してページを更新してください。
 
-    4. In **The table you want to search** box, fill in `github_global_event`. If the table does not exist, the template uses the following DDL to create the table. Click **Continue**.
+    4.  **「検索するテーブル」**ボックスに`github_global_event`と入力します。テーブルが存在しない場合は、テンプレートは次のDDLを使用してテーブルを作成します。 **「続行」**をクリックします。
 
         ![The create table DDL](/media/tidb-cloud/zapier/zapier-tidbcloud-create-table-ddl.png)
 
-4. Test action
+4.  テストアクション
 
-    Click **Test action**, and Zapier will create the table. You can also skip the test, and the table will be created when this workflow is running for the first time.
+    **「テストアクション」**をクリックすると、Zapierがテーブルを作成します。テストをスキップして、このワークフローが初めて実行されるときにテーブルを作成することもできます。
 
-### Step 4: Set up the `Create Row in TiDB Cloud` action
+### ステップ4: <code>Create Row in TiDB Cloud</code>を設定する {#step-4-set-up-the-code-create-row-in-tidb-cloud-code-action}
 
-1. Choose app & event
+1.  アプリとイベントを選択
 
-    Keep the default value set by the template. Click **Continue**.
+    テンプレートで設定されたデフォルト値をそのままにし、 **「続行」**をクリックします。
 
-2. Choose account
+2.  アカウントを選択
 
-    Select the account you have chosen when you set up the `Find Table in TiDB Cloud` action. Click **Continue**.
+    `Find Table in TiDB Cloud`アクションの設定時に選択したアカウントを選択します。 **「続行」**をクリックします。
 
     ![Choose account](/media/tidb-cloud/zapier/zapier-tidbcloud-choose-account.png)
 
-3. Set up action
+3.  アクションの設定
 
-    1. Fill in the **Project Name**, **Cluster Name**, **TiDB Password**, and **Database Name** as in the previous step.
+    1.  前の手順と同様に、**プロジェクト名**、**クラスタ名**、 **TiDB パスワード**、**データベース名**を入力します。
 
-    2. In the **Table Name**, choose the **github_global_event** table from the drop-down list. The columns of the table are displayed.
+    2.  **テーブル名**で、ドロップダウンリストから**github_global_event**テーブルを選択します。テーブルの列が表示されます。
 
         ![Table columns](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-columns.png)
 
-    3. In the **Columns** box, choose the corresponding data from the trigger. Fill in all the columns, and click **Continue**.
+    3.  **「列」**ボックスで、トリガーから対応するデータを選択します。すべての列に入力し、 **「続行」**をクリックします。
 
         ![Fill in Columns](/media/tidb-cloud/zapier/zapier-fill-in-tidbcloud-triggers-data.png)
 
-4. Test action
+4.  テストアクション
 
-    Click **Test action** to create a new row in the table. If you check your TiDB Cloud cluster, you can find the data is written successfully.
+    **「テストアクション」**をクリックすると、テーブルに新しい行が作成されます。TiDB TiDB Cloudクラスターを確認すると、データが正常に書き込まれていることが確認できます。
 
-   ```sql
-   mysql> SELECT * FROM test.github_global_event;
-   +-------------+-------------+------------+-----------------+----------------------------------------------+--------+---------------------+
-   | id          | type        | actor      | repo_name       | repo_url                                     | public | created_at          |
-   +-------------+-------------+------------+-----------------+----------------------------------------------+--------+---------------------+
-   | 25324462424 | CreateEvent | shiyuhang0 | shiyuhang0/docs | https://api.github.com/repos/shiyuhang0/docs | True   | 2022-11-18 08:03:14 |
-   +-------------+-------------+------------+-----------------+----------------------------------------------+--------+---------------------+
-   1 row in set (0.17 sec)
-   ```
+    ```sql
+    mysql> SELECT * FROM test.github_global_event;
+    +-------------+-------------+------------+-----------------+----------------------------------------------+--------+---------------------+
+    | id          | type        | actor      | repo_name       | repo_url                                     | public | created_at          |
+    +-------------+-------------+------------+-----------------+----------------------------------------------+--------+---------------------+
+    | 25324462424 | CreateEvent | shiyuhang0 | shiyuhang0/docs | https://api.github.com/repos/shiyuhang0/docs | True   | 2022-11-18 08:03:14 |
+    +-------------+-------------+------------+-----------------+----------------------------------------------+--------+---------------------+
+    1 row in set (0.17 sec)
+    ```
 
-### Step 5: Publish your zap
+### ステップ5: Zapを公開する {#step-5-publish-your-zap}
 
-Click **Publish** to publish your zap. You can see the zap is running in the [home page](https://zapier.com/app/zaps).
+**「公開」**をクリックしてZapを公開します。3でZapが実行中であることがわかります[ホームページ](https://zapier.com/app/zaps)
 
 ![Publish the zap](/media/tidb-cloud/zapier/zapier-tidbcloud-publish.png)
 
-Now, this zap will automatically record all the global events from your GitHub account into TiDB Cloud.
+これで、この zap は GitHub アカウントからのすべてのグローバル イベントをTiDB Cloudに自動的に記録します。
 
-## Triggers & Actions
+## トリガーとアクション {#triggers-x26-actions}
 
-[Triggers and actions](https://zapier.com/how-it-works) are the key concepts in Zapier. By combining different triggers and actions, you can create various automation workflows.
+[トリガーとアクション](https://zapier.com/how-it-works)はZapierの主要概念です。さまざまなトリガーとアクションを組み合わせることで、多様な自動化ワークフローを作成できます。
 
-This section introduces the triggers and actions provided by TiDB Cloud App on Zapier.
+このセクションでは、Zapier 上のTiDB Cloud App が提供するトリガーとアクションについて説明します。
 
-### Triggers
+### トリガー {#triggers}
 
-The following table lists the triggers supported by TiDB Cloud App.
+次の表は、TiDB Cloud App でサポートされているトリガーを示しています。
 
-| Trigger                | Description                                                                 |
-| ---------------------- |-----------------------------------------------------------------------------|
-| New Cluster            | Triggers when a new cluster is created.                                     |
-| New Table              | Triggers when a new table is created.                                       |
-| New Row                | Triggers when new rows are created. Only fetches the recent 10000 new rows. |
-| New Row (Custom Query) | Triggers when new rows are returned from a custom query that you provide.   |
+| トリガー          | 説明                                       |
+| ------------- | ---------------------------------------- |
+| 新しいクラスタ       | 新しいクラスターが作成された場合にトリガーされます。               |
+| 新しいテーブル       | 新しいテーブルが作成された場合にトリガーされます。                |
+| 新しい行          | 新しい行が作成された際にトリガーされます。最新の10,000行のみを取得します。 |
+| 新しい行（カスタムクエリ） | 指定したカスタム クエリから新しい行が返されたときにトリガーされます。      |
 
-### Actions
+### アクション {#actions}
 
-The following table lists the actions supported by TiDB Cloud App. Note that some actions need extra resources, and you need to prepare the corresponding resources before using the action.
+以下の表は、 TiDB Cloud Appでサポートされているアクションの一覧です。一部のアクションには追加のリソースが必要となるため、アクションを使用する前に適切なリソースを準備する必要があります。
 
-| Action | Description | Resource |
-|---|---|---|
-| Find Cluster | Finds an existing {{{ .starter }}} or TiDB Cloud Dedicated cluster. | None |
-| Create Cluster | Creates a new cluster. Only supports creating a {{{ .starter }}} cluster. | None |
-| Find Database | Finds an existing database. | A {{{ .starter }}} cluster |
-| Create Database | Creates a new database. | A {{{ .starter }}} cluster |
-| Find Table | Finds an existing Table. | A {{{ .starter }}} cluster and a database |
-| Create Table | Creates a new table. | A {{{ .starter }}} cluster and a database |
-| Create Row | Creates a new row. | A {{{ .starter }}} cluster, a database, and a table |
-| Update Row | Updates an existing row. | A {{{ .starter }}} cluster, a database, and a table |
-| Find Row | Finds a row in a table via a lookup column. | A {{{ .starter }}} cluster, a database, and a table |
-| Find Row (Custom Query) | Finds a row in a table via a custom query the you provide. | A {{{ .starter }}} cluster, a database, and a table |
+| アクション         | 説明                                                            | リソース                                    |
+| ------------- | ------------------------------------------------------------- | --------------------------------------- |
+| クラスタを見つける     | 既存のTiDB Cloud Serverless またはTiDB Cloud Dedicated クラスターを検索します。 | なし                                      |
+| クラスタの作成       | 新しいクラスターを作成します。TiDB TiDB Cloud Serverless クラスターの作成のみをサポートします。 | なし                                      |
+| データベースを探す     | 既存のデータベースを検索します。                                              | TiDB Cloudサーバーレスクラスター                   |
+| データベースの作成     | 新しいデータベースを作成します。                                              | TiDB Cloudサーバーレスクラスター                   |
+| テーブルを探す       | 既存のテーブルを検索します。                                                | TiDB Cloud Serverlessクラスタとデータベース        |
+| テーブルを作成       | 新しいテーブルを作成します。                                                | TiDB Cloud Serverlessクラスタとデータベース        |
+| 行を作成          | 新しい行を作成します。                                                   | TiDB Cloud Serverless クラスター、データベース、テーブル |
+| 行を更新          | 既存の行を更新します。                                                   | TiDB Cloud Serverless クラスター、データベース、テーブル |
+| 行を検索          | ルックアップ列を使用してテーブル内の行を検索します。                                    | TiDB Cloud Serverless クラスター、データベース、テーブル |
+| 行の検索（カスタムクエリ） | 指定したカスタム クエリを使用してテーブル内の行を検索します。                               | TiDB Cloud Serverless クラスター、データベース、テーブル |
 
-## TiDB Cloud App templates
+## TiDB Cloudアプリ テンプレート {#tidb-cloud-app-templates}
 
-TiDB Cloud provides some templates for you to use in Zapier directly. You can find all the templates in the [TiDB Cloud App](https://zapier.com/apps/tidb-cloud/integrations) page.
+TiDB Cloudは、 Zapierで直接使用できるテンプレートをいくつか提供しています。すべてのテンプレートは[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)ページ目にあります。
 
-Here are some examples:
+以下に例をいくつか挙げます。
 
-- [Duplicate new TiDB Cloud rows in Google Sheets](https://zapier.com/apps/google-sheets/integrations/tidb-cloud/1134881/duplicate-new-tidb-cloud-rows-in-google-sheets).
-- [Send emails via Gmail from new custom TiDB queries](https://zapier.com/apps/gmail/integrations/tidb-cloud/1134903/send-emails-via-gmail-from-new-custom-tidb-queries).
-- [Add rows to TiDB Cloud from newly caught webhooks](https://zapier.com/apps/tidb-cloud/integrations/webhook/1134955/add-rows-to-tidb-cloud-from-newly-caught-webhooks).
-- [Store new Salesforce contacts on TiDB rows](https://zapier.com/apps/salesforce/integrations/tidb-cloud/1134923/store-new-salesforce-contacts-on-tidb-rows).
-- [Create TiDB rows for new Gmail emails with resumes and send direct Slack notifications](https://zapier.com/apps/gmail/integrations/slack/1135456/create-tidb-rows-for-new-gmail-emails-with-resumes-and-send-direct-slack-notifications)
+-   [Google スプレッドシートで新しいTiDB Cloud行を複製する](https://zapier.com/apps/google-sheets/integrations/tidb-cloud/1134881/duplicate-new-tidb-cloud-rows-in-google-sheets) 。
+-   [新しいカスタム TiDB クエリから Gmail 経由でメールを送信する](https://zapier.com/apps/gmail/integrations/tidb-cloud/1134903/send-emails-via-gmail-from-new-custom-tidb-queries) 。
+-   [新しくキャッチしたウェブフックからTiDB Cloudに行を追加する](https://zapier.com/apps/tidb-cloud/integrations/webhook/1134955/add-rows-to-tidb-cloud-from-newly-caught-webhooks) 。
+-   [新しい Salesforce 連絡先を TiDB 行に保存する](https://zapier.com/apps/salesforce/integrations/tidb-cloud/1134923/store-new-salesforce-contacts-on-tidb-rows) 。
+-   [履歴書付きの新しい Gmail メールの TiDB 行を作成し、Slack 通知を直接送信します](https://zapier.com/apps/gmail/integrations/slack/1135456/create-tidb-rows-for-new-gmail-emails-with-resumes-and-send-direct-slack-notifications)
 
-## FAQ
+## FAQ {#faq}
 
-### How can I set up the TiDB Cloud account in Zapier?
+### Zapier でTiDB Cloudアカウントを設定するにはどうすればよいですか? {#how-can-i-set-up-the-tidb-cloud-account-in-zapier}
 
-Zapier requires your **TiDB Cloud API key** to connect with your TiDB Cloud account. Zapier does not need your login account for TiDB Cloud.
+Zapier はTiDB Cloudアカウントに接続するために**TiDB Cloud API キー**を必要とします。Zapier はTiDB Cloudのログインアカウントを必要としません。
 
-To get your TiDB Cloud API key, follow the [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
+TiDB Cloud API キーを取得するには、 [TiDB Cloud API ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)従ってください。
 
-### How do TiDB Cloud triggers perform de-duplication?
+### TiDB Cloudトリガーは重複排除をどのように実行しますか? {#how-do-tidb-cloud-triggers-perform-de-duplication}
 
-Zapier triggers can work with a polling API call to check for new data periodically (the interval depends on your Zapier plan).
+Zapier トリガーはポーリング API 呼び出しと連携して、定期的に新しいデータをチェックします (間隔は Zapier プランによって異なります)。
 
-TiDB Cloud triggers provide a polling API call that returns a lot of results. However, most of the results have been seen by Zapier before, that is, most of the results are duplication.
+TiDB Cloudトリガーは、大量の結果を返すポーリングAPI呼び出しを提供します。しかし、その結果のほとんどはZapierが以前に確認したものであり、つまり重複しています。
 
-Since we don’t want to trigger an action multiple times when an item in your API exists in multiple distinct polls, TiDB Cloud triggers deduplicate the data with the `id` field.
+API 内のアイテムが複数の異なるポーリングに存在する場合、アクションを複数回トリガーしたくないため、 TiDB Cloud は`id`フィールドでデータの重複を排除します。
 
-`New Cluster` and `New Table` triggers simply use the `cluster_id` or `table_id` as the `id` field to do the deduplication. You do not need to do anything for the two triggers.
+トリガー`New Cluster`と`New Table`は、重複排除を行うために、単に`cluster_id`または`table_id` `id`フィールドとして使用します。2つのトリガーについては何もする必要はありません。
 
-**New Row Trigger**
+**新しい行トリガー**
 
-The `New Row` trigger limits 10,000 results in every fetch. Therefore, if some new rows are not included in the 10,000 results, they cannot trigger Zapier.
+トリガー`New Row`は、1回のフェッチで10,000件の結果に制限されます。そのため、10,000件の結果に含まれない新しい行がある場合、Zapierをトリガーできません。
 
-One way to avoid this is to specify the `Order By` configuration in the trigger. For example, once you sort the rows by their creation time, the new rows will always be included in the 10,000 results.
+これを回避する方法の一つは、トリガーに`Order By`設定を指定することです。例えば、行を作成時刻で並べ替えると、新しい行は常に10,000件の結果に含まれるようになります。
 
-The `New Row` trigger also uses a flexible strategy to generate the `id` field to do the deduplication. The trigger generates the `id` field in the following order:
+`New Row`トリガーは、重複排除を行うための`id`番目のフィールドを生成するためにも柔軟な戦略を採用しています。トリガーは、以下の順序で`id`フィールドを生成します。
 
-1. If the result contains an `id` column, use the `id` column.
-2. If you specify a `Dedupe Key` in the trigger configuration, use the `Dedupe Key`.
-3. If the table has a primary key, use the primary key. If there are multiple primary keys, use the first column.
-4. If the table has a unique key, use the unique key.
-5. Use the first column of the table.
+1.  結果に`id`列目が含まれる場合は、 `id`列目を使用します。
+2.  トリガー構成で`Dedupe Key`指定する場合は、 `Dedupe Key`使用します。
+3.  テーブルに主キーがある場合は、その主キーを使用します。複数の主キーがある場合は、最初の列を使用します。
+4.  テーブルに一意のキーがある場合は、その一意のキーを使用します。
+5.  表の最初の列を使用します。
 
-**New Row (Custom Query) Trigger**
+**新しい行（カスタムクエリ）トリガー**
 
-The `New Row (Custom Query)` trigger limits 1,000,000 results in every fetch. 1,000,000 is a large number, and it is only set so as to protect the whole system. It is recommended that your query includes `ORDER BY` and `LIMIT`.
+トリガー`New Row (Custom Query)`は、毎回のフェッチで 1,000,000 件の結果を制限します。1,000,000 という数値は大きすぎるため、システム全体を保護するためにのみ設定されています。クエリには`ORDER BY`と`LIMIT`含めることをお勧めします。
 
-To perform deduplication, your query results must have a unique id field. Otherwise, you will get the `You must return the results with id field` error.
+重複排除を実行するには、クエリ結果に一意のIDフィールドが必要です。そうでない場合、エラー`You must return the results with id field`が発生します。
 
-Make sure that your custom query executes in less than 30 seconds. Otherwise, you will get the timeout error.
+カスタムクエリが30秒以内に実行されることを確認してください。30秒未満で実行されると、タイムアウトエラーが発生します。
 
-### How do I use the `find or create` action?
+### <code>find or create</code>アクションを使用するにはどうすればよいですか? {#how-do-i-use-the-code-find-or-create-code-action}
 
-`Find or create` action enables you to create a resource if it does not exist. Here is an example:
+`Find or create`アクションを使用すると、リソースが存在しない場合に作成できます。以下に例を示します。
 
-1. Choose `Find Table` action
+1.  `Find Table`アクションを選択
 
-2. In the`set up action` step, tick the `Create TiDB Cloud Table if it doesn’t exist yet?` box to enable `find and create`.
+2.  `set up action`ステップで、 `Create TiDB Cloud Table if it doesn’t exist yet?`ボックスにチェックを入れて`find and create`有効にします。
 
-   ![Find and create](/media/tidb-cloud/zapier/zapier-tidbcloud-find-and-create.png)
+    ![Find and create](/media/tidb-cloud/zapier/zapier-tidbcloud-find-and-create.png)
 
-This workflow creates a table if it does not exist yet. Note that the table will be created directly if you test your action.
+このワークフローは、テーブルがまだ存在しない場合は作成します。アクションをテストすると、テーブルが直接作成されることに注意してください。

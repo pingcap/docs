@@ -1,47 +1,47 @@
 ---
 title: ticloud auth login
-summary: The reference of `ticloud auth login`.
+summary: ticloud auth login` のリファレンス。
 ---
 
-# ticloud auth login
+# ticloud認証ログイン {#ticloud-auth-login}
 
-Authenticate with TiDB Cloud:
+TiDB Cloudで認証する:
 
 ```shell
 ticloud auth login [flags]
 ```
 
-## Examples
+## 例 {#examples}
 
-To log into TiDB Cloud:
+TiDB Cloudにログインするには:
 
 ```shell
 ticloud auth login
 ```
 
-To log into TiDB Cloud with insecure storage:
+安全でないstorageを使用してTiDB Cloudにログインするには:
 
 ```shell
 ticloud auth login --insecure-storage
 ```
 
-## Flags
+## 旗 {#flags}
 
-In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLIプロンプトに従って入力するだけです。
 
-| Flag               | Description                                                               | Required | Note                                                 |
-|--------------------|---------------------------------------------------------------------------|----------|------------------------------------------------------|
-| --insecure-storage | Saves authentication credentials in plain text instead of credential store. | No       | Works in both non-interactive and interactive modes. |
-| -h, --help         | Shows help information for this command.                                         | No       | Works in both non-interactive and interactive modes. |
+| フラグ          | 説明                                | 必須  | 注記                       |
+| ------------ | --------------------------------- | --- | ------------------------ |
+| --安全でないストレージ | 認証資格情報を資格情報ストアではなくプレーンテキストで保存します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
+| -h, --help   | このコマンドのヘルプ情報を表示します。               | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag                 | Description                                                                                | Required | Note                                                                                                             |
-|----------------------|--------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                  | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enables debug mode.                                                                          | No       | Works in both non-interactive and interactive modes.                                                             |
+| フラグ               | 説明                                                                             | 必須  | 注記                                                      |
+| ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------- |
+| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
+| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| -D, --debug       | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、皆様からの貢献も歓迎いたします。

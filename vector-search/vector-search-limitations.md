@@ -1,75 +1,75 @@
 ---
 title: Vector Search Limitations
-summary: Learn the limitations of the TiDB vector search.
+summary: TiDB ベクトル検索の制限について学習します。
 ---
 
-# Vector Search Limitations
+# ベクトル検索の制限 {#vector-search-limitations}
 
-This document describes the known limitations of TiDB vector search.
+このドキュメントでは、TiDB ベクトル検索の既知の制限について説明します。
 
 <CustomContent platform="tidb">
 
-> **Warning:**
+> **警告：**
 >
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> ベクトル検索機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを見つけた場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
 </CustomContent>
 
-> **Note:**
+> **注記：**
 >
-> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
-## Vector data type limitations
+## ベクトルデータ型の制限 {#vector-data-type-limitations}
 
-- Each [vector](/vector-search/vector-search-data-types.md) supports up to 16383 dimensions.
-- Vector data types cannot store `NaN`, `Infinity`, or `-Infinity` values.
-- Vector data types cannot store double-precision floating-point numbers. If you insert or store double-precision floating-point numbers in vector columns, TiDB converts them to single-precision floating-point numbers.
-- Vector columns cannot be used as primary keys or as part of a primary key.
-- Vector columns cannot be used as unique indexes or as part of a unique index.
-- Vector columns cannot be used as partition keys or as part of a partition key.
-- Currently, TiDB does not support modifying a vector column to other data types (such as `JSON` and `VARCHAR`).
+-   [ベクター](/vector-search/vector-search-data-types.md)最大 16383 次元をサポートします。
+-   ベクトル データ型では、 `NaN` 、 `Infinity` 、または`-Infinity`値を格納できません。
+-   ベクトルデータ型は倍精度浮動小数点数を格納できません。ベクトル列に倍精度浮動小数点数を挿入または格納すると、TiDB はそれを単精度浮動小数点数に変換します。
+-   ベクター列は主キーとして、または主キーの一部として使用することはできません。
+-   ベクター列は、一意のインデックスとして、または一意のインデックスの一部として使用することはできません。
+-   ベクター列はパーティション キーとして、またはパーティション キーの一部として使用することはできません。
+-   現在、TiDB はベクター列を他のデータ型 ( `JSON`や`VARCHAR`など) に変更することをサポートしていません。
 
-## Vector index limitations
+## ベクトルインデックスの制限 {#vector-index-limitations}
 
-See [Vector search restrictions](/vector-search/vector-search-index.md#restrictions).
+[ベクトル検索の制限](/vector-search/vector-search-index.md#restrictions)参照。
 
-## Compatibility with TiDB tools
+## TiDBツールとの互換性 {#compatibility-with-tidb-tools}
 
 <CustomContent platform="tidb">
 
-- Make sure that you are using v8.4.0 or a later version of BR to back up and restore data. Restoring tables with vector data types to TiDB clusters earlier than v8.4.0 is not supported.
-- TiDB Data Migration (DM) does not support migrating or replicating MySQL 9.0 vector data types to TiDB.
-- When TiCDC replicates vector data to a downstream that does not support vector data types, it will change the vector data types to another type. For more information, see [Compatibility with vector data types](/ticdc/ticdc-compatibility.md#compatibility-with-vector-data-types).
+-   データのバックアップとリストアには、 BRの v8.4.0 以降を使用してください。ベクトルデータ型のテーブルを v8.4.0 より前の TiDB クラスターにリストアすることはサポートされていません。
+-   TiDB データ移行 (DM) は、MySQL 9.0 ベクトル データ型の TiDB への移行または複製をサポートしていません。
+-   TiCDCは、ベクターデータ型をサポートしていない下流にベクターデータを複製する場合、ベクターデータ型を別の型に変更します。詳細については、 [ベクトルデータ型との互換性](/ticdc/ticdc-compatibility.md#compatibility-with-vector-data-types)参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- The Data Migration feature in the TiDB Cloud console does not support migrating or replicating MySQL 9.0 vector data types to TiDB Cloud.
+-   TiDB Cloudコンソールのデータ移行機能では、MySQL 9.0 ベクトル データ型のTiDB Cloudへの移行または複製はサポートされていません。
 
 </CustomContent>
 
-## Feedback
+## フィードバック {#feedback}
 
-We value your feedback and are always here to help:
+私たちはあなたのフィードバックを大切にしており、いつでもお手伝いいたします。
 
 <CustomContent platform="tidb">
 
-- [Join our Discord](https://discord.gg/zcqexutz2R)
+-   [Discordに参加する](https://discord.gg/zcqexutz2R)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- [Join our Discord](https://discord.gg/zcqexutz2R)
-- [Visit our Support Portal](https://tidb.support.pingcap.com/)
+-   [Discordに参加する](https://discord.gg/zcqexutz2R)
+-   [サポートポータルをご覧ください](https://tidb.support.pingcap.com/)
 
 </CustomContent>

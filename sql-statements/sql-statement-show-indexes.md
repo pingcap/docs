@@ -1,13 +1,13 @@
 ---
 title: SHOW INDEXES [FROM|IN] | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW INDEXES [FROM|IN] for the TiDB database.
+summary: TiDB データベースの SHOW INDEXES [FROM|IN] の使用法の概要。
 ---
 
-# SHOW INDEXES [FROM|IN]
+# インデックスを表示 [FROM|IN] {#show-indexes-from-in}
 
-The statement `SHOW INDEXES [FROM|IN]` lists the indexes on a specified table. The statements `SHOW INDEX [FROM|IN]`, `SHOW KEYS [FROM|IN]` are aliases of this statement, and included for compatibility with MySQL.
+文`SHOW INDEXES [FROM|IN]` 、指定されたテーブルのインデックスを一覧表示します。文`SHOW INDEX [FROM|IN]`と`SHOW KEYS [FROM|IN]`この文のエイリアスであり、MySQLとの互換性のために用意されています。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowIndexStmt ::=
@@ -18,7 +18,7 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (id int not null primary key AUTO_INCREMENT, col1 INT, INDEX(col1));
@@ -52,18 +52,18 @@ mysql> SHOW KEYS FROM t1;
 2 rows in set (0.00 sec)
 ```
 
-Note that TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax for compatibility with MySQL, but ignores them.
+TiDB `BTREE` `HASH`のインデックス タイプを`RTREE`ますが、無視されることに注意してください。
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-The `SHOW INDEXES [FROM|IN]` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDBの`SHOW INDEXES [FROM|IN]`文はMySQLと完全に互換性があります。互換性に違いがある場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
 
-## See also
+## 参照 {#see-also}
 
-* [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
-* [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
-* [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
-* [`information_schema.TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)
-* [`information_schema.TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)
-* [`information_schema.KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)
-* [`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
+-   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)
+-   [インデックスの削除](/sql-statements/sql-statement-drop-index.md)
+-   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
+-   [`information_schema.TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)
+-   [`information_schema.TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)
+-   [`information_schema.KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)
+-   [`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)

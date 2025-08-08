@@ -1,43 +1,41 @@
 ---
 title: Migrate and Merge MySQL Shards of Small Datasets to TiDB
-summary: Learn how to migrate and merge small datasets of shards from MySQL to TiDB.
+summary: シャードの小さなデータセットを MySQL から TiDB に移行およびマージする方法を学びます。
 ---
 
-# Migrate and Merge MySQL Shards of Small Datasets to TiDB
+# 小さなデータセットの MySQL シャードを TiDB に移行してマージする {#migrate-and-merge-mysql-shards-of-small-datasets-to-tidb}
 
-If you want to migrate and merge multiple MySQL database instances upstream to one TiDB database downstream, and the amount of data is not too large, you can use DM to migrate MySQL shards. "Small datasets" in this document usually mean data around or less than one TiB. Through examples in this document, you can learn the operation steps, precautions, and troubleshooting of the migration.
+複数のMySQLデータベースインスタンスを上流から下流の1つのTiDBデータベースに移行・統合し、データ量がそれほど大きくない場合は、DMを使用してMySQLシャードを移行できます。本ドキュメントにおける「小規模データセット」とは、通常、1TiB程度以下のデータを指します。本ドキュメントの例を通して、移行の操作手順、注意事項、トラブルシューティングについて理解を深めることができます。
 
-This document applies to migrating MySQL shards less than 1 TiB in total. If you want to migrate MySQL shards with a total of more than 1 TiB of data, it will take a long time to migrate only using DM. In this case, it is recommended that you follow the operation introduced in [Migrate and Merge MySQL Shards of Large Datasets to TiDB](/migrate-large-mysql-shards-to-tidb.md) to perform migration.
+このドキュメントは、合計1TiB未満のMySQLシャードの移行に適用されます。合計1TiBを超えるデータを持つMySQLシャードを移行する場合、DMのみを使用して移行すると長い時間がかかります。この場合、 [大規模データセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)で紹介した操作に従って移行を実行することをお勧めします。
 
-This document takes a simple example to illustrate the migration procedure. The MySQL shards of the two data source MySQL instances in the example are migrated to the downstream TiDB cluster.
+このドキュメントでは、簡単な例を用いて移行手順を説明します。例では、2つのデータソースMySQLインスタンスのMySQLシャードが下流のTiDBクラスタに移行されます。
 
-In this example, both MySQL Instance 1 and MySQL Instance 2 contain the following schemas and tables. In this example, you migrate and merge tables from `store_01` and `store_02` schemas with a `sale` prefix in both instances, into the downstream `sale` table in the `store` schema.
+この例では、MySQLインスタンス1とMySQLインスタンス2の両方に以下のスキーマとテーブルが含まれています。この例では、両方のインスタンスでプレフィックスが`sale`あるスキーマ`store_01`と`store_02`テーブルを、スキーマ`store`の下流のテーブル`sale`に移行してマージします。
 
-| Schema | Table |
-|:------|:------|
-| store_01 | sale_01, sale_02 |
-| store_02 | sale_01, sale_02 |
+| スキーマ   | テーブル          |
+| :----- | :------------ |
+| ストア_01 | セール_01、セール_02 |
+| ストア_02 | セール_01、セール_02 |
 
-Target schemas and tables:
+ターゲット スキーマとテーブル:
 
-| Schema | Table |
-|:------|:------|
-| store | sale |
+| スキーマ | テーブル |
+| :--- | :--- |
+| 店    | 販売   |
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-Before starting the migration, make sure you have completed the following tasks:
+移行を開始する前に、次のタスクが完了していることを確認してください。
 
-- [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md)
-- [Privileges required by DM-worker](/dm/dm-worker-intro.md)
+-   [TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)
+-   [DMワーカーに必要な権限](/dm/dm-worker-intro.md)
 
-### Check conflicts for the sharded tables
+### シャードテーブルの競合をチェックする {#check-conflicts-for-the-sharded-tables}
 
-If the migration involves merging data from different sharded tables, primary key or unique index conflicts may occur during the merge. Therefore, before migration, you need to take a deep look at the current sharding scheme from the business point of view, and find a way to avoid the conflicts. For more details, see [Handle conflicts between primary keys or unique indexes across multiple sharded tables](/dm/shard-merge-best-practices.md#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables). The following is a brief description.
+移行に異なるシャーディングされたテーブルからのデータのマージが含まれる場合、マージ中に主キーまたは一意のインデックスの競合が発生する可能性があります。そのため、移行前に、現在のシャーディングスキームをビジネスの観点から詳細に検討し、競合を回避する方法を見つける必要があります。詳細については、 [複数のシャードテーブル間の主キーまたは一意のインデックス間の競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables)参照してください。以下に簡単に説明します。
 
-In this example, `sale_01` and `sale_02` have the same table structure as follows
-
-{{< copyable "sql" >}}
+この例では、 `sale_01`と`sale_02`次の同じテーブル構造を持ちます。
 
 ```sql
 CREATE TABLE `sale_01` (
@@ -50,9 +48,7 @@ CREATE TABLE `sale_01` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
 
-The `id` column is the primary key, and the `sid` column is the sharding key. The `id` column is auto-incremental, and duplicated multiple sharded table ranges will cause data conflicts. The `sid` can ensure that the index is globally unique, so you can follow the steps in [Remove the primary key attribute of the auto-increment primary key](/dm/shard-merge-best-practices.md#remove-the-primary-key-attribute-from-the-column) to bypasses the `id` column.
-
-{{< copyable "sql" >}}
+`id`列目は主キー、 `sid`列目はシャーディングキーです。5列目`id`自動増分であり、複数のシャーディングテーブル範囲が重複するとデータ競合が発生します。7列`sid`インデックスのグローバル一意性を保証するため、 [自動増分主キーの主キー属性を削除します](/dm/shard-merge-best-practices.md#remove-the-primary-key-attribute-from-the-column)目の手順に従って`id`列目をバイパスできます。
 
 ```sql
 CREATE TABLE `sale` (
@@ -65,11 +61,9 @@ CREATE TABLE `sale` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
 
-## Step 1. Load data sources
+## ステップ1. データソースを読み込む {#step-1-load-data-sources}
 
-Create a new data source file called `source1.yaml`, which configures an upstream data source into DM, and add the following content:
-
-{{< copyable "shell-regular" >}}
+`source1.yaml`という新しいデータ ソース ファイルを作成し、DM にアップストリーム データ ソースを構成して、次のコンテンツを追加します。
 
 ```yaml
 # Configuration.
@@ -85,28 +79,24 @@ from:
   port: ${port}             # For example: 3306
 ```
 
-Run the following command in a terminal. Use `tiup dmctl` to load the data source configuration into the DM cluster:
-
-{{< copyable "shell-regular" >}}
+ターミナルで次のコマンドを実行します。1 `tiup dmctl`指定して、データソース構成を DM クラスターに読み込みます。
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 ```
 
-The parameters are described as follows.
+パラメータの説明は以下のとおりです。
 
-|Parameter      | Description |
-|-              |-            |
-|`--master-addr`         | `{advertise-addr}` of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261|
-|`operate-source create` | Load data sources to the DM clusters. |
+| パラメータ                   | 説明                                                                 |
+| ----------------------- | ------------------------------------------------------------------ |
+| `--master-addr`         | dmctlが接続するクラスタ内の任意のDMマスターノードの`{advertise-addr}`例：172.16.10.71:8261 |
+| `operate-source create` | データ ソースを DM クラスターにロードします。                                          |
 
-Repeat the above steps until all data sources are added to the DM cluster.
+すべてのデータ ソースが DM クラスターに追加されるまで、上記の手順を繰り返します。
 
-## Step 2. Configure the migration task
+## ステップ2. 移行タスクを構成する {#step-2-configure-the-migration-task}
 
-Create a task configuration file named `task1.yaml` and writes the following content to it:
-
-{{< copyable "shell-regular" >}}
+`task1.yaml`という名前のタスク構成ファイルを作成し、次の内容を書き込みます。
 
 ```yaml
 name: "shard_merge"               # The name of the task. Should be globally unique.
@@ -176,72 +166,66 @@ block-allow-list:           # filter or only migrate all operations of some data
     do-dbs: ["store_*"]     # The allow list of the schemas to be migrated, similar to replicate-do-db in MySQL.
 ```
 
-The above example is the minimum configuration to perform the migration task. For more information, see [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md).
+上記の例は、移行タスクを実行するための最小限の構成です。詳細については、 [DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)参照してください。
 
-For more information on `routes`, `filters` and other configurations in the task file, see the following documents:
+タスク ファイル内の`routes` 、およびその他`filters`構成の詳細については、次のドキュメントを参照してください。
 
-- [Table routing](/dm/dm-table-routing.md)
-- [Block & Allow Table Lists](/dm/dm-block-allow-table-lists.md)
-- [Binlog event filter](/filter-binlog-event.md)
-- [Filter Certain Row Changes Using SQL Expressions](/filter-dml-event.md)
+-   [テーブルルーティング](/dm/dm-table-routing.md)
+-   [ブロックと許可のテーブルリスト](/dm/dm-block-allow-table-lists.md)
+-   [Binlogイベントフィルター](/filter-binlog-event.md)
+-   [SQL 式を使用して特定の行の変更をフィルタリングする](/filter-dml-event.md)
 
-## Step 3. Start the task
+## ステップ3. タスクを開始する {#step-3-start-the-task}
 
-Before starting a migration task, run the `check-task` subcommand in `tiup dmctl` to check whether the configuration meets the requirements of DM so as to avoid possible errors.
-
-{{< copyable "shell-regular" >}}
+移行タスクを開始する前に、 `tiup dmctl`の`check-task`サブコマンドを実行して、構成が DM の要件を満たしているかどうかを確認し、起こりうるエラーを回避します。
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} check-task task.yaml
 ```
 
-Run the following command in `tiup dmctl` to start a migration task:
-
-{{< copyable "shell-regular" >}}
+移行タスクを開始するには、 `tiup dmctl`で次のコマンドを実行します。
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 ```
 
-| Parameter | Description|
-|-|-|
-|`--master-addr`| `{advertise-addr}` of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261 |
-|`start-task`   | Starts the data migration task. |
+| パラメータ           | 説明                                                                 |
+| --------------- | ------------------------------------------------------------------ |
+| `--master-addr` | dmctlが接続するクラスタ内の任意のDMマスターノードの`{advertise-addr}`例：172.16.10.71:8261 |
+| `start-task`    | データ移行タスクを開始します。                                                    |
 
-If the migration task fails to start, modify the configuration information according to the error information, and then run `start-task task.yaml` again to start the migration task. If you encounter problems, see [Handle Errors](/dm/dm-error-handling.md) and [FAQ](/dm/dm-faq.md).
+移行タスクの開始に失敗した場合は、エラー情報に従って構成情報を変更し、手順`start-task task.yaml`再度実行して移行タスクを開始してください。問題が発生した場合は、 [エラーの処理](/dm/dm-error-handling.md)と[FAQ](/dm/dm-faq.md)参照してください。
 
-## Step 4. Check the task
+## ステップ4. タスクを確認する {#step-4-check-the-task}
 
-After starting the migration task, you can use `dmtcl tiup` to run `query-status` to view the status of the task.
-
-{{< copyable "shell-regular" >}}
+移行タスクを開始した後、 `dmtcl tiup`使用して`query-status`実行し、タスクのステータスを表示できます。
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 ```
 
-If you encounter errors, use `query-status ${task-name}` to view more detailed information. For details about the query results, task status and sub task status of the `query-status` command, see [TiDB Data Migration Query Status](/dm/dm-query-status.md).
+エラーが発生した場合は、 `query-status ${task-name}`使用して詳細情報を表示してください。3 `query-status`のクエリ結果、タスクステータス、サブタスクステータスの詳細については、 [TiDB データ移行クエリのステータス](/dm/dm-query-status.md)参照してください。
 
-## Step 5. Monitor tasks and check logs (optional)
+## ステップ5. タスクを監視し、ログを確認する（オプション） {#step-5-monitor-tasks-and-check-logs-optional}
 
-You can view the history of a migration task and internal operational metrics through Grafana or logs.
+Grafana またはログを通じて、移行タスクの履歴と内部運用メトリックを表示できます。
 
-- Via Grafana
+-   グラファナ経由
 
-    If Prometheus, Alertmanager, and Grafana are correctly deployed when you deploy the DM cluster using TiUP, you can view DM monitoring metrics in Grafana. Specifically, enter the IP address and port specified during deployment in Grafana and select the DM dashboard.
+    TiUPを使用してDMクラスターをデプロイする際に、Prometheus、Alertmanager、Grafanaが正しくデプロイされていれば、GrafanaでDMの監視メトリクスを確認できます。具体的には、デプロイ時に指定したIPアドレスとポート番号をGrafanaに入力し、DMダッシュボードを選択してください。
 
-- Via logs
+-   ログ経由
 
-    When DM is running, DM-master, DM-worker, and dmctl output logs, which includes information about migration tasks. The log directory of each component is as follows.
+    DM の実行中、DM-master、DM-worker、dmctl は、移行タスクに関する情報を含むログを出力します。各コンポーネントのログディレクトリは以下のとおりです。
 
-    - DM-master log directory: It is specified by the DM-master process parameter `--log-file`. If DM is deployed using TiUP, the log directory is `/dm-deploy/dm-master-8261/log/`.
-    - DM-worker log directory: It is specified by the DM-worker process parameter `--log-file`. If DM is deployed using TiUP, the log directory is `/dm-deploy/dm-worker-8262/log/`.
+    -   DMマスターログディレクトリ：DMマスタープロセスパラメータ`--log-file`で指定されます。DMがTiUPを使用して展開されている場合、ログディレクトリは`/dm-deploy/dm-master-8261/log/`です。
+    -   DMワーカーログディレクトリ：DMワーカープロセスパラメータ`--log-file`で指定します。DMがTiUPを使用してデプロイされている場合、ログディレクトリは`/dm-deploy/dm-worker-8262/log/`です。
 
-## See also
+## 参照 {#see-also}
 
-- [Migrate and Merge MySQL Shards of Large Datasets to TiDB](/migrate-large-mysql-shards-to-tidb.md).
-- [Merge and Migrate Data from Sharded Tables](/dm/feature-shard-merge.md)
-- [Best Practices of Data Migration in the Shard Merge Scenario](/dm/shard-merge-best-practices.md)
-- [Handle Errors](/dm/dm-error-handling.md)
-- [Handle Performance Issues](/dm/dm-handle-performance-issues.md)
-- [FAQ](/dm/dm-faq.md)
+-   [大規模データセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md) 。
+-   [シャードテーブルからのデータのマージと移行](/dm/feature-shard-merge.md)
+-   [シャード統合シナリオにおけるデータ移行のベストプラクティス](/dm/shard-merge-best-practices.md)
+-   [エラーの処理](/dm/dm-error-handling.md)
+-   [パフォーマンスの問題に対処する](/dm/dm-handle-performance-issues.md)
+-   [FAQ](/dm/dm-faq.md)

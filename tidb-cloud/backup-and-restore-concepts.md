@@ -1,42 +1,42 @@
 ---
 title: Backup & Restore
-summary: Learn about backup & restore concepts for TiDB Cloud.
+summary: TiDB Cloudのバックアップと復元の概念について学習します。
 ---
 
-# Backup & Restore
+# バックアップと復元 {#backup-x26-restore}
 
-TiDB Cloud Backup & Restore features are designed to safeguard your data and ensure business continuity by enabling you to back up and recover cluster data.
+TiDB Cloud のバックアップと復元機能は、クラスター データのバックアップと復元を可能にして、データを保護し、ビジネスの継続性を確保するように設計されています。
 
-## Automatic backup
+## 自動バックアップ {#automatic-backup}
 
-For both {{{ .starter }}} and TiDB Cloud Dedicated clusters, snapshot backups are taken automatically by default and stored according to your backup retention policy.
+TiDB Cloud Serverless クラスターとTiDB Cloud Dedicated クラスターの両方で、スナップショット バックアップはデフォルトで自動的に作成され、バックアップ保持ポリシーに従って保存されます。
 
-For more information, see the following:
+詳細については、以下を参照してください。
 
-- [Automatic backups for {{{ .starter }}} clusters](/tidb-cloud/backup-and-restore-serverless.md#automatic-backups)
-- [Automatic backups for TiDB Cloud Dedicated clusters](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)
+-   [TiDB Cloud Serverless クラスターの自動バックアップ](/tidb-cloud/backup-and-restore-serverless.md#automatic-backups)
+-   [TiDB Cloud Dedicated クラスターの自動バックアップ](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)
 
-## Manual backup
+## 手動バックアップ {#manual-backup}
 
-Manual backup is a feature of TiDB Cloud Dedicated that enables you to back up your data to a known state as needed, and then restore to that state at any time.
+手動バックアップは、必要に応じてデータを既知の状態にバックアップし、いつでもその状態に復元できるTiDB Cloud Dedicated の機能です。
 
-For more information, see [Perform a manual backup](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup).
+詳細については[手動バックアップを実行する](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup)参照してください。
 
-## Dual region backup
+## デュアルリージョンバックアップ {#dual-region-backup}
 
-Dual region backup is a feature of TiDB Cloud Dedicated that enables you to replicate backups from your cluster region to another different region. After it is enabled, all backups are automatically replicated to the specified region. This provides cross-region data protection and disaster recovery capabilities. It is estimated that approximately 99% of the data can be replicated to the secondary region within an hour.
+デュアルリージョンバックアップは、 TiDB Cloud Dedicatedの機能で、クラスタリージョンから別のリージョンにバックアップを複製できます。この機能を有効にすると、すべてのバックアップが指定されたリージョンに自動的に複製されます。これにより、リージョンをまたいだデータ保護とディザスタリカバリ機能が実現します。1時間以内に約99%のデータがセカンダリリージョンに複製されると推定されます。
 
-For more information, see [Turn on dual region backup](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup).
+詳細については[デュアルリージョンバックアップをオンにする](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup)参照してください。
 
-## Point-in-time Restore
+## ポイントインタイムリストア {#point-in-time-restore}
 
-Point-in-time Restore is a feature that enables you to restore data of any point in time to a new cluster. You can use it to:
+ポイントインタイムリストアは、任意の時点のデータを新しいクラスターに復元できる機能です。この機能を使用すると、以下のことが可能になります。
 
-- Reduce RPO in disaster recovery.
-- Resolve cases of data write errors by restoring point-in-time that is before the error event.
-- Audit the historical data of the business.
+-   災害復旧における RPO を削減します。
+-   エラー イベントの前の時点を復元することにより、データ書き込みエラーのケースを解決します。
+-   ビジネスの履歴データを監査します。
 
-If you want to perform Point-in-time Restore, note the following:
+ポイントインタイム リストアを実行する場合は、次の点に注意してください。
 
-- For {{{ .starter }}} clusters, Point-in-time Restore is available only for scalable clusters and not available for free clusters. For more information, see [Restore mode](/tidb-cloud/backup-and-restore-serverless.md#restore-mode).
-- For TiDB Cloud Dedicated clusters, you need to [enable PITR](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore) in advance.
+-   TiDB Cloud Serverless クラスターでは、ポイントインタイムリストアはスケーラブルクラスターでのみ利用可能であり、無料クラスターでは利用できません。詳細については、 [復元モード](/tidb-cloud/backup-and-restore-serverless.md#restore-mode)ご覧ください。
+-   TiDB Cloud Dedicated クラスターの場合は、事前に[PITRを有効にする](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)実行する必要があります。

@@ -1,69 +1,71 @@
 ---
 title: TiDB Cloud Dedicated Database Audit Logging
-summary: Learn about how to audit a cluster in TiDB Cloud.
+summary: TiDB Cloudでクラスターを監査する方法について説明します。
 ---
 
-# TiDB Cloud Dedicated Database Audit Logging
+# TiDB Cloud専用データベース監査ログ {#tidb-cloud-dedicated-database-audit-logging}
 
-TiDB Cloud provides you with a database audit logging feature to record a history of user access details (such as any SQL statements executed) in logs.
+TiDB Cloud は、ユーザー アクセスの詳細 (実行された SQL ステートメントなど) の履歴をログに記録するデータベース監査ログ機能を提供します。
 
-> **Note:**
+> **注記：**
 >
-> Currently, the database audit logging feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for database audit logging" in the **Description** field and click **Submit**.
+> 現在、データベース監査ログ機能はリクエストに応じてのみご利用いただけます。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートをリクエスト**」をクリックしてください。次に、 **「説明」**欄に「データベース監査ログの申請」と入力し、 **「送信」を**クリックしてください。
 
-To assess the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to conduct a periodic analysis of the database audit logs.
+組織のユーザー アクセス ポリシーやその他の情報セキュリティ対策の有効性を評価するには、データベース監査ログを定期的に分析することがセキュリティのベスト プラクティスです。
 
-The audit logging feature is disabled by default. To audit a cluster, you need to enable the audit logging first, and then specify the auditing filter rules.
+監査ログ機能はデフォルトで無効になっています。クラスターを監査するには、まず監査ログを有効にし、監査フィルタールールを指定する必要があります。
 
-> **Note:**
+> **注記：**
 >
-> Because audit logging consumes cluster resources, be prudent about whether to audit a cluster.
+> 監査ログはクラスターのリソースを消費するため、クラスターを監査するかどうかは慎重に検討する必要があります。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- You are using a TiDB Cloud Dedicated cluster. Audit logging is not available for {{{ .starter }}} clusters.
-- You are in the `Organization Owner` or `Project Owner` role of your organization. Otherwise, you cannot see the database audit-related options in the TiDB Cloud console. For more information, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
+-   TiDB Cloud Dedicated クラスタを使用しています。TiDB TiDB Cloud Serverless クラスタでは監査ログは利用できません。
+-   組織内で`Organization Owner`または`Project Owner`ロールに所属しています。それ以外の場合、 TiDB Cloudコンソールでデータベース監査関連のオプションは表示されません。詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)ご覧ください。
 
-## Enable audit logging
+## 監査ログを有効にする {#enable-audit-logging}
 
-TiDB Cloud supports recording the audit logs of a TiDB Cloud Dedicated cluster to your cloud storage service. Before enabling database audit logging, configure your cloud storage service on the cloud provider where the cluster is located.
+TiDB Cloudは、 TiDB Cloud Dedicatedクラスタの監査ログをクラウドstorageサービスに記録することをサポートしています。データベース監査ログを有効にする前に、クラスタが配置されているクラウドプロバイダーでクラウドstorageサービスを設定してください。
 
-> **Note:**
+> **注記：**
 >
-> For TiDB clusters deployed on AWS, you can choose to store audit log files in TiDB Cloud when enabling database audit logging. Currently, this feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply to store audit log files in TiDB Cloud" in the **Description** field and click **Submit**.
+> AWS にデプロイされた TiDB クラスターでは、データベース監査ログを有効にする際に、監査ログファイルをTiDB Cloudに保存することを選択できます。現在、この機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「?」**をクリックし、 **「サポートをリクエスト」**をクリックしてください。次に、 **「説明」**フィールドに「監査ログファイルをTiDB Cloudに保存する申請」と入力し、 **「送信」を**クリックしてください。
 
-### Enable audit logging for AWS
+### AWSの監査ログを有効にする {#enable-audit-logging-for-aws}
 
-To enable audit logging for AWS, take the following steps:
+AWS の監査ログを有効にするには、次の手順を実行します。
 
-#### Step 1. Create an Amazon S3 bucket
+#### ステップ1. Amazon S3バケットを作成する {#step-1-create-an-amazon-s3-bucket}
 
-Specify an Amazon S3 bucket in your corporate-owned AWS account as a destination to which TiDB Cloud writes the audit logs.
+TiDB Cloud が監査ログを書き込む宛先として、企業所有の AWS アカウント内の Amazon S3 バケットを指定します。
 
-> Note:
+> 注記：
 >
-> Do not enable object lock on the AWS S3 bucket. Enabling object lock will prevent TiDB Cloud from pushing audit log files to S3.
+> AWS S3バケットでオブジェクトロックを有効にしないでください。オブジェクトロックを有効にすると、 TiDB Cloudが監査ログファイルをS3にプッシュできなくなります。
 
-For more information, see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) in the AWS User Guide.
+詳細については、AWS ユーザーガイドの[バケットの作成](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)参照してください。
 
-#### Step 2. Configure Amazon S3 access
+#### ステップ2. Amazon S3アクセスを構成する {#step-2-configure-amazon-s3-access}
 
-1. Get the TiDB Cloud Account ID and the External ID of the TiDB cluster that you want to enable audit logging.
+1.  監査ログを有効にする TiDB クラスターのTiDB Cloudアカウント ID と外部 ID を取得します。
 
-    1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-        > **Tip:**
+        > **ヒント：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
-    3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
-    4. In the **Enable Database Audit Logging** dialog, locate the **AWS IAM Policy Settings** section, and record **TiDB Cloud Account ID** and **TiDB Cloud External ID** for later use.
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[DB 監査ログ]**をクリックします。
 
-2. In the AWS Management Console, go to **IAM** > **Access Management** > **Policies**, and then check whether there is a storage bucket policy with the `s3:PutObject` write-only permission.
+    3.  **DB 監査ログ**ページで、右上隅の**[有効化]**をクリックします。
 
-    - If yes, record the matched storage bucket policy for later use.
-    - If not, go to **IAM** > **Access Management** > **Policies** > **Create Policy**, and define a bucket policy according to the following policy template.
+    4.  **[データベース監査ログの有効化]**ダイアログで、 **AWS IAMポリシー設定**セクションを見つけて、後で使用するために**TiDB Cloudアカウント ID**と**TiDB Cloud外部 ID**を記録します。
+
+2.  AWS マネジメントコンソールで、 **IAM** &gt;**アクセス管理**&gt;**ポリシー**に移動し、書き込み専用権限`s3:PutObject`を持つstorageバケットポリシーがあるかどうかを確認します。
+
+    -   はいの場合は、後で使用するために一致したstorageバケット ポリシーを記録します。
+    -   そうでない場合は、 **「IAM」** &gt; **「アクセス管理」** &gt; **「ポリシー」** &gt; **「ポリシーの作成」**に移動し、次のポリシー テンプレートに従ってバケット ポリシーを定義します。
 
         ```json
         {
@@ -78,259 +80,272 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
         }
         ```
 
-        In the template, `<Your S3 bucket ARN>` is the Amazon Resource Name (ARN) of your S3 bucket where the audit log files are to be written. You can go to the **Properties** tab in your S3 bucket and get the ARN value in the **Bucket Overview** area. In the `"Resource"` field, you need to add `/*` after the ARN. For example, if the ARN is `arn:aws:s3:::tidb-cloud-test`, you need to configure the value of the `"Resource"` field as `"arn:aws:s3:::tidb-cloud-test/*"`.
+        テンプレート内の`<Your S3 bucket ARN>` 、監査ログファイルが書き込まれるS3バケットのAmazonリソースネーム（ARN）です。S3バケットの「**プロパティ」**タブに移動し、 **「バケットの概要」**エリアでARN値を確認できます。「 `"Resource"`フィールドでは、ARNの後に`/*`追加する必要があります。例えば、ARNが`arn:aws:s3:::tidb-cloud-test`の場合、 `"Resource"`フィールドの値を`"arn:aws:s3:::tidb-cloud-test/*"`に設定する必要があります。
 
-3. Go to **IAM** > **Access Management** > **Roles**, and then check whether a role whose trust entity corresponds to the TiDB Cloud Account ID and the External ID that you recorded earlier already exists.
+3.  **「IAM」** &gt; **「アクセス管理」** &gt; **「ロール」**に移動し、信頼エンティティが先ほど記録したTiDB Cloudアカウント ID と外部 ID に対応するロールがすでに存在するかどうかを確認します。
 
-    - If yes, record the matched role for later use.
-    - If not, click **Create role**, select **Another AWS account** as the trust entity type, and then enter the TiDB Cloud Account ID value into the **Account ID** field. Then, choose the **Require External ID** option and enter the TiDB Cloud External ID value into the **External ID** field.
+    -   はいの場合は、後で使用するために一致したロールを記録します。
+    -   そうでない場合は、 **「ロールの作成」**をクリックし、信頼エンティティタイプとして**「別のAWSアカウント」**を選択し、「**アカウント**ID」フィールドにTiDB CloudのアカウントIDを入力します。次に、 **「外部IDが必要」**オプションを選択し、「**外部ID」**フィールドにTiDB Cloudの外部IDを入力します。
 
-4. In **IAM** > **Access Management** > **Roles**, click the role name from the previous step to go to the **Summary** page, and then take the following steps:
+4.  **IAM** &gt;**アクセス管理**&gt;**ロール**で、前の手順のロール名をクリックして**概要**ページに移動し、次の手順を実行します。
 
-    1. Under the **Permissions** tab, check whether the recorded policy with the `s3:PutObject` write-only permission is attached to the role. If not, choose **Attach Policies**, search for the needed policy, and then click **Attach Policy**.
-    2. Return to the **Summary** page and copy the **Role ARN** value to your clipboard.
+    1.  **「権限」**タブで、書き込み専用権限`s3:PutObject`を持つ記録済みのポリシーがロールにアタッチされているかどうかを確認します。アタッチされていない場合は、 **「ポリシーのアタッチ」**を選択し、必要なポリシーを検索して**「ポリシーのアタッチ」を**クリックします。
+    2.  **概要**ページに戻り、**ロール ARN**値をクリップボードにコピーします。
 
-#### Step 3. Enable audit logging
+#### ステップ3. 監査ログを有効にする {#step-3-enable-audit-logging}
 
-In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dialog box where you got the TiDB Cloud account ID and the External ID values, and then take the following steps:
+TiDB Cloudコンソールで、 TiDB Cloudアカウント ID と外部 ID 値を取得した**[データベース監査ログの有効化]**ダイアログ ボックスに戻り、次の手順を実行します。
 
-1. In the **Bucket URI** field, enter the URI of your S3 bucket where the audit log files are to be written.
-2. In the **Bucket Region** drop-down list, select the AWS region where the bucket locates.
-3. In the **Role ARN** field, fill in the Role ARN value that you copied in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
-4. Click **Test Connection** to verify whether TiDB Cloud can access and write to the bucket.
+1.  **「バケット URI」**フィールドに、監査ログファイルを書き込む S3 バケットの URI を入力します。
 
-    If it is successful, **The connection is successfully** is displayed. Otherwise, check your access configuration.
+2.  **「バケットリージョン」**ドロップダウンリストで、バケットが配置されている AWS リージョンを選択します。
 
-5. Click **Enable** to enable audit logging for the cluster.
+3.  **「ロール ARN」**フィールドに、 [ステップ2. Amazon S3アクセスを構成する](#step-2-configure-amazon-s3-access)でコピーしたロール ARN 値を入力します。
 
-    TiDB Cloud is ready to write audit logs for the specified cluster to your Amazon S3 bucket.
+4.  **「テスト接続」**をクリックして、 TiDB Cloud がバケットにアクセスして書き込むことができるかどうかを確認します。
 
-> **Note:**
+    成功した場合は、 **「接続に成功しました」と**表示されます。そうでない場合は、アクセス設定を確認してください。
+
+5.  クラスターの監査ログを有効にするには、 **[有効]**をクリックします。
+
+    TiDB Cloud は、指定されたクラスターの監査ログを Amazon S3 バケットに書き込む準備が整いました。
+
+> **注記：**
 >
-> - After enabling audit logging, if you make any new changes to the bucket URI, location, or ARN, you must click **Test Connection** again to verify that TiDB Cloud can connect to the bucket. Then, click **Enable** to apply the changes.
-> - To remove TiDB Cloud's access to your Amazon S3, simply delete the trust policy granted to this cluster in the AWS Management Console.
+> -   監査ログを有効にした後、バケットのURI、場所、またはARNに新しい変更を加えた場合は、再度**「接続テスト」**をクリックして、 TiDB Cloudがバケットに接続できることを確認してください。その後、 **「有効化」**をクリックして変更を適用してください。
+> -   TiDB Cloud の Amazon S3 へのアクセスを削除するには、AWS マネジメントコンソールでこのクラスターに付与された信頼ポリシーを削除するだけです。
 
-### Enable audit logging for Google Cloud
+### Google Cloud の監査ログを有効にする {#enable-audit-logging-for-google-cloud}
 
-To enable audit logging for Google Cloud, take the following steps:
+Google Cloud の監査ログを有効にするには、次の手順を行います。
 
-#### Step 1. Create a GCS bucket
+#### ステップ1. GCSバケットを作成する {#step-1-create-a-gcs-bucket}
 
-Specify a Google Cloud Storage (GCS) bucket in your corporate-owned Google Cloud account as a destination to which TiDB Cloud writes audit logs.
+TiDB Cloud が監査ログを書き込む宛先として、企業所有の Google Cloud アカウント内の Google Cloud Storage (GCS) バケットを指定します。
 
-For more information, see [Creating storage buckets](https://cloud.google.com/storage/docs/creating-buckets) in the Google Cloud Storage documentation.
+詳細については、Google Cloud Storage ドキュメントの[storageバケットの作成](https://cloud.google.com/storage/docs/creating-buckets)ご覧ください。
 
-#### Step 2. Configure GCS access
+#### ステップ2. GCSアクセスを構成する {#step-2-configure-gcs-access}
 
-1. Get the Google Cloud Service Account ID of the TiDB cluster that you want to enable audit logging.
+1.  監査ログを有効にする TiDB クラスタの Google Cloud サービス アカウント ID を取得します。
 
-    1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-        > **Tip:**
+        > **ヒント：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
-    3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
-    4. In the **Enable Database Audit Logging** dialog, locate the **Google Cloud Server Account ID** section, and record **Service Account ID** for later use.
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[DB 監査ログ]**をクリックします。
 
-2. In the Google Cloud console, go to **IAM & Admin** > **Roles**, and then check whether a role with the following write-only permissions of the storage container exists.
+    3.  **DB 監査ログ**ページで、右上隅の**[有効化]**をクリックします。
 
-    - storage.objects.create
-    - storage.objects.delete
+    4.  **[データベース監査ログを有効にする]**ダイアログで、 **[Google Cloud Server アカウント ID]**セクションを見つけて、後で使用するために**サービス アカウント ID**を記録します。
 
-    If yes, record the matched role for the TiDB cluster for later use. If not, go to **IAM & Admin** > **Roles** > **CREATE ROLE** to define a role for the TiDB cluster.
+2.  Google Cloud コンソールで、 **[IAMと管理]** &gt; **[ロール]**に移動し、storageコンテナの次の書き込み専用権限を持つロールが存在するかどうかを確認します。
 
-3. Go to **Cloud Storage** > **Browser**, select the GCS bucket you want TiDB Cloud to access, and then click **SHOW INFO PANEL**.
+    -   storage.オブジェクト.作成
+    -   storage.オブジェクト.削除
 
-    The panel is displayed.
+    はいの場合は、後で使用するためにTiDBクラスターの一致したロールを記録してください。いいえの場合は、 **「IAMと管理」** &gt; **「ロール」** &gt; **「ロールの作成」**に移動して、TiDBクラスターのロールを定義してください。
 
-4. In the panel, click **ADD PRINCIPAL**.
+3.  **「Cloud Storage」** &gt; **「ブラウザ」**に移動し、 TiDB Cloudがアクセスする GCS バケットを選択して、 **「情報パネルを表示」**をクリックします。
 
-    The dialog box for adding principals is displayed.
+    パネルが表示されます。
 
-5. In the dialog box, take the following steps:
+4.  パネルで、 **「プリンシパルの追加」を**クリックします。
 
-    1. In the **New Principals** field, paste the Google Cloud Service Account ID of the TiDB cluster.
-    2. In the **Role** drop-down list, choose the role of the target TiDB cluster.
-    3. Click **SAVE**.
+    プリンシパルを追加するためのダイアログ ボックスが表示されます。
 
-#### Step 3. Enable audit logging
+5.  ダイアログ ボックスで、次の手順を実行します。
 
-In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dialog box where you got the TiDB Cloud account ID, and then take the following steps:
+    1.  **[新しいプリンシパル]**フィールドに、TiDB クラスタの Google Cloud サービス アカウント ID を貼り付けます。
+    2.  **[ロール]**ドロップダウン リストで、ターゲット TiDB クラスターのロールを選択します。
+    3.  **[保存]**をクリックします。
 
-1. In the **Bucket URI** field, enter your full GCS bucket name.
-2. In the **Bucket Region** field, select the GCS region where the bucket locates.
-3. Click **Test Connection** to verify whether TiDB Cloud can access and write to the bucket.
+#### ステップ3. 監査ログを有効にする {#step-3-enable-audit-logging}
 
-    If it is successful, **The connection is successfully** is displayed. Otherwise, check your access configuration.
+TiDB Cloudコンソールで、 TiDB Cloudアカウント ID を取得した**[データベース監査ログの有効化]**ダイアログ ボックスに戻り、次の手順を実行します。
 
-4. Click **Enable** to enable audit logging for the cluster.
+1.  **「バケット URI」**フィールドに、完全な GCS バケット名を入力します。
 
-    TiDB Cloud is ready to write audit logs for the specified cluster to your GCS bucket.
+2.  **「バケットリージョン」**フィールドで、バケットが配置されている GCS リージョンを選択します。
 
-> **Note:**
+3.  **「テスト接続」**をクリックして、 TiDB Cloud がバケットにアクセスして書き込むことができるかどうかを確認します。
+
+    成功した場合は、 **「接続に成功しました」と**表示されます。そうでない場合は、アクセス設定を確認してください。
+
+4.  クラスターの監査ログを有効にするには、 **[有効]**をクリックします。
+
+    TiDB Cloud は、指定されたクラスタの監査ログを GCS バケットに書き込む準備が整いました。
+
+> **注記：**
 >
-> - After enabling audit logging, if you make any new changes to the bucket URI or location, you must click **Test Connection** again to verify that TiDB Cloud can connect to the bucket. Then, click **Enable** to apply the changes.
-> - To remove TiDB Cloud's access to your GCS bucket, delete the trust policy granted to this cluster in the Google Cloud console.
+> -   監査ログを有効にした後、バケットのURIまたは場所に新しい変更を加えた場合は、 **「接続テスト」**を再度クリックして、 TiDB Cloudがバケットに接続できることを確認してください。その後、 **「有効化」**をクリックして変更を適用してください。
+> -   TiDB Cloud の GCS バケットへのアクセスを削除するには、Google Cloud コンソールでこのクラスタに付与された信頼ポリシーを削除します。
 
-### Enable audit logging for Azure
+### Azureの監査ログを有効にする {#enable-audit-logging-for-azure}
 
-To enable audit logging for Azure, take the following steps:
+Azure の監査ログを有効にするには、次の手順を実行します。
 
-#### Step 1. Create an Azure storage account
+#### ステップ1. Azurestorageアカウントを作成する {#step-1-create-an-azure-storage-account}
 
-Create an Azure storage account in your organization's Azure subscription as the destination to which TiDB Cloud writes the database audit logs.
+TiDB Cloud がデータベース監査ログを書き込む宛先として、組織の Azure サブスクリプションに Azurestorageアカウントを作成します。
 
-For more information, see [Create an Azure storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal) in Azure documentation.
+詳細については、Azure ドキュメントの[Azurestorageアカウントを作成する](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal)参照してください。
 
-#### Step 2. Configure Azure Blob Storage access
+#### ステップ2. Azure Blob Storageアクセスを構成する {#step-2-configure-azure-blob-storage-access}
 
-1. In the [Azure portal](https://portal.azure.com/), create a container used for storing database audit logs.
+1.  [Azureポータル](https://portal.azure.com/)で、データベース監査ログを保存するために使用するコンテナを作成します。
 
-    1. In the left navigation pane of the Azure portal, click **Storage Accounts**, and then click the storage account for storing database audit logs.
+    1.  Azure ポータルの左側のナビゲーション ウィンドウで、 **[ストレージ アカウント]**をクリックし、データベース監査ログを保存するstorageアカウントをクリックします。
 
-        > **Tip:**
+        > **ヒント：**
         >
-        > If the left navigation pane is hidden, click the menu button in the upper-left corner to toggle its visibility.
+        > 左側のナビゲーション ペインが非表示になっている場合は、左上隅のメニュー ボタンをクリックして表示を切り替えます。
 
-    2. In the navigation pane for the selected storage account, click **Data storage > Containers**, and then click **+ Container** to open the **New container** pane.
+    2.  選択したstorageアカウントのナビゲーション ウィンドウで、 **[データstorage] &gt; [コンテナー]**をクリックし、 **[+ コンテナー]**をクリックして [**新しいコンテナー]**ウィンドウを開きます。
 
-    3. In the **New container** pane, enter a name for your new container, set the anonymous access level (the recommended level is **Private**, which means no anonymous access), and then click **Create**. The new container will be created and displayed in the container list in a few seconds.
+    3.  **「新しいコンテナ」**ペインで、新しいコンテナの名前を入力し、匿名アクセスレベル（推奨レベルは**「プライベート」** （匿名アクセスなし））を設定して、 **「作成」**をクリックします。数秒以内に新しいコンテナが作成され、コンテナリストに表示されます。
 
-2. Get the URL of the target container.
+2.  ターゲット コンテナの URL を取得します。
 
-    1. In the container list, select the target container, click **...** for the container, and then select **Container properties**.
-    2. On the displayed properties page, copy the **URL** value for later use, and then return to the container list.
+    1.  コンテナー リストで、対象のコンテナーを選択し、コンテナーの**[...]**をクリックして、 **[コンテナーのプロパティ] を**選択します。
+    2.  表示されたプロパティ ページで、後で使用するために**URL**値をコピーし、コンテナー リストに戻ります。
 
-3. Generate a SAS token for the target container.
+3.  ターゲット コンテナーの SAS トークンを生成します。
 
-    1. In the container list, select the target container, click **...** for the container, and then select **Generate SAS**.
-    2. In the displayed **Generate SAS** pane, select **Account key** for **Signing method**.
-    3. In the **Permissions** drop-down list, select **Read**, **Write**, and **Create** to allow writing audit log files.
-    4. In the **Start** and **Expiry** fields, specify a validity period for the SAS token.
+    1.  コンテナー リストで、ターゲット コンテナーを選択し、コンテナーの**[...]**をクリックして、 **[SAS の生成]**を選択します。
 
-        > **Note:**
+    2.  表示された**「SAS の生成」**ペインで、**署名方法**として**「アカウント キー」**を選択します。
+
+    3.  **[権限]**ドロップダウン リストで、 **[読み取り]** 、 **[書き込み]** 、 **[作成]**を選択して、監査ログ ファイルの書き込みを許可します。
+
+    4.  **[開始]**フィールドと**[有効期限]**フィールドで、SAS トークンの有効期間を指定します。
+
+        > **注記：**
         >
-        > - The audit feature needs to continuously write audit logs to the storage account, so the SAS token must have a sufficiently long validity period. However, longer validity increases the risk of token leakage. For security, it is recommended to replace your SAS token every six to twelve months.
-        > - The generated SAS token cannot be revoked, so you need to set its validity period carefully.
-        > - Make sure to re-generate and update the SAS token before it expires to ensure continuous availability of audit logs.
+        > -   監査機能はstorageアカウントに監査ログを継続的に書き込む必要があるため、SASトークンの有効期間を十分に長くする必要があります。ただし、有効期間が長くなるとトークン漏洩のリスクが高まります。セキュリティ上、SASトークンは6～12か月ごとに交換することをお勧めします。
+        > -   生成された SAS トークンは取り消すことができないため、有効期間を慎重に設定する必要があります。
+        > -   監査ログの継続的な可用性を確保するために、SAS トークンの有効期限が切れる前に必ず再生成して更新してください。
 
-    5. For **Allowed protocols**, select **HTTPS only** to ensure secure access.
-    6. Click **Generate SAS token and URL**, and then copy the displayed **Blob SAS token** for later use.
+    5.  **許可されたプロトコル**については、安全なアクセスを確保するために**HTTPS のみ**を選択します。
 
-#### Step 3. Enable audit logging
+    6.  **[SAS トークンと URL の生成]**をクリックし、表示される**BLOB SAS トークンを**後で使用するためにコピーします。
 
-1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+#### ステップ3. 監査ログを有効にする {#step-3-enable-audit-logging}
 
-    > **Tip:**
+1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+
+    > **ヒント：**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
-3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
-4. In the **Enable Database Audit Logging** dialog, provide the blob URL and SAS token that you obtained from [Step 2. Configure Azure Blob access](#step-2-configure-azure-blob-storage-access):
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[DB 監査ログ]**をクリックします。
 
-    - In the **Blob URL** field, enter the URL of the container where audit logs will be stored.
-    - In the **SAS Token** field, enter the SAS token for accessing the container.
+3.  **DB 監査ログ**ページで、右上隅の**[有効化]**をクリックします。
 
-5. Click **Test Connection** to verify whether TiDB Cloud can access and write to the container.
+4.  **[データベース監査ログの有効化]**ダイアログで、 [ステップ2. Azure BLOBアクセスを構成する](#step-2-configure-azure-blob-storage-access)から取得した BLOB URL と SAS トークンを指定します。
 
-    If it is successful, **The connection is successfully** is displayed. Otherwise, check your access configuration.
+    -   **「Blob URL」**フィールドに、監査ログが保存されるコンテナの URL を入力します。
+    -   **SAS トークン**フィールドに、コンテナーにアクセスするための SAS トークンを入力します。
 
-6. Click **Enable** to enable audit logging for the cluster.
+5.  **「テスト接続」**をクリックして、 TiDB Cloud がコンテナにアクセスして書き込むことができるかどうかを確認します。
 
-    TiDB Cloud is ready to write audit logs for the specified cluster to your Azure blob container.
+    成功した場合は、 **「接続に成功しました」と**表示されます。そうでない場合は、アクセス設定を確認してください。
 
-> **Note:**
+6.  クラスターの監査ログを有効にするには、 **[有効]**をクリックします。
+
+    TiDB Cloud は、指定されたクラスターの監査ログを Azure BLOB コンテナーに書き込む準備ができています。
+
+> **注記：**
 >
-> After enabling audit logging, if you make new changes to the **Blob URL** or **SAS Token** fields, you must click **Test Connection** again to verify that TiDB Cloud can connect to the container. Then, click **Enable** to apply the changes.
+> 監査ログを有効にした後、 **BLOB URL**または**SAS トークンの**フィールドに新しい変更を加えた場合は、再度**「接続テスト」**をクリックして、 TiDB Cloud がコンテナに接続できることを確認してください。その後、 **「有効化」**をクリックして変更を適用してください。
 
-## Specify auditing filter rules
+## 監査フィルタルールを指定する {#specify-auditing-filter-rules}
 
-After enabling audit logging, you must specify auditing filter rules to control which user access events to capture and write to audit logs. If no filter rules are specified, TiDB Cloud does not log anything.
+監査ログを有効にした後、監査フィルタルールを指定して、どのユーザーアクセスイベントをキャプチャし、監査ログに書き込むかを制御する必要があります。フィルタルールが指定されていない場合、 TiDB Cloudは何もログに記録しません。
 
-To specify auditing filter rules for a cluster, take the following steps:
+クラスターの監査フィルター ルールを指定するには、次の手順を実行します。
 
-1. On the **DB Audit Logging** page, click **Add Filter Rule** in the **Log Filter Rules** section to add an audit filter rule.
+1.  **DB 監査ログ**ページで、**ログ フィルタ ルール**セクションの**フィルタ ルールの追加を**クリックして、監査フィルタ ルールを追加します。
 
-    You can add one audit rule at a time. Each rule specifies a user expression, database expression, table expression, and access type. You can add multiple audit rules to meet your auditing requirements.
+    一度に追加できる監査ルールは1つだけです。各ルールでは、ユーザー式、データベース式、テーブル式、およびアクセスタイプを指定します。監査要件に合わせて複数の監査ルールを追加できます。
 
-2.In the **Log Filter Rules** section, click **>** to expand and view the list of audit rules you have added.
+2. **「ログ フィルター ルール」**セクションで、 **「&gt;」**をクリックして展開し、追加した監査ルールのリストを表示します。
 
-> **Note:**
+> **注記：**
 >
-> - The filter rules are regular expressions and case-sensitive. If you use the wildcard rule `.*`, all users, databases, or table events in the cluster are logged.
-> - Because audit logging consumes cluster resources, be prudent when specifying filter rules. To minimize the consumption, it is recommended that you specify filter rules to limit the scope of audit logging to specific database objects, users, and actions, where possible.
+> -   フィルタールールは正規表現で、大文字と小文字が区別されます。ワイルドカードルール`.*`を使用すると、クラスター内のすべてのユーザー、データベース、またはテーブルイベントがログに記録されます。
+> -   監査ログはクラスターリソースを消費するため、フィルタールールの指定には注意が必要です。消費を最小限に抑えるには、可能な限り、監査ログのスコープを特定のデータベースオブジェクト、ユーザー、およびアクションに限定するフィルタールールを指定することをお勧めします。
 
-## View audit logs
+## 監査ログをビュー {#view-audit-logs}
 
-By default, TiDB Cloud stores database audit log files in your storage service, so you need to read the audit log information from your storage service.
+デフォルトでは、 TiDB Cloudはデータベース監査ログ ファイルをstorageサービスに保存するため、storageサービスから監査ログ情報を読み取る必要があります。
 
-> **Note:**
+> **注記：**
 >
-> If you have requested and chosen to store audit log files in TiDB Cloud, you can download them from the **Audit Log Access** section on the **Database Audit Logging** page.
+> 監査ログ ファイルをTiDB Cloudに保存することを要求して選択した場合は、**データベース監査ログ**ページの**監査ログ アクセス**セクションからダウンロードできます。
 
-TiDB Cloud audit logs are readable text files with the cluster ID, Pod ID, and log creation date incorporated into the fully qualified filenames.
+TiDB Cloud監査ログは、クラスター ID、ポッド ID、およびログ作成日が完全修飾ファイル名に組み込まれた読み取り可能なテキスト ファイルです。
 
-For example, `13796619446086334065/tidb-0/tidb-audit-2022-04-21T18-16-29.529.log`. In this example, `13796619446086334065` indicates the cluster ID and `tidb-0` indicates the Pod ID.
+たとえば、 `13796619446086334065/tidb-0/tidb-audit-2022-04-21T18-16-29.529.log` 。この例では、 `13796619446086334065`クラスター ID を示し、 `tidb-0`ポッド ID を示します。
 
-## Disable audit logging
+## 監査ログを無効にする {#disable-audit-logging}
 
-If you no longer want to audit a cluster, go to the page of the cluster, click **Settings** > **Audit Settings**, and then toggle the audit setting in the upper-right corner to **Off**.
+クラスターの監査が不要になった場合は、そのクラスターのページに移動し、 **[設定]** &gt; **[監査設定]**をクリックして、右上隅の監査設定を**[オフ]**に切り替えます。
 
-> **Note:**
+> **注記：**
 >
-> Each time the size of the log file reaches 10 MiB, the log file will be pushed to the cloud storage bucket. Therefore, after the audit log is disabled, the log file whose size is smaller than 10 MiB will not be automatically pushed to the cloud storage bucket. To get the log file in this situation, contact [PingCAP support](/tidb-cloud/tidb-cloud-support.md).
+> ログファイルのサイズが10MiBに達するたびに、ログファイルはクラウドstorageバケットにプッシュされます。そのため、監査ログを無効化すると、10MiB未満のログファイルはクラウドstorageバケットに自動的にプッシュされなくなります。この状況でログファイルを取得するには、 [PingCAPサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
-## Audit log fields
+## 監査ログフィールド {#audit-log-fields}
 
-For each database event record in audit logs, TiDB provides the following fields:
+監査ログ内の各データベース イベント レコードに対して、TiDB は次のフィールドを提供します。
 
-> **Note:**
+> **注記：**
 >
-> In the following tables, the empty maximum length of a field means that the data type of this field has a well-defined constant length (for example, 4 bytes for INTEGER).
+> 次の表では、フィールドの最大長が空の場合、そのフィールドのデータ型には明確に定義された定数長 (たとえば、INTEGER の場合は 4 バイト) があることを意味します。
 
-| Col # | Field name | TiDB data type | Maximum length | Description |
-|---|---|---|---|---|
-| 1 | N/A | N/A | N/A | Reserved for internal use |
-| 2 | N/A | N/A | N/A | Reserved for internal use |
-| 3 | N/A | N/A | N/A | Reserved for internal use |
-| 4 | ID       | INTEGER |  | Unique event ID  |
-| 5 | TIMESTAMP | TIMESTAMP |  | Time of event   |
-| 6 | EVENT_CLASS | VARCHAR | 15 | Event type     |
-| 7 | EVENT_SUBCLASS     | VARCHAR | 15 | Event subtype |
-| 8 | STATUS_CODE | INTEGER |  | Response status of the statement   |
-| 9 | COST_TIME | FLOAT |  | Time consumed by the statement    |
-| 10 | HOST | VARCHAR | 16 | Server IP    |
-| 11 | CLIENT_IP         | VARCHAR | 16 | Client IP   |
-| 12 | USER | VARCHAR | 17 | Login username    |
-| 13 | DATABASE | VARCHAR | 64 | Event-related database      |
-| 14 | TABLES | VARCHAR | 64 | Event-related table name          |
-| 15 | SQL_TEXT | VARCHAR | 64 KB | Masked SQL statement   |
-| 16 | ROWS | INTEGER |  | Number of affected rows (`0` indicates that no rows are affected)      |
+| 列番号 | フィールド名    | TiDBデータ型 | 最大長   | 説明                               |
+| --- | --------- | -------- | ----- | -------------------------------- |
+| 1   | 該当なし      | 該当なし     | 該当なし  | 社内使用のために予約済み                     |
+| 2   | 該当なし      | 該当なし     | 該当なし  | 社内使用のために予約済み                     |
+| 3   | 該当なし      | 該当なし     | 該当なし  | 社内使用のために予約済み                     |
+| 4   | ID        | 整数       |       | 一意のイベントID                        |
+| 5   | タイムスタンプ   | タイムスタンプ  |       | イベントの時間                          |
+| 6   | イベントクラス   | 可変長文字    | 15    | イベントの種類                          |
+| 7   | イベントサブクラス | 可変長文字    | 15    | イベントのサブタイプ                       |
+| 8   | ステータスコード  | 整数       |       | 声明の回答状況                          |
+| 9   | コスト_時間    | フロート     |       | 声明に費やされた時間                       |
+| 10  | ホスト       | 可変長文字    | 16    | サーバーIP                           |
+| 11  | クライアントIP  | 可変長文字    | 16    | クライアントIP                         |
+| 12  | ユーザー      | 可変長文字    | 17    | ログインユーザー名                        |
+| 13  | データベース    | 可変長文字    | 64    | イベント関連データベース                     |
+| 14  | テーブル      | 可変長文字    | 64    | イベント関連のテーブル名                     |
+| 15  | SQL_TEXT  | 可変長文字    | 64 KB | マスクされたSQL文                       |
+| 16  | 行         | 整数       |       | 影響を受ける行の数（ `0`影響を受ける行がないことを示します） |
 
-Depending on the EVENT_CLASS field value set by TiDB, database event records in audit logs also contain additional fields as follows:
+TiDB によって設定された EVENT_CLASS フィールド値に応じて、監査ログ内のデータベース イベント レコードには次のような追加フィールドも含まれます。
 
-- If the EVENT_CLASS value is `CONNECTION`, database event records also contain the following fields:
+-   EVENT_CLASS 値が`CONNECTION`場合、データベース イベント レコードには次のフィールドも含まれます。
 
-    | Col # | Field name | TiDB data type | Maximum length | Description |
-    |---|---|---|---|---|
-    | 17 | CLIENT_PORT | INTEGER |  | Client port number |
-    | 18 | CONNECTION_ID | INTEGER |  | Connection ID |
-    | 19 | CONNECTION_TYPE  | VARCHAR | 12 | Connection via `socket` or `unix-socket` |
-    | 20 | SERVER_ID | INTEGER |  | TiDB server ID |
-    | 21 | SERVER_PORT | INTEGER |  | The port that the TiDB server uses to listen to client communicating via the MySQL protocol |
-    | 22 | SERVER_OS_LOGIN_USER | VARCHAR | 17 | The username of the TiDB process startup system  |
-    | 23 | OS_VERSION | VARCHAR | N/A | The version of the operating system where the TiDB server is located  |
-    | 24 | SSL_VERSION | VARCHAR | 6 | The current SSL version of TiDB |
-    | 25 | PID | INTEGER |  | The PID of the TiDB process |
+    | 列番号 | フィールド名         | TiDBデータ型 | 最大長  | 説明                                               |
+    | --- | -------------- | -------- | ---- | ------------------------------------------------ |
+    | 17  | クライアントポート      | 整数       |      | クライアントポート番号                                      |
+    | 18  | 接続ID           | 整数       |      | 接続ID                                             |
+    | 19  | 接続タイプ          | 可変長文字    | 12   | `socket`または`unix-socket`経由の接続                    |
+    | 20  | サーバーID         | 整数       |      | TiDBサーバーID                                       |
+    | 21  | サーバーポート        | 整数       |      | TiDBサーバーがMySQLプロトコル経由でクライアントの通信をリッスンするために使用するポート |
+    | 22  | サーバーOSログインユーザー | 可変長文字    | 17   | TiDBプロセス起動システムのユーザー名                             |
+    | 23  | OS_バージョン       | 可変長文字    | 該当なし | TiDBサーバーが配置されているオペレーティング システムのバージョン              |
+    | 24  | SSL_バージョン      | 可変長文字    | 6    | TiDBの現在のSSLバージョン                                 |
+    | 25  | PID            | 整数       |      | TiDBプロセスのPID                                     |
 
-- If the EVENT_CLASS value is `TABLE_ACCESS` or `GENERAL`, database event records also contain the following fields:
+-   EVENT_CLASS 値が`TABLE_ACCESS`または`GENERAL`場合、データベース イベント レコードには次のフィールドも含まれます。
 
-    | Col # | Field name | TiDB data type | Maximum length | Description |
-    |---|---|---|---|---|
-    | 17 | CONNECTION_ID | INTEGER |  | Connection ID   |
-    | 18 | COMMAND | VARCHAR | 14 | The command type of the MySQL protocol |
-    | 19 | SQL_STATEMENT  | VARCHAR | 17 | The SQL statement type |
-    | 20 | PID | INTEGER |  | The PID of the TiDB process  |
+    | 列番号 | フィールド名      | TiDBデータ型 | 最大長 | 説明                 |
+    | --- | ----------- | -------- | --- | ------------------ |
+    | 17  | 接続ID        | 整数       |     | 接続ID               |
+    | 18  | 指示          | 可変長文字    | 14  | MySQLプロトコルのコマンドタイプ |
+    | 19  | SQL_ステートメント | 可変長文字    | 17  | SQL文の種類            |
+    | 20  | PID         | 整数       |     | TiDBプロセスのPID       |

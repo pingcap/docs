@@ -1,83 +1,88 @@
 ---
 title: Integrate TiDB Vector Search with Amazon Bedrock
-summary: Learn how to integrate TiDB Vector Search with Amazon Bedrock to build a Retrieval-Augmented Generation (RAG) Q&A bot.
+summary: TiDB Vector Search を Amazon Bedrock と統合して、検索拡張生成 (RAG) Q&A ボットを構築する方法を学びます。
 ---
 
-# Integrate TiDB Vector Search with Amazon Bedrock
+# TiDB Vector Search を Amazon Bedrock に統合する {#integrate-tidb-vector-search-with-amazon-bedrock}
 
-This tutorial demonstrates how to integrate the [vector search](/vector-search/vector-search-overview.md) feature of TiDB with [Amazon Bedrock](https://aws.amazon.com/bedrock/) to build a Retrieval-Augmented Generation (RAG) Q&A bot.
+このチュートリアルでは、TiDB の[ベクトル検索](/vector-search/vector-search-overview.md)機能を[アマゾンの岩盤](https://aws.amazon.com/bedrock/)と統合して、検索拡張生成 (RAG) Q&amp;A ボットを構築する方法を説明します。
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを見つけた場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
 </CustomContent>
 
-> **Note**
+> **注記**
 >
-> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
-> **Tip**
+> **ヒント**
 >
-> You can view the complete [sample code](https://github.com/aws-samples/aws-generativeai-partner-samples/blob/main/tidb/samples/tidb-bedrock-boto3-rag.ipynb) in Notebook format.
+> [サンプルコード](https://github.com/aws-samples/aws-generativeai-partner-samples/blob/main/tidb/samples/tidb-bedrock-boto3-rag.ipynb)全体をノートブック形式で閲覧できます。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-To complete this tutorial, you need:
+このチュートリアルを完了するには、次のものが必要です。
 
-- [Python 3.11 or later](https://www.python.org/downloads/) installed
-- [Pip](https://pypi.org/project/pip/) installed
-- [AWS CLI](https://aws.amazon.com/cli/) installed
+-   [Python 3.11以降](https://www.python.org/downloads/)インストール済み
 
-    Ensure your AWS CLI profile is configured to a supported [Amazon Bedrock](https://aws.amazon.com/bedrock/) region for this tutorial. You can find the list of supported regions at [Amazon Bedrock Regions](https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html). To switch to a supported region, run the following command:
+-   [ピップ](https://pypi.org/project/pip/)インストール済み
+
+-   [AWS CLI](https://aws.amazon.com/cli/)インストール済み
+
+    このチュートリアルでは、AWS CLI プロファイルがサポートされている[アマゾンの岩盤](https://aws.amazon.com/bedrock/)リージョンに設定されていることを確認してください。サポートされているリージョンの一覧は[アマゾンの岩盤地域](https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html)にあります。サポートされているリージョンに切り替えるには、次のコマンドを実行します。
 
     ```shell
     aws configure set region <your-region>
     ```
 
-- A {{{ .starter }}} cluster
+-   TiDB Cloudサーバーレスクラスター
 
-    Follow [creating a {{{ .starter }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+    独自のTiDB Cloudクラスターがない場合は、手順[TiDB Cloud Serverless クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って作成します。
 
-- An AWS account with the [required permissions for Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html) and access to the following models:
+-   [Amazon Bedrock に必要な権限](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html)と次のモデルへのアクセス権を持つ AWS アカウント:
 
-    - **Amazon Titan Embeddings** (`amazon.titan-embed-text-v2:0`), used for generating text embeddings
-    - **Meta Llama 3** (`us.meta.llama3-2-3b-instruct-v1:0`), used for text generation
+    -   **Amazon Titan Embeddings** ( `amazon.titan-embed-text-v2:0` ) テキスト埋め込みの生成に使用される
+    -   **Meta Llama 3** ( `us.meta.llama3-2-3b-instruct-v1:0` )、テキスト生成に使用される
 
-  If you don't have access, follow the instructions in [Request access to an Amazon Bedrock foundation model](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html#getting-started-model-access).
+    アクセスできない場合は、 [Amazon Bedrock 基盤モデルへのアクセスをリクエストする](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html#getting-started-model-access)の手順に従ってください。
 
-## Get started
+## 始めましょう {#get-started}
 
-This section provides step-by-step instructions for integrating TiDB Vector Search with Amazon Bedrock to build a RAG-based Q&A bot.
+このセクションでは、TiDB Vector Search を Amazon Bedrock と統合して RAG ベースの Q&amp;A ボットを構築するための手順を段階的に説明します。
 
-### Step 1. Set the environment variables
+### ステップ1.環境変数を設定する {#step-1-set-the-environment-variables}
 
-Get the TiDB connection information from the [TiDB Cloud console](https://tidbcloud.com/) and set the environment variables in your development environment as follows:
+[TiDB Cloudコンソール](https://tidbcloud.com/)から TiDB 接続情報を取得し、開発環境で環境変数を次のように設定します。
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    - **Connection Type** is set to `Public`
-    - **Branch** is set to `main`
-    - **Connect With** is set to `General`
-    - **Operating System** matches your environment.
+    -   **接続タイプ**は`Public`に設定されています
 
-    > **Tip:**
+    -   **ブランチ**は`main`に設定されています
+
+    -   **接続先が**`General`に設定されています
+
+    -   **オペレーティング システムは**環境に適合します。
+
+    > **ヒント：**
     >
-    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
+    > プログラムが Windows Subsystem for Linux (WSL) で実行されている場合は、対応する Linux ディストリビューションに切り替えます。
 
-4. Click **Generate Password** to create a random password.
+4.  ランダムなパスワードを作成するには、 **「パスワードの生成」を**クリックします。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
 
-5. Run the following commands in your terminal to set the environment variables. You need to replace the placeholders in the commands with the corresponding connection parameters obtained from the connection dialog.
+5.  環境変数を設定するには、ターミナルで以下のコマンドを実行します。コマンド内のプレースホルダーは、接続ダイアログから取得した対応する接続パラメータに置き換えてください。
 
     ```shell
     export TIDB_HOST=<your-tidb-host>
@@ -87,30 +92,30 @@ Get the TiDB connection information from the [TiDB Cloud console](https://tidbcl
     export TIDB_DB_NAME=test
     ```
 
-### Step 2. Set up the Python virtual environment
+### ステップ2. Python仮想環境を設定する {#step-2-set-up-the-python-virtual-environment}
 
-1. Create a Python file named `demo.py`:
+1.  `demo.py`という名前の Python ファイルを作成します。
 
     ```shell
     touch demo.py
     ```
 
-2. Create and activate a virtual environment to manage dependencies:
+2.  依存関係を管理するために仮想環境を作成してアクティブ化します。
 
     ```shell
     python3 -m venv env
     source env/bin/activate  # On Windows, use env\Scripts\activate
     ```
 
-3. Install the required dependencies:
+3.  必要な依存関係をインストールします。
 
     ```shell
     pip install SQLAlchemy==2.0.30 PyMySQL==1.1.0 tidb-vector==0.0.9 pydantic==2.7.1 boto3
     ```
 
-### Step 3. Import required libraries
+### ステップ3. 必要なライブラリをインポートする {#step-3-import-required-libraries}
 
-Add the following code to the beginning of `demo.py` to import the required libraries:
+必要なライブラリをインポートするには、 `demo.py`の先頭に次のコードを追加します。
 
 ```python
 import os
@@ -121,9 +126,9 @@ from sqlalchemy.orm import declarative_base, Session
 from tidb_vector.sqlalchemy import VectorType
 ```
 
-### Step 4. Configure the database connection
+### ステップ4. データベース接続を構成する {#step-4-configure-the-database-connection}
 
-In `demo.py`, add the following code to configure the database connection:
+`demo.py`で、次のコードを追加してデータベース接続を構成します。
 
 ```python
 # ---- Configuration Setup ----
@@ -144,16 +149,16 @@ engine = create_engine(get_db_url(), pool_recycle=300)
 Base = declarative_base()
 ```
 
-### Step 5. Invoke the Amazon Titan Text Embeddings V2 model using the Bedrock runtime client
+### ステップ 5. Bedrock ランタイム クライアントを使用して Amazon Titan Text Embeddings V2 モデルを呼び出す {#step-5-invoke-the-amazon-titan-text-embeddings-v2-model-using-the-bedrock-runtime-client}
 
-The Amazon Bedrock runtime client provides you with an `invoke_model` API that accepts the following parameters:
+Amazon Bedrock ランタイムクライアントは、次のパラメータを受け入れる`invoke_model` API を提供します。
 
-- `modelId`: the model ID of the foundation model available in Amazon Bedrock.
-- `accept`: the type of the input request.
-- `contentType`: the content type of the input.
-- `body`: a JSON string payload consisting of the prompt and the configurations.
+-   `modelId` : Amazon Bedrock で利用可能な基盤モデルのモデル ID。
+-   `accept` : 入力要求のタイプ。
+-   `contentType` : 入力のコンテンツ タイプ。
+-   `body` : プロンプトと構成で構成される JSON 文字列ペイロード。
 
-In `demo.py`, add the following code to invoke the `invoke_model` API to generate text embeddings using Amazon Titan Text Embeddings and get responses from Meta Llama 3:
+`demo.py`に次のコードを追加して`invoke_model` API を呼び出し、Amazon Titan Text Embeddings を使用してテキスト埋め込みを生成し、Meta Llama 3 からの応答を取得します。
 
 ```python
 # Bedrock Runtime Client Setup
@@ -225,9 +230,9 @@ def generate_result(query: str, info_str: str):
     return completion
 ```
 
-### Step 6. Create a vector table
+### ステップ6.ベクターテーブルを作成する {#step-6-create-a-vector-table}
 
-In `demo.py`, add the following code to create a vector table to store text and vector embeddings:
+`demo.py`に次のコードを追加して、テキストとベクトル埋め込みを格納するベクトル テーブルを作成します。
 
 ```python
 # ---- TiDB Setup and Vector Index Creation ----
@@ -242,9 +247,9 @@ class Entity(Base):
 Base.metadata.create_all(engine)
 ```
 
-### Step 7. Save the vector data to {{{ .starter }}}
+### ステップ7. ベクターデータをTiDB Cloud Serverlessに保存する {#step-7-save-the-vector-data-to-tidb-cloud-serverless}
 
-In `demo.py`, add the following code to save the vector data to your {{{ .starter }}} cluster:
+`demo.py`で、次のコードを追加して、ベクター データをTiDB Cloud Serverless クラスターに保存します。
 
 ```python
 # ---- Saving Vectors to TiDB ----
@@ -256,9 +261,9 @@ def save_entities_with_embedding(session, contents):
     session.commit()
 ```
 
-### Step 8. Run the application
+### ステップ8. アプリケーションを実行する {#step-8-run-the-application}
 
-1. In `demo.py`, add the following code to establish a database session, save embeddings to TiDB, ask an example question (such as "What is TiDB?"), and generate results from the model:
+1.  `demo.py`では、次のコードを追加して、データベース セッションを確立し、埋め込みを TiDB に保存し、サンプルの質問 (「TiDB とは何ですか?」など) を尋ね、モデルから結果を生成します。
 
     ```python
     if __name__ == "__main__":
@@ -285,37 +290,35 @@ def save_entities_with_embedding(session, contents):
             print(f"Generated answer: {result}")
     ```
 
-2. Save all changes to `demo.py` and run the script:
+2.  すべての変更を`demo.py`に保存し、スクリプトを実行します。
 
     ```shell
     python3 demo.py
     ```
 
-    The expected output is similar to the following:
+    期待される出力は次のようになります。
 
-    ```
-    Generated answer:  What is the main purpose of TiDB?
-         What are the key features of TiDB?
-         What are the key benefits of TiDB?
+        Generated answer:  What is the main purpose of TiDB?
+             What are the key features of TiDB?
+             What are the key benefits of TiDB?
 
-        ----
-        Based on the provided text, here is the answer to the question:
-        What is TiDB?
-        TiDB is a distributed SQL database compatible with MySQL.
+            ----
+            Based on the provided text, here is the answer to the question:
+            What is TiDB?
+            TiDB is a distributed SQL database compatible with MySQL.
 
-    ## Step 1: Understand the question
-    The question asks for the definition of TiDB.
+        ## Step 1: Understand the question
+        The question asks for the definition of TiDB.
 
-    ## Step 2: Identify the key information
-    The key information provided in the text is that TiDB is a distributed SQL database compatible with MySQL.
+        ## Step 2: Identify the key information
+        The key information provided in the text is that TiDB is a distributed SQL database compatible with MySQL.
 
-    ## Step 3: Provide the answer
-    Based on the provided text, TiDB is a distributed SQL database compatible with MySQL.
+        ## Step 3: Provide the answer
+        Based on the provided text, TiDB is a distributed SQL database compatible with MySQL.
 
-    The final answer is: TiDB is a distributed SQL database compatible with MySQL.
-    ```
+        The final answer is: TiDB is a distributed SQL database compatible with MySQL.
 
-## See also
+## 参照 {#see-also}
 
-- [Vector Data Types](/vector-search/vector-search-data-types.md)
-- [Vector Search Index](/vector-search/vector-search-index.md)
+-   [ベクトルデータ型](/vector-search/vector-search-data-types.md)
+-   [ベクター検索インデックス](/vector-search/vector-search-index.md)

@@ -1,325 +1,323 @@
 ---
 title: SHOW BUILTINS
-summary: The usage of SHOW BUILTINS in TiDB.
+summary: TiDB での SHOW BUILTINS の使用法。
 ---
 
-# SHOW BUILTINS
+# ショービルド {#show-builtins}
 
-`SHOW BUILTINS` is used to list all supported builtin functions in TiDB.
+`SHOW BUILTINS` 、TiDB でサポートされているすべての組み込み関数を一覧表示するために使用されます。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowBuiltinsStmt ::=
     "SHOW" "BUILTINS"
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 SHOW BUILTINS;
 ```
 
-```
-+-----------------------------+
-| Supported_builtin_functions |
-+-----------------------------+
-| abs                         |
-| acos                        |
-| adddate                     |
-| addtime                     |
-| aes_decrypt                 |
-| aes_encrypt                 |
-| and                         |
-| any_value                   |
-| ascii                       |
-| asin                        |
-| atan                        |
-| atan2                       |
-| benchmark                   |
-| bin                         |
-| bin_to_uuid                 |
-| bit_count                   |
-| bit_length                  |
-| bitand                      |
-| bitneg                      |
-| bitor                       |
-| bitxor                      |
-| case                        |
-| ceil                        |
-| ceiling                     |
-| char_func                   |
-| char_length                 |
-| character_length            |
-| charset                     |
-| coalesce                    |
-| coercibility                |
-| collation                   |
-| compress                    |
-| concat                      |
-| concat_ws                   |
-| connection_id               |
-| conv                        |
-| convert                     |
-| convert_tz                  |
-| cos                         |
-| cot                         |
-| crc32                       |
-| curdate                     |
-| current_date                |
-| current_resource_group      |
-| current_role                |
-| current_time                |
-| current_timestamp           |
-| current_user                |
-| curtime                     |
-| database                    |
-| date                        |
-| date_add                    |
-| date_format                 |
-| date_sub                    |
-| datediff                    |
-| day                         |
-| dayname                     |
-| dayofmonth                  |
-| dayofweek                   |
-| dayofyear                   |
-| decode                      |
-| default_func                |
-| degrees                     |
-| des_decrypt                 |
-| des_encrypt                 |
-| div                         |
-| elt                         |
-| encode                      |
-| encrypt                     |
-| eq                          |
-| exp                         |
-| export_set                  |
-| extract                     |
-| field                       |
-| find_in_set                 |
-| floor                       |
-| format                      |
-| format_bytes                |
-| format_nano_time            |
-| found_rows                  |
-| from_base64                 |
-| from_days                   |
-| from_unixtime               |
-| ge                          |
-| get_format                  |
-| get_lock                    |
-| getparam                    |
-| greatest                    |
-| grouping                    |
-| gt                          |
-| hex                         |
-| hour                        |
-| if                          |
-| ifnull                      |
-| ilike                       |
-| in                          |
-| inet6_aton                  |
-| inet6_ntoa                  |
-| inet_aton                   |
-| inet_ntoa                   |
-| insert_func                 |
-| instr                       |
-| intdiv                      |
-| interval                    |
-| is_free_lock                |
-| is_ipv4                     |
-| is_ipv4_compat              |
-| is_ipv4_mapped              |
-| is_ipv6                     |
-| is_used_lock                |
-| is_uuid                     |
-| isfalse                     |
-| isnull                      |
-| istrue                      |
-| json_array                  |
-| json_array_append           |
-| json_array_insert           |
-| json_contains               |
-| json_contains_path          |
-| json_depth                  |
-| json_extract                |
-| json_insert                 |
-| json_keys                   |
-| json_length                 |
-| json_memberof               |
-| json_merge                  |
-| json_merge_patch            |
-| json_merge_preserve         |
-| json_object                 |
-| json_overlaps               |
-| json_pretty                 |
-| json_quote                  |
-| json_remove                 |
-| json_replace                |
-| json_schema_valid           |
-| json_search                 |
-| json_set                    |
-| json_storage_free           |
-| json_storage_size           |
-| json_type                   |
-| json_unquote                |
-| json_valid                  |
-| last_day                    |
-| last_insert_id              |
-| lastval                     |
-| lcase                       |
-| le                          |
-| least                       |
-| left                        |
-| leftshift                   |
-| length                      |
-| like                        |
-| ln                          |
-| load_file                   |
-| localtime                   |
-| localtimestamp              |
-| locate                      |
-| log                         |
-| log10                       |
-| log2                        |
-| lower                       |
-| lpad                        |
-| lt                          |
-| ltrim                       |
-| make_set                    |
-| makedate                    |
-| maketime                    |
-| master_pos_wait             |
-| md5                         |
-| microsecond                 |
-| mid                         |
-| minus                       |
-| minute                      |
-| mod                         |
-| month                       |
-| monthname                   |
-| mul                         |
-| name_const                  |
-| ne                          |
-| nextval                     |
-| not                         |
-| now                         |
-| nulleq                      |
-| oct                         |
-| octet_length                |
-| old_password                |
-| or                          |
-| ord                         |
-| password_func               |
-| period_add                  |
-| period_diff                 |
-| pi                          |
-| plus                        |
-| position                    |
-| pow                         |
-| power                       |
-| quarter                     |
-| quote                       |
-| radians                     |
-| rand                        |
-| random_bytes                |
-| regexp                      |
-| regexp_instr                |
-| regexp_like                 |
-| regexp_replace              |
-| regexp_substr               |
-| release_all_locks           |
-| release_lock                |
-| repeat                      |
-| replace                     |
-| reverse                     |
-| right                       |
-| rightshift                  |
-| round                       |
-| row_count                   |
-| rpad                        |
-| rtrim                       |
-| schema                      |
-| sec_to_time                 |
-| second                      |
-| session_user                |
-| setval                      |
-| setvar                      |
-| sha                         |
-| sha1                        |
-| sha2                        |
-| sign                        |
-| sin                         |
-| sleep                       |
-| sm3                         |
-| space                       |
-| sqrt                        |
-| str_to_date                 |
-| strcmp                      |
-| subdate                     |
-| substr                      |
-| substring                   |
-| substring_index             |
-| subtime                     |
-| sysdate                     |
-| system_user                 |
-| tan                         |
-| tidb_bounded_staleness      |
-| tidb_current_tso            |
-| tidb_decode_binary_plan     |
-| tidb_decode_key             |
-| tidb_decode_plan            |
-| tidb_decode_sql_digests     |
-| tidb_encode_sql_digest      |
-| tidb_is_ddl_owner           |
-| tidb_parse_tso              |
-| tidb_parse_tso_logical      |
-| tidb_row_checksum           |
-| tidb_shard                  |
-| tidb_version                |
-| time                        |
-| time_format                 |
-| time_to_sec                 |
-| timediff                    |
-| timestamp                   |
-| timestampadd                |
-| timestampdiff               |
-| to_base64                   |
-| to_days                     |
-| to_seconds                  |
-| translate                   |
-| trim                        |
-| truncate                    |
-| ucase                       |
-| unaryminus                  |
-| uncompress                  |
-| uncompressed_length         |
-| unhex                       |
-| unix_timestamp              |
-| upper                       |
-| user                        |
-| utc_date                    |
-| utc_time                    |
-| utc_timestamp               |
-| uuid                        |
-| uuid_short                  |
-| uuid_to_bin                 |
-| validate_password_strength  |
-| version                     |
-| vitess_hash                 |
-| week                        |
-| weekday                     |
-| weekofyear                  |
-| weight_string               |
-| xor                         |
-| year                        |
-| yearweek                    |
-+-----------------------------+
-292 rows in set (0.00 sec)
-```
+    +-----------------------------+
+    | Supported_builtin_functions |
+    +-----------------------------+
+    | abs                         |
+    | acos                        |
+    | adddate                     |
+    | addtime                     |
+    | aes_decrypt                 |
+    | aes_encrypt                 |
+    | and                         |
+    | any_value                   |
+    | ascii                       |
+    | asin                        |
+    | atan                        |
+    | atan2                       |
+    | benchmark                   |
+    | bin                         |
+    | bin_to_uuid                 |
+    | bit_count                   |
+    | bit_length                  |
+    | bitand                      |
+    | bitneg                      |
+    | bitor                       |
+    | bitxor                      |
+    | case                        |
+    | ceil                        |
+    | ceiling                     |
+    | char_func                   |
+    | char_length                 |
+    | character_length            |
+    | charset                     |
+    | coalesce                    |
+    | coercibility                |
+    | collation                   |
+    | compress                    |
+    | concat                      |
+    | concat_ws                   |
+    | connection_id               |
+    | conv                        |
+    | convert                     |
+    | convert_tz                  |
+    | cos                         |
+    | cot                         |
+    | crc32                       |
+    | curdate                     |
+    | current_date                |
+    | current_resource_group      |
+    | current_role                |
+    | current_time                |
+    | current_timestamp           |
+    | current_user                |
+    | curtime                     |
+    | database                    |
+    | date                        |
+    | date_add                    |
+    | date_format                 |
+    | date_sub                    |
+    | datediff                    |
+    | day                         |
+    | dayname                     |
+    | dayofmonth                  |
+    | dayofweek                   |
+    | dayofyear                   |
+    | decode                      |
+    | default_func                |
+    | degrees                     |
+    | des_decrypt                 |
+    | des_encrypt                 |
+    | div                         |
+    | elt                         |
+    | encode                      |
+    | encrypt                     |
+    | eq                          |
+    | exp                         |
+    | export_set                  |
+    | extract                     |
+    | field                       |
+    | find_in_set                 |
+    | floor                       |
+    | format                      |
+    | format_bytes                |
+    | format_nano_time            |
+    | found_rows                  |
+    | from_base64                 |
+    | from_days                   |
+    | from_unixtime               |
+    | ge                          |
+    | get_format                  |
+    | get_lock                    |
+    | getparam                    |
+    | greatest                    |
+    | grouping                    |
+    | gt                          |
+    | hex                         |
+    | hour                        |
+    | if                          |
+    | ifnull                      |
+    | ilike                       |
+    | in                          |
+    | inet6_aton                  |
+    | inet6_ntoa                  |
+    | inet_aton                   |
+    | inet_ntoa                   |
+    | insert_func                 |
+    | instr                       |
+    | intdiv                      |
+    | interval                    |
+    | is_free_lock                |
+    | is_ipv4                     |
+    | is_ipv4_compat              |
+    | is_ipv4_mapped              |
+    | is_ipv6                     |
+    | is_used_lock                |
+    | is_uuid                     |
+    | isfalse                     |
+    | isnull                      |
+    | istrue                      |
+    | json_array                  |
+    | json_array_append           |
+    | json_array_insert           |
+    | json_contains               |
+    | json_contains_path          |
+    | json_depth                  |
+    | json_extract                |
+    | json_insert                 |
+    | json_keys                   |
+    | json_length                 |
+    | json_memberof               |
+    | json_merge                  |
+    | json_merge_patch            |
+    | json_merge_preserve         |
+    | json_object                 |
+    | json_overlaps               |
+    | json_pretty                 |
+    | json_quote                  |
+    | json_remove                 |
+    | json_replace                |
+    | json_schema_valid           |
+    | json_search                 |
+    | json_set                    |
+    | json_storage_free           |
+    | json_storage_size           |
+    | json_type                   |
+    | json_unquote                |
+    | json_valid                  |
+    | last_day                    |
+    | last_insert_id              |
+    | lastval                     |
+    | lcase                       |
+    | le                          |
+    | least                       |
+    | left                        |
+    | leftshift                   |
+    | length                      |
+    | like                        |
+    | ln                          |
+    | load_file                   |
+    | localtime                   |
+    | localtimestamp              |
+    | locate                      |
+    | log                         |
+    | log10                       |
+    | log2                        |
+    | lower                       |
+    | lpad                        |
+    | lt                          |
+    | ltrim                       |
+    | make_set                    |
+    | makedate                    |
+    | maketime                    |
+    | master_pos_wait             |
+    | md5                         |
+    | microsecond                 |
+    | mid                         |
+    | minus                       |
+    | minute                      |
+    | mod                         |
+    | month                       |
+    | monthname                   |
+    | mul                         |
+    | name_const                  |
+    | ne                          |
+    | nextval                     |
+    | not                         |
+    | now                         |
+    | nulleq                      |
+    | oct                         |
+    | octet_length                |
+    | old_password                |
+    | or                          |
+    | ord                         |
+    | password_func               |
+    | period_add                  |
+    | period_diff                 |
+    | pi                          |
+    | plus                        |
+    | position                    |
+    | pow                         |
+    | power                       |
+    | quarter                     |
+    | quote                       |
+    | radians                     |
+    | rand                        |
+    | random_bytes                |
+    | regexp                      |
+    | regexp_instr                |
+    | regexp_like                 |
+    | regexp_replace              |
+    | regexp_substr               |
+    | release_all_locks           |
+    | release_lock                |
+    | repeat                      |
+    | replace                     |
+    | reverse                     |
+    | right                       |
+    | rightshift                  |
+    | round                       |
+    | row_count                   |
+    | rpad                        |
+    | rtrim                       |
+    | schema                      |
+    | sec_to_time                 |
+    | second                      |
+    | session_user                |
+    | setval                      |
+    | setvar                      |
+    | sha                         |
+    | sha1                        |
+    | sha2                        |
+    | sign                        |
+    | sin                         |
+    | sleep                       |
+    | sm3                         |
+    | space                       |
+    | sqrt                        |
+    | str_to_date                 |
+    | strcmp                      |
+    | subdate                     |
+    | substr                      |
+    | substring                   |
+    | substring_index             |
+    | subtime                     |
+    | sysdate                     |
+    | system_user                 |
+    | tan                         |
+    | tidb_bounded_staleness      |
+    | tidb_current_tso            |
+    | tidb_decode_binary_plan     |
+    | tidb_decode_key             |
+    | tidb_decode_plan            |
+    | tidb_decode_sql_digests     |
+    | tidb_encode_sql_digest      |
+    | tidb_is_ddl_owner           |
+    | tidb_parse_tso              |
+    | tidb_parse_tso_logical      |
+    | tidb_row_checksum           |
+    | tidb_shard                  |
+    | tidb_version                |
+    | time                        |
+    | time_format                 |
+    | time_to_sec                 |
+    | timediff                    |
+    | timestamp                   |
+    | timestampadd                |
+    | timestampdiff               |
+    | to_base64                   |
+    | to_days                     |
+    | to_seconds                  |
+    | translate                   |
+    | trim                        |
+    | truncate                    |
+    | ucase                       |
+    | unaryminus                  |
+    | uncompress                  |
+    | uncompressed_length         |
+    | unhex                       |
+    | unix_timestamp              |
+    | upper                       |
+    | user                        |
+    | utc_date                    |
+    | utc_time                    |
+    | utc_timestamp               |
+    | uuid                        |
+    | uuid_short                  |
+    | uuid_to_bin                 |
+    | validate_password_strength  |
+    | version                     |
+    | vitess_hash                 |
+    | week                        |
+    | weekday                     |
+    | weekofyear                  |
+    | weight_string               |
+    | xor                         |
+    | year                        |
+    | yearweek                    |
+    +-----------------------------+
+    292 rows in set (0.00 sec)
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。

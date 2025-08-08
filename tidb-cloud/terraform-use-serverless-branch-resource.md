@@ -1,66 +1,64 @@
 ---
-title: Use {{{ .starter }}} Branch Resource
-summary: Learn how to use the serverless branch resource to create and modify a {{{ .starter }}} branch.
+title: Use TiDB Cloud Serverless Branch Resource
+summary: サーバーレス ブランチ リソースを使用して、 TiDB Cloud Serverless ブランチを作成および変更する方法を学習します。
 ---
 
-# Use {{{ .starter }}} Branch Resource
+# TiDB Cloud Serverless Branchリソースを使用する {#use-tidb-cloud-serverless-branch-resource}
 
-This document describes how to manage a [{{{ .starter }}} branch](/tidb-cloud/branch-manage.md) using the `tidbcloud_serverless_branch` resource.
+このドキュメントでは、 `tidbcloud_serverless_branch`リソースを使用して[TiDB Cloudサーバーレス ブランチ](/tidb-cloud/branch-manage.md)管理する方法について説明します。
 
-The features of the `tidbcloud_serverless_branch` resource include the following:
+`tidbcloud_serverless_branch`リソースの機能は次のとおりです。
 
-- Create {{{ .starter }}} branches.
-- Import {{{ .starter }}} branches.
-- Delete {{{ .starter }}} branches.
+-   TiDB Cloud Serverless ブランチを作成します。
+-   TiDB Cloud Serverless ブランチをインポートします。
+-   TiDB Cloud Serverless ブランチを削除します。
 
-> **Note:**
+> **注記：**
 >
-> {{{ .starter }}} branch resource cannot be modified. If you want to change the configuration of a serverless branch resource, you need to delete the existing one and create a new one.
+> TiDB Cloud Serverlessブランチリソースは変更できません。Serverlessブランチリソースの設定を変更する場合は、既存のリソースを削除して新しいリソースを作成する必要があります。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
-- [Create a {{{ .starter }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+-   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
+-   [TiDB Cloud Serverless クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md) 。
 
-## Create a {{{ .starter }}} branch
+## TiDB Cloud Serverlessブランチを作成する {#create-a-tidb-cloud-serverless-branch}
 
-You can create a {{{ .starter }}} branch using the `tidbcloud_serverless_branch` resource.
+`tidbcloud_serverless_branch`リソースを使用して、 TiDB Cloud Serverless ブランチを作成できます。
 
-The following example shows how to create a {{{ .starter }}} branch.
+次の例は、TiDB Cloud Serverless ブランチを作成する方法を示しています。
 
-1. Create a directory for the branch and enter it.
+1.  ブランチ用のディレクトリを作成してそこに入ります。
 
-2. Create a `branch.tf` file:
+2.  `branch.tf`ファイルを作成します。
 
-    ```
-    terraform {
-      required_providers {
-        tidbcloud = {
-          source = "tidbcloud/tidbcloud"
+        terraform {
+          required_providers {
+            tidbcloud = {
+              source = "tidbcloud/tidbcloud"
+            }
+          }
         }
-      }
-    }
 
-    provider "tidbcloud" {
-      public_key = "your_public_key"
-      private_key = "your_private_key"
-    }
+        provider "tidbcloud" {
+          public_key = "your_public_key"
+          private_key = "your_private_key"
+        }
 
-    resource "tidbcloud_serverless_branch" "example" {
-      cluster_id   = 10581524018573000000
-      display_name = "example"
-      parent_id = 10581524018573000000
-    }
-    ```
+        resource "tidbcloud_serverless_branch" "example" {
+          cluster_id   = 10581524018573000000
+          display_name = "example"
+          parent_id = 10581524018573000000
+        }
 
-    Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
+    `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    - To use the serverless branch resource, set the resource type as `tidbcloud_serverless_branch`.
-    - For the resource name, you can define it as needed. For example, `example`.
-    - For the resource details, you can configure them according to the serverless branch specification information.
-    - To get the serverless branch specification information, see [tidbcloud_serverless_branch (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_branch).
+    -   サーバーレス ブランチ リソースを使用するには、リソース タイプを`tidbcloud_serverless_branch`に設定します。
+    -   リソース名は必要に応じて定義できます。例： `example` 。
+    -   リソースの詳細については、サーバーレス ブランチの仕様情報に従って設定できます。
+    -   サーバーレス ブランチの仕様情報を取得するには、 [tidbcloud_serverless_branch (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_branch)参照してください。
 
-3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
+3.  `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 
     ```shell
     $ terraform apply
@@ -96,13 +94,13 @@ The following example shows how to create a {{{ .starter }}} branch.
       Enter a value:
     ```
 
-    In the preceding result, Terraform generates an execution plan for you, which describes the actions that Terraform will take:
+    上記の結果では、Terraform によって実行されるアクションを記述した実行プランが生成されます。
 
-    - You can check the differences between the configurations and the states.
-    - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
-    - `known after apply` indicates that you will get the corresponding value after `apply`.
+    -   構成と状態の違いを確認できます。
+    -   `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
+    -   `known after apply` `apply`後の対応する値が取得されることを示します。
 
-4. If everything in your plan looks fine, type `yes` to continue:
+4.  計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
 
     ```shell
     Do you want to perform these actions?
@@ -118,7 +116,7 @@ The following example shows how to create a {{{ .starter }}} branch.
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-5. Use the `terraform show` or `terraform state show tidbcloud_serverless_branch.${resource-name}` command to inspect the state of your resource. The former command shows the states of all resources and data sources.
+5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_serverless_branch.${resource-name}`使用します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_serverless_branch.example 
@@ -158,38 +156,36 @@ The following example shows how to create a {{{ .starter }}} branch.
     }
     ```
 
-## Import a {{{ .starter }}} branch
+## TiDB Cloud Serverlessブランチをインポートする {#import-a-tidb-cloud-serverless-branch}
 
-For a {{{ .starter }}} branch that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+Terraform で管理されていないTiDB Cloud Serverless ブランチの場合は、インポートするだけで Terraform を使用して管理できます。
 
-Import a {{{ .starter }}} branch that is not created by Terraform as follows:
+次のように、Terraform によって作成されていないTiDB Cloud Serverless ブランチをインポートします。
 
-1. Add an import block for the new {{{ .starter }}} branch resource.
+1.  新しいTiDB Cloud Serverless ブランチ リソースのインポート ブロックを追加します。
 
-    Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,branch_id`:
+    次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` `cluster_id,branch_id`の形式に置き換えます。
 
+        import {
+          to = tidbcloud_serverless_branch.example
+          id = "${id}"
+        }
+
+2.  新しい構成ファイルを生成します。
+
+    インポート ブロックに従って、新しいTiDB Cloud Serverless ブランチ リソースの新しい構成ファイルを生成します。
+
+    ```shell
+    terraform plan -generate-config-out=generated.tf
     ```
-    import {
-      to = tidbcloud_serverless_branch.example
-      id = "${id}"
-    }
-    ```
 
-2. Generate the new configuration file.
+    上記のコマンドでは、既存の`.tf`名を指定しないでください。指定した場合、Terraform はエラーを返します。
 
-    Generate the new configuration file for the new {{{ .starter }}} branch resource according to the import block:
+3.  生成された構成を確認して適用します。
 
-      ```shell
-      terraform plan -generate-config-out=generated.tf
-      ```
+    生成された構成ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
 
-    Do not specify an existing `.tf` filename in the preceding command. Otherwise, Terraform will return an error.
-
-3. Review and apply the generated configuration.
-
-    Review the generated configuration file to ensure that it meets your needs. Optionally, you can move the contents of this file to your preferred location.
-
-    Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
+    次に、 `terraform apply`を実行してインフラストラクチャをインポートします。適用後の出力例は次のとおりです。
 
     ```shell
     tidbcloud_serverless_branch.example: Importing... 
@@ -198,11 +194,11 @@ Import a {{{ .starter }}} branch that is not created by Terraform as follows:
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
 
-Now you can manage the imported branch with Terraform.
+これで、インポートしたブランチを Terraform で管理できるようになりました。
 
-## Delete a {{{ .starter }}} branch
+## TiDB Cloud Serverlessブランチを削除する {#delete-a-tidb-cloud-serverless-branch}
 
-To delete a {{{ .starter }}} branch, you can delete the configuration of the `tidbcloud_serverless_branch` resource, then use the `terraform apply` command to destroy the resource:
+TiDB Cloud Serverless ブランチを削除するには、 `tidbcloud_serverless_branch`リソースの構成を削除してから、 `terraform apply`コマンドを使用してリソースを破棄します。
 
 ```shell
 $ terraform apply
@@ -263,8 +259,6 @@ tidbcloud_serverless_branch.example: Destruction complete after 1s
 Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
 ```
 
-Now, if you run the `terraform show` command, it will show no managed resources because the resource has been cleared:
+ここで、 `terraform show`コマンドを実行すると、リソースがクリアされているため、管理対象リソースは表示されません。
 
-```
-$ terraform show
-```
+    $ terraform show

@@ -1,95 +1,97 @@
 ---
 title: Configure Maintenance Window
-summary: Learn how to configure maintenance window for your cluster.
+summary: クラスターのメンテナンス ウィンドウを構成する方法を学習します。
 ---
 
-# Configure Maintenance Window
+# メンテナンスウィンドウの設定 {#configure-maintenance-window}
 
-A maintenance window is a designated timeframe during which planned maintenance tasks, such as operating system updates, security patches, and infrastructure upgrades, are performed automatically to ensure the reliability, security, and performance of the TiDB Cloud service.
+メンテナンス ウィンドウとは、 TiDB Cloudサービスの信頼性、セキュリティ、パフォーマンスを確保するために、オペレーティング システムの更新、セキュリティ パッチ、インフラストラクチャのアップグレードなどの計画されたメンテナンス タスクが自動的に実行される指定された期間です。
 
-During a maintenance window, the maintenance is executed on TiDB Cloud Dedicated clusters one by one so the overall impact is minimal. Although there might be temporary connection disruptions or QPS fluctuations, the clusters remain available, and the existing data import, backup, restore, migration, and replication tasks can still run normally.
+メンテナンス期間中は、 TiDB Cloud Dedicated クラスタに対して個別にメンテナンスが実行されるため、全体的な影響は最小限に抑えられます。一時的な接続中断や QPS の変動が発生する可能性はありますが、クラスタは引き続き利用可能であり、既存のデータインポート、バックアップ、リストア、移行、レプリケーションタスクは通常どおり実行できます。
 
-By configuring the maintenance window, you can easily schedule and manage maintenance tasks to minimize the maintenance impact. For example, you can set the start time of the maintenance window to avoid peak hours of your application workloads.
+メンテナンスウィンドウを設定することで、メンテナンスタスクのスケジュールと管理が容易になり、メンテナンスによる影響を最小限に抑えることができます。例えば、メンテナンスウィンドウの開始時刻を設定して、アプリケーションのワークロードのピーク時間帯を避けることができます。
 
-> **Note:**
+> **注記：**
 >
-> The maintenance window feature is only available for [TiDB Cloud Dedicated clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+> メンテナンス ウィンドウ機能は[TiDB Cloud専用クラスター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)のみで使用できます。
 
-## Allowed and disallowed operations during a maintenance window
+## メンテナンス期間中に許可される操作と許可されない操作 {#allowed-and-disallowed-operations-during-a-maintenance-window}
 
-During a maintenance window, some operations are allowed, while some are not.
+メンテナンス期間中は、一部の操作は許可されますが、一部の操作は許可されません。
 
-- Allowed operations:
+-   許可される操作:
 
-    - SQL operations
-    - Create clusters
-    - Delete clusters
-    - Create backup tasks
-    - Restore clusters
-    - Access cluster pages
+    -   SQL操作
+    -   クラスターを作成する
+    -   クラスターを削除する
+    -   バックアップタスクを作成する
+    -   クラスターを復元する
+    -   クラスターページにアクセスする
 
-- Disallowed operations:
+-   許可されない操作:
 
-    - Modify, pause, or resume clusters
-    - Change security settings in the TiDB Cloud console
-    - Create private links or configure VPC peering
-    - Create import tasks, migration jobs, or changefeeds
-    - Scale specifications of migration jobs or changefeeds
+    -   クラスターを変更、一時停止、または再開する
+    -   TiDB Cloudコンソールでセキュリティ設定を変更する
+    -   プライベートリンクを作成するか、VPCピアリングを構成する
+    -   インポートタスク、移行ジョブ、または変更フィードを作成する
+    -   移行ジョブまたは変更フィードのスケール仕様
 
-## Get notifications for maintenance windows
+## メンテナンスウィンドウの通知を受け取る {#get-notifications-for-maintenance-windows}
 
-To avoid potential disruptions, it is important to be aware of the maintenance schedules and plan your operations accordingly.
+潜在的な混乱を避けるためには、メンテナンス スケジュールを把握し、それに応じて操作を計画することが重要です。
 
-For every maintenance window, TiDB Cloud sends four email notifications to all project members at the following time points:
+メンテナンス ウィンドウごとに、 TiDB Cloud は次の時点ですべてのプロジェクト メンバーに 4 つの電子メール通知を送信します。
 
-- Two weeks before a maintenance window starts (excluding urgent maintenance tasks)
-- 72 hours before a maintenance window starts
-- The time when a maintenance window is started
-- The time when a maintenance window is completed
+-   メンテナンス期間の開始2週間前（緊急メンテナンスタスクを除く）
+-   メンテナンスウィンドウが開始する72時間前
+-   メンテナンスウィンドウが開始される時間
+-   メンテナンスウィンドウが完了した時間
 
-## View and configure maintenance windows
+## メンテナンスウィンドウのビューと構成 {#view-and-configure-maintenance-windows}
 
-Regular maintenance ensures that essential updates are performed to safeguard TiDB Cloud from security threats, performance issues, and unreliability. Therefore, the maintenance window is enabled by default and cannot be disabled.
+定期的なメンテナンスにより、 TiDB Cloud をセキュリティ脅威、パフォーマンス問題、信頼性の低下から保護するための重要なアップデートが確実に実行されます。そのため、メンテナンスウィンドウはデフォルトで有効になっており、無効にすることはできません。
 
-> **Note:**
+> **注記：**
 >
-> - For the default project automatically created when you first sign up for TiDB Cloud, the maintenance window starts at 03:00 AM every Wednesday (based on the time zone of your TiDB Cloud organization).
-> - For new projects that you create, you can set a custom start time for the maintenance window during project setup.
+> -   TiDB Cloudに初めてサインアップしたときに自動的に作成されるデフォルトのプロジェクトの場合、メンテナンス ウィンドウは毎週水曜日の午前 3 時に開始されます ( TiDB Cloud組織のタイム ゾーンに基づきます)。
+> -   新しく作成するプロジェクトでは、プロジェクトのセットアップ時にメンテナンス ウィンドウのカスタム開始時刻を設定できます。
 
-You can modify the start time to your preferred time or reschedule maintenance tasks until the deadline as follows:
+次のように、開始時刻を希望の時間に変更したり、期限までメンテナンス タスクを再スケジュールしたりできます。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Project Settings** > **Maintenance**.
-3. On the **Maintenance** page, check the maintenance information.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用してターゲット プロジェクトに切り替えます。
 
-     - If any maintenance tasks are displayed, check the descriptions, scheduled start time, and deadline. The maintenance tasks will start at the designated time.
+2.  左側のナビゲーション ペインで、 **[プロジェクト設定]** &gt; **[メンテナンス]**をクリックします。
 
-     - If there is no maintenance data, it means no maintenance task is scheduled recently.
+3.  **「メンテナンス」**ページでメンテナンス情報を確認します。
 
-4. (Optional) Click **Maintenance Window Setting** to modify the start time of the maintenance window. Note that the maintenance will be performed at the specified start time only if there is a maintenance window planned for that week.
+    -   メンテナンスタスクが表示されている場合は、説明、開始予定時刻、期限を確認してください。メンテナンスタスクは指定された時間に開始されます。
 
-5. To reschedule a specific maintenance task, click **...** > **Reschedule** in the **Action** column, and choose a new time before the deadline.
+    -   メンテナンス データがない場合、最近メンテナンス タスクがスケジュールされていないことを意味します。
 
-    If you need to reschedule the maintenance task beyond the deadline, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md#tidb-cloud-support) for assistance.
+4.  （オプション）**メンテナンスウィンドウの開始時刻を変更するには、「メンテナンスウィンドウ設定」を**クリックします。メンテナンスは、その週にメンテナンスウィンドウが予定されている場合にのみ、指定された開始時刻に実行されます。
 
-## FAQs
+5.  特定のメンテナンス タスクのスケジュールを変更するには、 **[アクション**] 列の**[...** ] &gt; **[スケジュール変更]**をクリックし、期限前の新しい時刻を選択します。
 
-- What are maintenance tasks?
+    期限を過ぎてメンテナンス タスクのスケジュールを変更する必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md#tidb-cloud-support)連絡してサポートを受けてください。
 
-    Maintenance tasks typically include operating system updates, security patches, and infrastructure upgrades.
+## よくある質問 {#faqs}
 
-- Can I disable a maintenance window?
+-   メンテナンスタスクとは何ですか?
 
-    No. The maintenance window is enabled by default and cannot be disabled. You can modify the start time of the maintenance window or reschedule a maintenance task until the deadline. For more information, see [View and configure maintenance windows](#view-and-configure-maintenance-windows).
+    メンテナンス タスクには通常、オペレーティング システムの更新、セキュリティ パッチ、インフラストラクチャのアップグレードが含まれます。
 
-- How long does a maintenance window last?
+-   メンテナンスウィンドウを無効にすることはできますか?
 
-    It depends. For each project, maintenance is executed on eligible TiDB clusters one by one. The duration of maintenance varies depending on the number of clusters, cluster data size, and the maintenance tasks to be performed.
+    いいえ。メンテナンスウィンドウはデフォルトで有効になっており、無効にすることはできません。メンテナンスウィンドウの開始時刻を変更したり、メンテナンスタスクを期限まで再スケジュールしたりすることは可能です。詳細については、 [メンテナンスウィンドウのビューと構成](#view-and-configure-maintenance-windows)ご覧ください。
 
-- Will maintenance tasks be performed on clusters in any status?
+-   メンテナンスウィンドウはどのくらい続きますか?
 
-    No. TiDB Cloud checks the cluster status before performing a maintenance task on a cluster.
+    状況によります。各プロジェクトごとに、対象となるTiDBクラスタに対してメンテナンスが1つずつ実行されます。メンテナンスの所要時間は、クラスタの数、クラスタデータのサイズ、および実行するメンテナンスタスクによって異なります。
 
-    - If the cluster is in the **Creating** or **Paused** status, maintenance tasks are not required.
-    - If the cluster is running an automatic or manual backup, the maintenance will be delayed and triggered until the current backup is successfully completed. Note that for clusters with large data volumes, the backup process might take a long time, such as 12 hours. To minimize the impact on the clusters, it is recommended to carefully set the start time for backups and the maintenance window.
-    - If the cluster is in any other status, the maintenance tasks will start as scheduled.
+-   メンテナンス タスクはどのステータスのクラスターでも実行されますか?
+
+    いいえ。TiDB TiDB Cloud は、クラスターでメンテナンス タスクを実行する前にクラスターのステータスを確認します。
+
+    -   クラスターが**作成**中または**一時停止中の**ステータスの場合、メンテナンス タスクは必要ありません。
+    -   クラスターが自動または手動バックアップを実行している場合、メンテナンスは現在のバックアップが正常に完了するまで延期され、実行されます。データ量が多いクラスターの場合、バックアッププロセスに12時間など長時間かかる場合がありますのでご注意ください。クラスターへの影響を最小限に抑えるため、バックアップの開始時間とメンテナンスウィンドウを慎重に設定することをお勧めします。
+    -   クラスターが他のステータスにある場合、メンテナンス タスクはスケジュールどおりに開始されます。

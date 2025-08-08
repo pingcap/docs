@@ -1,231 +1,203 @@
 ---
 title: Developer Guide Overview
-summary: Introduce the overview of the developer guide for TiDB Cloud and TiDB Self-Managed.
+summary: TiDB Cloudおよび TiDB Self-Managed の開発者ガイドの概要を紹介します。
 ---
 
-# Developer Guide Overview
+# 開発者ガイドの概要 {#developer-guide-overview}
 
 <CustomContent platform="tidb-cloud">
 
-<IntroHero title="Learn TiDB Cloud basics" content="TiDB Cloud is the fully-managed service built on top of TiDB, which is highly compatible with the MySQL protocol and supports most MySQL syntax and features." videoTitle="TiDB Cloud in 3 minutes">
-  <IntroHeroVideo src="https://www.youtube.com/embed/skCV9BEmjbo?autoplay=1" title="TiDB Cloud in 3 minutes" />
-</IntroHero>
+<IntroHero title="TiDB Cloudの基礎を学ぶ" content="TiDB Cloud is the fully-managed service built on top of TiDB, which is highly compatible with the MySQL protocol and supports most MySQL syntax and features." videoTitle="TiDB Cloud in 3 minutes"><IntroHeroVideo src="https://www.youtube.com/embed/skCV9BEmjbo?autoplay=1" title="3分でわかるTiDBクラウド" /></IntroHero>
 
-## Guides by language and framework
+## 言語とフレームワーク別のガイド {#guides-by-language-and-framework}
 
-Build your application with the language you use by following the guides with sample codes.
+サンプル コード付きのガイドに従って、使用する言語でアプリケーションを構築します。
 
-<DevLangAccordion label="JavaScript" defaultExpanded>
-<DevToolCard title="Serverless Driver (beta)" logo="tidb" docLink="/tidbcloud/serverless-driver" githubLink="https://github.com/tidbcloud/serverless-js">
+<DevLangAccordion label="JavaScript" defaultExpanded><DevToolCard title="サーバーレスドライバー（ベータ版）" logo="tidb" docLink="/tidbcloud/serverless-driver" githubLink="https://github.com/tidbcloud/serverless-js">
 
-Connect to TiDB Cloud over HTTPS from edge environments.
+エッジ環境から HTTPS 経由でTiDB Cloudに接続します。
 
-</DevToolCard>
-<DevToolCard title="Next.js" logo="nextjs" docLink="/tidbcloud/dev-guide-sample-application-nextjs" githubLink="https://github.com/vercel/next.js">
+</DevToolCard><DevToolCard title="ネクスト.js" logo="nextjs" docLink="/tidbcloud/dev-guide-sample-application-nextjs" githubLink="https://github.com/vercel/next.js">
 
-Connect Next.js with mysql2 to TiDB Cloud.
+mysql2 を含む Next.js をTiDB Cloudに接続します。
 
-</DevToolCard>
-<DevToolCard title="Prisma" logo="prisma" docLink="/tidbcloud/dev-guide-sample-application-nodejs-prisma" githubLink="https://github.com/prisma/prisma">
+</DevToolCard><DevToolCard title="プリズマ" logo="prisma" docLink="/tidbcloud/dev-guide-sample-application-nodejs-prisma" githubLink="https://github.com/prisma/prisma">
 
-Connect to TiDB Cloud with Prisma ORM.
+Prisma ORM を使用してTiDB Cloudに接続します。
 
-</DevToolCard>
-<DevToolCard title="TypeORM" logo="typeorm" docLink="/tidbcloud/dev-guide-sample-application-nodejs-typeorm" githubLink="https://github.com/typeorm/typeorm">
+</DevToolCard><DevToolCard title="タイプORM" logo="typeorm" docLink="/tidbcloud/dev-guide-sample-application-nodejs-typeorm" githubLink="https://github.com/typeorm/typeorm">
 
-Connect to TiDB Cloud with TypeORM.
+TypeORM を使用してTiDB Cloudに接続します。
 
-</DevToolCard>
-<DevToolCard title="Sequelize" logo="sequelize" docLink="/tidbcloud/dev-guide-sample-application-nodejs-sequelize" githubLink="https://github.com/sequelize/sequelize">
+</DevToolCard><DevToolCard title="続編" logo="sequelize" docLink="/tidbcloud/dev-guide-sample-application-nodejs-sequelize" githubLink="https://github.com/sequelize/sequelize">
 
-Connect to TiDB Cloud with Sequelize ORM.
+Sequelize ORM を使用してTiDB Cloudに接続します。
 
-</DevToolCard>
-<DevToolCard title="mysql.js" logo="mysql" docLink="/tidbcloud/dev-guide-sample-application-nodejs-mysqljs" githubLink="https://github.com/mysqljs/mysql">
+</DevToolCard><DevToolCard title="mysql.js" logo="mysql" docLink="/tidbcloud/dev-guide-sample-application-nodejs-mysqljs" githubLink="https://github.com/mysqljs/mysql">
 
-Connect Node.js with mysql.js module to TiDB Cloud.
+mysql.js モジュールを含む Node.js をTiDB Cloudに接続します。
 
-</DevToolCard>
-<DevToolCard title="node-mysql2" logo="mysql" docLink="/tidbcloud/dev-guide-sample-application-nodejs-mysql2" githubLink="https://github.com/sidorares/node-mysql2">
+</DevToolCard><DevToolCard title="ノード-mysql2" logo="mysql" docLink="/tidbcloud/dev-guide-sample-application-nodejs-mysql2" githubLink="https://github.com/sidorares/node-mysql2">
 
-Connect Node.js with node-mysql2 module to TiDB Cloud.
+node-mysql2 モジュールを含む Node.js をTiDB Cloudに接続します。
 
-</DevToolCard>
-<DevToolCard title="AWS Lambda" logo="aws-lambda" docLink="/tidbcloud/dev-guide-sample-application-aws-lambda" githubLink="https://github.com/sidorares/node-mysql2">
+</DevToolCard><DevToolCard title="AWS ラムダ" logo="aws-lambda" docLink="/tidbcloud/dev-guide-sample-application-aws-lambda" githubLink="https://github.com/sidorares/node-mysql2">
 
-Connect AWS Lambda Function with mysql2 to TiDB Cloud.
+mysql2 を含む AWS Lambda 関数をTiDB Cloudに接続します。
 
 </DevToolCard>
 </DevLangAccordion>
 
-<DevLangAccordion label="Python" defaultExpanded>
-<DevToolCard title="Django" logo="django" docLink="/tidbcloud/dev-guide-sample-application-python-django" githubLink="https://github.com/pingcap/django-tidb">
+<DevLangAccordion label="Python" defaultExpanded><DevToolCard title="ジャンゴ" logo="django" docLink="/tidbcloud/dev-guide-sample-application-python-django" githubLink="https://github.com/pingcap/django-tidb">
 
-Connect Django application with django-tidb to TiDB Cloud.
+django-tidb を使用して Django アプリケーションをTiDB Cloudに接続します。
 
-</DevToolCard>
-<DevToolCard title="MySQL Connector/Python" logo="python" docLink="/tidbcloud/dev-guide-sample-application-python-mysql-connector" githubLink="https://github.com/mysql/mysql-connector-python">
+</DevToolCard><DevToolCard title="MySQL コネクタ/Python" logo="python" docLink="/tidbcloud/dev-guide-sample-application-python-mysql-connector" githubLink="https://github.com/mysql/mysql-connector-python">
 
-Connect to TiDB Cloud with the official MySQL package.
+公式 MySQL パッケージを使用してTiDB Cloudに接続します。
 
-</DevToolCard>
-<DevToolCard title="PyMySQL" logo="python" docLink="/tidbcloud/dev-guide-sample-application-python-pymysql" githubLink="https://github.com/PyMySQL/PyMySQL">
+</DevToolCard><DevToolCard title="パイMySQL" logo="python" docLink="/tidbcloud/dev-guide-sample-application-python-pymysql" githubLink="https://github.com/PyMySQL/PyMySQL">
 
-Connect to TiDB Cloud with PyMySQL package.
+PyMySQL パッケージを使用してTiDB Cloudに接続します。
 
-</DevToolCard>
-<DevToolCard title="mysqlclient" logo="python" docLink="/tidbcloud/dev-guide-sample-application-python-mysqlclient" githubLink="https://github.com/PyMySQL/mysqlclient">
+</DevToolCard><DevToolCard title="mysqlクライアント" logo="python" docLink="/tidbcloud/dev-guide-sample-application-python-mysqlclient" githubLink="https://github.com/PyMySQL/mysqlclient">
 
-Connect to TiDB Cloud with mysqlclient package.
+mysqlclient パッケージを使用してTiDB Cloudに接続します。
 
-</DevToolCard>
-<DevToolCard title="SQLAlchemy" logo="sqlalchemy" docLink="/tidbcloud/dev-guide-sample-application-python-sqlalchemy" githubLink="https://github.com/sqlalchemy/sqlalchemy">
+</DevToolCard><DevToolCard title="SQLアルケミー" logo="sqlalchemy" docLink="/tidbcloud/dev-guide-sample-application-python-sqlalchemy" githubLink="https://github.com/sqlalchemy/sqlalchemy">
 
-Connect to TiDB Cloud with SQLAlchemy ORM.
+SQLAlchemy ORM を使用してTiDB Cloudに接続します。
 
-</DevToolCard>
-<DevToolCard title="peewee" logo="peewee" docLink="/tidbcloud/dev-guide-sample-application-python-peewee" githubLink="https://github.com/coleifer/peewee">
+</DevToolCard><DevToolCard title="ピーウィー" logo="peewee" docLink="/tidbcloud/dev-guide-sample-application-python-peewee" githubLink="https://github.com/coleifer/peewee">
 
-Connect to TiDB Cloud with Peewee ORM.
+Peewee ORM を使用してTiDB Cloudに接続します。
 
 </DevToolCard>
 </DevLangAccordion>
 
-<DevLangAccordion label="Java">
-<DevToolCard title="JDBC" logo="java" docLink="/tidbcloud/dev-guide-sample-application-java-jdbc" githubLink="https://github.com/mysql/mysql-connector-j">
+<DevLangAccordion label="Java"><DevToolCard title="JDBC" logo="java" docLink="/tidbcloud/dev-guide-sample-application-java-jdbc" githubLink="https://github.com/mysql/mysql-connector-j">
 
-Connect to TiDB Cloud with JDBC (MySQL Connector/J).
+JDBC (MySQL Connector/J) を使用してTiDB Cloudに接続します。
 
-</DevToolCard>
-<DevToolCard title="MyBatis" logo="mybatis" docLink="/tidbcloud/dev-guide-sample-application-java-mybatis" githubLink="https://github.com/mybatis/mybatis-3">
+</DevToolCard><DevToolCard title="マイバティス" logo="mybatis" docLink="/tidbcloud/dev-guide-sample-application-java-mybatis" githubLink="https://github.com/mybatis/mybatis-3">
 
-Connect to TiDB Cloud with MyBatis ORM.
+MyBatis ORM を使用してTiDB Cloudに接続します。
 
-</DevToolCard>
-<DevToolCard title="Hibernate" logo="hibernate" docLink="/tidbcloud/dev-guide-sample-application-java-hibernate" githubLink="https://github.com/hibernate/hibernate-orm">
+</DevToolCard><DevToolCard title="休止状態" logo="hibernate" docLink="/tidbcloud/dev-guide-sample-application-java-hibernate" githubLink="https://github.com/hibernate/hibernate-orm">
 
-Connect to TiDB Cloud with Hibernate ORM.
+Hibernate ORM を使用してTiDB Cloudに接続します。
 
-</DevToolCard>
-<DevToolCard title="Spring Boot" logo="spring" docLink="/tidbcloud/dev-guide-sample-application-java-spring-boot" githubLink="https://github.com/spring-projects/spring-data-jpa">
+</DevToolCard><DevToolCard title="スプリングブート" logo="spring" docLink="/tidbcloud/dev-guide-sample-application-java-spring-boot" githubLink="https://github.com/spring-projects/spring-data-jpa">
 
-Connect Spring based application with Spring Data JPA to TiDB Cloud.
+Spring Data JPA を使用した Spring ベースのアプリケーションをTiDB Cloudに接続します。
 
 </DevToolCard>
 </DevLangAccordion>
 
-<DevLangAccordion label="Go">
-<DevToolCard title="Go-MySQL-Driver" logo="go" docLink="/tidbcloud/dev-guide-sample-application-golang-sql-driver" githubLink="https://github.com/go-sql-driver/mysql">
+<DevLangAccordion label="Go"><DevToolCard title="Go-MySQL-ドライバー" logo="go" docLink="/tidbcloud/dev-guide-sample-application-golang-sql-driver" githubLink="https://github.com/go-sql-driver/mysql">
 
-Connect to TiDB Cloud with MySQL driver for Go.
+Go 用の MySQL ドライバーを使用してTiDB Cloudに接続します。
 
-</DevToolCard>
-<DevToolCard title="GORM" logo="gorm" docLink="/tidbcloud/dev-guide-sample-application-golang-gorm" githubLink="https://github.com/go-gorm/gorm">
+</DevToolCard><DevToolCard title="ゴーム" logo="gorm" docLink="/tidbcloud/dev-guide-sample-application-golang-gorm" githubLink="https://github.com/go-gorm/gorm">
 
-Connect to TiDB Cloud with GORM.
+GORM を使用してTiDB Cloudに接続します。
 
 </DevToolCard>
 </DevLangAccordion>
 
-<DevLangAccordion label="Ruby">
-<DevToolCard title="Ruby on Rails" logo="rails" docLink="/tidbcloud/dev-guide-sample-application-ruby-rails" githubLink="https://github.com/rails/rails/tree/main/activerecord">
+<DevLangAccordion label="Ruby"><DevToolCard title="ルビーオンレール" logo="rails" docLink="/tidbcloud/dev-guide-sample-application-ruby-rails" githubLink="https://github.com/rails/rails/tree/main/activerecord">
 
-Connect Ruby on Rails application with Active Record ORM to TiDB Cloud.
+Active Record ORM を備えた Ruby on Rails アプリケーションをTiDB Cloudに接続します。
 
-</DevToolCard>
-<DevToolCard title="mysql2" logo="ruby" docLink="/tidbcloud/dev-guide-sample-application-ruby-mysql2" githubLink="https://github.com/brianmario/mysql2">
+</DevToolCard><DevToolCard title="MySQL2" logo="ruby" docLink="/tidbcloud/dev-guide-sample-application-ruby-mysql2" githubLink="https://github.com/brianmario/mysql2">
 
-Connect to TiDB Cloud with mysql2 driver.
+mysql2 ドライバーを使用してTiDB Cloudに接続します。
 
 </DevToolCard>
 </DevLangAccordion>
 
-In addition to these guides, PingCAP works with the community to support [third-party MySQL drivers, ORMs, and tools](/develop/dev-guide-third-party-support.md).
+これらのガイドに加えて、PingCAP はコミュニティと協力して[サードパーティのMySQLドライバ、ORM、ツール](/develop/dev-guide-third-party-support.md)サポートします。
 
-## Use MySQL client software
+## MySQLクライアントソフトウェアを使用する {#use-mysql-client-software}
 
-As TiDB is a MySQL-compatible database, you can use many familiar client software tools to connect to TiDB Cloud and manage your databases. Or, you can use our <a href="/tidbcloud/get-started-with-cli">command line tool</a> to connect and manage your databases.
+TiDBはMySQL互換データベースであるため、多くの使い慣れたクライアントソフトウェアツールを使用してTiDB Cloudに接続し、データベースを管理できます。また、<a href="/tidbcloud/get-started-with-cli">コマンドラインツール</a>を使用してデータベースに接続し、管理することもできます。
 
-<DevToolGroup>
-<DevToolCard title="MySQL Workbench" logo="mysql-1" docLink="/tidbcloud/dev-guide-gui-mysql-workbench">
+<DevToolGroup><DevToolCard title="MySQLワークベンチ" logo="mysql-1" docLink="/tidbcloud/dev-guide-gui-mysql-workbench">
 
-Connect and manage TiDB Cloud databases with MySQL Workbench.
+MySQL Workbench を使用してTiDB Cloudデータベースに接続し、管理します。
 
-</DevToolCard>
-<DevToolCard title="Visual Studio Code" logo="vscode" docLink="/tidbcloud/dev-guide-gui-vscode-sqltools">
+</DevToolCard><DevToolCard title="ビジュアルスタジオコード" logo="vscode" docLink="/tidbcloud/dev-guide-gui-vscode-sqltools">
 
-Connect and manage TiDB Cloud databases with the SQLTools extension in VS Code.
+VS Code の SQLTools 拡張機能を使用して、 TiDB Cloudデータベースに接続および管理します。
 
-</DevToolCard>
-<DevToolCard title="DBeaver" logo="dbeaver" docLink="/tidbcloud/dev-guide-gui-dbeaver">
+</DevToolCard><DevToolCard title="DBeaver" logo="dbeaver" docLink="/tidbcloud/dev-guide-gui-dbeaver">
 
-Connect and manage TiDB Cloud databases with DBeaver.
+DBeaver を使用してTiDB Cloudデータベースに接続し、管理します。
 
-</DevToolCard>
-<DevToolCard title="DataGrip" logo="datagrip" docLink="/tidbcloud/dev-guide-gui-datagrip">
+</DevToolCard><DevToolCard title="データグリップ" logo="datagrip" docLink="/tidbcloud/dev-guide-gui-datagrip">
 
-Connect and manage TiDB Cloud databases with DataGrip by JetBrains.
+JetBrains の DataGrip を使用してTiDB Cloudデータベースに接続し、管理します。
 
 </DevToolCard>
 </DevToolGroup>
 
-## Additional resources
+## 追加リソース {#additional-resources}
 
-Learn other topics about developing with TiDB Cloud.
+TiDB Cloudを使用した開発に関するその他のトピックを学習します。
 
-- Use <a href="/tidbcloud/get-started-with-cli">TiDB Cloud CLI</a> to develop, manage and deploy your applications.
-- Explore popular <a href="/tidbcloud/integrate-tidbcloud-with-airbyte">service integrations</a> with TiDB Cloud.
-- Follow [TiDB database development reference](/develop/dev-guide-schema-design-overview.md) to design, interact with, optimize, and troubleshoot your data and schema.
-- Follow the free online course [Introduction to TiDB](https://eng.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide).
+-   <a href="/tidbcloud/get-started-with-cli">TiDB Cloud CLI を</a>使用して、アプリケーションを開発、管理、デプロイします。
+-   TiDB Cloudとの人気の<a href="/tidbcloud/integrate-tidbcloud-with-airbyte">サービス統合</a>をご覧ください。
+-   [TiDB データベース開発リファレンス](/develop/dev-guide-schema-design-overview.md)に従って、データとスキーマを設計、操作、最適化、およびトラブルシューティングします。
+-   無料のオンラインコース[TiDBの紹介](https://eng.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide)を受講してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb">
 
-This guide is written for application developers, but if you are interested in the inner workings of TiDB or want to get involved in TiDB development, read the [TiDB Kernel Development Guide](https://pingcap.github.io/tidb-dev-guide/) for more information about TiDB.
+このガイドはアプリケーション開発者向けに書かれていますが、TiDB の内部動作に興味がある場合や、TiDB 開発に関与したい場合は、TiDB の詳細情報については[TiDB カーネル開発ガイド](https://pingcap.github.io/tidb-dev-guide/)お読みください。
 
-This tutorial shows how to quickly build an application using TiDB, the possible use cases of TiDB and how to handle common problems.
+このチュートリアルでは、TiDB を使用してアプリケーションを迅速に構築する方法、TiDB の考えられる使用例、および一般的な問題の処理方法を説明します。
 
-Before reading this page, it is recommended that you read the [Quick Start with TiDB Self-Managed](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb/).
+このページを読む前に、 [TiDBセルフマネージドのクイックスタート](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb/)読むことをお勧めします。
 
-## TiDB basics
+## TiDBの基礎 {#tidb-basics}
 
-Before you start working with TiDB, you need to understand some important mechanisms of how TiDB works:
+TiDB を使い始める前に、TiDB がどのように動作するかの重要なメカニズムをいくつか理解する必要があります。
 
-- Read the [TiDB Transaction Overview](/transaction-overview.md) to understand how transactions work in TiDB, or check out the [Transaction Notes for Application Developers](/develop/dev-guide-transaction-overview.md) to learn about transaction knowledge required for application development.
-- Understand [the way applications interact with TiDB](#the-way-applications-interact-with-tidb).
-- To learn core components and concepts of building up the distributed database TiDB and TiDB Cloud, refer to the free online course [Introduction to TiDB](https://eng.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide).
+-   TiDB でのトランザクションの仕組みを理解するには[TiDBトランザクションの概要](/transaction-overview.md) 、アプリケーション開発に必要なトランザクションの知識については[アプリケーション開発者向けトランザクションノート](/develop/dev-guide-transaction-overview.md)をお読みください。
+-   [アプリケーションがTiDBと対話する方法](#the-way-applications-interact-with-tidb)理解する。
+-   分散データベース TiDB およびTiDB Cloudを構築するためのコア コンポーネントと概念を学習するには、無料のオンライン コース[TiDBの紹介](https://eng.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide)を参照してください。
 
-## TiDB transaction mechanisms
+## TiDBトランザクションメカニズム {#tidb-transaction-mechanisms}
 
-TiDB supports distributed transactions and offers both [optimistic transaction](/optimistic-transaction.md) and [pessimistic transaction](/pessimistic-transaction.md) modes. The current version of TiDB uses the **pessimistic transaction** mode by default, which allows you to transact with TiDB as you would with a traditional monolithic database (for example, MySQL).
+TiDBは分散トランザクションをサポートし、モード[楽観的取引](/optimistic-transaction.md)とモード[悲観的取引](/pessimistic-transaction.md)両方を提供します。現在のバージョンのTiDBでは、デフォルトで**悲観的トランザクション**モードが採用されており、従来のモノリシックデータベース（MySQLなど）と同様にTiDBでトランザクションを実行できます。
 
-You can start a transaction using [`BEGIN`](/sql-statements/sql-statement-begin.md), explicitly specify a **pessimistic transaction** using `BEGIN PESSIMISTIC`, or explicitly specify an **optimistic transaction** using `BEGIN OPTIMISTIC`. After that, you can either commit ([`COMMIT`](/sql-statements/sql-statement-commit.md)) or roll back ([`ROLLBACK`](/sql-statements/sql-statement-rollback.md)) the transaction.
+[`BEGIN`](/sql-statements/sql-statement-begin.md)でトランザクションを開始するか、 `BEGIN PESSIMISTIC`で**悲観的トランザクション**を明示的に指定するか、 `BEGIN OPTIMISTIC`で**楽観的トランザクション**を明示的に指定することができます。その後、トランザクションをコミット（ [`COMMIT`](/sql-statements/sql-statement-commit.md) ）するか、ロールバック（ [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) ）するかを選択できます。
 
-TiDB guarantees atomicity for all statements between the start of `BEGIN` and the end of `COMMIT` or `ROLLBACK`, that is, all statements that are executed during this period either succeed or fail as a whole. This is used to ensure data consistency you need for application development.
+TiDBは、 `BEGIN`の開始から`COMMIT`または`ROLLBACK`の終了までのすべてのステートメントのアトミック性を保証します。つまり、この期間中に実行されるすべてのステートメントは、全体として成功するか失敗するかのいずれかになります。これは、アプリケーション開発に必要なデータの一貫性を確保するために使用されます。
 
-If you are not sure what an **optimistic transaction** is, do **_NOT_** use it yet. Because **optimistic transactions** require that the application can correctly handle [all errors](https://docs.pingcap.com/tidb/v8.5/error-codes/) returned by the `COMMIT` statement. If you are not sure how your application handles them, use a **pessimistic transaction** instead.
+**楽観的トランザクション**が何なのかわからない場合は、まだ使用し***ないで***ください。**楽観的トランザクション**では、アプリケーションが`COMMIT`文によって返される[すべてのエラー](https://docs.pingcap.com/tidb/v8.5/error-codes/)正しく処理できることが条件となるためです。アプリケーションがどのように処理するかわからない場合は、代わりに**悲観的トランザクション**を使用してください。
 
-## The way applications interact with TiDB
+## アプリケーションがTiDBと対話する方法 {#the-way-applications-interact-with-tidb}
 
-TiDB is highly compatible with the MySQL protocol and supports [most MySQL syntax and features](/mysql-compatibility.md), so most MySQL connection libraries are compatible with TiDB. If your application framework or language does not have an official adaptation from PingCAP, it is recommended that you use MySQL's client libraries. More and more third-party libraries are actively supporting TiDB's different features.
+TiDBはMySQLプロトコルとの互換性が高く、 [ほとんどのMySQL構文と機能](/mysql-compatibility.md)サポートしているため、ほとんどのMySQL接続ライブラリはTiDBと互換性があります。アプリケーションフレームワークまたは言語にPingCAPからの公式な対応がない場合は、MySQLのクライアントライブラリを使用することをお勧めします。ますます多くのサードパーティ製ライブラリがTiDBのさまざまな機能を積極的にサポートしています。
 
-Since TiDB is compatible with the MySQL protocol and MySQL syntax, most of the ORMs that support MySQL are also compatible with TiDB.
+TiDB は MySQL プロトコルおよび MySQL 構文と互換性があるため、MySQL をサポートするほとんどの ORM も TiDB と互換性があります。
 
-## Read more
+## 続きを読む {#read-more}
 
-- [Quick Start](/develop/dev-guide-build-cluster-in-cloud.md)
-- [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
-- [Connect to TiDB](https://docs.pingcap.com/tidb/v8.5/dev-guide-connect-to-tidb/)
-- [Database Schema Design](/develop/dev-guide-schema-design-overview.md)
-- [Write Data](/develop/dev-guide-insert-data.md)
-- [Read Data](/develop/dev-guide-get-data-from-single-table.md)
-- [Transaction](/develop/dev-guide-transaction-overview.md)
-- [Optimize](/develop/dev-guide-optimize-sql-overview.md)
-- [Example Applications](/develop/dev-guide-sample-application-java-spring-boot.md)
+-   [クイックスタート](/develop/dev-guide-build-cluster-in-cloud.md)
+-   [DriverまたはORMを選択](/develop/dev-guide-choose-driver-or-orm.md)
+-   [TiDBに接続する](https://docs.pingcap.com/tidb/v8.5/dev-guide-connect-to-tidb/)
+-   [データベーススキーマ設計](/develop/dev-guide-schema-design-overview.md)
+-   [データの書き込み](/develop/dev-guide-insert-data.md)
+-   [データの読み取り](/develop/dev-guide-get-data-from-single-table.md)
+-   [トランザクション](/develop/dev-guide-transaction-overview.md)
+-   [最適化する](/develop/dev-guide-optimize-sql-overview.md)
+-   [アプリケーション例](/develop/dev-guide-sample-application-java-spring-boot.md)
 
-## Need help?
+## ヘルプが必要ですか? {#need-help}
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://docs.pingcap.com/tidb/v8.5/support/).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://docs.pingcap.com/tidb/v8.5/support/)についてコミュニティに質問してください。
 
 </CustomContent>

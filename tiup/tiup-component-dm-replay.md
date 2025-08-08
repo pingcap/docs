@@ -1,28 +1,28 @@
 ---
 title: tiup dm replay
-summary: The `tiup dm replay` command allows you to retry failed cluster operations and skip successfully performed steps. Use the `audit-id` of the command to be retried, which can be found using the `tiup dm audit` command. This helps save time when re-performing operations in a large cluster.
+summary: tiup dm replay` コマンドを使用すると、失敗したクラスタ操作を再試行し、正常に実行された手順をスキップできます。再試行するコマンドの `audit-id` を使用してください。このIDは `tiup dm audit` コマンドで確認できます。これにより、大規模クラスタで操作を再実行する際の時間節約に役立ちます。
 ---
 
-# tiup dm replay
+# tiup dm replay {#tiup-dm-replay}
 
-When you perform a cluster operation such as upgrade or restart, the operation might fail due to cluster environment issues. If you re-perform the operation, you need to perform all the steps from the very beginning. If the cluster is large, re-performing these steps will take a long time. In this case, you can use the `tiup dm replay` command to retry the failed commands and skip the successfully performed steps.
+アップグレードや再起動などのクラスター操作を実行すると、クラスター環境の問題により操作が失敗する場合があります。操作を再実行するには、最初からすべての手順を実行する必要があります。クラスターが大きい場合、これらの手順の再実行には長い時間がかかります。このような場合は、 `tiup dm replay`コマンドを使用して失敗したコマンドを再試行し、正常に実行された手順をスキップすることができます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm replay <audit-id> [flags]
 ```
 
-- `<audit-id>`: the `audit-id` of the command to be retried. You can view the historical commands and their `audit-id`s using the [`tiup dm audit`](/tiup/tiup-component-dm-audit.md) command.
+-   `<audit-id>` : 再試行するコマンドの`audit-id` 。6 [`tiup dm audit`](/tiup/tiup-component-dm-audit.md)を使用すると、履歴コマンドとその`audit-id`番目を表示できます。
 
-## Option
+## オプション {#option}
 
-### -h, --help
+### -h, --help {#h-help}
 
-Prints the help information.
+ヘルプ情報を出力します。
 
-## Output
+## 出力 {#output}
 
-The output of the command corresponding to `<audit-id>`.
+`<audit-id>`に対応するコマンドの出力。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

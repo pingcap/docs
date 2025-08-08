@@ -1,91 +1,93 @@
 ---
 title: Merge and Migrate Data from Sharded Tables in Optimistic Mode
-summary: Learn how DM merges and migrates data from sharded tables in the optimistic mode.
+summary: DM が楽観的モードでシャード テーブルからデータをマージおよび移行する方法を学習します。
 ---
 
-# Merge and Migrate Data from Sharded Tables in Optimistic Mode
+# オプティミスティックモードでシャードテーブルからデータをマージおよび移行する {#merge-and-migrate-data-from-sharded-tables-in-optimistic-mode}
 
-This document introduces the sharding support feature provided by Data Migration (DM) in the optimistic mode. This feature allows you to merge and migrate the data of tables with the same or different table schema(s) in the upstream MySQL or MariaDB instances into one same table in the downstream TiDB.
+このドキュメントでは、データ移行（DM）の楽観的モードにおけるシャーディングサポート機能について説明します。この機能を使用すると、上流のMySQLまたはMariaDBインスタンスにある、同一または異なるテーブルスキーマを持つテーブルのデータを、下流のTiDBにある同じテーブルにマージして移行できます。
 
-> **Note:**
+> **注記：**
 >
-> If you do not have an in-depth understanding of the optimistic mode and its restrictions, it is **NOT** recommended to use this mode. Otherwise, migration interruption or even data inconsistency might occur.
+> 楽観的モードとその制限事項を十分に理解していない場合は、このモードの使用は推奨さ**れません**。そうでない場合、移行が中断されたり、データの不整合が発生する可能性があります。
 
-## Background
+## 背景 {#background}
 
-DM supports executing DDL statements on sharded tables online, which is called sharding DDL, and uses the "pessimistic mode" by default. In this mode, when a DDL statement is executed in an upstream sharded table, data migration of this table is paused until the same DDL statement is executed in all other sharded tables. Only by then this DDL statement is executed in the downstream and data migration resumes.
+DMは、シャーディングDDLと呼ばれるシャーディングテーブルへのDDL文のオンライン実行をサポートしており、デフォルトで「悲観的モード」を使用します。このモードでは、上流のシャーディングテーブルでDDL文が実行されると、そのテーブルのデータ移行は、他のすべてのシャーディングテーブルで同じDDL文が実行されるまで一時停止されます。その後、下流のシャーディングテーブルで同じDDL文が実行され、データ移行が再開されます。
 
-The pessimistic mode guarantees that the data migrated to the downstream is always correct, but it pauses the data migration, which is bad for making A/B changes in the upstream. In some cases, users might spend a long time executing DDL statements in a single sharded table and change the schemas of other sharded tables only after a period of validation. In the pessimistic mode, these DDL statements block data migration and cause many binlog events to pile up.
+悲観的モードでは、下流に移行されるデータが常に正しいことが保証されますが、データ移行が一時停止されるため、上流でのA/B変更には適していません。場合によっては、ユーザーは単一のシャードテーブルでDDL文の実行に長い時間を費やし、検証期間が経過した後に他のシャードテーブルのスキーマを変更することがあります。悲観的モードでは、これらのDDL文がデータ移行をブロックし、多くのbinlogイベントが蓄積される原因となります。
 
-Therefore, an "optimistic mode" is needed. In this mode, a DDL statement executed on a sharded table is automatically converted to a statement that is compatible with other sharded tables, and then immediately migrated to the downstream. In this way, the DDL statement does not block any sharded table from executing DML migration.
+そのため、「楽観的モード」が必要になります。このモードでは、シャードテーブルに対して実行されたDDL文は、他のシャードテーブルと互換性のある文に自動的に変換され、すぐに下流に移行されます。これにより、DDL文がシャードテーブルによるDML移行の実行をブロックすることはありません。
 
-## Configuration of the optimistic mode
+## 楽観的モードのコンフィグレーション {#configuration-of-the-optimistic-mode}
 
-To use the optimistic mode, specify the `shard-mode` item in the task configuration file as `optimistic`. You can restrict the behavior of the optimistic mode by enabling the `strict-optimistic-shard-mode` configuration. For the detailed sample configuration file, see [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md).
+楽観的モードを使用するには、タスク設定ファイルの`shard-mode`項目を`optimistic`に指定します。5 `strict-optimistic-shard-mode`の設定を有効にすると、楽観的モードの動作を制限できます。詳細なサンプル設定ファイルについては、 [DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)参照してください。
 
-## Restrictions
+## 制限 {#restrictions}
 
-It takes some risks to use the optimistic mode. Follow these rules when you use it:
+楽観的モードの使用には多少のリスクが伴います。使用する際は、以下のルールに従ってください。
 
-- Ensure that the schema of every sharded table is consistent with each other before and after you execute a batch of DDL statements.
-- If you perform an A/B test, perform the test **ONLY** on one sharded table.
-- After the A/B test is finished, migrate only the most direct DDL statement(s) to the final schema. Do not re-execute every right or wrong step of the test.
+-   DDL ステートメントのバッチを実行する前と実行後に、各シャード テーブルのスキーマが相互に一貫していることを確認します。
 
-    For example, if you have executed `ADD COLUMN A INT; DROP COLUMN A; ADD COLUMN A FLOAT;` in a sharded table, you only need to execute `ADD COLUMN A FLOAT` in other sharded tables. You do not need to execute all of the three DDL statements again.
+-   A/B テストを実行する場合は、1 つのシャード テーブルで**のみ**テストを実行します。
 
-- Observe the status of the DM migration when executing the DDL statement. When an error is reported, you need to determine whether this batch of DDL statements will cause data inconsistency.
+-   A/Bテストが完了したら、最も直接的なDDL文のみを最終スキーマに移行します。テストのすべてのステップを、正解か不正解かを問わず再実行しないでください。
 
-In the optimistic mode, most of the DDL statements executed in the upstream are automatically migrated to the downstream with no extra effort required. These DDL statements are called "Type 1 DDL".
+    たとえば、あるシャードテーブルで`ADD COLUMN A INT; DROP COLUMN A; ADD COLUMN A FLOAT;` DDL文を実行した場合、他のシャードテーブルでは`ADD COLUMN A FLOAT` DDL文を実行するだけで済みます。3つのDDL文すべてを再度実行する必要はありません。
 
-DDL statements that change the column name, the column type, or the column default value are called "Type 2 DDL". When you execute Type 2 DDL statements in the upstream, make sure that you execute the DDL statements in all sharded tables in the same order.
+-   DDL文を実行する際は、DM移行のステータスを確認してください。エラーが報告された場合は、この一連のDDL文がデータの不整合を引き起こすかどうかを判断する必要があります。
 
-Some examples of Type 2 DDL statements are as follows:
+楽観的モードでは、上流で実行されたDDL文の大部分が、追加の作業なしに自動的に下流に移行されます。これらのDDL文は「タイプ1 DDL」と呼ばれます。
 
-- Alter the type of a column: `ALTER TABLE table_name MODIFY COLUMN column_name VARCHAR(20)`.
-- Rename a column: `ALTER TABLE table_name RENAME COLUMN column_1 TO column_2;`.
-- Add a `NOT NULL` column without a default value: `ALTER TABLE table_name ADD COLUMN column_1 NOT NULL;`.
-- Rename an index: `ALTER TABLE table_name RENAME INDEX index_1 TO index_2;`.
+列名、列の型、または列のデフォルト値を変更するDDL文は「Type 2 DDL」と呼ばれます。アップストリームでType 2 DDL文を実行する場合は、すべてのシャードテーブルで同じ順序でDDL文を実行するようにしてください。
 
-When the sharded tables execute the DDL statements above, if `strict-optimistic-shard-mode: true` is set, the task is directly interrupted and an error is reported. If `strict-optimistic-shard-mode: false` is set or not specified, different execution order of the DDL statements in sharded tables will cause migration interruption. For example:
+タイプ 2 DDL ステートメントの例を次に示します。
 
-- Shard 1 renames a column and then alters the column type:
-    1. Rename a column: `ALTER TABLE table_name RENAME COLUMN column_1 TO column_2;`.
-    2. Alter the column type: `ALTER TABLE table_name MODIFY COLUMN column_3 VARCHAR(20);`.
-- Shard 2 alters a column type and then renames the column:
-    1. Alter a column type: `ALTER TABLE table_name MODIFY COLUMN column_3 VARCHAR(20)`.
-    2. Rename a column: `ALTER TABLE table_name RENAME COLUMN column_1 TO column_2;`.
+-   列のタイプを変更します: `ALTER TABLE table_name MODIFY COLUMN column_name VARCHAR(20)` .
+-   列の名前を変更します: `ALTER TABLE table_name RENAME COLUMN column_1 TO column_2;` .
+-   デフォルト値のない`NOT NULL`列を追加します: `ALTER TABLE table_name ADD COLUMN column_1 NOT NULL;` 。
+-   インデックスの名前を変更します: `ALTER TABLE table_name RENAME INDEX index_1 TO index_2;` 。
 
-In addition, the following restrictions apply to both the optimistic mode and the pessimistic mode:
+シャードテーブルが上記のDDL文を実行する際、 `strict-optimistic-shard-mode: true`設定されている場合はタスクが直接中断され、エラーが報告されます。3 `strict-optimistic-shard-mode: false`設定されている場合、または指定されていない場合は、シャードテーブル内のDDL文の実行順序が異なるため、移行が中断されます。例：
 
-- `DROP TABLE` or `DROP DATABASE` is not supported.
-- `TRUNCATE TABLE` is not supported.
-- Each DDL statement must involve operations on only one table.
-- The DDL statement that is not supported in TiDB is also not supported in DM.
-- The default value of a newly added column must not contain `current_timestamp`, `rand()`, `uuid()`; otherwise, data inconsistency between the upstream and the downstream might occur.
+-   シャード 1 は列の名前を変更し、列の種類を変更します。
+    1.  列の名前を変更します: `ALTER TABLE table_name RENAME COLUMN column_1 TO column_2;` .
+    2.  列のタイプを変更します: `ALTER TABLE table_name MODIFY COLUMN column_3 VARCHAR(20);` 。
+-   シャード 2 は列の種類を変更し、列の名前を変更します。
+    1.  列の種類を変更します: `ALTER TABLE table_name MODIFY COLUMN column_3 VARCHAR(20)` 。
+    2.  列の名前を変更します: `ALTER TABLE table_name RENAME COLUMN column_1 TO column_2;` .
 
-## Risks
+さらに、楽観的モードと悲観的モードの両方に次の制限が適用されます。
 
-When you use the optimistic mode for a migration task, a DDL statement is migrated to the downstream immediately. If this mode is misused, data inconsistency between the upstream and the downstream might occur.
+-   `DROP TABLE`または`DROP DATABASE`サポートされていません。
+-   `TRUNCATE TABLE`はサポートされていません。
+-   各 DDL ステートメントには、1 つのテーブルに対する操作のみを含める必要があります。
+-   TiDB でサポートされていない DDL ステートメントは、DM でもサポートされません。
+-   新しく追加された列のデフォルト値には、 `current_timestamp` 、 `rand()` 、 `uuid()`を含めることはできません。そうしないと、上流と下流の間でデータの不整合が発生する可能性があります。
 
-### Operations that cause data inconsistency
+## リスク {#risks}
 
-- The schema of each sharded table is incompatible with each other. For example:
-    - Two columns of the same name are added to two sharded tables respectively, but the columns are of different types.
-    - Two columns of the same name are added to two sharded tables respectively, but the columns have different default values.
-    - Two generated columns of the same name are added to two sharded tables respectively, but the columns are generated using different expressions.
-    - Two indexes of the same name are added to two sharded tables respectively, but the keys are different.
-    - Other different table schemas with the same name.
-- Execute the DDL statement that can corrupt data in the sharded table and then try to roll back.
+移行タスクに楽観的モードを使用すると、DDL文は直ちに下流に移行されます。このモードを誤って使用すると、上流と下流の間でデータの不整合が発生する可能性があります。
 
-    For example, drop a column `X` and then add this column back.
+### データの不整合を引き起こす操作 {#operations-that-cause-data-inconsistency}
 
-### Example
+-   各シャードテーブルのスキーマは互いに互換性がありません。例:
+    -   同じ名前の 2 つの列が 2 つのシャード テーブルにそれぞれ追加されていますが、列のタイプは異なります。
+    -   同じ名前の 2 つの列が 2 つのシャード テーブルにそれぞれ追加されていますが、列のデフォルト値は異なります。
+    -   同じ名前の 2 つの生成された列がそれぞれ 2 つのシャード テーブルに追加されますが、列は異なる式を使用して生成されます。
+    -   同じ名前の 2 つのインデックスが 2 つのシャード テーブルにそれぞれ追加されていますが、キーは異なります。
+    -   同じ名前を持つ他の異なるテーブル スキーマ。
+-   シャード テーブル内のデータを破損する可能性のある DDL ステートメントを実行し、ロールバックを試みます。
 
-Merge and migrate the following three sharded tables to TiDB:
+    たとえば、列`X`を削除し、この列を再度追加します。
+
+### 例 {#example}
+
+次の 3 つのシャード テーブルをマージして TiDB に移行します。
 
 ![optimistic-ddl-fail-example-1](/media/dm/optimistic-ddl-fail-example-1.png)
 
-Add a new column `Age` in `tbl01` and set the default value of the column to `0`:
+`tbl01`に新しい列`Age`を追加し、列のデフォルト値を`0`に設定します。
 
 ```sql
 ALTER TABLE `tbl01` ADD COLUMN `Age` INT DEFAULT 0;
@@ -93,7 +95,7 @@ ALTER TABLE `tbl01` ADD COLUMN `Age` INT DEFAULT 0;
 
 ![optimistic-ddl-fail-example-2](/media/dm/optimistic-ddl-fail-example-2.png)
 
-Add a new column `Age` in `tbl00` and set the default value of the column to `-1`:
+`tbl00`に新しい列`Age`を追加し、列のデフォルト値を`-1`に設定します。
 
 ```sql
 ALTER TABLE `tbl00` ADD COLUMN `Age` INT DEFAULT -1;
@@ -101,21 +103,21 @@ ALTER TABLE `tbl00` ADD COLUMN `Age` INT DEFAULT -1;
 
 ![optimistic-ddl-fail-example-3](/media/dm/optimistic-ddl-fail-example-3.png)
 
-By then, the `Age` column of `tbl00` is inconsistent because `DEFAULT 0` and `DEFAULT -1` are incompatible with each other. In this situation, DM will report the error, but you have to manually fix the data inconsistency.
+この時点で、 `DEFAULT 0`と`DEFAULT -1`互いに互換性がないため、 `tbl00`の`Age`列目は不整合になります。このような状況では、DMはエラーを報告しますが、データの不整合を手動で修正する必要があります。
 
-## Implementation principle
+## 実施原則 {#implementation-principle}
 
-In the optimistic mode, after DM-worker receives the DDL statement from the upstream, it forwards the updated table schema to DM-master. DM-worker tracks the current schema of each sharded table, and DM-master merges these schemas into a composite schema that is compatible with DML statements of every sharded table. Then DM-master migrates the corresponding DDL statement to the downstream. DML statements are directly migrated to the downstream.
+楽観的モードでは、DMワーカーは上流からDDL文を受信すると、更新されたテーブルスキーマをDMマスターに転送します。DMワーカーは各シャードテーブルの現在のスキーマを追跡し、DMマスターはこれらのスキーマを、各シャードテーブルのDML文と互換性のある複合スキーマにマージします。その後、DMマスターは対応するDDL文を下流に移行します。DML文は下流に直接移行されます。
 
 ![optimistic-ddl-flow](/media/dm/optimistic-ddl-flow.png)
 
-### Examples
+### 例 {#examples}
 
-Assume the upstream MySQL has three sharded tables (`tbl00`, `tbl01`, and `tbl02`). Merge and migrate these sharded tables to the `tbl` table in the downstream TiDB. See the following image:
+アップストリームMySQLに3つ`tbl02`シャードテーブル（ `tbl00` ）があると仮定します。これらのシャードテーブル`tbl01`ダウンストリームTiDBの`tbl`テーブルにマージして移行します。次の図をご覧ください。
 
 ![optimistic-ddl-example-1](/media/dm/optimistic-ddl-example-1.png)
 
-Add a `Level` column in the upstream:
+アップストリームに`Level`列を追加します。
 
 ```sql
 ALTER TABLE `tbl00` ADD COLUMN `Level` INT;
@@ -123,11 +125,11 @@ ALTER TABLE `tbl00` ADD COLUMN `Level` INT;
 
 ![optimistic-ddl-example-2](/media/dm/optimistic-ddl-example-2.png)
 
-Then TiDB will receive the DML statement from `tbl00` (with the `Level` column) and the DML statement from the `tbl01` and `tbl02` tables (without the `Level` column).
+次に、TiDB は`tbl00` (列`Level`を含む) からの DML ステートメントと、 `tbl01`および`tbl02`テーブル (列`Level`を含まない) からの DML ステートメントを受け取ります。
 
 ![optimistic-ddl-example-3](/media/dm/optimistic-ddl-example-3.png)
 
-The following DML statements can be migrated to the downstream without any modification:
+次の DML ステートメントは、変更せずにダウンストリームに移行できます。
 
 ```sql
 UPDATE `tbl00` SET `Level` = 9 WHERE `ID` = 1;
@@ -136,7 +138,7 @@ INSERT INTO `tbl02` (`ID`, `Name`) VALUES (27, 'Tony');
 
 ![optimistic-ddl-example-4](/media/dm/optimistic-ddl-example-4.png)
 
-Also add a `Level` column in `tbl01`:
+また、 `tbl01`に`Level`列を追加します。
 
 ```sql
 ALTER TABLE `tbl01` ADD COLUMN `Level` INT;
@@ -144,9 +146,9 @@ ALTER TABLE `tbl01` ADD COLUMN `Level` INT;
 
 ![optimistic-ddl-example-5](/media/dm/optimistic-ddl-example-5.png)
 
-At this time, the downstream already have had the same `Level` column, so DM-master performs no operation after comparing the table schemas.
+この時点で、ダウンストリームにはすでに同じ`Level`列があるため、DM マスターはテーブル スキーマを比較した後、何も操作を実行しません。
 
-Drop a `Name` column in `tbl01`:
+`tbl01`に`Name`列をドロップします。
 
 ```sql
 ALTER TABLE `tbl01` DROP COLUMN `Name`;
@@ -154,9 +156,9 @@ ALTER TABLE `tbl01` DROP COLUMN `Name`;
 
 ![optimistic-ddl-example-6](/media/dm/optimistic-ddl-example-6.png)
 
-Then the downstream will receive the DML statements from `tbl00` and `tbl02` with the `Name` column, so this column is not immediately dropped.
+その後、ダウンストリームは`Name`列を含む`tbl00`と`tbl02`からの DML ステートメントを受信するため、この列はすぐには削除されません。
 
-In the same way, all DML statements can still be migrated to the downstream:
+同様に、すべての DML ステートメントをダウンストリームに移行することもできます。
 
 ```sql
 INSERT INTO `tbl01` (`ID`, `Level`) VALUES (15, 7);
@@ -165,7 +167,7 @@ UPDATE `tbl00` SET `Level` = 5 WHERE `ID` = 5;
 
 ![optimistic-ddl-example-7](/media/dm/optimistic-ddl-example-7.png)
 
-Add a `Level` column in `tbl02`:
+`tbl02`に`Level`列を追加します。
 
 ```sql
 ALTER TABLE `tbl02` ADD COLUMN `Level` INT;
@@ -173,9 +175,9 @@ ALTER TABLE `tbl02` ADD COLUMN `Level` INT;
 
 ![optimistic-ddl-example-8](/media/dm/optimistic-ddl-example-8.png)
 
-By then, all sharded tables have the `Level` column.
+その時までに、すべてのシャードテーブルに`Level`列が存在します。
 
-Drop the `Name` columns in `tbl00` and `tbl02` respectively:
+それぞれ`tbl00`と`tbl02`の`Name`列目を削除します。
 
 ```sql
 ALTER TABLE `tbl00` DROP COLUMN `Name`;
@@ -184,7 +186,7 @@ ALTER TABLE `tbl02` DROP COLUMN `Name`;
 
 ![optimistic-ddl-example-9](/media/dm/optimistic-ddl-example-9.png)
 
-By then, the `Name` columns are dropped from all sharded tables and can be safely dropped in the downstream:
+その時までに、 `Name`列はすべてのシャード テーブルから削除され、ダウンストリームで安全に削除できるようになります。
 
 ```sql
 ALTER TABLE `tbl` DROP COLUMN `Name`;

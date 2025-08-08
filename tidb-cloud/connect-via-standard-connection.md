@@ -1,44 +1,44 @@
 ---
 title: Connect to TiDB Cloud Dedicated via Public Connection
-summary: Learn how to connect to your TiDB Cloud cluster via public connection.
+summary: パブリック接続を介してTiDB Cloudクラスターに接続する方法を学習します。
 ---
 
-# Connect to TiDB Cloud Dedicated via Public Connection
+# パブリック接続経由でTiDB Cloud Dedicated に接続 {#connect-to-tidb-cloud-dedicated-via-public-connection}
 
-This document describes how to connect to your TiDB Cloud Dedicated cluster via public connection. The public connection exposes a public endpoint with traffic filters, so you can connect to your TiDB Cloud Dedicated cluster via a SQL client from your laptop.
+このドキュメントでは、パブリック接続を介してTiDB Cloud Dedicatedクラスターに接続する方法について説明します。パブリック接続はトラフィックフィルター付きのパブリックエンドポイントを公開するため、ノートパソコンからSQLクライアントを介してTiDB Cloud Dedicatedクラスターに接続できます。
 
-> **Tip:**
+> **ヒント：**
 >
-> To learn how to connect to a {{{ .starter }}} cluster via public connection, see [Connect to {{{ .starter }}} via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md).
+> パブリック接続を介してTiDB Cloud Serverless クラスターに接続する方法については、 [パブリックエンドポイント経由でTiDB Cloud Serverless に接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)参照してください。
 
-## Prerequisite: Configure IP access list
+## 前提条件: IPアクセスリストを構成する {#prerequisite-configure-ip-access-list}
 
-For public connections, TiDB Cloud Dedicated only allows client connections from addresses in the IP access list. If you have not configured the IP access list, follow the steps in [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md) to configure it before your first connection.
+パブリック接続の場合、 TiDB Cloud Dedicated は IP アクセスリストに登録されているアドレスからのクライアント接続のみを許可します。IP アクセスリストを設定していない場合は、最初の接続の前に手順[IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)に従って設定してください。
 
-## Connect to the cluster
+## クラスターに接続する {#connect-to-the-cluster}
 
-To connect to a TiDB Cloud Dedicated cluster via public connection, take the following steps:
+パブリック接続を介してTiDB Cloud Dedicated クラスターに接続するには、次の手順を実行します。
 
-1. Open the overview page of the target cluster.
+1.  ターゲット クラスターの概要ページを開きます。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-        > **Tip:**
+        > **ヒント：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2. Click the name of your target cluster to go to its overview page.
+    2.  ターゲット クラスターの名前をクリックすると、概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. In the connection dialog, select **Public** from the **Connection Type** drop-down list.
+3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択します。
 
-    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md) to configure it before your first connection.
+    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)に従って、最初の接続の前に設定してください。
 
-4. Click **CA cert** to download CA cert for TLS connection to TiDB clusters. The CA cert supports TLS 1.2 version by default.
+4.  **「CA証明書」**をクリックして、TiDBクラスタへのTLS接続用のCA証明書をダウンロードしてください。CA証明書はデフォルトでTLS 1.2バージョンをサポートしています。
 
-5. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
+5.  希望する接続方法を選択し、タブ上の接続文字列とサンプル コードを参照してクラスターに接続します。
 
-## What's next
+## 次は何？ {#what-s-next}
 
-After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](/basic-sql-operations.md).
+TiDB クラスターに正常に接続すると、 [TiDBでSQL文を調べる](/basic-sql-operations.md) 。

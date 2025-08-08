@@ -1,32 +1,32 @@
 ---
 title: Interact with Support Tickets via Lark
-summary: Introduces detailed information about the Lark interaction for support tickets
+summary: サポートチケットのLarkインタラクションに関する詳細情報を紹介します
 ---
 
-# Interact with Support Tickets via Lark
+# Lark経由でサポートチケットとやり取りする {#interact-with-support-tickets-via-lark}
 
-For customers subscribed to the **Premium** [support plan](/tidb-cloud/connected-care-detail.md), TiDB Cloud provides a ticket bot called **PingCAP Support Bot** in [Lark](https://www.larksuite.com/), to support more comprehensive interaction and management of support tickets.
+**Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)に加入している顧客向けに、 TiDB Cloud は、サポート チケットのより包括的なやり取りと管理をサポートするために、 [ラーク](https://www.larksuite.com/)で**PingCAP Support Bot**と呼ばれるチケット ボットを提供します。
 
-> **Note:**
+> **注記：**
 >
-> The ticket support feature for Lark is available upon request. If you are interested in trying this feature, contact TiDB Cloud support at <a href="mailto:support@pingcap.com">support@pingcap.com</a> or reach out to your Technical Account Manager (TAM).
+> Larkのチケットサポート機能はリクエストに応じてご利用いただけます。この機能をご利用になりたい場合は、 TiDB Cloudサポート<a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>までご連絡いただくか、担当のテクニカルアカウントマネージャー（TAM）までお問い合わせください。
 
-## Interact with support tickets
+## サポートチケットでやり取りする {#interact-with-support-tickets}
 
-If Interaction for Support Tickets is enabled, **PingCAP Support Bot** will convert the **Support Ticket Created** message card to a thread to manage ticket interactions.
+サポート チケットのインタラクションが有効になっている場合、 **PingCAP サポート ボットは****サポート チケット作成**メッセージ カードをスレッドに変換し、チケットのインタラクションを管理します。
 
 ![lark-ticket-interaction-1](/media/tidb-cloud/connected-lark-ticket-interaction-1.png)
 
-When a PingCAP support engineer comments on the ticket, the comment will be automatically synchronized to the thread.
+PingCAP サポート エンジニアがチケットにコメントすると、そのコメントは自動的にスレッドに同期されます。
 
-When anyone comments in the thread, the comment will be synchronized back to the corresponding support ticket.
+誰かがスレッドにコメントすると、そのコメントは対応するサポート チケットに同期されます。
 
-## FAQs
+## よくある質問 {#faqs}
 
-- How can I check the status of my ticket?
+-   チケットのステータスを確認するにはどうすればいいですか?
 
-    Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
+    チケット作成時に使用したメールアドレスで[PingCAPヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/user/requests)にログインしてください。現在のアカウントのすべての過去のチケットとそのステータスを確認できます。
 
-## Contact support
+## サポートにお問い合わせください {#contact-support}
 
-For help or questions, please contact our support team at <a href="mailto:support@pingcap.com">support@pingcap.com</a>.
+ヘルプや質問がある場合は、 <a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>のサポート チームにお問い合わせください。

@@ -1,18 +1,18 @@
 ---
 title: TIDB_CHECK_CONSTRAINTS
-summary: Learn the `TIDB_CHECK_CONSTRAINTS` INFORMATION_SCHEMA table.
+summary: TIDB_CHECK_CONSTRAINTS` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# TIDB\_CHECK\_CONSTRAINTS
+# TIDB_CHECK_CONSTRAINTS {#tidb-check-constraints}
 
-The `TIDB_CHECK_CONSTRAINTS` table provides information about [`CHECK` constraints](/constraints.md#check) on tables. In addition to the columns in [`CHECK_CONSTRAINTS`](/information-schema/information-schema-check-constraints.md), `TIDB_CHECK_CONSTRAINTS` provides the name and ID of the table that defines the `CHECK` constraint.
+`TIDB_CHECK_CONSTRAINTS`表は[`CHECK`制約](/constraints.md#check)表に関する情報を提供します。5 の[`CHECK_CONSTRAINTS`](/information-schema/information-schema-check-constraints.md)に加えて、 `TIDB_CHECK_CONSTRAINTS` `CHECK`制約を定義する表の名前と ID を提供します。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC TIDB_CHECK_CONSTRAINTS;
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 +--------------------+-------------+------+------+---------+-------+
@@ -28,7 +28,7 @@ The output is as follows:
 6 rows in set (0.00 sec)
 ```
 
-The following example adds a `CHECK` constraint using the `CREATE TABLE` statement:
+次の例では、 `CREATE TABLE`ステートメントを使用して`CHECK`制約を追加します。
 
 ```sql
 SET GLOBAL tidb_enable_check_constraint = ON;
@@ -36,7 +36,7 @@ CREATE TABLE test.t1 (id INT PRIMARY KEY, CHECK (id%2 = 0));
 SELECT * FROM TIDB_CHECK_CONSTRAINTS\G
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 *************************** 1. row ***************************
@@ -49,11 +49,11 @@ CONSTRAINT_CATALOG: def
 1 row in set (0.02 sec)
 ```
 
-Fields in the `TIDB_CHECK_CONSTRAINTS` table are described as follows:
+`TIDB_CHECK_CONSTRAINTS`テーブル内のフィールドは次のように説明されます。
 
-* `CONSTRAINT_CATALOG`: The catalog of the constraint, which is always `def`.
-* `CONSTRAINT_SCHEMA`: The schema of the constraint.
-* `CONSTRAINT_NAME`: The name of the constraint.
-* `CHECK_CLAUSE`: The clause of the check constraint.
-* `TABLE_NAME`: The name of the table where the constraint is located.
-* `TABLE_ID`: The ID of the table where the constraint is located.
+-   `CONSTRAINT_CATALOG` : 制約のカタログ。常に`def`です。
+-   `CONSTRAINT_SCHEMA` : 制約のスキーマ。
+-   `CONSTRAINT_NAME` : 制約の名前。
+-   `CHECK_CLAUSE` : チェック制約の句。
+-   `TABLE_NAME` : 制約が配置されているテーブルの名前。
+-   `TABLE_ID` : 制約が配置されているテーブルの ID。

@@ -1,53 +1,53 @@
 ---
-title: {{{ .starter }}} Branching (Beta) Overview
-summary: Learn the concept of {{{ .starter }}} branches.
+title: TiDB Cloud Serverless Branching (Beta) Overview
+summary: TiDB Cloud Serverless ブランチの概念を学びます。
 ---
 
-# {{{ .starter }}} Branching (Beta) Overview
+# TiDB Cloudサーバーレスブランチング（ベータ版）の概要 {#tidb-cloud-serverless-branching-beta-overview}
 
-TiDB Cloud lets you create branches for {{{ .starter }}} clusters. A branch for a cluster is a separate instance that contains a diverged copy of data from the original cluster. It provides an isolated environment, allowing you to experiment freely without worrying about affecting the original cluster.
+TiDB Cloud、 TiDB Cloud Serverless クラスターのブランチを作成できます。クラスターのブランチとは、元のクラスターから分岐したデータのコピーを含む独立したインスタンスです。これにより分離された環境が提供され、元のクラスターへの影響を心配することなく、自由に実験を行うことができます。
 
-With {{{ .starter }}} branches, developers can work in parallel, iterate rapidly on new features, troubleshoot issues without affecting the production database, and easily revert changes if needed. This feature streamlines the development and deployment process while ensuring a high level of stability and reliability for the production database.
+TiDB Cloud Serverlessブランチを使用すると、開発者は並行して作業を行い、新機能を迅速に反復開発し、本番データベースに影響を与えることなく問題をトラブルシューティングし、必要に応じて変更を簡単に元に戻すことができます。この機能により、開発とデプロイメントのプロセスが効率化されると同時に、本番データベースの高い安定性と信頼性が確保されます。
 
-## Implementations
+## 実装 {#implementations}
 
-When a branch for a cluster is created, the data in the branch diverges from the original cluster or its parent branch at a specific point in time. This means that subsequent changes made in either the parent or the branch will not be synchronized with each other.
+クラスターのブランチが作成されると、ブランチ内のデータは特定の時点で元のクラスターまたはその親ブランチから分岐します。つまり、親またはブランチのいずれかでその後行われた変更は互いに同期されません。
 
-To ensure fast and seamless branch creation, {{{ .starter }}} uses a copy-on-write technique for sharing data between the original cluster and its branches. This process usually completes within a few minutes and is imperceptible to users, ensuring that it does not affect the performance of your original cluster.
+TiDB Cloud Serverlessは、高速かつシームレスなブランチ作成を実現するために、コピーオンライト技術を使用して元のクラスターとそのブランチ間でデータを共有します。このプロセスは通常数分以内に完了し、ユーザーには認識されないため、元のクラスターのパフォーマンスに影響を与えることはありません。
 
-## Scenarios
+## シナリオ {#scenarios}
 
-You can create branches easily and quickly to get isolated data environments. Branches are beneficial in the following scenarios where multiple developers or teams need to work independently, test changes, fix bugs, experiment with new features, or roll out updates without disrupting the production database.
+ブランチを簡単かつ迅速に作成することで、分離されたデータ環境を実現できます。ブランチは、複数の開発者やチームが独立して作業し、変更のテスト、バグの修正、新機能の実験、本番データベースを中断することなくアップデートの展開を行う必要があるシナリオで役立ちます。
 
-- Feature development: Developers can work on new features in isolation without affecting the production database. Each feature can have its own branch, allowing quick iteration and experimentation without affecting other ongoing work.
+-   機能開発：開発者は、本番のデータベースに影響を与えることなく、新機能の開発に個別に取り組むことができます。各機能には独自のブランチを作成できるため、他の進行中の作業に影響を与えることなく、迅速な反復作業と実験が可能です。
 
-- Bug fixing: Developers can create a branch dedicated to fixing a specific bug, test the fix, and then merge it back once verified, without introducing new issues to the production database.
+-   バグ修正: 開発者は、特定のバグを修正するためのブランチを作成し、修正をテストし、検証後にマージし直すことで、本番データベースに新たな問題を持ち込むことなく修正を行うことができます。
 
-- Experimentation: While developing new features or making changes, developers can create branches to experiment with different approaches or configurations. This allows them to compare various options, gather data, and make informed decisions before the changes are merged into the production database.
+-   実験：新機能の開発や変更を行う際に、開発者はブランチを作成し、様々なアプローチや設定を試すことができます。これにより、変更を本番のデータベースにマージする前に、様々なオプションを比較し、データを収集し、情報に基づいた意思決定を行うことができます。
 
-- Performance optimization: Database changes are sometimes made to enhance performance. With branching, developers can experiment and fine-tune various configurations, indexes, or algorithms in isolated environments to identify the most efficient solution.
+-   パフォーマンスの最適化：パフォーマンスを向上させるために、データベースに変更が加えられることがあります。ブランチングを利用することで、開発者は分離された環境で様々な構成、インデックス、アルゴリズムを試用・微調整し、最も効率的なソリューションを特定することができます。
 
-- Testing and staging: Teams can create branches for testing and staging purposes. It provides a controlled environment for quality assurance, user acceptance testing, or staging customizations before the changes are merged into the production database.
+-   テストとステージング：チームはテストとステージングのためにブランチを作成できます。これにより、変更を本番データベースにマージする前に、品質保証、ユーザー受け入れテスト、ステージングのカスタマイズを行うための管理された環境が提供されます。
 
-- Parallel development: Different teams or developers can work on separate projects simultaneously. Each project can have its own branch, enabling independent development and experimentation, while still being able to merge changes back into the production database.
+-   並行開発：複数のチームや開発者が別々のプロジェクトに同時に取り組むことができます。各プロジェクトは独自のブランチを持つことができるため、独立した開発と実験が可能になり、変更を本番のデータベースにマージすることも可能です。
 
-## Limitations and quotas
+## 制限と割り当て {#limitations-and-quotas}
 
-Currently, {{{ .starter }}} branches are in beta and free of charge.
+現在、 TiDB Cloud Serverless ブランチはベータ版で無料です。
 
-- For each organization in TiDB Cloud, you can create a maximum of five {{{ .starter }}} branches by default across all the clusters. The branches of a cluster will be created in the same region as the cluster, and you cannot create branches for a throttled cluster or a cluster larger than 100 GiB.
+-   TiDB Cloudの各組織では、すべてのクラスターを合わせて、デフォルトで最大 5 つのTiDB Cloud Serverless ブランチを作成できます。クラスターのブランチは、クラスターと同じリージョンに作成されます。また、スロットルされたクラスターや 100 GiB を超えるクラスターにはブランチを作成できません。
 
-- For each branch of a free cluster, 10 GiB storage is allowed. For each branch of a scalable cluster, 100 GiB storage is allowed. Once the storage is reached, the read and write operations on this branch will be throttled until you reduce the storage.
+-   フリークラスターの各ブランチには、10GiBのstorageが利用可能です。スケーラブルクラスターの各ブランチには、100GiBのstorageが利用可能です。ストレージstorageが上限に達すると、storageを減らすまで、このブランチの読み取りおよび書き込み操作は制限されます。
 
-- If your cluster has tables with TiFlash replicas, these replicas will be temporarily unavailable in the new branch after you create it, because TiFlash needs to rebuild the replica data.
+-   クラスターにTiFlashレプリカを含むテーブルがある場合、 TiFlash はレプリカ データを再構築する必要があるため、新しいブランチを作成した後、これらのレプリカは一時的に使用できなくなります。
 
-- When [creating a branch](/tidb-cloud/branch-manage.md#create-a-branch) from a specific point in time:
+-   特定の時点から[ブランチの作成](/tidb-cloud/branch-manage.md#create-a-branch)場合:
 
-    - For branches of a free cluster, you can select any time within the last 24 hours.
-    - For branches of a scalable cluster, you can select any time within the last 14 days.
+    -   無料のクラスターのブランチの場合は、過去 24 時間以内の任意の時刻を選択できます。
+    -   スケーラブル クラスターのブランチの場合は、過去 14 日間の任意の時点を選択できます。
 
-If you need more quotas, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+さらに割り当てが必要な場合は、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md) 。
 
-## What's next
+## 次は何？ {#what-s-next}
 
-- [Learn how to manage branches](/tidb-cloud/branch-manage.md)
+-   [ブランチの管理方法を学ぶ](/tidb-cloud/branch-manage.md)

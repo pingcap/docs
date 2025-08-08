@@ -1,80 +1,80 @@
 ---
 title: CSV Configurations for Importing Data
-summary: Learn how to use CSV configurations for the Import Data service on TiDB Cloud.
+summary: TiDB Cloudのインポート データ サービスで CSV 構成を使用する方法を学習します。
 ---
 
-# CSV Configurations for Importing Data
+# データのインポートのためのCSV構成 {#csv-configurations-for-importing-data}
 
-This document introduces CSV configurations for the Import Data service on TiDB Cloud.
+このドキュメントでは、 TiDB Cloudの Import Data サービスの CSV 構成について説明します。
 
-The following is the CSV Configuration window when you use the Import Data service on TiDB Cloud to import CSV files. For more information, see [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md).
+以下は、 TiDB Cloudのデータインポートサービスを使用してCSVファイルをインポートする際のCSVコンフィグレーションウィンドウです。詳細については、 [クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)参照してください。
 
 <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/import-data-csv-config.png" width="500" />
 
-## Separator
+## セパレーター {#separator}
 
-- Definition: defines the field separator. It can be one or multiple characters, but must not be empty.
+-   定義: フィールドセパレーターを定義します。1文字または複数文字を指定できますが、空にすることはできません。
 
-- Common values:
+-   共通の値:
 
-    * `,` for CSV (comma-separated values). As shown in the above screenshot, "1", "Michael", and "male" represent three fields.
-    * `"\t"` for TSV (tab-separated values).
+    -   CSV（カンマ区切り値）の場合は`,`上記のスクリーンショットに示すように、「1」、「Michael」、「male」は3つのフィールドを表します。
+    -   TSV (タブ区切り値)の場合は`"\t"` 。
 
-- Default: `,`
+-   デフォルト: `,`
 
-## Delimiter
+## デリミタ {#delimiter}
 
-- Definition: defines the delimiter used for quoting. If **Delimiter** is empty, all fields are unquoted.
+-   定義: 引用符で囲む際に使用する区切り文字を定義します。**区切り文字**が空の場合、すべてのフィールドは引用符で囲まれません。
 
-- Common values:
+-   共通の値:
 
-    * `'"'` quotes fields with double-quote. As shown in the above screenshot, `"Michael","male"` represents two fields. Note that there must be a `,` between the two fields. If the data is `"Michael""male"` (without `,`), the import task will fail to parse. If the data is `"Michael,male"` (with only one double-quote), it is parsed as one field.
-    * `''` disables quoting.
+    -   `'"'`フィールドを二重引用符で囲みます。上のスクリーンショットに示すように、 `"Michael","male"` 2つのフィールドを表します。2つのフィールドの間には必ず`,`必要です。データが`"Michael""male"` （ `,`なし）の場合、インポートタスクは解析に失敗します。データが`"Michael,male"` （二重引用符が1つだけ）の場合、1つのフィールドとして解析されます。
+    -   `''`引用を無効にします。
 
-- Default: `"`
+-   デフォルト: `"`
 
-## Null Value
+## NULL値 {#null-value}
 
-- Definition: defines the string that represents a `NULL` value in the CSV file.
+-   定義: CSV ファイル内の`NULL`値を表す文字列を定義します。
 
-- Default: `\N`
+-   デフォルト: `\N`
 
-## Backslash Escape
+## バックスラッシュエスケープ {#backslash-escape}
 
-- Definition: controls whether to parse backslashes within fields as escape characters. If **Backslash Escape** is enabled, the following sequences are recognized and converted:
+-   定義: フィールド内のバックスラッシュをエスケープ文字として解析するかどうかを制御します。**バックスラッシュエスケープ**が有効になっている場合、以下のシーケンスが認識され、変換されます。
 
-    | Sequence | Converted to             |
-    |----------|--------------------------|
-    | `\0`     | Null character (`U+0000`)  |
-    | `\b`     | Backspace (`U+0008`)       |
-    | `\n`     | Line feed (`U+000A`)       |
-    | `\r`     | Carriage return (`U+000D`) |
-    | `\t`     | Tab (`U+0009`)             |
-    | `\Z`     | Windows EOF (`U+001A`)     |
+    | シーケンス | 変換された                    |
+    | ----- | ------------------------ |
+    | `\0`  | ヌル文字（ `U+0000` ）         |
+    | `\b`  | バックスペース ( `U+0008` )     |
+    | `\n`  | 改行（ `U+000A` ）           |
+    | `\r`  | キャリッジリターン（ `U+000D` ）    |
+    | `\t`  | タブ ( `U+0009` )          |
+    | `\Z`  | Windows EOF ( `U+001A` ) |
 
-    In all other cases (for example, `\"`), the backslash is stripped, leaving the next character (`"`) in the field. The character left has no special roles (for example, delimiters) and is just an ordinary character. Quoting does not affect whether backslash is parsed as an escape character.
+    その他の場合（例えば`\"` ）には、バックスラッシュは削除され、次の文字（ `"` ）がフィールドに残ります。残った文字には特別な役割（例えば区切り文字）はなく、通常の文字として扱われます。引用符で囲んでも、バックスラッシュがエスケープ文字として解析されるかどうかは影響を受けません。
 
-    Take the following fields as an example.
+    次のフィールドを例に挙げます。
 
-    - If the value is `True`, `"nick name is \"Mike\""` will be parsed as `nick name is "Mike"` and written to the target table.
-    - If the value is `False`, it will be parsed as three fields: `"nick name is \"` , `Mike\`, and `""`. But it cannot be parsed correctly because the fields are not separated from each other.
+    -   値が`True`の場合、 `"nick name is \"Mike\""` `nick name is "Mike"`として解析され、ターゲット テーブルに書き込まれます。
+    -   値が`False`の場合、 `"nick name is \"` 、 `Mike\` 、 `""`の3つのフィールドとして解析されます。しかし、フィールドが互いに分離されていないため、正しく解析できません。
 
-    For standard CSV files, if there are double-quoted characters in a field to be recorded, you need to use two double-quotes for escaping. In this case, using `Backslash escape = True` will result in a parsing error, while using `Backslash escape = False` will correctly parse. A typical scenario is when the imported field contains JSON content. A standard CSV JSON field is normally stored as follows:
+    標準CSVファイルの場合、記録するフィールドに二重引用符で囲まれた文字が含まれている場合は、エスケープ処理のために二重引用符を2つ使用する必要があります。この場合、二重引用符を`Backslash escape = True`使用すると解析エラーが発生しますが、 `Backslash escape = False`使用すると正しく解析されます。典型的なシナリオは、インポートされたフィールドにJSONコンテンツが含まれている場合です。標準CSVのJSONフィールドは通常、次のように保存されます。
 
     `"{""key1"":""val1"", ""key2"": ""val2""}"`
 
-    In this case, you can set `Backslash escape = False` and the field will be correctly escaped to the database as follows:
+    この場合、 `Backslash escape = False`設定すると、フィールドは次のようにデータベースに正しくエスケープされます。
 
     `{"key1": "val1", "key2": "val2"}`
 
-    If the content of the CSV source file is saved as JSON in the following way, then consider setting `Backslash escape = True` as follows. But this is not the standard format for CSV.
+    CSVソースファイルの内容が以下のようにJSON形式で保存されている場合は、 `Backslash escape = True`以下のように設定することを検討してください。ただし、これはCSVの標準形式ではありません。
 
     `"{\"key1\": \"val1\", \"key2\":\"val2\" }"`
 
-- Default: Enabled
+-   デフォルト: 有効
 
-## Skip Header
+## ヘッダーをスキップ {#skip-header}
 
-- Definition: controls whether to skip the header row in the CSV file. If **Skip Header** is enabled, the first row of the CSV file will be skipped during import.
+-   定義: CSVファイルのヘッダー行をスキップするかどうかを制御します。 **「ヘッダーをスキップ」**が有効になっている場合、インポート時にCSVファイルの最初の行がスキップされます。
 
-- Default: Disabled
+-   デフォルト: 無効

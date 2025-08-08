@@ -1,42 +1,45 @@
 ---
 title: Delete a TiDB Cluster
-summary: Learn how to delete a TiDB cluster.
+summary: TiDB クラスターを削除する方法を学習します。
 ---
 
-# Delete a TiDB Cluster
+# TiDBクラスタを削除する {#delete-a-tidb-cluster}
 
-This document describes how to delete a TiDB cluster on TiDB Cloud.
+このドキュメントでは、 TiDB Cloud上の TiDB クラスターを削除する方法について説明します。
 
-You can delete a cluster at any time by performing the following steps:
+次の手順を実行することにより、いつでもクラスターを削除できます。
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
-2. In the row of your target cluster to be deleted, click **...**.
+1.  プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-    > **Tip:**
+2.  削除するターゲット クラスターの行で、 **...**をクリックします。
+
+    > **ヒント：**
     >
-    > Alternatively, you can also click the name of the target cluster to go to its overview page, and then click **...** in the upper-right corner.
+    > または、ターゲット クラスターの名前をクリックして概要ページに移動し、右上隅の**... を**クリックすることもできます。
 
-3. Click **Delete** in the drop-down menu.
-4. In the cluster deleting window, confirm the deletion:
+3.  ドロップダウンメニューで**「削除」を**クリックします。
 
-    - If you have at least one manual or automatic backup, you can see the number of backups and the charging policy for backups. Click **Continue** and enter `<organization name>/<project name>/<cluster name>`.
-    - If you do not have any backups, just enter `<organization name>/<project name>/<cluster name>`.
+4.  クラスター削除ウィンドウで、削除を確認します。
 
-    If you want to restore the cluster sometime in the future, make sure that you have a backup of the cluster. Otherwise, you cannot restore it anymore. For more information about how to back up TiDB Cloud Dedicated clusters, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md).
+    -   手動または自動バックアップが少なくとも1つある場合は、バックアップの数とバックアップの課金ポリシーを確認できます。 **「続行」**をクリックし、 `<organization name>/<project name>/<cluster name>`と入力してください。
+    -   バックアップがない場合は、 `<organization name>/<project name>/<cluster name>`と入力してください。
 
-    > **Note:**
+    将来クラスタを復元する場合は、クラスタのバックアップを必ず作成してください。バックアップがないと、復元できなくなります。TiDB TiDB Cloud Dedicatedクラスタのバックアップ方法の詳細については、 [TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md)参照してください。
+
+    > **注記：**
     >
-    > [{{{ .starter }}} clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) do not support restoring data after the deletion. If you want to delete a {{{ .starter }}} cluster and restore its data in the future, see [Export Data from {{{ .starter }}}](/tidb-cloud/serverless-export.md) to export your data as a backup.
+    > [TiDB Cloudサーバーレス クラスター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)削除後のデータの復元をサポートしていません。TiDB TiDB Cloud Serverless クラスターを削除し、後でデータを復元する場合は、 [TiDB Cloud Serverlessからデータをエクスポート](/tidb-cloud/serverless-export.md)参照してデータをバックアップとしてエクスポートしてください。
 
-5. Click **I understand, delete it**.
+5.  **「理解しましたので削除します」を**クリックします。
 
-    Once a backed up TiDB Cloud Dedicated cluster is deleted, the existing backup files of the cluster are moved to the recycle bin.
+    バックアップされたTiDB Cloud Dedicated クラスターが削除されると、クラスターの既存のバックアップ ファイルはごみ箱に移動されます。
 
-    - Automatic backups will expire and be automatically deleted once the retention period ends. The default retention period is 7 days if you don't modify it.
-    - Manual backups will be kept in the Recycle Bin until manually deleted.
+    -   自動バックアップは保持期間が終了すると期限切れとなり、自動的に削除されます。デフォルトの保持期間は、変更しない場合は7日間です。
 
-    > **Note:**
+    -   手動バックアップは、手動で削除されるまでごみ箱に保存されます。
+
+    > **注記：**
     >
-    > Please be aware that backups will continue to incur charges until deleted.
+    > バックアップは削除されるまで料金が発生し続けることにご注意ください。
 
-    If you want to restore a TiDB Cloud Dedicated cluster from recycle bin, see [Restore a deleted cluster](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster).
+    TiDB Cloud Dedicated クラスターをごみ箱から復元する場合は、 [削除されたクラスターを復元する](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster)参照してください。

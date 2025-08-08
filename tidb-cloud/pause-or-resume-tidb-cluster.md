@@ -1,112 +1,123 @@
 ---
 title: Pause or Resume a TiDB Cloud Dedicated Cluster
-summary: Learn how to pause or resume a TiDB Cloud Dedicated cluster.
+summary: TiDB Cloud Dedicated クラスターを一時停止または再開する方法を学びます。
 ---
 
-# Pause or Resume a TiDB Cloud Dedicated Cluster
+# TiDB Cloud専用クラスタを一時停止または再開する {#pause-or-resume-a-tidb-cloud-dedicated-cluster}
 
-You can easily pause and resume a TiDB Cloud Dedicated cluster that is not in operation at all times in TiDB Cloud.
+TiDB Cloudでは常時稼働していないTiDB Cloud Dedicated クラスターを簡単に一時停止したり再開したりできます。
 
-The pause does not affect your data stored in the cluster but only stops the collection of monitoring information and the consumption of computing resources. After the pause, you can resume your cluster at any time.
+一時停止はクラスターに保存されているデータには影響しませんが、監視情報の収集とコンピューティングリソースの消費を停止するだけです。一時停止後は、いつでもクラスターを再開できます。
 
-Comparing with backup and restore, pausing and resuming a cluster takes less time and keeps your cluster information (including cluster version, cluster configurations, and TiDB user accounts).
+バックアップと復元と比較すると、クラスターの一時停止と再開にかかる時間は短く、クラスター情報 (クラスター バージョン、クラスター構成、TiDB ユーザー アカウントなど) が保持されます。
 
-> **Note:**
+> **注記：**
 >
-> You cannot pause a [{{{ .starter }}} cluster](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
+> [TiDB Cloudサーバーレス クラスター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)一時停止することはできません。
 
-## Limitations
+## 制限事項 {#limitations}
 
-- You can pause your cluster only when it is in the **Available** status. If your cluster is in other status such as **Modifying**, you must wait for the current operation to be completed before pausing the cluster.
-- You cannot pause your cluster when a data import task is going on. You can either wait for the import task to be completed or cancel the import task.
-- You cannot pause your cluster when a backup job is going on. You can either wait for the current backup job to be completed or [delete the running backup job](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job).
-- You cannot pause your cluster if it has any [changefeeds](/tidb-cloud/changefeed-overview.md). You need to [delete the existing changefeeds](/tidb-cloud/changefeed-overview.md#delete-a-changefeed) before pausing the cluster.
+-   クラスターを一時停止できるのは、クラスターが**「使用可能」**ステータスの場合のみです。クラスターが**「変更中」**などの他のステータスの場合は、現在の操作が完了するまでクラスターを一時停止できません。
+-   データインポートタスクの実行中は、クラスターを一時停止することはできません。インポートタスクが完了するまで待つか、インポートタスクをキャンセルしてください。
+-   バックアップジョブの実行中は、クラスターを一時停止することはできません。現在のバックアップジョブが完了するまで待つか、 [実行中のバックアップジョブを削除する](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job) .
+-   クラスターに[チェンジフィード](/tidb-cloud/changefeed-overview.md)がある場合は一時停止できません。クラスターを一時停止する前に[既存の変更フィードを削除する](/tidb-cloud/changefeed-overview.md#delete-a-changefeed)実行する必要があります。
 
-## Pause a TiDB cluster
+## TiDB クラスターを一時停止する {#pause-a-tidb-cluster}
 
-The pause duration and behavior depend on your organization's creation date:
+一時停止の期間と動作は、組織の作成日によって異なります。
 
-- Organizations created after November 12, 2024 follow the standard pause behavior with a maximum pause duration of 7 days.
-- Organizations created on or before November 12, 2024 follow the compatible pause behavior, which allows a longer pause duration. These organizations will gradually transition to the standard 7-day limit.
+-   2024 年 11 月 12 日以降に作成された組織は、標準の一時停止動作に従い、最大一時停止期間は 7 日間となります。
+-   2024年11月12日以前に作成された組織は、互換性のある一時停止動作に従い、より長い一時停止期間が認められます。これらの組織は、段階的に標準の7日間の制限に移行します。
 
 <SimpleTab>
 <div label="Standard pause behavior">
 
-When a cluster is paused, note the following:
+クラスターが一時停止されている場合は、次の点に注意してください。
 
-- TiDB Cloud stops collecting monitoring information of the cluster.
-- You cannot read data from or write data to the cluster.
-- You cannot import or back up data.
-- Only the following costs will be charged:
+-   TiDB Cloud はクラスターの監視情報の収集を停止します。
 
-    - Node Storage Cost
-    - Data Backup Cost
+-   クラスターからデータを読み取ったり、クラスターにデータを書き込んだりすることはできません。
 
-- TiDB Cloud stops [automatic backup](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) of the cluster.
-- The maximum pause duration is 7 days. If you do not manually resume the cluster within 7 days, TiDB Cloud will automatically resume it.
-- You can view the auto-resume schedule from the cluster overview page. TiDB Cloud will send a notification email to the organization owner and project owner 24 hours before the cluster is automatically resumed.
+-   データをインポートまたはバックアップすることはできません。
+
+-   以下の費用のみ請求されます。
+
+    -   ノードストレージコスト
+    -   データバックアップコスト
+
+-   TiDB Cloud はクラスターの[自動バックアップ](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)停止します。
+
+-   一時停止の最大期間は7日間です。7日以内に手動でクラスターを再開しない場合は、 TiDB Cloudによって自動的に再開されます。
+
+-   自動再開のスケジュールは、クラスターの概要ページから確認できます。TiDB TiDB Cloud は、クラスターが自動的に再開される 24 時間前に、組織のオーナーとプロジェクトのオーナーに通知メールを送信します。
 
 </div>
 <div label="Compatible pause behavior">
 
-> **Note:**
+> **注記：**
 >
-> If your organization was created before November 12, 2024, your cluster still follows the compatible pause behavior. TiDB Cloud will notify you before transitioning to the new standard pause behavior.
+> 組織が2024年11月12日より前に作成された場合、クラスターは引き続き互換性のある一時停止動作に従います。TiDB TiDB Cloudは、新しい標準の一時停止動作に移行する前に通知します。
 
-When a cluster is paused, note the following:
+クラスターが一時停止されている場合は、次の点に注意してください。
 
-- TiDB Cloud stops collecting monitoring information of the cluster.
-- You cannot read data from or write data to the cluster.
-- You cannot import or back up data.
-- TiDB Cloud does not automatically resume the paused cluster.
-- Only the following costs will be charged:
+-   TiDB Cloud はクラスターの監視情報の収集を停止します。
 
-    - Node Storage Cost
-    - Data Backup Cost
+-   クラスターからデータを読み取ったり、クラスターにデータを書き込んだりすることはできません。
 
-- TiDB Cloud stops [automatic backup](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) of the cluster.
+-   データをインポートまたはバックアップすることはできません。
+
+-   TiDB Cloud は一時停止されたクラスターを自動的に再開しません。
+
+-   以下の費用のみ請求されます。
+
+    -   ノードストレージコスト
+    -   データバックアップコスト
+
+-   TiDB Cloud はクラスターの[自動バックアップ](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)停止します。
 
 </div>
 </SimpleTab>
 
-To pause a cluster, take the following steps:
+クラスターを一時停止するには、次の手順を実行します。
 
-1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
-2. In the row of the cluster that you want to pause, click **...**.
+1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-    > **Tip:**
+2.  一時停止するクラスターの行で、 **...**をクリックします。
+
+    > **ヒント：**
     >
-    > Alternatively, you can click the name of the cluster that you want to pause on the **Clusters** page, and then click **...** in the upper-right corner.
+    > または、 **[クラスター]**ページで一時停止するクラスターの名前をクリックし、右上隅の**[...]**をクリックすることもできます。
 
-3. Click **Pause** in the drop-down menu.
+3.  ドロップダウン メニューで [**一時停止] を**クリックします。
 
-    The **Pause your cluster** dialog is displayed.
+    **クラスターを一時停止する**ダイアログが表示されます。
 
-4. In the dialog, click **Pause** to confirm your choice.
+4.  ダイアログで、 **「一時停止」**をクリックして選択を確認します。
 
-    After you click **Pause**, the cluster will enter the **Pausing** status first. Once the pause operation is done, the cluster will transition to the **Paused** status.
+    **「一時停止」**をクリックすると、クラスターはまず「**一時停止中」**状態になります。一時停止操作が完了すると、クラスターは「**一時停止」**状態に遷移します。
 
-You can also pause a cluster using TiDB Cloud API. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
+TiDB Cloud APIを使用してクラスターを一時停止することもできます。現在、 TiDB Cloud APIはまだベータ版です。詳細については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)ご覧ください。
 
-## Resume a TiDB cluster
+## TiDB クラスターを再開する {#resume-a-tidb-cluster}
 
-After a paused cluster is resumed, note the following:
+一時停止されたクラスターが再開された後、次の点に注意してください。
 
-- TiDB Cloud resumes collecting the monitoring information of the cluster, and you can read data from or write data to the cluster.
-- TiDB Cloud resumes charging both compute and storage costs.
-- TiDB Cloud resumes [automatic backup](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) of the cluster.
+-   TiDB Cloud はクラスターの監視情報の収集を再開し、クラスターからデータを読み取ったり、クラスターにデータを書き込んだりできるようになります。
+-   TiDB Cloud はコンピューティングとstorageの両方のコストの課金を再開します。
+-   TiDB Cloud はクラスターの[自動バックアップ](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)を再開します。
 
-To resume a paused cluster, take the following steps:
+一時停止したクラスターを再開するには、次の手順を実行します。
 
-1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
-2. For the cluster that you want to resume, click **Resume**. The **Resume your cluster** dialog is displayed.
+1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-    > **Note:**
+2.  再開したいクラスターで、 **「再開」**をクリックします。「**クラスターの再開」**ダイアログが表示されます。
+
+    > **注記：**
     >
-    > You cannot resume a cluster in the **Pausing** status.
+    > **一時停止中の**ステータスではクラスターを再開することはできません。
 
-3. In the dialog, click **Resume** to confirm your choice. The cluster status becomes **Resuming**.
+3.  ダイアログで**「再開」**をクリックして選択を確定します。クラスターのステータスが**「再開中」**に変わります。
 
-Depending on your cluster size, it can take several minutes to resume the cluster. After the cluster is resumed, the cluster status changes from **Resuming** to **Available**.
+クラスターのサイズによっては、再開に数分かかる場合があります。再開後、クラスターのステータスは**「再開中」**から**「使用可能」**に変わります。
 
-You can also resume a cluster using TiDB Cloud API. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
+TiDB Cloud APIを使用してクラスタを再開することもできます。現在、 TiDB Cloud APIはまだベータ版です。詳細については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)ご覧ください。

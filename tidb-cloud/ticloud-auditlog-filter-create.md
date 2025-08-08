@@ -1,61 +1,61 @@
 ---
 title: ticloud serverless audit-log filter-rule create
-summary: The reference of `ticloud serverless audit-log filter-rule create`.
+summary: ticloud serverless audit-log filter-rule create` のリファレンス。
 ---
 
-# ticloud serverless audit-log filter-rule create
+# ticloud サーバーレス監査ログフィルタールールの作成 {#ticloud-serverless-audit-log-filter-rule-create}
 
-Create an audit log filter rule for a {{{ .starter }}} cluster.
+TiDB Cloud Serverless クラスターの監査ログ フィルター ルールを作成します。
 
 ```shell
 ticloud serverless audit-log filter-rule create [flags]
 ```
 
-Or use the following alias command:
+または、次のエイリアス コマンドを使用します。
 
 ```shell
 ticloud serverless audit-log filter create [flags]
 ```
 
-## Examples
+## 例 {#examples}
 
-Create a filter rule in interactive mode:
+対話モードでフィルタ ルールを作成します。
 
 ```shell
 ticloud serverless audit-log filter create
 ```
 
-Create a filter rule that captures all audit logs in non-interactive mode:
+非対話型モードですべての監査ログをキャプチャするフィルタ ルールを作成します。
 
 ```shell
 ticloud serverless audit-log filter create --cluster-id <cluster-id> --name <rule-name> --rule '{"users":["%@%"],"filters":[{}]}'
 ```
 
-Create a filter rule that filters `QUERY` and `EXECUTE` events for the `test.t` table and filters `QUERY` events for all tables in non-interactive mode:
+非対話型モードで、テーブル`test.t`の`QUERY`および`EXECUTE`イベントをフィルターし、すべてのテーブルの`QUERY`イベントをフィルターするフィルター ルールを作成します。
 
 ```shell
 ticloud serverless audit-log filter create --cluster-id <cluster-id> --name <rule-name> --rule '{"users":["%@%"],"filters":[{"classes":["QUERY","EXECUTE"],"tables":["test.t"]},{"classes":["QUERY"]}]}'
 ```
 
-## Flags
+## 旗 {#flags}
 
-In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLIプロンプトに従って入力するだけです。
 
-| Flag                    | Description                                                                                                 | Required | Note                                                 |
-|-------------------------|-------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | The ID of the cluster.                                                                                      | Yes      | Only works in non-interactive mode.                  |
-| --name string           | The name of the filter rule.                                                                                | Yes      | Only works in non-interactive mode.                  |
-| --rule string           | Filter rule expressions. Use `ticloud serverless audit-log filter template` to see filter templates.        | Yes      | Only works in non-interactive mode.                  |
-| -h, --help              | Shows help information for this command.                                                                    | No       | Works in both non-interactive and interactive modes. |
+| フラグ                  | 説明                                                                               | 必須  | 注記                       |
+| -------------------- | -------------------------------------------------------------------------------- | --- | ------------------------ |
+| -c, --cluster-id 文字列 | クラスターの ID。                                                                       | はい  | 非対話型モードでのみ動作します。         |
+| --name 文字列           | フィルター ルールの名前。                                                                    | はい  | 非対話型モードでのみ動作します。         |
+| --ルール文字列             | フィルタールール式。フィルターテンプレートを表示するには`ticloud serverless audit-log filter template`使用します。 | はい  | 非対話型モードでのみ動作します。         |
+| -h, --help           | このコマンドのヘルプ情報を表示します。                                                              | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag                 | Description                                                                                          | Required | Note                                                                                                             |
-|----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enables debug mode.                                                                                  | No       | Works in both non-interactive and interactive modes.                                                             |
+| フラグ               | 説明                                                                             | 必須  | 注記                                                      |
+| ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------- |
+| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
+| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| -D, --debug       | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、皆様からの貢献も歓迎いたします。

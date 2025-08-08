@@ -1,28 +1,28 @@
 ---
 title: TiDB 3.1 Beta Release Notes
-summary: TiDB 3.1 Beta was released on December 20, 2019. It includes SQL Optimizer improvements and supports the Follower Read feature. TiKV now supports distributed backup and restore, as well as the Follower Read feature. PD also supports distributed backup and restore.
+summary: TiDB 3.1ベータ版は2019年12月20日にリリースされました。SQLオプティマイザーの改良に加え、Follower Read機能もサポートされています。TiKVは、Follower Read機能に加え、分散バックアップとリストアをサポートするようになりました。PDも分散バックアップとリストアをサポートします。
 ---
 
-# TiDB 3.1 Beta Release Notes
+# TiDB 3.1 ベータ版リリースノート {#tidb-3-1-beta-release-notes}
 
-Release date: December 20, 2019
+発売日：2019年12月20日
 
-TiDB version: 3.1.0-beta
+TiDB バージョン: 3.1.0-beta
 
-TiDB Ansible version: 3.1.0-beta
+TiDB Ansible バージョン: 3.1.0-beta
 
-## TiDB
+## TiDB {#tidb}
 
-+ SQL Optimizer
-    - Enrich SQL hints [#12192](https://github.com/pingcap/tidb/pull/12192)
-+ New feature
-    - Support the Follower Read feature [#12535](https://github.com/pingcap/tidb/pull/12535)
+-   SQLオプティマイザー
+    -   SQLヒントの強化[＃12192](https://github.com/pingcap/tidb/pull/12192)
+-   新機能
+    -   Follower Read機能[＃12535](https://github.com/pingcap/tidb/pull/12535)サポートする
 
-## TiKV
+## TiKV {#tikv}
 
-- Support the distributed backup and restore feature [#5532](https://github.com/tikv/tikv/pull/5532)
-- Support the Follower Read feature [#5562](https://github.com/tikv/tikv/pull/5562)
+-   分散バックアップおよび復元機能をサポート[＃5532](https://github.com/tikv/tikv/pull/5532)
+-   Follower Read機能[＃5562](https://github.com/tikv/tikv/pull/5562)サポートする
 
-## PD
+## PD {#pd}
 
-- Support the distributed backup and restore feature [#1896](https://github.com/pingcap/pd/pull/1896)
+-   分散バックアップおよび復元機能をサポート[＃1896](https://github.com/pingcap/pd/pull/1896)

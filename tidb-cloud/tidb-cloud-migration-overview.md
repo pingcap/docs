@@ -1,66 +1,66 @@
 ---
 title: Migration and Import Overview
-summary: Learn an overview of data migration and import scenarios for TiDB Cloud.
+summary: TiDB Cloudのデータ移行およびインポート シナリオの概要について説明します。
 aliases: ['/tidbcloud/export-data-from-tidb-cloud']
 ---
 
-# Migration and Import Overview
+# 移行とインポートの概要 {#migration-and-import-overview}
 
-You can migrate data from a wide variety of data sources to TiDB Cloud. This document gives an overview of the data migration scenarios.
+様々なデータソースからTiDB Cloudにデータを移行できます。このドキュメントでは、データ移行シナリオの概要を説明します。
 
-## Migrate data from MySQL-Compatible databases
+## MySQL互換データベースからデータを移行する {#migrate-data-from-mysql-compatible-databases}
 
-When you migrate data from a MySQL-compatible database, you can perform full data migration and incremental data migration. The migration scenarios and methods are as follows:
+MySQL互換データベースからデータを移行する場合、完全データ移行と増分データ移行を実行できます。移行シナリオと移行方法は次のとおりです。
 
-- Migrate MySQL-compatible databases using Data Migration
+-   データ移行を使用してMySQL互換データベースを移行する
 
-    TiDB is highly compatible with MySQL. You can use Data Migration in the TiDB Cloud console to migrate data from any MySQL-compatible databases to TiDB Cloud smoothly. For more information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
+    TiDBはMySQLとの互換性が非常に高く、 TiDB Cloudコンソールのデータ移行機能を使用することで、MySQL互換データベースからTiDB Cloudへのデータの移行をスムーズに行うことができます。詳細については、 [データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)ご覧ください。
 
-- Migrate using AWS DMS
+-   AWS DMS を使用して移行する
 
-    If you want to migrate heterogeneous databases, such as PostgreSQL, Oracle, and SQL Server to TiDB Cloud, it is recommended to use AWS Database Migration Service (AWS DMS).
+    PostgreSQL、Oracle、SQL Server などの異種データベースをTiDB Cloudに移行する場合は、AWS Database Migration Service (AWS DMS) を使用することをお勧めします。
 
-    - [Migrate from MySQL-Compatible Databases to TiDB Cloud Using AWS DMS](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
-    - [Migrate from Amazon RDS for Oracle Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
+    -   [AWS DMS を使用して MySQL 互換データベースからTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
+    -   [AWS DMS を使用して Amazon RDS for Oracle から移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
 
-- Migrate and merge MySQL shards
+-   MySQLシャードの移行とマージ
 
-    If your application uses MySQL shards for data storage, you can migrate these shards into TiDB Cloud as one table. For more information, see [Migrate and Merge MySQL Shards of Large Datasets to TiDB Cloud](/tidb-cloud/migrate-sql-shards.md).
+    アプリケーションでデータstorageにMySQLシャードを使用している場合は、これらのシャードを1つのテーブルとしてTiDB Cloudに移行できます。詳細については、 [大規模データセットのMySQLシャードをTiDB Cloudに移行および統合する](/tidb-cloud/migrate-sql-shards.md)ご覧ください。
 
-- Migrate from TiDB Self-Managed
+-   TiDBセルフマネージドからの移行
 
-    You can migrate data from your TiDB Self-Managed clusters to TiDB Cloud (AWS) through Dumpling and TiCDC. For more information, see [Migrate from TiDB Self-Managed to TiDB Cloud](/tidb-cloud/migrate-from-op-tidb.md).
+    DumplingとTiCDCを介して、TiDBセルフマネージドクラスターからTiDB Cloud （AWS）にデータを移行できます。詳細については、 [TiDBセルフマネージドからTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)ご覧ください。
 
-## Import data from files to TiDB Cloud
+## ファイルからTiDB Cloudにデータをインポートする {#import-data-from-files-to-tidb-cloud}
 
-If you have data files in SQL, CSV, Parquet, or Aurora Snapshot formats, you can import these files to TiDB Cloud in one go. The import scenarios and methods are as follows:
+SQL、CSV、Parquet、またはAurora Snapshot形式のデータファイルをお持ちの場合は、これらのファイルをTiDB Cloudに一括でインポートできます。インポートのシナリオと方法は次のとおりです。
 
-- Import a local CSV file to TiDB Cloud
+-   ローカルCSVファイルをTiDB Cloudにインポートする
 
-    You can import a local CSV file to TiDB Cloud. For more information, see [Import Local Files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md).
+    ローカルCSVファイルをTiDB Cloudにインポートできます。詳細については、 [ローカルファイルをTiDB Cloudにインポートする](/tidb-cloud/tidb-cloud-import-local-files.md)ご覧ください。
 
-- Import sample data (SQL file) to TiDB Cloud
+-   サンプルデータ（SQLファイル）をTiDB Cloudにインポートする
 
-    You can import sample data (SQL file) to TiDB Cloud to quickly get familiar with the TiDB Cloud interface and the import process. For more information, see [Import Sample Data to {{{ .starter }}}](/tidb-cloud/import-sample-data-serverless.md) and [Import Sample Data to TiDB Cloud Dedicated](/tidb-cloud/import-sample-data.md).
+    TiDB Cloudにサンプルデータ（SQL ファイル）をインポートすることで、 TiDB Cloud のインターフェースとインポートプロセスをすぐに理解することができます。詳細については、 [サンプルデータをTiDB Cloud Serverlessにインポートする](/tidb-cloud/import-sample-data-serverless.md)と[TiDB Cloud Dedicatedへのサンプルデータのインポート](/tidb-cloud/import-sample-data.md)ご覧ください。
 
-- Import CSV files from Amazon S3, Google Cloud Storage (GCS), or Azure Blob Storage into TiDB Cloud
+-   Amazon S3、Google Cloud Storage (GCS)、または Azure Blob Storage から CSV ファイルをTiDB Cloudにインポートします。
 
-    You can import CSV files from Amazon S3, Google Cloud Storage (GCS), or Azure Blob Storage into TiDB Cloud. For more information, see [Import CSV Files from Cloud Storage into {{{ .starter }}}](/tidb-cloud/import-csv-files-serverless.md) and [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md).
+    Amazon S3、Google Cloud Storage（GCS）、またはAzure Blob StorageからTiDB CloudにCSVファイルをインポートできます。詳細については、 [クラウド ストレージからTiDB Cloud Serverless に CSV ファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)と[クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)ご覧ください。
 
-- Import Apache Parquet files from Amazon S3, Google Cloud Storage (GCS), or Azure Blob Storage into TiDB Cloud
+-   Amazon S3、Google Cloud Storage (GCS)、または Azure Blob Storage から Apache Parquet ファイルをTiDB Cloudにインポートします。
 
-    You can import Parquet files from Amazon S3, Google Cloud Storage (GCS), or Azure Blob Storage into TiDB Cloud. For more information, see [Import Apache Parquet Files from Cloud Storage into {{{ .starter }}}](/tidb-cloud/import-parquet-files-serverless.md) and [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-parquet-files.md).
+    Amazon S3、Google Cloud Storage（GCS）、またはAzure Blob StorageからParquetファイルをTiDB Cloudにインポートできます。詳細については、 [Cloud Storage からTiDB Cloud Serverless に Apache Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files-serverless.md)と[クラウドストレージからTiDB Cloud DedicatedにApache Parquetファイルをインポートする](/tidb-cloud/import-parquet-files.md)ご覧ください。
 
-## Reference
+## 参照 {#reference}
 
-### Configure cloud storage access
+### クラウドstorageアクセスを構成する {#configure-cloud-storage-access}
 
-If your source data is stored in Amazon S3, Google Cloud Storage (GCS) buckets, or Azure Blob Storage containers, before importing or migrating the data to TiDB Cloud, you need to configure access to the storage. For more information, see [Configure External Storage Access for {{{ .starter }}}](/tidb-cloud/serverless-external-storage.md) and [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/dedicated-external-storage.md).
+ソースデータがAmazon S3、Google Cloud Storage（GCS）バケット、またはAzure Blob Storageコンテナに保存されている場合、 TiDB Cloudにデータをインポートまたは移行する前に、storageへのアクセスを設定する必要があります。詳細については、 [TiDB Cloud Serverless の外部ストレージアクセスを構成する](/tidb-cloud/serverless-external-storage.md)と[TiDB Cloud Dedicatedの外部ストレージアクセスを構成する](/tidb-cloud/dedicated-external-storage.md)参照してください。
 
-### Naming conventions for data import
+### データインポートの命名規則 {#naming-conventions-for-data-import}
 
-To make sure that your data can be imported successfully, you need to prepare schema files and data files that conform to the naming conventions. For more information, see [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md).
+データを確実にインポートするには、命名規則に準拠したスキーマファイルとデータファイルを準備する必要があります。詳細については、 [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)参照してください。
 
-### Troubleshoot access denied errors during data import from Amazon S3
+### Amazon S3 からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング {#troubleshoot-access-denied-errors-during-data-import-from-amazon-s3}
 
-You can troubleshoot access denied errors that might occur when you import data from Amazon S3 into TiDB Cloud. For more information, see [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+Amazon S3からTiDB Cloudにデータをインポートする際に発生する可能性のあるアクセス拒否エラーをトラブルシューティングできます。詳細については、 [Amazon S3 からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)参照してください。

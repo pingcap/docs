@@ -1,73 +1,71 @@
 ---
 title: Information Functions
-summary: Learn about the information functions.
+summary: 情報関数について学習します。
 ---
 
-# Information Functions
+# 情報機能 {#information-functions}
 
-TiDB supports most of the [information functions](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html) available in MySQL 8.0.
+TiDB は、MySQL 8.0 で利用可能な[情報関数](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html)ほとんどをサポートしています。
 
-## TiDB supported MySQL functions
+## TiDB がサポートする MySQL関数 {#tidb-supported-mysql-functions}
 
-| Name | Description |
-|:-----|:------------|
-| [`BENCHMARK()`](#benchmark) | Execute an expression in a loop |
-| [`CONNECTION_ID()`](#connection_id) | Return the connection ID (thread ID) for the connection  |
-| [`CURRENT_ROLE()`](#current_role) | Return the role that is in use by the connection |
-| [`CURRENT_USER()`, `CURRENT_USER`](#current_user) | Return the authenticated user name and host name |
-| [`DATABASE()`](#database) | Return the default (current) database name  |
-| [`FOUND_ROWS()`](#found_rows) | For a `SELECT` with a `LIMIT` clause, the number of the rows that are returned if there is no `LIMIT` clause |
-| [`LAST_INSERT_ID()`](#last_insert_id) | Return the value of the `AUTOINCREMENT` column for the last `INSERT`   |
-| [`ROW_COUNT()`](#row_count) | The number of rows affected |
-| [`SCHEMA()`](#schema) | Synonym for `DATABASE()`  |
-| [`SESSION_USER()`](#session_user) | Synonym for `USER()`    |
-| [`SYSTEM_USER()`](#system_user) | Synonym for `USER()`   |
-| [`USER()`](#user) | Return the user name and host name provided by the client    |
-| [`VERSION()`](#version) | Return a string that indicates the MySQL server version   |
+| 名前                                                 | 説明                                            |
+| :------------------------------------------------- | :-------------------------------------------- |
+| [`BENCHMARK()`](#benchmark)                        | ループ内で式を実行する                                   |
+| [`CONNECTION_ID()`](#connection_id)                | 接続の接続ID（スレッドID）を返します                          |
+| [`CURRENT_ROLE()`](#current_role)                  | 接続で使用されているロールを返します                            |
+| [`CURRENT_USER()` 、 `CURRENT_USER`](#current_user) | 認証されたユーザー名とホスト名を返す                            |
+| [`DATABASE()`](#database)                          | デフォルト（現在の）データベース名を返す                          |
+| [`FOUND_ROWS()`](#found_rows)                      | `LIMIT`節を持つ`SELECT`の場合、 `LIMIT`節がない場合に返される行の数 |
+| [`LAST_INSERT_ID()`](#last_insert_id)              | 最後の`INSERT`列の`AUTOINCREMENT`番目の値を返す           |
+| [`ROW_COUNT()`](#row_count)                        | 影響を受ける行数                                      |
+| [`SCHEMA()`](#schema)                              | `DATABASE()`の同義語                              |
+| [`SESSION_USER()`](#session_user)                  | `USER()`の同義語                                  |
+| [`SYSTEM_USER()`](#system_user)                    | `USER()`の同義語                                  |
+| [`USER()`](#user)                                  | クライアントから提供されたユーザー名とホスト名を返します                  |
+| [`VERSION()`](#version)                            | MySQLサーバーのバージョンを示す文字列を返します                    |
 
-### BENCHMARK()
+### ベンチマーク（） {#benchmark}
 
-The `BENCHMARK()` function executes the given expression a specified number of times.
+`BENCHMARK()`関数は、指定された回数、指定された式を実行します。
 
-Syntax:
+構文：
 
 ```sql
 BENCHMARK(count, expression)
 ```
 
-- `count`: the number of times the expression to be executed.
-- `expression`: the expression to be executed repeatedly.
+-   `count` : 式を実行する回数。
+-   `expression` : 繰り返し実行される式。
 
-Example:
+例：
 
 ```sql
 SELECT BENCHMARK(5, SLEEP(2));
 ```
 
-```
-+------------------------+
-| BENCHMARK(5, SLEEP(2)) |
-+------------------------+
-|                      0 |
-+------------------------+
-1 row in set (10.00 sec)
-```
+    +------------------------+
+    | BENCHMARK(5, SLEEP(2)) |
+    +------------------------+
+    |                      0 |
+    +------------------------+
+    1 row in set (10.00 sec)
 
-### CONNECTION_ID()
+### 接続ID() {#connection-id}
 
 <CustomContent platform="tidb">
 
-The `CONNECTION_ID()` function returns the ID of the connection. Based on the value of the [`enable-32bits-connection-id`](/tidb-configuration-file.md#enable-32bits-connection-id-new-in-v730) configuration item for TiDB, this function returns a 32-bit or 64-bit connection ID.
+`CONNECTION_ID()`関数は接続IDを返します。TiDBの[`enable-32bits-connection-id`](/tidb-configuration-file.md#enable-32bits-connection-id-new-in-v730)設定項目の値に基づいて、この関数は32ビットまたは64ビットの接続IDを返します。
 
-If [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610) is enabled, the connection ID can be used to kill queries across multiple TiDB instances of the same cluster.
+[`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が有効になっている場合、接続 ID を使用して、同じクラスターの複数の TiDB インスタンス間でクエリを強制終了できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The `CONNECTION_ID()` function returns the ID of the connection. Based on the value of the [`enable-32bits-connection-id`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-32bits-connection-id-new-in-v730) configuration item for TiDB, this function returns a 32-bit or 64-bit connection ID.
+`CONNECTION_ID()`関数は接続IDを返します。TiDBの[`enable-32bits-connection-id`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-32bits-connection-id-new-in-v730)設定項目の値に基づいて、この関数は32ビットまたは64ビットの接続IDを返します。
 
-If [`enable-global-kill`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-global-kill-new-in-v610) is enabled, the connection ID can be used to kill queries across multiple TiDB instances of the same cluster.
+[`enable-global-kill`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-global-kill-new-in-v610)が有効になっている場合、接続 ID を使用して、同じクラスターの複数の TiDB インスタンス間でクエリを強制終了できます。
 
 </CustomContent>
 
@@ -75,26 +73,24 @@ If [`enable-global-kill`](https://docs.pingcap.com/tidb/stable/tidb-configuratio
 SELECT CONNECTION_ID();
 ```
 
-```
-+-----------------+
-| CONNECTION_ID() |
-+-----------------+
-|       322961414 |
-+-----------------+
-1 row in set (0.00 sec)
-```
+    +-----------------+
+    | CONNECTION_ID() |
+    +-----------------+
+    |       322961414 |
+    +-----------------+
+    1 row in set (0.00 sec)
 
-### CURRENT_ROLE()
+### 現在のロール() {#current-role}
 
 <CustomContent platform="tidb">
 
-The `CURRENT_ROLE()` function returns the current [role](/role-based-access-control.md) for the current session.
+`CURRENT_ROLE()`関数は、現在のセッションの現在の[役割](/role-based-access-control.md)返します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The `CURRENT_ROLE()` function returns the current [role](https://docs.pingcap.com/tidb/stable/role-based-access-control) for the current session.
+`CURRENT_ROLE()`関数は、現在のセッションの現在の[役割](https://docs.pingcap.com/tidb/stable/role-based-access-control)返します。
 
 </CustomContent>
 
@@ -102,87 +98,77 @@ The `CURRENT_ROLE()` function returns the current [role](https://docs.pingcap.co
 SELECT CURRENT_ROLE();
 ```
 
-```
-+----------------+
-| CURRENT_ROLE() |
-+----------------+
-| NONE           |
-+----------------+
-1 row in set (0.00 sec)
-```
+    +----------------+
+    | CURRENT_ROLE() |
+    +----------------+
+    | NONE           |
+    +----------------+
+    1 row in set (0.00 sec)
 
-### CURRENT_USER()
+### 現在のユーザー() {#current-user}
 
-The `CURRENT_USER()` function returns the account that is used in the current session.
+`CURRENT_USER()`関数は、現在のセッションで使用されているアカウントを返します。
 
 ```sql
 SELECT CURRENT_USER();
 ```
 
-```
-+----------------+
-| CURRENT_USER() |
-+----------------+
-| root@%         |
-+----------------+
-1 row in set (0.00 sec)
-```
+    +----------------+
+    | CURRENT_USER() |
+    +----------------+
+    | root@%         |
+    +----------------+
+    1 row in set (0.00 sec)
 
-### DATABASE()
+### データベース() {#database}
 
-The `DATABASE()` function returns the database schema that the current session is using.
+`DATABASE()`関数は、現在のセッションで使用されているデータベース スキーマを返します。
 
 ```sql
 SELECT DATABASE();
 ```
 
-```
-+------------+
-| DATABASE() |
-+------------+
-| test       |
-+------------+
-1 row in set (0.00 sec)
-```
+    +------------+
+    | DATABASE() |
+    +------------+
+    | test       |
+    +------------+
+    1 row in set (0.00 sec)
 
-### FOUND_ROWS()
+### 見つかった行() {#found-rows}
 
-The `FOUND_ROWS()` function returns the number of rows in the result set of the last executed `SELECT` statement.
+`FOUND_ROWS()`関数は、最後に実行された`SELECT`ステートメントの結果セット内の行数を返します。
 
 ```sql
 SELECT 1 UNION ALL SELECT 2;
 ```
 
-```
-+------+
-| 1    |
-+------+
-|    2 |
-|    1 |
-+------+
-2 rows in set (0.01 sec)
-```
+    +------+
+    | 1    |
+    +------+
+    |    2 |
+    |    1 |
+    +------+
+    2 rows in set (0.01 sec)
 
 ```sql
 SELECT FOUND_ROWS();
 ```
 
-```
-+--------------+
-| FOUND_ROWS() |
-+--------------+
-|            2 |
-+--------------+
-1 row in set (0.00 sec)
-```
+    +--------------+
+    | FOUND_ROWS() |
+    +--------------+
+    |            2 |
+    +--------------+
+    1 row in set (0.00 sec)
 
-> **Note:**
+> **注記：**
 >
-> The `SQL_CALC_FOUND_ROWS` query modifier, which calculates the total number of rows in a result set without considering the `LIMIT` clause, is only accepted if [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) is enabled. This query modifier is deprecated starting from MySQL 8.0.17. It is recommended to use `COUNT(*)` instead.
+> クエリ修飾子`SQL_CALC_FOUND_ROWS` 、クエリ修飾子`LIMIT`を考慮せずに結果セットの合計行数を計算しますが、クエリ修飾子[`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)有効な場合にのみ使用できます。このクエリ修飾子は、MySQL 8.0.17 以降では非推奨です。代わりにクエリ修飾子`COUNT(*)`使用することをお勧めします。
 
-### LAST_INSERT_ID()
+### 最終挿入ID() {#last-insert-id}
 
-The `LAST_INSERT_ID()` function returns the ID of the last inserted row in a table that contains an [`AUTO_INCREMENT`](/auto-increment.md) or [`AUTO_RANDOM`](/auto-random.md) column.
+`LAST_INSERT_ID()`関数は、 [`AUTO_INCREMENT`](/auto-increment.md)または[`AUTO_RANDOM`](/auto-random.md)列を含むテーブルに最後に挿入された行の ID を返します。
 
 ```sql
 CREATE TABLE t1(id SERIAL);
@@ -212,17 +198,17 @@ TABLE t1;
 2 rows in set (0.00 sec)
 ```
 
-> **Note**
+> **注記**
 >
-> - In TiDB, [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache) might lead to results that differ from those returned by MySQL. This discrepancy arises because TiDB caches IDs on each node, potentially leading to IDs that are out of order or have gaps. If maintaining strict ID ordering is essential for your application, you can enable [MySQL compatible mode](/auto-increment.md#mysql-compatibility-mode).
+> -   TiDBでは、 [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache)指定するとMySQLが返す結果と異なる結果になる可能性があります。この不一致は、TiDBが各ノードにIDをキャッシュするため、IDの順序が乱れたり、IDに空白が生じたりする可能性があるためです。アプリケーションで厳密なID順序の維持が不可欠な場合は、 [MySQL互換モード](/auto-increment.md#mysql-compatibility-mode)有効にすることができます。
 >
-> - In the preceding example, IDs increase by 2 while MySQL would generate IDs incrementing by 1 in the same scenario. For more compatibility information, see [Auto-increment ID](/mysql-compatibility.md#auto-increment-id).
+> -   上の例ではIDが2ずつ増加しますが、MySQLでは同じシナリオでIDが1ずつ増加します。互換性に関する詳細は[自動増分ID](/mysql-compatibility.md#auto-increment-id)参照してください。
 
-The `LAST_INSERT_ID(expr)` function can accept an expression as an argument, storing the value for the next call to `LAST_INSERT_ID()`. You can use it as a MySQL-compatible method for generating sequences. Note that TiDB also supports proper [sequence functions](/functions-and-operators/sequence-functions.md).
+`LAST_INSERT_ID(expr)`関数は式を引数として受け取り、その値を`LAST_INSERT_ID()`次回呼び出し時に保存します。MySQL互換のシーケンス生成メソッドとして使用できます。TiDBは[シーケンス関数](/functions-and-operators/sequence-functions.md)もサポートしています。
 
-### ROW_COUNT()
+### ROW_COUNT() {#row-count}
 
-The `ROW_COUNT()` function returns the number of affected rows.
+`ROW_COUNT()`関数は影響を受ける行の数を返します。
 
 ```sql
 CREATE TABLE t1(id BIGINT UNSIGNED PRIMARY KEY AUTO_RANDOM);
@@ -241,38 +227,36 @@ SELECT ROW_COUNT();
 1 row in set (0.00 sec)
 ```
 
-### SCHEMA()
+### スキーマ() {#schema}
 
-The `SCHEMA()` function is a synonym for [`DATABASE()`](#database).
+`SCHEMA()`関数は[`DATABASE()`](#database)の同義語です。
 
-### SESSION_USER()
+### セッションユーザー() {#session-user}
 
-The `SESSION_USER()` function is a synonym for [`USER()`](#user).
+`SESSION_USER()`関数は[`USER()`](#user)の同義語です。
 
-### SYSTEM_USER()
+### SYSTEM_USER() {#system-user}
 
-The `SYSTEM_USER()` function is a synonym for [`USER()`](#user).
+`SYSTEM_USER()`関数は[`USER()`](#user)の同義語です。
 
-### USER()
+### ユーザー（） {#user}
 
-The `USER()` function returns the user of the current connection. This might differ slightly from the output of `CURRENT_USER()`, as `USER()` displays the actual IP address instead of a wildcard.
+`USER()`関数は現在の接続のユーザーを返します。5 `USER()`ワイルドカードではなく実際のIPアドレスを表示するため、 `CURRENT_USER()`の出力とは若干異なる場合があります。
 
 ```sql
 SELECT USER(), CURRENT_USER();
 ```
 
-```
-+----------------+----------------+
-| USER()         | CURRENT_USER() |
-+----------------+----------------+
-| root@127.0.0.1 | root@%         |
-+----------------+----------------+
-1 row in set (0.00 sec)
-```
+    +----------------+----------------+
+    | USER()         | CURRENT_USER() |
+    +----------------+----------------+
+    | root@127.0.0.1 | root@%         |
+    +----------------+----------------+
+    1 row in set (0.00 sec)
 
-### VERSION()
+### バージョン() {#version}
 
-The `VERSION()` function returns the TiDB version in a format that is compatible with MySQL. To get a more detailed result, you can use the [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version) function.
+`VERSION()`関数は、MySQLと互換性のある形式でTiDBのバージョンを返します。より詳細な結果を取得するには、 [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version)関数を使用します。
 
 ```sql
 SELECT VERSION();
@@ -299,26 +283,26 @@ Store: tikv
 1 row in set (0.00 sec)
 ```
 
-The preceding example is from TiDB v7.5.1, which identifies itself as MySQL 8.0.11.
+上記の例は、MySQL 8.0.11 として識別される TiDB v7.5.1 からのものです。
 
 <CustomContent platform="tidb">
 
-If you want to change the returned version, you can modify the [`server-version`](/tidb-configuration-file.md#server-version) configuration item.
+返されるバージョンを変更する場合は、 [`server-version`](/tidb-configuration-file.md#server-version)構成項目を変更できます。
 
 </CustomContent>
 
-## TiDB specific functions
+## TiDB固有の関数 {#tidb-specific-functions}
 
-The following function is only supported by TiDB, and there is no equivalent function in MySQL.
+次の関数は TiDB でのみサポートされており、MySQL には同等の関数はありません。
 
-| Name | Description |
-|:-----|:------------|
-| [`CURRENT_RESOURCE_GROUP()`](/functions-and-operators/tidb-functions.md#current_resource_group)  | Return the name of the resource group that the current session is bound to |
+| 名前                                                                                              | 説明                                  |
+| :---------------------------------------------------------------------------------------------- | :---------------------------------- |
+| [`CURRENT_RESOURCE_GROUP()`](/functions-and-operators/tidb-functions.md#current_resource_group) | 現在のセッションがバインドされているリソース グループの名前を返します |
 
-## Unsupported functions
+## サポートされていない関数 {#unsupported-functions}
 
-* `CHARSET()`
-* `COERCIBILITY()`
-* `COLLATION()`
-* `ICU_VERSION()`
-* `ROLES_GRAPHML()`
+-   `CHARSET()`
+-   `COERCIBILITY()`
+-   `COLLATION()`
+-   `ICU_VERSION()`
+-   `ROLES_GRAPHML()`

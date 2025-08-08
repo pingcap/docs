@@ -1,38 +1,38 @@
 ---
 title: TiKV MVCC In-Memory Engine
-summary: Learn the applicable scenarios and working principles of the in-memory engine, and how to use the in-memory engine to accelerate queries for MVCC versions.
+summary: インメモリ エンジンの適用可能なシナリオと動作原理、およびインメモリ エンジンを使用して MVCC バージョンのクエリを高速化する方法について学習します。
 ---
 
-# TiKV MVCC In-Memory Engine
+# TiKV MVCC インメモリエンジン {#tikv-mvcc-in-memory-engine}
 
-TiKV MVCC In-Memory Engine (IME) is primarily used to accelerate queries that need to scan a large number of MVCC historical versions, that is, [the total number of versions scanned (`total_keys`) is much greater than the number of versions processed (`processed_keys`)](/analyze-slow-queries.md#obsolete-mvcc-versions-and-excessive-keys).
+TiKV MVCC インメモリ エンジン (IME) は主に、多数の MVCC 履歴バージョン (つまり[スキャンされたバージョンの合計数 ( `total_keys` ) が、処理されたバージョン数 ( `processed_keys` ) よりもはるかに大きい](/analyze-slow-queries.md#obsolete-mvcc-versions-and-excessive-keys) ) をスキャンする必要があるクエリを高速化するために使用されます。
 
-TiKV MVCC in-memory engine is suitable for the following scenarios:
+TiKV MVCC インメモリ エンジンは、次のシナリオに適しています。
 
-- The application that requires querying records that are frequently updated or deleted.
-- The application that requires adjusting [`tidb_gc_life_time`](/garbage-collection-configuration.md#garbage-collection-configuration) to retain historical versions in TiDB for a longer period (for example, 24 hours).
+-   頻繁に更新または削除されるレコードを照会する必要があるアプリケーション。
+-   履歴バージョンを TiDB に長期間 (たとえば、24 時間) 保持するために[`tidb_gc_life_time`](/garbage-collection-configuration.md#garbage-collection-configuration)調整する必要のあるアプリケーション。
 
-## Implementation principles
+## 実施原則 {#implementation-principles}
 
-The TiKV MVCC in-memory engine caches the latest written MVCC versions in memory, and implements an MVCC GC mechanism independent of TiDB. This allows it to quickly perform GC on MVCC versions in memory, reducing the number of versions scanned during queries, thereby lowering request latency and reducing CPU overhead.
+TiKV MVCCインメモリエンジンは、書き込まれた最新のMVCCバージョンをメモリにキャッシュし、TiDBに依存しないMVCC GCメカニズムを実装します。これにより、メモリ内のMVCCバージョンに対してGCを迅速に実行できるため、クエリ中にスキャンされるバージョン数が削減され、リクエストのレイテンシーとCPUオーバーヘッドが低減されます。
 
-The following diagram illustrates how TiKV organizes MVCC versions:
+次の図は、TiKV が MVCC バージョンを整理する方法を示しています。
 
 ![IME caches recent versions to reduce CPU overhead](/media/tikv-ime-data-organization.png)
 
-The preceding diagram shows two rows of records, each with 9 MVCC versions. The behavior comparison between enabling and not enabling the in-memory engine is as follows:
+上の図は、それぞれ9つのMVCCバージョンを持つ2行のレコードを示しています。インメモリエンジンを有効にした場合と無効にした場合の動作の比較は次のとおりです。
 
-- On the left (in-memory engine disabled): the table records are stored in RocksDB in ascending order by the primary key, with all MVCC versions of the same row adjacent to each other.
-- On the right (in-memory engine enabled): the data in RocksDB is the same as that on the left, but the in-memory engine caches the two latest MVCC versions for each of the two rows.
-- When TiKV processes a scan request with a range of `[k1, k2]` and a start timestamp of `8`:
-    - Without the in-memory engine (left), it needs to process 11 MVCC versions.
-    - With the in-memory engine (right), it only processes 4 MVCC versions, reducing request latency and CPU consumption.
-- When TiKV processes a scan request with a range of `[k1, k2]` and a start timestamp of `7`:
-    - Because the required historical versions are missing in the in-memory engine (right), the cache becomes invalid, and TiKV falls back to reading data from RocksDB.
+-   左側 (メモリ内エンジンが無効): テーブル レコードは主キーの昇順で RocksDB に保存され、同じ行のすべての MVCC バージョンが互いに隣接しています。
+-   右側 (インメモリ エンジンが有効): RocksDB 内のデータは左側のものと同じですが、インメモリ エンジンは 2 つの行ごとに最新の 2 つの MVCC バージョンをキャッシュします。
+-   TiKV が範囲`[k1, k2]`および開始タイムスタンプ`8`のスキャン要求を処理する場合:
+    -   インメモリ エンジンがない場合 (左)、11 個の MVCC バージョンを処理する必要があります。
+    -   インメモリ エンジン (右) では、4 つの MVCC バージョンのみが処理されるため、リクエストのレイテンシーと CPU 消費が削減されます。
+-   TiKV が範囲`[k1, k2]`および開始タイムスタンプ`7`のスキャン要求を処理する場合:
+    -   必要な履歴バージョンがメモリ内エンジンにないため (右)、キャッシュが無効になり、TiKV は RocksDB からデータを読み取るようになります。
 
-## Usage
+## 使用法 {#usage}
 
-To enable the TiKV MVCC in-memory engine (IME), you need to adjust the [TiKV configuration](/tikv-configuration-file.md#in-memory-engine-new-in-v850) and restart TiKV. The configuration details are as follows:
+TiKV MVCCインメモリエンジン（IME）を有効にするには、 [TiKV構成](/tikv-configuration-file.md#in-memory-engine-new-in-v850)調整してTiKVを再起動する必要があります。設定の詳細は次のとおりです。
 
 ```toml
 [in-memory-engine]
@@ -57,40 +57,40 @@ gc-run-interval = "3m"
 mvcc-amplification-threshold = 10
 ```
 
-> **Note:**
+> **注記：**
 >
-> + The in-memory engine is disabled by default. After you enable it, you need to restart TiKV.
-> + Except for `enable`, all the other configuration items can be dynamically adjusted.
+> -   インメモリエンジンはデフォルトで無効になっています。有効にした後は、TiKVを再起動する必要があります。
+> -   `enable`を除き、他のすべての構成項目は動的に調整できます。
 
-### Automatic loading
+### 自動読み込み {#automatic-loading}
 
-After you enable the in-memory engine, TiKV automatically selects the Regions to load based on the read traffic and MVCC amplification of the Region. The specific process is as follows:
+インメモリエンジンを有効にすると、TiKVはリージョンの読み取りトラフィックとMVCC増幅に基づいて、ロードするリージョンを自動的に選択します。具体的なプロセスは以下のとおりです。
 
-1. Regions are sorted based on the number of recent `next` (RocksDB Iterator next API) and `prev` (RocksDB Iterator prev API) calls.
-2. Regions are filtered using the `mvcc-amplification-threshold` configuration parameter. The default value is `10`. MVCC amplification measures read amplification, calculated as (`next` + `prev`) / `processed_keys`.
-3. The top N Regions with severe MVCC amplification are loaded, where N is determined based on memory estimation.
+1.  リージョンは、最近の`next` (RocksDB Iterator next API) と`prev` (RocksDB Iterator prev API) の呼び出し回数に基づいてソートされます。
+2.  領域は`mvcc-amplification-threshold`設定パラメータを使用してフィルタリングされます。デフォルト値は`10`です。MVCC増幅はリード増幅を測定し、( `next` + `prev` ) / `processed_keys`として計算されます。
+3.  重大な MVCC 増幅を持つ上位 N 個の領域がロードされます。N はメモリ推定に基づいて決定されます。
 
-The in-memory engine also periodically evicts Regions. The process is as follows:
+インメモリエンジンは定期的にリージョンの削除も行います。そのプロセスは以下のとおりです。
 
-1. The in-memory engine evicts Regions with low read traffic or low MVCC amplification.
-2. If memory usage reaches 90% of `capacity` and new Regions need to be loaded, then the in-memory engine selects and evicts Regions based on read traffic.
+1.  インメモリ エンジンは、読み取りトラフィックが少ない、または MVCC 増幅が低い領域を排除します。
+2.  メモリ使用量が`capacity`の 90% に達し、新しいリージョンをロードする必要がある場合、インメモリ エンジンは読み取りトラフィックに基づいてリージョンを選択し、排除します。
 
-## Compatibility
+## 互換性 {#compatibility}
 
-+ [BR](/br/br-use-overview.md): the in-memory engine can be used alongside BR. However, during a BR restore, the Regions involved in the restore process are evicted from the in-memory engine. After the BR restore is complete, if the corresponding Regions remain hotspots, they will be automatically loaded by the in-memory engine.
-+ [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md): the in-memory engine can be used alongside TiDB Lightning. However, when TiDB Lightning operates in physical import mode, it evicts the Regions involved in the restore process from the in-memory engine. Once the physical import is complete, if the corresponding Regions remain hotspots, they will be automatically loaded by the in-memory engine.
-+ [Follower Read](/develop/dev-guide-use-follower-read.md) and [Stale Read](/develop/dev-guide-use-stale-read.md): the in-memory engine can be used alongside these two features. However, the in-memory engine can only accelerate coprocessor requests on the Leader, and cannot accelerate Follower Read and Stale Read operations.
-+ [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md): the in-memory engine can be used alongside Flashback. However, Flashback invalidates the in-memory engine cache. After the Flashback process is complete, the in-memory engine will automatically load hotspot Regions.
+-   [BR](/br/br-use-overview.md) : インメモリエンジンはBRと併用できます。ただし、 BRリストア中は、リストアプロセスに関係するリージョンがBRメモリエンジンから削除されます。BR リストアが完了した後、対応するリージョンがホットスポットとして残っている場合は、インメモリエンジンによって自動的にロードされます。
+-   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) : インメモリエンジンはTiDB Lightningと併用できます。ただし、 TiDB Lightning が物理インポートモードで動作する場合、復元プロセスに関係するリージョンはインメモリエンジンから削除されます。物理インポートが完了すると、対応するリージョンがホットスポットとして残っている場合は、インメモリエンジンによって自動的にロードされます。
+-   [Follower Read](/develop/dev-guide-use-follower-read.md)と[ステイル読み取り](/develop/dev-guide-use-stale-read.md) : インメモリエンジンは、これら 2 つの機能と併用できます。ただし、インメモリエンジンはLeader上のコプロセッサ要求のみを高速化でき、Follower Readとステイル読み取り操作を高速化することはできません。
+-   [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) : インメモリエンジンはフラッシュバックと併用できます。ただし、フラッシュバックはインメモリエンジンのキャッシュを無効化します。フラッシュバック処理が完了すると、インメモリエンジンはホットスポット領域を自動的にロードします。
 
-## FAQ
+## FAQ {#faq}
 
-### Can the in-memory engine reduce write latency and increase write throughput?
+### インメモリ エンジンは書き込みレイテンシーを削減し、書き込みスループットを向上させることができますか? {#can-the-in-memory-engine-reduce-write-latency-and-increase-write-throughput}
 
-No. The in-memory engine can only accelerate read requests that scan a large number of MVCC versions.
+いいえ。インメモリ エンジンは、多数の MVCC バージョンをスキャンする読み取り要求のみを高速化できます。
 
-### How to determine if the in-memory engine can improve my scenario?
+### インメモリ エンジンによってシナリオを改善できるかどうかを判断するにはどうすればよいですか? {#how-to-determine-if-the-in-memory-engine-can-improve-my-scenario}
 
-You can execute the following SQL statement to check if there are slow queries with `Total_keys` much greater than `Process_keys`:
+次の SQL ステートメントを実行して、 `Total_keys`が`Process_keys`より大幅に大きい遅いクエリがあるかどうかを確認できます。
 
 ```sql
 SELECT
@@ -119,47 +119,43 @@ ORDER BY Total_keys DESC
 LIMIT 5;
 ```
 
-Example:
+例：
 
-The following result shows that queries with severe MVCC amplification exist on the `db1.tbl1` table. TiKV processes 1358517 MVCC versions and only returns 2 versions.
+次の結果は、 `db1.tbl1`テーブルに深刻な MVCC 増幅を伴うクエリが存在することを示しています。TiKV は 1358517 個の MVCC バージョンを処理し、2 つのバージョンのみを返します。
 
-```
-+----------------------------+-----+-------------------+--------------+------------+-----------------------------------+--------------------+--------------------+--------------------+
-| Time                       | DB  | Index_names       | Process_keys | Total_keys | Query                             | Query_time         | Cop_time           | Process_time       |
-+----------------------------+-----+-------------------+--------------+------------+-----------------------------------+--------------------+--------------------+--------------------+
-| 2024-11-18 11:56:10.303228 | db1 | [tbl1:some_index] |            2 |    1358517 |  SELECT * FROM tbl1 ... LIMIT 1 ; | 1.2581352350000001 |         1.25651062 |        1.251837479 |
-| 2024-11-18 11:56:11.556257 | db1 | [tbl1:some_index] |            2 |    1358231 |  SELECT * FROM tbl1 ... LIMIT 1 ; |        1.252694002 |        1.251129038 |        1.240532546 |
-| 2024-11-18 12:00:10.553331 | db1 | [tbl1:some_index] |            2 |    1342914 |  SELECT * FROM tbl1 ... LIMIT 1 ; |        1.473941872 | 1.4720495900000001 | 1.3666103170000001 |
-| 2024-11-18 12:01:52.122548 | db1 | [tbl1:some_index] |            2 |    1128064 |  SELECT * FROM tbl1 ... LIMIT 1 ; |        1.058942591 |        1.056853228 |        1.023483875 |
-| 2024-11-18 12:01:52.107951 | db1 | [tbl1:some_index] |            2 |    1128064 |  SELECT * FROM tbl1 ... LIMIT 1 ; |        1.044847031 |        1.042546122 |        0.934768555 |
-+----------------------------+-----+-------------------+--------------+------------+-----------------------------------+--------------------+--------------------+--------------------+
-5 rows in set (1.26 sec)
-```
+    +----------------------------+-----+-------------------+--------------+------------+-----------------------------------+--------------------+--------------------+--------------------+
+    | Time                       | DB  | Index_names       | Process_keys | Total_keys | Query                             | Query_time         | Cop_time           | Process_time       |
+    +----------------------------+-----+-------------------+--------------+------------+-----------------------------------+--------------------+--------------------+--------------------+
+    | 2024-11-18 11:56:10.303228 | db1 | [tbl1:some_index] |            2 |    1358517 |  SELECT * FROM tbl1 ... LIMIT 1 ; | 1.2581352350000001 |         1.25651062 |        1.251837479 |
+    | 2024-11-18 11:56:11.556257 | db1 | [tbl1:some_index] |            2 |    1358231 |  SELECT * FROM tbl1 ... LIMIT 1 ; |        1.252694002 |        1.251129038 |        1.240532546 |
+    | 2024-11-18 12:00:10.553331 | db1 | [tbl1:some_index] |            2 |    1342914 |  SELECT * FROM tbl1 ... LIMIT 1 ; |        1.473941872 | 1.4720495900000001 | 1.3666103170000001 |
+    | 2024-11-18 12:01:52.122548 | db1 | [tbl1:some_index] |            2 |    1128064 |  SELECT * FROM tbl1 ... LIMIT 1 ; |        1.058942591 |        1.056853228 |        1.023483875 |
+    | 2024-11-18 12:01:52.107951 | db1 | [tbl1:some_index] |            2 |    1128064 |  SELECT * FROM tbl1 ... LIMIT 1 ; |        1.044847031 |        1.042546122 |        0.934768555 |
+    +----------------------------+-----+-------------------+--------------+------------+-----------------------------------+--------------------+--------------------+--------------------+
+    5 rows in set (1.26 sec)
 
-### How can I check whether the TiKV MVCC in-memory engine is enabled?
+### TiKV MVCC インメモリ エンジンが有効になっているかどうかを確認するにはどうすればよいですか? {#how-can-i-check-whether-the-tikv-mvcc-in-memory-engine-is-enabled}
 
-You can check the TiKV configuration using the [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md) statement. If the value of `in-memory-engine.enable` is `true`, it means that TiKV MVCC in-memory engine is enabled.
+[`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md)ステートメントを使用して TiKV の設定を確認できます。3 の値が`in-memory-engine.enable` `true`場合、TiKV MVCC インメモリエンジンが有効になっていることを意味します。
 
 ```sql
 SHOW CONFIG WHERE Type='tikv' AND Name LIKE 'in-memory-engine\.%';
 ```
 
-```
-+------+-----------------+-----------------------------------------------+---------+
-| Type | Instance        | Name                                          | Value   |
-+------+-----------------+-----------------------------------------------+---------+
-| tikv | 127.0.0.1:20160 | in-memory-engine.capacity                     | 5GiB    |
-| tikv | 127.0.0.1:20160 | in-memory-engine.cross-check-interval         | 0s      |
-| tikv | 127.0.0.1:20160 | in-memory-engine.enable                       | true    |
-| tikv | 127.0.0.1:20160 | in-memory-engine.evict-threshold              | 4920MiB |
-| tikv | 127.0.0.1:20160 | in-memory-engine.gc-run-interval              | 3m      |
-| tikv | 127.0.0.1:20160 | in-memory-engine.load-evict-interval          | 5m      |
-| tikv | 127.0.0.1:20160 | in-memory-engine.mvcc-amplification-threshold | 10      |
-| tikv | 127.0.0.1:20160 | in-memory-engine.stop-load-threshold          | 4208MiB |
-+------+-----------------+-----------------------------------------------+---------+
-8 rows in set (0.00 sec)
-```
+    +------+-----------------+-----------------------------------------------+---------+
+    | Type | Instance        | Name                                          | Value   |
+    +------+-----------------+-----------------------------------------------+---------+
+    | tikv | 127.0.0.1:20160 | in-memory-engine.capacity                     | 5GiB    |
+    | tikv | 127.0.0.1:20160 | in-memory-engine.cross-check-interval         | 0s      |
+    | tikv | 127.0.0.1:20160 | in-memory-engine.enable                       | true    |
+    | tikv | 127.0.0.1:20160 | in-memory-engine.evict-threshold              | 4920MiB |
+    | tikv | 127.0.0.1:20160 | in-memory-engine.gc-run-interval              | 3m      |
+    | tikv | 127.0.0.1:20160 | in-memory-engine.load-evict-interval          | 5m      |
+    | tikv | 127.0.0.1:20160 | in-memory-engine.mvcc-amplification-threshold | 10      |
+    | tikv | 127.0.0.1:20160 | in-memory-engine.stop-load-threshold          | 4208MiB |
+    +------+-----------------+-----------------------------------------------+---------+
+    8 rows in set (0.00 sec)
 
-### How can I monitor the TiKV MVCC in-memory engine?
+### TiKV MVCC インメモリ エンジンを監視するにはどうすればよいですか? {#how-can-i-monitor-the-tikv-mvcc-in-memory-engine}
 
-You can check the [**In Memory Engine**](/grafana-tikv-dashboard.md#in-memory-engine) section on the **TiKV-Details** dashboard in Grafana.
+Grafana の**TiKV-Details**ダッシュボードの[**インメモリエンジン**](/grafana-tikv-dashboard.md#in-memory-engine)セクションを確認できます。

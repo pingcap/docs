@@ -1,50 +1,50 @@
 ---
 title: AI Features
-summary: Learn about AI features for TiDB Cloud.
+summary: TiDB Cloudの AI 機能について学習します。
 ---
 
-# AI Features
+# AI機能 {#ai-features}
 
-The AI features in TiDB Cloud enable you to fully leverage advanced technologies for data exploration, search, and integration. From natural language-driven SQL query generation to high-performance vector search, TiDB combines database capabilities with modern AI features to power innovative applications. With support for popular AI frameworks, embedding models, and seamless integration with ORM libraries, TiDB offers a versatile platform for use cases such as semantic search and AI-powered analytics.
+TiDB CloudのAI機能により、データの探索、検索、統合のための高度なテクノロジーを最大限に活用できます。自然言語駆動型のSQLクエリ生成から高性能なベクトル検索まで、TiDBはデータベース機能と最新のAI機能を組み合わせ、革新的なアプリケーションを実現します。一般的なAIフレームワーク、埋め込みモデル、ORMライブラリとのシームレスな統合をサポートすることで、TiDBはセマンティック検索やAIを活用した分析といったユースケースに対応する多用途のプラットフォームを提供します。
 
-This document highlights these AI features and how they enhance the TiDB experience.
+このドキュメントでは、これらの AI 機能と、それが TiDB エクスペリエンスをどのように強化するかについて説明します。
 
-## Chat2Query (Beta)
+## Chat2Query（ベータ版） {#chat2query-beta}
 
-Chat2Query is an AI-powered feature integrated into SQL Editor that assists users in generating, debugging, or rewriting SQL queries using natural language instructions. For more information, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
+Chat2Queryは、SQLエディタに統合されたAIベースの機能で、自然言語によるSQLクエリの生成、デバッグ、書き換えを支援します。詳細については、 [AI支援SQLエディターでデータを探索](/tidb-cloud/explore-data-with-chat2query.md)ご覧ください。
 
-In addition, TiDB Cloud provides a Chat2Query API for {{{ .starter }}} clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called Chat2Query and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+さらに、 TiDB CloudはTiDB Cloud Serverlessクラスタ向けにChat2Query APIを提供しています。有効にすると、 TiDB Cloudは自動的にChat2Queryというシステムデータアプリと、データサービスにChat2Dataエンドポイントを作成します。このエンドポイントを呼び出すことで、AIが指示を与えることでSQL文を生成・実行できるようになります。詳細については、 [Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)ご覧ください。
 
-## Vector search (Beta)
+## ベクトル検索（ベータ版） {#vector-search-beta}
 
-Vector search is a search method that prioritizes the meaning of your data to deliver relevant results.
+ベクター検索は、データの意味を優先して関連性の高い結果を提供する検索方法です。
 
-Unlike traditional full-text search, which relies on exact keyword matching and word frequency, vector search converts various data types (such as text, images, or audio) into high-dimensional vectors and queries based on the similarity between these vectors. This search method captures the semantic meaning and contextual information of the data, leading to a more precise understanding of user intent.
+キーワードの完全一致と単語の出現頻度に依存する従来の全文検索とは異なり、ベクトル検索は、様々なデータタイプ（テキスト、画像、音声など）を高次元ベクトルに変換し、それらのベクトル間の類似性に基づいてクエリを実行します。この検索手法は、データの意味と文脈情報を捉えることで、ユーザーの検索意図をより正確に理解することを可能にします。
 
-Even when the search terms do not exactly match the content in the database, vector search can still provide results that align with the user's intent by analyzing the semantics of the data. For example, a full-text search for "a swimming animal" only returns results containing these exact keywords. In contrast, vector search can return results for other swimming animals, such as fish or ducks, even if these results do not contain the exact keywords.
+検索語がデータベースの内容と完全に一致しない場合でも、ベクター検索はデータのセマンティクスを分析することで、ユーザーの意図に沿った結果を提供できます。例えば、「泳ぐ動物」という全文検索では、このキーワードと完全に一致する結果のみが返されます。一方、ベクター検索では、魚やアヒルなど、他の泳ぐ動物についても、このキーワードと完全に一致する結果がなくても、結果を返すことができます。
 
-For more information, see [Vector Search (Beta) Overview](/vector-search/vector-search-overview.md).
+詳細については[ベクトル検索（ベータ版）の概要](/vector-search/vector-search-overview.md)参照してください。
 
-## AI integrations
+## AI統合 {#ai-integrations}
 
-### AI frameworks
+### AIフレームワーク {#ai-frameworks}
 
-TiDB provides official support for several popular AI frameworks, enabling you to easily integrate AI applications developed based on these frameworks with TiDB Vector Search.
+TiDB はいくつかの一般的な AI フレームワークを公式にサポートしており、これらのフレームワークに基づいて開発された AI アプリケーションを TiDB Vector Search に簡単に統合できます。
 
-For a list of supported AI frameworks, see [Vector Search Integration Overview](/vector-search/vector-search-integration-overview.md#ai-frameworks).
+サポートされている AI フレームワークの一覧については、 [ベクター検索統合の概要](/vector-search/vector-search-integration-overview.md#ai-frameworks)参照してください。
 
-### Embedding models and services
+### モデルとサービスの埋め込み {#embedding-models-and-services}
 
-A vector embedding, also known as an embedding, is a sequence of numbers that represents real-world objects in a high-dimensional space. It captures the meaning and context of unstructured data, such as documents, images, audio, and videos.
+ベクトル埋め込み（埋め込みとも呼ばれる）は、高次元空間における現実世界のオブジェクトを表す数値列です。文書、画像、音声、動画などの非構造化データの意味と文脈を捉えます。
 
-Embedding models are algorithms that transform data into [vector embeddings](/vector-search/vector-search-overview.md#vector-embedding). The choice of an appropriate embedding model is crucial for ensuring the accuracy and relevance of semantic search results.
+埋め込みモデルは、データを[ベクトル埋め込み](/vector-search/vector-search-overview.md#vector-embedding)に変換するアルゴリズムです。適切な埋め込みモデルの選択は、セマンティック検索結果の正確性と関連性を確保する上で非常に重要です。
 
-TiDB Vector Search supports storing vectors of up to 16383 dimensions, which accommodates most embedding models. For unstructured text data, you can find top-performing text embedding models on the [Massive Text Embedding Benchmark (MTEB) Leaderboard](https://huggingface.co/spaces/mteb/leaderboard).
+TiDB Vector Searchは最大16383次元のベクトルの格納をサポートしており、ほとんどの埋め込みモデルに対応しています。非構造化テキストデータの場合、 [大規模テキスト埋め込みベンチマーク（MTEB）リーダーボード](https://huggingface.co/spaces/mteb/leaderboard)で最高性能のテキスト埋め込みモデルを見つけることができます。
 
-### Object Relational Mapping (ORM) libraries
+### オブジェクトリレーショナルマッピング（ORM）ライブラリ {#object-relational-mapping-orm-libraries}
 
-Object Relational Mapping (ORM) libraries are tools that facilitate the interaction between applications and relational databases by allowing developers to work with database records as if they were objects in their programming language of choice.
+オブジェクト リレーショナル マッピング (ORM) ライブラリは、開発者がデータベース レコードを任意のプログラミング言語のオブジェクトであるかのように操作できるようにすることで、アプリケーションとリレーショナル データベース間のやり取りを容易にするツールです。
 
-TiDB lets you integrate vector search with ORM libraries to manage vector data alongside traditional relational data. This integration is particularly useful for applications that need to store and query vector embeddings generated by AI models. By using ORM libraries, developers can seamlessly interact with vector data stored in TiDB, leveraging the database's capabilities to perform complex vector operations like nearest neighbor search.
+TiDBでは、ベクトル検索とORMライブラリを統合することで、従来のリレーショナルデータと並行してベクトルデータを管理できます。この統合は、AIモデルによって生成されたベクトル埋め込みを保存およびクエリする必要があるアプリケーションに特に役立ちます。ORMライブラリを使用することで、開発者はTiDBに保存されたベクトルデータとシームレスに連携し、データベースの機能を活用して最近傍検索などの複雑なベクトル演算を実行できます。
 
-For a list of supported ORM libraries, see [Vector Search Integration Overview](/vector-search/vector-search-integration-overview.md#object-relational-mapping-orm-libraries).
+サポートされている ORM ライブラリのリストについては、 [ベクター検索統合の概要](/vector-search/vector-search-integration-overview.md#object-relational-mapping-orm-libraries)参照してください。

@@ -1,27 +1,27 @@
 ---
 title: Common Table Expression
-summary: Learn the CTE feature of TiDB, which help you write SQL statements more efficiently.
+summary: SQL ステートメントをより効率的に記述するのに役立つ TiDB の CTE 機能を学習します。
 ---
 
-# Common Table Expression
+# 共通テーブル式 {#common-table-expression}
 
-In some transaction scenarios, due to application complexity, you might need to write a single SQL statement of up to 2,000 lines. The statement probably contains a lot of aggregations and multi-level subquery nesting. Maintaining such a long SQL statement can be a developer's nightmare.
+トランザクションのシナリオによっては、アプリケーションの複雑さにより、最大2,000行にも及ぶSQL文を1つ記述しなければならない場合があります。このSQL文には、多数の集計や複数レベルのサブクエリのネストが含まれる可能性があります。このような長いSQL文を管理するのは、開発者にとって悪夢となる可能性があります。
 
-To avoid such a long SQL statement, you can simplify queries by using [Views](/develop/dev-guide-use-views.md) or cache intermediate query results by using [Temporary tables](/develop/dev-guide-use-temporary-tables.md).
+このような長い SQL 文を回避するには、 [ビュー](/develop/dev-guide-use-views.md)使用してクエリを簡略化するか、 [一時テーブル](/develop/dev-guide-use-temporary-tables.md)を使用して中間クエリ結果をキャッシュします。
 
-This document introduces the Common Table Expression (CTE) syntax in TiDB, which is a more convenient way to reuse query results.
+このドキュメントでは、クエリ結果を再利用するためのより便利な方法である、TiDB の共通テーブル式 (CTE) 構文を紹介します。
 
-Since TiDB v5.1, TiDB supports the CTE of the ANSI SQL99 standard and recursion. With CTE, you can write SQL statements for complex application logic more efficiently and maintain the code much easier.
+TiDB v5.1以降、TiDBはANSI SQL99標準のCTEと再帰をサポートしています。CTEを使用すると、複雑なアプリケーションロジックのSQL文をより効率的に記述でき、コードの保守も大幅に容易になります。
 
-## Basic use
+## 基本的な使い方 {#basic-use}
 
-A Common Table Expression (CTE) is a temporary result set that can be referred to multiple times within a SQL statement to improve the statement readability and execution efficiency. You can apply the [`WITH`](/sql-statements/sql-statement-with.md) statement to use CTE.
+共通テーブル式（CTE）は、SQL文内で複数回参照できる一時的な結果セットであり、文の可読性と実行効率を向上させます。CTEを使用するには、 [`WITH`](/sql-statements/sql-statement-with.md)文を適用します。
 
-Common Table Expressions can be classified into two types: non-recursive CTE and recursive CTE.
+共通テーブル式は、非再帰 CTE と再帰 CTE の 2 種類に分類できます。
 
-### Non-recursive CTE
+### 非再帰CTE {#non-recursive-cte}
 
-Non-recursive CTE can be defined using the following syntax:
+非再帰 CTE は次の構文を使用して定義できます。
 
 ```sql
 WITH <query_name> AS (
@@ -30,12 +30,12 @@ WITH <query_name> AS (
 SELECT ... FROM <query_name>;
 ```
 
-For example, if you want to know how many books each of the 50 oldest authors have written, take the following steps:
+たとえば、最年長の著者 50 人がそれぞれ何冊の本を書いたかを知りたい場合は、次の手順を実行します。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-Change the statement in [temporary tables](/develop/dev-guide-use-temporary-tables.md) to the following:
+[一時テーブル](/develop/dev-guide-use-temporary-tables.md)の文を次のように変更します。
 
 ```sql
 WITH top_50_eldest_authors_cte AS (
@@ -54,20 +54,18 @@ LEFT JOIN book_authors ba ON ta.id = ba.author_id
 GROUP BY ta.id;
 ```
 
-The result is as follows:
+結果は次のようになります。
 
-```
-+------------+------------+---------------------+-------+
-| author_id  | author_age | author_name         | books |
-+------------+------------+---------------------+-------+
-| 1238393239 |         80 | Araceli Purdy       |     1 |
-|  817764631 |         80 | Ivory Davis         |     3 |
-| 3093759193 |         80 | Lysanne Harris      |     1 |
-| 2299112019 |         80 | Ray Macejkovic      |     4 |
-...
-+------------+------------+---------------------+-------+
-50 rows in set (0.01 sec)
-```
+    +------------+------------+---------------------+-------+
+    | author_id  | author_age | author_name         | books |
+    +------------+------------+---------------------+-------+
+    | 1238393239 |         80 | Araceli Purdy       |     1 |
+    |  817764631 |         80 | Ivory Davis         |     3 |
+    | 3093759193 |         80 | Lysanne Harris      |     1 |
+    | 2299112019 |         80 | Ray Macejkovic      |     4 |
+    ...
+    +------------+------------+---------------------+-------+
+    50 rows in set (0.01 sec)
 
 </div>
 <div label="Java" value = "java">
@@ -109,7 +107,7 @@ public List<Author> getTop50EldestAuthorInfoByCTE() throws SQLException {
 </div>
 </SimpleTab>
 
-It can be found that the author "Ray Macejkovic" wrote 4 books. With the CTE query, you can further get the order and rating information of these 4 books as follows:
+著者「Ray Macejkovic」は4冊の本を執筆していることがわかります。CTEクエリを使用すると、これらの4冊の本の順序と評価情報を次のように取得できます。
 
 ```sql
 WITH books_authored_by_rm AS (
@@ -144,33 +142,31 @@ FROM
 ;
 ```
 
-The result is as follows:
+結果は次のようになります。
 
-```
-+------------+-------------------------+----------------+--------+
-| book_id    | book_title              | average_rating | orders |
-+------------+-------------------------+----------------+--------+
-|  481008467 | The Documentary of goat |         2.0000 |     16 |
-| 2224531102 | Brandt Skiles           |         2.7143 |     17 |
-| 2641301356 | Sheridan Bashirian      |         2.4211 |     12 |
-| 4154439164 | Karson Streich          |         2.5833 |     19 |
-+------------+-------------------------+----------------+--------+
-4 rows in set (0.06 sec)
-```
+    +------------+-------------------------+----------------+--------+
+    | book_id    | book_title              | average_rating | orders |
+    +------------+-------------------------+----------------+--------+
+    |  481008467 | The Documentary of goat |         2.0000 |     16 |
+    | 2224531102 | Brandt Skiles           |         2.7143 |     17 |
+    | 2641301356 | Sheridan Bashirian      |         2.4211 |     12 |
+    | 4154439164 | Karson Streich          |         2.5833 |     19 |
+    +------------+-------------------------+----------------+--------+
+    4 rows in set (0.06 sec)
 
-Three CTE blocks, which are separated by `,`, are defined in this SQL statement.
+この SQL ステートメントでは、 `,`で区切られた 3 つの CTE ブロックが定義されています。
 
-First, check out the books written by the author (ID is `2299112019`) in the CTE block `books_authored_by_rm`. Then find the average rating and order for these books respectively in `books_with_average_ratings` and `books_with_orders`. Finally, aggregate the results by the `JOIN` statement.
+まず、CTEブロック`books_authored_by_rm`で著者（ID `2299112019` ）が執筆した書籍を調べます。次に、 `books_with_average_ratings`と`books_with_orders`でそれぞれこれらの書籍の平均評価と順位を調べます。最後に、 `JOIN`ステートメントで結果を集計します。
 
-Note that the query in `books_authored_by_rm` executes only once, and then TiDB creates a temporary space to cache its result. When the queries in `books_with_average_ratings` and `books_with_orders` refer to `books_authored_by_rm`, TiDB gets its result directly from this temporary space.
+`books_authored_by_rm`のクエリは一度だけ実行され、その後 TiDB は結果をキャッシュするための一時領域を作成することに注意してください。3 と`books_with_average_ratings` `books_with_orders`クエリが`books_authored_by_rm`を参照する場合、TiDB はこの一時領域から直接結果を取得します。
 
-> **Tip:**
+> **ヒント：**
 >
-> If the efficiency of the default CTE queries is not good, you can use the [`MERGE()`](/optimizer-hints.md#merge) hint to expand the CTE subquery to the outer query to improve the efficiency.
+> デフォルトの CTE クエリの効率が良くない場合は、ヒント[`MERGE()`](/optimizer-hints.md#merge)を使用して CTE サブクエリを外部クエリに拡張し、効率を向上させることができます。
 
-### Recursive CTE
+### 再帰CTE {#recursive-cte}
 
-Recursive CTE can be defined using the following syntax:
+再帰 CTE は次の構文を使用して定義できます。
 
 ```sql
 WITH RECURSIVE <query_name> AS (
@@ -179,7 +175,7 @@ WITH RECURSIVE <query_name> AS (
 SELECT ... FROM <query_name>;
 ```
 
-A classic example is to generate a set of [Fibonacci numbers](https://en.wikipedia.org/wiki/Fibonacci_number) with recursive CTE:
+典型的な例は、再帰 CTE を使用して[フィボナッチ数列](https://en.wikipedia.org/wiki/Fibonacci_number)のセットを生成することです。
 
 ```sql
 WITH RECURSIVE fibonacci (n, fib_n, next_fib_n) AS
@@ -191,40 +187,38 @@ WITH RECURSIVE fibonacci (n, fib_n, next_fib_n) AS
 SELECT * FROM fibonacci;
 ```
 
-The result is as follows:
+結果は次のようになります。
 
-```
-+------+-------+------------+
-| n    | fib_n | next_fib_n |
-+------+-------+------------+
-|    1 |     0 |          1 |
-|    2 |     1 |          1 |
-|    3 |     1 |          2 |
-|    4 |     2 |          3 |
-|    5 |     3 |          5 |
-|    6 |     5 |          8 |
-|    7 |     8 |         13 |
-|    8 |    13 |         21 |
-|    9 |    21 |         34 |
-|   10 |    34 |         55 |
-+------+-------+------------+
-10 rows in set (0.00 sec)
-```
+    +------+-------+------------+
+    | n    | fib_n | next_fib_n |
+    +------+-------+------------+
+    |    1 |     0 |          1 |
+    |    2 |     1 |          1 |
+    |    3 |     1 |          2 |
+    |    4 |     2 |          3 |
+    |    5 |     3 |          5 |
+    |    6 |     5 |          8 |
+    |    7 |     8 |         13 |
+    |    8 |    13 |         21 |
+    |    9 |    21 |         34 |
+    |   10 |    34 |         55 |
+    +------+-------+------------+
+    10 rows in set (0.00 sec)
 
-## Read more
+## 続きを読む {#read-more}
 
-- [WITH](/sql-statements/sql-statement-with.md)
+-   [と](/sql-statements/sql-statement-with.md)
 
-## Need help?
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

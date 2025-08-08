@@ -1,84 +1,80 @@
 ---
 title: TiDB Lightning Error Resolution
-summary: Learn how to resolve type conversion and duplication errors during data import.
+summary: データのインポート中に発生する型変換および重複エラーを解決する方法を学習します。
 ---
 
-# TiDB Lightning Error Resolution
+# TiDB Lightningエラー解決 {#tidb-lightning-error-resolution}
 
-Starting from v5.4.0, you can configure TiDB Lightning to skip errors like invalid type conversion and unique key conflicts, and to continue the data processing as if those wrong row data does not exist. A report will be generated for you to read and manually fix errors afterward. This is ideal for importing from a slightly dirty data source, where locating the errors manually is difficult and restarting TiDB Lightning on every encounter is costly.
+v5.4.0以降、 TiDB Lightningを設定して、無効な型変換や一意キーの競合などのエラーをスキップし、それらの誤った行データが存在しないかのようにデータ処理を続行できるようになりました。生成されたレポートを読んで、後で手動でエラーを修正できます。これは、やや乱れたデータソースからのインポートに最適です。手動でエラーを特定するのは困難で、発生するたびにTiDB Lightningを再起動するのはコストがかかります。
 
-This document introduces TiDB Lightning error types, how to query the errors, and provides an example. The following configuration items are involved:
+このドキュメントでは、TiDB Lightning のエラーの種類、エラーのクエリ方法、および例を紹介します。以下の設定項目が関係します。
 
-- `lightning.max-error`: the tolerance threshold of type error
-- `conflict.strategy`, `conflict.threshold`, and `conflict.max-record-rows`: configurations related to conflicting data
-- `tikv-importer.duplicate-resolution` (deprecated in v8.0.0 and will be removed in a future release): the conflict handling configuration that can only be used in the physical import mode
-- `lightning.task-info-schema-name`: the database where conflicting data is stored when TiDB Lightning detects conflicts
+-   `lightning.max-error` : 型エラーの許容閾値
+-   `conflict.strategy` : 競合`conflict.max-record-rows` `conflict.threshold`に関連する構成
+-   `tikv-importer.duplicate-resolution` (v8.0.0 で非推奨となり、将来のリリースで削除される予定): 物理インポート モードでのみ使用できる競合処理構成
+-   `lightning.task-info-schema-name` : TiDB Lightningが競合を検出したときに競合するデータが格納されるデータベース
 
-For more information, see [TiDB Lightning (Task)](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task).
+詳細については[TiDB Lightning （タスク）](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)参照してください。
 
-## Type error
+## 入力エラー {#type-error}
 
-You can use the `lightning.max-error` configuration to increase the tolerance of errors related to data types. If this configuration is set to *N*, TiDB Lightning allows and skips up to *N* type errors from the data source before it exists. The default value `0` means that no error is allowed.
+`lightning.max-error`設定を使用すると、データ型に関連するエラーの許容範囲を広げることができます。この設定を*N*に設定すると、 TiDB Lightning はデータソースから最大*N*個のエラーを許容し、データソースが存在する前にスキップします。デフォルト値の`0` 、エラーが許容されないことを意味します。
 
-These errors are recorded in a database. After the import is completed, you can view the errors in the database and process them manually. For more information, see [Error Report](#error-report).
-
-{{< copyable "" >}}
+これらのエラーはデータベースに記録されます。インポート完了後、データベース内のエラーを確認し、手動で処理することができます。詳細については、 [エラーレポート](#error-report)参照してください。
 
 ```toml
 [lightning]
 max-error = 0
 ```
 
-The above configuration covers the following errors:
+上記の構成では、次のエラーがカバーされます。
 
-* Invalid values (example: set `'Text'` to an INT column).
-* Numeric overflow (example: set `500` to a TINYINT column)
-* String overflow (example: set `'Very Long Text'` to a VARCHAR(5) column).
-* Zero date-time (namely `'0000-00-00'` and `'2021-12-00'`).
-* Set NULL to a NOT NULL column.
-* Failed to evaluate a generated column expression.
-* Column count mismatch. The number of values in the row does not match the number of columns of the table.
-* Any other SQL errors.
+-   無効な値 (例: INT 列に`'Text'`設定する)。
+-   数値オーバーフロー（例：TINYINT列に`500`設定する）
+-   文字列オーバーフロー（例：VARCHAR(5)列に`'Very Long Text'`設定する）。
+-   日付と時刻がゼロ (つまり`'0000-00-00'`と`'2021-12-00'` )。
+-   NOT NULL 列に NULL を設定します。
+-   生成された列式の評価に失敗しました。
+-   カラム数が一致しません。行内の値の数がテーブルの列数と一致しません。
+-   その他の SQL エラー。
 
-The following errors are always fatal, and cannot be skipped by changing `lightning.max-error`:
+以下のエラーは常に致命的であり、 `lightning.max-error`変更してもスキップすることはできません。
 
-* Syntax error (such as unclosed quotation marks) in the original CSV, SQL or Parquet file.
-* I/O, network or system permission errors.
+-   元の CSV、SQL、または Parquet ファイルの構文エラー (閉じられていない引用符など)。
+-   I/O、ネットワーク、またはシステムの権限エラー。
 
-## Conflict errors
+## 競合エラー {#conflict-errors}
 
-You can use the [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) configuration item to increase the tolerance of errors related to data conflict. If this configuration item is set to *N*, TiDB Lightning allows and skips up to *N* conflict errors from the data source before it exits. The default value is `10000`, which means that 10000 errors are tolerant.
+設定項目[`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)使用すると、データ競合に関連するエラーの許容度を高めることができます。この設定項目を*N*に設定すると、 TiDB Lightning はデータソースから最大*N 個の*競合エラーを許容し、それをスキップしてから終了します。デフォルト値は`10000`で、これは 10000 個のエラーが許容されることを意味します。
 
-These errors are recorded in a table. After the import is completed, you can view the errors in the database and process them manually. For more information, see [Error Report](#error-report)
+これらのエラーはテーブルに記録されます。インポートが完了したら、データベースでエラーを確認し、手動で処理することができます。詳細については、 [エラーレポート](#error-report)をご覧ください。
 
-## Error report
+## エラーレポート {#error-report}
 
-If TiDB Lightning encounters errors during the import, it outputs a statistics summary about these errors in both your terminal and the log file when it exits.
+TiDB Lightning がインポート中にエラーに遭遇した場合、終了時にターミナルとログ ファイルの両方にこれらのエラーに関する統計の概要が出力されます。
 
-* The error report in the terminal is similar to the following table:
+-   ターミナルのエラーレポートは次の表のようになります。
 
-    | # | ERROR TYPE | ERROR COUNT | ERROR DATA TABLE |
-    | - | --- | --- | ------ |
-    | 1 | Data Type | 1000 | `lightning_task_info`.`type_error_v1` |
+    |   | エラーの種類 | エラー数 | エラーデータテーブル                            |
+    | - | ------ | ---- | ------------------------------------- |
+    | 1 | データ型   | 1000 | `lightning_task_info` `type_error_v1` |
 
-* The error report in the TiDB Lightning log file is as follows:
+-   TiDB Lightningログ ファイル内のエラー レポートは次のとおりです。
 
     ```shell
     [2022/03/13 05:33:57.736 +08:00] [WARN] [errormanager.go:459] ["Detect 1000 data type errors in total, please refer to table `lightning_task_info`.`type_error_v1` for more details"]
     ```
 
-All errors are written to tables in the `lightning_task_info` database in the downstream TiDB cluster. After the import is completed, if the error data is collected, you can view the errors in the database and process them manually.
+すべてのエラーは、下流TiDBクラスタの`lightning_task_info`のデータベース内のテーブルに書き込まれます。インポートが完了した後、エラーデータが収集されていれば、データベース内のエラーを確認し、手動で処理することができます。
 
-You can change the database name by configuring `lightning.task-info-schema-name`.
-
-{{< copyable "" >}}
+`lightning.task-info-schema-name`設定することでデータベース名を変更できます。
 
 ```toml
 [lightning]
 task-info-schema-name = 'lightning_task_info'
 ```
 
-TiDB Lightning creates three tables and one view in this database:
+TiDB Lightning はこのデータベースに 3 つのテーブルと 1 つのビューを作成します。
 
 ```sql
 CREATE TABLE type_error_v1 (
@@ -126,56 +122,54 @@ CREATE VIEW conflict_view AS
     FROM conflict_records;
 ```
 
-The `type_error_v1` table records all [type errors](#type-error) managed by `lightning.max-error`. Each error corresponds to one row.
+`type_error_v1`テーブルには、 `lightning.max-error`によって管理される[型エラー](#type-error)がすべて記録されます。各エラーは 1 行に対応します。
 
-The `conflict_error_v3` table records conflicts detected during postprocess conflict detection, managed by the `conflict` configuration group in the physical import mode. Each pair of conflicts corresponds to two rows.
+`conflict_error_v3`テーブルは、後処理の競合検出時に検出された競合を記録します。これは、物理インポートモードの`conflict`構成グループによって管理されます。各競合ペアは 2 行に対応します。
 
-The `conflict_records` table records conflicts detected during pre-import conflict detection, managed by the `conflict` configuration group in both logical and physical import modes. Each error corresponds to one row.
+`conflict_records`テーブルには、インポート前の競合検出で検出された競合が記録されます。この競合は、論理インポートモードと物理インポートモードの両方で`conflict`構成グループによって管理されます。各エラーは 1 行に対応します。
 
-The `conflict_view` view records conflicts that are detected by both pre-import and postprocess conflict detection, managed by the `conflict` configuration group in both logical and physical import modes. This view is created by performing a `UNION` operation on the `conflict_error_v3` and `conflict_records` tables.
+`conflict_view`ビューは、インポート前とインポート後の競合検出の両方で検出された競合を記録します。これらの競合は、論理インポートモードと物理インポートモードの両方で`conflict`設定グループによって管理されます。このビューは、 `conflict_error_v3`テーブルと`conflict_records`テーブルに対して`UNION`操作を実行することで作成されます。
 
-| Column       | Syntax | Type | Conflict | Description                                                                                                                         |
-| ------------ | ------ | ---- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| task_id      | ✓      | ✓    | ✓        | The TiDB Lightning task ID that generates this error                                                                                    |
-| create_time | ✓      | ✓    | ✓        | The time at which the error is recorded                                                                                                         |
-| table_name   | ✓      | ✓    | ✓        | The name of the table that contains the error, in the form of ``'`db`.`tbl`'``                                                                |
-| path         | ✓      | ✓    |          | The path of the file that contains the error                                                                                               |
-| offset       | ✓      | ✓    |          | The byte position in the file where the error is found                                                                                  |
-| error        | ✓      | ✓    |          | The error message                                                                                                                       |
-| context      | ✓      |      |          | The text that surrounds the error                                                                                                          |
-| index_name   |        |      | ✓        | The name of the unique key in conflict. It is `'PRIMARY'` for primary key conflicts.                                                          |
-| key_data     |        |      | ✓        | The formatted key handle of the row that causes the error. The content is for human reference only, and not intended to be machine-readable. |
-| row_data     |        | ✓    | ✓        | The formatted row data that causes the error. The content is for human reference only, and not intended to be machine-readable              |
-| raw_key      |        |      | ✓        | The key of the conflicted KV pair                                                                                                       |
-| raw_value    |        |      | ✓        | The value of the conflicted KV pair                                                                                                     |
-| raw_handle   |        |      | ✓        | The row handle of the conflicted row                                                                                                    |
-| raw_row      |        |      | ✓        | The encoded value of the conflicted row                                                                                                 |
+| カラム     | 構文 | タイプ | 対立 | 説明                                                                          |
+| ------- | -- | --- | -- | --------------------------------------------------------------------------- |
+| タスクID   | ✓  | ✓   | ✓  | このエラーを生成するTiDB Lightningタスク ID                                              |
+| 作成時間    | ✓  | ✓   | ✓  | エラーが記録された時刻                                                                 |
+| テーブル名   | ✓  | ✓   | ✓  | エラーを含むテーブルの名前（ ``'`db`.`tbl`'``の形式）                                         |
+| path    | ✓  | ✓   |    | エラーを含むファイルのパス                                                               |
+| オフセット   | ✓  | ✓   |    | ファイル内でエラーが見つかったバイト位置                                                        |
+| エラー     | ✓  | ✓   |    | エラーメッセージ                                                                    |
+| コンテクスト  | ✓  |     |    | エラーを囲むテキスト                                                                  |
+| インデックス名 |    |     | ✓  | 競合している一意キーの名前。主キーが競合している場合は`'PRIMARY'`なります。                                 |
+| キーデータ   |    |     | ✓  | エラーの原因となった行のフォーマットされたキーハンドル。この内容は人間による参照のみを目的としており、機械による読み取りを意図したものではありません。 |
+| 行データ    |    | ✓   | ✓  | エラーの原因となったフォーマットされた行データ。この内容は人間による参照のみを目的としており、機械による読み取りを意図したものではありません。     |
+| 生のキー    |    |     | ✓  | 競合するKVペアのキー                                                                 |
+| 生の値     |    |     | ✓  | 競合するKVペアの値                                                                  |
+| 生のハンドル  |    |     | ✓  | 競合した行の行ハンドル                                                                 |
+| 生の行     |    |     | ✓  | 競合行のエンコードされた値                                                               |
 
-> **Note:**
+> **注記：**
 >
-> The error report records the file offset, not line/column number which is inefficient to obtain. You can quickly jump near a byte position (using 183 as example) using the following commands:
+> エラーレポートにはファイルオフセットが記録されますが、行番号や列番号を取得するのは非効率的です。以下のコマンドを使用すると、バイト位置（例えば183）の近くまで素早くジャンプできます。
 >
-> * shell, printing the first several lines.
+> -   シェル、最初の数行を出力します。
 >
 >     ```shell
 >     head -c 183 file.csv | tail
 >     ```
 >
-> * shell, printing the next several lines:
+> -   シェルは、次の数行を出力します。
 >
 >     ```shell
 >     tail -c +183 file.csv | head
 >     ```
 >
-> * vim — `:goto 183` or `183go`
+> -   vim — `:goto 183`または`183go`
 
-## Example
+## 例 {#example}
 
-In this example, a data source is prepared with some known errors.
+この例では、いくつかの既知のエラーを含むデータ ソースが準備されます。
 
-1. Prepare the database and table schema.
-
-    {{< copyable "shell-regular" >}}
+1.  データベースとテーブル スキーマを準備します。
 
     ```shell
     mkdir example && cd example
@@ -184,9 +178,7 @@ In this example, a data source is prepared with some known errors.
     echo 'CREATE TABLE t(a TINYINT PRIMARY KEY, b VARCHAR(12) NOT NULL UNIQUE);' > example.t-schema.sql
     ```
 
-2. Prepare the data.
-
-    {{< copyable "shell-regular" >}}
+2.  データを準備します。
 
     ```shell
     cat <<EOF > example.t.1.sql
@@ -205,9 +197,7 @@ In this example, a data source is prepared with some known errors.
     EOF
     ```
 
-3. Configure TiDB Lightning to enable strict SQL mode, use the Local-backend to import data, replace duplicates, and skip up to 10 errors.
-
-    {{< copyable "shell-regular" >}}
+3.  TiDB Lightningを構成して厳密な SQL モードを有効にし、ローカル バックエンドを使用してデータをインポートし、重複を置き換え、最大 10 個のエラーをスキップします。
 
     ```shell
     cat <<EOF > config.toml
@@ -233,15 +223,13 @@ In this example, a data source is prepared with some known errors.
     EOF
     ```
 
-4. Run TiDB Lightning. This command will exit successfully because all errors are skipped.
-
-    {{< copyable "shell-regular" >}}
+4.  TiDB Lightningを実行します。すべてのエラーがスキップされるため、このコマンドは正常に終了します。
 
     ```shell
     tiup tidb-lightning -c config.toml
     ```
 
-5. Verify that the imported table only contains the two normal rows:
+5.  インポートされたテーブルに次の 2 つの通常の行のみが含まれていることを確認します。
 
     ```sql
     $ mysql -u root -h 127.0.0.1 -P 4000 -e 'select * from example.t'
@@ -253,7 +241,7 @@ In this example, a data source is prepared with some known errors.
     +---+-----+
     ```
 
-6. Check whether the `type_error_v1` table has caught the three rows involving type conversion:
+6.  `type_error_v1`テーブルに型変換を含む 3 つの行が含まれているかどうかを確認します。
 
     ```sql
     $ mysql -u root -h 127.0.0.1 -P 4000 -e 'select * from lightning_task_info.type_error_v1;' -E
@@ -286,7 +274,7 @@ In this example, a data source is prepared with some known errors.
        row_data: (600,'six hundred')
     ```
 
-7. Check whether the `conflict_error_v3` table has caught the four rows that have unique/primary key conflicts:
+7.  `conflict_error_v3`テーブルに、一意/主キーの競合がある 4 つの行が含まれているかどうかを確認します。
 
     ```sql
     $ mysql -u root -h 127.0.0.1 -P 4000 -e 'select * from lightning_task_info.conflict_error_v3;' --binary-as-hex -E

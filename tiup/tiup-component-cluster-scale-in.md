@@ -1,75 +1,75 @@
 ---
 title: tiup cluster scale-in
-summary: The `tiup cluster scale-in` command is used to scale in the cluster by taking specified nodes offline, removing them from the cluster, and deleting remaining files. Components like TiKV and TiFlash are handled asynchronously and require additional steps to check and clean up. The command also includes options for node specification, forceful removal, transfer timeout, and help information.
+summary: 「tiup cluster scale-in」コマンドは、指定されたノードをオフラインにし、クラスタから削除し、残りのファイルを削除することでクラスタをスケールインするために使用されます。TiKVやTiFlashなどのコンポーネントは非同期的に処理されるため、チェックとクリーンアップのための追加手順が必要です。このコマンドには、ノードの指定、強制削除、転送タイムアウト、ヘルプ情報などのオプションも含まれています。
 ---
 
-# tiup cluster scale-in
+# tiup cluster scale-in {#tiup-cluster-scale-in}
 
-The `tiup cluster scale-in` command is used to scale in the cluster, which takes the services of the specified nodes offline, removes the specified nodes from the cluster, and deletes the remaining files from those nodes.
+`tiup cluster scale-in`コマンドはクラスターをスケールインするために使用され、指定されたノードのサービスをオフラインにし、指定されたノードをクラスターから削除し、それらのノードから残りのファイルを削除します。
 
-## Particular handling of components' offline process
+## コンポーネントのオフラインプロセスの特別な処理 {#particular-handling-of-components-offline-process}
 
-Because the TiKV and TiFlash components are taken offline asynchronously (which requires TiUP to remove the node through API first) and the stopping process takes a long time (which requires TiUP to continuously check whether the node is successfully taken offline), the TiKV and TiFlash components are handled particularly as follows:
+TiKV およびTiFlashコンポーネントは非同期的にオフラインになるため (最初にTiUP がAPI を介してノードを削除する必要がある)、停止プロセスには長い時間がかかる (ノードが正常にオフラインになったかどうかをTiUPが継続的に確認する必要がある) ため、TiKV およびTiFlashコンポーネントは特に次のように処理されます。
 
-- For TiKV and TiFlash components:
+-   TiKV およびTiFlashコンポーネントの場合:
 
-    1. TiUP Cluster takes the node offline through API and directly exits without waiting for the process to be completed.
-    2. To check the status of the nodes being scaled in, you need to execute the `tiup cluster display` command and wait for the status to become `Tombstone`.
-    3. To clean up the nodes in the `Tombstone` status, you need to execute the `tiup cluster prune` command. The `tiup cluster prune` command performs the following operations:
+    1.  TiUPクラスタはAPI を介してノードをオフラインにし、プロセスが完了するのを待たずにすぐに終了します。
+    2.  スケールインされているノードのステータスを確認するには、 `tiup cluster display`コマンドを実行し、ステータスが`Tombstone`なるまで待つ必要があります。
+    3.  ステータス`Tombstone`のノードをクリーンアップするには、コマンド`tiup cluster prune`実行する必要があります。コマンド`tiup cluster prune`は以下の操作を実行します。
 
-        - Stops the services of the nodes that have been taken offline.
-        - Cleans up the data files of the nodes that have been taken offline.
-        - Updates the cluster topology and removes the nodes that have been taken offline.
+        -   オフラインになったノードのサービスを停止します。
+        -   オフラインになったノードのデータ ファイルをクリーンアップします。
+        -   クラスター トポロジを更新し、オフラインになったノードを削除します。
 
-For other components:
+その他のコンポーネントの場合:
 
-- When taking the PD components offline, TiUP Cluster quickly deletes the specified nodes from the cluster through API, stops the service of the specified PD nodes, and then deletes the related data files from the nodes.
-- When taking other components down, TiUP Cluster directly stops the node services and deletes the related data files from the specified nodes.
+-   PD コンポーネントをオフラインにする場合、 TiUP クラスタ はAPI を介して指定されたノードをクラスターからすばやく削除し、指定された PD ノードのサービスを停止し、ノードから関連データ ファイルを削除します。
+-   他のコンポーネントを停止する場合、 TiUP クラスタ はノード サービスを直接停止し、指定されたノードから関連データ ファイルを削除します。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster scale-in <cluster-name> [flags]
 ```
 
-`<cluster-name>` is the name of the cluster to scale in. If you forget the cluster name, you can check it using the [`tiup cluster list`](/tiup/tiup-component-cluster-list.md) command.
+`<cluster-name>`はスケールインするクラスターの名前です。クラスター名を忘れた場合は、 [`tiup cluster list`](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
 
-## Options
+## オプション {#options}
 
-### -N, --node
+### -N, --node {#n-node}
 
-- Specifies the nodes to take down. Multiple nodes are separated by commas.
-- Data type: `STRING`
-- There is no default value. This option is mandatory and the value must be not null.
+-   停止するノードを指定します。複数のノードはカンマで区切られます。
+-   データ型: `STRING`
+-   デフォルト値はありません。このオプションは必須であり、値はnull以外である必要があります。
 
-### --force
+### &#x20;--force {#force}
 
-- Controls whether to forcibly remove the specified nodes from the cluster. Sometimes, the host of the node to take offline might be down, which makes it impossible to connect to the node via SSH for operations, so you can forcibly remove the node from the cluster using the `--force` option.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   指定されたノードをクラスタから強制的に削除するかどうかを制御します。オフラインにするノードのホストがダウンしている場合、SSH経由でノードに接続して操作を行うことができないことがあります。その場合は、 `--force`オプションを使用してノードをクラスタから強制的に削除できます。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
 
-> **Warning:**
+> **警告：**
 >
-> When you use this option to forcibly remove TiKV or TiFlash nodes that are in service or are pending offline, these nodes will be deleted immediately without waiting for data to be migrated. This imposes a very high risk of data loss. If data loss occurs in the region where the metadata is located, the entire cluster will be unavailable and unrecoverable.
+> このオプションを使用して、稼働中またはオフライン保留中のTiKVノードまたはTiFlashノードを強制的に削除すると、これらのノードはデータの移行を待たずに直ちに削除されます。これにより、データ損失のリスクが非常に高くなります。メタデータが配置されているリージョンでデータ損失が発生した場合、クラスター全体が利用できなくなり、回復不能になります。
 
-### --transfer-timeout
+### --transfer-timeout {#transfer-timeout}
 
-- When a PD or TiKV node is to be removed, the Region leader on the node will be transferred to another node first. Because the transferring process takes some time, you can set the maximum waiting time (in seconds) by configuring `--transfer-timeout`. After the timeout, the `tiup cluster scale-in` command skips waiting and starts the scaling-in directly.
-- Data type: `UINT`
-- The option is enabled by default with `600` seconds (the default value) passed in.
+-   PDノードまたはTiKVノードを削除する場合、まずそのノードのリージョンリーダーが別のノードに転送されます。転送プロセスには時間がかかるため、 `--transfer-timeout`設定することで最大待機時間（秒単位）を設定できます。タイムアウト後、 `tiup cluster scale-in`コマンドは待機をスキップし、スケールインを直接開始します。
+-   データ型: `UINT`
+-   このオプションはデフォルトで有効になっており、 `600`秒 (デフォルト値) が渡されます。
 
-> **Note:**
+> **注記：**
 >
-> If a PD or TiKV node is taken offline directly without waiting for the leader transfer to be completed, the service performance might jitter.
+> リーダー転送が完了するのを待たずに PD または TiKV ノードが直接オフラインになると、サービスのパフォーマンスが不安定になる可能性があります。
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
 
-## Output
+## 出力 {#output}
 
-Shows the logs of the scaling-in process.
+スケールイン プロセスのログを表示します。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

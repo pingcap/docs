@@ -1,48 +1,48 @@
 ---
 title: ticloud serverless spending-limit
-summary: The reference of `ticloud serverless spending-limit`.
+summary: ticloud serverless spending-limit` のリファレンス。
 ---
 
-# ticloud serverless spending-limit
+# ticloud サーバーレス支出制限 {#ticloud-serverless-spending-limit}
 
-Set the maximum monthly [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for a {{{ .starter }}} cluster:
+TiDB Cloud Serverless クラスターの月間最大数[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)設定します。
 
 ```shell
 ticloud serverless spending-limit [flags]
 ```
 
-## Examples
+## 例 {#examples}
 
-Set the spending limit for a {{{ .starter }}} cluster in interactive mode:
+対話モードでTiDB Cloud Serverless クラスターの使用制限を設定します。
 
 ```shell
 ticloud serverless spending-limit
 ```
 
-Set the spending limit for a {{{ .starter }}} cluster in non-interactive mode:
+非対話型モードでTiDB Cloud Serverless クラスターの使用制限を設定します。
 
 ```shell
 ticloud serverless spending-limit -c <cluster-id> --monthly <spending-limit-monthly>
 ```
 
-## Flags
+## 旗 {#flags}
 
-In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLIプロンプトに従って入力するだけです。
 
-| Flag                    | Description                                 | Required | Note                                                 |
-|-------------------------|---------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | Specifies the ID of the cluster.                       | Yes      | Only works in non-interactive mode.                  |
-| --monthly int32         | Specifies the maximum monthly spending limit in USD cents. | Yes      | Only works in non-interactive mode.                  |
-| -h, --help              | Shows help information for this command.          | No       | Works in both non-interactive and interactive modes. |
+| フラグ                  | 説明                          | 必須  | 注記                       |
+| -------------------- | --------------------------- | --- | ------------------------ |
+| -c, --cluster-id 文字列 | クラスターの ID を指定します。           | はい  | 非対話型モードでのみ動作します。         |
+| --monthly int32      | 月間最大支出限度額を USD セント単位で指定します。 | はい  | 非対話型モードでのみ動作します。         |
+| -h, --help           | このコマンドのヘルプ情報を表示します。         | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag                 | Description                                                                                | Required | Note                                                                                                             |
-|----------------------|--------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                  | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enables debug mode.                                                                          | No       | Works in both non-interactive and interactive modes.                                                             |
+| フラグ               | 説明                                                                             | 必須  | 注記                                                      |
+| ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------- |
+| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
+| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| -D, --debug       | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、皆様からの貢献も歓迎いたします。

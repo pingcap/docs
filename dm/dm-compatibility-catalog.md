@@ -1,46 +1,46 @@
 ---
 title: Compatibility Catalog of TiDB Data Migration
-summary: This document describes the compatibility between DM of different versions and upstream/downstream databases.
+summary: このドキュメントでは、異なるバージョンの DM と上流/下流データベース間の互換性について説明します。
 ---
 
-# Compatibility Catalog of TiDB Data Migration
+# TiDBデータ移行の互換性カタログ {#compatibility-catalog-of-tidb-data-migration}
 
-DM supports migrating data from different sources to TiDB clusters. Based on the data source type, DM has four compatibility levels:
+DMは、異なるソースからTiDBクラスタへのデータ移行をサポートします。データソースの種類に基づいて、DMには4つの互換性レベルがあります。
 
-- **Generally available (GA)**: The application scenario has been verified and passed the GA test.
-- **Experimental**: Although the application scenario has been verified, the test does not cover all scenarios or involves only a limited number of users. The application scenario might encounter problems occasionally.
-- **Not tested**: DM is expected to be always compatible with MySQL during iteration. However, due to resource constraints, not all MySQL forks are tested with DM. Therefore, the *not tested* source or target is technically compatible with DM, but is not fully tested, which means you need to verify its compatibility before you use.
-- **Incompatible**: DM is proved to be incompatible with the data source and the application is not recommended for use in production environments.
+-   **一般公開 (GA)** : アプリケーション シナリオが検証され、GA テストに合格しました。
+-   **Experimental**：アプリケーションシナリオは検証済みですが、すべてのシナリオを網羅しているわけではなく、また、一部のユーザーのみが対象となっています。そのため、アプリケーションシナリオによっては、時折問題が発生する可能性があります。
+-   **テスト未実施**：DMは、イテレーション期間中、常にMySQLとの互換性が確保される予定です。しかし、リソースの制約により、すべてのMySQLフォークがDMでテストされているわけではありません。そのため、*テスト未実施の*ソースまたはターゲットは、技術的にはDMと互換性がありますが、完全にテストされていないため、使用前に互換性を確認する必要があります。
+-   **互換性なし**: DM はデータ ソースと互換性がないことが判明しており、アプリケーションを本番環境で使用することは推奨されません。
 
-## Data sources
+## データソース {#data-sources}
 
-|Data source|Compatibility level|Remarks|
-|-|-|-|
-|MySQL ≤ 5.5|Not tested||
-|MySQL 5.6|GA||
-|MySQL 5.7|GA||
-|MySQL 8.0|GA|Does not support binlog transaction compression [Transaction_payload_event](https://dev.mysql.com/doc/refman/8.0/en/binary-log-transaction-compression.html)|
-|MariaDB < 10.1.2|Incompatible|Incompatible with binlog of the time type|
-|MariaDB 10.1.2 ~ 10.5.10|Experimental||
-|MariaDB > 10.5.10|Incompatible|Permission errors reported in the check procedure|
+| データソース                   | 互換性レベル       | 備考                                                                                                                              |
+| ------------------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| MySQL ≤ 5.5              | テストされていません   |                                                                                                                                 |
+| MySQL 5.6                | GA           |                                                                                                                                 |
+| MySQL 5.7                | GA           |                                                                                                                                 |
+| MySQL 8.0                | GA           | binlogトランザクション圧縮をサポートしていません[トランザクションペイロードイベント](https://dev.mysql.com/doc/refman/8.0/en/binary-log-transaction-compression.html) |
+| MariaDB &lt; 10.1.2      | 互換性がない       | 時間タイプのbinlogと互換性がありません                                                                                                          |
+| MariaDB 10.1.2 ~ 10.5.10 | Experimental |                                                                                                                                 |
+| MariaDB &gt; 10.5.10     | 互換性がない       | チェック手順で報告された権限エラー                                                                                                               |
 
-## Target databases
+## ターゲットデータベース {#target-databases}
 
-> **Warning:**
+> **警告：**
 >
-> DM v5.3.0 is not recommended. If you have enabled GTID replication but do not enable relay log in DM v5.3.0, data replication fails with low probability.
+> DM v5.3.0 は推奨されません。DM v5.3.0 で GTID レプリケーションを有効にしてリレーログを有効にしていない場合、データレプリケーションが失敗する可能性は低くなります。
 
-|Target database|Compatibility level|DM version|
-|-|-|-|
-|TiDB 8.x|GA|≥ 5.3.1|
-|TiDB 7.x|GA|≥ 5.3.1|
-|TiDB 6.x|GA|≥ 5.3.1|
-|TiDB 5.4|GA|≥ 5.3.1|
-|TiDB 5.3|GA|≥ 5.3.1|
-|TiDB 5.2|GA|≥ 2.0.7, recommended: 5.4|
-|TiDB 5.1|GA|≥ 2.0.4, recommended: 5.4|
-|TiDB 5.0|GA|≥ 2.0.4, recommended: 5.4|
-|TiDB 4.x|GA|≥ 2.0.1, recommended: 2.0.7|
-|TiDB 3.x|GA|≥ 2.0.1, recommended: 2.0.7|
-|MySQL|Experimental||
-|MariaDB|Experimental||
+| ターゲットデータベース | 互換性レベル       | DMバージョン           |
+| ----------- | ------------ | ----------------- |
+| TiDB 8.x    | GA           | ≥ 5.3.1           |
+| TiDB 7.x    | GA           | ≥ 5.3.1           |
+| TiDB 6.x    | GA           | ≥ 5.3.1           |
+| TiDB 5.4    | GA           | ≥ 5.3.1           |
+| TiDB 5.3    | GA           | ≥ 5.3.1           |
+| TiDB 5.2    | GA           | ≥ 2.0.7、推奨: 5.4   |
+| TiDB 5.1    | GA           | ≥ 2.0.4、推奨: 5.4   |
+| TiDB 5.0    | GA           | ≥ 2.0.4、推奨: 5.4   |
+| TiDB 4.x    | GA           | ≥ 2.0.1、推奨: 2.0.7 |
+| TiDB 3.x    | GA           | ≥ 2.0.1、推奨: 2.0.7 |
+| MySQL       | Experimental |                   |
+| マリアDB       | Experimental |                   |

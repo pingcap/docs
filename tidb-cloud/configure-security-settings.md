@@ -1,27 +1,28 @@
 ---
 title: Configure Cluster Password Settings
-summary: Learn how to configure the root password to connect to your cluster.
+summary: クラスターに接続するためのルート パスワードを構成する方法を学習します。
 ---
 
-# Configure Cluster Password Settings
+# クラスタパスワード設定を構成する {#configure-cluster-password-settings}
 
-For TiDB Cloud Dedicated clusters, you can configure the root password and allowed IP addresses to connect to your cluster.
+TiDB Cloud Dedicated クラスターの場合、クラスターに接続するためのルート パスワードと許可された IP アドレスを構成できます。
 
-> **Note:**
+> **注記：**
 >
-> For {{{ .starter }}} clusters, this document is inapplicable and you can refer to [TLS Connection to {{{ .starter }}}](/tidb-cloud/secure-connections-to-serverless-clusters.md) instead.
+> TiDB Cloud Serverless クラスターの場合、このドキュメントは適用されないため、代わりに[TiDB Cloud ServerlessへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を参照してください。
 
-1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2. In the row of your target cluster, click **...** and select **Password Settings**.
-3. Set the root password to connect to your cluster, and then click **Save**.
+2.  ターゲット クラスターの行で、 **...**をクリックし、 **[パスワード設定]**を選択します。
 
-    You can click **Auto-generate Password** to generate a random password. The generated password will not show again, so save your password in a secure location.
+3.  クラスターに接続するためのルート パスワードを設定し、 **[保存]**をクリックします。
 
-> **Tip:**
+    **「パスワードを自動生成」**をクリックすると、ランダムなパスワードが生成されます。生成されたパスワードは再度表示されないため、安全な場所に保存してください。
+
+> **ヒント：**
 >
-> If you are viewing the overview page of your cluster, you can click the **...** in the upper-right corner of the page, select **Password Settings**, and configure these settings, too.
+> クラスターの概要ページを表示している場合は、ページの右上隅にある**...**をクリックし、 **[パスワード設定]**を選択して、これらの設定も構成できます。

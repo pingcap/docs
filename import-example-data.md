@@ -1,15 +1,15 @@
 ---
 title: Import Example Database
-summary: Install the Bikeshare example database.
+summary: Bikeshare サンプル データベースをインストールします。
 ---
 
-# Import Example Database
+# サンプルデータベースのインポート {#import-example-database}
 
-Examples used in the TiDB manual use [System Data](https://www.capitalbikeshare.com/system-data) from Capital Bikeshare, released under the [Capital Bikeshare Data License Agreement](https://www.capitalbikeshare.com/data-license-agreement).
+TiDB マニュアルで使用されている例では、 [キャピタル・バイクシェア・データライセンス契約](https://www.capitalbikeshare.com/data-license-agreement)でリリースされた Capital Bikeshare の[システムデータ](https://www.capitalbikeshare.com/system-data)使用されています。
 
-## Download all data files
+## すべてのデータファイルをダウンロードする {#download-all-data-files}
 
-The system data is available [for download in .zip files](https://s3.amazonaws.com/capitalbikeshare-data/index.html) organized per year. Downloading and extracting all files requires approximately 3GB of disk space. To download all files for years 2010-2017 using a bash script:
+システムデータは年ごとに[.zipファイルでダウンロード可能](https://s3.amazonaws.com/capitalbikeshare-data/index.html)整理されて提供されます。すべてのファイルをダウンロードして解凍するには、約3GBのディスク容量が必要です。bashスクリプトを使用して2010年から2017年までのすべてのファイルをダウンロードするには、以下のコマンドを実行します。
 
 ```bash
 mkdir -p bikeshare-data && cd bikeshare-data
@@ -18,17 +18,17 @@ curl -L --remote-name-all https://s3.amazonaws.com/capitalbikeshare-data/{2010..
 unzip \*-tripdata.zip
 ```
 
-## Load data into TiDB
+## TiDBにデータをロードする {#load-data-into-tidb}
 
-You can import the system data into TiDB using the following method.
+次の方法を使用して、システム データを TiDB にインポートできます。
 
-1. Rename the CSV files.
+1.  CSV ファイルの名前を変更します。
 
     ```bash
     i=1; for csv in *csv; do mv $csv bikeshare.trips.$(printf "%03d" $i).csv; i=$((i+1)); done
     ```
 
-2. Create the database and table.
+2.  データベースとテーブルを作成します。
 
     ```sql
     CREATE SCHEMA bikeshare;
@@ -47,7 +47,7 @@ You can import the system data into TiDB using the following method.
     );
     ```
 
-3. Create a `tidb-lightning.toml` file as follows:
+3.  次のように`tidb-lightning.toml`ファイルを作成します。
 
     ```toml
     [tikv-importer]
@@ -67,7 +67,7 @@ You can import the system data into TiDB using the following method.
     password = "very_secret"
     ```
 
-4. Run the following command.
+4.  次のコマンドを実行します。
 
     ```shell
     tiup tidb-lightning -c tidb-lightning.toml

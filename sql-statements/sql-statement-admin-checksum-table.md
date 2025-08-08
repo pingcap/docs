@@ -1,30 +1,30 @@
 ---
 title: ADMIN CHECKSUM TABLE | TiDB SQL Statement Reference
-summary: An overview of the usage of ADMIN for the TiDB database.
+summary: TiDB データベースにおける ADMIN の使用法の概要。
 category: reference
 ---
 
-# ADMIN CHECKSUM TABLE
+# 管理者チェックサムテーブル {#admin-checksum-table}
 
-The `ADMIN CHECKSUM TABLE` statement calculates a CRC64 checksum for the data and indexes of a table.
+`ADMIN CHECKSUM TABLE`のステートメントは、テーブルのデータとインデックスの CRC64 チェックサムを計算します。
 
 <CustomContent platform="tidb">
 
-The [checksum](/tidb-lightning/tidb-lightning-glossary.md#checksum) is calculated based on table data and properties such as `table_id`. This means that two tables with the same data but different `table_id` values will get different checksums.
+[チェックサム](/tidb-lightning/tidb-lightning-glossary.md#checksum) 、テーブルのデータと`table_id`などのプロパティに基づいて計算されます。つまり、同じデータを持ちながらも`table_id`値が異なる 2 つのテーブルでは、チェックサムは異なります。
 
-After importing a table using [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), [TiDB Data Migration](/dm/dm-overview.md), or [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md), `ADMIN CHECKSUM TABLE <table>` is executed by default to validate data integrity.
+[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 、 [TiDBデータ移行](/dm/dm-overview.md) 、または[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用してテーブルをインポートした後、データの整合性を検証するためにデフォルトで`ADMIN CHECKSUM TABLE <table>`実行されます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The [checksum](https://docs.pingcap.com/tidb/stable/tidb-lightning-glossary#checksum) is calculated over the table data and properties like the `table_id`. This means that two tables with the same data but different `table_id` values will get different checksums.
+[チェックサム](https://docs.pingcap.com/tidb/stable/tidb-lightning-glossary#checksum)テーブルのデータと`table_id`などのプロパティに基づいて計算されます。つまり、同じデータを持ちながらも`table_id`値が異なる 2 つのテーブルでは、チェックサムは異なります。
 
-After importing a table using [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md), `ADMIN CHECKSUM TABLE <table>` is executed by default to validate data integrity.
+[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)使用してテーブルをインポートした後、データの整合性を検証するためにデフォルトで`ADMIN CHECKSUM TABLE <table>`実行されます。
 
 </CustomContent>
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AdminChecksumTableStmt ::=
@@ -34,27 +34,27 @@ TableNameList ::=
     TableName ( ',' TableName )*
 ```
 
-## Examples
+## 例 {#examples}
 
-Create table `t1`:
+テーブル`t1`を作成します:
 
 ```sql
 CREATE TABLE t1(id INT PRIMARY KEY);
 ```
 
-Insert some data into `t1`:
+`t1`にデータを挿入します:
 
 ```sql
 INSERT INTO t1 VALUES (1),(2),(3);
 ```
 
-Calculate the checksum for `t1`:
+`t1`のチェックサムを計算します。
 
 ```sql
 ADMIN CHECKSUM TABLE t1;
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 +---------+------------+----------------------+-----------+-------------+
@@ -65,6 +65,6 @@ The output is as follows:
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。

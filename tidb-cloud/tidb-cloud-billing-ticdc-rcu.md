@@ -1,39 +1,39 @@
 ---
 title: Changefeed Billing
-summary: Learn about billing for changefeeds in TiDB Cloud.
+summary: TiDB Cloudの変更フィードに対する課金について説明します。
 aliases: ['/tidbcloud/tidb-cloud-billing-tcu']
 ---
 
-# Changefeed Billing
+# チェンジフィード課金 {#changefeed-billing}
 
-## RCU cost
+## RCUコスト {#rcu-cost}
 
-TiDB Cloud measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Replication Capacity Units (RCUs). When you [create a changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed) for a cluster, you can select an appropriate specification. The higher the RCU, the better the replication performance. You will be charged for these TiCDC changefeed RCUs.
+TiDB Cloudは、 [チェンジフィード](/tidb-cloud/changefeed-overview.md)をTiCDCレプリケーション容量ユニット（RCU）で測定します。クラスターに[チェンジフィードを作成する](/tidb-cloud/changefeed-overview.md#create-a-changefeed)設定すると、適切な仕様を選択できます。RCUが大きいほど、レプリケーションパフォーマンスが向上します。これらのTiCDC変更フィードRCUに対して料金が発生します。
 
-### Number of TiCDC RCUs
+### TiCDC RCUの数 {#number-of-ticdc-rcus}
 
-The following table lists the specifications and corresponding replication performances for changefeeds:
+次の表は、変更フィードの仕様と対応するレプリケーション パフォーマンスを示しています。
 
-| Specification | Maximum replication performance |
-|---------------|---------------------------------|
-| 2 RCUs        | 5,000 rows/s                    |
-| 4 RCUs        | 10,000 rows/s                   |
-| 8 RCUs        | 20,000 rows/s                   |
-| 16 RCUs       | 40,000 rows/s                   |
-| 24 RCUs       | 60,000 rows/s                   |
-| 32 RCUs       | 80,000 rows/s                   |
-| 40 RCUs       | 100,000 rows/s                  |
+| 仕様     | 最大のレプリケーションパフォーマンス |
+| ------ | ------------------ |
+| 2台のRCU | 5,000行/秒           |
+| 4台のRCU | 10,000行/秒          |
+| 8台のRCU | 20,000行/秒          |
+| 16 RCU | 40,000行/秒          |
+| 24 RCU | 60,000行/秒          |
+| 32 RCU | 80,000行/秒          |
+| 40 RCU | 100,000行/秒         |
 
-> **Note:**
+> **注記：**
 >
-> The preceding performance data is for reference only and might vary in different scenarios. It is strongly recommended that you conduct a real workload test before using the changefeed feature in a production environment. For further assistance, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+> 上記のパフォーマンスデータは参考用であり、シナリオによって異なる場合があります。本番環境でChangeFeed機能を使用する前に、実際のワークロードテストを実施することを強くお勧めします。ご不明な点がございましたら、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
-### Price
+### 価格 {#price}
 
-To learn about the supported regions and the price of TiDB Cloud for each TiCDC RCU, see [Changefeed Cost](https://www.pingcap.com/tidb-cloud-pricing-details/#changefeed-cost).
+各 TiCDC RCU でサポートされているリージョンとTiDB Cloudの価格については、 [チェンジフィードコスト](https://www.pingcap.com/tidb-cloud-pricing-details/#changefeed-cost)参照してください。
 
-## Private Data Link cost
+## プライベートデータリンクコスト {#private-data-link-cost}
 
-If you choose the **Private Link** or **Private Service Connect** network connectivity method, additional **Private Data Link** costs will be incurred. These charges fall under the [Data Transfer Cost](https://www.pingcap.com/tidb-dedicated-pricing-details/#data-transfer-cost) category.
+**プライベートリンク**または**プライベートサービスコネクトの**ネットワーク接続方法を選択した場合、追加の**プライベートデータリンク**料金が発生します。これらの料金は[データ転送コスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#data-transfer-cost)カテゴリに該当します。
 
-The price of **Private Data Link** is **$0.01/GiB**, the same as **Data Processed** of [AWS Interface Endpoint pricing](https://aws.amazon.com/privatelink/pricing/#Interface_Endpoint_pricing), **Consumer data processing** of [Google Cloud Private Service Connect pricing](https://cloud.google.com/vpc/pricing#psc-forwarding-rules), and **Inbound/Outbound Data Processed** of [Azure Private Link pricing](https://azure.microsoft.com/en-us/pricing/details/private-link/).
+**プライベート データ リンク**の料金は**$0.01/GiB**で、**処理済みデータ**[AWS インターフェースエンドポイントの料金](https://aws.amazon.com/privatelink/pricing/#Interface_Endpoint_pricing) 、**コンシューマー データ処理**[Google Cloud プライベート サービス コネクトの料金](https://cloud.google.com/vpc/pricing#psc-forwarding-rules) 、**受信/送信データ処理**[Azure プライベート リンクの料金](https://azure.microsoft.com/en-us/pricing/details/private-link/)と同じです。

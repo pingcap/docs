@@ -1,32 +1,32 @@
 ---
 title: Reseller's Customer
-summary: Learn how to become a reseller's customer.
+summary: 再販業者の顧客になる方法を学びます。
 ---
 
-# Reseller's Customer
+# 再販業者の顧客 {#reseller-s-customer}
 
-A reseller's customer subscribes to TiDB Cloud services through a reseller in the AWS Marketplace.
+リセラーの顧客は、AWS Marketplace のリセラーを通じてTiDB Cloudサービスに加入します。
 
-Unlike direct TiDB Cloud customers, a reseller's customers pay invoices via the AWS Marketplace rather than directly to PingCAP. However, all other daily operations in the TiDB Cloud console remain the same for both AWS Marketplace Channel Partner Private Offer (CPPO) and direct TiDB Cloud customers.
+TiDB Cloudの直接顧客とは異なり、リセラーの顧客はPingCAPに直接ではなくAWS Marketplace経由で請求書を支払います。ただし、 TiDB Cloudコンソールにおけるその他の日常的な操作は、AWS Marketplaceチャネルパートナープライベートオファー（CPPO）の顧客とTiDB Cloudの直接顧客のどちらでも同じです。
 
-This document outlines how to check both future and historical bills.
+このドキュメントでは、将来の請求書と過去の請求書の両方を確認する方法について説明します。
 
-## Migrate from a direct TiDB Cloud account to a reseller's customer account
+## 直接のTiDB Cloudアカウントから再販業者の顧客アカウントに移行する {#migrate-from-a-direct-tidb-cloud-account-to-a-reseller-s-customer-account}
 
-> **Tip:**
+> **ヒント：**
 >
-> Direct customers are the end customers who directly purchase TiDB Cloud from and pay invoices to PingCAP.
+> 直接顧客とは、PingCAP からTiDB Cloudを直接購入し、請求書を PingCAP に支払うエンド カスタマーです。
 
-If you are currently a direct customer with a TiDB Cloud account, you can ask your reseller to migrate your account to a reseller's customer account.
+現在、 TiDB Cloudアカウントを持つ直接顧客である場合は、再販業者にアカウントを再販業者の顧客アカウントに移行するよう依頼することができます。
 
-The migration will take effect on the first day of a future month. Discuss with your reseller to determine the specific effective date.
+移行は翌月の1日に有効になります。具体的な有効日については、販売代理店にご相談ください。
 
-On the effective day of migration, you will receive an email notification.
+移行の有効日に、電子メール通知が届きます。
 
-## View your future bills
+## 今後の請求書をビュー {#view-your-future-bills}
 
-As a reseller's customer, you will have your invoices processed and paid through the AWS Marketplace.
+再販業者の顧客の場合、請求書は AWS Marketplace を通じて処理され、支払われます。
 
-## View your historical bills
+## 過去の請求書をビュー {#view-your-historical-bills}
 
-If you have migrated from a direct TiDB Cloud account to a reseller's customer account, you can still access your billing history before the migration. To do so, go to **Billing** > **Bills** > **History** in the TiDB Cloud console.
+TiDB Cloudの直接アカウントからリセラーの顧客アカウントに移行した場合でも、移行前の請求履歴にアクセスできます。アクセスするには、 TiDB Cloudコンソールで**「請求」** &gt; **「請求書」** &gt; **「履歴」**に移動してください。

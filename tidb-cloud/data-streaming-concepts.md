@@ -1,22 +1,22 @@
 ---
 title: Data Streaming
-summary: Learn about data streaming concepts for TiDB Cloud.
+summary: TiDB Cloudのデータ ストリーミングの概念について学習します。
 ---
 
-# Data Streaming
+# データストリーミング {#data-streaming}
 
-TiDB Cloud lets you stream data changes from your TiDB Cluster to other systems like Kafka, MySQL, and object storage.
+TiDB Cloud を使用すると、TiDB クラスタからのデータ変更を Kafka、MySQL、オブジェクトstorageなどの他のシステムにストリーミングできます。
 
-Currently, TiDB Cloud supports streaming data to Apache Kafka, MySQL, TiDB Cloud, and cloud storage.
+現在、 TiDB Cloud は、Apache Kafka、MySQL、 TiDB Cloud、クラウドstorageへのストリーミング データをサポートしています。
 
-## Changefeed
+## チェンジフィード {#changefeed}
 
-TiDB Cloud changefeed is a continuous data stream that helps you replicate data changes from TiDB Cloud to other data services.
+TiDB Cloudチェンジフィードは、 TiDB Cloudから他のデータ サービスにデータの変更を複製するのに役立つ継続的なデータ ストリームです。
 
-On the **Changefeed** page in the TiDB Cloud console, you can create a changefeed, view a list of existing changefeeds, and operate the existing changefeeds (such as scaling, pausing, resuming, editing, and deleting a changefeed).
+TiDB Cloudコンソールの**Changefeed**ページでは、変更フィードを作成したり、既存の変更フィードの一覧を表示したり、既存の変更フィードを操作したり (変更フィードのスケーリング、一時停止、再開、編集、削除など) できます。
 
-Replication includes only incremental data changes by default. If existing data must be replicated, it must be exported and loaded into the target system manually before starting the changefeed.
+デフォルトでは、レプリケーションには増分データの変更のみが含まれます。既存のデータをレプリケーションする必要がある場合は、変更フィードを開始する前に、手動でエクスポートしてターゲットシステムにロードする必要があります。
 
-In TiDB Cloud, replication can be tailored by defining table filters (to specify which tables to replicate) and event filters (to include or exclude specific types of events like INSERT or DELETE).
+TiDB Cloudでは、テーブル フィルター (レプリケートするテーブルを指定する) とイベント フィルター (INSERT や DELETE などの特定の種類のイベントを含めるか除外するか) を定義することで、レプリケーションをカスタマイズできます。
 
-For more information, see [Changefeed](/tidb-cloud/changefeed-overview.md).
+詳細については[チェンジフィード](/tidb-cloud/changefeed-overview.md)参照してください。

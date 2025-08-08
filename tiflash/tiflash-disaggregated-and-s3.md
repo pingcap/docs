@@ -1,62 +1,62 @@
 ---
 title: TiFlash Disaggregated Storage and Compute Architecture and S3 Support
-summary: Learn about TiFlash disaggregated storage and compute architecture and S3 Support.
+summary: TiFlash の分散storageとコンピューティングアーキテクチャ、および S3 サポートについて学習します。
 ---
 
-# TiFlash Disaggregated Storage and Compute Architecture and S3 Support
+# TiFlash分散ストレージおよびコンピューティングアーキテクチャと S3 サポート {#tiflash-disaggregated-storage-and-compute-architecture-and-s3-support}
 
-By default, TiFlash is deployed using the coupled storage and compute architecture, in which each TiFlash node acts as both storage and compute node. Starting from TiDB v7.0.0, TiFlash supports the disaggregated storage and compute architecture and allows to store data in Amazon S3 or S3-compatible object storage (such as MinIO).
+デフォルトでは、 TiFlashはstorageとコンピューティングを組み合わせたアーキテクチャを使用してデプロイされ、各TiFlashノードはstorageとコンピューティングノードの両方として機能します。TiDB v7.0.0以降、 TiFlashは分散型storageとコンピューティングアーキテクチャをサポートし、Amazon S3またはS3互換オブジェクトstorage（MinIOなど）にデータを保存できるようになりました。
 
-## Architecture overview
+## アーキテクチャの概要 {#architecture-overview}
 
 ![TiFlash Write and Compute Separation Architecture](/media/tiflash/tiflash-s3.png)
 
-In the disaggregated storage and compute architecture, different functionalities of the TiFlash process are divided and allocated to two types of nodes: the Write Node and the Compute Node. These two types of nodes can be deployed separately and scaled independently, which means that you can decide the number of Write Nodes and Compute Nodes to be deployed as needed.
+分散型storageおよびコンピューティングアーキテクチャでは、 TiFlashプロセスの異なる機能が分割され、書き込みノードとコンピューティングノードという2種類のノードに割り当てられます。これらの2種類のノードは個別に導入および拡張できるため、必要に応じて導入する書き込みノードとコンピューティングノードの数を決定できます。
 
-- TiFlash Write Node
+-   TiFlash書き込みノード
 
-    The Write Node receives Raft logs data from TiKV, converts the data into the columnar format, and periodically packages and uploads all the updated data within a certain period to S3. In addition, the Write Node manages the data on S3, such as continuously organizing data to improve query performance and deleting useless data.
+    書き込みノードは、TiKVからRaftログデータを受け取り、列指向形式に変換し、一定期間内に更新されたすべてのデータを定期的にパッケージ化してS3にアップロードします。さらに、書き込みノードは、クエリパフォーマンスを向上させるための継続的なデータ整理や不要なデータの削除など、S3上のデータを管理します。
 
-    The Write Node uses local disks (usually NVMe SSDs) to cache the latest written data to avoid excessive use of memory.
+    書き込みノードは、メモリの過剰な使用を避けるために、ローカル ディスク (通常は NVMe SSD) を使用して最新の書き込みデータをキャッシュします。
 
-- TiFlash Compute Node
+-   TiFlashコンピューティングノード
 
-    The Compute Node executes query requests sent from a TiDB node. It first accesses a Write Node to obtain data snapshots, and then reads the latest data (that is, the data not been uploaded to S3 yet) from the Write Node and most of the remaining data from S3.
+    コンピューティングノードは、TiDBノードから送信されたクエリリクエストを実行します。まず、書き込みノードにアクセスしてデータのスナップショットを取得し、次に書き込みノードから最新のデータ（つまり、まだS3にアップロードされていないデータ）を読み取り、残りのデータの大部分をS3から読み取ります。
 
-    The Compute Node uses local disks (usually NVMe SSDs) as a cache for data files to avoid repeatedly reading the same data from remote locations (Write Nodes or S3) and improve query performance.
+    コンピューティング ノードは、ローカル ディスク (通常は NVMe SSD) をデータ ファイルのキャッシュとして使用し、リモートの場所 (書き込みノードまたは S3) から同じデータを繰り返し読み取ることを回避して、クエリ パフォーマンスを向上させます。
 
-    The Compute Node is stateless and its scaling speed is at a second level. You can use this feature to reduce costs as follows:
+    コンピューティングノードはステートレスであり、スケーリング速度は2段階レベルです。この機能を利用することで、以下のようにコストを削減できます。
 
-    - When the query workload is low, reduce the number of Compute Nodes to save costs. When there are no queries, you can even stop all Compute Nodes.
-    - When the query workload increases, quickly increase the number of Compute Nodes to ensure query performance.
+    -   クエリのワークロードが低い場合は、コンピューティングノードの数を減らしてコストを削減します。クエリがない場合、すべてのコンピューティングノードを停止することもできます。
+    -   クエリのワークロードが増加した場合は、コンピューティング ノードの数を迅速に増やして、クエリのパフォーマンスを確保します。
 
-## Scenarios
+## シナリオ {#scenarios}
 
-TiFlash disaggregated storage and compute architecture is suitable for cost-effective data analysis services. Because storage and compute resources can be scaled separately as needed in this architecture, you can get significant benefits in the following scenarios:
+TiFlashの分散型storageおよびコンピューティングアーキテクチャは、コスト効率の高いデータ分析サービスに最適です。このアーキテクチャでは、storageとコンピューティングリソースを必要に応じて個別に拡張できるため、以下のシナリオで大きなメリットが得られます。
 
-- The amount of data is large, but only a small amount of data is frequently queried. Most of the data is cold data and rarely queried. At this time, the frequently queried data is usually cached on the local SSD of the Compute Node to provide fast query performance, while most of the other cold data is stored in low-cost S3 or other object storage to save storage costs.
+-   データ量は膨大ですが、頻繁にクエリされるデータはごくわずかです。データの大部分はコールドデータであり、クエリ頻度は低いです。このため、頻繁にクエリされるデータは通常、コンピュートノードのローカルSSDにキャッシュされ、高速なクエリパフォーマンスを提供します。一方、その他のコールドデータの大部分は、storageコストを節約するために、低コストのS3などのオブジェクトstorageに保存されます。
 
-- The demand for compute resources has obvious peaks and valleys. For example, intensive reconciliation queries are usually performed at night, which demands high compute resources. In this case, you can consider temporarily adding more Compute Nodes at night. While at other times, you only need fewer Compute Nodes to complete regular query tasks.
+-   コンピューティングリソースの需要には明らかなピークと谷があります。例えば、集中的なリコンシリエーションクエリは通常夜間に実行され、多くのコンピューティングリソースを必要とします。このような場合、夜間に一時的にコンピューティングノードを追加することを検討できます。一方、他の時間帯には、通常のクエリタスクを実行するために必要なコンピューティングノードの数は少なくて済みます。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-1. Prepare an Amazon S3 bucket for storing the TiFlash data.
+1.  TiFlashデータを保存するための Amazon S3 バケットを準備します。
 
-    You can also use an existing bucket, but you need to reserve dedicated key prefixes for each TiDB cluster. For more information about S3 buckets, see [AWS documentation](https://docs.aws.amazon.com/en_us/AmazonS3/latest/userguide/creating-buckets-s3.html).
+    既存のバケットを使用することもできますが、TiDBクラスターごとに専用のキープレフィックスを予約する必要があります。S3バケットの詳細については、 [AWSドキュメント](https://docs.aws.amazon.com/en_us/AmazonS3/latest/userguide/creating-buckets-s3.html)ご覧ください。
 
-    You can also use other S3-compatible object storage, such as [MinIO](https://min.io/).
+    [ミニオ](https://min.io/)などの他の S3 互換オブジェクトstorageを使用することもできます。
 
-    TiFlash needs to use the following S3 APIs for accessing data. Make sure that TiFlash nodes in your TiDB cluster have the necessary permissions for these APIs.
+    TiFlash はデータにアクセスするために以下の S3 API を使用する必要があります。TiDB クラスター内のTiFlashノードにこれらの API に対する必要な権限が付与されていることを確認してください。
 
-    - PutObject
-    - GetObject
-    - CopyObject
-    - DeleteObject
-    - ListObjectsV2
-    - GetObjectTagging
-    - PutBucketLifecycle
+    -   オブジェクトを配置する
+    -   GetObject
+    -   オブジェクトのコピー
+    -   オブジェクトの削除
+    -   リストオブジェクトV2
+    -   オブジェクトタグ付けの取得
+    -   PutBucketライフサイクル
 
-2. Make sure that your TiDB cluster has no TiFlash nodes deployed using the coupled storage and compute architecture. If any, set the TiFlash replica count of all tables to `0` and then remove all TiFlash nodes. For example:
+2.  TiDBクラスターに、storageとコンピューティングを組み合わせたアーキテクチャを使用してデプロイされたTiFlashノードがないことを確認してください。もしある場合は、すべてのテーブルのTiFlashレプリカ数を`0`に設定し、すべてのTiFlashノードを削除してください。例：
 
     ```sql
     SELECT * FROM INFORMATION_SCHEMA.TIFLASH_REPLICA; # Query all tables with TiFlash replicas
@@ -69,11 +69,11 @@ TiFlash disaggregated storage and compute architecture is suitable for cost-effe
     tiup cluster prune mycluster                       # Remove all TiFlash nodes in the Tombstone state
     ```
 
-## Usage
+## 使用法 {#usage}
 
-By default, TiUP deploys TiFlash in the coupled storage and computation architecture. If you need to deploy TiFlash in the disaggregated storage and compute architecture, take the following steps for manual configuration:
+デフォルトでは、 TiUPはTiFlash を結合storageおよびコンピューティングアーキテクチャにデプロイします。分離storageおよびコンピューティングアーキテクチャにTiFlashをデプロイする必要がある場合は、以下の手順に従って手動で設定してください。
 
-1. Prepare a TiFlash topology configuration file, such as `scale-out.topo.yaml`, with the following configuration:
+1.  次の構成を持つ、 `scale-out.topo.yaml`などのTiFlashトポロジ構成ファイルを準備します。
 
     ```yaml
     tiflash_servers:
@@ -126,18 +126,18 @@ By default, TiUP deploys TiFlash in the coupled storage and computation architec
           storage.remote.cache.capacity: 858993459200           # 800 GiB
     ```
 
-    * Note that the above `ACCESS_KEY_ID` and `SECRET_ACCESS_KEY` are directly written in the configuration file. You can also choose to configure them separately using environment variables. If both ways are configured, the environment variables have higher priority.
+    -   上記の`ACCESS_KEY_ID`と`SECRET_ACCESS_KEY`設定ファイルに直接記述されていることに注意してください。環境変数を使用して個別に設定することもできます。両方の方法で設定した場合、環境変数が優先されます。
 
-        To configure `ACCESS_KEY_ID` and `SECRET_ACCESS_KEY` through environment variables, switch to the user environment that starts the TiFlash process (usually `tidb`) on all machines where TiFlash processes are deployed, and then modify `~/.bash_profile` to add the following configurations:
+        環境変数を使用して`ACCESS_KEY_ID`と`SECRET_ACCESS_KEY`構成するには、 TiFlashTiFlashを開始するユーザー環境 (通常は`tidb` ) に切り替え、 `~/.bash_profile`変更して次の構成を追加します。
 
         ```shell
         export S3_ACCESS_KEY_ID={ACCESS_KEY_ID}
         export S3_SECRET_ACCESS_KEY={SECRET_ACCESS_KEY}
         ```
 
-    * `storage.s3.endpoint` supports connecting to S3 using the `http` or `https` mode, and you can set the mode by directly modifying the URL. For example, `https://s3.{region}.amazonaws.com`.
+    -   `storage.s3.endpoint` `http`または`https`モードを使用した S3 接続をサポートしており、URL を直接変更することでモードを設定できます。例: `https://s3.{region}.amazonaws.com` 。
 
-2. Add TiFlash nodes and reset the number of TiFlash replicas:
+2.  TiFlashノードを追加し、 TiFlashレプリカの数をリセットします。
 
     ```shell
     tiup cluster scale-out mycluster ./scale-out.topo.yaml
@@ -147,15 +147,15 @@ By default, TiUP deploys TiFlash in the coupled storage and computation architec
     ALTER TABLE table_name SET TIFLASH REPLICA 1;
     ```
 
-3. Modify the TiDB configuration to query TiFlash using the disaggregated storage and compute architecture.
+3.  分散storageおよびコンピューティングアーキテクチャを使用してTiFlash をクエリするように TiDB 構成を変更します。
 
-    1. Open the TiDB configuration file in edit mode:
+    1.  TiDB 構成ファイルを編集モードで開きます。
 
-          ```shell
-          tiup cluster edit-config mycluster
-          ```
+        ```shell
+        tiup cluster edit-config mycluster
+        ```
 
-    2. Add the following configuration items to the TiDB configuration file:
+    2.  TiDB 構成ファイルに次の構成項目を追加します。
 
         ```shell
         server_configs:
@@ -163,16 +163,16 @@ By default, TiUP deploys TiFlash in the coupled storage and computation architec
         disaggregated-tiflash: true   # Query TiFlash using the disaggregated storage and compute architecture
         ```
 
-    3. Restart TiDB:
+    3.  TiDBを再起動します。
 
         ```shell
         tiup cluster reload mycluster -R tidb
         ```
 
-## Restrictions
+## 制限 {#restrictions}
 
-- TiFlash does not support in-place switching between the **disaggregated storage and compute architecture** and the **coupled storage and compute architecture**. Before switching to the disaggregated architecture, you must remove all existing TiFlash nodes deployed using the coupled architecture.
-- After the migration from one architecture to another, all TiFlash data needs to be replicated again.
-- Only TiFlash nodes with the same architecture are allowed in the same TiDB cluster. Two architectures cannot coexist in one cluster.
-- The disaggregated storage and compute architecture only supports object storage using the S3 API, while the coupled storage and compute architecture only supports local storage.
-- When using S3 storage, TiFlash nodes cannot obtain the keys of files not on their own nodes, so the [Encryption at Rest](/encryption-at-rest.md) feature cannot be used.
+-   TiFlash は**、分離storageおよびコンピューティングアーキテクチャと****結合storageおよびコンピューティングアーキテクチャ**間のインプレース切り替えをサポートしていません。分離アーキテクチャに切り替える前に、結合アーキテクチャを使用してデプロイされている既存のTiFlashノードをすべて削除する必要があります。
+-   あるアーキテクチャから別のアーキテクチャに移行した後、すべてのTiFlashデータを再度複製する必要があります。
+-   同じTiDBクラスター内では、同じアーキテクチャのTiFlashノードのみが許可されます。1つのクラスター内で2つのアーキテクチャを共存させることはできません。
+-   分散型storageおよびコンピューティングアーキテクチャはS3 API を使用したオブジェクトstorageのみをサポートしますが、結合型storageおよびコンピューティングアーキテクチャはローカルstorageのみをサポートします。
+-   S3storageを使用する場合、 TiFlashノードは自身のノード上にないファイルのキーを取得できないため、 [保存時の暗号化](/encryption-at-rest.md)機能は使用できません。

@@ -1,13 +1,13 @@
 ---
 title: Data Check for Tables with Different Schema or Table Names
-summary: Learn the data check for different database names or table names.
+summary: さまざまなデータベース名またはテーブル名のデータチェックについて学習します。
 ---
 
-# Data Check for Tables with Different Schema or Table Names
+# 異なるスキーマまたはテーブル名を持つテーブルのデータチェック {#data-check-for-tables-with-different-schema-or-table-names}
 
-When using replication tools such as [TiDB Data Migration](/dm/dm-overview.md), you can set `route-rules` to replicate data to a specified table in the downstream. sync-diff-inspector enables you to verify tables with different schema names or table names by setting `rules`.
+[TiDBデータ移行](/dm/dm-overview.md)などのレプリケーション ツールを使用する場合、 `route-rules`設定すると、ダウンストリーム内の指定されたテーブルにデータをレプリケートできます。 sync-diff-inspector では、 `rules`設定することで、異なるスキーマ名またはテーブル名を持つテーブルを検証できます。
 
-The following is a simple configuration example. To learn the complete configuration, refer to [sync-diff-inspector User Guide](/sync-diff-inspector/sync-diff-inspector-overview.md).
+以下は簡単な設定例です。詳細な設定については、 [sync-diff-inspector ユーザーガイド](/sync-diff-inspector/sync-diff-inspector-overview.md)を参照してください。
 
 ```toml
 ######################### Datasource config #########################
@@ -31,9 +31,9 @@ target-schema = "test_2"       # The name of the schema in the target database
 target-table = "t_2"           # The name of the target table
 ```
 
-This configuration can be used to check `test_2.t_2` in the downstream and `test_1.t_1` in the `mysql1` instance.
+この構成は、ダウンストリームで`test_2.t_2`チェックし、インスタンス`mysql1`で`test_1.t_1`チェックするために使用できます。
 
-To check a large number of tables with different schema names or table names, you can simplify the configuration by setting the mapping relationship by using `rules`. You can configure the mapping relationship of either schema or table, or of both. For example, all the tables in the upstream `test_1` database are replicated to the downstream `test_2` database, which can be checked through the following configuration:
+スキーマ名またはテーブル名が異なる多数のテーブルをチェックする場合、 `rules`を使用してマッピング関係を設定することで設定を簡素化できます。スキーマまたはテーブルのいずれか、あるいは両方のマッピング関係を設定できます。例えば、上流データベース`test_1`のすべてのテーブルが下流データベース`test_2`に複製され、以下の設定でチェックできます。
 
 ```toml
 ######################### Datasource config #########################
@@ -57,16 +57,16 @@ target-schema = "test_2"       # The name of the schema in the target database
 target-table = "t_2"           # The name of the target table
 ```
 
-## The initialization of table routers and some examples
+## テーブルルータの初期化といくつかの例 {#the-initialization-of-table-routers-and-some-examples}
 
-### The initialization of table routers
+### テーブルルータの初期化 {#the-initialization-of-table-routers}
 
-- If a `target-schema/target-table` table named `schema.table` exists in the rules, the behavior of sync-diff-inspector is as follows:
+-   ルール内に`schema.table`という名前のテーブル`target-schema/target-table`が存在する場合、sync-diff-inspector の動作は次のようになります。
 
-    - If there is a rule that matches `schema.table` to `schema.table`, sync-diff-inspector does nothing.
-    - If there is no rule that matches `schema.table` to `schema.table`, sync-diff-inspector will add a new rule `schema.table -> _no__exists__db_._no__exists__table_` to the table router. After that, sync-diff-inspector will treat the table `schema.table` as the table `_no__exists__db_._no__exists__table_`.
+    -   `schema.table` ～ `schema.table`に一致するルールがある場合、sync-diff-inspector は何も行いません。
+    -   `schema.table`から`schema.table`に一致するルールがない場合、sync-diff-inspector はテーブルルーターに新しいルール`schema.table -> _no__exists__db_._no__exists__table_`を追加します。その後、sync-diff-inspector はテーブル`schema.table`テーブル`_no__exists__db_._no__exists__table_`として扱います。
 
-- If `target-schema` exists only in the rules as follows:
+-   `target-schema`ルール内にのみ存在する場合、次のようになります。
 
     ```toml
     [routes.rule1]
@@ -74,29 +74,29 @@ target-table = "t_2"           # The name of the target table
     target-schema = "schema"     # the target schema
     ```
 
-    - If there is no schema `schema` in the upstream, sync-diff-inspector does nothing.
-    - If there is a schema `schema` in the upstream, and a rule matches the schema, sync-diff-inspector does nothing.
-    - If there is a schema `schema` in the upstream, but no rule matches the schema, sync-diff-inspector will add a new rule `schema -> _no__exists__db_` to the table router. After that, sync-diff-inspector will treat the table `schema` as the table `_no__exists__db_`.
+    -   アップストリームにスキーマ`schema`がない場合、sync-diff-inspector は何も行いません。
+    -   アップストリームにスキーマ`schema`があり、ルールがスキーマに一致する場合、sync-diff-inspector は何も行いません。
+    -   アップストリームにスキーマ`schema`が存在するものの、それに一致するルールがない場合、sync-diff-inspector はテーブルルーターに新しいルール`schema -> _no__exists__db_`追加します。その後、sync-diff-inspector はテーブル`schema`をテーブル`_no__exists__db_`として扱います。
 
-- If `target-schema.target-table` does not exist in the rules, sync-diff-inspector will add a rule to match `target-schema.target-table` to `target-schema.target-table` to make it case-insensitive, because the table router is case-insensitive.
+-   ルールに`target-schema.target-table`存在しない場合は、テーブル ルーターが大文字と小文字を区別しないため、sync-diff-inspector は`target-schema.target-table`から`target-schema.target-table`に一致するルールを追加して大文字と小文字を区別しないようにします。
 
-### Examples
+### 例 {#examples}
 
-Suppose there are seven tables in the upstream cluster:
+アップストリーム クラスターに 7 つのテーブルがあるとします。
 
-- `inspector_mysql_0.tb_emp1`
-- `Inspector_mysql_0.tb_emp1`
-- `inspector_mysql_0.Tb_emp1`
-- `inspector_mysql_1.tb_emp1`
-- `Inspector_mysql_1.tb_emp1`
-- `inspector_mysql_1.Tb_emp1`
-- `Inspector_mysql_1.Tb_emp1`
+-   `inspector_mysql_0.tb_emp1`
+-   `Inspector_mysql_0.tb_emp1`
+-   `inspector_mysql_0.Tb_emp1`
+-   `inspector_mysql_1.tb_emp1`
+-   `Inspector_mysql_1.tb_emp1`
+-   `inspector_mysql_1.Tb_emp1`
+-   `Inspector_mysql_1.Tb_emp1`
 
-In the configuration example, the upstream cluster has a rule `Source.rule1`, and the target table is `inspector_mysql_1.tb_emp1`.
+設定例では、アップストリーム クラスターにルール`Source.rule1`があり、ターゲット テーブルは`inspector_mysql_1.tb_emp1`です。
 
-#### Example 1
+#### 例1 {#example-1}
 
-If the configuration is as follows:
+構成が次のようになっている場合:
 
 ```toml
 [Source.rule1]
@@ -106,19 +106,19 @@ target-schema = "inspector_mysql_1"
 target-table = "tb_emp1"
 ```
 
-The routing results will be as follows:
+ルーティング結果は次のようになります。
 
-- `inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
-- `Inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
-- `inspector_mysql_0.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
-- `inspector_mysql_1.tb_emp1` is routed to `_no__exists__db_._no__exists__table_`
-- `Inspector_mysql_1.tb_emp1` is routed to `_no__exists__db_._no__exists__table_`
-- `inspector_mysql_1.Tb_emp1` is routed to `_no__exists__db_._no__exists__table_`
-- `Inspector_mysql_1.Tb_emp1` is routed to `_no__exists__db_._no__exists__table_`
+-   `inspector_mysql_0.tb_emp1`は`inspector_mysql_1.tb_emp1`にルーティングされます
+-   `Inspector_mysql_0.tb_emp1`は`inspector_mysql_1.tb_emp1`にルーティングされます
+-   `inspector_mysql_0.Tb_emp1`は`inspector_mysql_1.tb_emp1`にルーティングされます
+-   `inspector_mysql_1.tb_emp1`は`_no__exists__db_._no__exists__table_`にルーティングされます
+-   `Inspector_mysql_1.tb_emp1`は`_no__exists__db_._no__exists__table_`にルーティングされます
+-   `inspector_mysql_1.Tb_emp1`は`_no__exists__db_._no__exists__table_`にルーティングされます
+-   `Inspector_mysql_1.Tb_emp1`は`_no__exists__db_._no__exists__table_`にルーティングされます
 
-#### Example 2
+#### 例2 {#example-2}
 
-If the configuration is as follows:
+構成が次のようになっている場合:
 
 ```toml
 [Source.rule1]
@@ -126,19 +126,19 @@ schema-pattern = "inspector_mysql_0"
 target-schema = "inspector_mysql_1"
 ```
 
-The routing results will be as follows:
+ルーティング結果は次のようになります。
 
-- `inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
-- `Inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
-- `inspector_mysql_0.Tb_emp1` is routed to `inspector_mysql_1.Tb_emp1`
-- `inspector_mysql_1.tb_emp1` is routed to `_no__exists__db_._no__exists__table_`
-- `Inspector_mysql_1.tb_emp1` is routed to `_no__exists__db_._no__exists__table_`
-- `inspector_mysql_1.Tb_emp1` is routed to `_no__exists__db_._no__exists__table_`
-- `Inspector_mysql_1.Tb_emp1` is routed to `_no__exists__db_._no__exists__table_`
+-   `inspector_mysql_0.tb_emp1`は`inspector_mysql_1.tb_emp1`にルーティングされます
+-   `Inspector_mysql_0.tb_emp1`は`inspector_mysql_1.tb_emp1`にルーティングされます
+-   `inspector_mysql_0.Tb_emp1`は`inspector_mysql_1.Tb_emp1`にルーティングされます
+-   `inspector_mysql_1.tb_emp1`は`_no__exists__db_._no__exists__table_`にルーティングされます
+-   `Inspector_mysql_1.tb_emp1`は`_no__exists__db_._no__exists__table_`にルーティングされます
+-   `inspector_mysql_1.Tb_emp1`は`_no__exists__db_._no__exists__table_`にルーティングされます
+-   `Inspector_mysql_1.Tb_emp1`は`_no__exists__db_._no__exists__table_`にルーティングされます
 
-#### Example 3
+#### 例3 {#example-3}
 
-If the configuration is as follows:
+構成が次のようになっている場合:
 
 ```toml
 [Source.rule1]
@@ -146,19 +146,19 @@ schema-pattern = "other_schema"
 target-schema = "other_schema"
 ```
 
-The routing results will be as follows:
+ルーティング結果は次のようになります。
 
-- `inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_0.tb_emp1`
-- `Inspector_mysql_0.tb_emp1` is routed to `Inspector_mysql_0.tb_emp1`
-- `inspector_mysql_0.Tb_emp1` is routed to `inspector_mysql_0.Tb_emp1`
-- `inspector_mysql_1.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
-- `Inspector_mysql_1.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
-- `inspector_mysql_1.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
-- `Inspector_mysql_1.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
+-   `inspector_mysql_0.tb_emp1`は`inspector_mysql_0.tb_emp1`にルーティングされます
+-   `Inspector_mysql_0.tb_emp1`は`Inspector_mysql_0.tb_emp1`にルーティングされます
+-   `inspector_mysql_0.Tb_emp1`は`inspector_mysql_0.Tb_emp1`にルーティングされます
+-   `inspector_mysql_1.tb_emp1`は`inspector_mysql_1.tb_emp1`にルーティングされます
+-   `Inspector_mysql_1.tb_emp1`は`inspector_mysql_1.tb_emp1`にルーティングされます
+-   `inspector_mysql_1.Tb_emp1`は`inspector_mysql_1.tb_emp1`にルーティングされます
+-   `Inspector_mysql_1.Tb_emp1`は`inspector_mysql_1.tb_emp1`にルーティングされます
 
-#### Example 4
+#### 例4 {#example-4}
 
-If the configuration is as follows:
+構成が次のようになっている場合:
 
 ```toml
 [Source.rule1]
@@ -168,24 +168,24 @@ target-schema = "inspector_mysql_1"
 target-table = "tb_emp1"
 ```
 
-The routing results will be as follows:
+ルーティング結果は次のようになります。
 
-- `inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
-- `Inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
-- `inspector_mysql_0.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
-- `inspector_mysql_1.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
-- `Inspector_mysql_1.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
-- `inspector_mysql_1.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
-- `Inspector_mysql_1.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
+-   `inspector_mysql_0.tb_emp1`は`inspector_mysql_1.tb_emp1`にルーティングされます
+-   `Inspector_mysql_0.tb_emp1`は`inspector_mysql_1.tb_emp1`にルーティングされます
+-   `inspector_mysql_0.Tb_emp1`は`inspector_mysql_1.tb_emp1`にルーティングされます
+-   `inspector_mysql_1.tb_emp1`は`inspector_mysql_1.tb_emp1`にルーティングされます
+-   `Inspector_mysql_1.tb_emp1`は`inspector_mysql_1.tb_emp1`にルーティングされます
+-   `inspector_mysql_1.Tb_emp1`は`inspector_mysql_1.tb_emp1`にルーティングされます
+-   `Inspector_mysql_1.Tb_emp1`は`inspector_mysql_1.tb_emp1`にルーティングされます
 
-#### Example 5
+#### 例5 {#example-5}
 
-If you do not set any rules, the routing results will be as follows:
+ルールを設定しない場合、ルーティング結果は次のようになります。
 
-- `inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_0.tb_emp1`
-- `Inspector_mysql_0.tb_emp1` is routed to `Inspector_mysql_0.tb_emp1`
-- `inspector_mysql_0.Tb_emp1` is routed to `inspector_mysql_0.Tb_emp1`
-- `inspector_mysql_1.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
-- `Inspector_mysql_1.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
-- `inspector_mysql_1.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
-- `Inspector_mysql_1.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
+-   `inspector_mysql_0.tb_emp1`は`inspector_mysql_0.tb_emp1`にルーティングされます
+-   `Inspector_mysql_0.tb_emp1`は`Inspector_mysql_0.tb_emp1`にルーティングされます
+-   `inspector_mysql_0.Tb_emp1`は`inspector_mysql_0.Tb_emp1`にルーティングされます
+-   `inspector_mysql_1.tb_emp1`は`inspector_mysql_1.tb_emp1`にルーティングされます
+-   `Inspector_mysql_1.tb_emp1`は`inspector_mysql_1.tb_emp1`にルーティングされます
+-   `inspector_mysql_1.Tb_emp1`は`inspector_mysql_1.tb_emp1`にルーティングされます
+-   `Inspector_mysql_1.Tb_emp1`は`inspector_mysql_1.tb_emp1`にルーティングされます

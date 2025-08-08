@@ -1,94 +1,94 @@
 ---
 title: Overview Page
-summary: The TiDB overview page displays cluster QPS, latency, top SQL statements, recent slow queries, instance status, and monitor/alert links. Access it via TiDB Dashboard or left navigation menu. QPS and latency require Prometheus monitoring. Top SQL and slow queries need SQL Statements and slow query logs enabled. Instance status shows total and abnormal instances. Monitor and alert links lead to Grafana dashboard, AlertManager, and cluster diagnostics.
+summary: TiDB概要ページには、クラスターのQPS、レイテンシー、上位SQL文、最近のスロークエリ、インスタンスステータス、監視/アラートリンクが表示されます。TiDBダッシュボードまたは左側のナビゲーションメニューからアクセスできます。QPSとレイテンシーにはPrometheusモニタリングが必要です。Top SQLとスロークエリには、SQL文とスロークエリログが有効になっている必要があります。インスタンスステータスには、インスタンスの総数と異常なインスタンスが表示されます。監視とアラートのリンクは、Grafanaダッシュボード、AlertManager、クラスター診断にリンクしています。
 ---
 
-# Overview Page
+# 概要ページ {#overview-page}
 
-This page shows the overview of the entire TiDB cluster, including the following information:
+このページには、次の情報を含む TiDB クラスター全体の概要が表示されます。
 
-- Queries per second (QPS) of the entire cluster.
-- The query latency of the entire cluster.
-- The SQL statements that have accumulated the longest execution time over the recent period.
-- The slow queries whose execution time over the recent period exceeds the threshold.
-- The node count and status of each instance.
-- Monitor and alert messages.
+-   クラスター全体の 1 秒あたりのクエリ数 (QPS)。
+-   クラスター全体のクエリのレイテンシー。
+-   最近の期間に最も長い実行時間を累積した SQL ステートメント。
+-   最近の期間の実行時間がしきい値を超えた遅いクエリ。
+-   各インスタンスのノード数とステータス。
+-   メッセージを監視および警告します。
 
-## Access the page
+## ページにアクセスする {#access-the-page}
 
-After logging in to TiDB Dashboard, the overview page is entered by default, or you can click **Overview** in the left navigation menu to enter this page:
+TiDB ダッシュボードにログインすると、デフォルトで概要ページが表示されます。または、左側のナビゲーション メニューで**[概要]**をクリックしてこのページにアクセスすることもできます。
 
 ![Enter overview page](/media/dashboard/dashboard-overview-access-v650.png)
 
-## QPS
+## QPS {#qps}
 
-This area shows the number of successful and failed queries per second for the entire cluster over the recent hour:
+この領域には、最近の 1 時間におけるクラスター全体の 1 秒あたりの成功したクエリと失敗したクエリの数が表示されます。
 
 ![QPS](/media/dashboard/dashboard-overview-qps.png)
 
-> **Note:**
+> **注記：**
 >
-> This feature is available only in the cluster where the Prometheus monitoring component is deployed. If Prometheus is not deployed, an error will be displayed.
+> この機能は、Prometheus 監視コンポーネントがデプロイされているクラスターでのみ利用できます。Prometheus がデプロイされていない場合はエラーが表示されます。
 
-## Latency
+## レイテンシー {#latency}
 
-This area shows the latency of 99.9%, 99%, and 90% of queries in the entire cluster over the recent one hour:
+この領域には、過去 1 時間におけるクラスター全体のクエリの 99.9%、99%、90% のレイテンシーが表示されます。
 
 ![Latency](/media/dashboard/dashboard-overview-latency.png)
 
-> **Note:**
+> **注記：**
 >
-> This feature is available only on the cluster where the Prometheus monitoring component is deployed. If Prometheus is not deployed, an error will be displayed.
+> この機能は、Prometheus 監視コンポーネントがデプロイされているクラスターでのみ利用できます。Prometheus がデプロイされていない場合はエラーが表示されます。
 
-## Top SQL statements
+## Top SQL文 {#top-sql-statements}
 
-This area shows the ten types of SQL statements that have accumulated the longest execution time in the entire cluster over the recent period. SQL statements with different query parameters but of the same structure are classified into the same SQL type and displayed in the same row:
+この領域には、最近の期間にクラスター全体で最も実行時間が長かった10種類のSQL文が表示されます。クエリパラメータは異なるが構造が同じSQL文は、同じSQLタイプに分類され、同じ行に表示されます。
 
 ![Top SQL](/media/dashboard/dashboard-overview-top-statements.png)
 
-The information shown in this area is consistent with the more detailed [SQL Statements Page](/dashboard/dashboard-statement-list.md). You can click the **Top SQL Statements** heading to view the complete list. For details of the columns in this table, see [SQL Statements Page](/dashboard/dashboard-statement-list.md).
+この領域に表示される情報は、より詳細な[SQL文ページ](/dashboard/dashboard-statement-list.md)と一致しています。 **「Top SQL文」**の見出しをクリックすると、完全なリストが表示されます。この表の列の詳細については、 [SQL文ページ](/dashboard/dashboard-statement-list.md)参照してください。
 
-> **Note:**
+> **注記：**
 >
-> This feature is available only on the cluster where SQL Statements feature is enabled.
+> この機能は、SQL ステートメント機能が有効になっているクラスターでのみ使用できます。
 
-## Recent slow queries
+## 最近の遅いクエリ {#recent-slow-queries}
 
-By default, this area shows the latest 10 slow queries in the entire cluster over the recent 30 minutes:
+デフォルトでは、この領域には、過去 30 分間のクラスター全体の最新の 10 件の低速クエリが表示されます。
 
 ![Recent slow queries](/media/dashboard/dashboard-overview-slow-query.png)
 
-By default, the SQL query that is executed longer than 300 milliseconds is counted as a slow query and displayed on the table. You can change this threshold by modifying the [tidb_slow_log_threshold](/system-variables.md#tidb_slow_log_threshold) variable or the [instance.tidb_slow_log_threshold](/tidb-configuration-file.md#tidb_slow_log_threshold) TiDB parameter.
+デフォルトでは、実行時間が300ミリ秒を超えるSQLクエリはスロークエリとしてカウントされ、テーブルに表示されます。このしきい値は、 [tidb_slow_log_threshold](/system-variables.md#tidb_slow_log_threshold)変数または[インスタンス.tidb_slow_log_threshold](/tidb-configuration-file.md#tidb_slow_log_threshold) TiDBパラメータを変更することで変更できます。
 
-The content displayed in this area is consistent with the more detailed [Slow Queries Page](/dashboard/dashboard-slow-query.md). You can click the **Recent Slow Queries** title to view the complete list. For details of the columns in this table, see this [Slow Queries Page](/dashboard/dashboard-slow-query.md).
+この領域に表示される内容は、より詳細な[遅いクエリページ](/dashboard/dashboard-slow-query.md)内容と一致しています。 **「最近のスロークエリ」**というタイトルをクリックすると、完全なリストが表示されます。この表の列の詳細については、 [遅いクエリページ](/dashboard/dashboard-slow-query.md)をご覧ください。
 
-> **Note:**
+> **注記：**
 >
-> This feature is available only in the cluster with slow query logs enabled. By default, slow query logs are enabled in the cluster deployed using TiUP.
+> この機能は、スロークエリログが有効になっているクラスターでのみ利用できます。TiUPを使用してデプロイされたクラスターでは、スロークエリログはデフォルトで有効になっています。
 
-## Instances
+## インスタンス {#instances}
 
-This area summarizes the total number of instances and abnormal instances of TiDB, TiKV, PD, and TiFlash in the entire cluster:
+この領域には、クラスター全体の TiDB、TiKV、PD、およびTiFlashのインスタンスの総数と異常なインスタンス数がまとめられます。
 
 ![Instances](/media/dashboard/dashboard-overview-instances.png)
 
-The statuses in the preceding image are described as follows:
+上の画像のステータスは次のように説明されます。
 
-- Up: The instance is running properly (including the offline storage instance).
-- Down: The instance is running abnormally, such as network disconnection and process crash.
+-   稼働中: インスタンスは正常に実行されています (オフラインstorageインスタンスを含む)。
+-   ダウン: ネットワーク切断やプロセスクラッシュなど、インスタンスが異常な状態で動作しています。
 
-Click the **Instance** title to enter the [Cluster Info Page](/dashboard/dashboard-cluster-info.md) that shows the detailed running status of each instance.
+**インスタンスの**タイトルをクリックすると、各インスタンスの詳細な実行ステータスを示す[クラスタ情報ページ](/dashboard/dashboard-cluster-info.md)が表示されます。
 
-## Monitor and alert
+## 監視と警告 {#monitor-and-alert}
 
-This area provides links for you to view detailed monitor and alert:
+この領域には、詳細なモニターとアラートを表示するためのリンクがあります。
 
 ![Monitor and alert](/media/dashboard/dashboard-overview-monitor.png)
 
-- **View Metrics**: Click this link to jump to the Grafana dashboard where you can view detailed monitoring information of the cluster. For details of each monitoring metric in the Grafana dashboard, see [monitoring metrics](/grafana-overview-dashboard.md).
-- **View Alerts**: Click this link to jump to the AlertManager page where you can view detailed alert information of the cluster. If alerts exist in the cluster, the number of alerts is directly shown in the link text.
-- **Run Diagnostics**: Click this link to jump to the more detailed [cluster diagnostics page](/dashboard/dashboard-diagnostics-access.md).
+-   **メトリクスのビュー**：このリンクをクリックすると、Grafanaダッシュボードに移動し、クラスターの詳細な監視情報を確認できます。Grafanaダッシュボードの各監視メトリクスの詳細については、 [監視メトリック](/grafana-overview-dashboard.md)参照してください。
+-   **アラートのビュー**：このリンクをクリックすると、AlertManagerページに移動し、クラスターの詳細なアラート情報を確認できます。クラスターにアラートが存在する場合、アラートの数がリンクテキストに直接表示されます。
+-   **診断の実行**: このリンクをクリックすると、より詳細な[クラスター診断ページ](/dashboard/dashboard-diagnostics-access.md)にジャンプします。
 
-> **Note:**
+> **注記：**
 >
-> The **View Metrics** link is available only in the cluster where the Grafana node is deployed. The **View Alerts** link is available only in the cluster where the AlertManager node is deployed.
+> **「メトリックのビュー**」リンクは、Grafanaノードがデプロイされているクラスターでのみ使用できます。 **「アラートのビュー」**リンクは、AlertManagerノードがデプロイされているクラスターでのみ使用できます。

@@ -1,49 +1,49 @@
 ---
 title: ticloud serverless import cancel
-summary: The reference of `ticloud serverless import cancel`.
+summary: ticloud serverless import cancel` の参照。
 ---
 
-# ticloud serverless import cancel
+# ticloud サーバーレスインポートのキャンセル {#ticloud-serverless-import-cancel}
 
-Cancel a data import task:
+データインポートタスクをキャンセルします。
 
 ```shell
 ticloud serverless import cancel [flags]
 ```
 
-## Examples
+## 例 {#examples}
 
-Cancel an import task in interactive mode:
+対話モードでインポート タスクをキャンセルします。
 
 ```shell
 ticloud serverless import cancel
 ```
 
-Cancel an import task in non-interactive mode:
+非対話型モードでインポート タスクをキャンセルします。
 
 ```shell
 ticloud serverless import cancel --cluster-id <cluster-id> --import-id <import-id>
 ```
 
-## Flags
+## 旗 {#flags}
 
-In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLIプロンプトに従って入力するだけです。
 
-| Flag                    | Description                                  | Required | Note                                                 |
-|-------------------------|----------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | Specifies the ID of the cluster.                                  | Yes      | Only works in non-interactive mode.                  |
-| --force                 | Cancels an import task without confirmation. | No       | Works in both non-interactive and interactive modes. |
-| -h, --help              | Shows help information for this command.     | No       | Works in both non-interactive and interactive modes. |
-| --import-id string      | Specifies the ID of the import task.         | Yes      | Only works in non-interactive mode.                  |
+| フラグ                  | 説明                       | 必須  | 注記                       |
+| -------------------- | ------------------------ | --- | ------------------------ |
+| -c, --cluster-id 文字列 | クラスターの ID を指定します。        | はい  | 非対話型モードでのみ動作します。         |
+|  --force             | 確認なしでインポート タスクをキャンセルします。 | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
+| -h, --help           | このコマンドのヘルプ情報を表示します。      | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
+| --import-id 文字列      | インポート タスクの ID を指定します。    | はい  | 非対話型モードでのみ動作します。         |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag                 | Description                                                                               | Required | Note                                                                                                                    |
-|----------------------|-------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                  | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
-| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
+| フラグ               | 説明                                                                             | 必須  | 注記                                                      |
+| ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------- |
+| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
+| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| -D, --debug       | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、皆様からの貢献も歓迎いたします。

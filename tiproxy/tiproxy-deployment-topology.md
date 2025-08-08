@@ -1,46 +1,46 @@
 ---
 title: TiProxy Deployment Topology
-summary: Learn the deployment topology of TiProxy based on the minimal TiDB topology.
+summary: 最小限の TiDB トポロジに基づく TiProxy の展開トポロジについて学習します。
 ---
 
-# TiProxy Deployment Topology
+# TiProxy 展開トポロジ {#tiproxy-deployment-topology}
 
-This document describes the deployment topology of [TiProxy](/tiproxy/tiproxy-overview.md) based on the minimal TiDB topology.
+このドキュメントでは、最小限の TiDB トポロジに基づく[TiProxy](/tiproxy/tiproxy-overview.md)のデプロイメント トポロジについて説明します。
 
-For other deployment methods, refer to the following documents:
+その他の展開方法については、次のドキュメントを参照してください。
 
-- To deploy TiProxy using TiDB Operator, see the [TiDB Operator](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-tiproxy) documentation.
-- To quickly deploy TiProxy locally using TiUP, see [Deploy TiProxy](/tiup/tiup-playground.md#deploy-tiproxy).
-- To deploy TiProxy using TiUP, see [Installation and usage](/tiproxy/tiproxy-overview.md#installation-and-usage).
+-   TiDB Operatorを使用して TiProxy をデプロイするには、 [TiDB Operator](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-tiproxy)ドキュメントを参照してください。
+-   TiUPを使用して TiProxy をローカルに素早く展開するには、 [TiProxyをデプロイ](/tiup/tiup-playground.md#deploy-tiproxy)参照してください。
+-   TiUPを使用して TiProxy を展開するには、 [インストールと使用方法](/tiproxy/tiproxy-overview.md#installation-and-usage)参照してください。
 
-TiProxy is a L7 proxy server for TiDB, which can balance connections and migrate sessions when possible.
+TiProxy は TiDB の L7 プロキシサーバーであり、接続のバランスを取り、可能な場合はセッションを移行できます。
 
-## Topology information
+## トポロジ情報 {#topology-information}
 
-| Instance | Count | Physical machine configuration | IP | Configuration |
-| :-- | :-- | :-- | :-- | :-- |
-| TiDB | 3 | 16 VCore 32GB * 3 | 10.0.1.4 <br/> 10.0.1.5 <br/> 10.0.1.6 | Default port <br/> Global directory configuration |
-| PD | 3 | 4 VCore 8GB * 3 | 10.0.1.1 <br/> 10.0.1.2 <br/> 10.0.1.3 | Default port <br/> Global directory configuration |
-| TiKV | 3 | 16 VCore 32GB 2TB (nvme ssd) * 3 | 10.0.1.7 <br/> 10.0.1.8 <br/> 10.0.1.9 | Default port <br/> Global directory configuration |
-| TiProxy | 2 | 4 VCore 8 GB * 1  | 10.0.1.11 <br/> 10.0.1.12 | Default port <br/> Global directory configuration |
-| Monitoring & Grafana | 1 | 4 VCore 8GB * 1 500GB (ssd) | 10.0.1.13 | Default port <br/> Global directory configuration |
+| 実例             | カウント | 物理マシン構成                        | IP                                   | コンフィグレーション                 |
+| :------------- | :--- | :----------------------------- | :----------------------------------- | :------------------------- |
+| TiDB           | 3    | 16 VCore 32GB * 3              | 10.0.1.4<br/> 10.0.1.5<br/> 10.0.1.6 | デフォルトポート<br/>グローバルディレクトリ構成 |
+| PD             | 3    | 4 VCore 8GB * 3                | 10.0.1.1<br/> 10.0.1.2<br/> 10.0.1.3 | デフォルトポート<br/>グローバルディレクトリ構成 |
+| TiKV           | 3    | 16 VCore 32GB 2TB（NVMe SSD）* 3 | 10.0.1.7<br/> 10.0.1.8<br/> 10.0.1.9 | デフォルトポート<br/>グローバルディレクトリ構成 |
+| TiProxy        | 2    | 4 VCore 8 GB * 1               | 10.0.1.11<br/> 10.0.1.12             | デフォルトポート<br/>グローバルディレクトリ構成 |
+| モニタリングとGrafana | 1    | 4 VCore 8GB * 1 500GB (SSD)    | 10.0.1.13                            | デフォルトポート<br/>グローバルディレクトリ構成 |
 
-> **Note:**
+> **注記：**
 >
-> The IP addresses of the instances are given as examples only. In your actual deployment, replace the IP addresses with your actual IP addresses.
+> インスタンスのIPアドレスは例としてのみ示されています。実際の導入では、IPアドレスを実際のIPアドレスに置き換えてください。
 
-### Topology templates
+### トポロジテンプレート {#topology-templates}
 
-For more information about the template for TiProxy, see [The simple template for the TiProxy topology](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiproxy.yaml).
+TiProxy のテンプレートの詳細については、 [TiProxyトポロジのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiproxy.yaml)参照してください。
 
-For detailed descriptions of the configuration items in the preceding TiDB cluster topology file, see [Topology Configuration File for Deploying TiDB Using TiUP](/tiup/tiup-cluster-topology-reference.md).
+前述の TiDB クラスター トポロジ ファイルの構成項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)参照してください。
 
-### Key parameters
+### 主なパラメータ {#key-parameters}
 
-- The instance level `"-host"` configuration in `tiproxy_servers` only supports IP, not domain name.
-- For detailed TiProxy parameter description, see [TiProxy Configuration](/tiproxy/tiproxy-configuration.md).
+-   `tiproxy_servers`のインスタンス レベル`"-host"`構成では、ドメイン名ではなく IP のみがサポートされます。
+-   TiProxy パラメータの詳細な説明については、 [TiProxy のコンフィグレーション](/tiproxy/tiproxy-configuration.md)参照してください。
 
-> **Note:**
+> **注記：**
 >
-> - You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the target machines. You can customize the user, or keep the user consistent with the control machine.
-> - If you configure the deployment directory as a relative path, the cluster will be deployed in the home directory of the user.
+> -   設定ファイルに`tidb`ユーザーを手動で作成する必要はありません。TiUPTiUPコンポーネントは、ターゲットマシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、コントロールマシンと同じユーザーを維持することもできます。
+> -   デプロイメント ディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。

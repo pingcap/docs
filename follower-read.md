@@ -1,68 +1,71 @@
 ---
 title: Follower Read
-summary: This document describes the use and implementation of Follower Read.
+summary: このドキュメントでは、 Follower Readの使用と実装について説明します。
 ---
 
-# Follower Read
+# Follower Read {#follower-read}
 
-When a read hotspot appears in a Region, the Region leader can become a read bottleneck for the entire system. In this situation, enabling the Follower Read feature can significantly reduce the load of the leader, and improve the throughput of the whole system by balancing the load among multiple followers. This document introduces the use and implementation mechanism of Follower Read.
+リージョンに読み取りホットスポットが発生すると、リージョンリーダーがシステム全体の読み取りボトルネックになる可能性があります。このような状況では、Follower Read機能を有効にすると、リーダーの負荷を大幅に軽減し、複数のフォロワー間で負荷を分散することでシステム全体のスループットを向上させることができます。このドキュメントでは、Follower Readの使用方法と実装メカニズムを紹介します。
 
-## Overview
+## 概要 {#overview}
 
-The Follower Read feature refers to using any follower replica of a Region to serve a read request under the premise of strongly consistent reads. This feature improves the throughput of the TiDB cluster and reduces the load of the leader. It contains a series of load balancing mechanisms that offload TiKV read loads from the leader replica to the follower replica in a Region. TiKV's Follower Read implementation provides users with strongly consistent reads.
+Follower Read機能とは、強力な一貫性のある読み取りを前提として、リージョン内の任意のフォロワーレプリカを使用して読み取りリクエストを処理する機能です。この機能は、TiDBクラスターのスループットを向上させ、リーダーレプリカの負荷を軽減します。この機能には、TiKVの読み取り負荷をリーダーレプリカからリージョン内のフォロワーレプリカにオフロードする一連の負荷分散メカニズムが含まれています。TiKVのFollower Read実装は、ユーザーに強力な一貫性のある読み取りを提供します。
 
-> **Note:**
+> **注記：**
 >
-> To achieve strongly consistent reads, the follower node currently needs to request the current execution progress from the leader node (that is `ReadIndex`), which causes an additional network request overhead. Therefore, the main benefits of Follower Read are to isolate read requests from write requests in the cluster and to increase overall read throughput.
+> 強力な一貫性のある読み取りを実現するために、フォロワーノードは現在、リーダーノード（つまり`ReadIndex` ）に現在の実行進行状況を要求する必要があり、これによりネットワークリクエストのオーバーヘッドが増加します。そのため、Follower Readの主な利点は、クラスター内で読み取りリクエストと書き込みリクエストを分離し、全体的な読み取りスループットを向上させることです。
 
-## Usage
+## 使用法 {#usage}
 
-To enable TiDB's Follower Read feature, modify the value of the `tidb_replica_read` variable as follows:
-
-{{< copyable "sql" >}}
+TiDB のFollower Read機能を有効にするには、 `tidb_replica_read`変数の値を次のように変更します。
 
 ```sql
 set [session | global] tidb_replica_read = '<target value>';
 ```
 
-Scope: SESSION | GLOBAL
+スコープ: セッション | グローバル
 
-Default: leader
+デフォルト: リーダー
 
-This variable is used to set the expected data read mode.
+この変数は、予想されるデータ読み取りモードを設定するために使用されます。
 
-- When the value of `tidb_replica_read` is set to `leader` or an empty string, TiDB maintains its default behavior and sends all read operations to the leader replica to perform.
-- When the value of `tidb_replica_read` is set to `follower`, TiDB selects a follower replica of the Region to perform all read operations.
-- When the value of `tidb_replica_read` is set to `leader-and-follower`, TiDB can select any replicas to perform read operations. In this mode, read requests are load balanced between the leader and follower.
-- When the value of `tidb_replica_read` is set to `prefer-leader`, TiDB prefers to select the leader replica to perform read operations. If the leader replica is obviously slow in processing read operations (such as caused by disk or network performance jitter), TiDB will select other available follower replicas to perform read operations.
-- When the value of `tidb_replica_read` is set to `closest-replicas`, TiDB prefers to select a replica in the same availability zone to perform read operations, which can be a leader or a follower. If there is no replica in the same availability zone, TiDB reads from the leader replica.
-- When the value of `tidb_replica_read` is set to `closest-adaptive`:
+-   値`tidb_replica_read`が`leader`または空の文字列に設定されている場合、TiDB はデフォルトの動作を維持し、すべての読み取り操作をリーダー レプリカに送信して実行します。
 
-    - If the estimated result of a read request is greater than or equal to the value of [`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630), TiDB prefers to select a replica in the same availability zone for read operations. To avoid unbalanced distribution of read traffic across availability zones, TiDB dynamically detects the distribution of availability zones for all online TiDB and TiKV nodes. In each availability zone, the number of TiDB nodes whose `closest-adaptive` configuration takes effect is limited, which is always the same as the number of TiDB nodes in the availability zone with the fewest TiDB nodes, and the other TiDB nodes automatically read from the leader replica. For example, if TiDB nodes are distributed across 3 availability zones (A, B, and C), where A and B each contains 3 TiDB nodes and C contains only 2 TiDB nodes, the number of TiDB nodes whose `closest-adaptive` configuration takes effect in each availability zone is 2, and the other TiDB node in each of the A and B availability zones automatically selects the leader replica for read operations.
-    - If the estimated result of a read request is less than the value of [`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630), TiDB can only select the leader replica for read operations.
+-   値`tidb_replica_read`を`follower`に設定すると、TiDB はリージョンのフォロワーレプリカを選択してすべての読み取り操作を実行します。
 
-- When the value of `tidb_replica_read` is set to `learner`, TiDB reads data from the learner replica. If there is no learner replica in the Region, TiDB returns an error.
+-   `tidb_replica_read`の値を`leader-and-follower`に設定すると、TiDB は読み取り操作を実行するレプリカを任意に選択できます。このモードでは、読み取り要求はリーダーとフォロワーの間で負荷分散されます。
+
+-   値が`tidb_replica_read`から`prefer-leader`に設定されている場合、TiDB は読み取り操作を実行する際にリーダーレプリカを優先的に選択します。リーダーレプリカの読み取り操作の処理速度が明らかに遅い場合（ディスクやネットワークのパフォーマンスジッターなど）、TiDB は読み取り操作を実行するために他の利用可能なフォロワーレプリカを選択します。
+
+-   値が`tidb_replica_read`から`closest-replicas`に設定されている場合、TiDB は同じアベイラビリティゾーン内のレプリカ（リーダーまたはフォロワー）を優先的に選択して読み取り操作を実行します。同じアベイラビリティゾーン内にレプリカが存在しない場合は、TiDB はリーダーレプリカから読み取りを行います。
+
+-   `tidb_replica_read`の値が`closest-adaptive`に設定されている場合:
+
+    -   読み取り要求の推定結果が[`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)の値である場合、TiDB は読み取り操作に同じアベイラビリティーゾーン内のレプリカを選択することを優先します。 アベイラビリティーゾーン間で読み取りトラフィックの不均衡な分散を回避するために、TiDB はすべてのオンライン TiDB ノードと TiKV ノードのアベイラビリティーゾーンの分散を動的に検出します。 各アベイラビリティーゾーンでは、 `closest-adaptive`構成が有効になる TiDB ノードの数が制限されています。この数は、TiDB ノードが最も少ないアベイラビリティーゾーン内の TiDB ノードの数と常に同じであり、その他の TiDB ノードは自動的にリーダー レプリカから読み取ります。 たとえば、TiDB ノードが 3 つのアベイラビリティーゾーン (A、B、C) に分散されていて、A と B にそれぞれ 3 つの TiDB ノードが含まれ、C には 2 つの TiDB ノードのみが含まれる場合、各アベイラビリティーゾーンで`closest-adaptive`構成が有効になる TiDB ノードの数は 2 であり、A および B アベイラビリティーゾーンのそれぞれのその他の TiDB ノードは、読み取り操作にリーダー レプリカを自動的に選択します。
+    -   読み取り要求の推定結果が[`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)の値未満の場合、TiDB は読み取り操作に対してリーダー レプリカのみを選択できます。
+
+-   `tidb_replica_read`の値を`learner`に設定すると、TiDB は学習者レプリカからデータを読み取ります。リージョン内に学習者レプリカが存在しない場合、TiDB はエラーを返します。
 
 <CustomContent platform="tidb">
 
-> **Note:**
+> **注記：**
 >
-> When the value of `tidb_replica_read` is set to `closest-replicas` or `closest-adaptive`, you need to configure the cluster to ensure that replicas are distributed across availability zones according to the specified configuration. To configure `location-labels` for PD and set the correct `labels` for TiDB and TiKV, refer to [Schedule replicas by topology labels](/schedule-replicas-by-topology-labels.md). TiDB depends on the `zone` label to match TiKV nodes in the same availability zone, so you need to make sure that the `zone` label is included in the `location-labels` of PD and `zone` is included in the configuration of each TiDB and TiKV node. If your cluster is deployed using TiDB Operator, refer to [High availability of data](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/configure-a-tidb-cluster#high-availability-of-data).
+> `tidb_replica_read`の値が`closest-replicas`または`closest-adaptive`に設定されている場合、指定された設定に従ってレプリカがアベイラビリティゾーン全体に分散されるようにクラスターを構成する必要があります。PD に`location-labels`設定し、TiDB と TiKV に適切な`labels`設定するには、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)を参照してください。TiDB は、同じアベイラビリティゾーン内の TiKV ノードと一致するために`zone`ラベルに依存するため、PD の`location-labels`に`zone`ラベルが含まれ、各 TiDB および TiKV ノードの設定に`zone`ラベルが含まれていることを確認する必要があります。クラスターがTiDB Operatorを使用してデプロイされている場合は、 [データの高可用性](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/configure-a-tidb-cluster#high-availability-of-data)を参照してください。
 
 </CustomContent>
 
-## Implementation mechanism
+## 実施メカニズム {#implementation-mechanism}
 
-Before the Follower Read feature was introduced, TiDB applied the strong leader principle and submitted all read and write requests to the leader node of a Region to handle. Although TiKV can distribute Regions evenly on multiple physical nodes, for each Region, only the leader can provide external services. The other followers can do nothing to handle read requests but receive the data replicated from the leader at all times and prepare for voting to elect a leader in case of a failover.
+Follower Read機能が導入される前、TiDBは強力なリーダー原則を適用し、すべての読み取りおよび書き込みリクエストをリージョンのリーダーノードに送信して処理していました。TiKVはリージョンを複数の物理ノードに均等に分散できますが、各リージョンではリーダーノードのみが外部サービスを提供できます。他のフォロワーは読み取りリクエストの処理には何もできず、リーダーから複製されたデータを常に受信し、フェイルオーバー発生時にリーダーを選出するための投票を準備するだけです。
 
-To allow data reading in the follower node without violating linearizability or affecting Snapshot Isolation in TiDB, the follower node needs to use `ReadIndex` of the Raft protocol to ensure that the read request can read the latest data that has been committed on the leader. At the TiDB level, the Follower Read feature simply needs to send the read request of a Region to a follower replica based on the load balancing policy.
+TiDBにおいて、線形化可能性を侵害したりスナップショット分離に影響を与えたりすることなくフォロワーノードでデータの読み取りを可能にするには、フォロワーノードがRaftプロトコルの`ReadIndex`を使用して、読み取りリクエストがリーダーノードにコミットされた最新のデータを読み取れるようにする必要があります。TiDBレベルでは、Follower Read機能は、ロードバランシングポリシーに基づいて、リージョンの読み取りリクエストをフォロワーレプリカに送信するだけです。
 
-### Strongly consistent reads
+### 強力な一貫性のある読み取り {#strongly-consistent-reads}
 
-When the follower node processes a read request, it first uses `ReadIndex` of the Raft protocol to interact with the leader of the Region, to obtain the latest commit index of the current Raft group. After the latest commit index of the leader is applied locally to the follower, the processing of a read request starts.
+フォロワーノードが読み取りリクエストを処理する際、まずRaftプロトコルの`ReadIndex`使用してリージョンのリーダーとやり取りし、現在のRaftグループの最新のコミットインデックスを取得します。リーダーの最新のコミットインデックスがフォロワーにローカルに適用された後、読み取りリクエストの処理が開始されます。
 
-### Follower replica selection strategy
+### Followerレプリカ選択戦略 {#follower-replica-selection-strategy}
 
-Because the Follower Read feature does not affect TiDB's Snapshot Isolation transaction isolation level, TiDB adopts the round-robin strategy to select the follower replica. Currently, for the coprocessor requests, the granularity of the Follower Read load balancing policy is at the connection level. For a TiDB client connected to a specific Region, the selected follower is fixed, and is switched only when it fails or the scheduling policy is adjusted.
+Follower Read機能はTiDBのスナップショット分離トランザクション分離レベルに影響を与えないため、TiDBはラウンドロビン方式でフォロワーレプリカを選択します。現在、コプロセッサリクエストの場合、Follower Read負荷分散ポリシーの粒度は接続レベルです。特定のリージョンに接続されたTiDBクライアントの場合、選択されるフォロワーは固定され、フォロワーに障害が発生した場合、またはスケジューリングポリシーが変更された場合にのみ切り替えられます。
 
-However, for the non-coprocessor requests, such as a point query, the granularity of the Follower Read load balancing policy is at the transaction level. For a TiDB transaction on a specific Region, the selected follower is fixed, and is switched only when it fails or the scheduling policy is adjusted. If a transaction contains both point queries and coprocessor requests, the two types of requests are scheduled for reading separately according to the preceding scheduling policy. In this case, even if a coprocessor request and a point query are for the same Region, TiDB processes them as independent events.
+ただし、ポイントクエリなどのコプロセッサ以外のリクエストの場合、Follower Readロードバランシングポリシーの粒度はトランザクションレベルです。特定のリージョンにおけるTiDBトランザクションでは、選択されたフォロワーは固定されており、フォロワーが失敗するか、スケジューリングポリシーが調整された場合にのみ切り替えられます。トランザクションにポイントクエリとコプロセッサリクエストの両方が含まれている場合、2種類のリクエストは、先行するスケジューリングポリシーに従って個別に読み取りスケジュールされます。この場合、コプロセッサリクエストとポイントクエリが同じリージョンに対するものであっても、TiDBはそれらを独立したイベントとして処理します。

@@ -1,13 +1,13 @@
 ---
 title: TimeStamp Oracle (TSO) in TiDB
-summary: Learn about TimeStamp Oracle (TSO) in TiDB.
+summary: TiDB の TimeStamp Oracle (TSO) について学習します。
 ---
 
-# TimeStamp Oracle (TSO) in TiDB
+# TiDB のタイムスタンプ Oracle (TSO) {#timestamp-oracle-tso-in-tidb}
 
-In TiDB, the Placement Driver (PD) plays a pivotal role in allocating timestamps to various components within a cluster. These timestamps are instrumental in the assignment of temporal markers to transactions and data, a mechanism crucial for enabling the [Percolator](https://research.google/pubs/large-scale-incremental-processing-using-distributed-transactions-and-notifications/) model within TiDB. The Percolator model is used to support [Multi-Version Concurrency Control (MVCC)](https://docs.pingcap.com/tidb/stable/glossary#multi-version-concurrency-control-mvcc) and [transaction management](/transaction-overview.md).
+TiDBでは、配置Driver（PD）がクラスタ内の様々なコンポーネントにタイムスタンプを割り当てる上で重要な役割を果たします。これらのタイムスタンプは、トランザクションとデータに時間マーカーを割り当てる際に重要な役割を果たします。これは、TiDB内で[パーコレーター](https://research.google/pubs/large-scale-incremental-processing-using-distributed-transactions-and-notifications/)モデルを実現するために不可欠なメカニズムです。3と[マルチバージョン同時実行制御 (MVCC)](https://docs.pingcap.com/tidb/stable/glossary#multi-version-concurrency-control-mvcc) [取引管理](/transaction-overview.md)サポートするには、Percolatorモデルが使用されます。
 
-The following example shows how to get the current TSO in TiDB:
+次の例は、TiDB で現在の TSO を取得する方法を示しています。
 
 ```sql
 BEGIN; SET @ts := @@tidb_current_ts; ROLLBACK;
@@ -24,12 +24,12 @@ SELECT @ts;
 1 row in set (0.00 sec)
 ```
 
-Note that this is done in a transaction with `BEGIN; ...; ROLLBACK` because TSO timestamps are assigned per transaction.
+TSO タイムスタンプはトランザクションごとに割り当てられるため、これは`BEGIN; ...; ROLLBACK`トランザクションで実行されることに注意してください。
 
-The TSO timestamp you get from the preceding example is a decimal number. You can use the following SQL functions to parse the timestamp:
+前の例で取得したTSOタイムスタンプは10進数です。タイムスタンプを解析するには、以下のSQL関数を使用できます。
 
-- [`TIDB_PARSE_TSO()`](/functions-and-operators/tidb-functions.md#tidb_parse_tso)
-- [`TIDB_PARSE_TSO_LOGICAL()`](/functions-and-operators/tidb-functions.md)
+-   [`TIDB_PARSE_TSO()`](/functions-and-operators/tidb-functions.md#tidb_parse_tso)
+-   [`TIDB_PARSE_TSO_LOGICAL()`](/functions-and-operators/tidb-functions.md)
 
 ```sql
 SELECT TIDB_PARSE_TSO(443852055297916932);
@@ -51,7 +51,7 @@ SELECT TIDB_PARSE_TSO_LOGICAL(443852055297916932);
 1 row in set (0.00 sec)
 ```
 
-The following example shows what a TSO timestamp looks like in binary:
+次の例は、TSO タイムスタンプがバイナリでどのように見えるかを示しています。
 
 ```shell
 0000011000101000111000010001011110111000110111000000000000000100  ← This is 443852055297916932 in binary
@@ -59,12 +59,12 @@ The following example shows what a TSO timestamp looks like in binary:
                                               000000000000000100  ← The last 18 bits are the logical timestamp
 ```
 
-There are two parts in a TSO timestamp:
+TSO タイムスタンプには 2 つの部分があります。
 
-- The physical timestamp: a UNIX timestamp in milliseconds since 1 January 1970.
-- The logical timestamp: an incrementing counter, used in scenarios requiring multiple timestamps within the same millisecond, or in cases where certain events might trigger a reversal of the clock's progression. In such cases, the physical timestamp remains unchanged while the logical timestamp steadily advances. This mechanism ensures the integrity of the TSO timestamp, which always moves forward and never regresses.
+-   物理タイムスタンプ: 1970 年 1 月 1 日からのミリ秒単位の UNIX タイムスタンプ。
+-   論理タイムスタンプ：増分するカウンターで、同じミリ秒内に複数のタイムスタンプが必要なシナリオや、特定のイベントによって時計の進行が逆転する可能性がある場合に使用されます。このような場合、物理タイムスタンプは変化せず、論理タイムスタンプは着実に進みます。このメカニズムにより、TSOタイムスタンプの整合性が確保されます。TSOタイムスタンプは常に前進し、後退することはありません。
 
-With this knowledge, you can inspect the TSO timestamp a bit more in SQL:
+この知識があれば、SQL で TSO タイムスタンプをもう少し詳しく調べることができます。
 
 ```sql
 SELECT @ts, UNIX_TIMESTAMP(NOW(6)), (@ts >> 18)/1000, FROM_UNIXTIME((@ts >> 18)/1000), NOW(6), @ts & 0x3FFFF\G
@@ -78,19 +78,17 @@ FROM_UNIXTIME((@ts >> 18)/1000): 2023-08-27 20:33:41.6870
 1 row in set (0.00 sec)
 ```
 
-The `>> 18` operation signifies a bitwise [right shift](/functions-and-operators/bit-functions-and-operators.md#-right-shift) by 18 bits, which is used to extract the physical timestamp. Because the physical timestamp is expressed in milliseconds, deviating from the more common UNIX timestamp format measured in seconds, you need to divide it by 1000 to convert it into a format compatible with [`FROM_UNIXTIME()`](/functions-and-operators/date-and-time-functions.md). This process aligns with the functionality of `TIDB_PARSE_TSO()`.
+`>> 18`演算は、ビット単位の[右シフト](/functions-and-operators/bit-functions-and-operators.md#-right-shift) × 18 ビットを表し、これを用いて物理タイムスタンプを抽出します。物理タイムスタンプはミリ秒単位で表され、秒単位で測定される一般的な UNIX タイムスタンプ形式とは異なるため、これを[`FROM_UNIXTIME()`](/functions-and-operators/date-and-time-functions.md)と互換性のある形式に変換するには 1000 で割る必要があります。この処理は`TIDB_PARSE_TSO()`の機能と一致します。
 
-You can also extract the logical timestamp `000000000000000100` in binary, which is equivalent to `4` in decimal.
+10 進数では`4`に相当する、2 進数では論理タイムスタンプ`000000000000000100`抽出することもできます。
 
-You can also parse the timestamp via the CLI tool as follows:
+次のように CLI ツールを使用してタイムスタンプを解析することもできます。
 
 ```shell
 $ tiup ctl:v7.1.0 pd tso 443852055297916932
 ```
 
-```
-system:  2023-08-27 20:33:41.687 +0200 CEST
-logic:   4
-```
+    system:  2023-08-27 20:33:41.687 +0200 CEST
+    logic:   4
 
-Here you can see the physical timestamp in the line that starts with `system:` and the logical timestamp in the line that starts with `logic:`.
+ここでは、 `system:`で始まる行に物理タイムスタンプが表示され、 `logic:`で始まる行に論理タイムスタンプが表示されます。

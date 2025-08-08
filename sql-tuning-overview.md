@@ -1,17 +1,17 @@
 ---
 title: SQL Tuning Overview
-summary: SQL is a declarative language, meaning it describes the final result, not the steps to execute. TiDB optimizes execution and can execute parts of the query in any order. It's similar to GPS navigation, using statistics and live traffic data. Concepts include understanding query execution plans, SQL optimization, and controlling execution plans for better performance.
+summary: SQLは宣言型言語です。つまり、実行手順ではなく最終結果を記述します。TiDBは実行を最適化し、クエリの一部を任意の順序で実行できます。統計情報とリアルタイムの交通データを利用するGPSナビゲーションに似ています。概念には、クエリ実行プランの理解、SQLの最適化、パフォーマンス向上のための実行プランの制御などが含まれます。
 ---
 
-# SQL Tuning Overview
+# SQLチューニングの概要 {#sql-tuning-overview}
 
-SQL is a declarative language. That is, an SQL statement describes _what the final result should look like_ and not a set of steps to execute in sequence. TiDB will optimize the execution, and is semantically permitted to execute parts of the query in any order provided that it correctly returns the final result as described.
+SQLは宣言型言語です。つまり、SQL文は*最終結果がどのようになるべきか*を記述するものであり、順番に実行する一連の手順を記述するものではありません。TiDBは実行を最適化し、記述どおりに最終結果を正しく返す限り、クエリの各部分を任意の順序で実行することを意味的に許可します。
 
-A useful comparison to SQL optimization, is to describe what happens when you use GPS navigation. From your provided address, _2955 Campus Drive San Mateo CA 94403_, the GPS software plans the most time-efficient way to route you. It may make use of various statistics such as previous trips, meta data such as speed limits, and in modern cases, a live feed of traffic information. Several of these analogies translate to TiDB.
+SQL最適化との便利な比較例として、GPSナビゲーションの使用時に何が起こるかを説明することが挙げられます。入力された住所（ *2955 Campus Drive San Mateo CA 94403）*から、GPSソフトウェアは最も時間効率の高いルートを計画します。過去の走行履歴、速度制限などのメタデータ、そして最近では交通情報のライブフィードなど、様々な統計情報も活用します。これらの類似点のいくつかはTiDBにも当てはまります。
 
-This section introduces several concepts about query execution:
+このセクションでは、クエリ実行に関するいくつかの概念について説明します。
 
-- [Understanding the Query Execution Plan](/explain-overview.md) introduces how to use the `EXPLAIN` statement to understand how TiDB has decided to execute a statement.
-- [SQL Optimization Process](/sql-optimization-concepts.md) introduces what optimizations TiDB is capable of using to improve query execution performance.
-- [Control Execution Plans](/control-execution-plan.md) introduces ways to control the generation of the execution plan. This can be useful in cases where the execution plan decided by TiDB is suboptimal.
-- [Index Advisor](/index-advisor.md) introduces how to let TiDB recommend indexes for you automatically based on your workload.
+-   [クエリ実行プランを理解する](/explain-overview.md) 、TiDB がステートメントの実行を決定した方法を理解するために`EXPLAIN`ステートメントを使用する方法を紹介します。
+-   [SQL最適化プロセス](/sql-optimization-concepts.md) 、クエリ実行パフォーマンスを向上させるために TiDB が使用できる最適化が導入されています。
+-   [制御実行計画](/control-execution-plan.md) 、実行計画の生成を制御する方法が導入されました。これは、TiDBによって決定された実行計画が最適ではない場合に役立ちます。
+-   [インデックスアドバイザー](/index-advisor.md) 、ワークロードに基づいて TiDB が自動的にインデックスを推奨する方法が導入されています。

@@ -1,32 +1,32 @@
 ---
 title: Data Types
-summary: Learn about the data types supported in TiDB.
+summary: TiDB でサポートされているデータ型について学習します。
 ---
 
-# Data Types
+# データ型 {#data-types}
 
-TiDB supports all the data types in MySQL except the `SPATIAL` type. This includes all the [numeric types](/data-type-numeric.md), [string types](/data-type-string.md), [date & time types](/data-type-date-and-time.md), and [the JSON type](/data-type-json.md).
+TiDBは[文字列型](/data-type-string.md) MySQLの`SPATIAL`型を除くすべてのデータ型をサポートしています。これには、 [数値型](/data-type-numeric.md) [日付と時刻の種類](/data-type-date-and-time.md)すべてが含ま[JSON型](/data-type-json.md)ます。
 
-The definitions used for datatypes are specified as `T(M[, D])`. Where by:
+データ型に使用される定義は`T(M[, D])`として指定されます。
 
-- `T` indicates the specific data type.
-- `M` indicates the maximum display width for integer types. For floating-point and fixed-point types, `M` is the total number of digits that can be stored (the precision). For string types, `M` is the maximum length. The maximum permissible value of M depends on the data type.
+-   `T`特定のデータ型を示します。
+-   整数型の場合、 `M`最大表示幅を示します。浮動小数点型と固定小数点型の場合、 `M`格納可能な桁数（精度）です。文字列型の場合、 `M`最大長です。Mの許容最大値はデータ型によって異なります。
 
 <CustomContent platform="tidb">
 
-> **Warning:**
+> **警告：**
 >
-> Starting from v8.5.0, integer display width is deprecated ([`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length) is `true` by default). Specifying display width for integer types is NOT recommended.
+> バージョン8.5.0以降、整数の表示幅は非推奨となりました（デフォルトでは[`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length)が`true`なります）。整数型の表示幅の指定は推奨されません。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-> **Warning:**
+> **警告：**
 >
-> Starting from v8.5.0, integer display width is deprecated. Specifying display width for integer types is NOT recommended.
+> バージョン8.5.0以降、整数の表示幅は非推奨となりました。整数型の表示幅の指定は推奨されません。
 
 </CustomContent>
 
-- `D` applies to floating-point and fixed-point types and indicates the number of digits following the decimal point (the scale).
-- `fsp` applies to the `TIME`, `DATETIME`, and `TIMESTAMP` types and represents the fractional seconds precision. The `fsp` value, if given, must be in the range 0 to 6. A value of 0 signifies that there is no fractional part. If omitted, the default precision is 0.
+-   `D`浮動小数点型と固定小数点型に適用され、小数点以下の桁数 (スケール) を示します。
+-   `fsp` `TIME` 、 `DATETIME` 、 `TIMESTAMP`型に適用され、小数秒の精度を表します。8 `fsp`指定する場合は、0から6の範囲でなければなりません。0 は小数部がないことを意味します。省略した場合、デフォルトの精度は0です。

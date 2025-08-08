@@ -1,88 +1,87 @@
 ---
-title: Configure {{{ .starter }}} External Storage Access
-summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access.
+title: Configure TiDB Cloud Serverless External Storage Access
+summary: Amazon Simple Storage Service (Amazon S3) アクセスを構成する方法を学習します。
 ---
 
-# Configure External Storage Access for {{{ .starter }}}
+# TiDB Cloud Serverless の外部ストレージアクセスを構成する {#configure-external-storage-access-for-tidb-cloud-serverless}
 
-If you want to import data from or export data to an external storage in a {{{ .starter }}} cluster, you need to configure cross-account access. This document describes how to configure access to an external storage for {{{ .starter }}} clusters.
+TiDB Cloud Serverless クラスター内の外部storageからデータをインポートまたはエクスポートする場合は、クロスアカウントアクセスを設定する必要があります。このドキュメントでは、 TiDB Cloud Serverless クラスターの外部storageへのアクセスを設定する方法について説明します。
 
-If you need to configure these external storages for a TiDB Cloud Dedicated cluster, see [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/dedicated-external-storage.md).
+TiDB Cloud Dedicated クラスター用にこれらの外部ストレージを構成する必要がある場合は、 [TiDB Cloud Dedicatedの外部ストレージアクセスを構成する](/tidb-cloud/dedicated-external-storage.md)参照してください。
 
-## Configure Amazon S3 access
+## Amazon S3 アクセスを構成する {#configure-amazon-s3-access}
 
-To allow a {{{ .starter }}} cluster to access the source data in your Amazon S3 bucket, configure the bucket access for the cluster using either of the following methods:
+TiDB Cloud Serverless クラスターが Amazon S3 バケット内のソースデータにアクセスできるようにするには、次のいずれかの方法を使用してクラスターのバケットアクセスを設定します。
 
-- [Use a Role ARN](#configure-amazon-s3-access-using-a-role-arn): use a Role ARN to access your Amazon S3 bucket.
-- [Use an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key): use the access key of an IAM user to access your Amazon S3 bucket.
+-   [ロールARNを使用する](#configure-amazon-s3-access-using-a-role-arn) : ロール ARN を使用して Amazon S3 バケットにアクセスします。
+-   [AWSアクセスキーを使用する](#configure-amazon-s3-access-using-an-aws-access-key) : IAMユーザーのアクセスキーを使用して Amazon S3 バケットにアクセスします。
 
-### Configure Amazon S3 access using a Role ARN
+### ロール ARN を使用して Amazon S3 アクセスを構成する {#configure-amazon-s3-access-using-a-role-arn}
 
-It is recommended that you use [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html) to create a role ARN. Take the following steps to create one:
+ロールARNを作成するには、 [AWS クラウドフォーメーション](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html)使用することをお勧めします。作成するには、以下の手順に従ってください。
 
-> **Note:**
+> **注記：**
 >
-> Role ARN access to Amazon S3 is only supported for clusters with AWS as the cloud provider. If you use a different cloud provider, use an AWS access key instead. For more information, see [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key).
+> Amazon S3へのロールARNアクセスは、クラウドプロバイダーとしてAWSを使用しているクラスターでのみサポートされます。別のクラウドプロバイダーを使用している場合は、代わりにAWSアクセスキーを使用してください。詳細については、 [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key)ご覧ください。
 
-1. Open the **Import** page for your target cluster.
+1.  ターゲット クラスターの**インポート**ページを開きます。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
-2. Open the **Add New ARN** dialog.
+2.  **新しい ARN の追加**ダイアログを開きます。
 
-    - If you want to import data from Amazon S3, open the **Add New ARN** dialog as follows:
+    -   Amazon S3 からデータをインポートする場合は、次のようにして**[新しい ARN の追加]**ダイアログを開きます。
 
-        1. Click **Import from S3**.
-        2. Fill in the **File URI** field.
-        3. Choose **AWS Role ARN** and click **Click here to create new one with AWS CloudFormation**.
+        1.  Click **Import from S3**.
+        2.  **ファイル URI**フィールドに入力します。
+        3.  **AWS ロール ARN**を選択し、[**ここをクリックして AWS CloudFormation で新規作成] を**クリックします。
 
-    - If you want to export data to Amazon S3, open the **Add New ARN** dialog as follows:
+    -   データを Amazon S3 にエクスポートする場合は、次のようにして**[新しい ARN の追加]**ダイアログを開きます。
 
-        1. Click **Export data to...**  > **Amazon S3**. If your cluster has neither imported nor exported any data before, click **Click here to export data to...** > **Amazon S3** at the bottom of the page.
-        2. Fill in the **Folder URI** field.
-        3. Choose **AWS Role ARN** and click **Click here to create new one with AWS CloudFormation**.
+        1.  **「データをエクスポート...」** &gt; **「Amazon S3」**をクリックします。クラスターでこれまでデータのインポートもエクスポートもしたことがない場合は、ページ下部の**「データをエクスポートするにはここをクリック...** 」 &gt; **「Amazon S3」**をクリックします。
+        2.  **フォルダー URI**フィールドに入力します。
+        3.  **AWS ロール ARN**を選択し、[**ここをクリックして AWS CloudFormation で新規作成] を**クリックします。
 
-3. Create a role ARN with an AWS CloudFormation template.
+3.  AWS CloudFormation テンプレートを使用してロール ARN を作成します。
 
-    1. In the **Add New ARN** dialog, click **AWS Console with CloudFormation Template**.
+    1.  [**新しい ARN の追加]**ダイアログで、 **[AWS コンソールと CloudFormation テンプレート]**をクリックします。
 
-    2. Log in to the [AWS Management Console](https://console.aws.amazon.com) and you will be redirected to the AWS CloudFormation **Quick create stack** page.
+    2.  [AWS マネジメントコンソール](https://console.aws.amazon.com)にログインすると、AWS CloudFormation の**クイック作成スタック**ページにリダイレクトされます。
 
-    3. Fill in the **Role Name**.
+    3.  Fill in the **Role Name**.
 
-    4. Acknowledge to create a new role and click **Create stack** to create the role ARN.
+    4.  新しいロールを作成することを確認し、 **「スタックの作成」**をクリックしてロール ARN を作成します。
 
-    5. After the CloudFormation stack is executed, you can click the **Outputs** tab and find the Role ARN value in the **Value** column.
+    5.  CloudFormation スタックが実行された後、 **[出力]**タブをクリックし、[**値]**列でロール ARN 値を見つけることができます。
 
         ![img.png](/media/tidb-cloud/serverless-external-storage/serverless-role-arn.png)
 
-If you have any trouble creating a role ARN with AWS CloudFormation, you can take the following steps to create one manually:
+AWS CloudFormation でロール ARN を作成するときに問題が発生した場合は、次の手順に従って手動で作成できます。
 
-<details>
-<summary>Click here to see details</summary>
+<details><summary>詳細はこちらをクリック</summary>
 
-1. In the **Add New ARN** dialog described in previous instructions, click **Having trouble? Create Role ARN manually**. You will get the **TiDB Cloud Account ID** and **TiDB Cloud External ID**.
+1.  前の手順で説明した**「新しいARNを追加」**ダイアログで、 **「問題が発生した場合は、ロールARNを手動で作成してください」**をクリックします。TiDB **TiDB CloudアカウントID**と**TiDB Cloud外部ID**が表示されます。
 
-2. In the AWS Management Console, create a managed policy for your Amazon S3 bucket.
+2.  AWS マネジメントコンソールで、Amazon S3 バケットの管理ポリシーを作成します。
 
-    1. Sign in to the [AWS Management Console](https://console.aws.amazon.com/) and open the [Amazon S3 console](https://console.aws.amazon.com/s3/).
+    1.  [AWS マネジメントコンソール](https://console.aws.amazon.com/)にサインインして[Amazon S3 コンソール](https://console.aws.amazon.com/s3/)開きます。
 
-    2. In the **Buckets** list, choose the name of your bucket with the source data, and then click **Copy ARN** to get your S3 bucket ARN (for example, `arn:aws:s3:::tidb-cloud-source-data`). Take a note of the bucket ARN for later use.
+    2.  **「バケット」**リストで、ソースデータがあるバケットの名前を選択し、 **「ARNをコピー」**をクリックしてS3バケットのARN（例： `arn:aws:s3:::tidb-cloud-source-data` ）を取得します。後で使用するために、バケットのARNをメモしておいてください。
 
         ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
 
-    3. Open the [IAM console](https://console.aws.amazon.com/iam/), click **Policies** in the left navigation pane, and then click **Create Policy**.
+    3.  [IAMコンソール](https://console.aws.amazon.com/iam/)開き、左側のナビゲーション ペインで**[ポリシー]**をクリックして、 **[ポリシーの作成] を**クリックします。
 
         ![Create a policy](/media/tidb-cloud/aws-create-policy.png)
 
-    4. On the **Create policy** page, click the **JSON** tab.
+    4.  **[ポリシーの作成]**ページで、 **[JSON]**タブをクリックします。
 
-    5. Configure the policy in the policy text field according to your needs. The following is an example that you can use to export data from and import data into a {{{ .starter }}} cluster.
+    5.  Configure the policy in the policy text field according to your needs. The following is an example that you can use to export data from and import data into a TiDB Cloud Serverless cluster.
 
-        - Exporting data from a {{{ .starter }}} cluster needs the **s3:PutObject** and **s3:ListBucket** permissions.
-        - Importing data into a {{{ .starter }}} cluster needs the **s3:GetObject**, **s3:GetObjectVersion**, and **s3:ListBucket** permissions.
+        -   TiDB Cloud Serverless クラスターからデータをエクスポートするには**、s3:PutObject**および**s3:ListBucket**権限が必要です。
+        -   TiDB Cloud Serverless クラスターにデータをインポートするには**、 s3:GetObject** 、 **s3:GetObjectVersion** 、および**s3:ListBucket**権限が必要です。
 
         ```json
         {
@@ -110,185 +109,192 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
         }
         ```
 
-        In the policy text field, replace the following configurations with your own values.
+        ポリシー テキスト フィールドで、次の構成を独自の値に置き換えます。
 
-        - `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>/*"`. For example:
+        -   `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>/*"`. For example:
 
-            - If your source data is stored in the root directory of the `tidb-cloud-source-data` bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`.
-            - If your source data is stored in the `mydata` directory of the bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`.
+            -   ソース データが`tidb-cloud-source-data`バケットのルート ディレクトリに保存されている場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`使用します。
+            -   If your source data is stored in the `mydata` directory of the bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`.
 
-          Make sure that `/*` is added to the end of the directory so TiDB Cloud can access all files in this directory.
+            TiDB Cloud がこのディレクトリ内のすべてのファイルにアクセスできるように、ディレクトリの末尾に`/*`が追加されていることを確認してください。
 
-        - `"Resource": "<Your S3 bucket ARN>"`, for example, `"Resource": "arn:aws:s3:::tidb-cloud-source-data"`.
+        -   `"Resource": "<Your S3 bucket ARN>"` 、たとえば`"Resource": "arn:aws:s3:::tidb-cloud-source-data"` 。
 
-        - If you have enabled AWS Key Management Service key (SSE-KMS) with customer-managed key encryption, make sure the following configuration is included in the policy. `"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"` is a sample KMS key of the bucket.
+        -   カスタマー管理のキー暗号化で AWS Key Management Service キー (SSE-KMS) を有効にしている場合は、次の設定がポリシーに含まれていることを確認してください。1 `"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"`バケットのサンプル KMS キーです。
 
-            ```
-            {
-                "Sid": "AllowKMSkey",
-                "Effect": "Allow",
-                "Action": [
-                    "kms:Decrypt"
-                ],
-                "Resource": "arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"
-            }
-            ```
+                {
+                    "Sid": "AllowKMSkey",
+                    "Effect": "Allow",
+                    "Action": [
+                        "kms:Decrypt"
+                    ],
+                    "Resource": "arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"
+                }
 
-        - If the objects in your bucket have been copied from another encrypted bucket, the KMS key value needs to include the keys of both buckets. For example, `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]`.
+        -   バケット内のオブジェクトが別の暗号化バケットからコピーされた場合、KMSキーの値には両方のバケットのキーを含める必要があります。例： `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]` 。
 
-    6. Click **Next**.
+    6.  **「次へ」**をクリックします。
 
-    7. Set a policy name, add a tag of the policy (optional), and then click **Create policy**.
+    7.  ポリシー名を設定し、ポリシーのタグ（オプション）を追加して、 **「ポリシーの作成」を**クリックします。
 
-3. In the AWS Management Console, create an access role for TiDB Cloud and get the role ARN.
+3.  AWS マネジメントコンソールで、 TiDB Cloudのアクセスロールを作成し、ロール ARN を取得します。
 
-    1. In the [IAM console](https://console.aws.amazon.com/iam/), click **Roles** in the left navigation pane, and then click **Create role**.
+    1.  [IAMコンソール](https://console.aws.amazon.com/iam/)で、左側のナビゲーション ペインの**[ロール]**をクリックし、 **[ロールの作成] を**クリックします。
 
         ![Create a role](/media/tidb-cloud/aws-create-role.png)
 
-    2. To create a role, fill in the following information:
+    2.  ロールを作成するには、次の情報を入力します。
 
-        - In **Trusted entity type**, select **AWS account**.
-        - In **An AWS account**, select **Another AWS account**, and then paste the TiDB Cloud account ID to the **Account ID** field.
-        - In **Options**, click **Require external ID (Best practice when a third party will assume this role)**, and then paste the TiDB Cloud External ID to the **External ID** field. If the role is created without a Require external ID, once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can use the same Role ARN to access your Amazon S3 bucket. If the role is created with the account ID and external ID, only the corresponding TiDB cluster can access the bucket.
+        -   In **Trusted entity type**, select **AWS account**.
+        -   **「AWS アカウント」**で**「別の AWS アカウント」**を選択し、 TiDB Cloudアカウント ID を**「アカウント ID」**フィールドに貼り付けます。
+        -   **オプション**で、 **「外部IDが必要（サードパーティがこのロールを引き受ける場合のベストプラクティス）」**をクリックし、 TiDB Cloudの外部IDを**「外部ID」**フィールドに貼り付けます。「外部IDが必要」を指定せずにロールを作成した場合、プロジェクト内の1つのTiDBクラスターの設定が完了すると、そのプロジェクト内のすべてのTiDBクラスターが同じロールARNを使用してAmazon S3バケットにアクセスできるようになります。アカウントIDと外部IDを指定してロールを作成した場合、対応するTiDBクラスターのみがバケットにアクセスできます。
 
-    3. Click **Next** to open the policy list, choose the policy you just created, and then click **Next**.
+    3.  **[次へ]**をクリックしてポリシー リストを開き、作成したポリシーを選択して、 **[次へ]**をクリックします。
 
-    4. In **Role details**, set a name for the role, and then click **Create role** in the lower-right corner. After the role is created, the list of roles is displayed.
+    4.  **ロールの詳細**でロールの名前を設定し、右下にある**「ロールの作成」**をクリックします。ロールが作成されると、ロールのリストが表示されます。
 
-    5. In the list of roles, click the name of the role that you just created to go to its summary page, and then you can get the role ARN.
+    5.  ロールのリストで、作成したロールの名前をクリックして概要ページに移動し、ロール ARN を取得できます。
 
         ![Copy AWS role ARN](/media/tidb-cloud/aws-role-arn.png)
 
 </details>
 
-### Configure Amazon S3 access using an AWS access key
+### AWS アクセスキーを使用して Amazon S3 アクセスを構成する {#configure-amazon-s3-access-using-an-aws-access-key}
 
-It is recommended that you use an IAM user (instead of the AWS account root user) to create an access key.
+アクセスキーを作成するには、AWS アカウントのルートユーザーではなく、 IAMユーザーを使用することをお勧めします。
 
-Take the following steps to configure an access key:
+アクセス キーを構成するには、次の手順を実行します。
 
-1. Create an IAM user. For more information, see [creating an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console).
+1.  IAMユーザーを作成します。詳細については、 [IAMユーザーの作成](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console)参照してください。
 
-2. Use your AWS account ID or account alias, and your IAM user name and password to sign in to [the IAM console](https://console.aws.amazon.com/iam).
+2.  AWS アカウント ID またはアカウントエイリアス、 IAMユーザー名とパスワードを使用して[IAMコンソール](https://console.aws.amazon.com/iam)にサインインします。
 
-3. Create an access key. For more information, see [creating an access key for an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
+3.  アクセスキーを作成します。詳細については、 [IAMユーザーのアクセスキーの作成](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)参照してください。
 
-> **Note:**
+> **注記：**
 >
-> TiDB Cloud does not store your access keys. It is recommended that you [delete the access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) after the import or export is complete.
+> TiDB Cloudはアクセスキーを保存しません。インポートまたはエクスポートが完了したら、 [アクセスキーを削除する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)実行することをお勧めします。
 
-## Configure GCS access
+## GCS アクセスを構成する {#configure-gcs-access}
 
-To allow a {{{ .starter }}} cluster to access your GCS bucket, you need to configure the GCS access for the bucket. You can use a service account key to configure the bucket access:
+To allow a TiDB Cloud Serverless cluster to access your GCS bucket, you need to configure the GCS access for the bucket. You can use a service account key to configure the bucket access:
 
-Take the following steps to configure a service account key:
+サービス アカウント キーを構成するには、次の手順を実行します。
 
-1. On the Google Cloud [service account page](https://console.cloud.google.com/iam-admin/serviceaccounts), click **CREATE SERVICE ACCOUNT** to create a service account. For more information, see [Creating a service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts).
+1.  Google Cloud [service account page](https://console.cloud.google.com/iam-admin/serviceaccounts)で、 **「サービスアカウントを作成」**をクリックしてサービスアカウントを作成します。詳細については、 [サービスアカウントの作成](https://cloud.google.com/iam/docs/creating-managing-service-accounts)ご覧ください。
 
-    1. Enter a service account name.
-    2. Optional: Enter a description of the service account.
-    3. Click **CREATE AND CONTINUE** to create the service account.
-    4. In the `Grant this service account access to project`, choose the [IAM roles](https://cloud.google.com/iam/docs/understanding-roles) with the needed permission.
+    1.  サービス アカウント名を入力します。
 
-        - Exporting data from a {{{ .starter }}} cluster needs a role with `storage.objects.create` permission.
-        - Importing data into a {{{ .starter }}} cluster needs a role with `storage.buckets.get`, `storage.objects.get`, and `storage.objects.list` permissions.
+    2.  オプション: サービス アカウントの説明を入力します。
 
-    5. Click **Continue** to go to the next step.
-    6. Optional: In the `Grant users access to this service account`, choose members that need to [attach the service account to other resources](https://cloud.google.com/iam/docs/attach-service-accounts).
-    7. Click **Done** to finish creating the service account.
+    3.  **[作成して続行]**をクリックして、サービス アカウントを作成します。
 
-   ![service-account](/media/tidb-cloud/serverless-external-storage/gcs-service-account.png)
+    4.  `Grant this service account access to project`で、必要な権限を持つ[IAMロール](https://cloud.google.com/iam/docs/understanding-roles)選択します。
 
-2. Click the service account, and then click **ADD KEY** on the `KEYS` page to create a service account key.
+        -   TiDB Cloud Serverless クラスターからデータをエクスポートするには、 `storage.objects.create`権限を持つロールが必要です。
+        -   Importing data into a TiDB Cloud Serverless cluster needs a role with `storage.buckets.get`, `storage.objects.get`, and `storage.objects.list` permissions.
 
-   ![service-account-key](/media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
+    5.  **「続行」**をクリックして次のステップに進みます。
 
-3. Choose the default `JSON` key type, and then click **CREATE** to download the Google Cloud credentials file. The file contains the service account key that you need to use when configuring the GCS access for the {{{ .starter }}} cluster.
+    6.  オプション: `Grant users access to this service account`で、 [サービスアカウントを他のリソースに接続する](https://cloud.google.com/iam/docs/attach-service-accounts)必要なメンバーを選択します。
 
-## Configure Azure Blob Storage access
+    7.  **[完了] を**クリックして、サービス アカウントの作成を完了します。
 
-To allow {{{ .starter }}} to access your Azure Blob container, you need to create a service SAS token for the container.
+    ![service-account](/media/tidb-cloud/serverless-external-storage/gcs-service-account.png)
 
-You can create a SAS token either using an [Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview) (recommended) or manual configuration. 
+2.  サービス アカウントをクリックし、 `KEYS`ページで**[キーの追加]**をクリックしてサービス アカウント キーを作成します。
 
-To create a SAS token using an Azure ARM template, take the following steps:
+    ![service-account-key](/media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
 
-1. Open the **Import** page for your target cluster.
+3.  デフォルトのキータイプ`JSON`を選択し、 **「作成」**をクリックしてGoogle Cloud認証情報ファイルをダウンロードします。このファイルには、TiDB Cloud ServerlessクラスタのGCSアクセスを構成する際に必要なサービスアカウントキーが含まれています。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+## Azure Blob Storage アクセスを構成する {#configure-azure-blob-storage-access}
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+TiDB Cloud Serverless が Azure Blob コンテナーにアクセスできるようにするには、コンテナーのサービス SAS トークンを作成する必要があります。
 
-2. Open the **Generate New SAS Token via ARM Template Deployment** dialog.
-        
-    1. Click **Export data to...**  > **Azure Blob Storage**. If your cluster has neither imported nor exported any data before, click **Click here to export data to...** > **Azure Blob Storage** at the bottom of the page.
-   
-    2. Scroll down to the **Azure Blob Storage Settings** area, and then click **Click here to create a new one with Azure ARM template** under the SAS Token field. 
-   
-3. Create a SAS token with the Azure ARM template.
+SAS トークンは、 [Azure ARM テンプレート](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview) (推奨) または手動構成を使用して作成できます。
 
-    1. In the **Generate New SAS Token via ARM Template Deployment** dialog, click **Click to open the Azure Portal with the pre-configured ARM template**.
-   
-    2. After logging in to Azure, you will be redirected to the Azure **Custom deployment** page.
+Azure ARM テンプレートを使用して SAS トークンを作成するには、次の手順を実行します。
 
-    3. Fill in the **Resource group** and **Storage Account Name** in the **Custom deployment** page. You can get all the information from the storage account overview page where the container is located.
+1.  Open the **Import** page for your target cluster.
+
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**Clusters**](https://tidbcloud.com/project/clusters)ページに移動します。
+
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
+
+2.  **ARM テンプレートの展開による新しい SAS トークンの生成**ダイアログを開きます。
+
+    1.  **「データのエクスポート先...」** &gt; **「Azure Blob Storage」**をクリックします。クラスターでこれまでにデータのインポートもエクスポートもしたことがない場合は、ページの下部にある**「データのエクスポート先...」** &gt; **「Azure Blob Storage」**をクリックします。
+
+    2.  **Azure Blob Storage 設定**領域まで下にスクロールし、SAS トークン フィールドの下に**ある Azure ARM テンプレートを使用して新規作成するには、ここをクリック**します。をクリックします。
+
+3.  Azure ARM テンプレートを使用して SAS トークンを作成します。
+
+    1.  **[ARM テンプレートのデプロイによる新しい SAS トークンの生成]**ダイアログで、[クリックして**、事前構成された ARM テンプレートを含む Azure Portal を開く] をクリックします**。
+
+    2.  Azure にログインすると、Azure**カスタム デプロイメント**ページにリダイレクトされます。
+
+    3.  **カスタムデプロイ**ページで、**リソースグループ**と**ストレージアカウント名**を入力します。コンテナが配置されているstorageアカウントの概要ページからすべての情報を取得できます。
 
         ![azure-storage-account-overview](/media/tidb-cloud/serverless-external-storage/azure-storage-account-overview.png)
 
-    4. Click **Review + create** or **Next** to review the deployment. Click **Create** to start the deployment.
-   
-    5. After it completes, you will be redirected to the deployment overview page. Navigate to the **Outputs** section to get the SAS token.
+    4.  **「確認と作成」**または**「次へ」**をクリックして、デプロイ内容を確認します。 **「作成」**をクリックしてデプロイを開始します。
 
-If you have any trouble creating a SAS token with the Azure ARM template, take the following steps to create one manually:
+    5.  After it completes, you will be redirected to the deployment overview page. Navigate to the **Outputs** section to get the SAS token.
 
-<details>
-<summary>Click here to see details</summary>
+Azure ARM テンプレートを使用して SAS トークンを作成するときに問題が発生した場合は、次の手順に従って手動で作成してください。
 
-1. On the [Azure Storage account](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts) page, click your storage account to which the container belongs.
-   
-2. On your **Storage account** page, click the **Security+network**, and then click **Shared access signature**.
+<details><summary>詳細はこちらをクリック</summary>
 
-   ![sas-position](/media/tidb-cloud/serverless-external-storage/azure-sas-position.png)
+1.  [Azure ストレージ アカウント](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts)ページで、コンテナーが属するstorageアカウントをクリックします。
 
-3. On the **Shared access signature** page, create a service SAS token with needed permissions as follows. For more information, see [Create a service SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview).
+2.  **ストレージ アカウント**ページで、[**Security+ ネットワーク]**をクリックし、 **[Shared access signature]**をクリックします。
 
-    1. In the **Allowed services** section, choose the **Blob** service.
-    2. In the **Allowed Resource types** section, choose **Container** and **Object**.
-    3. In the **Allowed permissions** section, choose the permission as needed.
+    ![sas-position](/media/tidb-cloud/serverless-external-storage/azure-sas-position.png)
 
-        - Exporting data from a {{{ .starter }}} cluster needs the **Read** and **Write** permissions.
-        - Importing data into a {{{ .starter }}} cluster needs the **Read** and **List** permissions.
+3.  **Shared Access Signature**ページで、必要な権限を持つサービスSASトークンを以下のように作成します。詳細については、 [サービスSASトークンを作成する](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)参照してください。
 
-    4. Adjust **Start and expiry date/time** as needed.
-    5. You can keep the default values for other settings.
+    1.  **[許可されたサービス]**セクションで、 **Blob**サービスを選択します。
 
-   ![sas-create](/media/tidb-cloud/serverless-external-storage/azure-sas-create.png)
+    2.  **許可されたリソース タイプ**セクションで、**コンテナー**と**オブジェクト**を選択します。
 
-4. Click **Generate SAS and connection string** to generate the SAS token.
+    3.  In the **Allowed permissions** section, choose the permission as needed.
+
+        -   TiDB Cloud Serverless クラスターからデータをエクスポートするには、**読み取り**権限と**書き込み**権限が必要です。
+        -   TiDB Cloud Serverless クラスターにデータをインポートするには、**読み取り**権限と**リスト**権限が必要です。
+
+    4.  必要に応じて**開始日時と有効期限**を調整します。
+
+    5.  その他の設定はデフォルト値のままにしておきます。
+
+    ![sas-create](/media/tidb-cloud/serverless-external-storage/azure-sas-create.png)
+
+4.  Click **Generate SAS and connection string** to generate the SAS token.
 
 </details>
 
-## Configure Alibaba Cloud Object Storage Service (OSS) access
+## Alibaba Cloud Object Storage Service (OSS) アクセスを構成する {#configure-alibaba-cloud-object-storage-service-oss-access}
 
-To allow {{{ .starter }}} to access your Alibaba Cloud OSS bucket, you need to create an AccessKey pair for the bucket.
+TiDB Cloud Serverless が Alibaba Cloud OSS バケットにアクセスできるようにするには、バケットの AccessKey ペアを作成する必要があります。
 
-Take the following steps to configure an AccessKey pair:
+AccessKey ペアを構成するには、次の手順を実行します。
 
-1. Create a RAM user and get the AccessKey pair. For more information, see [Create a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-ram-user).
-    
-    In the **Access Mode** section, select **Using permanent AccessKey to access**.
+1.  RAMユーザーを作成し、AccessKeyペアを取得します。詳細については、 [RAMユーザーを作成する](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-ram-user)参照してください。
 
-2. Create a custom policy with the required permissions. For more information, see [Create custom policies](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy).
-    
-    - In the **Effect** section, select **Allow**.
-    - In the **Service** section, select **Object Storage Service**.
-    - In the **Action** section, select the permissions as needed.
-   
-        To import data into a {{{ .starter }}} cluster, grant **oss:GetObject**, **oss:GetBucketInfo**, and **oss:ListObjects** permissions.
+    **[アクセス モード]**セクションで、 **[永続的な AccessKey を使用してアクセスする] を**選択します。
 
-        To export data from a {{{ .starter }}} cluster, grant **oss:PutObject**, **oss:GetBucketInfo**, and **oss:ListBuckets** permissions.
-        
-    - In the **Resource** section, select the bucket and the objects in the bucket.
+2.  必要な権限を持つカスタムポリシーを作成します。詳細については、 [カスタムポリシーを作成する](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy)参照してください。
 
-3. Attach the custom policies to the RAM user. For more information, see [Grant permissions to a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/grant-permissions-to-the-ram-user).
+    -   In the **Effect** section, select **Allow**.
+
+    -   **[サービス]**セクションで、 **[オブジェクト ストレージ サービス]**を選択します。
+
+    -   **「アクション」**セクションで、必要に応じて権限を選択します。
+
+        TiDB Cloud Serverless クラスターにデータをインポートするには、 **oss:GetObject** 、 **oss:GetBucketInfo** 、および**oss:ListObjects**権限を付与します。
+
+        TiDB Cloud Serverless クラスターからデータをエクスポートするには、 **oss:PutObject** 、 **oss:GetBucketInfo** 、および**oss:ListBuckets**権限を付与します。
+
+    -   **リソース**セクションで、バケットとバケット内のオブジェクトを選択します。
+
+3.  カスタムポリシーをRAMユーザーにアタッチします。詳細については、 [RAMユーザーに権限を付与する](https://www.alibabacloud.com/help/en/ram/user-guide/grant-permissions-to-the-ram-user)参照してください。

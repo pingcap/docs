@@ -1,88 +1,88 @@
 ---
 title: Checkpoint Restore
-summary: TiDB v7.1.0 introduces checkpoint restore, allowing interrupted snapshot and log restores to continue without starting from scratch. It records restored shards and table IDs, enabling retries to use the progress point close to the interruption. However, it relies on the GC mechanism and may require some data to be restored again. It's important to avoid modifying cluster data during the restore to ensure accuracy.
+summary: TiDB v7.1.0ではチェックポイント復元が導入され、中断されたスナップショットやログの復元を最初からやり直すことなく継続できるようになりました。復元されたシャードとテーブルIDが記録されるため、再試行時に中断直後の進捗ポイントを利用できます。ただし、GCメカニズムに依存しているため、一部のデータを再度復元する必要がある場合があります。正確性を確保するため、復元中にクラスターデータの変更を避けることが重要です。
 ---
 
-# Checkpoint Restore
+# チェックポイント復元 {#checkpoint-restore}
 
-Snapshot restore or log restore might be interrupted due to recoverable errors, such as disk exhaustion and node crash. Before TiDB v7.1.0, the recovery progress before the interruption would be invalidated even after the error is addressed, and you need to start the restore from scratch. For large clusters, this incurs considerable extra cost.
+スナップショットリストアまたはログリストアは、ディスク枯渇やノードクラッシュなどの回復可能なエラーにより中断される可能性があります。TiDB v7.1.0より前のバージョンでは、エラーに対処した後でも中断前のリカバリの進行状況が無効になり、リストアを最初からやり直す必要がありました。大規模クラスターでは、これはかなりの追加コストが発生します。
 
-Starting from TiDB v7.1.0, Backup & Restore (BR) introduces the checkpoint restore feature, which enables you to continue an interrupted restore. This feature can retain most recovery progress of the interrupted restore.
+TiDB v7.1.0以降、バックアップ＆リストア（BR）にチェックポイント・リストア機能が導入され、中断されたリストアを再開できるようになりました。この機能により、中断されたリストアのリカバリ進行状況の大部分を保持できます。
 
-## Application scenarios
+## アプリケーションシナリオ {#application-scenarios}
 
-If your TiDB cluster is large and cannot afford to restore again after a failure, you can use the checkpoint restore feature. The br command-line tool (hereinafter referred to as `br`) periodically records the shards that have been restored. In this way, the next restore retry can use a recovery progress point close to the abnormal exit.
+TiDBクラスタが大規模で、障害発生後に再度リストアを行う余裕がない場合は、チェックポイントリストア機能を使用できます。brコマンドラインツール（以下、 `br` ）は、リストアされたシャードを定期的に記録します。これにより、次回のリストア再試行では、異常終了に近いリカバリ進捗ポイントを使用できます。
 
-## Implementation principles
+## 実施原則 {#implementation-principles}
 
-The implementation of checkpoint restore is divided into two parts: snapshot restore and log restore. For more information, see [Implementation details](#implementation-details).
+チェックポイント復元の実装は、スナップショット復元とログ復元の2つの部分に分かれています。詳細については、 [実装の詳細](#implementation-details)参照してください。
 
-### Snapshot restore
+### スナップショットの復元 {#snapshot-restore}
 
-The implementation of snapshot restore is similar to [snapshot backup](/br/br-checkpoint-backup.md#implementation-details). `br` restores all SST files within a key range (Region) in batches. After completing a restore, `br` records this range and the table ID of the restored cluster table. The checkpoint restore feature periodically uploads the new restore information to external storage so that the key ranges that have been restored can be persisted.
+スナップショット復元の実装は[スナップショットバックアップ](/br/br-checkpoint-backup.md#implementation-details)と同様です。3 `br` 、キー範囲（リージョン）内のすべてのSSTファイルを一括で復元します。復元が完了すると、 `br`この範囲と復元されたクラスタテーブルのテーブルIDを記録します。チェックポイント復元機能は、復元されたキー範囲を永続化するために、新しい復元情報を定期的に外部storageにアップロードします。
 
-When `br` retries a restore, it reads the key ranges that have been restored from external storage, and matches them with the corresponding table ID. During the restore, `br` skips any key ranges that overlap with those recorded in the checkpoint restore, and that have the same table ID.
+`br`復元を再試行する際、外部storageから復元されたキー範囲を読み取り、対応するテーブル ID と照合します。復元中、 `br`チェックポイント復元で記録されたキー範囲と重複し、同じテーブル ID を持つキー範囲をスキップします。
 
-If you delete tables before `br` retries the restore, the table ID of the newly created table during the retry will be different from the previously recorded table ID in the checkpoint restore. In this case, `br` bypasses the previous checkpoint restore information and restores the table again. This means that the same table with a new ID disregards the old ID's checkpoint restore information and records the new checkpoint restore information corresponding to the new ID.
+`br`リストアを再試行する前にテーブルを削除した場合、再試行時に新しく作成されたテーブルのテーブルIDは、以前のチェックポイントリストアで記録されたテーブルIDと異なります。この場合、 `br`以前のチェックポイントリストア情報をバイパスし、テーブルを再度リストアします。つまり、新しいIDを持つ同じテーブルは、古いIDのチェックポイントリストア情報を無視し、新しいIDに対応する新しいチェックポイントリストア情報を記録することになります。
 
-Due to the use of the MVCC (Multi-Version Concurrency Control) mechanism, data with specified timestamps can be written unordered and repeatedly.
+MVCC (Multi-Version Concurrency Control) メカニズムを使用しているため、指定されたタイムスタンプを持つデータを順序なしで繰り返し書き込むことができます。
 
-When restoring database or table DDLs using snapshot restore, the `ifExists` parameter is added. For existing databases or tables that are already considered created, `br` automatically skips the restore.
+スナップショット復元を使用してデータベースまたはテーブルのDDLを復元する場合、パラメータ`ifExists`が追加されます。既に作成済みとみなされる既存のデータベースまたはテーブルの場合、パラメータ`br`を指定すると復元は自動的にスキップされます。
 
-### Log restore
+### ログの復元 {#log-restore}
 
-Log restore is the process of restoring data metadata backed up by TiKV nodes (meta-kv) in the order of timestamps. The checkpoint restore first establishes a one-to-one ID mapping relationship between the backup cluster and the restored cluster based on the meta-kv data. This ensures that the ID of meta-kv remains consistent across different restore retries, enabling meta-kv to be restored again.
+ログリストアは、TiKVノードによってバックアップされたデータメタデータ（メタKV）をタイムスタンプ順にリストアするプロセスです。チェックポイントリストアではまず、メタKVデータに基づいて、バックアップクラスタとリストアされたクラスタ間の1対1のIDマッピング関係を確立します。これにより、メタKVのIDが複数回のリストア試行間で一貫性を保ち、メタKVを再度リストアできるようになります。
 
-Unlike snapshot backup files, the range of log backup files might overlap. Thus, the key range cannot be used directly as recovery progress metadata. Additionally, there might be a large number of log backup files. However, each log backup file has a fixed position in the log backup metadata. This means that a unique position in the log backup metadata can be assigned to each log backup file as recovery progress metadata.
+スナップショットバックアップファイルとは異なり、ログバックアップファイルの範囲は重複する可能性があります。そのため、キー範囲を復旧進捗メタデータとして直接使用することはできません。また、ログバックアップファイルの数が多すぎる場合もあります。ただし、各ログバックアップファイルは、ログバックアップメタデータ内で固定の位置を持ちます。つまり、ログバックアップメタデータ内の一意の位置を、復旧進捗メタデータとして各ログバックアップファイルに割り当てることができます。
 
-The log backup metadata contains an array of file metadata. Each file metadata in the array represents a file composed of multiple log backup files. The file metadata records the offset and size of a log backup file in the concatenated file. Therefore, `br` can use the triple `(log backup metadata name, file metadata array offset, log backup file array offset)` to uniquely identify a log backup file.
+ログバックアップメタデータには、ファイルメタデータの配列が含まれます。配列内の各ファイルメタデータは、複数のログバックアップファイルで構成されたファイルを表します。ファイルメタデータには、連結されたファイル内のログバックアップファイルのオフセットとサイズが記録されます。したがって、トリプル「 `br` `(log backup metadata name, file metadata array offset, log backup file array offset)`を使用してログバックアップファイルを一意に識別できます。
 
-## Usage limitations
+## 使用制限 {#usage-limitations}
 
-Checkpoint restore relies on the GC mechanism and cannot record all data that has been restored. The following sections provide the details.
+チェックポイント復元はGCメカニズムに依存しており、復元されたすべてのデータを記録することはできません。詳細については、以下のセクションで説明します。
 
-### GC will be paused
+### GCは一時停止されます {#gc-will-be-paused}
 
-During a log restore, the order of the restored data is unordered, which means that the deletion record of a key might be restored before its write record. If GC is triggered at this time, all data of the key will be deleted and then GC cannot process subsequent write records of the key. To avoid this situation, `br` pauses GC during log restore. If `br` exits halfway, GC remains paused.
+ログの復元中は、復元されたデータの順序が不規則であるため、キーの削除レコードが書き込みレコードよりも先に復元される可能性があります。このタイミングでGCが起動されると、キーのすべてのデータが削除され、GCはキーのそれ以降の書き込みレコードを処理できなくなります。このような状況を回避するため、 `br`ログの復元中にGCを一時停止します。3 `br`途中で終了した場合、GCは一時停止状態のままになります。
 
-After the log restore is completed, GC is restarted automatically without manual startup. However, if you decide not to continue the restore, you can manually enable GC as follows:
+ログの復元が完了すると、GCは手動で起動することなく自動的に再起動されます。ただし、復元を続行しない場合は、以下の手順でGCを手動で有効にすることができます。
 
-The principle of `br` pausing GC is to execute `SET config tikv gc.ratio-threshold = -1.0` to set `gc.ratio-threshold` to a negative number, thus pausing GC. You can manually enable GC by modifying the value of [`gc.ratio-threshold`](/tikv-configuration-file.md#ratio-threshold). For example, to reset to its default value, you can execute `SET config tikv gc.ratio-threshold = 1.1`.
+`br` GCを一時停止する原理は、 `SET config tikv gc.ratio-threshold = -1.0`実行して`gc.ratio-threshold`負の数に設定し、GCを一時停止することです。 [`gc.ratio-threshold`](/tikv-configuration-file.md#ratio-threshold)の値を変更することで、GCを手動で有効にすることができます。例えば、デフォルト値にリセットするには、 `SET config tikv gc.ratio-threshold = 1.1`実行します。
 
-### Some data needs to be restored again
+### 一部のデータは再度復元する必要があります {#some-data-needs-to-be-restored-again}
 
-When `br` retries a restore, some data that has been restored might need to be restored again, including the data being restored and the data not recorded by the checkpoint.
+`br`復元を再試行すると、復元中のデータやチェックポイントによって記録されていないデータなど、復元されたデータの一部を再度復元する必要がある場合があります。
 
-- If the interruption is caused by an error, `br` persists the meta information of the data restored before exit. In this case, only the data being restored needs to be restored again in the next retry.
+-   中断の原因がエラーである場合、 `br`終了前に復元されたデータのメタ情報を保持します。この場合、次回の再試行では復元中のデータのみを再度復元する必要があります。
 
-- If the `br` process is interrupted by the system, `br` cannot persist the meta information of the data restored to the external storage. Since `br` persists the meta information every 30 seconds, data restored in the last 30 seconds before interruption cannot be persisted and needs to be restored again in the next retry.
+-   `br`プロセスがシステムによって中断された場合、 `br`外部storageに復元されたデータのメタ情報を永続化できません。5 `br` 30秒ごとにメタ情報を永続化するため、中断前の30秒間に復元されたデータは永続化できず、次回の再試行時に再度復元する必要があります。
 
-### Avoid modifying cluster data during the restore
+### 復元中にクラスタデータを変更しないようにする {#avoid-modifying-cluster-data-during-the-restore}
 
-After a restore failure, avoid writing, deleting, or creating tables in the cluster. This is because the backup data might contain DDL operations for renaming tables. If you modify the cluster data, the checkpoint restore cannot decide whether the deleted or existing table are resulted from external operations, which affects the accuracy of the next restore retry.
+リストアに失敗した後は、クラスタ内でのテーブルの書き込み、削除、または作成は避けてください。バックアップデータには、テーブル名変更のためのDDL操作が含まれている可能性があるためです。クラスタデータを変更すると、チェックポイントリストアでは、削除されたテーブルまたは既存のテーブルが外部操作によるものかどうかを判断できず、次回のリストア再試行の精度に影響します。
 
-### Cross-major-version checkpoint recovery is not recommended
+### クロスメジャーバージョンのチェックポイントリカバリは推奨されません {#cross-major-version-checkpoint-recovery-is-not-recommended}
 
-Cross-major-version checkpoint recovery is not recommended. For clusters where `br` recovery fails using the Long-Term Support (LTS) versions prior to v8.5.0, recovery cannot be continued with v8.5.0 or later LTS versions, and vice versa.
+メジャーバージョン間のチェックポイントリカバリは推奨されません。v8.5.0より前のLong-Term Support（LTS）バージョンを使用して`br`リカバリが失敗したクラスターの場合、v8.5.0以降のLTSバージョンを使用してリカバリを続行することはできません。また、その逆も同様です。
 
-## Implementation details
+## 実装の詳細 {#implementation-details}
 
-Checkpoint restore operations are divided into two parts: snapshot restore and PITR restore.
+チェックポイント復元操作は、スナップショット復元と PITR 復元の 2 つの部分に分かれています。
 
-### Snapshot restore
+### スナップショットの復元 {#snapshot-restore}
 
-During the initial restore, `br` creates a `__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint` database in the target cluster. This database records checkpoint data, the upstream cluster ID, and the BackupTS of the backup data.
+初期復元中に、 `br`ターゲットクラスタに`__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint`データベースを作成します。このデータベースには、チェックポイントデータ、上流クラスタID、およびバックアップデータの BackupTS が記録されます。
 
-If the restore fails, you can retry it using the same command, and `br` will automatically read the checkpoint information from the `__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint` database and resume from the last restore point.
+復元が失敗した場合は、同じコマンドを使用して再試行できます。1 `br` `__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint`データベースからチェックポイント情報を自動的に読み取り、最後の復元ポイントから再開します。
 
-If the restore fails and you try to restore backup data with different checkpoint information to the same cluster, `br` reports an error. It indicates that the current upstream cluster ID or BackupTS is different from the checkpoint record. If the restore cluster has been cleaned, you can manually delete the `__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint` database and retry with a different backup.
+リストアに失敗し、異なるチェックポイント情報を持つバックアップデータを同じクラスタにリストアしようとすると、 `br`エラーを報告します。これは、現在の上流クラスタIDまたはBackupTSがチェックポイントレコードと異なることを示しています。リストアクラスタがクリーンアップされている場合は、 `__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint`データベースを手動で削除し、別のバックアップで再試行できます。
 
-### PITR restore
+### PITR復元 {#pitr-restore}
 
-[PITR (Point-in-time recovery)](/br/br-pitr-guide.md) consists of snapshot restore and log restore phases.
+[PITR（ポイントインタイムリカバリ）](/br/br-pitr-guide.md) 、スナップショットの復元フェーズとログの復元フェーズで構成されます。
 
-During the initial restore, `br` first enters the snapshot restore phase. This phase follows the same process as the preceding [snapshot restore](#snapshot-restore-1): BR records the checkpoint data, the upstream cluster ID, and BackupTS of the backup data (that is, the start time point `start-ts` of log restore) in the `__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint` database. If restore fails during this phase, you cannot adjust the `start-ts` of log restore when resuming checkpoint restore.
+初期リストアでは、まず`br`がスナップショットリストアフェーズに入ります。このフェーズは、前の[スナップショットの復元](#snapshot-restore-1)と同じプロセスに従います。BRは、チェックポイントデータ、上流クラスタID、およびバックアップデータのBackupTS（つまり、ログリストアの開始時点`start-ts` ）を`__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint`データベースに記録します。このフェーズでリストアが失敗した場合、チェックポイントリストアを再開する際にログリストアの`start-ts`調整することはできません。
 
-When entering the log restore phase during the initial restore, `br` creates a `__TiDB_BR_Temporary_Log_Restore_Checkpoint` database in the target cluster. This database records checkpoint data, the upstream cluster ID, and the restore time range (`start-ts` and `restored-ts`). If restore fails during this phase, you need to specify the same `start-ts` and `restored-ts` as recorded in the checkpoint database when retrying. Otherwise, `br` will report an error and prompt that the current specified restore time range or upstream cluster ID is different from the checkpoint record. If the restore cluster has been cleaned, you can manually delete the `__TiDB_BR_Temporary_Log_Restore_Checkpoint` database and retry with a different backup.
+初期復元中にログ復元フェーズに入ると、 `br`ターゲットクラスタに`__TiDB_BR_Temporary_Log_Restore_Checkpoint`データベースを作成します。このデータベースには、チェックポイントデータ、アップストリームクラスタID、および復元時間範囲（ `start-ts`と`restored-ts` ）が記録されます。このフェーズで復元に失敗した場合は、再試行時にチェックポイントデータベースに記録されているのと同じ`start-ts`と`restored-ts`指定する必要があります。そうでない場合、 `br`エラーを報告し、現在指定されている復元時間範囲またはアップストリームクラスタIDがチェックポイントレコードと異なることを通知します。復元クラスタがクリーンアップされている場合は、 `__TiDB_BR_Temporary_Log_Restore_Checkpoint`データベースを手動で削除し、別のバックアップで再試行できます。
 
-Before entering the log restore phase during the initial restore, `br` constructs a mapping of upstream and downstream cluster database and table IDs at the `restored-ts` time point. This mapping is persisted in the system table `mysql.tidb_pitr_id_map` to prevent duplicate allocation of database and table IDs. Deleting data from `mysql.tidb_pitr_id_map` might lead to inconsistent PITR restore data.
+初期リストア中のログリストアフェーズに入る前に、 `br` `restored-ts`時点における上流および下流のクラスタデータベースとテーブルIDのマッピングを構築します。このマッピングはシステムテーブル`mysql.tidb_pitr_id_map`に保存され、データベースIDとテーブルIDの重複割り当てを防止します。7 `mysql.tidb_pitr_id_map`データを削除すると、PITRリストアデータの不整合が発生する可能性があります。

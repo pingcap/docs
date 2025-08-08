@@ -1,46 +1,46 @@
 ---
 title: URI Formats of External Storage Services
-summary: Learn about the storage URI formats of external storage services, including Amazon S3, GCS, and Azure Blob Storage.
+summary: Amazon S3、GCS、Azure Blob Storage などの外部storageサービスのstorageURI 形式について説明します。
 ---
 
-## URI Formats of External Storage Services
+## 外部ストレージサービスのURI形式 {#uri-formats-of-external-storage-services}
 
-This document describes the URI formats of external storage services, including Amazon S3, GCS, and Azure Blob Storage.
+このドキュメントでは、Amazon S3、GCS、Azure Blob Storage などの外部storageサービスの URI 形式について説明します。
 
-The basic format of the URI is as follows:
+URI の基本的な形式は次のとおりです。
 
 ```shell
 [scheme]://[host]/[path]?[parameters]
 ```
 
-## Amazon S3 URI format
+## Amazon S3 URI 形式 {#amazon-s3-uri-format}
 
 <CustomContent platform="tidb">
 
-- `scheme`: `s3`
-- `host`: `bucket name`
-- `parameters`:
+-   `scheme` : `s3`
+-   `host` : `bucket name`
+-   `parameters` :
 
-    - `access-key`: Specifies the access key.
-    - `secret-access-key`: Specifies the secret access key.
-    - `session-token`: Specifies the temporary session token. BR supports this parameter starting from v7.6.0.
-    - `use-accelerate-endpoint`: Specifies whether to use the accelerate endpoint on Amazon S3 (defaults to `false`).
-    - `endpoint`: Specifies the URL of custom endpoint for S3-compatible services (for example, `<https://s3.example.com/>`).
-    - `force-path-style`: Use path style access rather than virtual hosted style access (defaults to `true`).
-    - `storage-class`: Specifies the storage class of the uploaded objects (for example, `STANDARD` or `STANDARD_IA`).
-    - `sse`: Specifies the server-side encryption algorithm used to encrypt the uploaded objects (value options: empty, `AES256`, or `aws:kms`).
-    - `sse-kms-key-id`: Specifies the KMS ID if `sse` is set to `aws:kms`.
-    - `acl`: Specifies the canned ACL of the uploaded objects (for example, `private` or `authenticated-read`).
-    - `role-arn`: When you need to access Amazon S3 data from a third party using a specified [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html), you can specify the corresponding [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the IAM role with the `role-arn` URL query parameter, such as `arn:aws:iam::888888888888:role/my-role`. For more information about using an IAM role to access Amazon S3 data from a third party, see [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html). BR supports this parameter starting from v7.6.0.
-    - `external-id`: When you access Amazon S3 data from a third party, you might need to specify a correct [external ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html) to assume [the IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html). In this case, you can use this `external-id` URL query parameter to specify the external ID and make sure that you can assume the IAM role. An external ID is an arbitrary string provided by the third party together with the IAM role ARN to access the Amazon S3 data. Providing an external ID is optional when assuming an IAM role, which means if the third party does not require an external ID for the IAM role, you can assume the IAM role and access the corresponding Amazon S3 data without providing this parameter.
+    -   `access-key` : アクセス キーを指定します。
+    -   `secret-access-key` : 秘密アクセスキーを指定します。
+    -   `session-token` : 一時セッショントークンを指定します。BRはv7.6.0以降でこのパラメータをサポートしています。
+    -   `use-accelerate-endpoint` : Amazon S3 の高速エンドポイントを使用するかどうかを指定します (デフォルトは`false` )。
+    -   `endpoint` : S3 互換サービスのカスタムエンドポイントの URL を指定します (例: `<https://s3.example.com/>` )。
+    -   `force-path-style` : 仮想ホスト スタイルのアクセスではなく、パス スタイルのアクセスを使用します (デフォルトは`true` )。
+    -   `storage-class` : アップロードされたオブジェクトのstorageクラスを指定します (たとえば、 `STANDARD`または`STANDARD_IA` )。
+    -   `sse` : アップロードされたオブジェクトの暗号化に使用されるサーバー側暗号化アルゴリズムを指定します (値のオプション: 空、 `AES256` 、または`aws:kms` )。
+    -   `sse-kms-key-id` : `sse` `aws:kms`に設定されている場合は KMS ID を指定します。
+    -   `acl` : アップロードされたオブジェクトの既定 ACL を指定します (たとえば、 `private`または`authenticated-read` )。
+    -   `role-arn` : 指定された[IAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)使用してサードパーティの Amazon S3 データにアクセスする必要がある場合、 `arn:aws:iam::888888888888:role/my-role`などの`role-arn` URL クエリパラメータで、対応する[Amazon リソースネーム (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) IAMロールを指定できます。IAMIAMを使用してサードパーティの Amazon S3 データにアクセスする方法の詳細については、 [AWSドキュメント](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html)参照してください。BRはv7.6.0 以降でこのパラメータをサポートしています。
+    -   `external-id` : サードパーティから Amazon S3 データにアクセスする場合、正しい[外部ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)指定して[IAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)引き受けることが必要になる場合があります。この場合、この`external-id` URL クエリパラメータを使用して外部 ID を指定し、 IAMロールを引き受けることができることを確認できます。外部 ID は、Amazon S3 データにアクセスするためにIAMロール ARN と一緒にサードパーティによって提供される任意の文字列です。IAM ロールを引き受ける場合の外部 IDのIAMIAMに外部 ID を必要としない場合は、このパラメータを指定せずにIAMロールを引き受け、対応する Amazon S3 データにアクセスできます。
 
-The following is an example of an Amazon S3 URI for TiDB Lightning and BR. In this example, you need to specify a specific file path `testfolder`.
+以下は、 TiDB LightningおよびBRの Amazon S3 URI の例です。この例では、特定のファイルパス`testfolder`指定する必要があります。
 
 ```shell
 s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-access-key}
 ```
 
-The following is an example of an Amazon S3 URI for TiCDC `sink-uri`.
+以下は、 TiCDC `sink-uri`の Amazon S3 URI の例です。
 
 ```shell
 tiup cdc:v7.5.0 cli changefeed create \
@@ -54,31 +54,41 @@ tiup cdc:v7.5.0 cli changefeed create \
 
 <CustomContent platform="tidb-cloud">
 
-- `scheme`: `s3`
-- `host`: `bucket name`
-- `parameters`:
+-   `scheme` : `s3`
+-   `host` : `bucket name`
+-   `parameters` :
 
-    - `access-key`: Specifies the access key.
-    - `secret-access-key`: Specifies the secret access key.
-    - `session-token`: Specifies the temporary session token.
-    - `use-accelerate-endpoint`: Specifies whether to use the accelerate endpoint on Amazon S3 (defaults to `false`).
-    - `endpoint`: Specifies the URL of custom endpoint for S3-compatible services (for example, `<https://s3.example.com/>`).
-    - `force-path-style`: Use path style access rather than virtual hosted style access (defaults to `true`).
-    - `storage-class`: Specifies the storage class of the uploaded objects (for example, `STANDARD` or `STANDARD_IA`).
-    - `sse`: Specifies the server-side encryption algorithm used to encrypt the uploaded objects (value options: empty, `AES256`, or `aws:kms`).
-    - `sse-kms-key-id`: Specifies the KMS ID if `sse` is set to `aws:kms`.
-    - `acl`: Specifies the canned ACL of the uploaded objects (for example, `private` or `authenticated-read`).
-    - `role-arn`: To allow TiDB Cloud to access Amazon S3 data using a specific [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html), provide the role's [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the `role-arn` URL query parameter. For example: `arn:aws:iam::888888888888:role/my-role`. 
+    -   `access-key` : アクセス キーを指定します。
 
-        > **Note:**
+    -   `secret-access-key` : 秘密アクセスキーを指定します。
+
+    -   `session-token` : 一時セッション トークンを指定します。
+
+    -   `use-accelerate-endpoint` : Amazon S3 の高速エンドポイントを使用するかどうかを指定します (デフォルトは`false` )。
+
+    -   `endpoint` : S3 互換サービスのカスタムエンドポイントの URL を指定します (例: `<https://s3.example.com/>` )。
+
+    -   `force-path-style` : 仮想ホスト スタイルのアクセスではなく、パス スタイルのアクセスを使用します (デフォルトは`true` )。
+
+    -   `storage-class` : アップロードされたオブジェクトのstorageクラスを指定します (たとえば、 `STANDARD`または`STANDARD_IA` )。
+
+    -   `sse` : アップロードされたオブジェクトの暗号化に使用されるサーバー側暗号化アルゴリズムを指定します (値のオプション: 空、 `AES256` 、または`aws:kms` )。
+
+    -   `sse-kms-key-id` : `sse` `aws:kms`に設定されている場合は KMS ID を指定します。
+
+    -   `acl` : アップロードされたオブジェクトの既定 ACL を指定します (たとえば、 `private`または`authenticated-read` )。
+
+    -   `role-arn` : TiDB Cloud が特定の[IAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)使用して Amazon S3 データにアクセスできるようにするには、 `role-arn` URL クエリパラメータにロールの[Amazon リソースネーム (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)指定します。例: `arn:aws:iam::888888888888:role/my-role` 。
+
+        > **注記：**
         >
-        > - To automatically create an IAM role, navigate to the **Import Data from Amazon S3** page of your cluster in the [TiDB Cloud console](https://tidbcloud.com/), fill in the **Folder URI** field, click **Click here to create new one with AWS CloudFormation** under the **Role ARN** field, and then follow the on-screen instructions in the **Add New Role ARN** dialog.
-        > - If you have any trouble creating the IAM role using AWS CloudFormation, click **click Having trouble? Create Role ARN manually** in the **Add New Role ARN** dialog to get the TiDB Cloud Account ID and TiDB Cloud External ID, and then follow the steps in [Configure Amazon S3 access using a Role ARN](https://docs.pingcap.com/tidbcloud/dedicated-external-storage#configure-amazon-s3-access-using-a-role-arn) to create the role manually. When configuring the IAM role, make sure to enter the TiDB Cloud account ID in the **Account ID** field and select **Require external ID** to protect against [confused deputy attacks](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html).
-        > - To enhance security, you can reduce the valid duration of the IAM role by configuring a shorter **Max session duration**. For more information, see [Update the maximum session duration for a role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_update-role-settings.html#id_roles_update-session-duration) in AWS documentation.
+        > -   IAMロールを自動的に作成するには、 [TiDB Cloudコンソール](https://tidbcloud.com/)でクラスターの**[Amazon S3 からのデータのインポート]**ページに移動し、 **[フォルダー URI]**フィールドに入力し、 **[ロール ARN]**フィールドの [**ここをクリックして AWS CloudFormation で新しく作成] を**クリックして、 **[新しいロール ARN の追加]**ダイアログの画面上の指示に従います。
+        > -   AWS CloudFormation を使用してIAMロールを作成する際に問題が発生した場合は、 **「新しいロール ARN を追加」**ダイアログで**「問題が発生した場合は、ロール ARN を手動で作成する」を**クリックしてTiDB Cloudアカウント ID とTiDB Cloud外部 ID を取得し、 [ロール ARN を使用して Amazon S3 アクセスを構成する](https://docs.pingcap.com/tidbcloud/dedicated-external-storage#configure-amazon-s3-access-using-a-role-arn)の手順に従って手動でロールを作成してください。IAMIAMを設定する際は、 **「アカウント ID」**フィールドにTiDB Cloudアカウント ID を入力し、 [混乱した副官の攻撃](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)から保護するために**外部 ID を要求する」**を選択してください。
+        > -   セキュリティを強化するために、**最大セッション継続時間を**短く設定することで、 IAMロールの有効期間を短縮できます。詳細については、AWSドキュメントの[ロールの最大セッション期間を更新する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_update-role-settings.html#id_roles_update-session-duration)参照してください。
 
-    - `external-id`: Specifies the TiDB Cloud External ID, which is required for TiDB Cloud to access Amazon S3 data. You can obtain this ID from the **Add New Role ARN** dialog in the [TiDB Cloud console](https://tidbcloud.com/). For more information, see [Configure Amazon S3 access using a Role ARN](https://docs.pingcap.com/tidbcloud/dedicated-external-storage#configure-amazon-s3-access-using-a-role-arn).
+    -   `external-id` : TiDB Cloud がAmazon S3 データにアクセスするために必要なTiDB Cloud外部 ID を指定します。この ID は、 [TiDB Cloudコンソール](https://tidbcloud.com/)の**「新しいロール ARN を追加」**ダイアログから取得できます。詳細については、 [ロール ARN を使用して Amazon S3 アクセスを構成する](https://docs.pingcap.com/tidbcloud/dedicated-external-storage#configure-amazon-s3-access-using-a-role-arn)参照してください。
 
-The following is an example of an Amazon S3 URI for [`BACKUP`](/sql-statements/sql-statement-backup.md) and [`RESTORE`](/sql-statements/sql-statement-restore.md). This example uses the file path `testfolder`.
+以下は、 [`BACKUP`](/sql-statements/sql-statement-backup.md)と[`RESTORE`](/sql-statements/sql-statement-restore.md)のAmazon S3 URIの例です。この例では、ファイルパス`testfolder`を使用しています。
 
 ```shell
 s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-access-key}
@@ -86,19 +96,19 @@ s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-acc
 
 </CustomContent>
 
-## GCS URI format
+## GCS URI形式 {#gcs-uri-format}
 
-- `scheme`: `gcs` or `gs`
-- `host`: `bucket name`
-- `parameters`:
+-   `scheme` ： `gcs`または`gs`
+-   `host` : `bucket name`
+-   `parameters` :
 
-    - `credentials-file`: Specifies the path to the credentials JSON file on the migration tool node.
-    - `storage-class`: Specifies the storage class of the uploaded objects (for example, `STANDARD` or `COLDLINE`)
-    - `predefined-acl`: Specifies the predefined ACL of the uploaded objects (for example, `private` or `project-private`)
+    -   `credentials-file` : 移行ツール ノード上の資格情報 JSON ファイルへのパスを指定します。
+    -   `storage-class` : アップロードされたオブジェクトのstorageクラスを指定します（例： `STANDARD`または`COLDLINE` ）
+    -   `predefined-acl` : アップロードされたオブジェクトの定義済みACLを指定します（たとえば、 `private`または`project-private` ）
 
 <CustomContent platform="tidb">
 
-The following is an example of a GCS URI for TiDB Lightning and BR. In this example, you need to specify a specific file path `testfolder`.
+以下は、 TiDB LightningとBRのGCS URIの例です。この例では、特定のファイルパス`testfolder`指定する必要があります。
 
 ```shell
 gcs://external/testfolder?credentials-file=${credentials-file-path}
@@ -106,26 +116,26 @@ gcs://external/testfolder?credentials-file=${credentials-file-path}
 
 </CustomContent>
 
-The following is an example of a GCS URI for [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md). In this example, you need to specify a specific filename `test.csv`.
+以下は[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)の GCS URI の例です。この例では、特定のファイル名`test.csv`指定する必要があります。
 
 ```shell
 gcs://external/test.csv?credentials-file=${credentials-file-path}
 ```
 
-## Azure Blob Storage URI format
+## Azure Blob Storage URI 形式 {#azure-blob-storage-uri-format}
 
-- `scheme`: `azure` or `azblob`
-- `host`: `container name`
-- `parameters`:
+-   `scheme` ： `azure`または`azblob`
+-   `host` : `container name`
+-   `parameters` :
 
-    - `account-name`: Specifies the account name of the storage.
-    - `account-key`: Specifies the access key.
-    - `sas-token`: Specifies the shared access signature (SAS) token.
-    - `access-tier`: Specifies the access tier of the uploaded objects, for example, `Hot`, `Cool`, or `Archive`. The default value is the default access tier of the storage account.
-    - `encryption-scope`: Specifies the [encryption scope](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-scope-manage?tabs=powershell#upload-a-blob-with-an-encryption-scope) for server-side encryption.
-    - `encryption-key`: Specifies the [encryption key](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-customer-provided-keys) for server-side encryption, which uses the AES256 encryption algorithm.
+    -   `account-name` :storageのアカウント名を指定します。
+    -   `account-key` : アクセス キーを指定します。
+    -   `sas-token` : 共有アクセス署名 (SAS) トークンを指定します。
+    -   `access-tier` : アップロードされたオブジェクトのアクセス層を指定します（例： `Hot` 、 `Cool` 、 `Archive` ）。既定値は、storageアカウントのデフォルトのアクセス層です。
+    -   `encryption-scope` : サーバー側の暗号化に[暗号化範囲](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-scope-manage?tabs=powershell#upload-a-blob-with-an-encryption-scope)指定します。
+    -   `encryption-key` : AES256 暗号化アルゴリズムを使用するサーバー側暗号化の場合は[暗号化キー](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-customer-provided-keys)指定します。
 
-The following is an example of an Azure Blob Storage URI for BR. In this example, you need to specify a specific file path `testfolder`.
+以下は、 BRのAzure Blob Storage URIの例です。この例では、特定のファイルパス`testfolder`指定する必要があります。
 
 ```shell
 azure://external/testfolder?account-name=${account-name}&account-key=${account-key}

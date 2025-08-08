@@ -1,22 +1,22 @@
 ---
 title: TIDB_SERVERS_INFO
-summary: Learn the `TIDB_SERVERS_INFO` INFORMATION_SCHEMA table.
+summary: TIDB_SERVERS_INFO` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# TIDB_SERVERS_INFO
+# TIDB_サーバー情報 {#tidb-servers-info}
 
-The `TIDB_SERVERS_INFO` table provides information about TiDB servers in the TiDB Cluster (namely, tidb-server processes).
+`TIDB_SERVERS_INFO`テーブルは、TiDBクラスタ内の TiDB サーバー (つまり、tidb-server プロセス) に関する情報を提供します。
 
-> **Note:**
+> **注記：**
 >
-> This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC tidb_servers_info;
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 +---------------+--------------+------+------+---------+-------+
@@ -35,13 +35,13 @@ The output is as follows:
 9 rows in set (0.00 sec)
 ```
 
-View the `TIDB_SERVERS_INFO` table:
+`TIDB_SERVERS_INFO`テーブルをビュー:
 
 ```sql
 SELECT * FROM TIDB_SERVERS_INFO\G
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 *************************** 1. row ***************************
@@ -50,7 +50,7 @@ The output is as follows:
          PORT: 4000
   STATUS_PORT: 10080
         LEASE: 45s
-      VERSION: 8.0.11-TiDB-{{{ .tidb-version }}}
+      VERSION: 8.0.11-TiDB-v8.5.2
      GIT_HASH: 827d8ff2d22ac4c93ae1b841b79d468211e1d393
 BINLOG_STATUS: Off
        LABELS:

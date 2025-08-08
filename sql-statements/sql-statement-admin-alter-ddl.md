@@ -1,49 +1,50 @@
 ---
 title: ADMIN ALTER DDL JOBS
-summary: An overview of the usage of `ADMIN ALTER DDL JOBS` for the TiDB database.
+summary: TiDB データベースの ADMIN ALTER DDL JOBS` の使用法の概要。
 ---
 
-# ADMIN ALTER DDL JOBS
+# 管理者による DDL ジョブの変更 {#admin-alter-ddl-jobs}
 
-> **Note:**
+> **注記：**
 >
-> Currently, this feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 現在、この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
-The `ADMIN ALTER DDL JOBS` statement allows you to modify the parameter of a single running DDL job. For example:
+`ADMIN ALTER DDL JOBS`文を使用すると、実行中の単一のDDLジョブのパラメータを変更できます。例:
 
 ```sql
 ADMIN ALTER DDL JOBS 101 THREAD = 8;
 ```
 
-- `101`: indicates the ID of the DDL job. You can obtain the ID by executing [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md).
-- `THREAD`: indicates the concurrency of the DDL job. You can configure its initial value using the system variable [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt).
+-   `101` : DDLジョブのIDを示します。IDは[`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)実行することで取得できます。
+-   `THREAD` : DDLジョブの同時実行性を示します。初期値はシステム変数[`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)を使用して設定できます。
 
-The DDL job types supported by the `ADMIN ALTER DDL JOBS` statement include `ADD INDEX`, `MODIFY COLUMN`, and `REORGANIZE PARTITION`. For other DDL job types, executing `ADMIN ALTER DDL JOBS` returns the `unsupported DDL operation` error.
+`ADMIN ALTER DDL JOBS`文でサポートされているDDLジョブタイプには、 `ADD INDEX` 、 `MODIFY COLUMN` 、 `REORGANIZE PARTITION`あります。その他のDDLジョブタイプの場合、 `ADMIN ALTER DDL JOBS`実行すると`unsupported DDL operation`エラーが返されます。
 
-Currently, you can only modify the parameters of a single DDL job by executing `ADMIN ALTER DDL JOBS`. Modifying the parameters of multiple DDL job IDs at the same time is not supported.
+現在、 `ADMIN ALTER DDL JOBS`実行して変更できるのは、単一の DDL ジョブのパラメータのみです。複数の DDL ジョブ ID のパラメータを同時に変更することはサポートされていません。
 
-The following are the supported parameters for different DDL jobs and their corresponding system variables:
+さまざまな DDL ジョブでサポートされているパラメータとそれに対応するシステム変数は次のとおりです。
 
-- `ADD INDEX`:
-    - `THREAD`: the concurrency of the DDL job. The initial value is set by `tidb_ddl_reorg_worker_cnt`.
-    - `BATCH_SIZE`: the batch size. The initial value is set by [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size).
-    - `MAX_WRITE_SPEED`: the maximum bandwidth limit for importing index records into each TiKV. The initial value is set by [`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850).
+-   `ADD INDEX` :
 
-  Currently, the preceding parameters only work for `ADD INDEX` jobs that are submitted and running after [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) is disabled.
+    -   `THREAD` : DDLジョブの同時実行数。初期値は`tidb_ddl_reorg_worker_cnt`に設定されます。
+    -   `BATCH_SIZE` : バッチサイズ。初期値は[`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)に設定されます。
+    -   `MAX_WRITE_SPEED` : 各TiKVにインデックスレコードをインポートする際の最大帯域幅制限。初期値は[`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850)に設定されます。
 
-- `MODIFY COLUMN`:
-    - `THREAD`: the concurrency of the DDL job. The initial value is set by `tidb_ddl_reorg_worker_cnt`.
-    - `BATCH_SIZE`: the batch size. The initial value is set by `tidb_ddl_reorg_batch_size`.
+    現在、上記のパラメータは、送信され、 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)無効になった後に実行される`ADD INDEX`ジョブに対してのみ機能します。
 
-- `REORGANIZE PARTITION`:
-    - `THREAD`: the concurrency of the DDL job. The initial value is set by `tidb_ddl_reorg_worker_cnt`.
-    - `BATCH_SIZE`: the batch size. The initial value is set by `tidb_ddl_reorg_batch_size`.
+-   `MODIFY COLUMN` :
+    -   `THREAD` : DDLジョブの同時実行数。初期値は`tidb_ddl_reorg_worker_cnt`に設定されます。
+    -   `BATCH_SIZE` : バッチサイズ。初期値は`tidb_ddl_reorg_batch_size`に設定されます。
 
-The value ranges of the preceding parameters are consistent with those of the corresponding system variables.
+-   `REORGANIZE PARTITION` :
+    -   `THREAD` : DDLジョブの同時実行数。初期値は`tidb_ddl_reorg_worker_cnt`に設定されます。
+    -   `BATCH_SIZE` : バッチサイズ。初期値は`tidb_ddl_reorg_batch_size`に設定されます。
 
-`ADMIN ALTER DDL JOBS` takes effect only on running DDL jobs. If the DDL job does not exist or has already completed, executing this statement returns the `ddl job is not running` error.
+前述のパラメータの値の範囲は、対応するシステム変数の値の範囲と一致しています。
 
-The following are some examples of this statement:
+`ADMIN ALTER DDL JOBS`実行中の DDL ジョブにのみ有効です。DDL ジョブが存在しないか、すでに完了している場合、このステートメントを実行するとエラー`ddl job is not running`が返されます。
+
+このステートメントの例を次に示します。
 
 ```sql
 ADMIN ALTER DDL JOBS 101 THREAD = 8;
@@ -52,22 +53,20 @@ ADMIN ALTER DDL JOBS 101 MAX_WRITE_SPEED = '200MiB';
 ADMIN ALTER DDL JOBS 101 THREAD = 8, BATCH_SIZE = 256;
 ```
 
-To view the current parameter values for a specific DDL job, you can execute `ADMIN SHOW DDL JOBS`. The results are displayed in the `COMMENTS` column:
+特定のDDLジョブの現在のパラメータ値を表示するには、 `ADMIN SHOW DDL JOBS`実行します。結果は`COMMENTS`列目に表示されます。
 
 ```sql
 ADMIN SHOW DDL JOBS 1;
 ```
 
-```
-+--------+---------+------------+-----------+--------------+-----------+----------+-----------+----------------------------+----------------------------+----------------------------+--------+-----------------------+
-| JOB_ID | DB_NAME | TABLE_NAME | JOB_TYPE  | SCHEMA_STATE | SCHEMA_ID | TABLE_ID | ROW_COUNT | CREATE_TIME                | START_TIME                 | END_TIME                   | STATE  | COMMENTS              |
-+--------+---------+------------+-----------+--------------+-----------+----------+-----------+----------------------------+----------------------------+----------------------------+--------+-----------------------+
-|    124 | test    | t          | add index | public       |         2 |      122 |         3 | 2024-11-15 11:17:06.213000 | 2024-11-15 11:17:06.213000 | 2024-11-15 11:17:08.363000 | synced | ingest, DXF, thread=8 |
-+--------+---------+------------+-----------+--------------+-----------+----------+-----------+----------------------------+----------------------------+----------------------------+--------+-----------------------+
-1 row in set (0.01 sec)
-```
+    +--------+---------+------------+-----------+--------------+-----------+----------+-----------+----------------------------+----------------------------+----------------------------+--------+-----------------------+
+    | JOB_ID | DB_NAME | TABLE_NAME | JOB_TYPE  | SCHEMA_STATE | SCHEMA_ID | TABLE_ID | ROW_COUNT | CREATE_TIME                | START_TIME                 | END_TIME                   | STATE  | COMMENTS              |
+    +--------+---------+------------+-----------+--------------+-----------+----------+-----------+----------------------------+----------------------------+----------------------------+--------+-----------------------+
+    |    124 | test    | t          | add index | public       |         2 |      122 |         3 | 2024-11-15 11:17:06.213000 | 2024-11-15 11:17:06.213000 | 2024-11-15 11:17:08.363000 | synced | ingest, DXF, thread=8 |
+    +--------+---------+------------+-----------+--------------+-----------+----------+-----------+----------------------------+----------------------------+----------------------------+--------+-----------------------+
+    1 row in set (0.01 sec)
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AdminAlterDDLStmt ::=
@@ -80,13 +79,13 @@ AlterJobOption ::=
     identifier "=" SignedLiteral
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
-* [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
-* [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)
-* [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)
+-   [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
+-   [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)
+-   [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)

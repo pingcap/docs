@@ -1,52 +1,52 @@
 ---
 title: TiDB 1.1 Alpha Release Notes
-summary: TiDB 1.1 Alpha, released on January 19, 2018, brings significant improvements in MySQL compatibility, SQL optimization, stability, and performance. Key updates include enhanced SQL parser, query optimizer, and executor, as well as server support for the PROXY protocol. PD now offers more APIs, TLS support, and improved scheduling, while TiKV introduces Raft learner support, TLS, and performance optimizations. Additionally, it enhances data recovery tools and improves flow control mechanisms.
+summary: 2018年1月19日にリリースされたTiDB 1.1 Alphaでは、MySQLとの互換性、SQLの最適化、安定性、パフォーマンスが大幅に向上しています。主なアップデートには、SQLパーサー、クエリオプティマイザー、エグゼキューターの強化、およびPROXYプロトコルのサーバーサポートが含まれます。PDではAPIの追加、TLSサポート、スケジューリングの改善が提供される一方、TiKVではRaft学習器のサポート、TLS、パフォーマンス最適化が導入されています。さらに、データリカバリツールの強化とフロー制御メカニズムの改善も行われています。
 ---
 
-# TiDB 1.1 Alpha Release Notes
+# TiDB 1.1 アルファ リリースノート {#tidb-1-1-alpha-release-notes}
 
-On January 19, 2018, TiDB 1.1 Alpha is released. This release has great improvement in MySQL compatibility, SQL optimization, stability, and performance.
+2018年1月19日、TiDB 1.1 Alphaがリリースされました。このリリースでは、MySQLとの互換性、SQLの最適化、安定性、パフォーマンスが大幅に向上しています。
 
-## TiDB
+## TiDB {#tidb}
 
-- SQL parser
-    - Support more syntax
-- SQL query optimizer
-    - Use more compact structure to reduce statistics info memory usage
-    - Speed up loading statistics info when starting tidb-server
-    - Provide more accurate query cost evaluation
-    - Use `Count-Min Sketch` to estimate the cost of queries using unique index more accurately
-    - Support more complex conditions to make full use of index
-- SQL executor
-    - Refactor all executor operators using Chunk architecture, improve the execution performance of analytical statements and reduce memory usage
-    - Optimize performance of the `INSERT IGNORE` statement
-    - Push down more types and functions to TiKV
-    - Support more `SQL_MODE`
-    - Optimize the `Load Data` performance to increase the speed by 10 times
-    - Optimize the `Use Database` performance
-    - Support statistics on the memory usage of physical operators
-- Server
-    - Support the PROXY protocol
+-   SQLパーサー
+    -   より多くの構文をサポート
+-   SQLクエリオプティマイザー
+    -   よりコンパクトな構造を使用して、統計情報のメモリ使用量を削減します
+    -   tidb-server の起動時に統計情報の読み込みを高速化
+    -   より正確なクエリコスト評価を提供する
+    -   `Count-Min Sketch`使用すると、ユニークインデックスを使用したクエリのコストをより正確に見積もることができます。
+    -   インデックスを最大限に活用するために、より複雑な条件をサポートします
+-   SQLエグゼキューター
+    -   Chunkアーキテクチャを使用してすべてのエグゼキュータ演算子をリファクタリングし、分析ステートメントの実行パフォーマンスを向上させ、メモリ使用量を削減します。
+    -   `INSERT IGNORE`文のパフォーマンスを最適化する
+    -   より多くの型と関数をTiKV にプッシュダウンする
+    -   さらに`SQL_MODE`サポート
+    -   `Load Data`パフォーマンスを最適化して速度を10倍向上
+    -   `Use Database`パフォーマンスを最適化する
+    -   物理演算子のメモリ使用量に関する統計情報のサポート
+-   サーバ
+    -   PROXYプロトコルをサポートする
 
-## PD
+## PD {#pd}
 
-- Add more APIs
-- Support TLS
-- Add more cases for scheduling Simulator
-- Schedule to adapt to different Region sizes
-- Fix some bugs about scheduling
+-   APIを追加する
+-   TLSをサポート
+-   シミュレータのスケジュールにケースを追加する
+-   さまざまなリージョン規模に合わせてスケジュールを調整
+-   スケジュールに関するいくつかのバグを修正
 
-## TiKV
+## TiKV {#tikv}
 
-- Support Raft learner
-- Optimize Raft Snapshot and reduce the I/O overhead
-- Support TLS
-- Optimize the RocksDB configuration to improve performance
-- Optimize `count (*)` and query performance of unique index in Coprocessor
-- Add more failpoints and stability test cases
-- Solve the reconnection issue between PD and TiKV
-- Enhance the features of the data recovery tool `tikv-ctl`
-- Support splitting according to table in Region
-- Support the `Delete Range` feature
-- Support setting the I/O limit caused by snapshot
-- Improve the flow control mechanism
+-   Raft学習者をサポート
+-   Raftスナップショットを最適化し、I/Oオーバーヘッドを削減する
+-   TLSをサポート
+-   RocksDB 構成を最適化してパフォーマンスを向上させる
+-   コプロセッサーのユニークインデックスの最適化`count (*)`とクエリパフォーマンス
+-   フェイルポイントと安定性テストケースを追加する
+-   PDとTiKV間の再接続問題を解決する
+-   データ復旧ツール`tikv-ctl`の機能を強化する
+-   リージョン内のテーブルに従って分割をサポート
+-   `Delete Range`機能をサポートする
+-   スナップショットによるI/O制限の設定をサポート
+-   フロー制御メカニズムを改善する

@@ -1,19 +1,19 @@
 ---
 title: TIDB_INDEX_USAGE
-summary: Learn the `TIDB_INDEX_USAGE` INFORMATION_SCHEMA table.
+summary: TIDB_INDEX_USAGE` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# TIDB_INDEX_USAGE
+# TIDB_インデックス_使用法 {#tidb-index-usage}
 
 <CustomContent platform="tidb">
 
-Starting from v8.0.0, TiDB provides the `TIDB_INDEX_USAGE` table. You can use `TIDB_INDEX_USAGE` to get the usage statistics of all indexes on the current TiDB node. By default, TiDB collects these index usage statistics during SQL statement execution. You can disable this feature by turning off the [`instance.tidb_enable_collect_execution_info`](/tidb-configuration-file.md#tidb_enable_collect_execution_info) configuration item or the [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) system variable.
+TiDB v8.0.0以降、 `TIDB_INDEX_USAGE`テーブルが提供されます`TIDB_INDEX_USAGE`使用すると、現在のTiDBノード上のすべてのインデックスの使用状況統計を取得できます。デフォルトでは、TiDBはSQL文の実行中にこれらのインデックス使用状況統計を収集します。この機能を無効にするには、 [`instance.tidb_enable_collect_execution_info`](/tidb-configuration-file.md#tidb_enable_collect_execution_info)設定項目または[`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info)システム変数をオフにします。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Starting from v8.0.0, TiDB provides the `TIDB_INDEX_USAGE` table. You can use `TIDB_INDEX_USAGE` to get the usage statistics of all indexes on the current TiDB node. By default, TiDB collects these index usage statistics during SQL statement execution. You can disable this feature by turning off the [`instance.tidb_enable_collect_execution_info`](https://docs.pingcap.com/tidb/v8.0/tidb-configuration-file#tidb_enable_collect_execution_info) configuration item or the [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) system variable.
+TiDB v8.0.0以降、 `TIDB_INDEX_USAGE`テーブルが提供されます`TIDB_INDEX_USAGE`使用すると、現在のTiDBノード上のすべてのインデックスの使用状況統計を取得できます。デフォルトでは、TiDBはSQL文の実行中にこれらのインデックス使用状況統計を収集します。この機能を無効にするには、 [`instance.tidb_enable_collect_execution_info`](https://docs.pingcap.com/tidb/v8.0/tidb-configuration-file#tidb_enable_collect_execution_info)設定項目または[`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info)システム変数をオフにします。
 
 </CustomContent>
 
@@ -44,35 +44,35 @@ DESC TIDB_INDEX_USAGE;
 14 rows in set (0.00 sec)
 ```
 
-The columns in the `TIDB_INDEX_USAGE` table are as follows:
+`TIDB_INDEX_USAGE`テーブルの列は次のとおりです。
 
-* `TABLE_SCHEMA`: The name of the database to which the table containing the index belongs.
-* `TABLE_NAME`: The name of the table containing the index.
-* `INDEX_NAME`: The name of the index.
-* `QUERY_TOTAL`: The total number of statements accessing the index.
-* `KV_REQ_TOTAL`: The total number of KV requests generated when accessing the index.
-* `ROWS_ACCESS_TOTAL`: The total number of rows scanned when accessing the index.
-* `PERCENTAGE_ACCESS_0`: The number of times the row access ratio (the percentage of accessed rows out of the total number of rows in the table) is 0.
-* `PERCENTAGE_ACCESS_0_1`: The number of times the row access ratio is between 0% and 1%.
-* `PERCENTAGE_ACCESS_1_10`: The number of times the row access ratio is between 1% and 10%.
-* `PERCENTAGE_ACCESS_10_20`: The number of times the row access ratio is between 10% and 20%.
-* `PERCENTAGE_ACCESS_20_50`: The number of times the row access ratio is between 20% and 50%.
-* `PERCENTAGE_ACCESS_50_100`: The number of times the row access ratio is between 50% and 100%.
-* `PERCENTAGE_ACCESS_100`: The number of times the row access ratio is 100%.
-* `LAST_ACCESS_TIME`: The time of the most recent access to the index.
+-   `TABLE_SCHEMA` : インデックスを含むテーブルが属するデータベースの名前。
+-   `TABLE_NAME` : インデックスを含むテーブルの名前。
+-   `INDEX_NAME` : インデックスの名前。
+-   `QUERY_TOTAL` : インデックスにアクセスするステートメントの合計数。
+-   `KV_REQ_TOTAL` : インデックスにアクセスするときに生成される KV リクエストの合計数。
+-   `ROWS_ACCESS_TOTAL` : インデックスにアクセスするときにスキャンされる行の合計数。
+-   `PERCENTAGE_ACCESS_0` : 行アクセス率 (テーブル内の行の総数に対するアクセスされた行の割合) が 0 である回数。
+-   `PERCENTAGE_ACCESS_0_1` : 行アクセス率が 0% から 1% の間となる回数。
+-   `PERCENTAGE_ACCESS_1_10` : 行アクセス率が 1% ～ 10% となる回数。
+-   `PERCENTAGE_ACCESS_10_20` : 行アクセス率が 10% ～ 20% となる回数。
+-   `PERCENTAGE_ACCESS_20_50` : 行アクセス率が 20% ～ 50% の間となる回数。
+-   `PERCENTAGE_ACCESS_50_100` : 行アクセス率が 50% ～ 100% の間となる回数。
+-   `PERCENTAGE_ACCESS_100` : 行アクセス率が 100% となる回数。
+-   `LAST_ACCESS_TIME` : インデックスへの最終アクセス時刻。
 
-## CLUSTER_TIDB_INDEX_USAGE
+## クラスター_TIDB_インデックス_使用法 {#cluster-tidb-index-usage}
 
-The `TIDB_INDEX_USAGE` table only provides usage statistics of all indexes on a single TiDB node. To obtain the index usage statistics on all TiDB nodes in the cluster, you need to query the `CLUSTER_TIDB_INDEX_USAGE` table.
+`TIDB_INDEX_USAGE`テーブルは、単一の TiDB ノード上のすべてのインデックスの使用状況統計のみを提供します。クラスター内のすべての TiDB ノードのインデックス使用状況統計を取得するには、 `CLUSTER_TIDB_INDEX_USAGE`テーブルをクエリする必要があります。
 
-Compared with the `TIDB_INDEX_USAGE` table, the query result of the `CLUSTER_TIDB_INDEX_USAGE` table includes an additional `INSTANCE` field. This field displays the IP address and port of each node in the cluster, which helps you distinguish the statistics across different nodes.
+`TIDB_INDEX_USAGE`番目のテーブルと比較すると、 `CLUSTER_TIDB_INDEX_USAGE`番目のテーブルのクエリ結果には`INSTANCE`のフィールドが追加されています。このフィールドには、クラスター内の各ノードの IP アドレスとポート番号が表示されるため、異なるノード間の統計情報を区別するのに役立ちます。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC CLUSTER_TIDB_INDEX_USAGE;
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 +--------------------------+-------------+------+------+---------+-------+
@@ -97,12 +97,12 @@ The output is as follows:
 15 rows in set (0.00 sec)
 ```
 
-## Limitations
+## 制限事項 {#limitations}
 
-- The data in the `TIDB_INDEX_USAGE` table might be delayed by up to 5 minutes.
-- After TiDB restarts, the data in the `TIDB_INDEX_USAGE` table is cleared.
-- TiDB records index usage for a table only when the table has valid statistics.
+-   `TIDB_INDEX_USAGE`テーブルのデータは最大 5 分遅延される可能性があります。
+-   TiDB が再起動すると、 `TIDB_INDEX_USAGE`テーブルのデータがクリアされます。
+-   TiDB は、テーブルに有効な統計がある場合にのみ、テーブルのインデックスの使用状況を記録します。
 
-## Read more
+## 続きを読む {#read-more}
 
-- [`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
+-   [`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)

@@ -1,13 +1,13 @@
 ---
 title: CREATE INDEX | TiDB SQL Statement Reference
-summary: An overview of the usage of CREATE INDEX for the TiDB database.
+summary: TiDB データベースの CREATE INDEX の使用法の概要。
 ---
 
-# CREATE INDEX
+# インデックスの作成 {#create-index}
 
 This statement adds a new index to an existing table. It is an alternative syntax to [`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-alter-table.md), and included for MySQL compatibility.
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 CreateIndexStmt ::=
@@ -63,7 +63,7 @@ KeyOrIndex ::=
     'Key' | 'Index'
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -102,23 +102,23 @@ mysql> CREATE UNIQUE INDEX c1 ON t1 (c1);
 Query OK, 0 rows affected (0.31 sec)
 ```
 
-## Expression index
+## 表現インデックス {#expression-index}
 
-In some scenarios, the filtering condition of a query is based on a certain expression. In these scenarios, the query performance is relatively poor because ordinary indexes cannot take effect, the query can only be executed by scanning the entire table. The expression index is a type of special index that can be created on an expression. Once an expression index is created, TiDB can use the index for the expression-based query, which significantly improves the query performance.
+クエリのフィルタリング条件が特定の式に基づいているシナリオもあります。このようなシナリオでは、通常のインデックスが機能せず、テーブル全体をスキャンしてクエリを実行する必要があるため、クエリのパフォーマンスが比較的低下します。式インデックスは、式に基づいて作成できる特殊なインデックスの一種です。式インデックスを作成すると、TiDBは式ベースのクエリにそのインデックスを使用できるため、クエリのパフォーマンスが大幅に向上します。
 
-For example, if you want to create an index based on `LOWER(col1)`, execute the following SQL statement:
+たとえば、 `LOWER(col1)`に基づいてインデックスを作成する場合は、次の SQL ステートメントを実行します。
 
 ```sql
 CREATE INDEX idx1 ON t1 ((LOWER(col1)));
 ```
 
-Or you can execute the following equivalent statement:
+または、次の同等のステートメントを実行することもできます。
 
 ```sql
 ALTER TABLE t1 ADD INDEX idx1((LOWER(col1)));
 ```
 
-You can also specify the expression index when you create the table:
+テーブルを作成するときに式インデックスを指定することもできます。
 
 ```sql
 CREATE TABLE t1 (
@@ -128,11 +128,11 @@ CREATE TABLE t1 (
 );
 ```
 
-> **Note:**
+> **注記：**
 >
-> The expression in an expression index must be surrounded by `(` and `)`. Otherwise, a syntax error is reported.
+> 式インデックス内の式は`(`と`)`で囲む必要があります。囲まない場合は構文エラーが発生します。
 
-You can drop an expression index in the same way as dropping an ordinary index:
+通常のインデックスを削除するのと同じ方法で、式インデックスを削除できます。
 
 ```sql
 DROP INDEX idx1 ON t1;
@@ -140,42 +140,42 @@ DROP INDEX idx1 ON t1;
 
 Expression index involves various kinds of expressions. To ensure correctness, only some fully tested functions are allowed for creating an expression index. This means that only these functions are allowed in expressions in a production environment. You can get these functions by querying the [`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520) variable. Currently, the allowed functions are as follows:
 
-- [`JSON_ARRAY()`](/functions-and-operators/json-functions.md)
-- [`JSON_ARRAY_APPEND()`](/functions-and-operators/json-functions.md)
-- [`JSON_ARRAY_INSERT()`](/functions-and-operators/json-functions.md)
-- [`JSON_CONTAINS()`](/functions-and-operators/json-functions.md)
-- [`JSON_CONTAINS_PATH()`](/functions-and-operators/json-functions.md)
-- [`JSON_DEPTH()`](/functions-and-operators/json-functions.md)
-- [`JSON_EXTRACT()`](/functions-and-operators/json-functions.md)
-- [`JSON_INSERT()`](/functions-and-operators/json-functions.md)
-- [`JSON_KEYS()`](/functions-and-operators/json-functions.md)
-- [`JSON_LENGTH()`](/functions-and-operators/json-functions.md)
-- [`JSON_MERGE_PATCH()`](/functions-and-operators/json-functions.md)
-- [`JSON_MERGE_PRESERVE()`](/functions-and-operators/json-functions.md)
-- [`JSON_OBJECT()`](/functions-and-operators/json-functions.md)
-- [`JSON_PRETTY()`](/functions-and-operators/json-functions.md)
-- [`JSON_QUOTE()`](/functions-and-operators/json-functions.md)
-- [`JSON_REMOVE()`](/functions-and-operators/json-functions.md)
-- [`JSON_REPLACE()`](/functions-and-operators/json-functions.md)
-- [`JSON_SCHEMA_VALID()`](/functions-and-operators/json-functions/json-functions-validate.md)
-- [`JSON_SEARCH()`](/functions-and-operators/json-functions.md)
-- [`JSON_SET()`](/functions-and-operators/json-functions.md)
-- [`JSON_STORAGE_SIZE()`](/functions-and-operators/json-functions.md)
-- [`JSON_TYPE()`](/functions-and-operators/json-functions.md)
-- [`JSON_UNQUOTE()`](/functions-and-operators/json-functions.md)
-- [`JSON_VALID()`](/functions-and-operators/json-functions.md)
-- [`LOWER()`](/functions-and-operators/string-functions.md#lower)
-- [`MD5()`](/functions-and-operators/encryption-and-compression-functions.md)
-- [`REVERSE()`](/functions-and-operators/string-functions.md#reverse)
-- [`TIDB_SHARD()`](/functions-and-operators/tidb-functions.md#tidb_shard)
-- [`UPPER()`](/functions-and-operators/string-functions.md#upper)
-- [`VITESS_HASH()`](/functions-and-operators/tidb-functions.md)
+-   [`JSON_ARRAY()`](/functions-and-operators/json-functions.md)
+-   [`JSON_ARRAY_APPEND()`](/functions-and-operators/json-functions.md)
+-   [`JSON_ARRAY_INSERT()`](/functions-and-operators/json-functions.md)
+-   [`JSON_CONTAINS()`](/functions-and-operators/json-functions.md)
+-   [`JSON_CONTAINS_PATH()`](/functions-and-operators/json-functions.md)
+-   [`JSON_DEPTH()`](/functions-and-operators/json-functions.md)
+-   [`JSON_EXTRACT()`](/functions-and-operators/json-functions.md)
+-   [`JSON_INSERT()`](/functions-and-operators/json-functions.md)
+-   [`JSON_KEYS()`](/functions-and-operators/json-functions.md)
+-   [`JSON_LENGTH()`](/functions-and-operators/json-functions.md)
+-   [`JSON_MERGE_PATCH()`](/functions-and-operators/json-functions.md)
+-   [`JSON_MERGE_PRESERVE()`](/functions-and-operators/json-functions.md)
+-   [`JSON_OBJECT()`](/functions-and-operators/json-functions.md)
+-   [`JSON_PRETTY()`](/functions-and-operators/json-functions.md)
+-   [`JSON_QUOTE()`](/functions-and-operators/json-functions.md)
+-   [`JSON_REMOVE()`](/functions-and-operators/json-functions.md)
+-   [`JSON_REPLACE()`](/functions-and-operators/json-functions.md)
+-   [`JSON_SCHEMA_VALID()`](/functions-and-operators/json-functions/json-functions-validate.md)
+-   [`JSON_SEARCH()`](/functions-and-operators/json-functions.md)
+-   [`JSON_SET()`](/functions-and-operators/json-functions.md)
+-   [`JSON_STORAGE_SIZE()`](/functions-and-operators/json-functions.md)
+-   [`JSON_TYPE()`](/functions-and-operators/json-functions.md)
+-   [`JSON_UNQUOTE()`](/functions-and-operators/json-functions.md)
+-   [`JSON_VALID()`](/functions-and-operators/json-functions.md)
+-   [`LOWER()`](/functions-and-operators/string-functions.md#lower)
+-   [`MD5()`](/functions-and-operators/encryption-and-compression-functions.md)
+-   [`REVERSE()`](/functions-and-operators/string-functions.md#reverse)
+-   [`TIDB_SHARD()`](/functions-and-operators/tidb-functions.md#tidb_shard)
+-   [`UPPER()`](/functions-and-operators/string-functions.md#upper)
+-   [`VITESS_HASH()`](/functions-and-operators/tidb-functions.md)
 
-For the functions that are not included in the above list, those functions are not fully tested and not recommended for a production environment, which can be seen as experimental. Other expressions such as operators, `CAST`, and `CASE WHEN` are also seen as experimental and not recommended for production.
+上記のリストに含まれていない関数は、十分にテストされていないため、本番環境での使用は推奨されません。これは実験的とみなされます。演算子、 `CAST`などの他`CASE WHEN`式も実験的とみなされ、本番環境での本番は推奨されません。
 
 <CustomContent platform="tidb">
 
-If you still want to use those expressions, you can make the following configuration in the [TiDB configuration file](/tidb-configuration-file.md#allow-expression-index-new-in-v400):
+それでもこれらの式を使用したい場合は、 [TiDB構成ファイル](/tidb-configuration-file.md#allow-expression-index-new-in-v400)で次の設定を行うことができます。
 
 ```sql
 allow-expression-index = true
@@ -183,37 +183,37 @@ allow-expression-index = true
 
 </CustomContent>
 
-> **Note:**
+> **注記：**
 >
-> An expression index cannot be created on a primary key.
+> 主キーに式インデックスを作成することはできません。
 >
-> The expression in an expression index cannot contain the following content:
+> 式インデックス内の式には、次の内容を含めることはできません。
 >
-> - Volatile functions, such as `RAND()` and `NOW()`.
-> - [System variables](/system-variables.md) and [user variables](/user-defined-variables.md).
-> - Subqueries.
-> - [`AUTO_INCREMENT`](/auto-increment.md) columns. You can remove this restriction by setting the value of [`tidb_enable_auto_increment_in_generated`](/system-variables.md#tidb_enable_auto_increment_in_generated) (system variable) to `true`.
-> - [Window functions](/functions-and-operators/window-functions.md).
-> - ROW functions, such as `CREATE TABLE t (j JSON, INDEX k (((j,j))));`.
-> - [Aggregate functions](/functions-and-operators/aggregate-group-by-functions.md).
+> -   `RAND()`や`NOW()`などの揮発性関数。
+> -   [システム変数](/system-variables.md)と[ユーザー変数](/user-defined-variables.md) 。
+> -   サブクエリ。
+> -   [`AUTO_INCREMENT`](/auto-increment.md)列。この制限は、システム変数[`tidb_enable_auto_increment_in_generated`](/system-variables.md#tidb_enable_auto_increment_in_generated)の値を`true`に設定することで解除できます。
+> -   [ウィンドウ関数](/functions-and-operators/window-functions.md) 。
+> -   ROW関数(例: `CREATE TABLE t (j JSON, INDEX k (((j,j))));` )。
+> -   [集計関数](/functions-and-operators/aggregate-group-by-functions.md) 。
 >
-> An expression index implicitly takes up a name (for example, `_V$_{index_name}_{index_offset}`). If you try to create a new expression index with the name that a column has already had, an error occurs. In addition, if you add a new column with the same name, an error also occurs.
+> 式インデックスは暗黙的に名前（例： `_V$_{index_name}_{index_offset}` ）を取得します。列に既に設定されている名前で新しい式インデックスを作成しようとすると、エラーが発生します。また、同じ名前の新しい列を追加した場合もエラーが発生します。
 >
-> Make sure that the number of function parameters in the expression of an expression index is correct.
+> 式インデックスの式内の関数パラメータの数が正しいことを確認してください。
 >
-> When the expression of an index contains a string-related function, affected by the returned type and the length, creating the expression index might fail. In this situation, you can use the `CAST()` function to explicitly specify the returned type and the length. For example, to create an expression index based on the `REPEAT(a, 3)` expression, you need to modify this expression to `CAST(REPEAT(a, 3) AS CHAR(20))`.
+> インデックスの式に文字列関連の関数が含まれており、戻り値の型と長さの影響を受ける場合、式インデックスの作成に失敗する可能性があります。このような状況では、関数`CAST()`使用して、戻り値の型と長さを明示的に指定できます。例えば、式`REPEAT(a, 3)`に基づいて式インデックスを作成するには、この式を`CAST(REPEAT(a, 3) AS CHAR(20))`に変更する必要があります。
 
-When the expression in a query statement matches the expression in an expression index, the optimizer can choose the expression index for the query. In some cases, the optimizer might not choose an expression index depending on statistics. In this situation, you can force the optimizer to select an expression index by using optimizer hints.
+クエリ文内の式が式インデックス内の式と一致する場合、オプティマイザはクエリに対して式インデックスを選択できます。ただし、統計情報によっては、オプティマイザが式インデックスを選択しない場合もあります。このような場合は、オプティマイザヒントを使用することで、オプティマイザに式インデックスを選択させることができます。
 
-In the following examples, suppose that you create the expression index `idx` on the expression `LOWER(col1)`:
+次の例では、式`LOWER(col1)`に式インデックス`idx`作成するとします。
 
-If the results of the query statement are the same expressions, the expression index applies. Take the following statement as an example:
+クエリ文の結果が同じ式である場合、式インデックスが適用されます。次の文を例に挙げます。
 
 ```sql
 SELECT LOWER(col1) FROM t;
 ```
 
-If the same expression is included in the filtering conditions, the expression index applies. Take the following statements as an example:
+フィルタリング条件に同じ式が含まれている場合、式インデックスが適用されます。以下の文を例に挙げます。
 
 ```sql
 SELECT * FROM t WHERE LOWER(col1) = "a";
@@ -224,30 +224,30 @@ SELECT * FROM t WHERE LOWER(col1) > "a" AND LOWER(col1) < "b";
 SELECT * FROM t WHERE LOWER(col1) > "b" OR LOWER(col1) < "a";
 ```
 
-When the queries are sorted by the same expression, the expression index applies. Take the following statement as an example:
+クエリが同じ式でソートされている場合、式インデックスが適用されます。次の文を例に挙げましょう。
 
 ```sql
 SELECT * FROM t ORDER BY LOWER(col1);
 ```
 
-If the same expression is included in the aggregate (`GROUP BY`) functions, the expression index applies. Take the following statements as an example:
+同じ式が集約関数（ `GROUP BY` ）に含まれている場合、式のインデックスが適用されます。次の文を例に挙げましょう。
 
 ```sql
 SELECT MAX(LOWER(col1)) FROM t;
 SELECT MIN(col1) FROM t GROUP BY LOWER(col1);
 ```
 
-To see the expression corresponding to the expression index, execute [`SHOW INDEX`](/sql-statements/sql-statement-show-indexes.md), or check the system tables [`information_schema.tidb_indexes`](/information-schema/information-schema-tidb-indexes.md) and the table [`information_schema.STATISTICS`](/information-schema/information-schema-statistics.md). The `Expression` column in the output indicates the corresponded expression. For the non-expression indexes, the column shows `NULL`.
+式インデックスに対応する式を確認するには、 [`SHOW INDEX`](/sql-statements/sql-statement-show-indexes.md)実行するか、システムテーブル[`information_schema.tidb_indexes`](/information-schema/information-schema-tidb-indexes.md)とテーブル[`information_schema.STATISTICS`](/information-schema/information-schema-statistics.md)を確認してください。出力の`Expression`列が対応する式を示します。式以外のインデックスの場合、この列には`NULL`表示されます。
 
-The cost of maintaining an expression index is higher than that of maintaining other indexes, because the value of the expression needs to be calculated whenever a row is inserted or updated. The value of the expression is already stored in the index, so this value does not require recalculation when the optimizer selects the expression index.
+式インデックスの維持コストは、行が挿入または更新されるたびに式の値を計算する必要があるため、他のインデックスの維持コストよりも高くなります。式の値は既にインデックスに格納されているため、オプティマイザが式インデックスを選択する際に再計算する必要はありません。
 
-Therefore, when the query performance outweighs the insert and update performance, you can consider indexing the expressions.
+したがって、クエリのパフォーマンスが挿入および更新のパフォーマンスを上回る場合は、式のインデックス作成を検討できます。
 
-Expression indexes have the same syntax and limitations as in MySQL. They are implemented by creating indexes on generated virtual columns that are invisible, so the supported expressions inherit all [limitations of virtual generated columns](/generated-columns.md#limitations).
+式インデックスはMySQLと同じ構文と制限事項を持ちます。生成された仮想列（非表示）にインデックスを作成することで実装されるため、サポートされる式はすべて[仮想生成列の制限](/generated-columns.md#limitations)継承します。
 
-## Multi-valued indexes
+## 多値インデックス {#multi-valued-indexes}
 
-Multi-valued indexes are a kind of secondary index defined on an array column. In a normal index, one index record corresponds to one data record (1:1). In a multi-valued index, multiple index records correspond to one data record (N:1). Multi-valued indexes are used to index JSON arrays. For example, a multi-valued index defined on the `zipcode` field will generate one index record for each element in the `zipcode` array.
+多値インデックスは、配列の列に定義されるセカンダリインデックスの一種です。通常のインデックスでは、1つのインデックスレコードが1つのデータレコードに対応します（1:1）。多値インデックスでは、複数のインデックスレコードが1つのデータレコードに対応します（N:1）。多値インデックスはJSON配列のインデックス作成に使用されます。例えば、 `zipcode`フィールドに多値インデックスを定義すると、配列`zipcode`各要素に対して1つのインデックスレコードが生成されます。
 
 ```json
 {
@@ -257,9 +257,9 @@ Multi-valued indexes are a kind of secondary index defined on an array column. I
 }
 ```
 
-### Create multi-valued indexes
+### 複数値インデックスを作成する {#create-multi-valued-indexes}
 
-You can create multi-valued indexes by using the [`CAST(... AS ... ARRAY)`](/functions-and-operators/cast-functions-and-operators.md#cast) function in the index definition, as creating an expression index.
+式インデックスを作成する場合と同様に、インデックス定義で[`CAST(... AS ... ARRAY)`](/functions-and-operators/cast-functions-and-operators.md#cast)関数を使用して、複数値インデックスを作成できます。
 
 ```sql
 mysql> CREATE TABLE customers (
@@ -270,7 +270,7 @@ mysql> CREATE TABLE customers (
 );
 ```
 
-You can define a multi-valued index as a unique index.
+複数値インデックスを一意のインデックスとして定義できます。
 
 ```sql
 mysql> CREATE TABLE customers (
@@ -281,7 +281,7 @@ mysql> CREATE TABLE customers (
 );
 ```
 
-When a multi-valued index is defined as a unique index, an error is reported if you try to insert duplicate data.
+複数値インデックスが一意のインデックスとして定義されている場合、重複するデータを挿入しようとするとエラーが報告されます。
 
 ```sql
 mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": [1,2]}');
@@ -291,7 +291,7 @@ mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": [2,3]}');
 ERROR 1062 (23000): Duplicate entry '2' for key 'customers.zips'
 ```
 
-The same record can have duplicate values, but when different records have duplicate values, an error is reported.
+同じレコードに重複した値が存在する可能性がありますが、異なるレコードに重複した値が存在する場合はエラーが報告されます。
 
 ```sql
 -- Insert succeeded
@@ -303,7 +303,7 @@ mysql> INSERT INTO t1 VALUES('[1,2]');
 mysql> INSERT INTO t1 VALUES('[2,3]');
 ```
 
-You can also define a multi-valued index as a composite index:
+複数値インデックスを複合インデックスとして定義することもできます。
 
 ```sql
 mysql> CREATE TABLE customers (
@@ -314,7 +314,7 @@ mysql> CREATE TABLE customers (
 );
 ```
 
-When a multi-valued index is defined as a composite index, the multi-valued part can appear in any position, but only once.
+複数値インデックスが複合インデックスとして定義されている場合、複数値部分は任意の位置に出現できますが、出現できるのは 1 回だけです。
 
 ```sql
 mysql> CREATE TABLE customers (
@@ -326,7 +326,7 @@ mysql> CREATE TABLE customers (
 ERROR 1235 (42000): This version of TiDB doesn't yet support 'more than one multi-valued key part per index'.
 ```
 
-The written data must exactly match the type defined by the multi-valued index; otherwise, the data write fails:
+書き込まれるデータは、複数値インデックスで定義された型と完全に一致する必要があります。一致しない場合、データの書き込みは失敗します。
 
 ```sql
 -- All elements in the zipcode field must be the UNSIGNED type.
@@ -340,24 +340,24 @@ mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": [1]}');
 Query OK, 1 row affected (0.00 sec)
 ```
 
-### Use multi-valued indexes
+### 複数値インデックスを使用する {#use-multi-valued-indexes}
 
-See [Index Selection - Use multi-valued indexes](/choose-index.md#use-multi-valued-indexes) for more details.
+詳細は[インデックスの選択 - 複数値インデックスを使用する](/choose-index.md#use-multi-valued-indexes)ご覧ください。
 
-### Limitations
+### Limitations {#limitations}
 
-- For an empty JSON array, no corresponding index record is generated.
-- The target type in `CAST(... AS ... ARRAY)` cannot be any of `BINARY`, `JSON`, `YEAR`, `FLOAT`, and `DECIMAL`. The source type must be JSON.
-- You cannot use multi-valued indexes for sorting.
-- You can only create multi-valued indexes on a JSON array.
-- A multi-valued index cannot be a primary key or a foreign key.
-- The extra storage space used by a multi-valued index = the average number of array elements per row * the space used by a normal secondary index.
-- Compared with normal indexes, DML operations will modify more index records for multi-valued indexes, so multi-valued indexes will have a greater performance impact than normal indexes.
-- Because multi-valued indexes are a special type of expression index, multi-valued indexes have the same limitations as expression indexes.
-- If a table uses multi-valued indexes, you cannot back up, replicate, or import the table using BR, TiCDC, or TiDB Lightning to a TiDB cluster earlier than v6.6.0.
-- For a query with complex conditions, TiDB might not be able to select multi-valued indexes. For information on the condition patterns supported by multi-valued indexes, refer to [Use multi-valued indexes](/choose-index.md#use-multi-valued-indexes).
+-   For an empty JSON array, no corresponding index record is generated.
+-   The target type in `CAST(... AS ... ARRAY)` cannot be any of `BINARY`, `JSON`, `YEAR`, `FLOAT`, and `DECIMAL`. The source type must be JSON.
+-   You cannot use multi-valued indexes for sorting.
+-   You can only create multi-valued indexes on a JSON array.
+-   A multi-valued index cannot be a primary key or a foreign key.
+-   The extra storage space used by a multi-valued index = the average number of array elements per row * the space used by a normal secondary index.
+-   Compared with normal indexes, DML operations will modify more index records for multi-valued indexes, so multi-valued indexes will have a greater performance impact than normal indexes.
+-   Because multi-valued indexes are a special type of expression index, multi-valued indexes have the same limitations as expression indexes.
+-   If a table uses multi-valued indexes, you cannot back up, replicate, or import the table using BR, TiCDC, or TiDB Lightning to a TiDB cluster earlier than v6.6.0.
+-   複雑な条件を持つクエリの場合、TiDBは複数値インデックスを選択できない可能性があります。複数値インデックスでサポートされる条件パターンについては、 [複数値インデックスを使用する](/choose-index.md#use-multi-valued-indexes)を参照してください。
 
-## Invisible index
+## Invisible index {#invisible-index}
 
 By default, invisible indexes are indexes that are ignored by the query optimizer:
 
@@ -366,33 +366,33 @@ CREATE TABLE t1 (c1 INT, c2 INT, UNIQUE(c2));
 CREATE UNIQUE INDEX c1 ON t1 (c1) INVISIBLE;
 ```
 
-Starting from TiDB v8.0.0, you can make the optimizer select invisible indexes by modifying the system variable [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800).
+TiDB v8.0.0 以降では、システム変数[`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)変更することで、オプティマイザーが非表示のインデックスを選択するようにすることができます。
 
-For details, see [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md).
+詳細は[`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)参照。
 
-## Associated system variables
+## Associated system variables {#associated-system-variables}
 
-The system variables associated with the `CREATE INDEX` statement are `tidb_ddl_enable_fast_reorg`, `tidb_ddl_reorg_worker_cnt`, `tidb_ddl_reorg_batch_size`, `tidb_enable_auto_increment_in_generated`, and `tidb_ddl_reorg_priority`. Refer to [system variables](/system-variables.md#tidb_ddl_reorg_worker_cnt) for details.
+`CREATE INDEX`文に関連付けられているシステム変数は`tidb_ddl_enable_fast_reorg` 、 `tidb_ddl_reorg_worker_cnt` 、 `tidb_ddl_reorg_batch_size` 、 `tidb_enable_auto_increment_in_generated` 、 `tidb_ddl_reorg_priority`です。詳細は[システム変数](/system-variables.md#tidb_ddl_reorg_worker_cnt)を参照してください。
 
-## MySQL compatibility
+## MySQL compatibility {#mysql-compatibility}
 
-* TiDB supports parsing the `FULLTEXT` syntax but does not support using the `FULLTEXT`, `HASH`, and `SPATIAL` indexes.
-* TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax for compatibility with MySQL, but ignores them.
-* Descending indexes are not supported (similar to MySQL 5.7).
-* Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
-* Expression indexes are incompatible with views. When a query is executed using a view, the expression index cannot be used at the same time.
-* Expression indexes have compatibility issues with bindings. When the expression of an expression index has a constant, the binding created for the corresponding query expands its scope. For example, suppose that the expression in the expression index is `a+1`, and the corresponding query condition is `a+1 > 2`. In this case, the created binding is `a+? > ?`, which means that the query with the condition such as `a+2 > 2` is also forced to use the expression index and results in a poor execution plan. In addition, this also affects the baseline capturing and baseline evolution in SQL Plan Management (SPM).
-* The data written with multi-valued indexes must exactly match the defined data type. Otherwise, data writes fail. For details, see [create multi-valued indexes](/sql-statements/sql-statement-create-index.md#create-multi-valued-indexes).
-* Setting a `UNIQUE KEY` as a [global index](/partitioned-table.md#global-indexes) with the `GLOBAL` index option is a TiDB extension for [partitioned tables](/partitioned-table.md) and is not compatible with MySQL.
+-   TiDB supports parsing the `FULLTEXT` syntax but does not support using the `FULLTEXT`, `HASH`, and `SPATIAL` indexes.
+-   TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax for compatibility with MySQL, but ignores them.
+-   Descending indexes are not supported (similar to MySQL 5.7).
+-   `CLUSTERED`型の主キーをテーブルに追加することはサポートされていません。3 型`CLUSTERED`主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
+-   Expression indexes are incompatible with views. When a query is executed using a view, the expression index cannot be used at the same time.
+-   Expression indexes have compatibility issues with bindings. When the expression of an expression index has a constant, the binding created for the corresponding query expands its scope. For example, suppose that the expression in the expression index is `a+1`, and the corresponding query condition is `a+1 > 2`. In this case, the created binding is `a+? > ?`, which means that the query with the condition such as `a+2 > 2` is also forced to use the expression index and results in a poor execution plan. In addition, this also affects the baseline capturing and baseline evolution in SQL Plan Management (SPM).
+-   多値インデックスで書き込まれるデータは、定義されたデータ型と完全に一致する必要があります。一致しない場合、データの書き込みは失敗します。詳細については、 [複数値インデックスを作成する](/sql-statements/sql-statement-create-index.md#create-multi-valued-indexes)参照してください。
+-   `GLOBAL`インデックス オプションを使用して`UNIQUE KEY` [グローバルインデックス](/partitioned-table.md#global-indexes)として設定することは、 [パーティションテーブル](/partitioned-table.md)の TiDB 拡張であり、MySQL とは互換性がありません。
 
-## See also
+## See also {#see-also}
 
-* [Index Selection](/choose-index.md)
-* [Wrong Index Solution](/wrong-index-solution.md)
-* [ADD INDEX](/sql-statements/sql-statement-add-index.md)
-* [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
-* [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
-* [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
-* [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-* [EXPLAIN](/sql-statements/sql-statement-explain.md)
+-   [インデックスの選択](/choose-index.md)
+-   [インデックス問題の解決方法](/wrong-index-solution.md)
+-   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
+-   [インデックスの削除](/sql-statements/sql-statement-drop-index.md)
+-   [インデックス名の変更](/sql-statements/sql-statement-rename-index.md)
+-   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)
+-   [列を追加](/sql-statements/sql-statement-add-column.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [EXPLAIN](/sql-statements/sql-statement-explain.md)

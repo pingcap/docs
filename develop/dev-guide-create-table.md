@@ -1,65 +1,63 @@
 ---
 title: Create a Table
-summary: Learn the definitions, rules, and guidelines in table creation.
+summary: テーブル作成における定義、ルール、ガイドラインを学習します。
 ---
 
-# Create a Table
+# テーブルを作成する {#create-a-table}
 
-This document introduces how to create tables using the SQL statement and the related best practices. An example of the TiDB-based [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application is provided to illustrate the best practices.
+このドキュメントでは、SQL文を使用してテーブルを作成する方法と、関連するベストプラクティスを紹介します。ベストプラクティスを説明するために、TiDBベースの[書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションの例を示します。
 
-## Before you start
+## 始める前に {#before-you-start}
 
-Before reading this document, make sure that the following tasks are completed:
+このドキュメントを読む前に、次のタスクが完了していることを確認してください。
 
-- [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
-- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
-- [Create a Database](/develop/dev-guide-create-database.md).
+-   [TiDB Cloudサーバーレスクラスタの構築](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)読んでください。
+-   [データベースを作成する](/develop/dev-guide-create-database.md) 。
 
-## What is a table
+## テーブルとは何か {#what-is-a-table}
 
-A [table](/develop/dev-guide-schema-design-overview.md#table) is a logical object in TiDB cluster that is subordinate to the [database](/develop/dev-guide-schema-design-overview.md#database). It is used to store the data sent from SQL statements. Tables save data records in the form of rows and columns. A table has at least one column. If you have defined `n` columns, each row of data has exactly the same fields as the `n` columns.
+[テーブル](/develop/dev-guide-schema-design-overview.md#table) TiDB クラスター内の[データベース](/develop/dev-guide-schema-design-overview.md#database)に従属する論理オブジェクトです。SQL 文から送信されたデータを格納するために使用されます。テーブルは行と列の形式でデータレコードを保存します。テーブルには少なくとも 1 つの列が含まれます。5 `n`列を定義した場合、各データ行には`n`列と全く同じフィールドが含まれます。
 
-## Name a table
+## テーブルに名前を付ける {#name-a-table}
 
-The first step for creating a table is to give your table a name. Do not use meaningless names that will cause great distress to yourself or your colleagues in the future. It is recommended that you follow your company or organization's table naming convention.
+テーブルを作成する最初のステップは、テーブルに名前を付けることです。将来的に自分自身や同僚に大きな迷惑をかけるような、意味のない名前は使用しないでください。会社または組織のテーブル命名規則に従うことをお勧めします。
 
-The `CREATE TABLE` statement usually takes the following form:
+`CREATE TABLE`ステートメントは通常、次の形式になります。
 
 ```sql
 CREATE TABLE {table_name} ( {elements} );
 ```
 
-**Parameter description**
+**パラメータの説明**
 
-- `{table_name}`: The name of the table to be created.
-- `{elements}`: A comma-separated list of table elements, such as column definitions and primary key definitions.
+-   `{table_name}` : 作成するテーブルの名前。
+-   `{elements}` : 列定義や主キー定義などのテーブル要素のコンマ区切りリスト。
 
-Suppose you need to create a table to store the user information in the `bookshop` database.
+`bookshop`データベースにユーザー情報を格納するためのテーブルを作成する必要があるとします。
 
-Note that you cannot execute the following SQL statement yet because not a single column has been added.
+まだ列が 1 つも追加されていないため、次の SQL ステートメントを実行できないことに注意してください。
 
 ```sql
 CREATE TABLE `bookshop`.`users` (
 );
 ```
 
-## Define columns
+## 列を定義する {#define-columns}
 
-A **column** is subordinate to a table. Each table has at least one column. Columns provide a structure to a table by dividing the values in each row into small cells of a single data type.
+**列**はテーブルに従属します。各テーブルには少なくとも1つの列が含まれます。列は、各行の値を単一のデータ型の小さなセルに分割することで、テーブルに構造を提供します。
 
-Column definitions typically take the following form.
+カラム定義は通常、次の形式になります。
 
-```
-{column_name} {data_type} {column_qualification}
-```
+    {column_name} {data_type} {column_qualification}
 
-**Parameter description**
+**パラメータの説明**
 
-- `{column_name}`: The column name.
-- `{data_type}`: The column [data type](/data-type-overview.md).
-- `{column_qualification}`: Column qualifications, such as **column-level constraints** or [generated column](/generated-columns.md) clauses.
+-   `{column_name}` : 列名。
+-   `{data_type}` : 列[データ型](/data-type-overview.md) 。
+-   `{column_qualification}` :**列レベルの制約**や[生成された列](/generated-columns.md)句などのカラム修飾。
 
-You can add some columns to the `users` table, such as the unique identifier `id`, `balance` and `nickname`.
+`users`テーブルに、一意の識別子`id` 、 `balance` 、 `nickname`などのいくつかの列を追加できます。
 
 ```sql
 CREATE TABLE `bookshop`.`users` (
@@ -69,15 +67,15 @@ CREATE TABLE `bookshop`.`users` (
 );
 ```
 
-In the above statement, a field is defined with the name `id` and the type [bigint](/data-type-numeric.md#bigint-type). This is used to represent a unique user identifier. This means that all user identifiers should be of the `bigint` type.
+上記の文では、名前が`id` 、型が[ビッグインテント](/data-type-numeric.md#bigint-type)フィールドが定義されています。これは、一意のユーザー識別子を表すために使用されます。つまり、すべてのユーザー識別子は`bigint`型である必要があります。
 
-Then, a field named `nickname` is defined, which is the [varchar](/data-type-string.md#varchar-type) type, with a length limit of 100 characters. This means that the `nicknames` of the users use the `varchar` type and are not longer than 100 characters.
+次に、 `nickname`というフィールドが定義されます。これは[varchar](/data-type-string.md#varchar-type)型で、長さ制限は100文字です。つまり、ユーザーのうち`nicknames`は`varchar`型を使用し、100文字を超えないことを意味します。
 
-Finally, a field named `balance` is added, which is the [decimal](/data-type-numeric.md#decimal-type) type, with a **precision** of `15` and a **scale** of `2`. **Precision** represents the total number of digits in the field, and **scale** represents the number of decimal places. For example, `decimal(5,2)` means a precision of `5` and a scale of `2`, with the range from `-999.99` to `999.99`. `decimal(6,1)` means a precision of `6` and a scale of `1`, with the range from `-99999.9` to `99999.9`. **decimal** is a [fixed-point types](/data-type-numeric.md#fixed-point-types), which can be used to store numbers accurately. In scenarios where accurate numbers are needed (for example, user property-related), make sure that you use the **decimal** type.
+最後に、 `balance`という名前のフィールドが追加されます。これは[小数点](/data-type-numeric.md#decimal-type)型で、**精度**は`15` 、**スケール**は`2`です。**精度は**フィールド内の桁数を表し、**スケールは**小数点以下の桁数を表します。たとえば、 `decimal(5,2)`精度が`5` 、スケールが`2`で、範囲は`-999.99`から`999.99`です。 `decimal(6,1)`精度が`6` 、スケールが`1`で、範囲は`-99999.9`から`99999.9`です。**小数点**は[固定小数点型](/data-type-numeric.md#fixed-point-types)で、数値を正確に格納するために使用できます。正確な数値が必要なシナリオ（ユーザープロパティ関連など）では、必ず**小数点**型を使用してください。
 
-TiDB supports many other column data types, including the [integer types](/data-type-numeric.md#integer-types), [floating-point types](/data-type-numeric.md#floating-point-types), [fixed-point types](/data-type-numeric.md#fixed-point-types), [date and time types](/data-type-date-and-time.md), and the [enum type](/data-type-string.md#enum-type). You can refer to the supported column [data types](/data-type-overview.md) and use the **data types** that match the data you want to save in the database.
+TiDBは、 [整数型](/data-type-numeric.md#integer-types) 、 [浮動小数点型](/data-type-numeric.md#floating-point-types) 、 [固定小数点型](/data-type-numeric.md#fixed-point-types) 、 [日付と時刻の型](/data-type-date-and-time.md) 、 [列挙型](/data-type-string.md#enum-type)など、他の多くの列データ型をサポートしています。サポートされている列[データ型](/data-type-overview.md)を参照し、データベースに保存するデータに一致する**データ型**を使用できます。
 
-To make it a bit more complex, you can define a `books` table which will be the core of the `bookshop` data. The `books` table contains fields for the book's ids, titles, types (for example, magazine, novel, life, arts), stock, prices, and publication dates.
+もう少し複雑にするには、 `bookshop`データの中核となる`books`テーブルを定義します。5番目`books`テーブルには、書籍のID、タイトル、種類（例：雑誌、小説、生活、芸術）、在庫、価格、出版日などのフィールドが含まれます。
 
 ```sql
 CREATE TABLE `bookshop`.`books` (
@@ -90,37 +88,37 @@ CREATE TABLE `bookshop`.`books` (
 );
 ```
 
-This table contains more data types than the `users` table.
+このテーブルには、 `users`テーブルよりも多くのデータ型が含まれています。
 
-- [int](/data-type-numeric.md#integer-types): It is recommended to use the type of right size to avoid using too much disk or even affecting performance (too large a type range) or data overflow (too small a data type range).
-- [datetime](/data-type-date-and-time.md): The **datetime** type can be used to store time values.
-- [enum](/data-type-string.md#enum-type): The enum type can be used to store a limited selection of values.
+-   [整数](/data-type-numeric.md#integer-types) : ディスクの使用量が増えたり、パフォーマンスに影響したり (型の範囲が大きすぎる)、データのオーバーフロー (データ型の範囲が小さすぎる) しないように、適切なサイズの型を使用することをお勧めします。
+-   [日時](/data-type-date-and-time.md) : **datetime**型は時刻値を保存するために使用できます。
+-   [列挙型](/data-type-string.md#enum-type) : 列挙型は、限られた値の選択を格納するために使用できます。
 
-## Select primary key
+## 主キーを選択 {#select-primary-key}
 
-A [primary key](/constraints.md#primary-key) is a column or a set of columns in a table whose values uniquely identify a row in the table.
+[主キー](/constraints.md#primary-key)テーブル内の列または列セットであり、その値によってテーブル内の行が一意に識別されます。
 
-> **Note:**
+> **注記：**
 >
-> The default definition of **primary key** in TiDB is different from that in [InnoDB](https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html)(the common storage engine of MySQL).
+> TiDB の**主キー**のデフォルト定義は、 [インノDB](https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html) (MySQL の共通storageエンジン) のものと異なります。
 >
-> - In **InnoDB**: A **primary key** is unique, not null, and **index clustered**.
+> -   **InnoDB**の場合:**主キーは**一意であり、null ではなく、**インデックスがクラスター化されます**。
 >
-> - In TiDB: A **primary key** is unique and is not null. But the primary key is not guaranteed to be a **clustered index**. Instead, another set of keywords `CLUSTERED` / `NONCLUSTERED` additionally controls whether the **primary key** is a **clustered index**. If the keyword is not specified, it is controlled by the system variable `@@global.tidb_enable_clustered_index`, as described in [clustered indexes](https://docs.pingcap.com/tidb/stable/clustered-indexes).
+> -   TiDBの場合：**主キーは**一意であり、NULLではありません。ただし、主キーが**クラスター化インデックス**であるとは限りません。代わりに、別`NONCLUSTERED`キーワードセット`CLUSTERED`によって、**主キーが****クラスター化インデックス**であるかどうかが制御されます。このキーワードが指定されていない場合は、 [クラスター化インデックス](https://docs.pingcap.com/tidb/stable/clustered-indexes)で説明されているように、システム変数`@@global.tidb_enable_clustered_index`によって制御されます。
 
-The **primary key** is defined in the `CREATE TABLE` statement. The [primary key constraint](/constraints.md#primary-key) requires that all constrained columns contain only non-NULL values.
+**主キー**は`CREATE TABLE`ステートメントで定義されます。5 [主キー制約](/constraints.md#primary-key)ステートメントでは、制約されたすべての列にNULL以外の値のみが含まれることが要求されます。
 
-A table can be created without a **primary key** or with a non-integer **primary key**. In this case, TiDB creates a `_tidb_rowid` as an **implicit primary key**. The implicit primary key `_tidb_rowid`, because of its monotonically increasing nature, might cause write hotspots in write-intensive scenarios. Therefore, if your application is write-intensive, consider sharding data using the [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) and [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) parameters. However, this might lead to read amplification, so you need to make your own trade-off.
+テーブルは**主キー**なしで、または整数以外の**主キー**で作成できます。この場合、TiDBは**暗黙的な主キー**として`_tidb_rowid`作成します。暗黙的な主キー`_tidb_rowid`単調に増加するため、書き込み集中型のシナリオでは書き込みホットスポットが発生する可能性があります。したがって、アプリケーションが書き込み集中型の場合は、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)と[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)パラメータを使用してデータをシャーディングすることを検討してください。ただし、これはリードアンプリフィケーションにつながる可能性があるため、ご自身でトレードオフを検討する必要があります。
 
-When the **primary key** of a table is an [integer type](/data-type-numeric.md#integer-types) and `AUTO_INCREMENT` is used, hotspots cannot be avoided by using `SHARD_ROW_ID_BITS`. If you need to avoid hotspots and do not need a continuous and incremental primary key, you can use [`AUTO_RANDOM`](/auto-random.md) instead of `AUTO_INCREMENT` to eliminate row ID continuity.
+テーブルの**主キー**が[整数型](/data-type-numeric.md#integer-types)で、かつ`AUTO_INCREMENT`使用されている場合、 `SHARD_ROW_ID_BITS`を使用してもホットスポットを回避することはできません。ホットスポットを回避する必要があり、連続した増分主キーを必要としない場合は、 `AUTO_INCREMENT`ではなく[`AUTO_RANDOM`](/auto-random.md)使用して行IDの連続性を排除できます。
 
 <CustomContent platform="tidb">
 
-For more information on how to handle hotspot issues, refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
+ホットスポットの問題の処理方法の詳細については、 [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。
 
 </CustomContent>
 
-Following the [guidelines for selecting primary key](#guidelines-to-follow-when-selecting-primary-key), the following example shows how an `AUTO_RANDOM` primary key is defined in the `users` table.
+[主キーの選択に関するガイドライン](#guidelines-to-follow-when-selecting-primary-key)に続いて、次の例は`users`テーブルで`AUTO_RANDOM`主キーがどのように定義されるかを示しています。
 
 ```sql
 CREATE TABLE `bookshop`.`users` (
@@ -131,27 +129,27 @@ CREATE TABLE `bookshop`.`users` (
 );
 ```
 
-## Clustered or not
+## クラスター化されているかどうか {#clustered-or-not}
 
-TiDB supports the [clustered index](/clustered-indexes.md) feature since v5.0. This feature controls how data is stored in tables containing primary keys. It provides TiDB the ability to organize tables in a way that can improve the performance of certain queries.
+TiDBはバージョン5.0以降、 [クラスター化インデックス](/clustered-indexes.md)機能をサポートしています。この機能は、主キーを含むテーブルへのデータの格納方法を制御します。これにより、TiDBは特定のクエリのパフォーマンスを向上させる方法でテーブルを整理できるようになります。
 
-The term clustered in this context refers to the organization of how data is stored and not a group of database servers working together. Some database management systems refer to clustered index tables as index-organized tables (IOT).
+ここでの「クラスター化」という用語は、データの格納方法の構成を指し、連携して動作するデータベースサーバーのグループを指すものではありません。一部のデータベース管理システムでは、クラスター化インデックステーブルをインデックス構成テーブル（IOT）と呼びます。
 
-Currently, tables **_containing primary_** keys in TiDB are divided into the following two categories:
+現在、TiDB の***主キーを含む***テーブルは次の 2 つのカテゴリに分類されます。
 
-- `NONCLUSTERED`: The primary key of the table is non-clustered index. In tables with non-clustered indexes, the keys for row data consist of internal `_tidb_rowid` implicitly assigned by TiDB. Because primary keys are essentially unique indexes, tables with non-clustered indexes need at least two key-value pairs to store a row, which are:
-    - `_tidb_rowid` (key) - row data (value)
-    - Primary key data (key) - `_tidb_rowid` (value)
-- `CLUSTERED`: The primary key of the table is clustered index. In tables with clustered indexes, the keys for row data consist of primary key data given by the user. Therefore, tables with clustered indexes need only one key-value pair to store a row, which is:
-    - Primary key data (key) - row data (value)
+-   `NONCLUSTERED` : テーブルの主キーは非クラスター化インデックスです。非クラスター化インデックスを持つテーブルでは、行データのキーはTiDBによって暗黙的に割り当てられた内部`_tidb_rowid`で構成されます。主キーは本質的に一意のインデックスであるため、非クラスター化インデックスを持つテーブルでは、行を格納するために少なくとも2つのキーと値のペアが必要です。これらのペアは次のとおりです。
+    -   `_tidb_rowid` (キー) - 行データ (値)
+    -   主キーデータ（キー） - `_tidb_rowid` （値）
+-   `CLUSTERED` : テーブルの主キーはクラスター化インデックスです。クラスター化インデックスを持つテーブルでは、行データのキーはユーザーが指定した主キーデータで構成されます。したがって、クラスター化インデックスを持つテーブルでは、行を格納するために必要なキーと値のペアは1つだけです。これは次のようになります。
+    -   主キーデータ（キー） - 行データ（値）
 
-As described in [select primary key](#select-primary-key), **clustered indexes** are controlled in TiDB using the keywords `CLUSTERED` and `NONCLUSTERED`.
+[主キーを選択](#select-primary-key)で説明したように、**クラスター化インデックスは**TiDB ではキーワード`CLUSTERED`と`NONCLUSTERED`使用して制御されます。
 
-> **Note:**
+> **注記：**
 >
-> TiDB supports clustering only by a table's `PRIMARY KEY`. With clustered indexes enabled, the terms _the_ `PRIMARY KEY` and _the clustered index_ might be used interchangeably. `PRIMARY KEY` refers to the constraint (a logical property), and clustered index describes the physical implementation of how the data is stored.
+> TiDB は、テーブルの`PRIMARY KEY`によるクラスタリングのみをサポートします。クラスター化インデックスが有効になっている場合、 *「* `PRIMARY KEY`と*「クラスター化インデックス」*は同じ意味で使用できます。 `PRIMARY KEY`は制約（論理プロパティ）を指し、「クラスター化インデックス」はデータの格納方法の物理的な実装を表します。
 
-Following the [guidelines for selecting clustered index](#guidelines-to-follow-when-selecting-clustered-index), the following example creates a table with an association between `books` and `users`, which represents the `ratings` of a `book` by `users`. The example creates the table and constructs a composite primary key using `book_id` and `user_id`, and creates a **clustered index** on that **primary key**.
+次の例では、 [クラスター化インデックスの選択に関するガイドライン](#guidelines-to-follow-when-selecting-clustered-index)に続いて、 `books`と`users` （ `book` × `users`の`ratings`表す）を関連付けたテーブルを作成します。この例では、テーブルを作成し、 `book_id`と`user_id`使用して複合主キーを構築し、その**主キー**に**クラスター化インデックス**を作成します。
 
 ```sql
 CREATE TABLE `bookshop`.`ratings` (
@@ -163,15 +161,15 @@ CREATE TABLE `bookshop`.`ratings` (
 );
 ```
 
-## Add column constraints
+## 列制約を追加する {#add-column-constraints}
 
-In addition to [primary key constraints](#select-primary-key), TiDB also supports other **column constraints** such as [NOT NULL](/constraints.md#not-null) constraint, [UNIQUE KEY](/constraints.md#unique-key) constraint, and `DEFAULT`. For complete constraints, refer to the [TiDB constraints](/constraints.md) document.
+TiDBは、 [主キー制約](#select-primary-key)に加えて、 [NULLではない](/constraints.md#not-null)制約、 [ユニークキー](/constraints.md#unique-key)制約、 `DEFAULT`などの他の**列制約**もサポートしています。完全な制約については、 [TiDB制約](/constraints.md)ドキュメントを参照してください。
 
-### Set default value
+### デフォルト値を設定する {#set-default-value}
 
-To set a default value on a column, use the `DEFAULT` constraint. The default value allows you to insert data without specifying a value for each column.
+列にデフォルト値を設定するには、 `DEFAULT`制約を使用します。デフォルト値を使用すると、各列に値を指定せずにデータを挿入できます。
 
-You can use `DEFAULT` together with [supported SQL functions](/functions-and-operators/functions-and-operators-overview.md) to move the calculation of defaults out of the application layer, thus saving resources of the application layer. The resources consumed by the calculation do not disappear and are moved to the TiDB cluster. Commonly, you can insert data with the default time. The following exemplifies setting the default value in the `ratings` table:
+`DEFAULT`と[サポートされているSQL関数](/functions-and-operators/functions-and-operators-overview.md)組み合わせることで、デフォルト値の計算をアプリケーションレイヤーから移動し、アプリケーションレイヤーのリソースを節約できます。計算に消費されたリソースは消滅せず、TiDBクラスターに移動されます。通常、デフォルトの時刻でデータを挿入できます。以下は、 `ratings`テーブルでデフォルト値を設定する例です。
 
 ```sql
 CREATE TABLE `bookshop`.`ratings` (
@@ -183,7 +181,7 @@ CREATE TABLE `bookshop`.`ratings` (
 );
 ```
 
-In addition, if the current time is also filled in by default when the data is being updated, the following statements can be used (but only the current-time related expressions can be filled in after `ON UPDATE`):
+さらに、データの更新時に現在の時刻もデフォルトで入力される場合は、次のステートメントを使用できます (ただし、 `ON UPDATE`後には現在の時刻に関連する式のみを入力できます)。
 
 ```sql
 CREATE TABLE `bookshop`.`ratings` (
@@ -195,13 +193,13 @@ CREATE TABLE `bookshop`.`ratings` (
 );
 ```
 
-For more information on default values of different data types, see [default values](/data-type-default-values.md).
+さまざまなデータ型のデフォルト値の詳細については、 [デフォルト値](/data-type-default-values.md)参照してください。
 
-### Prevent duplicate values
+### 重複した値を防ぐ {#prevent-duplicate-values}
 
-If you need to prevent duplicate values in a column, you can use the `UNIQUE` constraint.
+列内の値の重複を防ぐ必要がある場合は、 `UNIQUE`制約を使用できます。
 
-For example, to make sure that users' nicknames are unique, you can rewrite the table creation SQL statement for the `users` table like this:
+たとえば、ユーザーのニックネームが一意であることを確認するには、 `users`テーブルのテーブル作成 SQL ステートメントを次のように書き換えます。
 
 ```sql
 CREATE TABLE `bookshop`.`users` (
@@ -212,13 +210,13 @@ CREATE TABLE `bookshop`.`users` (
 );
 ```
 
-If you try to insert the same `nickname` in the `users` table, an error is returned.
+同じ`nickname` `users`テーブルに挿入しようとすると、エラーが返されます。
 
-### Prevent null values
+### NULL値を防ぐ {#prevent-null-values}
 
-If you need to prevent null values in a column, you can use the `NOT NULL` constraint.
+列内の NULL 値を防ぐ必要がある場合は、 `NOT NULL`制約を使用できます。
 
-Take user nicknames as an example. To ensure that a nickname is not only unique but is also not null, you can rewrite the SQL statement for creating the `users` table as follows:
+ユーザーのニックネームを例に挙げてみましょう。ニックネームが一意であるだけでなく、nullではないことを保証するには、 `users`のテーブルを作成するSQL文を次のように書き換えます。
 
 ```sql
 CREATE TABLE `bookshop`.`users` (
@@ -229,84 +227,84 @@ CREATE TABLE `bookshop`.`users` (
 );
 ```
 
-## Use HTAP capabilities
+## HTAP機能を使用する {#use-htap-capabilities}
 
 <CustomContent platform="tidb">
 
-> **Note:**
+> **注記：**
 >
-> The steps provided in this guide is **_ONLY_** for quick start in the test environment. For production environments, refer to [explore HTAP](/explore-htap.md).
+> このガイドに記載されている手順は、テスト環境での迅速な開始のみを目的***とし***ています。本番環境では、 [HTAPを探索する](/explore-htap.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> The steps provided in this guide is **_ONLY_** for quick start. For more instructions, refer to [Use an HTAP Cluster with TiFlash](/tiflash/tiflash-overview.md).
+> このガイドに記載されている手順は、***あくまでも***クイックスタートのためのものです。詳しい手順については、 [TiFlashでHTAPクラスタを使用する](/tiflash/tiflash-overview.md)を参照してください。
 
 </CustomContent>
 
-Suppose that you want to perform OLAP analysis on the `ratings` table using the `bookshop` application, for example, to query **whether the rating of a book has a significant correlation with the time of the rating**, which is to analyze whether the user's rating of the book is objective or not. Then you need to query the `score` and `rated_at` fields of the entire `ratings` table. This operation is resource-intensive for an OLTP-only database. Or you can use some ETL or other data synchronization tools to export the data from the OLTP database to a dedicated OLAP database for analysis.
+例えば、 `bookshop`アプリケーションを使用して`ratings`テーブルでOLAP分析を実行し、**ある書籍の評価と評価時刻に有意な相関関係があるかどうかを**照会するとします。これは、ユーザーによる書籍の評価が客観的かどうかを分析するためです。この場合、 `ratings`テーブル全体の`score`フィールドと`rated_at`フィールドを照会する必要があります。この操作は、OLTP専用データベースでは多くのリソースを消費します。あるいは、ETLなどのデータ同期ツールを使用して、OLTPデータベースから専用のOLAPデータベースにデータをエクスポートし、分析に利用することもできます。
 
-In this scenario, TiDB, an **HTAP (Hybrid Transactional and Analytical Processing)** database that supports both OLTP and OLAP scenarios, is an ideal one-stop database solution.
+このシナリオでは、OLTP と OLAP の両方のシナリオをサポートする**HTAP (ハイブリッド トランザクションおよび分析処理)**データベースである TiDB が理想的なワンストップ データベース ソリューションです。
 
-### Replicate column-based data
+### 列ベースのデータを複製する {#replicate-column-based-data}
 
 <CustomContent platform="tidb">
 
-Currently, TiDB supports two data analysis engines, **TiFlash** and **TiSpark**. For the large data scenarios (100 T), **TiFlash MPP** is recommended as the primary solution for HTAP, and **TiSpark** as a complementary solution.
+現在、TiDBは**TiFlash**と**TiSpark**という2つのデータ分析エンジンをサポートしています。大規模データシナリオ（100 TB）の場合、HTAPの主要ソリューションとして**TiFlash MPPを**推奨し、補完ソリューションとして**TiSparkを**推奨します。
 
-To learn more about TiDB HTAP capabilities, refer to the following documents: [Quick Start with TiDB HTAP](/quick-start-with-htap.md) and [Explore HTAP](/explore-htap.md).
+TiDB HTAP機能の詳細については、次のドキュメントを参照してください: [TiDB HTAPのクイックスタート](/quick-start-with-htap.md)および[HTAPを探索する](/explore-htap.md) 。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-To learn more about TiDB HTAP capabilities, see [TiDB Cloud HTAP Quick Start](/tidb-cloud/tidb-cloud-htap-quickstart.md) and [Use an HTAP Cluster with TiFlash](/tiflash/tiflash-overview.md).
+TiDB HTAP機能の詳細については、 [TiDB Cloud HTAP クイックスタート](/tidb-cloud/tidb-cloud-htap-quickstart.md)と[TiFlashでHTAPクラスタを使用する](/tiflash/tiflash-overview.md)参照してください。
 
 </CustomContent>
 
-In this example, [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) has been chosen as the data analysis engine for the `bookshop` database.
+この例では、 `bookshop`データベースのデータ分析エンジンとして[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)選択されています。
 
-TiFlash does not automatically replicate data after deployment. Therefore, you need to manually specify the tables to be replicated:
+TiFlashはデプロイメント後にデータを自動的に複製しません。そのため、複製するテーブルを手動で指定する必要があります。
 
 ```sql
 ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 ```
 
-**Parameter description**
+**パラメータの説明**
 
-- `{table_name}`: The table name.
-- `{count}`: The number of replicated replicas. If it is 0, replicated replicas are deleted.
+-   `{table_name}` : テーブル名。
+-   `{count}` : 複製されたレプリカの数。0の場合、複製されたレプリカは削除されます。
 
-**TiFlash** will then replicate the table. When a query is performed, TiDB automatically selects TiKV (row-based) or TiFlash (column-based) for the query based on cost optimization. Alternatively, you can manually specify whether the query uses a **TiFlash** replica. To learn how to specify it, refer to [Use TiDB to read TiFlash replicas](/tiflash/use-tidb-to-read-tiflash.md).
+**TiFlash**はテーブルを複製します。クエリが実行されると、TiDBはコスト最適化に基づいて、クエリに対してTiKV（行ベース）またはTiFlash （列ベース）を自動的に選択します。また、クエリで**TiFlash**レプリカを使用するかどうかを手動で指定することもできます。指定方法については、 [TiDBを使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
 
-### An example of using HTAP capabilities
+### HTAP機能の使用例 {#an-example-of-using-htap-capabilities}
 
-The `ratings` table opens `1` replica of TiFlash:
+`ratings`テーブルはTiFlashの`1`レプリカを開きます。
 
 ```sql
 ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 ```
 
-> **Note:**
+> **注記：**
 >
-> If your cluster does not contain **TiFlash** nodes, this SQL statement will report an error: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`. You can use [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-cluster) to create a {{{ .starter }}} cluster that includes **TiFlash**.
+> クラスターに**TiFlash**ノードが含まれていない場合、この SQL 文はエラー`1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`報告します。5 [TiDB Cloudサーバーレスクラスタの構築](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-cluster)使用して、 **TiFlash**を含むTiDB Cloud Serverless クラスターを作成できます。
 
-Then you can go on to perform the following query:
+次に、次のクエリを実行できます。
 
 ```sql
 SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` GROUP BY HOUR(`rated_at`);
 ```
 
-You can also execute the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statement to see whether this statement is using the **TiFlash**:
+[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)ステートメントを実行して、このステートメントが**TiFlash**を使用しているかどうかを確認することもできます。
 
 ```sql
 EXPLAIN ANALYZE SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` GROUP BY HOUR(`rated_at`);
 ```
 
-Running results:
+実行結果:
 
 ```sql
 +-----------------------------+-----------+---------+--------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+----------+------+
@@ -320,13 +318,13 @@ Running results:
 +-----------------------------+-----------+---------+--------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+----------+------+
 ```
 
-When the field `cop[tiflash]` appears, it means that the task is sent to **TiFlash** for processing.
+フィールド`cop[tiflash]`が表示された場合、タスクは処理のために**TiFlash**に送信されることを意味します。
 
-## Execute the `CREATE TABLE` statement
+## <code>CREATE TABLE</code>文を実行する {#execute-the-code-create-table-code-statement}
 
-After creating all the tables as above rules, our [database initialization](/develop/dev-guide-bookshop-schema-design.md#database-initialization-script-dbinitsql) script should look like this. If you need to see the table information in detail, please refer to [Description of the Tables](/develop/dev-guide-bookshop-schema-design.md#description-of-the-tables).
+上記のルールに従ってすべてのテーブルを作成すると、スクリプト[データベースの初期化](/develop/dev-guide-bookshop-schema-design.md#database-initialization-script-dbinitsql)は次のようになります。テーブルの詳細情報を確認したい場合は、 [表の説明](/develop/dev-guide-bookshop-schema-design.md#description-of-the-tables)を参照してください。
 
-To name the database initialization script `init.sql` and save it, you can execute the following statement to initialize the database.
+データベース初期化スクリプト`init.sql`名前を付けて保存するには、次のステートメントを実行してデータベースを初期化します。
 
 ```shell
 mysql
@@ -337,89 +335,89 @@ mysql
     < init.sql
 ```
 
-To view all tables under the `bookshop` database, use the [`SHOW TABLES`](/sql-statements/sql-statement-show-tables.md#show-full-tables) statement.
+`bookshop`データベースの下にあるすべてのテーブルを表示するには、 [`SHOW TABLES`](/sql-statements/sql-statement-show-tables.md#show-full-tables)ステートメントを使用します。
 
 ```sql
 SHOW TABLES IN `bookshop`;
 ```
 
-Running results:
+実行結果:
 
-```
-+--------------------+
-| Tables_in_bookshop |
-+--------------------+
-| authors            |
-| book_authors       |
-| books              |
-| orders             |
-| ratings            |
-| users              |
-+--------------------+
-```
+    +--------------------+
+    | Tables_in_bookshop |
+    +--------------------+
+    | authors            |
+    | book_authors       |
+    | books              |
+    | orders             |
+    | ratings            |
+    | users              |
+    +--------------------+
 
-## Guidelines to follow when creating a table
+## テーブルを作成する際に従うべきガイドライン {#guidelines-to-follow-when-creating-a-table}
 
-This section provides guidelines you need to follow when creating a table.
+このセクションでは、テーブルを作成するときに従う必要があるガイドラインを示します。
 
-### Guidelines to follow when naming a table
+### テーブルに名前を付けるときに従うべきガイドライン {#guidelines-to-follow-when-naming-a-table}
 
-- Use a **fully-qualified** table name (for example, `CREATE TABLE {database_name}. {table_name}`). If you do not specify the database name, TiDB uses the current database in your **SQL session**. If you do not use `USE {databasename};` to specify the database in your SQL session, TiDB returns an error.
-- Use meaningful table names. For example, if you need to create a user table, you can use names: `user`, `t_user`,`users`, or follow your company or organization's naming convention. If your company or organization does not have a naming convention, you can refer to the [table naming convention](/develop/dev-guide-object-naming-guidelines.md#table-naming-convention). Do not use such table names as: `t1`, `table1`.
-- Multiple words are separated by an underscore, and it is recommended that the name is no more than 32 characters.
-- Create a separate `DATABASE` for tables of different business modules and add comments accordingly.
+-   **完全修飾**テーブル名（例： `CREATE TABLE {database_name}. {table_name}` ）を使用してください。データベース名を指定しない場合、TiDBは**SQLセッション**の現在のデータベースを使用します。SQLセッションでデータベース名を`USE {databasename};`指定しない場合、TiDBはエラーを返します。
+-   意味のあるテーブル名を使用してください。例えば、ユーザーテーブルを作成する必要がある場合は、 `user` 、 `t_user` 、 `users`といった名前を使用するか、会社または組織の命名規則に従うことができます。会社または組織に命名規則がない場合は、 [テーブルの命名規則](/develop/dev-guide-object-naming-guidelines.md#table-naming-convention)を参照してください。 `t1` 、 `table1`ようなテーブル名は使用しないでください。
+-   複数の単語はアンダースコアで区切られ、名前は 32 文字以内にすることをお勧めします。
+-   異なるビジネス モジュールのテーブルごとに個別の`DATABASE`作成し、それに応じてコメントを追加します。
 
-### Guidelines to follow when defining columns
+### 列を定義する際に従うべきガイドライン {#guidelines-to-follow-when-defining-columns}
 
-- Check the [data types](/data-type-overview.md) supported by columns and organize your data according to the data type restrictions. Select the appropriate type for the data you plan to store in the column.
-- Check the [guidelines to follow](#guidelines-to-follow-when-selecting-primary-key) for selecting primary keys and decide whether to use primary key columns.
-- Check the [guidelines to follow](#guidelines-to-follow-when-selecting-clustered-index) for selecting clustered indexes and decide whether to specify **clustered indexes**.
-- Check [adding column constraints](#add-column-constraints) and decide whether to add constraints to the columns.
-- Use meaningful column names. It is recommended that you follow your company or organization's table naming convention. If your company or organization does not have a corresponding naming convention, refer to the [column naming convention](/develop/dev-guide-object-naming-guidelines.md#column-naming-convention).
+-   列でサポートされている[データ型](/data-type-overview.md)チェックし、データ型の制限に従ってデータを整理してください。列に格納する予定のデータに適した型を選択してください。
+-   主キーを選択するための[従うべきガイドライン](#guidelines-to-follow-when-selecting-primary-key)チェックし、主キー列を使用するかどうかを決定します。
+-   クラスター化インデックスを選択するための[従うべきガイドライン](#guidelines-to-follow-when-selecting-clustered-index)チェックし、**クラスター化インデックス**を指定するかどうかを決定します。
+-   [列制約の追加](#add-column-constraints)チェックし、列に制約を追加するかどうかを決定します。
+-   意味のある列名を使用してください。会社または組織のテーブル命名規則に従うことをお勧めします。会社または組織に適切な命名規則がない場合は、 [列の命名規則](/develop/dev-guide-object-naming-guidelines.md#column-naming-convention)を参照してください。
 
-### Guidelines to follow when selecting primary key
+### 主キーを選択する際のガイドライン {#guidelines-to-follow-when-selecting-primary-key}
 
-- Define a **primary key** or **unique index** within the table.
-- Try to select meaningful **columns** as **primary keys**.
-- For performance reasons, try to avoid storing extra-wide tables. It is not recommended that the number of table fields is over `60` and that the total data size of a single row is over `64K`. It is recommended to split fields with too much data length to another table.
-- It is not recommended to use complex data types.
-- For the fields to be joined, ensure that the data types are consistent and avoid implicit conversion.
-- Avoid defining **primary keys** on a single monotonic data column. If you use a single monotonic data column (for example, a column with the `AUTO_INCREMENT` attribute) to define the **primary key**, it might impact the write performance. If possible, use `AUTO_RANDOM` instead of `AUTO_INCREMENT`, which discards the continuous and incremental attribute of the primary key.
-- If you really need to create an index on a single monotonic data column at write-intensive scenarios, instead of defining this monotonic data column as the **primary key**, you can use `AUTO_RANDOM` to create the **primary key** for that table, or use [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) and [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) to shard `_tidb_rowid`.
+-   テーブル内に**主キー**または**一意のインデックス**を定義します。
+-   意味のある**列を****主キー**として選択するようにしてください。
+-   パフォーマンス上の理由から、極端に幅の広いテーブルを保存しないようにしてください。テーブルフィールド数が`60`超え、1行のデータサイズの合計が`64K`超えることは推奨されません。データ長が長すぎるフィールドは、別のテーブルに分割することをお勧めします。
+-   複雑なデータ型の使用はお勧めしません。
+-   結合するフィールドについては、データ型が一貫していることを確認し、暗黙的な変換を回避してください。
+-   単一の単調なデータ列に**主キー**を定義することは避けてください。単一の単調なデータ列（例えば、属性が`AUTO_INCREMENT`列）を使用して**主キー**を定義すると、書き込みパフォーマンスに影響する可能性があります。可能であれば、主キーの連続性と増分性を無視する`AUTO_INCREMENT`ではなく`AUTO_RANDOM`使用してください。
+-   書き込み集中型のシナリオで単一の単調なデータ列にインデックスを作成する必要がある場合は、この単調なデータ列を**主キー**として定義する代わりに、 `AUTO_RANDOM`使用してそのテーブルの**主キー**を作成するか、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)と[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)使用して`_tidb_rowid`シャード化することができます。
 
-### Guidelines to follow when selecting clustered index
+### クラスター化インデックスを選択する際のガイドライン {#guidelines-to-follow-when-selecting-clustered-index}
 
-- Follow [guidelines for selecting primary key](#guidelines-to-follow-when-selecting-primary-key) to build **clustered indexes**.
-- Compared to tables with non-clustered indexes, tables with clustered indexes offer greater performance and throughput advantages in the following scenarios:
-    - When data is inserted, the clustered index reduces one write of the index data from the network.
-    - When a query with an equivalent condition only involves the primary key, the clustered index reduces one read of index data from the network.
-    - When a query with a range condition only involves the primary key, the clustered index reduces multiple reads of index data from the network.
-    - When a query with an equivalent or range condition only involves the primary key prefix, the clustered index reduces multiple reads of index data from the network.
-- On the other hand, tables with clustered indexes might have the following issues:
-    - There might be write hotspot issues when you insert a large number of primary keys with close values. Follow the [guidelines to follow when selecting primary key](#guidelines-to-follow-when-selecting-primary-key).
-    - The table data takes up more storage space if the data type of the primary key is larger than 64 bits, especially when there are multiple secondary indexes.
+-   **クラスター化インデックス**を構築するには、 [主キーの選択に関するガイドライン](#guidelines-to-follow-when-selecting-primary-key)従います。
 
-- To control the [default behavior of whether to use clustered indexes](/clustered-indexes.md#create-a-table-with-clustered-indexes), you can explicitly specify whether to use clustered indexes instead of using the system variable `@@global.tidb_enable_clustered_index` and the configuration `alter-primary-key`.
+-   非クラスター化インデックスを持つテーブルと比較すると、クラスター化インデックスを持つテーブルでは、次のシナリオでパフォーマンスとスループットの利点が向上します。
+    -   データが挿入されると、クラスター化インデックスにより、ネットワークからのインデックス データの書き込みが 1 回削減されます。
+    -   同等の条件を持つクエリに主キーのみが関係する場合、クラスター化インデックスにより、ネットワークからのインデックス データの読み取りが 1 回削減されます。
+    -   範囲条件を持つクエリに主キーのみが関係する場合、クラスター化インデックスにより、ネットワークからのインデックス データの複数回の読み取りが削減されます。
+    -   同等条件または範囲条件を持つクエリに主キー プレフィックスのみが関係する場合、クラスター化インデックスにより、ネットワークからのインデックス データの複数回の読み取りが削減されます。
 
-### Guidelines to follow when executing the `CREATE TABLE` statement
+-   一方、クラスター化インデックスを持つテーブルでは、次のような問題が発生する可能性があります。
+    -   近い値を持つ主キーを多数挿入すると、書き込みホットスポットの問題が発生する可能性があります[主キーを選択する際のガイドライン](#guidelines-to-follow-when-selecting-primary-key)に従ってください。
+    -   主キーのデータ型が 64 ビットより大きい場合、特に複数のセカンダリ インデックスがある場合、テーブル データはより多くのstorageスペースを占有します。
 
-- It is not recommended to use a client-side Driver or ORM to perform database schema changes. It is recommended to use a [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or use a GUI client to perform database schema changes. In this document, the **MySQL client** is used to pass in SQL files to perform database schema changes in most scenarios.
-- Follow the SQL development [specification for creating and deleting tables](/develop/dev-guide-sql-development-specification.md#create-and-delete-tables). It is recommended to wrap the build and delete statements inside the business application to add judgment logic.
+-   [クラスター化インデックスを使用するかどうかのデフォルトの動作](/clustered-indexes.md#create-a-table-with-clustered-indexes)制御するには、システム変数`@@global.tidb_enable_clustered_index`と構成`alter-primary-key`使用する代わりに、クラスター化インデックスを使用するかどうかを明示的に指定できます。
 
-## One more step
+### <code>CREATE TABLE</code>文を実行する際に従うべきガイドライン {#guidelines-to-follow-when-executing-the-code-create-table-code-statement}
 
-Note that all the tables that have been created in this document do not contain secondary indexes. For a guide to add secondary indexes, refer to [Creating Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md).
+-   データベーススキーマの変更にクライアント側のDriverやORMを使用することは推奨されません[MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)を使用するか、GUIクライアントを使用してデータベーススキーマを変更することをお勧めします。このドキュメントでは、ほとんどのシナリオにおいて、 **MySQLクライアント**を使用してSQLファイルを渡し、データベーススキーマの変更を実行します。
+-   SQL開発[テーブルの作成と削除の仕様](/develop/dev-guide-sql-development-specification.md#create-and-delete-tables)に従ってください。判断ロジックを追加するには、ビジネスアプリケーション内でbuild文とdelete文をラップすることをお勧めします。
 
-## Need help?
+## もう一歩 {#one-more-step}
+
+このドキュメントで作成されたすべてのテーブルにはセカンダリインデックスが含まれていないことに注意してください。セカンダリインデックスの追加方法については、 [セカンダリインデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を参照してください。
+
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

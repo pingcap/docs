@@ -1,52 +1,52 @@
 ---
 title: Geo-distributed Deployment topology
-summary: Learn the geo-distributed deployment topology of TiDB.
+summary: TiDB の地理的に分散された展開トポロジについて学習します。
 ---
 
-# Geo-Distributed Deployment Topology
+# 地理的に分散した展開トポロジ {#geo-distributed-deployment-topology}
 
-This document takes the typical architecture of three data centers (DC) in two cities as an example, and introduces the geo-distributed deployment architecture and the key configuration. The cities used in this example are Shanghai (referred to as `sha`) and Beijing (referred to as `bja` and `bjb`).
+このドキュメントでは、2つの都市に3つのデータセンター（DC）を配置した典型的なアーキテクチャを例に、地理的に分散したデプロイメントアーキテクチャと主要な構成について説明します。この例で使用する都市は、上海（ `sha` ）と北京（ `bja`と`bjb` ）です。
 
-## Topology information
+## トポロジ情報 {#topology-information}
 
-| Instance | Count | Physical machine configuration | BJ IP | SH IP | Configuration |
-| :-- | :-- | :-- | :-- | :-- | :-- |
-| TiDB | 5 | 16 VCore 32GB * 1 | 10.0.1.1 <br/> 10.0.1.2 <br/> 10.0.1.3 <br/> 10.0.1.4 | 10.0.1.5 | Default port <br/> Global directory configuration |
-| PD | 5 | 4 VCore 8GB * 1 | 10.0.1.6 <br/> 10.0.1.7 <br/> 10.0.1.8 <br/> 10.0.1.9 | 10.0.1.10 | Default port <br/> Global directory configuration |
-| TiKV | 5 | 16 VCore 32GB 4TB (nvme ssd) * 1 | 10.0.1.11 <br/> 10.0.1.12 <br/> 10.0.1.13 <br/> 10.0.1.14 | 10.0.1.15 | Default port <br/> Global directory configuration |
-| Monitoring & Grafana | 1 | 4 VCore 8GB * 1 500GB (ssd) | 10.0.1.16 | | Default port <br/> Global directory configuration |
+| 実例             | カウント | 物理マシン構成                          | BJ IP                                                  | 船         | コンフィグレーション                 |
+| :------------- | :--- | :------------------------------- | :----------------------------------------------------- | :-------- | :------------------------- |
+| TiDB           | 5    | 16 VCore 32GB * 1                | 10.0.1.1<br/> 10.0.1.2<br/> 10.0.1.3<br/> 10.0.1.4     | 10.0.1.5  | デフォルトポート<br/>グローバルディレクトリ構成 |
+| PD             | 5    | 4 VCore 8GB * 1                  | 10.0.1.6<br/> 10.0.1.7<br/> 10.0.1.8<br/> 10.0.1.9     | 10.0.1.10 | デフォルトポート<br/>グローバルディレクトリ構成 |
+| TiKV           | 5    | 16 VCore 32GB 4TB (nvme ssd) * 1 | 10.0.1.11<br/> 10.0.1.12<br/> 10.0.1.13<br/> 10.0.1.14 | 10.0.1.15 | デフォルトポート<br/>グローバルディレクトリ構成 |
+| モニタリングとGrafana | 1    | 4 VCore 8GB * 1 500GB (SSD)      | 10.0.1.16                                              |           | デフォルトポート<br/>グローバルディレクトリ構成 |
 
-> **Note:**
+> **注記：**
 >
-> The IP addresses of the instances are given as examples only. In your actual deployment, replace the IP addresses with your actual IP addresses.
+> インスタンスのIPアドレスは例としてのみ示されています。実際の導入では、IPアドレスを実際のIPアドレスに置き換えてください。
 
-### Topology templates
+### トポロジテンプレート {#topology-templates}
 
-- [The geo-distributed topology template](https://github.com/pingcap/docs/blob/master/config-templates/geo-redundancy-deployment.yaml)
+-   [地理的に分散したトポロジテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/geo-redundancy-deployment.yaml)
 
-For detailed descriptions of the configuration items in the above TiDB cluster topology file, see [Topology Configuration File for Deploying TiDB Using TiUP](/tiup/tiup-cluster-topology-reference.md).
+上記の TiDB クラスター トポロジ ファイルの構成項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)参照してください。
 
-### Key parameters
+### 主なパラメータ {#key-parameters}
 
-This section describes the key parameter configuration of the TiDB geo-distributed deployment.
+このセクションでは、TiDB の地理的に分散されたデプロイメントの主要なパラメータ構成について説明します。
 
-#### TiKV parameters
+#### TiKVパラメータ {#tikv-parameters}
 
-- The gRPC compression format (`none` by default):
+-   gRPC 圧縮形式 (デフォルトは`none` ):
 
-    To increase the transmission speed of gRPC packages between geo-distributed target nodes, set this parameter to `gzip`.
+    地理的に分散されたターゲットノード間の gRPC パッケージの転送速度を上げるには、このパラメータを`gzip`に設定します。
 
     ```yaml
     server.grpc-compression-type: gzip
     ```
 
-- The label configuration:
+-   ラベル構成:
 
-    Since TiKV is deployed across different data centers, if the physical machines go down, the Raft Group might lose three of the default five replicas, which causes the cluster unavailability. To address this issue, you can configure the labels to enable the smart scheduling of PD, which ensures that the Raft Group does not allow three replicas to be located in TiKV instances on the same machine in the same cabinet of the same data center.
+    TiKVは複数のデータセンターにまたがって展開されているため、物理マシンがダウンすると、 Raftグループはデフォルトの5つのレプリカのうち3つを失い、クラスターが利用できなくなる可能性があります。この問題に対処するには、ラベルを設定してPDのスマートスケジューリングを有効にします。これにより、 Raftグループは、同じデータセンターの同じキャビネット内の同じマシン上のTiKVインスタンスに3つのレプリカを配置することを許可しません。
 
-- The TiKV configuration:
+-   TiKV 構成:
 
-    The same host-level label information is configured for the same physical machine.
+    同じ物理マシンに対して同じホストレベルのラベル情報が構成されています。
 
     ```yaml
     config:
@@ -57,32 +57,32 @@ This section describes the key parameter configuration of the TiDB geo-distribut
         host: host2
     ```
 
-- To prevent remote TiKV nodes from launching unnecessary Raft elections, it is required to increase the minimum and maximum number of ticks that the remote TiKV nodes need to launch an election. The two parameters are set to `0` by default.
+-   リモートTiKVノードが不要なRaft選出を開始するのを防ぐには、リモートTiKVノードが選出を開始するために必要な最小ティック数と最大ティック数を増やす必要があります。これらの2つのパラメータはデフォルトで`0`に設定されています。
 
     ```yaml
     raftstore.raft-min-election-timeout-ticks: 50
     raftstore.raft-max-election-timeout-ticks: 60
     ```
 
-> **Note:** 
+> **注記：**
 >
-> Using `raftstore.raft-min-election-timeout-ticks` and `raftstore.raft-max-election-timeout-ticks` to configure larger election timeout ticks for a TiKV node can significantly decrease the likelihood of Regions on that node becoming Leaders. However, in a disaster scenario where some TiKV nodes are offline and the remaining active TiKV nodes lag behind in Raft logs, only Regions on this TiKV node with large election timeout ticks can become Leaders. Because Regions on this TiKV node must wait for at least the duration set by `raftstore.raft-min-election-timeout-ticks` before initiating an election, it is recommended to avoid setting these values excessively large to prevent potential impact on the cluster availability in such scenarios.
+> TiKVノードの選出タイムアウト値を`raftstore.raft-min-election-timeout-ticks`と`raftstore.raft-max-election-timeout-ticks`大きく設定すると、そのノード上のリージョンがリーダーになる可能性が大幅に低下します。ただし、一部のTiKVノードがオフラインになり、残りのアクティブなTiKVノードのRaftログが遅延しているような災害シナリオでは、このTiKVノード上の選出タイムアウト値が大きいリージョンのみがリーダーになることができます。このTiKVノード上のリージョンは、選出を開始する前に少なくとも`raftstore.raft-min-election-timeout-ticks`で設定された期間待機する必要があるため、このようなシナリオではクラスターの可用性への影響を防ぐため、これらの値を過度に大きく設定しないことをお勧めします。
 
-#### PD parameters
+#### PDパラメータ {#pd-parameters}
 
-- The PD metadata information records the topology of the TiKV cluster. PD schedules the Raft Group replicas on the following four dimensions:
+-   PD メタデータ情報には、TiKV クラスターのトポロジが記録されます。PD は、次の 4 つの次元に基づいてRaftグループのレプリカをスケジュールします。
 
     ```yaml
     replication.location-labels: ["zone","dc","rack","host"]
     ```
 
-- To ensure high availability of the cluster, adjust the number of Raft Group replicas to be `5`:
+-   クラスターの高可用性を確保するには、 Raftグループのレプリカの数を`5`に調整します。
 
     ```yaml
     replication.max-replicas: 5
     ```
 
-- Forbid the remote TiKV Raft replica being elected as Leader:
+-   リモート TiKVRaftレプリカがLeaderとして選出されることを禁止します。
 
     ```yaml
     label-property:
@@ -91,13 +91,13 @@ This section describes the key parameter configuration of the TiDB geo-distribut
               value: "sha"
     ```
 
-   > **Note:**
-   >
-   > Since TiDB 5.2, the `label-property` configuration is not supported by default. To set the replica policy, use the [placement rules](/configure-placement-rules.md).
-   
-For the further information about labels and the number of Raft Group replicas, see [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md).
+    > **注記：**
+    >
+    > TiDB 5.2以降、 `label-property`構成はデフォルトではサポートされません。レプリカポリシーを設定するには、 [配置ルール](/configure-placement-rules.md)使用してください。
 
-> **Note:**
+ラベルとRaftグループのレプリカの数に関する詳細については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)参照してください。
+
+> **注記：**
 >
-> - You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the target machines. You can customize the user, or keep the user consistent with the control machine.
-> - If you configure the deployment directory as a relative path, the cluster will be deployed in the home directory of the user.
+> -   設定ファイルに`tidb`ユーザーを手動で作成する必要はありません。TiUPTiUPコンポーネントは、ターゲットマシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、コントロールマシンと同じユーザーを維持することもできます。
+> -   デプロイメント ディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。

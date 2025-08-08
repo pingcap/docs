@@ -1,20 +1,18 @@
 ---
 title: Column Pruning
-summary: Learn about the usage of column pruning in TiDB.
+summary: TiDB での列プルーニングの使用法について学習します。
 ---
 
-# Column Pruning
+# カラムの剪定 {#column-pruning}
 
-The basic idea of column pruning is that for columns not used in the operator, the optimizer does not need to retain them during optimization. Removing these columns reduces the use of I/O resources and facilitates the subsequent optimization. The following is an example of column repetition:
+列プルーニングの基本的な考え方は、演算子で使用されない列については、最適化中にオプティマイザが保持する必要がないというものです。これらの列を削除することで、I/Oリソースの使用量を削減し、後続の最適化を容易にします。以下は列の繰り返しの例です。
 
-Suppose there are four columns (a, b, c, and d) in table t. You can execute the following statement:
-
-{{< copyable "sql" >}}
+テーブルtに4つの列（a、b、c、d）があるとします。次の文を実行できます。
 
 ```sql
 select a from t where b> 5
 ```
 
-In this query, only column a and column b are used, and column c and column d are redundant. Regarding the query plan of this statement, the `Selection` operator uses column b. Then the `DataSource` operator uses columns a and column b. Columns c and column d can be pruned because the `DataSource` operator does not read them.
+このクエリでは、列aと列bのみが使用され、列cと列dは冗長です。この文のクエリプランでは、 `Selection`の演算子が列bを使用し、 `DataSource`演算子が列aと列bを使用します。5 `DataSource`演算子は列cと列dを読み取らないため、これらはプルーニング可能です。
 
-Therefore, when TiDB performs a top-down scanning during the logic optimization phase, redundant columns are pruned to reduce waste of resources. This scanning process is called "Column Pruning", corresponding to the `columnPruner` rule. If you want to disable this rule, refer to [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md).
+そのため、TiDBはロジック最適化フェーズでトップダウンスキャンを実行する際に、リソースの無駄を削減するために冗長な列をプルーニングします。このスキャン処理は「カラムの剪定」と呼ばれ、ルール`columnPruner`に対応しています。このルールを無効にしたい場合は、 [最適化ルールのブロックリストと式プッシュダウン](/blocklist-control-plan.md)を参照してください。

@@ -1,56 +1,56 @@
 ---
 title: Notifications in the TiDB Cloud Console
-summary: Learn about notifications in the TiDB Cloud console, including notification types, purposes, and how to view them.
+summary: 通知の種類、目的、表示方法など、 TiDB Cloudコンソールの通知について説明します。
 ---
 
-# Notifications in the TiDB Cloud Console
+# TiDB Cloudコンソールの通知 {#notifications-in-the-tidb-cloud-console}
 
-The [TiDB Cloud console](https://tidbcloud.com/) provides notifications to keep you informed about important updates, system messages, product changes, billing reminders, and other relevant information. These notifications help you stay up-to-date and take necessary actions without leaving the console.
+[TiDB Cloudコンソール](https://tidbcloud.com/) 、重要なアップデート、システムメッセージ、製品の変更、請求リマインダー、その他の関連情報をお知らせする通知機能を提供します。これらの通知により、コンソールを離れることなく最新情報を入手し、必要なアクションを実行できます。
 
-## Notification types
+## 通知の種類 {#notification-types}
 
-You might receive different types of notifications in the TiDB Cloud console, such as:
+TiDB Cloudコンソールでは、次のようなさまざまな種類の通知が届く場合があります。
 
-- **Informational notifications**
+-   **情報通知**
 
-    Provide helpful updates, such as feature usage tips, application changes, or reminders for upcoming events.
+    機能の使用に関するヒント、アプリケーションの変更、今後のイベントのリマインダーなど、役立つ更新情報を提供します。
 
-- **Actionable notifications**
+-   **実用的な通知**
 
-   Prompt you to perform specific actions, such as adding a credit card.
+    クレジットカードの追加など、特定のアクションを実行するように要求します。
 
-- **Alert notifications**
+-   **アラート通知**
 
-    Notify you of critical issues or urgent events requiring immediate attention, such as system errors, security warnings, or important updates.
+    システム エラー、セキュリティ警告、重要な更新など、すぐに対応する必要がある重大な問題や緊急イベントを通知します。
 
-- **Billing notifications**
+-   **請求通知**
 
-    Deliver updates about billing-related activities, such as credit and discount updates.
+    クレジットや割引の更新など、請求関連のアクティビティに関する最新情報を配信します。
 
-- **Feedback notifications**
+-   **フィードバック通知**
 
-    Request feedback on your experience with a feature, such as rating a recent interaction or completing a survey.
+    最近のやり取りを評価したり、アンケートに回答したりするなど、機能の使用経験に関するフィードバックをリクエストします。
 
-## Notifications list
+## 通知リスト {#notifications-list}
 
-The following table lists the notifications available in TiDB Cloud, along with their trigger events and recipients:
+次の表は、 TiDB Cloudで使用できる通知と、そのトリガー イベントおよび受信者を示しています。
 
-| Notification | Trigger event | Notification recipient |
-| --- | --- | --- |
-| {{{ .starter }}} cluster creation | A [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster is created. | All project members |
-| {{{ .starter }}} cluster deletion | A {{{ .starter }}} cluster is deleted. | All project members |
-| TiDB Cloud Dedicated cluster creation | A [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster is created. | All project members |
-| TiDB Cloud Dedicated cluster deletion | A TiDB Cloud Dedicated cluster is deleted. | All project members |
-| Organization Budget threshold alert | The organization [budget threshold](/tidb-cloud/tidb-cloud-budget.md) is reached. | `Organization Owner`, `Organization Billing Manager`, and `Organization Billing Viewer` |
-| Project Budget threshold alert | The project [budget threshold](/tidb-cloud/tidb-cloud-budget.md) is reached. | `Organization Owner`, `Organization Billing Manager`, `Organization Billing Viewer`, and `Project Owner` |
-| Serverless cluster spending limit threshold alert | The [spending limit threshold](/tidb-cloud/manage-serverless-spend-limit.md) for {{{ .starter }}} clusters in the organization is reached. | `Organization Owner`, `Organization Billing Manager`, `Organization Billing Viewer`, and `Project Owner` |
-| Credits update | [Credits](/tidb-cloud/tidb-cloud-billing.md#credits) for the organization are applied, fully used, reclaimed, or expired. | `Organization Owner`, `Organization Billing Manager`, and `Organization Billing Viewer` |
-| Discount update | [Discounts](/tidb-cloud/tidb-cloud-billing.md#discounts) for the organization are applied, reclaimed, or expired. | `Organization Owner`, `Organization Billing Manager`, and `Organization Billing Viewer` |
-| Marketplace update | The organization has a subscription or unsubscription through a cloud provider marketplace. | All organization members |
-| Support plan update | The support plan subscription for the organization is changed. | All organization members |
+| 通知                             | トリガーイベント                                                                                    | 通知受信者                                                                                             |
+| ------------------------------ | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| TiDB Cloudサーバーレス クラスターの作成      | [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターが作成されます。   | プロジェクトメンバー全員                                                                                      |
+| TiDB Cloud Serverless クラスターの削除 | TiDB Cloud Serverless クラスターが削除されます。                                                         | プロジェクトメンバー全員                                                                                      |
+| TiDB Cloud専用クラスタの作成            | [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターが作成されます。        | プロジェクトメンバー全員                                                                                      |
+| TiDB Cloud専用クラスタの削除            | TiDB Cloud Dedicated クラスターが削除されます。                                                          | プロジェクトメンバー全員                                                                                      |
+| 組織予算しきい値アラート                   | 組織[予算のしきい値](/tidb-cloud/tidb-cloud-budget.md)に到達しました。                                       | `Organization Owner` `Organization Billing Manager` `Organization Billing Viewer`                 |
+| プロジェクト予算しきい値アラート               | プロジェクト[予算のしきい値](/tidb-cloud/tidb-cloud-budget.md)に到達しました。                                   | `Organization Owner` `Organization Billing Manager` `Organization Billing Viewer` `Project Owner` |
+| サーバーレス クラスターの支出制限しきい値アラート      | 組織内のTiDB Cloud Serverless クラスターの[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)達しました。 | `Organization Owner` `Organization Billing Manager` `Organization Billing Viewer` `Project Owner` |
+| クレジットの更新                       | 組織の[クレジット](/tidb-cloud/tidb-cloud-billing.md#credits)は適用済み、完全に使用済み、再利用済み、または期限切れです。         | `Organization Owner` `Organization Billing Manager` `Organization Billing Viewer`                 |
+| 割引の更新                          | 組織の[割引](/tidb-cloud/tidb-cloud-billing.md#discounts)が適用、再利用、または期限切れです。                      | `Organization Owner` `Organization Billing Manager` `Organization Billing Viewer`                 |
+| マーケットプレイスのアップデート               | 組織は、クラウド プロバイダー マーケットプレイスを通じてサブスクリプションまたはサブスクリプション解除を行っています。                                | 組織の全メンバー                                                                                          |
+| サポートプランの更新                     | 組織のサポート プラン サブスクリプションが変更されます。                                                               | 組織の全メンバー                                                                                          |
 
-## View notifications
+## 通知をビュー {#view-notifications}
 
-To view notifications, click **Notification** in the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/).
+通知を表示するには、 [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある**[通知]**をクリックします。
 
-When new notifications are available, a number is displayed next to **Notification** indicating how many notifications are unread.
+新しい通知がある場合、 **「通知」の**横に未読の通知の数を示す数字が表示されます。

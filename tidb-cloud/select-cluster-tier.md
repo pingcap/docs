@@ -1,102 +1,103 @@
 ---
 title: Select Your Cluster Tier
-summary: Learn how to select your cluster tier on TiDB Cloud.
+summary: TiDB Cloudでクラスター層を選択する方法について説明します。
 aliases: ['/tidbcloud/developer-tier-cluster']
 ---
 
-# Select Your Cluster Tier
+# Cluster Tierを選択 {#select-your-cluster-tier}
 
-The cluster tier determines the throughput and performance of your cluster.
+クラスター層によって、クラスターのスループットとパフォーマンスが決まります。
 
-TiDB Cloud provides the following two options of cluster tiers. Before creating a cluster, you need to consider which option suits your need better.
+TiDB Cloud は、以下の 2 つのクラスター層オプションを提供します。クラスターを作成する前に、どちらのオプションがニーズに適しているかを検討する必要があります。
 
-- [TiDB Cloud Serverless](#tidb-cloud-serverless)
-- [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
+-   [TiDB Cloudサーバーレス](#tidb-cloud-serverless)
+-   [TiDB Cloud専用](#tidb-cloud-dedicated)
 
-## TiDB Cloud Serverless
+## TiDB Cloudサーバーレス {#tidb-cloud-serverless}
 
 <!--To be confirmed-->
-TiDB Cloud Serverless is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free tier and consumption based billing once free limits are exceeded.
 
-### Cluster plans
+TiDB Cloud Serverlessは、フルマネージドのマルチテナント型TiDBサービスです。MySQL互換データベースを瞬時に自動スケーリングし、十分な無料利用枠と、無料利用枠を超えた場合の使用量に応じた課金体系を提供します。
 
-{{{ .starter }}} offers two service plans to meet different user requirements. Whether you are just getting started or scaling to meet the increasing application demands, these service plans provide the flexibility and capability you need.
+### クラスタプラン {#cluster-plans}
 
-#### Free cluster plan
+TiDB Cloud Serverlessは、さまざまなユーザー要件に対応する2つのサービスプランを提供しています。導入を検討されている場合でも、増大するアプリケーション需要に合わせて拡張する場合でも、これらのサービスプランは必要な柔軟性と機能を提供します。
 
-The free cluster plan is ideal for those who are getting started with {{{ .starter }}}. It provides developers and small teams with the following essential features:
+#### 無料クラスタープラン {#free-cluster-plan}
 
-- **No cost**: This plan is completely free, with no credit card required to get started.
-- **Storage**: Provides an initial 5 GiB of row-based storage and 5 GiB of columnar storage.
-- **Request Units**: Includes 50 million [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) for database operations.
-- **Easy upgrade**: Offers a smooth transition to the [scalable cluster plan](#scalable-cluster-plan) as your needs grow.
+無料のクラスタープランは、 TiDB Cloud Serverless を初めてご利用になる方に最適です。開発者や小規模チームに、以下の重要な機能を提供します。
 
-#### Scalable cluster plan
+-   **無料**: このプランは完全に無料で、開始するのにクレジットカードは必要ありません。
+-   **ストレージ**: 初期 5 GiB の行ベースのstorageと 5 GiB の列ベースのstorageを提供します。
+-   **リクエスト単位**: データベース操作用の 5,000 万[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit)が含まれます。
+-   **簡単なアップグレード**: ニーズの拡大に応じて、 [スケーラブルなクラスタープラン](#scalable-cluster-plan)へのスムーズな移行を実現します。
 
-For applications experiencing growing workloads and needing scalability in real time, the scalable cluster plan provides the flexibility and performance to keep pace with your business growth with the following features:
+#### スケーラブルなクラスタープラン {#scalable-cluster-plan}
 
-- **Enhanced capabilities**: Includes all capabilities of the free cluster plan, along with the capacity to handle larger and more complex workloads, as well as advanced security features.
-- **Automatic scaling**: Automatically adjusts storage and computing resources to efficiently meet changing workload demands.
-- **Predictable pricing**: Although this plan requires a credit card, you are only charged for the resources you use, ensuring cost-effective scalability.
+ワークロードが増加し、リアルタイムのスケーラビリティを必要とするアプリケーションの場合、スケーラブル クラスター プランは、次の機能により、ビジネスの成長に対応できる柔軟性とパフォーマンスを提供します。
 
-### Usage quota
+-   **拡張機能**: 無料のクラスター プランのすべての機能に加えて、より大規模で複雑なワークロードを処理する能力と高度なセキュリティ機能が含まれています。
+-   **自動スケーリング**: 変化するワークロードの需要に効率的に対応するために、storageとコンピューティング リソースを自動的に調整します。
+-   **予測可能な価格設定**: このプランではクレジットカードが必要ですが、使用したリソースに対してのみ課金されるため、コスト効率の高いスケーラビリティが保証されます。
 
-For each organization in TiDB Cloud, you can create a maximum of five [free clusters](#free-cluster-plan) by default. To create more {{{ .starter }}} clusters, you need to add a credit card and create [scalable clusters](#scalable-cluster-plan) for the usage.
+### 使用量制限 {#usage-quota}
 
-For the first five {{{ .starter }}} clusters in your organization, whether they are free or scalable, TiDB Cloud provides a free usage quota for each of them as follows:
+TiDB Cloudでは、組織ごとに最大5つのクラスター（デフォルトでは[フリークラスター](#free-cluster-plan)を作成できます。TiDB TiDB Cloud Serverlessクラスターをさらに作成するには、クレジットカードを追加し、使用量に応じて[スケーラブルなクラスター](#scalable-cluster-plan)クラスターを作成する必要があります。
 
-- Row-based storage: 5 GiB
-- Columnar storage: 5 GiB
-- Request Units (RUs): 50 million RUs per month
+組織内の最初の 5 つのTiDB Cloud Serverless クラスターについては、無料かスケーラブルかに関係なく、 TiDB Cloud は次のようにクラスターごとに無料使用量割り当てを提供します。
 
-A Request Unit (RU) is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified.
+-   行ベースのstorage: 5 GiB
+-   列指向storage: 5 GiB
+-   リクエストユニット（RU）：月間5,000万RU
 
-Once a cluster reaches its usage quota, it immediately denies any new connection attempts until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) or the usage is reset upon the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling. For example, when the row-based storage of a cluster exceeds 5 GiB for a free cluster, the cluster automatically restricts any new connection attempts.
+リクエストユニット（RU）は、データベースへの単一のリクエストで消費されるリソースの量を表す測定単位です。リクエストで消費されるRUの量は、操作の種類や取得または変更されるデータの量など、さまざまな要因によって異なります。
 
-To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
+クラスターが使用量クォータに達すると、新しい月[割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)始まるまで、または使用量がリセットされるまで、新規接続の試行は直ちに拒否されます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。例えば、クラスターの行ベースstorageが空きクラスターで5GiBを超えると、クラスターは自動的に新規接続の試行を制限します。
 
-### User name prefix
+さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク送信など) の RU 消費量、価格の詳細、スロットル情報の詳細については、 [TiDB Cloud Serverless の価格詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)参照してください。
+
+### ユーザー名のプレフィックス {#user-name-prefix}
 
 <!--Important: Do not update the section name "User name prefix" because this section is referenced by TiDB backend error messages.-->
 
-For each {{{ .starter }}} cluster, TiDB Cloud generates a unique prefix to distinguish it from other clusters.
+TiDB Cloud は、各TiDB Cloud Serverless クラスターに対して、他のクラスターと区別するための一意のプレフィックスを生成します。
 
-Whenever you use or set a database user name, you must include the prefix in the user name. For example, assume that the prefix of your cluster is `3pTAoNNegb47Uc8`.
+データベースユーザー名を使用または設定する際は、必ずユーザー名にプレフィックスを含める必要があります。例えば、クラスターのプレフィックスが`3pTAoNNegb47Uc8`であるとします。
 
-- To connect to your cluster:
+-   クラスターに接続するには:
 
     ```shell
     mysql -u '3pTAoNNegb47Uc8.root' -h <host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_root_path> -p
     ```
 
-    > **Note:**
+    > **注記：**
     >
-    > {{{ .starter }}} requires TLS connection. To find the CA root path on your system, see [Root certificate default path](/tidb-cloud/secure-connections-to-serverless-clusters.md#root-certificate-default-path).
+    > TiDB Cloud Serverless にはTLS接続が必要です。システム上のCAルートパスを確認するには、 [ルート証明書のデフォルトパス](/tidb-cloud/secure-connections-to-serverless-clusters.md#root-certificate-default-path)参照してください。
 
-- To create a database user:
+-   データベース ユーザーを作成するには:
 
     ```sql
     CREATE USER '3pTAoNNegb47Uc8.jeffrey';
     ```
 
-To get the prefix for your cluster, take the following steps:
+クラスターのプレフィックスを取得するには、次の手順を実行します。
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page.
-2. Click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner. A connection dialog is displayed.
-3. In the dialog, get the prefix from the connection string.
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+2.  ターゲットクラスターの名前をクリックして概要ページに移動し、右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
+3.  ダイアログで、接続文字列からプレフィックスを取得します。
 
-### {{{ .starter }}} special terms and conditions
+### TiDB Cloud Serverless の特別利用規約 {#tidb-cloud-serverless-special-terms-and-conditions}
 
-Some of TiDB Cloud features are partially supported or not supported on {{{ .starter }}}. See [{{{ .starter }}} Limitations](/tidb-cloud/serverless-limitations.md) for details.
+TiDB Cloudの一部の機能は、 TiDB Cloud Serverlessでは部分的にサポートされるか、サポートされません。詳細は[TiDB Cloudサーバーレスの制限](/tidb-cloud/serverless-limitations.md)ご覧ください。
 
-## TiDB Cloud Dedicated
+## TiDB Cloud専用 {#tidb-cloud-dedicated}
 
-TiDB Cloud Dedicated is for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
+TiDB Cloud Dedicated は、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番での使用を目的としています。
 
-For TiDB Cloud Dedicated clusters, you can customize the cluster size of TiDB, TiKV, and TiFlash easily according to your business need. For each TiKV node and TiFlash node, the data on the node is replicated and distributed in different availability zones for [high availability](/tidb-cloud/high-availability-with-multi-az.md).
+TiDB Cloud Dedicated クラスターでは、ビジネスニーズに合わせて TiDB、TiKV、 TiFlashのクラスターサイズを簡単にカスタマイズできます。各 TiKV ノードとTiFlashノードでは、ノード上のデータが複製され、異なるアベイラビリティゾーンに[高可用性](/tidb-cloud/high-availability-with-multi-az.md)日間分散されます。
 
-To create a TiDB Cloud Dedicated cluster, you need to [add a payment method](/tidb-cloud/tidb-cloud-billing.md#payment-method) or [apply for a Proof of Concept (PoC) trial](/tidb-cloud/tidb-cloud-poc.md).
+TiDB Cloud Dedicated クラスターを作成するには、 [支払い方法を追加する](/tidb-cloud/tidb-cloud-billing.md#payment-method)または[概念実証（PoC）トライアルに申し込む](/tidb-cloud/tidb-cloud-poc.md)が必要です。
 
-> **Note:**
+> **注記：**
 >
-> You cannot decrease the node storage after your cluster is created.
+> クラスターの作成後にノードstorageを減らすことはできません。

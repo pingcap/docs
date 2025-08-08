@@ -1,17 +1,17 @@
 ---
 title: CREATE [GLOBAL|SESSION] BINDING
-summary: Use of CREATE BINDING in TiDB database.
+summary: TiDB データベースでの CREATE BINDING の使用。
 ---
 
-# CREATE [GLOBAL|SESSION] BINDING
+# [グローバル|セッション]バインディングの作成 {#create-global-session-binding}
 
-This statement creates a new execution plan binding in TiDB. Binding can be used to inject a hint into a statement without requiring changes to the underlying query.
+このステートメントは、TiDB に新しい実行プラン バインディングを作成します。バインディングを使用すると、基になるクエリを変更することなく、ステートメントにヒントを挿入できます。
 
-A `BINDING` can be on either a `GLOBAL` or `SESSION` basis. The default is `SESSION`.
+`BINDING` `GLOBAL`または`SESSION`基準で表されます。デフォルトは`SESSION`です。
 
-The bound SQL statement is parameterized and stored in the system table. When a SQL query is processed, as long as the parameterized SQL statement and a bound one in the system table are consistent and the system variable `tidb_use_plan_baselines` is set to `ON` (default), the corresponding optimizer hint is available. If multiple execution plans are available, the optimizer chooses to bind the plan with the least cost. For more information, see [Create a binding](/sql-plan-management.md#create-a-binding).
+バインドされたSQL文はパラメータ化され、システムテーブルに格納されます。SQLクエリが処理される際、パラメータ化されたSQL文とシステムテーブル内のバインドされたSQL文が整合しており、システム変数`tidb_use_plan_baselines`が`ON` （デフォルト）に設定されている限り、対応するオプティマイザヒントが利用可能です。複数の実行プランが利用可能な場合、オプティマイザは最もコストの低いプランをバインドします。詳細については、 [バインディングを作成する](/sql-plan-management.md#create-a-binding)参照してください。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 CreateBindingStmt ::=
@@ -31,20 +31,18 @@ StringLiteralOrUserVariable ::=
     ( stringLiteral | UserVariable )
 ```
 
-****
+***
 
-## Examples
+## 例 {#examples}
 
-You can create a binding according to a SQL statement or a historical execution plan.
+SQL ステートメントまたは履歴実行プランに従ってバインディングを作成できます。
 
-When you create a binding according to a historical execution plan, you need to specify the corresponding Plan Digest:
+履歴実行プランに従ってバインディングを作成する場合は、対応するプラン ダイジェストを指定する必要があります。
 
-- You can use either the string literal or user variable of the string type to specify the Plan Digest.
-- You can specify multiple Plan Digests to create bindings for multiple statements at the same time. In this case, you can specify multiple strings, and include multiple digests in each string. Note that the strings or digests need to be separated by commas.
+-   プラン ダイジェストを指定するには、文字列リテラルまたは文字列型のユーザー変数のいずれかを使用できます。
+-   複数のプランダイジェストを指定して、複数のステートメントのバインディングを同時に作成できます。この場合、複数の文字列を指定し、各文字列に複数のダイジェストを含めることができます。文字列またはダイジェストはカンマで区切る必要があることに注意してください。
 
-The following example shows how to create a binding according to a SQL statement.
-
-{{< copyable "sql" >}}
+次の例は、SQL ステートメントに従ってバインディングを作成する方法を示しています。
 
 ```sql
 mysql> CREATE TABLE t1 (
@@ -146,7 +144,7 @@ mysql> EXPLAIN ANALYZE SELECT * FROM t1 WHERE b = 123;
 3 rows in set (0.01 sec)
 ```
 
-The following example shows how to create a binding according to a historical execution plan.
+次の例は、履歴実行プランに従ってバインディングを作成する方法を示しています。
 
 ```sql
 USE test;
@@ -162,14 +160,14 @@ SELECT * FROM t1 WHERE t1.a IN (SELECT a FROM t2);
 SELECT @@LAST_PLAN_FROM_BINDING;
 ```
 
-Method 1:
+方法1:
 
 ```sql
 SELECT query_sample_text, stmt_type, table_names, plan_digest FROM information_schema.statements_summary_history WHERE table_names LIKE '%test.t1%' AND stmt_type != 'CreateTable';
 CREATE GLOBAL BINDING FROM HISTORY USING PLAN DIGEST 'e72819cf99932f63a548156dbf433adda60e10337e89dcaa8638b4caf16f64d8,c291edc36b2482738d3389d335f37efc76290be2930330fe5034c5f4c42eeb36,8dc146249484f4a6ab219bfe9effa6b7a18aeed3764d49b610da61ac347ab914,73b2dec866595688ea416675f88ccb3456eb8e7443a79cd816695b688e07ac6b';
 ```
 
-Method 2:
+方法2:
 
 ```sql
 SELECT @digests:=GROUP_CONCAT(plan_digest) FROM information_schema.statements_summary_history WHERE table_names LIKE '%test.t1%' AND stmt_type != 'CreateTable';
@@ -310,14 +308,14 @@ Empty set (0.002 sec)
 1 row in set (0.002 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [DROP [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-drop-binding.md)
-* [SHOW [GLOBAL|SESSION] BINDINGS](/sql-statements/sql-statement-show-bindings.md)
-* [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
-* [Optimizer Hints](/optimizer-hints.md)
-* [SQL Plan Management](/sql-plan-management.md)
+-   [DROP [グローバル|セッション] バインディング](/sql-statements/sql-statement-drop-binding.md)
+-   [[グローバル|セッション]バインディングを表示](/sql-statements/sql-statement-show-bindings.md)
+-   [テーブルを分析する](/sql-statements/sql-statement-analyze-table.md)
+-   [オプティマイザヒント](/optimizer-hints.md)
+-   [SQLプラン管理](/sql-plan-management.md)

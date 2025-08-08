@@ -1,40 +1,38 @@
 ---
 title: JSON Functions That Aggregate JSON Values
-summary: Learn about JSON functions that aggregate JSON values.
+summary: JSON 値を集約する JSON関数について学習します。
 ---
 
-# JSON Functions That Aggregate JSON Values
+# JSON値を集約するJSON関数 {#json-functions-that-aggregate-json-values}
 
-The functions listed on this page are part of the [aggregate functions](/functions-and-operators/aggregate-group-by-functions.md) that TiDB supports, but are specific to working with JSON.
+このページにリストされている関数は、TiDB がサポートする[集計関数](/functions-and-operators/aggregate-group-by-functions.md)の一部ですが、JSON の操作に特化しています。
 
-## [JSON_ARRAYAGG()](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_json-arrayagg)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_json-arrayagg">JSON_ARRAYAGG()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-aggregate-functions-html-function-json-arrayagg-json-arrayagg-a}
 
-The `JSON_ARRAYAGG(key)` function aggregates values of keys into a JSON array according to the given `key`. `key` is typically an expression or a column name.
+`JSON_ARRAYAGG(key)`関数は、指定された`key`に従ってキーの値を JSON 配列に集約します。5 `key`通常、式または列名です。
 
-Example:
+例：
 
-Here the two rows in one column of a table get aggregated into a JSON array.
+ここでは、テーブルの 1 つの列にある 2 つの行が JSON 配列に集約されます。
 
 ```sql
 SELECT JSON_ARRAYAGG(v) FROM (SELECT 1 'v' UNION SELECT 2);
 ```
 
-```
-+------------------+
-| JSON_ARRAYAGG(v) |
-+------------------+
-| [2, 1]           |
-+------------------+
-1 row in set (0.00 sec)
-```
+    +------------------+
+    | JSON_ARRAYAGG(v) |
+    +------------------+
+    | [2, 1]           |
+    +------------------+
+    1 row in set (0.00 sec)
 
-## [JSON_OBJECTAGG()](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_json-objectagg)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_json-objectagg">JSON_OBJECTAGG()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-aggregate-functions-html-function-json-objectagg-json-objectagg-a}
 
-The `JSON_OBJECTAGG(key,value)` function aggregates keys and values of keys into a JSON object according to the given `key` and `value`. Both `key` or `value` are typically an expression or a column name.
+`JSON_OBJECTAGG(key,value)`関数は、指定された`key`と`value`に従って、キーとキーの値をJSONオブジェクトに集約します。7 と`value` `key` 、式または列名です。
 
-Example:
+例：
 
-First, create two tables and add a few rows to them.
+まず、2 つのテーブルを作成し、そこにいくつかの行を追加します。
 
 ```sql
 CREATE TABLE plants (
@@ -66,43 +64,39 @@ VALUES
 (3, "thorns","no");
 ```
 
-Now you can check what the created tables look like.
+これで、作成されたテーブルがどのように見えるかを確認できます。
 
 ```sql
 TABLE plants;
 ```
 
-```
-+----+--------+
-| id | name   |
-+----+--------+
-|  1 | rose   |
-|  2 | tulip  |
-|  3 | orchid |
-+----+--------+
-3 rows in set (0.00 sec)
-```
+    +----+--------+
+    | id | name   |
+    +----+--------+
+    |  1 | rose   |
+    |  2 | tulip  |
+    |  3 | orchid |
+    +----+--------+
+    3 rows in set (0.00 sec)
 
 ```sql
 TABLE plant_attributes;
 ```
 
-```
-+----+----------+------------+--------+
-| id | plant_id | attribute  | value  |
-+----+----------+------------+--------+
-|  1 |        1 | color      | red    |
-|  2 |        1 | thorns     | yes    |
-|  3 |        2 | color      | orange |
-|  4 |        2 | thorns     | no     |
-|  5 |        2 | grows_from | bulb   |
-|  6 |        3 | color      | white  |
-|  7 |        3 | thorns     | no     |
-+----+----------+------------+--------+
-7 rows in set (0.00 sec)
-```
+    +----+----------+------------+--------+
+    | id | plant_id | attribute  | value  |
+    +----+----------+------------+--------+
+    |  1 |        1 | color      | red    |
+    |  2 |        1 | thorns     | yes    |
+    |  3 |        2 | color      | orange |
+    |  4 |        2 | thorns     | no     |
+    |  5 |        2 | grows_from | bulb   |
+    |  6 |        3 | color      | white  |
+    |  7 |        3 | thorns     | no     |
+    +----+----------+------------+--------+
+    7 rows in set (0.00 sec)
 
-You can use the `JSON_OBJECTAGG()` function with this data. Here you can see that for every group multiple key/value pairs are aggregated into a JSON object.
+このデータには`JSON_OBJECTAGG()`関数を使用できます。ここでは、グループごとに複数のキーと値のペアがJSONオブジェクトに集約されていることがわかります。
 
 ```sql
 SELECT
@@ -115,18 +109,16 @@ GROUP BY
     plant_id;
 ```
 
-```
-+--------+-----------------------------------------------------------+
-| name   | JSON_OBJECTAGG(attribute,value)                           |
-+--------+-----------------------------------------------------------+
-| rose   | {"color": "red", "thorns": "yes"}                         |
-| orchid | {"color": "white", "thorns": "no"}                        |
-| tulip  | {"color": "orange", "grows_from": "bulb", "thorns": "no"} |
-+--------+-----------------------------------------------------------+
-3 rows in set (0.00 sec)
-```
+    +--------+-----------------------------------------------------------+
+    | name   | JSON_OBJECTAGG(attribute,value)                           |
+    +--------+-----------------------------------------------------------+
+    | rose   | {"color": "red", "thorns": "yes"}                         |
+    | orchid | {"color": "white", "thorns": "no"}                        |
+    | tulip  | {"color": "orange", "grows_from": "bulb", "thorns": "no"} |
+    +--------+-----------------------------------------------------------+
+    3 rows in set (0.00 sec)
 
-## See also
+## 参照 {#see-also}
 
-- [JSON Functions Overview](/functions-and-operators/json-functions.md)
-- [JSON Data Type](/data-type-json.md)
+-   [JSON関数の概要](/functions-and-operators/json-functions.md)
+-   [JSONデータ型](/data-type-json.md)

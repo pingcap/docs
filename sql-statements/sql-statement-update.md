@@ -1,13 +1,13 @@
 ---
 title: UPDATE | TiDB SQL Statement Reference
-summary: An overview of the usage of UPDATE for the TiDB database.
+summary: TiDB データベースの UPDATE の使用法の概要。
 ---
 
-# UPDATE
+# アップデート {#update}
 
-The `UPDATE` statement is used to modify data in a specified table.
+`UPDATE`ステートメントは、指定されたテーブル内のデータを変更するために使用されます。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 UpdateStmt ::=
@@ -26,11 +26,11 @@ TableRefs ::=
     EscapedTableRef ("," EscapedTableRef)*
 ```
 
-> **Note:**
+> **注記：**
 >
-> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control-ru-groups.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority (`LOW_PRIORITY` and `HIGH_PRIORITY`) will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control-ru-groups.md) to manage resource usage for different SQL statements.
+> TiDB v6.6.0以降、 [リソース管理](/tidb-resource-control-ru-groups.md)サポートします。この機能を使用すると、異なるリソースグループで異なる優先度のSQL文を実行できます。これらのリソースグループに適切なクォータと優先度を設定することで、優先度の異なるSQL文のスケジュールをより適切に制御できます。リソース制御を有効にすると、文の優先度（ `LOW_PRIORITY`と`HIGH_PRIORITY` ）は無効になります。異なるSQL文のリソース使用量を管理するには、 [リソース管理](/tidb-resource-control-ru-groups.md)使用することをお勧めします。
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -65,9 +65,9 @@ mysql> SELECT * FROM t1;
 3 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-TiDB always uses the original value of a column when evaluating expressions. For example:
+TiDBは式を評価する際に常に列の元の値を使用します。例:
 
 ```sql
 CREATE TABLE t (a int, b int);
@@ -75,13 +75,13 @@ INSERT INTO t VALUES (1,2);
 UPDATE t SET a = a+1,b=a;
 ```
 
-In MySQL, the column `b` is updated to 2 because it is set to the value of `a`, and the value of `a` (which is 1) is updated to `a+1` (which is 2) in the same statement. 
+MySQL では、列`b`値`a`に設定されているため 2 に更新され、同じステートメントで値`a` (1) は値`a+1` (2) に更新されます。
 
-TiDB follows the more standard SQL behavior, and updates `b` to 1.
+TiDB はより標準的な SQL 動作に従い、 `b`対 1 で更新します。
 
-## See also
+## 参照 {#see-also}
 
-* [INSERT](/sql-statements/sql-statement-insert.md)
-* [SELECT](/sql-statements/sql-statement-select.md)
-* [DELETE](/sql-statements/sql-statement-delete.md)
-* [REPLACE](/sql-statements/sql-statement-replace.md)
+-   [入れる](/sql-statements/sql-statement-insert.md)
+-   [選択](/sql-statements/sql-statement-select.md)
+-   [消去](/sql-statements/sql-statement-delete.md)
+-   [交換する](/sql-statements/sql-statement-replace.md)

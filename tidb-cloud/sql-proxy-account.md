@@ -1,90 +1,90 @@
 ---
 title: SQL Proxy Account
-summary: Learn about the SQL proxy account in TiDB Cloud.
+summary: TiDB Cloudの SQL プロキシ アカウントについて説明します。
 ---
 
-# SQL Proxy Account
+# SQL プロキシアカウント {#sql-proxy-account}
 
-A SQL proxy account is a SQL user account that is automatically created by TiDB Cloud to access the database via [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) or [Data Service](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice) on behalf of a TiDB Cloud user. For example, `testuser@pingcap.com` is a TiDB Cloud user account, while `3jhEcSimm7keKP8.testuser._41mqK6H4` is its corresponding SQL proxy account.
+SQLプロキシアカウントは、 TiDB Cloudによって自動的に作成されるSQLユーザーアカウントで、 TiDB Cloudユーザーに代わって[SQLエディター](/tidb-cloud/explore-data-with-chat2query.md)または[データサービス](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)介してデータベースにアクセスするために作成されます。たとえば、 `testuser@pingcap.com` TiDB Cloudユーザーアカウントで、 `3jhEcSimm7keKP8.testuser._41mqK6H4`それに対応するSQLプロキシアカウントです。
 
-SQL proxy accounts provide a secure, token-based authentication mechanism for accessing the database in TiDB Cloud. By eliminating the need for traditional username and password credentials, SQL proxy accounts enhance security and simplify access management.
+SQLプロキシアカウントは、 TiDB Cloud内のデータベースにアクセスするための安全なトークンベースの認証メカニズムを提供します。従来のユーザー名とパスワードによる認証が不要になるため、SQLプロキシアカウントはセキュリティを強化し、アクセス管理を簡素化します。
 
-The key benefits of SQL proxy accounts are as follows:
+SQL プロキシ アカウントの主な利点は次のとおりです。
 
-- Enhanced security: mitigates risks associated with static credentials by using JWT tokens.
-- Streamlined access: restricts access specifically to the SQL Editor and Data Service, ensuring precise control.
-- Ease of management: simplifies authentication for developers and administrators working with TiDB Cloud.
+-   強化されたセキュリティ: JWT トークンを使用することで、静的資格情報に関連するリスクを軽減します。
+-   合理化されたアクセス: SQL エディターとデータ サービスへのアクセスを具体的に制限し、正確な制御を保証します。
+-   管理の容易さ: TiDB Cloudを使用する開発者と管理者の認証を簡素化します。
 
-## Identify the SQL proxy account
+## SQLプロキシアカウントを特定する {#identify-the-sql-proxy-account}
 
-If you want to identify whether a specific SQL account is a SQL proxy account, take the following steps:
+特定の SQL アカウントが SQL プロキシ アカウントであるかどうかを識別する場合は、次の手順を実行します。
 
-1. Examine the `mysql.user` table:
+1.  `mysql.user`テーブルを調べます。
 
     ```sql
     USE mysql;
     SELECT user FROM user WHERE plugin = 'tidb_auth_token';
     ```
 
-2. Check grants for the SQL account. If roles like `role_admin`, `role_readonly`, or `role_readwrite` are listed, then it is a SQL proxy account.
+2.  SQLアカウントの権限を確認してください。1、3、5 `role_admin`のロール`role_readonly`リストさ`role_readwrite`ている場合は、SQLプロキシアカウントです。
 
     ```sql
     SHOW GRANTS for 'username';
     ```
 
-## How the SQL proxy account is created
+## SQLプロキシアカウントの作成方法 {#how-the-sql-proxy-account-is-created}
 
-The SQL proxy account is automatically created during TiDB Cloud cluster initialization for the TiDB Cloud user who is granted a role with permissions in the cluster.
+SQL プロキシ アカウントは、クラスター内で権限を持つロールが付与されたTiDB Cloud TiDB Cloud Cloud クラスターの初期化中に自動的に作成されます。
 
-## How the SQL proxy account is deleted
+## SQLプロキシアカウントを削除する方法 {#how-the-sql-proxy-account-is-deleted}
 
-When a user is removed from [an organization](/tidb-cloud/manage-user-access.md#remove-an-organization-member) or [a project](/tidb-cloud/manage-user-access.md#remove-a-project-member), or their role changes to one that does not have access to the cluster, the SQL proxy account is automatically deleted.
+ユーザーが[組織](/tidb-cloud/manage-user-access.md#remove-an-organization-member)または[プロジェクト](/tidb-cloud/manage-user-access.md#remove-a-project-member)から削除されるか、そのロールがクラスターにアクセスできないロールに変更されると、SQL プロキシ アカウントは自動的に削除されます。
 
-Note that if a SQL proxy account is manually deleted, it will be automatically recreated when the user log in to the TiDB Cloud console next time.
+SQL プロキシ アカウントを手動で削除した場合、ユーザーが次回TiDB Cloudコンソールにログインしたときに自動的に再作成されることに注意してください。
 
-## SQL proxy account username
+## SQLプロキシアカウントのユーザー名 {#sql-proxy-account-username}
 
-In some cases, the SQL proxy account username is exactly the same as the TiDB Cloud username, but in other cases it is not exactly the same. The SQL proxy account username is determined by the length of the TiDB Cloud user's email address. The rules are as follows:
+SQLプロキシアカウントのユーザー名は、 TiDB Cloudのユーザー名と完全に一致する場合もありますが、完全に一致しない場合もあります。SQLプロキシアカウントのユーザー名は、 TiDB Cloudユーザーのメールアドレスの長さによって決まります。ルールは以下のとおりです。
 
-| Environment | Email length | Username format |
-| ----------- | ------------ | --------------- |
-| TiDB Cloud Dedicated | <= 32 characters | Full email address |
-| TiDB Cloud Dedicated | > 32 characters | `prefix($email, 23)_prefix(base58(sha1($email)), 8)` |
-| {{{ .starter }}} | <= 15 characters | `serverless_unique_prefix + "." + email` |
-| {{{ .starter }}} | > 15 characters | `serverless_unique_prefix + "." + prefix($email, 6)_prefix(base58(sha1($email)), 8)` |
+| 環境               | メールの長さ | ユーザー名の形式                                                                             |
+| ---------------- | ------ | ------------------------------------------------------------------------------------ |
+| TiDB Cloud専用     | 32文字以下 | 完全なメールアドレス                                                                           |
+| TiDB Cloud専用     | 32文字   | `prefix($email, 23)_prefix(base58(sha1($email)), 8)`                                 |
+| TiDB Cloudサーバーレス | 15文字以下 | `serverless_unique_prefix + "." + email`                                             |
+| TiDB Cloudサーバーレス | 15文字   | `serverless_unique_prefix + "." + prefix($email, 6)_prefix(base58(sha1($email)), 8)` |
 
-Examples:
+例:
 
-| Environment | Email address | SQL proxy account username |
-| ----------- | ----- | -------- |
-| TiDB Cloud Dedicated | `user@pingcap.com` | `user@pingcap.com` |
-| TiDB Cloud Dedicated | `longemailaddressexample@pingcap.com` | `longemailaddressexample_48k1jwL9` |
-| {{{ .starter }}} | `u1@pingcap.com` | `{user_name_prefix}.u1@pingcap.com` |
-| {{{ .starter }}} | `longemailaddressexample@pingcap.com` | `{user_name_prefix}.longem_48k1jwL9`|
+| 環境               | 電子メールアドレス                             | SQLプロキシアカウントのユーザー名                   |
+| ---------------- | ------------------------------------- | ------------------------------------ |
+| TiDB Cloud専用     | `user@pingcap.com`                    | `user@pingcap.com`                   |
+| TiDB Cloud専用     | `longemailaddressexample@pingcap.com` | `longemailaddressexample_48k1jwL9`   |
+| TiDB Cloudサーバーレス | `u1@pingcap.com`                      | `{user_name_prefix}.u1@pingcap.com`  |
+| TiDB Cloudサーバーレス | `longemailaddressexample@pingcap.com` | `{user_name_prefix}.longem_48k1jwL9` |
 
-> **Note:**
+> **注記：**
 >
-> In the preceding table, `{user_name_prefix}` is a unique prefix generated by TiDB Cloud to distinguish {{{ .starter }}} clusters. For details, see the [user name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) of {{{ .starter }}} clusters.
+> 上記の表の`{user_name_prefix}`は、 TiDB Cloud Serverless クラスターを区別するためにTiDB Cloudによって生成される一意のプレフィックスです。詳細については、 TiDB Cloud Serverless クラスターの「 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)参照してください。
 
-## SQL proxy account password
+## SQLプロキシアカウントのパスワード {#sql-proxy-account-password}
 
-Since SQL proxy accounts are JWT token-based, it is not necessary to manage passwords for these accounts. The security token is automatically managed by the system.
+SQL プロキシアカウントは JWT トークンベースであるため、これらのアカウントのパスワードを管理する必要はありません。セキュリティトークンはシステムによって自動的に管理されます。
 
-## SQL proxy account roles
+## SQL プロキシ アカウント ロール {#sql-proxy-account-roles}
 
-The SQL proxy account's role depends on the TiDB Cloud user's IAM role:
+SQL プロキシ アカウントのロールは、 TiDB CloudユーザーのIAMロールによって異なります。
 
-- Organization level:
-    - Organization Owner: role_admin
-    - Organization Billing Manager: No proxy account
-    - Organization Viewer: No proxy account
-    - Organization Console Audit Manager: No proxy account
+-   組織レベル:
+    -   組織の所有者: role_admin
+    -   組織の請求管理者: 代理アカウントなし
+    -   組織閲覧者: プロキシアカウントなし
+    -   組織コンソール監査マネージャ: プロキシアカウントなし
 
-- Project level:
-    - Project Owner: role_admin
-    - Project Data Access Read-Write: role_readwrite
-    - Project Data Access Read-Only: role_readonly
+-   プロジェクトレベル:
+    -   プロジェクトオーナー: role_admin
+    -   プロジェクトデータアクセスの読み取り/書き込み: role_readwrite
+    -   プロジェクトデータアクセス読み取り専用: role_readonly
 
-## SQL proxy account access control
+## SQL プロキシ アカウント アクセス制御 {#sql-proxy-account-access-control}
 
-SQL proxy accounts are JWT token-based and only accessible to the Data Service and SQL Editor. It is impossible to access the TiDB Cloud cluster using a SQL proxy account with a username and password.
+SQLプロキシアカウントはJWTトークンベースであり、データサービスとSQLエディタからのみアクセスできます。ユーザー名とパスワードを使用してSQLプロキシアカウントを使用してTiDB Cloudクラスターにアクセスすることはできません。

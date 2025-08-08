@@ -1,64 +1,62 @@
 ---
 title: Use SQL User Resource
-summary: Learn how to use the SQL user resource to create and modify a TiDB Cloud SQL user.
+summary: SQL ユーザー リソースを使用してTiDB Cloud SQL ユーザーを作成および変更する方法を学習します。
 ---
 
-# Use SQL User Resource
+# SQL ユーザー リソースを使用する {#use-sql-user-resource}
 
-This document describes how to manage TiDB Cloud SQL users using the `tidbcloud_sql_user` resource.
+このドキュメントでは、 `tidbcloud_sql_user`リソースを使用してTiDB Cloud SQL ユーザーを管理する方法について説明します。
 
-The features of the `tidbcloud_sql_user` resource include the following:
+`tidbcloud_sql_user`リソースの機能は次のとおりです。
 
-- Create TiDB Cloud SQL users.
-- Modify TiDB Cloud SQL users.
-- Import TiDB Cloud SQL users.
-- Delete TiDB Cloud SQL users.
+-   TiDB Cloud SQL ユーザーを作成します。
+-   TiDB Cloud SQL ユーザーを変更します。
+-   TiDB Cloud SQL ユーザーをインポートします。
+-   TiDB Cloud SQL ユーザーを削除します。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
-- [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md) or [a {{{ .starter }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+-   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
+-   [TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)または[TiDB Cloudサーバーレスクラスター](/tidb-cloud/create-tidb-cluster-serverless.md) 。
 
-## Create a SQL user
+## SQLユーザーを作成する {#create-a-sql-user}
 
-You can create a SQL user using the `tidbcloud_sql_user` resource.
+`tidbcloud_sql_user`リソースを使用して SQL ユーザーを作成できます。
 
-The following example shows how to create a TiDB Cloud SQL user.
+次の例は、TiDB Cloud SQL ユーザーを作成する方法を示しています。
 
-1. Create a directory for the SQL user and enter it.
+1.  SQL ユーザーのディレクトリを作成してそこに入ります。
 
-2. Create a `sql_user.tf` file:
+2.  `sql_user.tf`ファイルを作成します。
 
-    ```
-    terraform {
-      required_providers {
-        tidbcloud = {
-          source = "tidbcloud/tidbcloud"
+        terraform {
+          required_providers {
+            tidbcloud = {
+              source = "tidbcloud/tidbcloud"
+            }
+          }
         }
-      }
-    }
 
-    provider "tidbcloud" {
-      public_key = "your_public_key"
-      private_key = "your_private_key"
-    }
+        provider "tidbcloud" {
+          public_key = "your_public_key"
+          private_key = "your_private_key"
+        }
 
-    resource "tidbcloud_sql_user" "example" {
-      cluster_id   = "your_cluster_id"
-      user_name    = "example_user"
-      password     = "example_password"
-      builtin_role = "role_admin"
-    }
-    ```
+        resource "tidbcloud_sql_user" "example" {
+          cluster_id   = "your_cluster_id"
+          user_name    = "example_user"
+          password     = "example_password"
+          builtin_role = "role_admin"
+        }
 
-    Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
+    `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    - To use the SQL user resource, set the resource type as `tidbcloud_sql_user`.
-    - For the resource name, you can define it as needed. For example, `example`.
-    - For SQL users in the {{{ .starter }}} cluster, the `user_name` and builtin role `role_readonly` and `role_readwrite` must start with the user prefix, you can get the user prefix by running the `tidbcloud_serverless_cluster` data source.
-    - To get the SQL user specification information, see [`tidbcloud_sql_user` (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/sql_user).
+    -   SQL ユーザー リソースを使用するには、リソース タイプを`tidbcloud_sql_user`に設定します。
+    -   リソース名は必要に応じて定義できます。例： `example` 。
+    -   TiDB Cloud Serverless クラスター内の SQL ユーザーの場合、 `user_name`と組み込みロール`role_readonly`および`role_readwrite`ユーザー プレフィックスで始まる必要があり、 `tidbcloud_serverless_cluster`データ ソースを実行することでユーザー プレフィックスを取得できます。
+    -   SQL ユーザー指定情報を取得するには、 [`tidbcloud_sql_user` (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/sql_user)参照してください。
 
-3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
+3.  `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 
     ```shell
     $ terraform apply
@@ -86,13 +84,13 @@ The following example shows how to create a TiDB Cloud SQL user.
       Enter a value:
     ```
 
-    In the preceding result, Terraform generates an execution plan for you, which describes the actions Terraform will take:
+    上記の結果では、Terraform によって実行プランが生成され、Terraform が実行するアクションが記述されます。
 
-    - You can check the differences between the configurations and the states.
-    - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
-    - `known after apply` indicates that you will get the corresponding value after `apply`.
+    -   構成と状態の違いを確認できます。
+    -   `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
+    -   `known after apply` `apply`後の対応する値が取得されることを示します。
 
-4. If everything in your plan looks fine, type `yes` to continue:
+4.  計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
 
     ```shell
     Do you want to perform these actions?
@@ -107,7 +105,7 @@ The following example shows how to create a TiDB Cloud SQL user.
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-5. Use the `terraform show` or `terraform state show tidbcloud_sql_user.${resource-name}` command to inspect the state of your resource. The former command shows the states of all resources and data sources.
+5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_sql_user.${resource-name}`使用します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_sql_user.example                 
@@ -120,24 +118,22 @@ The following example shows how to create a TiDB Cloud SQL user.
       }
     ```
 
-## Change the password or user roles of a SQL user
+## SQL ユーザーのパスワードまたはユーザー ロールを変更する {#change-the-password-or-user-roles-of-a-sql-user}
 
-You can use Terraform to change the password or user roles of a SQL user as follows:
+次のように、Terraform を使用して SQL ユーザーのパスワードまたはユーザー ロールを変更できます。
 
-1. In the `sql_user.tf` file that is used when you [create the SQL user](#create-a-sql-user), change the `password`, `builtin_role`, and `custom_roles` (if applicable).
+1.  [SQLユーザーを作成する](#create-a-sql-user)実行するときに使用する`sql_user.tf`ファイルで、 `password` 、 `builtin_role` 、および`custom_roles` (該当する場合) を変更します。
 
-    For example:
+    例えば：
 
-    ```
-    resource "tidbcloud_sql_user" "example" {
-      cluster_id = 10423692645600000000
-      user_name = "example_user"
-      password = "updated_example_password"
-      builtin_role = "role_readonly"
-    }
-    ```
+        resource "tidbcloud_sql_user" "example" {
+          cluster_id = 10423692645600000000
+          user_name = "example_user"
+          password = "updated_example_password"
+          builtin_role = "role_readonly"
+        }
 
-2. Run the `terraform apply` command:
+2.  `terraform apply`コマンドを実行します。
 
     ```shell
     $ terraform apply
@@ -167,9 +163,9 @@ You can use Terraform to change the password or user roles of a SQL user as foll
 
     ```
 
-    In the preceding execution plan, password and builtin role will be changed.
+    上記の実行プランでは、パスワードと組み込みロールが変更されます。
 
-3. If everything in your plan looks fine, type `yes` to continue:
+3.  計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
 
     ```shell
       Enter a value: yes
@@ -180,55 +176,51 @@ You can use Terraform to change the password or user roles of a SQL user as foll
     Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
     ```
 
-4. Use `terraform state show tidbcloud_sql_user.${resource-name}` to check the state:
+4.  `terraform state show tidbcloud_sql_user.${resource-name}`使用して状態を確認します。
 
-    ```
-    $ terraform state show tidbcloud_sql_user.example
-    # tidbcloud_sql_user.example:
-    resource "tidbcloud_sql_user" "example" {
-        builtin_role = "role_readonly"
-        cluster_id   = "10423692645600000000"
-        password     = (sensitive value)
-        user_name    = "example_user"
-    }
-    ```
+        $ terraform state show tidbcloud_sql_user.example
+        # tidbcloud_sql_user.example:
+        resource "tidbcloud_sql_user" "example" {
+            builtin_role = "role_readonly"
+            cluster_id   = "10423692645600000000"
+            password     = (sensitive value)
+            user_name    = "example_user"
+        }
 
-The `builtin_role` is changed to `role_readonly`. The `password` is not shown because it is a sensitive value.
+`builtin_role` `role_readonly`に変更されます。5 `password`センシティブな値であるため表示されません。
 
-## Import a SQL user
+## SQLユーザーをインポートする {#import-a-sql-user}
 
-For a TiDB Cloud SQL user that is not managed by Terraform, you can use Terraform to manage it by importing it.
+Terraform で管理されていないTiDB Cloud SQL ユーザーの場合は、Terraform を使用してインポートすることで管理できます。
 
-For example, you can import a SQL user that is not created by Terraform as follows:
+たとえば、Terraform によって作成されていない SQL ユーザーを次のようにインポートできます。
 
-1. Add an import block for the new SQL user resource
+1.  新しいSQLユーザーリソースのインポートブロックを追加する
 
-    Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,user_name`:
+    次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` `cluster_id,user_name`の形式に置き換えます。
 
-    ```
-    import {
-      to = tidbcloud_sql_user.example
-      id = "${id}"
-    }
-    ```
+        import {
+          to = tidbcloud_sql_user.example
+          id = "${id}"
+        }
 
-2. Generate the new configuration file
+2.  新しい設定ファイルを生成する
 
-    Generate the new configuration file for the new SQL user resource according to the import block:
+    インポート ブロックに従って、新しい SQL ユーザー リソースの新しい構成ファイルを生成します。
 
     ```shell
     terraform plan -generate-config-out=generated.tf
     ```
 
-    Do not specify an existing `.tf` filename in the preceding command. Otherwise, Terraform will return an error.
+    上記のコマンドでは、既存の`.tf`名を指定しないでください。指定した場合、Terraform はエラーを返します。
 
-    Then the `generated.tf` file is created in the current directory, which contains the configuration of the imported resource. But the provider will throw an error because the required argument `password` is not set. You can replace the value of `password` argument to the `tidbcloud_sql_user` resource in the generated configuration file.
+    その後、カレントディレクトリに`generated.tf`ファイルが作成され、そこにインポートされたリソースの設定が含まれます。ただし、必須の引数`password`設定されていないため、プロバイダーはエラーをスローします。生成された設定ファイルで、引数`password`の値を`tidbcloud_sql_user`リソースに置き換えることができます。
 
-3. Review and apply the generated configuration
+3.  生成された構成を確認して適用する
 
-    Review the generated configuration file to ensure that it meets your needs. Optionally, you can move the contents of this file to your preferred location.
+    生成された構成ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
 
-    Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
+    次に、 `terraform apply`実行してインフラストラクチャをインポートします。適用後の出力例は次のとおりです。
 
     ```shell
     tidbcloud_sql_user.example: Importing... [id=10423692645600000000,example_user]
@@ -237,11 +229,11 @@ For example, you can import a SQL user that is not created by Terraform as follo
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
 
-Now you can manage the imported SQL user with Terraform.
+これで、インポートした SQL ユーザーを Terraform で管理できるようになりました。
 
-## Delete a SQL user
+## SQLユーザーを削除する {#delete-a-sql-user}
 
-To delete a SQL user, you can delete the configuration of the `tidbcloud_sql_user` resource, then use the `terraform apply` command to destroy the resource:
+SQL ユーザーを削除するには、 `tidbcloud_sql_user`リソースの構成を削除し、 `terraform apply`コマンドを使用してリソースを破棄します。
 
 ```shell
   $ terraform apply
@@ -275,8 +267,6 @@ To delete a SQL user, you can delete the configuration of the `tidbcloud_sql_use
   Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
 ```
 
-Now, if you run the `terraform show` command, you will get nothing because the resource has been cleared:
+ここで、コマンド`terraform show`実行すると、リソースがクリアされているため何も表示されません。
 
-```
-$ terraform show
-```
+    $ terraform show

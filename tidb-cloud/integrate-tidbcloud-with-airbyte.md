@@ -1,111 +1,116 @@
 ---
 title: Integrate TiDB Cloud with Airbyte
-summary: Learn how to use Airbyte TiDB connector.
+summary: Airbyte TiDB コネクタの使用方法を学びます。
 ---
 
-# Integrate TiDB Cloud with Airbyte
+# TiDB CloudとAirbyteを統合する {#integrate-tidb-cloud-with-airbyte}
 
-[Airbyte](https://airbyte.com/) is an open-source data integration engine to build Extract, Load, Transform (ELT) pipelines and consolidate your data in your data warehouses, data lakes, and databases. This document describes how to connect Airbyte to TiDB Cloud as a source or a destination.
+Airbyte [エアバイト](https://airbyte.com/) 、抽出、ロード、変換（ELT）パイプラインを構築し、データウェアハウス、データレイク、データベース内のデータを統合するためのオープンソースのデータ統合エンジンです。このドキュメントでは、AirbyteをTiDB Cloudにソースまたはデスティネーションとして接続する方法について説明します。
 
-## Deploy Airbyte
+## Airbyteをデプロイ {#deploy-airbyte}
 
-You can deploy Airbyte locally with only a few steps.
+わずか数ステップで Airbyte をローカルに展開できます。
 
-1. Install [Docker](https://www.docker.com/products/docker-desktop) on your workspace.
+1.  ワークスペースに[ドッカー](https://www.docker.com/products/docker-desktop)インストールします。
 
-2. Clone the Airbyte source code.
+2.  Airbyte ソース コードを複製します。
 
     ```shell
     git clone https://github.com/airbytehq/airbyte.git && \
     cd airbyte
     ```
 
-3. Run the Docker images by docker-compose.
+3.  docker-compose で Docker イメージを実行します。
 
     ```shell
     docker-compose up
     ```
 
-Once you see an Airbyte banner, you can go to [http://localhost:8000](http://localhost:8000) with the username (`airbyte`) and password (`password`) to visit the UI.
+Airbyteのバナーが表示されたら、ユーザー名( `airbyte` )とパスワード( `password` )を使用して[http://localhost:8000](http://localhost:8000)に進み、UIにアクセスできます。
 
-```
-airbyte-server      |     ___    _      __          __
-airbyte-server      |    /   |  (_)____/ /_  __  __/ /____
-airbyte-server      |   / /| | / / ___/ __ \/ / / / __/ _ \
-airbyte-server      |  / ___ |/ / /  / /_/ / /_/ / /_/  __/
-airbyte-server      | /_/  |_/_/_/  /_.___/\__, /\__/\___/
-airbyte-server      |                     /____/
-airbyte-server      | --------------------------------------
-airbyte-server      |  Now ready at http://localhost:8000/
-airbyte-server      | --------------------------------------
-```
+    airbyte-server      |     ___    _      __          __
+    airbyte-server      |    /   |  (_)____/ /_  __  __/ /____
+    airbyte-server      |   / /| | / / ___/ __ \/ / / / __/ _ \
+    airbyte-server      |  / ___ |/ / /  / /_/ / /_/ / /_/  __/
+    airbyte-server      | /_/  |_/_/_/  /_.___/\__, /\__/\___/
+    airbyte-server      |                     /____/
+    airbyte-server      | --------------------------------------
+    airbyte-server      |  Now ready at http://localhost:8000/
+    airbyte-server      | --------------------------------------
 
-## Set up the TiDB connector
+## TiDBコネクタを設定する {#set-up-the-tidb-connector}
 
-Conveniently, the steps are the same for setting TiDB as the source and the destination.
+便利なことに、TiDB をソースと宛先として設定する手順は同じです。
 
-1. Click **Sources** or **Destinations** in the sidebar and choose TiDB type to create a new TiDB connector.
+1.  サイドバーの**「ソース」**または**「宛先」**をクリックし、TiDB タイプを選択して新しい TiDB コネクタを作成します。
 
-2. Fill in the following parameters.
+2.  次のパラメータを入力してください。
 
-    - Host: The endpoint of your TiDB Cloud cluster
-    - Port: The port of the database
-    - Database: The database that you want to sync the data
-    - Username: The username to access the database
-    - Password: The password of the username
+    -   ホスト: TiDB Cloudクラスターのエンドポイント
+    -   ポート: データベースのポート
+    -   データベース: データを同期するデータベース
+    -   ユーザー名: データベースにアクセスするためのユーザー名
+    -   パスワード: ユーザー名のパスワード
 
-    You can get the parameter values from the connection dialog of your cluster. To open the dialog, go to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
+    パラメータ値は、クラスターの接続ダイアログから取得できます。ダイアログを開くには、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲットクラスターの名前をクリックして概要ページに移動し、右上隅の**「接続」**をクリックします。
 
-3. Enable **SSL Connection**, and set TLS protocols to **TLSv1.2** or **TLSv1.3** in **JDBC URL Params**.
+3.  **SSL 接続**を有効にし、 **JDBC URL パラメータ**で TLS プロトコルを**TLSv1.2**または**TLSv1.3**に設定します。
 
-    > Note:
+    > 注記：
     >
-    > - TiDB Cloud supports TLS connection. You can choose your TLS protocols in **TLSv1.2** and **TLSv1.3**, for example, `enabledTLSProtocols=TLSv1.2`.
-    > - If you want to disable TLS connection to TiDB Cloud via JDBC, you need to set useSSL to `false` in JDBC URL Params specifically and close SSL connection, for example, `useSSL=false`.
-    > - {{{ .starter }}} only supports TLS connections.
+    > -   TiDB CloudはTLS接続をサポートしています。TLSv1.2**と****TLSv1.3**の中から、例えば`enabledTLSProtocols=TLSv1.2` TLSプロトコルを選択できます。
+    > -   JDBC 経由でTiDB Cloudへの TLS 接続を無効にする場合は、JDBC URL パラメータで useSSL を`false`に設定し、SSL 接続を閉じる必要があります (例: `useSSL=false` )。
+    > -   TiDB Cloud Serverless は TLS 接続のみをサポートします。
 
-4. Click **Set up source** or **destination** to complete creating the connector. The following screenshot shows the configuration of TiDB as the source.
+4.  「ソースまたは**宛先の****設定」**をクリックしてコネクタの作成を完了します。次のスクリーンショットは、ソースとしてTiDBを設定した場合の設定を示しています。
 
 ![TiDB source configuration](/media/tidb-cloud/integration-airbyte-parameters.jpg)
 
-You can use any combination of sources and destinations, such as TiDB to Snowflake, and CSV files to TiDB.
+TiDB から Snowflake、CSV ファイルから TiDB など、ソースと宛先の任意の組み合わせを使用できます。
 
-For more details about the TiDB connector, see [TiDB Source](https://docs.airbyte.com/integrations/sources/tidb) and [TiDB Destination](https://docs.airbyte.com/integrations/destinations/tidb).
+TiDB コネクタの詳細については、 [TiDBソース](https://docs.airbyte.com/integrations/sources/tidb)および[TiDB 宛先](https://docs.airbyte.com/integrations/destinations/tidb)参照してください。
 
-## Set up the connection
+## 接続を設定する {#set-up-the-connection}
 
-After setting up the source and destination, you can build and configure the connection.
+ソースと宛先を設定したら、接続を構築して構成できます。
 
-The following steps use TiDB as both a source and a destination. Other connectors may have different parameters.
+以下の手順では、ソースと宛先の両方にTiDBを使用します。他のコネクタではパラメータが異なる場合があります。
 
-1. Click **Connections** in the sidebar and then click **New Connection**.
-2. Select the previously established source and destination.
-3. Go to the **Set up** connection panel and create a name for the connection, such as `${source_name} - ${destination-name}`.
-4. Set **Replication frequency** to **Every 24 hours**, which means the connection replicates data once a day.
-5. Set **Destination Namespace** to **Custom format** and set **Namespace Custom Format** to **test** to store all data in the `test` database.
-6. Choose the **Sync mode** to **Full refresh | Overwrite**.
+1.  サイドバーの**「接続」**をクリックし、 **「新しい接続」**をクリックします。
 
-    > **Tip:**
+2.  以前に設定したソースと宛先を選択します。
+
+3.  [接続**の設定]**パネルに移動して、接続の名前 (例: `${source_name} - ${destination-name}` ) を作成します。
+
+4.  **レプリケーション頻度を****24 時間ごと**に設定します。これは、接続が 1 日に 1 回データを複製することを意味します。
+
+5.  **宛先名前空間を****カスタム形式**に設定し、**名前空間カスタム形式**を**テスト**に設定して、すべてのデータを`test`データベースに保存します。
+
+6.  **同期モード**を**「完全更新 | 上書き」**に選択します。
+
+    > **ヒント：**
     >
-    > The TiDB connector supports both [Incremental and Full Refresh syncs](https://airbyte.com/blog/understanding-data-replication-modes).
+    > TiDB コネクタは[増分同期と完全更新同期](https://airbyte.com/blog/understanding-data-replication-modes)両方をサポートします。
     >
-    > - In Incremental mode, Airbyte only reads records added to the source since the last sync job. The first sync using Incremental mode is equivalent to Full Refresh mode.
-    > - In Full Refresh mode, Airbyte reads all records in the source and replicates to the destination in every sync task. You can set the sync mode for every table named **Namespace** in Airbyte individually.
+    > -   増分モードでは、Airbyteは前回の同期ジョブ以降にソースに追加されたレコードのみを読み取ります。増分モードでの最初の同期は、完全更新モードと同等です。
+    > -   フルリフレッシュモードでは、Airbyteは同期タスクごとにソース内のすべてのレコードを読み取り、同期先に複製します。同期モードは、Airbyte内の**Namespace**という名前のテーブルごとに個別に設定できます。
 
     ![Set up connection](/media/tidb-cloud/integration-airbyte-connection.jpg)
 
-7. Set **Normalization & Transformation** to **Normalized tabular data** to use the default normalization mode, or you can set the dbt file for your job. For more information about normalization, refer to [Transformations and Normalization](https://docs.airbyte.com/operator-guides/transformation-and-normalization/transformations-with-dbt).
-8. Click **Set up connection**.
-9. Once the connection is established, click **ENABLED** to activate the synchronization task. You can also click **Sync now** to sync immediately.
+7.  デフォルトの正規化モードを使用するには、 **「正規化と変換」**を**「正規化された表形式データ」**に設定するか、ジョブのdbtファイルを設定すると便利です。正規化の詳細については、 [変換と正規化](https://docs.airbyte.com/operator-guides/transformation-and-normalization/transformations-with-dbt)を参照してください。
+
+8.  **[接続の設定]を**クリックします。
+
+9.  接続が確立されたら、 **「有効」**をクリックして同期タスクを有効にします。 **「今すぐ同期」**をクリックしてすぐに同期することもできます。
 
 ![Sync data](/media/tidb-cloud/integration-airbyte-sync.jpg)
 
-## Limitations
+## 制限事項 {#limitations}
 
-- The TiDB connector cannot use the Change Data Capture (CDC) feature provided by TiCDC. The incremental sync is performed based on a cursor mechanism.
-- TiDB destination converts the `timestamp` type to the `varchar` type in default normalization mode. It happens because Airbyte converts the timestamp type to string during transmission, and TiDB does not support `cast ('2020-07-28 14:50:15+1:00' as timestamp)`.
-- For some large ELT missions, you need to increase the parameters of [transaction restrictions](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions) in TiDB.
+-   TiDBコネクタは、TiCDCが提供する変更データキャプチャ（CDC）機能を使用できません。増分同期はカーソルメカニズムに基づいて実行されます。
+-   TiDBの宛先は、デフォルトの正規化モードでは`timestamp`型を`varchar`型に変換します。これは、Airbyteが送信時にタイムスタンプ型を文字列に変換するのに対し、TiDBが`cast ('2020-07-28 14:50:15+1:00' as timestamp)`をサポートしていないために発生します。
+-   一部の大規模な ELT ミッションでは、TiDB のパラメータを[取引制限](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions)増やす必要があります。
 
-## See also
+## 参照 {#see-also}
 
-[Using Airbyte to Migrate Data from TiDB Cloud to Snowflake](https://www.pingcap.com/blog/using-airbyte-to-migrate-data-from-tidb-cloud-to-snowflake/).
+[Airbyte を使用してTiDB Cloudから Snowflake にデータを移行する](https://www.pingcap.com/blog/using-airbyte-to-migrate-data-from-tidb-cloud-to-snowflake/) 。

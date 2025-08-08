@@ -1,49 +1,49 @@
 ---
-title: Import Sample Data into {{{ .starter }}}
-summary: Learn how to import sample data into {{{ .starter }}} via the UI.
+title: Import Sample Data into TiDB Cloud Serverless
+summary: UI 経由でサンプル データをTiDB Cloud Serverless にインポートする方法を学習します。
 ---
 
-# Import Sample Data into {{{ .starter }}}
+# サンプルデータをTiDB Cloud Serverlessにインポートする {#import-sample-data-into-tidb-cloud-serverless}
 
-This document describes how to import the sample data into {{{ .starter }}} via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
+このドキュメントでは、UIを介してTiDB Cloud Serverlessにサンプルデータをインポートする方法について説明します。使用するサンプルデータは、Capital Bikeshareのデータライセンス契約に基づいてリリースされたCapital Bikeshareのシステムデータです。サンプルデータをインポートする前に、TiDBクラスターを1つ用意する必要があります。
 
-> **Note:**
+> **注記：**
 >
-> {{{ .starter }}} currently only supports importing sample data from Amazon S3.
+> TiDB Cloud Serverless は現在、Amazon S3 からのサンプルデータのインポートのみをサポートしています。
 
-1. Open the **Import** page for your target cluster.
+1.  ターゲット クラスターの**インポート**ページを開きます。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-        > **Tip:**
+        > **ヒント：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
-2. Click **Import data from Cloud Storage**.
+2.  **Cloud Storage からデータをインポート**をクリックします。
 
-3. On the **Import Data from Cloud Storage** page, provide the following information:
+3.  **「クラウド ストレージからデータをインポート」**ページで、次の情報を入力します。
 
-   - **Storage Provider**: select **Amazon S3**.
-   - **Source Files URI**: enter the sample data URI `s3://tidbcloud-sample-data/data-ingestion/`.
-   - **Credential**:
-      - **AWS Role ARN**: enter `arn:aws:iam::801626783489:role/import-sample-access`.
-      - **AWS Access Key**: skip this option for the sample data.
+    -   **ストレージプロバイダー**: **Amazon S3**を選択します。
+    -   **ソース ファイル URI** : サンプル データ URI `s3://tidbcloud-sample-data/data-ingestion/`を入力します。
+    -   **資格情報**:
+        -   **AWS ロール ARN** : `arn:aws:iam::801626783489:role/import-sample-access`と入力します。
+        -   **AWS アクセスキー**: サンプルデータの場合はこのオプションをスキップします。
 
-4. Click **Next**.
+4.  **「次へ」**をクリックします。
 
-5. In the **Destination Mapping** section, keep the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option selected and select **SQL** as the data format.
+5.  **[宛先マッピング]**セクションで、 **[自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則を</a>使用する]**オプションを選択したままにして、データ形式として**[SQL]**を選択します。
 
-6. Click **Next**.
+6.  **「次へ」**をクリックします。
 
-7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+7.  スキャン結果を確認し、見つかったデータ ファイルと対応するターゲット テーブルをチェックして、 **[インポートの開始] を**クリックします。
 
-8. When the import progress shows **Completed**, check the imported tables.
+8.  インポートの進行状況に**「完了」と**表示されたら、インポートされたテーブルを確認します。
 
-After connecting to the cluster, you can run some queries in your terminal to check the result, for example:
+クラスターに接続した後、ターミナルでいくつかのクエリを実行して結果を確認できます。次に例を示します。
 
-1. Get the trip records starting at "12th & U St NW":
+1.  「12th &amp; U St NW」から始まる旅行記録を取得します。
 
     ```sql
     use bikeshare;
@@ -70,7 +70,7 @@ After connecting to the cluster, you can run some queries in your terminal to ch
     +-----------------+---------------+---------------------+---------------------+--------------------+------------------+-------------------------------------------+----------------+-----------+------------+-----------+------------+---------------+
     ```
 
-2. Get the trip records with electric bikes:
+2.  電動自転車での旅行記録を取得:
 
     ```sql
     use bikeshare;

@@ -1,60 +1,60 @@
 ---
 title: ticloud serverless cluster list
-summary: The reference of `ticloud serverless list`.
+summary: ticloud serverless list` のリファレンス。
 ---
 
-# ticloud serverless list
+# ticloud サーバーレス リスト {#ticloud-serverless-list}
 
-List all {{{ .starter }}} clusters in a project:
+プロジェクト内のすべてのTiDB Cloud Serverless クラスターを一覧表示します。
 
 ```shell
 ticloud serverless list [flags]
 ```
 
-Or use the following alias command:
+または、次のエイリアス コマンドを使用します。
 
 ```shell
 ticloud serverless ls [flags]
 ```
 
-## Examples
+## 例 {#examples}
 
-List all {{{ .starter }}} clusters in interactive mode:
+インタラクティブ モードですべてのTiDB Cloud Serverless クラスターを一覧表示します。
 
 ```shell
 ticloud serverless list
 ```
 
-List all {{{ .starter }}} clusters in a specified project in non-interactive mode:
+指定されたプロジェクト内のすべてのTiDB Cloud Serverless クラスターを非対話型モードで一覧表示します。
 
 ```shell
 ticloud serverless list -p <project-id>
 ```
 
-List all {{{ .starter }}} clusters in a specified project with the JSON format in non-interactive mode:
+非対話型モードで、指定されたプロジェクト内のすべてのTiDB Cloud Serverless クラスターを JSON 形式で一覧表示します。
 
 ```shell
 ticloud serverless list -p <project-id> -o json
 ```
 
-## Flags
+## 旗 {#flags}
 
-In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLIプロンプトに従って入力するだけです。
 
-| Flag                    | Description                                                                                                              | Required | Note                                                 |
-|-------------------------|--------------------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
-| -p, --project-id string | Specifies the ID of the project.                                                              | Yes      | Only works in non-interactive mode.                  |
-| -h, --help              | Shows help information for this command.                                                                                       | No       | Works in both non-interactive and interactive modes. |
-| -o, --output string     | Specifies the output format (`human` by default). Valid values are `human` or `json`. To get a complete result, use the `json` format. | No       | Works in both non-interactive and interactive modes. |
+| フラグ                  | 説明                                                                                | 必須  | 注記                       |
+| -------------------- | --------------------------------------------------------------------------------- | --- | ------------------------ |
+| -p, --project-id 文字列 | プロジェクトの ID を指定します。                                                                | はい  | 非対話型モードでのみ動作します。         |
+| -h, --help           | このコマンドのヘルプ情報を表示します。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
+| -o, --出力文字列          | 出力形式を指定します（デフォルトは`human` ）。有効な値は`human`または`json`です。完全な結果を得るには、 `json`形式を使用してください。 | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag                 | Description                                                                                          | Required | Note                                                                                                             |
-|----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enables debug mode.                                                                                    | No       | Works in both non-interactive and interactive modes.                                                             |
+| フラグ               | 説明                                                                             | 必須  | 注記                                                      |
+| ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------- |
+| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
+| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| -D, --debug       | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、皆様からの貢献も歓迎いたします。

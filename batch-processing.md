@@ -1,108 +1,108 @@
 ---
 title: Batch Processing
-summary: Introduce batch processing features in TiDB, including Pipelined DML, non-transactional DML, the `IMPORT INTO` statement, and the deprecated batch-dml feature.
+summary: パイプライン DML、非トランザクション DML、IMPORT INTO` ステートメント、非推奨の batch-dml 機能など、TiDB のバッチ処理機能を紹介します。
 ---
 
-# Batch Processing
+# バッチ処理 {#batch-processing}
 
-Batch processing is a common and essential operation in real-world scenarios. It enables efficient handling of large datasets for tasks such as data migration, bulk imports, archiving, and large-scale updates.
+バッチ処理は、実世界のシナリオにおいて一般的かつ不可欠な操作です。データ移行、一括インポート、アーカイブ、大規模な更新といったタスクにおいて、大規模なデータセットを効率的に処理することを可能にします。
 
-To optimize performance for batch operations, TiDB introduces various features over its version evolution:
+バッチ操作のパフォーマンスを最適化するために、TiDB はバージョンの進化とともにさまざまな機能を導入しています。
 
-- Data import
-    - `IMPORT INTO` statement (introduced in TiDB v7.2.0 and GA in v7.5.0)
-- Data inserts, updates, and deletions
-    - Pipelined DML (experimental, introduced in TiDB v8.0.0)
-    - Non-transactional DML (introduced in TiDB v6.1.0)
-    - Batch-dml (deprecated)
+-   データのインポート
+    -   `IMPORT INTO`ステートメント (TiDB v7.2.0 で導入され、v7.5.0 で GA になりました)
+-   データの挿入、更新、削除
+    -   パイプライン DML (実験的、TiDB v8.0.0 で導入)
+    -   非トランザクションDML（TiDB v6.1.0で導入）
+    -   Batch-dml（非推奨）
 
-This document outlines the key benefits, limitations, and use cases of these features to help you choose the most suitable solution for efficient batch processing.
+このドキュメントでは、これらの機能の主な利点、制限事項、使用例について概説し、効率的なバッチ処理に最適なソリューションを選択できるようにします。
 
-## Data import
+## データのインポート {#data-import}
 
-The `IMPORT INTO` statement is designed for data import tasks. It enables you to quickly import data in formats such as CSV, SQL, or PARQUET into an empty TiDB table, without the need to deploy [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview) separately.
+`IMPORT INTO`ステートメントはデータインポートタスク用に設計されています。これにより、CSV、SQL、PARQUET などの形式のデータを空の TiDB テーブルに迅速にインポートでき、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)別途デプロイする必要はありません。
 
-### Key benefits
+### 主なメリット {#key-benefits}
 
-- Extremely fast import speed
-- Easier to use compared to TiDB Lightning
+-   非常に高速なインポート速度
+-   TiDB Lightningと比べて使いやすい
 
-### Limitations
+### 制限事項 {#limitations}
 
 <CustomContent platform="tidb">
 
-- No transactional [ACID](/glossary.md#acid) guarantees
-- Subject to various usage restrictions
+-   [ACID](/glossary.md#acid)保証なし
+-   Subject to various usage restrictions
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- No transactional [ACID](/tidb-cloud/tidb-cloud-glossary.md#acid) guarantees
-- Subject to various usage restrictions
+-   [ACID](/tidb-cloud/tidb-cloud-glossary.md#acid)保証なし
+-   さまざまな使用制限の対象となります
 
 </CustomContent>
 
-### Use cases
+### ユースケース {#use-cases}
 
-- Suitable for data import scenarios such as data migration or recovery. It is recommended to use `IMPORT INTO` instead of TiDB Lightning where applicable.
+-   データの移行や復旧などのデータインポートシナリオに適しています。該当する場合は、 TiDB Lightningではなく`IMPORT INTO`使用することをお勧めします。
 
-For more information, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md).
+詳細については[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)参照してください。
 
-## Data inserts, updates, and deletions
+## データの挿入、更新、削除 {#data-inserts-updates-and-deletions}
 
-### Pipelined DML
+### パイプラインDML {#pipelined-dml}
 
-Pipelined DML is an experimental feature introduced in TiDB v8.0.0. In v8.5.0, the feature is enhanced with significant performance improvements.
+パイプラインDMLは、TiDB v8.0.0で導入された実験的機能です。v8.5.0では、この機能が強化され、パフォーマンスが大幅に向上しました。
 
-#### Key benefits
+#### 主なメリット {#key-benefits}
 
-- Streams data to the storage layer during transaction execution instead of buffering it entirely in memory, allowing transaction size no longer limited by TiDB memory and supporting ultra-large-scale data processing
-- Achieves better performance compared to standard DML
-- Can be enabled through system variables without SQL modifications
+-   Streams data to the storage layer during transaction execution instead of buffering it entirely in memory, allowing transaction size no longer limited by TiDB memory and supporting ultra-large-scale data processing
+-   標準のDMLに比べて優れたパフォーマンスを実現
+-   SQL を変更せずにシステム変数を通じて有効にすることができます
 
-#### Limitations
+#### 制限事項 {#limitations}
 
-- Only supports [autocommit](/transaction-overview.md#autocommit) `INSERT`, `REPLACE`, `UPDATE`, and `DELETE` statements.
+-   [自動コミット](/transaction-overview.md#autocommit) `INSERT` `DELETE`のみ`UPDATE`サポートします`REPLACE`
 
-#### Use cases
+#### ユースケース {#use-cases}
 
-- Suitable for general batch processing tasks, such as bulk data inserts, updates, and deletions.
+-   大量のデータの挿入、更新、削除などの一般的なバッチ処理タスクに適しています。
 
-For more information, see [Pipelined DML](/pipelined-dml.md).
+詳細については[パイプラインDML](/pipelined-dml.md)参照してください。
 
-### Non-transactional DML statements
+### 非トランザクションDMLステートメント {#non-transactional-dml-statements}
 
-Non-transactional DML is introduced in TiDB v6.1.0. Initially, only the `DELETE` statement supports this feature. Starting from v6.5.0, `INSERT`, `REPLACE`, and `UPDATE` statements also support this feature.
+非トランザクションDMLはTiDB v6.1.0で導入されました。当初は`DELETE`ステートメントのみがこの機能をサポートしています。v6.5.0以降では、 `INSERT` 、 `REPLACE` 、 `UPDATE`ステートメントもこの機能をサポートします。
 
-#### Key benefits
+#### 主なメリット {#key-benefits}
 
-- Splits a single SQL statement into multiple smaller statements, bypassing memory limitations.
-- Achieves performance that is slightly faster or comparable to standard DML.
+-   メモリ制限を回避して、単一の SQL ステートメントを複数の小さなステートメントに分割します。
+-   標準の DML よりもわずかに高速、または同等のパフォーマンスを実現します。
 
-#### Limitations
+#### 制限事項 {#limitations}
 
-- Only supports [autocommit](/transaction-overview.md#autocommit) statements
-- Requires modifications to SQL statements
-- Imposes strict requirements on SQL syntax; some statements might need rewriting
-- Lacks full transactional ACID guarantees; in case of failures, partial execution of a statement might occur
+-   [自動コミット](/transaction-overview.md#autocommit)ステートメントのみをサポートします
+-   SQL文の変更が必要
+-   SQL 構文に厳しい要件を課すため、一部のステートメントは書き直しが必要になる場合があります。
+-   完全なトランザクションACID保証がないため、障害発生時には文が部分的に実行される可能性がある。
 
-#### Use cases
+#### ユースケース {#use-cases}
 
-- Suitable for scenarios involving bulk data inserts, updates, and deletions. Due to its limitations, it is recommended to consider non-transactional DML only when Pipelined DML is not applicable.
+-   大量のデータの挿入、更新、削除を伴うシナリオに適しています。ただし、その制限のため、パイプラインDMLが適用できない場合にのみ、非トランザクションDMLを検討することをお勧めします。
 
-For more information, see [Non-transactional DML](/non-transactional-dml.md).
+詳細については[非トランザクションDML](/non-transactional-dml.md)参照してください。
 
-### Deprecated batch-dml feature
+### 非推奨のbatch-dml機能 {#deprecated-batch-dml-feature}
 
-The batch-dml feature, available in TiDB versions prior to v4.0, is now deprecated and no longer recommended. This feature is controlled by the following system variables:
+TiDB v4.0より前のバージョンで利用可能だったbatch-dml機能は非推奨となり、推奨されなくなりました。この機能は、以下のシステム変数によって制御されます。
 
-- `tidb_batch_insert`
-- `tidb_batch_delete`
-- `tidb_batch_commit`
-- `tidb_enable_batch_dml`
-- `tidb_dml_batch_size`
+-   `tidb_batch_insert`
+-   `tidb_batch_delete`
+-   `tidb_batch_commit`
+-   `tidb_enable_batch_dml`
+-   `tidb_dml_batch_size`
 
-Due to the risk of data corruption or loss caused by inconsistent data and indexes, these variables have been deprecated and are planned for removal in future releases.
+データとインデックスの不一致によってデータが破損または失われるリスクがあるため、これらの変数は非推奨となり、将来のリリースでは削除される予定です。
 
-It is **NOT RECOMMENDED** to use the deprecated batch-dml feature under any circumstances. Instead, consider other alternative features outlined in this document.
+いかなる状況においても、非推奨のbatch-dml機能の使用は**推奨されません**。代わりに、このドキュメントで概説されている他の代替機能の使用をご検討ください。

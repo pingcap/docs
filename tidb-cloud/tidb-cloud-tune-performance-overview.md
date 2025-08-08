@@ -1,128 +1,124 @@
 ---
 title: Overview for Analyzing and Tuning Performance
-summary: Learn about how to analyze and tune SQL performance in TiDB Cloud.
+summary: TiDB Cloudで SQL パフォーマンスを分析および調整する方法について説明します。
 ---
 
-# Overview for Analyzing and Tuning Performance
+# パフォーマンスの分析とチューニングの概要 {#overview-for-analyzing-and-tuning-performance}
 
-This document describes steps to help you analyze and tune SQL performance in TiDB Cloud.
+このドキュメントでは、TiDB Cloudで SQL パフォーマンスを分析および調整するのに役立つ手順について説明します。
 
-## User response time
+## ユーザー応答時間 {#user-response-time}
 
-User response time indicates how long an application takes to return the results of a request to users. As you can see from the following sequential timing diagram, the time of a typical user request contains the following:
+ユーザー応答時間とは、アプリケーションがリクエストの結果をユーザーに返すまでにかかる時間を指します。以下のシーケンシャルタイミング図からわかるように、典型的なユーザーリクエストの時間には、以下の要素が含まれます。
 
-- The network latency between the user and the application
-- The processing time of the application
-- The network latency during the interaction between the application and the database
-- The service time of the database
+-   ユーザーとアプリケーション間のネットワークレイテンシー
+-   申請の処理時間
+-   アプリケーションとデータベース間のやり取り中のネットワークレイテンシー
+-   データベースのサービス時間
 
-The user response time is affected by various subsystems on the request chain, such as network latency and bandwidth, number and request types of concurrent users, and resource usage of server CPU and I/O. To optimize the entire system effectively, you need to first identify the bottlenecks in user response time.
+ユーザー応答時間は、ネットワークのレイテンシーや帯域幅、同時ユーザーの数やリクエストの種類、サーバーのCPUやI/Oリソースの使用率など、リクエストチェーン上の様々なサブシステムの影響を受けます。システム全体を効果的に最適化するには、まずユーザー応答時間のボトルネックを特定する必要があります。
 
-To get a total user response time within a specified time range (`ΔT`), you can use the following formula:
+指定された時間範囲（ `ΔT` ）内のユーザー応答時間の合計を取得するには、次の数式を使用します。
 
-Total user response time in `ΔT` = Average TPS (Transactions Per Second) x Average user response time x `ΔT`.
+`ΔT`での合計ユーザー応答時間 = 平均 TPS (1 秒あたりのトランザクション数) x 平均ユーザー応答時間 x `ΔT` 。
 
-![user_response_time](/media/performance/user_response_time_en.png)
+![user\_response\_time](/media/performance/user_response_time_en.png)
 
-## Relationship between user response time and system throughput
+## ユーザー応答時間とシステムスループットの関係 {#relationship-between-user-response-time-and-system-throughput}
 
-User response time consists of service time, queuing time, and concurrent waiting time to complete a user request.
+ユーザー応答時間は、サービス時間、キュー時間、およびユーザー要求を完了するための同時待機時間で構成されます。
 
-```
-User Response time = Service time + Queuing delay + Coherency delay
-```
+    User Response time = Service time + Queuing delay + Coherency delay
 
-- Service time: the time a system consumes on certain resources when processing a request, for example, the CPU time that a database consumes to complete a SQL request.
-- Queuing delay: the time a system waits in a queue for service of certain resources when processing a request.
-- Coherency delay: the time a system communicates and collaborates with other concurrent tasks, so that it can access shared resources when processing a request.
+-   サービス時間: リクエストを処理するときにシステムが特定のリソースに消費する時間。たとえば、データベースが SQL リクエストを完了するために消費する CPU 時間など。
+-   キューイング遅延: システムが要求を処理するときに、特定のリソースのサービスをキューで待機する時間。
+-   一貫性遅延: システムがリクエストを処理するときに共有リソースにアクセスできるように、他の同時タスクと通信して連携する時間。
 
-System throughput indicates the number of requests that can be completed by a system per second. User response time and throughput are usually inverse of each other. When the throughput increases, the system resource utilization and the queuing latency for a requested service increase accordingly. Once resource utilization exceeds a certain inflection point, the queuing latency will increase dramatically.
+システムスループットとは、システムが1秒間に処理できるリクエストの数を指します。ユーザー応答時間とスループットは通常、反比例関係にあります。スループットが増加すると、システムリソースの使用率と、要求されたサービスのキューイングレイテンシーもそれに応じて増加します。リソース使用率が一定の変曲点を超えると、キューイングレイテンシーは劇的に増加します。
 
-For example, for a database system running OLTP loads, after its CPU utilization exceeds 65%, the CPU queueing scheduling latency increases significantly. This is because concurrent requests of a system are not completely independent, which means that these requests can collaborate and compete for shared resources. For example, requests from different users might perform mutually exclusive locking operations on the same data. When the resource utilization increases, the queuing and scheduling latency increases too, which causes that the shared resources cannot be released in time and in turn prolongs the waiting time for shared resources by other tasks.
+例えば、OLTP負荷を実行しているデータベースシステムでは、CPU使用率が65%を超えると、CPUキューイングとスケジューリングのレイテンシーが大幅に増加します。これは、システムの同時リクエストが完全に独立していないため、これらのリクエストが連携して共有リソースを奪い合う可能性があるためです。例えば、異なるユーザーからのリクエストが、同じデータに対して相互に排他的なロック操作を実行する場合があります。リソース使用率が増加すると、キューイングとスケジューリングのレイテンシーも増加し、共有リソースが時間内に解放されず、他のタスクによる共有リソースの待機時間が長くなります。
 
-## Troubleshoot bottlenecks in user response time
+## ユーザー応答時間のボトルネックをトラブルシューティングする {#troubleshoot-bottlenecks-in-user-response-time}
 
-There are several pages in the TiDB Cloud console that help you troubleshoot user response time.
+TiDB Cloudコンソールには、ユーザー応答時間のトラブルシューティングに役立つページがいくつかあります。
 
-- [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page):
+-   [**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) :
 
-    - **SQL Statement** enables you to directly observe SQL execution on the page, and easily locate performance problems without querying the system tables. You can click a SQL statement to further view the execution plan of the query for troubleshooting and analysis. For more information about SQL performance tuning, see [SQL Tuning Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md).
-    - **Key Visualizer** helps you observe TiDB's data access patterns and data hotspots.
+    -   **SQL文を**使用すると、ページ上のSQL実行を直接観察し、システムテーブルをクエリすることなくパフォーマンスの問題を簡単に特定できます。SQL文をクリックすると、クエリの実行プランをさらに詳しく表示して、トラブルシューティングや分析を行うことができます。SQLパフォーマンスチューニングの詳細については、 [SQLチューニングの概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)参照してください。
+    -   **Key Visualizer を**使用すると、TiDB のデータ アクセス パターンとデータ ホットスポットを観察できます。
 
-- [**Metrics**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page): on this page, you can view metrics such as request units, used storage size, query per second, and average query duration.
+-   [**メトリクス**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) : このページでは、リクエスト単位、使用済みstorageサイズ、1 秒あたりのクエリ数、平均クエリ実行時間などのメトリックを表示できます。
 
-To request additional metrics, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+追加のメトリックをリクエストするには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
-If you experience latency and performance issues, refer to the steps in the following sections for analysis and troubleshooting.
+レイテンシーやパフォーマンスの問題が発生した場合は、分析とトラブルシューティングについては次のセクションの手順を参照してください。
 
-### Bottlenecks outside the TiDB cluster
+### TiDB クラスタ外部のボトルネック {#bottlenecks-outside-the-tidb-cluster}
 
-Observe Latency(P80) on the **Overview** tab. If this value is much lower than the P80 value for user response time, you can determine that the main bottleneck might be outside the TiDB cluster. In this case, you can use the following steps to troubleshoot the bottleneck.
+**「概要」**タブでレイテンシ(P80)を確認します。この値がユーザー応答時間のP80値よりも大幅に低い場合、主なボトルネックはTiDBクラスター外にある可能性があると判断できます。この場合、以下の手順に従ってボトルネックをトラブルシューティングできます。
 
-1. Check the TiDB version on the left side of the [Overview tab](/tidb-cloud/monitor-tidb-cluster.md). If it is v6.0.0 or earlier versions, it is recommended to contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) to confirm if the Prepared plan cache, Raft-engine and TiKV AsyncIO features can be enabled. Enabling these features, along with application-side tuning, can significantly improve throughput performance and reduce latency and resource utilization.
-2. If necessary, you can increase the TiDB token limit to increase the throughput.
-3. If the prepared plan cache feature is enabled, and you use JDBC on the user side, it is recommended to use the following configuration:
+1.  [概要タブ](/tidb-cloud/monitor-tidb-cluster.md)の左側にある TiDB のバージョンを確認してください。v6.0.0 以前のバージョンの場合は、 [PingCAPサポートチーム](/tidb-cloud/tidb-cloud-support.md)に問い合わせて、Prepared plan cache、Raft エンジン、TiKV AsyncIO 機能を有効にできるかどうかを確認することをお勧めします。これらの機能を有効にし、アプリケーション側のチューニングを行うことで、スループット性能を大幅に向上させ、レイテンシーとリソース使用率を削減できます。
+2.  必要に応じて、TiDB トークンの制限を増やしてスループットを向上させることができます。
+3.  準備済みプラン キャッシュ機能が有効になっていて、ユーザー側で JDBC を使用する場合は、次の構成を使用することをお勧めします。
 
-    ```
-    useServerPrepStmts=true&cachePrepStmts=true& prepStmtCacheSize=1000&prepStmtCacheSqlLimit=20480&useConfigs=maxPerformance
-    ```
+        useServerPrepStmts=true&cachePrepStmts=true& prepStmtCacheSize=1000&prepStmtCacheSqlLimit=20480&useConfigs=maxPerformance
 
-   If you do not use JDBC and want to take full advantage of the prepared plan cache feature of the current TiDB cluster, you need to cache the prepared statement objects on the client side. You do not need to reset the calls to StmtPrepare and StmtClose. Reduce the number of commands to be called for each query from 3 to 1. It requires some development effort, depending on your performance requirements and the amount of client-side changes. You can consult the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for help.
+    JDBC を使用せず、現在の TiDB クラスターの準備済みプランキャッシュ機能を最大限に活用したい場合は、クライアント側でプリペアドステートメントオブジェクトをキャッシュする必要があります。StmtPrepare および StmtClose の呼び出しをリセットする必要はありません。クエリごとに呼び出されるコマンドの数を 3 から 1 に減らします。パフォーマンス要件とクライアント側の変更の量によっては、ある程度の開発作業が必要になります。1 [PingCAPサポートチーム](/tidb-cloud/tidb-cloud-support.md)参照してください。
 
-### Bottlenecks in the TiDB cluster
+### TiDBクラスタのボトルネック {#bottlenecks-in-the-tidb-cluster}
 
-If you determine that the performance bottleneck is within a TiDB cluster, it is recommended that you do the following:
+パフォーマンスのボトルネックが TiDB クラスター内にあると判断した場合は、次の操作を実行することをお勧めします。
 
-- Optimize slow SQL queries.
-- Resolve hotspot issues.
-- Scale out the cluster to expand the capacity.
+-   遅い SQL クエリを最適化します。
+-   ホットスポットの問題を解決します。
+-   容量を拡張するには、クラスターをスケールアウトします。
 
-#### Optimize slow SQL queries
+#### 遅いSQLクエリを最適化する {#optimize-slow-sql-queries}
 
-For more information about SQL performance tuning, see [SQL Tuning Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md).
+SQL パフォーマンス チューニングの詳細については、 [SQLチューニングの概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)参照してください。
 
-#### Resolve hotstpot issues
+#### ホットスポットの問題を解決する {#resolve-hotstpot-issues}
 
-You can view hotspot issues on the [Key Visualizer tab](/tidb-cloud/tune-performance.md#key-visualizer). The following screenshot shows a sample heat map. The horizontal coordinate of the map is the time, and the vertical coordinate is the table and index. Brighter color indicates higher traffic. You can toggle the display of read or write traffic in the toolbar.
+ホットスポットの問題は[キービジュアライザータブ](/tidb-cloud/tune-performance.md#key-visualizer)で確認できます。以下のスクリーンショットはヒートマップのサンプルです。マップの横軸は時間、縦軸はテーブルとインデックスです。明るい色はトラフィックが多いことを示します。ツールバーで読み取りトラフィックと書き込みトラフィックの表示を切り替えることができます。
 
 ![Hotspot issues](/media/tidb-cloud/tidb-cloud-troubleshoot-hotspot.png)
 
-The following screenshot shows an example of a write hotspot. A bright diagonal line (diagonal up or diagonal down) appears in the write flow graph, and the write traffic appears only at the end of the line. It becomes a stepped pattern as the number of table Regions grows. It indicates that there is a write hotspot in the table. When a write hotspot occurs, you need to check whether you are using a self-incrementing primary key, or no primary key, or using a time-dependent insert statement or index.
+次のスクリーンショットは、書き込みホットスポットの例を示しています。書き込みフローグラフに明るい斜めの線（斜め上または斜め下）が表示され、書き込みトラフィックは線の終端にのみ現れます。テーブル「Regions」の数が増えるにつれて、このパターンは階段状に変化します。これは、テーブルに書き込みホットスポットが発生していることを示しています。書き込みホットスポットが発生した場合は、自己増分型の主キーを使用しているか、主キーを使用していないか、あるいは時間依存の挿入文またはインデックスを使用しているかを確認する必要があります。
 
 ![Write hotspot](/media/tidb-cloud/tidb-cloud-troubleshoot-write-hotspot.png)
 
-A read hotspot is generally represented in the heat map as a bright horizontal line, usually a small table with a large number of queries, as shown in the following screenshot.
+読み取りホットスポットは通常、次のスクリーンショットに示すように、明るい水平線でヒートマップに表され、通常は多数のクエリを含む小さなテーブルとして表示されます。
 
 ![Read hotspot](/media/tidb-cloud/tidb-cloud-troubleshoot-read-hotspot-new.png)
 
-Hover over the highlighted block to see which table or index has high traffic, as shown in the following screenshot.
+次のスクリーンショットに示すように、強調表示されたブロックにマウスを移動すると、トラフィック量が多いテーブルまたはインデックスが表示されます。
 
 ![Hotspot index](/media/tidb-cloud/tidb-cloud-troubleshoot-hotspot-index.png)
 
-#### Scale out
+#### スケールアウト {#scale-out}
 
-On the cluster [Overview](/tidb-cloud/monitor-tidb-cluster.md) page, check the storage space, CPU utilization, and TiKV IO rate metrics. If any of them are reaching the upper limit for a long time, it is possible that the current cluster size cannot meet the business requirements. It is recommended to contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) to confirm if you need to scale out the cluster.
+クラスター[概要](/tidb-cloud/monitor-tidb-cluster.md)ページで、storage容量、CPU使用率、TiKV IOレートのメトリクスを確認してください。いずれかのメトリクスが長期間上限に達している場合は、現在のクラスターサイズではビジネス要件を満たせない可能性があります。クラスター[PingCAPサポートチーム](/tidb-cloud/tidb-cloud-support.md)ご連絡いただき、スケールアウトが必要かどうか確認することをお勧めします。
 
-#### Other issues
+#### その他の問題 {#other-issues}
 
-If the previous methods cannot resolve the performance issue, you can contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for help. It is recommended to provide the following information to speed up the troubleshooting process.
+上記の方法でパフォーマンスの問題を解決できない場合は、 [PingCAPサポートチーム](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。トラブルシューティングを迅速に進めるために、以下の情報をご提供いただくことをお勧めします。
 
-- The cluster ID
-- The issue interval and a comparable normal interval
-- The problem phenomenon and expected behavior
-- The business workload characteristics, such as read or write ratios and primary behavior
+-   クラスターID
+-   発行間隔と同等の通常間隔
+-   問題現象と期待される動作
+-   読み取りまたは書き込み比率や主な動作などのビジネスワークロード特性
 
-## Summary
+## まとめ {#summary}
 
-In general, you can use the following optimization methods to analyze and resolve performance issues.
+一般に、パフォーマンスの問題を分析および解決するには、次の最適化方法を使用できます。
 
-| Action | Effect |
-|:--|:--|
-| Prepared plan cache + JDBC | Throughput performance will be greatly improved, latency will be significantly reduced, and the average TiDB CPU utilization will be significantly reduced. |
-| Enable AsyncIO and Raft-engine in TiKV | There will be some improvement in throughput performance. You need to contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) to enable it. |
-| Clustered Index | Throughput performance will be greatly improved. |
-| Scale out TiDB nodes |Throughput performance will be greatly improved.  |
-| Client-side optimization. Split 1 JVM into 3 | Throughput performance will improve significantly and may further continue to improve throughput capacity if further split. |
-| Limit the network latency between the application and the database | High network latency can lead to decreased throughput and increased latency. |
+| アクション                              | 効果                                                                                       |
+| :--------------------------------- | :--------------------------------------------------------------------------------------- |
+| 準備されたプランキャッシュ + JDBC               | スループット パフォーマンスが大幅に向上し、レイテンシーが大幅に削減され、TiDB の平均 CPU 使用率が大幅に削減されます。                         |
+| TiKVでAsyncIOとRaftエンジンを有効にする        | スループット性能が若干向上します。有効にするには、 [PingCAPサポートチーム](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。 |
+| クラスター化インデックス                       | スループットパフォーマンスが大幅に向上します。                                                                  |
+| TiDBノードのスケールアウト                    | スループットパフォーマンスが大幅に向上します。                                                                  |
+| クライアント側の最適化。1つのJVMを3つに分割           | スループット パフォーマンスは大幅に向上し、さらに分割するとスループット容量がさらに向上し続ける可能性があります。                                |
+| アプリケーションとデータベース間のネットワークレイテンシーを制限する | ネットワークレイテンシーが大きくなると、スループットが低下し、レイテンシーが増加する可能性があります。                                      |
 
-In the future, TiDB Cloud will introduce more observable metrics and self-diagnostic services. They will provide you with a more comprehensive understanding of performance metrics and operational advice to improve your experience.
+今後、 TiDB Cloud はより多くの観測可能なメトリクスと自己診断サービスを導入する予定です。これにより、パフォーマンスメトリクスに関するより包括的な理解と運用アドバイスが提供され、ユーザーエクスペリエンスが向上します。

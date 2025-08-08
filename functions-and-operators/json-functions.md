@@ -1,94 +1,94 @@
 ---
 title: JSON Functions
-summary: Learn about JSON functions.
+summary: JSON関数について学習します。
 ---
 
-# JSON Functions
+# JSON関数 {#json-functions}
 
-You can use JSON functions to work with data in the [JSON data type](/data-type-json.md).
+JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを操作できます。
 
-## Functions that create JSON values
+## JSON値を作成する関数 {#functions-that-create-json-values}
 
-| Function Name                     | Description |
-| --------------------------------- | ----------- |
-| [JSON_ARRAY()](/functions-and-operators/json-functions/json-functions-create.md#json_array) | Evaluates a (possibly empty) list of values and returns a JSON array containing those values |
-| [JSON_OBJECT()](/functions-and-operators/json-functions/json-functions-create.md#json_object) | Evaluates a (possibly empty) list of key-value pairs and returns a JSON object containing those pairs  |
-| [JSON_QUOTE()](/functions-and-operators/json-functions/json-functions-create.md#json_quote) | Returns a string as a JSON value with quotes |
+| 関数名                                                                                           | 説明                                                 |
+| --------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| [JSON_ARRAY()](/functions-and-operators/json-functions/json-functions-create.md#json_array)   | 値のリスト（空の可能性もある）を評価し、それらの値を含むJSON配列を返します。           |
+| [JSON_OBJECT()](/functions-and-operators/json-functions/json-functions-create.md#json_object) | キーと値のペアの（空の場合もある）リストを評価し、それらのペアを含むJSONオブジェクトを返します。 |
+| [JSON_QUOTE()](/functions-and-operators/json-functions/json-functions-create.md#json_quote)   | 引用符付きのJSON値として文字列を返します                             |
 
-## Functions that search JSON values
+## JSON値を検索する関数 {#functions-that-search-json-values}
 
-| Function Name                     | Description |
-| --------------------------------- | ----------- |
-| [JSON_CONTAINS()](/functions-and-operators/json-functions/json-functions-search.md#json_contains) | Indicates by returning 1 or 0 whether a given candidate JSON document is contained within a target JSON document |
-| [JSON_CONTAINS_PATH()](/functions-and-operators/json-functions/json-functions-search.md#json_contains_path) | Returns 0 or 1 to indicate whether a JSON document contains data at a given path or paths |
-| [JSON_EXTRACT()](/functions-and-operators/json-functions/json-functions-search.md#json_extract) | Returns data from a JSON document, selected from the parts of the document matched by the `path` arguments |
-| [->](/functions-and-operators/json-functions/json-functions-search.md#-)  | Returns the value from a JSON column after the evaluating path; an alias for `JSON_EXTRACT(doc, path_literal)`   |
-| [->>](/functions-and-operators/json-functions/json-functions-search.md#--1)  | Returns the value from a JSON column after the evaluating path and unquoting the result; an alias for `JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))` |
-| [JSON_KEYS()](/functions-and-operators/json-functions/json-functions-search.md#json_keys) | Returns the keys from the top-level value of a JSON object as a JSON array, or, if a path argument is given, the top-level keys from the selected path |
-| [JSON_SEARCH()](/functions-and-operators/json-functions/json-functions-search.md#json_search) | Search a JSON document for one or all matches of a string |
-| [MEMBER OF()](/functions-and-operators/json-functions/json-functions-search.md#member-of) | If the passed value is an element of the JSON array, returns 1. Otherwise, returns 0. |
-| [JSON_OVERLAPS()](/functions-and-operators/json-functions/json-functions-search.md#json_overlaps) | Indicates whether two JSON documents have overlapping part. If yes, returns 1. If not, returns 0. |
+| 関数名                                                                                                         | 説明                                                                                |
+| ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| [JSON_CONTAINS()](/functions-and-operators/json-functions/json-functions-search.md#json_contains)           | 指定された候補JSONドキュメントがターゲットJSONドキュメント内に含まれているかどうかを1または0を返すことで示します。                    |
+| [JSON_CONTAINS_PATH()](/functions-and-operators/json-functions/json-functions-search.md#json_contains_path) | JSONドキュメントに指定されたパスのデータが含まれているかどうかを示す0または1を返します。                                   |
+| [JSON_EXTRACT()](/functions-and-operators/json-functions/json-functions-search.md#json_extract)             | `path`引数に一致するドキュメントの部分から選択されたJSONドキュメントからデータを返します。                                |
+| [-&gt;](/functions-and-operators/json-functions/json-functions-search.md#-)                                 | 評価パスの後のJSON列から値を返します。1の別名です`JSON_EXTRACT(doc, path_literal)`                      |
+| [-&gt;&gt;](/functions-and-operators/json-functions/json-functions-search.md#--1)                           | 評価パスの後のJSON列から値を返し、結果を引用符で囲まない`JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))`の別名。 |
+| [JSON_KEYS()](/functions-and-operators/json-functions/json-functions-search.md#json_keys)                   | JSONオブジェクトの最上位レベルの値からキーをJSON配列として返します。パス引数が指定されている場合は、選択したパスから最上位レベルのキーを返します。     |
+| [JSON_SEARCH()](/functions-and-operators/json-functions/json-functions-search.md#json_search)               | JSONドキュメントで文字列の1つまたはすべてに一致するものを検索する                                               |
+| [メンバー()](/functions-and-operators/json-functions/json-functions-search.md#member-of)                        | 渡された値が JSON 配列の要素である場合は 1 を返します。それ以外の場合は 0 を返します。                                 |
+| [JSON_OVERLAPS()](/functions-and-operators/json-functions/json-functions-search.md#json_overlaps)           | 2つのJSONドキュメントに重複部分があるかどうかを示します。重複している場合は1を、重複していない場合は0を返します。                      |
 
-## Functions that modify JSON values
+## JSON値を変更する関数 {#functions-that-modify-json-values}
 
-| Function Name                     | Description |
-| --------------------------------- | ----------- |
-| [JSON_APPEND()](/functions-and-operators/json-functions/json-functions-modify.md#json_append) | An alias to `JSON_ARRAY_APPEND()` |
-| [JSON_ARRAY_APPEND()](/functions-and-operators/json-functions/json-functions-modify.md#json_array_append) | Appends values to the end of the indicated arrays within a JSON document and returns the result |
-| [JSON_ARRAY_INSERT()](/functions-and-operators/json-functions/json-functions-modify.md#json_array_insert) | Insert values into the specified locations of a JSON document and returns the result |
-| [JSON_INSERT()](/functions-and-operators/json-functions/json-functions-modify.md#json_insert) | Inserts data into a JSON document and returns the result |
-| [JSON_MERGE_PATCH()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge_patch)  | Merges two or more JSON documents, without preserving values of duplicate keys |
-| [JSON_MERGE_PRESERVE()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge_preserve)  | Merges two or more JSON documents by preserving all values |
-| [JSON_MERGE()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge)  | A deprecated alias for `JSON_MERGE_PRESERVE()` |
-| [JSON_REMOVE()](/functions-and-operators/json-functions/json-functions-modify.md#json_remove)    | Removes data from a JSON document and returns the result |
-| [JSON_REPLACE()](/functions-and-operators/json-functions/json-functions-modify.md#json_replace) | Replaces existing values in a JSON document and returns the result |
-| [JSON_SET()](/functions-and-operators/json-functions/json-functions-modify.md#json_set)  | Inserts or updates data in a JSON document and returns the result |
-| [JSON_UNQUOTE()](/functions-and-operators/json-functions/json-functions-modify.md#json_unquote) |  Unquotes a JSON value and returns the result as a string |
+| 関数名                                                                                                           | 説明                                     |
+| ------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| [JSON_APPEND()](/functions-and-operators/json-functions/json-functions-modify.md#json_append)                 | `JSON_ARRAY_APPEND()`の別名               |
+| [JSON_ARRAY_APPEND()](/functions-and-operators/json-functions/json-functions-modify.md#json_array_append)     | JSONドキュメント内の指定された配列の末尾に値を追加し、結果を返します。  |
+| [JSON_ARRAY_INSERT()](/functions-and-operators/json-functions/json-functions-modify.md#json_array_insert)     | JSONドキュメントの指定された場所に値を挿入し、結果を返します。      |
+| [JSON_INSERT()](/functions-and-operators/json-functions/json-functions-modify.md#json_insert)                 | JSONドキュメントにデータを挿入し、結果を返します             |
+| [JSON_MERGE_PATCH()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge_patch)       | 重複するキーの値を保持せずに、2つ以上のJSONドキュメントをマージします。 |
+| [JSON_MERGE_PRESERVE()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge_preserve) | すべての値を保持しながら2つ以上のJSONドキュメントを結合します      |
+| [JSON_MERGE()](/functions-and-operators/json-functions/json-functions-modify.md#json_merge)                   | `JSON_MERGE_PRESERVE()`の非推奨のエイリアス      |
+| [JSON_REMOVE()](/functions-and-operators/json-functions/json-functions-modify.md#json_remove)                 | JSONドキュメントからデータを削除し、結果を返します            |
+| [JSON_REPLACE()](/functions-and-operators/json-functions/json-functions-modify.md#json_replace)               | JSONドキュメント内の既存の値を置き換え、結果を返します          |
+| [JSON_SET()](/functions-and-operators/json-functions/json-functions-modify.md#json_set)                       | JSONドキュメントにデータを挿入または更新し、結果を返します。       |
+| [JSON_UNQUOTE()](/functions-and-operators/json-functions/json-functions-modify.md#json_unquote)               | JSON 値を引用符で囲まずに、結果を文字列として返します。         |
 
-## Functions that return JSON value attributes
+## JSON値属性を返す関数 {#functions-that-return-json-value-attributes}
 
-| Function Name                     | Description |
-| --------------------------------- | ----------- |
-| [JSON_DEPTH()](/functions-and-operators/json-functions/json-functions-return.md#json_depth) | Returns the maximum depth of a JSON document |
-| [JSON_LENGTH()](/functions-and-operators/json-functions/json-functions-return.md#json_length) | Returns the length of a JSON document, or, if a path argument is given, the length of the value within the path |
-| [JSON_TYPE()](/functions-and-operators/json-functions/json-functions-return.md#json_type) | Returns a string indicating the type of a JSON value |
-| [JSON_VALID()](/functions-and-operators/json-functions/json-functions-return.md#json_valid) | Checks if a json\_doc is valid JSON. |
+| 関数名                                                                                         | 説明                                                |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| [JSON_DEPTH()](/functions-and-operators/json-functions/json-functions-return.md#json_depth) | JSONドキュメントの最大深度を返します                              |
+| [JSON_長さ()](/functions-and-operators/json-functions/json-functions-return.md#json_length)   | JSONドキュメントの長さを返します。パス引数が指定されている場合は、パス内の値の長さを返します。 |
+| [JSON_TYPE()](/functions-and-operators/json-functions/json-functions-return.md#json_type)   | JSON値の型を示す文字列を返します                                |
+| [JSON_VALID()](/functions-and-operators/json-functions/json-functions-return.md#json_valid) | json_doc が有効な JSON であるかどうかを確認します。                 |
 
-## Utility functions
+## ユーティリティ関数 {#utility-functions}
 
-| Function Name                     | Description |
-| --------------------------------- | ----------- |
-| [JSON_PRETTY()](/functions-and-operators/json-functions/json-functions-utility.md#json_pretty) | Pretty formatting of a JSON document |
-| [JSON_STORAGE_FREE()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_free) | Returns how much storage space was freed in the binary representation of the JSON value after it was updated in place. |
-| [JSON_STORAGE_SIZE()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_size) | Returns an approximate size of bytes required to store the json value. As the size does not account for TiKV using compression, the output of this function is not strictly compatible with MySQL. |
+| 関数名                                                                                                        | 説明                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| [JSON_PRETTY()](/functions-and-operators/json-functions/json-functions-utility.md#json_pretty)             | JSONドキュメントのきれいなフォーマット                                                             |
+| [JSON_STORAGE_FREE()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_free) | JSON 値のバイナリ表現が更新された後に解放されたstorage容量を返します。                                         |
+| [JSON_ストレージサイズ()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_size)     | JSON値を格納するために必要なバイト数の概算値を返します。このサイズはTiKV圧縮を考慮していないため、この関数の出力はMySQLと厳密には互換性がありません。 |
 
-## Aggregate functions
+## 集計関数 {#aggregate-functions}
 
-| Function Name                     | Description |
-| --------------------------------- | ----------- |
-| [JSON_ARRAYAGG()](/functions-and-operators/json-functions/json-functions-aggregate.md#json_arrayagg) | Provides an aggregation of keys. |
-| [JSON_OBJECTAGG()](/functions-and-operators/json-functions/json-functions-aggregate.md#json_objectagg) | Provides an aggregation of values for a given key. |
+| 関数名                                                                                                    | 説明                  |
+| ------------------------------------------------------------------------------------------------------ | ------------------- |
+| [JSON_ARRAYAGG()](/functions-and-operators/json-functions/json-functions-aggregate.md#json_arrayagg)   | キーの集約を提供します。        |
+| [JSON_OBJECTAGG()](/functions-and-operators/json-functions/json-functions-aggregate.md#json_objectagg) | 指定されたキーの値の集計を提供します。 |
 
-## Validation functions
-    
-| Function Name                     | Description |
-| --------------------------------- | ----------- |
-| [JSON_SCHEMA_VALID()](/functions-and-operators/json-functions/json-functions-validate.md#json_schema_valid) | Validates a JSON document against a schema to ensure data integrity and consistency. |
+## 検証関数 {#validation-functions}
 
-## JSONPath
+| 関数名                                                                                                         | 説明                                             |
+| ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| [JSON_SCHEMA_VALID()](/functions-and-operators/json-functions/json-functions-validate.md#json_schema_valid) | データの整合性と一貫性を確保するために、JSON ドキュメントをスキーマに対して検証します。 |
 
-Many of JSON functions use [JSONPath](https://www.rfc-editor.org/rfc/rfc9535.html) to select parts of a JSON document.
+## JSONパス {#jsonpath}
 
-| Symbol         | Description                  |
-| -------------- | ---------------------------- |
-| `$`            | Document root                |
-| `.`            | Member selection             |
-| `[]`           | Array selection              |
-| `*`            | Wildcard                     |
-| `**`           | Path wildcard                |
-| `[<n> to <n>]` | Array range selection        |
+多くの JSON関数は、 [JSONパス](https://www.rfc-editor.org/rfc/rfc9535.html)使用して JSON ドキュメントの一部を選択します。
 
-The subsequent content takes the following JSON document as an example to demonstrate how to use JSONPath:
+| シンボル           | 説明        |
+| -------------- | --------- |
+| `$`            | ドキュメントルート |
+| `.`            | メンバーの選択   |
+| `[]`           | 配列の選択     |
+| `*`            | ワイルドカード   |
+| `**`           | パスワイルドカード |
+| `[<n> to <n>]` | 配列範囲の選択   |
+
+以降のコンテンツでは、次の JSON ドキュメントを例として、JSONPath の使用方法を説明します。
 
 ```json
 {
@@ -125,34 +125,34 @@ The subsequent content takes the following JSON document as an example to demons
 }
 ```
 
-| JSONPath                              | Description                             | Example with [`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract) | 
-|-------------------------------------- |-----------------------------------------|-------------------------------|
-| `$`                                   | The root of the document                | Returns the full document                              |
-| `$.database`                          | The `database` object                  |  Returns the full structure starting with `"database"`. It does not include `"migration_tool"` and the structure below that.                             |
-| `$.database.name`                     | The name of the database.               | `"TiDB"`                      |
-| `$.database.features`                 | All database features                   | `["distributed", "scalable", "relational", "cloud native"]`                              |
-| `$.database.features[0]`              | The first database feature.             | `"distributed"`               |
-| `$.database.features[2]`              | The third database feature.             | `"relational"`                |
-| `$.database.versions[0].type`         | The type of the first database version. | `"lts"`                       |
-| `$.database.versions[*].release_date` | The release date for all versions.      | `["2024-05-24","2024-03-29"]` |
-| `$.*.features`                        | Two array's of features                 | `[["distributed", "scalable", "relational", "cloud native"], ["MySQL compatible", "Shard merging"]]`                              |
-| `$**.version`                         | All versions, with path wildcard        | `["v8.1.0","v8.0.0"]`         |
-| `$.database.features[0 to 2]`         | Range of database features from the first to the third.             | `["scalable","relational"]`   |
+| JSONパス                                | 説明                         | 例[`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract)   |
+| ------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `$`                                   | 文書のルート                     | 完全な文書を返します                                                                                           |
+| `$.database`                          | `database`オブジェクト           | `"database"`から始まる完全な構造を返します。3 `"migration_tool"`それ以下の構造は含まれません。                                      |
+| `$.database.name`                     | データベースの名前。                 | `"TiDB"`                                                                                             |
+| `$.database.features`                 | すべてのデータベース機能               | `["distributed", "scalable", "relational", "cloud native"]`                                          |
+| `$.database.features[0]`              | 最初のデータベース機能。               | `"distributed"`                                                                                      |
+| `$.database.features[2]`              | 3番目のデータベース機能。              | `"relational"`                                                                                       |
+| `$.database.versions[0].type`         | 最初のデータベース バージョンのタイプ。       | `"lts"`                                                                                              |
+| `$.database.versions[*].release_date` | すべてのバージョンのリリース日。           | `["2024-05-24","2024-03-29"]`                                                                        |
+| `$.*.features`                        | 2つの機能の配列                   | `[["distributed", "scalable", "relational", "cloud native"], ["MySQL compatible", "Shard merging"]]` |
+| `$**.version`                         | パスワイルドカードを使用したすべてのバージョン    | `["v8.1.0","v8.0.0"]`                                                                                |
+| `$.database.features[0 to 2]`         | 1 番目から 3 番目までのデータベース機能の範囲。 | `["scalable","relational"]`                                                                          |
 
-For more information, see [the IETF draft for JSONPath](https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html).
+詳細については[JSONPathのIETFドラフト](https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html)参照してください。
 
-## See also
+## 参照 {#see-also}
 
-* [JSON Data Type](/data-type-json.md)
+-   [JSONデータ型](/data-type-json.md)
 
-## Unsupported functions
+## サポートされていない関数 {#unsupported-functions}
 
-- `JSON_SCHEMA_VALIDATION_REPORT()`
-- `JSON_TABLE()`
-- `JSON_VALUE()`
+-   `JSON_SCHEMA_VALIDATION_REPORT()`
+-   `JSON_TABLE()`
+-   `JSON_VALUE()`
 
-For more information, see [#14486](https://github.com/pingcap/tidb/issues/14486).
+詳細については[＃14486](https://github.com/pingcap/tidb/issues/14486)参照してください。
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-- TiDB supports most of the [JSON functions](https://dev.mysql.com/doc/refman/8.0/en/json-functions.html) available in MySQL 8.0.
+-   TiDB は、MySQL 8.0 で利用可能な[JSON関数](https://dev.mysql.com/doc/refman/8.0/en/json-functions.html)ほとんどをサポートしています。

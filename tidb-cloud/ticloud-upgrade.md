@@ -1,39 +1,39 @@
 ---
 title: ticloud upgrade
-summary: The reference of `ticloud upgrade`.
+summary: ticloud アップグレード` のリファレンス。
 aliases: ['/tidbcloud/ticloud-update']
 ---
 
-# ticloud upgrade
+# ticloud アップグレード {#ticloud-upgrade}
 
-Upgrade the TiDB Cloud CLI to the latest version:
+TiDB Cloud CLI を最新バージョンにアップグレードします。
 
 ```shell
 ticloud upgrade [flags]
 ```
 
-## Examples
+## 例 {#examples}
 
-Upgrade the TiDB Cloud CLI to the latest version:
+TiDB Cloud CLI を最新バージョンにアップグレードします。
 
 ```shell
 ticloud upgrade
 ```
 
-## Flags
+## 旗 {#flags}
 
-| Flag       | Description                       |
-|------------|-----------------------------------|
- | -h, --help | Shows help information for this command. |
+| フラグ        | 説明                  |
+| ---------- | ------------------- |
+| -h, --help | このコマンドのヘルプ情報を表示します。 |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag                 | Description                                                                                          | Required | Note                                                                                                             |
-|----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
+| フラグ               | 説明                                                                             | 必須  | 注記                                                      |
+| ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------- |
+| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
+| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| -D, --debug       | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、皆様からの貢献も歓迎いたします。

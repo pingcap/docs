@@ -1,61 +1,61 @@
 ---
 title: Overview of TiDB Node Group 
-summary: Learn about the implementation and usage scenarios of the TiDB Node Group feature.
+summary: TiDB ノード グループ機能の実装と使用シナリオについて説明します。
 ---
 
-# Overview of TiDB Node Group
+# TiDBノードグループの概要 {#overview-of-tidb-node-group}
 
-You can create TiDB node groups for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters. A TiDB node group physically groups the computing nodes (TiDB layer) of a cluster, with each group containing a specific number of TiDB nodes. This configuration provides physical isolation of computing resources between groups, enabling efficient resource allocation in multi-business scenarios.
+[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに対してTiDBノードグループを作成できます。TiDBノードグループは、クラスタ内のコンピューティングノード（TiDBレイヤー）を物理的にグループ化し、各グループには特定の数のTiDBノードが含まれます。この構成により、グループ間のコンピューティングリソースが物理的に分離され、複数の業務シナリオにおいて効率的なリソース割り当てが可能になります。
 
-With TiDB node groups, you can divide computing nodes into multiple TiDB node groups based on business requirements and configure unique connection endpoints for each TiDB node group. Your applications connect to the cluster through their respective endpoints, and requests route to the corresponding node group for processing. This ensures that resource overuse in one group does not affect other groups.
+TiDBノードグループを使用すると、ビジネス要件に基づいてコンピューティングノードを複数のTiDBノードグループに分割し、各TiDBノードグループに固有の接続エンドポイントを設定できます。アプリケーションはそれぞれのエンドポイントを介してクラスターに接続し、リクエストは対応するノードグループにルーティングされて処理されます。これにより、あるグループでのリソースの過剰使用が他のグループに影響を与えることを防ぎます。
 
-> **Note**:
+> **注記**：
 >
-> The TiDB Node Group feature is **NOT** available for {{{ .starter }}} clusters.
+> TiDB ノード グループ機能は、 TiDB Cloud Serverless クラスターでは使用でき**ません**。
 
-## Implementation
+## 実装 {#implementation}
 
-TiDB node groups manage the grouping of TiDB nodes and maintain the mapping between endpoints and their corresponding TiDB nodes.
+TiDB ノード グループは、TiDB ノードのグループ化を管理し、エンドポイントと対応する TiDB ノード間のマッピングを維持します。
 
-Each TiDB node group is associated with a dedicated load balancer. When a user sends a SQL request to the endpoint of a TiDB node group, the request first passes through that group's load balancer, which then routes it exclusively to TiDB nodes within the group.
+各TiDBノードグループは専用のロードバランサに関連付けられています。ユーザーがTiDBノードグループのエンドポイントにSQLリクエストを送信すると、リクエストはまずそのグループのロードバランサを通過し、その後、グループ内のTiDBノードにのみルーティングされます。
 
-The following diagram illustrates the implementation of the TiDB Node Group feature.
+次の図は、TiDB ノード グループ機能の実装を示しています。
 
 ![The implementation of the TiDB Node Group feature](/media/tidb-cloud/implementation-of-tidb-node-group.png)
 
-All nodes in a TiDB node group respond to requests from the corresponding endpoint. You can perform the following tasks:
+TiDBノードグループ内のすべてのノードは、対応するエンドポイントからのリクエストに応答します。以下のタスクを実行できます。
 
-- Create a TiDB node group and assign TiDB nodes to it.
-- Set up connection endpoints for each group. Supported connection types include [public connection](/tidb-cloud/tidb-node-group-management.md#connect-via-public-connection), [private endpoint](/tidb-cloud/tidb-node-group-management.md#connect-via-private-endpoint), and [VPC peering](/tidb-cloud/tidb-node-group-management.md#connect-via-vpc-peering).
-- Route applications to specific groups using distinct endpoints to achieve resource isolation.
+-   TiDB ノード グループを作成し、それに TiDB ノードを割り当てます。
+-   各グループの接続エンドポイントを設定します。サポートされている接続タイプは[パブリック接続](/tidb-cloud/tidb-node-group-management.md#connect-via-public-connection) 、 [プライベートエンドポイント](/tidb-cloud/tidb-node-group-management.md#connect-via-private-endpoint) 、 [VPCピアリング](/tidb-cloud/tidb-node-group-management.md#connect-via-vpc-peering)です。
+-   個別のエンドポイントを使用してアプリケーションを特定のグループにルーティングし、リソースの分離を実現します。
 
-## Scenarios
+## シナリオ {#scenarios}
 
-The TiDB Node Group feature significantly enhances resource allocation for TiDB Cloud Dedicated clusters. TiDB nodes are dedicated to computation and do not store data. By organizing nodes into multiple physical groups, the feature ensures that resource overuse in one group does not impact other groups.
+TiDBノードグループ機能は、TiDB Cloud Dedicatedクラスタのリソース割り当てを大幅に強化します。TiDBノードは計算専用であり、データを保存しません。この機能は、ノードを複数の物理グループに編成することで、あるグループでのリソースの過剰使用が他のグループに影響を与えないようにします。
 
-With this feature, you can:
+この機能を使用すると、次のことが可能になります。
 
-- Consolidate multiple applications from different systems into a single TiDB Cloud Dedicated cluster. As an application's workload grows, it will not affect the normal operation of other applications. The TiDB Node Group feature ensures that the response time of transactional applications is not impacted by data analysis or batch applications.
+-   異なるシステムから複数のアプリケーションを単一のTiDB Cloud Dedicatedクラスタに統合します。アプリケーションのワークロードが増加しても、他のアプリケーションの正常な動作に影響を与えることはありません。TiDBノードグループ機能により、トランザクションアプリケーションの応答時間がデータ分析やバッチアプリケーションの影響を受けないことが保証されます。
 
-- Perform import or DDL tasks on the TiDB Cloud Dedicated cluster without affecting the performance of existing production workloads. You can create a separate TiDB node group for importing or DDL tasks. Even though these tasks consume significant CPU or memory resources, they only use the resources in their own TiDB node group, ensuring the workloads in other TiDB node groups are not impacted. 
+-   TiDB Cloud Dedicated クラスタ上で、既存の本番ロードのパフォーマンスに影響を与えることなく、インポートまたは DDL タスクを実行できます。インポートまたは DDL タスク用に、専用の TiDB ノードグループを作成できます。これらのタスクは CPU またはメモリリソースを大量に消費しますが、使用するリソースは専用の TiDB ノードグループ内のみであるため、他の TiDB ノードグループのワークロードには影響しません。
 
-- Combine all test environments into a single TiDB cluster or group resource-intensive batch tasks into a dedicated TiDB node group. This approach improves hardware utilization, reduces operating costs, and ensures that critical applications always have access to necessary resources.
+-   すべてのテスト環境を単一のTiDBクラスタに統合するか、リソースを大量に消費するバッチタスクを専用のTiDBノードグループにグループ化します。このアプローチにより、ハードウェア使用率が向上し、運用コストが削減され、重要なアプリケーションが常に必要なリソースにアクセスできるようになります。
 
-In addition, TiDB node groups are easy to scale in or out. For key applications with high performance requirements, you can allocate TiDB nodes to the group as needed. For less demanding applications, you can start with a small number of TiDB nodes and scale out as needed. Efficient use of the TiDB Node Group feature reduces the number of clusters, simplifies operations and maintenance, and lowers management costs.
+さらに、TiDBノードグループはスケールインとスケールアウトが容易です。高パフォーマンス要件の主要アプリケーションでは、必要に応じてTiDBノードをグループに割り当てることができます。要件がそれほど厳しくないアプリケーションでは、少数のTiDBノードから開始し、必要に応じてスケールアウトすることができます。TiDBノードグループ機能を効率的に使用することで、クラスタ数を削減し、運用と保守を簡素化し、管理コストを削減できます。
 
-## Limitations and quotas
+## 制限と割り当て {#limitations-and-quotas}
 
-Currently, the TiDB Node Group feature is free of charge. The following are limitations and quotas:
+現在、TiDBノードグループ機能は無料です。制限事項とクォータは次のとおりです。
 
-- You can only create TiDB node groups for TiDB Cloud Dedicated clusters on AWS or Google Cloud. Support for other cloud providers is planned for the near future.
-- TiDB clusters with 4 vCPUs and 16 GiB of memory do not support the TiDB Node Group feature.
-- By default, you can create up to five TiDB node groups for a TiDB Cloud Dedicated cluster. If you need more groups, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). 
-- Each TiDB node group must contain at least one TiDB node. While there is no limit to the number of nodes in a group, the total number of TiDB nodes in a TiDB Cloud Dedicated cluster must not exceed 150.
-- TiDB Cloud runs automatic statistics collection tasks on the TiDB owner node, regardless of node group boundaries. These tasks cannot be isolated within individual TiDB node groups.
-- For TiDB clusters of versions earlier than v8.1.2, `ADD INDEX` tasks cannot be isolated within individual TiDB node groups. 
+-   TiDB ノードグループは、AWS または Google Cloud 上のTiDB Cloud Dedicated クラスターでのみ作成できます。他のクラウドプロバイダーへのサポートは、近い将来に予定されています。
+-   4 つの vCPU と 16 GiB のメモリを備えた TiDB クラスターは、TiDB ノード グループ機能をサポートしません。
+-   デフォルトでは、 TiDB Cloud Dedicated クラスターに最大 5 つの TiDB ノードグループを作成できます。さらにグループが必要な場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+-   各TiDBノードグループには、少なくとも1つのTiDBノードが含まれている必要があります。グループ内のノード数に制限はありませんが、 TiDB Cloud Dedicatedクラスタ内のTiDBノードの総数は150を超えてはなりません。
+-   TiDB Cloudは、ノードグループの境界に関係なく、TiDBオーナーノード上で自動統計収集タスクを実行します。これらのタスクは、個々のTiDBノードグループ内で分離することはできません。
+-   v8.1.2 より前のバージョンの TiDB クラスターの場合、 `ADD INDEX`タスクを個々の TiDB ノード グループ内で分離することはできません。
 
-## SLA impact
+## SLAの影響 {#sla-impact}
 
-According to TiDB Cloud [Service Level Agreement (SLA)](https://www.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/), the Monthly Uptime Percentage of TiDB Cloud Dedicated clusters with multiple TiDB nodes deployment can reach up to 99.99%. However, after introducing TiDB Node Group, if you create multiple TiDB Node Groups with only 1 TiDB node in each group, you will lose the high availability for the groups and your cluster's monthly uptime percentage will downgrade to a single TiDB node deployment model (namely, up to 99.9%).  
+TiDB Cloud [サービスレベル契約（SLA）](https://www.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/)によると、複数のTiDBノードを展開したTiDB Cloud Dedicatedクラスタの月間稼働率は最大99.99%に達します。しかし、TiDBノードグループを導入した後、各グループに1つのTiDBノードのみを含む複数のTiDBノードグループを作成すると、グループの高可用性が失われ、クラスタの月間稼働率は単一のTiDBノード展開モデル（つまり最大99.9%）に低下します。
 
-For high availability, it is recommended that you configure at least two TiDB nodes for each TiDB node group.
+高可用性を確保するには、TiDB ノード グループごとに少なくとも 2 つの TiDB ノードを構成することをお勧めします。

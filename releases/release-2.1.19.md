@@ -1,93 +1,93 @@
 ---
 title: TiDB 2.1.19 Release Notes
-summary: TiDB 2.1.19 was released on December 27, 2019. It includes various fixes and optimizations for SQL optimizer, SQL execution engine, server, DDL, TiKV, PD, and TiDB Ansible. Some notable fixes include resolving incorrect query results, memory overhead reduction, and fixing issues related to timezone, data duplication, and panic occurrences. The release also includes upgrades and optimizations for TiDB Binlog and TiDB Ansible.
+summary: TiDB 2.1.19は2019年12月27日にリリースされました。SQLオプティマイザー、SQL実行エンジン、サーバー、DDL、TiKV、PD、TiDB Ansibleに関する様々な修正と最適化が含まれています。主な修正としては、不正なクエリ結果の解決、メモリオーバーヘッドの削減、タイムゾーン、データ重複、panic発生に関連する問題の修正などが挙げられます。また、TiDB BinlogとTiDB Ansibleのアップグレードと最適化も含まれています。
 ---
 
-# TiDB 2.1.19 Release Notes
+# TiDB 2.1.19 リリースノート {#tidb-2-1-19-release-notes}
 
-Release date: December 27, 2019
+発売日：2019年12月27日
 
-TiDB version: 2.1.19
+TiDB バージョン: 2.1.19
 
-TiDB Ansible version: 2.1.19
+TiDB Ansible バージョン: 2.1.19
 
-## TiDB
+## TiDB {#tidb}
 
-+ SQL Optimizer
-    - Optimize the scenario of `select max(_tidb_rowid) from t` to avoid full table scan [#13294](https://github.com/pingcap/tidb/pull/13294)
-    - Fix the incorrect results caused by the incorrect value assigned to the user variable in the query and the push-down of predicates [#13230](https://github.com/pingcap/tidb/pull/13230)
-    - Fix the issue that the statistics are not accurate because a data race occurs when statistics are updated [#13690](https://github.com/pingcap/tidb/pull/13690)
-    - Fix the issue that the result is incorrect when the `UPDATE` statement contains both a sub-query and a stored generated column; fix the `UPDATE` statement execution error when this statement contains two same-named tables from different databases [#13357](https://github.com/pingcap/tidb/pull/13357)
-    - Fix the issue that the query plan might be incorrectly selected because the `PhysicalUnionScan` operator incorrectly sets the statistics [#14134](https://github.com/pingcap/tidb/pull/14134)
-    - Remove the `minAutoAnalyzeRatio` constraint to make the automatic `ANALYZE` more timely [#14013](https://github.com/pingcap/tidb/pull/14013)
-    - Fix the issue that the estimated number of rows is greater than `1` when the `WHERE` clause contains an equal condition on the unique key [#13385](https://github.com/pingcap/tidb/pull/13385)
-+ SQL Execution Engine
-    - Fix the precision overflow when using `int64` as the intermediate result of `unit64` in `ConvertJSONToInt` [#13036](https://github.com/pingcap/tidb/pull/13036)
-    - Fix the issue that when the `SLEEP` function is in a query (for example, `select 1 from (select sleep(1)) t;)`), column pruning causes `sleep(1)` in the query to be invalid [#13039](https://github.com/pingcap/tidb/pull/13039)
-    - Reduce memory overhead by reusing `Chunk` in the `INSERT ON DUPLICATE UPDATE` statement [#12999](https://github.com/pingcap/tidb/pull/12999)
-    - Add more transaction-related fields for the `slow_query` table [#13129](https://github.com/pingcap/tidb/pull/13129):
-        - `Prewrite_time`
-        - `Commit_time`
-        - `Get_commit_ts_time`
-        - `Commit_backoff_time`
-        - `Backoff_types`
-        - `Resolve_lock_time`
-        - `Local_latch_wait_time`
-        - `Write_key`
-        - `Write_size`
-        - `Prewrite_region`
-        - `Txn_retry`
-    - Fix the issue that a subquery contained in an `UPDATE` statement is incorrectly converted; fix the `UPDATE` execution failure when the `WHERE` clause contains a subquery [#13120](https://github.com/pingcap/tidb/pull/13120)
-    - Support executing `ADMIN CHECK TABLE` on partitioned tables [#13143](https://github.com/pingcap/tidb/pull/13143)
-    - Fix the issue that the precision of statements such as `SHOW CREATE TABLE` is incomplete when `ON UPDATE CURRENT_TIMESTAMP` is used as a column attribute and floating point precision is specified [#12462](https://github.com/pingcap/tidb/pull/12462)
-    - Fix the panic occurred when executing the `SELECT * FROM information_schema.KEY_COLUMN_USAGE` statement because the foreign key is not checked when dropping, modifying or changing the column [#14162](https://github.com/pingcap/tidb/pull/14162)
-    - Fix the issue that the returned data might be duplicated when `Streaming` is enabled in TiDB [#13255](https://github.com/pingcap/tidb/pull/13255)
-    - Fix the `Invalid time format` error caused by daylight saving time [#13624](https://github.com/pingcap/tidb/pull/13624)
-    - Fix the issue that data is incorrect because the precision is lost when an integer is converted to an unsigned floating point or decimal type [#13756](https://github.com/pingcap/tidb/pull/13756)
-    - Fix the issue that an incorrect type of value is returned when the `Quote` function handles the `NULL` value [#13681](https://github.com/pingcap/tidb/pull/13681)
-    - Fix the issue that the timezone is incorrect after parsing the date from strings using `gotime.Local` [#13792](https://github.com/pingcap/tidb/pull/13792)
-    - Fix the issue that the result might be incorrect because the `binSearch` function does not return an error in the implementation of `builtinIntervalRealSig` [#13768](https://github.com/pingcap/tidb/pull/13768)
-    - Fix the issue that an error might occur when converting the string type to the floating point type in the `INSERT` statement execution [#14009](https://github.com/pingcap/tidb/pull/14009)
-    - Fix the incorrect result returned from the `sum(distinct)` function [#13041](https://github.com/pingcap/tidb/pull/13041)
-    - Fix the issue that `data too long` is returned when `CAST` converting the data in `union` of the same location to the merged type because the returned type length of the `jsonUnquoteFunction` function is given an incorrect value [#13645](https://github.com/pingcap/tidb/pull/13645)
-    - Fix the issue that the password cannot be set because the privilege check is too strict [#13805](https://github.com/pingcap/tidb/pull/13805)
-+ Server
-    - Fix the issue that `KILL CONNECTION` might cause the goroutine leak [#13252](https://github.com/pingcap/tidb/pull/13252)
-    - Support getting the binlog status of all TiDB nodes via the `info/all` interface of the HTTP API [#13188](https://github.com/pingcap/tidb/pull/13188)
-    - Fix the failure to build the TiDB project on Windows [#13650](https://github.com/pingcap/tidb/pull/13650)
-    - Add the `server-version` configuration item to control and modify the version of TiDB server [#13904](https://github.com/pingcap/tidb/pull/13904)
-    - Fix the issue that the binary `plugin` compiled with Go1.13 does not run normally [#13527](https://github.com/pingcap/tidb/pull/13527)
-+ DDL
-    - Use the table's `COLLATE` instead of the system's default charset in the column when a table is created and the table contains `COLLATE` [#13190](https://github.com/pingcap/tidb/pull/13190)
-    - Limit the length of the index name when creating a table [#13311](https://github.com/pingcap/tidb/pull/13311)
-    - Fix the issue that the length of the table name is not checked when renaming a table [#13345](https://github.com/pingcap/tidb/pull/13345)
-    - Check the width range of the `BIT` column [#13511](https://github.com/pingcap/tidb/pull/13511)
-    - Make the error information output from `change/modify column` more understandable [#13798](https://github.com/pingcap/tidb/pull/13798)
-    - Fix the issue that when executing the `drop column` operation that has not yet been handled by the downstream Drainer, the downstream might receive DML operations without the affected column [#13974](https://github.com/pingcap/tidb/pull/13974)
+-   SQLオプティマイザー
+    -   `select max(_tidb_rowid) from t`のシナリオを最適化して、テーブル全体のスキャンを回避する[＃13294](https://github.com/pingcap/tidb/pull/13294)
+    -   クエリ内のユーザー変数に割り当てられた誤った値と述語のプッシュダウンによって発生する誤った結果を修正しました[＃13230](https://github.com/pingcap/tidb/pull/13230)
+    -   統計情報の更新時にデータ競合が発生し、統計情報が正確でない問題を修正しました[＃13690](https://github.com/pingcap/tidb/pull/13690)
+    -   `UPDATE`ステートメントにサブクエリとストアされた生成列の両方が含まれている場合に結果が正しくない問題を修正しました。3 `UPDATE`ステートメントに異なるデータベースの同じ名前のテーブルが 2 つ含まれている場合にステートメント実行エラーが発生する問題を修正しました[＃13357](https://github.com/pingcap/tidb/pull/13357)
+    -   `PhysicalUnionScan`演算子が統計[＃14134](https://github.com/pingcap/tidb/pull/14134)誤って設定するため、クエリ プランが誤って選択される可能性がある問題を修正しました。
+    -   `minAutoAnalyzeRatio`制約を取り除き、自動`ANALYZE`をよりタイムリーに[＃14013](https://github.com/pingcap/tidb/pull/14013)する
+    -   `WHERE`節に一意キー[＃13385](https://github.com/pingcap/tidb/pull/13385)等号条件が含まれている場合に推定行数が`1`より大きくなる問題を修正しました。
+-   SQL実行エンジン
+    -   `ConvertJSONToInt` [＃13036](https://github.com/pingcap/tidb/pull/13036)で`unit64`中間結果として`int64`使用するときに精度オーバーフローが発生する問題を修正しました。
+    -   クエリに`SLEEP`関数が含まれている場合（たとえば`select 1 from (select sleep(1)) t;)` ）、列の整理によってクエリ内の`sleep(1)`無効になる問題を修正しました[＃13039](https://github.com/pingcap/tidb/pull/13039)
+    -   `INSERT ON DUPLICATE UPDATE`文[＃12999](https://github.com/pingcap/tidb/pull/12999)で`Chunk`再利用してメモリのオーバーヘッドを削減します
+    -   `slow_query`テーブル[＃13129](https://github.com/pingcap/tidb/pull/13129)にトランザクション関連のフィールドを追加します。
+        -   `Prewrite_time`
+        -   `Commit_time`
+        -   `Get_commit_ts_time`
+        -   `Commit_backoff_time`
+        -   `Backoff_types`
+        -   `Resolve_lock_time`
+        -   `Local_latch_wait_time`
+        -   `Write_key`
+        -   `Write_size`
+        -   `Prewrite_region`
+        -   `Txn_retry`
+    -   `UPDATE`文に含まれるサブクエリが誤って変換される問題を修正しました。5 `WHERE`にサブクエリ[＃13120](https://github.com/pingcap/tidb/pull/13120)が含まれている場合に`UPDATE`実行エラーが発生する問題を修正しました。
+    -   パーティションテーブル[＃13143](https://github.com/pingcap/tidb/pull/13143)で`ADMIN CHECK TABLE`実行をサポート
+    -   列属性として`ON UPDATE CURRENT_TIMESTAMP`使用し、浮動小数点精度を指定した場合、 `SHOW CREATE TABLE`などのステートメントの精度が不完全になる問題を修正しました[＃12462](https://github.com/pingcap/tidb/pull/12462)
+    -   列[＃14162](https://github.com/pingcap/tidb/pull/14162)削除、修正、または変更するときに外部キーがチェックされないため、 `SELECT * FROM information_schema.KEY_COLUMN_USAGE`文の実行時にpanicが発生する問題を修正しました。
+    -   TiDB [＃13255](https://github.com/pingcap/tidb/pull/13255)で`Streaming`有効になっている場合に返されるデータが重複する可能性がある問題を修正しました
+    -   夏時間[＃13624](https://github.com/pingcap/tidb/pull/13624)による`Invalid time format`エラーを修正
+    -   整数を符号なし浮動小数点型または小数型に変換すると精度が失われ、データが正しくなくなる問題を修正[＃13756](https://github.com/pingcap/tidb/pull/13756)
+    -   `Quote`関数が`NULL`値[＃13681](https://github.com/pingcap/tidb/pull/13681)処理するときに誤ったタイプの値が返される問題を修正しました
+    -   `gotime.Local` [＃13792](https://github.com/pingcap/tidb/pull/13792)を使用して文字列から日付を解析した後にタイムゾーンが正しくない問題を修正しました
+    -   `builtinIntervalRealSig` [＃13768](https://github.com/pingcap/tidb/pull/13768)の実装で`binSearch`関数がエラーを返さないため、結果が正しくない可能性がある問題を修正しました。
+    -   `INSERT`文実行[＃14009](https://github.com/pingcap/tidb/pull/14009)で文字列型を浮動小数点型に変換するときにエラーが発生する可能性がある問題を修正
+    -   `sum(distinct)`関数[＃13041](https://github.com/pingcap/tidb/pull/13041)から返される誤った結果を修正します
+    -   関数`jsonUnquoteFunction`戻り型の長さに不正な値が与えられているため、同じ場所の`CAST` `union`データをマージされた型に変換すると`data too long`が返される問題を修正しました[＃13645](https://github.com/pingcap/tidb/pull/13645)
+    -   権限チェックが厳しすぎるためパスワードを設定できない問題を修正[＃13805](https://github.com/pingcap/tidb/pull/13805)
+-   サーバ
+    -   `KILL CONNECTION`ゴルーチンリークを引き起こす可能性がある問題を修正[＃13252](https://github.com/pingcap/tidb/pull/13252)
+    -   HTTP API [＃13188](https://github.com/pingcap/tidb/pull/13188)の`info/all`インターフェースを介してすべてのTiDBノードのbinlogステータスの取得をサポート
+    -   Windows [＃13650](https://github.com/pingcap/tidb/pull/13650)で TiDB プロジェクトのビルドに失敗する問題を修正
+    -   TiDBサーバー[＃13904](https://github.com/pingcap/tidb/pull/13904)のバージョンを制御および変更するための`server-version`構成項目を追加します。
+    -   Go1.13でコンパイルされたバイナリ`plugin`正常に動作しない問題を修正[＃13527](https://github.com/pingcap/tidb/pull/13527)
+-   DDL
+    -   テーブルが作成され、テーブルに`COLLATE` [＃13190](https://github.com/pingcap/tidb/pull/13190)が含まれている場合、列のシステムのデフォルトの文字セットの代わりにテーブルの`COLLATE`使用します。
+    -   テーブル[＃13311](https://github.com/pingcap/tidb/pull/13311)を作成するときにインデックス名の長さを制限する
+    -   テーブル名を変更するときにテーブル名の長さがチェックされない問題を修正[＃13345](https://github.com/pingcap/tidb/pull/13345)
+    -   `BIT`列目[＃13511](https://github.com/pingcap/tidb/pull/13511)列目の幅の範囲を確認する
+    -   `change/modify column`から出力されるエラー情報をより分かりやすくする[＃13798](https://github.com/pingcap/tidb/pull/13798)
+    -   下流のDrainerによってまだ処理されていない`drop column`操作を実行するときに、下流が影響を受ける列[＃13974](https://github.com/pingcap/tidb/pull/13974)のない DML 操作を受け取る可能性がある問題を修正しました。
 
-## TiKV
+## TiKV {#tikv}
 
-+ Raftstore
-    - Fix the panic occurred when restarting TiKV and `is_merging` is given an incorrect value in the process of merging Regions and applying the Compact log [#5884](https://github.com/tikv/tikv/pull/5884)
-+ Importer
-    - Remove the limit on the gRPC message length [#5809](https://github.com/tikv/tikv/pull/5809)
+-   Raftstore
+    -   TiKVを再起動したときに発生するpanicを修正し、リージョンをマージしてCompact log [＃5884](https://github.com/tikv/tikv/pull/5884)を適用するプロセスで`is_merging`誤った値が与えられました。
+-   輸入業者
+    -   gRPC メッセージの長さの制限を解除[＃5809](https://github.com/tikv/tikv/pull/5809)
 
-## PD
+## PD {#pd}
 
-- Improve the performance of the HTTP API for getting all Regions [#1988](https://github.com/pingcap/pd/pull/1988)
-- Upgrade etcd to fix the issue that etcd PreVote cannot elect a leader (downgrade not supported) [#2052](https://github.com/pingcap/pd/pull/2052)
+-   すべてのリージョン[＃1988](https://github.com/pingcap/pd/pull/1988)を取得するための HTTP API のパフォーマンスを改善しました
+-   etcd をアップグレードして、etcd PreVote がリーダーを選出できない問題を修正します (ダウングレードはサポートされていません) [＃2052](https://github.com/pingcap/pd/pull/2052)
 
-## Tools
+## ツール {#tools}
 
-+ TiDB Binlog
-    - Optimize the node status information output through binlogctl [#777](https://github.com/pingcap/tidb-binlog/pull/777)
-    - Fix the panic occurred because of the `nil` value in the Drainer filter configuration [#802](https://github.com/pingcap/tidb-binlog/pull/802)
-    - Optimize the `Graceful` exit of Pump [#825](https://github.com/pingcap/tidb-binlog/pull/825)
-    - Add more detailed monitoring metrics when Pump writes binlog data [#830](https://github.com/pingcap/tidb-binlog/pull/830)
-    - Optimize Drainer's logic to refresh table information after Drainer has executed a DDL operation [#836](https://github.com/pingcap/tidb-binlog/pull/836)
-    - Fix the issue that the commit binlog of a DDL operation is ignored when Pump does not receive this binlog [#855](https://github.com/pingcap/tidb-binlog/pull/855)
+-   TiDBBinlog
+    -   binlogctl [＃777](https://github.com/pingcap/tidb-binlog/pull/777)を通じてノードステータス情報の出力を最適化します。
+    -   Drainerフィルター設定[＃802](https://github.com/pingcap/tidb-binlog/pull/802)の値`nil`が原因でpanicが発生する問題を修正
+    -   Pump[＃825](https://github.com/pingcap/tidb-binlog/pull/825)の`Graceful`出口を最適化する
+    -   Pumpがbinlogデータを書き込むときに、より詳細な監視メトリックを追加します[＃830](https://github.com/pingcap/tidb-binlog/pull/830)
+    -   Drainer がDDL 操作[＃836](https://github.com/pingcap/tidb-binlog/pull/836)を実行した後にテーブル情報を更新するように Drainer のロジックを最適化します。
+    -   Pumpがこのbinlog[＃855](https://github.com/pingcap/tidb-binlog/pull/855)を受信しない場合、DDL操作のコミットbinlogが無視される問題を修正しました。
 
-## TiDB Ansible
+## TiDB アンシブル {#tidb-ansible}
 
-- Rename the `Uncommon Error OPM` monitoring item of TiDB service to `Write Binlog Error` and add the corresponding alert message [#1038](https://github.com/pingcap/tidb-ansible/pull/1038)
-- Upgrade TiSpark to 2.1.8 [#1063](https://github.com/pingcap/tidb-ansible/pull/1063)
+-   TiDBサービスの監視項目`Uncommon Error OPM`名前を`Write Binlog Error`に変更し、対応するアラートメッセージ[＃1038](https://github.com/pingcap/tidb-ansible/pull/1038)を追加します。
+-   TiSparkを2.1.8にアップグレード[＃1063](https://github.com/pingcap/tidb-ansible/pull/1063)

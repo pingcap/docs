@@ -1,64 +1,62 @@
 ---
-title: Use {{{ .starter }}} Export Resource
-summary: Learn how to use the {{{ .starter }}} export resource to create and modify a {{{ .starter }}} export task.
+title: Use TiDB Cloud Serverless Export Resource
+summary: TiDB Cloud Serverless エクスポート リソースを使用して、 TiDB Cloud Serverless エクスポート タスクを作成および変更する方法を学習します。
 ---
 
-# Use {{{ .starter }}} Export Resource
+# TiDB Cloud Serverless エクスポート リソースを使用する {#use-tidb-cloud-serverless-export-resource}
 
-This document describes how to manage a [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) data export task using the `tidbcloud_serverless_export` resource.
+このドキュメントでは、 `tidbcloud_serverless_export`リソースを使用して[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)データ エクスポート タスクを管理する方法について説明します。
 
-The features of the `tidbcloud_serverless_export` resource include the following:
+`tidbcloud_serverless_export`リソースの機能は次のとおりです。
 
-- Create {{{ .starter }}} data export tasks.
-- Import {{{ .starter }}} data export tasks.
-- Delete {{{ .starter }}} data export tasks.
+-   TiDB Cloud Serverless のデータ エクスポート タスクを作成します。
+-   TiDB Cloud Serverless データのエクスポート タスクをインポートします。
+-   TiDB Cloud Serverless データのエクスポート タスクを削除します。
 
-> **Note:**
+> **注記：**
 >
-> {{{ .starter }}} export resource cannot be modified. If you want to change the configuration of a {{{ .starter }}} export resource, you need to delete the existing one, and then create a new one.
+> TiDB Cloud Serverless エクスポートリソースは変更できません。TiDB TiDB Cloud Serverless エクスポートリソースの設定を変更する場合は、既存のリソースを削除してから、新しいリソースを作成する必要があります。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
-- [Create a {{{ .starter }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+-   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
+-   [TiDB Cloud Serverless クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md) 。
 
-## Create a {{{ .starter }}} data export task
+## TiDB Cloud Serverlessデータエクスポートタスクを作成する {#create-a-tidb-cloud-serverless-data-export-task}
 
-You can create a {{{ .starter }}} data export task using the `tidbcloud_serverless_export` resource.
+`tidbcloud_serverless_export`リソースを使用して、 TiDB Cloud Serverless データ エクスポート タスクを作成できます。
 
-The following example shows how to create a {{{ .starter }}} data export task.
+次の例は、TiDB Cloud Serverless データ エクスポート タスクを作成する方法を示しています。
 
-1. Create a directory for the export and enter it.
+1.  エクスポート用のディレクトリを作成してそこに入ります。
 
-2. Create a `export.tf` file:
+2.  `export.tf`ファイルを作成します。
 
-    ```
-    terraform {
-      required_providers {
-        tidbcloud = {
-          source = "tidbcloud/tidbcloud"
+        terraform {
+          required_providers {
+            tidbcloud = {
+              source = "tidbcloud/tidbcloud"
+            }
+          }
         }
-      }
-    }
 
-    provider "tidbcloud" {
-      public_key = "your_public_key"
-      private_key = "your_private_key"
-    }
+        provider "tidbcloud" {
+          public_key = "your_public_key"
+          private_key = "your_private_key"
+        }
 
-    resource "tidbcloud_serverless_export" "example" {
-      cluster_id   = 10476959660988000000
-    }
-    ```
+        resource "tidbcloud_serverless_export" "example" {
+          cluster_id   = 10476959660988000000
+        }
 
-    Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
+    `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    - To use the serverless export resource, set the resource type as `tidbcloud_serverless_export`.
-    - For the resource name, you can define it as needed. For example, `example`.
-    - For the resource details, you can configure them according to the serverless export specification information.
-    - To get the serverless export specification information, see [tidbcloud_serverless_export (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_export).
+    -   サーバーレス エクスポート リソースを使用するには、リソース タイプを`tidbcloud_serverless_export`に設定します。
+    -   リソース名は必要に応じて定義できます。例： `example` 。
+    -   リソースの詳細については、サーバーレス エクスポート仕様情報に従って構成できます。
+    -   サーバーレス エクスポート仕様情報を取得するには、 [tidbcloud_serverless_export (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_export)参照してください。
 
-3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
+3.  `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 
     ```shell
     $ terraform apply
@@ -94,13 +92,13 @@ The following example shows how to create a {{{ .starter }}} data export task.
         Enter a value:
     ```
 
-    In the preceding result, Terraform generates an execution plan for you, which describes the actions that Terraform will take:
+    上記の結果では、Terraform によって実行されるアクションを記述した実行プランが生成されます。
 
-    - You can check the difference between the configurations and the states.
-    - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
-    - `known after apply` indicates that you will get the corresponding value after `apply`.
+    -   構成と状態の違いを確認できます。
+    -   `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
+    -   `known after apply` `apply`後の対応する値が取得されることを示します。
 
-4. If everything in your plan looks fine, type `yes` to continue:
+4.  計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
 
     ```shell
     Do you want to perform these actions?
@@ -115,11 +113,11 @@ The following example shows how to create a {{{ .starter }}} data export task.
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-    In this example, the `tidbcloud_serverless_export.example` resource will create an export task to export data from the entire cluster. 
-    
-    This resource is not synchronized. You can use `terraform refresh` to retrieve its latest state.
+    この例では、 `tidbcloud_serverless_export.example`リソースがクラスター全体からデータをエクスポートするエクスポート タスクを作成します。
 
-5. Use the `terraform show` or `terraform state show tidbcloud_serverless_export.${resource-name}` command to inspect the state of your resource. The former command shows the states of all resources and data sources.
+    このリソースは同期されていません。最新の状態を取得するには`terraform refresh`使用してください。
+
+5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_serverless_export.${resource-name}`使用します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_serverless_export.example
@@ -142,38 +140,36 @@ The following example shows how to create a {{{ .starter }}} data export task.
     }
     ```
 
-## Import a {{{ .starter }}} data export task
+## TiDB Cloud Serverlessデータエクスポートタスクをインポートする {#import-a-tidb-cloud-serverless-data-export-task}
 
-For a TiDB Serverless data export task that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+Terraform によって管理されていない TiDB Serverless データ エクスポート タスクの場合は、インポートするだけで Terraform を使用して管理できます。
 
-Import a {{{ .starter }}} data export task that is not created by Terraform as follows:
+次のように、Terraform によって作成されていないTiDB Cloud Serverless データ エクスポート タスクをインポートします。
 
-1. Add an import block for the new {{{ .starter }}} export resource.
+1.  新しいTiDB Cloud Serverless エクスポート リソースのインポート ブロックを追加します。
 
-    Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,export_id`:
+    次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` `cluster_id,export_id`の形式に置き換えます。
 
+        import {
+          to = tidbcloud_serverless_export.example
+          id = "${id}"
+        }
+
+2.  新しい構成ファイルを生成します。
+
+    インポート ブロックに従って、新しいサーバーレス エクスポート リソースの新しい構成ファイルを生成します。
+
+    ```shell
+    terraform plan -generate-config-out=generated.tf
     ```
-    import {
-      to = tidbcloud_serverless_export.example
-      id = "${id}"
-    }
-    ```
 
-2. Generate the new configuration file.
+    上記のコマンドでは、既存の`.tf`名を指定しないでください。指定した場合、Terraform はエラーを返します。
 
-    Generate the new configuration file for the new serverless export resource according to the import block:
+3.  生成された構成を確認して適用します。
 
-      ```shell
-      terraform plan -generate-config-out=generated.tf
-      ```
+    生成された構成ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
 
-    Do not specify an existing `.tf` filename in the preceding command. Otherwise, Terraform will return an error.
-
-3. Review and apply the generated configuration.
-
-    Review the generated configuration file to ensure that it meets your needs. Optionally, you can move the contents of this file to your preferred location.
-
-    Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
+    次に、 `terraform apply`を実行してインフラストラクチャをインポートします。適用後の出力例は次のとおりです。
 
     ```shell
     tidbcloud_serverless_export.example: Importing... 
@@ -182,11 +178,11 @@ Import a {{{ .starter }}} data export task that is not created by Terraform as f
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
 
-Now you can manage the imported export with Terraform.
+これで、インポートしたエクスポートを Terraform で管理できるようになりました。
 
-## Delete a {{{ .starter }}} data export task
+## TiDB Cloud Serverless のデータエクスポートタスクを削除する {#delete-a-tidb-cloud-serverless-data-export-task}
 
-To delete a {{{ .starter }}} data export task, you can delete the configuration of the `tidbcloud_serverless_export` resource, then use the `terraform apply` command to destroy the resource:
+TiDB Cloud Serverless データ エクスポート タスクを削除するには、 `tidbcloud_serverless_export`リソースの構成を削除してから、 `terraform apply`コマンドを使用してリソースを破棄します。
 
 ```shell
 $ terraform apply
@@ -230,8 +226,6 @@ tidbcloud_serverless_export.example: Destruction complete after 2s
 Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
 ```
 
-Now, if you run the `terraform show` command, it will show no managed resources because the resource has been cleared:
+ここで、 `terraform show`コマンドを実行すると、リソースがクリアされているため、管理対象リソースは表示されません。
 
-```
-$ terraform show
-```
+    $ terraform show

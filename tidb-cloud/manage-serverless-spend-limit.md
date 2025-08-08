@@ -1,47 +1,48 @@
 ---
-title: Manage Spending Limit for {{{ .starter }}} Scalable Clusters
-summary: Learn how to manage spending limit for your {{{ .starter }}} scalable clusters.
+title: Manage Spending Limit for TiDB Cloud Serverless Scalable Clusters
+summary: TiDB Cloud Serverless のスケーラブル クラスターの支出制限を管理する方法を学びます。
 ---
 
-# Manage Spending Limit for {{{ .starter }}} Scalable Clusters
+# TiDB Cloudサーバーレス スケーラブル クラスターの支出制限を管理する {#manage-spending-limit-for-tidb-cloud-serverless-scalable-clusters}
 
-> **Note:**
+> **注記：**
 >
-> The spending limit is only applicable to {{{ .starter }}} [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan).
+> 支出制限はTiDB Cloud Serverless [スケーラブルなクラスター](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan)にのみ適用されます。
 
-Spending limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that allows you to set a budget for your {{{ .starter }}} scalable clusters.
+支出制限とは、特定のワークロードに対して1か月あたりに支出可能な最大金額を指します。これは、 TiDB Cloud Serverlessのスケーラブルクラスターの予算を設定できるコスト管理メカニズムです。
 
-For each organization in TiDB Cloud, you can create a maximum of five [free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create more {{{ .starter }}} clusters, you need to add a credit card and create scalable clusters for the usage. But if you delete some of your previous clusters before creating more, the new cluster can still be created without a credit card.
+TiDB Cloudでは、組織ごとに最大5つ[フリークラスター](/tidb-cloud/select-cluster-tier.md#free-cluster-plan)のTiDB Cloud Serverlessクラスターをデフォルトで作成できます。さらにTiDB Cloud Serverlessクラスターを作成するには、クレジットカード情報を追加し、使用量に合わせてスケーラブルなクラスターを作成する必要があります。ただし、クラスターを追加する前に既存のクラスターの一部を削除すれば、クレジットカード情報がなくても新しいクラスターを作成できます。
 
-## Usage quota
+## 使用量制限 {#usage-quota}
 
-For the first five {{{ .starter }}} clusters in your organization, whether they are free or scalable, TiDB Cloud provides a free usage quota for each of them as follows:
+組織内の最初の 5 つのTiDB Cloud Serverless クラスターについては、無料かスケーラブルかに関係なく、 TiDB Cloud は次のようにクラスターごとに無料使用量割り当てを提供します。
 
-- Row-based storage: 5 GiB
-- Columnar storage: 5 GiB
-- [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
+-   行ベースのstorage: 5 GiB
+-   列指向storage: 5 GiB
+-   [リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 月間5,000万RU
 
-Once a cluster reaches its usage quota, it immediately denies any new connection attempts until you [increase the quota](#update-spending-limit) or the usage is reset upon the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling. For example, when the row-based storage of a cluster exceeds 5 GiB for a free cluster, the cluster automatically restricts any new connection attempts.
+クラスターが使用量クォータに達すると、新しい月[割り当てを増やす](#update-spending-limit)始まるまで、または使用量がリセットされるまで、新規接続の試行は直ちに拒否されます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。例えば、クラスターの行ベースstorageが空きクラスターで5GiBを超えると、クラスターは自動的に新規接続の試行を制限します。
 
-To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
+さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク送信など) の RU 消費量、価格の詳細、スロットル情報の詳細については、 [TiDB Cloud Serverless の価格詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)参照してください。
 
-If you want to create a {{{ .starter }}} cluster with an additional quota, you can edit the spending limit on the cluster creation page. For more information, see [Create a {{{ .starter }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+追加のクォータを持つTiDB Cloud Serverlessクラスターを作成する場合は、クラスター作成ページで使用制限を編集できます。詳細については、 [TiDB Cloud Serverless クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)ご覧ください。
 
-## Update spending limit
+## 支出限度額の更新 {#update-spending-limit}
 
-For a {{{ .starter }}} free cluster, you can increase the usage quota by upgrading it to a scalable cluster. For an existing scalable cluster, you can adjust the monthly spending limit directly.
+TiDB Cloud Serverlessの無料クラスターの場合は、スケーラブルクラスターにアップグレードすることで使用量クォータを増やすことができます。既存のスケーラブルクラスターの場合は、月間使用量の上限を直接調整できます。
 
-To update the spending limit for a {{{ .starter }}} cluster, perform the following steps:
+TiDB Cloud Serverless クラスターの使用制限を更新するには、次の手順を実行します。
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
+1.  プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページで、ターゲット クラスターの名前をクリックして、概要ページに移動します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2. In the **Usage This Month** area, click **Upgrade to Scalable Cluster**.
+2.  **「今月の使用状況」**領域で、 **「スケーラブルクラスタにアップグレード」**をクリックします。
 
-    To adjust the spending limit for an existing scalable cluster, click <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 3.99998H6.8C5.11984 3.99998 4.27976 3.99998 3.63803 4.32696C3.07354 4.61458 2.6146 5.07353 2.32698 5.63801C2 6.27975 2 7.11983 2 8.79998V17.2C2 18.8801 2 19.7202 2.32698 20.362C2.6146 20.9264 3.07354 21.3854 3.63803 21.673C4.27976 22 5.11984 22 6.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9264 19.673 20.362C20 19.7202 20 18.8801 20 17.2V13M7.99997 16H9.67452C10.1637 16 10.4083 16 10.6385 15.9447C10.8425 15.8957 11.0376 15.8149 11.2166 15.7053C11.4184 15.5816 11.5914 15.4086 11.9373 15.0627L21.5 5.49998C22.3284 4.67156 22.3284 3.32841 21.5 2.49998C20.6716 1.67156 19.3284 1.67155 18.5 2.49998L8.93723 12.0627C8.59133 12.4086 8.41838 12.5816 8.29469 12.7834C8.18504 12.9624 8.10423 13.1574 8.05523 13.3615C7.99997 13.5917 7.99997 13.8363 7.99997 14.3255V16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> **Edit**.
+    既存のスケーラブルクラスタの支出制限を調整するには、 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 3.99998H6.8C5.11984 3.99998 4.27976 3.99998 3.63803 4.32696C3.07354 4.61458 2.6146 5.07353 2.32698 5.63801C2 6.27975 2 7.11983 2 8.79998V17.2C2 18.8801 2 19.7202 2.32698 20.362C2.6146 20.9264 3.07354 21.3854 3.63803 21.673C4.27976 22 5.11984 22 6.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9264 19.673 20.362C20 19.7202 20 18.8801 20 17.2V13M7.99997 16H9.67452C10.1637 16 10.4083 16 10.6385 15.9447C10.8425 15.8957 11.0376 15.8149 11.2166 15.7053C11.4184 15.5816 11.5914 15.4086 11.9373 15.0627L21.5 5.49998C22.3284 4.67156 22.3284 3.32841 21.5 2.49998C20.6716 1.67156 19.3284 1.67155 18.5 2.49998L8.93723 12.0627C8.59133 12.4086 8.41838 12.5816 8.29469 12.7834C8.18504 12.9624 8.10423 13.1574 8.05523 13.3615C7.99997 13.5917 7.99997 13.8363 7.99997 14.3255V16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>**編集**。
 
-3. Edit the monthly spending limit as needed. If you have not added a payment method, you will need to add a credit card after editing the limit.
-4. Click **Update Cluster Plan**.
+3.  必要に応じて月間利用限度額を編集してください。お支払い方法を追加していない場合は、限度額を編集した後にクレジットカードを追加する必要があります。
+
+4.  **[クラスタプランの更新] を**クリックします。

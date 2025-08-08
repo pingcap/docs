@@ -1,170 +1,170 @@
 ---
 title: Comparisons between Functions and Syntax of Oracle and TiDB
-summary: Learn the comparisons between functions and syntax of Oracle and TiDB.
+summary: Oracle と TiDB の関数と構文の比較を学習します。
 ---
 
-# Comparisons between Functions and Syntax of Oracle and TiDB
+# Oracle と TiDB の機能と構文の比較 {#comparisons-between-functions-and-syntax-of-oracle-and-tidb}
 
-This document describes the comparisons between functions and syntax of Oracle and TiDB. It helps you find the corresponding TiDB functions based on the Oracle functions, and understand the syntax differences between Oracle and TiDB.
+このドキュメントでは、OracleとTiDBの関数と構文の比較について説明します。Oracleの関数に基づいて対応するTiDB関数を見つけ、OracleとTiDBの構文の違いを理解するのに役立ちます。
 
-> **Note:**
+> **注記：**
 >
-> The functions and syntax in this document are based on Oracle 12.2.0.1.0 and TiDB v5.4.0. They might be different in other versions.
+> このドキュメントの関数と構文は、Oracle 12.2.0.1.0およびTiDB v5.4.0に基づいています。他のバージョンでは異なる場合があります。
 
-## Comparisons of functions
+## 関数の比較 {#comparisons-of-functions}
 
-The following table shows the comparisons between some Oracle and TiDB functions.
+次の表は、Oracle と TiDB のいくつかの関数の比較を示しています。
 
-| Function | Oracle syntax | TiDB syntax | Note |
-|---|---|---|---|
-| Cast a value as a certain type | <li>`TO_NUMBER(key)`</li><li>`TO_CHAR(key)`</li> | `CONVERT(key,dataType)` | TiDB supports casting a value as one of the following types: `BINARY`, `CHAR`, `DATE`, `DATETIME`, `TIME`, `SIGNED INTEGER`, `UNSIGNED INTEGER` and `DECIMAL`. |
-| Convert a date to a string | <li>`TO_CHAR(SYSDATE,'yyyy-MM-dd hh24:mi:ss')`</li> <li>`TO_CHAR(SYSDATE,'yyyy-MM-dd')`</li> | <li>`DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s')`</li><li>`DATE_FORMAT(NOW(),'%Y-%m-%d')`</li> | The format string of TiDB is case-sensitive. |
-| Convert a string to a date | <li>`TO_DATE('2021-05-28 17:31:37','yyyy-MM-dd hh24:mi:ss')`</li><li>`TO_DATE('2021-05-28','yyyy-MM-dd hh24:mi:ss')`</li> | <li>`STR_TO_DATE('2021-05-28 17:31:37','%Y-%m-%d %H:%i:%s')`</li><li>`STR_TO_DATE('2021-05-28','%Y-%m-%d%T')` </li> | The format string of TiDB is case-sensitive. |
-| Get the current system time in second precision | `SYSDATE` | `NOW()` | |
-| Get the current system time in microsecond precision | `SYSTIMESTAMP` | `CURRENT_TIMESTAMP(6)` | |
-| Get the number of days between two dates | `date1 - date2` | `DATEDIFF(date1, date2)` | |
-| Get the number of months between two dates | `MONTHS_BETWEEN(ENDDATE,SYSDATE)` | `TIMESTAMPDIFF(MONTH,SYSDATE,ENDDATE)` | The results of `MONTHS_BETWEEN()` in Oracle and `TIMESTAMPDIFF()` in TiDB are different. `TIMESTAMPDIFF()` returns an integer. Note that the parameters in the two functions are swapped. |
-| Add `n` days to a date | `DATEVAL + n` | `DATE_ADD(dateVal,INTERVAL n DAY)` | `n` can be a negative value.|
-| Add `n` months to a date | `ADD_MONTHS(dateVal,n)`| `DATE_ADD(dateVal,INTERVAL n MONTH)` | `n` can be a negative value. |
-| Get the day of a date | `TRUNC(SYSDATE)` | <li>`CAST(NOW() AS DATE)`</li><li>`DATE_FORMAT(NOW(),'%Y-%m-%d')`</li> | In TiDB, `CAST` and `DATE_FORMAT` return the same result. |
-| Get the month of a date | `TRUNC(SYSDATE,'mm')` | `DATE_ADD(CURDATE(),interval - day(CURDATE()) + 1 day)`  | |
-| Truncate a value | `TRUNC(2.136) = 2`<br/> `TRUNC(2.136,2) = 2.13` | `TRUNCATE(2.136,0) = 2`<br/> `TRUNCATE(2.136,2) = 2.13` | Data precision is preserved. Truncate the corresponding decimal places without rounding. |
-| Get the next value in a sequence | `sequence_name.NEXTVAL` | `NEXTVAL(sequence_name)` | |
-| Get a random sequence value | `SYS_GUID()` | `UUID()` | TiDB returns a Universal Unique Identifier (UUID). |
-| Left join or right join | `SELECT * FROM a, b WHERE a.id = b.id(+);`<br/>`SELECT * FROM a, b WHERE a.id(+) = b.id;` | `SELECT * FROM a LEFT JOIN b ON a.id = b.id;`<br/>`SELECT * FROM a RIGHT JOIN b ON a.id = b.id;` | In a correlated query, TiDB does not support using (+) to left join or right join. You can use `LEFT JOIN` or `RIGHT JOIN` instead. |
-| `NVL()` | `NVL(key,val)` | `IFNULL(key,val)` | If the value of the field is `NULL`, it returns `val`; otherwise, it returns the value of the field.  |
-| `NVL2()` | `NVL2(key, val1, val2)` | `IF(key is NOT NULL, val1, val2)` | If the value of the field is not `NULL`, it returns `val1`; otherwise, it returns `val2`. |
-| `DECODE()` | <li>`DECODE(key,val1,val2,val3)`</li><li>`DECODE(value,if1,val1,if2,val2,...,ifn,valn,val)`</li> | <li>`IF(key=val1,val2,val3)`</li><li>`CASE WHEN value=if1 THEN val1 WHEN value=if2 THEN val2,...,WHEN value=ifn THEN valn ELSE val END`</li> | <li>If the value of the field is `val1`, then it returns `val2`; otherwise it returns `val3`. </li><li>When the value of the field satisfies condition 1 (`if1`), it returns `val1`. When it satisfies condition 2 (`if2`), it returns `val2`. When it satisfies condition 3 (`if3`), it returns `val3`.</li> |
-| Concatenate the string `a` and `b` | <code>'a' \|\| 'b'</code> | `CONCAT('a','b')` | |
-| Get the length of a string | `LENGTH(str)` | `CHAR_LENGTH(str)` | |
-| Get the substring as specified | `SUBSTR('abcdefg',0,2) = 'ab'`<br/> `SUBSTR('abcdefg',1,2) = 'ab'` | `SUBSTRING('abcdefg',0,2) = ''`<br/>`SUBSTRING('abcdefg',1,2) = 'ab'` | <li>In Oracle, the starting position 0 has the same effect as 1. </li><li>In TiDB, the starting position 0 returns an empty string. If you want to get a substring from the beginning, the starting position should be 1.</li> |
-| Get the position of a substring | `INSTR('abcdefg','b',1,1)` | `INSTR('abcdefg','b')` | Search from the first character of `'abcdefg'` and return the position of the first occurrence of `'b'`. |
-| Get the position of a substring | `INSTR('stst','s',1,2)` | `LENGTH(SUBSTRING_INDEX('stst','s',2)) + 1` | Search from the first character of `'stst'` and return the position of the second occurrence of `'s'`. |
-| Get the position of a substring | `INSTR('abcabc','b',2,1)` | `LOCATE('b','abcabc',2)` | Search from the second character of `abcabc` and return the position of the first occurrence of `b`. |
-| Concatenate values of a column | `LISTAGG(CONCAT(E.dimensionid,'---',E.DIMENSIONNAME),'***') within GROUP(ORDER BY DIMENSIONNAME)` | `GROUP_CONCAT(CONCAT(E.dimensionid,'---',E.DIMENSIONNAME) ORDER BY DIMENSIONNAME SEPARATOR '***')` | Concatenate values of a specified column to one row with the `***` delimiter. |
-| Convert an ASCII code to a character | `CHR(n)` | `CHAR(n)` | The Tab (`CHR(9)`), LF (`CHR(10)`), and CR (`CHR(13)`) characters in Oracle correspond to `CHAR(9)`, `CHAR(10)`, and `CHAR(13)` in TiDB. |
+| 関数                     | Oracle構文                                                                                                                  | TiDB構文                                                                                                                                       | 注記                                                                                                                                                                    |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 値を特定の型にキャストする          | <li>`TO_NUMBER(key)`</li><li>`TO_CHAR(key)`</li>                                                                          | `CONVERT(key,dataType)`                                                                                                                      | TiDB は、値を`BINARY` 、 `CHAR` 、 `DATE` 、 `DATETIME` 、 `TIME` 、 `SIGNED INTEGER` 、 `UNSIGNED INTEGER` 、 `DECIMAL`のいずれかの型にキャストすることをサポートしています。                              |
+| 日付を文字列に変換する            | <li>`TO_CHAR(SYSDATE,'yyyy-MM-dd hh24:mi:ss')`</li> <li>`TO_CHAR(SYSDATE,'yyyy-MM-dd')`</li>                              | <li>`DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s')`</li><li>`DATE_FORMAT(NOW(),'%Y-%m-%d')`</li>                                                    | TiDB のフォーマット文字列では大文字と小文字が区別されます。                                                                                                                                      |
+| 文字列を日付に変換する            | <li>`TO_DATE('2021-05-28 17:31:37','yyyy-MM-dd hh24:mi:ss')`</li><li>`TO_DATE('2021-05-28','yyyy-MM-dd hh24:mi:ss')`</li> | <li>`STR_TO_DATE('2021-05-28 17:31:37','%Y-%m-%d %H:%i:%s')`</li><li>`STR_TO_DATE('2021-05-28','%Y-%m-%d%T')` </li>                          | TiDB のフォーマット文字列では大文字と小文字が区別されます。                                                                                                                                      |
+| 現在のシステム時間を秒精度で取得する     | `SYSDATE`                                                                                                                 | `NOW()`                                                                                                                                      |                                                                                                                                                                       |
+| 現在のシステム時間をマイクロ秒精度で取得する | `SYSTIMESTAMP`                                                                                                            | `CURRENT_TIMESTAMP(6)`                                                                                                                       |                                                                                                                                                                       |
+| 2つの日付間の日数を取得する         | `date1 - date2`                                                                                                           | `DATEDIFF(date1, date2)`                                                                                                                     |                                                                                                                                                                       |
+| 2つの日付間の月数を取得する         | `MONTHS_BETWEEN(ENDDATE,SYSDATE)`                                                                                         | `TIMESTAMPDIFF(MONTH,SYSDATE,ENDDATE)`                                                                                                       | Oracleの`MONTHS_BETWEEN()`とTiDBの`TIMESTAMPDIFF()`結果は異なります。5 `TIMESTAMPDIFF()`整数を返します。2つの関数のパラメータが入れ替わっていることに注意してください。                                                  |
+| 日付に`n`日を追加する           | `DATEVAL + n`                                                                                                             | `DATE_ADD(dateVal,INTERVAL n DAY)`                                                                                                           | `n`負の値になる場合があります。                                                                                                                                                     |
+| 日付に`n`月を加算する           | `ADD_MONTHS(dateVal,n)`                                                                                                   | `DATE_ADD(dateVal,INTERVAL n MONTH)`                                                                                                         | `n`負の値になる場合があります。                                                                                                                                                     |
+| デートの日を知る               | `TRUNC(SYSDATE)`                                                                                                          | <li>`CAST(NOW() AS DATE)`</li><li>`DATE_FORMAT(NOW(),'%Y-%m-%d')`</li>                                                                       | TiDB では、 `CAST`と`DATE_FORMAT`同じ結果を返します。                                                                                                                               |
+| 日付の月を取得する              | `TRUNC(SYSDATE,'mm')`                                                                                                     | `DATE_ADD(CURDATE(),interval - day(CURDATE()) + 1 day)`                                                                                      |                                                                                                                                                                       |
+| 値を切り捨てる                | `TRUNC(2.136) = 2`<br/> `TRUNC(2.136,2) = 2.13`                                                                           | `TRUNCATE(2.136,0) = 2`<br/> `TRUNCATE(2.136,2) = 2.13`                                                                                      | データの精度は保持されます。対応する小数点以下の桁は切り捨てられますが、四捨五入は行われません。                                                                                                                      |
+| シーケンス内の次の値を取得する        | `sequence_name.NEXTVAL`                                                                                                   | `NEXTVAL(sequence_name)`                                                                                                                     |                                                                                                                                                                       |
+| ランダムなシーケンス値を取得する       | `SYS_GUID()`                                                                                                              | `UUID()`                                                                                                                                     | TiDB は、ユニバーサル ユニーク識別子 (UUID) を返します。                                                                                                                                   |
+| 左結合または右結合              | `SELECT * FROM a, b WHERE a.id = b.id(+);`<br/>`SELECT * FROM a, b WHERE a.id(+) = b.id;`                                 | `SELECT * FROM a LEFT JOIN b ON a.id = b.id;`<br/>`SELECT * FROM a RIGHT JOIN b ON a.id = b.id;`                                             | 相関クエリでは、TiDBは左結合または右結合に(+)の使用をサポートしていません。代わりに`LEFT JOIN`または`RIGHT JOIN`使用してください。                                                                                      |
+| `NVL()`                | `NVL(key,val)`                                                                                                            | `IFNULL(key,val)`                                                                                                                            | フィールドの値が`NULL`の場合、 `val`返します。それ以外の場合は、フィールドの値を返します。                                                                                                                   |
+| `NVL2()`               | `NVL2(key, val1, val2)`                                                                                                   | `IF(key is NOT NULL, val1, val2)`                                                                                                            | フィールドの値が`NULL`でない場合は`val1`返し、そうでない場合は`val2`返します。                                                                                                                      |
+| `DECODE()`             | <li>`DECODE(key,val1,val2,val3)`</li><li>`DECODE(value,if1,val1,if2,val2,...,ifn,valn,val)`</li>                          | <li>`IF(key=val1,val2,val3)`</li><li>`CASE WHEN value=if1 THEN val1 WHEN value=if2 THEN val2,...,WHEN value=ifn THEN valn ELSE val END`</li> | <li>フィールドの値が`val1`の場合、 `val2`返します。それ以外の場合は`val3`返します。</li><li>フィールドの値が条件1（ `if1` ）を満たす場合は`val1`返します。条件2（ `if2` ）を満たす場合は`val2`返します。条件3（ `if3` ）を満たす場合は`val3`返します。</li> |
+| 文字列`a`と`b`を連結する        | `'a' || 'b'`                                                                                                              | `CONCAT('a','b')`                                                                                                                            |                                                                                                                                                                       |
+| 文字列の長さを取得する            | `LENGTH(str)`                                                                                                             | `CHAR_LENGTH(str)`                                                                                                                           |                                                                                                                                                                       |
+| 指定された部分文字列を取得する        | `SUBSTR('abcdefg',0,2) = 'ab'`<br/> `SUBSTR('abcdefg',1,2) = 'ab'`                                                        | `SUBSTRING('abcdefg',0,2) = ''`<br/>`SUBSTRING('abcdefg',1,2) = 'ab'`                                                                        | <li>Oracle では、開始位置 0 は 1 と同じ効果があります。</li><li> TiDBでは、開始位置0は空文字列を返します。先頭から部分文字列を取得したい場合は、開始位置を1にする必要があります。</li>                                                        |
+| 部分文字列の位置を取得する          | `INSTR('abcdefg','b',1,1)`                                                                                                | `INSTR('abcdefg','b')`                                                                                                                       | `'abcdefg'`の最初の文字から検索し、 `'b'`が最初に出現する位置を返します。                                                                                                                         |
+| 部分文字列の位置を取得する          | `INSTR('stst','s',1,2)`                                                                                                   | `LENGTH(SUBSTRING_INDEX('stst','s',2)) + 1`                                                                                                  | `'stst'`の最初の文字から検索し、 `'s'`の 2 番目に出現する位置を返します。                                                                                                                         |
+| 部分文字列の位置を取得する          | `INSTR('abcabc','b',2,1)`                                                                                                 | `LOCATE('b','abcabc',2)`                                                                                                                     | `abcabc`の 2 番目の文字から検索し、 `b`最初に出現する位置を返します。                                                                                                                            |
+| 列の値を連結する               | `LISTAGG(CONCAT(E.dimensionid,'---',E.DIMENSIONNAME),'***') within GROUP(ORDER BY DIMENSIONNAME)`                         | `GROUP_CONCAT(CONCAT(E.dimensionid,'---',E.DIMENSIONNAME) ORDER BY DIMENSIONNAME SEPARATOR '***')`                                           | 指定された列の値を`***`区切り文字で 1 行に連結します。                                                                                                                                       |
+| ASCIIコードを文字に変換する       | `CHR(n)`                                                                                                                  | `CHAR(n)`                                                                                                                                    | OracleのTab( `CHR(9)` )、LF( `CHR(10)` )、CR( `CHR(13)` )文字は、TiDBの`CHAR(9)` `CHAR(10)`相当`CHAR(13)`ます。                                                                    |
 
-## Comparisons of syntax
+## 構文の比較 {#comparisons-of-syntax}
 
-This section describes some syntax differences between Oracle and TiDB.
+このセクションでは、Oracle と TiDB の構文の違いについて説明します。
 
-### String syntax
+### 文字列構文 {#string-syntax}
 
-In Oracle, a string can only be enclosed in single quotes (''). For example `'a'`.
+Oracleでは、文字列は一重引用符（&#39;&#39;）で囲む必要があります。例： `'a'` 。
 
-In TiDB, a string can be enclosed in single quotes ('') or double quotes (""). For example, `'a'` and `"a"`.
+TiDBでは、文字列を一重引用符（&#39;&#39;）または二重引用符（&quot;&quot;）で囲むことができます。たとえば、 `'a'`と`"a"` 。
 
-### Difference between `NULL` and an empty string
+### <code>NULL</code>と空の文字列の違い {#difference-between-code-null-code-and-an-empty-string}
 
-Oracle does not distinguish between `NULL` and an empty string `''`, that is, `NULL` is equivalent to `''`.
+Oracle では、 `NULL`と空の文字列`''`を区別しません。つまり、 `NULL` `''`と同等です。
 
-TiDB distinguishes between `NULL` and an empty string `''`.
+TiDB は`NULL`と空の文字列`''`を区別します。
 
-### Read and write to the same table in an `INSERT` statement
+### <code>INSERT</code>ステートメントで同じテーブルに読み取りと書き込みを行う {#read-and-write-to-the-same-table-in-an-code-insert-code-statement}
 
-Oracle supports reading and writing to the same table in an `INSERT` statement. For example:
+Oracleは、 `INSERT`文で同じテーブルへの読み取りと書き込みをサポートしています。例：
 
 ```sql
 INSERT INTO table1 VALUES (field1,(SELECT field2 FROM table1 WHERE...))
 ```
 
-TiDB does not support reading and writing to the same table in a `INSERT` statement. For example:
+TiDBは、 `INSERT`ステートメントで同じテーブルへの読み取りと書き込みをサポートしていません。例:
 
 ```sql
 INSERT INTO table1 VALUES (field1,(SELECT T.fields2 FROM table1 T WHERE...))
 ```
 
-### Get the first n rows from a query
+### クエリから最初のn行を取得する {#get-the-first-n-rows-from-a-query}
 
-In Oracle, to get the first n rows from a query, you can use the `ROWNUM <= n` clause. For example `ROWNUM <= 10`.
+Oracleでは、クエリから最初のn行を取得するには、 `ROWNUM <= n`句を使用します。例えば、 `ROWNUM <= 10`ように指定します。
 
-In TiDB, to get the first n rows from a query, you can use the `LIMIT n` clause. For example `LIMIT 10`. The Hibernate Query Language (HQL) running SQL statements with `LIMIT` results in an error. You need to change the Hibernate statements to SQL statements.
+TiDBでは、クエリから最初のn行を取得するには、 `LIMIT n`句を使用します。例えば、 `LIMIT 10` 。Hibernateクエリ言語（HQL）で`LIMIT`を含むSQL文を実行するとエラーが発生します。Hibernateの文をSQL文に変更する必要があります。
 
-### Update multiple tables in an `UPDATE` statement
+### <code>UPDATE</code>ステートメントで複数のテーブルを更新する {#update-multiple-tables-in-an-code-update-code-statement}
 
-In Oracle, it is not necessary to list the specific field update relationship when updating multiple tables. For example:
+Oracleでは、複数のテーブルを更新するときに、特定のフィールドの更新関係をリストする必要はありません。例:
 
 ```sql
 UPDATE test1 SET(test1.name,test1.age) = (SELECT test2.name,test2.age FROM test2 WHERE test2.id=test1.id)
 ```
 
-In TiDB, when updating multiple tables, you need to list all the specific field update relationships in `SET`. For example:
+TiDBでは、複数のテーブルを更新する場合、特定のフィールドの更新関係をすべて`SET`にリストする必要があります。例：
 
 ```sql
 UPDATE test1,test2 SET test1.name=test2.name,test1.age=test2.age WHERE test1.id=test2.id
 ```
 
-### Derived table alias
+### 派生テーブル別名 {#derived-table-alias}
 
-In Oracle, when querying multiple tables, it is unnecessary to add an alias to the derived table. For example:
+Oracleでは、複数のテーブルをクエリする場合、派生テーブルに別名を追加する必要はありません。例:
 
 ```sql
 SELECT * FROM (SELECT * FROM test)
 ```
 
-In TiDB, when querying multiple tables, every derived table must have its own alias. For example:
+TiDBでは、複数のテーブルをクエリする場合、それぞれの派生テーブルに独自のエイリアスが必要です。例:
 
 ```sql
 SELECT * FROM (SELECT * FROM test) t
 ```
 
-### Set operations
+### 集合演算 {#set-operations}
 
-In Oracle, to get the rows that are in the first query result but not in the second, you can use the `MINUS` set operation. For example:
+Oracleでは、最初のクエリ結果には含まれているが2番目のクエリ結果には含まれていない行を取得するには、 `MINUS`演算を使用します。例：
 
 ```sql
 SELECT * FROM t1 MINUS SELECT * FROM t2
 ```
 
-TiDB does not support the `MINUS` operation. You can use the `EXCEPT` set operation. For example:
+TiDBは`MINUS`演算をサポートしていません。3 `EXCEPT`の演算を使用できます。例:
 
 ```sql
 SELECT * FROM t1 EXCEPT SELECT * FROM t2
 ```
 
-### Comment syntax
+### コメント構文 {#comment-syntax}
 
-In Oracle, the comment syntax is `--Comment`.
+Oracle では、コメント構文は`--Comment`です。
 
-In TiDB, the comment syntax is `-- Comment`. Note that there is a white space after `--` in TiDB.
+TiDBでは、コメント構文は`-- Comment` 。TiDBでは`--`後に空白があることに注意してください。
 
-### Pagination
+### ページネーション {#pagination}
 
-In Oracle, you can use the `OFFSET m ROWS` to skip `m` rows and use the `FETCH NEXT n ROWS ONLY`to fetch `n` rows. For example:
+Oracleでは、 `OFFSET m ROWS`使って`m`行スキップし、 `FETCH NEXT n ROWS ONLY`を使って`n`行取得できます。例えば：
 
 ```sql
 SELECT * FROM tables OFFSET 0 ROWS FETCH NEXT 2000 ROWS ONLY
 ```
 
-In TiDB, you can use the `LIMIT n OFFSET m` to replace `OFFSET m ROWS FETCH NEXT n ROWS ONLY`. For example:
+TiDBでは、 `OFFSET m ROWS FETCH NEXT n ROWS ONLY`代わりに`LIMIT n OFFSET m`使用できます。例:
 
 ```sql
 SELECT * FROM tables LIMIT 2000 OFFSET 0
 ```
 
-### Sorting order on `NULL` values
+### <code>NULL</code>値のソート順序 {#sorting-order-on-code-null-code-values}
 
-In Oracle, `NULL` values are sorted by the `ORDER BY` clause in the following cases:
+Oracle では、次の場合に`NULL`値が`ORDER BY`句によってソートされます。
 
-- In the `ORDER BY column ASC` statement, `NULL` values are returned last.
+-   `ORDER BY column ASC`のステートメントでは、最後に`NULL`値が返されます。
 
-- In the `ORDER BY column DESC` statement, `NULL` values are returned first.
+-   `ORDER BY column DESC`のステートメントでは、最初に`NULL`値が返されます。
 
-- In the `ORDER BY column [ASC|DESC] NULLS FIRST` statement, `NULL` values are returned before non-NULL values. Non-NULL values are returned in ascending order or descending order specified in `ASC|DESC`.
+-   `ORDER BY column [ASC|DESC] NULLS FIRST`文では、 `NULL`値が非NULL値の前に返されます。非NULL値は、 `ASC|DESC`で指定された昇順または降順で返されます。
 
-- In the `ORDER BY column [ASC|DESC] NULLS LAST` statement, `NULL` values are returned after non-NULL values. Non-NULL values are returned in ascending order or descending order specified in `ASC|DESC`.
+-   `ORDER BY column [ASC|DESC] NULLS LAST`文では、非 NULL 値の後に`NULL`値が返されます。非 NULL 値は、 `ASC|DESC`で指定された昇順または降順で返されます。
 
-In TiDB, `NULL` values are sorted by the `ORDER BY` clause in the following cases:
+TiDB では、次の場合に`NULL`値が`ORDER BY`句によってソートされます。
 
-- In the `ORDER BY column ASC` statement, `NULL` values are returned first.
+-   `ORDER BY column ASC`ステートメントでは、最初に`NULL`値が返されます。
 
-- In the `ORDER BY column DESC` statement, `NULL` values are returned last.
+-   `ORDER BY column DESC`のステートメントでは、最後に`NULL`値が返されます。
 
-The following table shows some examples of equivalent `ORDER BY` statements in Oracle and TiDB:
+次の表は、Oracle と TiDB の同等の`ORDER BY`ステートメントの例を示しています。
 
-| `ORDER BY` in Oracle | Equivalent statements in TiDB |
-| :------------------- | :----------------- |
-| `SELECT * FROM t1 ORDER BY name NULLS FIRST;`      | `SELECT * FROM t1 ORDER BY name;`  |
-| `SELECT * FROM t1 ORDER BY name DESC NULLS LAST;`  | `SELECT * FROM t1 ORDER BY name DESC;` |
+| Oracleの`ORDER BY`                                  | TiDBにおける同等のステートメント                                        |
+| :------------------------------------------------- | :-------------------------------------------------------- |
+| `SELECT * FROM t1 ORDER BY name NULLS FIRST;`      | `SELECT * FROM t1 ORDER BY name;`                         |
+| `SELECT * FROM t1 ORDER BY name DESC NULLS LAST;`  | `SELECT * FROM t1 ORDER BY name DESC;`                    |
 | `SELECT * FROM t1 ORDER BY name DESC NULLS FIRST;` | `SELECT * FROM t1 ORDER BY ISNULL(name) DESC, name DESC;` |
-| `SELECT * FROM t1 ORDER BY name ASC NULLS LAST;`   | `SELECT * FROM t1 ORDER BY ISNULL(name), name;` |
+| `SELECT * FROM t1 ORDER BY name ASC NULLS LAST;`   | `SELECT * FROM t1 ORDER BY ISNULL(name), name;`           |

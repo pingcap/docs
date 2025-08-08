@@ -1,74 +1,74 @@
 ---
 title: TSO Configuration Flags
-summary: The TSO configuration flags can be configured via command line flags or environment variables.
+summary: TSO 構成フラグは、コマンド ライン フラグまたは環境変数を介して構成できます。
 ---
 
-# TSO Configuration Flags
+# TSOコンフィグレーションフラグ {#tso-configuration-flags}
 
-The TSO node is used for providing the `tso` microservice for PD. You can configure it using command-line flags or environment variables.
+TSOノードは、PD用の`tso`マイクロサービスを提供するために使用されます。コマンドラインフラグまたは環境変数を使用して設定できます。
 
-## `--advertise-listen-addr`
+## <code>--advertise-listen-addr</code> {#code-advertise-listen-addr-code}
 
-- The URL for the client to access the TSO node.
-- Default: `${listen-addr}`
-- In some situations such as in Docker or NAT network environments, if a client cannot access the TSO node through the default client URLs listened to by `tso`, you must manually set `--advertise-listen-addr` for client access.
-- For example, the internal IP address of Docker is `172.17.0.1`, while the IP address of the host is `192.168.100.113` and the port mapping is set to `-p 3379:3379`. In this case, you can set `--advertise-listen-addr="http://192.168.100.113:3379"`. Then, the client can find this service through `http://192.168.100.113:3379`.
+-   クライアントが TSO ノードにアクセスするための URL。
+-   デフォルト: `${listen-addr}`
+-   Docker や NAT ネットワーク環境などの状況では、クライアントが`tso`でリッスンされるデフォルトのクライアント URL を通じて TSO ノードにアクセスできない場合は、クライアント アクセス用に`--advertise-listen-addr`手動で設定する必要があります。
+-   例えば、Dockerの内部IPアドレスは`172.17.0.1`ですが、ホストのIPアドレスは`192.168.100.113`で、ポートマッピングは`-p 3379:3379`に設定されています。この場合、 `--advertise-listen-addr="http://192.168.100.113:3379"`設定できます。そうすることで、クライアントは`http://192.168.100.113:3379`を通じてこのサービスを見つけることができるようになります。
 
-## `--backend-endpoints`
+## <code>--backend-endpoints</code> {#code-backend-endpoints-code}
 
-- The list of backend endpoints of other TSO nodes that the current TSO node listens to.
-- Default: `http://127.0.0.1:2379`
+-   現在の TSO ノードがリッスンする他の TSO ノードのバックエンド エンドポイントのリスト。
+-   デフォルト: `http://127.0.0.1:2379`
 
-## `--cacert`
+## <code>--cacert</code> {#code-cacert-code}
 
-- The file path of CA, used to enable TLS.
-- Default: `""`
+-   TLS を有効にするために使用される CA のファイル パス。
+-   デフォルト: `""`
 
-## `--cert`
+## <code>--cert</code> {#code-cert-code}
 
-- The path of the PEM file including the X.509 certificate, used to enable TLS.
-- Default: `""`
+-   TLS を有効にするために使用される、X.509 証明書を含む PEM ファイルのパス。
+-   デフォルト: `""`
 
-## `--config`
+## <code>--config</code> {#code-config-code}
 
-- The configuration file.
-- Default: `""`
-- If you specify a configuration file, the TSO node first reads configurations from that file. If the same configurations are also specified via command line flags, the TSO node uses the command line flag configurations to overwrite those in the configuration file.
+-   設定ファイル。
+-   デフォルト: `""`
+-   設定ファイルを指定すると、TSOノードはまずそのファイルから設定を読み取ります。同じ設定がコマンドラインフラグでも指定されている場合、TSOノードはコマンドラインフラグの設定を使用して設定ファイルの設定を上書きします。
 
-## `--data-dir`
+## <code>--data-dir</code> {#code-data-dir-code}
 
-- The path to the data directory on the TSO node.
-- Default: `"default.${name}"`
+-   TSO ノード上のデータ ディレクトリへのパス。
+-   デフォルト: `"default.${name}"`
 
-## `--key`
+## <code>--key</code> {#code-key-code}
 
-- The path of the PEM file including the X.509 key, used to enable TLS.
-- Default: `""`
+-   TLS を有効にするために使用される、X.509 キーを含む PEM ファイルのパス。
+-   デフォルト: `""`
 
-## `--listen-addr`
+## <code>--listen-addr</code> {#code-listen-addr-code}
 
-- The client URL that the current TSO node listens to.
-- Default: `"http://127.0.0.1:3379"`
-- When deploying a cluster, you must specify the IP address of the current host as `--listen-addr` (for example, `"http://192.168.100.113:3379"`). If the node runs on Docker, specify the Docker IP address as `"http://0.0.0.0:3379"`.
+-   現在の TSO ノードがリッスンするクライアント URL。
+-   デフォルト: `"http://127.0.0.1:3379"`
+-   クラスターをデプロイする際は、現在のホストのIPアドレスを`--listen-addr` （例： `"http://192.168.100.113:3379"` ）に指定する必要があります。ノードがDocker上で実行されている場合は、DockerのIPアドレスを`"http://0.0.0.0:3379"`に指定してください。
 
-## `--log-file`
+## <code>--log-file</code> {#code-log-file-code}
 
-- The log file.
-- Default: `""`
-- If this flag is not set, logs are output to "stderr". If this flag is set, logs are output to the corresponding file.
+-   ログ ファイル。
+-   デフォルト: `""`
+-   このフラグが設定されていない場合、ログは「stderr」に出力されます。このフラグが設定されている場合、ログは対応するファイルに出力されます。
 
-## `--name` <span class="version-mark">New in v8.3.0</span>
+## <code>--name</code> <span class="version-mark">v8.3.0 の新機能</span> {#code-name-code-span-class-version-mark-new-in-v8-3-0-span}
 
-+ The name of the current TSO node.
-+ Default: `"tso-${hostname}"`
-+ If you need to start multiple TSO nodes, it is recommended to configure different names for different nodes for easier identification.
+-   現在の TSO ノードの名前。
+-   デフォルト: `"tso-${hostname}"`
+-   複数の TSO ノードを起動する必要がある場合は、識別を容易にするために、ノードごとに異なる名前を設定することをお勧めします。
 
-## `-L`
+## <code>-L</code> {#code-l-code}
 
-- The log level.
-- Default: `"info"`
-- Optional values: `"debug"`, `"info"`, `"warn"`, `"error"`, `"fatal"`
+-   ログ レベル。
+-   デフォルト: `"info"`
+-   `"warn"` `"fatal"` `"error"` `"debug"` `"info"`
 
-## `-V`, `--version`
+## <code>-V</code> , <code>--version</code> {#code-v-code-code-version-code}
 
-- Output the version information and exit.
+-   バージョン情報を出力して終了します。

@@ -1,78 +1,78 @@
 ---
-title: {{{ .starter }}} Limitations and Quotas
-summary: Learn about the limitations of {{{ .starter }}}.
+title: TiDB Cloud Serverless Limitations and Quotas
+summary: TiDB Cloud Serverless の制限について説明します。
 aliases: ['/tidbcloud/serverless-tier-limitations']
 ---
 
-# {{{ .starter }}} Limitations and Quotas
+# TiDB Cloud Serverless の制限とクォータ {#tidb-cloud-serverless-limitations-and-quotas}
 
 <!-- markdownlint-disable MD026 -->
 
-{{{ .starter }}} works with almost all workloads that TiDB supports, but there are some feature differences between TiDB Self-Managed or TiDB Cloud Dedicated clusters and {{{ .starter }}} clusters. This document describes the limitations of {{{ .starter }}}.
+TiDB Cloud Serverlessは、TiDBがサポートするほぼすべてのワークロードで動作しますが、TiDBセルフマネージドまたはTiDB Cloud DedicatedクラスタとTiDB Cloud Serverlessクラスタの間には機能に若干の違いがあります。このドキュメントでは、TiDB Cloud Serverlessの制限事項について説明します。
 
-We are constantly filling in the feature gaps between {{{ .starter }}} and TiDB Cloud Dedicated. If you require these features or capabilities in the gap, use [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) or [contact us](https://www.pingcap.com/contact-us/?from=en) for a feature request.
+TiDB Cloud ServerlessとTiDB Cloud Dedicated間の機能ギャップを常に埋めています。ギャップを埋める機能や性能が必要な場合は、機能リクエストに[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)または[お問い合わせ](https://www.pingcap.com/contact-us/?from=en)ご記入ください。
 
-## Limitations
+## 制限事項 {#limitations}
 
-### Audit logs
+### 監査ログ {#audit-logs}
 
-- [Database audit logging](/tidb-cloud/tidb-cloud-auditing.md) is currently unavailable.
+-   [データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)は現在利用できません。
 
-### Connection
+### 繋がり {#connection}
 
-- Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to {{{ .starter }}} clusters. 
-- No [IP Access list](/tidb-cloud/configure-ip-access-list.md) support.
+-   [パブリックエンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)と[プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)のみ使用できます。5 [VPCピアリング](/tidb-cloud/set-up-vpc-peering-connections.md) TiDB Cloud Serverlessクラスターへの接続には使用できません。
+-   [IPアクセスリスト](/tidb-cloud/configure-ip-access-list.md)サポート。
 
-### Encryption
+### 暗号化 {#encryption}
 
-- Data persisted in your {{{ .starter }}} cluster is encrypted using the encryption tool provided by the cloud provider that manages your cluster. For [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan), an optional second layer of encryption is available during the cluster creation process, providing an additional level of security beyond the default encryption at rest.
-- Using [customer-managed encryption keys (CMEK)](/tidb-cloud/tidb-cloud-encrypt-cmek.md) is currently unavailable.
+-   TiDB Cloud Serverless クラスターに保存されるデータは、クラスターを管理するクラウドプロバイダーが提供する暗号化ツールを使用して暗号化されます[スケーラブルなクラスター](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan)の場合、クラスター作成プロセス中にオプションで第2レイヤーの暗号化を利用でき、保存時のデフォルトの暗号化よりも高いレベルのセキュリティを実現できます。
+-   [顧客管理暗号化キー（CMEK）](/tidb-cloud/tidb-cloud-encrypt-cmek.md)使用は現在利用できません。
 
-### Maintenance window
+### メンテナンスウィンドウ {#maintenance-window}
 
-- [Maintenance window](/tidb-cloud/configure-maintenance-window.md) is currently unavailable.
+-   [メンテナンスウィンドウ](/tidb-cloud/configure-maintenance-window.md)は現在利用できません。
 
-### Monitoring and diagnosis
+### 監視と診断 {#monitoring-and-diagnosis}
 
-- [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently unavailable.
-- [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md) is currently unavailable.
-- [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer) is currently unavailable.
-- [Index Insight](/tidb-cloud/tune-performance.md#index-insight-beta) is currently unavailable.
+-   現在[サードパーティのモニタリング統合](/tidb-cloud/third-party-monitoring-integrations.md)はご利用いただけません。
+-   [組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md)は現在利用できません。
+-   [キービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)は現在利用できません。
+-   [インデックスインサイト](/tidb-cloud/tune-performance.md#index-insight-beta)は現在利用できません。
 
-### Self-service upgrades
+### セルフサービスアップグレード {#self-service-upgrades}
 
-- {{{ .starter }}} is a fully managed deployment of TiDB. Major and minor version upgrades of {{{ .starter }}} are handled by TiDB Cloud and therefore cannot be initiated by users.
+-   TiDB Cloud Serverlessは、TiDBのフルマネージドなデプロイメントです。TiDB TiDB Cloud ServerlessのメジャーバージョンとマイナーバージョンのアップグレードはTiDB Cloudによって処理されるため、ユーザーが開始することはできません。
 
-### Stream data
+### ストリームデータ {#stream-data}
 
-- [Changefeed](/tidb-cloud/changefeed-overview.md) is not supported for {{{ .starter }}} currently.
-- [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) is not supported for {{{ .starter }}} currently.
+-   現在、 TiDB Cloud Serverless では[チェンジフィード](/tidb-cloud/changefeed-overview.md)はサポートされていません。
+-   現在、 TiDB Cloud Serverless では[データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)はサポートされていません。
 
-### Time to live (TTL)
+### 存続時間（TTL） {#time-to-live-ttl}
 
-- In {{{ .starter }}}, the [`TTL_JOB_INTERVAL`](/time-to-live.md#ttl-job) attribute for a table is fixed at `15m` and cannot be modified. This means that {{{ .starter }}} schedules a background job every 15 minutes to clean up expired data.
+-   TiDB Cloud Serverlessでは、テーブルの属性[`TTL_JOB_INTERVAL`](/time-to-live.md#ttl-job) `15m`に固定されており、変更できません。つまり、 TiDB Cloud Serverlessは15分ごとにバックグラウンドジョブをスケジュールし、期限切れのデータをクリーンアップします。
 
-### Others
+### その他 {#others}
 
-- Transaction can not last longer than 30 minutes.
-- For more details about SQL limitations, refer to [Limited SQL Features](/tidb-cloud/limited-sql-features.md).
+-   トランザクションは30分以上継続することはできません。
+-   SQL の制限の詳細については、 [制限されたSQL機能](/tidb-cloud/limited-sql-features.md)を参照してください。
 
-## Usage quota
+## 使用量制限 {#usage-quota}
 
-For each organization in TiDB Cloud, you can create a maximum of five [free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create more {{{ .starter }}} clusters, you need to add a credit card and create [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan) for the usage.
+TiDB Cloudでは、組織ごとに最大5つのクラスター（デフォルトでは[フリークラスター](/tidb-cloud/select-cluster-tier.md#free-cluster-plan)を作成できます。TiDB TiDB Cloud Serverlessクラスターをさらに作成するには、クレジットカードを追加し、使用量に応じて[スケーラブルなクラスター](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan)クラスターを作成する必要があります。
 
-For the first five {{{ .starter }}} clusters in your organization, whether they are free or scalable, TiDB Cloud provides a free usage quota for each of them as follows:
+組織内の最初の 5 つのTiDB Cloud Serverless クラスターについては、無料かスケーラブルかに関係なく、 TiDB Cloud は次のようにクラスターごとに無料使用量割り当てを提供します。
 
-- Row-based storage: 5 GiB
-- Columnar storage: 5 GiB
-- [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
+-   行ベースのstorage: 5 GiB
+-   列指向storage: 5 GiB
+-   [リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 月間5,000万RU
 
-The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction. It is a metric that allows you to estimate the computational resources required to process a specific request in the database. The request unit is also the billing unit for {{{ .starter }}} service.
+リクエストユニット（RU）は、クエリまたはトランザクションのリソース消費量を追跡するために使用される測定単位です。これは、データベース内の特定のリクエストを処理するために必要な計算リソースを見積もることができる指標です。リクエストユニットは、 TiDB Cloud Serverlessサービスの課金単位でもあります。
 
-Once a cluster reaches its usage quota, it immediately denies any new connection attempts until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) or the usage is reset upon the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling.
+クラスターが使用量クォータに達すると、新しい月の開始時に使用量がリセットされるか、 [割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)なるまで、新規接続の試行は直ちに拒否されます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。
 
-To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
+さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク送信など) の RU 消費量、価格の詳細、スロットル情報の詳細については、 [TiDB Cloud Serverless の価格詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)参照してください。
 
-If you want to create a {{{ .starter }}} cluster with an additional quota, you can select the scalable cluster plan and edit the spending limit on the cluster creation page. For more information, see [Create a {{{ .starter }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+追加のクォータを持つTiDB Cloud Serverlessクラスターを作成する場合は、スケーラブルクラスタープランを選択し、クラスター作成ページで使用制限を編集できます。詳細については、 [TiDB Cloud Serverless クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)ご覧ください。
 
-After creating a {{{ .starter }}} cluster, you can still check and edit the spending limit on your cluster overview page. For more information, see [Manage Spending Limit for {{{ .starter }}} Clusters](/tidb-cloud/manage-serverless-spend-limit.md).
+TiDB Cloud Serverless クラスターを作成した後でも、クラスターの概要ページで使用制限を確認および編集できます。詳細については、 [TiDB Cloudサーバーレス クラスターの支出制限を管理する](/tidb-cloud/manage-serverless-spend-limit.md)ご覧ください。

@@ -1,67 +1,67 @@
 ---
 title: Wrong Index Solution
-summary: Learn how to solve the wrong index issue.
+summary: 間違ったインデックスの問題を解決する方法を学びます。
 ---
 
-# Wrong Index Solution
+# インデックス問題の解決方法 {#wrong-index-solution}
 
-If you find that the execution speed of some query does not reach the expectation, the optimizer might choose the wrong index to run the query.
+一部のクエリの実行速度が期待値に達しない場合は、オプティマイザーがクエリを実行するために間違ったインデックスを選択する可能性があります。
 
-There are multiple reasons why the optimizer might choose an unexpected index:
+オプティマイザーが予期しないインデックスを選択する理由は複数あります。
 
-- **Outdated statistics**: the optimizer relies on statistics to estimate query costs. If the statistics are outdated, the optimizer might make suboptimal choices.
-- **Statistics mismatch**: even if statistics are current, they might not accurately reflect the data distribution, leading to incorrect cost estimations.
-- **Incorrect cost calculation**: the optimizer might miscalculate the cost of using an index due to complex query structures or data distribution.
-- **Inappropriate engine selection**: in some cases, the optimizer might select a storage engine that is not optimal for the query.
-- **Function pushdown limitations**: certain functions or operations might not be pushed down to storage engines, potentially affecting query performance.
+-   **古い統計**：オプティマイザーはクエリコストを推定するために統計を使用します。統計が古い場合、オプティマイザーは最適ではない選択を行う可能性があります。
+-   **統計の不一致**: 統計が最新であっても、データの分布を正確に反映していない可能性があり、コストの見積もりが不正確になる可能性があります。
+-   **コスト計算が正しくありません**: クエリ構造やデータ分散が複雑なため、オプティマイザーがインデックスの使用コストを誤って計算する場合があります。
+-   **不適切なエンジンの選択**: 場合によっては、オプティマイザーがクエリに最適ではないstorageエンジンを選択することがあります。
+-   **関数のプッシュダウンの制限**: 特定の関数または操作がstorageエンジンにプッシュダウンされない可能性があり、クエリのパフォーマンスに影響する可能性があります。
 
-## Statistics health
+## 統計の健康 {#statistics-health}
 
-You can first view the [health state of tables](/statistics.md#health-state-of-tables) in the statistics, and then solve this issue according to the different health states.
+まず統計の[テーブルの健全性状態](/statistics.md#health-state-of-tables)確認し、次にさまざまなヘルス状態に応じてこの問題を解決します。
 
-### Low health state
+### 健康状態が低い {#low-health-state}
 
-The low health state means TiDB has not performed the`ANALYZE` statement for a long time. You can update the statistics by running the `ANALYZE` command. After the update, if the optimizer still uses the wrong index, refer to the next section.
+ヘルス状態が低いということは、TiDBが`ANALYZE`ステートメントを長期間実行していないことを意味します。3 `ANALYZE`コマンドを実行することで統計情報を更新できます。更新後もオプティマイザーが誤ったインデックスを使用している場合は、次のセクションを参照してください。
 
-### Near 100% health state
+### ほぼ100%の健康状態 {#near-100-health-state}
 
-The near 100% health state suggests that the `ANALYZE` statement is just completed or was completed a short time ago. In this case, the wrong index issue might be related to TiDB's estimation logic for the number of rows.
+ヘルス状態がほぼ100%であることは、 `ANALYZE`ステートメントが完了間近、または少し前に完了したことを示しています。この場合、インデックスの誤りは、TiDBの行数推定ロジックに関連している可能性があります。
 
-For equivalence queries, the cause might be [Count-Min Sketch](/statistics.md#count-min-sketch). You can check whether Count-Min Sketch is the cause and take corresponding solutions.
+同値クエリの場合、原因は[カウントミニマムスケッチ](/statistics.md#count-min-sketch)ある可能性があります。Count-Min Sketchが原因であるかどうかを確認し、適切な解決策を実行できます。
 
-If the cause above does not apply to your problem, you can force-select indexes by using the `USE_INDEX` or `use index` optimizer hint (see [USE_INDEX](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-) for details). Also, you can change the query behavior by using [SQL Plan Management](/sql-plan-management.md) in a non-intrusive way.
+上記の原因が問題に当てはまらない場合は、 `USE_INDEX`または`use index`オプティマイザヒントを使用してインデックスを強制的に選択できます（詳細は[使用インデックス](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)参照）。また、 [SQLプラン管理](/sql-plan-management.md)を使用してクエリの動作を非侵入的に変更することもできます。
 
-### Other situations
+### その他の状況 {#other-situations}
 
-Apart from the aforementioned situations, the wrong index issue might also be caused by data updates which renders all the indexes no longer applicable. In such cases, you need to perform analysis on the conditions and data distribution to see whether new indexes can speed up the query. If so, you can add new indexes by running the [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) command.
+上記の状況以外にも、データ更新によってすべてのインデックスが適用できなくなった場合、間違ったインデックスの問題が発生することがあります。このような場合は、状況とデータ分布を分析し、新しいインデックスによってクエリが高速化されるかどうかを確認する必要があります。高速化できる場合は、 [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)コマンドを実行して新しいインデックスを追加できます。
 
-## Statistics mismatch
+## 統計の不一致 {#statistics-mismatch}
 
-When data distribution is highly skewed, the statistics might not accurately reflect the actual data. In such cases, try configuring the options of the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) statement. It might help improve the accuracy of statistics and better match the index.
+データ分布が大きく偏っている場合、統計情報が実際のデータを正確に反映しない可能性があります。そのような場合は、 [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)のステートメントのオプションを設定してみてください。統計情報の精度が向上し、インデックスとの整合性が向上する可能性があります。
 
-For example, suppose you have an `orders` table with an index on the `customer_id` column, and more than 50% of the orders share the same `customer_id`. In this case, the statistics might not represent the data distribution well, affecting query performance.
+例えば、列`customer_id`にインデックスが設定された`orders`テーブルがあり、注文の 50% 以上が同じ`customer_id`を共有しているとします。この場合、統計情報はデータ分布を適切に反映せず、クエリのパフォーマンスに影響を与える可能性があります。
 
-## Cost information
+## コスト情報 {#cost-information}
 
-To view detailed information on execution costs, you can execute the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) and [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statements with the `FORMAT=verbose` option. According to the information, you can see cost differences between different execution paths.
+実行コストの詳細情報を表示するには、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)と[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)ステートメントを`FORMAT=verbose`オプション付きで実行します。この情報から、異なる実行パス間のコストの違いを確認できます。
 
-## Engine selection
+## エンジンの選択 {#engine-selection}
 
-By default, TiDB chooses TiKV or TiFlash for table access based on cost estimation. You can experiment with different engines for the same query by applying engine isolation.
+デフォルトでは、TiDBはコスト見積もりに基づいてテーブルアクセスにTiKVまたはTiFlashを選択します。エンジン分離を適用することで、同じクエリに対して異なるエンジンを試すことができます。
 
-For more information, see [Engine isolation](/tiflash/use-tidb-to-read-tiflash.md#engine-isolation).
+詳細については[エンジン分離](/tiflash/use-tidb-to-read-tiflash.md#engine-isolation)参照してください。
 
-## Function pushdown
+## 関数プッシュダウン {#function-pushdown}
 
-To enhance query performance, TiDB can push down certain functions to the TiKV or TiFlash storage engine for execution. However, some functions do not support pushdown, which might limit available execution plans and potentially affect query performance.
+クエリパフォーマンスを向上させるため、TiDB は特定の関数をTiKV またはTiFlashstorageエンジンにプッシュダウンして実行できます。ただし、一部の関数はプッシュダウンをサポートしていないため、利用可能な実行プランが制限され、クエリパフォーマンスに影響を及ぼす可能性があります。
 
-For expressions that support pushdown, see [TiKV supported pushdown calculations](/functions-and-operators/expressions-pushed-down.md) and [TiFlash supported pushdown calculations](/tiflash/tiflash-supported-pushdown-calculations.md). 
+プッシュダウンをサポートする式については、 [TiKVはプッシュダウン計算をサポート](/functions-and-operators/expressions-pushed-down.md)と[TiFlashはプッシュダウン計算をサポート](/tiflash/tiflash-supported-pushdown-calculations.md)参照してください。
 
-Note that you can also disable the pushdown of specific expressions. For more information, see [Blocklist of optimization rules and expression pushdown](/blocklist-control-plan.md).
+特定の式のプッシュダウンを無効にすることもできます。詳細については、 [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)参照してください。
 
-## See also
+## 参照 {#see-also}
 
-- [Statistics](/statistics.md)
-- [Index selection](/choose-index.md)
-- [Optimizer hints](/optimizer-hints.md)
-- [SQL Plan Management](/sql-plan-management.md)
+-   [統計](/statistics.md)
+-   [インデックスの選択](/choose-index.md)
+-   [オプティマイザーヒント](/optimizer-hints.md)
+-   [SQLプラン管理](/sql-plan-management.md)

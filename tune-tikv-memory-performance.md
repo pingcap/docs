@@ -1,33 +1,33 @@
 ---
 title: Tune TiKV Memory Parameter Performance
-summary: Learn how to tune the TiKV parameters for optimal performance.
+summary: 最適なパフォーマンスを得るために TiKV パラメータを調整する方法を学びます。
 ---
 
-# Tune TiKV Memory Parameter Performance
+# TiKVメモリパラメータのパフォーマンスを調整する {#tune-tikv-memory-parameter-performance}
 
-This document describes how to tune the TiKV parameters for optimal performance. You can find the default configuration file in [etc/config-template.toml](https://github.com/tikv/tikv/blob/release-8.5/etc/config-template.toml). To modify the configuration, you can [use TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration) or [modify TiKV dynamically](/dynamic-config.md#modify-tikv-configuration-dynamically) for a limited set of configuration items. For the complete configuration, see [TiKV configuration file](/tikv-configuration-file.md).
+このドキュメントでは、TiKVパラメータを調整して最適なパフォーマンスを得る方法について説明します。デフォルトの設定ファイルは[etc/config-template.toml](https://github.com/tikv/tikv/blob/release-8.5/etc/config-template.toml)にあります。設定を変更するには、 [TiUPを使用する](/maintain-tidb-using-tiup.md#modify-the-configuration)または[TiKVを動的に変更する](/dynamic-config.md#modify-tikv-configuration-dynamically)で一部の設定項目を選択できます。完全な設定については、 [TiKV設定ファイル](/tikv-configuration-file.md)ご覧ください。
 
-TiKV uses RocksDB for persistent storage at the bottom level of the TiKV architecture. Therefore, many of the performance parameters are related to RocksDB. TiKV uses two RocksDB instances: the default RocksDB instance stores KV data, the Raft RocksDB instance (RaftDB) stores Raft logs.
+TiKVは、TiKVアーキテクチャの最下層にある永続storageとしてRocksDBを使用します。そのため、多くのパフォーマンスパラメータはRocksDBに関連しています。TiKVは2つのRocksDBインスタンスを使用します。デフォルトのRocksDBインスタンスはKVデータを保存し、 Raft RocksDBインスタンス（RaftDB）はRaftログを保存します。
 
-TiKV implements `Column Families` (CF) from RocksDB.
+TiKV は RocksDB から`Column Families` (CF) を実装します。
 
-- The default RocksDB instance stores KV data in the `default`, `write` and `lock` CFs.
+-   デフォルトの RocksDB インスタンスは`write` KV データを`default` 、および`lock` CF に保存します。
 
-    - The `default` CF stores the actual data. The corresponding parameters are in `[rocksdb.defaultcf]`.
-    - The `write` CF stores the version information in Multi-Version Concurrency Control (MVCC) and index-related data. The corresponding parameters are in `[rocksdb.writecf]`.
-    - The `lock` CF stores the lock information. The system uses the default parameters.
+    -   `default` CFには実際のデータが保存されます。対応するパラメータは`[rocksdb.defaultcf]`にあります。
+    -   `write` CF は、マルチバージョン同時実行制御（MVCC）のバージョン情報とインデックス関連データを格納します。対応するパラメータは`[rocksdb.writecf]`にあります。
+    -   `lock`はロック情報を保存します。システムはデフォルトのパラメータを使用します。
 
-- The Raft RocksDB (RaftDB) instance stores Raft logs.
+-   Raft RocksDB (RaftDB) インスタンスはRaftログを保存します。
 
-    - The `default` CF stores the Raft log. The corresponding parameters are in `[raftdb.defaultcf]`.
+    -   `default` CF にはRaftログが保存されます。対応するパラメータは`[raftdb.defaultcf]`にあります。
 
-After TiKV 3.0, by default, all CFs share one block cache instance. You can configure the size of the cache by setting the `capacity` parameter under `[storage.block-cache]`. The bigger the block cache, the more hot data can be cached, and the easier to read data, in the meantime, the more system memory is occupied.
+TiKV 3.0以降、デフォルトではすべてのCFが1つのブロックキャッシュインスタンスを共有します。キャッシュのサイズは、 `[storage.block-cache]`未満の`capacity`パラメータを設定することで調整できます。ブロックキャッシュが大きいほど、より多くのホットデータをキャッシュでき、データの読み取りが容易になりますが、同時にシステムメモリの占有量も増加します。
 
-Before TiKV 3.0, shared block cache is not supported, and you need to configure block cache for each CF individually.
+TiKV 3.0 より前では、共有ブロックキャッシュはサポートされていないため、各 CF ごとにブロックキャッシュを個別に構成する必要があります。
 
-Each CF also has a separate `write buffer`. You can configure the size by setting the `write-buffer-size` parameter.
+各 CF にはそれぞれ`write buffer`あります。3 パラメータ`write-buffer-size`設定することでサイズを設定できます。
 
-## Parameter specification
+## パラメータ仕様 {#parameter-specification}
 
 ```toml
 # Log level: trace, debug, warn, error, info, off.
@@ -239,18 +239,18 @@ max-bytes-for-level-base = "512MiB"
 target-file-size-base = "32MiB"
 ```
 
-## TiKV memory usage
+## TiKVメモリ使用量 {#tikv-memory-usage}
 
-Besides `block cache` and `write buffer` which occupy the system memory, the system memory is occupied in the following scenarios:
+システムメモリを占有する`block cache`と`write buffer`他に、次のシナリオでもシステムメモリが占有されます。
 
-+ Some of the memory is reserved as the system's page cache.
+-   メモリの一部はシステムのページ キャッシュとして予約されています。
 
-+ When TiKV processes large queries such as `select * from ...`, it reads data, generates the corresponding data structure in the memory, and returns this structure to TiDB. During this process, TiKV occupies some of the memory.
+-   TiKVは`select * from ...`ような大規模なクエリを処理する際、データを読み取り、対応するデータ構造をメモリ上に生成し、この構造をTiDBに返します。この処理中、TiKVはメモリの一部を占有します。
 
-## Recommended configuration of TiKV
+## TiKVの推奨構成 {#recommended-configuration-of-tikv}
 
-+ In production environments, it is not recommended to deploy TiKV on the machine whose CPU cores are less than 8 or the memory is less than 32GiB.
+-   本番環境では、CPU コアが 8 個未満、またはメモリが 32 GiB 未満のマシンに TiKV を展開することは推奨されません。
 
-+ If you demand a high write throughput, it is recommended to use a disk with good throughput capacity.
+-   高い書き込みスループットが求められる場合は、スループット容量の優れたディスクを使用することをお勧めします。
 
-+ If you demand a very low read-write latency, it is recommended to use SSD with high IOPS.
+-   非常に低い読み取り/書き込みレイテンシーを要求する場合は、高 IOPS の SSD を使用することをお勧めします。

@@ -1,108 +1,108 @@
 ---
 title: TiDB Versioning
-summary: Learn the version numbering system of TiDB.
+summary: TiDB のバージョン番号付けシステムについて学習します。
 ---
 
-# TiDB Versioning
+# TiDB のバージョン管理 {#tidb-versioning}
 
 <Important>
 
-It is recommended to always upgrade to the latest patch release of your release series.
+リリース シリーズの最新のパッチ リリースに常にアップグレードすることをお勧めします。
 
 </Important>
 
-TiDB offers two release series:
+TiDB には 2 つのリリース シリーズがあります。
 
-* Long-Term Support Releases
-* Development Milestone Releases (introduced in TiDB v6.0.0)
+-   長期サポートリリース
+-   開発マイルストーンリリース（TiDB v6.0.0 で導入）
 
-To learn about the support policy for major releases of TiDB, see [TiDB Release Support Policy](https://www.pingcap.com/tidb-release-support-policy/).
+TiDB のメジャー リリースのサポート ポリシーについては、 [TiDB リリース サポート ポリシー](https://www.pingcap.com/tidb-release-support-policy/)参照してください。
 
-## Release versioning
+## リリースバージョン管理 {#release-versioning}
 
-TiDB versioning has the form of `X.Y.Z`. `X.Y` represents a release series.
+TiDB のバージョン番号は`X.Y.Z`から始まり、 `X.Y`リリース シリーズを表します。
 
-- Since TiDB 1.0, `X` increments every year. Each `X` release introduces new features and improvements.
-- `Y` increments from 0. Each `Y` release introduces new features and improvements.
-- In the first release of a release series, `Z` is set to 0 by default. For patch releases, `Z` increments from 1.
+-   TiDB 1.0以降、毎年`X`増加します。3リリース`X`に新機能と改善が導入されます。
+-   `Y`から増加します。 `Y`ごとに新しい機能と改善が導入されます。
+-   リリースシリーズの最初のリリースでは、デフォルトで`Z`が 0 に設定されます。パッチリリースの場合は、1 から`Z`増加します。
 
-For the versioning system of TiDB v5.0.0 and earlier versions, refer to [Historical versioning](#historical-versioning-deprecated).
+TiDB v5.0.0 以前のバージョンのバージョン管理システムについては、 [歴史的なバージョン管理](#historical-versioning-deprecated)を参照してください。
 
-## Long-Term Support releases
+## 長期サポートリリース {#long-term-support-releases}
 
-Long-Term Support (LTS) versions are released approximately every six months and introduce new features, improvements, bug fixes and security vulnerability fixes.
+長期サポート (LTS) バージョンは約 6 か月ごとにリリースされ、新しい機能、改善、バグ修正、セキュリティ脆弱性修正が導入されます。
 
-LTS releases are versioned as `X.Y.Z`. `Z` defaults to 0.
+LTS リリースのバージョンは`X.Y.Z`です。3 `Z`デフォルトは 0 です。
 
-Example versions:
+例のバージョン:
 
-- 6.1.0
-- 5.4.0
+-   6.1.0
+-   5.4.0
 
-During the lifecycle of LTS, patch releases are made available on demand. Patch releases contain bug fixes and security vulnerability fixes, and do not introduce new features.
+LTS のライフサイクル中は、パッチリリースがオンデマンドで提供されます。パッチリリースにはバグ修正とセキュリティ脆弱性の修正が含まれており、新機能は導入されません。
 
-Patch releases are versioned as `X.Y.Z`. `X.Y` is consistent with the corresponding LTS versioning. The patch number `Z` increments from 1.
+パッチリリースのバージョン番号は`X.Y.Z`です。3 `X.Y`対応する LTS バージョン番号と一致しています。パッチ番号`Z` 1 から増加します。
 
-Example version:
+例のバージョン:
 
-- 6.1.1
+-   6.1.1
 
 <Note>
 
-v5.1.0, v5.2.0, v5.3.0, v5.4.0 were released only two months after their preceding releases, but all four releases are LTS and provide patch releases.
+v5.1.0、v5.2.0、v5.3.0、v5.4.0 は、前のリリースからわずか 2 か月後にリリースされましたが、4 つのリリースはすべて LTS であり、パッチ リリースが提供されます。
 
 </Note>
 
-## Development Milestone Releases
+## 開発マイルストーンリリース {#development-milestone-releases}
 
-Development Milestone Releases (DMR) are released approximately every two months that do not contain LTS. DMR versions introduce new features, improvements and bug fixes. TiDB does not provide patch releases based on DMR, and any related bugs are fixed in the subsequent release series.
+開発マイルストーンリリース（DMR）は、LTSを含まない約2ヶ月ごとにリリースされます。DMRバージョンでは、新機能、改善、バグ修正が導入されます。TiDBはDMRに基づくパッチリリースを提供しておらず、関連するバグは後続のリリースシリーズで修正されます。
 
-DMRs are versioned as `X.Y.Z`. `Z` defaults to 0. A `-DMR` suffix is appended to the version number.
+DMR のバージョン番号は`X.Y.Z`です。3 `Z`デフォルトで 0 になります。バージョン番号に`-DMR`というサフィックスが追加されます。
 
-Example version:
+例のバージョン:
 
-- 6.0.0-DMR
+-   6.0.0-DMR
 
-## Versioning of TiDB ecosystem tools
+## TiDBエコシステムツールのバージョン管理 {#versioning-of-tidb-ecosystem-tools}
 
-Some TiDB tools are released together with the TiDB server and use the same version numbering system, such as TiDB Lightning. Some TiDB tools are released separately from the TiDB server and use their own version numbering system, such as TiUP and TiDB Operator.
+一部のTiDBツールはTiDBサーバーと同時にリリースされ、同じバージョン番号体系を使用します（例： TiDB Lightning）。一部のTiDBツールはTiDBサーバーとは別にリリースされ、独自のバージョン番号体系を使用します（例： TiUP 、 TiDB Operator）。
 
-## Historical versioning (deprecated)
+## 履歴バージョン管理（非推奨） {#historical-versioning-deprecated}
 
-### General Availability releases
+### 一般公開リリース {#general-availability-releases}
 
-General Availability (GA) releases are stable versions of the current release series of TiDB. GA versions are released after Release Candidate (RC) versions. GA can be used in production environments.
+一般提供（GA）リリースは、TiDB の現在のリリース シリーズの安定バージョンです。GA バージョンは、リリースCandidate（RC）バージョンの後にリリースされます。GA は本番環境で使用できます。
 
-Example versions:
+例のバージョン:
 
-- 1.0
-- 2.1 GA
-- 5.0 GA
+-   1.0
+-   2.1 GA
+-   5.0 GA
 
-### Release Candidate releases
+### リリース候補Candidate {#release-candidate-releases}
 
-Release Candidate (RC) releases introduce new features and improvements. RC versions are significantly more stable than Beta versions. RC can be used for early testing, but are not suitable for production.
+リリースCandidate（RC）では、新機能や改良点が導入されます。RC版はベータ版よりも大幅に安定しています。RC版は初期テストには使用できますが、本番には適していません。
 
-Example versions:
+例のバージョン:
 
-- RC1
-- 2.0-RC1
-- 3.0.0-rc.1
+-   RC1
+-   2.0-RC1
+-   3.0.0-rc.1
 
-### Beta releases
+### ベータ版リリース {#beta-releases}
 
-Beta releases introduces new features and improvements. Beta versions are greatly improved over Alpha versions and have eliminated critical bugs, but still contain some bugs. Beta releases are available for users to test the latest features.
+ベータ版では、新機能や改善点が導入されます。ベータ版はアルファ版と比べて大幅に改善され、重大なバグは解消されていますが、依然としていくつかのバグが残っています。ベータ版は、ユーザーが最新機能をテストするためにご利用いただけます。
 
-Example versions:
+例のバージョン:
 
-- 1.1 Beta
-- 2.1 Beta
-- 4.0.0-beta.1
+-   1.1 ベータ版
+-   2.1 ベータ版
+-   4.0.0-ベータ.1
 
-### Alpha releases
+### アルファリリース {#alpha-releases}
 
-Alpha releases are internal releases for testing and introduce new features and improvements. Alpha releases are the initial versions of the current release series. Alpha releases might have some bugs and are available for users to test the latest features.
+アルファリリースはテスト用の社内リリースであり、新機能や改善点が導入されます。アルファリリースは、現在のリリースシリーズの初期バージョンです。アルファリリースにはバグが含まれている可能性があり、ユーザーが最新機能をテストするために利用できます。
 
-Example version:
+例のバージョン:
 
-- 1.1 Alpha
+-   1.1 アルファ

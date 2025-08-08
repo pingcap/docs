@@ -1,54 +1,54 @@
 ---
 title: Migrate and Upgrade a TiDB Cluster
-summary: Learn how to migrate and upgrade a TiDB cluster using BR for full backup and restore, along with TiCDC for incremental data replication.
+summary: 完全バックアップと復元のためのBRと、増分データレプリケーションのための TiCDC を使用して、TiDB クラスターを移行およびアップグレードする方法を学習します。
 ---
 
-# Migrate and Upgrade a TiDB Cluster
+# TiDBクラスタの移行とアップグレード {#migrate-and-upgrade-a-tidb-cluster}
 
-This document describes how to migrate and upgrade a TiDB cluster (also known as a blue-green upgrade) using [BR](/br/backup-and-restore-overview.md) for full backup and restore, along with [TiCDC](/ticdc/ticdc-overview.md) for incremental data replication. This solution uses dual-cluster redundancy and incremental replication to enable smooth traffic switchover and fast rollback, providing a reliable and low-risk upgrade path for critical systems. It is recommended to regularly upgrade the database version to continuously benefit from performance improvements and new features, helping you maintain a secure and efficient database system. The key advantages of this solution include:
+このドキュメントでは、 [BR](/br/backup-and-restore-overview.md)で完全バックアップとリストアを行い、 [TiCDC](/ticdc/ticdc-overview.md)で増分データレプリケーションを行う TiDB クラスタの移行とアップグレード（ブルーグリーンアップグレードとも呼ばれます）の方法について説明します。このソリューションは、デュアルクラスタ冗長性と増分レプリケーションを使用することで、スムーズなトラフィック切り替えと高速ロールバックを実現し、重要なシステムに信頼性が高くリスクの低いアップグレードパスを提供します。パフォーマンスの向上と新機能のメリットを継続的に享受し、安全で効率的なデータベースシステムを維持するために、データベースバージョンを定期的にアップグレードすることをお勧めします。このソリューションの主な利点は次のとおりです。
 
-- **Controllable risk**: supports rollback to the original cluster within minutes, ensuring business continuity.
-- **Data integrity**: uses a multi-stage verification mechanism to prevent data loss.
-- **Minimal business impact**: requires only a brief maintenance window for the final switchover.
+-   **制御可能なリスク**: 数分以内に元のクラスターへのロールバックをサポートし、ビジネスの継続性を確保します。
+-   **データ整合性**: 多段階の検証メカニズムを使用して、データの損失を防ぎます。
+-   **ビジネスへの影響は最小限**: 最終的な切り替えに必要なメンテナンス時間はわずかです。
 
-The core workflow for migration and upgrade is as follows:
+移行とアップグレードのコアワークフローは次のとおりです。
 
-1. **Pre-check risks**: verify cluster status and solution feasibility.
-2. **Prepare the new cluster**: create a new cluster from a full backup of the old cluster and upgrade it to the target version.
-3. **Replicate incremental data**: establish a forward data replication channel using TiCDC.
-4. **Switch and verify**: perform multi-dimensional verification, switch business traffic to the new cluster, and set up a TiCDC reverse replication channel.
-5. **Observe status**: maintain the reverse replication channel. After the observation period, clean up the environment.
+1.  **リスクの事前チェック**: クラスターの状態とソリューションの実現可能性を確認します。
+2.  **新しいクラスターを準備します**。古いクラスターの完全バックアップから新しいクラスターを作成し、それをターゲット バージョンにアップグレードします。
+3.  **増分データを複製する**: TiCDC を使用して順方向データ複製チャネルを確立します。
+4.  **切り替えと検証**: 多次元検証を実行し、ビジネス トラフィックを新しいクラスターに切り替え、TiCDC リバース レプリケーション チャネルを設定します。
+5.  **ステータスの監視**：リバースレプリケーションチャネルを維持します。監視期間終了後、環境をクリーンアップします。
 
-**Rollback plan**: if the new cluster encounters issues during the migration and upgrade process, you can switch business traffic back to the original cluster at any time.
+**ロールバック プラン**: 移行およびアップグレード プロセス中に新しいクラスターで問題が発生した場合、いつでもビジネス トラフィックを元のクラスターに戻すことができます。
 
-The following sections describe the standardized process and general steps for migrating and upgrading a TiDB cluster. The example commands are based on a TiDB Self-Managed environment.
+以下のセクションでは、TiDB クラスターの移行とアップグレードに関する標準化されたプロセスと一般的な手順について説明します。コマンド例は、TiDB セルフマネージド環境に基づいています。
 
-## Step 1: Evaluate solution feasibility
+## ステップ1: ソリューションの実現可能性を評価する {#step-1-evaluate-solution-feasibility}
 
-Before migrating and upgrading, evaluate the compatibility of relevant components and check cluster health status.
+移行およびアップグレードを行う前に、関連コンポーネントの互換性を評価し、クラスターの健全性状態を確認します。
 
-- Check the TiDB cluster version: this solution applies to TiDB v6.5.0 or later versions.
+-   TiDB クラスターのバージョンを確認します。このソリューションは、TiDB v6.5.0 以降のバージョンに適用されます。
 
-- Verify TiCDC compatibility:
+-   TiCDC の互換性を確認します。
 
-    - **Table schema requirements**: ensure that tables to be replicated contain valid indexes. For more information, see [TiCDC valid index](/ticdc/ticdc-overview.md#valid-index).
-    - **Feature limitations**: TiCDC does not support Sequence or TiFlash DDL replication. For more information, see [TiCDC unsupported scenarios](/ticdc/ticdc-overview.md#unsupported-scenarios).
-    - **Best practices**: avoid executing DDL operations on the upstream cluster of TiCDC during switchover.
+    -   **テーブルスキーマの要件**：レプリケートするテーブルに有効なインデックスが含まれていることを確認してください。詳細については、 [TiCDC有効インデックス](/ticdc/ticdc-overview.md#valid-index)参照してください。
+    -   **機能制限**：TiCDCはシーケンスDDLレプリケーションとTiFlash DDLレプリケーションをサポートしていません。詳細については、 [TiCDC がサポートしていないシナリオ](/ticdc/ticdc-overview.md#unsupported-scenarios)参照してください。
+    -   **ベスト プラクティス**: スイッチオーバー中に TiCDC のアップストリーム クラスターで DDL 操作を実行しないでください。
 
-- Verify BR compatibility:
+-   BRの互換性を確認します。
 
-    - Review the compatibility matrix of BR full backup. For more information, see [BR version compatibility matrix](/br/backup-and-restore-overview.md#br-version-compatibility-matrix-between-tidb-v650-and-v850).
-    - Check the known limitations of BR backup and restore. For more information, see [BR usage restrictions](/br/backup-and-restore-overview.md#restrictions).
+    -   BRフルバックアップの互換性マトリックスを確認してください。詳細については、 [BRバージョン互換性マトリックス](/br/backup-and-restore-overview.md#br-version-compatibility-matrix-between-tidb-v650-and-v850)参照してください。
+    -   BRバックアップとリストアの既知の制限事項を確認してください。詳細については、 [BRの使用制限](/br/backup-and-restore-overview.md#restrictions)参照してください。
 
-- Check the health status of the cluster, such as [Region](/glossary.md#regionpeerraft-group) health and node resource utilization.
+-   [リージョン](/glossary.md#regionpeerraft-group)健全性やノードのリソース使用率など、クラスターの健全性状態を確認します。
 
-## Step 2: Prepare the new cluster
+## ステップ2: 新しいクラスターを準備する {#step-2-prepare-the-new-cluster}
 
-### 1. Adjust the GC lifetime of the old cluster
+### 1. 古いクラスタのGC有効期間を調整する {#1-adjust-the-gc-lifetime-of-the-old-cluster}
 
-To ensure data replication stability, adjust the system variable [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) to a value that covers the total duration of the following operations and intervals: BR backup, BR restore, cluster upgrade, and TiCDC Changefeed replication setup. Otherwise, the replication task might enter an unrecoverable `failed` state, requiring a restart of the entire migration and upgrade process from a new full backup.
+データレプリケーションの安定性を確保するため、システム変数[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) 、 BRバックアップ、 BRリストア、クラスタアップグレード、 TiCDC Changefeedレプリケーションセットアップの各操作と間隔の合計所要時間をカバーする値に調整してください。そうしないと、レプリケーションタスクが回復不能な状態`failed`になり、移行とアップグレードのプロセス全体を新しいフルバックアップからやり直す必要が生じる可能性があります。
 
-The following example sets `tidb_gc_life_time` to `60h`:
+次の例では、 `tidb_gc_life_time`を`60h`に設定します。
 
 ```sql
 -- Check the current GC lifetime setting.
@@ -57,54 +57,57 @@ SHOW VARIABLES LIKE '%tidb_gc_life_time%';
 SET GLOBAL tidb_gc_life_time=60h;
 ```
 
-> **Note:**
+> **注記：**
 >
-> Increasing `tidb_gc_life_time` increases storage usage for [MVCC](/glossary.md#multi-version-concurrency-control-mvcc) data and might affect query performance. For more information, see [GC Overview](/garbage-collection-overview.md). Adjust the GC duration based on estimated operation time while considering storage and performance impacts.
+> `tidb_gc_life_time`増やすと、 [MVCC](/glossary.md#multi-version-concurrency-control-mvcc)データのstorage使用量が増加し、クエリのパフォーマンスに影響する可能性があります。詳細については、 [GCの概要](/garbage-collection-overview.md)参照してください。storageとパフォーマンスへの影響を考慮しながら、推定操作時間に基づいてGC期間を調整してください。
 
-### 2. Migrate full data to the new cluster
+### 2. 新しいクラスターに全データを移行する {#2-migrate-full-data-to-the-new-cluster}
 
-When migrating full data to the new cluster, note the following:
+完全なデータを新しいクラスターに移行するときは、次の点に注意してください。
 
-- **Version compatibility**: the BR version used for backup and restore must match the major version of the old cluster.
-- **Performance impact**: BR backup consumes system resources. To minimize business impact, perform backups during off-peak hours.
-- **Time estimation**: under optimal hardware conditions (no disk I/O or network bandwidth bottlenecks), estimated times are:
+-   **バージョンの互換性**: バックアップと復元に使用されるBRバージョンは、古いクラスターのメジャー バージョンと一致する必要があります。
 
-    - Backup speed: backing up 1 TiB of data per TiKV node with 8 threads takes approximately 1 hour.
-    - Restore speed: restoring 1 TiB of data per TiKV node takes approximately 20 minutes.
+-   **パフォーマンスへの影響**： BRバックアップはシステムリソースを消費します。ビジネスへの影響を最小限に抑えるには、オフピーク時間帯にバックアップを実行してください。
 
-- **Configuration consistency**: ensure that the [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) configuration is identical between the old and new clusters. Otherwise, BR restore will fail.
-- **System table restore**: Use the `--with-sys-table` option during BR restore to recover system table data.
+-   **時間の見積もり**: 最適なハードウェア条件 (ディスク I/O またはネットワーク帯域幅のボトルネックがない) では、推定時間は次のとおりです。
 
-To migrate full data to the new cluster, take the following steps:
+    -   バックアップ速度: 8 つのスレッドで TiKV ノードごとに 1 TiB のデータのバックアップに約 1 時間かかります。
+    -   復元速度: TiKV ノードごとに 1 TiB のデータの復元には約 20 分かかります。
 
-1. Perform a full backup on the old cluster:
+-   構成[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)**コンフィグレーション性**：古いクラスタと新しいクラスタの構成が同一であることを確認してください。同一でない場合、 BRの復元は失敗します。
+
+-   **システム テーブルの復元**: BR復元中に`--with-sys-table`オプションを使用して、システム テーブル データを復元します。
+
+完全なデータを新しいクラスターに移行するには、次の手順を実行します。
+
+1.  古いクラスターで完全バックアップを実行します。
 
     ```shell
     tiup br:${cluster_version} backup full --pd ${pd_host}:${pd_port} -s ${backup_location}
     ```
 
-2. Record the TSO of the old cluster for later TiCDC Changefeed creation:
+2.  後でTiCDC Changefeed を作成するために、古いクラスターの TSO を記録します。
 
     ```shell
     tiup br:${cluster_version} validate decode --field="end-version" \
     --storage "s3://xxx?access-key=${access-key}&secret-access-key=${secret-access-key}" | tail -n1
     ```
 
-3. Deploy the new cluster:
+3.  新しいクラスターをデプロイ。
 
     ```shell
     tiup cluster deploy ${new_cluster_name} ${cluster_version} tidb-cluster.yaml
     ```
 
-4. Restore the full backup to the new cluster:
+4.  完全バックアップを新しいクラスターに復元します。
 
     ```shell
     tiup br:${cluster_version} restore full --pd ${pd_host}:${pd_port} -s ${backup_location} --with-sys-table
     ```
 
-### 3. Upgrade the new cluster to the target version
+### 3. 新しいクラスターをターゲットバージョンにアップグレードする {#3-upgrade-the-new-cluster-to-the-target-version}
 
-To save time, you can perform an offline upgrade using the following commands. For more upgrade methods, see [Upgrade TiDB Using TiUP](/upgrade-tidb-using-tiup.md).
+時間を節約するために、以下のコマンドを使用してオフラインアップグレードを実行できます。その他のアップグレード方法については、 [TiUPを使用して TiDB をアップグレードする](/upgrade-tidb-using-tiup.md)参照してください。
 
 ```shell
 tiup cluster stop <new_cluster_name>      # Stop the cluster
@@ -112,31 +115,31 @@ tiup cluster upgrade <new_cluster_name> <v_target_version> --offline  # Perform 
 tiup cluster start <new_cluster_name>     # Start the cluster
 ```
 
-To maintain business continuity, you need to replicate essential configurations from the old cluster to the new cluster, such as configuration items and system variables.
+ビジネスの継続性を維持するには、構成項目やシステム変数などの重要な構成を古いクラスターから新しいクラスターに複製する必要があります。
 
-## Step 3: Replicate incremental data
+## ステップ3: 増分データを複製する {#step-3-replicate-incremental-data}
 
-### 1. Establish a forward data replication channel
+### 1. 順方向データ複製チャネルを確立する {#1-establish-a-forward-data-replication-channel}
 
-At this stage, the old cluster remains at its original version, while the new cluster has been upgraded to the target version. In this step, you need to establish a forward data replication channel from the old cluster to the new cluster.
+この段階では、古いクラスタは元のバージョンのままですが、新しいクラスタはターゲットバージョンにアップグレードされています。このステップでは、古いクラスタから新しいクラスタへの順方向データレプリケーションチャネルを確立する必要があります。
 
-> **Note:**
+> **注記：**
 >
-> The TiCDC component version must match the major version of the old cluster.
+> TiCDCコンポーネントのバージョンは、古いクラスターのメジャー バージョンと一致する必要があります。
 
-- Create a Changefeed task and set the incremental replication starting point (`${tso}`) to the exact backup TSO recorded in [Step 2](#step-2-prepare-the-new-cluster) to prevent data loss:
+-   Changefeedタスクを作成し、データ損失を防ぐために増分レプリケーションの開始点（ `${tso}` ）を[ステップ2](#step-2-prepare-the-new-cluster)で記録したバックアップTSOと正確に設定します。
 
     ```shell
     tiup ctl:${cluster_version} cdc changefeed create --server http://${cdc_host}:${cdc_port} --sink-uri="mysql://${username}:${password}@${tidb_endpoint}:${port}" --config config.toml --start-ts ${tso}
     ```
 
-- Check the replication task status and confirm that `tso` or `checkpoint` is continuously advancing:
+-   レプリケーション タスクのステータスを確認し、 `tso`または`checkpoint`継続的に進んでいることを確認します。
 
     ```shell
     tiup ctl:${cluster_version} cdc changefeed list --server http://${cdc_host}:${cdc_port}
     ```
 
-    The output is as follows:
+    出力は次のようになります。
 
     ```shell
     [{
@@ -150,131 +153,131 @@ At this stage, the old cluster remains at its original version, while the new cl
     }]
     ```
 
-During incremental data replication, continuously monitor the replication channel status and adjust settings if needed:
+増分データ レプリケーション中は、レプリケーション チャネルの状態を継続的に監視し、必要に応じて設定を調整します。
 
-- Latency metrics: ensure that `Changefeed checkpoint lag` remains within an acceptable range, such as within 5 minutes.
-- Throughput health: ensure that `Sink flush rows/s` consistently exceeds the business write rate.
-- Errors and alerts: regularly check TiCDC logs and alert information.
-- (Optional) Test data replication: update test data and verify that Changefeed correctly replicates it to the new cluster.
-- (Optional) Adjust the TiCDC configuration item [`gc-ttl`](/ticdc/ticdc-server-config.md#gc-ttl) (defaults to 24 hours).
+-   レイテンシ メトリック: `Changefeed checkpoint lag` 5 分以内などの許容範囲内に収まっていることを確認します。
+-   スループットの健全性: `Sink flush rows/s`一貫してビジネス書き込みレートを超えていることを確認します。
+-   エラーとアラート: TiCDC ログとアラート情報を定期的に確認してください。
+-   (オプション) テスト データ レプリケーション: テスト データを更新し、Changefeed がそれを新しいクラスターに正しく複製することを確認します。
+-   (オプション) TiCDC 構成項目[`gc-ttl`](/ticdc/ticdc-server-config.md#gc-ttl)調整します (デフォルトは 24 時間)。
 
-    If a replication task is unavailable or interrupted and cannot be resolved in time, `gc-ttl` ensures that data needed by TiCDC is retained in TiKV without being cleaned by garbage collection (GC). If this duration is exceeded, the replication task enters a `failed` state and cannot recover. In this case, PD's GC safe point continues advancing, requiring a new backup to restart the process.
+    レプリケーションタスクが利用不能または中断され、時間内に解決できない場合、 `gc-ttl` TiCDC に必要なデータがガベージコレクション(GC) によって消去されることなく TiKV に保持されることを保証します。この期間を超えると、レプリケーションタスクは`failed`状態になり、回復できなくなります。この場合、PD の GC セーフポイントは引き続き前進し、プロセスを再開するには新しいバックアップが必要になります。
 
-    Increasing the value of `gc-ttl` accumulates more MVCC data, similar to increasing `tidb_gc_life_time`. It is recommended to set it to a reasonably long but appropriate value.
+    `gc-ttl`を増やすと、 `tidb_gc_life_time`増やした場合と同様に、より多くのMVCCデータが蓄積されます。適度に長く、かつ適切な値に設定することをお勧めします。
 
-### 2. Verify data consistency
+### 2. データの一貫性を検証する {#2-verify-data-consistency}
 
-After data replication is complete, verify data consistency between the old and new clusters using the following methods:
+データのレプリケーションが完了したら、次の方法を使用して、古いクラスターと新しいクラスター間のデータの整合性を確認します。
 
-- Use the [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) tool:
+-   [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)ツールを使用します:
 
     ```shell
     ./sync_diff_inspector --config=./config.toml
     ```
 
-- Use the snapshot configuration of [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) with the [Syncpoint](/ticdc/ticdc-upstream-downstream-check.md) feature of TiCDC to verify data consistency without stopping Changefeed replication. For more information, see [Upstream and Downstream Clusters Data Validation and Snapshot Read](/ticdc/ticdc-upstream-downstream-check.md).
+-   [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)のスナップショット設定と TiCDC の[同期ポイント](/ticdc/ticdc-upstream-downstream-check.md)機能を組み合わせることで、ChangeFeed レプリケーションを停止することなくデータの整合性を検証できます。詳細については、 [上流および下流のクラスタのデータ検証とスナップショットの読み取り](/ticdc/ticdc-upstream-downstream-check.md)参照してください。
 
-- Perform manual validation of business data, such as comparing table row counts.
+-   テーブルの行数の比較など、ビジネス データの手動検証を実行します。
 
-### 3. Finalize the environment setup
+### 3. 環境設定を完了する {#3-finalize-the-environment-setup}
 
-This migration procedure restores some system table data using the BR `--with-sys-table` option. For tables that are not included in the scope, you need to manually restore. Common items to check and supplement include:
+この移行手順では、 BR `--with-sys-table`オプションを使用して一部のシステムテーブルデータを復元します。対象範囲に含まれないテーブルについては、手動で復元する必要があります。確認および補足すべき一般的な項目は次のとおりです。
 
-- User privileges: compare the `mysql.user` table.
-- Configuration settings: ensure that configuration items and system variables are consistent.
-- Auto-increment columns: clear auto-increment ID caches in the new cluster.
-- Statistics: collect statistics manually or enable automatic collection in the new cluster.
+-   ユーザー権限： `mysql.user`テーブルを比較します。
+-   コンフィグレーション設定: 構成項目とシステム変数が一貫していることを確認します。
+-   自動インクリメント列: 新しいクラスター内の自動インクリメント ID キャッシュをクリアします。
+-   統計: 統計を手動で収集するか、新しいクラスターで自動収集を有効にします。
 
-Additionally, you can scale out the new cluster to handle expected workloads and migrate operational tasks, such as alert subscriptions, scheduled statistics collection scripts, and data backup scripts.
+さらに、新しいクラスターをスケールアウトして、予想されるワークロードを処理し、アラート サブスクリプション、スケジュールされた統計収集スクリプト、データ バックアップ スクリプトなどの運用タスクを移行することもできます。
 
-## Step 4: Switch business traffic and rollback
+## ステップ4: ビジネストラフィックの切り替えとロールバック {#step-4-switch-business-traffic-and-rollback}
 
-### 1. Prepare for the switchover
+### 1. 切り替えの準備 {#1-prepare-for-the-switchover}
 
-- Confirm replication status:
+-   レプリケーションステータスを確認します。
 
-    - Monitor the latency of TiCDC Changefeed replication.
-    - Ensure that the incremental replication throughput is greater than or equal to the peak business write rate.
+    -   TiCDC Changefeedレプリケーションのレイテンシーを監視します。
+    -   増分レプリケーションのスループットがピーク時のビジネス書き込み速度以上であることを確認します。
 
-- Perform multi-dimensional validation, such as:
+-   次のような多次元検証を実行します。
 
-    - Ensure that all data validation steps are complete and perform any necessary additional checks.
-    - Conduct sanity or integration tests on the application in the new cluster.
+    -   すべてのデータ検証手順が完了していることを確認し、必要な追加チェックを実行します。
+    -   新しいクラスター内のアプリケーションに対して健全性テストまたは統合テストを実行します。
 
-### 2. Execute the switchover
+### 2. 切り替えを実行する {#2-execute-the-switchover}
 
-1. Stop application services to prevent the old cluster from handling business traffic. To further restrict access, you can use one of the following methods:
+1.  古いクラスタがビジネストラフィックを処理できないように、アプリケーションサービスを停止します。アクセスをさらに制限するには、次のいずれかの方法を使用します。
 
-    - Lock user accounts in the old cluster:
+    -   古いクラスター内のユーザー アカウントをロックします。
 
         ```sql
         ALTER USER ACCOUNT LOCK;
         ```
 
-    - Set the old cluster to read-only mode. It is recommended to restart TiDB nodes in the old cluster to clear active business sessions and prevent connections that have not entered read-only mode:
+    -   古いクラスタを読み取り専用モードに設定します。アクティブなビジネスセッションをクリアし、読み取り専用モードに入っていない接続を防止するため、古いクラスタ内のTiDBノードを再起動することをお勧めします。
 
         ```sql
         SET GLOBAL tidb_super_read_only=ON;
         ```
 
-2. Ensure TiCDC catches up:
+2.  TiCDC が追いつくようにする:
 
-    - After setting the old cluster to read-only mode, retrieve the current `up-tso`:
+    -   古いクラスターを読み取り専用モードに設定した後、現在の`up-tso`取得します。
 
         ```sql
         SELECT tidb_current_ts();
         ```
 
-    - Monitor the Changefeed `checkpointTs` to confirm it has surpassed `up-tso`, indicating that TiCDC has completed data replication.
+    -   Changefeed `checkpointTs`監視して、それが`up-tso`超えていることを確認します。これは、TiCDC がデータ複製を完了したことを示します。
 
-3. Verify data consistency between the new and old clusters:
+3.  新しいクラスターと古いクラスター間のデータの一貫性を確認します。
 
-    - After TiCDC catches up, obtain the `down-tso` from the new cluster.
-    - Use the [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) tool to compare data consistency between the new and old clusters at `up-tso` and `down-tso`.
+    -   TiCDC が追いついたら、新しいクラスターから`down-tso`取得します。
+    -   [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)ツールを使用して、 `up-tso`と`down-tso`の新しいクラスターと古いクラスター間のデータの一貫性を比較します。
 
-4. Pause the forward Changefeed replication task:
+4.  フォワード Changefeed レプリケーション タスクを一時停止します。
 
     ```shell
     tiup ctl:${cluster_version} cdc changefeed pause --server http://${cdc_host}:${cdc_port} -c <changefeedid>
     ```
 
-5. Restart the TiDB nodes in the new cluster to clear the auto-increment ID cache.
+5.  新しいクラスター内の TiDB ノードを再起動して、自動増分 ID キャッシュをクリアします。
 
-6. Check the operational status of the new cluster using the following methods:
+6.  次の方法を使用して、新しいクラスターの動作ステータスを確認します。
 
-    - Verify that the TiDB version matches the target version:
+    -   TiDB のバージョンがターゲット バージョンと一致していることを確認します。
 
         ```shell
         tiup cluster display <cluster-name>
         ```
 
-    - Log into the database and confirm component versions:
+    -   データベースにログインし、コンポーネントのバージョンを確認します。
 
         ```sql
         SELECT * FROM INFORMATION_SCHEMA.CLUSTER_INFO;
         ```
 
-    - Use Grafana to monitor service status: navigate to [**Overview > Services Port Status**](/grafana-overview-dashboard.md) and confirm that all services are in the **Up** state.
+    -   Grafana を使用してサービスの状態を監視します[**概要 &gt; サービスポートステータス**](/grafana-overview-dashboard.md)に移動し、すべてのサービスが**Up**状態であることを確認します。
 
-7. Set up reverse replication from the new cluster to the old cluster.
+7.  新しいクラスターから古いクラスターへのリバースレプリケーションを設定します。
 
-    1. Unlock user accounts in the old cluster and restore read-write mode:
+    1.  古いクラスター内のユーザー アカウントのロックを解除し、読み取り/書き込みモードを復元します。
 
         ```sql
         ALTER USER ACCOUNT UNLOCK;
         SET GLOBAL tidb_super_read_only=OFF;
         ```
 
-    2. Record the current TSO of the new cluster:
+    2.  新しいクラスターの現在の TSO を記録します。
 
         ```sql
         SELECT tidb_current_ts();
         ```
 
-    3. Configure the reverse replication link and ensure the Changefeed task is running properly:
+    3.  リバース レプリケーション リンクを構成し、Changefeed タスクが適切に実行されていることを確認します。
 
-        - Because business operations are stopped at this stage, you can use the current TSO.
-        - Ensure that `sink-uri` is set to the address of the old cluster to avoid loopback writing risks.
+        -   この段階では業務が停止しているため、現在の TSO を使用できます。
+        -   ループバック書き込みのリスクを回避するために、古いクラスターのアドレスに`sink-uri`が設定されていることを確認します。
 
         ```shell
         tiup ctl:${cluster_version} cdc changefeed create --server http://${cdc_host}:${cdc_port} --sink-uri="mysql://${username}:${password}@${tidb_endpoint}:${port}" --config config.toml --start-ts ${tso}
@@ -282,44 +285,44 @@ Additionally, you can scale out the new cluster to handle expected workloads and
         tiup ctl:${cluster_version} cdc changefeed list --server http://${cdc_host}:${cdc_port}
         ```
 
-8. Redirect business traffic to the new cluster.
+8.  ビジネス トラフィックを新しいクラスターにリダイレクトします。
 
-9. Monitor the load and operational status of the new cluster using the following Grafana panels:
+9.  次の Grafana パネルを使用して、新しいクラスターの負荷と動作ステータスを監視します。
 
-    - [**TiDB Dashboard > Query Summary**](/grafana-tidb-dashboard.md#query-summary): check the Duration, QPS, and Failed Query OPM metrics.
-    - [**TiDB Dashboard > Server**](/grafana-tidb-dashboard.md#server): monitor the **Connection Count** metric to ensure even distribution of connections across nodes.
+    -   [**TiDBダッシュボード &gt; クエリサマリー**](/grafana-tidb-dashboard.md#query-summary) : 期間、QPS、失敗したクエリ OPM メトリックを確認します。
+    -   [**TiDBダッシュボード &gt; サーバー**](/grafana-tidb-dashboard.md#server) :**接続数**メトリックを監視して、ノード間で接続が均等に分散されていることを確認します。
 
-At this point, business traffic has successfully switched to the new cluster, and the TiCDC reverse replication channel is established.
+この時点で、ビジネス トラフィックは新しいクラスターに正常に切り替えられ、TiCDC リバース レプリケーション チャネルが確立されます。
 
-### 3. Execute emergency rollback
+### 3. 緊急ロールバックを実行する {#3-execute-emergency-rollback}
 
-The rollback plan is as follows:
+ロールバック計画は次のとおりです。
 
-- Check data consistency between the new and old clusters regularly to ensure the reverse replication link is operating properly.
-- Monitor the system for a specified period, such as one week. If issues occur, switch back to the old cluster.
-- After the observation period, remove the reverse replication link and delete the old cluster.
+-   新しいクラスターと古いクラスター間のデータの整合性を定期的にチェックし、リバース レプリケーション リンクが適切に動作していることを確認します。
+-   1週間など、指定した期間にわたってシステムを監視します。問題が発生した場合は、古いクラスターに戻してください。
+-   観察期間が終了したら、リバースレプリケーションリンクを削除し、古いクラスターを削除します。
 
-The following introduces the usage scenario and steps for an emergency rollback, which redirects traffic back to the old cluster:
+以下では、トラフィックを古いクラスターにリダイレクトする緊急ロールバックの使用シナリオと手順について説明します。
 
-- Usage scenario: execute the rollback plan if critical issues cannot be resolved.
-- Steps:
+-   使用シナリオ: 重大な問題を解決できない場合は、ロールバック プランを実行します。
+-   手順:
 
-    1. Stop business access to the new cluster.
-    2. Reauthorize business accounts and restore read-write access to the old cluster.
-    3. Check the reverse replication link, confirm TiCDC has caught up, and verify data consistency between the new and old clusters.
-    4. Redirect business traffic back to the old cluster.
+    1.  新しいクラスターへのビジネス アクセスを停止します。
+    2.  ビジネス アカウントを再認証し、古いクラスターへの読み取り/書き込みアクセスを復元します。
+    3.  リバース レプリケーション リンクをチェックし、TiCDC が追いついていることを確認し、新しいクラスターと古いクラスター間のデータの一貫性を検証します。
+    4.  ビジネス トラフィックを古いクラスターにリダイレクトします。
 
-## Step 5: Clean up
+## ステップ5：クリーンアップ {#step-5-clean-up}
 
-After monitoring the new cluster for a period and confirming stable business operations, you can remove the TiCDC reverse replication and delete the old cluster.
+新しいクラスターを一定期間監視し、安定した業務運用を確認した後、TiCDC リバース レプリケーションを削除し、古いクラスターを削除できます。
 
-- Remove the TiCDC reverse replication:
+-   TiCDC リバースレプリケーションを削除します。
 
     ```shell
     tiup ctl:${cluster_version} cdc changefeed remove --server http://${cdc_host}:${cdc_port} -c <changefeedid>
     ```
 
-- Delete the old cluster. If you choose to retain it, restore `tidb_gc_life_time` to its original value:
+-   古いクラスターを削除します。保持する場合は、 `tidb_gc_life_time`元の値に戻します。
 
     ```sql
     -- Restore to the original value before modification.

@@ -1,40 +1,40 @@
 ---
 title: Transactions
-summary: Learn about transaction concepts for TiDB Cloud.
+summary: TiDB Cloudのトランザクション概念について学習します。
 ---
 
-# Transactions
+# 取引 {#transactions}
 
-TiDB provides complete distributed transactions, and the model has some optimizations on the basis of [Google Percolator](https://research.google.com/pubs/pub36726.html).
+TiDB は完全な分散トランザクションを提供し、モデルには[Google パーコレーター](https://research.google.com/pubs/pub36726.html)に基づいたいくつかの最適化が施されています。
 
-## Optimistic transaction mode
+## 楽観的トランザクションモード {#optimistic-transaction-mode}
 
-TiDB's optimistic transaction model does not detect conflicts until the commit phase. If there are conflicts, the transaction needs a retry. But this model is inefficient if the conflict is severe, because operations before the retry are invalid and need to repeat.
+TiDBの楽観的トランザクションモデルは、コミットフェーズまで競合を検出しません。競合が発生した場合、トランザクションは再試行する必要があります。しかし、競合が深刻な場合、再試行前の操作は無効となり、再度実行する必要があるため、このモデルは非効率的です。
 
-Assume that the database is used as a counter. High access concurrency might lead to severe conflicts, resulting in multiple retries or even timeouts. Therefore, in the scenario of severe conflicts, it is recommended to use the pessimistic transaction mode or to solve problems at the system architecture level, such as placing a counter in Redis. Nonetheless, the optimistic transaction model is efficient if the access conflict is not very severe.
+データベースをカウンターとして使用する場合を考えてみましょう。同時アクセス数が多いと深刻な競合が発生し、複数回の再試行やタイムアウトが発生する可能性があります。したがって、深刻な競合が発生するシナリオでは、悲観的トランザクションモードを使用するか、Redisにカウンターを配置するなど、システムアーキテクチャレベルで問題を解決することをお勧めします。ただし、アクセス競合がそれほど深刻でない場合は、楽観的トランザクションモデルが効率的です。
 
-For more information, see [TiDB Optimistic Transaction Model](/optimistic-transaction.md).
+詳細については[TiDB 楽観的トランザクションモデル](/optimistic-transaction.md)参照してください。
 
-## Pessimistic transaction mode
+## 悲観的なトランザクションモード {#pessimistic-transaction-mode}
 
-In TiDB, the pessimistic transaction mode has almost the same behavior as in MySQL. The transaction applies a lock during the execution phase, which avoids retries in conflict situations and ensures a higher success rate. By applying the pessimistic locking, you can also lock data in advance using `SELECT FOR UPDATE`.
+TiDBでは、悲観的トランザクションモードはMySQLとほぼ同じ動作をします。トランザクションは実行フェーズでロックを適用し、競合状況での再試行を回避し、高い成功率を保証します。悲観的ロックを適用することで、 `SELECT FOR UPDATE`使用して事前にデータをロックすることもできます。
 
-However, if the application scenario has fewer conflicts, the optimistic transaction model has better performance.
+ただし、アプリケーション シナリオの競合が少ない場合は、楽観的トランザクション モデルの方がパフォーマンスが向上します。
 
-For more information, see [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md).
+詳細については[TiDB 悲観的トランザクションモード](/pessimistic-transaction.md)参照してください。
 
-## Transaction isolation levels
+## トランザクション分離レベル {#transaction-isolation-levels}
 
-Transaction isolation is one of the foundations of database transaction processing. Isolation is one of the four key properties of a transaction (commonly referred to as [ACID](/tidb-cloud/tidb-cloud-glossary.md#acid)).
+トランザクション分離は、データベーストランザクション処理の基盤の一つです。分離は、トランザクションの4つの主要な特性（一般的に[ACID](/tidb-cloud/tidb-cloud-glossary.md#acid)と呼ばれます）の一つです。
 
-TiDB implements Snapshot Isolation (SI) consistency, which it advertises as `REPEATABLE-READ` for compatibility with MySQL. This differs from the [ANSI Repeatable Read isolation level](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read) and the [MySQL Repeatable Read level](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read).
+TiDBはスナップショット分離（SI）一貫性を実装しており、MySQLとの互換性のために`REPEATABLE-READ`として宣伝されています。これはSI [ANSI繰り返し読み取り分離レベル](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read)やSI [MySQL 繰り返し読み取りレベル](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)とは異なります。
 
-For more information, see [TiDB Transaction Isolation Levels](/transaction-isolation-levels.md).
+詳細については[TiDBトランザクション分離レベル](/transaction-isolation-levels.md)参照してください。
 
-## Non-transactional DML statements
+## 非トランザクションDMLステートメント {#non-transactional-dml-statements}
 
-A non-transactional DML statement is a DML statement split into multiple SQL statements (which is, multiple batches) to be executed in sequence. It enhances the performance and ease of use in batch data processing at the expense of transactional atomicity and isolation.
+非トランザクションDML文とは、複数のSQL文（つまり複数のバッチ）に分割され、順番に実行されるDML文です。トランザクションの原子性と独立性を犠牲にして、バッチデータ処理のパフォーマンスと使いやすさを向上させます。
 
-Usually, memory-consuming transactions need to be split into multiple SQL statements to bypass the transaction size limit. Non-transactional DML statements integrate this process into the TiDB kernel to achieve the same effect. It is helpful to understand the effect of non-transactional DML statements by splitting SQL statements. The `DRY RUN` syntax can be used to preview the split statements.
+通常、メモリを大量に消費するトランザクションは、トランザクションサイズ制限を回避するために複数のSQL文に分割する必要があります。非トランザクションDML文は、このプロセスをTiDBカーネルに統合することで、同様の効果を実現します。SQL文を分割することで、非トランザクションDML文の効果を理解するのに役立ちます`DRY RUN`構文を使用すると、分割された文をプレビューできます。
 
-For more information, see [Non-Transactional DML Statements](/non-transactional-dml.md).
+詳細については[非トランザクションDML文](/non-transactional-dml.md)参照してください。

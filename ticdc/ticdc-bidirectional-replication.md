@@ -1,104 +1,104 @@
 ---
 title: Bidirectional Replication
-summary: Learn how to use bidirectional replication of TiCDC.
+summary: TiCDC の双方向レプリケーションの使用方法を学習します。
 ---
 
-# Bidirectional Replication
+# 双方向レプリケーション {#bidirectional-replication}
 
-TiCDC supports bi-directional replication (BDR) among two TiDB clusters. Based on this feature, you can create a multi-active TiDB solution using TiCDC.
+TiCDCは、2つのTiDBクラスタ間の双方向レプリケーション（BDR）をサポートしています。この機能を利用することで、TiCDCを使用したマルチアクティブTiDBソリューションを構築できます。
 
-This section describes how to use bi-directional replication taking two TiDB clusters as an example.
+このセクションでは、2 つの TiDB クラスターを例にして双方向レプリケーションを使用する方法について説明します。
 
-## Deploy bi-directional replication
+## 双方向レプリケーションをデプロイ {#deploy-bi-directional-replication}
 
-TiCDC only replicates incremental data changes that occur after a specified timestamp to the downstream cluster. Before starting the bi-directional replication, you need to take the following steps:
+TiCDCは、指定されたタイムスタンプ以降に発生した増分データ変更のみを下流クラスターに複製します。双方向レプリケーションを開始する前に、次の手順を実行する必要があります。
 
-1. (Optional) According to your needs, import the data of the two TiDB clusters into each other using the data export tool [Dumpling](/dumpling-overview.md) and data import tool [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
+1.  (オプション) 必要に応じて、データ エクスポート ツール[Dumpling](/dumpling-overview.md)とデータ インポート ツール[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して、2 つの TiDB クラスターのデータを相互にインポートします。
 
-2. Deploy two TiCDC clusters between the two TiDB clusters. The cluster topology is as follows. The arrows in the diagram indicate the directions of data flow.
+2.  2つのTiDBクラスターの間に2つのTiCDCクラスターをデプロイ。クラスタートポロジは以下のとおりです。図中の矢印はデータフローの方向を示しています。
 
     ![TiCDC bidirectional replication](/media/ticdc/ticdc-bidirectional-replication.png)
 
-3. Specify the starting time point of data replication for the upstream and downstream clusters.
+3.  アップストリーム クラスターとダウンストリーム クラスターのデータ複製の開始時点を指定します。
 
-    1. Check the time point of the upstream and downstream clusters. In the case of two TiDB clusters, make sure that data in the two clusters are consistent at certain time points. For example, the data of TiDB A at `ts=1` and the data of TiDB B at `ts=2` are consistent.
+    1.  上流クラスタと下流クラスタの時点を確認します。2つのTiDBクラスタがある場合、特定の時点において2つのクラスタのデータが整合していることを確認します。例えば、TiDB Aの`ts=1`のデータとTiDB Bの`ts=2`のデータは整合しています。
 
-    2. When you create the changefeed, set the `--start-ts` of the changefeed for the upstream cluster to the corresponding `tso`. That is, if the upstream cluster is TiDB A, set `--start-ts=1`; if the upstream cluster is TiDB B, set `--start-ts=2`.
+    2.  changefeed を作成する際、上流クラスターの changefeed の`--start-ts`対応する`tso`に設定します。つまり、上流クラスターが TiDB A の場合は`--start-ts=1` 、上流クラスターが TiDB B の場合は`--start-ts=2`設定します。
 
-4. In the configuration file specified by the `--config` parameter, add the following configuration:
+4.  `--config`パラメータで指定された構成ファイルに、次の構成を追加します。
 
     ```toml
     # Whether to enable the bi-directional replication mode
     bdr-mode = true
     ```
 
-After the configuration takes effect, the clusters can perform bi-directional replication.
+構成が有効になると、クラスターは双方向のレプリケーションを実行できるようになります。
 
-## DDL types
+## DDL型 {#ddl-types}
 
-Starting from v7.6.0, to support DDL replication as much as possible in bi-directional replication, TiDB divides the [DDLs that TiCDC originally supports](/ticdc/ticdc-ddl.md) into two types: replicable DDLs and non-replicable DDLs, according to the impact of DDLs on the business.
+v7.6.0 以降、双方向レプリケーションで DDL レプリケーションを可能な限りサポートするために、TiDB は、DDL がビジネスに与える影響に応じて、DDL をレプリケート可能な DDL とレプリケート不可能な DDL の[TiCDCが元々サポートしていたDDL](/ticdc/ticdc-ddl.md)種類に分割します。
 
-### Replicable DDLs
+### 複製可能なDDL {#replicable-ddls}
 
-Replicable DDLs are the DDLs that can be directly executed and replicated to other TiDB clusters in bi-directional replication.
+レプリケート可能な DDL は、直接実行して双方向レプリケーションで他の TiDB クラスターにレプリケートできる DDL です。
 
-Replicable DDLs include:
+レプリケート可能な DDL には次のものが含まれます。
 
-- `CREATE DATABASE`
-- `CREATE TABLE`
-- `ADD COLUMN`: the column can be `null`, or has `not null` and `default value` at the same time
-- `ADD NON-UNIQUE INDEX`
-- `DROP INDEX`
-- `MODIFY COLUMN`: you can only modify the `default value` and `comment` of the column
-- `ALTER COLUMN DEFAULT VALUE`
-- `MODIFY TABLE COMMENT`
-- `RENAME INDEX`
-- `ADD TABLE PARTITION`
-- `DROP PRIMARY KEY`
-- `ALTER TABLE INDEX VISIBILITY`
-- `ALTER TABLE TTL`
-- `ALTER TABLE REMOVE TTL`
-- `CREATE VIEW`
-- `DROP VIEW`
+-   `CREATE DATABASE`
+-   `CREATE TABLE`
+-   `ADD COLUMN` : 列は`null`になるか、同時に`not null`と`default value`になります
+-   `ADD NON-UNIQUE INDEX`
+-   `DROP INDEX`
+-   `MODIFY COLUMN` : 列の`default value`と`comment`のみ変更できます
+-   `ALTER COLUMN DEFAULT VALUE`
+-   `MODIFY TABLE COMMENT`
+-   `RENAME INDEX`
+-   `ADD TABLE PARTITION`
+-   `DROP PRIMARY KEY`
+-   `ALTER TABLE INDEX VISIBILITY`
+-   `ALTER TABLE TTL`
+-   `ALTER TABLE REMOVE TTL`
+-   `CREATE VIEW`
+-   `DROP VIEW`
 
-### Non-replicable DDLs
+### 複製不可能なDDL {#non-replicable-ddls}
 
-Non-replicable DDLs are the DDLs that have a great impact on the business, and might cause data inconsistency between clusters. Non-replicable DDLs cannot be directly replicated to other TiDB clusters in bi-directional replication through TiCDC. Non-replicable DDLs must be executed through specific operations.
+複製不可能なDDLは、ビジネスに大きな影響を与え、クラスタ間のデータ不整合を引き起こす可能性のあるDDLです。複製不可能なDDLは、TiCDCを介した双方向レプリケーションにおいて、他のTiDBクラスタに直接複製することはできません。複製不可能なDDLは、特定の操作を通じて実行する必要があります。
 
-Non-replicable DDLs include:
+レプリケートできない DDL には次のものが含まれます。
 
-- `DROP DATABASE`
-- `DROP TABLE`
-- `ADD COLUMN`: the column is `not null` and does not have a `default value`
-- `DROP COLUMN`
-- `ADD UNIQUE INDEX`
-- `TRUNCATE TABLE`
-- `MODIFY COLUMN`: you can modify the attributes of the column except `default value` and `comment`
-- `RENAME TABLE`
-- `DROP PARTITION`
-- `TRUNCATE PARTITION`
-- `ALTER TABLE CHARACTER SET`
-- `ALTER DATABASE CHARACTER SET`
-- `RECOVER TABLE`
-- `ADD PRIMARY KEY`
-- `REBASE AUTO ID`
-- `EXCHANGE PARTITION`
-- `REORGANIZE PARTITION`
+-   `DROP DATABASE`
+-   `DROP TABLE`
+-   `ADD COLUMN` : 列は`not null`で、 `default value`はありません
+-   `DROP COLUMN`
+-   `ADD UNIQUE INDEX`
+-   `TRUNCATE TABLE`
+-   `MODIFY COLUMN` : `default value`と`comment`除く列の属性を変更できます
+-   `RENAME TABLE`
+-   `DROP PARTITION`
+-   `TRUNCATE PARTITION`
+-   `ALTER TABLE CHARACTER SET`
+-   `ALTER DATABASE CHARACTER SET`
+-   `RECOVER TABLE`
+-   `ADD PRIMARY KEY`
+-   `REBASE AUTO ID`
+-   `EXCHANGE PARTITION`
+-   `REORGANIZE PARTITION`
 
-## DDL replication
+## DDLレプリケーション {#ddl-replication}
 
-To solve the problem of replicable DDLs and non-replicable DDLs, TiDB introduces the following BDR roles:
+レプリケート可能な DDL とレプリケート不可能な DDL の問題を解決するために、TiDB は次の BDR ロールを導入します。
 
-- `PRIMARY`: You can execute replicable DDLs, but not non-replicable DDLs. Replicable DDLs executed in a PRIMARY cluster will be replicated to the downstream by TiCDC.
-- `SECONDARY`: You cannot execute replicable DDLs or non-replicable DDLs. However, DDLs executed in a PRIMARY cluster can be replicated to a SECONDARY cluster by TiCDC.
+-   `PRIMARY` : レプリケート可能なDDLは実行できますが、レプリケート不可能なDDLは実行できません。プライマリクラスターで実行されたレプリケート可能なDDLは、TiCDCによってダウンストリームにレプリケートされます。
+-   `SECONDARY` ：レプリケート可能なDDLもレプリケート不可能なDDLも実行できません。ただし、プライマリクラスターで実行されたDDLは、TiCDCによってセカンダリクラスターにレプリケートできます。
 
-When no BDR role is set, you can execute any DDL. However, the changefeed in BDR mode does not replicate any DDL on that cluster.
+BDRロールが設定されていない場合、任意のDDLを実行できます。ただし、BDRモードの変更フィードでは、そのクラスター上のDDLはレプリケートされません。
 
-In short, in BDR mode, TiCDC only replicates replicable DDLs in the PRIMARY cluster to the downstream.
+つまり、BDR モードでは、TiCDC はプライマリ クラスター内の複製可能な DDL のみをダウンストリームに複製します。
 
-### Replication scenarios of replicable DDLs
+### 複製可能なDDLのレプリケーションシナリオ {#replication-scenarios-of-replicable-ddls}
 
-1. Choose a TiDB cluster and execute `ADMIN SET BDR ROLE PRIMARY` to set it as the primary cluster.
+1.  TiDB クラスターを選択し、 `ADMIN SET BDR ROLE PRIMARY`実行してそれをプライマリ クラスターとして設定します。
 
     ```sql
     ADMIN SET BDR ROLE PRIMARY;
@@ -113,53 +113,55 @@ In short, in BDR mode, TiCDC only replicates replicable DDLs in the PRIMARY clus
     +----------+
     ```
 
-2. On other TiDB clusters, execute `ADMIN SET BDR ROLE SECONDARY` to set them as the secondary clusters.
-3. Execute **replicable DDLs** on the primary cluster. The successfully executed DDLs will be replicated to the secondary clusters by TiCDC.
+2.  他の TiDB クラスターで`ADMIN SET BDR ROLE SECONDARY`実行して、それらをセカンダリ クラスターとして設定します。
 
-> **Note:**
+3.  プライマリクラスターで**レプリケート可能なDDL**を実行します。正常に実行されたDDLは、TiCDCによってセカンダリクラスターにレプリケートされます。
+
+> **注記：**
 >
-> To prevent misuse:
+> 不正使用を防ぐために:
 >
-> - If you try to execute **non-replicable DDLs** on the primary cluster, you will get the [Error 8263](/error-codes.md).
-> - If you try to execute **replicable DDLs** or **non-replicable DDLs** on the secondary clusters, you will get the [Error 8263](/error-codes.md).
+> -   プライマリ クラスターで**レプリケートできない DDL**を実行しようとすると、 [エラー8263](/error-codes.md)返されます。
+> -   セカンダリ クラスターで**レプリケート可能な DDL**または**レプリケート不可能な DDL**を実行しようとすると、 [エラー8263](/error-codes.md)返されます。
 
-### Replication scenarios of non-replicable DDLs
+### 複製不可能なDDLのレプリケーションシナリオ {#replication-scenarios-of-non-replicable-ddls}
 
-1. Execute `ADMIN UNSET BDR ROLE` on all TiDB clusters to unset the BDR role.
-2. Stop writing data to the tables that need to execute DDLs in all clusters.
-3. Wait until all writes to the corresponding tables in all clusters are replicated to other clusters, and then manually execute all DDLs on each TiDB cluster.
-4. Wait until the DDLs are completed, and then resume writing data.
-5. Follow the steps in [Replication scenarios of replicable DDLs](#replication-scenarios-of-replicable-ddls) to switch back to the replication scenario of replicable DDLs.
+1.  すべての TiDB クラスターで`ADMIN UNSET BDR ROLE`実行して、BDR ロールを設定解除します。
+2.  すべてのクラスターで DDL を実行する必要があるテーブルへのデータの書き込みを停止します。
+3.  すべてのクラスター内の対応するテーブルへのすべての書き込みが他のクラスターに複製されるまで待機し、各 TiDB クラスターですべての DDL を手動で実行します。
+4.  DDL が完了するまで待ってから、データの書き込みを再開します。
+5.  レプリケート可能な DDL のレプリケーション シナリオに戻すには、手順[複製可能なDDLのレプリケーションシナリオ](#replication-scenarios-of-replicable-ddls)に従います。
 
-> **Warning:**
+> **警告：**
 >
-> After you execute `ADMIN UNSET BDR ROLE` on all TiDB clusters, none of the DDLs are replicated by TiCDC. You need to manually execute the DDLs on each cluster separately.
+> すべてのTiDBクラスターで`ADMIN UNSET BDR ROLE`実行すると、TiCDCによってDDLは複製されません。各クラスターで個別にDDLを手動で実行する必要があります。
 
-## Stop bi-directional replication
+## 双方向レプリケーションを停止する {#stop-bi-directional-replication}
 
-After the application has stopped writing data, you can insert a special record into each cluster. By checking the two special records, you can make sure that data in two clusters are consistent.
+アプリケーションがデータの書き込みを停止した後、各クラスタに特別なレコードを挿入できます。2つの特別なレコードをチェックすることで、2つのクラスタ内のデータの整合性を確認できます。
 
-After the check is completed, you can stop the changefeed to stop bi-directional replication, and execute `ADMIN UNSET BDR ROLE` on all TiDB clusters.
+チェックが完了したら、変更フィードを停止して双方向レプリケーションを停止し、すべての TiDB クラスターで`ADMIN UNSET BDR ROLE`実行できます。
 
-## Limitations
+## 制限事項 {#limitations}
 
-- Use BDR role only in the following scenarios:
+-   BDR ロールは次のシナリオでのみ使用してください。
 
-    - 1 `PRIMARY` cluster and n `SECONDARY` clusters (replication scenarios of replicable DDLs)
-    - n clusters that have no BDR roles (replication scenarios in which you can manually execute non-replicable DDLs on each cluster)
+    -   1 `PRIMARY`クラスタと n `SECONDARY`クラスタ（複製可能な DDL のレプリケーション シナリオ）
 
-    > **Note:**
+    -   BDR ロールを持たない n 個のクラスタ（各クラスタで複製不可能な DDL を手動で実行できるレプリケーション シナリオ）
+
+    > **注記：**
     >
-    > Do not set the BDR role in other scenarios, for example, setting `PRIMARY`, `SECONDARY`, and no BDR roles at the same time. If you set the BDR role incorrectly, TiDB cannot guarantee data correctness and consistency during data replication.
+    > 他のシナリオではBDRロールを設定しないでください。例えば、BDRロールを`PRIMARY` 、 `SECONDARY` 、そして0つを同時に設定しないでください。BDRロールを誤って設定すると、TiDBはデータレプリケーション中にデータの正確性と一貫性を保証できません。
 
-- Usually do not use `AUTO_INCREMENT` or `AUTO_RANDOM` to avoid data conflicts in the replicated tables. If you need to use `AUTO_INCREMENT` or `AUTO_RANDOM`, you can set different `auto_increment_increment` and `auto_increment_offset` for different clusters to ensure that different clusters can be assigned different primary keys. For example, if there are three TiDB clusters (A, B, and C) in bi-directional replication, you can set them as follows:
+-   通常、レプリケートされたテーブルでのデータ競合を避けるため、 `AUTO_INCREMENT`または`AUTO_RANDOM`使用しないでください。5 または`AUTO_INCREMENT` `AUTO_RANDOM`使用する必要がある場合は、異なるクラスタに異なる主キーを割り当てることができるように、異なるクラスタに異なる`auto_increment_increment`と`auto_increment_offset`設定できます。例えば、双方向レプリケーションに3つのTiDBクラスタ（A、B、C）がある場合、次のように設定します。
 
-    - In Cluster A, set `auto_increment_increment=3` and `auto_increment_offset=2000`
-    - In Cluster B, set `auto_increment_increment=3` and `auto_increment_offset=2001`
-    - In Cluster C, set `auto_increment_increment=3` and `auto_increment_offset=2002`
+    -   クラスタAでは、 `auto_increment_increment=3`と`auto_increment_offset=2000`を設定します
+    -   クラスタBでは`auto_increment_increment=3`と`auto_increment_offset=2001`設定します
+    -   クラスタCでは、 `auto_increment_increment=3`と`auto_increment_offset=2002`設定します
 
-    This way, A, B, and C will not conflict with each other in the implicitly assigned `AUTO_INCREMENT` ID and `AUTO_RANDOM` ID. If you need to add a cluster in BDR mode, you need to temporarily stop writing data of the related application, set the appropriate values for `auto_increment_increment` and `auto_increment_offset` on all clusters, and then resume writing data of the related application.
+    これにより、A、B、Cは暗黙的に割り当てられた`AUTO_INCREMENT`と`AUTO_RANDOM`で互いに競合することがなくなります。BDRモードでクラスターを追加する必要がある場合は、関連アプリケーションのデータ書き込みを一時的に停止し、すべてのクラスターの`auto_increment_increment`と`auto_increment_offset`に適切な値を設定してから、関連アプリケーションのデータ書き込みを再開する必要があります。
 
-- Bi-directional replication clusters cannot detect write conflicts, which might cause undefined behaviors. Therefore, you must ensure that there are no write conflicts from the application side.
+-   双方向レプリケーションクラスタは書き込み競合を検出できないため、未定義の動作が発生する可能性があります。そのため、アプリケーション側で書き込み競合がないことを確認する必要があります。
 
-- Bi-directional replication supports more than two clusters, but does not support multiple clusters in cascading mode, that is, a cyclic replication like TiDB A -> TiDB B -> TiDB C -> TiDB A. In such a topology, if one cluster fails, the whole data replication will be affected. Therefore, to enable bi-directional replication among multiple clusters, you need to connect each cluster with every other clusters, for example, `TiDB A <-> TiDB B`, `TiDB B <-> TiDB C`, `TiDB C <-> TiDB A`.
+-   双方向レプリケーションは2つ以上のクラスタをサポートしますが、カスケードモード、つまりTiDB A -&gt; TiDB B -&gt; TiDB C -&gt; TiDB Aのような循環的なレプリケーションはサポートしません。このようなトポロジでは、1つのクラスタに障害が発生すると、データレプリケーション全体に影響が出ます。したがって、複数のクラスタ間で双方向レプリケーションを実現するには、各クラスタを他のすべてのクラスタ（例： `TiDB A <-> TiDB B` `TiDB C <-> TiDB A`に接続する必要があります`TiDB B <-> TiDB C`

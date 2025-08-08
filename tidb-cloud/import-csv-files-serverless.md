@@ -1,61 +1,63 @@
 ---
-title: Import CSV Files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud OSS into {{{ .starter }}}
-summary: Learn how to import CSV files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into {{{ .starter }}}.
+title: Import CSV Files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud OSS into TiDB Cloud Serverless
+summary: Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service (OSS) からTiDB Cloud Serverless に CSV ファイルをインポートする方法を学習します。
 ---
 
-# Import CSV Files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud OSS into {{{ .starter }}}
+# Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud OSS から CSV ファイルをTiDB Cloud Serverless にインポートする {#import-csv-files-from-amazon-s3-gcs-azure-blob-storage-or-alibaba-cloud-oss-into-tidb-cloud-serverless}
 
-This document describes how to import CSV files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into {{{ .starter }}}.
+このドキュメントでは、Amazon Simple Storage Service (Amazon S3)、Google Cloud Storage (GCS)、Azure Blob Storage、または Alibaba Cloud Object Storage Service (OSS) からTiDB Cloud Serverless に CSV ファイルをインポートする方法について説明します。
 
-## Limitations
+## 制限事項 {#limitations}
 
-- To ensure data consistency, {{{ .starter }}} allows to import CSV files into empty tables only. To import data into an existing table that already contains data, you can use {{{ .starter }}} to import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
+-   データの一貫性を確保するため、 TiDB Cloud Serverless では空のテーブルへのCSVファイルのインポートのみが許可されています。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントに従ってTiDB Cloud Serverless を使用して一時的な空のテーブルにデータをインポートし、 `INSERT SELECT`ステートメントを使用してデータを対象の既存テーブルにコピーします。
 
-## Step 1. Prepare the CSV files
+## ステップ1.CSVファイルを準備する {#step-1-prepare-the-csv-files}
 
-1. If a CSV file is larger than 256 MB, consider splitting it into smaller files, each with a size around 256 MB.
+1.  CSV ファイルが 256 MB より大きい場合は、サイズがそれぞれ約 256 MB の小さなファイルに分割することを検討してください。
 
-    {{{ .starter }}} supports importing very large CSV files but performs best with multiple input files around 256 MB in size. This is because {{{ .starter }}} can process multiple files in parallel, which can greatly improve the import speed.
+    TiDB Cloud Serverlessは非常に大きなCSVファイルのインポートをサポートしていますが、256MB程度の複数の入力ファイルで最適なパフォーマンスを発揮します。これは、 TiDB Cloud Serverlessが複数のファイルを並列処理できるため、インポート速度が大幅に向上するからです。
 
-2. Name the CSV files as follows:
+2.  CSV ファイルに次のように名前を付けます。
 
-    - If a CSV file contains all data of an entire table, name the file in the `${db_name}.${table_name}.csv` format, which maps to the `${db_name}.${table_name}` table when you import the data.
-    - If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.000001.csv` and `${db_name}.${table_name}.000002.csv`. The numeric suffixes can be inconsecutive but must be in ascending order. You also need to add extra zeros before the number to ensure all the suffixes are in the same length.
-    - {{{ .starter }}} supports importing compressed files in the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`. If you want to import compressed CSV files, name the files in the `${db_name}.${table_name}.${suffix}.csv.${compress}` format, in which `${suffix}` is optional and can be any integer such as '000001'. For example, if you want to import the `trips.000001.csv.gz` file to the `bikeshare.trips` table, you need to rename the file as `bikeshare.trips.000001.csv.gz`.
+    -   CSV ファイルにテーブル全体のすべてのデータが含まれている場合は、データをインポートするときに`${db_name}.${table_name}`テーブルにマップされる`${db_name}.${table_name}.csv`形式でファイルに名前を付けます。
 
-    > **Note:**
+    -   1つのテーブルのデータが複数のCSVファイルに分割されている場合は、これらのCSVファイルに数値のサフィックスを追加してください。例： `${db_name}.${table_name}.000001.csv`と`${db_name}.${table_name}.000002.csv`数値のサフィックスは連続していなくても構いませんが、昇順である必要があります。また、すべてのサフィックスの長さを揃えるため、数値の前にゼロを追加する必要があります。
+
+    -   TiDB Cloud Serverlessは、以下の形式の圧縮ファイルのインポートをサポートしています： `.gzip` 、 `.gz` 、 `.zstd` 、 `.zst` 、 `.snappy` 。圧縮されたCSVファイルをインポートする場合は、ファイル名を`${db_name}.${table_name}.${suffix}.csv.${compress}`形式にしてください。13 `${suffix}`オプションで、「000001」などの任意の整数にすることができます。例えば、 `trips.000001.csv.gz`ファイルを`bikeshare.trips`テーブルにインポートする場合は、ファイル名を`bikeshare.trips.000001.csv.gz`に変更する必要があります。
+
+    > **注記：**
     >
-    > - To achieve better performance, it is recommended to limit the size of each compressed file to 100 MiB.
-    > - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
-    > - For uncompressed files, if you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **Mapping Settings** in [Step 4](#step-4-import-csv-files) to import your source data to a single target table.
+    > -   パフォーマンスを向上させるには、各圧縮ファイルのサイズを 100 MiB に制限することをお勧めします。
+    > -   Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。その他の Snappy 圧縮形式はサポートされていません。
+    > -   非圧縮ファイルの場合、前述のルールに従って CSV ファイル名を更新できないケース (たとえば、CSV ファイル リンクが他のプログラムでも使用されている場合) は、ファイル名を変更せずに、 [ステップ4](#step-4-import-csv-files)の**マッピング設定**を使用してソース データを単一のターゲット テーブルにインポートできます。
 
-## Step 2. Create the target table schemas
+## ステップ2. ターゲットテーブルスキーマを作成する {#step-2-create-the-target-table-schemas}
 
-Because CSV files do not contain schema information, before importing data from CSV files into {{{ .starter }}}, you need to create the table schemas using either of the following methods:
+CSV ファイルにはスキーマ情報が含まれていないため、CSV ファイルからTiDB Cloud Serverless にデータをインポートする前に、次のいずれかの方法でテーブル スキーマを作成する必要があります。
 
-- Method 1: In {{{ .starter }}}, create the target databases and tables for your source data.
+-   方法 1: TiDB Cloud Serverless で、ソース データのターゲット データベースとテーブルを作成します。
 
-- Method 2: In the Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service directory where the CSV files are located, create the target table schema files for your source data as follows:
+-   方法 2: CSV ファイルが保存されている Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service ディレクトリで、次のようにソース データのターゲット テーブル スキーマ ファイルを作成します。
 
-    1. Create database schema files for your source data.
+    1.  ソース データのデータベース スキーマ ファイルを作成します。
 
-        If your CSV files follow the naming rules in [Step 1](#step-1-prepare-the-csv-files), the database schema files are optional for the data import. Otherwise, the database schema files are mandatory.
+        CSVファイルが[ステップ1](#step-1-prepare-the-csv-files)の命名規則に従っている場合、データのインポート時にデータベーススキーマファイルはオプションです。それ以外の場合は、データベーススキーマファイルは必須です。
 
-        Each database schema file must be in the `${db_name}-schema-create.sql` format and contain a `CREATE DATABASE` DDL statement. With this file, {{{ .starter }}} will create the `${db_name}` database to store your data when you import the data.
+        各データベーススキーマファイルは`${db_name}-schema-create.sql`形式で、 `CREATE DATABASE` DDLステートメントを含んでいる必要があります。このファイルを使用して、 TiDB Cloud Serverlessはデータをインポートする際に、データを格納するための`${db_name}`データベースを作成します。
 
-        For example, if you create a `mydb-scehma-create.sql` file that contains the following statement, {{{ .starter }}} will create the `mydb` database when you import the data.
+        たとえば、次のステートメントを含む`mydb-scehma-create.sql`ファイルを作成すると、 TiDB Cloud Serverless はデータをインポートするときに`mydb`データベースを作成します。
 
         ```sql
         CREATE DATABASE mydb;
         ```
 
-    2. Create table schema files for your source data.
+    2.  ソース データのテーブル スキーマ ファイルを作成します。
 
-        If you do not include the table schema files in the Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service directory where the CSV files are located, {{{ .starter }}} will not create the corresponding tables for you when you import the data.
+        CSV ファイルが保存されている Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service ディレクトリにテーブル スキーマ ファイルを含めない場合、 TiDB Cloud Serverless はデータをインポートしたときに対応するテーブルを作成しません。
 
-        Each table schema file must be in the `${db_name}.${table_name}-schema.sql` format and contain a `CREATE TABLE` DDL statement. With this file, {{{ .starter }}} will create the `${db_table}` table in the `${db_name}` database when you import the data.
+        各テーブルスキーマファイルは`${db_name}.${table_name}-schema.sql`形式で、 `CREATE TABLE` DDLステートメントを含む必要があります。このファイルを使用することで、 TiDB Cloud Serverlessはデータをインポートする際に`${db_name}`データベースに`${db_table}`テーブルを作成します。
 
-        For example, if you create a `mydb.mytable-schema.sql` file that contains the following statement, {{{ .starter }}} will create the `mytable` table in the `mydb` database when you import the data.
+        たとえば、次のステートメントを含む`mydb.mytable-schema.sql`ファイルを作成すると、 TiDB Cloud Serverless はデータをインポートするときに`mydb`データベースに`mytable`テーブルを作成します。
 
         ```sql
         CREATE TABLE mytable (
@@ -64,254 +66,254 @@ Because CSV files do not contain schema information, before importing data from 
         COUNT INT );
         ```
 
-        > **Note:**
+        > **注記：**
         >
-        > Each `${db_name}.${table_name}-schema.sql` file should only contain a single DDL statement. If the file contains multiple DDL statements, only the first one takes effect.
+        > `${db_name}.${table_name}-schema.sql`ファイルには1つのDDL文のみを含めることができます。ファイルに複数のDDL文が含まれている場合、最初の文のみが有効になります。
 
-## Step 3. Configure cross-account access
+## ステップ3. クロスアカウントアクセスを構成する {#step-3-configure-cross-account-access}
 
-To allow {{{ .starter }}} to access the CSV files in the Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service bucket, do one of the following:
+TiDB Cloud Serverless が Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service バケット内の CSV ファイルにアクセスできるようにするには、次のいずれかを実行します。
 
-- If your CSV files are located in Amazon S3, [configure external storage access for {{{ .starter }}}](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+-   CSV ファイルが Amazon S3 にある場合は、 [TiDB Cloud Serverless の外部storageアクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access) 。
 
-    You can use either an AWS access key or a Role ARN to access your bucket. Once finished, make a note of the access key (including the access key ID and secret access key) or the Role ARN value as you will need it in [Step 4](#step-4-import-csv-files).
+    バケットにアクセスするには、AWS アクセスキーまたはロール ARN のいずれかを使用できます。完了したら、アクセスキー（アクセスキー ID とシークレットアクセスキーを含む）またはロール ARN の値をメモしておいてください。これらは[ステップ4](#step-4-import-csv-files)で必要になります。
 
-- If your CSV files are located in GCS, [configure external storage access for {{{ .starter }}}](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
+-   CSV ファイルが GCS にある場合は、 [TiDB Cloud Serverless の外部storageアクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-gcs-access) 。
 
-- If your CSV files are located in Azure Blob Storage, [configure external storage access for {{{ .starter }}}](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+-   CSV ファイルが Azure Blob Storage にある場合は、 [TiDB Cloud Serverless の外部storageアクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access) 。
 
-- If your CSV files are located in Alibaba Cloud Object Storage Service (OSS), [configure external storage access for {{{ .starter }}}](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
+-   CSV ファイルが Alibaba Cloud Object Storage Service (OSS) にある場合は、 [TiDB Cloud Serverless の外部storageアクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access) 。
 
-## Step 4. Import CSV files
+## ステップ4.CSVファイルをインポートする {#step-4-import-csv-files}
 
-To import the CSV files to {{{ .starter }}}, take the following steps:
+CSV ファイルをTiDB Cloud Serverless にインポートするには、次の手順を実行します。
 
 <SimpleTab>
 <div label="Amazon S3">
 
-1. Open the **Import** page for your target cluster.
+1.  ターゲット クラスターの**インポート**ページを開きます。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-        > **Tip:**
+        > **ヒント：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
-2. Click **Import data from Cloud Storage**.
+2.  **Cloud Storage からデータをインポート**をクリックします。
 
-3. On the **Import Data from Cloud Storage** page, provide the following information:
+3.  **「クラウド ストレージからデータをインポート」**ページで、次の情報を入力します。
 
-    - **Storage Provider**: select **Amazon S3**.
-    - **Source Files URI**:
-        - When importing one file, enter the source file URI in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `s3://sampledata/ingest/TableName.01.csv`.
-        - When importing multiple files, enter the source folder URI in the following format `s3://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
-    - **Credential**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
-        - **AWS Role ARN**: enter the AWS Role ARN value.
-        - **AWS Access Key**: enter the AWS access key ID and AWS secret access key.
+    -   **ストレージプロバイダー**: **Amazon S3**を選択します。
+    -   **ソースファイルURI** :
+        -   1つのファイルをインポートする場合は、ソースファイルのURIを次の形式で入力します`s3://[bucket_name]/[data_source_folder]/[file_name].csv` 。たとえば、 `s3://sampledata/ingest/TableName.01.csv` 。
+        -   複数のファイルをインポートする場合は、ソースフォルダのURIを次の形式で入力します`s3://[bucket_name]/[data_source_folder]/` 。たとえば、 `s3://sampledata/ingest/` 。
+    -   **認証情報**: バケットにアクセスするには、AWS ロール ARN または AWS アクセスキーのいずれかを使用できます。詳細については、 [Amazon S3 アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)参照してください。
+        -   **AWS ロール ARN** : AWS ロール ARN 値を入力します。
+        -   **AWS アクセスキー**: AWS アクセスキー ID と AWS シークレットアクセスキーを入力します。
 
-4. Click **Next**.
+4.  **「次へ」**をクリックします。
 
-5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
+5.  **宛先マッピング**セクションで、ソース ファイルをターゲット テーブルにマップする方法を指定します。
 
-    When a directory is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
+    **ソース ファイル URI**にディレクトリが指定されている場合は、**自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションがデフォルトで選択されます。
 
-    > **Note:**
+    > **注記：**
     >
-    > When a single file is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to select the target database and table for data import.
+    > **ソースファイルURI**に単一のファイルが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションは表示されず、 TiDB Cloudは**ソース**フィールドにファイル名を自動的に入力します。この場合、データのインポート対象となるデータベースとテーブルを選択するだけで済みます。
 
-    - To let TiDB Cloud automatically map all source files that follow the [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **CSV** as the data format.
+    -   TiDB Cloud が[ファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)続くすべてのソース ファイルを対応するテーブルに自動的にマップするようにするには、このオプションを選択したまま、データ形式として**CSV**を選択します。
 
-    - To manually configure the mapping rules to associate your source CSV files with the target database and table, unselect this option, and then fill in the following fields:
+    -   ソース CSV ファイルをターゲット データベースおよびテーブルに関連付けるためのマッピング ルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
 
-        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example: `TableName.01.csv`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
+        -   **ソース**: ファイル名のパターンを`[file_name].csv`形式で入力します。例: `TableName.01.csv` 。ワイルドカードを使用して複数のファイルに一致させることもできます。6と`*` `?`ワイルドカードのみがサポートされています。
 
-            - `my-data?.csv`: matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
-            - `my-data*.csv`: matches all CSV files that start with `my-data`, such as `my-data-2023.csv` and `my-data-final.csv`.
+            -   `my-data?.csv` : `my-data`で始まり、その後に`my-data1.csv`や`my-data2.csv`などの 1 文字が続くすべての CSV ファイルと一致します。
+            -   `my-data*.csv` : `my-data-2023.csv`や`my-data-final.csv`など、 `my-data`で始まるすべての CSV ファイルに一致します。
 
-        - **Target Database** and **Target Table**: select the target database and table to import the data to.
+        -   **ターゲット データベース**と**ターゲット テーブル**: データをインポートするターゲット データベースとテーブルを選択します。
 
-6. Click **Next**. TiDB Cloud scans the source files accordingly.
+6.  **「次へ」**をクリックします。TiDB TiDB Cloud はそれに応じてソースファイルをスキャンします。
 
-7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+7.  スキャン結果を確認し、見つかったデータ ファイルと対応するターゲット テーブルをチェックして、 **[インポートの開始] を**クリックします。
 
-8. When the import progress shows **Completed**, check the imported tables.
+8.  インポートの進行状況に**「完了」と**表示されたら、インポートされたテーブルを確認します。
 
 </div>
 
 <div label="Google Cloud">
 
-1. Open the **Import** page for your target cluster.
+1.  ターゲット クラスターの**インポート**ページを開きます。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-        > **Tip:**
+        > **ヒント：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
-2. Click **Import data from Cloud Storage**.
+2.  **Cloud Storage からデータをインポート**をクリックします。
 
-3. On the **Import Data from Cloud Storage** page, provide the following information:
+3.  **「クラウド ストレージからデータをインポート」**ページで、次の情報を入力します。
 
-    - **Storage Provider**: select **Google Cloud Storage**.
-    - **Source Files URI**:
-        - When importing one file, enter the source file URI in the following format `[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `[gcs|gs]://sampledata/ingest/TableName.01.csv`.
-        - When importing multiple files, enter the source folder URI in the following format `[gcs|gs]://[bucket_name]/[data_source_folder]/`. For example, `[gcs|gs]://sampledata/ingest/`.
-    - **Credential**: you can use a GCS IAM Role Service Account key to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
+    -   **ストレージ プロバイダー**: **Google Cloud Storage**を選択します。
+    -   **ソースファイルURI** :
+        -   1つのファイルをインポートする場合は、ソースファイルのURIを次の形式で入力します`[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].csv` 。たとえば、 `[gcs|gs]://sampledata/ingest/TableName.01.csv` 。
+        -   複数のファイルをインポートする場合は、ソースフォルダのURIを次の形式で入力します`[gcs|gs]://[bucket_name]/[data_source_folder]/` 。たとえば、 `[gcs|gs]://sampledata/ingest/` 。
+    -   **認証情報**: GCS IAMロールのサービスアカウントキーを使用してバケットにアクセスできます。詳細については、 [GCS アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-gcs-access)ご覧ください。
 
-4. Click **Next**.
+4.  **「次へ」**をクリックします。
 
-5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
+5.  **宛先マッピング**セクションで、ソース ファイルをターゲット テーブルにマップする方法を指定します。
 
-    When a directory is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
+    **ソース ファイル URI**にディレクトリが指定されている場合は、**自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションがデフォルトで選択されます。
 
-    > **Note:**
+    > **注記：**
     >
-    > When a single file is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to select the target database and table for data import.
+    > **ソースファイルURI**に単一のファイルが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションは表示されず、 TiDB Cloudは**ソース**フィールドにファイル名を自動的に入力します。この場合、データのインポート対象となるデータベースとテーブルを選択するだけで済みます。
 
-    - To let TiDB Cloud automatically map all source files that follow the [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **CSV** as the data format.
+    -   TiDB Cloud が[ファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)続くすべてのソース ファイルを対応するテーブルに自動的にマップするようにするには、このオプションを選択したまま、データ形式として**CSV**を選択します。
 
-    - To manually configure the mapping rules to associate your source CSV files with the target database and table, unselect this option, and then fill in the following fields:
+    -   ソース CSV ファイルをターゲット データベースおよびテーブルに関連付けるためのマッピング ルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
 
-        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example: `TableName.01.csv`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
+        -   **ソース**: ファイル名のパターンを`[file_name].csv`形式で入力します。例: `TableName.01.csv` 。ワイルドカードを使用して複数のファイルに一致させることもできます。6と`*` `?`ワイルドカードのみがサポートされています。
 
-            - `my-data?.csv`: matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
-            - `my-data*.csv`: matches all CSV files that start with `my-data`, such as `my-data-2023.csv` and `my-data-final.csv`.
+            -   `my-data?.csv` : `my-data`で始まり、その後に`my-data1.csv`や`my-data2.csv`などの 1 文字が続くすべての CSV ファイルと一致します。
+            -   `my-data*.csv` : `my-data-2023.csv`や`my-data-final.csv`など、 `my-data`で始まるすべての CSV ファイルに一致します。
 
-        - **Target Database** and **Target Table**: select the target database and table to import the data to.
+        -   **ターゲット データベース**と**ターゲット テーブル**: データをインポートするターゲット データベースとテーブルを選択します。
 
-6. Click **Next**. TiDB Cloud scans the source files accordingly.
+6.  **「次へ」**をクリックします。TiDB TiDB Cloud はそれに応じてソースファイルをスキャンします。
 
-7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+7.  スキャン結果を確認し、見つかったデータ ファイルと対応するターゲット テーブルをチェックして、 **[インポートの開始] を**クリックします。
 
-8. When the import progress shows **Completed**, check the imported tables.
+8.  インポートの進行状況に**「完了」と**表示されたら、インポートされたテーブルを確認します。
 
 </div>
 
 <div label="Azure Blob Storage">
 
-1. Open the **Import** page for your target cluster.
+1.  ターゲット クラスターの**インポート**ページを開きます。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-        > **Tip:**
+        > **ヒント：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
-2. Click **Import data from Cloud Storage**.
+2.  **Cloud Storage からデータをインポート**をクリックします。
 
-3. On the **Import Data from Cloud Storage** page, provide the following information:
+3.  **「クラウド ストレージからデータをインポート」**ページで、次の情報を入力します。
 
-    - **Storage Provider**: select **Azure Blob Storage**.
-    - **Source Files URI**:
-        - When importing one file, enter the source file URI in the following format `[azure|https]://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `[azure|https]://sampledata/ingest/TableName.01.csv`.
-        - When importing multiple files, enter the source folder URI in the following format `[azure|https]://[bucket_name]/[data_source_folder]/`. For example, `[azure|https]://sampledata/ingest/`.
-    - **Credential**: you can use a shared access signature (SAS) token to access your bucket. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+    -   **ストレージ プロバイダー**: **Azure Blob Storage**を選択します。
+    -   **ソースファイルURI** :
+        -   1つのファイルをインポートする場合は、ソースファイルのURIを次の形式で入力します`[azure|https]://[bucket_name]/[data_source_folder]/[file_name].csv` 。たとえば、 `[azure|https]://sampledata/ingest/TableName.01.csv` 。
+        -   複数のファイルをインポートする場合は、ソースフォルダのURIを次の形式で入力します`[azure|https]://[bucket_name]/[data_source_folder]/` 。たとえば、 `[azure|https]://sampledata/ingest/` 。
+    -   **認証情報**：バケットにアクセスするには、Shared Access Signature（SAS）トークンを使用できます。詳細については、 [Azure Blob Storage アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)ご覧ください。
 
-4. Click **Next**.
+4.  **「次へ」**をクリックします。
 
-5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
+5.  **宛先マッピング**セクションで、ソース ファイルをターゲット テーブルにマップする方法を指定します。
 
-    When a directory is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
+    **ソース ファイル URI**にディレクトリが指定されている場合は、**自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションがデフォルトで選択されます。
 
-    > **Note:**
+    > **注記：**
     >
-    > When a single file is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to select the target database and table for data import.
+    > **ソースファイルURI**に単一のファイルが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションは表示されず、 TiDB Cloudは**ソース**フィールドにファイル名を自動的に入力します。この場合、データのインポート対象となるデータベースとテーブルを選択するだけで済みます。
 
-    - To let TiDB Cloud automatically map all source files that follow the [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **CSV** as the data format.
+    -   TiDB Cloud が[ファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)続くすべてのソース ファイルを対応するテーブルに自動的にマップするようにするには、このオプションを選択したまま、データ形式として**CSV**を選択します。
 
-    - To manually configure the mapping rules to associate your source CSV files with the target database and table, unselect this option, and then fill in the following fields:
+    -   ソース CSV ファイルをターゲット データベースおよびテーブルに関連付けるためのマッピング ルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
 
-        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example: `TableName.01.csv`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
+        -   **ソース**: ファイル名のパターンを`[file_name].csv`形式で入力します。例: `TableName.01.csv` 。ワイルドカードを使用して複数のファイルに一致させることもできます。6と`*` `?`ワイルドカードのみがサポートされています。
 
-            - `my-data?.csv`: matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
-            - `my-data*.csv`: matches all CSV files that start with `my-data`, such as `my-data-2023.csv` and `my-data-final.csv`.
+            -   `my-data?.csv` : `my-data`で始まり、その後に`my-data1.csv`や`my-data2.csv`などの 1 文字が続くすべての CSV ファイルと一致します。
+            -   `my-data*.csv` : `my-data-2023.csv`や`my-data-final.csv`など、 `my-data`で始まるすべての CSV ファイルに一致します。
 
-        - **Target Database** and **Target Table**: select the target database and table to import the data to.
+        -   **ターゲット データベース**と**ターゲット テーブル**: データをインポートするターゲット データベースとテーブルを選択します。
 
-6. Click **Next**. TiDB Cloud scans the source files accordingly.
+6.  **「次へ」**をクリックします。TiDB TiDB Cloud はそれに応じてソースファイルをスキャンします。
 
-7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+7.  スキャン結果を確認し、見つかったデータ ファイルと対応するターゲット テーブルをチェックして、 **[インポートの開始] を**クリックします。
 
-8. When the import progress shows **Completed**, check the imported tables.
+8.  インポートの進行状況に**「完了」と**表示されたら、インポートされたテーブルを確認します。
 
 </div>
 
 <div label="Alibaba Cloud Object Storage Service (OSS)">
 
-1. Open the **Import** page for your target cluster.
+1.  ターゲット クラスターの**インポート**ページを開きます。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-        > **Tip:**
+        > **ヒント：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
-2. Click **Import data from Cloud Storage**.
+2.  **「Cloud Storage からデータをインポート」**をクリックします。
 
-3. On the **Import Data from Cloud Storage** page, provide the following information:
+3.  **「クラウド ストレージからデータをインポート」**ページで、次の情報を入力します。
 
-    - **Storage Provider**: select **Alibaba Cloud OSS**.
-    - **Source Files URI**:
-        - When importing one file, enter the source file URI in the following format `oss://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `oss://sampledata/ingest/TableName.01.csv`.
-        - When importing multiple files, enter the source folder URI in the following format `oss://[bucket_name]/[data_source_folder]/`. For example, `oss://sampledata/ingest/`.
-    - **Credential**: you can use an AccessKey pair to access your bucket. For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
+    -   **ストレージプロバイダー**: **Alibaba Cloud OSS**を選択します。
+    -   **ソースファイルURI** :
+        -   1つのファイルをインポートする場合は、ソースファイルのURIを次の形式で入力します`oss://[bucket_name]/[data_source_folder]/[file_name].csv` 。たとえば、 `oss://sampledata/ingest/TableName.01.csv` 。
+        -   複数のファイルをインポートする場合は、ソースフォルダのURIを次の形式で入力します`oss://[bucket_name]/[data_source_folder]/` 。たとえば、 `oss://sampledata/ingest/` 。
+    -   **認証情報**: アクセスキーペアを使用してバケットにアクセスできます。詳細については、 [Alibaba Cloud Object Storage Service (OSS) アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access)ご覧ください。
 
-4. Click **Next**.
+4.  **「次へ」**をクリックします。
 
-5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
+5.  **宛先マッピング**セクションで、ソース ファイルをターゲット テーブルにマップする方法を指定します。
 
-    When a directory is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
+    **ソース ファイル URI**にディレクトリが指定されている場合は、**自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションがデフォルトで選択されます。
 
-    > **Note:**
+    > **注記：**
     >
-    > When a single file is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud automatically populates the **Source** field with the file name. In this case, you only need to select the target database and table for data import.
+    > **ソースファイルURI**に単一のファイルが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションは表示されず、 TiDB Cloudは**ソース**フィールドにファイル名を自動的に入力します。この場合、データのインポート対象となるデータベースとテーブルを選択するだけで済みます。
 
-    - To let TiDB Cloud automatically map all source files that follow the [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **CSV** as the data format.
+    -   TiDB Cloud が[ファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)続くすべてのソース ファイルを対応するテーブルに自動的にマップするようにするには、このオプションを選択したまま、データ形式として**CSV**を選択します。
 
-    - To manually configure the mapping rules to associate your source CSV files with the target database and table, unselect this option, and then fill in the following fields:
+    -   ソース CSV ファイルをターゲット データベースおよびテーブルに関連付けるためのマッピング ルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
 
-        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example: `TableName.01.csv`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
+        -   **ソース**: ファイル名のパターンを`[file_name].csv`形式で入力します。例: `TableName.01.csv` 。ワイルドカードを使用して複数のファイルに一致させることもできます。6と`*` `?`ワイルドカードのみがサポートされています。
 
-            - `my-data?.csv`: matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
-            - `my-data*.csv`: matches all CSV files that start with `my-data`, such as `my-data-2023.csv` and `my-data-final.csv`.
+            -   `my-data?.csv` : `my-data`で始まり、その後に`my-data1.csv`や`my-data2.csv`などの 1 文字が続くすべての CSV ファイルと一致します。
+            -   `my-data*.csv` : `my-data-2023.csv`や`my-data-final.csv`など、 `my-data`で始まるすべての CSV ファイルに一致します。
 
-        - **Target Database** and **Target Table**: select the target database and table to import the data to.
+        -   **ターゲット データベース**と**ターゲット テーブル**: データをインポートするターゲット データベースとテーブルを選択します。
 
-6. Click **Next**. TiDB Cloud scans the source files accordingly.
+6.  **「次へ」**をクリックします。TiDB TiDB Cloud はそれに応じてソースファイルをスキャンします。
 
-7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+7.  スキャン結果を確認し、見つかったデータ ファイルと対応するターゲット テーブルをチェックして、 **[インポートの開始] を**クリックします。
 
-8. When the import progress shows **Completed**, check the imported tables.
+8.  インポートの進行状況に**「完了」と**表示されたら、インポートされたテーブルを確認します。
 
 </div>
 
 </SimpleTab>
 
-When you run an import task, if any unsupported or invalid conversions are detected, {{{ .starter }}} terminates the import job automatically and reports an importing error.
+インポート タスクを実行するときに、サポートされていない変換または無効な変換が検出されると、 TiDB Cloud Serverless はインポート ジョブを自動的に終了し、インポート エラーを報告します。
 
-If you get an importing error, do the following:
+インポート エラーが発生した場合は、次の手順を実行します。
 
-1. Drop the partially imported table.
-2. Check the table schema file. If there are any errors, correct the table schema file.
-3. Check the data types in the CSV files.
-4. Try the import task again.
+1.  部分的にインポートされたテーブルを削除します。
+2.  テーブルスキーマファイルを確認してください。エラーがある場合は、テーブルスキーマファイルを修正してください。
+3.  CSV ファイル内のデータ型を確認します。
+4.  インポートタスクをもう一度試してください。
 
-## Troubleshooting
+## トラブルシューティング {#troubleshooting}
 
-### Resolve warnings during data import
+### データのインポート中に警告を解決する {#resolve-warnings-during-data-import}
 
-After clicking **Start Import**, if you see a warning message such as `can't find the corresponding source files`, resolve this by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes.
+**[インポートの開始]**をクリックした後、 `can't find the corresponding source files`などの警告メッセージが表示された場合は、正しいソース ファイルを指定するか、 [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って既存のファイルの名前を変更するか、 **[詳細設定]**を使用して変更を加えることで、この問題を解決します。
 
-After resolving these issues, you need to import the data again.
+これらの問題を解決した後、データを再度インポートする必要があります。
 
-### Zero rows in the imported tables
+### インポートされたテーブルに行が 0 行あります {#zero-rows-in-the-imported-tables}
 
-After the import progress shows **Completed**, check the imported tables. If the number of rows is zero, it means no data files matched the Bucket URI that you entered. In this case, resolve this issue by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes. After that, import those tables again.
+インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。行数が0の場合、入力したバケットURIに一致するデータファイルが存在しないことを意味します。この場合、正しいソースファイルを指定するか、 [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って既存のファイルの名前を変更するか、**詳細設定**を使用して変更を加えることで問題を解決してください。その後、該当するテーブルを再度インポートしてください。

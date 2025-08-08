@@ -1,50 +1,50 @@
 ---
 title: Full-Text Search with SQL
-summary: Full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
+summary: 全文検索を使用すると、キーワードに完全一致するドキュメントを検索できます。検索拡張生成（RAG）シナリオでは、全文検索とベクター検索を併用することで、検索品質を向上させることができます。
 aliases: ['/tidb/stable/vector-search-full-text-search-sql']
 ---
 
-# Full-Text Search with SQL
+# SQLによる全文検索 {#full-text-search-with-sql}
 
-Unlike [Vector Search](/vector-search/vector-search-overview.md), which focuses on semantic similarity, full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
+意味的類似性に重点を置く[ベクトル検索](/vector-search/vector-search-overview.md)とは異なり、全文検索では正確なキーワードで文書を検索できます。検索拡張生成（RAG）シナリオでは、全文検索とベクトル検索を併用することで、検索品質を向上させることができます。
 
-The full-text search feature in TiDB provides the following capabilities:
+TiDB の全文検索機能は、次の機能を提供します。
 
-- **Query text data directly**: you can search any string columns directly without the embedding process.
+-   **テキスト データを直接クエリします**。埋め込みプロセスなしで任意の文字列列を直接検索できます。
 
-- **Support for multiple languages**: no need to specify the language for high-quality search. The text analyzer in TiDB supports documents in multiple languages mixed in the same table and automatically chooses the best analyzer for each document.
+-   **複数言語のサポート**：高品質な検索のために言語を指定する必要はありません。TiDBのテキストアナライザーは、同一テーブル内に複数言語の文書が混在していてもサポートし、各文書に最適なアナライザーを自動的に選択します。
 
-- **Order by relevance**: the search result can be ordered by relevance using the widely adopted [BM25 ranking](https://en.wikipedia.org/wiki/Okapi_BM25) algorithm.
+-   **関連性による並べ替え**: 広く採用されている[BM25ランキング](https://en.wikipedia.org/wiki/Okapi_BM25)アルゴリズムを使用して、検索結果を関連性によって並べ替えることができます。
 
-- **Fully compatible with SQL**: all SQL features, such as pre-filtering, post-filtering, grouping, and joining, can be used with full-text search.
+-   **SQL と完全に互換性があります**。事前フィルタリング、事後フィルタリング、グループ化、結合などのすべての SQL 機能をフルテキスト検索で使用できます。
 
-> **Tip:**
+> **ヒント：**
 >
-> For Python usage, see [Full-Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md).
+> Python の使用方法については、 [Pythonによる全文検索](/tidb-cloud/vector-search-full-text-search-python.md)参照してください。
 >
-> To use full-text search and vector search together in your AI apps, see [Hybrid Search](/tidb-cloud/vector-search-hybrid-search.md).
+> AI アプリで全文検索とベクトル検索を併用するには、 [ハイブリッド検索](/tidb-cloud/vector-search-hybrid-search.md)参照してください。
 
-## Get started
+## 始めましょう {#get-started}
 
-Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available for the following product option and regions:
+全文検索機能はまだ初期段階にあり、今後も継続的に多くのお客様にご利用いただけるよう展開していきます。現在、全文検索機能は下記の製品オプションとリージョンでのみご利用いただけます。
 
-- {{{ .starter }}}: `Frankfurt (eu-central-1)` and `Singapore (ap-southeast-1)`
+-   TiDB Cloudサーバーレス: `Frankfurt (eu-central-1)`と`Singapore (ap-southeast-1)`
 
-Before using full-text search, make sure your {{{ .starter }}} cluster is created in a supported region. If you don't have one, follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create it.
+全文検索を使用する前に、 TiDB Cloud Serverless クラスターがサポートされているリージョンに作成されていることを確認してください。まだ作成していない場合は、手順[TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って作成してください。
 
-To perform a full-text search, follow these steps:
+全文検索を実行するには、次の手順に従います。
 
-1. [**Create a full-text index**](#create-a-full-text-index): create a table with a full-text index, or add a full-text index to an existing table.
+1.  [**全文インデックスを作成する**](#create-a-full-text-index) : フルテキスト インデックスを持つテーブルを作成するか、既存のテーブルにフルテキスト インデックスを追加します。
 
-2. [**Insert text data**](#insert-text-data): insert text data into the table.
+2.  [**テキストデータを挿入する**](#insert-text-data) : テーブルにテキストデータを挿入します。
 
-3. [**Perform a full-text search**](#perform-a-full-text-search): perform a full-text search using text queries and full-text search functions.
+3.  [**全文検索を実行する**](#perform-a-full-text-search) : テキスト クエリと全文検索関数を使用して全文検索を実行します。
 
-### Create a full-text index
+### 全文インデックスを作成する {#create-a-full-text-index}
 
-To perform full-text search, a full-text index is required as it provides the necessary data structure for efficient searching and ranking. Full-text indexes can be created on new tables or added to existing tables.
+全文検索を実行するには、効率的な検索とランキングに必要なデータ構造を提供する全文インデックスが必要です。全文インデックスは、新しいテーブルに作成することも、既存のテーブルに追加することもできます。
 
-Create a table with a full-text index:
+フルテキスト インデックスを持つテーブルを作成します。
 
 ```sql
 CREATE TABLE stock_items(
@@ -54,7 +54,7 @@ CREATE TABLE stock_items(
 );
 ```
 
-Or add a full-text index to an existing table:
+または、既存のテーブルにフルテキスト インデックスを追加します。
 
 ```sql
 CREATE TABLE stock_items(
@@ -68,17 +68,17 @@ CREATE TABLE stock_items(
 ALTER TABLE stock_items ADD FULLTEXT INDEX (title) WITH PARSER MULTILINGUAL ADD_COLUMNAR_REPLICA_ON_DEMAND;
 ```
 
-The following parsers are accepted in the `WITH PARSER <PARSER_NAME>` clause:
+`WITH PARSER <PARSER_NAME>`節では次のパーサーが受け入れられます。
 
-- `STANDARD`: fast, works for English contents, splitting words by spaces and punctuation.
+-   `STANDARD` : 高速、英語コンテンツに適しており、スペースと句読点で単語を分割します。
 
-- `MULTILINGUAL`: supports multiple languages, including English, Chinese, Japanese, and Korean.
+-   `MULTILINGUAL` : 英語、中国語、日本語、韓国語など複数の言語をサポートします。
 
-### Insert text data
+### テキストデータを挿入する {#insert-text-data}
 
-Inserting data into a table with a full-text index is identical to inserting data into any other tables.
+フルテキスト インデックスを持つテーブルにデータを挿入する方法は、他のテーブルにデータを挿入する方法と同じです。
 
-For example, you can execute the following SQL statements to insert data in multiple languages. The multilingual parser in TiDB automatically processes the text.
+例えば、以下のSQL文を実行すると、複数の言語でデータを挿入できます。TiDBの多言語パーサーがテキストを自動的に処理します。
 
 ```sql
 INSERT INTO stock_items VALUES (1, "イヤホン bluetooth ワイヤレスイヤホン ");
@@ -98,11 +98,11 @@ INSERT INTO stock_items VALUES (14, "无线蓝牙耳机超长续航42小时快�
 INSERT INTO stock_items VALUES (15, "皎月银 国家补贴 心率血氧监测 蓝牙通话 智能手表 男女表");
 ```
 
-### Perform a full-text search
+### 全文検索を実行する {#perform-a-full-text-search}
 
-To perform a full-text search, you can use the `FTS_MATCH_WORD()` function.
+全文検索を実行するには、 `FTS_MATCH_WORD()`関数を使用できます。
 
-**Example: search for most relevant 10 documents**
+**例: 最も関連性の高い10件の文書を検索する**
 
 ```sql
 SELECT * FROM stock_items
@@ -139,7 +139,7 @@ SELECT * FROM stock_items
 +------+---------------------------------------------------------------------------------------------------------------+
 ```
 
-**Example: count the number of documents matching the user query**
+**例: ユーザークエリに一致するドキュメントの数を数える**
 
 ```sql
 SELECT COUNT(*) FROM stock_items
@@ -152,11 +152,11 @@ SELECT COUNT(*) FROM stock_items
 +----------+
 ```
 
-## Advanced example: Join search results with other tables
+## 高度な例: 検索結果を他のテーブルと結合する {#advanced-example-join-search-results-with-other-tables}
 
-You can combine full-text search with other SQL features such as joins and subqueries.
+全文検索を、結合やサブクエリなどの他の SQL 機能と組み合わせることができます。
 
-Assume you have a `users` table and a `tickets` table, and want to find tickets created by authors based on a full-text search of their names:
+`users`テーブルと`tickets`テーブルがあり、作成者の名前の全文検索に基づいて作成者によって作成されたチケットを見つけたいとします。
 
 ```sql
 CREATE TABLE users(
@@ -179,7 +179,7 @@ INSERT INTO tickets VALUES (2, "Ticket 2", 1);
 INSERT INTO tickets VALUES (3, "Ticket 3", 2);
 ```
 
-You can use a subquery to find matching user IDs based on the author's name, and then use these IDs in the outer query to retrieve and join related ticket information:
+サブクエリを使用して、作成者の名前に基づいて一致するユーザー ID を見つけ、これらの ID を外部クエリで使用して、関連するチケット情報を取得および結合することができます。
 
 ```sql
 SELECT t.title AS TICKET_TITLE, u.id AS AUTHOR_ID, u.name AS AUTHOR_NAME FROM tickets t
@@ -198,23 +198,23 @@ WHERE t.author_id IN
 +--------------+-----------+-------------+
 ```
 
-## See also
+## 参照 {#see-also}
 
-- [Hybrid Search](/tidb-cloud/vector-search-hybrid-search.md)
+-   [ハイブリッド検索](/tidb-cloud/vector-search-hybrid-search.md)
 
-## Feedback & help
+## フィードバックとヘルプ {#feedback-x26-help}
 
-Full-text search is still in the early stages with limited accessibility. If you would like to try full-text search in a region that is not yet available, or if you have feedback or need help, feel free to reach out to us:
+全文検索はまだ初期段階にあり、アクセス範囲が限られています。まだご利用いただけない地域で全文検索をお試しになりたい場合、またはフィードバックやサポートが必要な場合は、お気軽にお問い合わせください。
 
 <CustomContent platform="tidb">
 
-- [Join our Discord](https://discord.gg/zcqexutz2R)
+-   [Discordに参加する](https://discord.gg/zcqexutz2R)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- [Join our Discord](https://discord.gg/zcqexutz2R)
-- [Visit our Support Portal](https://tidb.support.pingcap.com/)
+-   [Discordに参加する](https://discord.gg/zcqexutz2R)
+-   [サポートポータルをご覧ください](https://tidb.support.pingcap.com/)
 
 </CustomContent>

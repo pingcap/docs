@@ -1,41 +1,39 @@
 ---
 title: Store Limit
-summary: Learn the feature of Store Limit.
+summary: ストア制限の機能について学びます。
 ---
 
-# Store Limit
+# 店舗制限 {#store-limit}
 
-Store Limit is a feature of PD. It is designed to control the scheduling speed in a finer manner for better performance in different scenarios.
+ストア制限はPDの機能です。様々なシナリオでパフォーマンスを向上させるために、スケジューリング速度をより細かく制御できるように設計されています。
 
-## Implementation principles
+## 実施原則 {#implementation-principles}
 
-PD performs scheduling at the unit of operator. An operator might contain several scheduling operations. For example:
+PDはオペレータ単位でスケジューリングを実行します。オペレータには複数のスケジューリング操作が含まれる場合があります。例：
 
-```
-"replace-down-replica {mv peer: store [2] to [3]} (kind:region,replica, region:10(4,5), createAt:2020-05-18 06:40:25.775636418 +0000 UTC m=+2168762.679540369, startAt:2020-05-18 06:40:25.775684648 +0000 UTC m=+2168762.679588599, currentStep:0, steps:[add learner peer 20 on store 3, promote learner peer 20 on store 3 to voter, remove peer on store 2])"
-```
+    "replace-down-replica {mv peer: store [2] to [3]} (kind:region,replica, region:10(4,5), createAt:2020-05-18 06:40:25.775636418 +0000 UTC m=+2168762.679540369, startAt:2020-05-18 06:40:25.775684648 +0000 UTC m=+2168762.679588599, currentStep:0, steps:[add learner peer 20 on store 3, promote learner peer 20 on store 3 to voter, remove peer on store 2])"
 
-In this above example, the `replace-down-replica` operator contains the following specific operations:
+上記の例では、 `replace-down-replica`演算子には次の特定の演算が含まれています。
 
-1. Add a learner peer with the ID `20` to `store 3`.
-2. Promote the learner peer with the ID `20` on `store 3` to a voter.
-3. Delete the peer on `store 2`.
+1.  ID `20` ～ `store 3`の学習者ピアを追加します。
+2.  ID `20` on `store 3`の学習者ピアを投票者に昇格します。
+3.  `store 2`のピアを削除します。
 
-Store Limit achieves the store-level speed limit by maintaining a mapping from store IDs to token buckets in memory. The different operations here correspond to different token buckets. Currently, Store Limit only supports limiting the speed of two operations: adding learners/peers and deleting peers. That is, each store has two types of token buckets.
+ストア制限は、ストアIDとトークンバケットのマッピングをメモリ内に保持することで、ストアレベルの速度制限を実現します。ここでの異なる操作は、それぞれ異なるトークンバケットに対応しています。現在、ストア制限は、学習者/ピアの追加とピアの削除という2つの操作の速度制限のみをサポートしています。つまり、各ストアには2種類のトークンバケットがあります。
 
-Every time an operator is generated, it checks whether enough tokens exist in the token buckets for its operations. If yes, the operator is added to the scheduling queue, and the corresponding token is taken from the token bucket. Otherwise, the operator is abandoned. Because the token bucket replenishes tokens at a fixed rate, the speed limit is thus achieved.
+オペレータが生成されるたびに、そのオペレータはトークンバケットにその操作に必要なトークンが十分にあるかどうかを確認します。十分なトークンがある場合、オペレータはスケジューリングキューに追加され、対応するトークンがトークンバケットから取得されます。十分なトークンがない場合、オペレータは破棄されます。トークンバケットは一定の速度でトークンを補充するため、速度制限はこのように達成されます。
 
-Store Limit is different from other limit-related parameters in PD (such as `region-schedule-limit` and `leader-schedule-limit`) in that it mainly limits the consuming speed of operators, while other parameters limits the generating speed of operators. Before introducing the Store Limit feature, the speed limit of scheduling is mostly at the global scope. Therefore, even if the global speed is limited, it is still possible that the scheduling operations are concentrated on some stores, affecting the performance of the cluster. By limiting the speed at a finer level, Store Limit can better control the scheduling behavior.
+ストア制限は、PDの他の制限関連パラメータ（ `region-schedule-limit`や`leader-schedule-limit`など）とは異なり、主にオペレータの消費速度を制限するのに対し、他のパラメータはオペレータの生成速度を制限します。ストア制限機能を導入する前は、スケジューリングの速度制限は主にグローバルスコープでした。そのため、グローバル速度が制限されたとしても、スケジューリング操作が一部のストアに集中し、クラスターのパフォーマンスに影響を与える可能性があります。より細かいレベルで速度を制限することで、ストア制限はスケジューリング動作をより適切に制御できます。
 
-Store Limit defines the maximum number of operations per minute. With a Store Limit of 5 operations per minute, adding a new node to the cluster will process 5 Regions per minute (`add-peer` operations). If 15 Regions require an `add-peer`, the operation will take 3 minutes (15 / 5 = 3) and consume up to 8 MiB/s ((5 × 96) / 60 = 8), assuming each Region is 96 MiB.
+ストア制限は、1分あたりの最大操作数を定義します。ストア制限が1分あたり5操作の場合、クラスターに新しいノードを追加すると、1分あたり5リージョン（ `add-peer`操作）が処理されます。15のリージョンで`add-peer`操作が必要な場合、操作には3分（15 / 5 = 3）かかり、各リージョンが96MiBであると仮定すると、最大8MiB/秒（(5 × 96) / 60 = 8）の帯域幅を消費します。
 
-## Usage
+## 使用法 {#usage}
 
-The parameters of Store Limit can be configured using [`PD Control`](/pd-control.md).
+Store Limit のパラメータは[`PD Control`](/pd-control.md)使用して設定できます。
 
-### View setting of the current store
+### 現在のストアのビュー設定 {#view-setting-of-the-current-store}
 
-To view the limit setting of the current store, run the following commands:
+現在のストアの制限設定を表示するには、次のコマンドを実行します。
 
 ```bash
 tiup ctl:v<CLUSTER_VERSION> pd store limit                         // Shows the speed limit of adding and deleting peers in all stores.
@@ -43,9 +41,9 @@ tiup ctl:v<CLUSTER_VERSION> pd store limit add-peer                // Shows the 
 tiup ctl:v<CLUSTER_VERSION> pd store limit remove-peer             // Shows the speed limit of deleting peers in all stores.
 ```
 
-### Set limit for all stores
+### 全店舗の制限を設定する {#set-limit-for-all-stores}
 
-To set the speed limit for all stores, run the following commands:
+すべてのストアの速度制限を設定するには、次のコマンドを実行します。
 
 ```bash
 tiup ctl:v<CLUSTER_VERSION> pd store limit all 5                   // All stores can at most add and delete 5 peers per minute.
@@ -53,9 +51,9 @@ tiup ctl:v<CLUSTER_VERSION> pd store limit all 5 add-peer          // All stores
 tiup ctl:v<CLUSTER_VERSION> pd store limit all 5 remove-peer       // All stores can at most delete 5 peers per minute.
 ```
 
-### Set limit for a single store
+### 単一店舗の制限を設定する {#set-limit-for-a-single-store}
 
-To set the speed limit for a single store, run the following commands:
+単一のストアに対して速度制限を設定するには、次のコマンドを実行します。
 
 ```bash
 tiup ctl:v<CLUSTER_VERSION> pd store limit 1 5                     // store 1 can at most add and delete 5 peers per minute.
@@ -63,8 +61,8 @@ tiup ctl:v<CLUSTER_VERSION> pd store limit 1 5 add-peer            // store 1 ca
 tiup ctl:v<CLUSTER_VERSION> pd store limit 1 5 remove-peer         // store 1 can at most delete 5 peers per minute.
 ```
 
-### Principles of store limit v2
+### 店舗制限の原則 v2 {#principles-of-store-limit-v2}
 
-When [`store-limit-version`](/pd-configuration-file.md#store-limit-version-new-in-v710) is set to `v2`, store limit v2 takes effect. In v2 mode, the limit of operators are dynamically adjusted based on the capability of TiKV snapshots. When TiKV has fewer pending tasks, PD increases its scheduling tasks. Otherwise, PD reduces the scheduling tasks for the node. Therefore, you do not need to manually set `store limit` to speed up the scheduling process.
+[`store-limit-version`](/pd-configuration-file.md#store-limit-version-new-in-v710) `v2`に設定すると、ストア制限 v2 が有効になります。v2 モードでは、オペレーターの制限は TiKV スナップショットの性能に基づいて動的に調整されます。TiKV の保留中のタスクが少なくなると、PD はスケジュールするタスクを増やします。そうでない場合は、PD はノードのスケジュールするタスクを減らします。したがって、スケジュール処理を高速化するために手動で`store limit`設定する必要はありません。
 
-In v2 mode, the execution speed of TiKV becomes the main bottleneck during migration. You can check whether the current scheduling speed has reached the upper limit through the **TiKV Details** > **Snapshot** > **Snapshot Speed** panel. To increase or decrease the scheduling speed of a node, you can adjust the TiKV snapshot limit ([`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec)).
+v2モードでは、TiKVの実行速度が移行時の主なボトルネックとなります。現在のスケジュール速度が上限に達しているかどうかは、 **「TiKV詳細」** &gt; **「スナップショット」** &gt; **「スナップショット速度」**パネルで確認できます。ノードのスケジュール速度を増減するには、TiKVスナップショット制限（ [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec) ）を調整します。

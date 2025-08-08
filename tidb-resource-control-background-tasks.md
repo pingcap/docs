@@ -1,96 +1,94 @@
 ---
 title: Use Resource Control to Manage Background Tasks
-summary: Introduces how to control background tasks through Resource Control.
+summary: リソース制御を通じてバックグラウンド タスクを制御する方法を紹介します。
 ---
 
-# Use Resource Control to Manage Background Tasks
+# リソース制御を使用してバックグラウンドタスクを管理する {#use-resource-control-to-manage-background-tasks}
 
-> **Warning:**
+> **警告：**
 >
-> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://docs.pingcap.com/tidb/stable/support) on GitHub.
+> この機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHubで[問題](https://docs.pingcap.com/tidb/stable/support)報告を行ってください。
 >
-> The background task management in resource control is based on TiKV's dynamic adjustment of resource quotas for CPU/IO utilization. Therefore, it relies on the available resource quota of each instance. If multiple components or instances are deployed on a single server, it is mandatory to set the appropriate resource quota for each instance through `cgroup`. It is difficult to achieve the expected effect in deployment with shared resources such as TiUP Playground.
+> リソース制御におけるバックグラウンドタスク管理は、TiKVによるCPU/IO使用率のリソースクォータの動的調整に基づいています。そのため、各インスタンスの利用可能なリソースクォータに依存します。複数のコンポーネントまたはインスタンスを単一のサーバーにデプロイする場合、 `cgroup`を通じて各インスタンスに適切なリソースクォータを設定する必要があります。TiUP PlaygroundなどのTiUPリソースとのデプロイでは、期待される効果を得ることが困難です。
 
-> **Note:**
+> **注記：**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
-Background tasks, such as data backup and automatic statistics collection, are low-priority but consume many resources. These tasks are usually triggered periodically or irregularly. During execution, they consume a lot of resources, thus affecting the performance of online high-priority tasks.
+データのバックアップや自動統計収集などのバックグラウンドタスクは、優先度が低いにもかかわらず、多くのリソースを消費します。これらのタスクは通常、定期的または不定期に実行されます。実行中は多くのリソースを消費するため、オンラインの高優先度タスクのパフォーマンスに影響を与えます。
 
-Starting from v7.4.0, the [TiDB resource control](/tidb-resource-control-ru-groups.md) feature supports managing background tasks. When a task is marked as a background task, TiKV dynamically limits the resources used by this type of task to avoid the impact on the performance of other foreground tasks. TiKV monitors the CPU and IO resources consumed by all foreground tasks in real time, and calculates the resource threshold that can be used by background tasks based on the total resource limit of the instance. All background tasks are restricted by this threshold during execution.
+バージョン7.4.0以降、 [TiDB リソース制御](/tidb-resource-control-ru-groups.md)機能はバックグラウンドタスクの管理をサポートします。タスクがバックグラウンドタスクとしてマークされると、TiKVは他のフォアグラウンドタスクのパフォーマンスへの影響を回避するため、このタイプのタスクで使用されるリソースを動的に制限します。TiKVは、すべてのフォアグラウンドタスクによって消費されるCPUおよびIOリソースをリアルタイムで監視し、インスタンスの合計リソース制限に基づいて、バックグラウンドタスクで使用できるリソースしきい値を計算します。すべてのバックグラウンドタスクは、実行中にこのしきい値によって制限されます。
 
-## `BACKGROUND` parameters
+## <code>BACKGROUND</code>パラメータ {#code-background-code-parameters}
 
-- `TASK_TYPES`: specifies the task types that need to be managed as background tasks. Use commas (`,`) to separate multiple task types.
-- `UTILIZATION_LIMIT`: limits the maximum percentage (0-100) of resources that background tasks can consume on each TiKV node. By default, TiKV calculates the available resources for background tasks based on the total resources of the node and the resources currently occupied by the foreground tasks. If `UTILIZATION_LIMIT` is configured, the resource allocated to background tasks will not exceed this limit.
+-   `TASK_TYPES` : バックグラウンドタスクとして管理する必要があるタスクの種類を指定します。複数のタスクの種類を指定する場合は、カンマ ( `,` ) で区切ります。
+-   `UTILIZATION_LIMIT` : 各 TiKV ノード上でバックグラウンドタスクが消費できるリソースの最大割合（0～100）を制限します。デフォルトでは、TiKV はノードの総リソースとフォアグラウンドタスクが現在占有しているリソースに基づいて、バックグラウンドタスクに利用可能なリソースを計算します`UTILIZATION_LIMIT`に設定すると、バックグラウンドタスクに割り当てられるリソースはこの制限を超えません。
 
-TiDB supports the following types of background tasks:
+TiDB は次の種類のバックグラウンド タスクをサポートしています。
 
 <CustomContent platform="tidb">
 
-- `lightning`: perform import tasks using [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md). Both physical and logical import modes of TiDB Lightning are supported.
-- `br`: perform backup and restore tasks using [BR](/br/backup-and-restore-overview.md). PITR is not supported.
-- `ddl`: control the resource usage during the batch data write back phase of Reorg DDLs.
-- `stats`: the [collect statistics](/statistics.md#collect-statistics) tasks that are manually executed or automatically triggered by TiDB.
-- `background`: a reserved task type. You can use the [`tidb_request_source_type`](/system-variables.md#tidb_request_source_type-new-in-v740) system variable to specify the task type of the current session as `background`.
+-   `lightning` : [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してインポートタスクを実行します。TiDB TiDB Lightningの物理インポートモードと論理インポートモードの両方がサポートされています。
+-   `br` : [BR](/br/backup-and-restore-overview.md)を使用してバックアップおよび復元タスクを実行します。PITR はサポートされていません。
+-   `ddl` : Reorg DDL のバッチ データ書き戻しフェーズ中のリソース使用量を制御します。
+-   `stats` : 手動で実行されるか、TiDB によって自動的にトリガーされる[統計を収集する](/statistics.md#collect-statistics)タスク。
+-   `background` : 予約済みのタスクタイプ。システム変数[`tidb_request_source_type`](/system-variables.md#tidb_request_source_type-new-in-v740)使用して、現在のセッションのタスクタイプを`background`に指定できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- `lightning`: perform import tasks using [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview). Both physical and logical import modes of TiDB Lightning are supported.
-- `br`: perform backup and restore tasks using [BR](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview). PITR is not supported.
-- `ddl`: control the resource usage during the batch data write back phase of Reorg DDLs.
-- `stats`: the [collect statistics](/statistics.md#collect-statistics) tasks that are manually executed or automatically triggered by TiDB.
-- `background`: a reserved task type. You can use the [`tidb_request_source_type`](/system-variables.md#tidb_request_source_type-new-in-v740) system variable to specify the task type of the current session as `background`.
+-   `lightning` : [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)を使用してインポートタスクを実行します。TiDB TiDB Lightningの物理インポートモードと論理インポートモードの両方がサポートされています。
+-   `br` : [BR](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)を使用してバックアップおよび復元タスクを実行します。PITR はサポートされていません。
+-   `ddl` : Reorg DDL のバッチ データ書き戻しフェーズ中のリソース使用量を制御します。
+-   `stats` : 手動で実行されるか、TiDB によって自動的にトリガーされる[統計を収集する](/statistics.md#collect-statistics)タスク。
+-   `background` : 予約済みのタスクタイプ。システム変数[`tidb_request_source_type`](/system-variables.md#tidb_request_source_type-new-in-v740)使用して、現在のセッションのタスクタイプを`background`に指定できます。
 
 </CustomContent>
 
-By default, the task types that are marked as background tasks are `""`, and the management of background tasks is disabled. To enable background task management, you need to manually modify the background task type of the `default` resource group. After a background task is identified and matched, Resource Control is automatically performed. This means that when system resources are insufficient, the background tasks are automatically reduced to the lowest priority to ensure the execution of foreground tasks.
+デフォルトでは、バックグラウンドタスクとしてマークされているタスクタイプは`""`で、バックグラウンドタスクの管理は無効になっています。バックグラウンドタスクの管理を有効にするには、リソースグループ`default`のバックグラウンドタスクタイプを手動で変更する必要があります。バックグラウンドタスクが識別され、マッチングされると、リソース制御が自動的に実行されます。つまり、システムリソースが不足している場合、バックグラウンドタスクの優先度は自動的に最低に下げられ、フォアグラウンドタスクの実行が確保されます。
 
-> **Note:**
+> **注記：**
 >
-> Currently, background tasks for all resource groups are bound to the `default` resource group. You can manage background task types globally through `default`. Binding background tasks to other resource groups is currently not supported.
+> 現在、すべてのリソースグループのバックグラウンドタスクは`default`リソースグループにバインドされています。3 を通じてバックグラウンドタスクの種類をグローバルに管理できます。他`default`リソースグループへのバックグラウンドタスクのバインドは現在サポートされていません。
 
-## Examples
+## 例 {#examples}
 
-1. Modify the `default` resource group by marking `br` and `ddl` as background tasks and setting the resource limit of background tasks to 30%.
+1.  `br`と`ddl`バックグラウンド タスクとしてマークし、バックグラウンド タスクのリソース制限を 30% に設定して、リソース グループ`default`を変更します。
 
     ```sql
     ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES='br,ddl', UTILIZATION_LIMIT=30);
     ```
 
-2. Change the `default` resource group to revert the background task type to its default value.
+2.  `default`リソース グループを変更して、バックグラウンド タスクの種類を既定値に戻します。
 
     ```sql
     ALTER RESOURCE GROUP `default` BACKGROUND=NULL;
     ```
 
-3. Change the `default` resource group to set the background task type to empty. In this case, all tasks of this resource group are not treated as background tasks.
+3.  `default`リソースグループを変更して、バックグラウンドタスクの種類を空に設定します。この場合、このリソースグループのすべてのタスクはバックグラウンドタスクとして扱われません。
 
     ```sql
     ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES="");
     ```
 
-4. View the background task type of the `default` resource group.
+4.  `default`リソース グループのバックグラウンド タスクの種類をビュー。
 
     ```sql
     SELECT * FROM information_schema.resource_groups WHERE NAME="default";
     ```
 
-    The output is as follows:
+    出力は次のようになります。
 
-    ```
-    +---------+------------+----------+-----------+-------------+-------------------------------------------+
-    | NAME    | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT | BACKGROUND                                |
-    +---------+------------+----------+-----------+-------------+-------------------------------------------+
-    | default | UNLIMITED  | MEDIUM   | YES       | NULL        | TASK_TYPES='br,ddl', UTILIZATION_LIMIT=30 |
-    +---------+------------+----------+-----------+-------------+-------------------------------------------+
-    ```
+        +---------+------------+----------+-----------+-------------+-------------------------------------------+
+        | NAME    | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT | BACKGROUND                                |
+        +---------+------------+----------+-----------+-------------+-------------------------------------------+
+        | default | UNLIMITED  | MEDIUM   | YES       | NULL        | TASK_TYPES='br,ddl', UTILIZATION_LIMIT=30 |
+        +---------+------------+----------+-----------+-------------+-------------------------------------------+
 
-5. To explicitly mark tasks in the current session as the background type, you can use `tidb_request_source_type` to explicitly specify the task type. The following is an example:
+5.  現在のセッションのタスクを明示的にバックグラウンドタイプとしてマークするには、 `tidb_request_source_type`使用してタスクタイプを明示的に指定します。例を以下に示します。
 
-    ``` sql
+    ```sql
     SET @@tidb_request_source_type="background";
     /* Add background task type */
     ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES="background");

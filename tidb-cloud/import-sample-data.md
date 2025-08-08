@@ -1,101 +1,101 @@
 ---
 title: Import Sample Data into TiDB Cloud Dedicated
-summary: Learn how to import sample data into TiDB Cloud Dedicated via the UI.
+summary: UI 経由でサンプル データをTiDB Cloud Dedicated にインポートする方法を学習します。
 ---
 
-# Import Sample Data into TiDB Cloud Dedicated
+# サンプルデータをTiDB Cloud Dedicatedにインポートする {#import-sample-data-into-tidb-cloud-dedicated}
 
-This document describes how to import the sample data into TiDB Cloud Dedicated via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
+このドキュメントでは、UIを介してTiDB Cloud Dedicatedにサンプルデータをインポートする方法について説明します。使用するサンプルデータは、Capital Bikeshareのデータライセンス契約に基づいてリリースされたCapital Bikeshareのシステムデータです。サンプルデータをインポートする前に、TiDBクラスタを1つ用意する必要があります。
 
 <SimpleTab>
 <div label="Amazon S3">
 
-1. Open the **Import** page for your target cluster.
+1.  ターゲット クラスターの**インポート**ページを開きます。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-        > **Tip:**
+        > **ヒント：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
-2. Select **Import data from Cloud Storage**.
+2.  **Cloud Storage からデータをインポート**を選択します。
 
-3. On the **Import Data from Amazon S3** page, configure the following source data information:
+3.  **「Amazon S3 からのデータのインポート」**ページで、次のソースデータ情報を設定します。
 
-    - **Included Schema Files**: for the sample data, select **Yes**.
-    - **Data Format**: select **SQL**. 
-    - **Folder URI** or **File URI**: enter the sample data URI `s3://tidbcloud-sample-data/data-ingestion/`.
-    - **Bucket Access**: for the sample data, you can only use a Role ARN to access its bucket. For your own data, you can use either an AWS access key or a Role ARN to access your bucket.
-        - **AWS Role ARN**: enter `arn:aws:iam::801626783489:role/import-sample-access`.
-        - **AWS Access Key**: skip this option for the sample data.
+    -   **含まれるスキーマ ファイル**: サンプル データの場合は、 **[はい]**を選択します。
+    -   **データ形式**: **SQL**を選択します。
+    -   **フォルダー URI**または**ファイル URI** : サンプル データ URI `s3://tidbcloud-sample-data/data-ingestion/`を入力します。
+    -   **バケットアクセス**：サンプルデータの場合、バケットへのアクセスにはロールARNのみを使用できます。独自のデータの場合は、AWSアクセスキーまたはロールARNのいずれかを使用してバケットにアクセスできます。
+        -   **AWS ロール ARN** : `arn:aws:iam::801626783489:role/import-sample-access`と入力します。
+        -   **AWS アクセスキー**: サンプルデータの場合はこのオプションをスキップします。
 
-4. Click **Connect** > **Start Import**.
+4.  **[接続]** &gt; **[インポートの開始] を**クリックします。
 
 </div>
 <div label="Google Cloud">
 
-1. Open the **Import** page for your target cluster.
+1.  ターゲット クラスターの**インポート**ページを開きます。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-        > **Tip:**
+        > **ヒント：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
-2. Select **Import data from Cloud Storage**.
+2.  **Cloud Storage からデータをインポート**を選択します。
 
-3. On the **Import Data from GCS** page, configure the following source data information:
+3.  **GCS からのデータのインポート**ページで、次のソース データ情報を設定します。
 
-    - **Included Schema Files**: for the sample data, select **Yes**.
-    - **Data Format**: select **SQL**.
-    - **Folder URI** or **File URI**: enter the sample data URI `gs://tidbcloud-samples-us-west1/`.
-    - **Bucket Access**: you can use a GCS IAM Role to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access).
+    -   **含まれるスキーマ ファイル**: サンプル データの場合は、 **[はい]**を選択します。
+    -   **データ形式**: **SQL**を選択します。
+    -   **フォルダー URI**または**ファイル URI** : サンプル データ URI `gs://tidbcloud-samples-us-west1/`を入力します。
+    -   **バケットアクセス**：GCS IAMロールを使用してバケットにアクセスできます。詳細については、 [GCS アクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access)ご覧ください。
 
-    If the region of the bucket is different from your cluster, confirm the compliance of cross region.
+    バケットのリージョンがクラスターのリージョンと異なる場合は、クロスリージョンのコンプライアンスを確認してください。
 
-4. Click **Connect** > **Start Import**.
+4.  **[接続]** &gt; **[インポートの開始] を**クリックします。
 
 </div>
 
 <div label="Azure Blob Storage">
 
-1. Open the **Import** page for your target cluster.
+1.  ターゲット クラスターの**インポート**ページを開きます。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-        > **Tip:**
+        > **ヒント：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
-2. Select **Import data from Cloud Storage**.
+2.  **Cloud Storage からデータをインポート**を選択します。
 
-3. On the **Import Data from Azure Blob Storage** page, configure the following source data information:
+3.  **[Azure Blob Storage からのデータのインポート]**ページで、次のソース データ情報を構成します。
 
-    - **Included Schema Files**: for the sample data, select **Yes**.
-    - **Data Format**: select **SQL**.
-    - **Folder URI**: enter the sample data URI `https://tcidmsampledata.blob.core.windows.net/sql/`.
-    - **SAS Token**: 
-        - For the sample data, use the following **SAS Token**: `sv=2015-04-05&ss=b&srt=co&sp=rl&se=2099-03-01T00%3A00%3A01.0000000Z&sig=cQHvaofmVsUJEbgyf4JFkAwTJGsFOmbQHx03GvVMrNc%3D`.
-        - For your own data, you can use a SAS token to access your Azure Blob Storage. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access).
+    -   **含まれるスキーマ ファイル**: サンプル データの場合は、 **[はい]**を選択します。
+    -   **データ形式**: **SQL**を選択します。
+    -   **フォルダー URI** : サンプル データ URI `https://tcidmsampledata.blob.core.windows.net/sql/`を入力します。
+    -   **SASトークン**:
+        -   サンプル データでは、次の**SAS トークン**`sv=2015-04-05&ss=b&srt=co&sp=rl&se=2099-03-01T00%3A00%3A01.0000000Z&sig=cQHvaofmVsUJEbgyf4JFkAwTJGsFOmbQHx03GvVMrNc%3D`使用します。
+        -   独自のデータについては、SASトークンを使用してAzure Blob Storageにアクセスできます。詳細については、 [Azure Blob Storage アクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access)ご覧ください。
 
-    If the region of the storage account is different from your cluster, confirm the compliance of cross region.
+    storageアカウントのリージョンがクラスターのリージョンと異なる場合は、クロスリージョンのコンプライアンスを確認してください。
 
-4. Click **Connect** > **Start Import**.
+4.  **[接続]** &gt; **[インポートの開始] を**クリックします。
 
 </div>
 </SimpleTab>
 
-When the data import progress shows **Completed**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
+データのインポートの進行状況に**「完了」と**表示されたら、サンプル データとデータベース スキーマがTiDB Cloudのデータベースに正常にインポートされています。
 
-After connecting to the cluster, you can run some queries in your terminal to check the result, for example:
+クラスターに接続した後、ターミナルでいくつかのクエリを実行して結果を確認できます。次に例を示します。
 
-1. Get the trip records starting at "12th & U St NW":
+1.  「12th &amp; U St NW」から始まる旅行記録を取得します。
 
     ```sql
     use bikeshare;
@@ -122,7 +122,7 @@ After connecting to the cluster, you can run some queries in your terminal to ch
     +-----------------+---------------+---------------------+---------------------+--------------------+------------------+-------------------------------------------+----------------+-----------+------------+-----------+------------+---------------+
     ```
 
-2. Get the trip records with electric bikes:
+2.  電動自転車での旅行記録を取得:
 
     ```sql
     use bikeshare;

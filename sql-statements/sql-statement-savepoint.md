@@ -1,11 +1,11 @@
 ---
 title: SAVEPOINT | TiDB SQL Statement Reference
-summary: An overview of the usage of SAVEPOINT for the TiDB database.
+summary: TiDB データベースの SAVEPOINT の使用法の概要。
 ---
 
-# SAVEPOINT
+# セーブポイント {#savepoint}
 
-`SAVEPOINT` is a feature introduced in TiDB v6.2.0. The syntax is as follows:
+`SAVEPOINT`はTiDB v6.2.0で導入された機能です。構文は次のとおりです。
 
 ```sql
 SAVEPOINT identifier
@@ -13,29 +13,25 @@ ROLLBACK TO [SAVEPOINT] identifier
 RELEASE SAVEPOINT identifier
 ```
 
-> **Warning:**
+> **警告：**
 >
-> You cannot use `SAVEPOINT` in pessimistic transactions when [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) is disabled.
+> [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)無効になっている場合、悲観的トランザクションで`SAVEPOINT`使用することはできません。
 
-- `SAVEPOINT` is used to set a savepoint of a specified name in the current transaction. If a savepoint with the same name already exists, it will be deleted and a new savepoint with the same name will be set.
+-   `SAVEPOINT` 、現在のトランザクションに指定された名前のセーブポイントを設定するために使用されます。同じ名前のセーブポイントが既に存在する場合、それは削除され、同じ名前の新しいセーブポイントが設定されます。
 
-- `ROLLBACK TO SAVEPOINT` rolls back a transaction to the savepoint of a specified name and does not terminate the transaction. Data changes made to the table data after the savepoint will be reverted in the rollback, and all savepoints after the savepoint are deleted. In a pessimistic transaction, the locks held by the transaction are not rolled back. Instead, the locks will be released when the transaction ends.
+-   `ROLLBACK TO SAVEPOINT` 、指定された名前のセーブポイントまでトランザクションをロールバックしますが、トランザクション自体は終了しません。セーブポイント以降にテーブルデータに加えられたデータ変更はロールバック時に元に戻され、セーブポイント以降のすべてのセーブポイントは削除されます。悲観的トランザクションでは、トランザクションによって保持されているロックはロールバックされません。代わりに、トランザクション終了時にロックが解放されます。
 
-    If the savepoint specified in the `ROLLBACK TO SAVEPOINT` statement does not exist, the statement returns the following error:
+    `ROLLBACK TO SAVEPOINT`のステートメントで指定されたセーブポイントが存在しない場合は、ステートメントは次のエラーを返します。
 
-    ```
-    ERROR 1305 (42000): SAVEPOINT identifier does not exist
-    ```
+        ERROR 1305 (42000): SAVEPOINT identifier does not exist
 
-- `RELEASE SAVEPOINT` statement removes the named savepoint and **all savepoints** after this savepoint from the current transaction, without committing or rolling back the current transaction. If the savepoint of the specified name does not exist, the following error is returned:
+-   `RELEASE SAVEPOINT`文は、現在のトランザクションをコミットまたはロールバックせずに、指定されたセーブポイントとそれ以降の**すべてのセーブポイントを**現在のトランザクションから削除します。指定された名前のセーブポイントが存在しない場合は、次のエラーが返されます。
 
-    ```
-    ERROR 1305 (42000): SAVEPOINT identifier does not exist
-    ```
+        ERROR 1305 (42000): SAVEPOINT identifier does not exist
 
-    After the transaction is committed or rolled back, all savepoints in the transaction will be deleted.
+    トランザクションがコミットまたはロールバックされると、トランザクション内のすべてのセーブポイントが削除されます。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 SavepointStmt ::=
@@ -48,9 +44,9 @@ ReleaseSavepointStmt ::=
     "RELEASE" "SAVEPOINT" Identifier
 ```
 
-## Examples
+## 例 {#examples}
 
-Create a table `t1`:
+テーブル`t1`を作成します。
 
 ```sql
 CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY);
@@ -60,7 +56,7 @@ CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY);
 Query OK, 0 rows affected (0.12 sec)
 ```
 
-Start the current transaction:
+現在のトランザクションを開始します:
 
 ```sql
 BEGIN;
@@ -70,7 +66,7 @@ BEGIN;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-Insert data into the table and set a savepoint `sp1`:
+テーブルにデータを挿入し、セーブポイント`sp1`設定します。
 
 ```sql
 INSERT INTO t1 VALUES (1);
@@ -88,7 +84,7 @@ SAVEPOINT sp1;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-Insert data into the table again and set a savepoint `sp2`:
+テーブルに再度データを挿入し、セーブポイント`sp2`設定します。
 
 ```sql
 INSERT INTO t1 VALUES (2);
@@ -106,7 +102,7 @@ SAVEPOINT sp2;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-Release the savepoint `sp2`:
+セーブポイント`sp2`を解放します:
 
 ```sql
 RELEASE SAVEPOINT sp2;
@@ -116,7 +112,7 @@ RELEASE SAVEPOINT sp2;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-Roll back to the savepoint `sp1`:
+セーブポイント`sp1`にロールバックします。
 
 ```sql
 ROLLBACK TO SAVEPOINT sp1;
@@ -126,7 +122,7 @@ ROLLBACK TO SAVEPOINT sp1;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-Commit the transaction and query the table. Only the data inserted before `sp1` is returned.
+トランザクションをコミットし、テーブルをクエリします。1 `sp1`前に挿入されたデータのみが返されます。
 
 ```sql
 COMMIT;
@@ -149,16 +145,16 @@ SELECT * FROM t1;
 1 row in set
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-When `ROLLBACK TO SAVEPOINT` is used to roll back a transaction to a specified savepoint, MySQL releases the locks held only after the specified savepoint, while in TiDB pessimistic transaction, TiDB does not immediately release the locks held after the specified savepoint. Instead, TiDB releases all locks when the transaction is committed or rolled back.
+`ROLLBACK TO SAVEPOINT`使用してトランザクションを指定されたセーブポイントまでロールバックすると、MySQL は指定されたセーブポイント以降に保持されているロックのみを解放します。一方、TiDB の悲観的トランザクションでは、TiDB は指定されたセーブポイント以降に保持されているロックをすぐには解放しません。代わりに、TiDB はトランザクションがコミットまたはロールバックされた時点ですべてのロックを解放します。
 
-TiDB does not support the MySQL syntax `ROLLBACK WORK TO SAVEPOINT ...`.
+TiDB は MySQL 構文`ROLLBACK WORK TO SAVEPOINT ...`サポートしていません。
 
-## See also
+## 参照 {#see-also}
 
-* [COMMIT](/sql-statements/sql-statement-commit.md)
-* [ROLLBACK](/sql-statements/sql-statement-rollback.md)
-* [START TRANSACTION](/sql-statements/sql-statement-start-transaction.md)
-* [TiDB Optimistic Transaction Mode](/optimistic-transaction.md)
-* [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md)
+-   [専念](/sql-statements/sql-statement-commit.md)
+-   [ロールバック](/sql-statements/sql-statement-rollback.md)
+-   [取引を開始](/sql-statements/sql-statement-start-transaction.md)
+-   [TiDB 楽観的トランザクションモード](/optimistic-transaction.md)
+-   [TiDB 悲観的トランザクションモード](/pessimistic-transaction.md)

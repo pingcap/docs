@@ -1,16 +1,16 @@
 ---
 title: "Connected: AI chat in IM"
-summary: Introduces detailed information about the AI chat in Instant Message (IM).
+summary: インスタント メッセージ (IM) の AI チャットに関する詳細情報を紹介します。
 ---
 
-# Connected: AI chat in IM
+# 接続：IMでのAIチャット {#connected-ai-chat-in-im}
 
-The AI chat in Instant Message (IM) powered by PingCAP, is an offering to invite TiDB AI assistant chatbot to specific IM channels for preliminary technical support and consultation. This service is based on Graph RAG (Retrieval-Augmented Generation) built on top of [TiDB Vector Search](/vector-search/vector-search-overview.md).
+PingCAPを搭載したインスタントメッセージ（IM）のAIチャットは、TiDB AIアシスタントチャットボットを特定のIMチャネルに招待し、予備的な技術サポートや相談を提供するサービスです。このサービスは、 [TiDBベクトル検索](/vector-search/vector-search-overview.md)ベースに構築されたGraph RAG（Retrieval-Augmented Generation）に基づいています。
 
-## Limitation
+## 制限 {#limitation}
 
-Currently, the ticket support feature for [Slack](https://slack.com/) and [Lark](https://www.larksuite.com/) is available upon request. If you are interested in trying this feature, contact TiDB Cloud support at <a href="mailto:support@pingcap.com">support@pingcap.com</a> or reach out to your Technical Account Manager (TAM).
+現在、 [スラック](https://slack.com/)と[ラーク](https://www.larksuite.com/)のチケットサポート機能はリクエストに応じてご利用いただけます。この機能をお試しになりたい場合は、 TiDB Cloudサポート（電話番号<a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>までご連絡いただくか、担当のテクニカルアカウントマネージャー（TAM）までお問い合わせください。
 
-## Example
+## 例 {#example}
 
 ![ai-chat-example](/media/tidb-cloud/connected-ai-chat-example.png)

@@ -1,60 +1,60 @@
 ---
 title: GROUP BY Modifiers
-summary: Learn how to use TiDB GROUP BY modifiers.
+summary: TiDB GROUP BY 修飾子の使用方法を学習します。
 ---
 
-# GROUP BY Modifiers
+# GROUP BY 修飾子 {#group-by-modifiers}
 
-Starting from v7.4.0, the `GROUP BY` clause of TiDB supports the `WITH ROLLUP` modifier.
+v7.4.0 以降、TiDB の`GROUP BY`句は`WITH ROLLUP`修飾子をサポートします。
 
-In the `GROUP BY` clause, you can specify one or more columns as a group list and append the `WITH ROLLUP` modifier after the list. Then, TiDB will conduct multidimensional descending grouping based on the columns in the group list and provide you with summary results for each group in the output.
+`GROUP BY`節では、1 つ以上の列をグループリストとして指定し、リストの後に`WITH ROLLUP`修飾子を付加できます。すると、TiDB はグループリスト内の列に基づいて多次元降順グループ化を実行し、各グループの要約結果を出力します。
 
-- Grouping method:
+-   グループ化方法:
 
-    - The first grouping dimension includes all columns in the group list.
-    - Subsequent grouping dimensions start from the right end of the grouping list and exclude one more column at a time to form new groups.
+    -   最初のグループ化ディメンションには、グループ リスト内のすべての列が含まれます。
+    -   後続のグループ化ディメンションは、グループ化リストの右端から始まり、一度に 1 列ずつ除外して新しいグループを形成します。
 
-- Aggregation summaries: for each dimension, the query performs aggregation operations, and then aggregates the results of this dimension with the results of all previous dimensions. This means that you can get aggregated data at different dimensions, from detailed to overall.
+-   集計サマリー：クエリは各ディメンションに対して集計演算を実行し、そのディメンションの結果を以前のすべてのディメンションの結果と集計します。つまり、詳細ディメンションから全体ディメンションまで、さまざまなディメンションで集計データを取得できます。
 
-With this grouping method, if there are `N` columns in the group list, TiDB aggregates the query results on `N+1` groups.
+このグループ化方法では、グループ リストに`N`列がある場合、TiDB はクエリ結果を`N+1`グループに集計します。
 
-For example:
+例えば：
 
 ```sql
 SELECT count(1) FROM t GROUP BY a,b,c WITH ROLLUP;
 ```
 
-In this example, TiDB will aggregate the calculation results of `count(1)` on 4 groups (that is, `{a, b, c}`, `{a, b}`, `{a}`, and `{}`) and output the summary results for each group.
+この例では、TiDB は`count(1)`の計算結果を 4 つのグループ (つまり`{a, b, c}` 、 `{a, b}` 、 `{a}` 、 `{}` ) に集計し、各グループの概要結果を出力します。
 
-> **Note:**
+> **注記：**
 >
-> Currently, TiDB does not support the Cube syntax.
+> 現在、TiDB は Cube 構文をサポートしていません。
 
-## Use cases
+## ユースケース {#use-cases}
 
-Aggregating and summarizing data from multiple columns is commonly used in OLAP (Online Analytical Processing) scenarios. By using the `WITH ROLLUP` modifier, you can get additional rows that display super summary information from other high-level dimensions in your aggregated results. Then, you can use the super summary information for advanced data analysis and report generation.
+複数`WITH ROLLUP`列からのデータの集計と要約は、OLAP（オンライン分析処理）シナリオでよく使用されます。1 修飾子を使用すると、集計結果に他の高レベルディメンションからのスーパーサマリー情報を表示する行を追加できます。これにより、スーパーサマリー情報を高度なデータ分析やレポート作成に活用できます。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
 <CustomContent platform="tidb">
 
-Before v8.3.0, TiDB only supports generating valid execution plans for the `WITH ROLLUP` syntax in [TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md). Therefore, your TiDB cluster needs to contain TiFlash nodes, and the target table must be configured with the correct TiFlash replica. For more information, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
+v8.3.0より前のTiDBでは、 [TiFlash MPPモード](/tiflash/use-tiflash-mpp-mode.md)の`WITH ROLLUP`構文に対してのみ有効な実行プランの生成がサポートされています。そのため、TiDBクラスターにはTiFlashノードが含まれており、ターゲットテーブルには正しいTiFlashレプリカが設定されている必要があります。詳細については、 [TiFlashクラスターのスケールアウト](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Before v8.3.0, TiDB only supports generating valid execution plans for the `WITH ROLLUP` syntax in [TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md). Therefore, your TiDB cluster needs to contain TiFlash nodes, and the target table must be configured with the correct TiFlash replica. For more information, see [Change node number](/tidb-cloud/scale-tidb-cluster.md#change-node-number).
+v8.3.0より前のTiDBでは、 [TiFlash MPPモード](/tiflash/use-tiflash-mpp-mode.md)の`WITH ROLLUP`構文に対してのみ有効な実行プランの生成がサポートされています。そのため、TiDBクラスターにはTiFlashノードが含まれており、ターゲットテーブルには正しいTiFlashレプリカが設定されている必要があります。詳細については、 [ノード番号を変更する](/tidb-cloud/scale-tidb-cluster.md#change-node-number)参照してください。
 
 </CustomContent>
 
-Starting from v8.3.0, the preceding limitation is removed. Regardless of whether your TiDB cluster contains TiFlash nodes, TiDB supports generating valid execution plans for the `WITH ROLLUP` syntax.
+v8.3.0以降では、上記の制限は解除されました。TiDBクラスターにTiFlashノードが含まれているかどうかに関係なく、TiDBは`WITH ROLLUP`構文の有効な実行プランの生成をサポートします。
 
-To identify whether TiDB or TiFlash executes the `Expand` operator, you can check the `task` attribute of the `Expand` operator in the execution plan. For more information, see [How to interpret the ROLLUP execution plan](#how-to-interpret-the-rollup-execution-plan).
+TiDBとTiFlashのどちらが演算子`Expand`実行するかを確認するには、実行プランで演算子`Expand`の属性`task`確認します。詳細については、 [ROLLUP実行プランの解釈方法](#how-to-interpret-the-rollup-execution-plan)参照してください。
 
-## Examples
+## 例 {#examples}
 
-Suppose you have a profit table named `bank` with the `year`, `month`, `day`, and `profit` columns.
+`year` 、 `month` 、 `day` 、 `profit`列を持つ`bank`という名前の利益テーブルがあるとします。
 
 ```sql
 CREATE TABLE bank
@@ -70,7 +70,7 @@ ALTER TABLE bank SET TIFLASH REPLICA 1; -- Add a TiFlash replica for the table i
 INSERT INTO bank VALUES(2000, "Jan", 1, 10.3),(2001, "Feb", 2, 22.4),(2000,"Mar", 3, 31.6)
 ```
 
-To get the profit for the bank per year, you can use a simple `GROUP BY` clause as follows:
+銀行の年間利益を取得するには、次のように単純な`GROUP BY`節を使用できます。
 
 ```sql
 SELECT year, SUM(profit) AS profit FROM bank GROUP BY year;
@@ -83,7 +83,7 @@ SELECT year, SUM(profit) AS profit FROM bank GROUP BY year;
 2 rows in set (0.15 sec)
 ```
 
-In addition to yearly profits, bank reports usually also need to include the overall profit for all years or monthly divided profits for detailed profit analysis. Before v7.4.0, you have to use different `GROUP BY` clauses in multiple queries and join the results using UNION to obtain aggregated summaries. Starting from v7.4.0, you can simply achieve the desired results in a single query by appending the `WITH ROLLUP` modifier to the `GROUP BY` clause.
+銀行レポートでは通常、年間利益に加えて、全年度の利益全体、または詳細な利益分析のために月ごとの利益を分割して記載する必要があります。v7.4.0より前は、複数のクエリで異なる`GROUP BY`句を使用し、結果をUNIONで結合して集計結果を取得する必要がありました。v7.4.0以降では、 `GROUP BY`句に`WITH ROLLUP`修飾子を追加するだけで、単一のクエリで目的の結果を簡単に得ることができます。
 
 ```sql
 SELECT year, month, SUM(profit) AS profit from bank GROUP BY year, month WITH ROLLUP ORDER BY year desc, month desc;
@@ -100,17 +100,17 @@ SELECT year, month, SUM(profit) AS profit from bank GROUP BY year, month WITH RO
 6 rows in set (0.025 sec)
 ```
 
-The preceding results include aggregated data at different dimensions: by both year and month, by year, and overall. In the results, a row without `NULL` values indicates that the `profit` in that row is calculated by grouping both year and month. A row with a `NULL` value in the `month` column indicates that `profit` in that row is calculated by aggregating all months in a year, while a row with a `NULL` value in the `year` column indicates that `profit` in that row is calculated by aggregating all years.
+上記の結果には、年と月の両方、年ごと、全体という異なるディメンションで集計されたデータが含まれています。結果において、 `NULL`値が存在しない行は、その行の`profit`年と月の両方をグループ化して計算されていることを示します。7 列の値が`NULL`で`month`行は、その行の`profit` 1 年間のすべての月を集計して計算されていることを示し、 `year`列の値が`NULL`である行は、その行の`profit`すべての年を集計して計算されていることを示します。
 
-Specifically:
+具体的には：
 
-- The `profit` value in the first row comes from the 2-dimensional group `{year, month}`, representing the aggregation result for the fine-grained `{2000, "Jan"}` group.
-- The `profit` value in the second row comes from the 1-dimensional group `{year}`, representing the aggregation result for the mid-level `{2001}` group.
-- The `profit` value in the last row comes from the 0-dimensional grouping `{}`, representing the overall aggregation result.
+-   最初の行の`profit`値は 2 次元グループ`{year, month}`からのもので、細粒度`{2000, "Jan"}`グループに対する集計結果を表しています。
+-   2 行目の値`profit`は 1 次元グループ`{year}`からのもので、中間レベルのグループ`{2001}`の集計結果を表しています。
+-   最後の行の`profit`値は 0 次元のグループ化`{}`から取得され、全体的な集計結果を表します。
 
-`NULL` values in the `WITH ROLLUP` results are generated just before the Aggregate operator is applied. Therefore, you can use `NULL` values in `SELECT`, `HAVING`, and `ORDER BY` clauses to further filter the aggregated results.
+`WITH ROLLUP`結果のうち`NULL`値は、Aggregate 演算子が適用される直前に生成されます。したがって、 `SELECT` 、 `HAVING` 、 `ORDER BY`句で`NULL`値を使用して、集計結果をさらに絞り込むことができます。
 
-For example, you can use `NULL` in the `HAVING` clause to filter and view the aggregated results of 2-dimensional groups only:
+たとえば、 `HAVING`句の`NULL`使用して、2 次元グループの集計結果のみをフィルタリングして表示できます。
 
 ```sql
 SELECT year, month, SUM(profit) AS profit FROM bank GROUP BY year, month WITH ROLLUP HAVING year IS NOT null AND month IS NOT null;
@@ -124,9 +124,9 @@ SELECT year, month, SUM(profit) AS profit FROM bank GROUP BY year, month WITH RO
 3 rows in set (0.02 sec)
 ```
 
-Note that if a column in the `GROUP BY` list contains native `NULL` values, the aggregation results of `WITH ROLLUP` might mislead the query results. To address this issue, you can use the `GROUPING()` function to distinguish native `NULL` values from `NULL` values generated by `WITH ROLLUP`. This function takes a grouping expression as a parameter and returns `0` or `1` to indicate whether the grouping expression is aggregated in the current result. `1` represents aggregated, and `0` represents not aggregated.
+`GROUP BY`の列にネイティブ`NULL`値が含まれている場合、 `WITH ROLLUP`の集計結果がクエリ結果を誤解させる可能性があることに注意してください。この問題に対処するには、 `GROUPING()`関数を使用して、ネイティブ`NULL`値と`WITH ROLLUP`によって生成された`NULL`値を区別できます。この関数はグループ化式をパラメータとして受け取り、現在の結果でグループ化式が集計されているかどうかを示す`0`または`1`返します。19 `1`集計されていることを表し、 `0`集計されていないことを表します。
 
-The following example shows how to use the `GROUPING()` function:
+次の例は、 `GROUPING()`関数の使用方法を示しています。
 
 ```sql
 SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(month) as grp_month FROM bank GROUP BY year, month WITH ROLLUP ORDER BY year DESC, month DESC;
@@ -143,9 +143,9 @@ SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(
 6 rows in set (0.028 sec)
 ```
 
-From this output, you can get an understanding of the aggregation dimension of a row directly from the results of `grp_year` and `grp_month`, which prevents interference from native `NULL` values in the `year` and `month` grouping expressions.
+この出力では、 `grp_year`と`grp_month`結果から行の集計ディメンションを直接把握することができ、 `year`と`month`グループ化式におけるネイティブの`NULL`値からの干渉を防ぐことができます。
 
-The `GROUPING()` function can accept up to 64 grouping expressions as parameters. In the output of multiple parameters, each parameter generates a result of `0` or `1`, and these parameters collectively form a 64-bit `UNSIGNED LONGLONG` with each bit as `0` or `1`. You can use the following formula to get the bit position of each parameter as follows:
+`GROUPING()`関数は、最大 64 個のグループ化式をパラメータとして受け入れることができます。複数のパラメータが出力された場合、各パラメータは`0`または`1`という結果を生成し、これらのパラメータは合計で 64 ビットの`UNSIGNED LONGLONG`を形成し、各ビットは`0`または`1`となります。各パラメータのビット位置を取得するには、次の式を使用します。
 
 ```go
 GROUPING(day, month, year):
@@ -154,7 +154,7 @@ GROUPING(day, month, year):
 + result for GROUPING(day) << 2
 ```
 
-By using multiple parameters in the `GROUPING()` function, you can efficiently filter aggregate results at any high dimension. For example, you can quickly filter the aggregate results for each year and all years by using `GROUPING(year, month)`.
+`GROUPING()`関数で複数のパラメータを使用することで、任意の高次元で集計結果を効率的にフィルタリングできます。例えば、 `GROUPING(year, month)`使用すると、各年と全年の集計結果を素早くフィルタリングできます。
 
 ```sql
 SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(month) as grp_month FROM bank GROUP BY year, month WITH ROLLUP HAVING GROUPING(year, month) <> 0 ORDER BY year DESC, month DESC;
@@ -168,13 +168,13 @@ SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(
 3 rows in set (0.023 sec)
 ```
 
-## How to interpret the ROLLUP execution plan
+## ROLLUP実行プランの解釈方法 {#how-to-interpret-the-rollup-execution-plan}
 
-Multidimensional data aggregation uses the `Expand` operator to copy data to meet the needs of multidimensional grouping. Each data copy corresponds to a grouping of a specific dimension. In MPP mode, the `Expand` operator can facilitate data shuffle to quickly reorganize and calculate a large amount of data between multiple nodes, making full use of the computing capacity of each node. In a TiDB cluster without TiFlash nodes, because the `Expand` operator is only executed on a single TiDB node, data redundancy will increase as the number of dimension groupings (`grouping set`) increases.
+多次元データ集約では、 `Expand`の演算子を用いてデータをコピーすることで、多次元グループ化のニーズに対応します。各データコピーは、特定の次元のグループ化に対応します。MPPモードでは、 `Expand`番目の演算子はデータシャッフルを容易にし、複数のノード間で大量のデータを迅速に再編成・計算することで、各ノードの計算能力を最大限に活用します。TiFlashノードのないTiFlashクラスターでは、 `Expand`演算子は単一のTiDBノードでのみ実行されるため、次元グループ化の数（ `grouping set` ）が増えるにつれてデータの冗長性が向上します。
 
-The implementation of the `Expand` operator is similar to that of the `Projection` operator. The difference is that `Expand` is a multi-level `Projection`, which contains multiple levels of projection operation expressions. For each row of the raw data, the `Projection` operator generates only one row in results, whereas the `Expand` operator generates multiple rows in results (the number of rows is equal to the number of levels in projection operation expressions).
+`Expand`演算子の実装は`Projection`演算子と似ています。違いは、 `Expand`多階層の`Projection`であり、複数階層の射影演算式を含むことです。生データの各行に対して、 `Projection`演算子は結果に 1 行のみを生成しますが、 `Expand`演算子は結果に複数行を生成します（行数は射影演算式のレベル数に等しくなります）。
 
-The following example shows the execution plan for a TiDB cluster without TiFlash nodes, where the `task` of the `Expand` operator is `root`, indicating that the `Expand` operator is executed in TiDB:
+次の例は、 TiFlashノードのない TiDB クラスターの実行プランを示しています。3 `Expand`演算子のうちの`task` `root`であり、 `Expand`演算子が TiDB で実行されることを示しています。
 
 ```sql
 EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS profit FROM bank GROUP BY year, month WITH ROLLUP;
@@ -191,7 +191,7 @@ EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS prof
 6 rows in set (0.00 sec)
 ```
 
-The following example shows the execution plan in TiFlash MPP mode, where the `task` of the `Expand` operator is `mpp[tiflash]`, indicating that the `Expand` operator is executed in TiFlash:
+次の例は、 TiFlash MPP モードでの実行プランを示しています。3 `Expand`演算子のうち`task` `mpp[tiflash]`であり、これは`Expand`演算子がTiFlashで実行されることを示しています。
 
 ```sql
 EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS profit FROM bank GROUP BY year, month WITH ROLLUP;
@@ -212,13 +212,13 @@ EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS prof
 10 rows in set (0.05 sec)
 ```
 
-In this example execution plan, you can view the multiple-level expression of the `Expand` operator in the `operator info` column of the `Expand_20` row. It consists of 2-dimensional expressions, and you can view the schema information of the `Expand` operator at the end of the row, which is `schema: [test.bank.profit, Column#6, Column#7, gid]`.
+この実行プランの例では、 `Expand_20`行目の`operator info`列目に`Expand`演算子の複数レベルの式が表示されています。これは2次元の式で構成されており、行末の`schema: [test.bank.profit, Column#6, Column#7, gid]`に`Expand`演算子のスキーマ情報が表示されています。
 
-In the schema information of the `Expand` operator, `GID` is generated as an additional column. Its value is calculated by the `Expand` operator based on the grouping logic of different dimensions, and the value reflects the relationship between the current data replica and the `grouping set`. In most cases, the `Expand` operator uses a Bit-And operation, which can represent 63 combinations of grouping items for ROLLUP, corresponding to 64 dimensions of grouping. In this mode, TiDB generates the `GID` value depending on whether the `grouping set` of the required dimension contains grouping expressions when the current data replica is replicated, and it fills a 64-bit UINT64 value in the order of columns to be grouped.
+`Expand`演算子のスキーマ情報では、 `GID`追加列として生成されます。その値は、 `Expand`演算子によって異なる次元のグループ化ロジックに基づいて計算され、現在のデータレプリカと`grouping set`関係を反映します。ほとんどの場合、 `Expand`演算子はBit-And演算を使用し、ROLLUPのグループ化項目の組み合わせを63通り表現でき、64次元のグループ化に対応します。このモードでは、TiDBは現在のデータレプリカを複製する際に、必要な次元の`grouping set`グループ化式が含まれているかどうかに応じて`GID`値を生成し、グループ化する列の順序で64ビットのUINT64値を埋めます。
 
-In the preceding example, the order of columns in the grouping list is `[year, month]`, and the dimension groups generated by the ROLLUP syntax are `{year, month}`, `{year}`, and `{}`. For the dimension group `{year, month}`, both `year` and `month` are required columns, so TiDB fills the bit positions for them with 1 and 1 correspondingly. This forms a UINT64 of `11...0`, which is 3 in decimal. Therefore, the projection expression is `[test.bank.profit, Column#6, Column#7, 3->gid]` (where `column#6` corresponds to `year`, and `column#7` corresponds to `month`).
+上の例では、グループ化リスト内の列の順序は`[year, month]`で、 ROLLUP 構文によって生成されるディメンショングループは`{year, month}` 、 `{year}` 、 `{}`です。ディメンショングループ`{year, month}`では、 `year`と`month`両方が必須列であるため、TiDBはそれらのビット位置にそれぞれ 1 と 1 を設定します。これにより、UINT64 の`11...0`形成され、これは10進数では 3 です。したがって、射影式は`[test.bank.profit, Column#6, Column#7, 3->gid]`となります（ `column#6` `year`に、 `column#7` `month`に対応します）。
 
-The following is an example row of the raw data:
+以下は生データの行の例です。
 
 ```sql
 +------+-------+------+------------+
@@ -228,7 +228,7 @@ The following is an example row of the raw data:
 +------+-------+------+------------+
 ```
 
-After the `Expand` operator is applied, you can get the following three rows of results:
+`Expand`演算子を適用すると、次の 3 行の結果が得られます。
 
 ```sql
 +------------+------+-------+-----+
@@ -242,4 +242,4 @@ After the `Expand` operator is applied, you can get the following three rows of 
 +------------+------+-------+-----+
 ```
 
-Note that the `SELECT` clause in the query uses the `GROUPING` function. When the `GROUPING` function is used in the `SELECT`, `HAVING`, or `ORDER BY` clauses, TiDB rewrites it during the logical optimization phase, transforms the relationship between the `GROUPING` function and the `GROUP BY` items into a `GID` related to the logic of dimension group (also known as `grouping set`), and fills this `GID` as metadata into the new `GROUPING` function.
+クエリ内の`SELECT`節は`GROUPING`関数を使用していることに注意してください。 `GROUPING`関数が`SELECT` 、 `HAVING` 、または`ORDER BY`節で使用されている場合、TiDB は論理最適化フェーズでそれを書き換え、 `GROUPING`関数と`GROUP BY`項目の関係をディメンショングループ（ `grouping set`とも呼ばれます）のロジックに関連する`GID`に変換し、この`GID`新しい`GROUPING`関数にメタデータとして入力します。

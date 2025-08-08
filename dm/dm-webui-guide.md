@@ -1,73 +1,73 @@
 ---
 title: Use WebUI to Manage DM migration tasks
-summary: Learn how to use WebUI to manage DM migration tasks.
+summary: WebUI を使用して DM 移行タスクを管理する方法を学習します。
 ---
 
-# Use WebUI to Manage DM migration tasks
+# WebUIを使用してDM移行タスクを管理する {#use-webui-to-manage-dm-migration-tasks}
 
-DM WebUI is a web-based GUI platform for managing TiDB Data Migration (DM) tasks. This platform provides a simple and intuitive way to manage a large number of migration tasks, which frees you from using the dmctl command-line tool.
+DM WebUIは、TiDBデータ移行（DM）タスクを管理するためのWebベースのGUIプラットフォームです。このプラットフォームは、多数の移行タスクをシンプルかつ直感的に管理できるため、dmctlコマンドラインツールを使用する手間が省けます。
 
-This document introduces how to access DM WebUI, the prerequisites, the use cases of each page on the interface, and the attention points.
+このドキュメントでは、 DM WebUI へのアクセス方法、前提条件、インターフェース上の各ページの使用例、注意点などを紹介します。
 
-> **Warning:**
+> **警告：**
 >
-> - DM WebUI is currently an experimental feature. It is not recommended to use it in the production environment.
-> - The lifecycle of `task` in DM WebUI has been changed, and it is not recommended to use DM WebUI and dmctl at the same time.
+> -   DM WebUIは現在実験的機能です。本番環境での使用は推奨されません。
+> -   DM WebUIの`task`のライフサイクルが変更され、 DM WebUIと dmctl を同時に使用することは推奨されません。
 
-DM WebUI has the following pages:
+DM WebUI には次のページがあります。
 
-- **Migration**
-    - **Task**: Provides an entry to task creation, and displays the detailed information of each migration task. This page helps you monitor, create, delete, and configure migration tasks.
-    - **Source**: Configures the information of upstream data source for a migration task. On this page, you can manage the upstream configuration in a data migration environment, including creating and deleting upstream configuration, monitoring the task status corresponding to the upstream configuration, and modifying upstream configuration.
-    - **Replication Detail**: Displays the detailed status information of migration tasks. On this page, you can view the detailed configuration and status information based on a specified filter, including the configuration information and database names of the upstream and downstream, the relation of source tables and target tables.
-- **Cluster**
-    - **Members**: Displays the list of all master and worker nodes in the DM cluster, and the binding relationship between worker nodes and the source. On this page, you can view the configuration information of the current DM cluster and the status information of each worker. In addition, basic management is also provided on this page.
+-   **移住**
+    -   **タスク**: タスク作成のエントリを提供し、各移行タスクの詳細情報を表示します。このページでは、移行タスクの監視、作成、削除、および設定を行うことができます。
+    -   **ソース**: 移行タスクのアップストリームデータソースの情報を設定します。このページでは、アップストリーム設定の作成と削除、アップストリーム設定に対応するタスクステータスの監視、アップストリーム設定の変更など、データ移行環境におけるアップストリーム設定を管理できます。
+    -   **レプリケーション詳細**：移行タスクの詳細なステータス情報を表示します。このページでは、指定したフィルターに基づいて、上流および下流の構成情報やデータベース名、ソーステーブルとターゲットテーブルの関係など、詳細な構成情報とステータス情報を確認できます。
+-   **クラスタ**
+    -   **メンバー**：DMクラスタ内のすべてのマスターノードとワーカーノードのリスト、およびワーカーノードとソースノード間のバインディング関係を表示します。このページでは、現在のDMクラスタの構成情報と各ワーカーのステータス情報を確認できます。また、基本的な管理機能もこのページで提供されます。
 
-The interface is as follows:
+インターフェースは次のとおりです。
 
 ![webui](/media/dm/dm-webui-preview-en.png)
 
-## Access method
+## アクセス方法 {#access-method}
 
-When [OpenAPI](/dm/dm-open-api.md#maintain-dm-clusters-using-openapi) is enabled, you can access the DM WebUI from any master node of the DM cluster. The access port is `8261` by default and is the same as that of DM OpenAPI. Here is an example of an access address: `http://{master_ip}:{master_port}/dashboard/`.
+[オープンAPI](/dm/dm-open-api.md#maintain-dm-clusters-using-openapi)有効にすると、DM クラスターの任意のマスターノードからDM WebUIにアクセスできます。アクセスポートはデフォルトで`8261`で、DM OpenAPI のポートと同じです。アクセスアドレスの例： `http://{master_ip}:{master_port}/dashboard/` 。
 
-## Migration
+## 移住 {#migration}
 
-**Migration** includes **Source**, **Task**, and **Replication Detail** pages.
+**移行には**、**ソース**、**タスク**、および**レプリケーションの詳細**ページが含まれます。
 
-### Source
+### ソース {#source}
 
-Before creating a migration task, you need to create the data source information of the upstream for the replication task. You can create the upstream configuration in the **Source** page. When creating sources, pay attention to the following items:
+移行タスクを作成する前に、レプリケーションタスクの上流のデータソース情報を作成する必要があります。上流の設定は**「ソース」**ページで作成できます。ソースを作成する際は、以下の点に注意してください。
 
-- If there is an auto failover between primary and secondary instance, enable GTID in the upstream MySQL and set GTID to `True` when creating the upstream configuration; otherwise, the migration task will be interrupted during the failover (except for AWS Aurora).
-- If a MySQL instance needs to be temporarily offline, you can disable the instance. However, when the MySQL instance is being disabled, other MySQL instances running migration tasks should not execute DDL operations; otherwise, the disabled instance cannot properly migrate data after it is enabled.
-- When multiple migration tasks use the same upstream, it might cause additional stress. Enabling relay log can reduce the impact on the upstream, so it is recommended to enable relay log.
+-   プライマリインスタンスとセカンダリインスタンス間で自動フェイルオーバーが発生する場合は、アップストリーム MySQL で GTID を有効にし、アップストリーム設定を作成するときに GTID を`True`に設定します。そうしないと、フェイルオーバー中に移行タスクが中断されます (AWS Auroraを除く)。
+-   MySQLインスタンスを一時的にオフラインにする必要がある場合は、インスタンスを無効化できます。ただし、MySQLインスタンスを無効化している間は、移行タスクを実行している他のMySQLインスタンスはDDL操作を実行しないでください。そうしないと、無効化されたインスタンスは有効化後にデータを正しく移行できません。
+-   複数の移行タスクが同じアップストリームを利用する場合、追加の負荷が発生する可能性があります。リレーログを有効にするとアップストリームへの影響を軽減できるため、リレーログを有効にすることを推奨します。
 
-### Task
+### タスク {#task}
 
-You can view the migration task details on the **Task** page, and create migration tasks.
+**「タスク」**ページで移行タスクの詳細を表示し、移行タスクを作成できます。
 
-#### View migration task details
+#### 移行タスクの詳細をビュー {#view-migration-task-details}
 
-In the task list, click the task name to view the Details page from the right. The Details page displays more detailed task status information. On this page, you can view the status of each sub-task and the current configuration information of the migration task.
+タスクリストでタスク名をクリックすると、右側から詳細ページが表示されます。詳細ページには、タスクのより詳細なステータス情報が表示されます。このページでは、各サブタスクのステータスと、移行タスクの現在の構成情報を確認できます。
 
-In DM, each sub-task of a migration task might be at different stages, namely full dump -> full import (load) -> incremental replication (sync). Therefore, the current stage of a task is displayed with the statistics of the sub-task statuses, which can help you better understand the running status of the task.
+DMでは、移行タスクの各サブタスクは、フルダンプ -&gt; フルインポート（ロード） -&gt; 増分レプリケーション（同期）といった異なる段階にある場合があります。そのため、タスクの現在の段階はサブタスクのステータスの統計情報とともに表示され、タスクの実行状況をより適切に把握するのに役立ちます。
 
-#### Create migration tasks
+#### 移行タスクを作成する {#create-migration-tasks}
 
-To create a migration task on this page, click the **Add** button on the top right corner. You can use one of the following methods to create a migration task:
+このページで移行タスクを作成するには、右上隅の「**追加」**ボタンをクリックします。移行タスクを作成するには、以下のいずれかの方法があります。
 
-- By following the WebUI instruction. Fill in the required information step by step on the WebUI. This method is suitable for beginners and for daily use.
-- By using a configuration file. Paste or write a JSON-formatted configuration file to create a migration task. This method supports adjusting more parameters and is suitable for advanced users.
+-   WebUIの指示に従ってください。WebUIで必要な情報を段階的に入力してください。この方法は初心者や日常的な使用に適しています。
+-   設定ファイルを使用する。JSON形式の設定ファイルを貼り付けるか書き込むことで、移行タスクを作成できます。この方法は、より多くのパラメータの調整をサポートしており、上級ユーザーに適しています。
 
-### Replication detail
+### レプリケーションの詳細 {#replication-detail}
 
-You can view the status of the migration rules configured for a migration task on the **Replication Detail** page. This page supports querying by task, source, and database name.
+移行タスクに設定された移行ルールのステータスは**、「レプリケーションの詳細」**ページで確認できます。このページでは、タスク、ソース、データベース名によるクエリがサポートされています。
 
-The query result contains the corresponding information of the upstream table and the downstream table, so be careful using `.*` in case that too many query results slow down the page response.
+クエリ結果には、アップストリーム テーブルとダウンストリーム テーブルの対応する情報が含まれるため、クエリ結果が多すぎるとページの応答が遅くなる可能性があるため、 `.*`使用するときは注意してください。
 
-## Cluster
+## クラスタ {#cluster}
 
-### Members
+### メンバー {#members}
 
-The **Members** page displays all the master and worker nodes in the DM cluster, and the binding relationship between worker nodes and the source.
+**「メンバー」**ページには、DM クラスター内のすべてのマスター ノードとワーカー ノード、およびワーカー ノードとソース間のバインド関係が表示されます。

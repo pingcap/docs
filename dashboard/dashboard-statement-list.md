@@ -1,75 +1,75 @@
 ---
 title: SQL Statements Page of TiDB Dashboard
-summary: The SQL statements page in TiDB Dashboard shows the execution status of all SQL statements in the cluster. It allows users to analyze long-running SQL statements and provides options to access, filter, display more columns, sort, and change settings. The page also includes a feature to limit the number of stored SQL statements. For more details, visit the TiDB Dashboard documentation.
+summary: TiDBダッシュボードのSQLステートメントページには、クラスター内のすべてのSQLステートメントの実行ステータスが表示されます。このページでは、実行時間の長いSQLステートメントを分析でき、アクセス、フィルタリング、列の追加表示、並べ替え、設定の変更などのオプションが提供されます。また、保存するSQLステートメントの数を制限する機能も備えています。詳細については、TiDBダッシュボードのドキュメントをご覧ください。
 ---
 
-# SQL Statements Page of TiDB Dashboard
+# TiDBダッシュボードのSQLステートメントページ {#sql-statements-page-of-tidb-dashboard}
 
-The SQL statements page shows the execution status of all SQL statements in the cluster. This page is often used to analyze the SQL statement whose total or single execution time is long.
+SQL文ページには、クラスター内のすべてのSQL文の実行状況が表示されます。このページは、合計実行時間または単一の実行時間が長いSQL文を分析するためによく使用されます。
 
-On this page, SQL queries with a consistent structure (even if the query parameters are inconsistent) are classified as the same SQL statement. For example, both `SELECT * FROM employee WHERE id IN (1, 2, 3)` and `select * from EMPLOYEE where ID in (4, 5)` are classified as the same `select * from employee where id in (...)` SQL statement.
+このページでは、構造が一貫しているSQLクエリ（クエリパラメータが不一致であっても）は、同じSQL文として分類されます。例えば、 `SELECT * FROM employee WHERE id IN (1, 2, 3)`と`select * from EMPLOYEE where ID in (4, 5)`は同じSQL文`select * from employee where id in (...)`として分類されます。
 
-## Access the page
+## ページにアクセスする {#access-the-page}
 
-You can use one of the following two methods to access the SQL statement summary page:
+SQL ステートメントの概要ページにアクセスするには、次の 2 つの方法のいずれかを使用できます。
 
-* After logging in to TiDB Dashboard, click **SQL Statements** in the left navigation menu.
+-   TiDB ダッシュボードにログインしたら、左側のナビゲーション メニューで**[SQL ステートメント]**をクリックします。
 
-* Visit <http://127.0.0.1:2379/dashboard/#/statement> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
+-   ブラウザで[http://127.0.0.1:2379/ダッシュボード/#/ステートメント](http://127.0.0.1:2379/dashboard/#/statement)アクセスしてください。3 `127.0.0.1:2379`実際のPDインスタンスのアドレスとポートに置き換えてください。
 
-All the data shown on the SQL statement summary page are from the TiDB statement summary tables. For more details about the tables, see [TiDB Statement Summary Tables](/statement-summary-tables.md).
+SQL文の概要ページに表示されるすべてのデータは、TiDB文の概要テーブルから取得されます。テーブルの詳細については、 [TiDB ステートメント サマリー テーブル](/statement-summary-tables.md)参照してください。
 
-> **Note:**
+> **注記：**
 >
-> In the **Mean Latency** column of the SQL statement summary page, the blue bar indicates the average execution time. If there is a yellow line on the blue bar for an SQL statement, the left and right sides of the yellow line respectively represent the minimum and maximum execution time of the SQL statement during the recent data collection cycle. 
+> SQL ステートメントの概要ページの**「平均レイテンシ」**列では、青いバーが平均実行時間を示します。SQL ステートメントの青いバーに黄色の線が表示されている場合、黄色の線の左側と右側はそれぞれ、最新のデータ収集サイクルにおけるその SQL ステートメントの最小実行時間と最大実行時間を表します。
 
-### Change Filters
+### フィルターを変更する {#change-filters}
 
-On the top of the SQL statement summary page, you can modify the time range of SQL executions to be displayed. You can also filter the list by database in which SQL statements are executed, or by SQL types. The following image shows all SQL executions over the recent data collection cycle (recent 30 minutes by default).
+SQL文の概要ページの上部で、表示するSQL実行の時間範囲を変更できます。また、SQL文が実行されたデータベースやSQLの種類でリストをフィルタリングすることもできます。次の画像は、最近のデータ収集サイクル（デフォルトでは過去30分）におけるすべてのSQL実行を示しています。
 
 ![Modify filters](/media/dashboard/dashboard-statement-filter-options.png)
 
-### Display More Columns
+### より多くの列を表示する {#display-more-columns}
 
-Click **Columns** on the page and you can choose to see more columns. You can move your mouse to the **(i)** icon at the right side of a column name to view the description of this column:
+ページ上の**「列」**をクリックすると、さらに列を表示できます。列名の右側にある**(i)**アイコンにマウスを移動すると、その列の説明が表示されます。
 
 ![Choose columns](/media/dashboard/dashboard-statement-columns-selector.png)
 
-### Sort by Column
+### カラムで並べ替え {#sort-by-column}
 
-By default, the list is sorted by **Total Latency** from high to low. Click on different column headings to modify the sorting basis or switch the sorting order:
+デフォルトでは、リストは**合計レイテンシ**の高低でソートされます。列見出しをクリックすると、ソート基準を変更したり、ソート順を切り替えたりできます。
 
 ![Modify list sorting](/media/dashboard/dashboard-statement-change-order.png)
 
-### Change Settings
+### 設定を変更する {#change-settings}
 
-On the list page, click the **Settings** button on the top right to change the settings of the SQL statements feature:
+リスト ページで、右上にある**[設定]**ボタンをクリックして、SQL ステートメント機能の設定を変更します。
 
 ![Settings entry](/media/dashboard/dashboard-statement-setting-entry.png)
 
-After clicking the **Settings** button, you can see the following setting dialog box:
+**[設定]**ボタンをクリックすると、次の設定ダイアログボックスが表示されます。
 
 ![Settings](/media/dashboard/dashboard-statement-settings.png)
 
-On the setting page, you can disable or enable the SQL statements feature. When the SQL statements feature is enabled, you can modify the following settings:
+設定ページでは、SQL文機能を有効または無効にすることができます。SQL文機能を有効にすると、以下の設定を変更できます。
 
-- Collect interval: The length of period for each SQL statement analysis, which is 30 minutes by default. The SQL statements feature summarizes and counts all SQL statements within a period of time. If the period is too long, the granularity of the summary is coarse, which is not good for locating problems; if the period is too short, the granularity of the statistics is fine, which is good for locating problems, but this will result in more records and more memory usage within the same data retention duration. Therefore, you need to adjust this value based on the actual situation, and properly lower this value when locating problems.
-- Data retain duration: The retention duration of summary information, which is 1 day by default. Data retained longer than this duration will be deleted from system tables.
+-   収集間隔：各SQL文の分析期間。デフォルトでは30分です。SQL文機能は、一定期間内のすべてのSQL文を集計し、カウントします。期間が長すぎると集計の粒度が粗くなり、問題の特定に適さなくなります。期間が短すぎると統計の粒度が細かくなり、問題の特定には適しますが、同じデータ保持期間内でのレコード数とメモリ使用量が増加します。したがって、実際の状況に応じてこの値を調整し、問題の特定時には適切にこの値を下げる必要があります。
+-   データ保持期間：概要情報の保持期間。デフォルトでは1日です。この期間を超えて保持されたデータは、システムテーブルから削除されます。
 
-See [Configurations of Statement Summary Tables](/statement-summary-tables.md#parameter-configuration) for details.
+詳細は[ステートメントサマリーテーブルの構成](/statement-summary-tables.md#parameter-configuration)参照。
 
-> **Note:**
+> **注記：**
 >
-> + Because the statement system table is only stored in memory, after the SQL Statements feature is disabled, the data in the system table will be cleared.
+> -   ステートメント システム テーブルはメモリ内にのみ保存されるため、SQL ステートメント機能が無効にされると、システム テーブル内のデータはクリアされます。
 >
-> + The values of `Collect interval` and `retain duration` affect the memory usage, so it is recommended to adjust these values according to the actual situation. The value of `retain duration` should not be set too large.
+> -   `Collect interval`と`retain duration`の値はメモリ使用量に影響するため、実際の状況に応じて調整することをお勧めします`retain duration`の値は大きすぎないようにしてください。
 
-### Others
+### その他 {#others}
 
-[`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40) limits the number of SQL digests that the [statements_summary](/statement-summary-tables.md#statements_summary) and [statements_summary_history](/statement-summary-tables.md#statements_summary_history) tables can store in memory totally. If the limit is exceeded, TiDB clears the SQL statements that recently remain unused. These cleared SQL statements are represented as rows with `DIGEST` set to `NULL`. On the SQL statement page of TiDB Dashboard, the information of these rows is displayed as `Others`.
+[`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40) 、テーブル[ステートメント要約](/statement-summary-tables.md#statements_summary)と[ステートメント概要履歴](/statement-summary-tables.md#statements_summary_history)メモリに格納できるSQLダイジェストの合計数を制限します。この制限を超えると、TiDBは最近使用されていないSQL文をクリアします。クリアされたSQL文は、 `DIGEST`が`NULL`に設定された行として表されます。TiDBダッシュボードのSQL文ページでは、これらの行の情報は`Others`として表示されます。
 
 ![Others](/media/dashboard/dashboard-statement-other-row.png)
 
-## Next step
+## 次のステップ {#next-step}
 
-For more information about how to view the execution details of SQL statements, see [Statement execution details of TiDB Dashboard](/dashboard/dashboard-statement-details.md).
+SQL ステートメントの実行詳細を表示する方法の詳細については、 [TiDBダッシュボードのステートメント実行の詳細](/dashboard/dashboard-statement-details.md)参照してください。

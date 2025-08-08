@@ -1,71 +1,70 @@
 ---
 title: Connect to TiDB with mysql2
-summary: Learn how to connect to TiDB using Ruby mysql2. This tutorial gives Ruby sample code snippets that work with TiDB using mysql2 gem.
+summary: Ruby mysql2を使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、mysql2 gemを使ってTiDBで動作するRubyのサンプルコードスニペットを紹介します。
 ---
 
-# Connect to TiDB with mysql2
+# mysql2でTiDBに接続する {#connect-to-tidb-with-mysql2}
 
-TiDB is a MySQL-compatible database, and [mysql2](https://github.com/brianmario/mysql2) is one of the most popular MySQL drivers for Ruby.
+TiDB は MySQL 互換のデータベースであり、Ruby 用の最も人気のある MySQL ドライバーの[MySQL2](https://github.com/brianmario/mysql2)です。
 
-In this tutorial, you can learn how to use TiDB and mysql2 to accomplish the following tasks:
+このチュートリアルでは、TiDB と mysql2 を使用して次のタスクを実行する方法を学習します。
 
-- Set up your environment.
-- Connect to your TiDB cluster using mysql2.
-- Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
+-   環境を設定します。
+-   mysql2 を使用して TiDB クラスターに接続します。
+-   アプリケーションをビルドして実行します。オプションで、基本的なCRUD操作用の[サンプルコードスニペット](#sample-code-snippets)見つけることもできます。
 
-> **Note:**
+> **注記：**
 >
-> This tutorial works with {{{ .starter }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed で機能します。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-To complete this tutorial, you need:
+このチュートリアルを完了するには、次のものが必要です。
 
-- [Ruby](https://www.ruby-lang.org/en/) >= 3.0 installed on your machine
-- [Bundler](https://bundler.io/) installed on your machine
-- [Git](https://git-scm.com/downloads) installed on your machine
-- A TiDB cluster running
+-   [ルビー](https://www.ruby-lang.org/en/) &gt;= 3.0 がマシンにインストールされている
+-   [バンドラー](https://bundler.io/)マシンにインストールされています
+-   [ギット](https://git-scm.com/downloads)マシンにインストールされています
+-   TiDBクラスタが稼働中
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**TiDB クラスターがない場合は、次のように作成できます。**
 
 <CustomContent platform="tidb">
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 
-## Run the sample app to connect to TiDB
+## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
-This section demonstrates how to run the sample application code and connect to TiDB.
+このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を説明します。
 
-### Step 1: Clone the sample app repository
+### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
-Run the following commands in your terminal window to clone the sample code repository:
+サンプル コード リポジトリのクローンを作成するには、ターミナル ウィンドウで次のコマンドを実行します。
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-ruby-mysql2-quickstart.git
 cd tidb-ruby-mysql2-quickstart
 ```
 
-### Step 2: Install dependencies
+### ステップ2: 依存関係をインストールする {#step-2-install-dependencies}
 
-Run the following command to install the required packages (including `mysql2` and `dotenv`) for the sample app:
+次のコマンドを実行して、サンプル アプリに必要なパッケージ ( `mysql2`と`dotenv`を含む) をインストールします。
 
 ```shell
 bundle install
 ```
 
-<details>
-<summary><b>Install dependencies for existing projects</b></summary>
+<details><summary><b>既存のプロジェクトの依存関係をインストールする</b></summary>
 
-For your existing project, run the following command to install the packages:
+既存のプロジェクトの場合は、次のコマンドを実行してパッケージをインストールします。
 
 ```shell
 bundle add mysql2 dotenv
@@ -73,33 +72,33 @@ bundle add mysql2 dotenv
 
 </details>
 
-### Step 3: Configure connection information
+### ステップ3: 接続情報を構成する {#step-3-configure-connection-information}
 
-Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
+選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
-<div label="{{{ .starter }}}">
+<div label="TiDB Cloud Serverless">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-   - **Connection Type** is set to `Public`.
-   - **Branch** is set to `main`.
-   - **Connect With** is set to `General`.
-   - **Operating System** matches the operating system where you run the application.
+    -   **接続タイプ**は`Public`に設定されています。
+    -   **ブランチ**は`main`に設定されています。
+    -   **Connect With が**`General`に設定されています。
+    -   **オペレーティング システムは、**アプリケーションを実行するオペレーティング システムと一致します。
 
-4. If you have not set a password yet, click **Generate Password** to generate a random password.
+4.  まだパスワードを設定していない場合は、 **「パスワードの生成」**をクリックしてランダムなパスワードを生成します。
 
-5. Run the following command to copy `.env.example` and rename it to `.env`:
+5.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
     ```shell
     cp .env.example .env
     ```
 
-6. Edit the `.env` file, set up the environment variables as follows, and replace the corresponding placeholders `{}` with connection parameters in the connection dialog:
+6.  `.env`ファイルを編集し、環境変数を次のように設定し、接続ダイアログで対応するプレースホルダー`{}`接続パラメータに置き換えます。
 
     ```dotenv
     DATABASE_HOST={host}
@@ -110,32 +109,32 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     DATABASE_ENABLE_SSL=true
     ```
 
-   > **Note**
-   >
-   > For {{{ .starter }}}, TLS connection **MUST** be enabled via `DATABASE_ENABLE_SSL` when using public endpoint.
+    > **注記**
+    >
+    > TiDB Cloud Serverless の場合、パブリック エンドポイントを使用するときは、 `DATABASE_ENABLE_SSL`経由で TLS 接続を有効にする**必要があります**。
 
-7. Save the `.env` file.
+7.  `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. In the connection dialog, select **Public** from the **Connection Type** drop-down list, and then click **CA cert** to download the CA certificate.
+3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
+    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
-    In addition to the **Public** connection type, TiDB Cloud Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
+    TiDB Cloud Dedicatedは、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPCピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ご覧ください。
 
-4. Run the following command to copy `.env.example` and rename it to `.env`:
+4.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
     ```shell
     cp .env.example .env
     ```
 
-5. Edit the `.env` file, set up the environment variables as follows, and replace the corresponding placeholders `{}` with connection parameters in the connection dialog:
+5.  `.env`ファイルを編集し、環境変数を次のように設定し、接続ダイアログで対応するプレースホルダー`{}`接続パラメータに置き換えます。
 
     ```dotenv
     DATABASE_HOST={host}
@@ -147,24 +146,24 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     DATABASE_SSL_CA={downloaded_ssl_ca_path}
     ```
 
-   > **Note**
-   >
-   > It is recommended to enable TLS connection when using the public endpoint to connect to a TiDB Cloud Dedicated cluster.
-   >
-   > To enable TLS connection, modify `DATABASE_ENABLE_SSL` to `true` and use `DATABASE_SSL_CA` to specify the file path of CA certificate downloaded from the connection dialog.
+    > **注記**
+    >
+    > パブリック エンドポイントを使用してTiDB Cloud Dedicated クラスターに接続する場合は、TLS 接続を有効にすることをお勧めします。
+    >
+    > TLS 接続を有効にするには、 `DATABASE_ENABLE_SSL`から`true`変更し、 `DATABASE_SSL_CA`使用して接続ダイアログからダウンロードした CA 証明書のファイル パスを指定します。
 
-6. Save the `.env` file.
+6.  `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Self-Managed">
 
-1. Run the following command to copy `.env.example` and rename it to `.env`:
+1.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
     ```shell
     cp .env.example .env
     ```
 
-2. Edit the `.env` file, set up the environment variables as follows, and replace the corresponding placeholders `{}` with your own TiDB connection information:
+2.  `.env`ファイルを編集し、環境変数を次のように設定し、対応するプレースホルダー`{}`独自の TiDB 接続情報に置き換えます。
 
     ```dotenv
     DATABASE_HOST={host}
@@ -174,43 +173,41 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     DATABASE_NAME=test
     ```
 
-   If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
+    TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空になります。
 
-3. Save the `.env` file.
+3.  `.env`ファイルを保存します。
 
 </div>
 </SimpleTab>
 
-### Step 4: Run the code and check the result
+### ステップ4: コードを実行して結果を確認する {#step-4-run-the-code-and-check-the-result}
 
-Run the following command to execute the sample code:
+サンプル コードを実行するには、次のコマンドを実行します。
 
 ```shell
 ruby app.rb
 ```
 
-If the connection is successful, the console will output the version of the TiDB cluster as follows:
+接続が成功すると、コンソールに次のように TiDB クラスターのバージョンが出力されます。
 
-```
-🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-{{{ .tidb-version }}})
-⏳ Loading sample game data...
-✅ Loaded sample game data.
+    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.5.2)
+    ⏳ Loading sample game data...
+    ✅ Loaded sample game data.
 
-🆕 Created a new player with ID 12.
-ℹ️ Got Player 12: Player { id: 12, coins: 100, goods: 100 }
-🔢 Added 50 coins and 50 goods to player 12, updated 1 row.
-🚮 Deleted 1 player data.
-```
+    🆕 Created a new player with ID 12.
+    ℹ️ Got Player 12: Player { id: 12, coins: 100, goods: 100 }
+    🔢 Added 50 coins and 50 goods to player 12, updated 1 row.
+    🚮 Deleted 1 player data.
 
-## Sample code snippets
+## サンプルコードスニペット {#sample-code-snippets}
 
-You can refer to the following sample code snippets to complete your own application development.
+次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了することができます。
 
-For complete sample code and how to run it, check out the [tidb-samples/tidb-ruby-mysql2-quickstart](https://github.com/tidb-samples/tidb-ruby-mysql2-quickstart) repository.
+完全なサンプル コードとその実行方法については、 [tidb-samples/tidb-ruby-mysql2-クイックスタート](https://github.com/tidb-samples/tidb-ruby-mysql2-quickstart)リポジトリを参照してください。
 
-### Connect to TiDB with connection options
+### 接続オプションを使用して TiDB に接続する {#connect-to-tidb-with-connection-options}
 
-The following code establishes a connection to TiDB with options defined in the environment variables:
+次のコードは、環境変数で定義されたオプションを使用して TiDB への接続を確立します。
 
 ```ruby
 require 'dotenv/load'
@@ -229,13 +226,13 @@ options.merge(sslca: ENV['DATABASE_SSL_CA']) if ENV['DATABASE_SSL_CA']
 client = Mysql2::Client.new(options)
 ```
 
-> **Note**
+> **注記**
 >
-> For {{{ .starter }}}, TLS connection **MUST** be enabled via `DATABASE_ENABLE_SSL` when using public endpoint, but you **don't** have to specify an SSL CA certificate via `DATABASE_SSL_CA`, because mysql2 gem will search for existing CA certificates in a particular order until a file is discovered.
+> TiDB Cloud Serverless の場合、パブリック エンドポイントを使用するときは`DATABASE_ENABLE_SSL`で TLS 接続を有効にする**必要があります**が、mysql2 gem はファイルが見つかるまで特定の順序で既存の CA 証明書を検索するため、 `DATABASE_SSL_CA`で SSL CA 証明書を指定する必要は**ありません**。
 
-### Insert data
+### データを挿入する {#insert-data}
 
-The following query creates a single player with two fields and returns the `last_insert_id`:
+次のクエリは、 2 つのフィールドを持つ単一のプレーヤーを作成し、 `last_insert_id`返します。
 
 ```ruby
 def create_player(client, coins, goods)
@@ -246,11 +243,11 @@ def create_player(client, coins, goods)
 end
 ```
 
-For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
+詳細については[データを挿入する](/develop/dev-guide-insert-data.md)を参照してください。
 
-### Query data
+### クエリデータ {#query-data}
 
-The following query returns the record of a specific player by ID:
+次のクエリは、ID によって特定のプレーヤーのレコードを返します。
 
 ```ruby
 def get_player_by_id(client, id)
@@ -261,11 +258,11 @@ def get_player_by_id(client, id)
 end
 ```
 
-For more information, refer to [Query data](/develop/dev-guide-get-data-from-single-table.md).
+詳細については[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)を参照してください。
 
-### Update data
+### データを更新する {#update-data}
 
-The following query updated the record of a specific player by ID:
+次のクエリは、ID によって特定のプレーヤーのレコードを更新しました。
 
 ```ruby
 def update_player(client, player_id, inc_coins, inc_goods)
@@ -276,11 +273,11 @@ def update_player(client, player_id, inc_coins, inc_goods)
 end
 ```
 
-For more information, refer to [Update data](/develop/dev-guide-update-data.md).
+詳細については[データを更新する](/develop/dev-guide-update-data.md)を参照してください。
 
-### Delete data
+### データを削除する {#delete-data}
 
-The following query deletes the record of a specific player:
+次のクエリは、特定のプレーヤーのレコードを削除します。
 
 ```ruby
 def delete_player_by_id(client, id)
@@ -291,35 +288,35 @@ def delete_player_by_id(client, id)
 end
 ```
 
-For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
+詳細については[データを削除する](/develop/dev-guide-delete-data.md)を参照してください。
 
-## Best practices
+## ベストプラクティス {#best-practices}
 
-By default, the mysql2 gem can search for existing CA certificates in a particular order until a file is discovered.
+デフォルトでは、mysql2 gem は、ファイルが見つかるまで特定の順序で既存の CA 証明書を検索できます。
 
-1. `/etc/ssl/certs/ca-certificates.crt` for Debian, Ubuntu, Gentoo, Arch, or Slackware
-2. `/etc/pki/tls/certs/ca-bundle.crt` for RedHat, Fedora, CentOS, Mageia, Vercel, or Netlify
-3. `/etc/ssl/ca-bundle.pem` for OpenSUSE
-4. `/etc/ssl/cert.pem` for macOS or Alpine (docker container)
+1.  Debian、Ubuntu、Gentoo、Arch、または Slackware の場合は`/etc/ssl/certs/ca-certificates.crt`
+2.  RedHat、Fedora、CentOS、Mageia、Vercel、または Netlify の場合は`/etc/pki/tls/certs/ca-bundle.crt`
+3.  OpenSUSEの場合は`/etc/ssl/ca-bundle.pem`
+4.  macOS または Alpine (docker コンテナ) の場合は`/etc/ssl/cert.pem`
 
-While it is possible to specify the CA certificate path manually, doing so might cause significant inconvenience in multi-environment deployment scenarios, because different machines and environments might store the CA certificate in different locations. Therefore, setting `sslca` to `nil` is recommended for flexibility and ease of deployment across different environments.
+CA証明書のパスを手動で指定することも可能ですが、複数の環境に展開する場合、異なるマシンや環境でCA証明書が異なる場所に保存される可能性があるため、大きな不便が生じる可能性があります。そのため、異なる環境への展開における柔軟性と容易さを確保するため、 `sslca` ～ `nil`設定をお勧めします。
 
-## Next steps
+## 次のステップ {#next-steps}
 
-- Learn more usage of mysql2 driver from [the documentation of mysql2](https://github.com/brianmario/mysql2#readme).
-- Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as: [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Query data](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
-- Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
+-   [mysql2のドキュメント](https://github.com/brianmario/mysql2#readme)からの mysql2 ドライバーの使用法について詳しく学びます。
+-   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
 
-## Need help?
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

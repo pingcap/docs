@@ -1,15 +1,15 @@
 ---
 title: RESOURCE_GROUPS
-summary: Learn the `RESOURCE_GROUPS` information_schema table.
+summary: RESOURCE_GROUPS` information_schema テーブルについて学習します。
 ---
 
-# RESOURCE_GROUPS
+# リソースグループ {#resource-groups}
 
-The `RESOURCE_GROUPS` table shows the information about all resource groups. For more information, see [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md).
+`RESOURCE_GROUPS`表にはすべてのリソースグループに関する情報が表示されます。詳細については、 [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)参照してください。
 
-> **Note:**
+> **注記：**
 >
-> This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 ```sql
 USE information_schema;
@@ -28,7 +28,7 @@ DESC resource_groups;
 3 rows in set (0.00 sec)
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 SELECT * FROM information_schema.resource_groups; -- View all resource groups. TiDB has a `default` resource group.
@@ -76,13 +76,13 @@ SELECT * FROM information_schema.resource_groups WHERE NAME = 'rg1'; -- View the
 1 row in set (0.00 sec)
 ```
 
-The descriptions of the columns in the `RESOURCE_GROUPS` table are as follows:
+`RESOURCE_GROUPS`表の列の説明は次のとおりです。
 
-* `NAME`: the name of the resource group.
-* `RU_PER_SEC`: the backfilling speed of the resource group. The unit is RU/second, in which RU means [Request Unit](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru).
-* `PRIORITY`: the absolute priority of tasks to be processed on TiKV. Different resources are scheduled according to the `PRIORITY` setting. Tasks with high `PRIORITY` are scheduled first. For resource groups with the same `PRIORITY`, tasks will be scheduled proportionally according to the `RU_PER_SEC` configuration. If `PRIORITY` is not specified, the default priority is `MEDIUM`.
-* `BURSTABLE`: whether to allow the resource group to overuse the available system resources.
+-   `NAME` : リソース グループの名前。
+-   `RU_PER_SEC` : リソースグループのバックフィル速度。単位はRU/秒で、RUは[リクエストユニット](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)意味します。
+-   `PRIORITY` : TiKVで処理されるタスクの絶対的な優先度。異なるリソースは`PRIORITY`設定に従ってスケジュールされます`PRIORITY`が高いタスクが最初にスケジュールされます。同じ`PRIORITY`のリソースグループの場合、タスクは`RU_PER_SEC`設定に従って比例的にスケジュールされます。10 `PRIORITY`指定されていない場合、デフォルトの優先度は`MEDIUM`です。
+-   `BURSTABLE` : リソース グループが利用可能なシステム リソースを過剰に使用することを許可するかどうか。
 
-> **Note:**
+> **注記：**
 >
-> TiDB automatically creates a `default` resource group during cluster initialization. For this resource group, the default value of `RU_PER_SEC` is `UNLIMITED` (equivalent to the maximum value of the `INT` type, that is, `2147483647`) and it is in `BURSTABLE` mode. All requests that are not bound to any resource group are automatically bound to this `default` resource group. When you create a new configuration for another resource group, it is recommended to modify the `default` resource group configuration as needed.
+> TiDBは、クラスタの初期化中に自動的にリソースグループ`default`を作成します。このリソースグループでは、デフォルト値は`RU_PER_SEC`ですが、 `UNLIMITED` （ `INT`タイプの最大値である`2147483647`相当）に設定され、モードは`BURSTABLE`です。どのリソースグループにもバインドされていないすべてのリクエストは、この`default`リソースグループに自動的にバインドされます。別のリソースグループの新しい構成を作成する場合は、必要に応じて`default`リソースグループの設定を変更することをお勧めします。

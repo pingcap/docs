@@ -1,194 +1,194 @@
 ---
 title: TiDB Cloud Glossary
-summary: Learn the terms used in TiDB Cloud.
+summary: TiDB Cloudで使用される用語を学習します。
 category: glossary
 aliases: ['/tidbcloud/glossary']
 ---
 
-# TiDB Cloud Glossary
+# TiDB Cloud用語集 {#tidb-cloud-glossary}
 
-## A
+## あ {#a}
 
-### ACID
+### ACID {#acid}
 
-ACID refers to the four key properties of a transaction: atomicity, consistency, isolation, and durability. Each of these properties is described below.
+ACIDとは、トランザクションの4つの主要な特性、すなわち原子性、一貫性、独立性、そして永続性を指します。これらの特性についてそれぞれ以下で説明します。
 
-- **Atomicity** means that either all the changes of an operation are performed, or none of them are. TiDB ensures the atomicity of the [TiDB Region](#region) that stores the Primary Key to achieve the atomicity of transactions.
+-   **原子性**とは、操作のすべての変更が実行されるか、まったく実行されないかのいずれかを意味します。TiDBは、トランザクションの原子性を実現するために、主キーを格納する[TiDBリージョン](#region)の要素の原子性を保証します。
 
-- **Consistency** means that transactions always bring the database from one consistent state to another. In TiDB, data consistency is ensured before writing data to the memory.
+-   **一貫性と**は、トランザクションがデータベースを常にある一貫性のある状態から別の一貫性のある状態へと移行させることを意味します。TiDBでは、データをメモリに書き込む前にデータの一貫性が確保されます。
 
-- **Isolation** means that a transaction in process is invisible to other transactions until it completes. This allows concurrent transactions to read and write data without sacrificing consistency. TiDB currently supports the isolation level of `REPEATABLE READ`.
+-   **分離と**は、処理中のトランザクションが完了するまで他のトランザクションから参照できないことを意味します。これにより、同時実行中のトランザクションは一貫性を損なうことなくデータの読み書きを行うことができます。TiDBは現在、分離レベル`REPEATABLE READ`サポートしています。
 
-- **Durability** means that once a transaction is committed, it remains committed even in the event of a system failure. TiKV uses persistent storage to ensure durability.
+-   **耐久性と**は、トランザクションが一度コミットされると、システム障害が発生してもコミットされた状態が維持されることを意味します。TiKVは永続storageを使用して耐久性を確保します。
 
-## C
+## C {#c}
 
-### Chat2Query
+### チャット2クエリ {#chat2query}
 
-Chat2Query is an AI-powered feature integrated into SQL Editor that assists users in generating, debugging, or rewriting SQL queries using natural language instructions. For more information, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
+Chat2Queryは、SQLエディタに統合されたAIベースの機能で、自然言語によるSQLクエリの生成、デバッグ、書き換えを支援します。詳細については、 [AI支援SQLエディターでデータを探索](/tidb-cloud/explore-data-with-chat2query.md)ご覧ください。
 
-In addition, TiDB Cloud provides a Chat2Query API for {{{ .starter }}} clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+さらに、 TiDB CloudはTiDB Cloud Serverlessクラスタ向けにChat2Query APIを提供しています。有効にすると、 TiDB Cloudは自動的に**Chat2Query**と呼ばれるシステムデータアプリと、データサービスにChat2Dataエンドポイントを作成します。このエンドポイントを呼び出すことで、AIが指示を与えることでSQL文を生成・実行できるようになります。詳細については、 [Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)ご覧ください。
 
-### Credit
+### クレジット {#credit}
 
-TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay TiDB cluster fees before the credits become expired.
+TiDB Cloudは、概念実証（PoC）ユーザーに一定数のクレジットを提供しています。1クレジットは1米ドルに相当します。クレジットは、有効期限が切れる前にTiDBクラスタの料金を支払うために使用できます。
 
-## D
+## D {#d}
 
-### Data App
+### データアプリ {#data-app}
 
-A Data App in [Data Service (beta)](#data-service) is a collection of endpoints that you can use to access data for a specific application. You can configure authorization settings using API keys to restrict access to endpoints in a Data App.
+[データサービス（ベータ版）](#data-service)のデータアプリは、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントのコレクションです。APIキーを使用して認証設定を構成し、データアプリ内のエンドポイントへのアクセスを制限できます。
 
-For more information, see [Manage a Data App](/tidb-cloud/data-service-manage-data-app.md).
+詳細については[データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)参照してください。
 
-### Data Service
+### データサービス {#data-service}
 
-Data Service (beta) enables you to access TiDB Cloud data via an HTTPS request using a custom API [endpoint](#endpoint). This feature uses a serverless architecture to handle computing resources and elastic scaling, so you can focus on the query logic in endpoints without worrying about infrastructure or maintenance costs.
+データサービス（ベータ版）を使用すると、カスタムAPI [終点](#endpoint)を使用したHTTPSリクエストを介してTiDB Cloudデータにアクセスできます。この機能は、サーバーレスアーキテクチャを使用してコンピューティングリソースと柔軟なスケーリングを処理するため、インフラストラクチャやメンテナンスコストを気にすることなく、エンドポイントのクエリロジックに集中できます。
 
-For more information, see [Data Service Overview](/tidb-cloud/data-service-overview.md).
+詳細については[データサービスの概要](/tidb-cloud/data-service-overview.md)参照してください。
 
-### Direct Customer
+### 直接顧客 {#direct-customer}
 
-A direct customer is an end customer who purchases TiDB Cloud and pays invoices directly from PingCAP. This is distinguished from an [MSP customer](#msp-customer).
+直接顧客とは、 TiDB Cloudを購入し、PingCAPから直接請求書を支払うエンドカスタマーです。これは[MSP顧客](#msp-customer)とは区別されます。
 
-## E
+## E {#e}
 
-### Endpoint
+### 終点 {#endpoint}
 
-An endpoint in Data Service is a web API that you can customize to execute SQL statements. You can specify parameters for your SQL statements, such as the value used in the `WHERE` clause. When a client calls an endpoint and provides values for the parameters in a request URL, the endpoint executes the corresponding SQL statement with the provided parameters and returns the results as part of the HTTP response.
+Data Service のエンドポイントは、SQL 文を実行するためにカスタマイズできる Web API です。SQL 文には、 `WHERE`句で使用する値などのパラメータを指定できます。クライアントがエンドポイントを呼び出し、リクエスト URL でパラメータの値を指定すると、エンドポイントは指定されたパラメータを使用して対応する SQL 文を実行し、結果を HTTP レスポンスの一部として返します。
 
-For more information, see [Manage an endpoint](/tidb-cloud/data-service-manage-endpoint.md).
+詳細については[エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)参照してください。
 
-## F
+## F {#f}
 
-### Full-text search
+### 全文検索 {#full-text-search}
 
-Unlike [Vector Search](/vector-search/vector-search-overview.md), which focuses on semantic similarity, full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
+意味的類似性に重点を置く[ベクトル検索](/vector-search/vector-search-overview.md)とは異なり、全文検索では正確なキーワードで文書を検索できます。検索拡張生成（RAG）シナリオでは、全文検索とベクトル検索を併用することで検索品質を向上させることができます。
 
-For more information, see [Full-Text Search with SQL](/tidb-cloud/vector-search-full-text-search-sql.md) and [Full-Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md).
+詳細については、 [SQLによる全文検索](/tidb-cloud/vector-search-full-text-search-sql.md)および[Pythonによる全文検索](/tidb-cloud/vector-search-full-text-search-python.md)参照してください。
 
-## M
+## M {#m}
 
-### member
+### メンバー {#member}
 
-A user that has been invited to an organization, with access to the organization and the clusters of this organization.
+組織に招待され、組織とこの組織のクラスターへのアクセス権を持つユーザー。
 
-### MPP
+### MPP {#mpp}
 
-Starting from v5.0, TiDB introduces Massively Parallel Processing (MPP) architecture through TiFlash nodes, which shares the execution workloads of large join queries among TiFlash nodes. When the MPP mode is enabled, TiDB, based on cost, determines whether to use the MPP framework to perform the calculation. In the MPP mode, the join keys are redistributed through the Exchange operation while being calculated, which distributes the calculation pressure to each TiFlash node and speeds up the calculation. For more information, see [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
+TiDB v5.0以降、 TiFlashノードを介した大規模並列処理（MPP）アーキテクチャが導入され、大規模な結合クエリの実行ワークロードがTiFlashノード間で共有されます。MPPモードが有効になっている場合、TiDBはコストに基づいて、MPPフレームワークを使用して計算を実行するかどうかを判断します。MPPモードでは、計算中に結合キーがExchange操作を通じて再分配されるため、各TiFlashノードへの計算負荷が分散され、計算速度が向上します。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)参照してください。
 
-### MSP Customer
+### MSP顧客 {#msp-customer}
 
-A managed service provider (MSP) customer is an end customer who purchases TiDB Cloud and pays invoices through the MSP channel. This is distinguished from a [direct customer](#direct-customer).
+マネージドサービスプロバイダー（MSP）顧客とは、 TiDB Cloudを購入し、MSPチャネルを通じて請求書を支払うエンドカスタマーです。これは[直接顧客](#direct-customer)とは区別されます。
 
-### Managed Service Provider (MSP)
+### マネージドサービスプロバイダー（MSP） {#managed-service-provider-msp}
 
-A managed service provider (MSP) is a partner who resells TiDB Cloud and provides value-added services, including but not limited to TiDB Cloud organization management, billing services, and technical support.
+マネージド サービス プロバイダー (MSP) は、 TiDB Cloudを再販し、 TiDB Cloud組織管理、課金サービス、テクニカル サポートなどを含む付加価値サービスを提供するパートナーです。
 
-## N
+## 北 {#n}
 
-### node
+### ノード {#node}
 
-Refers to either a data instance (TiKV) or a compute instance (TiDB) or an analytical instance (TiFlash).
+データ インスタンス (TiKV)、コンピューティング インスタンス (TiDB)、または分析インスタンス (TiFlash) のいずれかを指します。
 
-## O
+## お {#o}
 
-### organization
+### 組織 {#organization}
 
-An entity that you create to manage your TiDB Cloud accounts, including a management account with any number of multiple member accounts.
+任意の数の複数のメンバー アカウントを持つ管理アカウントを含む、 TiDB Cloudアカウントを管理するために作成するエンティティ。
 
-### organization members
+### 組織メンバー {#organization-members}
 
-Organization members are users who are invited by the organization owner or project owner to join an organization. Organization members can view members of the organization and can be invited to projects within the organization.
+組織メンバーとは、組織のオーナーまたはプロジェクトオーナーから組織への参加を招待されたユーザーです。組織メンバーは、組織のメンバーを閲覧したり、組織内のプロジェクトに招待したりできます。
 
-## P
+## P {#p}
 
-### policy
+### ポリシー {#policy}
 
-A document that defines permissions applying to a role, user, or organization, such as the access to specific actions or resources.
+特定のアクションやリソースへのアクセスなど、ロール、ユーザー、または組織に適用される権限を定義するドキュメント。
 
-### project
+### プロジェクト {#project}
 
-Based on the projects created by the organization, resources such as personnel, instances, and networks can be managed separately according to projects, and resources between projects do not interfere with each other.
+組織が作成したプロジェクトに基づいて、人員、インスタンス、ネットワークなどのリソースをプロジェクトごとに個別に管理することができ、プロジェクト間のリソースが互いに干渉することはありません。
 
-### project members
+### プロジェクトメンバー {#project-members}
 
-Project members are users who are invited to join one or more projects of the organization. Project members can manage clusters, network access, backups, and other resources.
+プロジェクトメンバーとは、組織の1つ以上のプロジェクトに参加するよう招待されたユーザーです。プロジェクトメンバーは、クラスタ、ネットワークアクセス、バックアップ、その他のリソースを管理できます。
 
-## R
+## R {#r}
 
-### Recycle Bin
+### ごみ箱 {#recycle-bin}
 
-The place where the data of deleted clusters with valid backups is stored. Once a backed-up TiDB Cloud Dedicated cluster is deleted, the existing backup files of the cluster are moved to the recycle bin. For backup files from automatic backups, the recycle bin will retain them for a specified period. You can configure the backup retention in **Backup Setting**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new cluster in time. Note that if a cluster **has no backup**, the deleted cluster will not be displayed here.
+有効なバックアップがある削除されたクラスターのデータが保存される場所です。バックアップされたTiDB Cloud Dedicated クラスターが削除されると、クラスターの既存のバックアップ ファイルはごみ箱に移動されます。自動バックアップからのバックアップ ファイルの場合、ごみ箱には指定された期間保持されます。バックアップ保持期間は**バックアップ設定**で設定でき、デフォルトは 7 日間です。手動バックアップからのバックアップ ファイルの場合、有効期限はありません。データ損失を避けるため、データを新しいクラスターに時間内に復元することを忘れないでください。クラスター**にバックアップがない**場合、削除されたクラスターはここに表示されないことに注意してください。
 
-### region
+### 地域 {#region}
 
-- TiDB Cloud region
+-   TiDB Cloudリージョン
 
-    A geographical area in which a TiDB Cloud cluster is deployed. A TiDB Cloud region comprises of at least 3 Availability Zones, and the cluster is deployed across these zones.
+    TiDB Cloudクラスターがデプロイされる地理的領域。TiDB TiDB Cloudリージョンは少なくとも 3 つのアベイラビリティーゾーンで構成され、クラスターはこれらのゾーンにまたがってデプロイされます。
 
-- TiDB Region
+-   TiDBリージョン
 
-    The basic unit of data in TiDB. TiKV divides the Key-Value space into a series of consecutive Key segments, and each segment is called a Region. The default size limit for each Region is 96 MB and can be configured.
+    TiDBにおけるデータの基本単位。TiKVはキーバリュー空間を連続するキーセグメントに分割し、各セグメントはリージョンと呼ばれます。各リージョンのデフォルトのサイズ制限は96MBですが、変更可能です。
 
-### replica
+### レプリカ {#replica}
 
-A separate database that can be located in the same or different region and contains the same data. A replica is often used for disaster recovery purposes or to improve performance.
+同じリージョンまたは別のリージョンに配置され、同じデータを含む独立したデータベース。レプリカは、災害復旧やパフォーマンス向上のためによく使用されます。
 
-### Replication Capacity Unit
+### レプリケーション容量単位 {#replication-capacity-unit}
 
-The replication of changefeed is charged according to the computing resources, which is the TiCDC replication capacity unit.
+changefeed のレプリケーションは、コンピューティング リソース (TiCDC レプリケーション容量単位) に応じて課金されます。
 
-### Request Unit
+### リクエストユニット {#request-unit}
 
-A Request Unit (RU) is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified. For more information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
+リクエストユニット（RU）は、データベースへの単一のリクエストで消費されるリソースの量を表す測定単位です。リクエストで消費されるRUの量は、操作の種類や取得または変更されるデータの量など、さまざまな要因によって異なります。詳細については、 [TiDB Cloud Serverless の価格詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)ご覧ください。
 
-## S
+## S {#s}
 
-### Spending limit
+### 支出限度額 {#spending-limit}
 
-Spending limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that enables you to set a budget for your {{{ .starter }}} clusters. For [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan), the spending limit must be set to a minimum of $0.01. Also, the scalable cluster can have a free quota if it meets the qualifications. The scalable cluster with a free quota will consume the free quota first.
+支出制限とは、特定のワークロードに対して1か月に支出可能な最大金額を指します。これは、 TiDB Cloud Serverlessクラスターの予算を設定できるコスト管理メカニズムです。1 [スケーラブルなクラスター](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan)場合、支出制限は最低0.01ドルに設定する必要があります。また、スケーラブルクラスターは、要件を満たしていれば無料割り当てを持つことができます。無料割り当てを持つスケーラブルクラスターは、まず無料割り当てを使用します。
 
-## T
+## T {#t}
 
-### TiDB cluster
+### TiDB クラスター {#tidb-cluster}
 
-The collection of [TiDB](https://docs.pingcap.com/tidb/stable/tidb-computing), [TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage), [the Placement Driver](https://docs.pingcap.com/tidb/stable/tidb-scheduling) (PD), and [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) nodes that form a functional working database.
+機能的な作業データベースを形成する[TiDB](https://docs.pingcap.com/tidb/stable/tidb-computing) 、 [TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage) 、 [配置Driver](https://docs.pingcap.com/tidb/stable/tidb-scheduling) (PD)、および[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)ノードのコレクション。
 
-### TiDB node
+### TiDBノード {#tidb-node}
 
-The computing node that aggregates data from queries returned from transactional or analytical stores. Increasing the number of TiDB nodes will increase the number of concurrent queries that the cluster can handle.
+トランザクションストアまたは分析ストアから返されたクエリからデータを集約するコンピューティングノード。TiDBノードの数を増やすと、クラスターが処理できる同時クエリの数が増加します。
 
-### TiFlash node
+### TiFlashノード {#tiflash-node}
 
-The analytical storage node that replicates data from TiKV in real time and supports real-time analytical workloads.
+TiKV からデータをリアルタイムで複製し、リアルタイムの分析storageロードをサポートする分析ストレージ ノード。
 
-### TiKV node
+### TiKVノード {#tikv-node}
 
-The storage node that stores the online transactional processing (OLTP) data. It is scaled in multiples of 3 nodes (for example, 3, 6, 9) for high availability, with two nodes acting as replicas. Increasing the number of TiKV nodes will increase the total throughput.
+オンライントランザクション処理（OLTP）データを保存するstorageノードです。高可用性を実現するために、3ノードの倍数（例：3、6、9）で拡張され、2つのノードがレプリカとして機能します。TiKVノードの数を増やすと、全体のスループットが向上します。
 
-### traffic filter
+### トラフィックフィルター {#traffic-filter}
 
-A list of IP addresses and Classless Inter-Domain Routing (CIDR) addresses that are allowed to access the TiDB Cloud cluster via a SQL client. The traffic filter is empty by default.
+SQLクライアント経由でTiDB Cloudクラスターへのアクセスが許可されるIPアドレスとクラスレスドメイン間ルーティング（CIDR）アドレスのリスト。トラフィックフィルターはデフォルトで空です。
 
-## V
+## V {#v}
 
-### Vector search
+### ベクトル検索 {#vector-search}
 
-[Vector search](/vector-search/vector-search-overview.md) is a search method that prioritizes the meaning of your data to deliver relevant results. Unlike traditional full-text search, which relies on exact keyword matching and word frequency, vector search converts various data types (such as text, images, or audio) into high-dimensional vectors and queries based on the similarity between these vectors. This search method captures the semantic meaning and contextual information of the data, leading to a more precise understanding of user intent. Even when the search terms do not exactly match the content in the database, vector search can still provide results that align with the user's intent by analyzing the semantics of the data.
+[ベクトル検索](/vector-search/vector-search-overview.md) 、データの意味を優先して関連性の高い結果を提供する検索手法です。キーワードの完全一致や単語の出現頻度に依存する従来の全文検索とは異なり、ベクター検索は、テキスト、画像、音声など様々なデータタイプを高次元ベクトルに変換し、それらのベクトル間の類似性に基づいてクエリを実行します。この検索手法は、データの意味と文脈情報を捉えることで、ユーザーの検索意図をより正確に理解します。検索語がデータベース内のコンテンツと完全に一致しない場合でも、ベクター検索はデータのセマンティクスを分析することで、ユーザーの検索意図に沿った結果を提供できます。
 
-### Virtual Private Cloud
+### 仮想プライベートクラウド {#virtual-private-cloud}
 
-A logically isolated virtual network partition that provides managed networking service for your resources.
+リソースに対して管理されたネットワーク サービスを提供する、論理的に分離された仮想ネットワーク パーティション。
 
-### VPC
+### VPC {#vpc}
 
-Short for Virtual Private Cloud.
+Virtual Private Cloud の略。
 
-### VPC peering
+### VPCピアリング {#vpc-peering}
 
-Enables you to connect Virtual Private Cloud ([VPC](#vpc)) networks so that workloads in different VPC networks can communicate privately.
+仮想プライベートクラウド（ [VPC](#vpc) ）ネットワークを接続して、異なるVPCネットワーク内のワークロードがプライベートに通信できるようにします。
 
-### VPC peering connection
+### VPCピアリング接続 {#vpc-peering-connection}
 
-A networking connection between two Virtual Private Clouds (VPCs) that enables you to route traffic between them using private IP addresses and helps you to facilitate data transfer.
+2 つの仮想プライベート クラウド (VPC) 間のネットワーク接続。これにより、プライベート IP アドレスを使用してそれらの間のトラフィックをルーティングし、データ転送を容易にすることができます。

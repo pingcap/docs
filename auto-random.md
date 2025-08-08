@@ -1,27 +1,27 @@
 ---
 title: AUTO_RANDOM
-summary: Learn the AUTO_RANDOM attribute.
+summary: AUTO_RANDOM 属性について学習します。
 ---
 
-# AUTO_RANDOM <span class="version-mark">New in v3.1.0</span>
+# AUTO_RANDOM <span class="version-mark">v3.1.0 の新機能</span> {#auto-random-span-class-version-mark-new-in-v3-1-0-span}
 
-## User scenario
+## ユーザーシナリオ {#user-scenario}
 
-Since the value of `AUTO_RANDOM` is random and unique, `AUTO_RANDOM` is often used in place of [`AUTO_INCREMENT`](/auto-increment.md) to avoid write hotspot in a single storage node caused by TiDB assigning consecutive IDs. If the current `AUTO_INCREMENT` column is a primary key and the type is `BIGINT`, you can execute the `ALTER TABLE t MODIFY COLUMN id BIGINT AUTO_RANDOM(5);` statement to switch from `AUTO_INCREMENT` to `AUTO_RANDOM`.
+`AUTO_RANDOM`の値はランダムかつ一意であるため、TiDBが連続したIDを割り当てることで単一storageノードに書き込みホットスポットが発生するのを回避するため、 [`AUTO_INCREMENT`](/auto-increment.md)の代わりに`AUTO_RANDOM`使用されることがよくあります。現在の`AUTO_INCREMENT`列が主キーで、型が`BIGINT`場合、 `ALTER TABLE t MODIFY COLUMN id BIGINT AUTO_RANDOM(5);`ステートメントを実行して`AUTO_INCREMENT`から`AUTO_RANDOM`に切り替えることができます。
 
 <CustomContent platform="tidb">
 
-For more information about how to handle highly concurrent write-heavy workloads in TiDB, see [Best Practices for High-Concurrency Writes](/best-practices/high-concurrency-best-practices.md).
+TiDB で同時書き込みの多いワークロードを処理する方法の詳細については、 [高同時書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)参照してください。
 
 </CustomContent>
 
-The `AUTO_RANDOM_BASE` parameter in the [CREATE TABLE](/sql-statements/sql-statement-create-table.md) statement is used to set the initial incremental part value of `auto_random`. This option can be considered as a part of the internal interface. You can ignore this parameter.
+[テーブルの作成](/sql-statements/sql-statement-create-table.md)文の`AUTO_RANDOM_BASE`パラメータは、初期増分値`auto_random`を設定するために使用されます。このオプションは内部インターフェースの一部とみなすことができます。このパラメータは無視できます。
 
-## Basic concepts
+## 基本概念 {#basic-concepts}
 
-`AUTO_RANDOM` is a column attribute that is used to automatically assign values to a `BIGINT` column. Values assigned automatically are **random** and **unique**.
+`AUTO_RANDOM`は、 `BIGINT`列に値を自動的に割り当てるために使用される列属性です。自動的に割り当てられる値は**ランダム**かつ**一意**です。
 
-To create a table with an `AUTO_RANDOM` column, you can use the following statements. The `AUTO_RANDOM` column must be included in a primary key, and the `AUTO_RANDOM` column is the first column in the primary key.
+`AUTO_RANDOM`列目のテーブルを作成するには、以下のステートメントを使用します。3列目`AUTO_RANDOM`主キーに含まれている必要があり、 `AUTO_RANDOM`列目は主キーの最初の列です。
 
 ```sql
 CREATE TABLE t (a BIGINT AUTO_RANDOM, b VARCHAR(255), PRIMARY KEY (a));
@@ -31,7 +31,7 @@ CREATE TABLE t (a BIGINT AUTO_RANDOM(5, 54), b VARCHAR(255), PRIMARY KEY (a));
 CREATE TABLE t (a BIGINT AUTO_RANDOM(5, 54), b VARCHAR(255), PRIMARY KEY (a, b));
 ```
 
-You can wrap the keyword `AUTO_RANDOM` in an executable comment. For more details, refer to [TiDB specific comment syntax](/comment-syntax.md#tidb-specific-comment-syntax).
+キーワード`AUTO_RANDOM`実行コメントで囲むことができます。詳細については[TiDB固有のコメント構文](/comment-syntax.md#tidb-specific-comment-syntax)を参照してください。
 
 ```sql
 CREATE TABLE t (a bigint /*T![auto_rand] AUTO_RANDOM */, b VARCHAR(255), PRIMARY KEY (a));
@@ -40,10 +40,10 @@ CREATE TABLE t (a BIGINT /*T![auto_rand] AUTO_RANDOM(6) */, b VARCHAR(255), PRIM
 CREATE TABLE t (a BIGINT  /*T![auto_rand] AUTO_RANDOM(5, 54) */, b VARCHAR(255), PRIMARY KEY (a));
 ```
 
-When you execute an `INSERT` statement:
+`INSERT`ステートメントを実行すると、次のようになります。
 
-- If you explicitly specify the value of the `AUTO_RANDOM` column, it is inserted into the table as is.
-- If you do not explicitly specify the value of the `AUTO_RANDOM` column, TiDB generates a random value and inserts it into the table.
+-   `AUTO_RANDOM`列目の値を明示的に指定すると、そのままテーブルに挿入されます。
+-   `AUTO_RANDOM`列の値を明示的に指定しない場合は、TiDB によってランダムな値が生成され、テーブルに挿入されます。
 
 ```sql
 tidb> CREATE TABLE t (a BIGINT PRIMARY KEY AUTO_RANDOM, b VARCHAR(255)) /*T! PRE_SPLIT_REGIONS=2 */ ;
@@ -100,55 +100,55 @@ tidb> SHOW TABLE t REGIONS;
 4 rows in set (0.00 sec)
 ```
 
-The `AUTO_RANDOM(S, R)` column value automatically assigned by TiDB has a total of 64 bits:
+TiDB によって自動的に割り当てられる`AUTO_RANDOM(S, R)`列の値の合計は 64 ビットです。
 
-- `S` is the number of shard bits. The value ranges from `1` to `15`. The default value is `5`.
-- `R` is the total length of the automatic allocation range. The value ranges from `32` to `64`. The default value is `64`.
+-   `S`はシャードビット数です。値の範囲は`1`から`15`です。デフォルト値は`5`です。
+-   `R`は自動割り当て範囲の合計長です。値の範囲は`32`から`64` 。デフォルト値は`64`です。
 
-The structure of an `AUTO_RANDOM` value with a signed bit is as follows:
+符号付きビットを持つ`AUTO_RANDOM`値の構造は次のとおりです。
 
-| Signed bit | Reserved bits | Shard bits | Auto-increment bits |
-|---------|-------------|--------|--------------|
-| 1 bit | `64-R` bits | `S` bits | `R-1-S` bits |
+| 符号付きビット | 予約ビット     | 破片の断片  | 自動インクリメントビット |
+| ------- | --------- | ------ | ------------ |
+| 1ビット    | `64-R`ビット | `S`ビット | `R-1-S`ビット   |
 
-The structure of an `AUTO_RANDOM` value without a signed bit is as follows:
+符号付きビットのない`AUTO_RANDOM`値の構造は次のとおりです。
 
-| Reserved bits | Shard bits | Auto-increment bits |
-|-------------|--------|--------------|
-| `64-R` bits | `S` bits | `R-S` bits |
+| 予約ビット     | 破片の断片  | 自動インクリメントビット |
+| --------- | ------ | ------------ |
+| `64-R`ビット | `S`ビット | `R-S`ビット     |
 
-- Whether a value has a signed bit depends on whether the corresponding column has the `UNSIGNED` attribute.
-- The length of the sign bit is determined by the existence of an `UNSIGNED` attribute. If there is an `UNSIGNED` attribute, the length is `0`. Otherwise, the length is `1`.
-- The length of the reserved bits is `64-R`. The reserved bits are always `0`.
-- The content of the shard bits is obtained by calculating the hash value of the starting time of the current transaction. To use a different length of shard bits (such as 10), you can specify `AUTO_RANDOM(10)` when creating the table.
-- The value of the auto-increment bits is stored in the storage engine and allocated sequentially. Each time a new value is allocated, the value is incremented by 1. The auto-increment bits ensure that the values of `AUTO_RANDOM` are unique globally. When the auto-increment bits are exhausted, an error `Failed to read auto-increment value from storage engine` is reported when the value is allocated again.
-- Value range: the maximum number of bits for the final generated value = shard bits + auto-increment bits. The range of a signed column is `[-(2^(R-1))+1, (2^(R-1))-1]`, and the range of an unsigned column is `[0, (2^R)-1]`.
-- You can use `AUTO_RANDOM` with `PRE_SPLIT_REGIONS`. When a table is created successfully, `PRE_SPLIT_REGIONS` pre-splits data in the table into the number of Regions as specified by `2^(PRE_SPLIT_REGIONS)`.
+-   値に符号付きビットがあるかどうかは、対応する列に`UNSIGNED`属性があるかどうかによって決まります。
+-   符号ビットの長さは、属性`UNSIGNED`有無によって決まります。属性`UNSIGNED`がある場合、長さは`0`です。そうでない場合、長さは`1`です。
+-   予約ビットの長さは`64-R`です。予約ビットは常に`0`です。
+-   シャードビットの内容は、現在のトランザクションの開始時刻のハッシュ値を計算することで得られます。異なるシャードビット長（10など）を使用する場合は、テーブル作成時に`AUTO_RANDOM(10)`指定します。
+-   自動インクリメントビットの値はstorageエンジンに格納され、順次割り当てられます。新しい値が割り当てられるたびに、値は1ずつ増加します。自動インクリメントビットは、 `AUTO_RANDOM`の値がグローバルに一意であることを保証します。自動インクリメントビットが使い果たされると、値が再び割り当てられる際にエラー`Failed to read auto-increment value from storage engine`が報告されます。
+-   値の範囲：最終的に生成される値の最大ビット数 = シャードビット数 + 自動インクリメントビット数。符号付き列の範囲は`[-(2^(R-1))+1, (2^(R-1))-1]` 、符号なし列の範囲は`[0, (2^R)-1]`です。
+-   `AUTO_RANDOM` `PRE_SPLIT_REGIONS`と組み合わせて使用できます。テーブルが正常に作成されると、 `PRE_SPLIT_REGIONS`テーブル内のデータを`2^(PRE_SPLIT_REGIONS)`で指定された数のリージョンに事前に分割します。
 
-> **Note:**
+> **注記：**
 >
-> Selection of shard bits (`S`):
+> シャードビットの選択（ `S` ）：
 >
-> - Since there is a total of 64 available bits, the shard bits length affects the auto-increment bits length. That is, as the shard bits length increases, the length of auto-increment bits decreases, and vice versa. Therefore, you need to balance the randomness of allocated values and available space.
-> - The best practice is to set the shard bits as `log(2, x)`, in which `x` is the current number of storage engines. For example, if there are 16 TiKV nodes in a TiDB cluster, you can set the shard bits as `log(2, 16)`, that is `4`. After all regions are evenly scheduled to each TiKV node, the load of bulk writes can be uniformly distributed to different TiKV nodes to maximize resource utilization.
+> -   利用可能なビット数は合計64ビットであるため、シャードビット長は自動インクリメントビット長に影響します。つまり、シャードビット長が増加すると自動インクリメントビット長は減少し、逆もまた同様です。したがって、割り当てられた値のランダム性と利用可能なスペースのバランスをとる必要があります。
+> -   ベストプラクティスは、シャードビットを`log(2, x)`に設定することです。ここで、 `x`現在のstorageエンジンの数です。例えば、TiDB クラスターに TiKV ノードが 16 個ある場合、シャードビットを`log(2, 16)` （つまり`4`に設定できます。すべてのリージョンが各 TiKV ノードに均等にスケジュールされると、一括書き込みの負荷が複数の TiKV ノードに均等に分散され、リソース使用率を最大化できます。
 >
-> Selection of range (`R`):
+> 範囲の選択（ `R` ）：
 >
-> - Typically, the `R` parameter needs to be set when the numeric type of the application cannot represent a full 64-bit integer.
-> - For example, the range of JSON number is `[-(2^53)+1, (2^53)-1]`. TiDB can easily assign an integer beyond this range to a column defined as `AUTO_RANDOM(5)`, causing unexpected behaviors when the application reads the column. In such cases, you can replace `AUTO_RANDOM(5)` with `AUTO_RANDOM(5, 54)` for signed columns, and replace `AUTO_RANDOM(5)` with `AUTO_RANDOM(5, 53)` for unsigned columns, ensuring that TiDB does not assign integers greater than `9007199254740991` (2^53-1) to the column.
+> -   通常、アプリケーションの数値型が完全な 64 ビット整数を表現できない場合は、 `R`パラメータを設定する必要があります。
+> -   例えば、JSONの数値の範囲は`[-(2^53)+1, (2^53)-1]`です。TiDBは、 `AUTO_RANDOM(5)`と定義された列にこの範囲を超える整数を簡単に割り当ててしまう可能性があり、アプリケーションがその列を読み取った際に予期しない動作を引き起こす可能性があります。このような場合、符号付き列の場合は`AUTO_RANDOM(5)` `AUTO_RANDOM(5, 54)`に、符号なし列の場合は`AUTO_RANDOM(5)` `AUTO_RANDOM(5, 53)`に置き換えることで、TiDBが列に`9007199254740991` (2^53-1) を超える整数を割り当てないようにすることができます。
 
-Values allocated implicitly to the `AUTO_RANDOM` column affect `last_insert_id()`. To get the ID that TiDB last implicitly allocates, you can use the `SELECT last_insert_id ()` statement.
+`AUTO_RANDOM`列に暗黙的に割り当てられた値は`last_insert_id()`影響します。TiDB が最後に暗黙的に割り当てた ID を取得するには、 `SELECT last_insert_id ()`ステートメントを使用できます。
 
-To view the shard bits number of the table with an `AUTO_RANDOM` column, you can execute the `SHOW CREATE TABLE` statement. You can also see the value of the `PK_AUTO_RANDOM_BITS=x` mode in the `TIDB_ROW_ID_SHARDING_INFO` column in the `information_schema.tables` system table. `x` is the number of shard bits.
+列番号が`AUTO_RANDOM`であるテーブルのシャードビット数を確認するには、 `SHOW CREATE TABLE`ステートメントを実行します。また、 `information_schema.tables`システムテーブルの列番号`TIDB_ROW_ID_SHARDING_INFO`で、 `PK_AUTO_RANDOM_BITS=x`のモードの値を確認することもできます`x`はシャードビット数です。
 
-After creating a table with an `AUTO_RANDOM` column, you can use `SHOW WARNINGS` to view the maximum implicit allocation times:
+`AUTO_RANDOM`列のテーブルを作成した後、 `SHOW WARNINGS`使用して最大暗黙的割り当て時間を表示できます。
 
 ```sql
 CREATE TABLE t (a BIGINT AUTO_RANDOM, b VARCHAR(255), PRIMARY KEY (a));
 SHOW WARNINGS;
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 +-------+------+---------------------------------------------------------+
@@ -159,55 +159,55 @@ The output is as follows:
 1 row in set (0.00 sec)
 ```
 
-## Implicit allocation rules of IDs
+## IDの暗黙的な割り当てルール {#implicit-allocation-rules-of-ids}
 
-TiDB implicitly allocates values to `AUTO_RANDOM` columns similarly to `AUTO_INCREMENT` columns. They are also controlled by the session-level system variables [`auto_increment_increment`](/system-variables.md#auto_increment_increment) and [`auto_increment_offset`](/system-variables.md#auto_increment_offset). The auto-increment bits (ID) of implicitly allocated values conform to the equation `(ID - auto_increment_offset) % auto_increment_increment == 0`.
+TiDBは、 `AUTO_INCREMENT`列と同様に、 `AUTO_RANDOM`列にも暗黙的に値を割り当てます。これらの値は、セッションレベルのシステム変数[`auto_increment_increment`](/system-variables.md#auto_increment_increment)と[`auto_increment_offset`](/system-variables.md#auto_increment_offset)によって制御されます。暗黙的に割り当てられた値の自動インクリメントビット（ID）は、式`(ID - auto_increment_offset) % auto_increment_increment == 0`に従います。
 
-## Clear the auto-increment ID cache
+## 自動増分IDキャッシュをクリアする {#clear-the-auto-increment-id-cache}
 
-When you insert data with explicit values into an `AUTO_RANDOM` column in a deployment with multiple TiDB server instances, potential ID collisions can occur, similar to an `AUTO_INCREMENT` column. If explicit inserts happen to use ID values that conflict with the internal counter TiDB uses for automatic generation, this can lead to errors. 
+複数のTiDBサーバーインスタンスが存在する環境で、 `AUTO_RANDOM`列目に明示的な値を持つデータを挿入すると、 `AUTO_INCREMENT`列目と同様に、IDの衝突が発生する可能性があります。明示的な挿入で使用されたID値が、TiDBが自動生成に使用する内部カウンターと競合すると、エラーが発生する可能性があります。
 
-Here's how the collision can happen: each `AUTO_RANDOM` ID consists of random bits and an auto-incrementing part. TiDB uses an internal counter for this auto-incrementing part. If you explicitly insert an ID where the auto-incrementing part matches the counter's next value, a duplicate key error might occur when TiDB later attempts to generate the same ID automatically. For more details, see [AUTO_INCREMENT Uniqueness](/auto-increment.md#uniqueness).
+衝突が発生する仕組みは以下のとおりです。 `AUTO_RANDOM` IDはランダムビットと自動増分部分で構成されています。TiDBはこの自動増分部分に内部カウンタを使用します。自動増分部分がカウンタの次の値と一致するIDを明示的に挿入すると、TiDBが後で同じIDを自動生成しようとする際に、重複キーエラーが発生する可能性があります。詳細については、 [AUTO_INCREMENT 一意性](/auto-increment.md#uniqueness)参照してください。
 
-With a single TiDB instance, this issue doesn't occur because the node automatically adjusts its internal counter when processing explicit insertions, preventing any future collisions. In contrast, with multiple TiDB nodes, each node maintains its own cache of IDs, which needs to be cleared to prevent collisions after explicit insertions. To clear these unallocated cached IDs and avoid potential collisions, you have two options: 
+TiDBインスタンスが1つの場合、ノードは明示的な挿入を処理する際に内部カウンターを自動的に調整し、将来の衝突を防ぐため、この問題は発生しません。一方、複数のTiDBノードがある場合、各ノードは独自のIDキャッシュを保持しており、明示的な挿入後に衝突を防ぐには、このキャッシュをクリアする必要があります。これらの未割り当てのキャッシュIDをクリアして衝突の可能性を回避するには、次の2つの方法があります。
 
-### Option 1: Automatically rebase (Recommended)
+### オプション 1: 自動的にリベースする (推奨) {#option-1-automatically-rebase-recommended}
 
 ```sql
 ALTER TABLE t AUTO_RANDOM_BASE=0;
 ```
 
-This statement automatically determines an appropriate base value. Although it produces a warning message similar to `Can't reset AUTO_INCREMENT to 0 without FORCE option, using XXX instead`, the base value **will** change and you can safely ignore this warning.
+このステートメントは適切な基数を自動的に決定します。1 `Can't reset AUTO_INCREMENT to 0 without FORCE option, using XXX instead`ような警告メッセージが表示されますが、基数は変更さ**れる**ため、この警告は無視しても問題ありません。
 
-> **Note:**
+> **注記：**
 >
-> You cannot set `AUTO_RANDOM_BASE` to `0` with the `FORCE` keyword. Attempting this results in an error.
+> `FORCE`キーワードを使用して`AUTO_RANDOM_BASE`から`0`設定することはできません。これを試みるとエラーが発生します。
 
-### Option 2: Manually set a specific base value
+### オプション2: 特定の基本値を手動で設定する {#option-2-manually-set-a-specific-base-value}
 
-If you need to set a specific base value (for example, `1000`), use the `FORCE` keyword:
+特定の基本値 (たとえば、 `1000` ) を設定する必要がある場合は、 `FORCE`キーワードを使用します。
 
 ```sql
 ALTER TABLE t FORCE AUTO_RANDOM_BASE = 1000;
 ```
 
-This approach is less convenient because it requires you to determine an appropriate base value yourself.
+このアプローチは、適切な基本値を自分で決定する必要があるため、あまり便利ではありません。
 
-> **Note:**
+> **注記：**
 >
-> When using `FORCE`, you must specify a non-zero positive integer.
+> `FORCE`使用する場合は、ゼロ以外の正の整数を指定する必要があります。
 
-Both commands modify the starting point for the auto-increment bits used in subsequent `AUTO_RANDOM` value generations across all TiDB nodes. They do not affect already allocated IDs.
+どちらのコマンドも、すべてのTiDBノードにおける後続の`AUTO_RANDOM`値生成で使用される自動インクリメントビットの開始点を変更します。すでに割り当てられているIDには影響しません。
 
-## Restrictions
+## 制限 {#restrictions}
 
-Pay attention to the following restrictions when you use `AUTO_RANDOM`:
+`AUTO_RANDOM`使用する場合は、次の制限に注意してください。
 
-- To insert values explicitly, you need to set the value of the `@@allow_auto_random_explicit_insert` system variable to `1` (`0` by default). It is **not** recommended that you explicitly specify a value for the column with the `AUTO_RANDOM` attribute when you insert data. Otherwise, the numeral values that can be automatically allocated for this table might be used up in advance.
-- Specify this attribute for the primary key column **ONLY** as the `BIGINT` type. Otherwise, an error occurs. In addition, when the attribute of the primary key is `NONCLUSTERED`, `AUTO_RANDOM` is not supported even on the integer primary key. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
-- You cannot use `ALTER TABLE` to modify the `AUTO_RANDOM` attribute, including adding or removing this attribute.
-- You cannot use `ALTER TABLE` to change from `AUTO_INCREMENT` to `AUTO_RANDOM` if the maximum value is close to the maximum value of the column type.
-- You cannot change the column type of the primary key column that is specified with `AUTO_RANDOM` attribute.
-- You cannot specify `AUTO_RANDOM` and `AUTO_INCREMENT` for the same column at the same time.
-- You cannot specify `AUTO_RANDOM` and `DEFAULT` (the default value of a column) for the same column at the same time.
-- When`AUTO_RANDOM` is used on a column, it is difficult to change the column attribute back to `AUTO_INCREMENT` because the auto-generated values might be very large.
+-   明示的に値を挿入するには、システム変数`@@allow_auto_random_explicit_insert`の値を`1` （デフォルトは`0` ）に設定する必要があります。データを挿入する際に、属性`AUTO_RANDOM`持つ列に明示的に値を指定することは推奨さ**れません**。そうしないと、このテーブルに自動的に割り当てられる数値が事前に使い果たされてしまう可能性があります。
+-   この属性は、主キー列に**のみ**`BIGINT`型で指定してください。それ以外の場合はエラーが発生します。また、主キーの属性が`NONCLUSTERED`の場合、整数型の主キーであっても`AUTO_RANDOM`サポートされません`CLUSTERED`型の主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
+-   `ALTER TABLE`使用して`AUTO_RANDOM`属性を変更することはできません (この属性の追加や削除を含む)。
+-   最大値が列タイプの最大値に近い場合は、 `ALTER TABLE`を使用して`AUTO_INCREMENT`から`AUTO_RANDOM`に変更することはできません。
+-   `AUTO_RANDOM`属性で指定された主キー列の列タイプを変更することはできません。
+-   同じ列に同時に`AUTO_RANDOM`と`AUTO_INCREMENT`指定することはできません。
+-   同じ列に`AUTO_RANDOM`と`DEFAULT` (列のデフォルト値) を同時に指定することはできません。
+-   列に`AUTO_RANDOM`使用されている場合、自動生成される値が非常に大きくなる可能性があるため、列属性を`AUTO_INCREMENT`に戻すのは困難です。

@@ -1,293 +1,293 @@
 ---
 title: TiDB Cloud Billing
-summary: Learn about TiDB Cloud billing.
+summary: TiDB Cloud の課金について説明します。
 ---
 
-# TiDB Cloud Billing
+# TiDB Cloud課金 {#tidb-cloud-billing}
 
-> **Note:**
+> **注記：**
 >
-> [{{{ .starter }}} clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) are free until May 31, 2023, with a 100% discount off. After that, usage beyond the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota) will be charged.
+> 2023年5月31日まで、 [TiDB Cloudサーバーレス クラスター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 100%割引で無料となります。それ以降は、 [無料割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)超えるご利用には料金が発生します。
 
-TiDB Cloud charges according to the resources that you consume. You can visit the following pages to get more information about the pricing.
+TiDB Cloudは、消費したリソースに応じて料金が発生します。料金の詳細については、以下のページをご覧ください。
 
-- [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-serverless-pricing-details/)
-- [TiDB Cloud Dedicated Pricing Details](https://www.pingcap.com/tidb-dedicated-pricing-details/)
+-   [TiDB Cloud Serverless の価格詳細](https://www.pingcap.com/tidb-serverless-pricing-details/)
+-   [TiDB Cloud専用料金の詳細](https://www.pingcap.com/tidb-dedicated-pricing-details/)
 
-## Invoices
+## 請求書 {#invoices}
 
-If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can manage the invoice information of TiDB Cloud. Otherwise, skip this section.
+組織内で`Organization Owner`または`Organization Billing Manager`ロールを担っている場合は、 TiDB Cloudの請求書情報を管理できます。それ以外の場合は、このセクションをスキップしてください。
 
-After you set up the payment method, TiDB Cloud will generate an invoice once your cost reaches a quota, which is $500 by default. If you want to raise the quota or receive one invoice per month, you can [contact our sales](https://www.pingcap.com/contact-us/).
+お支払い方法を設定すると、 TiDB Cloud は、ご利用料金がクォータ（デフォルトでは 500 ドル）に達すると請求書を発行します。クォータを増やしたい場合、または毎月 1 件の請求書を受け取りたい場合は、 [営業担当にお問い合わせください](https://www.pingcap.com/contact-us/)クリックしてください。
 
-> **Note:**
+> **注記：**
 >
-> If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), [Azure Marketplace](https://azuremarketplace.microsoft.com/), or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your AWS account, Azure account, or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
+> [AWS マーケットプレイス](https://aws.amazon.com/marketplace) 、 [Azureマーケットプレイス](https://azuremarketplace.microsoft.com/) 、または[Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)を通じてTiDB Cloudにサインアップした場合、AWS アカウント、Azure アカウント、または Google Cloud アカウントを通じて直接支払いを行うことができますが、 TiDB Cloudコンソールで支払い方法の追加や請求書のダウンロードを行うことはできません。
 
-After you contact our sales for receiving an invoice on a monthly basis, TiDB Cloud will generate the invoice for the previous month at the beginning of each month.
+月ごとに請求書を受け取るために弊社の営業部に連絡すると、 TiDB Cloud は毎月初めに前月の請求書を発行します。
 
-Invoice costs include TiDB cluster usage consumption, discounts, backup storage costs, support service cost, credit consumption, and data transmission costs in your organization.
+請求コストには、TiDB クラスターの使用量、割引、バックアップstorageコスト、サポート サービス コスト、クレジット消費、組織内のデータ転送コストが含まれます。
 
-For each monthly invoice:
+毎月の請求書ごとに：
 
-- TiDB Cloud provides the invoice to you on the ninth of each month. From the first to the ninth day, you cannot view the last month's cost details, but can obtain the cluster usage information of this month via the billing console.
-- The default method for paying invoices is credit card deduction. If you want to use other payment methods, please send a ticket request to let us know.
-- You can view the summary and details of charges for the current month and the previous month.
+-   TiDB Cloudは毎月9日に請求書を発行します。1日から9日までは前月の料金明細は閲覧できませんが、請求コンソールから当月のクラスター使用状況情報を取得できます。
+-   請求書のお支払いは、デフォルトでクレジットカードによる引き落としとなります。他のお支払い方法をご希望の場合は、チケットリクエストをお送りください。
+-   当月および前月の料金の概要と詳細をご覧いただけます。
 
-> **Note:**
+> **注記：**
 >
-> All billing deductions will be completed through the third-party platform Stripe.
+> すべての請求額の控除はサードパーティのプラットフォーム Stripe を通じて完了します。
 
-To view the list of invoices, perform the following steps:
+請求書のリストを表示するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用して対象の組織に切り替えます。
 
-2. In the left navigation pane, click **Billing**.
+2.  左側のナビゲーション ペインで、 **[請求]**をクリックします。
 
-3. On the **Billing** page, click the **Invoices** tab.
+3.  **「請求」**ページで、 **「請求書」**タブをクリックします。
 
-## Billing details
+## 請求の詳細 {#billing-details}
 
-If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can view and export the billing details of TiDB Cloud. Otherwise, skip this section.
+組織内で`Organization Owner`または`Organization Billing Manager`ロールを担っている場合は、 TiDB Cloudの請求情報を表示およびエクスポートできます。それ以外の場合は、このセクションをスキップしてください。
 
-After setting the payment method, TiDB Cloud will generate the invoice and billing details of the historical months, and generate the bill details of the current month at the beginning of each month. The billing details include your organization's TiDB cluster usage consumption, discounts, backup storage costs, data transmission costs, support service cost, credit consumption, and project splitting information.
+お支払い方法を設定すると、 TiDB Cloud は過去数か月分の請求書と請求明細を作成し、毎月月初に当月の請求明細を作成します。請求明細には、組織の TiDB クラスター使用量、割引、バックアップstorage費用、データ転送費用、サポートサービス費用、クレジット消費量、プロジェクト分割情報が含まれます。
 
-> **Note:**
+> **注記：**
 >
-> Due to delays and other reasons, the billing details of the current month are for reference only, not guaranteed to be accurate. TiDB Cloud ensures the accuracy of historical bills so that you can perform cost accounting and meet other needs.
+> 遅延などの理由により、当月の請求明細は参考用であり、正確性を保証するものではありません。TiDB TiDB Cloud は、過去の請求明細の正確性を確保することで、原価計算やその他のニーズに対応できるよう努めています。
 
-To view the billing details, perform the following steps:
+請求の詳細を表示するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用して対象の組織に切り替えます。
 
-2. In the left navigation pane, click **Billing**.
+2.  左側のナビゲーション ペインで、 **[請求]**をクリックします。
 
-On the **Billing** page, the **Bills** tab is displayed by default.
+**請求**ページでは、デフォルトで**請求書**タブが表示されます。
 
-The **Bills** tab shows the billing summary by project and by service. You can also see the usage details and download the data in CSV format.
+**「請求書」**タブには、プロジェクト別およびサービス別の請求概要が表示されます。また、使用状況の詳細を確認したり、CSV形式でデータをダウンロードしたりすることもできます。
 
-> **Note:**
+> **注記：**
 >
-> The total amount in the monthly bill might differ from that in the daily usage details due to differences in precision:
+> 精度の違いにより、毎月の請求書の合計金額は毎日の使用量の詳細と異なる場合があります。
 >
-> - The total amount in the monthly bill is rounded off to the 2nd decimal place.
-> - The total amount in the daily usage details is accurate to the 6th decimal place.
+> -   毎月の請求額の合計金額は小数点第2位まで切り捨てられます。
+> -   日々の使用量明細の合計金額は小数点第6位まで正確です。
 
-## Cost explorer
+## コストエクスプローラー {#cost-explorer}
 
-If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can view and analyze the usage costs of TiDB Cloud. Otherwise, skip this section.
+組織内で`Organization Owner`または`Organization Billing Manager`ロールを担っている場合は、 TiDB Cloudの使用コストを表示および分析できます。それ以外の場合は、このセクションをスキップしてください。
 
-To analyze and customize your cost reports of your organization, perform the following steps:
+組織のコストレポートを分析およびカスタマイズするには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Billing**.
-3. On the **Billing** page, click the **Cost Explorer** tab.
-4. On the **Cost Explorer** tab, expand the **Filter** section in the upper-right corner to customize your report. You can set the time range, select a grouping option (such as by service, project, cluster, region, product type, and charge type), and apply filters by selecting specific services, projects, clusters, or regions. The cost explorer will display you with the following information:
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用して対象の組織に切り替えます。
+2.  左側のナビゲーション ペインで、 **[請求]**をクリックします。
+3.  **[請求]**ページで、 **[コスト エクスプローラー]**タブをクリックします。
+4.  **「コストエクスプローラー」**タブの右上隅にある**「フィルター」**セクションを展開して、レポートをカスタマイズします。期間の設定、グループ化オプション（サービス、プロジェクト、クラスター、リージョン、製品タイプ、課金タイプなど）の選択、特定のサービス、プロジェクト、クラスター、リージョンを選択してフィルターを適用できます。コストエクスプローラーには、以下の情報が表示されます。
 
-    - **Cost Graph**: visualizes the cost trends over the selected time range. You can switch between **Monthly**, **Daily**, and **Total** views.
-    - **Cost Breakdown**: displays a detailed breakdown of your costs according to the selected grouping option. For further analysis, you can download the data in CSV format.
+    -   **コストグラフ**：選択した期間におけるコストの傾向を視覚化します。**月次**、**日次**、**合計**の表示を切り替えることができます。
+    -   **コストの内訳**：選択したグループ化オプションに応じて、コストの詳細な内訳を表示します。さらに分析したい場合は、CSV形式でデータをダウンロードできます。
 
-## Billing profile
+## 請求プロファイル {#billing-profile}
 
-Paid organizations can create a billing profile. Information in this profile will be used to determine the tax calculation.
+有料プランをご利用の組織は、請求プロファイルを作成できます。このプロファイルの情報は、税金の計算に使用されます。
 
-To view or update the billing profile of your organization, perform the following steps:
+組織の課金プロファイルを表示または更新するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Billing**.
-3. On the **Billing** page, click the **Billing Profile** tab.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用して対象の組織に切り替えます。
+2.  左側のナビゲーション ペインで、 **[請求]**をクリックします。
+3.  **「請求」**ページで、 **「請求プロファイル」**タブをクリックします。
 
-There are four fields in the billing profile.
+請求プロファイルには 4 つのフィールドがあります。
 
-### Company name (optional)
+### 会社名（任意） {#company-name-optional}
 
-If this field is specified, this name will appear on invoices instead of your organization name.
+このフィールドが指定されている場合、請求書には組織名の代わりにこの名前が表示されます。
 
-### Billing email (optional)
+### 請求先メールアドレス（オプション） {#billing-email-optional}
 
-If this field is specified, invoices and other billing-related notifications will be sent to this email address.
+このフィールドが指定されている場合、請求書やその他の請求関連の通知がこのメールアドレスに送信されます。
 
-### Primary business address
+### 主な事業所住所 {#primary-business-address}
 
-This is the address of the company that purchases TiDB Cloud services. It is used to calculate any applicable taxes.
+これは、TiDB Cloudサービスをご購入いただいた会社の住所です。適用される税金の計算に使用されます。
 
-### Business tax ID (optional)
+### 事業税ID（任意） {#business-tax-id-optional}
 
-If your business is registered for VAT/GST, fill in a valid VAT/GST ID. By providing this information, we will exempt you from charging VAT/GST if applicable. This is important for businesses operating in regions where VAT/GST registration allows for certain tax exemptions or refunds.
+貴社がVAT/GSTに登録されている場合は、有効なVAT/GST IDを入力してください。この情報をご提供いただくことで、該当する場合、VAT/GSTの課税が免除されます。これは、VAT/GST登録により一定の免税または還付が認められる地域で事業を営む企業にとって重要です。
 
-## Credits
+## クレジット {#credits}
 
-TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay TiDB cluster fees before the credits become expired.
+TiDB Cloudは、概念実証（PoC）ユーザーに一定数のクレジットを提供しています。1クレジットは1米ドルに相当します。クレジットは、有効期限が切れる前にTiDBクラスタの料金を支払うために使用できます。
 
-> **Tip:**
+> **ヒント：**
 >
-> To apply for a PoC, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
+> PoC を申請するには、 [TiDB Cloudで概念実証 (PoC) を実行する](/tidb-cloud/tidb-cloud-poc.md)参照してください。
 
-The detailed information of your credits is available on the **Credits** tab, including your total credits, available credits, current usage, and the status.
+クレジットの詳細情報（合計クレジット数、利用可能なクレジット数、現在の使用状況、ステータスなど）は、 **[クレジット]**タブで確認できます。
 
-To view the credit information, perform the following steps:
+クレジット情報を表示するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Billing**.
-3. On the **Billing** page, click the **Credits** tab.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用して対象の組織に切り替えます。
+2.  左側のナビゲーション ペインで、 **[請求]**をクリックします。
+3.  **「請求」**ページで、 **「クレジット」**タブをクリックします。
 
-> **Note:**
+> **注記：**
 >
-> - After you set up your payment method, the cluster fees are first deducted from your unused credits, then from your payment method.
-> - Credits cannot be used to pay the support plan fees.
+> -   支払い方法を設定すると、クラスター料金はまず未使用のクレジットから差し引かれ、次に支払い方法から差し引かれます。
+> -   クレジットはサポート プラン料金の支払いには使用できません。
 
-> **Warning:**
+> **警告：**
 >
-> During a PoC process:
+> PoC プロセス中:
 >
-> - If all your credits become expired before you add a payment method, you cannot create a new cluster. After 3 days, all your existing clusters will be recycled. After 7 days, all your backups will be recycled. To resume the process, you can add a payment method.
-> - If all your credits become expired after you add a payment method, your PoC process goes on, and fees are deducted from your payment method.
+> -   お支払い方法を追加する前にすべてのクレジットが期限切れになった場合、新しいクラスターを作成できません。3日後には既存のクラスターがすべてリサイクルされます。7日後にはすべてのバックアップがリサイクルされます。プロセスを再開するには、お支払い方法を追加してください。
+> -   支払い方法の追加後にすべてのクレジットの有効期限が切れた場合、PoC プロセスが続行され、支払い方法から手数料が差し引かれます。
 
-## Discounts
+## 割引 {#discounts}
 
-If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can view the discount information of TiDB Cloud on the **Discounts** tab. Otherwise, skip this section.
+組織内で`Organization Owner`または`Organization Billing Manager`ロールに所属している場合は、 **「割引」**タブでTiDB Cloudの割引情報をご確認いただけます。それ以外の場合は、このセクションをスキップしてください。
 
-The discount information includes all discounts that you have received, the status, the discount percentage, and the discount start and end date.
+割引情報には、受け取ったすべての割引、ステータス、割引率、割引の開始日と終了日が含まれます。
 
-To view the discount information, perform the following steps:
+割引情報を表示するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Billing**.
-3. On the **Billing** page, click the **Discounts** tab.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用して対象の組織に切り替えます。
+2.  左側のナビゲーション ペインで、 **[請求]**をクリックします。
+3.  **「請求」**ページで、 **「割引」**タブをクリックします。
 
-## Payment method
+## 支払方法 {#payment-method}
 
-If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can manage the payment information of TiDB Cloud. Otherwise, skip this section.
+組織内で`Organization Owner`または`Organization Billing Manager`役割を担っている場合は、 TiDB Cloudの支払い情報を管理できます。それ以外の場合は、このセクションをスキップしてください。
 
-> **Note:**
+> **注記：**
 >
-> If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), [Azure Marketplace](https://azuremarketplace.microsoft.com/), or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your AWS account, Azure account, or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
+> [AWS マーケットプレイス](https://aws.amazon.com/marketplace) 、 [Azureマーケットプレイス](https://azuremarketplace.microsoft.com/) 、または[Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)を通じてTiDB Cloudにサインアップした場合、AWS アカウント、Azure アカウント、または Google Cloud アカウントを通じて直接支払いを行うことができますが、 TiDB Cloudコンソールで支払い方法の追加や請求書のダウンロードを行うことはできません。
 
-The fee is deducted from a bound credit card according to your cluster usage. To add a valid credit card, you can use either of the following methods:
+料金は、クラスターの使用量に応じて、紐付けられたクレジットカードから差し引かれます。有効なクレジットカードを追加するには、以下のいずれかの方法をご利用ください。
 
-- When you are creating a TiDB Cloud Dedicated cluster:
+-   TiDB Cloud Dedicated クラスターを作成する場合:
 
-    1. On the **Create Cluster** page, click **Add Credit Card**.
-    2. In the **Add a Card** dialog, fill in the card information and billing address.
-    3. Click **Save Card**.
+    1.  **[クラスタの作成]**ページで、 **[クレジットカードの追加] を**クリックします。
+    2.  **「カードを追加」**ダイアログで、カード情報と請求先住所を入力します。
+    3.  **「カードを保存」**をクリックします。
 
-- Anytime in the billing console:
+-   請求コンソールでいつでも:
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
-    2. In the left navigation pane, click **Billing**.
-    3. On the **Billing** page, click the **Payment Method** tab, and then click **Add a New Card**.
-    4. Fill in the credit card information and credit card address, and then click **Save Card**.
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用して対象の組織に切り替えます。
+    2.  左側のナビゲーション ペインで、 **[請求]**をクリックします。
+    3.  **[請求]**ページで、[**お支払い方法]**タブをクリックし、 **[新しいカードの追加]を**クリックします。
+    4.  クレジットカード情報とクレジットカード住所を入力し、 **「カードを保存」**をクリックします。
 
-        If you do not specify a primary business address in [**Billing profile**](#billing-profile), the credit card address will be used as your primary business address for tax calculation. You can update your primary business address in **Billing profile** anytime.
+        [**請求プロファイル**](#billing-profile)で主要事業所住所を指定しない場合、クレジットカードの住所が税金計算の主要事業所住所として使用されます。主要事業所住所は**、請求情報**でいつでも更新できます。
 
-> **Note:**
+> **注記：**
 >
-> To ensure the security of credit card sensitive data, TiDB Cloud does not save any customer credit card information and saves them in the third-party payment platform Stripe. All billing deductions are completed through Stripe.
+> クレジットカードの機密データのセキュリティを確保するため、 TiDB Cloudは顧客のクレジットカード情報を一切保存せず、サードパーティの決済プラットフォームであるStripeに保存します。すべての請求額の控除はStripeを通じて行われます。
 
-You can bind multiple credit cards, and set one of them as the default credit card in the payment method of the billing console. After setting, subsequent billings will be automatically deducted from the default credit card.
+複数のクレジットカードを紐付け、そのうちの1枚を請求コンソールのお支払い方法設定でデフォルトのクレジットカードとして設定できます。設定後は、次回以降の請求は自動的にデフォルトのクレジットカードから引き落とされます。
 
-To set the default credit card, perform the following steps:
+デフォルトのクレジットカードを設定するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Billing**.
-3. On the **Billing** page, click the **Payment Method** tab.
-4. Select a credit card in the credit card list, and then click **Yes** when you are prompted to set it as the default credit card.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用して対象の組織に切り替えます。
+2.  左側のナビゲーション ペインで、 **[請求]**をクリックします。
+3.  **「請求」**ページで、 **「お支払い方法」**タブをクリックします。
+4.  クレジットカードの一覧からクレジットカードを選択し、それをデフォルトのクレジットカードとして設定するように求めるメッセージが表示されたら**「はい」**をクリックします。
 
-## Contract
+## 契約 {#contract}
 
-If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can manage your customized TiDB Cloud subscriptions in the TiDB Cloud console to meet compliance requirements. Otherwise, skip this section.
+組織内で`Organization Owner`または`Organization Billing Manager`ロールを担っている場合は、コンプライアンス要件を満たすために、 TiDB CloudコンソールでカスタマイズされたTiDB Cloudサブスクリプションを管理できます。それ以外の場合は、このセクションをスキップしてください。
 
-If you have agreed with our sales on a contract and received an email to review and accept the contract online, you can do the following:
+契約に基づいて当社の販売に同意し、契約をオンラインで確認して承認するためのメールを受け取った場合は、次の操作を実行できます。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Billing**.
-3. On the **Billing** page, click the **Contract** tab.
-4. On the **Contract** tab, locate the contract you want to review, and then click **...** in the row of the contract.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用して対象の組織に切り替えます。
+2.  左側のナビゲーション ペインで、 **[請求]**をクリックします。
+3.  **「請求」**ページで、 **「契約」**タブをクリックします。
+4.  [**契約]**タブで、確認する契約を見つけて、その契約の行にある**[...]**をクリックします。
 
-To learn more about contracts, feel free to [contact our sales](https://www.pingcap.com/contact-us/).
+契約について詳しく知りたい場合は、お気軽に[営業担当にお問い合わせください](https://www.pingcap.com/contact-us/)をご覧ください。
 
-## Billing from AWS Marketplace, Azure Marketplace, or Google Cloud Marketplace
+## AWS Marketplace、Azure Marketplace、または Google Cloud Marketplace からの請求 {#billing-from-aws-marketplace-azure-marketplace-or-google-cloud-marketplace}
 
-If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can link your TiDB Cloud account to an AWS billing account, an Azure billing account, or a Google Cloud billing account. Otherwise, skip this section.
+組織内で`Organization Owner`または`Organization Billing Manager`ロールに所属している場合は、 TiDB CloudアカウントをAWS請求アカウント、Azure請求アカウント、またはGoogle Cloud請求アカウントにリンクできます。それ以外の場合は、このセクションをスキップしてください。
 
-If you are new to TiDB Cloud and do not have a TiDB Cloud account, you can sign up for a TiDB Cloud account through [AWS Marketplace](https://aws.amazon.com/marketplace), [Azure Marketplace](https://azuremarketplace.microsoft.com/), or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), and pay for the usage via the AWS, Azure, or Google Cloud billing account.
+TiDB Cloudを初めて使用し、 TiDB Cloudアカウントをお持ちでない場合は、 [AWS マーケットプレイス](https://aws.amazon.com/marketplace) 、 [Azureマーケットプレイス](https://azuremarketplace.microsoft.com/) 、または[Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)を通じてTiDB Cloudアカウントにサインアップし、AWS、Azure、または Google Cloud の請求アカウントを通じて使用料を支払うことができます。
 
-- To sign up through AWS Marketplace, search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
-- To sign up through Azure Marketplace, search for `TiDB Cloud` in [Azure Marketplace](https://azuremarketplace.microsoft.com), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
-- To sign up through Google Cloud Marketplace, search for `TiDB Cloud` in [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+-   AWS Marketplace からサインアップするには、 `TiDB Cloud` in [AWS マーケットプレイス](https://aws.amazon.com/marketplace)を検索し、 TiDB Cloudをサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定します。
+-   Azure Marketplace を通じてサインアップするには、 `TiDB Cloud` in [Azureマーケットプレイス](https://azuremarketplace.microsoft.com)を検索し、 TiDB Cloudをサブスクライブして、画面上の指示に従ってTiDB Cloudアカウントを設定します。
+-   Google Cloud Marketplace からサインアップするには、 `TiDB Cloud` in [Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)を検索し、 「TiDB Cloud」をサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定します。
 
-If you already have a TiDB Cloud account and you want to pay for the usage via your AWS or Google Cloud billing account, you can link your TiDB Cloud account to your AWS or Google Cloud billing account.
+すでにTiDB Cloudアカウントをお持ちで、AWS または Google Cloud の請求アカウントを通じて使用料を支払う場合は、 TiDB Cloudアカウントを AWS または Google Cloud の請求アカウントにリンクできます。
 
 <SimpleTab>
 <div label="AWS Marketplace">
 
-To link your TiDB Cloud account to an AWS billing account, take the following steps:
+TiDB Cloudアカウントを AWS 請求アカウントにリンクするには、次の手順を実行します。
 
-1. Open the [AWS Marketplace page](https://aws.amazon.com/marketplace), search for `TiDB Cloud` and select **TiDB Cloud** in the search results. The TiDB Cloud product page is displayed.
+1.  [AWSマーケットプレイスページ](https://aws.amazon.com/marketplace)開き、 `TiDB Cloud`を検索して、検索結果から**「TiDB Cloud」**を選択します。TiDB TiDB Cloud の製品ページが表示されます。
 
-2. On the TiDB Cloud product page, click **Continue to Subscribe**. An order page is displayed.
+2.  TiDB Cloud製品ページで、 **「Continue to Subscribe」**をクリックします。注文ページが表示されます。
 
-3. On the order page, click **Subscribe**, and then click **Set Up your Account**. You are directed to the TiDB Cloud sign-up page.
+3.  注文ページで**「Subscribe（購読）** 」をクリックし、「 **Set Up your Account（アカウントを設定）」**をクリックします。TiDB TiDB Cloudのサインアップページに移動します。
 
-4. Check the notification in the upper part of the sign-up page and click **Sign in**.
+4.  サインアップページの上部にある通知を確認し、 **「サインイン」**をクリックします。
 
-5. Sign in with your TiDB Cloud account. The **Link to Your AWS Billing Account** page is displayed.
+5.  TiDB Cloudアカウントでサインインします。 **「AWS請求アカウントへのリンク」**ページが表示されます。
 
-6. On the **Link to Your AWS Billing Account** page, select your target organization and click **Link** to link to your AWS billing account.
+6.  **「AWS 請求アカウントへのリンク」**ページで、対象の組織を選択し、 **「リンク」**をクリックして AWS 請求アカウントにリンクします。
 
-    > **Note:**
+    > **注記：**
     >
-    > If your organization already has a payment method in TiDB Cloud, the existing payment method for this organization will be replaced by the newly added AWS billing account.
+    > 組織にTiDB Cloudでの支払い方法がすでにある場合、この組織の既存の支払い方法は、新しく追加された AWS 請求アカウントに置き換えられます。
 
 </div>
 
 <div label="Azure Marketplace">
 
-To link your TiDB Cloud account to an Azure billing account, take the following steps:
+TiDB Cloudアカウントを Azure 課金アカウントにリンクするには、次の手順を実行します。
 
-1. Open the [Azure Marketplace page](https://azuremarketplace.microsoft.com), search for `TiDB Cloud` and select **TiDB Cloud on Azure (Preview)** in the search results. The TiDB Cloud product page is displayed.
+1.  [Azure Marketplace ページ](https://azuremarketplace.microsoft.com)開き、 `TiDB Cloud`を検索して、検索結果から**「TiDB Cloud on Azure (プレビュー)」**を選択します。TiDB TiDB Cloud の製品ページが表示されます。
 
-2. On the TiDB Cloud product page, click **Get It Now**, accept the terms of use, and then click **Continue** to go to the order page.
+2.  TiDB Cloud製品ページで、 **「今すぐ入手」**をクリックし、利用規約に同意してから、「**続行」**をクリックして注文ページに進みます。
 
-    > **Note:**
+    > **注記：**
     >
-    > If you have not added your country and region information for your Microsoft account, you also need to enter that information before clicking **Continue**.
+    > Microsoft アカウントの国と地域の情報を追加していない場合は、 **[続行]**をクリックする前にその情報も入力する必要があります。
 
-3. On the order page, click **Subscribe**, fill in the required information on the **Basics** tab, and then click **Review + subscribe**. If everything looks good, click **Subscribe**, and then wait for a few seconds for the subscription to complete.
+3.  注文ページで**「Subscribe（購読）** 」をクリックし、 **「Basics（基本**情報）」タブに必要な情報を入力して、 **「Review + subscribe（確認**と購読）」をクリックします。問題がなければ**「Subscribe（購読）」**をクリックし、購読が完了するまで数秒お待ちください。
 
-4. When the subscription is done, click **Configure account now**. You will be directed to the TiDB Cloud sign-up page.
+4.  サブスクリプションが完了したら、 **「今すぐアカウントを設定」**をクリックします。TiDB TiDB Cloud のサインアップページに移動します。
 
-5. Check the notification in the upper part of the sign-up page and click **Sign in**.
+5.  サインアップページの上部にある通知を確認し、 **「サインイン」**をクリックします。
 
-6. Sign in with your TiDB Cloud account. The **Link to Your Azure Billing Account** page is displayed.
+6.  TiDB Cloudアカウントでサインインします。 **「Azure請求先アカウントへのリンク」**ページが表示されます。
 
-7. On the **Link to Your Azure Billing Account** page, select your target organization and click **Link** to link to your AWS billing account.
+7.  **「Azure 請求アカウントへのリンク」**ページで、対象の組織を選択し、 **「リンク」**をクリックして AWS 請求アカウントにリンクします。
 
-    > **Note:**
+    > **注記：**
     >
-    > If your organization already has a payment method in TiDB Cloud, the existing payment method for this organization will be replaced by the newly added Azure billing account.
+    > 組織にTiDB Cloudでの支払い方法が既にある場合、この組織の既存の支払い方法は、新しく追加された Azure 課金アカウントに置き換えられます。
 
 </div>
 
 <div label="Google Cloud Marketplace">
 
-To link your TiDB Cloud account to a Google Cloud billing account, take the following steps:
+TiDB Cloudアカウントを Google Cloud 請求先アカウントにリンクするには、次の手順を行います。
 
-1. Open the [Google Cloud Marketplace page](https://console.cloud.google.com/marketplace), search for `TiDB Cloud` and select **TiDB Cloud** in the search results. The TiDB Cloud product page is displayed.
+1.  [Google Cloud Marketplace ページ](https://console.cloud.google.com/marketplace)開き、 `TiDB Cloud`を検索して、検索結果から**「TiDB Cloud」**を選択します。TiDB TiDB Cloud の製品ページが表示されます。
 
-2. On the TiDB Cloud product page, click **SUBSCRIBE**. A subscription page is displayed.
+2.  TiDB Cloud製品ページで、 **「SUBSCRIBE」**をクリックします。サブスクリプションページが表示されます。
 
-3. On the subscription page, click **Subscribe**, and then click **Go to product page**. You are directed to the TiDB Cloud sign-up page.
+3.  サブスクリプションページで**「Subscribe（サブスクライブ）** 」をクリックし、「 **Go to product page（製品ページへ移動）** 」をクリックします。TiDB TiDB Cloudのサインアップページに移動します。
 
-4. Check the notification in the upper part of the sign-up page and click **Sign in**.
+4.  サインアップページの上部にある通知を確認し、 **「サインイン」**をクリックします。
 
-5. Sign in with your TiDB Cloud account. The page for linking to your Google Cloud billing account is displayed.
+5.  TiDB Cloudアカウントでサインインします。Google Cloud 請求先アカウントへのリンクページが表示されます。
 
-6. On the page, select the target organization and click **Link** to link to your Google Cloud billing account.
+6.  このページで対象の組織を選択し、 **「リンク」**をクリックして Google Cloud 請求先アカウントにリンクします。
 
-    > **Note:**
+    > **注記：**
     >
-    > If your organization already has a payment method in TiDB Cloud, the existing payment method for this organization will be replaced by the newly added Google Cloud billing account.
+    > 組織にすでにTiDB Cloudで支払い方法がある場合、この組織の既存の支払い方法は、新しく追加された Google Cloud 請求先アカウントに置き換えられます。
 
 </div>
 </SimpleTab>

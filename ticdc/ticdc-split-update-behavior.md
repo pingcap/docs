@@ -1,24 +1,24 @@
 ---
 title: TiCDC Behavior in Splitting UPDATE Events
-summary: Introduce the behavior changes about whether TiCDC splits `UPDATE` events, including the reasons and the impact of these changes.
+summary: TiCDC が UPDATE` イベントを分割するかどうかに関する動作の変更について、その理由と影響を含めて紹介します。
 ---
 
-# TiCDC Behavior in Splitting UPDATE Events
+# TiCDC の UPDATE イベントの分割動作 {#ticdc-behavior-in-splitting-update-events}
 
-## Split `UPDATE` events for MySQL sinks
+## MySQLシンクの<code>UPDATE</code>イベントを分割する {#split-code-update-code-events-for-mysql-sinks}
 
-Starting from v6.5.10, v7.1.6, v7.5.2, v8.1.1, and v8.2.0, when using the MySQL sink, any TiCDC node that receives a request for replicating a table will fetch the current timestamp `thresholdTS` from PD before starting the replication to the downstream. Based on the value of this timestamp, TiCDC decides whether to split `UPDATE` events:
+v6.5.10、v7.1.6、v7.5.2、v8.1.1、v8.2.0以降では、MySQLシンクを使用する場合、テーブルのレプリケーション要求を受信したTiCDCノードは、下流へのレプリケーションを開始する前に、PDから現在のタイムスタンプ`thresholdTS`取得します。このタイムスタンプの値に基づいて、TiCDCは`UPDATE`イベントを分割するかどうかを決定します。
 
-- For transactions containing one or multiple `UPDATE` changes, if the transaction `commitTS` is less than `thresholdTS`, TiCDC splits the `UPDATE` event into a `DELETE` event and an `INSERT` event before writing them to the Sorter module.
-- For `UPDATE` events with the transaction `commitTS` greater than or equal to `thresholdTS`, TiCDC does not split them. For more information, see GitHub issue [#10918](https://github.com/pingcap/tiflow/issues/10918).
+-   1 つまたは複数の`UPDATE`変更を含むトランザクションの場合、トランザクション`commitTS` `thresholdTS`未満であれば、TiCDC は`UPDATE`イベントを`DELETE`イベントと`INSERT`イベントに分割してから、それらを Sorter モジュールに書き込みます。
+-   トランザクション`commitTS`が`thresholdTS`以上であるイベントが`UPDATE`ある場合、TiCDC はそれらを分割しません。詳細については、GitHub の問題[＃10918](https://github.com/pingcap/tiflow/issues/10918)参照してください。
 
-> **Note:**
+> **注記：**
 >
-> In v8.1.0, when using MySQL Sink, TiCDC also decides whether to split `UPDATE` events based on the value of `thresholdTS`, but `thresholdTS` is obtained differently. Specifically, in v8.1.0, `thresholdTS` is the current timestamp fetched from PD at TiCDC startup, but this way might cause data inconsistency issues in multi-node scenarios. For more information, see GitHub issue [#11219](https://github.com/pingcap/tiflow/issues/11219).
+> v8.1.0では、MySQL Sinkを使用する場合、TiCDCは`thresholdTS`値に基づいて`UPDATE`イベントを分割するかどうかを決定しますが、 `thresholdTS`取得方法は異なります。具体的には、v8.1.0では、 `thresholdTS` TiCDC起動時にPDから取得される現在のタイムスタンプですが、この方法はマルチノードシナリオでデータの不整合の問題を引き起こす可能性があります。詳細については、GitHubのissue [＃11219](https://github.com/pingcap/tiflow/issues/11219)ご覧ください。
 
-This behavior change (that is, deciding whether to split `UPDATE` events based on `thresholdTS`) addresses the issue of downstream data inconsistencies caused by the potentially incorrect order of `UPDATE` events received by TiCDC, which can lead to an incorrect order of split `DELETE` and `INSERT` events.
+この動作の変更 (つまり、 `thresholdTS`に基づいて`UPDATE`イベントを分割するかどうかを決定する) により、TiCDC が受信した`UPDATE`イベントの順序が正しくない可能性があり、その結果、分割された`DELETE`と`INSERT`イベントの順序が間違ってしまう可能性がある、下流のデータの不整合の問題が解決されます。
 
-Take the following SQL statements as an example:
+次の SQL ステートメントを例に挙げます。
 
 ```sql
 CREATE TABLE t (a INT PRIMARY KEY, b INT);
@@ -31,16 +31,16 @@ UPDATE t SET a = 2 WHERE a = 1;
 COMMIT;
 ```
 
-In this example, the two `UPDATE` statements within the transaction have a sequential dependency on execution. The primary key `a` is changed from `2` to `3`, and then the primary key `a` is changed from `1` to `2`. After this transaction is executed, the records in the upstream database are `(2, 1)` and `(3, 2)`.
+この例では、トランザクション内の2つの`UPDATE`文は実行時に順次依存関係を持ちます。主キー`a` `2`から`3`に変更され、次に主キー`a` `1`から`2`に変更されます。このトランザクションの実行後、上流データベースのレコードは`(2, 1)`と`(3, 2)`なります。
 
-However, the order of `UPDATE` events received by TiCDC might differ from the actual execution order of the upstream transaction. For example:
+ただし、TiCDC が受信する`UPDATE`イベントの順序は、上流トランザクションの実際の実行順序と異なる場合があります。例:
 
 ```sql
 UPDATE t SET a = 2 WHERE a = 1;
 UPDATE t SET a = 3 WHERE a = 2;
 ```
 
-- Before this behavior change, TiCDC writes these `UPDATE` events to the Sorter module and then splits them into `DELETE` and `INSERT` events. After the split, the actual execution order of these events in the downstream is as follows:
+-   この動作変更前、TiCDCはこれらの`UPDATE`イベントをSorterモジュールに書き込み、その後`DELETE`つと`INSERT`イベントに分割していました。分割後、下流におけるこれらのイベントの実際の実行順序は以下のようになります。
 
     ```sql
     BEGIN;
@@ -51,9 +51,9 @@ UPDATE t SET a = 3 WHERE a = 2;
     COMMIT;
     ```
 
-    After the downstream executes the transaction, the records in the database are `(3, 2)`, which are different from the records in the upstream database (`(2, 1)` and `(3, 2)`), indicating a data inconsistency issue.
+    ダウンストリームがトランザクションを実行した後、データベース内のレコードは`(3, 2)`なりますが、これはアップストリーム データベースのレコード ( `(2, 1)`と`(3, 2)` ) と異なり、データの不整合の問題があることを示しています。
 
-- After this behavior change, if the transaction `commitTS` is less than the `thresholdTS` fetched from PD when TiCDC starts replicating the corresponding table to the downstream, TiCDC splits these `UPDATE` events into `DELETE` and `INSERT` events before writing them to the Sorter module. After the sorting by the Sorter module, the actual execution order of these events in the downstream is as follows:
+-   この動作変更後、TiCDCが対応するテーブルを下流にレプリケーションし始める際に、トランザクション`commitTS` PDからフェッチされた`thresholdTS`より小さい場合、TiCDCはこれらの`UPDATE`イベントを`DELETE`つと`INSERT`イベントに分割してからSorterモジュールに書き込みます。Sorterモジュールによるソート後、下流におけるこれらのイベントの実際の実行順序は以下のようになります。
 
     ```sql
     BEGIN;
@@ -64,21 +64,21 @@ UPDATE t SET a = 3 WHERE a = 2;
     COMMIT;
     ```
 
-    After the downstream executes the transaction, the records in the downstream database are the same as those in the upstream database, which are `(2, 1)` and `(3, 2)`, ensuring data consistency.
+    ダウンストリームがトランザクションを実行すると、ダウンストリーム データベースのレコードはアップストリーム データベースのレコード ( `(2, 1)`と`(3, 2)`と同じになり、データの一貫性が確保されます。
 
-As you can see from the preceding example, splitting the `UPDATE` event into `DELETE` and `INSERT` events before writing them to the Sorter module ensures that all `DELETE` events are executed before `INSERT` events after the split, thereby maintaining data consistency regardless of the order of `UPDATE` events received by TiCDC.
+前の例からわかるように、 `UPDATE`イベントを`DELETE`つと`INSERT`イベントに分割してから Sorter モジュールに書き込むと、分割後の`INSERT`イベントの前に`DELETE`イベントすべてが実行されるようになり、TiCDC が受信した`UPDATE`イベントの順序に関係なく、データの一貫性が維持されます。
 
-> **Note:**
+> **注記：**
 >
-> After this behavior change, when using the MySQL sink, TiCDC does not split the `UPDATE` event in most cases. Consequently, there might be primary key or unique key conflicts during changefeed runtime, causing the changefeed to restart automatically. After the restart, TiCDC will split the conflicting `UPDATE` events into `DELETE` and `INSERT` events before writing them to the Sorter module. This ensures that all events within the same transaction are correctly ordered, with all `DELETE` events preceding `INSERT` events, thus correctly completing data replication.
+> この動作変更後、MySQLシンクを使用する場合、TiCDCはほとんどの場合、 `UPDATE`イベントを分割しません。その結果、変更フィード実行時に主キーまたは一意キーの競合が発生し、変更フィードが自動的に再起動される可能性があります。再起動後、TiCDCは競合する`UPDATE`イベントを`DELETE`つと`INSERT`イベントに分割してから、Sorterモジュールに書き込みます。これにより、同一トランザクション内のすべてのイベントが正しく順序付けされ、 `DELETE`イベントすべてが`INSERT`イベントの前に配置されるため、データレプリケーションが正しく完了します。
 
-## Split primary or unique key `UPDATE` events for non-MySQL sinks
+## MySQL以外のシンクの主キーまたは一意キーの<code>UPDATE</code>イベントを分割する {#split-primary-or-unique-key-code-update-code-events-for-non-mysql-sinks}
 
-### Transactions containing a single `UPDATE` change
+### 単一の<code>UPDATE</code>変更を含むトランザクション {#transactions-containing-a-single-code-update-code-change}
 
-Starting from v6.5.3, v7.1.1, and v7.2.0, when using a non-MySQL sink, for transactions that only contain a single update change, if the primary key or non-null unique index value is modified in an `UPDATE` event, TiCDC splits this event into `DELETE` and `INSERT` events. For more information, see GitHub issue [#9086](https://github.com/pingcap/tiflow/issues/9086).
+v6.5.3、v7.1.1、v7.2.0以降、MySQL以外のシンクを使用する場合、単一の更新変更のみを含むトランザクションにおいて、主キーまたはnull以外の一意のインデックス値が`UPDATE`イベントで変更されると、TiCDCはこのイベントを`DELETE`つと`INSERT`イベントに分割します。詳細については、GitHubのissue [＃9086](https://github.com/pingcap/tiflow/issues/9086)ご覧ください。
 
-This change primarily addresses the issue that TiCDC only outputs the new value without the old value by default when using the CSV and AVRO protocols. Due to this issue, when the primary key or non-null unique index value changes, the consumer can only receive the new value, making it impossible to process the value before the change (for example, delete the old value). Take the following SQL as an example:
+この変更は主に、CSVおよびAVROプロトコル使用時にTiCDCがデフォルトで新しい値のみを出力し、古い値は出力しないという問題に対処します。この問題により、主キーまたは非NULLの一意のインデックス値が変更された場合、コンシューマーは新しい値しか受信できず、変更前の値を処理する（例えば、古い値を削除する）ことができなくなります。次のSQLを例に挙げましょう。
 
 ```sql
 CREATE TABLE t (a INT PRIMARY KEY, b INT);
@@ -86,15 +86,15 @@ INSERT INTO t VALUES (1, 1);
 UPDATE t SET a = 2 WHERE a = 1;
 ```
 
-In this example, the primary key `a` is updated from `1` to `2`. If the `UPDATE` event is not split, the consumer can only obtain the new value `a = 2` and cannot obtain the old value `a = 1` when using the CSV and AVRO protocols. This might cause the downstream consumer to only insert the new value `2` without deleting the old value `1`.
+この例では、主キー`a`が`1`から`2`に更新されます。イベント`UPDATE`が分割されていない場合、CSV プロトコルおよび AVRO プロトコルを使用する場合、コンシューマーは新しい値`a = 2`のみを取得でき、古い値`a = 1`取得できません。そのため、下流のコンシューマーは古い値`1`を削除せずに、新しい値`2`のみを挿入する可能性があります。
 
-### Transactions containing multiple `UPDATE` changes
+### 複数の<code>UPDATE</code>変更を含むトランザクション {#transactions-containing-multiple-code-update-code-changes}
 
-Starting from v6.5.4, v7.1.2, and v7.4.0, for transactions containing multiple changes, if the primary key or non-null unique index value is modified in the `UPDATE` event, TiCDC splits the event into `DELETE` and `INSERT` events and ensures that all events follow the sequence of `DELETE` events preceding `INSERT` events. For more information, see GitHub issue [#9430](https://github.com/pingcap/tiflow/issues/9430).
+v6.5.4、v7.1.2、v7.4.0以降、複数の変更を含むトランザクションにおいて、 `UPDATE`イベントで主キーまたはNULL以外の一意のインデックス値が変更された場合、TiCDCはイベントを`DELETE`と`INSERT`イベントに分割し、すべてのイベントが`INSERT`のイベントの前の`DELETE`のイベントのシーケンスに従うようにします。詳細については、GitHubのissue [＃9430](https://github.com/pingcap/tiflow/issues/9430)ご覧ください。
 
-This change primarily addresses the potential issue of primary key or unique key conflicts that consumers might encounter when writing data changes from the Kafka sink or other sinks to a relational database or performing a similar operation. This issue is caused by the potentially incorrect order of `UPDATE` events received by TiCDC.
+この変更は主に、Kafkaシンクまたはその他のシンクからリレーショナルデータベースへのデータ変更の書き込み時、あるいは同様の操作を実行する際にコンシューマーが遭遇する可能性のある、主キーまたは一意キーの競合に関する潜在的な問題に対処します。この問題は、TiCDCが受信した`UPDATE`イベントの順序が誤っている可能性があることに起因します。
 
-Take the following SQL as an example:
+次の SQL を例に挙げます。
 
 ```sql
 CREATE TABLE t (a INT PRIMARY KEY, b INT);
@@ -108,52 +108,52 @@ UPDATE t SET a = 2 WHERE a = 3;
 COMMIT;
 ```
 
-In this example, by executing three SQL statements to swap the primary keys of two rows, TiCDC only receives two update change events, that is, changing the primary key `a` from `1` to `2` and changing the primary key `a` from `2` to `1`. If consumers directly write these two `UPDATE` events to the downstream, a primary key conflict will occur, leading to changefeed errors.
+この例では、2つの行の主キーを交換する3つのSQL文を実行することで、TiCDCは主キー`a` `1`から`2`に変更し、主キー`a` `2`から`1`に変更するという2つの更新変更イベントのみを受け取ります。コンシューマーがこれらの2つの`UPDATE`イベントをダウンストリームに直接書き込むと、主キーの競合が発生し、変更フィードエラーが発生します。
 
-Therefore, TiCDC splits these two events into four events, that is, deleting records `(1, 1)` and `(2, 2)` and writing records `(2, 1)` and `(1, 2)`.
+したがって、TiCDC はこれら 2 つのイベントを 4 つのイベントに分割します。つまり、レコード`(1, 1)`と`(2, 2)`削除し、レコード`(2, 1)`と`(1, 2)`書き込みます。
 
-### Control whether to split primary or unique key `UPDATE` events
+### 主キーまたは一意キーの<code>UPDATE</code>イベントを分割するかどうかを制御する {#control-whether-to-split-primary-or-unique-key-code-update-code-events}
 
-Starting from v6.5.10, v7.1.6, v7.5.3, and v8.1.1, when using a non-MySQL sink, TiCDC supports controlling whether to split primary or unique key `UPDATE` events via the `output-raw-change-event` parameter, as described in the GitHub issue [#11211]( https://github.com/pingcap/tiflow/issues/11211). The specific behavior of this parameter is as follows:
+v6.5.10、v7.1.6、v7.5.3、v8.1.1以降、MySQL以外のシンクを使用する場合、TiCDCはGitHub Issue [＃11211](https://github.com/pingcap/tiflow/issues/11211)に記載されているように、 `output-raw-change-event`パラメータを介して主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御できるようになりました。このパラメータの具体的な動作は次のとおりです。
 
-- When you set `output-raw-change-event = false`, if the primary key or non-null unique index value is modified in an `UPDATE` event, TiCDC splits the event into `DELETE` and `INSERT` events and ensures that all events follow the sequence of `DELETE` events preceding `INSERT` events.
-- When you set `output-raw-change-event = true`, TiCDC does not split `UPDATE` events, and the consumer side is responsible for dealing with the problems described in [Split primary or unique key `UPDATE` events for non-MySQL sinks](/ticdc/ticdc-split-update-behavior.md#split-primary-or-unique-key-update-events-for-non-mysql-sinks). Otherwise there might be a risk of data inconsistency. Note that when the primary key of a table is a clustered index, updates to the primary key are still split into `DELETE` and `INSERT` events in TiDB, and such behavior is not affected by the `output-raw-change-event` parameter.
+-   `output-raw-change-event = false`設定すると、主キーまたは null 以外の一意のインデックス値が`UPDATE`イベントで変更された場合、TiCDC はイベントを`DELETE`と`INSERT`イベントに分割し、すべてのイベントが`INSERT`イベントの前の`DELETE`イベントのシーケンスに従うようにします。
+-   `output-raw-change-event = true`設定すると、TiCDCは`UPDATE`イベントを分割せず、 [MySQL以外のシンクの主キーまたは一意キーの`UPDATE`イベントを分割する](/ticdc/ticdc-split-update-behavior.md#split-primary-or-unique-key-update-events-for-non-mysql-sinks)で説明した問題への対処はコンシューマー側で行います。そうしないと、データの不整合が発生するリスクがあります。テーブルの主キーがクラスター化インデックスである場合、主キーへの更新はTiDB内で依然として`DELETE`つと`INSERT`イベントに分割されますが、この動作は`output-raw-change-event`パラメータの影響を受けません。
 
-> **Note**
+> **注記**
 >
-> In the following tables, UK/PK stands for primary key or unique key.
+> 次の表では、UK/PK は主キーまたは一意キーを表します。
 
-#### Release 6.5 compatibility
+#### リリース6.5の互換性 {#release-6-5-compatibility}
 
-| Version | Protocol | Split UK/PK `UPDATE` events | Not split UK/PK `UPDATE` events  | Comments |
-| -- | -- | -- | -- | -- |
-| <= v6.5.2 | ALL | ✗ | ✓ |  |
-| v6.5.3 / v6.5.4 | Canal/Open | ✗ | ✓ |  |
-| v6.5.3 | CSV/Avro | ✗ | ✗ | Split but does not sort. See [#9086](https://github.com/pingcap/tiflow/issues/9658) |
-| v6.5.4 | Canal/Open | ✗ | ✗ | Only split and sort transactions that contain multiple changes |
-| v6.5.5 ～ v6.5.9 | ALL | ✓ | ✗ |
-| \>= v6.5.10 | ALL | ✓ (Default value: `output-raw-change-event = false`) | ✓ (Optional: `output-raw-change-event = true`) | |
+| バージョン           | プロトコル   | UK/PK `UPDATE`イベントの分割                          | UK/ `UPDATE`イベントを分割しない                       | コメント                                                                               |
+| --------------- | ------- | ---------------------------------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------- |
+| バージョン6.5.2以下    | 全て      | ✗                                              | ✓                                            |                                                                                    |
+| v6.5.3 / v6.5.4 | 運河/オープン | ✗                                              | ✓                                            |                                                                                    |
+| バージョン6.5.3      | CSV/アブロ | ✗                                              | ✗                                            | 分割しますが、並べ替えは行いません。1を参照してください[＃9086](https://github.com/pingcap/tiflow/issues/9658) |
+| バージョン6.5.4      | 運河/オープン | ✗                                              | ✗                                            | 複数の変更を含むトランザクションのみを分割して並べ替える                                                       |
+| v6.5.5 ～ v6.5.9 | 全て      | ✓                                              | ✗                                            |                                                                                    |
+| = v6.5.10       | 全て      | ✓ (デフォルト値: `output-raw-change-event = false` ) | ✓ （オプション： `output-raw-change-event = true` ） |                                                                                    |
 
-#### Release 7.1 compatibility
+#### リリース7.1の互換性 {#release-7-1-compatibility}
 
-| Version | Protocol | Split UK/PK `UPDATE` events | Not split UK/PK `UPDATE` events  | Comments |
-| -- | -- | -- | -- | -- |
-| v7.1.0 | ALL | ✗ | ✓ |  |
-| v7.1.1 | Canal/Open | ✗ | ✓ |  |
-| v7.1.1 | CSV/Avro | ✗ | ✗ | Split but does not sort. See [#9086](https://github.com/pingcap/tiflow/issues/9658) |
-| v7.1.2  ~ v7.1.5 | ALL | ✓ | ✗ |  |
-| \>= v7.1.6 | ALL | ✓ (Default value: `output-raw-change-event = false`) | ✓ (Optional: `output-raw-change-event = true`)  | |
+| バージョン           | プロトコル   | UK/PK `UPDATE`イベントの分割                          | UK/ `UPDATE`イベントを分割しない                       | コメント                                                                               |
+| --------------- | ------- | ---------------------------------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------- |
+| バージョン7.1.0      | 全て      | ✗                                              | ✓                                            |                                                                                    |
+| バージョン7.1.1      | 運河/オープン | ✗                                              | ✓                                            |                                                                                    |
+| バージョン7.1.1      | CSV/アブロ | ✗                                              | ✗                                            | 分割しますが、並べ替えは行いません。1を参照してください[＃9086](https://github.com/pingcap/tiflow/issues/9658) |
+| v7.1.2 ~ v7.1.5 | 全て      | ✓                                              | ✗                                            |                                                                                    |
+| = v7.1.6        | 全て      | ✓ (デフォルト値: `output-raw-change-event = false` ) | ✓ （オプション： `output-raw-change-event = true` ） |                                                                                    |
 
-#### Release 7.5 compatibility
+#### リリース7.5の互換性 {#release-7-5-compatibility}
 
-| Version | Protocol | Split UK/PK `UPDATE` events | Not split UK/PK `UPDATE` events  | Comments |
-| -- | -- | -- | -- | -- |
-| <= v7.5.2 | ALL | ✓ | ✗ |
-| \>= v7.5.3 | ALL | ✓ (Default value:`output-raw-change-event = false`) | ✓  (Optional: `output-raw-change-event = true`) | |
+| バージョン        | プロトコル | UK/PK `UPDATE`イベントの分割                          | UK/ `UPDATE`イベントを分割しない                       | コメント |
+| ------------ | ----- | ---------------------------------------------- | -------------------------------------------- | ---- |
+| バージョン7.5.2以下 | 全て    | ✓                                              | ✗                                            |      |
+| = v7.5.3     | 全て    | ✓ (デフォルト値: `output-raw-change-event = false` ) | ✓ （オプション： `output-raw-change-event = true` ） |      |
 
-#### Release 8.1 compatibility
+#### リリース8.1の互換性 {#release-8-1-compatibility}
 
-| Version | Protocol | Split UK/PK `UPDATE` events | Not split UK/PK `UPDATE` events  | Comments |
-| -- | -- | -- | -- | -- |
-| v8.1.0 | ALL | ✓ | ✗ |
-| \>= v8.1.1 | ALL | ✓ (Default value:`output-raw-change-event = false`) | ✓  (Optional: `output-raw-change-event = true`) | |
+| バージョン      | プロトコル | UK/PK `UPDATE`イベントの分割                          | UK/ `UPDATE`イベントを分割しない                       | コメント |
+| ---------- | ----- | ---------------------------------------------- | -------------------------------------------- | ---- |
+| バージョン8.1.0 | 全て    | ✓                                              | ✗                                            |      |
+| = v8.1.1   | 全て    | ✓ (デフォルト値: `output-raw-change-event = false` ) | ✓ （オプション： `output-raw-change-event = true` ） |      |

@@ -1,99 +1,99 @@
 ---
 title: Best Practices for Handling Millions of Tables in SaaS Multi-Tenant Scenarios
-summary: Learn best practices for TiDB in SaaS (Software as a Service) multi-tenant scenarios, especially for environments where the number of tables in a single cluster exceeds one million.
+summary: SaaS (Software as a Service) マルチテナント シナリオ、特に単一クラスター内のテーブル数が 100 万を超える環境における TiDB のベスト プラクティスを学習します。
 ---
 
-# Best Practices for Handling Millions of Tables in SaaS Multi-Tenant Scenarios
+# SaaS マルチテナントシナリオで数百万のテーブルを処理するためのベストプラクティス {#best-practices-for-handling-millions-of-tables-in-saas-multi-tenant-scenarios}
 
-This document introduces best practices for TiDB in SaaS (Software as a Service) multi-tenant environments, especially in scenarios where the **number of tables in a single cluster exceeds one million**. By making reasonable configurations and choices, you can enable TiDB to run efficiently and stably in SaaS scenarios while reducing resource consumption and costs.
+このドキュメントでは、SaaS（Software as a Service）マルチテナント環境、特に**単一クラスター内のテーブル数が100万を超える**シナリオにおけるTiDBのベストプラクティスを紹介します。適切な構成と選択を行うことで、SaaSシナリオにおいてTiDBを効率的かつ安定的に実行し、リソース消費とコストを削減できます。
 
-> **Note:**
+> **注記：**
 >
-> It is recommended to use TiDB v8.5.0 or later versions.
+> TiDB v8.5.0 以降のバージョンを使用することをお勧めします。
 
-For a practical case study of these best practices, see the blog post: [Scaling 3 Million Tables: How TiDB Powers Atlassian Forge's SaaS Platform](https://www.pingcap.com/blog/scaling-3-million-tables-how-tidb-powers-atlassian-forge-saas-platform/).
+これらのベスト プラクティスの実際のケース スタディについては、ブログ投稿[300万テーブルへの拡張: TiDB が Atlassian Forge の SaaS プラットフォームを支える仕組み](https://www.pingcap.com/blog/scaling-3-million-tables-how-tidb-powers-atlassian-forge-saas-platform/)参照してください。
 
-## TiDB hardware recommendations
+## TiDB ハードウェア推奨事項 {#tidb-hardware-recommendations}
 
-It is recommended to use high-memory TiDB instances. For example:
+大容量メモリを搭載したTiDBインスタンスの使用をお勧めします。例:
 
-- For one million tables, use 32 GiB or more memory.
-- For three million tables, use 64 GiB or more memory.
+-   100 万個のテーブルの場合は、32 GiB 以上のメモリを使用します。
+-   300 万のテーブルの場合は、64 GiB 以上のメモリを使用します。
 
-High-memory TiDB instances allocate more cache space for Infoschema, Statistics, and execution plan caches, thereby improving cache hit rates and consequently enhancing business performance. Larger memory also mitigates performance fluctuations and stability issues caused by TiDB GC.
+大容量メモリを搭載したTiDBインスタンスは、Infoschema、 統計、および実行計画キャッシュに多くのキャッシュスペースを割り当てるため、キャッシュヒット率が向上し、ビジネスパフォーマンスが向上します。また、大容量メモリは、TiDB GCによるパフォーマンス変動や安定性の問題を軽減します。
 
-Recommended hardware configurations for TiKV and PD are as follows:
+TiKV および PD に推奨されるハードウェア構成は次のとおりです。
 
-* TiKV: 8 vCPUs and 32 GiB or more memory.
-* PD: 8 CPUs and 16 GiB or more memory.
+-   TiKV: 8 個の vCPU と 32 GiB 以上のメモリ。
+-   PD: 8 個の CPU と 16 GiB 以上のメモリ。
 
-## Control the number of Regions
+## リージョンの数を制御する {#control-the-number-of-regions}
 
-If you need to create a large number of tables (for example, more than 100,000), it is recommended to set the TiDB configuration item [`split-table`](/tidb-configuration-file.md#split-table) to `false` to reduce the number of Regions, thus alleviating memory pressure on TiKV.
+多数のテーブル (たとえば、100,000 個以上) を作成する必要がある場合は、TiDB 構成項目[`split-table`](/tidb-configuration-file.md#split-table)を`false`に設定してリージョンの数を減らし、TiKV のメモリ負荷を軽減することをお勧めします。
 
-## Configure caches
+## キャッシュを構成する {#configure-caches}
 
-* Starting from TiDB v8.4.0, TiDB loads table information involved in SQL statements into the Infoschema cache on demand during SQL execution.
+-   TiDB v8.4.0 以降、TiDB は SQL 実行中に、SQL ステートメントに関連するテーブル情報をオンデマンドで Infoschema キャッシュにロードします。
 
-    - You can monitor the size and hit rate of the Infoschema cache by observing the **Infoschema v2 Cache Size** and **Infoschema v2 Cache Operation** sub-panels under the **Schema Load** panel in TiDB Dashboard.
-    - You can use the [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800) system variable to adjust the memory limit of the Infoschema cache to meet business needs. The size of the Infoschema cache is linearly related to the number of different tables involved in SQL execution. In actual tests, fully caching metadata for one million tables (each with four columns, one primary key, and one index) requires about 2.4 GiB of memory.
+    -   TiDB ダッシュボードの**「スキーマ ロード」**パネルの下にある**「Infoschema v2 キャッシュ サイズ」**サブパネルと**「Infoschema v2 キャッシュ操作」**サブパネルを観察することで、Infoschema キャッシュのサイズとヒット率を監視できます。
+    -   システム変数[`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)使用すると、ビジネスニーズに合わせて Infoschema キャッシュのメモリ制限を調整できます。Infoschema キャッシュのサイズは、SQL 実行に関係するテーブルの数に比例します。実際のテストでは、100 万テーブル（各テーブルに 4 つの列、1 つの主キー、1 つのインデックス）のメタデータを完全にキャッシュするには、約 2.4 GiB のメモリが必要です。
 
-* TiDB loads table statistics involved in SQL statements into the Statistics cache on demand during SQL execution. 
+-   TiDB は、SQL 実行中に、SQL ステートメントに関係するテーブル統計をオンデマンドで統計キャッシュに読み込みます。
 
-    - You can monitor the size and hit rate of the Statistics cache by observing the **Stats Cache Cost** and **Stats Cache OPS** sub-panels under the **Statistics & Plan Management** panel in TiDB Dashboard.
-    - You can use the [`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610) system variable to adjust the memory limit of the Statistics cache to meet business needs. In actual tests, executing simple SQL (using the `IndexRangeScan` operator) on 100,000 tables consumes about 3.96 GiB of memory in the Statistics cache.
+    -   TiDB ダッシュボードの**「統計とプラン管理」**パネルの**「統計キャッシュ コスト」**サブパネルと**「統計キャッシュ OPS」**サブパネルを観察することで、統計キャッシュのサイズとヒット率を監視できます。
+    -   システム変数[`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610)使用すると、ビジネスニーズに合わせて統計キャッシュのメモリ制限を調整できます。実際のテストでは、100,000 個のテーブルに対して単純な SQL（演算子`IndexRangeScan`を使用）を実行すると、統計キャッシュで約 3.96 GiB のメモリが消費されます。
 
-## Collect statistics
+## 統計を収集する {#collect-statistics}
 
-* Starting from TiDB v8.4.0, TiDB introduces the [`tidb_auto_analyze_concurrency`](/system-variables.md#tidb_auto_analyze_concurrency-new-in-v840) system variable to control the number of concurrent auto-analyze operations that can run in a TiDB cluster. In multi-table scenarios, you can increase this concurrency as needed to improve the throughput of automatic analysis. As the concurrency value increases, the throughput and the CPU usage of the TiDB Owner node increase linearly. In actual tests, using a concurrency value of 16 allows automatic analysis of 320 tables (each with 10,000 rows, 4 columns, and 1 index) within one minute, consuming one CPU core of the TiDB Owner node.
-* The [`tidb_auto_build_stats_concurrency`](/system-variables.md#tidb_auto_build_stats_concurrency-new-in-v650) and [`tidb_build_sampling_stats_concurrency`](/system-variables.md#tidb_build_sampling_stats_concurrency-new-in-v750) system variables control the concurrency of TiDB statistics construction. You can adjust them based on your scenario:
-    - For scenarios with many partitioned tables, prioritize increasing the value of `tidb_auto_build_stats_concurrency`.
-    - For scenarios with many columns, prioritize increasing the value of `tidb_build_sampling_stats_concurrency`.
-* To avoid excessive resource usage, ensure that the product of `tidb_auto_analyze_concurrency`, `tidb_auto_build_stats_concurrency`, and `tidb_build_sampling_stats_concurrency` does not exceed the number of TiDB CPU cores.
+-   TiDB v8.4.0以降、TiDBはTiDBクラスター内で同時に実行できる自動分析操作の数を制御するためのシステム変数[`tidb_auto_analyze_concurrency`](/system-variables.md#tidb_auto_analyze_concurrency-new-in-v840)導入しました。複数テーブルを扱うシナリオでは、必要に応じてこの同時実行数を増やすことで、自動分析のスループットを向上させることができます。同時実行数の値を増やすと、スループットとTiDBオーナーノードのCPU使用率は直線的に増加します。実際のテストでは、同時実行数を16に設定することで、1分以内に320個のテーブル（各テーブルは10,000行、4列、1つのインデックスを持つ）の自動分析を実行でき、TiDBオーナーノードのCPUコアを1つ消費しました。
+-   システム変数[`tidb_auto_build_stats_concurrency`](/system-variables.md#tidb_auto_build_stats_concurrency-new-in-v650)と[`tidb_build_sampling_stats_concurrency`](/system-variables.md#tidb_build_sampling_stats_concurrency-new-in-v750)は、TiDB統計情報の構築における同時実行性を制御します。シナリオに応じて調整できます。
+    -   パーティション分割されたテーブルが多数あるシナリオでは、 `tidb_auto_build_stats_concurrency`の値を増やすことを優先します。
+    -   列数が多いシナリオでは、 `tidb_build_sampling_stats_concurrency`の値を増やすことを優先します。
+-   過剰なリソース使用を避けるため、 `tidb_auto_analyze_concurrency` 、 `tidb_auto_build_stats_concurrency` 、 `tidb_build_sampling_stats_concurrency`の積が TiDB CPU コアの数を超えないようにしてください。
 
-## Query system tables efficiently
+## システムテーブルを効率的にクエリする {#query-system-tables-efficiently}
 
-When querying system tables, it is recommended to add filters such as `TABLE_SCHEMA`, `TABLE_NAME`, or `TIDB_TABLE_ID` to avoid scanning a large amount of irrelevant data. This improves query speed and reduces resource consumption.
+システムテーブルをクエリする際は、大量の無関係なデータのスキャンを回避するために、 `TABLE_SCHEMA` 、 `TABLE_NAME` 、 `TIDB_TABLE_ID`などのフィルターを追加することをお勧めします。これにより、クエリ速度が向上し、リソース消費が削減されます。
 
-For example, in a scenario with three million tables:
+たとえば、300 万個のテーブルがあるシナリオでは次のようになります。
 
-- Executing the following SQL statement consumes about 8 GiB of memory.
+-   次の SQL ステートメントを実行すると、約 8 GiB のメモリが消費されます。
 
     ```sql
     SELECT COUNT(*) FROM information_schema.tables;
     ```
 
-- Executing the following SQL statement takes about 20 minutes.
+-   次の SQL ステートメントの実行には約 20 分かかります。
 
     ```sql
     SELECT COUNT(*) FROM information_schema.views;
     ```
 
-By adding appropriate filter conditions to the preceding SQL statements, memory consumption becomes negligible, and query time is reduced to milliseconds.
+前述の SQL ステートメントに適切なフィルター条件を追加することで、メモリ消費量は無視できるほどになり、クエリ時間は数ミリ秒に短縮されます。
 
-## Handle connection-intensive scenarios
+## 接続集中型のシナリオを処理する {#handle-connection-intensive-scenarios}
 
-In SaaS multi-tenant scenarios, each user usually connects to TiDB to operate data in their own tenant (database). To support a high number of connections:
+SaaS マルチテナントシナリオでは、各ユーザーは通常、TiDB に接続して自身のテナント（データベース）内のデータを操作します。多数の接続をサポートするには、次の点に留意してください。
 
-* Increase the TiDB configuration item [`token-limit`](/tidb-configuration-file.md#token-limit) (`1000` by default) to support more concurrent requests.
-* The memory usage of TiDB is roughly linear with the number of connections. In actual tests, 200,000 idle connections increase TiDB memory usage by about 30 GiB. It is recommended to increase TiDB memory specifications based on actual connection numbers.
-* If you use `PREPARED` statements, each connection maintains a session-level Prepared Plan Cache. If the `DEALLOCATE` statement is not executed for a long time, the cache might accumulate too many plans, increasing memory usage. In actual tests, 400,000 execution plans involving `IndexRangeScan` consume approximately 5 GiB of memory. It is recommended to increase memory specifications accordingly.
+-   より多くの同時リクエストをサポートするには、TiDB 構成項目[`token-limit`](/tidb-configuration-file.md#token-limit) (デフォルトでは`1000` ) を増やします。
+-   TiDBのメモリ使用量は接続数にほぼ比例します。実際のテストでは、アイドル接続が20万件あると、TiDBのメモリ使用量が約30GiB増加しました。実際の接続数に基づいて、TiDBのメモリ仕様を増やすことをお勧めします。
+-   `PREPARED`ステートメントを使用する場合、各接続はセッションレベルのプリペアドプランキャッシュを維持します。3 ステートメント`DEALLOCATE`長時間実行されない場合、キャッシュに過剰なプランが蓄積され、メモリ使用量が増加する可能性があります。実際のテストでは、 `IndexRangeScan`ステートメントを含む 400,000 の実行プランで約 5 GiB のメモリが消費されました。メモリ仕様を適宜増やすことを推奨します。
 
-## Use stale read carefully
+## 古いものを使用するには、慎重に読んでください {#use-stale-read-carefully}
 
-When you use [Stale Read](/stale-read.md), an outdated schema version might trigger a full load of historical schemas, which can significantly impact performance. To mitigate this issue, increase the value of [`tidb_schema_version_cache_limit`](/system-variables.md#tidb_schema_version_cache_limit-new-in-v740) (for example, to `255`).
+[ステイル読み取り](/stale-read.md)使用すると、古いスキーマバージョンによって過去のスキーマがフルロードされ、パフォーマンスに重大な影響を与える可能性があります。この問題を軽減するには、 [`tidb_schema_version_cache_limit`](/system-variables.md#tidb_schema_version_cache_limit-new-in-v740)の値を（例えば`255`に）増やしてください。
 
-## Optimize BR backup and restore
+## BRバックアップと復元を最適化 {#optimize-br-backup-and-restore}
 
-* When restoring a full backup with millions of tables, it is recommended to use high-memory BR instances. For example:
-    - For one million tables, use BR instances with 32 GiB or more memory.
-    - For three million tables, use BR instances with 64 GiB or more memory.
-* BR log backup and snapshot restore consume additional TiKV memory. It is recommended to use TiKV instances with 32 GiB or more memory.
-* Adjust BR configurations [`pitr-batch-count` and `pitr-concurrency`](/br/use-br-command-line-tool.md#common-options) as needed to improve log restore speed.
+-   数百万のテーブルを含むフルバックアップをリストアする場合は、大容量メモリを搭載したBRインスタンスの使用をお勧めします。例:
+    -   100 万個のテーブルの場合は、32 GiB 以上のメモリを備えたBRインスタンスを使用します。
+    -   300 万個のテーブルの場合は、64 GiB 以上のメモリを備えたBRインスタンスを使用します。
+-   BRログバックアップとスナップショットリストアは追加のTiKVメモリを消費します。32GiB以上のメモリを搭載したTiKVインスタンスの使用をお勧めします。
+-   ログの復元速度を向上させるには、必要に応じてBR構成[`pitr-batch-count`と`pitr-concurrency`](/br/use-br-command-line-tool.md#common-options)調整します。
 
-## Import data with TiDB Lightning
+## TiDB Lightningでデータをインポートする {#import-data-with-tidb-lightning}
 
-When importing millions of tables using [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), follow these recommendations:
+[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)使用して数百万のテーブルをインポートする場合は、次の推奨事項に従ってください。
 
-- For large tables (over 100 GiB), use TiDB Lightning [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md).
-- For small tables (typically numerous in quantity), use TiDB Lightning [logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md).
+-   大きなテーブル (100 GiB 以上) の場合は、 TiDB Lightning [物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)使用します。
+-   小さなテーブル (通常は多数) の場合は、 TiDB Lightning [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)使用します。

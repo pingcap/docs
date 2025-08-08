@@ -1,174 +1,174 @@
 ---
 title: Database Schema
-summary: Learn about database schema concepts for TiDB Cloud.
+summary: TiDB Cloudのデータベース スキーマの概念について学習します。
 ---
 
-# Database Schema
+# データベーススキーマ {#database-schema}
 
-A database schema defines the structure and organization of data within databases, tables, columns, indexes, and other objects.
+データベース スキーマは、データベース、テーブル、列、インデックス、およびその他のオブジェクト内のデータの構造と構成を定義します。
 
-This document introduces the key concepts of database schemas, such as databases, tables, columns, data types, constraints, and indexes. It also introduces advanced features such as temporary tables for managing intermediate data seamlessly, vector indexes for efficient approximate nearest neighbor (ANN) searches, and cached tables to improve read performance.
+このドキュメントでは、データベース、テーブル、列、データ型、制約、インデックスといったデータベーススキーマの主要な概念を紹介します。また、中間データをシームレスに管理するための一時テーブル、効率的な近似最近傍検索（ANN）のためのベクターインデックス、読み取りパフォーマンスを向上させるキャッシュテーブルといった高度な機能についても紹介します。
 
-## Databases
+## データベース {#databases}
 
-A database in TiDB is a collection of objects such as tables and indexes.
+TiDB のデータベースは、テーブルやインデックスなどのオブジェクトの集合です。
 
-### System databases
+### システムデータベース {#system-databases}
 
-System databases are default databases created by TiDB to store system tables. TiDB provides the following system databases:
+システムデータベースは、システムテーブルを保存するためにTiDBによって作成されるデフォルトのデータベースです。TiDBは次のシステムデータベースを提供します。
 
-- [`INFORMATION_SCHEMA`](/information-schema/information-schema.md)
+-   [`INFORMATION_SCHEMA`](/information-schema/information-schema.md)
 
-- [`mysql`](/mysql-schema/mysql-schema.md)
+-   [`mysql`](/mysql-schema/mysql-schema.md)
 
-- [`performance_schema`](/performance-schema/performance-schema.md)
+-   [`performance_schema`](/performance-schema/performance-schema.md)
 
-- [`sys`](/sys-schema/sys-schema.md)
+-   [`sys`](/sys-schema/sys-schema.md)
 
-### `test` database
+### <code>test</code>データベース {#code-test-code-database}
 
-TiDB comes with a default database named `test`. However, it is recommended that you create your own database instead of using the `test` database.
+TiDBには`test`というデフォルトのデータベースが付属しています。ただし、 `test`データベースを使用する代わりに、独自のデータベースを作成することをお勧めします。
 
-## Tables
+## テーブル {#tables}
 
-A table is a collection of related data in a [database](/develop/dev-guide-schema-design-overview.md#database).
+テーブルは、 [データベース](/develop/dev-guide-schema-design-overview.md#database)内の関連データの集合です。
 
-Each table consists of rows and columns. Each value in a row belongs to a specific column. Each column allows only a single data type. To further qualify columns, you can add some [constraints](/constraints.md). To accelerate calculations, you can add [generated columns](/generated-columns.md).
+各テーブルは行と列で構成されています。行の各値は特定の列に属します。各列には単一のデータ型のみを使用できます。列をさらに限定するには、 [制約](/constraints.md)を追加できます。計算を高速化するには、 [生成された列](/generated-columns.md)追加できます。
 
-### System table
+### システムテーブル {#system-table}
 
-- The `mysql` schema contains TiDB system tables. The design is similar to the `mysql` schema in MySQL, where tables such as `mysql.user` can be edited directly. It also contains a number of tables that are extensions to MySQL.
+-   `mysql`スキーマには TiDB システムテーブルが含まれています。設計は MySQL の`mysql`スキーマに似ており、 `mysql.user`などのテーブルを直接編集できます。また、MySQL の拡張機能であるテーブルもいくつか含まれています。
 
-- Information Schema provides an ANSI-standard way of viewing system metadata. TiDB also provides a number of custom `INFORMATION_SCHEMA` tables, in addition to the tables included for MySQL compatibility. Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` command. The benefit of querying `INFORMATION_SCHEMA` is that it is possible to join between tables.
+-   情報スキーマは、システムメタデータを表示するためのANSI標準の方法を提供します。TiDBは、MySQLとの互換性のために用意されているテーブルに加えて、多数のカスタム`INFORMATION_SCHEMA`テーブルも提供しています。多くの`INFORMATION_SCHEMA`テーブルには対応する`SHOW`コマンドがあります。7 `INFORMATION_SCHEMA`の利点は、テーブル間の結合が可能であることです。
 
-- Performance Schema. TiDB implements performance schema tables for MySQL compatibility.
+-   パフォーマンス スキーマ。TiDB は、MySQL との互換性のためにパフォーマンス スキーマ テーブルを実装します。
 
-### Cached table
+### キャッシュされたテーブル {#cached-table}
 
-TiDB introduces the [cached table](/cached-tables.md) feature for frequently accessed but rarely updated small hotspot tables. When this feature is used, the data of an entire table is loaded into the memory of the TiDB server, and TiDB directly gets the table data from the memory without accessing TiKV, which improves the read performance.
+TiDBは、頻繁にアクセスされるものの、更新頻度の低い小さなホットスポットテーブル向けに、 [キャッシュされたテーブル](/cached-tables.md)機能を導入しました。この機能を使用すると、テーブル全体のデータがTiDBサーバーのメモリにロードされ、TiDBはTiKVにアクセスすることなくメモリから直接テーブルデータを取得するため、読み取りパフォーマンスが向上します。
 
-### Temporary table
+### 一時テーブル {#temporary-table}
 
-The temporary tables feature solves the issue of temporarily storing the intermediate results of an application, which frees you from frequently creating and dropping tables. You can store the intermediate calculation data in temporary tables. When the intermediate data is no longer needed, TiDB automatically cleans up and recycles the temporary tables. This avoids user applications being too complicated, reduces table management overhead, and improves performance.
+一時テーブル機能は、アプリケーションの中間結果を一時的に保存するという問題を解決し、頻繁なテーブルの作成と削除から解放します。中間計算データは一時テーブルに保存できます。中間データが不要になると、TiDBは一時テーブルを自動的にクリーンアップして再利用します。これにより、ユーザーアプリケーションの複雑化を防ぎ、テーブル管理のオーバーヘッドを削減し、パフォーマンスを向上させます。
 
-### Partitioned table
+### パーティションテーブル {#partitioned-table}
 
-In TiDB, [partitioning](/partitioned-table.md) enables you to divide a large table into one or more manageable pieces called partitions. Each partition is independent and can be managed individually.
+TiDBでは、 [パーティショニング](/partitioned-table.md)使用すると、大きなテーブルをパーティションと呼ばれる1つ以上の管理しやすい部分に分割できます。各パーティションは独立しており、個別に管理できます。
 
-## Columns
+## 列 {#columns}
 
-A column is subordinate to a table. Each table has at least one column. Columns provide a structure to a table by dividing the values in each row into small cells of a single data type.
+列はテーブルに従属します。各テーブルには少なくとも1つの列が含まれます。列は、各行の値を単一のデータ型の小さなセルに分割することで、テーブルに構造を提供します。
 
-For more information, see [Define columns](/develop/dev-guide-create-table.md#define-columns).
+詳細については[列を定義する](/develop/dev-guide-create-table.md#define-columns)参照してください。
 
-## Generated columns
+## 生成された列 {#generated-columns}
 
-TiDB lets you extract data from the JSON data type as a [generated column](/generated-columns.md).
+TiDB を使用すると、JSON データ型からデータを[生成された列](/generated-columns.md)として抽出できます。
 
-Unlike general columns, the value of the generated column is calculated by the expression in the column definition. When inserting or updating a generated column, you cannot assign a value, but only use `DEFAULT`.
+一般的な列とは異なり、生成列の値は列定義内の式によって計算されます。生成列を挿入または更新する際には、値を割り当てることはできず、 `DEFAULT`のみを使用できます。
 
-There are two kinds of generated columns: virtual and stored. A virtual generated column occupies no storage and is computed when it is read. A stored generated column is computed when it is written (inserted or updated) and occupies storage. Compared with the virtual generated columns, the stored generated columns have better read performance, but take up more disk space.
+生成列には、仮想生成列と保存列の2種類があります。仮想生成列はstorageを占有せず、読み取り時に計算されます。保存列は書き込み（挿入または更新）時に計算され、storageを占有します。仮想生成列と比較すると、保存列は読み取りパフォーマンスに優れていますが、より多くのディスク容量を消費します。
 
-## Data types
+## データ型 {#data-types}
 
-TiDB supports all the data types in MySQL except the `SPATIAL` type. This includes all the [numeric types](/data-type-numeric.md), [string types](/data-type-string.md), [date & time types](/data-type-date-and-time.md), and [the JSON type](/data-type-json.md).
+TiDBは[文字列型](/data-type-string.md) MySQLの`SPATIAL`型を除くすべてのデータ型をサポートしています。これには、 [数値型](/data-type-numeric.md) [日付と時刻の種類](/data-type-date-and-time.md)すべてが含ま[JSON型](/data-type-json.md)ます。
 
-## Indexes
+## インデックス {#indexes}
 
-An index is a copy of selected columns in a table. You can create an index using one or more columns of a [table](/develop/dev-guide-schema-design-overview.md#table). With indexes, TiDB can quickly locate data without having to search every row in a table every time, which greatly improves your query performance.
+インデックスとは、テーブル内の選択された列のコピーです。1 の[テーブル](/develop/dev-guide-schema-design-overview.md#table)つまたは複数の列を使用してインデックスを作成できます。インデックスを使用すると、TiDBはテーブル内のすべての行を毎回検索することなく、データを迅速に見つけることができるため、クエリのパフォーマンスが大幅に向上します。
 
-There are two common types of indexes:
+一般的なインデックスには次の 2 つの種類があります。
 
-- Primary Key: indexes on the primary key column.
+-   主キー: 主キー列のインデックス。
 
-- Secondary Index: indexes on non-primary key column
+-   セカンダリインデックス: 主キー以外の列のインデックス
 
-### Unique indexes
+### ユニークインデックス {#unique-indexes}
 
-A unique index in TiDB enforces uniqueness on one or more columns, ensuring that no two rows in a table can have the same values in the indexed column(s). This constraint provides a way to maintain data integrity by preventing duplicate values, making unique indexes ideal for fields that should naturally be unique, like email addresses, usernames, or product codes.
+TiDBのユニークインデックスは、1つまたは複数の列に一意性を強制し、テーブル内の2つの行がインデックス列に同じ値を持つことがないように保証します。この制約により、値の重複を防ぎ、データの整合性を維持することができます。そのため、ユニークインデックスは、メールアドレス、ユーザー名、製品コードなど、本来一意であるべきフィールドに最適です。
 
-### Primary key index
+### 主キーインデックス {#primary-key-index}
 
-A primary key index is a unique index on one or more columns in a table, which serves as the primary identifier for each row. In TiDB, every table must have a primary key, and it can be defined explicitly by the user or implicitly by TiDB if no primary key is specified.
+主キーインデックスは、テーブル内の1つ以上の列に一意のインデックスを設定するもので、各行の主識別子として機能します。TiDBでは、すべてのテーブルに主キーが必ず必要です。主キーはユーザーが明示的に定義することも、主キーが指定されていない場合はTiDBによって暗黙的に定義することもできます。
 
-### Composite index
+### 複合指数 {#composite-index}
 
-A composite index is an index built on two or more columns of a table, which is particularly useful for queries that filter or sort data by multiple fields. For example, creating a composite index on `last_name` and `first_name` in a person table allows TiDB to quickly locate records based on both names.
+複合インデックスとは、テーブル内の2つ以上の列に基づいて構築されるインデックスです。これは、複数のフィールドでデータをフィルタリングまたはソートするクエリに特に便利です。例えば、personテーブルの`last_name`と`first_name`に複合インデックスを作成すると、TiDBは両方の名前に基づいてレコードを迅速に見つけることができます。
 
-### Invisible indexes
+### 目に見えないインデックス {#invisible-indexes}
 
-Invisible indexes are indexes that exist in the database but are hidden from the query optimizer, meaning they are ignored in query plans. In TiDB, invisible indexes are useful for testing and debugging, allowing you to assess the impact of an index on performance without fully dropping it.
+非表示インデックスとは、データベース内には存在するものの、クエリオプティマイザからは隠されているインデックスです。つまり、クエリプランでは無視されます。TiDBでは、非表示インデックスはテストやデバッグに役立ち、インデックスを完全に削除することなく、パフォーマンスへの影響を評価できます。
 
-Starting from TiDB v8.0.0, you can make the optimizer select invisible indexes by modifying the [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800) system variable.
+TiDB v8.0.0 以降では、 [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)システム変数を変更することで、オプティマイザーが非表示のインデックスを選択するようにすることができます。
 
-### Clustered indexes
+### クラスター化インデックス {#clustered-indexes}
 
-In clustered indexes, the term clustered refers to the organization of how data is stored and not a group of database servers working together. Some database management systems refer to clustered indexes as index-organized tables (IOT).
+クラスター化インデックスにおける「クラスター化」という用語は、データの格納方法の構成を指し、連携して動作するデータベースサーバーのグループを指すものではありません。一部のデータベース管理システムでは、クラスター化インデックスを索引構成表（IOT）と呼びます。
 
-This feature controls how data is stored in tables containing primary keys. It provides TiDB with the ability to organize tables in a way that can improve the performance of certain queries.
+この機能は、主キーを含むテーブルへのデータの格納方法を制御します。これにより、TiDB は特定のクエリのパフォーマンスを向上させる方法でテーブルを整理できるようになります。
 
-For more information, see [Clustered Indexes](/clustered-indexes.md).
+詳細については[クラスター化インデックス](/clustered-indexes.md)参照してください。
 
-### Secondary index
+### セカンダリインデックス {#secondary-index}
 
-A secondary index is a logical object in a TiDB cluster. You can simply regard it as a sorting type of data that TiDB uses to improve the query performance. In TiDB, creating a secondary index is an online operation, which does not block any data read and write operations on a table. For each index, TiDB creates references for each row in a table and sorts the references by selected columns instead of by data directly.
+セカンダリインデックスは、TiDBクラスタ内の論理オブジェクトです。TiDBがクエリパフォーマンスを向上させるために使用する、ソート用のデータと考えることができます。TiDBでは、セカンダリインデックスの作成はオンライン操作であり、テーブルに対するデータの読み取りおよび書き込み操作をブロックすることはありません。TiDBは各インデックスに対して、テーブル内の各行への参照を作成し、データではなく選択された列に基づいて参照をソートします。
 
-For more information about secondary indexes, see [Secondary Indexes](https://docs.pingcap.com/tidb/stable/tidb-best-practices#secondary-index).
+セカンダリインデックスの詳細については、 [セカンダリインデックス](https://docs.pingcap.com/tidb/stable/tidb-best-practices#secondary-index)参照してください。
 
-In TiDB, you can either [add a secondary index to an existing table](/develop/dev-guide-create-secondary-indexes.md#add-a-secondary-index-to-an-existing-table) or [create a secondary index when creating a new table](/develop/dev-guide-create-secondary-indexes.md#create-a-secondary-index-when-creating-a-new-table).
+TiDB では、 [既存のテーブルにセカンダリインデックスを追加する](/develop/dev-guide-create-secondary-indexes.md#add-a-secondary-index-to-an-existing-table)または[新しいテーブルを作成するときにセカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md#create-a-secondary-index-when-creating-a-new-table)いずれかを選択できます。
 
-### Vector index
+### ベクトルインデックス {#vector-index}
 
-> **Note:**
+> **注記：**
 >
-> The vector index feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> ベクトルインデックス機能はベータ版です。予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
-In TiDB, a vector index is a specialized index designed for efficient approximate nearest neighbor (ANN) searches over columns containing vector data. Vector indexes, particularly the HNSW (Hierarchical Navigable Small World) algorithm, allow K-nearest neighbors (KNN) searches to identify the closest data points in a vector space quickly. This significantly speeds up query performance, enabling results in milliseconds compared to brute-force methods.
+TiDBにおけるベクトルインデックスは、ベクトルデータを含む列に対する効率的な近似最近傍法（ANN）検索のために設計された特殊なインデックスです。ベクトルインデックス、特にHNSW（Hierarchical Navigable Small World）アルゴリズムは、K近傍法（KNN）検索を可能にし、ベクトル空間内で最も近いデータポイントを迅速に特定します。これによりクエリパフォーマンスが大幅に向上し、総当たり方式と比較して数ミリ秒単位で結果を得ることができます。
 
-Vector indexes rely on TiFlash replicas for data storage and search functionality. Before creating and using vector indexes, make sure that TiFlash nodes are available in your cluster.
+ベクターインデックスは、データのstorageと検索機能のためにTiFlashレプリカに依存しています。ベクターインデックスを作成して使用する前に、クラスター内でTiFlashノードが利用可能であることを確認してください。
 
-## Constraints
+## 制約 {#constraints}
 
-TiDB supports almost the same constraints as MySQL.
+TiDB は MySQL とほぼ同じ制約をサポートします。
 
-### NOT NULL constraints
+### NOT NULL制約 {#not-null-constraints}
 
-A `NOT NULL` constraint ensures that a column cannot contain `NULL` values.
+`NOT NULL`制約により、列に`NULL`値を含めることはできません。
 
-When a column is defined with the `NOT NULL` constraint, TiDB ensures that any attempt to insert or update a row with a `NULL` value in that column will result in an error. This behavior is consistent with MySQL's implementation of `NOT NULL` constraints.
+列に`NOT NULL`制約が定義されている場合、TiDBは、その列に`NULL`値を持つ行を挿入または更新しようとするとエラーが発生するようにします。この動作は、MySQLの`NOT NULL`制約の実装と一致しています。
 
-### CHECK constraints
+### CHECK制約 {#check-constraints}
 
-A `CHECK` constraint restricts the values of a column in a table to meet your specified conditions. When the `CHECK` constraint is added to a table, TiDB checks whether the constraint is satisfied during the insertion or updates of data into the table. If the constraint is not met, an error is returned.
+制約`CHECK`は、テーブル内の列の値を、指定された条件を満たすように制限します。制約`CHECK`テーブルに追加されると、TiDBはテーブルへのデータの挿入または更新時に制約が満たされているかどうかを確認します。制約が満たされていない場合は、エラーが返されます。
 
-### Primary key constraints
+### 主キー制約 {#primary-key-constraints}
 
-Like MySQL, primary key constraints in TiDB contain unique constraints, that is, creating a primary key constraint is equivalent to having a unique constraint. In addition, other primary key constraints of TiDB are also similar to those of MySQL.
+MySQLと同様に、TiDBの主キー制約には一意制約が含まれています。つまり、主キー制約を作成することは、一意制約を持つことと同じです。さらに、TiDBの他の主キー制約もMySQLのものと似ています。
 
-### Unique key constraints
+### ユニークキー制約 {#unique-key-constraints}
 
-Unique constraints mean that all non-null values in a unique index and a primary key column are unique.
+一意制約とは、一意のインデックスと主キー列内のすべての非 NULL 値が一意であることを意味します。
 
-### FOREIGN KEY constraints
+### FOREIGN KEY制約 {#foreign-key-constraints}
 
-A FOREIGN KEY is a database constraint that enforces referential integrity between two tables by linking a column in one table (the child table) to a column in another table (the parent table). This ensures that the values in the foreign key column of the child table match values in the primary or unique key column of the parent table. For example, a record in an `orders` table might have a foreign key linking to a customer in a `customers` table, which ensures that each order is associated with a valid customer.
+FOREIGN KEYは、一方のテーブル（子テーブル）の列をもう一方のテーブル（親テーブル）の列にリンクすることで、2つのテーブル間の参照整合性を確保するデータベース制約です。これにより、子テーブルの外部キー列の値が、親テーブルの主キー列または一意キー列の値と一致することが保証されます。例えば、 `orders`テーブルのレコードに、 `customers`テーブルの顧客にリンクする外部キーを設定することで、各注文が有効な顧客に関連付けられることが保証されます。
 
-Starting from v6.6.0, TiDB supports foreign key constraints as an experimental feature. This feature allows cross-table referencing of related data and helps maintain data consistency by enforcing referential integrity. However, it is important to note that this feature is experimental and not recommended for production environments due to potential performance issues, especially with large data volumes.
+TiDB v6.6.0以降、外部キー制約が実験的機能としてサポートされます。この機能により、関連データのテーブル間参照が可能になり、参照整合性を強制することでデータの一貫性を維持できます。ただし、この機能は実験的であり、特に大量のデータを扱う場合のパフォーマンス問題が発生する可能性があるため、本番環境での使用は推奨されません。
 
-For more information, see [FOREIGN KEY constraints](/foreign-key.md).
+詳細については[FOREIGN KEY制約](/foreign-key.md)参照してください。
 
-## Views
+## ビュー {#views}
 
-A view acts as a virtual table, whose schema is defined by the `SELECT` statement that creates the view. Using views has the following benefits:
+ビューは仮想テーブルとして機能し、そのスキーマはビューを作成する`SELECT`ステートメントによって定義されます。ビューを使用すると、次のような利点があります。
 
-- Exposing only safe fields and data to users to ensure the security of sensitive fields and data stored in the underlying table.
+-   安全なフィールドとデータのみをユーザーに公開し、基になるテーブルに保存されている機密フィールドとデータのセキュリティを確保します。
 
-- Defining complex queries that frequently appear as views to make complex queries easier and more convenient.
+-   頻繁に表示される複雑なクエリをビューとして定義し、複雑なクエリをより簡単に、より便利にします。
 
-For more information, see [Views](/views.md).
+詳細については[ビュー](/views.md)参照してください。
 
-## Sequence
+## シーケンス {#sequence}
 
-A sequence is a database object designed to generate a sequence of numbers according to a specified set of rules. This feature is especially useful in scenarios where unique identifiers are required, such as in the creation of primary keys for database tables.
+シーケンスとは、指定された一連のルールに従って数値のシーケンスを生成するように設計されたデータベースオブジェクトです。この機能は、データベーステーブルの主キーの作成など、一意の識別子が必要なシナリオで特に役立ちます。
 
-For more information, see [sequence](/sql-statements/sql-statement-create-sequence.md).
+詳細については[順序](/sql-statements/sql-statement-create-sequence.md)参照してください。

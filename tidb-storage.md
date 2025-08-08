@@ -1,109 +1,105 @@
 ---
 title: TiDB Storage
-summary: Understand the storage layer of a TiDB database.
+summary: TiDB データベースのstorageレイヤーを理解します。
 ---
 
-# TiDB Storage
+# TiDBストレージ {#tidb-storage}
 
-This document introduces some design ideas and key concepts of [TiKV](https://github.com/tikv/tikv).
+このドキュメントでは、 [TiKV](https://github.com/tikv/tikv)の設計アイデアと主要な概念をいくつか紹介します。
 
 ![storage-architecture](/media/tidb-storage-architecture-1.png)
 
-## Key-Value pairs
+## キーと値のペア {#key-value-pairs}
 
-The first thing to decide for a data storage system is the data storage model, that is, in what form the data is saved. TiKV's choice is the Key-Value model and provides an ordered traversal method. There are two key points for TiKV data storage model:
+データstorageシステムで最初に決定すべきことは、データstorageモデル、つまりデータをどのような形式で保存するかです。TiKVはキーバリューモデルを採用しており、順序付けされたトラバーサル手法を提供します。TiKVデータstorageモデルには、以下の2つの重要なポイントがあります。
 
-+ This is a huge Map (similar to `std::Map` in C++) , which stores Key-Value pairs.
-+ The Key-Value pair in the Map is ordered according to Keys' binary order, which means you can Seek the position of a particular Key and then call the Next method to get the Key-Value pairs larger than this Key in incremental order.
+-   これは、キーと値のペアを格納する巨大なマップ (C++ の`std::Map`に似ています) です。
+-   マップ内のキーと値のペアは、キーのバイナリ順序に従って順序付けられます。つまり、特定のキーの位置を Seek し、次に Next メソッドを呼び出して、このキーよりも大きいキーと値のペアを増分順に取得できます。
 
-Note that the KV storage model for TiKV described in this document has nothing to do with tables of SQL. This document does not discuss any concepts related to SQL and only focuses on how to implement a high-performance, high-reliability, distributed Key-Value storage such as TiKV.
+なお、本ドキュメントで説明するTiKVのKVstorageモデルは、SQLテーブルとは一切関係ありません。本ドキュメントではSQL関連の概念については説明せず、TiKVのような高性能で信頼性の高い分散型キーバリューstorageの実装方法のみに焦点を当てています。
 
-## Local storage (RocksDB)
+## ローカルstorage（RocksDB） {#local-storage-rocksdb}
 
-For any persistent storage engine, data is eventually saved on disk, and TiKV is no exception. TiKV does not write data directly on the disk, but stores data in RocksDB, which is responsible for the data storage. The reason is that it costs a lot to develop a standalone storage engine, especially a high-performance standalone engine that requires careful optimization.
+あらゆる永続storageエンジンでは、データは最終的にディスクに保存されます。TiKVも例外ではありません。TiKVはデータをディスクに直接書き込むのではなく、データstorageを担うRocksDBにデータを保存します。その理由は、スタンドアロンstorageエンジン、特に綿密な最適化を必要とする高性能スタンドアロンエンジンの開発には多大なコストがかかるためです。
 
-RocksDB is an excellent standalone storage engine open-sourced by Facebook. This engine can meet various requirements of TiKV for a single engine. Here, you can simply consider RocksDB as a single persistent Key-Value Map.
+RocksDBは、Facebookがオープンソース化した優れたスタンドアロンstorageエンジンです。このエンジンは、単一のエンジンでTiKVの様々な要件を満たすことができます。ここでは、RocksDBを単一の永続的なキーバリューマップと見なすことができます。
 
-## Raft protocol
+## Raftプロトコル {#raft-protocol}
 
-What's more, the implementation of TiKV faces a more difficult thing: to secure data safety in case a single machine fails.
+さらに、TiKV の実装では、1 台のマシンに障害が発生した場合でもデータの安全性を確保するという、より困難な問題に直面します。
 
-A simple way is to replicate data to multiple machines, so that even if one machine fails, the replicas on other machines are still available. In other words, you need a data replication scheme that is reliable, efficient, and able to handle the situation of a failed replica. All of these are made possible by the Raft algorithm.
+簡単な方法は、データを複数のマシンに複製することです。こうすることで、1台のマシンに障害が発生しても、他のマシンのレプリカが引き続き利用可能になります。つまり、信頼性が高く、効率的で、レプリカに障害が発生した場合でも対処できるデータ複製スキームが必要です。これらはすべて、 Raftアルゴリズムによって可能になります。
 
-Raft is a consensus algorithm. This document only briefly introduces Raft. For more details, you can see [In Search of an Understandable Consensus Algorithm](https://raft.github.io/raft.pdf). The Raft has several important features:
+Raftはコンセンサスアルゴリズムです。このドキュメントではRaftについて簡単に説明します。詳細については[理解しやすいコンセンサスアルゴリズムを求めて](https://raft.github.io/raft.pdf)ご覧ください。Raftにはいくつかの重要な機能があります。
 
-- Leader election
-- Membership changes (such as adding replicas, deleting replicas, and transferring leaders)
-- Log replication
+-   Leader選挙
+-   メンバーシップの変更（レプリカの追加、レプリカの削除、リーダーの譲渡など）
+-   ログレプリケーション
 
-TiKV use Raft to perform data replication. Each data change will be recorded as a Raft log. Through Raft log replication, data is safely and reliably replicated to multiple nodes of the Raft group. However, according to Raft protocol, successful writes only need that data is replicated to the majority of nodes.
+TiKVはRaftを使用してデータレプリケーションを実行します。各データ変更はRaftログとして記録されます。Raftログレプリケーションにより、データはRaftグループ内の複数のノードに安全かつ確実に複製されます。ただし、 Raftプロトコルでは、書き込みが成功するには、データが過半数のノードに複製されている必要があります。
 
 ![Raft in TiDB](/media/tidb-storage-1.png)
 
-In summary, TiKV can quickly store data on disk via the standalone machine RocksDB, and replicate data to multiple machines via Raft in case of machine failure. Data is written through the interface of Raft instead of to RocksDB. With the implementation of Raft, TiKV becomes a distributed Key-Value storage. Even with a few machine failures, TiKV can automatically complete replicas by virtue of the native Raft protocol, which does not impact the application.
+要約すると、TiKVはスタンドアロンマシンRocksDBを介してデータをディスクに迅速に保存し、マシン障害時にはRaftを介して複数のマシンにデータを複製できます。データはRocksDBではなくRaftインターフェースを介して書き込まれます。Raftの実装により、TiKVは分散型キーバリューstorageになります。たとえ少数のマシン障害が発生しても、TiKVはネイティブRaftプロトコルによって自動的に複製を完了できるため、アプリケーションには影響しません。
 
-## Region
+## リージョン {#region}
 
-To make it easy to understand, let's assume that all data only has one replica. As mentioned earlier, TiKV can be regarded as a large, orderly KV Map, so data is distributed across multiple machines in order to achieve horizontal scalability. For a KV system, there are two typical solutions to distributing data across multiple machines:
+理解を容易にするために、すべてのデータにレプリカが1つしかないと仮定しましょう。前述のように、TiKVは大規模で整然としたKVマップと見なすことができ、水平方向のスケーラビリティを実現するために、データは複数のマシンに分散されます。KVシステムでは、複数のマシンにデータを分散させる一般的なソリューションが2つあります。
 
-* Hash: Create Hash by Key and select the corresponding storage node according to the Hash value.
-* Range: Divide ranges by Key, where a segment of serial Key is stored on a node.
+-   ハッシュ: キーによってハッシュを作成し、ハッシュ値に応じて対応するstorageノードを選択します。
+-   範囲: 範囲をキーで分割します。シリアル キーのセグメントがノードに保存されます。
 
-TiKV chooses the second solution that divides the whole Key-Value space into a series of consecutive Key segments. Each segment is called a Region. Each Region can be described by `[StartKey, EndKey)`, a left-closed and right-open interval. The default size limit for each Region is 256 MiB and the size can be configured.
+TiKVは、キーと値の空間全体を連続するキーセグメントに分割する2番目のソリューションを選択します。各セグメントはリージョンと呼ばれます。各リージョンは、左閉区間と右開区間の`[StartKey, EndKey)`で表されます。各リージョンのデフォルトのサイズ制限は256MiBですが、サイズは設定可能です。
 
 ![Region in TiDB](/media/tidb-storage-2.png)
 
-Note that the Region here has nothing to do with the table in SQL. In this document, forget about SQL and focus on KV for now. After dividing data into Regions, TiKV will perform two important tasks:
+ここでのリージョンはSQLのテーブルとは何の関係もありません。このドキュメントでは、SQLについては一旦忘れてKVに焦点を当てます。データをリージョンに分割した後、TiKVは次の2つの重要なタスクを実行します。
 
-* Distributing data to all nodes in the cluster and use Region as the basic unit. Try its best to ensure that the number of Regions on each node is roughly similar.
-* Performing Raft replication and membership management in Region.
+-   クラスター内のすべてのノードにデータを分散し、リージョンを基本単位として使用します。各ノードのリージョン数がほぼ同じになるようにしてください。
+-   リージョン内でRaftレプリケーションとメンバーシップ管理を実行します。
 
-These two tasks are very important and will be introduced one by one.
+これら 2 つのタスクは非常に重要なので、1 つずつ紹介します。
 
-* First, data is divided into many Regions according to Key, and the data for each Region is stored on only one node (ignoring multiple replicas). The TiDB system has a PD component that is responsible for spreading Regions as evenly as possible across all nodes in the cluster. In this way, on one hand, the storage capacity is scaled horizontally (Regions on the other nodes are automatically scheduled to the newly added node); on the other hand, load balancing is achieved (the situation where one node has a lot of data while the others have little will not occur).
+-   まず、データはキーに基づいて複数のリージョンに分割され、各リージョンのデータは1つのノードにのみ保存されます（複数のレプリカは無視されます）。TiDBシステムには、クラスター内のすべてのノードにリージョンを可能な限り均等に分散させるPDコンポーネントがあります。これにより、storage容量が水平方向に拡張され（他のノードのリージョンは新しく追加されたノードに自動的にスケジュールされます）、負荷分散が実現されます（あるノードに大量のデータがある一方で、他のノードにはほとんどデータがないという状況は発生しません）。
 
-    At the same time, in order to ensure that the upper client can access the needed data, there is a component (PD) in the system to record the distribution of Regions on the node, that is, the exact Region of a Key and the node of that Region placed through any Key.
+    同時に、上位クライアントが必要なデータにアクセスできるようにするため、システムにはノード上の領域の分布、つまりキーの正確なリージョンと任意のキーを通じて配置されたそのリージョンのノードを記録するコンポーネント(PD) があります。
 
-* For the second task, TiKV replicates data in Regions, which means that data in one Region will have multiple replicas with the name "Replica". Multiple Replicas of a Region are stored on different nodes to form a Raft Group, which is kept consistent through the Raft algorithm.
+-   2つ目のタスクでは、TiKVはリージョン内でデータを複製します。つまり、1つのリージョン内のデータには「レプリカ」という名前のレプリカが複数存在することになります。リージョン内の複数のレプリカは異なるノードに保存され、 Raftグループを形成します。RaftグループはRaftアルゴリズムによって一貫性が維持されます。
 
-    One of the Replicas serves as the Leader of the Group and other as the Follower. By default, all reads and writes are processed through the Leader, where reads are done and write are replicated to followers. The following diagram shows the whole picture about Region and Raft group.
+    レプリカの1つはグループのLeaderとして機能し、もう1つはFollowerとして機能します。デフォルトでは、すべての読み取りと書き込みはLeaderを介して処理され、リーダーで読み取りが行われ、書き込みはフォロワーに複製されます。次の図は、リージョンとRaftグループの全体像を示しています。
 
 ![TiDB Storage](/media/tidb-storage-3.png)
 
-As we distribute and replicate data in Regions, we have a distributed Key-Value system that, to some extent, has the capability of disaster recovery. You no longer need to worry about the capacity, or disk failure and data loss.
+リージョン間でデータを分散・複製することで、分散型キーバリューシステムを構築し、ある程度の災害復旧能力を備えています。容量不足やディスク障害、データ損失を心配する必要はもうありません。
 
-## MVCC
+## MVCC {#mvcc}
 
-TiKV supports multi-version concurrency control (MVCC). Consider a scenario where Client A is writing to a key simultaneously as Client B is reading the same key. Without the MVCC mechanism, these read and write operations would be mutually exclusive, posing performance issues and deadlocks in a distributed scenario. However, With MVCC, as long as Client B performs a read operation at a logical time earlier than the Client A write operation, then Client B can correctly read the original value at the same time Client A performs the write operation. Even if the key is modified multiple times by multiple write operations, Client B can still read the old value according to its logical time.
+TiKVは、マルチバージョン同時実行制御（MVCC）をサポートしています。クライアントAがキーへの書き込みと、クライアントBが同じキーの読み取りを同時に行うシナリオを考えてみましょう。MVCCメカニズムがなければ、これらの読み取り操作と書き込み操作は相互に排他的になり、分散シナリオではパフォーマンスの問題やデッドロックが発生します。しかし、MVCCがあれば、クライアントBがクライアントAの書き込み操作よりも論理的に早い時間に読み取り操作を実行する限り、クライアントBはクライアントAが書き込み操作を実行すると同時に元の値を正しく読み取ることができます。キーが複数の書き込み操作によって複数回変更された場合でも、クライアントBは論理的に正しい時刻に基づいて古い値を読み取ることができます。
 
-TiKV MVCC is implemented by appending a version number to the key. Without MVCC, the Key-Value pairs of TiKV are as follows:
+TiKV MVCCは、キーにバージョン番号を付加することで実装されます。MVCCがない場合、TiKVのキーと値のペアは次のようになります。
 
-```
-Key1 -> Value
-Key2 -> Value
-……
-KeyN -> Value
-```
+    Key1 -> Value
+    Key2 -> Value
+    ……
+    KeyN -> Value
 
-With MVCC, the Key-Value pairs of TiKV are as follows:
+MVCC では、TiKV のキーと値のペアは次のようになります。
 
-```
-Key1_Version3 -> Value
-Key1_Version2 -> Value
-Key1_Version1 -> Value
-……
-Key2_Version4 -> Value
-Key2_Version3 -> Value
-Key2_Version2 -> Value
-Key2_Version1 -> Value
-……
-KeyN_Version2 -> Value
-KeyN_Version1 -> Value
-……
-```
+    Key1_Version3 -> Value
+    Key1_Version2 -> Value
+    Key1_Version1 -> Value
+    ……
+    Key2_Version4 -> Value
+    Key2_Version3 -> Value
+    Key2_Version2 -> Value
+    Key2_Version1 -> Value
+    ……
+    KeyN_Version2 -> Value
+    KeyN_Version1 -> Value
+    ……
 
-Note that for multiple versions of the same Key, versions with larger numbers are placed first (see the [Key-Value](#key-value-pairs) section where Keys are arranged in order), so that when you obtain Value through Key + Version, the Key of MVCC can be constructed with Key and Version, which is `Key_Version`. Then you can directly locate the first position greater than or equal to this `Key_Version` through RocksDB's `SeekPrefix(Key_Version)` API.
+同じキーに複数のバージョンがある場合、番号の大きいバージョンが先頭に配置されます（キーの順序については[キーバリュー](#key-value-pairs)セクションを参照）。そのため、Key + VersionでValueを取得すると、MVCCのKeyはKeyとVersionで構築でき、 `Key_Version`になります。その後、RocksDBの`SeekPrefix(Key_Version)` APIを使用して、この`Key_Version`以上の最初の位置を直接見つけることができます。
 
-## Distributed ACID transaction
+## 分散ACIDトランザクション {#distributed-acid-transaction}
 
-Transaction of TiKV adopts the model used by Google in BigTable: [Percolator](https://research.google/pubs/large-scale-incremental-processing-using-distributed-transactions-and-notifications/). TiKV's implementation is inspired by this paper, with a lot of optimizations. See [transaction overview](/transaction-overview.md) for details.
+TiKVのトランザクションは、GoogleがBigTableで使用しているモデルを採用しています: [パーコレーター](https://research.google/pubs/large-scale-incremental-processing-using-distributed-transactions-and-notifications/) 。TiKVの実装はこの論文に着想を得ており、多くの最適化が行われています。詳細は[取引の概要](/transaction-overview.md)ご覧ください。

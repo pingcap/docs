@@ -1,108 +1,108 @@
 ---
 title: TiDB TPC-H 50G Performance Test Report V2.0
-summary: TiDB TPC-H 50G Performance Test compared TiDB 1.0 and TiDB 2.0 in an OLAP scenario. Test results show that TiDB 2.0 outperformed TiDB 1.0 in most queries, with significant improvements in query processing time. Some queries in TiDB 1.0 did not return results, while others had high memory consumption. Future releases plan to support VIEW and address these issues.
+summary: TiDB TPC-H 50Gパフォーマンステストでは、OLAPシナリオにおいてTiDB 1.0とTiDB 2.0を比較しました。テスト結果によると、TiDB 2.0はほとんどのクエリでTiDB 1.0を上回り、クエリ処理時間が大幅に改善されました。TiDB 1.0では、一部のクエリで結果が返されず、メモリ消費量も増加しました。今後のリリースでは、VIEWをサポートし、これらの問題に対処する予定です。
 ---
 
-# TiDB TPC-H 50G Performance Test Report
+# TiDB TPC-H 50G パフォーマンステストレポート {#tidb-tpc-h-50g-performance-test-report}
 
-## Test purpose
+## テスト目的 {#test-purpose}
 
-This test aims to compare the performances of TiDB 1.0 and TiDB 2.0 in the OLAP scenario.
+このテストの目的は、OLAP シナリオにおける TiDB 1.0 と TiDB 2.0 のパフォーマンスを比較することです。
 
-> **Note:**
+> **注記：**
 >
-> Different test environments might lead to different test results.
+> テスト環境が異なると、テスト結果も異なる場合があります。
 
-## Test environment
+## テスト環境 {#test-environment}
 
-### Machine information
+### 機械情報 {#machine-information}
 
-System information:
+システム情報:
 
-| Machine IP      | Operation system              | Kernel version     | File system type |
-|--------------|------------------------|------------------------------|--------------|
-| 172.16.31.2  | Ubuntu 17.10 64bit     | 4.13.0-16-generic            | ext4         |
-| 172.16.31.3  | Ubuntu 17.10 64bit     | 4.13.0-16-generic            | ext4         |
-| 172.16.31.4  | Ubuntu 17.10 64bit     | 4.13.0-16-generic            | ext4         |
-| 172.16.31.6  | CentOS 7.4.1708 64bit  | 3.10.0-693.11.6.el7.x86\_64  | ext4         |
-| 172.16.31.8  | CentOS 7.4.1708 64bit  | 3.10.0-693.11.6.el7.x86\_64  | ext4         |
-| 172.16.31.10 | CentOS 7.4.1708 64bit  | 3.10.0-693.11.6.el7.x86\_64  | ext4         |
+| マシンIP        | 操作システム                | カーネルバージョン                  | ファイルシステムの種類 |
+| ------------ | --------------------- | -------------------------- | ----------- |
+| 172.16.31.2  | Ubuntu 17.10 64ビット    | 4.13.0-16-ジェネリック           | 拡張子4        |
+| 172.16.31.3  | Ubuntu 17.10 64ビット    | 4.13.0-16-ジェネリック           | 拡張子4        |
+| 172.16.31.4  | Ubuntu 17.10 64ビット    | 4.13.0-16-ジェネリック           | 拡張子4        |
+| 172.16.31.6  | CentOS 7.4.1708 64ビット | 3.10.0-693.11.6.el7.x86_64 | 拡張子4        |
+| 172.16.31.8  | CentOS 7.4.1708 64ビット | 3.10.0-693.11.6.el7.x86_64 | 拡張子4        |
+| 172.16.31.10 | CentOS 7.4.1708 64ビット | 3.10.0-693.11.6.el7.x86_64 | 拡張子4        |
 
-Hardware information:
+ハードウェア情報:
 
-| Type       |  Name                                                |
-|------------|------------------------------------------------------|
-| CPU        | 40 vCPUs, Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz  |
-| RAM        | 128GB, 16GB RDIMM * 8, 2400MT/s, dual channel, x8 bitwidth        |
-| DISK       | Intel P4500 4T SSD * 2      |
-| Network Card  | 10 Gigabit Ethernet |
+| タイプ       | 名前                                                |
+| --------- | ------------------------------------------------- |
+| CPU       | 40 vCPU、Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz |
+| ラム        | 128GB、16GB RDIMM * 8、2400MT/s、デュアルチャネル、x8 ビット幅    |
+| ディスク      | インテル P4500 4T SSD * 2                             |
+| ネットワークカード | 10ギガビットイーサネット                                     |
 
-### TPC-H
+### TPC-H {#tpc-h}
 
 [tidb-bench/tpch](https://github.com/pingcap/tidb-bench/tree/master/tpch)
 
-### Cluster topology
+### クラスタトポロジー {#cluster-topology}
 
-| Machine IP   | Deployment Instance |
-|--------------|---------------------|
-| 172.16.31.2  | TiKV \* 2           |
-| 172.16.31.3  | TiKV \* 2           |
-| 172.16.31.6  | TiKV \* 2           |
-| 172.16.31.8  | TiKV \* 2           |
-| 172.16.31.10 | TiKV \* 2           |
-| 172.16.31.10 | PD \* 1             |
-| 172.16.31.4  | TiDB \* 1           |
+| マシンIP        | デプロイメントインスタンス |
+| ------------ | ------------- |
+| 172.16.31.2  | ティKV * 2      |
+| 172.16.31.3  | ティKV * 2      |
+| 172.16.31.6  | ティKV * 2      |
+| 172.16.31.8  | ティKV * 2      |
+| 172.16.31.10 | ティKV * 2      |
+| 172.16.31.10 | PD * 1        |
+| 172.16.31.4  | TiDB * 1      |
 
-### Corresponding TiDB version information
+### 対応するTiDBバージョン情報 {#corresponding-tidb-version-information}
 
 TiDB 1.0:
 
-| Component | Version | Commit Hash                                 |
-|--------|-------------|--------------------------------------------|
-| TiDB   | v1.0.9      | 4c7ee3580cd0a69319b2c0c08abdc59900df7344   |
-| TiKV   | v1.0.8      | 2bb923a4cd23dbf68f0d16169fd526dc5c1a9f4a   |
-| PD     | v1.0.8      | 137fa734472a76c509fbfd9cb9bc6d0dc804a3b7   |
+| 成分   | バージョン      | コミットハッシュ                                 |
+| ---- | ---------- | ---------------------------------------- |
+| TiDB | バージョン1.0.9 | 4c7ee3580cd0a69319b2c0c08abdc59900df7344 |
+| TiKV | バージョン1.0.8 | 2bb923a4cd23dbf68f0d16169fd526dc5c1a9f4a |
+| PD   | バージョン1.0.8 | 137fa734472a76c509fbfd9cb9bc6d0dc804a3b7 |
 
 TiDB 2.0:
 
-| Component | Version      | Commit Hash                            |
-|--------|-------------|--------------------------------------------|
-| TiDB   | v2.0.0-rc.6 | 82d35f1b7f9047c478f4e1e82aa0002abc8107e7   |
-| TiKV   | v2.0.0-rc.6 | 8bd5c54966c6ef42578a27519bce4915c5b0c81f   |
-| PD     | v2.0.0-rc.6 | 9b824d288126173a61ce7d51a71fc4cb12360201   |
+| 成分   | バージョン       | コミットハッシュ                                 |
+| ---- | ----------- | ---------------------------------------- |
+| TiDB | v2.0.0-rc.6 | 82d35f1b7f9047c478f4e1e82aa0002abc8107e7 |
+| TiKV | v2.0.0-rc.6 | 8bd5c54966c6ef42578a27519bce4915c5b0c81f |
+| PD   | v2.0.0-rc.6 | 9b824d288126173a61ce7d51a71fc4cb12360201 |
 
-## Test result
+## テスト結果 {#test-result}
 
-| Query ID  | TiDB 2.0           | TiDB 1.0         |
-|-----------|--------------------|------------------|
-| 1         | 33.915s            | 215.305s         |
-| 2         | 25.575s            | Nan              |
-| 3         | 59.631s            | 196.003s         |
-| 4         | 30.234s            | 249.919s         |
-| 5         | 31.666s            | OOM              |
-| 6         | 13.111s            | 118.709s         |
-| 7         | 31.710s            | OOM              |
-| 8         | 31.734s            | 800.546s         |
-| 9         | 34.211s            | 630.639s         |
-| 10        | 30.774s            | 133.547s         |
-| 11        | 27.692s            | 78.026s          |
-| 12        | 27.962s            | 124.641s         |
-| 13        | 27.676s            | 174.695s         |
-| 14        | 19.676s            | 110.602s         |
-| 15        | NaN                | Nan              |
-| 16        | 24.890s            | 40.529s          |
-| 17        | 245.796s           | NaN              |
-| 18        | 91.256s            | OOM              |
-| 19        | 37.615s            | NaN              |
-| 20        | 44.167s            | 212.201s         |
-| 21        | 31.466s            | OOM              |
-| 22        | 31.539s            | 125.471s         |
+| クエリID | TiDB 2.0 | TiDB 1.0 |
+| ----- | -------- | -------- |
+| 1     | 33.915秒  | 215.305秒 |
+| 2     | 25.575秒  | ナン       |
+| 3     | 59.631秒  | 196.003秒 |
+| 4     | 30.234秒  | 249.919秒 |
+| 5     | 31.666秒  | OOM      |
+| 6     | 13.111秒  | 118.709秒 |
+| 7     | 31.710秒  | OOM      |
+| 8     | 31.734秒  | 800.546秒 |
+| 9     | 34.211秒  | 630.639秒 |
+| 10    | 30.774秒  | 133.547秒 |
+| 11    | 27.692秒  | 78.026秒  |
+| 12    | 27.962秒  | 124.641秒 |
+| 13    | 27.676秒  | 174.695秒 |
+| 14    | 19.676秒  | 110.602秒 |
+| 15    | 非数       | ナン       |
+| 16    | 24.890秒  | 40.529秒  |
+| 17    | 245.796秒 | 非数       |
+| 18    | 91.256秒  | OOM      |
+| 19    | 37.615秒  | 非数       |
+| 20    | 44.167秒  | 212.201秒 |
+| 21    | 31.466秒  | OOM      |
+| 22    | 31.539秒  | 125.471秒 |
 
 ![TPC-H Query Result](/media/tpch-query-result.png)
 
-It should be noted that:
+以下の点に注意してください。
 
-- In the diagram above, the orange bars represent the query results of Release 1.0 and the blue bars represent the query results of Release 2.0. The y-axis represents the processing time of queries in seconds, the shorter the faster.
-- Query 15 is tagged with "NaN" because VIEW is currently not supported in either TiDB 1.0 or 2.0. We have plans to provide VIEW support in a future release.
-- Queries 2, 17, and 19 in the TiDB 1.0 column are tagged with "NaN" because TiDB 1.0 did not return results for these queries.
-- Queries 5, 7, 18, and 21 in the TiDB 1.0 column are tagged with "OOM" because the memory consumption was too high.
+-   上の図では、オレンジ色のバーはリリース1.0のクエリ結果、青色のバーはリリース2.0のクエリ結果を表しています。Y軸はクエリの処理時間（秒）を表しており、短いほど高速です。
+-   クエリ15は、現在TiDB 1.0でも2.0でもVIEWがサポートされていないため、「NaN」タグが付けられています。今後のリリースでVIEWのサポートを提供する予定です。
+-   TiDB 1.0 列のクエリ 2、17、および 19 には、TiDB 1.0 がこれらのクエリの結果を返さなかったため、「NaN」タグが付けられています。
+-   TiDB 1.0 列のクエリ 5、7、18、および 21 には、メモリ消費量が高すぎるため、「OOM」タグが付けられています。

@@ -1,17 +1,17 @@
 ---
 title: TiDB Architecture FAQs
-summary: Learn about the most frequently asked questions (FAQs) relating to TiDB.
+summary: TiDB に関するよくある質問 (FAQ) について説明します。
 ---
 
-# TiDB Architecture FAQs
+# TiDBアーキテクチャに関するFAQ {#tidb-architecture-faqs}
 
 <!-- markdownlint-disable MD026 -->
 
-This document lists the Most Frequently Asked Questions about TiDB.
+このドキュメントには、TiDB に関するよくある質問が記載されています。
 
-## TiDB introduction and architecture
+## TiDB の紹介とアーキテクチャ {#tidb-introduction-and-architecture}
 
-### What is TiDB?
+### TiDB とは何ですか? {#what-is-tidb}
 
 <!-- Localization note for TiDB:
 
@@ -21,53 +21,51 @@ This document lists the Most Frequently Asked Questions about TiDB.
 
 -->
 
-[TiDB](https://github.com/pingcap/tidb) is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. The goal of TiDB is to provide users with a one-stop database solution that covers OLTP (Online Transactional Processing), OLAP (Online Analytical Processing), and HTAP services. TiDB is suitable for various use cases that require high availability and strong consistency with large-scale data.
+TiDB [TiDB](https://github.com/pingcap/tidb)は、ハイブリッドトランザクションおよび分析処理（HTAP）ワークロードをサポートするオープンソースの分散SQLデータベースです。MySQLと互換性があり、水平スケーラビリティ、強力な一貫性、高可用性を備えています。TiDBの目標は、OLTP（オンライントランザクション処理）、OLAP（オンライン分析処理）、そしてHTAPサービスをカバーするワンストップデータベースソリューションをユーザーに提供することです。TiDBは、大規模データで高可用性と強力な一貫性が求められる様々なユースケースに適しています。
 
-### What is TiDB's architecture?
+### TiDB のアーキテクチャとは何ですか? {#what-is-tidb-s-architecture}
 
-The TiDB cluster has three components: the TiDB server, the PD (Placement Driver) server, and the TiKV server. For more details, see [TiDB architecture](/tidb-architecture.md), [TiDB storage](/tidb-storage.md), [TiDB computing](/tidb-computing.md), and [TiDB scheduling](/tidb-scheduling.md).
+TiDBクラスタは、TiDBサーバー、PD（配置Driver）サーバー、TiKVサーバーの3つのコンポーネントで構成されています。詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md) [TiDBstorage](/tidb-storage.md)参照して[TiDB スケジューリング](/tidb-scheduling.md) [TiDBコンピューティング](/tidb-computing.md)
 
-### Is TiDB based on MySQL?
+### TiDB は MySQL に基づいていますか? {#is-tidb-based-on-mysql}
 
-No. TiDB supports MySQL syntax and protocol, but it is a new open source database that is developed and maintained by PingCAP, Inc.
+いいえ。TiDB は MySQL の構文とプロトコルをサポートしていますが、PingCAP, Inc. によって開発および保守されている新しいオープン ソース データベースです。
 
-### What is the respective responsibility of TiDB, TiKV and PD (Placement Driver)?
+### TiDB、TiKV、PD (配置Driver) のそれぞれの責任は何ですか? {#what-is-the-respective-responsibility-of-tidb-tikv-and-pd-placement-driver}
 
-- TiDB works as the SQL computing layer, mainly responsible for parsing SQL, specifying query plan, and generating executor.
-- TiKV works as a distributed Key-Value storage engine, used to store the real data. In short, TiKV is the storage engine of TiDB.
-- PD works as the cluster manager of TiDB, which manages TiKV metadata, allocates timestamps, and makes decisions for data placement and load balancing.
+-   TiDB は SQL コンピューティングレイヤーとして機能し、主に SQL の解析、クエリ プランの指定、エグゼキュータの生成を担当します。
+-   TiKVは分散型のキーバリューstorageエンジンとして動作し、実データの保存に使用されます。つまり、TiKVはTiDBのstorageエンジンです。
+-   PD は TiDB のクラスター マネージャーとして機能し、TiKV メタデータを管理し、タイムスタンプを割り当て、データの配置と負荷分散の決定を行います。
 
-### Is it easy to use TiDB?
+### TiDB は使いやすいですか? {#is-it-easy-to-use-tidb}
 
-Yes, it is. When all the required services are started, you can use TiDB as easily as a MySQL server. You can replace MySQL with TiDB to power your applications without changing a single line of code in most cases. You can also manage TiDB using the popular MySQL management tools.
+はい、可能です。必要なサービスがすべて起動していれば、TiDBはMySQLサーバーと同じくらい簡単に使用できます。MySQLをTiDBに置き換えれば、ほとんどの場合、コードを1行も変更することなくアプリケーションを強化できます。また、一般的なMySQL管理ツールを使用してTiDBを管理することも可能です。
 
-### How is TiDB compatible with MySQL?
+### TiDB は MySQL とどのように互換性がありますか? {#how-is-tidb-compatible-with-mysql}
 
-Currently, TiDB supports the majority of MySQL 8.0 syntax, but does not support triggers, stored procedures, and user-defined functions. For more details, see [Compatibility with MySQL](/mysql-compatibility.md).
+現在、TiDBはMySQL 8.0の構文の大部分をサポートしていますが、トリガー、ストアドプロシージャ、ユーザー定義関数はサポートしていません。詳細については、 [MySQLとの互換性](/mysql-compatibility.md)参照してください。
 
-### Does TiDB support distributed transactions?
+### TiDB は分散トランザクションをサポートしていますか? {#does-tidb-support-distributed-transactions}
 
-Yes. TiDB distributes transactions across your cluster, whether it is a few nodes in a single location or many [nodes across multiple data centers](/multi-data-centers-in-one-city-deployment.md).
+はい。TiDB は、単一の場所に少数のノードがある場合でも、多数の[複数のデータセンターにまたがるノード](/multi-data-centers-in-one-city-deployment.md)がある場合でも、クラスター全体にトランザクションを分散します。
 
-Inspired by Google's Percolator, the transaction model in TiDB is mainly a two-phase commit protocol with some practical optimizations. This model relies on a timestamp allocator to assign the monotone increasing timestamp for each transaction, so conflicts can be detected. [PD](/tidb-architecture.md#placement-driver-pd-server) works as the timestamp allocator in a TiDB cluster.
+GoogleのPercolatorに着想を得たTiDBのトランザクションモデルは、主に2フェーズコミットプロトコルをベースに、実用的な最適化が施されています。このモデルは、タイムスタンプアロケータを利用して各トランザクションに単調増加するタイムスタンプを割り当てることで、競合を検出します。1 [PD](/tidb-architecture.md#placement-driver-pd-server) TiDBクラスタ内でタイムスタンプアロケータとして機能します。
 
-### What programming language can I use to work with TiDB?
+### TiDB を操作するためにどのプログラミング言語を使用できますか? {#what-programming-language-can-i-use-to-work-with-tidb}
 
-Any language supported by MySQL client or driver.
+MySQL クライアントまたはドライバーでサポートされている任意の言語。
 
-### Can I use other Key-Value storage engines with TiDB?
+### TiDB で他のキー値storageエンジンを使用できますか? {#can-i-use-other-key-value-storage-engines-with-tidb}
 
-Yes. In addition to TiKV, TiDB supports standalone storage engines such as UniStore and MockTiKV. Note that in later TiDB releases, MockTiKV might NO LONGER be supported.
+はい。TiDBはTiKVに加えて、UniStoreやMockTiKVなどのスタンドアロンstorageエンジンをサポートしています。ただし、今後のTiDBリリースでは、MockTiKVはサポートされなくなる可能性がありますのでご注意ください。
 
-To check all TiDB-supported storage engines, use the following command:
-
-{{< copyable "shell-regular" >}}
+TiDB でサポートされているすべてのstorageエンジンを確認するには、次のコマンドを使用します。
 
 ```shell
 ./bin/tidb-server -h
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```shell
 Usage of ./bin/tidb-server:
@@ -82,50 +80,50 @@ Usage of ./bin/tidb-server:
   ......
 ```
 
-### In addition to the TiDB documentation, are there any other ways to acquire TiDB knowledge?
+### TiDB ドキュメントの他に、TiDB の知識を習得する方法はありますか? {#in-addition-to-the-tidb-documentation-are-there-any-other-ways-to-acquire-tidb-knowledge}
 
-- [TiDB documentation](https://docs.pingcap.com/): the most important and timely way to get TiDB related knowledge.
-- [TiDB blogs](https://www.pingcap.com/blog/): learn technical articles, product insights, and case studies.
-- [PingCAP Education](https://www.pingcap.com/education/?from=en): take online courses and certification programs.
+-   [TiDBドキュメント](https://docs.pingcap.com/) : TiDB 関連の知識を得るための最も重要かつタイムリーな方法。
+-   [TiDBブログ](https://www.pingcap.com/blog/) : 技術記事、製品の洞察、ケーススタディを学びます。
+-   [PingCAP教育](https://www.pingcap.com/education/?from=en) : オンライン コースや認定プログラムを受講します。
 
-### What is the length limit for the TiDB user name?
+### TiDB ユーザー名の長さ制限は何ですか? {#what-is-the-length-limit-for-the-tidb-user-name}
 
-32 characters at most.
+最大32文字。
 
-### What are the limits on the number of columns and row size in TiDB?
+### TiDB の列数と行サイズの制限は何ですか? {#what-are-the-limits-on-the-number-of-columns-and-row-size-in-tidb}
 
-- The maximum number of columns in TiDB defaults to 1017. You can adjust the number up to 4096.
-- The maximum size of a single row defaults to 6 MB. You can increase the number up to 120 MB.
+-   TiDB の列の最大数はデフォルトで 1017 に設定されています。この数は最大 4096 まで調整できます。
+-   1行あたりの最大サイズはデフォルトで6MBです。最大120MBまで増やすことができます。
 
-For more information, see [TiDB Limitations](/tidb-limitations.md).
+詳細については[TiDB の制限](/tidb-limitations.md)参照してください。
 
-### Does TiDB support XA?
+### TiDB は XA をサポートしていますか? {#does-tidb-support-xa}
 
-No. The JDBC driver of TiDB is MySQL Connector/J. When using Atomikos, set the data source to `type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`. TiDB does not support the connection with MySQL JDBC XADataSource. MySQL JDBC XADataSource only works for MySQL (for example, using DML to modify the `redo` log).
+いいえ。TiDBのJDBCドライバはMySQL Connector/Jです。Atomikosを使用する場合は、データソースを`type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`に設定してください。TiDBはMySQL JDBC XADataSourceとの接続をサポートしていません。MySQL JDBC XADataSourceはMySQLでのみ機能します（例：DMLを使用して`redo`ログを変更する場合）。
 
-After you configure the two data sources of Atomikos, set the JDBC drives to XA. When Atomikos operates TM and RM (DB), Atomikos sends the command including XA to the JDBC layer. Taking MySQL for an example, when XA is enabled in the JDBC layer, JDBC will send a series of XA logic operations to InnoDB, including using DML to change the `redo` log. This is the operation of the two-phase commit. The current TiDB version does not support the upper application layer JTA/XA and does not parse XA operations sent by Atomikos.
+Atomikosの2つのデータソースを設定したら、JDBCドライブをXAに設定します。AtomikosがTMおよびRM（DB）を操作する際、AtomikosはXAを含むコマンドをJDBCレイヤーに送信します。MySQLを例に挙げると、JDBCレイヤーでXAが有効になっている場合、JDBCはDMLを使用して`redo`ログを変更するなど、一連のXAロジック操作をInnoDBに送信します。これは2相コミットの動作です。現在のTiDBバージョンは、上位アプリケーションレイヤーのJTA/XAをサポートしておらず、Atomikosから送信されたXA操作を解析しません。
 
-As a standalone database, MySQL can only implement across-database transactions using XA; while TiDB supports distributed transactions using Google Percolator transaction model and its performance stability is higher than XA, so TiDB does not support JTA/XA and there is no need for TiDB to support XA.
+スタンドアロン データベースとして、MySQL は XA を使用したデータベース間トランザクションのみを実装できます。一方、TiDB は Google Percolator トランザクション モデルを使用した分散トランザクションをサポートし、パフォーマンスの安定性は XA よりも高いため、TiDB は JTA/XA をサポートしておらず、TiDB が XA をサポートする必要もありません。
 
-### How could TiDB support high concurrent `INSERT` or `UPDATE` operations to the columnar storage engine (TiFlash) without hurting performance?
+### TiDB は、パフォーマンスを損なうことなく、列指向storageエンジン (TiFlash) への大量の同時<code>INSERT</code>または<code>UPDATE</code>操作をどのようにサポートできるでしょうか? {#how-could-tidb-support-high-concurrent-code-insert-code-or-code-update-code-operations-to-the-columnar-storage-engine-tiflash-without-hurting-performance}
 
-- [TiFlash](/tiflash/tiflash-overview.md) introduces a special structure named DeltaTree to process the modification of the columnar engine.
-- TiFlash acts as the learner role in a Raft group, so it does not vote for the log commit or writes. This means that DML operations do not have to wait for the acknowledgment of TiFlash, which is why TiFlash does not slow down the OLTP performance. In addition, TiFlash and TiKV work in separate instances, so they do not affect each other.
+-   [TiFlash](/tiflash/tiflash-overview.md) 、列指向エンジンの変更を処理するために DeltaTree という特別な構造が導入されています。
+-   TiFlash はRaftグループにおいて学習者として動作するため、ログコミットや書き込みの投票は行いません。つまり、DML 操作はTiFlashの確認応答を待つ必要がなく、そのためTiFlashによって OLTP パフォーマンスが低下することはありません。さらに、 TiFlashと TiKV は別々のインスタンスで動作するため、相互に影響を与えることはありません。
 
-### What kind of consistency does TiFlash provide?
+### TiFlash はどのような一貫性を提供しますか? {#what-kind-of-consistency-does-tiflash-provide}
 
-TiFlash maintains strong data consistency by default. The raft learner process updates the data. There is also a TSO check to ensure the data in queries is fully consistent with the transaction. For more information, see [Asynchronous replication](/tiflash/tiflash-overview.md#asynchronous-replication) and [Consistency](/tiflash/tiflash-overview.md#consistency).
+TiFlashはデフォルトで強力なデータ整合性を維持します。ラフト学習プロセスがデータを更新します。また、クエリ内のデータがトランザクションと完全に整合していることを確認するためのTSOチェックも実行されます。詳細については、 [非同期レプリケーション](/tiflash/tiflash-overview.md#asynchronous-replication)と[一貫性](/tiflash/tiflash-overview.md#consistency)参照してください。
 
-## TiDB techniques
+## TiDBテクニック {#tidb-techniques}
 
-### TiKV for data storage
+### データstorage用のTiKV {#tikv-for-data-storage}
 
-See [TiDB Internal (I) - Data Storage](https://www.pingcap.com/blog/tidb-internal-data-storage/?from=en).
+[TiDB 内部 (I) - データストレージ](https://www.pingcap.com/blog/tidb-internal-data-storage/?from=en)参照。
 
-### TiDB for data computing
+### データコンピューティングのためのTiDB {#tidb-for-data-computing}
 
-See [TiDB Internal (II) - Computing](https://www.pingcap.com/blog/tidb-internal-computing/?from=en).
+[TiDB 内部 (II) - コンピューティング](https://www.pingcap.com/blog/tidb-internal-computing/?from=en)参照。
 
-### PD for scheduling
+### スケジュールのPD {#pd-for-scheduling}
 
-See [TiDB Internal (III) - Scheduling](https://www.pingcap.com/blog/tidb-internal-scheduling/?from=en).
+[TiDB内部（III） - スケジューリング](https://www.pingcap.com/blog/tidb-internal-scheduling/?from=en)参照。

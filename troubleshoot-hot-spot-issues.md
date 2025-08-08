@@ -1,136 +1,124 @@
 ---
 title: Troubleshoot Hotspot Issues
-summary: Learn how to locate and resolve read or write hotspot issues in TiDB.
+summary: TiDB の読み取りまたは書き込みホットスポットの問題を特定して解決する方法を学びます。
 ---
 
-# Troubleshoot Hotspot Issues
+# ホットスポットの問題のトラブルシューティング {#troubleshoot-hotspot-issues}
 
-This document describes how to locate and resolve the problem of read and write hotspots.
+このドキュメントでは、読み取りおよび書き込みホットスポットの問題を特定して解決する方法について説明します。
 
-As a distributed database, TiDB has a load balancing mechanism to distribute the application loads as evenly as possible to different computing or storage nodes, to make better use of server resources. However, in certain scenarios, some application loads cannot be well distributed, which can affect the performance and form a single point of high load, also known as a hotspot.
+分散データベースであるTiDBは、アプリケーションの負荷を異なるコンピューティングノードまたはstorageノードに可能な限り均等に分散し、サーバーリソースをより有効に活用する負荷分散メカニズムを備えています。しかし、特定のシナリオでは、一部のアプリケーションの負荷が適切に分散されず、パフォーマンスに影響を与え、ホットスポットと呼ばれる高負荷の単一ポイントが形成される可能性があります。
 
-TiDB provides a complete solution to troubleshooting, resolving or avoiding hotspots. By balancing load hotspots, overall performance can be improved, including improving QPS and reducing latency.
+TiDBは、ホットスポットのトラブルシューティング、解決、または回避のための包括的なソリューションを提供します。負荷ホットスポットを分散することで、QPSの向上やレイテンシーの削減など、全体的なパフォーマンスを向上させることができます。
 
-## Common hotspots
+## 一般的なホットスポット {#common-hotspots}
 
-This section describes TiDB encoding rules, table hotspots, and index hotspots.
+このセクションでは、TiDB エンコーディング ルール、テーブル ホットスポット、およびインデックス ホットスポットについて説明します。
 
-### TiDB encoding rules
+### TiDBエンコーディングルール {#tidb-encoding-rules}
 
-TiDB assigns a TableID to each table, an IndexID to each index, and a RowID to each row. By default, if the table uses an integer primary key, the value of the primary key is treated as the RowID. Among these IDs, TableID is unique in the entire cluster, while IndexID and RowID are unique in the table. The type of all these IDs is int64.
+TiDBは各テーブルにTableID、各インデックスにIndexID、各行にRowIDを割り当てます。デフォルトでは、テーブルが整数の主キーを使用している場合、主キーの値がRowIDとして扱われます。これらのIDのうち、TableIDはクラスター全体で一意であり、IndexIDとRowIDはテーブル内で一意です。これらのIDの型はすべてint64です。
 
-Each row of data is encoded as a key-value pair according to the following rule:
+各データ行は、次の規則に従ってキーと値のペアとしてエンコードされます。
 
-```
-Key: tablePrefix{tableID}_recordPrefixSep{rowID}
-Value: [col1, col2, col3, col4]
-```
+    Key: tablePrefix{tableID}_recordPrefixSep{rowID}
+    Value: [col1, col2, col3, col4]
 
-The `tablePrefix` and `recordPrefixSep` of the key are specific string constants, used to distinguish from other data in the KV space.
+キーの`tablePrefix`と`recordPrefixSep` 、KV 空間内の他のデータと区別するために使用される特定の文字列定数です。
 
-For Index data, the key-value pair is encoded according to the following rule:
+インデックス データの場合、キーと値のペアは次の規則に従ってエンコードされます。
 
-```
-Key: tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue
-Value: rowID
-```
+    Key: tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue
+    Value: rowID
 
-Index data has two types: the unique index and the non-unique index.
+インデックス データには、一意インデックスと非一意インデックスの 2 種類があります。
 
-- For unique indexes, you can follow the coding rules above.
-- For non-unique indexes, a unique key cannot be constructed through this encoding, because the `tablePrefix{tableID}_indexPrefixSep{indexID}` of the same index is the same and the `ColumnsValue` of multiple rows might be the same. The encoding rule for non-unique indexes is as follows:
+-   一意のインデックスの場合は、上記のコーディング規則に従うことができます。
+-   非一意インデックスの場合、このエンコーディングでは一意キーを構築できません。これは、同じインデックスの`tablePrefix{tableID}_indexPrefixSep{indexID}`は同じですが、複数の行の`ColumnsValue`は同じになる可能性があるためです。非一意インデックスのエンコーディング規則は次のとおりです。
 
-    ```
-    Key: tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue_rowID
-    Value: null
-    ```
+        Key: tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue_rowID
+        Value: null
 
-### Table hotspots
+### テーブルホットスポット {#table-hotspots}
 
-According to TiDB coding rules, the data of the same table is in a range prefixed by the beginning of the TableID, and the data is arranged in the order of RowID values. When RowID values are incremented during table inserting, the inserted line can only be appended to the end. The Region will split after it reaches a certain size, and then it still can only be appended to the end of the range. The `INSERT` operation can only be executed on one Region, forming a hotspot.
+TiDBのコーディングルールによれば、同じテーブルのデータはTableIDの先頭で始まる範囲に収められ、RowID値の順序で並べられます。テーブルの挿入時にRowID値が増加すると、挿入された行は末尾にのみ追加されます。Regionは一定のサイズに達すると分割されますが、その後も範囲の末尾にのみ追加できます。1 `INSERT`操作は1つのリージョンに対してのみ実行でき、ホットスポットを形成します。
 
-The common auto-increment primary key is sequentially increasing. When the primary key is of the integer type, the value of the primary key is used as the RowID by default. At this time, the RowID is sequentially increasing, and a write hotspot of the table forms when a large number of `INSERT` operations exist.
+一般的な自動インクリメント主キーは、順次増加します。主キーが整数型の場合、デフォルトで主キーの値がRowIDとして使用されます。この場合、RowIDは順次増加し、 `INSERT`操作が多数発生すると、テーブルの書き込みホットスポットが発生します。
 
-Meanwhile, the RowID in TiDB is also sequentially auto-incremental by default. When the primary key is not an integer type, you might also encounter the problem of write hotspots.
+一方、TiDBのRowIDもデフォルトで自動増分されます。主キーが整数型でない場合は、書き込みホットスポットの問題が発生する可能性があります。
 
-In addition, when hotspots occur during the process of data writes (on a newly created table or partition) or data reads (periodic read hotspots in read-only scenarios), you can control the Region merge behavior using table attributes. For details, see [Control the Region merge behavior using table attributes](/table-attributes.md#control-the-region-merge-behavior-using-table-attributes).
+さらに、データ書き込み（新規作成されたテーブルまたはパーティション）またはデータ読み取り（読み取り専用シナリオにおける定期的な読み取りホットスポット）のプロセス中にホットスポットが発生した場合、テーブル属性を使用してリージョンのマージ動作を制御できます。詳細については、 [テーブル属性を使用してリージョン結合の動作を制御する](/table-attributes.md#control-the-region-merge-behavior-using-table-attributes)参照してください。
 
-### Index hotspots
+### インデックスホットスポット {#index-hotspots}
 
-Index hotspots are similar to table hotspots. Common index hotspots appear in fields that are monotonously increasing in time order, or `INSERT` scenarios with a large number of repeated values.
+インデックスのホットスポットはテーブルのホットスポットに似ています。一般的なインデックスのホットスポットは、時間順に単調に増加するフィールド、または多数の重複値が含まれる`INSERT`で発生します。
 
-## Identify hotspot issues
+## ホットスポットの問題を特定する {#identify-hotspot-issues}
 
-Performance problems are not necessarily caused by hotspots and might be caused by multiple factors. Before troubleshooting issues, confirm whether it is related to hotspots.
+パフォーマンスの問題は必ずしもホットスポットが原因であるとは限らず、複数の要因が絡み合っている可能性があります。問題のトラブルシューティングを行う前に、ホットスポットに関連しているかどうかを確認してください。
 
-- To judge write hotspots, open **Hot Write** in the **TiKV-Trouble-Shooting** monitoring panel to check whether the Raftstore CPU metric value of any TiKV node is significantly higher than that of other nodes.
+-   書き込みホットスポットを判断するには、 **TiKV トラブルシューティング**監視パネルで**Hot Write を**開き、任意の TiKV ノードのRaftstore CPU メトリック値が他のノードの値よりも大幅に高いかどうかを確認します。
 
-- To judge read hotspots, open **Thread_CPU** in the **TiKV-Details** monitoring panel to check whether the coprocessor CPU metric value of any TiKV node is particularly high.
+-   読み取りホットスポットを判断するには、 **TiKV 詳細**監視パネルで**Thread_CPU**を開き、いずれかの TiKV ノードのコプロセッサ CPU メトリック値が特に高いかどうかを確認します。
 
-### Use TiDB Dashboard to locate hotspot tables
+### TiDBダッシュボードを使用してホットスポットテーブルを見つける {#use-tidb-dashboard-to-locate-hotspot-tables}
 
-The **Key Visualizer** feature in [TiDB Dashboard](/dashboard/dashboard-intro.md) helps users narrow down hotspot troubleshooting scope to the table level. The following is an example of the thermal diagram shown by **Key Visualizer**. The horizontal axis of the graph is time, and the vertical axis are various tables and indexes. The brighter the color, the greater the load. You can switch the read or write flow in the toolbar.
+[TiDBダッシュボード](/dashboard/dashboard-intro.md)の**Key Visualizer**機能は、ホットスポットのトラブルシューティング範囲をテーブルレベルに絞り込むのに役立ちます。以下は**、Key Visualizer**で表示された温度図の例です。グラフの横軸は時間、縦軸は各種テーブルとインデックスです。色が明るいほど負荷が大きいことを示します。ツールバーで読み取りフローと書き込みフローを切り替えることができます。
 
 ![Dashboard Example 1](/media/troubleshoot-hot-spot-issues-1.png)
 
-The following bright diagonal lines (oblique upward or downward) can appear in the write flow graph. Because the write only appears at the end, as the number of table Regions becomes larger, it appears as a ladder. This indicates that a write hotspot shows in this table:
+書き込みフローグラフには、以下のような明るい斜線（上向きまたは下向き）が現れることがあります。書き込みは最後にのみ現れるため、テーブル領域の数が増えるにつれて、梯子状の線が現れます。これは、このテーブルに書き込みホットスポットが発生していることを示しています。
 
 ![Dashboard Example 2](/media/troubleshoot-hot-spot-issues-2.png)
 
-For read hotspots, a bright horizontal line is generally shown in the thermal diagram. Usually these are caused by small tables with a large number of accesses, shown as follows:
+読み取りホットスポットの場合、一般的に温度図に明るい水平線が表示されます。これは通常、アクセス回数が多い小さなテーブルによって発生し、以下のように表示されます。
 
 ![Dashboard Example 3](/media/troubleshoot-hot-spot-issues-3.png)
 
-Hover over the bright block, you can see what table or index has a heavy load. For example:
+明るいブロックにマウスを合わせると、どのテーブルまたはインデックスに負荷がかかっているかを確認できます。例えば：
 
 ![Dashboard Example 4](/media/troubleshoot-hot-spot-issues-4.png)
 
-## Use `SHARD_ROW_ID_BITS` to process hotspots
+## <code>SHARD_ROW_ID_BITS</code>を使用してホットスポットを処理する {#use-code-shard-row-id-bits-code-to-process-hotspots}
 
-For a non-clustered primary key or a table without a primary key, TiDB uses an implicit auto-increment RowID. When a large number of `INSERT` operations exist, the data is written into a single Region, resulting in a write hotspot.
+非クラスター化主キーまたは主キーのないテーブルの場合、TiDBは暗黙的な自動インクリメントRowIDを使用します`INSERT`の操作が多数存在する場合、データは単一のリージョンに書き込まれるため、書き込みホットスポットが発生します。
 
-By setting [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md), row IDs are scattered and written into multiple Regions, which can alleviate the write hotspot issue.
+[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)設定すると、行 ID が複数のリージョンに分散されて書き込まれるため、書き込みホットスポットの問題を軽減できます。
 
-```
-SHARD_ROW_ID_BITS = 4 # Represents 16 shards.
-SHARD_ROW_ID_BITS = 6 # Represents 64 shards.
-SHARD_ROW_ID_BITS = 0 # Represents the default 1 shard.
-```
+    SHARD_ROW_ID_BITS = 4 # Represents 16 shards.
+    SHARD_ROW_ID_BITS = 6 # Represents 64 shards.
+    SHARD_ROW_ID_BITS = 0 # Represents the default 1 shard.
 
-Statement example:
-
-{{< copyable "sql" >}}
+ステートメントの例:
 
 ```sql
 CREATE TABLE: CREATE TABLE t (c int) SHARD_ROW_ID_BITS = 4;
 ALTER TABLE: ALTER TABLE t SHARD_ROW_ID_BITS = 4;
 ```
 
-The value of `SHARD_ROW_ID_BITS` can be dynamically modified. The modified value only takes effect for newly written data.
+値`SHARD_ROW_ID_BITS`は動的に変更できます。変更された値は、新しく書き込まれたデータにのみ適用されます。
 
-For the table with a primary key of the `CLUSTERED` type, TiDB uses the primary key of the table as the RowID. At this time, the `SHARD_ROW_ID_BITS` option cannot be used because it changes the RowID generation rules. For the table with the primary key of the `NONCLUSTERED` type, TiDB uses an automatically allocated 64-bit integer as the RowID. In this case, you can use the `SHARD_ROW_ID_BITS` feature. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+`CLUSTERED`型の主キーを持つテーブルの場合、TiDBはテーブルの主キーをRowIDとして使用します。この場合、 `SHARD_ROW_ID_BITS`オプションはRowIDの生成ルールを変更するため使用できません。5 `NONCLUSTERED`の主キーを持つテーブルの場合、TiDBは自動的に割り当てられた64ビット整数をRowIDとして使用します。この場合、 `SHARD_ROW_ID_BITS`機能が使用できます。9 `CLUSTERED`の主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
-The following two load diagrams shows the case where two tables without primary keys use `SHARD_ROW_ID_BITS` to scatter hotspots. The first diagram shows the situation before scattering hotspots, while the second one shows the situation after scattering hotspots.
+以下の2つの負荷図は、主キーを持たない2つのテーブルで`SHARD_ROW_ID_BITS`使用してホットスポットを分散させた場合を示しています。最初の図はホットスポットを分散させる前の状況を示し、2番目の図はホットスポットを分散させた後の状況を示しています。
 
 ![Dashboard Example 5](/media/troubleshoot-hot-spot-issues-5.png)
 
 ![Dashboard Example 6](/media/troubleshoot-hot-spot-issues-6.png)
 
-As shown in the load diagrams above, before setting `SHARD_ROW_ID_BITS`, load hotspots are concentrated on a single Region. After setting `SHARD_ROW_ID_BITS`, load hotspots become scattered.
+上記の負荷図に示すように、設定`SHARD_ROW_ID_BITS`より前では、負荷のホットスポットが単一のリージョンに集中していました。設定`SHARD_ROW_ID_BITS`より後では、負荷のホットスポットが分散するようになります。
 
-## Handle auto-increment primary key hotspot tables using `AUTO_RANDOM`
+## <code>AUTO_RANDOM</code>を使用して自動増分主キー ホットスポット テーブルを処理する {#handle-auto-increment-primary-key-hotspot-tables-using-code-auto-random-code}
 
-To resolve the write hotspots brought by auto-increment primary keys, use `AUTO_RANDOM` to handle hotspot tables that have auto-increment primary keys.
+自動インクリメント主キーによってもたらされる書き込みホットスポットを解決するには、 `AUTO_RANDOM`使用して、自動インクリメント主キーを持つホットスポット テーブルを処理します。
 
-If this feature is enabled, TiDB generates randomly distributed and non-repeated (before the space is used up) primary keys to achieve the purpose of scattering write hotspots.
+この機能を有効にすると、TiDB は書き込みホットスポットを分散させる目的を達成するために、ランダムに分散され、重複のない (スペースが使い果たされる前に) 主キーを生成します。
 
-Note that the primary keys generated by TiDB are no longer auto-increment primary keys and you can use `LAST_INSERT_ID()` to obtain the primary key value assigned last time.
+TiDB によって生成される主キーは自動増分主キーではなくなり、 `LAST_INSERT_ID()`使用して前回割り当てられた主キー値を取得できることに注意してください。
 
-To use this feature, modify `AUTO_INCREMENT` to `AUTO_RANDOM` in the `CREATE TABLE` statement. This feature is suitable for non-application scenarios where the primary keys only need to guarantee uniqueness.
+この機能を使用するには、 `CREATE TABLE`ステートメントの`AUTO_INCREMENT`を`AUTO_RANDOM`に変更します。この機能は、主キーの一意性のみを保証する必要がある非アプリケーションシナリオに適しています。
 
-For example:
-
-{{< copyable "sql" >}}
+例えば：
 
 ```sql
 CREATE TABLE t (a BIGINT PRIMARY KEY AUTO_RANDOM, b varchar(255));
@@ -146,8 +134,6 @@ SELECT * FROM t;
 +------------+---+
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT LAST_INSERT_ID();
 ```
@@ -160,31 +146,31 @@ SELECT LAST_INSERT_ID();
 +------------------+
 ```
 
-The following two load diagrams shows the situations both before and after modifying `AUTO_INCREMENT` to `AUTO_RANDOM` to scatter hotspots. The first one uses `AUTO_INCREMENT`, while the second one uses `AUTO_RANDOM`.
+以下の2つの負荷図は、 `AUTO_INCREMENT` ～ `AUTO_RANDOM`変更してホットスポットを分散させる前と後の状況を示しています。最初の図では`AUTO_INCREMENT`使用し、2番目の図では`AUTO_RANDOM`使用しています。
 
 ![Dashboard Example 7](/media/troubleshoot-hot-spot-issues-7.png)
 
 ![Dashboard Example 8](/media/troubleshoot-hot-spot-issues-8.png)
 
-As shown in the load diagrams above, using `AUTO_RANDOM` to replace `AUTO_INCREMENT` can well scatter hotspots.
+上記の負荷図に示されているように、 `AUTO_INCREMENT`代わりに`AUTO_RANDOM`使用すると、ホットスポットを適切に分散できます。
 
-For more details, see [AUTO_RANDOM](/auto-random.md).
+詳細については[自動ランダム](/auto-random.md)参照してください。
 
-## Optimization of small table hotspots
+## 小さなテーブルホットスポットの最適化 {#optimization-of-small-table-hotspots}
 
-The Coprocessor Cache feature of TiDB supports pushing down computing result caches. After this feature is enabled, TiDB caches the computing results that will be pushed down to TiKV. This feature works well for read hotspots of small tables.
+TiDBのコプロセッサーキャッシュ機能は、計算結果のキャッシュのプッシュダウンをサポートします。この機能を有効にすると、TiDBはTiKVにプッシュダウンされる計算結果をキャッシュします。この機能は、小規模なテーブルの読み取りホットスポットに最適です。
 
-For more details, see [Coprocessor Cache](/coprocessor-cache.md).
+詳細については[コプロセッサーキャッシュ](/coprocessor-cache.md)参照してください。
 
-**See also:**
+**参照:**
 
-- [Best Practices for High-Concurrency Writes](/best-practices/high-concurrency-best-practices.md)
-- [Split Region](/sql-statements/sql-statement-split-region.md)
+-   [高同時書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)
+-   [分割リージョン](/sql-statements/sql-statement-split-region.md)
 
-## Scatter read hotspots
+## 散在する読み取りホットスポット {#scatter-read-hotspots}
 
-In a read hotspot scenario, the hotspot TiKV node cannot process read requests in time, resulting in the read requests queuing. However, not all TiKV resources are exhausted at this time. To reduce latency, TiDB v7.1.0 introduces the load-based replica read feature, which allows TiDB to read data from other TiKV nodes without queuing on the hotspot TiKV node. You can control the queue length of read requests using the [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700) system variable. When the estimated queue time of the leader node exceeds this threshold, TiDB prioritizes reading data from follower nodes. This feature can improve read throughput by 70% to 200% in a read hotspot scenario compared to not scattering read hotspots.
+読み取りホットスポットのシナリオでは、ホットスポット TiKV ノードが読み取り要求を時間内に処理できず、読み取り要求がキューイングされます。ただし、この時点ですべての TiKV リソースが使い果たされるわけではありません。レイテンシーを削減するために、TiDB v7.1.0 では負荷ベースのレプリカ読み取り機能が導入されました。これにより、TiDB はホットスポット TiKV ノードでキューイングすることなく、他の TiKV ノードからデータを読み取ることができます。読み取り要求のキューの長さは、 [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700)システム変数を使用して制御できます。リーダーノードの推定キュー時間がこのしきい値を超えると、TiDB はフォロワーノードからのデータの読み取りを優先します。この機能により、読み取りホットスポットを分散させない場合と比較して、読み取りホットスポットのシナリオで読み取りスループットが 70% ～ 200% 向上します。
 
-## Use TiKV MVCC in-memory engine to mitigate read hotspots caused by high MVCC read amplification
+## TiKV MVCC インメモリ エンジンを使用して、高い MVCC 読み取り増幅によって発生する読み取りホットスポットを軽減します。 {#use-tikv-mvcc-in-memory-engine-to-mitigate-read-hotspots-caused-by-high-mvcc-read-amplification}
 
-When the retention time of historical MVCC data for GC is too long, or when the records are frequently updated or deleted, read hotspots might occur due to scanning a large number of MVCC versions. To alleviate this type of hotspot, you can enable the [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md) feature.
+GCの履歴MVCCデータの保持期間が長すぎる場合、またはレコードが頻繁に更新または削除される場合、多数のMVCCバージョンをスキャンすることで読み取りホットスポットが発生する可能性があります。このようなホットスポットを軽減するには、 [TiKV MVCC インメモリエンジン](/tikv-in-memory-engine.md)機能を有効にします。

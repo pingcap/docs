@@ -1,114 +1,114 @@
 ---
-title: High Availability in {{{ .starter }}}
-summary: Learn about the high availability architecture of {{{ .starter }}}. Discover Zonal and Regional High Availability options, automated backups, failover processes, and how TiDB ensures data durability and business continuity.
+title: High Availability in TiDB Cloud Serverless
+summary: TiDB Cloud Serverlessの高可用性アーキテクチャについてご紹介します。ゾーンおよびリージョンの高可用性オプション、自動バックアップ、フェイルオーバープロセス、そしてTiDBがデータの耐久性とビジネス継続性をどのように確保するかについてご紹介します。
 ---
 
-# High Availability in {{{ .starter }}}
+# TiDB Cloud Serverless の高可用性 {#high-availability-in-tidb-cloud-serverless}
 
-{{{ .starter }}} is designed with robust mechanisms to maintain high availability and data durability by default, preventing single points of failure and ensuring continuous service even in the face of disruptions. As a fully managed service based on the battle-tested TiDB Open Source product, it inherits TiDB's core high availability (HA) features and augments them with additional cloud-native capabilities.
+TiDB Cloud Serverlessは、高可用性とデータの耐久性をデフォルトで維持するための堅牢なメカニズムを備えており、単一障害点を回避し、障害発生時でも継続的なサービスを保証します。実績のあるTiDBオープンソース製品をベースとしたフルマネージドサービスとして、TiDBのコアとなる高可用性（HA）機能を継承し、クラウドネイティブな機能を追加することで強化されています。
 
-## Overview
+## 概要 {#overview}
 
-TiDB ensures high availability and data durability using the Raft consensus algorithm. This algorithm consistently replicates data changes across multiple nodes, allowing TiDB to handle read and write requests even in the event of node failures or network partitions. This approach provides both high data durability and fault tolerance.
+TiDBは、 Raftコンセンサスアルゴリズムを用いて、高い可用性とデータの耐久性を確保します。このアルゴリズムは、複数のノード間でデータの変更を一貫して複製するため、ノード障害やネットワーク分断が発生した場合でも、TiDBは読み取りおよび書き込みリクエストを処理できます。このアプローチにより、高いデータ耐久性とフォールトトレランスが両立します。
 
-{{{ .starter }}} extends these capabilities with two types of high availability to meet different operational requirements:
+TiDB Cloud Serverless は、さまざまな運用要件を満たすために、次の 2 種類の高可用性でこれらの機能を拡張します。
 
-- **Zonal high availability (default)**: This option places all nodes within a single availability zone, reducing network latency. It ensures high availability without requiring application-level redundancy across zones, making it suitable for applications that prioritize low latency within a single zone. Zonal high availability is available in all regions that support {{{ .starter }}}. For more information, see [Zonal high availability architecture](#zonal-high-availability-architecture).
+-   **ゾーン高可用性（デフォルト）** ：このオプションでは、すべてのノードを単一のアベイラビリティゾーン内に配置し、ネットワークレイテンシーを削減します。ゾーンをまたがるアプリケーションレベルの冗長性を必要とせずに高可用性を確保するため、単一ゾーン内での低レイテンシーを優先するアプリケーションに適しています。ゾーン高可用性は、 TiDB Cloud Serverlessをサポートするすべてのリージョンで利用できます。詳細については、 [ゾーン高可用性アーキテクチャ](#zonal-high-availability-architecture)ご覧ください。
 
-- **Regional high availability (beta)**: This option distributes nodes across multiple availability zones, offering maximum infrastructure isolation and redundancy. It provides the highest level of availability but requires application-level redundancy across zones. It is recommended to choose this option if you need maximum availability protection against infrastructure failures within a zone. Note that it increases latency and might incur cross-zone data transfer fees. This feature is available in selected regions with multi-availability zone support and can only be enabled during cluster creation. For more information, see [Regional high availability architecture](#regional-high-availability-architecture).
+-   **リージョン高可用性（ベータ版）** ：このオプションでは、ノードを複数のアベイラビリティゾーンに分散することで、インフラストラクチャの分離と冗長性を最大限に高めます。最高レベルの可用性を提供しますが、ゾーン間でアプリケーションレベルの冗長性を確保する必要があります。ゾーン内のインフラストラクチャ障害に対する最大限の可用性保護が必要な場合は、このオプションを選択することをお勧めします。ただし、レイテンシーが増加し、ゾーン間のデータ転送料金が発生する可能性があることに注意してください。この機能は、マルチアベイラビリティゾーンをサポートする一部のリージョンで利用可能であり、クラスター作成時にのみ有効にできます。詳細については、 [地域高可用性アーキテクチャ](#regional-high-availability-architecture)参照してください。
 
-## Zonal high availability architecture
+## ゾーン高可用性アーキテクチャ {#zonal-high-availability-architecture}
 
-> **Note:**
+> **注記：**
 >
-> Zonal high availability is the default option and is available in all AWS regions that support {{{ .starter }}}.
+> ゾーン高可用性はデフォルトのオプションであり、 TiDB Cloud Serverless をサポートするすべての AWS リージョンで利用できます。
 
-When you create a cluster with the default zonal high availability, all components, including Gateway, TiDB, TiKV, and TiFlash compute/write nodes, run in the same availability zone. The placement of these components in the data plane offer infrastructure redundancy with virtual machine pools, which minimizes failover time and network latency due to colocation.
+デフォルトのゾーン高可用性でクラスターを作成すると、ゲートウェイ、TiDB、TiKV、 TiFlashのコンピューティング/書き込みノードを含むすべてのコンポーネントが同じアベイラビリティゾーンで実行されます。これらのコンポーネントをデータプレーンに配置することで、仮想マシンプールによるインフラストラクチャの冗長性が確保され、コロケーションによるフェイルオーバー時間とネットワークレイテンシーが最小限に抑えられます。
 
-![{{{ .starter }}} zonal high availability](/media/tidb-cloud/serverless-zonal-high-avaliability-aws.png)
+![TiDB Cloud Serverless zonal high availability](/media/tidb-cloud/serverless-zonal-high-avaliability-aws.png)
 
-In zonal high availability architecture:
+ゾーン高可用性アーキテクチャの場合:
 
-- The Placement Driver (PD) is deployed across multiple availability zones, ensuring high availability by replicating data redundantly across zones.
-- Data is replicated across TiKV servers and TiFlash write nodes within the local availability zone.
-- TiDB servers and TiFlash compute nodes read from and write to TiKV and TiFlash write nodes, which are safeguarded by storage-level replication.
+-   配置Driver(PD) は複数の可用性ゾーンにデプロイされ、ゾーン間でデータを冗長的に複製することで高可用性を確保します。
+-   データは、ローカル アベイラビリティ ゾーン内の TiKV サーバーとTiFlash書き込みノード間で複製されます。
+-   TiDB サーバーとTiFlashコンピューティング ノードは、ストレージ レベルのレプリケーションによって保護されている TiKV およびTiFlash書き込みノードに対して読み取りと書き込みを行います。
 
-### Failover process
+### フェイルオーバープロセス {#failover-process}
 
-{{{ .starter }}} ensures a transparent failover process for your applications. During a failover:
+TiDB Cloud Serverlessは、アプリケーションの透過的なフェイルオーバープロセスを保証します。フェイルオーバー中は次のようになります。
 
-- A new replica is created to replace the failed one.
+-   障害が発生したレプリカを置き換えるために新しいレプリカが作成されます。
 
-- Servers providing storage services recover local caches from persisted data on Amazon S3, restoring the system to a consistent state with the replicas.
+-   storageサービスを提供するサーバーは、Amazon S3 上の永続データからローカルキャッシュを回復し、システムをレプリカとの一貫性のある状態に復元します。
 
-In the storage layer, persisted data is regularly pushed to Amazon S3 for high durability. Moreover, immediate updates are not only replicated across multiple TiKV servers but also stored on the EBS of each server, which further replicates the data for additional durability. TiDB automatically resolves issues by backing off and retrying in milliseconds, ensuring the failover process remains seamless for client applications.
+storageレイヤーでは、永続化されたデータは高い耐久性を確保するために定期的にAmazon S3にプッシュされます。さらに、即時更新は複数のTiKVサーバーに複製されるだけでなく、各サーバーのEBSにも保存され、さらにデータが複製されるため、耐久性が向上します。TiDBは、数ミリ秒単位でバックオフと再試行を行うことで問題を自動的に解決し、クライアントアプリケーションにとってシームレスなフェイルオーバープロセスを実現します。
 
-The gateway and computing layers are stateless, so failover involves restarting them elsewhere immediately. Applications should implement retry logic for their connections. While the zonal setup provides high availability, it cannot handle an entire zone failure. If the zone becomes unavailable, downtime will occur until the zone and its dependent services are restored.
+ゲートウェイ層とコンピューティング層はステートレスであるため、フェイルオーバーは即座に別の場所で再起動することを意味します。アプリケーションは接続の再試行ロジックを実装する必要があります。ゾーン構成は高可用性を実現しますが、ゾーン全体の障害には対応できません。ゾーンが利用できなくなった場合、ゾーンとそれに依存するサービスが復旧するまでダウンタイムが発生します。
 
-## Regional high availability architecture
+## 地域高可用性アーキテクチャ {#regional-high-availability-architecture}
 
-When you create a cluster with regional high availability, critical OLTP (Online Transactional Processing) workload components, such as PD and TiKV, are deployed across multiple availability zones to ensure redundant replication and maximizing availability. During normal operations, components like Gateway, TiDB, and TiFlash compute/write nodes are hosted in the primary availability zone. These components in data plane offer infrastructure redundancy through virtual machine pools, which minimizes failover time and network latency due to colocation.
+リージョン高可用性を備えたクラスターを作成すると、PDやTiKVなどの重要なOLTP（オンライントランザクション処理）ワークロードコンポーネントが複数のアベイラビリティゾーンに展開され、冗長レプリケーションが確保され、可用性が最大限に高まります。通常運用時は、ゲートウェイ、TiDB、 TiFlashのコンピューティング/書き込みノードなどのコンポーネントはプライマリアベイラビリティゾーンでホストされます。データプレーン内のこれらのコンポーネントは、仮想マシンプールを通じてインフラストラクチャの冗長性を提供し、コロケーションによるフェイルオーバー時間とネットワークレイテンシーを最小限に抑えます。
 
-> **Note:**
+> **注記：**
 >
-> - Regional high availability is currently in beta and only available in the AWS Tokyo (`ap-northeast-1`) region.
-> - You can enable regional high availability only during cluster creation.
+> -   リージョン高可用性は現在ベータ版であり、AWS 東京 ( `ap-northeast-1` ) リージョンでのみ利用できます。
+> -   リージョン高可用性を有効にできるのは、クラスターの作成時のみです。
 
-![{{{ .starter }}} regional high availability](/media/tidb-cloud/serverless-regional-high-avaliability-aws.png)
+![TiDB Cloud Serverless regional high availability](/media/tidb-cloud/serverless-regional-high-avaliability-aws.png)
 
-In regional high availability architecture:
+地域高可用性アーキテクチャの場合:
 
-- The Placement Driver (PD) and TiKV are deployed across multiple availability zones, and data is always replicated redundantly across zones to ensure the highest level of availability.
-- Data is replicated across TiFlash write nodes within the primary availability zone.
-- TiDB servers and TiFlash compute nodes read from and write to these TiKV and TiFlash write nodes, which are safeguarded by storage-level replication.
+-   配置Driver(PD) と TiKV は複数の可用性ゾーンに展開され、データは常にゾーン間で冗長的に複製され、最高レベルの可用性が確保されます。
+-   データは、プライマリ アベイラビリティ ゾーン内のTiFlash書き込みノード間で複製されます。
+-   TiDB サーバーとTiFlashコンピューティング ノードは、ストレージ レベルのレプリケーションによって保護されているこれらの TiKV およびTiFlash書き込みノードに対して読み取りと書き込みを行います。
 
-### Failover process
+### フェイルオーバープロセス {#failover-process}
 
-In the rare event of a primary zone failure scenario, which could be caused by a natural disaster, configuration change, software issue, or hardware failure, critical OLTP workload components, including Gateway and TiDB, are automatically launched in the standby availability zone. Traffic is automatically redirected to the standby zone to ensure swift recovery and maintain business continuity.
+自然災害、構成変更、ソフトウェアの問題、ハードウェア障害などによりプライマリゾーンに障害が発生した場合、ゲートウェイやTiDBなどの重要なOLTPワークロードコンポーネントがスタンバイアベイラビリティゾーンで自動的に起動されます。トラフィックはスタンバイゾーンに自動的にリダイレクトされ、迅速な復旧とビジネス継続性を確保します。
 
-{{{ .starter }}} minimizes service disruption and ensures business continuity during a primary zone failure by performing the following actions:
+TiDB Cloud Serverless は、次のアクションを実行することで、プライマリ ゾーンの障害発生時にサービスの中断を最小限に抑え、ビジネスの継続性を確保します。
 
-- Automatically create new replicas of Gateway and TiDB in the standby availability zone.
-- Use the elastic load balancer to detect active gateway replicas in the standby availability zone and redirect OLTP traffic from the failed primary zone.
+-   スタンバイ可用性ゾーンに Gateway と TiDB の新しいレプリカを自動的に作成します。
+-   エラスティック ロード バランサーを使用して、スタンバイ アベイラビリティ ゾーン内のアクティブなゲートウェイ レプリカを検出し、障害が発生したプライマリ ゾーンから OLTP トラフィックをリダイレクトします。
 
-In addition to providing high availability through TiKV replication, TiKV instances are deployed and configured to place each data replica in a different availability zone. The system remains available as long as two availability zones are operating normally. For high durability, data persistence is ensured by regularly backing up data to S3. Even if two zones fail, data stored in S3 remains accessible and recoverable.
+TiKVレプリケーションによる高可用性に加え、TiKVインスタンスは、各データレプリカを異なるアベイラビリティゾーンに配置するようにデプロイおよび構成されています。2つのアベイラビリティゾーンが正常に動作している限り、システムは継続的に利用可能です。高い耐久性を確保するため、S3への定期的なデータバックアップによりデータの永続性が確保されています。2つのゾーンに障害が発生した場合でも、S3に保存されているデータへのアクセスと復旧は可能です。
 
-Applications are unaffected by failures in non-primary zones and remain unaware of such events. During a primary zone failure, Gateway and TiDB are launched in the standby availability zone to handle workloads. Ensure that your applications implement retry logic to redirect new requests to active servers in the standby availability zone.
+アプリケーションはプライマリゾーン以外のゾーンで発生した障害の影響を受けず、そのようなイベントも認識しません。プライマリゾーンで障害が発生した場合、ワークロードを処理するために、スタンバイアベイラビリティゾーンでゲートウェイとTiDBが起動されます。アプリケーションには、新規リクエストをスタンバイアベイラビリティゾーンのアクティブサーバーにリダイレクトする再試行ロジックが実装されていることを確認してください。
 
-## Automatic backups and durability
+## 自動バックアップと耐久性 {#automatic-backups-and-durability}
 
-Database backups are essential for business continuity and disaster recovery, helping to protect your data from corruption or accidental deletion. With backups, you can restore your database to a specific point in time within the retention period, minimizing data loss and downtime.
+データベースのバックアップは、事業継続性と災害復旧に不可欠であり、データの破損や誤削除からデータを保護するのに役立ちます。バックアップがあれば、データベースを保有期間内の特定の時点に復元できるため、データ損失とダウンタイムを最小限に抑えることができます。
 
-{{{ .starter }}} provides robust automated backup mechanisms to ensure continuous data protection:
+TiDB Cloud Serverless は、継続的なデータ保護を保証する強力な自動バックアップ メカニズムを提供します。
 
-- **Daily full backups**: A full backup of your database is created once a day, capturing the entire database state.
-- **Continuous transaction log backups**: Transaction logs are backed up continuously, approximately every 5 minutes, though the exact frequency depends on database activity.
+-   **毎日の完全バックアップ**: データベースの完全なバックアップが 1 日に 1 回作成され、データベース全体の状態がキャプチャされます。
+-   **継続的なトランザクション ログのバックアップ**:トランザクションログは約 5 分ごとに継続的にバックアップされますが、正確な頻度はデータベースのアクティビティによって異なります。
 
-These automated backups enable you to restore your database either from a full backup or from a specific point in time by combining full backups with continuous transaction logs. This flexibility ensures that you can recover your database to a precise point just before an incident occurs.
+これらの自動バックアップにより、データベースをフルバックアップから復元することも、フルバックアップと継続的なトランザクションログを組み合わせることで特定の時点から復元することもできます。この柔軟性により、インシデント発生直前の正確な時点にデータベースを復旧できます。
 
-> **Note:**
+> **注記：**
 >
-> Automatic backups, including snapshot-based and continuous backups for Point-in-Time Recovery (PITR), are performed on Amazon S3, which provides regional-level high durability.
+> スナップショットベースおよびポイントインタイムリカバリ (PITR) の継続的なバックアップを含む自動バックアップは、リージョンレベルの高い耐久性を提供する Amazon S3 で実行されます。
 
-## Impact on sessions during failures
+## 障害時のセッションへの影響 {#impact-on-sessions-during-failures}
 
-During a failure, ongoing transactions on the failed server might be interrupted. Although failover is transparent to applications, you must implement logic to handle recoverable failures during active transactions. Different failure scenarios are handled as follows:
+障害発生時には、障害が発生したサーバー上で実行中のトランザクションが中断される可能性があります。フェイルオーバーはアプリケーションに対して透過的ですが、アクティブなトランザクション中に回復可能な障害を処理するためのロジックを実装する必要があります。様々な障害シナリオは、以下のように処理されます。
 
-- **TiDB failures**: If a TiDB instance fails, client connections are unaffected because {{{ .starter }}} automatically reroutes traffic through the gateway. While transactions on the failed TiDB instance might be interrupted, the system ensures that committed data is preserved, and new transactions are handled by another available TiDB instance.
-- **Gateway failures**: If the Gateway fails, client connections are disrupted. However, {{{ .starter }}} gateways are stateless and can restart immediately in a new zone or server. Traffic is automatically redirected to the new gateway, minimizing downtime.
+-   **TiDB の障害**：TiDB インスタンスに障害が発生した場合、 TiDB Cloud Serverless はトラフィックをゲートウェイ経由で自動的に再ルーティングするため、クライアント接続は影響を受けません。障害が発生した TiDB インスタンス上のトランザクションは中断される可能性がありますが、コミット済みのデータは保持され、新しいトランザクションは別の利用可能な TiDB インスタンスによって処理されます。
+-   **ゲートウェイ障害**：ゲートウェイに障害が発生すると、クライアント接続が中断されます。しかし、 TiDB Cloud Serverlessゲートウェイはステートレスであり、新しいゾーンまたはサーバーで即座に再起動できます。トラフィックは自動的に新しいゲートウェイにリダイレクトされるため、ダウンタイムを最小限に抑えることができます。
 
-It is recommended to implement retry logic in your application to handle recoverable failures. For implementation details, refer to your driver or ORM documentation (for example, [JDBC](https://dev.mysql.com/doc/connector-j/en/connector-j-config-failover.html)).
+回復可能な障害に対処するために、アプリケーションに再試行ロジックを実装することをお勧めします。実装の詳細については、ドライバーまたはORMのドキュメント（例： [JDBC](https://dev.mysql.com/doc/connector-j/en/connector-j-config-failover.html) ）を参照してください。
 
-## RTO and RPO
+## RTOとRPO {#rto-and-rpo}
 
-When creating your business continuity plan, consider these two key metrics:
+ビジネス継続計画を作成するときは、次の 2 つの主要な指標を考慮してください。
 
-- Recovery Time Objective (RTO): The maximum acceptable time it takes for the application to fully recover after a disruptive event.
-- Recovery Point Objective (RPO): The maximum acceptable time interval of recent data updates that the application can tolerate losing during recovery from an unplanned disruptive event.
+-   目標復旧時間 (RTO): 中断イベント発生後にアプリケーションが完全に復旧するまでにかかる最大許容時間。
+-   リカバリポイント目標 (RPO): 予期しない中断イベントからのリカバリ中にアプリケーションが失うことを許容できる最新のデータ更新の最大許容時間間隔。
 
-The following table compares the RTO and RPO for each high availability option:
+次の表は、各高可用性オプションの RTO と RPO を比較したものです。
 
-| High availability architecture | RTO (downtime)                | RPO (data loss) |
-|--------------------------------|-------------------------------|-----------------|
-| Zonal high availability                         | Near 0 seconds                      | 0               |
-| Regional high availability                      | Typically less than 600 seconds | 0               |
+| 高可用性アーキテクチャ | RTO（ダウンタイム） | RPO（データ損失） |
+| ----------- | ----------- | ---------- |
+| ゾーン高可用性     | 0秒近く        | 0          |
+| 地域的な高可用性    | 通常600秒未満    | 0          |

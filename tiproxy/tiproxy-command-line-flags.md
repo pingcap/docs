@@ -1,47 +1,47 @@
 ---
 title: TiProxy Command-Line Flags
-summary: Learn the command-line startup flags of TiProxy.
+summary: TiProxy のコマンドライン起動フラグについて学習します。
 ---
 
-# TiProxy Command-Line Flags
+# TiProxy コマンドラインフラグ {#tiproxy-command-line-flags}
 
-This document introduces the command-line flags that you can use when you launch TiProxy. It also introduces flags of `tiproxyctl`.
+このドキュメントでは、TiProxy を起動する際に使用できるコマンドラインフラグについて説明します。また、 `tiproxyctl`のフラグについても説明します。
 
-## TiProxy Server
+## TiProxy サーバー {#tiproxy-server}
 
-This section lists the flags of the server program `tiproxy`.
+このセクションでは、サーバープログラム`tiproxy`のフラグを一覧表示します。
 
-### `--advertise-addr`
+### <code>--advertise-addr</code> {#code-advertise-addr-code}
 
-+ Specifies the address that clients use to connect to this TiProxy instance.
-+ Type: `string`
-+ Default: `""`
-+ This flag is automatically set when you deploy TiProxy using TiUP or TiDB Operator. If not set, the external IP address of the TiProxy instance is used.
+-   クライアントがこの TiProxy インスタンスに接続するために使用するアドレスを指定します。
+-   タイプ: `string`
+-   デフォルト: `""`
+-   このフラグは、 TiUPまたはTiDB Operatorを使用して TiProxy をデプロイすると自動的に設定されます。設定されていない場合は、TiProxy インスタンスの外部 IP アドレスが使用されます。
 
-### `--config`
+### <code>--config</code> {#code-config-code}
 
-+ Specifies the path of the TiProxy configuration file.
-+ Type: `string`
-+ Default: `""`
-+ You must specify the configuration file. For detailed configuration items, refer to [Configure TiProxy](/tiproxy/tiproxy-configuration.md). Note that TiProxy automatically reloads the configuration when the configuration file is modified. Therefore, do not directly modify the configuration file. It is recommended to modify the configuration by executing [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md) or [`kubectl edit tc`](https://docs.pingcap.com/tidb-in-kubernetes/stable/modify-tidb-configuration).
+-   TiProxy 構成ファイルのパスを指定します。
+-   タイプ: `string`
+-   デフォルト: `""`
+-   設定ファイルを指定する必要があります。詳細な設定項目については、 [TiProxy を設定する](/tiproxy/tiproxy-configuration.md)を参照してください。設定ファイルが変更されると、TiProxyは自動的に設定を再読み込みするため、設定ファイルを直接変更しないでください。3または[`kubectl edit tc`](https://docs.pingcap.com/tidb-in-kubernetes/stable/modify-tidb-configuration) [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md)実行して設定を変更することをお勧めします。
 
-## TiProxy Control
+## TiProxy コントロール {#tiproxy-control}
 
-This section introduces the installation methods, syntax, options, and commands of the client program `tiproxyctl`.
+このセクションでは、クライアント プログラム`tiproxyctl`のインストール方法、構文、オプション、およびコマンドについて説明します。
 
-### Install TiProxy Control
+### TiProxyコントロールをインストールする {#install-tiproxy-control}
 
-You can install TiProxy Control using one of the following two methods.
+TiProxy Control は、次の 2 つの方法のいずれかを使用してインストールできます。
 
-> **Note:**
+> **注記：**
 >
-> TiProxy Control is specifically designed for debugging purposes and might not be fully compatible with future capabilities introduced in TiProxy. It's not recommended to include this tool in application or utility development to get information.
+> TiProxy Control はデバッグ用に特別に設計されており、TiProxy に将来導入される機能と完全に互換性がない可能性があります。情報を取得するためにこのツールをアプリケーションやユーティリティの開発に組み込むことは推奨されません。
 
-#### Install using TiUP
+#### TiUPを使用してインストール {#install-using-tiup}
 
-After installing [TiUP](/tiup/tiup-overview.md), you can use the `tiup install tiproxy` command to download and install the binary programs for TiProxy and TiProxy Control. After installation, you can use `tiup --binary tiproxy` to view the installation path of TiProxy. TiProxy Control is located in the same directory as TiProxy.
+[TiUP](/tiup/tiup-overview.md)インストールした後、 `tiup install tiproxy`コマンドを使用して TiProxy と TiProxy Control のバイナリプログラムをダウンロードしてインストールできます。インストール後、 `tiup --binary tiproxy`コマンドを使用して TiProxy のインストールパスを確認できます。TiProxy Control は TiProxy と同じディレクトリにあります。
 
-For example:
+例えば：
 
 ```shell
 tiup install tiproxy
@@ -50,11 +50,11 @@ ls `tiup --binary tiproxy`ctl
 # /root/.tiup/components/tiproxy/v1.3.0/tiproxyctl
 ```
 
-#### Compile from source code
+#### ソースコードからコンパイルする {#compile-from-source-code}
 
-Compilation environment requirement: [Go](https://golang.org/) 1.21 or later
+コンパイル環境要件: [行く](https://golang.org/) 1.21以降
 
-Compilation procedures: Go to the root directory of the [TiProxy project](https://github.com/pingcap/tiproxy), use the `make` command to compile and generate `tiproxyctl`.
+コンパイル手順: [TiProxyプロジェクト](https://github.com/pingcap/tiproxy)のルート ディレクトリに移動し、 `make`コマンドを使用してコンパイルし、 `tiproxyctl`生成します。
 
 ```shell
 git clone https://github.com/pingcap/tiproxy.git
@@ -63,75 +63,71 @@ make
 ls bin/tiproxyctl
 ```
 
-### Syntax
+### 構文 {#syntax}
 
-```
-tiproxyctl [flags] [command]
-```
+    tiproxyctl [flags] [command]
 
-For example:
+例えば：
 
-```
-tiproxyctl --host 127.0.0.1 --port 3080 config get
-```
+    tiproxyctl --host 127.0.0.1 --port 3080 config get
 
-### Options
+### オプション {#options}
 
-#### `--host`
+#### <code>--host</code> {#code-host-code}
 
-+ Specifies the TiProxy server address.
-+ Type: `string`
-+ Default: `localhost`
+-   TiProxyサーバーのアドレスを指定します。
+-   タイプ: `string`
+-   デフォルト: `localhost`
 
-#### `--port`
+#### <code>--port</code> {#code-port-code}
 
-+ Specifies the port number of the TiProxy API gateway.
-+ Type: `int`
-+ Default: `3080`
+-   TiProxy API ゲートウェイのポート番号を指定します。
+-   タイプ: `int`
+-   デフォルト: `3080`
 
-#### `--log_encoder`
+#### <code>--log_encoder</code> {#code-log-encoder-code}
 
-+ Specifies the log format of `tiproxyctl`.
-+ Type: `string`
-+ Default: `"tidb"`
-+ It defaults to the same log format of TiDB. However, you can also specify it as one of the following:
+-   `tiproxyctl`のログ形式を指定します。
+-   タイプ: `string`
+-   デフォルト: `"tidb"`
+-   デフォルトではTiDBと同じログ形式が使用されます。ただし、次のいずれかを指定することもできます。
 
-    - `console`: a more human-readable format
-    - `json`: a structured log format
+    -   `console` : より人間が読みやすい形式
+    -   `json` : 構造化されたログ形式
 
-#### `--log_level`
+#### <code>--log_level</code> {#code-log-level-code}
 
-+ Specifies the log level of tiproxyctl.
-+ Type: `string`
-+ Default: `"warn"`
-+ You can specify `debug`, `info`, `warn`, `error`, `panic`.
+-   tiproxyctl のログ レベルを指定します。
+-   タイプ: `string`
+-   デフォルト: `"warn"`
+-   `debug` `info` `error`でき`panic` `warn`
 
-#### `-k, --insecure`
+#### <code>-k, --insecure</code> {#code-k-insecure-code}
 
-+ Specifies whether to skip TLS CA verification when dialing to the server.
-+ Type: `boolean`
-+ Default: `false`
-+ Used for testing.
+-   サーバーにダイヤルするときに TLS CA 検証をスキップするかどうかを指定します。
+-   タイプ: `boolean`
+-   デフォルト: `false`
+-   テストに使用されます。
 
-#### `--ca`
+#### <code>--ca</code> {#code-ca-code}
 
-+ Specifies the CA when dialing to the server.
-+ Type: `string`
-+ Default: `""`
+-   サーバーにダイヤルするときに CA を指定します。
+-   タイプ: `string`
+-   デフォルト: `""`
 
-#### `--cert`
+#### <code>--cert</code> {#code-cert-code}
 
-+ Specifies the certificate when dialing to the server.
-+ Type: `string`
-+ Default: `""`
+-   サーバーにダイヤルするときに証明書を指定します。
+-   タイプ: `string`
+-   デフォルト: `""`
 
-### Commands
+### コマンド {#commands}
 
-#### `config set`
+#### <code>config set</code> {#code-config-set-code}
 
-The `tiproxyctl config set` command reads a TOML-formatted configuration file from standard input and sets these configuration items to TiProxy. Unspecified configuration items will remain unchanged, so you only need to specify the items that you want to modify.
+`tiproxyctl config set`コマンドは標準入力からTOML形式の設定ファイルを読み取り、これらの設定項目をTiProxyに設定します。指定されていない設定項目は変更されないため、変更したい項目のみを指定してください。
 
-The following example sets `log.level` as `'warning'`, while leaving other configuration items unchanged.
+次の例では、他の構成項目は変更せずに、 `log.level` `'warning'`に設定します。
 
 ```bash
 $ cat test.toml
@@ -143,71 +139,71 @@ $ tiproxyctl config get | grep level
 level = 'warning'
 ```
 
-#### `config get`
+#### <code>config get</code> {#code-config-get-code}
 
-The `tiproxyctl config get` command is used to get the current TiProxy configuration in TOML format.
+`tiproxyctl config get`コマンドは、現在の TiProxy 構成を TOML 形式で取得するために使用されます。
 
-#### `health`
+#### <code>health</code> {#code-health-code}
 
-The `tiproxyctl health` command is used to get the health status of TiProxy and the checksum of the configuration. When TiProxy is running normally, it returns the checksum of the configuration. When TiProxy is shutting down or offline, it returns an error.
+`tiproxyctl health`コマンドは、TiProxy のヘルスステータスと設定のチェックサムを取得するために使用されます。TiProxy が正常に動作している場合は、設定のチェックサムを返します。TiProxy がシャットダウンまたはオフラインの場合は、エラーを返します。
 
-Example output:
+出力例:
 
 ```json
 {"config_checksum":3006078629}
 ```
 
-#### `traffic capture`
+#### <code>traffic capture</code> {#code-traffic-capture-code}
 
-The `tiproxyctl traffic capture` command is used to capture traffic.
+`tiproxyctl traffic capture`コマンドはトラフィックをキャプチャするために使用されます。
 
-Options:
+オプション:
 
-- `--output`: (required) specifies the directory to store traffic files.
-- `--duration`: (required) specifies the duration of capture. The unit is one of `m` (minutes), `h` (hours), or `d` (days). For example, `--duration=1h` captures traffic for one hour.
+-   `--output` : (必須) トラフィック ファイルを保存するディレクトリを指定します。
+-   `--duration` : (必須) キャプチャ期間を指定します。単位は`m` (分)、 `h` (時間)、 `d` (日) のいずれかです。例えば、 `--duration=1h`指定すると 1 時間のトラフィックがキャプチャされます。
 
-Example:
+例：
 
-The following command connects to the TiProxy instance at `10.0.1.10:3080`, captures traffic for one hour, and saves it to the `/tmp/traffic` directory on the TiProxy instance:
+次のコマンドは、 `10.0.1.10:3080`の TiProxy インスタンスに接続し、1 時間のトラフィックをキャプチャし、それを TiProxy インスタンスの`/tmp/traffic`ディレクトリに保存します。
 
 ```shell
 tiproxyctl traffic capture --host 10.0.1.10 --port 3080 --output="/tmp/traffic" --duration=1h
 ```
 
-#### `traffic replay`
+#### <code>traffic replay</code> {#code-traffic-replay-code}
 
-The `tiproxyctl traffic replay` command is used to replay captured traffic.
+`tiproxyctl traffic replay`コマンドは、キャプチャされたトラフィックを再生するために使用されます。
 
-Options:
+オプション:
 
-- `--username`: (required) specifies the database username for replay.
-- `--password`: (optional) specifies the password for the username. The default value is an empty string `""`.
-- `--input`: (required) specifies the directory containing traffic files.
-- `--speed`: (optional) specifies the replay speed multiplier. The range is `[0.1, 10]`. The default value is `1`, indicating replay at the original speed.
+-   `--username` : (必須) 再生用のデータベース ユーザー名を指定します。
+-   `--password` : (オプション) ユーザー名のパスワードを指定します。デフォルト値は空の文字列`""`です。
+-   `--input` : (必須) トラフィック ファイルを含むディレクトリを指定します。
+-   `--speed` : (オプション) 再生速度の乗数を指定します。範囲は`[0.1, 10]`です。デフォルト値は`1`で、元の速度で再生されます。
 
-Example:
+例：
 
-The following command connects to the TiProxy instance at `10.0.1.10:3080` using username `u1` and password `123456`, reads traffic files from the `/tmp/traffic` directory on the TiProxy instance, and replays the traffic at twice the original speed:
+次のコマンドは、ユーザー名`u1`とパスワード`123456`を使用して`10.0.1.10:3080`の TiProxy インスタンスに接続し、TiProxy インスタンスの`/tmp/traffic`ディレクトリからトラフィック ファイルを読み取り、元の速度の 2 倍でトラフィックを再生します。
 
 ```shell
 tiproxyctl traffic replay --host 10.0.1.10 --port 3080 --username="u1" --password="123456" --input="/tmp/traffic" --speed=2
 ```
 
-#### `traffic cancel`
+#### <code>traffic cancel</code> {#code-traffic-cancel-code}
 
-The `tiproxyctl traffic cancel` command is used to cancel the current capture or replay task.
+`tiproxyctl traffic cancel`コマンドは、現在のキャプチャまたは再生タスクをキャンセルするために使用されます。
 
-#### `traffic show`
+#### <code>traffic show</code> {#code-traffic-show-code}
 
-The `tiproxyctl traffic show` command is used to display historical capture and replay tasks.
+`tiproxyctl traffic show`コマンドは、履歴キャプチャおよび再生タスクを表示するために使用されます。
 
-The `status` field in the output indicates the task status, with the following possible values:
+出力の`status`フィールドはタスクのステータスを示し、次の値が可能です。
 
-- `done`: the task completed normally.
-- `canceled`: the task was canceled. You can check the `error` field for the reason.
-- `running`: the task is running. You can check the `progress` field for the completion percentage.
+-   `done` : タスクは正常に完了しました。
+-   `canceled` : タスクはキャンセルされました。理由は`error`フィールドで確認できます。
+-   `running` ：タスクは実行中です。完了率は`progress`フィールドで確認できます。
 
-Example output:
+出力例:
 
 ```json
 [

@@ -1,72 +1,70 @@
 ---
-title: Use {{{ .starter }}} Cluster Resource
-summary: Learn how to use the {{{ .starter }}} cluster resource to create and modify a {{{ .starter }}} cluster.
+title: Use TiDB Cloud Serverless Cluster Resource
+summary: TiDB Cloud Serverless クラスター リソースを使用して、 TiDB Cloud Serverless クラスターを作成および変更する方法を学習します。
 ---
 
-# Use {{{ .starter }}} Cluster Resource
+# TiDB Cloud Serverless クラスタリソースを使用する {#use-tidb-cloud-serverless-cluster-resource}
 
-This document describes how to manage a [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster with the `tidbcloud_serverless_cluster` resource.
+このドキュメントでは、 `tidbcloud_serverless_cluster`リソースを使用して[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターを管理する方法について説明します。
 
-In addition, you will also learn how to get the necessary information with the `tidbcloud_projects` data source.
+さらに、 `tidbcloud_projects`データ ソースを使用して必要な情報を取得する方法も学習します。
 
-The features of the `tidbcloud_serverless_cluster` resource include the following:
+`tidbcloud_serverless_cluster`リソースの機能は次のとおりです。
 
-- Create {{{ .starter }}} clusters.
-- Modify {{{ .starter }}} clusters.
-- Import {{{ .starter }}} clusters.
-- Delete {{{ .starter }}} clusters.
+-   TiDB Cloud Serverless クラスターを作成します。
+-   TiDB Cloud Serverless クラスターを変更します。
+-   TiDB Cloud Serverless クラスターをインポートします。
+-   TiDB Cloud Serverless クラスターを削除します。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
+-   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
 
-## Get project IDs using the `tidbcloud_projects` data source
+## <code>tidbcloud_projects</code>データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-code-tidbcloud-projects-code-data-source}
 
-Each TiDB cluster belongs to a project. Before creating a {{{ .starter }}} cluster, you need to obtain the ID of the project where you want to create the cluster. If no `project_id` is specified, the default project will be used.
+各TiDBクラスタはプロジェクトに属します。TiDB TiDB Cloud Serverlessクラスタを作成する前に、クラスタを作成するプロジェクトのIDを取得する必要があります。1 `project_id`指定されていない場合は、デフォルトのプロジェクトが使用されます。
 
-To retrieve the information about all available projects, use the `tidbcloud_projects` data source as follows:
+利用可能なすべてのプロジェクトに関する情報を取得するには、次のように`tidbcloud_projects`データ ソースを使用します。
 
-1. In the `main.tf` file created when you [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md), add the `data` and `output` blocks as follows:
+1.  [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)で作成した`main.tf`ファイルに、次のように`data`と`output`ブロックを追加します。
 
-    ```
-    terraform {
-      required_providers {
-        tidbcloud = {
-          source = "tidbcloud/tidbcloud"
+        terraform {
+          required_providers {
+            tidbcloud = {
+              source = "tidbcloud/tidbcloud"
+            }
+          }
         }
-      }
-    }
 
-    provider "tidbcloud" {
-      public_key = "your_public_key"
-      private_key = "your_private_key"
-    }
+        provider "tidbcloud" {
+          public_key = "your_public_key"
+          private_key = "your_private_key"
+        }
 
-    data "tidbcloud_projects" "example_project" {
-      page      = 1
-      page_size = 10
-    }
+        data "tidbcloud_projects" "example_project" {
+          page      = 1
+          page_size = 10
+        }
 
-    output "projects" {
-      value = data.tidbcloud_projects.example_project.items
-    }
-    ```
+        output "projects" {
+          value = data.tidbcloud_projects.example_project.items
+        }
 
-    - Use the `data` block to define the data source of TiDB Cloud, including the data source type and the data source name.
+    -   `data`ブロックを使用して、データ ソース タイプやデータ ソース名など、 TiDB Cloudのデータ ソースを定義します。
 
-        - To use the projects data source, set the data source type as `tidbcloud_projects`.
-        - For the data source name, you can define it as needed. For example, `"example_project"`.
-        - For the `tidbcloud_projects` data source, you can use the `page` and `page_size` attributes to limit the maximum number of projects you want to check.
+        -   プロジェクト データ ソースを使用するには、データ ソース タイプを`tidbcloud_projects`に設定します。
+        -   データソース名は必要に応じて定義できます。例： `"example_project"` 。
+        -   `tidbcloud_projects`データ ソースの場合、 `page`および`page_size`属性を使用して、チェックするプロジェクトの最大数を制限できます。
 
-    - Use the `output` block to define the data source information to be displayed in the output, and expose the information for other Terraform configurations to use.
+    -   `output`ブロックを使用して、出力に表示されるデータ ソース情報を定義し、他の Terraform 構成が使用できるように情報を公開します。
 
-        The `output` block works similarly to returned values in programming languages. See [Terraform documentation](https://www.terraform.io/language/values/outputs) for more details.
+        `output`ブロックはプログラミング言語の戻り値と同様に機能します。詳細は[Terraform ドキュメント](https://www.terraform.io/language/values/outputs)参照してください。
 
-    To get all the available configurations for the resources and data sources, see the [Terraform provider configuration documentation](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
+    リソースとデータ ソースの使用可能なすべての構成を取得するには、 [Terraform プロバイダーの構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)参照してください。
 
-2. Run the `terraform apply` command to apply the configurations. You need to type `yes` at the confirmation prompt to proceed.
+2.  設定を適用するには、コマンド`terraform apply`を実行してください。続行するには、確認プロンプトで`yes`と入力してください。
 
-    To skip the prompt, use `terraform apply --auto-approve`:
+    プロンプトをスキップするには、 `terraform apply --auto-approve`使用します。
 
     ```shell
     $ terraform apply --auto-approve
@@ -117,52 +115,50 @@ To retrieve the information about all available projects, use the `tidbcloud_pro
     ])
     ```
 
-Now, you can get all the available projects from the output. Copy one of the project IDs that you need.
+これで、出力から利用可能なすべてのプロジェクトを取得できます。必要なプロジェクトIDを1つコピーしてください。
 
-## Create a {{{ .starter }}} cluster
+## TiDB Cloud Serverless クラスターを作成する {#create-a-tidb-cloud-serverless-cluster}
 
-You can create a {{{ .starter }}} cluster using the `tidbcloud_serverless_cluster` resource.
+`tidbcloud_serverless_cluster`リソースを使用して、 TiDB Cloud Serverless クラスターを作成できます。
 
-The following example shows how to create a {{{ .starter }}} cluster.
+次の例は、TiDB Cloud Serverless クラスターを作成する方法を示しています。
 
-1. Create a directory for the cluster and enter it.
+1.  クラスターのディレクトリを作成してそこに入ります。
 
-2. Create a `cluster.tf` file:
+2.  `cluster.tf`ファイルを作成します。
 
-    ```
-    terraform {
-      required_providers {
-        tidbcloud = {
-          source = "tidbcloud/tidbcloud"
+        terraform {
+          required_providers {
+            tidbcloud = {
+              source = "tidbcloud/tidbcloud"
+            }
+          }
         }
-      }
-    }
 
-    provider "tidbcloud" {
-      public_key = "your_public_key"
-      private_key = "your_private_key"
-    }
+        provider "tidbcloud" {
+          public_key = "your_public_key"
+          private_key = "your_private_key"
+        }
 
-    resource "tidbcloud_serverless_cluster" "example" {
-      project_id = "1372813089454000000"
-      display_name = "test-tf"
-      spending_limit = {
-        monthly = 1
-      }
-      region = {
-        name = "regions/aws-us-east-1"
-      }
-    }
-    ```
+        resource "tidbcloud_serverless_cluster" "example" {
+          project_id = "1372813089454000000"
+          display_name = "test-tf"
+          spending_limit = {
+            monthly = 1
+          }
+          region = {
+            name = "regions/aws-us-east-1"
+          }
+        }
 
-    Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
+    `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    - To use the {{{ .starter }}} cluster resource, set the resource type as `tidbcloud_serverless_cluster`.
-    - For the resource name, you can define it as needed. For example, `example`.
-    - For the resource details, you can configure them according to the Project ID and the {{{ .starter }}} cluster specification information.
-    - To get the {{{ .starter }}} cluster specification information, see [tidbcloud_serverless_cluster (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster).
+    -   TiDB Cloud Serverless クラスター リソースを使用するには、リソース タイプを`tidbcloud_serverless_cluster`に設定します。
+    -   リソース名は必要に応じて定義できます。例： `example` 。
+    -   リソースの詳細については、プロジェクト ID とTiDB Cloud Serverless クラスターの仕様情報に従って設定できます。
+    -   TiDB Cloud Serverless クラスターの仕様情報を取得するには、 [tidbcloud_serverless_cluster (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster)参照してください。
 
-3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
+3.  `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 
     ```shell
     $ terraform apply
@@ -208,13 +204,13 @@ The following example shows how to create a {{{ .starter }}} cluster.
         Enter a value:
     ```
 
-    In the preceding result, Terraform generates an execution plan for you, which describes the actions that Terraform will take:
+    上記の結果では、Terraform によって実行されるアクションを記述した実行プランが生成されます。
 
-    - You can check the differences between the configurations and the states.
-    - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
-    - `known after apply` indicates that you will get the corresponding value after `apply`.
+    -   構成と状態の違いを確認できます。
+    -   `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
+    -   `known after apply` `apply`後の対応する値が取得されることを示します。
 
-4. If everything in your plan looks fine, type `yes` to continue:
+4.  計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
 
     ```shell
     Do you want to perform these actions?
@@ -229,7 +225,7 @@ The following example shows how to create a {{{ .starter }}} cluster.
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-5. Use the `terraform show` or `terraform state show tidbcloud_serverless_cluster.${resource-name}` command to inspect the state of your resource. The former command shows the states of all resources and data sources.
+5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_serverless_cluster.${resource-name}`使用します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_serverless_cluster.example
@@ -289,31 +285,29 @@ The following example shows how to create a {{{ .starter }}} cluster.
     }
     ```
 
-## Modify a {{{ .starter }}} cluster
+## TiDB Cloud Serverless クラスターを変更する {#modify-a-tidb-cloud-serverless-cluster}
 
-For a {{{ .starter }}} cluster, you can use Terraform to manage resources. The arguments that you can modify include:
+TiDB Cloud Serverless クラスターでは、Terraform を使用してリソースを管理できます。変更可能な引数は次のとおりです。
 
-- `display_name`: The display name of the cluster.
-- `spending_limit`: The spending limit of the cluster.
-- `endpoints.public.disabled`: Whether to disable the public endpoint.
-- `automated_backup_policy.start_time`: The UTC time of day in `HH:mm` format when the automated backup starts.
+-   `display_name` : クラスターの表示名。
+-   `spending_limit` : クラスターの使用制限。
+-   `endpoints.public.disabled` : パブリックエンドポイントを無効にするかどうか。
+-   `automated_backup_policy.start_time` : 自動バックアップが開始される時点の UTC 時刻 ( `HH:mm`形式)。
 
-To modify a {{{ .starter }}} cluster, you can modify the configuration of the `tidbcloud_serverless_cluster` resource, then use the `terraform apply` command to apply the changes. For example, you can modify the `display_name` and `spending_limit` as follows:
+TiDB Cloud Serverlessクラスターを変更するには、 `tidbcloud_serverless_cluster`のリソースの設定を変更し、 `terraform apply`コマンドを使用して変更を適用します。例えば、 `display_name`と`spending_limit`次のように変更できます。
 
-```
-resource "tidbcloud_serverless_cluster" "example" {
-  project_id = "1372813089454000000"
-  display_name = "test-tf-modified"
-  spending_limit = {
-    monthly = 2
-  }
-  region = {
-    name = "regions/aws-us-east-1"
-  }
-}
-```
+    resource "tidbcloud_serverless_cluster" "example" {
+      project_id = "1372813089454000000"
+      display_name = "test-tf-modified"
+      spending_limit = {
+        monthly = 2
+      }
+      region = {
+        name = "regions/aws-us-east-1"
+      }
+    }
 
-Then, run the `terraform apply` command to apply the changes:
+次に、 `terraform apply`コマンドを実行して変更を適用します。
 
 ```shell
 $ terraform apply
@@ -359,7 +353,7 @@ tidbcloud_serverless_cluster.example: Modifications complete after 8s
 Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
 ```
 
-Then, you can use the `terraform show` or `terraform state show tidbcloud_serverless_cluster.${resource-name}` command to inspect the state of your resource. The former command shows the states of all resources and data sources.
+次に、コマンド`terraform show`または`terraform state show tidbcloud_serverless_cluster.${resource-name}`使用してリソースの状態を確認します。コマンド1は、すべてのリソースとデータソースの状態を表示します。
 
 ```shell
 $ terraform state show tidbcloud_serverless_cluster.example
@@ -418,38 +412,36 @@ resource "tidbcloud_serverless_cluster" "example" {
 }
 ```
 
-## Import a {{{ .starter }}} cluster
+## TiDB Cloud Serverless クラスターをインポートする {#import-a-tidb-cloud-serverless-cluster}
 
-For a {{{ .starter }}} cluster that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+Terraform で管理されていないTiDB Cloud Serverless クラスターの場合は、インポートするだけで Terraform を使用して管理できます。
 
-Import a {{{ .starter }}} cluster that is not created by Terraform as follows:
+次のように、Terraform によって作成されていないTiDB Cloud Serverless クラスターをインポートします。
 
-1. Add an import block for the new {{{ .starter }}} cluster resource.
+1.  新しいTiDB Cloud Serverless クラスター リソースのインポート ブロックを追加します。
 
-    Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the cluster ID:
+    次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}`クラスター ID に置き換えます。
 
+        import {
+          to = tidbcloud_serverless_cluster.example
+          id = "${id}"
+        }
+
+2.  新しい構成ファイルを生成します。
+
+    インポート ブロックに従って、新しいTiDB Cloud Serverless クラスター リソースの新しい構成ファイルを生成します。
+
+    ```shell
+    terraform plan -generate-config-out=generated.tf
     ```
-    import {
-      to = tidbcloud_serverless_cluster.example
-      id = "${id}"
-    }
-    ```
 
-2. Generate the new configuration file.
+    上記のコマンドでは、既存の`.tf`名を指定しないでください。指定した場合、Terraform はエラーを返します。
 
-    Generate the new configuration file for the new {{{ .starter }}} cluster resource according to the import block:
+3.  生成された構成を確認して適用します。
 
-      ```shell
-      terraform plan -generate-config-out=generated.tf
-      ```
+    生成された構成ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
 
-    Do not specify an existing `.tf` filename in the preceding command. Otherwise, Terraform will return an error.
-
-3. Review and apply the generated configuration.
-
-    Review the generated configuration file to ensure that it meets your needs. Optionally, you can move the contents of this file to your preferred location.
-
-    Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
+    次に、 `terraform apply`実行してインフラストラクチャをインポートします。適用後の出力例は次のとおりです。
 
     ```shell
     tidbcloud_serverless_cluster.example: Importing... 
@@ -458,11 +450,11 @@ Import a {{{ .starter }}} cluster that is not created by Terraform as follows:
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
 
-Now you can manage the imported cluster with Terraform.
+これで、インポートしたクラスターを Terraform で管理できるようになりました。
 
-## Delete a {{{ .starter }}} cluster
+## TiDB Cloud Serverless クラスターを削除する {#delete-a-tidb-cloud-serverless-cluster}
 
-To delete a {{{ .starter }}} cluster, you can delete the configuration of the `tidbcloud_serverless_cluster` resource, then use the `terraform apply` command to destroy the resource:
+TiDB Cloud Serverless クラスターを削除するには、 `tidbcloud_serverless_cluster`リソースの構成を削除してから、 `terraform apply`コマンドを使用してリソースを破棄します。
 
 ```shell
 $ terraform apply
@@ -542,8 +534,6 @@ tidbcloud_serverless_cluster.example: Destruction complete after 1s
 Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
 ```
 
-Now, if you run the `terraform show` command, it will show no managed resources because the resource has been cleared:
+ここで、 `terraform show`コマンドを実行すると、リソースがクリアされているため、管理対象リソースは表示されません。
 
-```
-$ terraform show
-```
+    $ terraform show

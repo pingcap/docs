@@ -1,83 +1,79 @@
 ---
 title: Migrate Cluster Resource to Serverless or Dedicated Cluster Resource
-summary: Learn how to migrate a cluster resource to a serverless or dedicated cluster resource.
+summary: クラスター リソースをサーバーレスまたは専用のクラスター リソースに移行する方法を学習します。
 ---
 
-# Migrate Cluster Resource to Serverless or Dedicated Cluster Resource
+# クラスタリソースをサーバーレスまたは専用クラスタリソースに移行する {#migrate-cluster-resource-to-serverless-or-dedicated-cluster-resource}
 
-Starting from TiDB Cloud Terraform Provider v0.4.0, the `tidbcloud_cluster` resource is replaced by two new resources: `tidbcloud_serverless_cluster` and `tidbcloud_dedicated_cluster`. If you are using TiDB Cloud Terraform Provider v0.4.0 or a later version, you can follow this document to migrate your `tidbcloud_cluster` resource to the `tidbcloud_serverless_cluster` or `tidbcloud_dedicated_cluster` resource. 
+TiDB Cloud Terraform Provider v0.4.0 以降では、 `tidbcloud_cluster`リソースが`tidbcloud_serverless_cluster`と`tidbcloud_dedicated_cluster` 2 つの新しいリソースに置き換えられます。TiDB TiDB Cloud Terraform Provider v0.4.0 以降のバージョンをご利用の場合は、このドキュメントに従って`tidbcloud_cluster`リソースを`tidbcloud_serverless_cluster`または`tidbcloud_dedicated_cluster`リソースに移行できます。
 
-> **Tip:**
+> **ヒント：**
 >
-> The steps in this document use the configuration generation feature of Terraform to simplify the migration process by automatically recreating the `.tf` configuration for your cluster resource. To learn more about it, see [Generating configuration](https://developer.hashicorp.com/terraform/language/import/generating-configuration) in Terraform documentation.
+> このドキュメントの手順では、Terraform の構成生成機能を使用して、クラスターリソースの`.tf`構成を自動的に再作成することで、移行プロセスを簡素化します。詳細については、Terraform ドキュメントの[構成の生成](https://developer.hashicorp.com/terraform/language/import/generating-configuration)参照してください。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- Upgrade to [TiDB Cloud Terraform Provider v0.4.0 or later](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest)
+-   [TiDB Cloud Terraform プロバイダー v0.4.0 以降](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest)にアップグレード
 
-## Step 1. Identify the `tidbcloud_cluster` resource to migrate
+## ステップ1. 移行する<code>tidbcloud_cluster</code>リソースを特定する {#step-1-identify-the-code-tidbcloud-cluster-code-resource-to-migrate}
 
-1. List all `tidbcloud_cluster` resources:
+1.  すべての`tidbcloud_cluster`リソースを一覧表示します:
 
     ```shell
     terraform state list | grep "tidbcloud_cluster"
     ```
 
-2. Choose a target cluster resource to migrate and get its cluster `id` for later use:
+2.  移行するターゲット クラスター リソースを選択し、後で使用するためにクラスター`id`を取得します。
 
     ```shell
     terraform state show ${your_target_cluster_resource} | grep ' id '
     ```
 
-## Step 2. Remove the existing resource from the Terraform state
+## ステップ2. Terraform状態から既存のリソースを削除する {#step-2-remove-the-existing-resource-from-the-terraform-state}
 
-Remove your target cluster resource from the Terraform state:
+ターゲット クラスター リソースを Terraform 状態から削除します。
 
 ```shell
 terraform state rm ${your_target_cluster_resource}
 ```
 
-## Step 3. Delete the configuration of your target cluster resource
+## ステップ3. ターゲットクラスタリソースの構成を削除する {#step-3-delete-the-configuration-of-your-target-cluster-resource}
 
-In your `.tf` file, find the configuration of your target cluster resource and delete the corresponding code.
+`.tf`ファイルで、ターゲット クラスター リソースの構成を見つけて、対応するコードを削除します。
 
-## Step 4. Add an import block for the new serverless or dedicated cluster resource
+## ステップ4. 新しいサーバーレスまたは専用クラスターリソースのインポートブロックを追加する {#step-4-add-an-import-block-for-the-new-serverless-or-dedicated-cluster-resource}
 
-- If your target cluster is {{{ .starter }}}, add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the cluster ID you get from [Step 1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate):
+-   ターゲット クラスターがTiDB Cloud Serverless の場合は、次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` [ステップ1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate)から取得したクラスター ID に置き換えます。
 
-    ```
-    # {{{ .starter }}}
-    import {
-      to = tidbcloud_serverless_cluster.example
-      id = "${id}"
-    }
-    ```
+        # TiDB Cloud Serverless
+        import {
+          to = tidbcloud_serverless_cluster.example
+          id = "${id}"
+        }
 
-- If your target cluster is TiDB Cloud Dedicated, add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the cluster ID you get from [Step 1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate):
+-   ターゲット クラスターがTiDB Cloud Dedicated の場合は、次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` [ステップ1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate)から取得したクラスター ID に置き換えます。
 
-    ```
-    # TiDB Cloud Dedicated
-    import {
-      to = tidbcloud_dedicated_cluster.example
-      id = "${id}"
-    }
-    ```
+        # TiDB Cloud Dedicated
+        import {
+          to = tidbcloud_dedicated_cluster.example
+          id = "${id}"
+        }
 
-## Step 5. Generate the new configuration file
+## ステップ5. 新しい構成ファイルを生成する {#step-5-generate-the-new-configuration-file}
 
-Generate the new configuration file for the new serverless or dedicated cluster resource according to the import block:
+インポート ブロックに従って、新しいサーバーレスまたは専用クラスター リソースの新しい構成ファイルを生成します。
 
 ```shell
 terraform plan -generate-config-out=generated.tf
 ```
 
-Do not specify an existing `.tf` file name in the preceding command. Otherwise, Terraform will return an error.
+上記のコマンドでは、既存の`.tf`名を指定しないでください。指定した場合、Terraform はエラーを返します。
 
-## Step 6. Review and apply the generated configuration
+## ステップ6. 生成された構成を確認して適用する {#step-6-review-and-apply-the-generated-configuration}
 
-Review the generated configuration file to ensure it meets your needs. Optionally, you can move the contents of this file to your preferred location.
+生成された構成ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
 
-Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
+次に、 `terraform apply`を実行してインフラストラクチャをインポートします。適用後の出力例は次のとおりです。
 
 ```shell
 tidbcloud_serverless_cluster.example: Importing... 

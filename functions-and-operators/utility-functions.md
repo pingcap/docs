@@ -1,42 +1,38 @@
 ---
 title: Utility Functions
-summary: This document introduces utility functions supported in TiDB.
+summary: このドキュメントでは、TiDB でサポートされているユーティリティ関数について説明します。
 ---
 
-# Utility Functions
+# ユーティリティ関数 {#utility-functions}
 
-This document introduces utility functions supported in TiDB, designed to simplify common data conversions for better readability.
+このドキュメントでは、一般的なデータ変換を簡素化して読みやすさを向上させるように設計された、TiDB でサポートされているユーティリティ関数を紹介します。
 
-## `FORMAT_BYTES()`
+## <code>FORMAT_BYTES()</code> {#code-format-bytes-code}
 
-The `FORMAT_BYTES()` function converts a number of bytes into a human-readable format.
+`FORMAT_BYTES()`関数は、バイト数を人間が読める形式に変換します。
 
 ```sql
 SELECT FORMAT_BYTES(10*1024*1024);
 ```
 
-```
-+----------------------------+
-| FORMAT_BYTES(10*1024*1024) |
-+----------------------------+
-| 10.00 MiB                  |
-+----------------------------+
-1 row in set (0.001 sec)
-```
+    +----------------------------+
+    | FORMAT_BYTES(10*1024*1024) |
+    +----------------------------+
+    | 10.00 MiB                  |
+    +----------------------------+
+    1 row in set (0.001 sec)
 
-## `FORMAT_NANO_TIME()`
+## <code>FORMAT_NANO_TIME()</code> {#code-format-nano-time-code}
 
-The `FORMAT_NANO_TIME()` function converts a number of nanoseconds into a human-readable time format.
+`FORMAT_NANO_TIME()`関数は、ナノ秒数を人間が読める時間形式に変換します。
 
 ```sql
 SELECT FORMAT_NANO_TIME(1000000);
 ```
 
-```
-+---------------------------+
-| FORMAT_NANO_TIME(1000000) |
-+---------------------------+
-| 1.00 ms                   |
-+---------------------------+
-1 row in set (0.001 sec)
-```
+    +---------------------------+
+    | FORMAT_NANO_TIME(1000000) |
+    +---------------------------+
+    | 1.00 ms                   |
+    +---------------------------+
+    1 row in set (0.001 sec)

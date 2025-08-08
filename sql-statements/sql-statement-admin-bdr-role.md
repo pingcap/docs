@@ -1,15 +1,15 @@
 ---
 title: ADMIN [SET|SHOW|UNSET] BDR ROLE
-summary: An overview of the usage of ADMIN [SET|SHOW|UNSET] BDR ROLE for the TiDB database.
+summary: TiDB データベースの ADMIN [SET|SHOW|UNSET] BDR ROLE の使用法の概要。
 ---
 
-# ADMIN [SET|SHOW|UNSET] BDR ROLE
+# 管理者 [設定|表示|設定解除] BDR ロール {#admin-set-show-unset-bdr-role}
 
-- Use `ADMIN SET BDR ROLE` to set the BDR role of the cluster. Currently, you can set the following BDR roles for a TiDB cluster: `PRIMARY` and `SECONDARY`. For more information about BDR roles, see [DDL Synchronization in TiCDC Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md#ddl-replication).
-- Use `ADMIN SHOW BDR ROLE` to show the BDR role of the cluster.
-- Use `ADMIN UNSET BDR ROLE` to unset the BDR role of the cluster.
+-   クラスターのBDRロールを設定するには、 `ADMIN SET BDR ROLE`使用します。現在、TiDBクラスターには`PRIMARY`と`SECONDARY` BDRロールを設定できます。BDRロールの詳細については、 [TiCDC 双方向レプリケーションにおける DDL 同期](/ticdc/ticdc-bidirectional-replication.md#ddl-replication)参照してください。
+-   クラスターの BDR ロールを表示するには、 `ADMIN SHOW BDR ROLE`使用します。
+-   クラスターの BDR ロールを設定解除するには、 `ADMIN UNSET BDR ROLE`使用します。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AdminShowBDRRoleStmt ::=
@@ -22,9 +22,9 @@ AdminUnsetBDRRoleStmt ::=
     'ADMIN' 'UNSET' 'BDR' 'ROLE'
 ```
 
-## Examples
+## 例 {#examples}
 
-By default, a TiDB cluster has no BDR role. Run the following command to show the BDR role of the cluster.
+デフォルトでは、TiDB クラスターには BDR ロールがありません。クラスターの BDR ロールを表示するには、次のコマンドを実行します。
 
 ```sql
 ADMIN SHOW BDR ROLE;
@@ -39,7 +39,7 @@ ADMIN SHOW BDR ROLE;
 1 row in set (0.01 sec)
 ```
 
-Run the following command to set the BDR role to `PRIMARY`.
+次のコマンドを実行して、BDR ロールを`PRIMARY`に設定します。
 
 ```sql
 ADMIN SET BDR ROLE PRIMARY;
@@ -59,7 +59,7 @@ ADMIN SHOW BDR ROLE;
 1 row in set (0.00 sec)
 ```
 
-Run the following command to unset the BDR role of the cluster.
+クラスターの BDR ロールを設定解除するには、次のコマンドを実行します。
 
 ```sql
 ADMIN UNSET BDR ROLE;
@@ -79,6 +79,6 @@ ADMIN SHOW BDR ROLE;
 1 row in set (0.01 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。

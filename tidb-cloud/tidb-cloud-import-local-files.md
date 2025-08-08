@@ -1,93 +1,94 @@
 ---
-title: Import Local Files to {{{ .starter }}}
-summary: Learn how to import local files to {{{ .starter }}}.
+title: Import Local Files to TiDB Cloud Serverless
+summary: ローカル ファイルをTiDB Cloud Serverless にインポートする方法を学びます。
 ---
 
-# Import Local Files to {{{ .starter }}}
+# ローカルファイルをTiDB Cloud Serverlessにインポート {#import-local-files-to-tidb-cloud-serverless}
 
-You can import local files to {{{ .starter }}} directly. It only takes a few clicks to complete the task configuration, and then your local CSV data will be quickly imported to your TiDB cluster. Using this method, you do not need to provide the cloud storage and credentials. The whole importing process is quick and smooth.
+ローカルファイルをTiDB Cloud Serverlessに直接インポートできます。タスク設定は数回クリックするだけで完了し、ローカルCSVデータがTiDBクラスターに素早くインポートされます。この方法を使えば、クラウドstorageや認証情報を入力する必要はなく、インポートプロセス全体が迅速かつスムーズです。
 
-Currently, this method supports importing one CSV file for one task into either an existing empty table or a new table.
+現在、この方法では、1 つのタスクに対して 1 つの CSV ファイルを既存の空のテーブルまたは新しいテーブルにインポートすることがサポートされています。
 
-## Limitations
+## 制限事項 {#limitations}
 
-- Currently, TiDB Cloud only supports importing a local file in CSV format within 250 MiB for one task.
-- Importing local files is supported only for {{{ .starter }}} clusters, not for TiDB Cloud Dedicated clusters.
-- You cannot run more than one import task at the same time.
+-   現在、 TiDB Cloud は、1 つのタスクにつき 250 MiB 以内の CSV 形式のローカル ファイルのインポートのみをサポートしています。
+-   ローカル ファイルのインポートは、 TiDB Cloud Serverless クラスターでのみサポートされ、 TiDB Cloud Dedicated クラスターではサポートされません。
+-   複数のインポート タスクを同時に実行することはできません。
 
-## Import local files
+## ローカルファイルをインポートする {#import-local-files}
 
-1. Open the **Import** page for your target cluster.
+1.  ターゲット クラスターの**インポート**ページを開きます。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-        > **Tip:**
+        > **ヒント：**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
-2. On the **Import** page, you can directly drag and drop your local file to the upload area, or click **Upload a local file** to select and upload the target local file. Note that you can upload only one CSV file of less than 250 MiB for one task. If your local file is larger than 250 MiB, see [How to import a local file larger than 250 MiB?](#how-to-import-a-local-file-larger-than-250-mib).
+2.  **インポート**ページでは、ローカルファイルをアップロードエリアに直接ドラッグ＆ドロップするか、 **「ローカルファイルをアップロード」**をクリックして対象のローカルファイルを選択してアップロードできます。1つのタスクにつき、250MiB未満のCSVファイルを1つだけアップロードできます。ローカルファイルが250MiBを超える場合は、 [250 MiB を超えるローカル ファイルをインポートするにはどうすればよいでしょうか?](#how-to-import-a-local-file-larger-than-250-mib)参照してください。
 
-3. In the **Destination** section, select the target database and the target table, or enter a name directly to create a new database or a new table. The name must only contain characters in Unicode BMP (Basic Multilingual Plane), excluding the null character `\u0000` and whitespace characters, and can be up to 64 characters in length. Click **Define Table**, the **Table Definition** section is displayed.
+3.  **「宛先」**セクションで、ターゲットデータベースとターゲットテーブルを選択するか、名前を直接入力して新しいデータベースまたはテーブルを作成します。名前には、Unicode BMP（Basic Multilingual Plane）の文字のみを使用し、ヌル文字`\u0000`と空白文字は含めず、最大64文字まで使用できます。 **「テーブルの定義」を**クリックすると、 **「テーブル定義」**セクションが表示されます。
 
-4. Check the table.
+4.  表を確認してください。
 
-    You can see a list of configurable table columns. Each line shows the table column name inferred by TiDB Cloud, the table column type inferred, and the previewed data from the CSV file.
+    設定可能なテーブル列のリストが表示されます。各行には、 TiDB Cloudによって推定されたテーブル列名、推定されたテーブル列の型、および CSV ファイルからプレビューされたデータが表示されます。
 
-    - If you import data into an existing table in TiDB Cloud, the column list is extracted from the table definition, and the previewed data is mapped to the corresponding columns by column names.
+    -   TiDB Cloudの既存のテーブルにデータをインポートする場合、テーブル定義から列リストが抽出され、プレビューされたデータが列名によって対応する列にマップされます。
 
-    - If you want to create a new table, the column list is extracted from the CSV file, and the column type is inferred by TiDB Cloud. For example, if the previewed data is all integers, the inferred column type will be integer.
+    -   新しいテーブルを作成する場合、CSVファイルから列リストが抽出され、 TiDB Cloudによって列の型が推測されます。例えば、プレビューされたデータがすべて整数の場合、推測される列の型は整数になります。
 
-5. Configure the column names and data types.
+5.  列名とデータ型を構成します。
 
-    If the first row in the CSV file records the column names, make sure that **Use first row as column name** is selected, which is selected by default.
+    CSV ファイルの最初の行に列名が記録されている場合は、デフォルトで選択されている**「最初の行を列名として使用する**」が選択されていることを確認します。
 
-    If the CSV file does not have a row for the column names, do not select **Use first row as column name**. In this case:
+    CSVファイルに列名用の行がない場合は、 **「最初の行を列名として使用」**を選択しないでください。この場合、次のようになります。
 
-    - If the target table already exists, the columns in the CSV file will be imported into the target table in order. Extra columns will be truncated and missing columns will be filled with default values.
+    -   対象テーブルが既に存在する場合、CSVファイル内の列が順番に対象テーブルにインポートされます。余分な列は切り捨てられ、不足している列にはデフォルト値が設定されます。
 
-    - If you need TiDB Cloud to create the target table, input the name for each column. The column name must meet the following requirements:
+    -   TiDB Cloud でターゲットテーブルを作成する必要がある場合は、各列の名前を入力してください。列名は、以下の要件を満たす必要があります。
 
-        * The name must be composed of characters in Unicode BMP, excluding the null character `\u0000` and whitespace characters.
-        * The length of the name must be less than 65 characters.
+        -   名前は、ヌル文字`\u0000`と空白文字を除く、Unicode BMP の文字で構成されている必要があります。
+        -   名前の長さは 65 文字未満にする必要があります。
 
-        You can also change the data type if needed.
+        必要に応じてデータ型を変更することもできます。
 
-    > **Note:**
+    > **注記：**
     >
-    > When you import a CSV file into an existing table in TiDB Cloud and the target table has more columns than the source file, the extra columns are handled differently depending on the situation:
-    > - If the extra columns are not the primary keys or the unique keys, no error will be reported. Instead, these extra columns will be populated with their [default values](/data-type-default-values.md).
-    > - If the extra columns are the primary keys or the unique keys and do not have the `auto_increment` or `auto_random` attribute, an error will be reported. In that case, it is recommended that you choose one of the following strategies:
-    >   - Provide a source file that includes these primary key or unique key columns.
-    >   - Modify the target table's primary key and unique key columns to match the existing columns in the source file.
-    >   - Set the attributes of the primary key or the unique key columns to `auto_increment` or `auto_random`.
-
-6. For a new target table, you can set the primary key. You can select a column as the primary key, or select multiple columns to create a composite primary key. The composite primary key will be formed in the order in which you select the column names.
-
-    > **Note:**
+    > TiDB Cloudの既存のテーブルに CSV ファイルをインポートし、ターゲット テーブルにソース ファイルよりも多くの列がある場合、状況に応じて余分な列が異なって処理されます。
     >
-    > The primary key of the table is a clustered index and cannot be dropped after creation.
+    > -   追加列が主キーまたは一意キーでない場合、エラーは報告されません。代わりに、これらの追加列には[デフォルト値](/data-type-default-values.md)が設定されます。
+    > -   追加列が主キーまたは一意キーであり、属性`auto_increment`または`auto_random`を持たない場合、エラーが報告されます。その場合は、以下のいずれかの戦略を選択することをお勧めします。
+    >     -   これらの主キーまたは一意キーの列を含むソース ファイルを提供します。
+    >     -   ターゲット テーブルの主キーと一意キーの列を、ソース ファイル内の既存の列と一致するように変更します。
+    >     -   主キーまたは一意キー列の属性を`auto_increment`または`auto_random`に設定します。
 
-7. Edit the CSV configuration if needed.
+6.  新しいターゲットテーブルでは、主キーを設定できます。主キーとして列を選択するか、複数の列を選択して複合主キーを作成できます。複合主キーは、列名を選択した順序で作成されます。
 
-   You can also click **Edit CSV configuration** to configure Backslash Escape, Separator, and Delimiter for more fine-grained control. For more information about the CSV configuration, see [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md).
+    > **注記：**
+    >
+    > テーブルの主キーはクラスター化インデックスであり、作成後に削除することはできません。
 
-8. Click **Start Import**.
+7.  必要に応じて CSV 構成を編集します。
 
-    You can view the import progress on the **Import Task Detail** page. If there are warnings or failed tasks, you can check to view the details and solve them.
+    **「CSV設定の編集」を**クリックすると、バックスラッシュエスケープ、セパレーター、区切り文字を設定して、よりきめ細かな制御を行うことができます。CSV設定の詳細については、 [データのインポートのためのCSV構成](/tidb-cloud/csv-config-for-import-data.md)参照してください。
 
-9. After the import task is completed, you can click **Explore your data by SQL Editor** to query your imported data. For more information about how to use SQL Editor, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
+8.  **[インポートの開始]を**クリックします。
 
-10. On the **Import** page, you can click **...** > **View** in the **Action** column to check the import task detail.
+    **インポートタスクの詳細**ページでインポートの進行状況を確認できます。警告や失敗したタスクがある場合は、詳細を確認して解決できます。
 
-## FAQ
+9.  インポートタスクが完了したら、 **「SQLエディタでデータを**探索」をクリックして、インポートしたデータに対してクエリを実行できます。SQLエディタの使用方法の詳細については、 [AI支援SQLエディターでデータを探索](/tidb-cloud/explore-data-with-chat2query.md)ご覧ください。
 
-### Can I only import some specified columns by the Import feature in TiDB Cloud?
+10. **[インポート]**ページで、 **[アクション**] 列の**[...** ] &gt; **[ビュー]**をクリックして、インポート タスクの詳細を確認できます。
 
-No. Currently, you can only import all columns of a CSV file into an existing table when using the Import feature.
+## FAQ {#faq}
 
-To import only some specified columns, you can use the MySQL client to connect your TiDB cluster, and then use [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data) to specify the columns to be imported. For example:
+### TiDB Cloudのインポート機能を使用して、指定した列のみをインポートできますか? {#can-i-only-import-some-specified-columns-by-the-import-feature-in-tidb-cloud}
+
+いいえ。現在、インポート機能を使用する場合、CSV ファイルのすべての列を既存のテーブルにインポートすることしかできません。
+
+特定の列のみをインポートするには、MySQLクライアントを使用してTiDBクラスタに接続し、 [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data)使用してインポートする列を指定します。例：
 
 ```sql
 CREATE TABLE `import_test` (
@@ -99,19 +100,19 @@ CREATE TABLE `import_test` (
 LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE import_test FIELDS TERMINATED BY ',' (name, address);
 ```
 
-If you use `mysql` and encounter `ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`, you can add `--local-infile=true` in the connection string.
+`mysql`使用していて`ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`遭遇した場合は、接続文字列に`--local-infile=true`追加できます。
 
-### Why can't I query a column with a reserved keyword after importing data into TiDB Cloud?
+### TiDB Cloudにデータをインポートした後、予約キーワードを含む列をクエリできないのはなぜですか? {#why-can-t-i-query-a-column-with-a-reserved-keyword-after-importing-data-into-tidb-cloud}
 
-If a column name is a reserved [keyword](/keywords.md) in TiDB, when you query the column, you need to add backticks `` ` `` to enclose the column name. For example, if the column name is `order`, you need to query the column with `` `order` ``.
+列名がTiDBで予約済みの[キーワード](/keywords.md)である場合、その列をクエリする際には、列名を囲むバッククォート`` ` ``を追加する必要があります。例えば、列名が`order`場合、 `` `order` ``で列をクエリする必要があります。
 
-### How to import a local file larger than 250 MiB?
+### 250 MiB を超えるローカル ファイルをインポートするにはどうすればよいでしょうか? {#how-to-import-a-local-file-larger-than-250-mib}
 
-If the file is larger than 250 MiB, you can use [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md) to import the file. For more information, see [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md).
+ファイルが250MiBより大きい場合は、 [TiDB CloudCLI](/tidb-cloud/get-started-with-cli.md)使用してファイルをインポートできます。詳細については、 [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md)参照してください。
 
-Alternatively, you can use the `split [-l ${line_count}]` utility to split it into multiple smaller files (for Linux or macOS only). For example, run `split -l 100000 tidb-01.csv small_files` to split a file named `tidb-01.csv` by line length `100000`, and the split files are named `small_files${suffix}`. Then, you can import these smaller files to TiDB Cloud one by one.
+あるいは、 `split [-l ${line_count}]`ユーティリティを使って複数の小さなファイルに分割することもできます（LinuxまたはmacOSのみ）。例えば、 `split -l 100000 tidb-01.csv small_files`実行すると、 `tidb-01.csv`というファイルが行長`100000`で分割され、分割後のファイルの名前は`small_files${suffix}`なります。その後、これらの小さなファイルをTiDB Cloudに1つずつインポートできます。
 
-Refer to the following script:
+次のスクリプトを参照してください。
 
 ```bash
 #!/bin/bash
@@ -128,7 +129,7 @@ do
 done
 ```
 
-You can input `n` and a file name, and then run the script. The script will divide the file into `n` equal parts while keeping the original file extension. For example:
+`n`とファイル名を入力してスクリプトを実行すると、元のファイル拡張子を維持しながら、ファイルを`n`均等な部分に分割します。例：
 
 ```bash
 > sh ./split.sh 3 mytest.customer.csv

@@ -1,31 +1,27 @@
 ---
 title: FLASHBACK TABLE
-summary: Learn how to recover tables using the `FLASHBACK TABLE` statement.
+summary: FLASHBACK TABLE` ステートメントを使用してテーブルを回復する方法を学習します。
 ---
 
-# FLASHBACK TABLE
+# フラッシュバックテーブル {#flashback-table}
 
-The `FLASHBACK TABLE` syntax is introduced since TiDB 4.0. You can use the `FLASHBACK TABLE` statement to restore the tables and data dropped by the `DROP` or `TRUNCATE` operation within the Garbage Collection (GC) lifetime.
+`FLASHBACK TABLE`構文は TiDB 4.0 以降で導入されました。3 ステートメント`FLASHBACK TABLE`使用すると、ガベージコレクション (GC) の有効期間中に`DROP`または`TRUNCATE`操作によって削除されたテーブルとデータを復元できます。
 
-The system variable [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) (default: `10m0s`) defines the retention time of earlier versions of rows. The current `safePoint` of where garbage collection has been performed up to can be obtained with the following query:
-
-{{< copyable "sql" >}}
+システム変数[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) （デフォルト: `10m0s` ）は、以前のバージョンの行の保持期間を定義します。ガベージコレクションが実行された現在の`safePoint`間は、次のクエリで取得できます。
 
 ```sql
 SELECT * FROM mysql.tidb WHERE variable_name = 'tikv_gc_safe_point';
 ```
 
-As long as the table is dropped by `DROP` or `TRUNCATE` statements after the `tikv_gc_safe_point` time, you can restore the table using the `FLASHBACK TABLE` statement.
+`tikv_gc_safe_point`回目以降に`DROP`または`TRUNCATE`ステートメントでテーブルが削除されている限り、 `FLASHBACK TABLE`ステートメントを使用してテーブルを復元できます。
 
-## Syntax
-
-{{< copyable "sql" >}}
+## 構文 {#syntax}
 
 ```sql
 FLASHBACK TABLE table_name [TO other_table_name]
 ```
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 FlashbackTableStmt ::=
@@ -38,62 +34,54 @@ FlashbackToNewName ::=
     ( 'TO' Identifier )?
 ```
 
-## Notes
+## 注記 {#notes}
 
-If a table is dropped and the GC lifetime has passed, you can no longer use the `FLASHBACK TABLE` statement to recover the dropped data. Otherwise, an error like `Can't find dropped / truncated table 't' in GC safe point 2020-03-16 16:34:52 +0800 CST` will be returned.
+テーブルが削除され、GCの有効期間が過ぎた場合、 `FLASHBACK TABLE`ステートメントを使用して削除されたデータを回復することはできなくなります。そうでない場合は、 `Can't find dropped / truncated table 't' in GC safe point 2020-03-16 16:34:52 +0800 CST`ようなエラーが返されます。
 
-## Example
+## 例 {#example}
 
-- Recover the table data dropped by the `DROP` operation:
-
-    {{< copyable "sql" >}}
+-   `DROP`操作で削除されたテーブル データを回復します。
 
     ```sql
     DROP TABLE t;
     ```
 
-    {{< copyable "sql" >}}
-
     ```sql
     FLASHBACK TABLE t;
     ```
 
-- Recover the table data dropped by the `TRUNCATE` operation. Because the truncated table `t` still exists, you need to rename the table `t` to be recovered. Otherwise, an error will be returned because the table `t` already exists.
-
-    {{< copyable "sql" >}}
+-   操作`TRUNCATE`で削除されたテーブルデータを復元します。切り捨てられたテーブル`t`まだ存在するため、復元するテーブル`t`名前を変更する必要があります。変更しないと、テーブル`t`既に存在するためエラーが返されます。
 
     ```sql
     TRUNCATE TABLE t;
     ```
 
-    {{< copyable "sql" >}}
-
     ```sql
     FLASHBACK TABLE t TO t1;
     ```
 
-## Implementation principle
+## 実施原則 {#implementation-principle}
 
-When deleting a table, TiDB only deletes the table metadata, and writes the table data (row data and index data) to be deleted to the `mysql.gc_delete_range` table. The GC Worker in the TiDB background periodically removes from the `mysql.gc_delete_range` table the keys that exceed the GC lifetime.
+テーブルを削除する際、TiDBはテーブルメタデータのみを削除し、削除対象のテーブルデータ（行データとインデックスデータ）を`mysql.gc_delete_range`テーブルに書き込みます。TiDBのバックグラウンドにあるGCワーカーは、GCの有効期間を超えたキーを`mysql.gc_delete_range`テーブルから定期的に削除します。
 
-Therefore, to recover a table, you only need to recover the table metadata and delete the corresponding row record in the `mysql.gc_delete_range` table before the GC Worker deletes the table data. You can use a snapshot read of TiDB to recover the table metadata. For details of snapshot read, refer to [Read Historical Data](/read-historical-data.md).
+したがって、テーブルをリカバリするには、GCワーカーがテーブルデータを削除する前に、テーブルメタデータをリカバリし、 `mysql.gc_delete_range`のテーブルから対応する行レコードを削除するだけで済みます。テーブルメタデータのリカバリには、TiDBのスナップショット読み取りを使用できます。スナップショット読み取りの詳細については、 [履歴データを読む](/read-historical-data.md)を参照してください。
 
-The following is the working process of `FLASHBACK TABLE t TO t1`:
+`FLASHBACK TABLE t TO t1`の作業工程は以下のとおりです。
 
-1. TiDB searches the recent DDL history jobs and locates the first DDL operation of the `DROP TABLE` or the `truncate table` type on table `t`. If TiDB fails to locate one, an error is returned.
-2. TiDB checks whether the starting time of the DDL job is before `tikv_gc_safe_point`. If it is before `tikv_gc_safe_point`, it means that the table dropped by the `DROP` or `TRUNCATE` operation has been cleaned up by the GC and an error is returned.
-3. TiDB uses the starting time of the DDL job as the snapshot to read historical data and read table metadata.
-4. TiDB deletes GC tasks related to table `t` in `mysql.gc_delete_range`.
-5. TiDB changes `name` in the table's metadata to `t1`, and uses this metadata to create a new table. Note that only the table name is changed but not the table ID. The table ID is the same as that of the previously dropped table `t`.
+1.  TiDBは最近のDDL履歴ジョブを検索し、テーブル`t`で最初のDDL操作（タイプ`DROP TABLE`またはタイプ`truncate table`を見つけます。TiDBが見つけられなかった場合は、エラーが返されます。
+2.  TiDBは、DDLジョブの開始時刻が`tikv_gc_safe_point`より前かどうかを確認します。3 `tikv_gc_safe_point`前の場合、 `DROP`または`TRUNCATE`操作で削除されたテーブルがGCによってクリーンアップされたことを意味し、エラーが返されます。
+3.  TiDB は、DDL ジョブの開始時刻をスナップショットとして使用して、履歴データを読み取り、テーブル メタデータを読み取ります。
+4.  TiDB は`mysql.gc_delete_range`のテーブル`t`に関連する GC タスクを削除します。
+5.  TiDBはテーブルのメタデータの`name` `t1`に変更し、このメタデータを使用して新しいテーブルを作成します。テーブル名のみが変更され、テーブルIDは変更されないことに注意してください。テーブルIDは、以前に削除されたテーブル`t`と同じです。
 
-From the above process, you can see that TiDB always operates on the metadata of the table, and the user data of the table has never been modified. The restored table `t1` has the same ID as the previously dropped table `t`, so `t1` can read the user data of `t`.
+上記のプロセスから、TiDBは常にテーブルのメタデータに対して操作を行い、テーブルのユーザーデータは変更されていないことがわかります。復元されたテーブル`t1` 、以前に削除されたテーブル`t`と同じIDを持つため、テーブル`t1` `t`のユーザーデータを読み取ることができます。
 
-> **Note:**
+> **注記：**
 >
-> You cannot use `FLASHBACK` statements to restore the same deleted table multiple times, because the ID of the restored table is the same ID of the dropped table, and TiDB requires that all existing tables must have a globally unique table ID.
+> 復元されたテーブルの ID は削除されたテーブルの ID と同じであり、TiDB では既存のすべてのテーブルにグローバルに一意のテーブル ID が必要であるため、 `FLASHBACK`ステートメントを使用して同じ削除されたテーブルを複数回復元することはできません。
 
-The `FLASHBACK TABLE` operation is done by TiDB obtaining the table metadata through snapshot read, and then going through the process of table creation similar to `CREATE TABLE`. Therefore, `FLASHBACK TABLE` is, in essence, a kind of DDL operation.
+`FLASHBACK TABLE`操作は、TiDBがスナップショット読み取りによってテーブルメタデータを取得し、 `CREATE TABLE`と同様のテーブル作成プロセスを実行することで実行されます。したがって、 `FLASHBACK TABLE`本質的には一種のDDL操作です。
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。

@@ -1,41 +1,41 @@
 ---
 title: Quick Start with TiDB Self-Managed
-summary: Learn how to quickly get started with TiDB Self-Managed using TiUP playground and see if TiDB is the right choice for you.
+summary: TiUPプレイグラウンドを使用して TiDB Self-Managed をすぐに使い始める方法を学び、TiDB が最適な選択であるかどうかを確認します。
 ---
 
-# Quick Start with TiDB Self-Managed
+# TiDBセルフマネージドのクイックスタート {#quick-start-with-tidb-self-managed}
 
-This guide provides the quickest way to get started with TiDB Self-Managed. For non-production environments, you can deploy your TiDB database using either of the following methods:
+このガイドでは、TiDBセルフマネージドを使い始めるための最も簡単な方法を紹介します。非本番環境では、以下のいずれかの方法でTiDBデータベースをデプロイできます。
 
-- [Deploy a local test cluster](#deploy-a-local-test-cluster) (for macOS and Linux)
-- [Simulate production deployment on a single machine](#simulate-production-deployment-on-a-single-machine) (for Linux only)
+-   [ローカルテストクラスタをデプロイ](#deploy-a-local-test-cluster) (macOSおよびLinux用)
+-   [単一のマシンで本番の展開をシミュレートする](#simulate-production-deployment-on-a-single-machine) (Linuxのみ)
 
-In addition, you can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_quick_start).
+さらに、 [TiDB プレイグラウンド](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_quick_start)で TiDB の機能を試すこともできます。
 
-> **Note:**
+> **注記：**
 >
-> The deployment method provided in this guide is **ONLY FOR** quick start, **NOT FOR** production or comprehensive functionality and stability testing.
+> このガイドで提供されるデプロイメント方法は、クイック スタート**のみを目的とし**ており、本番や包括的な機能および安定性のテスト**には使用できません**。
 >
-> - To deploy a self-hosted production cluster, see the [production installation guide](/production-deployment-using-tiup.md).
-> - To deploy TiDB on Kubernetes, see [Get Started with TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started).
-> - To manage TiDB in the cloud, see [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart).
+> -   セルフホスト型の本番本番クラスターをデプロイするには、 [本番インストールガイド](/production-deployment-using-tiup.md)参照してください。
+> -   Kubernetes に TiDB をデプロイするには、 [Kubernetes で TiDB を使い始める](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started)参照してください。
+> -   クラウドで TiDB を管理するには、 [TiDB Cloudクイックスタート](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)参照してください。
 
-## Deploy a local test cluster
+## ローカルテストクラスタをデプロイ {#deploy-a-local-test-cluster}
 
-This section describes how to quickly deploy a local TiDB cluster for testing on a single macOS or Linux server. By deploying such a cluster, you can learn the basic architecture of the TiDB database and the operation of its components, such as TiDB, TiKV, PD, and the monitoring components.
+このセクションでは、単一のmacOSまたはLinuxサーバー上でテスト用のローカルTiDBクラスターを迅速に展開する方法について説明します。このようなクラスターを展開することで、TiDBデータベースの基本的なアーキテクチャと、TiDB、TiKV、PD、監視コンポーネントなどのコンポーネントの動作を学習できます。
 
 <SimpleTab>
 <div label="macOS">
 
-As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB instances, 3 TiKV instances, 3 PD instances, and optional TiFlash instances. With TiUP Playground, you can quickly set up a test cluster by following these steps:
+分散システムであるTiDBテストクラスタは、通常、2つのTiDBインスタンス、3つのTiKVインスタンス、3つのPDインスタンス、そしてオプションのTiFlashインスタンスで構成されます。TiUP TiUPを使用すると、以下の手順で簡単にテストクラスタをセットアップできます。
 
-1. Download and install TiUP:
+1.  TiUPをダウンロードしてインストールします:
 
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-    If the following message is displayed, you have successfully installed TiUP:
+    次のメッセージが表示されたら、 TiUPは正常にインストールされています。
 
     ```log
     Successfully set mirror to https://tiup-mirrors.pingcap.com
@@ -49,42 +49,42 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     ===============================================
     ```
 
-    Note the Shell profile path in the output above. You need to use the path in the next step.
+    上記の出力にあるシェルプロファイルのパスをメモしてください。このパスは次の手順で使用します。
 
-    > **Note:**
+    > **注記：**
     >
-    > Starting from v5.2.0, TiDB supports running `tiup playground` on the machine that uses the Apple silicon chip.
+    > v5.2.0 以降、TiDB は Apple Silicon チップを使用するマシン上で`tiup playground`実行をサポートします。
 
-2. Declare the global environment variable:
+2.  グローバル環境変数を宣言します。
 
-    > **Note:**
+    > **注記：**
     >
-    > After the installation, TiUP displays the absolute path of the corresponding Shell profile file. You need to modify `${your_shell_profile}` in the following `source` command according to the path. In this case, `${your_shell_profile}` is `/Users/user/.zshrc` from the output of Step 1.
+    > インストール後、 TiUP は対応するシェルプロファイルファイルの絶対パスを表示します。次の`source`コマンドの`${your_shell_profile}`パスに合わせて変更する必要があります。この場合、 `${your_shell_profile}`手順 1 の出力の`/Users/user/.zshrc`になります。
 
     ```shell
     source ${your_shell_profile}
     ```
 
-3. Start the cluster in the current session:
+3.  現在のセッションでクラスターを起動します。
 
-    > **Note:**
+    > **注記：**
     >
-    > - For the playground operated in the following way, after the deployment and testing are finished, TiUP will automatically clean up the cluster data. You will get a new cluster after re-running the command.
-    > - If you want to persist data on storage, then add the `--tag` flag when you start the cluster. For details, see [Specify a tag when starting the TiDB cluster to store the data](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data).
+    > -   以下の方法で運用されたプレイグラウンドでは、デプロイとテストが完了すると、 TiUPによってクラスターデータが自動的にクリーンアップされます。コマンドを再実行すると、新しいクラスターが作成されます。
+    > -   storageにデータを永続化したい場合は、クラスターの起動時にフラグ`--tag`を追加してください。詳細は[TiDBクラスタを起動するときにデータを保存するタグを指定します](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data)参照してください。
     >
     >     ```shell
     >     tiup playground --tag ${tag_name}
     >     ```
 
-    - To start a TiDB cluster of the latest version with 1 TiDB instance, 1 TiKV instance, 1 PD instance, and 1 TiFlash instance, run the following command:
+    -   1 つの TiDB インスタンス、1 つの TiKV インスタンス、1 つの PD インスタンス、および 1 つのTiFlashインスタンスを含む最新バージョンの TiDB クラスターを起動するには、次のコマンドを実行します。
 
         ```shell
         tiup playground
         ```
 
-        If this is the first time you run the command, TiUP will download the latest version of TiDB and start the cluster.
+        このコマンドを初めて実行する場合、 TiUP は最新バージョンの TiDB をダウンロードし、クラスターを起動します。
 
-        The output displays a list of endpoints of the cluster:
+        出力にはクラスターのエンドポイントのリストが表示されます。
 
         ```log
         🎉 TiDB Playground Cluster is started, enjoy!
@@ -94,66 +94,66 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         Grafana:         http://127.0.0.1:3000
         ```
 
-    - To specify the TiDB version and the number of instances of each component, run a command like this:
+    -   TiDB のバージョンと各コンポーネントのインスタンスの数を指定するには、次のようなコマンドを実行します。
 
         ```shell
-        tiup playground {{{ .tidb-version }}} --db 2 --pd 3 --kv 3
+        tiup playground v8.5.2 --db 2 --pd 3 --kv 3
         ```
 
-        It is recommended to run this command on a machine with at least 10 GiB of memory and 4 CPU cores. Insufficient resources might cause the system to crash.  
+        このコマンドは、少なくとも10GiBのメモリと4つのCPUコアを搭載したマシンで実行することをお勧めします。リソースが不足すると、システムがクラッシュする可能性があります。
 
-        To view all available versions, run `tiup list tidb`.
+        利用可能なすべてのバージョンを表示するには、 `tiup list tidb`実行します。
 
-4. Start a new session to access the TiDB cluster endpoints:
+4.  TiDB クラスターのエンドポイントにアクセスするための新しいセッションを開始します。
 
-    - Connect to the TiDB database:
+    -   TiDB データベースに接続します。
 
-        - Use the TiUP client to connect to TiDB.
+        -   TiUPクライアントを使用して TiDB に接続します。
 
             ```shell
             tiup client
             ```
 
-        - Alternatively, you can use the MySQL client to connect to TiDB.
+        -   あるいは、MySQL クライアントを使用して TiDB に接続することもできます。
 
             ```shell
             mysql --host 127.0.0.1 --port 4000 -u root
             ```
 
-    - Prometheus: <http://127.0.0.1:9090>.
+    -   プロメテウス: [http://127.0.0.1:9090](http://127.0.0.1:9090) .
 
-    - [TiDB Dashboard](/dashboard/dashboard-intro.md): <http://127.0.0.1:2379/dashboard>. The default username is `root`, and the password is empty.
+    -   [TiDBダッシュボード](/dashboard/dashboard-intro.md) : [http://127.0.0.1:2379/ダッシュボード](http://127.0.0.1:2379/dashboard) 。デフォルトのユーザー名は`root` 、パスワードは空です。
 
-    - Grafana: <http://127.0.0.1:3000>. Both the default username and password are `admin`.
+    -   Grafana: [http://127.0.0.1:3000](http://127.0.0.1:3000) 。デフォルトのユーザー名とパスワードはどちらも`admin`です。
 
-5. (Optional) [Load data to TiFlash](/tiflash/tiflash-overview.md#use-tiflash) for analysis.
+5.  (オプション) 分析用に[TiFlashにデータをロードする](/tiflash/tiflash-overview.md#use-tiflash) 。
 
-6. Clean up the cluster after testing:
+6.  テスト後にクラスターをクリーンアップします。
 
-    1. Stop the above TiDB service by pressing <kbd>Control</kbd>+<kbd>C</kbd>.
+    1.  <kbd>Control</kbd> + <kbd>C</kbd>を押して上記の TiDB サービスを停止します。
 
-    2. Run the following command after the service is stopped:
+    2.  サービスを停止した後、次のコマンドを実行します。
 
         ```shell
         tiup clean --all
         ```
 
-> **Note:**
+> **注記：**
 >
-> TiUP Playground listens on `127.0.0.1` by default, and the service is only locally accessible. If you want the service to be externally accessible, specify the listening address using the `--host` parameter to bind the network interface card (NIC) to an externally accessible IP address.
+> TiUP Playgroundはデフォルトで`127.0.0.1`をリッスンしており、サービスはローカルからのみアクセス可能です。サービスを外部からアクセス可能にしたい場合は、 `--host`パラメータを使用してリッスンアドレスを指定し、ネットワークインターフェースカード（NIC）を外部からアクセス可能なIPアドレスにバインドします。
 
 </div>
 <div label="Linux">
 
-As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB instances, 3 TiKV instances, 3 PD instances, and optional TiFlash instances. With TiUP Playground, you can quickly set up a test cluster by following these steps:
+分散システムであるTiDBテストクラスタは、通常、2つのTiDBインスタンス、3つのTiKVインスタンス、3つのPDインスタンス、そしてオプションのTiFlashインスタンスで構成されます。TiUP TiUPを使用すると、以下の手順で簡単にテストクラスタをセットアップできます。
 
-1. Download and install TiUP:
+1.  TiUPをダウンロードしてインストールします:
 
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-    If the following message is displayed, you have successfully installed TiUP:
+    次のメッセージが表示されたら、 TiUPは正常にインストールされています。
 
     ```log
     Successfully set mirror to https://tiup-mirrors.pingcap.com
@@ -167,38 +167,38 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     ===============================================
     ```
 
-    Note the Shell profile path in the output above. You need to use the path in the next step.
+    上記の出力にあるシェルプロファイルのパスをメモしてください。このパスは次の手順で使用します。
 
-2. Declare the global environment variable:
+2.  グローバル環境変数を宣言します。
 
-    > **Note:**
+    > **注記：**
     >
-    > After the installation, TiUP displays the absolute path of the corresponding Shell profile file. You need to modify `${your_shell_profile}` in the following `source` command according to the path.
+    > インストール後、 TiUP は対応するシェルプロファイルファイルの絶対パスを表示します。以下の`source`コマンドの`${your_shell_profile}`パスに合わせて変更する必要があります。
 
     ```shell
     source ${your_shell_profile}
     ```
 
-3. Start the cluster in the current session:
+3.  現在のセッションでクラスターを起動します。
 
-    > **Note:**
+    > **注記：**
     >
-    > - For the playground operated in the following way, after the deployment and testing are finished, TiUP will automatically clean up the cluster data. You will get a new cluster after re-running the command.
-    > - If you want to persist data on storage, then add the `--tag` flag when you start the cluster. For details, see [Specify a tag when starting the TiDB cluster to store the data](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data).
+    > -   以下の方法で運用されたプレイグラウンドでは、デプロイとテストが完了すると、 TiUPによってクラスターデータが自動的にクリーンアップされます。コマンドを再実行すると、新しいクラスターが作成されます。
+    > -   storageにデータを永続化したい場合は、クラスターの起動時にフラグ`--tag`を追加してください。詳細は[TiDBクラスタを起動するときにデータを保存するタグを指定します](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data)参照してください。
     >
     >     ```shell
     >     tiup playground --tag ${tag_name}
     >     ```
 
-    - To start a TiDB cluster of the latest version with 1 TiDB instance, 1 TiKV instance, 1 PD instance, and 1 TiFlash instance, run the following command:
+    -   1 つの TiDB インスタンス、1 つの TiKV インスタンス、1 つの PD インスタンス、および 1 つのTiFlashインスタンスを含む最新バージョンの TiDB クラスターを起動するには、次のコマンドを実行します。
 
         ```shell
         tiup playground
         ```
 
-        If this is the first time you run the command, TiUP will download the latest version of TiDB and start the cluster.
+        このコマンドを初めて実行する場合、 TiUP は最新バージョンの TiDB をダウンロードし、クラスターを起動します。
 
-        The output displays a list of endpoints of the cluster:
+        出力にはクラスターのエンドポイントのリストが表示されます。
 
         ```log
         🎉 TiDB Playground Cluster is started, enjoy!
@@ -208,137 +208,137 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         Grafana:         http://127.0.0.1:3000
         ```
 
-    - To specify the TiDB version and the number of instances of each component, run a command like this:
+    -   TiDB のバージョンと各コンポーネントのインスタンスの数を指定するには、次のようなコマンドを実行します。
 
         ```shell
-        tiup playground {{{ .tidb-version }}} --db 2 --pd 3 --kv 3
+        tiup playground v8.5.2 --db 2 --pd 3 --kv 3
         ```
 
-        To view all available versions, run `tiup list tidb`.
+        利用可能なすべてのバージョンを表示するには、 `tiup list tidb`実行します。
 
-4. Start a new session to access the TiDB cluster endpoints:
+4.  TiDB クラスターのエンドポイントにアクセスするための新しいセッションを開始します。
 
-    - Connect to the TiDB database:
+    -   TiDB データベースに接続します。
 
-        - Use the TiUP client to connect to TiDB.
+        -   TiUPクライアントを使用して TiDB に接続します。
 
             ```shell
             tiup client
             ```
 
-        - Alternatively, you can use the MySQL client to connect to TiDB.
+        -   あるいは、MySQL クライアントを使用して TiDB に接続することもできます。
 
             ```shell
             mysql --host 127.0.0.1 --port 4000 -u root
             ```
 
-    - Prometheus: <http://127.0.0.1:9090>.
+    -   プロメテウス: [http://127.0.0.1:9090](http://127.0.0.1:9090) .
 
-    - [TiDB Dashboard](/dashboard/dashboard-intro.md): <http://127.0.0.1:2379/dashboard>. The default username is `root`, and the password is empty.
+    -   [TiDBダッシュボード](/dashboard/dashboard-intro.md) : [http://127.0.0.1:2379/ダッシュボード](http://127.0.0.1:2379/dashboard) 。デフォルトのユーザー名は`root` 、パスワードは空です。
 
-    - Grafana: <http://127.0.0.1:3000>. Both the default username and password are `admin`.
+    -   Grafana: [http://127.0.0.1:3000](http://127.0.0.1:3000) 。デフォルトのユーザー名とパスワードはどちらも`admin`です。
 
-5. (Optional) [Load data to TiFlash](/tiflash/tiflash-overview.md#use-tiflash) for analysis.
+5.  (オプション) 分析用に[TiFlashにデータをロードする](/tiflash/tiflash-overview.md#use-tiflash) 。
 
-6. Clean up the cluster after testing:
+6.  テスト後にクラスターをクリーンアップします。
 
-    1. Stop the process by pressing <kbd>Control</kbd>+<kbd>C</kbd>.
+    1.  <kbd>Control</kbd> + <kbd>C</kbd>を押してプロセスを停止します。
 
-    2. Run the following command after the service is stopped:
+    2.  サービスを停止した後、次のコマンドを実行します。
 
         ```shell
         tiup clean --all
         ```
 
-> **Note:**
+> **注記：**
 >
-> TiUP Playground listens on `127.0.0.1` by default, and the service is only locally accessible. If you want the service to be externally accessible, specify the listening address using the `--host` parameter to bind the network interface card (NIC) to an externally accessible IP address.
+> TiUP Playgroundはデフォルトで`127.0.0.1`をリッスンしており、サービスはローカルからのみアクセス可能です。サービスを外部からアクセス可能にしたい場合は、 `--host`パラメータを使用してリッスンアドレスを指定し、ネットワークインターフェースカード（NIC）を外部からアクセス可能なIPアドレスにバインドします。
 
 </div>
 </SimpleTab>
 
-## Simulate production deployment on a single machine
+## 単一のマシンで本番の展開をシミュレートする {#simulate-production-deployment-on-a-single-machine}
 
-This section describes how to set up the smallest TiDB cluster with a full topology, and simulate production deployment steps on a single Linux server.
+このセクションでは、完全なトポロジを持つ最小の TiDB クラスターを設定し、単一の Linuxサーバー上で本番展開手順をシミュレートする方法について説明します。
 
-The following describes how to deploy a TiDB cluster using a YAML file of the smallest topology in TiUP.
+以下では、 TiUPで最小トポロジの YAML ファイルを使用して TiDB クラスターをデプロイする方法について説明します。
 
-### Prepare
+### 準備する {#prepare}
 
-Before deploying the TiDB cluster, ensure that the target machine meets the following requirements:
+TiDB クラスターを展開する前に、ターゲット マシンが次の要件を満たしていることを確認してください。
 
-- CentOS 7.3 or a later version is installed.
-- The Linux OS has access to the internet, which is required to download TiDB and related software installation packages.
+-   CentOS 7.3 以降のバージョンがインストールされています。
+-   Linux OS はインターネットにアクセスできるため、TiDB および関連ソフトウェアのインストール パッケージをダウンロードする必要があります。
 
-The smallest TiDB cluster topology consists of the following instances:
+最小の TiDB クラスター トポロジは次のインスタンスで構成されます。
 
-| Instance | Count | IP | Configuration |
-|:-- | :-- | :-- | :-- |
-| TiKV | 3 | 10.0.1.1 | Use incremental port numbers to avoid conflicts |
-| TiDB | 1 | 10.0.1.1 | Use default port and other configurations |
-| PD | 1 | 10.0.1.1 | Use default port and other configurations |
-| TiFlash | 1 | 10.0.1.1 | Use default port and other configurations |
-| Monitor | 1 | 10.0.1.1 | Use default port and other configurations |
+| 実例      | カウント | IP       | コンフィグレーション            |
+| :------ | :--- | :------- | :-------------------- |
+| TiKV    | 3    | 10.0.1.1 | 競合を避けるために増分ポート番号を使用する |
+| TiDB    | 1    | 10.0.1.1 | デフォルトのポートとその他の設定を使用する |
+| PD      | 1    | 10.0.1.1 | デフォルトのポートとその他の設定を使用する |
+| TiFlash | 1    | 10.0.1.1 | デフォルトのポートとその他の設定を使用する |
+| モニター    | 1    | 10.0.1.1 | デフォルトのポートとその他の設定を使用する |
 
-> **Note:**
+> **注記：**
 >
-> The IP addresses of the instances are given as examples only. In your actual deployment, replace the IP addresses with your actual IP addresses.
+> インスタンスのIPアドレスは例としてのみ示されています。実際の導入では、IPアドレスを実際のIPアドレスに置き換えてください。
 
-Other requirements for the target machine include:
+ターゲット マシンのその他の要件は次のとおりです。
 
-- The `root` user and its password are required.
-- [Stop the firewall service of the target machine](/check-before-deployment.md#check-the-firewall-service-of-target-machines), or open the ports needed by the TiDB cluster nodes.
-- Currently, the TiUP cluster supports deploying TiDB on the x86_64 (AMD64) and ARM architectures:
+-   `root`ユーザーとそのパスワードが必要です。
+-   [対象マシンのファイアウォールサービスを停止します](/check-before-deployment.md#check-the-firewall-service-of-target-machines) 、または TiDB クラスター ノードに必要なポートを開きます。
+-   現在、 TiUPクラスターは、x86_64 (AMD64) および ARM アーキテクチャでの TiDB のデプロイをサポートしています。
 
-    - It is recommended to use CentOS 7.3 or later versions on AMD64 architecture.
-    - It is recommended to use CentOS 7.6 (1810) on ARM architecture.
+    -   AMD64アーキテクチャでは CentOS 7.3 以降のバージョンを使用することをお勧めします。
+    -   ARMアーキテクチャでは CentOS 7.6 (1810) を使用することをお勧めします。
 
-### Deploy
+### デプロイ {#deploy}
 
-> **Note:**
+> **注記：**
 >
-> You can log in to the target machine as a regular user or the `root` user. The following steps use the `root` user as an example.
+> 対象マシンには、通常のユーザーまたはユーザー`root`としてログインできます。以下の手順では、ユーザー`root`例に説明します。
 
-1. Download and install TiUP:
+1.  TiUPをダウンロードしてインストールします:
 
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-2. Declare the global environment variable.
+2.  グローバル環境変数を宣言します。
 
-    > **Note:**
+    > **注記：**
     >
-    > After the installation, TiUP displays the absolute path of the corresponding Shell profile file. You need to modify `${your_shell_profile}` in the following `source` command according to the path.
+    > インストール後、 TiUP は対応するシェルプロファイルファイルの絶対パスを表示します。以下の`source`コマンドの`${your_shell_profile}`パスに合わせて変更する必要があります。
 
     ```shell
     source ${your_shell_profile}
     ```
 
-3. Install the cluster component of TiUP:
+3.  TiUPのクラスターコンポーネントをインストールします。
 
     ```shell
     tiup cluster
     ```
 
-4. If the TiUP cluster is already installed on the machine, update the software version:
+4.  TiUPクラスターがすでにマシンにインストールされている場合は、ソフトウェア バージョンを更新します。
 
     ```shell
     tiup update --self && tiup update cluster
     ```
 
-5. Increase the connection limit of the `sshd` service using the root user privilege. This is because TiUP needs to simulate deployment on multiple machines.
+5.  ルートユーザー権限を使用して、 `sshd`サービスへの接続制限を増やします。これは、 TiUPが複数のマシンへの展開をシミュレートする必要があるためです。
 
-    1. Modify `/etc/ssh/sshd_config`, and set `MaxSessions` to `20`.
-    2. Restart the `sshd` service:
+    1.  `/etc/ssh/sshd_config`を変更し、 `MaxSessions`を`20`に設定します。
+    2.  `sshd`サービスを再起動します。
 
         ```shell
         service sshd restart
         ```
 
-6. Create and start the cluster:
+6.  クラスターを作成して起動します。
 
-    Create and edit the [topology configuration file](/tiup/tiup-cluster-topology-reference.md) according to the following template, and name it as `topo.yaml`:
+    次のテンプレートに従って[トポロジ構成ファイル](/tiup/tiup-cluster-topology-reference.md)作成および編集し、 `topo.yaml`という名前を付けます。
 
     ```yaml
     # # Global variables are applied to all deployments and used as the default value of
@@ -401,102 +401,102 @@ Other requirements for the target machine include:
      - host: 10.0.1.1
     ```
 
-    - `user: "tidb"`: Use the `tidb` system user (automatically created during deployment) to perform the internal management of the cluster. By default, use port 22 to log in to the target machine via SSH.
-    - `replication.enable-placement-rules`: This PD parameter is set to ensure that TiFlash runs normally.
-    - `host`: The IP of the target machine.
+    -   `user: "tidb"` : クラスターの内部管理には、デプロイメント中に自動作成されるシステムユーザー`tidb`を使用します。デフォルトでは、ポート22を使用してSSH経由でターゲットマシンにログインします。
+    -   `replication.enable-placement-rules` : この PD パラメータは、 TiFlashが正常に実行されるように設定されます。
+    -   `host` : ターゲットマシンの IP。
 
-7. Execute the cluster deployment command:
+7.  クラスター デプロイメント コマンドを実行します。
 
     ```shell
     tiup cluster deploy <cluster-name> <version> ./topo.yaml --user root -p
     ```
 
-    - `<cluster-name>`: sets the cluster name.
-    - `<version>`: sets the TiDB cluster version, such as `{{{ .tidb-version }}}`. You can see all the supported TiDB versions by running the `tiup list tidb` command.
-    - `--user`: specifies the user to initialize the environment.
-    - `-p`: specifies the password used to connect to the target machine.
+    -   `<cluster-name>` : クラスター名を設定します。
+    -   `<version>` : TiDBクラスターのバージョンを設定します（例： `v8.5.2` ） `tiup list tidb`コマンドを実行すると、サポートされているすべてのTiDBバージョンを確認できます。
+    -   `--user` : 環境を初期化するユーザーを指定します。
+    -   `-p` : ターゲット マシンに接続するために使用するパスワードを指定します。
 
-        > **Note:**
+        > **注記：**
         >
-        > If you use secret keys, you can specify the path of the keys through `-i`. Do not use `-i` and `-p` at the same time.
+        > 秘密鍵を使用する場合は、 `-i`で鍵のパスを指定できます。3と`-i` `-p`同時に使用しないでください。
 
-    Enter "y" and the `root` user's password to complete the deployment:
+    展開を完了するには、「y」と`root`ユーザーのパスワードを入力します。
 
     ```log
     Do you want to continue? [y/N]:  y
     Input SSH password:
     ```
 
-8. Start the cluster:
+8.  クラスターを起動します。
 
     ```shell
     tiup cluster start <cluster-name>
     ```
 
-9. Access the cluster endpoints:
+9.  クラスターのエンドポイントにアクセスします。
 
-    - Install the MySQL client. If it is already installed, skip this step.
+    -   MySQLクライアントをインストールします。すでにインストールされている場合は、この手順をスキップしてください。
 
         ```shell
         yum -y install mysql
         ```
 
-    - Connect to the TiDB database using the MySQL client. The password is empty:
+    -   MySQLクライアントを使用してTiDBデータベースに接続します。パスワードは空です。
 
         ```shell
         mysql -h 10.0.1.1 -P 4000 -u root
         ```
 
-    - Grafana: <http://{grafana-ip}:3000>. The default username and password are both `admin`.
+    -   Grafana: [http://{grafana-ip}:3000](http://%7Bgrafana-ip%7D:3000) 。デフォルトのユーザー名とパスワードはどちらも`admin`です。
 
-    - [TiDB Dashboard](/dashboard/dashboard-intro.md): <http://{pd-ip}:2379/dashboard>. The default username is `root`, and the password is empty.
+    -   [TiDBダッシュボード](/dashboard/dashboard-intro.md) : [http://{pd-ip}:2379/ダッシュボード](http://%7Bpd-ip%7D:2379/dashboard) 。デフォルトのユーザー名は`root` 、パスワードは空です。
 
-10. (Optional) View the cluster list and topology.
+10. (オプション) クラスターのリストとトポロジをビュー。
 
-    - To view the cluster list:
+    -   クラスター リストを表示するには:
 
         ```shell
         tiup cluster list
         ```
 
-    - To view the cluster topology and status:
+    -   クラスターのトポロジとステータスを表示するには:
 
         ```shell
         tiup cluster display <cluster-name>
         ```
 
-    To learn more about the `tiup cluster` commands, see [TiUP Cluster Commands](/tiup/tiup-component-cluster.md).
+    `tiup cluster`コマンドの詳細については、 [TiUPクラスタコマンド](/tiup/tiup-component-cluster.md)参照してください。
 
-11. Clean up the cluster after testing:
+11. テスト後にクラスターをクリーンアップします。
 
-    1. Stop the above TiDB service by pressing <kbd>Control</kbd>+<kbd>C</kbd>.
+    1.  <kbd>Control</kbd> + <kbd>C</kbd>を押して上記の TiDB サービスを停止します。
 
-    2. Run the following command after the service is stopped:
+    2.  サービスを停止した後、次のコマンドを実行します。
 
         ```shell
         tiup clean --all
         ```
 
-## What's next
+## 次は何？ {#what-s-next}
 
-If you have just deployed a TiDB cluster for the local test environment, here are the next steps:
+ローカル テスト環境用に TiDB クラスターをデプロイしたばかりの場合は、次の手順に従います。
 
-- Learn about basic SQL operations in TiDB by referring to [Basic SQL operations in TiDB](/basic-sql-operations.md).
-- You can also migrate data to TiDB by referring to [Migrate data to TiDB](/migration-overview.md).
-- Learn more about using TiUP to manage TiDB clusters by referring to [TiUP Overview](/tiup/tiup-overview.md).
+-   [TiDBにおける基本的なSQL操作](/basic-sql-operations.md)を参照して、TiDB での基本的な SQL 操作について学習します。
+-   [TiDBへのデータの移行](/migration-overview.md)を参照して TiDB にデータを移行することもできます。
+-   TiUPを使用して TiDB クラスターを管理する方法の詳細については、 [TiUPの概要](/tiup/tiup-overview.md)を参照してください。
 
-If you are ready to deploy a TiDB cluster for the production environment, here are the next steps:
+本番環境用に TiDB クラスターをデプロイする準備ができたら、次の手順に従います。
 
-- [Deploy TiDB using TiUP](/production-deployment-using-tiup.md)
-- Alternatively, you can deploy TiDB on Cloud using TiDB Operator by referring to the [TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable) documentation.
+-   [TiUPを使用して TiDBをデプロイ](/production-deployment-using-tiup.md)
+-   あるいは、 [Kubernetes 上の TiDB](https://docs.pingcap.com/tidb-in-kubernetes/stable)ドキュメントを参照して、 TiDB Operatorを使用してクラウドに TiDB をデプロイすることもできます。
 
-If you are an application developer and want to quickly build an application using TiDB, here are the next steps:
+アプリケーション開発者であり、TiDB を使用してアプリケーションを迅速に構築したい場合は、次の手順に従ってください。
 
-- [Developer Guide Overview](/develop/dev-guide-overview.md)
-- [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
-- [Example Applications](/develop/dev-guide-sample-application-java-jdbc.md)
+-   [開発者ガイドの概要](/develop/dev-guide-overview.md)
+-   [TiDB Cloudサーバーレスクラスタの構築](/develop/dev-guide-build-cluster-in-cloud.md)
+-   [アプリケーション例](/develop/dev-guide-sample-application-java-jdbc.md)
 
-If you are looking for an analytics solution with TiFlash, here are the next steps:
+TiFlashを使用した分析ソリューションをお探しの場合は、次の手順に従ってください。
 
-- [TiFlash Overview](/tiflash/tiflash-overview.md)
-- [Use TiFlash](/tiflash/tiflash-overview.md#use-tiflash)
+-   [TiFlashの概要](/tiflash/tiflash-overview.md)
+-   [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)

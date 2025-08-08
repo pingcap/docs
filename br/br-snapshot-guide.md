@@ -1,27 +1,27 @@
 ---
 title: Snapshot Backup and Restore Guide
-summary: This document describes how to back up and restore TiDB snapshots using the br command-line tool. It includes instructions for snapshot backup, restoring data of a specified time point, and restoring a database or table. The document also covers the performance and impact of snapshot backup and restore.
+summary: このドキュメントでは、br コマンドラインツールを使用して TiDB スナップショットをバックアップおよび復元する方法について説明します。スナップショットのバックアップ、指定した時点のデータの復元、データベースまたはテーブルの復元の手順が含まれます。また、スナップショットのバックアップと復元のパフォーマンスと影響についても説明します。
 ---
 
-# Snapshot Backup and Restore Guide
+# スナップショットのバックアップと復元ガイド {#snapshot-backup-and-restore-guide}
 
-This document describes how to back up and restore TiDB snapshots using the br command-line tool (hereinafter referred to as `br`). Before backing up and restoring data, you need to [install the br command-line tool](/br/br-use-overview.md#deploy-and-use-br) first.
+このドキュメントでは、br コマンドラインツール（以下、 `br`と呼びます）を使用して TiDB スナップショットをバックアップおよび復元する方法について説明します。データのバックアップと復元を行う前に、まず[brコマンドラインツールをインストールする](/br/br-use-overview.md#deploy-and-use-br)行う必要があります。
 
-Snapshot backup is an implementation to back up the entire cluster. It is based on [multi-version concurrency control (MVCC)](/tidb-storage.md#mvcc) and backs up all data in the specified snapshot to a target storage. The size of the backup data is approximately the size of the compressed single replica in the cluster. After the backup is completed, you can restore the backup data to an empty cluster or a cluster that does not contain conflict data (with the same schema or same tables), restore the cluster to the time point of the snapshot backup, and restore multiple replicas according to the cluster replica settings.
+スナップショットバックアップは、クラスタ全体をバックアップする実装です。1 [マルチバージョン同時実行制御 (MVCC)](/tidb-storage.md#mvcc)ベースとし、指定されたスナップショット内のすべてのデータをターゲットstorageにバックアップします。バックアップデータのサイズは、クラスタ内の圧縮された単一レプリカのサイズとほぼ同等です。バックアップ完了後、バックアップデータを空のクラスタまたは競合データを含まないクラスタ（同一スキーマまたは同一テーブル）に復元したり、スナップショットバックアップの時点にクラスタを復元したり、クラスタレプリカ設定に従って複数のレプリカを復元したりできます。
 
-Besides basic backup and restore, snapshot backup and restore also provides the following features:
+基本的なバックアップと復元に加えて、スナップショット バックアップと復元では次の機能も提供されます。
 
-* [Backup data of a specified time point](#back-up-cluster-snapshots)
-* [Restore data of a specified database or table](#restore-a-database-or-a-table)
+-   [指定した時点のバックアップデータ](#back-up-cluster-snapshots)
+-   [指定されたデータベースまたはテーブルのデータを復元する](#restore-a-database-or-a-table)
 
-## Back up cluster snapshots
+## クラスタースナップショットをバックアップする {#back-up-cluster-snapshots}
 
-> **Note:**
+> **注記：**
 >
-> - The following examples assume that Amazon S3 access keys and secret keys are used to authorize permissions. If IAM roles are used to authorize permissions, you need to set `--send-credentials-to-tikv` to `false`.
-> - If other storage systems or authorization methods are used to authorize permissions, adjust the parameter settings according to [Backup Storages](/br/backup-and-restore-storages.md).
+> -   以下の例では、Amazon S3 アクセスキーとシークレットキーを使用して権限を承認することを前提としています。IAMIAMを使用して権限を承認する場合は、 `--send-credentials-to-tikv`を`false`に設定する必要があります。
+> -   他のstorageシステムまたは認証方法を使用して権限を認証する場合は、 [バックアップストレージ](/br/backup-and-restore-storages.md)に従ってパラメータ設定を調整します。
 
-You can back up a TiDB cluster snapshot by running the `tiup br backup full` command. Run `tiup br backup full --help` to see the help information:
+`tiup br backup full`コマンドを実行すると、TiDB クラスターのスナップショットをバックアップできます。ヘルプ情報を表示するには、 `tiup br backup full --help`を実行します。
 
 ```shell
 tiup br backup full --pd "${PD_IP}:2379" \
@@ -29,12 +29,12 @@ tiup br backup full --pd "${PD_IP}:2379" \
     --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}" 
 ```
 
-In the preceding command:
+上記のコマンドでは、次のようになります。
 
-- `--backupts`: The time point of the snapshot. The format can be [TSO](/tso.md) or timestamp, such as `400036290571534337` or `2018-05-11 01:42:23 +08:00`. If the data of this snapshot is garbage collected, the `tiup br backup` command returns an error and `br` exits. When backing up using a timestamp, it is recommended to specify the time zone as well. Otherwise, `br` uses the local time zone to construct the timestamp by default, which might lead to an incorrect backup time point. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
-- `--storage`: The storage address of the backup data. Snapshot backup supports Amazon S3, Google Cloud Storage, and Azure Blob Storage as backup storage. The preceding command uses Amazon S3 as an example. For more details, see [URI Formats of External Storage Services](/external-storage-uri.md).
+-   `--backupts` : スナップショットの時点。形式は[TSO](/tso.md)またはタイムスタンプ（例： `400036290571534337` 、 `2018-05-11 01:42:23 +08:00`です。このスナップショットのデータがガベージコレクションされた場合、 `tiup br backup`コマンドはエラーを返し、 `br`終了します。タイムスタンプを使用してバックアップする場合は、タイムゾーンも指定することをお勧めします。指定しない場合、 `br`デフォルトでローカルタイムゾーンを使用してタイムスタンプを作成するため、バックアップの時点が不正確になる可能性があります。このパラメータを指定しない場合、 `br`バックアップ開始時刻に対応するスナップショットを選択します。
+-   `--storage` : バックアップデータのstorageアドレス。スナップショットバックアップは、Amazon S3、Google Cloud Storage、Azure Blob Storageをバックアップstorageとしてサポートしています。上記のコマンドでは、例としてAmazon S3を使用しています。詳細については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
 
-During backup, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the backup task is completed and statistics such as total backup time, average backup speed, and backup data size are displayed.
+バックアップ中は、ターミナルに以下のようにプログレスバーが表示されます。プログレスバーが100%に達すると、バックアップタスクが完了し、合計バックアップ時間、平均バックアップ速度、バックアップデータサイズなどの統計情報が表示されます。
 
 ```shell
 Full Backup <-------------------------------------------------------------------------------> 100.00%
@@ -42,54 +42,52 @@ Checksum <----------------------------------------------------------------------
 *** ["Full Backup success summary"] *** [backup-checksum=3.597416ms] [backup-fast-checksum=2.36975ms] *** [total-take=4.715509333s] [BackupTS=435844546560000000] [total-kv=1131] [total-kv-size=250kB] [average-speed=53.02kB/s] [backup-data-size(after-compressed)=71.33kB] [Size=71330]
 ```
 
-## Get the backup time point of a snapshot backup
+## スナップショットバックアップのバックアップ時点を取得する {#get-the-backup-time-point-of-a-snapshot-backup}
 
-To manage a lot of backups, if you need to get the physical time of a snapshot backup, you can run the following command:
+多数のバックアップを管理するために、スナップショット バックアップの物理的な時間を取得する必要がある場合は、次のコマンドを実行できます。
 
 ```shell
 tiup br validate decode --field="end-version" \
 --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}" | tail -n1
 ```
 
-The output is as follows, corresponding to the physical time `2022-09-08 13:30:00 +0800 CST`:
+出力は次のようになり、物理時間`2022-09-08 13:30:00 +0800 CST`に対応します。
 
-```
-435844546560000000
-```
+    435844546560000000
 
-## Restore cluster snapshots
+## クラスタースナップショットを復元する {#restore-cluster-snapshots}
 
-> **Note:**
+> **注記：**
 >
-> - For BR v7.5.0 and earlier versions, the snapshot restore speed per TiKV node is approximately 100 MiB/s.
-> - Starting from BR v7.6.0, to address potential restore bottlenecks in scenarios with large-scale Regions, BR supports accelerating restore through the coarse-grained Region scattering algorithm (experimental). You can enable this feature by specifying the command-line parameter `--granularity="coarse-grained"`.
-> - Starting from BR v8.0.0, the snapshot restore through the coarse-grained Region scattering algorithm is generally available (GA) and enabled by default. BR improves the snapshot restore speed significantly by implementing various optimizations such as adopting the coarse-grained Region scattering algorithm, creating databases and tables in batches, reducing the mutual impact between SST file downloads and ingest operations, and accelerating the restore of table statistics. According to test results from real-world cases, the SST file download speed for snapshot restore is improved by approximately up to 10 times, the data restore speed per TiKV node stabilizes at 1.2 GiB/s, the end-to-end restore speed is improved by approximately 1.5 to 3 times, and 100 TiB of data can be restored within one hour.
-> - Starting from BR v8.2.0, the command line parameter `--granularity` is deprecated, and the coarse-grained Region scattering algorithm is enabled by default.
-> - Starting from BR v8.3.0, the snapshot restore task introduces available disk space checks for TiKV and TiFlash: at the beginning of the task, BR verifies whether TiKV and TiFlash have sufficient disk space based on the size of SST files to be restored; for TiKV v8.3.0 or later version, TiKV verifies whether it has sufficient disk space before downloading each SST file. If the space is insufficient according to any of these checks, the restore task fails with an error. You can skip the check at the beginning of the restore task by setting `--check-requirements=false`, but the disk space check before TiKV downloads each SST file cannot be skipped.
+> -   BR v7.5.0 以前のバージョンでは、TiKV ノードあたりのスナップショット復元速度は約 100 MiB/秒です。
+> -   BR v7.6.0以降、大規模リージョンのシナリオにおける潜在的なリストアボトルネックに対処するため、粗粒度のリージョン分散アルゴリズム（実験的）によるリストアの高速化がBRでサポートされます。この機能は、コマンドラインパラメータ`--granularity="coarse-grained"`指定することで有効化できます。
+> -   BR v8.0.0 以降では、粗粒度リージョン分散アルゴリズムによるスナップショット復元が一般提供 (GA) され、デフォルトで有効になっています。BRBR、粗粒度リージョン分散アルゴリズムの採用、データベースとテーブルのバッチ作成、SST ファイルのダウンロードと取り込み操作の相互影響の低減、テーブル統計の復元の高速化など、さまざまな最適化を実装することで、スナップショットの復元速度が大幅に向上しています。実際のケースでのテスト結果によると、スナップショット復元の SST ファイルのダウンロード速度は最大約 10 倍向上し、TiKV ノードあたりのデータ復元速度は 1.2 GiB/s で安定し、エンドツーエンドの復元速度は約 1.5～3 倍向上し、100 TiB のデータを 1 時間以内に復元できます。
+> -   BR v8.2.0 以降では、コマンド ライン パラメータ`--granularity`非推奨となり、粗粒度のリージョン分散アルゴリズムがデフォルトで有効になります。
+> -   BR v8.3.0 以降、スナップショット復元タスクでは、TiKV およびTiFlashの使用可能なディスク容量チェックが導入されています。タスクの開始時に、 BR は復元する SST ファイルのサイズに基づいて、TiKV およびTiFlash に十分なディスク容量があるかどうかを確認します。TiKV v8.3.0 以降のバージョンでは、TiKV は各 SST ファイルをダウンロードする前に、十分なディスク容量があるかどうかを確認します。これらのチェックのいずれかで容量が不足している場合、復元タスクはエラーで失敗します。1 `--check-requirements=false`設定することで復元タスクの開始時のチェックをスキップできますが、TiKV が各 SST ファイルをダウンロードする前のディスク容量チェックはスキップできません。
 
-You can restore a snapshot backup by running the `tiup br restore full` command. Run `tiup br restore full --help` to see the help information:
+スナップショットバックアップを復元するには、コマンド`tiup br restore full`を実行します。ヘルプ情報を表示するには、コマンド`tiup br restore full --help`を実行します。
 
-The following example restores the [preceding backup snapshot](#back-up-cluster-snapshots) to a target cluster:
+次の例では、 [前のバックアップスナップショット](#back-up-cluster-snapshots)ターゲット クラスターに復元します。
 
 ```shell
 tiup br restore full --pd "${PD_IP}:2379" \
 --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
-During restore, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restore task is completed and statistics such as total restore time, average restore speed, and total data size are displayed.
+復元中は、ターミナルに以下のようにプログレスバーが表示されます。プログレスバーが100%に達すると、復元タスクが完了し、合計復元時間、平均復元速度、合計データサイズなどの統計情報が表示されます。
 
 ```shell
 Full Restore <------------------------------------------------------------------------------> 100.00%
 *** ["Full Restore success summary"] *** [total-take=4.344617542s] [total-kv=5] [total-kv-size=327B] [average-speed=75.27B/s] [restore-data-size(after-compressed)=4.813kB] [Size=4813] [BackupTS=435844901803917314]
 ```
 
-### Restore a database or a table
+### データベースまたはテーブルを復元する {#restore-a-database-or-a-table}
 
-BR supports restoring partial data of a specified database or table from backup data. This feature allows you to filter out unwanted data and back up only a specific database or table.
+BRは、バックアップデータから指定されたデータベースまたはテーブルの部分的なデータを復元する機能をサポートしています。この機能により、不要なデータを除外し、特定のデータベースまたはテーブルのみをバックアップできます。
 
-**Restore a database**
+**データベースを復元する**
 
-To restore a database to a cluster, run the `tiup br restore db` command. The following example restores the `test` database from the backup data to the target cluster:
+データベースをクラスターに復元するには、 `tiup br restore db`コマンドを実行します。次の例では、 `test`データベースをバックアップデータからターゲットクラスターに復元します。
 
 ```shell
 tiup br restore db \
@@ -98,11 +96,11 @@ tiup br restore db \
 --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
-In the preceding command, `--db` specifies the name of the database to be restored.
+上記のコマンドでは、 `--db`復元するデータベースの名前を指定します。
 
-**Restore a table**
+**テーブルを復元する**
 
-To restore a single table to a cluster, run the `tiup br restore table` command. The following example restores the `test.usertable` table from the backup data to the target cluster:
+単一のテーブルをクラスターに復元するには、 `tiup br restore table`コマンドを実行します。次の例では、バックアップデータから`test.usertable`テーブルをターゲットクラスターに復元します。
 
 ```shell
 tiup br restore table --pd "${PD_IP}:2379" \
@@ -111,11 +109,11 @@ tiup br restore table --pd "${PD_IP}:2379" \
 --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
-In the preceding command, `--db` specifies the name of the database to be restored, and `--table` specifies the name of the table to be restored.
+上記のコマンドでは、 `--db`復元するデータベースの名前を指定し、 `--table`復元するテーブルの名前を指定します。
 
-**Restore multiple tables with table filter**
+**テーブルフィルターを使用して複数のテーブルを復元する**
 
-To restore multiple tables with more complex filter rules, run the `tiup br restore full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`. The following example restores tables that match the `db*.tbl*` filter rule from the backup data to the target cluster:
+より複雑なフィルタールールを持つ複数のテーブルを復元するには、 `tiup br restore full`コマンドを実行し、 [テーブルフィルター](/table-filter.md)に`--filter`または`-f`指定します。次の例では、バックアップデータから`db*.tbl*`フィルタールールに一致するテーブルをターゲットクラスターに復元します。
 
 ```shell
 tiup br restore full \
@@ -124,105 +122,103 @@ tiup br restore full \
 --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
-### Restore tables in the `mysql` schema
+### <code>mysql</code>スキーマ内のテーブルを復元する {#restore-tables-in-the-code-mysql-code-schema}
 
-- Starting from BR v5.1.0, when you back up snapshots, BR automatically backs up the **system tables** in the `mysql` schema, but does not restore these system tables by default.
-- Starting from v6.2.0, BR lets you specify `--with-sys-table` to restore **data in some system tables**.
-- Starting from v7.6.0, BR enables `--with-sys-table` by default, which means that BR restores **data in some system tables** by default.
+-   BR v5.1.0 以降では、スナップショットをバックアップすると、 BR は`mysql`スキーマ内の**システム テーブルを**自動的にバックアップしますが、デフォルトではこれらのシステム テーブルを復元しません。
+-   v6.2.0 以降、 BR**一部のシステム テーブルのデータを**復元するために`--with-sys-table`指定できます。
+-   v7.6.0 以降、 BR はデフォルトで`--with-sys-table`有効にします。つまり、 BR はデフォルトで**一部のシステム テーブルのデータ**を復元します。
 
-**BR can restore data in the following system tables:**
+**BR は次のシステム テーブルのデータを復元できます。**
 
-```
-+----------------------------------+
-| mysql.columns_priv               |
-| mysql.db                         |
-| mysql.default_roles              |
-| mysql.global_grants              |
-| mysql.global_priv                |
-| mysql.role_edges                 |
-| mysql.tables_priv                |
-| mysql.user                       |
-| mysql.bind_info                  |
-+----------------------------------+
-```
+    +----------------------------------+
+    | mysql.columns_priv               |
+    | mysql.db                         |
+    | mysql.default_roles              |
+    | mysql.global_grants              |
+    | mysql.global_priv                |
+    | mysql.role_edges                 |
+    | mysql.tables_priv                |
+    | mysql.user                       |
+    | mysql.bind_info                  |
+    +----------------------------------+
 
-**BR does not restore the following system tables:**
+**BR は次のシステム テーブルを復元しません。**
 
-- Statistics tables (`mysql.stat_*`). But statistics can be restored. See [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics).
-- System variable tables (`mysql.tidb` and `mysql.global_variables`)
-- [Other system tables](https://github.com/pingcap/tidb/blob/release-8.5/br/pkg/restore/snap_client/systable_restore.go#L31)
+-   統計表（ `mysql.stat_*` ）。ただし、統計は復元可能です。3 [統計のバックアップ](/br/br-snapshot-manual.md#back-up-statistics)参照してください。
+-   システム変数テーブル（ `mysql.tidb`と`mysql.global_variables` ）
+-   [その他のシステムテーブル](https://github.com/pingcap/tidb/blob/release-8.5/br/pkg/restore/snap_client/systable_restore.go#L31)
 
-```
-+-----------------------------------------------------+
-| capture_plan_baselines_blacklist                    |
-| column_stats_usage                                  |
-| gc_delete_range                                     |
-| gc_delete_range_done                                |
-| global_variables                                    |
-| stats_buckets                                       |
-| stats_extended                                      |
-| stats_feedback                                      |
-| stats_fm_sketch                                     |
-| stats_histograms                                    |
-| stats_history                                       |
-| stats_meta                                          |
-| stats_meta_history                                  |
-| stats_table_locked                                  |
-| stats_top_n                                         |
-| tidb                                                |
-+-----------------------------------------------------+
-```
+<!---->
 
-When you restore data related to system privilege, note that before restoring data, BR checks whether the system tables in the target cluster are compatible with those in the backup data. "Compatible" means that all the following conditions are met:
+    +-----------------------------------------------------+
+    | capture_plan_baselines_blacklist                    |
+    | column_stats_usage                                  |
+    | gc_delete_range                                     |
+    | gc_delete_range_done                                |
+    | global_variables                                    |
+    | stats_buckets                                       |
+    | stats_extended                                      |
+    | stats_feedback                                      |
+    | stats_fm_sketch                                     |
+    | stats_histograms                                    |
+    | stats_history                                       |
+    | stats_meta                                          |
+    | stats_meta_history                                  |
+    | stats_table_locked                                  |
+    | stats_top_n                                         |
+    | tidb                                                |
+    +-----------------------------------------------------+
 
-- The target cluster has the same system tables as the backup data.
-- The **number of columns** in the system privilege table of the target cluster is the same as that in the backup data. The column order is not important.
-- The columns in the system privilege table of the target cluster are compatible with that in the backup data. If the data type of the column is a type with a length (such as integer and string), the length in the target cluster must be >= the length in the backup data. If the data type of the column is an `ENUM` type, the number of `ENUM` values in the target cluster must be a superset of that in the backup data.
+システム権限に関連するデータをリストアする場合、 BR はリストア前に、ターゲットクラスタ内のシステムテーブルがバックアップデータ内のシステムテーブルと互換性があるかどうかを確認します。「互換性がある」とは、以下のすべての条件が満たされていることを意味します。
 
-## Performance and impact
+-   ターゲット クラスターには、バックアップ データと同じシステム テーブルがあります。
+-   ターゲットクラスタのシステム権限テーブルの**列数は、**バックアップデータの列数と同じです。列の順序は重要ではありません。
+-   ターゲットクラスタのシステム権限テーブルの列は、バックアップデータの列と互換性があります。列のデータ型が長さを持つ型（整数や文字列など）の場合、ターゲットクラスタの長さはバックアップデータの長さ以上である必要があります。列のデータ型が`ENUM`の場合、ターゲットクラスタの`ENUM`の値の数は、バックアップデータの3つの値のスーパーセットである必要があります。
 
-### Performance and impact of snapshot backup
+## パフォーマンスと影響 {#performance-and-impact}
 
-The backup feature has some impact on cluster performance (transaction latency and QPS). However, you can mitigate the impact by adjusting the number of backup threads [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) or by adding more clusters.
+### スナップショットバックアップのパフォーマンスと影響 {#performance-and-impact-of-snapshot-backup}
 
-To illustrate the impact of backup, this document lists the test conclusions of several snapshot backup tests:
+バックアップ機能はクラスターのパフォーマンス（トランザクションレイテンシーとQPS）に多少影響を及ぼします。ただし、バックアップスレッド数[`backup.num-threads`](/tikv-configuration-file.md#num-threads-1)を調整するか、クラスターを追加することで、影響を軽減できます。
 
-- (5.3.0 and earlier) When the backup threads of BR on a TiKV node take up 75% of the total CPU of the node, the QPS is reduced by 35% of the original QPS.
-- (5.4.0 and later) When there are no more than `8` threads of BR on a TiKV node and the cluster's total CPU utilization does not exceed 80%, the impact of BR tasks on the cluster (write and read) is 20% at most.
-- (5.4.0 and later) When there are no more than `8` threads of BR on a TiKV node and the cluster's total CPU utilization does not exceed 75%, the impact of BR tasks on the cluster (write and read) is 10% at most.
-- (5.4.0 and later) When there are no more than `8` threads of BR on a TiKV node and the cluster's total CPU utilization does not exceed 60%, BR tasks have little impact on the cluster (write and read).
+バックアップの影響を説明するために、このドキュメントではいくつかのスナップショット バックアップ テストのテスト結果をリストします。
 
-You can use the following methods to manually control the impact of backup tasks on cluster performance. However, these two methods also reduce the speed of backup tasks while reducing the impact of backup tasks on the cluster.
+-   (5.3.0 以前) TiKV ノード上のBRのバックアップ スレッドがノードの合計 CPU の 75% を占めると、QPS は元の QPS の 35% 減少します。
+-   (5.4.0 以降) TiKV ノードにBRのスレッドが`8`以下で、クラスターの合計 CPU 使用率が 80% を超えない場合、 BRタスク (書き込みと読み取り) がクラスターに与える影響は最大 20% になります。
+-   (5.4.0 以降) TiKV ノードにBRのスレッドが`8`以下で、クラスターの合計 CPU 使用率が 75% を超えない場合、 BRタスク (書き込みと読み取り) がクラスターに与える影響は最大で 10% になります。
+-   (5.4.0 以降) TiKV ノードにBRのスレッドが`8`以下で、クラスターの合計 CPU 使用率が 60% を超えない場合、 BRタスクはクラスターにほとんど影響を与えません (書き込みと読み取り)。
 
-- Recommended method: Adjust the TiKV configuration parameter [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1), which controls the number of worker threads used by backup tasks. Because backup is a CPU-intensive operation, tuning this parameter allows you to control TiKV's CPU usage more precisely, enabling better resource isolation and predictability. In most scenarios, simply adjusting `num-threads` is sufficient to limit the impact of backup on the cluster. Internal testing shows that when the number of threads is set to `8` or fewer, and overall cluster CPU usage remains below 60%, the impact of backup on foreground workloads is negligible.
+以下の方法を使用して、バックアップタスクがクラスターのパフォーマンスに与える影響を手動で制御できます。ただし、これらの2つの方法は、バックアップタスクがクラスターに与える影響を軽減する一方で、バックアップタスクの速度も低下させます。
 
-- Alternative method: If you have already set `backup.num-threads` to a small value (for example, `1`), but still want to further reduce the impact of backup on the cluster, consider using the `--ratelimit` parameter. This option limits the bandwidth used to write backup files to external storage, specified in MiB/s. Note that the actual rate limiting effect depends on the size of the compressed data. You can refer to the `backup data size (after compressed)` field in the logs for more insight. When `--ratelimit` is enabled, BR automatically sets `--concurrency` to `1` to reduce the number of concurrent requests.
+-   推奨方法：バックアップタスクで使用されるワーカースレッドの数を制御するTiKV構成パラメータ[`backup.num-threads`](/tikv-configuration-file.md#num-threads-1)調整します。バックアップはCPUを大量に消費する処理であるため、このパラメータを調整することでTiKVのCPU使用率をより正確に制御し、リソースの分離と予測可能性を向上させることができます。ほとんどのシナリオでは、 `num-threads`調整するだけで、バックアップがクラスターに与える影響を制限するのに十分です。社内テストでは、スレッド数を`8`以下に設定し、クラスター全体のCPU使用率が60%未満であれば、バックアップがフォアグラウンドワークロードに与える影響はごくわずかであることが示されています。
 
-> **Note:** 
+-   代替方法：既に`backup.num-threads`小さな値（例えば`1` ）に設定しているものの、バックアップがクラスターに与える影響をさらに軽減したい場合は、 `--ratelimit`パラメータの使用を検討してください。このオプションは、バックアップファイルを外部storageに書き込む際に使用する帯域幅を MiB/s 単位で制限します。実際のレート制限効果は、圧縮データのサイズによって異なります。詳細については、ログの`backup data size (after compressed)`フィールドを参照してください。 `--ratelimit`が有効になっている場合、 BR は同時リクエスト数を減らすために、自動的に`--concurrency`を`1`に設定します。
+
+> **注記：**
 >
-> Enabling `--ratelimit` will further reduce backup throughput. In most cases, if you are already performing backups during off-peak hours and have reduced `backup.num-threads` to 1 but still observe backup impact on foreground workloads, it typically indicates that the cluster is approaching its resource limits.
+> `--ratelimit`有効にすると、バックアップのスループットがさらに低下します。通常、オフピーク時にバックアップを実行しており、 `backup.num-threads` 1 に減らしてもフォアグラウンドのワークロードへのバックアップの影響が見られる場合、クラスターのリソース制限に近づいていることを示しています。
 >
-> In such situations, you can consider the following alternatives:
+> このような状況では、次の代替案を検討できます。
 >
-> - [Scale out a cluster](/tiup/tiup-cluster.md#scale-out-a-cluster) to increase available resources.
-> - Enable [`Log Backup`](/br/br-log-architecture.md) to offload backup pressure and minimize disruption to online workloads.
+> -   利用可能なリソースを増やすには[クラスターをスケールアウトする](/tiup/tiup-cluster.md#scale-out-a-cluster) 。
+> -   [`Log Backup`](/br/br-log-architecture.md)有効にすると、バックアップの負荷が軽減され、オンライン ワークロードの中断が最小限に抑えられます。
 
-The impact of backup on cluster performance can be reduced by limiting the backup threads number, but this affects the backup performance. The preceding tests show that the backup speed is proportional to the number of backup threads. When the number of threads is small, the backup speed is about 20 MiB/thread. For example, 5 backup threads on a single TiKV node can reach a backup speed of 100 MiB/s.
+バックアップスレッド数を制限することで、バックアップがクラスターのパフォーマンスに与える影響を軽減できますが、これはバックアップのパフォーマンスにも影響を及ぼします。前述のテストでは、バックアップ速度はバックアップスレッド数に比例することが示されています。スレッド数が少ない場合、バックアップ速度は約20MiB/スレッドです。例えば、単一のTiKVノードで5つのバックアップスレッドを実行すると、100MiB/秒のバックアップ速度に達する可能性があります。
 
-### Performance and impact of snapshot restore
+### スナップショット復元のパフォーマンスと影響 {#performance-and-impact-of-snapshot-restore}
 
-- During data restore, TiDB tries to fully utilize the TiKV CPU, disk IO, and network bandwidth resources. Therefore, it is recommended to restore the backup data on an empty cluster to avoid affecting the running applications.
-- The speed of restoring backup data is much related with the cluster configuration, deployment, and running applications. In internal tests, the restore speed of a single TiKV node can reach 100 MiB/s. The performance and impact of snapshot restore are varied in different user scenarios and should be tested in actual environments.
-- BR provides a coarse-grained Region scattering algorithm to accelerate Region restore in large-scale Region scenarios. This algorithm ensures that each TiKV node receives stable and evenly distributed download tasks, thus fully utilizing the resources of each TiKV node and achieving a rapid parallel recovery. In several real-world cases, the snapshot restore speed of the cluster is improved by about 3 times in large-scale Region scenarios.
-- Starting from v8.0.0, the `br` command-line tool introduces the `--tikv-max-restore-concurrency` parameter to control the maximum number of files that BR downloads and ingests per TiKV node. By configuring this parameter, you can also control the maximum length of the job queue (the maximum length of the job queue = 32 \* the number of TiKV nodes \* `--tikv-max-restore-concurrency`), thereby controlling the memory consumption of the BR node.
+-   データのリストア中、TiDBはTiKVのCPU、ディスクIO、ネットワーク帯域幅のリソースを最大限に活用しようとします。そのため、実行中のアプリケーションに影響を与えないように、バックアップデータは空のクラスタにリストアすることをお勧めします。
+-   バックアップデータの復元速度は、クラスタの構成、展開、および実行中のアプリケーションに大きく依存します。社内テストでは、単一のTiKVノードの復元速度は100MiB/秒に達する場合があります。スナップショット復元のパフォーマンスと影響は、ユーザーシナリオによって異なるため、実際の環境でテストする必要があります。
+-   BRは、大規模リージョンシナリオにおけるリージョンリストアを高速化するために、粗粒度のリージョン分散アルゴリズムを提供します。このアルゴリズムにより、各TiKVノードが安定的かつ均等に分散されたダウンロードタスクを受け取ることができるため、各TiKVノードのリソースを最大限に活用し、迅速な並列リカバリを実現できます。いくつかの実例において、大規模リージョンシナリオにおいて、クラスターのスナップショットリストア速度が約3倍向上しました。
+-   v8.0.0以降、コマンドラインツール`br`に、TiKVノードごとにBRがダウンロードおよびインジェストするファイルの最大数を制御するための`--tikv-max-restore-concurrency`パラメータが導入されました。このパラメータを設定することで、ジョブキューの最大長（ジョブキューの最大長 = 32 * TiKVノード数 * `--tikv-max-restore-concurrency` ）も制御でき、 BRノードのメモリ消費量を制御できます。
 
-    In normal cases, `--tikv-max-restore-concurrency` is automatically adjusted based on the cluster configuration, so manual configuration is unnecessary. If the **TiKV-Details** > **Backup & Import** > **Import RPC count** monitoring metric in Grafana shows that the number of files BR downloads remains close to 0 for a long time while the number of files that BR ingests consistently reaches the upper limit, it indicates that ingesting file tasks pile up and the job queue has reached its maximum length. In this case, you can take the following measures to alleviate the task pilling-up issue:
+    通常、 `--tikv-max-restore-concurrency`クラスタ構成に基づいて自動的に調整されるため、手動での設定は不要です。Grafana の**TiKV-Details** &gt; **Backup &amp; Import** &gt; **Import RPC count**監視メトリックで、 BRがダウンロードするファイル数が長時間 0 に近い状態が続く一方で、 BRが取り込むファイル数が常に上限に達している場合は、ファイル取り込みタスクが山積みになり、ジョブキューが最大長に達していることを示しています。この場合、タスク山積みの問題を軽減するために、以下の対策を講じることができます。
 
-    - Set the `--ratelimit` parameter to limit the download speed, ensuring sufficient resources for ingesting file tasks. For example, if the disk throughput of any TiKV node is `x MiB/s` and the network bandwidth for downloading backup files exceeds `x/2 MiB/s`, you can set the parameter as `--ratelimit x/2`. If the disk throughput of any TiKV node is `x MiB/s` and the network bandwidth for downloading backup files is less than or equal to `x/2 MiB/s`, you can leave the parameter `--ratelimit` unset.
-    - Increase the `--tikv-max-restore-concurrency` to increase the maximum length of the job queue.
+    -   パラメータ`--ratelimit`設定するとダウンロード速度が制限され、ファイル取り込みタスクに十分なリソースが確保されます。例えば、TiKVノードのディスクスループットが`x MiB/s`で、バックアップファイルのダウンロードに必要なネットワーク帯域幅が`x/2 MiB/s`超える場合は、パラメータを`--ratelimit x/2`に設定できます。TiKVノードのディスクスループットが`x MiB/s`で、バックアップファイルのダウンロードに必要なネットワーク帯域幅が`x/2 MiB/s`以下の場合は、パラメータ`--ratelimit`設定せずにそのままにしておくことができます。
+    -   ジョブ キューの最大長を増やすには、 `--tikv-max-restore-concurrency`を増やします。
 
-## See also
+## 参照 {#see-also}
 
-* [TiDB Backup and Restore Use Cases](/br/backup-and-restore-use-cases.md)
-* [br Command-line Manual](/br/use-br-command-line-tool.md)
-* [TiDB Snapshot Backup and Restore Architecture](/br/br-snapshot-architecture.md)
+-   [TiDB バックアップとリストアのユースケース](/br/backup-and-restore-use-cases.md)
+-   [br コマンドラインマニュアル](/br/use-br-command-line-tool.md)
+-   [TiDB スナップショットのバックアップと復元のアーキテクチャ](/br/br-snapshot-architecture.md)

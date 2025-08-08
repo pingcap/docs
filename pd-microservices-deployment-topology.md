@@ -1,31 +1,30 @@
 ---
 title: PD Microservice Deployment Topology
-summary: Learn the deployment topology of PD microservices based on the minimal TiDB topology.
+summary: 最小限の TiDB トポロジに基づく PD マイクロサービスのデプロイメント トポロジを学習します。
 ---
 
-# PD Microservice Deployment Topology
+# PDマイクロサービスデプロイメントトポロジ {#pd-microservice-deployment-topology}
 
-This document describes the deployment topology of [PD microservices](/pd-microservices.md) based on the minimal TiDB topology.
+このドキュメントでは、最小限の TiDB トポロジに基づく[PDマイクロサービス](/pd-microservices.md)のデプロイメント トポロジについて説明します。
 
-## Topology information
+## トポロジ情報 {#topology-information}
 
-| Instance              | Count | Physical machine configuration       | IP                                      | Configuration             |
-| :-------------------- | :---  | :----------------------------------- | :-------------------------------------- | :-------------------------|
-| TiDB                  | 2     | 16 VCore 32GB * 1                    | 10.0.1.1 <br/> 10.0.1.2                 | Default port <br/> Global directory configuration |
-| PD                    | 3     | 4 VCore 8GB * 1                      | 10.0.1.3 <br/> 10.0.1.4 <br/> 10.0.1.5  | Default port <br/> Global directory configuration |
-| TSO                   | 2     | 4 VCore 8GB * 1                      | 10.0.1.6 <br/> 10.0.1.7                 | Default port <br/> Global directory configuration |
-| Scheduling            | 2     | 4 VCore 8GB * 1                      | 10.0.1.8 <br/> 10.0.1.9                 | Default port <br/> Global directory configuration |
-| TiKV                  | 3     | 16 VCore 32GB 2TB (nvme ssd) * 1     | 10.0.1.10 <br/> 10.0.1.11 <br/> 10.0.1.12 | Default port <br/> Global directory configuration |
-| Monitoring & Grafana  | 1     | 4 VCore 8GB * 1 500GB (ssd)          | 10.0.1.13                               | Default port <br/> Global directory configuration |
+| 実例             | カウント | 物理マシン構成                        | IP                                      | コンフィグレーション                 |
+| :------------- | :--- | :----------------------------- | :-------------------------------------- | :------------------------- |
+| TiDB           | 2    | 16 VCore 32GB * 1              | 10.0.1.1<br/> 10.0.1.2                  | デフォルトポート<br/>グローバルディレクトリ構成 |
+| PD             | 3    | 4 VCore 8GB * 1                | 10.0.1.3<br/> 10.0.1.4<br/> 10.0.1.5    | デフォルトポート<br/>グローバルディレクトリ構成 |
+| TSO            | 2    | 4 VCore 8GB * 1                | 10.0.1.6<br/> 10.0.1.7                  | デフォルトポート<br/>グローバルディレクトリ構成 |
+| スケジュール         | 2    | 4 VCore 8GB * 1                | 10.0.1.8<br/> 10.0.1.9                  | デフォルトポート<br/>グローバルディレクトリ構成 |
+| TiKV           | 3    | 16 VCore 32GB 2TB（NVMe SSD）* 1 | 10.0.1.10<br/> 10.0.1.11<br/> 10.0.1.12 | デフォルトポート<br/>グローバルディレクトリ構成 |
+| モニタリングとGrafana | 1    | 4 VCore 8GB * 1 500GB (SSD)    | 10.0.1.13                               | デフォルトポート<br/>グローバルディレクトリ構成 |
 
-> **Note:**
+> **注記：**
 >
-> The IP addresses of the instances are given as examples only. In your actual deployment, replace the IP addresses with your actual IP addresses.
+> インスタンスのIPアドレスは例としてのみ示されています。実際の導入では、IPアドレスを実際のIPアドレスに置き換えてください。
 
-### Topology template
+### トポロジテンプレート {#topology-template}
 
-<details>
-<summary>Simple template for the PD microservice topology</summary>
+<details><summary>PDマイクロサービストポロジのシンプルなテンプレート</summary>
 
 ```yaml
 # # Global variables are applied to all deployments and used as the default value of
@@ -81,16 +80,16 @@ grafana_servers:
 
 </details>
 
-For detailed descriptions of the configuration items in the preceding TiDB cluster topology file, see [Topology configuration file for deploying TiDB using TiUP](/tiup/tiup-cluster-topology-reference.md).
+前述の TiDB クラスター トポロジ ファイルの構成項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジ構成ファイル](/tiup/tiup-cluster-topology-reference.md)参照してください。
 
-### Key parameters
+### 主なパラメータ {#key-parameters}
 
-- The instance-level `host` configuration in `tso_servers` only supports IP address, not domain name.
-- For detailed descriptions of TSO configuration items, see [TSO configuration file](/tso-configuration-file.md).
-- The instance-level `host` configuration in `scheduling_servers` only supports IP address, not domain name.
-- For detailed descriptions of Scheduling configuration items, see [Scheduling configuration file](/scheduling-configuration-file.md).
+-   `tso_servers`のインスタンスのレベル`host`構成では、ドメイン名ではなく IP アドレスのみがサポートされます。
+-   TSO 構成項目の詳細については、 [TSO 構成ファイル](/tso-configuration-file.md)参照してください。
+-   `scheduling_servers`のインスタンスのレベル`host`構成では、ドメイン名ではなく IP アドレスのみがサポートされます。
+-   スケジュール設定項目の詳細については、 [スケジュール設定ファイル](/scheduling-configuration-file.md)参照してください。
 
-> **Note:**
+> **注記：**
 >
-> - You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the target machines. You can customize the user, or keep the user consistent with the control machine.
-> - If you configure the deployment directory as a relative path, the cluster will be deployed in the home directory of the user.
+> -   設定ファイルに`tidb`ユーザーを手動で作成する必要はありません。TiUPTiUPコンポーネントは、ターゲットマシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、制御マシンと同じユーザーを維持することもできます。
+> -   デプロイメント ディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。

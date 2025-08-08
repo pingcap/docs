@@ -1,42 +1,42 @@
 ---
 title: Two Availability Zones in One Region Deployment
-summary: Learn the deployment solution of two availability zones in one region.
+summary: 1 つのリージョンに 2 つの可用性ゾーンを展開するソリューションについて学習します。
 ---
 
-# Two Availability Zones in One Region Deployment
+# 1つのリージョンに2つのアベイラビリティゾーンを展開 {#two-availability-zones-in-one-region-deployment}
 
-This document introduces the deployment mode of two availability zones (AZs) in one region, including the architecture, configuration, how to enable this deployment mode, and how to use replicas in this mode.
+このドキュメントでは、アーキテクチャ、構成、このデプロイメント モードを有効にする方法、このモードでレプリカを使用する方法など、1 つのリージョン内の 2 つのアベイラビリティ ゾーン (AZ) のデプロイメント モードについて説明します。
 
-The term "region" in this document refers to a geographic area, while the capitalized "Region" refers to a basic unit of data storage in TiKV. "AZ" refers to an isolated location within a region, and each region has multiple AZs. The solution described in this document also applies to the scenario where multiple data centers are located in a single city.
+このドキュメントにおける「リージョン」という用語は地理的な領域を指し、「リージョン」はTiKVにおけるデータstorageの基本単位を指します。「AZ」はリージョン内の独立した場所を指し、各リージョンには複数のAZが存在します。このドキュメントで説明するソリューションは、単一の都市に複数のデータセンターが存在するシナリオにも適用されます。
 
-## Introduction
+## 導入 {#introduction}
 
-TiDB usually adopts the multi-AZ deployment solution to ensure high availability and disaster recovery capability. The multi-AZ deployment solution includes multiple deployment modes, such as multiple AZs in one region and multiple AZs in two regions. This document introduces the deployment mode of two AZs in one region. Deployed in this mode, TiDB can also meet the requirements of high availability and disaster recovery, with a lower cost. This deployment solution adopts Data Replication Auto Synchronous mode, or the DR Auto-Sync mode.
+TiDBは通常、高可用性と災害復旧機能を確保するために、マルチAZ配置ソリューションを採用しています。マルチAZ配置ソリューションには、1つのリージョンに複数のAZを配置する、2つのリージョンに複数のAZを配置するなど、複数の配置モードがあります。このドキュメントでは、1つのリージョンに2つのAZを配置する配置モードを紹介します。このモードで配置することで、TiDBは低コストで高可用性と災害復旧の要件を満たすことができます。この配置ソリューションは、データレプリケーション自動同期モード、またはDR自動同期モードを採用しています。
 
-Under the mode of two AZs in one region, the two AZs are less than 50 kilometers apart. They are usually located in the same region or in two adjacent regions. The network latency between the two AZs is lower than 1.5 milliseconds and the bandwidth is higher than 10 Gbps.
+1つのリージョンに2つのAZを配置するモードでは、2つのAZ間の距離は50キロメートル未満です。通常、これらは同じリージョンまたは隣接する2つのリージョンに配置されます。2つのAZ間のネットワークレイテンシーは1.5ミリ秒未満で、帯域幅は10Gbpsを超えます。
 
-## Deployment architecture
+## デプロイメントアーキテクチャ {#deployment-architecture}
 
-This section takes the example of a region where two availability zones AZ1 and AZ2 are located respectively in the east and west. AZ1 is the primary AZ and AZ2 is the disaster recovery (DR) AZ.
+このセクションでは、AZ1 と AZ2 という 2 つのアベイラビリティゾーンがそれぞれ東と西に配置されているリージョンを例に説明します。AZ1 はプライマリ AZ で、AZ2 は災害復旧 (DR) AZ です。
 
-The architecture of the cluster deployment is as follows:
+クラスター展開のアーキテクチャは次のとおりです。
 
-- The cluster has six replicas: three Voter replicas in AZ1, and two Voter replicas along with one Learner replica in AZ2. For the TiKV component, each rack has a proper label.
-- The Raft protocol is adopted to ensure consistency and high availability of data, which is transparent to users.
+-   クラスターには6つのレプリカがあります。AZ1には3つのVoterレプリカ、AZ2には2つのVoterレプリカと1つのLearnerレプリカがあります。TiKVコンポーネントでは、各ラックに適切なラベルが付けられています。
+-   ユーザーにとって透過的なデータの一貫性と高可用性を確保するために、 Raftプロトコルが採用されています。
 
 ![2-AZ-in-1-region architecture](/media/two-dc-replication-1.png)
 
-This deployment solution defines three statuses to control and identify the replication status of the cluster, which restricts the replication mode of TiKV. The replication mode of the cluster can automatically and adaptively switch between the three statuses. For details, see the [Status switch](#status-switch) section.
+このデプロイメントソリューションでは、クラスタのレプリケーション状態を制御および識別するために3つのステータスを定義しており、これによりTiKVのレプリケーションモードが制限されます。クラスタのレプリケーションモードは、3つのステータス間を自動的かつ適応的に切り替えることができます。詳細については、セクション[ステータススイッチ](#status-switch)ご覧ください。
 
-- **sync**: Synchronous replication mode. In this mode, at least one replica in the disaster recovery AZ synchronizes with the primary AZ. The Raft algorithm ensures that each log is replicated to the DR based on the label.
-- **async**: Asynchronous replication mode. In this mode, the disaster recovery AZ is not fully synchronized with the primary AZ. The Raft algorithm follows the majority protocol to replicate logs.
-- **sync-recover**: Synchronous recovery mode. In this mode, the disaster recovery AZ is not fully synchronized with the primary AZ. Raft gradually switches to the label replication mode and then reports the label information to PD.
+-   **sync** : 同期レプリケーションモード。このモードでは、災害復旧AZ内の少なくとも1つのレプリカがプライマリAZと同期します。RaftRaftにより、各ログはラベルに基づいてDRに複製されます。
+-   **async** : 非同期レプリケーションモード。このモードでは、ディザスタリカバリAZはプライマリAZと完全に同期されません。RaftアルゴリズムはRaftプロトコルに従ってログを複製します。
+-   **sync-recover** : 同期リカバリモード。このモードでは、ディザスタリカバリAZはプライマリAZと完全に同期されていません。Raftは徐々にラベルレプリケーションモードに切り替え、ラベル情報をPDに報告します。
 
-## Configuration
+## コンフィグレーション {#configuration}
 
-### Example
+### 例 {#example}
 
-The following `tiup topology.yaml` example file is a typical topology configuration for the two availability zones in one region deployment mode:
+次の`tiup topology.yaml`サンプル ファイルは、1 つのリージョン展開モードにおける 2 つの可用性ゾーンの一般的なトポロジ構成です。
 
 ```yaml
 # # Global variables are applied to all deployments and used as the default value of
@@ -87,128 +87,120 @@ alertmanager_servers:
   - host: 10.63.10.60
 ```
 
-### Placement Rules
+### 配置ルール {#placement-rules}
 
-To deploy a cluster based on the planned topology, you need to use [Placement Rules](/configure-placement-rules.md) to determine the locations of the cluster replicas. Taking the deployment of four replicas (two Voter replicas are at the primary AZ, one Voter replica, and one Learner replica are at the disaster recovery AZ) as an example, you can use the Placement Rules to configure the replicas as follows:
+計画されたトポロジに基づいてクラスターをデプロイするには、 [配置ルール](/configure-placement-rules.md)使用してクラスターレプリカの配置場所を決定する必要があります。4 つのレプリカ（Voter レプリカ 2 つをプライマリ AZ、Voter レプリカ 1 つをディザスタリカバリ AZ に、 Learnerレプリカ 1 つをディザスタリカバリ AZ に配置）のデプロイを例に挙げると、配置ルールを使用してレプリカを次のように設定できます。
 
-```
-cat rule.json
-[
-  {
-    "group_id": "pd",
-    "group_index": 0,
-    "group_override": false,
-    "rules": [
+    cat rule.json
+    [
       {
         "group_id": "pd",
-        "id": "az-east",
-        "start_key": "",
-        "end_key": "",
-        "role": "voter",
-        "count": 3,
-        "label_constraints": [
+        "group_index": 0,
+        "group_override": false,
+        "rules": [
           {
-            "key": "az",
-            "op": "in",
-            "values": [
-              "east"
+            "group_id": "pd",
+            "id": "az-east",
+            "start_key": "",
+            "end_key": "",
+            "role": "voter",
+            "count": 3,
+            "label_constraints": [
+              {
+                "key": "az",
+                "op": "in",
+                "values": [
+                  "east"
+                ]
+              }
+            ],
+            "location_labels": [
+              "az",
+              "rack",
+              "host"
+            ]
+          },
+          {
+            "group_id": "pd",
+            "id": "az-west-1",
+            "start_key": "",
+            "end_key": "",
+            "role": "follower",
+            "count": 2,
+            "label_constraints": [
+              {
+                "key": "az",
+                "op": "in",
+                "values": [
+                  "west"
+                ]
+              }
+            ],
+            "location_labels": [
+              "az",
+              "rack",
+              "host"
+            ]
+          },
+          {
+            "group_id": "pd",
+            "id": "az-west-2",
+            "start_key": "",
+            "end_key": "",
+            "role": "learner",
+            "count": 1,
+            "label_constraints": [
+              {
+                "key": "az",
+                "op": "in",
+                "values": [
+                  "west"
+                ]
+              }
+            ],
+            "location_labels": [
+              "az",
+              "rack",
+              "host"
             ]
           }
-        ],
-        "location_labels": [
-          "az",
-          "rack",
-          "host"
-        ]
-      },
-      {
-        "group_id": "pd",
-        "id": "az-west-1",
-        "start_key": "",
-        "end_key": "",
-        "role": "follower",
-        "count": 2,
-        "label_constraints": [
-          {
-            "key": "az",
-            "op": "in",
-            "values": [
-              "west"
-            ]
-          }
-        ],
-        "location_labels": [
-          "az",
-          "rack",
-          "host"
-        ]
-      },
-      {
-        "group_id": "pd",
-        "id": "az-west-2",
-        "start_key": "",
-        "end_key": "",
-        "role": "learner",
-        "count": 1,
-        "label_constraints": [
-          {
-            "key": "az",
-            "op": "in",
-            "values": [
-              "west"
-            ]
-          }
-        ],
-        "location_labels": [
-          "az",
-          "rack",
-          "host"
         ]
       }
     ]
-  }
-]
-```
 
-To use the configurations in `rule.json`, run the following command to back up the existing configuration to the `default.json` file and overwrite the existing configuration with `rule.json`:
-
-{{< copyable "shell-regular" >}}
+`rule.json`の構成を使用するには、次のコマンドを実行して既存の構成を`default.json`ファイルにバックアップし、既存の構成を`rule.json`で上書きします。
 
 ```bash
 pd-ctl config placement-rules rule-bundle load --out="default.json"
 pd-ctl config placement-rules rule-bundle save --in="rule.json"
 ```
 
-If you need to roll back to the previous configuration, you can restore the backup file `default.json` or write the following JSON file manually and overwrite the current configuration with this JSON file:
+以前の構成にロールバックする必要がある場合は、バックアップ ファイル`default.json`を復元するか、次の JSON ファイルを手動で作成し、この JSON ファイルで現在の構成を上書きします。
 
-```
-cat default.json
-[
-  {
-    "group_id": "pd",
-    "group_index": 0,
-    "group_override": false,
-    "rules": [
+    cat default.json
+    [
       {
         "group_id": "pd",
-        "id": "default",
-        "start_key": "",
-        "end_key": "",
-        "role": "voter",
-        "count": 5
+        "group_index": 0,
+        "group_override": false,
+        "rules": [
+          {
+            "group_id": "pd",
+            "id": "default",
+            "start_key": "",
+            "end_key": "",
+            "role": "voter",
+            "count": 5
+          }
+        ]
       }
     ]
-  }
-]
-```
 
-### Enable the DR Auto-Sync mode
+### DR自動同期モードを有効にする {#enable-the-dr-auto-sync-mode}
 
-The replication mode is controlled by PD. You can configure the replication mode in the PD configuration file using one of the following methods:
+レプリケーションモードはPDによって制御されます。PD設定ファイルでレプリケーションモードを設定するには、以下のいずれかの方法を使用します。
 
-- Method 1: Configure the PD configuration file, and then deploy a cluster.
-
-    {{< copyable "" >}}
+-   方法 1: PD 構成ファイルを構成し、クラスターをデプロイします。
 
     ```toml
     [replication-mode]
@@ -224,9 +216,7 @@ The replication mode is controlled by PD. You can configure the replication mode
     pause-region-split = false  
     ```
 
-- Method 2: If you have deployed a cluster, use pd-ctl commands to modify the configurations of PD.
-
-    {{< copyable "" >}}
+-   方法 2: クラスターをデプロイしている場合は、pd-ctl コマンドを使用して PD の構成を変更します。
 
     ```shell
     config set replication-mode dr-auto-sync
@@ -237,25 +227,21 @@ The replication mode is controlled by PD. You can configure the replication mode
     config set replication-mode dr-auto-sync dr-replicas 2
     ```
 
-Descriptions of configuration items:
+構成項目の説明:
 
-+ `replication-mode` is the replication mode to be enabled. In the preceding example, it is set to `dr-auto-sync`. By default, the majority protocol is used.
-+ `label-key` is used to distinguish different AZs and needs to match Placement Rules. In this example, the primary AZ is "east" and the disaster recovery AZ is "west".
-+ `primary-replicas` is the number of Voter replicas in the primary AZ.
-+ `dr-replicas` is the number of Voter replicas in the disaster recovery (DR) AZ.
-+ `wait-store-timeout` is the waiting time for switching to asynchronous replication mode when network isolation or failure occurs. If the time of network failure exceeds the waiting time, asynchronous replication mode is enabled. The default waiting time is 60 seconds.
-+ `wait-recover-timeout` is the waiting time for switching back to the `sync-recover` status after the network recovers. The default value is 0 seconds.
-+ `pause-region-split` controls whether to pause Region split operations in the `async_wait` and `async` statuses. Pausing Region split can prevent temporary partial data loss in the DR AZ when synchronizing data in the `sync-recover` status. The default value is `false`.
+-   `replication-mode`は有効にするレプリケーションモードです。上記の例では`dr-auto-sync`に設定されています。デフォルトでは、多数決プロトコルが使用されます。
+-   `label-key`は異なる AZ を区別するために使用され、配置ルールに一致する必要があります。この例では、プライマリ AZ は「east」、災害復旧 AZ は「west」です。
+-   `primary-replicas`はプライマリ AZ 内の Voter レプリカの数です。
+-   `dr-replicas`は、災害復旧 (DR) AZ 内の投票者レプリカの数です。
+-   `wait-store-timeout` 、ネットワークの分離または障害発生時に非同期レプリケーションモードに切り替えるまでの待機時間です。ネットワーク障害の時間が待機時間を超えると、非同期レプリケーションモードが有効になります。デフォルトの待機時間は60秒です。
+-   `wait-recover-timeout` 、ネットワークが回復した後に状態`sync-recover`に戻るまでの待機時間です。デフォルト値は0秒です。
+-   `pause-region-split` 、ステータス`async_wait`および`async`においてリージョン分割操作を一時停止するかどうかを制御します。リージョン分割を一時停止すると、ステータス`sync-recover`でデータを同期する際に DR AZ で一時的な部分的なデータ損失が発生するのを防ぐことができます。デフォルト値は`false`です。
 
-To check the current replication status of the cluster, use the following API:
-
-{{< copyable "shell-regular" >}}
+クラスターの現在のレプリケーション ステータスを確認するには、次の API を使用します。
 
 ```bash
 curl http://pd_ip:pd_port/pd/api/v1/replication_mode/status
 ```
-
-{{< copyable "shell-regular" >}}
 
 ```bash
 {
@@ -267,32 +253,32 @@ curl http://pd_ip:pd_port/pd/api/v1/replication_mode/status
 }
 ```
 
-#### Status switch
+#### ステータススイッチ {#status-switch}
 
-The replication mode of a cluster can automatically and adaptively switch between three statuses:
+クラスターのレプリケーション モードは、次の 3 つのステータス間を自動的かつ適応的に切り替えることができます。
 
-- When the cluster is normal, the synchronous replication mode is enabled to maximize the data integrity of the disaster recovery AZ.
-- When the network connection between the two AZs fails or the disaster recovery AZ breaks down, after a pre-set protective interval, the cluster enables the asynchronous replication mode to ensure the availability of the application.
-- When the network reconnects or the disaster recovery AZ recovers, the TiKV node joins the cluster again and gradually replicates the data. Finally, the cluster switches to the synchronous replication mode.
+-   クラスターが正常な場合、同期レプリケーション モードが有効になり、災害復旧 AZ のデータ整合性が最大限に高まります。
+-   2 つの AZ 間のネットワーク接続に障害が発生した場合、または災害復旧 AZ が故障した場合、事前に設定された保護間隔の後に、クラスターは非同期レプリケーション モードを有効にして、アプリケーションの可用性を確保します。
+-   ネットワークが再接続するか、災害復旧AZが復旧すると、TiKVノードはクラスターに再び参加し、データを段階的にレプリケーションします。最終的に、クラスターは同期レプリケーションモードに切り替わります。
 
-The details for the status switch are as follows:
+ステータススイッチの詳細は次のとおりです。
 
-1. **Initialization**: At the initialization stage, the cluster is in the synchronous replication mode. PD sends the status information to TiKV, and all TiKV nodes strictly follow the synchronous replication mode to work.
+1.  **初期化**：初期化段階では、クラスターは同期レプリケーションモードになります。PDはステータス情報をTiKVに送信し、すべてのTiKVノードは同期レプリケーションモードに厳密に従って動作します。
 
-2. **Switch from sync to async**: PD regularly checks the heartbeat information of TiKV to judge whether the TiKV node fails or is disconnected. If the number of failed nodes exceeds the number of replicas of the primary AZ (`primary-replicas`) and the disaster recovery AZ (`dr-replicas`), the synchronous replication mode can no longer serve the data replication and it is necessary to switch the status. When the failure or disconnect time exceeds the time set by `wait-store-timeout`, PD switches the status of the cluster to the async mode. Then PD sends the status of async to all TiKV nodes, and the replication mode for TiKV switches from two-availability-zone replication to the native Raft majority.
+2.  **同期から非同期への切り替え**：PDは定期的にTiKVのハートビート情報をチェックし、TiKVノードに障害が発生したか、切断されているかを判断します。障害が発生したノードの数がプライマリAZ（ `primary-replicas` ）と災害復旧AZ（ `dr-replicas` ）のレプリカ数を超えると、同期レプリケーションモードではデータレプリケーションを提供できなくなり、ステータスを切り替える必要があります。障害または切断の時間が`wait-store-timeout`で設定された時間を超えると、PDはクラスターのステータスを非同期モードに切り替えます。次に、PDはすべてのTiKVノードに非同期のステータスを送信し、TiKVのレプリケーションモードは2つのアベイラビリティゾーンのレプリケーションからネイティブのRaftマジョリティに切り替わります。
 
-3. **Switch from async to sync**: PD regularly checks the heartbeat information of TiKV to judge whether the TiKV node is reconnected. If the number of failed nodes is less than the number of replicas of the primary AZ (`primary-replicas`) and the disaster recovery AZ (`dr-replicas`), the synchronous replication mode can be enabled again. PD first switches the status of the cluster to sync-recover and sends the status information to all TiKV nodes. All Regions of TiKV gradually switch to the two-availability-zone synchronous replication mode and then report the heartbeat information to PD. PD records the status of TiKV Regions and calculates the recovery progress. When all TiKV Regions finish the switching, PD switches the replication mode to sync.
+3.  **非同期から同期への切り替え**: PD は TiKV のハートビート情報を定期的にチェックし、TiKV ノードが再接続されたかどうかを判断します。障害が発生したノードの数がプライマリ AZ ( `primary-replicas` ) と災害復旧 AZ ( `dr-replicas` ) のレプリカ数より少ない場合、同期レプリケーション モードを再度有効にできます。PD は最初にクラスターのステータスを sync-recover に切り替え、そのステータス情報をすべての TiKV ノードに送信します。TiKV のすべてのリージョンは、2 つのアベイラビリティ ゾーンの同期レプリケーション モードに徐々に切り替わり、ハートビート情報を PD に報告します。PD は TiKV リージョンのステータスを記録し、リカバリの進行状況を計算します。すべての TiKV リージョンで切り替えが完了すると、PD はレプリケーション モードを同期に切り替えます。
 
-### Disaster recovery
+### 災害復旧 {#disaster-recovery}
 
-This section introduces the disaster recovery solution of the two AZs in one region deployment.
+このセクションでは、1 つのリージョン展開における 2 つの AZ の災害復旧ソリューションを紹介します。
 
-When a disaster occurs to a cluster in the synchronous replication mode, you can perform data recovery with `RPO = 0`:
+同期レプリケーションモードのクラスタに災害が発生した場合、 `RPO = 0`でデータリカバリを実行できます。
 
-- If the primary AZ fails and most of the Voter replicas are lost, but complete data exists in the disaster recovery AZ, the lost data can be recovered from the disaster recovery AZ. At this time, manual intervention is required with professional tools. You can [get support](/support.md) from PingCAP or the community for a recovery solution.
+-   プライマリ AZ に障害が発生し、Voter レプリカの大部分が失われたものの、災害復旧 AZ に完全なデータが存在する場合、失われたデータは災害復旧 AZ から復旧できます。この場合、専門ツールを用いた手動介入が必要です。復旧ソリューションについては、PingCAP またはコミュニティから[サポートを受ける](/support.md)参照してください。
 
-- If the disaster recovery AZ fails and a few Voter replicas are lost, the cluster automatically switches to the asynchronous replication mode.
+-   災害復旧 AZ に障害が発生し、いくつかの Voter レプリカが失われた場合、クラスターは自動的に非同期レプリケーション モードに切り替わります。
 
-When a disaster occurs to a cluster that is not in the synchronous replication mode and you cannot perform data recovery with `RPO = 0`:
+同期レプリケーションモードになっていないクラスタに災害が発生し、 `RPO = 0`でデータリカバリを実行できない場合:
 
-- If most of the Voter replicas are lost, manual intervention is required with professional tools. You can [get support](/support.md) from PingCAP or the community for a recovery solution.
+-   Voterレプリカの大部分が失われた場合は、専門ツールを用いた手動介入が必要です。PingCAPまたはコミュニティから復旧ソリューションを[サポートを受ける](/support.md)することもできます。

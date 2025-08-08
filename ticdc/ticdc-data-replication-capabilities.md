@@ -1,50 +1,50 @@
 ---
 title: TiCDC Data Replication Capabilities
-summary: Learn the data replication capabilities of TiCDC.
+summary: TiCDC のデータ複製機能について学習します。
 ---
 
-# TiCDC Data Replication Capabilities
+# TiCDC データレプリケーション機能 {#ticdc-data-replication-capabilities}
 
-[TiCDC](/ticdc/ticdc-overview.md) (TiDB Change Data Capture) is a core component in the TiDB ecosystem for real-time data replication. This document provides a detailed explanation of TiCDC data replication capabilities.
+[TiCDC](/ticdc/ticdc-overview.md) （TiDB Change Data Capture）は、リアルタイムデータレプリケーションを実現するTiDBエコシステムの中核コンポーネントです。このドキュメントでは、TiCDCのデータレプリケーション機能について詳しく説明します。
 
-## How TiCDC works
+## TiCDCの仕組み {#how-ticdc-works}
 
-- TiCDC listens to TiKV change logs (Raft logs) and converts row-level data changes (`INSERT`, `UPDATE`, and `DELETE` operations) into downstream-compatible SQL statements. TiCDC does not rely on the original SQL statements executed on the upstream database. For details, see [how TiCDC processes data changes](/ticdc/ticdc-overview.md#implementation-of-processing-data-changes).
+-   TiCDCはTiKV変更ログ（Raftログ）をリッスンし、行レベルのデータ変更（ `INSERT` `DELETE`操作） `UPDATE`下流と互換性のあるSQL文に変換します。TiCDCは上流データベースで実行された元のSQL文に依存しません。詳細については、 [TiCDCがデータ変更を処理する方法](/ticdc/ticdc-overview.md#implementation-of-processing-data-changes)参照してください。
 
-- TiCDC generates logical operations (such as `INSERT`, `UPDATE`, and `DELETE`) equivalent to SQL semantics, rather than restoring the original SQL statements executed on the upstream database one by one. For details, see [how TiCDC processes data changes](/ticdc/ticdc-overview.md#implementation-of-processing-data-changes).
+-   TiCDCは、上流データベースで実行された元のSQL文`UPDATE`一つ一つ復元するのではなく、SQLセマンティクスに相当する論理演算（ `INSERT`など）を生成します。詳細については[TiCDCがデータ変更を処理する方法](/ticdc/ticdc-overview.md#implementation-of-processing-data-changes) `DELETE`してください。
 
-- TiCDC ensures eventual consistency of transactions. With [redo log](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios) enabled, TiCDC can guarantee eventual consistency in disaster recovery scenarios. With [Syncpoint](/ticdc/ticdc-upstream-downstream-check.md#enable-syncpoint) enabled, TiCDC supports consistent snapshot reads and data consistency validation.
+-   TiCDCはトランザクションの最終的な一貫性を保証します。1 [再実行ログ](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)有効にすると、TiCDCは災害復旧シナリオにおいて最終的な一貫性を保証できます。3 [同期ポイント](/ticdc/ticdc-upstream-downstream-check.md#enable-syncpoint)有効にすると、TiCDCは一貫性のあるスナップショット読み取りとデータ整合性の検証をサポートします。
 
-## Supported downstream systems
+## サポートされている下流システム {#supported-downstream-systems}
 
-TiCDC supports replicating data to various downstream systems, including the following:
+TiCDC は、次のようなさまざまな下流システムへのデータの複製をサポートしています。
 
-- [TiDB database or other MySQL-compatible databases](/ticdc/ticdc-sink-to-mysql.md)
-- [Apache Kafka](/ticdc/ticdc-sink-to-kafka.md)
-- [Message Queue (MQ)-type sinks](/ticdc/ticdc-changefeed-config.md#sink), such as [Pulsar](/ticdc/ticdc-sink-to-pulsar.md)
-- [Storage services (Amazon S3, GCS, Azure Blob Storage, and NFS)](/ticdc/ticdc-sink-to-cloud-storage.md)
-- [Snowflake, ksqlDB, SQL Server via Confluent Cloud integration](/ticdc/integrate-confluent-using-ticdc.md)
-- [Apache Flink for consuming Kafka-replicated data](/replicate-data-to-kafka.md)
+-   [TiDBデータベースまたはその他のMySQL互換データベース](/ticdc/ticdc-sink-to-mysql.md)
+-   [アパッチカフカ](/ticdc/ticdc-sink-to-kafka.md)
+-   [メッセージキュー（MQ）タイプのシンク](/ticdc/ticdc-changefeed-config.md#sink) 、例えば[パルサー](/ticdc/ticdc-sink-to-pulsar.md)
+-   [ストレージ サービス (Amazon S3、GCS、Azure Blob Storage、NFS)](/ticdc/ticdc-sink-to-cloud-storage.md)
+-   [Confluent Cloud 統合による Snowflake、ksqlDB、SQL Server](/ticdc/integrate-confluent-using-ticdc.md)
+-   [Kafka で複製されたデータを消費するための Apache Flink](/replicate-data-to-kafka.md)
 
-## Scope of data replication
+## データ複製の範囲 {#scope-of-data-replication}
 
-TiCDC supports the following types of upstream data changes:
+TiCDC は、次の種類のアップストリーム データの変更をサポートします。
 
-+ **Supported:**
+-   **サポート対象:**
 
-    - DDL and DML statements (excluding system tables).
-    - Index operations (`ADD INDEX`, `CREATE INDEX`): to reduce the impact on changefeed replication latency, if the downstream is TiDB, TiCDC [asynchronously executes the `ADD INDEX` and `CREATE INDEX` DDL operations](/ticdc/ticdc-ddl.md#asynchronous-execution-of-add-index-and-create-index-ddls).
-    - Foreign key constraint DDL statements (`ADD FOREIGN KEY`): TiCDC does **not** replicate upstream system variable settings. You need to manually configure [`foreign_key_checks`](/system-variables.md#foreign_key_checks) in the downstream to determine whether the downstream foreign key constraint check is enabled. Additionally, when writing data to the downstream, TiCDC automatically enables the session-level setting `SET SESSION foreign_key_checks = OFF;`. Therefore, even if global foreign key checks are enabled in the downstream, the data written by TiCDC will not trigger foreign key constraint validation.
+    -   DDL および DML ステートメント (システム テーブルを除く)。
+    -   インデックス操作 ( `ADD INDEX` 、 `CREATE INDEX` ): ダウンストリームが TiDB、TiCDC [`ADD INDEX`および`CREATE INDEX` DDL操作を非同期に実行します。](/ticdc/ticdc-ddl.md#asynchronous-execution-of-add-index-and-create-index-ddls)の場合、変更フィードレプリケーションのレイテンシーへの影響を軽減します。
+    -   外部キー制約DDL文（ `ADD FOREIGN KEY` ）：TiCDCは上流のシステム変数設定を複製し**ません**。下流の外部キー制約チェックを有効にするには、下流で[`foreign_key_checks`](/system-variables.md#foreign_key_checks)手動で設定する必要があります。また、下流にデータを書き込む際に、TiCDCはセッションレベルの設定`SET SESSION foreign_key_checks = OFF;`自動的に有効にします。したがって、下流でグローバル外部キーチェックが有効になっている場合でも、TiCDCによって書き込まれたデータは外部キー制約の検証をトリガーしません。
 
-+ **Not supported**:
+-   **サポートされていません**:
 
-    - DDL and DML statements executed in upstream system tables (including `mysql.*` and `information_schema.*`).
-    - DDL and DML statements executed in upstream temporary tables.
-    - DQL (Data Query Language) and DCL (Data Control Language) statements.
+    -   アップストリーム システム テーブルで実行された DDL および DML ステートメント ( `mysql.*`および`information_schema.*`を含む)。
+    -   アップストリーム一時テーブルで実行された DDL および DML ステートメント。
+    -   DQL (データ クエリ言語) および DCL (データ制御言語) ステートメント。
 
-## Limitations
+## 制限事項 {#limitations}
 
-- TiCDC does not support certain scenarios. For details, see [unsupported scenarios](/ticdc/ticdc-overview.md#unsupported-scenarios).
-- TiCDC only verifies the integrity of upstream data changes. It does not validate whether the changes conform to upstream or downstream constraints. If the data violates downstream constraints, TiCDC will return an error when writing to the downstream.
+-   TiCDCは特定のシナリオをサポートしていません。詳細については[サポートされていないシナリオ](/ticdc/ticdc-overview.md#unsupported-scenarios)参照してください。
+-   TiCDCは上流データの変更の整合性のみを検証します。変更が上流または下流の制約に準拠しているかどうかは検証しません。データが下流の制約に違反している場合、TiCDCは下流への書き込み時にエラーを返します。
 
-    For example: When a changefeed is configured to filter out all DDL events, if the upstream executes a `DROP COLUMN` operation but continues to write `INSERT` statements involving that column, TiCDC will fail to replicate these DML changes to the downstream because of table schema mismatches.
+    たとえば、変更フィードがすべての DDL イベントをフィルターするように構成されている場合、アップストリームが`DROP COLUMN`操作を実行しても、その列に関連する`INSERT`ステートメントの書き込みを継続すると、テーブル スキーマの不一致により、TiCDC はこれらの DML 変更をダウンストリームに複製できません。

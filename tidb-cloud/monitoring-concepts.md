@@ -1,44 +1,44 @@
 ---
 title: Monitoring
-summary: Learn about monitoring concepts for TiDB Cloud.
+summary: TiDB Cloudの監視概念について学習します。
 ---
 
-# Monitoring
+# 監視 {#monitoring}
 
-Monitoring in TiDB Cloud provides tools and integrations that enable you to oversee cluster performance, track activity, and respond to issues in a timely manner.
+TiDB Cloudのモニタリングでは、クラスターのパフォーマンスを監視し、アクティビティを追跡し、問題にタイムリーに対応できるようにするツールと統合が提供されます。
 
-## Built-in metrics
+## 組み込みメトリック {#built-in-metrics}
 
-Built-in metrics refer to a full set of standard metrics of your cluster that TiDB Cloud collects and presents on the **Metrics** page. With these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
+組み込みメトリクスとは、 TiDB Cloudが収集し、**メトリクス**ページに表示される、クラスタの標準メトリクスの完全なセットを指します。これらのメトリクスを使用することで、パフォーマンスの問題を簡単に特定し、現在のデータベース環境が要件を満たしているかどうかを判断できます。
 
-For more information, see [TiDB Cloud Built-in Metrics](/tidb-cloud/built-in-monitoring.md).
+詳細については[TiDB Cloud組み込みメトリクス](/tidb-cloud/built-in-monitoring.md)参照してください。
 
-## Built-in alerting
+## 組み込みアラート {#built-in-alerting}
 
-Built-in alerting refers to the cluster alerting mechanism that TiDB Cloud provides to assist you in monitoring your cluster. Currently, TiDB Cloud provides the following three types of alerts:
+組み込みアラートとは、 TiDB Cloud がクラスタの監視を支援するために提供するクラスタアラートメカニズムを指します。現在、 TiDB Cloud は以下の3種類のアラートを提供しています。
 
-- Resource usage alerts
+-   リソース使用状況アラート
 
-- Data migration alerts
+-   データ移行アラート
 
-- Changefeed alerts
+-   チェンジフィードアラート
 
-On the Alerts page of the TiDB Cloud console, you can view alerts of your cluster, edit alert rules, and subscribe to alert notification emails.
+TiDB Cloudコンソールの [アラート] ページでは、クラスターのアラートを表示したり、アラート ルールを編集したり、アラート通知メールをサブスクライブしたりできます。
 
-For more information, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
+詳細については[TiDB Cloud組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md)参照してください。
 
-## Cluster events
+## クラスタイベント {#cluster-events}
 
-In TiDB Cloud, an event indicates a change in your TiDB Cloud cluster. TiDB Cloud logs the historical events at the cluster level to help you track cluster activities. You can view the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.
+TiDB Cloudでは、イベントはTiDB Cloudクラスターの変化を示します。TiDB TiDB Cloud はクラスターレベルで過去のイベントを記録し、クラスターのアクティビティを追跡できるようにします。記録されたイベントは、 **「イベント」**ページで確認でき、イベントの種類、ステータス、メッセージ、トリガー時刻、トリガーユーザーなどが含まれます。
 
-For more information, see [TiDB Cloud Cluster Event](/tidb-cloud/tidb-cloud-events.md).
+詳細については[TiDB Cloudクラスタイベント](/tidb-cloud/tidb-cloud-events.md)参照してください。
 
-## Third-party metrics integrations
+## サードパーティの指標の統合 {#third-party-metrics-integrations}
 
-TiDB Cloud lets you integrate any of the following third-party metrics services to receive TiDB Cloud alerts and view the performance metrics of your TiDB cluster.
+TiDB Cloud を使用すると、次のサードパーティ メトリック サービスを統合して、 TiDB Cloudアラートを受信し、TiDB クラスターのパフォーマンス メトリックを表示できます。
 
-- [Datadog integration (Preview)](/tidb-cloud/monitor-datadog-integration.md)
+-   [Datadog 統合（プレビュー）](/tidb-cloud/monitor-datadog-integration.md)
 
-- [Prometheus and Grafana integration (Beta)](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
+-   [Prometheus と Grafana の統合 (ベータ版)](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
 
-- [New Relic integration (Preview)](/tidb-cloud/monitor-new-relic-integration.md)
+-   [New Relic 統合（プレビュー）](/tidb-cloud/monitor-new-relic-integration.md)

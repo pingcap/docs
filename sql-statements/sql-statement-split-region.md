@@ -1,21 +1,21 @@
 ---
 title: Split Region
-summary: An overview of the usage of Split Region for the TiDB database.
+summary: TiDB データベースの Split リージョンの使用法の概要。
 ---
 
-# Split Region
+# 分割リージョン {#split-region}
 
-For each new table created in TiDB, one [Region](/tidb-storage.md#region) is segmented by default to store the data of this table. This default behavior is controlled by `split-table` in the TiDB configuration file. When the data in this Region exceeds the default Region size limit, the Region starts to split into two.
+TiDBに新しいテーブルが作成されると、デフォルトで[リージョン](/tidb-storage.md#region)つのセグメントが分割され、そのテーブルのデータが保存されます。このデフォルトの動作は、TiDB設定ファイルの`split-table`によって制御されます。このリージョン内のデータがデフォルトのリージョンサイズ制限を超えると、リージョンは2つに分割され始めます。
 
-In the above case, because there is only one Region at the beginning, all write requests occur on the TiKV where the Region is located. If there are a large number of writes for the newly created table, hotspots are caused.
+上記のケースでは、開始時にリージョンが1つしかないため、すべての書き込みリクエストは、そのリージョンが配置されているTiKV上で発生します。新規作成されたテーブルへの書き込みが大量に発生すると、ホットスポットが発生します。
 
-To solve the hotspot problem in the above scenario, TiDB introduces the pre-split function, which can pre-split multiple Regions for a certain table according to the specified parameters and scatter them to each TiKV node.
+上記のシナリオのホットスポット問題を解決するために、TiDB は事前分割機能を導入しました。この機能は、指定されたパラメータに従って特定のテーブルの複数のリージョンを事前に分割し、各 TiKV ノードに分散させることができます。
 
-> **Note:**
+> **注記：**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 SplitRegionStmt ::=
@@ -38,27 +38,27 @@ RowValue ::=
     "(" ValuesOpt ")"
 ```
 
-## Usage of Split Region
+## 分割リージョンの使用 {#usage-of-split-region}
 
-There are two types of Split Region syntax:
+分割リージョン構文には 2 つの種類があります。
 
-- The syntax of even split:
+-   均等分割の構文:
 
     ```sql
     SPLIT TABLE table_name [INDEX index_name] BETWEEN (lower_value) AND (upper_value) REGIONS region_num
     ```
 
-    `BETWEEN lower_value AND upper_value REGIONS region_num` defines the upper boundary, the lower boundary, and the Region amount. Then the current region will be evenly spilt into the number of regions (as specified in `region_num`) between the upper and lower boundaries.
+    `BETWEEN lower_value AND upper_value REGIONS region_num`上限、下限、そしてリージョンの量を定義します。すると、現在のリージョンは、上限と下限の間のリージョン数（ `region_num`で指定）に均等に分割されます。
 
-- The syntax of uneven split:
+-   不均等分割の構文:
 
     ```sql
     SPLIT TABLE table_name [INDEX index_name] BY (value_list) [, (value_list)] ...
     ```
 
-    `BY value_list…` specifies a series of points manually, based on which the current Region is spilt. It is suitable for scenarios with unevenly distributed data.
+    `BY value_list…` 、現在のリージョンを分割するポイントの系列を手動で指定します。データが不均一に分散しているシナリオに適しています。
 
-The following example shows the result of the `SPLIT` statement:
+次の例は、 `SPLIT`のステートメントの結果を示しています。
 
 ```sql
 +--------------------+----------------------+
@@ -68,186 +68,184 @@ The following example shows the result of the `SPLIT` statement:
 +--------------------+----------------------+
 ```
 
-* `TOTAL_SPLIT_REGION`: the number of newly split Regions.
-* `SCATTER_FINISH_RATIO`: the completion rate of scattering for newly split Regions. `1.0` means that all Regions are scattered. `0.5` means that only half of the Regions are scattered and the rest are being scattered.
+-   `TOTAL_SPLIT_REGION` : 新しく分割されたリージョンの数。
+-   `SCATTER_FINISH_RATIO` : 新しく分割された領域の分散の完了率。2 `1.0`すべての領域が分散されていることを意味します。4 `0.5`領域の半分だけが分散され、残りは分散中であることを意味します。
 
-> **Note:**
+> **注記：**
 >
-> The following two session variables might affect the behavior of the `SPLIT` statement:
+> 次の 2 つのセッション変数は、 `SPLIT`ステートメントの動作に影響を与える可能性があります。
 >
-> - `tidb_wait_split_region_finish`: It might take a while to scatter the Regions. This duration depends on PD scheduling and TiKV loads. This variable is used to control when executing the `SPLIT REGION` statement whether to return the results to the client until all Regions are scattered. If its value is set to `1` (by default), TiDB returns the results only after the scattering is completed. If its value is set to `0`, TiDB returns the results regardless of the scattering status.
-> - `tidb_wait_split_region_timeout`: This variable is to set the execution timeout of the `SPLIT REGION` statement, in seconds. The default value is 300s. If the `split` operation is not completed within the duration, TiDB returns a timeout error.
+> -   `tidb_wait_split_region_finish` : リージョンの分散には時間がかかる場合があります。この時間はPDスケジューリングとTiKVの負荷に依存します。この変数は、 `SPLIT REGION`ステートメントを実行する際に、すべてのリージョンが分散されるまで結果をクライアントに返すかどうかを制御するために使用されます。値が`1` （デフォルト）に設定されている場合、TiDBは分散が完了した後にのみ結果を返します。値が`0`に設定されている場合、TiDBは分散状態に関係なく結果を返します。
+> -   `tidb_wait_split_region_timeout` : この変数は、 `SPLIT REGION`のステートメントの実行タイムアウトを秒単位で設定します。デフォルト値は300秒です。4 `split`操作が指定時間内に完了しない場合、TiDBはタイムアウトエラーを返します。
 
-### Split Table Region
+### テーブルリージョンを分割 {#split-table-region}
 
-The key of row data in each table is encoded by `table_id` and `row_id`. The format is as follows:
+各テーブルの行データのキーは`table_id`と`row_id`でエンコードされます。形式は以下のとおりです。
 
 ```go
 t[table_id]_r[row_id]
 ```
 
-For example, when `table_id` is 22 and `row_id` is 11:
+たとえば、 `table_id`が 22 で`row_id`が 11 の場合:
 
 ```go
 t22_r11
 ```
 
-Row data in the same table have the same `table_id`, but each row has its unique `row_id` that can be used for Region split.
+同じテーブル内の行データには同じ`table_id`含まれますが、各行にはリージョン分割に使用できる固有の`row_id`含まれます。
 
-#### Even Split
+#### 均等分割 {#even-split}
 
-Because `row_id` is an integer, the value of the key to be split can be calculated according to the specified `lower_value`, `upper_value`, and `region_num`. TiDB first calculates the step value (`step = (upper_value - lower_value)/region_num`). Then split will be done evenly per each "step" between `lower_value` and `upper_value` to generate the number of Regions as specified by `region_num`.
+`row_id`整数なので、分割するキーの値は指定された`lower_value` 、 `upper_value` 、 `region_num`に従って計算できます。TiDBはまずステップ値（ `step = (upper_value - lower_value)/region_num` ）を計算します。次に、 `lower_value`から`upper_value`までの各「ステップ」ごとに均等に分割し、 `region_num`で指定された数のリージョンを生成します。
 
-For example, if you want 16 evenly split Regions split from key range`minInt64`~`maxInt64` for table t, you can use this statement:
+たとえば、テーブル t のキー範囲`minInt64` ～ `maxInt64`から 16 個の均等に分割された領域が必要な場合は、次のステートメントを使用できます。
 
 ```sql
 SPLIT TABLE t BETWEEN (-9223372036854775808) AND (9223372036854775807) REGIONS 16;
 ```
 
-This statement splits table t into 16 Regions between minInt64 and maxInt64. If the given primary key range is smaller than the specified one, for example, 0~1000000000, you can use 0 and 1000000000 take place of minInt64 and maxInt64 respectively to split Regions.
+このステートメントは、テーブル t を minInt64 から maxInt64 までの 16 個の Region に分割します。指定された主キーの範囲が、例えば 0~1000000000 のように、指定された範囲よりも小さい場合は、minInt64 と maxInt64 の代わりにそれぞれ 0 と 1000000000 を指定して Region を分割できます。
 
 ```sql
 SPLIT TABLE t BETWEEN (0) AND (1000000000) REGIONS 16;
 ```
 
-#### Uneven split
+#### 不平等な分割 {#uneven-split}
 
-If the known data is unevenly distributed, and you want a Region to be split respectively in key ranges -inf ~ 10000, 10000 ~ 90000, and 90000 ~ +inf, you can achieve this by setting fixed points, as shown below:
+既知のデータが不均一に分布していて、リージョンをキー範囲 -inf ~ 10000、10000 ~ 90000、90000 ~ +inf にそれぞれ分割したい場合は、以下に示すように固定ポイントを設定することでこれを実現できます。
 
 ```sql
 SPLIT TABLE t BY (10000), (90000);
 ```
 
-### Split index Region
+### 分割インデックスリージョン {#split-index-region}
 
-The key of the index data in the table is encoded by `table_id`, `index_id`, and the value of the index column. The format is as follows:
+テーブル内のインデックスデータのキーは、 `table_id` `index_id`およびインデックス列の値でエンコードされます。形式は次のとおりです。
 
 ```go
 t[table_id]_i[index_id][index_value]
 ```
 
-For example, when `table_id` is 22, `index_id` is 5, and `index_value` is abc:
+たとえば、 `table_id`が`index_id`が`index_value`が abc の場合:
 
 ```go
 t22_i5abc
 ```
 
-The `table_id` and `index_id` of the same index data in one table is the same. To split index Regions, you need to split Regions based on `index_value`.
+同じテーブル内の同じインデックスデータの`table_id`と`index_id`同じです。インデックスの Region を分割するには、 `index_value`に基づいて Region を分割する必要があります。
 
-#### Even Spilt
+#### こぼしても {#even-spilt}
 
-The way to split index evenly works the same as splitting data evenly. However, calculating the value of step is more complicated, because `index_value` might not be an integer.
+インデックスを均等に分割する方法は、データを均等に分割する方法と同じです。ただし、 `index_value`整数ではない可能性があるため、ステップの値の計算はより複雑になります。
 
-The values of `upper` and `lower` are encoded into a byte array firstly. After removing the longest common prefix of `lower` and `upper` byte array, the first 8 bytes of `lower` and `upper` are converted into the uint64 format. Then `step = (upper - lower)/num` is calculated. After that, the calculated step is encoded into a byte array, which is appended to the longest common prefix of the `lower` and `upper` byte array for index split. Here is an example:
+まず、 `upper`と`lower`の値がバイト配列にエンコードされます。5と`upper`バイト配列の最長共通プレフィックス`lower`削除した後、 `lower`と`upper`の最初の8バイトがuint64形式に変換されます。次に`step = (upper - lower)/num`計算されます。その後、計算されたステップがバイト配列にエンコードされ、 `lower`と`upper`バイト配列の最長共通プレフィックスに追加されてインデックス分割が行われます。以下に例を示します。
 
-If the column of the `idx` index is of the integer type, you can use the following SQL statement to split index data:
+`idx`インデックスの列が整数型の場合、次の SQL 文を使用してインデックス データを分割できます。
 
 ```sql
 SPLIT TABLE t INDEX idx BETWEEN (-9223372036854775808) AND (9223372036854775807) REGIONS 16;
 ```
 
-This statement splits the Region of index idx in table t into 16 Regions from `minInt64` to `maxInt64`.
+このステートメントは、テーブル t のインデックス idx のリージョンを`minInt64`から`maxInt64`までの 16 の Region に分割します。
 
-If the column of index idx1 is of varchar type, and you want to split index data by prefix letters.
+インデックス idx1 の列が varchar 型であり、インデックス データをプレフィックス文字で分割する場合。
 
 ```sql
 SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("z") REGIONS 25;
 ```
 
-This statement splits index idx1 into 25 Regions from a~z. The range of Region 1 is `[minIndexValue, b)`; the range of Region 2 is `[b, c)`; … the range of Region 25 is `[y, minIndexValue]`. For the `idx` index, data with the `a` prefix is written into Region 1, and data with the `b` prefix is written into Region 2.
+この文は、インデックス idx1 を a～z の 25 個のリージョンに分割します。リージョン1 の範囲は`[minIndexValue, b)` 、リージョン2 の範囲は`[b, c)` 、…リージョン25 の範囲は`[y, minIndexValue]`です。インデックス`idx`場合、プレフィックスが`a`のデータはリージョン1 に書き込まれ、プレフィックスが`b`のデータはリージョン2 に書き込まれます。
 
-In the split method above, both data with the `y` and `z` prefixes are written into Region 25, because the upper bound is not `z`, but `{` (the character next to `z` in ASCII). Therefore, a more accurate split method is as follows:
+上記の分割方法では、 `y`と`z`プレフィックスを持つデータは両方ともリージョン25に書き込まれます。これは、上限が`z`ではなく`{` （ASCIIコードで`z`次の文字）であるためです。したがって、より正確な分割方法は次のとおりです。
 
 ```sql
 SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("{") REGIONS 26;
 ```
 
-This statement splits index idx1 of the table `t` into 26 Regions from a~`{`. The range of Region 1 is `[minIndexValue, b)`; the range of Region 2 is `[b, c)`; … the range of Region 25 is `[y, z)`, and the range of Region 26 is `[z, maxIndexValue)`. 
+この文は、テーブル`t`のインデックス idx1 を a~ `{`の26のリージョンに分割します。リージョン1 の範囲は`[minIndexValue, b)` 、リージョン2 の範囲は`[b, c)` 、リージョン25 の範囲は`[y, z)` 、リージョン26 の範囲は`[z, maxIndexValue)`です。
 
-If the column of index `idx2` is of time type like timestamp/datetime, and you want to split index Region by year:
+インデックス`idx2`の列がタイムスタンプ/日付時刻のような時間型で、インデックスのリージョンを年ごとに分割する場合:
 
 ```sql
 SPLIT TABLE t INDEX idx2 BETWEEN ("2010-01-01 00:00:00") AND ("2020-01-01 00:00:00") REGIONS 10;
 ```
 
-This statement splits the Region of index `idx2` in table `t` into 10 Regions from `2010-01-01 00:00:00` to `2020-01-01 00:00:00`. The range of Region 1 is `[minIndexValue, 2011-01-01 00:00:00)`; the range of Region 2 is `[2011-01-01 00:00:00, 2012-01-01 00:00:00)`.
+この文は、表`t`のインデックス`idx2`のリージョンを`2010-01-01 00:00:00`から`2020-01-01 00:00:00`までの10のRegionに分割します。Region 1のリージョンは`[minIndexValue, 2011-01-01 00:00:00)` 、 リージョン 2の範囲は`[2011-01-01 00:00:00, 2012-01-01 00:00:00)`です。
 
-If you want to split the index Region by day, see the following example:
+インデックスリージョンを日ごとに分割する場合は、次の例を参照してください。
 
 ```sql
 SPLIT TABLE t INDEX idx2 BETWEEN ("2020-06-01 00:00:00") AND ("2020-07-01 00:00:00") REGIONS 30;
 ```
 
-This statement splits the data of June 2020 of index `idex2` in table `t` into 30 Regions, each Region representing 1 day.
+このステートメントは、表`t`のインデックス`idex2`の 2020 年 6 月のデータを 30 の地域に分割します。各リージョンは1 日を表します。
 
-Region split methods for other types of index columns are similar.
+他のタイプのインデックス列のリージョン分割方法も同様です。
 
-For data Region split of joint indexes, the only difference is that you can specify multiple columns values.
+結合インデックスのデータリージョン分割の場合、唯一の違いは複数の列の値を指定できることです。
 
-For example, index `idx3 (a, b)` contains 2 columns, with column `a` of timestamp type and column `b` int. If you just want to do a time range split according to column `a`, you can use the SQL statement for splitting time index of a single column. In this case, do not specify the value of column `b` in `lower_value` and `upper_velue`.
+例えば、インデックス`idx3 (a, b)`は2つの列があり、列`a`はタイムスタンプ型、列`b` int 型です。列`a`に基づいて時間範囲を分割したいだけの場合は、単一列の時間インデックスを分割するSQL文を使用できます。この場合、列`b`の値を`lower_value`と`upper_velue`に指定しないでください。
 
 ```sql
 SPLIT TABLE t INDEX idx3 BETWEEN ("2010-01-01 00:00:00") AND ("2020-01-01 00:00:00") REGIONS 10;
 ```
 
-Within the same range of time, if you want to do one more split according to column b column. Just specify the value for column b when splitting.
+同じ時間範囲内で、列bの値に基づいてさらに分割したい場合は、分割時に列bの値を指定するだけです。
 
 ```sql
 SPLIT TABLE t INDEX idx3 BETWEEN ("2010-01-01 00:00:00", "a") AND ("2010-01-01 00:00:00", "z") REGIONS 10;
 ```
 
-This statement splits 10 Regions in the range of a~z according to the value of column b, with the same time prefix as column a. If the value specified for column a is different, the value of column b might not be used in this case.
+このステートメントは、列bの値に基づいて、列aと同じ時刻プレフィックスを持つa～zの範囲にある10個のリージョンを分割します。列aに指定された値が異なる場合、この場合、列bの値は使用されない可能性があります。
 
-If the primary key of the table is a [non-clustered index](/clustered-indexes.md), you need to use backticks ``` ` ``` to escape the `PRIMARY` keyword when splitting Regions. For example:
+テーブルの主キーが[非クラスター化インデックス](/clustered-indexes.md)の場合、リージョンを分割する際に`PRIMARY`キーワードをエスケープするためにバッククォート`` ` ``使用する必要があります。例:
 
 ```sql
 SPLIT TABLE t INDEX `PRIMARY` BETWEEN (-9223372036854775808) AND (9223372036854775807) REGIONS 16;
 ```
 
-#### Uneven Split
+#### 不平等な分割 {#uneven-split}
 
-Index data can also be split by specified index values.
+インデックス データは、指定されたインデックス値によって分割することもできます。
 
-For example, there is `idx4 (a,b)`, with column `a` of the varchar type and column `b` of the timestamp type.
+たとえば、列`a`が varchar 型で列`b`が timestamp 型の`idx4 (a,b)`あります。
 
 ```sql
 SPLIT TABLE t1 INDEX idx4 BY ("a", "2000-01-01 00:00:01"), ("b", "2019-04-17 14:26:19"), ("c", "");
 ```
 
-This statement specifies 3 values to split 4 Regions. The range of each Region is as follows:
+このステートメントは、4つの領域を分割するための3つの値を指定します。各リージョンの範囲は次のとおりです。
 
-```
-region1  [ minIndexValue               , ("a", "2000-01-01 00:00:01"))
-region2  [("a", "2000-01-01 00:00:01") , ("b", "2019-04-17 14:26:19"))
-region3  [("b", "2019-04-17 14:26:19") , ("c", "")                   )
-region4  [("c", "")                    , maxIndexValue               )
-```
+    region1  [ minIndexValue               , ("a", "2000-01-01 00:00:01"))
+    region2  [("a", "2000-01-01 00:00:01") , ("b", "2019-04-17 14:26:19"))
+    region3  [("b", "2019-04-17 14:26:19") , ("c", "")                   )
+    region4  [("c", "")                    , maxIndexValue               )
 
-### Split Regions for partitioned tables
+### パーティションテーブルの分割領域 {#split-regions-for-partitioned-tables}
 
-Splitting Regions for partitioned tables is the same as splitting Regions for ordinary tables. The only difference is that the same split operation is performed for every partition.
+パーティションテーブルのリージョン分割は、通常のテーブルのリージョン分割と同じです。唯一の違いは、すべてのパーティションに対して同じ分割操作が実行される点です。
 
-+ The syntax of even split:
+-   均等分割の構文:
 
     ```sql
     SPLIT [PARTITION] TABLE t [PARTITION] [(partition_name_list...)] [INDEX index_name] BETWEEN (lower_value) AND (upper_value) REGIONS region_num
     ```
 
-+ The syntax of uneven split:
+-   不均等分割の構文:
 
     ```sql
     SPLIT [PARTITION] TABLE table_name [PARTITION (partition_name_list...)] [INDEX index_name] BY (value_list) [, (value_list)] ...
     ```
 
-#### Examples of Split Regions for partitioned tables
+#### パーティションテーブルの分割領域の例 {#examples-of-split-regions-for-partitioned-tables}
 
-1. Create a partitioned table `t`. Suppose that you want to create a Hash table divided into two partitions. The example statement is as follows:
+1.  パーティションテーブル`t`を作成します。2つのパーティションに分割されたハッシュテーブルを作成するとします。例のステートメントは次のとおりです。
 
     ```sql
     CREATE TABLE t (a INT, b INT, INDEX idx(a)) PARTITION BY HASH(a) PARTITIONS 2;
     ```
 
-    After creating the table `t`, a Region is split for each partition. Use the [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md) syntax to view the Regions of this table:
+    テーブル`t`作成した後、各パーティションにリージョンが分割されます。このテーブルのリージョンを表示するには、 [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)構文を使用します。
 
     ```sql
     SHOW TABLE t REGIONS;
@@ -262,19 +260,19 @@ Splitting Regions for partitioned tables is the same as splitting Regions for or
     +-----------+-----------+---------+-----------+-----------------+------------------+------------+---------------+------------+----------------------+------------------+
     ```
 
-2. Use the `SPLIT` syntax to split a Region for each partition. Suppose that you want to split the data in the `[0,10000]` range of each partition into four Regions. The example statement is as follows:
+2.  各パーティションのリージョンを分割するには、 `SPLIT`構文を使用します。各パーティションの`[0,10000]`範囲のデータを 4 つのリージョンに分割するとします。例のステートメントは次のとおりです。
 
     ```sql
     split partition table t between (0) and (10000) regions 4;
     ```
 
-    In the above statement, `0` and `10000` respectively represent the `row_id` of the upper and lower boundaries corresponding to the hotspot data you want to scatter.
+    上記のステートメントでは、 `0`と`10000`それぞれ、散布するホットスポット データに対応する上限と下限の`row_id`表します。
 
-    > **Note:**
+    > **注記：**
     >
-    > This example only applies to scenarios where hotspot data is evenly distributed. If the hotspot data is unevenly distributed in a specified data range, refer to the syntax of uneven split in [Split Regions for partitioned tables](#split-regions-for-partitioned-tables).
+    > この例は、ホットスポットデータが均等に分散されているシナリオにのみ適用されます。指定されたデータ範囲内でホットスポットデータが不均等に分散されている場合は、 [パーティションテーブルの分割領域](#split-regions-for-partitioned-tables)の不均等分割の構文を参照してください。
 
-3. Use the `SHOW TABLE REGIONS` syntax to view the Regions of this table again. You can see that this table now has ten Regions, each partition with five Regions, four of which are the row data and one is the index data.
+3.  `SHOW TABLE REGIONS`構文を使用して、このテーブルのRegionを再度表示します。テーブルには10個のRegionがあり、各パーティションには5個のRegionが含まれています。そのうち4個は行データ、1個はインデックスデータです。
 
     ```sql
     SHOW TABLE t REGIONS;
@@ -297,17 +295,17 @@ Splitting Regions for partitioned tables is the same as splitting Regions for or
     +-----------+---------------+---------------+-----------+-----------------+------------------+------------+---------------+------------+----------------------+------------------+
     ```
 
-4. You can also split Regions for the index of each partition. For example, you can split the `[1000,10000]` range of the `idx` index into two Regions. The example statement is as follows:
+4.  各パーティションのインデックスのRegionを分割することもできます。例えば、インデックス`idx`の`[1000,10000]`の範囲を2つのRegionに分割できます。例のステートメントは次のとおりです。
 
     ```sql
     SPLIT PARTITION TABLE t INDEX idx BETWEEN (1000) AND (10000) REGIONS 2;
     ```
 
-#### Examples of Split Region for a single partition
+#### 単一パーティションの分割リージョンの例 {#examples-of-split-region-for-a-single-partition}
 
-You can specify the partition to be split.
+分割するパーティションを指定できます。
 
-1. Create a partitioned table. Suppose that you want to create a Range partitioned table split into three partitions. The example statement is as follows:
+1.  パーティションテーブルを作成します。3つのパーティションに分割された範囲パーティションテーブルを作成するとします。例のステートメントは次のとおりです。
 
     ```sql
     CREATE TABLE t ( a INT, b INT, INDEX idx(b)) PARTITION BY RANGE( a ) (
@@ -316,19 +314,19 @@ You can specify the partition to be split.
         PARTITION p3 VALUES LESS THAN (MAXVALUE) );
     ```
 
-2. Suppose that you want to split the data in the `[0,10000]` range of the `p1` partition into two Regions. The example statement is as follows:
+2.  パーティション`p1`の`[0,10000]`の範囲のデータを2つのリージョンに分割するとします。例のステートメントは次のとおりです。
 
     ```sql
     SPLIT PARTITION TABLE t PARTITION (p1) BETWEEN (0) AND (10000) REGIONS 2;
     ```
 
-3. Suppose that you want to split the data in the `[10000,20000]` range of the `p2` partition into two Regions. The example statement is as follows:
+3.  パーティション`p2`の`[10000,20000]`の範囲のデータを2つのリージョンに分割するとします。例のステートメントは次のとおりです。
 
     ```sql
     SPLIT PARTITION TABLE t PARTITION (p2) BETWEEN (10000) AND (20000) REGIONS 2;
     ```
 
-4. You can use the `SHOW TABLE REGIONS` syntax to view the Regions of this table:
+4.  `SHOW TABLE REGIONS`構文を使用して、このテーブルの地域を表示できます。
 
     ```sql
     SHOW TABLE t REGIONS;
@@ -346,52 +344,50 @@ You can specify the partition to be split.
     +-----------+----------------+----------------+-----------+-----------------+------------------+------------+---------------+------------+----------------------+------------------+
     ```
 
-5. Suppose that you want to split the `[0,20000]` range of the `idx` index of the `p1` and `p2` partitions into two Regions. The example statement is as follows:
+5.  パーティション`p1`と`p2`インデックス番号`idx`の`[0,20000]`の範囲を2つのリージョンに分割するとします。例のステートメントは次のとおりです。
 
     ```sql
     SPLIT PARTITION TABLE t PARTITION (p1,p2) INDEX idx BETWEEN (0) AND (20000) REGIONS 2;
     ```
 
-## pre_split_regions
+## 事前分割領域 {#pre-split-regions}
 
-When creating a table with the `AUTO_RANDOM` or `SHARD_ROW_ID_BITS` attribute, you can also specify the `PRE_SPLIT_REGIONS` option if you want to evenly pre-split the table into Regions immediately after the table is created. The number of pre-split Regions for a table is `2^(PRE_SPLIT_REGIONS)`.
+`AUTO_RANDOM`または`SHARD_ROW_ID_BITS`属性でテーブルを作成する際に、テーブル作成直後に均等にリージョンに事前分割したい場合は、 `PRE_SPLIT_REGIONS`オプションも指定できます。テーブルごとに事前分割されるリージョンの数は`2^(PRE_SPLIT_REGIONS)`です。
 
-> **Note:**
+> **注記：**
 >
-> The value of `PRE_SPLIT_REGIONS` must be less than or equal to that of `SHARD_ROW_ID_BITS` or `AUTO_RANDOM`.
+> `PRE_SPLIT_REGIONS`の値は`SHARD_ROW_ID_BITS`または`AUTO_RANDOM`の値以下でなければなりません。
 
-The [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region) global variable affects the behavior of `PRE_SPLIT_REGIONS`. This variable controls whether to wait for Regions to be pre-split and scattered before returning results after the table creation. If there are intensive writes after creating the table, you need to set the value of this variable to `global`, then TiDB scatters the Regions of newly created tables according to the data distribution of the entire cluster. Otherwise, TiDB writes the data before the scattering is completed, which will have a significant impact on write performance.
+グローバル変数[`tidb_scatter_region`](/system-variables.md#tidb_scatter_region) `PRE_SPLIT_REGIONS`動作に影響します。この変数は、テーブル作成後に結果を返す前に、リージョンが事前に分割され、分散されるまで待機するかどうかを制御します。テーブル作成後に書き込みが集中する場合は、この変数の値を`global`に設定する必要があります。そうしないと、TiDBはクラスター全体のデータ分布に従って、新しく作成されたテーブルのリージョンを分散します。そうでない場合、TiDBは分散が完了する前にデータを書き込んでしまい、書き込みパフォーマンスに大きな影響を与えます。
 
-### Examples of pre_split_regions
+### pre_split_regionsの例 {#examples-of-pre-split-regions}
 
 ```sql
 CREATE TABLE t (a INT, b INT, INDEX idx1(a)) SHARD_ROW_ID_BITS = 4 PRE_SPLIT_REGIONS=2;
 ```
 
-After building the table, this statement splits `4 + 1` Regions for table t. `4 (2^2)` Regions are used to save table row data, and 1 Region is for saving the index data of `idx1`.
+テーブルを構築した後、このステートメントはテーブル t の`4 + 1`領域を分割します。3 `4 (2^2)`領域はテーブル行データを保存するために使用され、1 つのリージョンは`idx1`のインデックス データを保存するために使用されます。
 
-The ranges of the 4 table Regions are as follows:
+4 つのテーブル領域の範囲は次のとおりです。
 
-```
-region1:   [ -inf      ,  1<<61 )
-region2:   [ 1<<61     ,  2<<61 )
-region3:   [ 2<<61     ,  3<<61 )
-region4:   [ 3<<61     ,  +inf  )
-```
+    region1:   [ -inf      ,  1<<61 )
+    region2:   [ 1<<61     ,  2<<61 )
+    region3:   [ 2<<61     ,  3<<61 )
+    region4:   [ 3<<61     ,  +inf  )
 
 <CustomContent platform="tidb">
 
-> **Note:**
+> **注記：**
 >
-> The Region split by the Split Region statement is controlled by the [Region merge](/best-practices/pd-scheduling-best-practices.md#region-merge) scheduler in PD. To avoid PD re-merging the newly split Region soon after, you need to use [table attributes](/table-attributes.md) or [dynamically modify](/pd-control.md) configuration items related to the Region merge feature.
+> Split リージョンステートメントによって分割されたリージョンは、PDの[リージョンの統合](/best-practices/pd-scheduling-best-practices.md#region-merge)のスケジューラによって制御されます。PDが分割されたリージョンをすぐに再マージすることを避けるには、リージョンマージ機能に関連する[テーブル属性](/table-attributes.md)または[動的に変更する](/pd-control.md)設定項目を使用する必要があります。
 
 </CustomContent>
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [SHOW TABLE REGIONS](/sql-statements/sql-statement-show-table-regions.md)
-* Session variables: [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region), [`tidb_wait_split_region_finish`](/system-variables.md#tidb_wait_split_region_finish) and [`tidb_wait_split_region_timeout`](/system-variables.md#tidb_wait_split_region_timeout).
+-   [テーブル領域を表示](/sql-statements/sql-statement-show-table-regions.md)
+-   セッション[`tidb_wait_split_region_timeout`](/system-variables.md#tidb_wait_split_region_timeout) : [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region) [`tidb_wait_split_region_finish`](/system-variables.md#tidb_wait_split_region_finish)

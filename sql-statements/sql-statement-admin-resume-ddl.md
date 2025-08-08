@@ -1,15 +1,15 @@
 ---
 title: ADMIN RESUME DDL JOBS
-summary: An overview of the usage of ADMIN RESUME DDL for the TiDB database.
+summary: TiDB データベースの ADMIN RESUME DDL の使用法の概要。
 ---
 
-# ADMIN RESUME DDL JOBS
+# 管理者履歴書DDLジョブ {#admin-resume-ddl-jobs}
 
-`ADMIN RESUME DDL` allows you to resume a paused DDL job. You can find the `job_id` by running [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md).
+`ADMIN RESUME DDL`使用すると、一時停止中のDDLジョブを再開できます。2 は`job_id` [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)実行すると確認できます。
 
-You can use this statement to resume a paused DDL job. After the resume is completed, the SQL statement that executes the DDL job continues to show as being executed. If you try to resume a DDL job that has already been completed, you will see the `DDL Job:90 not found` error in the `RESULT` column, which indicates that the job has been removed from the DDL waiting queue.
+このステートメントを使用すると、一時停止中のDDLジョブを再開できます。再開が完了した後も、DDLジョブを実行するSQL文は実行中として表示されます。すでに完了しているDDLジョブを再開しようとすると、列`RESULT`にエラー`DDL Job:90 not found`が表示されます。これは、ジョブがDDL待機キューから削除されたことを示します。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AdminResumeDDLStmt ::=
@@ -19,44 +19,44 @@ NumList ::=
     Int64Num ( ',' Int64Num )*
 ```
 
-## Examples
+## 例 {#examples}
 
-`ADMIN RESUME DDL JOBS` resumes the currently paused DDL job and returns whether the job is resumed successfully.
+`ADMIN RESUME DDL JOBS`現在一時停止中の DDL ジョブを再開し、ジョブが正常に再開されたかどうかを返します。
 
 ```sql
 ADMIN RESUME DDL JOBS job_id [, job_id] ...;
 ```
 
-If the resume fails, the specific reason for the failure is displayed.
+再開に失敗した場合は、失敗の具体的な理由が表示されます。
 
 <CustomContent platform="tidb">
 
-> **Note:**
+> **注記：**
 >
-> + During the cluster upgrade, the ongoing DDL jobs are paused, and the DDL jobs initiated during the upgrade are also paused. After the upgrade, all paused DDL jobs will resume. The pause and resume operations during the upgrade are taken automatically. For details, see [TiDB Smooth Upgrade](/smooth-upgrade-tidb.md).
-> + This statement can resume multiple DDL jobs. You can use the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) statement to obtain the `job_id` of a DDL job.
-> + A DDL job in other status (other than `paused`) cannot be resumed and the resume operation will fail.
-> + If you try to resume a job more than once, TiDB reports an error `Error Number: 8261`.
+> -   クラスタのアップグレード中は、実行中のDDLジョブが一時停止され、アップグレード中に開始されたDDLジョブも一時停止されます。アップグレード後、一時停止されていたすべてのDDLジョブは再開されます。アップグレード中の一時停止と再開の操作は自動的に実行されます。詳細は[TiDB スムーズアップグレード](/smooth-upgrade-tidb.md)ご覧ください。
+> -   このステートメントは複数のDDLジョブを再開できます。1 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)ステートメントを使用して、DDLジョブの`job_id`のステートメントを取得できます。
+> -   その他のステータス ( `paused`以外) の DDL ジョブは再開できず、再開操作は失敗します。
+> -   ジョブを複数回再開しようとすると、TiDB はエラー`Error Number: 8261`報告します。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> + During the cluster upgrade, the ongoing DDL jobs are paused, and the DDL jobs initiated during the upgrade are also paused. After the upgrade, all paused DDL jobs will resume. The pause and resume operations during the upgrade are taken automatically. For details, see [TiDB Smooth Upgrade](https://docs.pingcap.com/tidb/stable/smooth-upgrade-tidb).
-> + This statement can resume multiple DDL jobs. You can use the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) statement to obtain the `job_id` of a DDL job.
-> + A DDL job in other status (other than `paused`) cannot be resumed and the resume operation will fail.
-> + If you try to resume a job more than once, TiDB reports an error `Error Number: 8261`.
+> -   クラスタのアップグレード中は、実行中のDDLジョブが一時停止され、アップグレード中に開始されたDDLジョブも一時停止されます。アップグレード後、一時停止されていたすべてのDDLジョブは再開されます。アップグレード中の一時停止と再開の操作は自動的に実行されます。詳細は[TiDB スムーズアップグレード](https://docs.pingcap.com/tidb/stable/smooth-upgrade-tidb)ご覧ください。
+> -   このステートメントは複数のDDLジョブを再開できます。1 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)ステートメントを使用して、DDLジョブの`job_id`のステートメントを取得できます。
+> -   その他のステータス ( `paused`以外) の DDL ジョブは再開できず、再開操作は失敗します。
+> -   ジョブを複数回再開しようとすると、TiDB はエラー`Error Number: 8261`報告します。
 
 </CustomContent>
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
-* [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
-* [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)
-* [`ADMIN ALTER DDL`](/sql-statements/sql-statement-admin-alter-ddl.md)
+-   [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
+-   [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)
+-   [`ADMIN ALTER DDL`](/sql-statements/sql-statement-admin-alter-ddl.md)

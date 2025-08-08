@@ -1,230 +1,229 @@
 ---
-title: {{{ .starter }}} Database Audit Logging
-summary: Learn about how to audit a {{{ .starter }}} cluster in TiDB Cloud.
+title: TiDB Cloud Serverless Database Audit Logging
+summary: TiDB CloudでTiDB Cloud Serverless クラスターを監査する方法について説明します。
 ---
 
-# {{{ .starter }}} Database Audit Logging (Beta)
+# TiDB Cloudサーバーレス データベース監査ログ (ベータ版) {#tidb-cloud-serverless-database-audit-logging-beta}
 
-{{{ .starter }}} provides you with a database audit logging feature to record a history of user access details (such as any SQL statements executed) in logs.
+TiDB Cloud Serverless は、ユーザー アクセスの詳細 (実行された SQL ステートメントなど) の履歴をログに記録するデータベース監査ログ機能を提供します。
 
-> **Note:**
+> **注記：**
 >
-> Currently, the database audit logging feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for {{{ .starter }}} database audit logging" in the **Description** field and click **Submit**.
+> 現在、データベース監査ログ機能はリクエストに応じてのみご利用いただけます。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートをリクエスト**」をクリックしてください。次に、 **「説明」**欄に「 TiDB Cloud Serverless データベース監査ログの申請」と入力し、 **「送信」を**クリックしてください。
 
-To assess the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to conduct a periodic analysis of the database audit logs.
+組織のユーザー アクセス ポリシーやその他の情報セキュリティ対策の有効性を評価するには、データベース監査ログを定期的に分析することがセキュリティのベスト プラクティスです。
 
-The audit logging feature is disabled by default. To audit a cluster, you need to enable audit logging for it.
+監査ログ機能はデフォルトで無効になっています。クラスターを監査するには、クラスターの監査ログを有効にする必要があります。
 
-## Enable audit logging
+## 監査ログを有効にする {#enable-audit-logging}
 
-To enable audit logging for a {{{ .starter }}} cluster, use the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-config.md).
+TiDB Cloud Serverless クラスターの監査ログを有効にするには、 [TiDB CloudCLI](/tidb-cloud/ticloud-auditlog-config.md)使用します。
 
 ```shell
 ticloud serverless audit-log config -c <cluster-id> --enabled
 ```
 
-To disable audit logging for a {{{ .starter }}} cluster, use the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-config.md).
+TiDB Cloud Serverless クラスターの監査ログを無効にするには、 [TiDB CloudCLI](/tidb-cloud/ticloud-auditlog-config.md)使用します。
 
 ```shell
 ticloud serverless audit-log config -c <cluster-id> --enabled=false
 ```
 
-> **Note:**
+> **注記：**
 >
-> Only enabling audit logging will not generate audit logs. You need to configure filters to specify what events to log. For more information, see [Manage audit logging filter rules](#manage-audit-logging-filter-rules).
+> 監査ログを有効にするだけでは監査ログは生成されません。ログに記録するイベントを指定するには、フィルターを設定する必要があります。詳細については、 [監査ログフィルタルールを管理する](#manage-audit-logging-filter-rules)ご覧ください。
 
-## Manage audit logging filter rules
+## 監査ログフィルタルールを管理する {#manage-audit-logging-filter-rules}
 
-To filter the audit logging, you need to create a filter rule to specify which events to log. You can use the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-filter-create.md) to manage the filter rules.
+監査ログをフィルタリングするには、ログに記録するイベントを指定するためのフィルタルールを作成する必要があります。フィルタルールは[TiDB CloudCLI](/tidb-cloud/ticloud-auditlog-filter-create.md)使用して管理できます。
 
-The filter rule contains the following fields:
+フィルター ルールには次のフィールドが含まれます。
 
-- `users`: A list of user names to filter audit events. You can use the wildcard `%` to match any user name.
-- `filters`: A list of filter objects. Each filter object can contain the following fields:
+-   `users` : 監査イベントをフィルタリングするユーザー名のリスト。ワイルドカード`%`使用すると、任意のユーザー名に一致します。
+-   `filters` : フィルターオブジェクトのリスト。各フィルターオブジェクトには以下のフィールドが含まれます。
 
-    - `classes`: A list of event classes to filter audit events. For example, `["QUERY", "EXECUTE"]`.
-    - `tables`: A list of table filters. For more information, see [Table filters].
-    - `statusCodes`: A list of status codes to filter audit events. `1` means success, `0` means failure.
+    -   `classes` : 監査イベントをフィルタリングするイベントクラスのリスト。例： `["QUERY", "EXECUTE"]` 。
+    -   `tables` : テーブルフィルターのリスト。詳細については、[テーブルフィルター]を参照してください。
+    -   `statusCodes` : 監査イベントをフィルター処理するためのステータス コードのリスト。2 `1`成功、 `0`失敗を意味します。
 
-Here is the summary of all event classes in database audit logging:
+データベース監査ログのすべてのイベント クラスの概要は次のとおりです。
 
-| Event Class   | Description                                                                                      | Parent-class   |
-|---------------|--------------------------------------------------------------------------------------------------|---------------|
-| CONNECTION    | Record all operations related to connections, such as handshaking, connections, disconnections, connection reset, and changing users | -             |
-| CONNECT       | Record all operations of the handshaking in connections                                          | CONNECTION    |
-| DISCONNECT    | Record all operations of the disconnections                                                      | CONNECTION    |
-| CHANGE_USER   | Record all operations of changing users                                                          | CONNECTION    |
-| QUERY         | Record all operations of SQL statements, including all errors about querying and modifying data  | -             |
-| TRANSACTION   | Record all operations related to transactions, such as `BEGIN`, `COMMIT`, and `ROLLBACK`               | QUERY         |
-| EXECUTE       | Record all operations of the `EXECUTE` statements                                                  | QUERY         |
-| QUERY_DML     | Record all operations of the DML statements, including `INSERT`, `REPLACE`, `UPDATE`, `DELETE`, and `LOAD DATA` | QUERY     |
-| INSERT        | Record all operations of the `INSERT` statements                                                   | QUERY_DML     |
-| REPLACE       | Record all operations of the `REPLACE` statements                                                  | QUERY_DML     |
-| UPDATE        | Record all operations of the `UPDATE` statements                                                   | QUERY_DML     |
-| DELETE        | Record all operations of the `DELETE` statements                                                   | QUERY_DML     |
-| LOAD DATA     | Record all operations of the `LOAD DATA` statements                                                | QUERY_DML     |
-| SELECT        | Record all operations of the `SELECT` statements                                                   | QUERY         |
-| QUERY_DDL          | Record all operations of the DDL statements                                                      | QUERY               |
-| AUDIT              | Record all operations related to setting TiDB database auditing, including setting system variables and calling system functions | -                   |
-| AUDIT_FUNC_CALL    | Record all operations of calling system functions related to TiDB database auditing               | AUDIT               |
+| イベントクラス  | 説明                                                          | 親クラス      |
+| -------- | ----------------------------------------------------------- | --------- |
+| 繋がり      | ハンドシェイク、接続、切断、接続のリセット、ユーザーの変更など、接続に関連するすべての操作を記録します。        | <li></li> |
+| 接続する     | 接続時のハンドシェイクのすべての操作を記録する                                     | 繋がり       |
+| 切断       | 切断のすべての操作を記録する                                              | 繋がり       |
+| ユーザーの変更  | ユーザーの変更に関するすべての操作を記録する                                      | 繋がり       |
+| クエリ      | データのクエリと変更に関するすべてのエラーを含む、SQL ステートメントのすべての操作を記録します。          | <li></li> |
+| 取引       | `BEGIN`など、取引に関連する`COMMIT`の操作`ROLLBACK`記録する                  | クエリ       |
+| 実行する     | `EXECUTE`ステートメントのすべての操作を記録する                                | クエリ       |
+| クエリ_DML  | `INSERT` `REPLACE`含むDML `LOAD DATA`の`UPDATE`の操作`DELETE`記録する | クエリ       |
+| 入れる      | `INSERT`ステートメントのすべての操作を記録する                                 | クエリ_DML   |
+| 交換する     | `REPLACE`ステートメントのすべての操作を記録する                                | クエリ_DML   |
+| アップデート   | `UPDATE`ステートメントのすべての操作を記録する                                 | クエリ_DML   |
+| 消去       | `DELETE`ステートメントのすべての操作を記録する                                 | クエリ_DML   |
+| データをロード  | `LOAD DATA`ステートメントのすべての操作を記録する                              | クエリ_DML   |
+| 選択       | `SELECT`ステートメントのすべての操作を記録する                                 | クエリ       |
+| クエリ_DDL  | DDL文のすべての操作を記録する                                            | クエリ       |
+| 監査       | システム変数の設定やシステム関数の呼び出しなど、TiDB データベース監査の設定に関連するすべての操作を記録します。  | <li></li> |
+| 監査機能呼び出し | TiDBデータベース監査に関連するシステム関数の呼び出し操作をすべて記録します。                    | 監査        |
 
-### Create a filter rule
+### フィルタールールを作成する {#create-a-filter-rule}
 
-To create a filter rule that captures all audit logs, run the following command:
+すべての監査ログをキャプチャするフィルタ ルールを作成するには、次のコマンドを実行します。
 
 ```shell
 ticloud serverless audit-log filter create --cluster-id <cluster-id> --name <rule-name> --rule '{"users":["%@%"],"filters":[{}]}'
 ```
 
-To create a filter rule that filters ALL EXECUTE events, run the following command:
+すべての EXECUTE イベントをフィルタリングするフィルタ ルールを作成するには、次のコマンドを実行します。
 
 ```shell
 ticloud serverless audit-log filter create --cluster-id <cluster-id> --name <rule-name> --rule '{"users":["%@%"],"filters":[{"classes":["EXECUTE"]]}'
 ```
 
-### Update a filter rule
+### フィルタルールを更新する {#update-a-filter-rule}
 
-To disable a filter rule, run the following command:
+フィルター ルールを無効にするには、次のコマンドを実行します。
 
 ```shell
 ticloud serverless audit-log filter update --cluster-id <cluster-id> --name <rule-name> --enabled=false
 ```
 
-To update a filter rule, run the following command:
+フィルター ルールを更新するには、次のコマンドを実行します。
 
 ```shell
 ticloud serverless audit-log filter update --cluster-id <cluster-id> --name <rule-name> --rule '{"users":["%@%"],"filters":[{"classes":["QUERY"],"tables":["test.t"]}]}'
 ```
 
-Note that you need to pass the complete `--rule` field when updating.
+更新時には、完全な`--rule`フィールドを渡す必要があることに注意してください。
 
-### Delete a filter rule
+### フィルタルールを削除する {#delete-a-filter-rule}
 
-To delete a filter rule, run the following command:
+フィルター ルールを削除するには、次のコマンドを実行します。
 
 ```shell
 ticloud serverless audit-log filter delete --cluster-id <cluster-id> --name <rule-name>
 ```
 
-## Configure audit logging
+## 監査ログを構成する {#configure-audit-logging}
 
-### Data redaction
+### データ編集 {#data-redaction}
 
-{{{ .starter }}} redacts sensitive data in the audit logs by default. Take the following SQL statement as an example:
+TiDB Cloud Serverlessは、監査ログ内の機密データをデフォルトで削除します。次のSQL文を例に挙げましょう。
 
-```sql 
+```sql
 INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES (1, 'Alice', '123456');
 ```
 
-It is redacted as follows:
+以下のように編集されています。
 
 ```sql
 INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 ```
 
-If you want to disable redaction, use the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-config.md).
+編集を無効にする場合は、 [TiDB CloudCLI](/tidb-cloud/ticloud-auditlog-config.md)使用します。
 
 ```shell
 ticloud serverless audit-log config --cluster-id <cluster-id> --unredacted
 ```
 
-### Log file rotation
+### ログファイルのローテーション {#log-file-rotation}
 
-{{{ .starter }}} generates a new audit log file when either of the following conditions is met:
+TiDB Cloud Serverless は、次のいずれかの条件が満たされると、新しい監査ログ ファイルを生成します。
 
-- The size of the current log file reaches 100 MiB.
-- One hour has passed since the previous log generation. Depending on the internal scheduling mechanism, log generation might be delayed by a few minutes.
+-   現在のログ ファイルのサイズは 100 MiB に達します。
+-   前回のログ生成から1時間が経過しました。内部のスケジュール設定によっては、ログ生成が数分遅れる場合があります。
 
-> **Note:**
+> **注記：**
 >
-> Currently, Log file rotation settings are not configurable. {{{ .starter }}} automatically rotates the audit log files based on the preceding conditions.
+> 現在、ログファイルのローテーション設定は変更できません。TiDB TiDB Cloud Serverless は、上記の条件に基づいて監査ログファイルを自動的にローテーションします。
 
-## Access audit logging
+## アクセス監査ログ {#access-audit-logging}
 
-{{{ .starter }}} audit logs are stored as readable text files named `YYYY-MM-DD-<index>.log`.
+TiDB Cloud Serverless 監査ログは、 `YYYY-MM-DD-<index>.log`名前の読み取り可能なテキスト ファイルとして保存されます。
 
-Currently, audit logs are stored within TiDB Cloud for 365 days. After this period, logs are automatically deleted.
+現在、監査ログはTiDB Cloud内に365日間保存されます。この期間が経過すると、ログは自動的に削除されます。
 
-> **Note:**
+> **注記：**
 >
-> Contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) if you need to save audit logs in external storage (such as AWS S3, Azure Blob Storage, and Google Cloud Storage).
+> 監査ログを外部storage(AWS S3、Azure Blob Storage、Google Cloud Storage など) に保存する必要がある場合は、 [TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)お問い合わせください。
 
-To view and download audit logs, use the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-download.md):
+監査ログを表示およびダウンロードするには、 [TiDB CloudCLI](/tidb-cloud/ticloud-auditlog-download.md)使用します。
 
 ```shell
 ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <output-path> --start-date <start-date> --end-date <end-date>
 ```
 
-- `start-date`: The start date of the audit log you want to download in the format of `YYYY-MM-DD`, for example `2025-01-01`.
-- `end-date`: The end date of the audit log you want to download in the format of `YYYY-MM-DD`, for example `2025-01-01`.
+-   `start-date` : ダウンロードする監査ログの開始日（ `YYYY-MM-DD`の形式、例`2025-01-01` ）。
+-   `end-date` : ダウンロードする監査ログの終了日（ `YYYY-MM-DD`の形式、例`2025-01-01` ）。
 
-> **Note:**
+> **注記：**
 >
-> {{{ .starter }}} does not guarantee sequential ordering of audit logs. The log file named `YYYY-MM-DD-<index>.log` might contain the audit logs in previous days.
-> If you want to retrieve all logs from a specific date (for example, January 1, 2025), specifying `--start-date 2025-01-01` and `--end-date 2025-01-02` usually works. But under extreme conditions, you might need to download all log files and order them by the `TIME` field.
+> TiDB Cloud Serverless は、監査ログの順序を保証しません`YYYY-MM-DD-<index>.log`という名前のログファイルには、以前の日付の監査ログが含まれている可能性があります。特定の日付（例えば 2025 年 1 月 1 日）のすべてのログを取得したい場合は、通常は`--start-date 2025-01-01`と`--end-date 2025-01-02`指定すれば問題ありません。ただし、極端な状況では、すべてのログファイルをダウンロードし、 `TIME`フィールドで順序付けする必要があるかもしれません。
 
-## Audit logging fields
+## 監査ログフィールド {#audit-logging-fields}
 
-For each database event record in audit logs, TiDB provides the following fields:
+監査ログ内の各データベース イベント レコードに対して、TiDB は次のフィールドを提供します。
 
-### General information
+### 一般情報 {#general-information}
 
-All classes of audit logs contain the following information:
+すべてのクラスの監査ログには、次の情報が含まれます。
 
-| Field         | Description                                                                                   |
-|---------------|-----------------------------------------------------------------------------------------------|
-| ID            | The unique identifier that identifies the audit record of an operation                        |
-| TIME          | The timestamp of the audit record                        |
-| EVENT         | The event classes of the audit record. Multiple event types are separated by commas (`,`)        |
-| USER          | The username of the audit record                                                              |
-| ROLES         | The roles of the user at the time of the operation                                            |
-| CONNECTION_ID | The identifier of the user's connection                                                       |
-| TABLES        | The accessed tables related to this audit record                                              |
-| STATUS_CODE   | The status code of the audit record. `1` means success, and `0` means failure.                       |
-| KEYSPACE_NAME | The keyspace name of the audit record. |
-| SERVERLESS_TENANT_ID           | The ID of the serverless tenant that the cluster belongs to. |
-| SERVERLESS_TSERVERLESS_PROJECT_ID         | The ID of the serverless project that the cluster belongs to. |
-| SERVERLESS_CLUSTER_ID          | The ID of the serverless cluster that the audit record belongs to. |
-| REASON        | The error message of the audit record. Only recorded when an error occurs during the operation. |
+| 分野                           | 説明                                          |
+| ---------------------------- | ------------------------------------------- |
+| ID                           | 操作の監査記録を識別する一意の識別子                          |
+| 時間                           | 監査記録のタイムスタンプ                                |
+| イベント                         | 監査レコードのイベントクラス。複数のイベントタイプはカンマで区切られます（ `,` ） |
+| ユーザー                         | 監査レコードのユーザー名                                |
+| 役割                           | 操作時のユーザーの役割                                 |
+| 接続ID                         | ユーザーの接続の識別子                                 |
+| テーブル                         | この監査レコードに関連するアクセスされたテーブル                    |
+| ステータスコード                     | 監査レコードのステータス コード。1 `1`成功、 `0`失敗を意味します。      |
+| キースペース名                      | 監査レコードのキースペース名。                             |
+| サーバーレステナントID                 | クラスターが属するサーバーレス テナントの ID。                   |
+| サーバーレス_TSERVERLESS_プロジェクト_ID | クラスターが属するサーバーレス プロジェクトの ID。                 |
+| サーバーレスクラスターID                | 監査レコードが属するサーバーレス クラスターの ID。                 |
+| 理由                           | 監査レコードのエラーメッセージ。操作中にエラーが発生した場合にのみ記録されます。    |
 
-### SQL statement information
+### SQL文の情報 {#sql-statement-information}
 
-When the event class is `QUERY` or a subclass of `QUERY`, the audit logs contain the following information:
+イベント クラスが`QUERY`または`QUERY`のサブクラスの場合、監査ログには次の情報が含まれます。
 
-| Field          | Description                                                                                                   |
-|----------------|---------------------------------------------------------------------------------------------------------------|
-| CURRENT_DB     | The name of the current database.                                                                              |
-| SQL_TEXT       | The executed SQL statements. If audit log redaction is enabled, the redacted SQL statements are recorded.     |
-| EXECUTE_PARAMS | The parameters for the `EXECUTE` statements. Recorded only when the event classes include `EXECUTE` and redaction is disabled. |
-| AFFECTED_ROWS  | The number of affected rows of the SQL statements. Recorded only when the event classes include `QUERY_DML`.    |
+| 分野        | 説明                                                                  |
+| --------- | ------------------------------------------------------------------- |
+| 現在のデータベース | 現在のデータベースの名前。                                                       |
+| SQL_TEXT  | 実行された SQL 文。監査ログの編集が有効になっている場合は、編集された SQL 文が記録されます。                 |
+| 実行パラメータ   | `EXECUTE`ステートメントのパラメータ。イベントクラスに`EXECUTE`含まれ、編集が無効になっている場合にのみ記録されます。 |
+| 影響を受ける行   | SQL文の影響を受けた行数。イベントクラスに`QUERY_DML`含まれる場合にのみ記録されます。                   |
 
-### Connection information
+### 接続情報 {#connection-information}
 
-When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit logs contain the following information:
+イベント クラスが`CONNECTION`または`CONNECTION`のサブクラスの場合、監査ログには次の情報が含まれます。
 
-| Field           | Description                                                                                   |
-|-----------------|-----------------------------------------------------------------------------------------------|
-| CURRENT_DB      | The name of the current database. When the event classes include DISCONNECT, this information is not recorded. |
-| CONNECTION_TYPE | The type of connection, including Socket, UnixSocket, and SSL/TLS.                                 |
-| PID             | The process ID of the current connection.                                                          |
-| SERVER_VERSION  | The current version of the connected TiDB server.                                                  |
-| SSL_VERSION     | The current version of SSL in use.                                                                 |
-| HOST_IP         | The current IP address of the connected TiDB server.                                              |
-| HOST_PORT       | The current port of the connected TiDB server.                                                     |
-| CLIENT_IP       | The current IP address of the client.                                                             |
-| CLIENT_PORT     | The current port of the client.                                                                    |
+| 分野        | 説明                                                   |
+| --------- | ---------------------------------------------------- |
+| 現在のデータベース | 現在のデータベースの名前。イベントクラスにDISCONNECTが含まれる場合、この情報は記録されません。 |
+| 接続タイプ     | 接続の種類 (ソケット、UnixSocket、SSL/TLS など)。                  |
+| PID       | 現在の接続のプロセス ID。                                       |
+| サーバーバージョン | 接続されている TiDBサーバーの現在のバージョン。                           |
+| SSL_バージョン | 現在使用されている SSL のバージョン。                                |
+| ホストIP     | 接続されている TiDBサーバーの現在の IP アドレス。                        |
+| ホストポート    | 接続されている TiDBサーバーの現在のポート。                             |
+| クライアントIP  | クライアントの現在の IP アドレス。                                  |
+| クライアントポート | クライアントの現在のポート。                                       |
 
-### Audit operation information
+### 監査操作情報 {#audit-operation-information}
 
-When the event class is `AUDIT` or a subclass of `AUDIT`, the audit logs contain the following information:
+イベント クラスが`AUDIT`または`AUDIT`のサブクラスの場合、監査ログには次の情報が含まれます。
 
-| Field          | Description                                                                                                   |
-|----------------|---------------------------------------------------------------------------------------------------------------|
-| AUDIT_OP_TARGET| The objects of the setting related to TiDB database auditing. |
-| AUDIT_OP_ARGS  | The arguments of the setting related to TiDB database auditing. |
+| 分野        | 説明                           |
+| --------- | ---------------------------- |
+| 監査操作ターゲット | TiDB データベース監査に関連する設定のオブジェクト。 |
+| 監査オプション引数 | TiDB データベース監査に関連する設定の引数。     |
 
-## Audit logging limitations
+## 監査ログの制限 {#audit-logging-limitations}
 
-- Audit logging is only available via TiDB Cloud CLI at present.
-- Audit logs can only be stored in TiDB Cloud at present.
-- {{{ .starter }}} does not guarantee the sequential order of audit logs, which means you might have to review all log files to view the latest events. To sort the logs chronologically, you can use the `TIME` field in the audit logs.
+-   監査ログは現在、 TiDB Cloud CLI 経由でのみ利用可能です。
+-   監査ログは現在、 TiDB Cloudにのみ保存できます。
+-   TiDB Cloud Serverless は監査ログの順序を保証しません。そのため、最新のイベントを確認するには、すべてのログファイルを確認する必要がある場合があります。ログを時系列で並べ替えるには、監査ログの`TIME`フィールドを使用します。

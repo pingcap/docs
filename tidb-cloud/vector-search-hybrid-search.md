@@ -1,33 +1,33 @@
 ---
 title: Hybrid Search
-summary: Use full-text search and vector search together to improve the retrieval quality.
+summary: 全文検索とベクトル検索を併用して、検索品質を向上させます。
 aliases: ['/tidb/stable/vector-search-hybrid-search']
 ---
 
-# Hybrid Search
+# ハイブリッド検索 {#hybrid-search}
 
-By using full-text search, you can retrieve documents based on exact keywords. By using vector search, you can retrieve documents based on semantic similarity. Can we combine these two search methods to improve the retrieval quality and handle more scenarios? Yes, this approach is known as hybrid search and is commonly used in AI applications.
+全文検索を使用すると、正確なキーワードに基づいて文書を検索できます。ベクトル検索を使用すると、意味的な類似性に基づいて文書を検索できます。これら2つの検索方法を組み合わせることで、検索品質を向上させ、より多くのシナリオに対応できますか？はい、このアプローチはハイブリッド検索と呼ばれ、AIアプリケーションでよく使用されています。
 
-A general workflow of hybrid search in TiDB is as follows:
+TiDB でのハイブリッド検索の一般的なワークフローは次のとおりです。
 
-1. Use TiDB for **full-text search** and **vector search**.
-2. Use a **reranker** to combine the results from both searches.
+1.  **全文検索**や**ベクター検索**には TiDB を使用します。
+2.  **再ランク付け機能**を使用して、両方の検索の結果を結合します。
 
 ![Hybrid Search](/media/vector-search/hybrid-search-overview.svg)
 
-This tutorial demonstrates how to use hybrid search in TiDB with the [pytidb](https://github.com/pingcap/pytidb) Python SDK, which provides built-in support for embedding and reranking. Using pytidb is completely optional — you can perform a search using SQL directly and use your own reranking model as you like.
+このチュートリアルでは、埋め込みと再ランキングの組み込みサポートを提供する[pytidb](https://github.com/pingcap/pytidb) Python SDKを使用して、TiDBのハイブリッド検索を使用する方法を説明します。pytidbの使用は完全にオプションです。SQLを使用して直接検索を実行し、必要に応じて独自の再ランキングモデルを使用することもできます。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-Hybrid search relies on both [full-text search](/tidb-cloud/vector-search-full-text-search-python.md) and vector search. Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available for the following product option and regions:
+ハイブリッド検索は、 [全文検索](/tidb-cloud/vector-search-full-text-search-python.md)検索とベクトル検索の両方を利用します。全文検索はまだ初期段階であり、より多くのお客様に継続的に展開しています。現在、全文検索は以下の製品オプションとリージョンでのみご利用いただけます。
 
-- {{{ .starter }}}: `Frankfurt (eu-central-1)` and `Singapore (ap-southeast-1)`
+-   TiDB Cloudサーバーレス: `Frankfurt (eu-central-1)`と`Singapore (ap-southeast-1)`
 
-To complete this tutorial, make sure you have a {{{ .starter }}} cluster in a supported region. If you don't have one, follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create it.
+このチュートリアルを完了するには、サポート対象リージョンにTiDB Cloud Serverlessクラスターがインストールされている必要があります。まだインストールされていない場合は、手順[TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って作成してください。
 
-## Get started
+## 始めましょう {#get-started}
 
-### Step 1. Install the [pytidb](https://github.com/pingcap/pytidb) Python SDK
+### ステップ1. <a href="https://github.com/pingcap/pytidb">pytidb</a> Python SDKをインストールする {#step-1-install-the-a-href-https-github-com-pingcap-pytidb-pytidb-a-python-sdk}
 
 ```shell
 pip install "pytidb[models]"
@@ -39,7 +39,7 @@ pip install "pytidb[models]"
 # pip install pandas
 ```
 
-### Step 2. Connect to TiDB
+### ステップ2. TiDBに接続する {#step-2-connect-to-tidb}
 
 ```python
 from pytidb import TiDBClient
@@ -53,45 +53,45 @@ db = TiDBClient.connect(
 )
 ```
 
-You can get these connection parameters from the [TiDB Cloud console](https://tidbcloud.com):
+これらの接続パラメータは[TiDB Cloudコンソール](https://tidbcloud.com)から取得できます:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
+2.  右上隅の**「接続」**をクリックします。接続パラメータがリストされた接続ダイアログが表示されます。
 
-   For example, if the connection parameters are displayed as follows:
+    たとえば、接続パラメータが次のように表示される場合:
 
-   ```text
-   HOST:     gateway01.us-east-1.prod.shared.aws.tidbcloud.com
-   PORT:     4000
-   USERNAME: 4EfqPF23YKBxaQb.root
-   PASSWORD: abcd1234
-   DATABASE: test
-   CA:       /etc/ssl/cert.pem
-   ```
+    ```text
+    HOST:     gateway01.us-east-1.prod.shared.aws.tidbcloud.com
+    PORT:     4000
+    USERNAME: 4EfqPF23YKBxaQb.root
+    PASSWORD: abcd1234
+    DATABASE: test
+    CA:       /etc/ssl/cert.pem
+    ```
 
-   The corresponding Python code to connect to the {{{ .starter }}} cluster would be as follows:
+    TiDB Cloud Serverless クラスターに接続するための対応する Python コードは次のようになります。
 
-   ```python
-   db = TiDBClient.connect(
-       host="gateway01.us-east-1.prod.shared.aws.tidbcloud.com",
-       port=4000,
-       username="4EfqPF23YKBxaQb.root",
-       password="abcd1234",
-       database="test",
-   )
-   ```
+    ```python
+    db = TiDBClient.connect(
+        host="gateway01.us-east-1.prod.shared.aws.tidbcloud.com",
+        port=4000,
+        username="4EfqPF23YKBxaQb.root",
+        password="abcd1234",
+        database="test",
+    )
+    ```
 
-   Note that the preceding example is for demonstration purposes only. You need to fill in the parameters with your own values and keep them secure.
+    上記の例はデモンストレーションのみを目的としていることに注意してください。パラメータには独自の値を入力し、安全な状態に保ってください。
 
-### Step 3. Create a table
+### ステップ3. テーブルを作成する {#step-3-create-a-table}
 
-As an example, create a table named `chunks` with the following columns:
+例として、次の列を持つ`chunks`という名前のテーブルを作成します。
 
-- `id` (int): the ID of the chunk.
-- `text` (text): the text content of the chunk.
-- `text_vec` (vector): the vector representation of the text, automatically generated by the embedding model in pytidb.
-- `user_id` (int): the ID of the user who created the chunk.
+-   `id` (int): チャンクの ID。
+-   `text` (テキスト): チャンクのテキスト コンテンツ。
+-   `text_vec` (ベクトル): pytidb の埋め込みモデルによって自動的に生成されたテキストのベクトル表現。
+-   `user_id` (int): チャンクを作成したユーザーの ID。
 
 ```python
 from pytidb.schema import TableModel, Field
@@ -112,7 +112,7 @@ class Chunk(TableModel, table=True):
 table = db.create_table(schema=Chunk)
 ```
 
-### Step 4. Insert data
+### ステップ4. データを挿入する {#step-4-insert-data}
 
 ```python
 table.bulk_insert(
@@ -124,9 +124,9 @@ table.bulk_insert(
 )
 ```
 
-### Step 5. Perform a hybrid search
+### ステップ5.ハイブリッド検索を実行する {#step-5-perform-a-hybrid-search}
 
-In this example, use the [jina-reranker](https://huggingface.co/jinaai/jina-reranker-m0) model to rerank the search results.
+この例では、 [jina-reranker](https://huggingface.co/jinaai/jina-reranker-m0)モデルを使用して検索結果を再ランク付けします。
 
 ```python
 from pytidb.rerankers import Reranker
@@ -141,27 +141,27 @@ df = (
 )
 ```
 
-For a complete example, see [pytidb hybrid search demo](https://github.com/pingcap/pytidb/tree/main/examples/hybrid_search).
+完全な例については、 [pytidb ハイブリッド検索デモ](https://github.com/pingcap/pytidb/tree/main/examples/hybrid_search)参照してください。
 
-## See also
+## 参照 {#see-also}
 
-- [pytidb Python SDK Documentation](https://github.com/pingcap/pytidb)
+-   [pytidb Python SDK ドキュメント](https://github.com/pingcap/pytidb)
 
-- [Full-Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md)
+-   [Pythonによる全文検索](/tidb-cloud/vector-search-full-text-search-python.md)
 
-## Feedback & help
+## フィードバックとヘルプ {#feedback-x26-help}
 
-Full-text search is still in the early stages with limited accessibility. If you would like to try full-text search in a region that is not yet available, or if you have feedback or need help, feel free to reach out to us:
+全文検索はまだ初期段階にあり、アクセス範囲が限られています。まだご利用いただけない地域で全文検索をお試しになりたい場合、またはフィードバックやサポートが必要な場合は、お気軽にお問い合わせください。
 
 <CustomContent platform="tidb">
 
-- [Join our Discord](https://discord.gg/zcqexutz2R)
+-   [Discordに参加する](https://discord.gg/zcqexutz2R)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- [Join our Discord](https://discord.gg/zcqexutz2R)
-- [Visit our Support Portal](https://tidb.support.pingcap.com/)
+-   [Discordに参加する](https://discord.gg/zcqexutz2R)
+-   [サポートポータルをご覧ください](https://tidb.support.pingcap.com/)
 
 </CustomContent>

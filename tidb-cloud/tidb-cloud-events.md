@@ -1,58 +1,58 @@
 ---
 title: TiDB Cloud Cluster Events
-summary: Learn how to view the events for TiDB Cloud clusters using the Events page.
+summary: イベント ページを使用してTiDB Cloudクラスターのイベントを表示する方法を学習します。
 ---
 
-# TiDB Cloud Cluster Events
+# TiDB Cloudクラスタイベント {#tidb-cloud-cluster-events}
 
-TiDB Cloud logs the historical events at the cluster level. An *event* indicates a change in your TiDB Cloud cluster. You can view the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.
+TiDB Cloudは、クラスタレベルで過去のイベントを記録します。*イベントは、* TiDB Cloudクラスタにおける変更を示します。記録されたイベントは、 **「イベント」**ページで確認できます。イベントの種類、ステータス、メッセージ、トリガー時刻、トリガーユーザーなどの情報が表示されます。
 
-This document describes how to view the events for TiDB Cloud clusters using the **Events** page and lists the supported event types.
+このドキュメントでは**、[イベント]**ページを使用してTiDB Cloudクラスターのイベントを表示する方法について説明し、サポートされているイベント タイプを一覧表示します。
 
-## View the Events page
+## イベントページをビュー {#view-the-events-page}
 
-To view the events on the **Events** page, take the following steps:
+**イベント**ページでイベントを表示するには、次の手順を実行します。
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
+1.  プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページで、ターゲット クラスターの名前をクリックして、概要ページに移動します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2. In the left navigation pane, click **Monitoring** > **Events**.
+2.  左側のナビゲーション ペインで、 **[監視]** &gt; **[イベント]**をクリックします。
 
-## Logged events
+## 記録されたイベント {#logged-events}
 
-TiDB Cloud logs the following types of cluster events:
+TiDB Cloud は次の種類のクラスター イベントをログに記録します。
 
-| Event Type| Description |
-|:--- |:--- |
-| CreateCluster |  Create a cluster |  
-| PauseCluster |   Pause a cluster |  
-| ResumeCluster |   Resume a cluster | 
-| ModifyClusterSize |   Modify cluster size | 
-| BackupCluster |   Back up a cluster |  
-| ExportBackup |   Export a backup |
-| RestoreFromCluster |   Restore a cluster |  
-| CreateChangefeed |   Create a changefeed |  
-| PauseChangefeed |   Pause a changefeed | 
-| ResumeChangefeed |   Resume a changefeed | 
-| DeleteChangefeed |   Delete a changefeed |  
-| EditChangefeed |  Edit a changefeed |  
-| ScaleChangefeed |   Scale the specification of a changefeed |  
-| FailedChangefeed |   Changefeed failures |  
-| ImportData |   Import data to a cluster |  
-| UpdateSpendingLimit |   Update spending limit of a {{{ .starter }}} scalable cluster |  
-| ResourceLimitation |   Update resource limitation of a {{{ .starter }}} cluster |  
+| イベントタイプ      | 説明                                           |
+| :----------- | :------------------------------------------- |
+| クラスターの作成     | クラスターを作成する                                   |
+| 一時停止クラスター    | クラスターを一時停止する                                 |
+| 履歴書クラスター     | クラスターを再開する                                   |
+| クラスタサイズの変更   | クラスターサイズを変更する                                |
+| バックアップクラスター  | クラスターをバックアップする                               |
+| エクスポートバックアップ | バックアップをエクスポートする                              |
+| クラスタからの復元    | クラスターを復元する                                   |
+| 変更フィードを作成    | チェンジフィードを作成する                                |
+| 一時停止変更フィード   | チェンジフィードを一時停止する                              |
+| 履歴書変更フィード    | チェンジフィードを再開する                                |
+| 変更フィードを削除    | 変更フィードを削除する                                  |
+| 編集変更フィード     | 変更フィードを編集する                                  |
+| スケール変更フィード   | チェンジフィードの仕様をスケールする                           |
+| 失敗した変更フィード   | チェンジフィードの失敗                                  |
+| インポートデータ     | クラスターにデータをインポートする                            |
+| 支出制限の更新      | TiDB Cloud Serverless スケーラブル クラスターの使用制限を更新する |
+| リソース制限       | TiDB Cloud Serverless クラスターのリソース制限の更新        |
 
-For each event, the following information is logged:
+各イベントについて、次の情報が記録されます。
 
-- Event Type
-- Status
-- Message
-- Time
-- Triggered By
+-   イベントタイプ
+-   状態
+-   メッセージ
+-   時間
+-   きっかけ
 
-## Event retention policy
+## イベント保持ポリシー {#event-retention-policy}
 
-Event data is kept for 7 days.
+イベントデータは 7 日間保存されます。

@@ -1,48 +1,44 @@
 ---
 title: SHOW CREATE SEQUENCE
-summary: An overview of the usage of SHOW CREATE SEQUENCE for the TiDB database.
+summary: TiDB データベースの SHOW CREATE SEQUENCE の使用法の概要。
 ---
 
-# SHOW CREATE SEQUENCE
+# シーケンスの作成を表示 {#show-create-sequence}
 
-The `SHOW CREATE SEQUENCE` shows the detailed information of a sequence, which is similar to `SHOW CREATE TABLE`.
+`SHOW CREATE SEQUENCE` `SHOW CREATE TABLE`と同様にシーケンスの詳細情報を表示します。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowCreateSequenceStmt ::=
     "SHOW" "CREATE" "SEQUENCE" ( SchemaName "." )? TableName
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 CREATE SEQUENCE seq;
 ```
 
-```
-Query OK, 0 rows affected (0.03 sec)
-```
+    Query OK, 0 rows affected (0.03 sec)
 
 ```sql
 SHOW CREATE SEQUENCE seq;
 ```
 
-```
-+-------+----------------------------------------------------------------------------------------------------------------------------+
-| Table | Create Table                                                                                                               |
-+-------+----------------------------------------------------------------------------------------------------------------------------+
-| seq   | CREATE SEQUENCE `seq` start with 1 minvalue 1 maxvalue 9223372036854775806 increment by 1 cache 1000 nocycle ENGINE=InnoDB |
-+-------+----------------------------------------------------------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +-------+----------------------------------------------------------------------------------------------------------------------------+
+    | Table | Create Table                                                                                                               |
+    +-------+----------------------------------------------------------------------------------------------------------------------------+
+    | seq   | CREATE SEQUENCE `seq` start with 1 minvalue 1 maxvalue 9223372036854775806 increment by 1 cache 1000 nocycle ENGINE=InnoDB |
+    +-------+----------------------------------------------------------------------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension. The implementation is modeled on sequences available in MariaDB.
+このステートメントはTiDBの拡張機能です。実装はMariaDBで利用可能なシーケンスをモデルにしています。
 
-## See also
+## 参照 {#see-also}
 
-* [CREATE SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
-* [ALTER SEQUENCE](/sql-statements/sql-statement-alter-sequence.md)
-* [DROP SEQUENCE](/sql-statements/sql-statement-drop-sequence.md)
+-   [シーケンスを作成](/sql-statements/sql-statement-create-sequence.md)
+-   [シーケンスの変更](/sql-statements/sql-statement-alter-sequence.md)
+-   [ドロップシーケンス](/sql-statements/sql-statement-drop-sequence.md)

@@ -1,40 +1,36 @@
 ---
 title: Data App Configuration Files
-summary: This document describes the configuration files of Data App in TiDB Cloud.
+summary: このドキュメントでは、TiDB Cloudのデータ アプリの構成ファイルについて説明します。
 ---
 
-# Data App Configuration Files
+# データアプリコンフィグレーションファイル {#data-app-configuration-files}
 
-This document describes the configuration files of a [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) in TiDB Cloud.
+このドキュメントでは、 TiDB Cloudの[データアプリ](/tidb-cloud/tidb-cloud-glossary.md#data-app)の構成ファイルについて説明します。
 
-If you have [connected your Data App to GitHub](/tidb-cloud/data-service-manage-github-connection.md), you can find the configuration files of your Data App in your specified directory on GitHub as follows:
+[データアプリをGitHubに接続しました](/tidb-cloud/data-service-manage-github-connection.md)がある場合は、次のように GitHub の指定したディレクトリにデータ アプリの構成ファイルが見つかります。
 
-```
-├── <Your Data App directory>
-│   ├── data_sources
-│   │   └── cluster.json
-│   ├── dataapp_config.json
-│   ├── http_endpoints
-│   │   ├── config.json
-│   │   └── sql
-│   │       ├── <method>-<endpoint-path1>.sql
-│   │       ├── <method>-<endpoint-path2>.sql
-│   │       └── <method>-<endpoint-path3>.sql
-```
+    ├── <Your Data App directory>
+    │   ├── data_sources
+    │   │   └── cluster.json
+    │   ├── dataapp_config.json
+    │   ├── http_endpoints
+    │   │   ├── config.json
+    │   │   └── sql
+    │   │       ├── <method>-<endpoint-path1>.sql
+    │   │       ├── <method>-<endpoint-path2>.sql
+    │   │       └── <method>-<endpoint-path3>.sql
 
-## Data source configuration
+## データソースの構成 {#data-source-configuration}
 
-The data source of a Data App comes from its linked TiDB clusters. You can find the data source configuration in `data_sources/cluster.json`.
+データアプリのデータソースは、リンクされたTiDBクラスタから取得されます。データソースの構成は`data_sources/cluster.json`に記載されています。
 
-```
-├── <Your Data App directory>
-│   ├── data_sources
-│   │   └── cluster.json
-```
+    ├── <Your Data App directory>
+    │   ├── data_sources
+    │   │   └── cluster.json
 
-For each Data App, you can link to one or multiple TiDB clusters.
+各データ アプリごとに、1 つまたは複数の TiDB クラスターにリンクできます。
 
-The following is an example configuration of `cluster.json`. In this example, there are two linked clusters for this Data App.
+以下は`cluster.json`の構成例です。この例では、このデータアプリには 2 つのリンクされたクラスターがあります。
 
 ```json
 [
@@ -47,22 +43,20 @@ The following is an example configuration of `cluster.json`. In this example, th
 ]
 ```
 
-The field description is as follows:
+フィールドの説明は次のとおりです。
 
-| Field   | Type    | Description  |
-|---------|---------|--------------|
-| `cluster_id` | Integer | The ID of your TiDB cluster. You can get it from the URL of your cluster. For example, if your cluster URL is `https://tidbcloud.com/clusters/1234567891234567890/overview`, your cluster ID is `1234567891234567890`. |
+| 分野           | タイプ | 説明                                                                                                                                               |
+| ------------ | --- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `cluster_id` | 整数  | TiDBクラスターのIDです。クラスターのURLから取得できます。例えば、クラスターのURLが`https://tidbcloud.com/clusters/1234567891234567890/overview`の場合、クラスターIDは`1234567891234567890`です。 |
 
-## Data App configuration
+## データアプリの構成 {#data-app-configuration}
 
-The properties of a Data App contain the App ID, name, and type. You can find the properties in the `dataapp_config.json` file.
+データアプリのプロパティには、アプリID、名前、タイプが含まれます。これらのプロパティは`dataapp_config.json`ファイルで確認できます。
 
-```
-├── <Your Data App directory>
-│   ├── dataapp_config.json
-```
+    ├── <Your Data App directory>
+    │   ├── dataapp_config.json
 
-The following is an example configuration of `dataapp_config.json`.
+以下は`dataapp_config.json`の構成例です。
 
 ```json
 {
@@ -74,35 +68,33 @@ The following is an example configuration of `dataapp_config.json`.
 }
 ```
 
-The description of each field is as follows:
+各フィールドの説明は次のとおりです。
 
-| Field      | Type   | Description        |
-|------------|--------|--------------------|
-| `app_id`   | String | The Data App ID. Do not change this field unless your `dataapp_config.json` file is copied from another Data App and you want to update it to the ID of your current Data App. Otherwise, the deployment triggered by this modification will fail. |
-| `app_name` | String | The Data App name. |
-| `app_type` | String | The Data App type, which can only be `"dataapi"`. |
-| `app_version` | String | The Data App version, which is in the `"<major>.<minor>.<patch>"` format. For example, `"1.0.0"`. |
-| `description` | String | The Data App description. |
+| 分野            | タイプ | 説明                                                                                                                           |
+| ------------- | --- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `app_id`      | 弦   | データアプリID。1 `dataapp_config.json`が別のデータアプリからコピーされ、現在のデータアプリのIDに更新する場合を除き、このフィールドを変更しないでください。変更しないと、この変更によってトリガーされるデプロイが失敗します。 |
+| `app_name`    | 弦   | データ アプリの名前。                                                                                                                  |
+| `app_type`    | 弦   | データ アプリのタイプ。指定できるのは`"dataapi"`のみです。                                                                                          |
+| `app_version` | 弦   | データアプリのバージョン（ `"<major>.<minor>.<patch>"`形式）。例： `"1.0.0"` 。                                                                  |
+| `description` | 弦   | データ アプリの説明。                                                                                                                  |
 
-## HTTP endpoint configuration
+## HTTPエンドポイント構成 {#http-endpoint-configuration}
 
-In your Data App directory, you can find endpoint configurations in `http_endpoints/config.json` and the SQL files in `http_endpoints/sql/<method>-<endpoint-name>.sql`.
+データ アプリ ディレクトリでは、エンドポイント構成は`http_endpoints/config.json`に、SQL ファイルは`http_endpoints/sql/<method>-<endpoint-name>.sql`にあります。
 
-```
-├── <Your Data App directory>
-│   ├── http_endpoints
-│   │   ├── config.json
-│   │   └── sql
-│   │       ├── <method>-<endpoint-path1>.sql
-│   │       ├── <method>-<endpoint-path2>.sql
-│   │       └── <method>-<endpoint-path3>.sql
-```
+    ├── <Your Data App directory>
+    │   ├── http_endpoints
+    │   │   ├── config.json
+    │   │   └── sql
+    │   │       ├── <method>-<endpoint-path1>.sql
+    │   │       ├── <method>-<endpoint-path2>.sql
+    │   │       └── <method>-<endpoint-path3>.sql
 
-### Endpoint configuration
+### エンドポイント構成 {#endpoint-configuration}
 
-For each Data App, there can be one or multiple endpoints. You can find the configurations of all endpoints for a Data App in `http_endpoints/config.json`.
+各データアプリには、1つまたは複数のエンドポイントが存在します。データアプリのすべてのエンドポイントの設定は、 `http_endpoints/config.json`で確認できます。
 
-The following is an example configuration of `config.json`. In this example, there are two endpoints for this Data App.
+以下は`config.json`の構成例です。この例では、このデータアプリには 2 つのエンドポイントがあります。
 
 ```json
 [
@@ -162,41 +154,41 @@ The following is an example configuration of `config.json`. In this example, the
 ]
 ```
 
-The description of each field is as follows:
+各フィールドの説明は次のとおりです。
 
-| Field         | Type   | Description |
-|---------------|--------|-------------|
-| `name`        | String | The endpoint name.            |
-| `description` | String | (Optional) The endpoint description.          |
-| `method`      | String | The HTTP method of the endpoint. You can use `GET` to retrieve data, use `POST` to create or insert data, use `PUT` to update or modify data, and use `DELETE` to delete data. |
-| `endpoint`    | String | The unique path of the endpoint in the Data App. Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in the path, which must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`. The length of the path must be less than 64 characters.|
-| `cluster_id`  | String | The ID of the TiDB cluster for your endpoint. You can get it from the URL of your TiDB cluster. For example, if your cluster URL is `https://tidbcloud.com/clusters/1234567891234567890/overview`, the cluster ID is `1234567891234567890`. |
-| `params` | Array | The parameters used in the endpoint. By defining parameters, you can dynamically replace the parameter value in your queries through the endpoint. In `params`, you can define one or multiple parameters. For each parameter, you need to define its `name`, `type`, `required`, and `default` fields. If your endpoint does not need any parameters. You can leave `params` empty such as `"params": []`. |
-| `params.name` | String | The name of the parameter. The name can only include letters, digits, and underscores (`_`) and must start with a letter or an underscore (`_`). **DO NOT** use `page` and `page_size` as parameter names, which are reserved for pagination of request results. |
-| `params.type` | String | The data type of the parameter. Supported values are `string`, `number`, `integer`, `boolean`, and `array`. When using a `string` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `string` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`. |
-| `params.required` | Integer | Specifies whether the parameter is required in the request. Supported values are `0` (not required) and `1` (required). The default value is `0`.  |
-| `params.enum` | String | (Optional) Specifies the value options of the parameter. This field is only valid when `params.type` is set to `string`, `number`, or `integer`. To specify multiple values, you can separate them with a comma (`,`). |
-| `params.default` | String | The default value of the parameter. Make sure that the value matches the type of parameter you specified. Otherwise, the endpoint returns an error. The default value of an `ARRAY` type parameter is a string and you can use a comma (`,`) to separate multiple values. |
-| `params.description` | String | The description of the parameter. |
-| `params.is_path_parameter` | Boolean | Specifies whether the parameter is a path parameter. If it is set to `true`, ensure that the `endpoint` field contains the corresponding parameter placeholders; otherwise, it will cause deployment failures. Conversely, if the `endpoint` field contains the corresponding parameter placeholders but this field is set to `false`, it will also cause deployment failures. |
-| `settings.timeout`     | Integer | The timeout for the endpoint in milliseconds, which is `30000` by default. You can set it to an integer from `1` to `60000`.  |
-| `settings.row_limit`   | Integer  | The maximum number of rows that the endpoint can operate or return, which is `1000` by default. When `batch_operation` is set to `0`, you can set it to an integer from `1` to `2000`. When `batch_operation` is set to `1`, you can set it to an integer from `1` to `100`.  |
-| `settings.enable_pagination`   | Integer  | Controls whether to enable the pagination for the results returned by the request. Supported values are `0` (disabled) and `1` (enabled). The default value is `0`. |
-| `settings.cache_enabled`   | Integer  | Controls whether to cache the response returned by your `GET` requests within a specified time-to-live (TTL) period. Supported values are `0` (disabled) and `1` (enabled). The default value is `0`. |
-| `settings.cache_ttl`   | Integer  | The time-to-live (TTL) period in seconds for cached response when `settings.cache_enabled` is set to `1`. You can set it to an integer from 30 to 600. During the TTL period, if you make the same `GET` requests again, Data Service returns the cached response directly instead of fetching data from the target database again, which improves your query performance. |
-| `tag`    | String | The tag for the endpoint. The default value is `"Default"`. |
-| `batch_operation`    | Integer | Controls whether to enable the endpoint to operate in batch mode. Supported values are `0` (disabled) and `1` (enabled). When it is set to `1`, you can operate on multiple rows in a single request. To enable this option, make sure that the request method is `POST` or `PUT`. |
-| `sql_file`    | String | The SQL file directory for the endpoint. For example, `"sql/GET-v1.sql"`. |
-| `type`        | String | The type of the endpoint. The value is `"system-data"` for predefined system endpoints and `"sql_endpoint"` for other endpoints. |
-| `return_type` | String | The response format of the endpoint, which can only be `"json"`.             |
+| 分野                           | タイプ  | 説明                                                                                                                                                                                                                |
+| ---------------------------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                       | 弦    | エンドポイント名。                                                                                                                                                                                                         |
+| `description`                | 弦    | (オプション) エンドポイントの説明。                                                                                                                                                                                               |
+| `method`                     | 弦    | エンドポイントのHTTPメソッド`GET`データの取得、 `POST`データの作成または挿入、 `PUT`データの更新または変更、 `DELETE`データの削除に使用できます。                                                                                                                          |
+| `endpoint`                   | 弦    | データアプリ内のエンドポイントの一意のパス。パスには文字、数字、アンダースコア（ `_` ）、スラッシュ（ `/` ）のみを使用できます。パスはスラッシュ（ `/` ）で始まり、文字、数字、またはアンダースコア（ `_` ）で終わる必要があります。例： `/my_endpoint/get_id` 。パスの長さは64文字未満である必要があります。                                     |
+| `cluster_id`                 | 弦    | エンドポイントのTiDBクラスターのIDです。TiDBクラスターのURLから取得できます。例えば、クラスターURLが`https://tidbcloud.com/clusters/1234567891234567890/overview`の場合、クラスターIDは`1234567891234567890`です。                                                       |
+| `params`                     | 配列   | エンドポイントで使用されるパラメータ。パラメータを定義することで、エンドポイントを介したクエリ内のパラメータ値を動的に置き換えることができます。1 では、 `params` `type` `name` `required`を定義する必要があります。エンドポイントにパラメータが不要な場合は、 `params`空白のままにすることができます（例： `default` `"params": []` 。           |
+| `params.name`                | 弦    | パラメータ名。名前には文字、数字、アンダースコア（ `_` ）のみを使用でき、文字またはアンダースコア（ `_` ）で始まる必要があります。7と`page_size` `page`結果のページ区切り用に予約されているため、パラメータ名として使用し**ないでください**。                                                                           |
+| `params.type`                | 弦    | パラメータのデータ型。サポートされる値は`string` 、 `number` 、 `integer` 、 `boolean` 、 `array`です。11 型のパラメータを使用する場合は、引用符（ `'`または`"` ）を追加する必要はありません。例えば、 `string`型`string`は`foo`が有効であり、 `"foo"`として処理されますが、 `"foo"` `"\"foo\""`として処理されます。 |
+| `params.required`            | 整数   | リクエストにおいてパラメータが必須かどうかを指定します。サポートされている値は`0` （必須ではない）と`1` （必須）です。デフォルト値は`0`です。                                                                                                                                      |
+| `params.enum`                | 弦    | （オプション）パラメータの値オプションを指定します。このフィールドは、 `params.type` `string` 、 `number` 、または`integer`に設定されている場合にのみ有効です。複数の値を指定するには、カンマ（ `,` ）で区切ります。                                                                                |
+| `params.default`             | 弦    | パラメータのデフォルト値です。値が指定したパラメータの型と一致していることを確認してください。一致していない場合、エンドポイントはエラーを返します。1 `ARRAY`のパラメータのデフォルト値は文字列で、複数の値を指定する場合はカンマ ( `,` ) で区切ることができます。                                                                        |
+| `params.description`         | 弦    | パラメータの説明。                                                                                                                                                                                                         |
+| `params.is_path_parameter`   | ブール値 | パラメータがパスパラメータかどうかを指定します`true`に設定されている場合、 `endpoint`フィールドに対応するパラメータプレースホルダが含まれていることを確認してください。含まれていない場合、デプロイに失敗します。逆に、 `endpoint`フィールドに対応するパラメータプレースホルダが含まれているにもかかわらず、このフィールドが`false`に設定されている場合も、デプロイに失敗します。        |
+| `settings.timeout`           | 整数   | エンドポイントのタイムアウト（ミリ秒単位）。デフォルトは`30000`です`1`から`60000`までの整数に設定できます。                                                                                                                                                    |
+| `settings.row_limit`         | 整数   | エンドポイントが操作または返すことができる行の最大数。デフォルトは`1000`です。3 `batch_operation` `0`に設定すると、 `1`から`2000`までの整数を設定できます。11 `batch_operation` `1`に設定すると、 `1`から`100`までの整数を設定できます。                                                          |
+| `settings.enable_pagination` | 整数   | リクエストによって返される結果のページ区切りを有効にするかどうかを制御します。サポートされる値は`0` (無効) と`1` (有効) です。デフォルト値は`0`です。                                                                                                                               |
+| `settings.cache_enabled`     | 整数   | `GET`リクエストで返されたレスポンスを、指定された有効期限（TTL）内にキャッシュするかどうかを制御します。サポートされている値は`0` （無効）と`1` （有効）です。デフォルト値は`0`です。                                                                                                              |
+| `settings.cache_ttl`         | 整数   | `settings.cache_enabled` `1`に設定した場合の、キャッシュされたレスポンスの有効期間（TTL）（秒単位）。30 から 600 までの整数に設定できます。TTL 期間中に同じリクエストを`GET`再度送信した場合、Data Service はターゲットデータベースからデータを再度取得するのではなく、キャッシュされたレスポンスを直接返すため、クエリのパフォーマンスが向上します。         |
+| `tag`                        | 弦    | エンドポイントのタグ。デフォルト値は`"Default"`です。                                                                                                                                                                                  |
+| `batch_operation`            | 整数   | エンドポイントをバッチモードで操作できるようにするかどうかを制御します。サポートされる値は`0` (無効) と`1` (有効) です。 `1`に設定すると、1 回のリクエストで複数の行を操作できます。このオプションを有効にするには、リクエストメソッドが`POST`または`PUT`であることを確認してください。                                                       |
+| `sql_file`                   | 弦    | エンドポイントのSQLファイルディレクトリ。例： `"sql/GET-v1.sql"` 。                                                                                                                                                                     |
+| `type`                       | 弦    | エンドポイントのタイプ。定義済みシステムエンドポイントの場合は値は`"system-data"` 、その他のエンドポイントの場合は`"sql_endpoint"` 。                                                                                                                               |
+| `return_type`                | 弦    | エンドポイントの応答形式`"json"`のみが可能です。                                                                                                                                                                                      |
 
-### SQL file configuration
+### SQLファイルの構成 {#sql-file-configuration}
 
-The SQL file of an endpoint specifies the SQL statements to query data through the endpoint. You can find the endpoint SQL files of a Data App in the `http_endpoints/sql/` directory. For each endpoint, there should be a corresponding SQL file.
+エンドポイントのSQLファイルは、エンドポイントを介してデータをクエリするためのSQL文を指定します。データアプリのエンドポイントSQLファイルは、 `http_endpoints/sql/`ディレクトリにあります。エンドポイントごとに、対応するSQLファイルが存在します。
 
-The name of a SQL file is in the `<method>-<endpoint-path>.sql` format, where `<method>` and `<endpoint-path>` must match the `method` and `endpoint` configuration in [`http_endpoints/config.json`](#endpoint-configuration).
+SQL ファイルの名前は`<method>-<endpoint-path>.sql`形式です。3 と`<endpoint-path>` `<method>` [`http_endpoints/config.json`](#endpoint-configuration) `method`と`endpoint`構成と一致する必要があります。
 
-In the SQL file, you can write statements such as table join queries, complex queries, and aggregate functions. The following is an example SQL file.
+SQLファイルでは、テーブル結合クエリ、複雑なクエリ、集計関数などのステートメントを記述できます。以下はSQLファイルの例です。
 
 ```sql
 /* Getting Started:
@@ -214,16 +206,16 @@ WHERE
   country = ${country};
 ```
 
-When writing a SQL file, pay attention to the following:
+SQL ファイルを書き込むときは、次の点に注意してください。
 
-- At the beginning of the SQL file, you need to specify the database in the SQL statements. For example, `USE database_name;`.
+-   SQLファイルの先頭で、SQL文にデータベースを指定する必要があります。例： `USE database_name;` 。
 
-- To define a parameter of the endpoint, you can insert it as a variable placeholder like `${variable-name}` to the SQL statement.
+-   エンドポイントのパラメータを定義するには、それを`${variable-name}`ような変数プレースホルダとして SQL ステートメントに挿入します。
 
-    In the preceding example, `${country}` is used as a parameter of the endpoint. With this parameter, you can specify a desired country to query in your endpoint curl command.
+    上記の例では、エンドポイントのパラメータとして`${country}`使用されています。このパラメータを使用することで、エンドポイントの curl コマンドでクエリする国を指定できます。
 
-    > **Note:**
+    > **注記：**
     >
-    > - The parameter name is case-sensitive.
-    > - The parameter cannot be a table name or column name.
-    > - The parameter name in the SQL file match the parameter name configured in [`http_endpoints/config.json`](#endpoint-configuration).
+    > -   パラメータ名では大文字と小文字が区別されます。
+    > -   パラメータにはテーブル名または列名は指定できません。
+    > -   SQL ファイル内のパラメータ名は、 [`http_endpoints/config.json`](#endpoint-configuration)で構成されたパラメータ名と一致します。

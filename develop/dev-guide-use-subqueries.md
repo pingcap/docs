@@ -1,39 +1,39 @@
 ---
 title: Subquery
-summary: Learn how to use subquery in TiDB.
+summary: TiDB でサブクエリを使用する方法を学びます。
 ---
 
-# Subquery
+# サブクエリ {#subquery}
 
-This document introduces subquery statements and categories in TiDB.
+このドキュメントでは、TiDB のサブクエリ ステートメントとカテゴリについて説明します。
 
-## Overview
+## 概要 {#overview}
 
-A subquery is a query within another SQL query. With subquery, the query result can be used in another query.
+サブクエリとは、別のSQLクエリ内に含まれるクエリです。サブクエリを使用すると、クエリの結果を別のクエリで使用できます。
 
-The following takes the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application as an example to introduce subquery.
+以下では、サブクエリを紹介するために、アプリケーション[書店](/develop/dev-guide-bookshop-schema-design.md)例に挙げます。
 
-## Subquery statement
+## サブクエリステートメント {#subquery-statement}
 
-In most cases, there are five types of subqueries:
+ほとんどの場合、サブクエリには次の 5 つの種類があります。
 
-- Scalar Subquery, such as `SELECT (SELECT s1 FROM t2) FROM t1`.
-- Derived Tables, such as `SELECT t1.s1 FROM (SELECT s1 FROM t2) t1`.
-- Existential Test, such as `WHERE NOT EXISTS(SELECT ... FROM t2)`, `WHERE t1.a IN (SELECT ... FROM t2)`.
-- Quantified Comparison, such as `WHERE t1.a = ANY(SELECT ... FROM t2)`, `WHERE t1.a = ANY(SELECT ... FROM t2)`.
-- Subquery as a comparison operator operand, such as `WHERE t1.a > (SELECT ... FROM t2)`.
+-   スカラーサブクエリ (例: `SELECT (SELECT s1 FROM t2) FROM t1` )。
+-   派生テーブル (例: `SELECT t1.s1 FROM (SELECT s1 FROM t2) t1` )。
+-   存在テスト、例: `WHERE NOT EXISTS(SELECT ... FROM t2)` `WHERE t1.a IN (SELECT ... FROM t2)`
+-   `WHERE t1.a = ANY(SELECT ... FROM t2)`などの定量化された比較`WHERE t1.a = ANY(SELECT ... FROM t2)`
+-   比較演算子のオペランドとしてのサブクエリ (例: `WHERE t1.a > (SELECT ... FROM t2)` )。
 
-## Category of subquery
+## サブクエリのカテゴリ {#category-of-subquery}
 
-The subquery can be categorized as [Correlated Subquery](https://en.wikipedia.org/wiki/Correlated_subquery) and Self-contained Subquery. TiDB treats these two types differently.
+サブクエリは、 [相関サブクエリ](https://en.wikipedia.org/wiki/Correlated_subquery)と自己完結型サブクエリに分類できます。TiDB では、これら 2 つのタイプを異なる方法で扱います。
 
-Whether a subquery is correlated or not depends on whether it refers to columns used in its outer query.
+サブクエリが相関しているかどうかは、サブクエリが外部クエリで使用される列を参照しているかどうかによって決まります。
 
-### Self-contained subquery
+### 自己完結型サブクエリ {#self-contained-subquery}
 
-For a self-contained subquery that uses subquery as operand of comparison operators (`>`, `>=`, `<` , `<=` , `=` , or `! =`), the inner subquery queries only once, and TiDB rewrites it as a constant during the execution plan phase.
+サブクエリを比較演算子 ( `>` 、 `>=` 、 `<` 、 `<=` 、 `=` 、または`! =` ) のオペランドとして使用する自己完結型サブクエリの場合、内部サブクエリは 1 回だけクエリを実行し、実行プラン フェーズで TiDB によって定数として書き換えられます。
 
-For example, to query authors in the `authors` table whose age is greater than the average age, you can use a subquery as a comparison operator operand.
+たとえば、年齢が平均年齢より大きい`authors`テーブル内の著者を照会するには、サブクエリを比較演算子のオペランドとして使用できます。
 
 ```sql
 SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > (
@@ -44,50 +44,48 @@ SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_ye
 )
 ```
 
-The inner subquery is executed before TiDB executes the above query:
+TiDB が上記のクエリを実行する前に、内部サブクエリが実行されます。
 
 ```sql
 SELECT AVG(IFNULL(a2.death_year, YEAR(NOW())) - a2.birth_year) AS average_age FROM authors a2;
 ```
 
-Suppose the result of the query is 34, that is, the average age is 34, and 34 will be used as a constant to replace the original subquery.
+クエリの結果が 34 である、つまり平均年齢が 34 歳であると仮定し、34 が定数として使用され、元のサブクエリが置き換えられます。
 
 ```sql
 SELECT * FROM authors a1
 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > 34;
 ```
 
-The result is as follows:
+結果は次のようになります。
 
-```
-+--------+-------------------+--------+------------+------------+
-| id     | name              | gender | birth_year | death_year |
-+--------+-------------------+--------+------------+------------+
-| 13514  | Kennith Kautzer   | 1      | 1956       | 2018       |
-| 13748  | Dillon Langosh    | 1      | 1985       | NULL       |
-| 99184  | Giovanny Emmerich | 1      | 1954       | 2012       |
-| 180191 | Myrtie Robel      | 1      | 1958       | 2009       |
-| 200969 | Iva Renner        | 0      | 1977       | NULL       |
-| 209671 | Abraham Ortiz     | 0      | 1943       | 2016       |
-| 229908 | Wellington Wiza   | 1      | 1932       | 1969       |
-| 306642 | Markus Crona      | 0      | 1969       | NULL       |
-| 317018 | Ellis McCullough  | 0      | 1969       | 2014       |
-| 322369 | Mozelle Hand      | 0      | 1942       | 1977       |
-| 325946 | Elta Flatley      | 0      | 1933       | 1986       |
-| 361692 | Otho Langosh      | 1      | 1931       | 1997       |
-| 421294 | Karelle VonRueden | 0      | 1977       | NULL       |
-...
-```
+    +--------+-------------------+--------+------------+------------+
+    | id     | name              | gender | birth_year | death_year |
+    +--------+-------------------+--------+------------+------------+
+    | 13514  | Kennith Kautzer   | 1      | 1956       | 2018       |
+    | 13748  | Dillon Langosh    | 1      | 1985       | NULL       |
+    | 99184  | Giovanny Emmerich | 1      | 1954       | 2012       |
+    | 180191 | Myrtie Robel      | 1      | 1958       | 2009       |
+    | 200969 | Iva Renner        | 0      | 1977       | NULL       |
+    | 209671 | Abraham Ortiz     | 0      | 1943       | 2016       |
+    | 229908 | Wellington Wiza   | 1      | 1932       | 1969       |
+    | 306642 | Markus Crona      | 0      | 1969       | NULL       |
+    | 317018 | Ellis McCullough  | 0      | 1969       | 2014       |
+    | 322369 | Mozelle Hand      | 0      | 1942       | 1977       |
+    | 325946 | Elta Flatley      | 0      | 1933       | 1986       |
+    | 361692 | Otho Langosh      | 1      | 1931       | 1997       |
+    | 421294 | Karelle VonRueden | 0      | 1977       | NULL       |
+    ...
 
-For self-contained subqueries such as Existential Test and Quantified Comparison, TiDB rewrites and replaces them with equivalent queries for better performance. For more information, see [Subquery Related Optimizations](/subquery-optimization.md).
+存在テストや定量比較などの自己完結型サブクエリについては、TiDBはパフォーマンス向上のためにそれらを書き換え、同等のクエリに置き換えます。詳細については、 [サブクエリ関連の最適化](/subquery-optimization.md)参照してください。
 
-### Correlated subquery
+### 相関サブクエリ {#correlated-subquery}
 
-For correlated subquery, because the inner subquery references the columns from the outer query, each subquery is executed once for each row of the outer query. That is, assuming that the outer query gets 10 million results, the subquery will also be executed 10 million times, which will consume more time and resources.
+相関サブクエリの場合、内部サブクエリは外部クエリの列を参照するため、各サブクエリは外部クエリの各行に対して1回ずつ実行されます。つまり、外部クエリが1,000万件の結果を取得すると仮定すると、サブクエリも1,000万回実行され、より多くの時間とリソースが消費されます。
 
-Therefore, in the process of processing, TiDB will try to [Decorrelate of Correlated Subquery](/correlated-subquery-optimization.md) to improve the query efficiency at the execution plan level.
+したがって、処理の過程で、TiDB [相関サブクエリの非相関](/correlated-subquery-optimization.md)実行プラン レベルでクエリ効率を向上させるように努めます。
 
-The following statement is to query authors who are older than the average age of other authors of the same gender.
+次の文は、同じ性別の他の著者の平均年齢よりも年上の著者を照会するためのものです。
 
 ```sql
 SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > (
@@ -101,7 +99,7 @@ SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_ye
 );
 ```
 
-TiDB rewrites it to an equivalent `join` query:
+TiDB はこれを同等の`join`クエリに書き換えます。
 
 ```sql
 SELECT *
@@ -121,24 +119,24 @@ WHERE
     AND (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > a2.average_age;
 ```
 
-As a best practice, in actual development, it is recommended to avoid querying through a correlated subquery if you can write another equivalent query with better performance.
+ベスト プラクティスとして、実際の開発では、パフォーマンスが向上する別の同等のクエリを記述できる場合は、相関サブクエリを介したクエリを避けることをお勧めします。
 
-## Read more
+## 続きを読む {#read-more}
 
-- [Subquery Related Optimizations](/subquery-optimization.md)
-- [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
-- [Subquery Optimization in TiDB](https://www.pingcap.com/blog/subquery-optimization-in-tidb/)
+-   [サブクエリ関連の最適化](/subquery-optimization.md)
+-   [相関サブクエリの非相関](/correlated-subquery-optimization.md)
+-   [TiDBにおけるサブクエリの最適化](https://www.pingcap.com/blog/subquery-optimization-in-tidb/)
 
-## Need help?
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

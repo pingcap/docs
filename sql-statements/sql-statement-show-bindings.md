@@ -1,13 +1,13 @@
 ---
 title: SHOW [GLOBAL|SESSION] BINDINGS
-summary: Use of SHOW BINDINGS binding in TiDB database.
+summary: TiDB データベースでの SHOW BINDINGS バインディングの使用。
 ---
 
-# SHOW [GLOBAL|SESSION] BINDINGS
+# [グローバル|セッション]バインディングを表示 {#show-global-session-bindings}
 
-The `SHOW BINDINGS` statement is used to display information about created SQL bindings. A `BINDING` can be on either a `GLOBAL` or `SESSION` basis. The default is `SESSION`.
+`SHOW BINDINGS`ステートメントは、作成されたSQLバインディングに関する情報を表示するために使用されます。3 `BINDING` `GLOBAL`または`SESSION`いずれかの基準で表されます。デフォルトは`SESSION`です。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowBindingsStmt ::=
@@ -18,23 +18,23 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Syntax description
+## 構文の説明 {#syntax-description}
 
-This statement outputs the execution plan bindings at the GLOBAL or SESSION level. The default scope is SESSION. Currently `SHOW BINDINGS` outputs eight columns, as shown below:
+この文は、GLOBALまたはSESSIONレベルの実行プランバインディングを出力します。デフォルトのスコープはSESSIONです。現在、 `SHOW BINDINGS`以下に示すように8つの列を出力します。
 
-| Column Name | Description |
-| :---------- | :------------- |
-| original_sql  |  Original SQL statement after parameterization |
-| bind_sql | Bound SQL statement with hints |
-| default_db | Default database |
-| status | Status including 'Using', 'Deleted', 'Invalid', 'Rejected', and 'Pending verification'|
-| create_time | Created time |
-| update_time | Updated time |
-| charset | Character set |
-| collation | Sorting rule |
-| source | The way in which a binding is created, including `manual` (created by the `create [global] binding` SQL statement), `capture` (captured automatically by TiDB), and `evolve` (evolved automatically by TiDB) |
+| カラム名     | 説明                                                                                                                                                    |
+| :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| オリジナルSQL | パラメータ化後の元のSQL文                                                                                                                                        |
+| バインドSQL  | ヒント付きのバインドされたSQL文                                                                                                                                     |
+| デフォルト_db | デフォルトのデータベース                                                                                                                                          |
+| 状態       | 「使用中」、「削除済み」、「無効」、「拒否」、「検証待ち」などのステータス                                                                                                                 |
+| 作成時間     | 作成時間                                                                                                                                                  |
+| 更新時間     | 更新時間                                                                                                                                                  |
+| 文字セット    | 文字セット                                                                                                                                                 |
+| 照合順序     | ソートルール                                                                                                                                                |
+| ソース      | バインディングが作成される方法`manual` ( `create [global] binding` SQL ステートメントによって作成される)、 `capture` (TiDB によって自動的にキャプチャされる)、および`evolve` (TiDB によって自動的に展開される) が含まれます。 |
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (
@@ -123,14 +123,14 @@ Original_sql: select * from t1 where b = ?
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [CREATE [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-create-binding.md)
-* [DROP [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-drop-binding.md)
-* [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
-* [Optimizer Hints](/optimizer-hints.md)
-* [SQL Plan Management](/sql-plan-management.md)
+-   [[グローバル|セッション]バインディングの作成](/sql-statements/sql-statement-create-binding.md)
+-   [DROP [グローバル|セッション] バインディング](/sql-statements/sql-statement-drop-binding.md)
+-   [テーブルを分析する](/sql-statements/sql-statement-analyze-table.md)
+-   [オプティマイザヒント](/optimizer-hints.md)
+-   [SQLプラン管理](/sql-plan-management.md)

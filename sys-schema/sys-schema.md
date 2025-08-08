@@ -1,14 +1,14 @@
 ---
 title: sys Schema
-summary: Learn about the system tables in the `sys` schema.
+summary: sys` スキーマ内のシステム テーブルについて学習します。
 ---
 
-# `sys` Schema
+# <code>sys</code>スキーマ {#code-sys-code-schema}
 
-Starting from v8.0.0, TiDB provides the `sys` schema. You can use the views in `sys` schema to understand the data in the system tables, [`INFORMATION_SCHEMA`](/information-schema/information-schema.md), and [`PERFORMANCE SCHEMA`](/performance-schema/performance-schema.md) of TiDB.
+TiDBはv8.0.0以降、 `sys`スキーマを提供します。3 `sys`のビューを使用して、TiDBのシステムテーブル[`INFORMATION_SCHEMA`](/information-schema/information-schema.md) [`PERFORMANCE SCHEMA`](/performance-schema/performance-schema.md)データを把握できます。
 
-## Tables for MySQL compatibility
+## MySQL互換性のためのテーブル {#tables-for-mysql-compatibility}
 
-| Table name                                                                                       | Description                                               |
-|--------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
-| [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)                                  | Records indexes that have not been used since the last start of TiDB. |
+| テーブル名                                                               | 説明                                  |
+| ------------------------------------------------------------------- | ----------------------------------- |
+| [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) | TiDB の最後の起動以降に使用されていないインデックスを記録します。 |

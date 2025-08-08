@@ -1,33 +1,31 @@
 ---
 title: TiCDC Avro Protocol
-summary: Learn the concept of TiCDC Avro Protocol and how to use it.
+summary: TiCDC Avro プロトコルの概念とその使用方法を学びます。
 ---
 
-# TiCDC Avro Protocol
+# TiCDC Avroプロトコル {#ticdc-avro-protocol}
 
-TiCDC Avro protocol is a third-party implementation of the [Confluent Avro](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/serdes-avro.html) data exchange protocol defined by [Confluent Platform](https://docs.confluent.io/platform/current/platform.html). Avro is a data format defined by [Apache Avro™](https://avro.apache.org/)
+TiCDC Avroプロトコルは、 [コンフルエントプラットフォーム](https://docs.confluent.io/platform/current/platform.html)で定義された[合流アブロ](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/serdes-avro.html)データ交換プロトコルのサードパーティ実装です。Avroは[アパッチ アブロ™](https://avro.apache.org/)で定義されたデータ形式です。
 
-This document describes how TiCDC implements the Confluent Avro protocol, and the interaction between Avro and [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html).
+このドキュメントでは、TiCDC が Confluent Avro プロトコルを実装する方法と、Avro と[Confluent スキーマレジストリ](https://docs.confluent.io/platform/current/schema-registry/index.html)間の相互作用について説明します。
 
-> **Warning:**
+> **警告：**
 >
-> Starting from v7.3.0, if you enable TiCDC to [replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index), TiCDC will report an error when you create a changefeed that uses the Avro protocol.
+> v7.3.0 以降、TiCDC を[有効なインデックスのないテーブルを複製する](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index)に有効にすると、Avro プロトコルを使用する変更フィードを作成するときに TiCDC によってエラーが報告されます。
 
-## Use Avro
+## Avroを使用する {#use-avro}
 
-The following is a configuration example using Avro:
-
-{{< copyable "shell-regular" >}}
+以下は Avro を使用した構成例です。
 
 ```shell
 cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-avro" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
 ```
 
-The value of `--schema-registry` supports the `https` protocol and `username:password` authentication. The username and password must be URL-encoded. For example, `--schema-registry=https://username:password@schema-registry-uri.com`.
+値`--schema-registry`は、プロトコル`https`と認証`username:password`サポートします。ユーザー名とパスワードはURLエンコードされている必要があります。例： `--schema-registry=https://username:password@schema-registry-uri.com` 。
 
-> **Note：**
-> 
-> When using the Avro protocol, one Kafka topic can only contain data for one table. You need to configure the [Topic dispatcher](/ticdc/ticdc-sink-to-kafka.md#topic-dispatchers) in the configuration file. 
+> **注記：**
+>
+> Avroプロトコルを使用する場合、1つのKafkaトピックには1つのテーブルのデータのみを含めることができます。設定ファイルで[トピックディスパッチャ](/ticdc/ticdc-sink-to-kafka.md#topic-dispatchers)設定する必要があります。
 
 ```shell
 [sink]
@@ -36,65 +34,61 @@ dispatchers = [
 ]
 ```
 
-## Definition of the data format
+## データ形式の定義 {#definition-of-the-data-format}
 
-TiCDC converts a DML event into a Kafka event, and the Key and Value of an event are encoded according to the Avro protocol.
+TiCDC は DML イベントを Kafka イベントに変換し、イベントのキーと値は Avro プロトコルに従ってエンコードされます。
 
-### Key data format
+### キーデータ形式 {#key-data-format}
 
-```
-{
-    "name":"{{TableName}}",
-    "namespace":"{{Namespace}}",
-    "type":"record",
-    "fields":[
-        {{ColumnValueBlock}},
-        {{ColumnValueBlock}},
-    ]
-}
-```
+    {
+        "name":"{{TableName}}",
+        "namespace":"{{Namespace}}",
+        "type":"record",
+        "fields":[
+            {{ColumnValueBlock}},
+            {{ColumnValueBlock}},
+        ]
+    }
 
-- `{{TableName}}` indicates the name of the table where the event occurs.
-- `{{Namespace}}` is the namespace of Avro.
-- `{{ColumnValueBlock}}` defines the format of each column of data.
+-   `{{TableName}}`イベントが発生したテーブルの名前を示します。
+-   `{{Namespace}}`は Avro の名前空間です。
+-   `{{ColumnValueBlock}}`データの各列の形式を定義します。
 
-The `fields` in the key contains only primary key columns or unique index columns.
+キーの`fields`には、主キー列または一意のインデックス列のみが含まれます。
 
-### Value data format
+### 値のデータ形式 {#value-data-format}
 
-```
-{
-    "name":"{{TableName}}",
-    "namespace":"{{Namespace}}",
-    "type":"record",
-    "fields":[
-        {{ColumnValueBlock}},
-        {{ColumnValueBlock}},
-    ]
-}
-```
+    {
+        "name":"{{TableName}}",
+        "namespace":"{{Namespace}}",
+        "type":"record",
+        "fields":[
+            {{ColumnValueBlock}},
+            {{ColumnValueBlock}},
+        ]
+    }
 
-The data format of Value is the same as that of Key, by default. However, `fields` in the Value contains all columns.
+デフォルトでは、値のデータ形式はキーと同じです。ただし、値の`fields`にはすべての列が含まれます。
 
-> **Note:**
+> **注記：**
 >
-> The Avro protocol encodes DML events as follows: 
-> 
-> - For Delete events, Avro only encodes the Key part. The Value part is empty. 
-> - For Insert events, Avro encodes all column data to the Value part. 
-> - For Update events, Avro encodes only all column data that is updated to the Value part.
+> Avro プロトコルは、DML イベントを次のようにエンコードします。
 >
-> The Avro protocol does not encode the old values for Update and Delete events. Additionally, to be compatible with most Confluent sink connectors that rely on `null` records to identify deletions (`delete.on.null`), Delete events do not include extension information, such as `_tidb_commit_ts`, even when `enable-tidb-extension` is enabled. If you need these features, consider using other protocols such as Canal-JSON or Debezium.
+> -   削除イベントの場合、Avro はキー部分のみをエンコードします。値部分は空です。
+> -   挿入イベントの場合、Avro はすべての列データを値部分にエンコードします。
+> -   更新イベントの場合、Avro は値部分に更新されるすべての列データのみをエンコードします。
+>
+> Avroプロトコルは、UpdateイベントとDeleteイベントの古い値をエンコードしません。さらに、削除を識別するために`null`レコードを使用するほとんどのConfluentシンクコネクタ（ `delete.on.null` ）との互換性を確保するため、 `enable-tidb-extension`が有効になっている場合でも、Deleteイベントには`_tidb_commit_ts`などの拡張情報は含まれません。これらの機能が必要な場合は、Canal-JSONやDebeziumなどの他のプロトコルの使用を検討してください。
 
-## TiDB extension fields
+## TiDB拡張フィールド {#tidb-extension-fields}
 
-By default, Avro only collects data of changed rows in DML events and does not collect the type of data changes or TiDB-specific CommitTS (the unique identifiers of transactions). To address this issue, TiCDC introduces the following three TiDB extension fields to the Avro protocol message. When `enable-tidb-extension` is set to `true` (`false` by default) in `sink-uri`, TiCDC adds these three fields to the Avro messages during message generation.
+デフォルトでは、AvroはDMLイベント内の変更された行のデータのみを収集し、データ変更の種類やTiDB固有のCommitTS（トランザクションの一意の識別子）は収集しません。この問題に対処するため、TiCDCはAvroプロトコルメッセージに以下の3つのTiDB拡張フィールドを導入しています。7で`enable-tidb-extension` `true` （デフォルトは`false` ）に設定すると、TiCDC `sink-uri`メッセージ生成時にこれらの3つのフィールドをAvroメッセージに追加します。
 
-- `_tidb_op`: The DML type. "c" indicates insert and "u" indicates updates.
-- `_tidb_commit_ts`: The unique identifier of a transaction.
-- `_tidb_commit_physical_time`: The physical timestamp in a transaction identifier.
+-   `_tidb_op` : DML タイプ。「c」は挿入を示し、「u」は更新を示します。
+-   `_tidb_commit_ts` : トランザクションの一意の識別子。
+-   `_tidb_commit_physical_time` : トランザクション識別子内の物理的なタイムスタンプ。
 
-The following is a configuration example:
+以下は設定例です。
 
 ```shell
 cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-avro-enable-extension" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro&enable-tidb-extension=true" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
@@ -107,121 +101,113 @@ dispatchers = [
 ]
 ```
 
-After you enable [`enable-tidb-extension`](#tidb-extension-fields), the data format of the Value will be as follows:
+[`enable-tidb-extension`](#tidb-extension-fields)有効にすると、値のデータ形式は次のようになります。
 
-```
-{
-    "name":"{{TableName}}",
-    "namespace":"{{Namespace}}",
-    "type":"record",
-    "fields":[
-        {{ColumnValueBlock}},
-        {{ColumnValueBlock}},
-        {
-            "name":"_tidb_op",
-            "type":"string"
-        },
-        {
-            "name":"_tidb_commit_ts",
-            "type":"long"
-        },
-        {
-            "name":"_tidb_commit_physical_time",
-            "type":"long"
-        }
-    ]
-}
-```
-
-Compared with the Value data format with `enable-tidb-extension` disabled, three new fields are added: `_tidb_op`, `_tidb_commit_ts`, and `_tidb_commit_physical_time`.
-
-### Column data format
-
-The Column data is the `{{ColumnValueBlock}}` part of the Key/Value data format. TiCDC generates the Column data format based on the SQL Type. The basic Column data format is as follows:
-
-```
-{
-    "name":"{{ColumnName}}",
-    "type":{
-        "connect.parameters":{
-            "tidb_type":"{{TIDB_TYPE}}"
-        },
-        "type":"{{AVRO_TYPE}}"
+    {
+        "name":"{{TableName}}",
+        "namespace":"{{Namespace}}",
+        "type":"record",
+        "fields":[
+            {{ColumnValueBlock}},
+            {{ColumnValueBlock}},
+            {
+                "name":"_tidb_op",
+                "type":"string"
+            },
+            {
+                "name":"_tidb_commit_ts",
+                "type":"long"
+            },
+            {
+                "name":"_tidb_commit_physical_time",
+                "type":"long"
+            }
+        ]
     }
-}
-```
 
-If one column can be NULL, the Column data format can be:
+`enable-tidb-extension`無効になっている値のデータ形式と比較すると、 `_tidb_op` 、 `_tidb_commit_ts` 、 `_tidb_commit_physical_time` 3 つの新しいフィールドが追加されます。
 
-```
-{
-    "default":null,
-    "name":"{{ColumnName}}",
-    "type":[
-        "null",
-        {
+### カラムデータ形式 {#column-data-format}
+
+カラムデータは、キー/値データ形式の第`{{ColumnValueBlock}}`要素です。TiCDCはSQLタイプに基づいてカラムデータ形式を生成します。基本的なカラムデータ形式は次のとおりです。
+
+    {
+        "name":"{{ColumnName}}",
+        "type":{
             "connect.parameters":{
                 "tidb_type":"{{TIDB_TYPE}}"
             },
             "type":"{{AVRO_TYPE}}"
         }
-    ]
-}
-```
+    }
 
-- `{{ColumnName}}` indicates the column name.
-- `{{TIDB_TYPE}}` indicates the type in TiDB, which is not a one-to-one mapping with the SQL type.
-- `{{AVRO_TYPE}}` indicates the type in the [Avro Specification](https://avro.apache.org/docs/++version++/specification).
+1 つの列が NULL になる可能性がある場合、カラムのデータ形式は次のようになります。
 
-| SQL TYPE   | TIDB_TYPE | AVRO_TYPE | Description                                                                                                               |
-|------------|-----------|-----------|---------------------------------------------------------------------------------------------------------------------------|
-| BOOL       | INT       | int       |                                                                                                                           |
-| TINYINT    | INT       | int       | When it is unsigned, TIDB_TYPE is INT UNSIGNED.                                                                            |
-| SMALLINT   | INT       | int       | When it is unsigned, TIDB_TYPE is INT UNSIGNED.                                                                            |
-| MEDIUMINT  | INT       | int       | When it is unsigned, TIDB_TYPE is INT UNSIGNED.                                                                            |
-| INT        | INT       | int       | When it is unsigned, TIDB_TYPE is INT UNSIGNED and AVRO_TYPE is long.                                                      |
-| BIGINT     | BIGINT    | long      | When it is unsigned, TIDB_TYPE is BIGINT UNSIGNED. If `avro-bigint-unsigned-handling-mode` is string, AVRO_TYPE is string. |
-| TINYBLOB   | BLOB      | bytes     |  -                                                                                                                         |
-| BLOB       | BLOB      | bytes     |  -                                                                                                                         |
-| MEDIUMBLOB | BLOB      | bytes     |  -                                                                                                                         |
-| LONGBLOB   | BLOB      | bytes     |  -                                                                                                                         |
-| BINARY     | BLOB      | bytes     |  -                                                                                                                        |
-| VARBINARY  | BLOB      | bytes     |  -                                                                                                                        |
-| TINYTEXT   | TEXT      | string    |  -                                                                                                                        |
-| TEXT       | TEXT      | string    |  -                                                                                                                        |
-| MEDIUMTEXT | TEXT      | string    |  -                                                                                                                        |
-| LONGTEXT   | TEXT      | string    |  -                                                                                                                         |
-| CHAR       | TEXT      | string    |  -                                                                                                                         |
-| VARCHAR    | TEXT      | string    |  -                                                                                                                         |
-| FLOAT      | FLOAT     | double    |  -                                                                                                                         |
-| DOUBLE     | DOUBLE    | double    |  -                                                                                                                         |
-| DATE       | DATE      | string    |  -                                                                                                                         |
-| DATETIME   | DATETIME  | string    |  -                                                                                                                         |
-| TIMESTAMP  | TIMESTAMP | string    |  -                                                                                                                         |
-| TIME       | TIME      | string    |  -                                                                                                                         |
-| YEAR       | YEAR      | int       |  -                                                                                                                         |
-| BIT        | BIT       | bytes     |  -                                                                                                                         |
-| JSON       | JSON      | string    |  -                                                                                                                         |
-| ENUM       | ENUM      | string    |  -                                                                                                                         |
-| SET        | SET       | string    |  -                                                                                                                         |
-| DECIMAL    | DECIMAL   | bytes     | When `avro-decimal-handling-mode` is string, AVRO_TYPE is string.                                                         |
-| TiDBVECTORFloat32 | TiDBVECTORFloat32 | string | - |
+    {
+        "default":null,
+        "name":"{{ColumnName}}",
+        "type":[
+            "null",
+            {
+                "connect.parameters":{
+                    "tidb_type":"{{TIDB_TYPE}}"
+                },
+                "type":"{{AVRO_TYPE}}"
+            }
+        ]
+    }
 
-In the Avro protocol, two other `sink-uri` parameters might affect the Column data format as well: `avro-decimal-handling-mode` and `avro-bigint-unsigned-handling-mode`.
+-   `{{ColumnName}}`列名を示します。
+-   `{{TIDB_TYPE}}` TiDB 内の型を示します。これは SQL 型との 1 対 1 のマッピングではありません。
+-   `{{AVRO_TYPE}}` [Avro仕様](https://avro.apache.org/docs/++version++/specification)内のタイプを示します。
 
-- `avro-decimal-handling-mode` controls how Avro handles decimal fields, including:
+| SQLタイプ            | TIDB_タイプ          | AVRO_TYPE | 説明                                                                                                |
+| ----------------- | ----------------- | --------- | ------------------------------------------------------------------------------------------------- |
+| ブール               | INT               | 整数        |                                                                                                   |
+| タイニーイント           | INT               | 整数        | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になります。                                                           |
+| スモールイント           | INT               | 整数        | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になります。                                                           |
+| ミディアムミント          | INT               | 整数        | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になります。                                                           |
+| INT               | INT               | 整数        | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になり、AVRO_TYPE は long になります。                                      |
+| ビッグイント            | ビッグイント            | 長さ        | 符号なしの場合、TIDB_TYPEはBIGINT UNSIGNEDです。1 `avro-bigint-unsigned-handling-mode`文字列の場合、AVRO_TYPEは文字列です。 |
+| タイニーブロブ           | ブロブ               | バイト       | <li></li>                                                                                         |
+| ブロブ               | ブロブ               | バイト       | <li></li>                                                                                         |
+| ミディアムブロブ          | ブロブ               | バイト       | <li></li>                                                                                         |
+| ロングブロブ            | ブロブ               | バイト       | <li></li>                                                                                         |
+| バイナリ              | ブロブ               | バイト       | <li></li>                                                                                         |
+| VARBINARY         | ブロブ               | バイト       | <li></li>                                                                                         |
+| 小さなテキスト           | TEXT              | 弦         | <li></li>                                                                                         |
+| TEXT              | TEXT              | 弦         | <li></li>                                                                                         |
+| 中テキスト             | TEXT              | 弦         | <li></li>                                                                                         |
+| 長文                | TEXT              | 弦         | <li></li>                                                                                         |
+| チャー               | TEXT              | 弦         | <li></li>                                                                                         |
+| 可変長文字             | TEXT              | 弦         | <li></li>                                                                                         |
+| フロート              | フロート              | ダブル       | <li></li>                                                                                         |
+| ダブル               | ダブル               | ダブル       | <li></li>                                                                                         |
+| 日付                | 日付                | 弦         | <li></li>                                                                                         |
+| 日時                | 日時                | 弦         | <li></li>                                                                                         |
+| タイムスタンプ           | タイムスタンプ           | 弦         | <li></li>                                                                                         |
+| 時間                | 時間                | 弦         | <li></li>                                                                                         |
+| 年                 | 年                 | 整数        | <li></li>                                                                                         |
+| 少し                | 少し                | バイト       | <li></li>                                                                                         |
+| JSON              | JSON              | 弦         | <li></li>                                                                                         |
+| 列挙型               | 列挙型               | 弦         | <li></li>                                                                                         |
+| セット               | セット               | 弦         | <li></li>                                                                                         |
+| 小数点               | 小数点               | バイト       | `avro-decimal-handling-mode`文字列の場合、AVRO_TYPE は文字列です。                                              |
+| TiDBVECTORFloat32 | TiDBVECTORFloat32 | 弦         | <li></li>                                                                                         |
 
-    - string: Avro handles decimal fields as strings.
-    - precise: Avro handles decimal fields as bytes.
+Avro プロトコルでは、他の 2 つの`sink-uri`パラメータ`avro-decimal-handling-mode`と`avro-bigint-unsigned-handling-mode`もカラムデータ形式に影響する可能性があります。
 
-- `avro-bigint-unsigned-handling-mode` controls how Avro handles BIGINT UNSIGNED fields, including:
+-   `avro-decimal-handling-mode` 、Avro が小数フィールドを処理する方法を制御します。これには以下が含まれます。
 
-    - string: Avro handles BIGINT UNSIGNED fields as strings.
-    - long: Avro handles BIGINT UNSIGNED fields as 64-bit signed integers. When the value is greater than `9223372036854775807`, overflow will occur.
+    -   文字列: Avro は小数フィールドを文字列として処理します。
+    -   precise: Avro は 10 進フィールドをバイトとして処理します。
 
-The following is a configuration example:
+-   `avro-bigint-unsigned-handling-mode` 、Avro が BIGINT UNSIGNED フィールドを処理する方法を制御します。これには以下が含まれます。
 
-{{< copyable "shell-regular" >}}
+    -   文字列: Avro は BIGINT UNSIGNED フィールドを文字列として処理します。
+    -   long: AvroはBIGINT UNSIGNEDフィールドを64ビット符号付き整数として扱います。値が`9223372036854775807`より大きい場合、オーバーフローが発生します。
+
+以下は設定例です。
 
 ```shell
 cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-avro-string-option" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro&avro-decimal-handling-mode=string&avro-bigint-unsigned-handling-mode=string" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
@@ -234,82 +220,76 @@ dispatchers = [
 ]
 ```
 
-Most SQL types are mapped to the base Column data format. Some other SQL types extend the base data format to provide more information.
+ほとんどのSQL型は基本のカラムデータ形式にマッピングされます。他のSQL型の中には、基本データ形式を拡張してより多くの情報を提供するものもあります。
 
-BIT(64)
+ビット(64)
 
-```
-{
-    "name":"{{ColumnName}}",
-    "type":{
-        "connect.parameters":{
-            "tidb_type":"BIT",
-            "length":"64"
-        },
-        "type":"bytes"
+    {
+        "name":"{{ColumnName}}",
+        "type":{
+            "connect.parameters":{
+                "tidb_type":"BIT",
+                "length":"64"
+            },
+            "type":"bytes"
+        }
     }
-}
-```
 
-ENUM/SET(a,b,c)
+列挙型/セット(a,b,c)
 
-```
-{
-    "name":"{{ColumnName}}",
-    "type":{
-        "connect.parameters":{
-            "tidb_type":"ENUM/SET",
-            "allowed":"a,b,c"
-        },
-        "type":"string"
+    {
+        "name":"{{ColumnName}}",
+        "type":{
+            "connect.parameters":{
+                "tidb_type":"ENUM/SET",
+                "allowed":"a,b,c"
+            },
+            "type":"string"
+        }
     }
-}
-```
 
-DECIMAL(10, 4)
+10進数(10, 4)
 
-```
-{
-    "name":"{{ColumnName}}",
-    "type":{
-        "connect.parameters":{
-            "tidb_type":"DECIMAL",
-        },
-        "logicalType":"decimal",
-        "precision":10,
-        "scale":4,
-        "type":"bytes"
+    {
+        "name":"{{ColumnName}}",
+        "type":{
+            "connect.parameters":{
+                "tidb_type":"DECIMAL",
+            },
+            "logicalType":"decimal",
+            "precision":10,
+            "scale":4,
+            "type":"bytes"
+        }
     }
-}
-```
 
-## DDL events and schema changes
+## DDLイベントとスキーマの変更 {#ddl-events-and-schema-changes}
 
-Avro does not send DDL events and Watermark events to downstream. It checks whether a schema changes each time a DML event occurs. If a schema changes, Avro generates a new schema and registers it with the Schema Registry. If the schema change does not pass the compatibility check, the registration fails. TiCDC does not resolve any schema compatibility issues.
+AvroはDDLイベントとウォーターマークイベントを下流に送信しません。DMLイベントが発生するたびに、スキーマが変更されているかどうかを確認します。スキーマが変更された場合、Avroは新しいスキーマを生成し、スキーマレジストリに登録します。スキーマ変更が互換性チェックに合格しない場合、登録は失敗します。TiCDCはスキーマ互換性の問題を解決しません。
 
-For example, the default [compatibility policy](https://docs.confluent.io/platform/current/schema-registry/fundamentals/schema-evolution.html#compatibility-types) of Confluent Schema Registry is `BACKWARD`, and you add a non-empty column to the source table. In this situation, Avro generates a new schema but fails to register it with Schema Registry due to compatibility issues. At this time, the changefeed enters an error state.
+例えば、Confluent Schema Registry のデフォルトの[互換性ポリシー](https://docs.confluent.io/platform/current/schema-registry/fundamentals/schema-evolution.html#compatibility-types) `BACKWARD`設定されており、ソーステーブルに空でない列を追加したとします。この場合、Avro は新しいスキーマを生成しますが、互換性の問題により Schema Registry への登録に失敗します。このとき、changefeed はエラー状態になります。
 
-Note that, even if a schema change passes the compatibility check and a new version is registered, the data producers and consumers still need to acquire the new schema for data encoding and decoding.
+スキーマの変更が互換性チェックに合格し、新しいバージョンが登録された場合でも、データのプロデューサーとコンシューマーはデータのエンコードとデコードのために新しいスキーマを取得する必要があることに注意してください。
 
-For more information about schemas, refer to [Schema Registry related documents](https://docs.confluent.io/platform/current/schema-registry/avro.html).
+スキーマの詳細については、 [スキーマレジストリ関連ドキュメント](https://docs.confluent.io/platform/current/schema-registry/avro.html)を参照してください。
 
-## Consumer implementation
+## 消費者実装 {#consumer-implementation}
 
-The TiCDC Avro protocol can be deserialized by [`io.confluent.kafka.serializers.KafkaAvroDeserializer`](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/serdes-avro.html#avro-deserializer).
+TiCDC Avro プロトコルは[`io.confluent.kafka.serializers.KafkaAvroDeserializer`](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/serdes-avro.html#avro-deserializer)で逆シリアル化できます。
 
-The consumer program can acquire the latest schema via [Schema Registry API](https://docs.confluent.io/platform/current/schema-registry/develop/api.html), and then use the schema to deserialize the data encoded by the TiCDC Avro protocol.
+コンシューマー プログラムは[スキーマレジストリAPI](https://docs.confluent.io/platform/current/schema-registry/develop/api.html)を介して最新のスキーマを取得し、そのスキーマを使用して TiCDC Avro プロトコルによってエンコードされたデータを逆シリアル化できます。
 
-### Distinguish event types
+### イベントの種類を区別する {#distinguish-event-types}
 
-The consumer program can distinguish DML event types by the following rules:
+コンシューマー プログラムは、次のルールによって DML イベント タイプを区別できます。
 
-* If there is only the Key part, it is a Delete event.
-* If there are both Key and Value parts, it is either an Insert or an Update event. If the [TiDB extension fields](#tidb-extension-fields) are enabled, you can use the `_tidb_op` field to identify if it is an Insert or Update event. If the TiDB extension fields are not enabled, you cannot distinguish them.
+-   Key部分のみの場合はDeleteイベントになります。
+-   キーと値の両方がある場合、挿入イベントまたは更新イベントのいずれかです。1 [TiDB拡張フィールド](#tidb-extension-fields)有効になっている場合は、 `_tidb_op`フィールドを使用して挿入イベントか更新イベントかを識別できます。TiDB拡張フィールドが有効になっていない場合は、それらを区別できません。
 
-## Topic distribution
+## トピックの分布 {#topic-distribution}
 
-Schema Registry supports three [Subject Name Strategies](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#subject-name-strategy): TopicNameStrategy, RecordNameStrategy, and TopicRecordNameStrategy. Currently, TiCDC Avro only supports TopicNameStrategy, which means that a Kafka topic can only receive data in one data format. Therefore, TiCDC Avro prohibits mapping multiple tables to the same topic. When you create a changefeed, an error will be reported if the topic rule does not include the `{schema}` and `{table}` placeholders in the configured distribution rule.
+スキーマレジストリは、TopicNameStrategy、RecordNameStrategy、TopicRecordNameStrategyの3つの[件名戦略](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#subject-name-strategy)サポートしています。現在、TiCDC AvroはTopicNameStrategyのみをサポートしており、Kafkaトピックは1つのデータ形式でのみデータを受信できます。そのため、TiCDC Avroでは複数のテーブルを同じトピックにマッピングすることは禁止されています。変更フィードを作成する際、トピックルールに設定された分散ルールの`{schema}`と`{table}`プレースホルダーが含まれていない場合、エラーが報告されます。
 
-## Compatibility
+## 互換性 {#compatibility}
 
-When upgrading the TiCDC cluster to v7.0.0, if a table replicated using Avro contains the `FLOAT` data type, you need to manually adjust the compatibility policy of Confluent Schema Registry to `None` before upgrading so that the changefeed can successfully update the schema. Otherwise, after upgrading, the changefeed will be unable to update the schema and enter an error state. For more information, see [#8490](https://github.com/pingcap/tiflow/issues/8490).
+TiCDC クラスターを v7.0.0 にアップグレードする際、Avro を使用してレプリケートされたテーブルに`FLOAT`データ型が含まれている場合は、アップグレード前に Confluent Schema Registry の互換性ポリシーを手動で`None`に調整し、changefeed がスキーマを正常に更新できるようにする必要があります。そうしないと、アップグレード後に changefeed がスキーマを更新できなくなり、エラー状態になります。詳細については、 [＃8490](https://github.com/pingcap/tiflow/issues/8490)参照してください。

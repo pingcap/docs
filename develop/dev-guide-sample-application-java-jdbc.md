@@ -1,114 +1,117 @@
 ---
 title: Connect to TiDB with JDBC
-summary: Learn how to connect to TiDB using JDBC. This tutorial gives Java sample code snippets that work with TiDB using JDBC.
+summary: JDBCを使用してTiDBに接続する方法を学びます。このチュートリアルでは、JDBCを使用してTiDBを操作するJavaサンプルコードスニペットを紹介します。
 ---
 
-# Connect to TiDB with JDBC
+# JDBC で TiDB に接続する {#connect-to-tidb-with-jdbc}
 
-TiDB is a MySQL-compatible database, and JDBC (Java Database Connectivity) is the data access API for Java. [MySQL Connector/J](https://dev.mysql.com/downloads/connector/j/) is MySQL's implementation of JDBC.
+TiDB は MySQL 互換のデータベースであり、JDBC (Java Database Connectivity) はJavaのデータ アクセス API です。1 [MySQL コネクタ/J](https://dev.mysql.com/downloads/connector/j/) MySQL の JDBC 実装です。
 
-In this tutorial, you can learn how to use TiDB and JDBC to accomplish the following tasks:
+このチュートリアルでは、TiDB と JDBC を使用して次のタスクを実行する方法を学習します。
 
-- Set up your environment.
-- Connect to your TiDB cluster using JDBC.
-- Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
+-   環境を設定します。
+-   JDBC を使用して TiDB クラスターに接続します。
+-   アプリケーションをビルドして実行します。オプションで、基本的なCRUD操作用の[サンプルコードスニペット](#sample-code-snippets)見つけることもできます。
 
 <CustomContent platform="tidb">
 
-> **Note:**
+> **注記：**
 >
-> - This tutorial works with {{{ .starter }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
-> - Starting from TiDB v7.4, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `UTF-8` in the JDBC URL, the collation used in a JDBC connection depends on the JDBC driver version. For more information, see [Collation used in JDBC connections](/faq/sql-faq.md#collation-used-in-jdbc-connections).
+> -   このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed で機能します。
+> -   TiDB v7.4以降、JDBC URLで`connectionCollation`が設定されておらず、 `characterEncoding`設定されていないか`UTF-8`に設定されている場合、JDBC接続で使用される照合順序はJDBCドライバーのバージョンによって異なります。詳細については、 [JDBC接続で使用される照合順序](/faq/sql-faq.md#collation-used-in-jdbc-connections)参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> - This tutorial works with {{{ .starter }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
-> - Starting from TiDB v7.4, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `UTF-8` in the JDBC URL, the collation used in a JDBC connection depends on the JDBC driver version. For more information, see [Collation used in JDBC connections](https://docs.pingcap.com/tidb/stable/sql-faq#collation-used-in-jdbc-connections).
+> -   このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed で機能します。
+> -   TiDB v7.4以降、JDBC URLで`connectionCollation`が設定されておらず、 `characterEncoding`設定されていないか`UTF-8`に設定されている場合、JDBC接続で使用される照合順序はJDBCドライバーのバージョンによって異なります。詳細については、 [JDBC接続で使用される照合順序](https://docs.pingcap.com/tidb/stable/sql-faq#collation-used-in-jdbc-connections)参照してください。
 
 </CustomContent>
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-To complete this tutorial, you need:
+このチュートリアルを完了するには、次のものが必要です。
 
-- **Java Development Kit (JDK) 17** or higher. You can choose [OpenJDK](https://openjdk.org/) or [Oracle JDK](https://www.oracle.com/hk/java/technologies/downloads/) based on your business and personal requirements.
-- [Maven](https://maven.apache.org/install.html) **3.8** or higher.
-- [Git](https://git-scm.com/downloads).
-- A TiDB cluster.
+-   **Java Development Kit (JDK) 17**以上。ビジネスおよび個人の要件に応じて、 [オープンJDK](https://openjdk.org/)または[オラクル JDK](https://www.oracle.com/hk/java/technologies/downloads/)選択できます。
+-   [メイヴン](https://maven.apache.org/install.html) **3.8**以上。
+-   [ギット](https://git-scm.com/downloads) 。
+-   TiDB クラスター。
 
 <CustomContent platform="tidb">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**TiDB クラスターがない場合は、次のように作成できます。**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> For security considerations, it is recommended that you use `VERIFY_IDENTITY` to establish TLS connections to TiDB clusters when connecting over the internet. Both {{{ .starter }}} and TiDB Cloud Dedicated use Subject Alternative Name (SAN) certificates, which require MySQL Connector/J version to be greater than or equal to [8.0.22](https://dev.mysql.com/doc/relnotes/connector-j/en/news-8-0-22.html).
+> セキュリティ上の理由から、インターネット経由でTiDBクラスタに接続する場合は、 `VERIFY_IDENTITY`使用してTLS接続を確立することをお勧めします。TiDB TiDB Cloud ServerlessとTiDB Cloud DedicatedはどちらもSubject Alternative Name（SAN）証明書を使用するため、MySQL Connector/Jのバージョンは[8.0.22](https://dev.mysql.com/doc/relnotes/connector-j/en/news-8-0-22.html)以上である必要があります。
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**TiDB クラスターがない場合は、次のように作成できます。**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 
-## Run the sample app to connect to TiDB
+## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
-This section demonstrates how to run the sample application code and connect to TiDB.
+このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を説明します。
 
-### Step 1: Clone the sample app repository
+### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
-Run the following commands in your terminal window to clone the sample code repository:
+サンプル コード リポジトリのクローンを作成するには、ターミナル ウィンドウで次のコマンドを実行します。
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-java-jdbc-quickstart.git
 cd tidb-java-jdbc-quickstart
 ```
 
-### Step 2: Configure connection information
+### ステップ2: 接続情報を構成する {#step-2-configure-connection-information}
 
-Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
+選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
-<div label="{{{ .starter }}}">
+<div label="TiDB Cloud Serverless">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    - **Connection Type** is set to `Public`
-    - **Branch** is set to `main`
-    - **Connect With** is set to `General`
-    - **Operating System** matches your environment.
+    -   **接続タイプ**は`Public`に設定されています
 
-    > **Tip:**
+    -   **ブランチ**は`main`に設定されています
+
+    -   **接続先が**`General`に設定されています
+
+    -   **オペレーティング システムは**環境に適合します。
+
+    > **ヒント：**
     >
-    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
+    > プログラムが Windows Subsystem for Linux (WSL) で実行されている場合は、対応する Linux ディストリビューションに切り替えます。
 
-4. Click **Generate Password** to create a random password.
+4.  ランダムなパスワードを作成するには、 **「パスワードの生成」を**クリックします。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
 
-5. Run the following command to copy `env.sh.example` and rename it to `env.sh`:
+5.  次のコマンドを実行して`env.sh.example`コピーし、名前を`env.sh`に変更します。
 
     ```shell
     cp env.sh.example env.sh
     ```
 
-6. Copy and paste the corresponding connection string into the `env.sh` file. The example result is as follows:
+6.  対応する接続文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
@@ -119,32 +122,32 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     export USE_SSL='true'
     ```
 
-    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
+    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに置き換えてください。
 
-    {{{ .starter }}} requires a secure connection. Therefore, you need to set the value of `USE_SSL` to `true`.
+    TiDB Cloud Serverless は安全な接続を必要とします。そのため、 `USE_SSL`値を`true`に設定する必要があります。
 
-7. Save the `env.sh` file.
+7.  `env.sh`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. In the connection dialog, select **Public** from the **Connection Type** drop-down list, and then click **CA cert** to download the CA certificate.
+3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
+    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
-    In addition to the **Public** connection type, TiDB Cloud Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
+    TiDB Cloud Dedicatedは、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPCピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ご覧ください。
 
-4. Run the following command to copy `env.sh.example` and rename it to `env.sh`:
+4.  次のコマンドを実行して`env.sh.example`コピーし、名前を`env.sh`に変更します。
 
     ```shell
     cp env.sh.example env.sh
     ```
 
-5. Copy and paste the corresponding connection string into the `env.sh` file. The example result is as follows:
+5.  対応する接続文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -155,20 +158,20 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     export USE_SSL='false'
     ```
 
-    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
+    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに置き換えてください。
 
-6. Save the `env.sh` file.
+6.  `env.sh`ファイルを保存します。
 
 </div>
 <div label="TiDB Self-Managed">
 
-1. Run the following command to copy `env.sh.example` and rename it to `env.sh`:
+1.  次のコマンドを実行して`env.sh.example`コピーし、名前を`env.sh`に変更します。
 
     ```shell
     cp env.sh.example env.sh
     ```
 
-2. Copy and paste the corresponding connection string into the `env.sh` file. The example result is as follows:
+2.  対応する接続文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'
@@ -179,30 +182,30 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     export USE_SSL='false'
     ```
 
-    Be sure to replace the placeholders `{}` with the connection parameters, and set `USE_SSL` to `false`. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
+    プレースホルダー`{}`接続パラメータに置き換え、 `USE_SSL`を`false`に設定してください。TiDBをローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空です。
 
-3. Save the `env.sh` file.
+3.  `env.sh`ファイルを保存します。
 
 </div>
 </SimpleTab>
 
-### Step 3: Run the code and check the result
+### ステップ3: コードを実行して結果を確認する {#step-3-run-the-code-and-check-the-result}
 
-1. Execute the following command to run the sample code:
+1.  サンプル コードを実行するには、次のコマンドを実行します。
 
     ```shell
     make
     ```
 
-2. Check the [Expected-Output.txt](https://github.com/tidb-samples/tidb-java-jdbc-quickstart/blob/main/Expected-Output.txt) to see if the output matches.
+2.  [期待出力.txt](https://github.com/tidb-samples/tidb-java-jdbc-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
 
-## Sample code snippets
+## サンプルコードスニペット {#sample-code-snippets}
 
-You can refer to the following sample code snippets to complete your own application development.
+次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了することができます。
 
-For complete sample code and how to run it, check out the [tidb-samples/tidb-java-jdbc-quickstart](https://github.com/tidb-samples/tidb-java-jdbc-quickstart) repository.
+完全なサンプル コードとその実行方法については、 [tidb-samples/tidb-java-jdbc-クイックスタート](https://github.com/tidb-samples/tidb-java-jdbc-quickstart)リポジトリを参照してください。
 
-### Connect to TiDB
+### TiDBに接続する {#connect-to-tidb}
 
 ```java
 public MysqlDataSource getMysqlDataSource() throws SQLException {
@@ -222,9 +225,9 @@ public MysqlDataSource getMysqlDataSource() throws SQLException {
 }
 ```
 
-When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, and `${tidb_db_name}` with the actual values of your TiDB cluster.
+この関数を使用する場合は、 `${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、 `${tidb_db_name}` TiDB クラスターの実際の値に置き換える必要があります。
 
-### Insert data
+### データを挿入する {#insert-data}
 
 ```java
 public void createPlayer(PlayerBean player) throws SQLException {
@@ -240,9 +243,9 @@ public void createPlayer(PlayerBean player) throws SQLException {
 }
 ```
 
-For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
+詳細については[データを挿入する](/develop/dev-guide-insert-data.md)を参照してください。
 
-### Query data
+### クエリデータ {#query-data}
 
 ```java
 public void getPlayer(String id) throws SQLException {
@@ -261,9 +264,9 @@ public void getPlayer(String id) throws SQLException {
 }
 ```
 
-For more information, refer to [Query data](/develop/dev-guide-get-data-from-single-table.md).
+詳細については[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)を参照してください。
 
-### Update data
+### データを更新する {#update-data}
 
 ```java
 public void updatePlayer(String id, int amount, int price) throws SQLException {
@@ -278,9 +281,9 @@ public void updatePlayer(String id, int amount, int price) throws SQLException {
 }
 ```
 
-For more information, refer to [Update data](/develop/dev-guide-update-data.md).
+詳細については[データを更新する](/develop/dev-guide-update-data.md)を参照してください。
 
-### Delete data
+### データを削除する {#delete-data}
 
 ```java
 public void deletePlayer(String id) throws SQLException {
@@ -293,40 +296,40 @@ public void deletePlayer(String id) throws SQLException {
 }
 ```
 
-For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
+詳細については[データを削除する](/develop/dev-guide-delete-data.md)を参照してください。
 
-## Useful notes
+## 役立つメモ {#useful-notes}
 
-### Using driver or ORM framework?
+### ドライバーまたは ORM フレームワークを使用していますか? {#using-driver-or-orm-framework}
 
-The Java driver provides low-level access to the database, but it requires the developers to:
+Javaドライバーはデータベースへの低レベルのアクセスを提供しますが、開発者は次の作業を行う必要があります。
 
-- Manually establish and release database connections.
-- Manually manage database transactions.
-- Manually map data rows to data objects.
+-   データベース接続を手動で確立および解放します。
+-   データベース トランザクションを手動で管理します。
+-   データ行をデータ オブジェクトに手動でマップします。
 
-Unless you need to write complex SQL statements, it is recommended to use [ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping) framework for development, such as [Hibernate](/develop/dev-guide-sample-application-java-hibernate.md), [MyBatis](/develop/dev-guide-sample-application-java-mybatis.md), or [Spring Data JPA](/develop/dev-guide-sample-application-java-spring-boot.md). It can help you:
+複雑なSQL文を書く必要がない限り、開発には[休止状態](/develop/dev-guide-sample-application-java-hibernate.md) 、 [マイバティス](/develop/dev-guide-sample-application-java-mybatis.md) 、 [スプリングデータ JPA](/develop/dev-guide-sample-application-java-spring-boot.md)などのフレームワークを[ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping)使用することをお勧めします。これにより、次のようなメリットが得られます。
 
-- Reduce [boilerplate code](https://en.wikipedia.org/wiki/Boilerplate_code) for managing connections and transactions.
-- Manipulate data with data objects instead of a number of SQL statements.
+-   接続とトランザクションを管理するために[定型コード](https://en.wikipedia.org/wiki/Boilerplate_code)減らします。
+-   多数の SQL ステートメントの代わりにデータ オブジェクトを使用してデータを操作します。
 
-## Next steps
+## 次のステップ {#next-steps}
 
-- Learn more usage of MySQL Connector/J from [the documentation of MySQL Connector/J](https://dev.mysql.com/doc/connector-j/en/).
-- Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
-- Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
-- Learn through the course for Java developers: [Working with TiDB from Java](https://eng.edu.pingcap.com/catalog/info/id:212).
+-   MySQL Connector/J の使用方法を[MySQL Connector/J のドキュメント](https://dev.mysql.com/doc/connector-j/en/)から詳しく学びます。
+-   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
+-   Java開発者向けコースを通じて学習します: [JavaからTiDBを操作する](https://eng.edu.pingcap.com/catalog/info/id:212) .
 
-## Need help?
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

@@ -1,13 +1,13 @@
 ---
 title: CLI and Configuration Parameters of TiCDC Changefeeds
-summary: Learn the definitions of CLI and configuration parameters of TiCDC changefeeds.
+summary: TiCDC 変更フィードの CLI と構成パラメータの定義について学習します。
 ---
 
-# CLI and Configuration Parameters of TiCDC Changefeeds
+# TiCDC 変更フィードの CLI とコンフィグレーションパラメータ {#cli-and-configuration-parameters-of-ticdc-changefeeds}
 
-## Changefeed CLI parameters
+## Changefeed CLI パラメータ {#changefeed-cli-parameters}
 
-This section introduces the command-line parameters of TiCDC changefeeds by illustrating how to create a replication (changefeed) task:
+このセクションでは、レプリケーション (changefeed) タスクを作成する方法を示しながら、TiCDC changefeed のコマンドライン パラメータを紹介します。
 
 ```shell
 cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task"
@@ -16,458 +16,462 @@ cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://ro
 ```shell
 Create changefeed successfully!
 ID: simple-replication-task
-Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"{{{ .tidb-release-date }}}T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"{{{ .tidb-version }}}"}
+Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2025-06-12T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v8.5.2"}
 ```
 
-- `--changefeed-id`: The ID of the replication task. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
-- `--sink-uri`: The downstream address of the replication task. Configure `--sink-uri` according to the following format. Currently, the scheme supports `mysql`, `tidb`, and `kafka`.
+-   `--changefeed-id` : レプリケーションタスクのID。形式は正規表現`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`に一致する必要があります。このIDが指定されていない場合、TiCDCは自動的にUUID（バージョン4形式）をIDとして生成します。
 
-    ```
-    [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
-    ```
+-   `--sink-uri` : レプリケーションタスクのダウンストリームアドレス`--sink-uri`以下の形式で設定してください。現在、このスキームは`mysql` 、 `tidb` 、 `kafka`サポートしています。
 
-    When the sink URI parameters contain special characters such as `! * ' ( ) ; : @ & = + $ , / ? % # [ ]`, you need to escape the special characters, for example, in [URI Encoder](https://www.urlencoder.org/).
+        [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
 
-- `--start-ts`: Specifies the starting TSO of the changefeed. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
-- `--target-ts`: Specifies the ending TSO of the changefeed. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
-- `--config`: Specifies the configuration file of the changefeed.
+    シンク URI パラメータに`! * ' ( ) ; : @ & = + $ , / ? % # [ ]`などの特殊文字が含まれている場合は、 [URIエンコーダ](https://www.urlencoder.org/)のように特殊文字をエスケープする必要があります。
 
-## Changefeed configuration parameters
+-   `--start-ts` : チェンジフィードの開始TSOを指定します。このTSOから、TiCDCクラスターはデータのプルを開始します。デフォルト値は現在時刻です。
 
-This section introduces the configuration of a replication task.
+-   `--target-ts` : チェンジフィードの終了TSOを指定します。このTSOまで、TiCDCクラスターはデータのプルを停止します。デフォルト値は空で、TiCDCはデータのプルを自動的に停止しません。
 
-### `memory-quota`
+-   `--config` : 変更フィードの構成ファイルを指定します。
 
-- Specifies the memory quota (in bytes) that can be used in the capture server by the sink manager. If the value is exceeded, the overused part will be recycled by the go runtime.
-- Default value: `1073741824` (1 GiB)
+## Changefeed 設定パラメータ {#changefeed-configuration-parameters}
 
-### `case-sensitive`
+このセクションでは、レプリケーション タスクの構成について説明します。
 
-- Specifies whether the database names and tables in the configuration file are case-sensitive. Starting from v6.5.6, v7.1.3, and v7.5.0, the default value changes from `true` to `false`.
-- This configuration item affects configurations related to filter and sink.
-- Default value: `false`
+### <code>memory-quota</code> {#code-memory-quota-code}
 
-### `force-replicate`
+-   シンクマネージャーがキャプチャサーバーで使用できるメモリクォータ（バイト単位）を指定します。この値を超えた場合、過剰に使用された部分はGoランタイムによってリサイクルされます。
+-   デフォルト値: `1073741824` (1 GiB)
 
-- Specifies whether to forcibly [replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index).
-- Default value: `false`
+### <code>case-sensitive</code> {#code-case-sensitive-code}
 
-### `enable-sync-point` <span class="version-mark">New in v6.3.0</span>
+-   設定ファイル内のデータベース名とテーブルで大文字と小文字を区別するかどうかを指定します。v6.5.6、v7.1.3、v7.5.0以降では、デフォルト値は`true`から`false`に変更されます。
+-   この構成項目は、フィルターとシンクに関連する構成に影響します。
+-   デフォルト値: `false`
 
-- Specifies whether to enable the Syncpoint feature, which is supported starting from v6.3.0 and is disabled by default.
-- Starting from v6.4.0, only the changefeed with the `SYSTEM_VARIABLES_ADMIN` or `SUPER` privilege can use the TiCDC Syncpoint feature.
-- This configuration item only takes effect if the downstream is TiDB.
-- Default value: `false`
+### <code>force-replicate</code> {#code-force-replicate-code}
 
-### `sync-point-interval`
+-   強制的に[有効なインデックスのないテーブルを複製する](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index)かどうかを指定します。
+-   デフォルト値: `false`
 
-- Specifies the interval at which Syncpoint aligns the upstream and downstream snapshots.
-- This configuration item only takes effect if the downstream is TiDB.
-- The format is `"h m s"`. For example, `"1h30m30s"`.
-- Default value: `"10m"`
-- Minimum value: `"30s"`
+### <code>enable-sync-point</code><span class="version-mark">バージョン6.3.0の新機能</span> {#code-enable-sync-point-code-span-class-version-mark-new-in-v6-3-0-span}
 
-### `sync-point-retention`
+-   バージョン 6.3.0 以降でサポートされ、デフォルトでは無効になっている Syncpoint 機能を有効にするかどうかを指定します。
+-   v6.4.0 以降では、権限`SYSTEM_VARIABLES_ADMIN`または`SUPER`持つ changefeed のみが TiCDC Syncpoint 機能を使用できます。
+-   この構成項目は、ダウンストリームが TiDB の場合にのみ有効になります。
+-   デフォルト値: `false`
 
-- Specifies how long the data is retained by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up.
-- This configuration item only takes effect if the downstream is TiDB.
-- The format is `"h m s"`. For example, `"24h30m30s"`.
-- Default value: `"24h"`
+### <code>sync-point-interval</code> {#code-sync-point-interval-code}
 
-### `sql-mode` <span class="version-mark">New in v6.5.6, v7.1.3, and v7.5.0</span>
+-   Syncpoint が上流スナップショットと下流スナップショットを調整する間隔を指定します。
+-   この構成項目は、ダウンストリームが TiDB の場合にのみ有効になります。
+-   形式は`"h m s"`です。たとえば`"1h30m30s"` 。
+-   デフォルト値: `"10m"`
+-   最小値: `"30s"`
 
-- Specifies the [SQL mode](/sql-mode.md) used when parsing DDL statements. Multiple modes are separated by commas.
-- Default value: `"ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"`, which is the same as the default SQL mode of TiDB
+### <code>sync-point-retention</code> {#code-sync-point-retention-code}
 
-### `bdr-mode`
+-   下流テーブルにおける同期ポイントによるデータの保持期間を指定します。この期間を超過すると、データはクリーンアップされます。
+-   この構成項目は、ダウンストリームが TiDB の場合にのみ有効になります。
+-   形式は`"h m s"`です。たとえば`"24h30m30s"` 。
+-   デフォルト値: `"24h"`
 
-- To set up BDR (Bidirectional replication) clusters using TiCDC, modify this parameter to `true` and set the TiDB clusters to BDR mode. For more information, see [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md#bidirectional-replication).
-- Default value: `false`, indicating that bi-directional replication (BDR) mode is not enabled
+### <code>sql-mode</code> <span class="version-mark">v6.5.6、v7.1.3、v7.5.0 の新機能</span> {#code-sql-mode-code-span-class-version-mark-new-in-v6-5-6-v7-1-3-and-v7-5-0-span}
 
-### `changefeed-error-stuck-duration`
+-   DDL文を解析する際に使用する[SQLモード](/sql-mode.md)指定します。複数のモードはカンマで区切られます。
+-   デフォルト値: `"ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"` 、これは TiDB のデフォルトの SQL モードと同じです。
 
-- Specifies the duration for which the changefeed is allowed to automatically retry when internal errors or exceptions occur.
-- The changefeed enters the failed state if internal errors or exceptions occur in the changefeed and persist longer than the duration set by this parameter.
-- When the changefeed is in the failed state, you need to restart the changefeed manually for recovery.
-- The format is `"h m s"`. For example, `"1h30m30s"`.
-- Default value: `"30m"`
+### <code>bdr-mode</code> {#code-bdr-mode-code}
 
-### mounter
+-   TiCDCを使用してBDR（双方向レプリケーション）クラスターをセットアップするには、このパラメータを`true`に変更し、TiDBクラスターをBDRモードに設定します。詳細については、 [双方向レプリケーション](/ticdc/ticdc-bidirectional-replication.md#bidirectional-replication)参照してください。
+-   デフォルト値: `false` 、双方向レプリケーション (BDR) モードが有効になっていないことを示します。
 
-#### `worker-num`
+### <code>changefeed-error-stuck-duration</code> {#code-changefeed-error-stuck-duration-code}
 
-- Specifies the number of threads with which the mounter decodes KV data.
-- Default value: `16`
+-   内部エラーまたは例外が発生したときに、変更フィードが自動的に再試行される期間を指定します。
+-   変更フィードで内部エラーまたは例外が発生し、このパラメータで設定された期間よりも長く継続すると、変更フィードは失敗状態になります。
+-   変更フィードが失敗した状態の場合、回復するには変更フィードを手動で再起動する必要があります。
+-   形式は`"h m s"`です。たとえば`"1h30m30s"` 。
+-   デフォルト値: `"30m"`
 
-### filter
+### マウンター {#mounter}
 
-#### `ignore-txn-start-ts`
+#### <code>worker-num</code> {#code-worker-num-code}
 
-- Ignores the transaction of specified start_ts.
+-   マウンタが KV データをデコードするスレッドの数を指定します。
+-   デフォルト値: `16`
+
+### フィルター {#filter}
+
+#### <code>ignore-txn-start-ts</code> {#code-ignore-txn-start-ts-code}
+
+-   指定された start_ts のトランザクションを無視します。
 
 <!-- Example: `[1, 2]` -->
 
-#### `rules`
+#### <code>rules</code> {#code-rules-code}
 
-- Specifies the filter rules. For more information, see [Syntax](/table-filter.md#syntax).
+-   フィルタルールを指定します。詳細については、 [構文](/table-filter.md#syntax)参照してください。
 
 <!-- Example: `['*.*', '!test.*']` -->
 
-#### filter.event-filters
+#### フィルター.イベントフィルター {#filter-event-filters}
 
-For more information, see [Event filter rules](/ticdc/ticdc-filter.md#event-filter-rules).
+詳細については[イベントフィルタールール](/ticdc/ticdc-filter.md#event-filter-rules)参照してください。
 
-##### `matcher`
+##### <code>matcher</code> {#code-matcher-code}
 
-- `matcher` is an allow list. `matcher = ["test.worker"]` means this rule only applies to the `worker` table in the `test` database.
+-   `matcher`は許可リストです。2 `matcher = ["test.worker"]` 、このルールが`test`データベース内の`worker`テーブルにのみ適用されることを意味します。
 
-##### `ignore-event`
+##### <code>ignore-event</code> {#code-ignore-event-code}
 
-- `ignore-event = ["insert"]` ignores `INSERT` events. 
-- `ignore-event = ["drop table", "delete"]` ignores the `DROP TABLE` DDL events and the `DELETE` DML events. Note that when a value in the clustered index column is updated in TiDB, TiCDC splits an `UPDATE` event into `DELETE` and `INSERT` events. TiCDC cannot identify such events as `UPDATE` events and thus cannot correctly filter out such events.
+-   `ignore-event = ["insert"]` `INSERT`イベントを無視します。
+-   `ignore-event = ["drop table", "delete"]` 、 `DROP TABLE` DDL イベントと`DELETE` DML イベントを無視します。TiDB でクラスター化インデックス列の値が更新されると、TiCDC は`UPDATE`イベントを`DELETE`つと`INSERT`イベントに分割することに注意してください。TiCDC はこれらのイベントを`UPDATE`イベントとして識別できないため、正しくフィルタリングできません。
 
-##### `ignore-sql`
+##### <code>ignore-sql</code> {#code-ignore-sql-code}
 
-- `ignore-sql = ["^drop", "add column"]` ignores DDLs that start with `DROP` or contain `ADD COLUMN`.
+-   `ignore-sql = ["^drop", "add column"]` `DROP`で始まるか`ADD COLUMN`含む DDL を無視します。
 
-##### `ignore-delete-value-expr`
+##### <code>ignore-delete-value-expr</code> {#code-ignore-delete-value-expr-code}
 
-- `ignore-delete-value-expr = "name = 'john'"` ignores `DELETE` DMLs that contain the condition `name = 'john'`.
+-   `ignore-delete-value-expr = "name = 'john'"`条件`name = 'john'`を含む`DELETE` DML を無視します。
 
-##### `ignore-insert-value-expr`
+##### <code>ignore-insert-value-expr</code> {#code-ignore-insert-value-expr-code}
 
-- `ignore-insert-value-expr = "id >= 100"` ignores `INSERT` DMLs that contain the condition `id >= 100`
+-   `ignore-insert-value-expr = "id >= 100"`条件`id >= 100`を含む`INSERT` DMLを無視します
 
-##### `ignore-update-old-value-expr`
+##### <code>ignore-update-old-value-expr</code> {#code-ignore-update-old-value-expr-code}
 
-- `ignore-update-old-value-expr = "age < 18"` ignores `UPDATE` DMLs whose old value contains `age < 18`
+-   `ignore-update-old-value-expr = "age < 18"`古い値に`age < 18`含まれる`UPDATE` DMLを無視します。
 
-##### `ignore-update-new-value-expr`
+##### <code>ignore-update-new-value-expr</code> {#code-ignore-update-new-value-expr-code}
 
-- `ignore-update-new-value-expr = "gender = 'male'"` ignores `UPDATE` DMLs whose new value contains `gender = 'male'`
+-   `ignore-update-new-value-expr = "gender = 'male'"` 、新しい値に`gender = 'male'`が含まれる`UPDATE` DMLを無視します。
 
-### scheduler
+### スケジューラ {#scheduler}
 
-#### `enable-table-across-nodes`
+#### <code>enable-table-across-nodes</code> {#code-enable-table-across-nodes-code}
 
-- Allocate tables to multiple TiCDC nodes for replication on a per-Region basis.
-- This configuration item only takes effect on Kafka changefeeds and is not supported on MySQL changefeeds.
-- When `enable-table-across-nodes` is enabled, there are two allocation modes:
+-   リージョンごとにレプリケーション用にテーブルを複数の TiCDC ノードに割り当てます。
 
-    1. Allocate tables based on the number of Regions, so that each TiCDC node handles roughly the same number of Regions. If the number of Regions for a table exceeds the value of [`region-threshold`](#region-threshold), the table will be allocated to multiple nodes for replication. The default value of `region-threshold` is `100000`.
-    2. Allocate tables based on the write traffic, so that each TiCDC node handles roughly the same number of modified rows. Only when the number of modified rows per minute in a table exceeds the value of [`write-key-threshold`](#write-key-threshold), will this allocation take effect.
+-   この構成項目は Kafka 変更フィードにのみ適用され、MySQL 変更フィードではサポートされません。
 
-  You only need to configure one of the two modes. If both `region-threshold` and `write-key-threshold` are configured, TiCDC prioritizes the traffic allocation mode, namely `write-key-threshold`.
+-   `enable-table-across-nodes`が有効な場合、次の 2 つの割り当てモードがあります。
 
-- The value is `false` by default. Set it to `true` to enable this feature.
-- Default value: `false`
+    1.  リージョン数に基づいてテーブルを割り当てます。これにより、各TiCDCノードはほぼ同じ数のリージョンを処理します。テーブルのリージョン数が[`region-threshold`](#region-threshold)を超える場合、テーブルはレプリケーションのために複数のノードに割り当てられます。デフォルト値は`region-threshold`ですが、現在は`100000`です。
+    2.  書き込みトラフィックに基づいてテーブルを割り当て、各TiCDCノードがほぼ同じ数の変更行を処理するようにします。この割り当ては、テーブル内の1分あたりの変更行数が[`write-key-threshold`](#write-key-threshold)を超えた場合にのみ有効になります。
 
-#### `region-threshold`
+    2つのモードのうち1つだけを設定する必要があります。1と`write-key-threshold` `region-threshold`が設定されている場合、TiCDCはトラフィック割り当てモード（つまり`write-key-threshold`を優先します。
 
-- Default value: `100000`
+-   デフォルトの値は`false`です。この機能を有効にするには`true`に設定してください。
 
-#### `write-key-threshold`
+-   デフォルト値: `false`
 
-- Default value: `0`, which means that the traffic allocation mode is not used by default
+#### <code>region-threshold</code> {#code-region-threshold-code}
 
-### sink
+-   デフォルト値: `100000`
+
+#### <code>write-key-threshold</code> {#code-write-key-threshold-code}
+
+-   デフォルト値: `0` 、これはトラフィック割り当てモードがデフォルトでは使用されないことを意味します
+
+### シンク {#sink}
 
 <!-- MQ sink configuration items -->
 
-#### `dispatchers`
+#### <code>dispatchers</code> {#code-dispatchers-code}
 
-- For the sink of MQ type, you can use dispatchers to configure the event dispatcher.
-- Starting from v6.1.0, TiDB supports two types of event dispatchers: partition and topic.
-- The matching syntax of matcher is the same as the filter rule syntax.
-- This configuration item only takes effect if the downstream is MQ.
-- When the downstream MQ is Pulsar, if the routing rule for `partition` is not specified as any of `ts`, `index-value`, `table`, or `default`, each Pulsar message will be routed using the string you set as the key. For example, if you specify the routing rule for a matcher as the string `code`, then all Pulsar messages that match that matcher will be routed with `code` as the key.
+-   MQ タイプのシンクの場合、ディスパッチャーを使用してイベント ディスパッチャーを構成できます。
+-   v6.1.0 以降、TiDB はパーティションとトピックの 2 種類のイベント ディスパッチャーをサポートしています。
+-   マッチャーのマッチング構文は、フィルター ルール構文と同じです。
+-   この構成項目は、ダウンストリームが MQ の場合にのみ有効になります。
+-   下流のMQがPulsarの場合、 `partition`のルーティングルール`index-value` `ts`いずれにも指定されていない場合、各Pulsarメッセージはキーとして設定した文字列を使用してルーティングされます。例えば、あるマッチャーのルーティングルール`table`文字列`code`に指定すると、そのマッチャー`default`一致するすべてのPulsarメッセージは`code`をキーとしてルーティングされます。
 
-#### `column-selectors` <span class="version-mark">New in v7.5.0</span>
+#### <code>column-selectors</code> <span class="version-mark">v7.5.0 の新機能</span> {#code-column-selectors-code-span-class-version-mark-new-in-v7-5-0-span}
 
-- Selects specific columns for replication. This only takes effect when the downstream is Kafka.
+-   レプリケーションする特定の列を選択します。これは、ダウンストリームがKafkaの場合にのみ有効です。
 
-#### `protocol`
+#### <code>protocol</code> {#code-protocol-code}
 
-- Specifies the protocol format used for encoding messages.
-- This configuration item only takes effect if the downstream is Kafka, Pulsar, or a storage service.
-- When the downstream is Kafka, the protocol can be canal-json, avro, debezium, open-protocol, or simple.
-- When the downstream is Pulsar, the protocol can only be canal-json.
-- When the downstream is a storage service, the protocol can only be canal-json or csv.
+-   メッセージのエンコードに使用するプロトコル形式を指定します。
+-   この構成項目は、ダウンストリームが Kafka、Pulsar、またはstorageサービスの場合にのみ有効になります。
+-   ダウンストリームが Kafka の場合、プロトコルは canal-json、avro、debezium、open-protocol、または simple になります。
+-   ダウンストリームが Pulsar の場合、プロトコルは canal-json のみになります。
+-   ダウンストリームがstorageサービスの場合、プロトコルは canal-json または csv のみになります。
 
 <!-- Example: `"canal-json"` -->
 
-#### `delete-only-output-handle-key-columns` <span class="version-mark">New in v7.2.0</span>
+#### <code>delete-only-output-handle-key-columns</code> <span class="version-mark">v7.2.0 の新機能</span> {#code-delete-only-output-handle-key-columns-code-span-class-version-mark-new-in-v7-2-0-span}
 
-- Specifies the output of DELETE events. This parameter is valid only for canal-json and open-protocol protocols.
-- This parameter is incompatible with `force-replicate`. If both this parameter and `force-replicate` are set to `true`, TiCDC reports an error when creating a changefeed.
-- The Avro protocol is not controlled by this parameter and always outputs only the primary key columns or unique index columns.
-- The CSV protocol is not controlled by this parameter and always outputs all columns.
-- Default value: `false`, which means outputting all columns
-- When you set it to `true`, only primary key columns or unique index columns are output.
+-   DELETEイベントの出力を指定します。このパラメータは、canal-jsonおよびopen-protocolプロトコルでのみ有効です。
+-   このパラメータは`force-replicate`と互換性がありません。このパラメータと`force-replicate`両方が`true`に設定されている場合、TiCDC は変更フィードの作成時にエラーを報告します。
+-   Avro プロトコルはこのパラメータによって制御されず、常に主キー列または一意のインデックス列のみを出力します。
+-   CSV プロトコルはこのパラメータによって制御されず、常にすべての列を出力します。
+-   デフォルト値: `false` 、すべての列を出力することを意味します
+-   `true`に設定すると、主キー列または一意のインデックス列のみが出力されます。
 
-#### `schema-registry`
+#### <code>schema-registry</code> {#code-schema-registry-code}
 
-- Specifies the schema registry URL.
-- This configuration item only takes effect if the downstream is MQ.
+-   スキーマ レジストリ URL を指定します。
+-   この構成項目は、ダウンストリームが MQ の場合にのみ有効になります。
 
 <!-- Example: `"http://localhost:80801/subjects/{subject-name}/versions/{version-number}/schema"` -->
 
-#### `encoder-concurrency`
+#### <code>encoder-concurrency</code> {#code-encoder-concurrency-code}
 
-- Specifies the number of encoder threads used when encoding data.
-- This configuration item only takes effect if the downstream is MQ.
-- Default value: `32`
+-   データをエンコードするときに使用するエンコーダー スレッドの数を指定します。
+-   この構成項目は、ダウンストリームが MQ の場合にのみ有効になります。
+-   デフォルト値: `32`
 
-#### `enable-kafka-sink-v2`
+#### <code>enable-kafka-sink-v2</code> {#code-enable-kafka-sink-v2-code}
 
-> **Warning:**
+> **警告：**
 >
-> This configuration is an experimental feature. It is not recommended to use it in production environments.
+> この設定は実験的機能です。本番環境での使用は推奨されません。
 
-- Specifies whether to enable kafka-sink-v2 that uses the kafka-go sink library.
-- This configuration item only takes effect if the downstream is MQ.
-- Default value: `false`
+-   kafka-go シンク ライブラリを使用する kafka-sink-v2 を有効にするかどうかを指定します。
+-   この構成項目は、ダウンストリームが MQ の場合にのみ有効になります。
+-   デフォルト値: `false`
 
-#### `only-output-updated-columns` <span class="version-mark">New in v7.1.0</span>
+#### <code>only-output-updated-columns</code> <span class="version-mark">v7.1.0 の新機能</span> {#code-only-output-updated-columns-code-span-class-version-mark-new-in-v7-1-0-span}
 
-- Specifies whether to only output the updated columns.
-- This configuration item only applies to the MQ downstream using the open-protocol and canal-json.
-- Default value: `false`
+-   更新された列のみを出力するかどうかを指定します。
+-   この構成項目は、open-protocol と canal-json を使用する MQ ダウンストリームにのみ適用されます。
+-   デフォルト値: `false`
 
 <!-- Storage sink configuration items -->
 
-#### `terminator`
+#### <code>terminator</code> {#code-terminator-code}
 
-- This configuration item is only used when you replicate data to storage sinks and can be ignored when replicating data to MQ or MySQL sinks.
-- Specifies the row terminator, used for separating two data change events.
-- Default value: `""`, which means `\r\n` is used
+-   この構成項目は、データをstorageシンクに複製する場合にのみ使用され、データを MQ または MySQL シンクに複製する場合は無視できます。
+-   2 つのデータ変更イベントを区切るために使用される行ターミネータを指定します。
+-   デフォルト値: `""` 、つまり`\r\n`が使用される
 
-#### `date-separator`
+#### <code>date-separator</code> {#code-date-separator-code}
 
-- Specifies the date separator type used in the file directory. For more information, see [Data change records](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records).
-- This configuration item only takes effect if the downstream is a storage service.
-- Default value: `day`, which means separating files by day
-- Value options: `none`, `year`, `month`, `day`
+-   ファイルディレクトリで使用する日付区切り文字の種類を指定します。詳細については、 [データ変更記録](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records)参照してください。
+-   この構成項目は、ダウンストリームがstorageサービスの場合にのみ有効になります。
+-   デフォルト値: `day` 、ファイルを日ごとに分けることを意味します
+-   `day` `month` `year` : `none`
 
-#### `enable-partition-separator`
+#### <code>enable-partition-separator</code> {#code-enable-partition-separator-code}
 
-- Controls whether to use partitions as the separation string.
-- This configuration item only takes effect if the downstream is a storage service.
-- Default value: `true`, which means that partitions in a table are stored in separate directories
-- Note that this configuration will be deprecated in future versions and will be forcibly set to `true`. It is recommended to keep this configuration at its default value to avoid potential data loss in downstream partitioned tables. For more information, see [Issue #11979](https://github.com/pingcap/tiflow/issues/11979). For usage examples, see [Data change records](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records).
+-   パーティションを区切り文字列として使用するかどうかを制御します。
+-   この構成項目は、ダウンストリームがstorageサービスの場合にのみ有効になります。
+-   デフォルト値: `true` 、テーブル内のパーティションが別々のディレクトリに保存されることを意味します
+-   この設定は将来のバージョンでは非推奨となり、強制的に`true`に設定されます。下流のパーティションテーブルでのデータ損失を防ぐため、この設定はデフォルト値のままにしておくことをお勧めします。詳細については[問題番号 #11979](https://github.com/pingcap/tiflow/issues/11979)参照してください。使用例については[データ変更記録](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records)参照してください。
 
-#### `debezium-disable-schema`
+#### <code>debezium-disable-schema</code> {#code-debezium-disable-schema-code}
 
-- Controls whether to disable the output of schema information.
-- Default value: `false`, which means enabling the output of schema information
-- This parameter only takes effect when the sink type is MQ and the output protocol is Debezium.
+-   スキーマ情報の出力を無効にするかどうかを制御します。
+-   デフォルト値: `false` 、スキーマ情報の出力を有効にすることを意味します
+-   このパラメータは、シンク タイプが MQ で、出力プロトコルが Debezium の場合にのみ有効です。
 
-#### sink.csv <span class="version-mark">New in v6.5.0</span>
+#### sink.csv<span class="version-mark">バージョン6.5.0の新機能</span> {#sink-csv-span-class-version-mark-new-in-v6-5-0-span}
 
-Starting from v6.5.0, TiCDC supports saving data changes to storage services in CSV format. Ignore the following configurations if you replicate data to MQ or MySQL sinks.
+バージョン6.5.0以降、TiCDCはデータの変更をCSV形式でstorageサービスに保存できるようになりました。MQまたはMySQLシンクにデータをレプリケートする場合は、以下の設定を無視してください。
 
-##### `delimiter`
+##### <code>delimiter</code> {#code-delimiter-code}
 
-- Specifies the character used to separate fields in the CSV file. The value must be an ASCII character.
-- Default value: `,`
+-   CSVファイル内のフィールドを区切るために使用される文字を指定します。値はASCII文字である必要があります。
+-   デフォルト値: `,`
 
-##### `quote`
+##### <code>quote</code> {#code-quote-code}
 
-- Specifies the quotation character used to surround fields in the CSV file. If the value is empty, no quotation is used.
-- Default value: `"`
+-   CSVファイル内のフィールドを囲むために使用する引用符を指定します。値が空の場合、引用符は使用されません。
+-   デフォルト値: `"`
 
-##### `null`
+##### <code>null</code> {#code-null-code}
 
-- Specifies the character displayed when a CSV column is NULL.
-- Default value: `\N`
+-   CSV 列が NULL の場合に表示される文字を指定します。
+-   デフォルト値: `\N`
 
-##### `include-commit-ts`
+##### <code>include-commit-ts</code> {#code-include-commit-ts-code}
 
-- Controls whether to include commit-ts in CSV rows.
-- Default value: `false`
+-   CSV 行にコミット ts を含めるかどうかを制御します。
+-   デフォルト値: `false`
 
-##### `binary-encoding-method`
+##### <code>binary-encoding-method</code> {#code-binary-encoding-method-code}
 
-- Specifies the encoding method of binary data.
-- Default value: `base64`
-- Value option: `base64`, `hex`
+-   バイナリデータのエンコード方法を指定します。
+-   デフォルト値: `base64`
+-   値`hex`オプション: `base64`
 
-##### `output-handle-key`
+##### <code>output-handle-key</code> {#code-output-handle-key-code}
 
-- Controls whether to output handle key information. This configuration parameter is for internal implementation only, so it is not recommended to set it.
-- Default value: `false`
+-   ハンドルキー情報を出力するかどうかを制御します。この設定パラメータは内部実装専用であるため、設定することは推奨されません。
+-   デフォルト値: `false`
 
-##### `output-old-value`
+##### <code>output-old-value</code> {#code-output-old-value-code}
 
-- Controls whether to output the value before the row data changes. The default value is false. 
-- When it is enabled (setting it to `true`), the `UPDATE` event will output two rows of data: the first row is a `DELETE` event that outputs the data before the change; the second row is an `INSERT` event that outputs the changed data.
-- When it is enabled, the `"is-update"` column will be added before the column with data changes. This added column is used to identify whether the data change of the current row comes from the `UPDATE` event or the original `INSERT` or `DELETE` event. If the data change of the current row comes from the `UPDATE` event, the value of the `"is-update"` column is `true`. Otherwise, it is `false`.
-- Default value: `false`
+-   行データが変更される前に値を出力するかどうかを制御します。デフォルト値は false です。
+-   有効にすると ( `true`に設定)、 `UPDATE`イベントは 2 行のデータを出力します。最初の行は変更前のデータを出力する`DELETE`イベントで、2 番目の行は変更されたデータを出力する`INSERT`イベントです。
+-   有効にすると、データ変更のある列の前に列`"is-update"`が追加されます。この追加された列は、現在の行のデータ変更が`UPDATE`イベントによるものか、それとも元の`INSERT`または`DELETE`イベントによるものかを識別するために使用されます。現在の行のデータ変更が`UPDATE`イベントによるものかを判断するために、列`"is-update"`の値は`true`になります。それ以外の場合は、列`false`になります。
+-   デフォルト値: `false`
 
-Starting from v8.0.0, TiCDC supports the Simple message encoding protocol. The following are the configuration parameters for the Simple protocol. For more information about the protocol, see [TiCDC Simple Protocol](/ticdc/ticdc-simple-protocol.md).
+TiCDCはv8.0.0以降、Simpleメッセージエンコーディングプロトコルをサポートしています。以下は、Simpleプロトコルの設定パラメータです。プロトコルの詳細については、 [TiCDCシンプルプロトコル](/ticdc/ticdc-simple-protocol.md)参照してください。
 
-The following configuration parameters control the sending behavior of bootstrap messages.
+次の構成パラメータは、ブートストラップ メッセージの送信動作を制御します。
 
-#### `send-bootstrap-interval-in-sec`
+#### <code>send-bootstrap-interval-in-sec</code> {#code-send-bootstrap-interval-in-sec-code}
 
-- Controls the time interval for sending bootstrap messages, in seconds.
-- Default value: `120`, which means that a bootstrap message is sent every 120 seconds for each table
-- Unit: Seconds
+-   ブートストラップ メッセージを送信する時間間隔を秒単位で制御します。
+-   デフォルト値: `120` 、これは各テーブルに対して120秒ごとにブートストラップメッセージが送信されることを意味します。
+-   単位: 秒
 
-#### `send-bootstrap-in-msg-count`
+#### <code>send-bootstrap-in-msg-count</code> {#code-send-bootstrap-in-msg-count-code}
 
-- Controls the message interval for sending bootstrap, in message count.
-- Default value: `10000`, which means that a bootstrap message is sent every 10000 row changed messages for each table
-- If you want to disable the sending of bootstrap messages, set both [`send-bootstrap-interval-in-sec`](#send-bootstrap-interval-in-sec) and `send-bootstrap-in-msg-count` to `0`.
+-   ブートストラップを送信するためのメッセージ間隔をメッセージ数で制御します。
+-   デフォルト値: `10000` 。これは、各テーブルで 10000 行の変更メッセージごとにブートストラップ メッセージが送信されることを意味します。
+-   ブートストラップ メッセージの送信を無効にする場合は、 [`send-bootstrap-interval-in-sec`](#send-bootstrap-interval-in-sec)と`send-bootstrap-in-msg-count`両方を`0`に設定します。
 
-#### `send-bootstrap-to-all-partition`
+#### <code>send-bootstrap-to-all-partition</code> {#code-send-bootstrap-to-all-partition-code}
 
-- Controls whether to send bootstrap messages to all partitions.
-- Setting it to `false` means bootstrap messages are sent to only the first partition of the corresponding table topic.
-- Default value: `true`, which means that bootstrap messages are sent to all partitions of the corresponding table topic
+-   すべてのパーティションにブートストラップ メッセージを送信するかどうかを制御します。
+-   `false`に設定すると、ブートストラップ メッセージが対応するテーブル トピックの最初のパーティションにのみ送信されます。
+-   デフォルト値: `true` 、これは、対応するテーブルトピックのすべてのパーティションにブートストラップメッセージが送信されることを意味します。
 
-#### sink.kafka-config.codec-config
+#### sink.kafka-config.codec-config {#sink-kafka-config-codec-config}
 
-##### `encoding-format`
+##### <code>encoding-format</code> {#code-encoding-format-code}
 
-- Controls the encoding format of the Simple protocol messages. Currently, the Simple protocol message supports `json` and `avro` encoding formats.
-- Default value: `json`
-- Value options: `json`, `avro`
+-   シンプルプロトコルメッセージのエンコード形式を制御します。現在、シンプルプロトコルメッセージはエンコード形式`json`と`avro`サポートしています。
+-   デフォルト値: `json`
+-   値`avro`オプション: `json`
 
-#### sink.open
+#### シンク.オープン {#sink-open}
 
-##### `output-old-value`
+##### <code>output-old-value</code> {#code-output-old-value-code}
 
-- Controls whether to output the value before the row data changes. The default value is true. When it is disabled, the `UPDATE` event does not output the "p" field.
-- Default value: `true`
+-   行データが変更される前に値を出力するかどうかを制御します。デフォルト値はtrueです。無効にすると、 `UPDATE`イベントは「p」フィールドを出力しません。
+-   デフォルト値: `true`
 
-#### sink.debezium
+#### sink.debezium {#sink-debezium}
 
-##### `output-old-value`
+##### <code>output-old-value</code> {#code-output-old-value-code}
 
-- Controls whether to output the value before the row data changes. The default value is true. When it is disabled, the `UPDATE` event does not output the "before" field.
-- Default value: `true`
+-   行データが変更される前の値を出力するかどうかを制御します。デフォルト値はtrueです。無効にすると、 `UPDATE`イベントは「before」フィールドを出力しません。
+-   デフォルト値: `true`
 
-### consistent
+### 一貫性のある {#consistent}
 
-Specifies the replication consistency configurations for a changefeed when using the redo log. For more information, see [Eventually consistent replication in disaster scenarios](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios).
+REDOログを使用する場合の変更フィードのレプリケーション一貫性設定を指定します。詳細については、 [災害シナリオにおける最終的に一貫性のあるレプリケーション](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)参照してください。
 
-Note: The consistency-related configuration items only take effect when the downstream is a database and the redo log feature is enabled.
+注意: 一貫性関連の構成項目は、ダウンストリームがデータベースであり、REDO ログ機能が有効になっている場合にのみ有効になります。
 
-#### `level`
+#### <code>level</code> {#code-level-code}
 
-- The data consistency level. `"none"` means that the redo log is disabled.
-- Default value: `"none"`
-- Value options: `"none"`, `"eventual"`
+-   データ一貫性レベル。1 `"none"` 、REDO ログが無効であることを意味します。
+-   デフォルト値: `"none"`
+-   値`"eventual"`オプション: `"none"`
 
-#### `max-log-size`
+#### <code>max-log-size</code> {#code-max-log-size-code}
 
-- The max redo log size.
-- Default value: `64`
-- Unit: MiB
+-   最大REDOログサイズ。
+-   デフォルト値: `64`
+-   単位: MiB
 
-#### `flush-interval`
+#### <code>flush-interval</code> {#code-flush-interval-code}
 
-- The flush interval for redo log.
-- Default value: `2000`
-- Unit: milliseconds
+-   REDO ログのフラッシュ間隔。
+-   デフォルト値: `2000`
+-   単位: ミリ秒
 
-#### `storage`
+#### <code>storage</code> {#code-storage-code}
 
-- The storage URI of the redo log.
-- Default value: `""`
+-   再実行ログのstorageURI。
+-   デフォルト値: `""`
 
-#### `use-file-backend`
+#### <code>use-file-backend</code> {#code-use-file-backend-code}
 
-- Specifies whether to store the redo log in a local file.
-- Default value: `false`
+-   再実行ログをローカル ファイルに保存するかどうかを指定します。
+-   デフォルト値: `false`
 
-#### `encoding-worker-num`
+#### <code>encoding-worker-num</code> {#code-encoding-worker-num-code}
 
-- The number of encoding and decoding workers in the redo module.
-- Default value: `16`
+-   再実行モジュール内のエンコードおよびデコード ワーカーの数。
+-   デフォルト値: `16`
 
-#### `flush-worker-num`
+#### <code>flush-worker-num</code> {#code-flush-worker-num-code}
 
-- The number of flushing workers in the redo module.
-- Default value: `8`
+-   再実行モジュール内のフラッシュワーカーの数。
+-   デフォルト値: `8`
 
-#### `compression` <span class="version-mark">New in v6.5.6, v7.1.3, v7.5.1, and v7.6.0</span>
+#### <code>compression</code> <span class="version-mark">v6.5.6、v7.1.3、v7.5.1、v7.6.0 の新機能</span> {#code-compression-code-span-class-version-mark-new-in-v6-5-6-v7-1-3-v7-5-1-and-v7-6-0-span}
 
-- The behavior to compress redo log files.
-- Default value: `""`, which means no compression
-- Value options: `""`, `"lz4"`
+-   REDO ログ ファイルを圧縮する動作。
+-   デフォルト値: `""` 、圧縮なしを意味します
+-   値`"lz4"`オプション: `""`
 
-#### `flush-concurrency` <span class="version-mark">New in v6.5.6, v7.1.3, v7.5.1, and v7.6.0</span>
+#### <code>flush-concurrency</code> <span class="version-mark">v6.5.6、v7.1.3、v7.5.1、v7.6.0 の新機能</span> {#code-flush-concurrency-code-span-class-version-mark-new-in-v6-5-6-v7-1-3-v7-5-1-and-v7-6-0-span}
 
-- The concurrency for uploading a single redo file.
-- Default value: `1`, which means concurrency is disabled
+-   単一の REDO ファイルをアップロードするための同時実行性。
+-   デフォルト値: `1` 、同時実行が無効であることを意味します
 
-### integrity
+### 誠実さ {#integrity}
 
-#### `integrity-check-level`
+#### <code>integrity-check-level</code> {#code-integrity-check-level-code}
 
-- Controls whether to enable the checksum validation for single-row data.
-- Default value: `"none"`, which means to disable the feature
-- Value options: `"none"`, `"correctness"`
+-   単一行データのチェックサム検証を有効にするかどうかを制御します。
+-   デフォルト値: `"none"` 、機能を無効にすることを意味します
+-   値`"correctness"`オプション: `"none"`
 
-#### `corruption-handle-level`
+#### <code>corruption-handle-level</code> {#code-corruption-handle-level-code}
 
-- Specifies the log level of the changefeed when the checksum validation for single-row data fails.
-- Default value: `"warn"` 
-- Value options: `"warn"`, `"error"`
+-   単一行データのチェックサム検証が失敗した場合の変更フィードのログ レベルを指定します。
+-   デフォルト値: `"warn"`
+-   値`"error"`オプション: `"warn"`
 
-### sink.kafka-config
+### sink.kafka-config {#sink-kafka-config}
 
-The following configuration items only take effect when the downstream is Kafka.
+以下の設定項目は、ダウンストリームが Kafka の場合にのみ有効になります。
 
-#### `sasl-mechanism`
+#### <code>sasl-mechanism</code> {#code-sasl-mechanism-code}
 
-- Specifies the mechanism of Kafka SASL authentication.
-- Default value: `""`, indicating that SASL authentication is not used
+-   Kafka SASL 認証のメカニズムを指定します。
+-   デフォルト値: `""` 、SASL認証が使用されないことを示します
 
 <!-- Example: `OAUTHBEARER` -->
 
-#### `sasl-oauth-client-id`
+#### <code>sasl-oauth-client-id</code> {#code-sasl-oauth-client-id-code}
 
-- Specifies the client-id in the Kafka SASL OAUTHBEARER authentication. This parameter is required when the OAUTHBEARER authentication is used.
-- Default value: `""`
+-   Kafka SASL OAUTHBEARER認証におけるクライアントIDを指定します。このパラメータは、OAUTHBEARER認証を使用する場合に必須です。
+-   デフォルト値: `""`
 
-#### `sasl-oauth-client-secret`
+#### <code>sasl-oauth-client-secret</code> {#code-sasl-oauth-client-secret-code}
 
-- Specifies the client-secret in the Kafka SASL OAUTHBEARER authentication. This parameter is required when the OAUTHBEARER authentication is used.
-- Default value: `""`
+-   Kafka SASL OAUTHBEARER認証におけるクライアントシークレットを指定します。このパラメータは、OAUTHBEARER認証を使用する場合に必須です。
+-   デフォルト値: `""`
 
-#### `sasl-oauth-token-url`
+#### <code>sasl-oauth-token-url</code> {#code-sasl-oauth-token-url-code}
 
-- Specifies the token-url in the Kafka SASL OAUTHBEARER authentication to obtain the token. This parameter is required when the OAUTHBEARER authentication is used.
-- Default value: `""`
+-   トークンを取得するためのKafka SASL OAUTHBEARER認証のtoken-urlを指定します。このパラメータは、OAUTHBEARER認証を使用する場合に必須です。
+-   デフォルト値: `""`
 
-#### `sasl-oauth-scopes`
+#### <code>sasl-oauth-scopes</code> {#code-sasl-oauth-scopes-code}
 
-- Specifies the scopes in the Kafka SASL OAUTHBEARER authentication. This parameter is optional when the OAUTHBEARER authentication is used.
-- Default value: `""`
+-   Kafka SASL OAUTHBEARER認証のスコープを指定します。OAUTHBEARER認証を使用する場合、このパラメータはオプションです。
+-   デフォルト値: `""`
 
-#### `sasl-oauth-grant-type`
+#### <code>sasl-oauth-grant-type</code> {#code-sasl-oauth-grant-type-code}
 
-- Specifies the grant-type in the Kafka SASL OAUTHBEARER authentication. This parameter is optional when the OAUTHBEARER authentication is used.
-- Default value: `"client_credentials"`
+-   Kafka SASL OAUTHBEARER認証における付与タイプを指定します。OAUTHBEARER認証を使用する場合、このパラメータはオプションです。
+-   デフォルト値: `"client_credentials"`
 
-#### `sasl-oauth-audience`
+#### <code>sasl-oauth-audience</code> {#code-sasl-oauth-audience-code}
 
-- Specifies the audience in the Kafka SASL OAUTHBEARER authentication. This parameter is optional when the OAUTHBEARER authentication is used.
-- Default value: `""`
+-   Kafka SASL OAUTHBEARER認証におけるオーディエンスを指定します。OAUTHBEARER認証を使用する場合、このパラメータはオプションです。
+-   デフォルト値: `""`
 
 <!-- Example: `"kafka"` -->
 
-#### `output-raw-change-event`
+#### <code>output-raw-change-event</code> {#code-output-raw-change-event-code}
 
-- Controls whether to output the original data change event. For more information, see [Control whether to split primary or unique key `UPDATE` events](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events).
-- Default value: `false`
+-   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御する](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)参照してください。
+-   デフォルト値: `false`
 
-### sink.kafka-config.glue-schema-registry-config
+### sink.kafka-config.glue-schema-registry-config {#sink-kafka-config-glue-schema-registry-config}
 
-The following configuration is only required when using Avro as the protocol and AWS Glue Schema Registry:
+次の設定は、プロトコルとして Avro を使用し、AWS Glue スキーマレジストリを使用する場合にのみ必要です。
 
 ```toml
 region="us-west-1"
@@ -477,141 +481,141 @@ secret-access-key="xxxx"
 token="xxxx"
 ```
 
-For more information, see [Integrate TiCDC with AWS Glue Schema Registry](/ticdc/ticdc-sink-to-kafka.md#integrate-ticdc-with-aws-glue-schema-registry).
+詳細については[TiCDC を AWS Glue スキーマレジストリと統合する](/ticdc/ticdc-sink-to-kafka.md#integrate-ticdc-with-aws-glue-schema-registry)参照してください。
 
-### sink.pulsar-config
+### sink.pulsar-config {#sink-pulsar-config}
 
-The following parameters take effect only when the downstream is Pulsar.
+以下のパラメータは、ダウンストリームが Pulsar の場合にのみ有効になります。
 
-#### `authentication-token`
+#### <code>authentication-token</code> {#code-authentication-token-code}
 
-- Authentication on the Pulsar server is done using a token. Specify the value of the token.
+-   Pulsarサーバーでの認証はトークンを使用して行われます。トークンの値を指定してください。
 
-#### `token-from-file`
+#### <code>token-from-file</code> {#code-token-from-file-code}
 
-- When you use a token for Pulsar server authentication, specify the path to the file where the token is located.
+-   Pulsarサーバー認証にトークンを使用する場合は、トークンが配置されているファイルへのパスを指定します。
 
-#### `basic-user-name`
+#### <code>basic-user-name</code> {#code-basic-user-name-code}
 
-- Pulsar uses the basic account and password to authenticate the identity. Specify the account.
+-   Pulsarは基本アカウントとパスワードを使用して本人認証を行います。アカウントを指定してください。
 
-#### `basic-password`
+#### <code>basic-password</code> {#code-basic-password-code}
 
-- Pulsar uses the basic account and password to authenticate the identity. Specify the password.
+-   Pulsarは基本アカウントとパスワードを使用して本人認証を行います。パスワードを指定してください。
 
-#### `auth-tls-certificate-path`
+#### <code>auth-tls-certificate-path</code> {#code-auth-tls-certificate-path-code}
 
-- Specifies the certificate path for Pulsar TLS encrypted authentication.
+-   Pulsar TLS 暗号化認証の証明書パスを指定します。
 
-#### `auth-tls-private-key-path`
+#### <code>auth-tls-private-key-path</code> {#code-auth-tls-private-key-path-code}
 
-- Specifies the private key path for Pulsar TLS encrypted authentication.
+-   Pulsar TLS 暗号化認証の秘密鍵パスを指定します。
 
-#### `tls-trust-certs-file-path`
+#### <code>tls-trust-certs-file-path</code> {#code-tls-trust-certs-file-path-code}
 
-- Specifies the path to trusted certificate file of the Pulsar TLS encrypted authentication.
+-   Pulsar TLS 暗号化認証の信頼できる証明書ファイルへのパスを指定します。
 
-#### `oauth2.oauth2-issuer-url`
+#### <code>oauth2.oauth2-issuer-url</code> {#code-oauth2-oauth2-issuer-url-code}
 
-- Pulsar oauth2 issuer-url.
-- For more information, see [Pulsar documentation website](https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication).
+-   Pulsar oauth2 発行者 URL。
+-   詳細については[Pulsarドキュメントウェブサイト](https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication)参照してください。
 
-#### `oauth2.oauth2-audience`
+#### <code>oauth2.oauth2-audience</code> {#code-oauth2-oauth2-audience-code}
 
-- Pulsar oauth2 audience.
-- For more information, see the [Pulsar website](https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication).
+-   Pulsar oauth2 オーディエンス。
+-   詳細については、 [パルサーのウェブサイト](https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication)参照してください。
 
-#### `oauth2.oauth2-private-key`
+#### <code>oauth2.oauth2-private-key</code> {#code-oauth2-oauth2-private-key-code}
 
-- Pulsar oauth2 private-key.
-- For more information, see the [Pulsar website](https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication).
+-   Pulsar oauth2 秘密鍵。
+-   詳細については、 [パルサーのウェブサイト](https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication)参照してください。
 
-#### `oauth2.oauth2-client-id`
+#### <code>oauth2.oauth2-client-id</code> {#code-oauth2-oauth2-client-id-code}
 
-- Pulsar oauth2 client-id
-- For more information, see the [Pulsar website](https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication).
+-   Pulsar oauth2 クライアントID
+-   詳細については、 [パルサーのウェブサイト](https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication)参照してください。
 
-#### `oauth2.oauth2-scope`
+#### <code>oauth2.oauth2-scope</code> {#code-oauth2-oauth2-scope-code}
 
-- Pulsar oauth2 oauth2-scope.
-- For more information, see the [Pulsar website](https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication).
+-   Pulsar oauth2 oauth2 スコープ。
+-   詳細については、 [パルサーのウェブサイト](https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication)参照してください。
 
-#### `pulsar-producer-cache-size`
+#### <code>pulsar-producer-cache-size</code> {#code-pulsar-producer-cache-size-code}
 
-- Specifies the number of cached Pulsar producers in TiCDC. Each Pulsar producer corresponds to one topic. If the number of topics you need to replicate is larger than the default value, you need to increase the number.
-- Default value: `10240`
+-   TiCDC にキャッシュされる Pulsar プロデューサーの数を指定します。各 Pulsar プロデューサーは 1 つのトピックに対応します。複製する必要があるトピックの数がデフォルト値より多い場合は、この数を増やす必要があります。
+-   デフォルト値: `10240`
 
-#### `compression-type`
+#### <code>compression-type</code> {#code-compression-type-code}
 
-- Pulsar data compression method. 
-- Default value: `""`, which means no compression is used
-- Value options: `"lz4"`, `"zlib"`, `"zstd"`
+-   Pulsar データ圧縮方式。
+-   デフォルト値: `""` 、圧縮は使用されないことを意味します
+-   `"zstd"` `"zlib"`オプション: `"lz4"`
 
-#### `connection-timeout`
+#### <code>connection-timeout</code> {#code-connection-timeout-code}
 
-- The timeout for the Pulsar client to establish a TCP connection with the server.
-- Default value: `5` (seconds)
+-   Pulsar クライアントがサーバーとの TCP 接続を確立するまでのタイムアウト。
+-   デフォルト値: `5` (秒)
 
-#### `operation-timeout`
+#### <code>operation-timeout</code> {#code-operation-timeout-code}
 
-- The timeout for Pulsar clients to initiate operations such as creating and subscribing to a topic.
-- Default value: `30` (seconds)
+-   Pulsar クライアントがトピックの作成やサブスクライブなどの操作を開始するまでのタイムアウト。
+-   デフォルト値: `30` (秒)
 
-#### `batching-max-messages`
+#### <code>batching-max-messages</code> {#code-batching-max-messages-code}
 
-- The maximum number of messages in a single batch for a Pulsar producer to send.
-- Default value: `1000`
+-   Pulsar プロデューサーが単一バッチで送信するメッセージの最大数。
+-   デフォルト値: `1000`
 
-#### `batching-max-publish-delay`
+#### <code>batching-max-publish-delay</code> {#code-batching-max-publish-delay-code}
 
-- The interval at which Pulsar producer messages are saved for batching.
-- Default value: `10` (milliseconds)
+-   Pulsar プロデューサー メッセージがバッチ処理用に保存される間隔。
+-   デフォルト値: `10` (ミリ秒)
 
-#### `send-timeout`
+#### <code>send-timeout</code> {#code-send-timeout-code}
 
-- The timeout for a Pulsar producer to send a message.
-- Default value: `30` (seconds)
+-   Pulsar プロデューサーがメッセージを送信するまでのタイムアウト。
+-   デフォルト値: `30` (秒)
 
-#### `output-raw-change-event`
+#### <code>output-raw-change-event</code> {#code-output-raw-change-event-code}
 
-- Controls whether to output the original data change event. For more information, see [Control whether to split primary or unique key `UPDATE` events](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events).
-- Default value: `false`
+-   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御する](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)参照してください。
+-   デフォルト値: `false`
 
-### sink.cloud-storage-config
+### sink.cloud-storage-config {#sink-cloud-storage-config}
 
-#### `worker-count`
+#### <code>worker-count</code> {#code-worker-count-code}
 
-- The concurrency for saving data changes to the downstream cloud storage.
-- Default value: `16`
+-   下流のクラウドstorageにデータ変更を保存するための同時実行性。
+-   デフォルト値: `16`
 
-#### `flush-interval`
+#### <code>flush-interval</code> {#code-flush-interval-code}
 
-- The interval for saving data changes to the downstream cloud storage.
-- Default value: `"2s"`
+-   下流のクラウドstorageにデータを保存する間隔が変更されます。
+-   デフォルト値: `"2s"`
 
-#### `file-size`
+#### <code>file-size</code> {#code-file-size-code}
 
-- A data change file is saved to the cloud storage when the number of bytes in this file exceeds `file-size`.
-- Default value: `67108864`, that is 64 MiB
+-   データ変更ファイルは、ファイル内のバイト数が`file-size`超えるとクラウドstorageに保存されます。
+-   デフォルト値: `67108864` 、つまり 64 MiB
 
-#### `file-expiration-days`
+#### <code>file-expiration-days</code> {#code-file-expiration-days-code}
 
-- The duration to retain files, which takes effect only when `date-separator` is configured as `day`.
-- Default value: `0`, which means file cleanup is disabled
-- Assume that `file-expiration-days = 1` and `file-cleanup-cron-spec = "0 0 0 * * *"`, then TiCDC performs daily cleanup at 00:00:00 for files saved beyond 24 hours. For example, at 00:00:00 on 2023/12/02, TiCDC cleans up files generated before 2023/12/01, while files generated on 2023/12/01 remain unaffected.
+-   ファイルを保持する期間`date-separator` `day`に設定されている場合にのみ有効になります。
+-   デフォルト値: `0` 、ファイルのクリーンアップが無効であることを意味します
+-   `file-expiration-days = 1`と`file-cleanup-cron-spec = "0 0 0 * * *"`仮定すると、TiCDCは24時間を超えて保存されたファイルに対して、毎日00:00:00にクリーンアップを実行します。例えば、2023年12月2日の00:00:00に、TiCDCは2023年12月1日より前に生成されたファイルをクリーンアップしますが、2023年12月1日に生成されたファイルは影響を受けません。
 
-#### `file-cleanup-cron-spec`
+#### <code>file-cleanup-cron-spec</code> {#code-file-cleanup-cron-spec-code}
 
-- The running cycle of the scheduled cleanup task, compatible with the crontab configuration.
-- The format is `<Second> <Minute> <Hour> <Day of the month> <Month> <Day of the week (Optional)>`
-- Default value: `"0 0 2 * * *"`, which means that the cleanup task is executed every day at 2 AM
+-   crontab 構成と互換性のある、スケジュールされたクリーンアップ タスクの実行サイクル。
+-   フォーマットは`<Second> <Minute> <Hour> <Day of the month> <Month> <Day of the week (Optional)>`
+-   デフォルト値: `"0 0 2 * * *"` 、これはクリーンアップタスクが毎日午前2時に実行されることを意味します
 
-#### `flush-concurrency`
+#### <code>flush-concurrency</code> {#code-flush-concurrency-code}
 
-- The concurrency for uploading a single file.
-- Default value: `1`, which means concurrency is disabled
+-   1 つのファイルをアップロードする際の同時実行性。
+-   デフォルト値: `1` 、同時実行が無効であることを意味します
 
-#### `output-raw-change-event`
+#### <code>output-raw-change-event</code> {#code-output-raw-change-event-code}
 
-- Controls whether to output the original data change event. For more information, see [Control whether to split primary or unique key `UPDATE` events](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events).
-- Default value: `false`
+-   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御する](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)参照してください。
+-   デフォルト値: `false`

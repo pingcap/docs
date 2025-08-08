@@ -1,45 +1,45 @@
 ---
 title: Titan Configuration
-summary: Learn how to configure Titan.
+summary: Titan の設定方法を学びます。
 ---
 
-# Titan Configuration
+# タイタンのコンフィグレーション {#titan-configuration}
 
-This document introduces how to enable and disable [Titan](/storage-engine/titan-overview.md) using the corresponding configuration items, data conversion mechanism, the relevant parameters, and the Level Merge feature.
+このドキュメントでは、対応する構成項目、データ変換メカニズム、関連パラメータ、およびレベルマージ機能を使用して[タイタン](/storage-engine/titan-overview.md)有効または無効にする方法を紹介します。
 
-## Enable Titan
+## タイタンを有効にする {#enable-titan}
 
-> **Note:**
+> **注記：**
 >
-> - Starting from TiDB v7.6.0, Titan is enabled by default for new clusters to enhance the performance of writing wide tables and JSON data. The default value of the [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) threshold is changed from `1KB` to `32KB`.
-> - Existing clusters upgraded to v7.6.0 or later versions retain the original configuration, which means that if Titan is not explicitly enabled, it still uses RocksDB.
-> - If you have enabled Titan before upgrading a cluster to TiDB v7.6.0 or later versions, Titan will be enabled after the upgrade, and the configuration of [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) before the upgrade will also be retained. If you do not explicitly configure the value before the upgrade, the default value of the old version `1KB` will be retained to ensure the stability of the cluster configuration after the upgrade.
+> -   TiDB v7.6.0以降、新規クラスタではTitanがデフォルトで有効化され、ワイドテーブルとJSONデータの書き込みパフォーマンスが向上します。1 [`min-blob-size`](/tikv-configuration-file.md#min-blob-size)のデフォルト値は`1KB`から`32KB`に変更されました。
+> -   v7.6.0 以降のバージョンにアップグレードされた既存のクラスターは元の構成を保持します。つまり、Titan が明示的に有効になっていない場合は、引き続き RocksDB が使用されます。
+> -   クラスタをTiDB v7.6.0以降のバージョンにアップグレードする前にTitanを有効にしていた場合、アップグレード後もTitanが有効になり、アップグレード前の設定値[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)も保持されます。アップグレード前に明示的に値を設定しない場合は、アップグレード後のクラスタ構成の安定性を確保するために、旧バージョンのデフォルト値`1KB`が保持されます。
 
-Titan is compatible with RocksDB, so you can directly enable Titan on the existing TiKV instances that use RocksDB. You can use one of the following methods to enable Titan:
+TitanはRocksDBと互換性があるため、RocksDBを使用する既存のTiKVインスタンスでTitanを直接有効化できます。Titanを有効化するには、以下のいずれかの方法があります。
 
-+ Method 1: If you have deployed the cluster using TiUP, you can execute the `tiup cluster edit-config ${cluster-name}` command and edit the TiKV configuration file as the following example shows:
+-   方法 1: TiUPを使用してクラスターをデプロイした場合は、次の例に示すように、 `tiup cluster edit-config ${cluster-name}`コマンドを実行して TiKV 構成ファイルを編集できます。
 
     ```shell
     tikv:
       rocksdb.titan.enabled: true
     ```
 
-    Reload the configuration and TiKV will be rolling restarted dynamically:
+    設定を再ロードすると、TiKV が動的にローリング再起動されます。
 
     ```shell
     tiup cluster reload ${cluster-name} -R tikv
     ```
 
-    For the detailed command, see [Modify the configuration using TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration).
+    詳細なコマンドについては[TiUPを使用して構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)参照してください。
 
-+ Method 2: Directly edit the TiKV configuration file to enable Titan (**NOT** recommended for the production environment).
+-   方法 2: TiKV 構成ファイルを直接編集して Titan を有効にします (本番環境では推奨さ**れません**)。
 
     ```toml
     [rocksdb.titan]
     enabled = true
     ```
 
-+ Method 3: Edit the `${cluster_name}/tidb-cluster.yaml` configuration file for TiDB Operator:
+-   方法3: TiDB Operatorの`${cluster_name}/tidb-cluster.yaml`構成ファイルを編集します。
 
     ```yaml
     spec:
@@ -55,63 +55,63 @@ Titan is compatible with RocksDB, so you can directly enable Titan on the existi
               enabled = true
     ```
 
-    Apply the configuration to trigger an online rolling restart of the TiDB cluster for the changes to take effect:
+    変更を有効にするために、TiDB クラスターのオンライン ローリング再起動をトリガーする構成を適用します。
 
     ```shell
     kubectl apply -f ${cluster_name} -n ${namespace}
     ```
 
-    For more information, refer to [Configuring a TiDB Cluster in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster).
+    詳細については[Kubernetes での TiDBクラスタの構成](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster)を参照してください。
 
-## Data conversion
+## データ変換 {#data-conversion}
 
-> **Warning:**
+> **警告：**
 >
-> When Titan is disabled, RocksDB cannot read data that has been moved to Titan. If Titan is incorrectly disabled on a TiKV instance with Titan already enabled (mistakenly set `rocksdb.titan.enabled` to `false`), TiKV will fail to start, and the `You have disabled titan when its data directory is not empty` error appears in the TiKV log. To correctly disabled Titan, see [Disable Titan](#disable-titan).
+> Titanが無効になっている場合、RocksDBはTitanに移動されたデータを読み取ることができません。Titanが既に有効になっているTiKVインスタンスでTitanを誤って無効にした場合（誤って`rocksdb.titan.enabled`を`false`に設定した場合）、TiKVは起動に失敗し、TiKVログに`You have disabled titan when its data directory is not empty`エラーが表示されます。Titanを正しく無効にするには、 [タイタンを無効にする](#disable-titan)参照してください。
 
-After Titan is enabled, the existing data stored in RocksDB is not immediately moved to the Titan engine. As new data is written to the TiKV and RocksDB performs compaction, **the values are progressively separated from keys and written to Titan**. Similarly, the data restored through BR snapshot/log, the data converted during scaling, or the data imported by TiDB Lightning Physical Import Mode, is not written directly into Titan. As compaction proceeds, the large values exceeding the default value (`32KB`) of [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) in the processed SST files are separated into Titan. You can monitor the size of files stored in Titan by observing the **TiKV Details > Titan kv > blob file size** panel to estimate the data size.
+Titan を有効にした後、RocksDB に保存されている既存のデータは、すぐに Titan エンジンに移動されるわけではありません。新しいデータが TiKV に書き込まれ、RocksDB が圧縮を実行すると、**値は徐々にキーから分離され、 Titan に書き込まれます**。同様に、 BRスナップショット/ログを通じて復元されたデータ、スケーリング中に変換されたデータ、またはTiDB Lightning物理インポート モードによってインポートされたデータは、Titan に直接書き込まれません。圧縮が進むにつれて、処理された SST ファイル内のデフォルト値 ( `32KB` ) の[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)を超える大きな値が Titan に分離されます。TiKV**の詳細 &gt; Titan kv &gt; blob ファイル サイズ**パネルを観察してデータ サイズを見積もることで、Titan に保存されているファイルのサイズを監視できます。
 
-If you want to speed up the writing process, you can use tikv-ctl to compact data of the whole TiKV cluster manually. For details, see [manual compaction](/tikv-control.md#compact-data-of-the-whole-tikv-cluster-manually). The data access is continuous during the conversion from RocksDB to Titan, therefore the block cache of RocksDB significantly accelerates the data conversion process. In the test, by using tikv-ctl, a volume of 670 GiB TiKV data can be converted to Titan in one hour.
+書き込みプロセスを高速化したい場合は、tikv-ctl を使用して TiKV クラスター全体のデータを手動で圧縮できます。詳細は[手作業による圧縮](/tikv-control.md#compact-data-of-the-whole-tikv-cluster-manually)参照してください。RocksDB から Titan への変換中はデータアクセスが継続的に行われるため、RocksDB のブロックキャッシュによってデータ変換プロセスが大幅に高速化されます。テストでは、tikv-ctl を使用することで、670 GiB の TiKV データを 1 時間で Titan に変換できました。
 
-Note that the values in Titan Blob files are not continuous, and Titan's cache is at the value level, so the Blob Cache does not help during compaction. The conversion speed from Titan to RocksDB is an order of magnitude slower than that from RocksDB to Titan. In the test, it takes 12 hours to convert a volume of 800 GiB Titan data on a TiKV node to RocksDB by tikv-ctl in a full compaction.
+Titan BLOBファイル内の値は連続しておらず、Titanのキャッシュは値レベルであるため、圧縮時にはBLOBキャッシュは役に立ちません。TitanからRocksDBへの変換速度は、RocksDBからTitanへの変換速度よりも桁違いに遅くなります。テストでは、TiKVノード上の800GiBのTitanデータをtikv-ctlでRocksDBに完全圧縮変換するのに12時間かかりました。
 
-## Parameters
+## パラメータ {#parameters}
 
-By properly configuring Titan parameters, you can effectively improve database performance and resource utilization. This section introduces some key parameters you can use.
+Titanパラメータを適切に設定することで、データベースのパフォーマンスとリソース使用率を効果的に向上させることができます。このセクションでは、使用可能な主要なパラメータをいくつか紹介します。
 
-### `min-blob-size`
+### <code>min-blob-size</code> {#code-min-blob-size-code}
 
-You can use [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) to set the threshold for the value size to determine which data is stored in RocksDB and which in Titan's blob files. According to the test, `32KB` is an appropriate threshold. It ensures that Titan's performance does not regress compared with RocksDB. However, in many scenarios, this value is not optimal. It is recommended that you refer to [Impact of `min-blob-size` on performance](/storage-engine/titan-overview.md#impact-of-min-blob-size-on-performance) to choose an appropriate value. If you want to further improve write performance and can tolerate scan performance regression, you can set it to the minimum value `1KB`.
+[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)使用すると、RocksDB に保存するデータと Titan の BLOB ファイルに保存するデータを決定するための値のサイズのしきい値を設定できます。テストによると、適切なしきい値は`32KB`です。これにより、RocksDB と比較して Titan のパフォーマンスが低下しないことが保証されます。ただし、多くのシナリオでは、この値は最適ではありません。適切な値を選択するには、 [`min-blob-size`がパフォーマンスに与える影響](/storage-engine/titan-overview.md#impact-of-min-blob-size-on-performance)を参照することをお勧めします。書き込みパフォーマンスをさらに向上させ、スキャンパフォーマンスの低下を許容できる場合は、最小値の`1KB`に設定できます。
 
-### `blob-file-compression` and `zstd-dict-size`
+### <code>blob-file-compression</code>と<code>zstd-dict-size</code> {#code-blob-file-compression-code-and-code-zstd-dict-size-code}
 
-You can use [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression) to specify the compression algorithm used for values in Titan. You can also enable the `zstd` dictionary compression through [`zstd-dict-size`](/tikv-configuration-file.md#zstd-dict-size) to improve the compression rate.
+[`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression)使用すると、Titan の値に使用する圧縮アルゴリズムを指定できます。また、 `zstd`から[`zstd-dict-size`](/tikv-configuration-file.md#zstd-dict-size)の辞書圧縮を有効にして圧縮率を向上させることもできます。
 
-### `blob-cache-size`
+### <code>blob-cache-size</code> {#code-blob-cache-size-code}
 
-You can use [`blob-cache-size`](/tikv-configuration-file.md#blob-cache-size) to control the cache size of values in Titan. Larger cache size means higher read performance of Titan. However, too large a cache size causes Out of Memory (OOM) issues.
+Titanの値のキャッシュサイズを制御するには、 [`blob-cache-size`](/tikv-configuration-file.md#blob-cache-size)使用します。キャッシュサイズが大きいほど、Titanの読み取りパフォーマンスが向上します。ただし、キャッシュサイズが大きすぎると、メモリ不足（OOM）の問題が発生します。
 
-It is recommended to set the value of `storage.block-cache.capacity` to the store size minus the blob file size, and set `blob-cache-size` to `memory size * 50% - block cache size` according to the monitoring metrics when the database is running stably. This maximizes the blob cache size when the block cache is large enough for the whole RocksDB engine.
+ストアサイズからBLOBファイルサイズを引いた値を`storage.block-cache.capacity`に設定し、データベースが安定して動作している場合は、監視指標に応じて`blob-cache-size` ～ `memory size * 50% - block cache size`設定することをお勧めします。これにより、ブロックキャッシュがRocksDBエンジン全体に十分な大きさである場合に、BLOBキャッシュサイズが最大化されます。
 
-### `discardable-ratio` and `max-background-gc`
+### <code>discardable-ratio</code>と<code>max-background-gc</code> {#code-discardable-ratio-code-and-code-max-background-gc-code}
 
-The [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio) parameter and [`max-background-gc`](/tikv-configuration-file.md#max-background-gc) parameter significantly impact Titan's read performance and garbage collection process.
+[`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio)のパラメータと[`max-background-gc`](/tikv-configuration-file.md#max-background-gc)パラメータは、Titan の読み取りパフォーマンスとガベージコレクションプロセスに大きな影響を与えます。
 
-When the ratio of obsolete data (the corresponding key has been updated or deleted) in a blob file exceeds the threshold set by [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio), Titan GC is triggered. Reducing this threshold can reduce space amplification but can cause more frequent Titan GC. Increasing this value can reduce Titan GC, I/O bandwidth, and CPU consumption, but increase disk space usage.
+BLOBファイル内の古いデータ（対応するキーが更新または削除されたデータ）の割合が、 [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio)で設定されたしきい値を超えると、Titan GCがトリガーされます。このしきい値を下げると、スペースの増幅を軽減できますが、Titan GCの頻度が高くなる可能性があります。この値を上げると、Titan GC、I/O帯域幅、CPU消費量を削減できますが、ディスク容量の使用量は増加します。
 
-If you observe that the Titan GC thread is in full load for a long time from **TiKV Details** - **Thread CPU** - **RocksDB CPU**, consider adjusting [`max-background-gc`](/tikv-configuration-file.md#max-background-gc) to increase the Titan GC thread pool size.
+**TiKV の詳細**-**スレッド CPU** - **RocksDB CPU**から、Titan GC スレッドが長時間にわたってフル ロード状態になっていることが確認された場合は、 [`max-background-gc`](/tikv-configuration-file.md#max-background-gc)調整して Titan GC スレッド プールのサイズを増やすことを検討してください。
 
-### `rate-bytes-per-sec`
+### <code>rate-bytes-per-sec</code> {#code-rate-bytes-per-sec-code}
 
-You can adjust [`rate-bytes-per-sec`](/tikv-configuration-file.md#rate-bytes-per-sec) to limit the I/O rate of RocksDB compaction, reducing its impact on foreground read and write performance during high traffic.
+[`rate-bytes-per-sec`](/tikv-configuration-file.md#rate-bytes-per-sec)調整すると、RocksDB 圧縮の I/O レートを制限し、トラフィック量が多いときのフォアグラウンドの読み取りおよび書き込みパフォーマンスへの影響を軽減できます。
 
-### `shared-blob-cache` (New in v8.0.0)
+### <code>shared-blob-cache</code> (v8.0.0 の新機能) {#code-shared-blob-cache-code-new-in-v8-0-0}
 
-You can control whether to enable the shared cache for Titan blob files and RocksDB block files through [`shared-blob-cache`](/tikv-configuration-file.md#shared-blob-cache-new-in-v800). The default value is `true`. When the shared cache is enabled, block files have higher priority. This means that TiKV prioritizes meeting the cache needs of block files and then uses the remaining cache for blob files.
+Titan BLOBファイルとRocksDBブロックファイルの共有キャッシュを有効にするかどうかを[`shared-blob-cache`](/tikv-configuration-file.md#shared-blob-cache-new-in-v800)で制御できます。デフォルト値は`true`です。共有キャッシュを有効にすると、ブロックファイルの優先度が高くなります。つまり、TiKVはブロックファイルのキャッシュニーズを満たすことを優先し、残りのキャッシュをBLOBファイル用に使用することになります。
 
-### Titan configuration example
+### Titanの構成例 {#titan-configuration-example}
 
-The following is an example of the Titan configuration file. You can either [use TiUP to modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration) or [configure a TiDB cluster on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster).
+以下は Titan 設定ファイルの例です。1 または[Kubernetes上でTiDBクラスターを構成する](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster) [TiUPを使用して設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)かを選択できます。
 
 ```toml
 [rocksdb]
@@ -130,20 +130,21 @@ blob-run-mode = "normal"
 level-merge = false
 ```
 
-## Disable Titan
+## タイタンを無効にする {#disable-titan}
 
-To disable Titan, you can configure the `rocksdb.defaultcf.titan.blob-run-mode` option. The optional values for `blob-run-mode` are as follows:
+Titanを無効にするには、オプション`rocksdb.defaultcf.titan.blob-run-mode`設定します。オプション`blob-run-mode`のオプション値は次のとおりです。
 
-- When the option is set to `normal`, Titan performs read and write operations normally.
-- When the option is set to `read-only`, all newly written values are written into RocksDB, regardless of the value size.
-- When the option is set to `fallback`, all newly written values are written into RocksDB, regardless of the value size. Also, all compacted values stored in the Titan blob file are automatically moved back to RocksDB.
+-   オプションを`normal`に設定すると、Titan は読み取りおよび書き込み操作を通常どおり実行します。
+-   オプションを`read-only`に設定すると、値のサイズに関係なく、新しく書き込まれたすべての値が RocksDB に書き込まれます。
+-   このオプションを`fallback`に設定すると、新しく書き込まれたすべての値は、値のサイズに関係なく、RocksDBに書き込まれます。また、Titan BLOBファイルに保存されたすべての圧縮された値は、自動的にRocksDBに戻されます。
 
-To disable Titan for all existing and future data, you can follow these steps. Note that you can skip Step 2 because it greatly impacts online traffic performance. In fact even without Step 2, the data compaction consumes extra I/O and CPU resources when it moves data from Titan to RocksDB, and performance will degrade (sometimes as much as 50%) when TiKV I/O or CPU resources are limited.
+既存および将来のすべてのデータに対してTitanを無効にするには、以下の手順に従ってください。手順2はオンライントラフィックのパフォーマンスに大きな影響を与えるため、省略できます。実際、手順2を実行しなくても、TitanからRocksDBへのデータ移動時にデータ圧縮によって余分なI/OとCPUリソースが消費され、TiKVのI/OまたはCPUリソースが制限されている場合はパフォーマンスが低下します（最大50%低下する場合もあります）。
 
-1. Update the configuration of the TiKV nodes you wish to disable Titan for. You can update configuration in two methods:
+1.  Titanを無効化したいTiKVノードの設定を更新します。設定の更新は2つの方法で行えます。
 
-    + Execute `tiup cluster edit-config`, edit the configuration file, and execute `tiup cluster reload -R tikv`.
-    + Manually update the configuration file and restart TiKV.
+    -   `tiup cluster edit-config`実行し、設定ファイルを編集して`tiup cluster reload -R tikv`実行します。
+
+    -   構成ファイルを手動で更新し、TiKV を再起動します。
 
         ```toml
         [rocksdb.defaultcf.titan]
@@ -151,46 +152,46 @@ To disable Titan for all existing and future data, you can follow these steps. N
         discardable-ratio = 1.0
         ```
 
-    > **Note:**
+    > **注記：**
     >
-    > When there is insufficient disk space to accommodate both Titan and RocksDB data, it is recommended to use the default value of `0.5` for [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio). In general, the default value is recommended when available disk space is less than 50%. This is because when `discardable-ratio = 1.0`, the RocksDB data continues to increase. At the same time, the recycling of existing blob files in Titan requires all the data in that file to be converted to RocksDB, which is a slow process. However, if the disk size is large enough, setting `discardable-ratio = 1.0` can reduce the GC of the blob file itself during compaction, which saves bandwidth.
+    > TitanとRocksDBの両方のデータを収容するのに十分なディスク容量がない場合は、デフォルト値の`0.5` （ [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio)を使用することをお勧めします。一般的に、使用可能なディスク容量が50%未満の場合は、デフォルト値を使用することをお勧めします。これは、 `discardable-ratio = 1.0`設定するとRocksDBデータが増加し続けるためです。同時に、Titan内の既存のBLOBファイルをリサイクルするには、そのファイル内のすべてのデータをRocksDBに変換する必要があり、これは時間のかかるプロセスです。ただし、ディスクサイズが十分に大きい場合は、 `discardable-ratio = 1.0`設定すると、圧縮時にBLOBファイル自体のGCを削減できるため、帯域幅を節約できます。
 
-2. (Optional) Perform a full compaction using tikv-ctl. This process will consume a large amount of I/O and CPU resources.
+2.  （オプション）tikv-ctlを使用してフルコンパクションを実行します。このプロセスは大量のI/OとCPUリソースを消費します。
 
-    > **Warning:**
+    > **警告：**
     >
-    > When disk space is insufficient, executing the following command might result in the entire cluster running out of available space and thus unable to write data.
+    > ディスク容量が不足している場合、次のコマンドを実行すると、クラスター全体の使用可能な容量が不足し、データを書き込めなくなる可能性があります。
 
     ```bash
     tikv-ctl --pd <PD_ADDR> compact-cluster --bottommost force
     ```
 
-3. After the compaction is finished, wait for the **Blob file count** metrics under **TiKV-Details**/**Titan - kv** to decrease to `0`.
+3.  圧縮が完了したら、 **TiKV-Details** / **Titan - kv**の下の**Blob ファイル数**メトリックが`0`に減少するまで待ちます。
 
-4. For TiDB v8.5.0 or a later version, update the configuration of these TiKV nodes to disable Titan.
+4.  TiDB v8.5.0 以降のバージョンの場合、これらの TiKV ノードの構成を更新して Titan を無効にします。
 
-    > **Warning:**
+    > **警告：**
     >
-    > For versions earlier than v8.5.0, it is recommended to skip this step, because it might cause TiKV to crash. In these earlier versions, following Step 1 is sufficient to disable Titan. There is no performance difference between the configuration changes in Step 1 and the following changes in this step after the data migration is complete.
+    > v8.5.0より前のバージョンでは、TiKVがクラッシュする可能性があるため、この手順をスキップすることをお勧めします。これらの以前のバージョンでは、手順1を実行するだけでTitanを無効化できます。データ移行完了後、手順1の設定変更とこの手順の以降の変更との間にパフォーマンスの違いはありません。
 
     ```toml
     [rocksdb.titan]
     enabled = false
     ```
 
-## Level Merge (experimental)
+## レベルマージ（実験的） {#level-merge-experimental}
 
-In TiKV 4.0, [Level Merge](/storage-engine/titan-overview.md#level-merge), a new algorithm, is introduced to improve the performance of range query and to reduce the impact of Titan GC on the foreground write operations. You can enable Level Merge using the following option:
+TiKV 4.0では、範囲クエリのパフォーマンスを向上させ、Titan GCによるフォアグラウンド書き込み操作への影響を軽減するための新しいアルゴリズム[レベルマージ](/storage-engine/titan-overview.md#level-merge)導入されました。レベルマージは、以下のオプションで有効にできます。
 
 ```toml
 [rocksdb.defaultcf.titan]
 level-merge = true
 ```
 
-Enabling Level Merge has the following benefits:
+レベルマージを有効にすると、次の利点があります。
 
-- Greatly improve the performance of Titan range query.
-- Reduce the impact of Titan GC on the foreground write operations and improve write performance.
-- Reduce space amplification of Titan and the disk usage (compared to the disk usage with the default configuration).
+-   Titan 範囲クエリのパフォーマンスが大幅に向上しました。
+-   Titan GC によるフォアグラウンド書き込み操作への影響を軽減し、書き込みパフォーマンスを向上させます。
+-   Titan のスペース増幅とディスク使用量を削減します (デフォルト構成でのディスク使用量と比較して)。
 
-Accordingly, the write amplification with Level Merge enabled is slightly higher than that of Titan but is still lower than that of the native RocksDB.
+したがって、Level Merge を有効にした場合の書き込み増幅は Titan の場合よりもわずかに高くなりますが、ネイティブ RocksDB の場合よりも低くなります。

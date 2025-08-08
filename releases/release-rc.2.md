@@ -1,52 +1,52 @@
 ---
 title: TiDB RC2 Release Notes
-summary: TiDB RC2, released on March 1, 2017, focuses on MySQL compatibility, SQL query optimization, system stability, and performance. It introduces a new permission management mechanism, allowing users to control data access similar to MySQL privilege management. Key improvements include query optimizer enhancements, basic privilege management support, MySQL built-in functions, and performance optimizations. PD now supports location aware replica scheduling and fast scheduling based on region count, while TiKV introduces Async Apply for improved write performance and various optimizations for read and insert performance. Bug fixes and memory leak solutions are also included.
+summary: 2017年3月1日にリリースされたTiDB RC2は、MySQLとの互換性、SQLクエリの最適化、システムの安定性、そしてパフォーマンスに重点を置いています。新しい権限管理メカニズムが導入され、ユーザーはMySQLの権限管理と同様にデータアクセスを制御できます。主な改善点としては、クエリオプティマイザの強化、基本的な権限管理のサポート、MySQL組み込み関数、そしてパフォーマンスの最適化が挙げられます。PDでは、ロケーションアウェアなレプリカスケジューリングとリージョン数に基づく高速スケジューリングがサポートされるようになり、TiKVでは書き込みパフォーマンスを向上させる非同期適用と、読み取りおよび挿入パフォーマンスの様々な最適化が導入されています。バグ修正とメモリリーク対策も含まれています。
 ---
 
-# TiDB RC2 Release Notes
+# TiDB RC2 リリースノート {#tidb-rc2-release-notes}
 
-On March 1, 2017, TiDB RC2 is released! This release is focused on the compatibility with MySQL, SQL query optimizer, system stability and performance in this version. What's more, a new permission management mechanism is added and users can control data access in the same way as the MySQL privilege management system.
+2017年3月1日、TiDB RC2がリリースされました！このリリースでは、MySQLとの互換性、SQLクエリオプティマイザー、システムの安定性とパフォーマンスの向上に重点が置かれています。さらに、新しい権限管理メカニズムが追加され、ユーザーはMySQLの権限管理システムと同様にデータアクセスを制御できるようになりました。
 
-## TiDB
+## TiDB {#tidb}
 
-+ Query optimizer
-    - Collect column/index statistics and use them in the query optimizer
-    - Optimize the correlated subquery
-    - Optimize the Cost Based Optimizer (CBO) framework
-    - Eliminate aggregation using unique key information
-    - Refactor expression evaluation framework
-    - Convert Distinct to GroupBy
-    - Support the topn operation push-down
-+ Support basic privilege management
-+ Add lots of MySQL built-in functions
-+ Improve the Alter Table statement and support the modification of table name, default value and comment
-+ Support the Create Table Like statement
-+ Support the Show Warnings statement
-+ Support the Rename Table statement
-+ Restrict the size of a single transaction to avoid the cluster blocking of large transactions
-+ Automatically split data in the process of Load Data
-+ Optimize the performance of the AddIndex and Delete statement
-+ Support "ANSI_QUOTES" sql_mode
-+ Improve the monitoring system
-+ Fix Bugs
-+ Solve the problem of memory leak
+-   クエリオプティマイザー
+    -   列/インデックス統計を収集し、クエリオプティマイザーで使用します。
+    -   相関サブクエリを最適化する
+    -   コストベースオプティマイザー（CBO）フレームワークを最適化する
+    -   一意のキー情報を使用して集約を排除する
+    -   式評価フレームワークのリファクタリング
+    -   Distinct を GroupBy に変換する
+    -   topn操作のプッシュダウンをサポート
+-   基本的な権限管理をサポート
+-   MySQLの組み込み関数を多数追加
+-   Alter Table ステートメントを改良し、テーブル名、デフォルト値、コメントの変更をサポートします。
+-   Create Table Like ステートメントをサポートする
+-   警告の表示ステートメントをサポートする
+-   Rename Tableステートメントをサポートする
+-   大規模なトランザクションのクラスタブロックを回避するために、単一のトランザクションのサイズを制限します。
+-   データのロードプロセスでデータを自動的に分割する
+-   AddIndex および Delete ステートメントのパフォーマンスを最適化します
+-   「ANSI_QUOTES」sql_modeをサポート
+-   監視システムを改善する
+-   バグを修正
+-   メモリリークの問題を解決する
 
-## PD
+## PD {#pd}
 
-+ Support location aware replica scheduling
-+ Conduct fast scheduling based on the number of region
-+ pd-ctl support more features
-    - Add or delete PD
-    - Obtain Region information with Key
-    - Add or delete scheduler and operator
-    - Obtain cluster label information
+-   位置認識レプリカスケジューリングをサポート
+-   地域数に基づいて迅速なスケジュールを実施
+-   pd-ctl はより多くの機能をサポートします
+    -   PDを追加または削除する
+    -   キーでリージョン情報を取得する
+    -   スケジューラとオペレータの追加または削除
+    -   クラスタラベル情報を取得する
 
-## TiKV
+## TiKV {#tikv}
 
-+ Support Async Apply to improve the entire write performance
-+ Use prefix seek to improve the read performance of Write CF
-+ Use memory hint prefix to improve the insert performance of Raft CF
-+ Optimize the single read transaction performance
-+ Support more push-down expressions
-+ Improve the monitoring system
-+ Fix Bugs
+-   非同期適用をサポートし、全体的な書き込みパフォーマンスを向上
+-   プレフィックスシークを使用してWrite CFの読み取りパフォーマンスを向上させます
+-   メモリヒントプレフィックスを使用して、 Raft CF の挿入パフォーマンスを向上させます。
+-   単一読み取りトランザクションのパフォーマンスを最適化する
+-   より多くのプッシュダウン式をサポート
+-   監視システムを改善する
+-   バグを修正

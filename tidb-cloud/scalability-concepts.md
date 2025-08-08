@@ -1,43 +1,43 @@
 ---
 title: Scalability
-summary: Learn about scalability concepts for TiDB Cloud.
+summary: TiDB Cloudのスケーラビリティの概念について学習します。
 ---
 
-# Scalability
+# スケーラビリティ {#scalability}
 
-TiDB Cloud Dedicated lets you adjust its compute and storage resources separately to match your data volume or workload changes. TiDB Cloud Dedicated can do scaling without any service disruption. This flexibility allows organizations to optimize their infrastructure costs while maintaining high performance and availability.
+TiDB Cloud Dedicatedでは、データ量やワークロードの変化に合わせて、コンピューティングリソースとstorageリソースを個別に調整できます。TiDB TiDB Cloud Dedicatedは、サービスを中断することなくスケーリングできます。この柔軟性により、組織は高いパフォーマンスと可用性を維持しながら、インフラストラクチャコストを最適化できます。
 
-> **Note:**
+> **注記：**
 >
-> [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) scales automatically based on your application's workload changes. However, you cannot manually scale a {{{ .starter }}} cluster.
+> [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)アプリケーションのワークロードの変化に応じて自動的にスケールします。ただし、 TiDB Cloud Serverless クラスターを手動でスケールすることはできません。
 
-> **Tip:**
+> **ヒント：**
 >
-> For information about how to determine the size of a TiDB Cloud Dedicated cluster, see [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md).
+> TiDB Cloud Dedicated クラスターのサイズを決定する方法については、 [TiDBのサイズを決定する](/tidb-cloud/size-your-cluster.md)参照してください。
 
-## Vertical and horizontal scaling
+## 垂直および水平スケーリング {#vertical-and-horizontal-scaling}
 
-TiDB Cloud Dedicated supports both vertical (scale up) and horizontal (scale out) scaling.
+TiDB Cloud Dedicated は、垂直 (スケールアップ) スケーリングと水平 (スケールアウト) スケーリングの両方をサポートします。
 
-- Horizontal scaling is the process of adding nodes to your dedicated cluster to distribute the workload.
-- Vertical scaling is the process of increasing the vCPU and RAM for your dedicated cluster.
+-   水平スケーリングは、ワークロードを分散するために専用クラスターにノードを追加するプロセスです。
+-   垂直スケーリングは、専用クラスターの vCPU と RAM を増やすプロセスです。
 
-A combination of both vertical and horizontal scaling is also supported in TiDB Cloud Dedicated.
+TiDB Cloud Dedicated では、垂直スケーリングと水平スケーリングの両方の組み合わせもサポートされています。
 
-## TiDB scalability
+## TiDBのスケーラビリティ {#tidb-scalability}
 
-TiDB is for computing only and does not store data. You can configure the node number, vCPU, and RAM for TiDB.
+TiDBはコンピューティング専用であり、データの保存は行いません。TiDBのノード数、vCPU、RAMを設定できます。
 
-In general, TiDB performance increases linearly with the number of TiDB nodes.
+一般に、TiDB のパフォーマンスは TiDB ノードの数に応じて直線的に増加します。
 
-## TiKV scalability
+## TiKVのスケーラビリティ {#tikv-scalability}
 
-TiKV is responsible for storing row-based data. You can configure the node number, vCPU and RAM, and storage for TiKV. The number of TiKV nodes should be at least 1 set (3 nodes in 3 different available zones) and increase by 3 nodes.
+TiKVは行ベースのデータの保存を担当します。TiKVのノード数、vCPU、RAM、storageを設定できます。TiKVノードの数は少なくとも1セット（3つの異なる利用可能なゾーンに3ノード）で、3ノードずつ増加する必要があります。
 
-TiDB Cloud deploys TiKV nodes evenly to 3 available zones in the region you select to achieve durability and high availability. In a typical 3-replica setup, your data is distributed evenly among the TiKV nodes across all availability zones and is persisted to the disk of each TiKV node. Although TiKV is mainly used for data storage, the performance of the TiKV node also varies depending on different workloads.
+TiDB Cloudは、耐久性と高可用性を実現するために、選択したリージョン内の3つの利用可能なゾーンにTiKVノードを均等にデプロイします。典型的な3レプリカ構成では、データはすべてのアベイラビリティゾーンにわたるTiKVノードに均等に分散され、各TiKVノードのディスクに永続化されます。TiKVは主にデータstorageに使用されますが、TiKVノードのパフォーマンスはワークロードによっても異なります。
 
-## TiFlash scalability
+## TiFlashのスケーラビリティ {#tiflash-scalability}
 
-TiFlash is responsible for storing columnar data. TiFlash synchronizes data from TiKV in real time and supports real-time analytics workloads right out of the box. You can configure the node number, vCPU and RAM, and storage for TiFlash.
+TiFlashは列指向データの保存を担います。TiFlashはTiKVからのデータをリアルタイムで同期し、すぐにリアルタイム分析ワークロードをサポートします。TiFlashのノード数、vCPU、RAM、storageを設定できます。
 
-TiDB Cloud deploys TiFlash nodes evenly to different availability zones in a region. It is recommended that you configure at least two TiFlash nodes in each TiDB Cloud cluster and create at least two replicas of the data for high availability in your production environment.
+TiDB Cloudは、リージョン内の異なるアベイラビリティゾーンにTiFlashノードを均等に展開します。本番環境での高可用性を確保するため、各TiDB Cloudクラスターに少なくとも2つのTiFlashノードを設定し、データのレプリカを少なくとも2つ作成することをお勧めします。

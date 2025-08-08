@@ -1,52 +1,52 @@
 ---
 title: Migrate from TiDB Self-Managed to TiDB Cloud
-summary: Learn how to migrate data from TiDB Self-Managed to TiDB Cloud.
+summary: TiDB Self-Managed からTiDB Cloudにデータを移行する方法を学びます。
 ---
 
-# Migrate from TiDB Self-Managed to TiDB Cloud
+# TiDBセルフマネージドからTiDB Cloudへの移行 {#migrate-from-tidb-self-managed-to-tidb-cloud}
 
-This document describes how to migrate data from your TiDB Self-Managed clusters to TiDB Cloud (AWS) through Dumpling and TiCDC.
+このドキュメントでは、 Dumplingと TiCDC を使用して、TiDB セルフマネージド クラスターからTiDB Cloud (AWS) にデータを移行する方法について説明します。
 
-The overall procedure is as follows:
+全体的な手順は次のとおりです。
 
-1. Build the environment and prepare the tools.
-2. Migrate full data. The process is as follows:
-   1. Export data from TiDB Self-Managed to Amazon S3 using Dumpling.
-   2. Import data from Amazon S3 to TiDB Cloud.
-3. Replicate incremental data by using TiCDC.
-4. Verify the migrated data.
+1.  環境を構築し、ツールを準備します。
+2.  全データを移行します。手順は次のとおりです。
+    1.  Dumplingを使用して、TiDB Self-Managed から Amazon S3 にデータをエクスポートします。
+    2.  Amazon S3 からTiDB Cloudにデータをインポートします。
+3.  TiCDC を使用して増分データを複製します。
+4.  移行されたデータを確認します。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-It is recommended that you put the S3 bucket and the TiDB Cloud cluster in the same region. Cross-region migration might incur additional cost for data conversion.
+S3バケットとTiDB Cloudクラスターは同じリージョンに配置することをお勧めします。リージョン間の移行では、データ変換のために追加コストが発生する可能性があります。
 
-Before migration, you need to prepare the following:
+移行する前に、次のものを準備する必要があります。
 
-- An [AWS account](https://docs.aws.amazon.com/AmazonS3/latest/userguide/setting-up-s3.html#sign-up-for-aws-gsg) with administrator access
-- An [AWS S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html)
-- [A TiDB Cloud account](/tidb-cloud/tidb-cloud-quickstart.md) with at least the [`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles) access to your target TiDB Cloud cluster hosted on AWS
+-   管理者アクセス権を持つ[AWSアカウント](https://docs.aws.amazon.com/AmazonS3/latest/userguide/setting-up-s3.html#sign-up-for-aws-gsg)
+-   [AWS S3バケット](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html)
+-   AWS でホストされているターゲットTiDB Cloudクラスターへのアクセス権が少なくとも[`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles)つある[TiDB Cloudアカウント](/tidb-cloud/tidb-cloud-quickstart.md)
 
-## Prepare tools
+## ツールを準備する {#prepare-tools}
 
-You need to prepare the following tools:
+以下のツールを準備する必要があります。
 
-- Dumpling: a data export tool
-- TiCDC: a data replication tool
+-   Dumpling：データエクスポートツール
+-   TiCDC: データ複製ツール
 
-### Dumpling
+### Dumpling {#dumpling}
 
-[Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview) is a tool that exports data from TiDB or MySQL into SQL or CSV files. You can use Dumpling to export full data from TiDB Self-Managed.
+[Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview) 、TiDBまたはMySQLからSQLファイルまたはCSVファイルにデータをエクスポートするツールです。Dumplingを使用すると、TiDB Self-Managedから完全なデータをエクスポートできます。
 
-Before you deploy Dumpling, note the following:
+Dumplingをデプロイする前に、次の点に注意してください。
 
-- It is recommended to deploy Dumpling on a new EC2 instance in the same VPC as the TiDB cluster in TiDB Cloud.
-- The recommended EC2 instance type is **c6g.4xlarge** (16 vCPU and 32 GiB memory). You can choose other EC2 instance types based on your needs. The Amazon Machine Image (AMI) can be Amazon Linux, Ubuntu, or Red Hat.
+-   TiDB Cloudの TiDB クラスターと同じ VPC 内の新しい EC2 インスタンスにDumplingをデプロイすることをお勧めします。
+-   推奨されるEC2インスタンスタイプは**c6g.4xlarge** （16 vCPU、32 GiBメモリ）です。ニーズに応じて、他のEC2インスタンスタイプも選択できます。Amazonマシンイメージ（AMI）は、Amazon Linux、Ubuntu、Red Hatのいずれかを選択できます。
 
-You can deploy Dumpling by using TiUP or using the installation package.
+Dumpling は、 TiUPまたはインストール パッケージを使用して展開できます。
 
-#### Deploy Dumpling using TiUP
+#### TiUPを使用してDumplingをデプロイ {#deploy-dumpling-using-tiup}
 
-Use [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview) to deploy Dumpling:
+[TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview)使用してDumplingを展開します：
 
 ```bash
 ## Deploy TiUP
@@ -57,31 +57,31 @@ tiup install dumpling
 tiup update --self && tiup update dumpling
 ```
 
-#### Deploy Dumpling using the installation package
+#### インストールパッケージを使用してDumplingをデプロイ {#deploy-dumpling-using-the-installation-package}
 
-To deploy Dumpling using the installation package:
+インストール パッケージを使用してDumplingを展開するには:
 
-1. Download the [toolkit package](https://docs.pingcap.com/tidb/stable/download-ecosystem-tools).
+1.  [ツールキットパッケージ](https://docs.pingcap.com/tidb/stable/download-ecosystem-tools)ダウンロードしてください。
 
-2. Extract it to the target machine. You can get Dumpling using TiUP by running `tiup install dumpling`. Afterwards, you can use `tiup dumpling ...` to run Dumpling. For more information, see [Dumpling introduction](https://docs.pingcap.com/tidb/stable/dumpling-overview#dumpling-introduction).
+2.  対象マシンに解凍してください。TiUPを使ってDumplingを入手するには、 `tiup install dumpling`実行します。その後、 `tiup dumpling ...`使用してDumplingを実行します。詳細については、 [Dumplingの紹介](https://docs.pingcap.com/tidb/stable/dumpling-overview#dumpling-introduction)参照してください。
 
-#### Configure privileges for Dumpling
+#### Dumplingの権限を設定する {#configure-privileges-for-dumpling}
 
-You need the following privileges to export data from the upstream database:
+アップストリーム データベースからデータをエクスポートするには、次の権限が必要です。
 
-- SELECT
-- RELOAD
-- LOCK TABLES
-- REPLICATION CLIENT
-- PROCESS
+-   選択
+-   リロード
+-   ロックテーブル
+-   レプリケーションクライアント
+-   プロセス
 
-### Deploy TiCDC
+### TiCDCをデプロイ {#deploy-ticdc}
 
-You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to replicate incremental data from the upstream TiDB cluster to TiDB Cloud.
+アップストリーム TiDB クラスターからTiDB Cloudに増分データを複製するには、 [TiCDCを展開する](https://docs.pingcap.com/tidb/dev/deploy-ticdc)が必要です。
 
-1. Confirm whether the current TiDB version supports TiCDC. TiDB v4.0.8.rc.1 and later versions support TiCDC. You can check the TiDB version by executing `select tidb_version();` in the TiDB cluster. If you need to upgrade it, see [Upgrade TiDB Using TiUP](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup).
+1.  現在のTiDBバージョンがTiCDCをサポートしているかどうかを確認してください。TiDB v4.0.8.rc.1以降のバージョンはTiCDCをサポートしています。TiDBクラスタで`select tidb_version();`実行すると、TiDBのバージョンを確認できます。アップグレードが必要な場合は、 [TiUPを使用して TiDB をアップグレードする](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup)参照してください。
 
-2. Add the TiCDC component to the TiDB cluster. See [Add or scale out TiCDC to an existing TiDB cluster using TiUP](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup). Edit the `scale-out.yml` file to add TiCDC:
+2.  TiCDCコンポーネントをTiDBクラスタに追加します。1 [TiUPを使用して既存の TiDB クラスターに TiCDC を追加またはスケールアウトする](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)参照してください。3 `scale-out.yml`を編集してTiCDCを追加します。
 
     ```yaml
     cdc_servers:
@@ -93,37 +93,37 @@ You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to re
       data_dir: /tidb-data/cdc-8300
     ```
 
-3. Add the TiCDC component and check the status.
+3.  TiCDCコンポーネントを追加し、ステータスを確認します。
 
     ```shell
     tiup cluster scale-out <cluster-name> scale-out.yml
     tiup cluster display <cluster-name>
     ```
 
-## Migrate full data
+## 全データを移行する {#migrate-full-data}
 
-To migrate data from the TiDB Self-Managed cluster to TiDB Cloud, perform a full data migration as follows:
+TiDB Self-Managed クラスターからTiDB Cloudにデータを移行するには、次のようにして完全なデータ移行を実行します。
 
-1. Migrate data from the TiDB Self-Managed cluster to Amazon S3.
-2. Migrate data from Amazon S3 to TiDB Cloud.
+1.  TiDB セルフマネージド クラスターから Amazon S3 にデータを移行します。
+2.  Amazon S3 からTiDB Cloudにデータを移行します。
 
-### Migrate data from the TiDB Self-Managed cluster to Amazon S3
+### TiDBセルフマネージドクラスターからAmazon S3にデータを移行する {#migrate-data-from-the-tidb-self-managed-cluster-to-amazon-s3}
 
-You need to migrate data from the TiDB Self-Managed cluster to Amazon S3 using Dumpling.
+Dumplingを使用して、TiDB セルフマネージド クラスターから Amazon S3 にデータを移行する必要があります。
 
-If your TiDB cluster is in a local IDC, or the network between the Dumpling server and Amazon S3 is not connected, you can export the files to the local storage first, and then upload them to Amazon S3 later.
+TiDB クラスターがローカル IDC 内にある場合、またはDumplingサーバーと Amazon S3 間のネットワークが接続されていない場合は、最初にファイルをローカルstorageにエクスポートし、後で Amazon S3 にアップロードすることができます。
 
-#### Step 1. Disable the GC mechanism of the upstream TiDB Self-Managed cluster temporarily
+#### ステップ1.上流のTiDBセルフマネージドクラスタのGCメカニズムを一時的に無効にする {#step-1-disable-the-gc-mechanism-of-the-upstream-tidb-self-managed-cluster-temporarily}
 
-To ensure that newly written data is not lost during incremental migration, you need to disable the upstream cluster's garbage collection (GC) mechanism before starting the migration to prevent the system from cleaning up historical data.
+増分移行中に新しく書き込まれたデータが失われないようにするには、移行を開始する前にアップストリーム クラスターのガベージコレクション(GC) メカニズムを無効にして、システムが履歴データをクリーンアップしないようにする必要があります。
 
-Run the following command to verify whether the setting is successful.
+設定が成功したかどうかを確認するには、次のコマンドを実行します。
 
 ```sql
 SET GLOBAL tidb_gc_enable = FALSE;
 ```
 
-The following is an example output, in which `0` indicates that it is disabled.
+以下は出力例です`0`無効であることを示します。
 
 ```sql
 SELECT @@global.tidb_gc_enable;
@@ -135,42 +135,42 @@ SELECT @@global.tidb_gc_enable;
 1 row in set (0.01 sec)
 ```
 
-#### Step 2. Configure access permissions to the Amazon S3 bucket for Dumpling
+#### ステップ2. DumplingのAmazon S3バケットへのアクセス権限を設定する {#step-2-configure-access-permissions-to-the-amazon-s3-bucket-for-dumpling}
 
-Create an access key in the AWS console. See [Create an access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) for details.
+AWSコンソールでアクセスキーを作成します。詳細は[アクセスキーを作成する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)ご覧ください。
 
-1. Use your AWS account ID or account alias, your IAM user name, and your password to sign in to [the IAM console](https://console.aws.amazon.com/iam/home#/security_credentials).
+1.  AWS アカウント ID またはアカウントエイリアス、 IAMユーザー名、およびパスワードを使用して[IAMコンソール](https://console.aws.amazon.com/iam/home#/security_credentials)にサインインします。
 
-2. In the navigation bar on the upper right, choose your user name, and then click **My Security Credentials**.
+2.  右上のナビゲーション バーでユーザー名を選択し、 **[Security資格情報]**をクリックします。
 
-3. To create an access key, click **Create access key**. Then choose **Download .csv file** to save the access key ID and secret access key to a CSV file on your computer. Store the file in a secure location. You will not have access to the secret access key again after this dialog box closes. After you download the CSV file, choose **Close**. When you create an access key, the key pair is active by default, and you can use the pair right away.
+3.  アクセスキーを作成するには、 **「アクセスキーの作成」**をクリックします。次に、 **「.csvファイルのダウンロード**」を選択して、アクセスキーIDとシークレットアクセスキーをCSVファイルとしてコンピューターに保存します。ファイルは安全な場所に保管してください。このダイアログボックスを閉じると、シークレットアクセスキーに再度アクセスできなくなります。CSVファイルをダウンロードしたら、 **「閉じる」**を選択します。アクセスキーを作成すると、キーペアはデフォルトでアクティブになり、すぐに使用できます。
 
     ![Create access key](/media/tidb-cloud/op-to-cloud-create-access-key01.png)
 
     ![Download CSV file](/media/tidb-cloud/op-to-cloud-create-access-key02.png)
 
-#### Step 3. Export data from the upstream TiDB cluster to Amazon S3 using Dumpling
+#### ステップ3. Dumplingを使用して上流のTiDBクラスターからAmazon S3にデータをエクスポートする {#step-3-export-data-from-the-upstream-tidb-cluster-to-amazon-s3-using-dumpling}
 
-Do the following to export data from the upstream TiDB cluster to Amazon S3 using Dumpling:
+Dumplingを使用してアップストリーム TiDB クラスターから Amazon S3 にデータをエクスポートするには、次の手順を実行します。
 
-1. Configure the environment variables for Dumpling.
+1.  Dumplingの環境変数を設定します。
 
     ```shell
     export AWS_ACCESS_KEY_ID=${AccessKey}
     export AWS_SECRET_ACCESS_KEY=${SecretKey}
     ```
 
-2. Get the S3 bucket URI and region information from the AWS console. See [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) for details.
+2.  AWSコンソールからS3バケットのURIとリージョン情報を取得します。詳細は[バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)参照してください。
 
-    The following screenshot shows how to get the S3 bucket URI information:
+    次のスクリーンショットは、S3 バケット URI 情報を取得する方法を示しています。
 
     ![Get the S3 URI](/media/tidb-cloud/op-to-cloud-copy-s3-uri.png)
 
-    The following screenshot shows how to get the region information:
+    次のスクリーンショットは、地域情報を取得する方法を示しています。
 
     ![Get the region information](/media/tidb-cloud/op-to-cloud-copy-region-info.png)
 
-3. Run Dumpling to export data to the Amazon S3 bucket.
+3.  Dumplingを実行して、データを Amazon S3 バケットにエクスポートします。
 
     ```shell
     dumpling \
@@ -185,42 +185,42 @@ Do the following to export data from the upstream TiDB cluster to Amazon S3 usin
     --s3.region "${s3.region}"
     ```
 
-    The `-t` option specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and also increases the database's memory consumption. Therefore, do not set a too large number for this parameter.
+    `-t`オプションは、エクスポートのスレッド数を指定します。スレッド数を増やすと、 Dumplingの同時実行性とエクスポート速度が向上しますが、データベースのメモリ消費量も増加します。そのため、このパラメータにあまり大きな数値を設定しないでください。
 
-    For more information, see [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-to-sql-files).
+    詳細については[Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-to-sql-files)参照してください。
 
-4. Check the export data. Usually the exported data includes the following:
+4.  エクスポートデータを確認してください。通常、エクスポートされたデータには以下が含まれます。
 
-    - `metadata`: this file contains the start time of the export, and the location of the master binary log.
-    - `{schema}-schema-create.sql`: the SQL file for creating the schema
-    - `{schema}.{table}-schema.sql`: the SQL file for creating the table
-    - `{schema}.{table}.{0001}.{sql|csv}`: data files
-    - `*-schema-view.sql`, `*-schema-trigger.sql`, `*-schema-post.sql`: other exported SQL files
+    -   `metadata` : このファイルには、エクスポートの開始時刻とマスター バイナリ ログの場所が含まれています。
+    -   `{schema}-schema-create.sql` : スキーマを作成するためのSQLファイル
+    -   `{schema}.{table}-schema.sql` : テーブルを作成するためのSQLファイル
+    -   `{schema}.{table}.{0001}.{sql|csv}` : データファイル
+    -   `*-schema-view.sql` : その他のエクスポート`*-schema-post.sql`れたSQL `*-schema-trigger.sql`
 
-### Migrate data from Amazon S3 to TiDB Cloud
+### Amazon S3からTiDB Cloudへのデータ移行 {#migrate-data-from-amazon-s3-to-tidb-cloud}
 
-After you export data from the TiDB Self-Managed cluster to Amazon S3, you need to migrate the data to TiDB Cloud.
+TiDB セルフマネージド クラスターから Amazon S3 にデータをエクスポートした後、そのデータをTiDB Cloudに移行する必要があります。
 
-1. Get the Account ID and External ID of the cluster in the TiDB Cloud console. For more information, see [Step 2. Configure Amazon S3 access](/tidb-cloud/tidb-cloud-auditing.md#step-2-configure-amazon-s3-access).
+1.  TiDB CloudコンソールでクラスターのアカウントIDと外部IDを取得します。詳細については、 [ステップ2. Amazon S3アクセスを構成する](/tidb-cloud/tidb-cloud-auditing.md#step-2-configure-amazon-s3-access)参照してください。
 
-    The following screenshot shows how to get the Account ID and External ID:
+    次のスクリーンショットは、アカウント ID と外部 ID を取得する方法を示しています。
 
     ![Get the Account ID and External ID](/media/tidb-cloud/op-to-cloud-get-role-arn.png)
 
-2. Configure access permissions for Amazon S3. Usually you need the following read-only permissions:
+2.  Amazon S3 のアクセス権限を設定します。通常、以下の読み取り専用権限が必要です。
 
-    - s3:GetObject
-    - s3:GetObjectVersion
-    - s3:ListBucket
-    - s3:GetBucketLocation
+    -   s3:GetObject
+    -   s3:オブジェクトバージョンを取得する
+    -   s3:リストバケット
+    -   s3:GetBucketLocation
 
-    If the S3 bucket uses server-side encryption SSE-KMS, you also need to add the KMS permission.
+    S3 バケットがサーバー側暗号化 SSE-KMS を使用する場合は、KMS 権限も追加する必要があります。
 
-    - kms:Decrypt
+    -   kms:復号化
 
-3. Configure the access policy. Go to the [AWS Console > IAM > Access Management > Policies](https://console.aws.amazon.com/iamv2/home#/policies) and switch to your region to check if the access policy for TiDB Cloud exists already. If it does not exist, create a policy following this document [Creating policies on the JSON tab](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html).
+3.  アクセスポリシーを設定します[AWSコンソール &gt; IAM &gt; アクセス管理 &gt; ポリシー](https://console.aws.amazon.com/iamv2/home#/policies)に進み、リージョンを切り替えて、 TiDB Cloudのアクセスポリシーが既に存在するかどうかを確認します。存在しない場合は、このドキュメント[JSONタブでポリシーを作成する](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html)に従ってポリシーを作成してください。
 
-    The following is an example template for the json policy.
+    以下は、json ポリシーのテンプレートの例です。
 
     ```json
     ## Create a json policy template
@@ -265,35 +265,35 @@ After you export data from the TiDB Self-Managed cluster to Amazon S3, you need 
     }
     ```
 
-4. Configure the role. See [Creating an IAM role (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html). In the Account ID field, enter the TiDB Cloud Account ID and TiDB Cloud External ID you have noted down in Step 1.
+4.  ロールを設定します[IAMロールの作成 (コンソール)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html)参照してください。「アカウントID」フィールドに、手順1でメモしたTiDB CloudアカウントIDとTiDB Cloud外部IDを入力します。
 
-5. Get the Role-ARN. Go to [AWS Console > IAM > Access Management > Roles](https://console.aws.amazon.com/iamv2/home#/roles). Switch to your region. Click the role you have created, and note down the ARN. You will use it when importing data into TiDB Cloud.
+5.  ロールARNを取得します[AWSコンソール &gt; IAM &gt; アクセス管理 &gt; ロール](https://console.aws.amazon.com/iamv2/home#/roles)に進みます。リージョンに切り替えます。作成したロールをクリックし、ARNをメモします。これはTiDB Cloudにデータをインポートする際に使用します。
 
-6. Import data to TiDB Cloud. See [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md).
+6.  TiDB Cloudにデータをインポートします。1 [クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)参照してください。
 
-## Replicate incremental data
+## 増分データを複製する {#replicate-incremental-data}
 
-To replicate incremental data, do the following:
+増分データを複製するには、次の手順を実行します。
 
-1. Get the start time of the incremental data migration. For example, you can get it from the metadata file of the full data migration.
+1.  増分データ移行の開始時刻を取得します。例えば、完全データ移行のメタデータファイルから取得できます。
 
     ![Start Time in Metadata](/media/tidb-cloud/start_ts_in_metadata.png)
 
-2. Grant TiCDC to connect to TiDB Cloud.
+2.  TiCDC にTiDB Cloudへの接続を許可します。
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com/project/clusters), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
-    2. In the left navigation pane, click **Settings** > **Networking**.
-    3. On the **Networking** page, click **Add IP Address**.
-    4. In the displayed dialog, select **Use IP addresses**, click **+**, fill in the public IP address of the TiCDC component in the **IP Address** field, and then click **Confirm**. Now TiCDC can access TiDB Cloud. For more information, see [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/project/clusters)で[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+    2.  左側のナビゲーション ペインで、 **[設定]** &gt; **[ネットワーク] を**クリックします。
+    3.  **[ネットワーク]**ページで、 **[IP アドレスの追加] を**クリックします。
+    4.  表示されたダイアログで**「IPアドレスを使用する」**を選択し、「 **+」**をクリックして、 **「IPアドレス」**フィールドにTiCDCコンポーネントのパブリックIPアドレスを入力し、 **「確認」**をクリックします。これでTiCDCはTiDB Cloudにアクセスできるようになります。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)参照してください。
 
-3. Get the connection information of the downstream TiDB Cloud cluster.
+3.  ダウンストリームTiDB Cloudクラスターの接続情報を取得します。
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com/project/clusters), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
-    2. Click **Connect** in the upper-right corner.
-    3. In the connection dialog, select **Public** from the **Connection Type** drop-down list and select **General** from the **Connect With** drop-down list.
-    4. From the connection information, you can get the host IP address and port of the cluster. For more information, see [Connect via public connection](/tidb-cloud/connect-via-standard-connection.md).
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/project/clusters)で[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+    2.  右上隅の**「接続」**をクリックします。
+    3.  接続ダイアログで、 **「接続タイプ」**ドロップダウンリストから**「パブリック」**を選択し、 **「接続先」**ドロップダウンリストから**「一般」**を選択します。
+    4.  接続情報から、クラスターのホストIPアドレスとポートを取得できます。詳細については、 [パブリック接続経由で接続する](/tidb-cloud/connect-via-standard-connection.md)参照してください。
 
-4. Create and run the incremental replication task. In the upstream cluster, run the following:
+4.  増分レプリケーションタスクを作成して実行します。アップストリームクラスターで、以下のコマンドを実行します。
 
     ```shell
     tiup cdc cli changefeed create \
@@ -303,27 +303,29 @@ To replicate incremental data, do the following:
     --start-ts="431434047157698561"
     ```
 
-    - `--pd`: the PD address of the upstream cluster. The format is: `[upstream_pd_ip]:[pd_port]`
-    - `--sink-uri`: the downstream address of the replication task. Configure `--sink-uri` according to the following format. Currently, the scheme supports `mysql`, `tidb`, `kafka`, `s3`, and `local`.
+    -   `--pd` : 上流クラスタのPDアドレス。形式は`[upstream_pd_ip]:[pd_port]`です。
+
+    -   `--sink-uri` : レプリケーションタスクのダウンストリームアドレス`--sink-uri`以下の形式で設定してください。現在、このスキームは`mysql` 、 `tidb` 、 `kafka` 、 `s3` 、 `local`サポートしています。
 
         ```shell
         [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
         ```
 
-    - `--changefeed-id`: the ID of the replication task. The format must match the ^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$ regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
-    - `--start-ts`: specifies the starting TSO of the changefeed. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
+    -   `--changefeed-id` : レプリケーションタスクのID。形式は ^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$ 正規表現に一致する必要があります。このIDが指定されていない場合、TiCDCは自動的にUUID（バージョン4形式）をIDとして生成します。
 
-    For more information, see [CLI and Configuration Parameters of TiCDC Changefeeds](https://docs.pingcap.com/tidb/dev/ticdc-changefeed-config).
+    -   `--start-ts` : チェンジフィードの開始TSOを指定します。このTSOからTiCDCクラスターはデータのプルを開始します。デフォルト値は現在時刻です。
 
-5. Enable the GC mechanism again in the upstream cluster. If no error or delay is found in incremental replication, enable the GC mechanism to resume garbage collection of the cluster.
+    詳細については[TiCDC 変更フィードの CLI とコンフィグレーションパラメータ](https://docs.pingcap.com/tidb/dev/ticdc-changefeed-config)参照してください。
 
-    Run the following command to verify whether the setting works.
+5.  上流クラスタでGCメカニズムを再度有効化します。増分レプリケーションでエラーや遅延が見つからない場合、GCメカニズムを有効化してクラスタのガベージコレクションを再開します。
+
+    設定が機能するかどうかを確認するには、次のコマンドを実行します。
 
     ```sql
     SET GLOBAL tidb_gc_enable = TRUE;
     ```
 
-    The following is an example output, in which `1` indicates that GC is disabled.
+    以下は出力例です。1 `1` GC が無効であることを示します。
 
     ```sql
     SELECT @@global.tidb_gc_enable;
@@ -335,10 +337,11 @@ To replicate incremental data, do the following:
     1 row in set (0.01 sec)
     ```
 
-6. Verify the incremental replication task.
+6.  増分レプリケーション タスクを確認します。
 
-    - If the message "Create changefeed successfully!" is displayed in the output, the replication task is created successfully.
-    - If the state is `normal`, the replication task is normal.
+    -   出力に「Create changefeed successfully!」というメッセージが表示されたら、レプリケーション タスクは正常に作成されています。
+
+    -   状態が`normal`場合、レプリケーション タスクは正常です。
 
         ```shell
          tiup cdc cli changefeed list --pd=http://172.16.6.122:2379
@@ -346,39 +349,39 @@ To replicate incremental data, do the following:
 
         ![Update Filter](/media/tidb-cloud/normal_status_in_replication_task.png)
 
-    - Verify the replication. Write a new record to the upstream cluster, and then check whether the record is replicated to the downstream TiDB Cloud cluster.
+    -   レプリケーションを確認します。アップストリームクラスタに新しいレコードを書き込み、そのレコードがダウンストリームTiDB Cloudクラスタにレプリケートされているかどうかを確認します。
 
-7. Set the same timezone for the upstream and downstream clusters. By default, TiDB Cloud sets the timezone to UTC. If the timezone is different between the upstream and downstream clusters, you need to set the same timezone for both clusters.
+7.  アップストリームクラスタとダウンストリームクラスタに同じタイムゾーンを設定してください。デフォルトでは、 TiDB Cloud はタイムゾーンを UTC に設定します。アップストリームクラスタとダウンストリームクラスタのタイムゾーンが異なる場合は、両方のクラスタに同じタイムゾーンを設定する必要があります。
 
-    1. In the upstream cluster, run the following command to check the timezone:
+    1.  アップストリーム クラスターで次のコマンドを実行してタイムゾーンを確認します。
 
         ```sql
         SELECT @@global.time_zone;
         ```
 
-    2. In the downstream cluster, run the following command to set the timezone:
+    2.  ダウンストリーム クラスターで、次のコマンドを実行してタイムゾーンを設定します。
 
         ```sql
         SET GLOBAL time_zone = '+08:00';
         ```
 
-    3. Check the timezone again to verify the setting:
+    3.  設定を確認するには、タイムゾーンをもう一度確認してください。
 
         ```sql
         SELECT @@global.time_zone;
         ```
 
-8. Back up the [query bindings](/sql-plan-management.md) in the upstream cluster and restore them in the downstream cluster. You can use the following query to back up the query bindings:
+8.  上流クラスターの[クエリバインディング](/sql-plan-management.md)バックアップし、下流クラスターに復元します。クエリバインディングをバックアップするには、次のクエリを使用します。
 
     ```sql
     SELECT DISTINCT(CONCAT('CREATE GLOBAL BINDING FOR ', original_sql,' USING ', bind_sql,';')) FROM mysql.bind_info WHERE status='enabled';
     ```
 
-    If you do not get any output, query bindings might not be used in the upstream cluster. In this case, you can skip this step.
+    出力が表示されない場合は、上流クラスターでクエリバインディングが使用されていない可能性があります。その場合は、この手順をスキップできます。
 
-    After you get the query bindings, run them in the downstream cluster to restore the query bindings.
+    クエリ バインディングを取得したら、ダウンストリーム クラスターでそれを実行して、クエリ バインディングを復元します。
 
-9. Back up the user and privilege information in the upstream cluster and restore them in the downstream cluster. You can use the following script to back up the user and privilege information. Note that you need to replace the placeholders with the actual values.
+9.  上流クラスタのユーザーと権限情報をバックアップし、下流クラスタに復元します。以下のスクリプトを使用して、ユーザーと権限情報をバックアップできます。プレースホルダは実際の値に置き換える必要があることに注意してください。
 
     ```shell
     #!/bin/bash
@@ -388,7 +391,7 @@ To replicate incremental data, do the following:
     export MYSQL_USER=root
     export MYSQL_PWD={root_password}
     export MYSQL="mysql -u${MYSQL_USER} --default-character-set=utf8mb4"
-    
+
     function backup_user_priv(){
         ret=0
         sql="SELECT CONCAT(user,':',host,':',authentication_string) FROM mysql.user WHERE user NOT IN ('root')"
@@ -403,8 +406,8 @@ To replicate incremental data, do the following:
         done
         return $ret
     }
-    
+
     backup_user_priv
     ```
-    
-    After you get the user and privilege information, run the generated SQL statements in the downstream cluster to restore the user and privilege information.
+
+    ユーザーと権限の情報を取得したら、ダウンストリーム クラスターで生成された SQL ステートメントを実行して、ユーザーと権限の情報を復元します。

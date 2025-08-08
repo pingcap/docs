@@ -1,17 +1,17 @@
 ---
 title: How to Test TiDB Using Sysbench
-summary: TiDB performance can be optimized by using Sysbench 1.0 or later. Configure TiDB and TiKV with higher log levels for better performance. Adjust Sysbench configuration and import data to optimize performance. Address common issues related to proxy use and CPU utilization rates.
+summary: TiDBのパフォーマンスは、Sysbench 1.0以降を使用することで最適化できます。TiDBとTiKVのログレベルを高く設定することで、パフォーマンスが向上します。Sysbenchの設定を調整し、データをインポートすることで、パフォーマンスを最適化できます。プロキシの使用とCPU使用率に関連する一般的な問題にも対処できます。
 ---
 
-# How to Test TiDB Using Sysbench
+# Sysbenchを使用してTiDBをテストする方法 {#how-to-test-tidb-using-sysbench}
 
-It is recommended to use Sysbench 1.0 or later, which can be [downloaded here](https://github.com/akopytov/sysbench/releases/tag/1.0.20).
+Sysbench 1.0 以降 ( [ここからダウンロード](https://github.com/akopytov/sysbench/releases/tag/1.0.20)も可) の使用をお勧めします。
 
-## Test plan
+## テスト計画 {#test-plan}
 
-### TiDB configuration
+### TiDB構成 {#tidb-configuration}
 
-Higher log level means fewer logs to be printed and thus positively influences TiDB performance. Specifically, you can add the following command in the TiUP configuration file:
+ログレベルを高くすると、出力されるログが少なくなり、TiDBのパフォーマンスが向上します。具体的には、 TiUP設定ファイルに以下のコマンドを追加してください。
 
 ```yaml
 server_configs:
@@ -19,21 +19,21 @@ server_configs:
     log.level: "error"
 ```
 
-It is also recommended to make sure [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610) is enabled and that you allow sysbench to use prepared statements by using `--db-ps-mode=auto`. See the [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md) for documentation about what the SQL plan cache does and how to monitor it.
+また、 [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)有効になっていることを確認し、 `--db-ps-mode=auto`使用して sysbench が準備済みステートメントを使用できるようにすることをお勧めします。SQL プランキャッシュの機能と監視方法については、 [SQL 準備済み実行プランキャッシュ](/sql-prepared-plan-cache.md)のドキュメントを参照してください。
 
-> **Note:**
+> **注記：**
 >
-> In different versions of Sysbench, the default value of `db-ps-mode` might be different. It is recommended to explicitly specify it in the command.
+> Sysbenchのバージョンによっては、デフォルト値の`db-ps-mode`異なる場合があります。コマンドで明示的に指定することをお勧めします。
 
-### TiKV configuration
+### TiKV構成 {#tikv-configuration}
 
-Higher log level also means better performance for TiKV.
+ログ レベルが高いほど、TiKV のパフォーマンスも向上します。
 
-There are multiple Column Families on TiKV cluster which are mainly used to store different types of data, including Default CF, Write CF, and Lock CF. For the Sysbench test, you only need to focus on Default CF and Write CF. The Column Family that is used to import data has a constant proportion among TiDB clusters:
+TiKVクラスターには複数のカラムファミリーがあり、主に異なる種類のデータを格納するために使用されます。デフォルトカラムファミリー、書き込みカラムファミリー、ロックカラムファミリーなどです。Sysbenchテストでは、デフォルトカラムファミリーと書き込みカラムファミリーのみに注目してください。データのインポートに使用されるカラムファミリーは、TiDBクラスター間で一定の割合で存在します。
 
-Default CF : Write CF = 4 : 1
+デフォルトCF：書き込みCF = 4：1
 
-Configuring the block cache of RocksDB on TiKV should be based on the machine's memory size, in order to make full use of the memory. To deploy a TiKV cluster on a 40GB virtual machine, it is recommended to configure the block cache as follows:
+TiKV上のRocksDBのブロックキャッシュは、メモリを最大限に活用するために、マシンのメモリサイズに基づいて設定する必要があります。40GBの仮想マシンにTiKVクラスターをデプロイする場合は、ブロックキャッシュを次のように設定することをお勧めします。
 
 ```yaml
 server_configs:
@@ -43,7 +43,7 @@ server_configs:
     rocksdb.writecf.block-cache-size: "6GB"
 ```
 
-You can also configure TiKV to share block cache:
+ブロックキャッシュを共有するように TiKV を構成することもできます。
 
 ```yaml
 server_configs:
@@ -51,17 +51,17 @@ server_configs:
     storage.block-cache.capacity: "30GB"
 ```
 
-For more detailed information on TiKV performance tuning, see [Tune TiKV Performance](/tune-tikv-memory-performance.md).
+TiKV パフォーマンス チューニングの詳細については、 [TiKVパフォーマンスの調整](/tune-tikv-memory-performance.md)参照してください。
 
-## Test process
+## テストプロセス {#test-process}
 
-> **Note:**
+> **注記：**
 >
-> The test in this document was performed without load balancing tools such as HAproxy. We run the Sysbench test on individual TiDB node and added the results up. The load balancing tools and the parameters of different versions might also impact the performance.
+> このドキュメントのテストは、HAproxyなどの負荷分散ツールを使用せずに実施しました。TiDBノードごとにSysbenchテストを実行し、結果を合計しました。負荷分散ツールや異なるバージョンのパラメータもパフォーマンスに影響を与える可能性があります。
 
-### Sysbench configuration
+### Sysbenchの構成 {#sysbench-configuration}
 
-This is an example of the Sysbench configuration file:
+これは Sysbench 構成ファイルの例です。
 
 ```txt
 mysql-host={TIDB_HOST}
@@ -75,9 +75,9 @@ report-interval=10
 db-driver=mysql
 ```
 
-The above parameters can be adjusted according to actual needs. Among them, `TIDB_HOST` is the IP address of the TiDB server (because we cannot include multiple addresses in the configuration file), `threads` is the number of concurrent connections in the test, which can be adjusted in "8, 16, 32, 64, 128, 256". When importing data, it is recommended to set threads = 8 or 16. After adjusting `threads`, save the file named **config**.
+上記のパラメータは、実際のニーズに合わせて調整できます。1 `TIDB_HOST` TiDBサーバーのIPアドレス（設定ファイルに複数のアドレスを含めることはできないため）、 `threads`テストにおける同時接続数で、「8、16、32、64、128、256」の範囲で調整できます。データをインポートする際は、threads = 8または16に設定することをお勧めします`threads`を調整したら、 **config**というファイルを保存します。
 
-See the following as a sample **config** file:
+サンプル**設定**ファイルとして以下を参照してください。
 
 ```txt
 mysql-host=172.16.30.33
@@ -91,97 +91,85 @@ report-interval=10
 db-driver=mysql
 ```
 
-### Data import
+### データのインポート {#data-import}
 
-> **Note:**
+> **注記：**
 >
-> If you enable the optimistic transaction model (TiDB uses the pessimistic transaction mode by default), TiDB rolls back transactions when a concurrency conflict is found. Setting `tidb_disable_txn_auto_retry` to `off` turns on the automatic retry mechanism after meeting a transaction conflict, which can prevent Sysbench from quitting because of the transaction conflict error.
+> 楽観的トランザクションモデルを有効にすると（TiDBはデフォルトで悲観的トランザクションモードを使用します）、同時実行の競合が検出されるとTiDBはトランザクションをロールバックします。1～ `tidb_disable_txn_auto_retry` `off`設定すると、トランザクションの競合が発生した後に自動再試行メカニズムが有効になり、トランザクション競合エラーによってSysbenchが終了するのを防ぐことができます。
 
-Before importing the data, it is necessary to make some settings to TiDB. Execute the following command in MySQL client:
-
-{{< copyable "sql" >}}
+データをインポートする前に、TiDBにいくつかの設定を行う必要があります。MySQLクライアントで以下のコマンドを実行してください。
 
 ```sql
 set global tidb_disable_txn_auto_retry = off;
 ```
 
-Then exit the client.
+次にクライアントを終了します。
 
-Restart MySQL client and execute the following SQL statement to create a database `sbtest`:
-
-{{< copyable "sql" >}}
+MySQL クライアントを再起動し、次の SQL ステートメントを実行してデータベース`sbtest`を作成します。
 
 ```sql
 create database sbtest;
 ```
 
-Adjust the order in which Sysbench scripts create indexes. Sysbench imports data in the order of "Build Table -> Insert Data -> Create Index", which takes more time for TiDB to import data. Users can adjust the order to speed up the import of data. Suppose that you use the Sysbench version [1.0.20](https://github.com/akopytov/sysbench/tree/1.0.20). You can adjust the order in either of the following two ways:
+Sysbench スクリプトがインデックスを作成する順序を調整します。Sysbench は「テーブルの作成 -&gt; データの挿入 -&gt; インデックスの作成」という順序でデータをインポートするため、TiDB によるデータのインポートに時間がかかります。ユーザーはこの順序を調整することで、データのインポートを高速化できます。Sysbench バージョン[1.0.20](https://github.com/akopytov/sysbench/tree/1.0.20)使用している場合、順序は次の 2 つの方法で調整できます。
 
-- Download the modified [oltp_common.lua](https://raw.githubusercontent.com/pingcap/tidb-bench/master/sysbench/sysbench-patch/oltp_common.lua) file for TiDB and overwrite the `/usr/share/sysbench/oltp_common.lua` file with it.
-- In `/usr/share/sysbench/oltp_common.lua`, move the lines [235-240](https://github.com/akopytov/sysbench/blob/1.0.20/src/lua/oltp_common.lua#L235-L240) to be right behind the line 198.
+-   TiDB 用に変更された[oltp_common.lua](https://raw.githubusercontent.com/pingcap/tidb-bench/master/sysbench/sysbench-patch/oltp_common.lua)ファイルをダウンロードし、 `/usr/share/sysbench/oltp_common.lua`ファイルをそれで上書きします。
+-   `/usr/share/sysbench/oltp_common.lua`で、行[235-240](https://github.com/akopytov/sysbench/blob/1.0.20/src/lua/oltp_common.lua#L235-L240)行 198 のすぐ後ろに移動します。
 
-> **Note:**
+> **注記：**
 >
-> This operation is optional and is only to save the time consumed by data import.
+> この操作はオプションであり、データのインポートにかかる時間を節約するためだけに行われます。
 
-At the command line, enter the following command to start importing data. The config file is the one configured in the previous step:
-
-{{< copyable "shell-regular" >}}
+コマンドラインで以下のコマンドを入力してデータのインポートを開始します。設定ファイルは前の手順で設定したファイルです。
 
 ```bash
 sysbench --config-file=config oltp_point_select --tables=32 --table-size=10000000 prepare
 ```
 
-### Warming data and collecting statistics
+### 温暖化データと統計の収集 {#warming-data-and-collecting-statistics}
 
-To warm data, we load data from disk into the block cache of memory. The warmed data has significantly improved the overall performance of the system. It is recommended to warm data once after restarting the cluster.
+データをウォームアップするには、ディスクからメモリのブロックキャッシュにデータをロードします。ウォームアップされたデータにより、システム全体のパフォーマンスが大幅に向上しました。クラスターを再起動した後は、一度データをウォームアップすることをお勧めします。
 
 ```bash
 sysbench --config-file=config oltp_point_select --tables=32 --table-size=10000000 prewarm
 ```
 
-### Point select test command
-
-{{< copyable "shell-regular" >}}
+### Point select test command {#point-select-test-command}
 
 ```bash
 sysbench --config-file=config oltp_point_select --tables=32 --table-size=10000000 --db-ps-mode=auto --rand-type=uniform run
 ```
 
-### Update index test command
-
-{{< copyable "shell-regular" >}}
+### インデックス更新テストコマンド {#update-index-test-command}
 
 ```bash
 sysbench --config-file=config oltp_update_index --tables=32 --table-size=10000000 --db-ps-mode=auto --rand-type=uniform run
 ```
 
-### Read-only test command
-
-{{< copyable "shell-regular" >}}
+### 読み取り専用テストコマンド {#read-only-test-command}
 
 ```bash
 sysbench --config-file=config oltp_read_only --tables=32 --table-size=10000000 --db-ps-mode=auto --rand-type=uniform run
 ```
 
-## Common issues
+## よくある問題 {#common-issues}
 
-### TiDB and TiKV are both properly configured under high concurrency, why is the overall performance still low?
+### TiDB と TiKV は両方とも高い同時実行性で適切に構成されているのに、全体的なパフォーマンスがまだ低いのはなぜですか? {#tidb-and-tikv-are-both-properly-configured-under-high-concurrency-why-is-the-overall-performance-still-low}
 
-This issue often has things to do with the use of a proxy. You can add pressure on single TiDB server, sum each result up and compare the summed result with the result with proxy.
+この問題は多くの場合、プロキシの使用に関係しています。単一のTiDBサーバーに負荷をかけ、それぞれの結果を合計し、プロキシを使用した結果と比較することができます。
 
-Take HAproxy as an example. The parameter `nbproc` can increase the number of processes it can start at most. Later versions of HAproxy also support `nbthread` and `cpu-map`. All of these can mitigate the negative impact of proxy use on performance.
+HAproxyを例に挙げましょう。パラメータ`nbproc`指定すると、起動できるプロセスの最大数を増やすことができます。HAproxyの最新バージョンでは、 `nbthread`と`cpu-map`サポートされています。これらはすべて、プロキシの使用によるパフォーマンスへの悪影響を軽減します。
 
-### Under high concurrency, why is the CPU utilization rate of TiKV still low?
+### 同時実行性が高いのに、TiKV の CPU 使用率が低いのはなぜですか? {#under-high-concurrency-why-is-the-cpu-utilization-rate-of-tikv-still-low}
 
-Although the overall CPU utilization rate is low for TiKV, the CPU utilization rate of some modules in the cluster might be high.
+TiKV 全体の CPU 使用率は低いですが、クラスター内の一部のモジュールの CPU 使用率は高くなる可能性があります。
 
-The maximum concurrency limits for other modules on TiKV, such as storage readpool, coprocessor, and gRPC, can be adjusted through the TiKV configuration file.
+storage読み取りプール、コプロセッサ、gRPC など、TiKV 上の他のモジュールの最大同時実行制限は、TiKV 構成ファイルを通じて調整できます。
 
-The actual CPU usage can be observed through Grafana's TiKV Thread CPU monitor panel. If there is a bottleneck on the modules, it can be adjusted by increasing the concurrency of the modules.
+実際のCPU使用率は、GrafanaのTiKVスレッドCPUモニターパネルで確認できます。モジュールにボトルネックがある場合は、モジュールの同時実行性を高めることで調整できます。
 
-### Given that TiKV has not yet reached the CPU usage bottleneck under high concurrency, why is TiDB's CPU utilization rate still low?
+### TiKV が高同時実行時の CPU 使用率のボトルネックにまだ達していないのに、なぜ TiDB の CPU 使用率がまだ低いのでしょうか? {#given-that-tikv-has-not-yet-reached-the-cpu-usage-bottleneck-under-high-concurrency-why-is-tidb-s-cpu-utilization-rate-still-low}
 
-CPU of NUMA architecture is used on some high-end equipment where cross-CPU access to remote memory will greatly reduce performance. By default, TiDB will use all CPUs of the server, and goroutine scheduling will inevitably lead to cross-CPU memory access.
+NUMAアーキテクチャのCPUは、一部のハイエンド機器で使用されています。これらの機器では、リモートメモリへのCPU間アクセスによってパフォーマンスが大幅に低下します。デフォルトでは、TiDBはサーバーのすべてのCPUを使用するため、goroutineスケジューリングによって必然的にCPU間メモリアクセスが発生します。
 
-Therefore, it is recommended to deploy *n* TiDBs (*n* is the number of NUMA CPUs) on the server of NUMA architecture, and meanwhile set the TiDB parameter `max-procs` to a value that is the same as the number of NUMA CPU cores.
+したがって、NUMAアーキテクチャのサーバーに*n 個の*TiDB ( *n*は NUMA CPU の数) を展開し、同時に TiDB パラメータ`max-procs` NUMA CPU コアの数と同じ値に設定することをお勧めします。

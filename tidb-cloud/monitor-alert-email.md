@@ -1,49 +1,54 @@
 ---
 title: Subscribe via Email
-summary: Learn how to monitor your TiDB cluster by getting alert notifications via Email.
+summary: 電子メールでアラート通知を受信して TiDB クラスターを監視する方法を学習します。
 ---
 
-# Subscribe via Email
+# メールで購読する {#subscribe-via-email}
 
-TiDB Cloud provides you with an easy way to subscribe to alert notifications via email, [Slack](/tidb-cloud/monitor-alert-slack.md), and [Zoom](/tidb-cloud/monitor-alert-zoom.md). This document describes how to subscribe to alert notifications via email.
+TiDB Cloud、電子メールによるアラート通知を簡単に購読できます。1 、 [スラック](/tidb-cloud/monitor-alert-slack.md) [ズーム](/tidb-cloud/monitor-alert-zoom.md)このドキュメントでは、電子メールによるアラート通知を購読する方法について説明します。
 
-> **Note:**
+> **注記：**
 >
-> Currently, alert subscription is only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+> 現在、アラートサブスクリプションは[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対してのみ利用可能です。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- To subscribe to alert notifications of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Project Owner` access to the target project in TiDB Cloud.
+-   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権またはTiDB Cloudの対象プロジェクトへの`Project Owner`アクセス権が必要です。
 
-## Subscribe to alert notifications
+## アラート通知を購読する {#subscribe-to-alert-notifications}
 
-> **Tip:**
+> **ヒント：**
 >
-> The alert subscription is for all alerts in the current project. If you have multiple clusters in the project, you just need to subscribe once.
+> アラートサブスクリプションは、現在のプロジェクト内のすべてのアラートに適用されます。プロジェクト内に複数のクラスターがある場合は、一度だけサブスクリプションすれば済みます。
 
-To get alert notifications of clusters in your project, take the following steps:
+プロジェクト内のクラスターのアラート通知を取得するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
-3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
-4. Select **Email** from the **Subscriber Type** drop-down list.
-5. Enter your email address.
-6. Click **Test Connection**.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用してターゲット プロジェクトに切り替えます。
 
-    - If the test succeeds, the **Save** button is displayed.
-    - If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and then retry the connection.
+2.  左側のナビゲーション ペインで、 **[プロジェクト設定]** &gt; **[アラート サブスクリプション]**をクリックします。
 
-7. Click **Save** to complete the subscription.
+3.  **アラート サブスクリプション**ページで、右上隅の**[サブスクライバーの追加]**をクリックします。
 
-Alternatively, you can also click **Subscribe** in the upper-right corner of the [**Alert**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts) page of the cluster. You will be directed to the **Alert Subscriber** page.
+4.  **「サブスクライバータイプ」**ドロップダウンリストから**「電子メール」**を選択します。
 
-If an alert condition remains unchanged, the alert sends email notifications every three hours.
+5.  メールアドレスを入力してください。
 
-## Unsubscribe from alert notifications
+6.  **[接続テスト]**をクリックします。
 
-If you no longer want to receive alert notifications of clusters in your project, take the following steps:
+    -   テストが成功すると、 **[保存]**ボタンが表示されます。
+    -   テストに失敗した場合は、エラーメッセージが表示されます。メッセージに従って問題を解決し、接続を再試行してください。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
-3. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
-4. Click **Unsubscribe** to confirm the unsubscription.
+7.  **「保存」**をクリックしてサブスクリプションを完了します。
+
+または、クラスターの[**警告**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts)ページ目の右上隅にある**「サブスクライブ」**をクリックすることもできます。 **「アラートサブスクライバー」**ページに移動します。
+
+アラート条件が変更されない場合、アラートは 3 時間ごとに電子メール通知を送信します。
+
+## アラート通知の購読を解除する {#unsubscribe-from-alert-notifications}
+
+プロジェクト内のクラスターのアラート通知を受信したくない場合は、次の手順を実行します。
+
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用してターゲット プロジェクトに切り替えます。
+2.  左側のナビゲーション ペインで、 **[プロジェクト設定]** &gt; **[アラート サブスクリプション]**をクリックします。
+3.  **[アラート サブスクリプション]**ページで、削除する対象のサブスクライバーの行を見つけて、 **[...]** &gt; **[サブスクリプション解除]**をクリックします。
+4.  登録解除を確認するには、 **「登録解除」を**クリックします。

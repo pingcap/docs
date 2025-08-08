@@ -1,86 +1,86 @@
 ---
 title: TiDB Cloud Quick Start
-summary: Sign up quickly to try TiDB Cloud and create your TiDB cluster.
+summary: すぐにサインアップしてTiDB Cloudを試し、TiDB クラスターを作成してください。
 category: quick start
 ---
 
-# TiDB Cloud Quick Start
+# TiDB Cloudクイックスタート {#tidb-cloud-quick-start}
 
-*Estimated completion time: 20 minutes*
+*推定所要時間: 20 分*
 
-This tutorial guides you through an easy way to get started with TiDB Cloud.
+このチュートリアルでは、 TiDB Cloudを使い始めるための簡単な方法を説明します。
 
-Additionally, you can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
+さらに、 [TiDB プレイグラウンド](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_cloud_quick_start)で TiDB 機能を試すこともできます。
 
-## Step 1: Create a TiDB cluster
+## ステップ1: TiDBクラスターを作成する {#step-1-create-a-tidb-cluster}
 
-[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) is the best way to get started with TiDB Cloud. To create a {{{ .starter }}} cluster, follow these steps:
+[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) TiDB Cloudを使い始めるのに最適な方法です。TiDB TiDB Cloud Serverlessクラスターを作成するには、以下の手順に従ってください。
 
-1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up.
+1.  TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidbcloud.com/free-trial)クリックしてサインアップしてください。
 
-    You can sign up with your email and password to manage your password using TiDB Cloud, or choose to sign in with your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
+    メールアドレスとパスワードでサインアップして、 TiDB Cloudを使用してパスワードを管理するか、Google、GitHub、または Microsoft アカウントでサインインして、 TiDB Cloudへのシングル サインオン (SSO) を選択することもできます。
 
-2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
+2.  [ログイン](https://tidbcloud.com/) TiDB Cloudアカウントに追加します。
 
-    The [**Clusters**](https://tidbcloud.com/project/clusters) page is displayed by default.
+    デフォルトでは[**クラスター**](https://tidbcloud.com/project/clusters)ページ目が表示されます。
 
-3. For new sign-up users, TiDB Cloud automatically creates a default {{{ .starter }}} cluster named `Cluster0` for you.
+3.  新規サインアップ ユーザーの場合、 TiDB Cloud は`Cluster0`名前のデフォルトのTiDB Cloud Serverless クラスターを自動的に作成します。
 
-    - To instantly try out TiDB Cloud features with this default cluster, proceed to [Step 2: Try AI-assisted SQL Editor](#step-2-try-ai-assisted-sql-editor).
-    - To create a new {{{ .starter }}} cluster on your own, follow these steps:
+    -   このデフォルトのクラスターでTiDB Cloud機能をすぐに試すには、 [ステップ2: AI支援SQLエディターを試す](#step-2-try-ai-assisted-sql-editor)に進みます。
+    -   独自に新しいTiDB Cloud Serverless クラスターを作成するには、次の手順に従います。
 
-        1. Click **Create Cluster**.
-        2. On the **Create Cluster** page, **Serverless** is selected by default. Select the target region for your cluster, update the default cluster name if necessary, select your [cluster plan](/tidb-cloud/select-cluster-tier.md#cluster-plans), and then click **Create**. Your {{{ .starter }}} cluster will be created in approximately 30 seconds.
+        1.  **[クラスタの作成]を**クリックします。
+        2.  **「クラスタの作成」**ページでは、デフォルトで**「Serverless」**が選択されています。クラスターのターゲットリージョンを選択し、必要に応じてデフォルトのクラスター名を更新し、 [クラスタープラン](/tidb-cloud/select-cluster-tier.md#cluster-plans)を選択して**「作成**」をクリックします。TiDB TiDB Cloud Serverless クラスターは約30秒で作成されます。
 
-## Step 2: Try AI-assisted SQL Editor
+## ステップ2: AI支援SQLエディターを試す {#step-2-try-ai-assisted-sql-editor}
 
-You can use the built-in AI-assisted SQL Editor in the TiDB Cloud console to maximize your data value. This enables you to run SQL queries against databases without a local SQL client. You can intuitively view the query results in tables or charts and easily check the query logs.
+TiDB Cloudコンソールに搭載されたAI支援SQLエディタを使用することで、データの価値を最大限に引き出すことができます。これにより、ローカルSQLクライアントを必要とせずに、データベースに対してSQLクエリを実行できます。クエリ結果は表やグラフで直感的に表示され、クエリログも簡単に確認できます。
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click on a cluster name to go to its overview page, and then click **SQL Editor** in the left navigation pane.
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページで、クラスター名をクリックして概要ページに移動し、左側のナビゲーション ペインで**[SQL エディター] を**クリックします。
 
-2. To try the AI capacity of TiDB Cloud, follow the on-screen instructions to allow PingCAP and AWS Bedrock to use your code snippets for research and service improvement, and then click **Save and Get Started**.
+2.  TiDB Cloudの AI 機能を試すには、画面上の指示に従って、PingCAP と AWS Bedrock がコードスニペットを研究とサービスの改善のために使用することを許可し、 **[保存して開始] を**クリックします。
 
-3. In SQL Editor, press <kbd>⌘</kbd> + <kbd>I</kbd> on macOS (or <kbd>Control</kbd> + <kbd>I</kbd> on Windows or Linux) to instruct [Chat2Query (beta)](/tidb-cloud/tidb-cloud-glossary.md#chat2query) to generate SQL queries automatically.
+3.  SQL エディターで、macOS の場合は<kbd>⌘</kbd> + <kbd>I</kbd> (Windows または Linux の場合は<kbd>Control</kbd> + <kbd>I</kbd> ) を押して、 [Chat2Query（ベータ版）](/tidb-cloud/tidb-cloud-glossary.md#chat2query) SQL クエリを自動的に生成するように指示します。
 
-    For example, to create a new table `test.t` with two columns (column `id` and column `name`), you can type `use test;` to specify the database, press <kbd>⌘</kbd> + <kbd>I</kbd>, type `create a new table t with id and name` as the instruction, and then press **Enter** to let AI generate a SQL statement accordingly. 
-    
-    For the generated statement, you can accept it by clicking **Accept** and then further edit it if needed, or reject it by clicking **Discard**.
+    たとえば、2 つの列 (列`id`と列`name` ) を持つ新しいテーブル`test.t`を作成するには、 `use test;`と入力してデータベースを指定し、 <kbd>⌘</kbd> + <kbd>I</kbd>を押して、指示として`create a new table t with id and name`入力し、 **Enter**を押すと、AI がそれに応じて SQL ステートメントを生成できます。
 
-    > **Note:**
+    生成されたステートメントについては、 **「承認」**をクリックして承認し、必要に応じてさらに編集するか、 **「破棄」を**クリックして拒否することができます。
+
+    > **注記：**
     >
-    > SQL queries generated by AI are not 100% accurate and might still require further tweaking.
+    > AI によって生成された SQL クエリは 100% 正確ではないため、さらに調整が必要になる場合があります。
 
-4. Run the SQL queries.
+4.  SQL クエリを実行します。
 
     <SimpleTab>
-    <div label="macOS">
+     <div label="macOS">
 
-    For macOS:
+    macOSの場合:
 
-    - If you have only one query in the editor, press **⌘ + Enter** or click <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**Run** to execute it.
+    -   エディタにクエリが1つしかない場合は、 **⌘ + Enter**を押すか、 <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>実行するには**実行してください**。
 
-    - If you have multiple queries in the editor, select the lines of the target queries with your cursor, and then press **⌘ + Enter** or click **Run** to execute them sequentially.
+    -   エディターに複数のクエリがある場合は、カーソルで対象クエリの行を選択し、 **⌘ + Enter キー**を押すか、 **[実行]**をクリックして順番に実行します。
 
-    - To run all queries in the editor sequentially, press **⇧ + ⌘ + Enter**, or select the lines of all queries with your cursor and click **Run**.
+    -   エディター内のすべてのクエリを順番に実行するには、 **⇧ + ⌘ + Enter を**押すか、カーソルですべてのクエリの行を選択して**「実行」**をクリックします。
 
     </div>
 
     <div label="Windows/Linux">
 
-    For Windows or Linux:
+    Windows または Linux の場合:
 
-    - If you have only one query in the editor, press **Ctrl + Enter** or click <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**Run** to execute it.
+    -   エディタにクエリが1つしかない場合は、 **Ctrl + Enter**を押すか、 <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>実行するには**実行してください**。
 
-    - If you have multiple queries in the editor, select the lines of the target queries with your cursor, and then press **Ctrl + Enter** or click **Run** to execute them sequentially.
+    -   エディターに複数のクエリがある場合は、カーソルで対象クエリの行を選択し、 **Ctrl + Enter キー**を押すか、 **[実行]**をクリックして順番に実行します。
 
-    - To run all queries in the editor sequentially, press **Shift + Ctrl + Enter**, or select the lines of all queries with your cursor and click **Run**.
+    -   エディター内のすべてのクエリを順番に実行するには、 **Shift + Ctrl + Enter**を押すか、カーソルですべてのクエリの行を選択して**[実行]**をクリックします。
 
     </div>
-    </SimpleTab>
+     </SimpleTab>
 
-After running the queries, you can immediately see the query logs and results at the bottom of the page. 
+クエリを実行すると、ページの下部にクエリのログと結果がすぐに表示されます。
 
-To let AI generate more SQL statements, you can type more instructions as shown in the following example:
+AI にさらに多くの SQL ステートメントを生成させるには、次の例に示すように、さらに命令を入力します。
 
 ```sql
 use test;
@@ -105,18 +105,18 @@ FROM
   `t`;
 ```
 
-## Step 3: Try interactive tutorials
+## ステップ3: インタラクティブなチュートリアルを試す {#step-3-try-interactive-tutorials}
 
-TiDB Cloud offers interactive tutorials with carefully crafted sample datasets to help you quickly get started with TiDB Cloud. You can try these tutorials to learn how to use TiDB Cloud for high-performance data analytics.
+TiDB Cloud は、 TiDB Cloudをすぐに使い始めることができるよう、丁寧に作成されたサンプルデータセットを使用したインタラクティブなチュートリアルを提供しています。これらのチュートリアルを試して、 TiDB Cloud を高性能なデータ分析に使用する方法を習得してください。
 
-1. Click on the **?** icon in the lower-right corner of the console and select **Interactive Tutorials**.
-2. In the tutorials list, select a tutorial card to start, such as **Steam Game Stats**.
-3. Choose a {{{ .starter }}} cluster that you want to use for the tutorial, and click **Import Dataset**. The import process might take approximately one minute.
-4. Once the sample data is imported, follow the on-screen instructions to complete the tutorial.
+1.  コンソールの右下にある**[?]**アイコンをクリックし、 **[インタラクティブ チュートリアル]**を選択します。
+2.  チュートリアル リストで、 **Steam ゲーム統計**などの開始するチュートリアル カードを選択します。
+3.  チュートリアルで使用するTiDB Cloud Serverlessクラスターを選択し、 **「Import Dataset」**をクリックします。インポート処理には約1分かかる場合があります。
+4.  サンプル データをインポートしたら、画面の指示に従ってチュートリアルを完了します。
 
-## What's next
+## 次は何？ {#what-s-next}
 
-- To learn how to connect to your cluster using different methods, see [Connect to a {{{ .starter }}} cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
-- For more information about how to use SQL Editor and Chat2Query to explore your data, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
-- For TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
-- For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), see [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
+-   さまざまな方法を使用してクラスターに接続する方法については、 [TiDB Cloud Serverless クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)参照してください。
+-   SQL エディターと Chat2Query を使用してデータを探索する方法の詳細については、 [AI支援SQLエディターでデータを探索](/tidb-cloud/explore-data-with-chat2query.md)参照してください。
+-   TiDB SQL の使用法については、 [TiDB で SQL を探索する](/basic-sql-operations.md)参照してください。
+-   ゾーン間の高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番で使用する場合は、 [TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)参照してください。

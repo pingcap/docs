@@ -1,74 +1,83 @@
 ---
 title: User-Controlled Log Redaction
-summary: Learn how to enable or disable user-controlled log redaction for TiDB Cloud Dedicated clusters to manage sensitive data visibility in execution logs.
+summary: 実行ログ内の機密データの可視性を管理するために、 TiDB Cloud Dedicated クラスターのユーザー制御のログ編集を有効または無効にする方法を学習します。
 ---
 
-# User-Controlled Log Redaction
+# ユーザー制御のログ編集 {#user-controlled-log-redaction}
 
-User-controlled log redaction lets you manage the visibility of sensitive data in your [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster logs. By toggling this redaction feature, you can protect your information, balance operational needs with security, and control what appears in your cluster logs.
+ユーザー制御のログ編集機能により、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタのログに含まれる機密データの可視性を管理できます。この編集機能を切り替えることで、情報を保護し、運用上のニーズとセキュリティのバランスを取り、クラスタログに表示される内容を制御できます。
 
-Log redaction is enabled by default, ensuring that sensitive information in running logs and execution plans is concealed. If you need more detailed log information for cluster maintenance or SQL tuning, you can disable this feature at any time.
+ログ編集はデフォルトで有効になっており、実行ログと実行プラン内の機密情報が隠蔽されます。クラスターのメンテナンスやSQLチューニングのためにより詳細なログ情報が必要な場合は、いつでもこの機能を無効にすることができます。
 
-> **Note:**
+> **注記：**
 >
-> The log redaction feature is only supported for TiDB Cloud Dedicated clusters.
+> ログ編集機能は、 TiDB Cloud Dedicated クラスターでのみサポートされます。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-* You must be in the **Organization Owner** or **Project Owner** role of your organization in TiDB Cloud.
-* Log redaction cannot be enabled or disabled when the cluster is in the `paused` state.
+-   TiDB Cloudで組織の**組織所有者**または**プロジェクト所有者の**役割を持っている必要があります。
+-   クラスターが`paused`状態にある場合、ログ編集を有効または無効にすることはできません。
 
-## Disable log redaction
+## ログ編集を無効にする {#disable-log-redaction}
 
-> **Warning:**
+> **警告：**
 >
-> Disabling log redaction might expose sensitive information and increase the risk of data leakage. Ensure that you understand and acknowledge this risk before proceeding. Remember to re-enable it as soon as you complete your diagnostic or maintenance task.
+> ログ編集を無効にすると、機密情報が漏洩し、データ漏洩のリスクが高まる可能性があります。続行する前に、このリスクを十分に理解し、認識していることを確認してください。診断またはメンテナンスタスクが完了したら、すぐにログ編集を再度有効にしてください。
 
-To disable log redaction, do the following:
+ログ編集を無効にするには、次の手順を実行します。
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
-2. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
 
-    > **Tip:**
+2.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+
+    > **ヒント：**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-3. In the left navigation pane, click **Settings** > **Security**.
-4. In the **Execution Log Redaction** section, you can see that the redaction feature is **Enabled** by default.
-5. Click **Disable**. A warning appears, explaining the risks of disabling log redaction. 
-6. Confirm the disabling.
+3.  左側のナビゲーション ペインで、 **[設定]** &gt; **[Security]**をクリックします。
 
-After disabling log redaction, note the following:
+4.  **実行ログの編集**セクションでは、編集機能がデフォルトで**有効になっている**ことがわかります。
 
-* The change only applies to new database connections.
-* Existing connections are unaffected. You need to reconnect them for the changes to take effect.
-* Logs for new sessions will no longer be redacted.
+5.  **「無効にする」を**クリックします。ログ編集を無効にすることのリスクを説明する警告が表示されます。
 
-## Check the updated logs
+6.  無効化を確認します。
 
-To check the updated logs after log redaction is disabled, do the following:
+ログ編集を無効にした後、次の点に注意してください。
 
-1. Simulate a performance issue caused by a slow query. For example, execute the following SQL statement:
+-   変更は新しいデータベース接続にのみ適用されます。
+-   既存の接続は影響を受けません。変更を有効にするには、再接続する必要があります。
+-   新しいセッションのログは編集されなくなります。
+
+## 更新されたログを確認する {#check-the-updated-logs}
+
+ログ編集を無効にした後で更新されたログを確認するには、次の手順を実行します。
+
+1.  遅いクエリによって発生するパフォーマンスの問題をシミュレートします。例えば、次のSQL文を実行します。
 
     ```sql
     SELECT *, SLEEP(2) FROM users WHERE email LIKE "%useremail%";
     ```
 
-2. Wait a few minutes for the slow query log to update.
-3. Review the log to confirm that the sensitive data is not redacted.
+2.  スロークエリログが更新されるまで数分間お待ちください。
 
-## Enable log redaction
+3.  ログを確認して、機密データが編集されていないことを確認します。
 
-To maintain data security, **enable log redaction** as soon as you complete your diagnostic or maintenance task as follows.
+## ログ編集を有効にする {#enable-log-redaction}
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
-2. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+データのセキュリティを維持するために、次のように診断またはメンテナンス タスクを完了したらすぐに**ログ編集を有効にします**。
 
-    > **Tip:**
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
+
+2.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
+
+    > **ヒント：**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-3. In the left navigation pane, click **Settings** > **Security**.
-4. In the **Execution Log Redaction** section, you can see that the redaction feature is **Disabled**.
-5. Click **Enable** to enable it.
-6. Reconnect to the database for the change to take effect on new sessions.
+3.  左側のナビゲーション ペインで、 **[設定]** &gt; **[Security]**をクリックします。
+
+4.  **実行ログの編集**セクションでは、編集機能が**無効になっている**ことがわかります。
+
+5.  有効にするには、 **「有効」**をクリックします。
+
+6.  新しいセッションで変更を有効にするには、データベースに再接続します。

@@ -1,64 +1,60 @@
 ---
 title: Connect to TiDB with C#
-summary: Learn how to connect to TiDB using C#. This tutorial provides sample C# code snippets for interacting with TiDB.
+summary: C#を使用してTiDBに接続する方法を学びます。このチュートリアルでは、TiDBを操作するためのサンプルC#コードスニペットを提供します。
 ---
 
-# Connect to TiDB with C\#
+# C#でTiDBに接続する {#connect-to-tidb-with-c}
 
-C# (pronounced "C-Sharp") is one of the programming languages in the .NET family, developed by Microsoft. Other .NET languages include VB.NET and F#. In this tutorial, you will use C# along with MySQL Connector/NET to connect a C# application to TiDB using the MySQL protocol. This works because TiDB is highly [compatible with MySQL](/mysql-compatibility.md).
+C#（「Cシャープ」と発音）は、Microsoftによって開発された.NETファミリーのプログラミング言語の一つです。他の.NET言語には、VB.NETやF#などがあります。このチュートリアルでは、C#とMySQL Connector/NETを使用して、C#アプリケーションをMySQLプロトコル経由でTiDBに接続します。これは、TiDBが[MySQLと互換性あり](/mysql-compatibility.md)という高度なセキュリティを備えているためです。
 
-While .NET is commonly used on Windows, it is also available for macOS and Linux. Across all platforms, the commands and code are largely the same, with only minor differences in prompts and file paths.
+.NETはWindowsでよく使用されますが、macOSとLinuxでも利用できます。すべてのプラットフォームで、コマンドとコードはほぼ同じで、プロンプトとファイルパスにわずかな違いがあるだけです。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- Download the [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download).
-- This tutorial uses the `dotnet` command-line tool. Alternatively, you can use the Visual Studio Code IDE to work with C# code.
-- To complete this tutorial, you need access to a TiDB instance. You can use a [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-serverless) or [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-dedicated) cluster on TiDB Cloud, or a TiDB Self-Managed cluster, such as one started using `tiup playground`.
+-   [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download)ダウンロードしてください。
+-   このチュートリアルでは、 `dotnet`コマンドラインツールを使用します。または、Visual Studio Code IDE を使用して C# コードを操作することもできます。
+-   このチュートリアルを完了するには、TiDBインスタンスへのアクセスが必要です。TiDB TiDB Cloudの[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-serverless)または[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-dedicated)クラスター、あるいは`tiup playground`で開始したような TiDB Self-Managed クラスターを使用できます。
 
-## Step 1. Set up a console project
+## ステップ1. コンソールプロジェクトを設定する {#step-1-set-up-a-console-project}
 
-Create a new project using the `console` template. This will generate a new directory named `tidb_cs`. Before running the following command, either navigate to the location where you want this directory to be created, or specify a full path.
+`console`テンプレートを使用して新しいプロジェクトを作成します。これにより、 `tidb_cs`名前の新しいディレクトリが生成されます。以下のコマンドを実行する前に、このディレクトリを作成する場所に移動するか、フルパスを指定してください。
 
-```
-$ dotnet new console -o tidb_cs
-The template "Console App" was created successfully.
+    $ dotnet new console -o tidb_cs
+    The template "Console App" was created successfully.
 
-Processing post-creation actions...
-Restoring /home/dvaneeden/tidb_cs/tidb_cs.csproj:
-Restore succeeded.
-```
+    Processing post-creation actions...
+    Restoring /home/dvaneeden/tidb_cs/tidb_cs.csproj:
+    Restore succeeded.
 
-## Step 2. Add the MySql.Data package
+## ステップ2. MySql.Dataパッケージを追加する {#step-2-add-the-mysql-data-package}
 
-The package manager for .NET is called NuGet. The NuGet package name for MySQL Connector/NET is [MySql.Data](https://www.nuget.org/packages/MySql.Data), which provides support for the MySQL protocol in .NET applications. If you do not specify a version, NuGet installs the latest stable version (for example, version 9.3.0).
+.NET用のパッケージマネージャーはNuGetです。MySQL Connector/NETのNuGetパッケージ名は[MySql.データ](https://www.nuget.org/packages/MySql.Data)で、.NETアプリケーションでMySQLプロトコルをサポートします。バージョンを指定しない場合は、NuGetは最新の安定バージョン（例：バージョン9.3.0）をインストールします。
 
-```
-$ cd tidb_cs
-$ dotnet add package MySql.Data
+    $ cd tidb_cs
+    $ dotnet add package MySql.Data
 
-Build succeeded in 1.0s
-info : X.509 certificate chain validation will use the system certificate bundle at '/etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem'.
-info : X.509 certificate chain validation will use the fallback certificate bundle at '/usr/lib64/dotnet/sdk/9.0.106/trustedroots/timestampctl.pem'.
-info : Adding PackageReference for package 'MySql.Data' into project '/home/dvaneeden/tidb_cs/tidb_cs.csproj'.
-info :   GET https://api.nuget.org/v3/registration5-gz-semver2/mysql.data/index.json
-info :   OK https://api.nuget.org/v3/registration5-gz-semver2/mysql.data/index.json 133ms
-info : Restoring packages for /home/dvaneeden/tidb_cs/tidb_cs.csproj...
-info :   GET https://api.nuget.org/v3/vulnerabilities/index.json
-info :   OK https://api.nuget.org/v3/vulnerabilities/index.json 98ms
-info :   GET https://api.nuget.org/v3-vulnerabilities/2025.06.18.05.40.02/vulnerability.base.json
-info :   GET https://api.nuget.org/v3-vulnerabilities/2025.06.18.05.40.02/2025.06.19.11.40.05/vulnerability.update.json
-info :   OK https://api.nuget.org/v3-vulnerabilities/2025.06.18.05.40.02/vulnerability.base.json 32ms
-info :   OK https://api.nuget.org/v3-vulnerabilities/2025.06.18.05.40.02/2025.06.19.11.40.05/vulnerability.update.json 64ms
-info : Package 'MySql.Data' is compatible with all the specified frameworks in project '/home/dvaneeden/tidb_cs/tidb_cs.csproj'.
-info : PackageReference for package 'MySql.Data' version '9.3.0' added to file '/home/dvaneeden/tidb_cs/tidb_cs.csproj'.
-info : Generating MSBuild file /home/dvaneeden/tidb_cs/obj/tidb_cs.csproj.nuget.g.targets.
-info : Writing assets file to disk. Path: /home/dvaneeden/tidb_cs/obj/project.assets.json
-log  : Restored /home/dvaneeden/tidb_cs/tidb_cs.csproj (in 551 ms).
-```
+    Build succeeded in 1.0s
+    info : X.509 certificate chain validation will use the system certificate bundle at '/etc/pki/ca-trust/extracted/pem/objsign-ca-bundle.pem'.
+    info : X.509 certificate chain validation will use the fallback certificate bundle at '/usr/lib64/dotnet/sdk/9.0.106/trustedroots/timestampctl.pem'.
+    info : Adding PackageReference for package 'MySql.Data' into project '/home/dvaneeden/tidb_cs/tidb_cs.csproj'.
+    info :   GET https://api.nuget.org/v3/registration5-gz-semver2/mysql.data/index.json
+    info :   OK https://api.nuget.org/v3/registration5-gz-semver2/mysql.data/index.json 133ms
+    info : Restoring packages for /home/dvaneeden/tidb_cs/tidb_cs.csproj...
+    info :   GET https://api.nuget.org/v3/vulnerabilities/index.json
+    info :   OK https://api.nuget.org/v3/vulnerabilities/index.json 98ms
+    info :   GET https://api.nuget.org/v3-vulnerabilities/2025.06.18.05.40.02/vulnerability.base.json
+    info :   GET https://api.nuget.org/v3-vulnerabilities/2025.06.18.05.40.02/2025.06.19.11.40.05/vulnerability.update.json
+    info :   OK https://api.nuget.org/v3-vulnerabilities/2025.06.18.05.40.02/vulnerability.base.json 32ms
+    info :   OK https://api.nuget.org/v3-vulnerabilities/2025.06.18.05.40.02/2025.06.19.11.40.05/vulnerability.update.json 64ms
+    info : Package 'MySql.Data' is compatible with all the specified frameworks in project '/home/dvaneeden/tidb_cs/tidb_cs.csproj'.
+    info : PackageReference for package 'MySql.Data' version '9.3.0' added to file '/home/dvaneeden/tidb_cs/tidb_cs.csproj'.
+    info : Generating MSBuild file /home/dvaneeden/tidb_cs/obj/tidb_cs.csproj.nuget.g.targets.
+    info : Writing assets file to disk. Path: /home/dvaneeden/tidb_cs/obj/project.assets.json
+    log  : Restored /home/dvaneeden/tidb_cs/tidb_cs.csproj (in 551 ms).
 
-## Step 3. Update the code
+## ステップ3. コードを更新する {#step-3-update-the-code}
 
-Replace the "Hello World" example in `Program.cs` with the following code.
+`Program.cs`の「Hello World」の例を次のコードに置き換えます。
 
 ```cs
 using System;
@@ -97,27 +93,25 @@ public class Tutorial1
 }
 ```
 
-This connects to a TiDB instance on the specified IP and port. If you use TiDB Cloud, replace connection string parameters (such as hostname, port, user, and password) with the details provided in the [TiDB Cloud console](https://tidbcloud.com/).
+指定されたIPとポートのTiDBインスタンスに接続します。TiDB TiDB Cloudを使用する場合は、接続文字列パラメータ（ホスト名、ポート、ユーザー名、パスワードなど）を[TiDB Cloudコンソール](https://tidbcloud.com/)に記載されている詳細情報に置き換えてください。
 
-The code connects to the database, prints its version, then executes a SQL query using [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version) to retrieve more detailed version information, and finally prints this result.
+コードはデータベースに接続し、そのバージョンを出力、 [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version)を使用して SQL クエリを実行し、より詳細なバージョン情報を取得し、最後にこの結果を出力。
 
-## Step 4. Run the program
+## ステップ4. プログラムを実行する {#step-4-run-the-program}
 
-```
-$ dotnet run
-Connecting to TiDB...
+    $ dotnet run
+    Connecting to TiDB...
 
-Connected to: 8.0.11-TiDB-{{{ .tidb-version }}}
+    Connected to: 8.0.11-TiDB-v8.5.2
 
-Version details:
-Release Version: {{{ .tidb-version }}}
-Edition: Community
-Git Commit Hash: f43a13324440f92209e2a9f04c0bbe9cf763978d
-Git Branch: HEAD
-UTC Build Time: 2025-05-29 03:30:55
-GoVersion: go1.23.8
-Race Enabled: false
-Check Table Before Drop: false
-Store: tikv
-Done.
-```
+    Version details:
+    Release Version: v8.5.2
+    Edition: Community
+    Git Commit Hash: f43a13324440f92209e2a9f04c0bbe9cf763978d
+    Git Branch: HEAD
+    UTC Build Time: 2025-05-29 03:30:55
+    GoVersion: go1.23.8
+    Race Enabled: false
+    Check Table Before Drop: false
+    Store: tikv
+    Done.

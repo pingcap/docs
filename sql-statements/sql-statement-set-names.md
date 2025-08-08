@@ -1,20 +1,20 @@
 ---
 title: SET [NAMES|CHARACTER SET] |  TiDB SQL Statement Reference
-summary: An overview of the usage of SET [NAMES|CHARACTER SET] for the TiDB database.
+summary: TiDB データベースの SET [NAMES|CHARACTER SET] の使用法の概要。
 ---
 
-# SET [NAMES|CHARACTER SET]
+# SET [名前|文字セット] {#set-names-character-set}
 
-The statements `SET NAMES`, `SET CHARACTER SET` and `SET CHARSET` modify the variables `character_set_client`, `character_set_results` and `character_set_connection` for the current connection.
+ステートメント`SET NAMES` 、および`SET CHARSET` `SET CHARACTER SET`現在の接続の変数`character_set_client` 、および`character_set_connection` `character_set_results`します。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 SetNamesStmt ::=
     "SET" ("NAMES" ("DEFAULT" | CharsetName ("COLLATE" ("DEFAULT" | CollationName))?) | ("CHARSET" | ("CHAR" | "CHARACTER") "SET") ("DEFAULT" | CharsetName))
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> SHOW VARIABLES LIKE 'character_set%';
@@ -69,12 +69,12 @@ mysql> SHOW VARIABLES LIKE 'character_set%';
 8 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-The `SET [NAMES|CHARACTER SET]` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDBの`SET [NAMES|CHARACTER SET]`文はMySQLと完全に互換性があります。互換性に違いがある場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
 
-## See also
+## 参照 {#see-also}
 
-* [SHOW \[GLOBAL|SESSION\] VARIABLES](/sql-statements/sql-statement-show-variables.md)
-* [`SET <variable>`](/sql-statements/sql-statement-set-variable.md)
-* [Character Set and Collation Support](/character-set-and-collation.md)
+-   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [`SET &#x3C;variable>`](/sql-statements/sql-statement-set-variable.md)
+-   [文字セットと照合順序のサポート](/character-set-and-collation.md)

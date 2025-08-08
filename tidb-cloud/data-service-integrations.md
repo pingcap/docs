@@ -1,40 +1,42 @@
 ---
 title: Integrate a Data App with Third-Party Tools
-summary: Learn how to integrate a TiDB Cloud Data App with third-party tools, such as GPTs and Dify, in the TiDB Cloud console.
+summary: TiDB Cloudコンソールで、 TiDB Cloud Data App を GPT や Dify などのサードパーティ ツールと統合する方法を学びます。
 ---
 
-# Integrate a Data App with Third-Party Tools
+# データアプリをサードパーティツールと統合する {#integrate-a-data-app-with-third-party-tools}
 
-Integrating third-party tools with your Data App enhances your applications with advanced natural language processing and artificial intelligence (AI) capabilities provided by third-party tools. This integration enables your applications to perform more complex tasks and deliver intelligent solutions.
+サードパーティ製ツールをデータアプリに統合することで、サードパーティ製ツールが提供する高度な自然言語処理機能と人工知能（AI）機能をアプリケーションに導入し、強化することができます。これにより、アプリケーションはより複雑なタスクを実行し、インテリジェントなソリューションを提供できるようになります。
 
-This document describes how to integrate a Data App with third-party tools, such as GPTs and Dify, in the TiDB Cloud console.
+このドキュメントでは、 TiDB Cloudコンソールでデータ アプリを GPT や Dify などのサードパーティ ツールと統合する方法について説明します。
 
-## Integrate your Data App with GPTs
+## データアプリをGPTと統合する {#integrate-your-data-app-with-gpts}
 
-You can integrate your Data App with [GPTs](https://openai.com/blog/introducing-gpts) to enhance your applications with intelligent capabilities.
+Data App を[GPT](https://openai.com/blog/introducing-gpts)と統合して、インテリジェントな機能でアプリケーションを強化できます。
 
-To integrate your Data App with GPTs, perform the following steps:
+データ アプリを GPT と統合するには、次の手順を実行します。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
-2. In the left pane, locate your target Data App, click the name of your target Data App, and then click the **Integrations** tab.
-3. In the **Integrate with GPTs** area, click **Get Configuration**.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/project/data-service)ページに移動します。
+
+2.  左側のペインで、対象のデータ アプリを見つけて、対象のデータ アプリの名前をクリックし、 **[統合]**タブをクリックします。
+
+3.  **[GPT との統合]**領域で、 **[コンフィグレーションの取得] を**クリックします。
 
     ![Get Configuration](/media/tidb-cloud/data-service/GPTs1.png)
 
-4. In the displayed dialog box, you can see the following fields:
+4.  表示されたダイアログ ボックスには、次のフィールドが表示されます。
 
-    a. **API Specification URL**: copy the URL of the OpenAPI Specification of your Data App. For more information, see [Use the OpenAPI Specification](/tidb-cloud/data-service-manage-data-app.md#use-the-openapi-specification).
+    a. **API仕様URL** ：データアプリのOpenAPI仕様のURLをコピーします。詳細については、 [OpenAPI仕様を使用する](/tidb-cloud/data-service-manage-data-app.md#use-the-openapi-specification)ご覧ください。
 
-    b. **API Key**: enter the API key of your Data App. If you do not have an API key yet, click **Create API Key** to create one. For more information, see [Create an API key](/tidb-cloud/data-service-api-key.md#create-an-api-key).
+    b. **APIキー**：データアプリのAPIキーを入力します。APIキーをお持ちでない場合は、 **「APIキーを作成」**をクリックして作成してください。詳しくは[APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)ご覧ください。
 
-    c. **API Key Encoded**: copy the base64 encoded string equivalent to the API key you have provided.
+    c. **API キーエンコード**: 指定した API キーに相当する base64 でエンコードされた文字列をコピーします。
 
     ![GPTs Dialog Box](/media/tidb-cloud/data-service/GPTs2.png)
 
-5. Use the copied API Specification URL and the encoded API key in your GPT configuration.
+5.  コピーした API 仕様 URL とエンコードされた API キーを GPT 構成で使用します。
 
-## Integrate your Data App with Dify
+## データアプリをDifyと統合する {#integrate-your-data-app-with-dify}
 
-You can integrate your Data App with [Dify](https://docs.dify.ai/guides/tools) to enhance your applications with intelligent capabilities, such as vector distance calculations, advanced similarity searches, and vector analysis.
+データ アプリを[ディファイ](https://docs.dify.ai/guides/tools)と統合すると、ベクトル距離計算、高度な類似性検索、ベクトル分析などのインテリジェントな機能を使用してアプリケーションを強化できます。
 
-To integrate your Data App with Dify, follow the same steps as for [GPTs integration](#integrate-your-data-app-with-gpts). The only difference is that on the **Integrations** tab, you need to click **Get Configuration** in the **Integrate with Dify** area.
+データアプリをDifyと統合するには、 [GPTの統合](#integrate-your-data-app-with-gpts)と同じ手順に従います。唯一の違いは、 **「統合」**タブの**「Difyとの統合」**領域で**「コンフィグレーションを取得」を**クリックする必要があることです。

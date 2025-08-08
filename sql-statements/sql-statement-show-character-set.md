@@ -1,13 +1,13 @@
 ---
 title: SHOW CHARACTER SET | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW CHARACTER SET for the TiDB database.
+summary: TiDB データベースの SHOW CHARACTER SET の使用法の概要。
 ---
 
-# SHOW CHARACTER SET
+# 文字セットを表示 {#show-character-set}
 
-This statement provides a static list of available character sets in TiDB. The output does not reflect any attributes of the current connection or user.
+このステートメントは、TiDBで使用可能な文字セットの静的リストを提供します。出力には、現在の接続またはユーザーの属性は反映されません。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowCharsetStmt ::=
@@ -18,59 +18,53 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 SHOW CHARACTER SET;
 ```
 
-```
-+---------+-------------------------------------+-------------------+--------+
-| Charset | Description                         | Default collation | Maxlen |
-+---------+-------------------------------------+-------------------+--------+
-| ascii   | US ASCII                            | ascii_bin         |      1 |
-| binary  | binary                              | binary            |      1 |
-| gbk     | Chinese Internal Code Specification | gbk_chinese_ci    |      2 |
-| latin1  | Latin1                              | latin1_bin        |      1 |
-| utf8    | UTF-8 Unicode                       | utf8_bin          |      3 |
-| utf8mb4 | UTF-8 Unicode                       | utf8mb4_bin       |      4 |
-+---------+-------------------------------------+-------------------+--------+
-6 rows in set (0.00 sec)
-```
+    +---------+-------------------------------------+-------------------+--------+
+    | Charset | Description                         | Default collation | Maxlen |
+    +---------+-------------------------------------+-------------------+--------+
+    | ascii   | US ASCII                            | ascii_bin         |      1 |
+    | binary  | binary                              | binary            |      1 |
+    | gbk     | Chinese Internal Code Specification | gbk_chinese_ci    |      2 |
+    | latin1  | Latin1                              | latin1_bin        |      1 |
+    | utf8    | UTF-8 Unicode                       | utf8_bin          |      3 |
+    | utf8mb4 | UTF-8 Unicode                       | utf8mb4_bin       |      4 |
+    +---------+-------------------------------------+-------------------+--------+
+    6 rows in set (0.00 sec)
 
 ```sql
 SHOW CHARACTER SET LIKE 'utf8%';
 ```
 
-```
-+---------+---------------+-------------------+--------+
-| Charset | Description   | Default collation | Maxlen |
-+---------+---------------+-------------------+--------+
-| utf8    | UTF-8 Unicode | utf8_bin          |      3 |
-| utf8mb4 | UTF-8 Unicode | utf8mb4_bin       |      4 |
-+---------+---------------+-------------------+--------+
-2 rows in set (0.00 sec)
-```
+    +---------+---------------+-------------------+--------+
+    | Charset | Description   | Default collation | Maxlen |
+    +---------+---------------+-------------------+--------+
+    | utf8    | UTF-8 Unicode | utf8_bin          |      3 |
+    | utf8mb4 | UTF-8 Unicode | utf8mb4_bin       |      4 |
+    +---------+---------------+-------------------+--------+
+    2 rows in set (0.00 sec)
 
 ```sql
 SHOW CHARACTER SET WHERE Description='UTF-8 Unicode';
 ```
 
-```
-+---------+---------------+-------------------+--------+
-| Charset | Description   | Default collation | Maxlen |
-+---------+---------------+-------------------+--------+
-| utf8    | UTF-8 Unicode | utf8_bin          |      3 |
-| utf8mb4 | UTF-8 Unicode | utf8mb4_bin       |      4 |
-+---------+---------------+-------------------+--------+
-2 rows in set (0.00 sec)
-```
+    +---------+---------------+-------------------+--------+
+    | Charset | Description   | Default collation | Maxlen |
+    +---------+---------------+-------------------+--------+
+    | utf8    | UTF-8 Unicode | utf8_bin          |      3 |
+    | utf8mb4 | UTF-8 Unicode | utf8mb4_bin       |      4 |
+    +---------+---------------+-------------------+--------+
+    2 rows in set (0.00 sec)
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-The usage of `SHOW CHARACTER SET` statement in TiDB is fully compatible with MySQL. However, charsets in TiDB might have different default collations compared with MySQL. For details, refer to [Compatibility with MySQL](/mysql-compatibility.md). If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDBの`SHOW CHARACTER SET`文の使用方法はMySQLと完全に互換性があります。ただし、TiDBの文字セットはMySQLと比較してデフォルトの照合順序が異なる場合があります。詳細については[MySQLとの互換性](/mysql-compatibility.md)参照してください。互換性に関する相違点が見つかった場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
 
-## See also
+## 参照 {#see-also}
 
-* [SHOW COLLATION](/sql-statements/sql-statement-show-collation.md)
-* [Character Set and Collation](/character-set-and-collation.md)
+-   [照合順序を表示](/sql-statements/sql-statement-show-collation.md)
+-   [文字セットと照合順序](/character-set-and-collation.md)

@@ -1,17 +1,17 @@
 ---
 title: QUERY WATCH
-summary: An overview of the usage of QUERY WATCH for the TiDB database.
+summary: TiDB データベースの QUERY WATCH の使用法の概要。
 ---
 
-# QUERY WATCH
+# クエリウォッチ {#query-watch}
 
-The `QUERY WATCH` statement is used to manually manage the watch list of runaway queries in a resource group.
+`QUERY WATCH`ステートメントは、リソース グループ内のランナウェイ クエリの監視リストを手動で管理するために使用されます。
 
-> **Note:**
+> **注記：**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AddQueryWatchStmt ::=
@@ -52,14 +52,14 @@ DropQueryWatchStmt ::=
     "QUERY" "WATCH" "REMOVE" NUM
 ```
 
-## Parameters
+## パラメータ {#parameters}
 
-See [`QUERY WATCH` parameters](/tidb-resource-control-runaway-queries.md#query-watch-parameters).
+[`QUERY WATCH`パラメータ](/tidb-resource-control-runaway-queries.md#query-watch-parameters)参照。
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [Runaway Queries](/tidb-resource-control-runaway-queries.md)
+-   [ランナウェイクエリ](/tidb-resource-control-runaway-queries.md)

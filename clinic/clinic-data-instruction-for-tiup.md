@@ -1,154 +1,154 @@
 ---
 title: PingCAP Clinic Diagnostic Data
-summary: PingCAP Clinic Diagnostic Service collects diagnostic data from TiDB and DM clusters using TiUP. Data types include cluster information, diagnostic data for TiDB, TiKV, PD, TiFlash, TiCDC, Prometheus monitoring, system variables, and node system information. Data is stored in Clinic Server for international and Chinese mainland users. The collected data is only used for troubleshooting cluster problems.
+summary: PingCAPクリニック診断サービスは、 TiUPを使用してTiDBおよびDMクラスターから診断データを収集します。収集されるデータの種類には、クラスター情報、TiDBの診断データ、TiKV、PD、 TiFlash、TiCDC、Prometheusモニタリング、システム変数、ノードシステム情報が含まれます。データは、海外および中国本土のユーザー向けにClinic Serverに保存されます。収集されたデータは、クラスターの問題のトラブルシューティングにのみ使用されます。
 ---
 
-# PingCAP Clinic Diagnostic Data
+# PingCAPクリニック診断データ {#pingcap-clinic-diagnostic-data}
 
-This document provides the types of diagnostic data that can be collected by PingCAP Clinic Diagnostic Service (PingCAP Clinic) from the TiDB and DM clusters deployed using TiUP. Also, the document lists the parameters for data collection corresponding to each data type. When running a command to [collect data using Diag client (Diag)](/clinic/clinic-user-guide-for-tiup.md), you can add the required parameters to the command according to the types of the data to be collected.
+このドキュメントでは、 TiUPを使用して展開された TiDB および DM クラスタからPingCAPクリニック診断サービス (PingCAPクリニック ) によって収集できる診断データの種類について説明します。また、各データの種類に対応するデータ収集パラメータも示します。1 [Diagクライアント（Diag）を使用してデータを収集する](/clinic/clinic-user-guide-for-tiup.md)コマンドを実行する際に、収集するデータの種類に応じて必要なパラメータをコマンドに追加できます。
 
-The diagnostic data collected by PingCAP Clinic is **only** used for troubleshooting cluster problems.
+PingCAPクリニックによって収集された診断データは、クラスターの問題のトラブルシューティングに**のみ**使用されます。
 
-A diagnostic service deployed in the cloud, Clinic Server provides two independent services depending on the data storage location:
+クラウドに展開される診断サービスである Clinic Server は、データのstorage場所に応じて 2 つの独立したサービスを提供します。
 
-- [Clinic Server for international users](https://clinic.pingcap.com): If you upload the collected data to Clinic Server for international users, the data will be stored in the Amazon S3 service deployed by PingCAP in AWS US regions. PingCAP uses strict data access policies and only authorized technical support can access the data.
-- [Clinic Server for users in the Chinese mainland](https://clinic.pingcap.com.cn): If you upload the collected data to Clinic Server for users in the Chinese mainland, the data will be stored in the Amazon S3 service deployed by PingCAP in China (Beijing) regions. PingCAP uses strict data access policies and only authorized technical support can access the data.
+-   [海外ユーザー向けクリニックサーバー](https://clinic.pingcap.com) ：収集したデータを海外ユーザー向けのClinic Serverにアップロードすると、データはPingCAPがAWS米国リージョンに展開するAmazon S3サービスに保存されます。PingCAPは厳格なデータアクセスポリシーを採用しており、承認されたテクニカルサポート担当者のみがデータにアクセスできます。
+-   [中国本土のユーザー向けクリニックサーバー](https://clinic.pingcap.com.cn) ：収集したデータを中国本土のユーザー向けクリニックサーバーにアップロードすると、データはPingCAPが中国（北京）リージョンに展開するAmazon S3サービスに保存されます。PingCAPは厳格なデータアクセスポリシーを採用しており、承認されたテクニカルサポート担当者のみがデータにアクセスできます。
 
-## TiDB clusters
+## TiDB クラスター {#tidb-clusters}
 
-This section lists the types of diagnostic data that can be collected by [Diag](https://github.com/pingcap/diag) from the TiDB clusters deployed using TiUP.
+このセクションでは、 TiUPを使用して展開された TiDB クラスターから[診断](https://github.com/pingcap/diag)によって収集できる診断データの種類を示します。
 
-### TiDB cluster information
+### TiDB クラスタ情報 {#tidb-cluster-information}
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
-| :------ | :------ |:-------- |
-| Basic information of the cluster, including the cluster ID | `cluster.json` | The data is collected per run by default. |
-| Detailed information of the cluster | `meta.yaml` | The data is collected per run by default. |
+| データ型                 | エクスポートされたファイル  | PingCAPクリニックによるデータ収集パラメータ |
+| :------------------- | :------------- | :------------------------ |
+| クラスターIDを含むクラスターの基本情報 | `cluster.json` | デフォルトでは、データは実行ごとに収集されます。  |
+| クラスターの詳細情報           | `meta.yaml`    | デフォルトでは、データは実行ごとに収集されます。  |
 
-### TiDB diagnostic data
+### TiDB診断データ {#tidb-diagnostic-data}
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
-| :------ | :------ |:-------- |
-| Log | `tidb.log` | `--include=log` |
-| Error log | `tidb_stderr.log` | `--include=log` |
-| Slow log | `tidb_slow_query.log` | `--include=log` |
-| Audit log | `tidb-audit.log.json` | `--include=log` |
-| Configuration file | `tidb.toml` | `--include=config` |
-| Real-time configuration | `config.json` | `--include=config` |
+| データ型           | エクスポートされたファイル         | PingCAPクリニックによるデータ収集パラメータ |
+| :------------- | :-------------------- | :------------------------ |
+| ログ             | `tidb.log`            | `--include=log`           |
+| エラーログ          | `tidb_stderr.log`     | `--include=log`           |
+| スローログ          | `tidb_slow_query.log` | `--include=log`           |
+| 監査ログ           | `tidb-audit.log.json` | `--include=log`           |
+| コンフィグレーションファイル | `tidb.toml`           | `--include=config`        |
+| リアルタイム構成       | `config.json`         | `--include=config`        |
 
-### TiKV diagnostic data
+### TiKV診断データ {#tikv-diagnostic-data}
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
-| :------ | :------ |:-------- |
-| Log | `tikv.log` | `--include=log` |
-| Error log | `tikv_stderr.log` | `--include=log` |
-| Configuration file | `tikv.toml` | `--include=config` |
-| Real-time configuration | `config.json` | `--include=config` |
+| データ型           | エクスポートされたファイル     | PingCAPクリニックによるデータ収集パラメータ |
+| :------------- | :---------------- | :------------------------ |
+| ログ             | `tikv.log`        | `--include=log`           |
+| エラーログ          | `tikv_stderr.log` | `--include=log`           |
+| コンフィグレーションファイル | `tikv.toml`       | `--include=config`        |
+| リアルタイム構成       | `config.json`     | `--include=config`        |
 
-### PD diagnostic data
+### PD診断データ {#pd-diagnostic-data}
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
-| :------ | :------ |:-------- |
-| Log | `pd.log` | `--include=log` |
-| Error log | `pd_stderr.log` | `--include=log` |
-| Configuration file | `pd.toml` | `--include=config` |
-| Real-time configuration | `config.json` | `--include=config` |
-| Outputs of the command `tiup ctl:v<CLUSTER_VERSION> pd -u http://${pd IP}:${PORT} store` | `store.json` | `--include=config` |
-| Outputs of the command `tiup ctl:v<CLUSTER_VERSION> pd -u http://${pd IP}:${PORT} config placement-rules show` | `placement-rule.json` | `--include=config` |
+| データ型                                                                                           | エクスポートされたファイル         | PingCAPクリニックによるデータ収集パラメータ |
+| :--------------------------------------------------------------------------------------------- | :-------------------- | :------------------------ |
+| ログ                                                                                             | `pd.log`              | `--include=log`           |
+| エラーログ                                                                                          | `pd_stderr.log`       | `--include=log`           |
+| コンフィグレーションファイル                                                                                 | `pd.toml`             | `--include=config`        |
+| リアルタイム構成                                                                                       | `config.json`         | `--include=config`        |
+| コマンド`tiup ctl:v<CLUSTER_VERSION> pd -u http://${pd IP}:${PORT} store`の出力                       | `store.json`          | `--include=config`        |
+| コマンド`tiup ctl:v<CLUSTER_VERSION> pd -u http://${pd IP}:${PORT} config placement-rules show`の出力 | `placement-rule.json` | `--include=config`        |
 
-### TiFlash diagnostic data
+### TiFlash診断データ {#tiflash-diagnostic-data}
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
-| :------ | :------ |:-------- |
-| Log | `tiflash.log` | `--include=log` |
-| Error log | `tiflash_stderr.log` | `--include=log` |
-| Configuration file |  `tiflash-learner.toml`, `tiflash-preprocessed.toml`, `tiflash.toml` | `--include=config` |
-| Real-time configuration | `config.json` | `--include=config` |
+| データ型           | エクスポートされたファイル                                                     | PingCAPクリニックによるデータ収集パラメータ |
+| :------------- | :---------------------------------------------------------------- | :------------------------ |
+| ログ             | `tiflash.log`                                                     | `--include=log`           |
+| エラーログ          | `tiflash_stderr.log`                                              | `--include=log`           |
+| コンフィグレーションファイル | `tiflash-learner.toml` `tiflash-preprocessed.toml` `tiflash.toml` | `--include=config`        |
+| リアルタイム構成       | `config.json`                                                     | `--include=config`        |
 
-### TiCDC diagnostic data
+### TiCDC診断データ {#ticdc-diagnostic-data}
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
-| :------ | :------ |:-------- |
-| Log | `ticdc.log` | `--include=log`|
-| Error log | `ticdc_stderr.log` | `--include=log` |
-| Configuration file | `ticdc.toml` | `--include=config` |
-| Debug data | `info.txt`, `status.txt`, `changefeeds.txt`, `captures.txt`, `processors.txt` | `--include=debug` (Diag does not collect this data type by default) |
+| データ型           | エクスポートされたファイル                                                             | PingCAPクリニックによるデータ収集パラメータ                         |
+| :------------- | :------------------------------------------------------------------------ | :------------------------------------------------ |
+| ログ             | `ticdc.log`                                                               | `--include=log`                                   |
+| エラーログ          | `ticdc_stderr.log`                                                        | `--include=log`                                   |
+| コンフィグレーションファイル | `ticdc.toml`                                                              | `--include=config`                                |
+| デバッグデータ        | `info.txt` `status.txt` `changefeeds.txt` `captures.txt` `processors.txt` | `--include=debug` (Diag はデフォルトではこのデータ タイプを収集しません) |
 
-### Prometheus monitoring data
+### プロメテウス監視データ {#prometheus-monitoring-data}
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
-| :------ | :------ |:-------- |
-| All metrics data | `{metric_name}.json` | `--include=monitor` |
-| All alerts data | `alerts.json` | `--include=monitor` |
+| データ型        | エクスポートされたファイル        | PingCAPクリニックによるデータ収集パラメータ |
+| :---------- | :------------------- | :------------------------ |
+| すべての指標データ   | `{metric_name}.json` | `--include=monitor`       |
+| すべてのアラートデータ | `alerts.json`        | `--include=monitor`       |
 
-### TiDB system variables
+### TiDB システム変数 {#tidb-system-variables}
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
-| :------ | :------ |:-------- |
-| TiDB system variables | `mysql.tidb.csv` | `--include=db_vars` (Diag does not collect this data type by default; if you need to collect this data type, database credential is required) |
-| | `global_variables.csv` | `--include=db_vars` (Diag does not collect this data type by default) |
+| データ型        | エクスポートされたファイル          | PingCAPクリニックによるデータ収集パラメータ                                                                  |
+| :---------- | :--------------------- | :----------------------------------------------------------------------------------------- |
+| TiDB システム変数 | `mysql.tidb.csv`       | `--include=db_vars` (Diag はデフォルトではこのデータ タイプを収集しません。このデータ タイプを収集する必要がある場合は、データベース資格情報が必要です) |
+|             | `global_variables.csv` | `--include=db_vars` (Diag はデフォルトではこのデータ タイプを収集しません)                                        |
 
-### System information of the cluster node
+### クラスタノードのシステム情報 {#system-information-of-the-cluster-node}
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
-| :------ | :------ |:-------- |
-| Kernel log | `dmesg.log` | `--include=system` |
-| Basic information of the system and hardware | `insight.json` | `--include=system` |
-| Contents in the `/etc/security/limits.conf` | `limits.conf` | `--include=system` |
-| List of kernel parameters | `sysctl.conf` | `--include=system` |
-| Socket system information, which is the output of the `ss` command | `ss.txt` | `--include=system` |
+| データ型                           | エクスポートされたファイル  | PingCAPクリニックによるデータ収集パラメータ |
+| :----------------------------- | :------------- | :------------------------ |
+| カーネルログ                         | `dmesg.log`    | `--include=system`        |
+| システムとハードウェアの基本情報               | `insight.json` | `--include=system`        |
+| `/etc/security/limits.conf`の内容 | `limits.conf`  | `--include=system`        |
+| カーネルパラメータのリスト                  | `sysctl.conf`  | `--include=system`        |
+| ソケットシステム情報（ `ss`コマンドの出力）       | `ss.txt`       | `--include=system`        |
 
-## DM clusters
+## DMクラスター {#dm-clusters}
 
-This section lists the types of diagnostic data that can be collected by Diag from the DM clusters deployed using TiUP.
+このセクションでは、 TiUPを使用して展開された DM クラスターから Diag によって収集できる診断データの種類を示します。
 
-### DM cluster information
+### DMクラスター情報 {#dm-cluster-information}
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
-| :------ | :------ |:-------- |
-| Basic information of the cluster, including the cluster ID  | `cluster.json`| The data is collected per run by default. |
-| Detailed information of the cluster | `meta.yaml` | The data is collected per run by default. |
+| データ型                 | エクスポートされたファイル  | PingCAPクリニックによるデータ収集パラメータ |
+| :------------------- | :------------- | :------------------------ |
+| クラスターIDを含むクラスターの基本情報 | `cluster.json` | デフォルトでは、データは実行ごとに収集されます。  |
+| クラスターの詳細情報           | `meta.yaml`    | デフォルトでは、データは実行ごとに収集されます。  |
 
-### dm-master diagnostic data
+### dm-master診断データ {#dm-master-diagnostic-data}
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
-| :------ | :------ |:-------- |
-| Log | `dm-master.log` | `--include=log` |
-| Error log | `dm-master_stderr.log` | `--include=log` |
-| Configuration file | `dm-master.toml` | `--include=config` |
+| データ型           | エクスポートされたファイル          | PingCAPクリニックによるデータ収集パラメータ |
+| :------------- | :--------------------- | :------------------------ |
+| ログ             | `dm-master.log`        | `--include=log`           |
+| エラーログ          | `dm-master_stderr.log` | `--include=log`           |
+| コンフィグレーションファイル | `dm-master.toml`       | `--include=config`        |
 
-### dm-worker diagnostic data
+### dm-worker診断データ {#dm-worker-diagnostic-data}
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
-| :------ | :------ |:-------- |
-| Log| `dm-worker.log` | `--include=log`|
-| Error log | `dm-worker_stderr.log` | `--include=log` |
-| Configuration file | `dm-work.toml` | `--include=config` |
+| データ型           | エクスポートされたファイル          | PingCAPクリニックによるデータ収集パラメータ |
+| :------------- | :--------------------- | :------------------------ |
+| ログ             | `dm-worker.log`        | `--include=log`           |
+| エラーログ          | `dm-worker_stderr.log` | `--include=log`           |
+| コンフィグレーションファイル | `dm-work.toml`         | `--include=config`        |
 
-### Prometheus monitoring data
+### プロメテウス監視データ {#prometheus-monitoring-data}
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
-| :------ | :------ |:-------- |
-| All metrics data | `{metric_name}.json` | `--include=monitor` |
-| All alerts data | `alerts.json` | `--include=monitor` |
+| データ型        | エクスポートされたファイル        | PingCAPクリニックによるデータ収集パラメータ |
+| :---------- | :------------------- | :------------------------ |
+| すべての指標データ   | `{metric_name}.json` | `--include=monitor`       |
+| すべてのアラートデータ | `alerts.json`        | `--include=monitor`       |
 
-### System information of the cluster node
+### クラスタノードのシステム情報 {#system-information-of-the-cluster-node}
 
-| Data type | Exported file | Parameter for data collection by PingCAP Clinic |
-| :------ | :------ |:-------- |
-| Kernel log | `dmesg.log` | `--include=system` |
-| Basic information of the system and hardware | `insight.json` | `--include=system` |
-| Contents in the `/etc/security/limits.conf` system | `limits.conf` | `--include=system` |
-| List of kernel parameters | `sysctl.conf` | `--include=system` |
-| Socket system information, which is the output of the `ss` command | `ss.txt` | `--include=system` |
+| データ型                               | エクスポートされたファイル  | PingCAPクリニックによるデータ収集パラメータ |
+| :--------------------------------- | :------------- | :------------------------ |
+| カーネルログ                             | `dmesg.log`    | `--include=system`        |
+| システムとハードウェアの基本情報                   | `insight.json` | `--include=system`        |
+| `/etc/security/limits.conf`システムの内容 | `limits.conf`  | `--include=system`        |
+| カーネルパラメータのリスト                      | `sysctl.conf`  | `--include=system`        |
+| ソケットシステム情報（ `ss`コマンドの出力）           | `ss.txt`       | `--include=system`        |
 
-### Log file classification
+### ログファイルの分類 {#log-file-classification}
 
-You can use the `--include=log.<type>` parameter to specify which types of logs to collect.
+`--include=log.<type>`パラメータを使用して、収集するログの種類を指定できます。
 
-Log types:
+ログの種類:
 
-- `std`: Log files that contain `stderr` in the filename.
-- `rocksdb`: Log files with a `rocksdb` prefix and a `.info` suffix.
-- `slow`: Slow query log files.
-- `unknown`: Log files that do not match any of the preceding types.
+-   `std` : ファイル名に`stderr`含まれるログファイル。
+-   `rocksdb` : プレフィックスが`rocksdb` 、サフィックスが`.info`ログ ファイル。
+-   `slow` : クエリ ログ ファイルが遅い。
+-   `unknown` : 上記のいずれの種類にも一致しないログ ファイル。

@@ -1,39 +1,39 @@
 ---
 title: PROCESSLIST
-summary: Learn the `PROCESSLIST` information_schema table.
+summary: PROCESSLIST` information_schema テーブルについて学習します。
 ---
 
-# PROCESSLIST
+# プロセスリスト {#processlist}
 
-`PROCESSLIST`, just like [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md), is used to view the requests that are being handled.
+`PROCESSLIST` 、 [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md)と同様に、処理中のリクエストを表示するために使用されます。
 
-The `PROCESSLIST` table has additional columns not present in `SHOW PROCESSLIST`:
+`PROCESSLIST`テーブルには`SHOW PROCESSLIST`にはない追加の列があります。
 
 <CustomContent platform="tidb">
 
-* A `DIGEST` column to show the digest of the SQL statement.
-* A `MEM` column to show the memory used by the request that is being processed, in bytes.
-* A `DISK` column to show the disk usage in bytes.
-* A `TxnStart` column to show the start time of the transaction.
-* A `RESOURCE_GROUP` column to show the resource group name.
-* A `SESSION_ALIAS` column to show the alias of the current session.
-* A `ROWS_AFFECTED` column to show the number of rows currently affected by the statement.
-* A `TIDB_CPU` column to show the amount of time in nanoseconds that the statement consumes the TiDB server CPU. This column shows meaningful value only when the [Top SQL](/dashboard/top-sql.md) feature is enabled. Otherwise the value will be `0`.
-* A `TIKV_CPU` column to show the amount of time in nanoseconds that the statement consumes the TiKV server CPU.
+-   SQL ステートメントのダイジェストを表示する`DIGEST`列。
+-   処理中のリクエストによって使用されているメモリをバイト単位で表示する`MEM`列。
+-   ディスク使用量をバイト単位で表示する`DISK`列。
+-   トランザクションの開始時刻を表示する`TxnStart`列。
+-   リソース グループ名を表示する`RESOURCE_GROUP`列。
+-   現在のセッションのエイリアスを表示する`SESSION_ALIAS`列。
+-   ステートメントによって現在影響を受けている行数を示す`ROWS_AFFECTED`列。
+-   `TIDB_CPU`列は、ステートメントがTiDBサーバーのCPUを消費した時間をナノ秒単位で示します。この列は、 [Top SQL](/dashboard/top-sql.md)機能が有効な場合にのみ意味のある値を表示します。それ以外の場合は、値は`0`になります。
+-   ステートメントが TiKVサーバーCPU を消費する時間をナノ秒単位で表示する`TIKV_CPU`列。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-* A `DIGEST` column to show the digest of the SQL statement.
-* A `MEM` column to show the memory used by the request that is being processed, in bytes.
-* A `DISK` column to show the disk usage in bytes.
-* A `TxnStart` column to show the start time of the transaction.
-* A `RESOURCE_GROUP` column to show the resource group name.
-* A `SESSION_ALIAS` column to show the alias of the current session.
-* A `ROWS_AFFECTED` column to show the number of rows currently affected by the statement.
-* A `TIDB_CPU` column to show the amount of time in nanoseconds that the statement consumes the TiDB server CPU. This column shows meaningful value only when the [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql) feature is enabled. Otherwise the value will be `0`.
-* A `TIKV_CPU` column to show the amount of time in nanoseconds that the statement consumes the TiKV server CPU.
+-   SQL ステートメントのダイジェストを表示する`DIGEST`列。
+-   処理中のリクエストによって使用されているメモリをバイト単位で表示する`MEM`列。
+-   ディスク使用量をバイト単位で表示する`DISK`列。
+-   トランザクションの開始時刻を表示する`TxnStart`列。
+-   リソース グループ名を表示する`RESOURCE_GROUP`列。
+-   現在のセッションのエイリアスを表示する`SESSION_ALIAS`列。
+-   ステートメントによって現在影響を受けている行数を示す`ROWS_AFFECTED`列。
+-   `TIDB_CPU`列は、ステートメントがTiDBサーバーのCPUを消費した時間をナノ秒単位で示します。この列は、 [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql)機能が有効な場合にのみ意味のある値を表示します。それ以外の場合は、値は`0`になります。
+-   ステートメントが TiKVサーバーCPU を消費する時間をナノ秒単位で表示する`TIKV_CPU`列。
 
 </CustomContent>
 
@@ -91,55 +91,55 @@ RESOURCE_GROUP: default
       TIKV_CPU: 0
 ```
 
-Fields in the `PROCESSLIST` table are described as follows:
+`PROCESSLIST`テーブル内のフィールドは次のように説明されます。
 
 <CustomContent platform="tidb">
 
-* `ID`: The ID of the user connection.
-* `USER`: The name of the user who is executing `PROCESS`.
-* `HOST`: The address that the user is connecting to.
-* `DB`: The name of the currently connected default database.
-* `COMMAND`: The command type that `PROCESS` is executing.
-* `TIME`: The current execution duration of `PROCESS`, in seconds.
-* `STATE`: The current connection state.
-* `INFO`: The requested statement that is being processed.
-* `DIGEST`: The digest of the SQL statement.
-* `MEM`: The memory used by the request that is being processed, in bytes.
-* `DISK`: The disk usage in bytes.
-* `TxnStart`: The start time of the transaction.
-* `RESOURCE_GROUP`: The resource group name.
-* `SESSION_ALIAS`: The alias of the current session.
-* `ROWS_AFFECTED`: The number of rows currently affected by the statement.
-* `TIDB_CPU`: The amount of time in nanoseconds that the statement consumes the TiDB server CPU. This column shows meaningful value only when the [Top SQL](/dashboard/top-sql.md) feature is enabled. Otherwise the value will be `0`.
-* `TIKV_CPU`: The amount of time in nanoseconds that the statement consumes the TiKV server CPU.
+-   `ID` : ユーザー接続の ID。
+-   `USER` : `PROCESS`を実行しているユーザーの名前。
+-   `HOST` : ユーザーが接続しているアドレス。
+-   `DB` : 現在接続されているデフォルト データベースの名前。
+-   `COMMAND` : `PROCESS`が実行しているコマンドの種類。
+-   `TIME` : 現在の実行時間`PROCESS` (秒)。
+-   `STATE` : 現在の接続状態。
+-   `INFO` : 処理中の要求されたステートメント。
+-   `DIGEST` : SQL ステートメントのダイジェスト。
+-   `MEM` : 処理中のリクエストによって使用されるメモリ（バイト単位）。
+-   `DISK` : ディスク使用量（バイト単位）。
+-   `TxnStart` : トランザクションの開始時刻。
+-   `RESOURCE_GROUP` : リソース グループ名。
+-   `SESSION_ALIAS` : 現在のセッションのエイリアス。
+-   `ROWS_AFFECTED` : 現在ステートメントによって影響を受けている行数。
+-   `TIDB_CPU` : ステートメントがTiDBサーバーのCPUを消費する時間（ナノ秒単位）。この列は、 [Top SQL](/dashboard/top-sql.md)機能が有効な場合にのみ意味のある値を表示します。それ以外の場合は、値は`0`になります。
+-   `TIKV_CPU` : ステートメントが TiKVサーバーCPU を消費する時間 (ナノ秒単位)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-* `ID`: The ID of the user connection.
-* `USER`: The name of the user who is executing `PROCESS`.
-* `HOST`: The address that the user is connecting to.
-* `DB`: The name of the currently connected default database.
-* `COMMAND`: The command type that `PROCESS` is executing.
-* `TIME`: The current execution duration of `PROCESS`, in seconds.
-* `STATE`: The current connection state.
-* `INFO`: The requested statement that is being processed.
-* `DIGEST`: The digest of the SQL statement.
-* `MEM`: The memory used by the request that is being processed, in bytes.
-* `DISK`: The disk usage in bytes.
-* `TxnStart`: The start time of the transaction.
-* `RESOURCE_GROUP`: The resource group name.
-* `SESSION_ALIAS`: The alias of the current session.
-* `ROWS_AFFECTED`: The number of rows currently affected by the statement.
-* `TIDB_CPU`: The amount of time in nanoseconds that the statement consumes the TiDB server CPU. This column shows meaningful value only when the [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql) feature is enabled. Otherwise the value will be `0`.
-* `TIKV_CPU`: The amount of time in nanoseconds that the statement consumes the TiKV server CPU.
+-   `ID` : ユーザー接続の ID。
+-   `USER` : `PROCESS`を実行しているユーザーの名前。
+-   `HOST` : ユーザーが接続しているアドレス。
+-   `DB` : 現在接続されているデフォルト データベースの名前。
+-   `COMMAND` : `PROCESS`が実行しているコマンドの種類。
+-   `TIME` : 現在の実行時間`PROCESS` (秒)。
+-   `STATE` : 現在の接続状態。
+-   `INFO` : 処理中の要求されたステートメント。
+-   `DIGEST` : SQL ステートメントのダイジェスト。
+-   `MEM` : 処理中のリクエストによって使用されるメモリ（バイト単位）。
+-   `DISK` : ディスク使用量（バイト単位）。
+-   `TxnStart` : トランザクションの開始時刻。
+-   `RESOURCE_GROUP` : リソース グループ名。
+-   `SESSION_ALIAS` : 現在のセッションのエイリアス。
+-   `ROWS_AFFECTED` : 現在ステートメントによって影響を受けている行数。
+-   `TIDB_CPU` : ステートメントがTiDBサーバーのCPUを消費する時間（ナノ秒単位）。この列は、 [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql)機能が有効な場合にのみ意味のある値を表示します。それ以外の場合は、値は`0`になります。
+-   `TIKV_CPU` : ステートメントが TiKVサーバーCPU を消費する時間 (ナノ秒単位)。
 
 </CustomContent>
 
-## CLUSTER_PROCESSLIST
+## クラスタープロセスリスト {#cluster-processlist}
 
-`CLUSTER_PROCESSLIST` is the cluster system table corresponding to `PROCESSLIST`. It is used to query the `PROCESSLIST` information of all TiDB nodes in the cluster. The table schema of `CLUSTER_PROCESSLIST` has one more column than `PROCESSLIST`, the `INSTANCE` column, which stores the address of the TiDB node this row of data is from.
+`CLUSTER_PROCESSLIST`は`PROCESSLIST`に対応するクラスタシステムテーブルです。これは、クラスタ内のすべての TiDB ノードの`PROCESSLIST`情報を照会するために使用されます。 `CLUSTER_PROCESSLIST`のテーブルスキーマには`PROCESSLIST`よりも1つ多い列、つまり`INSTANCE`列があり、このデータ行の元となる TiDB ノードのアドレスが格納されます。
 
 ```sql
 SELECT * FROM information_schema.cluster_processlist;

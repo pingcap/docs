@@ -1,24 +1,27 @@
 ---
 title: Delete a Recovery Group
-summary: Learn how to delete a Recovery Group when it is no longer needed.
+summary: 回復グループが不要になった場合に削除する方法を説明します。
 ---
 
-# Delete a Recovery Group
+# リカバリグループを削除する {#delete-a-recovery-group}
 
-When a recovery group is no longer needed, you can delete it.
+回復グループが不要になったら、削除できます。
 
-## Delete a recovery group
+## 回復グループを削除する {#delete-a-recovery-group}
 
-When a recovery group is no longer needed to manage the replication of a set of databases, you can delete it from the system.
+データベース セットのレプリケーションを管理するために回復グループが不要になった場合は、システムから削除できます。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Recovery Group**.
-3. On the **Recovery Group** page, locate the name of the recovery group that you wish to delete.
-4. Click the **Action** menu for the recovery group, and then click **Delete**. The deletion dialog is displayed.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、左上隅のコンボ ボックスを使用してターゲット プロジェクトに切り替えます。
 
-    > **Warning**
+2.  左側のナビゲーション ペインで、 **[回復グループ]**をクリックします。
+
+3.  **[回復グループ]**ページで、削除する回復グループの名前を見つけます。
+
+4.  回復グループの**「アクション」**メニューをクリックし、 **「削除」**をクリックします。削除ダイアログが表示されます。
+
+    > **警告**
     >
-    > - Deleting a recovery group also removes all associated replication relationships associated with that recovery group. 
-    > - The databases associated with the recovery group are no longer protected against disasters.
+    > -   回復グループを削除すると、その回復グループに関連付けられているすべてのレプリケーション関係も削除されます。
+    > -   リカバリ グループに関連付けられたデータベースは、災害から保護されなくなります。
 
-5. Confirm that you understand the impact of the deletion by typing the name of the recovery group and clicking **I understand, delete it**.
+5.  回復グループの名前を入力し、 **「理解したので削除します」**をクリックして、削除の影響を理解していることを確認します。

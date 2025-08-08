@@ -1,50 +1,50 @@
 ---
 title: tiup cluster disable
-summary: The `tiup cluster disable` command is used to disable the auto-enabling of cluster service after restarting the machine. It executes `systemctl disable <service>` on the specified node. Options include -N for specifying nodes and -R for specifying roles. The output is the execution log of the tiup-cluster.
+summary: tiup cluster disable`コマンドは、マシンの再起動後にクラスタサービスの自動有効化を無効にするために使用されます。指定されたノードで`systemctl disable <service>`を実行します。オプションには、ノードを指定するための-Nとロールを指定するための-Rがあります。出力はtiup-clusterの実行ログです。
 ---
 
-# tiup cluster disable
+# tiup cluster disable {#tiup-cluster-disable}
 
-After restarting the machine on which the cluster service is located, the cluster service will be automatically enabled. To disable the auto-enabling of cluster service, you can use the `tiup cluster disable` command. This command executes `systemctl disable <service>` on the specified node to disable the auto-enabling of the service.
+クラスタサービスが配置されているマシンを再起動すると、クラスタサービスは自動的に有効化されます。クラスタサービスの自動有効化を無効にするには、コマンド`tiup cluster disable`使用します。このコマンドは、指定されたノードでコマンド`systemctl disable <service>`を実行し、サービスの自動有効化を無効にします。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster disable <cluster-name> [flags]
 ```
 
-`<cluster-name>`: the cluster whose service auto-enabling is to be disabled.
+`<cluster-name>` : サービスの自動有効化を無効にするクラスター。
 
-## Options
+## オプション {#options}
 
-### -N, --node
+### -N, --node {#n-node}
 
-- Specifies the nodes whose service auto-enabling is to be disabled. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the [`tiup cluster display`](/tiup/tiup-component-cluster-display.md) command.
-- Data type: `STRINGS`
-- If this option is not specified in the command, the auto-enabling of all nodes is disabled by default.
+-   サービスの自動有効化を無効にするノードを指定します。このオプションの値は、ノードIDのカンマ区切りのリストです。ノードIDは、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドで返されるクラスタステータステーブルの最初の列から取得できます。
+-   データ型: `STRINGS`
+-   このオプションがコマンドで指定されていない場合、すべてのノードの自動有効化はデフォルトで無効になります。
 
-> **Note:**
+> **注記：**
 >
-> If the `-R, --role` option is specified at the same time, the auto-enabling of services that match both the specifications of `-N, --node` and `-R, --role` is disabled.
+> `-R, --role`オプションを同時に指定した場合、 `-N, --node`と`-R, --role`両方の指定に一致するサービスの自動有効化は無効になります。
 
-### -R, --role
+### -R, --role {#r-role}
 
-- Specifies the roles whose service auto-enabling is to be disabled. The value of this option is a comma-separated list of node roles. You can get the roles of nodes from the second column of the cluster status table returned by the [`tiup cluster display`](/tiup/tiup-component-cluster-display.md) command.
-- Data type: `STRINGS`
-- If this option is not specified in the command, the auto-enabling of all roles is disabled by default.
+-   サービスの自動有効化を無効にするロールを指定します。このオプションの値は、ノードロールのコンマ区切りのリストです。ノードのロールは、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドで返されるクラスターステータステーブルの2列目から取得できます。
+-   データ型: `STRINGS`
+-   コマンドでこのオプションを指定しない場合、すべてのロールの自動有効化はデフォルトで無効になります。
 
-> **Note:**
+> **注記：**
 >
-> If the `-N, --node` option is specified at the same time, the auto-enabling of services that match both the specifications of `-N, --node` and `-R, --role` is disabled.
+> `-N, --node`オプションを同時に指定した場合、 `-N, --node`と`-R, --role`両方の指定に一致するサービスの自動有効化は無効になります。
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
-## Output
+## 出力 {#output}
 
-The execution log of the tiup-cluster.
+tiup-clusterの実行ログ。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

@@ -1,68 +1,67 @@
 ---
-title: Connect to {{{ .starter }}} via Public Endpoint
-summary: Learn how to connect to your {{{ .starter }}} cluster via public endpoint.
+title: Connect to TiDB Cloud Serverless via Public Endpoint
+summary: パブリック エンドポイント経由でTiDB Cloud Serverless クラスターに接続する方法を学習します。
 ---
 
-# Connect to {{{ .starter }}} via Public Endpoint
+# パブリックエンドポイント経由でTiDB Cloud Serverless に接続する {#connect-to-tidb-cloud-serverless-via-public-endpoint}
 
-This document describes how to connect to your {{{ .starter }}} cluster via a public endpoint, using a SQL client from your computer, as well as how to disable a public endpoint.
+このドキュメントでは、コンピューターから SQL クライアントを使用してパブリック エンドポイント経由でTiDB Cloud Serverless クラスターに接続する方法と、パブリック エンドポイントを無効にする方法について説明します。
 
-## Connect via a public endpoint
+## パブリックエンドポイント経由で接続する {#connect-via-a-public-endpoint}
 
-> **Tip:**
+> **ヒント：**
 >
-> To learn how to connect to a TiDB Cloud Dedicated cluster via public endpoint, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
+> パブリック エンドポイント経由でTiDB Cloud Dedicated クラスターに接続する方法については、 [パブリック接続経由でTiDB Cloud Dedicated に接続](/tidb-cloud/connect-via-standard-connection.md)参照してください。
 
-To connect to a {{{ .starter }}} cluster via public endpoint, take the following steps:
+パブリック エンドポイント経由でTiDB Cloud Serverless クラスターに接続するには、次の手順を実行します。
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. In the dialog, keep the default setting of the connection type as `Public`, and select your preferred connection method and operating system to get the corresponding connection string.
+3.  ダイアログでは、接続タイプのデフォルト設定を`Public`のままにして、希望する接続方法とオペレーティング システムを選択して、対応する接続文字列を取得します。
 
-    > **Note:**
+    > **注記：**
     >
-    > - Keeping the connection type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to {{{ .starter }}}](/tidb-cloud/secure-connections-to-serverless-clusters.md).
-    > - If you choose **Private Endpoint** in the **Connection Type** drop-down list, it means that the connection is via private endpoint. For more information, see [Connect to {{{ .starter }}} via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
+    > -   接続タイプを`Public`ままにしておくと、標準のTLS接続が使用されます。詳細については、 [TiDB Cloud ServerlessへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)参照してください。
+    > -   **「接続タイプ」**ドロップダウンリストで**「プライベートエンドポイント」**を選択した場合、接続はプライベートエンドポイント経由となります。詳細については、 [プライベートエンドポイント経由でTiDB Cloud Serverless に接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)参照してください。
 
-4. {{{ .starter }}} lets you create [branches](/tidb-cloud/branch-overview.md) for your cluster. After a branch is created, you can choose to connect to the branch via the **Branch** drop-down list. `main` represents the cluster itself.
+4.  TiDB Cloud Serverlessでは、クラスターに[枝](/tidb-cloud/branch-overview.md)作成できます。ブランチを作成したら、 **「ブランチ」**ドロップダウンリストからそのブランチに接続できます。5 `main`クラスター自体を表します。
 
-5. If you have not set a password yet, click **Generate Password** to generate a random password. The generated password will not show again, so save your password in a secure location.
+5.  まだパスワードを設定していない場合は、 **「パスワードを生成」**をクリックしてランダムなパスワードを生成します。生成されたパスワードは再度表示されないため、安全な場所に保存してください。
 
-6. Connect to your cluster with the connection string.
+6.  接続文字列を使用してクラスターに接続します。
 
-    > **Note:**
+    > **注記：**
     >
-    > When you connect to a {{{ .starter }}} cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
-    > Your client IP must be in the allowed IP rules of the public endpoint of your cluster. For more information, see [Configure {{{ .starter }}} Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md).
+    > TiDB Cloud Serverless クラスターに接続する際は、ユーザー名にクラスターのプレフィックスを含め、引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)ご覧ください。クライアント IP は、クラスターのパブリックエンドポイントの許可 IP ルールに含まれている必要があります。詳細については、 [パブリックエンドポイント用のTiDB Cloudサーバーレス ファイアウォール ルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)ご覧ください。
 
-## Disable a public endpoint
+## パブリックエンドポイントを無効にする {#disable-a-public-endpoint}
 
-If you do not need to use a public endpoint of a {{{ .starter }}} cluster, you can disable it to prevent connections from the internet:
+TiDB Cloud Serverless クラスターのパブリック エンドポイントを使用する必要がない場合は、それを無効にしてインターネットからの接続を防ぐことができます。
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2. In the left navigation pane, click **Settings** > **Networking**.
+2.  左側のナビゲーション ペインで、 **[設定]** &gt; **[ネットワーク] を**クリックします。
 
-3. On the **Networking** page, click **Disable**. A confirmation dialog is displayed.
+3.  **「ネットワーク」**ページで、 **「無効にする」**をクリックします。確認ダイアログが表示されます。
 
-4. Click **Disable** in the confirmation dialog.
+4.  確認ダイアログで**「無効にする」を**クリックします。
 
-After disabling the public endpoint, the `Public` entry in the **Connection Type** drop-down list of the connect dialog is disabled. If users are still trying to access the cluster from the public endpoint, they will get an error.
+パブリックエンドポイントを無効化すると、接続ダイアログの「**接続タイプ」**ドロップダウンリストの「 `Public`エントリが無効化されます。ユーザーがパブリックエンドポイントからクラスターにアクセスしようとすると、エラーが表示されます。
 
-> **Note:**
+> **注記：**
 >
-> Disabling the public endpoint does not affect existing connections. It only prevents new connections from the internet.
+> パブリックエンドポイントを無効にしても、既存の接続には影響しません。インターネットからの新規接続のみがブロックされます。
 
-You can re-enable the public endpoint after disabling it:
+パブリック エンドポイントを無効にした後、再度有効にすることができます。
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2. In the left navigation pane, click **Settings** > **Networking**.
+2.  左側のナビゲーション ペインで、 **[設定]** &gt; **[ネットワーク] を**クリックします。
 
-3. On the **Networking** page, click **Enable**.
+3.  **[ネットワーク]**ページで、 **[有効化]**をクリックします。
 
-## What's next
+## 次は何？ {#what-s-next}
 
-After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](/basic-sql-operations.md).
+TiDB クラスターに正常に接続すると、 [TiDBでSQL文を調べる](/basic-sql-operations.md) 。

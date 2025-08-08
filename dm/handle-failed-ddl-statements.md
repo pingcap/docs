@@ -1,122 +1,116 @@
 ---
 title: Handle Failed DDL Statements in TiDB Data Migration
-summary: Learn how to handle failed DDL statements when you're using the TiDB Data Migration tool to migrate data.
+summary: TiDB データ移行ツールを使用してデータを移行するときに、失敗した DDL ステートメントを処理する方法を学習します。
 ---
 
-# Handle Failed DDL Statements in TiDB Data Migration
+# TiDB データ移行で失敗した DDL ステートメントを処理する {#handle-failed-ddl-statements-in-tidb-data-migration}
 
-This document introduces how to handle failed DDL statements when you're using the TiDB Data Migration (DM) tool to migrate data.
+このドキュメントでは、TiDB データ移行 (DM) ツールを使用してデータを移行するときに、失敗した DDL ステートメントを処理する方法について説明します。
 
-Currently, TiDB is not completely compatible with all MySQL syntax (see [the DDL statements supported by TiDB](/mysql-compatibility.md#ddl-operations)). Therefore, when DM is migrating data from MySQL to TiDB and TiDB does not support the corresponding DDL statement, an error might occur and break the migration process. In this case, you can use the `binlog` command of DM to resume the migration.
+現在、TiDBはMySQLのすべての構文と完全に互換性があるわけではありません（ [TiDBでサポートされているDDL文](/mysql-compatibility.md#ddl-operations)参照）。そのため、DMがMySQLからTiDBにデータを移行する際に、TiDBが対応するDDL文をサポートしていない場合、エラーが発生し、移行プロセスが中断される可能性があります。この場合、DMの`binlog`コマンドを使用して移行を再開できます。
 
-## Restrictions
+## 制限 {#restrictions}
 
-Do not use this command in the following situations:
+次の状況ではこのコマンドを使用しないでください。
 
-* It is unacceptable in the actual production environment that the failed DDL statement is skipped in the downstream TiDB.
-* The failed DDL statement cannot be replaced with other DDL statements.
-* Other DDL statements must not be injected into the downstream TiDB.
+-   実際の本番環境では、失敗した DDL ステートメントが下流の TiDB でスキップされることは許容されません。
+-   失敗した DDL ステートメントを他の DDL ステートメントに置き換えることはできません。
+-   その他の DDL ステートメントをダウンストリーム TiDB に挿入してはなりません。
 
-For example, `DROP PRIMARY KEY`. In this scenario, you can only create a new table in the downstream with the new table schema (after executing the DDL statement), and re-import all the data into this new table.
+たとえば、 `DROP PRIMARY KEY` 。このシナリオでは、新しいテーブル スキーマを使用してダウンストリームに新しいテーブルを作成し (DDL ステートメントを実行した後)、すべてのデータをこの新しいテーブルに再インポートすることしかできません。
 
-## Supported scenarios
+## サポートされているシナリオ {#supported-scenarios}
 
-During the migration, the DDL statement unsupported by TiDB is executed in the upstream and migrated to the downstream, and as a result, the migration task gets interrupted.
+移行中に、TiDB でサポートされていない DDL ステートメントがアップストリームで実行され、ダウンストリームに移行され、その結果、移行タスクが中断されます。
 
-- If it is acceptable that this DDL statement is skipped in the downstream TiDB, then you can use `binlog skip <task-name>` to skip migrating this DDL statement and resume the migration.
-- If it is acceptable that this DDL statement is replaced with other DDL statements, then you can use `binlog replace <task-name>` to replace this DDL statement and resume the migration.
-- If it is acceptable that other DDL statements are injected to the downstream TiDB, then you can use `binlog inject <task-name>` to inject other DDL statements and resume the migration.
+-   この DDL ステートメントがダウンストリーム TiDB でスキップされることが許容される場合は、 `binlog skip <task-name>`使用してこの DDL ステートメントの移行をスキップし、移行を再開できます。
+-   この DDL ステートメントを他の DDL ステートメントに置き換えても問題ない場合は、 `binlog replace <task-name>`使用してこの DDL ステートメントを置き換え、移行を再開できます。
+-   他の DDL ステートメントがダウンストリーム TiDB に挿入されることが許容される場合は、 `binlog inject <task-name>`使用して他の DDL ステートメントを挿入し、移行を再開できます。
 
-## Commands
+## コマンド {#commands}
 
-When you use dmctl to manually handle the failed DDL statements, the commonly used commands include `query-status` and `binlog`.
+dmctl を使用して失敗した DDL ステートメントを手動で処理する場合、よく使用されるコマンドには`query-status`と`binlog`含まれます。
 
-### query-status
+### クエリステータス {#query-status}
 
-The `query-status` command is used to query the current status of items such as the subtask and the relay unit in each MySQL instance. For details, see [query status](/dm/dm-query-status.md).
+`query-status`コマンドは、各 MySQL インスタンス内のサブタスクやリレーユニットなどの現在の状態を問い合わせるために使用されます。詳細については、 [クエリステータス](/dm/dm-query-status.md)参照してください。
 
-### binlog
+### binlog {#binlog}
 
-The `binlog` command is used to manage and show binlog operations. This command is only supported in DM v6.0 and later versions. For earlier versions, use the `handle-error` command.
+`binlog`コマンドは、 binlog操作の管理と表示に使用されます。このコマンドは DM v6.0 以降のバージョンでのみサポートされています。それ以前のバージョンでは、 `handle-error`コマンドを使用してください。
 
-The usage of `binlog` is as follows:
+`binlog`の使い方は次のとおりです。
 
 ```bash
 binlog -h
 ```
 
-```
-manage or show binlog operations
+    manage or show binlog operations
 
-Usage:
-  dmctl binlog [command]
+    Usage:
+      dmctl binlog [command]
 
-Available Commands:
-  inject      inject the current error event or a specific binlog position (binlog-pos) with some ddls
-  list        list error handle command at binlog position (binlog-pos) or after binlog position (binlog-pos)
-  replace     replace the current error event or a specific binlog position (binlog-pos) with some ddls
-  revert      revert the current binlog operation or a specific binlog position (binlog-pos) operation
-  skip        skip the current error event or a specific binlog position (binlog-pos) event
+    Available Commands:
+      inject      inject the current error event or a specific binlog position (binlog-pos) with some ddls
+      list        list error handle command at binlog position (binlog-pos) or after binlog position (binlog-pos)
+      replace     replace the current error event or a specific binlog position (binlog-pos) with some ddls
+      revert      revert the current binlog operation or a specific binlog position (binlog-pos) operation
+      skip        skip the current error event or a specific binlog position (binlog-pos) event
 
-Flags:
-  -b, --binlog-pos string   position used to match binlog event if matched the binlog operation will be applied. The format like "mysql-bin|000001.000003:3270"
-  -h, --help                help for binlog
+    Flags:
+      -b, --binlog-pos string   position used to match binlog event if matched the binlog operation will be applied. The format like "mysql-bin|000001.000003:3270"
+      -h, --help                help for binlog
 
-Global Flags:
-  -s, --source strings   MySQL Source ID.
+    Global Flags:
+      -s, --source strings   MySQL Source ID.
 
-Use "dmctl binlog [command] --help" for more information about a command.
-```
+    Use "dmctl binlog [command] --help" for more information about a command.
 
-`binlog` supports the following sub-commands:
+`binlog`次のサブコマンドをサポートします。
 
-* `inject`: injects DDL statements into the current error event or a specific binlog position. To specify the binlog position, refer to `-b, --binlog-pos`.
-* `list`: lists all valid `inject`, `skip`, and `replace` operations at the current binlog position or after the current binlog position. To specify the binlog position, refer to `-b, --binlog-pos`.
-* `replace`: replaces the DDL statement at a specific binlog position with another DDL statement. To specify the binlog position, refer to `-b, --binlog-pos`.
-* `revert`: reverts the `inject`, `skip` or `replace` operation at a specified binlog operation, only if the previous operation does not take effect. To specify the binlog position, refer to `-b, --binlog-pos`.
-* `skip`: skips the DDL statement at a specific binlog position. To specify the binlog position, refer to `-b, --binlog-pos`.
+-   `inject` : 現在のエラーイベントまたは特定のbinlog位置にDDL文を挿入します。binlog位置の指定については、 `-b, --binlog-pos`を参照してください。
+-   `list` : 現在のbinlog位置、または現在のbinlog位置以降の有効な`inject` 、 `skip` 、 `replace`各操作をすべてリストします。binlog位置を指定するには、 `-b, --binlog-pos`を参照してください。
+-   `replace` : 特定のbinlog位置にあるDDL文を別のDDL文に置き換えます。binlog位置の指定については、 `-b, --binlog-pos`を参照してください。
+-   `revert` : 指定されたbinlog操作において、前の操作が無効であった場合にのみ、 `inject` 、または`replace` `skip`を元に戻します。binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
+-   `skip` : 特定のbinlog位置にあるDDL文をスキップします。binlog位置の指定については、 `-b, --binlog-pos`を参照してください。
 
-`binlog` supports the following flags:
+`binlog`次のフラグをサポートします:
 
-+ `-b, --binlog-pos`:
-    - Type: string.
-    - Specifies a binlog position. When the position of the binlog event matches `binlog-pos`, the operation is executed. If it is not specified, DM automatically sets `binlog-pos` to the currently failed DDL statement.
-    - Format: `binlog-filename:binlog-pos`, for example, `mysql-bin|000001.000003:3270`.
-    - After the migration returns an error, the binlog position can be obtained from `position` in `startLocation` returned by `query-status`. Before the migration returns an error, the binlog position can be obtained by using [`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html) in the upstream MySQL instance.
+-   `-b, --binlog-pos` :
+    -   タイプ: 文字列。
+    -   binlogの位置を指定します。binlogイベントの位置が`binlog-pos`一致すると、操作が実行されます。指定されていない場合、DM は現在失敗した DDL 文に`binlog-pos`自動的に設定します。
+    -   形式: `binlog-filename:binlog-pos` 、たとえば`mysql-bin|000001.000003:3270` 。
+    -   マイグレーションがエラーを返した後は、 `query-status`で返される`startLocation`の`position`からbinlogの位置を取得できます。マイグレーションがエラーを返す前は、上流の MySQL インスタンスで[`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html)を使用してbinlogの位置を取得できます。
 
-+ `-s, --source`:
-    - Type: string.
-    - Specifies the MySQL instance in which the preset operation is to be executed.
+-   `-s, --source` :
+    -   タイプ: 文字列。
+    -   事前設定された操作を実行する MySQL インスタンスを指定します。
 
-## Usage examples
+## 使用例 {#usage-examples}
 
-### Skip DDL if the migration gets interrupted
+### 移行が中断された場合はDDLをスキップする {#skip-ddl-if-the-migration-gets-interrupted}
 
-If you need to skip the DDL statement when the migration gets interrupted, run the `binlog skip` command:
+移行が中断されたときに DDL ステートメントをスキップする必要がある場合は、 `binlog skip`コマンドを実行します。
 
 ```bash
 binlog skip -h
 ```
 
-```
-skip the current error event or a specific binlog position (binlog-pos) event
+    skip the current error event or a specific binlog position (binlog-pos) event
 
-Usage:
-  dmctl binlog skip <task-name> [flags]
+    Usage:
+      dmctl binlog skip <task-name> [flags]
 
-Flags:
-  -h, --help   help for skip
+    Flags:
+      -h, --help   help for skip
 
-Global Flags:
-  -b, --binlog-pos string   position used to match binlog event if matched the binlog operation will be applied. The format like "mysql-bin|000001.000003:3270"
-  -s, --source strings      MySQL Source ID.
-```
+    Global Flags:
+      -b, --binlog-pos string   position used to match binlog event if matched the binlog operation will be applied. The format like "mysql-bin|000001.000003:3270"
+      -s, --source strings      MySQL Source ID.
 
-#### Non-shard-merge scenario
+#### シャードマージなしのシナリオ {#non-shard-merge-scenario}
 
-Assume that you need to migrate the upstream table `db1.tbl1` to the downstream TiDB. The initial table schema is:
-
-{{< copyable "sql" >}}
+上流のテーブル`db1.tbl1`下流のTiDBに移行する必要があると仮定します。初期のテーブルスキーマは次のとおりです。
 
 ```sql
 SHOW CREATE TABLE db1.tbl1;
@@ -134,112 +128,98 @@ SHOW CREATE TABLE db1.tbl1;
 +-------+--------------------------------------------------+
 ```
 
-Now, the following DDL statement is executed in the upstream to alter the table schema (namely, alter DECIMAL(11, 3) of c2 into DECIMAL(10, 3)):
-
-{{< copyable "sql" >}}
+ここで、アップストリームで次の DDL ステートメントが実行され、テーブル スキーマが変更されます (つまり、c2 の DECIMAL(11, 3) が DECIMAL(10, 3) に変更されます)。
 
 ```sql
 ALTER TABLE db1.tbl1 CHANGE c2 c2 DECIMAL (10, 3);
 ```
 
-Because this DDL statement is not supported by TiDB, the migration task of DM gets interrupted. Execute the `query-status <task-name>` command, and you can see the following error:
+このDDL文はTiDBでサポートされていないため、DMの移行タスクは中断されます。コマンド`query-status <task-name>`を実行すると、次のエラーが表示されます。
 
-```
-ERROR 8200 (HY000): Unsupported modify column: can't change decimal column precision
-```
+    ERROR 8200 (HY000): Unsupported modify column: can't change decimal column precision
 
-Assume that it is acceptable in the actual production environment that this DDL statement is not executed in the downstream TiDB (namely, the original table schema is retained). Then you can use `binlog skip <task-name>` to skip this DDL statement to resume the migration. The procedures are as follows:
+実際の本番環境では、このDDL文が下流のTiDBで実行されない（つまり、元のテーブルスキーマが保持される）ことが許容されると仮定します。その場合、 `binlog skip <task-name>`使用してこのDDL文をスキップし、移行を再開できます。手順は以下のとおりです。
 
-1. Execute `binlog skip <task-name>` to skip the currently failed DDL statement:
-
-    {{< copyable "" >}}
+1.  `binlog skip <task-name>`実行して、現在失敗している DDL ステートメントをスキップします。
 
     ```bash
     » binlog skip test
     ```
 
-    ```
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-01",
-                "worker": "worker1"
-            }
-        ]
-    }
-    ```
+        {
+            "result": true,
+            "msg": "",
+            "sources": [
+                {
+                    "result": true,
+                    "msg": "",
+                    "source": "mysql-replica-01",
+                    "worker": "worker1"
+                }
+            ]
+        }
 
-2. Execute `query-status <task-name>` to view the task status:
-
-    {{< copyable "" >}}
+2.  タスクのステータスを表示するには、 `query-status <task-name>`実行します。
 
     ```bash
     » query-status test
     ```
 
-    <details><summary> See the execution result.</summary>
+    <details><summary>実行結果を確認します。</summary>
 
-    ```
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "sourceStatus": {
-                    "source": "mysql-replica-01",
-                    "worker": "worker1",
-                    "result": null,
-                    "relayStatus": null
-                },
-                "subTaskStatus": [
-                    {
-                        "name": "test",
-                        "stage": "Running",
-                        "unit": "Sync",
+        {
+            "result": true,
+            "msg": "",
+            "sources": [
+                {
+                    "result": true,
+                    "msg": "",
+                    "sourceStatus": {
+                        "source": "mysql-replica-01",
+                        "worker": "worker1",
                         "result": null,
-                        "unresolvedDDLLockID": "",
-                        "sync": {
-                            "masterBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
-                            "masterBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-10",
-                            "syncerBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
-                            "syncerBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-4",
-                            "blockingDDLs": [
-                            ],
-                            "unresolvedGroups": [
-                            ],
-                            "synced": true,
-                            "binlogType": "remote",
-                            "totalRows": "4",
-                            "totalRps": "0",
-                            "recentRps": "0"
+                        "relayStatus": null
+                    },
+                    "subTaskStatus": [
+                        {
+                            "name": "test",
+                            "stage": "Running",
+                            "unit": "Sync",
+                            "result": null,
+                            "unresolvedDDLLockID": "",
+                            "sync": {
+                                "masterBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
+                                "masterBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-10",
+                                "syncerBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
+                                "syncerBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-4",
+                                "blockingDDLs": [
+                                ],
+                                "unresolvedGroups": [
+                                ],
+                                "synced": true,
+                                "binlogType": "remote",
+                                "totalRows": "4",
+                                "totalRps": "0",
+                                "recentRps": "0"
+                            }
                         }
-                    }
-                ]
-            }
-        ]
-    }
-    ```
+                    ]
+                }
+            ]
+        }
 
     </details>
 
-    You can see that the task runs normally and the wrong DDL is skipped.
+    タスクが正常に実行され、間違った DDL がスキップされていることがわかります。
 
-#### Shard merge scenario
+#### シャードマージシナリオ {#shard-merge-scenario}
 
-Assume that you need to merge and migrate the following four tables in the upstream to one same table ``` `shard_db`.`shard_table` ``` in the downstream. The task mode is "pessimistic".
+アップストリームにある以下の4つのテーブルを、ダウンストリームにある同じテーブル`` `shard_db`.`shard_table` ``にマージして移行する必要があると仮定します。タスクモードは「悲観的」です。
 
-- MySQL instance 1 contains the `shard_db_1` schema, which includes the `shard_table_1` and `shard_table_2` tables.
-- MySQL instance 2 contains the `shard_db_2` schema, which includes the `shard_table_1` and `shard_table_2` tables.
+-   MySQL インスタンス 1 には、 `shard_table_1`と`shard_table_2`テーブルを含む`shard_db_1`スキーマが含まれています。
+-   MySQL インスタンス 2 には、 `shard_table_1`と`shard_table_2`テーブルを含む`shard_db_2`スキーマが含まれています。
 
-The initial table schema is:
-
-{{< copyable "sql" >}}
+初期のテーブル スキーマは次のとおりです。
 
 ```sql
 SHOW CREATE TABLE shard_db.shard_table;
@@ -256,224 +236,202 @@ SHOW CREATE TABLE shard_db.shard_table;
 +-------+-----------------------------------------------------------------------------------------------------------+
 ```
 
-Now, execute the following DDL statement to all upstream sharded tables to alter their character set:
-
-{{< copyable "sql" >}}
+次に、すべてのアップストリーム シャード テーブルに対して次の DDL ステートメントを実行して、文字セットを変更します。
 
 ```sql
 ALTER TABLE `shard_db_*`.`shard_table_*` CHARACTER SET LATIN1 COLLATE LATIN1_DANISH_CI;
 ```
 
-Because this DDL statement is not supported by TiDB, the migration task of DM gets interrupted. Execute the `query-status` command, and you can see the following errors reported by the `shard_db_1`.`shard_table_1` table in MySQL instance 1 and the `shard_db_2`.`shard_table_1` table in MySQL instance 2:
+このDDL文はTiDBでサポートされていないため、DMの移行タスクは中断されます。コマンド`query-status` `shard_db_1`実行すると、MySQLインスタンス1のテーブル`shard_table_1`とMySQLインスタンス`shard_table_1` `shard_db_2`以下のエラーが報告されます。
 
-```
-{
-    "Message": "cannot track DDL: ALTER TABLE `shard_db_1`.`shard_table_1` CHARACTER SET UTF8 COLLATE UTF8_UNICODE_CI",
-    "RawCause": "[ddl:8200]Unsupported modify charset from latin1 to utf8"
-}
-```
+    {
+        "Message": "cannot track DDL: ALTER TABLE `shard_db_1`.`shard_table_1` CHARACTER SET UTF8 COLLATE UTF8_UNICODE_CI",
+        "RawCause": "[ddl:8200]Unsupported modify charset from latin1 to utf8"
+    }
 
-```
-{
-    "Message": "cannot track DDL: ALTER TABLE `shard_db_2`.`shard_table_1` CHARACTER SET UTF8 COLLATE UTF8_UNICODE_CI",
-    "RawCause": "[ddl:8200]Unsupported modify charset from latin1 to utf8"
-}
-```
+<!---->
 
-Assume that it is acceptable in the actual production environment that this DDL statement is not executed in the downstream TiDB (namely, the original table schema is retained). Then you can use `binlog skip <task-name>` to skip this DDL statement to resume the migration. The procedures are as follows:
+    {
+        "Message": "cannot track DDL: ALTER TABLE `shard_db_2`.`shard_table_1` CHARACTER SET UTF8 COLLATE UTF8_UNICODE_CI",
+        "RawCause": "[ddl:8200]Unsupported modify charset from latin1 to utf8"
+    }
 
-1. Execute `binlog skip <task-name>` to skip the currently failed DDL statements in MySQL instance 1 and 2:
+実際の本番環境では、このDDL文が下流のTiDBで実行されない（つまり、元のテーブルスキーマが保持される）ことが許容されると仮定します。その場合、 `binlog skip <task-name>`使用してこのDDL文をスキップし、移行を再開できます。手順は以下のとおりです。
 
-    {{< copyable "" >}}
+1.  `binlog skip <task-name>`実行して、MySQL インスタンス 1 と 2 で現在失敗している DDL ステートメントをスキップします。
 
     ```bash
     » binlog skip test
     ```
 
-    ```
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-01",
-                "worker": "worker1"
-            },
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-02",
-                "worker": "worker2"
-            }
-        ]
-    }
-    ```
+        {
+            "result": true,
+            "msg": "",
+            "sources": [
+                {
+                    "result": true,
+                    "msg": "",
+                    "source": "mysql-replica-01",
+                    "worker": "worker1"
+                },
+                {
+                    "result": true,
+                    "msg": "",
+                    "source": "mysql-replica-02",
+                    "worker": "worker2"
+                }
+            ]
+        }
 
-2. Execute the `query-status` command, and you can see the errors reported by the `shard_db_1`.`shard_table_2` table in MySQL instance 1 and the `shard_db_2`.`shard_table_2` table in MySQL instance 2:
+2.  `query-status`コマンドを実行すると、MySQL インスタンス 1 の`shard_db_1` `shard_table_2`と MySQL インスタンス 2 `shard_table_2` `shard_db_2`によって報告されたエラーを確認できます。
 
-    ```
-    {
-        "Message": "cannot track DDL: ALTER TABLE `shard_db_1`.`shard_table_2` CHARACTER SET UTF8 COLLATE UTF8_UNICODE_CI",
-        "RawCause": "[ddl:8200]Unsupported modify charset from latin1 to utf8"
-    }
-    ```
+        {
+            "Message": "cannot track DDL: ALTER TABLE `shard_db_1`.`shard_table_2` CHARACTER SET UTF8 COLLATE UTF8_UNICODE_CI",
+            "RawCause": "[ddl:8200]Unsupported modify charset from latin1 to utf8"
+        }
 
-    ```
-    {
-        "Message": "cannot track DDL: ALTER TABLE `shard_db_2`.`shard_table_2` CHARACTER SET UTF8 COLLATE UTF8_UNICODE_CI",
-        "RawCause": "[ddl:8200]Unsupported modify charset from latin1 to utf8"
-    }
-    ```
+    <!---->
 
-3. Execute `binlog skip <task-name>` again to skip the currently failed DDL statements in MySQL instance 1 and 2:
+        {
+            "Message": "cannot track DDL: ALTER TABLE `shard_db_2`.`shard_table_2` CHARACTER SET UTF8 COLLATE UTF8_UNICODE_CI",
+            "RawCause": "[ddl:8200]Unsupported modify charset from latin1 to utf8"
+        }
 
-    {{< copyable "" >}}
+3.  `binlog skip <task-name>`再度実行して、MySQL インスタンス 1 と 2 で現在失敗している DDL ステートメントをスキップします。
 
     ```bash
     » handle-error test skip
     ```
 
-    ```
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-01",
-                "worker": "worker1"
-            },
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-02",
-                "worker": "worker2"
-            }
-        ]
-    }
-    ```
+        {
+            "result": true,
+            "msg": "",
+            "sources": [
+                {
+                    "result": true,
+                    "msg": "",
+                    "source": "mysql-replica-01",
+                    "worker": "worker1"
+                },
+                {
+                    "result": true,
+                    "msg": "",
+                    "source": "mysql-replica-02",
+                    "worker": "worker2"
+                }
+            ]
+        }
 
-4. Use `query-status <task-name>` to view the task status:
-
-    {{< copyable "" >}}
+4.  タスクのステータスを表示するには`query-status <task-name>`使用します。
 
     ```bash
     » query-status test
     ```
 
-    <details><summary> See the execution result.</summary>
+    <details><summary>実行結果を確認します。</summary>
 
-    ```
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "sourceStatus": {
-                    "source": "mysql-replica-01",
-                    "worker": "worker1",
-                    "result": null,
-                    "relayStatus": null
-                },
-                "subTaskStatus": [
-                    {
-                        "name": "test",
-                        "stage": "Running",
-                        "unit": "Sync",
+        {
+            "result": true,
+            "msg": "",
+            "sources": [
+                {
+                    "result": true,
+                    "msg": "",
+                    "sourceStatus": {
+                        "source": "mysql-replica-01",
+                        "worker": "worker1",
                         "result": null,
-                        "unresolvedDDLLockID": "",
-                        "sync": {
-                            "masterBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
-                            "masterBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-10",
-                            "syncerBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
-                            "syncerBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-4",
-                            "blockingDDLs": [
-                            ],
-                            "unresolvedGroups": [
-                            ],
-                            "synced": true,
-                            "binlogType": "remote",
-                            "totalRows": "4",
-                            "totalRps": "0",
-                            "recentRps": "0"
+                        "relayStatus": null
+                    },
+                    "subTaskStatus": [
+                        {
+                            "name": "test",
+                            "stage": "Running",
+                            "unit": "Sync",
+                            "result": null,
+                            "unresolvedDDLLockID": "",
+                            "sync": {
+                                "masterBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
+                                "masterBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-10",
+                                "syncerBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
+                                "syncerBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-4",
+                                "blockingDDLs": [
+                                ],
+                                "unresolvedGroups": [
+                                ],
+                                "synced": true,
+                                "binlogType": "remote",
+                                "totalRows": "4",
+                                "totalRps": "0",
+                                "recentRps": "0"
+                            }
                         }
-                    }
-                ]
-            },
-            {
-                "result": true,
-                "msg": "",
-                "sourceStatus": {
-                    "source": "mysql-replica-02",
-                    "worker": "worker2",
-                    "result": null,
-                    "relayStatus": null
+                    ]
                 },
-                "subTaskStatus": [
-                    {
-                        "name": "test",
-                        "stage": "Running",
-                        "unit": "Sync",
+                {
+                    "result": true,
+                    "msg": "",
+                    "sourceStatus": {
+                        "source": "mysql-replica-02",
+                        "worker": "worker2",
                         "result": null,
-                        "unresolvedDDLLockID": "",
-                        "sync": {
-                            "masterBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
-                            "masterBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-10",
-                            "syncerBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
-                            "syncerBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-4",
-                            "blockingDDLs": [
-                            ],
-                            "unresolvedGroups": [
-                            ],
-                            "synced": true,
-                            "binlogType": "remote",
-                            "totalRows": "4",
-                            "totalRps": "0",
-                            "recentRps": "0"
+                        "relayStatus": null
+                    },
+                    "subTaskStatus": [
+                        {
+                            "name": "test",
+                            "stage": "Running",
+                            "unit": "Sync",
+                            "result": null,
+                            "unresolvedDDLLockID": "",
+                            "sync": {
+                                "masterBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
+                                "masterBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-10",
+                                "syncerBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
+                                "syncerBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-4",
+                                "blockingDDLs": [
+                                ],
+                                "unresolvedGroups": [
+                                ],
+                                "synced": true,
+                                "binlogType": "remote",
+                                "totalRows": "4",
+                                "totalRps": "0",
+                                "recentRps": "0"
+                            }
                         }
-                    }
-                ]
-            }
-        ]
-    }
-    ```
+                    ]
+                }
+            ]
+        }
 
     </details>
 
-    You can see that the task runs normally with no error and all four wrong DDL statements are skipped.
+    タスクはエラーなしで正常に実行され、4 つの間違った DDL ステートメントはすべてスキップされていることがわかります。
 
-### Replace DDL if the migration gets interrupted
+### 移行が中断された場合はDDLを置き換える {#replace-ddl-if-the-migration-gets-interrupted}
 
-If you need to replace the DDL statement when the migration gets interrupted, run the `binlog replace` command:
+移行が中断されたときに DDL ステートメントを置き換える必要がある場合は、 `binlog replace`コマンドを実行します。
 
 ```bash
 binlog replace -h
 ```
 
-```
-replace the current error event or a specific binlog position (binlog-pos) with some ddls
+    replace the current error event or a specific binlog position (binlog-pos) with some ddls
 
-Usage:
-  dmctl binlog replace <task-name> <replace-sql1> <replace-sql2>... [flags]
+    Usage:
+      dmctl binlog replace <task-name> <replace-sql1> <replace-sql2>... [flags]
 
-Flags:
-  -h, --help   help for replace
+    Flags:
+      -h, --help   help for replace
 
-Global Flags:
-  -b, --binlog-pos string   position used to match binlog event if matched the binlog operation will be applied. The format like "mysql-bin|000001.000003:3270"
-  -s, --source strings      MySQL Source ID.
-```
+    Global Flags:
+      -b, --binlog-pos string   position used to match binlog event if matched the binlog operation will be applied. The format like "mysql-bin|000001.000003:3270"
+      -s, --source strings      MySQL Source ID.
 
-#### Non-shard-merge scenario
+#### シャードマージなしのシナリオ {#non-shard-merge-scenario}
 
-Assume that you need to migrate the upstream table `db1.tbl1` to the downstream TiDB. The initial table schema is:
-
-{{< copyable "sql" >}}
+上流のテーブル`db1.tbl1`下流のTiDBに移行する必要があると仮定します。初期のテーブルスキーマは次のとおりです。
 
 ```sql
 SHOW CREATE TABLE db1.tbl1;
@@ -490,115 +448,101 @@ SHOW CREATE TABLE db1.tbl1;
 +-------+-----------------------------------------------------------------------------------------------------------+
 ```
 
-Now, perform the following DDL operation in the upstream to add a new column with the UNIQUE constraint:
-
-{{< copyable "sql" >}}
+次に、アップストリームで次の DDL 操作を実行して、UNIQUE 制約を持つ新しい列を追加します。
 
 ```sql
 ALTER TABLE `db1`.`tbl1` ADD COLUMN new_col INT UNIQUE;
 ```
 
-Because this DDL statement is not supported by TiDB, the migration task gets interrupted. Execute the `query-status` command, and you can see the following error:
+このDDL文はTiDBでサポートされていないため、移行タスクは中断されます。コマンド`query-status`を実行すると、次のエラーが表示されます。
 
-```
-{
-    "Message": "cannot track DDL: ALTER TABLE `db1`.`tbl1` ADD COLUMN `new_col` INT UNIQUE KEY",
-    "RawCause": "[ddl:8200]unsupported add column 'new_col' constraint UNIQUE KEY when altering 'db1.tbl1'",
-}
-```
+    {
+        "Message": "cannot track DDL: ALTER TABLE `db1`.`tbl1` ADD COLUMN `new_col` INT UNIQUE KEY",
+        "RawCause": "[ddl:8200]unsupported add column 'new_col' constraint UNIQUE KEY when altering 'db1.tbl1'",
+    }
 
-You can replace this DDL statement with two equivalent DDL statements. The steps are as follows:
+このDDL文を2つの同等のDDL文に置き換えることができます。手順は次のとおりです。
 
-1. Replace the wrong DDL statement by the following command:
-
-    {{< copyable "" >}}
+1.  間違った DDL ステートメントを次のコマンドで置き換えます。
 
     ```bash
     » binlog replace test "ALTER TABLE `db1`.`tbl1` ADD COLUMN `new_col` INT;ALTER TABLE `db1`.`tbl1` ADD UNIQUE(`new_col`)";
     ```
 
-    ```
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-01",
-                "worker": "worker1"
-            }
-        ]
-    }
-    ```
+        {
+            "result": true,
+            "msg": "",
+            "sources": [
+                {
+                    "result": true,
+                    "msg": "",
+                    "source": "mysql-replica-01",
+                    "worker": "worker1"
+                }
+            ]
+        }
 
-2. Use `query-status <task-name>` to view the task status:
-
-    {{< copyable "" >}}
+2.  タスクのステータスを表示するには`query-status <task-name>`使用します。
 
     ```bash
     » query-status test
     ```
 
-    <details><summary> See the execution result.</summary>
+    <details><summary>実行結果を確認します。</summary>
 
-    ```
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "sourceStatus": {
-                    "source": "mysql-replica-01",
-                    "worker": "worker1",
-                    "result": null,
-                    "relayStatus": null
-                },
-                "subTaskStatus": [
-                    {
-                        "name": "test",
-                        "stage": "Running",
-                        "unit": "Sync",
+        {
+            "result": true,
+            "msg": "",
+            "sources": [
+                {
+                    "result": true,
+                    "msg": "",
+                    "sourceStatus": {
+                        "source": "mysql-replica-01",
+                        "worker": "worker1",
                         "result": null,
-                        "unresolvedDDLLockID": "",
-                        "sync": {
-                            "masterBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
-                            "masterBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-10",
-                            "syncerBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
-                            "syncerBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-4",
-                            "blockingDDLs": [
-                            ],
-                            "unresolvedGroups": [
-                            ],
-                            "synced": true,
-                            "binlogType": "remote",
-                            "totalRows": "4",
-                            "totalRps": "0",
-                            "recentRps": "0"
+                        "relayStatus": null
+                    },
+                    "subTaskStatus": [
+                        {
+                            "name": "test",
+                            "stage": "Running",
+                            "unit": "Sync",
+                            "result": null,
+                            "unresolvedDDLLockID": "",
+                            "sync": {
+                                "masterBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
+                                "masterBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-10",
+                                "syncerBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
+                                "syncerBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-4",
+                                "blockingDDLs": [
+                                ],
+                                "unresolvedGroups": [
+                                ],
+                                "synced": true,
+                                "binlogType": "remote",
+                                "totalRows": "4",
+                                "totalRps": "0",
+                                "recentRps": "0"
+                            }
                         }
-                    }
-                ]
-            }
-        ]
-    }
-    ```
+                    ]
+                }
+            ]
+        }
 
     </details>
 
-    You can see that the task runs normally and the wrong DDL statement is replaced by new DDL statements that execute successfully.
+    タスクが正常に実行され、間違った DDL ステートメントが正常に実行される新しい DDL ステートメントに置き換えられていることがわかります。
 
-#### Shard merge scenario
+#### シャードマージシナリオ {#shard-merge-scenario}
 
-Assume that you need to merge and migrate the following four tables in the upstream to one same table ``` `shard_db`.`shard_table` ``` in the downstream. The task mode is "pessimistic".
+アップストリームにある以下の4つのテーブルを、ダウンストリームにある同じテーブル`` `shard_db`.`shard_table` ``にマージして移行する必要があると仮定します。タスクモードは「悲観的」です。
 
-- In the MySQL instance 1, there is a schema `shard_db_1`, which has two tables `shard_table_1` and `shard_table_2`.
-- In the MySQL instance 2, there is a schema `shard_db_2`, which has two tables `shard_table_1` and `shard_table_2`.
+-   MySQL インスタンス 1 にはスキーマ`shard_db_1`があり、そこには`shard_table_1`と`shard_table_2` 2 つのテーブルがあります。
+-   MySQL インスタンス 2 にはスキーマ`shard_db_2`があり、そこには`shard_table_1`と`shard_table_2` 2 つのテーブルがあります。
 
-The initial table schema is:
-
-{{< copyable "sql" >}}
+初期のテーブル スキーマは次のとおりです。
 
 ```sql
 SHOW CREATE TABLE shard_db.shard_table;
@@ -615,229 +559,203 @@ SHOW CREATE TABLE shard_db.shard_table;
 +-------+-----------------------------------------------------------------------------------------------------------+
 ```
 
-Now, perform the following DDL operation to all upstream sharded tables to add a new column with the UNIQUE constraint:
-
-{{< copyable "sql" >}}
+次に、すべてのアップストリーム シャード テーブルに対して次の DDL 操作を実行し、UNIQUE 制約を持つ新しい列を追加します。
 
 ```sql
 ALTER TABLE `shard_db_*`.`shard_table_*` ADD COLUMN new_col INT UNIQUE;
 ```
 
-Because this DDL statement is not supported by TiDB, the migration task gets interrupted. Execute the `query-status` command, and you can see the following errors reported by the `shard_db_1`.`shard_table_1` table in MySQL instance 1 and the `shard_db_2`.`shard_table_1` table in MySQL instance 2:
+このDDL文はTiDBでサポートされていないため、移行タスクは中断されます。コマンド`query-status`を実行すると、MySQLインスタンス`shard_table_1` `shard_db_1` MySQLインスタンス2のテーブル`shard_db_2`で以下のエラー`shard_table_1`報告されます。
 
-```
-{
-    "Message": "cannot track DDL: ALTER TABLE `shard_db_1`.`shard_table_1` ADD COLUMN `new_col` INT UNIQUE KEY",
-    "RawCause": "[ddl:8200]unsupported add column 'new_col' constraint UNIQUE KEY when altering 'shard_db_1.shard_table_1'",
-}
-```
+    {
+        "Message": "cannot track DDL: ALTER TABLE `shard_db_1`.`shard_table_1` ADD COLUMN `new_col` INT UNIQUE KEY",
+        "RawCause": "[ddl:8200]unsupported add column 'new_col' constraint UNIQUE KEY when altering 'shard_db_1.shard_table_1'",
+    }
 
-```
-{
-    "Message": "cannot track DDL: ALTER TABLE `shard_db_2`.`shard_table_1` ADD COLUMN `new_col` INT UNIQUE KEY",
-    "RawCause": "[ddl:8200]unsupported add column 'new_col' constraint UNIQUE KEY when altering 'shard_db_2.shard_table_1'",
-}
-```
+<!---->
 
-You can replace this DDL statement with two equivalent DDL statements. The steps are as follows:
+    {
+        "Message": "cannot track DDL: ALTER TABLE `shard_db_2`.`shard_table_1` ADD COLUMN `new_col` INT UNIQUE KEY",
+        "RawCause": "[ddl:8200]unsupported add column 'new_col' constraint UNIQUE KEY when altering 'shard_db_2.shard_table_1'",
+    }
 
-1. Replace the wrong DDL statements respectively in MySQL instance 1 and MySQL instance 2 by the following commands:
+このDDL文を2つの同等のDDL文に置き換えることができます。手順は次のとおりです。
 
-    {{< copyable "" >}}
+1.  次のコマンドを使用して、MySQL インスタンス 1 と MySQL インスタンス 2 の間違った DDL ステートメントをそれぞれ置き換えます。
 
     ```bash
     » binlog replace test -s mysql-replica-01 "ALTER TABLE `shard_db_1`.`shard_table_1` ADD COLUMN `new_col` INT;ALTER TABLE `shard_db_1`.`shard_table_1` ADD UNIQUE(`new_col`)";
     ```
 
-    ```
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-01",
-                "worker": "worker1"
-            }
-        ]
-    }
-    ```
-
-    {{< copyable "" >}}
+        {
+            "result": true,
+            "msg": "",
+            "sources": [
+                {
+                    "result": true,
+                    "msg": "",
+                    "source": "mysql-replica-01",
+                    "worker": "worker1"
+                }
+            ]
+        }
 
     ```bash
     » binlog replace test -s mysql-replica-02 "ALTER TABLE `shard_db_2`.`shard_table_1` ADD COLUMN `new_col` INT;ALTER TABLE `shard_db_2`.`shard_table_1` ADD UNIQUE(`new_col`)";
     ```
 
-    ```
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-02",
-                "worker": "worker2"
-            }
-        ]
-    }
-    ```
+        {
+            "result": true,
+            "msg": "",
+            "sources": [
+                {
+                    "result": true,
+                    "msg": "",
+                    "source": "mysql-replica-02",
+                    "worker": "worker2"
+                }
+            ]
+        }
 
-2. Use `query-status <task-name>` to view the task status, and you can see the following errors reported by the `shard_db_1`.`shard_table_2` table in MySQL instance 1 and the `shard_db_2`.`shard_table_2` table in MySQL instance 2:
+2.  `query-status <task-name>`使用してタスクのステータス`shard_table_2` `shard_db_1` `shard_table_2` `shard_db_2`された次のエラーを確認できます。
 
-    ```
-    {
-        "Message": "detect inconsistent DDL sequence from source ... ddls: [ALTER TABLE `shard_db`.`tb` ADD COLUMN `new_col` INT UNIQUE KEY] source: `shard_db_1`.`shard_table_2`], right DDL sequence should be ..."
-    }
-    ```
+        {
+            "Message": "detect inconsistent DDL sequence from source ... ddls: [ALTER TABLE `shard_db`.`tb` ADD COLUMN `new_col` INT UNIQUE KEY] source: `shard_db_1`.`shard_table_2`], right DDL sequence should be ..."
+        }
 
-    ```
-    {
-        "Message": "detect inconsistent DDL sequence from source ... ddls: [ALTER TABLE `shard_db`.`tb` ADD COLUMN `new_col` INT UNIQUE KEY] source: `shard_db_2`.`shard_table_2`], right DDL sequence should be ..."
-    }
-    ```
+    <!---->
 
-3. Execute `handle-error <task-name> replace` again to replace the wrong DDL statements in MySQL instance 1 and 2:
+        {
+            "Message": "detect inconsistent DDL sequence from source ... ddls: [ALTER TABLE `shard_db`.`tb` ADD COLUMN `new_col` INT UNIQUE KEY] source: `shard_db_2`.`shard_table_2`], right DDL sequence should be ..."
+        }
 
-    {{< copyable "" >}}
+3.  `handle-error <task-name> replace`再度実行して、MySQL インスタンス 1 と 2 の間違った DDL ステートメントを置き換えます。
 
     ```bash
     » binlog replace test -s mysql-replica-01 "ALTER TABLE `shard_db_1`.`shard_table_2` ADD COLUMN `new_col` INT;ALTER TABLE `shard_db_1`.`shard_table_2` ADD UNIQUE(`new_col`)";
     ```
 
-    ```
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-01",
-                "worker": "worker1"
-            }
-        ]
-    }
-    ```
-
-    {{< copyable "" >}}
+        {
+            "result": true,
+            "msg": "",
+            "sources": [
+                {
+                    "result": true,
+                    "msg": "",
+                    "source": "mysql-replica-01",
+                    "worker": "worker1"
+                }
+            ]
+        }
 
     ```bash
     » binlog replace test -s mysql-replica-02 "ALTER TABLE `shard_db_2`.`shard_table_2` ADD COLUMN `new_col` INT;ALTER TABLE `shard_db_2`.`shard_table_2` ADD UNIQUE(`new_col`)";
     ```
 
-    ```
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-02",
-                "worker": "worker2"
-            }
-        ]
-    }
-    ```
+        {
+            "result": true,
+            "msg": "",
+            "sources": [
+                {
+                    "result": true,
+                    "msg": "",
+                    "source": "mysql-replica-02",
+                    "worker": "worker2"
+                }
+            ]
+        }
 
-4. Use `query-status <task-name>` to view the task status:
-
-    {{< copyable "" >}}
+4.  タスクのステータスを表示するには`query-status <task-name>`使用します。
 
     ```bash
     » query-status test
     ```
 
-    <details><summary> See the execution result.</summary>
+    <details><summary>実行結果を確認します。</summary>
 
-    ```
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "sourceStatus": {
-                    "source": "mysql-replica-01",
-                    "worker": "worker1",
-                    "result": null,
-                    "relayStatus": null
-                },
-                "subTaskStatus": [
-                    {
-                        "name": "test",
-                        "stage": "Running",
-                        "unit": "Sync",
+        {
+            "result": true,
+            "msg": "",
+            "sources": [
+                {
+                    "result": true,
+                    "msg": "",
+                    "sourceStatus": {
+                        "source": "mysql-replica-01",
+                        "worker": "worker1",
                         "result": null,
-                        "unresolvedDDLLockID": "",
-                        "sync": {
-                            "masterBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
-                            "masterBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-10",
-                            "syncerBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
-                            "syncerBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-4",
-                            "blockingDDLs": [
-                            ],
-                            "unresolvedGroups": [
-                            ],
-                            "unresolvedGroups": [
-                            ],
-                            "synced": true,
-                            "binlogType": "remote",
-                            "totalRows": "4",
-                            "totalRps": "0",
-                            "recentRps": "0"
+                        "relayStatus": null
+                    },
+                    "subTaskStatus": [
+                        {
+                            "name": "test",
+                            "stage": "Running",
+                            "unit": "Sync",
+                            "result": null,
+                            "unresolvedDDLLockID": "",
+                            "sync": {
+                                "masterBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
+                                "masterBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-10",
+                                "syncerBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
+                                "syncerBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-4",
+                                "blockingDDLs": [
+                                ],
+                                "unresolvedGroups": [
+                                ],
+                                "unresolvedGroups": [
+                                ],
+                                "synced": true,
+                                "binlogType": "remote",
+                                "totalRows": "4",
+                                "totalRps": "0",
+                                "recentRps": "0"
+                            }
                         }
-                    }
-                ]
-            },
-            {
-                "result": true,
-                "msg": "",
-                "sourceStatus": {
-                    "source": "mysql-replica-02",
-                    "worker": "worker2",
-                    "result": null,
-                    "relayStatus": null
+                    ]
                 },
-                "subTaskStatus": [
-                    {
-                        "name": "test",
-                        "stage": "Running",
-                        "unit": "Sync",
+                {
+                    "result": true,
+                    "msg": "",
+                    "sourceStatus": {
+                        "source": "mysql-replica-02",
+                        "worker": "worker2",
                         "result": null,
-                        "unresolvedDDLLockID": "",
-                        "sync": {
-                            "masterBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
-                            "masterBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-10",
-                            "syncerBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
-                            "syncerBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-4",
-                            "blockingDDLs": [
-                            ],
-                            "unresolvedGroups": [
-                            ],
-                            "unresolvedGroups": [
-                            ],
-                            "synced": try,
-                            "binlogType": "remote",
-                            "totalRows": "4",
-                            "totalRps": "0",
-                            "recentRps": "0"
+                        "relayStatus": null
+                    },
+                    "subTaskStatus": [
+                        {
+                            "name": "test",
+                            "stage": "Running",
+                            "unit": "Sync",
+                            "result": null,
+                            "unresolvedDDLLockID": "",
+                            "sync": {
+                                "masterBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
+                                "masterBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-10",
+                                "syncerBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
+                                "syncerBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-4",
+                                "blockingDDLs": [
+                                ],
+                                "unresolvedGroups": [
+                                ],
+                                "unresolvedGroups": [
+                                ],
+                                "synced": try,
+                                "binlogType": "remote",
+                                "totalRows": "4",
+                                "totalRps": "0",
+                                "recentRps": "0"
+                            }
                         }
-                    }
-                ]
-            }
-        ]
-    }
-    ```
+                    ]
+                }
+            ]
+        }
 
     </details>
 
-    You can see that the task runs normally with no error and all four wrong DDL statements are replaced.
+    タスクはエラーなしで正常に実行され、4 つの誤った DDL ステートメントがすべて置き換えられていることがわかります。
 
-### Other commands
+### その他のコマンド {#other-commands}
 
-For the usage of other commands of `binlog`, refer to the `binlog skip` and `binlog replace` examples above.
+`binlog`の他のコマンドの使用方法については、上記の`binlog skip`と`binlog replace`例を参照してください。

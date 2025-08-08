@@ -1,158 +1,154 @@
 ---
 title: TiDB Log Backup and PITR Architecture
-summary: TiDB log backup and PITR architecture is introduced using a Backup & Restore (BR) tool as an example. The architecture includes log backup process design, system components, and key concepts. The PITR process involves restoring full backup data and log backup data. Log backup generates files such as log data, metadata, and global checkpoint.
+summary: TiDBのログバックアップとPITRアーキテクチャを、バックアップ＆リストア（BR）ツールを例に紹介します。このアーキテクチャには、ログバックアッププロセスの設計、システムコンポーネント、主要な概念が含まれます。PITRプロセスでは、フルバックアップデータとログバックアップデータの復元が行われます。ログバックアップでは、ログデータ、メタデータ、グローバルチェックポイントなどのファイルが生成されます。
 ---
 
-# TiDB Log Backup and PITR Architecture
+# TiDB ログバックアップと PITRアーキテクチャ {#tidb-log-backup-and-pitr-architecture}
 
-This document introduces the architecture and process of TiDB log backup and point-in-time recovery (PITR) using a Backup & Restore (BR) tool as an example.
+このドキュメントでは、バックアップとリストア ( BR ) ツールを例として、TiDB ログ バックアップとポイントインタイム リカバリ (PITR) のアーキテクチャとプロセスについて説明します。
 
-## Architecture
+## アーキテクチャ {#architecture}
 
-The log backup and PITR architecture is as follows:
+ログ バックアップと PITR のアーキテクチャは次のとおりです。
 
 ![BR log backup and PITR architecture](/media/br/br-log-arch.png)
 
-## Process of log backup
+## ログバックアップのプロセス {#process-of-log-backup}
 
-The process of a cluster log backup is as follows:
+クラスター ログ バックアップのプロセスは次のとおりです。
 
 ![BR log backup process design](/media/br/br-log-backup-ts.png)
 
-System components and key concepts involved in the log backup process:
+ログ バックアップ プロセスに関係するシステム コンポーネントと主要な概念:
 
-* **local metadata**: indicates the metadata backed up by a single TiKV node, including local checkpoint ts, global checkpoint ts, and backup file information.
-* **local checkpoint ts** (in local metadata): indicates that all logs generated before local checkpoint ts in this TiKV node have been backed up to the target storage.
-* **global checkpoint ts**: indicates that all logs generated before global checkpoint ts in all TiKV nodes have been backed up to the target storage. TiDB Coordinator calculates this timestamp by collecting local checkpoint ts of all TiKV node and then reports it to PD.
-* **TiDB Coordinator**: a TiDB node is elected as the coordinator, which is responsible for collecting and calculating the progress of the entire log backup task (global checkpoint ts). This component is stateless in design, and after its failure, a new Coordinator is elected from the surviving TiDB nodes.
-* **TiKV log backup observer**: runs on each TiKV node in the TiDB cluster, which is responsible for backing up log data. If a TiKV node fails, backing up the data range on it will be taken by other TiKV nodes after region re-election, and these nodes will back up data of the failure range starting from global checkpoint ts.
+-   **ローカル メタデータ**: ローカル チェックポイント ts、グローバル チェックポイント ts、バックアップ ファイル情報など、単一の TiKV ノードによってバックアップされたメタデータを示します。
+-   **ローカル チェックポイント ts** (ローカル メタデータ内): この TiKV ノードのローカル チェックポイント ts より前に生成されたすべてのログがターゲットstorageにバックアップされていることを示します。
+-   **グローバルチェックポイント ts** : すべての TiKV ノードにおいて、グローバルチェックポイント ts より前に生成されたすべてのログがターゲットstorageにバックアップされたことを示します。TiDB コーディネーターは、すべての TiKV ノードのローカルチェックポイント ts を収集してこのタイムスタンプを計算し、PD に報告します。
+-   **TiDBコーディネーター**：TiDBノードがコーディネーターとして選出され、ログバックアップタスク全体（グローバルチェックポイントTS）の進捗状況を収集および計算する役割を担います。このコンポーネントはステートレス設計であり、障害発生時には、残りのTiDBノードから新しいコーディネーターが選出されます。
+-   **TiKVログバックアップオブザーバー**：TiDBクラスター内の各TiKVノードで実行され、ログデータのバックアップを担当します。TiKVノードに障害が発生した場合、そのノード上のデータ範囲のバックアップは、リージョンの再選出後に他のTiKVノードに引き継がれ、グローバルチェックポイントtsから始まる障害範囲のデータがバックアップされます。
 
-The complete backup process is as follows:
+完全なバックアッププロセスは次のとおりです。
 
-1. BR receives the `br log start` command.
+1.  BRは`br log start`コマンドを受信します。
 
-   * BR parses the checkpoint ts (the start time of log backup) and storage path of the backup task.
-   * **Register log backup task**: BR registers a log backup task in PD.
+    -   BR は、チェックポイント ts (ログ バックアップの開始時刻) とバックアップ タスクのstorageパスを解析します。
+    -   **ログ バックアップ タスクの登録**: BR はPD にログ バックアップ タスクを登録します。
 
-2. TiKV monitors the creation and update of the log backup task.
+2.  TiKV は、ログ バックアップ タスクの作成と更新を監視します。
 
-   * **Fetch log backup task**: The log backup observer of each TiKV node fetches the log backup task from PD and then backs up the log data in the specified range.
+    -   **ログ バックアップ タスクの取得**: 各 TiKV ノードのログ バックアップ オブザーバーは、PD からログ バックアップ タスクを取得し、指定された範囲のログ データをバックアップします。
 
-3. The log backup observer backs up the KV change logs continuously.
+3.  ログ バックアップ オブザーバーは、KV 変更ログを継続的にバックアップします。
 
-   * **Read kv change data**: reads KV change data and then saves the change log to [backup files in custom format](#log-backup-files).
-   * **Fetch global checkpoint ts**: fetches the global checkpoint ts from PD.
-   * **Generate local metadata**: generates the local metadata of the backup task, including local checkpoint ts, global checkpoint ts, and backup file information.
-   * **Upload log data & metadata**: uploads the backup files and local metadata to the target storage periodically.
-   * **Configure GC**: requests PD to prevent data that have not been backed up (greater than local checkpoint ts) from being recycled by the [TiDB GC mechanism](/garbage-collection-overview.md).
+    -   **KV 変更データの読み取り**: KV 変更データを読み取り、変更ログを[カスタム形式のバックアップファイル](#log-backup-files)に保存します。
+    -   **グローバル チェックポイント ts を取得**: PD からグローバル チェックポイント ts を取得します。
+    -   **ローカル メタデータの生成**: ローカル チェックポイント ts、グローバル チェックポイント ts、バックアップ ファイル情報など、バックアップ タスクのローカル メタデータを生成します。
+    -   **ログ データとメタデータのアップロード**: バックアップ ファイルとローカル メタデータを定期的にターゲットstorageにアップロードします。
+    -   **GC を構成する**: バックアップされていないデータ (ローカル チェックポイント ts より大きい) が[TiDB GCメカニズム](/garbage-collection-overview.md)によってリサイクルされるのを防ぐように PD に要求します。
 
-4. The TiDB Coordinator monitors the progress of the log backup task.
+4.  TiDB コーディネーターは、ログ バックアップ タスクの進行状況を監視します。
 
-   * **Watch backup progress**: gets the backup progress of each Region (Region checkpoint ts) by polling all TiKV nodes.
-   * **Report global checkpoint ts**: calculates the progress of the entire log backup task (global checkpoint ts) based on the Region checkpoint ts and then reports the global checkpoint ts to PD.
+    -   **バックアップの進行状況を監視する**: すべての TiKV ノードをポーリングして、各リージョン(リージョンチェックポイント ts) のバックアップの進行状況を取得します。
+    -   **グローバル チェックポイント ts を報告**:リージョンチェックポイント ts に基づいてログ バックアップ タスク全体 (グローバル チェックポイント ts) の進行状況を計算し、グローバル チェックポイント ts を PD に報告します。
 
-5. PD persists the status of the log backup task, and you can view it using `br log status`.
+5.  PD はログ バックアップ タスクのステータスを保持し、 `br log status`使用してそれを表示できます。
 
-## Process of PITR
+## PITRのプロセス {#process-of-pitr}
 
-The process of PITR is as follows:
+PITR のプロセスは次のとおりです。
 
 ![Point-in-time recovery process design](/media/br/pitr-ts.png)
 
-The complete PITR process is as follows:
+完全な PITR プロセスは次のとおりです。
 
-1. BR receives the `br restore point` command.
+1.  BRは`br restore point`コマンドを受信します。
 
-   * BR parses the full backup data address, log backup data address, and the point-in-time recovery time.
-   * Queries the restore object (database or table) in the backup data and checks whether the table to be restored exists and meets the restore requirements.
+    -   BR は、完全バックアップ データ アドレス、ログ バックアップ データ アドレス、およびポイントインタイム リカバリ時間を解析します。
+    -   バックアップ データ内の復元オブジェクト (データベースまたはテーブル) を照会し、復元するテーブルが存在し、復元要件を満たしているかどうかを確認します。
 
-2. BR restores the full backup data.
+2.  BR は完全なバックアップ データを復元します。
 
-   * Restores full backup data. For more details about the process of snapshot backup data restore, refer to [Restore snapshot backup data](/br/br-snapshot-architecture.md#process-of-restore).
+    -   完全バックアップデータを復元します。スナップショットバックアップデータの復元プロセスの詳細については、 [スナップショットバックアップデータを復元する](/br/br-snapshot-architecture.md#process-of-restore)を参照してください。
 
-3. BR restores the log backup data.
+3.  BR はログバックアップデータを復元します。
 
-   * **Read backup data**: reads the log backup data and calculates the log backup data that needs to be restored.
-   * **Fetch Region info**: fetches all Regions distributions by accessing PD.
-   * **Request TiKV to restore data**: creates a log restore request and sends it to the corresponding TiKV node. The log restore request contains the log backup data information to be restored.
+    -   **バックアップ データの読み取り**: ログ バックアップ データを読み取り、復元する必要があるログ バックアップ データを計算します。
+    -   **リージョン情報の取得**: PD にアクセスしてすべてのリージョン分布を取得します。
+    -   **TiKVにデータの復元を要求する**：ログ復元要求を作成し、対応するTiKVノードに送信します。ログ復元要求には、復元するログバックアップデータの情報が含まれます。
 
-4. TiKV accepts the restore request from BR and initiates a log restore worker.
+4.  TiKV はBRからの復元要求を受け入れ、ログ復元ワーカーを開始します。
 
-   * The log restore worker gets the log backup data that needs to be restored.
+    -   ログ復元ワーカーは、復元する必要があるログ バックアップ データを取得します。
 
-5. TiKV restores the log backup data.
+5.  TiKV はログ バックアップ データを復元します。
 
-   * **Download KVs**: the log restore worker downloads the corresponding backup data from the backup storage to a local directory according to the log restore request.
-   * **Rewrite KVs**: the log restore worker rewrites the KV data of the backup data according to the table ID of the restore cluster table, that is, replace the original table ID in the [Key-Value](/tidb-computing.md#mapping-table-data-to-key-value) with the new table ID. The restore worker also rewrites the index ID in the same way.
-   * **Apply KVs**: the log restore worker writes the processed KV data to the store (RocksDB) through the raft interface.
-   * **Report restore result**: the log restore worker returns the restore result to BR.
+    -   **KV のダウンロード**: ログ復元ワーカーは、ログ復元要求に従って、対応するバックアップ データをバックアップstorageからローカル ディレクトリにダウンロードします。
+    -   **KVの書き換え**：ログリストアワーカーは、リストアクラスタテーブルのテーブルIDに基づいて、バックアップデータのKVデータを書き換えます。つまり、 [キーバリュー](/tidb-computing.md#mapping-table-data-to-key-value)のテーブルIDを新しいテーブルIDに置き換えます。リストアワーカーは、インデックスIDも同様に書き換えます。
+    -   **KV の適用**: ログ復元ワーカーは、処理された KV データを raft インターフェイスを介してストア (RocksDB) に書き込みます。
+    -   **復元結果の報告**: ログ復元ワーカーは復元結果をBRに返します。
 
-6. BR receives the restore result from each TiKV node.
+6.  BR は各 TiKV ノードから復元結果を受信します。
 
-   * If some data fails to be restored due to `RegionNotFound` or `EpochNotMatch`, for example, a TiKV node is down, BR will retry the restore.
-   * If there is any data fails to be restored and cannot be retried, the restore task fails.
-   * After all data is restored, the restore task succeeds.
+    -   `RegionNotFound`または`EpochNotMatch`原因で一部のデータの復元に失敗した場合 (たとえば、TiKV ノードがダウンしている場合)、 BR は復元を再試行します。
+    -   復元に失敗し、再試行できないデータがある場合、復元タスクは失敗します。
+    -   すべてのデータが復元されると、復元タスクは成功します。
 
-## Log backup files
+## ログバックアップファイル {#log-backup-files}
 
-Log backup generates the following types of files:
+ログ バックアップでは次の種類のファイルが生成されます。
 
-- `{resolved_ts}-{uuid}.meta` file: is generated every time each TiKV node uploads the log backup data and stores metadata of all log backup data files uploaded this time. The `{resolved_ts}` is the resolved timestamp of the TiKV node. The latest `resolved_ts` of the log backup task is the minimum resolved timestamp among all TiKV nodes. The `{uuid}` is generated randomly when the file is created.
-- `{store_id}.ts` file: is updated with global checkpoint ts every time each TiKV node uploads the log backup data. The `{store_id}` is the store ID of the TiKV node.
-- `{min_ts}-{uuid}.log` file: stores the KV change log data of the backup task. The `{min_ts}` is the minimum TSO timestamp of the KV change log data in the file, and the `{uuid}` is generated randomly when the file is created.
-- `v1_stream_truncate_safepoint.txt` file: stores the timestamp corresponding to the latest backup data in storage that deleted by `br log truncate`.
+-   `{resolved_ts}-{uuid}.meta`ファイル: 各 TiKV ノードがログバックアップデータをアップロードするたびに生成され、今回アップロードされたすべてのログバックアップデータファイルのメタデータが格納されます。2 `{resolved_ts}` TiKV ノードの解決済みタイムスタンプです。ログバックアップタスクの最新の`resolved_ts`すべての TiKV ノードの中で最小の解決済みタイムスタンプです。6 `{uuid}`ファイル作成時にランダムに生成されます。
+-   `{store_id}.ts`ファイル: 各 TiKV ノードがログバックアップデータをアップロードするたびに、グローバルチェックポイント ts で更新されます。2 `{store_id}` TiKV ノードのストア ID です。
+-   `{min_ts}-{uuid}.log`ファイル: バックアップタスクの KV 変更ログデータを保存します。2 `{min_ts}`ファイル内の KV 変更ログデータの最小 TSO タイムスタンプで、 `{uuid}`ファイル作成時にランダムに生成されます。
+-   `v1_stream_truncate_safepoint.txt`ファイル: `br log truncate`によって削除されたstorage内の最新のバックアップ データに対応するタイムスタンプを保存します。
 
-### Structure of backup files
+### バックアップファイルの構造 {#structure-of-backup-files}
 
-```
-.
-├── v1
-│   ├── backupmeta
-│   │   ├── ...
-│   │   └── {resolved_ts}-{uuid}.meta
-│   ├── global_checkpoint
-│   │   └── {store_id}.ts
-│   └── {date}
-│       └── {hour}
-│           └── {store_id}
-│               ├── ...
-│               └── {min_ts}-{uuid}.log
-└── v1_stream_truncate_safepoint.txt
-```
+    .
+    ├── v1
+    │   ├── backupmeta
+    │   │   ├── ...
+    │   │   └── {resolved_ts}-{uuid}.meta
+    │   ├── global_checkpoint
+    │   │   └── {store_id}.ts
+    │   └── {date}
+    │       └── {hour}
+    │           └── {store_id}
+    │               ├── ...
+    │               └── {min_ts}-{uuid}.log
+    └── v1_stream_truncate_safepoint.txt
 
-Explanation of the backup file directory structure:
+バックアップ ファイルのディレクトリ構造の説明:
 
-- `backupmeta`: stores backup metadata. The `resolved_ts` in the filename indicates the backup progress, meaning that data before this TSO has been fully backed up. However, note that this TSO only reflects the progress of certain shards.
-- `global_checkpoint`: represents the global backup progress. It records the latest point in time to which data can be restored using `br restore point`.
-- `{date}/{hour}`: stores backup data for the corresponding date and hour. When cleaning up storage, always use `br log truncate` instead of manually deleting data. This is because the metadata references the data in this directory, and manual deletion might lead to restore failures or data inconsistencies after restore.
+-   `backupmeta` : バックアップメタデータを保存します。ファイル名の`resolved_ts`バックアップの進行状況を示し、このTSO以前のデータが完全にバックアップされていることを意味します。ただし、このTSOは特定のシャードの進行状況のみを反映することに注意してください。
+-   `global_checkpoint` : グローバルバックアップの進行状況を表します。2 `br restore point`使用してデータを復元できる最新の時点を記録します。
+-   `{date}/{hour}` : 対応する日時のバックアップデータを保存します。storageをクリーンアップする際は、手動でデータを削除するのではなく、必ず`br log truncate`使用してください。メタデータはこのディレクトリ内のデータを参照しており、手動で削除すると復元が失敗したり、復元後にデータの不整合が発生したりする可能性があるためです。
 
-The following is an example:
+次に例を示します。
 
-```
-.
-├── v1
-│   ├── backupmeta
-│   │   ├── ...
-│   │   ├── 435213818858112001-e2569bda-a75a-4411-88de-f469b49d6256.meta
-│   │   ├── 435214043785779202-1780f291-3b8a-455e-a31d-8a1302c43ead.meta
-│   │   └── 435214443785779202-224f1408-fff5-445f-8e41-ca4fcfbd2a67.meta
-│   ├── global_checkpoint
-│   │   ├── 1.ts
-│   │   ├── 2.ts
-│   │   └── 3.ts
-│   └── 20220811
-│       └── 03
-│           ├── 1
-│           │   ├── ...
-│           │   ├── 435213866703257604-60fcbdb6-8f55-4098-b3e7-2ce604dafe54.log
-│           │   └── 435214023989657606-72ce65ff-1fa8-4705-9fd9-cb4a1e803a56.log
-│           ├── 2
-│           │   ├── ...
-│           │   ├── 435214102632857605-11deba64-beff-4414-bc9c-7a161b6fb22c.log
-│           │   └── 435214417205657604-e6980303-cbaa-4629-a863-1e745d7b8aed.log
-│           └── 3
-│               ├── ...
-│               ├── 435214495848857605-7bf65e92-8c43-427e-b81e-f0050bd40be0.log
-│               └── 435214574492057604-80d3b15e-3d9f-4b0c-b133-87ed3f6b2697.log
-└── v1_stream_truncate_safepoint.txt
-```
+    .
+    ├── v1
+    │   ├── backupmeta
+    │   │   ├── ...
+    │   │   ├── 435213818858112001-e2569bda-a75a-4411-88de-f469b49d6256.meta
+    │   │   ├── 435214043785779202-1780f291-3b8a-455e-a31d-8a1302c43ead.meta
+    │   │   └── 435214443785779202-224f1408-fff5-445f-8e41-ca4fcfbd2a67.meta
+    │   ├── global_checkpoint
+    │   │   ├── 1.ts
+    │   │   ├── 2.ts
+    │   │   └── 3.ts
+    │   └── 20220811
+    │       └── 03
+    │           ├── 1
+    │           │   ├── ...
+    │           │   ├── 435213866703257604-60fcbdb6-8f55-4098-b3e7-2ce604dafe54.log
+    │           │   └── 435214023989657606-72ce65ff-1fa8-4705-9fd9-cb4a1e803a56.log
+    │           ├── 2
+    │           │   ├── ...
+    │           │   ├── 435214102632857605-11deba64-beff-4414-bc9c-7a161b6fb22c.log
+    │           │   └── 435214417205657604-e6980303-cbaa-4629-a863-1e745d7b8aed.log
+    │           └── 3
+    │               ├── ...
+    │               ├── 435214495848857605-7bf65e92-8c43-427e-b81e-f0050bd40be0.log
+    │               └── 435214574492057604-80d3b15e-3d9f-4b0c-b133-87ed3f6b2697.log
+    └── v1_stream_truncate_safepoint.txt

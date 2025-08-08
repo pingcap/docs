@@ -1,51 +1,51 @@
 ---
 title: ticloud serverless export download
-summary: The reference of `ticloud serverless export download`.
+summary: ticloud serverless export download` のリファレンス。
 ---
 
-# ticloud serverless export download
+# ticloud サーバーレスエクスポートのダウンロード {#ticloud-serverless-export-download}
 
-Download the exported data from a {{{ .starter }}} cluster to your local storage:
+TiDB Cloud Serverless クラスターからエクスポートされたデータをローカルstorageにダウンロードします。
 
 ```shell
 ticloud serverless export download [flags]
 ```
 
-## Examples
+## 例 {#examples}
 
-Download the exported data in interactive mode:
+エクスポートされたデータをインタラクティブ モードでダウンロードします。
 
 ```shell
 ticloud serverless export download
 ```
 
-Download the exported data in non-interactive mode:
+エクスポートされたデータを非対話型モードでダウンロードします。
 
 ```shell
 ticloud serverless export download -c <cluster-id> -e <export-id>
 ```
 
-## Flags
+## 旗 {#flags}
 
-In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLIプロンプトに従って入力するだけです。
 
-| Flag                    | Description                                                                                                                       | Required | Note                                                 |
-|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | Specifies the ID of the cluster.                                                                                                  | Yes      | Only works in non-interactive mode.                  |
-| -e, --export-id string  | Specifies the ID of the export task.                                                                                              | Yes      | Only works in non-interactive mode.                  |
-| --output-path string    | Specifies the destination path for saving the downloaded data. If not specified, the data is downloaded to the current directory. | No       | Only works in non-interactive mode.                  |
-| --concurrency int       | Specifies the download concurrency. The default value is `3`.                                                                                                 | No       | Works in both non-interactive and interactive modes. |
-| --force                 | Downloads the exported data without confirmation.                                                                                 | No       | Works in both non-interactive and interactive modes. |
-| -h, --help              | Shows help information for this command.                                                                                          | No       | Works in both non-interactive and interactive modes. |
+| フラグ                  | 説明                                                         | 必須  | 注記                       |
+| -------------------- | ---------------------------------------------------------- | --- | ------------------------ |
+| -c, --cluster-id 文字列 | クラスターの ID を指定します。                                          | はい  | 非対話型モードでのみ動作します。         |
+| -e, --export-id 文字列  | エクスポート タスクの ID を指定します。                                     | はい  | 非対話型モードでのみ動作します。         |
+| --出力パス文字列            | ダウンロードしたデータの保存先パスを指定します。指定しない場合は、データは現在のディレクトリにダウンロードされます。 | いいえ | 非対話型モードでのみ動作します。         |
+| --同時実行性 int          | ダウンロードの同時実行数を指定します。デフォルト値は`3`です。                           | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
+|  --force             | 確認なしでエクスポートされたデータをダウンロードします。                               | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
+| -h, --help           | このコマンドのヘルプ情報を表示します。                                        | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag                 | Description                                                                                          | Required | Note                                                                                                             |
-|----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
+| フラグ               | 説明                                                                             | 必須  | 注記                                                      |
+| ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------- |
+| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
+| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| -D, --debug       | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、皆様からの貢献も歓迎いたします。

@@ -1,73 +1,67 @@
 ---
 title: JSON Utility Functions
-summary: Learn about JSON utility functions.
+summary: JSON ユーティリティ関数について学習します。
 ---
 
-# JSON Utility Functions
+# JSONユーティリティ関数 {#json-utility-functions}
 
-This document describes JSON utility functions.
+このドキュメントでは、JSON ユーティリティ関数について説明します。
 
-## [JSON_PRETTY()](https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-pretty)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-pretty">JSON_PRETTY()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-utility-functions-html-function-json-pretty-json-pretty-a}
 
-The `JSON_PRETTY(json_doc)` function does pretty formatting of a JSON document.
+`JSON_PRETTY(json_doc)`関数は JSON ドキュメントのフォーマットをきれいにします。
 
 ```sql
 SELECT JSON_PRETTY('{"person":{"name":{"first":"John","last":"Doe"},"age":23}}')\G
 ```
 
-```
-*************************** 1. row ***************************
-JSON_PRETTY('{"person":{"name":{"first":"John","last":"Doe"},"age":23}}'): {
-  "person": {
-    "age": 23,
-    "name": {
-      "first": "John",
-      "last": "Doe"
+    *************************** 1. row ***************************
+    JSON_PRETTY('{"person":{"name":{"first":"John","last":"Doe"},"age":23}}'): {
+      "person": {
+        "age": 23,
+        "name": {
+          "first": "John",
+          "last": "Doe"
+        }
+      }
     }
-  }
-}
-1 row in set (0.00 sec)
-```
+    1 row in set (0.00 sec)
 
-## [JSON_STORAGE_FREE()](https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-storage-free)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-storage-free">JSON_STORAGE_FREE()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-utility-functions-html-function-json-storage-free-json-storage-free-a}
 
-The `JSON_STORAGE_FREE(json_doc)` function returns how much storage space is freed in the binary representation of the JSON value after it is updated in place. 
+`JSON_STORAGE_FREE(json_doc)`関数は、JSON 値がその場で更新された後にバイナリ表現で解放されるstorage容量を返します。
 
-> **Note:**
+> **注記：**
 >
-> Because TiDB has a different storage architecture from MySQL, this function always returns `0` for a valid JSON value, and it is implemented for [compatibility with MySQL 8.0](/mysql-compatibility.md). Note that TiDB does not do in-place updates. For more information, see [RocksDB space usage](/storage-engine/rocksdb-overview.md#rocksdb-space-usage).
+> TiDBはMySQLとは異なるstorageアーキテクチャを採用しているため、この関数は有効なJSON値に対して常に`0`返します。これは[MySQL 8.0との互換性](/mysql-compatibility.md)で実装されています。TiDBはインプレース更新を行わないことに注意してください。詳細については[RocksDB のスペース使用量](/storage-engine/rocksdb-overview.md#rocksdb-space-usage)参照してください。
 
 ```sql
 SELECT JSON_STORAGE_FREE('{}');
 ```
 
-```
-+-------------------------+
-| JSON_STORAGE_FREE('{}') |
-+-------------------------+
-|                       0 |
-+-------------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------------+
+    | JSON_STORAGE_FREE('{}') |
+    +-------------------------+
+    |                       0 |
+    +-------------------------+
+    1 row in set (0.00 sec)
 
-## [JSON_STORAGE_SIZE()](https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-storage-size)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-storage-size">JSON_ストレージサイズ()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-utility-functions-html-function-json-storage-size-json-storage-size-a}
 
-The `JSON_STORAGE_SIZE(json_doc)` function returns an approximate size of bytes required to store the JSON value. Because the size does not account for TiKV using compression, the output of this function is not strictly compatible with MySQL.
+`JSON_STORAGE_SIZE(json_doc)`関数は、JSON 値を格納するために必要なバイト数の概算値を返します。このサイズは TiKV 圧縮を考慮していないため、この関数の出力は MySQL と厳密には互換性がありません。
 
 ```sql
 SELECT JSON_STORAGE_SIZE('{}');
 ```
 
-```
-+-------------------------+
-| JSON_STORAGE_SIZE('{}') |
-+-------------------------+
-|                       9 |
-+-------------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------------+
+    | JSON_STORAGE_SIZE('{}') |
+    +-------------------------+
+    |                       9 |
+    +-------------------------+
+    1 row in set (0.00 sec)
 
-## See also
+## 参照 {#see-also}
 
-- [JSON Functions Overview](/functions-and-operators/json-functions.md)
-- [JSON Data Type](/data-type-json.md)
+-   [JSON関数の概要](/functions-and-operators/json-functions.md)
+-   [JSONデータ型](/data-type-json.md)

@@ -1,99 +1,99 @@
 ---
 title: Telemetry
-summary: Learn the telemetry feature, how to disable the feature and view its status.
+summary: テレメトリ機能、その機能を無効化する方法、およびそのステータスを表示する方法について学習します。
 ---
 
-# Telemetry
+# テレメトリー {#telemetry}
 
-When the telemetry feature is enabled, TiUP and TiSpark collect usage information and share the information with PingCAP to help understand how to improve the product.
+テレメトリ機能を有効にすると、 TiUPと TiSpark は使用状況情報を収集し、その情報を PingCAP と共有して、製品の改善方法の理解に役立てます。
 
-> **Note:**
+> **注記：**
 >
-> - Starting from TiUP v1.11.3, the telemetry feature in TiUP is disabled by default, which means TiUP usage information is not collected by default. If you upgrade from a TiUP version earlier than v1.11.3 to v1.11.3 or a later version, the telemetry feature keeps the same status as before the upgrade.
-> - Starting from TiSpark v3.0.3, the telemetry feature in TiSpark is disabled by default, which means TiSpark usage information is not collected by default.
-> - Starting from v8.1.0, the telemetry feature in TiDB and TiDB Dashboard is removed.
+> -   TiUP v1.11.3以降、 TiUPのテレメトリ機能はデフォルトで無効化されており、 TiUPの使用状況情報はデフォルトで収集されません。v1.11.3より前のTiUPバージョンからv1.11.3以降のバージョンにアップグレードした場合、テレメトリ機能はアップグレード前と同じ状態を維持します。
+> -   TiSpark v3.0.3 以降、TiSpark のテレメトリ機能はデフォルトで無効になっており、TiSpark の使用状況情報はデフォルトでは収集されません。
+> -   v8.1.0 以降、TiDB および TiDB ダッシュボードのテレメトリ機能は削除されます。
 
-## What is shared when telemetry is enabled?
+## テレメトリを有効にすると何が共有されますか? {#what-is-shared-when-telemetry-is-enabled}
 
-The following sections describe the shared usage information in detail for TiUP and TiSpark. The usage details that get shared might change over time. These changes (if any) will be announced in [release notes](/releases/release-notes.md).
+以下のセクションでは、 TiUPとTiSparkの共有される使用状況情報について詳しく説明します。共有される使用状況情報は、今後変更される可能性があります。変更があった場合は、 [リリースノート](/releases/release-notes.md)でお知らせします。
 
-> **Note:**
+> **注記：**
 >
-> In **ALL** cases, user data stored in the TiDB cluster will **NOT** be shared. You can also refer to [PingCAP Privacy Policy](https://pingcap.com/privacy-policy).
+> **いずれの**場合も、TiDBクラスタに保存されたユーザーデータは共有され**ません**。5も参照してください[PingCAPプライバシーポリシー](https://pingcap.com/privacy-policy)
 
-### TiUP
+### TiUP {#tiup}
 
-When the telemetry collection feature is enabled in TiUP, usage details of TiUP will be shared, including (but not limited to):
+TiUPでテレメトリ収集機能が有効になっている場合、次のような (ただしこれらに限定されない) TiUPの使用状況の詳細が共有されます。
 
-- A randomly generated telemetry ID.
-- Execution status of TiUP commands, such as whether the execution is successful and the execution duration.
-- Deployment characteristics, such as the size of hardware, TiDB components versions, and deployment configuration names that have been modified.
+-   ランダムに生成されたテレメトリ ID。
+-   実行が成功したかどうかや実行時間などのTiUPコマンドの実行ステータス。
+-   ハードウェアのサイズ、TiDB コンポーネントのバージョン、変更されたデプロイメント構成名などのデプロイメント特性。
 
-To view the full content of the usage information shared to PingCAP, set the `TIUP_CLUSTER_DEBUG=enable` environment variable when executing the TiUP command. For example:
+PingCAPに共有される使用状況情報の全内容を表示するには、 TiUPコマンド実行時に環境変数`TIUP_CLUSTER_DEBUG=enable`設定します。例：
 
 ```shell
 TIUP_CLUSTER_DEBUG=enable tiup cluster list
 ```
 
-### TiSpark
+### ティスパーク {#tispark}
 
-> **Note:**
+> **注記：**
 >
-> Starting from v3.0.3, the telemetry collection is disabled by default in TiSpark, and usage information is not collected and shared with PingCAP.
+> v3.0.3 以降、TiSpark ではテレメトリ収集がデフォルトで無効になっており、使用状況情報は収集されず、PingCAP と共有されません。
 
-When the telemetry collection feature is enabled for TiSpark, the Spark module will share the usage details of TiSpark, including (but not limited to):
+TiSpark のテレメトリ収集機能が有効になっている場合、Spark モジュールは次のようなもの (ただしこれに限定されません) を含む TiSpark の使用状況の詳細を共有します。
 
-- A randomly generated telemetry ID.
-- Some configuration information of TiSpark, such as the read engine and whether streaming read is enabled.
-- Cluster deployment information, such as the machine hardware information, OS information, and component version number of the node where TiSpark is located.
+-   ランダムに生成されたテレメトリ ID。
+-   読み取りエンジンやストリーミング読み取りが有効かどうかなど、TiSpark の一部の構成情報。
+-   TiSpark が配置されているノードのマシン ハードウェア情報、OS 情報、コンポーネントバージョン番号などのクラスタ展開情報。
 
-You can view TiSpark usage information that is collected in Spark logs. You can set the Spark log level to INFO or lower, for example:
+Sparkログに収集されたTiSparkの使用状況情報を表示できます。SparkログレベルをINFO以下に設定できます。例：
 
 ```shell
 grep "Telemetry report" {spark.log} | tail -n 1
 ```
 
-## Enable telemetry
+## テレメトリを有効にする {#enable-telemetry}
 
-### Enable TiUP telemetry
+### TiUPテレメトリを有効にする {#enable-tiup-telemetry}
 
-To enable the TiUP telemetry collection, execute the following command:
+TiUPテレメトリ収集を有効にするには、次のコマンドを実行します。
 
 ```shell
 tiup telemetry enable
 ```
 
-### Enable TiSpark telemetry
+### TiSparkテレメトリを有効にする {#enable-tispark-telemetry}
 
-To enable the TiSpark telemetry collection, configure `spark.tispark.telemetry.enable = true` in the TiSpark configuration file.
+TiSpark テレメトリ収集を有効にするには、TiSpark 構成ファイルで`spark.tispark.telemetry.enable = true`構成します。
 
-## Disable telemetry
+## テレメトリを無効にする {#disable-telemetry}
 
-### Disable TiUP telemetry
+### TiUPテレメトリを無効にする {#disable-tiup-telemetry}
 
-To disable the TiUP telemetry collection, execute the following command:
+TiUPテレメトリ収集を無効にするには、次のコマンドを実行します。
 
 ```shell
 tiup telemetry disable
 ```
 
-### Disable TiSpark telemetry
+### TiSparkテレメトリを無効にする {#disable-tispark-telemetry}
 
-To disable the TiSpark telemetry collection, configure `spark.tispark.telemetry.enable = false` in the TiSpark configuration file.
+TiSpark テレメトリ収集を無効にするには、TiSpark 構成ファイルで`spark.tispark.telemetry.enable = false`構成します。
 
-## Check telemetry status
+## テレメトリステータスを確認する {#check-telemetry-status}
 
-For TiUP telemetry, execute the following command to check the telemetry status:
+TiUPテレメトリの場合、次のコマンドを実行してテレメトリのステータスを確認します。
 
 ```shell
 tiup telemetry status
 ```
 
-## Compliance
+## コンプライアンス {#compliance}
 
-To meet compliance requirements in different countries or regions, the usage information is sent to servers located in different countries according to the IP address of the sender machine:
+さまざまな国や地域のコンプライアンス要件を満たすために、使用情報は送信元マシンの IP アドレスに応じてさまざまな国にあるサーバーに送信されます。
 
-- For IP addresses from the Chinese mainland, usage information is sent to and stored on cloud servers in the Chinese mainland.
-- For IP addresses from outside of the Chinese mainland, usage information is sent to and stored on cloud servers in the US.
+-   中国本土の IP アドレスの場合、使用情報は中国本土のクラウド サーバーに送信され、保存されます。
+-   中国本土以外の IP アドレスの場合、使用情報は米国のクラウド サーバーに送信され、保存されます。
 
-See [PingCAP Privacy Policy](https://www.pingcap.com/privacy-policy/) for details.
+詳細は[PingCAPプライバシーポリシー](https://www.pingcap.com/privacy-policy/)参照。

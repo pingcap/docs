@@ -1,15 +1,15 @@
 ---
 title: DROP [GLOBAL|SESSION] BINDING
-summary: Use of DROP BINDING in TiDB database.
+summary: TiDB データベースでの DROP BINDING の使用。
 ---
 
-# DROP [GLOBAL|SESSION] BINDING
+# DROP [グローバル|セッション] バインディング {#drop-global-session-binding}
 
-This statement removes a binding from a specific SQL statement. Bindings can be used to inject a hint into a statement without requiring changes to the underlying query.
+この文は、特定のSQL文からバインディングを削除します。バインディングを使用すると、基になるクエリを変更することなく、文にヒントを挿入できます。
 
-A `BINDING` can be on either a `GLOBAL` or `SESSION` basis. The default is `SESSION`.
+`BINDING` `GLOBAL`または`SESSION`基準で表されます。デフォルトは`SESSION`です。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 DropBindingStmt ::=
@@ -29,18 +29,16 @@ StringLiteralOrUserVariable ::=
     ( stringLiteral | UserVariable )
 ```
 
-## Examples
+## 例 {#examples}
 
-You can remove a binding according to a SQL statement or SQL Digest.
+SQL ステートメントまたは SQL ダイジェストに従ってバインドを削除できます。
 
-When you remove a binding according to SQL Digest, you need to specify the corresponding SQL Digest:
+SQL ダイジェストに従ってバインドを削除する場合は、対応する SQL ダイジェストを指定する必要があります。
 
-- You can use either the string literal or user variable of the string type to specify the Plan Digest.
-- You can specify multiple string values, and include multiple digests in each string. Note that the strings or digests need to be separated by commas.
+-   プラン ダイジェストを指定するには、文字列リテラルまたは文字列型のユーザー変数のいずれかを使用できます。
+-   複数の文字列値を指定し、各文字列に複数のダイジェストを含めることができます。文字列またはダイジェストはカンマで区切る必要があることに注意してください。
 
-The following example shows how to remove a binding according to a SQL statement.
-
-{{< copyable "sql" >}}
+次の例は、SQL ステートメントに従ってバインドを削除する方法を示しています。
 
 ```sql
 mysql> CREATE TABLE t1 (
@@ -145,7 +143,7 @@ mysql> SHOW SESSION BINDINGS\G
 Empty set (0.00 sec)
 ```
 
-The following example shows how to remove a binding according to SQL Digest.
+次の例は、SQL ダイジェストに従ってバインドを削除する方法を示しています。
 
 ```sql
 CREATE TABLE t1(a INT, b INT, c INT, INDEX ia(a));
@@ -156,14 +154,14 @@ CREATE GLOBAL BINDING FOR SELECT * FROM t1 JOIN t2 ON t1.b = t2.a USING SELECT /
 SHOW GLOBAL BINDINGS;
 ```
 
-Method 1:
+方法1:
 
 ```sql
 DROP GLOBAL BINDING FOR SQL DIGEST '31026623c8f22264fe0dfc26f29c69c5c457d6b85960c578ebcf17a967ed7893', '0f38b2e769927ae37981c66f0988c6299b602e03f029e38aa071e656fc321593', '3c8dfc451b0e36afd904cefca5137e68fb051f02964e1958ed60afdadc25f57e';
 SHOW GLOBAL BINDINGS;
 ```
 
-Method 2:
+方法2:
 
 ```sql
 SET @digests='31026623c8f22264fe0dfc26f29c69c5c457d6b85960c578ebcf17a967ed7893, 0f38b2e769927ae37981c66f0988c6299b602e03f029e38aa071e656fc321593, 3c8dfc451b0e36afd904cefca5137e68fb051f02964e1958ed60afdadc25f57e';
@@ -204,14 +202,14 @@ Query OK, 3 rows affected (0.019 sec)
 Empty set (0.002 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [CREATE [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-create-binding.md)
-* [SHOW [GLOBAL|SESSION] BINDINGS](/sql-statements/sql-statement-show-bindings.md)
-* [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
-* [Optimizer Hints](/optimizer-hints.md)
-* [SQL Plan Management](/sql-plan-management.md)
+-   [[グローバル|セッション]バインディングの作成](/sql-statements/sql-statement-create-binding.md)
+-   [[グローバル|セッション]バインディングを表示](/sql-statements/sql-statement-show-bindings.md)
+-   [テーブルを分析する](/sql-statements/sql-statement-analyze-table.md)
+-   [オプティマイザヒント](/optimizer-hints.md)
+-   [SQLプラン管理](/sql-plan-management.md)

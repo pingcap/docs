@@ -1,35 +1,35 @@
 ---
 title: Credits
-summary: Learn about the list and roles of contributors to the TiDB community.
+summary: TiDB コミュニティへの貢献者のリストと役割について学びます。
 ---
 
-# Credits
+# クレジット {#credits}
 
-Each contributor has played an important role in promoting the robust development of TiDB. We sincerely appreciate all contributors who have submitted code, written and translated documents for TiDB.
+貢献者の皆様は、TiDBの堅実な開発を促進する上で重要な役割を果たしてきました。TiDBのコード、ドキュメントの執筆、翻訳にご協力いただいたすべての貢献者に心から感謝申し上げます。
 
-## TiDB developers
+## TiDB開発者 {#tidb-developers}
 
-TiDB developers contribute to new feature development, performance improvement, stability guarantee, and bug fixes. The following is the list of contributors in TiDB related repos:
+TiDB開発者は、新機能の開発、パフォーマンスの向上、安定性の保証、バグ修正に貢献しています。TiDB関連リポジトリの貢献者リストは次のとおりです。
 
-- [pingcap/tidb](https://github.com/pingcap/tidb/graphs/contributors)
-- [tikv/tikv](https://github.com/tikv/tikv/graphs/contributors)
-- [tikv/pd](https://github.com/tikv/pd/graphs/contributors)
-- [pingcap/tiflash](https://github.com/pingcap/tiflash/graphs/contributors)
-- [pingcap/tidb-operator](https://github.com/pingcap/tidb-operator/graphs/contributors)
-- [pingcap/tiup](https://github.com/pingcap/tiup/graphs/contributors)
-- [pingcap/tidb-dashboard](https://github.com/pingcap/tidb-dashboard/graphs/contributors)
-- [pingcap/tiflow](https://github.com/pingcap/tiflow/graphs/contributors)
-- [pingcap/tidb-tools](https://github.com/pingcap/tidb-tools/graphs/contributors)
-- [pingcap/tispark](https://github.com/pingcap/tispark/graphs/contributors)
-- [tikv/client-java](https://github.com/tikv/client-java/graphs/contributors)
-- [tidb-incubator/TiBigData](https://github.com/tidb-incubator/TiBigData/graphs/contributors)
-- [ti-community-infra](https://github.com/orgs/ti-community-infra/people)
+-   [pingcap/tidb](https://github.com/pingcap/tidb/graphs/contributors)
+-   [ティックブ/ティックブ](https://github.com/tikv/tikv/graphs/contributors)
+-   [tikv/pd](https://github.com/tikv/pd/graphs/contributors)
+-   [pingcap/tiflash](https://github.com/pingcap/tiflash/graphs/contributors)
+-   [pingcap/tidbオペレーター](https://github.com/pingcap/tidb-operator/graphs/contributors)
+-   [pingcap/tiup](https://github.com/pingcap/tiup/graphs/contributors)
+-   [pingcap/tidb-ダッシュボード](https://github.com/pingcap/tidb-dashboard/graphs/contributors)
+-   [ピングキャップ/ティフロー](https://github.com/pingcap/tiflow/graphs/contributors)
+-   [pingcap/tidb-ツール](https://github.com/pingcap/tidb-tools/graphs/contributors)
+-   [ピングキャップ/ティスパーク](https://github.com/pingcap/tispark/graphs/contributors)
+-   [tikv/クライアント-java](https://github.com/tikv/client-java/graphs/contributors)
+-   [tidbインキュベーター/TiBigData](https://github.com/tidb-incubator/TiBigData/graphs/contributors)
+-   [ti-コミュニティ-インフラ](https://github.com/orgs/ti-community-infra/people)
 
-## Writers and translators for TiDB documentation
+## TiDBドキュメントの作成者と翻訳者 {#writers-and-translators-for-tidb-documentation}
 
-Writers and translators write and translate documents for TiDB and the related projects. The following is the list of contributors in TiDB documentation related repos:
+ライターと翻訳者は、TiDBおよび関連プロジェクトのドキュメントの作成と翻訳を担当しています。TiDBドキュメント関連リポジトリへの貢献者リストは以下のとおりです。
 
-- [pingcap/docs-cn](https://github.com/pingcap/docs-cn/graphs/contributors)
-- [pingcap/docs](https://github.com/pingcap/docs/graphs/contributors)
-- [pingcap/docs-tidb-operator](https://github.com/pingcap/docs-tidb-operator/graphs/contributors)
-- [tikv/website](https://github.com/tikv/website/graphs/contributors)
+-   [pingcap/docs-cn](https://github.com/pingcap/docs-cn/graphs/contributors)
+-   [pingcap/ドキュメント](https://github.com/pingcap/docs/graphs/contributors)
+-   [pingcap/docs-tidb-operator](https://github.com/pingcap/docs-tidb-operator/graphs/contributors)
+-   [tikv/ウェブサイト](https://github.com/tikv/website/graphs/contributors)

@@ -1,159 +1,159 @@
 ---
-title: Back Up and Restore {{{ .starter }}} Data
-summary: Learn how to back up and restore your {{{ .starter }}} cluster.
+title: Back Up and Restore TiDB Cloud Serverless Data
+summary: TiDB Cloud Serverless クラスターをバックアップおよび復元する方法を学びます。
 aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# Back Up and Restore {{{ .starter }}} Data
+# TiDB Cloudサーバーレスデータのバックアップと復元 {#back-up-and-restore-tidb-cloud-serverless-data}
 
-This document describes how to back up and restore your {{{ .starter }}} cluster data on TiDB Cloud.
+このドキュメントでは、TiDB Cloud上のTiDB Cloud Serverless クラスター データをバックアップおよび復元する方法について説明します。
 
-> **Tip:**
+> **ヒント：**
 >
-> To learn how to back up and restore TiDB Cloud Dedicated cluster data, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md).
+> TiDB Cloud Dedicated クラスター データをバックアップおよび復元する方法については、 [TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md)参照してください。
 
-## View the Backup page
+## バックアップページをビュー {#view-the-backup-page}
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページで、ターゲット クラスターの名前をクリックして、概要ページに移動します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2. In the left navigation pane, click **Data** > **Backup**.
+2.  左側のナビゲーション ペインで、 **[データ]** &gt; **[バックアップ] を**クリックします。
 
-## Automatic backups
+## 自動バックアップ {#automatic-backups}
 
-{{{ .starter }}} automatically backs up your cluster data, allowing you to restore data from a backup snapshot to minimize data loss in the event of a disaster.
+TiDB Cloud Serverless はクラスター データを自動的にバックアップし、バックアップ スナップショットからデータを復元して、災害発生時のデータ損失を最小限に抑えることができます。
 
-### Learn about the backup setting
+### バックアップ設定について学ぶ {#learn-about-the-backup-setting}
 
-Automatic backup settings vary between free clusters and scalable clusters, as shown in the following table:
+自動バックアップ設定は、次の表に示すように、無料クラスターとスケーラブル クラスターによって異なります。
 
-| Backup setting   | Free clusters | Scalable clusters |
-|------------------|--------------|------------------|
-| Backup Cycle     | Daily        | Daily            |
-| Backup Retention | 1 day        | 14 days          |
-| Backup Time      | Fixed time   | Configurable     |
+| バックアップ設定   | フリークラスター | スケーラブルなクラスター |
+| ---------- | -------- | ------------ |
+| バックアップサイクル | 毎日       | 毎日           |
+| バックアップの保持  | 1日       | 14日間         |
+| バックアップ時間   | 固定時間     | 設定可能         |
 
-- **Backup Cycle** is the frequency at which backups are taken.
+-   **バックアップ サイクル**は、バックアップが実行される頻度です。
 
-- **Backup Retention** is the duration for which backups are retained. Expired backups cannot be restored.
-   
-- **Backup Time** is the time when the backup starts to be scheduled. Note that the final backup time might fall behind the configured backup time.
-   
-    - Free clusters: the backup time is a randomly fixed time.
-    - Scalable clusters: you can configure the backup time to every half an hour. The default value is a randomly fixed time.
+-   **バックアップ保持**期間とは、バックアップが保持される期間です。期限切れのバックアップは復元できません。
 
-### Configure the backup setting
+-   **バックアップ時間は、**バックアップのスケジュールが開始される時間です。最終的なバックアップ時間は、設定されたバックアップ時間より遅くなる場合があることに注意してください。
 
-To set the backup time for a scalable cluster, perform the following steps:
+    -   フリークラスター: バックアップ時間はランダムに固定された時間です。
+    -   スケーラブルクラスター：バックアップ間隔を30分ごとに設定できます。デフォルト値はランダムに固定された時間です。
 
-1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
+### バックアップ設定を構成する {#configure-the-backup-setting}
 
-2. Click **Backup Setting**. This will open the **Backup Setting** window, where you can configure the automatic backup settings according to your requirements.
+スケーラブル クラスターのバックアップ時間を設定するには、次の手順を実行します。
 
-3. In **Backup Time**, schedule a start time for the daily cluster backup.
+1.  クラスターの[**バックアップ**](#view-the-backup-page)ページに移動します。
 
-4. Click **Confirm**.
+2.  **「バックアップ設定」**をクリックします。 **「バックアップ設定」**ウィンドウが開き、必要に応じて自動バックアップ設定を構成できます。
 
-## Restore
+3.  **[バックアップ時刻]**で、毎日のクラスター バックアップの開始時刻をスケジュールします。
 
-{{{ .starter }}} clusters offer restore functionality to help recover data in case of accidental loss or corruption.
+4.  **［確認］**をクリックします。
 
-### Restore mode
+## 復元する {#restore}
 
-{{{ .starter }}} supports snapshot restore and point-in-time restore for your cluster.
+TiDB Cloud Serverless クラスターは、偶発的な損失や破損が発生した場合にデータを回復するのに役立つ復元機能を提供します。
 
-- **Snapshot Restore**: restores your cluster from a specific backup snapshot.
+### 復元モード {#restore-mode}
 
-- **Point-in-Time Restore (beta)**: restores your cluster to a specific time.
+TiDB Cloud Serverless は、クラスターのスナップショット復元とポイントインタイム復元をサポートします。
 
-    - Free clusters: not supported.
-    - Scalable clusters: restores to any time within the last 14 days, but not before the cluster creation time or after the current time minus one minute.
+-   **スナップショットの復元**: 特定のバックアップ スナップショットからクラスターを復元します。
 
-### Restore destination
+-   **ポイントインタイム リストア (ベータ)** : クラスターを特定の時点に復元します。
 
-{{{ .starter }}} supports restoring in-place and restoring to a new cluster.
+    -   フリークラスター: サポートされていません。
+    -   スケーラブル クラスター: 過去 14 日以内の任意の時点に復元しますが、クラスターの作成時刻より前、または現在の時刻から 1 分後の時点には復元しません。
 
-**In-place restore**
+### 復元先 {#restore-destination}
 
-Restore to the current cluster will overwrite existing data. Note the following:
+TiDB Cloud Serverless は、インプレース復元と新しいクラスターへの復元をサポートしています。
 
-- Existing connections will be terminated once the restore is started.
-- The cluster will be unavailable, and new connections will be blocked during the restore process.
-- Restore will affect tables in the `mysql` schema. Any changes to user credentials, permissions, or system variables will be reverted to their state at the backup time.
+**インプレースリストア**
 
-**Restore to a new cluster**
+現在のクラスタに復元すると、既存のデータが上書きされます。以下の点にご注意ください。
 
-Create and restore to the new cluster. Note the following:
+-   復元が開始されると、既存の接続は終了します。
+-   復元プロセス中はクラスターは使用できなくなり、新しい接続はブロックされます。
+-   復元はスキーマ`mysql`内のテーブルに影響します。ユーザー資格情報、権限、またはシステム変数への変更は、バックアップ時の状態に戻ります。
 
-- User credentials and permissions from the source cluster will not be restored to the new cluster.
+**新しいクラスターに復元する**
 
-### Restore timeout
+新しいクラスターを作成し、復元します。以下の点に注意してください。
 
-The restore process typically completes within a few minutes. If the restore takes longer than three hours, it is automatically canceled. The outcome of a canceled restore depends on the destination:
+-   ソース クラスターのユーザー資格情報と権限は新しいクラスターに復元されません。
 
-- **In-place restore**: the cluster status changes from **Restoring** to **Available**, and the cluster becomes accessible.
-- **Restore to a new cluster**: the new cluster is deleted and the source cluster remains unchanged.
+### 復元タイムアウト {#restore-timeout}
 
-If the data is corrupted after a canceled restore and cannot be recovered, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance.
+復元プロセスは通常数分以内に完了します。復元に3時間以上かかる場合は、自動的にキャンセルされます。キャンセルされた復元の結果は、復元先によって異なります。
 
-### Perform the restore
+-   **インプレース復元**: クラスターのステータスが**「復元中」**から**「使用可能」**に変わり、クラスターにアクセスできるようになります。
+-   **新しいクラスターに復元**: 新しいクラスターは削除され、ソース クラスターは変更されません。
 
-To restore your {{{ .starter }}} cluster, follow these steps:
+復元をキャンセルした後にデータが破損し、回復できない場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)連絡してサポートを受けてください。
 
-1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
+### 復元を実行する {#perform-the-restore}
 
-2. Click **Restore**. The setting window displays.
+TiDB Cloud Serverless クラスターを復元するには、次の手順に従います。
 
-3. In **Restore Mode**, you can choose to restore from a specific backup or any point in time.
+1.  クラスターの[**バックアップ**](#view-the-backup-page)ページに移動します。
 
-    <SimpleTab>
-    <div label="Snapshot Restore">
+2.  **「復元」**をクリックします。設定ウィンドウが表示されます。
 
-    To restore from a selected backup snapshot, take the following steps:
-
-    1. Click **Snapshot Restore**.
-    2. Select the backup snapshot you want to restore from.
-
-    </div>
-    <div label="Point-in-Time Restore">
-
-    To restore to a specific point in time for a scalable cluster, take the following steps:
-
-    1. Click **Point-in-Time Restore**.
-    2. Select the date and time you want to restore to.
-
-    </div>
-    </SimpleTab>
-
-4. In **Destination**, you can choose to restore to a new cluster or restore in-place.
+3.  **復元モード**では、特定のバックアップまたは任意の時点から復元することを選択できます。
 
     <SimpleTab>
-    <div label="Restore to a new cluster">
+     <div label="Snapshot Restore">
 
-    To restore to a new cluster, take the following steps:
+    選択したバックアップ スナップショットから復元するには、次の手順を実行します。
 
-    1. Click **Restore to a New Cluster**.
-    2. Enter a name for the new cluster.
-    3. Choose the cluster plan for the new cluster.
-    4. If you choose a scalable cluster, set a monthly spending limit, and then configure advanced settings as needed. Otherwise, skip this step.
+    1.  **スナップショットの復元を**クリックします。
+    2.  復元するバックアップ スナップショットを選択します。
 
     </div>
-    <div label="Restore in-place">
+     <div label="Point-in-Time Restore">
 
-    To restore in-place, click **In-place Restore**.
+    スケーラブルなクラスターを特定の時点に復元するには、次の手順を実行します。
+
+    1.  **ポイントインタイム復元を**クリックします。
+    2.  復元したい日付と時刻を選択します。
 
     </div>
-    </SimpleTab>
+     </SimpleTab>
 
-5. Click **Restore** to begin the restore process.
+4.  **[宛先]**では、新しいクラスターに復元するか、インプレースで復元するかを選択できます。
 
-Once the restore process begins, the cluster status changes to **Restoring**. The cluster will remain unavailable until the restore is complete and the status changes to **Available**.
+    <SimpleTab>
+     <div label="Restore to a new cluster">
 
-## Limitations
+    新しいクラスターに復元するには、次の手順を実行します。
 
-- If a TiFlash replica is enabled, it will be unavailable for a period after the restore, because the data needs to be rebuilt in TiFlash.
-- Manual backups are not supported for {{{ .starter }}} clusters.
-- Clusters with more than 1 TiB of data do not support restoring to new clusters by default. Contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance with larger datasets.
+    1.  **「新しいクラスタに復元」を**クリックします。
+    2.  新しいクラスターの名前を入力します。
+    3.  新しいクラスターのクラスター プランを選択します。
+    4.  スケーラブルなクラスターを選択した場合は、月間使用制限を設定し、必要に応じて詳細設定を構成します。それ以外の場合は、この手順をスキップしてください。
+
+    </div>
+     <div label="Restore in-place">
+
+    インプレース復元するには、 **[インプレース復元] を**クリックします。
+
+    </div>
+     </SimpleTab>
+
+5.  復元プロセスを開始するには、 **「復元」を**クリックします。
+
+復元プロセスが開始されると、クラスターのステータスが**「復元中」**に変わります。復元が完了してステータスが「使用可能」に変わるまで、クラスターは**利用**できません。
+
+## 制限事項 {#limitations}
+
+-   TiFlashレプリカが有効になっている場合、データをTiFlashで再構築する必要があるため、復元後に一定期間使用できなくなります。
+-   TiDB Cloud Serverless クラスターでは手動バックアップはサポートされていません。
+-   1 TiBを超えるデータを持つクラスターは、デフォルトでは新しいクラスターへの復元をサポートしていません。より大きなデータセットについては、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。

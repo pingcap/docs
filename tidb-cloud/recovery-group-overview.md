@@ -1,37 +1,37 @@
 ---
 title: Recovery Group Overview (Beta)
-summary: Learn how to protect your databases against disasters by using TiDB Cloud recovery groups.
+summary: TiDB Cloudリカバリ グループを使用してデータベースを災害から保護する方法を学びます。
 ---
 
-# Recovery Group Overview (Beta)
+# リカバリグループの概要（ベータ版） {#recovery-group-overview-beta}
 
-A TiDB Cloud recovery group allows you to replicate your databases between TiDB Cloud Dedicated clusters for protection against regional disasters. You can orchestrate the failover of databases from one cluster to another. After a failover to the secondary cluster, if the original primary cluster becomes available again, you can re-establish replication in the reverse direction to reprotect your databases.
+TiDB Cloudリカバリグループを使用すると、 TiDB Cloud Dedicated クラスタ間でデータベースを複製し、地域的な災害から保護することができます。クラスタ間でデータベースのフェイルオーバーをオーケストレーションできます。セカンダリクラスタへのフェイルオーバー後、元のプライマリクラスタが再び利用可能になった場合は、逆方向のレプリケーションを再確立してデータベースを再び保護できます。
 
-## Architecture
+## アーキテクチャ {#architecture}
 
-A recovery group consists of a set of replicated databases that can be failed over together between two TiDB Cloud Dedicated clusters. Each recovery group is assigned a primary cluster, and databases on this primary cluster are associated with the group and are then replicated to the secondary cluster.
+リカバリグループは、2つのTiDB Cloud Dedicatedクラスタ間でまとめてフェイルオーバー可能な、複製されたデータベースのセットで構成されます。各リカバリグループにはプライマリクラスタが割り当てられ、このプライマリクラスタ上のデータベースはグループに関連付けられ、セカンダリクラスタに複製されます。
 
 ![Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-overview.png)
 
-- Recovery Group: a group of databases that are replicated between two clusters
-- Primary Cluster: the cluster where the database is actively written by the application
-- Secondary Cluster: the cluster where replicas of the database are located
+-   リカバリグループ: 2つのクラスタ間で複製されるデータベースのグループ
+-   プライマリクラスタ: アプリケーションによってデータベースがアクティブに書き込まれるクラスタ
+-   セカンダリクラスタ: データベースのレプリカが配置されているクラスタ
 
-> **Note**
+> **注記**
 >
-> Client connections to the replica databases are not explicitly forced to be read-only by the Recovery Group feature. Ensuring that the application connecting to the replica databases only performs read-only queries is the responsibility of the application.
+> レプリカデータベースへのクライアント接続は、復旧グループ機能によって明示的に読み取り専用に強制されることはありません。レプリカデータベースに接続するアプリケーションが読み取り専用クエリのみを実行するようにするのは、アプリケーションの責任です。
 
-## Key features and limitations
+## 主な機能と制限 {#key-features-and-limitations}
 
-- Currently, only TiDB Cloud Dedicated clusters hosted on AWS support recovery groups.
-- Recovery groups are established between two clusters.
-- Bi-directional replication of a database is not supported with recovery groups.
+-   現在、AWS でホストされているTiDB Cloud Dedicated クラスターのみがリカバリ グループをサポートしています。
+-   リカバリ グループは 2 つのクラスター間に確立されます。
+-   リカバリ グループでは、データベースの双方向レプリケーションはサポートされません。
 
-> **Warning**
+> **警告**
 >
-> This feature is in beta and not recommended for production environments.
+> この機能はベータ版であり、本番環境には推奨されません。
 
-## What's next
+## 次は何？ {#what-s-next}
 
-- To get started with recovery groups, see [Create Database Recovery Group](/tidb-cloud/recovery-group-get-started.md).
-- To learn how to use a recovery group, see [Failover and Reprotect Databases](/tidb-cloud/recovery-group-failover.md).
+-   回復グループの使用を開始するには、 [データベース復旧グループの作成](/tidb-cloud/recovery-group-get-started.md)参照してください。
+-   回復グループの使用方法については、 [データベースのフェイルオーバーと再保護](/tidb-cloud/recovery-group-failover.md)参照してください。

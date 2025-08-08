@@ -1,215 +1,207 @@
 ---
 title: Connection Pools and Connection Parameters
-summary: This document explains how to configure connection pools and parameters for TiDB. It covers connection pool size, probe configuration, and formulas for optimal throughput. It also discusses JDBC API usage and MySQL Connector/J parameter configurations for performance optimization.
+summary: このドキュメントでは、TiDB の接続プールとパラメータの設定方法について説明します。接続プールのサイズ、プローブの設定、最適なスループットを得るための計算式などについて説明します。また、パフォーマンスを最適化するための JDBC API の使用方法と MySQL Connector/J パラメータ設定についても説明します。
 ---
 
-# Connection Pools and Connection Parameters
+# 接続プールと接続パラメータ {#connection-pools-and-connection-parameters}
 
-This document describes how to configure connection pools and connection parameters when you use a driver or ORM framework to connect to TiDB.
+このドキュメントでは、ドライバーまたは ORM フレームワークを使用して TiDB に接続するときに、接続プールと接続パラメータを構成する方法について説明します。
 
 <CustomContent platform="tidb">
 
-If you are interested in more tips about Java application development, see [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md#connection-pool)
+Javaアプリケーション開発に関するさらなるヒントにご興味がおありの場合は、 [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/best-practices/java-app-best-practices.md#connection-pool)参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-If you are interested in more tips about Java application development, see [Best Practices for Developing Java Applications with TiDB](https://docs.pingcap.com/tidb/stable/java-app-best-practices)
+Javaアプリケーション開発に関するさらなるヒントにご興味がおありの場合は、 [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](https://docs.pingcap.com/tidb/stable/java-app-best-practices)参照してください。
 
 </CustomContent>
 
-## Connection pool
+## 接続プール {#connection-pool}
 
-Building TiDB (MySQL) connections is relatively expensive (for OLTP scenarios at least). Because in addition to building a TCP connection, connection authentication is also required. Therefore, the client usually saves the TiDB (MySQL) connections to the connection pool for reuse.
+TiDB (MySQL) 接続の構築は、比較的コストがかかります（少なくともOLTPシナリオでは）。TCP 接続の構築に加えて、接続認証も必要となるためです。そのため、クライアントは通常、TiDB (MySQL) 接続を接続プールに保存し、再利用します。
 
-Java has many connection pool implementations such as [HikariCP](https://github.com/brettwooldridge/HikariCP), [tomcat-jdbc](https://tomcat.apache.org/tomcat-10.1-doc/jdbc-pool.html), [druid](https://github.com/alibaba/druid), [c3p0](https://www.mchange.com/projects/c3p0/), and [dbcp](https://commons.apache.org/proper/commons-dbcp/). TiDB does not limit which connection pool you use, so you can choose whichever you like for your application.
+Javaには、 [HikariCP](https://github.com/brettwooldridge/HikariCP) 、 [tomcat-jdbc](https://tomcat.apache.org/tomcat-10.1-doc/jdbc-pool.html) 、 [druid](https://github.com/alibaba/druid) 、 [c3p0](https://www.mchange.com/projects/c3p0/) 、 [dbcp](https://commons.apache.org/proper/commons-dbcp/)など、多くの接続プール実装があります。TiDB では使用する接続プールに制限がないため、アプリケーションに合わせて好きな接続プールを選択できます。
 
-### Configure the number of connections
+### 接続数を設定する {#configure-the-number-of-connections}
 
-It is a common practice that the connection pool size is well adjusted according to the application's own needs. Take HikariCP as an example:
+アプリケーションのニーズに応じて接続プールのサイズを適切に調整するのが一般的です。HikariCPを例に挙げましょう。
 
-- **maximumPoolSize**: The maximum number of connections in the connection pool. If this value is too large, TiDB consumes resources to maintain useless connections. If this value is too small, the application gets slow connections. Therefore, you need to configure this value according to your application characteristics. For details, see [About Pool Sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing).
-- **minimumIdle**: The minimum number of idle connections in the connection pool. It is mainly used to reserve some connections to respond to sudden requests when the application is idle. You also need to configure it according to your application characteristics.
+-   **maximumPoolSize** : 接続プールの最大接続数。この値が大きすぎると、TiDBは無駄な接続を維持するためにリソースを消費します。この値が小さすぎると、アプリケーションの接続速度が遅くなります。したがって、アプリケーションの特性に応じてこの値を設定する必要があります。詳細は[プールのサイズについて](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing)参照してください。
+-   **minimumIdle** : 接続プール内のアイドル接続の最小数。これは主に、アプリケーションがアイドル状態のときに突発的なリクエストに対応するために、いくつかの接続を予約するために使用されます。アプリケーションの特性に応じて設定する必要があります。
 
-The application needs to return the connection after finishing using it. It is recommended that the application uses the corresponding connection pool monitoring (such as **metricRegistry**) to locate connection pool issues in time.
+アプリケーションは、使用を終えた後、接続を返却する必要があります。接続プールの問題を早期に特定するために、アプリケーションでは対応する接続プール監視（ **metricRegistry**など）を使用することをお勧めします。
 
-### Probe configuration
+### プローブ構成 {#probe-configuration}
 
-The connection pool maintains persistent connections from clients to TiDB as follows:
+接続プールは、次のようにクライアントから TiDB への永続的な接続を維持します。
 
-- Before v5.4, TiDB does not proactively close client connections by default (unless an error is reported).
-- Starting from v5.4, TiDB automatically closes client connections after `28800` seconds (this is, `8` hours) of inactivity by default. You can control this timeout setting using the TiDB and MySQL compatible `wait_timeout` variable. For more information, see [JDBC Query Timeout](/develop/dev-guide-timeouts-in-tidb.md#jdbc-query-timeout).
+-   v5.4 より前では、TiDB はデフォルトでクライアント接続をプロアクティブに閉じません (エラーが報告されない限り)。
+-   バージョン5.4以降、TiDBはデフォルトで`28800`秒（つまり`8`時間）の非アクティブ状態が続くとクライアント接続を自動的に閉じます。このタイムアウト設定は、TiDBとMySQL互換の`wait_timeout`変数を使用して制御できます。詳細については、 [JDBCクエリタイムアウト](/develop/dev-guide-timeouts-in-tidb.md#jdbc-query-timeout)参照してください。
 
-Moreover, there might be network proxies such as [LVS](https://en.wikipedia.org/wiki/Linux_Virtual_Server) or [HAProxy](https://en.wikipedia.org/wiki/HAProxy) between clients and TiDB. These proxies typically proactively clean up connections after a specific idle period (determined by the proxy's idle configuration). In addition to monitoring the proxy's idle configuration, connection pools also need to maintain or probe connections for keep-alive.
+さらに、クライアントとTiDBの間には、 [LVS](https://en.wikipedia.org/wiki/Linux_Virtual_Server)や[HAプロキシ](https://en.wikipedia.org/wiki/HAProxy)ようなネットワークプロキシが存在する場合があります。これらのプロキシは通常、一定のアイドル時間（プロキシのアイドル設定によって決定されます）が経過すると、接続をプロアクティブにクリーンアップします。接続プールは、プロキシのアイドル設定を監視するだけでなく、キープアライブのために接続を維持またはプローブする必要があります。
 
-If you often see the following error in your Java application:
+Javaアプリケーションで次のエラーが頻繁に表示される場合:
 
-```
-The last packet sent successfully to the server was 3600000 milliseconds ago. The driver has not received any packets from the server. com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
-```
+    The last packet sent successfully to the server was 3600000 milliseconds ago. The driver has not received any packets from the server. com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
 
-If `n` in `n milliseconds ago` is `0` or a very small value, it is usually because the executed SQL operation causes TiDB to exit abnormally. To find the cause, it is recommended to check the TiDB stderr log.
+`n milliseconds ago`分の`n` `0`または非常に小さい値である場合、通常は実行されたSQL操作によってTiDBが異常終了したことが原因です。原因を特定するには、TiDBのstderrログを確認することをお勧めします。
 
-If `n` is a very large value (such as `3600000` in the above example), it is likely that this connection was idle for a long time and then closed by the proxy. The usual solution is to increase the value of the proxy's idle configuration and allow the connection pool to:
+`n`が非常に大きな値（上記の例では`3600000`など）の場合、この接続は長時間アイドル状態だった後、プロキシによって切断された可能性があります。通常の解決策は、プロキシのアイドル設定の値を増やし、接続プールで以下の処理を実行することです。
 
-- Check whether the connection is available before using the connection every time.
-- Regularly check whether the connection is available using a separate thread.
-- Send a test query regularly to keep alive connections.
+-   毎回接続を使用する前に、接続が利用可能かどうかを確認してください。
+-   別のスレッドを使用して、接続が利用可能かどうかを定期的に確認します。
+-   接続を維持するために定期的にテスト クエリを送信します。
 
-Different connection pool implementations might support one or more of the above methods. You can check your connection pool documentation to find the corresponding configuration.
+接続プールの実装によっては、上記の方法のうち1つ以上をサポートしている場合があります。対応する設定については、接続プールのドキュメントをご確認ください。
 
-### Formulas based on experience
+### 経験に基づいた公式 {#formulas-based-on-experience}
 
-According to the [About Pool Sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing) article of HikariCP, if you have no idea about how to set a proper size for the database connection pool, you can get started with a [formula based on experience](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#connections--core_count--2--effective_spindle_count). Then, based on the performance result of the pool size calculated from the formula, you can further adjust the size to achieve the best performance.
+HikariCPの[プールのサイズについて](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing)記事によると、データベース接続プールの適切なサイズ設定方法がわからない場合は、まず[経験に基づく式](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#connections--core_count--2--effective_spindle_count)から始めることができます。その後、計算式から算出されたプールサイズのパフォーマンス結果に基づいて、最適なパフォーマンスが得られるようにサイズをさらに調整することができます。
 
-The formula based on experience is as follows:
+経験に基づいた計算式は次のとおりです。
 
-```
-connections = ((core_count * 2) + effective_spindle_count)
-```
+    connections = ((core_count * 2) + effective_spindle_count)
 
-The description of each parameter in the formula is as follows:
+数式内の各パラメータの説明は次のとおりです。
 
-- **connections**: the size of connections obtained.
-- **core_count**: the number of CPU cores.
-- **effective_spindle_count**: the number of hard drives (not [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)). Because each spinning hard disk can be called a spindle. For example, if you are using a server with a RAID of 16 disks, the **effective_spindle_count** should be 16. Because **HDD** usually can handle only one request at a time, the formula here is actually measuring how many concurrent I/O requests your server can manage.
+-   **接続**: 取得された接続のサイズ。
+-   **core_count** : CPU コアの数。
+-   **effective_spindle_count** : ハードドライブの数（ [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)ではありません）。回転するハードディスクはそれぞれスピンドルと呼ばれるため、スピンドルと呼ばれます。例えば、16台のディスクでRAIDを構成しているサーバーを使用している場合、 **effective_spindle_count**は16になります。HDD**は**通常、一度に1つのリクエストしか処理できないため、この式は実際にはサーバーが処理できる同時I/Oリクエストの数を測定しています。
 
-In particular, pay attention to the following note below the [formula](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#the-formula).
+特に、 [式](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#the-formula)下にある以下の注意事項に注意してください。
 
-> ```
-> A formula which has held up pretty well across a lot of benchmarks for years is
-> that for optimal throughput the number of active connections should be somewhere
-> near ((core_count * 2) + effective_spindle_count). Core count should not include
-> HT threads, even if hyperthreading is enabled. Effective spindle count is zero if
-> the active data set is fully cached, and approaches the actual number of spindles
-> as the cache hit rate falls. ... There hasn't been any analysis so far regarding
-> how well the formula works with SSDs.
-> ```
+>     A formula which has held up pretty well across a lot of benchmarks for years is
+>     that for optimal throughput the number of active connections should be somewhere
+>     near ((core_count * 2) + effective_spindle_count). Core count should not include
+>     HT threads, even if hyperthreading is enabled. Effective spindle count is zero if
+>     the active data set is fully cached, and approaches the actual number of spindles
+>     as the cache hit rate falls. ... There hasn't been any analysis so far regarding
+>     how well the formula works with SSDs.
 
-This note indicates that:
+このメモは次のことを示しています:
 
-- **core_count** is the number of physical cores, regardless of whether you enable [Hyper-Threading](https://en.wikipedia.org/wiki/Hyper-threading) or not.
-- When data is fully cached, you need to set **effective_spindle_count** to `0`. As the hit rate of cache decreases, the count is closer to the actual number of `HDD`.
-- **Whether the formula works for _SSD_ is not tested and unknown.**
+-   **core_count は**、 [ハイパースレッディング](https://en.wikipedia.org/wiki/Hyper-threading)有効にするかどうかに関係なく、物理コアの数です。
+-   データが完全にキャッシュされている場合は、 **effective_spindle_count を**`0`に設定する必要があります。キャッシュのヒット率が低下すると、カウントは実際の値である`HDD`に近づきます。
+-   **この式が*SSD*で機能するかどうかはテストされておらず不明です。**
 
-When using SSDs, it is recommended that you use the following formula based on experience instead:
+SSD を使用する場合は、代わりに経験に基づいた次の式を使用することをお勧めします。
 
-```
-connections = (number of cores * 4)
-```
+    connections = (number of cores * 4)
 
-Therefore, you can set the maximum connection size of the initial connection pool to `cores * 4` in the case of SSDs and further adjust the size to tune the performance.
+したがって、SSD の場合は初期接続プールの最大接続サイズを`cores * 4`に設定し、さらにサイズを調整してパフォーマンスをチューニングすることができます。
 
-### Tuning direction
+### チューニング方向 {#tuning-direction}
 
-As you can see, a size calculated from the [formulas based on experience](#formulas-based-on-experience) is just a recommended base value. To get the optimal size on a specific machine, you need to try other values around the base value and test the performance.
+ご覧のとおり、 [経験に基づいた公式](#formulas-based-on-experience)から計算されたサイズはあくまで推奨される基本値です。特定のマシンで最適なサイズを得るには、基本値付近の値を試してパフォーマンスをテストする必要があります。
 
-Here are some basic rules to help you get the optimal size:
+最適なサイズを見つけるのに役立つ基本的なルールをいくつか紹介します。
 
-- If your network or storage latency is high, increase your maximum number of connections to reduce the latency waiting time. Once a thread is blocked by latency, other threads can take over and continue processing.
-- If you have multiple services deployed on your server and each service has a separate connection pool, consider the sum of the maximum number of connections to all connection pools.
+-   ネットワークまたはstorageのレイテンシーが高い場合は、最大接続数を増やしてレイテンシー待機時間を短縮してください。レイテンシーによってスレッドがブロックされた場合でも、他のスレッドが引き継いで処理を続行できます。
+-   サーバーに複数のサービスがデプロイされており、各サービスに個別の接続プールがある場合は、すべての接続プールへの接続の最大数の合計を考慮してください。
 
-## Connection parameters
+## 接続パラメータ {#connection-parameters}
 
-Java applications can be encapsulated with various frameworks. In most of the frameworks, JDBC API is called on the bottommost level to interact with the database server. For JDBC, it is recommended that you focus on the following things:
+Javaアプリケーションは様々なフレームワークでカプセル化されたできます。ほとんどのフレームワークでは、データベースサーバーとやり取りするために最下層でJDBC APIが呼び出されます。JDBCでは、以下の点に重点を置くことをお勧めします。
 
-- JDBC API usage choice
-- API Implementer's parameter configuration
+-   JDBC APIの使用選択
+-   API実装者のパラメータ設定
 
-### JDBC API
+### JDBC API {#jdbc-api}
 
-For JDBC API usage, see [JDBC official tutorial](https://docs.oracle.com/javase/tutorial/jdbc/). This section covers the usage of several important APIs.
+JDBC APIの使用方法については、 [JDBC公式チュートリアル](https://docs.oracle.com/javase/tutorial/jdbc/)参照してください。このセクションでは、いくつかの重要なAPIの使用方法について説明します。
 
-#### Use Prepare API
+#### 準備APIを使用する {#use-prepare-api}
 
-For OLTP (Online Transactional Processing) scenarios, the SQL statements sent by the program to the database are several types that can be exhausted after removing parameter changes. Therefore, it is recommended to use [Prepared Statements](https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html) instead of regular [execution from a text file](https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html#executing_queries) and reuse Prepared Statements to execute directly. This avoids the overhead of repeatedly parsing and generating SQL execution plans in TiDB.
+OLTP（オンライントランザクション処理）シナリオでは、プログラムからデータベースに送信されるSQL文は複数の種類に分かれており、パラメータ変更を削除すると使い尽くされる可能性があります。そのため、通常の[テキストファイルからの実行](https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html#executing_queries)ではなく[準備された声明](https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)使用し、Prepared Statementを再利用して直接実行することをお勧めします。これにより、TiDBでSQL実行プランを繰り返し解析および生成するオーバーヘッドを回避できます。
 
-At present, most upper-level frameworks call the Prepare API for SQL execution. If you use the JDBC API directly for development, pay attention to choosing the Prepare API.
+現在、上位フレームワークのほとんどはSQL実行時にPrepare APIを呼び出します。開発でJDBC APIを直接使用する場合は、Prepare APIを選択する際に注意してください。
 
-In addition, with the default implementation of MySQL Connector/J, only client-side statements are preprocessed, and the statements are sent to the server in a text file after `?` is replaced on the client. Therefore, in addition to using the Prepare API, you also need to configure `useServerPrepStmts = true` in JDBC connection parameters before you perform statement preprocessing on the TiDB server. For detailed parameter configuration, see [MySQL JDBC parameters](#mysql-jdbc-parameters).
+また、MySQL Connector/J のデフォルト実装では、クライアント側のステートメントのみが前処理され、クライアント側で`?`が置換された後、テキストファイルでサーバーに送信されます。そのため、TiDBサーバーでステートメントの前処理を実行する前に、Prepare API の使用に加えて、JDBC 接続パラメータの`useServerPrepStmts = true`も設定する必要があります。詳細なパラメータ設定については、 [MySQL JDBCパラメータ](#mysql-jdbc-parameters)参照してください。
 
-#### Use Batch API
+#### バッチAPIを使用する {#use-batch-api}
 
-For batch inserts, you can use the [`addBatch`/`executeBatch` API](https://www.tutorialspoint.com/jdbc/jdbc-batch-processing). The `addBatch()` method is used to cache multiple SQL statements first on the client, and then send them to the database server together when calling the `executeBatch` method.
+バッチ挿入の場合は、 [`addBatch` / `executeBatch` API](https://www.tutorialspoint.com/jdbc/jdbc-batch-processing)使用できます。3 `addBatch()`方法は、複数の SQL 文を最初にクライアントでキャッシュし、次に`executeBatch`方法を呼び出したときにそれらをまとめてデータベースサーバーに送信するために使用されます。
 
-> **Note:**
+> **注記：**
 >
-> In the default MySQL Connector/J implementation, the sending time of the SQL statements that are added to batch with `addBatch()` is delayed to the time when `executeBatch()` is called, but the statements will still be sent one by one during the actual network transfer. Therefore, this method usually does not reduce the amount of communication overhead.
+> デフォルトのMySQL Connector/J実装では、 `addBatch()`でバッチに追加されたSQL文の送信は`executeBatch()`呼び出された時点まで遅延されますが、実際のネットワーク転送では文は1つずつ送信されます。そのため、この方法では通常、通信オーバーヘッドは削減されません。
 >
-> If you want to batch network transfer, you need to configure `rewriteBatchedStatements = true` in the JDBC connection parameters. For the detailed parameter configuration, see [Batch-related parameters](#batch-related-parameters).
+> バッチネットワーク転送を行う場合は、JDBC接続パラメータの`rewriteBatchedStatements = true`設定する必要があります。詳細なパラメータ設定については、 [バッチ関連のパラメータ](#batch-related-parameters)参照してください。
 
-#### Use `StreamingResult` to get the execution result
+#### <code>StreamingResult</code>を使用して実行結果を取得します {#use-code-streamingresult-code-to-get-the-execution-result}
 
-In most scenarios, to improve execution efficiency, JDBC obtains query results in advance and saves them in client memory by default. But when the query returns a super large result set, the client often wants the database server to reduce the number of records returned at a time and waits until the client's memory is ready and it requests for the next batch.
+多くの場合、JDBCは実行効率を向上させるために、クエリ結果を事前に取得し、デフォルトでクライアントメモリに保存します。しかし、クエリが返す結果セットが非常に大きい場合、クライアントはデータベースサーバーに一度に返されるレコード数を減らすよう要求し、クライアントのメモリが準備できて次のバッチを要求するまで待機することがよくあります。
 
-The following two processing methods are usually used in JDBC:
+JDBC では通常、次の 2 つの処理方法が使用されます。
 
-- The first method: [Set **FetchSize** to `Integer.MIN_VALUE`](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-implementation-notes.html#ResultSet) to ensure that the client does not cache. The client will read the execution result from the network connection through `StreamingResult`.
+-   最初の方法： [**FetchSize を**`Integer.MIN_VALUE`に設定する](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-implementation-notes.html#ResultSet)クライアントがキャッシュしないようにします。クライアントは`StreamingResult`を介してネットワーク接続から実行結果を読み取ります。
 
-    When the client uses the streaming read method, it needs to finish reading or close `resultset` before continuing to use the statement to make a query. Otherwise, the error `No statements may be issued when any streaming result sets are open and in use on a given connection. Ensure that you have called .close() on any active streaming result sets before attempting more queries.` is returned.
+    クライアントがストリーミング読み取り方式を使用する場合、ステートメントを使用してクエリを実行する前に、読み取りを完了するか、 `resultset`閉じる必要があります。そうでない場合は、エラー`No statements may be issued when any streaming result sets are open and in use on a given connection. Ensure that you have called .close() on any active streaming result sets before attempting more queries.`が返されます。
 
-    To avoid such an error in queries before the client finishes reading or closes `resultset`, you can add the `clobberStreamingResults=true` parameter in the URL. Then, `resultset` is automatically closed but the result set to be read in the previous streaming query is lost.
+    クライアントが読み取りを完了するか`resultset`閉じる前にクエリでこのようなエラーが発生するのを回避するには、URL に`clobberStreamingResults=true`パラメータを追加します。これにより、 `resultset`自動的に閉じられますが、前のストリーミングクエリで読み取られるべき結果セットは失われます。
 
-- The second method: Use Cursor Fetch by first [setting `FetchSize`](http://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html) as a positive integer and then configuring `useCursorFetch = true` in the JDBC URL.
+-   2 番目の方法: 最初に[`FetchSize`の設定](http://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html)正の整数として設定し、次に JDBC URL で`useCursorFetch = true`設定してカーソル フェッチを使用します。
 
-TiDB supports both methods, but it is recommended that you use the first method that sets `FetchSize` to `Integer.MIN_VALUE`, because it is a simpler implementation and has better execution efficiency.
+TiDB は両方の方法をサポートしていますが、実装が簡単で実行効率が優れているため、 `FetchSize`を`Integer.MIN_VALUE`に設定する最初の方法を使用することをお勧めします。
 
-For the second method, TiDB first loads all data to the TiDB node, and then returns data to the client according to the `FetchSize`. Therefore, it usually consumes more memory than the first method. If [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) is set to `ON`, TiDB might temporarily write the result to the hard disk.
+2番目の方法では、TiDBはまずすべてのデータをTiDBノードにロードし、その後、 `FetchSize`に従ってクライアントにデータを返します。そのため、通常は1番目の方法よりも多くのメモリを消費します。3 [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) `ON`設定すると、TiDBは結果を一時的にハードディスクに書き込む可能性があります。
 
-If the [`tidb_enable_lazy_cursor_fetch`](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830) system variable is set to `ON`, TiDB tries to read part of the data only when the client fetches it, which uses less memory. For more details and limitations, read the [complete descriptions for the `tidb_enable_lazy_cursor_fetch` system variable](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830).
+システム変数[`tidb_enable_lazy_cursor_fetch`](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830) `ON`に設定すると、TiDB はクライアントがデータを取得する際にのみデータの一部を読み取ろうとするため、メモリ使用量が少なくなります。詳細と制限事項については、 [`tidb_enable_lazy_cursor_fetch`システム変数の完全な説明](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)参照してください。
 
-### MySQL JDBC parameters
+### MySQL JDBCパラメータ {#mysql-jdbc-parameters}
 
-JDBC usually provides implementation-related configurations in the form of JDBC URL parameters. This section introduces [MySQL Connector/J's parameter configurations](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html) (If you use MariaDB, see [MariaDB's parameter configurations](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#optional-url-parameters)). Because this document cannot cover all configuration items, it mainly focuses on several parameters that might affect performance.
+JDBCは通常、実装関連の設定をJDBC URLパラメータの形で提供します。このセクションでは[MySQL Connector/Jのパラメータ設定](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html) （MariaDBをご利用の場合は[MariaDBのパラメータ設定](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#optional-url-parameters) ）について説明します。このドキュメントではすべての設定項目を網羅することはできないため、主にパフォーマンスに影響を与える可能性のあるいくつかのパラメータに焦点を当てます。
 
-#### Prepare-related parameters
+#### 準備関連のパラメータ {#prepare-related-parameters}
 
-This section introduces parameters related to `Prepare`.
+このセクションでは、 `Prepare`に関連するパラメータを紹介します。
 
-- **useServerPrepStmts**
+-   **useServerPrepStmts**
 
-    **useServerPrepStmts** is set to `false` by default, that is, even if you use the Prepare API, the "prepare" operation will be done only on the client. To avoid the parsing overhead of the server, if the same SQL statement uses the Prepare API multiple times, it is recommended to set this configuration to `true`.
+    **useServerPrepStmts は**デフォルトで`false`に設定されています。つまり、Prepare API を使用した場合でも、「準備」操作はクライアント側でのみ実行されます。サーバーの解析オーバーヘッドを回避するため、同じ SQL 文で Prepare API を複数回使用する場合は、この設定を`true`に設定することをお勧めします。
 
-    To verify that this setting already takes effect, you can do:
+    この設定がすでに有効になっていることを確認するには、次の操作を実行します。
 
-    - Go to TiDB monitoring dashboard and view the request command type through **Query Summary** > **CPS By Instance**.
-    - If `COM_QUERY` is replaced by `COM_STMT_EXECUTE` or `COM_STMT_PREPARE` in the request, it means this setting already takes effect.
+    -   TiDB 監視ダッシュボードに移動し、**クエリ サマリー**&gt;**インスタンス別の CPS**を通じて要求コマンド タイプを表示します。
+    -   リクエスト内の`COM_QUERY` `COM_STMT_EXECUTE`または`COM_STMT_PREPARE`に置き換えられた場合、この設定はすでに有効になっていることを意味します。
 
-- **cachePrepStmts**
+-   **キャッシュ準備ステートメント**
 
-    Although `useServerPrepStmts=true` allows the server to execute Prepared Statements, by default, the client closes the Prepared Statements after each execution and does not reuse them. This means that the "prepare" operation is not even as efficient as text file execution. To solve this, it is recommended that after setting `useServerPrepStmts=true`, you should also configure `cachePrepStmts=true`. This allows the client to cache Prepared Statements.
+    `useServerPrepStmts=true`ではサーバーがプリペアドステートメントを実行できますが、デフォルトではクライアントはプリペアドステートメントを毎回実行した後に閉じ、再利用しません。つまり、「準備」操作はテキストファイルの実行ほど効率的ではありません。この問題を解決するには、 `useServerPrepStmts=true`設定した後、 `cachePrepStmts=true`も設定することをお勧めします。これにより、クライアントはプリペアドステートメントをキャッシュできるようになります。
 
-    To verify that this setting already takes effect, you can do:
+    この設定がすでに有効になっていることを確認するには、次の操作を実行します。
 
-    - Go to TiDB monitoring dashboard and view the request command type through **Query Summary** > **CPS By Instance**.
-    - If the number of `COM_STMT_EXECUTE` in the request is far more than the number of `COM_STMT_PREPARE`, it means this setting already takes effect.
+    -   TiDB 監視ダッシュボードに移動し、**クエリ サマリー**&gt;**インスタンス別の CPS**を通じて要求コマンド タイプを表示します。
+    -   リクエスト内の`COM_STMT_EXECUTE`の数が`COM_STMT_PREPARE`数よりはるかに多い場合、この設定はすでに有効になっていることを意味します。
 
-    In addition, configuring `useConfigs=maxPerformance` will configure multiple parameters at the same time, including `cachePrepStmts=true`.
+    また、 `useConfigs=maxPerformance`設定すると、 `cachePrepStmts=true`含む複数のパラメータが同時に設定されます。
 
-- **prepStmtCacheSqlLimit**
+-   **準備StmtCacheSqlLimit**
 
-    After configuring `cachePrepStmts`, also pay attention to the `prepStmtCacheSqlLimit` configuration (the default value is `256`). This configuration controls the maximum length of the Prepared Statements cached on the client.
+    `cachePrepStmts`設定した後は、 `prepStmtCacheSqlLimit`設定にも注意してください（デフォルト値は`256`です）。この設定は、クライアントにキャッシュされるプリペアドステートメントの最大長を制御します。
 
-    The Prepared Statements that exceed this maximum length will not be cached, so they cannot be reused. In this case, you may consider increasing the value of this configuration depending on the actual SQL length of the application.
+    この最大長を超えるPrepared Statementはキャッシュされず、再利用できません。この場合、アプリケーションの実際のSQLの長さに応じて、この設定の値を増やすことを検討してください。
 
-    You need to check whether this setting is too small if you:
+    次の場合は、この設定が小さすぎないかどうかを確認する必要があります。
 
-    - Go to TiDB monitoring dashboard and view the request command type through **Query Summary** > **CPS By Instance**.
-    - And find that `cachePrepStmts=true` has been configured, but `COM_STMT_PREPARE` is still mostly equal to `COM_STMT_EXECUTE` and `COM_STMT_CLOSE` exists.
+    -   TiDB 監視ダッシュボードに移動し、**クエリ サマリー**&gt;**インスタンス別の CPS**を通じて要求コマンド タイプを表示します。
+    -   そして、 `cachePrepStmts=true`設定されていることがわかりますが、 `COM_STMT_PREPARE`まだ`COM_STMT_EXECUTE`とほぼ同じで、 `COM_STMT_CLOSE`存在します。
 
-- **prepStmtCacheSize**
+-   **準備StmtCacheSize**
 
-    **prepStmtCacheSize** controls the number of cached Prepared Statements (the default value is `25`). If your application requires "preparing" many types of SQL statements and wants to reuse Prepared Statements, you can increase this value.
+    **prepStmtCacheSize は**、キャッシュされる Prepared Statement の数を制御します（デフォルト値は`25` ）。アプリケーションで多くの種類の SQL 文を「準備」する必要があり、Prepared Statement を再利用したい場合は、この値を増やすことができます。
 
-    To verify that this setting already takes effect, you can do:
+    この設定がすでに有効になっていることを確認するには、次の操作を実行します。
 
-    - Go to TiDB monitoring dashboard and view the request command type through **Query Summary** > **CPS By Instance**.
-    - If the number of `COM_STMT_EXECUTE` in the request is far more than the number of `COM_STMT_PREPARE`, it means this setting already takes effect.
+    -   TiDB 監視ダッシュボードに移動し、**クエリ サマリー**&gt;**インスタンス別の CPS**を通じて要求コマンド タイプを表示します。
+    -   リクエスト内の`COM_STMT_EXECUTE`の数が`COM_STMT_PREPARE`数よりはるかに多い場合、この設定はすでに有効になっていることを意味します。
 
-#### Batch-related parameters
+#### バッチ関連のパラメータ {#batch-related-parameters}
 
-While processing batch writes, it is recommended to configure `rewriteBatchedStatements=true`. After using `addBatch()` or `executeBatch()`, JDBC still sends SQL one by one by default, for example:
+バッチ書き込み処理中は、 `rewriteBatchedStatements=true`設定することをお勧めします。 `addBatch()`または`executeBatch()`使用した後でも、JDBCはデフォルトでSQLを1つずつ送信します。例:
 
 ```java
 pstmt = prepare("INSERT INTO `t` (a) values(?)");
@@ -221,7 +213,7 @@ pstmt.setInt(1, 12);
 pstmt.executeBatch();
 ```
 
-Although `Batch` methods are used, the SQL statements sent to TiDB are still individual `INSERT` statements:
+`Batch`方法が使用されていますが、TiDB に送信される SQL ステートメントは個別の`INSERT`ステートメントのままです。
 
 ```sql
 INSERT INTO `t` (`a`) VALUES(10);
@@ -229,13 +221,13 @@ INSERT INTO `t` (`a`) VALUES(11);
 INSERT INTO `t` (`a`) VALUES(12);
 ```
 
-But if you set `rewriteBatchedStatements=true`, the SQL statements sent to TiDB will be a single `INSERT` statement:
+ただし、 `rewriteBatchedStatements=true`設定すると、TiDB に送信される SQL ステートメントは`INSERT`の単一のステートメントになります。
 
 ```sql
 INSERT INTO `t` (`a`) values(10),(11),(12);
 ```
 
-Note that the rewrite of the `INSERT` statements is to concatenate the values after multiple "values" keywords into a whole SQL statement. If the `INSERT` statements have other differences, they cannot be rewritten, for example:
+`INSERT`番目の文の書き換えは、複数の「values」キーワードの後の値を連結して、1 つの SQL 文を作成するというものです。3 `INSERT`文に他の違いがある場合は、書き換えることはできません。例えば、次のようになります。
 
 ```sql
 INSERT INTO `t` (`a`) VALUES (10) ON DUPLICATE KEY UPDATE `a` = 10;
@@ -243,7 +235,7 @@ INSERT INTO `t` (`a`) VALUES (11) ON DUPLICATE KEY UPDATE `a` = 11;
 INSERT INTO `t` (`a`) VALUES (12) ON DUPLICATE KEY UPDATE `a` = 12;
 ```
 
-The above `INSERT` statements cannot be rewritten into one statement. But if you change the three statements into the following ones:
+上記の`INSERT`文を1つの文に書き直すことはできません。しかし、3つの文を次のように書き換えると、
 
 ```sql
 INSERT INTO `t` (`a`) VALUES (10) ON DUPLICATE KEY UPDATE `a` = VALUES(`a`);
@@ -251,46 +243,46 @@ INSERT INTO `t` (`a`) VALUES (11) ON DUPLICATE KEY UPDATE `a` = VALUES(`a`);
 INSERT INTO `t` (`a`) VALUES (12) ON DUPLICATE KEY UPDATE `a` = VALUES(`a`);
 ```
 
-Then they meet the rewrite requirement. The above `INSERT` statements will be rewritten into the following one statement:
+すると、書き換え要件を満たします。上記の`INSERT`は、次の1つの文に書き換えられます。
 
 ```sql
 INSERT INTO `t` (`a`) VALUES (10), (11), (12) ON DUPLICATE KEY UPDATE a = VALUES(`a`);
 ```
 
-If there are three or more updates during the batch update, the SQL statements will be rewritten and sent as multiple queries. This effectively reduces the client-to-server request overhead, but the side effect is that a larger SQL statement is generated. For example:
+バッチ更新中に3つ以上の更新が発生した場合、SQL文は書き換えられ、複数のクエリとして送信されます。これにより、クライアントからサーバーへのリクエストのオーバーヘッドは効果的に削減されますが、副作用として生成されるSQL文のサイズが大きくなります。例えば、次のようになります。
 
 ```sql
 UPDATE `t` SET `a` = 10 WHERE `id` = 1; UPDATE `t` SET `a` = 11 WHERE `id` = 2; UPDATE `t` SET `a` = 12 WHERE `id` = 3;
 ```
 
-In addition, because of a [client bug](https://bugs.mysql.com/bug.php?id=96623), if you want to configure `rewriteBatchedStatements=true` and `useServerPrepStmts=true` during batch update, it is recommended that you also configure the `allowMultiQueries=true` parameter to avoid this bug.
+また、 [クライアントのバグ](https://bugs.mysql.com/bug.php?id=96623)ため、バッチ更新中に`rewriteBatchedStatements=true`と`useServerPrepStmts=true`設定する場合は、このバグを回避するために`allowMultiQueries=true`パラメータも設定することをお勧めします。
 
-#### Integrate parameters
+#### パラメータを統合する {#integrate-parameters}
 
-Through monitoring, you might notice that although the application only performs `INSERT` operations to the TiDB cluster, there are a lot of redundant `SELECT` statements. Usually this happens because JDBC sends some SQL statements to query the settings, for example, `select @@session.transaction_read_only`. These SQL statements are useless for TiDB, so it is recommended that you configure `useConfigs=maxPerformance` to avoid extra overhead.
+監視中に、アプリケーションがTiDBクラスタに対して`INSERT`操作しか実行していないにもかかわらず、冗長な`SELECT`ステートメントが多数存在することに気付く場合があります。これは通常、JDBCが設定を照会するためにいくつかのSQLステートメント（例えば`select @@session.transaction_read_only` ）を送信するために発生します。これらのSQLステートメントはTiDBには役に立たないため、余分なオーバーヘッドを回避するために`useConfigs=maxPerformance`設定することをお勧めします。
 
-`useConfigs=maxPerformance` includes a group of configurations. To get the detailed configurations in MySQL Connector/J 8.0 and those in MySQL Connector/J 5.1, see [mysql-connector-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties) and [mysql-connector-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties) respectively.
+`useConfigs=maxPerformance`には一連の設定が含まれています。MySQL Connector/J 8.0とMySQL Connector/J 5.1の詳細な設定については、それぞれ[mysql-コネクタ-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties)と[mysql-コネクタ-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties)参照してください。
 
-After it is configured, you can check the monitoring to see a decreased number of `SELECT` statements.
+設定後、監視をチェックして、 `SELECT`ステートメントの数が減っていることを確認できます。
 
-#### Timeout-related parameters
+#### タイムアウト関連のパラメータ {#timeout-related-parameters}
 
-TiDB provides two MySQL-compatible parameters to control the timeout: [`wait_timeout`](/system-variables.md#wait_timeout) and [`max_execution_time`](/system-variables.md#max_execution_time). These two parameters respectively control the connection idle timeout with the Java application and the timeout of the SQL execution in the connection; that is to say, these parameters control the longest idle time and the longest busy time for the connection between TiDB and the Java application. Since TiDB v5.4, the default value of `wait_timeout` is `28800` seconds, which is 8 hours. For TiDB versions earlier than v5.4, the default value is `0`, which means the timeout is unlimited. The default value of `max_execution_time` is `0`, which means the maximum execution time of a SQL statement is unlimited.
+TiDB には、タイムアウトを制御するための MySQL 互換パラメータが[`wait_timeout`](/system-variables.md#wait_timeout)と[`max_execution_time`](/system-variables.md#max_execution_time) 2 つが用意されています。これらの 2 つのパラメータはそれぞれ、 Javaアプリケーションとの接続アイドル タイムアウトと、接続中の SQL 実行のタイムアウトを制御します。つまり、これらのパラメータは、TiDB とJavaアプリケーション間の接続の最長アイドル時間と最長ビジー時間を制御します。TiDB v5.4 以降では、デフォルト値`wait_timeout`は`28800`秒 (8 時間) です。v5.4 より前のバージョンの TiDB では、デフォルト値は`0`で、タイムアウトは無制限であることを意味します。デフォルト値`max_execution_time`は`0`で、SQL 文の最大実行時間は無制限であることを意味します。
 
-The default value of [`wait_timeout`](/system-variables.md#wait_timeout) is relatively large. In scenarios where a transaction starts but is neither committed nor rolled back, you might need a finer-grained control and a shorter timeout to prevent prolonged lock holding. In this case, you can use [`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) (introduced in TiDB v7.6.0) to control the idle timeout for transactions in a user session.
+デフォルト値の[`wait_timeout`](/system-variables.md#wait_timeout)比較的大きい値です。トランザクションが開始されたものの、コミットもロールバックも行われないシナリオでは、ロックの長時間保持を防ぐために、よりきめ細かな制御と短いタイムアウトが必要になる場合があります。このような場合は、TiDB v7.6.0で導入された[`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760)使用して、ユーザーセッション内のトランザクションのアイドルタイムアウトを制御できます。
 
-However, in an actual production environment, idle connections and SQL statements with excessively long execution time negatively affect databases and applications. To avoid idle connections and SQL statements that are executed for too long, you can configure these two parameters in your application's connection string. For example, set `sessionVariables=wait_timeout=3600` (1 hour) and `sessionVariables=max_execution_time=300000` (5 minutes).
+しかし、実際の本番環境では、アイドル接続や実行時間が長すぎるSQL文は、データベースやアプリケーションに悪影響を及ぼします。アイドル接続やSQL文の実行時間が長すぎるのを回避するには、アプリケーションの接続文字列でこれらの2つのパラメータを設定できます。例えば、 `sessionVariables=wait_timeout=3600` （1時間）と`sessionVariables=max_execution_time=300000` （5分）を設定します。
 
-## Need help?
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

@@ -1,68 +1,66 @@
 ---
 title: TiFlash MinTSO Scheduler
-summary: Learn the implementation principles of the TiFlash MinTSO Scheduler.
+summary: TiFlash MinTSO Scheduler の実装原則を学びます。
 ---
 
-# TiFlash MinTSO Scheduler
+# TiFlash MinTSO スケジューラ {#tiflash-mintso-scheduler}
 
-The TiFlash MinTSO scheduler is a distributed scheduler for [MPP](/glossary.md#massively-parallel-processing-mpp) tasks in TiFlash. This document describes the implementation principles of the TiFlash MinTSO scheduler.
+TiFlash MinTSOスケジューラは、 TiFlash内の[MPP](/glossary.md#massively-parallel-processing-mpp)タスク用の分散スケジューラです。このドキュメントでは、 TiFlash MinTSOスケジューラの実装原理について説明します。
 
-## Background
+## 背景 {#background}
 
-When processing an MPP query, TiDB splits the query into one or more MPP tasks and sends these MPP tasks to the corresponding TiFlash nodes for compilation and execution. Before TiFlash uses the [pipeline execution model](/tiflash/tiflash-pipeline-model.md), TiFlash needs to use several threads to execute each MPP task, with the specific number of threads depending on the complexity of the MPP task and the concurrency parameters set in TiFlash.
+MPPクエリを処理する際、TiDBはクエリを1つ以上のMPPタスクに分割し、これらのMPPタスクを対応するTiFlashノードに送信してコンパイルおよび実行します。TiFlashが[パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)使用する前に、各MPPタスクを実行するために複数のスレッドを使用する必要があります。具体的なスレッド数は、MPPタスクの複雑さとTiFlashに設定された同時実行パラメータによって異なります。
 
-In high concurrency scenarios, TiFlash nodes receive multiple MPP tasks simultaneously. If the execution of MPP tasks is not controlled, the number of threads that TiFlash needs to request from the system will increase linearly along with the increasing number of MPP tasks. Too many threads can affect the execution efficiency of TiFlash, and because the operating system itself supports a limited number of threads, TiFlash will encounter errors when it requests more threads than the operating system can provide.
+同時実行性の高いシナリオでは、 TiFlashノードは複数のMPPタスクを同時に受信します。MPPタスクの実行が制御されていない場合、 TiFlashがシステムに要求する必要があるスレッド数は、MPPタスク数の増加に伴って直線的に増加します。スレッド数が多すぎるとTiFlashの実行効率に影響を与える可能性があります。また、オペレーティングシステム自体がサポートするスレッド数には制限があるため、オペレーティングシステムが提供できる以上のスレッドをTiFlashが要求するとエラーが発生します。
 
-To improve TiFlash's processing capability in high concurrency scenarios, an MPP task scheduler needs to be introduced into TiFlash.
+高い同時実行性が必要なシナリオで TiFlash の処理能力を向上させるには、 TiFlashに MPP タスク スケジューラを導入する必要があります。
 
-## Implementation principles
+## 実施原則 {#implementation-principles}
 
-As mentioned in the [background](#background), the initial purpose of introducing the TiFlash task scheduler is to control the number of threads used during MPP query execution. A simple scheduling strategy is to specify the maximum number of threads TiFlash can request. For each MPP task, the scheduler decides whether the MPP task can be scheduled based on the current number of threads used by the system and the expected number of threads the MPP task will use:
+[背景](#background)で述べたように、 TiFlashタスクスケジューラを導入する当初の目的は、MPP クエリ実行中に使用されるスレッド数を制御することです。シンプルなスケジューリング戦略は、 TiFlash が要求できる最大スレッド数を指定することです。スケジューラは、各 MPP タスクについて、システムで現在使用されているスレッド数と、MPP タスクが使用すると予想されるスレッド数に基づいて、その MPP タスクをスケジュールできるかどうかを判断します。
 
 ![TiFlash MinTSO Scheduler v1](/media/tiflash/tiflash_mintso_v1.png)
 
-Although the preceding scheduling strategy can effectively control the number of system threads, an MPP task is not the smallest independent execution unit, and dependencies exist between different MPP tasks:
+前述のスケジューリング戦略はシステム スレッドの数を効果的に制御できますが、MPP タスクは最小の独立した実行単位ではなく、異なる MPP タスク間に依存関係が存在します。
 
 ```sql
 EXPLAIN SELECT count(*) FROM t0 a JOIN t0 b ON a.id = b.id;
 ```
 
-```
-+--------------------------------------------+----------+--------------+---------------+----------------------------------------------------------+
-| id                                         | estRows  | task         | access object | operator info                                            |
-+--------------------------------------------+----------+--------------+---------------+----------------------------------------------------------+
-| HashAgg_44                                 | 1.00     | root         |               | funcs:count(Column#8)->Column#7                          |
-| └─TableReader_46                           | 1.00     | root         |               | MppVersion: 2, data:ExchangeSender_45                    |
-|   └─ExchangeSender_45                      | 1.00     | mpp[tiflash] |               | ExchangeType: PassThrough                                |
-|     └─HashAgg_13                           | 1.00     | mpp[tiflash] |               | funcs:count(1)->Column#8                                 |
-|       └─Projection_43                      | 12487.50 | mpp[tiflash] |               | test.t0.id                                               |
-|         └─HashJoin_42                      | 12487.50 | mpp[tiflash] |               | inner join, equal:[eq(test.t0.id, test.t0.id)]           |
-|           ├─ExchangeReceiver_22(Build)     | 9990.00  | mpp[tiflash] |               |                                                          |
-|           │ └─ExchangeSender_21            | 9990.00  | mpp[tiflash] |               | ExchangeType: Broadcast, Compression: FAST               |
-|           │   └─Selection_20               | 9990.00  | mpp[tiflash] |               | not(isnull(test.t0.id))                                  |
-|           │     └─TableFullScan_19         | 10000.00 | mpp[tiflash] | table:a       | pushed down filter:empty, keep order:false, stats:pseudo |
-|           └─Selection_24(Probe)            | 9990.00  | mpp[tiflash] |               | not(isnull(test.t0.id))                                  |
-|             └─TableFullScan_23             | 10000.00 | mpp[tiflash] | table:b       | pushed down filter:empty, keep order:false, stats:pseudo |
-+--------------------------------------------+----------+--------------+---------------+----------------------------------------------------------+
-```
+    +--------------------------------------------+----------+--------------+---------------+----------------------------------------------------------+
+    | id                                         | estRows  | task         | access object | operator info                                            |
+    +--------------------------------------------+----------+--------------+---------------+----------------------------------------------------------+
+    | HashAgg_44                                 | 1.00     | root         |               | funcs:count(Column#8)->Column#7                          |
+    | └─TableReader_46                           | 1.00     | root         |               | MppVersion: 2, data:ExchangeSender_45                    |
+    |   └─ExchangeSender_45                      | 1.00     | mpp[tiflash] |               | ExchangeType: PassThrough                                |
+    |     └─HashAgg_13                           | 1.00     | mpp[tiflash] |               | funcs:count(1)->Column#8                                 |
+    |       └─Projection_43                      | 12487.50 | mpp[tiflash] |               | test.t0.id                                               |
+    |         └─HashJoin_42                      | 12487.50 | mpp[tiflash] |               | inner join, equal:[eq(test.t0.id, test.t0.id)]           |
+    |           ├─ExchangeReceiver_22(Build)     | 9990.00  | mpp[tiflash] |               |                                                          |
+    |           │ └─ExchangeSender_21            | 9990.00  | mpp[tiflash] |               | ExchangeType: Broadcast, Compression: FAST               |
+    |           │   └─Selection_20               | 9990.00  | mpp[tiflash] |               | not(isnull(test.t0.id))                                  |
+    |           │     └─TableFullScan_19         | 10000.00 | mpp[tiflash] | table:a       | pushed down filter:empty, keep order:false, stats:pseudo |
+    |           └─Selection_24(Probe)            | 9990.00  | mpp[tiflash] |               | not(isnull(test.t0.id))                                  |
+    |             └─TableFullScan_23             | 10000.00 | mpp[tiflash] | table:b       | pushed down filter:empty, keep order:false, stats:pseudo |
+    +--------------------------------------------+----------+--------------+---------------+----------------------------------------------------------+
 
-For example, the preceding query generates two MPP tasks on each TiFlash node, where the MPP task containing the `ExchangeSender_45` executor depends on the MPP task containing the `ExchangeSender_21` executor. In high concurrency scenarios, if the scheduler schedules the MPP task containing `ExchangeSender_45` for each query, the system will enter a deadlock state.
+例えば、上記のクエリは各TiFlashノードに2つのMPPタスクを生成しますが、 `ExchangeSender_45`のエグゼキューターを含むMPPタスクは`ExchangeSender_21`エグゼキューターを含むMPPタスクに依存しています。同時実行性の高いシナリオでは、スケジューラーが各クエリに対して`ExchangeSender_45`のエグゼキューターを含むMPPタスクをスケジュールすると、システムはデッドロック状態になります。
 
-To avoid deadlock, TiFlash introduces the following two levels of thread limits:
+デッドロックを回避するために、 TiFlash は次の 2 つのレベルのスレッド制限を導入します。
 
-* thread_soft_limit: used to limit the number of threads used by the system. For specific MPP tasks, this limit can be broken to avoid deadlock.
-* thread_hard_limit: used to protect the system. Once the number of threads used by the system exceeds the hard limit, TiFlash will report an error to avoid deadlock.
+-   thread_soft_limit: システムで使用されるスレッド数を制限するために使用されます。特定のMPPタスクでは、デッドロックを回避するためにこの制限を超えることができます。
+-   thread_hard_limit: システムを保護するために使用されます。システムで使用されるスレッド数がハードリミットを超えると、 TiFlashはデッドロックを回避するためにエラーを報告します。
 
-The soft limit and hard limit work together to avoid deadlock as follows: the soft limit restricts the total number of threads used by all queries, enabling full use of resources while avoiding thread resource exhaustion; the hard limit ensures that in any situation, at least one query in the system can break the soft limit and continue to acquire thread resources and run, thus avoiding deadlock. As long as the number of threads does not exceed the hard limit, there will always be one query in the system where all its MPP tasks can be executed normally, thus preventing deadlock.
+ソフトリミットとハードリミットは、デッドロックを回避するために次のように連携して機能します。ソフトリミットは、すべてのクエリで使用されるスレッドの総数を制限し、スレッドリソースの枯渇を回避しながらリソースを最大限に活用できるようにします。ハードリミットは、いかなる状況においても、システム内の少なくとも1つのクエリがソフトリミットを破り、スレッドリソースを取得して実行を継続できるようにすることで、デッドロックを回避します。スレッド数がハードリミットを超えない限り、システム内には常に1つのクエリが存在し、そのクエリのすべてのMPPタスクが正常に実行され、デッドロックを回避します。
 
-The goal of the MinTSO scheduler is to control the number of system threads while ensuring that there is always one and only one special query in the system, where all its MPP tasks can be scheduled. The MinTSO scheduler is a fully distributed scheduler, with each TiFlash node scheduling MPP tasks based only on its own information. Therefore, all MinTSO schedulers on TiFlash nodes need to identify the same "special" query. In TiDB, each query carries a read timestamp (`start_ts`), and the MinTSO scheduler defines the "special" query as the query with the smallest `start_ts` on the current TiFlash node. Based on the principle that the global minimum is also the local minimum, the "special" query selected by all TiFlash nodes must be the same, called the MinTSO query.
+MinTSOスケジューラの目的は、システムスレッドの数を制御しながら、システム内に常に1つの特別なクエリが存在し、そのクエリですべてのMPPタスクをスケジュールできるようにすることです。MinTSOスケジューラは完全に分散されたスケジューラであり、各TiFlashノードは自身の情報のみに基づいてMPPタスクをスケジュールします。したがって、 TiFlashノード上のすべてのMinTSOスケジューラは同じ「特別な」クエリを識別する必要があります。TiDBでは、各クエリは読み取りタイムスタンプ（ `start_ts` ）を持ち、MinTSOスケジューラは現在のTiFlashノード上で最も小さい`start_ts`持つクエリを「特別な」クエリとして定義します。グローバル最小値はローカル最小値でもあるという原則に基づき、すべてのTiFlashノードによって選択される「特別な」クエリは、MinTSOクエリと呼ばれる同じである必要があります。
 
-The scheduling process of the MinTSO Scheduler is as follows:
+MinTSO スケジューラのスケジューリング プロセスは次のとおりです。
 
 ![TiFlash MinTSO Scheduler v2](/media/tiflash/tiflash_mintso_v2.png)
 
-By introducing soft limit and hard limit, the MinTSO scheduler effectively avoids system deadlock while controlling the number of system threads. In high concurrency scenarios, however, most queries might only have part of their MPP tasks scheduled. Queries with only part of MPP tasks scheduled cannot execute normally, leading to low system execution efficiency. To avoid this situation, TiFlash introduces a query-level limit for the MinTSO scheduler, called active_set_soft_limit. This limit allows only MPP tasks of up to active_set_soft_limit queries to participate in scheduling; MPP tasks of other queries do not participate in scheduling, and only after the current queries finish can new queries participate in scheduling. This limit is only a soft limit because for the MinTSO query, all its MPP tasks can be scheduled directly as long as the number of system threads does not exceed the hard limit.
+ソフト制限とハード制限を導入することで、MinTSO スケジューラはシステム スレッドの数を制御しながらシステム デッドロックを効果的に回避します。ただし、同時実行性の高いシナリオでは、ほとんどのクエリで MPP タスクの一部のみがスケジュールされている可能性があります。MPP タスクの一部のみがスケジュールされているクエリは正常に実行できず、システム実行効率が低下します。この状況を回避するために、 TiFlash は、active_set_soft_limit と呼ばれる MinTSO スケジューラのクエリ レベルの制限を導入しています。この制限により、active_set_soft_limit クエリまでの MPP タスクのみがスケジューリングに参加できます。その他のクエリの MPP タスクはスケジューリングに参加せず、現在のクエリが終了した後にのみ新しいクエリがスケジューリングに参加できます。MinTSO クエリの場合、システム スレッドの数がハード制限を超えない限り、すべての MPP タスクを直接スケジュールできるため、この制限は単なるソフト制限です。
 
-## See also
+## 参照 {#see-also}
 
-- [Configure TiFlash](/tiflash/tiflash-configuration.md): learn how to configure the MinTSO scheduler.
+-   [TiFlashを設定する](/tiflash/tiflash-configuration.md) : MinTSO スケジューラを構成する方法を学習します。

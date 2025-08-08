@@ -1,36 +1,36 @@
 ---
 title: Create a Database
-summary: Learn steps, rules, and examples to create a database.
+summary: データベースを作成する手順、ルール、および例を学びます。
 ---
 
-# Create a Database
+# データベースを作成する {#create-a-database}
 
-This document describes how to create a database using SQL and various programming languages and lists the rules of database creation. In this document, the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application is taken as an example to walk you through the steps of database creation.
+このドキュメントでは、SQLと様々なプログラミング言語を用いてデータベースを作成する方法と、データベース作成のルールを列挙します。このドキュメントでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションを例に、データベース作成の手順を順を追って説明します。
 
-## Before you start
+## 始める前に {#before-you-start}
 
-Before creating a database, do the following:
+データベースを作成する前に、次の操作を行います。
 
-- [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
-- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
+-   [TiDB Cloudサーバーレスクラスタの構築](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)読んでください。
 
-## What is database
+## データベースとは {#what-is-database}
 
-[Database](/develop/dev-guide-schema-design-overview.md) objects in TiDB contain **tables**, **views**, **sequences**, and other objects.
+TiDB の[データベース](/develop/dev-guide-schema-design-overview.md)オブジェクトには、**テーブル**、**ビュー**、**シーケンス**、およびその他のオブジェクトが含まれます。
 
-## Create databases
+## データベースを作成する {#create-databases}
 
-To create a database, you can use the `CREATE DATABASE` statement.
+データベースを作成するには、 `CREATE DATABASE`ステートメントを使用できます。
 
-For example, to create a database named `bookshop` if it does not exist, use the following statement:
+たとえば、存在しない場合に`bookshop`という名前のデータベースを作成するには、次のステートメントを使用します。
 
 ```sql
 CREATE DATABASE IF NOT EXISTS `bookshop`;
 ```
 
-For more information and examples of the `CREATE DATABASE` statement, see the [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md) document.
+`CREATE DATABASE`ステートメントの詳細と例については、 [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)ドキュメントを参照してください。
 
-To execute the library build statement as the `root` user, run the following command:
+ライブラリ ビルド ステートメントを`root`ユーザーとして実行するには、次のコマンドを実行します。
 
 ```shell
 mysql
@@ -41,11 +41,11 @@ mysql
     -e "CREATE DATABASE IF NOT EXISTS bookshop;"
 ```
 
-## View databases
+## データベースをビュー {#view-databases}
 
-To view the databases in a cluster, use the [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md) statement.
+クラスター内のデータベースを表示するには、 [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)ステートメントを使用します。
 
-For example:
+例えば：
 
 ```shell
 mysql
@@ -56,41 +56,39 @@ mysql
     -e "SHOW DATABASES;"
 ```
 
-The following is an example output:
+出力例は次のとおりです。
 
-```
-+--------------------+
-| Database           |
-+--------------------+
-| INFORMATION_SCHEMA |
-| PERFORMANCE_SCHEMA |
-| bookshop           |
-| mysql              |
-| test               |
-+--------------------+
-```
+    +--------------------+
+    | Database           |
+    +--------------------+
+    | INFORMATION_SCHEMA |
+    | PERFORMANCE_SCHEMA |
+    | bookshop           |
+    | mysql              |
+    | test               |
+    +--------------------+
 
-## Rules in database creation
+## データベース作成のルール {#rules-in-database-creation}
 
-- Follow the [Database Naming Conventions](/develop/dev-guide-object-naming-guidelines.md) and name your database meaningfully.
-- TiDB comes with a default database named `test`. However, it is not recommended that you use it in a production environment if you do not have to. You can create your own database using the `CREATE DATABASE` statement and change the current database using the [`USE {databasename};`](/sql-statements/sql-statement-use.md) statement in a SQL session.
-- Use the `root` user to create objects such as database, roles, and users. Grant only the necessary privileges to roles and users.
-- As a best practice, it is recommended that you use a **MySQL command-line client** or a **MySQL GUI client** instead of a driver or ORM to execute database schema changes.
+-   [データベースの命名規則](/develop/dev-guide-object-naming-guidelines.md)に従って、データベースに意味のある名前を付けます。
+-   TiDBには、 `test`というデフォルトのデータベースが付属しています。ただし、必要がない限り、本番環境での使用は推奨されません。SQLセッションで`CREATE DATABASE`ステートメントを使用して独自のデータベースを作成し、 [`USE {databasename};`](/sql-statements/sql-statement-use.md)ステートメントを使用して現在のデータベースを変更できます。
+-   `root`ユーザーを使用して、データベース、ロール、ユーザーなどのオブジェクトを作成します。ロールとユーザーには必要な権限のみを付与します。
+-   ベスト プラクティスとして、データベース スキーマの変更を実行するには、ドライバーまたは ORM ではなく**、MySQL コマンドライン クライアント**または**MySQL GUI クライアント**を使用することをお勧めします。
 
-## Next step
+## 次のステップ {#next-step}
 
-After creating a database, you can add **tables** to it. For more information, see [Create a Table](/develop/dev-guide-create-table.md).
+データベースを作成したら、**テーブル**を追加できます。詳細については、 [テーブルを作成する](/develop/dev-guide-create-table.md)参照してください。
 
-## Need help?
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

@@ -1,37 +1,37 @@
 ---
 title: TiDB Incremental Backup and Restore Guide
-summary: Incremental data is the differentiated data between starting and end snapshots, along with DDLs. It reduces backup volume and requires setting `tidb_gc_life_time` for incremental backup. Use `tiup br backup` with `--lastbackupts` for incremental backup and ensure all previous data is restored before restoring incremental data.
+summary: 増分データは、開始スナップショットと終了スナップショット間の差分データとDDLです。これによりバックアップボリュームが削減され、増分バックアップにはtidb_gc_life_time`の設定が必要になります。増分バックアップには`tiup br backup`と`--lastbackupts`オプションを使用し、増分データを復元する前に以前のデータがすべて復元されていることを確認してください。
 ---
 
-# TiDB Incremental Backup and Restore Guide
+# TiDB 増分バックアップとリストアガイド {#tidb-incremental-backup-and-restore-guide}
 
-Incremental data of a TiDB cluster is differentiated data between the starting snapshot and the end snapshot of time period, and the DDLs generated during this period. Compared with full (snapshot) backup data, incremental data is smaller and therefore it is a supplementary to snapshot backup, which reduces the volume of backup data. To perform incremental backup, ensure that MVCC data generated within the specified period is not garbage collected by the [TiDB GC mechanism](/garbage-collection-overview.md). For example, to perform incremental backup hourly, you must set [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) to a value greater than 1 hour.
+TiDBクラスターの増分データは、期間の開始スナップショットと終了スナップショット間の差分データ、およびこの期間に生成されたDDLです。完全（スナップショット）バックアップデータと比較して増分データはサイズが小さいため、スナップショットバックアップの補足として機能し、バックアップデータの容量を削減します。増分バックアップを実行するには、指定された期間内に生成されたMVCCデータが[TiDB GCメカニズム](/garbage-collection-overview.md)によってガベージコレクションされないようにしてください。たとえば、1時間ごとに増分バックアップを実行するには、 [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) 1時間より大きい値に設定する必要があります。
 
-> **Warning:**
+> **警告：**
 >
-> Development for this feature has stopped. It is recommended that you use [log backup and PITR](/br/br-pitr-guide.md) as an alternative.
+> この機能の開発は停止しています。代替として[ログバックアップとPITR](/br/br-pitr-guide.md)使用することをお勧めします。
 
-## Limitations
+## 制限事項 {#limitations}
 
-Because restoring the incremental backup relies on the snapshot of the database table at the backup time point to filter incremental DDL statements, the tables deleted during the incremental backup process might still exist after the data restore and need to be manually deleted.
+増分バックアップの復元では、増分 DDL ステートメントをフィルター処理するためにバックアップ時点のデータベース テーブルのスナップショットを使用するため、増分バックアップ プロセス中に削除されたテーブルはデータの復元後も存在する可能性があり、手動で削除する必要があります。
 
-The incremental backup does not support batch renaming of tables. If batch renaming of tables occurs during the incremental backup process, the data restore might fail. It is recommended to perform a full backup after batch renaming tables, and use the latest full backup to replace the incremental data during restore.
+増分バックアップでは、テーブル名の一括変更はサポートされていません。増分バックアップ中にテーブル名の一括変更が行われた場合、データの復元が失敗する可能性があります。テーブル名の一括変更後に完全バックアップを実行し、復元時に最新の完全バックアップを使用して増分データを置き換えることをお勧めします。
 
-Starting from v8.3.0, the `--allow-pitr-from-incremental` configuration parameter is introduced to control whether incremental backups and subsequent log backups are compatible. The default value is `true`, which means that incremental backups are compatible with subsequent log backups.
+バージョン8.3.0以降、増分バックアップと後続のログバックアップの互換性を制御するための構成パラメータ`--allow-pitr-from-incremental`が導入されました。デフォルト値は`true`で、増分バックアップと後続のログバックアップの互換性があることを意味します。
 
-- When you keep the default value `true`, the DDLs that need to be replayed are strictly checked before the incremental restore begins. This mode does not yet support `ADD INDEX`, `MODIFY COLUMN`, or `REORG PARTITION`. If you  want to use incremental backups together with log backups, make sure that none of the preceding DDLs exist during the incremental backup process. Otherwise, these three DDLs cannot be replayed correctly.
+-   デフォルト値`true`ままにしておくと、増分リストアを開始する前に、再生が必要なDDLが厳密にチェックされます。このモードでは、 `ADD INDEX` 、 `MODIFY COLUMN` 、 `REORG PARTITION`まだサポートされていません。増分バックアップとログバックアップを併用する場合は、増分バックアッププロセス中に、前述のDDLが存在しないことを確認してください。そうでない場合、これら3つのDDLを正しく再生できません。
 
-- If you want to use incremental restores without log backups during the whole recovery process, you can set `--allow-pitr-from-incremental` to `false` to skip the checks in the incremental recovery phase.
+-   リカバリプロセス全体でログ バックアップなしで増分復元を使用する場合は、 `--allow-pitr-from-incremental`から`false`設定して増分リカバリ フェーズでのチェックをスキップできます。
 
-## Back up incremental data
+## 増分データをバックアップする {#back-up-incremental-data}
 
-To back up incremental data, run the `tiup br backup` command with **the last backup timestamp** `--lastbackupts` specified. In this way, br command-line tool automatically backs up incremental data generated between `lastbackupts` and the current time. To get `--lastbackupts`, run the `validate` command. The following is an example:
+増分データをバックアップするには、 `tiup br backup`コマンドを、**最終バックアップのタイムスタンプ**`--lastbackupts`を指定して実行します。これにより、br コマンドラインツールは`lastbackupts`から現在時刻の間に生成された増分データを自動的にバックアップします。9 `--lastbackupts`取得するには、 `validate`コマンドを実行します。以下は例です。
 
 ```shell
 LAST_BACKUP_TS=`tiup br validate decode --field="end-version" --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}"| tail -n1`
 ```
 
-The following command backs up the incremental data between `(LAST_BACKUP_TS, current PD timestamp]` and the DDLs generated during this time period:
+次のコマンドは、 `(LAST_BACKUP_TS, current PD timestamp]`とこの期間中に生成された DDL 間の増分データをバックアップします。
 
 ```shell
 tiup br backup full --pd "${PD_IP}:2379" \
@@ -40,22 +40,22 @@ tiup br backup full --pd "${PD_IP}:2379" \
 --ratelimit 128
 ```
 
-- `--lastbackupts`: The last backup timestamp.
-- `--ratelimit`: The maximum speed **per TiKV** performing backup tasks (in MiB/s).
-- `storage`: The storage path of backup data. You need to save the incremental backup data under a different path from the previous snapshot backup. In the preceding example, incremental backup data is saved in the `incr` directory under the full backup data. For details, see [URI Formats of External Storage Services](/external-storage-uri.md).
+-   `--lastbackupts` : 最後のバックアップのタイムスタンプ。
+-   `--ratelimit` : バックアップ タスクを実行する**TiKV あたりの**最大速度 (MiB/秒)。
+-   `storage` : バックアップデータのstorageパス。増分バックアップデータは、前回のスナップショットバックアップとは異なるパスに保存する必要があります。上記の例では、増分バックアップデータはフルバックアップデータの下の`incr`ディレクトリに保存されます。詳細は[外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
 
-## Restore incremental data
+## 増分データを復元する {#restore-incremental-data}
 
-When restoring incremental data, make sure that all the data backed up before `LAST_BACKUP_TS` has been restored to the target cluster. Also, because incremental restore updates data, you need to ensure that there are no other writes during the restore. Otherwise, conflicts might occur.
+増分データをリストアする際は、 `LAST_BACKUP_TS`より前にバックアップされたすべてのデータがターゲットクラスターにリストアされていることを確認してください。また、増分リストアはデータを更新するため、リストア中に他の書き込みが行われていないことを確認する必要があります。そうしないと、競合が発生する可能性があります。
 
-The following command restores the full backup data stored in the `backup-101/snapshot-202209081330` directory:
+次のコマンドは、 `backup-101/snapshot-202209081330`ディレクトリに保存されている完全バックアップ データを復元します。
 
 ```shell
 tiup br restore full --pd "${PD_IP}:2379" \
 --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
-The following command restores the incremental backup data stored in the `backup-101/snapshot-202209081330/incr` directory:
+次のコマンドは、 `backup-101/snapshot-202209081330/incr`ディレクトリに保存されている増分バックアップ データを復元します。
 
 ```shell
 tiup br restore full --pd "${PD_IP}:2379" \

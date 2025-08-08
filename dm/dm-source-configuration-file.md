@@ -1,15 +1,15 @@
 ---
 title: Upstream Database Configuration File of TiDB Data Migration
-summary: Learn the configuration file of the upstream database
+summary: アップストリームデータベースの設定ファイルを学ぶ
 ---
 
-# Upstream Database Configuration File of TiDB Data Migration
+# TiDB データ移行の上流データベースコンフィグレーションファイル {#upstream-database-configuration-file-of-tidb-data-migration}
 
-This document introduces the configuration file of the upstream database, including a configuration file template and the description of each configuration parameter in this file.
+このドキュメントでは、アップストリーム データベースの構成ファイルについて紹介します。これには、構成ファイル テンプレートと、このファイル内の各構成パラメータの説明が含まれます。
 
-## Configuration file template
+## コンフィグレーションファイルテンプレート {#configuration-file-template}
 
-The following is a configuration file template of the upstream database:
+以下は、アップストリーム データベースの構成ファイル テンプレートです。
 
 ```yaml
 source-id: "mysql-replica-01"
@@ -55,118 +55,118 @@ from:
 #   action: Ignore
 ```
 
-> **Note:**
+> **注記：**
 >
-> In DM v2.0.1, DO NOT set `enable-gtid` and `enable-relay` to `true` at the same time. Otherwise, it may cause loss of incremental data.
+> DM v2.0.1では、 `enable-gtid`と`enable-relay`を同時に`true`に設定しないでください。そうしないと、増分データが失われる可能性があります。
 
-## Configuration parameters
+## コンフィグレーションパラメータ {#configuration-parameters}
 
-This section describes each configuration parameter in the configuration file.
+このセクションでは、構成ファイル内の各構成パラメータについて説明します。
 
-### Global configuration
+### グローバル構成 {#global-configuration}
 
-#### `source-id`
+#### <code>source-id</code> {#code-source-id-code}
 
-- Represents a MySQL instance ID.
+-   MySQL インスタンス ID を表します。
 
-#### `enable-gtid`
+#### <code>enable-gtid</code> {#code-enable-gtid-code}
 
-- Determines whether to pull binlog from the upstream using GTID.
-- In general, you do not need to configure `enable-gtid` manually. However, if GTID is enabled in the upstream database, and the primary/secondary switch is required, you need to set `enable-gtid` to `true`.
-- Default value: `false`
+-   GTID を使用してアップストリームからbinlogをプルするかどうかを決定します。
+-   通常、 `enable-gtid`手動で設定する必要はありません。ただし、上流データベースでGTIDが有効になっていて、プライマリ/セカンダリスイッチが必要な場合は、 `enable-gtid`を`true`に設定する必要があります。
+-   デフォルト値: `false`
 
-#### `enable-relay`
+#### <code>enable-relay</code> {#code-enable-relay-code}
 
-- Determines whether to enable the relay log feature. This parameter takes effect from v5.4. Additionally, you can [enable relay log dynamically](/dm/relay-log.md#enable-and-disable-relay-log) using the `start-relay` command.
-- Default value: `false`
+-   リレーログ機能を有効にするかどうかを指定します。このパラメータはバージョン5.4以降で有効になります。また、コマンド`start-relay`を使用して[リレーログを動的に有効にする](/dm/relay-log.md#enable-and-disable-relay-log)実行することもできます。
+-   デフォルト値: `false`
 
-#### `relay-binlog-name`
+#### <code>relay-binlog-name</code> {#code-relay-binlog-name-code}
 
-- Specifies the file name from which DM-worker starts to pull the binlog. For example, `"mysql-bin.000002"`.
-- It only works when [`enable-gtid`](#enable-gtid) is `false`. If this parameter is not specified, DM-worker will start pulling from the earliest binlog file being replicated. Manual configuration is generally not required.
+-   DM-workerがbinlogの取得を開始するファイル名を指定します。例： `"mysql-bin.000002"` 。
+-   [`enable-gtid`](#enable-gtid)が`false`場合にのみ機能します。このパラメータが指定されていない場合、DM-workerは複製される最も古いbinlogファイルからプルを開始します。通常、手動設定は必要ありません。
 
-#### `relay-binlog-gtid`
+#### <code>relay-binlog-gtid</code> {#code-relay-binlog-gtid-code}
 
-- Specifies the GTID from which DM-worker starts to pull the binlog. For example, `"e9a1fc22-ec08-11e9-b2ac-0242ac110003:1-7849"`.
-- It only works when [`enable-gtid`](#enable-gtid) is `true`. If this parameter is not specified, DM-worker will start pulling from the latest GTID being replicated. Manual configuration is generally not required.
+-   DMワーカーがbinlogのプルを開始するGTIDを指定します。例： `"e9a1fc22-ec08-11e9-b2ac-0242ac110003:1-7849"` 。
+-   [`enable-gtid`](#enable-gtid)が`true`場合にのみ機能します。このパラメータが指定されていない場合、DMワーカーはレプリケーション中の最新のGTIDからプルを開始します。通常、手動設定は必要ありません。
 
-#### `relay-dir`
+#### <code>relay-dir</code> {#code-relay-dir-code}
 
-- Specifies the relay log directory.
-- Default value: `"./relay_log"`
+-   リレー ログ ディレクトリを指定します。
+-   デフォルト値: `"./relay_log"`
 
-#### `host`
+#### <code>host</code> {#code-host-code}
 
-- Specifies the host of the upstream database.
+-   アップストリーム データベースのホストを指定します。
 
-#### `port`
+#### <code>port</code> {#code-port-code}
 
-- Specifies the port of the upstream database.
+-   アップストリーム データベースのポートを指定します。
 
-#### `user`
+#### <code>user</code> {#code-user-code}
 
-- Specifies the username of the upstream database.
+-   アップストリーム データベースのユーザー名を指定します。
 
-#### `password`
+#### <code>password</code> {#code-password-code}
 
-- Specifies the user password of the upstream database. It is recommended to use the password encrypted with dmctl.
+-   アップストリームデータベースのユーザーパスワードを指定します。dmctlで暗号化されたパスワードを使用することをお勧めします。
 
-#### `security`
+#### <code>security</code> {#code-security-code}
 
-- Specifies the TLS config of the upstream database. The configured file paths of the certificates must be accessible to all nodes. If the configured file paths are local paths, then all the nodes in the cluster need to store a copy of the certificates in the same path of each host.
+-   アップストリームデータベースのTLS設定を指定します。証明書のファイルパスは、すべてのノードからアクセスできる必要があります。ファイルパスがローカルパスの場合、クラスター内のすべてのノードは、各ホストの同じパスに証明書のコピーを保存する必要があります。
 
-### Relay log cleanup strategy configuration (`purge`)
+### リレーログクリーンアップ戦略の構成（ <code>purge</code> ） {#relay-log-cleanup-strategy-configuration-code-purge-code}
 
-Generally, there is no need to manually configure these parameters unless there is a large amount of relay logs and disk capacity is insufficient.
+通常、リレーログが大量に存在し、ディスク容量が不足している場合を除き、これらのパラメータを手動で設定する必要はありません。
 
-#### `interval`
+#### <code>interval</code> {#code-interval-code}
 
-- Specifies the time interval at which relay logs are regularly checked for expiration, in seconds.
-- Default value: `3600`
-- Unit: seconds
+-   リレー ログの有効期限を定期的にチェックする間隔 (秒単位) を指定します。
+-   デフォルト値: `3600`
+-   単位: 秒
 
-#### `expires`
+#### <code>expires</code> {#code-expires-code}
 
-- Specifies the expiration time for relay logs.
-- The relay log that is not written by the relay processing unit, or does not need to be read by the existing data migration task will be deleted by DM if it exceeds the expiration time. If this parameter is not specified, the automatic purge is not performed.
-- Default value: `0`
-- Unit: hours
+-   リレー ログの有効期限を指定します。
+-   リレー処理ユニットによって書き込まれていない、または既存のデータ移行タスクによって読み取る必要がないリレーログは、有効期限を過ぎるとDMによって削除されます。このパラメータが指定されていない場合、自動パージは実行されません。
+-   デフォルト値: `0`
+-   単位: 時間
 
-#### `remain-space`
+#### <code>remain-space</code> {#code-remain-space-code}
 
-- Specifies the minimum amount of free disk space, in gigabytes. When the available disk space is smaller than this value, DM-worker tries to delete relay logs.
-- Default value: `15`
-- Unit: GiB
+-   空きディスク容量の最小値をギガバイト単位で指定します。使用可能なディスク容量がこの値より小さい場合、DM-workerはリレーログを削除しようとします。
+-   デフォルト値: `15`
+-   単位: GiB
 
-> **Note:**
+> **注記：**
 >
-> The automatic data purge strategy only takes effect when [`interval`](#interval) is not `0` and at least one of the two configuration items [`expires`](#expires) and [`remain-space`](#remain-space) is not `0`.
+> 自動データ消去戦略は、 [`interval`](#interval) `0`でなく、 2 つの構成項目[`expires`](#expires)と[`remain-space`](#remain-space)うち少なくとも 1 つが`0`でない場合にのみ有効になります。
 
-### Task status checker configuration (`checker`)
+### タスクステータスチェッカーの設定（ <code>checker</code> ） {#task-status-checker-configuration-code-checker-code}
 
-DM periodically checks the current task status and error message to determine if resuming the task will eliminate the error. If needed, DM automatically retries to resume the task. DM adjusts the checking interval using the exponential backoff strategy. Its behaviors can be adjusted by the following configuration.
+DMは定期的に現在のタスクステータスとエラーメッセージを確認し、タスクを再開することでエラーが解消されるかどうかを判断します。必要に応じて、DMは自動的にタスクの再開を再試行します。DMは指数バックオフ戦略を使用してチェック間隔を調整します。DMの動作は、以下の設定で調整できます。
 
-#### `check-enable`
+#### <code>check-enable</code> {#code-check-enable-code}
 
-- Whether to enable this feature.
+-   この機能を有効にするかどうか。
 
-#### `backoff-rollback`
+#### <code>backoff-rollback</code> {#code-backoff-rollback-code}
 
-- If the current checking interval of backoff strategy is larger than this value and the task status is normal, DM will try to decrease the interval.
+-   バックオフ戦略の現在のチェック間隔がこの値より大きく、タスクのステータスが正常である場合、DM は間隔を短縮しようとします。
 
-#### `backoff-max`
+#### <code>backoff-max</code> {#code-backoff-max-code}
 
-- The maximum value of checking interval of backoff strategy, must be larger than 1 second.
+-   バックオフ戦略のチェック間隔の最大値は 1 秒より大きくなければなりません。
 
-### Binlog event filter
+### Binlogイベントフィルター {#binlog-event-filter}
 
-Starting from DM v2.0.2, you can configure binlog event filters in the source configuration file.
+DM v2.0.2 以降では、ソース構成ファイルでbinlogイベント フィルターを構成できます。
 
-#### `case-sensitive`
+#### <code>case-sensitive</code> {#code-case-sensitive-code}
 
-- Determines whether the filtering rules are case-sensitive.
-- Default value: `false`
+-   フィルタリング ルールで大文字と小文字を区別するかどうかを決定します。
+-   デフォルト値: `false`
 
-#### `filters`
+#### <code>filters</code> {#code-filters-code}
 
-- Specifies binlog event filtering rules. For details, see [Binlog event filter parameter explanation](/dm/dm-binlog-event-filter.md#parameter-descriptions).
+-   binlogイベントのフィルタリングルールを指定します。詳細については[Binlogイベントフィルターパラメータの説明](/dm/dm-binlog-event-filter.md#parameter-descriptions)参照してください。

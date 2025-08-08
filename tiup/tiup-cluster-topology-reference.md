@@ -1,100 +1,100 @@
 ---
 title: Topology Configuration File for TiDB Deployment Using TiUP
-summary: TiUP uses a topology file to deploy or modify the cluster topology for TiDB. It also deploys monitoring servers like Prometheus, Grafana, and Alertmanager. The topology file contains sections for global configuration, monitoring services, component versions, and more. Each section specifies the machines to which the corresponding services are deployed and their configurations.
+summary: TiUPは、TiDBのクラスタートポロジーをデプロイまたは変更するためにトポロジーファイルを使用します。また、Prometheus、Grafana、Alertmanagerなどの監視サーバーもデプロイします。トポロジーファイルには、グローバル設定、監視サービス、コンポーネントバージョンなどのセクションが含まれています。各セクションでは、対応するサービスがデプロイされるマシンとその設定を指定します。
 ---
 
-# Topology Configuration File for TiDB Deployment Using TiUP
+# TiUPを使用した TiDB デプロイメントのトポロジコンフィグレーションファイル {#topology-configuration-file-for-tidb-deployment-using-tiup}
 
-To deploy or scale TiDB using TiUP, you need to provide a topology file ([sample](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)) to describe the cluster topology.
+TiUPを使用して TiDB をデプロイまたは拡張するには、クラスタートポロジを記述するトポロジファイル ( [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml) ) を用意する必要があります。
 
-Similarly, to modify the cluster topology, you need to modify the topology file. The difference is that, after the cluster is deployed, you can only modify a part of the fields in the topology file. This document introduces each section of the topology file and each field in each section.
+同様に、クラスタトポロジを変更するには、トポロジファイルに変更を加える必要があります。違いは、クラスタのデプロイ後は、トポロジファイル内のフィールドの一部しか変更できないことです。このドキュメントでは、トポロジファイルの各セクションと、各セクション内の各フィールドについて説明します。
 
-When you deploy a TiDB cluster using TiUP, TiUP also deploys monitoring servers, such as Prometheus, Grafana, and Alertmanager. In the meantime, if you scale out this cluster, TiUP also adds the new nodes into monitoring scope. To customize the configurations of the preceding monitoring servers, you can follow the instructions in [Customize Configurations of Monitoring Servers](/tiup/customized-montior-in-tiup-environment.md).
+TiUPを使用して TiDB クラスターをデプロイすると、Prometheus、Grafana、Alertmanager などの監視サーバーもデプロイされます。また、このクラスターをスケールアウトすると、 TiUP は新しいノードを監視範囲に追加します。上記の監視サーバーの設定をカスタマイズするには、 [監視サーバーの構成をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md)の手順に従ってください。
 
-## File structure
+## ファイル構造 {#file-structure}
 
-A topology configuration file for TiDB deployment using TiUP might contain the following sections:
+TiUPを使用した TiDB デプロイメントのトポロジ構成ファイルには、次のセクションが含まれる場合があります。
 
-- [global](#global): The cluster's global configuration. Some of the configuration items use the default values and you can configure them separately in each instance.
-- [monitored](#monitored): Configuration for monitoring services, namely, the blackbox_exporter and the `node_exporter`. On each machine, a `node_exporter` and a `blackbox_exporter` are deployed.
-- [server_configs](#server_configs): Components' global configuration. You can configure each component separately. If an instance has a configuration item with the same name, the instance's configuration item will take effect.
-- [component_versions](#component_versions): Component version. You can configure it when a component does not use the cluster version. This section is introduced in tiup-cluster v1.14.0.
-- [pd_servers](#pd_servers): The configuration of the PD instance. This configuration specifies the machines to which the PD component is deployed.
-- [tidb_servers](#tidb_servers): The configuration of the TiDB instance. This configuration specifies the machines to which the TiDB component is deployed.
-- [tikv_servers](#tikv_servers): The configuration of the TiKV instance. This configuration specifies the machines to which the TiKV component is deployed.
-- [tiflash_servers](#tiflash_servers): The configuration of the TiFlash instance. This configuration specifies the machines to which the TiFlash component is deployed.
-- [tiproxy_servers](#tiproxy_servers): The configuration of the TiProxy instance. This configuration specifies the machines to which the TiProxy component is deployed.
-- [kvcdc_servers](#kvcdc_servers): The configuration of the [TiKV-CDC](https://tikv.org/docs/7.1/concepts/explore-tikv-features/cdc/cdc/) instance. This configuration specifies the machines to which the TiKV-CDC component is deployed.
-- [cdc_servers](#cdc_servers): The configuration of the TiCDC instance. This configuration specifies the machines to which the TiCDC component is deployed.
-- [tispark_masters](#tispark_masters): The configuration of the TiSpark master instance. This configuration specifies the machines to which the TiSpark master component is deployed. Only one node of TiSpark master can be deployed.
-- [tispark_workers](#tispark_workers): The configuration of the TiSpark worker instance. This configuration specifies the machines to which the TiSpark worker component is deployed.
-- [tso_servers](/tiup/tiup-cluster-topology-reference.md#tso_servers): The configuration of the TSO instance. This configuration specifies the machines to which the `tso` microservice is deployed (requires configuring `pd_mode: "ms"` in [`global`](#global) to enable [PD microservices](/pd-microservices.md)).
-- [scheduling_servers](/tiup/tiup-cluster-topology-reference.md#scheduling_servers): The configuration of the Scheduling instance. This configuration specifies the machines to which the `scheduling` microservice is deployed (requires configuring `pd_mode: "ms"` in [`global`](#global) to enable [PD microservices](/pd-microservices.md)).
-- [monitoring_servers](#monitoring_servers): Specifies the machines to which Prometheus and NGMonitoring are deployed. TiUP supports deploying multiple Prometheus instances but only the first instance is used.
-- [grafana_servers](#grafana_servers): The configuration of the Grafana instance. This configuration specifies the machines to which Grafana is deployed.
-- [alertmanager_servers](#alertmanager_servers): The configuration of the Alertmanager instance. This configuration specifies the machines to which Alertmanager is deployed.
+-   [グローバル](#global) : クラスターのグローバル設定。一部の設定項目はデフォルト値を使用しますが、インスタンスごとに個別に設定できます。
+-   [監視](#monitored) : 監視サービス（blackbox_exporterと`node_exporter`のコンフィグレーション。各マシンに`node_exporter`と`blackbox_exporter`デプロイされています。
+-   [サーバー構成](#server_configs) : コンポーネントのグローバル設定。各コンポーネントを個別に設定できます。インスタンスに同じ名前の設定項目が存在する場合、インスタンスの設定項目が有効になります。
+-   [コンポーネントバージョン](#component_versions) : コンポーネントバージョン。コンポーネントがクラスタバージョンを使用しない場合に設定できます。このセクションはtiup-cluster v1.14.0で導入されました。
+-   [pd_servers](#pd_servers) : PDインスタンスの構成。この構成では、PDコンポーネントがデプロイされるマシンを指定します。
+-   [tidb_servers](#tidb_servers) : TiDBインスタンスの構成。この構成では、TiDBコンポーネントがデプロイされるマシンを指定します。
+-   [tikv_servers](#tikv_servers) : TiKVインスタンスの構成。この構成では、TiKVコンポーネントがデプロイされるマシンを指定します。
+-   [tiflash_servers](#tiflash_servers) : TiFlashインスタンスの構成。この構成では、 TiFlashコンポーネントがデプロイされるマシンを指定します。
+-   [tiproxy_servers](#tiproxy_servers) : TiProxyインスタンスの構成。この構成は、TiProxyコンポーネントがデプロイされるマシンを指定します。
+-   [kvcdc_servers](#kvcdc_servers) : インスタンス[TiKV-CDC](https://tikv.org/docs/7.1/concepts/explore-tikv-features/cdc/cdc/)の構成。この構成では、TiKV-CDCコンポーネントがデプロイされるマシンを指定します。
+-   [cdc_servers](#cdc_servers) : TiCDCインスタンスの構成。この構成では、TiCDCコンポーネントがデプロイされるマシンを指定します。
+-   [tispark_masters](#tispark_masters) : TiSpark マスターインスタンスの構成。この構成では、TiSpark マスターコンポーネントがデプロイされるマシンを指定します。TiSpark マスターのノードは 1 つだけデプロイできます。
+-   [tispark_workers](#tispark_workers) : TiSparkワーカーインスタンスの構成。この構成では、TiSparkワーカーコンポーネントがデプロイされるマシンを指定します。
+-   [tso_servers](/tiup/tiup-cluster-topology-reference.md#tso_servers) : TSOインスタンスの構成。この構成では、 `tso`マイクロサービスがデプロイされるマシンを指定します（ [PDマイクロサービス](/pd-microservices.md)番目のマイクロサービスを有効にするには、 [`global`](#global)のマイクロサービスで`pd_mode: "ms"`マイクロサービスを構成する必要があります）。
+-   [スケジューリングサーバー](/tiup/tiup-cluster-topology-reference.md#scheduling_servers) : スケジューリングインスタンスの構成。この構成では、 `scheduling`マイクロサービスがデプロイされるマシンを指定します（ [PDマイクロサービス](/pd-microservices.md)有効にするには、 [`global`](#global)で`pd_mode: "ms"`構成する必要があります）。
+-   [監視サーバー](#monitoring_servers) : PrometheusとNGMonitoringがデプロイされるマシンを指定します。TiUPは複数のPrometheusインスタンスのデプロイをサポートしていますが、最初のインスタンスのみが使用されます。
+-   [grafana_servers](#grafana_servers) : Grafanaインスタンスの設定。この設定では、Grafanaがデプロイされるマシンを指定します。
+-   [アラートマネージャーサーバー](#alertmanager_servers) : Alertmanagerインスタンスの設定。この設定では、Alertmanagerがデプロイされるマシンを指定します。
 
-### `global`
+### <code>global</code> {#code-global-code}
 
-The `global` section corresponds to the cluster's global configuration and has the following fields:
+`global`セクションはクラスターのグローバル構成に対応し、次のフィールドがあります。
 
-- `user`: The user used to start the deployed cluster. The default value is `"tidb"`. If the user specified in the `<user>` field does not exist on the target machine, this user is automatically created.
+-   `user` : デプロイされたクラスターを起動するために使用するユーザー。デフォルト値は`"tidb"`です。4 `<user>`に指定されたユーザーがターゲットマシン上に存在しない場合、このユーザーは自動的に作成されます。
 
-- `group`: The user group to which a user belongs. It is specified when the user is created. The value defaults to that of the `<user>` field. If the specified group does not exist, it is automatically created.
+-   `group` : ユーザーが所属するユーザーグループ。ユーザー作成時に指定されます。デフォルト値は`<user>`のフィールドの値です。指定されたグループが存在しない場合は、自動的に作成されます。
 
-- `systemd_mode`: Specifies the `systemd` mode used on the target machine during cluster deployment. The default value is `system`. If set to `user`, sudo permissions are not required on the target machine, meaning [TiUP no-sudo mode](/tiup/tiup-cluster-no-sudo-mode.md) is used.
+-   `systemd_mode` : クラスタのデプロイメント時にターゲットマシンで使用される`systemd`モードを指定します。デフォルト値は`system`です。 `user`に設定すると、ターゲットマシンでsudo権限は不要になり、 [TiUP no-sudo モード](/tiup/tiup-cluster-no-sudo-mode.md)使用されます。
 
-- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. The default value is `22`.
+-   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。デフォルト値は`22`です。
 
-- `enable_tls`: Specifies whether to enable TLS for the cluster. After TLS is enabled, the generated TLS certificate must be used for connections between components or between the client and the component. The default value is `false`.
+-   `enable_tls` : クラスタでTLSを有効にするかどうかを指定します。TLSを有効にすると、生成されたTLS証明書はコンポーネント間またはクライアントとコンポーネント間の接続に使用する必要があります。デフォルト値は`false`です。
 
-- `listen_host`: Specifies the default listening IP address. If it is empty, each instance automatically sets it to `::` or `0.0.0.0` based on whether its `host` field contains `:`. This field is introduced in tiup-cluster v1.14.0. 
+-   `listen_host` : デフォルトのリスニングIPアドレスを指定します。空の場合、各インスタンスは、 `host`フィールドに`:`含まれているかどうかに基づいて、自動的に`::`または`0.0.0.0`に設定します。このフィールドはtiup-cluster v1.14.0で導入されました。
 
-- `deploy_dir`: The deployment directory of each component. The default value is `"deployed"`. Its application rules are as follows:
+-   `deploy_dir` : 各コンポーネントの配置ディレクトリ。デフォルト値は`"deployed"`です。適用ルールは以下のとおりです。
 
-    - If the absolute path of `deploy_dir` is configured at the instance level, the actual deployment directory is `deploy_dir` configured for the instance.
+    -   インスタンス レベルで絶対パス`deploy_dir`が設定されている場合、実際のデプロイメント ディレクトリはインスタンスに対して`deploy_dir`設定されます。
 
-    - For each instance, if you do not configure `deploy_dir`, its default value is the relative path `<component-name>-<component-port>`.
+    -   各インスタンスに対して`deploy_dir`設定しない場合、デフォルト値は相対パス`<component-name>-<component-port>`になります。
 
-    - If `global.deploy_dir` is an absolute path, the component is deployed to the `<global.deploy_dir>/<instance.deploy_dir>` directory.
+    -   `global.deploy_dir`が絶対パスの場合、コンポーネントは`<global.deploy_dir>/<instance.deploy_dir>`ディレクトリにデプロイされます。
 
-    - If `global.deploy_dir` is a relative path, the component is deployed to the `/home/<global.user>/<global.deploy_dir>/<instance.deploy_dir>` directory.
+    -   `global.deploy_dir`が相対パスの場合、コンポーネントは`/home/<global.user>/<global.deploy_dir>/<instance.deploy_dir>`ディレクトリにデプロイされます。
 
-- `data_dir`: The data directory. Default value: `"data"`. Its application rules are as follows:
+-   `data_dir` : データディレクトリ。デフォルト値: `"data"` 。適用ルールは以下のとおりです。
 
-    - If the absolute path of `data_dir` is configured at the instance level, the actual deployment directory is `data_dir` configured for the instance.
+    -   インスタンス レベルで絶対パス`data_dir`が設定されている場合、実際のデプロイメント ディレクトリはインスタンスに対して`data_dir`設定されます。
 
-    - For each instance, if you do not configure `data_dir`, its default value is `<global.data_dir>`.
+    -   各インスタンスに対して`data_dir`設定しない場合、デフォルト値は`<global.data_dir>`なります。
 
-    - If `data_dir` is a relative path, the component data is placed in `<deploy_dir>/<data_dir>`. For the calculation rules of `<deploy_dir>`, see the application rules of the `deploy_dir` field.
+    -   `data_dir`が相対パスの場合、コンポーネントデータは`<deploy_dir>/<data_dir>`に配置されます。 `<deploy_dir>`の計算規則については、 `deploy_dir`フィールドの適用規則を参照してください。
 
-- `log_dir`: The log directory. Default value: `"log"`. Its application rules are as follows:
+-   `log_dir` : ログディレクトリ。デフォルト値: `"log"` 。適用ルールは以下のとおりです。
 
-    - If the absolute path `log_dir` is configured at the instance level, the actual log directory is the `log_dir` configured for the instance.
+    -   絶対パス`log_dir`インスタンス レベルで構成されている場合、実際のログ ディレクトリはインスタンスに構成されている`log_dir`なります。
 
-    - For each instance, if you not configure `log_dir`, its default value is `<global.log_dir>`.
+    -   各インスタンスに対して`log_dir`設定しない場合、デフォルト値は`<global.log_dir>`なります。
 
-    - If `log_dir` is a relative path, the component log is placed in `<deploy_dir>/<log_dir>`. For the calculation rules of `<deploy_dir>`, see the application rules of the `deploy_dir` field.
+    -   `log_dir`相対パスの場合、コンポーネントログは`<deploy_dir>/<log_dir>`に配置されます。 `<deploy_dir>`の計算規則については、 `deploy_dir`フィールドの適用規則を参照してください。
 
-- `os`: The operating system of the target machine. The field controls which operating system to adapt to for the components pushed to the target machine. The default value is "linux".
+-   `os` : ターゲットマシンのオペレーティングシステム。このフィールドは、ターゲットマシンにプッシュされるコンポーネントをどのオペレーティングシステムに適応させるかを制御します。デフォルト値は「linux」です。
 
-- `arch`: The CPU architecture of the target machine. The field controls which platform to adapt to for the binary packages pushed to the target machine. The supported values are "amd64" and "arm64". The default value is "amd64".
+-   `arch` : ターゲットマシンのCPUアーキテクチャ。このフィールドは、ターゲットマシンにプッシュされるバイナリパッケージをどのプラットフォームに適合させるかを制御します。サポートされている値は「amd64」と「arm64」です。デフォルト値は「amd64」です。
 
-- `pd_mode`: The PD working mode. The field controls whether to enable [PD microservices](/pd-microservices.md). The supported value is "ms". Specifying this field means enabling PD microservices.
+-   `pd_mode` : PD動作モード。このフィールドは、 [PDマイクロサービス](/pd-microservices.md)有効にするかどうかを制御します。サポートされる値は「ms」です。このフィールドを指定すると、PDマイクロサービスが有効になります。
 
-- `resource_control`: Runtime resource control. All configurations in this field are written into the service file of systemd. There is no limit by default. The resources that can be controlled are as follows:
+-   `resource_control` : ランタイムリソース制御。このフィールドのすべての設定は、systemd のサービスファイルに書き込まれます。デフォルトでは制限はありません。制御可能なリソースは以下のとおりです。
 
-    - `memory_limit`: Limits the maximum runtime memory. For example, "2G" means that the maximum memory of 2 GB can be used.
+    -   `memory_limit` : 最大ランタイムメモリを制限します。たとえば、「2G」は最大2GBのメモリが使用できることを意味します。
 
-    - `cpu_quota`: Limits the maximum CPU usage at runtime. For example, "200%".
+    -   `cpu_quota` : 実行時のCPU使用率の上限を制限します。例：200%
 
-    - `io_read_bandwidth_max`: Limits the maximum I/O bandwidth for disk reads. For example, `"/dev/disk/by-path/pci-0000:00:1f.2-scsi-0:0:0:0 100M"`.
+    -   `io_read_bandwidth_max` : ディスク読み取りの最大I/O帯域幅を制限します。例： `"/dev/disk/by-path/pci-0000:00:1f.2-scsi-0:0:0:0 100M"` 。
 
-    - `io_write_bandwidth_max`: Limits maximum I/O bandwidth for disk writes. For example, `/dev/disk/by-path/pci-0000:00:1f.2-scsi-0:0:0:0 100M`.
+    -   `io_write_bandwidth_max` : ディスク書き込みの最大I/O帯域幅を制限します。例： `/dev/disk/by-path/pci-0000:00:1f.2-scsi-0:0:0:0 100M` 。
 
-    - `limit_core`: Controls the size of core dump.
+    -   `limit_core` : コアダンプのサイズを制御します。
 
-A `global` configuration example is as follows:
+`global`構成の例は次のとおりです。
 
 ```yaml
 global:
@@ -103,23 +103,23 @@ global:
     memory_limit: "2G"
 ```
 
-In the above configuration, the `tidb` user is used to start the cluster. At the same time, each component is restricted to a maximum of 2 GB of memory when it is running.
+上記の構成では、 `tidb`ユーザーを使用してクラスターを起動します。同時に、各コンポーネントの実行中のメモリは最大2GBに制限されます。
 
-### `monitored`
+### <code>monitored</code> {#code-monitored-code}
 
-`monitored` is used to configure the monitoring service on the target machine: [`node_exporter`](https://github.com/prometheus/node_exporter) and [`blackbox_exporter`](https://github.com/prometheus/blackbox_exporter). The following fields are included:
+`monitored`ターゲットマシンの監視サービスを設定するために使用されます: [`node_exporter`](https://github.com/prometheus/node_exporter)および[`blackbox_exporter`](https://github.com/prometheus/blackbox_exporter) 。以下のフィールドが含まれます:
 
-- `node_exporter_port`: The service port of `node_exporter`. The default value is `9100`.
+-   `node_exporter_port` : サービスポート`node_exporter`デフォルト値は`9100`です。
 
-- `blackbox_exporter_port`: The service port of `blackbox_exporter`. The default value is `9115`.
+-   `blackbox_exporter_port` : サービスポート`blackbox_exporter`デフォルト値は`9115`です。
 
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
+-   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
 
-- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated according to the `data_dir` directory configured in `global`.
+-   `data_dir` : データディレクトリを指定します。指定されない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`data_dir`ディレクトリに従ってディレクトリが生成されます。
 
-- `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
+-   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
-A `monitored` configuration example is as follows:
+`monitored`構成の例は次のとおりです。
 
 ```yaml
 monitored:
@@ -127,31 +127,31 @@ monitored:
   blackbox_exporter_port: 9115
 ```
 
-The above configuration specifies that `node_exporter` uses the `9100` port and `blackbox_exporter` uses the `9115` port.
+上記の構成では、 `node_exporter` `9100`ポートを使用し、 `blackbox_exporter` `9115`ポートを使用するように指定しています。
 
-### `server_configs`
+### <code>server_configs</code> {#code-server-configs-code}
 
-`server_configs` is used to configure services and to generate configuration files for each component. Similar to the `global` section, the configuration of this section can be overwritten by the configurations with the same names in an instance. `server_configs` mainly includes the following fields:
+`server_configs` 、サービスの設定と`global`コンポーネントの設定ファイルの生成に使用されます。2 セクションと同様に、このセクションの設定は、インスタンス内の同名の設定によって上書きできます。4 `server_configs`は主に以下のフィールドが含まれます。
 
-- `tidb`: TiDB service-related configuration. For the complete configuration, see [TiDB configuration file](/tidb-configuration-file.md).
+-   `tidb` : TiDBサービス関連の設定。詳細な設定については[TiDB構成ファイル](/tidb-configuration-file.md)参照してください。
 
-- `tikv`: TiKV service-related configuration. For the complete configuration, see [TiKV configuration file](/tikv-configuration-file.md).
+-   `tikv` : TiKVサービス関連の設定。詳細な設定については[TiKV設定ファイル](/tikv-configuration-file.md)参照してください。
 
-- `pd`: PD service-related configuration. For the complete configuration, see [PD configuration file](/pd-configuration-file.md).
+-   `pd` ：PDサービス関連の設定。詳細な設定については[PD設定ファイル](/pd-configuration-file.md)参照してください。
 
-- `tiflash`: TiFlash service-related configuration. For the complete configuration, see [TiFlash configuration file](/tiflash/tiflash-configuration.md).
+-   `tiflash` : TiFlashサービス関連の設定。詳細な設定については[TiFlash設定ファイル](/tiflash/tiflash-configuration.md)参照してください。
 
-- `tiflash_learner`: Each TiFlash node has a special built-in TiKV. This configuration item is used to configure this special TiKV. It is generally not recommended to modify the content under this configuration item.
+-   `tiflash_learner` ：各TiFlashノードには特別なTiKVが組み込まれています。この設定項目は、この特別なTiKVを設定するために使用されます。通常、この設定項目の内容を変更することは推奨されません。
 
-- `tiproxy`: TiProxy service-related configuration. For the complete configuration, see [TiProxy configuration file](/tiproxy/tiproxy-configuration.md).
+-   `tiproxy` : TiProxyサービス関連の設定。詳細な設定については[TiProxy設定ファイル](/tiproxy/tiproxy-configuration.md)参照してください。
 
-- `cdc`: TiCDC service-related configuration. For the complete configuration, see [Deploy TiCDC](/ticdc/deploy-ticdc.md).
+-   `cdc` : TiCDCサービス関連の設定。詳細な設定については[TiCDCをデプロイ](/ticdc/deploy-ticdc.md)参照してください。
 
-- `tso`: `tso` microservice-related configuration. For the complete configuration, see [TSO configuration file](/tso-configuration-file.md).
+-   `tso` : `tso`マイクロサービス関連の設定。詳細な設定については[TSO 構成ファイル](/tso-configuration-file.md)参照してください。
 
-- `scheduling`: `scheduling` microservice-related configuration. For the complete configuration, see [Scheduling configuration file](/scheduling-configuration-file.md).
+-   `scheduling` : `scheduling`マイクロサービス関連の設定。詳細な設定については[スケジュール設定ファイル](/scheduling-configuration-file.md)参照してください。
 
-A `server_configs` configuration example is as follows:
+`server_configs`構成の例は次のとおりです。
 
 ```yaml
 server_configs:
@@ -165,91 +165,91 @@ server_configs:
     readpool.unified.min-thread-count: 1
 ```
 
-The above configuration specifies the global configuration of TiDB and TiKV.
+上記の構成は、TiDB と TiKV のグローバル構成を指定します。
 
-### `component_versions`
+### <code>component_versions</code> {#code-component-versions-code}
 
-> **Note:**
+> **注記：**
 >
-> For components that share a version number, such as TiDB, TiKV, PD, and TiCDC, there are no complete tests to ensure that they work properly in a mixed-version deployment scenario. Ensure that you use this section only in test environments, or with the help of [technical support](/support.md).
+> TiDB、TiKV、PD、TiCDC など、バージョン番号を共有するコンポーネントについては、混在バージョンのデプロイメントシナリオで正常に動作することを保証するための完全なテストは用意されていません。このセクションはテスト環境でのみ使用するか、 [テクニカルサポート](/support.md)の支援を受けて使用してください。
 
-`component_versions` is used to specify the version number of a certain component. 
+`component_versions` 、特定のコンポーネントのバージョン番号を指定するために使用されます。
 
-- When `component_versions` is not configured, each component either uses the same version number as the TiDB cluster (such as PD and TiKV), or uses the latest version (such as Alertmanager). 
-- When `component_versions` is configured, the corresponding component will use the specified version, and this version will be used in subsequent cluster scaling and upgrade operations. 
+-   `component_versions`設定されていない場合、各コンポーネントは TiDB クラスターと同じバージョン番号 (PD や TiKV など) を使用するか、最新バージョン (Alertmanager など) を使用します。
+-   `component_versions`設定されている場合、対応するコンポーネントは指定されたバージョンを使用し、このバージョンは後続のクラスターのスケーリングおよびアップグレード操作で使用されます。
 
-Make sure you only configure it when you need to use a specific version of a component. 
+特定のバージョンのコンポーネントを使用する必要がある場合にのみ構成するようにしてください。
 
-`component_versions` contains the following fields:
+`component_versions`には次のフィールドが含まれます。
 
-- `tikv`: The version of the TiKV component
-- `tiflash`: The version of the TiFlash component
-- `pd`: The version of the PD component
-- `tidb_dashboard`: The version of the standalone TiDB Dashboard component
-- `cdc`: The version of the CDC component
-- `kvcdc`: The version of the TiKV-CDC component
-- `tiproxy`: The version of the TiProxy component
-- `prometheus`: The version of the Prometheus component
-- `grafana`: The version of the Grafana component
-- `alertmanager`: The version of the Alertmanager component
-- `tso`: The version of the TSO component
-- `scheduling`: The version of the Scheduling component
+-   `tikv` : TiKVコンポーネントのバージョン
+-   `tiflash` : TiFlashコンポーネントのバージョン
+-   `pd` : PDコンポーネントのバージョン
+-   `tidb_dashboard` : スタンドアロンの TiDB ダッシュボードコンポーネントのバージョン
+-   `cdc` : CDCコンポーネントのバージョン
+-   `kvcdc` : TiKV-CDCコンポーネントのバージョン
+-   `tiproxy` : TiProxyコンポーネントのバージョン
+-   `prometheus` : Prometheusコンポーネントのバージョン
+-   `grafana` : Grafanaコンポーネントのバージョン
+-   `alertmanager` : Alertmanagerコンポーネントのバージョン
+-   `tso` : TSOコンポーネントのバージョン
+-   `scheduling` : スケジュールコンポーネントのバージョン
 
-The following is an example configuration for `component_versions`:
+以下は`component_versions`の構成例です。
 
 ```yaml
 component_versions:
   kvcdc: "v1.1.1"
 ```
 
-The preceding configuration specifies the version number of TiKV-CDC to be `v1.1.1`.
+上記の構成では、TiKV-CDC のバージョン番号を`v1.1.1`に指定しています。
 
-### `pd_servers`
+### <code>pd_servers</code> {#code-pd-servers-code}
 
-`pd_servers` specifies the machines to which PD services are deployed. It also specifies the service configuration on each machine. `pd_servers` is an array, and each element of the array contains the following fields:
+`pd_servers` PDサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`pd_servers`は配列であり、配列の各要素には以下のフィールドが含まれます。
 
-- `host`: Specifies the machine to which the PD services are deployed. The field value is an IP address and is mandatory.
+-   `host` : PDサービスがデプロイされるマシンを指定します。このフィールド値はIPアドレスで、必須です。
 
-- `listen_host`: When the machine has multiple IP addresses, `listen_host` specifies the listening IP address of the service. The default value is `0.0.0.0`.
+-   `listen_host` : マシンに複数のIPアドレスがある場合、 `listen_host`サービスのリスニングIPアドレスを指定します。デフォルト値は`0.0.0.0`です。
 
-- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+-   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
-- `name`: Specifies the name of the PD instance. Different instances must have unique names; otherwise, instances cannot be deployed.
+-   `name` : PDインスタンスの名前を指定します。異なるインスタンスにはそれぞれ一意の名前を付ける必要があります。そうでない場合、インスタンスをデプロイできません。
 
-- `client_port`: Specifies the port that PD uses to connect to the client. The default value is `2379`.
+-   `client_port` : PDがクライアントへの接続に使用するポートを指定します。デフォルト値は`2379`です。
 
-- `peer_port`: Specifies the port for communication between PDs. The default value is `2380`.
+-   `peer_port` : PD間の通信ポートを指定します。デフォルト値は`2380`です。
 
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
+-   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
 
-- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated according to the `data_dir` directory configured in `global`.
+-   `data_dir` : データディレクトリを指定します。指定されない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`data_dir`ディレクトリに従ってディレクトリが生成されます。
 
-- `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
+-   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
-- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
-- `config`: The configuration rule of this field is the same as the `pd` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `pd` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Then, a configuration file is generated and sent to the machine specified in `host`.
+-   `config` : このフィールドの設定ルールは、 `server_configs`の`pd`設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`pd`内容とマージされます（2 つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
-- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
+-   `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
 
-- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
-- `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd 設定ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
-For the above fields, you cannot modify these configured fields after the deployment:
+上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
 
-- `host`
-- `listen_host`
-- `name`
-- `client_port`
-- `peer_port`
-- `deploy_dir`
-- `data_dir`
-- `log_dir`
-- `arch`
-- `os`
+-   `host`
+-   `listen_host`
+-   `name`
+-   `client_port`
+-   `peer_port`
+-   `deploy_dir`
+-   `data_dir`
+-   `log_dir`
+-   `arch`
+-   `os`
 
-A `pd_servers` configuration example is as follows:
+`pd_servers`構成の例は次のとおりです。
 
 ```yaml
 pd_servers:
@@ -260,48 +260,48 @@ pd_servers:
   - host: 10.0.1.12
 ```
 
-The above configuration specifies that PD will be deployed on `10.0.1.11` and `10.0.1.12`, and makes specific configurations for the PD of `10.0.1.11`.
+上記の設定では、 PD が`10.0.1.11`と`10.0.1.12`にデプロイされることを指定し、 `10.0.1.11`の PD に対して特定の設定を行います。
 
-### `tidb_servers`
+### <code>tidb_servers</code> {#code-tidb-servers-code}
 
-`tidb_servers` specifies the machines to which TiDB services are deployed. It also specifies the service configuration on each machine. `tidb_servers` is an array, and each element of the array contains the following fields:
+`tidb_servers` TiDB サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`tidb_servers`は配列であり、配列の各要素には以下のフィールドが含まれます。
 
-- `host`: Specifies the machine to which the TiDB services are deployed. The field value is an IP address and is mandatory.
+-   `host` : TiDBサービスがデプロイされるマシンを指定します。このフィールド値はIPアドレスで、必須です。
 
-- `listen_host`: When the machine has multiple IP addresses, `listen_host` specifies the listening IP address of the service. The default value is `0.0.0.0`.
+-   `listen_host` : マシンに複数のIPアドレスがある場合、 `listen_host`サービスのリスニングIPアドレスを指定します。デフォルト値は`0.0.0.0`です。
 
-- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+-   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
-- `port`: The listening port of TiDB services, which is used to provide connection to the MySQL client. The default value is `4000`.
+-   `port` : TiDBサービスのリスニングポート。MySQLクライアントへの接続に使用されます。デフォルト値は`4000`です。
 
-- `status_port`: The listening port of the TiDB status service, which is used to view the status of the TiDB services from the external via HTTP requests. The default value is `10080`.
+-   `status_port` : TiDBステータスサービスのリスニングポート。HTTPリクエストを介して外部からTiDBサービスのステータスを確認するために使用されます。デフォルト値は`10080`です。
 
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
+-   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
 
-- `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
+-   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
-- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
-- `config`: The configuration rule of this field is the same as the `tidb` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `tidb` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Then, a configuration file is generated and sent to the machine specified in `host`.
+-   `config` : このフィールドの設定ルールは、 `server_configs`の`tidb`設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tidb`内容とマージされます（2 つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
-- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
+-   `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
 
-- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
-- `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd 設定ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
-For the above fields, you cannot modify these configured fields after the deployment:
+上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
 
-- `host`
-- `listen_host`
-- `port`
-- `status_port`
-- `deploy_dir`
-- `log_dir`
-- `arch`
-- `os`
+-   `host`
+-   `listen_host`
+-   `port`
+-   `status_port`
+-   `deploy_dir`
+-   `log_dir`
+-   `arch`
+-   `os`
 
-A `tidb_servers` configuration example is as follows:
+`tidb_servers`構成の例は次のとおりです。
 
 ```yaml
 tidb_servers:
@@ -312,49 +312,49 @@ tidb_servers:
   - host: 10.0.1.15
 ```
 
-### `tikv_servers`
+### <code>tikv_servers</code> {#code-tikv-servers-code}
 
-`tikv_servers` specifies the machines to which TiKV services are deployed. It also specifies the service configuration on each machine. `tikv_servers` is an array, and each element of the array contains the following fields:
+`tikv_servers` TiKV サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`tikv_servers`は配列であり、配列の各要素には以下のフィールドが含まれます。
 
-- `host`: Specifies the machine to which the TiKV services are deployed. The field value is an IP address and is mandatory.
+-   `host` : TiKVサービスがデプロイされるマシンを指定します。このフィールド値はIPアドレスで、必須です。
 
-- `listen_host`: When the machine has multiple IP addresses, `listen_host` specifies the listening IP address of the service. The default value is `0.0.0.0`.
+-   `listen_host` : マシンに複数のIPアドレスがある場合、 `listen_host`サービスのリスニングIPアドレスを指定します。デフォルト値は`0.0.0.0`です。
 
-- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+-   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
-- `port`: The listening port of the TiKV services. The default value is `20160`.
+-   `port` : TiKVサービスのリスニングポート。デフォルト値は`20160`です。
 
-- `status_port`: The listening port of the TiKV status service. The default value is `20180`.
+-   `status_port` : TiKVステータスサービスのリスニングポート。デフォルト値は`20180`です。
 
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
+-   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
 
-- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated according to the `data_dir` directory configured in `global`.
+-   `data_dir` : データディレクトリを指定します。指定されない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`data_dir`ディレクトリに従ってディレクトリが生成されます。
 
-- `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
+-   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
-- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
-- `config`: The configuration rule of this field is the same as the `tikv` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `tikv` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Then, a configuration file is generated and sent to the machine specified in `host`.
+-   `config` : このフィールドの設定ルールは、 `server_configs`の`tikv`設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tikv`内容とマージされます（2 つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
-- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
+-   `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
 
-- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
-- `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd 設定ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
-For the above fields, you cannot modify these configured fields after the deployment:
+上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
 
-- `host`
-- `listen_host`
-- `port`
-- `status_port`
-- `deploy_dir`
-- `data_dir`
-- `log_dir`
-- `arch`
-- `os`
+-   `host`
+-   `listen_host`
+-   `port`
+-   `status_port`
+-   `deploy_dir`
+-   `data_dir`
+-   `log_dir`
+-   `arch`
+-   `os`
 
-A `tikv_servers` configuration example is as follows:
+`tikv_servers`構成の例は次のとおりです。
 
 ```yaml
 tikv_servers:
@@ -366,59 +366,59 @@ tikv_servers:
       server.labels: { zone: "zone1", host: "host2" }
 ```
 
-### `tiflash_servers`
+### <code>tiflash_servers</code> {#code-tiflash-servers-code}
 
-`tiflash_servers` specifies the machines to which TiFlash services are deployed. It also specifies the service configuration on each machine. This section is an array, and each element of the array contains the following fields:
+`tiflash_servers` 、 TiFlashサービスが展開されるマシンを指定します。また、各マシンにおけるサービス構成も指定します。このセクションは配列であり、配列の各要素には以下のフィールドが含まれます。
 
-- `host`: Specifies the machine to which the TiFlash services are deployed. The field value is an IP address and is mandatory.
+-   `host` : TiFlashサービスが展開されるマシンを指定します。このフィールド値は IP アドレスで、必須です。
 
-- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+-   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
-- `tcp_port`: The port of the TiFlash TCP service for internal testing purposes. The default value is `9000`. Starting from TiUP v1.12.5, this configuration item does not take effect on clusters that are v7.1.0 or later.
+-   `tcp_port` : 内部テスト用のTiFlash TCPサービスのポート。デフォルト値は`9000`です。TiUP v1.12.5以降、この設定項目はv7.1.0以降のクラスターでは有効になりません。
 
-- `flash_service_port`: The port via which TiFlash provides services. TiDB reads data from TiFlash via this port. The default value is `3930`.
+-   `flash_service_port` : TiFlashがサービスを提供するポート。TiDBはこのポートを介してTiFlashからデータを読み取ります。デフォルト値は`3930`です。
 
-- `metrics_port`: TiFlash's status port, which is used to output metric data. The default value is `8234`.
+-   `metrics_port` : TiFlashのステータスポート。メトリックデータの出力に使用されます。デフォルト値は`8234`です。
 
-- `flash_proxy_port`: The port of the built-in TiKV. The default value is `20170`.
+-   `flash_proxy_port` : 内蔵TiKVのポート。デフォルト値は`20170`です。
 
-- `flash_proxy_status_port`: The status port of the built-in TiKV. The default value is `20292`.
+-   `flash_proxy_status_port` : 内蔵TiKVのステータスポート。デフォルト値は`20292`です。
 
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
+-   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
 
-- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated according to the `data_dir` directory configured in `global`. TiFlash supports multiple `data_dir` directories separated by commas.
+-   `data_dir` : データディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`data_dir`ディレクトリに従ってディレクトリが生成されます。TiFlashは、カンマで区切られた複数の`data_dir`ディレクトリをサポートしています。
 
-- `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
+-   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
-- `tmp_path`: The storage path of TiFlash temporary files. The default value is [`path` or the first directory of `storage.latest.dir`] + "/tmp".
+-   `tmp_path` : TiFlash一時ファイルのstorageパス。デフォルト値は[ `path`または`storage.latest.dir`の最初のディレクトリ] + &quot;/tmp&quot;です。
 
-- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
-- `config`: The configuration rule of this field is the same as the `tiflash` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `tiflash` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Then, a configuration file is generated and sent to the machine specified in `host`.
+-   `config` : このフィールドの設定ルールは、 `server_configs`の`tiflash`設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tiflash`内容とマージされます（2 つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
-- `learner_config`: Each TiFlash node has a special built-in TiKV. This configuration item is used to configure this special TiKV. It is generally not recommended to modify the content under this configuration item.
+-   `learner_config` ：各TiFlashノードには特別なTiKVが組み込まれています。この設定項目は、この特別なTiKVを設定するために使用されます。通常、この設定項目の内容を変更することは推奨されません。
 
-- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
+-   `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
 
-- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
-- `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd 設定ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
-After the deployment, for the fields above, you can only add directories to `data_dir`; for the fields below, you cannot modify these fields:
+デプロイ後は、上記のフィールドについては、ディレクトリを`data_dir`にのみ追加できます。以下のフィールドについては、これらのフィールドを変更することはできません。
 
-- `host`
-- `tcp_port`
-- `flash_service_port`
-- `flash_proxy_port`
-- `flash_proxy_status_port`
-- `metrics_port`
-- `deploy_dir`
-- `log_dir`
-- `tmp_path`
-- `arch`
-- `os`
+-   `host`
+-   `tcp_port`
+-   `flash_service_port`
+-   `flash_proxy_port`
+-   `flash_proxy_status_port`
+-   `metrics_port`
+-   `deploy_dir`
+-   `log_dir`
+-   `tmp_path`
+-   `arch`
+-   `os`
 
-A `tiflash_servers` configuration example is as follows:
+`tiflash_servers`構成の例は次のとおりです。
 
 ```yaml
 tiflash_servers:
@@ -426,37 +426,37 @@ tiflash_servers:
   - host: 10.0.1.22
 ```
 
-### `tiproxy_servers`
+### <code>tiproxy_servers</code> {#code-tiproxy-servers-code}
 
-`tiproxy_servers` specifies the machines to which the TiProxy services are deployed and the service configuration on each machine. `tiproxy_servers` is an array, and each element of the array contains the following fields:
+`tiproxy_servers` 、TiProxy サービスが展開されるマシンと、各マシン上のサービスの構成を指定します。2 `tiproxy_servers`配列であり、配列の各要素には次のフィールドが含まれます。
 
-- `host`: Specifies the IP address of the machine to which the TiProxy services are deployed. This field is mandatory.
+-   `host` : TiProxyサービスがデプロイされているマシンのIPアドレスを指定します。このフィールドは必須です。
 
-- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+-   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
-- `port`: The listening port of the TiProxy SQL services. The default value is `6000`.
+-   `port` : TiProxy SQL サービスのリスニングポート。デフォルト値は`6000`です。
 
-- `status_port`: The listening port of the TiProxy status service. It is used to view the status of the TiProxy services from the external via HTTP requests. The default value is `3080`.
+-   `status_port` : TiProxyステータスサービスのリスニングポート。外部からHTTPリクエストを介してTiProxyサービスのステータスを確認するために使用されます。デフォルト値は`3080`です。
 
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated based on the `deploy_dir` directory configured in `global`.
+-   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに基づいてディレクトリが生成されます。
 
-- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is of string type. The value is the ID of the NUMA node, such as `"0,1"`.
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、ターゲットマシンに[ヌマクトル](https://linux.die.net/man/8/numactl)インストールされていることを確認してください。このフィールドを指定した場合、cpubindおよびmembindポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。値はNUMAノードのID（例： `"0,1"` ）です。
 
-- `config`: The configuration rule of this field is the same as the `tiproxy` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `tiproxy` content in `server_configs`. If these two fields overlap, the content of this field takes effect. Subsequently, a configuration file is generated and sent to the machine specified in `host`.
+-   `config` : このフィールドの設定ルールは、 `server_configs`の`tiproxy`設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tiproxy`内容と結合されます。これら 2 つのフィールドが重複している場合、このフィールドの内容が有効になります。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
-- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
+-   `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
 
-- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
-Among the above fields, you cannot modify the following configured fields after the deployment:
+上記のフィールドのうち、次の設定済みフィールドは、デプロイメント後に変更できません。
 
-- `host`
-- `port`
-- `deploy_dir`
-- `arch`
-- `os`
+-   `host`
+-   `port`
+-   `deploy_dir`
+-   `arch`
+-   `os`
 
-A `tiproxy_servers` configuration example is as follows:
+`tiproxy_servers`構成の例は次のとおりです。
 
 ```yaml
 tiproxy_servers:
@@ -472,49 +472,49 @@ tiproxy_servers:
       labels: { zone: "zone2" }
 ```
 
-For more configuration examples, see [TiProxy Deployment Topology](/tiproxy/tiproxy-deployment-topology.md).
+その他の構成例については、 [TiProxy 展開トポロジ](/tiproxy/tiproxy-deployment-topology.md)参照してください。
 
-### `kvcdc_servers`
+### <code>kvcdc_servers</code> {#code-kvcdc-servers-code}
 
-`kvcdc_servers` specifies the machines to which the [TiKV-CDC](https://tikv.org/docs/7.1/concepts/explore-tikv-features/cdc/cdc/) services are deployed. It also specifies the service configuration on each machine. `kvcdc_servers` is an array. Each array element contains the following fields:
+`kvcdc_servers` 、 [TiKV-CDC](https://tikv.org/docs/7.1/concepts/explore-tikv-features/cdc/cdc/)サービスがデプロイされるマシンを指定します。また、各マシンにおけるサービス構成も指定します`kvcdc_servers`配列です。各配列要素には以下のフィールドが含まれます。
 
-- `host`: Specifies the machine to which the TiKV-CDC services are deployed. The field value is an IP address and is mandatory.
+-   `host` : TiKV-CDC サービスがデプロイされるマシンを指定します。このフィールド値は IP アドレスで、必須です。
 
-- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+-   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
-- `port`: The listening port of the TiKV-CDC services. The default value is `8600`.
+-   `port` : TiKV-CDCサービスのリスニングポート。デフォルト値は`8600`です。
 
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
+-   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
 
-- `data-dir`: Specifies the directory that TiKV-CDC uses to store temporary files primarily for sorting (optional). The free disk space for this directory is recommended to be greater than or equal to 500 GiB.
+-   `data-dir` : TiKV-CDC が主にソート用の一時ファイルを保存するディレクトリを指定します（オプション）。このディレクトリの空きディスク容量は 500 GiB 以上が推奨されます。
 
-- `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
+-   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
-- `gc-ttl`: The TTL (Time to Live, in seconds) of the service-level GC safepoint in PD set by TiKV-CDC (optional). It is the duration that replication tasks can be suspended, defaulting to `86400`, which is 24 hours. Note that suspending replication tasks affects the progress of TiKV garbage collection safepoint. The longer the `gc-ttl`, the longer changefeeds can be suspended, but at the same time, more obsolete data will be kept and occupy more space. Vice versa.
+-   `gc-ttl` : TiKV-CDC（オプション）によってPDに設定されるサービスレベルGCセーフポイントのTTL（Time to Live、秒単位）。これはレプリケーションタスクを一時停止できる期間で、デフォルトは`86400` （24時間）です。レプリケーションタスクの一時停止は、TiKVガベージコレクションセーフポイントの進行状況に影響することに注意してください。 `gc-ttl`長いほど、変更フィードを一時停止できる時間は長くなりますが、同時に、より多くの古いデータが保持され、より多くのスペースを占有することになります。逆もまた同様です。
 
-- `tz`: The time zone that the TiKV-CDC services use. TiKV-CDC uses this time zone when internally converting time data types such as timestamp and when replicating data to the downstream. The default value is the local time zone where the process runs.
+-   `tz` : TiKV-CDCサービスが使用するタイムゾーン。TiKV-CDCは、タイムスタンプなどの時間データ型を内部的に変換する際、および下流にデータを複製する際にこのタイムゾーンを使用します。デフォルト値は、プロセスが実行されるローカルタイムゾーンです。
 
-- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
-- `config`: The address of the configuration file that TiKV-CDC uses (optional).
+-   `config` : TiKV-CDC が使用する構成ファイルのアドレス (オプション)。
 
-- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
+-   `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
 
-- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
-- `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd 設定ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
-For the above fields, you cannot modify these configured fields after the deployment:
+上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
 
-- `host`
-- `port`
-- `deploy_dir`
-- `data_dir`
-- `log_dir`
-- `arch`
-- `os`
+-   `host`
+-   `port`
+-   `deploy_dir`
+-   `data_dir`
+-   `log_dir`
+-   `arch`
+-   `os`
 
-A `kvcdc_servers` configuration example is as follows:
+`kvcdc_servers`構成の例は次のとおりです。
 
 ```yaml
 kvcdc_servers:
@@ -522,50 +522,50 @@ kvcdc_servers:
   - host: 10.0.1.22
 ```
 
-### `cdc_servers`
+### <code>cdc_servers</code> {#code-cdc-servers-code}
 
-`cdc_servers` specifies the machines to which the TiCDC services are deployed. It also specifies the service configuration on each machine. `cdc_servers` is an array. Each array element contains the following fields:
+`cdc_servers` TiCDCサービスがデプロイされるマシンを指定します。また、各マシンにおけるサービス構成も指定します`cdc_servers`は配列です。各配列要素には以下のフィールドが含まれます。
 
-- `host`: Specifies the machine to which the TiCDC services are deployed. The field value is an IP address and is mandatory.
+-   `host` : TiCDC サービスがデプロイされるマシンを指定します。このフィールド値は IP アドレスで、必須です。
 
-- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+-   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
-- `port`: The listening port of the TiCDC services. The default value is `8300`.
+-   `port` : TiCDCサービスのリスニングポート。デフォルト値は`8300`です。
 
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
+-   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
 
-- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated according to the `data_dir` directory configured in `global`.
+-   `data_dir` : データディレクトリを指定します。指定されない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`data_dir`ディレクトリに従ってディレクトリが生成されます。
 
-- `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
+-   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
-- `gc-ttl`: The Time To Live (TTL) duration of the service level GC safepoint set by TiCDC in PD, in seconds. The default value is `86400`, which is 24 hours.
+-   `gc-ttl` : TiCDCによってPDに設定されるサービスレベルGCセーフポイントのTime To Live（TTL）期間（秒）。デフォルト値は`86400` （24時間）です。
 
-- `tz`: The time zone that the TiCDC services use. TiCDC uses this time zone when internally converting time data types such as timestamp and when replicating data to the downstream. The default value is the local time zone where the process runs.
+-   `tz` : TiCDCサービスが使用するタイムゾーン。TiCDCは、タイムスタンプなどの時間データ型を内部的に変換する際、および下流にデータを複製する際にこのタイムゾーンを使用します。デフォルト値は、プロセスが実行されるローカルタイムゾーンです。
 
-- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
-- `config`: The field content is merged with the `cdc` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Then, a configuration file is generated and sent to the machine specified in `host`.
+-   `config` : フィールドの内容は`server_configs`の`cdc`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
-- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
+-   `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
 
-- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
-- `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd 設定ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
-- `ticdc_cluster_id`: Specifies the TiCDC cluster ID corresponding to the service. If this field is not specified, the service joins the default TiCDC cluster. This field only takes effect in TiDB v6.3.0 or later versions.
+-   `ticdc_cluster_id` : サービスに対応するTiCDCクラスタIDを指定します。このフィールドが指定されていない場合、サービスはデフォルトのTiCDCクラスタに参加します。このフィールドはTiDB v6.3.0以降のバージョンでのみ有効です。
 
-For the above fields, you cannot modify these configured fields after the deployment:
+上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
 
-- `host`
-- `port`
-- `deploy_dir`
-- `data_dir`
-- `log_dir`
-- `arch`
-- `os`
-- `ticdc_cluster_id`
+-   `host`
+-   `port`
+-   `deploy_dir`
+-   `data_dir`
+-   `log_dir`
+-   `arch`
+-   `os`
+-   `ticdc_cluster_id`
 
-A `cdc_servers` configuration example is as follows:
+`cdc_servers`構成の例は次のとおりです。
 
 ```yaml
 cdc_servers:
@@ -577,43 +577,43 @@ cdc_servers:
     data_dir: "/cdc-data"
 ```
 
-### `tispark_masters`
+### <code>tispark_masters</code> {#code-tispark-masters-code}
 
-`tispark_masters` specifies the machines to which the master node of TiSpark is deployed. It also specifies the service configuration on each machine. `tispark_masters` is an array. Each array element contains the following fields:
+`tispark_masters` 、TiSpark のマスターノードがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`tispark_masters`は配列です。各配列要素には以下のフィールドが含まれます。
 
-- `host`: Specifies the machine to which the TiSpark master is deployed. The field value is an IP address and is mandatory.
+-   `host` : TiSparkマスターがデプロイされているマシンを指定します。このフィールド値はIPアドレスで、必須です。
 
-- `listen_host`: When the machine has multiple IP addresses, `listen_host` specifies the listening IP address of the service. The default value is `0.0.0.0`.
+-   `listen_host` : マシンに複数のIPアドレスがある場合、 `listen_host`サービスのリスニングIPアドレスを指定します。デフォルト値は`0.0.0.0`です。
 
-- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+-   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
-- `port`: Spark's listening port, used for communication before the node. The default value is `7077`.
+-   `port` : Sparkのリスニングポート。ノード前の通信に使用されます。デフォルト値は`7077`です。
 
-- `web_port`: Spark's web port, which provides web services and the task status. The default value is `8080`.
+-   `web_port` : SparkのWebポート。Webサービスとタスクステータスを提供します。デフォルト値は`8080`です。
 
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
+-   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
 
-- `java_home`: Specifies the path of the JRE environment to be used. This parameter corresponds to the `JAVA_HOME` system environment variable.
+-   `java_home` : 使用するJRE環境のパスを指定します。このパラメータはシステム環境変数`JAVA_HOME`に対応します。
 
-- `spark_config`: Configures to configure the TiSpark services. Then, a configuration file is generated and sent to the machine specified in `host`.
+-   `spark_config` : TiSparkサービスを構成するための設定を行います。その後、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
-- `spark_env`: Configures the environment variables when Spark starts.
+-   `spark_env` : Spark の起動時に環境変数を構成します。
 
-- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
+-   `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
 
-- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
-For the above fields, you cannot modify these configured fields after the deployment:
+上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
 
-- `host`
-- `listen_host`
-- `port`
-- `web_port`
-- `deploy_dir`
-- `arch`
-- `os`
+-   `host`
+-   `listen_host`
+-   `port`
+-   `web_port`
+-   `deploy_dir`
+-   `arch`
+-   `os`
 
-A `tispark_masters` configuration example is as follows:
+`tispark_masters`構成の例は次のとおりです。
 
 ```yaml
 tispark_masters:
@@ -634,39 +634,39 @@ tispark_masters:
   - host: 10.0.1.22
 ```
 
-### `tispark_workers`
+### <code>tispark_workers</code> {#code-tispark-workers-code}
 
-`tispark_workers` specifies the machines to which the worker nodes of TiSpark are deployed. It also specifies the service configuration on each machine. `tispark_workers` is an array. Each array element contains the following fields:
+`tispark_workers` 、TiSpark のワーカーノードがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`tispark_workers`は配列です。各配列要素には以下のフィールドが含まれます。
 
-- `host`: Specifies the machine to which the TiSpark workers are deployed. The field value is an IP address and is mandatory.
+-   `host` : TiSparkワーカーがデプロイされるマシンを指定します。このフィールド値はIPアドレスで、必須です。
 
-- `listen_host`: When the machine has multiple IP addresses, `listen_host` specifies the listening IP address of the service. The default value is `0.0.0.0`.
+-   `listen_host` : マシンに複数のIPアドレスがある場合、 `listen_host`サービスのリスニングIPアドレスを指定します。デフォルト値は`0.0.0.0`です。
 
-- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+-   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
-- `port`: Spark's listening port, used for communication before the node. The default value is `7077`.
+-   `port` : Sparkのリスニングポート。ノード前の通信に使用されます。デフォルト値は`7077`です。
 
-- `web_port`: Spark's web port, which provides web services and the task status. The default value is `8080`.
+-   `web_port` : SparkのWebポート。Webサービスとタスクステータスを提供します。デフォルト値は`8080`です。
 
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
+-   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
 
-- `java_home`: Specifies the path in which the JRE environment to be used is located. This parameter corresponds to the `JAVA_HOME` system environment variable.
+-   `java_home` : 使用するJRE環境のパスを指定します。このパラメータはシステム環境変数`JAVA_HOME`に対応します。
 
-- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
+-   `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
 
-- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
-For the above fields, you cannot modify these configured fields after the deployment:
+上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
 
-- `host`
-- `listen_host`
-- `port`
-- `web_port`
-- `deploy_dir`
-- `arch`
-- `os`
+-   `host`
+-   `listen_host`
+-   `port`
+-   `web_port`
+-   `deploy_dir`
+-   `arch`
+-   `os`
 
-A `tispark_workers` configuration example is as follows:
+`tispark_workers`構成の例は次のとおりです。
 
 ```yaml
 tispark_workers:
@@ -674,29 +674,29 @@ tispark_workers:
   - host: 10.0.1.23
 ```
 
-### `tso_servers`
+### <code>tso_servers</code> {#code-tso-servers-code}
 
-`tso_servers` specifies the machines to which the `tso` microservices are deployed. It also specifies the service configuration on each machine. `tso_servers` is an array, and each element of the array contains the following fields:
+`tso_servers` 、 `tso`マイクロサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。4 `tso_servers`配列であり、配列の各要素には以下のフィールドが含まれます。
 
-- `host`: Specifies the IP address of the machine to which the `tso` microservices are deployed. The field value is mandatory.
-- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
-- `port`: Specifies the listening port of the `tso` microservices. The default value is `3379`.
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
-- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated according to the `data_dir` directory configured in `global`.
-- `config`: The configuration rule of this field is the same as the `tso` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `tso` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Subsequently, a configuration file is generated and sent to the machine specified in `host`.
-- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
-- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
+-   `host` : `tso`マイクロサービスがデプロイされるマシンのIPアドレスを指定します。このフィールド値は必須です。
+-   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
+-   `port` : `tso`マイクロサービスのリスニングポートを指定します。デフォルト値は`3379`です。
+-   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
+-   `data_dir` : データディレクトリを指定します。指定されない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`data_dir`ディレクトリに従ってディレクトリが生成されます。
+-   `config` : このフィールドの設定ルールは、 `server_configs`の`tso`設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tso`内容とマージされます（2 つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
+-   `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
-Among the preceding fields, you cannot modify these fields after the deployment:
+上記のフィールドのうち、デプロイメント後に次のフィールドを変更することはできません。
 
-- `host`
-- `port`
-- `deploy_dir`
-- `data_dir`
-- `arch`
-- `os`
+-   `host`
+-   `port`
+-   `deploy_dir`
+-   `data_dir`
+-   `arch`
+-   `os`
 
-A `tso_servers` configuration example is as follows:
+`tso_servers`構成の例は次のとおりです。
 
 ```yaml
 tso_servers:
@@ -704,29 +704,29 @@ tso_servers:
   - host: 10.0.1.22
 ```
 
-### `scheduling_servers`
+### <code>scheduling_servers</code> {#code-scheduling-servers-code}
 
-`scheduling_servers` specifies the machines to which `scheduling` microservices are deployed. It also specifies the service configuration on each machine. `scheduling_servers` is an array, and each element of the array contains the following fields:
+`scheduling_servers` 、 `scheduling`マイクロサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。4 `scheduling_servers`配列であり、配列の各要素には以下のフィールドが含まれます。
 
-- `host`: Specifies the IP address of the machine to which the `scheduling` microservices are deployed. The field is mandatory.
-- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
-- `port`: Specifies the listening port of the `scheduling` microservices. The default value is `3379`.
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
-- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated according to the `data_dir` directory configured in `global`.
-- `config`: The configuration rule of this field is the same as the `scheduling` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `scheduling` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Subsequently, a configuration file is generated and sent to the machine specified in `host`.
-- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
-- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
+-   `host` : `scheduling`マイクロサービスがデプロイされるマシンのIPアドレスを指定します。このフィールドは必須です。
+-   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
+-   `port` : `scheduling`マイクロサービスのリスニングポートを指定します。デフォルト値は`3379`です。
+-   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
+-   `data_dir` : データディレクトリを指定します。指定されない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`data_dir`ディレクトリに従ってディレクトリが生成されます。
+-   `config` : このフィールドの設定ルールは、 `server_configs`の`scheduling`設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`scheduling`内容とマージされます（2 つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
+-   `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
-Among the preceding fields, you cannot modify these fields after the deployment:
+上記のフィールドのうち、デプロイメント後に次のフィールドを変更することはできません。
 
-- `host`
-- `port`
-- `deploy_dir`
-- `data_dir`
-- `arch`
-- `os`
+-   `host`
+-   `port`
+-   `deploy_dir`
+-   `data_dir`
+-   `arch`
+-   `os`
 
-A `scheduling_servers` configuration example is as follows:
+`scheduling_servers`構成の例は次のとおりです。
 
 ```yaml
 scheduling_servers:
@@ -734,55 +734,57 @@ scheduling_servers:
   - host: 10.0.1.22
 ```
 
-### `monitoring_servers`
+### <code>monitoring_servers</code> {#code-monitoring-servers-code}
 
-`monitoring_servers` specifies the machines to which the Prometheus services are deployed. It also specifies the service configuration on each machine. `monitoring_servers` is an array. Each array element contains the following fields:
+`monitoring_servers` 、Prometheus サービスがデプロイされるマシンを指定します。また、各マシンにおけるサービス設定も指定します`monitoring_servers`は配列です。各配列要素には以下のフィールドが含まれます。
 
-- `host`: Specifies the machine to which the monitoring services are deployed. The field value is an IP address and is mandatory.
+-   `host` : 監視サービスがデプロイされているマシンを指定します。このフィールド値はIPアドレスで、必須です。
 
-- `ng_port`: Specifies the port that NgMonitoring listens to. Introduced in TiUP v1.7.0, this field supports [Continuous Profiling](/dashboard/dashboard-profiling.md) and [Top SQL](/dashboard/top-sql.md). The default value is `12020`.
+-   `ng_port` : NgMonitoringがリッスンするポートを指定します。TiUP TiUPで導入されたこのフィールドは、 [継続的なプロファイリング](/dashboard/dashboard-profiling.md)と[Top SQL](/dashboard/top-sql.md)サポートします。デフォルト値は`12020`です。
 
-- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+-   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
-- `port`: The listening port of the Prometheus services. The default value is `9090`.
+-   `port` : Prometheusサービスのリスニングポート。デフォルト値は`9090`です。
 
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
+-   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
 
-- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated according to the `data_dir` directory configured in `global`.
+-   `data_dir` : データディレクトリを指定します。指定されない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`data_dir`ディレクトリに従ってディレクトリが生成されます。
 
-- `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
+-   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
-- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
-- `storage_retention`: The retention time of the Prometheus monitoring data. The default value is `"30d"`.
+-   `storage_retention` : Prometheus監視データの保持期間。デフォルト値は`"30d"`です。
 
-- `rule_dir`: Specifies a local directory that should contain complete `*.rules.yml` files. These files are transferred to the target machine during the initialization phase of the cluster configuration as the rules for Prometheus.
-- `remote_config`: Supports writing Prometheus data to the remote, or reading data from the remote. This field has two configurations:
-    - `remote_write`: See the Prometheus document [`<remote_write>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write).
-    - `remote_read`: See the Prometheus document [`<remote_read>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read).
-- `external_alertmanagers`: If the `external_alertmanagers` field is configured, Prometheus alerts the configuration behavior to the Alertmanager that is outside the cluster. This field is an array, each element of which is an external Alertmanager and consists of the `host` and `web_port` fields.
+-   `rule_dir` : `*.rules.yml`のファイルすべてを含むローカルディレクトリを指定します。これらのファイルは、Prometheusのルールとして、クラスター構成の初期化フェーズ中にターゲットマシンに転送されます。
 
-- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
+-   `remote_config` : Prometheusデータのリモートへの書き込み、またはリモートからのデータの読み取りをサポートします。このフィールドには2つの設定があります。
+    -   `remote_write` : Prometheus ドキュメント[`&#x3C;remote_write>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)を参照してください。
+    -   `remote_read` : Prometheus ドキュメント[`&#x3C;remote_read>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read)を参照してください。
 
-- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
+-   `external_alertmanagers` : フィールド`external_alertmanagers`が設定されている場合、Prometheusはクラスター外のAlertmanagerに構成動作を通知します。このフィールドは配列であり、各要素は外部Alertmanagerであり、フィールド`host`とフィールド`web_port`で構成されます。
 
-- `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
+-   `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
 
-- `additional_args`: Introduced in TiUP v1.15.0, this field configures additional parameters for running Prometheus. This field is an array, and each element of the array is a Prometheus running parameter. For example, to enable the Prometheus hot reload feature, you can set this field to `--web.enable-lifecycle`.
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
-- `additional_scrape_conf`: Customized Prometheus scrape configuration. When you deploy, scale out, scale in, or reload a TiDB cluster, TiUP adds the content of the `additional_scrape_conf` field to the corresponding parameters of the Prometheus configuration file. For more information, see [Customize Prometheus scrape configuration](/tiup/customized-montior-in-tiup-environment.md#customize-prometheus-scrape-configuration).
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd 設定ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
-For the above fields, you cannot modify these configured fields after the deployment:
+-   `additional_args` : TiUP v1.15.0で導入されたこのフィールドは、Prometheusの実行に必要な追加パラメータを設定します。このフィールドは配列であり、配列の各要素はPrometheusの実行パラメータです。例えば、Prometheusのホットリロード機能を有効にするには、このフィールドを`--web.enable-lifecycle`に設定します。
 
-- `host`
-- `port`
-- `deploy_dir`
-- `data_dir`
-- `log_dir`
-- `arch`
-- `os`
+-   `additional_scrape_conf` : カスタマイズされたPrometheusスクレイプ設定。TiDBクラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUPは`additional_scrape_conf`フィールドの内容をPrometheus設定ファイルの対応するパラメータに追加します。詳細については、 [Prometheusのスクレイプ設定をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md#customize-prometheus-scrape-configuration)参照してください。
 
-A `monitoring_servers` configuration example is as follows:
+上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
+
+-   `host`
+-   `port`
+-   `deploy_dir`
+-   `data_dir`
+-   `log_dir`
+-   `arch`
+-   `os`
+
+`monitoring_servers`構成の例は次のとおりです。
 
 ```yaml
 monitoring_servers:
@@ -807,48 +809,48 @@ monitoring_servers:
         web_port: 9094
 ```
 
-### `grafana_servers`
+### <code>grafana_servers</code> {#code-grafana-servers-code}
 
-`grafana_servers` specifies the machines to which the Grafana services are deployed. It also specifies the service configuration on each machine. `grafana_servers` is an array. Each array element contains the following fields:
+`grafana_servers` 、Grafana サービスがデプロイされるマシンを指定します。また、各マシンにおけるサービス設定も指定します`grafana_servers`は配列です。各配列要素には以下のフィールドが含まれます。
 
-- `host`: Specifies the machine to which the Grafana services are deployed. The field value is an IP address and is mandatory.
+-   `host` : Grafanaサービスがデプロイされるマシンを指定します。このフィールド値はIPアドレスで、必須です。
 
-- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+-   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
-- `port`: The listening port of the Grafana services. The default value is `3000`.
+-   `port` : Grafanaサービスのリスニングポート。デフォルト値は`3000`です。
 
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
+-   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
 
-- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
+-   `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
 
-- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
-- `username`: The user name on the Grafana login interface.
+-   `username` : Grafana ログイン インターフェース上のユーザー名。
 
-- `password`: The password corresponding to Grafana.
+-   `password` : Grafanaに対応するパスワード。
 
-- `dashboard_dir`: Specifies a local directory that should contain complete `dashboard(*.json)` files. These files are transferred to the target machine during the initialization phase of the cluster configuration as the dashboards for Grafana.
+-   `dashboard_dir` : `dashboard(*.json)`ファイルすべてを含むローカルディレクトリを指定します。これらのファイルは、クラスター構成の初期化フェーズ中に、Grafanaのダッシュボードとしてターゲットマシンに転送されます。
 
-- `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd 設定ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
-- `config`: This field is used to add custom configurations to Grafana. When you deploy, scale out, scale in, or reload a TiDB cluster, TiUP adds the content of the `config` field to the Grafana configuration file `grafana.ini`. For more information, see [Customize other Grafana configurations](/tiup/customized-montior-in-tiup-environment.md#customize-other-grafana-configurations).
+-   `config` : このフィールドは、Grafanaにカスタム設定を追加するために使用されます。TiDBクラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUPは`config`フィールドの内容をGrafana設定ファイル`grafana.ini`に追加します。詳細については、 [その他のGrafana設定をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md#customize-other-grafana-configurations)参照してください。
 
-> **Note:**
+> **注記：**
 >
-> If the `dashboard_dir` field of `grafana_servers` is configured, after executing the `tiup cluster rename` command to rename the cluster, you need to perform the following operations:
+> `dashboard_dir`フィールドが`grafana_servers`設定されている場合、クラスターの名前を変更する`tiup cluster rename`コマンドを実行した後、次の操作を実行する必要があります。
 >
-> 1. For the `*.json` files in the local dashboards directory, update the value of the `datasource` field to the new cluster name (because `datasource` is named after the cluster name).
-> 2. Execute the `tiup cluster reload -R grafana` command.
+> 1.  ローカル ダッシュボード ディレクトリ内の`*.json`ファイルについては、 `datasource`フィールドの値を新しいクラスター名に更新します ( `datasource`クラスター名に基づいて名前が付けられているため)。
+> 2.  `tiup cluster reload -R grafana`コマンドを実行します。
 
-For the above fields, you cannot modify these configured fields after the deployment:
+上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
 
-- `host`
-- `port`
-- `deploy_dir`
-- `arch`
-- `os`
+-   `host`
+-   `port`
+-   `deploy_dir`
+-   `arch`
+-   `os`
 
-A `grafana_servers` configuration example is as follows:
+`grafana_servers`構成の例は次のとおりです。
 
 ```yaml
 grafana_servers:
@@ -856,48 +858,48 @@ grafana_servers:
     dashboard_dir: /local/dashboard/dir
 ```
 
-### `alertmanager_servers`
+### <code>alertmanager_servers</code> {#code-alertmanager-servers-code}
 
-`alertmanager_servers` specifies the machines to which the Alertmanager services are deployed. It also specifies the service configuration on each machine. `alertmanager_servers` is an array. Each array element contains the following fields:
+`alertmanager_servers` 、Alertmanagerサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`alertmanager_servers`は配列です。各配列要素には以下のフィールドが含まれます。
 
-- `host`: Specifies the machine to which the Alertmanager services are deployed. The field value is an IP address and is mandatory.
+-   `host` : Alertmanager サービスがデプロイされているマシンを指定します。このフィールド値は IP アドレスで、必須です。
 
-- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
+-   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
-- `web_port`: Specifies the port used that Alertmanager uses to provide web services. The default value is `9093`.
+-   `web_port` : AlertmanagerがWebサービスを提供するために使用するポートを指定します。デフォルト値は`9093`です。
 
-- `cluster_port`: Specifies the communication port between one Alertmanger and other Alertmanager. The default value is `9094`.
+-   `cluster_port` : Alertmanager間の通信ポートを指定します。デフォルト値は`9094`です。
 
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
+-   `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
 
-- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated according to the `data_dir` directory configured in `global`.
+-   `data_dir` : データディレクトリを指定します。指定されない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`data_dir`ディレクトリに従ってディレクトリが生成されます。
 
-- `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
+-   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
-- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
-- `config_file`: Specifies a local file that is transferred to the target machine during the initialization phase of the cluster configuration as the configuration of Alertmanager.
+-   `config_file` : クラスター構成の初期化フェーズ中に、Alertmanager の構成としてターゲット マシンに転送されるローカル ファイルを指定します。
 
-- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
+-   `os` : `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値になります。
 
-- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
-- `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd 設定ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
-- `listen_host`: Specifies the listening address so that Alertmanager can be accessed through a proxy. It is recommended to configure it as `0.0.0.0`. For more information, see [Customize Alertmanager configurations](/tiup/customized-montior-in-tiup-environment.md#customize-alertmanager-configurations).
+-   `listen_host` : Alertmanagerにプロキシ経由でアクセスできるように、リスニングアドレスを指定します。 `0.0.0.0`に設定することをお勧めします。詳細については、 [Alertmanager 設定をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md#customize-alertmanager-configurations)参照してください。
 
-For the above fields, you cannot modify these configured fields after the deployment:
+上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
 
-- `host`
-- `web_port`
-- `cluster_port`
-- `deploy_dir`
-- `data_dir`
-- `log_dir`
-- `arch`
-- `os`
+-   `host`
+-   `web_port`
+-   `cluster_port`
+-   `deploy_dir`
+-   `data_dir`
+-   `log_dir`
+-   `arch`
+-   `os`
 
-A `alertmanager_servers` configuration example is as follows:
+`alertmanager_servers`構成の例は次のとおりです。
 
 ```yaml
 alertmanager_servers:

@@ -1,39 +1,39 @@
 ---
 title: TiDB 2.0 RC1 Release Notes
-summary: TiDB 2.0 RC1, released on March 9, 2018, brings improvements in MySQL compatibility, SQL optimization, and stability. Key updates include memory usage limitation for SQL statements, Stream Aggregate operator support, configuration file validation, and HTTP API for configuration information. TiDB also enhances MySQL syntax compatibility, optimizer, and Boolean field length. PD sees logic and performance optimizations, while TiKV fixes gRPC call and adds gRPC APIs for metrics. Additionally, TiKV checks SSD usage, optimizes read performance, and improves metrics usage.
+summary: 2018年3月9日にリリースされたTiDB 2.0 RC1では、MySQLとの互換性、SQLの最適化、そして安定性が向上しています。主なアップデートには、SQL文のメモリ使用量制限、Stream Aggregate演算子のサポート、設定ファイルの検証、設定情報用のHTTP APIなどがあります。また、TiDBはMySQL構文の互換性、オプティマイザー、ブールフィールドの長さも強化しています。PDではロジックとパフォーマンスの最適化が行われ、TiKVではgRPC呼び出しの修正とメトリクス用のgRPC APIの追加が行われました。さらに、TiKVはSSDの使用状況をチェックし、読み取りパフォーマンスを最適化し、メトリクスの使用状況を改善しました。
 ---
 
-# TiDB 2.0 RC1 Release Notes
+# TiDB 2.0 RC1 リリースノート {#tidb-2-0-rc1-release-notes}
 
-On March 9, 2018, TiDB 2.0 RC1 is released. This release has great improvement in MySQL compatibility, SQL optimization and stability.
+2018年3月9日、TiDB 2.0 RC1がリリースされました。このリリースでは、MySQLとの互換性、SQLの最適化、そして安定性が大幅に向上しています。
 
-## TiDB
+## TiDB {#tidb}
 
-- Support limiting the memory usage by a single SQL statement, to reduce the risk of OOM
-- Support pushing the Stream Aggregate operator down to TiKV
-- Support validating the configuration file
-- Support obtaining the information of TiDB configuration through HTTP API
-- Compatible with more MySQL syntax in Parser
-- Improve the compatibility with Navicat
-- Improve the optimizer and extract common expressions with multiple OR conditions, to choose better query plan
-- Improve the optimizer and convert subqueries to Join operators in more scenarios, to choose better query plan
-- Resolve Lock in the Batch mode to increase the garbage collection speed
-- Fix the length of Boolean field to improve compatibility
-- Optimize the Add Index operation and give lower priority to all write and read operations, to reduce the impact on online business
+-   OOMのリスクを軽減するために、単一のSQL文によるメモリ使用量の制限をサポートします。
+-   Stream Aggregate 演算子を TiKV にプッシュダウンする機能をサポート
+-   構成ファイルの検証をサポート
+-   HTTP API 経由で TiDB 構成情報を取得する機能をサポート
+-   パーサーのより多くのMySQL構文と互換性がある
+-   Navicatとの互換性を向上
+-   オプティマイザを改良し、複数のOR条件を持つ共通式を抽出して、より良いクエリプランを選択する
+-   オプティマイザを改良し、より多くのシナリオでサブクエリを結合演算子に変換して、よりよいクエリプランを選択する
+-   バッチモードでロックを解決してガベージコレクションの速度を上げます
+-   互換性を向上させるためにブールフィールドの長さを修正しました
+-   インデックス追加操作を最適化し、すべての書き込みおよび読み取り操作の優先度を下げて、オンラインビジネスへの影響を軽減します。
 
-## PD
+## PD {#pd}
 
-- Optimize the logic of code used to check the Region status to improve performance
-- Optimize the output of log information in abnormal conditions to facilitate debugging
-- Fix the monitor statistics that the disk space of TiKV nodes is not enough
-- Fix the wrong reporting issue of the health interface when TLS is enabled
-- Fix the issue that concurrent addition of replicas might exceed the threshold value of configuration, to improve stability
+-   リージョンステータスをチェックするコードのロジックを最適化してパフォーマンスを向上します
+-   異常時のログ情報の出力を最適化し、デバッグを容易にします。
+-   TiKVノードのディスク容量が十分でないことを示すモニター統計を修正
+-   TLS が有効になっている場合のヘルスインターフェースの誤ったレポート問題を修正しました
+-   レプリカの同時追加が設定のしきい値を超える可能性がある問題を修正し、安定性を向上しました。
 
-## TiKV
+## TiKV {#tikv}
 
-- Fix the issue that gRPC call is not cancelled when PD leaders switch
-- Protect important configuration which cannot be changed after initial configuration
-- Add gRPC APIs used to obtain metrics
-- Check whether SSD is used when you start the cluster
-- Optimize the read performance using ReadPool, and improve the performance by 30% in the `raw get` test
-- Improve metrics and optimize the usage of metrics
+-   PDリーダーが切り替わってもgRPC呼び出しがキャンセルされない問題を修正
+-   初期設定後に変更できない重要な設定を保護する
+-   メトリクスを取得するために使用されるgRPC APIを追加する
+-   クラスターを起動するときにSSDが使用されているかどうかを確認する
+-   ReadPoolを使用して読み取りパフォーマンスを最適化し、 `raw get`テストでパフォーマンスを30％向上
+-   指標を改善し、指標の使用を最適化する

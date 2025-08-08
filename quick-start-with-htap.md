@@ -1,72 +1,64 @@
 ---
 title: Quick Start with TiDB HTAP
-summary: Learn how to quickly get started with the TiDB HTAP.
+summary: TiDB HTAPをすぐに使い始める方法を学びます。
 ---
 
-# Quick Start with TiDB HTAP
+# TiDB HTAPのクイックスタート {#quick-start-with-tidb-htap}
 
-This guide walks you through the quickest way to get started with TiDB's one-stop solution of Hybrid Transactional and Analytical Processing (HTAP).
+このガイドでは、TiDB のハイブリッド トランザクションおよび分析処理 (HTAP) のワンストップ ソリューションを最も簡単に使い始める方法について説明します。
 
-> **Note:**
+> **注記：**
 >
-> The steps provided in this guide is ONLY for quick start in the test environment. For production environments, [explore HTAP](/explore-htap.md) is recommended.
+> このガイドで紹介する手順は、テスト環境での迅速な開始のみを目的としています。本番環境では、 [HTAPを探索する](/explore-htap.md)推奨します。
 
-## Basic concepts
+## 基本概念 {#basic-concepts}
 
-Before using TiDB HTAP, you need to have some basic knowledge about [TiKV](/tikv-overview.md), a row-based storage engine for TiDB Online Transactional Processing (OLTP), and [TiFlash](/tiflash/tiflash-overview.md), a columnar storage engine for TiDB Online Analytical Processing (OLAP).
+TiDB HTAP を使用する前に、 [TiKV](/tikv-overview.md) 、TiDB オンライン トランザクション処理 (OLTP) 用の行ベースのストレージ エンジン、および[TiFlash](/tiflash/tiflash-overview.md) 、TiDB オンライン分析処理 (OLAP) 用の列ベースのstoragestorageに関する基本的な知識が必要です。
 
-- Storage engines of HTAP: The row-based storage engine and the columnar storage engine co-exist for HTAP. Both storage engines can replicate data automatically and keep strong consistency. The row-based storage engine optimizes OLTP performance, and the columnar storage engine optimizes OLAP performance.
-- Data consistency of HTAP: As a distributed and transactional key-value database, TiKV provides transactional interfaces with ACID compliance, and guarantees data consistency between multiple replicas and high availability with the implementation of the [Raft consensus algorithm](https://raft.github.io/raft.pdf). As a columnar storage extension of TiKV, TiFlash replicates data from TiKV in real time according to the Raft Learner consensus algorithm, which ensures that data is strongly consistent between TiKV and TiFlash.
-- Data isolation of HTAP: TiKV and TiFlash can be deployed on different machines as needed to solve the problem of HTAP resource isolation.
-- MPP computing engine: [MPP](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode) is a distributed computing framework provided by the TiFlash engine since TiDB 5.0, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms. In the MPP mode, the run time of the analytic queries can be significantly reduced.
+-   HTAPのストレージエンジン：HTAPでは、行ベースstorageエンジンと列指向storageエンジンが共存します。どちらのstorageエンジンもデータを自動的に複製し、強力な一貫性を維持できます。行ベースstorageエンジンはOLTPパフォーマンスを最適化し、列指向storageエンジンはOLAPパフォーマンスを最適化します。
+-   HTAP のデータ一貫性: 分散型トランザクション キー値データベースである TiKV は、 ACID準拠のトランザクション インターフェイスを提供し、 [Raftコンセンサスアルゴリズム](https://raft.github.io/raft.pdf)の実装により複数のレプリカ間のデータ一貫性と高可用性を保証します。TiKV の列指向storage拡張機能であるTiFlash は、 Raft Learnerコンセンサス アルゴリズムに従って TiKV からデータをリアルタイムで複製し、TiKV とTiFlash間でデータの強力な一貫性を保証します。
+-   HTAP のデータ分離: HTAP リソース分離の問題を解決するために、必要に応じて TiKV とTiFlash を異なるマシンに展開できます。
+-   MPPコンピューティングエンジン： [MPP](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode)は、TiDB 5.0以降TiFlashエンジンによって提供される分散コンピューティングフレームワークであり、ノード間のデータ交換を可能にし、高性能かつ高スループットのSQLアルゴリズムを提供します。MPPモードでは、分析クエリの実行時間を大幅に短縮できます。
 
-## Steps
+## 手順 {#steps}
 
-In this document, you can experience the convenience and high performance of TiDB HTAP by querying an example table in a [TPC-H](http://www.tpc.org/tpch/) dataset. TPC-H is a popular decision support benchmark that consists of a suite of business oriented ad-hoc queries with large volumes of data and a high degree of complexity. To experience 22 complete SQL queries using TPC-H, visit [tidb-bench repo](https://github.com/pingcap/tidb-bench/tree/master/tpch/queries) or [TPC-H](http://www.tpc.org/tpch/) for instructions on how to generate query statements and data.
+このドキュメントでは、 [TPC-H](http://www.tpc.org/tpch/)データセットのサンプルテーブルをクエリすることで、 TiDB HTAPの利便性と高いパフォーマンスを体験できます。TPC-Hは、大量のデータと高度な複雑さを扱うビジネス指向のアドホッククエリスイートで構成される、広く使用されている意思決定支援ベンチマークです。TPC-Hを使用した22の完全なSQLクエリを体験するには、クエリステートメントとデータの生成方法については、 [tidb-benchリポジトリ](https://github.com/pingcap/tidb-bench/tree/master/tpch/queries)または[TPC-H](http://www.tpc.org/tpch/)ご覧ください。
 
-### Step 1. Deploy a local test environment
+### ステップ1. ローカルテスト環境をデプロイ {#step-1-deploy-a-local-test-environment}
 
-Before using TiDB HTAP, follow the steps in the [Quick Start with TiDB Self-Managed](/quick-start-with-tidb.md) to prepare a local test environment, and run the following command to deploy a TiDB cluster:
-
-{{< copyable "shell-regular" >}}
+TiDB HTAPを使用する前に、 [TiDBセルフマネージドのクイックスタート](/quick-start-with-tidb.md)の手順に従ってローカル テスト環境を準備し、次のコマンドを実行して TiDB クラスターをデプロイします。
 
 ```shell
 tiup playground
 ```
 
-> **Note:**
+> **注記：**
 >
-> `tiup playground` command is ONLY for quick start, NOT for production.
+> `tiup playground`コマンドはクイック スタート専用であり、本番用ではありません。
 
-### Step 2. Prepare test data
+### ステップ2. テストデータの準備 {#step-2-prepare-test-data}
 
-In the following steps, you can create a [TPC-H](http://www.tpc.org/tpch/) dataset as the test data to use TiDB HTAP. If you are interested in TPC-H, see [General Implementation Guidelines](http://tpc.org/tpc_documents_current_versions/pdf/tpc-h_v3.0.0.pdf).
+以下の手順で、 TiDB HTAPを使用するためのテストデータとして[TPC-H](http://www.tpc.org/tpch/)データセットを作成します。TPC-H にご興味がある場合は、 [一般的な実装ガイドライン](http://tpc.org/tpc_documents_current_versions/pdf/tpc-h_v3.0.0.pdf)ご覧ください。
 
-> **Note:**
+> **注記：**
 >
-> If you want to use your existing data for analytic queries, you can [migrate your data to TiDB](/migration-overview.md). If you want to design and create your own test data, you can create it by executing SQL statements or using related tools.
+> 既存のデータを分析クエリに使用する場合は、 [データをTiDBに移行する](/migration-overview.md)実行できます。独自のテスト データを設計および作成する場合は、SQL ステートメントを実行するか、関連ツールを使用して作成できます。
 
-1. Install the test data generation tool by running the following command:
-
-    {{< copyable "shell-regular" >}}
+1.  次のコマンドを実行して、テスト データ生成ツールをインストールします。
 
     ```shell
     tiup install bench
     ```
 
-2. Generate the test data by running the following command:
-
-    {{< copyable "shell-regular" >}}
+2.  次のコマンドを実行してテスト データを生成します。
 
     ```shell
     tiup bench tpch --sf=1 prepare
     ```
 
-    If the output of this command shows `Finished`, it indicates that the data is created.
+    このコマンドの出力に`Finished`表示される場合は、データが作成されたことを示します。
 
-3. Execute the following SQL statement to view the generated data:
-
-    {{< copyable "sql" >}}
+3.  生成されたデータを表示するには、次の SQL ステートメントを実行します。
 
     ```sql
     SELECT
@@ -81,7 +73,7 @@ In the following steps, you can create a [TPC-H](http://www.tpc.org/tpch/) datas
       table_schema='test';
     ```
 
-    As you can see from the output, eight tables are created in total, and the largest table has 6.5 million rows (the number of rows created by the tool depends on the actual SQL query result because the data is randomly generated).
+    出力からわかるように、合計 8 つのテーブルが作成され、最大のテーブルには 650 万行があります (データはランダムに生成されるため、ツールによって作成される行数は実際の SQL クエリ結果によって異なります)。
 
     ```sql
     +---------------+----------------+-----------+------------+-----------+
@@ -99,13 +91,11 @@ In the following steps, you can create a [TPC-H](http://www.tpc.org/tpch/) datas
     8 rows in set (0.06 sec)
     ```
 
-    This is a database of a commercial ordering system. In which, the `test.nation` table indicates the information about countries, the `test.region` table indicates the information about regions, the `test.part` table indicates the information about parts, the `test.supplier` table indicates the information about suppliers, the `test.partsupp` table indicates the information about parts of suppliers, the `test.customer` table indicates the information about customers, the `test.customer` table indicates the information about orders, and the `test.lineitem` table indicates the information about online items.
+    これは商用発注システムのデータベースです。テーブル`test.nation`は国に関する情報、テーブル`test.region`は地域に関する情報、テーブル`test.part`は部品に関する情報、テーブル`test.supplier`はサプライヤーに関する情報、テーブル`test.partsupp`はサプライヤーの部品に関する情報、テーブル`test.customer`は顧客に関する情報、テーブル`test.customer`は注文に関する情報、テーブル`test.lineitem`はオンライン商品に関する情報を示しています。
 
-### Step 3. Query data with the row-based storage engine
+### ステップ3. 行ベースのstorageエンジンでデータをクエリする {#step-3-query-data-with-the-row-based-storage-engine}
 
-To know the performance of TiDB with only the row-based storage engine, execute the following SQL statements:
-
-{{< copyable "sql" >}}
+行ベースのstorageエンジンのみを使用した TiDB のパフォーマンスを確認するには、次の SQL ステートメントを実行します。
 
 ```sql
 USE test;
@@ -136,13 +126,11 @@ ORDER BY
 limit 10;
 ```
 
-This is a shipping priority query, which provides the priority and potential revenue of the highest-revenue order that has not been shipped before a specified date. The potential revenue is defined as the sum of `l_extendedprice * (1-l_discount)`. The orders are listed in the descending order of revenue. In this example, this query lists the unshipped orders with potential query revenue in the top 10.
+これは配送優先度クエリで、指定日までに発送されていない、最も収益の高い注文の優先度と潜在収益を取得します。潜在収益は`l_extendedprice * (1-l_discount)`の合計として定義されます。注文は収益の降順でリストされます。この例では、このクエリは潜在収益が上位10件の未発送注文をリストします。
 
-### Step 4. Replicate the test data to the columnar storage engine
+### ステップ4. テストデータを列指向storageエンジンに複製する {#step-4-replicate-the-test-data-to-the-columnar-storage-engine}
 
-After TiFlash is deployed, TiKV does not replicate data to TiFlash immediately. You need to execute the following DDL statements in a MySQL client of TiDB to specify which tables need to be replicated. After that, TiDB will create the specified replicas in TiFlash accordingly.
-
-{{< copyable "sql" >}}
+TiFlashを導入した後、TiKV はデータをすぐにTiFlashに複製しません。複製するテーブルを指定するには、TiDB の MySQL クライアントで以下の DDL 文を実行する必要があります。その後、TiDB は指定されたレプリカをTiFlashに作成します。
 
 ```sql
 ALTER TABLE test.customer SET TIFLASH REPLICA 1;
@@ -150,9 +138,7 @@ ALTER TABLE test.orders SET TIFLASH REPLICA 1;
 ALTER TABLE test.lineitem SET TIFLASH REPLICA 1;
 ```
 
-To check the replication status of the specific tables, execute the following statements:
-
-{{< copyable "sql" >}}
+特定のテーブルのレプリケーション ステータスを確認するには、次のステートメントを実行します。
 
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'test' and TABLE_NAME = 'customer';
@@ -160,18 +146,16 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'test' and
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'test' and TABLE_NAME = 'lineitem';
 ```
 
-In the result of the above statements:
+上記のステートメントの結果:
 
-- `AVAILABLE` indicates whether the TiFlash replica of a specific table is available or not. `1` means available and `0` means unavailable. Once the `AVAILABLE` field becomes `1`, this status does not change anymore.
-- `PROGRESS` means the progress of the replication. The value is between 0.0 and 1.0. 1 means that the replication progress of the TiFlash replica is complete.
+-   `AVAILABLE` 、特定のテーブルのTiFlashレプリカが利用可能かどうかを示します。2 `1`利用可能、 `0`利用不可を意味します。6 フィールドが`AVAILABLE` `1`なると、このステータスは変更されなくなります。
+-   `PROGRESS`レプリケーションの進行状況を表します。値は0.0～1.0の範囲です。1はTiFlashレプリカのレプリケーションの進行状況が完了したことを意味します。
 
-### Step 5. Analyze data faster using HTAP
+### ステップ5. HTAPを使用してデータをより速く分析する {#step-5-analyze-data-faster-using-htap}
 
-Execute the SQL statements in [Step 3](#step-3-query-data-with-the-row-based-storage-engine) again, and you can see the performance of TiDB HTAP.
+もう一度[ステップ3](#step-3-query-data-with-the-row-based-storage-engine)の SQL 文を実行すると、 TiDB HTAPのパフォーマンスを確認できます。
 
-For tables with TiFlash replicas, the TiDB optimizer automatically determines whether to use TiFlash replicas based on the cost estimation. To check whether or not a TiFlash replica is selected, you can use the `desc` or `explain analyze` statement. For example:
-
-{{< copyable "sql" >}}
+TiFlashレプリカを持つテーブルの場合、TiDBオプティマイザーはコスト見積もりに基づいてTiFlashレプリカを使用するかどうかを自動的に決定します。TiFlashTiFlashが選択されているかどうかを確認するには、 `desc`または`explain analyze`ステートメントを使用します。例：
 
 ```sql
 USE test;
@@ -202,14 +186,14 @@ ORDER BY
 limit 10;
 ```
 
-If the result of the `EXPLAIN` statement shows `ExchangeSender` and `ExchangeReceiver` operators, it indicates that the MPP mode has taken effect.
+`EXPLAIN`ステートメントの結果に`ExchangeSender`と`ExchangeReceiver`演算子が表示されている場合は、MPP モードが有効になっていることを示します。
 
-In addition, you can specify that each part of the entire query is computed using only the TiFlash engine. For detailed information, see [Use TiDB to read TiFlash replicas](/tiflash/use-tidb-to-read-tiflash.md).
+さらに、クエリ全体の各部分をTiFlashエンジンのみを使用して計算するように指定することもできます。詳細については、 [TiDBを使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)参照してください。
 
-You can compare query results and query performance of these two methods.
+これら 2 つの方法のクエリ結果とクエリ パフォーマンスを比較できます。
 
-## What's next
+## 次は何？ {#what-s-next}
 
-- [Architecture of TiDB HTAP](/tiflash/tiflash-overview.md#architecture)
-- [Explore HTAP](/explore-htap.md)
-- [Use TiFlash](/tiflash/tiflash-overview.md#use-tiflash)
+-   [TiDB HTAPのアーキテクチャ](/tiflash/tiflash-overview.md#architecture)
+-   [HTAPを探索する](/explore-htap.md)
+-   [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)

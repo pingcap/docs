@@ -1,80 +1,80 @@
 ---
 title: Metadata Lock
-summary: Introduce the concept, principles, and implementation details of metadata lock in TiDB.
+summary: TiDB のメタデータ ロックの概念、原則、実装の詳細を紹介します。
 ---
 
-# Metadata Lock
+# メタデータロック {#metadata-lock}
 
-This document introduces the metadata lock in TiDB.
+このドキュメントでは、TiDB のメタデータ ロックについて説明します。
 
-## Concept
+## コンセプト {#concept}
 
-TiDB uses the online asynchronous schema change algorithm to support changing metadata objects. When a transaction is executed, it obtains the corresponding metadata snapshot at the transaction start. If the metadata is changed during a transaction, to ensure data consistency, TiDB returns an `Information schema is changed` error and the transaction fails to commit.
+TiDBは、オンライン非同期スキーマ変更アルゴリズムを使用して、メタデータオブジェクトの変更をサポートします。トランザクションが実行されると、トランザクション開始時の対応するメタデータスナップショットが取得されます。トランザクション中にメタデータが変更された場合、データの整合性を確保するために、TiDBはエラー`Information schema is changed`を返し、トランザクションはコミットに失敗します。
 
-To solve the problem, TiDB v6.3.0 introduces metadata lock into the online DDL algorithm. To avoid most DML errors, TiDB coordinates the priority of DMLs and DDLs during table metadata change and makes executing DDLs wait for the DMLs with old metadata to commit.
+この問題を解決するため、TiDB v6.3.0ではオンラインDDLアルゴリズムにメタデータロックが導入されました。ほとんどのDMLエラーを回避するため、TiDBはテーブルメタデータの変更時にDMLとDDLの優先順位を調整し、古いメタデータを持つDMLがコミットされるまで実行中のDDLを待機させます。
 
-## Scenarios
+## シナリオ {#scenarios}
 
-The metadata lock in TiDB applies to all DDL statements, such as:
+TiDB のメタデータ ロックは、次のようなすべての DDL ステートメントに適用されます。
 
-- [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
-- [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
-- [`DROP COLUMN`](/sql-statements/sql-statement-drop-column.md)
-- [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)
-- [`DROP PARTITION`](/partitioned-table.md#partition-management)
-- [`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md)
-- [`EXCHANGE PARTITION`](/partitioned-table.md#partition-management)
-- [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
-- [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
+-   [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
+-   [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
+-   [`DROP COLUMN`](/sql-statements/sql-statement-drop-column.md)
+-   [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)
+-   [`DROP PARTITION`](/partitioned-table.md#partition-management)
+-   [`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md)
+-   [`EXCHANGE PARTITION`](/partitioned-table.md#partition-management)
+-   [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
+-   [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
 
-Enabling metadata lock might have some performance impact on the execution of the DDL task in TiDB. To reduce the impact, the following lists some scenarios that do not require metadata lock:
+メタデータロックを有効にすると、TiDB での DDL タスク実行のパフォーマンスに若干の影響が出る可能性があります。この影響を軽減するために、メタデータロックを必要としないシナリオをいくつか以下に示します。
 
-+ `SELECT` queries with auto-commit enabled
-+ Stale Read is enabled
-+ Access temporary tables
+-   自動コミットが有効になっているクエリは`SELECT`
+-   ステイル読み取りが有効になっています
+-   一時テーブルにアクセスする
 
-## Usage
+## 使用法 {#usage}
 
-Starting from v6.5.0, TiDB enables metadata lock by default. When you upgrade your existing cluster from v6.4.0 or earlier to v6.5.0 or later, TiDB automatically enables metadata lock. To disable metadata lock, you can set the system variable [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630) to `OFF`.
+TiDB v6.5.0以降、メタデータロックはデフォルトで有効になります。既存のクラスタをv6.4.0以前からv6.5.0以降にアップグレードすると、TiDBはメタデータロックを自動的に有効にします。メタデータロックを無効にするには、システム変数[`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630)を`OFF`に設定します。
 
-## Impact
+## インパクト {#impact}
 
-- For DMLs, metadata lock does not block its execution, nor causes any deadlock.
-- When metadata lock is enabled, the information of a metadata object in a transaction is determined on the first access and does not change after that.
-- For DDLs, when changing metadata state, DDLs might be blocked by old transactions. The following is an example:
+-   DML の場合、メタデータ ロックは実行をブロックせず、デッドロックも発生しません。
+-   メタデータ ロックを有効にすると、トランザクション内のメタデータ オブジェクトの情報は最初のアクセス時に決定され、その後は変更されません。
+-   DDLの場合、メタデータの状態を変更すると、古いトランザクションによってDDLがブロックされる可能性があります。以下に例を示します。
 
-    | Session 1 | Session 2 |
-    |:---------------------------|:----------|
-    | `CREATE TABLE t (a INT);`  |           |
-    | `INSERT INTO t VALUES(1);` |           |
-    | `BEGIN;`                   |           |
-    |                            | `ALTER TABLE t ADD COLUMN b INT;` |
-    | `SELECT * FROM t;`<br/>(Uses the current metadata version of table `t`. Returns `(a=1, b=NULL)` and locks table `t`.)         |           |
-    |                            | `ALTER TABLE t ADD COLUMN c INT;` (blocked by Session 1) |
+    | セッション1                                                                                     | セッション2                                                     |
+    | :----------------------------------------------------------------------------------------- | :--------------------------------------------------------- |
+    | `CREATE TABLE t (a INT);`                                                                  |                                                            |
+    | `INSERT INTO t VALUES(1);`                                                                 |                                                            |
+    | `BEGIN;`                                                                                   |                                                            |
+    |                                                                                            | `ALTER TABLE t ADD COLUMN b INT;`                          |
+    | `SELECT * FROM t;`<br/> (テーブル`t`の現在のメタデータ バージョンを使用します。5 `(a=1, b=NULL)`返し、テーブル`t`をロックします。) |                                                            |
+    |                                                                                            | `ALTER TABLE t ADD COLUMN c INT;` (セッション 1 によってブロックされています) |
 
-    At the repeatable read isolation level, from the transaction start to the timepoint of determining the metadata of a table, if a DDL that requires data changes is performed, such as adding an index, or changing column types, the DDL returns an error as follows:
+    繰り返し可能読み取り分離レベルでは、トランザクションの開始からテーブルのメタデータを決定する時点までの間に、インデックスの追加や列タイプの変更など、データの変更を必要とする DDL が実行されると、DDL は次のようなエラーを返します。
 
-    | Session 1                  | Session 2                                 |
-    |:---------------------------|:------------------------------------------|
-    | `CREATE TABLE t (a INT);`  |                                           |
-    | `INSERT INTO t VALUES(1);` |                                           |
-    | `BEGIN;`                   |                                           |
-    |                            | `ALTER TABLE t ADD INDEX idx(a);`         |
-    | `SELECT * FROM t;` (index `idx` is not available) |                    |
-    | `COMMIT;`                  |                                           |
-    | `BEGIN;`                   |                                           |
-    |                            | `ALTER TABLE t MODIFY COLUMN a CHAR(10);` |
-    | `SELECT * FROM t;` (returns `ERROR 8028 (HY000): public column a has changed`) | |
+    | セッション1                                                                     | セッション2                                    |
+    | :------------------------------------------------------------------------- | :---------------------------------------- |
+    | `CREATE TABLE t (a INT);`                                                  |                                           |
+    | `INSERT INTO t VALUES(1);`                                                 |                                           |
+    | `BEGIN;`                                                                   |                                           |
+    |                                                                            | `ALTER TABLE t ADD INDEX idx(a);`         |
+    | `SELECT * FROM t;` （インデックス`idx`使用できません）                                    |                                           |
+    | `COMMIT;`                                                                  |                                           |
+    | `BEGIN;`                                                                   |                                           |
+    |                                                                            | `ALTER TABLE t MODIFY COLUMN a CHAR(10);` |
+    | `SELECT * FROM t;` ( `ERROR 8028 (HY000): public column a has changed`を返す) |                                           |
 
-## Observability
+## 可観測性 {#observability}
 
-TiDB v6.3.0 introduces the `mysql.tidb_mdl_view` view to help you obtain the information of the current blocked DDL.
+TiDB v6.3.0 では、現在ブロックされている DDL の情報を取得するのに役立つ`mysql.tidb_mdl_view`ビューが導入されています。
 
-> **Note:**
+> **注記：**
 >
-> To select the `mysql.tidb_mdl_view` view, the [`PROCESS` privilege](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) is required.
+> `mysql.tidb_mdl_view`ビューを選択するには、 [`PROCESS`権限](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)必要です。
 
-The following takes adding an index for table `t` as an example. Assume that there is a DDL statement `ALTER TABLE t ADD INDEX idx(a)`:
+以下は、テーブル`t`にインデックスを追加する例です。DDL文`ALTER TABLE t ADD INDEX idx(a)`があると仮定します。
 
 ```sql
 TABLE mysql.tidb_mdl_view\G
@@ -93,45 +93,45 @@ SQL_DIGESTS: ["begin","select * from `t`"]
 
 ```
 
-From the preceding output, you can see that the transaction whose `SESSION ID` is `1547698182` blocks the `ADD COLUMN` DDL. `SQL_DIGEST` shows the SQL statements executed by this transaction, which is ``["begin","select * from `t`"]``. To make the blocked DDL continue to execute, you can use the following global `KILL` statement to kill the `1547698182` transaction:
+上記の出力から、 `SESSION ID`が`1547698182`であるトランザクションが`ADD COLUMN` DDLをブロックしていることがわかります。7 `SQL_DIGEST` 、このトランザクションによって実行されたSQL文（ ``["begin","select * from `t`"]``を示しています。ブロックされたDDLの実行を継続するには、次のグローバル`KILL`文を使用して`1547698182`トランザクションを強制終了します。
 
 ```sql
 mysql> KILL 1547698182;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-After killing the transaction, you can select the `mysql.tidb_mdl_view` view again. At this time, the preceding transaction is not shown in the output, which means the DDL is not blocked.
+トランザクションを強制終了した後、 `mysql.tidb_mdl_view`のビューを再度選択できます。この時点では、前のトランザクションは出力に表示されません。これは、DDLがブロックされていないことを意味します。
 
 ```sql
 TABLE mysql.tidb_mdl_view\G
 Empty set (0.01 sec)
 ```
 
-## Principles
+## 原則 {#principles}
 
-### Description of the issue
+### 問題の説明 {#description-of-the-issue}
 
-DDL operations in TiDB are the online DDL mode. When a DDL statement is being executed, the metadata version of the defined object to be modified might go through multiple minor version changes. The online asynchronous metadata change algorithm only establishes that two adjacent minor versions are compatible, that is, operations between two versions do not break data consistency of the object that DDL changes.
+TiDBにおけるDDL操作はオンラインDDLモードです。DDL文の実行中、変更対象オブジェクトのメタデータバージョンは、複数のマイナーバージョン変更を経る可能性があります。オンライン非同期メタデータ変更アルゴリズムは、隣接する2つのマイナーバージョン間の互換性のみを確立します。つまり、2つのバージョン間の操作によって、DDL変更対象のオブジェクトのデータ整合性が損なわれることはありません。
 
-When adding an index to a table, the state of the DDL statement changes as follows: None -> Delete Only, Delete Only -> Write Only, Write Only -> Write Reorg, Write Reorg -> Public.
+テーブルにインデックスを追加すると、DDL ステートメントの状態は次のように変わります: なし -&gt; 削除のみ、削除のみ -&gt; 書き込みのみ、書き込みのみ -&gt; 書き込み再編成、書き込み再編成 -&gt; パブリック。
 
-The following commit process of transactions violates the preceding constraint:
+次のトランザクションのコミット プロセスは、前述の制約に違反します。
 
-| Transaction  | Version used by transaction  | Latest version in the cluster | Version difference |
-|:-----|:-----------|:-----------|:----|
-| txn1 | None       | None       | 0   |
-| txn2 | DeleteOnly | DeleteOnly | 0   |
-| txn3 | WriteOnly  | WriteOnly  | 0   |
-| txn4 | None       | WriteOnly  | 2   |
-| txn5 | WriteReorg | WriteReorg | 0   |
-| txn6 | WriteOnly  | WriteReorg | 1   |
-| txn7 | Public     | Public     | 0   |
+| トランザクション  | トランザクションで使用されるバージョン | クラスター内の最新バージョン | バージョンの違い |
+| :-------- | :------------------ | :------------- | :------- |
+| トランザクション1 | なし                  | なし             | 0        |
+| トランザクション2 | 削除のみ                | 削除のみ           | 0        |
+| トランザクション3 | 書き込み専用              | 書き込み専用         | 0        |
+| txn4      | なし                  | 書き込み専用         | 2        |
+| txn5      | 書き込み再編成             | 書き込み再編成        | 0        |
+| txn6      | 書き込み専用              | 書き込み再編成        | 1        |
+| txn7      | 公共                  | 公共             | 0        |
 
-In the preceding table, the metadata version used when `txn4` is committed is two versions different from the latest version in the cluster. This might cause data inconsistency.
+上記の表では、 `txn4`コミットされたときに使用されるメタデータバージョンは、クラスター内の最新バージョンから 2 バージョン離れています。これにより、データの不整合が発生する可能性があります。
 
-### Implementation details
+### 実装の詳細 {#implementation-details}
 
-Metadata lock can ensure that the metadata versions used by all transactions in a TiDB cluster differ by one version at most. To achieve this goal, TiDB implements the following two rules:
+メタデータロックは、TiDBクラスタ内のすべてのトランザクションで使用されるメタデータのバージョン差が最大1バージョン以内であることを保証できます。この目的を達成するために、TiDBは次の2つのルールを実装しています。
 
-- When executing a DML, TiDB records metadata objects accessed by the DML in the transaction context, such as tables, views, and corresponding metadata versions. These records are cleaned up when the transaction is committed.
-- When a DDL statement changes state, the latest version of metadata is pushed to all TiDB nodes. If the difference between the metadata version used by all transactions related to this state change on a TiDB node and the current metadata version is less than two, the TiDB node is considered to acquire the metadata lock of the metadata object. The next state change can only be executed after all TiDB nodes in the cluster have obtained the metadata lock of the metadata object.
+-   DMLを実行すると、TiDBはDMLによってアクセスされたメタデータオブジェクト（テーブル、ビュー、対応するメタデータバージョンなど）をトランザクションコンテキストに記録します。これらのレコードは、トランザクションがコミットされるとクリーンアップされます。
+-   DDL文の状態が変化すると、メタデータの最新バージョンがすべてのTiDBノードにプッシュされます。TiDBノード上でこの状態変化に関連するすべてのトランザクションで使用されるメタデータバージョンと現在のメタデータバージョンの差が2未満の場合、そのTiDBノードはメタデータオブジェクトのメタデータロックを取得したとみなされます。次の状態変化は、クラスタ内のすべてのTiDBノードがメタデータオブジェクトのメタデータロックを取得した後にのみ実行できます。

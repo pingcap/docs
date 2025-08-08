@@ -1,32 +1,32 @@
 ---
 title: Support Resources
-summary: Find support resources if you encounter a problem using TiDB.
+summary: TiDB の使用中に問題が発生した場合は、サポート リソースを見つけてください。
 ---
 
-# Support Resources
+# サポートリソース {#support-resources}
 
-If you encounter a problem when you use TiDB, you can reach out for support from PingCAP or the TiDB community via the following methods:
+TiDB の使用中に問題が発生した場合は、次の方法で PingCAP または TiDB コミュニティにサポートを依頼できます。
 
-+ Get support from PingCAP for [TiDB Enterprise Edition](https://www.pingcap.com/tidb-enterprise/):
+-   PingCAPから[TiDB エンタープライズエディション](https://www.pingcap.com/tidb-enterprise/)のサポートを受ける:
 
-    - [Submit a request](https://tidb.support.pingcap.com)
+    -   [リクエストを送信する](https://tidb.support.pingcap.com)
 
-+ Get support from PingCAP for TiDB Cloud:
+-   PingCAP からTiDB Cloudのサポートを受けるには:
 
-    - Report an issue directly from the [TiDB Cloud console](https://tidbcloud.com/)
-    - [Documentation for TiDB Cloud support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)
+    -   [TiDB Cloudコンソール](https://tidbcloud.com/)から直接問題を報告
+    -   [TiDB Cloudサポートのドキュメント](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)
 
-+ Seek help from the TiDB community:
+-   TiDB コミュニティから支援を求めてください:
 
-    - [Discord channels](https://discord.gg/DQZ2dy3cuc?utm_source=doc)
-    - Slack channels: [#everyone](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=docs) (English), [#tidb-japan](https://slack.tidb.io/invite?team=tidb-community&channel=tidb-japan&ref=docs) (Japanese)
-    - [Stack Overflow](https://stackoverflow.com/questions/tagged/tidb) (questions tagged with #tidb)
+    -   [Discordチャンネル](https://discord.gg/DQZ2dy3cuc?utm_source=doc)
+    -   Slackチャンネル: [＃みんな](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=docs) (英語)、 [#tidb-japan](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=tidb-japan&#x26;ref=docs) (日本語)
+    -   [スタックオーバーフロー](https://stackoverflow.com/questions/tagged/tidb) (#tidb タグの付いた質問)
 
-+ Report a bug
+-   バグを報告する
 
-    - Submit an issue [on GitHub](https://github.com/pingcap/tidb/issues/new/choose)
+    -   問題を提出する[GitHubで](https://github.com/pingcap/tidb/issues/new/choose)
 
-+ Learn TiDB's implementation and design
+-   TiDBの実装と設計を学ぶ
 
-    - [TiDB development guide](https://pingcap.github.io/tidb-dev-guide/)
-    - [Discussions on GitHub](https://github.com/orgs/pingcap/discussions)
+    -   [TiDB開発ガイド](https://pingcap.github.io/tidb-dev-guide/)
+    -   [GitHubでの議論](https://github.com/orgs/pingcap/discussions)

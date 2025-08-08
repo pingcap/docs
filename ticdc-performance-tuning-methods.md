@@ -1,70 +1,71 @@
 ---
 title: TiCDC Performance Analysis and Tuning Methods
-summary: Introduces the TiCDC metrics on the Performance Overview dashboard to help you better understand and monitor TiCDC workloads.
+summary: パフォーマンス概要ダッシュボードに TiCDC メトリックを導入し、TiCDC ワークロードをより適切に理解して監視できるようにします。
 ---
 
-# TiCDC Performance Analysis and Tuning Methods
+# TiCDC のパフォーマンス分析とチューニング方法 {#ticdc-performance-analysis-and-tuning-methods}
 
-This document introduces TiCDC resource utilization and key performance metrics. You can monitor and evaluate TiCDC performance on data replication through the [CDC panel](/grafana-performance-overview-dashboard.md#cdc) on the Performance Overview dashboard.
+このドキュメントでは、TiCDCのリソース使用率と主要なパフォーマンス指標についてご紹介します。パフォーマンス概要ダッシュボードの[CDCパネル](/grafana-performance-overview-dashboard.md#cdc)を通じて、データレプリケーションにおけるTiCDCのパフォーマンスを監視および評価できます。
 
-## Resource utilization of a TiCDC cluster
+## TiCDC クラスターのリソース利用率 {#resource-utilization-of-a-ticdc-cluster}
 
-With the following three metrics, you can quickly get the resource utilization of a TiCDC cluster:
+次の 3 つのメトリックを使用すると、TiCDC クラスターのリソース使用率を簡単に取得できます。
 
-- CPU usage: the CPU usage per TiCDC node.
-- Memory usage: the memory usage per TiCDC node.
-- Goroutine count: the number of goroutines per TiCDC node.
+-   CPU 使用率: TiCDC ノードごとの CPU 使用率。
+-   メモリ使用量: TiCDC ノードごとのメモリ使用量。
+-   ゴルーチン数: TiCDC ノードあたりのゴルーチンの数。
 
-## Key metrics for TiCDC data replication
+## TiCDCデータレプリケーションの主要指標 {#key-metrics-for-ticdc-data-replication}
 
-### TiCDC overall metrics
+### TiCDC の全体的な指標 {#ticdc-overall-metrics}
 
-With the following metrics, you can get an overview of TiCDC data replication:
+次のメトリックを使用すると、TiCDC データ レプリケーションの概要を把握できます。
 
-- Changefeed checkpoint lag: the progress lag of data replication between the upstream and the downstream, measured in seconds.
+-   Changefeed チェックポイント ラグ: アップストリームとダウンストリーム間のデータ複製の進行ラグ (秒単位で測定)。
 
-    If the speed at which TiCDC consumes data and writes downstream keeps up with upstream data changes, this metric remains within a small latency range, typically within 10 seconds. Otherwise, this metric will continue to increase.
+    TiCDC がデータを消費し、下流に書き込む速度が上流のデータの変化に追いついている場合、この指標は小さなレイテンシー範囲内（通常は 10 秒以内）に留まります。そうでない場合、この指標は増加し続けます。
 
-    When this metric (that is, `Changefeed checkpoint lag`) increases, common reasons are as follows:
+    このメトリック (つまり`Changefeed checkpoint lag` ) が増加する場合、一般的な理由は次のとおりです。
 
-    - Insufficient system resources: if the CPU, memory, or disk space of TiCDC is insufficient, it might cause data processing to be too slow, which results in a long checkpoint of the TiCDC changefeed.
-    - Network issues: if network interruptions, lags, or insufficient bandwidth occur in TiCDC, it might affect data transfer speed, which results in a long checkpoint of the TiCDC changefeed.
-    - High QPS in the upstream: if the data to be processed by TiCDC is excessively large, it might cause data processing timeouts, which results in an increased checkpoint of the TiCDC changefeed. Typically, a single TiCDC node can handle a maximum QPS of around 60K.
-    - Database issues:
-        - The gap between the `min resolved ts` of the upstream TiKV cluster and the latest PD TSO is significant. This issue usually occurs because TiKV fails to advance the resolved ts in time when the write workload of the upstream is excessively heavy.
-        - The write latency in downstream databases is high, blocking TiCDC from replicating data to the downstream timely.
+    -   システム リソースが不十分: TiCDC の CPU、メモリ、またはディスク領域が不十分な場合、データ処理が遅くなりすぎて、TiCDC 変更フィードのチェックポイントが長くなる可能性があります。
+    -   ネットワークの問題: TiCDC でネットワークの中断、遅延、または帯域幅不足が発生すると、データ転送速度に影響し、TiCDC 変更フィードのチェックポイントが長くなる可能性があります。
+    -   アップストリームのQPSが高い場合：TiCDCで処理するデータが過度に大きい場合、データ処理のタイムアウトが発生し、TiCDCチェンジフィードのチェックポイントが増加する可能性があります。通常、単一のTiCDCノードは最大約60KのQPSを処理できます。
+    -   データベースの問題:
+        -   アップストリームTiKVクラスタの`min resolved ts`と最新のPD TSOのギャップが大きくなっています。この問題は通常、アップストリームの書き込みワークロードが過度に重い場合に、TiKVが解決済みのTSを時間内に進めることができないために発生します。
+        -   ダウンストリーム データベースのレイテンシーが大きいため、TiCDC がダウンストリームにデータをタイムリーに複製できなくなります。
 
-- Changefeed resolved ts lag: the progress lag between the internal replication status of a TiCDC node and the upstream, measured in seconds. If this metric is high, it indicates that the data processing capability of the TiCDC Puller or Sorter module might be insufficient, or there might be network latency or slow disk read/write speed issues. In such cases, to ensure the efficient and stable operation of TiCDC, you need to take appropriate measures, such as increasing the number of TiCDC nodes or optimizing the network configuration.
-- The status of changefeeds: for status explanations of changefeeds, see [Changefeed state transfer](/ticdc/ticdc-changefeed-overview.md).
+-   Changefeed 解決 ts ラグ: TiCDC ノードの内部レプリケーション状態と上流との間の進捗ラグ（秒単位）。このメトリックが高い場合、TiCDC Puller または Sorter モジュールのデータ処理能力が不足しているか、ネットワークレイテンシーやディスクの読み取り/書き込み速度の低下などの問題が発生している可能性があります。このような場合、TiCDC の効率的かつ安定した運用を確保するには、TiCDC ノードの数を増やす、ネットワーク構成を最適化するなどの適切な対策を講じる必要があります。
 
-Example 1: High checkpoint lag due to high upstream QPS in the case of a single TiCDC node
+-   changefeed のステータス: changefeed のステータスの説明については、 [チェンジフィード状態転送](/ticdc/ticdc-changefeed-overview.md)参照してください。
 
-As shown in the following diagram, because the upstream QPS is excessively high and there is only a single TiCDC node in the cluster, the TiCDC node is overloaded, the CPU usage is high, and both `Changefeed checkpoint lag` and `Changefeed resolved ts lag` keep increasing. The changefeed status intermittently transitions from `0` to `1`, indicating that the changefeed keeps getting errors. You can try resolving this issue by adding more resources as follows:
+例1: 単一のTiCDCノードの場合、上流QPSが高いためにチェックポイントの遅延が大きくなる
 
-- Add more TiCDC nodes: scale out the TiCDC cluster to multiple nodes to increase processing capacity.
-- Optimize TiCDC node resources: increase CPU and memory configurations of the TiCDC node to improve performance.
+次の図に示すように、アップストリームのQPSが過度に高く、クラスター内にTiCDCノードが1つしかないため、TiCDCノードが過負荷状態になり、CPU使用率が高くなり、 `Changefeed checkpoint lag`と`Changefeed resolved ts lag`両方が増加し続けています。changefeedのステータスは断続的に`0`から`1`に遷移しており、changefeedでエラーが発生し続けていることを示しています。以下の手順でリソースを追加することで、この問題を解決できます。
+
+-   TiCDC ノードを追加します。処理能力を高めるために、TiCDC クラスターを複数のノードにスケールアウトします。
+-   TiCDC ノードのリソースを最適化します。TiCDC ノードの CPU とメモリの構成を増やしてパフォーマンスを向上させます。
 
 ![TiCDC overview](/media/performance/cdc/cdc-slow.png)
 
-### Data flow throughput metrics and downstream latency
+### データフローのスループット指標とダウンストリームのレイテンシー {#data-flow-throughput-metrics-and-downstream-latency}
 
-With the following metrics, you can learn the data flow throughput and downstream latency of TiCDC:
+次のメトリックを使用すると、TiCDC のデータフロー スループットとダウンストリームレイテンシーを知ることができます。
 
-- Puller output events/s: the number of rows that the Puller module of TiCDC nodes sends to the Sorter module per second.
-- Sorter output events/s: the number of rows that the Sorter module of TiCDC nodes sends to the Mounter module per second.
-- Mounter output events/s: the number of rows that the Mounter module of TiCDC nodes sends to the Sink module per second.
-- Table sink output events/s: the number of rows that the Table Sorter module of the TiCDC nodes sends to the Sink module per second.
-- SinkV2 - Sink flush rows/s: the number of rows that the Sink module in the TiCDC node sends to the downstream per second.
-- Transaction Sink Full Flush Duration: the average latency and p999 latency of writing downstream transactions by the MySQL Sink of TiCDC nodes.
-- MQ Worker Send Message Duration Percentile: the latency of sending messages by MQ worker when the downstream is Kafka.
-- Kafka Outgoing Bytes: the traffic of writing downstream transactions in MQ Workload.
+-   Puller 出力イベント/秒: TiCDC ノードの Puller モジュールが Sorter モジュールに 1 秒あたりに送信する行数。
+-   ソーター出力イベント/秒: TiCDC ノードのソーター モジュールがマウント モジュールに 1 秒あたりに送信する行数。
+-   マウンター出力イベント/秒: TiCDC ノードのマウンター モジュールがシンク モジュールに 1 秒あたりに送信する行数。
+-   テーブル シンク出力イベント/秒: TiCDC ノードのテーブル ソーター モジュールがシンク モジュールに 1 秒あたりに送信する行数。
+-   SinkV2 - シンク フラッシュ行数/秒: TiCDC ノードのシンク モジュールがダウンストリームに 1 秒あたりに送信する行数。
+-   トランザクションシンクの完全フラッシュ期間: TiCDC ノードの MySQL シンクによるダウンストリーム トランザクションの書き込みの平均レイテンシーと p999レイテンシー。
+-   MQ ワーカーのメッセージ送信期間パーセンタイル: ダウンストリームが Kafka の場合の MQ ワーカーによるメッセージ送信のレイテンシー。
+-   Kafka 送信バイト: MQ ワークロードでのダウンストリーム トランザクションの書き込みトラフィック。
 
-Example 2: Impact of downstream database write speed on TiCDC data replication performance
+例2: 下流データベースの書き込み速度がTiCDCデータレプリケーションのパフォーマンスに与える影響
 
-As shown in the following diagram, both upstream and downstream are TiDB clusters. The TiCDC `Puller output events/s` metric indicates the QPS of the upstream database. The `Transaction Sink Full Flush Duration` metric indicates the average write latency of the downstream database, which is high during the first workload and low during the second workload.
+次の図に示すように、上流と下流の両方がTiDBクラスターです。TiCDC `Puller output events/s`メトリックは上流データベースのQPSを示します`Transaction Sink Full Flush Duration`メトリックは下流データベースの平均書き込みレイテンシーを示しており、最初のワークロードでは高く、2番目のワークロードでは低くなります。
 
-- During the first workload, because the downstream TiDB cluster writes data slowly, TiCDC consumes data at a speed that falls behind the upstream QPS, leading to a continuous increase in `Changefeed checkpoint lag`. However, `Changefeed resolved ts lag` remains within 300 milliseconds, indicating that replication lag and throughput bottlenecks are not caused by the puller and sorter modules but caused by the downstream sink module.
-- During the second workload, because the downstream TiDB cluster writes data faster, TiCDC replicates data at a speed that completely catches up with the upstream, the `Changefeed checkpoint lag` and `Changefeed resolved ts lag` remain within 500 milliseconds, which is a relatively ideal replication speed for TiCDC.
+-   最初のワークロードでは、下流のTiDBクラスターが低速でデータを書き込むため、TiCDCは上流のQPSに遅れをとる速度でデータを消費し、 `Changefeed checkpoint lag`継続的に増加します。しかし、 `Changefeed resolved ts lag` 300ミリ秒以内に収まっているため、レプリケーションの遅延とスループットのボトルネックは、プラーモジュールとソーターモジュールではなく、下流のシンクモジュールによって発生していることがわかります。
+-   2 番目のワークロードでは、下流の TiDB クラスターがデータをより高速に書き込むため、TiCDC は上流に完全に追いつく速度でデータを複製し、 `Changefeed checkpoint lag`と`Changefeed resolved ts lag` 500 ミリ秒以内に留まります。これは、TiCDC にとって比較的理想的なレプリケーション速度です。
 
 ![TiCDC overview](/media/performance/cdc/cdc-fast-1.png)
 

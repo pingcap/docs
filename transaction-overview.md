@@ -1,93 +1,81 @@
 ---
 title: Transactions
-summary: Learn transactions in TiDB.
+summary: TiDB でのトランザクションについて学習します。
 ---
 
-# Transactions
+# 取引 {#transactions}
 
-TiDB supports distributed transactions using either [pessimistic](/pessimistic-transaction.md) or [optimistic](/optimistic-transaction.md) transaction mode. Starting from TiDB 3.0.8, TiDB uses the pessimistic transaction mode by default.
+TiDBは、 [悲観的](/pessimistic-transaction.md)または[楽観的](/optimistic-transaction.md)トランザクションモードを使用した分散トランザクションをサポートします。TiDB 3.0.8以降では、デフォルトで悲観的トランザクションモードが使用されます。
 
-This document introduces commonly used transaction-related statements, explicit and implicit transactions, isolation levels, lazy check for constraints, and transaction sizes.
+このドキュメントでは、一般的に使用されるトランザクション関連のステートメント、明示的および暗黙的なトランザクション、分離レベル、制約の遅延チェック、およびトランザクション サイズについて説明します。
 
-The common variables include [`autocommit`](#autocommit), [`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry), [`tidb_retry_limit`](/system-variables.md#tidb_retry_limit), and [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode).
+一般的な変数には、 [`autocommit`](#autocommit) 、 [`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry) 、 [`tidb_retry_limit`](/system-variables.md#tidb_retry_limit) 、 [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode)などがあります。
 
-> **Note:**
+> **注記：**
 >
-> The [`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry) and [`tidb_retry_limit`](/system-variables.md#tidb_retry_limit) variables only apply to optimistic transactions, not to pessimistic transactions.
+> 変数[`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry)と[`tidb_retry_limit`](/system-variables.md#tidb_retry_limit)は楽観的トランザクションにのみ適用され、悲観的トランザクションには適用されません。
 
-## Common statements
+## よくある発言 {#common-statements}
 
-### Starting a transaction
+### 取引の開始 {#starting-a-transaction}
 
-The statements [`BEGIN`](/sql-statements/sql-statement-begin.md) and [`START TRANSACTION`](/sql-statements/sql-statement-start-transaction.md) can be used interchangeably to explicitly start a new transaction.
+ステートメント[`BEGIN`](/sql-statements/sql-statement-begin.md)と[`START TRANSACTION`](/sql-statements/sql-statement-start-transaction.md) 、新しいトランザクションを明示的に開始するために互換的に使用できます。
 
-Syntax:
-
-{{< copyable "sql" >}}
+構文：
 
 ```sql
 BEGIN;
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 START TRANSACTION;
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 START TRANSACTION WITH CONSISTENT SNAPSHOT;
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 START TRANSACTION WITH CAUSAL CONSISTENCY ONLY;
 ```
 
-If the current session is in the process of a transaction when one of these statements is executed, TiDB automatically commits the current transaction before starting a new transaction.
+これらのステートメントのいずれかが実行されたときに現在のセッションがトランザクションの処理中である場合、TiDB は新しいトランザクションを開始する前に現在のトランザクションを自動的にコミットします。
 
-> **Note:**
+> **注記：**
 >
-> Unlike MySQL, TiDB takes a snapshot of the current database after executing the statements above. MySQL's `BEGIN` and `START TRANSACTION` take a snapshot after executing the first `SELECT` statement (not `SELECT FOR UPDATE`) that reads data from InnoDB after a transaction is started. `START TRANSACTION WITH CONSISTENT SNAPSHOT` takes a snapshot during the execution of the statement. As a result, `BEGIN`, `START TRANSACTION`, and `START TRANSACTION WITH CONSISTENT SNAPSHOT` are equivalent to `START TRANSACTION WITH CONSISTENT SNAPSHOT` in MySQL.
+> MySQLとは異なり、TiDBは上記のステートメントを実行した後に現在のデータベースのスナップショットを取得します。MySQLの`BEGIN`と`START TRANSACTION` 、トランザクション開始後、InnoDBからデータを読み取る最初の`SELECT`ステートメント（ `SELECT FOR UPDATE`ではありません）を実行した後にスナップショットを取得します。9 `START TRANSACTION WITH CONSISTENT SNAPSHOT` `START TRANSACTION`ステートメントの実行中にスナップショットを取得します。結果として、 `BEGIN` `START TRANSACTION WITH CONSISTENT SNAPSHOT` MySQLの`START TRANSACTION WITH CONSISTENT SNAPSHOT`に相当します。
 
-### Committing a transaction
+### トランザクションのコミット {#committing-a-transaction}
 
-The statement [`COMMIT`](/sql-statements/sql-statement-commit.md) instructs TiDB to apply all changes made in the current transaction.
+ステートメント[`COMMIT`](/sql-statements/sql-statement-commit.md) 、現在のトランザクションで行われたすべての変更を適用するように TiDB に指示します。
 
-Syntax:
-
-{{< copyable "sql" >}}
+構文：
 
 ```sql
 COMMIT;
 ```
 
-> **Tip:**
+> **ヒント：**
 >
-> Make sure that your application correctly handles that a `COMMIT` statement could return an error before enabling [optimistic transactions](/optimistic-transaction.md). If you are unsure of how your application handles this, it is recommended to instead use the default of [pessimistic transactions](/pessimistic-transaction.md).
+> [楽観的取引](/optimistic-transaction.md)有効にする前に、アプリケーションが`COMMIT`ステートメントでエラーが返される可能性があることを正しく処理できることを確認してください。アプリケーションがこれをどのように処理するか不明な場合は、代わりにデフォルトの[悲観的取引](/pessimistic-transaction.md)使用することをお勧めします。
 
-### Rolling back a transaction
+### トランザクションのロールバック {#rolling-back-a-transaction}
 
-The statement [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) rolls back and cancels all changes in the current transaction.
+ステートメント[`ROLLBACK`](/sql-statements/sql-statement-rollback.md) 、現在のトランザクション内のすべての変更をロールバックしてキャンセルします。
 
-Syntax:
-
-{{< copyable "sql" >}}
+構文：
 
 ```sql
 ROLLBACK;
 ```
 
-Transactions are also automatically rolled back if the client connection is aborted or closed.
+クライアント接続が中止または閉じられた場合も、トランザクションは自動的にロールバックされます。
 
-## Autocommit
+## 自動コミット {#autocommit}
 
-As required for MySQL compatibility, TiDB will by default _autocommit_ statements immediately following their execution.
+MySQL との互換性のために必要なため、TiDB はデフォルトでステートメントを実行直後に*自動コミットし*ます。
 
-For example:
+例えば：
 
 ```sql
 mysql> CREATE TABLE t1 (
@@ -119,7 +107,7 @@ mysql> SELECT * FROM t1;
 1 row in set (0.00 sec)
 ```
 
-In the above example, the `ROLLBACK` statement has no effect. This is because the `INSERT` statement is executed in autocommit. That is, it was the equivalent of the following single-statement transaction:
+上記の例では、 `ROLLBACK`文は効果がありません。これは、 `INSERT`文が自動コミットで実行されるためです。つまり、これは次の単一文のトランザクションと同等です。
 
 ```sql
 START TRANSACTION;
@@ -127,7 +115,7 @@ INSERT INTO t1 VALUES (1, 'test');
 COMMIT;
 ```
 
-Autocommit will not apply if a transaction has been explicitly started. In the following example, the `ROLLBACK` statement successfully reverts the `INSERT` statement:
+トランザクションが明示的に開始されている場合、自動コミットは適用されません。次の例では、 `ROLLBACK`文が`INSERT`文を正常に元に戻しています。
 
 ```sql
 mysql> CREATE TABLE t2 (
@@ -157,41 +145,35 @@ mysql> SELECT * FROM t2;
 Empty set (0.00 sec)
 ```
 
-The [`autocommit`](/system-variables.md#autocommit) system variable [can be changed](/sql-statements/sql-statement-set-variable.md) on either a global or session basis.
+グローバルまたはセッション ベースの[`autocommit`](/system-variables.md#autocommit)システム変数[変更可能](/sql-statements/sql-statement-set-variable.md) 。
 
-For example:
-
-{{< copyable "sql" >}}
+例えば：
 
 ```sql
 SET autocommit = 0;
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 SET GLOBAL autocommit = 0;
 ```
 
-## Explicit and implicit transaction
+## 明示的トランザクションと暗黙的トランザクション {#explicit-and-implicit-transaction}
 
-> **Note:**
+> **注記：**
 >
-> Some statements are committed implicitly. For example, executing `[BEGIN|START TRANSACTION]` implicitly commits the last transaction and starts a new transaction. This behavior is required for MySQL compatibility. Refer to [implicit commit](https://dev.mysql.com/doc/refman/8.0/en/implicit-commit.html) for more details.
+> 一部の文は暗黙的にコミットされます。例えば、 `[BEGIN|START TRANSACTION]`実行すると、最後のトランザクションが暗黙的にコミットされ、新しいトランザクションが開始されます。この動作はMySQLとの互換性を保つために必要です。詳細は[暗黙のコミット](https://dev.mysql.com/doc/refman/8.0/en/implicit-commit.html)を参照してください。
 
-TiDB supports explicit transactions (use `[BEGIN|START TRANSACTION]` and `COMMIT` to define the start and end of the transaction) and implicit transactions (`SET autocommit = 1`).
+TiDBは明示的なトランザクション（ `[BEGIN|START TRANSACTION]`と`COMMIT`使用してトランザクションの開始と終了を定義する）と暗黙的なトランザクション（ `SET autocommit = 1` ）をサポートしています。
 
-If you set the value of `autocommit` to `1` and start a new transaction through the `[BEGIN|START TRANSACTION]` statement, the autocommit is disabled before `COMMIT` or `ROLLBACK` which makes the transaction becomes explicit.
+`autocommit`の値を`1`に設定し、 `[BEGIN|START TRANSACTION]`ステートメントを通じて新しいトランザクションを開始すると、 `COMMIT`または`ROLLBACK`前に自動コミットが無効になり、トランザクションが明示的になります。
 
-For DDL statements, the transaction is committed automatically and does not support rollback. If you run the DDL statement while the current session is in the process of a transaction, the DDL statement is executed after the current transaction is committed.
+DDL文の場合、トランザクションは自動的にコミットされ、ロールバックはサポートされません。現在のセッションがトランザクション処理中である間にDDL文を実行した場合、DDL文は現在のトランザクションがコミットされた後に実行されます。
 
-## Lazy check of constraints
+## 制約の遅延チェック {#lazy-check-of-constraints}
 
-By default, optimistic transactions will not check the [primary key](/constraints.md#primary-key) or [unique constraints](/constraints.md#unique-key) when a DML statement is executed. These checks are instead performed on transaction `COMMIT`.
+デフォルトでは、楽観的トランザクションはDML文の実行時に[主キー](/constraints.md#primary-key)と[一意制約](/constraints.md#unique-key)チェックしません。これらのチェックはトランザクション`COMMIT`で実行されます。
 
-For example:
-
-{{< copyable "sql" >}}
+例えば：
 
 ```sql
 CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY);
@@ -230,18 +212,16 @@ mysql> SELECT * FROM t1; -- MySQL returns 1 2; TiDB returns 1.
 1 row in set (0.01 sec)
 ```
 
-The lazy check optimization improves performance by batching constraint checks and reducing network communication. The behavior can be disabled by setting [`tidb_constraint_check_in_place=ON`](/system-variables.md#tidb_constraint_check_in_place).
+遅延チェック最適化は、制約チェックをバッチ処理し、ネットワーク通信を削減することでパフォーマンスを向上させます。この動作は[`tidb_constraint_check_in_place=ON`](/system-variables.md#tidb_constraint_check_in_place)設定することで無効にできます。
 
-> **Note:**
+> **注記：**
 >
-> + This optimization only applies to optimistic transactions.
-> + This optimization does not take effect for `INSERT IGNORE` and `INSERT ON DUPLICATE KEY UPDATE`, but only for normal `INSERT` statements.
+> -   この最適化は楽観的トランザクションにのみ適用されます。
+> -   この最適化は`INSERT IGNORE`と`INSERT ON DUPLICATE KEY UPDATE`には適用されず、通常の`INSERT`ステートメントにのみ適用されます。
 
-## Statement rollback
+## ステートメントのロールバック {#statement-rollback}
 
-TiDB supports atomic rollback after statement execution failure. If a statement results in an error, the changes it made will not take effect. The transaction will remain open, and additional changes can be made before issuing a `COMMIT` or `ROLLBACK` statement.
-
-{{< copyable "sql" >}}
+TiDBは、ステートメント実行失敗後のアトミックロールバックをサポートしています。ステートメントがエラーになった場合、そのステートメントで行われた変更は有効になりません。トランザクションはオープンのままとなり、 `COMMIT`または`ROLLBACK`ステートメントを発行する前に追加の変更を加えることができます。
 
 ```sql
 CREATE TABLE test (id INT NOT NULL PRIMARY KEY);
@@ -284,84 +264,82 @@ mysql> SELECT * FROM test;
 2 rows in set (0.00 sec)
 ```
 
-In the above example, the transaction remains open after the failed `INSERT` statements. The final insert statement is then successful and changes are committed.
+上記の例では、 `INSERT`ステートメントが失敗した後もトランザクションは開いたままです。その後、最後の挿入ステートメントが成功し、変更がコミットされます。
 
-## Transaction size limit
+## トランザクションサイズの制限 {#transaction-size-limit}
 
-Due to the limitations of the underlying storage engine, TiDB requires a single row to be no more than 6 MB. All columns of a row are converted to bytes according to their data types and summed up to estimate the size of a single row.
+基盤となるstorageエンジンの制限により、TiDBでは1行のサイズが6MB以下である必要があります。行内のすべての列は、それぞれのデータ型に応じてバイトに変換され、合計されて1行のサイズが推定されます。
 
-TiDB supports both optimistic and pessimistic transactions, and optimistic transactions are the basis for pessimistic transactions. Because optimistic transactions first cache the changes in private memory, TiDB limits the size of a single transaction.
+TiDBは楽観的トランザクションと悲観的トランザクションの両方をサポートしており、楽観的トランザクションは悲観的トランザクションの基盤となります。楽観的トランザクションはまず変更をプライベートメモリにキャッシュするため、TiDBは単一トランザクションのサイズを制限します。
 
-By default, TiDB sets the total size of a single transaction to no more than 100 MB. You can modify this default value via `txn-total-size-limit` in the configuration file. The maximum value of `txn-total-size-limit` is 1 TB. The individual transaction size limit also depends on the size of remaining memory available in the server. This is because when a transaction is executed, the memory usage of the TiDB process is scaled up comparing with the transaction size, up to two to three times or more of the transaction size.
+デフォルトでは、TiDB は単一トランザクションの合計サイズを 100 MB 以下に設定します。このデフォルト値は、設定ファイルで`txn-total-size-limit`設定することで変更できます。最大値は`txn-total-size-limit`で、1 TB です。個々のトランザクションのサイズ制限は、サーバーで使用可能なメモリの残り容量にも依存します。これは、トランザクションの実行時に、TiDB プロセスのメモリ使用量がトランザクションサイズと比較して、最大でトランザクションサイズの 2 ～ 3 倍以上にまで増加するためです。
 
-TiDB previously limited the total number of key-value pairs for a single transaction to 300,000. This restriction was removed in TiDB v4.0.
+TiDBでは以前、1トランザクションあたりのキーと値のペアの総数が300,000個に制限されていました。この制限はTiDB v4.0で削除されました。
 
-## Causal consistency
+## 因果関係の一貫性 {#causal-consistency}
 
-> **Note:**
+> **注記：**
 >
-> Transactions with causal consistency take effect only when the async commit and one-phase commit features are enabled. For details of the two features, see [`tidb_enable_async_commit`](/system-variables.md#tidb_enable_async_commit-new-in-v50) and [`tidb_enable_1pc`](/system-variables.md#tidb_enable_1pc-new-in-v50).
+> 因果一貫性のあるトランザクションは、非同期コミット機能と1相コミット機能が有効な場合にのみ有効になります。これらの2つの機能の詳細については、 [`tidb_enable_async_commit`](/system-variables.md#tidb_enable_async_commit-new-in-v50)と[`tidb_enable_1pc`](/system-variables.md#tidb_enable_1pc-new-in-v50)参照してください。
 
-TiDB supports enabling causal consistency for transactions. Transactions with causal consistency, when committed, do not need to get timestamp from PD and have lower commit latency. The syntax to enable causal consistency is as follows:
-
-{{< copyable "sql" >}}
+TiDBは、トランザクションの因果一貫性の有効化をサポートしています。因果一貫性のあるトランザクションは、コミット時にPDからタイムスタンプを取得する必要がなく、コミットレイテンシーが低くなります。因果一貫性を有効にする構文は次のとおりです。
 
 ```sql
 START TRANSACTION WITH CAUSAL CONSISTENCY ONLY;
 ```
 
-By default, TiDB guarantees linear consistency. In the case of linear consistency, if transaction 2 is committed after transaction 1 is committed, logically, transaction 2 should occur after transaction 1. Causal consistency is weaker than linear consistency. In the case of causal consistency, the commit order and occurrence order of two transactions can be guaranteed consistent only when the data locked or written by transaction 1 and transaction 2 have an intersection, which means that the two transactions have a causal relationship known to the database. Currently, TiDB does not support passing in external causal relationship.
+TiDBはデフォルトで線形一貫性を保証します。線形一貫性の場合、トランザクション1がコミットされた後にトランザクション2がコミットされた場合、論理的にはトランザクション2はトランザクション1の後に発生するはずです。因果一貫性は線形一貫性よりも弱いです。因果一貫性の場合、2つのトランザクションのコミット順序と発生順序の一貫性が保証されるのは、トランザクション1とトランザクション2によってロックまたは書き込まれたデータが交差している場合のみです。つまり、2つのトランザクションはデータベースに既知の因果関係があることを意味します。現在、TiDBは外部因果関係の受け渡しをサポートしていません。
 
-Two transactions with causal consistency enabled have the following characteristics:
+因果一貫性が有効になっている 2 つのトランザクションには、次の特性があります。
 
-+ [Transactions with potential causal relationship have the consistent logical order and physical commit order](#transactions-with-potential-causal-relationship-have-the-consistent-logical-order-and-physical-commit-order)
-+ [Transactions with no causal relationship do not guarantee consistent logical order and physical commit order](#transactions-with-no-causal-relationship-do-not-guarantee-consistent-logical-order-and-physical-commit-order)
-+ [Reads without lock do not create causal relationship](#reads-without-lock-do-not-create-causal-relationship)
+-   [潜在的な因果関係を持つトランザクションは、一貫した論理順序と物理的なコミット順序を持つ](#transactions-with-potential-causal-relationship-have-the-consistent-logical-order-and-physical-commit-order)
+-   [因果関係のないトランザクションは、一貫した論理順序と物理的なコミット順序を保証しません。](#transactions-with-no-causal-relationship-do-not-guarantee-consistent-logical-order-and-physical-commit-order)
+-   [ロックなしの読み取りでは因果関係は生まれない](#reads-without-lock-do-not-create-causal-relationship)
 
-### Transactions with potential causal relationship have the consistent logical order and physical commit order
+### 潜在的な因果関係を持つトランザクションは、一貫した論理順序と物理的なコミット順序を持つ {#transactions-with-potential-causal-relationship-have-the-consistent-logical-order-and-physical-commit-order}
 
-Assume that both transaction 1 and transaction 2 adopt causal consistency and have the following statements executed:
+トランザクション 1 とトランザクション 2 の両方が因果一貫性を採用し、次のステートメントを実行すると仮定します。
 
-| Transaction 1 | Transaction 2 |
-|-------|-------|
-| START TRANSACTION WITH CAUSAL CONSISTENCY ONLY | START TRANSACTION WITH CAUSAL CONSISTENCY ONLY |
-| x = SELECT v FROM t WHERE id = 1 FOR UPDATE | |
-| UPDATE t set v = $(x + 1) WHERE id = 2 | |
-| COMMIT | |
-| | UPDATE t SET v = 2 WHERE id = 1 |
-| | COMMIT |
+| トランザクション1                                   | トランザクション2                   |
+| ------------------------------------------- | --------------------------- |
+| 因果関係の一貫性のみで取引を開始する                          | 因果関係の一貫性のみで取引を開始する          |
+| x = SELECT v FROM t WHERE id = 1 FOR UPDATE |                             |
+| 更新 t set v = $(x + 1) WHERE id = 2          |                             |
+| 専念                                          |                             |
+|                                             | 更新 t SET v = 2 WHERE id = 1 |
+|                                             | 専念                          |
 
-In the example above, transaction 1 locks the `id = 1` record and transaction 2 modifies the `id = 1` record. Therefore, transaction 1 and transaction 2 have a potential causal relationship. Even with the causal consistency enabled, as long as transaction 2 is committed after transaction 1 is successfully committed, logically, transaction 2 must occur after transaction 1. Therefore, it is impossible that a transaction reads transaction 2's modification on the `id = 1` record without reading transaction 1's modification on the `id = 2` record.
+上記の例では、トランザクション1がレコード`id = 1`をロックし、トランザクション2がレコード`id = 1`変更します。したがって、トランザクション1とトランザクション2には潜在的な因果関係があります。因果一貫性が有効になっている場合でも、トランザクション2がトランザクション1のコミット後にコミットされる限り、論理的にはトランザクション2はトランザクション1の後に発生する必要があります。したがって、トランザクション1によるレコード`id = 2`の変更を読み取らずに、トランザクション2によるレコード`id = 1`の変更を読み取るトランザクションは不可能です。
 
-### Transactions with no causal relationship do not guarantee consistent logical order and physical commit order
+### 因果関係のないトランザクションは、一貫した論理順序と物理的なコミット順序を保証しません。 {#transactions-with-no-causal-relationship-do-not-guarantee-consistent-logical-order-and-physical-commit-order}
 
-Assume that the initial values of `id = 1` and `id = 2` are both `0`. Assume that both transaction 1 and transaction 2 adopt causal consistency and have the following statements executed:
+`id = 1`と`id = 2`の初期値はどちらも`0`あると仮定します。トランザクション 1 とトランザクション 2 の両方が因果一貫性を採用し、以下の文が実行されるものとします。
 
-| Transaction 1 | Transaction 2 | Transaction 3 |
-|-------|-------|-------|
-| START TRANSACTION WITH CAUSAL CONSISTENCY ONLY | START TRANSACTION WITH CAUSAL CONSISTENCY ONLY | |
-| UPDATE t set v = 3 WHERE id = 2 | | |
-| | UPDATE t SET v = 2 WHERE id = 1 | |
-| | | BEGIN |
-| COMMIT | | |
-| | COMMIT | |
-| | | SELECT v FROM t WHERE id IN (1, 2) |
+| トランザクション1                   | トランザクション2                   | トランザクション3                          |
+| --------------------------- | --------------------------- | ---------------------------------- |
+| 因果関係の一貫性のみで取引を開始する          | 因果関係の一貫性のみで取引を開始する          |                                    |
+| 更新 t set v = 3 WHERE id = 2 |                             |                                    |
+|                             | 更新 t SET v = 2 WHERE id = 1 |                                    |
+|                             |                             | 始める                                |
+| 専念                          |                             |                                    |
+|                             | 専念                          |                                    |
+|                             |                             | SELECT v FROM t WHERE id IN (1, 2) |
 
-In the example above, transaction 1 does not read the `id = 1` record, so transaction 1 and transaction 2 have no causal relationship known to the database. With causal consistency enabled for the transactions, even if transaction 2 is committed after transaction 1 is committed in terms of physical time order, TiDB does not guarantee that transaction 2 logically occurs after transaction 1.
+上記の例では、トランザクション1はレコード`id = 1`を読み取らないため、データベースはトランザクション1とトランザクション2の間に因果関係を認識していません。トランザクションの因果一貫性が有効になっている場合、物理的な時間順序でトランザクション2がトランザクション1のコミット後にコミットされたとしても、TiDBはトランザクション2が論理的にトランザクション1の後に発生することを保証しません。
 
-If transaction 3 begins before transaction 1 is committed, and if transaction 3 reads the `id = 1` and `id = 2` records after transaction 2 is committed, transaction 3 might read the value of `id = 1` to be `2` but the value of `id = 2` to be `0`.
+トランザクション 3 がトランザクション 1 がコミットされる前に開始され、トランザクション 3 がトランザクション 2 がコミットされた後にレコード`id = 1`と`id = 2`読み取る場合、トランザクション 3 は`id = 1`の値を`2`と読み取りますが、 `id = 2`の値は`0`読み取る可能性があります。
 
-### Reads without lock do not create causal relationship
+### ロックなしの読み取りでは因果関係は生まれない {#reads-without-lock-do-not-create-causal-relationship}
 
-Assume that both transaction 1 and transaction 2 adopt causal consistency and have the following statements executed:
+トランザクション 1 とトランザクション 2 の両方が因果一貫性を採用し、次のステートメントを実行すると仮定します。
 
-| Transaction 1 | Transaction 2 |
-|-------|-------|
-| START TRANSACTION WITH CAUSAL CONSISTENCY ONLY | START TRANSACTION WITH CAUSAL CONSISTENCY ONLY |
-| | UPDATE t SET v = 2 WHERE id = 1 |
-| SELECT v FROM t WHERE id = 1 | |
-| UPDATE t set v = 3 WHERE id = 2 | |
-| | COMMIT |
-| COMMIT | |
+| トランザクション1                    | トランザクション2                   |
+| ---------------------------- | --------------------------- |
+| 因果関係の一貫性のみで取引を開始する           | 因果関係の一貫性のみで取引を開始する          |
+|                              | 更新 t SET v = 2 WHERE id = 1 |
+| SELECT v FROM t WHERE id = 1 |                             |
+| 更新 t set v = 3 WHERE id = 2  |                             |
+|                              | 専念                          |
+| 専念                           |                             |
 
-In the example above, reads without lock do not create causal relationship. Transaction 1 and transaction 2 have created write skew. In this case, it would have been unreasonable if the two transactions still had causal relationship. Therefore, the two transactions with causal consistency enabled have no definite logical order.
+上記の例では、ロックなしの読み取りでは因果関係は発生しません。トランザクション1とトランザクション2は書き込みスキューを発生させています。この場合、2つのトランザクションに因果関係が残っているとしたら不合理です。したがって、因果一貫性が有効な2つのトランザクションには明確な論理的順序がありません。

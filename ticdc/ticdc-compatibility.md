@@ -1,92 +1,92 @@
 ---
 title: TiCDC Compatibility
-summary: Learn about compatibility issues of TiCDC and how to handle them.
+summary: TiCDC の互換性の問題とその処理方法について学習します。
 ---
 
-# TiCDC Compatibility
+# TiCDC の互換性 {#ticdc-compatibility}
 
-This section describes compatibility issues related to TiCDC and how to handle them.
+このセクションでは、TiCDC に関連する互換性の問題とその処理方法について説明します。
 
-## Compatibility with TiDB Lightning
+## TiDB Lightningとの互換性 {#compatibility-with-tidb-lightning}
 
-[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) provides two data import modes: [logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md) and [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md). This section describes the compatibility of these modes with TiCDC and the steps to use TiDB Lightning and TiCDC together in a cluster.
+[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)には、 [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)と[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md) 2つのデータインポートモードがあります。このセクションでは、これらのモードと TiCDC の互換性、およびクラスター内でTiDB Lightningと TiCDC を併用する手順について説明します。
 
-In the logical import mode, TiDB Lightning imports data by executing SQL statements. This mode is compatible with TiCDC. To use TiDB Lightning's logical import mode with TiCDC for data replication, perform the following steps:
+論理インポートモードでは、 TiDB LightningはSQL文を実行してデータをインポートします。このモードはTiCDCと互換性があります。TiDB Lightningの論理インポートモードをTiCDCと組み合わせてデータレプリケーションに使用するには、以下の手順を実行してください。
 
-1. Create a changefeed. For more information, see [Create a replication task](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task).
-2. Start TiDB Lightning and import data using the logical import mode. For more information, see [Use logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md).
+1.  変更フィードを作成します。詳細については、 [レプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)参照してください。
+2.  TiDB Lightningを起動し、論理インポートモードを使用してデータをインポートします。詳細については、 [論理インポートモードを使用する](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md)参照してください。
 
-In the physical import mode, TiDB Lightning imports data by inserting SST files into TiKV. TiCDC is not compatible with this mode and does not support replicating data imported through physical import mode. If you need to use both TiDB Lightning's physical import mode and TiCDC, choose one of the following solutions based on your downstream system:
+物理インポートモードでは、 TiDB LightningはSSTファイルをTiKVに挿入することでデータをインポートします。TiCDCはこのモードと互換性がなく、物理インポートモードでインポートされたデータの複製をサポートしていません。TiDB Lightningの物理インポートモードとTiCDCの両方を使用する必要がある場合は、下流システムに応じて以下のいずれかのソリューションを選択してください。
 
-- If the downstream is a TiDB cluster, perform the following steps:
+-   ダウンストリームが TiDB クラスターの場合は、次の手順を実行します。
 
-    1. Use TiDB Lightning to import data into both the upstream and downstream TiDB clusters to ensure data consistency.
-    2. Create a changefeed to replicate subsequent incremental data written through SQL. For more information, see [Create a replication task](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task).
+    1.  TiDB Lightningを使用して、上流と下流の両方の TiDB クラスターにデータをインポートし、データの一貫性を確保します。
+    2.  SQLを通じて書き込まれた後続の増分データを複製するための変更フィードを作成します。詳細については、 [レプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)参照してください。
 
-- If the downstream is not a TiDB cluster, perform the following steps:
+-   ダウンストリームが TiDB クラスターでない場合は、次の手順を実行します。
 
-    1. Use the offline import tool provided by your downstream system to import TiDB Lightning's input files.
-    2. Create a changefeed to replicate subsequent incremental data written through SQL. For more information, see [Create a replication task](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task).
+    1.  下流システムが提供するオフライン インポート ツールを使用して、TiDB Lightning の入力ファイルをインポートします。
+    2.  SQLを通じて書き込まれた後続の増分データを複製するための変更フィードを作成します。詳細については、 [レプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)参照してください。
 
-## Compatibility with TiFlash
+## TiFlashとの互換性 {#compatibility-with-tiflash}
 
-Currently, when you use TiCDC to replicate tables to a downstream TiDB cluster, creating TiFlash replicas for the tables is not supported, which means that TiCDC does not support replicating TiFlash-related DDL statements, such as:
+現在、TiCDC を使用してテーブルをダウンストリーム TiDB クラスターにレプリケートする場合、テーブルのTiFlashレプリカの作成はサポートされていません。つまり、TiCDC は次のようなTiFlash関連の DDL ステートメントのレプリケートをサポートしていません。
 
-* `ALTER TABLE table_name SET TIFLASH REPLICA count;`
-* `ALTER DATABASE db_name SET TIFLASH REPLICA count;`
+-   `ALTER TABLE table_name SET TIFLASH REPLICA count;`
+-   `ALTER DATABASE db_name SET TIFLASH REPLICA count;`
 
-## CLI and configuration file compatibility
+## CLIと設定ファイルの互換性 {#cli-and-configuration-file-compatibility}
 
-* In TiCDC v4.0.0, `ignore-txn-commit-ts` is removed and `ignore-txn-start-ts` is added, which uses start_ts to filter transactions.
-* In TiCDC v4.0.2, `db-dbs`/`db-tables`/`ignore-dbs`/`ignore-tables` are removed and `rules` is added, which uses new filter rules for databases and tables. For detailed filter syntax, see [Table Filter](/table-filter.md).
-* Starting from TiCDC v6.2.0, `cdc cli` can directly interact with TiCDC server via TiCDC Open API. You can specify the address of the TiCDC server using the `--server` parameter. `--pd` is deprecated.
-* Since v6.4.0, only the changefeed with the `SYSTEM_VARIABLES_ADMIN` or `SUPER` privilege can use the TiCDC Syncpoint feature.
+-   TiCDC v4.0.0 では、 `ignore-txn-commit-ts`が削除され、start_ts を使用してトランザクションをフィルター処理する`ignore-txn-start-ts`追加されました。
+-   TiCDC v4.0.2では、 `db-dbs` / `db-tables` / `ignore-dbs` / `ignore-tables`が削除され、データベースとテーブルに新しいフィルタールールを使用する`rules`追加されました。詳細なフィルター構文については、 [テーブルフィルター](/table-filter.md)参照してください。
+-   TiCDC v6.2.0以降、 `cdc cli` TiCDC Open APIを介してTiCDCサーバーに直接アクセスできるようになりました。3 `--server`を使用してTiCDCサーバーのアドレスを指定できます。5 `--pd`非推奨です。
+-   v6.4.0 以降、 `SYSTEM_VARIABLES_ADMIN`または`SUPER`権限を持つ changefeed のみが TiCDC Syncpoint 機能を使用できます。
 
-## Handle compatibility issues
+## 互換性の問題に対処する {#handle-compatibility-issues}
 
-This section describes compatibility issues related to TiCDC and how to handle them.
+このセクションでは、TiCDC に関連する互換性の問題とその処理方法について説明します。
 
-### Incompatibility issue caused by using the TiCDC v5.0.0-rc `cdc cli` tool to operate a v4.0.x cluster
+### TiCDC v5.0.0-rc <code>cdc cli</code>ツールを使用して v4.0.x クラスターを操作することによって発生する非互換性の問題 {#incompatibility-issue-caused-by-using-the-ticdc-v5-0-0-rc-code-cdc-cli-code-tool-to-operate-a-v4-0-x-cluster}
 
-When using the `cdc cli` tool of TiCDC v5.0.0-rc to operate a v4.0.x TiCDC cluster, you might encounter the following abnormal situations:
+TiCDC v5.0.0-rc の`cdc cli`ツールを使用して v4.0.x TiCDC クラスターを操作すると、次の異常な状況が発生する可能性があります。
 
-- If the TiCDC cluster is v4.0.8 or an earlier version, using the v5.0.0-rc `cdc cli` tool to create a replication task might cause cluster anomalies and get the replication task stuck.
+-   TiCDC クラスターが v4.0.8 以前のバージョンの場合、v5.0.0-rc `cdc cli`ツールを使用してレプリケーション タスクを作成すると、クラスターの異常が発生し、レプリケーション タスクが停止する可能性があります。
 
-- If the TiCDC cluster is v4.0.9 or a later version, using the v5.0.0-rc `cdc cli` tool to create a replication task will cause the old value and unified sorter features to be unexpectedly enabled by default.
+-   TiCDC クラスターが v4.0.9 以降のバージョンの場合、v5.0.0-rc `cdc cli`ツールを使用してレプリケーション タスクを作成すると、古い値と統合ソーター機能が予期せずデフォルトで有効になります。
 
-Solutions:
+解決策:
 
-Use the `cdc` executable file corresponding to the TiCDC cluster version to perform the following operations:
+TiCDC クラスター バージョンに対応する`cdc`実行可能ファイルを使用して、次の操作を実行します。
 
-1. Delete the changefeed created using the v5.0.0-rc `cdc cli` tool. For example, run the `tiup cdc:v4.0.9 cli changefeed remove -c xxxx --pd=xxxxx --force` command.
-2. If the replication task is stuck, restart the TiCDC cluster. For example, run the `tiup cluster restart <cluster_name> -R cdc` command.
-3. Re-create the changefeed. For example, run the `tiup cdc:v4.0.9 cli changefeed create --sink-uri=xxxx --pd=xxx` command.
+1.  v5.0.0-rc `cdc cli`ツールを使用して作成された変更フィードを削除します。例えば、コマンド`tiup cdc:v4.0.9 cli changefeed remove -c xxxx --pd=xxxxx --force`を実行します。
+2.  レプリケーションタスクが停止している場合は、TiCDC クラスターを再起動してください。例えば、コマンド`tiup cluster restart <cluster_name> -R cdc`を実行してください。
+3.  変更フィードを再作成します。例えば、コマンド`tiup cdc:v4.0.9 cli changefeed create --sink-uri=xxxx --pd=xxx`を実行します。
 
-> **Note:**
+> **注記：**
 >
-> This issue exists only when `cdc cli` is v5.0.0-rc. `cdc cli` tool of other v5.0.x versions is compatible with v4.0.x clusters.
+> この問題は、 `cdc cli` v5.0.0-rc の場合にのみ発生します。3 他の v5.0.x バージョンの`cdc cli`は、v4.0.x クラスターと互換性があります。
 
-### Compatibility notes for `sort-dir` and `data-dir`
+### <code>sort-dir</code>と<code>data-dir</code>互換性に関する注意事項 {#compatibility-notes-for-code-sort-dir-code-and-code-data-dir-code}
 
-The `sort-dir` configuration is used to specify the temporary file directory for the TiCDC sorter. Its functionalities might vary in different versions. The following table lists `sort-dir`'s compatibility changes across versions.
+`sort-dir`設定は、TiCDC ソーターの一時ファイルディレクトリを指定するために使用されます。機能はバージョンによって異なる場合があります。次の表は、 `sort-dir`におけるバージョン間の互換性の変更点を示しています。
 
-|  Version  |  `sort-engine` functionality  |  Note   |  Recommendation   |
-|  :---  |    :---               |  :--    | :-- |
-| v4.0.11 or an earlier v4.0 version, v5.0.0-rc | It is a changefeed configuration item and specifies temporary file directory for the `file` sorter and `unified` sorter. | In these versions, `file` sorter and `unified` sorter are **experimental features** and **NOT** recommended for the production environment. <br/><br/> If multiple changefeeds use the `unified` sorter as its `sort-engine`, the actual temporary file directory might be the `sort-dir` configuration of any changefeed, and the directory used for each TiCDC node might be different. | It is not recommended to use `unified` sorter in the production environment. |
-| v4.0.12, v4.0.13, v5.0.0, and v5.0.1 |  It is a configuration item of changefeed or of `cdc server`. | By default, the `sort-dir` configuration of a changefeed does not take effect, and the `sort-dir` configuration of `cdc server` defaults to `/tmp/cdc_sort`. It is recommended to only configure `cdc server` in the production environment.<br /><br /> If you use TiUP to deploy TiCDC, it is recommended to use the latest TiUP version and set `sorter.sort-dir` in the TiCDC server configuration.<br /><br /> The `unified` sorter is enabled by default in v4.0.13, v5.0.0, and v5.0.1. If you want to upgrade your cluster to these versions, make sure that you have correctly configured `sorter.sort-dir` in the TiCDC server configuration. | You need to configure `sort-dir` using the `cdc server` command-line parameter (or TiUP). |
-|  v4.0.14 and later v4.0 versions, v5.0.3 and later v5.0 versions, later TiDB versions | `sort-dir` is deprecated. It is recommended to configure `data-dir`.  |  You can configure `data-dir` using the latest version of TiUP. In these TiDB versions, `unified` sorter is enabled by default. Make sure that `data-dir` has been configured correctly when you upgrade your cluster. Otherwise, `/tmp/cdc_data` will be used by default as the temporary file directory. <br /><br /> If the storage capacity of the device where the directory is located is insufficient, the problem of insufficient hard disk space might occur. In this situation, the previous `sort-dir` configuration of changefeed will become invalid.| You need to configure `data-dir` using the `cdc server` command-line parameter (or TiUP).  |
-| v6.0.0 and later versions | `data-dir` is used for saving the temporary files generated by TiCDC. | Starting from v6.0.0, TiCDC uses `db sorter` as the sort engine by default. `data-dir` is the disk directory for this engine.  | You need to configure `data-dir` using the `cdc server` command-line parameter (or TiUP).  |
+| バージョン                                                         | `sort-engine`機能                                                      | 注記                                                                                                                                                                                                                                                                                                                                                                                    | おすすめ                                                           |
+| :------------------------------------------------------------ | :------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------- |
+| v4.0.11 またはそれ以前の v4.0 バージョン、v5.0.0-rc                         | これは、チェンジフィード構成項目であり、 `file`ソーターおよび`unified`ソーターの一時ファイル ディレクトリを指定します。 | これらのバージョンでは、 `file`ソーターと`unified`ソーターは**実験的機能**であり、本番環境には推奨さ**れません**。<br/><br/>複数の changefeed が`unified`ソーターを`sort-engine`として使用する場合、実際の一時ファイル ディレクトリはいずれかの changefeed の`sort-dir`構成になる可能性があり、各 TiCDC ノードに使用されるディレクトリは異なる場合があります。                                                                                                                                                      | 本番環境で`unified`ソーターを使用することはお勧めしません。                             |
+| v4.0.12、v4.0.13、v5.0.0、および v5.0.1                             | これは changefeed または`cdc server`の構成項目です。                               | デフォルトでは、changefeed の`sort-dir`設定は有効にならず、 `cdc server`の`sort-dir`設定はデフォルトで`/tmp/cdc_sort`に設定されます。本番環境では`cdc server`のみを設定することをお勧めします。<br/><br/> TiUPを使用して TiCDC を展開する場合は、最新のTiUPバージョンを使用し、TiCDCサーバー構成で`sorter.sort-dir`設定することをお勧めします。<br/><br/> `unified`ソーターは、v4.0.13、v5.0.0、v5.0.1 ではデフォルトで有効になっています。クラスターをこれらのバージョンにアップグレードする場合は、TiCDCサーバー構成で`sorter.sort-dir`正しく設定されていることを確認してください。 | `cdc server`コマンドラインパラメータ (またはTiUP) を使用して`sort-dir`設定する必要があります。 |
+| v4.0.14 以降の v4.0 バージョン、v5.0.3 以降の v5.0 バージョン、それ以降の TiDB バージョン | `sort-dir`は非推奨です。 `data-dir`設定することをお勧めします。                           | 最新バージョンのTiUPを使用して`data-dir`設定できます。これらのTiDBバージョンでは、 `unified`ソーターがデフォルトで有効になっています。クラスタをアップグレードする際は、 `data-dir`正しく設定されていることを確認してください。正しく設定されていない場合、一時ファイルディレクトリとしてデフォルトで`/tmp/cdc_data`使用されます。<br/><br/>ディレクトリが配置されているデバイスのstorage容量が不足している場合、ハードディスク容量不足の問題が発生する可能性があります。この場合、以前の`sort-dir`のchangefeed設定は無効になります。                                                                      | `cdc server`コマンドラインパラメータ (またはTiUP) を使用して`data-dir`設定する必要があります。 |
+| v6.0.0以降のバージョン                                                | `data-dir` 、TiCDC によって生成された一時ファイルを保存するために使用されます。                     | v6.0.0 以降、TiCDC はデフォルトでソート エンジンとして`db sorter`使用します。3 `data-dir`このエンジンのディスク ディレクトリです。                                                                                                                                                                                                                                                                                                  | `cdc server`コマンドラインパラメータ (またはTiUP) を使用して`data-dir`設定する必要があります。 |
 
-### Compatibility with temporary tables
+### 一時テーブルとの互換性 {#compatibility-with-temporary-tables}
 
-Since v5.3.0, TiCDC supports [global temporary tables](/temporary-tables.md#global-temporary-tables). Replicating global temporary tables to the downstream using TiCDC of a version earlier than v5.3.0 causes table definition error.
+v5.3.0 以降、TiCDC は[グローバル一時テーブル](/temporary-tables.md#global-temporary-tables)サポートします。v5.3.0 より前のバージョンの TiCDC を使用してグローバル一時テーブルをダウンストリームに複製すると、テーブル定義エラーが発生します。
 
-If the upstream cluster contains a global temporary table, the downstream TiDB cluster is expected to be v5.3.0 or a later version. Otherwise, an error occurs during the replication process.
+上流クラスターにグローバル一時テーブルが含まれている場合、下流TiDBクラスターはv5.3.0以降のバージョンである必要があります。それ以外の場合、レプリケーションプロセス中にエラーが発生します。
 
-### Compatibility with vector data types
+### ベクトルデータ型との互換性 {#compatibility-with-vector-data-types}
 
-Starting from v8.4.0, TiCDC supports replicating tables with [vector data types](/vector-search/vector-search-data-types.md) to downstream (experimental).
+v8.4.0 以降、TiCDC は、 [ベクトルデータ型](/vector-search/vector-search-data-types.md)からダウンストリームへのテーブルの複製をサポートします (実験的)。
 
-When the downstream is Kafka or a storage service (such as Amazon S3, GCS, Azure Blob Storage, or NFS), TiCDC converts vector data types into string types before writing to the downstream.
+ダウンストリームが Kafka またはstorageサービス (Amazon S3、GCS、Azure Blob Storage、NFS など) の場合、TiCDC はダウンストリームに書き込む前にベクトル データ型を文字列型に変換します。
 
-When the downstream is a MySQL-compatible database that does not support vector data types, TiCDC fails to write DDL events involving vector types to the downstream. In this case, add the `has-vector-type=true` parameter to `sink-url`, which allows TiCDC to convert vector data types into the `LONGTEXT` type before writing.
+ダウンストリームがMySQL互換データベースで、ベクトルデータ型をサポートしていない場合、TiCDCはベクトル型を含むDDLイベントをダウンストリームに書き込むことができません。この場合、 `sink-url`に`has-vector-type=true`パラメータを追加することで、TiCDCは書き込み前にベクトルデータ型を`LONGTEXT`型に変換できます。

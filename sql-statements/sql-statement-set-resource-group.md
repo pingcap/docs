@@ -1,19 +1,19 @@
 ---
 title: SET RESOURCE GROUP
-summary: An overview of the usage of SET RESOURCE GROUP in the TiDB database.
+summary: TiDB データベースでの SET RESOURCE GROUP の使用法の概要。
 ---
 
-# SET RESOURCE GROUP
+# リソースグループの設定 {#set-resource-group}
 
-`SET RESOURCE GROUP` is used to set the resource group for the current session.
+`SET RESOURCE GROUP` 、現在のセッションのリソース グループを設定するために使用されます。
 
-> **Note:**
+> **注記：**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
-## Synopsis
+## 概要 {#synopsis}
 
-**SetResourceGroupStmt:**
+**リソースグループステートメントの設定:**
 
 ```ebnf+diagram
 SetResourceGroupStmt ::=
@@ -24,16 +24,16 @@ ResourceGroupName ::=
 |   "DEFAULT"
 ```
 
-## Privilege
+## 特権 {#privilege}
 
-Executing this statement requires the following configuration and privilege:
+このステートメントを実行するには、次の構成と権限が必要です。
 
-1. The system variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
-2. When the system variable [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) is set to `ON`, you need to have the `SUPER` or `RESOURCE_GROUP_ADMIN` or `RESOURCE_GROUP_USER` privilege; when it is set to `OFF`, none of these privileges are required.
+1.  システム変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) `ON`に設定されています。
+2.  システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) `ON`に設定されている場合、 `SUPER` 、 `RESOURCE_GROUP_ADMIN` 、または`RESOURCE_GROUP_USER`権限が必要です。 `OFF`に設定されている場合、これらの権限は必要ありません。
 
-## Examples
+## 例 {#examples}
 
-Create a user `user1`, create two resource groups `rg1` and `rg2`, and bind the user `user1` to the resource group `rg1`.
+ユーザー`user1`を作成し、リソース グループ`rg1`と`rg2` 2 つのリソース グループを作成し、ユーザー`user1`リソース グループ`rg1`にバインドします。
 
 ```sql
 CREATE USER 'user1';
@@ -41,38 +41,34 @@ CREATE RESOURCE GROUP 'rg1' RU_PER_SEC = 1000;
 ALTER USER 'user1' RESOURCE GROUP `rg1`;
 ```
 
-Use `user1` to log in and view the resource group bound to the current user.
+ログインして、現在のユーザーにバインドされているリソース グループを表示するには、 `user1`使用します。
 
 ```sql
 SELECT CURRENT_RESOURCE_GROUP();
 ```
 
-```
-+--------------------------+
-| CURRENT_RESOURCE_GROUP() |
-+--------------------------+
-| rg1                      |
-+--------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------+
+    | CURRENT_RESOURCE_GROUP() |
+    +--------------------------+
+    | rg1                      |
+    +--------------------------+
+    1 row in set (0.00 sec)
 
-Execute `SET RESOURCE GROUP` to set the resource group for the current session to `rg2`.
+`SET RESOURCE GROUP`実行して、現在のセッションのリソース グループを`rg2`に設定します。
 
 ```sql
 SET RESOURCE GROUP `rg2`;
 SELECT CURRENT_RESOURCE_GROUP();
 ```
 
-```
-+--------------------------+
-| CURRENT_RESOURCE_GROUP() |
-+--------------------------+
-| rg2                      |
-+--------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------+
+    | CURRENT_RESOURCE_GROUP() |
+    +--------------------------+
+    | rg2                      |
+    +--------------------------+
+    1 row in set (0.00 sec)
 
-Execute `SET RESOURCE GROUP` to specify the current session to use the default resource group.
+現在のセッションでデフォルトのリソース グループを使用するように指定するには、 `SET RESOURCE GROUP`実行します。
 
 ```sql
 SET RESOURCE GROUP `default`;
@@ -88,13 +84,13 @@ SELECT CURRENT_RESOURCE_GROUP();
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-MySQL also supports [SET RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/set-resource-group.html). But the accepted parameters are different from that of TiDB. They are not compatible.
+MySQLも[リソースグループの設定](https://dev.mysql.com/doc/refman/8.0/en/set-resource-group.html)サポートしています。ただし、受け入れられるパラメータはTiDBとは異なります。互換性はありません。
 
-## See also
+## 参照 {#see-also}
 
-* [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
-* [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
-* [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
-* [Resource Control](/tidb-resource-control-ru-groups.md)
+-   [リソースグループの作成](/sql-statements/sql-statement-create-resource-group.md)
+-   [リソースグループの削除](/sql-statements/sql-statement-drop-resource-group.md)
+-   [リソースグループの変更](/sql-statements/sql-statement-alter-resource-group.md)
+-   [リソース管理](/tidb-resource-control-ru-groups.md)

@@ -1,59 +1,59 @@
 ---
 title: Overview of Key Concepts
-summary: Learn about the key concepts in TiDB Cloud.
+summary: TiDB Cloudの主要な概念について学習します。
 ---
 
-# Overview of Key Concepts
+# 主要概念の概要 {#overview-of-key-concepts}
 
-This document provides an overview of the key concepts in [TiDB Cloud](https://www.pingcap.com/tidb-cloud/). Understanding these concepts helps you better use TiDB Cloud features and capabilities.
+このドキュメントでは、 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/)の主要な概念の概要を説明します。これらの概念を理解することで、 TiDB Cloud の機能をより効果的に活用できるようになります。
 
-## Architecture
+## アーキテクチャ {#architecture}
 
-TiDB Cloud is built on a cloud-native distributed architecture that separates computing from storage, enabling elastic scaling and high availability. [Learn more about TiDB Cloud architecture](/tidb-cloud/architecture-concepts.md).
+TiDB Cloud は、コンピューティングとstorageを分離し、弾力的なスケーリングと高可用性を実現するクラウドネイティブの分散アーキテクチャ上に構築されています[TiDB Cloudアーキテクチャの詳細](/tidb-cloud/architecture-concepts.md) 。
 
-## Database schema
+## データベーススキーマ {#database-schema}
 
-TiDB Cloud enables you to organize and structure your data using objects such as databases, tables, columns, indexes, and constraints. It also supports advanced features such as temporary tables, vector indexes, and cached tables. [Learn more about database schema](/tidb-cloud/database-schema-concepts.md).
+TiDB Cloud を使用すると、データベース、テーブル、列、インデックス、制約などのオブジェクトを使用してデータを整理および構造化できます。また、一時テーブル、ベクターインデックス、キャッシュテーブルなどの高度な機能もサポートしています[データベーススキーマの詳細](/tidb-cloud/database-schema-concepts.md) 。
 
-## Transactions
+## 取引 {#transactions}
 
-TiDB provides complete distributed transactions, and the model has some optimizations on the basis of [Google Percolator](https://research.google.com/pubs/pub36726.html). [Learn more about transactions](/tidb-cloud/transaction-concepts.md).
+TiDB は完全な分散トランザクションを提供し、モデル[取引について詳しくはこちら](/tidb-cloud/transaction-concepts.md) [Google パーコレーター](https://research.google.com/pubs/pub36726.html)基づいたいくつかの最適化が施されています。
 
-## SQL
+## SQL {#sql}
 
-TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.0. [Learn more about SQL in TiDB Cloud](/tidb-cloud/sql-concepts.md).
+TiDB は、MySQL プロトコルおよびMySQL 5.7と MySQL 8.0.1 の共通機能と構文と高い互換性があります[TiDB Cloudの SQL について詳しく見る](/tidb-cloud/sql-concepts.md)
 
-## AI features
+## AI機能 {#ai-features}
 
-The AI features in TiDB Cloud enable you to fully leverage advanced technologies for data exploration, search, and integration. [Learn more about AI features](/tidb-cloud/ai-feature-concepts.md).
+TiDB Cloudの AI 機能を使用すると、データの探索、検索、統合のための高度なテクノロジーを最大限に活用できます[AI機能について詳しくはこちら](/tidb-cloud/ai-feature-concepts.md) 。
 
-## Data Service (Beta)
+## データサービス（ベータ版） {#data-service-beta}
 
-Data Service enables you to access TiDB Cloud data via an HTTPS request using a custom API endpoint. [Learn more about Data Service](/tidb-cloud/data-service-concepts.md).
+データ サービスを使用すると、カスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスできます[データサービスの詳細](/tidb-cloud/data-service-concepts.md) 。
 
-## Scalability
+## スケーラビリティ {#scalability}
 
-TiDB Cloud Dedicated lets you adjust its compute and storage resources separately to match your data volume or workload changes. [Learn more about scalability](/tidb-cloud/scalability-concepts.md).
+TiDB Cloud Dedicated を使用すると、データ量やワークロードの変化に合わせてコンピューティング リソースとstorageリソースを個別に調整できます[スケーラビリティについて詳しく見る](/tidb-cloud/scalability-concepts.md) 。
 
-## High availability
+## 高可用性 {#high-availability}
 
-TiDB Cloud ensures high availability in both {{{ .starter }}} and TiDB Cloud Dedicated clusters:
+TiDB Cloud は、 TiDB Cloud Serverless クラスターとTiDB Cloud Dedicated クラスターの両方で高可用性を保証します。
 
-- [High Availability in {{{ .starter }}}](/tidb-cloud/serverless-high-availability.md)
-- [High Availability in TiDB Cloud Dedicated](/tidb-cloud/high-availability-with-multi-az.md)
+-   [TiDB Cloud Serverless の高可用性](/tidb-cloud/serverless-high-availability.md)
+-   [TiDB Cloud専用における高可用性](/tidb-cloud/high-availability-with-multi-az.md)
 
-## Monitoring
+## 監視 {#monitoring}
 
-TiDB Cloud provides comprehensive monitoring capabilities for cluster performance and health. [Learn more about monitoring](/tidb-cloud/monitoring-concepts.md).
+TiDB Cloud は、クラスターのパフォーマンスと健全性を包括的に監視する機能を提供します[監視について詳しくはこちら](/tidb-cloud/monitoring-concepts.md) 。
 
-## Data streaming
+## データストリーミング {#data-streaming}
 
-TiDB Cloud lets you stream data changes from your TiDB Cluster to other systems such as Kafka, MySQL, and object storage. [Learn more about data streaming](/tidb-cloud/data-streaming-concepts.md).
+TiDB Cloud を使用すると、TiDB クラスタからのデータ変更を Kafka、MySQL、オブジェクトstorageなどの他のシステムにストリーミングできます[データストリーミングの詳細](/tidb-cloud/data-streaming-concepts.md) 。
 
-## Backup & Restore
+## バックアップと復元 {#backup-x26-restore}
 
-TiDB Cloud offers automated backup solutions and point-in-time recovery (PITR) capabilities. [Learn more about backup and restore](/tidb-cloud/backup-and-restore-concepts.md).
+TiDB Cloud は、自動バックアップ ソリューションとポイントインタイム リカバリ (PITR) 機能を提供します[バックアップと復元の詳細](/tidb-cloud/backup-and-restore-concepts.md) 。
 
-## Security
+## Security {#security}
 
-TiDB Cloud provides a robust and flexible security framework designed to protect data, enforce access control, and meet modern compliance standards. [Learn more about security](/tidb-cloud/security-concepts.md).
+TiDB Cloud は、データを保護し、アクセス制御を強化し、最新のコンプライアンス標準を満たすように設計された、堅牢で柔軟なセキュリティ フレームワークを提供します[セキュリティについて詳しくはこちら](/tidb-cloud/security-concepts.md) 。

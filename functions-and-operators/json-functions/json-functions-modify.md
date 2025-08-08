@@ -1,97 +1,89 @@
 ---
 title: JSON Functions That Modify JSON Values
-summary: Learn about JSON functions that modify JSON values.
+summary: JSON 値を変更する JSON関数について学習します。
 ---
 
-# JSON Functions That Modify JSON Values
+# JSON値を変更するJSON関数 {#json-functions-that-modify-json-values}
 
-This document describes JSON functions that modify JSON values.
+このドキュメントでは、JSON 値を変更する JSON関数について説明します。
 
-## [JSON_APPEND()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-append)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-append">JSON_APPEND()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-append-json-append-a}
 
-An alias to [`JSON_ARRAY_APPEND()`](#json_array_append).
+[`JSON_ARRAY_APPEND()`](#json_array_append)の別名。
 
-## [JSON_ARRAY_APPEND()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-append)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-append">JSON_ARRAY_APPEND()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-array-append-json-array-append-a}
 
-The `JSON_ARRAY_APPEND(json_array, path, value [,path, value] ...)` function appends values to the end of the indicated arrays within a JSON document at the specified `path` and returns the result.
+`JSON_ARRAY_APPEND(json_array, path, value [,path, value] ...)`関数は、JSON ドキュメント内の指定された配列の末尾に指定された`path`に値を追加し、結果を返します。
 
-This function takes arguments in pairs, where each pair is a `path` and a `value`.
+この関数は引数をペアで受け取ります。各ペアは`path`と`value`です。
 
-Examples:
+例:
 
-The following example adds an item to an array, which is the root of the JSON document.
+次の例では、JSON ドキュメントのルートである配列に項目を追加します。
 
 ```sql
 SELECT JSON_ARRAY_APPEND('["Car", "Boat", "Train"]', '$', "Airplane") AS "Transport options";
 ```
 
-```
-+--------------------------------------+
-| Transport options                    |
-+--------------------------------------+
-| ["Car", "Boat", "Train", "Airplane"] |
-+--------------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------------+
+    | Transport options                    |
+    +--------------------------------------+
+    | ["Car", "Boat", "Train", "Airplane"] |
+    +--------------------------------------+
+    1 row in set (0.00 sec)
 
-The following example adds an item to an array at the specified path.
+次の例では、指定されたパスの配列に項目を追加します。
 
 ```sql
 SELECT JSON_ARRAY_APPEND('{"transport_options": ["Car", "Boat", "Train"]}', '$.transport_options', "Airplane") AS "Transport options";
 ```
 
-```
-+-------------------------------------------------------------+
-| Transport options                                           |
-+-------------------------------------------------------------+
-| {"transport_options": ["Car", "Boat", "Train", "Airplane"]} |
-+-------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------------------------------------------------+
+    | Transport options                                           |
+    +-------------------------------------------------------------+
+    | {"transport_options": ["Car", "Boat", "Train", "Airplane"]} |
+    +-------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-## [JSON_ARRAY_INSERT()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-insert)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-insert">JSON_ARRAY_INSERT()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-array-insert-json-array-insert-a}
 
-The `JSON_ARRAY_INSERT(json_array, path, value [,path, value] ...)` function inserts a `value` into the specified position of the `json_array` in the `path` and returns the result.
+`JSON_ARRAY_INSERT(json_array, path, value [,path, value] ...)`関数は、 `path`の`json_array`の指定された位置に`value`挿入し、結果を返します。
 
-This function takes arguments in pairs, where each pair is a `path` and a `value`.
+この関数は引数をペアで受け取ります。各ペアは`path`と`value`です。
 
-Examples:
+例:
 
-The following example inserts a value at the position of index 0 in the array.
+次の例では、配列のインデックス 0 の位置に値を挿入します。
 
 ```sql
 SELECT JSON_ARRAY_INSERT('["Car", "Boat", "Train"]', '$[0]', "Airplane") AS "Transport options";
 ```
 
-```
-+--------------------------------------+
-| Transport options                    |
-+--------------------------------------+
-| ["Airplane", "Car", "Boat", "Train"] |
-+--------------------------------------+
-1 row in set (0.01 sec)
-```
+    +--------------------------------------+
+    | Transport options                    |
+    +--------------------------------------+
+    | ["Airplane", "Car", "Boat", "Train"] |
+    +--------------------------------------+
+    1 row in set (0.01 sec)
 
-The following example inserts a value at the position of index 1 in the array.
+次の例では、配列のインデックス 1 の位置に値を挿入します。
 
 ```sql
 SELECT JSON_ARRAY_INSERT('["Car", "Boat", "Train"]', '$[1]', "Airplane") AS "Transport options";
 ```
 
-```
-+--------------------------------------+
-| Transport options                    |
-+--------------------------------------+
-| ["Car", "Airplane", "Boat", "Train"] |
-+--------------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------------+
+    | Transport options                    |
+    +--------------------------------------+
+    | ["Car", "Airplane", "Boat", "Train"] |
+    +--------------------------------------+
+    1 row in set (0.00 sec)
 
-## [JSON_INSERT()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-insert)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-insert">JSON_INSERT()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-insert-json-insert-a}
 
-The `JSON_INSERT(json_doc, path, value [,path, value] ...)` function inserts one or more values into a JSON document and returns the result.
+`JSON_INSERT(json_doc, path, value [,path, value] ...)`関数は、JSON ドキュメントに 1 つ以上の値を挿入し、結果を返します。
 
-This function takes arguments in pairs, where each pair is a `path` and a `value`.
+この関数は引数をペアで受け取ります。各ペアは`path`と`value`です。
 
 ```sql
 SELECT JSON_INSERT(
@@ -101,37 +93,33 @@ SELECT JSON_INSERT(
 ) AS "Demo";
 ```
 
-```
-+------------------------------------------------------------------------------------------+
-| Demo                                                                                     |
-+------------------------------------------------------------------------------------------+
-| {"architecture": "riscv", "language": ["Go", "Rust", "C++"], "os": ["linux", "freebsd"]} |
-+------------------------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------------------------------------------------------------+
+    | Demo                                                                                     |
+    +------------------------------------------------------------------------------------------+
+    | {"architecture": "riscv", "language": ["Go", "Rust", "C++"], "os": ["linux", "freebsd"]} |
+    +------------------------------------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-Note that this function does not overwrite values of existing attributes. For example, the following statement appears to overwrite the `"a"` attribute, but it does not actually do so.
+この関数は既存の属性の値を上書きしないことに注意してください。例えば、次の文は属性`"a"`を上書きしているように見えますが、実際には上書きしません。
 
 ```sql
 SELECT JSON_INSERT('{"a": 61, "b": 62}', '$.a', 41, '$.c', 63);
 ```
 
-```
-+---------------------------------------------------------+
-| JSON_INSERT('{"a": 61, "b": 62}', '$.a', 41, '$.c', 63) |
-+---------------------------------------------------------+
-| {"a": 61, "b": 62, "c": 63}                             |
-+---------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +---------------------------------------------------------+
+    | JSON_INSERT('{"a": 61, "b": 62}', '$.a', 41, '$.c', 63) |
+    +---------------------------------------------------------+
+    | {"a": 61, "b": 62, "c": 63}                             |
+    +---------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-## [JSON_MERGE_PATCH()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge-patch)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge-patch">JSON_MERGE_PATCH()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-merge-patch-json-merge-patch-a}
 
-The `JSON_MERGE_PATCH(json_doc, json_doc [,json_doc] ...)` function merges two or more JSON documents into a single JSON document, without preserving values of duplicate keys. For `json_doc` arguments with duplicated keys, only the values from the later specified `json_doc` argument are preserved in the merged result.
+`JSON_MERGE_PATCH(json_doc, json_doc [,json_doc] ...)`関数は、重複するキーの値を保持せずに、2つ以上のJSONドキュメントを1つのJSONドキュメントにマージします。重複するキーを持つ`json_doc`引数の場合、マージされた結果には、後で指定された`json_doc`引数の値のみが保持されます。
 
-Examples:
+例:
 
-In the following example, you can see that the value of `a` gets overwritten by argument 2 and that `c` is added as a new attribute in the merged result.
+次の例では、値`a`が引数 2 によって上書きされ、マージされた結果に`c`新しい属性として追加されていることがわかります。
 
 ```sql
 SELECT JSON_MERGE_PATCH(
@@ -141,206 +129,184 @@ SELECT JSON_MERGE_PATCH(
 );
 ```
 
-```
-+-----------------------------------------------------------------+
-| JSON_MERGE_PATCH('{"a": 1, "b": 2}','{"a": 100}', '{"c": 300}') |
-+-----------------------------------------------------------------+
-| {"a": 100, "b": 2, "c": 300}                                    |
-+-----------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------------------------------------------------------+
+    | JSON_MERGE_PATCH('{"a": 1, "b": 2}','{"a": 100}', '{"c": 300}') |
+    +-----------------------------------------------------------------+
+    | {"a": 100, "b": 2, "c": 300}                                    |
+    +-----------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-## [JSON_MERGE_PRESERVE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge-preserve)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge-preserve">JSON_MERGE_PRESERVE()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-merge-preserve-json-merge-preserve-a}
 
-The `JSON_MERGE_PRESERVE(json_doc, json_doc [,json_doc] ...)` function merges two or more JSON documents while preserving all values associated with each key and returns the merged result.
+`JSON_MERGE_PRESERVE(json_doc, json_doc [,json_doc] ...)`関数は、各キーに関連付けられたすべての値を保持しながら 2 つ以上の JSON ドキュメントをマージし、マージされた結果を返します。
 
-Examples:
+例:
 
-In the following example, you can see that the value of argument 2 is appended to `a` and that `c` is added as a new attribute.
+次の例では、引数 2 の値が`a`に追加され、 `c`新しい属性として追加されていることがわかります。
 
 ```sql
 SELECT JSON_MERGE_PRESERVE('{"a": 1, "b": 2}','{"a": 100}', '{"c": 300}');
 ```
 
-```
-+--------------------------------------------------------------------+
-| JSON_MERGE_PRESERVE('{"a": 1, "b": 2}','{"a": 100}', '{"c": 300}') |
-+--------------------------------------------------------------------+
-| {"a": [1, 100], "b": 2, "c": 300}                                  |
-+--------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------------------------------------------+
+    | JSON_MERGE_PRESERVE('{"a": 1, "b": 2}','{"a": 100}', '{"c": 300}') |
+    +--------------------------------------------------------------------+
+    | {"a": [1, 100], "b": 2, "c": 300}                                  |
+    +--------------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-## [JSON_MERGE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge">JSON_MERGE()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-merge-json-merge-a}
 
-> **Warning:**
+> **警告：**
 >
-> This function is deprecated.
+> この機能は非推奨です。
 
-A deprecated alias for [`JSON_MERGE_PRESERVE()`](#json_merge_preserve).
+[`JSON_MERGE_PRESERVE()`](#json_merge_preserve)の非推奨のエイリアス。
 
-## [JSON_REMOVE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-remove)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-remove">JSON_REMOVE()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-remove-json-remove-a}
 
-The `JSON_REMOVE(json_doc, path [,path] ...)` function removes data of the specified `path` from a JSON document and returns the result.
+`JSON_REMOVE(json_doc, path [,path] ...)`関数は、JSON ドキュメントから指定された`path`のデータを削除し、結果を返します。
 
-Examples:
+例:
 
-This example removes the `b` attribute from the JSON document.
+この例では、JSON ドキュメントから`b`属性を削除します。
 
 ```sql
 SELECT JSON_REMOVE('{"a": 61, "b": 62, "c": 63}','$.b');
 ```
 
-```
-+--------------------------------------------------+
-| JSON_REMOVE('{"a": 61, "b": 62, "c": 63}','$.b') |
-+--------------------------------------------------+
-| {"a": 61, "c": 63}                               |
-+--------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------------------------+
+    | JSON_REMOVE('{"a": 61, "b": 62, "c": 63}','$.b') |
+    +--------------------------------------------------+
+    | {"a": 61, "c": 63}                               |
+    +--------------------------------------------------+
+    1 row in set (0.00 sec)
 
-This example removes the `b` and `c` attributes from the JSON document.
+この例では、JSON ドキュメントから`b`属性と`c`属性を削除します。
 
 ```sql
 SELECT JSON_REMOVE('{"a": 61, "b": 62, "c": 63}','$.b','$.c');
 ```
 
-```
-+--------------------------------------------------------+
-| JSON_REMOVE('{"a": 61, "b": 62, "c": 63}','$.b','$.c') |
-+--------------------------------------------------------+
-| {"a": 61}                                              |
-+--------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------------------------------+
+    | JSON_REMOVE('{"a": 61, "b": 62, "c": 63}','$.b','$.c') |
+    +--------------------------------------------------------+
+    | {"a": 61}                                              |
+    +--------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-## [JSON_REPLACE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-replace)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-replace">JSON_REPLACE()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-replace-json-replace-a}
 
-The `JSON_REPLACE(json_doc, path, value [, path, value] ...)` function replaces values in specified paths of a JSON document and returns the result. If a specified path does not exist, the value corresponding to the path is not added to the result.
+`JSON_REPLACE(json_doc, path, value [, path, value] ...)`関数は、JSON ドキュメント内の指定されたパス内の値を置き換え、結果を返します。指定されたパスが存在しない場合、そのパスに対応する値は結果に追加されません。
 
-This function takes arguments in pairs, where each pair is a `path` and a `value`.
+この関数は引数をペアで受け取ります。各ペアは`path`と`value`です。
 
-Examples:
+例:
 
-In the following example, you change the value at `$.b` from `62` to `42`.
+次の例では、 `$.b`値を`62`から`42`に変更します。
 
 ```sql
 SELECT JSON_REPLACE('{"a": 41, "b": 62}','$.b',42);
 ```
 
-```
-+---------------------------------------------+
-| JSON_REPLACE('{"a": 41, "b": 62}','$.b',42) |
-+---------------------------------------------+
-| {"a": 41, "b": 42}                          |
-+---------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +---------------------------------------------+
+    | JSON_REPLACE('{"a": 41, "b": 62}','$.b',42) |
+    +---------------------------------------------+
+    | {"a": 41, "b": 42}                          |
+    +---------------------------------------------+
+    1 row in set (0.00 sec)
 
-In the following example, you can change the value at `$.b` from `62` to `42`.  In addition, this statement tries to replace the value at `$.c` with `43`, but it does not work because the `$.c` path does not exist in `{"a": 41, "b": 62}`.
+次の例では、 `$.b`の値を`62`から`42`に変更できます。さらに、この文は`$.c`の値を`43`に置き換えようとしますが、 `$.c`パスが`{"a": 41, "b": 62}`に存在しないため、これは機能しません。
 
 ```sql
 SELECT JSON_REPLACE('{"a": 41, "b": 62}','$.b',42,'$.c',43);
 ```
 
-```
-+------------------------------------------------------+
-| JSON_REPLACE('{"a": 41, "b": 62}','$.b',42,'$.c',43) |
-+------------------------------------------------------+
-| {"a": 41, "b": 42}                                   |
-+------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------------------------+
+    | JSON_REPLACE('{"a": 41, "b": 62}','$.b',42,'$.c',43) |
+    +------------------------------------------------------+
+    | {"a": 41, "b": 42}                                   |
+    +------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-## [JSON_SET()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-set)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-set">JSON_SET()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-set-json-set-a}
 
-The `JSON_SET(json_doc, path, value [,path, value] ...)` function inserts or updates data in a JSON document and returns the result.
+`JSON_SET(json_doc, path, value [,path, value] ...)`関数は、JSON ドキュメントにデータを挿入または更新し、結果を返します。
 
-This function takes arguments in pairs, where each pair is a `path` and a `value`.
+この関数は引数をペアで受け取ります。各ペアは`path`と`value`です。
 
-Examples:
+例:
 
-In the following example, you can update the `$.version` from `1.1` to `1.2`.
+次の例では、 `$.version` `1.1`から`1.2`に更新できます。
 
 ```sql
 SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2);
 ```
 
-```
-+-----------------------------------------------------------------+
-| JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2) |
-+-----------------------------------------------------------------+
-| {"name": "example", "version": 1.2}                             |
-+-----------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------------------------------------------------------+
+    | JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2) |
+    +-----------------------------------------------------------------+
+    | {"name": "example", "version": 1.2}                             |
+    +-----------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-In the following example, you can update the `$.version` from `1.1` to `1.2`. And you can update `$.branch`, which does not exist before, to `main`.
+次の例では、 `$.version` `1.1`から`1.2`に更新できます。また、以前は存在しなかった`$.branch` `main`に更新できます。
 
 ```sql
 SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2,'$.branch', "main");
 ```
 
-```
-+------------------------------------------------------------------------------------+
-| JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2,'$.branch', "main") |
-+------------------------------------------------------------------------------------+
-| {"branch": "main", "name": "example", "version": 1.2}                              |
-+------------------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------------------------------------------------------+
+    | JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2,'$.branch', "main") |
+    +------------------------------------------------------------------------------------+
+    | {"branch": "main", "name": "example", "version": 1.2}                              |
+    +------------------------------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-## [JSON_UNQUOTE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-unquote)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-unquote">JSON_UNQUOTE()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-unquote-json-unquote-a}
 
-The `JSON_UNQUOTE(json)` function unquotes a JSON value and returns the result as a string. This is the opposite of the [`JSON_QUOTE()`](/functions-and-operators/json-functions/json-functions-create.md#json_quote) function.
+`JSON_UNQUOTE(json)`関数はJSON値の引用符を解除し、結果を文字列として返します。これは[`JSON_QUOTE()`](/functions-and-operators/json-functions/json-functions-create.md#json_quote)関数の逆の動作です。
 
-Examples:
+例:
 
-In the example, `"foo"` is unquoted to `foo`.
+この例では、 `"foo"`引用符で囲まれずに`foo`になります。
 
 ```sql
 SELECT JSON_UNQUOTE('"foo"');
 ```
 
-```
-+-----------------------+
-| JSON_UNQUOTE('"foo"') |
-+-----------------------+
-| foo                   |
-+-----------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------------+
+    | JSON_UNQUOTE('"foo"') |
+    +-----------------------+
+    | foo                   |
+    +-----------------------+
+    1 row in set (0.00 sec)
 
-This function is often used together with [`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract). For the following examples, you can extract a JSON value with quotes in the first example and then use the two functions together to unquote the value in the second example. Note that instead of `JSON_UNQUOTE(JSON_EXTRACT(...))`, you can use the [`->>`](/functions-and-operators/json-functions/json-functions-search.md#--1) operator.
+この関数は[`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract)と一緒に使用されることが多いです。以下の例では、最初の例では引用符付きのJSON値を抽出し、2番目の例では2つの関数を組み合わせて引用符を外します。3 `JSON_UNQUOTE(JSON_EXTRACT(...))`代わりに[`->>`](/functions-and-operators/json-functions/json-functions-search.md#--1)演算子を使用できることに注意してください。
 
 ```sql
 SELECT JSON_EXTRACT('{"database": "TiDB"}', '$.database');
 ```
 
-```
-+----------------------------------------------------+
-| JSON_EXTRACT('{"database": "TiDB"}', '$.database') |
-+----------------------------------------------------+
-| "TiDB"                                             |
-+----------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +----------------------------------------------------+
+    | JSON_EXTRACT('{"database": "TiDB"}', '$.database') |
+    +----------------------------------------------------+
+    | "TiDB"                                             |
+    +----------------------------------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT JSON_UNQUOTE(JSON_EXTRACT('{"database": "TiDB"}', '$.database'));
 ```
 
-```
-+------------------------------------------------------------------+
-| JSON_UNQUOTE(JSON_EXTRACT('{"database": "TiDB"}', '$.database')) |
-+------------------------------------------------------------------+
-| TiDB                                                             |
-+------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------------------------------------+
+    | JSON_UNQUOTE(JSON_EXTRACT('{"database": "TiDB"}', '$.database')) |
+    +------------------------------------------------------------------+
+    | TiDB                                                             |
+    +------------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-## See also
+## 参照 {#see-also}
 
-- [JSON Functions Overview](/functions-and-operators/json-functions.md)
-- [JSON Data Type](/data-type-json.md)
+-   [JSON関数の概要](/functions-and-operators/json-functions.md)
+-   [JSONデータ型](/data-type-json.md)

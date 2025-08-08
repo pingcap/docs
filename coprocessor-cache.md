@@ -1,55 +1,60 @@
 ---
 title: Coprocessor Cache
-summary: Learn the features of Coprocessor Cache.
+summary: コプロセッサーキャッシュの機能について学習します。
 ---
 
-# Coprocessor Cache
+# コプロセッサーキャッシュ {#coprocessor-cache}
 
-Starting from v4.0, the TiDB instance supports caching the results of the calculation that is pushed down to TiKV (the Coprocessor Cache feature), which can accelerate the calculation process in some scenarios.
+v4.0 以降、TiDB インスタンスは TiKV (コプロセッサーキャッシュ機能) にプッシュダウンされる計算結果のキャッシュをサポートしており、これにより一部のシナリオで計算プロセスを高速化できます。
 
-## Configuration
+## コンフィグレーション {#configuration}
 
 <CustomContent platform="tidb">
 
-You can configure Coprocessor Cache via the `tikv-client.copr-cache` configuration items in the TiDB configuration file. For details about how to enable and configure Coprocessor Cache, see [TiDB Configuration File](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400).
+コプロセッサーキャッシュは、TiDB設定ファイルの`tikv-client.copr-cache`設定項目で設定できます。コプロセッサーキャッシュの有効化と設定方法の詳細については、 [TiDBコンフィグレーションファイル](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400)参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The Coprocessor Cache feature is enabled by default. The maximum size of the data that can be cached is 1000 MB.
+コプロセッサーキャッシュ機能はデフォルトで有効になっています。キャッシュできるデータの最大サイズは1000MBです。
 
 </CustomContent>
 
-## Feature description
+## 機能の説明 {#feature-description}
 
-+ When a SQL statement is executed on a single TiDB instance for the first time, the execution result is not cached.
-+ Calculation results are cached in the memory of TiDB. If the TiDB instance is restarted, the cache becomes invalid.
-+ The cache is not shared among TiDB instances.
-+ Only push-down calculation result is cached. Even if cache is hit, TiDB still need to perform subsequent calculation.
-+ The cache is in the unit of Region. Writing data to a Region causes the Region cache to be invalid. For this reason, the Coprocessor Cache feature mainly takes effect on the data that rarely changes.
-+ When push-down calculation requests are the same, the cache is hit. Usually in the following scenarios, the push-down calculation requests are the same or partially the same:
-    - The SQL statements are the same. For example, the same SQL statement is executed repeatedly.
+-   単一の TiDB インスタンスで SQL ステートメントが初めて実行されると、実行結果はキャッシュされません。
 
-        In this scenario, all the push-down calculation requests are consistent, and all requests can use the push-down calculation cache.
+-   計算結果はTiDBのメモリにキャッシュされます。TiDBインスタンスを再起動すると、キャッシュは無効になります。
 
-    - The SQL statements contain a changing condition, and the other parts are consistent. The changing condition is the primary key of the table or the partition.
+-   キャッシュは TiDB インスタンス間で共有されません。
 
-        In this scenario, some of the push-down calculation requests are the same with some previous requests, and these calculation requests can use the cached (previous) push-down calculation result.
+-   プッシュダウン計算の結果のみがキャッシュされます。キャッシュにヒットした場合でも、TiDBは後続の計算を実行する必要があります。
 
-    - The SQL statements contain multiple changing conditions and the other parts are consistent. The changing conditions exactly match a compound index column.
+-   キャッシュはリージョン単位で管理されます。リージョンにデータを書き込むと、リージョンキャッシュは無効になります。そのため、コプロセッサーキャッシュ機能は、主に変更頻度の低いデータに効果を発揮します。
 
-        In this scenario, some of the push-down calculation requests are the same with some previous requests, and these calculation requests can use the cached (previous) push-down calculation result.
+-   プッシュダウン計算リクエストが同じ場合、キャッシュにヒットします。通常、以下のシナリオでは、プッシュダウン計算リクエストは同じか、部分的に同じです。
+    -   SQL文は同じです。例えば、同じSQL文が繰り返し実行されます。
 
-+ This feature is transparent to users. Enabling or disabling this feature does not affect the calculation result and only affects the SQL execution time.
+        このシナリオでは、すべてのプッシュダウン計算要求は一貫しており、すべての要求はプッシュダウン計算キャッシュを使用できます。
 
-## Check the cache effect
+    -   SQL文には変更条件が含まれており、その他の部分は一貫しています。変更条件は、テーブルまたはパーティションの主キーです。
 
-You can check the cache effect of Coprocessor by executing `EXPLAIN ANALYZE` or viewing the Grafana monitoring panel.
+        このシナリオでは、プッシュダウン計算要求の一部は以前の要求の一部と同じであり、これらの計算要求はキャッシュされた (以前の) プッシュダウン計算結果を使用できます。
 
-### Use `EXPLAIN ANALYZE`
+    -   SQL文には複数の変更条件が含まれており、その他の部分は一貫しています。変更条件は複合インデックス列と完全に一致します。
 
-You can view the cache hit rate in [Operators for accessing tables](/choose-index.md#operators-for-accessing-tables) by using the [`EXPLAIN ANALYZE` statement](/sql-statements/sql-statement-explain-analyze.md). See the following example:
+        このシナリオでは、プッシュダウン計算要求の一部は以前の要求の一部と同じであり、これらの計算要求はキャッシュされた (以前の) プッシュダウン計算結果を使用できます。
+
+-   この機能はユーザーにとって透過的です。この機能を有効または無効にしても計算結果には影響せず、SQL実行時間のみに影響します。
+
+## キャッシュ効果を確認する {#check-the-cache-effect}
+
+`EXPLAIN ANALYZE`実行するか、Grafana 監視パネルを表示することで、コプロセッサーのキャッシュ効果を確認できます。
+
+### <code>EXPLAIN ANALYZE</code>使用する {#use-code-explain-analyze-code}
+
+[テーブルにアクセスするための演算子](/choose-index.md#operators-for-accessing-tables)のキャッシュヒット率は[`EXPLAIN ANALYZE`ステートメント](/sql-statements/sql-statement-explain-analyze.md)使って確認できます。次の例をご覧ください。
 
 ```sql
 EXPLAIN ANALYZE SELECT * FROM t USE INDEX(a);
@@ -63,8 +68,8 @@ EXPLAIN ANALYZE SELECT * FROM t USE INDEX(a);
 3 rows in set (0.62 sec)
 ```
 
-The column `execution info` of the execution result gives the `copr_cache_hit_ratio` information, which indicates the hit rate of the Coprocessor Cache. The `0.75` in the above example means that the hit rate is about 75%.
+実行結果の列`execution info`は、コプロセッサーキャッシュのヒット率を示す「 `copr_cache_hit_ratio`という情報が表示されます。上記の例の「 `0.75`は、ヒット率が約75%であることを意味します。
 
-### View the Grafana monitoring panel
+### Grafana 監視パネルをビュー {#view-the-grafana-monitoring-panel}
 
-In Grafana, you can see the **copr-cache** panel in the `distsql` subsystem under the `tidb` namespace. This panel monitors the number of hits, misses, and cache discards of the Coprocessor Cache in the entire cluster.
+Grafanaでは、 `tidb`名前空間の`distsql`サブシステムに**copr-cache**パネルが表示されます。このパネルは、クラスター全体のコプロセッサーキャッシュのヒット数、ミス数、キャッシュ破棄数を監視します。

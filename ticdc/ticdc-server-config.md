@@ -1,178 +1,178 @@
 ---
 title: TiCDC Server Configurations
-summary: Learn the CLI and configuration parameters used in TiCDC.
+summary: TiCDC で使用される CLI と構成パラメータについて学習します。
 ---
 
-# TiCDC Server Configurations
+# TiCDC サーバー構成 {#ticdc-server-configurations}
 
-This document describes the CLI and configuration file parameters used in TiCDC.
+このドキュメントでは、TiCDC で使用される CLI および構成ファイルのパラメータについて説明します。
 
-## `cdc server` CLI parameters
+## <code>cdc server</code> CLIパラメータ {#code-cdc-server-code-cli-parameters}
 
-The following are descriptions of options available in a `cdc server` command:
+以下は、 `cdc server`コマンドで使用できるオプションの説明です。
 
-- `addr`: The listening address of TiCDC, the HTTP API address, and the Prometheus address of the TiCDC service. The default value is `127.0.0.1:8300`.
-- `advertise-addr`: The advertised address via which clients access TiCDC. If unspecified, the value is the same as that of `addr`.
-- `pd`: A comma-separated list of PD endpoints.
-- `config`: The address of the configuration file that TiCDC uses (optional). This option is supported since TiCDC v5.0.0. This option can be used in the TiCDC deployment since TiUP v1.4.0. For detailed configuration description, see [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md)
-- `data-dir`: Specifies the directory that TiCDC uses when it needs to use disks to store files. The sort engine used by TiCDC and redo logs use this directory to store temporary files. It is recommended to ensure that the free disk space for this directory is greater than or equal to 500 GiB. If you are using TiUP, you can configure `data_dir` in the [`cdc_servers`](/tiup/tiup-cluster-topology-reference.md#cdc_servers) section, or directly use the default `data_dir` path in `global`.
-- `gc-ttl`: The TTL (Time To Live) of the service level `GC safepoint` in PD set by TiCDC, and the duration that the replication task can suspend, in seconds. The default value is `86400`, which means 24 hours. Note: Suspending of the TiCDC replication task affects the progress of TiCDC GC safepoint, which means that it affects the progress of upstream TiDB GC, as detailed in [Complete Behavior of TiCDC GC safepoint](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint).
-- `log-file`: The path to which logs are output when the TiCDC process is running. If this parameter is not specified, logs are written to the standard output (stdout).
-- `log-level`: The log level when the TiCDC process is running. The default value is `"info"`.
-- `ca`: Specifies the path of the CA certificate file in PEM format for TLS connection (optional).
-- `cert`: Specifies the path of the certificate file in PEM format for TLS connection (optional).
-- `cert-allowed-cn`: Specifies the path of the common name in PEM format for TLS connection (optional).
-- `key`: Specifies the path of the private key file in PEM format for TLS connection (optional).
-- `tz`: Time zone used by the TiCDC service. TiCDC uses this time zone when it internally converts time data types such as `TIMESTAMP` or when it replicates data to the downstream. The default is the local time zone in which the process runs. If you specify `time-zone` (in `sink-uri`) and `tz` at the same time, the internal TiCDC processes use the time zone specified by `tz`, and the sink uses the time zone specified by `time-zone` for replicating data to the downstream. Make sure that the time zone specified by `tz` is the same as that specified by `time-zone` (in `sink-uri`).
-- `cluster-id`: (optional) The ID of the TiCDC cluster. The default value is `default`. `cluster-id` is the unique identifier of a TiCDC cluster. TiCDC nodes with the same `cluster-id` belong to the same cluster. The length of a `cluster-id` is 128 characters at most. `cluster-id` must follow the pattern of `^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$` and cannot be one of the following: `owner`, `capture`, `task`, `changefeed`, `job`, and `meta`.
+-   `addr` : TiCDCのリスニングアドレス、HTTP APIアドレス、およびTiCDCサービスのPrometheusアドレス。デフォルト値は`127.0.0.1:8300`です。
+-   `advertise-addr` : クライアントがTiCDCにアクセスするために使用するアドバタイズされたアドレス。指定されていない場合、値は`addr`と同じになります。
+-   `pd` : PD エンドポイントのコンマ区切りリスト。
+-   `config` : TiCDCが使用する設定ファイルのアドレス（オプション）。このオプションはTiCDC v5.0.0以降でサポートされています。このオプションはTiUP v1.4.0以降のTiCDCデプロイメントで使用できます。詳細な設定については、 [TiCDC Changefeedフィード構成](/ticdc/ticdc-changefeed-config.md)参照してください。
+-   `data-dir` : TiCDC がディスクを使用してファイルを保存する必要がある場合に使用するディレクトリを指定します。TiCDC が使用するソートエンジンと REDO ログは、このディレクトリに一時ファイルを保存します。このディレクトリの空きディスク容量は 500 GiB 以上確保することをお勧めします。TiUPを使用している場合は、セクション[`cdc_servers`](/tiup/tiup-cluster-topology-reference.md#cdc_servers)で`data_dir`設定するか、 `global`でデフォルトのパス`data_dir`直接使用できます。
+-   `gc-ttl` : TiCDC によって設定される PD のサービスレベル`GC safepoint`の TTL (Time To Live) と、レプリケーションタスクが一時停止できる期間（秒単位）。デフォルト値は`86400`で、これは 24 時間を意味します。注: TiCDC レプリケーションタスクの一時停止は、TiCDC GC セーフポイントの進行に影響します。つまり、 [TiCDC GCセーフポイントの完全な動作](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)で詳述されているように、上流の TiDB GC の進行にも影響します。
+-   `log-file` : TiCDCプロセス実行時にログが出力されるパス。このパラメータが指定されていない場合、ログは標準出力（stdout）に書き込まれます。
+-   `log-level` : TiCDCプロセス実行時のログレベル。デフォルト値は`"info"`です。
+-   `ca` : TLS 接続用の PEM 形式の CA 証明書ファイルのパスを指定します (オプション)。
+-   `cert` : TLS 接続用の PEM 形式の証明書ファイルのパスを指定します (オプション)。
+-   `cert-allowed-cn` : TLS 接続用の PEM 形式の共通名のパスを指定します (オプション)。
+-   `key` : TLS 接続用の PEM 形式の秘密鍵ファイルのパスを指定します (オプション)。
+-   `tz` : TiCDCサービスが使用するタイムゾーン。TiCDCは、 `TIMESTAMP`などの時間データ型を内部的に変換するとき、またはデータを下流に複製するときにこのタイムゾーンを使用します。デフォルトは、プロセスが実行されるローカルタイムゾーンです。4（ `sink-uri` ）と`tz` `time-zone`指定した場合、内部TiCDCプロセスは`tz`で指定されたタイムゾーンを使用し、シンクは`time-zone`で指定されたタイムゾーンを使用して下流にデータを複製します。14で指定されたタイムゾーン`sink-uri` `tz` `time-zone`指定されたタイムゾーンと同じであることを確認してください。
+-   `cluster-id` : (オプション) TiCDC クラスターの ID。デフォルト値は`default`です。 `cluster-id` TiCDC クラスターの一意の識別子です。同じ`cluster-id`を持つ TiCDC ノードは同じクラスターに属します。 `cluster-id`の長さは最大 128 文字です。 `cluster-id` `^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$`のパターンに従う必要があり、 `owner` 、 `capture` 、 `task` 、 `changefeed` 、 `job` 、 `meta`のいずれかにすることはできません。
 
-## `cdc server` configuration file parameters
+## <code>cdc server</code>構成ファイルのパラメータ {#code-cdc-server-code-configuration-file-parameters}
 
-The following describes the configuration file specified by the `config` option in the `cdc server` command. You can find the default configuration file in [`pkg/cmd/util/ticdc.toml`](https://github.com/pingcap/tiflow/blob/master/pkg/cmd/util/ticdc.toml).
+以下は、コマンド`cdc server`の`config`オプションで指定される設定ファイルについて説明します。デフォルトの設定ファイルは[`pkg/cmd/util/ticdc.toml`](https://github.com/pingcap/tiflow/blob/master/pkg/cmd/util/ticdc.toml)にあります。
 
 <!-- The configuration method of the following parameters is the same as that of CLI parameters, but the CLI parameters have higher priorities. -->
 
-### `addr`
+### <code>addr</code> {#code-addr-code}
 
-- Example: `"127.0.0.1:8300"`
+-   例: `"127.0.0.1:8300"`
 
-### `advertise-addr`
+### <code>advertise-addr</code> {#code-advertise-addr-code}
 
-- Example: `""`
+-   例: `""`
 
-### `log-file`
+### <code>log-file</code> {#code-log-file-code}
 
-- Example: `""`
+-   例: `""`
 
-### `log-level`
+### <code>log-level</code> {#code-log-level-code}
 
-- Example: `"info"`
+-   例: `"info"`
 
-### `data-dir`
+### <code>data-dir</code> {#code-data-dir-code}
 
-- Example: `""`
+-   例: `""`
 
-### `gc-ttl`
+### <code>gc-ttl</code> {#code-gc-ttl-code}
 
-- Example: `86400` (24h)
+-   例: `86400` (24時間)
 
-### `tz`
+### <code>tz</code> {#code-tz-code}
 
-- Example: `"System"`
+-   例: `"System"`
 
-### `cluster-id`
+### <code>cluster-id</code> {#code-cluster-id-code}
 
-- Example: `"default"`
+-   例: `"default"`
 
-### `gc-tuner-memory-threshold`
+### <code>gc-tuner-memory-threshold</code> {#code-gc-tuner-memory-threshold-code}
 
-- Specifies the maximum memory threshold for tuning GOGC. Setting a smaller threshold increases the GC frequency. Setting a larger threshold reduces GC frequency and consumes more memory resources for the TiCDC process. Once the memory usage exceeds this threshold, GOGC Tuner stops working.
-- Default value: `0`, indicating that GOGC Tuner is disabled
-- Unit: Bytes
+-   GOGCチューニングの最大メモリしきい値を指定します。しきい値を小さくするとGCの頻度が増加します。しきい値を大きくするとGCの頻度は減少しますが、TiCDCプロセスで消費されるメモリリソースが増加します。メモリ使用量がこのしきい値を超えると、GOGC Tunerは動作を停止します。
+-   デフォルト値: `0` 、GOGCチューナーが無効であることを示します
+-   単位: バイト
 
-### security
+### 安全 {#security}
 
-#### `ca-path`
+#### <code>ca-path</code> {#code-ca-path-code}
 
-- Example: `""`
+-   例: `""`
 
-#### `cert-path`
+#### <code>cert-path</code> {#code-cert-path-code}
 
-- Example: `""`
+-   例: `""`
 
-#### `key-path`
+#### <code>key-path</code> {#code-key-path-code}
 
-- Example: `""`
+-   例: `""`
 
-#### `mtls`
+#### <code>mtls</code> {#code-mtls-code}
 
-- Controls whether to enable the TLS client authentication.
-- Default value: `false`
+-   TLS クライアント認証を有効にするかどうかを制御します。
+-   デフォルト値: `false`
 
-#### `client-user-required`
+#### <code>client-user-required</code> {#code-client-user-required-code}
 
-- Controls whether to use username and password for client authentication. The default value is false.
-- Default value: `false`
+-   クライアント認証にユーザー名とパスワードを使用するかどうかを制御します。デフォルト値は false です。
+-   デフォルト値: `false`
 
-#### `client-allowed-user`
+#### <code>client-allowed-user</code> {#code-client-allowed-user-code}
 
-- Lists the usernames that are allowed for client authentication. Authentication requests with usernames not in this list will be rejected.
-- Default value: `null`
+-   クライアント認証に許可されるユーザー名をリストします。このリストにないユーザー名による認証要求は拒否されます。
+-   デフォルト値: `null`
 
 <!-- Example: `["username_1", "username_2"]` -->
 
-### `capture-session-ttl`
+### <code>capture-session-ttl</code> {#code-capture-session-ttl-code}
 
-- Specifies the session duration between TiCDC and etcd services. This parameter is optional.
-- Default value: `10`
-- Unit: Seconds
+-   TiCDCとetcdサービス間のセッション期間を指定します。このパラメータはオプションです。
+-   デフォルト値: `10`
+-   単位: 秒
 
-### `owner-flush-interval`
+### <code>owner-flush-interval</code> {#code-owner-flush-interval-code}
 
-- Specifies the interval at which the Owner module in the TiCDC cluster attempts to push the replication progress. This parameter is optional and its default value is `50000000` nanoseconds (that is, 50 milliseconds).
-- You can configure this parameter in two ways: specifying only the number (for example, configuring it as `40000000` represents 40000000 nanoseconds, which is 40 milliseconds), or specifying both the number and unit (for example, directly configuring it as `40ms`).
-- Default value: `50000000`, that is, 50 milliseconds
+-   TiCDCクラスタのオーナーモジュールがレプリケーションの進行状況をプッシュしようとする間隔を指定します。このパラメータはオプションで、デフォルト値は`50000000`ナノ秒（つまり50ミリ秒）です。
+-   このパラメータは、数値のみを指定する（たとえば、 `40000000`に設定すると 40000000 ナノ秒、つまり 40 ミリ秒を表します）、または数値と単位の両方を指定する（たとえば、直接`40ms`に設定する）という 2 つの方法で設定できます。
+-   デフォルト値: `50000000` 、つまり50ミリ秒
 
-### `processor-flush-interval`
+### <code>processor-flush-interval</code> {#code-processor-flush-interval-code}
 
-- Specifies the interval at which the Processor module in the TiCDC cluster attempts to push the replication progress. This parameter is optional and its default value is `50000000` nanoseconds (that is, 50 milliseconds).
-- The configuration method of this parameter is the same as that of `owner-flush-interval`.
-- Default value: `50000000`, that is, 50 milliseconds
+-   TiCDCクラスタ内のプロセッサモジュールがレプリケーションの進行状況をプッシュしようとする間隔を指定します。このパラメータはオプションで、デフォルト値は`50000000`ナノ秒（つまり50ミリ秒）です。
+-   このパラメータの設定方法は`owner-flush-interval`と同様です。
+-   デフォルト値: `50000000` 、つまり50ミリ秒
 
-### log
+### ログ {#log}
 
-#### `error-output`
+#### <code>error-output</code> {#code-error-output-code}
 
-- Specifies the output location for internal error logs of the zap log module. This parameter is optional.
-- Default value: `"stderr"`
+-   zapログモジュールの内部エラーログの出力場所を指定します。このパラメータはオプションです。
+-   デフォルト値: `"stderr"`
 
-#### log.file
+#### ログファイル {#log-file}
 
-##### `max-size`
+##### <code>max-size</code> {#code-max-size-code}
 
-- Specifies the maximum size of a single log file. This parameter is optional.
-- Default value: `300`
-- Unit: MiB
+-   単一のログファイルの最大サイズを指定します。このパラメータはオプションです。
+-   デフォルト値: `300`
+-   単位: MiB
 
-##### `max-days`
+##### <code>max-days</code> {#code-max-days-code}
 
-- Specifies the maximum number of days to retain log files. This parameter is optional.
-- Default value: `0`, indicating never to delete
+-   ログファイルを保持する最大日数を指定します。このパラメータはオプションです。
+-   デフォルト値: `0` 、削除しないことを示します
 
-##### `max-backups`
+##### <code>max-backups</code> {#code-max-backups-code}
 
-- Specifies the number of log files to retain. This parameter is optional.
-- Default value: `0`, indicating to keep all log files
+-   保持するログファイルの数を指定します。このパラメータはオプションです。
+-   デフォルト値: `0` 、すべてのログファイルを保持することを示します
 
-### sorter
+### 仕分け機 {#sorter}
 
-#### `cache-size-in-mb`
+#### <code>cache-size-in-mb</code> {#code-cache-size-in-mb-code}
 
-- Specifies the size of the shared pebble block cache in the Sorter module for the 8 pebble DBs started by default.
-- Default value: `128`
-- Unit: MiB
+-   デフォルトで起動される 8 つの Pebble DB の Sorter モジュール内の共有 Pebbleブロックキャッシュのサイズを指定します。
+-   デフォルト値: `128`
+-   単位: MiB
 
-#### `sorter-dir`
+#### <code>sorter-dir</code> {#code-sorter-dir-code}
 
-- Specifies the directory where sorter files are stored relative to the data directory (`data-dir`). This parameter is optional.
-- Default value: `"/tmp/sorter"`
+-   ソートファイルが保存されるディレクトリを、データディレクトリ（ `data-dir` ）を基準として指定します。このパラメータはオプションです。
+-   デフォルト値: `"/tmp/sorter"`
 
-### kv-client
+### kvクライアント {#kv-client}
 
-#### `worker-concurrent`
+#### <code>worker-concurrent</code> {#code-worker-concurrent-code}
 
-- Specifies the number of threads that can be used in a single Region worker. This parameter is optional.
-- Default value: `8`
+-   単一のリージョンワーカーで使用できるスレッド数を指定します。このパラメータはオプションです。
+-   デフォルト値: `8`
 
-#### `worker-pool-size`
+#### <code>worker-pool-size</code> {#code-worker-pool-size-code}
 
-- Specifies the number of threads in the shared thread pool of TiCDC, mainly used for processing KV events. This parameter is optional.
-- Default value: `0`, indicating that the default pool size is twice the number of CPU cores
+-   TiCDCの共有スレッドプール内のスレッド数を指定します。これは主にKVイベントの処理に使用されます。このパラメータはオプションです。
+-   デフォルト値: `0` 、デフォルトのプールサイズがCPUコア数の2倍であることを示します。
 
-#### `region-retry-duration`
+#### <code>region-retry-duration</code> {#code-region-retry-duration-code}
 
-- Specifies the retry duration of Region connections. This parameter is optional.
-- You can configure this parameter in two ways:
-    - Specify only the number, for example, `50000000` represents 50000000 nanoseconds (50 milliseconds)
-    - Specify both the number and the unit, for example, `50ms`
-- Default value: `60000000000` (1 minute)
+-   リージョン接続の再試行期間を指定します。このパラメータはオプションです。
+-   このパラメータは次の 2 つの方法で設定できます。
+    -   数字のみを指定します。たとえば、 `50000000` 50000000ナノ秒（50ミリ秒）を表します。
+    -   数値と単位の両方を指定します（例： `50ms`
+-   Default value: `60000000000` (1 minute)

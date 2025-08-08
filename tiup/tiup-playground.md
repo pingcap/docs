@@ -1,158 +1,154 @@
 ---
 title: Quickly Deploy a Local TiDB Cluster
-summary: Learn how to quickly deploy a local TiDB cluster using the playground component of TiUP.
+summary: TiUPのプレイグラウンドコンポーネントを使用して、ローカル TiDB クラスターをすばやくデプロイする方法を学習します。
 ---
 
-# Quickly Deploy a Local TiDB Cluster
+# ローカル TiDBクラスタを迅速にデプロイ {#quickly-deploy-a-local-tidb-cluster}
 
-The TiDB cluster is a distributed system that consists of multiple components. A typical TiDB cluster consists of at least three PD nodes, three TiKV nodes, and two TiDB nodes. If you want to have a quick experience on TiDB, you might find it time-consuming and complicated to manually deploy so many components. This document introduces the playground component of TiUP and how to use it to quickly build a local TiDB test environment.
+TiDBクラスタは、複数のコンポーネントで構成される分散システムです。典型的なTiDBクラスタは、少なくとも3つのPDノード、3つのTiKVノード、そして2つのTiDBノードで構成されます。TiDBをすぐに試してみたい場合、多数のコンポーネントを手動でデプロイするのは時間がかかり、複雑だと感じるかもしれません。このドキュメントでは、 TiUPのプレイグラウンドコンポーネントと、それを使用してローカルのTiDBテスト環境を迅速に構築する方法を紹介します。
 
-## TiUP playground overview
+## TiUPプレイグラウンドの概要 {#tiup-playground-overview}
 
-The basic usage of the playground component is shown as follows:
+プレイグラウンドコンポーネントの基本的な使用方法は次のとおりです。
 
 ```bash
 tiup playground ${version} [flags]
 ```
 
-If you directly execute the `tiup playground` command, TiUP uses the locally installed TiDB, TiKV, and PD components or installs the stable version of these components to start a TiDB cluster that consists of one TiKV instance, one TiDB instance, one PD instance, and one TiFlash instance.
+`tiup playground`コマンドを直接実行すると、 TiUP はローカルにインストールされた TiDB、TiKV、および PD コンポーネントを使用するか、これらのコンポーネントの安定バージョンをインストールして、1 つの TiKV インスタンス、1 つの TiDB インスタンス、1 つの PD インスタンス、および 1 つのTiFlashインスタンスで構成される TiDB クラスターを起動します。
 
-This command actually performs the following operations:
+このコマンドは実際には次の操作を実行します。
 
-- Because this command does not specify the version of the playground component, TiUP first checks the latest version of the installed playground component. Assume that the latest version is v1.12.3, then this command works the same as `tiup playground:v1.12.3`.
-- If you have not used TiUP playground to install the TiDB, TiKV, and PD components, the playground component installs the latest stable version of these components, and then start these instances.
-- Because this command does not specify the version of the TiDB, PD, and TiKV component, TiUP playground uses the latest version of each component by default. Assume that the latest version is {{{ .tidb-version }}}, then this command works the same as `tiup playground:v1.12.3 {{{ .tidb-version }}}`.
-- Because this command does not specify the number of each component, TiUP playground, by default, starts a smallest cluster that consists of one TiDB instance, one TiKV instance, one PD instance, and one TiFlash instance.
-- After starting each TiDB component, TiUP playground reminds you that the cluster is successfully started and provides you some useful information, such as how to connect to the TiDB cluster through the MySQL client and how to access the [TiDB Dashboard](/dashboard/dashboard-intro.md).
+-   このコマンドはプレイグラウンドコンポーネントのバージョンを指定しないため、 TiUPはまずインストールされているプレイグラウンドコンポーネントの最新バージョンを確認します。最新バージョンがv1.12.3であると仮定すると、このコマンドは`tiup playground:v1.12.3`と同じように動作します。
+-   TiUPプレイグラウンドを使用して TiDB、TiKV、および PD コンポーネントをインストールしていない場合、プレイグラウンドコンポーネントはこれらのコンポーネントの最新の安定バージョンをインストールしてから、これらのインスタンスを起動します。
+-   このコマンドはTiDB、PD、およびTiKVコンポーネントのバージョンを指定しないため、 TiUPプレイグラウンドはデフォルトで各コンポーネントの最新バージョンを使用します。最新バージョンがv8.5.2であると仮定すると、このコマンドは`tiup playground:v1.12.3 v8.5.2`と同じように動作します。
+-   このコマンドは各コンポーネントの数を指定しないため、デフォルトでは、 TiUPプレイグラウンドは 1 つの TiDB インスタンス、1 つの TiKV インスタンス、1 つの PD インスタンス、および 1 つのTiFlashインスタンスで構成される最小のクラスターを起動します。
+-   各 TiDBコンポーネントを起動すると、 TiUPプレイグラウンドによってクラスターが正常に起動されたことが通知され、MySQL クライアント経由で TiDB クラスターに接続する方法や[TiDBダッシュボード](/dashboard/dashboard-intro.md)アクセスする方法などの役立つ情報が提供されます。
 
-You can use the following command to view the command-line flags of the playground component:
+次のコマンドを使用して、プレイグラウンドコンポーネントのコマンドライン フラグを表示できます。
 
 ```shell
 tiup playground --help
 ```
 
-## Examples
+## 例 {#examples}
 
-### Check available TiDB versions
+### 利用可能なTiDBのバージョンを確認する {#check-available-tidb-versions}
 
 ```shell
 tiup list tidb
 ```
 
-### Start a TiDB cluster of a specific version
+### 特定のバージョンの TiDB クラスターを起動する {#start-a-tidb-cluster-of-a-specific-version}
 
 ```shell
 tiup playground ${version}
 ```
 
-Replace `${version}` with the target version number.
+`${version}`ターゲットのバージョン番号に置き換えます。
 
-### Start a TiDB cluster of the nightly version
+### ナイトリーバージョンのTiDBクラスタを起動する {#start-a-tidb-cluster-of-the-nightly-version}
 
 ```shell
 tiup playground nightly
 ```
 
-In the command above, `nightly` indicates the latest development version of TiDB.
+上記のコマンドでは、 `nightly` TiDB の最新の開発バージョンを示します。
 
-### Override PD's default configuration
+### PDのデフォルト設定を上書きする {#override-pd-s-default-configuration}
 
-First, you need to copy the [PD configuration template](https://github.com/pingcap/pd/blob/master/conf/config.toml). Assume you place the copied file to `~/config/pd.toml` and make some changes according to your need, then you can execute the following command to override PD's default configuration:
+まず、 [PD構成テンプレート](https://github.com/pingcap/pd/blob/master/conf/config.toml)コピーする必要があります。コピーしたファイルを`~/config/pd.toml`に配置し、必要に応じて変更を加えた後、以下のコマンドを実行して PD のデフォルト設定を上書きできます。
 
 ```shell
 tiup playground --pd.config ~/config/pd.toml
 ```
 
-### Replace the default binary files
+### デフォルトのバイナリファイルを置き換える {#replace-the-default-binary-files}
 
-By default, when playground is started, each component is started using the binary files from the official mirror. If you want to put a temporarily compiled local binary file into the cluster for testing, you can use the `--{comp}.binpath` flag for replacement. For example, execute the following command to replace the binary file of TiDB:
+デフォルトでは、プレイグラウンドを起動すると、各コンポーネントは公式ミラーから取得したバイナリファイルを使用して起動されます。テストのために一時的にコンパイルされたローカルバイナリファイルをクラスタに配置する場合は、置換フラグ`--{comp}.binpath`使用できます。例えば、TiDBのバイナリファイルを置換するには、以下のコマンドを実行します。
 
 ```shell
 tiup playground --db.binpath /xx/tidb-server
 ```
 
-### Start multiple component instances
+### 複数のコンポーネントインスタンスを起動する {#start-multiple-component-instances}
 
-By default, only one instance is started for each TiDB, TiKV, and PD component. To start multiple instances for each component, add the following flag:
+デフォルトでは、TiDB、TiKV、PDの各コンポーネントごとに1つのインスタンスのみが起動されます。各コンポーネントごとに複数のインスタンスを起動するには、次のフラグを追加します。
 
 ```shell
 tiup playground --db 3 --pd 3 --kv 3
 ```
 
-### Specify a tag when starting the TiDB cluster to store the data
+### TiDBクラスタを起動するときにデータを保存するタグを指定します {#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data}
 
-After you stop a TiDB cluster started using TiUP playground, all cluster data is cleaned up as well. To start a TiDB cluster using TiUP playground and ensure that the cluster data is not cleaned up automatically, you can specify a tag when starting the cluster. After specifying the tag, you can find the cluster data in the `~/.tiup/data` directory. Run the following command to specify a tag:
+TiUPプレイグラウンドを使用して起動したTiDBクラスタを停止すると、クラスタデータもすべてクリーンアップされます。TiUPTiUPグラウンドを使用してTiDBクラスタを起動し、クラスタデータが自動的にクリーンアップされないようにするには、クラスタの起動時にタグを指定します。タグを指定すると、クラスタデータは`~/.tiup/data`ディレクトリに保存されます。タグを指定するには、以下のコマンドを実行します。
 
 ```shell
 tiup playground --tag ${tag_name}
 ```
 
-For a cluster started in this way, the data files are retained after the cluster is stopped. You can use this tag to start the cluster next time so that you can use the data kept since the cluster was stopped.
+この方法で起動したクラスタでは、クラスタの停止後もデータファイルが保持されます。このタグを使用して次回クラスタを起動すると、クラスタ停止後に保持されたデータを使用できます。
 
-## Quickly connect to the TiDB cluster started by playground
+## プレイグラウンドによって開始された TiDB クラスターにすばやく接続します {#quickly-connect-to-the-tidb-cluster-started-by-playground}
 
-TiUP provides the `client` component, which is used to automatically find and connect to a local TiDB cluster started by playground. The usage is as follows:
+TiUPは、プレイグラウンドによって起動されたローカルTiDBクラスタを自動的に検出して接続するために使用される`client`コンポーネントを提供します。使用方法は次のとおりです。
 
 ```shell
 tiup client
 ```
 
-This command provides a list of TiDB clusters that are started by playground on the current machine on the console. Select the TiDB cluster to be connected. After clicking <kbd>Enter</kbd>, a built-in MySQL client is opened to connect to TiDB.
+このコマンドは、現在のマシン上でプレイグラウンドによって起動されたTiDBクラスタのリストをコンソールに表示します。接続するTiDBクラスタを選択してください。Enter<kbd>キー</kbd>を押すと、TiDBに接続するための組み込みMySQLクライアントが開きます。
 
-## View information of the started cluster
+## 起動したクラスターの情報をビュー {#view-information-of-the-started-cluster}
 
 ```shell
 tiup playground display
 ```
 
-The command above returns the following results:
+上記のコマンドは次の結果を返します。
 
-```
-Pid    Role     Uptime
----    ----     ------
-84518  pd       35m22.929404512s
-84519  tikv     35m22.927757153s
-86189  tidb     exited
-86526  tidb     34m28.293148663s
-```
+    Pid    Role     Uptime
+    ---    ----     ------
+    84518  pd       35m22.929404512s
+    84519  tikv     35m22.927757153s
+    86189  tidb     exited
+    86526  tidb     34m28.293148663s
 
-## Scale out a cluster
+## クラスターをスケールアウトする {#scale-out-a-cluster}
 
-The command-line parameter for scaling out a cluster is similar to that for starting a cluster. You can scale out two TiDB instances by executing the following command:
+クラスターをスケールアウトするためのコマンドラインパラメータは、クラスターを起動するためのものと似ています。以下のコマンドを実行することで、2つのTiDBインスタンスをスケールアウトできます。
 
 ```shell
 tiup playground scale-out --db 2
 ```
 
-## Scale in a cluster
+## クラスターのスケールイン {#scale-in-a-cluster}
 
-You can specify a `pid` in the `tiup playground scale-in` command to scale in the corresponding instance. To view the `pid`, execute `tiup playground display`.
+`tiup playground scale-in`コマンドに`pid`指定すると、対応するインスタンスをスケールインできます。 `pid`を表示するには、 `tiup playground display`実行してください。
 
 ```shell
 tiup playground scale-in --pid 86526
 ```
 
-## Deploy TiProxy
+## TiProxyをデプロイ {#deploy-tiproxy}
 
-[TiProxy](/tiproxy/tiproxy-overview.md) is the official proxy component from PingCAP, placed between the client and the TiDB server to provide load balancing, connection persistence, service discovery, and other features for TiDB.
+[TiProxy](/tiproxy/tiproxy-overview.md)は PingCAP の公式プロキシコンポーネントであり、クライアントと TiDBサーバーの間に配置され、負荷分散、接続の永続性、サービス検出、および TiDB のその他の機能を提供します。
 
-Starting from TiUP v1.15.0, you can deploy TiProxy for your cluster using TiUP Playground.
+TiUP v1.15.0 以降では、 TiUP Playground を使用してクラスターに TiProxy をデプロイできます。
 
-1. Create a `tidb.toml` file and add the following configuration:
+1.  `tidb.toml`ファイルを作成し、次の構成を追加します。
 
-    ```
-    graceful-wait-before-shutdown=15
-    ```
+        graceful-wait-before-shutdown=15
 
-    This configuration item controls the duration (in seconds) that TiDB waits before shutting down the server, avoiding client disconnections during cluster scaling-in operations.
+    この構成項目は、TiDB がサーバーをシャットダウンする前に待機する期間 (秒単位) を制御し、クラスターのスケールイン操作中にクライアントが切断されるのを回避します。
 
-2. Start the TiDB cluster:
+2.  TiDB クラスターを起動します。
 
     ```shell
-    tiup playground {{{ .tidb-version }}} --tiproxy 1 --db.config tidb.toml
+    tiup playground v8.5.2 --tiproxy 1 --db.config tidb.toml
     ```
 
-    In the playground component, TiProxy-related command-line flags are as follows:
+    プレイグラウンドコンポーネントでは、TiProxy 関連のコマンドライン フラグは次のとおりです。
 
     ```bash
     Flags:
@@ -165,19 +161,19 @@ Starting from TiUP v1.15.0, you can deploy TiProxy for your cluster using TiUP P
           --tiproxy.version string       The version of TiProxy. If not specified, the latest version of TiProxy is deployed.
     ```
 
-For more information about deploying and using TiProxy, see [TiProxy installation and usage](/tiproxy/tiproxy-overview.md#installation-and-usage).
+TiProxy の導入と使用の詳細については、 [TiProxyのインストールと使用方法](/tiproxy/tiproxy-overview.md#installation-and-usage)参照してください。
 
-To use the TiProxy client program `tiproxyctl`, see [Install TiProxy Control](/tiproxy/tiproxy-command-line-flags.md#install-tiproxy-control).
+TiProxy クライアント プログラム`tiproxyctl`を使用するには、 [TiProxyコントロールをインストールする](/tiproxy/tiproxy-command-line-flags.md#install-tiproxy-control)参照してください。
 
-## Deploy PD microservices
+## PDマイクロサービスのデプロイ {#deploy-pd-microservices}
 
-Starting from v8.2.0, [PD microservice mode](/pd-microservices.md) (experimental) can be deployed using TiUP. You can deploy the `tso` microservice and `scheduling` microservice for your cluster using TiUP Playground as follows:
+v8.2.0以降、 TiUPを使用して[PDマイクロサービスモード](/pd-microservices.md) （実験的）のマイクロサービスをデプロイできます。TiUP Playgroundを使用して、以下の手順で`tso`と`scheduling`マイクロサービスをクラスターにデプロイできます。
 
 ```shell
-tiup playground {{{ .tidb-version }}} --pd.mode ms --pd 3 --tso 2 --scheduling 2
+tiup playground v8.5.2 --pd.mode ms --pd 3 --tso 2 --scheduling 2
 ```
 
-- `--pd.mode`: setting it to `ms` means enabling the microservice mode for PD.
-- `--pd <num>`: specifies the number of APIs for PD microservices. It must be at least `1`.
-- `--tso <num>`: specifies the number of instances to be deployed for the `tso` microservice.
-- `--scheduling <num>`: specifies the number of instances to be deployed for the `scheduling` microservice.
+-   `--pd.mode` : これを`ms`に設定すると、PD のマイクロサービス モードが有効になります。
+-   `--pd <num>` : PDマイクロサービスのAPIの数を指定します。少なくとも`1`である必要があります。
+-   `--tso <num>` : `tso`マイクロサービスにデプロイされるインスタンスの数を指定します。
+-   `--scheduling <num>` : `scheduling`マイクロサービスにデプロイされるインスタンスの数を指定します。

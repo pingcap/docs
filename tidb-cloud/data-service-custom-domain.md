@@ -1,72 +1,72 @@
 ---
 title: Custom Domain in Data Service
-summary: Learn how to use a custom domain to access your Data App in TiDB Cloud Data Service.
+summary: カスタム ドメインを使用してTiDB Cloudデータ サービスのデータ アプリにアクセスする方法を学習します。
 ---
 
-# Custom Domain in Data Service
+# データサービスにおけるカスタムドメイン {#custom-domain-in-data-service}
 
-TiDB Cloud Data Service provides a default domain `<region>.data.tidbcloud.com` to access each Data App's endpoints. For enhanced personalization and flexibility, you can configure a custom domain for your Data App instead of using the default domain.
+TiDB Cloudデータサービスは、各データアプリのエンドポイントにアクセスするためのデフォルトドメイン`<region>.data.tidbcloud.com`を提供します。パーソナライズと柔軟性を高めるために、デフォルトドメインの代わりにデータアプリ用のカスタムドメインを設定することもできます。
 
-This document describes how to manage custom domains in your Data App.
+このドキュメントでは、データ アプリでカスタム ドメインを管理する方法について説明します。
 
-## Before you begin
+## 始める前に {#before-you-begin}
 
-Before configuring a custom domain for your Data App, note the following:
+データ アプリのカスタム ドメインを構成する前に、次の点に注意してください。
 
-- Custom domain requests exclusively support HTTPS for security. Once you successfully configure a custom domain, a "Let's Encrypt" certificate is automatically applied.
-- Your custom domain must be unique within the TiDB Cloud Data Service.
-- You can configure only one custom domain for each default domain, which is determined by the region of your cluster.
+-   カスタムドメインのリクエストは、セキュリティ保護のためHTTPSのみをサポートします。カスタムドメインの設定が完了すると、「Let&#39;s Encrypt」証明書が自動的に適用されます。
+-   カスタム ドメインは、 TiDB Cloudデータ サービス内で一意である必要があります。
+-   クラスターのリージョンによって決まるデフォルト ドメインごとに、カスタム ドメインを 1 つだけ構成できます。
 
-## Manage custom domains
+## カスタムドメインを管理する {#manage-custom-domains}
 
-The following sections describe how to create, edit, and remove a custom domain for a Data App.
+次のセクションでは、データ アプリのカスタム ドメインを作成、編集、削除する方法について説明します。
 
-### Create a custom domain
+### カスタムドメインを作成する {#create-a-custom-domain}
 
-To create a custom domain for a Data App, perform the following steps:
+データ アプリのカスタム ドメインを作成するには、次の手順を実行します。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its details.
-3. In the **Manage Custom Domain** area, click **Add Custom Domain**.
-4. In the **Add Custom Domain** dialog box, do the following:
-    1. Select the default domain you want to replace.
-    2. Enter your desired custom domain name.
-    3. Optional: configure a custom path as the prefix for your endpoints. If **Custom Path** is left empty, the default path is used.
-5. Preview your **Base URL** to ensure it meets your expectations. If it looks correct, click **Save**.
-6. Follow the instructions in the **DNS Settings** dialog to add a `CNAME` record for the default domain in your DNS provider.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/project/data-service)ページに移動します。
+2.  左側のペインで、対象のデータ アプリの名前をクリックして詳細を表示します。
+3.  **[カスタム ドメインの管理]**領域で、 **[カスタム ドメインの追加] を**クリックします。
+4.  **[カスタム ドメインの追加]**ダイアログ ボックスで、次の操作を行います。
+    1.  置き換えたいデフォルトのドメインを選択します。
+    2.  希望するカスタム ドメイン名を入力します。
+    3.  オプション：エンドポイントのプレフィックスとしてカスタムパスを設定します。**カスタムパス**が空の場合、デフォルトのパスが使用されます。
+5.  **ベースURL**をプレビューして、期待どおりであることを確認します。問題がなければ、 **「保存」**をクリックします。
+6.  **DNS 設定**ダイアログの指示に従って、DNS プロバイダーのデフォルト ドメインの`CNAME`レコードを追加します。
 
-The custom domain is in a **Pending** status initially while the system validates your DNS settings. Once the DNS validation is successful, the status of your custom domain will update to **Success**.
+システムがDNS設定を検証している間、カスタムドメインは最初は「**保留中**」ステータスになります。DNS検証が成功すると、カスタムドメインのステータスは**「成功」**に更新されます。
 
-> **Note:**
+> **注記：**
 >
-> Depending on your DNS provider, it might take up to 24 hours for the DNS record to be validated. If a custom domain remains unvalidated for over 24 hours, it will be in an **Expired** status. In this case, you can only remove the custom domain and try again.
+> ご利用のDNSプロバイダーによっては、DNSレコードの検証に最大24時間かかる場合があります。カスタムドメインが24時間以上検証されていない場合、ステータスは**「期限切れ**」になります。この場合、カスタムドメインを削除して再試行するしかありません。
 
-After your custom domain status is set to **Success**, you can use it to access your endpoint. The code example provided by TiDB Cloud Data Service is automatically updated to your custom domain and path. For more information, see [Call an endpoint](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint).
+カスタムドメインのステータスが**「成功」**になったら、エンドポイントにアクセスできるようになります。TiDB TiDB Cloud Data Service が提供するコード例は、カスタムドメインとパスに自動的に更新されます。詳細については、 [エンドポイントを呼び出す](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint)ご覧ください。
 
-### Edit a custom domain
+### カスタムドメインを編集する {#edit-a-custom-domain}
 
-> **Note:**
+> **注記：**
 >
-> After you complete the following changes, the previous custom domain and custom path will become invalid immediately. If you modify the custom domain, you need to wait for the new DNS record to be validated.
+> 以下の変更を完了すると、以前のカスタムドメインとカスタムパスは直ちに無効になります。カスタムドメインを変更する場合は、新しいDNSレコードが検証されるまでお待ちください。
 
-To edit a custom domain for a Data App, perform the following steps:
+データ アプリのカスタム ドメインを編集するには、次の手順を実行します。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its details.
-3. In the **Manage Custom Domain** area, locate the **Action** column, and then click <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M11 4H6.8c-1.68 0-2.52 0-3.162.327a3 3 0 0 0-1.311 1.311C2 6.28 2 7.12 2 8.8v8.4c0 1.68 0 2.52.327 3.162a3 3 0 0 0 1.311 1.311C4.28 22 5.12 22 6.8 22h8.4c1.68 0 2.52 0 3.162-.327a3 3 0 0 0 1.311-1.311C20 19.72 20 18.88 20 17.2V13M8 16h1.675c.489 0 .733 0 .963-.055.204-.05.4-.13.579-.24.201-.123.374-.296.72-.642L21.5 5.5a2.121 2.121 0 0 0-3-3l-9.563 9.563c-.346.346-.519.519-.642.72a2 2 0 0 0-.24.579c-.055.23-.055.474-.055.963V16Z" stroke-width="inherit"></path></svg> **Edit** in the custom domain row that you want to edit.
-4. In the displayed dialog box, update the custom domain or custom path.
-5. Preview your **Base URL** to ensure it meets your expectations. If it looks correct, click **Save**.
-6. If you have changed the custom domain, follow the instructions in the **DNS Settings** dialog to add a `CNAME` record for the default domain in your DNS provider.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/project/data-service)ページに移動します。
+2.  左側のペインで、対象のデータ アプリの名前をクリックして詳細を表示します。
+3.  **「カスタムドメインの管理」**領域で、 **「アクション」**列を見つけてクリックします。 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M11 4H6.8c-1.68 0-2.52 0-3.162.327a3 3 0 0 0-1.311 1.311C2 6.28 2 7.12 2 8.8v8.4c0 1.68 0 2.52.327 3.162a3 3 0 0 0 1.311 1.311C4.28 22 5.12 22 6.8 22h8.4c1.68 0 2.52 0 3.162-.327a3 3 0 0 0 1.311-1.311C20 19.72 20 18.88 20 17.2V13M8 16h1.675c.489 0 .733 0 .963-.055.204-.05.4-.13.579-.24.201-.123.374-.296.72-.642L21.5 5.5a2.121 2.121 0 0 0-3-3l-9.563 9.563c-.346.346-.519.519-.642.72a2 2 0 0 0-.24.579c-.055.23-.055.474-.055.963V16Z" stroke-width="inherit"></path></svg>編集するカスタム ドメインの行を**編集します**。
+4.  表示されたダイアログ ボックスで、カスタム ドメインまたはカスタム パスを更新します。
+5.  **ベースURL**をプレビューして、期待どおりであることを確認します。問題がなければ、 **「保存」**をクリックします。
+6.  カスタム ドメインを変更した場合は、 **[DNS 設定]**ダイアログの指示に従って、DNS プロバイダーのデフォルト ドメインの`CNAME`レコードを追加します。
 
-### Remove a custom domain
+### カスタムドメインを削除する {#remove-a-custom-domain}
 
-> **Note:**
+> **注記：**
 >
-> Before you delete a custom domain, make sure that the custom domain is not used anymore.
+> カスタム ドメインを削除する前に、そのカスタム ドメインがもう使用されていないことを確認してください。
 
-To remove a custom domain for a Data App, perform the following steps:
+データ アプリのカスタム ドメインを削除するには、次の手順を実行します。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its details.
-3. In the **Manage Custom Domain** area, locate the **Action** column, and then click <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M16 6v-.8c0-1.12 0-1.68-.218-2.108a2 2 0 0 0-.874-.874C14.48 2 13.92 2 12.8 2h-1.6c-1.12 0-1.68 0-2.108.218a2 2 0 0 0-.874.874C8 3.52 8 4.08 8 5.2V6m2 5.5v5m4-5v5M3 6h18m-2 0v11.2c0 1.68 0 2.52-.327 3.162a3 3 0 0 1-1.311 1.311C16.72 22 15.88 22 14.2 22H9.8c-1.68 0-2.52 0-3.162-.327a3 3 0 0 1-1.311-1.311C5 19.72 5 18.88 5 17.2V6" stroke-width="inherit"></path></svg> **Delete** in the custom domain row that you want to delete.
-4. In the displayed dialog box, confirm the deletion.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/project/data-service)ページに移動します。
+2.  左側のペインで、対象のデータ アプリの名前をクリックして詳細を表示します。
+3.  **「カスタムドメインの管理」**領域で、 **「アクション」**列を見つけてクリックします。 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M16 6v-.8c0-1.12 0-1.68-.218-2.108a2 2 0 0 0-.874-.874C14.48 2 13.92 2 12.8 2h-1.6c-1.12 0-1.68 0-2.108.218a2 2 0 0 0-.874.874C8 3.52 8 4.08 8 5.2V6m2 5.5v5m4-5v5M3 6h18m-2 0v11.2c0 1.68 0 2.52-.327 3.162a3 3 0 0 1-1.311 1.311C16.72 22 15.88 22 14.2 22H9.8c-1.68 0-2.52 0-3.162-.327a3 3 0 0 1-1.311-1.311C5 19.72 5 18.88 5 17.2V6" stroke-width="inherit"></path></svg>削除するカスタム ドメインの行を**削除します**。
+4.  表示されたダイアログボックスで削除を確認します。

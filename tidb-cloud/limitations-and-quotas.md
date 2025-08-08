@@ -1,35 +1,35 @@
 ---
 title: TiDB Cloud Dedicated Limitations and Quotas
-summary: Learn the limitations and quotas in TiDB Cloud.
+summary: TiDB Cloudの制限と割り当てについて説明します。
 ---
 
-# TiDB Cloud Dedicated Limitations and Quotas
+# TiDB Cloud専用制限とクォータ {#tidb-cloud-dedicated-limitations-and-quotas}
 
-TiDB Cloud limits how many of each kind of component you can create in a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster, and the common usage limitations of TiDB. In addition, there are some organization-level quotas to limit the amount of resources created by users to prevent from creating more resources than you actually need. These tables outline limits and quotas.
+TiDB Cloud、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスター内で作成できる各コンポーネントの数と、TiDBの一般的な使用制限が制限されています。さらに、組織レベルのクォータによってユーザーが作成できるリソースの量を制限し、実際に必要な量を超えるリソースの作成を防ぐことができます。以下の表は、制限とクォータの概要を示しています。
 
-> **Note:**
+> **注記：**
 >
-> If any of these limits or quotas present a problem for your organization, please contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> これらの制限または割り当てが組織にとって問題となる場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
-## Cluster Limits
+## クラスタの制限 {#cluster-limits}
 
-| Component | Limit |
-|:-|:-|
-| Number of copies for each [data region](/tidb-cloud/tidb-cloud-glossary.md#region) | 3 |
-| Number of Availability Zones for a cross-zone deployment | 3 |
+| 成分                                                          | 制限 |
+| :---------------------------------------------------------- | :- |
+| [データ領域](/tidb-cloud/tidb-cloud-glossary.md#region)部あたりのコピー数 | 3  |
+| クロスゾーン展開のアベイラビリティゾーンの数                                      | 3  |
 
-> **Note:**
+> **注記：**
 >
-> If you want to learn more about common usage limitations of TiDB, please refer to [TiDB Limitations](https://docs.pingcap.com/tidb/stable/tidb-limitations).
+> TiDB の一般的な使用上の制限について詳しく知りたい場合は、 [TiDB の制限](https://docs.pingcap.com/tidb/stable/tidb-limitations)を参照してください。
 
-## Cluster Quotas
+## クラスタクォータ {#cluster-quotas}
 
-| Component | Quota (default) |
-|:-|:-|
-| Maximum number of total TiDB nodes for all clusters in your organization | 10 |
-| Maximum number of total TiKV nodes for all clusters in your organization | 15 |
-| Maximum number of total TiFlash nodes for all clusters in your organization | 5 |
+| 成分                            | クォータ（デフォルト） |
+| :---------------------------- | :---------- |
+| 組織内のすべてのクラスタの合計 TiDB ノードの最大数  | 10          |
+| 組織内のすべてのクラスタの合計 TiKV ノードの最大数  | 15          |
+| 組織内のすべてのクラスタの合計TiFlashノードの最大数 | 5           |
 
-> **Note:**
+> **注記：**
 >
-> If any of these limits or quotas present a problem for your organization, please contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> これらの制限または割り当てが組織にとって問題となる場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。

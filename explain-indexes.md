@@ -1,20 +1,18 @@
 ---
 title: Explain Statements That Use Indexes
-summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
+summary: TiDB のEXPLAINステートメントによって返される実行プラン情報について学習します。
 ---
 
-# Explain Statements That Use Indexes
+# インデックスを使用するステートメントを説明する {#explain-statements-that-use-indexes}
 
-TiDB supports several operators which make use of indexes to speed up query execution:
+TiDB は、インデックスを利用してクエリの実行を高速化するいくつかの演算子をサポートしています。
 
-+ [`IndexLookup`](#indexlookup)
-+ [`IndexReader`](#indexreader)
-+ [`Point_Get` and `Batch_Point_Get`](#point_get-and-batch_point_get)
-+ [`IndexFullScan`](#indexfullscan)
+-   [`IndexLookup`](#indexlookup)
+-   [`IndexReader`](#indexreader)
+-   [`Point_Get`と`Batch_Point_Get`](#point_get-and-batch_point_get)
+-   [`IndexFullScan`](#indexfullscan)
 
-The examples in this document are based on the following sample data:
-
-{{< copyable "sql" >}}
+このドキュメントの例は、次のサンプル データに基づいています。
 
 ```sql
 CREATE TABLE t1 (
@@ -30,11 +28,9 @@ INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1024), RANDOM_BYTES(1024) FROM t1 a JOI
 INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1024), RANDOM_BYTES(1024) FROM t1 a JOIN t1 b JOIN t1 c LIMIT 10000;
 ```
 
-## IndexLookup
+## インデックスルックアップ {#indexlookup}
 
-TiDB uses the `IndexLookup` operator when retrieving data from a secondary index. In this case, the following queries will all use the `IndexLookup` operator on the `intkey` index:
-
-{{< copyable "sql" >}}
+TiDBは、セカンダリインデックスからデータを取得する際に`IndexLookup`演算子を使用します。この場合、以下のクエリはすべて、 `intkey`インデックスに対して`IndexLookup`演算子を使用します。
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE intkey = 123;
@@ -91,14 +87,12 @@ EXPLAIN SELECT * FROM t1 WHERE intkey >= 99 AND intkey <= 103;
 3 rows in set (0.00 sec)
 ```
 
-The `IndexLookup` operator has two child nodes:
+`IndexLookup`演算子には 2 つの子ノードがあります。
 
-* The `├─IndexRangeScan_8(Build)` operator performs a range scan on the `intkey` index and retrieves the values of the internal `RowID` (for this table, the primary key).
-* The `└─TableRowIDScan_9(Probe)` operator then retrieves the full row from the table data.
+-   `├─IndexRangeScan_8(Build)`演算子は`intkey`インデックスの範囲スキャンを実行し、内部の`RowID` (このテーブルの場合は主キー) の値を取得します。
+-   次に、 `└─TableRowIDScan_9(Probe)`演算子はテーブル データから完全な行を取得します。
 
-Because an `IndexLookup` task requires two steps, the SQL Optimizer might choose the `TableFullScan` operator based on [statistics](/statistics.md) in scenarios where a large number of rows match. In the following example, a large number of rows match the condition of `intkey > 100`, and a `TableFullScan` is chosen:
-
-{{< copyable "sql" >}}
+`IndexLookup`タスクには2つのステップが必要なため、多数の行が一致するシナリオでは、SQLオプティマイザーは[統計](/statistics.md)に基づいて`TableFullScan`演算子を選択する可能性があります。次の例では、多数の行が`intkey > 100`条件に一致するため、 `TableFullScan`が選択されます。
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE intkey > 100;
@@ -115,9 +109,7 @@ EXPLAIN SELECT * FROM t1 WHERE intkey > 100;
 3 rows in set (0.00 sec)
 ```
 
-The `IndexLookup` operator can also be used to efficiently optimize `LIMIT` on an indexed column:
-
-{{< copyable "sql" >}}
+`IndexLookup`演算子は、インデックス付き列の`LIMIT`効率的に最適化するためにも使用できます。
 
 ```sql
 EXPLAIN SELECT * FROM t1 ORDER BY intkey DESC LIMIT 10;
@@ -136,13 +128,11 @@ EXPLAIN SELECT * FROM t1 ORDER BY intkey DESC LIMIT 10;
 
 ```
 
-In the above example, the last 10 rows are read from the index `intkey`. These `RowID` values are then retrieved from the table data.
+上記の例では、インデックス`intkey`から最後の10行が読み取られます。その後、テーブルデータからこれらの`RowID`値が取得されます。
 
-## IndexReader
+## インデックスリーダー {#indexreader}
 
-TiDB supports the _covering index optimization_. If all rows can be retrieved from an index, TiDB will skip the second step that is usually required in an `IndexLookup`. Consider the following two examples:
-
-{{< copyable "sql" >}}
+TiDBは*カバーインデックス最適化*をサポートしています。インデックスからすべての行を取得できる場合、TiDBは通常`IndexLookup`で必要な2番目のステップを省略します。次の2つの例を考えてみましょう。
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE intkey = 123;
@@ -169,13 +159,11 @@ EXPLAIN SELECT id FROM t1 WHERE intkey = 123;
 3 rows in set (0.00 sec)
 ```
 
-Because `id` is also the internal `RowID`, it is stored in the `intkey` index. After using the `intkey` index as part of `└─IndexRangeScan_5`, the value of the `RowID` can be returned directly.
+`id`内部的には`RowID`でもあるため、インデックス`intkey`に格納されます。インデックス`intkey`を`└─IndexRangeScan_5`の一部として使用することで、インデックス`RowID`の値を直接返すことができます。
 
-## Point_Get and Batch_Point_Get
+## Point_Get と Batch_Point_Get {#point-get-and-batch-point-get}
 
-TiDB uses the `Point_Get` or `Batch_Point_Get` operator when retrieving data directly from a primary key or unique key. These operators are more efficient than `IndexLookup`. For example:
-
-{{< copyable "sql" >}}
+TiDBは、主キーまたは一意キーから直接データを取得する際に、 `Point_Get`または`Batch_Point_Get`演算子を使用します。これらの演算子は`IndexLookup`よりも効率的です。例えば、
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE id = 1234;
@@ -226,11 +214,9 @@ Query OK, 0 rows affected (0.37 sec)
 1 row in set (0.00 sec)
 ```
 
-## IndexFullScan
+## インデックスフルスキャン {#indexfullscan}
 
-Because indexes are ordered, the `IndexFullScan` operator can be used to optimize common queries such as the `MIN` or `MAX` values for an indexed value:
-
-{{< copyable "sql" >}}
+インデックスは順序付けられているため、 `IndexFullScan`演算子を使用して、インデックス付けされた値の`MIN`または`MAX`値などの一般的なクエリを最適化できます。
 
 ```sql
 EXPLAIN SELECT MIN(intkey) FROM t1;
@@ -261,11 +247,9 @@ EXPLAIN SELECT MAX(intkey) FROM t1;
 5 rows in set (0.00 sec)
 ```
 
-In the above statements, an `IndexFullScan` task is performed on each TiKV Region. Despite the name `FullScan`, only the first row needs to be read (`└─Limit_28`). Each TiKV Region returns its `MIN` or `MAX` value to TiDB, which then performs Stream Aggregation to filter for a single row. Stream Aggregation with the aggregation function `MAX` or `MIN` also ensures that `NULL` is returned if the table is empty.
+上記の文では、各TiKVリージョンに対してタスク`IndexFullScan`が実行されます。3 `FullScan`名前にもかかわらず、読み取る必要があるのは最初の行（ `└─Limit_28` ）のみです。各TiKVリージョンは`MIN`または`MAX`値をTiDBに返し、TiDBはストリーム集計を実行して単一行をフィルタリングします。また、集約関数`MAX`または`MIN`使用したストリーム集計により、テーブルが空の場合に`NULL`返されることも保証されます。
 
-By contrast, executing the `MIN` function on an unindexed value will result in `TableFullScan`. The query will require all rows to be scanned in TiKV, but a `TopN` calculation is performed to ensure each TiKV Region only returns one row to TiDB. Although `TopN` prevents excessive rows from being transferred between TiKV and TiDB, this statement is still considered far less efficient than the above example where `MIN` is able to make use of an index.
-
-{{< copyable "sql" >}}
+対照的に、インデックスなしの値に対して関数`MIN`実行すると、結果は`TableFullScan`になります。このクエリではTiKV内のすべての行をスキャンする必要がありますが、各TiKVリージョンがTiDBに1行のみを返すように、 `TopN`計算が実行されます。 `TopN` TiKVとTiDB間で過剰な行が転送されるのを防ぎますが、この文は、インデックスを利用できる上記の例`MIN`よりもはるかに効率が悪いと考えられます。
 
 ```sql
 EXPLAIN SELECT MIN(pad1) FROM t1;
@@ -285,9 +269,7 @@ EXPLAIN SELECT MIN(pad1) FROM t1;
 6 rows in set (0.00 sec)
 ```
 
-The following statements will use the `IndexFullScan` operator to scan every row in the index:
-
-{{< copyable "sql" >}}
+次のステートメントは、 `IndexFullScan`演算子を使用してインデックス内のすべての行をスキャンします。
 
 ```sql
 EXPLAIN SELECT SUM(intkey) FROM t1;
@@ -316,11 +298,9 @@ EXPLAIN SELECT AVG(intkey) FROM t1;
 4 rows in set (0.00 sec)
 ```
 
-In the above examples, `IndexFullScan` is more efficient than `TableFullScan` because the width of the value in the `(intkey + RowID)` index is less than the width of the full row.
+上記の例では、インデックス`(intkey + RowID)`値の幅が行全体の幅よりも狭いため、 `IndexFullScan`が`TableFullScan`よりも効率的です。
 
-The following statement does not support using an `IndexFullScan` operator because additional columns are required from the table:
-
-{{< copyable "sql" >}}
+次のステートメントでは、テーブルから追加の列が必要であるため、 `IndexFullScan`演算子の使用はサポートされません。
 
 ```sql
 EXPLAIN SELECT AVG(intkey), ANY_VALUE(pad1) FROM t1;

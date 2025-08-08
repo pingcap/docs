@@ -1,208 +1,218 @@
 ---
 title: Connect to TiDB with Visual Studio Code
-summary: Learn how to connect to TiDB using Visual Studio Code or GitHub Codespaces.
+summary: Visual Studio Code または GitHub Codespaces を使用して TiDB に接続する方法を学習します。
 ---
 
-# Connect to TiDB with Visual Studio Code
+# Visual Studio Code で TiDB に接続する {#connect-to-tidb-with-visual-studio-code}
 
-TiDB is a MySQL-compatible database, and [Visual Studio Code (VS Code)](https://code.visualstudio.com/) is a lightweight but powerful source code editor. This tutorial uses the [SQLTools](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools) extension which supports TiDB as an [official driver](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql).
+TiDBはMySQL互換のデータベースであり、 [ビジュアルスタジオコード（VSコード）](https://code.visualstudio.com/)軽量ながらも強力なソースコードエディタです。このチュートリアルでは、TiDBを[公式ドライバー](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql)としてサポートする[SQLツール](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)拡張機能を使用します。
 
-In this tutorial, you can learn how to connect to your TiDB cluster using Visual Studio Code.
+このチュートリアルでは、Visual Studio Code を使用して TiDB クラスターに接続する方法を学習します。
 
-> **Note:**
+> **注記：**
 >
-> - This tutorial is compatible with {{{ .starter }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
-> - This tutorial also works with Visual Studio Code Remote Development environments, such as [GitHub Codespaces](https://github.com/features/codespaces), [Visual Studio Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers), and [Visual Studio Code WSL](https://code.visualstudio.com/docs/remote/wsl).
+> -   このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed と互換性があります。
+> -   このチュートリアルは、 [GitHub コードスペース](https://github.com/features/codespaces) 、 [Visual Studio Code 開発コンテナ](https://code.visualstudio.com/docs/devcontainers/containers) 、 [ビジュアルスタジオコード WSL](https://code.visualstudio.com/docs/remote/wsl)などの Visual Studio Code リモート開発環境でも機能します。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-To complete this tutorial, you need:
+このチュートリアルを完了するには、次のものが必要です。
 
-- [Visual Studio Code](https://code.visualstudio.com/#alt-downloads) **1.72.0** or later versions.
-- [SQLTools MySQL/MariaDB/TiDB](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql) extension for Visual Studio Code. To install it, you can use one of the following methods:
-    - Click <a href="vscode:extension/mtxr.sqltools-driver-mysql">this link</a>  to launch VS Code and install the extension directly.
-    - Navigate to [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql) and click **Install**.
-    - On the **Extensions** tab of your VS Code, search for `mtxr.sqltools-driver-mysql` to get the **SQLTools MySQL/MariaDB/TiDB** extension, and then click **Install**.
-- A TiDB cluster.
+-   [ビジュアルスタジオコード](https://code.visualstudio.com/#alt-downloads) **1.72.0**以降のバージョン。
+-   Visual Studio Code の[SQLツール MySQL/MariaDB/TiDB](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql)拡張機能。インストールするには、以下のいずれかの方法があります。
+    -   <a href="vscode:extension/mtxr.sqltools-driver-mysql">このリンク</a>をクリックして VS Code を起動し、拡張機能を直接インストールします。
+    -   [VS Code マーケットプレイス](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql)に移動して、 **[インストール]**をクリックします。
+    -   VS Code の**拡張機能**タブで、 `mtxr.sqltools-driver-mysql`検索して**SQLTools MySQL/MariaDB/TiDB**拡張機能を取得し、**インストールを**クリックします。
+-   TiDB クラスター。
 
 <CustomContent platform="tidb">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**TiDB クラスターがない場合は、次のように作成できます。**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**TiDB クラスターがない場合は、次のように作成できます。**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 
-## Connect to TiDB
+## TiDBに接続する {#connect-to-tidb}
 
-Connect to your TiDB cluster depending on the TiDB deployment option you have selected.
+選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
-<div label="{{{ .starter }}}">
+<div label="TiDB Cloud Serverless">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    - **Connection Type** is set to `Public`.
-    - **Branch** is set to `main`.
-    - **Connect With** is set to `VS Code`.
-    - **Operating System** matches your environment.
+    -   **接続タイプ**は`Public`に設定されています。
 
-    > **Tip:**
+    -   **ブランチ**は`main`に設定されています。
+
+    -   **Connect With が**`VS Code`に設定されています。
+
+    -   **オペレーティング システムは**環境に適合します。
+
+    > **ヒント：**
     >
-    > If your VS Code is running on a remote development environment, select the remote operating system from the list. For example, if you are using Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution. This is not necessary if you are using GitHub Codespaces.
+    > VS Code がリモート開発環境で実行されている場合は、リストからリモートオペレーティングシステムを選択してください。例えば、Windows Subsystem for Linux (WSL) を使用している場合は、対応する Linux ディストリビューションに切り替えてください。GitHub Codespaces を使用している場合は、この操作は不要です。
 
-4. Click **Generate Password** to create a random password.
+4.  ランダムなパスワードを作成するには、 **「パスワードの生成」を**クリックします。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
 
-5. Launch VS Code and select the **SQLTools** extension on the navigation pane. Under the **CONNECTIONS** section, click **Add New Connection** and select **TiDB** as the database driver.
+5.  VS Codeを起動し、ナビゲーションペインで**SQLTools**拡張機能を選択します。 **「接続」**セクションで**「新しい接続の追加」**をクリックし、データベースドライバーとして**TiDBを**選択します。
 
     ![VS Code SQLTools: add new connection](/media/develop/vsc-sqltools-add-new-connection.jpg)
 
-6. In the setting pane, configure the following connection parameters:
+6.  設定ペインで、次の接続パラメータを構成します。
 
-    - **Connection name**: give this connection a meaningful name.
-    - **Connection group**: (optional) give this group of connections a meaningful name. Connections with the same group name will be grouped together.
-    - **Connect using**: select **Server and Port**.
-    - **Server Address**: enter the `HOST` parameter from the TiDB Cloud connection dialog.
-    - **Port**: enter the `PORT` parameter from the TiDB Cloud connection dialog.
-    - **Database**: enter the database that you want to connect to.
-    - **Username**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
-    - **Password mode**: select **SQLTools Driver Credentials**.
-    - In the **MySQL driver specific options** area, configure the following parameters:
+    -   **接続名**: この接続に意味のある名前を付けます。
+    -   **接続グループ**: (オプション) この接続グループに分かりやすい名前を付けます。同じグループ名の接続はグループ化されます。
+    -   **接続方法**:**サーバーおよびポート**を選択します。
+    -   **サーバー アドレス**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    -   **データベース**: 接続するデータベースを入力します。
+    -   **ユーザー名**: TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力します。
+    -   **パスワード モード**: **SQLToolsDriver資格情報**を選択します。
+    -   **MySQL ドライバー固有のオプション**領域で、次のパラメータを設定します。
 
-        - **Authentication Protocol**: select **default**.
-        - **SSL**: select **Enabled**. {{{ .starter }}} requires a secure connection. In the **SSL Options (node.TLSSocket)** area, configure the **Certificate Authority (CA) Certificate File** field as the `CA` parameter from the TiDB Cloud connection dialog.
+        -   **認証プロトコル**:**デフォルト**を選択します。
+        -   **SSL** ：**有効を**選択します。TiDB TiDB Cloud Serverlessでは安全な接続が必要です。 **「SSLオプション（node.TLSSocket）」**領域で、 **「証明機関（CA）証明書ファイル」**フィールドをTiDB Cloud接続ダイアログの`CA`のパラメータとして設定します。
 
-            > **Note:**
+            > **注記：**
             >
-            > If you are running on Windows or GitHub Codespaces, you can leave **SSL** blank. By default SQLTools trusts well-known CAs curated by Let's Encrypt. For more information, see [{{{ .starter }}} root certificate management](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management).
+            > WindowsまたはGitHub Codespacesで実行している場合は、 **SSLを**空白のままにすることができます。SQLToolsはデフォルトでLet&#39;s Encryptが管理する既知のCAを信頼します。詳細については、 [TiDB Cloudサーバーレスルート証明書管理](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management)ご覧ください。
 
-    ![VS Code SQLTools: configure connection settings for {{{ .starter }}}](/media/develop/vsc-sqltools-connection-config-serverless.jpg)
+    ![VS Code SQLTools: configure connection settings for TiDB Cloud Serverless](/media/develop/vsc-sqltools-connection-config-serverless.jpg)
 
-7. Click **TEST CONNECTION** to validate the connection to the {{{ .starter }}} cluster.
+7.  **「テスト接続」**をクリックして、 TiDB Cloud Serverless クラスターへの接続を検証します。
 
-    1. In the pop-up window, click **Allow**.
-    2. In the **SQLTools Driver Credentials** dialog, enter the password you created in step 4.
+    1.  ポップアップウィンドウで、 **[許可]**をクリックします。
+    2.  **SQLToolsDriver資格情報**ダイアログで、手順 4 で作成したパスワードを入力します。
 
-        ![VS Code SQLTools: enter password to connect to {{{ .starter }}}](/media/develop/vsc-sqltools-password.jpg)
+        ![VS Code SQLTools: enter password to connect to TiDB Cloud Serverless](/media/develop/vsc-sqltools-password.jpg)
 
-8. If the connection test is successful, you can see the **Successfully connected!** message. Click **SAVE CONNECTION** to save the connection configuration.
+8.  接続テストが成功すると、「**正常に接続されました！」という**メッセージが表示されます。 **「接続を保存」**をクリックして接続設定を保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. In the connection dialog, select **Public** from the **Connection Type** drop-down list, and then click **CA cert** to download the CA certificate.
+3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
+    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
-    In addition to the **Public** connection type, TiDB Cloud Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
+    TiDB Cloud Dedicatedは、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPCピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ご覧ください。
 
-4. Launch VS Code and select the **SQLTools** extension on the navigation pane. Under the **CONNECTIONS** section, click **Add New Connection** and select **TiDB** as the database driver.
+4.  VS Codeを起動し、ナビゲーションペインで**SQLTools**拡張機能を選択します。 **「接続」**セクションで**「新しい接続の追加」**をクリックし、データベースドライバーとして**TiDBを**選択します。
 
     ![VS Code SQLTools: add new connection](/media/develop/vsc-sqltools-add-new-connection.jpg)
 
-5. In the setting pane, configure the following connection parameters:
+5.  設定ペインで、次の接続パラメータを構成します。
 
-    - **Connection name**: give this connection a meaningful name.
-    - **Connection group**: (optional) give this group of connections a meaningful name. Connections with the same group name will be grouped together.
-    - **Connect using**: select **Server and Port**.
-    - **Server Address**: enter the `host` parameter from the TiDB Cloud connection dialog.
-    - **Port**: enter the `port` parameter from the TiDB Cloud connection dialog.
-    - **Database**: enter the database that you want to connect to.
-    - **Username**: enter the `user` parameter from the TiDB Cloud connection dialog.
-    - **Password mode**: select **SQLTools Driver Credentials**.
-    - In the **MySQL driver specific options** area, configure the following parameters:
+    -   **接続名**: この接続に意味のある名前を付けます。
+    -   **接続グループ**: (オプション) この接続グループに分かりやすい名前を付けます。同じグループ名の接続はグループ化されます。
+    -   **接続方法**:**サーバーおよびポート**を選択します。
+    -   **サーバー アドレス**: TiDB Cloud接続ダイアログから`host`パラメータを入力します。
+    -   **ポート**: TiDB Cloud接続ダイアログから`port`パラメータを入力します。
+    -   **データベース**: 接続するデータベースを入力します。
+    -   **ユーザー名**: TiDB Cloud接続ダイアログから`user`パラメータを入力します。
+    -   **パスワード モード**: **SQLToolsDriver資格情報**を選択します。
+    -   **MySQL ドライバー固有のオプション**領域で、次のパラメータを設定します。
 
-        - **Authentication Protocol**: select **default**.
-        - **SSL**: select **Disabled**.
+        -   **認証プロトコル**:**デフォルト**を選択します。
+        -   **SSL** : **「無効」**を選択します。
 
     ![VS Code SQLTools: configure connection settings for TiDB Cloud Dedicated](/media/develop/vsc-sqltools-connection-config-dedicated.jpg)
 
-6. Click **TEST CONNECTION** to validate the connection to the TiDB Cloud Dedicated cluster.
+6.  **「テスト接続」**をクリックして、 TiDB Cloud Dedicated クラスターへの接続を検証します。
 
-    1. In the pop-up window, click **Allow**.
-    2. In the **SQLTools Driver Credentials** dialog, enter the password of the TiDB Cloud Dedicated cluster.
+    1.  ポップアップウィンドウで、 **[許可]**をクリックします。
+    2.  **SQLToolsDriver資格情報**ダイアログで、 TiDB Cloud Dedicated クラスターのパスワードを入力します。
 
     ![VS Code SQLTools: enter password to connect to TiDB Cloud Dedicated](/media/develop/vsc-sqltools-password.jpg)
 
-7. If the connection test is successful, you can see the **Successfully connected!** message. Click **SAVE CONNECTION** to save the connection configuration.
+7.  接続テストが成功すると、「**正常に接続されました！」という**メッセージが表示されます。 **「接続を保存」**をクリックして接続設定を保存します。
 
 </div>
 <div label="TiDB Self-Managed">
 
-1. Launch VS Code and select the **SQLTools** extension on the navigation pane. Under the **CONNECTIONS** section, click **Add New Connection** and select **TiDB** as the database driver.
+1.  VS Codeを起動し、ナビゲーションペインで**SQLTools**拡張機能を選択します。 **「接続」**セクションで**「新しい接続の追加」**をクリックし、データベースドライバーとして**TiDBを**選択します。
 
     ![VS Code SQLTools: add new connection](/media/develop/vsc-sqltools-add-new-connection.jpg)
 
-2. In the setting pane, configure the following connection parameters:
+2.  設定ペインで、次の接続パラメータを構成します。
 
-    - **Connection name**: give this connection a meaningful name.
-    - **Connection group**: (optional) give this group of connections a meaningful name. Connections with the same group name will be grouped together.
-    - **Connect using**: select **Server and Port**.
-    - **Server Address**: enter the IP address or domain name of your TiDB Self-Managed cluster.
-    - **Port**: enter the port number of your TiDB Self-Managed cluster.
-    - **Database**: enter the database that you want to connect to.
-    - **Username**: enter the username to use to connect to your TiDB Self-Managed cluster.
-    - **Password mode**:
+    -   **接続名**: この接続に意味のある名前を付けます。
 
-        - If the password is empty, select **Use empty password**.
-        - Otherwise, select **SQLTools Driver Credentials**.
+    -   **接続グループ**: (オプション) この接続グループに分かりやすい名前を付けます。同じグループ名の接続はグループ化されます。
 
-    - In the **MySQL driver specific options** area, configure the following parameters:
+    -   **接続方法**:**サーバーおよびポート**を選択します。
 
-        - **Authentication Protocol**: select **default**.
-        - **SSL**: select **Disabled**.
+    -   **サーバー アドレス**: TiDB セルフマネージド クラスターの IP アドレスまたはドメイン名を入力します。
+
+    -   **ポート**: TiDB セルフマネージド クラスターのポート番号を入力します。
+
+    -   **データベース**: 接続するデータベースを入力します。
+
+    -   **ユーザー名**: TiDB セルフマネージド クラスターに接続するために使用するユーザー名を入力します。
+
+    -   **パスワードモード**:
+
+        -   パスワードが空の場合は、 **「空のパスワードを使用する」**を選択します。
+        -   それ以外の場合は、 **SQLToolsDriver資格情報**を選択します。
+
+    -   **MySQL ドライバー固有のオプション**領域で、次のパラメータを設定します。
+
+        -   **認証プロトコル**:**デフォルト**を選択します。
+        -   **SSL** : **「無効」**を選択します。
 
     ![VS Code SQLTools: configure connection settings for TiDB Self-Managed](/media/develop/vsc-sqltools-connection-config-self-hosted.jpg)
 
-3. Click **TEST CONNECTION** to validate the connection to the TiDB Self-Managed cluster.
+3.  **[テスト接続]**をクリックして、TiDB セルフマネージド クラスターへの接続を検証します。
 
-    If the password is not empty, click **Allow** in the pop-up window, and then enter the password of the TiDB Self-Managed cluster.
+    パスワードが空でない場合は、ポップアップ ウィンドウで**[許可]**をクリックし、TiDB セルフマネージド クラスターのパスワードを入力します。
 
     ![VS Code SQLTools: enter password to connect to TiDB Self-Managed](/media/develop/vsc-sqltools-password.jpg)
 
-4. If the connection test is successful, you can see the **Successfully connected!** message. Click **SAVE CONNECTION** to save the connection configuration.
+4.  接続テストが成功すると、「**正常に接続されました！」という**メッセージが表示されます。 **「接続を保存」**をクリックして接続設定を保存します。
 
 </div>
 </SimpleTab>
 
-## Next steps
+## 次のステップ {#next-steps}
 
-- Learn more usage of Visual Studio Code from [the documentation of Visual Studio Code](https://code.visualstudio.com/docs).
-- Learn more usage of VS Code SQLTools extension from [the documentation](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools) and [GitHub repository](https://github.com/mtxr/vscode-sqltools) of SQLTools.
-- Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
-- Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
+-   Visual Studio Code の使い方を[Visual Studio Codeのドキュメント](https://code.visualstudio.com/docs)から詳しく学びます。
+-   SQLTools の[ドキュメント](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)と[GitHubリポジトリ](https://github.com/mtxr/vscode-sqltools)から、VS Code SQLTools 拡張機能の詳細な使用方法を学習します。
+-   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
 
-## Need help?
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

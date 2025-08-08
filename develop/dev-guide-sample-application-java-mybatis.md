@@ -1,96 +1,99 @@
 ---
 title: Connect to TiDB with MyBatis
-summary: Learn how to connect to TiDB using MyBatis. This tutorial gives Java sample code snippets that work with TiDB using MyBatis.
+summary: MyBatisを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、MyBatisを使ってTiDBを操作するJavaサンプルコードを紹介します。
 ---
 
-# Connect to TiDB with MyBatis
+# MyBatisでTiDBに接続する {#connect-to-tidb-with-mybatis}
 
-TiDB is a MySQL-compatible database, and [MyBatis](https://mybatis.org/mybatis-3/index.html) is a popular open-source Java ORM.
+TiDB は MySQL 互換のデータベースであり、 [マイバティス](https://mybatis.org/mybatis-3/index.html)人気のオープンソースのJava ORM です。
 
-In this tutorial, you can learn how to use TiDB and MyBatis to accomplish the following tasks:
+このチュートリアルでは、TiDB と MyBatis を使用して次のタスクを実行する方法を学習します。
 
-- Set up your environment.
-- Connect to your TiDB cluster using MyBatis.
-- Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
+-   環境を設定します。
+-   MyBatis を使用して TiDB クラスターに接続します。
+-   アプリケーションをビルドして実行します。オプションで、基本的なCRUD操作用の[サンプルコードスニペット](#sample-code-snippets)見つけることもできます。
 
-> **Note:**
+> **注記：**
 >
-> This tutorial works with {{{ .starter }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed で機能します。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-To complete this tutorial, you need:
+このチュートリアルを完了するには、次のものが必要です。
 
-- **Java Development Kit (JDK) 17** or higher. You can choose [OpenJDK](https://openjdk.org/) or [Oracle JDK](https://www.oracle.com/hk/java/technologies/downloads/) based on your business and personal requirements.
-- [Maven](https://maven.apache.org/install.html) **3.8** or higher.
-- [Git](https://git-scm.com/downloads).
-- A TiDB cluster.
+-   **Java Development Kit (JDK) 17**以上。ビジネスおよび個人の要件に応じて、 [オープンJDK](https://openjdk.org/)または[オラクル JDK](https://www.oracle.com/hk/java/technologies/downloads/)選択できます。
+-   [メイヴン](https://maven.apache.org/install.html) **3.8**以上。
+-   [ギット](https://git-scm.com/downloads) 。
+-   TiDB クラスター。
 
 <CustomContent platform="tidb">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**TiDB クラスターがない場合は、次のように作成できます。**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**TiDB クラスターがない場合は、次のように作成できます。**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 
-## Run the sample app to connect to TiDB
+## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
-This section demonstrates how to run the sample application code and connect to TiDB.
+このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を説明します。
 
-### Step 1: Clone the sample app repository
+### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
-Run the following commands in your terminal window to clone the sample code repository:
+サンプル コード リポジトリのクローンを作成するには、ターミナル ウィンドウで次のコマンドを実行します。
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-java-mybatis-quickstart.git
 cd tidb-java-mybatis-quickstart
 ```
 
-### Step 2: Configure connection information
+### ステップ2: 接続情報を構成する {#step-2-configure-connection-information}
 
-Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
+選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
-<div label="{{{ .starter }}}">
+<div label="TiDB Cloud Serverless">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    - **Connection Type** is set to `Public`
-    - **Branch** is set to `main`
-    - **Connect With** is set to `General`
-    - **Operating System** matches your environment.
+    -   **接続タイプ**は`Public`に設定されています
 
-    > **Tip:**
+    -   **ブランチ**は`main`に設定されています
+
+    -   **接続先が**`General`に設定されています
+
+    -   **オペレーティング システムは**環境に適合します。
+
+    > **ヒント：**
     >
-    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
+    > プログラムが Windows Subsystem for Linux (WSL) で実行されている場合は、対応する Linux ディストリビューションに切り替えます。
 
-4. Click **Generate Password** to create a random password.
+4.  ランダムなパスワードを作成するには、 **「パスワードの生成」を**クリックします。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
 
-5. Run the following command to copy `env.sh.example` and rename it to `env.sh`:
+5.  次のコマンドを実行して`env.sh.example`コピーし、名前を`env.sh`に変更します。
 
     ```shell
     cp env.sh.example env.sh
     ```
 
-6. Copy and paste the corresponding connection string into the `env.sh` file. The example result is as follows:
+6.  対応する接続文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
@@ -101,32 +104,32 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     export USE_SSL='true'
     ```
 
-    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
+    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに置き換えてください。
 
-    {{{ .starter }}} requires a secure connection. Therefore, you need to set the value of `USE_SSL` to `true`.
+    TiDB Cloud Serverless は安全な接続を必要とします。そのため、 `USE_SSL`値を`true`に設定する必要があります。
 
-7. Save the `env.sh` file.
+7.  `env.sh`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. In the connection dialog, select **Public** from the **Connection Type** drop-down list, and then click **CA cert** to download the CA certificate.
+3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
+    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
-    In addition to the **Public** connection type, TiDB Cloud Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
+    TiDB Cloud Dedicatedは、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPCピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ご覧ください。
 
-4. Run the following command to copy `env.sh.example` and rename it to `env.sh`:
+4.  次のコマンドを実行して`env.sh.example`コピーし、名前を`env.sh`に変更します。
 
     ```shell
     cp env.sh.example env.sh
     ```
 
-5. Copy and paste the corresponding connection string into the `env.sh` file. The example result is as follows:
+5.  対応する接続文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
@@ -137,20 +140,20 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     export USE_SSL='false'
     ```
 
-    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
+    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに置き換えてください。
 
-6. Save the `env.sh` file.
+6.  `env.sh`ファイルを保存します。
 
 </div>
 <div label="TiDB Self-Managed">
 
-1. Run the following command to copy `env.sh.example` and rename it to `env.sh`:
+1.  次のコマンドを実行して`env.sh.example`コピーし、名前を`env.sh`に変更します。
 
     ```shell
     cp env.sh.example env.sh
     ```
 
-2. Copy and paste the corresponding connection string into the `env.sh` file. The example result is as follows:
+2.  対応する接続文字列をコピーして、 `env.sh`ファイルに貼り付けます。結果の例は次のとおりです。
 
     ```shell
     export TIDB_HOST='{host}'
@@ -161,32 +164,32 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     export USE_SSL='false'
     ```
 
-    Be sure to replace the placeholders `{}` with the connection parameters, and set `USE_SSL` to `false`. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
+    プレースホルダー`{}`接続パラメータに置き換え、 `USE_SSL`を`false`に設定してください。TiDBをローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空です。
 
-3. Save the `env.sh` file.
+3.  `env.sh`ファイルを保存します。
 
 </div>
 </SimpleTab>
 
-### Step 3: Run the code and check the result
+### ステップ3: コードを実行して結果を確認する {#step-3-run-the-code-and-check-the-result}
 
-1. Execute the following command to run the sample code:
+1.  サンプル コードを実行するには、次のコマンドを実行します。
 
     ```shell
     make
     ```
 
-2. Check the [Expected-Output.txt](https://github.com/tidb-samples/tidb-java-mybatis-quickstart/blob/main/Expected-Output.txt) to see if the output matches.
+2.  [期待出力.txt](https://github.com/tidb-samples/tidb-java-mybatis-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
 
-## Sample code snippets
+## サンプルコードスニペット {#sample-code-snippets}
 
-You can refer to the following sample code snippets to complete your own application development.
+次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了することができます。
 
-For complete sample code and how to run it, check out the [tidb-samples/tidb-java-mybatis-quickstart](https://github.com/tidb-samples/tidb-java-mybatis-quickstart) repository.
+完全なサンプル コードとその実行方法については、 [tidb-samples/tidb-java-mybatis-クイックスタート](https://github.com/tidb-samples/tidb-java-mybatis-quickstart)リポジトリを参照してください。
 
-### Connect to TiDB
+### TiDBに接続する {#connect-to-tidb}
 
-Edit the MyBatis configuration file `mybatis-config.xml`:
+MyBatis設定ファイル`mybatis-config.xml`を編集します。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -220,7 +223,7 @@ Edit the MyBatis configuration file `mybatis-config.xml`:
 </configuration>
 ```
 
-Be sure to replace `${tidb_jdbc_url}`, `${tidb_user}`, and `${tidb_password}` with the actual values of your TiDB cluster. Also, replace `${mapper_location}` with the path of your mapper XML configuration file. For multiple mapper XML configuration files, you need to add a `<mapper/>` tag for each. Then, define the following function:
+`${tidb_jdbc_url}` `${tidb_user}` TiDBクラスタの実際の値に置き換えてください。また、 `${mapper_location}` `${tidb_password}` XML設定ファイルのパスに置き換えてください。マッパーXML設定ファイルが複数ある場合は、それぞれに`<mapper/>`タグを追加する必要があります。次に、以下の関数を定義します。
 
 ```java
 public SqlSessionFactory getSessionFactory() {
@@ -229,9 +232,9 @@ public SqlSessionFactory getSessionFactory() {
 }
 ```
 
-### Insert data
+### データを挿入する {#insert-data}
 
-Add a node in the mapper XML and add a function with the same name in the interface class configured in the `mapper.namespace` attribute of the XML configuration file:
+マッパー XML にノードを追加し、XML 構成ファイルの`mapper.namespace`属性で構成されたインターフェイス クラスに同じ名前の関数を追加します。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -244,11 +247,11 @@ Add a node in the mapper XML and add a function with the same name in the interf
 </mapper>
 ```
 
-For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
+詳細については[データを挿入する](/develop/dev-guide-insert-data.md)を参照してください。
 
-### Query data
+### クエリデータ {#query-data}
 
-Add a node in the mapper XML and add a function with the same name in the interface class configured in the `mapper.namespace` attribute of the XML configuration file. Specifically, if you use `resultMap` as the return type for MyBatis query functions, make sure that the `<resultMap/>` node is configured correctly.
+マッパーXMLにノードを追加し、XML設定ファイルの`mapper.namespace`属性で設定されたインターフェースクラスに同じ名前の関数を追加します。特に、MyBatisクエリ関数の戻り値の型として`resultMap`使用する場合は、 `<resultMap/>`ノードが正しく設定されていることを確認してください。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -270,11 +273,11 @@ Add a node in the mapper XML and add a function with the same name in the interf
 </mapper>
 ```
 
-For more information, refer to [Query data](/develop/dev-guide-get-data-from-single-table.md).
+詳細については[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)を参照してください。
 
-### Update data
+### データを更新する {#update-data}
 
-Add a node in the mapper XML and add a function with the same name in the interface class configured in the `mapper.namespace` attribute of the XML configuration file:
+マッパー XML にノードを追加し、XML 構成ファイルの`mapper.namespace`属性で構成されたインターフェイス クラスに同じ名前の関数を追加します。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -289,11 +292,11 @@ Add a node in the mapper XML and add a function with the same name in the interf
 </mapper>
 ```
 
-For more information, refer to [Update data](/develop/dev-guide-update-data.md).
+詳細については[データを更新する](/develop/dev-guide-update-data.md)を参照してください。
 
-### Delete data
+### データを削除する {#delete-data}
 
-Add a node in the mapper XML and add a function with the same name in the interface class configured in the `mapper.namespace` attribute of the XML configuration file:
+マッパー XML にノードを追加し、XML 構成ファイルの`mapper.namespace`属性で構成されたインターフェイス クラスに同じ名前の関数を追加します。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -306,25 +309,25 @@ Add a node in the mapper XML and add a function with the same name in the interf
 </mapper>
 ```
 
-For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
+詳細については[データを削除する](/develop/dev-guide-delete-data.md)を参照してください。
 
-## Next steps
+## 次のステップ {#next-steps}
 
-- Learn more usage of MyBatis from [the documentation of MyBatis](http://www.mybatis.org/mybatis-3/).
-- Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
-- Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
-- Learn through the course for Java developers: [Working with TiDB from Java](https://eng.edu.pingcap.com/catalog/info/id:212).
+-   MyBatis の使い方を[MyBatisのドキュメント](http://www.mybatis.org/mybatis-3/)から詳しく学びます。
+-   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
+-   Java開発者向けコースを通じて学習します: [JavaからTiDBを操作する](https://eng.edu.pingcap.com/catalog/info/id:212) .
 
-## Need help?
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

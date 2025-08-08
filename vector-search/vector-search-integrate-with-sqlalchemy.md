@@ -1,72 +1,72 @@
 ---
 title: Integrate TiDB Vector Search with SQLAlchemy
-summary: Learn how to integrate TiDB Vector Search with SQLAlchemy to store embeddings and perform semantic searches.
+summary: TiDB Vector Search を SQLAlchemy と統合して埋め込みを保存し、セマンティック検索を実行する方法を学習します。
 ---
 
-# Integrate TiDB Vector Search with SQLAlchemy
+# TiDBベクトル検索をSQLAlchemyと統合する {#integrate-tidb-vector-search-with-sqlalchemy}
 
-This tutorial walks you through how to use [SQLAlchemy](https://www.sqlalchemy.org/) to interact with [TiDB Vector Search](/vector-search/vector-search-overview.md), store embeddings, and perform vector search queries.
+このチュートリアルでは、 [SQLアルケミー](https://www.sqlalchemy.org/)使用して[TiDBベクトル検索](/vector-search/vector-search-overview.md)と対話し、埋め込みを保存し、ベクトル検索クエリを実行する方法について説明します。
 
 <CustomContent platform="tidb">
 
-> **Warning:**
+> **警告：**
 >
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> ベクトル検索機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを見つけた場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
 </CustomContent>
 
-> **Note:**
+> **注記：**
 >
-> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-To complete this tutorial, you need:
+このチュートリアルを完了するには、次のものが必要です。
 
-- [Python 3.8 or higher](https://www.python.org/downloads/) installed.
-- [Git](https://git-scm.com/downloads) installed.
-- A TiDB cluster.
+-   [Python 3.8以上](https://www.python.org/downloads/)個インストールされました。
+-   [ギット](https://git-scm.com/downloads)個インストールされました。
+-   TiDB クラスター。
 
 <CustomContent platform="tidb">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**TiDB クラスターがない場合は、次のように作成できます。**
 
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
-- Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+-   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
+-   [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**TiDB クラスターがない場合は、次のように作成できます。**
 
-- (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster of v8.4.0 or a later version.
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従って、v8.4.0 以降のバージョンのローカル クラスターを作成します。
 
 </CustomContent>
 
-## Run the sample app
+## サンプルアプリを実行する {#run-the-sample-app}
 
-You can quickly learn about how to integrate TiDB Vector Search with SQLAlchemy by following the steps below.
+以下の手順に従って、TiDB Vector Search を SQLAlchemy と統合する方法を簡単に学習できます。
 
-### Step 1. Clone the repository
+### ステップ1. リポジトリのクローンを作成する {#step-1-clone-the-repository}
 
-Clone the `tidb-vector-python` repository to your local machine:
+`tidb-vector-python`リポジトリをローカル マシンにクローンします。
 
 ```shell
 git clone https://github.com/pingcap/tidb-vector-python.git
 ```
 
-### Step 2. Create a virtual environment
+### ステップ2. 仮想環境を作成する {#step-2-create-a-virtual-environment}
 
-Create a virtual environment for your project:
+プロジェクト用の仮想環境を作成します。
 
 ```bash
 cd tidb-vector-python/examples/orm-sqlalchemy-quickstart
@@ -74,53 +74,56 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### Step 3. Install the required dependencies
+### ステップ3. 必要な依存関係をインストールする {#step-3-install-the-required-dependencies}
 
-Install the required dependencies for the demo project:
+デモ プロジェクトに必要な依存関係をインストールします。
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Alternatively, you can install the following packages for your project:
+あるいは、プロジェクトに次のパッケージをインストールすることもできます。
 
 ```bash
 pip install pymysql python-dotenv sqlalchemy tidb-vector
 ```
 
-### Step 4. Configure the environment variables
+### ステップ4.環境変数を設定する {#step-4-configure-the-environment-variables}
 
-Configure the environment variables depending on the TiDB deployment option you've selected.
+選択した TiDB デプロイメント オプションに応じて環境変数を構成します。
 
 <SimpleTab>
-<div label="{{{ .starter }}}">
+<div label="TiDB Cloud Serverless">
 
-For a {{{ .starter }}} cluster, take the following steps to obtain the cluster connection string and configure environment variables:
+TiDB Cloud Serverless クラスターの場合、次の手順に従ってクラスター接続文字列を取得し、環境変数を構成します。
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. Ensure the configurations in the connection dialog match your environment.
+3.  接続ダイアログの構成が環境と一致していることを確認します。
 
-    - **Connection Type** is set to `Public`.
-    - **Branch** is set to `main`.
-    - **Connect With** is set to `SQLAlchemy`.
-    - **Operating System** matches your environment.
+    -   **接続タイプ**は`Public`に設定されています。
 
-    > **Tip:**
+    -   **ブランチ**は`main`に設定されています。
+
+    -   **Connect With が**`SQLAlchemy`に設定されています。
+
+    -   **オペレーティング システムは**環境に適合します。
+
+    > **ヒント：**
     >
-    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
+    > プログラムが Windows Subsystem for Linux (WSL) で実行されている場合は、対応する Linux ディストリビューションに切り替えます。
 
-4. Click the **PyMySQL** tab and copy the connection string.
+4.  **PyMySQL**タブをクリックし、接続文字列をコピーします。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have not set a password yet, click **Generate Password** to generate a random password.
+    > まだパスワードを設定していない場合は、 **「パスワードの生成」**をクリックしてランダムなパスワードを生成します。
 
-5. In the root directory of your Python project, create a `.env` file and paste the connection string into it.
+5.  Python プロジェクトのルート ディレクトリに`.env`ファイルを作成し、そこに接続文字列を貼り付けます。
 
-    The following is an example for macOS:
+    以下は macOS の例です。
 
     ```dotenv
     TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
@@ -129,34 +132,34 @@ For a {{{ .starter }}} cluster, take the following steps to obtain the cluster c
 </div>
 <div label="TiDB Self-Managed">
 
-For a TiDB Self-Managed cluster, create a `.env` file in the root directory of your Python project. Copy the following content into the `.env` file, and modify the environment variable values according to the connection parameters of your TiDB cluster:
+TiDBセルフマネージドクラスタの場合、Pythonプロジェクトのルートディレクトリに`.env`ファイルを作成します。以下の内容を`.env`ファイルにコピーし、TiDBクラスタの接続パラメータに応じて環境変数の値を変更します。
 
 ```dotenv
 TIDB_DATABASE_URL="mysql+pymysql://<USER>:<PASSWORD>@<HOST>:<PORT>/<DATABASE>"
 # For example: TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
 ```
 
-If you are running TiDB on your local machine, `<HOST>` is `127.0.0.1` by default. The initial `<PASSWORD>` is empty, so if you are starting the cluster for the first time, you can omit this field.
+ローカルマシンでTiDBを実行している場合、デフォルトでは`<HOST>`が`127.0.0.1`なります。初期の`<PASSWORD>`空なので、クラスターを初めて起動する場合はこのフィールドを省略できます。
 
-The following are descriptions for each parameter:
+各パラメータの説明は次のとおりです。
 
-- `<USER>`: The username to connect to the TiDB cluster.
-- `<PASSWORD>`: The password to connect to the TiDB cluster.
-- `<HOST>`: The host of the TiDB cluster.
-- `<PORT>`: The port of the TiDB cluster.
-- `<DATABASE>`: The name of the database you want to connect to.
+-   `<USER>` : TiDB クラスターに接続するためのユーザー名。
+-   `<PASSWORD>` : TiDB クラスターに接続するためのパスワード。
+-   `<HOST>` : TiDB クラスターのホスト。
+-   `<PORT>` : TiDB クラスターのポート。
+-   `<DATABASE>` : 接続するデータベースの名前。
 
 </div>
 
 </SimpleTab>
 
-### Step 5. Run the demo
+### ステップ5.デモを実行する {#step-5-run-the-demo}
 
 ```bash
 python sqlalchemy-quickstart.py
 ```
 
-Example output:
+出力例:
 
 ```text
 Get 3-nearest neighbor documents:
@@ -173,13 +176,13 @@ Get documents within a certain distance:
     document: dog
 ```
 
-## Sample code snippets
+## サンプルコードスニペット {#sample-code-snippets}
 
-You can refer to the following sample code snippets to develop your application.
+アプリケーションを開発するには、次のサンプル コード スニペットを参照できます。
 
-### Create vector tables
+### ベクターテーブルを作成する {#create-vector-tables}
 
-#### Connect to TiDB cluster
+#### TiDBクラスタに接続する {#connect-to-tidb-cluster}
 
 ```python
 import os
@@ -195,9 +198,9 @@ tidb_connection_string = os.environ['TIDB_DATABASE_URL']
 engine = create_engine(tidb_connection_string)
 ```
 
-#### Define a vector column
+#### ベクトル列を定義する {#define-a-vector-column}
 
-Create a table with a column named `embedding` that stores a 3-dimensional vector.
+3 次元ベクトルを格納する`embedding`という名前の列を持つテーブルを作成します。
 
 ```python
 Base = declarative_base()
@@ -209,7 +212,7 @@ class Document(Base):
     embedding = Column(VectorType(3))
 ```
 
-### Store documents with embeddings
+### 埋め込み付きドキュメントを保存する {#store-documents-with-embeddings}
 
 ```python
 with Session(engine) as session:
@@ -219,9 +222,9 @@ with Session(engine) as session:
    session.commit()
 ```
 
-### Search the nearest neighbor documents
+### 最も近い文書を検索する {#search-the-nearest-neighbor-documents}
 
-Search for the top-3 documents that are semantically closest to the query vector `[1, 2, 3]` based on the cosine distance function.
+コサイン距離関数に基づいて、クエリベクトル`[1, 2, 3]`に意味的に最も近い上位 3 つのドキュメントを検索します。
 
 ```python
 with Session(engine) as session:
@@ -231,9 +234,9 @@ with Session(engine) as session:
    ).order_by(distance).limit(3).all()
 ```
 
-### Search documents within a certain distance
+### 特定の距離内の文書を検索する {#search-documents-within-a-certain-distance}
 
-Search for documents whose cosine distance from the query vector `[1, 2, 3]` is less than 0.2.
+クエリベクトル`[1, 2, 3]`からのコサイン距離が 0.2 未満であるドキュメントを検索します。
 
 ```python
 with Session(engine) as session:
@@ -243,7 +246,7 @@ with Session(engine) as session:
     ).filter(distance < 0.2).order_by(distance).limit(3).all()
 ```
 
-## See also
+## 参照 {#see-also}
 
-- [Vector Data Types](/vector-search/vector-search-data-types.md)
-- [Vector Search Index](/vector-search/vector-search-index.md)
+-   [ベクトルデータ型](/vector-search/vector-search-data-types.md)
+-   [ベクター検索インデックス](/vector-search/vector-search-index.md)

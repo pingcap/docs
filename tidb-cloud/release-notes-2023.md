@@ -1,1003 +1,1003 @@
 ---
 title: TiDB Cloud Release Notes in 2023
-summary: Learn about the release notes of TiDB Cloud in 2023.
+summary: 2023 年のTiDB Cloudのリリース ノートについて説明します。
 ---
 
-# TiDB Cloud Release Notes in 2023
+# 2023年のTiDB Cloudリリースノート {#tidb-cloud-release-notes-in-2023}
 
-This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
+このページには、2023 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
-## December 5, 2023
+## 2023年12月5日 {#december-5-2023}
 
-**General changes**
+**一般的な変更**
 
-- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) enables you to resume a failed changefeed, which saves your effort to recreate a new one.
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)使用すると、失敗した変更フィードを再開できるため、新しい変更フィードを再作成する手間が省けます。
 
-    For more information, see [Changefeed states](/tidb-cloud/changefeed-overview.md#changefeed-states).
+    詳細については[チェンジフィードの状態](/tidb-cloud/changefeed-overview.md#changefeed-states)参照してください。
 
-**Console changes**
+**コンソールの変更**
 
-- Enhance the connection experience for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)の接続エクスペリエンスを強化します。
 
-    Refine the **Connect** dialog interface to offer {{{ .starter }}} users a smoother and more efficient connection experience. In addition, {{{ .starter }}} introduces more client types and allows you to select the desired branch for connection.
+    **接続**ダイアログのインターフェースを改良し、 TiDB Cloud Serverless ユーザーにとってよりスムーズで効率的な接続エクスペリエンスを提供します。さらに、 TiDB Cloud Serverless ではより多くのクライアントタイプが導入され、接続するブランチを選択できるようになりました。
 
-    For more information, see [Connect to {{{ .starter }}}](/tidb-cloud/connect-via-standard-connection-serverless.md).
+    詳細については[TiDB Cloud Serverless に接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)参照してください。
 
-## November 28, 2023
+## 2023年11月28日 {#november-28-2023}
 
-**General changes**
+**一般的な変更**
 
-- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) supports restoring SQL bindings from backups.
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)バックアップからの SQL バインディングの復元をサポートします。
 
-    TiDB Cloud Dedicated now restores user accounts and SQL bindings by default when restoring from a backup. This enhancement is available for clusters of v6.2.0 or later versions, streamlining the data restoration process. The restoration of SQL bindings ensures the smooth reintegration of query-related configurations and optimizations, providing you with a more comprehensive and efficient recovery experience.
+    TiDB Cloud Dedicated は、バックアップからの復元時に、ユーザーアカウントと SQL バインディングをデフォルトで復元するようになりました。この機能強化はバージョン 6.2.0 以降のクラスターで利用可能で、データ復元プロセスを効率化します。SQL バインディングの復元により、クエリ関連の設定と最適化がスムーズに再統合され、より包括的で効率的なリカバリエクスペリエンスが実現します。
 
-    For more information, see [Back up and restore TiDB Cloud Dedicated data](/tidb-cloud/backup-and-restore.md).
+    詳細については[TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md)参照してください。
 
-**Console changes**
+**コンソールの変更**
 
-- [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) supports monitoring SQL statement RU costs.
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) SQL ステートメントの RU コストの監視をサポートします。
 
-    {{{ .starter }}} now provides detailed insights into each SQL statement's [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit). You can view both the **Total RU** and **Mean RU** costs per SQL statement. This feature helps you identify and analyze RU costs, offering opportunities for potential cost savings in your operations.
+    TiDB Cloud Serverless は、各 SQL ステートメントの詳細な分析情報を提供するようになりました[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit)ステートメントごとの**合計 RU**コストと**平均 RU**コストの両方を表示できます。この機能は RU コストの特定と分析に役立ち、運用における潜在的なコスト削減の機会を提供します。
 
-    To check your SQL statement RU details, navigate to the **Diagnosis** page of [your {{{ .starter }}} cluster](https://tidbcloud.com/project/clusters) and then click the **SQL Statement** tab.
+    SQL ステートメントの RU の詳細を確認するには、 [TiDB Cloudサーバーレスクラスター](https://tidbcloud.com/project/clusters)の**診断**ページに移動し、 **SQL ステートメント**タブをクリックします。
 
-## November 21, 2023
+## 2023年11月21日 {#november-21-2023}
 
-**General changes**
+**一般的な変更**
 
-- [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) supports high-speed physical mode for TiDB clusters deployed on Google Cloud.
+-   [データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md) 、Google Cloud にデプロイされた TiDB クラスタの高速物理モードをサポートします。
 
-    Now you can use physical mode for TiDB clusters deployed on AWS and Google Cloud. The migration speed of physical mode can reach up to 110 MiB/s, which is 2.4 times faster than logical mode. The improved performance is suitable for quickly migrating large datasets to TiDB Cloud.
+    AWSおよびGoogle CloudにデプロイされたTiDBクラスタで物理モードがご利用いただけるようになりました。物理モードの移行速度は最大110MiB/sに達し、論理モードの2.4倍の速度です。このパフォーマンス向上は、大規模なデータセットをTiDB Cloudに迅速に移行するのに最適となります。
 
-    For more information, see [Migrate existing data and incremental data](/tidb-cloud/migrate-from-mysql-using-data-migration.md#migrate-existing-data-and-incremental-data).
+    詳細については[既存データと増分データを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md#migrate-existing-data-and-incremental-data)参照してください。
 
-## November 14, 2023
+## 2023年11月14日 {#november-14-2023}
 
-**General changes**
+**一般的な変更**
 
-- When you restore data from TiDB Cloud Dedicated clusters, the default behavior is now modified from restoring without user accounts to restoring with all user accounts.
+-   TiDB Cloud Dedicated クラスターからデータを復元する場合のデフォルトの動作が、ユーザー アカウントなしでの復元からすべてのユーザー アカウントを使用しての復元に変更されました。
 
-    For more information, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md).
+    詳細については[TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md)参照してください。
 
-- Introduce event filters for changefeeds.
+-   変更フィード用のイベント フィルターを導入します。
 
-    This enhancement empowers you to easily manage event filters for changefeeds directly through the [TiDB Cloud console](https://tidbcloud.com/), streamlining the process of excluding specific events from changefeeds and providing better control over data replication downstream.
+    この機能強化により、 [TiDB Cloudコンソール](https://tidbcloud.com/)を通じて直接変更フィードのイベント フィルターを簡単に管理できるようになり、変更フィードから特定のイベントを除外するプロセスが効率化され、下流のデータ レプリケーションをより適切に制御できるようになります。
 
-    For more information, see [Changefeed](/tidb-cloud/changefeed-overview.md#edit-a-changefeed).
+    詳細については[チェンジフィード](/tidb-cloud/changefeed-overview.md#edit-a-changefeed)参照してください。
 
-## November 7, 2023
+## 2023年11月7日 {#november-7-2023}
 
-**General changes**
+**一般的な変更**
 
-- Add the following resource usage alerts. The new alerts are disabled by default. You can enable them as needed.
+-   以下のリソース使用状況アラートを追加します。新しいアラートはデフォルトで無効になっています。必要に応じて有効にできます。
 
-    - Max memory utilization across TiDB nodes exceeded 70% for 10 minutes
-    - Max memory utilization across TiKV nodes exceeded 70% for 10 minutes
-    - Max CPU utilization across TiDB nodes exceeded 80% for 10 minutes
-    - Max CPU utilization across TiKV nodes exceeded 80% for 10 minutes
+    -   TiDB ノード全体の最大メモリ使用率が 10 分間 70% を超えました
+    -   TiKVノード全体の最大メモリ使用率が10分間70%を超えました
+    -   TiDBノード全体の最大CPU使用率が10分間80%を超えました
+    -   TiKVノード全体の最大CPU使用率が10分間80%を超えました
 
-  For more information, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md#resource-usage-alerts).
+    詳細については[TiDB Cloud組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md#resource-usage-alerts)参照してください。
 
-## October 31, 2023
+## 2023年10月31日 {#october-31-2023}
 
-**General changes**
+**一般的な変更**
 
-- Support directly upgrading to the Enterprise support plan in the TiDB Cloud console without contacting sales.
+-   営業担当者に連絡せずに、 TiDB Cloudコンソールでエンタープライズ サポート プランに直接アップグレードできます。
 
-    For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+    詳細については[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)参照してください。
 
-## October 25, 2023
+## 2023年10月25日 {#october-25-2023}
 
-**General changes**
+**一般的な変更**
 
-- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) supports dual region backup (beta) on Google Cloud.
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 、Google Cloud でのデュアルリージョン バックアップ (ベータ版) をサポートします。
 
-    TiDB Cloud Dedicated clusters hosted on Google Cloud work seamlessly with Google Cloud Storage. Similar to the [Dual-regions](https://cloud.google.com/storage/docs/locations#location-dr) feature of Google Cloud Storage, the pair of regions that you use for the dual-region in TiDB Cloud Dedicated must be within the same multi-region. For example, Tokyo and Osaka are in the same multi-region `ASIA` so they can be used together for dual-region storage.
+    Google Cloud でホストされるTiDB Cloud Dedicated クラスタは、Google Cloud Storage とシームレスに連携します。Google Cloud Storage の[デュアルリージョン](https://cloud.google.com/storage/docs/locations#location-dr)機能と同様に、 TiDB Cloud Dedicated のデュアルリージョンで使用するリージョンのペアは、同じマルチリージョン内になければなりません。例えば、東京と大阪は同じマルチリージョン`ASIA`内にあるため、デュアルリージョンstorageとして一緒に使用できます。
 
-    For more information, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup).
+    詳細については[TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup)参照してください。
 
-- The feature of [streaming data change logs to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md) is now in General Availability (GA).
+-   [データ変更ログをApache Kafkaにストリーミングする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)の機能は現在、一般提供 (GA) になっています。
 
-    After a successful 10-month beta trial, the feature of streaming data change logs from TiDB Cloud to Apache Kafka becomes generally available. Streaming data from TiDB to a message queue is a common need in data integration scenarios. You can use Kafka sink to integrate with other data processing systems (such as Snowflake) or support business consumption.
+    10ヶ月間のベータトライアルを経て、 TiDB CloudからApache Kafkaへのデータ変更ログのストリーミング機能が一般提供となりました。TiDBからメッセージキューへのデータストリーミングは、データ統合シナリオにおいて一般的なニーズです。Kafkaシンクを使用することで、他のデータ処理システム（Snowflakeなど）との統合や、ビジネス利用のサポートが可能になります。
 
-    For more information, see [Changefeed overview](/tidb-cloud/changefeed-overview.md).
+    詳細については[チェンジフィードの概要](/tidb-cloud/changefeed-overview.md)参照してください。
 
-## October 11, 2023
+## 2023年10月11日 {#october-11-2023}
 
-**General changes**
+**一般的な変更**
 
-- Support [dual region backup (beta)](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters deployed on AWS.
+-   AWS にデプロイされた[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのうち[デュアルリージョンバックアップ（ベータ版）](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup)サポートします。
 
-    You can now replicate backups across geographic regions within your cloud provider. This feature provides an additional layer of data protection and disaster recovery capabilities.
+    クラウドプロバイダー内の地理的リージョン間でバックアップを複製できるようになりました。この機能により、データ保護と災害復旧機能がさらにレイヤーされます。
 
-    For more information, see [Back up and restore TiDB Cloud Dedicated data](/tidb-cloud/backup-and-restore.md).
+    詳細については[TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md)参照してください。
 
-- Data Migration now supports both physical mode and logical mode for migrating existing data.
+-   データ移行では、既存のデータの移行に物理モードと論理モードの両方がサポートされるようになりました。
 
-    In physical mode, the migration speed can reach up to 110 MiB/s. Compared with 45 MiB/s in logical mode, the migration performance has improved significantly.
+    物理モードでは、移行速度は最大110 MiB/秒に達します。論理モードの45 MiB/秒と比較すると、移行パフォーマンスが大幅に向上しています。
 
-    For more information, see [Migrate existing data and incremental data](/tidb-cloud/migrate-from-mysql-using-data-migration.md#migrate-existing-data-and-incremental-data).
+    詳細については[既存データと増分データを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md#migrate-existing-data-and-incremental-data)参照してください。
 
-## October 10, 2023
+## 2023年10月10日 {#october-10-2023}
 
-**General changes**
+**一般的な変更**
 
-- Support using {{{ .starter }}} branches in [Vercel Preview Deployments](https://vercel.com/docs/deployments/preview-deployments), with TiDB Cloud Vercel integration.
+-   TiDB Cloud Vercel 統合により、 [Vercel プレビュー デプロイメント](https://vercel.com/docs/deployments/preview-deployments)でのTiDB Cloud Serverless ブランチの使用をサポートします。
 
-    For more information, see [Connect with {{{ .starter }}} branching](/tidb-cloud/integrate-tidbcloud-with-vercel.md#connect-with-branching).
+    詳細については[TiDB Cloud Serverless ブランチに接続](/tidb-cloud/integrate-tidbcloud-with-vercel.md#connect-with-branching)参照してください。
 
-## September 28, 2023
+## 2023年9月28日 {#september-28-2023}
 
-**API changes**
+**APIの変更**
 
-- Introduce a TiDB Cloud Billing API endpoint to retrieve the bill for the given month of a specific organization.
+-   特定の組織の特定の月の請求書を取得するためのTiDB Cloud Billing API エンドポイントを導入します。
 
-    This Billing API endpoint is released in TiDB Cloud API v1beta1, which is the latest API version of TiDB Cloud. For more information, refer to the [API documentation (v1beta1)](https://docs.pingcap.com/tidbcloud/api/v1beta1#tag/Billing).
+    このBilling APIエンドポイントは、 TiDB Cloudの最新APIバージョンであるTiDB Cloud API v1beta1でリリースされています。詳細については、 [APIドキュメント（v1beta1）](https://docs.pingcap.com/tidbcloud/api/v1beta1#tag/Billing)をご覧ください。
 
-## September 19, 2023
+## 2023年9月19日 {#september-19-2023}
 
-**General changes**
+**一般的な変更**
 
-- Remove 2 vCPU TiDB and TiKV nodes from [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターから 2 つの vCPU TiDB ノードと TiKV ノードを削除します。
 
-    The 2 vCPU option is no longer available on the **Create Cluster** page or the **Modify Cluster** page.
+    2 vCPU オプションは**、 [クラスタの作成]**ページまたは**[クラスタの変更]**ページで使用できなくなりました。
 
-- Release [TiDB Cloud serverless driver (beta)](/tidb-cloud/serverless-driver.md) for JavaScript.
+-   JavaScript のリリース[TiDB Cloudサーバーレス ドライバー (ベータ版)](/tidb-cloud/serverless-driver.md) 。
 
-    TiDB Cloud serverless driver for JavaScript allows you to connect to your [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster over HTTPS. It is particularly useful in edge environments where TCP connections are limited, such as [Vercel Edge Function](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/).
+    TiDB CloudのJavaScript用サーバーレスドライバーを使用すると、HTTPS経由で[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターに接続できます。特に、TCP接続数が[Vercelエッジ関数](https://vercel.com/docs/functions/edge-functions)や[Cloudflareワーカー](https://workers.cloudflare.com/)などに制限されているエッジ環境で役立ちます。
 
-    For more information, see [TiDB Cloud serverless driver (beta)](/tidb-cloud/serverless-driver.md).
+    詳細については[TiDB Cloudサーバーレス ドライバー (ベータ版)](/tidb-cloud/serverless-driver.md)参照してください。
 
-**Console changes**
+**コンソールの変更**
 
-- For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, you can get an estimation of cost in the **Usage This Month** panel or while setting up the spending limit.
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターの場合、 **「今月の使用量**」パネルまたは支出限度額の設定時にコストの見積もりを取得できます。
 
-## September 5, 2023
+## 2023年9月5日 {#september-5-2023}
 
-**General changes**
+**一般的な変更**
 
-- [Data Service (beta)](https://tidbcloud.com/project/data-service) supports customizing the rate limit for each API key to meet specific rate-limiting requirements in different situations.
+-   [データサービス（ベータ版）](https://tidbcloud.com/project/data-service) 、さまざまな状況での特定のレート制限要件を満たすために、各 API キーのレート制限をカスタマイズすることがサポートされています。
 
-    You can adjust the rate limit of an API key when you [create](/tidb-cloud/data-service-api-key.md#create-an-api-key) or [edit](/tidb-cloud/data-service-api-key.md#edit-an-api-key) the key.
+    キーを[作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)または[編集](/tidb-cloud/data-service-api-key.md#edit-an-api-key)すると、API キーのレート制限を調整できます。
 
-    For more information, see [Rate limiting](/tidb-cloud/data-service-api-key.md#rate-limiting).
+    詳細については[レート制限](/tidb-cloud/data-service-api-key.md#rate-limiting)参照してください。
 
-- Support a new AWS region for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters: São Paulo (sa-east-1).
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して新しい AWS リージョンをサポートします: サンパウロ (sa-east-1)。
 
-- Support adding up to 100 IP addresses to the IP access list for each [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster.
+-   各[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの IP アクセス リストに最大 100 個の IP アドレスを追加することをサポートします。
 
-    For more information, see [Configure an IP access list](/tidb-cloud/configure-ip-access-list.md).
+    詳細については[IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)参照してください。
 
-**Console changes**
+**コンソールの変更**
 
-- Introduce the **Events** page for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, which provides the records of main changes to your cluster.
+-   クラスターの主な変更の記録を提供する、 [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターの**イベント**ページを紹介します。
 
-    On this page, you can view the event history for the last 7 days and track important details such as the trigger time and the user who initiated an action.
+    このページでは、過去 7 日間のイベント履歴を表示し、トリガー時間やアクションを開始したユーザーなどの重要な詳細を追跡できます。
 
-    For more information, see [TiDB Cloud cluster events](/tidb-cloud/tidb-cloud-events.md).
+    詳細については[TiDB Cloudクラスター イベント](/tidb-cloud/tidb-cloud-events.md)参照してください。
 
-**API changes**
+**APIの変更**
 
-- Release several TiDB Cloud API endpoints for managing the [AWS PrivateLink](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc) or [Google Cloud Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters:
+-   [AWS プライベートリンク](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&#x26;privatelink-blogs.sort-order=desc)または[Google Cloud プライベート サービス接続](https://cloud.google.com/vpc/docs/private-service-connect) for [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターを管理するためのTiDB Cloud API エンドポイントをいくつかリリースします。
 
-    - Create a private endpoint service for a cluster
-    - Retrieve the private endpoint service information of a cluster
-    - Create a private endpoint for a cluster
-    - List all private endpoints of a cluster
-    - List all private endpoints in a project
-    - Delete a private endpoint of a cluster
+    -   クラスターのプライベート エンドポイント サービスを作成する
+    -   クラスターのプライベート エンドポイント サービス情報を取得する
+    -   クラスターのプライベートエンドポイントを作成する
+    -   クラスターのすべてのプライベートエンドポイントを一覧表示する
+    -   プロジェクト内のすべてのプライベートエンドポイントを一覧表示する
+    -   クラスターのプライベートエンドポイントを削除する
 
-  For more information, refer to the [API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster).
+    詳細については、 [APIドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster)を参照してください。
 
-## August 23, 2023
+## 2023年8月23日 {#august-23-2023}
 
-**General changes**
+**一般的な変更**
 
-- Support Google Cloud [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに対して Google Cloud [プライベートサービスコネクト](https://cloud.google.com/vpc/docs/private-service-connect)サポートします。
 
-    You can now create a private endpoint and establish a secure connection to a TiDB Cloud Dedicated cluster hosted on Google Cloud.
+    プライベート エンドポイントを作成し、Google Cloud でホストされているTiDB Cloud Dedicated クラスタへの安全な接続を確立できるようになりました。
 
-    Key benefits:
+    主な利点:
 
-    - Intuitive operations: helps you create a private endpoint with only several steps.
-    - Enhanced security: establishes a secure connection to protect your data.
-    - Improved performance: provides low-latency and high-bandwidth connectivity.
+    -   直感的な操作: わずか数ステップでプライベート エンドポイントを作成できます。
+    -   強化されたセキュリティ: データを保護するために安全な接続を確立します。
+    -   パフォーマンスの向上: 低遅延かつ高帯域幅の接続を実現します。
 
-  For more information, see [Connect via Private Endpoint with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
+    詳細については[プライベートエンドポイント経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)参照してください。
 
-- Support using a changefeed to stream data from a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster to [Google Cloud Storage (GCS)](https://cloud.google.com/storage).
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターから[Google クラウド ストレージ (GCS)](https://cloud.google.com/storage)にデータをストリーミングするための変更フィードの使用をサポートします。
 
-    You can now stream data from TiDB Cloud to GCS by using your own account's bucket and providing precisely tailored permissions. After replicating data to GCS, you can analyze the changes in your data as you wish.
+    ご自身のアカウントのバケットを使用し、適切にカスタマイズされた権限を付与することで、 TiDB Cloudから GCS にデータをストリーミングできるようになりました。GCS にデータを複製した後、データの変更を自由に分析できます。
 
-    For more information, see [Sink to Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md).
+    詳細については[クラウドストレージに保存](/tidb-cloud/changefeed-sink-to-cloud-storage.md)参照してください。
 
-## August 15, 2023
+## 2023年8月15日 {#august-15-2023}
 
-**General changes**
+**一般的な変更**
 
-- [Data Service (beta)](https://tidbcloud.com/project/data-service) supports pagination for `GET` requests to improve the development experience.
+-   [データサービス（ベータ版）](https://tidbcloud.com/project/data-service)開発エクスペリエンスを向上させるために`GET`リクエストのページ分割をサポートします。
 
-    For `GET` requests, you can paginate results by enabling **Pagination** in **Advance Properties** and specifying `page` and `page_size` as query parameters when calling the endpoint. For example, to get the second page with 10 items per page, you can use the following command:
+    `GET`リクエストの場合、**アドバンスプロパティ**で**ページネーションを**有効にし、エンドポイントを呼び出す際にクエリパラメータとして`page`と`page_size`指定することで、結果をページ分けできます。例えば、1 ページあたり 10 項目の 2 ページ目を取得するには、次のコマンドを使用します。
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
       --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>?page=2&page_size=10'
     ```
 
-    Note that this feature is available only for `GET` requests where the last query is a `SELECT` statement.
+    この機能は、最後のクエリが`SELECT`ステートメントである`GET`リクエストに対してのみ使用できることに注意してください。
 
-    For more information, see [Call an endpoint](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint).
+    詳細については[エンドポイントを呼び出す](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint)参照してください。
 
-- [Data Service (beta)](https://tidbcloud.com/project/data-service) supports caching endpoint response of `GET` requests for a specified time-to-live (TTL) period.
+-   [データサービス（ベータ版）](https://tidbcloud.com/project/data-service) 、指定された有効期間 (TTL) にわたって`GET`要求のエンドポイント応答のキャッシュをサポートします。
 
-    This feature decreases database load and optimizes endpoint latency.
+    この機能により、データベースの負荷が軽減され、エンドポイントのレイテンシーが最適化されます。
 
-    For an endpoint using the `GET` request method, you can enable **Cache Response** and configure the TTL period for the cache in **Advance Properties**.
+    `GET`リクエスト メソッドを使用するエンドポイントの場合、**キャッシュ レスポンス**を有効にし、 **Advance Properties**でキャッシュの TTL 期間を設定できます。
 
-    For more information, see [Advanced properties](/tidb-cloud/data-service-manage-endpoint.md#advanced-properties).
+    詳細については[高度なプロパティ](/tidb-cloud/data-service-manage-endpoint.md#advanced-properties)参照してください。
 
-- Disable the load balancing improvement for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters that are hosted on AWS and created after August 15, 2023, including:
+-   AWS でホストされ、2023 年 8 月 15 日以降に作成された[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの負荷分散の改善を無効にします。これには以下が含まれます。
 
-    - Disable automatically migrating existing connections to new TiDB nodes when you scale out TiDB nodes hosted on AWS.
-    - Disable automatically migrating existing connections to available TiDB nodes when you scale in TiDB nodes hosted on AWS.
+    -   AWS でホストされている TiDB ノードをスケールアウトするときに、既存の接続を新しい TiDB ノードに自動的に移行することを無効にします。
+    -   AWS でホストされている TiDB ノードをスケールインするときに、既存の接続を利用可能な TiDB ノードに自動的に移行することを無効にします。
 
-  This change avoids resource contention of hybrid deployments and does not affect existing clusters with this improvement enabled. If you want to enable the load balancing improvement for your new clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+    この変更により、ハイブリッド展開におけるリソース競合が回避され、この改善が有効になっている既存のクラスターには影響しません。新しいクラスターで負荷分散の改善を有効にする場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
-## August 8, 2023
+## 2023年8月8日 {#august-8-2023}
 
-**General changes**
+**一般的な変更**
 
-- [Data Service (beta)](https://tidbcloud.com/project/data-service) now supports Basic Authentication.
+-   [データサービス（ベータ版）](https://tidbcloud.com/project/data-service)では基本認証がサポートされるようになりました。
 
-    You can provide your public key as the username and private key as the password in requests using the ['Basic' HTTP Authentication](https://datatracker.ietf.org/doc/html/rfc7617). Compared with Digest Authentication, the Basic Authentication is simpler, enabling more straightforward usage when calling Data Service endpoints.
+    [「基本」HTTP認証](https://datatracker.ietf.org/doc/html/rfc7617)使用して、リクエストで公開鍵をユーザー名として、秘密鍵をパスワードとして提供できます。ダイジェスト認証と比較して、基本認証はよりシンプルで、データ サービス エンドポイントを呼び出すときに簡単に使用できます。
 
-    For more information, see [Call an endpoint](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint).
+    詳細については[エンドポイントを呼び出す](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint)参照してください。
 
-## August 1, 2023
+## 2023年8月1日 {#august-1-2023}
 
-**General changes**
+**一般的な変更**
 
-- Support the OpenAPI Specification for Data Apps in TiDB Cloud [Data Service](https://tidbcloud.com/project/data-service).
+-   TiDB Cloud [データサービス](https://tidbcloud.com/project/data-service)でデータ アプリの OpenAPI 仕様をサポートします。
 
-    TiDB Cloud Data Service provides autogenerated OpenAPI documentation for each Data App. In the documentation, you can view the endpoints, parameters, and responses, and try out the endpoints.
+    TiDB Cloud Data Service は、各データアプリ向けに自動生成された OpenAPI ドキュメントを提供します。ドキュメントでは、エンドポイント、パラメータ、レスポンスを確認し、エンドポイントを試すことができます。
 
-    You can also download an OpenAPI Specification (OAS) for a Data App and its deployed endpoints in YAML or JSON format. The OAS provides standardized API documentation, simplified integration, and easy code generation, which enables faster development and improved collaboration.
+    データアプリとそのデプロイされたエンドポイントのOpenAPI仕様（OAS）をYAMLまたはJSON形式でダウンロードすることもできます。OASは標準化されたAPIドキュメント、簡素化された統合、そして容易なコード生成を提供し、開発の迅速化とコラボレーションの向上を実現します。
 
-    For more information, see [Use the OpenAPI Specification](/tidb-cloud/data-service-manage-data-app.md#use-the-openapi-specification) and [Use the OpenAPI Specification with Next.js](/tidb-cloud/data-service-oas-with-nextjs.md).
+    詳細については、 [OpenAPI仕様を使用する](/tidb-cloud/data-service-manage-data-app.md#use-the-openapi-specification)および[Next.js で OpenAPI 仕様を使用する](/tidb-cloud/data-service-oas-with-nextjs.md)参照してください。
 
-- Support running Data App in [Postman](https://www.postman.com/).
+-   [郵便配達員](https://www.postman.com/)でデータ アプリの実行をサポートします。
 
-    The Postman integration empowers you to import a Data App's endpoints as a collection into your preferred workspace. Then you can benefit from enhanced collaboration and seamless API testing with support for both Postman web and desktop apps.
+    Postman統合により、データアプリのエンドポイントをコレクションとして、お好みのワークスペースにインポートできます。PostmanのWebアプリとデスクトップアプリの両方をサポートすることで、強化されたコラボレーションとシームレスなAPIテストのメリットを享受できます。
 
-    For more information, see [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md).
+    詳細については[Postmanでデータアプリを実行する](/tidb-cloud/data-service-postman-integration.md)参照してください。
 
-- Introduce a new **Pausing** status for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, allowing cost-effective pauses with no charges during this period.
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに新しい**一時停止**ステータスを導入し、この期間中は料金なしでコスト効率の高い一時停止を可能にします。
 
-    When you click **Pause** for a TiDB Cloud Dedicated cluster, the cluster will enter the **Pausing** status first. Once the pause operation is completed, the cluster status will transition to **Paused**.
+    TiDB Cloud Dedicated クラスターで**「一時停止」**をクリックすると、クラスターはまず「**一時停止中」**状態になります。一時停止操作が完了すると、クラスターのステータスは**「一時停止」**に変わります。
 
-    A cluster can only be resumed after its status transitions to **Paused**, which resolves the abnormal resumption issue caused by rapid clicks of **Pause** and **Resume**.
+    クラスターは、ステータスが**[一時停止]**に遷移した後にのみ再開できます。これにより、 **[一時停止]**と**[再開] を**素早くクリックすることで発生する異常な再開の問題が解決されます。
 
-    For more information, see [Pause or resume a TiDB Cloud Dedicated cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md).
+    詳細については[TiDB Cloud Dedicated クラスターを一時停止または再開する](/tidb-cloud/pause-or-resume-tidb-cluster.md)参照してください。
 
-## July 26, 2023
+## 2023年7月26日 {#july-26-2023}
 
-**General changes**
+**一般的な変更**
 
-- Introduce a powerful feature in TiDB Cloud [Data Service](https://tidbcloud.com/project/data-service): Automatic endpoint generation.
+-   TiDB Cloud [データサービス](https://tidbcloud.com/project/data-service)の強力な機能、自動エンドポイント生成を紹介します。
 
-    Developers can now effortlessly create HTTP endpoints with minimal clicks and configurations. Eliminate repetitive boilerplate code, simplify and accelerate endpoint creation, and reduce potential errors.
+    開発者は、最小限のクリックと設定でHTTPエンドポイントを簡単に作成できるようになりました。繰り返しの定型コードを排除し、エンドポイントの作成を簡素化・高速化し、潜在的なエラーを削減します。
 
-    For more information on how to use this feature, see [Generate an endpoint automatically](/tidb-cloud/data-service-manage-endpoint.md#generate-an-endpoint-automatically).
+    この機能の使用方法の詳細については、 [エンドポイントを自動的に生成する](/tidb-cloud/data-service-manage-endpoint.md#generate-an-endpoint-automatically)参照してください。
 
-- Support `PUT` and `DELETE` request methods for endpoints in TiDB Cloud [Data Service](https://tidbcloud.com/project/data-service).
+-   TiDB Cloud [データサービス](https://tidbcloud.com/project/data-service)のエンドポイントの`PUT`および`DELETE`リクエスト メソッドをサポートします。
 
-    - Use the `PUT` method to update or modify data, similar to an `UPDATE` statement.
-    - Use the `DELETE` method to delete data, similar to a `DELETE` statement.
+    -   `UPDATE`ステートメントと同様に、 `PUT`メソッドを使用してデータを更新または変更します。
+    -   `DELETE`ステートメントと同様に、 `DELETE`メソッドを使用してデータを削除します。
 
-  For more information, see [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
+    詳細については[プロパティを構成する](/tidb-cloud/data-service-manage-endpoint.md#configure-properties)参照してください。
 
-- Support **Batch Operation** for `POST`, `PUT`, and `DELETE` request methods in TiDB Cloud [Data Service](https://tidbcloud.com/project/data-service).
+-   TiDB Cloud [データサービス](https://tidbcloud.com/project/data-service)で`POST` `PUT` `DELETE`メソッドの**バッチ操作**をサポートします。
 
-    When **Batch Operation** is enabled for an endpoint, you gain the ability to perform operations on multiple rows in a single request. For instance, you can insert multiple rows of data using a single `POST` request.
+    エンドポイントで**バッチ操作**を有効にすると、単一のリクエストで複数の行に対する操作を実行できるようになります。例えば、単一のリクエスト`POST`で複数行のデータを挿入できます。
 
-    For more information, see [Advanced properties](/tidb-cloud/data-service-manage-endpoint.md#advanced-properties).
+    詳細については[高度なプロパティ](/tidb-cloud/data-service-manage-endpoint.md#advanced-properties)参照してください。
 
-## July 25, 2023
+## 2023年7月25日 {#july-25-2023}
 
-**General changes**
+**一般的な変更**
 
-- Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v6.5.3](https://docs.pingcap.com/tidb/v6.5/release-6.5.3) to [v7.1.1](https://docs.pingcap.com/tidb/v7.1/release-7.1.1).
+-   新しい[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン6.5.3](https://docs.pingcap.com/tidb/v6.5/release-6.5.3)から[バージョン7.1.1](https://docs.pingcap.com/tidb/v7.1/release-7.1.1)にアップグレードします。
 
-**Console changes**
+**コンソールの変更**
 
-- Simplify access to PingCAP Support for TiDB Cloud users by optimizing support entries. Improvements include:
+-   サポートエントリを最適化することで、 TiDB CloudユーザーのPingCAPサポートへのアクセスを簡素化します。改善点は以下のとおりです。
 
-    - Add an entrance for **Support** in the <MDSvgIcon name="icon-top-organization" /> in the lower-left corner.
-    - Revamp the menus of the **?** icon in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/) to make them more intuitive.
+    -   **サポート**用の入り口を追加<mdsvgicon name="icon-top-organization">左下隅にあります。</mdsvgicon>
+    -   [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**?**アイコンのメニューを改良して、より直感的に操作できるようにします。
 
-  For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+    詳細については[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)参照してください。
 
-## July 18, 2023
+## 2023年7月18日 {#july-18-2023}
 
-**General changes**
+**一般的な変更**
 
-- Refine role-based access control at both the organization level and project level, which lets you grant roles with minimum permissions to users for better security, compliance, and productivity.
+-   組織レベルとプロジェクトレベルの両方でロールベースのアクセス制御を調整することで、ユーザーに最小限の権限を持つロールを付与し、セキュリティ、コンプライアンス、生産性を向上させることができます。
 
-    - The organization roles include `Organization Owner`, `Organization Billing Admin`, `Organization Console Audit Admin`, and `Organization Member`.
-    - The project roles include `Project Owner`, `Project Data Access Read-Write`, and `Project Data Access Read-Only`.
-    - To manage clusters in a project (such as cluster creation, modification, and deletion), you need to be in the `Organization Owner` or `Project Owner` role.
+    -   組織の役割には、 `Organization Owner` 、 `Organization Billing Admin` 、 `Organization Console Audit Admin` 、 `Organization Member`含まれます。
+    -   プロジェクト ロールには`Project Owner` 、 `Project Data Access Read-Write` 、 `Project Data Access Read-Only`含まれます。
+    -   プロジェクト内のクラスターを管理するには (クラスターの作成、変更、削除など)、ロール`Organization Owner`または`Project Owner`である必要があります。
 
-  For more information about permissions of different roles, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
+    さまざまなロールの権限の詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)参照してください。
 
-- Support the Customer-Managed Encryption Key (CMEK) feature (beta) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS.
+-   AWS でホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して、カスタマー管理暗号化キー (CMEK) 機能 (ベータ版) をサポートします。
 
-    You can create CMEK based on AWS KMS to encrypt data stored in EBS and S3 directly from the TiDB Cloud console. This ensures that customer data is encrypted with a key managed by the customer, which enhances security.
+    AWS KMS ベースの CMEK を作成し、 TiDB Cloudコンソールから直接 EBS および S3 に保存されているデータを暗号化できます。これにより、顧客データは顧客が管理するキーで暗号化されるため、セキュリティが強化されます。
 
-    Note that this feature still has restrictions and is only available upon request. To apply for this feature, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+    この機能にはまだ制限があり、リクエストに応じてのみご利用いただけます。この機能を申請するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)ご連絡ください。
 
-- Optimize the Import feature in TiDB Cloud, aimed at enhancing the data import experience. The following improvements have been made:
+-   TiDB Cloudのインポート機能を最適化し、データのインポートエクスペリエンスを向上させました。以下の改善が行われました。
 
-    - Unified Import entry for {{{ .starter }}}: consolidate the entries for importing data, allowing you to seamlessly switch between importing local files and importing files from Amazon S3.
-    - Streamlined configuration: importing data from Amazon S3 now only requires a single step, saving time and effort.
-    - Enhanced CSV configuration: the CSV configuration settings are now located under the file type option, making it easier for you to quickly configure the necessary parameters.
-    - Enhanced target table selection: support choosing the desired target tables for data import by clicking checkboxes. This improvement eliminates the need for complex expressions and simplifies the target table selection.
-    - Refined display information: resolve issues related to inaccurate information displayed during the import process. In addition, the Preview feature has been removed to prevent incomplete data display and avoid misleading information.
-    - Improved source files mapping: support defining mapping relationships between source files and target tables. It addresses the challenge of modifying source file names to meet specific naming requirements.
+    -   TiDB Cloud Serverless の統合インポート エントリ: データのインポートのエントリを統合し、ローカル ファイルのインポートと Amazon S3 からのファイルのインポートをシームレスに切り替えることができます。
+    -   合理化された構成: Amazon S3 からのデータのインポートは 1 つのステップだけで済むため、時間と労力を節約できます。
+    -   強化された CSV 構成: CSV 構成設定がファイル タイプ オプションの下に配置されるようになり、必要なパラメータを簡単にすばやく構成できるようになりました。
+    -   ターゲットテーブルの選択機能強化：チェックボックスをクリックすることで、データインポートの対象となるターゲットテーブルを選択できるようになりました。この改善により、複雑な式を入力する必要がなくなり、ターゲットテーブルの選択が簡素化されます。
+    -   表示情報の改良：インポート処理中に表示される不正確な情報に関する問題を解決しました。また、不完全なデータ表示や誤解を招く情報の表示を防ぐため、プレビュー機能を削除しました。
+    -   ソースファイルマッピングの改善：ソースファイルとターゲットテーブル間のマッピング関係の定義をサポートします。これにより、特定の命名要件を満たすためにソースファイル名を変更するという課題に対処できます。
 
-## July 11, 2023
+## 2023年7月11日 {#july-11-2023}
 
-**General changes**
+**一般的な変更**
 
-- [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) now is Generally Available.
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)が一般公開されました。
 
-- Introduce TiDB Bot (beta), an OpenAI-powered chatbot that offers multi-language support, 24/7 real-time response, and integrated documentation access.
+-   多言語サポート、24 時間 365 日のリアルタイム応答、統合ドキュメント アクセスを提供する OpenAI 搭載チャットボット、TiDB Bot (ベータ版) をご紹介します。
 
-    TiDB Bot provides you with the following benefits:
+    TiDB Bot には次のような利点があります。
 
-    - Continuous support: always available to assist and answer your questions for an enhanced support experience.
-    - Improved efficiency: automated responses reduce latency, improving overall operations.
-    - Seamless documentation access: direct access to TiDB Cloud documentation for easy information retrieval and quick issue resolution.
+    -   継続的なサポート: いつでもサポートを提供して質問に回答し、サポート エクスペリエンスを向上させます。
+    -   効率性の向上: 自動応答によりレイテンシーが短縮され、全体的な操作が改善されます。
+    -   シームレスなドキュメント アクセス: TiDB Cloudドキュメントに直接アクセスして、情報を簡単に取得し、問題を迅速に解決できます。
 
-  To use TiDB Bot, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and select **Ask TiDB Bot** to start a chat.
+    TiDB Bot を使用するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**[?]**をクリックし、 **[TiDB Bot に質問]**を選択してチャットを開始します。
 
-- Support [the branching feature (beta)](/tidb-cloud/branch-overview.md) for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターに対して[分岐機能（ベータ版）](/tidb-cloud/branch-overview.md)サポートします。
 
-    TiDB Cloud lets you create branches for {{{ .starter }}} clusters. A branch for a cluster is a separate instance that contains a diverged copy of data from the original cluster. It provides an isolated environment, allowing you to connect to it and experiment freely without worrying about affecting the original cluster.
+    TiDB Cloud、 TiDB Cloud Serverless クラスターのブランチを作成できます。クラスターのブランチとは、元のクラスターから分岐したデータのコピーを含む独立したインスタンスです。これにより分離された環境が提供され、元のクラスターへの影響を心配することなく、自由に接続して実験を行うことができます。
 
-    You can create branches for {{{ .starter }}} clusters created after July 5, 2023 by using either [TiDB Cloud console](/tidb-cloud/branch-manage.md) or [TiDB Cloud CLI](/tidb-cloud/ticloud-branch-create.md).
+    [TiDB Cloudコンソール](/tidb-cloud/branch-manage.md)または[TiDB CloudCLI](/tidb-cloud/ticloud-branch-create.md)いずれかを使用して、2023 年 7 月 5 日以降に作成されたTiDB Cloud Serverless クラスターのブランチを作成できます。
 
-    If you use GitHub for application development, you can integrate {{{ .starter }}} branching into your GitHub CI/CD pipeline, which lets you automatically test your pull requests with branches without affecting the production database. For more information, see [Integrate {{{ .starter }}} Branching (Beta) with GitHub](/tidb-cloud/branch-github-integration.md).
+    アプリケーション開発にGitHubをご利用の場合、 TiDB Cloud Serverlessブランチ機能をGitHub CI/CDパイプラインに統合することで、本番のデータベースに影響を与えることなく、ブランチを使用してプルリクエストを自動的にテストできます。詳細については、 [TiDB Cloud Serverless Branching（ベータ版）をGitHubと統合する](/tidb-cloud/branch-github-integration.md)ご覧ください。
 
-- Support weekly backup for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters. For more information, see [Back up and restore TiDB Cloud Dedicated data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup).
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタの週次バックアップをサポートします。詳細については、 [TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)参照してください。
 
-## July 4, 2023
+## 2023年7月4日 {#july-4-2023}
 
-**General changes**
+**一般的な変更**
 
-- Support point-in-time recovery (PITR) (beta) for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターに対してポイントインタイムリカバリ (PITR) (ベータ版) をサポートします。
 
-    You can now restore your {{{ .starter }}} cluster to any point in time within the last 90 days. This feature enhances the data recovery capability of {{{ .starter }}} clusters. For example, you can use PITR when data write errors occur and you want to restore the data to an earlier state.
+    TiDB Cloud Serverless クラスターを過去90日間の任意の時点に復元できるようになりました。この機能により、 TiDB Cloud Serverless クラスターのデータ復旧能力が強化されます。例えば、データ書き込みエラーが発生し、データを以前の状態に復元したい場合、PITR を使用できます。
 
-    For more information, see [Back up and restore {{{ .starter }}} data](/tidb-cloud/backup-and-restore-serverless.md#restore).
+    詳細については[TiDB Cloud Serverless データのバックアップと復元](/tidb-cloud/backup-and-restore-serverless.md#restore)参照してください。
 
-**Console changes**
+**コンソールの変更**
 
-- Enhance the **Usage This Month** panel on the cluster overview page for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters to provide a clearer view of your current resource usage.
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターのクラスター概要ページの**「今月の使用状況」**パネルを拡張し、現在のリソース使用状況をより明確に表示します。
 
-- Enhance the overall navigation experience by making the following changes:
+-   次の変更を加えることで、全体的なナビゲーション エクスペリエンスが向上します。
 
-    - Consolidate <MDSvgIcon name="icon-top-organization" /> **Organization** and <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner into the left navigation bar.
-    - Consolidate <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5H7.5C6.10444 14.5 5.40665 14.5 4.83886 14.6722C3.56045 15.06 2.56004 16.0605 2.17224 17.3389C2 17.9067 2 18.6044 2 20M14.5 6.5C14.5 8.98528 12.4853 11 10 11C7.51472 11 5.5 8.98528 5.5 6.5C5.5 4.01472 7.51472 2 10 2C12.4853 2 14.5 4.01472 14.5 6.5ZM22 16.516C22 18.7478 19.6576 20.3711 18.8054 20.8878C18.7085 20.9465 18.6601 20.9759 18.5917 20.9911C18.5387 21.003 18.4613 21.003 18.4083 20.9911C18.3399 20.9759 18.2915 20.9465 18.1946 20.8878C17.3424 20.3711 15 18.7478 15 16.516V14.3415C15 13.978 15 13.7962 15.0572 13.6399C15.1077 13.5019 15.1899 13.3788 15.2965 13.2811C15.4172 13.1706 15.5809 13.1068 15.9084 12.9791L18.2542 12C18.3452 11.9646 18.4374 11.8 18.4374 11.8H18.5626C18.5626 11.8 18.6548 11.9646 18.7458 12L21.0916 12.9791C21.4191 13.1068 21.5828 13.1706 21.7035 13.2811C21.8101 13.3788 21.8923 13.5019 21.9428 13.6399C22 13.7962 22 13.978 22 14.3415V16.516Z" stroke="currentColor" stroke-width="inherit" stroke-linecap="round" stroke-linejoin="round"></path></svg> **Admin** in the left navigation bar into <MDSvgIcon name="icon-left-projects" /> **Project** in the left navigation bar, and remove the ☰ hover menu in the upper-left corner. Now you can click <MDSvgIcon name="icon-left-projects" /> to switch between projects and modify project settings.
-    - Consolidate all the help and support information for TiDB Cloud into the menu of the **?** icon in the lower-right corner, such as documentation, interactive tutorials, self-paced training, and support entries.
+    -   統合する<mdsvgicon name="icon-top-organization">**組織**と<mdsvgicon name="icon-top-account-settings">右上隅の**アカウントを**左のナビゲーション バーに移動します。</mdsvgicon></mdsvgicon>
+    -   統合する<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5H7.5C6.10444 14.5 5.40665 14.5 4.83886 14.6722C3.56045 15.06 2.56004 16.0605 2.17224 17.3389C2 17.9067 2 18.6044 2 20M14.5 6.5C14.5 8.98528 12.4853 11 10 11C7.51472 11 5.5 8.98528 5.5 6.5C5.5 4.01472 7.51472 2 10 2C12.4853 2 14.5 4.01472 14.5 6.5ZM22 16.516C22 18.7478 19.6576 20.3711 18.8054 20.8878C18.7085 20.9465 18.6601 20.9759 18.5917 20.9911C18.5387 21.003 18.4613 21.003 18.4083 20.9911C18.3399 20.9759 18.2915 20.9465 18.1946 20.8878C17.3424 20.3711 15 18.7478 15 16.516V14.3415C15 13.978 15 13.7962 15.0572 13.6399C15.1077 13.5019 15.1899 13.3788 15.2965 13.2811C15.4172 13.1706 15.5809 13.1068 15.9084 12.9791L18.2542 12C18.3452 11.9646 18.4374 11.8 18.4374 11.8H18.5626C18.5626 11.8 18.6548 11.9646 18.7458 12L21.0916 12.9791C21.4191 13.1068 21.5828 13.1706 21.7035 13.2811C21.8101 13.3788 21.8923 13.5019 21.9428 13.6399C22 13.7962 22 13.978 22 14.3415V16.516Z" stroke="currentColor" stroke-width="inherit" stroke-linecap="round" stroke-linejoin="round"></path></svg>左のナビゲーションバーの**管理者**に<mdsvgicon name="icon-left-projects">左ナビゲーションバーの**「プロジェクト」を**クリックし、左上隅の☰ホバーメニューを削除します。これで、<mdsvgicon name="icon-left-projects">プロジェクト間を切り替えたり、プロジェクト設定を変更したりします。</mdsvgicon></mdsvgicon>
+    -   ドキュメント、対話型チュートリアル、自習型トレーニング、サポート エントリなど、 TiDB Cloudのすべてのヘルプとサポート情報を、右下隅の**[?]**アイコンのメニューに統合します。
 
-- TiDB Cloud console now supports Dark Mode, which provides a more comfortable, eye-friendly experience. You can switch between light mode and dark mode from the bottom of the left navigation bar.
+-   TiDB Cloudコンソールは、より快適で目に優しいダークモードをサポートするようになりました。左ナビゲーションバーの下部から、ライトモードとダークモードを切り替えることができます。
 
-## June 27, 2023
+## 2023年6月27日 {#june-27-2023}
 
-**General changes**
+**一般的な変更**
 
-- Remove the pre-built sample dataset for newly created [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+-   新しく作成された[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターの事前構築されたサンプル データセットを削除します。
 
-## June 20, 2023
+## 2023年6月20日 {#june-20-2023}
 
-**General changes**
+**一般的な変更**
 
-- Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v6.5.2](https://docs.pingcap.com/tidb/v6.5/release-6.5.2) to [v6.5.3](https://docs.pingcap.com/tidb/v6.5/release-6.5.3).
+-   新しい[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン6.5.2](https://docs.pingcap.com/tidb/v6.5/release-6.5.2)から[バージョン6.5.3](https://docs.pingcap.com/tidb/v6.5/release-6.5.3)にアップグレードします。
 
-## June 13, 2023
+## 2023年6月13日 {#june-13-2023}
 
-**General changes**
+**一般的な変更**
 
-- Support using changefeeds to stream data to Amazon S3.
+-   changefeed を使用してデータを Amazon S3 にストリーミングすることをサポートします。
 
-    This enables seamless integration between TiDB Cloud and Amazon S3. It allows real-time data capture and replication from [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters to Amazon S3, ensuring that downstream applications and analytics have access to up-to-date data.
+    これにより、 TiDB CloudとAmazon S3のシームレスな統合が可能になります。1 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタからAmazon S3へのリアルタイムのデータキャプチャとレプリケーションが可能になり、下流のアプリケーションと分析機能が最新のデータにアクセスできるようになります。
 
-    For more information, see [Sink to cloud storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md).
+    詳細については[クラウドストレージにstorage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)参照してください。
 
-- Increase the maximum node storage of 16 vCPU TiKV for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from 4 TiB to 6 TiB.
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの 16 vCPU TiKV の最大ノードstorageを4 TiB から 6 TiB に増加します。
 
-    This enhancement increases the data storage capacity of your TiDB Cloud Dedicated cluster, improves workload scaling efficiency, and accommodates growing data requirements.
+    この機能強化により、 TiDB Cloud Dedicated クラスターのデータstorage容量が増加し、ワークロードのスケーリング効率が向上し、増大するデータ要件に対応できるようになります。
 
-    For more information, see [Size your cluster](/tidb-cloud/size-your-cluster.md).
+    詳細については[クラスターのサイズ](/tidb-cloud/size-your-cluster.md)参照してください。
 
-- Extend the [monitoring metrics retention period](/tidb-cloud/built-in-monitoring.md#metrics-retention-policy) for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from 3 days to 7 days.
+-   [監視メトリクスの保持期間](/tidb-cloud/built-in-monitoring.md#metrics-retention-policy) for [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターを 3 日から 7 日に延長します。
 
-    By extending the metrics retention period, now you have access to more historical data. This helps you identify trends and patterns of the cluster for better decision-making and faster troubleshooting.
+    メトリクスの保持期間を延長することで、より多くの履歴データにアクセスできるようになります。これにより、クラスターの傾向やパターンを特定し、より適切な意思決定と迅速なトラブルシューティングが可能になります。
 
-**Console changes**
+**コンソールの変更**
 
-- Release a new native web infrastructure for the [**Key Visualizer**](/tidb-cloud/tune-performance.md#key-visualizer) page of [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの[**キービジュアライザー**](/tidb-cloud/tune-performance.md#key-visualizer)ページ用の新しいネイティブ Web インフラストラクチャをリリースします。
 
-    With the new infrastructure, you can easily navigate through the **Key Visualizer** page and access the necessary information in a more intuitive and efficient manner. The new infrastructure also resolves many problems on UX, making the SQL diagnosis process more user-friendly.
+    新しいインフラストラクチャにより、 **Key Visualizer**ページ内を簡単にナビゲートし、より直感的かつ効率的に必要な情報にアクセスできるようになります。また、新しいインフラストラクチャはUXに関する多くの問題を解決し、SQL診断プロセスをよりユーザーフレンドリーなものにします。
 
-## June 6, 2023
+## 2023年6月6日 {#june-6-2023}
 
-**General changes**
+**一般的な変更**
 
-- Introduce [Index Insight (beta)](/tidb-cloud/index-insight.md) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, which optimizes query performance by providing index recommendations for slow queries.
+-   [インデックスインサイト（ベータ版）](/tidb-cloud/index-insight.md) for [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターを導入します。これは、遅いクエリに対してインデックスの推奨を提供することで、クエリ パフォーマンスを最適化します。
 
-    With Index Insight, you can improve the overall application performance and efficiency of your database operations in the following ways:
+    Index Insight を使用すると、次の方法でアプリケーション全体のパフォーマンスとデータベース操作の効率を向上させることができます。
 
-    - Enhanced query performance: Index Insight identifies slow queries and suggests appropriate indexes for them, thereby speeding up query execution, reducing response time, and improving user experience.
-    - Cost efficiency: By using Index Insight to optimize query performance, the need for extra computing resources is reduced, enabling you to use existing infrastructure more effectively. This can potentially lead to operational cost savings.
-    - Simplified optimization process: Index Insight simplifies the identification and implementation of index improvements, eliminating the need for manual analysis and guesswork. As a result, you can save time and effort with accurate index recommendations.
-    - Improved application efficiency: By using Index Insight to optimize database performance, applications running on TiDB Cloud can handle larger workloads and serve more users concurrently, which makes scaling operations of applications more efficient.
+    -   強化されたクエリ パフォーマンス: Index Insight は、遅いクエリを識別し、適切なインデックスを提案します。これにより、クエリの実行が高速化され、応答時間が短縮され、ユーザー エクスペリエンスが向上します。
+    -   コスト効率：Index Insight を使用してクエリパフォーマンスを最適化することで、追加のコンピューティングリソースの必要性が軽減され、既存のインフラストラクチャをより効率的に活用できるようになります。これにより、運用コストの削減につながる可能性があります。
+    -   簡素化された最適化プロセス：Index Insightは、インデックスの改善点の特定と実装を簡素化し、手作業による分析や推測作業の必要性を排除します。その結果、正確なインデックス推奨によって時間と労力を節約できます。
+    -   アプリケーション効率の向上: Index Insight を使用してデータベース パフォーマンスを最適化することで、 TiDB Cloudで実行されるアプリケーションはより大きなワークロードを処理し、より多くのユーザーに同時にサービスを提供できるようになり、アプリケーションのスケーリング操作がより効率的になります。
 
-  To use Index Insight, navigate to the **Diagnosis** page of your TiDB Cloud Dedicated cluster and click the **Index Insight BETA** tab.
+    Index Insight を使用するには、 TiDB Cloud Dedicated クラスターの**診断**ページに移動し、 **Index Insight BETA**タブをクリックします。
 
-    For more information, see [Use Index Insight (beta)](/tidb-cloud/index-insight.md).
+    詳細については[Index Insight（ベータ版）を使用する](/tidb-cloud/index-insight.md)参照してください。
 
-- Introduce [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_release_notes), an interactive platform for experiencing the full capabilities of TiDB, without registration or installation.
+-   登録やインストールなしで TiDB の全機能を体験できるインタラクティブ プラットフォーム[TiDB プレイグラウンド](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_cloud_release_notes)をご紹介します。
 
-    TiDB Playground is an interactive platform designed to provide a one-stop-shop experience for exploring the capabilities of TiDB, such as scalability, MySQL compatibility, and real-time analytics.
+    TiDB Playground は、スケーラビリティ、MySQL 互換性、リアルタイム分析などの TiDB の機能をワンストップで探索できるエクスペリエンスを提供するように設計されたインタラクティブ プラットフォームです。
 
-    With TiDB Playground, you can try out TiDB features in a controlled environment free from complex configurations in real-time, making it ideal to understand the features in TiDB.
+    TiDB Playground を使用すると、複雑な構成のない制御された環境で TiDB の機能をリアルタイムで試すことができるため、TiDB の機能を理解するのに最適です。
 
-    To get started with TiDB Playground, go to the [**TiDB Playground**](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_release_notes) page, select a feature you want to explore, and begin your exploration.
+    TiDB Playground を使い始めるには、 [**TiDB プレイグラウンド**](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_cloud_release_notes)ページに移動し、探索する機能を選択して探索を開始します。
 
-## June 5, 2023
+## 2023年6月5日 {#june-5-2023}
 
-**General changes**
+**一般的な変更**
 
-- Support connecting your [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) to GitHub.
+-   [データアプリ](/tidb-cloud/tidb-cloud-glossary.md#data-app) GitHub に接続することをサポートします。
 
-    By [connecting your Data App to GitHub](/tidb-cloud/data-service-manage-github-connection.md), you can manage all configurations of the Data App as [code files](/tidb-cloud/data-service-app-config-files.md) on Github, which integrates TiDB Cloud Data Service seamlessly with your system architecture and DevOps process.
+    [データアプリをGitHubに接続する](/tidb-cloud/data-service-manage-github-connection.md)により、データ アプリのすべての構成を Github 上の[コードファイル](/tidb-cloud/data-service-app-config-files.md)として管理できるようになり、 TiDB Cloudデータ サービスをシステムアーキテクチャおよび DevOps プロセスとシームレスに統合できます。
 
-    With this feature, you can easily accomplish the following tasks, which improves the CI/CD experience of developing Data Apps:
+    この機能を使用すると、次のタスクを簡単に実行できるため、データ アプリの開発における CI/CD エクスペリエンスが向上します。
 
-    - Automatically deploy Data App changes with GitHub.
-    - Configure CI/CD pipelines of your Data App changes on GitHub with version control.
-    - Disconnect from a connected GitHub repository.
-    - Review endpoint changes before the deployment.
-    - View deployment history and take necessary actions in the event of a failure.
-    - Re-deploy a commit to roll back to an earlier deployment.
+    -   GitHub を使用してデータ アプリの変更を自動的にデプロイします。
+    -   バージョン管理を使用して、GitHub でデータ アプリの変更の CI/CD パイプラインを構成します。
+    -   接続されている GitHub リポジトリから切断します。
+    -   展開前にエンドポイントの変更を確認します。
+    -   デプロイメント履歴をビュー、障害が発生した場合に必要なアクションを実行します。
+    -   コミットを再デプロイして、以前のデプロイにロールバックします。
 
-  For more information, see [Deploy Data App automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
+    詳細については[GitHub でデータ アプリを自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)参照してください。
 
-## June 2, 2023
+## 2023年6月2日 {#june-2-2023}
 
-**General changes**
+**一般的な変更**
 
-- In our pursuit to simplify and clarify, we have updated the names of our products:
+-   簡素化と明確化を目指し、製品名を更新しました。
 
-    - "{{{ .starter }}} Tier" is now called "{{{ .starter }}}".
-    - "TiDB Cloud Dedicated Tier" is now called "TiDB Cloud Dedicated".
-    - "TiDB On-Premises" is now called "TiDB Self-Managed".
+    -   「TiDB Cloud Serverless Tier」は「TiDB Cloud Serverless」という名前になりました。
+    -   「TiDB Cloud Dedicated Tier」は「TiDB Cloud Dedicated」という名前になりました。
+    -   「TiDB On-Premises」は「TiDB Self-Managed」という名前になりました。
 
-    Enjoy the same great performance under these refreshed names. Your experience is our priority.
+    刷新された名前でも、変わらぬ素晴らしいパフォーマンスをお楽しみください。お客様の体験こそが私たちの最優先事項です。
 
-## May 30, 2023
+## 2023年5月30日 {#may-30-2023}
 
-**General changes**
+**一般的な変更**
 
-- Enhance support for incremental data migration for the Data Migration feature in TiDB Cloud.
+-   TiDB Cloudのデータ移行機能の増分データ移行のサポートを強化します。
 
-    You can now specify a binlog position or a global transaction identifier (GTID) to replicate only incremental data generated after the specified position to TiDB Cloud. This enhancement empowers you with greater flexibility to select and replicate the data you need, aligning with your specific requirements.
+    binlogの位置またはグローバルトランザクション識別子（GTID）を指定して、指定した位置以降に生成された増分データのみをTiDB Cloudに複製できるようになりました。この機能強化により、お客様の特定の要件に合わせて必要なデータを選択し、複製する柔軟性が向上します。
 
-    For details, refer to [Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md).
+    詳細は[データ移行を使用して、MySQL 互換データベースからTiDB Cloudに増分データのみを移行する](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)を参照。
 
-- Add a new event type (`ImportData`) to the [**Events**](/tidb-cloud/tidb-cloud-events.md) page.
+-   [**イベント**](/tidb-cloud/tidb-cloud-events.md)ページに新しいイベントタイプ（ `ImportData` ）を追加します。
 
-- Remove **Playground** from the TiDB Cloud console.
+-   TiDB Cloudコンソールから**Playground**を削除します。
 
-    Stay tuned for the new standalone Playground with an optimized experience.
+    最適化されたエクスペリエンスを備えた新しいスタンドアロン プレイグラウンドにご期待ください。
 
-## May 23, 2023
+## 2023年5月23日 {#may-23-2023}
 
-**General changes**
+**一般的な変更**
 
-- When uploading a CSV file to TiDB, you can use not only English letters and numbers, but also characters such as Chinese and Japanese to define column names. However, for special characters, only underscore (`_`) is supported.
+-   CSVファイルをTiDBにアップロードする際、列名には英数字だけでなく、中国語や日本語などの文字も使用できます。ただし、特殊文字についてはアンダースコア（ `_` ）のみがサポートされています。
 
-    For details, refer to [Import Local Files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md).
+    詳細は[ローカルファイルをTiDB Cloudにインポートする](/tidb-cloud/tidb-cloud-import-local-files.md)を参照。
 
-## May 16, 2023
+## 2023年5月16日 {#may-16-2023}
 
-**Console changes**
+**コンソールの変更**
 
-- Introduce the left navigation entries organized by functional categories for both Dedicated and Serverless tiers.
+-   専用層とサーバーレス層の両方において、機能カテゴリ別に整理された左側のナビゲーション エントリを導入します。
 
-    The new navigation makes it easier and more intuitive for you to discover the feature entries. To view the new navigation, access the overview page of your cluster.
+    新しいナビゲーションにより、機能エントリをより簡単に、より直感的に見つけられるようになりました。新しいナビゲーションを表示するには、クラスターの概要ページにアクセスしてください。
 
-- Release a new native web infrastructure for the following two tabs on the **Diagnosis** page of Dedicated Tier clusters.
+-   Dedicated Tierクラスターの**診断**ページの次の 2 つのタブに新しいネイティブ Web インフラストラクチャをリリースします。
 
-    - [Slow Query](/tidb-cloud/tune-performance.md#slow-query)
-    - [SQL Statement](/tidb-cloud/tune-performance.md#statement-analysis)
+    -   [遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)
+    -   [SQL文](/tidb-cloud/tune-performance.md#statement-analysis)
 
-    With the new infrastructure, you can easily navigate through the two tabs and access the necessary information in a more intuitive and efficient manner. The new infrastructure also improves user experience, making the SQL diagnosis process more user-friendly.
+    新しいインフラストラクチャにより、2つのタブを簡単に切り替え、より直感的かつ効率的に必要な情報にアクセスできます。また、ユーザーエクスペリエンスも向上し、SQL診断プロセスがよりユーザーフレンドリーになります。
 
-## May 9, 2023
+## 2023年5月9日 {#may-9-2023}
 
-**General changes**
+**一般的な変更**
 
-- Support changing node sizes for GCP-hosted clusters created after April 26, 2023.
+-   2023 年 4 月 26 日以降に作成された GCP ホスト クラスタのノード サイズの変更をサポートします。
 
-    With this feature, you can upgrade to higher-performance nodes for increased demand or downgrade to lower-performance nodes for cost savings. With this added flexibility, you can adjust your cluster's capacity to align with your workloads and optimize costs.
+    この機能により、需要の増加に合わせて高パフォーマンスノードにアップグレードしたり、コスト削減のために低パフォーマンスノードにダウングレードしたりできます。この柔軟性の向上により、ワークロードに合わせてクラスターのキャパシティを調整し、コストを最適化できます。
 
-    For detailed steps, see [Change node size](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram).
+    詳細な手順については、 [ノードサイズを変更する](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)参照してください。
 
-- Support importing compressed files. You can import CSV and SQL files in the following formats: `.gzip`, `.gz`, `.zstd`, `.zst`, and `.snappy`. This feature provides a more efficient and cost-effective way to import data and reduces your data transfer costs.
+-   圧縮ファイルのインポート`.zstd`サポートします。CSVファイルとSQLファイルの`.zst`は、 `.gzip` `.gz` 。この機能により、より効率的`.snappy`コスト効率の高いデータインポートが可能になり、データ転送コストを削減できます。
 
-    For more information, see [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md) and [Import Sample Data](/tidb-cloud/import-sample-data.md).
+    詳細については、 [クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)および[サンプルデータのインポート](/tidb-cloud/import-sample-data.md)参照してください。
 
-- Support AWS PrivateLink-powered endpoint connection as a new network access management option for TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+-   TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターの新しいネットワーク アクセス管理オプションとして、AWS PrivateLink を利用したエンドポイント接続をサポートします。
 
-    The private endpoint connection does not expose your data to the public internet. In addition, the endpoint connection supports CIDR overlap and is easier for network management.
+    プライベートエンドポイント接続では、データがパブリックインターネットに公開されることはありません。さらに、エンドポイント接続はCIDR重複をサポートしており、ネットワーク管理が容易になります。
 
-    For more information, see [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md).
+    詳細については[プライベートエンドポイント接続を設定する](/tidb-cloud/set-up-private-endpoint-connections.md)参照してください。
 
-**Console changes**
+**コンソールの変更**
 
-- Add new event types to the [**Event**](/tidb-cloud/tidb-cloud-events.md) page to record backup, restore, and changefeed actions for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+-   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのバックアップ、復元、および changefeed アクションを記録するために、 [**イベント**](/tidb-cloud/tidb-cloud-events.md)ページに新しいイベント タイプを追加します。
 
-    To get a full list of the events that can be recorded, see [Logged events](/tidb-cloud/tidb-cloud-events.md#logged-events).
+    記録できるイベントの完全なリストについては、 [記録されたイベント](/tidb-cloud/tidb-cloud-events.md#logged-events)参照してください。
 
-- Introduce the **SQL Statement** tab on the [**SQL Diagnosis**](/tidb-cloud/tune-performance.md) page for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+-   [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターの[**SQL診断**](/tidb-cloud/tune-performance.md)ページに**SQL ステートメント**タブを導入します。
 
-    The **SQL Statement** tab provides the following:
+    **「SQL ステートメント」**タブには次の内容が表示されます。
 
-    - A comprehensive overview of all SQL statements executed by your TiDB database, allowing you to easily identify and diagnose slow queries.
-    - Detailed information on each SQL statement, such as the query time, execution plan, and the database server response, helping you optimize your database performance.
-    - A user-friendly interface that makes it easy to sort, filter, and search through large amounts of data, enabling you to focus on the most critical queries.
+    -   TiDB データベースによって実行されるすべての SQL ステートメントの包括的な概要により、遅いクエリを簡単に識別して診断できます。
+    -   クエリ時間、実行プラン、データベースサーバーの応答など、各 SQL ステートメントの詳細情報が提供され、データベースのパフォーマンスの最適化に役立ちます。
+    -   大量のデータを簡単に並べ替え、フィルタリング、検索できるユーザーフレンドリーなインターフェースにより、最も重要なクエリに集中できます。
 
-  For more information, see [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis).
+    詳細については[ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)参照してください。
 
-## May 6, 2023
+## 2023年5月6日 {#may-6-2023}
 
-**General changes**
+**一般的な変更**
 
-- Support directly accessing the [Data Service endpoint](/tidb-cloud/tidb-cloud-glossary.md#endpoint) in the region where a TiDB [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster is located.
+-   TiDB [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターが配置されているリージョンの[データサービスエンドポイント](/tidb-cloud/tidb-cloud-glossary.md#endpoint)の直接アクセスをサポートします。
 
-    For newly created Serverless Tier clusters, the endpoint URL now includes the cluster region information. By requesting the regional domain `<region>.data.tidbcloud.com`, you can directly access the endpoint in the region where the TiDB cluster is located.
+    新しく作成されたServerless Tierクラスターのエンドポイント URL にクラスターのリージョン情報が含まれるようになりました。リージョンドメイン`<region>.data.tidbcloud.com`リクエストすることで、TiDB クラスターが配置されているリージョンのエンドポイントに直接アクセスできます。
 
-    Alternatively, you can also request the global domain `data.tidbcloud.com` without specifying a region. In this way, TiDB Cloud will internally redirect the request to the target region, but this might result in additional latency. If you choose this way, make sure to add the `--location-trusted` option to your curl command when calling an endpoint.
+    あるいは、リージョンを指定せずにグローバルドメイン`data.tidbcloud.com`リクエストすることもできます。この場合、 TiDB Cloud は内部的にリクエストをターゲットリージョンにリダイレクトしますが、レイテンシーが増加する可能性があります。この方法を選択する場合は、エンドポイントを呼び出す際に curl コマンドに`--location-trusted`オプションを追加してください。
 
-    For more information, see [Call an endpoint](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint).
+    詳細については[エンドポイントを呼び出す](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint)参照してください。
 
-## April 25, 2023
+## 2023年4月25日 {#april-25-2023}
 
-**General changes**
+**一般的な変更**
 
-- For the first five [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
+-   組織内の最初の 5 [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターについては、 TiDB Cloud は次のようにクラスターごとに無料使用量割り当てを提供します。
 
-    - Row storage: 5 GiB
-    - [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
+    -   行storage: 5 GiB
+    -   [リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 月間5,000万RU
 
-  Until May 31, 2023, Serverless Tier clusters are still free, with a 100% discount off. After that, usage beyond the free quota will be charged.
+    2023年5月31日まで、Serverless Tierのクラスターは引き続き無料で、100%割引となります。それ以降は、無料枠を超えた使用量に対して料金が発生します。
 
-    You can easily [monitor your cluster usage or increase your usage quota](/tidb-cloud/manage-serverless-spend-limit.md) in the **Usage This Month** area of your cluster **Overview** page. Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you increase the quota or the usage is reset upon the start of a new month.
+    クラスターの**概要**ページの**「今月の使用量」**エリアで簡単に[クラスターの使用状況を監視するか、使用量の割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md)確認できます。クラスターの無料クォータに達すると、クォータを増やすか、新しい月の開始時に使用量がリセットされるまで、このクラスターの読み取りおよび書き込み操作は制限されます。
 
-    For more information about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [{{{ .starter }}} Tier Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
+    さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク送信など) の RU 消費量、価格の詳細、スロットル情報の詳細については、 [TiDB CloudServerless Tierの料金詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)参照してください。
 
-- Support backup and restore for TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+-   TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターのバックアップと復元をサポートします。
 
-     For more information, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore-serverless.md).
+    詳細については[TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore-serverless.md)参照してください。
 
-- Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v6.5.1](https://docs.pingcap.com/tidb/v6.5/release-6.5.1) to [v6.5.2](https://docs.pingcap.com/tidb/v6.5/release-6.5.2).
+-   新しい[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン6.5.1](https://docs.pingcap.com/tidb/v6.5/release-6.5.1)から[バージョン6.5.2](https://docs.pingcap.com/tidb/v6.5/release-6.5.2)にアップグレードします。
 
-- Provide a maintenance window feature to enable you to easily schedule and manage planned maintenance activities for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+-   メンテナンス ウィンドウ機能を提供して、 [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの計画されたメンテナンス アクティビティを簡単にスケジュールおよび管理できるようにします。
 
-    A maintenance window is a designated timeframe during which planned maintenance activities, such as operating system updates, security patches, and infrastructure upgrades, are performed automatically to ensure the reliability, security, and performance of the TiDB Cloud service.
+    メンテナンス ウィンドウとは、 TiDB Cloudサービスの信頼性、セキュリティ、パフォーマンスを確保するために、オペレーティング システムの更新、セキュリティ パッチ、インフラストラクチャのアップグレードなどの計画されたメンテナンス アクティビティが自動的に実行される指定された期間です。
 
-    During a maintenance window, temporary connection disruptions or QPS fluctuations might occur, but the clusters remain available, and SQL operations, the existing data import, backup, restore, migration, and replication tasks can still run normally. See [a list of allowed and disallowed operations](/tidb-cloud/configure-maintenance-window.md#allowed-and-disallowed-operations-during-a-maintenance-window) during maintenance.
+    メンテナンス期間中は、一時的な接続中断やQPSの変動が発生する可能性がありますが、クラスタは引き続き利用可能であり、SQL操作、既存のデータインポート、バックアップ、リストア、移行、レプリケーションタスクは通常通り実行されます。メンテナンス中は[許可された操作と許可されていない操作のリスト](/tidb-cloud/configure-maintenance-window.md#allowed-and-disallowed-operations-during-a-maintenance-window)ご覧ください。
 
-    We will strive to minimize the frequency of maintenance. If a maintenance window is planned, the default start time is 03:00 Wednesday (based on the time zone of your TiDB Cloud organization) of the target week. To avoid potential disruptions, it is important to be aware of the maintenance schedules and plan your operations accordingly.
+    メンテナンスの頻度を最小限に抑えるよう努めます。メンテナンス期間が予定されている場合、デフォルトの開始時間は対象週の水曜日午前3時（ TiDB Cloud組織のタイムゾーンに基づく）です。サービス中断の可能性を回避するために、メンテナンススケジュールをご確認いただき、それに応じて運用を計画していただくことが重要です。
 
-    - To keep you informed, TiDB Cloud will send you three email notifications for every maintenance window: one before, one starting, and one after the maintenance tasks.
-    - To minimize the maintenance impact, you can modify the maintenance start time to your preferred time or defer maintenance activities on the **Maintenance** page.
+    -   最新情報をお届けするために、 TiDB Cloud はメンテナンス ウィンドウごとに 3 つの電子メール通知を送信します。1 つはメンテナンス タスクの前、1 つは開始時、もう 1 つはメンテナンス タスクの後です。
+    -   メンテナンスの影響を最小限に抑えるには、 **「メンテナンス」**ページでメンテナンスの開始時刻を希望の時間に変更したり、メンテナンス アクティビティを延期したりすることができます。
 
-  For more information, see [Configure maintenance window](/tidb-cloud/configure-maintenance-window.md).
+    詳細については[メンテナンスウィンドウを構成する](/tidb-cloud/configure-maintenance-window.md)参照してください。
 
-- Improve load balancing of TiDB and reduce connection drops when you scale TiDB nodes of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters that are hosted on AWS and created after April 25, 2023.
+-   AWS でホストされ、2023 年 4 月 25 日以降に作成された[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの TiDB ノードをスケーリングするときに、TiDB の負荷分散を改善し、接続の切断を減らします。
 
-    - Support automatically migrating existing connections to new TiDB nodes when you scale out TiDB nodes.
-    - Support automatically migrating existing connections to available TiDB nodes when you scale in TiDB nodes.
+    -   TiDB ノードをスケールアウトするときに、既存の接続を新しい TiDB ノードに自動的に移行することをサポートします。
+    -   TiDB ノードをスケールインするときに、既存の接続を利用可能な TiDB ノードに自動的に移行することをサポートします。
 
-  Currently, this feature is provided for all Dedicated Tier clusters hosted on AWS.
+    現在、この機能は AWS でホストされているすべてのDedicated Tierクラスターに提供されています。
 
-**Console changes**
+**コンソールの変更**
 
-- Release a new native web infrastructure for the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+-   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページ用の新しいネイティブ Web インフラストラクチャをリリースします。
 
-    With the new infrastructure, you can easily navigate through the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page and access the necessary information in a more intuitive and efficient manner. The new infrastructure also resolves many problems on UX, making the monitoring process more user-friendly.
+    新しいインフラストラクチャにより、 [監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページ目から簡単にナビゲートし、より直感的かつ効率的に必要な情報にアクセスできます。また、UXに関する多くの問題も解決され、監視プロセスがよりユーザーフレンドリーになります。
 
-## April 18, 2023
+## 2023年4月18日 {#april-18-2023}
 
-**General changes**
+**一般的な変更**
 
-- Support scaling up or down [Data Migration job specifications](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration) for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+-   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して[データ移行ジョブの仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)スケールアップまたはスケールダウンをサポートします。
 
-    With this feature, you can improve migration performance by scaling up specifications or reduce costs by scaling down specifications.
+    この機能を使用すると、仕様を拡大して移行のパフォーマンスを向上させたり、仕様を縮小してコストを削減したりできます。
 
-    For more information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md#scale-a-migration-job-specification).
+    詳細については[データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md#scale-a-migration-job-specification)参照してください。
 
-**Console changes**
+**コンソールの変更**
 
-- Revamp the UI to make [cluster creation](https://tidbcloud.com/clusters/create-cluster) experience more user-friendly, enabling you to create and configure clusters with just a few clicks.
+-   UI を改良して[クラスターの作成](https://tidbcloud.com/clusters/create-cluster)をさらにユーザーフレンドリーにし、数回クリックするだけでクラスターを作成および構成できるようになりました。
 
-    The new design focuses on simplicity, reducing visual clutter, and providing clear instructions. After clicking **Create** on the cluster creation page, you will be directed to the cluster overview page without having to wait for the cluster creation to be completed.
+    新しいデザインは、シンプルさを重視し、視覚的な煩雑さを軽減し、明確な指示を提供します。クラスター作成ページで**「作成」を**クリックすると、クラスターの作成が完了するのを待たずに、クラスターの概要ページに移動します。
 
-    For more information, see [Create a cluster](/tidb-cloud/create-tidb-cluster.md).
+    詳細については[クラスターを作成する](/tidb-cloud/create-tidb-cluster.md)参照してください。
 
-- Introduce the **Discounts** tab on the **Billing** page to show the discount information for organization owners and billing administrators.
+-   **請求**ページに**割引**タブを導入し、組織の所有者と請求管理者向けの割引情報を表示します。
 
-    For more information, see [Discounts](/tidb-cloud/tidb-cloud-billing.md#discounts).
+    詳細については[割引](/tidb-cloud/tidb-cloud-billing.md#discounts)参照してください。
 
-## April 11, 2023
+## 2023年4月11日 {#april-11-2023}
 
-**General changes**
+**一般的な変更**
 
-- Improve the load balance of TiDB and reduce connection drops when you scale TiDB nodes of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS.
+-   AWS でホストされている[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの TiDB ノードをスケーリングするときに、TiDB の負荷分散を改善し、接続の切断を減らします。
 
-    - Support automatically migrating existing connections to new TiDB nodes when you scale out TiDB nodes.
-    - Support automatically migrating existing connections to available TiDB nodes when you scale in TiDB nodes.
+    -   TiDB ノードをスケールアウトするときに、既存の接続を新しい TiDB ノードに自動的に移行することをサポートします。
+    -   TiDB ノードをスケールインするときに、既存の接続を利用可能な TiDB ノードに自動的に移行することをサポートします。
 
-  Currently, this feature is only provided for Dedicated Tier clusters that are hosted on the AWS `Oregon (us-west-2)` region.
+    現在、この機能は AWS `Oregon (us-west-2)`リージョンでホストされているDedicated Tierクラスターに対してのみ提供されています。
 
-- Support the [New Relic](https://newrelic.com/) integration for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+-   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して[ニューレリック](https://newrelic.com/)統合をサポートします。
 
-    With the New Relic integration, you can configure TiDB Cloud to send metric data of your TiDB clusters to [New Relic](https://newrelic.com/). Then, you can monitor and analyze both your application performance and your TiDB database performance on [New Relic](https://newrelic.com/). This feature can help you quickly identify and troubleshoot potential issues and reduce the resolution time.
+    New Relicとの連携により、 TiDB Cloudを設定してTiDBクラスターのメトリックデータを[ニューレリック](https://newrelic.com/)に送信できます。これにより、 [ニューレリック](https://newrelic.com/)でアプリケーションパフォーマンスとTiDBデータベースパフォーマンスの両方を監視・分析できます。この機能により、潜在的な問題を迅速に特定してトラブルシューティングし、解決時間を短縮できます。
 
-    For integration steps and available metrics, see [Integrate TiDB Cloud with New Relic](/tidb-cloud/monitor-new-relic-integration.md).
+    統合手順と利用可能なメトリックについては、 [TiDB CloudとNew Relicの統合](/tidb-cloud/monitor-new-relic-integration.md)参照してください。
 
-- Add the following [changefeed](/tidb-cloud/changefeed-overview.md) metrics to the Prometheus integration for Dedicated Tier clusters.
+-   Dedicated Tierクラスターの Prometheus 統合に次の[チェンジフィード](/tidb-cloud/changefeed-overview.md)メトリックを追加します。
 
-    - `tidbcloud_changefeed_latency`
-    - `tidbcloud_changefeed_replica_rows`
+    -   `tidbcloud_changefeed_latency`
+    -   `tidbcloud_changefeed_replica_rows`
 
-    If you have [integrated TiDB Cloud with Prometheus](/tidb-cloud/monitor-prometheus-and-grafana-integration.md), you can monitor the performance and health of changefeeds in real time using these metrics. Additionally, you can easily create alerts to monitor the metrics using Prometheus.
+    [TiDB CloudとPrometheusを統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)お持ちの場合は、これらのメトリクスを使用して、変更フィードのパフォーマンスと健全性をリアルタイムで監視できます。さらに、Prometheus を使用してメトリクスを監視するためのアラートを簡単に作成できます。
 
-**Console changes**
+**コンソールの変更**
 
-- Update the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters to use [node-level resource metrics](/tidb-cloud/built-in-monitoring.md#server).
+-   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページを[ノードレベルのリソースメトリック](/tidb-cloud/built-in-monitoring.md#server)使用するように更新します。
 
-    With node-level resource metrics, you can see a more accurate representation of resource consumption to better understand the actual usage of purchased services.
+    ノード レベルのリソース メトリックを使用すると、リソース消費量をより正確に表示して、購入したサービスの実際の使用状況をよりよく理解できます。
 
-    To access these metrics, navigate to the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page of your cluster, and then check the **Server** category under the **Metrics** tab.
+    これらのメトリックにアクセスするには、クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページに移動し、 **[メトリック]**タブの**[サーバー]**カテゴリを確認します。
 
-- Optimize the [Billing](/tidb-cloud/tidb-cloud-billing.md#billing-details) page by reorganizing the billing items in **Summary by Project** and **Summary by Service**, which makes the billing information clearer.
+-   **プロジェクト別概要**と**サービス別概要**の請求項目を再編成して[請求する](/tidb-cloud/tidb-cloud-billing.md#billing-details)ページを最適化し、請求情報をより明確にします。
 
-## April 4, 2023
+## 2023年4月4日 {#april-4-2023}
 
-**General changes**
+**一般的な変更**
 
-- Remove the following two alerts from [TiDB Cloud built-in alerts](/tidb-cloud/monitor-built-in-alerting.md#tidb-cloud-built-in-alert-conditions) to prevent false positives. This is because temporary offline or out-of-memory (OOM) issues on one of the nodes do not significantly affect the overall health of a cluster.
+-   誤検知を防ぐため、 [TiDB Cloud組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md#tidb-cloud-built-in-alert-conditions)から以下の 2 つのアラートを削除します。これは、ノードの 1 つで一時的なオフラインまたはメモリ不足 (OOM) が発生しても、クラスター全体の健全性に大きな影響を与えないためです。
 
-    - At least one TiDB node in the cluster has run out of memory.
-    - One or more cluster nodes are offline.
+    -   クラスター内の少なくとも 1 つの TiDB ノードでメモリ不足が発生しました。
+    -   1 つ以上のクラスター ノードがオフラインです。
 
-**Console changes**
+**コンソールの変更**
 
-- Introduce the [Alerts](/tidb-cloud/monitor-built-in-alerting.md) page for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, which lists both active and closed alerts for each Dedicated Tier cluster.
+-   各Dedicated Tierクラスターのアクティブなアラートとクローズされたアラートの両方を一覧表示する、 [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの[アラート](/tidb-cloud/monitor-built-in-alerting.md)ページを導入します。
 
-    The **Alerts** page provides the following:
+    **アラート**ページには次の内容が表示されます。
 
-    - An intuitive and user-friendly user interface. You can view alerts for your clusters on this page even if you have not subscribed to the alert notification emails.
-    - Advanced filtering options to help you quickly find and sort alerts based on their severity, status, and other attributes. It also allows you to view the historical data for the last 7 days, which eases the alert history tracking.
-    - The **Edit Rule** feature. You can customize alert rule settings to meet your cluster's specific needs.
+    -   直感的で使いやすいユーザーインターフェース。アラート通知メールを購読していない場合でも、このページでクラスターのアラートを確認できます。
+    -   高度なフィルタリングオプションにより、アラートの重大度、ステータス、その他の属性に基づいて、アラートを素早く検索・並べ替えることができます。また、過去7日間の履歴データを表示できるため、アラート履歴の追跡が容易になります。
+    -   **ルール編集**機能。クラスターの特定のニーズに合わせてアラートルール設定をカスタマイズできます。
 
-  For more information, see [TiDB Cloud built-in alerts](/tidb-cloud/monitor-built-in-alerting.md).
+    詳細については[TiDB Cloud組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md)参照してください。
 
-- Consolidate the help-related information and actions of TiDB Cloud into a single place.
+-   TiDB Cloudのヘルプ関連の情報とアクションを 1 か所に統合します。
 
-    Now, you can get all the [TiDB Cloud help information](/tidb-cloud/tidb-cloud-support.md) and contact support by clicking **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/).
+    これで、 [TiDB Cloudコンソール](https://tidbcloud.com/)右下隅にある**[?]**をクリックして、 [TiDB Cloudヘルプ情報](/tidb-cloud/tidb-cloud-support.md)すべて取得し、サポートに問い合わせることができます。
 
-- Introduce the [Getting Started](https://tidbcloud.com/getting-started) page to help you learn about TiDB Cloud.
+-   TiDB Cloudについて理解を深めるのに役立つ[はじめる](https://tidbcloud.com/getting-started)ページを紹介します。
 
-    The **Getting Started** page provides you with interactive tutorials, essential guides, and useful links. By following interactive tutorials, you can easily explore TiDB Cloud features and HTAP capabilities with pre-built industry-specific datasets (Steam Game Dataset and S&P 500 Dataset).
+    **「はじめに」**ページでは、インタラクティブなチュートリアル、必須ガイド、役立つリンクを提供しています。インタラクティブなチュートリアルに従うことで、業界固有のデータセット（SteamゲームデータセットとS&amp;P 500データセット）を活用し、 TiDB Cloudの機能とHTAP機能を簡単に体験できます。
 
-    To access the **Getting Started** page, click <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.9998L9 11.9998M12 14.9998C13.3968 14.4685 14.7369 13.7985 16 12.9998M12 14.9998V19.9998C12 19.9998 15.03 19.4498 16 17.9998C17.08 16.3798 16 12.9998 16 12.9998M9 11.9998C9.53214 10.6192 10.2022 9.29582 11 8.04976C12.1652 6.18675 13.7876 4.65281 15.713 3.59385C17.6384 2.53489 19.8027 1.98613 22 1.99976C22 4.71976 21.22 9.49976 16 12.9998M9 11.9998H4C4 11.9998 4.55 8.96976 6 7.99976C7.62 6.91976 11 7.99976 11 7.99976M4.5 16.4998C3 17.7598 2.5 21.4998 2.5 21.4998C2.5 21.4998 6.24 20.9998 7.5 19.4998C8.21 18.6598 8.2 17.3698 7.41 16.5898C7.02131 16.2188 6.50929 16.0044 5.97223 15.9878C5.43516 15.9712 4.91088 16.1535 4.5 16.4998Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> **Getting Started** in the left navigation bar of the [TiDB Cloud console](https://tidbcloud.com/). On this page, you can click **Query Sample Dataset** to open the interactive tutorials or click other links to explore TiDB Cloud. Alternatively, you can click **?** in the lower-right corner and click **Interactive Tutorials**.
+    **「はじめに」**ページにアクセスするには、 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.9998L9 11.9998M12 14.9998C13.3968 14.4685 14.7369 13.7985 16 12.9998M12 14.9998V19.9998C12 19.9998 15.03 19.4498 16 17.9998C17.08 16.3798 16 12.9998 16 12.9998M9 11.9998C9.53214 10.6192 10.2022 9.29582 11 8.04976C12.1652 6.18675 13.7876 4.65281 15.713 3.59385C17.6384 2.53489 19.8027 1.98613 22 1.99976C22 4.71976 21.22 9.49976 16 12.9998M9 11.9998H4C4 11.9998 4.55 8.96976 6 7.99976C7.62 6.91976 11 7.99976 11 7.99976M4.5 16.4998C3 17.7598 2.5 21.4998 2.5 21.4998C2.5 21.4998 6.24 20.9998 7.5 19.4998C8.21 18.6598 8.2 17.3698 7.41 16.5898C7.02131 16.2188 6.50929 16.0044 5.97223 15.9878C5.43516 15.9712 4.91088 16.1535 4.5 16.4998Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> [TiDB Cloudコンソール](https://tidbcloud.com/)の左側のナビゲーションバーにある**「Getting Started」をクリックしてください**。このページでは、 **「Query Sample Dataset」**をクリックしてインタラクティブチュートリアルを開いたり、他のリンクをクリックしてTiDB Cloudを探索したりできます。または、右下隅の**「?」**をクリックして**「Interactive Tutorials」**をクリックすることもできます。
 
-## March 29, 2023
+## 2023年3月29日 {#march-29-2023}
 
-**General changes**
+**一般的な変更**
 
-- [Data Service (beta)](/tidb-cloud/data-service-overview.md) supports more fine-grained access control for Data Apps.
+-   [データサービス（ベータ版）](/tidb-cloud/data-service-overview.md) 、データ アプリに対するよりきめ細かいアクセス制御がサポートされます。
 
-    On the Data App details page, now you can link clusters to your Data App and specify the role for each API key. The role controls whether the API key can read or write data to the linked clusters and can be set to `ReadOnly` or `ReadAndWrite`. This feature provides cluster-level and permission-level access control for Data Apps, giving you more flexibility to control the access scope according to your business needs.
+    データアプリの詳細ページで、クラスタをデータアプリにリンクし、各APIキーのロールを指定できるようになりました。ロールは、APIキーがリンクされたクラスタへのデータの読み取りまたは書き込みを許可するかどうかを制御し、 `ReadOnly`または`ReadAndWrite`に設定できます。この機能により、データアプリに対してクラスタレベルおよび権限レベルのアクセス制御が可能になり、ビジネスニーズに応じてアクセス範囲をより柔軟に制御できるようになります。
 
-    For more information, see [Manage linked clusters](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources) and [Manage API keys](/tidb-cloud/data-service-api-key.md).
+    詳細については、 [リンクされたクラスターを管理する](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)および[APIキーを管理する](/tidb-cloud/data-service-api-key.md)参照してください。
 
-## March 28, 2023
+## 2023年3月28日 {#march-28-2023}
 
-**General changes**
+**一般的な変更**
 
-- Add 2 RCUs, 4 RCUs, and 8 RCUs specifications for [changefeeds](/tidb-cloud/changefeed-overview.md), and support choosing your desired specification when you [create a changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed).
+-   [チェンジフィード](/tidb-cloud/changefeed-overview.md)に 2 RCU、4 RCU、8 RCU 仕様を追加し、 [チェンジフィードを作成する](/tidb-cloud/changefeed-overview.md#create-a-changefeed)ときに希望の仕様を選択できるようにサポートします。
 
-    Using these new specifications, the data replication costs can be reduced by up to 87.5% compared to scenarios where 16 RCUs were previously required.
+    これらの新しい仕様を使用すると、以前は 16 個の RCU が必要だったシナリオと比較して、データ複製コストを最大 87.5% 削減できます。
 
-- Support scaling up or down specifications for [changefeeds](/tidb-cloud/changefeed-overview.md) created after March 28, 2023.
+-   2023 年 3 月 28 日以降に作成された[チェンジフィード](/tidb-cloud/changefeed-overview.md)スケールアップまたはスケールダウン仕様をサポートします。
 
-    You can improve replication performance by choosing a higher specification or reduce replication costs by choosing a lower specification.
+    より高い仕様を選択するとレプリケーションのパフォーマンスが向上し、より低い仕様を選択するとレプリケーションのコストが削減されます。
 
-    For more information, see [Scale a changefeed](/tidb-cloud/changefeed-overview.md#scale-a-changefeed).
+    詳細については[チェンジフィードをスケールする](/tidb-cloud/changefeed-overview.md#scale-a-changefeed)参照してください。
 
-- Support replicating incremental data in real-time from a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster in AWS to a [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster in the same project and same region.
+-   AWS の[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターから同じプロジェクトおよび同じリージョン内の[Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターへの増分データのリアルタイム複製をサポートします。
 
-    For more information, see [Sink to TiDB Cloud](/tidb-cloud/changefeed-sink-to-tidb-cloud.md).
+    詳細については[TiDB Cloudにシンク](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)参照してください。
 
-- Support two new GCP regions for the [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) feature of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters: `Singapore (asia-southeast1)` and `Oregon (us-west1)`.
+-   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの[データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)機能に対して 2 つの新しい GCP リージョン ( `Singapore (asia-southeast1)`と`Oregon (us-west1)`をサポートします。
 
-    With these new regions, you have more options for migrating your data to TiDB Cloud. If your upstream data is stored in or near these regions, you can now take advantage of faster and more reliable data migration from GCP to TiDB Cloud.
+    これらの新しいリージョンにより、 TiDB Cloudへのデータ移行の選択肢が広がります。アップストリームデータがこれらのリージョン内またはその付近に保存されている場合、GCP からTiDB Cloudへのより高速で信頼性の高いデータ移行を活用できるようになります。
 
-    For more information, see [Migrate MySQL-compatible databases to TiDB Cloud using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
+    詳細については[データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)参照してください。
 
-**Console changes**
+**コンソールの変更**
 
-- Release a new native web infrastructure for the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) page of [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+-   [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターの[遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)ページ用の新しいネイティブ Web インフラストラクチャをリリースします。
 
-    With this new infrastructure, you can easily navigate through the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) page and access the necessary information in a more intuitive and efficient manner. The new infrastructure also resolves many problems on UX, making the SQL diagnosis process more user-friendly.
+    この新しいインフラストラクチャにより、 [遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)ページ目を簡単にナビゲートし、より直感的かつ効率的に必要な情報にアクセスできます。また、UXに関する多くの問題も解決され、SQL診断プロセスがよりユーザーフレンドリーになります。
 
-## March 21, 2023
+## 2023年3月21日 {#march-21-2023}
 
-**General changes**
+**一般的な変更**
 
-- Introduce [Data Service (beta)](https://tidbcloud.com/project/data-service) for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, which enables you to access data via an HTTPS request using a custom API endpoint.
+-   [データサービス（ベータ版）](https://tidbcloud.com/project/data-service) for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターを導入すると、カスタム API エンドポイントを使用して HTTPS リクエスト経由でデータにアクセスできるようになります。
 
-    With Data Service, you can seamlessly integrate TiDB Cloud with any application or service that is compatible with HTTPS. The following are some common scenarios:
+    Data Service を使用すると、 TiDB Cloud をHTTPS 対応のあらゆるアプリケーションやサービスとシームレスに統合できます。一般的なシナリオを以下に示します。
 
-    - Access the database of your TiDB cluster directly from a mobile or web application.
-    - Use serverless edge functions to call endpoints and avoid scalability issues caused by database connection pooling.
-    - Integrate TiDB Cloud with data visualization projects by using Data Service as a data source.
-    - Connect to your database from an environment that MySQL interface does not support.
+    -   モバイル アプリケーションまたは Web アプリケーションから TiDB クラスターのデータベースに直接アクセスします。
+    -   サーバーレス エッジ関数を使用してエンドポイントを呼び出し、データベース接続プールによって発生するスケーラビリティの問題を回避します。
+    -   データ サービスをデータ ソースとして使用して、 TiDB Cloud をデータ視覚化プロジェクトと統合します。
+    -   MySQL インターフェースがサポートしていない環境からデータベースに接続します。
 
-    In addition, TiDB Cloud provides the [Chat2Query API](/tidb-cloud/use-chat2query-api.md), a RESTful interface that allows you to generate and execute SQL statements using AI.
+    さらに、 TiDB Cloud は、AI を使用して SQL ステートメントを生成および実行できる RESTful インターフェースである[Chat2Query API](/tidb-cloud/use-chat2query-api.md)提供します。
 
-    To access Data Service, navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page in the left navigation pane. For more information, see the following documentation:
+    データサービスにアクセスするには、左側のナビゲーションペインの[**データサービス**](https://tidbcloud.com/project/data-service)ページ目に移動します。詳細については、以下のドキュメントをご覧ください。
 
-    - [Data Service Overview](/tidb-cloud/data-service-overview.md)
-    - [Get Started with Data Service](/tidb-cloud/data-service-get-started.md)
-    - [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md)
+    -   [データサービスの概要](/tidb-cloud/data-service-overview.md)
+    -   [データサービスを始める](/tidb-cloud/data-service-get-started.md)
+    -   [Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)
 
-- Support decreasing the size of TiDB, TiKV, and TiFlash nodes to scale in a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster that is hosted on AWS and created after December 31, 2022.
+-   AWS でホストされ、2022 年 12 月 31 日以降に作成される[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでスケールするために、TiDB、TiKV、およびTiFlashノードのサイズを縮小することをサポートします。
 
-    You can decrease the node size [via the TiDB Cloud console](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram) or [via the TiDB Cloud API (beta)](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster).
+    ノード サイズを[TiDB Cloudコンソール経由](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)または[TiDB Cloud API（ベータ版）経由](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)減らすことができます。
 
-- Support a new GCP region for the [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) feature of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters: `Tokyo (asia-northeast1)`.
+-   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの[データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)機能に対して新しい GCP リージョンをサポートします: `Tokyo (asia-northeast1)` 。
 
-    The feature can help you migrate data from MySQL-compatible databases in Google Cloud Platform (GCP) to your TiDB cluster easily and efficiently.
+    この機能を使用すると、Google Cloud Platform (GCP) の MySQL 互換データベースから TiDB クラスタにデータを簡単かつ効率的に移行できます。
 
-    For more information, see [Migrate MySQL-compatible databases to TiDB Cloud using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
+    詳細については[データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)参照してください。
 
-**Console changes**
+**コンソールの変更**
 
-- Introduce the **Events** page for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, which provides the records of main changes to your cluster.
+-   クラスターの主な変更の記録を提供する、 [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの**イベント**ページを紹介します。
 
-    On this page, you can view the event history for the last 7 days and track important details such as the trigger time and the user who initiated an action. For example, you can view events such as when a cluster was paused or who modified the cluster size.
+    このページでは、過去7日間のイベント履歴を表示し、トリガー時刻やアクションを開始したユーザーなどの重要な詳細を追跡できます。例えば、クラスターが一時停止された時刻や、クラスターのサイズを変更したユーザーなどのイベントを確認できます。
 
-    For more information, see [TiDB Cloud cluster events](/tidb-cloud/tidb-cloud-events.md).
+    詳細については[TiDB Cloudクラスター イベント](/tidb-cloud/tidb-cloud-events.md)参照してください。
 
-- Add the **Database Status** tab to the **Monitoring** page for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, which displays the following database-level metrics:
+-   [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターの**[監視]**ページに**[データベース ステータス]**タブを追加します。ここには、次のデータベース レベルのメトリックが表示されます。
 
-    - QPS Per DB
-    - Average Query Duration Per DB
-    - Failed Queries Per DB
+    -   DBあたりのQPS
+    -   DBあたりの平均クエリ実行時間
+    -   DBあたりの失敗したクエリ数
 
-  With these metrics, you can monitor the performance of individual databases, make data-driven decisions, and take actions to improve the performance of your applications.
+    これらのメトリックを使用すると、個々のデータベースのパフォーマンスを監視し、データに基づいて意思決定を行い、アプリケーションのパフォーマンスを向上させるためのアクションを実行できます。
 
-  For more information, see [Monitoring metrics for Serverless Tier clusters](/tidb-cloud/built-in-monitoring.md).
+    詳細については[Serverless Tierクラスターのモニタリングメトリクス](/tidb-cloud/built-in-monitoring.md)参照してください。
 
-## March 14, 2023
+## 2023年3月14日 {#march-14-2023}
 
-**General changes**
+**一般的な変更**
 
-- Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v6.5.0](https://docs.pingcap.com/tidb/v6.5/release-6.5.0) to [v6.5.1](https://docs.pingcap.com/tidb/v6.5/release-6.5.1).
+-   新しい[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン6.5.0](https://docs.pingcap.com/tidb/v6.5/release-6.5.0)から[バージョン6.5.1](https://docs.pingcap.com/tidb/v6.5/release-6.5.1)にアップグレードします。
 
-- Support modifying column names of the target table to be created by TiDB Cloud when uploading a local CSV file with a header row.
+-   ヘッダー行を含むローカル CSV ファイルをアップロードするときに、 TiDB Cloudによって作成されるターゲット テーブルの列名の変更をサポートします。
 
-    When importing a local CSV file with a header row to a [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster, if you need TiDB Cloud to create the target table and the column names in the header row do not follow the TiDB Cloud column naming conventions, you will see a warning icon next to the corresponding column name. To resolve the warning, you can move the cursor over the icon and follow the message to edit the existing column names or enter new column names.
+    ヘッダー行を含むローカルCSVファイルを[Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスタにインポートする際、 TiDB Cloudでターゲットテーブルを作成する必要があり、ヘッダー行の列名がTiDB Cloudの列命名規則に従っていない場合、対応する列名の横に警告アイコンが表示されます。この警告を解決するには、アイコンの上にカーソルを移動し、メッセージに従って既存の列名を編集するか、新しい列名を入力してください。
 
-    For information about column naming conventions, see [Import local files](/tidb-cloud/tidb-cloud-import-local-files.md#import-local-files).
+    列の命名規則については、 [ローカルファイルをインポートする](/tidb-cloud/tidb-cloud-import-local-files.md#import-local-files)参照してください。
 
-## March 7, 2023
+## 2023年3月7日 {#march-7-2023}
 
-**General changes**
+**一般的な変更**
 
-- Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0) to [v6.6.0](https://docs.pingcap.com/tidb/v6.6/release-6.6.0).
+-   すべての[Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターのデフォルトの TiDB バージョンを[バージョン6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0)から[バージョン6.6.0](https://docs.pingcap.com/tidb/v6.6/release-6.6.0)にアップグレードします。
 
-## February 28, 2023
+## 2023年2月28日 {#february-28-2023}
 
-**General changes**
+**一般的な変更**
 
-- Add the [SQL Diagnosis](/tidb-cloud/tune-performance.md) feature for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+-   [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターに[SQL診断](/tidb-cloud/tune-performance.md)機能を追加します。
 
-    With SQL Diagnosis, you can gain deep insights into SQL-related runtime status, which makes the SQL performance tuning more efficient. Currently, the SQL Diagnosis feature for Serverless Tier only provides slow query data.
+    SQL診断を使用すると、SQL関連の実行時ステータスに関する詳細な分析情報を取得できるため、SQLパフォーマンスチューニングの効率が向上します。現在、Serverless TierのSQL診断機能は、低速クエリデータのみを提供しています。
 
-    To use SQL Diagnosis, click **SQL Diagnosis** on the left navigation bar of your Serverless Tier cluster page.
+    SQL 診断を使用するには、 Serverless Tierクラスター ページの左側のナビゲーション バーで**[SQL 診断] を**クリックします。
 
-**Console changes**
+**コンソールの変更**
 
-- Optimize the left navigation.
+-   左側のナビゲーションを最適化します。
 
-    You can navigate pages more efficiently, for example:
+    たとえば、次のようにページをより効率的にナビゲートできます。
 
-    - You can hover the mouse in the upper-left corner to quickly switch between clusters or projects.
-    - You can switch between the **Clusters** page and the **Admin** page.
+    -   左上隅にマウスを移動すると、クラスターまたはプロジェクト間をすばやく切り替えることができます。
+    -   **クラスター**ページと**管理**ページを切り替えることができます。
 
-**API changes**
+**APIの変更**
 
-- Release several TiDB Cloud API endpoints for data import：
+-   データインポート用のTiDB Cloud APIエンドポイントをいくつかリリース：
 
-    - List all import tasks
-    - Get an import task
-    - Create an import task
-    - Update an import task
-    - Upload a local file for an import task
-    - Preview data before starting an import task
-    - Get the role information for import tasks
+    -   すべてのインポートタスクを一覧表示する
+    -   インポートタスクを取得する
+    -   インポートタスクを作成する
+    -   インポートタスクを更新する
+    -   インポートタスク用のローカルファイルをアップロードする
+    -   インポートタスクを開始する前にデータをプレビューする
+    -   インポートタスクのロール情報を取得する
 
-  For more information, refer to the [API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Import).
+    詳細については、 [APIドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Import)を参照してください。
 
-## February 22, 2023
+## 2023年2月22日 {#february-22-2023}
 
-**General changes**
+**一般的な変更**
 
-- Support using the [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md) feature to track various activities performed by members within your organization in the [TiDB Cloud console](https://tidbcloud.com/).
+-   [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)機能を使用して、 [TiDB Cloudコンソール](https://tidbcloud.com/)で組織内のメンバーが実行したさまざまなアクティビティを追跡することをサポートします。
 
-    The console audit logging feature is only visible to users with the `Owner` or `Audit Admin` role and is disabled by default. To enable it, click <MDSvgIcon name="icon-top-organization" /> **Organization** > **Console Audit Logging** in the upper-right corner of the [TiDB Cloud console](https://tidbcloud.com/).
+    コンソール監査ログ機能は、ロール`Owner`または`Audit Admin`ユーザーのみに表示され、デフォルトでは無効になっています。有効にするには、<mdsvgicon name="icon-top-organization"> [TiDB Cloudコンソール](https://tidbcloud.com/)の右上隅にある**[組織]** &gt; **[コンソール監査ログ] を選択します**。</mdsvgicon>
 
-    By analyzing console audit logs, you can identify suspicious operations performed within your organization, thereby improving the security of your organization's resources and data.
+    コンソール監査ログを分析することで、組織内で実行された不審な操作を特定し、組織のリソースとデータのセキュリティを向上させることができます。
 
-    For more information, see [Console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md).
+    詳細については[コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)参照してください。
 
-**CLI changes**
+**CLIの変更**
 
-- Add a new command `ticloud cluster connect-info` for [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
+-   [TiDB CloudCLI](/tidb-cloud/cli-reference.md)に新しいコマンド`ticloud cluster connect-info`を追加します。
 
-    `ticloud cluster connect-info` is a command that allows you to get the connection string of a cluster. To use this command, [update `ticloud`](/tidb-cloud/ticloud-upgrade.md) to v0.3.2 or a later version.
+    `ticloud cluster connect-info` 、クラスターの接続文字列を取得できるコマンドです。このコマンドを使用するには、 [`ticloud`を更新する](/tidb-cloud/ticloud-upgrade.md)からv0.3.2以降のバージョンが必要です。
 
-## February 21, 2023
+## 2023年2月21日 {#february-21-2023}
 
-**General changes**
+**一般的な変更**
 
-- Support using the AWS access keys of an IAM user to access your Amazon S3 bucket when importing data to TiDB Cloud.
+-   TiDB Cloudにデータをインポートするときに、 IAMユーザーの AWS アクセスキーを使用して Amazon S3 バケットにアクセスすることをサポートします。
 
-    This method is simpler than using Role ARN. For more information, refer to [Configure Amazon S3 access](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access).
+    この方法はロールARNを使用するよりも簡単です。詳細については、 [Amazon S3 アクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)を参照してください。
 
-- Extend the [monitoring metrics retention period](/tidb-cloud/built-in-monitoring.md#metrics-retention-policy) from 2 days to a longer period:
+-   [監視メトリクスの保持期間](/tidb-cloud/built-in-monitoring.md#metrics-retention-policy) 2 日からより長い期間に延長します。
 
-    - For Dedicated Tier clusters, you can view metrics data for the past 7 days.
-    - For Serverless Tier clusters, you can view metrics data for the past 3 days.
+    -   Dedicated Tierクラスターの場合、過去 7 日間のメトリック データを表示できます。
+    -   Serverless Tierクラスターの場合、過去 3 日間のメトリック データを表示できます。
 
-  By extending the metrics retention period, now you have access to more historical data. This helps you identify trends and patterns of the cluster for better decision-making and faster troubleshooting.
+    メトリクスの保持期間を延長することで、より多くの履歴データにアクセスできるようになります。これにより、クラスターの傾向やパターンを特定し、より適切な意思決定と迅速なトラブルシューティングが可能になります。
 
-**Console changes**
+**コンソールの変更**
 
-- Release a new native web infrastructure on the Monitoring page of [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+-   [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターの監視ページで新しいネイティブ Web インフラストラクチャをリリースします。
 
-    With the new infrastructure, you can easily navigate through the Monitoring page and access the necessary information in a more intuitive and efficient manner. The new infrastructure also resolves many problems on UX, making the monitoring process a lot more user-friendly.
+    新しいインフラストラクチャにより、モニタリングページを簡単に操作し、より直感的かつ効率的に必要な情報にアクセスできるようになりました。また、新しいインフラストラクチャはUXに関する多くの問題を解決し、モニタリングプロセスを大幅にユーザーフレンドリーなものにしています。
 
-## February 17, 2023
+## 2023年2月17日 {#february-17-2023}
 
-**CLI changes**
+**CLIの変更**
 
-- Add a new command [`ticloud connect`](/tidb-cloud/ticloud-serverless-shell.md) for [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
+-   [TiDB CloudCLI](/tidb-cloud/cli-reference.md)に新しいコマンド[`ticloud connect`](/tidb-cloud/ticloud-serverless-shell.md)を追加します。
 
-    `ticloud connect` is a command that allows you to connect to your TiDB Cloud cluster from your local machine without installing any SQL clients. After connecting to your TiDB Cloud cluster, you can execute SQL statements in the TiDB Cloud CLI.
+    `ticloud connect` 、SQL クライアントをインストールすることなく、ローカルマシンからTiDB Cloudクラスターに接続できるコマンドです。TiDB TiDB Cloudクラスターに接続した後、 TiDB Cloud CLI で SQL ステートメントを実行できます。
 
-## February 14, 2023
+## 2023年2月14日 {#february-14-2023}
 
-**General changes**
+**一般的な変更**
 
-- Support decreasing the number of TiKV and TiFlash nodes to scale in a TiDB [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster.
+-   TiDB [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでスケールするために TiKV ノードとTiFlashノードの数を減らすことをサポートします。
 
-    You can decrease the node number [via the TiDB Cloud console](/tidb-cloud/scale-tidb-cluster.md#change-node-number) or [via the TiDB Cloud API (beta)](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster).
+    ノード番号を[TiDB Cloudコンソール経由](/tidb-cloud/scale-tidb-cluster.md#change-node-number)または[TiDB Cloud API（ベータ版）経由](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)減らすことができます。
 
-**Console changes**
+**コンソールの変更**
 
-- Introduce the **Monitoring** page for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+-   [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターの**監視**ページを紹介します。
 
-    The **Monitoring** page provides a range of metrics and data, such as the number of SQL statements executed per second, the average duration of queries, and the number of failed queries, which helps you better understand the overall performance of SQL statements in your Serverless Tier cluster.
+    **モニタリング**ページには、1 秒あたりに実行される SQL ステートメントの数、クエリの平均実行時間、失敗したクエリの数など、さまざまなメトリックとデータが提供され、 Serverless Tierクラスター内の SQL ステートメントの全体的なパフォーマンスをよりよく理解するのに役立ちます。
 
-    For more information, see [TiDB Cloud built-in monitoring](/tidb-cloud/built-in-monitoring.md).
+    詳細については[TiDB Cloud組み込み監視](/tidb-cloud/built-in-monitoring.md)参照してください。
 
-## February 2, 2023
+## 2023年2月2日 {#february-2-2023}
 
-**CLI changes**
+**CLIの変更**
 
-- Introduce the TiDB Cloud CLI client [`ticloud`](/tidb-cloud/cli-reference.md).
+-   TiDB Cloud CLI クライアント[`ticloud`](/tidb-cloud/cli-reference.md)を紹介します。
 
-    Using `ticloud`, you can easily manage your TiDB Cloud resources from a terminal or other automatic workflows with a few lines of commands. Especially for GitHub Actions, we have provided [`setup-tidbcloud-cli`](https://github.com/marketplace/actions/set-up-tidbcloud-cli) for you to easily set up `ticloud`.
+    `ticloud`使用すると、ターミナルやその他の自動ワークフローから数行のコマンドでTiDB Cloudリソースを簡単に管理できます。特にGitHub Actionsについては、 `ticloud`簡単に設定できるように[`setup-tidbcloud-cli`](https://github.com/marketplace/actions/set-up-tidbcloud-cli)提供しています。
 
-    For more information, see [TiDB Cloud CLI Quick Start](/tidb-cloud/get-started-with-cli.md) and [TiDB Cloud CLI Reference](/tidb-cloud/cli-reference.md).
+    詳細については、 [TiDB Cloud CLI クイックスタート](/tidb-cloud/get-started-with-cli.md)および[TiDB CloudCLI リファレンス](/tidb-cloud/cli-reference.md)参照してください。
 
-## January 18, 2023
+## 2023年1月18日 {#january-18-2023}
 
-**General changes**
+**一般的な変更**
 
-* Support [signing up](https://tidbcloud.com/free-trial) TiDB Cloud with a Microsoft account.
+-   Microsoft アカウントで[サインアップ](https://tidbcloud.com/free-trial) TiDB Cloudをサポートします。
 
-## January 17, 2023
+## 2023年1月17日 {#january-17-2023}
 
-**General changes**
+**一般的な変更**
 
-- Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v6.1.3](https://docs.pingcap.com/tidb/stable/release-6.1.3) to [v6.5.0](https://docs.pingcap.com/tidb/stable/release-6.5.0).
+-   新しい[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン6.1.3](https://docs.pingcap.com/tidb/stable/release-6.1.3)から[バージョン6.5.0](https://docs.pingcap.com/tidb/stable/release-6.5.0)にアップグレードします。
 
-- For new sign-up users, TiDB Cloud will automatically create a free [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster so that you can quickly start a data exploration journey with TiDB Cloud.
+-   新規サインアップ ユーザーの場合、 TiDB Cloud は自動的に[Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターを無料で作成し、 TiDB Cloudを使用したデータ探索をすぐに開始できるようにします。
 
-- Support a new AWS region for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters: `Seoul (ap-northeast-2)`.
+-   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して新しい AWS リージョンをサポートします: `Seoul (ap-northeast-2)` 。
 
-    The following features are enabled for this region:
+    この地域では次の機能が有効になっています:
 
-    - [Migrate MySQL-compatible databases to TiDB Cloud using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
-    - [Stream data from TiDB Cloud to other data services using changefeed](/tidb-cloud/changefeed-overview.md)
-    - [Back up and restore TiDB cluster data](/tidb-cloud/backup-and-restore.md)
+    -   [データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
+    -   [変更フィードを使用してTiDB Cloudから他のデータ サービスにデータをストリーミングする](/tidb-cloud/changefeed-overview.md)
+    -   [TiDB クラスタ データのバックアップと復元](/tidb-cloud/backup-and-restore.md)
 
-## January 10, 2023
+## 2023年1月10日 {#january-10-2023}
 
-**General changes**
+**一般的な変更**
 
-- Optimize the feature of importing data from local CSV files to TiDB to improve the user experience for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+-   ローカル CSV ファイルから TiDB にデータをインポートする機能を最適化し、 [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターのユーザー エクスペリエンスを向上させます。
 
-    - To upload a CSV file, now you can simply drag and drop it to the upload area on the **Import** page.
-    - When creating an import task, if your target database or table does not exist, you can enter a name to let TiDB Cloud create it for you automatically. For the target table to be created, you can specify a primary key or select multiple fields to form a composite primary key.
-    - After the import is completed, you can explore your data with [AI-powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md) by clicking **Explore your data by Chat2Query** or clicking the target table name in the task list.
+    -   CSV ファイルをアップロードするには、**インポート**ページのアップロード領域にドラッグ アンド ドロップするだけです。
+    -   インポートタスクを作成する際に、対象のデータベースまたはテーブルが存在しない場合は、名前を入力することでTiDB Cloudが自動的に作成します。作成する対象テーブルには、主キーを指定するか、複数のフィールドを選択して複合主キーを形成することができます。
+    -   インポートが完了したら、 **「Chat2Query でデータを探索」**をクリックするか、タスク リストでターゲット テーブル名をクリックすると、 [AI搭載のChat2Query](/tidb-cloud/explore-data-with-chat2query.md)でデータを探索できます。
 
-  For more information, see [Import local files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md).
+    詳細については[ローカルファイルをTiDB Cloudにインポートする](/tidb-cloud/tidb-cloud-import-local-files.md)参照してください。
 
-**Console changes**
+**コンソールの変更**
 
-- Add the **Get Support** option for each cluster to simplify the process of requesting support for a specific cluster.
+-   特定のクラスターに対するサポートを要求するプロセスを簡素化するために、各クラスターに**「サポートの取得」**オプションを追加します。
 
-    You can request support for a cluster in either of the following ways:
+    クラスターのサポートは、次のいずれかの方法でリクエストできます。
 
-    - On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click **...** in the row of your cluster and select **Get Support**.
-    - On your cluster overview page, click **...** in the upper-right corner and select **Get Support**.
+    -   プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページで、クラスターの行にある**[...]**をクリックし、 **[サポートを受ける]**を選択します。
+    -   クラスターの概要ページで、右上隅の**[...]**をクリックし、 **[サポートを受ける]**を選択します。
 
-## January 5, 2023
+## 2023年1月5日 {#january-5-2023}
 
-**Console changes**
+**コンソールの変更**
 
-- Rename SQL Editor (beta) to Chat2Query (beta) for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters and support generating SQL queries using AI.
+-   [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターの SQL Editor (ベータ) の名前を Chat2Query (ベータ) に変更し、AI を使用した SQL クエリの生成をサポートします。
 
-  In Chat2Query, you can either let AI generate SQL queries automatically or write SQL queries manually, and run SQL queries against databases without a terminal.
+    Chat2Query では、AI に SQL クエリを自動的に生成させたり、SQL クエリを手動で記述したり、ターミナルなしでデータベースに対して SQL クエリを実行したりできます。
 
-  To access Chat2Query, go to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click your cluster name, and then click **Chat2Query** in the left navigation pane.
+    Chat2Query にアクセスするには、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、クラスター名をクリックして、左側のナビゲーション ペインで**Chat2Query を**クリックします。
 
-## January 4, 2023
+## 2023年1月4日 {#january-4-2023}
 
-**General changes**
+**一般的な変更**
 
-- Support scaling up TiDB, TiKV, and TiFlash nodes by increasing the **Node Size(vCPU + RAM)** for TiDB Cloud Dedicated clusters hosted on AWS and created after December 31, 2022.
+-   AWS でホストされ、2022 年 12 月 31 日以降に作成されたTiDB Cloud Dedicated クラスターの**ノード サイズ (vCPU + RAM) を**増やすことで、TiDB、TiKV、およびTiFlashノードのスケールアップをサポートします。
 
-    You can increase the node size [using the TiDB Cloud console](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram) or [using the TiDB Cloud API (beta)](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster).
+    ノード サイズを[TiDB Cloudコンソールを使用する](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)または[TiDB Cloud API（ベータ版）を使用する](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)増やすことができます。
 
-- Extend the metrics retention period on the [**Monitoring**](/tidb-cloud/built-in-monitoring.md) page to two days.
+-   [**監視**](/tidb-cloud/built-in-monitoring.md)ページのメトリックの保持期間を 2 日間に延長します。
 
-    Now you have access to metrics data of the last two days, giving you more flexibility and visibility into your cluster performance and trends.
+    これで、過去 2 日間のメトリック データにアクセスできるようになり、クラスターのパフォーマンスと傾向をより柔軟かつ明確に把握できるようになります。
 
-    This improvement comes at no additional cost and can be accessed on the **Diagnosis** tab of the [**Monitoring**](/tidb-cloud/built-in-monitoring.md) page for your cluster. This will help you identify and troubleshoot performance issues and monitor the overall health of your cluster more effectively.
+    この改善は追加費用なしで、クラスターの[**監視**](/tidb-cloud/built-in-monitoring.md)ページ目の**「診断」**タブからアクセスできます。これにより、パフォーマンスの問題を特定してトラブルシューティングし、クラスター全体の健全性をより効果的に監視できるようになります。
 
-- Support customizing Grafana dashboard JSON for Prometheus integration.
+-   Prometheus 統合のための Grafana ダッシュボード JSON のカスタマイズをサポートします。
 
-    If you have [integrated TiDB Cloud with Prometheus](/tidb-cloud/monitor-prometheus-and-grafana-integration.md), you can now import a pre-built Grafana dashboard to monitor TiDB Cloud clusters and customize the dashboard to your needs. This feature enables easy and fast monitoring of your TiDB Cloud clusters and helps you identify any performance issues quickly.
+    [TiDB CloudとPrometheusを統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)お持ちの場合は、事前に構築されたGrafanaダッシュボードをインポートしてTiDB Cloudクラスターを監視し、ニーズに合わせてダッシュボードをカスタマイズできるようになりました。この機能により、 TiDB Cloudクラスターを簡単かつ迅速に監視し、パフォーマンスの問題を迅速に特定できるようになります。
 
-    For more information, see [Use Grafana GUI dashboards to visualize the metrics](/tidb-cloud/monitor-prometheus-and-grafana-integration.md#step-3-use-grafana-gui-dashboards-to-visualize-the-metrics).
+    詳細については[Grafana GUIダッシュボードを使用してメトリックを視覚化する](/tidb-cloud/monitor-prometheus-and-grafana-integration.md#step-3-use-grafana-gui-dashboards-to-visualize-the-metrics)参照してください。
 
-- Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0). The cold start issue after upgrading the default TiDB version of Serverless Tier clusters to v6.4.0 has been resolved.
+-   すべての[Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターのデフォルトのTiDBバージョンを[バージョン6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0)から[バージョン6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0)にアップグレードします。Serverless Serverless Tierコールドスタートの問題が解決されました。
 
-**Console changes**
+**コンソールの変更**
 
-- Simplify the display of the [**Clusters**](https://tidbcloud.com/project/clusters) page and the cluster overview page.
+-   [**クラスター**](https://tidbcloud.com/project/clusters)ページ目とクラスター概要ページの表示を簡素化します。
 
-    - You can click the cluster name on the [**Clusters**](https://tidbcloud.com/project/clusters) page to enter the cluster overview page and start operating the cluster.
-    - Remove the **Connection** and **Import** panes from the cluster overview page. You can click **Connect** in the upper-right corner to get the connection information and click **Import** in the left navigation pane to import data.
+    -   [**クラスター**](https://tidbcloud.com/project/clusters)ページのクラスター名をクリックすると、クラスターの概要ページに入り、クラスターの操作を開始できます。
+    -   クラスター概要ページから**「接続」ペイン**と**「インポート」**ペインを削除します。右上隅の**「接続」**をクリックすると接続情報が表示され、左側のナビゲーションペインの**「インポート」を**クリックするとデータをインポートできます。

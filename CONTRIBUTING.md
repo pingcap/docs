@@ -1,173 +1,161 @@
-# TiDB Documentation Contributing Guide
+# TiDB ドキュメント貢献ガイド {#tidb-documentation-contributing-guide}
 
-Welcome to [TiDB](https://github.com/pingcap/tidb) documentation! We are excited about the prospect of you joining [TiDB Community](https://github.com/pingcap/community/).
+[TiDB](https://github.com/pingcap/tidb)ドキュメントへようこそ! [TiDBコミュニティ](https://github.com/pingcap/community/)ご参加いただけることを心よりお待ちしております。
 
-## What you can contribute
+## あなたが貢献できること {#what-you-can-contribute}
 
-You can start from any one of the following items to help improve [TiDB documentation at the PingCAP website](https://docs.pingcap.com/tidb/stable):
+[PingCAP ウェブサイトの TiDB ドキュメント](https://docs.pingcap.com/tidb/stable)改善するには、次のいずれかの項目から始めることができます。
 
-- Fix typos or format (punctuation, space, indentation, code block, etc.)
-- Fix or update inappropriate or outdated descriptions
-- Add missing content (sentence, paragraph, or a new document)
-- Translate docs changes from English to Chinese
-- Submit, reply to, and resolve [docs issues](https://github.com/pingcap/docs/issues)
-- (Advanced) Review Pull Requests created by others
+-   タイプミスやフォーマット（句読点、スペース、インデント、コードブロックなど）を修正します
+-   不適切または古い説明を修正または更新する
+-   不足しているコンテンツ（文、段落、または新しいドキュメント）を追加します
+-   ドキュメントの変更を英語から中国語に翻訳する
+-   提出、返信、解決[ドキュメントの問題](https://github.com/pingcap/docs/issues)
+-   (上級) 他の人が作成したプルリクエストを確認する
 
-## Before you contribute
+## 貢献する前に {#before-you-contribute}
 
-Before you contribute, please take a quick look at some general information about TiDB documentation maintenance. This can help you to become a contributor soon.
+貢献する前に、TiDB ドキュメントのメンテナンスに関する一般的な情報をざっとお読みください。これにより、すぐに貢献者になれるでしょう。
 
-### Get familiar with style
+### スタイルに慣れる {#get-familiar-with-style}
 
-- [Commit Message Style](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message)
-- [Pull Request Title Style](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style)
-- [Markdown Rules](/resources/markdownlint-rules.md)
-- [Code Comment Style](https://github.com/pingcap/community/blob/master/contributors/code-comment-style.md)
-- Diagram Style: [Figma Quick Start Guide](https://github.com/pingcap/community/blob/master/contributors/figma-quick-start-guide.md)
+-   [コミットメッセージのスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message)
+-   [プルリクエストのタイトルスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style)
+-   [マークダウンルール](/resources/markdownlint-rules.md)
+-   [コードコメントスタイル](https://github.com/pingcap/community/blob/master/contributors/code-comment-style.md)
+-   図表スタイル: [Figma クイックスタートガイド](https://github.com/pingcap/community/blob/master/contributors/figma-quick-start-guide.md)
 
-    To keep a consistent style for diagrams, we recommend using [Figma](https://www.figma.com/) to draw or design diagrams. If you need to draw a diagram, refer to the guide and use shapes or colors provided in the template.
+    図のスタイルを統一するために、図の描画やデザインには[フィグマ](https://www.figma.com/)使用することをお勧めします。図を描く必要がある場合は、ガイドを参照し、テンプレートで提供されている図形や色を使用してください。
 
-### Pick a doc template
+### ドキュメントテンプレートを選択する {#pick-a-doc-template}
 
-If you are going to create a new document for TiDB, we provide [several doc templates](/resources/doc-templates) for you to use to align with our style.
+TiDB 用の新しいドキュメントを作成する場合は、当社のスタイルに合わせて使用できる[いくつかのドキュメントテンプレート](/resources/doc-templates)ドキュメントを提供します。
 
-Please check out these templates before you submit a pull request:
+プル リクエストを送信する前に、次のテンプレートを確認してください。
 
-- [Concept](/resources/doc-templates/template-concept.md)
-- [Task](/resources/doc-templates/template-task.md)
-- [Reference](/resources/doc-templates/template-reference.md)
-- [New Feature](/resources/doc-templates/template-new-feature.md)
-- [Troubleshooting](/resources/doc-templates/template-troubleshooting.md)
+-   [コンセプト](/resources/doc-templates/template-concept.md)
+-   [タスク](/resources/doc-templates/template-task.md)
+-   [参照](/resources/doc-templates/template-reference.md)
+-   [新機能](/resources/doc-templates/template-new-feature.md)
+-   [トラブルシューティング](/resources/doc-templates/template-troubleshooting.md)
 
-### Learn about docs versions
+### ドキュメントのバージョンについて学ぶ {#learn-about-docs-versions}
 
-We use separate branches to maintain different versions of TiDB documentation.
+異なるバージョンの TiDB ドキュメントを管理するために、個別のブランチを使用します。
 
-- The [documentation under development](https://docs.pingcap.com/tidb/dev) is maintained in the `master` branch.
-- The [published documentation](https://docs.pingcap.com/tidb/stable/) is maintained in the corresponding `release-<version>` branch. For example, TiDB v8.1 documentation is maintained in the `release-8.1` branch.
-- The [archived documentation](https://docs-archive.pingcap.com/) is no longer maintained and does not receive any further updates.
+-   [開発中のドキュメント](https://docs.pingcap.com/tidb/dev) `master`ブランチで維持されます。
+-   [公開された文書](https://docs.pingcap.com/tidb/stable/)対応する`release-<version>`ブランチでメンテナンスされています。例えば、TiDB v8.1 のドキュメントは`release-8.1`ブランチでメンテナンスされています。
+-   [アーカイブされた文書](https://docs-archive.pingcap.com/)メンテナンスされなくなり、今後更新されることはありません。
 
-### Use cherry-pick labels
+### チェリーピックラベルを使用する {#use-cherry-pick-labels}
 
-As changes to one documentation version often apply to other documentation versions as well, we introduce [ti-chi-bot](https://github.com/ti-chi-bot) to automate the PR cherry-pick process based on cherry-pick labels.
+あるドキュメント バージョンへの変更は他のドキュメント バージョンにも適用されることが多いため、チェリー ピック ラベルに基づいて PR チェリー ピック プロセスを自動化する[チチボット](https://github.com/ti-chi-bot)導入します。
 
-- If your changes only apply to a specific documentation version, just create a PR based on the branch of that documentation version. There is no need to add any cherry-pick labels.
+-   変更が特定のドキュメントバージョンにのみ適用される場合は、そのドキュメントバージョンのブランチに基づいてPRを作成してください。チェリーピックラベルを追加する必要はありません。
 
-- If your changes apply to multiple documentation versions, instead of creating multiple PRs, you can just create one PR based on the latest applicable branch (such as `master`), and then add one or several `needs-cherry-pick-release-<version>` labels to the PR according to the applicable documentation versions. Then, after the PR is merged, ti-chi-bot will automatically create the corresponding cherry-pick PRs based on the branches of the specified versions.
+-   変更が複数のドキュメントバージョンに適用される場合は、複数のPRを作成する代わりに、最新の適用可能なブランチ（例： `master` ）に基づいて1つのPRを作成し、適用可能なドキュメントバージョンに応じて1つまたは複数の`needs-cherry-pick-release-<version>`ラベルをPRに追加します。PRがマージされると、ti-chi-botは指定されたバージョンのブランチに基づいて、対応するチェリーピックPRを自動的に作成します。
 
-- If most of your changes apply to multiple documentation versions but some differences exist among versions, in addition to the cherry-pick labels for all the target versions, you also need to add the `requires-version-specific-change` label as a reminder to the PR reviewer. After your PR is merged and ti-chi-bot creates the corresponding cherry-pick PRs, you can still make changes to these cherry-pick PRs.
+-   変更の大部分が複数のドキュメントバージョンに適用されるものの、バージョン間で差異が存在する場合は、対象バージョンすべてにチェリーピックラベルを付与するだけでなく、PRレビュアーへのリマインダーとして「 `requires-version-specific-change`ラベルも付与する必要があります。PRがマージされ、ti-chi-botが対応するチェリーピックPRを作成した後でも、これらのチェリーピックPRに変更を加えることができます。
 
-## How to contribute
+## 貢献方法 {#how-to-contribute}
 
-Please perform the following steps to create your Pull Request to this repository. If don't like to use commands, you can also use [GitHub Desktop](https://desktop.github.com/), which is easier to get started.
+このリポジトリへのプルリクエストを作成するには、以下の手順を実行してください。コマンドを使いたくない場合は、 [GitHubデスクトップ](https://desktop.github.com/)使用することもできます。こちらの方が簡単です。
 
-> **Note:**
+> **注記：**
 >
-> This section takes creating a PR to the `master` branch as an example. Steps of creating PRs to other branches are similar.
+> このセクションでは、ブランチ`master`への PR の作成を例に説明します。他のブランチへの PR の作成手順も同様です。
 
-### Step 0: Sign the CLA
+### ステップ0: CLAに署名する {#step-0-sign-the-cla}
 
-To have your pull requests merged, you must sign the [Contributor License Agreement](https://cla.pingcap.net/pingcap/docs) (CLA). Please make sure you sign it before continuing.
+プルリクエストをマージするには、 [貢献者ライセンス契約](https://cla.pingcap.net/pingcap/docs) (CLA) に署名する必要があります。続行する前に必ず署名してください。
 
-### Step 1: Fork the repository
+### ステップ1: リポジトリをフォークする {#step-1-fork-the-repository}
 
-1. Visit the project: <https://github.com/pingcap/docs>
-2. Click the **Fork** button on the top right and wait it to finish.
+1.  プロジェクトを訪問: [https://github.com/pingcap/docs](https://github.com/pingcap/docs)
+2.  右上の**フォーク**ボタンをクリックし、完了するまで待ちます。
 
-### Step 2: Clone the forked repository to local storage
+### ステップ2: フォークしたリポジトリをローカルstorageにクローンする {#step-2-clone-the-forked-repository-to-local-storage}
 
-```
-cd $working_dir # Comes to the directory that you want put the fork in, for example, "cd ~/Documents/GitHub"
-git clone git@github.com:$user/docs.git # Replace "$user" with your GitHub ID
+    cd $working_dir # Comes to the directory that you want put the fork in, for example, "cd ~/Documents/GitHub"
+    git clone git@github.com:$user/docs.git # Replace "$user" with your GitHub ID
 
-cd $working_dir/docs
-git remote add upstream git@github.com:pingcap/docs.git # Adds the upstream repo
-git remote -v # Confirms that your remote makes sense
-```
-
-### Step 3: Create a new branch
-
-1. Get your local master up-to-date with upstream/master.
-
-    ```
     cd $working_dir/docs
+    git remote add upstream git@github.com:pingcap/docs.git # Adds the upstream repo
+    git remote -v # Confirms that your remote makes sense
+
+### ステップ3: 新しいブランチを作成する {#step-3-create-a-new-branch}
+
+1.  ローカル マスターを、upstream/master で最新の状態にします。
+
+        cd $working_dir/docs
+        git fetch upstream
+        git checkout master
+        git rebase upstream/master
+
+2.  マスター ブランチに基づいて新しいブランチを作成します。
+
+        git checkout -b new-branch-name
+
+### ステップ4：何か行動を起こす {#step-4-do-something}
+
+`new-branch-name`ブランチのファイルをいくつか編集し、変更を保存します。Visual Studio Code などのエディタを使用して`.md`ファイルを開いて編集できます。
+
+### ステップ5: 変更をコミットする {#step-5-commit-your-changes}
+
+    git status # Checks the local status
+    git add <file> ... # Adds the file(s) you want to commit. If you want to commit all changes, you can directly use `git add.`
+    git commit -m "commit-message: update the xx"
+
+[コミットメッセージのスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message)参照。
+
+### ステップ6: ブランチをアップストリーム/マスターと同期させる {#step-6-keep-your-branch-in-sync-with-upstream-master}
+
+    # While on your new branch
     git fetch upstream
-    git checkout master
     git rebase upstream/master
-    ```
 
-2. Create a new branch based on the master branch.
+### ステップ7: 変更をリモートにプッシュする {#step-7-push-your-changes-to-the-remote}
 
-    ```
-    git checkout -b new-branch-name
-    ```
+    git push -u origin new-branch-name # "-u" is used to track the remote branch from origin
 
-### Step 4: Do something
+### ステップ8: プルリクエストを作成する {#step-8-create-a-pull-request}
 
-Edit some file(s) on the `new-branch-name` branch and save your changes. You can use editors like Visual Studio Code to open and edit `.md` files.
+1.  [https://github.com/$user/docs](https://github.com/$user/docs)でフォークにアクセスします ( `$user` GitHub ID に置き換えます)
+2.  `new-branch-name`ブランチの横にある`Compare & pull request`ボタンをクリックして PR を作成します。5 [プルリクエストのタイトルスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style)参照してください。
 
-### Step 5: Commit your changes
+これで、PR が正常に送信されました。この PR がマージされると、自動的に TiDB ドキュメントの貢献者になります。
 
-```
-git status # Checks the local status
-git add <file> ... # Adds the file(s) you want to commit. If you want to commit all changes, you can directly use `git add.`
-git commit -m "commit-message: update the xx"
-```
+## 影響を受けるバージョンを選択するためのガイドライン {#guideline-for-choosing-the-affected-version-s}
 
-See [Commit Message Style](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message).
+プル リクエストを作成するときは、プル リクエスト ページの説明テンプレートで、ドキュメントの変更を適用するリリース バージョンを選択する必要があります。
 
-### Step 6: Keep your branch in sync with upstream/master
+変更が以下のいずれかの状況に該当する場合は、 **「マスターブランチのみを選択」すること**をお勧めします。PRがマージされると、変更はすぐに[PingCAP ドキュメント ウェブサイトの開発ページ](https://docs.pingcap.com/tidb/dev/)に表示されます。TiDBの次のメジャーバージョンまたはマイナーバージョンがリリースされると、変更は新しいバージョンのウェブサイトページにも表示されます。
 
-```
-# While on your new branch
-git fetch upstream
-git rebase upstream/master
-```
+-   欠落または不完全なドキュメントの内容を補足するなど、ドキュメントの拡張に関連します。
+-   値、説明、例、タイプミスなど、不正確または間違ったドキュメントの内容を修正します。
+-   特定のトピック モジュールでのドキュメントのリファクタリングが含まれます。
 
-### Step 7: Push your changes to the remote
+変更が以下のいずれかの状況に当てはまる場合は、**影響を受けるリリース ブランチとマスターを選択してください**。
 
-```
-git push -u origin new-branch-name # "-u" is used to track the remote branch from origin
-```
+-   特定のバージョンに関連する機能の動作の変更が含まれます。
+-   構成項目またはシステム変数のデフォルト値の変更など、互換性の変更が含まれます。
+-   表示エラーを解決するためにフォーマットを修正します
+-   壊れたリンクを修正
 
-### Step 8: Create a pull request
+## TiDB Cloudドキュメントへの貢献に関するガイドライン {#guideline-for-contributing-to-tidb-cloud-documentation}
 
-1. Visit your fork at <https://github.com/$user/docs> (replace `$user` with your GitHub ID)
-2. Click the `Compare & pull request` button next to your `new-branch-name` branch to create your PR. See [Pull Request Title Style](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style).
+現在、 [TiDB Cloudドキュメント](https://docs.pingcap.com/tidbcloud/)英語版のみで提供されており、SQLドキュメントとTiDB v8.1の開発ドキュメントを再利用するために、このリポジトリの[リリース8.1](https://github.com/pingcap/docs/tree/release-8.1/tidb-cloud)ブランチに保存されています。したがって、 TiDB Cloudドキュメントのプルリクエストを作成する場合は、プルリクエストが[リリース8.1](https://github.com/pingcap/docs/tree/release-8.1)ブランチに基づいていることを確認してください。
 
-Now, your PR is successfully submitted! After this PR is merged, you will automatically become a contributor to TiDB documentation.
-
-## Guideline for choosing the affected version(s)
-
-When you create a Pull Request, you need to choose the release version to which your document change applies in the description template on your Pull Request page.
-
-If your change fits one of the following situations, it is recommended to **CHOOSE THE MASTER BRANCH ONLY**. After the PR is merged, the change will be soon displayed on the [Dev page of the PingCAP documentation website](https://docs.pingcap.com/tidb/dev/). After the next major or minor version of TiDB is released, the change will also be displayed on the website page for the new version.
-
-- Relates to a documentation enhancement, such as supplementing missing or incomplete document contents.
-- Fixes inaccurate or incorrect document contents, including values, descriptions, examples, or typos.
-- Involves a documentation refactor in a specific topic module.
-
-If your change fits one of the following situations, **CHOOSE THE AFFECTED RELEASE BRANCH(ES) AND MASTER**:
-
-- Involves a feature behavior change that relates to a specific version.
-- Involves a compatibility change, including changing the default value of a configuration item or a system variable.
-- Fixes format to resolve a display error
-- Fixes broken links
-
-## Guideline for contributing to TiDB Cloud documentation
-
-Currently, the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) is available only in English, and it is stored in the [release-8.1](https://github.com/pingcap/docs/tree/release-8.1/tidb-cloud) branch of this repository for reusing SQL documents and development documents of TiDB v8.1. Hence, to create a pull request for TiDB Cloud documentation, make sure that your PR is based on the [release-8.1](https://github.com/pingcap/docs/tree/release-8.1) branch.
-
-> **Tip:**
+> **ヒント：**
 >
-> To learn which TiDB document is reused by TiDB Cloud, check the [TOC file of TiDB Cloud documentation](https://github.com/pingcap/docs/blob/release-8.1/TOC-tidb-cloud.md?plain=1).
+> TiDB Cloudによって再利用される TiDB ドキュメントを確認するには、 [TiDB Cloudドキュメントの TOC ファイル](https://github.com/pingcap/docs/blob/release-8.1/TOC-tidb-cloud.md?plain=1)確認してください。
 >
-> - If the path of a document in this file starts with `/tidb-cloud/`, it means that this document is only for TiDB Cloud.
-> - If the path of a document in this file does not start with `/tidb-cloud/`, it means that this TiDB document is reused by TiDB Cloud.
+> -   このファイル内のドキュメントのパスが`/tidb-cloud/`で始まる場合、このドキュメントはTiDB Cloud専用であることを意味します。
+> -   このファイル内のドキュメントのパスが`/tidb-cloud/`で始まっていない場合は、この TiDB ドキュメントがTiDB Cloudによって再利用されることを意味します。
 
-In some TiDB documents that are reused by TiDB Cloud, you might notice `CustomContent` tags. These `CustomContent` tags are used to show the dedicated content of TiDB or TiDB Cloud.
+TiDB Cloudで再利用される一部の TiDB ドキュメントには、 `CustomContent`タグが含まれている場合があります。これらの`CustomContent`タグは、TiDB またはTiDB Cloudの専用コンテンツを示すために使用されます。
 
-For example:
+例えば：
 
 ```Markdown
 ## Restrictions
@@ -195,18 +183,18 @@ For example:
     * Determine the concurrency based on testing results and specific circumstances.
 ```
 
-In the example:
+この例では、
 
-- The content within the `<CustomContent platform="tidb">` tag is only applicable to TiDB and will not be displayed on the [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud/) website.
-- The content within the `<CustomContent platform="tidb-cloud">`tag is only applicable to TiDB Cloud and will not be displayed on the [TiDB documentation](https://docs.pingcap.com/tidb/stable) website.
-- The content that are not wrapped by `<CustomContent>` tag are applicable to both TiDB and TiDB Cloud and will be displayed on both documentation websites.
+-   `<CustomContent platform="tidb">`タグ内のコンテンツは TiDB にのみ適用され、 [TiDB Cloudドキュメント](https://docs.pingcap.com/tidbcloud/) Web サイトには表示されません。
+-   `<CustomContent platform="tidb-cloud">`タグ内のコンテンツはTiDB Cloudにのみ適用され、 [TiDBドキュメント](https://docs.pingcap.com/tidb/stable) Web サイトには表示されません。
+-   `<CustomContent>`タグで囲まれていないコンテンツは、TiDB とTiDB Cloud の両方に適用され、両方のドキュメント Web サイトに表示されます。
 
-## Guideline for previewing EBNF diagrams
+## EBNF図のプレビューのガイドライン {#guideline-for-previewing-ebnf-diagrams}
 
-[TiDB documentation](https://docs.pingcap.com/tidb/stable) provides a lot of SQL synopsis diagrams to help users understand the SQL syntax. For example, you can find the synopsis diagrams for the `ALTER INDEX` statement [here](https://docs.pingcap.com/tidb/stable/sql-statement-alter-index#synopsis).
+[TiDBドキュメント](https://docs.pingcap.com/tidb/stable) 、SQL構文の理解を助けるために、多くのSQL概要図を提供しています。例えば、 `ALTER INDEX`文[ここ](https://docs.pingcap.com/tidb/stable/sql-statement-alter-index#synopsis)の概要図があります。
 
-The source of these synopsis diagrams is written using [extended Backus–Naur form (EBNF)](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form). When preparing the EBNF code for a SQL statement, you can easily preview the EBNF diagram by copying the code to <https://kennytm.github.io/website-docs/dist/> and clicking **Render**.
+これら概要図のソースは[拡張バッカスナウア記法（EBNF）](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form)使用して記述されています。SQL文のEBNFコードを準備する際には、コードを[https://kennytm.github.io/website-docs/dist/](https://kennytm.github.io/website-docs/dist/)にコピーして**「レンダリング」**をクリックすることで、EBNF図を簡単にプレビューできます。
 
-## Contact
+## 接触 {#contact}
 
-Join [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) for discussion.
+ディスカッションには[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)参加してください。

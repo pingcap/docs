@@ -1,335 +1,335 @@
 ---
 title: SQL Statement Overview
-summary: Learn about supported SQL statements in TiDB.
+summary: TiDB でサポートされている SQL ステートメントについて学習します。
 ---
 
-# SQL Statement Overview
+# SQL文の概要 {#sql-statement-overview}
 
-TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensions for MySQL and TiDB-specific statements where necessary.
+TiDB は、必要に応じて MySQL および TiDB 固有のステートメントの拡張機能を使用して、ISO/IEC SQL 標準に準拠することを目的とした SQL ステートメントを使用します。
 
-## Schema management / Data definition statements (DDL)
+## スキーマ管理 / データ定義文（DDL） {#schema-management-data-definition-statements-ddl}
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md) | Modifies a database. |
-| [`ALTER SEQUENCE`](/sql-statements/sql-statement-alter-sequence.md) | Modifies a sequence. |
-| [`ALTER TABLE ... ADD COLUMN`](/sql-statements/sql-statement-add-column.md) | Adds a column to an existing table. |
-| [`ALTER TABLE ... ADD INDEX`](/sql-statements/sql-statement-add-index.md) | Adds an index to an existing table. |
-| [`ALTER TABLE ... ALTER INDEX`](/sql-statements/sql-statement-alter-index.md) | Changes an index definition. |
-| [`ALTER TABLE ... CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) | Changes a column definition. |
-| [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) | Compacts a table. |
-| [`ALTER TABLE ... DROP COLUMN`](/sql-statements/sql-statement-drop-column.md) | Drops a column from a table. |
-| [`ALTER TABLE ... MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md) | Modifies a column definition. |
-| [`ALTER TABLE ... RENAME INDEX`](/sql-statements/sql-statement-rename-index.md) | Renames an index. |
-| [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) | Changes a table definition. |
-| [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md) | Creates a new database. |
-| [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md) | Creates a new index on a table. |
-| [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) | Creates a new sequence object. |
-| [`CREATE TABLE LIKE`](/sql-statements/sql-statement-create-table-like.md) | Copies the definition of an existing table, without copying any data. |
-| [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) | Creates a new table. |
-| [`CREATE VIEW`](/sql-statements/sql-statement-create-view.md) | Creates a new view. |
-| [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md) | Drops an existing database. |
-| [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md) | Drops an index from a table. |
-| [`DROP SEQUENCE`](/sql-statements/sql-statement-drop-sequence.md) | Drops a sequence object. |
-| [`DROP TABLE`](/sql-statements/sql-statement-drop-table.md) | Drops an existing table. |
-| [`DROP VIEW`](/sql-statements/sql-statement-drop-view.md) | Drops an existing view. |
-| [`RENAME TABLE`](/sql-statements/sql-statement-rename-table.md) | Renames a table. |
-| [`SHOW COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md) | Shows the columns from a table. |
-| [`SHOW CREATE DATABASE`](/sql-statements/sql-statement-show-create-database.md) | Shows the CREATE statement for a database. |
-| [`SHOW CREATE SEQUENCE`](/sql-statements/sql-statement-show-create-sequence.md) | Shows the CREATE statement for a sequence. |
-| [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md) | Shows the CREATE statement for a table. |
-| [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md) | Shows a list of databases that the current user has privileges to. |
-| [`SHOW FIELDS FROM`](/sql-statements/sql-statement-show-fields-from.md) | Shows columns of a table. |
-| [`SHOW INDEXES`](/sql-statements/sql-statement-show-indexes.md) | Shows indexes of a table. |
-| [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md) | An alias to `SHOW DATABASES`, which shows a list of databases that the current user has privileges to. |
-| [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md) | Shows the next row ID for a table. |
-| [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md) | Shows the Region information of a table in TiDB. |
-| [`SHOW TABLE STATUS`](/sql-statements/sql-statement-show-table-status.md) | Shows various statistics about tables in TiDB. |
-| [`SHOW TABLES`](/sql-statements/sql-statement-show-tables.md) | Shows tables in a database. |
-| [`TRUNCATE`](/sql-statements/sql-statement-truncate.md) | Truncates all data from a table. |
+| SQL文                                                                               | 説明                                                    |
+| ---------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)                | データベースを変更します。                                         |
+| [`ALTER SEQUENCE`](/sql-statements/sql-statement-alter-sequence.md)                | シーケンスを変更します。                                          |
+| [`ALTER TABLE ... ADD COLUMN`](/sql-statements/sql-statement-add-column.md)        | 既存のテーブルに列を追加します。                                      |
+| [`ALTER TABLE ... ADD INDEX`](/sql-statements/sql-statement-add-index.md)          | 既存のテーブルにインデックスを追加します。                                 |
+| [`ALTER TABLE ... ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)      | インデックス定義を変更します。                                       |
+| [`ALTER TABLE ... CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)  | 列の定義を変更します。                                           |
+| [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)  | テーブルを圧縮します。                                           |
+| [`ALTER TABLE ... DROP COLUMN`](/sql-statements/sql-statement-drop-column.md)      | テーブルから列を削除します。                                        |
+| [`ALTER TABLE ... MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)  | 列定義を変更します。                                            |
+| [`ALTER TABLE ... RENAME INDEX`](/sql-statements/sql-statement-rename-index.md)    | インデックスの名前を変更します。                                      |
+| [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)                      | テーブル定義を変更します。                                         |
+| [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)              | 新しいデータベースを作成します。                                      |
+| [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md)                    | テーブルに新しいインデックスを作成します。                                 |
+| [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)              | 新しいシーケンス オブジェクトを作成します。                                |
+| [`CREATE TABLE LIKE`](/sql-statements/sql-statement-create-table-like.md)          | データをコピーせずに、既存のテーブルの定義をコピーします。                         |
+| [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)                    | 新しいテーブルを作成します。                                        |
+| [`CREATE VIEW`](/sql-statements/sql-statement-create-view.md)                      | 新しいビューを作成します。                                         |
+| [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md)                  | 既存のデータベースを削除します。                                      |
+| [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)                        | テーブルからインデックスを削除します。                                   |
+| [`DROP SEQUENCE`](/sql-statements/sql-statement-drop-sequence.md)                  | シーケンス オブジェクトを削除します。                                   |
+| [`DROP TABLE`](/sql-statements/sql-statement-drop-table.md)                        | 既存のテーブルを削除します。                                        |
+| [`DROP VIEW`](/sql-statements/sql-statement-drop-view.md)                          | 既存のビューを削除します。                                         |
+| [`RENAME TABLE`](/sql-statements/sql-statement-rename-table.md)                    | テーブルの名前を変更します。                                        |
+| [`SHOW COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)          | テーブルの列を表示します。                                         |
+| [`SHOW CREATE DATABASE`](/sql-statements/sql-statement-show-create-database.md)    | データベースの CREATE ステートメントを表示します。                         |
+| [`SHOW CREATE SEQUENCE`](/sql-statements/sql-statement-show-create-sequence.md)    | シーケンスの CREATE ステートメントを表示します。                          |
+| [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)          | テーブルの CREATE ステートメントを表示します。                           |
+| [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)                | 現在のユーザーが権限を持つデータベースのリストを表示します。                        |
+| [`SHOW FIELDS FROM`](/sql-statements/sql-statement-show-fields-from.md)            | テーブルの列を表示します。                                         |
+| [`SHOW INDEXES`](/sql-statements/sql-statement-show-indexes.md)                    | テーブルのインデックスを表示します。                                    |
+| [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md)                    | `SHOW DATABASES`のエイリアス。現在のユーザーが権限を持つデータベースのリストを表示します。 |
+| [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md) | テーブルの次の行 ID を表示します。                                   |
+| [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)        | TiDB 内のテーブルのリージョン情報を表示します。                            |
+| [`SHOW TABLE STATUS`](/sql-statements/sql-statement-show-table-status.md)          | TiDB 内のテーブルに関するさまざまな統計を表示します。                         |
+| [`SHOW TABLES`](/sql-statements/sql-statement-show-tables.md)                      | データベース内のテーブルを表示します。                                   |
+| [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)                            | テーブルからすべてのデータを切り捨てます。                                 |
 
-## Data manipulation statements (DML)
+## データ操作ステートメント（DML） {#data-manipulation-statements-dml}
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`BATCH`](/sql-statements/sql-statement-batch.md) | Splits a DML statement into multiple statements in TiDB for execution. |
-| [`DELETE`](/sql-statements/sql-statement-delete.md) | Deletes rows from a table. |
-| [`INSERT`](/sql-statements/sql-statement-insert.md) | Inserts new rows into a table. |
-| [`REPLACE`](/sql-statements/sql-statement-replace.md) | Replaces existing rows or inserts new rows. |
-| [`SELECT`](/sql-statements/sql-statement-select.md) | Reads data from a table. |
-| [`TABLE`](/sql-statements/sql-statement-table.md) | Retrieves rows from a table. |
-| [`UPDATE`](/sql-statements/sql-statement-update.md) | Updates existing rows in a table. |
-| [`WITH`](/sql-statements/sql-statement-with.md) | Defines common table expressions. |
+| SQL文                                                  | 説明                                        |
+| ----------------------------------------------------- | ----------------------------------------- |
+| [`BATCH`](/sql-statements/sql-statement-batch.md)     | DML ステートメントを TiDB 内の複数のステートメントに分割して実行します。 |
+| [`DELETE`](/sql-statements/sql-statement-delete.md)   | テーブルから行を削除します。                            |
+| [`INSERT`](/sql-statements/sql-statement-insert.md)   | テーブルに新しい行を挿入します。                          |
+| [`REPLACE`](/sql-statements/sql-statement-replace.md) | 既存の行を置き換えるか、新しい行を挿入します。                   |
+| [`SELECT`](/sql-statements/sql-statement-select.md)   | テーブルからデータを読み取ります。                         |
+| [`TABLE`](/sql-statements/sql-statement-table.md)     | テーブルから行を取得します。                            |
+| [`UPDATE`](/sql-statements/sql-statement-update.md)   | テーブル内の既存の行を更新します。                         |
+| [`WITH`](/sql-statements/sql-statement-with.md)       | 共通テーブル式を定義します。                            |
 
-## Transaction statements
+## トランザクション明細書 {#transaction-statements}
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`BEGIN`](/sql-statements/sql-statement-begin.md) | Begins a new transaction. |
-| [`COMMIT`](/sql-statements/sql-statement-commit.md) | Commits the current transaction. |
-| [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) | Rolls back the current transaction. |
-| [`SAVEPOINT`](/sql-statements/sql-statement-savepoint.md) | Sets a savepoint within a transaction. |
-| [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md) | Changes the current isolation level on a `GLOBAL` or `SESSION` basis. |
-| [`START TRANSACTION`](/sql-statements/sql-statement-start-transaction.md) | Starts a new transaction. |
+| SQL文                                                                      | 説明                                      |
+| ------------------------------------------------------------------------- | --------------------------------------- |
+| [`BEGIN`](/sql-statements/sql-statement-begin.md)                         | 新しいトランザクションを開始します。                      |
+| [`COMMIT`](/sql-statements/sql-statement-commit.md)                       | 現在のトランザクションをコミットします。                    |
+| [`ROLLBACK`](/sql-statements/sql-statement-rollback.md)                   | 現在のトランザクションをロールバックします。                  |
+| [`SAVEPOINT`](/sql-statements/sql-statement-savepoint.md)                 | トランザクション内にセーブポイントを設定します。                |
+| [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)     | 現在の分離レベルを`GLOBAL`または`SESSION`ベースで変更します。 |
+| [`START TRANSACTION`](/sql-statements/sql-statement-start-transaction.md) | 新しいトランザクションを開始します。                      |
 
-## Prepared statements
+## 準備された声明 {#prepared-statements}
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`DEALLOCATE`](/sql-statements/sql-statement-deallocate.md) | Deallocates a prepared statement, freeing associated resources. |
-| [`EXECUTE`](/sql-statements/sql-statement-execute.md) | Executes a prepared statement with specific parameter values. |
-| [`PREPARE`](/sql-statements/sql-statement-prepare.md) | Creates a prepared statement with placeholders. |
+| SQL文                                                        | 説明                                    |
+| ----------------------------------------------------------- | ------------------------------------- |
+| [`DEALLOCATE`](/sql-statements/sql-statement-deallocate.md) | プリペアドステートメントの割り当てを解除し、関連するリソースを解放します。 |
+| [`EXECUTE`](/sql-statements/sql-statement-execute.md)       | 特定のパラメータ値を使用してプリペアドステートメントを実行します。     |
+| [`PREPARE`](/sql-statements/sql-statement-prepare.md)       | プレースホルダーを使用してプリペアドステートメントを作成します。      |
 
-## Administrative statements
+## 行政声明 {#administrative-statements}
 
 <CustomContent platform="tidb">
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md) | Modifies the parameter of a single running DDL job. |
-| [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) | Cancels a DDL job. |
-| [`ADMIN CHECK [TABLE\|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | Checks the integrity of a table or index. |
-| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md) | Computes the checksum of a table. |
-| [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md) | Cleans up indexes from a table. |
-| [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md) | Pauses DDL operations. |
-| [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md) | Resumes DDL operations. |
-| [`ADMIN SHOW DDL [JOBS\|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md) | Shows DDL jobs or job queries. |
-| [`ADMIN`](/sql-statements/sql-statement-admin.md) | Performs various administrative tasks. |
-| [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md) |  Included for [MySQL compatibility](/mysql-compatibility.md). It has no effective usage in TiDB. |
-| [`SET <variable>`](/sql-statements/sql-statement-set-variable.md) | Modifies a system variable or user variable. |
-| [`SET [NAMES\|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md) | Set a character set and collation. |
-| [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md) | Splits a Region into smaller Regions. |
+| SQL文                                                                                    | 説明                                                                 |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)              | 実行中の単一の DDL ジョブのパラメータを変更します。                                       |
+| [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)                 | DDL ジョブをキャンセルします。                                                  |
+| [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの整合性をチェックします。                                         |
+| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)         | テーブルのチェックサムを計算します。                                                 |
+| [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md)                 | テーブルからインデックスをクリーンアップします。                                           |
+| [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)                   | DDL 操作を一時停止します。                                                    |
+| [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)                 | DDL 操作を再開します。                                                      |
+| [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)  | DDL ジョブまたはジョブ クエリを表示します。                                           |
+| [`ADMIN`](/sql-statements/sql-statement-admin.md)                                       | さまざまな管理タスクを実行します。                                                  |
+| [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md)                         | [MySQLの互換性](/mysql-compatibility.md)に含まれています。TiDB では有効な使用方法はありません。 |
+| [`SET &#x3C;variable>`](/sql-statements/sql-statement-set-variable.md)                  | システム変数またはユーザー変数を変更します。                                             |
+| [`SET [NAMES|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)               | 文字セットと照合順序を設定します。                                                  |
+| [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md)                         | リージョンを小さな領域に分割します。                                                 |
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md) | Modifies the parameter of a single running DDL job. |
-| [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) | Cancels a DDL job. |
-| [`ADMIN CHECK [TABLE\|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | Checks the integrity of a table or index. |
-| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md) | Computes the checksum of a table. |
-| [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md) | Cleans up indexes from a table. |
-| [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md) | Pauses DDL operations. |
-| [`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md) | Recovers the consistency based on the redundant indexes. |
-| [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md) | Resumes DDL operations. |
-| [`ADMIN SHOW DDL [JOBS\|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md) | Shows DDL jobs or job queries. |
-| [`ADMIN`](/sql-statements/sql-statement-admin.md) | Performs various administrative tasks. |
-| [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md) |  Included for [MySQL compatibility](/mysql-compatibility.md). It has no effective usage in TiDB. |
-| [`SET <variable>`](/sql-statements/sql-statement-set-variable.md) | Modifies a system variable or user variable. |
-| [`SET [NAMES\|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md) | Set a character set and collation. |
-| [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md) | Splits a Region into smaller Regions. |
+| SQL文                                                                                    | 説明                                                                 |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)              | 実行中の単一の DDL ジョブのパラメータを変更します。                                       |
+| [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)                 | DDL ジョブをキャンセルします。                                                  |
+| [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの整合性をチェックします。                                         |
+| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)         | テーブルのチェックサムを計算します。                                                 |
+| [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md)                 | テーブルからインデックスをクリーンアップします。                                           |
+| [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)                   | DDL 操作を一時停止します。                                                    |
+| [`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md)                 | 冗長インデックスに基づいて一貫性を回復します。                                            |
+| [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)                 | DDL 操作を再開します。                                                      |
+| [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)  | DDL ジョブまたはジョブ クエリを表示します。                                           |
+| [`ADMIN`](/sql-statements/sql-statement-admin.md)                                       | さまざまな管理タスクを実行します。                                                  |
+| [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md)                         | [MySQLの互換性](/mysql-compatibility.md)に含まれています。TiDB では有効な使用方法はありません。 |
+| [`SET &#x3C;variable>`](/sql-statements/sql-statement-set-variable.md)                  | システム変数またはユーザー変数を変更します。                                             |
+| [`SET [NAMES|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)               | 文字セットと照合順序を設定します。                                                  |
+| [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md)                         | リージョンを小さな領域に分割します。                                                 |
 
 </CustomContent>
 
-## Data import and export
+## データのインポートとエクスポート {#data-import-and-export}
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md) | Cancels an ongoing import job. |
-| [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) | Imports data into a table via the [Physical Import Mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode) of TiDB Lightning. |
-| [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) | Loads data into a table from Amazon S3 or Google Cloud Storage. |
-| [`SHOW IMPORT JOB`](/sql-statements/sql-statement-show-import-job.md) | Shows the status of an import job. |
+| SQL文                                                                      | 説明                                                                                                                         |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md) | 進行中のインポート ジョブをキャンセルします。                                                                                                    |
+| [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)             | TiDB Lightningの[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)介してデータをテーブルにインポートします。 |
+| [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)                 | Amazon S3 または Google Cloud Storage からテーブルにデータをロードします。                                                                      |
+| [`SHOW IMPORT JOB`](/sql-statements/sql-statement-show-import-job.md)     | インポート ジョブのステータスを表示します。                                                                                                     |
 
-## Backup & restore
+## バックアップと復元 {#backup-x26-restore}
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`BACKUP`](/sql-statements/sql-statement-backup.md) | Performs a distributed backup of the TiDB cluster. |
-| [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) | Restores the cluster to a specific snapshot. |
-| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) | Restores a database and its data deleted by the `DROP` statement. |
-| [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md) | Restore the tables and data dropped by the `DROP` or `TRUNCATE` operation. |
-| [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md) | Recovers a deleted table and the data on it. |
-| [`RESTORE`](/sql-statements/sql-statement-restore.md) | Restores a database from a backup. |
-| [`SHOW BACKUPS`](/sql-statements/sql-statement-show-backups.md) | Shows backup tasks. |
-| [`SHOW RESTORES`](/sql-statements/sql-statement-show-backups.md) | Shows restore tasks. |
+| SQL文                                                                        | 説明                                            |
+| --------------------------------------------------------------------------- | --------------------------------------------- |
+| [`BACKUP`](/sql-statements/sql-statement-backup.md)                         | TiDB クラスターの分散バックアップを実行します。                    |
+| [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)   | クラスターを特定のスナップショットに復元します。                      |
+| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) | `DROP`ステートメントによって削除されたデータベースとそのデータを復元します。     |
+| [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)       | `DROP`または`TRUNCATE`操作によって削除されたテーブルとデータを復元します。 |
+| [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md)           | 削除されたテーブルとその上のデータを回復します。                      |
+| [`RESTORE`](/sql-statements/sql-statement-restore.md)                       | バックアップからデータベースを復元します。                         |
+| [`SHOW BACKUPS`](/sql-statements/sql-statement-show-backups.md)             | バックアップ タスクを表示します。                             |
+| [`SHOW RESTORES`](/sql-statements/sql-statement-show-backups.md)            | 復元タスクを表示します。                                  |
 
-## Placement policy
+## 配置ポリシー {#placement-policy}
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md) | Modifies a placement policy. |
-| [`ALTER RANGE`](/sql-statements/sql-statement-alter-range.md) | Modifies the range of a placement policy. |
-| [`CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-create-placement-policy.md) | Creates a new placement policy. |
-| [`DROP PLACEMENT POLICY`](/sql-statements/sql-statement-drop-placement-policy.md) | Drops an existing placement policy. |
-| [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md) | Shows the `CREATE` statement for a placement policy. |
-| [`SHOW PLACEMENT FOR`](/sql-statements/sql-statement-show-placement-for.md) | Shows placement rules for a specific table. |
-| [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md) | Shows available placement labels. |
-| [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md) | Shows placement rules. |
+| SQL文                                                                                            | 説明                            |
+| ----------------------------------------------------------------------------------------------- | ----------------------------- |
+| [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)             | 配置ポリシーを変更します。                 |
+| [`ALTER RANGE`](/sql-statements/sql-statement-alter-range.md)                                   | 配置ポリシーの範囲を変更します。              |
+| [`CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-create-placement-policy.md)           | 新しい配置ポリシーを作成します。              |
+| [`DROP PLACEMENT POLICY`](/sql-statements/sql-statement-drop-placement-policy.md)               | 既存の配置ポリシーを削除します。              |
+| [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md) | 配置ポリシーの`CREATE`ステートメントを表示します。 |
+| [`SHOW PLACEMENT FOR`](/sql-statements/sql-statement-show-placement-for.md)                     | 特定のテーブルの配置ルールを表示します。          |
+| [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)               | 使用可能な配置ラベルを表示します。             |
+| [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md)                             | 配置ルールを表示します。                  |
 
-## Resource groups
+## リソースグループ {#resource-groups}
 
 <CustomContent platform="tidb">
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md) | Modifies a resource group. |
-| [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md) | Estimates and outputs the [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) capacity of the current cluster. |
-| [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md) | Creates a new resource group. |
-| [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md) | Drops a resource group. |
-| [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) | Manages the runaway query watch list. |
-| [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md) | Sets a resource group. |
-| [`SHOW CREATE RESOURCE GROUP`](/sql-statements/sql-statement-show-create-resource-group.md) | Shows the `CREATE` statement for a resource group. |
+| SQL文                                                                                        | 説明                                                                                                 |
+| ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)             | リソース グループを変更します。                                                                                   |
+| [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)                 | 現在のクラスターの[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)容量を推定して出力します。 |
+| [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md)           | 新しいリソース グループを作成します。                                                                                |
+| [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)               | リソース グループを削除します。                                                                                   |
+| [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)                               | ランナウェイ クエリ監視リストを管理します。                                                                             |
+| [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)                 | リソース グループを設定します。                                                                                   |
+| [`SHOW CREATE RESOURCE GROUP`](/sql-statements/sql-statement-show-create-resource-group.md) | リソース グループの`CREATE`ステートメントを表示します。                                                                   |
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md) | Modifies a resource group. |
-| [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md) | Creates a new resource group. |
-| [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md) | Drops a resource group. |
-| [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) | Manages the runaway query watch list. |
-| [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md) | Sets a resource group. |
-| [`SHOW CREATE RESOURCE GROUP`](/sql-statements/sql-statement-show-create-resource-group.md) | Shows the `CREATE` statement for a resource group. |
+| SQL文                                                                                        | 説明                               |
+| ------------------------------------------------------------------------------------------- | -------------------------------- |
+| [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)             | リソース グループを変更します。                 |
+| [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md)           | 新しいリソース グループを作成します。              |
+| [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)               | リソース グループを削除します。                 |
+| [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)                               | ランナウェイ クエリ監視リストを管理します。           |
+| [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)                 | リソース グループを設定します。                 |
+| [`SHOW CREATE RESOURCE GROUP`](/sql-statements/sql-statement-show-create-resource-group.md) | リソース グループの`CREATE`ステートメントを表示します。 |
 
 </CustomContent>
 
-## Utility statements
+## ユーティリティステートメント {#utility-statements}
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`DESC`](/sql-statements/sql-statement-desc.md) | An alias to `DESCRIBE`, which shows the structure of a table. |
-| [`DESCRIBE`](/sql-statements/sql-statement-describe.md) | Shows the structure of a table. |
-| [`DO`](/sql-statements/sql-statement-do.md) | Executes an expression but does not return any results. |
-| [`EXPLAIN`](/sql-statements/sql-statement-explain.md) | Shows the execution plan of a query. |
-| [`TRACE`](/sql-statements/sql-statement-trace.md) | Provides detailed information about query execution. |
-| [`USE`](/sql-statements/sql-statement-use.md) | Sets the current database. |
+| SQL文                                                    | 説明                           |
+| ------------------------------------------------------- | ---------------------------- |
+| [`DESC`](/sql-statements/sql-statement-desc.md)         | `DESCRIBE`別名で、テーブルの構造を表示します。 |
+| [`DESCRIBE`](/sql-statements/sql-statement-describe.md) | テーブルの構造を表示します。               |
+| [`DO`](/sql-statements/sql-statement-do.md)             | 式を実行しますが、結果は返しません。           |
+| [`EXPLAIN`](/sql-statements/sql-statement-explain.md)   | クエリの実行プランを表示します。             |
+| [`TRACE`](/sql-statements/sql-statement-trace.md)       | クエリ実行に関する詳細情報を提供します。         |
+| [`USE`](/sql-statements/sql-statement-use.md)           | 現在のデータベースを設定します。             |
 
-## Show statements
+## ステートメントを表示 {#show-statements}
 
 <CustomContent platform="tidb">
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md) | Lists builtin functions. |
-| [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md) | Lists character sets. |
-| [`SHOW COLLATIONS`](/sql-statements/sql-statement-show-collation.md) | Lists collations. |
-| [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md) | Shows errors from previously executed statements. |
-| [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md) | Included for [compatibility with MySQL](/mysql-compatibility.md). TiDB uses [Prometheus and Grafana](/tidb-monitoring-framework.md) for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
-| [`SHOW VARIABLES`](/sql-statements/sql-statement-show-variables.md) | Shows system variables. |
-| [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md) | Shows warnings and notes from previously executed statements. |
+| SQL文                                                                        | 説明                                                                                                                                                 |
+| --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md)           | 組み込み関数を一覧表示します。                                                                                                                                    |
+| [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md) | 文字セットを一覧表示します。                                                                                                                                     |
+| [`SHOW COLLATIONS`](/sql-statements/sql-statement-show-collation.md)        | 照合を一覧表示します。                                                                                                                                        |
+| [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md)               | 以前実行されたステートメントのエラーを表示します。                                                                                                                          |
+| [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)               | [MySQLとの互換性](/mysql-compatibility.md)に含まれています。TiDB は、ほとんどのメトリックに対して`SHOW STATUS`ではなく、集中メトリック収集に[プロメテウスとグラファナ](/tidb-monitoring-framework.md)使用します。 |
+| [`SHOW VARIABLES`](/sql-statements/sql-statement-show-variables.md)         | システム変数を表示します。                                                                                                                                      |
+| [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md)           | 以前実行されたステートメントからの警告とメモを表示します。                                                                                                                      |
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md) | Lists builtin functions. |
-| [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md) | Lists character sets. |
-| [`SHOW COLLATIONS`](/sql-statements/sql-statement-show-collation.md) | Lists collations. |
-| [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md) | Shows errors from previously executed statements. |
-| [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md) | Included for [compatibility with MySQL](/mysql-compatibility.md). TiDB Cloud provides [Monitoring](/tidb-cloud/monitor-tidb-cluster.md) for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
-| [`SHOW VARIABLES`](/sql-statements/sql-statement-show-variables.md) | Shows system variables. |
-| [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md) | Shows warnings and notes from previously executed statements. |
+| SQL文                                                                        | 説明                                                                                                                                                         |
+| --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md)           | 組み込み関数を一覧表示します。                                                                                                                                            |
+| [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md) | 文字セットを一覧表示します。                                                                                                                                             |
+| [`SHOW COLLATIONS`](/sql-statements/sql-statement-show-collation.md)        | 照合を一覧表示します。                                                                                                                                                |
+| [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md)               | 以前実行されたステートメントのエラーを表示します。                                                                                                                                  |
+| [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)               | [MySQLとの互換性](/mysql-compatibility.md)に含まれています。TiDB TiDB Cloud は、ほとんどのメトリックに対して`SHOW STATUS`ではなく、集中メトリック収集用に[監視](/tidb-cloud/monitor-tidb-cluster.md)提供します。 |
+| [`SHOW VARIABLES`](/sql-statements/sql-statement-show-variables.md)         | システム変数を表示します。                                                                                                                                              |
+| [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md)           | 以前実行されたステートメントからの警告とメモを表示します。                                                                                                                              |
 
 </CustomContent>
 
-## Instance management
+## インスタンス管理 {#instance-management}
 
 <CustomContent platform="tidb">
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md) | Modifies an instance. |
-| [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md) | Included for [compatibility with MySQL](/mysql-compatibility.md). TiDB uses [Prometheus and Grafana](/tidb-monitoring-framework.md) for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
-| [`KILL`](/sql-statements/sql-statement-kill.md) | Kills a connection in any TiDB instance in the current TiDB cluster. |
-| [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md) | Shows the configuration of various components of TiDB. |
-| [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md) | Shows available storage engines. |
-| [`SHOW PLUGINS`](/sql-statements/sql-statement-show-plugins.md) | Shows installed plugins. |
-| [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) | Shows the current sessions connected to the same TiDB server. |
-| [`SHOW PROFILES`](/sql-statements/sql-statement-show-profiles.md) | Included for [compatibility with MySQL](/mysql-compatibility.md). Currently, it only returns an empty result. |
-| [`SHUTDOWN`](/sql-statements/sql-statement-shutdown.md) | Stops the client-connected TiDB instance, not the entire TiDB cluster. |
+| SQL文                                                                    | 説明                                                                                                                                                 |
+| ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)     | インスタンスを変更します。                                                                                                                                      |
+| [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md)         | [MySQLとの互換性](/mysql-compatibility.md)に含まれています。TiDB は、ほとんどのメトリックに対して`SHOW STATUS`ではなく、集中メトリック収集に[プロメテウスとグラファナ](/tidb-monitoring-framework.md)使用します。 |
+| [`KILL`](/sql-statements/sql-statement-kill.md)                         | 現在の TiDB クラスター内の任意の TiDB インスタンスの接続を切断します。                                                                                                          |
+| [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md)           | TiDB のさまざまなコンポーネントの構成を表示します。                                                                                                                       |
+| [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)         | 使用可能なstorageエンジンを表示します。                                                                                                                            |
+| [`SHOW PLUGINS`](/sql-statements/sql-statement-show-plugins.md)         | インストールされているプラグインを表示します。                                                                                                                            |
+| [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) | 同じ TiDBサーバーに接続されている現在のセッションを表示します。                                                                                                                 |
+| [`SHOW PROFILES`](/sql-statements/sql-statement-show-profiles.md)       | [MySQLとの互換性](/mysql-compatibility.md)に含まれています。現在は空の結果のみが返されます。                                                                                     |
+| [`SHUTDOWN`](/sql-statements/sql-statement-shutdown.md)                 | TiDB クラスター全体ではなく、クライアントに接続された TiDB インスタンスを停止します。                                                                                                   |
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md) | Modifies an instance. |
-| [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md) | Included for [compatibility with MySQL](/mysql-compatibility.md). TiDB Cloud provides [Monitoring](/tidb-cloud/monitor-tidb-cluster.md) for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
-| [`KILL`](/sql-statements/sql-statement-kill.md) | Kills a connection in any TiDB instance in the current TiDB cluster. |
-| [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md) | Shows available storage engines. |
-| [`SHOW PLUGINS`](/sql-statements/sql-statement-show-plugins.md) | Shows installed plugins. |
-| [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) | Shows the current sessions connected to the same TiDB server. |
-| [`SHOW PROFILES`](/sql-statements/sql-statement-show-profiles.md) | Shows query profiles. Included for [compatibility with MySQL](/mysql-compatibility.md). Currently only returns an empty result. |
+| SQL文                                                                    | 説明                                                                                                                                                         |
+| ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)     | インスタンスを変更します。                                                                                                                                              |
+| [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md)         | [MySQLとの互換性](/mysql-compatibility.md)に含まれています。TiDB TiDB Cloud は、ほとんどのメトリックに対して`SHOW STATUS`ではなく、集中メトリック収集用に[監視](/tidb-cloud/monitor-tidb-cluster.md)提供します。 |
+| [`KILL`](/sql-statements/sql-statement-kill.md)                         | 現在の TiDB クラスター内の任意の TiDB インスタンスの接続を切断します。                                                                                                                  |
+| [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)         | 使用可能なstorageエンジンを表示します。                                                                                                                                    |
+| [`SHOW PLUGINS`](/sql-statements/sql-statement-show-plugins.md)         | インストールされているプラグインを表示します。                                                                                                                                    |
+| [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) | 同じ TiDBサーバーに接続されている現在のセッションを表示します。                                                                                                                         |
+| [`SHOW PROFILES`](/sql-statements/sql-statement-show-profiles.md)       | クエリプロファイルを表示します。 [MySQLとの互換性](/mysql-compatibility.md)に含まれます。現在は空の結果のみを返します。                                                                               |
 
 </CustomContent>
 
-## Locking statements
+## ロックステートメント {#locking-statements}
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md) | Locks statistics of tables or partitions. |
-| [`LOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md) | Locks tables for the current session. |
-| [`UNLOCK STATS`](/sql-statements/sql-statement-unlock-stats.md) | Unlocks statistics of tables or partitions. |
-| [`UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md) | Unlocks tables. |
+| SQL文                                                                              | 説明                          |
+| --------------------------------------------------------------------------------- | --------------------------- |
+| [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md)                       | テーブルまたはパーティションの統計をロックします。   |
+| [`LOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)   | 現在のセッションのテーブルをロックします。       |
+| [`UNLOCK STATS`](/sql-statements/sql-statement-unlock-stats.md)                   | テーブルまたはパーティションの統計をロック解除します。 |
+| [`UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md) | テーブルのロックを解除します。             |
 
-## Account management / Data Control Language
+## アカウント管理 / データ制御言語 {#account-management-data-control-language}
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) | Modifies a user. |
-| [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md) | Creates a role. |
-| [`CREATE USER`](/sql-statements/sql-statement-create-user.md) | Creates a new user. |
-| [`DROP ROLE`](/sql-statements/sql-statement-drop-role.md) | Drops an existing role. |
-| [`DROP USER`](/sql-statements/sql-statement-drop-user.md) | Drops an existing user. |
-| [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md) | Reloads the in-memory copy of privileges from the privilege tables. |
-| [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md) | Grants privileges. |
-| [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md) | Grants a role. |
-| [`RENAME USER`](/sql-statements/sql-statement-rename-user.md) | Renames an existing user. |
-| [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md) | Revokes privileges. |
-| [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md) | Revokes a role. |
-| [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md) | Sets a default role. |
-| [`SET PASSWORD`](/sql-statements/sql-statement-set-password.md) | Changes a password. |
-| [`SET ROLE`](/sql-statements/sql-statement-set-role.md) | Enables roles in the current session. |
-| [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md) | Shows the `CREATE` statement for a user. |
-| [`SHOW GRANTS`](/sql-statements/sql-statement-show-grants.md) | Shows privileges associated with a user. |
-| [`SHOW PRIVILEGES`](/sql-statements/sql-statement-show-privileges.md) | Shows available privileges. |
+| SQL文                                                                             | 説明                          |
+| -------------------------------------------------------------------------------- | --------------------------- |
+| [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)                      | ユーザーを変更します。                 |
+| [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)                    | ロールを作成します。                  |
+| [`CREATE USER`](/sql-statements/sql-statement-create-user.md)                    | 新しいユーザーを作成します。              |
+| [`DROP ROLE`](/sql-statements/sql-statement-drop-role.md)                        | 既存のロールを削除します。               |
+| [`DROP USER`](/sql-statements/sql-statement-drop-user.md)                        | 既存のユーザーを削除します。              |
+| [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)          | 権限テーブルから権限のメモリ内コピーを再ロードします。 |
+| [`GRANT &#x3C;privileges>`](/sql-statements/sql-statement-grant-privileges.md)   | 権限を付与します。                   |
+| [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)               | ロールを付与します。                  |
+| [`RENAME USER`](/sql-statements/sql-statement-rename-user.md)                    | 既存のユーザーの名前を変更します。           |
+| [`REVOKE &#x3C;privileges>`](/sql-statements/sql-statement-revoke-privileges.md) | 権限を取り消します。                  |
+| [`REVOKE &#x3C;role>`](/sql-statements/sql-statement-revoke-role.md)             | ロールを取り消します。                 |
+| [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)          | デフォルトのロールを設定します。            |
+| [`SET PASSWORD`](/sql-statements/sql-statement-set-password.md)                  | パスワードを変更します。                |
+| [`SET ROLE`](/sql-statements/sql-statement-set-role.md)                          | 現在のセッションでロールを有効にします。        |
+| [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)          | ユーザーの`CREATE`ステートメントを表示します。 |
+| [`SHOW GRANTS`](/sql-statements/sql-statement-show-grants.md)                    | ユーザーに関連付けられた権限を表示します。       |
+| [`SHOW PRIVILEGES`](/sql-statements/sql-statement-show-privileges.md)            | 利用可能な権限を表示します。              |
 
-## TiCDC
+## TiCDC {#ticdc}
 
 <CustomContent platform="tidb">
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`ADMIN [SET\|SHOW\|UNSET] BDR ROLE`](/sql-statements/sql-statement-admin-bdr-role.md) | Manages BDR roles. |
-| [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md) | Shows the latest TSO in the cluster. |
+| SQL文                                                                                 | 説明                     |
+| ------------------------------------------------------------------------------------ | ---------------------- |
+| [`ADMIN [SET|SHOW|UNSET] BDR ROLE`](/sql-statements/sql-statement-admin-bdr-role.md) | BDR ロールを管理します。         |
+| [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md)          | クラスター内の最新の TSO を表示します。 |
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) & [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) are tools for replicating TiDB data to the upstream for TiDB Self-Managed. Most SQL statements for TiCDC and TiDB Binlog are not applicable to TiDB Cloud. For TiDB Cloud, you can use the [Changefeed](/tidb-cloud/changefeed-overview.md) feature in the [TiDB Cloud console](https://tidbcloud.com) instead to stream data.
+> [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)と[TiDBBinlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) 、TiDB Self-Managed のアップストリームに TiDB データを複製するためのツールです。TiCDC および TiDB Binlogのほとんどの SQL 文はTiDB Cloudには適用できません。TiDB TiDB Cloudでは、代わりに[TiDB Cloudコンソール](https://tidbcloud.com)の[チェンジフィード](/tidb-cloud/changefeed-overview.md)機能を使用してデータをストリーミングできます。
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md) | Shows the latest TSO in the cluster. |
+| SQL文                                                                        | 説明                     |
+| --------------------------------------------------------------------------- | ---------------------- |
+| [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md) | クラスター内の最新の TSO を表示します。 |
 
 </CustomContent>
 
-## Statistics and plan management
+## 統計と計画管理 {#statistics-and-plan-management}
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) | Collects statistics about a table. |
-| [`CREATE BINDING`](/sql-statements/sql-statement-create-binding.md) | Creates an execution plan binding for a SQL statement. |
-| [`DROP BINDING`](/sql-statements/sql-statement-drop-binding.md) | Drops an execution plan binding from a SQL statement. |
-| [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) | Drops statistics from a table. |
-| [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) | Works similar to `EXPLAIN`, with the major difference that it will execute the statement. |
-| [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md) | Loads statistics into TiDB. |
-| [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md) | Shows statistics collection tasks. |
-| [`SHOW BINDINGS`](/sql-statements/sql-statement-show-bindings.md) | Shows created SQL bindings. |
-| [`SHOW COLUMN_STATS_USAGE`](/sql-statements/sql-statement-show-column-stats-usage.md) | Shows the last usage time and collection time of column statistics. |
-| [`SHOW STATS_BUCKETS`](/sql-statements/sql-statement-show-stats-buckets.md) | Shows the bucket information in statistics. |
-| [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) | Shows an estimation of how accurate statistics are believed to be. |
-| [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-stats-histograms.md) | Shows the histogram information in statistics. |
-| [`SHOW STATS_LOCKED`](/sql-statements/sql-statement-show-stats-locked.md) | Shows the tables whose statistics are locked. |
-| [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md) | Shows how many rows are in a table and how many rows are changed in that table. |
-| [`SHOW STATS_TOPN`](/sql-statements/sql-statement-show-stats-topn.md) | Shows the Top-N information in statistics. |
+| SQL文                                                                                  | 説明                                             |
+| ------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)                     | テーブルに関する統計を収集します。                              |
+| [`CREATE BINDING`](/sql-statements/sql-statement-create-binding.md)                   | SQL ステートメントの実行プラン バインディングを作成します。               |
+| [`DROP BINDING`](/sql-statements/sql-statement-drop-binding.md)                       | SQL ステートメントから実行プラン バインディングを削除します。              |
+| [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md)                           | テーブルから統計を削除します。                                |
+| [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)                 | `EXPLAIN`と同様に動作しますが、ステートメントを実行するという大きな違いがあります。 |
+| [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md)                           | 統計を TiDB に読み込みます。                              |
+| [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)         | 統計収集タスクを表示します。                                 |
+| [`SHOW BINDINGS`](/sql-statements/sql-statement-show-bindings.md)                     | 作成された SQL バインディングを表示します。                       |
+| [`SHOW COLUMN_STATS_USAGE`](/sql-statements/sql-statement-show-column-stats-usage.md) | 列統計の最終使用時間と収集時間を表示します。                         |
+| [`SHOW STATS_BUCKETS`](/sql-statements/sql-statement-show-stats-buckets.md)           | 統計にバケット情報を表示します。                               |
+| [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)           | 統計がどの程度正確であると考えられるかの推定値を示します。                  |
+| [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-stats-histograms.md)     | 統計のヒストグラム情報を表示します。                             |
+| [`SHOW STATS_LOCKED`](/sql-statements/sql-statement-show-stats-locked.md)             | 統計がロックされているテーブルを表示します。                         |
+| [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)                 | テーブル内の行数と、そのテーブル内で変更された行数を表示します。               |
+| [`SHOW STATS_TOPN`](/sql-statements/sql-statement-show-stats-topn.md)                 | 統計の上位 N 情報を表示します。                              |

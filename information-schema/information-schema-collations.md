@@ -1,11 +1,11 @@
 ---
 title: COLLATIONS
-summary: Learn the `COLLATIONS` information_schema table.
+summary: COLLATIONS` information_schema テーブルについて学習します。
 ---
 
-# COLLATIONS
+# 照合 {#collations}
 
-The `COLLATIONS` table provides a list of collations that correspond to character sets in the `CHARACTER_SETS` table. Currently, this table is included only for compatibility with MySQL.
+`COLLATIONS`テーブルは、 `CHARACTER_SETS`テーブル内の文字セットに対応する照合順序のリストを提供します。現在、このテーブルはMySQLとの互換性のためだけに含まれています。
 
 ```sql
 USE information_schema;
@@ -44,19 +44,19 @@ SELECT * FROM collations WHERE character_set_name='utf8mb4';
 5 rows in set (0.001 sec)
 ```
 
-The description of columns in the `COLLATIONS` table is as follows:
+`COLLATIONS`表の列の説明は次のとおりです。
 
-* `COLLATION_NAME`: The name of the collation.
-* `CHARACTER_SET_NAME`: The name of the character set which the collation belongs to.
-* `ID`: The ID of the collation.
-* `IS_DEFAULT`: Whether this collation is the default collation of the character set it belongs to.
-* `IS_COMPILED`: Whether the character set is compiled into the server.
-* `SORTLEN`: The minimum length of memory allocated when the collation sorts characters.
-* `PAD_ATTRIBUTE`: Whether trailing spaces are ignored during string comparison. `PAD SPACE` means that trailing spaces are ignored (for example, `'abc'` equals `'abc   '`), while `NO PAD` means that trailing spaces are significant (for example, `'abc'` does not equal `'abc   '`).
+-   `COLLATION_NAME` :照合順序の名前。
+-   `CHARACTER_SET_NAME` :照合順序が属する文字セットの名前。
+-   `ID` :照合順序の ID。
+-   `IS_DEFAULT` : この照合順序が、それが属する文字セットのデフォルトの照合順序であるかどうか。
+-   `IS_COMPILED` : 文字セットがサーバーにコンパイルされているかどうか。
+-   `SORTLEN` :照合順序が文字をソートするときに割り当てられるメモリの最小長。
+-   `PAD_ATTRIBUTE` : 文字列の比較中に末尾のスペースを無視するかどうか。2 `PAD SPACE`末尾のスペースが無視されることを意味し (たとえば、 `'abc'` `'abc   '`と等しい)、 `NO PAD`末尾のスペースが重要であることを意味します (たとえば、 `'abc'` `'abc   '`等しくありません)。
 
-## See also
+## 参照 {#see-also}
 
-- [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
-- [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
-- [`INFORMATION_SCHEMA.CHARACTER_SETS`](/information-schema/information-schema-character-sets.md)
-- [`INFORMATION_SCHEMA.COLLATION_CHARACTER_SET_APPLICABILITY`](/information-schema/information-schema-collation-character-set-applicability.md)
+-   [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
+-   [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
+-   [`INFORMATION_SCHEMA.CHARACTER_SETS`](/information-schema/information-schema-character-sets.md)
+-   [`INFORMATION_SCHEMA.COLLATION_CHARACTER_SET_APPLICABILITY`](/information-schema/information-schema-collation-character-set-applicability.md)

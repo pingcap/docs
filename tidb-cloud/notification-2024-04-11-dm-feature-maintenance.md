@@ -1,49 +1,49 @@
 ---
 title: 2024-04-11 TiDB Cloud Data Migration (DM) Feature Maintenance Notification
-summary: Learn about the details of TiDB Cloud Data Migration (DM) feature maintenance on April 11, 2024, such as the maintenance window and impact.
+summary: 2024 年 4 月 11 日のTiDB Cloud Data Migration (DM) 機能メンテナンスの詳細 (メンテナンス ウィンドウや影響など) について説明します。
 ---
 
-# [2024-04-11] TiDB Cloud Data Migration (DM) Feature Maintenance Notification
+# [2024-04-11] TiDB Cloudデータ移行（DM）機能メンテナンスのお知らせ {#2024-04-11-tidb-cloud-data-migration-dm-feature-maintenance-notification}
 
-This notification describes the details that you need to know about the maintenance for [Data Migration (DM) feature](/tidb-cloud/migrate-from-mysql-using-data-migration.md) of TiDB Cloud Dedicated on April 11, 2024.
+この通知では、2024 年 4 月 11 日のTiDB Cloud Dedicated [データ移行（DM）機能](/tidb-cloud/migrate-from-mysql-using-data-migration.md)のメンテナンスについて知っておく必要のある詳細について説明します。
 
-## Maintenance window
+## メンテナンスウィンドウ {#maintenance-window}
 
-- Start time: 2024-04-11 08:00 (UTC+0)
-- End time: 2024-04-11 09:00 (UTC+0)
-- Duration: 1 hour
+-   開始時間: 2024-04-11 08:00 (UTC+0)
+-   終了時間: 2024-04-11 09:00 (UTC+0)
+-   所要時間: 1時間
 
-## Impact
+## インパクト {#impact}
 
-During the maintenance window, the DM feature for TiDB Cloud Dedicated clusters in the following regions will be affected:
+メンテナンス期間中、次のリージョンのTiDB Cloud Dedicated クラスターの DM 機能が影響を受けます。
 
-- Cloud provider: AWS, region: Oregon (us-west-2)
-- Cloud provider: AWS, region: N. Virginia (us-east-1)
-- Cloud provider: AWS, region: Singapore (ap-southeast-1)
-- Cloud provider: AWS, region: Seoul (ap-northeast-2)
-- Cloud provider: AWS, region: Frankfurt (eu-central-1)
-- Cloud provider: AWS, region: São Paulo (sa-east-1)
-- Cloud provider: AWS, region: Oregon (us-west-2)
-- Cloud provider: Google Cloud, region: Oregon (us-west1)
-- Cloud provider: Google Cloud, region: Tokyo (asia-northeast1)
-- Cloud provider: Google Cloud, region: Singapore (asia-southeast1)
+-   クラウドプロバイダー: AWS、リージョン: オレゴン (us-west-2)
+-   クラウドプロバイダー: AWS、リージョン: 北バージニア (us-east-1)
+-   クラウドプロバイダー: AWS、リージョン: シンガポール (ap-southeast-1)
+-   クラウドプロバイダー: AWS、リージョン: ソウル (ap-northeast-2)
+-   クラウドプロバイダー: AWS、リージョン: フランクフルト (eu-central-1)
+-   クラウドプロバイダー: AWS、リージョン: サンパウロ (sa-east-1)
+-   クラウドプロバイダー: AWS、リージョン: オレゴン (us-west-2)
+-   クラウドプロバイダー: Google Cloud、リージョン: オレゴン (us-west1)
+-   クラウドプロバイダー: Google Cloud、リージョン: 東京 (asia-northeast1)
+-   クラウドプロバイダー: Google Cloud、リージョン: シンガポール (asia-southeast1)
 
-The maintenance only affects the DM feature in the TiDB cluster. All the other functionalities remain unaffected. You can continue to manage the TiDB cluster and perform read/write operations or other operations as usual.
+このメンテナンスは、TiDBクラスタのDM機能にのみ影響します。その他の機能には影響はありません。引き続きTiDBクラスタを管理し、通常通り読み取り/書き込み操作やその他の操作を実行できます。
 
-For clusters deployed on AWS:
+AWS にデプロイされたクラスターの場合:
 
-- During the upgrade, the DM tasks can keep running without disruption. The DM console can be used normally.
+-   アップグレード中も、DMタスクは中断することなく実行を継続できます。DMコンソールは通常通り使用できます。
 
-For clusters deployed on Google Cloud:
+Google Cloud にデプロイされたクラスタの場合:
 
-- The DM console will be unavailable for up to 30 minutes. During this period, you cannot create or manage DM tasks.
-- If a DM task is in the incremental migration stage, it will be interrupted for up to 30 minutes. During this period, do not purge the binary log of the MySQL database. The DM task will automatically resume after the upgrade is completed.
-- If a DM task is in the stage of exporting and importing full data, it will fail during the upgrade, and cannot be resumed after the upgrade. It is recommended not to create any DM task on the day when the upgrade is performed, to ensure that no DM tasks are in the stage of exporting and importing full data when the upgrade starts.
+-   DMコンソールは最大30分間利用できなくなります。この間は、DMタスクの作成や管理はできません。
+-   DMタスクが増分移行段階にある場合、最大30分間中断されます。この間、MySQLデータベースのバイナリログをパージしないでください。アップグレードが完了すると、DMタスクは自動的に再開されます。
+-   DMタスクがフルデータのエクスポートとインポートの段階にある場合、アップグレード中に失敗し、アップグレード後に再開することはできません。アップグレード開始時にフルデータのエクスポートとインポートの段階にあるDMタスクが存在しないように、アップグレードを実行する当日はDMタスクを作成しないことをお勧めします。
 
-## Completion and resumption
+## 完了と再開 {#completion-and-resumption}
 
-Once the maintenance is successfully completed, the affected functionalities will be reinstated, offering you a better experience.
+メンテナンスが正常に完了すると、影響を受けた機能が復元され、より良いエクスペリエンスが提供されます。
 
-## Get support
+## サポートを受ける {#get-support}
 
-If you have any questions or need assistance, contact our [support team](/tidb-cloud/tidb-cloud-support.md). We are here to address your concerns and provide any necessary guidance.
+ご質問やサポートが必要な場合は、 [サポートチーム](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。お客様のご懸念にお答えし、必要なサポートを提供させていただきます。

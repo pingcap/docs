@@ -1,180 +1,181 @@
 ---
 title: Key Visualizer Page
-summary: TiDB Dashboard's Key Visualizer page analyzes and troubleshoots traffic hotspots in the TiDB cluster. It visually shows traffic changes over time, and allows users to zoom in on specific time periods or region ranges. The page also provides settings to adjust brightness, select metrics, and refresh the heatmap. It identifies common heatmap types and offers solutions to address hotspot issues.
+summary: TiDBダッシュボードのKey Visualizerページでは、TiDBクラスタ内のトラフィックのホットスポットを分析およびトラブルシューティングできます。トラフィックの変化を時間経過とともに視覚的に表示し、特定の期間または地域範囲を拡大表示できます。また、明るさの調整、指標の選択、ヒートマップの更新などの設定も行えます。一般的なヒートマップの種類を特定し、ホットスポットの問題に対処するためのソリューションを提供します。
 ---
 
-# Key Visualizer Page
+# キービジュアライザーページ {#key-visualizer-page}
 
-The Key Visualizer page of TiDB Dashboard is used to analyze the usage of TiDB and troubleshoot traffic hotspots. This page visually shows the traffic of the TiDB cluster over a period of time.
+TiDBダッシュボードのKey Visualizerページは、TiDBの使用状況を分析し、トラフィックのホットスポットをトラブルシューティングするために使用します。このページでは、一定期間にわたるTiDBクラスタのトラフィックを視覚的に表示します。
 
-## Access Key Visualizer page
+## アクセスキービジュアライザーページ {#access-key-visualizer-page}
 
-You can use one of the following two methods to access the Key Visualizer page:
+Key Visualizer ページにアクセスするには、次の 2 つの方法のいずれかを使用できます。
 
-* After logging in to TiDB Dashboard, click **Key Visualizer** in the left navigation menu.
+-   TiDB ダッシュボードにログインしたら、左側のナビゲーション メニューで**Key Visualizer**をクリックします。
 
     ![Access Key Visualizer](/media/dashboard/dashboard-keyviz-access-v650.png)
 
-* Visit <http://127.0.0.1:2379/dashboard/#/keyviz> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
+-   ブラウザで[http://127.0.0.1:2379/ダッシュボード/#/keyviz](http://127.0.0.1:2379/dashboard/#/keyviz)アクセスしてください。3 `127.0.0.1:2379`実際のPDインスタンスのアドレスとポートに置き換えてください。
 
-## Interface demonstration
+## インターフェースのデモンストレーション {#interface-demonstration}
 
-The following image is a demonstration of the Key Visualizer page:
+次の画像は、Key Visualizer ページのデモです。
 
 ![Key Visualizer page](/media/dashboard/dashboard-keyviz-overview.png)
 
-From the preceding interface, you can see the following objects:
+上記のインターフェースから、次のオブジェクトを確認できます。
 
-+ A large heatmap that shows changes of the overall traffic over time.
-+ The detailed information of a certain coordinate point.
-+ Information of tables, and indexes (on the left side of the heatmap).
+-   全体的なトラフィックの経時的な変化を示す大きなヒートマップ。
+-   特定の座標点の詳細情報。
+-   テーブルとインデックスの情報 (ヒートマップの左側)。
 
-## Basic concepts
+## 基本概念 {#basic-concepts}
 
-This section introduces the basic concepts that relate to Key Visualizer.
+このセクションでは、Key Visualizer に関連する基本的な概念について説明します。
 
-### Region
+### リージョン {#region}
 
-In a TiDB cluster, the stored data is distributed among TiKV instances. Logically, TiKV is a huge and orderly key-value map. The whole key-value space is divided into many segments and each segment consists of a series of adjacent keys. Such segment is called a `Region`.
+TiDBクラスタでは、保存されたデータはTiKVインスタンス間に分散されます。論理的には、TiKVは巨大で整然としたキーバリューマップです。キーバリュー空間全体は多数のセグメントに分割され、各セグメントは隣接するキーの列で構成されます。このようなセグメントは`Region`と呼ばれます。
 
-For detailed introduction of Region, refer to [TiDB Internal (I) - Data Storage](https://www.pingcap.com/blog/tidb-internal-data-storage/).
+リージョンの詳しい紹介については[TiDB 内部 (I) - データストレージ](https://www.pingcap.com/blog/tidb-internal-data-storage/)を参照してください。
 
-### Hotspot
+### ホットスポット {#hotspot}
 
-When you use the TiDB database, the hotspot issue is typical, where high traffic is concentrated on a small range of data. Because consecutive data ranges are often processed on the same TiKV instance, the TiKV instance on which the hotspot occurs becomes the performance bottleneck of the whole application. The hotspot issue often occurs in the following scenarios:
+TiDBデータベースを使用する場合、ホットスポット問題が発生することがよくあります。これは、高トラフィックが狭い範囲のデータに集中する現象です。連続したデータ範囲が同じTiKVインスタンスで処理されることが多いため、ホットスポットが発生するTiKVインスタンスは、アプリケーション全体のパフォーマンスのボトルネックとなります。ホットスポット問題は、次のようなシナリオでよく発生します。
 
-+ Write adjacent data into a table with the `AUTO_INCREMENT` primary key, which causes a hotspot issue on this table.
-+ Write adjacent time data into the time index of a table, which causes a hotspot issue on the table index.
+-   主キーが`AUTO_INCREMENT`であるテーブルに隣接するデータを書き込むと、このテーブルでホットスポットの問題が発生します。
+-   隣接する時間データをテーブルの時間インデックスに書き込むと、テーブル インデックスでホットスポットの問題が発生します。
 
-For more details about hotspot, refer to [Best Practices for High-Concurrency Writes](/best-practices/high-concurrency-best-practices.md#hotspot-causes)
+ホットスポットの詳細については、 [高同時書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md#hotspot-causes)を参照してください。
 
-### Heatmap
+### ヒートマップ {#heatmap}
 
-The heatmap is the core part of Key Visualizer, which shows the change of a metric over time. The X-axis of the heatmap indicates the time. The Y-axis of the heatmap indicates the consecutive Regions based on key ranges that cover all schemas and tables of the TiDB cluster.
+ヒートマップはKey Visualizerの中核部分であり、メトリクスの経時的な変化を表示します。ヒートマップのX軸は時間を示します。Y軸は、TiDBクラスターのすべてのスキーマとテーブルをカバーするキー範囲に基づいて、連続したリージョンを示します。
 
-Colder colors in the heatmap indicate lower read and write traffic of Regions in that period of time. Hotter (brighter) colors indicate higher traffic.
+ヒートマップ内の色が濃いほど、その期間におけるリージョンの読み取りおよび書き込みトラフィックが少ないことを示します。色が濃いほど（明るいほど）、トラフィックが多いことを示します。
 
-### Region compression
+### リージョン圧縮 {#region-compression}
 
-A TiDB cluster might have up to hundreds of thousands of Regions. It is difficult to display so many Regions on screen. Therefore, on each heatmap, these Regions are compressed into 1,500 consecutive ranges, each range called a Bucket. In the heatmap, because hotter instances need more attention, Key Visualizer tends to compress a large number of Regions with lower traffic into one Bucket, and displays the Region with higher traffic also in one Bucket.
+TiDB クラスターには最大数十万のリージョンが含まれる場合があります。これほど多くのリージョンを画面に表示するのは困難です。そのため、各ヒートマップでは、これらのリージョンを 1,500 個の連続した範囲に圧縮し、各範囲を「バケット」と呼びます。ヒートマップでは、負荷の高いインスタンスに重点を置く必要があるため、Key Visualizer はトラフィックの少ない多数のリージョンを 1 つのバケットに圧縮し、トラフィックの多いリージョンも 1 つのバケットに表示するリージョンがあります。
 
-## Use Key Visualizer
+## キービジュアライザーを使用する {#use-key-visualizer}
 
-This section introduces how to use Key Visualizer.
+このセクションでは、Key Visualizer の使い方を紹介します。
 
-### Settings
+### 設定 {#settings}
 
-To use the Key Visualizer page for the first time, you need to manually enable this feature on the **Settings** page. Follow the page guide and click **Open Settings** to open the settings page:
+Key Visualizerページを初めてご利用になる場合は、 **「設定」**ページでこの機能を手動で有効にする必要があります。ページのガイドに従い、 **「設定を開く」**をクリックして設定ページを開きます。
 
 ![Feature disabled](/media/dashboard/dashboard-keyviz-not-enabled.png)
 
-After this feature is enabled, you can open the settings page by clicking the **Settings** icon in the upper right corner:
+この機能を有効にすると、右上隅にある**設定**アイコンをクリックして設定ページを開くことができます。
 
 ![Settings icon](/media/dashboard/dashboard-keyviz-settings-button.png)
 
-The settings page is shown as follows:
+設定ページは次のように表示されます。
 
 ![Settings page](/media/dashboard/dashboard-keyviz-settings.png)
 
-Set whether to start data collection through the switch, and click **Save** to take effect. After enabling the feature, you can see that the toolbar is available:
+スイッチを介してデータ収集を開始するかどうかを設定し、 **「保存」**をクリックして設定を有効にします。機能を有効にすると、ツールバーが利用可能になります。
 
 ![Toolbar](/media/dashboard/dashboard-keyviz-toolbar.png)
 
-After this feature is enabled, data collection is going on at the backend. You can see the heatmap shortly.
+この機能を有効にすると、バックエンドでデータ収集が開始されます。まもなくヒートマップが表示されます。
 
-### Observe a certain period of time or Region range
+### 特定の期間またはリージョン範囲を観察する {#observe-a-certain-period-of-time-or-region-range}
 
-When you open Key Visualizer, the heatmap of the entire database over the recent six hours is displayed by default. In this heatmap, the closer to the right side (current time), the shorter the time interval corresponding to each column of Buckets. If you want to observe a specific time period or a specific Region range, you can zoom in to get more details. The specific instructions are as follows:
+Key Visualizer を開くと、デフォルトで過去 6 時間のデータベース全体のヒートマップが表示されます。このヒートマップでは、右側（現在時刻）に近いほど、各バケット列に対応する時間間隔が短くなります。特定の期間または特定のリージョン範囲を観察したい場合は、拡大して詳細を確認できます。具体的な手順は以下のとおりです。
 
-1. Scroll up or down in the heatmap.
-2. Click and drag one of the following buttons to select the range.
-    + Click the **Select & Zoom** button. Then click and drag this button to select the area to zoom in.
+1.  ヒートマップを上または下にスクロールします。
+2.  範囲を選択するには、次のいずれかのボタンをクリックしてドラッグします。
+
+    -   **「選択とズーム」**ボタンをクリックします。次に、このボタンをクリック＆ドラッグして、ズームインする領域を選択します。
 
     ![Selection box](/media/dashboard/dashboard-keyviz-select-zoom.gif)
 
-    + Click the **Reset** button to reset the Region range to the entire database.
-    + Click the **time selection box** (at the position of `6 hour` on the preceding interface) and select the observation time period again.
+    -   リージョン範囲をデータベース全体にリセットするには、 **[リセット]**ボタンをクリックします。
+    -   **時間選択ボックス**(前のインターフェイスの`6 hour`の位置) をクリックし、観測期間を再度選択します。
 
     ![Select time](/media/dashboard/dashboard-keyviz-select-time.png)
 
-> **Note:**
+> **注記：**
 >
-> If you follow step 2 in the instruction above, the heatmap is redrawn, which might be very different from the original heatmap. This difference is normal because if you observe in more detail, the granularity of the Region compression has changed, or the basis of `hot` in a specific range has changed.
+> 上記の手順2を実行すると、ヒートマップが再描画されますが、元のヒートマップとは大きく異なる可能性があります。この差異は正常です。詳しく観察すると、リージョン圧縮の粒度が変更されたか、特定の範囲における`hot`の基準が変更されたことがわかります。
 
-### Adjust brightness
+### 明るさを調整する {#adjust-brightness}
 
-The heatmap uses colors of different brightnesses to indicate the Bucket traffic. Colder colors in the heatmap indicate lower read and write traffic of the Region in that period of time. Hotter (brighter) colors indicate higher traffic. If the color is too cold or too hot, it is difficult to observe in details. In this situation, you can click the **Brightness** button and then use the slider to adjust the brightness of the page.
+ヒートマップでは、バケットのトラフィックを異なる明るさの色で示します。ヒートマップ上の寒色系は、その期間におけるリージョンの読み取りおよび書き込みトラフィックが少ないことを示します。暖色系（明るい色）は、トラフィックが多いことを示します。色が寒色系または暖色系すぎると、詳細な観察が困難になります。このような場合は、「**明るさ」**ボタンをクリックし、スライダーを使ってページの明るさを調整できます。
 
-> **Note:**
+> **注記：**
 >
-> When Key Visualizer displays the heatmap of an area, it defines the basis of being cold and hot according to the traffic of this area. When the traffic in the entire area is relatively even, even if the overall traffic is low in value, you might still see a large bright-colored area. Remember to include the value into your analysis.
+> Key Visualizer がエリアのヒートマップを表示する際、そのエリアのトラフィックに基づいてコールドとホットの基準を定義します。エリア全体のトラフィックが比較的均一な場合、全体のトラフィック値が低くても、明るい色の大きなエリアが表示されることがあります。分析にはこの値を含めることを忘れないでください。
 
-### Select metrics
+### 指標を選択 {#select-metrics}
 
 ![Select metrics](/media/dashboard/dashboard-keyviz-select-type.png)
 
-You can view a metric you are interested in by selecting this metric in the **metrics selection box** (at the `Write (bytes)` position in the interface above):
+関心のあるメトリックを表示するには**、メトリック選択ボックス**(上記のインターフェイスの`Write (bytes)`番目の位置) でこのメトリックを選択します。
 
-* `Read (bytes)`: Read traffic.
-* `Write (bytes)`: Write traffic.
-* `Read (keys)`: The number of read rows.
-* `Write (keys)`: The number of written rows.
-* `All`: The sum of read and write traffic.
+-   `Read (bytes)` : トラフィックを読み取ります。
+-   `Write (bytes)` : トラフィックを書き込みます。
+-   `Read (keys)` : 読み取られた行数。
+-   `Write (keys)` : 書き込まれた行数。
+-   `All` : 読み取りトラフィックと書き込みトラフィックの合計。
 
-### Refresh and automatic refresh
+### 更新と自動更新 {#refresh-and-automatic-refresh}
 
-To regain a heatmap based on the current time, click the **Refresh** button. If you need to observe the traffic distribution of the database in real time, click the down arrow on the right side of the **Refresh** button and select a fixed time interval for the heatmap to automatically refresh at this interval.
+現在の時刻に基づくヒートマップを再度表示するには、 **「更新」**ボタンをクリックします。データベースのトラフィック分布をリアルタイムで確認する必要がある場合は、 **「更新」**ボタンの右側にある下矢印をクリックし、ヒートマップの自動更新間隔を指定します。
 
-> **Note:**
+> **注記：**
 >
-> If you adjust the time range or Region range, the automatic refresh is disabled.
+> 時間範囲またはリージョン範囲を調整すると、自動更新は無効になります。
 
-### See Bucket details
+### バケットの詳細を見る {#see-bucket-details}
 
-You can hover your mouse over the Bucket you are interested in to view the detailed information of this Region range. The image below is an example of this information:
+関心のあるバケットにマウスオーバーすると、そのリージョン範囲の詳細情報が表示されます。以下の画像は、この情報の例です。
 
 ![Bucket details](/media/dashboard/dashboard-keyviz-tooltip.png)
 
-If you want to copy this information, click a Bucket. Then, the page with relevant details is temporarily pinned. Click on the information, and you have copied it to the clipboard.
+この情報をコピーしたい場合は、バケットをクリックしてください。すると、関連する詳細を含むページが一時的にピン留めされます。その情報をクリックすると、クリップボードにコピーされます。
 
 ![Copy Bucket details](/media/dashboard/dashboard-keyviz-tooltip-copy.png)
 
-## Common heatmap types
+## 一般的なヒートマップの種類 {#common-heatmap-types}
 
-This section shows and interprets four common types of heatmap in Key Visualizer.
+このセクションでは、Key Visualizer の一般的な 4 種類のヒートマップを示して解釈します。
 
-### Evenly distributed workload
+### 均等に分散された作業負荷 {#evenly-distributed-workload}
 
 ![Balanced](/media/dashboard/dashboard-keyviz-well-dist.png)
 
-In the heatmap above, bright and dark colors are a fine-grained mix. This indicates that reads or writes are evenly distributed over time and among key ranges. The workload is evenly distributed to all nodes, which is ideal for a distributed database.
+上のヒートマップでは、明るい色と暗い色が細かく混在しています。これは、読み取りまたは書き込みが時間の経過とともに、またキー範囲間で均等に分散されていることを示しています。ワークロードはすべてのノードに均等に分散されており、これは分散データベースに最適です。
 
-### Periodically reads and writes
+### 定期的に読み書きする {#periodically-reads-and-writes}
 
 ![Periodically](/media/dashboard/dashboard-keyviz-period.png)
 
-In the heatmap above, there is an alternating brightness and darkness along the X-axis (time) but the brightness is relatively even along the Y-axis (Region). This indicates that the reads and writes change periodically, which might occur in scenarios of periodically scheduled tasks. For example, the big data platform periodically extracts data from TiDB every day. In this kind of scenarios, pay attention to whether the resources are sufficient during peak usage.
+上記のヒートマップでは、X軸（時間）に沿って明暗が交互に変化していますが、Y軸（リージョン）に沿って明度は比較的均一です。これは、読み取りと書き込みが定期的に変化していることを示しています。これは、定期的にスケジュールされたタスクを実行するシナリオで発生する可能性があります。例えば、ビッグデータプラットフォームはTiDBから毎日定期的にデータを抽出します。このようなシナリオでは、ピーク使用時にリソースが十分かどうかに注意してください。
 
-### Concentrated reads or writes
+### 集中した読み取りまたは書き込み {#concentrated-reads-or-writes}
 
 ![Concentrated](/media/dashboard/dashboard-keyviz-continue.png)
 
-In the heatmap above, you can see several bright lines. Along the Y-axis, the fringes around the bright lines are dark, which indicates that the Regions corresponding to bright lines have high read and write traffic. You can observe whether the traffic distribution is expected by your application. For example, when all services are associated with the user table, the overall traffic of the user table can be high, so it is reasonable to show bright lines in the heatmap.
+上のヒートマップには、複数の明るい線が見られます。Y軸に沿って、明るい線の周囲の縁が暗くなっているのは、明るい線に対応するリージョンで読み取りと書き込みのトラフィックが多いことを示しています。これにより、トラフィックの分布がアプリケーションで想定されているかどうかを確認できます。例えば、すべてのサービスがユーザーテーブルに関連付けられている場合、ユーザーテーブル全体のトラフィックが高くなる可能性があるため、ヒートマップに明るい線を表示するのは妥当です。
 
-In addition, the height of the bright lines (the thickness along the Y-axis) is important. Because TiKV has its own Region-based hotspot balancing mechanism, the more Regions involved in the hotspot, the better it is for balancing traffic across all TiKV instances. The thicker and more bright lines indicate that hotspots are more scattered, and TiKV is better used. The thinner and fewer bright lines indicate that hotspots are more concentrated, and the hotspot issue is more obvious in TiKV, which might requires manual intervention.
+さらに、明るい線の高さ（Y軸の太さ）も重要です。TiKVには独自のリージョンベースのホットスポット分散メカニズムがあるため、ホットスポットに関係するリージョンが多いほど、すべてのTiKVインスタンス間でトラフィック分散が適切に行われます。線が太く明るい線が多いほど、ホットスポットが分散しており、TiKVの活用度が高いことを示します。明るい線が細く少ないほど、ホットスポットが集中しており、TiKVにおけるホットスポットの問題がより顕著であり、手動による介入が必要になる可能性があることを示します。
 
-### Sequential reads or writes
+### 順次読み取りまたは書き込み {#sequential-reads-or-writes}
 
 ![Sequential](/media/dashboard/dashboard-keyviz-sequential.png)
 
-In the heatmap above, you can see a bright line. This means that the data reads or writes are sequential. Typical scenarios of sequential data reads or writes are importing data or scanning tables and indexes. For example, you continuously write data to tables with auto-increment IDs.
+上のヒートマップには明るい線が見られます。これは、データの読み取りまたは書き込みがシーケンシャルであることを意味します。シーケンシャルなデータの読み取りまたは書き込みの典型的なシナリオは、データのインポートやテーブルとインデックスのスキャンです。例えば、自動インクリメントIDを持つテーブルにデータを継続的に書き込む場合などです。
 
-Regions in the bright areas are the hotspots of read and write traffic, which often become the performance bottleneck of the entire cluster. In this situation, you might need to readjust the primary key for the application. By doing this, you scatter Regions much as possible to spread the pressure across multiple Regions. You can also schedule application tasks during the low-peak period.
+明るいエリアにあるリージョンは、読み取りおよび書き込みトラフィックのホットスポットであり、多くの場合、クラスター全体のパフォーマンスのボトルネックとなります。このような状況では、アプリケーションのプライマリキーを再調整する必要があるかもしれません。これにより、リージョンを可能な限り分散させ、負荷を複数のリージョンに分散させることができます。また、アプリケーションタスクを低ピーク時にスケジュールすることもできます。
 
-> **Note:**
+> **注記：**
 >
-> In this section, only the common types of heatmap are shown. Key Visualizer actually displays the heatmap of all schemas and tables in the entire cluster, so you might see different types of heatmap in different areas, or mixed results of multiple heatmap types. Use the heatmap based on the actual situation.
+> このセクションでは、一般的なタイプのヒートマップのみを示しています。Key Visualizer は実際にはクラスター全体のすべてのスキーマとテーブルのヒートマップを表示するため、エリアによって異なるタイプのヒートマップが表示されたり、複数のタイプのヒートマップが混在したりする場合があります。実際の状況に応じてヒートマップを使用してください。
 
-## Address hotspot issues
+## ホットスポットの問題に対処する {#address-hotspot-issues}
 
-TiDB has some built-in features to mitigate the common hotspot issue. Refer to [Best Practices for High-Concurrency Writes](/best-practices/high-concurrency-best-practices.md) for details.
+TiDBには、共通ホットスポット問題を軽減するための機能がいくつか組み込まれています。詳細は[高同時書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)を参照してください。

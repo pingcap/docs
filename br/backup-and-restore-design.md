@@ -1,23 +1,23 @@
 ---
 title: Overview of TiDB Backup & Restore Architecture
-summary: TiDB supports backup and restore for cluster data using Backup & Restore (BR) and TiDB Operator. Tasks can be created to back up data from TiKV nodes and restore data to TiKV nodes. The architecture includes full data backup and restore, data change log backup, and point-in-time recovery (PITR). For details, refer to specific documents for each feature.
+summary: TiDBは、Backup & Restore（BR）とTiDB Operatorを使用したクラスタデータのバックアップとリストアをサポートしています。TiKVノードからデータをバックアップし、TiKVノードにデータをリストアするタスクを作成できます。アーキテクチャには、フルデータバックアップとリストア、データ変更ログバックアップ、ポイントインタイムリカバリ（PITR）が含まれます。詳細については、各機能のドキュメントを参照してください。
 ---
 
-# Overview of TiDB Backup & Restore Architecture
+# TiDB バックアップとリストアのアーキテクチャの概要 {#overview-of-tidb-backup-x26-restore-architecture}
 
-As described in [TiDB Backup & Restore Overview](/br/backup-and-restore-overview.md), TiDB supports backing up and restoring multiple types of cluster data. You can use Backup & Restore (BR) and TiDB Operator to access these features, and create tasks to back up data from TiKV nodes or restore data to TiKV nodes.
+[TiDB バックアップと復元の概要](/br/backup-and-restore-overview.md)で説明したように、TiDB は複数の種類のクラスターデータのバックアップとリストアをサポートしています。Backup &amp; Restore (BR) とTiDB Operatorを使用してこれらの機能にアクセスし、TiKV ノードからデータをバックアップしたり、TiKV ノードにデータをリストアしたりするタスクを作成できます。
 
-For details about the architecture of each backup and restore feature, see the following documents:
+各バックアップおよび復元機能のアーキテクチャの詳細については、次のドキュメントを参照してください。
 
-- Full data backup and restore
+-   完全なデータのバックアップと復元
 
-    - [Back up snapshot data](/br/br-snapshot-architecture.md#process-of-backup)
-    - [Restore snapshot backup data](/br/br-snapshot-architecture.md#process-of-restore)
+    -   [スナップショットデータをバックアップする](/br/br-snapshot-architecture.md#process-of-backup)
+    -   [スナップショットバックアップデータを復元する](/br/br-snapshot-architecture.md#process-of-restore)
 
-- Data change log backup
+-   データ変更ログのバックアップ
 
-    - [Log backup: backup of KV data change](/br/br-log-architecture.md#process-of-log-backup)
+    -   [ログバックアップ: KVデータの変更のバックアップ](/br/br-log-architecture.md#process-of-log-backup)
 
-- Point-in-time recovery (PITR)
+-   ポイントインタイムリカバリ（PITR）
 
-    - [PITR](/br/br-log-architecture.md#process-of-pitr)
+    -   [PITR](/br/br-log-architecture.md#process-of-pitr)

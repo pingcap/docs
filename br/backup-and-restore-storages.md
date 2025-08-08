@@ -1,59 +1,59 @@
 ---
 title: Backup Storages
-summary: TiDB supports backup storage to Amazon S3, Google Cloud Storage, Azure Blob Storage, and NFS. You can specify the URI and authentication for different storage services. BR sends credentials to TiKV by default when using S3, GCS, or Azure Blob Storage. You can disable this for cloud environments. The URI format for each storage service is specified, along with authentication methods. Server-side encryption is supported for Amazon S3 and Azure Blob Storage. BR v6.3.0 also supports AWS S3 Object Lock.
+summary: TiDBは、Amazon S3、Google Cloud Storage、Azure Blob Storage、NFSへのバックアップstorageをサポートしています。各storageサービスのURIと認証を指定できます。S3、GCS、またはAzure Blob Storageを使用する場合、 BRはBRでTiKVに認証情報を送信します。クラウド環境では、この機能を無効にすることができます。各storageサービスのURI形式と認証方法を指定します。Amazon S3とAzure Blob Storageでは、サーバー側暗号化がサポートされています。BR v6.3.0はAWS S3オブジェクトロックもサポートしています。
 ---
 
-# Backup Storages
+# バックアップストレージ {#backup-storages}
 
-TiDB supports storing backup data to Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, and NFS. Specifically, you can specify the URI of backup storage in the `--storage` or `-s` parameter of `br` commands. This document introduces the [URI format](#uri-format) and [authentication](#authentication) of different external storage services, and [server-side encryption](#server-side-encryption).
+TiDBは、Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage、NFSへのバックアップデータの保存をサポートしています。具体的には、 `br`コマンドの`--storage`または`-s`パラメータでバックアップstorageのURIを指定できます。このドキュメントでは、 [URI形式](#uri-format)と[認証](#authentication)の外部ストレージサービスと、 [サーバー側の暗号化](#server-side-encryption)外部storageサービスを紹介します。
 
-## Send credentials to TiKV
+## TiKVに資格情報を送信する {#send-credentials-to-tikv}
 
-| CLI parameter                | Description                                                  | Default value |
-|:-----------------------------|:-------------------------------------------------------------|:--------------|
-| `--send-credentials-to-tikv` | Controls whether to send credentials obtained by BR to TiKV. | `true`        |
+| CLIパラメータ                     | 説明                                     | デフォルト値 |
+| :--------------------------- | :------------------------------------- | :----- |
+| `--send-credentials-to-tikv` | BRによって取得された資格情報を TiKV に送信するかどうかを制御します。 | `true` |
 
-By default, BR sends a credential to each TiKV node when using Amazon S3, GCS, or Azure Blob Storage as the storage system. This behavior simplifies the configuration and is controlled by the parameter `--send-credentials-to-tikv`(or `-c` in short).
+デフォルトでは、storageシステムとしてAmazon S3、GCS、またはAzure Blob Storageを使用する場合、 BRは各TiKVノードに認証情報を送信します。この動作は設定を簡素化し、パラメータ`--send-credentials-to-tikv` （または短縮形`-c` ）によって制御されます。
 
-Note that this operation is not applicable to cloud environments. If you use IAM Role authorization, each node has its own role and permissions. In this case, you need to configure `--send-credentials-to-tikv=false` (or `-c=0` in short) to disable sending credentials:
+この操作はクラウド環境には適用されないことに注意してください。IAMロール認証を使用する場合、各ノードには独自のロールと権限が付与されます。この場合、認証情報の送信を無効にするには、 `--send-credentials-to-tikv=false` （または`-c=0` ）を設定する必要があります。
 
 ```bash
 tiup br backup full -c=0 -u pd-service:2379 --storage 's3://bucket-name/prefix'
 ```
 
-If you back up or restore data using the [`BACKUP`](/sql-statements/sql-statement-backup.md) and [`RESTORE`](/sql-statements/sql-statement-restore.md) statements, you can add the `SEND_CREDENTIALS_TO_TIKV = FALSE` option:
+[`BACKUP`](/sql-statements/sql-statement-backup.md)および[`RESTORE`](/sql-statements/sql-statement-restore.md)ステートメントを使用してデータをバックアップまたは復元する場合は、 `SEND_CREDENTIALS_TO_TIKV = FALSE`オプションを追加できます。
 
 ```sql
 BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
 ```
 
-## URI format
+## URI形式 {#uri-format}
 
-### URI format description
+### URI形式の説明 {#uri-format-description}
 
-The URI format of the external storage service is as follows:
+外部storageサービスの URI 形式は次のとおりです。
 
 ```shell
 [scheme]://[host]/[path]?[parameters]
 ```
 
-For more information about the URI format, see [URI Formats of External Storage Services](/external-storage-uri.md).
+URI 形式の詳細については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
 
-### URI examples
+### URIの例 {#uri-examples}
 
-This section provides some URI examples by using `external` as the `host` parameter (`bucket name` or `container name` in the preceding sections).
+このセクションでは、 `host`パラメータとして`external` (前のセクションでは`bucket name`または`container name` ) を使用した URI の例をいくつか示します。
 
 <SimpleTab groupId="storage">
 <div label="Amazon S3" value="amazon">
 
-**Back up snapshot data to Amazon S3**
+**スナップショットデータをAmazon S3にバックアップする**
 
 ```shell
 tiup br backup full -u "${PD_IP}:2379" \
 --storage "s3://external/backup-20220915?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
-**Restore snapshot data from Amazon S3**
+**Amazon S3からスナップショットデータを復元する**
 
 ```shell
 tiup br restore full -u "${PD_IP}:2379" \
@@ -63,14 +63,14 @@ tiup br restore full -u "${PD_IP}:2379" \
 </div>
 <div label="GCS" value="gcs">
 
-**Back up snapshot data to GCS**
+**スナップショットデータをGCSにバックアップする**
 
 ```shell
 tiup br backup full --pd "${PD_IP}:2379" \
 --storage "gcs://external/backup-20220915?credentials-file=${credentials-file-path}"
 ```
 
-**Restore snapshot data from GCS**
+**GCSからスナップショットデータを復元する**
 
 ```shell
 tiup br restore full --pd "${PD_IP}:2379" \
@@ -80,14 +80,14 @@ tiup br restore full --pd "${PD_IP}:2379" \
 </div>
 <div label="Azure Blob Storage" value="azure">
 
-**Back up snapshot data to Azure Blob Storage**
+**スナップショットデータをAzure Blob Storageにバックアップする**
 
 ```shell
 tiup br backup full -u "${PD_IP}:2379" \
 --storage "azure://external/backup-20220915?account-name=${account-name}&account-key=${account-key}"
 ```
 
-**Restore the `test` database from snapshot backup data in Azure Blob Storage**
+**Azure Blob Storage のスナップショット バックアップ データから`test`データベースを復元する**
 
 ```shell
 tiup br restore db --db test -u "${PD_IP}:2379" \
@@ -97,38 +97,38 @@ tiup br restore db --db test -u "${PD_IP}:2379" \
 </div>
 </SimpleTab>
 
-## Authentication
+## 認証 {#authentication}
 
-When storing backup data in a cloud storage system, you need to configure authentication parameters depending on the specific cloud service provider. This section describes the authentication methods used by Amazon S3, GCS, and Azure Blob Storage, and how to configure the accounts used to access the corresponding storage service.
+クラウドstorageシステムにバックアップデータを保存する場合、クラウドサービスプロバイダーに応じて認証パラメータを設定する必要があります。このセクションでは、Amazon S3、GCS、Azure Blob Storageで使用される認証方法と、それぞれのstorageサービスにアクセスするためのアカウントの設定方法について説明します。
 
 <SimpleTab groupId="storage">
 <div label="Amazon S3" value="amazon">
 
-Before backup, configure the following privileges to access the backup directory on S3.
+バックアップの前に、S3 上のバックアップ ディレクトリにアクセスするための次の権限を設定します。
 
-- Minimum privileges for TiKV and Backup & Restore (BR) to access the backup directories during backup: `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, `s3:PutObject`, and `s3:AbortMultipartUpload`
-- Minimum privileges for TiKV and BR to access the backup directories during restore: `s3:ListBucket` and `s3:GetObject`.
+-   バックアップ中にバックアップディレクトリにアクセスするための TiKV および Backup &amp; Restore ( BR ) の最小権限: `s3:ListBucket` 、 `s3:GetObject` 、 `s3:DeleteObject` 、 `s3:PutObject` 、および`s3:AbortMultipartUpload`
+-   復元中に TiKV とBR がバックアップ ディレクトリにアクセスするための最小権限: `s3:ListBucket`と`s3:GetObject` 。
 
-If you have not yet created a backup directory, refer to [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) to create an S3 bucket in the specified region. If necessary, you can also create a folder in the bucket by referring to [Create a folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
+バックアップディレクトリをまだ作成していない場合は、 [バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照して指定のリージョンに S3 バケットを作成してください。必要に応じて、 [フォルダを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してバケット内にフォルダを作成することもできます。
 
-> **Note:**
+> **注記：**
 >
-> In 2024, AWS changed the default behavior, and newly created instances now only support IMDSv2 by default. For more details, see [Set IMDSv2 as default for all new instance launches in your account](https://aws.amazon.com/about-aws/whats-new/2024/03/set-imdsv2-default-new-instance-launches/). Therefore, starting from v8.4.0, BR supports obtaining IAM role permissions on Amazon EC2 instances with only IMDSv2 enabled. When using BR of an earlier version before v8.4.0, you need to configure the instance to support both IMDSv1 and IMDSv2.
+> 2024年にAWSはデフォルトの動作を変更し、新規に作成されたインスタンスはデフォルトでIMDSv2のみをサポートするようになりました。詳細については[アカウント内のすべての新規インスタンスの起動に対して IMDSv2 をデフォルトとして設定します](https://aws.amazon.com/about-aws/whats-new/2024/03/set-imdsv2-default-new-instance-launches/)ご覧ください。そのため、v8.4.0以降、 BRはIMDSv2のみが有効になっているAmazon EC2インスタンスでのIAMロール権限の取得をサポートします。v8.4.0より前のバージョンのBRを使用する場合は、インスタンスをIMDSv1とIMDSv2の両方をサポートするように設定する必要があります。
 
-It is recommended that you configure access to S3 using either of the following ways:
+次のいずれかの方法で S3 へのアクセスを構成することをお勧めします。
 
-- Method 1: Specify the access key
+-   方法1: アクセスキーを指定する
 
-    If you specify an access key and a secret access key in the URI, authentication is performed using the specified access key and secret access key. Besides specifying the key in the URI, the following methods are also supported:
+    URIにアクセスキーとシークレットアクセスキーを指定した場合、指定されたアクセスキーとシークレットアクセスキーを使用して認証が行われます。URIでキーを指定する以外にも、以下の方法がサポートされています。
 
-    - BR reads the environment variables `$AWS_ACCESS_KEY_ID` and `$AWS_SECRET_ACCESS_KEY`.
-    - BR reads the environment variables `$AWS_ACCESS_KEY` and `$AWS_SECRET_KEY`.
-    - BR reads the shared credentials file in the path specified by the environment variable `$AWS_SHARED_CREDENTIALS_FILE`.
-    - BR reads the shared credentials file in the `~/.aws/credentials` path.
+    -   BRは環境変数`$AWS_ACCESS_KEY_ID`と`$AWS_SECRET_ACCESS_KEY`読み取ります。
+    -   BRは環境変数`$AWS_ACCESS_KEY`と`$AWS_SECRET_KEY`読み取ります。
+    -   BR は、環境変数`$AWS_SHARED_CREDENTIALS_FILE`で指定されたパスにある共有資格情報ファイルを読み取ります。
+    -   BR は`~/.aws/credentials`パスにある共有資格情報ファイルを読み取ります。
 
-- Method 2: Access based on the IAM role
+-   方法2: IAMロールに基づくアクセス
 
-    Associate an IAM role that can access S3 with EC2 instances where the TiKV and BR nodes run. After the association, BR can directly access the backup directories in S3 without additional settings.
+    S3にアクセスできるIAMロールを、TiKVノードとBRノードが稼働するEC2インスタンスに関連付けます。関連付け後、 BRは追加設定なしでS3内のバックアップディレクトリに直接アクセスできるようになります。
 
     ```shell
     tiup br backup full --pd "${PD_IP}:2379" \
@@ -138,56 +138,54 @@ It is recommended that you configure access to S3 using either of the following 
 </div>
 <div label="GCS" value="gcs">
 
-You can configure the account used to access GCS by specifying the access key. If you specify the `credentials-file` parameter, the authentication is performed using the specified `credentials-file`. Besides specifying the key in the URI, the following methods are also supported:
+GCSへのアクセスに使用するアカウントは、アクセスキーを指定することで設定できます。1 `credentials-file`を指定した場合、指定された`credentials-file`使用して認証が行われます。URIでキーを指定する以外にも、以下の方法がサポートされています。
 
-- BR reads the file in the path specified by the environment variable `$GOOGLE_APPLICATION_CREDENTIALS`
-- BR reads the file `~/.config/gcloud/application_default_credentials.json`.
-- BR obtains the credentials from the metadata server when the cluster is running in GCE or GAE.
+-   BRは環境変数`$GOOGLE_APPLICATION_CREDENTIALS`で指定されたパスのファイルを読み取ります。
+-   BR はファイル`~/.config/gcloud/application_default_credentials.json`を読み取ります。
+-   BR は、クラスターが GCE または GAE で実行されているときに、メタデータサーバーから資格情報を取得します。
 
 </div>
 <div label="Azure Blob Storage" value="azure">
 
-- Method 1: Specify the shared access signature
+-   方法1: 共有アクセス署名を指定する
 
-    If you specify `account-name` and `sas-token` in the URI, the authentication is performed using the specified account name and shared access signature (SAS) token. Note that the SAS token contains the `&` character. You need to encode it as `%26` before appending it to the URI. You can also directly encode the entire `sas-token` using percent-encoding.
+    URIに`account-name`と`sas-token`指定した場合、指定されたアカウント名と共有アクセス署名（SAS）トークンを使用して認証が行われます。SASトークンには`&`文字が含まれていることに注意してください。これをURIに追加する前に、 `%26`としてエンコードする必要があります。パーセントエンコードを使用して、 `sas-token`全体を直接エンコードすることもできます。
 
-- Method 2: Specify the access key
+-   方法2: アクセスキーを指定する
 
-    If you specify `account-name` and `account-key` in the URI, the authentication is performed using the specified account name and account key. Besides the method of specifying the key in the URI, BR can also read the key from the environment variable `$AZURE_STORAGE_KEY`.
+    URIに`account-name`と`account-key`指定すると、指定されたアカウント名とアカウントキーを用いて認証が行われます。URIでキーを指定する方法に加え、 BRは環境変数`$AZURE_STORAGE_KEY`からキーを読み取ることもできます。
 
-- Method 3: Use Azure AD for backup and restore
+-   方法3: バックアップと復元にAzure ADを使用する
 
-    Configure the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` on the node where BR is running.
+    BRが実行されているノードで環境変数`$AZURE_CLIENT_ID` 、および`$AZURE_CLIENT_SECRET` `$AZURE_TENANT_ID`します。
 
-    - When the cluster is started using TiUP, TiKV uses the systemd service. The following example shows how to configure the preceding three environment variables for TiKV:
+    -   TiUPを使用してクラスターを起動すると、TiKV は systemd サービスを使用します。次の例は、TiKV の上記の 3 つの環境変数を設定する方法を示しています。
 
-        > **Note:**
+        > **注記：**
         >
-        > If this method is used, you need to restart TiKV in step 3. If your cluster cannot be restarted, use **Method 1: Specify the access key** for backup and restore.
+        > この方法を使用する場合は、手順 3 で TiKV を再起動する必要があります。クラスターを再起動できない場合は、 **「方法 1: バックアップと復元のアクセス キーを指定する」**を使用します。
 
-        1. Suppose that the TiKV port on this node is `24000`, that is, the name of the systemd service is `tikv-24000`:
+        1.  このノードの TiKV ポートが`24000` 、つまり systemd サービスの名前が`tikv-24000`であるとします。
 
             ```shell
             systemctl edit tikv-24000
             ```
 
-        2. Edit the TiKV configuration file to configure the three environment variables:
+        2.  TiKV 構成ファイルを編集して、次の 3 つの環境変数を構成します。
 
-            ```
-            [Service]
-            Environment="AZURE_CLIENT_ID=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
-            Environment="AZURE_TENANT_ID=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
-            Environment="AZURE_CLIENT_SECRET=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-            ```
+                [Service]
+                Environment="AZURE_CLIENT_ID=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+                Environment="AZURE_TENANT_ID=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+                Environment="AZURE_CLIENT_SECRET=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 
-        3. Reload the configuration and restart TiKV:
+        3.  設定を再ロードし、TiKV を再起動します。
 
             ```shell
             systemctl daemon-reload
             systemctl restart tikv-24000
             ```
 
-    - To configure the Azure AD information for TiKV and BR started with command lines, you only need to check whether the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` are configured in the operating environment by running the following commands:
+    -   コマンドラインで起動した TiKV およびBRの Azure AD 情報を構成するには、次のコマンドを実行して、オペレーティング環境で環境変数`$AZURE_CLIENT_ID` 、および`$AZURE_CLIENT_SECRET` `$AZURE_TENANT_ID`されているかどうかを確認するだけです。
 
         ```shell
         echo $AZURE_CLIENT_ID
@@ -195,7 +193,7 @@ You can configure the account used to access GCS by specifying the access key. I
         echo $AZURE_CLIENT_SECRET
         ```
 
-    - Use BR to back up data to Azure Blob Storage:
+    -   BRを使用してデータを Azure Blob Storage にバックアップします。
 
         ```shell
         tiup br backup full -u "${PD_IP}:2379" \
@@ -205,22 +203,22 @@ You can configure the account used to access GCS by specifying the access key. I
 </div>
 </SimpleTab>
 
-## Server-side encryption
+## サーバー側の暗号化 {#server-side-encryption}
 
-### Amazon S3 server-side encryption
+### Amazon S3 サーバー側暗号化 {#amazon-s3-server-side-encryption}
 
-BR supports server-side encryption when backing up data to Amazon S3. You can also use an AWS KMS key you create for S3 server-side encryption using BR. For details, see [BR S3 server-side encryption](/encryption-at-rest.md#br-s3-server-side-encryption).
+BR は、Amazon S3 へのデータのバックアップ時にサーバー側暗号化をサポートします。また、 BRを使用して S3 のサーバー側暗号化用に作成した AWS KMS キーを使用することもできます。詳細については、 [BR S3 サーバー側暗号化](/encryption-at-rest.md#br-s3-server-side-encryption)参照してください。
 
-### Azure Blob Storage server-side encryption
+### Azure Blob Storage のサーバー側暗号化 {#azure-blob-storage-server-side-encryption}
 
-BR supports specifying the Azure server-side encryption scope or providing the encryption key when backing up data to Azure Blob Storage. This feature lets you establish a security boundary for different backup data of the same storage account. For details, see [BR Azure Blob Storage server-side encryption](/encryption-at-rest.md#br-azure-blob-storage-server-side-encryption).
+BRは、Azure Blob Storageへのデータのバックアップ時に、Azureサーバー側暗号化のスコープを指定したり、暗号化キーを提供したりすることをサポートしています。この機能により、同じstorageアカウントの異なるバックアップデータに対してセキュリティ境界を設定できます。詳細については、 [BR Azure Blob Storage サーバー側暗号化](/encryption-at-rest.md#br-azure-blob-storage-server-side-encryption)ご覧ください。
 
-## Other features supported by the storage service
+## storageサービスでサポートされているその他の機能 {#other-features-supported-by-the-storage-service}
 
-Amazon [S3 Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html) can help prevent backup data from accidental or intentional deletion during a specified retention period, enhancing the security and integrity of data. Starting from v6.3.0, BR supports Amazon S3 Object Lock for snapshot backups, adding an additional layer of security for full backups. Starting from v8.0.0, PITR also supports Amazon S3 Object Lock. Whether for full backups or log data backups, the Object Lock feature ensures more reliable data protection, further strengthening the security of data backup and recovery and meeting regulatory requirements.
+Amazon [S3 オブジェクトロック](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html) 、指定された保持期間中のバックアップデータの偶発的または意図的な削除を防ぎ、データのセキュリティと整合性を強化します。バージョン6.3.0以降、 BRはスナップショットバックアップでAmazon S3オブジェクトロックをサポートし、フルバックアップのセキュリティをさらに強化します。バージョン8.0.0以降、PITRもAmazon S3オブジェクトロックをサポートします。フルバックアップでもログデータバックアップでも、オブジェクトロック機能はより信頼性の高いデータ保護を実現し、データのバックアップとリカバリのセキュリティをさらに強化し、規制要件を満たします。
 
-BR and PITR automatically detect whether the Amazon S3 Object Lock feature is enabled or disabled. You do not need to perform any additional operations.
+BRとPITRは、Amazon S3オブジェクトロック機能の有効/無効を自動的に検出します。追加の操作は必要ありません。
 
-> **Warning:**
+> **警告：**
 >
-> If the Object Lock feature is enabled during the snapshot backup or PITR log backup process, the snapshot backup or log backup might fail. You need to restart the snapshot backup or PITR log backup task to continue the backup.
+> スナップショットバックアップまたはPITRログバックアッププロセス中にオブジェクトロック機能が有効になっている場合、スナップショットバックアップまたはログバックアップが失敗する可能性があります。バックアップを続行するには、スナップショットバックアップまたはPITRログバックアップタスクを再起動する必要があります。

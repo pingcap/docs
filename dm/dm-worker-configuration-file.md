@@ -1,15 +1,15 @@
 ---
 title: DM-worker Configuration File
-summary: Learn the configuration file of DM-worker.
+summary: DM-worker の設定ファイルについて学習します。
 ---
 
-# DM-worker Configuration File
+# DMワーカーコンフィグレーションファイル {#dm-worker-configuration-file}
 
-This document introduces the configuration of DM worker, including a configuration file template and a description of each configuration parameter in this file.
+このドキュメントでは、構成ファイル テンプレートと、このファイル内の各構成パラメータの説明を含む、DM ワーカーの構成について説明します。
 
-## Configuration file template
+## コンフィグレーションファイルテンプレート {#configuration-file-template}
 
-The following is a configuration file template of the DM-worker:
+以下は、DM ワーカーの構成ファイル テンプレートです。
 
 ```toml
 # Worker Configuration.
@@ -34,64 +34,64 @@ ssl-key = "/path/to/key.pem"
 cert-allowed-cn = ["dm"]
 ```
 
-## Configuration parameters
+## コンフィグレーションパラメータ {#configuration-parameters}
 
-### Global
+### グローバル {#global}
 
-#### `name`
+#### <code>name</code> {#code-name-code}
 
-- The name of the DM-worker.
+-   DM ワーカーの名前。
 
-#### `log-level`
+#### <code>log-level</code> {#code-log-level-code}
 
-- Specifies a log level.
-- Default value: `info`
-- Value options: `debug`, `info`, `warn`, `error`, `fatal`
+-   ログ レベルを指定します。
+-   デフォルト値: `info`
+-   `fatal` `warn` `info` `error` `debug`
 
-#### `log-file`
+#### <code>log-file</code> {#code-log-file-code}
 
-- Specifies the log file directory. If this parameter is not specified, the logs are printed onto the standard output.
+-   ログファイルのディレクトリを指定します。このパラメータが指定されていない場合、ログは標準出力に出力されます。
 
-#### `worker-addr`
+#### <code>worker-addr</code> {#code-worker-addr-code}
 
-- Specifies the address of DM-worker which provides services. You can omit the IP address and specify the port number only, such as `":8262"`.
+-   サービスを提供するDMワーカーのアドレスを指定します。IPアドレスを省略し、ポート番号のみ（例： `":8262"` ）を指定することもできます。
 
-#### `advertise-addr`
+#### <code>advertise-addr</code> {#code-advertise-addr-code}
 
-- Specifies the address that DM-worker advertises to the outside world.
+-   DM ワーカーが外部にアドバタイズするアドレスを指定します。
 
-#### `join`
+#### <code>join</code> {#code-join-code}
 
-- Corresponds to one or more [`master-addr`s](/dm/dm-master-configuration-file.md#global-configuration) in the DM-master configuration file.
+-   DM マスター構成ファイル内の 1 つ以上の[`master-addr`](/dm/dm-master-configuration-file.md#global-configuration)に対応します。
 
-#### `keepalive-ttl`
+#### <code>keepalive-ttl</code> {#code-keepalive-ttl-code}
 
-- The keepalive time (in seconds) of a DM-worker node to the DM-master node if the upstream data source of the DM-worker node does not enable the relay log.
-- Default value: `60`
-- Unit: seconds
+-   DM ワーカー ノードの上流データ ソースがリレー ログを有効にしていない場合の、DM ワーカー ノードから DM マスター ノードへのキープアライブ時間 (秒単位)。
+-   デフォルト値: `60`
+-   単位: 秒
 
-#### `relay-keepalive-ttl` <span class="version-mark">New in DM v2.0.2</span>
+#### <code>relay-keepalive-ttl</code> <span class="version-mark">DM v2.0.2の新機能</span> {#code-relay-keepalive-ttl-code-span-class-version-mark-new-in-dm-v2-0-2-span}
 
-- The keepalive time (in seconds) of a DM-worker node to the DM-master node if the upstream data source of the DM-worker node enables the relay log.
-- Default value: `1800`
-- Unit: seconds
+-   DM ワーカー ノードの上流データ ソースがリレー ログを有効にしている場合の、DM ワーカー ノードから DM マスター ノードへのキープアライブ時間 (秒単位)。
+-   デフォルト値: `1800`
+-   単位: 秒
 
-#### `relay-dir` <span class="version-mark">New in v5.4.0</span>
+#### <code>relay-dir</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-relay-dir-code-span-class-version-mark-new-in-v5-4-0-span}
 
-- When relay log is enabled in the bound upstream data source, DM-worker stores the relay log in this directory. This parameter takes precedence over the configuration of the upstream data source.
+-   バインドされた上流データソースでリレーログが有効になっている場合、DM-workerはリレーログをこのディレクトリに保存します。このパラメータは、上流データソースの設定よりも優先されます。
 
-#### `ssl-ca`
+#### <code>ssl-ca</code> {#code-ssl-ca-code}
 
-- The path of the file that contains list of trusted SSL CAs for DM-worker to connect with other components.
+-   DM-worker が他のコンポーネントに接続するための信頼できる SSL CA のリストが含まれるファイルのパス。
 
-#### `ssl-cert`
+#### <code>ssl-cert</code> {#code-ssl-cert-code}
 
-- The path of the file that contains X509 certificate in PEM format for DM-worker to connect with other components.
+-   DM-worker が他のコンポーネントに接続するための PEM 形式の X509 証明書を含むファイルのパス。
 
-#### `ssl-key`
+#### <code>ssl-key</code> {#code-ssl-key-code}
 
-- The path of the file that contains X509 key in PEM format for DM-worker to connect with other components.
+-   DM-worker が他のコンポーネントに接続するための PEM 形式の X509 キーを含むファイルのパス。
 
-#### `cert-allowed-cn`
+#### <code>cert-allowed-cn</code> {#code-cert-allowed-cn-code}
 
-- Common Name list.
+-   一般名リスト。

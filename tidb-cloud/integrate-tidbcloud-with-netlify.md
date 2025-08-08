@@ -1,86 +1,84 @@
 ---
 title: Integrate TiDB Cloud with Netlify
-summary: Learn how to connect your TiDB Cloud clusters to Netlify projects.
+summary: TiDB Cloudクラスターを Netlify プロジェクトに接続する方法を学習します。
 ---
 
-# Integrate TiDB Cloud with Netlify
+# TiDB Cloudと Netlify を統合する {#integrate-tidb-cloud-with-netlify}
 
-[Netlify](https://netlify.com/) is an all-in-one platform for automating modern web projects. It replaces your hosting infrastructure, continuous integration, and deployment pipeline with a single workflow and integrates dynamic functionality like serverless functions, user authentication, and form handling as your projects grow.
+[ネットリファイ](https://netlify.com/)は、最新のWebプロジェクトを自動化するためのオールインワンプラットフォームです。ホスティングインフラストラクチャ、継続的インテグレーション、デプロイメントパイプラインを単一のワークフローに置き換え、プロジェクトの拡大に合わせてサーバーレス関数、ユーザー認証、フォーム処理などの動的な機能を統合します。
 
-This document describes how to deploy a fullstack app on Netlify with TiDB Cloud as the database backend. You can also learn how to use Netlify edge function with our TiDB Cloud serverless driver.
+このドキュメントでは、TiDB CloudをデータベースバックエンドとしてNetlifyにフルスタックアプリをデプロイする方法について説明します。また、 TiDB Cloudサーバーレスドライバーを使用してNetlifyエッジ機能を使用する方法についても説明します。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-Before the deployment, make sure the following prerequisites are met.
+展開する前に、次の前提条件が満たされていることを確認してください。
 
-### A Netlify account and CLI
+### NetlifyアカウントとCLI {#a-netlify-account-and-cli}
 
-You are expected to have a Netlify account and CLI. If you do not have any, refer to the following links to create one:
+NetlifyアカウントとCLIが必要です。お持ちでない場合は、以下のリンクを参照して作成してください。
 
-* [Sign up for a Netlify account](https://app.netlify.com/signup).
-* [Get Netlify CLI](https://docs.netlify.com/cli/get-started/).
+-   [Netlifyアカウントにサインアップする](https://app.netlify.com/signup) 。
+-   [Netlify CLI を入手する](https://docs.netlify.com/cli/get-started/) 。
 
-### A TiDB Cloud account and a TiDB cluster
+### TiDB Cloudアカウントと TiDB クラスター {#a-tidb-cloud-account-and-a-tidb-cluster}
 
-You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to the following to create one:
+TiDB Cloudのアカウントとクラスターが必要です。まだお持ちでない場合は、以下を参照して作成してください。
 
-- [Create a {{{ .starter }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
-- [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)
+-   [TiDB Cloud Serverless クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
+-   [TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
 
-One TiDB Cloud cluster can connect to multiple Netlify sites.
+1 つのTiDB Cloudクラスターは複数の Netlify サイトに接続できます。
 
-### All IP addresses allowed for traffic filter in TiDB Cloud
+### TiDB Cloudのトラフィックフィルターで許可されるすべての IP アドレス {#all-ip-addresses-allowed-for-traffic-filter-in-tidb-cloud}
 
-For TiDB Cloud Dedicated clusters, make sure that the traffic filter of the cluster allows all IP addresses (set to `0.0.0.0/0`) for connection. This is because Netlify deployments use dynamic IP addresses.
+TiDB Cloud Dedicated クラスターの場合、クラスターのトラフィックフィルターですべての IP アドレス（ `0.0.0.0/0`に設定）が接続に許可されていることを確認してください。これは、Netlify デプロイメントが動的 IP アドレスを使用するためです。
 
-{{{ .starter }}} clusters allow all IP addresses for connection by default, so you do not need to configure any traffic filter.
+TiDB Cloud Serverless クラスターは、デフォルトですべての IP アドレスの接続を許可するため、トラフィック フィルターを構成する必要はありません。
 
-## Step 1. Get the example project and the connection string
+## ステップ1. サンプルプロジェクトと接続文字列を取得する {#step-1-get-the-example-project-and-the-connection-string}
 
-To help you get started quickly, TiDB Cloud provides a fullstack example app in TypeScript with Next.js using React and Prisma Client. It is a simple blog site where you can post and delete your own blogs. All the content is stored in TiDB Cloud through Prisma.
+すぐに使い始められるように、 TiDB CloudはReactとPrisma Clientを使用した、TypeScriptとNext.jsで書かれたフルスタックのサンプルアプリを提供しています。これはシンプルなブログサイトで、ご自身のブログを投稿したり削除したりできます。すべてのコンテンツはPrismaを介してTiDB Cloudに保存されます。
 
-### Fork the example project and clone it to your own space
+### サンプルプロジェクトをフォークして自分のスペースにクローンする {#fork-the-example-project-and-clone-it-to-your-own-space}
 
-1. Fork the [Fullstack Example with Next.js and Prisma](https://github.com/tidbcloud/nextjs-prisma-example) repository to your own GitHub repository.
+1.  [Next.js と Prisma を使用したフルスタックの例](https://github.com/tidbcloud/nextjs-prisma-example)リポジトリを自分の GitHub リポジトリにフォークします。
 
-2. Clone the forked repository to your own space:
+2.  フォークしたリポジトリを自分のスペースにクローンします。
 
     ```shell
     git clone https://github.com/${your_username}/nextjs-prisma-example.git
     cd nextjs-prisma-example/
     ```
 
-### Get the TiDB Cloud connection string
+### TiDB Cloud接続文字列を取得する {#get-the-tidb-cloud-connection-string}
 
-For a {{{ .starter }}} cluster, you can get the connection string either from [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) or from [TiDB Cloud console](https://tidbcloud.com/).
+TiDB Cloud Serverless クラスターの場合、接続文字列は[TiDB CloudCLI](/tidb-cloud/cli-reference.md)または[TiDB Cloudコンソール](https://tidbcloud.com/)から取得できます。
 
-For a TiDB Cloud Dedicated cluster, you can get the connection string only from the TiDB Cloud console.
+TiDB Cloud Dedicated クラスターの場合、接続文字列はTiDB Cloudコンソールからのみ取得できます。
 
 <SimpleTab>
 <div label="TiDB Cloud CLI">
 
-> **Tip:**
+> **ヒント：**
 >
-> If you have not installed Cloud CLI, refer to [TiDB Cloud CLI Quick Start](/tidb-cloud/get-started-with-cli.md) for quick installation before taking the following steps.
+> Cloud CLI をインストールしていない場合は、次の手順に進む前に、クイック インストールの[TiDB Cloud CLI クイックスタート](/tidb-cloud/get-started-with-cli.md)を参照してください。
 
-1. Get the connection string of a cluster in interactive mode:
+1.  対話モードでクラスターの接続文字列を取得します。
 
     ```shell
     ticloud cluster connect-info
     ```
 
-2. Follow the prompts to select your cluster, client, and operating system. Note that the client used in this document is `Prisma`.
+2.  プロンプトに従って、クラスター、クライアント、オペレーティングシステムを選択してください。このドキュメントではクライアントは`Prisma`です。
 
-    ```
-    Choose the cluster
-    > [x] Cluster0(13796194496)
-    Choose the client
-    > [x] Prisma
-    Choose the operating system
-    > [x] macOS/Alpine (Detected)
-    ```
+        Choose the cluster
+        > [x] Cluster0(13796194496)
+        Choose the client
+        > [x] Prisma
+        Choose the operating system
+        > [x] macOS/Alpine (Detected)
 
-    The output is as follows, where you can find the connection string for Prisma in the `url` value.
+    出力は次のようになります`url`値に Prisma の接続文字列が含まれています。
 
     ```shell
     datasource db {
@@ -89,54 +87,54 @@ For a TiDB Cloud Dedicated cluster, you can get the connection string only from 
     }
     ```
 
-    > **Note:**
+    > **注記：**
     >
-    > When you use the connection string later, note the following:
+    > 後に接続文字列を使用する場合は、次の点に注意してください。
     >
-    > - Replace the parameters in the connection string with actual values.
-    > - The example app in this document requires a new database, so you need to replace `<Database>` with a unique new name.
+    > -   接続文字列内のパラメータを実際の値に置き換えます。
+    > -   このドキュメントのサンプル アプリには新しいデータベースが必要なので、 `<Database>`一意の新しい名前に置き換える必要があります。
 
 </div>
 <div label="TiDB Cloud console">
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner. In the displayed dialog, you can get the following connection parameters from the connection string.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)でプロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲットクラスターの名前をクリックして概要ページに移動し、右上隅の**「接続」**をクリックします。表示されるダイアログで、接続文字列から以下の接続パラメータを取得できます。
 
-    - `${host}`
-    - `${port}`
-    - `${user}`
-    - `${password}`
+    -   `${host}`
+    -   `${port}`
+    -   `${user}`
+    -   `${password}`
 
-2. Fill the connection parameters in the following connection string:
+2.  次の接続文字列に接続パラメータを入力します。
 
     ```shell
     mysql://<User>:<Password>@<Host>:<Port>/<Database>?sslaccept=strict
     ```
 
-    > **Note:**
+    > **注記：**
     >
-    > When you use the connection string later, note the following:
+    > 後に接続文字列を使用する場合は、次の点に注意してください。
     >
-    > - Replace the parameters in the connection string with actual values.
-    > - The example app in this document requires a new database, so you need to replace `<Database>` with a unique new name.
+    > -   接続文字列内のパラメータを実際の値に置き換えます。
+    > -   このドキュメントのサンプル アプリには新しいデータベースが必要なので、 `<Database>`一意の新しい名前に置き換える必要があります。
 
 </div>
 </SimpleTab>
 
-## Step 2. Deploy the example app to Netlify
+## ステップ2. サンプルアプリをNetlifyにデプロイ {#step-2-deploy-the-example-app-to-netlify}
 
-1. In Netlify CLI, authenticate your Netlify account and obtain an access token.
+1.  Netlify CLI で、Netlify アカウントを認証し、アクセス トークンを取得します。
 
     ```shell
     netlify login
     ```
 
-2. Start the automatic setup. This step connects your repository for continuous deployment, so Netlify CLI needs access to create a deploy key and a webhook on the repository.
+2.  自動セットアップを開始します。このステップでは、継続的デプロイメントのためにリポジトリを接続するため、Netlify CLI がリポジトリにデプロイキーと Webhook を作成するためのアクセス権が必要になります。
 
     ```shell
     netlify init
     ```
 
-    When you are prompted, choose **Create & configure a new site**, and grant GitHub access. Use the default values for all other options.
+    プロンプトが表示されたら、 **「新しいサイトの作成と構成」**を選択し、GitHubへのアクセスを許可します。その他のオプションはすべてデフォルト値のままにしてください。
 
     ```shell
     Adding local .netlify folder to .gitignore file...
@@ -177,7 +175,7 @@ For a TiDB Cloud Dedicated cluster, you can get the connection string only from 
     netlify open   Open the Netlify admin URL of your site
     ```
 
-3. Set environment variables. To connect to your TiDB Cloud cluster from your own space and the Netlify space, you need to set the `DATABASE_URL` as the connection string obtained from [Step 1](#step-1-get-the-example-project-and-the-connection-string).
+3.  環境変数を設定します。自分のスペースとNetlifyスペースからTiDB Cloudクラスターに接続するには、 [ステップ1](#step-1-get-the-example-project-and-the-connection-string)から取得した接続文字列を`DATABASE_URL`に設定する必要があります。
 
     ```shell
     # set the environment variable for your own space
@@ -187,7 +185,7 @@ For a TiDB Cloud Dedicated cluster, you can get the connection string only from 
     netlify env:set DATABASE_URL 'mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict'
     ```
 
-    Check your environment variables.
+    環境変数を確認してください。
 
     ```shell
     # check the environment variable for your own space
@@ -197,65 +195,65 @@ For a TiDB Cloud Dedicated cluster, you can get the connection string only from 
     netlify env:list
     ```
 
-4. Build the app locally and migrate the schema to your TiDB Cloud cluster.
+4.  アプリをローカルでビルドし、スキーマをTiDB Cloudクラスターに移行します。
 
-    > **Tips:**
+    > **ヒント:**
     >
-    > If you want to skip the local deployment and directly deploy the app to Netlify, just go to step 6.
+    > ローカルデプロイメントをスキップしてアプリを Netlify に直接デプロイする場合は、手順 6 に進んでください。
 
     ```shell
     npm install .
     npm run netlify-build
     ```
 
-5. Run the application locally. You can start a local development server to preview your site.
+5.  アプリケーションをローカルで実行します。ローカル開発サーバーを起動して、サイトをプレビューできます。
 
     ```shell
     netlify dev
     ```
 
-    Then, go to `http://localhost:3000/` in your browser to explore its UI.
+    次に、ブラウザで`http://localhost:3000/`に移動して、UI を調べます。
 
-6. Deploy the app to Netlify. Once you are satisfied with the local preview, you can deploy your site to Netlify using the following command. `--trigger` means deployment without uploading local files. If you made any local changes, make sure that you have committed them to your GitHub repository.
+6.  アプリをNetlifyにデプロイ。ローカルプレビューに問題がなければ、以下のコマンドでサイトをNetlifyにデプロイできます。1 `--trigger`ローカルファイルをアップロードせずにデプロイすることを意味します。ローカルで変更を加えた場合は、GitHubリポジトリにコミットしたことを確認してください。
 
     ```shell
     netlify deploy --prod --trigger
     ```
 
-    Go to your Netlify console to check the deployment state. After the deployment is done, the site for the app will have a public IP address provided by Netlify so that everyone can access it.
+    Netlifyコンソールにアクセスして、デプロイの状態を確認してください。デプロイが完了すると、アプリのサイトにはNetlifyからパブリックIPアドレスが割り当てられ、誰でもアクセスできるようになります。
 
-## Use the edge function
+## エッジ機能を使用する {#use-the-edge-function}
 
-The example app mentioned in the section above runs on the Netlify serverless function. This section shows you how to use the edge function with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). The edge function is a feature provided by Netlify, which allows you to run serverless functions on the edge of the Netlify CDN.
+前述のセクションで紹介したサンプルアプリは、Netlifyのサーバーレス関数上で動作します。このセクションでは、 [TiDB Cloudサーバーレス ドライバー](/tidb-cloud/serverless-driver.md)でエッジ関数を使用する方法を説明します。エッジ関数はNetlifyが提供する機能で、Netlify CDNのエッジでサーバーレス関数を実行できます。
 
-To use the edge function, take the following steps:
+エッジ機能を使用するには、次の手順を実行します。
 
-1. Create a directory named `netlify/edge-functions` in the root directory of your project. 
+1.  プロジェクトのルート ディレクトリに`netlify/edge-functions`という名前のディレクトリを作成します。
 
-2. Create a file named `hello.ts` in the directory and add the following code:
+2.  ディレクトリに`hello.ts`という名前のファイルを作成し、次のコードを追加します。
 
     ```typescript
     import { connect } from 'https://esm.sh/@tidbcloud/serverless'
-    
+
     export default async () => {
       const conn = connect({url: Netlify.env.get('DATABASE_URL')})
       const result = await conn.execute('show databases')
       return new Response(JSON.stringify(result));
     }
-   
+
     export const config = { path: "/api/hello" };
     ```
 
-3. Set the `DATABASE_URL` environment variables. You can get the connection information from the [TiDB Cloud console](https://tidbcloud.com/).
+3.  `DATABASE_URL`環境変数を設定します。3 [TiDB Cloudコンソール](https://tidbcloud.com/)接続情報を取得できます。
 
     ```shell
     netlify env:set DATABASE_URL 'mysql://<username>:<password>@<host>/<database>'
     ```
 
-4. Deploy the edge function to Netlify.
+4.  エッジ機能を Netlify にデプロイ。
 
     ```shell
     netlify deploy --prod --trigger
     ```
 
-Then you can go to your Netlify console to check the state of the deployment. After the deployment is done, you can access the edge function through the `https://<netlify-host>/api/hello` URL.
+その後、Netlifyコンソールにアクセスしてデプロイメントの状態を確認できます。デプロイメントが完了すると、 `https://<netlify-host>/api/hello` URLからエッジ関数にアクセスできます。

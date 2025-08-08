@@ -1,28 +1,28 @@
 ---
 title: Logical Import Mode Introduction
-summary: Learn about the logical import mode in TiDB Lightning.
+summary: TiDB Lightningの論理インポート モードについて学習します。
 ---
 
-# Logical Import Mode Introduction
+# 論理インポートモードの概要 {#logical-import-mode-introduction}
 
-The logical import mode is one of the two import modes supported by TiDB Lightning. In the logical import mode, TiDB Lightning first encodes data into SQL statements and then runs the SQL statements to import data.
+論理インポートモードは、 TiDB Lightningがサポートする2つのインポートモードの1つです。論理インポートモードでは、 TiDB Lightning はまずデータをSQL文にエンコードし、次にSQL文を実行してデータをインポートします。
 
-If your TiDB cluster already contains data and provides service for external applications, it is recommended to import data in the logical import mode. The behavior of the logical import mode is the same as executing normal SQL statements, and thus it guarantees ACID compliance.
+TiDBクラスターに既にデータが含まれており、外部アプリケーションにサービスを提供している場合は、論理インポートモードでデータをインポートすることをお勧めします。論理インポートモードの動作は通常のSQL文の実行と同じであるため、 ACID準拠が保証されます。
 
-The backend for the logical import mode is `tidb`.
+論理インポート モードのバックエンドは`tidb`です。
 
-## Environment requirements
+## 環境要件 {#environment-requirements}
 
-**Operating system**:
+**オペレーティング·システム**：
 
-It is recommended to use fresh CentOS 7 instances. You can deploy a virtual machine either on your local host or in the cloud. Because TiDB Lightning consumes as much CPU resources as needed by default, it is recommended that you deploy it on a dedicated server. If this is not possible, you can deploy it on a single server together with other TiDB components (for example, tikv-server) and then configure `region-concurrency` to limit the CPU usage from TiDB Lightning. Usually, you can configure the size to 75% of the logical CPU.
+CentOS 7の新規インスタンスの使用をお勧めします。仮想マシンはローカルホストまたはクラウドにデプロイできます。TiDB TiDB Lightningはデフォルトで必要なCPUリソースを消費するため、専用サーバーにデプロイすることをお勧めします。これが不可能な場合は、他のTiDBコンポーネント（例：tikv-server）と一緒に単一のサーバーにデプロイし、 TiDB LightningからのCPU使用量を制限するように`region-concurrency`設定できます。通常、サイズは論理CPUの75%に設定できます。
 
-**Memory and CPU**:
+**メモリとCPU** :
 
-It is recommended that you allocate CPU more than 4 cores and memory greater than 8 GiB to get better performance. It is verified that TiDB Lightning does not have significant memory usage (no more than 5 GiB) in the logical import mode. However, if you increase the value of `region-concurrency`, TiDB Lightning might consume more memory.
+パフォーマンスを向上させるには、CPUコア数を4以上、メモリを8GiB以上割り当てることをお勧めします。TiDB TiDB Lightningは、論理インポートモードではメモリ使用量が5GiB以下と、それほど大きくないことが検証されています。ただし、値を`region-concurrency`に増やすと、 TiDB Lightningのメモリ消費量が増加する可能性があります。
 
-**Network**: A 1 Gbps or 10 Gbps Ethernet card is recommended.
+**ネットワーク**: 1 Gbps または 10 Gbps のイーサネット カードが推奨されます。
 
-## Limitations
+## 制限事項 {#limitations}
 
-When you use multiple TiDB Lightning to import data to the same target, do not mix the backends. That is, do not use the physical import mode and the logical import mode to import data to a single TiDB cluster at the same time.
+複数のTiDB Lightningを使用して同じターゲットにデータをインポートする場合、バックエンドを混在させないでください。つまり、物理インポートモードと論理インポートモードを同時に使用して、単一のTiDBクラスタにデータをインポートしないでください。

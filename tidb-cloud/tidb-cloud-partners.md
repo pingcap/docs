@@ -1,72 +1,72 @@
 ---
 title: TiDB Cloud Partner Web Console
-summary: Learn how to use the TiDB Cloud Partner web console as a reseller and Managed Service Provider (MSP).
+summary: 再販業者およびマネージド サービス プロバイダー (MSP) としてTiDB Cloud Partner Web コンソールを使用する方法を学習します。
 aliases: ['/tidbcloud/managed-service-provider']
 ---
 
-# TiDB Cloud Partner Web Console
+# TiDB Cloudパートナー Web コンソール {#tidb-cloud-partner-web-console}
 
-TiDB Cloud Partner Web Console is designed for partners focused on SaaS solutions, with the goal of building and nurturing a strong partnership between PingCAP and our partners to better serve our customers.
+TiDB Cloudパートナー Web コンソールは、SaaS ソリューションに重点を置くパートナー向けに設計されており、PingCAP とパートナー間の強力なパートナーシップを構築および育成し、顧客により良いサービスを提供することを目的としています。
 
-There are two types of TiDB Cloud partners:
+TiDB Cloudパートナーには 2 つの種類があります。
 
-- Reseller: resells TiDB Cloud through AWS Marketplace Channel Partner Private Offer (CPPO)
-- Managed Service Provider (MSP): resells TiDB Cloud and provides value-added services
+-   再販業者: AWS Marketplace チャネルパートナープライベートオファー (CPPO) を通じてTiDB Cloud を再販します
+-   マネージド サービス プロバイダー (MSP): TiDB Cloudを再販し、付加価値サービスを提供します
 
-## Reseller through AWS Channel Partner Private Offer (CPPO)
+## AWS チャネルパートナープライベートオファー (CPPO) を通じた再販業者 {#reseller-through-aws-channel-partner-private-offer-cppo}
 
-The reseller through [AWS CPPO](https://aws.amazon.com/marketplace/features/cpprivateoffers) allows customers to purchase TiDB Cloud through the AWS Marketplace directly from a reseller. This enables customers to benefit from the partner's business knowledge, localized support, and expertise, while still enjoying the fast and seamless purchasing experience they expect from AWS Marketplace.
+[AWS CPPO](https://aws.amazon.com/marketplace/features/cpprivateoffers)を介したリセラーは、お客様がAWS Marketplaceを通じてリセラーから直接TiDB Cloudを購入できるようにします。これにより、お客様はパートナーのビジネス知識、地域に根ざしたサポート、そして専門知識を活用しながら、AWS Marketplaceならではの迅速かつシームレスな購入体験を享受できます。
 
-### Become a reseller of PingCAP
+### PingCAPの再販業者になる {#become-a-reseller-of-pingcap}
 
-If you are interested in the reseller program and would like to join as a partner, [contact sales](https://www.pingcap.com/partners/become-a-partner/) to enroll.
+リセラー プログラムに興味があり、パートナーとして参加したい場合は、登録して[営業担当者に問い合わせる](https://www.pingcap.com/partners/become-a-partner/) 。
 
-### Manage daily tasks for a reseller
+### 再販業者の日常業務を管理する {#manage-daily-tasks-for-a-reseller}
 
-As a reseller, you have two ways to manage your daily management tasks:
+再販業者には、日常の管理タスクを管理する 2 つの方法があります。
 
-- [TiDB Cloud Partner console](https://partner-console.tidbcloud.com)
-- Partner Management API. You can find the open API documentation on the **Support** page of the TiDB Cloud Partner console.
+-   [TiDB Cloudパートナーコンソール](https://partner-console.tidbcloud.com)
+-   パートナー管理 API。オープン API ドキュメントは、 TiDB Cloudパートナー コンソールの**サポート**ページでご覧いただけます。
 
-## Managed Service Provider (MSP)
+## マネージドサービスプロバイダー（MSP） {#managed-service-provider-msp}
 
-An MSP is a partner who resells TiDB Cloud and provides value-added services, including but not limited to TiDB Cloud organization management, billing services, and technical support.
+MSP は、 TiDB Cloudを再販し、 TiDB Cloud組織管理、課金サービス、技術サポートなどを含む付加価値サービスを提供するパートナーです。
 
-Benefits of becoming a managed service provider include:
+マネージド サービス プロバイダーになるメリットは次のとおりです。
 
-- Discounts and incentive programs
-- Enablement training
-- Increased visibility through certification
-- Joint marketing opportunities
+-   割引とインセンティブプログラム
+-   エンパワーメントトレーニング
+-   認証による可視性の向上
+-   共同マーケティングの機会
 
-### Become an MSP of PingCAP
+### PingCAPのMSPになる {#become-an-msp-of-pingcap}
 
-If you are interested in the MSP program and would like to join as a partner, [contact sales](https://www.pingcap.com/partners/become-a-partner/) to enroll. Please provide the following information:
+MSPプログラムにご興味があり、パートナーとしてご参加をご希望の場合は、登録[営業担当者に問い合わせる](https://www.pingcap.com/partners/become-a-partner/)にご記入ください。以下の情報をご提供ください。
 
-- Company name
-- Company contact email
-- Company official website URL
-- Company logo (One SVG file for light mode and one SVG file for dark mode; a horizontal logo with 256 x 48 pixels is preferred)
+-   会社名
+-   会社の連絡先メールアドレス
+-   会社公式サイトURL
+-   会社のロゴ（ライトモード用に 1 つの SVG ファイル、ダークモード用に 1 つの SVG ファイル。256 x 48 ピクセルの横長のロゴが推奨されます）
 
-The preceding information is used to generate an exclusive sign-up URL and page with your company logo for your customers.
+上記の情報は、顧客専用のサインアップ URL と会社ロゴ入りのページを生成するために使用されます。
 
-We will carefully evaluate your request and get back to you soon.
+お客様のご要望を慎重に評価し、すぐにご返答させていただきます。
 
-### Manage daily tasks for an MSP
+### MSPの日常業務を管理する {#manage-daily-tasks-for-an-msp}
 
-As a TiDB Cloud MSP partner, there are two methods for you to manage your daily management tasks:
+TiDB Cloud MSP パートナーとして、日常の管理タスクを管理するには 2 つの方法があります。
 
-- [TiDB Cloud Partner console](https://partner-console.tidbcloud.com)
-- [MSP Management API (deprecated)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
+-   [TiDB Cloudパートナーコンソール](https://partner-console.tidbcloud.com)
+-   [MSP 管理 API (非推奨)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
 
-After your complete the registration as a TiDB Cloud partner, you will receive an email notification to activate the account in the TiDB Cloud Partner console, and receive an API key for the MSP Management API.
+TiDB Cloudパートナーとしての登録が完了すると、 TiDB Cloudパートナー コンソールでアカウントをアクティブ化するための電子メール通知が届き、MSP 管理 API の API キーが送信されます。
 
-You can use the MSP management API to manage the following daily tasks:
+MSP 管理 API を使用して、次の日常的なタスクを管理できます。
 
-- Query the MSP monthly bill for a specific month
-- Query credits applied to an MSP
-- Query discounts applied to an MSP
-- Query the monthly bill for a specific MSP customer
-- Create a new sign-up URL for an MSP customer
-- List all MSP customers
-- Retrieve MSP customer information by the customer organization ID
+-   特定の月の MSP 月額料金を照会する
+-   MSPに適用されるクエリクレジット
+-   MSP に適用されるクエリ割引
+-   特定の MSP 顧客の月額料金を照会する
+-   MSP顧客用の新しいサインアップURLを作成する
+-   すべてのMSP顧客を一覧表示する
+-   顧客組織IDでMSP顧客情報を取得する

@@ -1,51 +1,51 @@
 ---
 title: Gitpod
-summary: Gitpod provides a complete, automated, and pre-configured cloud-native development environment. You can develop, run, and test code directly in the browser without any local configurations.
+summary: Gitpodは、完全かつ自動化された、事前設定済みのクラウドネイティブ開発環境を提供します。ローカル設定を必要とせず、ブラウザ内で直接コードを開発、実行、テストできます。
 ---
 
 <!-- markdownlint-disable MD029 -->
 
-# Gitpod
+# ギットポッド {#gitpod}
 
-With [Gitpod](https://www.gitpod.io/), you can get a full development environment in your browser with the click of a button or link, and you can write code right away.
+[ギットポッド](https://www.gitpod.io/)使用すると、ボタンまたはリンクをクリックするだけでブラウザ内で完全な開発環境が得られ、すぐにコードを記述できます。
 
-Gitpod is an open-source Kubernetes application (GitHub repository address: <https://github.com/gitpod-io/gitpod>) for direct-to-code development environments, which spins up fresh, automated development environments for each task, in the cloud, in seconds. It enables you to describe your development environment as code and start instant, remote and cloud-based development environments directly from your browser or your Desktop IDE.
+Gitpodは、コードを直接操作する開発環境向けのオープンソースKubernetesアプリケーション（GitHubリポジトリアドレス： [https://github.com/gitpod-io/gitpod](https://github.com/gitpod-io/gitpod) ）です。クラウド上で、タスクごとに最新の自動化開発環境を数秒で構築します。開発環境をコードとして記述し、ブラウザまたはデスクトップIDEから直接、リモートおよびクラウドベースの開発環境を即座に開始できます。
 
-## Quick start
+## クイックスタート {#quick-start}
 
-1. Fork the example code repository [pingcap-inc/tidb-example-java](https://github.com/pingcap-inc/tidb-example-java) for TiDB application development.
+1.  TiDB アプリケーション開発用のサンプル コード リポジトリ[pingcap-inc/tidb-example-java](https://github.com/pingcap-inc/tidb-example-java)フォークします。
 
-2. Start your Gitpod workspace by prefixing the URL of the sample code repository with `https://gitpod.io/#` in the address bar of your browser.
+2.  ブラウザのアドレスバーでサンプル コード リポジトリの URL の前に`https://gitpod.io/#`を付けて、Gitpod ワークスペースを起動します。
 
-   - For example, `https://gitpod.io/#https://github.com/pingcap-inc/tidb-example-java`.
+    -   たとえば、 `https://gitpod.io/#https://github.com/pingcap-inc/tidb-example-java` 。
 
-   - You can configure environment variables in the URL. For example, `https://gitpod.io/#targetFile=spring-jpa-hibernate_Makefile,targetMode=spring-jpa-hibernate/https://github.com/pingcap-inc/tidb-example-java`.
+    -   URL内で環境変数を設定できます。例： `https://gitpod.io/#targetFile=spring-jpa-hibernate_Makefile,targetMode=spring-jpa-hibernate/https://github.com/pingcap-inc/tidb-example-java` 。
 
-3. Log in and start the workspace using one of the providers listed. For example, `Github`.
+3.  ログインし、リストされているプロバイダーのいずれかを使用してワークスペースを起動します。例： `Github` 。
 
-## Use the default Gitpod configuration and environment
+## デフォルトのGitpod設定と環境を使用する {#use-the-default-gitpod-configuration-and-environment}
 
-After completing the [quick-start](#quick-start) steps, it will take a while for Gitpod to set up your workspace.
+[クイックスタート](#quick-start)手順を完了した後、Gitpod がワークスペースをセットアップするまでにしばらく時間がかかります。
 
-Take the [Spring Boot Web](/develop/dev-guide-sample-application-java-spring-boot.md) application as an example. You can create a new workspace by the `https://gitpod.io/#targetFile=spring-jpa-hibernate_Makefile,targetMode=spring-jpa-hibernate/https://github.com/pingcap-inc/tidb-example-java` URL.
+[スプリングブートウェブ](/develop/dev-guide-sample-application-java-spring-boot.md)のアプリケーションを例に挙げると、 `https://gitpod.io/#targetFile=spring-jpa-hibernate_Makefile,targetMode=spring-jpa-hibernate/https://github.com/pingcap-inc/tidb-example-java`のURLで新しいワークスペースを作成できます。
 
-After that, you will see a page similar to the following:
+その後、次のようなページが表示されます。
 
 ![playground gitpod workspace init](/media/develop/playground-gitpod-workspace-init.png)
 
-This scenario in the page uses [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview) to build a TiDB Playground. You can check the progress on the left side of the terminal area.
+このページのシナリオでは、 [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview)使用してTiDB Playgroundを構築します。ターミナル領域の左側で進行状況を確認できます。
 
-Once the TiDB Playground is ready, another `Spring JPA Hibernate` task will run. You can check the progress on the right side of the terminal area.
+TiDB Playground の準備が完了すると、さらに`Spring JPA Hibernate`タスクが実行されます。ターミナル領域の右側で進行状況を確認できます。
 
-After all these tasks are finished, you will see a page similar to the following. On this page, check the `REMOTE EXPLORER` area in the left navigation pane (Gitpod supports URL-based port forwarding) and find the URL of your port `8080`.
+これらのタスクがすべて完了すると、次のようなページが表示されます。このページで、左側のナビゲーションペインの`REMOTE EXPLORER`領域（GitpodはURLベースのポート転送をサポートしています）を確認し、ポート`8080`のURLを見つけます。
 
 ![playground gitpod workspace ready](/media/develop/playground-gitpod-workspace-ready.png)
 
-## Using custom Gitpod configuration and Docker image
+## カスタムGitpod構成とDockerイメージの使用 {#using-custom-gitpod-configuration-and-docker-image}
 
-### Customize Gitpod configurations
+### Gitpodの設定をカスタマイズする {#customize-gitpod-configurations}
 
-Referring to [example.gitpod.yml](https://github.com/pingcap-inc/tidb-example-java/blob/main/.gitpod.yml), create a `.gitpod. yml` file in the root directory of your project to configure the Gitpod workspace.
+[例.gitpod.yml](https://github.com/pingcap-inc/tidb-example-java/blob/main/.gitpod.yml)を参照して、プロジェクトのルート ディレクトリに`.gitpod. yml`ファイルを作成し、Gitpod ワークスペースを構成します。
 
 ```yml
 # This configuration file was automatically generated by Gitpod.
@@ -91,13 +91,13 @@ ports:
     onOpen: ignore
 ```
 
-### Customize Gitpod Docker images
+### Gitpod Dockerイメージをカスタマイズする {#customize-gitpod-docker-images}
 
-By default, Gitpod uses a standard Docker image named Workspace-Full as the basis for the workspace. Workspaces launched from this default image are pre-installed with Docker, Go, Java, Node.js, C/C++, Python, Ruby, Rust, PHP, and tools such as Homebrew, Tailscale, and Nginx.
+Gitpod はデフォルトで、Workspace-Full という標準 Docker イメージをワークスペースのベースとして使用します。このデフォルトイメージから起動されたワークスペースには、Docker、Go、 Java、Node.js、C/C++、Python、Ruby、Rust、PHP、そしてHomebrew、Tailscale、Nginx などのツールがプリインストールされています。
 
-You can use a public Docker image or a Dockerfile and also install any required dependencies for your project.
+パブリック Docker イメージまたは Dockerfile を使用し、プロジェクトに必要な依存関係をインストールすることもできます。
 
-For example, you can use a Dockerfile (see also [Example `.gitpod.Dockerfile`](https://github.com/pingcap-inc/tidb-example-java/blob/main/.gitpod.Dockerfile)) as follows:
+たとえば、次のように Dockerfile ( [`.gitpod.Dockerfile`例](https://github.com/pingcap-inc/tidb-example-java/blob/main/.gitpod.Dockerfile)も参照) を使用できます。
 
 ```dockerfile
 FROM gitpod/workspace-java-17
@@ -106,7 +106,7 @@ RUN sudo apt install mysql-client -y
 RUN curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
 ```
 
-Then, you need to update `.gitpod.yml`:
+次に、 `.gitpod.yml`更新する必要があります。
 
 ```yml
 # This configuration file was automatically generated by Gitpod.
@@ -153,30 +153,30 @@ ports:
     onOpen: ignore
 ```
 
-### Apply changes
+### 変更を適用する {#apply-changes}
 
-After completing the configuration of the `.gitpod.yml` file, make sure that the latest code is available in your corresponding GitHub repository.
+`.gitpod.yml`ファイルの設定が完了したら、対応する GitHub リポジトリで最新のコードが利用可能であることを確認します。
 
-Visit `https://gitpod.io/#<YOUR_REPO_URL>` to create a new Gitpod workspace with the latest code applied.
+`https://gitpod.io/#<YOUR_REPO_URL>`アクセスして、最新のコードが適用された新しい Gitpod ワークスペースを作成します。
 
-Visit `https://gitpod.io/workspaces` for all established workspaces.
+確立されたすべてのワークスペースについては、 `https://gitpod.io/workspaces`参照してください。
 
-## Summary
+## まとめ {#summary}
 
-Gitpod provides a complete, automated, and pre-configured cloud-native development environment. You can develop, run, and test code directly in the browser without any local configurations.
+Gitpodは、完全かつ自動化された、事前設定済みのクラウドネイティブ開発環境を提供します。ローカル設定を必要とせず、ブラウザ内で直接コードを開発、実行、テストできます。
 
 ![playground gitpod summary](/media/develop/playground-gitpod-summary.png)
 
-## Need help?
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

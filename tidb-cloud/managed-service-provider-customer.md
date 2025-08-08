@@ -1,43 +1,43 @@
 ---
 title: Managed Service Provider Customer
-summary: Learn how to become a Managed Service Provider (MSP) customer.
+summary: マネージド サービス プロバイダー (MSP) の顧客になる方法を学びます。
 ---
 
-# Managed Service Provider Customer
+# マネージドサービスプロバイダーの顧客 {#managed-service-provider-customer}
 
-A Managed Service Provider (MSP) customer is a customer who uses the TiDB Cloud Services provided by the Managed Service Provider. 
+マネージド サービス プロバイダー (MSP) 顧客とは、マネージド サービス プロバイダーが提供するTiDB Cloudサービスを使用する顧客です。
 
-Compared to the direct TiDB Cloud customer, there are several differences for sign-up and invoice payment:
+TiDB Cloud の直接顧客と比較すると、サインアップと請求書の支払いに関していくつかの違いがあります。
 
-- The MSP customer needs to sign up for a TiDB Cloud account from the dedicated sign-up page provided by the MSP.
-- The MSP customer pays invoices through the MSP channel, instead of paying directly to PingCAP.
+-   MSP 顧客は、MSP が提供する専用のサインアップ ページからTiDB Cloudアカウントにサインアップする必要があります。
+-   MSP 顧客は、PingCAP に直接支払うのではなく、MSP チャネルを通じて請求書を支払います。
 
-Other daily operations on the TiDB Cloud console are the same for both direct TiDB Cloud customers and MSP customers.
+TiDB Cloudコンソールでのその他の日常的な操作は、直接のTiDB Cloud顧客と MSP 顧客の両方で同じです。
 
-This document describes how to become an MSP customer and how to check history and future bills for MSP customers.
+このドキュメントでは、MSP 顧客になる方法と、MSP 顧客の履歴と今後の請求を確認する方法について説明します。
 
-## Create a new MSP customer account
+## 新しいMSP顧客アカウントを作成する {#create-a-new-msp-customer-account}
 
-To create a new MSP customer account, visit the MSP dedicated sign-up page. Each MSP has a unique dedicated sign-up page. Contact your MSP to get the URL of the sign-up page.
+新しいMSP顧客アカウントを作成するには、MSP専用のサインアップページにアクセスしてください。各MSPには専用のサインアップページがあります。サインアップページのURLを取得するには、ご利用のMSPにお問い合わせください。
 
-## Migrate from a direct TiDB Cloud account to an MSP customer account
+## 直接のTiDB Cloudアカウントから MSP 顧客アカウントに移行する {#migrate-from-a-direct-tidb-cloud-account-to-an-msp-customer-account}
 
-> **Tip:**
+> **ヒント：**
 >
-> Direct customers are the end customers who purchase TiDB Cloud and pay invoices directly from PingCAP.
+> 直接顧客とは、 TiDB Cloudを購入し、PingCAP から直接請求書を支払うエンド カスタマーです。
 
-If you are currently a direct customer with a TiDB Cloud account, you can ask your MSP to migrate your account to an MSP customer account.
+現在、 TiDB Cloudアカウントを持つ直接顧客である場合は、MSP にアカウントを MSP 顧客アカウントに移行するよう依頼できます。
 
-The migration will take effect on the first day of a future month. Discuss with your MSP to determine the specific effective date.
+移行は翌月の1日に有効になります。具体的な有効日については、MSPにご相談ください。
 
-On the effective day of migration, you will receive an email notification.
+移行の有効日に、電子メール通知が届きます。
 
-## Check your future bills
+## 今後の請求書を確認する {#check-your-future-bills}
 
-Once you successfully become an MSP customer, you will pay invoices through your MSP. Ask your MSP where you can check your bills and invoices.
+MSPの顧客になると、請求書の支払いはMSPを通じて行われます。請求書や領収書の確認場所については、MSPにお問い合わせください。
 
-PingCAP does not send any bills and invoices to MSP customers.
+PingCAP は MSP 顧客に請求書や領収書を送信しません。
 
-## Check your history bills
+## 過去の請求書を確認する {#check-your-history-bills}
 
-If you have migrated from a direct TiDB Cloud account to an MSP customer account, you can view your history bills prior to the migration by visiting **Billing** > **Bills** > **History** in the TiDB Cloud console.
+直接のTiDB Cloudアカウントから MSP 顧客アカウントに移行した場合は、 TiDB Cloudコンソールの**[請求]** &gt; **[請求書]** &gt; **[履歴]**にアクセスして、移行前の履歴請求書を表示できます。

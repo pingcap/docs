@@ -1,15 +1,13 @@
 ---
 title: SHOW MASTER STATUS
-summary: An overview of the usage of SHOW MASTER STATUS for the TiDB database.
+summary: TiDB データベースの SHOW MASTER STATUS の使用法の概要。
 ---
 
-# SHOW MASTER STATUS
+# マスターステータスを表示 {#show-master-status}
 
-The `SHOW MASTER STATUS` statement displays the latest TSO in the cluster.
+`SHOW MASTER STATUS`ステートメントは、クラスター内の最新の TSO を表示します。
 
-## Examples
-
-{{< copyable "sql" >}}
+## 例 {#examples}
 
 ```sql
 SHOW MASTER STATUS;
@@ -24,8 +22,8 @@ SHOW MASTER STATUS;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-The output of `SHOW MASTER STATUS` is designed to match MySQL. However, the execution results are different in that the MySQL result is the binlog location information and the TiDB result is the latest TSO information.
+`SHOW MASTER STATUS`の出力はMySQLと一致するように設計されています。ただし、MySQLの結果はbinlogの位置情報であり、TiDBの結果は最新のTSO情報であるという点で実行結果が異なります。
 
-The `SHOW BINARY LOG STATUS` statement was added in TiDB as an alias for `SHOW MASTER STATUS`, which has been deprecated in MySQL 8.2.0 and newer versions.
+`SHOW BINARY LOG STATUS`ステートメントは、MySQL 8.2.0 以降のバージョンでは非推奨となっている`SHOW MASTER STATUS`エイリアスとして TiDB に追加されました。

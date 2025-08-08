@@ -1,30 +1,30 @@
 ---
 title: Third-Party Metrics Integrations
-summary: Learn how to use third-party metrics integrations.
+summary: サードパーティのメトリクス統合の使用方法を学習します。
 ---
 
-# Third-Party Metrics Integrations
+# サードパーティのメトリクス統合 {#third-party-metrics-integrations}
 
-You can integrate TiDB Cloud with the following third-party metrics services to receive TiDB Cloud alerts and view the performance metrics of your TiDB cluster in these services:
+TiDB Cloud を次のサードパーティ メトリック サービスと統合して、 TiDB Cloudアラートを受信し、これらのサービスで TiDB クラスターのパフォーマンス メトリックを表示できます。
 
-- [Datadog integration (Preview)](#datadog-integration-preview)
-- [Prometheus and Grafana integration (Beta)](#prometheus-and-grafana-integration-beta)
-- [New Relic integration (Preview)](#new-relic-integration-preview)
+-   [Datadog 統合（プレビュー）](#datadog-integration-preview)
+-   [Prometheus と Grafana の統合 (ベータ版)](#prometheus-and-grafana-integration-beta)
+-   [New Relic 統合（プレビュー）](#new-relic-integration-preview)
 
-## Datadog integration (Preview)
+## Datadog 統合（プレビュー） {#datadog-integration-preview}
 
-With the Datadog integration, you can configure TiDB Cloud to send metric data about your TiDB clusters to [Datadog](https://www.datadoghq.com/) and view these metrics in your Datadog dashboards.
+Datadog 統合を使用すると、 TiDB Cloudを構成して、TiDB クラスターに関するメトリック データを[データドッグ](https://www.datadoghq.com/)に送信し、これらのメトリックを Datadog ダッシュボードで表示できます。
 
-For the detailed integration steps and a list of metrics that Datadog tracks, refer to [Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration.md).
+詳細な統合手順と Datadog が追跡するメトリクスのリストについては、 [TiDB CloudとDatadogの統合](/tidb-cloud/monitor-datadog-integration.md)を参照してください。
 
-## Prometheus and Grafana integration (Beta)
+## Prometheus と Grafana の統合 (ベータ版) {#prometheus-and-grafana-integration-beta}
 
-With the Prometheus and Grafana integration, you can get a `scrape_config` file for Prometheus from TiDB Cloud and use the content from the file to configure Prometheus. You can view these metrics in your Grafana dashboards.
+PrometheusとGrafanaの統合により、 TiDB CloudからPrometheus用の`scrape_config`ファイルを取得し、そのファイルの内容を使用してPrometheusを設定できます。これらのメトリクスはGrafanaダッシュボードで確認できます。
 
-For the detailed integration steps and a list of metrics that Prometheus tracks, see [Integrate TiDB Cloud with Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md).
+詳細な統合手順と Prometheus が追跡するメトリックのリストについては、 [TiDB Cloud をPrometheus および Grafana と統合する](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)参照してください。
 
-## New Relic integration (Preview)
+## New Relic 統合（プレビュー） {#new-relic-integration-preview}
 
-With the New Relic integration, you can configure TiDB Cloud to send metric data about your TiDB clusters to [New Relic](https://newrelic.com/) and view these metrics in your New Relic dashboards.
+New Relic 統合を使用すると、 TiDB Cloudを構成して、TiDB クラスターに関するメトリック データを[ニューレリック](https://newrelic.com/)に送信し、これらのメトリックを New Relic ダッシュボードで表示できます。
 
-For the detailed integration steps and a list of metrics that New Relic tracks, see [Integrate TiDB Cloud with New Relic](/tidb-cloud/monitor-new-relic-integration.md).
+詳細な統合手順と New Relic が追跡するメトリックのリストについては、 [TiDB CloudとNew Relicの統合](/tidb-cloud/monitor-new-relic-integration.md)参照してください。

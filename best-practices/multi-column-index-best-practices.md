@@ -1,26 +1,26 @@
 ---
 title: Best Practices for Optimizing Multi-Column Indexes
-summary: Learn how to use multi-column indexes effectively in TiDB and apply advanced optimization techniques.
+summary: TiDB で複数列のインデックスを効果的に使用し、高度な最適化手法を適用する方法を学習します。
 ---
 
-# Best Practices for Optimizing Multi-Column Indexes
+# 複数列インデックスの最適化のベストプラクティス {#best-practices-for-optimizing-multi-column-indexes}
 
-In today's data-driven world, efficiently handling complex queries on large datasets is critical to keeping applications responsive and performant. For TiDB, a distributed SQL database designed to manage high-scale and high-demand environments, optimizing data access paths is essential to delivering smooth and efficient queries.
+今日のデータドリブンの世界では、大規模データセットに対する複雑なクエリを効率的に処理することが、アプリケーションの応答性とパフォーマンスを維持するために不可欠です。大規模かつ高負荷の環境を管理するために設計された分散SQLデータベースであるTiDBでは、データアクセスパスの最適化がスムーズで効率的なクエリの実行に不可欠です。
 
-Indexes are a powerful tool for improving query performance by avoiding the need to scan all rows in a table. TiDB's query optimizer leverages multi-column indexes to intelligently filter data, handling complex query conditions that traditional databases such as MySQL cannot process as effectively.
+インデックスは、テーブル内のすべての行をスキャンする必要性を回避し、クエリパフォーマンスを向上させる強力なツールです。TiDBのクエリオプティマイザーは、複数列のインデックスを活用してデータをインテリジェントにフィルタリングし、MySQLなどの従来のデータベースでは効率的に処理できない複雑なクエリ条件を処理します。
 
-This document walks you through how multi-column indexes function, why they are crucial, and how TiDB's optimization transforms intricate query conditions into efficient access paths. After optimization, you can achieve faster responses, minimized table scans, and streamlined performance, even at massive scale.
+このドキュメントでは、マルチカラムインデックスの仕組み、その重要性、そしてTiDBの最適化によって複雑なクエリ条件が効率的なアクセスパスに変換される仕組みについて解説します。最適化を行うことで、大規模な環境でもレスポンスの高速化、テーブルスキャンの最小化、そしてパフォーマンスの合理化を実現できます。
 
-Without these optimizations, query performance in large TiDB databases can degrade quickly. Full table scans and inadequate filtering can turn milliseconds into minutes. Additionally, excessive memory use can lead to out-of-memory (OOM) errors, especially in constrained environments. TiDB's targeted approach ensures only relevant data is accessed. This keeps latency low and memory usage efficient, even for the most complex queries.
+これらの最適化を行わないと、大規模なTiDBデータベースにおけるクエリパフォーマンスは急速に低下する可能性があります。テーブル全体のスキャンや不適切なフィルタリングにより、数ミリ秒単位の時間が数分単位にまで悪化する可能性があります。さらに、メモリ使用量の過剰は、特に制約の厳しい環境ではメモリ不足（OOM）エラーにつながる可能性があります。TiDBのターゲット型アプローチは、関連データのみにアクセスすることを保証します。これにより、最も複雑なクエリであっても、レイテンシーを低く抑え、メモリ使用効率を向上できます。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- The multi-column index feature is available in TiDB v8.3 and later versions.
-- Before using this feature, you must set the value of the [optimizer fix control **54337**](/optimizer-fix-controls.md#54337-new-in-v830) to `ON`.
+-   マルチ列インデックス機能は、TiDB v8.3 以降のバージョンで使用できます。
+-   この機能を使用する前に、 [オプティマイザー修正制御**54337**](/optimizer-fix-controls.md#54337-new-in-v830)の値を`ON`に設定する必要があります。
 
-## Background: multi-column indexes
+## 背景: 複数列インデックス {#background-multi-column-indexes}
 
-This document takes an example of a rental listings table defined as follows. In this example, each listing contains a unique ID, city, number of bedrooms, rent price, and availability date:
+このドキュメントでは、以下のように定義された賃貸物件一覧テーブルを例に挙げます。この例では、各物件には一意のID、都市、寝室数、賃料、空室日が含まれています。
 
 ```sql
 CREATE TABLE listings (
@@ -32,59 +32,57 @@ CREATE TABLE listings (
 );
 ```
 
-Suppose this table has 20 million listings across the United States. If you want to find all listings with a price under $2,000, you can add an index on the price column. This index allows the optimizer to filter out rows, scanning only the range `[-inf, 2000.00)`. This helps reduce the search to about 14 million rows (assuming 70% of rentals are priced above `$2,000`). In the query execution plan, TiDB performs an index range scan on price. This limits the need for a full table scan and improves efficiency.
+このテーブルに全米の物件が2,000万件登録されているとします。価格が2,000ドル未満の物件をすべて検索したい場合は、価格列にインデックスを追加できます。このインデックスにより、オプティマイザは範囲`[-inf, 2000.00)`のみをスキャンして行をフィルタリングできます。これにより、検索行数を約1,400万行に削減できます（物件の70%が価格が`$2,000`を超えると仮定）。クエリ実行プランでは、TiDBは価格に対してインデックス範囲スキャンを実行します。これにより、テーブル全体のスキャンの必要性が制限され、効率が向上します。
 
 ```sql
 -- Query 1: Find listings with price < 2000
 EXPLAIN FORMAT = "brief" SELECT * FROM listings WHERE price < 2000;
 ```
 
-```
-+-----------------------------+---------+----------------------------------------------+---------------------------+
-| id                          | task    | access object                                | operator info             |
-+-----------------------------+---------+----------------------------------------------+---------------------------+
-| IndexLookUp                 | root    |                                              |                           |
-| ├─IndexRangeScan(Build)     | root    | table: listings, index: price_idx(price)     | range: [-inf, 2000.00)    |
-| └─TableRowIDScan(Probe)     | root    | table: listings                              |                           |
-+-----------------------------+---------+----------------------------------------------+---------------------------+
-```
+    +-----------------------------+---------+----------------------------------------------+---------------------------+
+    | id                          | task    | access object                                | operator info             |
+    +-----------------------------+---------+----------------------------------------------+---------------------------+
+    | IndexLookUp                 | root    |                                              |                           |
+    | ├─IndexRangeScan(Build)     | root    | table: listings, index: price_idx(price)     | range: [-inf, 2000.00)    |
+    | └─TableRowIDScan(Probe)     | root    | table: listings                              |                           |
+    +-----------------------------+---------+----------------------------------------------+---------------------------+
 
-While this filter improves performance, it might still return a large number of rows. This is not ideal for a user looking for more specific listings. Adding filters, such as specifying the city, number of bedrooms, and a maximum price, narrows the results significantly. For example, a query to find two-bedroom listings in San Francisco under `$2,000` is more useful, likely returning only a few dozen rows.
+このフィルターはパフォーマンスを向上させますが、それでも大量の行が返される可能性があります。これは、より具体的な物件を探しているユーザーには理想的ではありません。都市、寝室数、最高価格などのフィルターを追加すると、結果が大幅に絞り込まれます。例えば、サンフランシスコで`$2,000`ベッドルーム以下の物件を検索するクエリの方が、おそらく数十行しか返されないため、より有用です。
 
-To optimize this query, you can create a multi-column index on `city`, `bedrooms`, and `price` as follows:
+このクエリを最適化するには、次のように`city` 、 `bedrooms` 、 `price`に複数列のインデックスを作成します。
 
 ```sql
 CREATE INDEX idx_city_bedrooms_price ON listings (city, bedrooms, price);
 ```
 
-Multi-column indexes in SQL are ordered lexicographically. In the case of an index on `(city, bedrooms, price)`, the data is first sorted by `city`, then by `bedrooms` within each city, and finally by `price` within each `(city, bedrooms)` combination. This ordering lets TiDB efficiently access rows based on each condition:
+SQLの複数列インデックスは辞書式順序で並べられます。1 のインデックスの場合、データはまず`(city, bedrooms, price)`でソートされ、次に各都市内で`city`でソートさ`bedrooms` 、最後に各`(city, bedrooms)`組み合わせ内で`price`でソートされます。この順序付けにより、TiDBは各条件に基づいて効率的に行にアクセスできます。
 
-1. Filter by `city`, which is the primary filter.
-2. Optionally filter by `bedrooms` within that city.
-3. Optionally filter by `price` within the city-bedroom grouping.
+1.  プライマリフィルターである`city`でフィルターします。
+2.  オプションで、その都市内で`bedrooms`でフィルタリングします。
+3.  オプションで、都市-ベッドルーム グループ内で`price`でフィルタリングします。
 
-## Sample data
+## サンプルデータ {#sample-data}
 
-The following table shows a sample dataset that illustrates how multi-column indexing refines search results:
+次の表は、複数列のインデックスによって検索結果がどのように絞り込まれるかを示すサンプル データセットを示しています。
 
-| City          | Bedrooms | Price |
-| ------------- | -------- | ----- |
-| San Diego     | 1        | 1000  |
-| San Diego     | 1        | 1500  |
-| San Diego     | 2        | 1000  |
-| San Diego     | 2        | 2500  |
-| San Diego     | 3        | 1000  |
-| San Diego     | 3        | 2500  |
-| San Francisco | 1        | 1000  |
-| San Francisco | 1        | 1500  |
-| San Francisco | 2        | 1000  |
-| San Francisco | 2        | 1500  |
-| San Francisco | 3        | 2500  |
-| San Francisco | 3        | 3000  |
+| 市        | 寝室 | 価格   |
+| -------- | -- | ---- |
+| サンディエゴ   | 1  | 1000 |
+| サンディエゴ   | 1  | 1500 |
+| サンディエゴ   | 2  | 1000 |
+| サンディエゴ   | 2  | 2500 |
+| サンディエゴ   | 3  | 1000 |
+| サンディエゴ   | 3  | 2500 |
+| サンフランシスコ | 1  | 1000 |
+| サンフランシスコ | 1  | 1500 |
+| サンフランシスコ | 2  | 1000 |
+| サンフランシスコ | 2  | 1500 |
+| サンフランシスコ | 3  | 2500 |
+| サンフランシスコ | 3  | 3000 |
 
-## Optimized queries and results
+## 最適化されたクエリと結果 {#optimized-queries-and-results}
 
-Using the multi-column index, TiDB can efficiently narrow the scan range to find listings in San Francisco with two bedrooms and a price under $2,000:
+マルチカラムインデックスを使用すると、TiDB はスキャン範囲を効率的に絞り込み、サンフランシスコでベッドルームが 2 つあり価格が 2,000 ドル未満の物件を検索できます。
 
 ```sql
 -- Query 2: Find two-bedroom listings in San Francisco under $2,000
@@ -93,51 +91,49 @@ EXPLAIN FORMAT = "brief"
     WHERE city = 'San Francisco' AND bedrooms = 2 AND price < 2000;
 ```
 
-```
-+------------------------+------+---------------------------------------------------------------------------------------------+---------------------------------+
-| id                     | task | access object                                                                               | operator info                   |
-+------------------------+------+---------------------------------------------------------------------------------------------+---------------------------------+
-| IndexLookUp            | root |                                                                                             |                                 |
-| ├─IndexRangeScan(Build)| root |table:listings,index:idx_city_bedrooms_price ["San Francisco" 2 -inf,(city, bedrooms, price)]|range:["San Francisco" 2 2000.00)|
-| └─TableRowIDScan(Probe)| root |table:listings                                                                               |                                 |
-+------------------------+------+---------------------------------------------------------------------------------------------+---------------------------------+
-```
+    +------------------------+------+---------------------------------------------------------------------------------------------+---------------------------------+
+    | id                     | task | access object                                                                               | operator info                   |
+    +------------------------+------+---------------------------------------------------------------------------------------------+---------------------------------+
+    | IndexLookUp            | root |                                                                                             |                                 |
+    | ├─IndexRangeScan(Build)| root |table:listings,index:idx_city_bedrooms_price ["San Francisco" 2 -inf,(city, bedrooms, price)]|range:["San Francisco" 2 2000.00)|
+    | └─TableRowIDScan(Probe)| root |table:listings                                                                               |                                 |
+    +------------------------+------+---------------------------------------------------------------------------------------------+---------------------------------+
 
-This query returns the following filtered results from the sample data:
+このクエリは、サンプル データから次のフィルター処理された結果を返します。
 
-| City          | Bedrooms | Price |
-|---------------|----------|-------|
-| San Francisco |    2     | 1000  |
-| San Francisco |    2     | 1500  |
+| 市        | 寝室 | 価格   |
+| -------- | -- | ---- |
+| サンフランシスコ | 2  | 1000 |
+| サンフランシスコ | 2  | 1500 |
 
-By using a multi-column index, TiDB avoids unnecessary row scanning and significantly boosts query performance.
+複数列のインデックスを使用することで、TiDB は不要な行スキャンを回避し、クエリ パフォーマンスを大幅に向上させます。
 
-## Index range derivation
+## インデックス範囲の導出 {#index-range-derivation}
 
-The TiDB optimizer includes a powerful range derivation component. It is designed to take a query's conditions and relevant index columns and generate efficient index ranges for table access. This derived range then feeds into TiDB's table access component, which determines the most resource-efficient way to access the table.
+TiDBオプティマイザには、強力な範囲導出コンポーネントが含まれています。これは、クエリの条件と関連するインデックス列を取得し、テーブルアクセスのための効率的なインデックス範囲を生成するように設計されています。この導出された範囲は、TiDBのテーブルアクセスコンポーネントに送られ、最もリソース効率の高いテーブルアクセス方法を決定します。
 
-For each table in a query, the table access component evaluates all applicable indexes to identify the optimal access method—whether through a full table scan or an index scan. It calculates the range for each relevant index, assesses the access cost, and selects the path with the lowest cost. This process combines range derivation with a cost assessment subsystem to find the most efficient way to retrieve data, balancing performance and resource usage.
+クエリ内の各テーブルについて、テーブルアクセスコンポーネントは適用可能なすべてのインデックスを評価し、最適なアクセス方法（フルテーブルスキャンまたはインデックススキャン）を特定します。各関連インデックスの範囲を計算し、アクセスコストを評価し、コストが最も低いパスを選択します。このプロセスでは、範囲の導出とコスト評価サブシステムを組み合わせることで、パフォーマンスとリソース使用量のバランスを取りながら、最も効率的なデータ取得方法を見つけ出します。
 
-The diagram below illustrates how the range derivation and cost assessment work together within TiDB's table access logic to achieve optimal data retrieval.
+以下の図は、TiDB のテーブル アクセス ロジック内で範囲の導出とコスト評価がどのように連携して、最適なデータ取得を実現するかを示しています。
 
 ![Table Access Path Selection](/media/best-practices/multi-column-index-table-access-path-selection.png)
 
-Multi-column filters are often more complex than the basic examples discussed earlier. They might include **AND** conditions, **OR** conditions, or a combination of both. TiDB's range derivation subsystem is designed to handle these cases efficiently, generating the most selective (and therefore, most effective) index ranges.
+複数列のフィルタは、前述の基本的な例よりも複雑になることがよくあります。AND**条件**、 **OR**条件、あるいはその両方の組み合わせが含まれる場合があります。TiDBの範囲導出サブシステムは、これらのケースを効率的に処理し、最も選択性の高い（したがって最も効果的な）インデックス範囲を生成するように設計されています。
 
-In general, the subsystem applies a **UNION** operation for ranges generated from **OR** conditions and an **INTERSECT** operation for ranges derived from **AND** conditions. This approach ensures that TiDB can filter data as precisely as possible, even with complex filtering logic.
+通常、サブシステムは**OR**条件から生成された範囲には**UNION**演算を適用し、 **AND**条件から生成された範囲には**INTERSECT**演算を適用します。このアプローチにより、TiDBは複雑なフィルタリングロジックであっても、可能な限り正確にデータをフィルタリングできます。
 
-## Disjunctive conditions (`OR` conditions) in multi-column indexes
+## 複数列インデックスにおける選言条件（ <code>OR</code>条件） {#disjunctive-conditions-code-or-code-conditions-in-multi-column-indexes}
 
-When there are `OR` conditions in a query (known as "disjunctive predicates"), the optimizer handles each condition separately, creating a range for each part of the `OR` condition. If any of these ranges overlap, the optimizer merges them into one continuous range. If they do not overlap, they remain as separate ranges, both of which can still be used for an index scan.
+クエリに`OR`条件（「分離述語」と呼ばれる）がある場合、オプティマイザは各条件を個別に処理し、 `OR`条件の各部分について範囲を作成します。これらの範囲が重複している場合、オプティマイザはそれらを1つの連続した範囲に結合します。重複していない場合は、それぞれ別々の範囲として保持され、どちらもインデックススキャンに使用できます。
 
-### Example 1: overlapping ranges
+### 例1: 重複する範囲 {#example-1-overlapping-ranges}
 
-Consider a query that looks for listings in New York with two bedrooms, where the price falls into one of two overlapping ranges:
+ニューヨークで、価格が 2 つの重複する範囲のいずれかに該当する 2 ベッドルームの物件を検索するクエリを考えてみましょう。
 
-- Price between `$1,000` and `$2,000`
-- Price between `$1,500` and `$2,500`
+-   価格は`$1,000` ～ `$2,000`
+-   価格は`$1,500` ～ `$2,500`
 
-In this case, the two ranges overlap, so the optimizer combines them into a single range from `$1,000` to `$2,500`. Here is the query and its execution plan:
+この場合、2つの範囲が重複しているため、オプティマイザーはそれらを`$1,000`から`$2,500`の単一の範囲に結合します。クエリとその実行プランは次のとおりです。
 
 ```sql
 -- Query 3: Overlapping price ranges
@@ -147,24 +143,22 @@ EXPLAIN FORMAT = "brief"
        OR (city = 'New York' AND bedrooms = 2 AND price >= 1500 AND price < 2500);
 ```
 
-```
-+-------------------------+------+----------------------------------------------------------------------+--------------------------------------------------+
-| id                      | task | access object                                                        | operator info                                    |
-+-------------------------+------+----------------------------------------------------------------------+--------------------------------------------------+
-| IndexLookUp             | root |                                                                      |                                                  |
-| ├─IndexRangeScan(Build) | root | table:listings,index:idx_city_bedrooms_price(city, bedrooms, price)  | range:["New York" 2 1000.00,"New York" 2 2500.00)|
-| └─TableRowIDScan(Probe) | root | table:listings                                                       |                                                  |
-+-------------------------+------+----------------------------------------------------------------------+--------------------------------------------------+
-```
+    +-------------------------+------+----------------------------------------------------------------------+--------------------------------------------------+
+    | id                      | task | access object                                                        | operator info                                    |
+    +-------------------------+------+----------------------------------------------------------------------+--------------------------------------------------+
+    | IndexLookUp             | root |                                                                      |                                                  |
+    | ├─IndexRangeScan(Build) | root | table:listings,index:idx_city_bedrooms_price(city, bedrooms, price)  | range:["New York" 2 1000.00,"New York" 2 2500.00)|
+    | └─TableRowIDScan(Probe) | root | table:listings                                                       |                                                  |
+    +-------------------------+------+----------------------------------------------------------------------+--------------------------------------------------+
 
-### Example 2: non-overlapping ranges
+### 例2: 重複しない範囲 {#example-2-non-overlapping-ranges}
 
-In a different scenario, imagine a query that looks for affordable single-bedroom listings in either San Francisco or San Diego. Here, the `OR` condition specifies two distinct ranges for different cities:
+別のシナリオとして、サンフランシスコまたはサンディエゴで手頃な価格のシングルベッドルームの物件を検索するクエリを想像してみてください。ここでは、条件`OR`異なる都市の2つの異なる範囲を指定しています。
 
-- Listings in San Francisco, 1 bedroom, priced between `$1,500` and `$2,500`
-- Listings in San Diego, 1 bedroom, priced between `$1,000` and `$1,500`
+-   サンフランシスコの物件、1ベッドルーム、価格`$1,500` ～ `$2,500`
+-   サンディエゴの物件、1ベッドルーム、価格`$1,000` ～ `$1,500`
 
-Because the index ranges do not overlap, they remain separate in the execution plan, with each city having its own index range:
+インデックス範囲は重複しないため、実行プランでは個別のままとなり、各都市には独自のインデックス範囲が設定されます。
 
 ```sql
 -- Query 4: Non-overlapping ranges for different cities
@@ -176,25 +170,23 @@ EXPLAIN FORMAT = "brief"
      OR (city = 'San Diego' AND bedrooms = 1 AND price >= 1000 AND price < 1500);
 ```
 
-```
-+-------------------------+------+--------------------------------------------------------------------+------------------------------------------------------------+
-| id                      | task | access object                                                      | operator info                                              |
-+-------------------------+------+--------------------------------------------------------------------+------------------------------------------------------------+
-| IndexLookUp             | root |                                                                    |                                                            |
-| ├─IndexRangeScan(Build) | root | table:listings,index:idx_city_bedrooms_price(city, bedrooms, price)| range:["San Francisco" 1 1500.00,"San Francisco" 1 2500.00)|
-| └─TableRowIDScan(Probe) | root | table:listings                                                     |       ["San Diego" 1 1000.00,"San Diego" 1 1500.00)        |
-+-------------------------+------+--------------------------------------------------------------------+------------------------------------------------------------+
-```
+    +-------------------------+------+--------------------------------------------------------------------+------------------------------------------------------------+
+    | id                      | task | access object                                                      | operator info                                              |
+    +-------------------------+------+--------------------------------------------------------------------+------------------------------------------------------------+
+    | IndexLookUp             | root |                                                                    |                                                            |
+    | ├─IndexRangeScan(Build) | root | table:listings,index:idx_city_bedrooms_price(city, bedrooms, price)| range:["San Francisco" 1 1500.00,"San Francisco" 1 2500.00)|
+    | └─TableRowIDScan(Probe) | root | table:listings                                                     |       ["San Diego" 1 1000.00,"San Diego" 1 1500.00)        |
+    +-------------------------+------+--------------------------------------------------------------------+------------------------------------------------------------+
 
-By creating either merged or distinct ranges based on overlap, the optimizer can efficiently use indexes for `OR` conditions, avoiding unnecessary scans and improving query performance.
+重複に基づいて結合された範囲または個別の範囲を作成することにより、オプティマイザーは`OR`条件に対してインデックスを効率的に使用し、不要なスキャンを回避してクエリのパフォーマンスを向上させることができます。
 
-## Conjunctive conditions (`AND` conditions) in multi-column indexes
+## 複数列インデックスの結合条件（ <code>AND</code>条件） {#conjunctive-conditions-code-and-code-conditions-in-multi-column-indexes}
 
-For queries with **AND** conditions (also known as conjunctive conditions), the TiDB optimizer creates a range for each condition. It then finds the overlap (intersection) of these ranges to get a precise result for index access. If each condition has only one range, this is straightforward, but it becomes more complex if any condition contains multiple ranges. In such cases, TiDB combines these ranges to produce the most selective, efficient result.
+**AND**条件（結合条件とも呼ばれます）を含むクエリの場合、TiDBオプティマイザは各条件に対して範囲を作成します。そして、これらの範囲の重なり（共通部分）を検出し、インデックスアクセスの正確な結果を取得します。各条件に範囲が1つしかない場合は簡単ですが、条件に複数の範囲が含まれる場合は複雑になります。そのような場合、TiDBはこれらの範囲を結合し、最も選択的で効率的な結果を生成します。
 
-### Example 1: table setup
+### 例1：テーブルのセットアップ {#example-1-table-setup}
 
-Consider a table `t1` that is defined as follows:
+次のように定義された表`t1`を考えます。
 
 ```sql
 CREATE TABLE t1 (
@@ -205,39 +197,39 @@ CREATE TABLE t1 (
 );
 ```
 
-Suppose you have a query with the following conditions:
+次の条件のクエリがあるとします。
 
 ```sql
 (a1, b1) > (1, 10) AND (a1, b1) < (10, 20)
 ```
 
-This query involves comparing multiple columns, and requires the TiDB optimizer to process it in the following two steps:
+このクエリでは複数の列を比較するため、TiDB オプティマイザーは次の 2 つの手順で処理する必要があります。
 
-1. Translate the expressions.
+1.  表現を翻訳してください。
 
-    The TiDB optimizer breaks down these complex conditions into simpler parts.
+    TiDB オプティマイザーは、これらの複雑な条件をより単純な部分に分解します。
 
-    - `(a1, b1) > (1, 10)` translates to `(a1 > 1) OR (a1 = 1 AND b1 > 10)`, meaning it includes all cases where `a1` is greater than `1` or where `a1` is exactly `1` and `b1` is greater than `10`.
-    - `(a1, b1) < (10, 20)` translates to `(a1 < 10) OR (a1 = 10 AND b1 < 20)`, covering cases where `a1` is less than `10` or where `a1` is exactly `10` and `b1` is less than `20`.
+    -   `(a1, b1) > (1, 10)` `(a1 > 1) OR (a1 = 1 AND b1 > 10)`に変換されます。つまり、 `a1` `1`より大きい場合、または`a1`がちょうど`1`で`b1` `10`より大きい場合がすべて含まれます。
+    -   `(a1, b1) < (10, 20)` `(a1 < 10) OR (a1 = 10 AND b1 < 20)`に変換され、 `a1` `10`より小さい場合や、 `a1`がちょうど`10`で`b1` `20`より小さい場合をカバーします。
 
-    These expressions are then combined using `AND`:
+    これらの式は`AND`使用して結合されます。
 
     ```sql
     ((a1 > 1) OR (a1 = 1 AND b1 > 10)) AND ((a1 < 10) OR (a1 = 10 AND b1 < 20))
     ```
 
-2. Derive and combine ranges.
+2.  範囲を導出して結合します。
 
-    After breaking down the conditions, the TiDB optimizer calculates ranges for each part and combines them. For this example, it derives:
+    TiDBオプティマイザは条件を分解した後、各部分の範囲を計算し、それらを結合します。この例では、次のように導出されます。
 
-    - For `(a1, b1) > (1, 10)`: it creates ranges such as `(1, +inf]` for cases where `a1 > 1` and `(1, 10, 1, +inf]` for cases where `a1 = 1` and `b1 > 10`.
-    - For `(a1, b1) < (10, 20)`: it creates ranges `[-inf, 10)` for cases where `a1 < 10` and `[10, -inf, 10, 20)` for cases where `a1 = 10` and `b1 < 20`.
+    -   `(a1, b1) > (1, 10)`場合: `a1 > 1`の場合は`(1, +inf]` 、 `a1 = 1`および`b1 > 10`の場合は`(1, 10, 1, +inf]`などの範囲を作成します。
+    -   `(a1, b1) < (10, 20)`場合: `a1 < 10`の場合は範囲`[-inf, 10)`作成し、 `a1 = 10`および`b1 < 20`の場合は範囲`[10, -inf, 10, 20)`作成します。
 
-    The final result combines these to get a refined range: `(1, 10, 1, +inf] UNION (1, 10) UNION [10, -inf, 10, 20)`.
+    最終結果では、これらを組み合わせて、洗練された範囲`(1, 10, 1, +inf] UNION (1, 10) UNION [10, -inf, 10, 20)`得られます。
 
-### Example 2: query plan
+### 例2: クエリプラン {#example-2-query-plan}
 
-The following query plan shows the derived ranges:
+次のクエリ プランは、派生した範囲を示しています。
 
 ```sql
 -- Query 5: Conjunctive conditions on (a1, b1)
@@ -246,22 +238,20 @@ EXPLAIN FORMAT = "brief"
     WHERE (a1, b1) > (1, 10) AND (a1, b1) < (10, 20);
 ```
 
-```
-+-------------------------+------+----------------------------+-------------------------------------------+
-| id                      | task | access object              | operator info                             |
-+-------------------------+------+----------------------------+-------------------------------------------+
-| IndexLookUp             | root |                            |                                           |
-| ├─IndexRangeScan(Build) | root | table:t1,index:iab(a1, b1) | range:(1 10,1 +inf],(1,10)[10 -inf,10 20) |
-| └─TableRowIDScan(Probe) | root | table:t1                   |                                           |
-+-------------------------+------+----------------------------+-------------------------------------------+
-```
+    +-------------------------+------+----------------------------+-------------------------------------------+
+    | id                      | task | access object              | operator info                             |
+    +-------------------------+------+----------------------------+-------------------------------------------+
+    | IndexLookUp             | root |                            |                                           |
+    | ├─IndexRangeScan(Build) | root | table:t1,index:iab(a1, b1) | range:(1 10,1 +inf],(1,10)[10 -inf,10 20) |
+    | └─TableRowIDScan(Probe) | root | table:t1                   |                                           |
+    +-------------------------+------+----------------------------+-------------------------------------------+
 
-In this example, the table has about 500 million rows. However, this optimization allows TiDB to narrow down the access to only around 4,000 rows, just 0.0008% of the total data. This refinement drastically reduces query latency to a few milliseconds, as opposed to over two minutes without optimization.
+この例では、テーブルには約5億行あります。しかし、この最適化により、TiDBはアクセスを約4,000行、つまり全データのわずか0.0008%に絞り込むことができます。この改良により、クエリのレイテンシーは、最適化なしの場合の2分以上から数ミリ秒まで大幅に短縮されます。
 
-Unlike MySQL, which requires a full table scan for such conditions, the TiDB optimizer can handle complex row expressions efficiently by leveraging these derived ranges.
+このような条件で完全なテーブルスキャンを必要とする MySQL とは異なり、TiDB オプティマイザーはこれらの派生範囲を活用して複雑な行式を効率的に処理できます。
 
-## Conclusion
+## 結論 {#conclusion}
 
-The TiDB optimizer uses multi-column indexes and advanced range derivation to significantly lower data access costs for complex SQL queries. By effectively managing both conjunctive (`AND`) and disjunctive (`OR`) conditions, TiDB converts row-based expressions into optimal access paths, reducing query times and enhancing performance. Unlike MySQL, TiDB supports union and intersection operations on multi-column indexes, allowing efficient processing of intricate filters. In practical use, this optimization enables TiDB to complete queries in just a few milliseconds—compared to over two minutes without it, demonstrating a substantial reduction in latency.
+TiDBオプティマイザは、マルチカラムインデックスと高度な範囲導出を使用することで、複雑なSQLクエリのデータアクセスコストを大幅に削減します。結合条件（ `AND` ）と選言条件（ `OR` ）の両方を効果的に管理することで、TiDBは行ベースの式を最適なアクセスパスに変換し、クエリ時間を短縮し、パフォーマンスを向上させます。MySQLとは異なり、TiDBはマルチカラムインデックスの和集合演算と積集合演算をサポートしているため、複雑なフィルターを効率的に処理できます。実用上、この最適化により、TiDBはわずか数ミリ秒でクエリを完了できます。最適化を行わない場合は2分以上かかるため、レイテンシーが大幅に削減されます。
 
-Check out the [comparison white paper](https://www.pingcap.com/ebook-whitepaper/tidb-vs-mysql-product-comparison-guide/) to discover even more differences between MySQL and TiDB's architecture, and why this matters for scalability, reliability, and hybrid transactional and analytical workloads.
+MySQL と TiDB のアーキテクチャの違いをさらに詳しく知るには、 [比較ホワイトペーパー](https://www.pingcap.com/ebook-whitepaper/tidb-vs-mysql-product-comparison-guide/)参照してください。また、これがスケーラビリティ、信頼性、ハイブリッド トランザクションおよび分析ワークロードにとってなぜ重要なのかについても説明します。

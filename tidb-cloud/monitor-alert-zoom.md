@@ -1,75 +1,83 @@
 ---
 title: Subscribe via Zoom
-summary: Learn how to monitor your TiDB cluster by getting alert notifications via Zoom.
+summary: Zoom 経由でアラート通知を受信して TiDB クラスターを監視する方法を学びます。
 ---
 
-# Subscribe via Zoom
+# Zoomで登録する {#subscribe-via-zoom}
 
-TiDB Cloud provides you with an easy way to subscribe to alert notifications via [Zoom](https://www.zoom.com/), [Slack](/tidb-cloud/monitor-alert-slack.md), and [email](/tidb-cloud/monitor-alert-email.md). This document describes how to subscribe to alert notifications via Zoom.
+TiDB Cloud、 [ズーム](https://www.zoom.com/) [メール](/tidb-cloud/monitor-alert-email.md)方法でアラート通知を簡単に購読できます。このドキュメントでは[スラック](/tidb-cloud/monitor-alert-slack.md) Zoom経由でアラート通知を購読する方法について説明します。
 
-> **Note:**
+> **注記：**
 >
-> Currently, alert subscription is only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+> 現在、アラートサブスクリプションは[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対してのみ利用可能です。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- The subscribing via Zoom feature is only available for organizations that subscribe to the **Enterprise** or **Premium** support plan.
+-   Zoom 経由のサブスクリプション機能は、**エンタープライズ**または**プレミアム**サポート プランに加入している組織でのみご利用いただけます。
 
-- To subscribe to alert notifications of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Project Owner` access to the target project in TiDB Cloud.
+-   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権またはTiDB Cloudの対象プロジェクトへの`Project Owner`アクセス権が必要です。
 
-- To add and configure the Incoming Webhook Chatbot in Zoom, you need to have admin permissions on your Zoom account.
+-   Zoom で Incoming Webhook チャットボットを追加して構成するには、Zoom アカウントの管理者権限が必要です。
 
-## Subscribe to alert notifications
+## アラート通知を購読する {#subscribe-to-alert-notifications}
 
-### Step 1. Add the Zoom Incoming Webhook app
+### ステップ1. Zoom Incoming Webhookアプリを追加する {#step-1-add-the-zoom-incoming-webhook-app}
 
-1. Sign in to the [Zoom App Marketplace](https://marketplace.zoom.us/) as the account administrator.
-2. Go to the [Incoming Webhook App](https://marketplace.zoom.us/apps/eH_dLuquRd-VYcOsNGy-hQ) page in the Zoom App Marketplace, and then click **Add** to add this app. If the app is not pre-approved, contact your Zoom admin to approve this app for your account. For more information, see [Approving apps and managing app requests](https://support.zoom.us/hc/en-us/articles/360027829671). 
-3. Confirm the permissions the app requires, then click **Authorize** to add the Incoming Webhook app.
+1.  アカウント管理者として[Zoomアプリマーケットプレイス](https://marketplace.zoom.us/)にサインインします。
+2.  Zoomアプリマーケットプレイスの[受信Webhookアプリ](https://marketplace.zoom.us/apps/eH_dLuquRd-VYcOsNGy-hQ)ページに移動し、 **「追加」**をクリックしてこのアプリを追加してください。アプリが事前承認されていない場合は、Zoom管理者に連絡して、アカウントへのアプリの承認を依頼してください。詳しくは[アプリの承認とアプリリクエストの管理](https://support.zoom.us/hc/en-us/articles/360027829671)ご覧ください。
+3.  アプリに必要な権限を確認し、 **「承認」**をクリックして Incoming Webhook アプリを追加します。
 
-### Step 2. Generate a Zoom webhook URL
+### ステップ2. ZoomウェブフックURLを生成する {#step-2-generate-a-zoom-webhook-url}
 
-1. Sign in to the Zoom desktop client.
-2. Click the **Team Chat** tab.
-3. Under **Apps**, find and select **Incoming Webhook**, or select a chat channel from above that you would like to receive messages in.
-4. Enter the following command to make a new connection. You need to replace `${connectionName}` with your desired connection name, for example, `tidbcloud-alerts`:
+1.  Zoom デスクトップ クライアントにサインインします。
+
+2.  **チームチャット**タブをクリックします。
+
+3.  **[アプリ]**の下で、 **[受信 Webhook]**を見つけて選択するか、メッセージを受信したいチャット チャネルを上から選択します。
+
+4.  新しい接続を作成するには、以下のコマンドを入力します。1 `${connectionName}`希望の接続名（例： `tidbcloud-alerts` ）に置き換えてください。
 
     ```shell
     /inc connect ${connectionName}
     ```
 
-5. The command will return the following details:
+5.  このコマンドは次の詳細を返します。
 
-   - **Endpoint**. It will provide a webhook URL in the format: `https://integrations.zoom.us/chat/webhooks/incomingwebhook/XXXXXXXXXXXXXXXXXXXXXXXX`.
-   - **Verification Token**
+    -   **エンドポイント**。2 `https://integrations.zoom.us/chat/webhooks/incomingwebhook/XXXXXXXXXXXXXXXXXXXXXXXX`形式でWebhook URLが提供されます。
+    -   **検証トークン**
 
-### Step 3. Subscribe from TiDB Cloud
+### ステップ3. TiDB Cloudからサブスクライブする {#step-3-subscribe-from-tidb-cloud}
 
-> **Tip:**
+> **ヒント：**
 >
-> The alert subscription is for all alerts in the current project. If you have multiple clusters in the project, you just need to subscribe once.
+> アラートサブスクリプションは、現在のプロジェクト内のすべてのアラートに適用されます。プロジェクト内に複数のクラスターがある場合は、一度だけサブスクリプションすれば済みます。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
-3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
-4. Select **Zoom** from the **Subscriber Type** drop-down list.
-5. Enter a name in the **Name** field, your Zoom webhook URL in the **URL** field, and the verification token in the **Token** field.
-6. Click **Test Connection**.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用してターゲット プロジェクトに切り替えます。
 
-    - If the test succeeds, the **Save** button is displayed.
-    - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the connection.
+2.  左側のナビゲーション ペインで、 **[プロジェクト設定]** &gt; **[アラート サブスクリプション]**をクリックします。
 
-7. Click **Save** to complete the subscription.
+3.  **アラート サブスクリプション**ページで、右上隅の**[サブスクライバーの追加]**をクリックします。
 
-Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the cluster. You will be directed to the **Alert Subscriber** page.
+4.  **「サブスクライバータイプ」**ドロップダウンリストから**「Zoom」**を選択します。
 
-If an alert condition remains unchanged, the alert sends notifications every three hours.
+5.  **「名前」**フィールドに名前、 **「URL」**フィールドに Zoom Webhook URL、 **「トークン」**フィールドに検証トークンを入力します。
 
-## Unsubscribe from alert notifications
+6.  **[接続テスト]**をクリックします。
 
-If you no longer want to receive alert notifications of clusters in your project, take the following steps:
+    -   テストが成功すると、 **[保存]**ボタンが表示されます。
+    -   テストに失敗した場合は、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、接続を再試行してください。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
-3. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
-4. Click **Unsubscribe** to confirm the unsubscription.
+7.  **「保存」**をクリックしてサブスクリプションを完了します。
+
+または、クラスターの**アラート**ページの右上隅にある**「サブスクライブ」**をクリックすることもできます。**アラートサブスクライバー**ページに移動します。
+
+アラート条件が変更されない場合、アラートは 3 時間ごとに通知を送信します。
+
+## アラート通知の購読を解除する {#unsubscribe-from-alert-notifications}
+
+プロジェクト内のクラスターのアラート通知を受信したくない場合は、次の手順を実行します。
+
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用してターゲット プロジェクトに切り替えます。
+2.  左側のナビゲーション ペインで、 **[プロジェクト設定]** &gt; **[アラート サブスクリプション]**をクリックします。
+3.  **[アラート サブスクリプション]**ページで、削除する対象のサブスクライバーの行を見つけて、 **[...]** &gt; **[サブスクリプション解除]**をクリックします。
+4.  登録解除を確認するには、 **「登録解除」を**クリックします。

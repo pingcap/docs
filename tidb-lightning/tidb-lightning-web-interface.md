@@ -1,19 +1,19 @@
 ---
 title: TiDB Lightning Web Interface
-summary: Control TiDB Lightning through the web interface.
+summary: Web インターフェースを通じてTiDB Lightning を制御します。
 ---
 
-# TiDB Lightning Web Interface
+# TiDB Lightning Webインターフェース {#tidb-lightning-web-interface}
 
-TiDB Lightning provides a webpage for viewing the import progress and performing some simple task management. This is called the *server mode*.
+TiDB Lightningは、インポートの進行状況を確認したり、簡単なタスク管理を実行したりするためのウェブページを提供します。これは*サーバーモード*と呼ばれます。
 
-To enable server mode, either start `tidb-lightning` with the `--server-mode` flag
+サーバーモードを有効にするには、 `tidb-lightning` `--server-mode`フラグで開始するか、
 
 ```sh
 tiup tidb-lightning --server-mode --status-addr :8289
 ```
 
-or set the `lightning.server-mode` setting in the configuration file.
+または、構成ファイルで`lightning.server-mode`設定を設定します。
 
 ```toml
 [lightning]
@@ -21,59 +21,59 @@ server-mode = true
 status-addr = ':8289'
 ```
 
-After TiDB Lightning is launched, visit `http://127.0.0.1:8289` to control the program (the actual URL depends on the `status-addr` setting).
+TiDB Lightningが起動したら、 `http://127.0.0.1:8289`アクセスしてプログラムを制御します (実際の URL は`status-addr`設定によって異なります)。
 
-In server mode, TiDB Lightning does not start running immediately. Rather, users submit (multiple) *tasks* via the web interface to import data.
+サーバーモードでは、 TiDB Lightning はすぐには実行されません。ユーザーはWebインターフェースを介して（複数の）*タスク*を送信し、データをインポートします。
 
-## Front page
+## 表紙 {#front-page}
 
 ![Front page of the web interface](/media/lightning-web-frontpage.png)
 
-Functions of the title bar, from left to right:
+タイトル バーの機能 (左から右へ):
 
-| Icon | Function |
-|:----|:----|
-| "TiDB Lightning" | Click to go back to the front page |
-| ⚠ | Display any error message from *previous* task |
-| ⓘ | List current and queued tasks; a badge may appear here to indicate number of queued tasks |
-| + | Submit a task |
-| ⏸/▶ | Pause/resume current execution |
-| ⟳ | Configure auto-refresh of the web page |
+| アイコン             | 関数                                                        |
+| :--------------- | :-------------------------------------------------------- |
+| 「TiDB Lightning」 | クリックするとトップページに戻ります                                        |
+| ⚠                | *前の*タスクからのエラーメッセージを表示する                                   |
+| ⓘ                | 現在のタスクとキュー内のタスクを一覧表示します。キュー内のタスクの数を示すバッジがここに表示される場合があります。 |
+| <li></li>        | タスクを送信する                                                  |
+| ⏸/▶              | 現在の実行を一時停止/再開する                                           |
+| ⟳                | ウェブページの自動更新を設定する                                          |
 
-Three panels below the title bar show all tables in different states:
+タイトル バーの下の 3 つのパネルには、さまざまな状態にあるすべてのテーブルが表示されます。
 
-* Active: these tables are currently being imported
-* Completed: these tables have been imported successfully or failed
-* Pending: these tables are not yet processed
+-   アクティブ: これらのテーブルは現在インポート中です
+-   完了: これらのテーブルは正常にインポートされたか、失敗しました
+-   保留中: これらのテーブルはまだ処理されていません
 
-Each panel contains cards describing the status of the table.
+各パネルには、テーブルの状態を説明するカードが含まれています。
 
-## Submit task
+## タスクを送信 {#submit-task}
 
-Click the **+** button on the title bar to submit a task.
+タスクを送信するには、タイトルバーの**+**ボタンをクリックします。
 
 ![Submit task dialog](/media/lightning-web-submit.png)
 
-Tasks are TOML files described as [task configurations](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task). One could also open a local TOML file by clicking **UPLOAD**.
+タスクは[タスク構成](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)ように記述されたTOMLファイルです。UPLOAD**を**クリックしてローカルのTOMLファイルを開くこともできます。
 
-Click **SUBMIT** to run the task. If a task is already running, the new task will be queued and executed after the current task succeeds.
+タスクを実行するには、 **「送信」**をクリックします。すでにタスクが実行中の場合は、新しいタスクがキューに追加され、現在のタスクが成功した後に実行されます。
 
-## Table progress
+## 表の進捗状況 {#table-progress}
 
-Click the **>** button of a table card on the front page to view the detailed progress of a table.
+テーブルの詳細な進行状況を表示するには、フロントページのテーブル カードの**&gt;**ボタンをクリックしてください。
 
 ![Table progress](/media/lightning-web-table.png)
 
-The page shows the import progress of every engine and data files associated with the table.
+このページには、テーブルに関連付けられているすべてのエンジンとデータ ファイルのインポートの進行状況が表示されます。
 
-Click **TiDB Lightning** on the title bar to go back to the front page.
+タイトルバーの**TiDB Lightning**をクリックすると、フロント ページに戻ります。
 
-## Task management
+## タスク管理 {#task-management}
 
-Click the **ⓘ** button on the title bar to manage the current and queued tasks.
+現在のタスクとキューに入れられたタスクを管理するには、タイトル バーの**ⓘ**ボタンをクリックします。
 
 ![Task management page](/media/lightning-web-queue.png)
 
-Each task is labeled by the time it was submitted. Clicking the task would show the configuration formatted as JSON.
+各タスクには送信時刻のラベルが付けられています。タスクをクリックすると、JSON形式で構成された設定が表示されます。
 
-Manage tasks by clicking the **⋮** button next to a task. You can stop a task immediately, or reorder queued tasks.
+タスクの横にある**「⋮」**ボタンをクリックしてタスクを管理します。タスクをすぐに停止したり、キュー内のタスクの順序を変更したりできます。

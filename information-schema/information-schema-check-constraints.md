@@ -1,18 +1,18 @@
 ---
 title: CHECK_CONSTRAINTS
-summary: Learn the `CHECK_CONSTRAINTS` INFORMATION_SCHEMA table.
+summary: CHECK_CONSTRAINTS` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# CHECK\_CONSTRAINTS
+# CHECK_CONSTRAINTS {#check-constraints}
 
-The `CHECK_CONSTRAINTS` table provides information about [`CHECK` constraints](/constraints.md#check) on tables.
+`CHECK_CONSTRAINTS`表には、 [`CHECK`制約](/constraints.md#check)表に関する情報が示されています。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC CHECK_CONSTRAINTS;
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 +--------------------+-------------+------+-----+---------+-------+
@@ -26,7 +26,7 @@ The output is as follows:
 4 rows in set (0.00 sec)
 ```
 
-The following example adds a `CHECK` constraint using the `CREATE TABLE` statement:
+次の例では、 `CREATE TABLE`ステートメントを使用して`CHECK`制約を追加します。
 
 ```sql
 SET GLOBAL tidb_enable_check_constraint = ON;
@@ -34,7 +34,7 @@ CREATE TABLE test.t1 (id INT PRIMARY KEY, CHECK (id%2 = 0));
 SELECT * FROM CHECK_CONSTRAINTS\G
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 *************************** 1. row ***************************
@@ -45,9 +45,9 @@ CONSTRAINT_CATALOG: def
 1 row in set (0.00 sec)
 ```
 
-Fields in the `CHECK_CONSTRAINTS` table are described as follows:
+`CHECK_CONSTRAINTS`テーブル内のフィールドは次のように説明されます。
 
-* `CONSTRAINT_CATALOG`: The catalog of the constraint, which is always `def`.
-* `CONSTRAINT_SCHEMA`: The schema of the constraint.
-* `CONSTRAINT_NAME`: The name of the constraint.
-* `CHECK_CLAUSE`: The clause of the check constraint.
+-   `CONSTRAINT_CATALOG` : 制約のカタログ。常に`def`です。
+-   `CONSTRAINT_SCHEMA` : 制約のスキーマ。
+-   `CONSTRAINT_NAME` : 制約の名前。
+-   `CHECK_CLAUSE` : チェック制約の句。

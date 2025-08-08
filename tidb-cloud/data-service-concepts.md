@@ -1,48 +1,48 @@
 ---
 title: Data Service (Beta)
-summary: Learn about Data Service concepts for TiDB Cloud.
+summary: TiDB Cloudのデータ サービスの概念について学習します。
 ---
 
-# Data Service (Beta)
+# データサービス（ベータ版） {#data-service-beta}
 
-TiDB Cloud [Data Service (beta)](https://tidbcloud.com/project/data-service) is a fully managed low-code backend-as-a-service solution that simplifies backend application development, empowering developers to rapidly build highly scalable, secure, data-driven applications.
+TiDB Cloud [データサービス（ベータ版）](https://tidbcloud.com/project/data-service)は、バックエンド アプリケーション開発を簡素化し、開発者が拡張性が高く安全なデータ駆動型アプリケーションを迅速に構築できるようにする、完全に管理されたローコードの BaaS (Backend-as-a-Service) ソリューションです。
 
-Data Service enables you to access TiDB Cloud data via an HTTPS request using a custom API endpoint. This feature uses a serverless architecture to handle computing resources and elastic scaling, so you can focus on the query logic in endpoints without worrying about infrastructure or maintenance costs.
+Data Service を使用すると、カスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスできます。この機能は、サーバーレスアーキテクチャを使用してコンピューティングリソースと柔軟なスケーリングを処理するため、インフラストラクチャやメンテナンスコストを気にすることなく、エンドポイントのクエリロジックに集中できます。
 
-For more information, see [TiDB Cloud Data Service (Beta) Overview](/tidb-cloud/data-service-overview.md).
+詳細については[TiDB Cloudデータ サービス (ベータ版) の概要](/tidb-cloud/data-service-overview.md)参照してください。
 
-## Data App
+## データアプリ {#data-app}
 
-A Data App in [Data Service (beta)](https://tidbcloud.com/project/data-service) is a collection of endpoints that you can use to access data for a specific application. By creating a Data App, you can group your endpoints and configure authorization settings using API keys to restrict access to endpoints. In this way, you can ensure that only authorized users can access and manipulate your data, making your application more secure.
+[データサービス（ベータ版）](https://tidbcloud.com/project/data-service)のデータアプリは、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントのコレクションです。データアプリを作成することで、エンドポイントをグループ化し、APIキーを使用してエンドポイントへのアクセスを制限する認証設定を構成できます。これにより、承認されたユーザーのみがデータにアクセスして操作できるようにし、アプリケーションのセキュリティを強化できます。
 
-For more information, see [Manage a Data App](/tidb-cloud/data-service-manage-data-app.md).
+詳細については[データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)参照してください。
 
-## Data App endpoints
+## データアプリのエンドポイント {#data-app-endpoints}
 
-An endpoint in [Data Service (beta)](https://tidbcloud.com/project/data-service) is a web API that you can customize to execute SQL statements. You can specify parameters for your SQL statements, such as the value used in the `WHERE` clause. When a client calls an endpoint and provides values for the parameters in a request URL, the endpoint executes the corresponding SQL statement with the provided parameters and returns the results as part of the HTTP response.
+[データサービス（ベータ版）](https://tidbcloud.com/project/data-service)のエンドポイントは、SQL 文を実行するためにカスタマイズできる Web API です。SQL 文には、 `WHERE`節で使用される値などのパラメータを指定できます。クライアントがエンドポイントを呼び出し、リクエスト URL でパラメータの値を指定すると、エンドポイントは指定されたパラメータを使用して対応する SQL 文を実行し、結果を HTTP レスポンスの一部として返します。
 
-For more information, see [Manage an Endpoint](/tidb-cloud/data-service-manage-endpoint.md).
+詳細については[エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)参照してください。
 
-## Chat2Query API
+## Chat2Query API {#chat2query-api}
 
-In TiDB Cloud, Chat2Query API is a RESTful interface that enables you to generate and execute SQL statements using AI by providing instructions. Then, the API returns the query results for you.
+TiDB Cloudの Chat2Query API は、AI が指示を与えることで SQL 文を生成・実行できる RESTful インターフェースです。その後、API がクエリ結果を返します。
 
-For more information, see [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+詳細については[Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)参照してください。
 
-## AI integrations
+## AI統合 {#ai-integrations}
 
-Integrating third-party tools with your Data App enhances your applications with advanced natural language processing and artificial intelligence (AI) capabilities provided by third-party tools. This integration enables your applications to perform more complex tasks and deliver intelligent solutions.
+サードパーティ製ツールをデータアプリに統合することで、サードパーティ製ツールが提供する高度な自然言語処理機能と人工知能（AI）機能をアプリケーションに導入し、強化することができます。この統合により、アプリケーションはより複雑なタスクを実行し、インテリジェントなソリューションを提供できるようになります。
 
-Currently, you can integrate third-party tools, such as GPTs and Dify, in the TiDB Cloud console.
+現在、GPT や Dify などのサードパーティ ツールをTiDB Cloudコンソールに統合できます。
 
-For more information, see [Integrate a Data App with Third-Party Tools](/tidb-cloud/data-service-integrations.md).
+詳細については[データアプリをサードパーティツールと統合する](/tidb-cloud/data-service-integrations.md)参照してください。
 
-## Configuration as Code
+## コードとしてのコンフィグレーション {#configuration-as-code}
 
-TiDB Cloud provides a Configuration as Code (CaC) approach to represent your entire Data App configurations as code using the JSON syntax.
+TiDB Cloud は、 JSON 構文を使用してデータ アプリの構成全体をコードとして表現する、 コンフィグレーション as Code (CaC) アプローチを提供します。
 
-By connecting your Data App to GitHub, TiDB Cloud can use the CaC approach and push your Data App configurations as [configuration files](/tidb-cloud/data-service-app-config-files.md) to your preferred GitHub repository and branch.
+データ アプリを GitHub に接続することで、 TiDB Cloud はCaC アプローチを使用して、データ アプリの構成を[設定ファイル](/tidb-cloud/data-service-app-config-files.md)として優先 GitHub リポジトリおよびブランチにプッシュできます。
 
-If Auto Sync & Deployment is enabled for your GitHub connection, you can also modify your Data App by updating its configuration files on GitHub. After you push the configuration file changes to GitHub, the new configurations will be deployed in TiDB Cloud automatically.
+GitHub接続で自動同期とデプロイが有効になっている場合は、GitHub上の設定ファイルを更新することでデータアプリを変更することもできます。設定ファイルの変更をGitHubにプッシュすると、新しい設定がTiDB Cloudに自動的にデプロイされます。
 
-For more information, see [Deploy Data App Automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
+詳細については[GitHub でデータ アプリを自動デプロイ](/tidb-cloud/data-service-manage-github-connection.md)参照してください。

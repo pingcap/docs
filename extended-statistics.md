@@ -1,74 +1,73 @@
 ---
 title: Introduction to Extended Statistics
-summary: Learn how to use extended statistics to guide the optimizer.
+summary: 拡張統計を使用してオプティマイザーをガイドする方法を学習します。
 ---
 
-# Introduction to Extended Statistics
+# 拡張統計入門 {#introduction-to-extended-statistics}
 
-TiDB can collect the following two types of statistics. This document describes how to use extended statistics to guide the optimizer. Before reading this document, it is recommended that you read [Introduction to Statistics](/statistics.md) first.
+TiDBは以下の2種類の統計情報を収集できます。このドキュメントでは、拡張統計を使用してオプティマイザをガイドする方法について説明します。このドキュメントを読む前に、まず[統計入門](/statistics.md)読むことをお勧めします。
 
-- Basic statistics: statistics such as histograms and Count-Min Sketch, which primarily focus on individual columns. They are essential for the optimizer to estimate the query cost. See [Introduction to Statistics](/statistics.md) for details.
-- Extended statistics: statistics that focus on data correlations between specified columns, which guide the optimizer to estimate the query cost more precisely when the queried columns are correlated. 
+-   基本統計：ヒストグラムやCount-Min Sketchなど、主に個々の列に焦点を当てた統計。これらは、オプティマイザがクエリコストを見積もるために不可欠です。詳細は[統計入門](/statistics.md)ご覧ください。
+-   拡張統計: 指定された列間のデータの相関関係に焦点を当てた統計。クエリされた列が相関している場合に、オプティマイザーがクエリ コストをより正確に見積もることを可能にします。
 
-When the `ANALYZE` statement is executed manually or automatically, TiDB by default only collects the basic statistics and does not collect the extended statistics. This is because the extended statistics are only used for optimizer estimates in specific scenarios, and collecting them requires additional overhead.
+`ANALYZE`の文が手動または自動で実行される場合、TiDB はデフォルトで基本統計のみを収集し、拡張統計は収集しません。これは、拡張統計は特定のシナリオにおけるオプティマイザの推定にのみ使用され、収集には追加のオーバーヘッドが必要になるためです。
 
-Extended statistics are disabled by default. To collect extended statistics, you need to first enable extended statistics, and then create your desired extended statistics objects one by one. After the object creation, the next time the `ANALYZE` statement is executed, TiDB collects both the basic statistics and the corresponding extended statistics of the created objects.
+拡張統計はデフォルトで無効になっています。拡張統計を収集するには、まず拡張統計を有効にし、必要な拡張統計オブジェクトを1つずつ作成する必要があります。オブジェクトの作成後、次に`ANALYZE`ステートメントが実行されると、TiDBは作成されたオブジェクトの基本統計と対応する拡張統計の両方を収集します。
 
-> **Warning:**
+> **警告：**
 >
-> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> この機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
-## Limitations
+## 制限事項 {#limitations}
 
-Extended statistics are not collected in the following scenarios:
+次のシナリオでは拡張統計は収集されません。
 
-- Statistics collection on indexes only
-- Statistics collection using the `ANALYZE INCREMENTAL` command
-- Statistics collection when the value of the system variable `tidb_enable_fast_analyze` is set to `true`
+-   インデックスのみの統計収集
+-   `ANALYZE INCREMENTAL`コマンドを使用した統計収集
+-   システム変数`tidb_enable_fast_analyze`の値が`true`に設定されている場合の統計収集
 
-## Common operations
+## 一般的な操作 {#common-operations}
 
-### Enable extended statistics
+### 拡張統計を有効にする {#enable-extended-statistics}
 
-To enable extended statistics, set the system variable `tidb_enable_extended_stats` to `ON`:
+拡張統計を有効にするには、システム変数`tidb_enable_extended_stats`を`ON`に設定します。
 
 ```sql
 SET GLOBAL tidb_enable_extended_stats = ON;
 ```
 
-The default value of this variable is `OFF`. The setting of this system variable applies to all extended statistics objects.
+この変数のデフォルト値は`OFF`です。このシステム変数の設定は、すべての拡張統計オブジェクトに適用されます。
 
-### Create extended statistics objects
+### 拡張統計オブジェクトを作成する {#create-extended-statistics-objects}
 
-The creation of extended statistics objects is not a one-time task. You need to repeat the creation for each extended statistics object.
+拡張統計オブジェクトの作成は一度限りの作業ではありません。拡張統計オブジェクトごとに作成を繰り返す必要があります。
 
-To create an extended statistics object, use the SQL statement `ALTER TABLE ADD STATS_EXTENDED`. The syntax is as follows:
+拡張統計オブジェクトを作成するには、SQL文`ALTER TABLE ADD STATS_EXTENDED`を使用します。構文は次のとおりです。
 
 ```sql
 ALTER TABLE table_name ADD STATS_EXTENDED IF NOT EXISTS stats_name stats_type(column_name, column_name...);
 ```
 
-In the syntax, you can specify the table name, statistics name, statistics type, and column name of the extended statistics object to be collected.
+構文では、収集する拡張統計オブジェクトのテーブル名、統計名、統計タイプ、および列名を指定できます。
 
-- `table_name` specifies the name of the table from which the extended statistics are collected.
-- `stats_name` specifies the name of the statistics object, which must be unique for each table.
-- `stats_type` specifies the type of the statistics. Currently, only the correlation type is supported.
-- `column_name` specifies the column group, which might have multiple columns. Currently, you can only specify two column names.
+-   `table_name` 、拡張統計が収集されるテーブルの名前を指定します。
+-   `stats_name`統計オブジェクトの名前を指定します。この名前はテーブルごとに一意である必要があります。
+-   `stats_type`統計の種類を指定します。現在は相関タイプのみがサポートされています。
+-   `column_name`列グループを指定します。このグループには複数の列が含まれる場合があります。現在、列名は2つしか指定できません。
 
-<details>
-<summary> How it works</summary>
+<details><summary>仕組み</summary>
 
-To improve access performance, each TiDB node maintains a cache in the system table `mysql.stats_extended` for extended statistics. After you create the extended statistics objects, the next time the `ANALYZE` statement is executed, TiDB will collect the extended statistics if the system table `mysql.stats_extended` has the corresponding objects.
+アクセスパフォーマンスを向上させるため、各TiDBノードはシステムテーブル`mysql.stats_extended`に拡張統計用のキャッシュを保持します。拡張統計オブジェクトを作成した後、次に`ANALYZE`ステートメントが実行されると、システムテーブル`mysql.stats_extended`対応するオブジェクトが存在する場合、TiDBは拡張統計を収集します。
 
-Each row in the `mysql.stats_extended` table has a `version` column. Once a row is updated, the value of `version` is increased. In this way, TiDB loads the table into memory incrementally, instead of fully.
+`mysql.stats_extended`テーブルの各行には`version`列があります。行が更新されるたびに、 `version`の値が増加します。このように、TiDB はテーブルをメモリに完全にロードするのではなく、段階的にロードします。
 
-TiDB loads `mysql.stats_extended` periodically to ensure that the cache is kept the same as the data in the table.
+TiDB は、キャッシュがテーブル内のデータと同じ状態に維持されるように、定期的に`mysql.stats_extended`ロードします。
 
-> **Warning:**
+> **警告：**
 >
-> It is **NOT RECOMMENDED** to directly operate on the `mysql.stats_extended` system table. Otherwise, inconsistent caches occur on different TiDB nodes.
+> `mysql.stats_extended`システムテーブルを直接操作することは**推奨されません**。そうしないと、異なる TiDB ノード間でキャッシュの不整合が発生します。
 >
-> If you have mistakenly operated on the table, you can execute the following statement on each TiDB node. Then the current cache will be cleared and the `mysql.stats_extended` table will be fully reloaded:
+> テーブルに対して誤った操作を行った場合は、各TiDBノードで以下のステートメントを実行してください。これにより、現在のキャッシュがクリアされ、 `mysql.stats_extended`テーブルが完全に再ロードされます。
 >
 > ```sql
 > ADMIN RELOAD STATS_EXTENDED;
@@ -76,26 +75,25 @@ TiDB loads `mysql.stats_extended` periodically to ensure that the cache is kept 
 
 </details>
 
-### Delete extended statistics objects
+### 拡張統計オブジェクトを削除する {#delete-extended-statistics-objects}
 
-To delete an extended statistics object, use the following statement:
+拡張統計オブジェクトを削除するには、次のステートメントを使用します。
 
 ```sql
 ALTER TABLE table_name DROP STATS_EXTENDED stats_name;
 ```
 
-<details>
-<summary>How it works</summary>
+<details><summary>仕組み</summary>
 
-After you execute the statement, TiDB marks the value of the corresponding object in `mysql.stats_extended`'s column `status` to `2`, instead of deleting the object directly.
+ステートメントを実行すると、TiDB はオブジェクトを直接削除するのではなく、 `mysql.stats_extended`の列`status` ～ `2`に該当するオブジェクトの値をマークします。
 
-Other TiDB nodes will read this change and delete the object in their memory cache. The background garbage collection will delete the object eventually.
+他のTiDBノードはこの変更を読み取り、メモリキャッシュ内のオブジェクトを削除します。最終的にはバックグラウンドガベージコレクションによってオブジェクトが削除されます。
 
-> **Warning:**
+> **警告：**
 >
-> It is **NOT RECOMMENDED** to directly operate on the `mysql.stats_extended` system table. Otherwise, inconsistent caches occur on different TiDB nodes.
+> `mysql.stats_extended`システムテーブルを直接操作することは**推奨されません**。そうしないと、異なる TiDB ノード間でキャッシュの不整合が発生します。
 >
-> If you have mistakenly operated on the table, you can use the following statement on each TiDB node. Then the current cache will be cleared and the `mysql.stats_extended` table will be fully reloaded:
+> テーブルを誤って操作してしまった場合は、各TiDBノードで以下のステートメントを実行してください。これにより、現在のキャッシュがクリアされ、 `mysql.stats_extended`テーブルが完全に再ロードされます。
 >
 > ```sql
 > ADMIN RELOAD STATS_EXTENDED;
@@ -103,59 +101,59 @@ Other TiDB nodes will read this change and delete the object in their memory cac
 
 </details>
 
-### Export and import extended statistics
+### 拡張統計のエクスポートとインポート {#export-and-import-extended-statistics}
 
-The way of exporting or importing extended statistics is the same as exporting or importing basic statistics. See [Introduction to Statistics - Import and export statistics](/statistics.md#export-and-import-statistics) for details.
+拡張統計のエクスポート／インポート方法は、基本統計のエクスポート／インポート方法と同じです。詳細は[統計入門 - 輸入と輸出の統計](/statistics.md#export-and-import-statistics)ご覧ください。
 
-## Usage examples for correlation-type extended statistics
+## 相関型拡張統計の使用例 {#usage-examples-for-correlation-type-extended-statistics}
 
-Currently, TiDB only supports the correlation-type extended statistics. This type is used to estimate the number of rows in the range query and improve index selection. The following example shows how the correlation-type extended statistics are used to estimate the number of rows in a range query.
+現在、TiDBは相関型の拡張統計のみをサポートしています。この統計は、範囲クエリ内の行数を推定し、インデックス選択を改善するために使用されます。次の例は、相関型の拡張統計を使用して範囲クエリ内の行数を推定する方法を示しています。
 
-### Step 1. Define the table
+### ステップ1. テーブルを定義する {#step-1-define-the-table}
 
-Define a table `t` as follows:
+テーブル`t`次のように定義します。
 
 ```sql
 CREATE TABLE t(col1 INT, col2 INT, KEY(col1), KEY(col2));
 ```
 
-Suppose that `col1` and `col2` of table `t` both obey monotonically increasing constraints in row order. This means that the values of `col1` and `col2` are strictly correlated in order, and the correlation factor is `1`.
+表`t`の`col1`と`col2`どちらも行順序に関して単調増加制約に従うと仮定します。これは、 `col1`と`col2`の値が順序に関して厳密に相関しており、相関係数は`1`であることを意味します。
 
-### Step 2. Execute an example query without extended statistics
+### ステップ2. 拡張統計なしでサンプルクエリを実行する {#step-2-execute-an-example-query-without-extended-statistics}
 
-Execute the following query without using extended statistics:
+拡張統計を使用せずに次のクエリを実行します。
 
 ```sql
 SELECT * FROM t WHERE col1 > 1 ORDER BY col2 LIMIT 1;
 ```
 
-For the execution of the preceding query, the TiDB optimizer has the following options to access table `t`:
+上記のクエリを実行する場合、TiDB オプティマイザーにはテーブル`t`アクセスするための次のオプションがあります。
 
-- Uses the index on `col1` to access table `t` and then sorts the result by `col2` to calculate `Top-1`.
-- Uses the index on `col2` to meet the first row that satisfies `col1 > 1`. The cost of this access method mainly depends on how many rows are filtered out when TiDB scans the table in `col2`'s order.
+-   `col1`のインデックスを使用してテーブル`t`にアクセスし、結果を`col2`でソートして`Top-1`計算します。
+-   `col2`のインデックスを使用して、 `col1 > 1`満たす最初の行を検索します。このアクセス方法のコストは、TiDBが`col2`の順序でテーブルをスキャンする際に、どれだけの行がフィルタリングされるかに主に依存します。
 
-Without extended statistics, the TiDB optimizer only supposes that `col1` and `col2` are independent, which **leads to a significant estimation error**.
+拡張統計がない場合、TiDB オプティマイザーは`col1`と`col2`独立していると想定するだけなので、**大きな推定誤差が生じます**。
 
-### Step 3. Enable extended statistics
+### ステップ3. 拡張統計を有効にする {#step-3-enable-extended-statistics}
 
-Set `tidb_enable_extended_stats` to `ON`, and create the extended statistics object for `col1` and `col2`:
+`tidb_enable_extended_stats`を`ON`に設定し、 `col1`と`col2`の拡張統計オブジェクトを作成します。
 
 ```sql
 ALTER TABLE t ADD STATS_EXTENDED s1 correlation(col1, col2);
 ```
 
-When you execute `ANALYZE` after the object creation, TiDB calculates the [Pearson correlation coefficient](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient) of `col1` and `col2` of table `t`, and writes the object into the `mysql.stats_extended` table.
+オブジェクト作成後に`ANALYZE`実行すると、 TiDB はテーブル`t`の`col1`と`col2`の[ピアソン相関係数](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient)計算し、オブジェクトをテーブル`mysql.stats_extended`に書き込みます。
 
-### Step 4. See how extended statistics make a difference
+### ステップ4. 拡張統計がどのように違いを生むかを確認する {#step-4-see-how-extended-statistics-make-a-difference}
 
-After TiDB has the extended statistics for correlation, the optimizer can estimate how many rows to be scanned more precisely.
+TiDB が相関関係の拡張統計を取得すると、オプティマイザーはスキャンする行数をより正確に見積もることができます。
 
-At this time, for the query in [Stage 2. Execute an example query without extended statistics](#step-2-execute-an-example-query-without-extended-statistics), `col1` and `col2` are strictly correlated in order. If TiDB accesses table `t` by using the index on `col2` to meet the first row that satisfies `col1 > 1`, the TiDB optimizer will equivalently translate the row count estimation into the following query:
+この時点で、 [ステージ2. 拡張統計なしでサンプルクエリを実行する](#step-2-execute-an-example-query-without-extended-statistics)のクエリでは、 `col1`と`col2`厳密に順序付けされています。TiDBが`col2`のインデックスを使用してテーブル`t`アクセスし、 `col1 > 1`満たす最初の行を検索すると、TiDBオプティマイザは行数推定を次のクエリに変換します。
 
 ```sql
 SELECT * FROM t WHERE col1 <= 1 OR col1 IS NULL;
 ```
 
-The preceding query result plus one will be the final estimation for the row count. In this way, you do not need to use the independent assumption and **the significant estimation error is avoided**.
+前のクエリ結果に1を加えたものが、最終的な行数の推定値となります。これにより、独立仮定を用いる必要がなくなり、**大きな推定誤差を回避できます**。
 
-If the correlation factor (`1` in this example) is less than the value of the system variable `tidb_opt_correlation_threshold`, the optimizer will use the independent assumption, but it will also increase the estimation heuristically. The larger the value of `tidb_opt_correlation_exp_factor`, the larger the estimation result. The larger the absolute value of the correlation factor, the larger the estimation result.
+相関係数（この例では`1` ）がシステム変数`tidb_opt_correlation_threshold`の値より小さい場合、オプティマイザは独立仮定を使用しますが、ヒューリスティックに推定値も増加させます。5 `tidb_opt_correlation_exp_factor`値が大きいほど、推定結果は大きくなります。相関係数の絶対値が大きいほど、推定結果は大きくなります。

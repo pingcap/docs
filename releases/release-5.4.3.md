@@ -1,104 +1,104 @@
 ---
 title: TiDB 5.4.3 Release Notes
-summary: TiDB 5.4.3 was released on October 13, 2022. The release includes various improvements and bug fixes for TiKV, Tools, TiCDC, TiFlash, PD, and other tools. Improvements include support for configuring RocksDB write stall settings, optimizing Scatter Region to batch mode, and reducing performance overhead in multi-Region scenarios. Bug fixes address issues such as incorrect output of `SHOW CREATE PLACEMENT POLICY`, DDL statements getting stuck after PD node replacement, and various issues causing incorrect results and errors in TiDB, TiKV, PD, TiFlash, and other tools. The release also provides workarounds and affected versions for specific issues.
+summary: TiDB 5.4.3は2022年10月13日にリリースされました。このリリースには、TiKV、ツール、TiCDC、 TiFlash、PD、その他のツールに対するさまざまな改善とバグ修正が含まれています。改善点には、RocksDBの書き込みストール設定のサポート、Scatter リージョンのバッチモードへの最適化、マルチリージョンシナリオにおけるパフォーマンスオーバーヘッドの削減が含まれます。バグ修正では、「SHOW CREATE PLACEMENT POLICY」の出力が正しくない、PDノードの置き換え後にDDL文がスタックする、TiDB、TiKV、PD、 TiFlash、その他のツールで誤った結果やエラーを引き起こすさまざまな問題が修正されています。また、このリリースでは、特定の問題に対する回避策と影響を受けるバージョンも提供されています。
 ---
 
-# TiDB 5.4.3 Release Notes
+# TiDB 5.4.3 リリースノート {#tidb-5-4-3-release-notes}
 
-Release date: October 13, 2022
+発売日：2022年10月13日
 
-TiDB version: 5.4.3
+TiDB バージョン: 5.4.3
 
-## Improvements
+## 改善点 {#improvements}
 
-+ TiKV
+-   TiKV
 
-    - Support configuring the RocksDB write stall settings to a value smaller than the flow control threshold [#13467](https://github.com/tikv/tikv/issues/13467)
-    - Support configuring the `unreachable_backoff` item to avoid Raftstore broadcasting too many messages after one peer becomes unreachable [#13054](https://github.com/tikv/tikv/issues/13054)
+    -   RocksDB 書き込みストール設定をフロー制御しきい値[＃13467](https://github.com/tikv/tikv/issues/13467)より小さい値に設定できるようになりました。
+    -   1つのピアが到達不能になった後にRaftstoreが過剰なメッセージをブロードキャストするのを避けるために`unreachable_backoff`項目の設定をサポートします[＃13054](https://github.com/tikv/tikv/issues/13054)
 
-+ Tools
+-   ツール
 
-    + TiDB Lightning
+    -   TiDB Lightning
 
-        - Optimize Scatter Region to batch mode to improve the stability of the Scatter Region process [#33618](https://github.com/pingcap/tidb/issues/33618)
+        -   散布リージョンをバッチモードに最適化して、散布リージョンプロセスの安定性を向上させます[＃33618](https://github.com/pingcap/tidb/issues/33618)
 
-    + TiCDC
+    -   TiCDC
 
-        - Reduce performance overhead caused by runtime context switching in multi-Region scenarios [#5610](https://github.com/pingcap/tiflow/issues/5610)
+        -   マルチリージョンシナリオにおける実行時コンテキスト切り替えによるパフォーマンスオーバーヘッドを削減[＃5610](https://github.com/pingcap/tiflow/issues/5610)
 
-## Bug fixes
+## バグ修正 {#bug-fixes}
 
-+ TiDB
+-   TiDB
 
-    - Fix the incorrect output of `SHOW CREATE PLACEMENT POLICY` [#37526](https://github.com/pingcap/tidb/issues/37526)
-    - Fix the issue that some DDL statements might be stuck for a period after the PD node of a cluster is replaced [#33908](https://github.com/pingcap/tidb/issues/33908)
-    - Fix the issue that `KILL TIDB` cannot take effect immediately on idle connections [#24031](https://github.com/pingcap/tidb/issues/24031)
-    - Fix the issue that incorrect results are returned in the `DATA_TYPE` and `COLUMN_TYPE` columns when querying the `INFORMSTION_SCHEMA.COLUMNS` system table [#36496](https://github.com/pingcap/tidb/issues/36496)
-    - Fix the issue that when TiDB Binlog is enabled, executing the `ALTER SEQUENCE` statement might cause a wrong metadata version and cause Drainer to exit [#36276](https://github.com/pingcap/tidb/issues/36276)
-    - Fix the issue that the `UNION` operator might return unexpected empty result [#36903](https://github.com/pingcap/tidb/issues/36903)
-    - Fix the wrong result that occurs when enabling dynamic mode in partitioned tables for TiFlash [#37254](https://github.com/pingcap/tidb/issues/37254)
-    - Fix the issue that `INL_HASH_JOIN` might hang when used with `LIMIT` [#35638](https://github.com/pingcap/tidb/issues/35638)
-    - Fix the issue that TiDB might return the `invalid memory address or nil pointer dereference` error when executing the `SHOW WARNINGS` statement [#31569](https://github.com/pingcap/tidb/issues/31569)
-    - Fix the `invalid transaction` error that occurs when performing Stale Read in the RC isolation level [#30872](https://github.com/pingcap/tidb/issues/30872)
-    - Fix the issue that the `EXPLAIN ANALYZE` statement with DML executors might return result before the transaction commit finishes [#37373](https://github.com/pingcap/tidb/issues/37373)
-    - Fix the issue of the `data and columnID count not match` error that occurs when inserting duplicated values with TiDB Binlog enabled [#33608](https://github.com/pingcap/tidb/issues/33608)
-    - Fix the issue that in the static partition prune mode, SQL statements with an aggregate condition might return wrong result when the table is empty [#35295](https://github.com/pingcap/tidb/issues/35295)
-    - Fix the issue that TiDB might panic when executing the `UPDATE` statement [#32311](https://github.com/pingcap/tidb/issues/32311)
-    - Fix the issue of wrong query result because the `UnionScan` operator cannot maintain the order [#33175](https://github.com/pingcap/tidb/issues/33175)
-    - Fix the issue that the UPDATE statements incorrectly eliminate the projection in some cases, which causes the `Can't find column` error [#37568](https://github.com/pingcap/tidb/issues/37568)
-    - Fix the issue that partitioned tables cannot fully use indexes to scan data in some cases [#33966](https://github.com/pingcap/tidb/issues/33966)
-    - Fix the issue that the `EXECUTE` might throw an unexpected error in specific scenarios [#37187](https://github.com/pingcap/tidb/issues/37187)
-    - Fix the issue that TiDB might return wrong results when using a `BIT` type index with prepared plan cache enabled [#33067](https://github.com/pingcap/tidb/issues/33067)
+    -   `SHOW CREATE PLACEMENT POLICY` [＃37526](https://github.com/pingcap/tidb/issues/37526)の誤った出力を修正
+    -   クラスターのPDノードが交換された後、一部のDDL文が一定期間スタックする可能性がある問題を修正しました[＃33908](https://github.com/pingcap/tidb/issues/33908)
+    -   `KILL TIDB`アイドル接続時にすぐに効果を発揮できない問題を修正[＃24031](https://github.com/pingcap/tidb/issues/24031)
+    -   `INFORMSTION_SCHEMA.COLUMNS`システムテーブル[＃36496](https://github.com/pingcap/tidb/issues/36496)をクエリするときに`DATA_TYPE`と`COLUMN_TYPE`列に誤った結果が返される問題を修正しました
+    -   TiDB Binlogが有効な場合、 `ALTER SEQUENCE`文を実行するとメタデータ バージョンが間違って発生し、 Drainerが終了する可能性がある問題を修正しました[＃36276](https://github.com/pingcap/tidb/issues/36276)
+    -   `UNION`演算子が予期しない空の結果[＃36903](https://github.com/pingcap/tidb/issues/36903)を返す可能性がある問題を修正しました
+    -   TiFlash [＃37254](https://github.com/pingcap/tidb/issues/37254)のパーティションテーブルでダイナミックモードを有効にしたときに発生する誤った結果を修正しました
+    -   `LIMIT` [＃35638](https://github.com/pingcap/tidb/issues/35638)と併用すると`INL_HASH_JOIN`ハングアップする可能性がある問題を修正
+    -   TiDBが`SHOW WARNINGS`ステートメント[＃31569](https://github.com/pingcap/tidb/issues/31569)を実行するときに`invalid memory address or nil pointer dereference`エラーを返す可能性がある問題を修正しました
+    -   RC分離レベル[＃30872](https://github.com/pingcap/tidb/issues/30872)でステイル読み取りを実行するときに発生する`invalid transaction`エラーを修正
+    -   DMLエグゼキュータを使用した`EXPLAIN ANALYZE`文がトランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました[＃37373](https://github.com/pingcap/tidb/issues/37373)
+    -   TiDB Binlogを有効にして重複した値を挿入すると発生する`data and columnID count not match`エラーの問題を修正しました[＃33608](https://github.com/pingcap/tidb/issues/33608)
+    -   静的パーティションプルーニングモードで、テーブルが空の場合に集計条件を含むSQL文が間違った結果を返す可能性がある問題を修正しました[＃35295](https://github.com/pingcap/tidb/issues/35295)
+    -   `UPDATE`文[＃32311](https://github.com/pingcap/tidb/issues/32311)を実行するときに TiDB がpanic可能性がある問題を修正しました
+    -   `UnionScan`演算子が順序を維持できないために間違ったクエリ結果が発生する問題を修正[＃33175](https://github.com/pingcap/tidb/issues/33175)
+    -   UPDATE文が場合によっては投影を誤って削除し、 `Can't find column`エラー[＃37568](https://github.com/pingcap/tidb/issues/37568)が発生する問題を修正しました。
+    -   パーティションテーブルがインデックスを完全に使用してデータをスキャンできない場合がある問題を修正[＃33966](https://github.com/pingcap/tidb/issues/33966)
+    -   特定のシナリオ[＃37187](https://github.com/pingcap/tidb/issues/37187)予期しないエラーが発生する可能性がある問題を修正しました`EXECUTE`
+    -   準備済みプランキャッシュが有効になっている`BIT`タイプのインデックスを使用すると、TiDBが間違った結果を返す可能性がある問題を修正しました[＃33067](https://github.com/pingcap/tidb/issues/33067)
 
-+ TiKV
+-   TiKV
 
-    - Fix the issue of continuous SQL execution errors in the cluster after the PD leader is switched or PD is restarted [#12934](https://github.com/tikv/tikv/issues/12934)
-        - Cause: This issue is caused by a TiKV bug that TiKV does not retry sending heartbeat information to PD client after heartbeat requests fail, until TiKV reconnects to PD client. As a result, the Region information on the failed TiKV node becomes outdated, and TiDB cannot get the latest Region information, which causes SQL execution errors.
-        - Affected versions: v5.3.2 and v5.4.2. This issue has been fixed in v5.3.3 and v5.4.3. If you are using v5.4.2, you can upgrade your cluster to v5.4.3.
-        - Workaround: In addition to upgrade, you can also restart the TiKV nodes that cannot send Region heartbeat to PD, until there is no Region heartbeat to send.
-    - Fix the issue that causes permission denied error when TiKV gets an error from the web identity provider and fails back to the default provider [#13122](https://github.com/tikv/tikv/issues/13122)
-    - Fix the issue that the PD client might cause deadlocks [#13191](https://github.com/tikv/tikv/issues/13191)
-    - Fix the issue that Regions might be overlapped if Raftstore is busy [#13160](https://github.com/tikv/tikv/issues/13160)
+    -   PDリーダーの切り替え後またはPDの再起動後にクラスタ内でSQL実行エラーが継続する問題を修正[＃12934](https://github.com/tikv/tikv/issues/12934)
+        -   原因：この問題は、TiKVのバグが原因で発生します。このバグにより、ハートビート要求が失敗した後、TiKVはPDクライアントに再接続するまで、PDクライアントへのハートビート情報の送信を再試行しません。その結果、障害が発生したTiKVノードのリージョン情報が古くなり、TiDBは最新のリージョン情報を取得できず、SQL実行エラーが発生します。
+        -   影響を受けるバージョン: v5.3.2 および v5.4.2。この問題は v5.3.3 および v5.4.3 で修正されています。v5.4.2 をご利用の場合は、クラスターを v5.4.3 にアップグレードできます。
+        -   回避策: アップグレードに加えて、送信するリージョンハートビートがなくなるまで、リージョンハートビートを PD に送信できない TiKV ノードを再起動することもできます。
+    -   TiKV が Web ID プロバイダーからエラーを取得し、デフォルトのプロバイダー[＃13122](https://github.com/tikv/tikv/issues/13122)にフェイルバックしたときに、権限拒否エラーが発生する問題を修正しました。
+    -   PDクライアントがデッドロックを引き起こす可能性がある問題を修正[＃13191](https://github.com/tikv/tikv/issues/13191)
+    -   Raftstoreがビジー状態の場合にリージョンが重複する可能性がある問題を修正[＃13160](https://github.com/tikv/tikv/issues/13160)
 
-+ PD
+-   PD
 
-    - Fix the issue that PD cannot correctly handle dashboard proxy requests [#5321](https://github.com/tikv/pd/issues/5321)
-    - Fix the issue that a removed tombstone store appears again after the PD leader transfer ​​[#4941](https://github.com/tikv/pd/issues/4941)
-    - Fix the issue that the TiFlash learner replica might not be created [#5401](https://github.com/tikv/pd/issues/5401)
+    -   PDがダッシュボードプロキシリクエストを正しく処理できない問題を修正[＃5321](https://github.com/tikv/pd/issues/5321)
+    -   PDリーダー移転後に削除した墓石ストアが再び表示される問題を修正[＃4941](https://github.com/tikv/pd/issues/4941)
+    -   TiFlash学習者レプリカが作成されない可能性がある問題を修正[＃5401](https://github.com/tikv/pd/issues/5401)
 
-+ TiFlash
+-   TiFlash
 
-    - Fix the issue that the `format` function might return a `Data truncated` error [#4891](https://github.com/pingcap/tiflash/issues/4891)
-    - Fix the issue that TiFlash might crash due to an error in parallel aggregation [#5356](https://github.com/pingcap/tiflash/issues/5356)
-    - Fix the panic that occurs after creating the primary index with a column containing the `NULL` value [#5859](https://github.com/pingcap/tiflash/issues/5859)
+    -   `format`関数が`Data truncated`エラー[＃4891](https://github.com/pingcap/tiflash/issues/4891)を返す可能性がある問題を修正しました
+    -   並列集約[＃5356](https://github.com/pingcap/tiflash/issues/5356)エラーによりTiFlashがクラッシュする可能性がある問題を修正
+    -   `NULL`値[＃5859](https://github.com/pingcap/tiflash/issues/5859)を含む列を持つプライマリインデックスを作成した後に発生するpanicを修正しました
 
-+ Tools
+-   ツール
 
-    + TiDB Lightning
+    -   TiDB Lightning
 
-        - Fix the issue that an auto-increment column of the `BIGINT` type might be out of range [#27937](https://github.com/pingcap/tidb/issues/27937)
-        - Fix the issue that de-duplication might cause TiDB Lightning to panic in extreme cases [#34163](https://github.com/pingcap/tidb/issues/34163)
-        - Fix the issue that TiDB Lightning does not support columns starting with slash, number, or non-ascii characters in Parquet files [#36980](https://github.com/pingcap/tidb/issues/36980)
-        - Fix the issue that TiDB Lightning fails to connect to TiDB when TiDB uses an IPv6 host [#35880](https://github.com/pingcap/tidb/issues/35880)
+        -   `BIGINT`型の自動増分列が範囲外になる可能性がある問題を修正[＃27937](https://github.com/pingcap/tidb/issues/27937)
+        -   重複排除により極端な場合にTiDB Lightning がpanicを起こす可能性がある問題を修正[＃34163](https://github.com/pingcap/tidb/issues/34163)
+        -   TiDB Lightning がParquet ファイル内のスラッシュ、数字、または非 ASCII 文字で始まる列をサポートしない問題を修正しました[＃36980](https://github.com/pingcap/tidb/issues/36980)
+        -   TiDBがIPv6ホスト[＃35880](https://github.com/pingcap/tidb/issues/35880)を使用しているときにTiDB LightningがTiDBに接続できない問題を修正しました
 
-    + TiDB Data Migration (DM)
+    -   TiDB データ移行 (DM)
 
-        - Fix the issue that DM Worker might get stuck when getting DB Conn [#3733](https://github.com/pingcap/tiflow/issues/3733)
-        - Fix the issue that DM reports the `Specified key was too long` error [#5315](https://github.com/pingcap/tiflow/issues/5315)
-        - Fix the issue that latin1 data might be corrupted during replication [#7028](https://github.com/pingcap/tiflow/issues/7028)
-        - Fix the issue that DM fails to start when TiDB uses an IPv6 host [#6249](https://github.com/pingcap/tiflow/issues/6249)
-        - Fix the issue of possible data race in `query-status` [#4811](https://github.com/pingcap/tiflow/issues/4811)
-        - Fix goroutine leak when relay meets an error [#6193](https://github.com/pingcap/tiflow/issues/6193)
+        -   DB Conn [＃3733](https://github.com/pingcap/tiflow/issues/3733)取得する際に DM ワーカーがスタックする可能性がある問題を修正しました
+        -   DMが`Specified key was too long`エラーを報告する問題を修正しました[＃5315](https://github.com/pingcap/tiflow/issues/5315)
+        -   レプリケーション[＃7028](https://github.com/pingcap/tiflow/issues/7028)中にlatin1データが破損する可能性がある問題を修正
+        -   TiDBがIPv6ホスト[＃6249](https://github.com/pingcap/tiflow/issues/6249)を使用しているときにDMが起動に失敗する問題を修正
+        -   `query-status` [＃4811](https://github.com/pingcap/tiflow/issues/4811)で起こりうるデータ競合の問題を修正
+        -   リレーがエラー[＃6193](https://github.com/pingcap/tiflow/issues/6193)に遭遇したときの goroutine リークを修正
 
-    + TiCDC
+    -   TiCDC
 
-        - Fix the TiCDC panic issue when you set `enable-old-value = false` [#6198](https://github.com/pingcap/tiflow/issues/6198)
+        -   `enable-old-value = false` [＃6198](https://github.com/pingcap/tiflow/issues/6198)を設定すると TiCDCpanicする問題を修正
 
-    + Backup & Restore (BR)
+    -   バックアップと復元 (BR)
 
-        - Fix the issue that might lead to backup and restoration failure if special characters exist in the authorization key of external storage [#37469](https://github.com/pingcap/tidb/issues/37469)
-        - Fix the issue that the regions are not balanced because the concurrency is set too large during the restoration [#37549](https://github.com/pingcap/tidb/issues/37549)
+        -   外部storage[＃37469](https://github.com/pingcap/tidb/issues/37469)の認証キーに特殊文字が含まれている場合にバックアップと復元が失敗する可能性がある問題を修正しました
+        -   復元中に同時実行が大きすぎる設定になっているために領域のバランスが取れていない問題を修正[＃37549](https://github.com/pingcap/tidb/issues/37549)
 
-    + Dumpling
+    -   Dumpling
 
-        - Fix the issue that GetDSN does not support IPv6 [#36112](https://github.com/pingcap/tidb/issues/36112)
+        -   GetDSNがIPv6 [＃36112](https://github.com/pingcap/tidb/issues/36112)をサポートしていない問題を修正

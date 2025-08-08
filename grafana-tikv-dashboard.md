@@ -1,608 +1,608 @@
 ---
 title: Key Monitoring Metrics of TiKV
-summary: Learn some key metrics displayed on the Grafana TiKV dashboard.
+summary: Grafana TiKV ダッシュボードに表示されるいくつかの主要なメトリックについて学習します。
 ---
 
-# Key Monitoring Metrics of TiKV
+# TiKVの主要な監視指標 {#key-monitoring-metrics-of-tikv}
 
-If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus/Grafana) is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/tidb-monitoring-framework.md).
+TiUPを使用してTiDBクラスターをデプロイする場合、監視システム（Prometheus/Grafana）も同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)参照してください。
 
-The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, and Performance\_overview. A lot of metrics are there to help you diagnose.
+Grafanaダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter、Performance_overviewといった一連のサブダッシュボードに分かれています。診断に役立つ多くのメトリクスが用意されています。
 
-## TiKV-Details dashboard
+## TiKV詳細ダッシュボード {#tikv-details-dashboard}
 
-You can get an overview of the component TiKV status from the **TiKV-Details** dashboard, where the key metrics are displayed. According to the [Performance Map](https://asktug.com/_/tidb-performance-map/#/), you can check whether the status of the cluster is as expected.
+**TiKV詳細**ダッシュボードでは、主要なメトリックが表示され、コンポーネントのTiKVステータスの概要を確認できます[パフォーマンスマップ](https://asktug.com/_/tidb-performance-map/#/)に基づいて、クラスターのステータスが期待どおりかどうかを確認できます。
 
-This section provides a detailed description of these key metrics on the **TiKV-Details** dashboard.
+このセクションでは**、TiKV-Details**ダッシュボード上のこれらの主要なメトリックについて詳しく説明します。
 
-### Cluster
+### クラスタ {#cluster}
 
-- Store size: The storage size per TiKV instance
-- Available size: The available capacity per TiKV instance
-- Capacity size: The capacity size per TiKV instance
-- CPU: The CPU utilization per TiKV instance
-- Memory: The memory usage per TiKV instance
-- IO utilization: The I/O utilization per TiKV instance
-- MBps: The total bytes of read and write in each TiKV instance
-- QPS: The QPS per command in each TiKV instance
-- Errps: The rate of gRPC message failures
-- leader: The number of leaders per TiKV instance
-- Region: The number of Regions per TiKV instance
-- Uptime: The runtime of TiKV since last restart
+-   ストアサイズ: TiKVインスタンスあたりのstorageサイズ
+-   利用可能なサイズ: TiKVインスタンスあたりの利用可能な容量
+-   容量サイズ: TiKVインスタンスあたりの容量サイズ
+-   CPU: TiKVインスタンスあたりのCPU使用率
+-   メモリ: TiKVインスタンスあたりのメモリ使用量
+-   IO使用率: TiKVインスタンスあたりのI/O使用率
+-   MBps: 各 TiKV インスタンスの読み取りと書き込みの合計バイト数
+-   QPS: 各 TiKV インスタンスのコマンドあたりの QPS
+-   Errps: gRPC メッセージの失敗率
+-   リーダー: TiKVインスタンスあたりのリーダーの数
+-   リージョン: TiKVインスタンスあたりのリージョン数
+-   稼働時間: 前回の再起動以降の TiKV の実行時間
 
 ![TiKV Dashboard - Cluster metrics](/media/tikv-dashboard-cluster.png)
 
-### Errors
+### エラー {#errors}
 
-- Critical error: The number of critical errors
-- Server is busy: Indicates occurrences of events that make the TiKV instance unavailable temporarily, such as Write Stall, and Channel Full. It should be `0` in normal case.
-- Server report failures: The number of error messages reported by server. It should be `0` in normal case.
-- Raftstore error: The number of Raftstore errors per type on each TiKV instance
-- Scheduler error: The number of scheduler errors per type on each TiKV instance
-- Coprocessor error: The number of coprocessor errors per type on each TiKV instance
-- gRPC message error: The number of gRPC message errors per type on each TiKV instance
-- Leader drop: The count of dropped leaders per TiKV instance
-- Leader missing: The count of missing leaders per TiKV instance
-- Log Replication Reject: The number of logappend messages rejected due to insufficient memory on each TiKV instance
+-   重大なエラー: 重大なエラーの数
+-   サーバーがビジー状態です: 書き込みストールやチャネルフルなど、TiKVインスタンスを一時的に利用できないイベントが発生したことを示します。通常は`0`なります。
+-   サーバーレポートの失敗:サーバーから報告されたエラーメッセージの数。通常は`0`です。
+-   Raftstoreエラー: 各 TiKV インスタンスのタイプごとのRaftstoreエラーの数
+-   スケジューラエラー: 各 TiKV インスタンスのタイプごとのスケジューラエラーの数
+-   コプロセッサーエラー: 各 TiKV インスタンスの種類ごとのコプロセッサエラーの数
+-   gRPC メッセージ エラー: 各 TiKV インスタンスのタイプごとの gRPC メッセージ エラーの数
+-   Leaderドロップ: TiKVインスタンスごとにドロップされたリーダーの数
+-   Leaderの欠落: TiKVインスタンスごとのリーダーの欠落数
+-   ログレプリケーション拒否: 各 TiKV インスタンスのメモリ不足により拒否された logappend メッセージの数
 
 ![TiKV Dashboard - Errors metrics](/media/tikv-dashboard-errors-v610.png)
 
-### Server
+### サーバ {#server}
 
-- CF size: The size of each column family
-- Store size: The storage size per TiKV instance
-- Channel full: The number of Channel Full errors per TiKV instance. It should be `0` in normal case.
-- Active written leaders: The number of leaders being written on each TiKV instance
-- Approximate Region size: The approximate Region size
-- Approximate Region size Histogram: The histogram of each approximate Region size
-- Region average written keys: The average number of written keys to Regions per TiKV instance
-- Region average written bytes: The average written bytes to Regions per TiKV instance
+-   CFサイズ: 各カラムファミリーのサイズ
+-   ストアサイズ: TiKVインスタンスあたりのstorageサイズ
+-   チャネルフル: TiKVインスタンスあたりのチャネルフルエラーの数。通常は`0`です。
+-   アクティブな書き込みリーダー: 各 TiKV インスタンスに書き込まれているリーダーの数
+-   おおよそのリージョンサイズ: おおよそのリージョンサイズ
+-   おおよそのリージョンサイズのヒストグラム: 各おおよそのリージョンサイズのヒストグラム
+-   リージョン平均書き込みキー: TiKVインスタンスあたりのリージョンへの平均書き込みキー数
+-   リージョン平均書き込みバイト数: TiKVインスタンスあたりのリージョンへの平均書き込みバイト数
 
 ![TiKV Dashboard - Server metrics](/media/tikv-dashboard-server.png)
 
-### gRPC
+### gRPC {#grpc}
 
-- gRPC message count: The rate of gRPC messages per type
-- gRPC message failed: The rate of failed gRPC messages
-- 99% gRPC message duration: The gRPC message duration per message type (P99)
-- Average gRPC message duration: The average execution time of gRPC messages
-- gRPC batch size: The batch size of gRPC messages between TiDB and TiKV
-- Raft message batch size: The batch size of Raft messages between TiKV instances
-- gRPC request sources QPS: The QPS of gRPC request sources
-- gRPC request sources duration: The execution time of gRPC request sources
-- gRPC resource group QPS: The QPS of gRPC request sources by resource groups
+-   gRPC メッセージ数: タイプごとの gRPC メッセージの割合
+-   gRPC メッセージが失敗しました: 失敗した gRPC メッセージの割合
+-   99% gRPC メッセージ継続時間: メッセージ タイプごとの gRPC メッセージ継続時間 (P99)
+-   平均gRPCメッセージ期間: gRPCメッセージの平均実行時間
+-   gRPC バッチサイズ: TiDB と TiKV 間の gRPC メッセージのバッチサイズ
+-   Raftメッセージのバッチサイズ: TiKVインスタンス間のRaftメッセージのバッチサイズ
+-   gRPC リクエストソースの QPS: gRPC リクエストソースの QPS
+-   gRPC リクエストソースの持続時間: gRPC リクエストソースの実行時間
+-   gRPC リソース グループの QPS: リソース グループ別の gRPC リクエスト ソースの QPS
 
-### Thread CPU
+### スレッドCPU {#thread-cpu}
 
-- Raft store CPU: The CPU utilization of the `raftstore` thread. The CPU utilization should be less than 80% * `raftstore.store-pool-size` in normal case.
-- Async apply CPU: The CPU utilization of the `async apply` thread. The CPU utilization should be less than 90% * `raftstore.apply-pool-size` in normal cases.
-- Store writer CPU: The CPU utilization of the async IO thread. The CPU utilization should be less than 90% * `raftstore.store-io-pool-size` in normal cases.
-- gRPC poll CPU: The CPU utilization of the `gRPC` thread. The CPU utilization should be less than 80% * `server.grpc-concurrency` in normal cases.
-- Scheduler worker CPU: The CPU utilization of the `scheduler worker` thread. The CPU utilization should be less than 90% * `storage.scheduler-worker-pool-size` in normal cases.
-- Storage ReadPool CPU: The CPU utilization of the `storage read pool` thread
-- Unified read pool CPU: The CPU utilization of the `unified read pool` thread
-- RocksDB CPU: The CPU utilization of the RocksDB thread
-- Coprocessor CPU: The CPU utilization of the `coprocessor` thread
-- GC worker CPU: The CPU utilization of the `GC worker` thread
-- BackGround worker CPU: The CPU utilization of the `background worker` thread
-- Import CPU: The CPU utilization of the `import` thread
-- Backup Worker CPU: The CPU utilization of the `backup` thread
-- CDC Worker CPU: The CPU utilization of the `CDC worker` thread
-- CDC endpoint CPU: The CPU utilization of the `CDC endpoint` thread
-- Raftlog fetch worker CPU: The CPU utilization of the async raft log fetcher worker
-- TSO Worker CPU: The CPU utilization of the `TSO worker` thread
+-   RaftストアCPU: `raftstore`スレッドのCPU使用率。通常、CPU使用率は80% * `raftstore.store-pool-size`未満である必要があります。
+-   非同期適用CPU: `async apply`スレッドのCPU使用率。通常、CPU使用率は90% * `raftstore.apply-pool-size`未満である必要があります。
+-   ストアライターCPU: 非同期IOスレッドのCPU使用率。通常、CPU使用率は90% * `raftstore.store-io-pool-size`未満である必要があります。
+-   gRPC ポーリング CPU: `gRPC`スレッドの CPU 使用率。通常、CPU 使用率は 80% * `server.grpc-concurrency`未満である必要があります。
+-   スケジューラワーカーCPU: `scheduler worker`スレッドのCPU使用率。通常、CPU使用率は90% * `storage.scheduler-worker-pool-size`未満である必要があります。
+-   ストレージ読み取りプールCPU: `storage read pool`スレッドのCPU使用率
+-   統合読み取りプールCPU: `unified read pool`スレッドのCPU使用率
+-   RocksDB CPU: RocksDBスレッドのCPU使用率
+-   コプロセッサーCPU: `coprocessor`スレッドのCPU使用率
+-   GCワーカーCPU: `GC worker`スレッドのCPU使用率
+-   バックグラウンドワーカーCPU: `background worker`スレッドのCPU使用率
+-   インポートCPU: `import`スレッドのCPU使用率
+-   バックアップワーカーCPU: `backup`スレッドのCPU使用率
+-   CDCワーカーCPU: `CDC worker`スレッドのCPU使用率
+-   CDCエンドポイントCPU: `CDC endpoint`スレッドのCPU使用率
+-   Raftlog フェッチワーカー CPU: 非同期 Rafflog フェッチャーワーカーの CPU 使用率
+-   TSOワーカーCPU: `TSO worker`スレッドのCPU使用率
 
-### PD
+### PD {#pd}
 
-- PD requests: The rate at which TiKV sends to PD
-- PD request duration (average): The average duration of processing requests that TiKV sends to PD
-- PD heartbeats: The rate at which heartbeat messages are sent from TiKV to PD
-- PD validate peers: The rate at which messages are sent from TiKV to PD to validate TiKV peers
+-   PDリクエスト: TiKVがPDに送信するレート
+-   PDリクエスト処理時間（平均）: TiKVがPDに送信するリクエストの処理時間の平均
+-   PDハートビート: TiKVからPDにハートビートメッセージが送信される速度
+-   PD検証ピア: TiKVピアを検証するためにTiKVからPDにメッセージが送信される速度
 
-### Raft IO
+### RaftIO {#raft-io}
 
-- Apply log duration: The time consumed for Raft to apply logs
-- Apply log duration per server: The time consumed for Raft to apply logs per TiKV instance
-- Append log duration: The time consumed for Raft to append logs
-- Append log duration per server: The time consumed for Raft to append logs per TiKV instance
-- Commit log duration: The time consumed by Raft to commit logs
-- Commit log duration per server: The time consumed by Raft to commit logs per TiKV instance
+-   ログ適用期間: Raftがログを適用するのにかかる時間
+-   サーバーごとのログ適用期間: TiKVインスタンスごとにRaftがログを適用するのにかかる時間
+-   ログ追加時間: Raftがログを追加するのにかかる時間
+-   サーバーごとのログ追加時間: TiKVインスタンスごとにRaftがログを追加するのにかかる時間
+-   コミットログ期間: Raftがログをコミットするのにかかる時間
+-   サーバーごとのコミットログ期間: TiKVインスタンスごとにRaftがログをコミットするのにかかる時間
 
 ![TiKV Dashboard - Raft IO metrics](/media/tikv-dashboard-raftio.png)
 
-### Raft process
+### Raftプロセス {#raft-process}
 
-- Ready handled: The number of handled ready operations per type per second
-    - count: The number of handled ready operations per second
-    - has_ready_region: The number of Regions that have ready per second
-    - pending_region: The operations per second of the Regions being checked for whether it has ready. This metric is deprecated since v3.0.0
-    - message: The number of messages that the ready operations per second contain
-    - append: The number of Raft log entries that the ready operations per second contain
-    - commit: The number of committed Raft log entries that the ready operations per second contain
-    - snapshot: The number of snapshots that the ready operations per second contains
-- 0.99 Duration of Raft store events: The time consumed by Raftstore events (P99)
-- Process ready duration: The time consumed for processes to be ready in Raft
-- Process ready duration per server: The time consumed for peer processes to be ready in Raft per TiKV instance. It should be less than 2 seconds (P99.99).
-- Max Duration of Raft store events: The time consumed by the slowest Raftstore event.
-- Replica read lock checking duration: The time consumed for checking locks when processing Replica Read.
-- Peer msg length distribution: The number of messages processed by each Region in each TiKV instance at a time. The more messages, the busier the peer is.
+-   処理済み準備完了: 1 秒あたりに処理された準備完了操作の数
+    -   count: 1秒あたりに処理された準備操作の数
+    -   has_ready_region: 1秒あたりに準備完了しているリージョンの数
+    -   pending_region: 準備完了を確認中のリージョンの1秒あたりの操作数。この指標はv3.0.0以降非推奨です。
+    -   メッセージ: 1秒あたりの準備操作に含まれるメッセージの数
+    -   append: 1秒あたりの準備操作に含まれるRaftログエントリの数
+    -   コミット: 1秒あたりの準備操作に含まれるコミットされたRaftログエントリの数
+    -   スナップショット: 1秒あたりの準備操作に含まれるスナップショットの数
+-   0.99 Raftストアイベントの期間: Raftstoreイベントに消費される時間 (P99)
+-   プロセス準備時間: Raftでプロセスが準備完了するまでにかかる時間
+-   サーバーごとのプロセス準備時間：TiKVインスタンスごとに、 Raftでピアプロセスの準備が完了するまでにかかる時間。2秒（P99.99）未満である必要があります。
+-   Raftストア イベントの最大期間: 最も遅いRaftstoreイベントによって消費される時間。
+-   レプリカ読み取りロック チェック期間: レプリカ読み取りの処理時にロックのチェックにかかる時間。
+-   ピアのメッセージ長分布：各TiKVインスタンス内の各リージョンで一度に処理されるメッセージ数。メッセージ数が多いほど、ピアの負荷が高いことを示します。
 
 ![TiKV Dashboard - Raft process metrics](/media/tikv-dashboard-raft-process.png)
 
-### Raft message
+### Raftメッセージ {#raft-message}
 
-- Sent messages per server: The number of Raft messages sent by each TiKV instance per second
-- Flush messages per server: The number of Raft messages flushed by the Raft client in each TiKV instance per second
-- Receive messages per server: The number of Raft messages received by each TiKV instance per second
-- Messages: The number of Raft messages sent per type per second
-- Vote: The number of Vote messages sent in Raft per second
-- Raft dropped messages: The number of dropped Raft messages per type per second
+-   サーバーあたりの送信メッセージ数: 各 TiKV インスタンスが 1 秒あたりに送信するRaftメッセージの数
+-   サーバーあたりのフラッシュメッセージ数: 各 TiKV インスタンスでRaftクライアントによって 1 秒あたりにフラッシュされるRaftメッセージの数
+-   サーバーあたりの受信メッセージ数: 各 TiKV インスタンスが 1 秒あたりに受信するRaftメッセージの数
+-   メッセージ: 1秒あたりに送信されたRaftメッセージの数
+-   投票: Raftで 1 秒あたりに送信された投票メッセージの数
+-   Raftドロップメッセージ: 1 秒あたりにタイプごとにドロップされたRaftメッセージの数
 
 ![TiKV Dashboard - Raft message metrics](/media/tikv-dashboard-raft-message.png)
 
-### Raft propose
+### Raft提案 {#raft-propose}
 
-- Raft apply proposals per ready: The histogram of the number of proposals that each ready operation contains in a batch while applying proposal.
-- Raft read/write proposals: The number of proposals per type per second
-- Raft read proposals per server: The number of read proposals made by each TiKV instance per second
-- Raft write proposals per server: The number of write proposals made by each TiKV instance per second
-- Propose wait duration: The histogram of waiting time of each proposal
-- Propose wait duration per server: The histogram of waiting time of each proposal per TiKV instance
-- Apply wait duration: The histogram of apply time of each proposal
-- Apply wait duration per server: The histogram of apply time of each proposal per TiKV instance
-- Raft log speed: The average rate at which peers propose logs
+-   準備完了ごとのRaft適用提案: 提案を適用するときに、各準備完了操作がバッチ内に含める提案の数のヒストグラム。
+-   Raft の読み取り/書き込み提案: 1 秒あたりのタイプごとの提案数
+-   サーバーあたりのRaft読み取り提案数: 各 TiKV インスタンスが 1 秒あたりに行った読み取り提案の数
+-   サーバーあたりのRaft書き込み提案数: 各 TiKV インスタンスが 1 秒あたりに行う書き込み提案の数
+-   提案の待機時間: 各提案の待機時間のヒストグラム
+-   サーバーごとの提案待機時間: TiKVインスタンスごとの各提案の待機時間のヒストグラム
+-   適用待ち時間: 各提案の適用時間のヒストグラム
+-   サーバーごとの適用待機時間: TiKVインスタンスごとの各提案の適用時間のヒストグラム
+-   Raft速度: 仲間がログを提案する平均速度
 
 ![TiKV Dashboard - Raft propose metrics](/media/tikv-dashboard-raft-propose.png)
 
-### Raft admin
+### Raft管理者 {#raft-admin}
 
-- Admin proposals: The number of admin proposals per second
-- Admin apply: The number of processed apply commands per second
-- Check split: The number of Raftstore split check commands per second
-- 99.99% Check split duration: The time consumed when running split check commands (P99.99)
+-   管理者提案: 1秒あたりの管理者提案の数
+-   管理適用: 1秒あたりに処理された適用コマンドの数
+-   チェック分割: 1秒あたりのRaftstore分割チェックコマンドの数
+-   99.99% チェック分割期間: 分割チェックコマンドの実行に要した時間 (P99.99)
 
 ![TiKV Dashboard - Raft admin metrics](/media/tikv-dashboard-raft-admin.png)
 
-### Local reader
+### 地元の読者 {#local-reader}
 
-- Local reader requests: The number of total requests and the number of rejections from the local read thread
+-   ローカル読み取りリクエスト: ローカル読み取りスレッドからの合計リクエスト数と拒否数
 
 ![TiKV Dashboard - Local reader metrics](/media/tikv-dashboard-local-reader.png)
 
-### Unified Read Pool
+### 統合読み取りプール {#unified-read-pool}
 
-- Time used by level: The time consumed for each level in the unified read pool. Level 0 means small queries.
-- Level 0 chance: The proportion of level 0 tasks in unified read pool
-- Running tasks: The number of tasks running concurrently in the unified read pool
+-   レベル別使用時間：統合読み取りプール内の各レベルで消費された時間。レベル 0 は小さなクエリを意味します。
+-   レベル0のチャンス: 統合読み取りプール内のレベル0タスクの割合
+-   実行中のタスク: 統合読み取りプールで同時に実行されているタスクの数
 
-### Storage
+### ストレージ {#storage}
 
-- Storage command total: The number of received command by type per second
-- Storage async request error: The number of engine asynchronous request errors per second
-- Storage async snapshot duration: The time consumed by processing asynchronous snapshot requests. It should be less than `1s` in `.99`.
-- Storage async write duration: The time consumed by processing asynchronous write requests. It should be less than `1s` in `.99`.
+-   ストレージコマンド合計: 1秒あたりのタイプ別受信コマンド数
+-   ストレージ非同期リクエストエラー: 1秒あたりのエンジン非同期リクエストエラーの数
+-   ストレージ非同期スナップショット期間：非同期スナップショット要求の処理にかかる時間。3 `.99`の`1s`未満である必要があります。
+-   ストレージ非同期書き込み時間：非同期書き込みリクエストの処理にかかる時間。3 `.99`の`1s`未満である必要があります。
 
 ![TiKV Dashboard - Storage metrics](/media/tikv-dashboard-storage.png)
 
-### Flow Control
+### フロー制御 {#flow-control}
 
-- Scheduler flow: The scheduler traffic on each TiKV instance in real time.
-- Scheduler discard ratio: The rejection ratio of scheduler requests on each TiKV instance. If this ratio is greater than 0, it indicates that flow control exists. When `Compaction pending bytes` exceeds its threshold, TiKV will linearly increase the `Scheduler discard ratio` based on the exceeded portion. The client will retry the rejected requests automatically.
-- Throttle duration: The blocked duration for the execution of the scheduler requests when flow control is triggered due to too many L0 files. If this metric has values, it indicates that flow control exists.
-- Scheduler throttled CF: The CF that triggers RocksDB throttling when the flow control threshold is reached.
-- Flow controller actions: The actions that trigger RocksDB throttling when the flow control threshold is reached.
-- Flush/L0 flow: The traffic of flush and L0 compaction for different CFs of RocksDB on each TiKV instance.
-- Flow control factors: The factors related to triggering RocksDB throttling.
-- Compaction pending bytes: The size of the RocksDB data awaiting compaction in real time on each TiKV instance.
-- Txn command throttled duration: The blocked duration for commands related to transactions due to throttling. Under normal circumstances, this metric is 0.
-- Non-txn command throttled duration: The blocked duration for other commands due to throttling. Under normal circumstances, this metric is 0.
+-   スケジューラ フロー: 各 TiKV インスタンス上のスケジューラ トラフィック (リアルタイム)。
+-   スケジューラ破棄率: 各TiKVインスタンスにおけるスケジューラリクエストの拒否率。この比率が0より大きい場合、フロー制御が行われていることを示します。1 `Compaction pending bytes`しきい値を超えると、TiKVは超過分に基づいて`Scheduler discard ratio`線形に増加させます。クライアントは拒否されたリクエストを自動的に再試行します。
+-   スロットル期間: L0ファイルが多すぎるためにフロー制御がトリガーされた際に、スケジューラリクエストの実行がブロックされた期間。このメトリックに値がある場合、フロー制御が存在していることを示します。
+-   スケジューラ スロットル CF: フロー制御しきい値に達したときに RocksDB スロットルをトリガーする CF。
+-   フロー コントローラ アクション: フロー制御しきい値に達したときに RocksDB スロットルをトリガーするアクション。
+-   フラッシュ/L0 フロー: 各 TiKV インスタンス上の RocksDB の異なる CF のフラッシュと L0 圧縮のトラフィック。
+-   フロー制御要因: RocksDB スロットルのトリガーに関連する要因。
+-   圧縮保留バイト: 各 TiKV インスタンスでリアルタイムに圧縮を待機している RocksDB データのサイズ。
+-   トランザクションコマンドのスロットル期間: スロットルによりトランザクション関連コマンドがブロックされた期間。通常、このメトリックは0です。
+-   非トランザクションコマンドのスロットル期間: スロットルにより他のコマンドがブロックされた期間。通常、このメトリックは0です。
 
 ![TiKV Dashboard - Flow Control metrics](/media/tikv-dashboard-flow-control.png)
 
-### Scheduler
+### スケジューラ {#scheduler}
 
-- Scheduler stage total: The number of commands at each stage per second. There should not be a lot of errors in a short time.
-- Scheduler writing bytes: The total written bytes by commands processed on each TiKV instance
-- Scheduler priority commands: The count of different priority commands per second
-- Scheduler pending commands: The count of pending commands per TiKV instance per second
+-   スケジューラステージ合計：各ステージにおける1秒あたりのコマンド数。短時間に大量のエラーが発生しないようにする必要があります。
+-   スケジューラ書き込みバイト数: 各 TiKV インスタンスで処理されたコマンドによって書き込まれた合計バイト数
+-   スケジューラ優先コマンド: 1秒あたりの異なる優先コマンドの数
+-   スケジューラの保留コマンド: TiKV インスタンスあたりの 1 秒あたりの保留コマンドの数
 
 ![TiKV Dashboard - Scheduler metrics](/media/tikv-dashboard-scheduler.png)
 
-### Scheduler - commit
+### スケジューラ - コミット {#scheduler-commit}
 
-- Scheduler stage total: The number of commands at each stage per second when executing the commit command. There should not be a lot of errors in a short time.
-- Scheduler command duration: The time consumed when executing the commit command. It should be less than `1s`.
-- Scheduler latch wait duration: The waiting time caused by latch when executing the commit command. It should be less than `1s`.
-- Scheduler keys read: The count of keys read by a commit command
-- Scheduler keys written: The count of keys written by a commit command
-- Scheduler scan details: The keys scan details of each CF when executing the commit command.
-- Scheduler scan details [lock]: The keys scan details of lock CF when executing the commit command
-- Scheduler scan details [write]: The keys scan details of write CF when executing the commit command
-- Scheduler scan details [default]: The keys scan details of default CF when executing the commit command
+-   スケジューラステージ合計: コミットコマンド実行時の各ステージにおける1秒あたりのコマンド数。短時間に大量のエラーが発生しないようにする必要があります。
+-   スケジューラコマンド実行時間: コミットコマンドの実行にかかる時間。1 `1s`である必要があります。
+-   スケジューララッチ待機時間：コミットコマンド実行時にラッチによって発生する待機時間。1 `1s`である必要があります。
+-   スケジューラキー読み取り:コミットコマンドによって読み取られたキーの数
+-   書き込まれたスケジューラキー:コミットコマンドによって書き込まれたキーの数
+-   スケジューラ スキャンの詳細: キーは、コミット コマンドを実行するときに各 CF の詳細をスキャンします。
+-   スケジューラスキャンの詳細 [ロック]: コミットコマンドを実行するときに、キーはロックCFの詳細をスキャンします。
+-   スケジューラスキャンの詳細 [書き込み]: コミットコマンドを実行するときに、キーは書き込みCFの詳細をスキャンします。
+-   スケジューラスキャンの詳細 [デフォルト]: コミットコマンドを実行するときに、キーはデフォルトのCFの詳細をスキャンします。
 
 ![TiKV Dashboard - Scheduler commit metrics](/media/tikv-dashboard-scheduler-commit.png)
 
-### Scheduler - pessimistic_rollback
+### スケジューラ - pessimistic_rollback {#scheduler-pessimistic-rollback}
 
-- Scheduler stage total: The number of commands at each stage per second when executing the `pessimistic_rollback` command. There should not be a lot of errors in a short time.
-- Scheduler command duration: The time consumed when executing the `pessimistic_rollback` command. It should be less than `1s`.
-- Scheduler latch wait duration: The waiting time caused by latch when executing the `pessimistic_rollback` command. It should be less than `1s`.
-- Scheduler keys read: The count of keys read by a `pessimistic_rollback` command
-- Scheduler keys written: The count of keys written by a `pessimistic_rollback` command
-- Scheduler scan details: The keys scan details of each CF when executing the `pessimistic_rollback` command.
-- Scheduler scan details [lock]: The keys scan details of lock CF when executing the `pessimistic_rollback` command
-- Scheduler scan details [write]: The keys scan details of write CF when executing the `pessimistic_rollback` command
-- Scheduler scan details [default]: The keys scan details of default CF when executing the `pessimistic_rollback` command
+-   スケジューラステージ合計: `pessimistic_rollback`コマンド実行時の各ステージにおける1秒あたりのコマンド数。短時間に大量のエラーが発生しないはずです。
+-   スケジューラコマンドの実行時間: `pessimistic_rollback`コマンドの実行にかかる時間。3 `1s`である必要があります。
+-   スケジューララッチ待機時間：コマンド`pessimistic_rollback`実行時にラッチによって発生する待機時間。3 `1s`である必要があります。
+-   スケジューラキー読み取り: `pessimistic_rollback`コマンドで読み取られたキーの数
+-   書き込まれたスケジューラキー: `pessimistic_rollback`コマンドによって書き込まれたキーの数
+-   スケジューラ スキャンの詳細: キーは、 `pessimistic_rollback`コマンドを実行するときに各 CF の詳細をスキャンします。
+-   スケジューラスキャンの詳細 [ロック]: キーは、 `pessimistic_rollback`コマンドを実行するときにロック CF の詳細をスキャンします。
+-   スケジューラスキャンの詳細 [書き込み]: キーは、 `pessimistic_rollback`コマンドを実行するときに書き込みCFの詳細をスキャンします。
+-   スケジューラスキャンの詳細 [デフォルト]: キーは、 `pessimistic_rollback`コマンドを実行するときにデフォルトの CF の詳細をスキャンします。
 
-### Scheduler - prewrite
+### スケジューラ - 事前書き込み {#scheduler-prewrite}
 
-- Scheduler stage total: The number of commands at each stage per second when executing the prewrite command. There should not be a lot of errors in a short time.
-- Scheduler command duration: The time consumed when executing the prewrite command. It should be less than `1s`.
-- Scheduler latch wait duration: The waiting time caused by latch when executing the prewrite command. It should be less than `1s`.
-- Scheduler keys read: The count of keys read by a prewrite command
-- Scheduler keys written: The count of keys written by a prewrite command
-- Scheduler scan details: The keys scan details of each CF when executing the prewrite command.
-- Scheduler scan details [lock]: The keys scan details of lock CF when executing the prewrite command
-- Scheduler scan details [write]: The keys scan details of write CF when executing the prewrite command
-- Scheduler scan details [default]: The keys scan details of default CF when executing the prewrite command
+-   スケジューラステージ合計: プリライトコマンド実行時の各ステージにおける1秒あたりのコマンド数。短時間に大量のエラーが発生しないようにする必要があります。
+-   スケジューラコマンド実行時間: 事前書き込みコマンドの実行にかかる時間。1 `1s`である必要があります。
+-   スケジューララッチ待機時間：プリライトコマンド実行時にラッチによって発生する待機時間。1 `1s`である必要があります。
+-   スケジューラキー読み取り: 事前書き込みコマンドによって読み取られたキーの数
+-   書き込まれたスケジューラキー: 事前書き込みコマンドによって書き込まれたキーの数
+-   スケジューラ スキャンの詳細: キーは、事前書き込みコマンドを実行するときに各 CF の詳細をスキャンします。
+-   スケジューラスキャンの詳細 [ロック]: キーは、prewrite コマンドを実行するときにロック CF の詳細をスキャンします。
+-   スケジューラスキャンの詳細 [書き込み]: キーは、書き込み前コマンドを実行するときに書き込みCFの詳細をスキャンします。
+-   スケジューラスキャンの詳細 [デフォルト]: キーは、prewrite コマンドを実行するときにデフォルトの CF の詳細をスキャンします。
 
-### Scheduler - rollback
+### スケジューラ - ロールバック {#scheduler-rollback}
 
-- Scheduler stage total: The number of commands at each stage per second when executing the rollback command. There should not be a lot of errors in a short time.
-- Scheduler command duration: The time consumed when executing the rollback command. It should be less than `1s`.
-- Scheduler latch wait duration: The waiting time caused by latch when executing the rollback command. It should be less than `1s`.
-- Scheduler keys read: The count of keys read by a rollback command
-- Scheduler keys written: The count of keys written by a rollback command
-- Scheduler scan details: The keys scan details of each CF when executing the rollback command.
-- Scheduler scan details [lock]: The keys scan details of lock CF when executing the rollback command
-- Scheduler scan details [write]: The keys scan details of write CF when executing the rollback command
-- Scheduler scan details [default]: The keys scan details of default CF when executing the rollback command
+-   スケジューラステージ合計: ロールバックコマンド実行時の各ステージにおける1秒あたりのコマンド数。短時間に大量のエラーが発生しないようにする必要があります。
+-   スケジューラコマンド実行時間: ロールバックコマンドの実行にかかる時間。1 `1s`である必要があります。
+-   スケジューララッチ待機時間：ロールバックコマンド実行時にラッチによって発生する待機時間。1 `1s`である必要があります。
+-   スケジューラキーの読み取り: ロールバックコマンドによって読み取られたキーの数
+-   書き込まれたスケジューラキー: ロールバックコマンドによって書き込まれたキーの数
+-   スケジューラ スキャンの詳細: キーは、ロールバック コマンドを実行するときに各 CF の詳細をスキャンします。
+-   スケジューラスキャンの詳細 [ロック]: ロールバックコマンドを実行するときに、キーはロックCFの詳細をスキャンします。
+-   スケジューラスキャンの詳細 [書き込み]: ロールバックコマンドを実行するときに、キーは書き込みCFの詳細をスキャンします。
+-   スケジューラスキャンの詳細 [デフォルト]: ロールバックコマンドを実行するときに、キーはデフォルトのCFの詳細をスキャンします。
 
-### GC
+### GC {#gc}
 
-- GC tasks: The count of GC tasks processed by gc_worker
-- GC tasks Duration: The time consumed when executing GC tasks
-- TiDB GC seconds: The GC duration
-- TiDB GC worker actions: The count of TiDB GC worker actions
-- ResolveLocks Progress: The progress of the first phase of GC (Resolve Locks)
-- TiKV Auto GC Progress: The progress of the second phase of GC
-- GC speed: The number of keys deleted by GC per second
-- TiKV Auto GC SafePoint: The value of TiKV GC safe point. The safe point is the current GC timestamp
-- GC lifetime: The lifetime of TiDB GC
-- GC interval: The interval of TiDB GC
-- GC in Compaction Filter: The count of filtered versions in the compaction filter of write CF.
+-   GCタスク: gc_workerによって処理されたGCタスクの数
+-   GCタスク期間: GCタスクの実行に要した時間
+-   TiDB GC秒数:GCの所要時間
+-   TiDB GCワーカーアクション: TiDB GCワーカーアクションの数
+-   ResolveLocks Progress: GC (Resolve Locks) の最初のフェーズの進行状況
+-   TiKV Auto GCの進捗状況: GCの第2フェーズの進捗状況
+-   GC速度: GCによって1秒あたりに削除されるキーの数
+-   TiKV自動GCセーフポイント: TiKV GCセーフポイントの値。セーフポイントは現在のGCタイムスタンプです。
+-   GC の有効期間: TiDB GC の有効期間
+-   GC間隔: TiDB GCの間隔
+-   圧縮フィルター内の GC: 書き込み CF の圧縮フィルターでフィルターされたバージョンの数。
 
-### Snapshot
+### スナップショット {#snapshot}
 
-- Rate snapshot message: The rate at which Raft snapshot messages are sent
-- 99% Handle snapshot duration: The time consumed to handle snapshots (P99)
-- Snapshot state count: The number of snapshots per state
-- 99.99% Snapshot size: The snapshot size (P99.99)
-- 99.99% Snapshot KV count: The number of KV within a snapshot (P99.99)
+-   スナップショットメッセージの送信レート: Raftショットメッセージが送信されるレート
+-   99% スナップショット処理時間: スナップショットの処理に要した時間 (P99)
+-   スナップショット状態数: 状態ごとのスナップショットの数
+-   99.99% スナップショットサイズ: スナップショットサイズ (P99.99)
+-   99.99% スナップショット KV 数: スナップショット内の KV 数 (P99.99)
 
-### Task
+### タスク {#task}
 
-- Worker handled tasks: The number of tasks handled by worker per second
-- Worker pending tasks: Current number of pending and running tasks of worker per second. It should be less than `1000` in normal case.
-- FuturePool handled tasks: The number of tasks handled by future pool per second
-- FuturePool pending tasks: Current number of pending and running tasks of future pool per second
+-   ワーカーが処理したタスク: ワーカーが1秒あたりに処理したタスクの数
+-   ワーカーの保留タスク数: 1秒あたりのワーカーの保留中および実行中のタスク数。通常は`1000`未満です。
+-   FuturePool が処理したタスク: FuturePool が 1 秒あたりに処理したタスクの数
+-   FuturePool の保留中のタスク: FuturePool の 1 秒あたりの保留中および実行中のタスクの現在の数
 
-### Coprocessor Overview
+### コプロセッサーの概要 {#coprocessor-overview}
 
-- Request duration: The total duration from the time of receiving the coprocessor request to the time of finishing processing the request
-- Total Requests: The number of requests by type per second
-- Handle duration: The histogram of time spent actually processing coprocessor requests per minute
-- Total Request Errors: The number of request errors of Coprocessor per second. There should not be a lot of errors in a short time.
-- Total KV Cursor Operations: The total number of the KV cursor operations by type per second, such as `select`, `index`, `analyze_table`, `analyze_index`, `checksum_table`, and `checksum_index`.
-- KV Cursor Operations: The histogram of KV cursor operations by type per second
-- Total RocksDB Perf Statistics: The statistics of RocksDB performance
-- Total Response Size: The total size of coprocessor response
+-   リクエスト期間: コプロセッサリクエストを受信してからリクエストの処理が完了するまでの合計期間
+-   合計リクエスト数: 1秒あたりのリクエスト数（種類別）
+-   処理時間: 1 分あたりにコプロセッサ要求を実際に処理するのにかかった時間のヒストグラム
+-   リクエストエラー総数:コプロセッサーの1秒あたりのリクエストエラー数。短時間に大量のエラーが発生することはありません。
+-   合計 KV カーソル操作: `select` 、 `index` 、 `analyze_table` 、 `analyze_index` 、 `checksum_table` 、 `checksum_index`など、1 秒あたりのタイプ別の KV カーソル操作の合計数。
+-   KV カーソル操作: 1 秒あたりの KV カーソル操作の種類別のヒストグラム
+-   RocksDBパフォーマンス統計合計: RocksDBパフォーマンスの統計
+-   合計応答サイズ:コプロセッサ応答の合計サイズ
 
-### Coprocessor Detail
+### コプロセッサーの詳細 {#coprocessor-detail}
 
-- Handle duration: The histogram of time spent actually processing coprocessor requests per minute
-- 95% Handle duration by store: The time consumed to handle coprocessor requests per TiKV instance per second (P95)
-- Wait duration: The time consumed when coprocessor requests are waiting to be handled. It should be less than `10s` (P99.99).
-- 95% Wait duration by store: The time consumed when coprocessor requests are waiting to be handled per TiKV instance per second (P95)
-- Total DAG Requests: The total number of DAG requests per second
-- Total DAG Executors: The total number of DAG executors per second
-- Total Ops Details (Table Scan): The number of RocksDB internal operations per second when executing select scan in coprocessor
-- Total Ops Details (Index Scan): The number of RocksDB internal operations per second when executing index scan in coprocessor
-- Total Ops Details by CF (Table Scan): The number of RocksDB internal operations for each CF per second when executing select scan in coprocessor
-- Total Ops Details by CF (Index Scan): The number of RocksDB internal operations for each CF per second when executing index scan in coprocessor
+-   処理時間: 1 分あたりにコプロセッサ要求を実際に処理するのにかかった時間のヒストグラム
+-   ストア別の95%処理時間: TiKVインスタンスあたりのコプロセッサ要求の処理に1秒あたりに要した時間 (P95)
+-   待機時間: コプロセッサ要求の処理待ち時間。1 (P99.99) `10s`である必要があります。
+-   ストア別95%待機時間:コプロセッサ要求が処理されるのを待機している時間 (TiKVインスタンスあたり1秒あたり、P95)
+-   合計DAGリクエスト数: 1秒あたりのDAGリクエスト数の合計
+-   DAGエグゼキューターの合計数: 1秒あたりのDAGエグゼキューターの合計数
+-   合計操作の詳細（テーブルスキャン）：コプロセッサで選択スキャンを実行する際の、1秒あたりのRocksDB内部操作の数
+-   合計操作の詳細（インデックススキャン）：コプロセッサでインデックススキャンを実行する際の、1秒あたりのRocksDB内部操作の数
+-   CF別の合計操作詳細（テーブルスキャン）：コプロセッサで選択スキャンを実行する際の、各CFの1秒あたりのRocksDB内部操作の数
+-   CF別合計オペレーション詳細（インデックススキャン）：コプロセッサでインデックススキャンを実行する際の、各CFの1秒あたりのRocksDB内部オペレーション数
 
-### Threads
+### スレッド {#threads}
 
-- Threads state: The state of TiKV threads
-- Threads IO: The I/O traffic of each TiKV thread
-- Thread Voluntary Context Switches: The number of TiKV threads voluntary context switches
-- Thread Nonvoluntary Context Switches: The number of TiKV threads nonvoluntary context switches
+-   スレッドの状態: TiKVスレッドの状態
+-   スレッドIO: 各TiKVスレッドのI/Oトラフィック
+-   スレッドの自発的なコンテキストスイッチ: TiKVスレッドの自発的なコンテキストスイッチの数
+-   スレッドの非自発的コンテキストスイッチ: TiKVスレッドの非自発的コンテキストスイッチの数
 
-### RocksDB - kv/raft
+### RocksDB - kv/raft {#rocksdb-kv-raft}
 
-- Get operations: The count of get operations per second
-- Get duration: The time consumed when executing get operations
-- Seek operations: The count of seek operations per second
-- Seek duration: The time consumed when executing seek operations
-- Write operations: The count of write operations per second
-- Write duration: The time consumed when executing write operations
-- WAL sync operations: The count of WAL sync operations per second
-- Write WAL duration: The time consumed for writing WAL
-- WAL sync duration: The time consumed when executing WAL sync operations
-- Compaction operations: The count of compaction and flush operations per second
-- Compaction duration: The time consumed when executing the compaction and flush operations
-- SST read duration: The time consumed when reading SST files
-- Write stall duration: Write stall duration. It should be `0` in normal case.
-- Memtable size: The memtable size of each column family
-- Memtable hit: The hit rate of memtable
-- Block cache size: The block cache size. Broken down by column family if shared block cache is disabled.
-- Block cache hit: The hit rate of block cache
-- Block cache flow: The flow rate of block cache operations per type
-- Block cache operations: The count of block cache operations per type
-- Keys flow: The flow rate of operations on keys per type
-- Total keys: The count of keys in each column family
-- Read flow: The flow rate of read operations per type
-- Bytes / Read: The bytes per read operation
-- Write flow: The flow rate of write operations per type
-- Bytes / Write: The bytes per write operation
-- Compaction flow: The flow rate of compaction operations per type
-- Compaction pending bytes: The pending bytes to be compacted
-- Compaction Job Size(files): The number of SST files involved in a single compaction job
-- Read amplification: The read amplification per TiKV instance
-- Compression ratio: The compression ratio of each level
-- Number of snapshots: The number of snapshots per TiKV instance
-- Oldest snapshots duration: The time that the oldest unreleased snapshot survivals
-- Number files at each level: The number of SST files for different column families in each level
-- Ingest SST duration seconds: The time consumed to ingest SST files
-- Stall conditions changed of each CF: Stall conditions changed of each column family
+-   取得操作: 1秒あたりの取得操作の数
+-   取得時間: 取得操作の実行にかかる時間
+-   シーク操作: 1秒あたりのシーク操作の回数
+-   シーク時間: シーク操作を実行する際に消費される時間
+-   書き込み操作: 1秒あたりの書き込み操作の数
+-   書き込み時間: 書き込み操作の実行にかかる時間
+-   WAL同期操作: 1秒あたりのWAL同期操作の数
+-   WAL書き込み時間: WALの書き込みにかかる時間
+-   WAL同期時間: WAL同期操作の実行にかかる時間
+-   圧縮操作: 1秒あたりの圧縮およびフラッシュ操作の数
+-   圧縮時間: 圧縮とフラッシュ操作の実行にかかる時間
+-   SST 読み取り時間: SST ファイルの読み取りにかかる時間
+-   書き込みストール期間: 書き込みストール期間。通常は`0`なります。
+-   メモリテーブルサイズ: 各カラムファミリーのメモリテーブルサイズ
+-   Memtableヒット: memtableのヒット率
+-   ブロック キャッシュ サイズ:ブロックキャッシュサイズ。共有ブロックキャッシュが無効になっている場合は、カラムファミリーごとに分類されます。
+-   ブロックキャッシュヒット:ブロックキャッシュのヒット率
+-   ブロックキャッシュフロー:ブロックキャッシュ操作の種類ごとのフローレート
+-   ブロックキャッシュ操作: タイプごとのブロックキャッシュ操作の数
+-   キーフロー: キーの種類ごとの操作のフロー率
+-   合計キー: 各カラムファミリー内のキーの数
+-   読み取りフロー: タイプごとの読み取り操作のフローレート
+-   バイト / 読み取り: 読み取り操作あたりのバイト数
+-   書き込みフロー: 書き込み操作の種類ごとのフローレート
+-   バイト / 書き込み: 書き込み操作あたりのバイト数
+-   締固め流量: 締固め作業の種類ごとの流量
+-   圧縮保留バイト数: 圧縮される保留バイト数
+-   圧縮ジョブサイズ（ファイル）: 1回の圧縮ジョブに含まれるSSTファイルの数
+-   リード増幅: TiKVインスタンスごとのリード増幅
+-   圧縮率: 各レベルの圧縮率
+-   スナップショットの数: TiKVインスタンスあたりのスナップショットの数
+-   最古のスナップショットの存続期間: 最も古い未リリースのスナップショットが存続する時間
+-   各レベルのファイル数: 各レベルの異なる列ファミリの SST ファイルの数
+-   SST取り込み時間（秒）: SST ファイルの取り込みにかかった時間
+-   各 CF の失速条件が変更されました: 各カラムファミリーの失速条件が変更されました
 
-### Raft Engine
+### Raft Engine {#raft-engine}
 
-- Operations
-    - write: the number of write operations by Raft Engine per second
-    - read_entry: the number of raft log read operations by Raft Engine per second
-    - read_message: the number of raft metadata read operations by Raft Engine per second
-- Write duration: the duration of write operations by Raft Engine. This duration is close to the sum of the latency of disk IOs involved in writing these data.
-- Flow
-    - write: the write traffic of Raft Engine
-    - rewrite append: the traffic of rewriting append logs
-    - rewrite rewrite: the traffic of rewriting rewrite logs
-- Write Duration Breakdown (99%)
-    - wal: the latency of writing Raft Engine WAL
-    - wait: the waiting time before writing
-    - apply: the time consumed for applying data to memory
-- Bytes/Written: the bytes written by Raft Engine every time
-- WAL Duration Breakdown (P99%): the time consumed for each stage of writing Raft Engine WAL
-- File Count
-    - append: the number of files used for appending data by Raft Engine
-    - rewrite: the number of files used for rewriting data by Raft Engine (rewrite is similar to RocksDB compaction)
-- Entry Count
-    - rewrite: the number of entries rewritten by Raft Engine
-    - append: the number of entries appended by Raft Engine
+-   オペレーション
+    -   書き込み: Raft Engineによる 1 秒あたりの書き込み操作の数
+    -   read_entry: Raft Engineによる1秒あたりのRaftログ読み取り操作の数
+    -   read_message: Raft Engineによる 1 秒あたりの Rought メタデータ読み取り操作の数
+-   書き込み時間: Raft Engineによる書き込み操作の時間。この時間は、これらのデータの書き込みに関連するディスクIOのレイテンシーの合計にほぼ相当します。
+-   流れ
+    -   書き込み: Raft Engineの書き込みトラフィック
+    -   書き換え追加: 書き換え追加ログのトラフィック
+    -   書き換え書き換え: 書き換えログの書き換えトラフィック
+-   書き込み時間の内訳（99%）
+    -   wal: Raft Engine WAL の書き込みのレイテンシー
+    -   wait: 書き込み前の待機時間
+    -   適用: データをメモリに適用するのにかかる時間
+-   バイト数/書き込み: Raft Engineが毎回書き込むバイト数
+-   WAL 所要時間の内訳 (P99%): Raft EngineWAL の書き込みの各ステージで消費された時間
+-   ファイル数
+    -   append: Raft Engineによってデータを追加するために使われるファイルの数
+    -   rewrite: Raft Engineによってデータの書き換えに使用されるファイルの数 (rewrite は RocksDB の圧縮に似ています)
+-   エントリー数
+    -   rewrite: Raft Engineによって書き換えられたエントリの数
+    -   append: Raft Engineによって追加されたエントリの数
 
-### Titan - All
+### タイタン - すべて {#titan-all}
 
-- Blob file count: The number of Titan blob files
-- Blob file size: The total size of Titan blob file
-- Live blob size: The total size of valid blob record
-- Blob cache hit: The hit rate of Titan block cache
-- Iter touched blob file count: The number of blob file involved in a single iterator
-- Blob file discardable ratio distribution: The ratio distribution of blob record failure of blob files
-- Blob key size: The size of Titan blob keys
-- Blob value size: The size of Titan blob values
-- Blob get operations: The count of get operations in Titan blob
-- Blob get duration: The time consumed when executing get operations in Titan blob
-- Blob iter operations: The time consumed when executing iter operations in Titan blob
-- Blob seek duration: The time consumed when executing seek operations in Titan blob
-- Blob next duration: The time consumed when executing next operations in Titan blob
-- Blob prev duration: The time consumed when executing prev operations in Titan blob
-- Blob keys flow: The flow rate of operations on Titan blob keys
-- Blob bytes flow: The flow rate of bytes on Titan blob keys
-- Blob file read duration: The time consumed when reading Titan blob file
-- Blob file write duration: The time consumed when writing Titan blob file
-- Blob file sync operations: The count of blob file sync operations
-- Blob file sync duration: The time consumed when synchronizing blob file
-- Blob GC action: The count of Titan GC actions
-- Blob GC duration: The Titan GC duration
-- Blob GC keys flow: The flow rate of keys read and written by Titan GC
-- Blob GC bytes flow: The flow rate of bytes read and written by Titan GC
-- Blob GC input file size: The size of Titan GC input file
-- Blob GC output file size: The size of Titan GC output file
-- Blob GC file count: The count of blob files involved in Titan GC
+-   BLOBファイル数: Titan BLOBファイルの数
+-   BLOBファイルサイズ: Titan BLOBファイルの合計サイズ
+-   ライブBLOBサイズ: 有効なBLOBレコードの合計サイズ
+-   BLOBキャッシュヒット: Titanブロックキャッシュのヒット率
+-   反復処理されたBLOBファイルの数: 単一の反復処理に関係するBLOBファイルの数
+-   BLOBファイルの破棄可能率の分布: BLOBファイルのBLOBレコードの失敗率の分布
+-   ブロブキーのサイズ: Titanブロブキーのサイズ
+-   BLOB値のサイズ: Titan BLOB値のサイズ
+-   BLOB 取得操作: Titan BLOB の取得操作の数
+-   BLOB 取得時間: Titan BLOB で取得操作を実行するときに消費される時間
+-   BLOB反復操作: Titan BLOBで反復操作を実行するときに消費される時間
+-   BLOBシーク時間: Titan BLOBでシーク操作を実行するときに消費される時間
+-   BLOBの次の処理時間: Titan BLOBで次の操作を実行するときにかかる時間
+-   BLOB前処理時間: Titan BLOBで前処理を実行するのにかかる時間
+-   ブロブキーフロー: Titanブロブキーの操作のフローレート
+-   BLOBバイトフロー: Titan BLOBキーのバイトフローレート
+-   BLOBファイルの読み取り時間: Titan BLOBファイルの読み取りにかかる時間
+-   BLOBファイルの書き込み時間: Titan BLOBファイルの書き込みにかかる時間
+-   BLOBファイル同期操作: BLOBファイル同期操作の数
+-   BLOBファイル同期時間: BLOBファイルの同期にかかる時間
+-   BLOB GCアクション: Titan GCアクションの数
+-   BLOB GC 期間: Titan GC 期間
+-   BLOB GCキーフロー: Titan GCによって読み書きされるキーのフローレート
+-   BLOB GCバイトフロー: Titan GCによって読み書きされるバイトのフローレート
+-   BLOB GC入力ファイルサイズ: Titan GC入力ファイルのサイズ
+-   BLOB GC出力ファイルサイズ: Titan GC出力ファイルのサイズ
+-   BLOB GC ファイル数: Titan GC に関係する BLOB ファイルの数
 
-### In Memory Engine
+### インメモリエンジン {#in-memory-engine}
 
-The following metrics are related to [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md) (IME).
+次のメトリックは[TiKV MVCC インメモリエンジン](/tikv-in-memory-engine.md) (IME) に関連しています。
 
-- Ops: The number of operations per second for column families
-- Read MBps: The total bytes of read traffic in RocksDB and the in-memory engine
-- Coprocessor Handle duration: The time consumed for handling coprocessor requests
-- Region Cache Hit: The number of times data is successfully retrieved from the Region cache
-- Region Cache Hit Rate: The hit rate of Region cache
-- Region Cache Miss Reason: The reasons why data is not retrieved from the Region cache
-- Memory Usage: The memory usage of the in-memory engine
-- Region Count: The count of different types of Regions
-- GC Filter: The information about the filtering process during garbage collection (GC)
-- Region GC Duration: The time consumed for Region GC
-- Region Load Duration: The time consumed for loading Regions
-- Region Load Count: The number of Regions loaded per second
-- Region Eviction Duration: The time consumed for evicting Regions
-- Region Eviction Count: The number of Regions evicted per second
-- Write duration: The time consumed for write operations in the Region cache engine
-- 99% In-memory engine write duration per server: The 99th percentile of write duration per TiKV server for the in-memory engine
-- Prepare for write duration: The time consumed for preparing write operations in the in-memory engine
-- 99% In-memory engine prepare for write duration per server: The 99th percentile of time consumed for preparing write operations per TiKV server in the in-memory engine
-- Iterator operations: The number of different types of iterator operations
-- Seek duration: The time consumed for seek operations
-- Oldest Auto GC SafePoint: The oldest automatic GC safepoint for Regions cached in the in-memory engine
-- Newest Auto GC SafePoint: The newest automatic GC safepoint for Regions cached in the in-memory engine
-- Auto GC SafePoint Gap: The time gap between the newest automatic GC safepoint and the oldest automatic GC safepoint for Regions cached in the in-memory engine
-- Auto GC SafePoint Gap With TiKV: The gap between the TiKV automatic GC safepoint and the oldest automatic GC safepoint for Regions cached in the in-memory engine
+-   Ops: 列ファミリーの1秒あたりの操作数
+-   読み取りMBps: RocksDBとメモリ内エンジンの読み取りトラフィックの合計バイト数
+-   コプロセッサー処理時間: コプロセッサ要求の処理に要した時間
+-   リージョンキャッシュヒット:リージョンキャッシュからデータが正常に取得された回数
+-   リージョンキャッシュヒット率:リージョンキャッシュのヒット率
+-   リージョンキャッシュの失敗理由:リージョンキャッシュからデータが取得されない理由
+-   メモリ使用量: インメモリエンジンのメモリ使用量
+-   リージョン数: さまざまな種類のリージョンの数
+-   GCフィルタ:ガベージコレクション(GC)中のフィルタリングプロセスに関する情報
+-   リージョンGC期間:リージョンGCにかかった時間
+-   リージョン読み込み時間: リージョンの読み込みにかかる時間
+-   リージョンロード数: 1秒あたりにロードされるリージョンの数
+-   リージョンの退去所要時間: リージョンの退去にかかる時間
+-   リージョンのエビクション数: 1秒あたりにエビクションされたリージョンの数
+-   書き込み時間:リージョンキャッシュエンジンでの書き込み操作にかかる時間
+-   サーバーあたりの99%インメモリエンジン書き込み時間:インメモリエンジンのTiKVサーバーあたりの書き込み時間の99パーセンタイル
+-   書き込み準備時間: インメモリエンジンでの書き込み操作の準備にかかる時間
+-   99% インメモリ エンジンの書き込み準備にかかる時間 (サーバーあたり): インメモリ エンジンで TiKVサーバーごとに書き込み操作の準備に費やされる時間の 99 パーセンタイル
+-   反復子操作: 反復子操作の異なる種類の数
+-   シーク時間: シーク操作にかかる時間
+-   最も古い自動 GC セーフポイント: メモリ内エンジンにキャッシュされたリージョンの最も古い自動 GC セーフポイント
+-   最新の自動 GC セーフポイント: インメモリ エンジンにキャッシュされたリージョンの最新の自動 GC セーフポイント
+-   自動 GC セーフポイント ギャップ: インメモリ エンジンにキャッシュされたリージョンの最新の自動 GC セーフポイントと最も古い自動 GC セーフポイント間の時間差
+-   TiKV による自動 GC セーフポイント ギャップ: TiKV 自動 GC セーフポイントと、インメモリ エンジンにキャッシュされた領域の最も古い自動 GC セーフポイント間のギャップ
 
-### Pessimistic Locking
+### 悲観的ロック {#pessimistic-locking}
 
-- Lock Manager Thread CPU: The CPU utilization of the lock manager thread
-- Lock Manager Handled tasks: The number of tasks handled by lock manager
-- Waiter lifetime duration: The waiting time of the transaction for the lock to be released
-- Wait table: The status information of wait table, including the number of locks and the number of transactions waiting for the lock
-- Deadlock detect duration: The time consumed for detecting deadlock
-- Detect error: The number of errors encountered when detecting deadlock, including the number of deadlocks
-- Deadlock detector leader: The information of the node where the deadlock detector leader is located
-- Total pessimistic locks memory size: The memory size occupied by the in-memory pessimistic locks
-- In-memory pessimistic locking result: The result of only saving pessimistic locks to memory. `full` means the number of times that the pessimistic lock is not saved to memory because the memory limit is exceeded.
+-   ロックマネージャスレッドCPU: ロックマネージャスレッドのCPU使用率
+-   ロックマネージャが処理したタスク: ロックマネージャによって処理されたタスクの数
+-   待機者の存続期間: ロックが解放されるまでのトランザクションの待機時間
+-   待機テーブル: ロックの数やロックを待機しているトランザクションの数など、待機テーブルのステータス情報
+-   デッドロック検出時間:デッドロックの検出にかかる時間
+-   検出エラー: デッドロックの検出時に発生したエラーの数（デッドロックの数を含む）
+-   デッドロック検出リーダー: デッドロック検出リーダーが配置されているノードの情報
+-   悲観的ロックの合計メモリサイズ: メモリ内の悲観的ロックが占めるメモリサイズ
+-   メモリ内悲観的ロックの結果:悲観的ロックのみをメモリに保存した結果。1 `full`メモリ制限を超えたために悲観的ロックがメモリに保存されなかった回数を意味します。
 
-### Resolved-TS
+### 解決済み-TS {#resolved-ts}
 
-- Resolved-TS worker CPU: The CPU utilization of the resolved-ts worker threads
-- Advance-TS worker CPU: The CPU utilization of the advance-ts worker threads
-- Scan lock worker CPU: The CPU utilization of the scan lock worker threads
-- Max gap of resolved-ts: The maximum time difference between the resolved-ts of all active Regions in this TiKV and the current time
-- Max gap of safe-ts: The maximum time difference between the safe-ts of all active Regions in this TiKV and the current time
-- Min Resolved TS Region: The ID of the Region whose resolved-ts is the minimal
-- Min Safe TS Region: The ID of the Region whose safe-ts is the minimal
-- Check Leader Duration: The distribution of time spent on processing leader requests. The duration is from sending requests to receiving responses in leader
-- Max gap of resolved-ts in Region leaders: The maximum time difference between the resolved-ts of all active Regions in this TiKV and the current time, only for Region leaders
-- Min Leader Resolved TS Region: The ID of the Region whose resolved-ts is the minimal, only for Region leaders
-- Lock heap size: The size of the heap that tracks locks in the resolved-ts module
+-   解決済みTSワーカーCPU:resolved-tsワーカースレッドのCPU使用率
+-   Advance-TSワーカーCPU: Advance-TSワーカースレッドのCPU使用率
+-   スキャンロックワーカーCPU: スキャンロックワーカースレッドのCPU使用率
+-   resolved-tsの最大ギャップ: この TiKV 内のすべてのアクティブな領域のresolved-tsと現在の時刻との間の最大時間差
+-   セーフタイムの最大ギャップ: この TiKV のすべてのアクティブ領域のセーフタイムと現在の時刻との間の最大時間差
+-   最小解決TSリージョン:resolved-tsが最小であるリージョンのID
+-   最小安全TSリージョン: 安全TSが最小であるリージョンのID
+-   Leader期間の確認: リーダーリクエストの処理に費やされた時間の分布。期間は、リーダーリクエストの送信から応答の受信までです。
+-   リージョンリーダーのresolved-tsの最大ギャップ: この TiKV 内のすべてのアクティブなリージョンのresolved-tsと現在の時刻との間の最大時間差 (リージョンリーダーのみ)
+-   最小Leader解決TSリージョン:resolved-tsが最小であるリージョンのID（リージョンリーダーのみ）
+-   ロックヒープサイズ: resolved-tsモジュール内のロックを追跡するヒープのサイズ
 
-### Memory
+### メモリ {#memory}
 
-- Allocator Stats: The statistics of the memory allocator
+-   アロケータ統計:メモリアロケータの統計
 
-### Backup
+### バックアップ {#backup}
 
-- Backup CPU: The CPU utilization of the backup thread
-- Range Size: The histogram of backup range size
-- Backup Duration: The time consumed for backup
-- Backup Flow: The total bytes of backup
-- Disk Throughput: The disk throughput per instance
-- Backup Range Duration: The time consumed for backing up a range
-- Backup Errors: The number of errors encountered during a backup
+-   バックアップCPU: バックアップスレッドのCPU使用率
+-   範囲サイズ: バックアップ範囲サイズのヒストグラム
+-   バックアップ時間: バックアップにかかる時間
+-   バックアップフロー: バックアップの合計バイト数
+-   ディスクスループット: インスタンスあたりのディスクスループット
+-   バックアップ範囲期間: 範囲のバックアップにかかる時間
+-   バックアップエラー: バックアップ中に発生したエラーの数
 
-### Encryption
+### 暗号化 {#encryption}
 
-- Encryption data keys: The total number of encrypted data keys
-- Encrypted files: The number of encrypted files
-- Encryption initialized: Shows whether encryption is enabled. `1` means enabled.
-- Encryption meta files size: The size of the encryption meta file
-- Encrypt/decrypt data nanos: The histogram of duration on encrypting/decrypting data each time
-- Read/write encryption meta duration: The time consumed for reading/writing encryption meta files
+-   暗号化データキー: 暗号化されたデータキーの総数
+-   暗号化されたファイル: 暗号化されたファイルの数
+-   暗号化が初期化されました: 暗号化が有効かどうかを示します。1 `1`有効であることを意味します。
+-   暗号化メタファイルのサイズ: 暗号化メタファイルのサイズ
+-   データの暗号化/復号化ナノ秒: 毎回のデータの暗号化/復号化にかかる時間のヒストグラム
+-   暗号化メタファイルの読み取り/書き込み時間:暗号化メタファイルの読み取り/書き込みにかかる時間
 
-### Log Backup
+### ログバックアップ {#log-backup}
 
-- Handle Event Rate: The speed of handling write events
-- Initial Scan Generate Event Throughput: Incremental scanning speed when generating a new listener stream
-- Abnormal Checkpoint TS Lag: The lag of the current checkpoint TS to the present time for each task
-- Memory Of Events: An estimated amount of memory occupied by temporary data generated by incremental scanning
-- Observed Region Count: The number of Regions currently listened to
-- Errors: The number and type of retryable and non-fatal errors
-- Fatal Errors: The number and type of fatal errors. Usually, fatal errors cause the task to be paused.
-- Checkpoint TS of Tasks: Checkpoint TS for each task
-- Flush Duration: The heat map of how long it takes for moving cached data to external storage
-- Initial Scanning Duration: The heat map of how long it takes for incremental scanning when creating a new listening stream
-- Convert Raft Event Duration: The heat map of how long it takes to transform a Raft log entry into backup data after creating a listening stream
-- Command Batch Size: The batch size (within a single Raft group) of the listening Raft command
-- Save to Temp File Duration: The heat map of how long it takes to temporarily store a batch of backup data (spanning several tasks) into the temporary file area
-- Write to Temp File Duration: The heat map of how long it takes to temporarily store a batch of backup data (from a particular task) into the temporary file area
-- System Write Call Duration: The heat map of how long it takes to write a batch of backup data (from a Region) to a temporary file
-- Internal Message Type: The type of messages received by the actor responsible for the log backup within TiKV
-- Internal Message Handling Duration (P90|P99): The speed of consuming and processing each type of messages
-- Initial Scan RocksDB Throughput: The read traffic generated by RocksDB internal logging during incremental scanning
-- Initial Scan RocksDB Operation: The number of individual operations logged internally by RocksDB during incremental scanning
-- Initial Scanning Trigger Reason: The reason for triggering incremental scanning
-- Region Checkpoint Key Putting: The number of checkpoint operations logged to the PD
+-   処理イベントレート: 書き込みイベントの処理速度
+-   初期スキャン生成イベントスループット: 新しいリスナーストリームを生成する際の増分スキャン速度
+-   異常なチェックポイントTSラグ: 各タスクの現在のチェックポイントTSから現在までのラグ
+-   イベントのメモリ: 増分スキャンによって生成された一時データが占めるメモリの推定量
+-   観測されたリージョン数: 現在聴取されているリージョンの数
+-   エラー: 再試行可能なエラーと致命的ではないエラーの数と種類
+-   致命的なエラー: 致命的なエラーの数と種類。通常、致命的なエラーが発生するとタスクが一時停止されます。
+-   タスクのチェックポイント TS: 各タスクのチェックポイント TS
+-   フラッシュ期間: キャッシュされたデータを外部storageに移動するのにかかる時間のヒートマップ
+-   初期スキャン時間: 新しいリスニングストリームを作成するときに増分スキャンにかかる時間のヒートマップ
+-   Raftイベント期間の変換: リスニング ストリームを作成した後、 Raftログ エントリをバックアップ データに変換するのにかかる時間のヒート マップ
+-   コマンドバッチサイズ: リスニング中のRaftコマンドのバッチサイズ（単一のRaftグループ内）
+-   一時ファイルへの保存時間: 複数のタスクにまたがるバックアップ データのバッチを一時ファイル領域に一時的に保存するのにかかる時間のヒート マップ
+-   一時ファイルへの書き込み時間: 特定のタスクからのバックアップ データのバッチを一時ファイル領域に一時的に保存するのにかかる時間のヒート マップ
+-   システム書き込み呼び出し時間: バックアップ データのバッチ (リージョンから) を一時ファイルに書き込むのにかかる時間のヒート マップ
+-   内部メッセージタイプ: TiKV内でログバックアップを担当するアクターが受信したメッセージのタイプ
+-   内部メッセージ処理時間（P90|P99）：各タイプのメッセージの消費と処理の速度
+-   初期スキャン RocksDB スループット: 増分スキャン中に RocksDB 内部ログによって生成される読み取りトラフィック
+-   初期スキャン RocksDB 操作: 増分スキャン中に RocksDB によって内部的に記録された個々の操作の数
+-   初期スキャンのトリガー理由: 増分スキャンをトリガーする理由
+-   リージョンチェックポイントキーの配置: PDに記録されたチェックポイント操作の数
 
-> **Note:**
+> **注記：**
 >
-> The following monitoring metrics all use TiDB nodes as their data source, but they have some impact on the log backup process. Therefore, they are placed in the **TiKV Details** dashboard for ease of reference. TiKV actively pushes progress most of the time, but it is normal for some of the following monitoring metrics to occasionally not have sampled data.
+> 以下の監視メトリックはすべてTiDBノードをデータソースとして使用しますが、ログバックアッププロセスに多少の影響を及ぼします。そのため、参照しやすいように**TiKV詳細**ダッシュボードに配置されています。TiKVはほとんどの場合、進捗状況をアクティブにプッシュしますが、以下の監視メトリックの一部にサンプリングデータが含まれない場合もありますが、これは正常な動作です。
 
-- Request Checkpoint Batch Size: The request batch size when the log backup coordinator requests checkpoint information for each TiKV
-- Tick Duration \[P99|P90\]: The time taken by the tick inside the coordinator
-- Region Checkpoint Failure Reason: The reason why a Region checkpoint cannot advance within the coordinator
-- Request Result: The record of the coordinator's success or failure in advancing the Region checkpoint
-- Get Region Operation Count: The number of times the coordinator requests Region information from the PD
-- Try Advance Trigger Time: The time taken for the coordinator to attempt to advance the checkpoint
+-   チェックポイントバッチサイズ要求: ログバックアップコーディネータが各TiKVのチェックポイント情報を要求する際の要求バッチサイズ
+-   ティック期間 [P99|P90]: コーディネータ内部のティックにかかる時間
+-   リージョンチェックポイントの失敗理由:リージョンチェックポイントがコーディネータ内で先に進めない理由
+-   リクエスト結果: コーディネータがリージョンチェックポイントを進めることに成功したか失敗したかの記録
+-   リージョン取得操作回数: コーディネータがPDにリージョン情報を要求した回数
+-   前進試行トリガ時間: コーディネータがチェックポイントの前進を試行するのにかかる時間
 
-### Backup & Import
+### バックアップとインポート {#backup-x26-import}
 
-- Import CPU Utilization: The CPU utilization aggregated by SST importer.
-- Import Thread Count: The number of threads used by SST importer.
-- Import Errors: The number of errors encountered during SST import.
-- Import RPC Duration: The time spent on various RPC calls in SST importer.
-- Import RPC Ops: The total number of RPC calls in SST importer.
-- Import RPC Count: The number of RPC calls being processed by SST importer.
-- Import Write/Download RPC Duration: The RPC time for write or download operations in SST importer.
-- Import Wait Duration: The time spent waiting in queue for download task execution.
-- Import Read SST Duration: The time spent reading an SST file from external storage and downloading it to TiKV.
-- Import Rewrite SST Duration: The time spent rewriting the SST file based on rewrite rules.
-- Import Ingest RPC Duration: The time spent handling ingest RPC requests on TiKV.
-- Import Ingest SST Duration: The time spent ingesting the SST file into RocksDB.
-- Import Ingest SST Bytes: The number of bytes ingested.
-- Import Download SST Throughput: The SST download throughput in bytes per second.
-- cloud request: The number of requests to cloud providers.
+-   インポート CPU 使用率: SST インポーターによって集計された CPU 使用率。
+-   インポート スレッド数: SST インポーターによって使用されるスレッドの数。
+-   インポート エラー: SST インポート中に発生したエラーの数。
+-   インポート RPC 期間: SST インポーターでのさまざまな RPC 呼び出しに費やされた時間。
+-   インポート RPC オペレーション: SST インポーターでの RPC 呼び出しの合計数。
+-   インポート RPC 数: SST インポーターによって処理されている RPC 呼び出しの数。
+-   インポート書き込み/ダウンロード RPC 期間: SST インポーターでの書き込みまたはダウンロード操作の RPC 時間。
+-   インポート待機時間: ダウンロード タスクの実行をキューで待機する時間。
+-   インポート読み取り SST 時間: 外部storageから SST ファイルを読み取り、TiKV にダウンロードするのにかかった時間。
+-   インポート書き換え SST 期間: 書き換えルールに基づいて SST ファイルを書き換えるのにかかった時間。
+-   インポート取り込みRPC 期間: TiKV でのインジェスト RPC 要求の処理に費やされた時間。
+-   インポート取り込みSST 期間: SST ファイルを RocksDB に取り込むのにかかった時間。
+-   インポート取り込みSST バイト: 取り込まれたバイト数。
+-   インポート ダウンロード SST スループット: SST ダウンロード スループット (バイト/秒)。
+-   クラウド リクエスト: クラウド プロバイダーへのリクエストの数。
 
-### Point In Time Restore
+### ポイントインタイムリストア {#point-in-time-restore}
 
-- CPU Usage: The CPU utilization by point-in-time recovery (PITR).
-- P99 RPC Duration: The 99th percentile of RPC request duration.
-- Import RPC Ops: The total number of RPC calls in SST importer.
-- Import RPC Count: The number of RPC calls being processed by SST importer.
-- Cache Events: The number of events in the file cache during SST import.
-- Overall RPC Duration: The time spent on RPC calls.
-- Read File into Memory Duration: The time spent downloading files from external storage and loading them into memory.
-- Queuing Time: The time spent waiting to be scheduled on a thread.
-- Apply Request Throughput: The rate of applying requests in bytes.
-- Downloaded File Size: The size of downloaded file in bytes.
-- Apply Batch Size: The number of bytes for applying to Raft store in one batch.
-- Blocked by Concurrency Time: The time spent waiting for execution due to concurrency constraints.
-- Apply Request Speed: The speed of applying request to Raft store.
-- Cached File in Memory: The files cached by the applying requests of SST importer.
-- Engine Requests Unfinished: The number of pending requests to Raft store.
-- Apply Time: The time spent writing data to Raft store.
-- Raft Store Memory Usage: The memory usage for Raft store.
+-   CPU 使用率: ポイントインタイムリカバリ (PITR) による CPU 使用率。
+-   P99 RPC 期間: RPC 要求期間の 99 パーセンタイル。
+-   インポート RPC オペレーション: SST インポーターでの RPC 呼び出しの合計数。
+-   インポート RPC 数: SST インポーターによって処理されている RPC 呼び出しの数。
+-   キャッシュ イベント: SST インポート中のファイル キャッシュ内のイベントの数。
+-   全体的な RPC 期間: RPC 呼び出しに費やされた時間。
+-   ファイルをメモリに読み込む時間: 外部storageからファイルをダウンロードしてメモリに読み込むのにかかる時間。
+-   キュー時間: スレッドにスケジュールされるまで待機する時間。
+-   適用要求スループット: 要求を適用する速度 (バイト単位)。
+-   ダウンロードしたファイルのサイズ: ダウンロードしたファイルのサイズ (バイト単位)。
+-   適用バッチ サイズ: 1 回のバッチでRaftストアに適用するバイト数。
+-   同時実行時間によるブロック: 同時実行制約により実行を待機するのに費やされた時間。
+-   リクエストの適用速度: Raftストアにリクエストを適用する速度。
+-   メモリ内のキャッシュされたファイル: SST インポーターの適用要求によってキャッシュされたファイル。
+-   未完了のエンジン リクエスト: Raftストアへの保留中のリクエストの数。
+-   適用時間: Raftストアにデータを書き込むのに費やされた時間。
+-   Raftストアのメモリ使用量: Raftストアのメモリ使用量。
 
-### Explanation of Common Parameters
+### 共通パラメータの説明 {#explanation-of-common-parameters}
 
-#### gRPC Message Type
+#### gRPC メッセージタイプ {#grpc-message-type}
 
-1. Transactional API:
+1.  トランザクション API:
 
-    - kv_get: The command of getting the latest version of data specified by `ts`
-    - kv_scan: The command of scanning a range of data
-    - kv_prewrite: The command of prewriting the data to be committed at first phase of 2PC
-    - kv_pessimistic_lock: The command of adding a pessimistic lock to the key to prevent other transaction from modifying this key
-    - kv_pessimistic_rollback: The command of deleting the pessimistic lock on the key
-    - kv_txn_heart_beat: The command of updating `lock_ttl` for pessimistic transactions or large transactions to prevent them from rolling back
-    - kv_check_txn_status: The command of checking the status of the transaction
-    - kv_commit: The command of committing the data written by the prewrite command
-    - kv_cleanup: The command of rolling back a transaction, which is deprecated in v4.0
-    - kv_batch_get: The command of getting the value of batch key at once, similar to `kv_get`
-    - kv_batch_rollback: The command of batch rollback of multiple prewrite transactions
-    - kv_scan_lock: The command of scanning all locks with a version number before `max_version` to clean up expired transactions
-    - kv_resolve_lock: The command of committing or rollback the transaction lock, according to the transaction status.
-    - kv_gc: The command of GC
-    - kv_delete_range: The command of deleting a range of data from TiKV
+    -   kv_get: `ts`で指定されたデータの最新バージョンを取得するコマンド
+    -   kv_scan: データの範囲をスキャンするコマンド
+    -   kv_prewrite: 2PCの最初のフェーズでコミットするデータを事前に書き込むコマンド
+    -   kv_pessimistic_lock: 他のトランザクションがこのキーを変更するのを防ぐために、キーに悲観的ロックを追加するコマンド
+    -   kv_pessimistic_rollback: キーの悲観的ロックを削除するコマンド
+    -   kv_txn_heart_beat:悲観的トランザクションや大規模なトランザクションがロールバックされないように、 `lock_ttl`更新するコマンド
+    -   kv_check_txn_status: トランザクションのステータスを確認するコマンド
+    -   kv_commit: prewriteコマンドで書き込まれたデータをコミットするコマンド
+    -   kv_cleanup: トランザクションをロールバックするコマンド。v4.0 では非推奨です。
+    -   kv_batch_get: `kv_get`と同様に、バッチキーの値を一度に取得するコマンド
+    -   kv_batch_rollback: 複数の事前書き込みトランザクションを一括ロールバックするコマンド
+    -   kv_scan_lock: 期限切れのトランザクションをクリーンアップするために、バージョン番号が`max_version`より前のすべてのロックをスキャンするコマンド
+    -   kv_resolve_lock: トランザクションの状態に応じて、トランザクション ロックをコミットまたはロールバックするコマンド。
+    -   kv_gc: GCのコマンド
+    -   kv_delete_range: TiKVからデータの範囲を削除するコマンド
 
-2. Raw API:
+2.  生のAPI:
 
-    - raw_get: The command of getting the value of key
-    - raw_batch_get: The command of getting the value of batch keys
-    - raw_scan: The command of scanning a range of data
-    - raw_batch_scan: The command of scanning multiple consecutive data range
-    - raw_put: The command of writing a key/value pair
-    - raw_batch_put: The command of writing a batch of key/value pairs
-    - raw_delete: The command of deleting a key/value pair
-    - raw_batch_delete: The command of a batch of key/value pairs
-    - raw_delete_range: The command of deleting a range of data
+    -   raw_get: キーの値を取得するコマンド
+    -   raw_batch_get: バッチキーの値を取得するコマンド
+    -   raw_scan: データの範囲をスキャンするコマンド
+    -   raw_batch_scan: 複数の連続したデータ範囲をスキャンするコマンド
+    -   raw_put: キー/値のペアを書き込むコマンド
+    -   raw_batch_put: キーと値のペアを一括して書き込むコマンド
+    -   raw_delete: キー/値のペアを削除するコマンド
+    -   raw_batch_delete: キーと値のペアのバッチのコマンド
+    -   raw_delete_range: データの範囲を削除するコマンド
 
-## TiKV-FastTune dashboard
+## TiKV-FastTuneダッシュボード {#tikv-fasttune-dashboard}
 
-If performance issues of TiKV occur, such as QPS jitter, latency jitter, and latency increasing trend, you can check the **TiKV-FastTune** dashboard. This dashboard contains a set of panels that help you with diagnostics, especially when the write workload in your cluster is medium or large.
+QPSジッター、レイテンシージッター、レイテンシー増加傾向など、TiKVのパフォーマンス問題が発生した場合は、 **TiKV-FastTune**ダッシュボードを確認してください。このダッシュボードには、特にクラスター内の書き込みワークロードが中規模または大規模の場合に診断に役立つ一連のパネルが含まれています。
 
-When write-related performance issues occur, you can first check the TiDB-related dashboards. If the issues are at the storage side, open the **TiKV-FastTune** page, browse and check every panel on it.
+書き込み関連のパフォーマンス問題が発生した場合は、まずTiDB関連のダッシュボードを確認してください。問題がstorage側にある場合は、 **TiKV-FastTune**ページを開き、すべてのパネルを閲覧して確認してください。
 
-In the **TiKV-FastTune** dashboard, you can see a title that suggests a possible cause of the performance issues. To check whether the suggested cause is true, check the graph on the page.
+**TiKV-FastTune**ダッシュボードには、パフォーマンスの問題の考えられる原因を示すタイトルが表示されます。その原因が正しいかどうかを確認するには、ページ上のグラフを確認してください。
 
-The left-Y-axis of the graph represents the write-RPC QPS of the storage side, and a set of graphs on the right-Y-axis are drawn upside down. If the shape of the left graph matches that of the right graphs, the suggested cause is true.
+グラフの左側のY軸はstorage側の書き込みRPC QPSを表し、右側のY軸上のグラフは上下逆さまに描かれています。左側のグラフの形状が右側のグラフの形状と一致する場合、示唆された原因は正しいです。
 
-For detailed metrics and descriptions, see the dashboard [user manual](https://docs.google.com/presentation/d/1aeBF2VCKf7eo4-3TMyP7oPzFWIih6UBA53UI8YQASCQ/edit#slide=id.gab6b984c2a_1_352).
+詳細なメトリックと説明については、ダッシュボード[ユーザーマニュアル](https://docs.google.com/presentation/d/1aeBF2VCKf7eo4-3TMyP7oPzFWIih6UBA53UI8YQASCQ/edit#slide=id.gab6b984c2a_1_352)参照してください。

@@ -1,29 +1,29 @@
 ---
 title: SLOW_QUERY
-summary: Learn the `SLOW_QUERY` INFORMATION_SCHEMA table.
+summary: SLOW_QUERY` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# SLOW_QUERY
+# 遅いクエリ {#slow-query}
 
 <CustomContent platform="tidb">
 
-The `SLOW_QUERY` table provides the slow query information of the current node, which is the parsing result of the TiDB [slow log file](/tidb-configuration-file.md#slow-query-file). The column names in the table are corresponding to the field names in the slow log.
+`SLOW_QUERY`テーブルは、TiDB [遅いログファイル](/tidb-configuration-file.md#slow-query-file)の解析結果である、現在のノードのスロークエリ情報を提供します。テーブル内の列名は、スローログ内のフィールド名に対応しています。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The `SLOW_QUERY` table provides the slow query information of the current node, which is the parsing result of the TiDB [slow log file](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#slow-query-file). The column names in the table are corresponding to the field names in the slow log.
+`SLOW_QUERY`テーブルは、TiDB [遅いログファイル](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#slow-query-file)の解析結果である、現在のノードのスロークエリ情報を提供します。テーブル内の列名は、スローログ内のフィールド名に対応しています。
 
 </CustomContent>
 
-> **Note:**
+> **注記：**
 >
-> This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 <CustomContent platform="tidb">
 
-For how to use this table to identify problematic statements and improve query performance, see [Slow Query Log Document](/identify-slow-queries.md).
+この表を使用して問題のあるステートメントを識別し、クエリのパフォーマンスを向上させる方法については、 [スロークエリログドキュメント](/identify-slow-queries.md)参照してください。
 
 </CustomContent>
 
@@ -32,7 +32,7 @@ USE INFORMATION_SCHEMA;
 DESC SLOW_QUERY;
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 +-------------------------------+---------------------+------+------+---------+-------+
@@ -123,19 +123,19 @@ The output is as follows:
 81 rows in set (0.00 sec)
 ```
 
-The maximum statement length of the `Query` column is limited by the [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40) system variable.
+`Query`列目のステートメントの最大長は、 [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40)システム変数によって制限されます。
 
-## CLUSTER_SLOW_QUERY table
+## CLUSTER_SLOW_QUERY テーブル {#cluster-slow-query-table}
 
-The `CLUSTER_SLOW_QUERY` table provides the slow query information of all nodes in the cluster, which is the parsing result of the TiDB slow log files. You can use the `CLUSTER_SLOW_QUERY` table the way you do with `SLOW_QUERY`. The table schema of the `CLUSTER_SLOW_QUERY` table differs from that of the `SLOW_QUERY` table in that an `INSTANCE` column is added to `CLUSTER_SLOW_QUERY`. The `INSTANCE` column represents the TiDB node address of the row information on the slow query.
+`CLUSTER_SLOW_QUERY`テーブル`CLUSTER_SLOW_QUERY` 、クラスター内のすべてのノードのスロークエリ情報を提供します。これは、TiDBスローログファイルの解析結果です。3 テーブルは`CLUSTER_SLOW_QUERY` `SLOW_QUERY`と同じように使用できます。7 テーブルのテーブルスキーマは、 `CLUSTER_SLOW_QUERY`列に`INSTANCE`列が追加されている点で`SLOW_QUERY`テーブルと異なります。15 `INSTANCE`は、スロークエリの行情報の TiDB ノードアドレスを表します。
 
-> **Note:**
+> **注記：**
 >
-> This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 <CustomContent platform="tidb">
 
-For how to use this table to identify problematic statements and improve query performance, see [Slow Query Log Document](/identify-slow-queries.md).
+この表を使用して問題のあるステートメントを識別し、クエリのパフォーマンスを向上させる方法については、 [スロークエリログドキュメント](/identify-slow-queries.md)参照してください。
 
 </CustomContent>
 
@@ -143,7 +143,7 @@ For how to use this table to identify problematic statements and improve query p
 DESC CLUSTER_SLOW_QUERY;
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 +-------------------------------+---------------------+------+------+---------+-------+
@@ -235,13 +235,13 @@ The output is as follows:
 82 rows in set (0.00 sec)
 ```
 
-When the cluster system table is queried, TiDB does not obtain data from all nodes, but pushes down the related calculation to other nodes. The execution plan is as follows:
+クラスタシステムテーブルへのクエリ実行時、TiDBはすべてのノードからデータを取得するのではなく、関連する計算を他のノードにプッシュダウンします。実行プランは以下のとおりです。
 
 ```sql
 DESC SELECT COUNT(*) FROM CLUSTER_SLOW_QUERY WHERE user = 'u1';
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 +----------------------------+----------+-----------+--------------------------+------------------------------------------------------+
@@ -255,68 +255,64 @@ The output is as follows:
 4 rows in set (0.00 sec)
 ```
 
-In the preceding execution plan, the `user = u1` condition is pushed down to other (`cop`) TiDB nodes, and the aggregate operator is also pushed down (the `StreamAgg` operator in the graph).
+上記の実行プランでは、 `user = u1`条件が他の（ `cop` ）TiDBノードにプッシュダウンされ、集計演算子もプッシュダウンされます（グラフの`StreamAgg`の演算子）。
 
-Currently, because statistics of the system tables are not collected, sometimes some aggregation operators cannot be pushed down, which results in slow execution. In this case, you can manually specify the SQL HINT to push down the aggregation operators. For example:
+現在、システムテーブルの統計情報が収集されていないため、一部の集計演算子をプッシュダウンできず、実行速度が低下することがあります。このような場合は、SQL HINTを手動で指定して、集計演算子をプッシュダウンすることができます。例：
 
 ```sql
 SELECT /*+ AGG_TO_COP() */ COUNT(*) FROM CLUSTER_SLOW_QUERY GROUP BY user;
 ```
 
-## View execution information
+## 実行情報をビュー {#view-execution-information}
 
-By running an [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) query on the `SLOW_QUERY` table, you can get detailed information about how the database fetches the slow query information. However, this information is **not** available when you run `EXPLAIN ANALYZE` on the `CLUSTER_SLOW_QUERY` table.
+`SLOW_QUERY`テーブルで[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)クエリを実行すると、データベースがスロークエリ情報を取得する方法に関する詳細な情報を取得できます。ただし、 `CLUSTER_SLOW_QUERY`テーブルで`EXPLAIN ANALYZE`を実行しても、この情報は取得でき**ません**。
 
-Example:
+例：
 
 ```sql
 EXPLAIN ANALYZE SELECT * FROM INFORMATION_SCHEMA.SLOW_QUERY LIMIT 1\G
 ```
 
-```
-*************************** 1. row ***************************
-            id: Limit_7
-       estRows: 1.00
-       actRows: 1
-          task: root
- access object: 
-execution info: time:3.46ms, loops:2, RU:0.000000
- operator info: offset:0, count:1
-        memory: N/A
-          disk: N/A
-*************************** 2. row ***************************
-            id: └─MemTableScan_10
-       estRows: 10000.00
-       actRows: 64
-          task: root
- access object: table:SLOW_QUERY
-execution info: time:3.45ms, loops:1, initialize: 55.5µs, read_file: 1.21ms, parse_log: {time:4.11ms, concurrency:15}, total_file: 1, read_file: 1, read_size: 4.06 MB
- operator info: only search in the current 'tidb-slow.log' file
-        memory: 1.26 MB
-          disk: N/A
-2 rows in set (0.01 sec)
-```
+    *************************** 1. row ***************************
+                id: Limit_7
+           estRows: 1.00
+           actRows: 1
+              task: root
+     access object: 
+    execution info: time:3.46ms, loops:2, RU:0.000000
+     operator info: offset:0, count:1
+            memory: N/A
+              disk: N/A
+    *************************** 2. row ***************************
+                id: └─MemTableScan_10
+           estRows: 10000.00
+           actRows: 64
+              task: root
+     access object: table:SLOW_QUERY
+    execution info: time:3.45ms, loops:1, initialize: 55.5µs, read_file: 1.21ms, parse_log: {time:4.11ms, concurrency:15}, total_file: 1, read_file: 1, read_size: 4.06 MB
+     operator info: only search in the current 'tidb-slow.log' file
+            memory: 1.26 MB
+              disk: N/A
+    2 rows in set (0.01 sec)
 
-In the output, check the following fields (formatted for readability) in the `execution info` section:
+出力では、セクション`execution info`の次のフィールド (読みやすいようにフォーマットされています) を確認します。
 
-```
-initialize: 55.5µs,
-read_file: 1.21ms,
-parse_log: {
-  time:4.11ms,
-  concurrency:15
-},
-total_file: 1,
-read_file: 1,
-read_size: 4.06 MB
-```
+    initialize: 55.5µs,
+    read_file: 1.21ms,
+    parse_log: {
+      time:4.11ms,
+      concurrency:15
+    },
+    total_file: 1,
+    read_file: 1,
+    read_size: 4.06 MB
 
-| Field | Description |
-|---|---|
-| `initialize` | Time spent initializing |
-| `read_file` | Time spent reading the slow log file |
-| `parse_log.time` | Time spent parsing the slow log file |
-| `parse_log.concurrency` | Concurrency for parsing the slow log file (set by [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)) |
-| `total_file` | Total number of slow log files |
-| `read_file` | Number of slow log files that are read |
-| `read_size` | Bytes read from the log file |
+| 分野                      | 説明                                                                                                            |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `initialize`            | 初期化にかかった時間                                                                                                    |
+| `read_file`             | 遅いログファイルの読み取りにかかった時間                                                                                          |
+| `parse_log.time`        | スローログファイルの解析にかかった時間                                                                                           |
+| `parse_log.concurrency` | スローログファイルの解析の同時実行性（ [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)に設定） |
+| `total_file`            | スローログファイルの合計数                                                                                                 |
+| `read_file`             | 読み取られる遅いログファイルの数                                                                                              |
+| `read_size`             | ログファイルから読み取られたバイト数                                                                                            |

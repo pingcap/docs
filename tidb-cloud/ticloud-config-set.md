@@ -1,66 +1,66 @@
 ---
 title: ticloud config set
-summary: The reference of `ticloud config set`.
+summary: ticloud config set` のリファレンス。
 ---
 
-# ticloud config set
+# ticloud 設定セット {#ticloud-config-set}
 
-Configure the properties for the active [user profile](/tidb-cloud/cli-reference.md#user-profile):
+アクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)のプロパティを設定します。
 
 ```shell
 ticloud config set <property-name> <value> [flags]
 ```
 
-The properties that can be configured include `public-key`, `private-key`, and `api-url`.
+設定できるプロパティには、 `public-key` 、 `private-key` 、 `api-url`などがあります。
 
-| Properties  | Description                                                        | Required |
-|-------------|--------------------------------------------------------------------|----------|
-| public-key  | Specifies the public key of the TiDB Cloud API.                               | Yes      |
-| private-key | Specifies the private key of the TiDB Cloud API.                              | Yes      |
-| api-url     | Specifies the base API URL of TiDB Cloud (`https://api.tidbcloud.com` by default). | No       |
+| プロパティ   | 説明                                                                 | 必須  |
+| ------- | ------------------------------------------------------------------ | --- |
+| 公開鍵     | TiDB Cloud API の公開キーを指定します。                                        | はい  |
+| 秘密鍵     | TiDB Cloud API の秘密キーを指定します。                                        | はい  |
+| API URL | TiDB Cloudの基本 API URL を指定します (デフォルトは`https://api.tidbcloud.com` )。 | いいえ |
 
-> **Note:**
+> **注記：**
 >
-> If you want to configure properties for a specific user profile, you can add the `-P` flag and specify the target user profile name in the command.
+> 特定のユーザー プロファイルのプロパティを構成する場合は、 `-P`フラグを追加し、コマンドで対象のユーザー プロファイル名を指定できます。
 
-## Examples
+## 例 {#examples}
 
-Set the value of the public-key for the active profile:
+アクティブ プロファイルの公開キーの値を設定します。
 
 ```shell
 ticloud config set public-key <public-key>
 ```
 
-Set the value of the public-key for a specific profile `test`:
+特定のプロファイル`test`の公開キーの値を設定します。
 
 ```shell
 ticloud config set public-key <public-key> -P test
 ```
 
-Set the API host:
+API ホストを設定します。
 
 ```shell
 ticloud config set api-url https://api.tidbcloud.com
 ```
 
-> **Note:**
+> **注記：**
 >
-> The TiDB Cloud API URL is `https://api.tidbcloud.com` by default. Usually, you do not need to set up it.
+> TiDB Cloud APIのURLはデフォルトで`https://api.tidbcloud.com`設定されています。通常は設定する必要はありません。
 
-## Flags
+## 旗 {#flags}
 
-| Flag       | Description              |
-|------------|--------------------------|
-| -h, --help | Shows help information for this command. |
+| フラグ        | 説明                  |
+| ---------- | ------------------- |
+| -h, --help | このコマンドのヘルプ情報を表示します。 |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag                 | Description                                   | Required | Note                                                                                                                    |
-|----------------------|-----------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                      | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
-| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
+| フラグ               | 説明                                                                             | 必須  | 注記                                                      |
+| ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------- |
+| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
+| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| -D, --debug       | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、皆様からの貢献も歓迎いたします。

@@ -1,123 +1,123 @@
 ---
 title: TiDB Cloud Clinic
-summary: Learn how to use TiDB Cloud Clinic for advanced monitoring and diagnostics.
+summary: 高度な監視と診断のためにTiDB Cloud Clinic を使用する方法を学習します。
 ---
 
-# TiDB Cloud Clinic
+# TiDB Cloudクリニック {#tidb-cloud-clinic}
 
-TiDB Cloud Clinic offers advanced monitoring and diagnostic capabilities on the TiDB Cloud, designed to help you quickly identify performance issues, optimize your database, and enhance overall performance with detailed analysis and actionable insights.
+TiDB Cloud Clinic は、 TiDB Cloud上で高度な監視および診断機能を提供します。詳細な分析と実用的な洞察により、パフォーマンスの問題を迅速に特定し、データベースを最適化し、全体的なパフォーマンスを向上させることができるように設計されています。
 
 ![tidb-cloud-clinic](/media/tidb-cloud/tidb-cloud-clinic.png)
 
-> **Note:**
+> **注記：**
 >
-> Currently, TiDB Cloud Clinic is only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+> 現在、 TiDB Cloud Clinic は[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでのみ使用できます。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-TiDB Cloud Clinic is only available for organizations that subscribe to the **Enterprise** or **Premium** support plan.
+TiDB Cloud Clinic は**、エンタープライズ**または**プレミアム**サポート プランに加入している組織でのみご利用いただけます。
 
-## View the Cluster page
+## クラスタページをビュー {#view-the-cluster-page}
 
-To view the **Cluster** page, take the following steps:
+**クラスタ**ページを表示するには、次の手順を実行します。
 
-1. Log in to the [TiDB Cloud Clinic console](https://clinic.pingcap.com/) and select **Continue with TiDB Account** to enter the TiDB Cloud login page.
+1.  [TiDB Cloudクリニック コンソール](https://clinic.pingcap.com/)にログインし、 **「TiDB アカウントで続行」**を選択して、 TiDB Cloudログイン ページに入ります。
 
-2. From the organization list, select your target organization. The clusters in the selected project are displayed.
+2.  組織リストから対象の組織を選択します。選択したプロジェクト内のクラスターが表示されます。
 
-3. Click the name of your target cluster. The cluster overview page is displayed, where you can view detailed information about your cluster, including:
+3.  ターゲットクラスタの名前をクリックします。クラスタの概要ページが表示され、クラスタに関する以下の詳細情報を確認できます。
 
-    - Advanced Metrics
-    - Top Slow Queries (only supported when the TiDB version of the cluster is v8.1.1 or later, v7.5.4 or later)
-    - TopSQL (only supported when the TiDB version of the cluster is v8.1.1 or later, v7.5.4 or later)
-    - Benchmark Report
+    -   高度なメトリクス
+    -   最も遅いクエリ（クラスターの TiDB バージョンが v8.1.1 以降、v7.5.4 以降の場合にのみサポートされます）
+    -   TopSQL (クラスターの TiDB バージョンが v8.1.1 以降、v7.5.4 以降の場合にのみサポートされます)
+    -   ベンチマークレポート
 
-## Monitor advanced metrics
+## 高度な指標を監視する {#monitor-advanced-metrics}
 
-TiDB Cloud Clinic uses Grafana to provide a comprehensive set of metrics for TiDB clusters. The retention policy for advanced metrics is 90 days.
+TiDB Cloud ClinicはGrafanaを使用して、TiDBクラスターの包括的なメトリクスセットを提供します。高度なメトリクスの保持ポリシーは90日間です。
 
-To view the metrics dashboard, take the following steps:
+メトリクス ダッシュボードを表示するには、次の手順を実行します。
 
-1. In the [TiDB Cloud Clinic console](https://clinic.pingcap.com/), navigate to the **Cluster** page of a cluster.
+1.  [TiDB Cloudクリニック コンソール](https://clinic.pingcap.com/)で、クラスターの**「クラスタ」**ページに移動します。
 
-2. Click **Metrics**.
+2.  **「メトリクス」**をクリックします。
 
-3. Click the name of the dashboard you want to view. The dashboard is displayed.
+3.  表示したいダッシュボードの名前をクリックします。ダッシュボードが表示されます。
 
-The dashboards and their content are subject to change. Currently, the following dashboards are available:
+ダッシュボードとその内容は変更される場合があります。現在、以下のダッシュボードをご利用いただけます。
 
-- Backup & Import
-- DM-Professional
-- DM-Standard
-- Lightning
-- Performance-Overview
-- TiCDC-Summary
-- TiDB
-- TiDB-Resource-Control
-- TiFlash-Summary
-- TiKV-Details
-- User-Node-Info
+-   バックアップとインポート
+-   DMプロフェッショナル
+-   DM標準
+-   稲妻
+-   パフォーマンス概要
+-   TiCDC-概要
+-   TiDB
+-   TiDB リソース制御
+-   TiFlash-概要
+-   TiKV詳細
+-   ユーザーノード情報
 
-## Analyze top slow queries
+## 最も遅いクエリを分析する {#analyze-top-slow-queries}
 
-By default, SQL queries that take longer than 300 milliseconds are considered slow queries.
+デフォルトでは、300 ミリ秒以上かかる SQL クエリは遅いクエリと見なされます。
 
-On the default [**Slow Queries**](/tidb-cloud/tune-performance.md#slow-query) page in the TiDB Cloud console, identifying performance-impacting queries can be difficult, especially in clusters with a large number of slow queries. The **Top Slow Queries** feature in TiDB Cloud Clinic provides aggregated analysis based on slow query logs. With this feature, you can easily pinpoint queries with performance issues, reducing overall performance tuning time by at least half.
+TiDB Cloudコンソールのデフォルトの[**遅いクエリ**](/tidb-cloud/tune-performance.md#slow-query)ページでは、パフォーマンスに影響を与えるクエリを特定するのが困難な場合があります。特に、スロークエリが多数存在するクラスタではなおさらです。TiDB TiDB Cloud Clinicの**「Top Slow Queries」**機能は、スロークエリのログに基づいて集計分析を提供します。この機能により、パフォーマンスに問題のあるクエリを簡単に特定できるため、全体的なパフォーマンスチューニング時間を少なくとも半分に短縮できます。
 
-Top Slow Queries displays the top 10 queries aggregated by SQL digest, sorted by the following dimensions:
+「上位の遅いクエリ」には、SQL ダイジェストによって集計された上位 10 件のクエリが、次のディメンションで並べ替えられて表示されます。
 
-- Total latency 
-- Maximum latency
-- Average latency
-- Total memory
-- Maximum memory
-- Average memory
-- Total count
+-   合計レイテンシー
+-   最大レイテンシー
+-   平均レイテンシー
+-   合計メモリ
+-   最大メモリ
+-   平均メモリ
+-   合計数
 
-To view slow queries in a cluster, take the following steps:
+クラスター内の遅いクエリを表示するには、次の手順を実行します。
 
-1. In the [TiDB Cloud Clinic console](https://clinic.pingcap.com/), navigate to the **Cluster** page of a cluster.
+1.  [TiDB Cloudクリニック コンソール](https://clinic.pingcap.com/)で、クラスターの**「クラスタ」**ページに移動します。
 
-2. Click **Slow Query**.
+2.  **[スロー クエリ]**をクリックします。
 
-3. The top slow queries are displayed in a table. You can sort the results by different columns.
+3.  最も遅いクエリが表に表示されます。結果は列ごとに並べ替えることができます。
 
-4. (Optional) Click any slow query in the list to view its detailed execution information.
+4.  (オプション) リスト内の遅いクエリをクリックすると、詳細な実行情報が表示されます。
 
-5. (Optional) Filter slow queries by time range, database, or statement type.
+5.  (オプション) 時間範囲、データベース、またはステートメントの種類別に遅いクエリをフィルタリングします。
 
-The retention policy for slow queries is 7 days.
+低速クエリの保持ポリシーは 7 日間です。
 
-For more information, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-slow-query).
+詳細については[TiDBダッシュボードの遅いクエリ](https://docs.pingcap.com/tidb/stable/dashboard-slow-query)参照してください。
 
-## Monitor TopSQL
+## TopSQLを監視する {#monitor-topsql}
 
-TiDB Cloud Clinic provides TopSQL information, enabling you to monitor and visually explore the CPU overhead of each SQL statement in your database in real time. This helps you optimize and resolve database performance issues.
+TiDB Cloud ClinicはTopSQL情報を提供し、データベース内の各SQL文のCPUオーバーヘッドをリアルタイムで監視し、視覚的に調査することができます。これにより、データベースのパフォーマンスに関する問題の最適化と解決に役立ちます。
 
-To view TopSQL, take the following steps:
+TopSQL を表示するには、次の手順を実行します。
 
-1. In the [TiDB Cloud Clinic console](https://clinic.pingcap.com/), navigate to the **Cluster** page of a cluster.
+1.  [TiDB Cloudクリニック コンソール](https://clinic.pingcap.com/)で、クラスターの**「クラスタ」**ページに移動します。
 
-2. Click **TopSQL**.
+2.  **TopSQL**をクリックします。
 
-3. Select a specific TiDB or TiKV instance to observe its load. You can use the time picker or select a time range in the chart to refine your analysis.
+3.  特定のTiDBまたはTiKVインスタンスを選択して、その負荷を監視します。時間ピッカーを使用するか、チャートで時間範囲を選択して、分析を絞り込むことができます。
 
-4. Analyze the charts and tables displayed by TopSQL.
+4.  TopSQL によって表示されるグラフと表を分析します。
 
-For more information, see [TopSQL in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/top-sql). 
+詳細については[TiDBダッシュボードのTopSQL](https://docs.pingcap.com/tidb/stable/top-sql)参照してください。
 
-## Generate benchmark reports
+## ベンチマークレポートを生成する {#generate-benchmark-reports}
 
-The **Benchmark Report** feature helps you identify performance issues in a TiDB cluster during performance testing. After completing a stress test, you can generate a benchmark report to analyze the cluster's performance. The report highlights identified bottlenecks and provides optimization suggestions. After applying these suggestions, you can run another round of stress testing and generate a new benchmark report to compare performance improvements.
+**ベンチマークレポート**機能は、パフォーマンステスト中にTiDBクラスタのパフォーマンス問題を特定するのに役立ちます。ストレステストを完了すると、ベンチマークレポートを生成してクラスタのパフォーマンスを分析できます。レポートには、特定されたボトルネックが強調表示され、最適化の提案が提示されます。これらの提案を適用した後、もう一度ストレステストを実行し、新しいベンチマークレポートを生成してパフォーマンスの改善を比較できます。
 
-To generate a benchmark report, take the following steps:
+ベンチマーク レポートを生成するには、次の手順を実行します。
 
-1. In the [TiDB Cloud Clinic console](https://clinic.pingcap.com/), navigate to the **Cluster** page of a cluster.
+1.  [TiDB Cloudクリニック コンソール](https://clinic.pingcap.com/)で、クラスターの**「クラスタ」**ページに移動します。
 
-2. Click **Benchmark Report**.
+2.  **ベンチマークレポート**をクリックします。
 
-3. Select the time range to be analyzed in the benchmark report.
+3.  ベンチマーク レポートで分析する時間範囲を選択します。
 
-4. Click **Create Report** to generate the benchmark report.
+4.  ベンチマーク レポートを生成するには、 **[レポートの作成] を**クリックします。
 
-5. Wait for report generation to complete. When the report is ready, click **View** to open it.
+5.  レポートの生成が完了するまでお待ちください。レポートが完成したら、 **「ビュー」**をクリックして開きます。

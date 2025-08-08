@@ -1,133 +1,133 @@
 ---
 title: IMPORT INTO vs. TiDB Lightning
-summary: Learn about the differences between `IMPORT INTO` and TiDB Lightning.
+summary: IMPORT INTO` とTiDB Lightningの違いについて説明します。
 ---
 
-# IMPORT INTO vs. TiDB Lightning
+# IMPORT INTO とTiDB Lightning の比較 {#import-into-vs-tidb-lightning}
 
-Many users have provided feedback that the deployment, configuration, and maintenance of [TiDB Lightning](/tidb-lightning/tidb-lightning-configuration.md) are complex, especially in scenarios involving [parallel importing](/tidb-lightning/tidb-lightning-distributed-import.md) of large datasets.
+多くのユーザーから、 [TiDB Lightning](/tidb-lightning/tidb-lightning-configuration.md)の展開、構成、メンテナンスは、特に[並行輸入](/tidb-lightning/tidb-lightning-distributed-import.md)の大規模なデータセットが関係するシナリオでは複雑であるというフィードバックが寄せられています。
 
-Based on the feedback, TiDB has gradually integrated some functionalities of TiDB Lightning into the [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) SQL statement. You can directly import data by executing `IMPORT INTO`, thereby improving the efficiency of data import. In addition, `IMPORT INTO` supports some functionalities that TiDB Lightning does not, such as automatic distributed task scheduling and [TiDB Global Sort](/tidb-global-sort.md).
+皆様からのフィードバックに基づき、TiDBはTiDB Lightningの一部の機能を[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) SQL文に段階的に統合してきました。3 `IMPORT INTO`実行することでデータを直接インポートできるため、データインポートの効率が向上します。さらに、 `IMPORT INTO`自動分散タスクスケジューリングや[TiDB グローバルソート](/tidb-global-sort.md)といった、 TiDB Lightningにはない機能もサポートされています。
 
-`IMPORT INTO` is introduced in v7.2.0 and becomes generally available (GA) in v7.5.0. It will continue to be improved and optimized in future versions. Once the `IMPORT INTO` capability can fully replace TiDB Lightning, TiDB Lightning will be deprecated. At that time, relevant notification will be provided in advance in TiDB Release Notes and documentation.
+`IMPORT INTO`はv7.2.0で導入され、v7.5.0で一般提供（GA）されます。今後のバージョンでも引き続き改良と最適化が行われます。2 `IMPORT INTO`機能がTiDB Lightningを完全に置き換えることが可能になった時点で、 TiDB Lightningは廃止されます。その際には、TiDBのリリースノートおよびドキュメントで事前にお知らせいたします。
 
-## Comparison between `IMPORT INTO` and TiDB Lightning
+## <code>IMPORT INTO</code>とTiDB Lightningの比較 {#comparison-between-code-import-into-code-and-tidb-lightning}
 
-The following sections describe the differences between `IMPORT INTO` and TiDB Lightning in multiple dimensions.
+次のセクションでは、 `IMPORT INTO`とTiDB Lightningの違いをさまざまな側面から説明します。
 
-### Deployment cost
+### 導入コスト {#deployment-cost}
 
-#### `IMPORT INTO`
+#### <code>IMPORT INTO</code> {#code-import-into-code}
 
-`IMPORT INTO` does not require separate deployment. You can run it directly on TiDB nodes, which eliminates additional deployment work.
+`IMPORT INTO`個別のデプロイメントを必要としません。TiDB ノード上で直接実行できるため、追加のデプロイメント作業が不要になります。
 
-#### TiDB Lightning
+#### TiDB Lightning {#tidb-lightning}
 
-By contrast, TiDB Lightning requires [separate server deployment](/tidb-lightning/deploy-tidb-lightning.md).
+対照的に、 TiDB Lightning[個別のサーバー展開](/tidb-lightning/deploy-tidb-lightning.md)必要です。
 
-### Resource utilization
+### リソースの活用 {#resource-utilization}
 
-#### `IMPORT INTO`
+#### <code>IMPORT INTO</code> {#code-import-into-code}
 
-The `IMPORT INTO` task and other business workloads can share TiDB resources or utilize them at different times to fully leverage the TiDB resources. To ensure stable operation of business workloads while maintaining the performance and stability of the `IMPORT INTO` task, you can specify [specific TiDB nodes](/system-variables.md#tidb_service_scope-new-in-v740) dedicated to `IMPORT INTO` for data import.
+`IMPORT INTO`タスクと他のビジネスワークロードは、TiDB リソースを共有したり、異なるタイミングで利用したりすることで、TiDB リソースを最大限に活用できます。3 タスクのパフォーマンスと安定性を維持しながら、ビジネスワークロードの安定した運用を確保するために、 `IMPORT INTO`タスクにデータインポート専用の[特定のTiDBノード](/system-variables.md#tidb_service_scope-new-in-v740)を指定することができ`IMPORT INTO` 。
 
-When you use [TiDB Global Sort](/tidb-global-sort.md), there is no need to mount large local disks. TiDB Global Sort can use Amazon S3 as the storage. Once the import task is completed, the temporary data stored on Amazon S3 for global sorting will be automatically deleted to save storage costs.
+[TiDB グローバルソート](/tidb-global-sort.md)使用する場合、大容量のローカルディスクをマウントする必要はありません。TiDB Global Sort は Amazon S3 をstorageとして使用できます。インポートタスクが完了すると、グローバルソート用に Amazon S3 に保存された一時データは自動的に削除され、storageコストを節約できます。
 
-#### TiDB Lightning
+#### TiDB Lightning {#tidb-lightning}
 
-You need separate servers to deploy and run TiDB Lightning. When no import tasks are executed, these resources remain idle. The total idle time is even longer in scenarios where import tasks are executed periodically, resulting in a waste of resources.
+TiDB Lightning をデプロイして実行するには、別々のサーバーが必要です。インポートタスクが実行されていない場合、これらのリソースはアイドル状態のままになります。インポートタスクが定期的に実行されるシナリオでは、合計アイドル時間はさらに長くなり、リソースの無駄が発生します。
 
-If the dataset to be imported is large, you also need to prepare large local disks to sort the data to be imported.
+インポートするデータセットが大きい場合は、インポートするデータをソートするための大容量のローカル ディスクも準備する必要があります。
 
-### Task configuration and integration
+### タスクの構成と統合 {#task-configuration-and-integration}
 
-#### `IMPORT INTO`
+#### <code>IMPORT INTO</code> {#code-import-into-code}
 
 You can directly write SQL statements to submit import tasks, which are easy to call and integrate.
 
-#### TiDB Lightning
+#### TiDB Lightning {#tidb-lightning}
 
-By contrast, TiDB Lightning requires you to write [task configuration files](/tidb-lightning/tidb-lightning-configuration.md). These configuration files are complex and not easily called by third parties.
+対照的に、 TiDB Lightning[タスク設定ファイル](/tidb-lightning/tidb-lightning-configuration.md)記述する必要があります。これらの構成ファイルは複雑であり、サードパーティが簡単に呼び出すことはできません。
 
-### Task scheduling
+### タスクのスケジュール {#task-scheduling}
 
-#### `IMPORT INTO`
+#### <code>IMPORT INTO</code> {#code-import-into-code}
 
-`IMPORT INTO` supports distributed execution. For example, when you import 40 TiB of source data files into one target table, after submitting the SQL statement, TiDB will automatically split the import task into multiple sub-tasks and schedule different TiDB nodes to execute these sub-tasks.
+`IMPORT INTO`分散実行をサポートします。例えば、40TiBのソースデータファイルを1つのターゲットテーブルにインポートする場合、SQL文の送信後、TiDBはインポートタスクを複数のサブタスクに自動的に分割し、各サブタスクを実行するために異なるTiDBノードをスケジュールします。
 
-#### TiDB Lightning
+#### TiDB Lightning {#tidb-lightning}
 
-By contrast, the configuration for TiDB Lightning is complex, inefficient, and prone to errors.
+対照的に、 TiDB Lightningの構成は複雑で非効率であり、エラーが発生しやすくなります。
 
-Assume that you start 10 TiDB Lightning instances to import data in parallel, then you need to create 10 TiDB Lightning configuration files. In each file, you need to configure the range of source files to be read by the corresponding TiDB Lightning instance. For example, TiDB Lightning instance 1 reads the first 100 files, instance 2 reads the next 100 files, and so on.
+10 個のTiDB Lightningインスタンスを起動してデータを並列インポートする場合、10 個のTiDB Lightning設定ファイルを作成する必要があります。各ファイルでは、対応するTiDB Lightningインスタンスが読み取るソースファイルの範囲を設定する必要があります。例えば、 TiDB Lightningインスタンス 1 は最初の 100 ファイルを読み取り、インスタンス 2 は次の 100 ファイルを読み取り、というように続きます。
 
-In addition, you need to configure the shared metadata table and other configuration information for these 10 TiDB Lightning instances, which is complex.
+さらに、これら 10 個のTiDB Lightningインスタンスの共有メタデータ テーブルやその他の構成情報を構成する必要があり、これは複雑です。
 
-### Global Sort vs. local sort
+### グローバルソートとローカルソート {#global-sort-vs-local-sort}
 
-#### `IMPORT INTO`
+#### <code>IMPORT INTO</code> {#code-import-into-code}
 
-With TiDB Global Sort, `IMPORT INTO` can transmit tens of TiB of source data to multiple TiDB nodes, encode the data KV pairs and index KV pairs, and then transfer these pairs to Amazon S3 for global sorting before writing them into TiKV.
+TiDB Global Sort を使用すると、 `IMPORT INTO`十 TiB のソースデータを複数の TiDB ノードに送信し、データ KV ペアとインデックス KV ペアをエンコードしてから、これらのペアを Amazon S3 に転送してグローバルソートしてから、TiKV に書き込むことができます。
 
-Because these KV pairs are globally sorted, data imported from various TiDB nodes into TiKV does not overlap, allowing it to be written directly into the RocksDB. This eliminates the need for TiKV to perform compaction operations, resulting in significant improvement in both write performance and stability of TiKV.
+これらのKVペアはグローバルにソートされているため、複数のTiDBノードからTiKVにインポートされたデータは重複せず、RocksDBに直接書き込むことができます。これにより、TiKVによる圧縮操作が不要になり、TiKVの書き込みパフォーマンスと安定性が大幅に向上します。
 
-After the import is completed, the data used for global sorting on Amazon S3 will be automatically deleted, saving storage costs.
+インポートが完了すると、Amazon S3 上のグローバルソートに使用されたデータは自動的に削除され、storageコストを節約できます。
 
-#### TiDB Lightning
+#### TiDB Lightning {#tidb-lightning}
 
-TiDB Lightning only supports local sort. For example, for tens of TiB of source data, if TiDB Lightning does not have large local disks configured, or if multiple TiDB Lightning instances are used for parallel import, each TiDB Lightning instance can only use local disks to sort the data to be imported. Due to the inability to perform global sort, there will be an overlap between the data imported into TiKV by multiple TiDB Lightning instances, especially in scenarios where index data is more prevalent, triggering TiKV to perform compaction operations. Compaction operations are resource-intensive, which will lead to a decrease in TiKV's write performance and stability.
+TiDB Lightningはローカルソートのみをサポートします。例えば、数十TiB規模のソースデータの場合、 TiDB Lightningに大容量のローカルディスクが設定されていない場合、または複数のTiDB Lightningインスタンスを並列インポートに使用している場合、各TiDB Lightningインスタンスはローカルディスクを使用してのみインポートデータをソートできます。グローバルソートを実行できないため、複数のTiDB LightningインスタンスからTiKVにインポートされたデータに重複が生じ、特にインデックスデータが多いシナリオでは、TiKVは圧縮操作を実行します。圧縮操作はリソースを大量に消費するため、TiKVの書き込みパフォーマンスと安定性が低下します。
 
-If you want to continue importing data later, you will need to keep the TiDB Lightning server and the disks on the server for the next import. The cost of using preallocated disks is relatively high, compared with `IMPORT INTO` using Amazon S3 on a pay-as-you-go basis.
+後日データのインポートを継続する場合は、次回のインポートのためにTiDB Lightningサーバーとサーバー上のディスクを保持しておく必要があります。事前割り当てディスクを使用する場合のコストは、Amazon S3を従量課金制で使用した`IMPORT INTO`と比較して比較的高くなります。
 
-### Performance
+### パフォーマンス {#performance}
 
-Currently, there are no performance test comparison results under equivalent test environments between `IMPORT INTO` and TiDB Lightning.
+現在、 `IMPORT INTO`とTiDB Lightningの間で同等のテスト環境下でのパフォーマンステスト比較結果はありません。
 
-When Amazon S3 is used as the storage for global sorting, the performance test results for `IMPORT INTO` are as follows:
+グローバルソートのstorageとして Amazon S3 を使用した場合、 `IMPORT INTO`のパフォーマンステスト結果は次のとおりです。
 
-| Source dataset                    | Node configuration                                           | Average import speed per TiDB node |
-|------------------------------------|--------------------------------------------------------------|------------------------------------|
-| 40 TiB data (2.26 billion rows, 19 KiB per row) | 10 TiDB (16C32G) nodes and 20 TiKV (16C27G) nodes | 222 GiB/h |
-| 10 TiB data (565 million rows, 19 KiB per row) | 5 TiDB (16C32G) nodes and 10 TiKV (16C27G) nodes | 307 GiB/h |
+| ソースデータセット                              | ノード構成                                   | TiDBノードあたりの平均インポート速度 |
+| -------------------------------------- | --------------------------------------- | -------------------- |
+| 40 TiB のデータ (22.6 億行、行あたり 19 KiB)      | 10個のTiDB（16C32G）ノードと20個のTiKV（16C27G）ノード | 222 GiB/時            |
+| 10 TiB のデータ (5 億 6,500 万行、行あたり 19 KiB) | 5つのTiDB（16C32G）ノードと10つのTiKV（16C27G）ノード  | 307 GiB/時            |
 
-### High availability
+### 高可用性 {#high-availability}
 
-#### `IMPORT INTO`
+#### <code>IMPORT INTO</code> {#code-import-into-code}
 
-After a TiDB node fails, tasks on that node are automatically transferred to the remaining TiDB nodes to continue running.
+TiDB ノードに障害が発生すると、そのノード上のタスクは残りの TiDB ノードに自動的に転送され、実行が継続されます。
 
-#### TiDB Lightning
+#### TiDB Lightning {#tidb-lightning}
 
-After a TiDB Lightning instance node fails, you need to perform manual recovery of tasks on a new node based on previously recorded checkpoints.
+TiDB Lightningインスタンス ノードに障害が発生した場合、以前に記録されたチェックポイントに基づいて、新しいノードでタスクの手動リカバリを実行する必要があります。
 
-### Scalability
+### スケーラビリティ {#scalability}
 
-#### `IMPORT INTO`
+#### <code>IMPORT INTO</code> {#code-import-into-code}
 
 Due to the use of Global Sort, data imported into TiKV does not overlap, resulting in better scalability compared with TiDB Lightning.
 
-#### TiDB Lightning
+#### TiDB Lightning {#tidb-lightning}
 
-Due to only supporting local sort, data imported into TiKV might overlap when new TiDB Lightning instances are added, resulting in more compaction operations for TiKV and limiting scalability relative to `IMPORT INTO`.
+ローカルソートのみをサポートしているため、新しいTiDB Lightningインスタンスが追加されたときに TiKV にインポートされたデータが重複する可能性があり、その結果 TiKV の圧縮操作が増え、 `IMPORT INTO`に対するスケーラビリティが制限されます。
 
-## Functionalities not supported by `IMPORT INTO`
+## <code>IMPORT INTO</code>でサポートされていない機能 {#functionalities-not-supported-by-code-import-into-code}
 
-Currently, `IMPORT INTO` still lacks some functionalities and cannot fully replace TiDB Lightning in some scenarios, such as:
+現在、 `IMPORT INTO`はまだいくつかの機能が欠けており、次のようなシナリオではTiDB Lightning を完全に置き換えることはできません。
 
-- Logical import
+-   論理インポート
 
-    Before importing data with `IMPORT INTO`, the target table must be empty. If you need to import data into a table that already contains data, it is recommended to use methods such as [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) or direct insertion. Starting from v8.0, TiDB supports [bulk DML](/system-variables.md#tidb_dml_type-new-in-v800) for executing large transactions.
+    `IMPORT INTO`でデータをインポートする前に、ターゲットテーブルは空である必要があります。既にデータが含まれているテーブルにデータをインポートする必要がある場合は、 [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)や直接挿入などの方法を使用することをお勧めします。TiDB v8.0以降、大規模トランザクションの実行には[バルクDML](/system-variables.md#tidb_dml_type-new-in-v800)サポートされます。
 
-- Conflict data handling
+-   競合データの処理
 
-    `IMPORT INTO` currently does not support conflict data handling. Before the data import, you need to define the table schema properly to ensure that the data to be imported does not conflict with primary keys (PK) or unique keys (UK). Otherwise, it might cause task failures.
+    `IMPORT INTO`現在、競合データの処理をサポートしていません。データのインポート前に、インポートするデータが主キー（PK）または一意キー（UK）と競合しないように、テーブルスキーマを適切に定義する必要があります。そうしないと、タスクが失敗する可能性があります。
 
-- Importing data into multiple target tables
+-   複数のターゲットテーブルへのデータのインポート
 
-    Currently, only one target table is allowed for one `IMPORT INTO` SQL statement. If you want to import data into multiple target tables, you need to submit multiple `IMPORT INTO` SQL statements.
+    現在、 `IMPORT INTO` SQL文で指定できるターゲットテーブルは1つだけです。複数のターゲットテーブルにデータをインポートする場合は、 `IMPORT INTO`のSQL文を発行する必要があります。
 
-In future versions, these functionalities will be supported by `IMPORT INTO`, along with additional enhancements to its capabilities, such as allowing modification of concurrency during task execution and adjusting throughput for writing to TiKV. This will make it more convenient for you to manage tasks.
+将来のバージョンでは、これらの機能は`IMPORT INTO`でサポートされる予定です。また、タスク実行中の同時実行性の変更やTiKVへの書き込みスループットの調整といった機能強化も行われます。これにより、タスク管理がより便利になります。
 
-## Summary
+## まとめ {#summary}
 
-Compared with TiDB Lightning, `IMPORT INTO`can be directly executed on TiDB nodes, supports automated distributed task scheduling and [TiDB Global Sort](/tidb-global-sort.md), and offers significant improvements in deployment, resource utilization, task configuration convenience, ease of invocation and integration, high availability, and scalability. It is recommended that you consider using `IMPORT INTO` instead of TiDB Lightning in appropriate scenarios.
+TiDB Lightningと比較すると、 `IMPORT INTO` TiDBノード上で直接実行でき、自動化された分散タスクスケジューリングと[TiDB グローバルソート](/tidb-global-sort.md)サポートし、デプロイメント、リソース利用率、タスク設定の利便性、呼び出しと統合の容易さ、高可用性、スケーラビリティにおいて大幅な改善をもたらします。適切なシナリオでは、 TiDB Lightningではなく`IMPORT INTO`使用を検討することをお勧めします。

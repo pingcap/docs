@@ -1,22 +1,22 @@
 ---
 title: Unstable Result Set
-summary: Learn how to handle the error of an unstable result set.
+summary: 不安定な結果セットのエラーを処理する方法を学習します。
 ---
 
-# Unstable Result Set
+# 不安定な結果セット {#unstable-result-set}
 
-This document describes how to solve unstable result set errors.
+このドキュメントでは、不安定な結果セットのエラーを解決する方法について説明します。
 
-## GROUP BY
+## グループ化 {#group-by}
 
-For convenience, MySQL "extends" the `GROUP BY` syntax to allow the `SELECT` clause to refer to non-aggregated fields not declared in the `GROUP BY` clause, that is, the `NON-FULL GROUP BY` syntax. In other databases, this is considered a syntax **_ERROR_** because it causes unstable result sets.
+便宜上、MySQLは`GROUP BY`の構文を「拡張」し、 `SELECT`番目の句で`GROUP BY`番目の句で宣言されていない非集約フィールドを参照できるようにしています。つまり、 `NON-FULL GROUP BY`の構文です。他のデータベースでは、これは不安定な結果セットを引き起こすため、構文***エラー***とみなされます。
 
-For example, you have two tables:
+たとえば、次の 2 つのテーブルがあるとします。
 
-- `stu_info` stores the student information
-- `stu_score` stores the student test scores.
+-   `stu_info`学生情報を保存します
+-   `stu_score`生徒のテストのスコアが格納されます。
 
-Then you can write a SQL query statement like this:
+次に、次のような SQL クエリ ステートメントを記述します。
 
 ```sql
 SELECT
@@ -34,7 +34,7 @@ ORDER BY
     `a`.`stuname`;
 ```
 
-Result:
+結果：
 
 ```sql
 +------------+--------------+------------------+
@@ -47,9 +47,9 @@ Result:
 3 rows in set (0.00 sec)
 ```
 
-The `a`.`class` and `a`.`stuname` fields are specified in the `GROUP BY` statement, and the selected columns are `a`.`class`, `a`.`stuname` and `b`.`courscore`. The only column that is not in the `GROUP BY` condition, `b`.`courscore`, is also specified with a unique value using the `max()` function. There is **_ONLY ONE_** result that satisfies this SQL statement without any ambiguity, which is called the `FULL GROUP BY` syntax.
+`a` . `class`と`a` . `stuname`フィールドは`GROUP BY`文で指定されており、選択された列は`a` . `class` 、 `a` . `stuname` 、 `b` . `courscore`です。23 `GROUP BY`条件に含まれない唯一の列である`b` . `courscore`も、 `max()`関数を使用して一意の値で指定されています。このSQL文を曖昧さなく満たす結果は***1つだけ***あり、これを`FULL GROUP BY`構文と呼びます。
 
-A counterexample is the `NON-FULL GROUP BY` syntax. For example, in these two tables, write the following SQL query (delete `a`.`stuname` in `GROUP BY`).
+反例として、 `NON-FULL GROUP BY`構文があります。例えば、この 2 つのテーブルに次の SQL クエリ (delete `a` . `stuname` in `GROUP BY` ) を記述します。
 
 ```sql
 SELECT
@@ -66,9 +66,9 @@ ORDER BY
     `a`.`stuname`;
 ```
 
-Then two values that match this SQL are returned.
+すると、この SQL に一致する 2 つの値が返されます。
 
-The first returned value:
+最初に返される値:
 
 ```sql
 +------------+--------------+------------------------+
@@ -79,7 +79,7 @@ The first returned value:
 +------------+--------------+------------------------+
 ```
 
-The second returned value:
+2 番目に返される値:
 
 ```sql
 +------------+--------------+------------------+
@@ -90,9 +90,9 @@ The second returned value:
 +------------+--------------+------------------+
 ```
 
-There are two results because you did **_NOT_** specify how to get the value of the `a`.`stuname` field in SQL, and two results are both satisfied by SQL semantics. It results in an unstable result set. Therefore, if you want to guarantee the stability of the result set of the `GROUP BY` statement, use the `FULL GROUP BY` syntax.
+結果が2つあるのは`stuname` `a`の値を取得する方法を指定して***おらず***、2つの結果がどちらもSQLセマンティクスを満たしているためです。そのため、結果セットは不安定になります。したがって、 `GROUP BY`文の結果セットの安定性を保証したい場合は、 `FULL GROUP BY`構文を使用してください。
 
-MySQL provides a `sql_mode` switch `ONLY_FULL_GROUP_BY` to control whether to check the `FULL GROUP BY` syntax or not. TiDB is also compatible with this `sql_mode` switch.
+MySQLは、構文チェックを行うかどうかを制御するスイッチ`sql_mode`スイッチ`ONLY_FULL_GROUP_BY`を提供しています。TiDBもこのスイッチ`FULL GROUP BY` `sql_mode`互換性があります。
 
 ```sql
 mysql> select a.class, a.stuname, max(b.courscore) from stu_info a join stu_score b on a.stuno=b.stuno group by a.class order by a.class, a.stuname;
@@ -111,15 +111,15 @@ mysql> select a.class, a.stuname, max(b.courscore) from stu_info a join stu_scor
 ERROR 1055 (42000): Expression #2 of ORDER BY is not in GROUP BY clause and contains nonaggregated column '' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
 ```
 
-**Run results**: The above example shows the effect when you set `ONLY_FULL_GROUP_BY` for `sql_mode`.
+**実行結果**: 上記の例は、 `sql_mode`に`ONLY_FULL_GROUP_BY`設定した場合の効果を示しています。
 
-## ORDER BY
+## 順序 {#order-by}
 
-In SQL semantics, the result set is output in order only if the `ORDER BY` syntax is used. For a single-instance database, since the data is stored on one server, the results of multiple executions are often stable without data reorganization. Some databases (especially the MySQL InnoDB storage engine) can even output the result sets in order of the primary key or index.
+SQLセマンティクスでは、 `ORDER BY`構文が使用されている場合にのみ結果セットが順序通りに出力されます。単一インスタンスのデータベースでは、データが1つのサーバーに保存されるため、複数回実行してもデータの再編成なしで結果が安定することがよくあります。一部のデータベース（特にMySQL InnoDBstorageエンジン）では、主キーまたはインデックスの順序で結果セットを出力することも可能です。
 
-As a distributed database, TiDB stores data on multiple servers. In addition, the TiDB layer does not cache data pages, so the result set order of SQL statements without `ORDER BY` is easily perceived as unstable. To output a sequential result set, you need to explicitly add the order field into the `ORDER BY` clause, which conforms to SQL semantics.
+分散データベースであるTiDBは、複数のサーバーにデータを保存しています。また、TiDBレイヤーはデータページをキャッシュしないため、 `ORDER BY`を含まないSQL文の結果セットの順序は不安定であると認識されやすくなります。順序付けられた結果セットを出力するには、SQLセマンティクスに準拠した`ORDER BY`節に明示的に順序フィールドを追加する必要があります。
 
-In the following example, only one field is added to the `ORDER BY` clause, and TiDB only sorts the results by that one field.
+次の例では、 `ORDER BY`句に 1 つのフィールドのみが追加され、TiDB はその 1 つのフィールドのみで結果を並べ替えます。
 
 ```sql
 mysql> select a.class, a.stuname, b.course, b.courscore from stu_info a join stu_score b on a.stuno=b.stuno order by a.class;
@@ -167,19 +167,17 @@ mysql> select a.class, a.stuname, b.course, b.courscore from stu_info a join stu
 
 ```
 
-Results are unstable when the `ORDER BY` values are the same. To reduce randomness, `ORDER BY` values should be unique. If you can't guarantee the uniqueness, you need to add more `ORDER BY` fields until the combination of the `ORDER BY` fields in `ORDER BY` is unique, then the result will be stable.
+`ORDER BY`値が同じ場合、結果は不安定になります。ランダム性を低減するには、 `ORDER BY`値が一意である必要があります。一意性を保証できない場合は、 `ORDER BY`フィールドのうち`ORDER BY`フィールドの組み合わせが一意になるまで、さらに`ORDER BY`フィールドを追加する必要があります。そうすれば、結果は安定します。
 
-## The result set is unstable because order by is not used in `GROUP_CONCAT()`
+## <code>GROUP_CONCAT()</code>で order by が使用されていないため、結果セットは不安定です。 {#the-result-set-is-unstable-because-order-by-is-not-used-in-code-group-concat-code}
 
-The result set is unstable because TiDB reads data from the storage layer in parallel, so the result set order returned by `GROUP_CONCAT()` without `ORDER BY` is easily perceived as unstable.
+TiDB はstorageレイヤーからデータを並列に読み取るため、結果セットは不安定になります。そのため、 `ORDER BY`なしで`GROUP_CONCAT()`によって返される結果セットの順序は不安定であると簡単に認識されます。
 
-To let `GROUP_CONCAT()` get the result set output in order, you need to add the sorting fields to the `ORDER BY` clause, which conforms to the SQL semantics. In the following example, `GROUP_CONCAT()` that splices `customer_id` without `ORDER BY` causes an unstable result set.
+`GROUP_CONCAT()`で結果セットの出力を順序どおりにするには、SQLセマンティクスに準拠した`ORDER BY`節にソートフィールドを追加する必要があります。次の例では、 `ORDER BY`を除いた`customer_id`を結合する`GROUP_CONCAT()`によって、不安定な結果セットが生成されます。
 
-1. Excluded `ORDER BY`
+1.  除外`ORDER BY`
 
-    First query:
-
-    {{< copyable "sql" >}}
+    最初のクエリ:
 
     ```sql
     mysql>  select GROUP_CONCAT( customer_id SEPARATOR ',' ) FROM customer where customer_id like '200002%';
@@ -190,9 +188,7 @@ To let `GROUP_CONCAT()` get the result set output in order, you need to add the 
     +-------------------------------------------------------------------------+
     ```
 
-    Second query:
-
-    {{< copyable "sql" >}}
+    2番目のクエリ:
 
     ```sql
     mysql>  select GROUP_CONCAT( customer_id SEPARATOR ',' ) FROM customer where customer_id like '200002%';
@@ -203,11 +199,9 @@ To let `GROUP_CONCAT()` get the result set output in order, you need to add the 
     +-------------------------------------------------------------------------+
     ```
 
-2. Include `ORDER BY`
+2.  `ORDER BY`を含む
 
-    First query:
-
-    {{< copyable "sql" >}}
+    最初のクエリ:
 
     ```sql
     mysql>  select GROUP_CONCAT( customer_id order by customer_id SEPARATOR ',' ) FROM customer where customer_id like '200002%';
@@ -218,9 +212,7 @@ To let `GROUP_CONCAT()` get the result set output in order, you need to add the 
     +-------------------------------------------------------------------------+
     ```
 
-    Second query:
-
-    {{< copyable "sql" >}}
+    2番目のクエリ:
 
     ```sql
     mysql>  select GROUP_CONCAT( customer_id order by customer_id SEPARATOR ',' ) FROM customer where customer_id like '200002%';
@@ -231,20 +223,20 @@ To let `GROUP_CONCAT()` get the result set output in order, you need to add the 
     +-------------------------------------------------------------------------+
     ```
 
-## Unstable results in `SELECT * FROM T LIMIT N`
+## <code>SELECT * FROM T LIMIT N</code>で結果が不安定になる {#unstable-results-in-code-select-from-t-limit-n-code}
 
-The returned result is related to the distribution of data on the storage node (TiKV). If multiple queries are performed, different storage units (Regions) of the storage nodes (TiKV) return results at different speeds, which can cause unstable results.
+返される結果は、storageノード（TiKV）上のデータの分散状況に関係します。複数のクエリを実行すると、storageノード（TiKV）の異なるstorageユニット（リージョン）から異なる速度で結果が返されるため、結果が不安定になる可能性があります。
 
-## Need help?
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

@@ -1,60 +1,60 @@
 ---
 title: JSON Functions That Validate JSON Documents
-summary: Learn about JSON functions that validate JSON documents.
+summary: JSON ドキュメントを検証する JSON関数について学習します。
 ---
 
-# JSON Functions That Validate JSON Documents
+# JSONドキュメントを検証するJSON関数 {#json-functions-that-validate-json-documents}
 
-This document describes JSON functions that validate JSON documents.
+このドキュメントでは、JSON ドキュメントを検証する JSON関数について説明します。
 
-> **Note:**
+> **注記：**
 >
-> Currently, this feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 現在、この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
-## [JSON_SCHEMA_VALID()](https://dev.mysql.com/doc/refman/8.0/en/json-validation-functions.html#function_json-schema-valid)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-validation-functions.html#function_json-schema-valid">JSON_SCHEMA_VALID()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-validation-functions-html-function-json-schema-valid-json-schema-valid-a}
 
-The `JSON_SCHEMA_VALID(schema, json_doc)` function validate a JSON document against a schema to ensure data integrity and consistency.
+`JSON_SCHEMA_VALID(schema, json_doc)`関数は、JSON ドキュメントをスキーマに対して検証し、データの整合性と一貫性を確保します。
 
-This can be used together with a [CHECK](/constraints.md#check) constraint to do automatic schema validation when a table is modified.
+これを[チェック](/constraints.md#check)制約と一緒に使用すると、テーブルが変更されたときに自動スキーマ検証を行うことができます。
 
-This function follows the [JSON Schema specification](https://json-schema.org/specification).
+この関数は[JSONスキーマ仕様](https://json-schema.org/specification)に従います。
 
-The supported validation keywords are as follows:
+サポートされている検証キーワードは次のとおりです。
 
-| Validation keyword | Applied type | Description |
-|---|---|---|
-| `type`                 | Any | Tests the type (such as `array` and `string`) |
-| `enum`                 | Any | Tests if a value is in the specified array of values |
-| `const`                | Any | Similar to `enum`, but for a single value |
-| `allOf`                | Any | Matches all of the specified schemas |
-| `anyOf`                | Any | Matches any of the specified schemas |
-| `multipleOf`           | `number`/`integer` | Tests if the value is a multiple of the specified value |
-| `maximum`              | `number`/`integer` | Tests if the value is below the maximum (inclusive) |
-| `exclusiveMaximum`     | `number`/`integer` | Tests if the value is below the maximum (exclusive) |
-| `minimum`              | `number`/`integer` | Tests if the value is above the minimum (inclusive) |
-| `exclusiveMinimum`     | `number`/`integer` | Tests if the value is above the minimum (exclusive) |
-| `maxlength`            | `string` | Tests if the length of the value is not exceeding the specified value |
-| `minLength`            | `string` | Tests if the length of the value is at least the specified value |
-| `format`               | `string` | Tests if a string matches a named format |
-| `pattern`              | `string` | Tests if a string matches a pattern |
-| `items`                | `array` | Schema to apply to the items of an array |
-| `prefixItems`          | `array` | Schema to apply to positional items of an array |
-| `maxItems`             | `array` | Tests if the number of items in the array is not exceeding the specified value |
-| `minItems`             | `array` | Tests if the number of items in the array is at least the specified value |
-| `uniqueItems`          | `array` | Tests if the items in the array are unique, `true`/`false`|
-| `contains`             | `array` | Sets schema for items contained in the array |
-| `maxContains`          | `array` | Used together with `contains` to test the maximum times an item can be present |
-| `minContains`          | `array` | Used together with `contains` to test the minimum times an item can be present |
-| `properties`           | `object` | Schema to apply to the properties of an object |
-| `patternProperties`    | `object` | Schema to apply to certain properties based on pattern matching of the property name |
-| `additionalProperties` | `object` | Whether additional properties are allowed or not, `true`/`false` |
-| `minProperties`        | `object` | Tests the minimum number of properties that an object can have |
-| `maxProperties`        | `object` | Tests the maximum number of properties that an object can have |
-| `required`             | `object` | Tests if the specified property names exist in an object |
+| 検証キーワード                | 適用タイプ                | 説明                                        |
+| ---------------------- | -------------------- | ----------------------------------------- |
+| `type`                 | どれでも                 | タイプをテストします（ `array`や`string`など）           |
+| `enum`                 | どれでも                 | 値が指定された値の配列内にあるかどうかをテストします                |
+| `const`                | どれでも                 | `enum`と同様だが、単一の値である                       |
+| `allOf`                | どれでも                 | 指定されたすべてのスキーマに一致します                       |
+| `anyOf`                | どれでも                 | 指定されたスキーマのいずれかに一致する                       |
+| `multipleOf`           | `number` / `integer` | 値が指定された値の倍数かどうかをテストします                    |
+| `maximum`              | `number` / `integer` | 値が最大値（含む）を下回っているかどうかをテストします               |
+| `exclusiveMaximum`     | `number` / `integer` | 値が最大値（含まない）を下回っているかどうかをテストします             |
+| `minimum`              | `number` / `integer` | 値が最小値（含む）を超えているかどうかをテストします                |
+| `exclusiveMinimum`     | `number` / `integer` | 値が最小値（含まない）より大きいかどうかをテストします               |
+| `maxlength`            | `string`             | 値の長さが指定された値を超えていないかどうかをテストします             |
+| `minLength`            | `string`             | 値の長さが指定された値以上かどうかをテストします                  |
+| `format`               | `string`             | 文字列が名前付きフォーマットに一致するかどうかをテストします            |
+| `pattern`              | `string`             | 文字列がパターンに一致するかどうかをテストします                  |
+| `items`                | `array`              | 配列の項目に適用するスキーマ                            |
+| `prefixItems`          | `array`              | 配列の位置項目に適用するスキーマ                          |
+| `maxItems`             | `array`              | 配列内の項目数が指定された値を超えていないかどうかをテストします          |
+| `minItems`             | `array`              | 配列内の項目数が指定された値以上かどうかをテストします               |
+| `uniqueItems`          | `array`              | 配列内の項目が一意かどうかをテストします`true` / `false`      |
+| `contains`             | `array`              | 配列に含まれるアイテムのスキーマを設定します                    |
+| `maxContains`          | `array`              | `contains`と一緒に使用して、アイテムが存在できる最大回数をテストします。 |
+| `minContains`          | `array`              | `contains`と一緒に使用して、アイテムが存在できる最小回数をテストします。 |
+| `properties`           | `object`             | オブジェクトのプロパティに適用するスキーマ                     |
+| `patternProperties`    | `object`             | プロパティ名のパターンマッチングに基づいて特定のプロパティに適用するスキーマ    |
+| `additionalProperties` | `object`             | 追加プロパティが許可されるかどうか、 `true` / `false`       |
+| `minProperties`        | `object`             | オブジェクトが持つことができるプロパティの最小数をテストします           |
+| `maxProperties`        | `object`             | オブジェクトが持つことができるプロパティの最大数をテストします           |
+| `required`             | `object`             | 指定されたプロパティ名がオブジェクト内に存在するかどうかをテストします       |
 
-Examples:
+例:
 
-For some of the examples, use this JSON document:
+いくつかの例では、次の JSON ドキュメントを使用します。
 
 ```json
 {
@@ -70,152 +70,134 @@ For some of the examples, use this JSON document:
 }
 ```
 
-Use a [user defined variable](/user-defined-variables.md) to hold the JSON document.
+JSON ドキュメントを保持するには[ユーザー定義変数](/user-defined-variables.md)使用します。
 
 ```sql
 SET @j := '{"fruits": ["orange", "apple", "pear"], "vegetables": ["carrot", "pepper", "kale"]}';
 ```
 
-Start by testing the type:
+まず、次のタイプをテストします。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"type": "object"}',@j);
 ```
 
-```
-+--------------------------------------------+
-| JSON_SCHEMA_VALID('{"type": "object"}',@j) |
-+--------------------------------------------+
-|                                          1 |
-+--------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------------------+
+    | JSON_SCHEMA_VALID('{"type": "object"}',@j) |
+    +--------------------------------------------+
+    |                                          1 |
+    +--------------------------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"type": "array"}',@j);
 ```
 
-```
-+-------------------------------------------+
-| JSON_SCHEMA_VALID('{"type": "array"}',@j) |
-+-------------------------------------------+
-|                                         0 |
-+-------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------------------------------+
+    | JSON_SCHEMA_VALID('{"type": "array"}',@j) |
+    +-------------------------------------------+
+    |                                         0 |
+    +-------------------------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 mysql> SELECT JSON_TYPE(@j);
 ```
 
-```
-+---------------+
-| JSON_TYPE(@j) |
-+---------------+
-| OBJECT        |
-+---------------+
-1 row in set (0.00 sec)
-```
+    +---------------+
+    | JSON_TYPE(@j) |
+    +---------------+
+    | OBJECT        |
+    +---------------+
+    1 row in set (0.00 sec)
 
-As you can see in the preceding output, the type of `@j` is `object`. This matches with the output of [`JSON_TYPE()`](/functions-and-operators/json-functions/json-functions-return.md#json_type).
+上記の出力からわかるように、 `@j`の型は`object`です。これは[`JSON_TYPE()`](/functions-and-operators/json-functions/json-functions-return.md#json_type)の出力と一致します。
 
-Now validate the presence of certain attributes.
+ここで、特定の属性の存在を検証します。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables"]}',@j);
 ```
 
-```
-+---------------------------------------------------------------+
-| JSON_SCHEMA_VALID('{"required": ["fruits","vegetables"]}',@j) |
-+---------------------------------------------------------------+
-|                                                             1 |
-+---------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +---------------------------------------------------------------+
+    | JSON_SCHEMA_VALID('{"required": ["fruits","vegetables"]}',@j) |
+    +---------------------------------------------------------------+
+    |                                                             1 |
+    +---------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-In the preceding output, you can see that the validation of the presence of the `fruits` and `vegetables` attributes succeeds.
+上記の出力では、属性`fruits`と`vegetables`存在の検証が成功したことがわかります。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables","grains"]}',@j);
 ```
 
-```
-+------------------------------------------------------------------------+
-| JSON_SCHEMA_VALID('{"required": ["fruits","vegetables","grains"]}',@j) |
-+------------------------------------------------------------------------+
-|                                                                      0 |
-+------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------------------------------------------+
+    | JSON_SCHEMA_VALID('{"required": ["fruits","vegetables","grains"]}',@j) |
+    +------------------------------------------------------------------------+
+    |                                                                      0 |
+    +------------------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-In the preceding output, you can see that the validation of the presence of the `fruits`, `vegetables` and `grains` attributes fails because `grains` is not present.
+上記の出力では、 `grains`が存在しないため、 `fruits` 、 `vegetables` 、 `grains`属性の存在の検証が失敗していることがわかります。
 
-Now validate that `fruits` is an array.
+ここで、 `fruits`配列であることを検証します。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array"}}}',@j);
 ```
 
-```
-+-----------------------------------------------------------------------+
-| JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array"}}}',@j) |
-+-----------------------------------------------------------------------+
-|                                                                     1 |
-+-----------------------------------------------------------------------+
-1 row in set (0.01 sec)
-```
+    +-----------------------------------------------------------------------+
+    | JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array"}}}',@j) |
+    +-----------------------------------------------------------------------+
+    |                                                                     1 |
+    +-----------------------------------------------------------------------+
+    1 row in set (0.01 sec)
 
-The preceding output confirms that `fruits` is an array.
+上記の出力は、 `fruits`が配列であることを確認します。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "string"}}}',@j);
 ```
 
-```
-+------------------------------------------------------------------------+
-| JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "string"}}}',@j) |
-+------------------------------------------------------------------------+
-|                                                                      0 |
-+------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------------------------------------------+
+    | JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "string"}}}',@j) |
+    +------------------------------------------------------------------------+
+    |                                                                      0 |
+    +------------------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-The preceding output shows that `fruits` is **not** a string.
+上記の出力は、 `fruits`文字列**ではない**ことを示しています。
 
-Now verify the number of items in the array.
+次に、配列内の項目の数を確認します。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array", "minItems": 3}}}',@j);
 ```
 
-```
-+--------------------------------------------------------------------------------------+
-| JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array", "minItems": 3}}}',@j) |
-+--------------------------------------------------------------------------------------+
-|                                                                                    1 |
-+--------------------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------------------------------------------------------------+
+    | JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array", "minItems": 3}}}',@j) |
+    +--------------------------------------------------------------------------------------+
+    |                                                                                    1 |
+    +--------------------------------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-The preceding output shows that `fruits` is an array with at least 3 items.
+上記の出力は、 `fruits`少なくとも 3 つの項目を持つ配列であることを示しています。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array", "minItems": 4}}}',@j);
 ```
 
-```
-+--------------------------------------------------------------------------------------+
-| JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array", "minItems": 4}}}',@j) |
-+--------------------------------------------------------------------------------------+
-|                                                                                    0 |
-+--------------------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------------------------------------------------------------+
+    | JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array", "minItems": 4}}}',@j) |
+    +--------------------------------------------------------------------------------------+
+    |                                                                                    0 |
+    +--------------------------------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-The preceding output shows that `fruits` is **not** an array with at least 4 items. This is because it does not meet the minimum number of items.
+上記の出力は、 `fruits`少なくとも 4 つの項目を持つ配列**ではない**ことを示しています。これは、最小項目数を満たしていないためです。
 
-For integers values, you can check if they are in a certain range.
+整数値の場合、特定の範囲内にあるかどうかを確認できます。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"type": "integer", "minimum": 40, "maximum": 45}', '42');
@@ -231,160 +213,138 @@ SELECT JSON_SCHEMA_VALID('{"type": "integer", "minimum": 40, "maximum": 45}', '4
 SELECT JSON_SCHEMA_VALID('{"type": "integer", "minimum": 40, "maximum": 45}', '123');
 ```
 
-```
-+-------------------------------------------------------------------------------+
-| JSON_SCHEMA_VALID('{"type": "integer", "minimum": 40, "maximum": 45}', '123') |
-+-------------------------------------------------------------------------------+
-|                                                                             0 |
-+-------------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------------------------------------------------------------------+
+    | JSON_SCHEMA_VALID('{"type": "integer", "minimum": 40, "maximum": 45}', '123') |
+    +-------------------------------------------------------------------------------+
+    |                                                                             0 |
+    +-------------------------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-For a string, you can validate whether it matches a certain pattern.
+文字列の場合、特定のパターンに一致するかどうかを検証できます。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"type": "string", "pattern": "^Ti"}', '"TiDB"');
 ```
 
-```
-+---------------------------------------------------------------------+
-| JSON_SCHEMA_VALID('{"type": "string", "pattern": "^Ti"}', '"TiDB"') |
-+---------------------------------------------------------------------+
-|                                                                   1 |
-+---------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +---------------------------------------------------------------------+
+    | JSON_SCHEMA_VALID('{"type": "string", "pattern": "^Ti"}', '"TiDB"') |
+    +---------------------------------------------------------------------+
+    |                                                                   1 |
+    +---------------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"type": "string", "pattern": "^Ti"}', '"PingCAP"');
 ```
 
-```
-+------------------------------------------------------------------------+
-| JSON_SCHEMA_VALID('{"type": "string", "pattern": "^Ti"}', '"PingCAP"') |
-+------------------------------------------------------------------------+
-|                                                                      0 |
-+------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------------------------------------------+
+    | JSON_SCHEMA_VALID('{"type": "string", "pattern": "^Ti"}', '"PingCAP"') |
+    +------------------------------------------------------------------------+
+    |                                                                      0 |
+    +------------------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-You can check whether a value matches a certain named format. The formats that can be validated include `ipv4`, `ipv6`, `time`, `date`, `duration`, `email`, `hostname`, `uuid`, and `uri`.
+値が特定の名前付き形式に一致するかどうかを確認できます。検証可能な形式には`ipv4` 、 `ipv6` 、 `time` 、 `date` 、 `duration` 、 `email` 、 `hostname` 、 `uuid` 、 `uri`などがあります。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"format": "ipv4"}', '"127.0.0.1"');
 ```
 
-```
-+--------------------------------------------------------+
-| JSON_SCHEMA_VALID('{"format": "ipv4"}', '"127.0.0.1"') |
-+--------------------------------------------------------+
-|                                                      1 |
-+--------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------------------------------+
+    | JSON_SCHEMA_VALID('{"format": "ipv4"}', '"127.0.0.1"') |
+    +--------------------------------------------------------+
+    |                                                      1 |
+    +--------------------------------------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"format": "ipv4"}', '"327.0.0.1"');
 ```
 
-```
-+--------------------------------------------------------+
-| JSON_SCHEMA_VALID('{"format": "ipv4"}', '"327.0.0.1"') |
-+--------------------------------------------------------+
-|                                                      0 |
-+--------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------------------------------+
+    | JSON_SCHEMA_VALID('{"format": "ipv4"}', '"327.0.0.1"') |
+    +--------------------------------------------------------+
+    |                                                      0 |
+    +--------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-You can also use `enum` to check if a string is in an array.
+`enum`使用して、文字列が配列内にあるかどうかを確認することもできます。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"enum": ["TiDB", "MySQL"]}', '"TiDB"');
 ```
 
-```
-+------------------------------------------------------------+
-| JSON_SCHEMA_VALID('{"enum": ["TiDB", "MySQL"]}', '"TiDB"') |
-+------------------------------------------------------------+
-|                                                          1 |
-+------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------------------------------+
+    | JSON_SCHEMA_VALID('{"enum": ["TiDB", "MySQL"]}', '"TiDB"') |
+    +------------------------------------------------------------+
+    |                                                          1 |
+    +------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"enum": ["TiDB", "MySQL"]}', '"MySQL"');
 ```
 
-```
-+-------------------------------------------------------------+
-| JSON_SCHEMA_VALID('{"enum": ["TiDB", "MySQL"]}', '"MySQL"') |
-+-------------------------------------------------------------+
-|                                                           1 |
-+-------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------------------------------------------------+
+    | JSON_SCHEMA_VALID('{"enum": ["TiDB", "MySQL"]}', '"MySQL"') |
+    +-------------------------------------------------------------+
+    |                                                           1 |
+    +-------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"enum": ["TiDB", "MySQL"]}', '"SQLite"');
 ```
 
-```
-+--------------------------------------------------------------+
-| JSON_SCHEMA_VALID('{"enum": ["TiDB", "MySQL"]}', '"SQLite"') |
-+--------------------------------------------------------------+
-|                                                            0 |
-+--------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------------------------------------+
+    | JSON_SCHEMA_VALID('{"enum": ["TiDB", "MySQL"]}', '"SQLite"') |
+    +--------------------------------------------------------------+
+    |                                                            0 |
+    +--------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-With `anyOf`, you can combine certain requirements and validate whether any of the requirements is met.
+`anyOf`使用すると、特定の要件を組み合わせて、いずれかの要件が満たされているかどうかを検証できます。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"anyOf": [{"type": "string"},{"type": "integer"}]}', '"TiDB"');
 ```
 
-```
-+------------------------------------------------------------------------------------+
-| JSON_SCHEMA_VALID('{"anyOf": [{"type": "string"},{"type": "integer"}]}', '"TiDB"') |
-+------------------------------------------------------------------------------------+
-|                                                                                  1 |
-+------------------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +------------------------------------------------------------------------------------+
+    | JSON_SCHEMA_VALID('{"anyOf": [{"type": "string"},{"type": "integer"}]}', '"TiDB"') |
+    +------------------------------------------------------------------------------------+
+    |                                                                                  1 |
+    +------------------------------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"anyOf": [{"type": "string"},{"type": "integer"}]}', '["TiDB", "MySQL"]');
 ```
 
-```
-+-----------------------------------------------------------------------------------------------+
-| JSON_SCHEMA_VALID('{"anyOf": [{"type": "string"},{"type": "integer"}]}', '["TiDB", "MySQL"]') |
-+-----------------------------------------------------------------------------------------------+
-|                                                                                             0 |
-+-----------------------------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +-----------------------------------------------------------------------------------------------+
+    | JSON_SCHEMA_VALID('{"anyOf": [{"type": "string"},{"type": "integer"}]}', '["TiDB", "MySQL"]') |
+    +-----------------------------------------------------------------------------------------------+
+    |                                                                                             0 |
+    +-----------------------------------------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"anyOf": [{"type": "string"},{"type": "integer"}]}', '5');
 ```
 
-```
-+-------------------------------------------------------------------------------+
-| JSON_SCHEMA_VALID('{"anyOf": [{"type": "string"},{"type": "integer"}]}', '5') |
-+-------------------------------------------------------------------------------+
-|                                                                             1 |
-+-------------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------------------------------------------------------------------+
+    | JSON_SCHEMA_VALID('{"anyOf": [{"type": "string"},{"type": "integer"}]}', '5') |
+    +-------------------------------------------------------------------------------+
+    |                                                                             1 |
+    +-------------------------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-- If the schema to be validated in `JSON_SCHEMA_VALID()` is invalid (such as `{"type": "sting"}`), MySQL might accept it, but TiDB returns an error. Note that there is a spelling mistake in `"sting"`, which should be `"string"`.
-- MySQL uses an older draft version of the JSON Schema standard.
+-   `JSON_SCHEMA_VALID()`で検証するスキーマが無効な場合（例： `{"type": "sting"}` ）、MySQL はそれを受け入れますが、TiDB はエラーを返します。 `"sting"`にスペルミスがあり、正しくは`"string"`です。
+-   MySQL は、JSON スキーマ標準の古いドラフト バージョンを使用します。
 
-## See also
+## 参照 {#see-also}
 
-- [JSON Schema Reference](https://json-schema.org/understanding-json-schema/reference)
-- [JSON Functions Overview](/functions-and-operators/json-functions.md)
-- [JSON Data Type](/data-type-json.md)
+-   [JSONスキーマリファレンス](https://json-schema.org/understanding-json-schema/reference)
+-   [JSON関数の概要](/functions-and-operators/json-functions.md)
+-   [JSONデータ型](/data-type-json.md)

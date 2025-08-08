@@ -1,69 +1,67 @@
 ---
 title: Use TiDB Cloud Dedicated Network Container Resource
-summary: Learn how to use the TiDB Cloud Dedicated network container resource to create and modify a TiDB Cloud Dedicated network container.
+summary: TiDB Cloud Dedicated ネットワーク コンテナ リソースを使用して、 TiDB Cloud Dedicated ネットワーク コンテナを作成および変更する方法を学習します。
 ---
 
-# Use TiDB Cloud Dedicated Network Container Resource
+# TiDB Cloud専用ネットワークコンテナリソースを使用する {#use-tidb-cloud-dedicated-network-container-resource}
 
-This document describes how to manage a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) network container using the `tidbcloud_dedicated_network_container` resource.
+このドキュメントでは、 `tidbcloud_dedicated_network_container`リソースを使用して[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)ネットワーク コンテナーを管理する方法について説明します。
 
-A network container is a logical networking resource that lets you define and manage a CIDR block (IP address range) for a specific project and region. This CIDR block is used for creating a VPC for TiDB Cloud Dedicated clusters and is required before setting up VPC peering in that region.
+ネットワークコンテナは、特定のプロジェクトとリージョンのCIDRブロック（IPアドレス範囲）を定義および管理できる論理ネットワークリソースです。このCIDRブロックは、 TiDB Cloud Dedicatedクラスター用のVPCを作成するために使用され、そのリージョンでVPCピアリングを設定する前に必要です。
 
-Before adding VPC peering requests to a region, you must first set a CIDR block for that region and create an initial TiDB Cloud Dedicated cluster. Once the first cluster is created, TiDB Cloud automatically creates the associated VPC, enabling you to establish a peering connection with your application's VPC.
+リージョンにVPCピアリングリクエストを追加する前に、まずそのリージョンのCIDRブロックを設定し、最初のTiDB Cloud Dedicatedクラスターを作成する必要があります。最初のクラスターが作成されると、 TiDB Cloudは関連するVPCを自動的に作成し、アプリケーションのVPCとのピアリング接続を確立できるようになります。
 
-The features of the `tidbcloud_dedicated_network_container` resource include the following:
+`tidbcloud_dedicated_network_container`リソースの機能は次のとおりです。
 
-- Create TiDB Cloud Dedicated network containers.
-- Import TiDB Cloud Dedicated network containers.
-- Delete TiDB Cloud Dedicated network containers.
+-   TiDB Cloud専用ネットワーク コンテナーを作成します。
+-   TiDB Cloud Dedicated ネットワーク コンテナーをインポートします。
+-   TiDB Cloud Dedicated ネットワーク コンテナーを削除します。
 
-> **Note:**
+> **注記：**
 >
-> TiDB Cloud Dedicated network containers cannot be modified or deleted if the status is `ACTIVE`. Make sure that the configuration of the `tidbcloud_network_container` resource is correct before you apply it.
+> TiDB Cloud Dedicatedネットワークコンテナは、ステータスが`ACTIVE`場合、変更または削除できません。適用する前に、 `tidbcloud_network_container`リソースの構成が正しいことを確認してください。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
+-   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
 
-## Create a TiDB Cloud Dedicated network container
+## TiDB Cloud専用ネットワークコンテナを作成する {#create-a-tidb-cloud-dedicated-network-container}
 
-You can create a TiDB Cloud Dedicated network container using the `tidbcloud_dedicated_network_container` resource.
+`tidbcloud_dedicated_network_container`リソースを使用して、 TiDB Cloud専用ネットワーク コンテナーを作成できます。
 
-The following example shows how to create a TiDB Cloud Dedicated network container.
+次の例は、TiDB Cloud Dedicated ネットワーク コンテナを作成する方法を示しています。
 
-1. Create a directory for the TiDB Cloud Dedicated network container and enter it.
+1.  TiDB Cloud Dedicated ネットワーク コンテナのディレクトリを作成してそこに入ります。
 
-2. Create a `network_container.tf` file:
+2.  `network_container.tf`ファイルを作成します。
 
-    ```
-    terraform {
-      required_providers {
-        tidbcloud = {
-          source = "tidbcloud/tidbcloud"
+        terraform {
+          required_providers {
+            tidbcloud = {
+              source = "tidbcloud/tidbcloud"
+            }
+          }
         }
-      }
-    }
 
-    provider "tidbcloud" {
-      public_key = "your_public_key"
-      private_key = "your_private_key"
-    }
+        provider "tidbcloud" {
+          public_key = "your_public_key"
+          private_key = "your_private_key"
+        }
 
-    resource "tidbcloud_dedicated_network_container" "example" {
-      project_id = "1372813089454000000"
-      region_id = "aws-ap-northeast-2"
-      cidr_notation = "172.16.16.0/21"
-    }
-    ```
+        resource "tidbcloud_dedicated_network_container" "example" {
+          project_id = "1372813089454000000"
+          region_id = "aws-ap-northeast-2"
+          cidr_notation = "172.16.16.0/21"
+        }
 
-    Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
+    `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    - To use the TiDB Cloud Dedicated network container resource, set the resource type as `tidbcloud_dedicated_network_container`.
-    - For the resource name, you can define it as needed, for example, `example`.
-    - If you do not know how to get the values of the required arguments, see [Set a CIDR for a Region](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region).
-    - For more information about the TiDB Cloud Dedicated network container specification, see [tidbcloud_dedicated_network_container (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_network_container).
+    -   TiDB Cloud Dedicated ネットワーク コンテナ リソースを使用するには、リソース タイプを`tidbcloud_dedicated_network_container`に設定します。
+    -   リソース名は、必要に応じて定義できます（例： `example` ）。
+    -   必要な引数の値を取得する方法がわからない場合は、 [リージョンの CIDR を設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)参照してください。
+    -   TiDB Cloud Dedicated ネットワーク コンテナ仕様の詳細については、 [tidbcloud_dedicated_network_container (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_network_container)参照してください。
 
-3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
+3.  `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 
     ```shell
     $ terraform apply
@@ -95,13 +93,13 @@ The following example shows how to create a TiDB Cloud Dedicated network contain
         Enter a value:
     ```
 
-    In the preceding result, Terraform generates an execution plan for you, which describes the actions Terraform will take:
+    上記の結果では、Terraform によって実行プランが生成され、Terraform が実行するアクションが記述されます。
 
-    - You can check the differences between the configurations and the states.
-    - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
-    - `known after apply` indicates that you will get the corresponding value after `apply`.
+    -   構成と状態の違いを確認できます。
+    -   `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
+    -   `known after apply` `apply`後の対応する値が取得されることを示します。
 
-4. If everything in your plan looks fine, type `yes` to continue:
+4.  計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
 
     ```shell
     Do you want to perform these actions?
@@ -114,9 +112,9 @@ The following example shows how to create a TiDB Cloud Dedicated network contain
     tidbcloud_dedicated_network_container.example: Creation complete after 4s
     ```
 
-    The status of the resource will remain `INACTIVE` until you create a TiDB Cloud Dedicated cluster in the region of the TiDB Cloud Dedicated network container. Then, the status will change to `ACTIVE`.
+    TiDB Cloud Dedicated ネットワークコンテナのリージョンにTiDB Cloud Dedicated クラスターを作成するまで、リソースのステータスは`INACTIVE`ままです。その後、ステータスは`ACTIVE`に変わります。
 
-5. Use the `terraform show` or `terraform state show tidbcloud_dedicated_network_container.${resource-name}` command to inspect the state of your resource. The former command shows the states of all resources and data sources.
+5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_dedicated_network_container.${resource-name}`使用します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_dedicated_network_container.example          
@@ -136,40 +134,38 @@ The following example shows how to create a TiDB Cloud Dedicated network contain
     }
     ```
 
-## Import a TiDB Cloud Dedicated network container
+## TiDB Cloud専用ネットワークコンテナをインポートする {#import-a-tidb-cloud-dedicated-network-container}
 
-For a TiDB Cloud Dedicated network container that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+Terraform で管理されていないTiDB Cloud Dedicated ネットワーク コンテナの場合は、インポートするだけで Terraform を使用して管理できます。
 
-For example, you can import a network container that is not created by Terraform.
+たとえば、Terraform によって作成されていないネットワーク コンテナーをインポートできます。
 
-1. Add an import block for the new TiDB Cloud Dedicated network container resource.
+1.  新しいTiDB Cloud Dedicated ネットワーク コンテナ リソースのインポート ブロックを追加します。
 
-    Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,network_container_id`:
+    次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` `cluster_id,network_container_id`の形式に置き換えます。
 
-    ```
-    import {
-      to = tidbcloud_dedicated_network_container.example
-      id = "${id}"
-    }
-    ```
+        import {
+          to = tidbcloud_dedicated_network_container.example
+          id = "${id}"
+        }
 
-2. Generate the new configuration file.
+2.  新しい構成ファイルを生成します。
 
-    Generate the new configuration file for the new TiDB Cloud Dedicated network container resource according to the import block:
+    インポート ブロックに従って、新しいTiDB Cloud Dedicated ネットワーク コンテナ リソースの新しい構成ファイルを生成します。
 
     ```shell
     terraform plan -generate-config-out=generated.tf
     ```
 
-    Do not specify an existing `.tf` filename in the preceding command. Otherwise, Terraform will return an error.
+    上記のコマンドでは、既存の`.tf`名を指定しないでください。指定した場合、Terraform はエラーを返します。
 
-    Then the `generated.tf` file is created in the current directory, which contains the configuration of the imported resource.
+    次に、インポートされたリソースの構成を含む`generated.tf`ファイルが現在のディレクトリに作成されます。
 
-3. Review and apply the generated configuration.
+3.  生成された構成を確認して適用します。
 
-    Review the generated configuration file to ensure that it meets your needs. Optionally, you can move the contents of this file to your preferred location.
+    生成された構成ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
 
-    Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
+    次に、 `terraform apply`を実行してインフラストラクチャをインポートします。適用後の出力例は次のとおりです。
 
     ```shell
     tidbcloud_dedicated_network_container.example: Importing... [id=10423692645683000000,example]
@@ -178,13 +174,13 @@ For example, you can import a network container that is not created by Terraform
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
 
-Now you can manage the imported TiDB Cloud Dedicated network container with Terraform.
+これで、インポートしたTiDB Cloud Dedicated ネットワーク コンテナを Terraform で管理できるようになりました。
 
-## Delete a TiDB Cloud Dedicated network container
+## TiDB Cloud Dedicatedネットワークコンテナを削除する {#delete-a-tidb-cloud-dedicated-network-container}
 
-To delete a TiDB Cloud Dedicated cluster, you can delete the configuration of the `tidbcloud_dedicated_cluster` resource, then use the `terraform apply` command to destroy the resource. However, you must ensure that the status of the TiDB Cloud Dedicated network container is not `ACTIVE`. If it is `ACTIVE`, you cannot delete it.
+TiDB Cloud Dedicated クラスターを削除するには、 `tidbcloud_dedicated_cluster`リソースの設定を削除し、 `terraform apply`コマンドを使用してリソースを破棄します。ただし、 TiDB Cloud Dedicated ネットワークコンテナのステータスが`ACTIVE`でないことを確認する必要があります。ステータスが`ACTIVE`場合は削除できません。
 
-If the status is `INACTIVE`, you can delete it by running the following command:
+ステータスが`INACTIVE`の場合は、次のコマンドを実行して削除できます。
 
 ```shell
   $ terraform apply
@@ -225,8 +221,6 @@ If the status is `INACTIVE`, you can delete it by running the following command:
   Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
 ```
 
-Now, if you run the `terraform show` command, it will show no managed resources because the resource has been cleared:
+ここで、 `terraform show`コマンドを実行すると、リソースがクリアされているため、管理対象リソースは表示されません。
 
-```
-$ terraform show
-```
+    $ terraform show

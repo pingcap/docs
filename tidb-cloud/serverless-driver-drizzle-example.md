@@ -1,272 +1,268 @@
 ---
-title: {{{ .starter }}} Driver Drizzle Tutorial
-summary: Learn how to use TiDB Cloud serverless driver with Drizzle.
+title: TiDB Cloud Serverless Driver Drizzle Tutorial
+summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する方法を学びます。
 ---
 
-# {{{ .starter }}} Driver Drizzle Tutorial
+# TiDB CloudサーバーレスDriverDrizzle チュートリアル {#tidb-cloud-serverless-driver-drizzle-tutorial}
 
-[Drizzle ORM](https://orm.drizzle.team/) is a lightweight and performant TypeScript ORM with developer experience in mind. Starting from `drizzle-orm@0.31.2`, it supports [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless), enabling you to use Drizzle over HTTPS with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md).
+[霧雨ORM](https://orm.drizzle.team/) 、開発者エクスペリエンスを重視した軽量で高性能な TypeScript ORM です。2 `drizzle-orm@0.31.2`では[drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)サポートし、 [TiDB Cloudサーバーレス ドライバー](/tidb-cloud/serverless-driver.md)では HTTPS 経由で Drizzle を利用できるようになります。
 
-This tutorial describes how to use TiDB Cloud serverless driver with Drizzle in Node.js environments and edge environments.
+このチュートリアルでは、Node.js 環境とエッジ環境で Drizzle とTiDB Cloudサーバーレス ドライバーを使用する方法について説明します。
 
-## Use Drizzle and TiDB Cloud serverless driver in Node.js environments
+## Node.js環境でDrizzleとTiDB Cloudサーバーレスドライバーを使用する {#use-drizzle-and-tidb-cloud-serverless-driver-in-node-js-environments}
 
-This section describes how to use TiDB Cloud serverless driver with Drizzle in Node.js environments.
+このセクションでは、Node.js 環境で Drizzle とTiDB Cloudサーバーレス ドライバーを使用する方法について説明します。
 
-### Before you begin
+### 始める前に {#before-you-begin}
 
-To complete this tutorial, you need the following:
+このチュートリアルを完了するには、次のものが必要です。
 
-- [Node.js](https://nodejs.org/en) >= 18.0.0.
-- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A {{{ .starter }}} cluster. If you don't have any, you can [create a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+-   [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
+-   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
+-   TiDB Cloud Serverless クラスター。お持ちでない場合は、 [TiDB Cloud Serverless クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)ご利用ください。
 
-### Step 1. Create a project
+### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
-1. Create a project named `drizzle-node-example`:
+1.  `drizzle-node-example`という名前のプロジェクトを作成します。
 
     ```shell
     mkdir drizzle-node-example
     cd drizzle-node-example
     ```
 
-2. Install the `drizzle-orm` and `@tidbcloud/serverless` packages:
+2.  `drizzle-orm`と`@tidbcloud/serverless`パッケージをインストールします。
 
-   ```shell
-   npm install drizzle-orm @tidbcloud/serverless
-   ```
+    ```shell
+    npm install drizzle-orm @tidbcloud/serverless
+    ```
 
-3. In the root directory of your project, locate the `package.json` file, and then specify the ES module by adding `"type": "module"` to the file:
+3.  プロジェクトのルート ディレクトリで、 `package.json`ファイルを見つけ、ファイルに`"type": "module"`追加して ES モジュールを指定します。
 
-   ```json
-   {
-     "type": "module",
-     "dependencies": {
-       "@tidbcloud/serverless": "^0.1.1",
-       "drizzle-orm": "^0.31.2"
-     }
-   }
-   ```
+    ```json
+    {
+      "type": "module",
+      "dependencies": {
+        "@tidbcloud/serverless": "^0.1.1",
+        "drizzle-orm": "^0.31.2"
+      }
+    }
+    ```
 
-4. In the root directory of your project, add a `tsconfig.json` file to define the TypeScript compiler options. Here is an example file:
+4.  プロジェクトのルートディレクトリに、TypeScriptコンパイラオプションを定義するファイル`tsconfig.json`追加します。以下にサンプルファイルを示します。
 
-   ```json
-   {
-     "compilerOptions": {
-       "module": "ES2022",
-       "target": "ES2022",
-       "moduleResolution": "node",
-       "strict": false,
-       "declaration": true,
-       "outDir": "dist",
-       "removeComments": true,
-       "allowJs": true,
-       "esModuleInterop": true,
-       "resolveJsonModule": true
-     }
-   }
-   ```
+    ```json
+    {
+      "compilerOptions": {
+        "module": "ES2022",
+        "target": "ES2022",
+        "moduleResolution": "node",
+        "strict": false,
+        "declaration": true,
+        "outDir": "dist",
+        "removeComments": true,
+        "allowJs": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true
+      }
+    }
+    ```
 
-### Step 2. Set the environment
+### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target {{{ .starter }}} cluster to go to its overview page.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲットのTiDB Cloud Serverless クラスターの名前をクリックして、その概要ページに移動します。
 
-2. On the overview page, click **Connect** in the upper-right corner, select `Serverless Driver` in the **Connect With** drop-down list, and then click **Generate Password** to create a random password.
+2.  概要ページで、右上隅の**[接続]**をクリックし、 **[接続**先] ドロップダウン リストで`Serverless Driver`を選択して、[**パスワードの生成]**をクリックし、ランダム パスワードを作成します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
 
-    The connection string looks like this:
+    接続文字列は次のようになります。
 
-    ```
-    mysql://[username]:[password]@[host]/[database]
-    ```
+        mysql://[username]:[password]@[host]/[database]
 
-3. Set the environment variable `DATABASE_URL` in your local environment. For example, in Linux or macOS, you can run the following command:
+3.  ローカル環境で環境変数`DATABASE_URL`設定します。例えば、LinuxまたはmacOSでは、次のコマンドを実行できます。
 
     ```shell
     export DATABASE_URL='mysql://[username]:[password]@[host]/[database]'
     ```
 
-### Step 3. Use Drizzle to query data
+### ステップ3. Drizzleを使用してデータをクエリする {#step-3-use-drizzle-to-query-data}
 
-1. Create a table in your {{{ .starter }}} cluster.
+1.  TiDB Cloud Serverless クラスターにテーブルを作成します。
 
-   You can use [SQL Editor in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
+    [TiDB Cloudコンソールの SQL エディター](/tidb-cloud/explore-data-with-chat2query.md)使用するとSQL文を実行できます。以下に例を示します。
 
-   ```sql
-   CREATE TABLE `test`.`users` (
-    `id` BIGINT PRIMARY KEY auto_increment,
-    `full_name` TEXT,
-    `phone` VARCHAR(256)
-   );
-   ```
+    ```sql
+    CREATE TABLE `test`.`users` (
+     `id` BIGINT PRIMARY KEY auto_increment,
+     `full_name` TEXT,
+     `phone` VARCHAR(256)
+    );
+    ```
 
-2. In the root directory of your project, create a file named `hello-world.ts` and add the following code:
+2.  プロジェクトのルート ディレクトリに`hello-world.ts`名前のファイルを作成し、次のコードを追加します。
 
-   ```ts
-   import { connect } from '@tidbcloud/serverless';
-   import { drizzle } from 'drizzle-orm/tidb-serverless';
-   import { mysqlTable, serial, text, varchar } from 'drizzle-orm/mysql-core';
+    ```ts
+    import { connect } from '@tidbcloud/serverless';
+    import { drizzle } from 'drizzle-orm/tidb-serverless';
+    import { mysqlTable, serial, text, varchar } from 'drizzle-orm/mysql-core';
 
-   // Initialize
-   const client = connect({ url: process.env.DATABASE_URL });
-   const db = drizzle(client);
+    // Initialize
+    const client = connect({ url: process.env.DATABASE_URL });
+    const db = drizzle(client);
 
-   // Define schema
-   export const users = mysqlTable('users', {
-     id: serial("id").primaryKey(),
-     fullName: text('full_name'),
-     phone: varchar('phone', { length: 256 }),
-   });
-   export type User = typeof users.$inferSelect; // return type when queried
-   export type NewUser = typeof users.$inferInsert; // insert type
+    // Define schema
+    export const users = mysqlTable('users', {
+      id: serial("id").primaryKey(),
+      fullName: text('full_name'),
+      phone: varchar('phone', { length: 256 }),
+    });
+    export type User = typeof users.$inferSelect; // return type when queried
+    export type NewUser = typeof users.$inferInsert; // insert type
 
-   // Insert and select data
-   const user: NewUser = { fullName: 'John Doe', phone: '123-456-7890' };
-   await db.insert(users).values(user)
-   const result: User[] = await db.select().from(users);
-   console.log(result);
-   ```
+    // Insert and select data
+    const user: NewUser = { fullName: 'John Doe', phone: '123-456-7890' };
+    await db.insert(users).values(user)
+    const result: User[] = await db.select().from(users);
+    console.log(result);
+    ```
 
-### Step 4. Run the Typescript code
+### ステップ4. Typescriptコードを実行する {#step-4-run-the-typescript-code}
 
-1. Install `ts-node` to transform TypeScript into JavaScript, and then install `@types/node` to provide TypeScript type definitions for Node.js.
+1.  `ts-node`インストールして TypeScript を JavaScript に変換し、次に`@types/node`インストールして Node.js に TypeScript 型定義を提供します。
 
-   ```shell
-   npm install -g ts-node
-   npm i --save-dev @types/node
-   ```
+    ```shell
+    npm install -g ts-node
+    npm i --save-dev @types/node
+    ```
 
-2. Run the Typescript code with the following command:
+2.  次のコマンドで Typescript コードを実行します。
 
-   ```shell
-   ts-node --esm hello-world.ts
-   ```
+    ```shell
+    ts-node --esm hello-world.ts
+    ```
 
-## Use Drizzle and TiDB Cloud serverless driver in edge environments
+## エッジ環境で Drizzle とTiDB Cloudサーバーレス ドライバーを使用する {#use-drizzle-and-tidb-cloud-serverless-driver-in-edge-environments}
 
-This section takes the Vercel Edge Function as an example.
+このセクションでは、Vercel Edge Function を例に説明します。
 
-### Before you begin
+### 始める前に {#before-you-begin}
 
-To complete this tutorial, you need the following:
+このチュートリアルを完了するには、次のものが必要です。
 
-- A [Vercel](https://vercel.com/docs) account that provides edge environment.
-- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A {{{ .starter }}} cluster. If you don't have any, you can [create a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+-   エッジ環境を提供する[ヴェルセル](https://vercel.com/docs)アカウント。
+-   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
+-   TiDB Cloud Serverless クラスター。お持ちでない場合は、 [TiDB Cloud Serverless クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)ご利用ください。
 
-### Step 1. Create a project
+### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
-1. Install the Vercel CLI:
+1.  Vercel CLI をインストールします。
 
     ```shell
     npm i -g vercel@latest
     ```
 
-2. Create a [Next.js](https://nextjs.org/) project called `drizzle-example` using the following terminal command:
+2.  次のターミナル コマンドを使用して、 `drizzle-example`という[ネクスト.js](https://nextjs.org/)プロジェクトを作成します。
 
-   ```shell
-   npx create-next-app@latest drizzle-example --ts --no-eslint --tailwind --no-src-dir --app --import-alias "@/*"
-   ```
+    ```shell
+    npx create-next-app@latest drizzle-example --ts --no-eslint --tailwind --no-src-dir --app --import-alias "@/*"
+    ```
 
-3. Navigate to the `drizzle-example` directory:
+3.  `drizzle-example`ディレクトリに移動します。
 
-   ```shell
-   cd drizzle-example
-   ```
+    ```shell
+    cd drizzle-example
+    ```
 
-4. Install the `drizzle-orm` and `@tidbcloud/serverless` packages:
+4.  `drizzle-orm`と`@tidbcloud/serverless`パッケージをインストールします。
 
-   ```shell
-   npm install drizzle-orm @tidbcloud/serverless --force
-   ```
+    ```shell
+    npm install drizzle-orm @tidbcloud/serverless --force
+    ```
 
-### Step 2. Set the environment
+### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target {{{ .starter }}} cluster to go to its overview page.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲットのTiDB Cloud Serverless クラスターの名前をクリックして、その概要ページに移動します。
 
-2. On the overview page, click **Connect** in the upper-right corner, select `Serverless Driver` in the **Connect With** drop-down list, and then click **Generate Password** to create a random password.
+2.  概要ページで、右上隅の**[接続]**をクリックし、 **[接続**先] ドロップダウン リストで`Serverless Driver`を選択して、[**パスワードの生成]**をクリックし、ランダム パスワードを作成します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
 
-    The connection string looks like this:
+    接続文字列は次のようになります。
 
+        mysql://[username]:[password]@[host]/[database]
+
+### ステップ3. エッジ関数を作成する {#step-3-create-an-edge-function}
+
+1.  TiDB Cloud Serverless クラスターにテーブルを作成します。
+
+    [TiDB Cloudコンソールの SQL エディター](/tidb-cloud/explore-data-with-chat2query.md)使用するとSQL文を実行できます。以下に例を示します。
+
+    ```sql
+    CREATE TABLE `test`.`users` (
+     `id` BIGINT PRIMARY KEY auto_increment,
+     `full_name` TEXT,
+     `phone` VARCHAR(256)
+    );
     ```
-    mysql://[username]:[password]@[host]/[database]
+
+2.  プロジェクトの`app`ディレクトリにファイル`/api/edge-function-example/route.ts`を作成し、次のコードを追加します。
+
+    ```ts
+    import { NextResponse } from 'next/server';
+    import type { NextRequest } from 'next/server';
+    import { connect } from '@tidbcloud/serverless';
+    import { drizzle } from 'drizzle-orm/tidb-serverless';
+    import { mysqlTable, serial, text, varchar } from 'drizzle-orm/mysql-core';
+    export const runtime = 'edge';
+
+    // Initialize
+    const client = connect({ url: process.env.DATABASE_URL });
+    const db = drizzle(client);
+
+    // Define schema
+    export const users = mysqlTable('users', {
+      id: serial("id").primaryKey(),
+      fullName: text('full_name'),
+      phone: varchar('phone', { length: 256 }),
+    });
+    export type User = typeof users.$inferSelect; // return type when queried
+    export type NewUser = typeof users.$inferInsert; // insert type
+
+    export async function GET(request: NextRequest) {
+      // Insert and select data
+      const user: NewUser = { fullName: 'John Doe', phone: '123-456-7890' };
+      await db.insert(users).values(user)
+      const result: User[] = await db.select().from(users);
+      return NextResponse.json(result);
+    }
     ```
 
-### Step 3. Create an edge function
+3.  コードをローカルでテストします。
 
-1. Create a table in your {{{ .starter }}} cluster.
+    ```shell
+    export DATABASE_URL='mysql://[username]:[password]@[host]/[database]'
+    next dev
+    ```
 
-   You can use [SQL Editor in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
+4.  ルートからの応答を取得するには、 `http://localhost:3000/api/edge-function-example`に移動します。
 
-   ```sql
-   CREATE TABLE `test`.`users` (
-    `id` BIGINT PRIMARY KEY auto_increment,
-    `full_name` TEXT,
-    `phone` VARCHAR(256)
-   );
-   ```
+### ステップ4. コードをVercelにデプロイ {#step-4-deploy-your-code-to-vercel}
 
-2. In the `app` directory of your project, create a file `/api/edge-function-example/route.ts` and add the following code:
+1.  `DATABASE_URL`環境変数を使用してコードを Vercel にデプロイ。
 
-   ```ts
-   import { NextResponse } from 'next/server';
-   import type { NextRequest } from 'next/server';
-   import { connect } from '@tidbcloud/serverless';
-   import { drizzle } from 'drizzle-orm/tidb-serverless';
-   import { mysqlTable, serial, text, varchar } from 'drizzle-orm/mysql-core';
-   export const runtime = 'edge';
+    ```shell
+    vercel -e DATABASE_URL='mysql://[username]:[password]@[host]/[database]' --prod
+    ```
 
-   // Initialize
-   const client = connect({ url: process.env.DATABASE_URL });
-   const db = drizzle(client);
+    デプロイが完了すると、プロジェクトの URL が取得されます。
 
-   // Define schema
-   export const users = mysqlTable('users', {
-     id: serial("id").primaryKey(),
-     fullName: text('full_name'),
-     phone: varchar('phone', { length: 256 }),
-   });
-   export type User = typeof users.$inferSelect; // return type when queried
-   export type NewUser = typeof users.$inferInsert; // insert type
+2.  ルートからの応答を取得するには、 `${Your-URL}/api/edge-function-example`ページに移動します。
 
-   export async function GET(request: NextRequest) {
-     // Insert and select data
-     const user: NewUser = { fullName: 'John Doe', phone: '123-456-7890' };
-     await db.insert(users).values(user)
-     const result: User[] = await db.select().from(users);
-     return NextResponse.json(result);
-   }
-   ```
+## 次は何？ {#what-s-next}
 
-3. Test your code locally:
-
-   ```shell
-   export DATABASE_URL='mysql://[username]:[password]@[host]/[database]'
-   next dev
-   ```
-
-4. Navigate to `http://localhost:3000/api/edge-function-example` to get the response from your route.
-
-### Step 4. Deploy your code to Vercel
-
-1. Deploy your code to Vercel with the `DATABASE_URL` environment variable:
-
-   ```shell
-   vercel -e DATABASE_URL='mysql://[username]:[password]@[host]/[database]' --prod
-   ```
-
-   After the deployment is complete, you will get the URL of your project.
-
-2. Navigate to the `${Your-URL}/api/edge-function-example` page to get the response from your route.
-
-## What's next
-
-- Learn more about [Drizzle](https://orm.drizzle.team/docs/overview) and [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless).
-- Learn how to [integrate TiDB Cloud with Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md).
+-   [霧雨](https://orm.drizzle.team/docs/overview)と[drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)について詳しく説明します。
+-   [TiDB CloudとVercelを統合する](/tidb-cloud/integrate-tidbcloud-with-vercel.md)方法を学習します。

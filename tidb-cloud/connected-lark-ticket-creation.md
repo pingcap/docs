@@ -1,42 +1,42 @@
 ---
 title: Create Tickets and Subscribe to Ticket Updates via Lark
-summary: Introduces detailed information about the Lark ticket creation and update subscription.
+summary: Lark チケットの作成と更新サブスクリプションに関する詳細情報を紹介します。
 ---
 
-# Create Tickets and Subscribe to Ticket Updates via Lark
+# Larkでチケットを作成し、チケットの更新を購読する {#create-tickets-and-subscribe-to-ticket-updates-via-lark}
 
-For customers subscribed to the **Enterprise** [support plan](/tidb-cloud/connected-care-detail.md), TiDB Cloud provides a ticket bot called **PingCAP Support Bot** in [Lark](https://www.larksuite.com/), to manage ticket creation and updates from the support ticket system.
+**Enterprise** [サポートプラン](/tidb-cloud/connected-care-detail.md)に加入している顧客向けに、 TiDB Cloud は[ラーク](https://www.larksuite.com/)で**PingCAP Support Bot**と呼ばれるチケット ボットを提供し、サポート チケット システムからのチケットの作成と更新を管理します。
 
-> **Note:**
+> **注記：**
 >
-> The ticket support feature for Lark is available upon request. If you are interested in trying this feature, contact TiDB Cloud support at <a href="mailto:support@pingcap.com">support@pingcap.com</a> or reach out to your Technical Account Manager (TAM).
+> Larkのチケットサポート機能はリクエストに応じてご利用いただけます。この機能をご利用になりたい場合は、 TiDB Cloudサポート<a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>までご連絡いただくか、担当のテクニカルアカウントマネージャー（TAM）までお問い合わせください。
 
-## Create a support ticket
+## サポートチケットを作成する {#create-a-support-ticket}
 
-In the **Customer Support Group** Lark group, type `@PingCAP Support Bot create ticket` in a message. Then, **PingCAP Support Bot** will reply with a Lark message card for ticket creation.
+**カスタマーサポートグループ**のLarkグループで、メッセージに`@PingCAP Support Bot create ticket`と入力してください。すると、 **PingCAPサポートボットが**チケット作成用のLarkメッセージカードで返信します。
 
 ![lark-ticket-creation-1](/media/tidb-cloud/connected-lark-ticket-creation-1.png)
 
-Fill in the required fields and click **Submit**. Once submitted, the card will be updated to **Ticket Submitted**, indicating that your request is being processed.
+必須項目に入力し、 **「送信」**をクリックします。送信すると、カードのステータスが**「チケットが送信されました」**に更新され、リクエストが処理中であることが示されます。
 
 ![lark-ticket-creation-2](/media/tidb-cloud/connected-lark-ticket-creation-2.png)
 
-After the support ticket is created, the **Ticket Submitted** card will be updated to the **Support Ticket Created** card, providing the ticket name and a link to view the ticket.
+サポート チケットが作成されると、**チケット送信**カードが**サポート チケット作成**カードに更新され、チケット名とチケットを表示するためのリンクが提供されます。
 
 ![lark-ticket-creation-3](/media/tidb-cloud/connected-lark-ticket-creation-3.png)
 
-## Subscribe to ticket updates
+## チケットの最新情報を購読する {#subscribe-to-ticket-updates}
 
-Whenever a PingCAP support engineer comments on the ticket, **PingCAP Support Bot** will send a **New Comment on Your Ticket** card to the Lark group.
+PingCAP サポート エンジニアがチケットにコメントするたびに、 **PingCAP サポート ボットは****チケットへの新しいコメント**カードを Lark グループに送信します。
 
 ![connected-lark-ticket-creation-4](/media/tidb-cloud/connected-lark-ticket-creation-4.png)
 
-## FAQs
+## よくある質問 {#faqs}
 
-- How can I check the status of my ticket?
+-   チケットのステータスを確認するにはどうすればいいですか?
 
-    Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
+    チケット作成時に使用したメールアドレスで[PingCAPヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/user/requests)にログインしてください。現在のアカウントのすべての過去のチケットとそのステータスを確認できます。
 
-## Contact support
+## サポートにお問い合わせください {#contact-support}
 
-For help or questions, please contact our support team at <a href="mailto:support@pingcap.com">support@pingcap.com</a>.
+ヘルプや質問がある場合は、 <a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>のサポート チームにお問い合わせください。

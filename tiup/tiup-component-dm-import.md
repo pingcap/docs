@@ -1,69 +1,69 @@
 ---
 title: tiup dm import
-summary: The `import` command in TiUP DM is used to upgrade DM clusters from v1.0 to v2.0 or later versions. It does not support importing DM Portal components from v1.0 clusters and requires stopping the original cluster before importing. The command only supports importing to DM v2.0.0-rc.2 and later versions and can be used to import a DM v1.0 cluster to a new DM v2.0 cluster. After importing, there is only one DM-master node in the cluster, and the deployment directories of some components might be different from those in the original cluster.
+summary: TiUP DMの「import」コマンドは、DMクラスタをv1.0からv2.0以降のバージョンにアップグレードするために使用されます。このコマンドは、v1.0クラスタからのDMポータルコンポーネントのインポートをサポートしておらず、インポート前に元のクラスタを停止する必要があります。このコマンドはDM v2.0.0-rc.2以降のバージョンへのインポートのみをサポートしており、DM v1.0クラスタを新しいDM v2.0クラスタにインポートするために使用できます。インポート後、クラスタ内のDMマスターノードは1つだけになり、一部のコンポーネントのデプロイメントディレクトリは元のクラスタと異なる場合があります。
 ---
 
-# tiup dm import <span class="version-mark">Only for upgrading DM v1.0</span>
+# tiup dm import <span class="version-mark">DM v1.0 のアップグレードのみ</span> {#tiup-dm-import-span-class-version-mark-only-for-upgrading-dm-v1-0-span}
 
 <Note>
 
-This command is used only for upgrading DM clusters from v1.0 to v2.0 or later versions.
+このコマンドは、DM クラスターを v1.0 から v2.0 以降のバージョンにアップグレードする場合にのみ使用されます。
 
 </Note>
 
-In DM v1.0, the cluster is basically deployed using TiDB Ansible. TiUP DM provides the `import` command to import v1.0 clusters and redeploy the clusters in DM v2.0.
+DM v1.0では、クラスターは基本的にTiDB Ansibleを使用してデプロイされます。TiUP TiUP DMは、 v1.0クラスターをインポートし、DM v2.0に再デプロイするためのコマンド`import`を提供します。
 
-> **Note:**
+> **注記：**
 >
-> - The command does not support importing DM Portal components from DM v1.0 clusters.
-> - Before importing the cluster, stop running the original cluster first.
-> - For data migration tasks that need to be upgraded to v2.0, do not execute `stop-task` on these tasks.
-> - The command only supports importing to DM v2.0.0-rc.2 and later versions.
-> - The `import` command is used to import a DM v1.0 cluster to a new DM v2.0 cluster. If you need to import data migration tasks to an existing v2.0 cluster, refer to [Manually Upgrade TiDB Data Migration from v1.0.x to v2.0+](/dm/manually-upgrade-dm-1.0-to-2.0.md)
-> - The deployment directories of some components might be different from those in the original cluster. You can check it with the `display` command.
-> - Before importing the cluster, run `tiup update --self && tiup update dm` to upgrade TiUP DM components to the latest version.
-> - After the cluster is imported, there is only one DM-master node in the cluster. You can refer to [the `scale out` command](/tiup/tiup-component-dm-scale-out.md) to scale out the DM-master node.
+> -   このコマンドは、DM v1.0 クラスターからの DM Portal コンポーネントのインポートをサポートしていません。
+> -   クラスターをインポートする前に、まず元のクラスターの実行を停止します。
+> -   v2.0 にアップグレードする必要があるデータ移行タスクの場合、これらのタスクで`stop-task`実行しないでください。
+> -   このコマンドは、DM v2.0.0-rc.2 以降のバージョンへのインポートのみをサポートします。
+> -   `import`コマンドは、DM v1.0 クラスタを新しい DM v2.0 クラスタにインポートするために使用されます。既存の v2.0 クラスタにデータ移行タスクをインポートする必要がある場合は、 [TiDB データ移行を v1.0.x から v2.0+ に手動でアップグレードする](/dm/manually-upgrade-dm-1.0-to-2.0.md)を参照してください。
+> -   一部のコンポーネントのデプロイメントディレクトリは、元のクラスタのものと異なる場合`display`あります。1 コマンドで確認できます。
+> -   クラスターをインポートする前に、 `tiup update --self && tiup update dm`実行してTiUP DMコンポーネントを最新バージョンにアップグレードします。
+> -   クラスターをインポートすると、クラスター内のDMマスターノードは1つだけになります。DMマスターノードをスケールアウトするには、 [`scale out`コマンド](/tiup/tiup-component-dm-scale-out.md)を参照してください。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm import [flags]
 ```
 
-## Options
+## オプション {#options}
 
-### -v, --cluster-version
+### -v, --cluster-version {#v-cluster-version}
 
-- Specifies the version number for redeploying. You must use a version later than v2.0.0-rc.2 (including v2.0.0-rc.2).
-- Data type: `STRING`
-- This option is **required** to execute the command.
+-   再デプロイするバージョン番号を指定します。v2.0.0-rc.2（v2.0.0-rc.2を含む）以降のバージョンを使用する必要があります。
+-   データ型: `STRING`
+-   コマンドを実行するにはこのオプションが**必要**です。
 
-### -d, --dir
+### -d, --dir {#d-dir}
 
-- Specifies the directory of TiDB Ansible.
-- Data type: `STRING`
-- If this option is not specified in the command, the current directory is the default directory.
+-   TiDB Ansible のディレクトリを指定します。
+-   データ型: `STRING`
+-   コマンドでこのオプションを指定しない場合は、現在のディレクトリがデフォルトのディレクトリになります。
 
-### --inventory
+### &#x20;--inventory {#inventory}
 
-- Specifies the name of the Ansible inventory file.
-- Data type: `STRING`
-- If this option is not specified in the command, the default file name is `"inventory.ini"`.
+-   Ansible インベントリ ファイルの名前を指定します。
+-   データ型: `STRING`
+-   このオプションがコマンドで指定されていない場合、デフォルトのファイル名は`"inventory.ini"`なります。
 
-### --rename
+### --rename {#rename}
 
-- Renames the imported cluster.
-- Data type: `STRING`
-- If this option is not specified in the command, the default cluster name is the `cluster_name` specified in the inventory file.
+-   インポートされたクラスターの名前を変更します。
+-   データ型: `STRING`
+-   このオプションがコマンドで指定されていない場合、デフォルトのクラスター名はインベントリ ファイルに指定された`cluster_name`なります。
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
 
-## Outputs
+## 出力 {#outputs}
 
-The log of the importing process.
+インポートプロセスのログ。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

@@ -1,65 +1,65 @@
 ---
 title: ProxySQL Integration Guide
-summary: Learn how to integrate TiDB Cloud and TiDB (self-hosted) with ProxySQL.
+summary: TiDB Cloudと TiDB (セルフホスト) を ProxySQL と統合する方法を学びます。
 ---
 
-# Integrate TiDB with ProxySQL
+# TiDBとProxySQLを統合する {#integrate-tidb-with-proxysql}
 
-This document provides a high-level introduction to ProxySQL, describes how to integrate ProxySQL with TiDB in a [development environment](#development-environment) and a [production environment](#production-environment), and demonstrates the key integration benefits through the [scenario of query routing](#typical-scenario).
+このドキュメントでは、ProxySQL の概要を説明し、 [開発環境](#development-environment)および[本番環境](#production-environment)で ProxySQL を TiDB と統合する方法を説明し、 [クエリルーティングのシナリオ](#typical-scenario)を通じて主要な統合の利点を示します。
 
-If you are interested in learning more about TiDB and ProxySQL, you can find some useful links as follows:
+TiDB と ProxySQL についてさらに詳しく知りたい場合は、次のような役立つリンクがあります。
 
-- [TiDB Cloud](https://docs.pingcap.com/tidbcloud)
-- [TiDB Developer Guide](/develop/dev-guide-overview.md)
-- [ProxySQL Documentation](https://proxysql.com/documentation/)
+-   [TiDB Cloud](https://docs.pingcap.com/tidbcloud)
+-   [TiDB 開発者ガイド](/develop/dev-guide-overview.md)
+-   [ProxySQL ドキュメント](https://proxysql.com/documentation/)
 
-## What is ProxySQL?
+## ProxySQL とは何ですか? {#what-is-proxysql}
 
-[ProxySQL](https://proxysql.com/) is a high-performance, open-source SQL proxy. It has a flexible architecture and can be deployed in several different ways, making it ideal for a variety of use cases. For example, ProxySQL can be used to improve performance by caching frequently-accessed data.
+[プロキシSQL](https://proxysql.com/)は、高性能なオープンソースSQLプロキシです。柔軟なアーキテクチャを備え、様々な方法で導入できるため、様々なユースケースに最適です。例えば、ProxySQLは、頻繁にアクセスされるデータをキャッシュすることでパフォーマンスを向上させることができます。
 
-ProxySQL is designed from the ground up to be fast, efficient, and easy to use. It is fully compatible with MySQL, and supports all of the features you would expect from a high quality SQL proxy. In addition, ProxySQL comes with a number of unique features that make it an ideal choice for a wide range of applications.
+ProxySQLは、高速、効率的、そして使いやすさを念頭に設計されています。MySQLとの完全な互換性を備え、高品質なSQLプロキシに期待されるすべての機能を備えています。さらに、ProxySQLには独自の機能が多数搭載されており、幅広いアプリケーションに最適な選択肢となります。
 
-## Why ProxySQL integration?
+## ProxySQL 統合の理由は何ですか? {#why-proxysql-integration}
 
-- ProxySQL can help boost application performance by reducing latency when interacting with TiDB. Irrespective of what you are building, whether it is a scalable application using serverless functions like Lambda, where the workload is nondeterministic and can spike, or if you are building an application to execute queries that load tons of data. By leveraging powerful capabilities of ProxySQL such as [connection pooling](https://proxysql.com/documentation/detailed-answers-on-faq/) and [caching frequently-used queries](https://proxysql.com/documentation/query-cache/), applications can gain immediate benefits.
-- ProxySQL can act as an additional layer of application security protection against SQL vulnerabilities such as SQL injection with the help of [query rules](#query-rules), an easy-to-configure feature available in ProxySQL.
-- As both [ProxySQL](https://github.com/sysown/proxysql) and [TiDB](https://github.com/pingcap/tidb) are open-source projects, you can get the benefits of zero vendor lock-in.
+-   ProxySQLは、TiDBとのやり取りにおけるレイテンシーを削減することで、アプリケーションのパフォーマンス向上に役立ちます。Lambdaなどのサーバーレス関数を使用したスケーラブルなアプリケーション（ワークロードが非決定的で急増する可能性がある）を構築する場合でも、大量[接続プール](https://proxysql.com/documentation/detailed-answers-on-faq/)データを読み込むクエリを実行するアプリケーションを構築する場合でも、構築するものは問いません。1や[頻繁に使用されるクエリのキャッシュ](https://proxysql.com/documentation/query-cache/)などのProxySQLの強力な機能を活用することで、アプリケーションはすぐにメリットを得ることができます。
+-   ProxySQL は、ProxySQL で利用できる簡単に構成できる機能である[クエリルール](#query-rules)の助けを借りて、SQL インジェクションなどの SQL の脆弱性に対するアプリケーション セキュリティ保護の追加レイヤーとして機能します。
+-   [プロキシSQL](https://github.com/sysown/proxysql)と[TiDB](https://github.com/pingcap/tidb)どちらもオープンソース プロジェクトであるため、ベンダー ロックインがないというメリットが得られます。
 
-## Deployment architecture
+## デプロイメントアーキテクチャ {#deployment-architecture}
 
-The most obvious way to deploy ProxySQL with TiDB is to add ProxySQL as a standalone intermediary between the application layer and TiDB. However, the scalability and failure tolerance are not guaranteed, and it also adds additional latency due to network hop. To avoid these problems, an alternate deployment architecture is to deploy ProxySQL as a sidecar as below:
+TiDBとProxySQLを併用する最も分かりやすい方法は、アプリケーションレイヤーとTiDBの間にProxySQLをスタンドアロンの仲介者として追加することです。しかし、スケーラビリティと耐障害性は保証されず、ネットワークホップによるレイテンシーも増加します。これらの問題を回避するための代替アーキテクチャとして、以下のようにProxySQLをサイドカーとして導入する方法があります。
 
 ![proxysql-client-side-tidb-cloud](/media/develop/proxysql-client-side-tidb-cloud.png)
 
-> **Note:**
+> **注記：**
 >
-> The preceding illustration is only for reference. You must adapt it according to your actual deployment architecture.
+> 上記の図は参考用です。実際のデプロイメントアーキテクチャに合わせて調整する必要があります。
 
-## Development environment
+## 開発環境 {#development-environment}
 
-This section describes how to integrate TiDB with ProxySQL in a development environment. To get started with the ProxySQL integration, you can choose either of the following options depending on your TiDB cluster type after you have all the [prerequisites](#prerequisite) in place.
+このセクションでは、開発環境でTiDBとProxySQLを統合する方法について説明します。ProxySQLとの統合を開始するには、 [前提条件](#prerequisite)のすべての準備が完了したら、TiDBクラスタの種類に応じて以下のいずれかのオプションを選択してください。
 
-- Option 1: [Integrate TiDB Cloud with ProxySQL](#option-1-integrate-tidb-cloud-with-proxysql)
-- Option 2: [Integrate TiDB (self-hosted) with ProxySQL](#option-2-integrate-tidb-self-hosted-with-proxysql)
+-   オプション1: [TiDB Cloudと ProxySQL を統合する](#option-1-integrate-tidb-cloud-with-proxysql)
+-   オプション2: [TiDB（セルフホスト）をProxySQLと統合する](#option-2-integrate-tidb-self-hosted-with-proxysql)
 
-### Prerequisites
+### 前提条件 {#prerequisites}
 
-Depending on the option you choose, you might need the following packages:
+選択したオプションに応じて、次のパッケージが必要になる場合があります。
 
-- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-- [Docker](https://docs.docker.com/get-docker/)
-- [Python 3](https://www.python.org/downloads/)
-- [Docker Compose](https://docs.docker.com/compose/install/linux/)
-- [MySQL Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)
+-   [ギット](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+-   [ドッカー](https://docs.docker.com/get-docker/)
+-   [Python 3](https://www.python.org/downloads/)
+-   [Dockerコンポーズ](https://docs.docker.com/compose/install/linux/)
+-   [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)
 
-You can follow the installation instructions as below:
+以下のインストール手順に従ってください。
 
 <SimpleTab groupId="os">
 
 <div label="macOS" value="macOS">
 
-1. [Download](https://docs.docker.com/get-docker/) and start Docker (the Docker Desktop already includes the Docker Compose).
-2. Run the following command to install Python and `mysql-client`:
+1.  [ダウンロード](https://docs.docker.com/get-docker/)インストールして Docker を起動します (Docker Desktop にはすでに Docker Compose が含まれています)。
+2.  次のコマンドを実行して、Python と`mysql-client`インストールします。
 
     ```bash
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -80,58 +80,58 @@ systemctl start docker
 
 <div label="Windows" value="Windows">
 
-- Download and install Git.
+-   Git をダウンロードしてインストールします。
 
-    1. Download the **64-bit Git for Windows Setup** package from the [Git Windows Download](https://git-scm.com/download/win) page.
-    2. Install the Git package by following the setup wizard. You can click **Next** for a few times to use the default installation settings.
+    1.  [Git Windows ダウンロード](https://git-scm.com/download/win)ページから**64 ビット Git for Windows セットアップ**パッケージをダウンロードします。
+    2.  セットアップウィザードに従ってGitパッケージをインストールします。デフォルトのインストール設定を使用する場合は、 **「次へ」**を数回クリックします。
 
         ![proxysql-windows-git-install](/media/develop/proxysql-windows-git-install.png)
 
-- Download and install MySQL Shell.
+-   MySQL Shell をダウンロードしてインストールします。
 
-    1. Download the ZIP file of MySQL Installer from the [MySQL Community Server Download](https://dev.mysql.com/downloads/mysql/) page.
-    2. Unzip the file, and locate `mysql.exe` in the `bin` folder. You need to add the path of the `bin` folder to the system variable and set it into the `PATH` variable at Git Bash:
+    1.  [MySQLコミュニティサーバーのダウンロード](https://dev.mysql.com/downloads/mysql/)ページ目からMySQLインストーラーのZIPファイルをダウンロードします。
+    2.  ファイルを解凍し、 `bin`フォルダ内の`mysql.exe`見つけます。5 フォルダ`bin`パスをシステム変数に追加し、Git Bash の`PATH`変数に設定します。
 
         ```bash
         echo 'export PATH="(your bin folder)":$PATH' >>~/.bash_profile
         source ~/.bash_profile
         ```
 
-        For example:
+        例えば：
 
         ```bash
         echo 'export PATH="/c/Program Files (x86)/mysql-8.0.31-winx64/bin":$PATH' >>~/.bash_profile
         source ~/.bash_profile
         ```
 
-- Download and install Docker.
+-   Docker をダウンロードしてインストールします。
 
-    1. Download Docker Desktop installer from the [Docker Download](https://www.docker.com/products/docker-desktop/) page.
-    2. Double-click the installer to run it. After the installation is completed, you will be prompted for a restart.
+    1.  [Docker ダウンロード](https://www.docker.com/products/docker-desktop/)ページ目から Docker Desktop インストーラーをダウンロードします。
+    2.  インストーラーをダブルクリックして実行します。インストールが完了すると、再起動を求めるメッセージが表示されます。
 
         ![proxysql-windows-docker-install](/media/develop/proxysql-windows-docker-install.png)
 
-- Download the latest Python 3 installer from the [Python Download](https://www.python.org/downloads/) page and run it.
+-   [Python ダウンロード](https://www.python.org/downloads/)ページから最新の Python 3 インストーラーをダウンロードして実行します。
 
 </div>
 
 </SimpleTab>
 
-### Option 1: Integrate TiDB Cloud with ProxySQL
+### オプション1: TiDB CloudとProxySQLを統合する {#option-1-integrate-tidb-cloud-with-proxysql}
 
-For this integration, you will be using the [ProxySQL Docker image](https://hub.docker.com/r/proxysql/proxysql) along with a {{{ .starter }}} cluster. The following steps will set up ProxySQL on port `16033`, so make sure this port is available.
+この統合では、 [ProxySQL Docker イメージ](https://hub.docker.com/r/proxysql/proxysql)とTiDB Cloud Serverless クラスターを使用します。以下の手順ではポート`16033`に ProxySQL を設定するため、このポートが使用可能であることを確認してください。
 
-#### Step 1. Create a {{{ .starter }}} cluster
+#### ステップ1. TiDB Cloud Serverlessクラスターを作成する {#step-1-create-a-tidb-cloud-serverless-cluster}
 
-1. [Create a free {{{ .starter }}} cluster](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster). Remember the root password that you set for your cluster.
-2. Get your cluster hostname, port, and username for later use.
+1.  [無料のTiDB Cloud Serverlessクラスターを作成する](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster) 。クラスターに設定したルートパスワードを覚えておいてください。
+2.  後で使用するために、クラスターのホスト名、ポート、およびユーザー名を取得します。
 
-    1. On the [Clusters](https://tidbcloud.com/console/clusters) page, click your cluster name to go to the cluster overview page.
-    2. On the cluster overview page, locate the **Connection** pane, and then copy the `Endpoint`, `Port`, and `User` fields, where the `Endpoint` is your cluster hostname.
+    1.  [クラスター](https://tidbcloud.com/console/clusters)ページで、クラスター名をクリックしてクラスターの概要ページに移動します。
+    2.  クラスターの概要ページで、 **[接続]**ペインを見つけて、 `Endpoint` 、 `Port` 、 `User`フィールドをコピーします。ここで、 `Endpoint`クラスターのホスト名です。
 
-#### Step 2. Generate ProxySQL configuration files
+#### ステップ2. ProxySQL構成ファイルを生成する {#step-2-generate-proxysql-configuration-files}
 
-1. Clone the [integration example code repository](https://github.com/pingcap-inc/tidb-proxysql-integration) for TiDB and ProxySQL:
+1.  TiDB および ProxySQL の[統合サンプルコードリポジトリ](https://github.com/pingcap-inc/tidb-proxysql-integration)クローンします。
 
     <SimpleTab groupId="os">
 
@@ -161,7 +161,7 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
     </SimpleTab>
 
-2. Change to the `tidb-cloud-connect` folder:
+2.  `tidb-cloud-connect`フォルダに変更します:
 
     <SimpleTab groupId="os">
 
@@ -191,7 +191,7 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
     </SimpleTab>
 
-3. Generate ProxySQL configuration files by running `proxysql-config.py`:
+3.  `proxysql-config.py`実行して ProxySQL 構成ファイルを生成します。
 
     <SimpleTab groupId="os">
 
@@ -221,27 +221,25 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
     </SimpleTab>
 
-    When prompted, enter the endpoint of your cluster for `Serverless Tier Host`, and then enter the username and the password of your cluster.
+    プロンプトが表示されたら、クラスターのエンドポイントを`Serverless Tier Host`に入力し、クラスターのユーザー名とパスワードを入力します。
 
-    The following is an example output. You will see that three configuration files are generated under the current `tidb-cloud-connect` folder.
+    以下は出力例です。現在のフォルダ`tidb-cloud-connect`の下に 3 つの設定ファイルが生成されていることがわかります。
 
-    ```
-    [Begin] generating configuration files..
-    tidb-cloud-connect.cnf generated successfully.
-    proxysql-prepare.sql generated successfully.
-    proxysql-connect.py generated successfully.
-    [End] all files generated successfully and placed in the current folder.
-    ```
+        [Begin] generating configuration files..
+        tidb-cloud-connect.cnf generated successfully.
+        proxysql-prepare.sql generated successfully.
+        proxysql-connect.py generated successfully.
+        [End] all files generated successfully and placed in the current folder.
 
-#### Step 3. Configure ProxySQL
+#### ステップ3. ProxySQLを構成する {#step-3-configure-proxysql}
 
-1. Start Docker. If Docker has already started, skip this step:
+1.  Dockerを起動します。Dockerがすでに起動している場合は、この手順をスキップしてください。
 
     <SimpleTab groupId="os">
 
     <div label="macOS" value="macOS">
 
-    Double-click the icon of the installed Docker to start it.
+    インストールした Docker のアイコンをダブルクリックして起動します。
 
     </div>
 
@@ -255,13 +253,13 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
     <div label="Windows" value="Windows">
 
-    Double-click the icon of the installed Docker to start it.
+    インストールした Docker のアイコンをダブルクリックして起動します。
 
     </div>
 
     </SimpleTab>
 
-2. Pull the ProxySQL image and start a ProxySQL container in the background:
+2.  ProxySQL イメージをプルし、バックグラウンドで ProxySQL コンテナを起動します。
 
     <SimpleTab groupId="os">
 
@@ -291,7 +289,7 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
     </SimpleTab>
 
-3. Integrate with ProxySQL by running the following command, which executes `proxysql-prepare.sql` inside **ProxySQL Admin Interface**:
+3.  **ProxySQL 管理インターフェース**内で`proxysql-prepare.sql`実行する次のコマンドを実行して、ProxySQL と統合します。
 
     <SimpleTab groupId="os">
 
@@ -321,38 +319,36 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
     </SimpleTab>
 
-    > **Note:**
+    > **注記：**
     >
-    > The `proxysql-prepare.sql` script does the following:
+    > `proxysql-prepare.sql`スクリプトは次のことを実行します。
     >
-    > 1. Adds a user using the username and password of your cluster.
-    > 2. Assigns the user to the monitoring account.
-    > 3. Adds your {{{ .starter }}} cluster to the list of hosts.
-    > 4. Enables a secure connection between ProxySQL and the {{{ .starter }}} cluster.
+    > 1.  クラスターのユーザー名とパスワードを使用してユーザーを追加します。
+    > 2.  ユーザーを監視アカウントに割り当てます。
+    > 3.  TiDB Cloud Serverless クラスターをホストのリストに追加します。
+    > 4.  ProxySQL とTiDB Cloud Serverless クラスター間の安全な接続を有効にします。
     >
-    > To have a better understanding, it is strongly recommended that you check the `proxysql-prepare.sql` file. To learn more about ProxySQL configuration, see [ProxySQL documentation](https://proxysql.com/documentation/proxysql-configuration/).
+    > より深く理解するために、 `proxysql-prepare.sql`ファイルを確認することを強くお勧めします。ProxySQL の設定の詳細については、 [ProxySQLドキュメント](https://proxysql.com/documentation/proxysql-configuration/)参照してください。
 
-    The following is an example output. You will see that the hostname of your cluster is shown in the output, which means that the connectivity between ProxySQL and the {{{ .starter }}} cluster is established.
+    以下は出力例です。出力にクラスターのホスト名が表示されています。これは、ProxySQL とTiDB Cloud Serverless クラスター間の接続が確立されていることを意味します。
 
-    ```
-    *************************** 1. row ***************************
-        hostgroup_id: 0
-            hostname: gateway01.us-west-2.prod.aws.tidbcloud.com
-                port: 4000
-            gtid_port: 0
-                status: ONLINE
-                weight: 1
-            compression: 0
-        max_connections: 1000
-    max_replication_lag: 0
-                use_ssl: 1
-        max_latency_ms: 0
-                comment:
-    ```
+        *************************** 1. row ***************************
+            hostgroup_id: 0
+                hostname: gateway01.us-west-2.prod.aws.tidbcloud.com
+                    port: 4000
+                gtid_port: 0
+                    status: ONLINE
+                    weight: 1
+                compression: 0
+            max_connections: 1000
+        max_replication_lag: 0
+                    use_ssl: 1
+            max_latency_ms: 0
+                    comment:
 
-#### Step 4. Connect to your TiDB cluster through ProxySQL
+#### ステップ4. ProxySQL経由でTiDBクラスターに接続する {#step-4-connect-to-your-tidb-cluster-through-proxysql}
 
-1. To connect to your TiDB cluster, run `proxysql-connect.py`. The script will automatically launch the MySQL client and use the username and password you specified in [Step 2](#step-2-generate-proxysql-configuration-files) for connection.
+1.  TiDB クラスターに接続するには、 `proxysql-connect.py`実行します。スクリプトは自動的に MySQL クライアントを起動し、 [ステップ2](#step-2-generate-proxysql-configuration-files)で指定したユーザー名とパスワードを使用して接続します。
 
     <SimpleTab groupId="os">
 
@@ -382,19 +378,19 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
     </SimpleTab>
 
-2. After connecting to your TiDB cluster, you can use the following SQL statement to validate the connection:
+2.  TiDB クラスターに接続した後、次の SQL ステートメントを使用して接続を検証できます。
 
     ```sql
     SELECT VERSION();
     ```
 
-    If the TiDB version is displayed, you are successfully connected to your {{{ .starter }}} cluster through ProxySQL. To exit from the MySQL client anytime, enter `quit` and press <kbd>enter</kbd>.
+    TiDBのバージョンが表示されていれば、ProxySQL経由でTiDB Cloud Serverlessクラスターに正常に接続されています。MySQLクライアントを終了するには、 `quit`入力して<kbd>Enterキー</kbd>を押してください。
 
-    > **Note:**
+    > **注記：**
     >
-    > ***For Debugging:*** If you are unable to connect to the cluster, check the files `tidb-cloud-connect.cnf`, `proxysql-prepare.sql`, and `proxysql-connect.py`. Make sure that the server information you provided is available and correct.
+    > ***デバッグ用：***クラスターに接続できない場合は、ファイル`tidb-cloud-connect.cnf` 、 `proxysql-prepare.sql` 、 `proxysql-connect.py`を確認してください。指定したサーバー情報が利用可能であり、正しいことを確認してください。
 
-3. To stop and remove containers, and go to the previous directory, run the following command:
+3.  コンテナを停止して削除し、前のディレクトリに移動するには、次のコマンドを実行します。
 
     <SimpleTab groupId="os">
 
@@ -427,19 +423,19 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
     </SimpleTab>
 
-### Option 2: Integrate TiDB (self-hosted) with ProxySQL
+### オプション2: TiDB（セルフホスト）をProxySQLと統合する {#option-2-integrate-tidb-self-hosted-with-proxysql}
 
-For this integration, you will set up an environment using Docker images of [TiDB](https://hub.docker.com/r/pingcap/tidb) and [ProxySQL](https://hub.docker.com/r/proxysql/proxysql). You are encouraged to try [other ways of installing TiDB (self-hosted)](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb) in your own interest.
+この統合では、 [TiDB](https://hub.docker.com/r/pingcap/tidb)と[プロキシSQL](https://hub.docker.com/r/proxysql/proxysql)のDockerイメージを使用して環境を構築します。興味があれば、 [TiDB をインストールする他の方法 (セルフホスト)](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb)試してみることをお勧めします。
 
-The following steps will set up ProxySQL and TiDB on ports `6033` and `4000` respectively, so make sure these ports are available.
+次の手順では、それぞれポート`6033`と`4000`に ProxySQL と TiDB を設定するので、これらのポートが使用可能であることを確認してください。
 
-1. Start Docker. If Docker has already started, skip this step:
+1.  Dockerを起動します。Dockerがすでに起動している場合は、この手順をスキップしてください。
 
     <SimpleTab groupId="os">
 
     <div label="macOS" value="macOS">
 
-    Double-click the icon of the installed Docker to start it.
+    インストールした Docker のアイコンをダブルクリックして起動します。
 
     </div>
 
@@ -453,13 +449,13 @@ The following steps will set up ProxySQL and TiDB on ports `6033` and `4000` res
 
     <div label="Windows" value="Windows">
 
-    Double-click the icon of the installed Docker to start it.
+    インストールした Docker のアイコンをダブルクリックして起動します。
 
     </div>
 
     </SimpleTab>
 
-2. Clone the [integration example code repository](https://github.com/pingcap-inc/tidb-proxysql-integration) for TiDB and ProxySQL:
+2.  TiDB および ProxySQL の[統合サンプルコードリポジトリ](https://github.com/pingcap-inc/tidb-proxysql-integration)クローンします。
 
     <SimpleTab groupId="os">
 
@@ -489,7 +485,7 @@ The following steps will set up ProxySQL and TiDB on ports `6033` and `4000` res
 
     </SimpleTab>
 
-3. Pull the latest images of ProxySQL and TiDB:
+3.  ProxySQL と TiDB の最新イメージをプルします。
 
     <SimpleTab groupId="os">
 
@@ -519,7 +515,7 @@ The following steps will set up ProxySQL and TiDB on ports `6033` and `4000` res
 
     </SimpleTab>
 
-4. Start an integrated environment using both TiDB and ProxySQL running as containers:
+4.  コンテナとして実行される TiDB と ProxySQL の両方を使用して統合環境を開始します。
 
     <SimpleTab groupId="os">
 
@@ -549,9 +545,9 @@ The following steps will set up ProxySQL and TiDB on ports `6033` and `4000` res
 
     </SimpleTab>
 
-    To log in to the ProxySQL `6033` port, you can use the `root` username with an empty password.
+    ProxySQL `6033`ポートにログインするには、空のパスワードを持つ`root`ユーザー名を使用できます。
 
-5. Connect to TiDB via ProxySQL:
+5.  ProxySQL 経由で TiDB に接続します。
 
     <SimpleTab groupId="os">
 
@@ -581,15 +577,15 @@ The following steps will set up ProxySQL and TiDB on ports `6033` and `4000` res
 
     </SimpleTab>
 
-6. After connecting to your TiDB cluster, you can use the following SQL statement to validate the connection:
+6.  TiDB クラスターに接続した後、次の SQL ステートメントを使用して接続を検証できます。
 
     ```sql
     SELECT VERSION();
     ```
 
-    If the TiDB version is displayed, you are successfully connected to your TiDB containers through ProxySQL.
+    TiDB バージョンが表示されている場合は、ProxySQL を介して TiDB コンテナーに正常に接続されています。
 
-7. To stop and remove containers, and go to the previous directory, run the following command:
+7.  コンテナを停止して削除し、前のディレクトリに移動するには、次のコマンドを実行します。
 
     <SimpleTab groupId="os">
 
@@ -622,27 +618,27 @@ The following steps will set up ProxySQL and TiDB on ports `6033` and `4000` res
 
     </SimpleTab>
 
-## Production environment
+## 生産環境 {#production-environment}
 
-For a production environment, it is recommended that you use [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated/) directly for a fully-managed experience.
+本番環境では、完全に管理されたエクスペリエンスを実現するために[TiDB Cloud専用](https://www.pingcap.com/tidb-cloud-dedicated/)直接使用することをお勧めします。
 
-### Prerequisite
+### 前提条件 {#prerequisite}
 
-Download and install a MySQL client. For example, [MySQL Shell](https://dev.mysql.com/downloads/shell/).
+MySQLクライアントをダウンロードしてインストールします。例： [MySQLシェル](https://dev.mysql.com/downloads/shell/) 。
 
-### Integrate TiDB Cloud with ProxySQL on CentOS
+### CentOS でTiDB Cloudと ProxySQL を統合する {#integrate-tidb-cloud-with-proxysql-on-centos}
 
-ProxySQL can be installed on many different platforms. The following takes CentOS as an example.
+ProxySQLは様々なプラットフォームにインストールできます。以下ではCentOSを例に説明します。
 
-For a full list of supported platforms and the corresponding version requirements, see [ProxySQL documentation](https://proxysql.com/documentation/installing-proxysql/).
+サポートされているプラットフォームと対応するバージョン要件の完全なリストについては、 [ProxySQLドキュメント](https://proxysql.com/documentation/installing-proxysql/)参照してください。
 
-#### Step 1. Create a TiDB Cloud Dedicated cluster
+#### ステップ1. TiDB Cloud専用クラスターを作成する {#step-1-create-a-tidb-cloud-dedicated-cluster}
 
-For detailed steps, see [Create a TiDB Cluster](https://docs.pingcap.com/tidbcloud/create-tidb-cluster).
+詳細な手順については、 [TiDBクラスタを作成する](https://docs.pingcap.com/tidbcloud/create-tidb-cluster)参照してください。
 
-#### Step 2. Install ProxySQL
+#### ステップ2. ProxySQLをインストールする {#step-2-install-proxysql}
 
-1. Add ProxySQL to the YUM repository:
+1.  ProxySQL を YUM リポジトリに追加します。
 
     ```bash
     cat > /etc/yum.repos.d/proxysql.repo << EOF
@@ -654,40 +650,39 @@ For detailed steps, see [Create a TiDB Cluster](https://docs.pingcap.com/tidbclo
     EOF
     ```
 
-2. Install ProxySQL:
+2.  ProxySQL をインストールします。
 
     ```bash
     yum install -y proxysql
     ```
 
-3. Start ProxySQL:
+3.  ProxySQLを起動します。
 
     ```bash
     systemctl start proxysql
     ```
 
-To learn more about the supported platforms of ProxySQL and their installation, refer to [ProxySQL README](https://github.com/sysown/proxysql#installation) or [ProxySQL installation documentation](https://proxysql.com/documentation/installing-proxysql/).
+ProxySQL がサポートするプラットフォームとそのインストールの詳細については、 [ProxySQL README](https://github.com/sysown/proxysql#installation)または[ProxySQL インストールドキュメント](https://proxysql.com/documentation/installing-proxysql/)参照してください。
 
-#### Step 3. Configure ProxySQL
+#### ステップ3. ProxySQLを構成する {#step-3-configure-proxysql}
 
-To use ProxySQL as a proxy for TiDB, you need to configure ProxySQL. To do so, you can either [execute SQL statements inside ProxySQL Admin Interface](#option-1-configure-proxysql-using-the-admin-interface) (recommended) or use the [configuration file](#option-2-configure-proxysql-using-a-configuration-file).
+ProxySQLをTiDBのプロキシとして使用するには、ProxySQLを設定する必要があります。設定には、 [ProxySQL管理インターフェース内でSQL文を実行する](#option-1-configure-proxysql-using-the-admin-interface) （推奨）または[設定ファイル](#option-2-configure-proxysql-using-a-configuration-file)のいずれかを使用できます。
 
-> **Note:**
+> **注記：**
 >
-> The following sections list only the required configuration items of ProxySQL.
-> For a comprehensive list of configurations, see [ProxySQL documentation](https://proxysql.com/documentation/proxysql-configuration/).
+> 以下のセクションでは、ProxySQL の必須設定項目のみを記載しています。設定項目の包括的なリストについては、 [ProxySQLドキュメント](https://proxysql.com/documentation/proxysql-configuration/)参照してください。
 
-##### Option 1: Configure ProxySQL using the Admin Interface
+##### オプション 1: 管理インターフェースを使用して ProxySQL を構成する {#option-1-configure-proxysql-using-the-admin-interface}
 
-1. Reconfigure ProxySQL's internals using the standard ProxySQL Admin interface, accessible via any MySQL command line client (available by default on port `6032`):
+1.  任意の MySQL コマンドライン クライアント (デフォルトではポート`6032`で使用可能) からアクセスできる標準の ProxySQL 管理インターフェイスを使用して、ProxySQL の内部を再構成します。
 
     ```bash
     mysql -u admin -padmin -h 127.0.0.1 -P6032 --prompt 'ProxySQL Admin> '
     ```
 
-    The above step will take you to the ProxySQL admin prompt.
+    上記の手順を実行すると、ProxySQL 管理者プロンプトが表示されます。
 
-2. Configure the TiDB clusters to be used, where you can add one or multiple TiDB clusters to ProxySQL. The following statement will add one TiDB Cloud Dedicated cluster for example. You need to replace `<tidb cloud dedicated cluster host>` and `<tidb cloud dedicated cluster port>` with your TiDB Cloud endpoint and port (the default port is `4000`).
+2.  使用するTiDBクラスターを設定します。ProxySQLに1つまたは複数のTiDBクラスターを追加できます。以下の文は、例えば1つのTiDB Cloud Dedicatedクラスターを追加します。1と`<tidb cloud dedicated cluster port>` `<tidb cloud dedicated cluster host>` TiDB Cloudのエンドポイントとポート番号（デフォルトは`4000` ）に置き換えてください。
 
     ```sql
     INSERT INTO mysql_servers(hostgroup_id, hostname, port) 
@@ -701,13 +696,13 @@ To use ProxySQL as a proxy for TiDB, you need to configure ProxySQL. To do so, y
     SAVE mysql servers TO DISK;
     ```
 
-    > **Note:**
+    > **注記：**
     >
-    > - `hostgroup_id`:  specify an ID of the hostgroup. ProxySQL manages clusters using hostgroup. To distribute SQL traffic to these clusters evenly, you can configure several clusters that need load balancing to the same hostgroup. To distinguish the clusters, such as for read and write purposes, you can configure them to use different hostgroups.
-    > - `hostname`: the endpoint of the TiDB cluster.
-    > - `port`: the port of the TiDB cluster.
+    > -   `hostgroup_id` : ホストグループのIDを指定します。ProxySQLはホストグループを使用してクラスターを管理します。これらのクラスターへのSQLトラフィックを均等に分散するには、負荷分散が必要な複数のクラスターを同じホストグループに設定できます。読み取りと書き込みなど、クラスターを区別するために、異なるホストグループを使用するように設定することもできます。
+    > -   `hostname` : TiDB クラスターのエンドポイント。
+    > -   `port` : TiDB クラスターのポート。
 
-3. Configure Proxy login users to make sure that the users have appropriate permissions on the TiDB cluster. In the following statements, you need to replace '*tidb cloud dedicated cluster username*' and '*tidb cloud dedicated cluster password*' with the actual username and password of your cluster.
+3.  プロキシログインユーザーを設定し、ユーザーがTiDBクラスタに対して適切な権限を持っていることを確認してください。以下の文で、「 *tidb cloud dedicated cluster username* 」と「 *tidb cloud dedicated cluster password* 」を、実際のクラスタのユーザー名とパスワードに置き換えてください。
 
     ```sql
     INSERT INTO mysql_users(
@@ -724,87 +719,85 @@ To use ProxySQL as a proxy for TiDB, you need to configure ProxySQL. To do so, y
     SAVE mysql users TO DISK;
     ```
 
-    > **Note:**
+    > **注記：**
     >
-    > - `username`: TiDB username.
-    > - `password`: TiDB password.
-    > - `active`: controls whether the user is active. `1` indicates that the user is **active** and can be used for login, while `0` indicates that the user is inactive.
-    > - `default_hostgroup`: the default hostgroup used by the user, where SQL traffic is distributed unless the query rule overrides the traffic to a specific hostgroup.
-    > - `transaction_persistent`: `1` indicates a persistent transaction. When a user starts a transaction within a connection, all query statements are routed to the same hostgroup until the transaction is committed or rolled back.
+    > -   `username` : TiDB ユーザー名。
+    > -   `password` : TiDB パスワード。
+    > -   `active` : ユーザーがアクティブかどうかを制御します。2 `1`ユーザーが**アクティブ**でありログインに使用できることを示し、 `0`ユーザーが非アクティブであることを示します。
+    > -   `default_hostgroup` : ユーザーが使用するデフォルトのホストグループ。クエリ ルールによって特定のホストグループへのトラフィックがオーバーライドされない限り、SQL トラフィックが分散されます。
+    > -   `transaction_persistent` : `1`永続的なトランザクションを示します。ユーザーが接続内でトランザクションを開始すると、トランザクションがコミットまたはロールバックされるまで、すべてのクエリステートメントは同じホストグループにルーティングされます。
 
-##### Option 2: Configure ProxySQL using a configuration file
+##### オプション2: 構成ファイルを使用してProxySQLを構成する {#option-2-configure-proxysql-using-a-configuration-file}
 
-This option should only be considered as an alternate method for configuring ProxySQL. For more information, see [Configuring ProxySQL through the config file](https://github.com/sysown/proxysql#configuring-proxysql-through-the-config-file).
+このオプションは、ProxySQLを設定するための代替方法としてのみご検討ください。詳細については、 [設定ファイルによるProxySQLの設定](https://github.com/sysown/proxysql#configuring-proxysql-through-the-config-file)参照してください。
 
-1. Delete any existing SQLite database (where configurations are stored internally):
+1.  既存の SQLite データベース (構成が内部的に保存されている場所) を削除します。
 
     ```bash
     rm /var/lib/proxysql/proxysql.db
     ```
 
-    > **Warning:**
+    > **警告：**
     >
-    > If you delete the SQLite database file, any configuration changes made using ProxySQL Admin interface will be lost.
+    > SQLite データベース ファイルを削除すると、ProxySQL 管理インターフェイスを使用して行われた構成の変更はすべて失われます。
 
-2. Modify the configuration file `/etc/proxysql.cnf` according to your need. For example:
+2.  必要に応じて設定ファイル`/etc/proxysql.cnf`を変更します。例：
 
-    ```
-    mysql_servers:
-    (
-        {
-            address="<tidb cloud dedicated cluster host>"
-            port=<tidb cloud dedicated cluster port>
-            hostgroup=0
-            max_connections=2000
-        }
-    )
+        mysql_servers:
+        (
+            {
+                address="<tidb cloud dedicated cluster host>"
+                port=<tidb cloud dedicated cluster port>
+                hostgroup=0
+                max_connections=2000
+            }
+        )
 
-    mysql_users:
-    (
-        {
-            username = "<tidb cloud dedicated cluster username>"
-            password = "<tidb cloud dedicated cluster password>"
-            default_hostgroup = 0
-            max_connections = 1000
-            default_schema = "test"
-            active = 1
-            transaction_persistent = 1
-        }
-    )
-    ```
+        mysql_users:
+        (
+            {
+                username = "<tidb cloud dedicated cluster username>"
+                password = "<tidb cloud dedicated cluster password>"
+                default_hostgroup = 0
+                max_connections = 1000
+                default_schema = "test"
+                active = 1
+                transaction_persistent = 1
+            }
+        )
 
-    In the preceding example:
+    上記の例では、次のようになります。
 
-    - `address` and `port`: specify the endpoint and port of your TiDB Cloud cluster.
-    - `username` and `password`: specify the username and password of your TiDB Cloud cluster.
+    -   `address`と`port` : TiDB Cloudクラスターのエンドポイントとポートを指定します。
+    -   `username`と`password` : TiDB Cloudクラスターのユーザー名とパスワードを指定します。
 
-3. Restart ProxySQL:
+3.  ProxySQLを再起動します。
 
     ```bash
     systemctl restart proxysql
     ```
 
-    After the restart, the SQLite database will be created automatically.
+    再起動後、SQLite データベースが自動的に作成されます。
 
-> **Warning:**
+> **警告：**
 >
-> Do not run ProxySQL with default credentials in production. Before starting the `proxysql` service, you can change the defaults in the `/etc/proxysql.cnf` file by changing the `admin_credentials` variable.
+> 本番本番では、デフォルトの認証情報でProxySQLを実行しないでください。1 サービスを開始する前に、 `proxysql`ファイル`/etc/proxysql.cnf` `admin_credentials`変数を変更することで、デフォルトを変更できます。
 
-## Typical scenario
+## 典型的なシナリオ {#typical-scenario}
 
-This section takes query routing as an example to show some of the benefits that you can leverage by integrating ProxySQL with TiDB.
+このセクションでは、クエリ ルーティングを例に、ProxySQL と TiDB を統合することで得られる利点のいくつかを示します。
 
-### Query rules
+### クエリルール {#query-rules}
 
-Databases can be overloaded by high traffic, faulty code, or malicious spam. With query rules of ProxySQL, you can respond to these issues quickly and effectively by rerouting, rewriting, or rejecting queries.
+データベースは、大量のトラフィック、コードの不具合、悪意のあるスパムなどによって過負荷になる可能性があります。ProxySQLのクエリルールを使用すれば、クエリのルーティング変更、書き換え、または拒否を行うことで、これらの問題に迅速かつ効果的に対応できます。
 
 ![proxysql-client-side-rules](/media/develop/proxysql-client-side-rules.png)
 
-> **Note:**
+> **注記：**
 >
-> In the following steps, you will be using the container images of TiDB and ProxySQL to configure query rules. If you have not pulled them, you can check the [integration section](#option-2-integrate-tidb-self-hosted-with-proxysql) for detailed steps.
+> 次の手順では、TiDBとProxySQLのコンテナイメージを使用してクエリルールを設定します。まだプルしていない場合は、詳細な手順については[統合セクション](#option-2-integrate-tidb-self-hosted-with-proxysql)ご覧ください。
 
-1. Clone the [integration example code repository](https://github.com/pingcap-inc/tidb-proxysql-integration) for TiDB and ProxySQL. Skip this step if you have already cloned it in the previous steps.
+1.  TiDBとProxySQL用の[統合サンプルコードリポジトリ](https://github.com/pingcap-inc/tidb-proxysql-integration)クローンします。前の手順で既にクローンしている場合は、この手順をスキップしてください。
 
     <SimpleTab groupId="os">
 
@@ -834,7 +827,7 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
 
     </SimpleTab>
 
-2. Change to the example directory for ProxySQL rules:
+2.  ProxySQL ルールのサンプル ディレクトリに変更します。
 
     <SimpleTab groupId="os">
 
@@ -864,7 +857,7 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
 
     </SimpleTab>
 
-3. Run the following command to start two TiDB containers and a ProxySQL container:
+3.  次のコマンドを実行して、2 つの TiDB コンテナと 1 つの ProxySQL コンテナを起動します。
 
     <SimpleTab groupId="os">
 
@@ -894,12 +887,12 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
 
     </SimpleTab>
 
-    If everything goes well, the following containers are started:
+    すべてがうまくいけば、次のコンテナが起動します。
 
-    - Two Docker containers of TiDB clusters exposed via ports `4001`, `4002`
-    - One ProxySQL Docker container exposed via port `6034`.
+    -   ポート`4001` `4002`で公開される TiDB クラスターの 2 つの Docker コンテナ
+    -   ポート`6034`経由で公開される 1 つの ProxySQL Docker コンテナー。
 
-4. In the two TiDB containers, using `mysql` to create a table with a similar schema definition and then insert different data (`'tidb-server01-port-4001'`, `'tidb-server02-port-4002'`) to identify these containers.
+4.  2 つの TiDB コンテナで、 `mysql`使用して同様のスキーマ定義を持つテーブルを作成し、 `'tidb-server02-port-4002'`データ ( `'tidb-server01-port-4001'` ) を挿入してこれらのコンテナを識別します。
 
     <SimpleTab groupId="os">
 
@@ -959,7 +952,7 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
 
     </SimpleTab>
 
-5. Configure ProxySQL by running the following command, which executes `proxysql-prepare.sql` inside ProxySQL Admin Interface to establish a proxy connection between the TiDB containers and ProxySQL.
+5.  次のコマンドを実行して ProxySQL を構成します。このコマンドは、ProxySQL 管理インターフェイス内で`proxysql-prepare.sql`実行し、TiDB コンテナーと ProxySQL の間にプロキシ接続を確立します。
 
     <SimpleTab groupId="os">
 
@@ -989,29 +982,29 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
 
     </SimpleTab>
 
-    > **Note:**
+    > **注記：**
     >
-    > The `proxysql-prepare.sql` does the following:
+    > `proxysql-prepare.sql`は次のことを行います。
     >
-    > - Adds the TiDB clusters in ProxySQL with `hostgroup_id` as `0` and `1`.
-    > - Adds a user `root` with an empty password and sets `default_hostgroup` as `0`.
-    > - Adds the rule `^SELECT.*FOR UPDATE$` with `rule_id` as `1` and `destination_hostgroup` as `0`. If a SQL statement matches this rule, the request will be forwarded to the TiDB cluster with `hostgroup` as `0`.
-    > - Adds the rule `^SELECT` with `rule_id` as `2` and `destination_hostgroup` as `1`. If a SQL statement matches this rule, the request will be forwarded to the TiDB cluster with `hostgroup` as `1`.
+    > -   `hostgroup_id`の ProxySQL に TiDB クラスターを`0`および`1`として追加します。
+    > -   空のパスワードを持つユーザー`root`追加し、 `default_hostgroup`を`0`に設定します。
+    > -   ルール`^SELECT.*FOR UPDATE$`に、 `rule_id`を`1` 、 `destination_hostgroup`を`0`として追加します。SQL文がこのルールに一致する場合、リクエストは`hostgroup`を`0`としてTiDBクラスターに転送されます。
+    > -   ルール`^SELECT`に、 `rule_id`を`2` 、 `destination_hostgroup`を`1`として追加します。SQL文がこのルールに一致する場合、リクエストは`hostgroup`を`1`としてTiDBクラスターに転送されます。
     >
-    > To have a better understanding, it is strongly recommended that you check the `proxysql-prepare.sql` file. To learn more about ProxySQL configuration, see [ProxySQL documentation](https://proxysql.com/documentation/proxysql-configuration/).
+    > より深く理解するために、 `proxysql-prepare.sql`ファイルを確認することを強くお勧めします。ProxySQL の設定の詳細については、 [ProxySQLドキュメント](https://proxysql.com/documentation/proxysql-configuration/)参照してください。
 
-    The following is some additional information about how ProxySQL patterns match query rules:
+    以下は、ProxySQL パターンがクエリ ルールと一致する方法に関する追加情報です。
 
-    - ProxySQL tries to match the rules one by one in the ascending order of `rule_id`.
-    - `^` symbol matches the beginning of a SQL statement and `$` matches the end.
+    -   ProxySQL は、 `rule_id`の昇順でルールを 1 つずつ照合しようとします。
+    -   `^`記号は SQL ステートメントの先頭に一致し、 `$`末尾に一致します。
 
-    For more information about ProxySQL regular expression and pattern matching, see [mysql-query_processor_regex](https://proxysql.com/documentation/global-variables/mysql-variables/#mysql-query_processor_regex) in ProxySQL documentation.
+    ProxySQL の正規表現とパターン マッチングの詳細については、ProxySQL ドキュメントの[mysql-クエリプロセッサ正規表現](https://proxysql.com/documentation/global-variables/mysql-variables/#mysql-query_processor_regex)参照してください。
 
-    For a full list of parameters, see [mysql_query_rules](https://proxysql.com/documentation/main-runtime/#mysql_query_rules) in ProxySQL documentation.
+    パラメータの完全なリストについては、ProxySQL ドキュメントの[mysql_クエリルール](https://proxysql.com/documentation/main-runtime/#mysql_query_rules)参照してください。
 
-6. Verify the configuration and check whether the query rules work.
+6.  構成を確認し、クエリ ルールが機能するかどうかを確認します。
 
-    1. Log into ProxySQL MySQL Interface as the `root` user:
+    1.  `root`ユーザーとして ProxySQL MySQL インターフェースにログインします。
 
         <SimpleTab groupId="os">
 
@@ -1041,25 +1034,25 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
 
         </SimpleTab>
 
-    2. Execute the following SQL statements:
+    2.  次の SQL ステートメントを実行します。
 
-        - Execute a `SELECT` statement:
+        -   `SELECT`ステートメントを実行します。
 
             ```sql
             SELECT * FROM test.tidb_server;
             ```
 
-            This statement will match rule_id `2` and forward the statement to the TiDB cluster on `hostgroup 1`.
+            このステートメントは、rule_id `2`と一致し、ステートメントを`hostgroup 1`の TiDB クラスターに転送します。
 
-        - Execute a `SELECT ... FOR UPDATE` statement:
+        -   `SELECT ... FOR UPDATE`ステートメントを実行します。
 
             ```sql
             SELECT * FROM test.tidb_server FOR UPDATE;
             ```
 
-            This statement will match rule_id `1` and forward the statement to the TiDB cluster on `hostgroup 0`.
+            このステートメントは、rule_id `1`と一致し、ステートメントを`hostgroup 0`の TiDB クラスターに転送します。
 
-        - Start a transaction:
+        -   取引を開始します:
 
             ```sql
             BEGIN;
@@ -1068,9 +1061,9 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
             ROLLBACK;
             ```
 
-            In this transaction, the `BEGIN` statement will not match any rules. It uses the default hostgroup (`hostgroup 0` in this example). Because ProxySQL enables user transaction_persistent by default, which will execute all statements within the same transaction in the same hostgroup, the `INSERT` and `SELECT * FROM test.tidb_server;` statements will also be forwarded to the TiDB cluster `hostgroup 0`.
+            このトランザクションでは、 `BEGIN`ステートメントはどのルールにも一致しません。デフォルトのホストグループ（この例では`hostgroup 0` ）を使用します。ProxySQLはデフォルトでユーザーtransaction_persistentを有効にし、同じトランザクション内のすべてのステートメントを同じホストグループで実行するので、 `INSERT`と`SELECT * FROM test.tidb_server;`ステートメントもTiDBクラスター`hostgroup 0`に転送されます。
 
-        The following is an example output. If you get a similar output, you have successfully configured the query rules with ProxySQL.
+        以下は出力例です。同様の出力が表示されれば、ProxySQLでクエリルールが正常に設定されています。
 
         ```sql
         +-------------------------+
@@ -1091,9 +1084,9 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
         +--------------------------------+
         ```
 
-    3. To exit from the MySQL client anytime, enter `quit` and press <kbd>enter</kbd>.
+    3.  いつでも MySQL クライアントを終了するには、 `quit`入力して<kbd>Enter キー</kbd>を押します。
 
-7. To stop and remove containers, and go to the previous directory, run the following command:
+7.  コンテナを停止して削除し、前のディレクトリに移動するには、次のコマンドを実行します。
 
     <SimpleTab groupId="os">
 
@@ -1126,16 +1119,16 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
 
     </SimpleTab>
 
-## Need help?
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

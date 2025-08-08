@@ -1,127 +1,127 @@
 ---
 title: Scheduling Configuration File
-summary: The Scheduling configuration file includes multiple configuration items such as node name, data path, and node URL.
+summary: スケジューリング構成ファイルには、ノード名、データ パス、ノード URL などの複数の構成項目が含まれています。
 ---
 
-# Scheduling Configuration File
+# スケジュールコンフィグレーションファイル {#scheduling-configuration-file}
 
 <!-- markdownlint-disable MD001 -->
 
-The Scheduling node is used for providing the `scheduling` microservice for PD. This document is applicable only in PD microservice mode.
+スケジューリングノードは、PD用の`scheduling`サービスを提供するために使用されます。このドキュメントはPDマイクロサービスモードにのみ適用されます。
 
-> **Tip:**
+> **ヒント：**
 >
-> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+> 構成項目の値を調整する必要がある場合は、 [設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 
-### `name`
+### <code>name</code> {#code-name-code}
 
-- The name of the Scheduling node
-- Default value: `"Scheduling"`
-- To start multiple Scheduling nodes, use a unique name for each node.
+-   スケジューリングノードの名前
+-   デフォルト値: `"Scheduling"`
+-   複数のスケジューリング ノードを開始するには、各ノードに一意の名前を使用します。
 
-### `data-dir`
+### <code>data-dir</code> {#code-data-dir-code}
 
-- The directory in which the Scheduling node stores data
-- Default value: `"default.${name}"`
+-   スケジューリングノードがデータを保存するディレクトリ
+-   デフォルト値: `"default.${name}"`
 
-### `listen-addr`
+### <code>listen-addr</code> {#code-listen-addr-code}
 
-- The client URL that the current Scheduling node listens to
-- Default value: `"http://127.0.0.1:3379"`
-- When deploying a cluster, you must specify the IP address of the current host as `listen-addr` (for example, `"http://192.168.100.113:3379"`). If the node runs on Docker, specify the Docker IP address as `"http://0.0.0.0:3379"`.
+-   現在のスケジューリングノードがリッスンするクライアント URL
+-   デフォルト値: `"http://127.0.0.1:3379"`
+-   クラスターをデプロイする際は、現在のホストのIPアドレスを`listen-addr` （例： `"http://192.168.100.113:3379"` ）に指定する必要があります。ノードがDocker上で実行されている場合は、DockerのIPアドレスを`"http://0.0.0.0:3379"`に指定してください。
 
-### `advertise-listen-addr`
+### <code>advertise-listen-addr</code> {#code-advertise-listen-addr-code}
 
-- The URL for the client to access the Scheduling node
-- Default value: `"${listen-addr}"`
-- In some situations such as in Docker or NAT network environments, if a client cannot access the Scheduling node through the default client URLs listened to by the Scheduling node, you must manually set `advertise-listen-addr` for client access.
-- For example, the internal IP address of Docker is `172.17.0.1`, while the IP address of the host is `192.168.100.113` and the port mapping is set to `-p 3379:3379`. In this case, you can set `advertise-listen-addr="http://192.168.100.113:2379"`. Then, the client can find this service through `http://192.168.100.113:2379`.
+-   クライアントがスケジューリングノードにアクセスするためのURL
+-   デフォルト値: `"${listen-addr}"`
+-   Docker や NAT ネットワーク環境などの状況では、クライアントがスケジューリング ノードによってリッスンされるデフォルトのクライアント URL を通じてスケジューリング ノードにアクセスできない場合は、クライアント アクセスに手動で`advertise-listen-addr`設定する必要があります。
+-   例えば、Dockerの内部IPアドレスは`172.17.0.1`ですが、ホストのIPアドレスは`192.168.100.113`で、ポートマッピングは`-p 3379:3379`に設定されています。この場合、 `advertise-listen-addr="http://192.168.100.113:2379"`設定できます。そうすることで、クライアントは`http://192.168.100.113:2379`を通じてこのサービスを見つけることができるようになります。
 
-### `backend-endpoints`
+### <code>backend-endpoints</code> {#code-backend-endpoints-code}
 
-- The list of backend endpoints of other Scheduling nodes that the current Scheduling node listens to
-- Default value: `"http://127.0.0.1:2379"`
+-   現在のスケジューリングノードがリッスンする他のスケジューリングノードのバックエンドエンドポイントのリスト
+-   デフォルト値: `"http://127.0.0.1:2379"`
 
-### `lease`
+### <code>lease</code> {#code-lease-code}
 
-- The timeout of the Scheduling Primary Key lease. After the timeout, the system re-elects a Primary.
-- Default value: `3`
-- Unit: seconds
+-   スケジュールプライマリキーリースのタイムアウト。タイムアウト後、システムはプライマリを再選出します。
+-   デフォルト値: `3`
+-   単位: 秒
 
-## security
+## 安全 {#security}
 
-Configuration items related to security
+セキュリティ関連のコンフィグレーション項目
 
-### `cacert-path`
+### <code>cacert-path</code> {#code-cacert-path-code}
 
-- The path of the CA file
-- Default value: ""
+-   CAファイルのパス
+-   デフォルト値: &quot;&quot;
 
-### `cert-path`
+### <code>cert-path</code> {#code-cert-path-code}
 
-- The path of the Privacy Enhanced Mail (PEM) file that contains the X.509 certificate
-- Default value: ""
+-   X.509証明書を含むPrivacy Enhanced Mail（PEM）ファイルのパス
+-   デフォルト値: &quot;&quot;
 
-### `key-path`
+### <code>key-path</code> {#code-key-path-code}
 
-- The path of the PEM file that contains the X.509 key
-- Default value: ""
+-   X.509キーを含むPEMファイルのパス
+-   デフォルト値: &quot;&quot;
 
-### `redact-info-log`
+### <code>redact-info-log</code> {#code-redact-info-log-code}
 
-- Controls whether to enable log redaction in Scheduling node logs.
-- When you set the configuration value to `true`, user data is redacted in Scheduling node logs.
-- Default value: `false`
+-   スケジュール ノード ログでログ編集を有効にするかどうかを制御します。
+-   構成値を`true`に設定すると、スケジュール ノード ログでユーザー データが編集されます。
+-   デフォルト値: `false`
 
-## log
+## ログ {#log}
 
-Configuration items related to logs.
+ログに関するコンフィグレーション項目。
 
-### `level`
+### <code>level</code> {#code-level-code}
 
-- Specifies the level of the output log.
-- Optional value: `"debug"`, `"info"`, `"warn"`, `"error"`, `"fatal"`
-- Default value: `"info"`
+-   出力ログのレベルを指定します。
+-   `"warn"` `"fatal"` `"error"` `"debug"` `"info"`
+-   デフォルト値: `"info"`
 
-### `format`
+### <code>format</code> {#code-format-code}
 
-- The log format
-- Optional value: `"text"`, `"json"`
-- Default value: `"text"`
+-   ログ形式
+-   オプション`"json"` : `"text"`
+-   デフォルト値: `"text"`
 
-### `disable-timestamp`
+### <code>disable-timestamp</code> {#code-disable-timestamp-code}
 
-- Controls whether to disable the automatically generated timestamp in logs.
-- Default value: `false`
+-   ログ内の自動生成されたタイムスタンプを無効にするかどうかを制御します。
+-   デフォルト値: `false`
 
-## log.file
+## ログファイル {#log-file}
 
-Configuration items related to the log file
+ログファイルに関連するコンフィグレーション項目
 
-### `max-size`
+### <code>max-size</code> {#code-max-size-code}
 
-- The maximum size of a single log file. When this value is exceeded, the system automatically splits the log into several files.
-- Default value: `300`
-- Unit: MiB
-- Minimum value: `1`
+-   1つのログファイルの最大サイズ。この値を超えると、システムは自動的にログを複数のファイルに分割します。
+-   デフォルト値: `300`
+-   単位: MiB
+-   最小値: `1`
 
-### `max-days`
+### <code>max-days</code> {#code-max-days-code}
 
-- The maximum number of days in which a log is kept.
-- If the configuration item is unset or set to the default value `0`, Scheduling does not clean up log files.
-- Default value: `0`
+-   ログが保持される最大日数。
+-   構成項目が設定されていないか、デフォルト値`0`に設定されている場合、スケジュールではログ ファイルがクリーンアップされません。
+-   デフォルト値: `0`
 
-### `max-backups`
+### <code>max-backups</code> {#code-max-backups-code}
 
-- The maximum number of log files to be kept.
-- If the configuration item is unset or set to the default value `0`, Scheduling keeps all log files.
-- Default value: `0`
+-   保持されるログ ファイルの最大数。
+-   構成項目が設定されていないか、デフォルト値`0`に設定されている場合、スケジュールはすべてのログ ファイルを保持します。
+-   デフォルト値: `0`
 
-## metric
+## メトリック {#metric}
 
-Configuration items related to monitoring
+監視に関連するコンフィグレーション項目
 
-### `interval`
+### <code>interval</code> {#code-interval-code}
 
-- The interval at which monitoring metric data is pushed to Prometheus
-- Default value: `15s`
+-   監視メトリックデータがPrometheusにプッシュされる間隔
+-   デフォルト値: `15s`

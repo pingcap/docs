@@ -1,13 +1,13 @@
 ---
 title: TiProxy Configuration File
-summary: Learn how to configure TiProxy.
+summary: TiProxy を構成する方法を学びます。
 ---
 
-# TiProxy Configuration File
+# TiProxyコンフィグレーションファイル {#tiproxy-configuration-file}
 
-This document introduces the configuration parameters related to the deployment and use of TiProxy. For the configurations of TiUP deployment topology, see [tiproxy-servers configurations](/tiup/tiup-cluster-topology-reference.md#tiproxy_servers).
+このドキュメントでは、TiProxyの導入と使用に関連する設定パラメータTiUP説明します。TiUP導入トポロジの設定については、 [tiproxy-servers の設定](/tiup/tiup-cluster-topology-reference.md#tiproxy_servers)参照してください。
 
-The following is an example configuration:
+以下に構成例を示します。
 
 ```toml
 [proxy]
@@ -29,116 +29,116 @@ skip-ca = true
 skip-ca = true
 ```
 
-## Configure the `tiproxy.toml` file
+## <code>tiproxy.toml</code>ファイルを設定する {#configure-the-code-tiproxy-toml-code-file}
 
-This section introduces the configuration parameters of TiProxy.
+このセクションでは、TiProxy の構成パラメータについて説明します。
 
-> **Tip:**
+> **ヒント：**
 >
-> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration). Normally the modification leads to a restart. Because TiProxy supports hot-reloading, you can skip restart by executing `tiup cluster reload --skip-restart`.
+> 設定項目の値を調整する必要がある場合は、 [設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。通常、変更を行うと再起動が必要になります。TiProxy はホットリロードをサポートしているため、 `tiup cluster reload --skip-restart`実行することで再起動を省略できます。
 
-### proxy
+### プロキシ {#proxy}
 
-Configuration for SQL port.
+SQL ポートのコンフィグレーション。
 
-#### `addr`
+#### <code>addr</code> {#code-addr-code}
 
-+ Default value: `0.0.0.0:6000`
-+ Support hot-reload: no
-+ The listening address of the SQL service. The format is `<ip>:<port>`. This configuration item is automatically set when you deploy TiProxy using TiUP or TiDB Operator.
+-   デフォルト値: `0.0.0.0:6000`
+-   ホットリロードのサポート: いいえ
+-   SQLサービスのリスニングアドレス。形式は`<ip>:<port>`です。この構成項目は、 TiUPまたはTiDB Operatorを使用してTiProxyをデプロイすると自動的に設定されます。
 
-#### `advertise-addr`
+#### <code>advertise-addr</code> {#code-advertise-addr-code}
 
-+ Default value: `""`
-+ Support hot-reload: no
-+ Specifies the address that other components use to connect to this TiProxy instance. This address only contains the host name, not the port. This address might be different from the host name in [`addr`](#addr). For example, if the `Subject Alternative Name` in TiProxy's TLS certificate contains only the domain name, other components will fail to connect to TiProxy via IP. This configuration item is automatically set when you deploy TiProxy using TiUP or TiDB Operator. If not set, the external IP address of the TiProxy instance is used.
+-   デフォルト値: `""`
+-   ホットリロードのサポート: いいえ
+-   他のコンポーネントがこのTiProxyインスタンスに接続するために使用するアドレスを指定します。このアドレスにはホスト名のみが含まれ、ポート番号は含まれません。このアドレスは[`addr`](#addr)のホスト名とは異なる場合があります。例えば、TiProxyのTLS証明書の`Subject Alternative Name`ドメイン名のみが含まれている場合、他のコンポーネントはIP経由でTiProxyに接続できません。この設定項目は、 TiUPまたはTiDB Operatorを使用してTiProxyをデプロイすると自動的に設定されます。設定されていない場合は、TiProxyインスタンスの外部IPアドレスが使用されます。
 
-#### `graceful-wait-before-shutdown`
+#### <code>graceful-wait-before-shutdown</code> {#code-graceful-wait-before-shutdown-code}
 
-+ Default value: `0`
-+ Support hot-reload: yes
-+ Unit: second
-+ When TiProxy shuts down, the HTTP status returns unhealthy but the SQL port still accepts new connections for `graceful-wait-before-shutdown` seconds. After that, it rejects new connections and drains clients. It is recommended to set it to `0` when there are no other proxies (e.g. NLB) between the client and TiProxy.
+-   デフォルト値: `0`
+-   ホットリロードのサポート: はい
+-   単位：秒
+-   TiProxyがシャットダウンすると、HTTPステータスは「unhealthy」に戻りますが、SQLポートは`graceful-wait-before-shutdown`秒間は新規接続を受け付けます。その後、新規接続は拒否され、クライアントの負荷が増大します。クライアントとTiProxyの間に他のプロキシ（NLBなど）が存在しない場合は、この値を`0`に設定することをお勧めします。
 
-#### `graceful-close-conn-timeout`
+#### <code>graceful-close-conn-timeout</code> {#code-graceful-close-conn-timeout-code}
 
-+ Default value: `15`
-+ Support hot-reload: yes
-+ Unit: second
-+ When TiProxy shuts down, it closes connections when they have completed their current transactions (also known as draining clients) within `graceful-close-conn-timeout` seconds. After that, all the connections are closed at once. `graceful-close-conn-timeout` happens after `graceful-wait-before-shutdown`. It is recommended to set this timeout longer than the lifecycle of a transaction.
+-   デフォルト値: `15`
+-   ホットリロードのサポート: はい
+-   単位：秒
+-   TiProxy がシャットダウンする際、現在のトランザクション（ドレインクライアントとも呼ばれます）が`graceful-close-conn-timeout`秒以内に完了すると、接続が閉じられます。その後、すべての接続が一度に閉じられます。3 `graceful-close-conn-timeout` `graceful-wait-before-shutdown`後に発生します。このタイムアウトは、トランザクションのライフサイクルよりも長く設定することをお勧めします。
 
-#### `max-connections`
+#### <code>max-connections</code> {#code-max-connections-code}
 
-+ Default value: `0`
-+ Support hot-reload: yes
-+ Each TiProxy instance can accept `max-connections` connections at most. `0` means no limitation.
+-   デフォルト値: `0`
+-   ホットリロードのサポート: はい
+-   各 TiProxy インスタンスは最大`max-connections`接続を受け入れることができます。3 `0`制限がないことを意味します。
 
-#### `conn-buffer-size`
+#### <code>conn-buffer-size</code> {#code-conn-buffer-size-code}
 
-+ Default value: `32768`
-+ Support hot-reload: yes, but only for new connections
-+ Range: `[1024, 16777216]`
-+ This configuration item lets you decide the connection buffer size. Each connection uses one read buffer and one write buffer. It is a tradeoff between memory and performance. A larger buffer might yield better performance results but consume more memory. When it is `0`, TiProxy uses the default buffer size.
+-   デフォルト値: `32768`
+-   ホットリロードのサポート: はい、ただし新規接続のみ
+-   範囲: `[1024, 16777216]`
+-   この設定項目では、接続バッファサイズを指定できます。各接続は、読み取りバッファと書き込みバッファをそれぞれ`0`使用します。これはメモリとパフォーマンスのトレードオフです。バッファサイズを大きくするとパフォーマンスは向上しますが、メモリ消費量も増加します。1 に設定すると、TiProxy はデフォルトのバッファサイズを使用します。
 
-#### `pd-addrs`
+#### <code>pd-addrs</code> {#code-pd-addrs-code}
 
-+ Default value: `127.0.0.1:2379`
-+ Support hot-reload: no
-+ The PD addresses TiProxy connects to. TiProxy discovers TiDB instances by fetching the TiDB list from the PD. It is set automatically when TiProxy is deployed by TiUP or TiDB Operator.
+-   デフォルト値: `127.0.0.1:2379`
+-   ホットリロードのサポート: いいえ
+-   TiProxyが接続するPDアドレス。TiProxyはPDからTiDBリストを取得することでTiDBインスタンスを検出します。TiUPまたはTiUP TiDB OperatorによってTiProxyがデプロイされると、自動的に設定されます。
 
-#### `proxy-protocol`
+#### <code>proxy-protocol</code> {#code-proxy-protocol-code}
 
-+ Default value: `""`
-+ Support hot-reload: yes, but only for new connections
-+ Possible values: `""`, `"v2"`
-+ Enable the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) on the port. By enabling the PROXY protocol, TiProxy can pass the real client IP address to TiDB. `"v2"` indicates using the PROXY protocol version 2, and `""` indicates disabling the PROXY protocol. If the PROXY protocol is enabled on TiProxy, you need to also enable the [PROXY protocol](/tidb-configuration-file.md#proxy-protocol) on the TiDB server.
+-   デフォルト値: `""`
+-   ホットリロードのサポート: はい、ただし新規接続のみ
+-   可能`"v2"`値: `""`
+-   ポートの[PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)有効にしてください。PROXYプロトコルを有効にすると、TiProxyは実際のクライアントIPアドレスをTiDBに渡すことができます。3 `"v2"` PROXYプロトコルバージョン2の使用を示し、 `""` PROXYプロトコルの無効化を示します。TiProxyでPROXYプロトコルが有効になっている場合は、TiDBサーバーでも[PROXYプロトコル](/tidb-configuration-file.md#proxy-protocol)有効にする必要があります。
 
-### api
+### API {#api}
 
-Configurations for HTTP gateway.
+HTTP ゲートウェイの構成。
 
-#### `addr`
+#### <code>addr</code> {#code-addr-code}
 
-+ Default value: `0.0.0.0:3080`
-+ Support hot-reload: no
-+ API gateway address. You can specify `ip:port`.
+-   デフォルト値: `0.0.0.0:3080`
+-   ホットリロードのサポート: いいえ
+-   APIゲートウェイアドレス。1 `ip:port`指定できます。
 
-#### `proxy-protocol`
+#### <code>proxy-protocol</code> {#code-proxy-protocol-code}
 
-+ Default value: `""`
-+ Support hot-reload: no
-+ Possible values: `""`, `"v2"`
-+ Enable the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) on the port. `"v2"` indicates using the PROXY protocol version 2, and `""` indicates disabling the PROXY protocol.
+-   デフォルト値: `""`
+-   ホットリロードのサポート: いいえ
+-   可能`"v2"`値: `""`
+-   ポートの[PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)有効にします。3 `"v2"` PROXY プロトコル バージョン 2 を使用することを示し、 `""` PROXY プロトコルを無効にすることを示します。
 
-### balance
+### バランス {#balance}
 
-Configurations for the load balancing policy of TiProxy.
+TiProxy の負荷分散ポリシーの構成。
 
-#### `label-name`
+#### <code>label-name</code> {#code-label-name-code}
 
-+ Default value: `""`
-+ Support hot-reload: yes
-+ Specifies the label name used for [label-based load balancing](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing). TiProxy matches the label values of TiDB servers based on this label name and prioritizes routing requests to TiDB servers with the same label value as itself.
-+ The default value of `label-name` is an empty string, indicating that label-based load balancing is not used. To enable this load balancing policy, you need to set this configuration item to a non-empty string and configure both [`labels`](#labels) in TiProxy and [`labels`](/tidb-configuration-file.md#labels) in TiDB. For more information, see [Label-based load balancing](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing).
+-   デフォルト値: `""`
+-   ホットリロードのサポート: はい
+-   [ラベルベースの負荷分散](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing)に使用するラベル名を指定します。TiProxy は、このラベル名に基づいて TiDB サーバのラベル値を照合し、自分と同じラベル値を持つ TiDB サーバへのルーティング要求を優先します。
+-   デフォルト値の`label-name`空文字列で、ラベルベースの負荷分散が使用されないことを示します。この負荷分散ポリシーを有効にするには、この設定項目を空でない文字列に設定し、TiProxy で[`labels`](#labels) 、TiDB で[`labels`](/tidb-configuration-file.md#labels)両方を設定する必要があります。詳細については、 [ラベルベースの負荷分散](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing)参照してください。
 
-#### `policy`
+#### <code>policy</code> {#code-policy-code}
 
-+ Default value: `resource`
-+ Support hot-reload: yes
-+ Possible values: `resource`, `location`, `connection`
-+ Specifies the load balancing policy. For the meaning of each possible value, see [TiProxy load balancing policies](/tiproxy/tiproxy-load-balance.md#configure-load-balancing-policies).
+-   デフォルト値: `resource`
+-   ホットリロードのサポート: はい
+-   `location` `connection`値: `resource`
+-   負荷分散ポリシーを指定します。各値の意味については、 [TiProxy 負荷分散ポリシー](/tiproxy/tiproxy-load-balance.md#configure-load-balancing-policies)参照してください。
 
-### ha
+### ハ {#ha}
 
-High availability configurations for TiProxy.
+TiProxy の高可用性構成。
 
-#### `virtual-ip`
+#### <code>virtual-ip</code> {#code-virtual-ip-code}
 
-+ Default value: `""`
-+ Support hot-reload: no
-+ Specifies the virtual IP address in the CIDR format, such as `"10.0.1.10/24"`. When you configure multiple TiProxy instances in a cluster with the same virtual IP, only one instance binds to it at a time. If this instance goes offline, another TiProxy instance automatically takes over the virtual IP. This ensures that clients can always connect to an available TiProxy through the virtual IP.
+-   デフォルト値: `""`
+-   ホットリロードのサポート: いいえ
+-   仮想IPアドレスをCIDR形式（例： `"10.0.1.10/24"` ）で指定します。クラスタ内で複数のTiProxyインスタンスを同じ仮想IPで構成した場合、一度に1つのインスタンスのみがその仮想IPにバインドされます。このインスタンスがオフラインになった場合、別のTiProxyインスタンスが自動的に仮想IPを引き継ぎます。これにより、クライアントは常に仮想IPを介して利用可能なTiProxyに接続できるようになります。
 
-The following is an example configuration:
+以下に構成例を示します。
 
 ```yaml
 server_configs:
@@ -147,74 +147,74 @@ server_configs:
     ha.interface: "eth0"
 ```
 
-Starting from v1.3.1, TiProxy supports configuring multiple virtual IP addresses. When you need to isolate computing layer resources, you can configure multiple virtual IP addresses and use [label-based load balancing](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing) in combination. For an example configuration, see [label-based load balancing](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing).
+TiProxy v1.3.1以降、複数の仮想IPアドレスの設定がサポートされます。コンピューティングレイヤーのリソースを分離する必要がある場合は、複数の仮想IPアドレスを設定し、 [ラベルベースの負荷分散](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing)組み合わせて使用できます。設定例については、 [ラベルベースの負荷分散](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing)参照してください。
 
-> **Note:**
+> **注記：**
 >
-> - Virtual IP is only supported on Linux operating systems.
-> - The Linux user running TiProxy must have permission to bind IP addresses.
-> - The real and virtual IP addresses of one TiProxy instance must be within the same CIDR range.
+> -   仮想 IP は Linux オペレーティング システムでのみサポートされます。
+> -   TiProxy を実行する Linux ユーザーには、IP アドレスをバインドする権限が必要です。
+> -   1 つの TiProxy インスタンスの実際の IP アドレスと仮想 IP アドレスは、同じ CIDR 範囲内にある必要があります。
 
-#### `interface`
+#### <code>interface</code> {#code-interface-code}
 
-+ Default value: `""`
-+ Support hot-reload: no
-+ Specifies the network interface to bind the virtual IP to, such as `"eth0"`. The virtual IP will be bound to a TiProxy instance only when both [`ha.virtual-ip`](#virtual-ip) and `ha.interface` are set.
+-   デフォルト値: `""`
+-   ホットリロードのサポート: いいえ
+-   仮想IPをバインドするネットワークインターフェースを指定します（例： `"eth0"` ）。仮想IPは、 [`ha.virtual-ip`](#virtual-ip)と`ha.interface`両方が設定されている場合にのみTiProxyインスタンスにバインドされます。
 
-### `labels`
+### <code>labels</code> {#code-labels-code}
 
-+ Default value: `{}`
-+ Support hot-reload: yes
-+ Specifies server labels. For example, `{ zone = "us-west-1", dc = "dc1" }`.
+-   デフォルト値: `{}`
+-   ホットリロードのサポート: はい
+-   サーバーのラベルを指定します。例: `{ zone = "us-west-1", dc = "dc1" }` 。
 
-### log
+### ログ {#log}
 
-#### `level`
+#### <code>level</code> {#code-level-code}
 
-+ Default value: `info`
-+ Support hot-reload: yes
-+ Possible values: `debug`, `info`, `warn`, `error`, `panic`
-+ Specify the log level. With the `panic` level, TiProxy will panic on errors.
+-   デフォルト値: `info`
+-   ホットリロードのサポート: はい
+-   `warn` `panic` `info` `error` `debug`
+-   ログレベルを指定します。レベル`panic`の場合、エラー発生時にTiProxyはpanicになります。
 
-#### `encoder`
+#### <code>encoder</code> {#code-encoder-code}
 
-+ Default value: `tidb`
-+ You can specify:
+-   デフォルト値: `tidb`
+-   以下を指定できます:
 
-    + `tidb`: format used by TiDB. For details, refer to [Unified Log Format](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md).
-    + `json`: structured JSON format.
-    + `console`: human-readable log format.
+    -   `tidb` : TiDBで使用されるフォーマット。詳細は[統合ログ形式](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md)を参照してください。
+    -   `json` : 構造化された JSON 形式。
+    -   `console` : 人間が読めるログ形式。
 
-### log.log-file
+### log.ログファイル {#log-log-file}
 
-#### `filename`
+#### <code>filename</code> {#code-filename-code}
 
-+ Default value: `""`
-+ Support hot-reload: yes
-+ Log file path. Non empty value will enable logging to file. When TiProxy is deployed with TiUP, the filename is set automatically.
+-   デフォルト値: `""`
+-   ホットリロードのサポート: はい
+-   ログファイルのパス。空でない値を指定すると、ファイルへのログ記録が有効になります。TiProxy がTiUPと共にデプロイされている場合、ファイル名は自動的に設定されます。
 
-#### `max-size`
+#### <code>max-size</code> {#code-max-size-code}
 
-+ Default value: `300`
-+ Support hot-reload: yes
-+ Unit: MB
-+ Specifies the maximum size for log files. A log file will be rotated if its size exceeds this limit.
+-   デフォルト値: `300`
+-   ホットリロードのサポート: はい
+-   単位: MB
+-   ログファイルの最大サイズを指定します。ログファイルのサイズがこの制限を超えると、ログファイルはローテーションされます。
 
-#### `max-days`
+#### <code>max-days</code> {#code-max-days-code}
 
-+ Default value: `3`
-+ Support hot-reload: yes
-+ Specifies the maximum number of days to keep old log files. Outdated log files are deleted after surpassing this period.
+-   デフォルト値: `3`
+-   ホットリロードのサポート: はい
+-   古いログファイルを保存する最大日数を指定します。この期間を過ぎると、古いログファイルは削除されます。
 
-#### `max-backups`
+#### <code>max-backups</code> {#code-max-backups-code}
 
-+ Default value: `3`
-+ Support hot-reload: yes
-+ Specifies the maximum number of log files to be retained. Surplus log files will be automatically deleted when an excessive number is reached.
+-   デフォルト値: `3`
+-   ホットリロードのサポート: はい
+-   保持するログファイルの最大数を指定します。超過数に達した場合、余分なログファイルは自動的に削除されます。
 
-### security
+### 安全 {#security}
 
-There are four TLS objects in the `[security]` section with different names. They share the same configuration format and fields, but they are interpreted differently depending on their names.
+`[security]`セクションには、名前の異なる TLS オブジェクトが 4 つあります。これらは設定形式とフィールドは同じですが、名前によって解釈が異なります。
 
 ```toml
 [security]
@@ -224,50 +224,50 @@ There are four TLS objects in the `[security]` section with different names. The
     auto-certs = true
 ```
 
-All TLS options are hot-reloaded.
+すべての TLS オプションはホットリロードされます。
 
-TLS object fields:
+TLS オブジェクト フィールド:
 
-+ `ca`: specifies the CA
-+ `cert`: specifies the certificate
-+ `key`: specifies the private key
-+ `auto-certs`: mostly used for tests. It generates certificates if no certificate or key is specified.
-+ `skip-ca`: skips verifying certificates using CA on client object or skips server-side verification on server object.
-+ `min-tls-version`: sets the minimum TLS version. Possible values are `1.0`, `1.1`, `1.2`, and `1.3`. The default value is `1.2`, which allows v1.2 or higher TLS versions.
-+ `rsa-key-size`: sets the RSA key size when `auto-certs` is enabled.
-+ `autocert-expire-duration`: sets the default expiration duration for auto-generated certificates.
+-   `ca` : CAを指定する
+-   `cert` : 証明書を指定する
+-   `key` : 秘密鍵を指定する
+-   `auto-certs` : 主にテストに使用されます。証明書またはキーが指定されていない場合は証明書を生成します。
+-   `skip-ca` : クライアント オブジェクト上の CA を使用した証明書の検証をスキップするか、サーバーオブジェクト上のサーバー側検証をスキップします。
+-   `min-tls-version` : 最小のTLSバージョンを設定します。指定可能な値は`1.0` 、 `1.1` 、 `1.2` 、 `1.3`です。デフォルト値は`1.2`で、v1.2以上のTLSバージョンが許可されます。
+-   `rsa-key-size` : `auto-certs`が有効な場合の RSA キー サイズを設定します。
+-   `autocert-expire-duration` : 自動生成された証明書のデフォルトの有効期限を設定します。
 
-Objects are classified into client or server objects by their names.
+オブジェクトは、名前によってクライアント オブジェクトまたはサーバーオブジェクトに分類されます。
 
-For client TLS object:
+クライアント TLS オブジェクトの場合:
 
-- You must set either `ca` or `skip-ca` to skip verifying server certificates.
-- Optionally, you can set `cert` or `key` to pass server-side client verification.
-- Useless fields: auto-certs.
+-   サーバー証明書の検証をスキップするには、 `ca`または`skip-ca`設定する必要があります。
+-   オプションで、サーバー側のクライアント検証に合格するために`cert`または`key`設定できます。
+-   役に立たないフィールド: 自動証明書。
 
-For server TLS object:
+サーバーTLS オブジェクトの場合:
 
-+ You can set either `cert` or `key` or `auto-certs` to support TLS connections. Otherwise, TiProxy doesn't support TLS connections.
-+ Optionally, if `ca` is not empty, it enables server-side client verification. The client must provide their certificates. Alternatively, if both `skip-ca` is true and `ca` is not empty, the server will only verify client certificates if they provide one.
+-   TLS接続をサポートするには、 `cert` 、または`auto-certs` `key`かを設定できます。それ以外の場合、TiProxyはTLS接続をサポートしません。
+-   オプションとして、 `ca`空でない場合、サーバー側でのクライアント検証が有効になります。クライアントは証明書を提供する必要があります。また、 `skip-ca`真で`ca`空でない場合、サーバーはクライアントが証明書を提供した場合にのみ検証を行います。
 
-#### `cluster-tls`
+#### <code>cluster-tls</code> {#code-cluster-tls-code}
 
-A client TLS object. It is used to access TiDB or PD.
+クライアントTLSオブジェクト。TiDBまたはPDへのアクセスに使用されます。
 
-#### `require-backend-tls`
+#### <code>require-backend-tls</code> {#code-require-backend-tls-code}
 
-+ Default value: `false`
-+ Support hot-reload: yes, but only for new connections
-+ Require TLS between TiProxy and TiDB servers. If the TiDB server does not support TLS, clients will report an error when connecting to TiProxy.
+-   デフォルト値: `false`
+-   ホットリロードのサポート: はい、ただし新規接続のみ
+-   TiProxyとTiDBサーバー間のTLS接続を必須にします。TiDBサーバーがTLSをサポートしていない場合、クライアントはTiProxyへの接続時にエラーを報告します。
 
-#### `sql-tls`
+#### <code>sql-tls</code> {#code-sql-tls-code}
 
-A client TLS object. It is used to access TiDB SQL port (4000).
+クライアントTLSオブジェクト。TiDB TiDB SQLポート（4000）へのアクセスに使用されます。
 
-#### `server-tls`
+#### <code>server-tls</code> {#code-server-tls-code}
 
-A server TLS object. It is used to provide TLS on SQL port (6000).
+サーバーTLSオブジェクト。SQLポート（6000）でTLSを提供するために使用されます。
 
-#### `server-http-tls`
+#### <code>server-http-tls</code> {#code-server-http-tls-code}
 
-A server TLS object. It is used to provide TLS on HTTP status port (3080).
+サーバーTLSオブジェクト。HTTPステータスポート（3080）でTLSを提供するために使用されます。

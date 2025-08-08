@@ -1,91 +1,85 @@
 ---
 title: TiDB Pessimistic Transaction Mode
-summary: Learn the pessimistic transaction mode in TiDB.
+summary: TiDB の悲観的トランザクション モードについて学習します。
 ---
 
-# TiDB Pessimistic Transaction Mode
+# TiDB 悲観的トランザクションモード {#tidb-pessimistic-transaction-mode}
 
-To make the usage of TiDB closer to traditional databases and reduce the cost of migration, starting from v3.0, TiDB supports the pessimistic transaction mode on top of the optimistic transaction model. This document describes the features of the TiDB pessimistic transaction mode.
+TiDB を従来のデータベースに近づけ、移行コストを削減するため、v3.0 以降では、楽観的トランザクションモデルに加えて悲観的トランザクションモードもサポートしています。このドキュメントでは、TiDB の悲観的トランザクションモードの機能について説明します。
 
-> **Note:**
+> **注記：**
 >
-> Starting from v3.0.8, newly created TiDB clusters use the pessimistic transaction mode by default. However, this does not affect your existing cluster if you upgrade it from v3.0.7 or earlier to v3.0.8 or later. In other words, **only newly created clusters default to using the pessimistic transaction mode**.
+> v3.0.8以降、新規に作成されたTiDBクラスターはデフォルトで悲観的・トランザクション・モードを使用します。ただし、既存のクラスターをv3.0.7以前からv3.0.8以降にアップグレードした場合、この変更は影響を受けません。つまり、**新規に作成されたクラスターのみがデフォルトで悲観的・トランザクション・モードを使用するようになります**。
 
-## Switch transaction mode
+## トランザクションモードの切り替え {#switch-transaction-mode}
 
-You can set the transaction mode by configuring the [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) system variable. The following command sets all explicit transactions (that is, non-autocommit transactions) executed by newly created sessions in the cluster to the pessimistic transaction mode:
-
-{{< copyable "sql" >}}
+トランザクションモードは、システム変数[`tidb_txn_mode`](/system-variables.md#tidb_txn_mode)設定することで設定できます。次のコマンドは、クラスター内で新規作成されたセッションによって実行されるすべての明示的なトランザクション（つまり、自動コミットされないトランザクション）を悲観的トランザクションモードに設定します。
 
 ```sql
 SET GLOBAL tidb_txn_mode = 'pessimistic';
 ```
 
-You can also explicitly enable the pessimistic transaction mode by executing the following SQL statements:
-
-{{< copyable "sql" >}}
+次の SQL ステートメントを実行して、悲観的トランザクション モードを明示的に有効にすることもできます。
 
 ```sql
 BEGIN PESSIMISTIC;
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 BEGIN /*T! PESSIMISTIC */;
 ```
 
-The `BEGIN PESSIMISTIC;` and `BEGIN OPTIMISTIC;` statements take precedence over the `tidb_txn_mode` system variable. Transactions started with these two statements ignore the system variable and support using both the pessimistic and optimistic transaction modes.
+`BEGIN PESSIMISTIC;`と`BEGIN OPTIMISTIC;`ステートメントは、システム変数`tidb_txn_mode`よりも優先されます。これらの 2 つのステートメントで開始されたトランザクションは、システム変数を無視し、悲観的トランザクションモードと楽観的トランザクションモードの両方をサポートします。
 
-## Behaviors
+## 行動 {#behaviors}
 
-Pessimistic transactions in TiDB behave similarly to those in MySQL. See the minor differences in [Differences from MySQL InnoDB](#differences-from-mysql-innodb).
+TiDBの悲観的トランザクションはMySQLの悲観的トランザクションと同様に動作します。1の小さな違いをご覧ください[MySQL InnoDBとの違い](#differences-from-mysql-innodb)
 
-- For pessimistic transactions, TiDB introduces snapshot read and current read.
+-   悲観的トランザクションの場合、TiDB はスナップショット読み取りと現在の読み取りを導入します。
 
-    - Snapshot read: it is an unlocked read that reads a version committed before the transaction starts. The read in the `SELECT` statement is a snapshot read.
-    - Current read: it is a locked read that reads the latest committed version. The read in the `UPDATE`, `DELETE`, `INSERT`, or `SELECT FOR UPDATE` statement is a current read.
+    -   スナップショット読み取り：トランザクション開始前にコミットされたバージョンを読み取る、ロック解除された読み取りです。1 `SELECT`のステートメントの読み取りはスナップショット読み取りです。
+    -   現在の読み取り：コミットされた最新のバージョンを読み取るロックされた読み取りです。1、3、5、または`INSERT` `UPDATE`ステートメントの読み取り`SELECT FOR UPDATE`現在の読み取り`DELETE` 。
 
-    The following examples provide a detailed description of snapshot read and current read.
+    次の例では、スナップショット読み取りと現在の読み取りについて詳しく説明します。
 
-    | Session 1 | Session 2 | Session 3 |
-    | :----| :---- | :---- |
-    | CREATE TABLE t (a INT); |  |  |
-    | INSERT INTO T VALUES(1); |  |  |
-    | BEGIN PESSIMISTIC; |  |
-    | UPDATE t SET a = a + 1; |  |  |
-    |  | BEGIN PESSIMISTIC; |  |
-    |  | SELECT * FROM t;  -- Use the snapshot read to read the version committed before the current transaction starts. The result returns a=1. |  |
-    |  |  | BEGIN PESSIMISTIC;
-    |  |  | SELECT * FROM t FOR UPDATE; -- Use the current read. Wait for the lock.  |
-    | COMMIT; -- Release the lock. The SELECT FOR UPDATE operation of session 3 obtains the lock and TiDB uses the current read to read the latest committed version. The result returns a=2. |  |  |
-    |  | SELECT * FROM t; -- Use the snapshot read to read the version committed before the current transaction starts. The result returns a=1. |  |
+    | セッション1                                                                                                          | セッション2                                                                                 | セッション3                                                  |
+    | :-------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------- | :------------------------------------------------------ |
+    | テーブル t を作成します (INT)。                                                                                            |                                                                                        |                                                         |
+    | T値に挿入(1);                                                                                                       |                                                                                        |                                                         |
+    | 悲観的に始める。                                                                                                        |                                                                                        |                                                         |
+    | tを更新し、a = a + 1に設定します。                                                                                          |                                                                                        |                                                         |
+    |                                                                                                                 | 悲観的に始める。                                                                               |                                                         |
+    |                                                                                                                 | SELECT * FROM t; -- スナップショット読み取りを使用して、現在のトランザクションの開始前にコミットされたバージョンを読み取ります。結果はa=1を返します。 |                                                         |
+    |                                                                                                                 |                                                                                        | 悲観的に始める。                                                |
+    |                                                                                                                 |                                                                                        | SELECT * FROM t FOR UPDATE; -- 現在の読み取りを使用します。ロックを待機します。 |
+    | COMMIT; -- ロックを解除します。セッション3のSELECT FOR UPDATE操作によってロックが取得され、TiDBは現在の読み取りを使用して最新のコミット済みバージョンを読み取ります。結果はa=2を返します。 |                                                                                        |                                                         |
+    |                                                                                                                 | SELECT * FROM t; -- スナップショット読み取りを使用して、現在のトランザクションの開始前にコミットされたバージョンを読み取ります。結果はa=1を返します。 |                                                         |
 
-- When you execute `UPDATE`, `DELETE` or `INSERT` statements, the **latest** committed data is read, data is modified, and a pessimistic lock is applied on the modified rows.
+-   `UPDATE` 、または`INSERT`ステートメントを実行すると、コミットされた**最新の**データが読み取られ、データが変更され、変更された行に悲観的ロック`DELETE`適用されます。
 
-- For `SELECT FOR UPDATE` statements, a pessimistic lock is applied on the latest version of the committed data, instead of on the modified rows.
+-   `SELECT FOR UPDATE`ステートメントの場合、変更された行ではなく、コミットされたデータの最新バージョンに悲観的ロックが適用されます。
 
-- Locks will be released when the transaction is committed or rolled back. Other transactions attempting to modify the data are blocked and have to wait for the lock to be released. Transactions attempting to _read_ the data are not blocked, because TiDB uses multi-version concurrency control (MVCC).
+-   トランザクションがコミットまたはロールバックされると、ロックは解除されます。データの変更を試みる他のトランザクションはブロックされ、ロックが解除されるまで待機する必要があります。TiDBはマルチバージョン同時実行制御（MVCC）を使用しているため、データの*読み取り*を試みるトランザクションはブロックされません。
 
-- You can set the system variable [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) to control whether to skip the pessimistic locks with unique constraint checks. See [constraints](/constraints.md#pessimistic-transactions) for details.
+-   システム変数[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)設定することで、一意制約チェックを伴う悲観的ロックをスキップするかどうかを制御できます。詳細は[制約](/constraints.md#pessimistic-transactions)参照してください。
 
-- If several transactions are trying to acquire each other's respective locks, a deadlock will occur. This is automatically detected, and one of the transactions will randomly be terminated with a MySQL-compatible error code `1213` returned.
+-   複数のトランザクションが互いのロックを取得しようとすると、デッドロックが発生します。これは自動的に検出され、いずれかのトランザクションがランダムに終了し、MySQL互換のエラーコード`1213`が返されます。
 
-- Transactions will wait up to `innodb_lock_wait_timeout` seconds (default: 50) to acquire new locks. When this timeout is reached, a MySQL-compatible error code `1205` is returned. If multiple transactions are waiting for the same lock, the order of priority is approximately based on the `start ts` of the transaction.
+-   トランザクションは新しいロックを取得するために最大`innodb_lock_wait_timeout`秒（デフォルト：50秒）待機します。このタイムアウトに達すると、MySQL互換のエラーコード`1205`返されます。複数のトランザクションが同じロックを待機している場合、優先順位はトランザクションの`start ts`に基づいてほぼ決定されます。
 
-- TiDB supports both the optimistic transaction mode and pessimistic transaction mode in the same cluster. You can specify either mode for transaction execution.
+-   TiDBは、同一クラスタ内で楽観的トランザクションモードと悲観的トランザクションモードの両方をサポートします。トランザクション実行にはどちらのモードも指定できます。
 
-- TiDB supports the `FOR UPDATE NOWAIT` syntax and does not block and wait for locks to be released. Instead, a MySQL-compatible error code `3572` is returned.
+-   TiDBは`FOR UPDATE NOWAIT`構文をサポートしており、ブロックしてロックが解放されるのを待つことはありません。代わりに、MySQL互換のエラーコード`3572`返されます。
 
-- If the `Point Get` and `Batch Point Get` operators do not read data, they still lock the given primary key or unique key, which blocks other transactions from locking or writing data to the same primary key or unique key.
+-   演算子`Point Get`と`Batch Point Get`データを読み取らない場合でも、指定された主キーまたは一意キーはロックされ、他のトランザクションが同じ主キーまたは一意キーをロックしたり、データを書き込んだりすることがブロックされます。
 
-- TiDB supports the `FOR UPDATE OF TABLES` syntax. For a statement that joins multiple tables, TiDB only applies pessimistic locks on the rows that are associated with the tables in `OF TABLES`.
+-   TiDBは`FOR UPDATE OF TABLES`構文をサポートしています。複数のテーブルを結合する文の場合、TiDBは`OF TABLES`のテーブルに関連付けられた行に対してのみ悲観的ロックを適用します。
 
-## Differences from MySQL InnoDB
+## MySQL InnoDBとの違い {#differences-from-mysql-innodb}
 
-1. When TiDB executes DML or `SELECT FOR UPDATE` statements that use range in the WHERE clause, concurrent DML statements within the range are not blocked.
+1.  TiDB が WHERE 句で範囲を使用する DML または`SELECT FOR UPDATE`ステートメントを実行する場合、範囲内の同時実行 DML ステートメントはブロックされません。
 
-    For example:
+    例えば：
 
     ```sql
     CREATE TABLE t1 (
@@ -106,82 +100,80 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
     UPDATE t1 SET pad1='new value' WHERE id = 5; -- blocks waiting in both MySQL and TiDB
     ```
 
-    This behavior is because TiDB does not currently support _gap locking_.
+    この動作は、TiDB が現在*ギャップ ロック*をサポートしていないために発生します。
 
-2. TiDB does not support `SELECT LOCK IN SHARE MODE`.
+2.  TiDB は`SELECT LOCK IN SHARE MODE`サポートしていません。
 
-    TiDB does not support the `SELECT LOCK IN SHARE MODE` syntax by default. You can enable [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) to make TiDB compatible with the `SELECT LOCK IN SHARE MODE` syntax. Executing `SELECT LOCK IN SHARE MODE` has the same effect as that without the lock, so it does not block read or write operations of other transactions.
+    TiDBはデフォルトでは`SELECT LOCK IN SHARE MODE`構文をサポートしていません。3 [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)有効にすると、TiDBは`SELECT LOCK IN SHARE MODE`構文と互換性を持つようになります。7 `SELECT LOCK IN SHARE MODE`実行すると、ロックなしの場合と同じ効果が得られるため、他のトランザクションの読み取りまたは書き込み操作がブロックされることはありません。
 
-    Starting from v8.3.0, TiDB supports using the [`tidb_enable_shared_lock_promotion`](/system-variables.md#tidb_enable_shared_lock_promotion-new-in-v830) system variable to enable the `SELECT LOCK IN SHARE MODE` statement to add locks. However, note that the lock added at this time is not a true shared lock, but an exclusive lock, which is consistent with `SELECT FOR UPDATE`. If you want to block writes to prevent data from being modified by write transactions in parallel during reads while keeping TiDB compatible with the `SELECT LOCK IN SHARE MODE` syntax, you can enable this variable. Enabling this variable takes effect on the `SELECT LOCK IN SHARE MODE` statement, regardless of whether [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) is enabled or not.
+    v8.3.0以降、TiDBは[`tidb_enable_shared_lock_promotion`](/system-variables.md#tidb_enable_shared_lock_promotion-new-in-v830)システム変数を使用して`SELECT LOCK IN SHARE MODE`ステートメントによるロックの追加を有効にできるようになりました。ただし、今回追加されるロックは真の共有ロックではなく、 `SELECT FOR UPDATE`と整合性のある排他ロックであることに注意してください。TiDBと`SELECT LOCK IN SHARE MODE`構文の互換性を維持しながら、読み取り中に並行して実行される書き込みトランザクションによるデータの変更を防ぐために書き込みをブロックしたい場合は、この変数を有効にできます。この変数を有効にすると、 [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)が有効かどうかに関係なく、 `SELECT LOCK IN SHARE MODE`ステートメントから有効になります。
 
-3. DDL may result in failure of the pessimistic transaction commit.
+3.  DDL により悲観的トランザクション コミットが失敗する可能性があります。
 
-    When DDL is executed in MySQL, it might be blocked by the transaction that is being executed. However, in this scenario, the DDL operation is not blocked in TiDB, which leads to failure of the pessimistic transaction commit: `ERROR 1105 (HY000): Information schema is changed. [try again later]`. TiDB executes the `TRUNCATE TABLE` statement during the transaction execution, which might result in the `table doesn't exist` error.
+    MySQLでDDLを実行すると、実行中のトランザクションによってブロックされる可能性があります。しかし、このシナリオでは、TiDBではDDL操作がブロックされないため、悲観的トランザクションコミットが失敗します`ERROR 1105 (HY000): Information schema is changed. [try again later]` . TiDBはトランザクション実行中に`TRUNCATE TABLE`文を実行するため、 `table doesn't exist`のエラーが発生する可能性があります。
 
-4. After executing `START TRANSACTION WITH CONSISTENT SNAPSHOT`, MySQL can still read the tables that are created later in other transactions, while TiDB cannot.
+4.  `START TRANSACTION WITH CONSISTENT SNAPSHOT`実行した後、MySQL は他のトランザクションで後で作成されたテーブルを読み取ることができますが、TiDB は読み取ることができません。
 
-5. The autocommit transactions prefer the optimistic locking.
+5.  自動コミット トランザクションでは楽観的ロックが優先されます。
 
-    When using the pessimistic model, the autocommit transactions first try to commit the statement using the optimistic model that has less overhead. If a write conflict occurs, the pessimistic model is used for transaction retry. Therefore, if `tidb_retry_limit` is set to `0`, the autocommit transaction still reports the `Write Conflict` error when a write conflict occurs.
+    悲観的モデルを使用する場合、自動コミットトランザクションはまず、オーバーヘッドの少ない楽観的モデルを使用してステートメントのコミットを試みます。書き込み競合が発生した場合、トランザクションの再試行には悲観的モデルが使用されます。したがって、 `tidb_retry_limit` `0`に設定した場合、自動コミットトランザクションは書き込み競合が発生したときに`Write Conflict`エラーを報告します。
 
-    The autocommit `SELECT FOR UPDATE` statement does not wait for lock.
+    自動コミット`SELECT FOR UPDATE`ステートメントはロックを待機しません。
 
-6. The data read by `EMBEDDED SELECT` in the statement is not locked.
+6.  ステートメント内の`EMBEDDED SELECT`によって読み取られたデータはロックされません。
 
-7. Open transactions in TiDB do not block garbage collection (GC). By default, this limits the maximum execution time of pessimistic transactions to 1 hour. You can modify this limit by editing `max-txn-ttl` under `[performance]` in the TiDB configuration file.
+7.  TiDBでは、オープントランザクションはガベージコレクション（GC）をブロックしません。デフォルトでは、悲観的トランザクションの最大実行時間は1時間に制限されています。この制限は、TiDB設定ファイルの`max-txn-ttl`の`[performance]`を編集することで変更できます。
 
-## Isolation level
+## 分離レベル {#isolation-level}
 
-TiDB supports the following two isolation levels in the pessimistic transaction mode:
+TiDB は、悲観的トランザクション モードで次の 2 つの分離レベルをサポートします。
 
-- [Repeatable Read](/transaction-isolation-levels.md#repeatable-read-isolation-level) by default, which is the same as MySQL.
+-   デフォルトでは[繰り返し読み取り](/transaction-isolation-levels.md#repeatable-read-isolation-level)で、これは MySQL と同じです。
 
-    > **Note:**
+    > **注記：**
     >
-    > In this isolation level, DML operations are performed based on the latest committed data. The behavior is the same as MySQL, but differs from the optimistic transaction mode in TiDB. See [Difference between TiDB and MySQL Repeatable Read](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read).
+    > この分離レベルでは、DML操作は最新のコミットデータに基づいて実行されます。動作はMySQLと同じですが、TiDBの楽観的トランザクションモードとは異なります。1 [TiDBとMySQLの繰り返し読み取りの違い](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)参照してください。
 
-- [Read Committed](/transaction-isolation-levels.md#read-committed-isolation-level). You can set this isolation level using the [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md) statement.
+-   [コミットされた読み取り](/transaction-isolation-levels.md#read-committed-isolation-level) 。この分離レベルは[`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)ステートメントを使用して設定できます。
 
-## Pessimistic transaction commit process
+## 悲観的なトランザクションコミットプロセス {#pessimistic-transaction-commit-process}
 
-In the transaction commit process, pessimistic transactions and optimistic transactions have the same logic. Both transactions adopt the two-phase commit (2PC) mode. The important adaptation of pessimistic transactions is DML execution.
+トランザクションのコミットプロセスにおいて、悲観的トランザクションと楽観的トランザクションは同じロジックを持ちます。どちらのトランザクションも2相コミット（2PC）モードを採用しています。悲観的トランザクションにおける重要な適応は、DML実行です。
 
 ![TiDB pessimistic transaction commit process](/media/pessimistic-transaction-commit.png)
 
-The pessimistic transaction adds an `Acquire Pessimistic Lock` phase before 2PC. This phase includes the following steps:
+悲観的トランザクションは、2PCの前にフェーズ`Acquire Pessimistic Lock`追加します。このフェーズには以下のステップが含まれます。
 
-1. (Same as the optimistic transaction mode) TiDB receives the `begin` request from the client, and the current timestamp is this transaction's start_ts.
-2. When the TiDB server receives a writing request from the client, the TiDB server initiates a pessimistic lock request to the TiKV server, and the lock is persisted to the TiKV server.
-3. (Same as the optimistic transaction mode) When the client sends the commit request, TiDB starts to perform the two-phase commit similar to the optimistic transaction mode.
+1.  (楽観的トランザクション モードと同じ) TiDB はクライアントから`begin`リクエストを受信し、現在のタイムスタンプはこのトランザクションの start_ts になります。
+2.  TiDBサーバーはクライアントから書き込み要求を受信すると、TiDBサーバーはTiKVサーバーに悲観的ロック要求を開始し、ロックは TiKVサーバーに永続化されます。
+3.  (楽観的トランザクション モードと同じ) クライアントがコミット要求を送信すると、TiDB は楽観的トランザクション モードと同様に 2 フェーズ コミットの実行を開始します。
 
 ![Pessimistic transactions in TiDB](/media/pessimistic-transaction-in-tidb.png)
 
-## Pipelined locking process
+## パイプライン化されたロックプロセス {#pipelined-locking-process}
 
-Adding a pessimistic lock requires writing data into TiKV. The response of successfully adding a lock can only be returned to TiDB after commit and apply through Raft. Therefore, compared with optimistic transactions, the pessimistic transaction mode inevitably has higher latency.
+悲観的ロックを追加するには、TiKVへのデータ書き込みが必要です。ロック追加成功のレスポンスは、 Raftを介したコミットと適用後にのみTiDBに返されます。そのため、楽観的トランザクションと比較して、悲観的トランザクションモードでは必然的にレイテンシーが高くなります。
 
-To reduce the overhead of locking, TiKV implements the pipelined locking process: when the data meets the requirements for locking, TiKV immediately notifies TiDB to execute subsequent requests and writes into the pessimistic lock asynchronously. This process reduces most latency and significantly improves the performance of pessimistic transactions. However, when network partition occurs in TiKV or a TiKV node is down, the asynchronous write into the pessimistic lock might fail and affect the following aspects:
+ロックのオーバーヘッドを削減するため、TiKVはパイプライン化されたロック処理を実装しています。データがロックの要件を満たすと、TiKVは直ちにTiDBに後続のリクエストの実行を通知し、悲観的ロックへの非同期書き込みを実行します。この処理により、レイテンシーが大幅に削減され、悲観的トランザクションのパフォーマンスが大幅に向上します。ただし、TiKVでネットワーク分断が発生した場合、またはTiKVノードがダウンした場合、悲観的ロックへの非同期書き込みが失敗し、以下の影響が生じる可能性があります。
 
-* Other transactions that modify the same data cannot be blocked. If the application logic relies on locking or lock waiting mechanisms, the correctness of the application logic is affected.
+-   同じデータを変更する他のトランザクションをブロックすることはできません。アプリケーションロジックがロックまたはロック待機メカニズムに依存している場合、アプリケーションロジックの正確性に影響が出ます。
 
-* There is a low probability that the transaction commit fails, but it does not affect the correctness of the transactions.
+-   トランザクションのコミットが失敗する可能性は低いですが、トランザクションの正確性には影響しません。
 
 <CustomContent platform="tidb">
 
-If the application logic relies on the locking or lock waiting mechanisms, or if you want to guarantee as much as possible the success rate of transaction commits even in the case of TiKV cluster anomalies, you should disable the pipelined locking feature.
+アプリケーション ロジックがロックまたはロック待機メカニズムに依存している場合、または TiKV クラスターの異常が発生した場合でもトランザクション コミットの成功率を可能な限り保証したい場合は、パイプライン ロック機能を無効にする必要があります。
 
 ![Pipelined pessimistic lock](/media/pessimistic-transaction-pipelining.png)
 
-This feature is enabled by default. To disable it, modify the TiKV configuration:
+この機能はデフォルトで有効になっています。無効にするには、TiKVの設定を変更してください。
 
 ```toml
 [pessimistic-txn]
 pipelined = false
 ```
 
-If the TiKV cluster is v4.0.9 or later, you can also dynamically disable this feature by [modifying TiKV configuration dynamically](/dynamic-config.md#modify-tikv-configuration-dynamically):
-
-{{< copyable "sql" >}}
+TiKV クラスターが v4.0.9 以降の場合は、 [TiKV設定を動的に変更する](/dynamic-config.md#modify-tikv-configuration-dynamically)を実行してこの機能を動的に無効にすることもできます。
 
 ```sql
 set config tikv pessimistic-txn.pipelined='false';
@@ -191,40 +183,38 @@ set config tikv pessimistic-txn.pipelined='false';
 
 <CustomContent platform="tidb-cloud">
 
-If the application logic relies on the locking or lock waiting mechanisms, or if you want to guarantee as much as possible the success rate of transaction commits even in the case of TiKV cluster anomalies, you can [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to disable the pipelined locking feature.
+アプリケーション ロジックがロックまたはロック待機メカニズムに依存している場合、または TiKV クラスターの異常が発生した場合でもトランザクション コミットの成功率を可能な限り保証したい場合は、パイプライン ロック機能を[TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)無効にすることができます。
 
 </CustomContent>
 
-## In-memory pessimistic lock
+## メモリ内悲観的ロック {#in-memory-pessimistic-lock}
 
-In v6.0.0, TiKV introduces the feature of in-memory pessimistic lock. When this feature is enabled, pessimistic locks are usually stored in the memory of the Region leader only, and are not persisted to disk or replicated through Raft to other replicas. This feature can greatly reduce the overhead of acquiring pessimistic locks and improve the throughput of pessimistic transactions.
+v6.0.0では、TiKVにインメモリ悲観的ロック機能が導入されました。この機能を有効にすると、悲観的ロックは通常、リージョンリーダーのメモリにのみ保存され、ディスクに永続化されず、 Raftを介して他のレプリカに複製されることもありません。この機能により、悲観的ロックの取得にかかるオーバーヘッドが大幅に削減され、悲観的トランザクションのスループットが向上します。
 
 <CustomContent platform="tidb">
 
-When the memory usage of in-memory pessimistic locks exceeds the memory threshold of the [Region](/tikv-configuration-file.md#in-memory-peer-size-limit-new-in-v840) or the [TiKV node](/tikv-configuration-file.md#in-memory-instance-size-limit-new-in-v840), the acquisition of pessimistic locks turns to the [pipelined locking process](#pipelined-locking-process). When the Region is merged or the leader is transferred, to avoid the loss of the pessimistic lock, TiKV writes the in-memory pessimistic lock to disk and replicates it to other replicas.
+インメモリ悲観的ロックのメモリ使用量が[リージョン](/tikv-configuration-file.md#in-memory-peer-size-limit-new-in-v840)または[TiKVノード](/tikv-configuration-file.md#in-memory-instance-size-limit-new-in-v840)のメモリしきい値を超えると、悲観的ロックの取得は[パイプライン化されたロックプロセス](#pipelined-locking-process)に切り替わります。リージョンの統合やリーダーの交代時には、悲観的的ロックの喪失を回避するため、TiKVはインメモリ悲観的ロックをディスクに書き込み、他のレプリカに複製します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-When the memory usage of in-memory pessimistic locks exceeds the memory threshold of the [Region](https://docs.pingcap.com/tidb/dev/tikv-configuration-file#in-memory-peer-size-limit-new-in-v840) or the [TiKV node](https://docs.pingcap.com/tidb/dev/tikv-configuration-file#in-memory-instance-size-limit-new-in-v840), the acquisition of pessimistic locks turns to the [pipelined locking process](#pipelined-locking-process). When the Region is merged or the leader is transferred, to avoid the loss of the pessimistic lock, TiKV writes the in-memory pessimistic lock to disk and replicates it to other replicas.
+インメモリ悲観的ロックのメモリ使用量が[リージョン](https://docs.pingcap.com/tidb/dev/tikv-configuration-file#in-memory-peer-size-limit-new-in-v840)または[TiKVノード](https://docs.pingcap.com/tidb/dev/tikv-configuration-file#in-memory-instance-size-limit-new-in-v840)のメモリしきい値を超えると、悲観的ロックの取得は[パイプライン化されたロックプロセス](#pipelined-locking-process)に切り替わります。リージョンの統合やリーダーの交代時には、悲観的的ロックの喪失を回避するため、TiKVはインメモリ悲観的ロックをディスクに書き込み、他のレプリカに複製します。
 
 </CustomContent>
 
-The in-memory pessimistic lock performs similarly to the pipelined locking process, which does not affect the lock acquisition when the cluster is healthy. However, when network isolation occurs in TiKV or a TiKV node is down, the acquired pessimistic lock might be lost.
+インメモリ悲観的ロックはパイプライン化されたロック処理と同様に動作し、クラスターが正常な場合はロックの取得に影響を与えません。ただし、TiKVでネットワーク分離が発生した場合、またはTiKVノードがダウンした場合、取得済みの悲観的ロックが失われる可能性があります。
 
-If the application logic relies on the lock acquiring or lock waiting mechanism, or if you want to guarantee as much as possible the success rate of transaction commits even when the cluster is in an abnormal state, you need to **disable** the in-memory pessimistic lock feature.
+アプリケーション ロジックがロック取得またはロック待機メカニズムに依存している場合、またはクラスターが異常な状態にある場合でもトランザクション コミットの成功率を可能な限り保証する場合は、メモリ内悲観的ロック機能**を無効にする**必要があります。
 
-This feature is enabled by default. To disable it, modify the TiKV configuration:
+この機能はデフォルトで有効になっています。無効にするには、TiKVの設定を変更してください。
 
 ```toml
 [pessimistic-txn]
 in-memory = false
 ```
 
-To dynamically disable this feature, modify the TiKV configuration dynamically:
-
-{{< copyable "sql" >}}
+この機能を動的に無効にするには、TiKV 構成を動的に変更します。
 
 ```sql
 set config tikv pessimistic-txn.in-memory='false';
@@ -232,7 +222,7 @@ set config tikv pessimistic-txn.in-memory='false';
 
 <CustomContent platform="tidb">
 
-Starting from v8.4.0, you can configure the memory usage limit for in-memory pessimistic locks in a Region or a TiKV instance using [`pessimistic-txn.in-memory-peer-size-limit`](/tikv-configuration-file.md#in-memory-peer-size-limit-new-in-v840) or [`pessimistic-txn.in-memory-instance-size-limit`](/tikv-configuration-file.md#in-memory-instance-size-limit-new-in-v840):
+v8.4.0 以降では、 [`pessimistic-txn.in-memory-peer-size-limit`](/tikv-configuration-file.md#in-memory-peer-size-limit-new-in-v840)または[`pessimistic-txn.in-memory-instance-size-limit`](/tikv-configuration-file.md#in-memory-instance-size-limit-new-in-v840)使用して、リージョンまたは TiKV インスタンス内のメモリ内悲観的ロックのメモリ使用量制限を設定できます。
 
 ```toml
 [pessimistic-txn]
@@ -240,7 +230,7 @@ in-memory-peer-size-limit = "512KiB"
 in-memory-instance-size-limit = "100MiB"
 ```
 
-To dynamically modify these limits, [modify TiKV configuration dynamically](/dynamic-config.md#modify-tikv-configuration-dynamically) as follows:
+これらの制限を動的に変更するには、 [TiKV設定を動的に変更する](/dynamic-config.md#modify-tikv-configuration-dynamically)のようにします。
 
 ```sql
 SET CONFIG tikv `pessimistic-txn.in-memory-peer-size-limit`="512KiB";

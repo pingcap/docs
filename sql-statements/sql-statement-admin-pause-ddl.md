@@ -1,15 +1,15 @@
 ---
 title: ADMIN PAUSE DDL JOBS
-summary: An overview of the usage of ADMIN PAUSE DDL JOBS for the TiDB database.
+summary: TiDB データベースの ADMIN PAUSE DDL JOBS の使用法の概要。
 ---
 
-# ADMIN PAUSE DDL JOBS
+# 管理者によるDDLジョブの一時停止 {#admin-pause-ddl-jobs}
 
-`ADMIN PAUSE DDL` allows you to pause a running DDL job. The `job_id` can be found by running [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md).
+`ADMIN PAUSE DDL`は実行中のDDLジョブを一時停止します。2 `job_id` [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)実行することで確認できます。
 
-You can use this statement to pause a DDL job that is issued but not yet completed executing. After the pause, the SQL statement that executes the DDL job does not return immediately, but looks like it is still running. If you try to pause a DDL job that has already been completed, you will see the `DDL Job:90 not found` error in the `RESULT` column, which indicates that the job has been removed from the DDL waiting queue.
+この文を使用すると、発行済みだがまだ実行が完了していないDDLジョブを一時停止できます。一時停止後、DDLジョブを実行するSQL文はすぐには戻りませんが、まだ実行中であるように見えます。すでに完了しているDDLジョブを一時停止しようとすると、列`RESULT`にエラー`DDL Job:90 not found`表示されます。これは、ジョブがDDL待機キューから削除されたことを示します。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AdminPauseDDLStmt ::=
@@ -19,42 +19,42 @@ NumList ::=
     Int64Num ( ',' Int64Num )*
 ```
 
-## Examples
+## 例 {#examples}
 
-`ADMIN PAUSE DDL JOBS` pauses the currently running DDL job and returns whether the job is paused successfully. The job can be resumed by `ADMIN RESUME DDL JOBS`.
+`ADMIN PAUSE DDL JOBS`現在実行中のDDLジョブを一時停止し、ジョブが正常に一時停止されたかどうかを返します。ジョブは`ADMIN RESUME DDL JOBS`で再開できます。
 
 ```sql
 ADMIN PAUSE DDL JOBS job_id [, job_id] ...;
 ```
 
-If the pause fails, the specific reason for the failure is displayed.
+一時停止に失敗した場合は、失敗の具体的な理由が表示されます。
 
 <CustomContent platform="tidb">
 
-> **Note:**
+> **注記：**
 >
-> + This statement can pause a DDL job, but other operations and environment changes (such as machine restarts and cluster restarts) do not pause DDL jobs except for cluster upgrades.
-> + During the cluster upgrade, the ongoing DDL jobs are paused, and the DDL jobs initiated during the upgrade are also paused. After the upgrade, all paused DDL jobs will resume. The pause and resume operations during the upgrade are taken automatically. For details, see [TiDB Smooth Upgrade](/smooth-upgrade-tidb.md).
-> + This statement can pause multiple DDL jobs. You can use the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) statement to obtain the `job_id` of a DDL job.
+> -   このステートメントは DDL ジョブを一時停止できますが、他の操作や環境の変更 (マシンの再起動やクラスターの再起動など) では、クラスターのアップグレードを除き、DDL ジョブは一時停止されません。
+> -   クラスタのアップグレード中は、実行中のDDLジョブが一時停止され、アップグレード中に開始されたDDLジョブも一時停止されます。アップグレード後、一時停止されていたすべてのDDLジョブは再開されます。アップグレード中の一時停止と再開の操作は自動的に実行されます。詳細は[TiDB スムーズアップグレード](/smooth-upgrade-tidb.md)ご覧ください。
+> -   このステートメントは複数のDDLジョブを一時停止できます。1 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)ステートメントを使用して、DDLジョブの`job_id`のステートメントを取得できます。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> + This statement can pause a DDL job, but other operations and environment changes (such as machine restarts and cluster restarts) do not pause DDL jobs except for cluster upgrades.
-> + During the cluster upgrade, the ongoing DDL jobs are paused, and the DDL jobs initiated during the upgrade are also paused. After the upgrade, all paused DDL jobs will resume. The pause and resume operations during the upgrade are taken automatically. For details, see [TiDB Smooth Upgrade](https://docs.pingcap.com/tidb/stable/smooth-upgrade-tidb).
-> + This statement can pause multiple DDL jobs. You can use the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) statement to obtain the `job_id` of a DDL job.
+> -   このステートメントは DDL ジョブを一時停止できますが、他の操作や環境の変更 (マシンの再起動やクラスターの再起動など) では、クラスターのアップグレードを除き、DDL ジョブは一時停止されません。
+> -   クラスタのアップグレード中は、実行中のDDLジョブが一時停止され、アップグレード中に開始されたDDLジョブも一時停止されます。アップグレード後、一時停止されていたすべてのDDLジョブは再開されます。アップグレード中の一時停止と再開の操作は自動的に実行されます。詳細は[TiDB スムーズアップグレード](https://docs.pingcap.com/tidb/stable/smooth-upgrade-tidb)ご覧ください。
+> -   このステートメントは複数のDDLジョブを一時停止できます。1 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)ステートメントを使用して、DDLジョブの`job_id`のステートメントを取得できます。
 
 </CustomContent>
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
-* [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
-* [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)
-* [`ADMIN ALTER DDL`](/sql-statements/sql-statement-admin-alter-ddl.md)
+-   [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
+-   [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)
+-   [`ADMIN ALTER DDL`](/sql-statements/sql-statement-admin-alter-ddl.md)

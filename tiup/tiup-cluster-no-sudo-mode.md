@@ -1,33 +1,33 @@
 ---
 title: Deploy and Maintain an Online TiDB Cluster Using TiUP No-sudo Mode
-summary: Learn how to deploy and maintain an online TiDB cluster using the TiUP no-sudo mode.
+summary: TiUP no-sudo モードを使用してオンライン TiDB クラスターを展開および管理する方法を学習します。
 ---
 
-# Deploy and Maintain an Online TiDB Cluster Using TiUP No-sudo Mode
+# TiUP No-sudo モードを使用してオンライン TiDBクラスタをデプロイおよび管理 {#deploy-and-maintain-an-online-tidb-cluster-using-tiup-no-sudo-mode}
 
-This document describes how to use the TiUP no-sudo mode to deploy a cluster.
+このドキュメントでは、 TiUP no-sudo モードを使用してクラスターをデプロイする方法について説明します。
 
-> **Note:**
+> **注記：**
 >
-> For CentOS, only CentOS 8 or later versions are supported.
+> CentOS の場合、CentOS 8 以降のバージョンのみがサポートされます。
 
-## Prepare the user and configure the SSH mutual trust
+## ユーザーを準備し、SSH相互信頼を構成する {#prepare-the-user-and-configure-the-ssh-mutual-trust}
 
-This document takes the `tidb` user as an example.
+このドキュメントでは、 `tidb`ユーザーを例に挙げます。
 
-1. Log in to all the target machines as the `root` user, create a user named `tidb` and configure the system resource limits for this user as follows:
+1.  すべてのターゲット マシンに`root`ユーザーとしてログインし、 `tidb`という名前のユーザーを作成し、このユーザーのシステム リソース制限を次のように構成します。
 
-    > **Note:**
+    > **注記：**
     >
-    > In no-sudo mode, configuring passwordless sudo for the `tidb` user is unnecessary, that is, you do not need to add the `tidb` user to the `sudoers` file.
+    > no-sudo モードでは、 `tidb`ユーザーに対してパスワードなしの sudo を構成する必要はありません。つまり、 `tidb`ユーザーを`sudoers`ファイルに追加する必要はありません。
 
-    1. Add the `tidb` user:
+    1.  `tidb`ユーザーを追加します:
 
         ```shell
         adduser tidb
         ```
 
-    2. Configure the resource limits for the `tidb` user:
+    2.  `tidb`ユーザーのリソース制限を構成します。
 
         ```shell
         cat << EOF >>/etc/security/limits.conf
@@ -40,9 +40,9 @@ This document takes the `tidb` user as an example.
         EOF
         ```
 
-2. Start the `systemd user` mode for the `tidb` user on each target machine. This step is required and do not skip it.
+2.  各ターゲットマシンで、ユーザー`tidb`の`systemd user`モードを起動します。この手順は必須ですので、スキップしないでください。
 
-    1. Use the `tidb` user to set the `XDG_RUNTIME_DIR` environment variable.
+    1.  `tidb`ユーザーを使用して`XDG_RUNTIME_DIR`環境変数を設定します。
 
         ```shell
         sudo -iu tidb  # Switch to the tidb user
@@ -51,7 +51,7 @@ This document takes the `tidb` user as an example.
         source ~/.bashrc.d/systemd
         ```
 
-    2. Use the `root` user to start the user service.
+    2.  `root`ユーザーを使用してユーザー サービスを開始します。
 
         ```shell
         $ uid=$(id -u tidb) # Get the ID of the tidb user
@@ -74,53 +74,53 @@ This document takes the `tidb` user as an example.
                   └─3358 /usr/bin/pulseaudio --daemonize=no --log-target=journal
         ```
 
-    3. Execute `systemctl --user`. If no errors occur, it indicates that the `systemd user` mode has started successfully.
+    3.  `systemctl --user`実行します。エラーが発生しない場合は、 `systemd user`モードが正常に開始されたことを示します。
 
-3. Use the `root` user to execute the following command to enable lingering for the systemd user `tidb`.
+3.  `root`ユーザーを使用して次のコマンドを実行し、 systemd ユーザー`tidb`の lingering を有効にします。
 
     ```shell
     loginctl enable-linger tidb
     loginctl show-user -p Linger tidb # This should show: Linger=yes
     ```
 
-    You can read the systemd documentation for reference, [Automatic start-up of systemd user instances](https://wiki.archlinux.org/title/Systemd/User#Automatic_start-up_of_systemd_user_instances).
+    参考として、systemd のドキュメント[systemd ユーザーインスタンスの自動起動](https://wiki.archlinux.org/title/Systemd/User#Automatic_start-up_of_systemd_user_instances)読んでみてください。
 
-4. Generate a key using `ssh-keygen` on the control machine:
+4.  制御マシンで`ssh-keygen`使用してキーを生成します。
 
     ```shell
     ssh-keygen
     ```
 
-5. Copy the public key to the other machines in the cluster to establish SSH trust.
+5.  SSH 信頼を確立するには、公開キーをクラスター内の他のマシンにコピーします。
 
-    - If you have set a password for the `tidb` user, you can use `ssh-copy-id` command to copy the public key to the target machine.
+    -   `tidb`ユーザーにパスワードを設定している場合は、 `ssh-copy-id`コマンドを使用して公開キーをターゲット マシンにコピーできます。
 
         ```shell
         ssh-copy-id tidb@host
         ```
 
-        You need to replace `host` with the hostname of the target machine and run this command on each of the other machines in the cluster.
+        `host`ターゲット マシンのホスト名に置き換え、クラスター内の他の各マシンでこのコマンドを実行する必要があります。
 
-    - If you use a different method to copy the public key, make sure to check the permissions of the `/home/tidb/.ssh/authorized_keys` file after the copy.
+    -   別の方法で公開鍵をコピーする場合は、コピー後に`/home/tidb/.ssh/authorized_keys`ファイルの権限を必ず確認してください。
 
         ```shell
         chown -R tidb:tidb /home/tidb/.ssh/authorized_keys
         chmod 600 /home/tidb/.ssh/authorized_keys
         ```
 
-## Prepare the topology file
+## トポロジファイルを準備する {#prepare-the-topology-file}
 
-1. Execute the following command to generate the topology file.
+1.  次のコマンドを実行してトポロジ ファイルを生成します。
 
     ```shell
     tiup cluster template > topology.yaml
     ```
 
-2. Edit the topology file.
+2.  トポロジ ファイルを編集します。
 
-    Compared with the regular mode, when using TiUP in no-sudo mode, you need to add a line `systemd_mode: "user"` in the `global` module of the `topology.yaml` file. The `systemd_mode` parameter is used to set whether to use the `systemd user` mode. If this parameter is not set, the default value is `system`, meaning sudo permissions are required.
+    通常モードと比較して、 TiUPをno-sudoモードで使用する場合は、 `topology.yaml`ファイルの`global`モジュールに`systemd_mode: "user"`行目を追加する必要があります。7パラメータ`systemd_mode` 、 `systemd user`モードを使用するかどうかを設定するために使用されます。このパラメータが設定されていない場合、デフォルト値は`system`で、sudo権限が必要であることを意味します。
 
-    Additionally, in no-sudo mode, because the non-root `tidb` user does not have permission to use the `/data` directory as `deploy_dir` or `data_dir`, you must select a path accessible to non-root users. The following example uses relative paths, and the actual paths used are `/home/tidb/data/tidb-deploy` and `/home/tidb/data/tidb-data`. The rest of the topology file remains the same as in the regular mode. Another option is to use the root user to create the directories and then use `chown` to change the ownership to `tidb:tidb`.
+    さらに、no-sudoモードでは、非rootユーザー`tidb`は`/data`ディレクトリを`deploy_dir`または`data_dir`として使用する権限がないため、非rootユーザーがアクセスできるパスを選択する必要があります。以下の例では相対パスを使用しており、実際に使用されるパスは`/home/tidb/data/tidb-deploy`と`/home/tidb/data/tidb-data`です。トポロジファイルの残りの部分は、通常モードと同じです。別の方法として、rootユーザーを使用してディレクトリを作成し、その後`chown`を使用して所有権を`tidb:tidb`に変更することもできます。
 
     ```yaml
     global:
@@ -133,13 +133,13 @@ This document takes the `tidb` user as an example.
       ...
     ```
 
-## Manually repair failed check items
+## 失敗したチェック項目を手動で修復する {#manually-repair-failed-check-items}
 
-> **Note:**
+> **注記：**
 >
-> If you use a minimal install, make sure the `tar` package is installed. Otherwise, the `tiup cluster check` command will fail.
+> 最小インストールを使用する場合は、 `tar`パッケージがインストールされていることを確認してください。インストールされていない場合、 `tiup cluster check`コマンドは失敗します。
 
-Executing `tiup cluster check topology.yaml --user tidb` can generate some failed check items. The following is an example.
+`tiup cluster check topology.yaml --user tidb`実行すると、いくつかのチェック項目が失敗する可能性があります。以下に例を示します。
 
 ```shell
 Node            Check         Result  Message
@@ -158,53 +158,53 @@ Node            Check         Result  Message
 192.168.124.27  service       Fail    service firewalld is running but should be stopped
 ```
 
-In no-sudo mode, the `tidb` user does not have sudo permissions. As a result, running `tiup cluster check topology.yaml --apply --user tidb` cannot automatically fix the failed check items. You need to manually fix it by using the `root` user on the target machines.
+no-sudoモードでは、 `tidb`ユーザーにはsudo権限がありません。そのため、 `tiup cluster check topology.yaml --apply --user tidb`実行しても失敗したチェック項目を自動的に修正することはできません。対象マシンで`root`ユーザーを使用して手動で修正する必要があります。
 
-For more information, see [TiDB Environment and System Configuration Check](/check-before-deployment.md). Note that you need to skip the step [Manually configure the SSH mutual trust and sudo without password](/check-before-deployment.md#manually-configure-the-ssh-mutual-trust-and-sudo-without-password) in the document.
+詳細については、 [TiDB環境とシステムコンフィグレーションのチェック](/check-before-deployment.md)参照してください。ドキュメントの手順[SSH相互信頼とパスワードなしのsudoを手動で設定する](/check-before-deployment.md#manually-configure-the-ssh-mutual-trust-and-sudo-without-password)スキップする必要があることに注意してください。
 
-## Deploy and manage the cluster
+## クラスターのデプロイと管理 {#deploy-and-manage-the-cluster}
 
-To use the `tidb` user created in preceding steps and avoid creating a new one, add `--user tidb` when running the following `deploy` command:
+前の手順で作成した`tidb`ユーザーを使用し、新しいユーザーを作成しないようにするには、次の`deploy`コマンドを実行するときに`--user tidb`追加します。
 
 ```shell
 tiup cluster deploy mycluster v8.5.0 topology.yaml --user tidb
 ```
 
-> **Note:**
+> **注記：**
 >
-> You need to replace `v8.5.0` in the preceding command with the TiDB version that you want to deploy and `mycluster` with the name you want to give to your cluster.
+> 上記のコマンドの`v8.5.0` 、デプロイする TiDB バージョンに置き換え、 `mycluster`クラスターに付ける名前に置き換える必要があります。
 
-Start the cluster:
+クラスターを起動します。
 
 ```shell
 tiup cluster start mycluster
 ```
 
-Scale out the cluster:
+クラスターをスケールアウトします。
 
 ```shell
 tiup cluster scale-out mycluster scale.yaml --user tidb
 ```
 
-Scale in the cluster:
+クラスターのスケールイン:
 
 ```shell
 tiup cluster scale-in mycluster -N 192.168.124.27:20160
 ```
 
-Upgrade the cluster:
+クラスターをアップグレードします。
 
 ```shell
 tiup cluster upgrade mycluster v8.2.0
 ```
 
-## FAQ
+## FAQ {#faq}
 
-### The `Trying to run as user instance, but $XDG_RUNTIME_DIR is not set.` error occurs when starting user@.service
+### &lt;user@.service&gt; の起動時に<code>Trying to run as user instance, but $XDG_RUNTIME_DIR is not set.</code>エラーが発生します。 {#the-code-trying-to-run-as-user-instance-but-xdg-runtime-dir-is-not-set-code-error-occurs-when-starting-x3c-user-service}
 
-This issue might be caused by the absence of `pam_systemd.so` in your `/etc/pam.d/system-auth.ued` file.
+この問題は、 `/etc/pam.d/system-auth.ued`ファイルに`pam_systemd.so`存在しないために発生する可能性があります。
 
-To resolve this issue, use the following command to check whether the `/etc/pam.d/system-auth.ued` file contains the `pam_systemd.so` module. If not, append `session optional pam_systemd.so` to the end of the file.
+この問題を解決するには、次のコマンドを使用して、 `/etc/pam.d/system-auth.ued`ファイルに`pam_systemd.so`モジュールが含まれているかどうかを確認します。含まれていない場合は、ファイルの末尾に`session optional pam_systemd.so`追加します。
 
 ```shell
 grep 'pam_systemd.so' /etc/pam.d/system-auth.ued || echo 'session     optional      pam_systemd.so' >> /etc/pam.d/system-auth.ued

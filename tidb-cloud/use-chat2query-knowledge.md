@@ -1,38 +1,38 @@
 ---
 title: Use Knowledge Bases
-summary: Learn how to improve your Chat2Query results by using Chat2Query knowledge base APIs.
+summary: Chat2Query ナレッジ ベース API を使用して Chat2Query の結果を改善する方法を学びます。
 ---
 
-# Use Knowledge Bases
+# ナレッジベースを使用する {#use-knowledge-bases}
 
-A knowledge base is a collection of structured data that can be used to enhance the SQL generation capabilities of Chat2Query.
+ナレッジ ベースは、Chat2Query の SQL 生成機能を強化するために使用できる構造化データのコレクションです。
 
-Starting from v3, the Chat2Query API enables you to add or modify knowledge bases by calling knowledge base related endpoints of your Chat2Query Data App.
+v3 以降、Chat2Query API を使用すると、Chat2Query データ アプリのナレッジ ベース関連のエンドポイントを呼び出すことによって、ナレッジ ベースを追加または変更できるようになります。
 
-> **Note:**
+> **注記：**
 >
-> Knowledge base related endpoints are available for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters by default. To use knowledge base related endpoints on [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+> ナレッジベース関連エンドポイントは、デフォルトで[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターで利用可能です。3 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)でナレッジベース関連エンドポイントをご利用になる場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
-## Before you begin
+## 始める前に {#before-you-begin}
 
-Before creating a knowledge base for your database, make sure that you have the following:
+データベースのナレッジ ベースを作成する前に、次のものを用意してください。
 
-- A [Chat2Query Data App](/tidb-cloud/use-chat2query-api.md#create-a-chat2query-data-app)
-- An [API key for the Chat2Query Data App](/tidb-cloud/use-chat2query-api.md#create-an-api-key)
+-   A [Chat2Queryデータアプリ](/tidb-cloud/use-chat2query-api.md#create-a-chat2query-data-app)
+-   [Chat2QueryデータアプリのAPIキー](/tidb-cloud/use-chat2query-api.md#create-an-api-key)
 
-## Step 1. Create a knowledge base for the linked database
+## ステップ1. リンクされたデータベースのナレッジベースを作成する {#step-1-create-a-knowledge-base-for-the-linked-database}
 
-> **Note:**
+> **注記：**
 >
-> The knowledge used by Chat2Query is **structured according to the database dimension**. You can connect multiple Chat2Query Data Apps to the same database, but each Chat2Query Data App can only use knowledge from a specific database it is linked to.
+> Chat2Queryが使用する知識は、**データベースのディメンションに基づいて構造化されて**います。複数のChat2Queryデータアプリを同じデータベースに接続できますが、各Chat2Queryデータアプリは、リンクされている特定のデータベースの知識のみを使用できます。
 
-In your Chat2Query Data App, you can create a knowledge base for a specific database by calling the `/v3/knowledgeBases` endpoint. After creation, you will get a `knowledge_base_id` for future knowledge management.
+Chat2Queryデータアプリでは、エンドポイント`/v3/knowledgeBases`呼び出すことで、特定のデータベースのナレッジベースを作成できます。作成後は、将来のナレッジ管理のために`knowledge_base_id`付与されます。
 
-The following is a general code example for calling this endpoint.
+以下は、このエンドポイントを呼び出すための一般的なコード例です。
 
-> **Tip:**
+> **ヒント：**
 >
-> To get a specific code example for your endpoint, click the endpoint name in the left pane of your Data App, and then click **Show Code Example**. For more information, see [Get the example code of an endpoint](/tidb-cloud/use-chat2query-api.md#get-the-code-example-of-an-endpoint).
+> エンドポイントの具体的なコード例を取得するには、データアプリの左側のペインでエンドポイント名をクリックし、 **「コード例を表示」**をクリックします。詳細については、 [エンドポイントのサンプルコードを取得する](/tidb-cloud/use-chat2query-api.md#get-the-code-example-of-an-endpoint)参照してください。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/knowledgeBases'\
@@ -44,7 +44,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 }'
 ```
 
-An example response is as follows:
+応答の例は次のとおりです。
 
 ```json
 {
@@ -59,31 +59,31 @@ An example response is as follows:
 }
 ```
 
-After getting the response, record the `knowledge_base_id` value in your response for later use.
+応答を取得したら、後で使用するために応答内の`knowledge_base_id`値を記録します。
 
-## Step 2. Choose a knowledge type
+## ステップ2. 知識の種類を選択する {#step-2-choose-a-knowledge-type}
 
-The knowledge base of each database can contain multiple types of knowledge. Before adding knowledge to your knowledge base, you need to choose a knowledge type that best suits your use case.
+各データベースのナレッジベースには、複数の種類のナレッジを含めることができます。ナレッジベースにナレッジを追加する前に、ユースケースに最適なナレッジの種類を選択する必要があります。
 
-Currently, Chat2Query knowledge bases support the following knowledge types. Each type is specifically designed for different scenarios and has a unique knowledge structure.
+現在、Chat2Queryナレッジベースは以下のナレッジタイプをサポートしています。各タイプは異なるシナリオ向けに特別に設計されており、独自のナレッジ構造を持っています。
 
-- [Few-shot example](#few-shot-example)
-- [Term-sheet explanation](#term-sheet-explanation)
-- [Instruction](#instruction)
+-   [少数ショットの例](#few-shot-example)
+-   [契約書の説明](#term-sheet-explanation)
+-   [命令](#instruction)
 
-### Few-shot example
+### 少数ショットの例 {#few-shot-example}
 
-Few-shot example refers to the Q&A learning samples provided to Chat2Query, which include sample questions and their corresponding answers. These examples help Chat2Query handle new tasks more effectively.
+少数のサンプルとは、Chat2Queryに提供されるQ&amp;A学習サンプルを指します。サンプルの質問とそれに対応する回答が含まれています。これらのサンプルは、Chat2Queryが新しいタスクをより効率的に処理するのに役立ちます。
 
-> **Note:**
+> **注記：**
 >
-> Make sure the accuracy of newly added examples, because the quality of examples affects how well Chat2Query learns. Poor examples, such as mismatched questions and answers, can degrade the performance of Chat2Query on new tasks.
+> 新しく追加した例文の精度を確認してください。例文の質はChat2Queryの学習効率に影響します。質問と回答が一致しないなど、質の低い例は、新しいタスクにおけるChat2Queryのパフォーマンスを低下させる可能性があります。
 
-#### Knowledge structure
+#### 知識構造 {#knowledge-structure}
 
-Each example consists of a sample question and its corresponding answer.
+各例は、サンプルの質問とそれに対応する回答で構成されています。
 
-For example:
+例えば：
 
 ```json
 {
@@ -92,27 +92,27 @@ For example:
 }
 ```
 
-#### Use cases
+#### ユースケース {#use-cases}
 
-Few-Shot examples can significantly improve the performance of Chat2Query in various scenarios, including but not limited to the following:
+Few-Shot の例を使用すると、次のようなさまざまなシナリオで Chat2Query のパフォーマンスを大幅に向上させることができます。
 
-1. **When dealing with rare or complex questions**: if Chat2Query encounters infrequent or complex questions, adding few-shot examples can enhance its understanding and improve the accuracy of the results.
+1.  **まれな質問や複雑な質問を扱う場合**: Chat2Query がまれな質問や複雑な質問に遭遇した場合、数回の例を追加すると理解が深まり、結果の精度が向上します。
 
-2. **When struggling with a certain type of question**: if Chat2Query frequently makes mistakes or has difficulty with specific questions, adding few-shot examples can help improve its performance on these questions.
+2.  **特定の種類の質問に苦労している場合**: Chat2Query が頻繁に間違いを犯したり、特定の質問で困難を抱えたりする場合、少数の例を追加すると、これらの質問でのパフォーマンスの向上に役立ちます。
 
-### Term-sheet explanation
+### 契約書の説明 {#term-sheet-explanation}
 
-Term-sheet explanation refers to a comprehensive explanation of a specific term or a group of similar terms, helping Chat2Query understand the meaning and usage of these terms.
+用語シートの説明とは、特定の用語または類似の用語のグループに関する包括的な説明を指し、Chat2Query がこれらの用語の意味と使用法を理解するのに役立ちます。
 
-> **Note:**
+> **注記：**
 >
-> Make sure the accuracy of newly added term explanations, because the quality of explanations affects how well Chat2Query learns. Incorrect interpretations do not improve Chat2Query results but also potentially lead to adverse effects.
+> 新しく追加された用語の説明の正確性を確認してください。説明の質はChat2Queryの学習効率に影響します。誤った解釈はChat2Queryの結果を向上させるどころか、悪影響をもたらす可能性があります。
 
-#### Knowledge structure
+#### 知識構造 {#knowledge-structure}
 
-Each explanation includes either a single term or a list of similar terms and their detailed descriptions.
+それぞれの説明には、単一の用語、または類似の用語のリストとその詳細な説明が含まれます。
 
-For example:
+例えば：
 
 ```json
 {
@@ -121,28 +121,28 @@ For example:
 }
 ```
 
-#### Use cases
+#### ユースケース {#use-cases}
 
-Term-sheet explanation is primarily used to improve Chat2Query's comprehension of user queries, especially in these situations:
+条件書の説明は主に、特に次のような状況で、Chat2Query によるユーザークエリの理解を向上させるために使用されます。
 
-- **Dealing with industry-specific terminology or acronyms**: when your query contains industry-specific terminology or acronyms that might not be universally recognized, using a term-sheet explanation can help Chat2Query understand the meaning and usage of these terms.
-- **Dealing with ambiguities in user queries**: when your query contains ambiguous concepts that is confusing, using a term-sheet explanation can help Chat2Query clarify these ambiguities.
-- **Dealing with terms with various meanings**: when your query contains terms that carry different meanings in various contexts, using a term-sheet explanation can assist Chat2Query in discerning the correct interpretation.
+-   **業界固有の用語や頭字語への対処**: クエリに、一般的には認識されていない可能性のある業界固有の用語や頭字語が含まれている場合、用語シートの説明を使用すると、Chat2Query がこれらの用語の意味と使用法を理解するのに役立ちます。
+-   **ユーザークエリの曖昧さへの対処**: クエリに曖昧な概念が含まれており混乱を招く場合、用語シートの説明を使用すると、Chat2Query がこれらの曖昧さを明確にするのに役立ちます。
+-   **さまざまな意味を持つ用語の取り扱い**: クエリにさまざまなコンテキストで異なる意味を持つ用語が含まれている場合、用語シートの説明を使用すると、Chat2Query が正しい解釈を判断するのに役立ちます。
 
-### Instruction
+### 命令 {#instruction}
 
-Instruction is a piece of textual command. It is used to guide or control the behavior of Chat2Query, specifically instructing it on how to generate SQL according to specific requirements or conditions.
+命令とは、テキスト形式のコマンドです。Chat2Queryの動作をガイドまたは制御するために使用され、具体的には、特定の要件や条件に応じてSQLを生成する方法を指示します。
 
-> **Note:**
+> **注記：**
 >
-> - The instruction has a length limit of 512 characters.
-> - Make sure to provide as clear and specific instructions as possible to ensure that Chat2Query can understand and execute the instructions effectively.
+> -   命令の長さは 512 文字に制限されます。
+> -   Chat2Query が指示を効果的に理解して実行できるように、できるだけ明確で具体的な指示を提供するようにしてください。
 
-#### Knowledge structure
+#### 知識構造 {#knowledge-structure}
 
-Instruction only includes a piece of textual command.
+指示にはテキスト コマンドのみが含まれます。
 
-For example:
+例えば：
 
 ```json
 {
@@ -150,20 +150,20 @@ For example:
 }
 ```
 
-#### Use cases
+#### ユースケース {#use-cases}
 
-Instruction can be used in many scenarios to guide Chat2Query to output according to your requirements, including but not limited to the following:
+指示はさまざまなシナリオで使用でき、Chat2Query が要件に応じて出力するようにガイドできます。これには次のものが含まれますが、これらに限定されません。
 
-- **Limiting query scope**: if you want the SQL to consider only certain tables or columns, use an instruction to specify this.
-- **Guiding SQL structure**: if you have specific requirements for the SQL structure, use an instruction to guide Chat2Query.
+-   **クエリ範囲の制限**: SQL で特定のテーブルまたは列のみを考慮する場合は、これを指定する命令を使用します。
+-   **SQL 構造のガイド**: SQL 構造に特定の要件がある場合は、Chat2Query をガイドする指示を使用します。
 
-## Step 3. Add knowledge to the newly created knowledge base
+## ステップ3. 新しく作成したナレッジベースに知識を追加する {#step-3-add-knowledge-to-the-newly-created-knowledge-base}
 
-To add new knowledge, you can call the `/v3/knowledgeBases/{knowledge_base_id}/data` endpoint.
+新しい知識を追加するには、 `/v3/knowledgeBases/{knowledge_base_id}/data`エンドポイントを呼び出すことができます。
 
-### Add a few-shot example type of knowledge
+### 数ショットの例の知識を追加する {#add-a-few-shot-example-type-of-knowledge}
 
-For example, if you want Chat2Query to generate SQL statements of the count of rows in a table in a specific structure, you can add a few-shot example type of knowledge by calling `/v3/knowledgeBases/{knowledge_base_id}/data` as follows:
+たとえば、Chat2Query を使用して、特定の構造内のテーブル内の行数の SQL ステートメントを生成する場合は、次のように`/v3/knowledgeBases/{knowledge_base_id}/data`呼び出して、数回のサンプル タイプの知識を追加できます。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/knowledgeBases/<knowledge_base_id>/data'\
@@ -178,11 +178,11 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 }'
 ```
 
-In the preceding example code, `"type": "few-shot"` represents the few-shot example knowledge type.
+上記のコード例では、 `"type": "few-shot"`少数ショットの例の知識タイプを表します。
 
-### Add a term-sheet explanation type of knowledge
+### タームシートの説明タイプの知識を追加する {#add-a-term-sheet-explanation-type-of-knowledge}
 
-For example, if you want Chat2Query to comprehend the meaning of the term `OSS` using your provided explanation, you can add a term-sheet explanation type of knowledge by calling `/v3/knowledgeBases/{knowledge_base_id}/data` as follows:
+たとえば、提供された説明を使用して Chat2Query に用語`OSS`の意味を理解してもらいたい場合は、次のように`/v3/knowledgeBases/{knowledge_base_id}/data`呼び出して用語シートの説明タイプの知識を追加できます。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/knowledgeBases/<knowledge_base_id>/data'\
@@ -197,11 +197,11 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 }'
 ```
 
-In the preceding example code, `"type": "term-sheet"` represents the term-sheet explanation knowledge type.
+上記のコード例では、 `"type": "term-sheet"`用語シートの説明の知識タイプを表します。
 
-### Add an instruction type of knowledge
+### 指示タイプの知識を追加する {#add-an-instruction-type-of-knowledge}
 
-For example, if you want Chat2Query to consistently use the `LAG` function with the `OVER` clause in SQL queries when dealing with questions about sequential growth rate calculation, you can add an instruction type of knowledge by calling `/v3/knowledgeBases/{knowledge_base_id}/data` as follows:
+たとえば、連続成長率の計算に関する質問を処理するときに、Chat2Query が SQL クエリで`OVER`句を含む`LAG`関数を一貫して使用するようにしたい場合は、次のように`/v3/knowledgeBases/{knowledge_base_id}/data`呼び出して、指示タイプの知識を追加できます。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/knowledgeBases/<knowledge_base_id>/data'\
@@ -215,4 +215,4 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 }'
 ```
 
-In the preceding example code, `"type": "instruction"` represents the instruction knowledge type.
+上記のコード例では、 `"type": "instruction"`命令の知識タイプを表します。

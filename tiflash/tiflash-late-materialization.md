@@ -1,84 +1,78 @@
 ---
 title: TiFlash Late Materialization
-summary: Describe how to use the TiFlash late materialization feature to accelerate queries in OLAP scenarios.
+summary: TiFlash の遅延マテリアライゼーション機能を使用して、OLAP シナリオでクエリを高速化する方法について説明します。
 ---
 
-# TiFlash Late Materialization
+# TiFlash遅延マテリアライゼーション {#tiflash-late-materialization}
 
-> **Note:**
+> **注記：**
 >
-> TiFlash late materialization does not take effect in the [fast scan mode](/tiflash/use-fastscan.md).
+> TiFlash の遅延マテリアライゼーションは[高速スキャンモード](/tiflash/use-fastscan.md)では有効になりません。
 
-TiFlash late materialization is an optimization method to accelerate queries in OLAP scenarios. You can use the [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700) system variable to control whether to enable or disable TiFlash late materialization.
+TiFlash の遅延マテリアライゼーションは、OLAP シナリオにおけるクエリを高速化するための最適化手法です。システム変数[`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)使用して、 TiFlash の遅延マテリアライゼーションの有効化または無効化を制御できます。
 
-- When it is disabled, to process a `SELECT` statement with filter conditions (`WHERE` clause), TiFlash reads all the data from the columns required by the query, and then filters and aggregates the data based on the query conditions.
-- When it is enabled, TiFlash supports pushing down part of the filter conditions to the TableScan operator. That is, TiFlash first scans the column data related to the filter conditions that are pushed down to the TableScan operator, filters the rows that meet the condition, and then scans the other column data of these rows for further calculation, thereby reducing IO scans and computations of data processing.
+-   無効にすると、フィルタ条件（ `WHERE`句）を含む`SELECT`ステートメントを処理するために、 TiFlash はクエリに必要な列からすべてのデータを読み取り、クエリ条件に基づいてデータをフィルタリングして集計します。
+-   有効にすると、 TiFlash はフィルター条件の一部を TableScan オペレーターにプッシュダウンすることをサポートします。つまり、 TiFlash はまず TableScan オペレーターにプッシュダウンされたフィルター条件に関連する列データをスキャンし、条件を満たす行をフィルタリングした後、それらの行の残りの列データをスキャンしてさらに計算を行います。これにより、データ処理における IO スキャンと計算量が削減されます。
 
-To improve the performance of certain queries in OLAP scenarios, starting from v7.1.0, the TiFlash late materialization feature is enabled by default. The TiDB optimizer can determine which filter conditions to be pushed down based on statistics and filter conditions, and prioritize pushing down the filter conditions with high filtration rates. For detailed algorithms, see the [RFC document](https://github.com/pingcap/tidb/tree/release-8.5/docs/design/2022-12-06-support-late-materialization.md).
+OLAPシナリオにおける特定のクエリのパフォーマンスを向上させるため、v7.1.0以降ではTiFlashの遅延マテリアライゼーション機能がデフォルトで有効化されています。TiDBオプティマイザーは、統計情報とフィルタ条件に基づいてプッシュダウンするフィルタ条件を決定し、フィルタリング率の高いフィルタ条件を優先的にプッシュダウンします。詳細なアルゴリズムについては、 [RFC文書](https://github.com/pingcap/tidb/tree/release-8.5/docs/design/2022-12-06-support-late-materialization.md)参照してください。
 
-For example:
+例えば：
 
 ```sql
 EXPLAIN SELECT a, b, c FROM t1 WHERE a < 1;
 ```
 
-```
-+-------------------------+----------+--------------+---------------+-------------------------------------------------------+
-| id                      | estRows  | task         | access object | operator info                                         |
-+-------------------------+----------+--------------+---------------+-------------------------------------------------------+
-| TableReader_12          | 12288.00 | root         |               | MppVersion: 1, data:ExchangeSender_11                 |
-| └─ExchangeSender_11     | 12288.00 | mpp[tiflash] |               | ExchangeType: PassThrough                             |
-|   └─TableFullScan_9     | 12288.00 | mpp[tiflash] | table:t1      | pushed down filter:lt(test.t1.a, 1), keep order:false |
-+-------------------------+----------+--------------+---------------+-------------------------------------------------------+
-```
+    +-------------------------+----------+--------------+---------------+-------------------------------------------------------+
+    | id                      | estRows  | task         | access object | operator info                                         |
+    +-------------------------+----------+--------------+---------------+-------------------------------------------------------+
+    | TableReader_12          | 12288.00 | root         |               | MppVersion: 1, data:ExchangeSender_11                 |
+    | └─ExchangeSender_11     | 12288.00 | mpp[tiflash] |               | ExchangeType: PassThrough                             |
+    |   └─TableFullScan_9     | 12288.00 | mpp[tiflash] | table:t1      | pushed down filter:lt(test.t1.a, 1), keep order:false |
+    +-------------------------+----------+--------------+---------------+-------------------------------------------------------+
 
-In this example, the filter condition `a < 1` is pushed down to the TableScan operator. TiFlash first reads all data from column `a`, and then filters the rows that meet the `a < 1` condition. Next, TiFlash reads columns `b` and `c` from these filtered rows.
+この例では、フィルタ条件`a < 1` TableScan演算子にプッシュダウンされます。TiFlashはまず列`a`からすべてのデータを読み取り、次に条件`a < 1`を満たす行をフィルタリングします。次に、 TiFlashはフィルタリングされた行から列`b`と`c`読み取ります。
 
-## Enable or disable TiFlash late materialization
+## TiFlash の遅延マテリアライゼーションを有効または無効にする {#enable-or-disable-tiflash-late-materialization}
 
-By default, the `tidb_opt_enable_late_materialization` system variable is `ON` at both the session and global levels, which means that the TiFlash late materialization feature is enabled. You can use the following statement to view the corresponding variable information:
+デフォルトでは、システム変数`tidb_opt_enable_late_materialization`セッションレベルとグローバルレベルの両方で`ON`設定されており、これはTiFlash の遅延マテリアライゼーション機能が有効になっていることを意味します。対応する変数情報を表示するには、次のステートメントを使用します。
 
 ```sql
 SHOW VARIABLES LIKE 'tidb_opt_enable_late_materialization';
 ```
 
-```
-+--------------------------------------+-------+
-| Variable_name                        | Value |
-+--------------------------------------+-------+
-| tidb_opt_enable_late_materialization | ON    |
-+--------------------------------------+-------+
-```
+    +--------------------------------------+-------+
+    | Variable_name                        | Value |
+    +--------------------------------------+-------+
+    | tidb_opt_enable_late_materialization | ON    |
+    +--------------------------------------+-------+
 
 ```sql
 SHOW GLOBAL VARIABLES LIKE 'tidb_opt_enable_late_materialization';
 ```
 
-```
-+--------------------------------------+-------+
-| Variable_name                        | Value |
-+--------------------------------------+-------+
-| tidb_opt_enable_late_materialization | ON    |
-+--------------------------------------+-------+
-```
+    +--------------------------------------+-------+
+    | Variable_name                        | Value |
+    +--------------------------------------+-------+
+    | tidb_opt_enable_late_materialization | ON    |
+    +--------------------------------------+-------+
 
-You can modify the `tidb_opt_enable_late_materialization` variable at the session level or at the global level.
+`tidb_opt_enable_late_materialization`変数は、セッション レベルまたはグローバル レベルで変更できます。
 
-- To disable TiFlash late materialization in the current session, use the following statement:
+-   現在のセッションでTiFlash の遅延マテリアライゼーションを無効にするには、次のステートメントを使用します。
 
     ```sql
     SET SESSION tidb_opt_enable_late_materialization=OFF;
     ```
 
-- To disable TiFlash late materialization at the global level, use the following statement:
+-   グローバル レベルでTiFlash の遅延マテリアライゼーションを無効にするには、次のステートメントを使用します。
 
     ```sql
     SET GLOBAL tidb_opt_enable_late_materialization=OFF;
     ```
 
-    After this setting, the `tidb_opt_enable_late_materialization` variable will be enabled by default for both session and global levels in new sessions.
+    この設定後、新しいセッションでは、セッション レベルとグローバル レベルの両方で`tidb_opt_enable_late_materialization`変数がデフォルトで有効になります。
 
-To enable TiFlash late materialization, use the following statements:
+TiFlash の遅延マテリアライゼーションを有効にするには、次のステートメントを使用します。
 
 ```sql
 SET SESSION tidb_opt_enable_late_materialization=ON;
@@ -88,12 +82,12 @@ SET SESSION tidb_opt_enable_late_materialization=ON;
 SET GLOBAL tidb_opt_enable_late_materialization=ON;
 ```
 
-## Implementation mechanism
+## 実施メカニズム {#implementation-mechanism}
 
-When filter conditions are pushed down to the TableScan operator, the execution process of the TableScan operator mainly includes the following steps:
+フィルター条件が TableScan オペレーターにプッシュダウンされると、TableScan オペレーターの実行プロセスには主に次の手順が含まれます。
 
-1. Reads the three columns `<handle, del_mark, version>`, performs multi-version concurrency control (MVCC) filtering, and then generates the MVCC Bitmap.
-2. Reads the columns related to the filter conditions, filters the rows that meet the conditions, and then generates the Filter Bitmap.
-3. Performs an `AND` operation between the MVCC Bitmap and Filter Bitmap to generate the Final Bitmap.
-4. Reads the corresponding rows of the remaining columns according to the Final Bitmap.
-5. Merges the data read in steps 2 and 4, and then returns the results.
+1.  3 つの列`<handle, del_mark, version>`読み取り、マルチバージョン同時実行制御 (MVCC) フィルタリングを実行し、MVCC ビットマップを生成します。
+2.  フィルター条件に関連する列を読み取り、条件を満たす行をフィルターして、フィルター ビットマップを生成します。
+3.  MVCC ビットマップとフィルター ビットマップの間で`AND`演算を実行して、最終ビットマップを生成します。
+4.  最終ビットマップに従って、残りの列の対応する行を読み取ります。
+5.  手順 2 と 4 で読み取ったデータを結合し、結果を返します。

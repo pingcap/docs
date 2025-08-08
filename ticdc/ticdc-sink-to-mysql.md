@@ -1,15 +1,15 @@
 ---
 title: Replicate Data to MySQL-compatible Databases
-summary: Learn how to replicate data to TiDB or MySQL using TiCDC.
+summary: TiCDC を使用して TiDB または MySQL にデータを複製する方法を学習します。
 ---
 
-# Replicate Data to MySQL-compatible Databases
+# MySQL互換データベースにデータを複製する {#replicate-data-to-mysql-compatible-databases}
 
-This document describes how to replicate incremental data to the downstream TiDB database or other MySQL-compatible databases using TiCDC. It also introduces how to use the eventually consistent replication feature in disaster scenarios.
+このドキュメントでは、TiCDCを使用して、下流のTiDBデータベースまたはその他のMySQL互換データベースに増分データをレプリケーションする方法について説明します。また、災害シナリオにおいて結果整合性レプリケーション機能を使用する方法についても紹介します。
 
-## Create a replication task
+## レプリケーションタスクを作成する {#create-a-replication-task}
 
-Create a replication task by running the following command:
+次のコマンドを実行してレプリケーション タスクを作成します。
 
 ```shell
 cdc cli changefeed create \
@@ -24,125 +24,123 @@ ID: simple-replication-task
 Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":"2023-11-28T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":false,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
 ```
 
-- `--server`: The address of any TiCDC server in the TiCDC cluster.
-- `--changefeed-id`: The ID of the replication task. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
-- `--sink-uri`: The downstream address of the replication task. For details, see [Configure sink URI with `mysql`/`tidb`](#configure-sink-uri-for-mysql-or-tidb).
-- `--start-ts`: Specifies the starting TSO of the changefeed. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
-- `--target-ts`: Specifies the ending TSO of the changefeed. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
-- `--config`: Specifies the changefeed configuration file. For details, see [TiCDC Changefeed Configuration Parameters](/ticdc/ticdc-changefeed-config.md).
+-   `--server` : TiCDC クラスター内の任意の TiCDCサーバーのアドレス。
+-   `--changefeed-id` : レプリケーションタスクのID。形式は正規表現`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`に一致する必要があります。このIDが指定されていない場合、TiCDCは自動的にUUID（バージョン4形式）をIDとして生成します。
+-   `--sink-uri` : レプリケーションタスクのダウンストリームアドレス。詳細は[`mysql` / `tidb`でシンクURIを設定する](#configure-sink-uri-for-mysql-or-tidb)参照してください。
+-   `--start-ts` : チェンジフィードの開始TSOを指定します。このTSOから、TiCDCクラスターはデータのプルを開始します。デフォルト値は現在時刻です。
+-   `--target-ts` : チェンジフィードの終了TSOを指定します。このTSOまで、TiCDCクラスターはデータのプルを停止します。デフォルト値は空で、TiCDCはデータのプルを自動的に停止しません。
+-   `--config` : changefeed設定ファイルを指定します。詳細は[TiCDC Changefeedコンフィグレーションパラメータ](/ticdc/ticdc-changefeed-config.md)参照してください。
 
-> **Note:**
+> **注記：**
 >
-> - TiCDC only replicates incremental data. To initialize full data, use Dumpling/TiDB Lightning or BR.
-> - After the full data is initialized, you need to specify the `start-ts` as the TSO when the upstream backup is performed. For example, the `pos` value in the metadata file under the Dumpling directory, or the `backupTS` value in the log output after BR completes the backup.
+> -   TiCDCは増分データのみを複製します。完全なデータを初期化するには、 Dumpling/ TiDB LightningまたはBRを使用してください。
+> -   フルデータが初期化された後、上流バックアップを実行する際にTSOとして`start-ts`指定する必要があります。例えば、 Dumplingディレクトリ下のメタデータファイル内の値`pos` 、またはBRがバックアップを完了した後に出力されるログ内の値`backupTS`です。
 
-## Configure sink URI for MySQL or TiDB
+## MySQL または TiDB のシンク URI を構成する {#configure-sink-uri-for-mysql-or-tidb}
 
-Sink URI is used to specify the connection information of the TiCDC target system. The format is as follows:
+シンクURIは、TiCDCターゲットシステムの接続情報を指定するために使用されます。形式は次のとおりです。
 
-```
-[scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
-```
+    [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
 
-> **Note:**
+> **注記：**
 >
-> `/path` is not used for the MySQL sink.
+> `/path`は MySQL シンクには使用されません。
 
-Sample configuration for MySQL:
+MySQL のサンプル構成:
 
 ```shell
 --sink-uri="mysql://root:12345678@127.0.0.1:3306"
 ```
 
-The following are descriptions of sink URI parameters and parameter values that can be configured for MySQL or TiDB:
+以下は、MySQL または TiDB に対して構成できるシンク URI パラメータとパラメータ値の説明です。
 
-| Parameter/Parameter value    | Description                                             |
-| :------------ | :------------------------------------------------ |
-| `root`        | The username of the downstream database. To replicate data to TiDB or other MySQL-compatible databases, make sure that the downstream database user has [certain permissions](#permissions-required-for-the-downstream-database-user).                             |
-| `12345678`       | The password of the downstream database (can be encoded using Base64).                                      |
-| `127.0.0.1`    | The IP address of the downstream database.                               |
-| `3306`         | The port for the downstream database.                                 |
-| `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, the default value is `16`, and the maximum value is `1024`). |
-| `cache-prep-stmts` | Controls whether to use prepared statements when executing SQL in the downstream and enable prepared statement cache on the client side (optional, `true` by default). |
-| `multi-stmt-enable` | Controls whether the SQL statements executed downstream support multiple SQL statements separated by semicolons (optional, the default value is `true`). If it is set to `false`, each SQL statement is executed as a separate transaction. If it is set to `true`, `cache-prep-stmts` does not take effect. |
-| `max-txn-row` | The batch size of SQL statements executed to the downstream (optional, the default value is `256`, and the maximum value is `2048`). |
-| `max-multi-update-row` | The batch size of `UPDATE ROWS` SQL statements executed to the downstream when batch write (`batch-dml-enable`) is enabled, always less than `max-txn-row` (optional, the default value is `40`, and the maximum value is `256`). |
-| `max-multi-update-row-size` | The size limit of `UPDATE ROWS` SQL statements executed to the downstream when batch write (`batch-dml-enable`) is enabled. If the size exceeds this limit, each row is executed as a separate SQL statement (optional, the default value is `1024`, and the maximum value is `8192`). |
-| `ssl-ca` | The path of the CA certificate file needed to connect to the downstream MySQL instance (optional).  |
-| `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional). |
-| `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional). |
-| `time-zone` | The time zone used when connecting to the downstream MySQL instance, which is effective since v4.0.8. This is an optional parameter. If this parameter is not specified, the time zone of TiCDC service processes is used. If this parameter is set to an empty value, such as `time-zone=""`, no time zone is specified when TiCDC connects to the downstream MySQL instance and the default time zone of the downstream is used. |
-| `transaction-atomicity`  |  The atomicity level of a transaction. This is an optional parameter, with the default value of `none`. When the value is `table`, TiCDC ensures the atomicity of a single-table transaction. When the value is `none`, TiCDC splits the single-table transaction.  |
-| `batch-dml-enable` | Enables the batch write (batch-dml) feature (optional, the default value is `true`). |
-| `read-timeout` | The go-sql-driver parameter, [I/O read timeout](https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-readtimeout) (optional, the default value is `2m`). |
-| `write-timeout` | The go-sql-driver parameter, [I/O write timeout](https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-writetimeout) (optional, the default value is `2m`). |
-| `timeout` | The go-sql-driver parameter, [timeout for establishing connections](https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-timeout), also known as dial timeout (optional, the default value is `2m`). |
-| `tidb-txn-mode` | Specifies the [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) environment variable (optional, the default value is `optimistic`). |
-| `safe-mode` | Specifies how TiCDC handles `INSERT` and `UPDATE` statements when replicating data to the downstream. When it is `true`, TiCDC converts all upstream `INSERT` statements to `REPLACE INTO` statements, and all `UPDATE` statements to `DELETE` + `REPLACE INTO` statements. Before v6.1.3, the default value of this parameter is `true`. Starting from v6.1.3, the default value is changed to `false`. When TiCDC starts, it obtains a current timestamp `ThresholdTs`. For `INSERT` and `UPDATE` statements with `CommitTs` less than `ThresholdTs`, TiCDC converts them to `REPLACE INTO` statements and `DELETE` + `REPLACE INTO` statements respectively. For `INSERT` and `UPDATE` statements with `CommitTs` greater than or equal to `ThresholdTs`, `INSERT` statements are directly replicated to the downstream, while the behavior of `UPDATE` statements follows the [TiCDC Behavior in Splitting UPDATE Events](/ticdc/ticdc-split-update-behavior.md). |
+| パラメータ/パラメータ値                | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| :-------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `root`                      | ダウンストリームデータベースのユーザー名。TiDBまたはその他のMySQL互換データベースにデータを複製するには、ダウンストリームデータベースのユーザーに[特定の権限](#permissions-required-for-the-downstream-database-user)あることを確認してください。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `12345678`                  | ダウンストリーム データベースのパスワード (Base64 を使用してエンコードできます)。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `127.0.0.1`                 | ダウンストリーム データベースの IP アドレス。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `3306`                      | ダウンストリーム データベースのポート。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `worker-count`              | ダウンストリームに対して同時に実行できる SQL 文の数 (オプション、デフォルト値は`16` 、最大値は`1024` )。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `cache-prep-stmts`          | ダウンストリームで SQL を実行するときに準備済みステートメントを使用するかどうか、およびクライアント側でプリペアドステートメントキャッシュを有効にするかどうかを制御します (オプション、デフォルトは`true` )。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `multi-stmt-enable`         | 下流で実行されるSQL文が、セミコロンで区切られた複数のSQL文をサポートするかどうかを制御します（オプション、デフォルト値は`true` ）。 `false`に設定すると、各SQL文は個別のトランザクションとして実行されます。 `true`に設定すると、 `cache-prep-stmts`無効になります。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `max-txn-row`               | ダウンストリームに対して実行される SQL ステートメントのバッチ サイズ (オプション、デフォルト値は`256` 、最大値は`2048` )。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `max-multi-update-row`      | バッチ書き込み( `batch-dml-enable` )が有効な場合に下流に実行される`UPDATE ROWS` SQL文のバッチサイズ。常に`max-txn-row`未満です(オプション、デフォルト値は`40` 、最大値は`256` )。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `max-multi-update-row-size` | バッチ書き込み（ `batch-dml-enable` ）が有効な場合、下流に実行されるSQL文のサイズ制限`UPDATE ROWS` 。このサイズ制限を超えると、各行は個別のSQL文として実行されます（オプション、デフォルト値は`1024` 、最大値は`8192` ）。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `ssl-ca`                    | ダウンストリーム MySQL インスタンスに接続するために必要な CA 証明書ファイルのパス (オプション)。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `ssl-cert`                  | ダウンストリーム MySQL インスタンスに接続するために必要な証明書ファイルのパス (オプション)。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `ssl-key`                   | ダウンストリーム MySQL インスタンスに接続するために必要な証明書キー ファイルのパス (オプション)。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `time-zone`                 | 下流のMySQLインスタンスへの接続時に使用するタイムゾーン。v4.0.8以降で有効です。これはオプションパラメータです。このパラメータが指定されていない場合は、TiCDCサービスプロセスのタイムゾーンが使用されます。このパラメータが空の値（例： `time-zone=""` ）に設定されている場合、TiCDCが下流のMySQLインスタンスに接続する際にタイムゾーンは指定されず、下流のデフォルトのタイムゾーンが使用されます。                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `transaction-atomicity`     | トランザクションのアトミック性レベル。これはオプションのパラメータで、デフォルト値は`none`です。値が`table`場合、TiCDC は単一テーブルトランザクションのアトミック性を保証します。値が`none`の場合、TiCDC は単一テーブルトランザクションを分割します。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `batch-dml-enable`          | バッチ書き込み (batch-dml) 機能を有効にします (オプション、デフォルト値は`true` )。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `read-timeout`              | go-sql-driver パラメータ、 [I/O読み取りタイムアウト](https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-readtimeout) (オプション、デフォルト値は`2m` )。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `write-timeout`             | go-sql-driver パラメータ、 [I/O書き込みタイムアウト](https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-writetimeout) (オプション、デフォルト値は`2m` )。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `timeout`                   | go-sql-driver パラメータ[接続を確立するためのタイムアウト](https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-timeout)はダイヤル タイムアウトとも呼ばれます (オプション、デフォルト値は`2m` )。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `tidb-txn-mode`             | [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode)環境変数を指定します (オプション、デフォルト値は`optimistic` )。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `safe-mode`                 | TiCDC がダウンストリームにデータを複製するときに`INSERT`および`UPDATE`ステートメントを処理する方法を指定します。 `true`の場合、 TiCDC はアップストリームの`INSERT`ステートメントをすべて`REPLACE INTO`ステートメントに変換し、 `UPDATE`ステートメントをすべて`DELETE` + `REPLACE INTO`ステートメントに変換します。 v6.1.3 より前では、このパラメーターのデフォルト値は`true`です。 v6.1.3 以降では、デフォルト値は`false`に変更されます。 TiCDC が起動すると、現在のタイムスタンプ`ThresholdTs`取得します。 `CommitTs`が`ThresholdTs`より小さい`INSERT`および`UPDATE`ステートメントの場合、 TiCDC はそれらをそれぞれ`REPLACE INTO`ステートメントと`DELETE` + `REPLACE INTO`ステートメントに変換します。 `CommitTs`が`ThresholdTs`以上である`INSERT`および`UPDATE`ステートメントの場合、 `INSERT`ステートメントはダウンストリームに直接複製されますが、 `UPDATE`ステートメントの動作は[TiCDC の UPDATE イベントの分割動作](/ticdc/ticdc-split-update-behavior.md)に従います。 |
 
-To encode the database password in the sink URI using Base64, use the following command:
+Base64 を使用してシンク URI 内のデータベース パスワードをエンコードするには、次のコマンドを使用します。
 
 ```shell
 echo -n '12345678' | base64   # '12345678' is the password to be encoded.
 ```
 
-The encoded password is as follows:
+エンコードされたパスワードは次のとおりです。
 
 ```shell
 MTIzNDU2Nzg=
 ```
 
-> **Note:**
+> **注記：**
 >
-> When the sink URI parameters contain special characters such as `! * ' ( ) ; : @ & = + $ , / ? % # [ ]`, you need to escape the special characters, for example, in [URI Encoder](https://www.urlencoder.org/).
-> 
-> For example, if the username for connecting to the downstream database is `R&D (2)` and the certificate file path is `/data1/R&D (2).pem`, you need to escape these parameters as follows:
-> 
+> シンク URI パラメータに`! * ' ( ) ; : @ & = + $ , / ? % # [ ]`などの特殊文字が含まれている場合は、 [URIエンコーダ](https://www.urlencoder.org/)のように特殊文字をエスケープする必要があります。
+>
+> たとえば、ダウンストリーム データベースに接続するためのユーザー名が`R&D (2)`で、証明書ファイルのパスが`/data1/R&D (2).pem`の場合、これらのパラメーターを次のようにエスケープする必要があります。
+>
 > ```shell
 > --sink-uri="mysql://R%26D%20%282%29:MTIzNDU2Nzg%3D@127.0.0.1:3306/?ssl-cert=/data1/R%26D%20%282%29.pem"
 > #                    ^~~ ^~~^~~ ^~~            ^~~                                  ^~~ ^~~^~~ ^~~
 > ```
 
-## Permissions required for the downstream database user
+## ダウンストリームデータベースユーザーに必要な権限 {#permissions-required-for-the-downstream-database-user}
 
-To replicate data to TiDB or other MySQL-compatible databases, the downstream database user needs the following permissions:
+TiDB またはその他の MySQL 互換データベースにデータを複製するには、ダウンストリーム データベース ユーザーに次の権限が必要です。
 
-- `Select`
-- `Index`
-- `Insert`
-- `Update`
-- `Delete`
-- `Create`
-- `Drop`
-- `Alter`
-- `Create View`
+-   `Select`
+-   `Index`
+-   `Insert`
+-   `Update`
+-   `Delete`
+-   `Create`
+-   `Drop`
+-   `Alter`
+-   `Create View`
 
-To replicate [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md) to the downstream TiDB, the downstream database user also needs the `Super` permission.
+[`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md)ダウンストリーム TiDB に複製するには、ダウンストリーム データベース ユーザーに`Super`権限も必要です。
 
-If the downstream TiDB cluster has [read-only mode](/system-variables.md#tidb_restricted_read_only-new-in-v520) enabled, the downstream database user also needs the `RESTRICTED_REPLICA_WRITER_ADMIN` permission.
+ダウンストリーム TiDB クラスターで[読み取り専用モード](/system-variables.md#tidb_restricted_read_only-new-in-v520)有効になっている場合、ダウンストリーム データベース ユーザーには`RESTRICTED_REPLICA_WRITER_ADMIN`権限も必要です。
 
-## Eventually consistent replication in disaster scenarios
+## 災害シナリオにおける最終的に一貫性のあるレプリケーション {#eventually-consistent-replication-in-disaster-scenarios}
 
-Starting from v6.1.1, this feature becomes GA. Starting from v5.3.0, TiCDC supports backing up incremental data from an upstream TiDB cluster to an object storage or an NFS of the downstream cluster. When the upstream cluster encounters a disaster and becomes unavailable, TiCDC can restore the downstream data to the recent eventually consistent state. This is the eventually consistent replication capability provided by TiCDC. With this capability, you can switch applications to the downstream cluster quickly, avoiding long-time downtime and improving service continuity.
+この機能はv6.1.1以降でGAとなります。v5.3.0以降、TiCDCは上流TiDBクラスターから下流クラスターのオブジェクトstorageまたはNFSへの増分データのバックアップをサポートします。上流クラスターが災害に見舞われて利用できなくなった場合でも、TiCDCは下流データを最新の結果整合性のある状態に復元できます。これは、TiCDCが提供する結果整合性のあるレプリケーション機能です。この機能により、アプリケーションを下流クラスターに迅速に切り替えることができ、長時間のダウンタイムを回避し、サービスの継続性を向上させることができます。
 
-Currently, TiCDC can replicate incremental data from a TiDB cluster to another TiDB cluster or a MySQL-compatible database system (including Aurora, MySQL, and MariaDB). In case the upstream cluster crashes, TiCDC can restore data in the downstream cluster within 5 minutes, given the conditions that TiCDC replicates data normally before the crash, and the replication lag is small. It allows data loss of 10s at most, that is, RTO <= 5 min, and P95 RPO <= 10s.
+現在、TiCDCは、TiDBクラスタから別のTiDBクラスタ、またはMySQL互換データベースシステム（ Aurora、MySQL、MariaDBを含む）への増分データのレプリケーションが可能です。上流クラスタがクラッシュした場合、TiCDCがクラッシュ前に正常にデータをレプリケーションし、レプリケーション遅延が小さいという条件であれば、TiCDCは下流クラスタに5分以内にデータを復元できます。データ損失は最大10秒、つまりRTO &lt;= 5分、P95 RPO &lt;= 10秒を許容します。
 
-TiCDC replication lag increases in the following scenarios:
+次のシナリオでは、TiCDC レプリケーション ラグが増加します。
 
-- The TPS increases significantly in a short time.
-- Large or long transactions occur in the upstream.
-- The TiKV or TiCDC cluster in the upstream is reloaded or upgraded.
-- Time-consuming DDL statements, such as `add index`, are executed in the upstream.
-- The PD is configured with aggressive scheduling strategies, resulting in frequent transfer of Region leaders, or frequent Region merge or Region split.
+-   短時間でTPSが大幅に向上します。
+-   アップストリームで大規模または長いトランザクションが発生します。
+-   アップストリームの TiKV または TiCDC クラスターが再ロードまたはアップグレードされます。
+-   `add index`などの時間のかかる DDL ステートメントは、アップストリームで実行されます。
+-   PD は積極的なスケジュール戦略で構成されているため、リージョンリーダーの頻繁な転送、またはリージョンの頻繁なマージやリージョンの分割が発生します。
 
-> **Note:**
+> **注記：**
 >
-> Starting from v6.1.1, the eventually consistent replication feature of TiCDC supports Amazon S3-compatible object storage. Starting from v6.1.4, this feature supports GCS- and Azure-compatible object storage.
+> バージョン6.1.1以降、TiCDCの結果整合性レプリケーション機能はAmazon S3互換オブジェクトstorageをサポートします。バージョン6.1.4以降、この機能はGCSおよびAzure互換オブジェクトstorageをサポートします。
 
-### Prerequisites
+### 前提条件 {#prerequisites}
 
-- Prepare a highly available object storage or NFS for storing TiCDC's real-time incremental data backup files. These files can be accessed in case of a disaster in the upstream.
-- Enable this feature for changefeeds that need to have eventual consistency in disaster scenarios. To enable it, you can add the following configuration to the changefeed configuration file.
+-   TiCDCのリアルタイム増分データバックアップファイルを格納するための高可用性オブジェクトstorageまたはNFSを用意してください。これらのファイルは、上流で災害が発生した場合でもアクセスできます。
+-   災害シナリオにおいて最終的な一貫性を保つ必要がある変更フィードに対して、この機能を有効にします。この機能を有効にするには、変更フィード設定ファイルに以下の設定を追加します。
 
 ```toml
 [consistent]
@@ -161,12 +159,12 @@ flush-interval = 2000
 storage = "$SCHEME://logbucket/test-changefeed?endpoint=http://$ENDPOINT/"
 ```
 
-### Disaster recovery
+### 災害復旧 {#disaster-recovery}
 
-When a disaster happens in the primary cluster, you need to recover manually in the secondary cluster by running the `cdc redo` command. The recovery process is as follows.
+プライマリクラスターで災害が発生した場合、 `cdc redo`コマンドを実行してセカンダリクラスターで手動で復旧する必要があります。復旧プロセスは以下のとおりです。
 
-1. Ensure that all the TiCDC processes have exited. This is to prevent the primary cluster from resuming service during data recovery and prevent TiCDC from restarting data synchronization.
-2. Use cdc binary for data recovery. Run the following command:
+1.  すべてのTiCDCプロセスが終了していることを確認してください。これは、データ復旧中にプライマリクラスタがサービスを再開したり、TiCDCがデータ同期を再開したりするのを防ぐためです。
+2.  データ復旧にはcdcバイナリを使用してください。以下のコマンドを実行してください。
 
 ```shell
 cdc redo apply --tmp-dir="/tmp/cdc/redo/apply" \
@@ -174,8 +172,8 @@ cdc redo apply --tmp-dir="/tmp/cdc/redo/apply" \
     --sink-uri="mysql://normal:123456@10.0.10.55:3306/"
 ```
 
-In this command:
+このコマンドでは、
 
-- `tmp-dir`: Specifies the temporary directory for downloading TiCDC incremental data backup files.
-- `storage`: Specifies the address for storing the TiCDC incremental data backup files, either a URI of object storage or an NFS directory.
-- `sink-uri`: Specifies the secondary cluster address to restore the data to. Scheme can only be `mysql`.
+-   `tmp-dir` : TiCDC 増分データ バックアップ ファイルをダウンロードするための一時ディレクトリを指定します。
+-   `storage` : TiCDC 増分データ バックアップ ファイルを保存するためのアドレス (オブジェクトstorageの URI または NFS ディレクトリ) を指定します。
+-   `sink-uri` : データを復元するセカンダリクラスタアドレスを指定します。スキームは`mysql`のみに指定できます。

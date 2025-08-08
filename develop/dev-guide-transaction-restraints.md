@@ -1,37 +1,37 @@
 ---
 title: Transaction Restraints
-summary: Learn about transaction restraints in TiDB.
+summary: TiDB のトランザクション制約について学習します。
 ---
 
-# Transaction Restraints
+# トランザクション制限 {#transaction-restraints}
 
-This document briefly introduces the transaction restraints in TiDB.
+このドキュメントでは、TiDB におけるトランザクションの制約について簡単に説明します。
 
-## Isolation levels
+## 分離レベル {#isolation-levels}
 
-The isolation levels supported by TiDB are **RC (Read Committed)** and **SI (Snapshot Isolation)**, where **SI** is basically equivalent to the **RR (Repeatable Read)** isolation level.
+TiDB でサポートされている分離レベルは**RC (Read Committed)**と**SI** **(Snapshot Isolation)**です。SI は基本的に**RR (Repeatable Read)**分離レベルに相当します。
 
 ![isolation level](/media/develop/transaction_isolation_level.png)
 
-## Snapshot Isolation can avoid phantom reads
+## スナップショット分離によりファントムリードを回避できる {#snapshot-isolation-can-avoid-phantom-reads}
 
-The `SI` isolation level of TiDB can avoid **Phantom Reads**, but the `RR` in ANSI/ISO SQL standard cannot.
+TiDB の分離レベル`SI`では**ファントム リード**は回避できますが、ANSI/ISO SQL 標準の分離レベル`RR`では回避できません。
 
-The following two examples show what **phantom reads** is.
+次の 2 つの例は**、ファントム リードが**何であるかを示しています。
 
-- Example 1: **Transaction A** first gets `n` rows according to the query, and then **Transaction B** changes `m` rows other than these `n` rows or adds `m` rows that match the query of **Transaction A**. When **Transaction A** runs the query again, it finds that there are `n+m` rows that match the condition. It is like a phantom, so it is called a **phantom read**.
+-   例1：**トランザクションAは**まずクエリに従って`n`行を取得します。その後、**トランザクションBは**これらの`n`行以外の`m`行を変更するか、**トランザクションA**のクエリに一致する`m`行を追加します。**トランザクションAが**再度クエリを実行すると、条件に一致する行が`n+m`行あることがわかります。これはファントムリードに似ているため、**ファントムリード**と呼ばれます。
 
-- Example 2: **Admin A** changes the grades of all students in the database from specific scores to ABCDE grades, but **Admin B** inserts a record with a specific score at this time. When **Admin A** finishes changing and finds that there is still a record (the one inserted by **Admin B**) that has not been changed yet. That is a **phantom read**.
+-   例2：**管理者Aが**データベース内のすべての生徒の成績を特定スコアからABCDEスコアに変更しましたが、**管理者Bは**同時に特定のスコアを持つレコードを挿入しました。**管理者A**が変更を終えると、まだ変更されていないレコード（**管理者B**が挿入したレコード）が残っていることに気づきます。これが**ファントムリード**です。
 
-## SI cannot avoid write skew
+## SIは書き込みスキューを回避できない {#si-cannot-avoid-write-skew}
 
-TiDB's SI isolation level cannot avoid **write skew** exceptions. You can use the `SELECT FOR UPDATE` syntax to avoid **write skew** exceptions.
+TiDBのSI分離レベルでは**、書き込みスキュー**例外を回避できません。3構文`SELECT FOR UPDATE`使用することで、**書き込みスキュー**例外を回避できます。
 
-A **write skew** exception occurs when two concurrent transactions read different but related records, and then each transaction updates the data it reads and eventually commits the transaction. If there is a constraint between these related records that cannot be modified concurrently by multiple transactions, then the end result will violate the constraint.
+**書き込みスキュー**例外は、2つの同時トランザクションが異なるものの関連するレコードを読み取り、各トランザクションが読み取ったデータを更新し、最終的にトランザクションをコミットしたときに発生します。これらの関連レコード間に、複数のトランザクションによる同時変更が不可能な制約がある場合、最終結果はその制約に違反することになります。
 
-For example, suppose you are writing a doctor shift management program for a hospital. Hospitals typically require several doctors to be on call at the same time, but the minimum requirement is that at least one doctor is on call. Doctors can drop their shifts (for example, if they are feeling sick) as long as at least one doctor is on call during that shift.
+例えば、病院の医師シフト管理プログラムを作成するとします。病院では通常、複数の医師が同時にオンコール対応することが求められますが、最低要件として、少なくとも1人の医師がオンコール対応していることが挙げられます。医師は、例えば体調が優れない場合など、そのシフト中に少なくとも1人の医師がオンコール対応していれば、シフトを中断することができます。
 
-Now there is a situation where doctors `Alice` and `Bob` are on call. Both are feeling sick, so they decide to take sick leave. They happen to click the button at the same time. Let's simulate this process with the following program:
+今、医師`Alice`と`Bob`オンコール中です。二人とも体調が悪く、病気休暇を取ることにしました。そして、偶然にも同時にボタンをクリックしてしまいました。このプロセスを次のプログラムでシミュレートしてみましょう。
 
 <SimpleTab groupId="language">
 
@@ -160,7 +160,7 @@ public class EffectWriteSkew {
 
 <div label="Golang" value="golang">
 
-To adapt TiDB transactions, write a [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util) according to the following code:
+TiDB トランザクションを適応させるには、次のコードに従って[ユーティリティ](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)記述します。
 
 ```go
 package main
@@ -328,7 +328,7 @@ func createDoctor(db *sql.DB, id int, name string, onCall bool, shiftID int) err
 
 </SimpleTab>
 
-SQL log:
+SQL ログ:
 
 ```sql
 /* txn 1 */ BEGIN
@@ -341,7 +341,7 @@ SQL log:
 /* txn 1 */ COMMIT
 ```
 
-Running result:
+実行結果:
 
 ```sql
 mysql> SELECT * FROM doctors;
@@ -354,11 +354,11 @@ mysql> SELECT * FROM doctors;
 +----+-------+---------+----------+
 ```
 
-In both transactions, the application first checks if two or more doctors are on call; if so, it assumes that one doctor can safely take leave. Since the database uses the snapshot isolation, both checks return `2`, so both transactions move on to the next stage. `Alice` updates her record to be off duty, and so does `Bob`. Both transactions are successfully committed. Now there are no doctors on duty which violates the requirement that at least one doctor should be on call. The following diagram (quoted from **_Designing Data-Intensive Applications_**) illustrates what actually happens.
+どちらのトランザクションでも、アプリケーションはまず2人以上の医師が待機中かどうかを確認します。待機中の場合、1人の医師は安全に休暇を取得できると想定します。データベースはスナップショット分離を使用しているため、両方のチェックで`2`返され、両方のトランザクションが次の段階に進みます。3 `Alice`自身のレコードを非番として更新し、 `Bob`同様に更新します。両方のトランザクションが正常にコミットされました。これで、待機中の医師がいなくなり、少なくとも1人の医師が待機中であるという要件に違反します。次の図（ ***『Designing Data-Intensive Applications*** 』より引用）は、実際に何が起こるかを示しています。
 
 ![Write Skew](/media/develop/write-skew.png)
 
-Now let's change the sample program to use `SELECT FOR UPDATE` to avoid the write skew problem:
+ここで、書き込みスキューの問題を回避するために、サンプル プログラムを変更して`SELECT FOR UPDATE`使用します。
 
 <SimpleTab groupId="language">
 
@@ -653,7 +653,7 @@ func createDoctor(db *sql.DB, id int, name string, onCall bool, shiftID int) err
 
 </SimpleTab>
 
-SQL log:
+SQL ログ:
 
 ```sql
 /* txn 1 */ BEGIN
@@ -666,7 +666,7 @@ At least one doctor is on call
 /* txn 1 */ ROLLBACK
 ```
 
-Running result:
+実行結果:
 
 ```sql
 mysql> SELECT * FROM doctors;
@@ -679,15 +679,15 @@ mysql> SELECT * FROM doctors;
 +----+-------+---------+----------+
 ```
 
-## Support for `savepoint` and nested transactions
+## <code>savepoint</code>とネストされたトランザクションのサポート {#support-for-code-savepoint-code-and-nested-transactions}
 
-> **Note:**
+> **注記：**
 >
-> Starting from v6.2.0, TiDB supports the [`savepoint`](/sql-statements/sql-statement-savepoint.md) feature. If your TiDB cluster is earlier than v6.2.0, your TiDB cluster does not support the `PROPAGATION_NESTED` behavior. It is recommended to upgrade to v6.2.0 or a later version. If upgrading TiDB is not possible, and your applications are based on the **Java Spring** framework that uses the `PROPAGATION_NESTED` propagation behavior, you need to adapt it on the application side to remove the logic for nested transactions.
+> TiDBはv6.2.0以降、 [`savepoint`](/sql-statements/sql-statement-savepoint.md)機能をサポートします。v6.2.0より前のバージョンのTiDBクラスタでは、 `PROPAGATION_NESTED`動作はサポートされません。v6.2.0以降のバージョンへのアップグレードをお勧めします。TiDBのアップグレードが不可能で、アプリケーションが`PROPAGATION_NESTED`伝播動作を使用する**Java Spring**フレームワークをベースにしている場合は、アプリケーション側でネストされたトランザクションのロジックを削除する必要があります。
 
-The `PROPAGATION_NESTED` propagation behavior supported by **Spring** triggers a nested transaction, which is a child transaction that is started independently of the current transaction. A `savepoint` is recorded when the nested transaction starts. If the nested transaction fails, the transaction will roll back to the `savepoint` state. The nested transaction is part of the outer transaction and will be committed together with the outer transaction.
+**Spring**がサポートする`PROPAGATION_NESTED`伝播動作は、ネストされたトランザクション（現在のトランザクションとは独立して開始される子トランザクション）をトリガーします。ネストされたトランザクションの開始時に`savepoint`記録されます。ネストされたトランザクションが失敗した場合、トランザクションは`savepoint`番目の状態にロールバックされます。ネストされたトランザクションは外側のトランザクションの一部であり、外側のトランザクションと同時にコミットされます。
 
-The following example demonstrates the `savepoint` mechanism:
+次の例は、 `savepoint`メカニズムを示しています。
 
 ```sql
 mysql> BEGIN;
@@ -705,40 +705,40 @@ mysql> SELECT * FROM T2;
 +------+
 ```
 
-## Large transaction restrictions
+## 大規模取引制限 {#large-transaction-restrictions}
 
-The basic principle is to limit the size of the transaction. At the KV level, TiDB has a restriction on the size of a single transaction. At the SQL level, one row of data is mapped to one KV entry, and each additional index will add one KV entry. The restriction is as follows at the SQL level:
+基本原則は、トランザクションのサイズを制限することです。TiDBはKVレベルでは、単一トランザクションのサイズに制限を設けています。SQLレベルでは、1行のデータに1つのKVエントリがマッピングされ、インデックスを追加するごとに1つのKVエントリが追加されます。SQLレベルでの制限は以下のとおりです。
 
-- The maximum single row record size is 120 MiB.
+-   単一行レコードの最大サイズは 120 MiB です。
 
-    - You can adjust it by using the [`performance.txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500) configuration parameter of tidb-server for TiDB v4.0.10 and later v4.0.x versions, TiDB v5.0.0 and later versions. The value is `6 MB` for versions earlier than v4.0.10.
-    - Starting from v7.6.0, you can use the [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760) system variable to dynamically modify the value of this configuration item.
+    -   TiDB v4.0.10以降のv4.0.xバージョン、およびTiDB v5.0.0以降のバージョンでは、tidb-serverの設定パラメータ[`performance.txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500)使用して調整できます。v4.0.10より前のバージョンでは、値は`6 MB`です。
+    -   v7.6.0 以降では、 [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760)システム変数を使用して、この構成項目の値を動的に変更できます。
 
-- The maximum single transaction size supported is 1 TiB. 
+-   サポートされる単一トランザクションの最大サイズは 1 TiB です。
 
-    - For TiDB v4.0 and later versions, You can configure it by [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)). The value is `100 MB` for earlier versions.
-    - For TiDB v6.5.0 and later versions, this configuration is no longer recommended. For more information, see [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)).
+    -   TiDB v4.0 以降のバージョンでは、 [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)に設定できます。それより前のバージョンでは、値は`100 MB`です。
+    -   TiDB v6.5.0以降のバージョンでは、この構成は推奨されません。詳細については、 [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) )を参照してください。
 
-Note that for both the size restrictions and row restrictions, you should also consider the overhead of encoding and additional keys for the transaction during the transaction execution. To achieve optimal performance, it is recommended to write one transaction every 100 ~ 500 rows.
+サイズ制限と行制限の両方において、トランザクション実行中のエンコードと追加キーのオーバーヘッドも考慮する必要があります。最適なパフォーマンスを得るには、100～500行ごとに1つのトランザクションを書き込むことをお勧めします。
 
-## Auto-committed `SELECT FOR UPDATE` statements do NOT wait for locks
+## 自動コミットされた<code>SELECT FOR UPDATE</code>文はロックを待機しません。 {#auto-committed-code-select-for-update-code-statements-do-not-wait-for-locks}
 
-Currently locks are not added to auto-committed `SELECT FOR UPDATE` statements. The effect is shown in the following figure:
+現在、自動コミットされた`SELECT FOR UPDATE`文にはロックは追加されません。その影響は次の図に示されています。
 
 ![The situation in TiDB](/media/develop/autocommit_selectforupdate_nowaitlock.png)
 
-This is a known incompatibility issue with MySQL. You can solve this issue by using the explicit `BEGIN;COMMIT;` statements.
+これはMySQLとの既知の非互換性問題です。明示的な`BEGIN;COMMIT;`文を使用することでこの問題を解決できます。
 
-## Need help?
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

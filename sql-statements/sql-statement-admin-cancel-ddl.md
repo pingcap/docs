@@ -1,16 +1,16 @@
 ---
 title: ADMIN CANCEL DDL | TiDB SQL Statement Reference
-summary: An overview of the usage of ADMIN CANCEL DDL for the TiDB database.
+summary: TiDB データベースの ADMIN CANCEL DDL の使用法の概要。
 category: reference
 ---
 
-# ADMIN CANCEL DDL
+# 管理者によるDDLのキャンセル {#admin-cancel-ddl}
 
-The `ADMIN CANCEL DDL` statement allows you to cancel a running DDL job. The `job_id` can be found by running [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md).
+`ADMIN CANCEL DDL`文は実行中のDDLジョブをキャンセルします。3 `job_id` [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)実行することで確認できます。
 
-The `ADMIN CANCEL DDL` statement also allows you to cancel a DDL job that is committed but not yet completed executing. After the cancellation, the SQL statement that executes the DDL job returns the `ERROR 8214 (HY000): Cancelled DDL job` error. If you cancel a DDL job that has already been completed, you will see the `DDL Job:90 not found` error in the `RESULT` column, which indicates that the job has been removed from the DDL waiting queue.
+`ADMIN CANCEL DDL`文を使用すると、コミットされているもののまだ実行が完了していないDDLジョブをキャンセルすることもできます。キャンセル後、DDLジョブを実行するSQL文は`ERROR 8214 (HY000): Cancelled DDL job`エラーを返します。すでに完了しているDDLジョブをキャンセルした場合は、 `RESULT`列に`DDL Job:90 not found`エラーが表示されます。これは、ジョブがDDL待機キューから削除されたことを示します。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AdminCancelDDLStmt ::=
@@ -20,26 +20,26 @@ NumList ::=
     Int64Num ( ',' Int64Num )*
 ```
 
-## Examples
+## 例 {#examples}
 
-To cancel the currently running DDL jobs and return whether the corresponding jobs are successfully cancelled, use `ADMIN CANCEL DDL JOBS`:
+現在実行中の DDL ジョブをキャンセルし、対応するジョブが正常にキャンセルされたかどうかを返すには、 `ADMIN CANCEL DDL JOBS`使用します。
 
 ```sql
 ADMIN CANCEL DDL JOBS job_id [, job_id] ...;
 ```
 
-If the operation fails to cancel the jobs, specific reasons are displayed.
+ジョブをキャンセルする操作が失敗した場合、具体的な理由が表示されます。
 
-> **Note:**
+> **注記：**
 >
-> - Before v6.2.0, only this operation can cancel DDL jobs, and all other operations and environment changes (such as machine restart and cluster restart) cannot cancel these jobs. Starting from v6.2.0, [`KILL`](/sql-statements/sql-statement-kill.md) statements can also be used to cancel ongoing DDL jobs by killing them. 
-> - This operation can cancel multiple DDL jobs at the same time. You can get the ID of DDL jobs using the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) statement.
-> - If the jobs you want to cancel are finished, the cancellation operation fails.
+> -   バージョン6.2.0より前では、この操作のみがDDLジョブをキャンセルでき、他のすべての操作や環境変更（マシンの再起動やクラスタの再起動など）ではこれらのジョブをキャンセルできませんでした。バージョン6.2.0以降では、 [`KILL`](/sql-statements/sql-statement-kill.md)ステートメントを使用して実行中のDDLジョブを強制終了することでキャンセルできるようになりました。
+> -   この操作では、複数のDDLジョブを同時にキャンセルできます。1 ステートメントを使用して、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)ジョブのIDを取得できます。
+> -   キャンセルするジョブが完了している場合、キャンセル操作は失敗します。
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)

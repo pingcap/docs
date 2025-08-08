@@ -1,59 +1,59 @@
 ---
 title: TiKV Configuration Flags
-summary: Learn some configuration flags of TiKV.
+summary: TiKV のいくつかの構成フラグについて学習します。
 ---
 
-# TiKV Configuration Flags
+# TiKVコンフィグレーションフラグ {#tikv-configuration-flags}
 
-TiKV supports some readable unit conversions for command line parameters.
+TiKV は、コマンドラインパラメータに対していくつかの読み取り可能な単位変換をサポートしています。
 
-- File size (based on byte): KB, MB, GB, TB, PB (or lowercase)
-- Time (based on ms): ms, s, m, h
+-   ファイルサイズ（バイト単位）: KB、MB、GB、TB、PB（または小文字）
+-   時間（ミリ秒単位）: ms、s、m、h
 
-## `-A, --addr`
+## <code>-A, --addr</code> {#code-a-addr-code}
 
-- The address that the TiKV server monitors
-- Default: `"127.0.0.1:20160"`
-- To deploy a cluster, you must use `--addr` to specify the IP address of the current host, such as `"192.168.100.113:20160"`. If the cluster is run on Docker, specify the IP address of Docker as `"0.0.0.0:20160"`.
+-   TiKVサーバーが監視するアドレス
+-   デフォルト: `"127.0.0.1:20160"`
+-   クラスターをデプロイするには、現在のホストのIPアドレスを`--addr`で指定する必要があります（例： `"192.168.100.113:20160"` 。クラスターがDocker上で実行される場合は、DockerのIPアドレスを`"0.0.0.0:20160"`で指定します。
 
-## `--advertise-addr`
+## <code>--advertise-addr</code> {#code-advertise-addr-code}
 
-- The server advertise address for client traffic from outside
-- Default: `${addr}`
-- If the client cannot connect to TiKV through the `--addr` address because of Docker or NAT network, you must manually set the `--advertise-addr` address.
-- For example, the internal IP address of Docker is 172.17.0.1, while the IP address of the host is 192.168.100.113 and the port mapping is set to `-p 20160:20160`. In this case, you can set `--advertise-addr` to "192.168.100.113:20160". The client can find this service through 192.168.100.113:20160.
+-   サーバーは外部からのクライアントトラフィックのアドレスをアドバタイズします
+-   デフォルト: `${addr}`
+-   Docker または NAT ネットワークのためにクライアントが`--addr`アドレス経由で TiKV に接続できない場合は、 `--advertise-addr`アドレスを手動で設定する必要があります。
+-   例えば、Dockerの内部IPアドレスが172.17.0.1で、ホストのIPアドレスが192.168.100.113で、ポートマッピングが`-p 20160:20160`に設定されている場合、 `--advertise-addr` 「192.168.100.113:20160」に設定できます。クライアントは192.168.100.113:20160を介してこのサービスにアクセスできます。
 
-## `--status-addr`
+## <code>--status-addr</code> {#code-status-addr-code}
 
-+ The port through which the TiKV service status is listened
-+ Default: `"20180"`
-+ The Prometheus can access this status information via `http://host:status_port/metrics`.
-+ The Profile can access this status information via `http://host:status_port/debug/pprof/profile`.
+-   TiKV サービスのステータスをリッスンするポート
+-   デフォルト: `"20180"`
+-   Prometheus は`http://host:status_port/metrics`介してこのステータス情報にアクセスできます。
+-   プロファイルは`http://host:status_port/debug/pprof/profile`を介してこのステータス情報にアクセスできます。
 
-## `--advertise-status-addr`
+## <code>--advertise-status-addr</code> {#code-advertise-status-addr-code}
 
-- The address through which TiKV accesses service status from outside.
-- Default: The value of `--status-addr` is used.
-- If the client cannot connect to TiKV through the `--status-addr` address because of Docker or NAT network, you must manually set the `--advertise-status-addr` address.
-- For example, the internal IP address of Docker is `172.17.0.1`, while the IP address of the host is `192.168.100.113` and the port mapping is set to `-p 20180:20180`. In this case, set `--advertise-status-addr="192.168.100.113:20180"`. The client can find this service through `192.168.100.113:20180`.
+-   TiKV が外部からサービス ステータスにアクセスするために使用するアドレス。
+-   デフォルト: 値`--status-addr`が使用されます。
+-   Docker または NAT ネットワークのためにクライアントが`--status-addr`アドレス経由で TiKV に接続できない場合は、 `--advertise-status-addr`アドレスを手動で設定する必要があります。
+-   例えば、Dockerの内部IPアドレスは`172.17.0.1`ですが、ホストのIPアドレスは`192.168.100.113`で、ポートマッピングは`-p 20180:20180`に設定されています。この場合、 `--advertise-status-addr="192.168.100.113:20180"`設定します。クライアントは`192.168.100.113:20180`を通じてこのサービスを見つけられます。
 
-## `-C, --config`
+## <code>-C, --config</code> {#code-c-config-code}
 
-- The config file
-- Default: `""`
-- If you set the configuration using the command line, the same setting in the config file will be overwritten.
+-   設定ファイル
+-   デフォルト: `""`
+-   コマンドラインを使用して設定を行うと、設定ファイル内の同じ設定が上書きされます。
 
-## `--capacity`
+## <code>--capacity</code> {#code-capacity-code}
 
-- The store capacity
-- Default: `0` (unlimited)
-- PD uses this flag to determine how to balance the TiKV servers. (Tip: you can use 10GB instead of 1073741824)
+-   店舗収容人数
+-   デフォルト: `0` (無制限)
+-   PDはこのフラグを使用して、TiKVサーバーのバランス調整方法を決定します。（ヒント：1073741824の代わりに10GBを使用することもできます）
 
-## `--config-info <FORMAT>`
+## <code>--config-info &#x3C;FORMAT></code> {#code-config-info-x3c-format-code}
 
-- When this flag is used, available configuration values are listed according to `FORMAT` and then exit.
-- Value option for `FORMAT`: `json`. Currently, only JSON format is supported.
-- Only the configuration name (Name), default value (DefaultValue) and current value (ValueInFile) are listed in the output JSON. If the `-C` or `--config` is specified, the current value and the default value of configuration items in the file are listed together, and other items without `-C` or `--config` specified only have default values. The following is an example:
+-   このフラグを使用すると、使用可能な構成値が`FORMAT`に従ってリストされ、終了します。
+-   `FORMAT`の値オプション: `json` 。現在、JSON 形式のみがサポートされています。
+-   出力されるJSONには、設定名（Name）、デフォルト値（DefaultValue）、現在の値（ValueInFile）のみが記載されます。1または`--config` `-C`されている場合は、ファイル内の設定項目の現在の値とデフォルト値が一緒に記載され、 `-C`または`--config`が指定されていない項目にはデフォルト値のみが設定されます。以下は例です。
 
     ```json
     {
@@ -74,25 +74,25 @@ TiKV supports some readable unit conversions for command line parameters.
     }
     ```
 
-## `--data-dir`
+## <code>--data-dir</code> {#code-data-dir-code}
 
-- The path to the data directory
-- Default: `"/tmp/tikv/store"`
+-   データディレクトリへのパス
+-   デフォルト: `"/tmp/tikv/store"`
 
-## `-L`
+## <code>-L</code> {#code-l-code}
 
-- The log level
-- Default: `"info"`
-- Optional values: `"debug"`, `"info"`, `"warn"`, `"error"`, `"fatal"`
+-   ログレベル
+-   デフォルト: `"info"`
+-   `"warn"` `"fatal"` `"error"` `"debug"` `"info"`
 
-## `--log-file`
+## <code>--log-file</code> {#code-log-file-code}
 
-- The log file
-- Default: `""`
-- If this flag is not set, logs will be written to "stderr". If this flag is set, logs are output to the corresponding file.
+-   ログファイル
+-   デフォルト: `""`
+-   このフラグが設定されていない場合、ログは「stderr」に書き込まれます。このフラグが設定されている場合、ログは対応するファイルに出力されます。
 
-## `--pd`
+## <code>--pd</code> {#code-pd-code}
 
-- The address list of PD servers
-- Default: `""`
-- To make TiKV work, you must use the value of `--pd` to connect the TiKV server to the PD server. Separate multiple PD addresses using comma, for example "192.168.100.113:2379, 192.168.100.114:2379, 192.168.100.115:2379".
+-   PDサーバーのアドレスリスト
+-   デフォルト: `""`
+-   TiKVを動作させるには、TiKVサーバーをPDサーバーに接続する際に値`--pd`使用する必要があります。複数のPDアドレスはカンマで区切ってください（例：192.168.100.113:2379, 192.168.100.114:2379, 192.168.100.115:2379）。

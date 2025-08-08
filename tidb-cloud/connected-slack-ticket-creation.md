@@ -1,44 +1,44 @@
 ---
 title: Create Tickets and Subscribe to Ticket Updates in Slack
-summary: Introduces detailed information about the Slack ticket creation and update subscription.
+summary: Slack チケットの作成と更新サブスクリプションに関する詳細情報を紹介します。
 ---
 
-# Create Tickets and Subscribe to Ticket Updates in Slack
+# Slack でチケットを作成し、チケットの更新を購読する {#create-tickets-and-subscribe-to-ticket-updates-in-slack}
 
-For customers subscribed to the **Enterprise** [support plan](/tidb-cloud/connected-care-detail.md), TiDB Cloud provides a ticket bot called **PingCAP Support Bot** in [Slack](https://slack.com/), to support quick ticket creation.
+**Enterprise** [サポートプラン](/tidb-cloud/connected-care-detail.md)に加入している顧客向けに、 TiDB Cloud は[スラック](https://slack.com/)で**PingCAP Support Bot**と呼ばれるチケット ボットを提供し、迅速なチケット作成をサポートします。
 
-> **Note:**
+> **注記：**
 >
-> The ticket support feature for Slack is available upon request. If you are interested in trying this feature, contact TiDB Cloud support at <a href="mailto:support@pingcap.com">support@pingcap.com</a> or reach out to your Technical Account Manager (TAM).
+> Slackのチケットサポート機能はリクエストに応じてご利用いただけます。この機能をご利用になりたい場合は、 TiDB Cloudサポート<a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>までご連絡いただくか、担当のテクニカルアカウントマネージャー（TAM）までお問い合わせください。
 
-## Create a support ticket
+## サポートチケットを作成する {#create-a-support-ticket}
 
-In the Slack support channel, you only need to mention **PingCAP Support Bot** and describe the problem in a message. Then, the ticket bot will send you a message with a **Raise request** button.
+Slackのサポートチャンネルで、 **PingCAP Support Bot**をメンションし、メッセージで問題を説明してください。すると、チケットボットが**「リクエストを送信」**ボタン付きのメッセージを送信します。
 
 ![slack-ticket-creation-1](/media/tidb-cloud/connected-slack-ticket-creation-1.png)
 
-Click **Raise request** to open a form, fill it out according to the problem, and then click **Create** to submit the ticket.
+**「リクエストを送信」**をクリックしてフォームを開き、問題に応じて入力し、 **「作成」**をクリックしてチケットを送信します。
 
 ![slack-ticket-creation-2](/media/tidb-cloud/connected-slack-ticket-creation-2.png)
 
-After successfully creating the ticket, the bot will reply with the ticket link. You can click the link to view the ticket details in the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals).
+チケットの作成が完了すると、ボットからチケットリンクが返信されます。リンクをクリックすると、 [PingCAPヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)でチケットの詳細を確認できます。
 
 ![slack-ticket-creation-3](/media/tidb-cloud/connected-slack-ticket-creation-3.png)
 
 ![slack-ticket-creation-4](/media/tidb-cloud/connected-slack-ticket-creation-4.png)
 
-## Subscribe to ticket updates
+## チケットの最新情報を購読する {#subscribe-to-ticket-updates}
 
-The **Enterprise** support plan supports subscriptions to ticket updates in Slack. When a support engineer responds to a ticket, a ticket update message will appear in the Slack channel. The message includes information such as the ticket title, ticket link, and last comment content.
+**エンタープライズ**サポートプランでは、Slack でのチケット更新の購読がサポートされています。サポートエンジニアがチケットに返信すると、Slack チャンネルにチケット更新メッセージが表示されます。メッセージには、チケットのタイトル、チケットリンク、最新のコメント内容などの情報が含まれます。
 
 ![slack-ticket-creation-5](/media/tidb-cloud/connected-slack-ticket-creation-5.png)
 
-## FAQs
+## よくある質問 {#faqs}
 
-- How can I check the status of my ticket?
+-   チケットのステータスを確認するにはどうすればいいですか?
 
-    Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
+    チケット作成時に使用したメールアドレスで[PingCAPヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/user/requests)にログインしてください。現在のアカウントのすべての過去のチケットとそのステータスを確認できます。
 
-## Contact support
+## サポートにお問い合わせください {#contact-support}
 
-For help or questions, please contact our support team at <a href="mailto:support@pingcap.com">support@pingcap.com</a>.
+ヘルプや質問がある場合は、 <a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>のサポート チームにお問い合わせください。

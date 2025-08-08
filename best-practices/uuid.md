@@ -1,57 +1,57 @@
 ---
 title: Best Practices for Using UUIDs as Primary Keys
-summary: UUIDs, when used as primary keys, offer benefits such as reduced network trips, support in most programming languages and databases, and protection against enumeration attacks. Storing UUIDs as binary in a `BINARY(16)` column is recommended. It's also advised to avoid setting the `swap_flag` with TiDB to prevent hotspots. MySQL compatibility is available for UUIDs.
+summary: UUIDを主キーとして使用すると、ネットワーク通信の削減、ほとんどのプログラミング言語とデータベースでのサポート、列挙攻撃からの保護などの利点があります。UUIDはバイナリ形式でBINARY(16)`列に格納することをお勧めします。また、ホットスポットの発生を防ぐため、TiDBでは`swap_flag`の設定を避けることをお勧めします。UUIDはMySQLと互換性があります。
 ---
 
-# Best Practices for Using UUIDs as Primary Keys
+# UUIDを主キーとして使用するベストプラクティス {#best-practices-for-using-uuids-as-primary-keys}
 
-UUIDs (Universally Unique Identifiers) are a popular alternative to auto-incrementing integers for primary keys in distributed databases. This document outlines the benefits of using UUIDs in TiDB, and offers best practices for storing and indexing them efficiently.
+UUID（Universally Unique Identifiers）は、分散データベースにおける主キーとして、自動増分整数の代替として広く利用されています。このドキュメントでは、TiDBでUUIDを使用するメリットを概説し、UUIDを効率的に保存およびインデックス化するためのベストプラクティスを紹介します。
 
-## Overview of UUIDs
+## UUIDの概要 {#overview-of-uuids}
 
-When used as a primary key, a UUID offers the following advantages compared with an [`AUTO_INCREMENT`](/auto-increment.md) integer:
+UUID を主キーとして使用すると、 [`AUTO_INCREMENT`](/auto-increment.md)整数と比較して次の利点があります。
 
-- UUIDs can be generated on multiple systems without risking conflicts. In some cases, this means that the number of network trips to TiDB can be reduced, leading to improved performance.
-- UUIDs are supported by most programming languages and database systems.
-- When used as a part of a URL, a UUID is not vulnerable to enumeration attacks. In comparison, with an `AUTO_INCREMENT` number, it is possible to guess the invoice IDs or user IDs.
+-   UUIDは複数のシステムで競合のリスクなく生成できます。場合によっては、TiDBへのネットワーク通信回数が削減され、パフォーマンスが向上する可能性があります。
+-   UUID は、ほとんどのプログラミング言語とデータベース システムでサポートされています。
+-   URLの一部として使用される場合、UUIDは列挙攻撃に対して脆弱ではありません。一方、 `AUTO_INCREMENT`数字を使用すると、請求書IDやユーザーIDを推測される可能性があります。
 
-## Best practices
+## ベストプラクティス {#best-practices}
 
-This section describes best practices for storing and indexing UUIDs in TiDB.
+このセクションでは、TiDB で UUID を保存およびインデックス作成するためのベスト プラクティスについて説明します。
 
-### Store as binary
+### バイナリとして保存 {#store-as-binary}
 
-The textual UUID format looks like this: `ab06f63e-8fe7-11ec-a514-5405db7aad56`, which is a string of 36 characters. By using [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md#uuid_to_bin), the textual format can be converted into a binary format of 16 bytes. This allows you to store the text in a [`BINARY(16)`](/data-type-string.md#binary-type) column. When retrieving the UUID, you can use the [`BIN_TO_UUID()`](/functions-and-operators/miscellaneous-functions.md#bin_to_uuid) function to get back to the textual format.
+テキスト形式のUUID形式は次のようになります`ab06f63e-8fe7-11ec-a514-5405db7aad56`は36文字の文字列です。3 [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md#uuid_to_bin)使用すると、テキスト形式を16バイトのバイナリ形式に変換できます。これにより、テキストを[`BINARY(16)`](/data-type-string.md#binary-type)列に格納できます。UUIDを取得する際には、 [`BIN_TO_UUID()`](/functions-and-operators/miscellaneous-functions.md#bin_to_uuid)関数を使用してテキスト形式に戻すことができます。
 
-### UUID format binary order and clustered primary keys
+### UUID形式のバイナリ順序とクラスター化された主キー {#uuid-format-binary-order-and-clustered-primary-keys}
 
-The `UUID_TO_BIN()` function can be used with one argument, the UUID or with two arguments where the second argument is a `swap_flag`.
+`UUID_TO_BIN()`関数は、 1 つの引数 (UUID)、または 2 つの引数 (2 番目の引数は`swap_flag`とともに使用できます。
 
 <CustomContent platform="tidb">
 
-It is recommended to not set the `swap_flag` with TiDB to avoid [hotspots](/best-practices/high-concurrency-best-practices.md).
+[ホットスポット](/best-practices/high-concurrency-best-practices.md)回避するために、 TiDB では`swap_flag`設定しないことをお勧めします。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-It is recommended to not set the `swap_flag` with TiDB to avoid hotspots.
+ホットスポットを回避するために、TiDB では`swap_flag`設定しないことをお勧めします。
 
 </CustomContent>
 
-You can also explicitly set the [`CLUSTERED` option](/clustered-indexes.md) for UUID based primary keys to avoid hotspots.
+ホットスポットを回避するために、UUID ベースの主キーに[`CLUSTERED`オプション](/clustered-indexes.md)明示的に設定することもできます。
 
-To demonstrate the effect of the `swap_flag`, here are two tables with an identical structure. The difference is that the data inserted into `uuid_demo_1` uses `UUID_TO_BIN(?, 0)` and `uuid_demo_2` uses `UUID_TO_BIN(?, 1)`.
+`swap_flag`の効果を示すために、同一の構造を持つ2つのテーブルを示します。違いは、 `uuid_demo_1`に挿入されるデータは`UUID_TO_BIN(?, 0)`を使用し、 `uuid_demo_2` `UUID_TO_BIN(?, 1)`使用する点です。
 
 <CustomContent platform="tidb">
 
-In the screenshot of the [Key Visualizer](/dashboard/dashboard-key-visualizer.md) below, you can see that writes are concentrated in a single region of the `uuid_demo_2` table that has the order of the fields swapped in the binary format.
+以下の[キービジュアライザー](/dashboard/dashboard-key-visualizer.md)のスクリーンショットでは、バイナリ形式でフィールドの順序が入れ替わった`uuid_demo_2`テーブルの単一の領域に書き込みが集中していることがわかります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-In the screenshot of the [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer) below, you can see that writes are concentrated in a single region of the `uuid_demo_2` table that has the order of the fields swapped in the binary format.
+以下の[キービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)のスクリーンショットでは、バイナリ形式でフィールドの順序が入れ替わった`uuid_demo_2`テーブルの単一の領域に書き込みが集中していることがわかります。
 
 </CustomContent>
 
@@ -73,6 +73,6 @@ CREATE TABLE `uuid_demo_2` (
 )
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-UUIDs can be used in MySQL as well. The `BIN_TO_UUID()` and `UUID_TO_BIN()` functions were introduced in MySQL 8.0. The `UUID()` function is available in earlier MySQL versions as well.
+UUIDはMySQLでも使用できます。1と`BIN_TO_UUID()` `UUID_TO_BIN()`関数はMySQL 8.0で導入されました。5 `UUID()`関数はそれ以前のMySQLバージョンでも使用できます。

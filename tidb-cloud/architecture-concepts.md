@@ -1,104 +1,104 @@
 ---
 title: Architecture
-summary: Learn about architecture concepts for TiDB Cloud.
+summary: TiDB Cloudのアーキテクチャの概念について学習します。
 ---
 
-# Architecture
+# アーキテクチャ {#architecture}
 
-TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings the flexibility and power of [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source HTAP (Hybrid Transactional and Analytical Processing) database, to AWS, Azure, and Google Cloud.
+TiDB Cloud は、オープンソースの HTAP (ハイブリッド トランザクションおよび分析処理) データベース[TiDB](https://docs.pingcap.com/tidb/stable/overview)の柔軟性とパワーを AWS、Azure、Google Cloud に提供する、完全に管理された Database-as-a-Service (DBaaS) です。
 
-TiDB is MySQL-compatible, making it easy to migrate and work with existing applications, while offering seamless scalability to handle everything from small workloads to massive, high-performance clusters. It supports both transactional (OLTP) and analytical (OLAP) workloads in one system, simplifying operations and enabling real-time insights.
+TiDBはMySQLと互換性があり、既存のアプリケーションへの移行と連携が容易です。また、小規模なワークロードから大規模な高性能クラスタまで、あらゆるワークロードに対応できるシームレスなスケーラビリティを提供します。トランザクション（OLTP）と分析（OLAP）の両方のワークロードを1つのシステムでサポートし、運用を簡素化し、リアルタイムの洞察を実現します。
 
-TiDB Cloud provides two deployment options: **TiDB Cloud** **Serverless**, for auto-scaling, cost-efficient workloads, and **TiDB Cloud Dedicated**, for enterprise-grade applications with dedicated resources and advanced capabilities. TiDB Cloud makes it easy to scale your database, handle complex management tasks, and stay focused on developing reliable, high-performing applications.
+TiDB Cloud には、自動スケーリングとコスト効率の高いワークロード向けの**TiDB Cloud** **Serverless**と、専用リソースと高度な機能を備えたエンタープライズグレードのアプリケーション向けの**TiDB Cloud Dedicated**という2つのデプロイメントオプションがあります。TiDB TiDB Cloudすると、データベースのスケーリング、複雑な管理タスクの処理が容易になり、信頼性が高く高性能なアプリケーションの開発に集中できます。
 
-## {{{ .starter }}}
+## TiDB Cloudサーバーレス {#tidb-cloud-serverless}
 
-{{{ .starter }}} is a fully managed serverless solution that provides HTAP capabilities similar to traditional TiDB, while offering auto-scaling to alleviate users' burdens related to capacity planning and management complexities. It includes a free tier for basic usage, with consumption-based billing for any usage that exceeds the free limits. {{{ .starter }}} offers two types of high availability to address varying operational requirements.
+TiDB Cloud Serverlessは、従来のTiDBと同様のHTAP機能を提供するフルマネージドのサーバーレスソリューションです。オートスケーリング機能により、キャパシティプランニングや管理の複雑さに伴うユーザーの負担を軽減します。基本的な使用量は無料枠で提供され、無料枠を超えた使用量については使用量に応じて課金されます。TiDB TiDB Cloud Serverlessは、さまざまな運用要件に対応するために、2種類の高可用性オプションを提供しています。
 
-By default, clusters utilizing the Zonal High Availability option have all components located within the same availability zone, which results in lower network latency.
+デフォルトでは、ゾーン高可用性オプションを利用するクラスターではすべてのコンポーネントが同じ可用性ゾーン内に配置されるため、ネットワークレイテンシーが低減されます。
 
-![{{{ .starter }}} zonal high availability](/media/tidb-cloud/serverless-zonal-high-avaliability-aws.png)
+![TiDB Cloud Serverless zonal high availability](/media/tidb-cloud/serverless-zonal-high-avaliability-aws.png)
 
-For applications that require maximum infrastructure isolation and redundancy, the Regional High Availability option distributes nodes across multiple availability zones.
+最大限のインフラストラクチャ分離と冗長性を必要とするアプリケーションの場合、リージョン高可用性オプションにより、複数の可用性ゾーンにノードが分散されます。
 
-![{{{ .starter }}} regional high availability](/media/tidb-cloud/serverless-regional-high-avaliability-aws.png)
+![TiDB Cloud Serverless regional high availability](/media/tidb-cloud/serverless-regional-high-avaliability-aws.png)
 
-## TiDB Cloud Dedicated
+## TiDB Cloud専用 {#tidb-cloud-dedicated}
 
-TiDB Cloud Dedicated is designed for mission-critical businesses, offering high availability across multiple availability zones, horizontal scaling, and full HTAP capabilities.
+TiDB Cloud Dedicated は、ミッションクリティカルなビジネス向けに設計されており、複数の可用性ゾーンにわたる高可用性、水平スケーリング、完全な HTAP 機能を提供します。
 
-Built on isolated cloud resources such as VPCs, VMs, managed Kubernetes services, and cloud storage, it leverages the infrastructure of major cloud providers. TiDB Cloud Dedicated clusters support the complete TiDB feature set, enabling rapid scaling, reliable backups, deployment within specific VPCs, and geographic-level disaster recovery.
+VPC、VM、マネージドKubernetesサービス、クラウドstorageなどの分離されたクラウドリソース上に構築され、主要クラウドプロバイダーのインフラストラクチャを活用します。TiDB TiDB Cloud Dedicatedクラスターは、TiDBの完全な機能セットをサポートし、迅速なスケーリング、信頼性の高いバックアップ、特定のVPC内でのデプロイメント、地理的レベルの災害復旧を可能にします。
 
 ![TiDB Cloud Dedicated Architecture](/media/tidb-cloud/tidb-cloud-dedicated-architecture.png)
 
-## TiDB Cloud console
+## TiDB Cloudコンソール {#tidb-cloud-console}
 
-The [TiDB Cloud console](https://tidbcloud.com/) is the web-based management interface for both {{{ .starter }}} and TiDB Cloud Dedicated. It provides tools to manage clusters, import or migrate data, monitor performance metrics, configure backups, set up security controls, and integrate with other cloud services, all from a single, user-friendly platform.
+[TiDB Cloudコンソール](https://tidbcloud.com/) 、 TiDB Cloud ServerlessとTiDB Cloud Dedicatedの両方に対応するWebベースの管理インターフェースです。クラスターの管理、データのインポートまたは移行、パフォーマンス指標の監視、バックアップの設定、セキュリティ制御の設定、他のクラウドサービスとの統合など、すべて単一の使いやすいプラットフォームから実行できるツールを提供します。
 
-## TiDB Cloud CLI (Beta)
+## TiDB CloudCLI (ベータ版) {#tidb-cloud-cli-beta}
 
-The TiDB Cloud CLI, `ticloud`, allows you to manage {{{ .starter }}} and TiDB Cloud Dedicated directly from your terminal with simple commands. You can perform tasks such as:
+TiDB Cloud CLI `ticloud` ）を使用すると、簡単なコマンドでターミナルから直接TiDB Cloud ServerlessとTiDB Cloud Dedicatedを管理できます。以下のようなタスクを実行できます。
 
-- Creating, deleting, and listing clusters.
-- Importing data into clusters.
-- Exporting data from clusters.
+-   クラスターの作成、削除、および一覧表示。
+-   クラスターにデータをインポートしています。
+-   クラスターからデータをエクスポートしています。
 
-For more information, see [TiDB Cloud CLI Reference](/tidb-cloud/cli-reference.md).
+詳細については[TiDB CloudCLI リファレンス](/tidb-cloud/cli-reference.md)参照してください。
 
-## TiDB Cloud API (Beta)
+## TiDB CloudAPI (ベータ版) {#tidb-cloud-api-beta}
 
-The TiDB Cloud API is a REST-based interface that provides programmatic access to manage resources across {{{ .starter }}} and TiDB Cloud Dedicated. It enables automated and efficient handling of tasks such as managing projects, clusters, backups, restores, data imports, billing, and other resources in [TiDB Cloud Data Service](/tidb-cloud/data-service-overview.md).
+TiDB Cloud APIは、 TiDB Cloud ServerlessとTiDB Cloud Dedicated全体のリソースを管理するためのプログラム的なアクセスを提供するRESTベースのインターフェースです。プロジェクト、クラスタ、バックアップ、リストア、データのインポート、課金、その他のリソース管理といったタスクを自動化し、効率的に処理できます[TiDB Cloudデータサービス](/tidb-cloud/data-service-overview.md)
 
-For more information, see [TiDB Cloud API Overview](/tidb-cloud/api-overview.md).
+詳細については[TiDB CloudAPI の概要](/tidb-cloud/api-overview.md)参照してください。
 
-## Nodes
+## ノード {#nodes}
 
-In TiDB Cloud, each cluster consists of TiDB, TiKV, and TiFlash nodes.
+TiDB Cloudでは、各クラスターは TiDB、TiKV、およびTiFlashノードで構成されます。
 
-- In a TiDB Cloud Dedicated cluster, you can fully manage the number and size of your dedicated TiDB, TiKV, and TiFlash nodes according to your performance requirements. For more information, see [Scalability](/tidb-cloud/scalability-concepts.md).
-- In a {{{ .starter }}} cluster, the number and size of TiDB, TiKV, and TiFlash nodes are automatically managed. This ensures seamless scaling, eliminating the need for users to handle node configuration or management tasks.
+-   TiDB Cloud Dedicated クラスターでは、パフォーマンス要件に応じて、専用の TiDB、TiKV、 TiFlashノードの数とサイズを完全に管理できます。詳細については、 [スケーラビリティ](/tidb-cloud/scalability-concepts.md)ご覧ください。
+-   TiDB Cloud Serverless クラスターでは、TiDB、TiKV、 TiFlashノードの数とサイズが自動的に管理されます。これによりシームレスなスケーリングが保証され、ユーザーがノードの設定や管理を行う必要がなくなります。
 
-### TiDB node
+### TiDBノード {#tidb-node}
 
-A [TiDB node](/tidb-computing.md) is a stateless SQL layer that connects to applications using a MySQL-compatible endpoint. It handles tasks like parsing, optimizing, and creating distributed execution plans for SQL queries.
+[TiDBノード](/tidb-computing.md) 、MySQL 互換エンドポイントを使用してアプリケーションに接続するステートレス SQLレイヤーです。SQL クエリの解析、最適化、分散実行プランの作成などのタスクを処理します。
 
-You can deploy multiple TiDB nodes to scale horizontally and manage higher workloads. These nodes work with load balancers, such as TiProxy or HAProxy, to provide a seamless interface. TiDB nodes do not store data themselves---they forward data requests to TiKV nodes for row-based storage or TiFlash nodes for columnar storage.
+複数のTiDBノードを展開することで、水平方向にスケーリングし、より高いワークロードを管理できます。これらのノードは、TiProxyやHAProxyなどのロードバランサーと連携して、シームレスなインターフェースを提供します。TiDBノード自体はデータを保存せず、行ベースstorageの場合はTiKVノード、列ベースstorageの場合はTiFlashノードにデータ要求を転送します。
 
-### TiKV node
+### TiKVノード {#tikv-node}
 
-A [TiKV node](/tikv-overview.md) is the backbone of data storage in the TiDB architecture, serving as a distributed transactional key-value storage engine that delivers reliability, scalability, and high availability.
+[TiKVノード](/tikv-overview.md)は、TiDBアーキテクチャのデータstorageのバックボーンであり、信頼性、スケーラビリティ、高可用性を実現する分散トランザクション キー値storageエンジンとして機能します。
 
-**Key features:**
+**主な機能:**
 
-- **Region-based data storage**
+-   **地域ベースのデータstorage**
 
-    - Data is divided into [Regions](https://docs.pingcap.com/tidb/dev/glossary#regionpeerraft-group), each covering a specific Key Range (left-closed, right-open interval: `StartKey` to `EndKey`).
-    - Multiple Regions coexist within each TiKV node to ensure efficient data distribution.
+    -   データは[地域](https://docs.pingcap.com/tidb/dev/glossary#regionpeerraft-group)に分割され、それぞれが特定のキー範囲 (左閉じ、右開きの間隔: `StartKey` ～ `EndKey` ) をカバーします。
+    -   効率的なデータ分散を確保するために、各 TiKV ノード内に複数のリージョンが共存します。
 
-- **Transactional support**
+-   **トランザクションサポート**
 
-    - TiKV nodes provide native distributed transaction support at the key-value level, ensuring Snapshot Isolation as the default isolation level.
-    - The TiDB node translates SQL execution plans into calls to the TiKV node API, enabling seamless SQL-level transaction support.
+    -   TiKV ノードは、キー値レベルでネイティブの分散トランザクション サポートを提供し、デフォルトの分離レベルとしてスナップショット分離を保証します。
+    -   TiDB ノードは、SQL 実行プランを TiKV ノード API への呼び出しに変換し、シームレスな SQL レベルのトランザクション サポートを可能にします。
 
-- **High availability**
+-   **高可用性**
 
-    - All data in TiKV nodes is replicated (default: three replicas) for durability.
-    - TiKV ensures native high availability and supports automatic failover, safeguarding against node failures.
+    -   TiKV ノード内のすべてのデータは、耐久性を確保するために複製されます (デフォルト: 3 つのレプリカ)。
+    -   TiKV はネイティブの高可用性を保証し、自動フェイルオーバーをサポートして、ノード障害から保護します。
 
-- **Scalability and reliability**
+-   **スケーラビリティと信頼性**
 
-    - TiKV nodes are designed to handle expanding datasets while maintaining distributed consistency and fault tolerance.
+    -   TiKV ノードは、分散一貫性とフォールト トレランスを維持しながら、拡大するデータセットを処理するように設計されています。
 
-### TiFlash node
+### TiFlashノード {#tiflash-node}
 
-A [TiFlash node](/tiflash/tiflash-overview.md) is a specialized type of storage node within the TiDB architecture. Unlike ordinary TiKV nodes, TiFlash is designed for analytical acceleration with a columnar storage model.
+[TiFlashノード](/tiflash/tiflash-overview.md) 、TiDBアーキテクチャにおける特殊なタイプのstorageノードです。通常のTiKVノードとは異なり、 TiFlashは列指向storageモデルによる分析アクセラレーションを目的として設計されています。
 
-**Key features:**
+**主な機能:**
 
-- **Columnar storage**
+-   **列型storage**
 
-    TiFlash nodes store data in a columnar format, making them optimized for analytical queries and significantly improving performance for read-intensive workloads.
+    TiFlashノードはデータを列形式で保存するため、分析クエリに最適化され、読み取り集中型のワークロードのパフォーマンスが大幅に向上します。
 
-- **Vector search index support**
+-   **ベクター検索インデックスのサポート**
 
-    The vector search index feature uses TiFlash replicas for tables, enabling advanced search capabilities and improving efficiency in complex analytical scenarios.
+    ベクター検索インデックス機能は、テーブルにTiFlashレプリカを使用するため、高度な検索機能が有効になり、複雑な分析シナリオでの効率が向上します。

@@ -1,107 +1,97 @@
 ---
-title: TLS Connections to {{{ .starter }}}
-summary: Introduce TLS connections in {{{ .starter }}}.
+title: TLS Connections to TiDB Cloud Serverless
+summary: TiDB Cloud Serverless に TLS 接続を導入します。
 aliases: ['/tidbcloud/secure-connections-to-serverless-tier-clusters']
 ---
 
-# TLS Connections to {{{ .starter }}}
+# TiDB Cloud ServerlessへのTLS接続 {#tls-connections-to-tidb-cloud-serverless}
 
-Establishing a secure TLS connection between your client and your {{{ .starter }}} cluster is one of the basic security practices for connecting to your databases. The server certificate for {{{ .starter }}} is issued by an independent third-party certificate provider. You can easily connect to your {{{ .starter }}} cluster without downloading a server-side digital certificate.
+クライアントとTiDB Cloud Serverlessクラスタ間の安全なTLS接続を確立することは、データベース接続における基本的なセキュリティ対策の一つです。TiDB TiDB Cloud Serverlessのサーバー証明書は、独立したサードパーティの証明書プロバイダによって発行されます。サーバー側のデジタル証明書をダウンロードすることなく、 TiDB Cloud Serverlessクラスタに簡単に接続できます。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- Log in to TiDB Cloud via [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md) or [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md).
-- [Create a {{{ .starter }}} cluster](/tidb-cloud/tidb-cloud-quickstart.md).
+-   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)または[SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)でTiDB Cloudにログインします。
+-   [TiDB Cloud Serverless クラスターを作成する](/tidb-cloud/tidb-cloud-quickstart.md) 。
 
-## TLS connection to a {{{ .starter }}} cluster
+## TiDB Cloud Serverless クラスターへの TLS 接続 {#tls-connection-to-a-tidb-cloud-serverless-cluster}
 
-In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of different connection methods and connect to your {{{ .starter }}} cluster as follows:
+[TiDB Cloudコンソール](https://tidbcloud.com/)では、さまざまな接続方法の例を取得し、次のようにTiDB Cloud Serverless クラスターに接続できます。
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your cluster to go to its overview page.
+1.  プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、クラスターの名前をクリックして概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A dialog is displayed.
+2.  右上隅の**「接続」**をクリックします。ダイアログが表示されます。
 
-3. In the dialog, keep the default setting of the connection type as `Public`, and select your preferred connection method and operating system.
+3.  ダイアログでは、接続タイプのデフォルト設定を`Public`のままにして、希望する接続方法とオペレーティング システムを選択します。
 
-4. If you have not set a password yet, click **Generate Password** to generate a random password for your {{{ .starter }}} cluster. The password will be automatically embedded in the sample connection string for connecting to your cluster easily.
+4.  パスワードをまだ設定していない場合は、「パスワード**を生成」**をクリックして、 TiDB Cloud Serverless クラスターのランダムパスワードを生成します。生成されたパスワードはサンプル接続文字列に自動的に埋め込まれ、クラスターへの接続が簡単になります。
 
-    > **Note:**
+    > **注記：**
     >
-    > - The random password consists of 16 characters, including uppercase and lowercase letters, numbers, and special characters.
-    > - After you close this dialog, the generated password will not show again, so you need to save the password in a secure location. If you forget it, you can click **Reset Password** in this dialog to reset it.
-    > - The {{{ .starter }}} cluster can be accessed through the internet. If you need to use the password elsewhere, it is recommended that you reset it to ensure database security.
+    > -   ランダム パスワードは、大文字、小文字、数字、特殊文字を含む 16 文字で構成されます。
+    > -   このダイアログを閉じると、生成されたパスワードは表示されなくなりますので、安全な場所に保存してください。パスワードを忘れた場合は、このダイアログの**「パスワードをリセット」**をクリックしてリセットできます。
+    > -   TiDB Cloud Serverless クラスターにはインターネット経由でアクセスできます。他の場所でパスワードを使用する必要がある場合は、データベースのセキュリティを確保するためにパスワードをリセットすることをお勧めします。
 
-5. Connect to your cluster with the connection string.
+5.  接続文字列を使用してクラスターに接続します。
 
-    > **Note:**
+    > **注記：**
     >
-    > When you connect to a {{{ .starter }}} cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+    > TiDB Cloud Serverless クラスターに接続する場合は、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)参照してください。
 
-## Root certificate management
+## ルート証明書の管理 {#root-certificate-management}
 
-### Root certificate issuance and validity
+### ルート証明書の発行と有効性 {#root-certificate-issuance-and-validity}
 
-{{{ .starter }}} uses certificates from [Let's Encrypt](https://letsencrypt.org/) as a Certificate Authority (CA) for TLS connection between clients and {{{ .starter }}} clusters. Once the {{{ .starter }}} certificate expires, it will be automatically rotated without affecting the normal operations of your cluster and the established TLS secure connection.
+TiDB Cloud Serverlessは、クライアントとTiDB Cloud Serverlessクラスタ間のTLS接続に、 [レッツ・エンクリプト](https://letsencrypt.org/)の証明書を証明機関（CA）として使用します。TiDB TiDB Cloud Serverless証明書の有効期限が切れると、クラスタの通常の動作や確立されたTLSセキュア接続に影響を与えることなく、自動的にローテーションされます。
 
-If the client uses the system's root CA stores by default, such as Java and Go, you can easily connect securely to {{{ .starter }}} clusters without specifying the path of CA roots. However, some drivers and ORMs do not use the system root CA stores. In those cases, you need to configure the CA root path of the drivers or ORMs to your system root CA stores. For example, when you use [mysqlclient](https://github.com/PyMySQL/mysqlclient) to connect a {{{ .starter }}} cluster in Python on macOS, you need to set `ca: /etc/ssl/cert.pem` in the `ssl` argument.
+JavaやGoなど、クライアントがシステムのルートCAストアをデフォルトで使用する場合、CAルートのパスを指定せずにTiDB Cloud Serverlessクラスタに安全に接続できます。ただし、一部のドライバやORMはシステムルートCAストアを使用しません。そのような場合は、ドライバやORMのCAルートパスをシステムルートCAストアに設定する必要があります。例えば、macOS上のPythonで[mysqlクライアント](https://github.com/PyMySQL/mysqlclient)使用してTiDB Cloud Serverlessクラスタに接続する場合、引数`ssl`に`ca: /etc/ssl/cert.pem`設定する必要があります。
 
-If you are using a GUI client, such as DBeaver, which does not accept a certificate file with multiple certificates inside, you must download the [ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem) certificate.
+複数の証明書が含まれる証明書ファイルを受け入れない DBeaver などの GUI クライアントを使用している場合は、 [ISRGルートX1](https://letsencrypt.org/certs/isrgrootx1.pem)証明書をダウンロードする必要があります。
 
-### Root certificate default path
+### ルート証明書のデフォルトパス {#root-certificate-default-path}
 
-In different operating systems, the default storage paths of the root certificate are as follows：
+異なるオペレーティング システムにおけるルート証明書のデフォルトのstorageパスは次のとおりです。
 
-**MacOS**
+**macOS**
 
-```
-/etc/ssl/cert.pem
-```
+    /etc/ssl/cert.pem
 
 **Debian / Ubuntu / Arch**
 
-```
-/etc/ssl/certs/ca-certificates.crt
-```
+    /etc/ssl/certs/ca-certificates.crt
 
 **RedHat / Fedora / CentOS / Mageia**
 
-```
-/etc/pki/tls/certs/ca-bundle.crt
-```
+    /etc/pki/tls/certs/ca-bundle.crt
 
-**Alpine**
+**高山**
 
-```
-/etc/ssl/cert.pem
-```
+    /etc/ssl/cert.pem
 
-**OpenSUSE**
+**オープンSUSE**
 
-```
-/etc/ssl/ca-bundle.pem
-```
+    /etc/ssl/ca-bundle.pem
 
-**Windows**
+**ウィンドウズ**
 
-Windows does not offer a specific path to the CA root. Instead, it uses the [registry](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores) to store certificates. For this reason, to specify the CA root path on Windows, take the following steps:
+WindowsはCAルートへの特定のパスを提供していません。代わりに、 [レジストリ](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores)使用して証明書を保存します。そのため、WindowsでCAルートパスを指定するには、次の手順に従います。
 
-1. Download the [ISRG Root X1 certificate](https://letsencrypt.org/certs/isrgrootx1.pem) and then save it in a path you prefer, such as `<path_to_ca>`.
-2. Use the path (`<path_to_ca>`) as your CA root path when you connect to a {{{ .starter }}} cluster.
+1.  [ISRGルートX1証明書](https://letsencrypt.org/certs/isrgrootx1.pem)をダウンロードし、 `<path_to_ca>`などの任意のパスに保存します。
+2.  TiDB Cloud Serverlessクラスターに接続するときは、パス（ `<path_to_ca>` ）をCAルートパスとして使用します。
 
-## FAQs
+## よくある質問 {#faqs}
 
-### Which TLS versions are supported to connect to my {{{ .starter }}} cluster?
+### TiDB Cloud Serverless クラスターに接続するためにサポートされている TLS バージョンはどれですか? {#which-tls-versions-are-supported-to-connect-to-my-tidb-cloud-serverless-cluster}
 
-For security reasons, {{{ .starter }}} only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions. See IETF [Deprecating TLS 1.0 and TLS 1.1](https://datatracker.ietf.org/doc/rfc8996/) for details.
+セキュリティ上の理由から、 TiDB Cloud Serverless は TLS 1.2 と TLS 1.3 のみをサポートし、TLS 1.0 と TLS 1.1 はサポートしていません。詳細は IETF [TLS 1.0 および TLS 1.1 の廃止](https://datatracker.ietf.org/doc/rfc8996/)をご覧ください。
 
-### Is two-way TLS authentication between my connection client and {{{ .starter }}} supported?
+### 接続クライアントとTiDB Cloud Serverless 間の双方向 TLS 認証はサポートされていますか? {#is-two-way-tls-authentication-between-my-connection-client-and-tidb-cloud-serverless-supported}
 
-No.
+いいえ。
 
-{{{ .starter }}} only supports one-way TLS authentication, which means your client uses the public key to verify the signature of your TiDB Cloud cluster certificate's private key while the cluster does not validate the client.
+TiDB Cloud Serverless は一方向の TLS 認証のみをサポートします。つまり、クライアントは公開キーを使用してTiDB Cloudクラスター証明書の秘密キーの署名を検証しますが、クラスターはクライアントを検証しません。
 
-### Does {{{ .starter }}} have to configure TLS to establish a secure connection?
+### TiDB Cloud Serverless では、安全な接続を確立するために TLS を構成する必要がありますか? {#does-tidb-cloud-serverless-have-to-configure-tls-to-establish-a-secure-connection}
 
-For standard connection, {{{ .starter }}} only allows TLS connections and prohibits non-SSL/TLS connections. The reason is that SSL/TLS is one of the most basic security measures for you to reduce the risk of data exposure to the internet when you connect to the {{{ .starter }}} cluster through the internet.
+標準接続の場合、 TiDB Cloud Serverless は TLS 接続のみを許可し、SSL/TLS 以外の接続は禁止します。これは、SSL/TLS が、インターネット経由でTiDB Cloud Serverless クラスターに接続する際に、インターネットへのデータ漏洩リスクを軽減するための最も基本的なセキュリティ対策の一つであるためです。
 
-For private endpoint connection, because it supports highly secure and one-way access to the TiDB Cloud service and does not expose your data to the public internet, configuring TLS is optional.
+プライベート エンドポイント接続では、 TiDB Cloudサービスへの高度に安全な一方向アクセスがサポートされ、データがパブリック インターネットに公開されないため、TLS の構成はオプションです。

@@ -1,59 +1,59 @@
 ---
 title: TiDB 2.0 RC3 Release Notes
-summary: TiDB 2.0 RC3, released on March 23, 2018, brings improvements in MySQL compatibility, SQL optimization, and stability. It includes fixes for various issues, optimizations for execution speed, memory control, and DDL job management. PD now supports Region Merge and has optimizations for leader balance and abnormal Regions. TiKV also supports Region Merge, Raft snapshot process, and streaming in Coprocessor, with various improvements in space management and data recovery.
+summary: 2018年3月23日にリリースされたTiDB 2.0 RC3では、MySQLとの互換性、SQLの最適化、安定性が向上しています。様々な問題の修正、実行速度、メモリ制御、DDLジョブ管理の最適化が含まれています。PDはリージョンマージをサポートし、リーダーバランスと異常リージョンに対する最適化も行われています。TiKVはリージョンマージ、 Raftスナップショットプロセス、コプロセッサーでのストリーミングをサポートし、スペース管理とデータリカバリに関する様々な改善も行われています。
 ---
 
-# TiDB 2.0 RC3 Release Notes
+# TiDB 2.0 RC3 リリースノート {#tidb-2-0-rc3-release-notes}
 
-On March 23, 2018, TiDB 2.0 RC3 is released. This release has great improvement in MySQL compatibility, SQL optimization and stability.
+2018年3月23日にTiDB 2.0 RC3がリリースされました。このリリースでは、MySQLとの互換性、SQLの最適化、そして安定性が大幅に向上しています。
 
-## TiDB
+## TiDB {#tidb}
 
-- Fix the wrong result issue of `MAX/MIN` in some scenarios
-- Fix the issue that the result of `Sort Merge Join` does not show in order of Join Key in some scenarios
-- Fix the error of comparison between `uint` and `int` in boundary conditions
-- Optimize checks on length and precision of the floating point type, to improve compatibility with MySQL
-- Improve the parsing error log of time type and add more error information
-- Improve memory control and add statistics about `IndexLookupExecutor` memory
-- Optimize the execution speed of `ADD INDEX` to greatly increase the speed in some scenarios
-- Use the Stream Aggregation operator when the `GROUP BY` substatement is empty, to increase the speed
-- Support closing the `Join Reorder` optimization in the optimizer using `STRAIGHT_JOIN`
-- Output more detailed status information of DDL jobs in `ADMIN SHOW DDL JOBS`
-- Support querying the original statements of currently running DDL jobs using `ADMIN SHOW DDL JOB QUERIES`
-- Support recovering the index data using `ADMIN RECOVER INDEX` for disaster recovery
-- Attach a lower priority to the `ADD INDEX` operation to reduce the impact on online business
-- Support aggregation functions with JSON type parameters, such as `SUM/AVG`
-- Support modifying the `lower_case_table_names` system variable in the configuration file, to support the OGG data replication tool
-- Improve compatibility with the Navicat management tool
-- Support using implicit RowID in CRUD operations
+-   いくつかのシナリオで間違った結果`MAX/MIN`の問題を修正しました
+-   一部のシナリオで結合キーの順序に従って結果`Sort Merge Join`が表示されない問題を修正しました
+-   境界条件における`uint`と`int`比較のエラーを修正する
+-   浮動小数点型の長さと精度のチェックを最適化し、MySQLとの互換性を向上しました。
+-   時間タイプの解析エラーログを改善し、エラー情報をさらに追加しました
+-   メモリ制御を改善し、 `IndexLookupExecutor`メモリに関する統計情報を追加します
+-   `ADD INDEX`の実行速度を最適化して、いくつかのシナリオで速度を大幅に向上させます
+-   `GROUP BY`サブステートメントが空の場合にストリーム集計演算子を使用して速度を上げます
+-   `STRAIGHT_JOIN`使用してオプティマイザの`Join Reorder`最適化を閉じることをサポート
+-   DDLジョブのより詳細なステータス情報を`ADMIN SHOW DDL JOBS`で出力します
+-   `ADMIN SHOW DDL JOB QUERIES`を使用して現在実行中のDDLジョブの元のステートメントを照会する機能をサポート
+-   災害復旧のために`ADMIN RECOVER INDEX`を使用してインデックスデータの復旧をサポート
+-   オンラインビジネスへの影響を軽減するために、 `ADD INDEX`操作の優先度を下げます。
+-   JSON型パラメータを使った集計関数をサポートする（例： `SUM/AVG`
+-   OGGデータレプリケーションツールをサポートするために、構成ファイル内の`lower_case_table_names`システム変数の変更をサポートします。
+-   Navicat管理ツールとの互換性を向上
+-   CRUD 操作で暗黙的な RowID の使用をサポート
 
-## PD
+## PD {#pd}
 
-- Support Region Merge, to merge empty Regions or small Regions after deleting data
-- Ignore the nodes that have a lot of pending peers during adding replicas, to improve the speed of restoring replicas or making nodes offline
-- Fix the frequent scheduling issue caused by a large number of empty Regions
-- Optimize the scheduling speed of leader balance in scenarios of unbalanced resources within different labels
-- Add more statistics about abnormal Regions
+-   リージョン結合をサポートし、データを削除した後に空の領域または小さな領域を結合します。
+-   レプリカの追加中に保留中のピアが多数あるノードを無視して、レプリカの復元やノードのオフライン化の速度を向上させます。
+-   多数の空き領域によって頻繁に発生するスケジュールの問題を修正しました
+-   異なるラベル内でリソースが不均衡なシナリオにおけるリーダーバランスのスケジューリング速度を最適化します
+-   異常な地域に関する統計情報を追加する
 
-## TiKV
+## TiKV {#tikv}
 
-- Support Region Merge
-- Inform PD immediately once the Raft snapshot process is completed, to speed up balancing
-- Add the Raw DeleteRange API
-- Add the GetMetric API
-- Reduce the I/O fluctuation caused by RocksDB sync files
-- Optimize the space reclaiming mechanism after deleting data
-- Improve the data recovery tool `tikv-ctl`
-- Fix the issue that it is slow to make nodes down caused by snapshot
-- Support streaming in Coprocessor
-- Support Readpool and increase the `raw_get/get/batch_get` by 30%
-- Support configuring the request timeout of Coprocessor
-- Support streaming aggregation in Coprocessor
-- Carry time information in Region heartbeats
-- Limit the space usage of snapshot files to avoid consuming too much disk space
-- Record and report the Regions that cannot elect a leader for a long time
-- Speed up garbage cleaning when starting the server
-- Update the size information about the corresponding Region according to compaction events
-- Limit the size of `scan lock` to avoid request timeout
-- Use `DeleteRange` to speed up Region deletion
-- Support modifying RocksDB parameters online
+-   リージョンマージをサポート
+-   Raftスナップショットプロセスが完了したらすぐにPDに通知して、バランス調整を高速化します。
+-   生のDeleteRange APIを追加する
+-   GetMetric APIを追加する
+-   RocksDB 同期ファイルによる I/O 変動を軽減します
+-   データを削除した後のスペース回収メカニズムを最適化
+-   データ復旧ツール`tikv-ctl`改善
+-   スナップショットによってノードをダウンさせるのが遅くなる問題を修正しました
+-   コプロセッサーでのストリーミングをサポート
+-   リードプールをサポートし、 `raw_get/get/batch_get`を30％増加
+-   コプロセッサーのリクエストタイムアウトの設定をサポート
+-   コプロセッサーでのストリーミング集約をサポート
+-   リージョンハートビートで時間情報を伝達する
+-   スナップショットファイルのスペース使用量を制限して、ディスク容量の消費を抑制します。
+-   長期間にわたりリーダーを選出できない地域を記録し報告する
+-   サーバー起動時のガベージクリーンアップを高速化
+-   圧縮イベントに応じて対応するリージョンのサイズ情報を更新します
+-   リクエストのタイムアウトを回避するためにサイズを`scan lock`に制限します
+-   `DeleteRange`使用すると、リージョンの削除が高速化されます
+-   RocksDBパラメータのオンライン変更をサポート

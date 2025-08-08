@@ -1,202 +1,206 @@
 ---
-title: Integrate {{{ .starter }}} with Amazon Lambda Using AWS CloudFormation
-summary: Introduce how to integrate {{{ .starter }}} with Amazon Lambda and CloudFormation step by step.
+title: Integrate TiDB Cloud Serverless with Amazon Lambda Using AWS CloudFormation
+summary: TiDB Cloud Serverless を Amazon Lambda および CloudFormation と統合する方法を段階的に紹介します。
 ---
 
-# Integrate {{{ .starter }}} with Amazon Lambda Using AWS CloudFormation
+# AWS CloudFormation を使用してTiDB Cloud Serverless を Amazon Lambda と統合する {#integrate-tidb-cloud-serverless-with-amazon-lambda-using-aws-cloudformation}
 
-This document provides a step-by-step guide on how to use [AWS CloudFormation](https://aws.amazon.com/cloudformation/) to integrate [{{{ .starter }}}](https://www.pingcap.com/tidb-cloud/), a cloud-native distributed SQL database, with [AWS Lambda](https://aws.amazon.com/lambda/), a serverless and event-driven compute service. By integrating {{{ .starter }}} with Amazon Lambda, you can leverage the scalability and cost-efficiency of microservices through {{{ .starter }}} and AWS Lambda. AWS CloudFormation automates the creation and management of AWS resources, including Lambda functions, API Gateway, and Secrets Manager.
+このドキュメントでは、クラウドネイティブの分散SQLデータベースである[TiDB Cloudサーバーレス](https://www.pingcap.com/tidb-cloud/) 、サーバーレスでイベントドリブンなコンピューティングサービスである[AWS ラムダ](https://aws.amazon.com/lambda/)と統合するための手順を[AWS クラウドフォーメーション](https://aws.amazon.com/cloudformation/)から順に説明します。TiDB TiDB Cloud ServerlessをAmazon Lambdaと統合することで、 TiDB Cloud ServerlessとAWS Lambdaを介したマイクロサービスのスケーラビリティとコスト効率を活用できます。AWS CloudFormationは、Lambda関数、API Gateway、Secrets ManagerなどのAWSリソースの作成と管理を自動化します。
 
-## Solution overview
+## ソリューションの概要 {#solution-overview}
 
-In this guide, you will create a fully functional online bookshop with the following components:
+このガイドでは、次のコンポーネントを使用して、完全に機能するオンライン書店を作成します。
 
-- AWS Lambda Function: handles requests and queries data from a {{{ .starter }}} cluster using Sequelize ORM and Fastify API framework.
-- AWS Secrets Manager SDK: retrieves and manages connection configurations for the {{{ .starter }}} cluster.
-- AWS API Gateway: handles HTTP request routes.
-- {{{ .starter }}}: a cloud-native distributed SQL database.
+-   AWS Lambda 関数: Sequelize ORM と Fastify API フレームワークを使用して、 TiDB Cloud Serverless クラスターからのリクエストを処理し、データをクエリします。
+-   AWS Secrets Manager SDK: TiDB Cloud Serverless クラスターの接続構成を取得および管理します。
+-   AWS API Gateway: HTTP リクエストルートを処理します。
+-   TiDB Cloud Serverless: クラウドネイティブの分散 SQL データベース。
 
-AWS CloudFormation is used to create the necessary resources for the project, including the Secrets Manager, API Gateway, and Lambda Functions.
+AWS CloudFormation は、Secrets Manager、API Gateway、Lambda 関数など、プロジェクトに必要なリソースを作成するために使用されます。
 
-The structure of the bookshop project is as follows:
+書店プロジェクトの構造は次のとおりです。
 
 ![AWS Lambda structure overview](/media/develop/aws-lambda-structure-overview.png)
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-Before getting started, ensure that you have the following:
+始める前に、次のものを用意してください。
 
-- An AWS account with access to the following AWS services:
-    - [AWS CloudFormation](https://aws.amazon.com/cloudformation/)
-    - [Secrets Manager](https://aws.amazon.com/secrets-manager/)
-    - [API Gateway](https://aws.amazon.com/api-gateway/)
-    - [Lambda services](https://aws.amazon.com/lambda/)
-    - [S3](https://aws.amazon.com/s3/)
-    - [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
-- A [TiDB Cloud](https://tidbcloud.com) account and a {{{ .starter }}} cluster. Get the connection information for your {{{ .starter }}} cluster:
+-   次の AWS サービスにアクセスできる AWS アカウント:
+    -   [AWS クラウドフォーメーション](https://aws.amazon.com/cloudformation/)
+    -   [シークレットマネージャー](https://aws.amazon.com/secrets-manager/)
+    -   [APIゲートウェイ](https://aws.amazon.com/api-gateway/)
+    -   [ラムダサービス](https://aws.amazon.com/lambda/)
+    -   [S3](https://aws.amazon.com/s3/)
+    -   [IAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
+
+-   [TiDB Cloud](https://tidbcloud.com)アカウントとTiDB Cloud Serverless クラスター。TiDB TiDB Cloud Serverless クラスターの接続情報を取得します。
 
     ![TiDB Cloud connection information](/media/develop/aws-lambda-tidbcloud-connection-info.png)
 
-- API test tools such as [Postman](https://www.postman.com/) and [cURL](https://curl.se/). Most examples in this document use cURL. For Windows users, Postman is recommended.
-- Download the [latest release assets](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest) of the project to your local machine, which includes `cloudformation_template.yml` and `cloudformation_template.json` files.
+-   [郵便配達員](https://www.postman.com/)や[カール](https://curl.se/)などのAPIテストツール。このドキュメントのほとんどの例ではcURLを使用しています。WindowsユーザーにはPostmanの使用をお勧めします。
 
-> **Note:**
+-   プロジェクトの[最新リリースアセット](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest)ローカル マシンにダウンロードします。これには、 `cloudformation_template.yml`と`cloudformation_template.json`ファイルが含まれます。
+
+> **注記：**
 >
-> - When you create the AWS resources, it is recommended to use `us-east-1` as your cluster region. This is because the Lambda function code in this demo hardcodes the region as `us-east-1`, and the code bundle is stored in the `us-east-1` region. 
-> - If you use a different region, you need to follow the following instructions to modify the Lambda function code, rebuild it, and upload the code bundle to your own S3 bucket.
+> -   AWSリソースを作成する際は、クラスターのリージョンとして`us-east-1`使用することをお勧めします。これは、このデモのLambda関数コードがリージョンを`us-east-1`にハードコードし、コードバンドルが`us-east-1`リージョンに保存されるためです。
+> -   別のリージョンを使用する場合は、次の手順に従って Lambda 関数コードを変更し、再構築して、コードバンドルを独自の S3 バケットにアップロードする必要があります。
 
-<details>
-<summary>Modify and rebuild the Lambda function code if you use a region other than <code>us-east-1</code></summary>
+<details><summary><code>us-east-1</code>以外のリージョンを使用する場合は、Lambda 関数のコードを修正して再構築します。</summary>
 
-If you use `us-east-1` as your cluster region, skip this section and go to [Step 1: Set up the project using AWS CloudFormation](#step-1-set-up-the-bookshop-project-using-aws-cloudformation).
+クラスターリージョンとして`us-east-1`使用する場合は、このセクションをスキップして[ステップ1: AWS CloudFormationを使用してプロジェクトをセットアップする](#step-1-set-up-the-bookshop-project-using-aws-cloudformation)に進みます。
 
-If you use a different AWS region other than `us-east-1` to create the AWS resources, you need to modify the Lambda function code, rebuild it, and upload the code bundle to your own S3 bucket.
+AWS リソースを作成するために`us-east-1`以外の別の AWS リージョンを使用する場合は、Lambda 関数コードを変更して再構築し、コードバンドルを独自の S3 バケットにアップロードする必要があります。
 
-To avoid local development environment issues, it is recommended that you use a cloud-native development environment, such as [Gitpod](https://www.gitpod.io/).
+ローカル開発環境の問題を回避するには、 [ギットポッド](https://www.gitpod.io/)などのクラウドネイティブ開発環境を使用することをお勧めします。
 
-To rebuild and upload the code bundle to your own S3 bucket, do the following:
+コードバンドルを再構築して独自の S3 バケットにアップロードするには、次の手順を実行します。
 
-1. Initialize the development environment.
+1.  開発環境を初期化します。
 
-    - Open the [Gitpod](https://gitpod.io/#/https://github.com/pingcap/TiDB-Lambda-integration) workspace and log in with your GitHub account.
+    -   [ギットポッド](https://gitpod.io/#/https://github.com/pingcap/TiDB-Lambda-integration)ワークスペースを開き、GitHub アカウントでログインします。
 
-2. Modify the Lambda function code.
+2.  Lambda 関数のコードを変更します。
 
-    1. Open the `aws-lambda-cloudformation/src/secretManager.ts` file in the left sidebar.
-    2. Locate the line 22 and then modify the `region` variable to match your own region.
+    1.  左側のサイドバーで`aws-lambda-cloudformation/src/secretManager.ts`ファイルを開きます。
+    2.  22 行目を見つけて、 `region`変数を自分の地域に合わせて変更します。
 
-3. Rebuild the code bundle.
+3.  コード バンドルを再構築します。
 
-    1. Install the dependencies.
+    1.  依存関係をインストールします。
 
-        1. Open a terminal in Gitpod.
-        2. Enter the working directory:
+        1.  Gitpod でターミナルを開きます。
+
+        2.  作業ディレクトリを入力してください:
 
             ```shell
             cd aws-lambda-cloudformation
             ```
 
-        3. Install the dependencies:
+        3.  依存関係をインストールします。
 
             ```shell
             yarn
             ```
 
-    2. Rebuild the code bundle.
+    2.  コード バンドルを再構築します。
 
-        1. Build the code bundle.
+        1.  コードバンドルをビルドします。
 
             ```shell
             yarn build
             ```
 
-        2. Check the `aws-lambda-cloudformation/dist/index.zip` file.
-        3. Right-click the `index.zip` file and select **Download**.
+        2.  `aws-lambda-cloudformation/dist/index.zip`ファイルを確認してください。
 
-4. Upload the rebuilt code bundle to your own S3 bucket.
+        3.  `index.zip`ファイルを右クリックし、 **[ダウンロード]**を選択します。
 
-    1. Visit the [S3 service](https://console.aws.amazon.com/s3) in the AWS Management Console.
-    2. Create a new bucket in your selected region.
-    3. Upload the `index.zip` file to the bucket.
-    4. Note down the S3 bucket name and region for later use.
+4.  再構築されたコードバンドルを独自の S3 バケットにアップロードします。
+
+    1.  AWS マネジメントコンソールの[S3 サービス](https://console.aws.amazon.com/s3)アクセスします。
+    2.  選択したリージョンに新しいバケットを作成します。
+    3.  `index.zip`ファイルをバケットにアップロードします。
+    4.  後で使用するために、S3 バケット名とリージョンを書き留めておきます。
 
 </details>
 
-## Step 1. Set up the bookshop project using AWS CloudFormation
+## ステップ1. AWS CloudFormationを使用して書店プロジェクトをセットアップする {#step-1-set-up-the-bookshop-project-using-aws-cloudformation}
 
-To set up the bookshop project using AWS CloudFormation, do the following:
+AWS CloudFormation を使用してブックショップ プロジェクトをセットアップするには、次の手順を実行します。
 
-1. Navigate to the AWS Management Console and access the [AWS CloudFormation service](https://console.aws.amazon.com/cloudformation).
-2. Click **Create Stack** > **With new resources (standard)**.
-3. On the **Create Stack** page, complete the stack creation process.
+1.  AWS マネジメントコンソールに移動し、 [AWS CloudFormation サービス](https://console.aws.amazon.com/cloudformation)にアクセスします。
+2.  **[スタックの作成]** &gt; **[新しいリソースを使用 (標準)]**をクリックします。
+3.  **「スタックの作成」**ページで、スタックの作成プロセスを完了します。
 
-    1. In the **Prerequisite** area, select **Choose an existing template**.
-    2. In the **Specify template** area, select **Upload a template file**, click **Choose file** to upload the template file (either YAML or JSON), and click **Next**.
+    1.  **前提条件**領域で、**既存のテンプレートを選択**を選択します。
 
-        If you do not have the file yet, download it from [GitHub](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest). The file contains the AWS CloudFormation template that creates the necessary resources for the project.
+    2.  **[テンプレートの指定]**領域で**[テンプレート ファイルのアップロード]**を選択し、[**ファイルの選択]**をクリックしてテンプレート ファイル (YAML または JSON) をアップロードし、 **[次へ]**をクリックします。
+
+        ファイルがまだない場合は、 [GitHub](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest)からダウンロードしてください。ファイルには、プロジェクトに必要なリソースを作成する AWS CloudFormation テンプレートが含まれています。
 
         ![Create a stack](/media/develop/aws-lambda-cf-create-stack.png)
 
-    3. Specify stack details.
+    3.  スタックの詳細を指定します。
 
-        - If you use `us-east-1` as your cluster region, fill in the fields as in the following screenshot:
+        -   クラスターリージョンとして`us-east-1`使用する場合は、次のスクリーンショットのようにフィールドに入力します。
 
             ![Specify AWS Lambda stack details](/media/develop/aws-lambda-cf-stack-config.png)
 
-            - **Stack name**: enter the stack name.
-            - **S3Bucket**: enter the S3 bucket where you store the zip file.
-            - **S3Key**: enter the S3 key.
-            - **TiDBDatabase**: enter the TiDB Cloud cluster name.
-            - **TiDBHost**: enter the host URL for TiDB Cloud database access. Enter `localhost`.
-            - **TiDBPassword**: enter the password for TiDB Cloud database access.
-            - **TiDBPort**: enter the port for TiDB Cloud database access.
-            - **TiDBUser**: enter the user name for TiDB Cloud database access.
+            -   **スタック名**: スタック名を入力します。
+            -   **S3Bucket** : zip ファイルを保存する S3 バケットを入力します。
+            -   **S3Key** : S3 キーを入力します。
+            -   **TiDBDatabase** : TiDB Cloudクラスター名を入力します。
+            -   **TiDBHost** : TiDB Cloudデータベースアクセス用のホストURLを入力します。2 `localhost`入力してください。
+            -   **TiDBPassword** : TiDB Cloudデータベース アクセス用のパスワードを入力します。
+            -   **TiDBPort** : TiDB Cloudデータベース アクセス用のポートを入力します。
+            -   **TiDBUser** : TiDB Cloudデータベース アクセス用のユーザー名を入力します。
 
-        - If you use a different AWS region other than `us-east-1`, follow these steps:
+        -   `us-east-1`以外の AWS リージョンを使用する場合は、次の手順に従ってください。
 
-            1. Refer to [Modify and rebuild the Lambda function code if you use a region other than `us-east-1`](#prerequisites) to modify the Lambda function code, rebuild it, and upload the code bundle to your own S3 bucket.
-            2. In the stack details fields, specify the S3 bucket name and region in the `S3Bucket` and `S3Key` parameters according to your own configuration.
-            3. Fill in other fields as in the preceding screenshot.
+            1.  [`us-east-1`以外のリージョンを使用する場合は、Lambda 関数のコードを修正して再構築します。](#prerequisites)を参照して Lambda 関数コードを変更し、再構築して、コードバンドルを独自の S3 バケットにアップロードします。
+            2.  スタックの詳細フィールドで、独自の設定に応じて、パラメータ`S3Bucket`と`S3Key`に S3 バケット名とリージョンを指定します。
+            3.  前のスクリーンショットのように、他のフィールドに入力します。
 
-    4. Configure stack options. You can use the default configurations.
+    4.  スタックオプションを設定します。デフォルトの設定を使用できます。
 
         ![Configure stack options](/media/develop/aws-lambda-cf-stack-config-option.png)
 
-    5. Review and create the stack.
+    5.  スタックを確認して作成します。
 
         ![Review and create the stack](/media/develop/aws-lambda-cf-stack-config-review.png)
 
-## Step 2. Use the bookshop project
+## ステップ2. 書店プロジェクトを使用する {#step-2-use-the-bookshop-project}
 
-After the stack has been created, you can use the project as follows:
+スタックが作成されたら、次のようにプロジェクトを使用できます。
 
-1. Visit the [API Gateway service](https://console.aws.amazon.com/apigateway) in the AWS Management Console, click the `TiDBCloudApiGatewayV2` API, and then click **API: TiDBCloudApiGatewayV2** in the left pane.
+1.  AWS マネジメントコンソールの[APIゲートウェイサービス](https://console.aws.amazon.com/apigateway)アクセスし、 `TiDBCloudApiGatewayV2` API をクリックして、左側のペインで**API: TiDBCloudApiGatewayV2**をクリックします。
 
-2. Copy the `Invoke URL` from the **Overview** page. This URL serves as the API endpoint.
+2.  **概要**ページから`Invoke URL`コピーします。このURLがAPIエンドポイントとして機能します。
 
     ![API Gateway Invoke URL](/media/develop/aws-lambda-get-apigateway-invoke-url.png)
 
-3. Use API test tools such as Postman and cURL to test the API:
+3.  API をテストするには、Postman や cURL などの API テスト ツールを使用してください。
 
-    - Init mock books:
+    -   模擬試験本を初期化します:
 
         ```shell
         curl -X POST -H "Content-Type: application/json" -d '{"count":100}' https://<your-api-endpoint>/book/init
         ```
 
-    - Get all books:
+    -   すべての書籍を入手:
 
         ```shell
         curl https://<your-api-endpoint>/book
         ```
 
-    - Get a book by the book ID:
+    -   書籍IDで書籍を取得します:
 
         ```shell
         curl https://<your-api-endpoint>/book/<book-id>
         ```
 
-    - Create a book:
+    -   本を作成する:
 
         ```shell
         curl -X POST -H "Content-Type: application/json" -d '{ "title": "Book Title", "type": "Test", "publishAt": "2022-12-15T21:01:49.000Z", "stock": 123, "price": 12.34, "authors": "Test Test" }' https://  <your-api-endpoint>/book
         ```
 
-    - Update a book:
+    -   本を更新する:
 
         ```shell
         curl -X PUT -H "Content-Type: application/json" -d '{ "title": "Book Title(updated)" }' https://<your-api-endpoint>/book/<book-id>
         ```
 
-    - Delete a book:
+    -   本を削除する:
 
         ```shell
         curl -X DELETE https://<your-api-endpoint>/book/<book-id>
         ```
 
-## Step 3. Clean up resources
+## ステップ3. リソースをクリーンアップする {#step-3-clean-up-resources}
 
-To avoid unnecessary charges, clean up all resources that have been created.
+不要な料金を避けるため、作成されたすべてのリソースをクリーンアップしてください。
 
-1. Access the [AWS Management Console](https://console.aws.amazon.com/cloudformation). 
-2. Delete the AWS CloudFormation stack that you created.
+1.  [AWS マネジメントコンソール](https://console.aws.amazon.com/cloudformation)にアクセスします。
+2.  作成した AWS CloudFormation スタックを削除します。

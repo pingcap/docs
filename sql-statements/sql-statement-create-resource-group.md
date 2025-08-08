@@ -1,17 +1,17 @@
 ---
 title: CREATE RESOURCE GROUP
-summary: Learn the usage of CREATE RESOURCE GROUP in TiDB.
+summary: TiDB での CREATE RESOURCE GROUP の使用方法を学習します。
 ---
 
-# CREATE RESOURCE GROUP
+# リソースグループの作成 {#create-resource-group}
 
-You can use the `CREATE RESOURCE GROUP` statement to create a resource group.
+`CREATE RESOURCE GROUP`ステートメントを使用してリソース グループを作成できます。
 
-> **Note:**
+> **注記：**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 CreateResourceGroupStmt ::=
@@ -73,26 +73,25 @@ ResourceGroupRunawayActionOption ::=
 | "SWITCH_GROUP" '(' ResourceGroupName ')'
 ```
 
-The resource group name parameter (`ResourceGroupName`) must be globally unique.
+リソースグループ名パラメータ（ `ResourceGroupName` ）はグローバルに一意である必要があります。
 
-TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) is a unified abstraction unit in TiDB for CPU, IO, and other system resources.
+TiDB は次の`DirectResourceGroupOption`サポートします[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)は、CPU、IO、およびその他のシステム リソース用の TiDB 内の統一された抽象化単位です。
 
-| Option     | Description                         | Example                |
-|---------------|-------------------------------------|------------------------|
-| `RU_PER_SEC`  | Rate of RU backfilling per second   | `RU_PER_SEC = 500` indicates that this resource group is backfilled with 500 RUs per second    |
-| `PRIORITY`    | The absolute priority of tasks to be processed on TiKV  | `PRIORITY = HIGH` indicates that the priority is high. If not specified, the default value is `MEDIUM`. |
-| `BURSTABLE`   | If the `BURSTABLE` attribute is set, TiDB allows the corresponding resource group to use the available system resources when the quota is exceeded. |
-| `QUERY_LIMIT` | When the query execution meets this condition, the query is identified as a runaway query and the corresponding action is executed. | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')` indicates that the query is identified as a runaway query when the execution time exceeds 60 seconds. The query is terminated. All SQL statements with the same SQL text will be terminated immediately in the coming 10 minutes. `QUERY_LIMIT=()` or `QUERY_LIMIT=NULL` means that runaway control is not enabled. See [Runaway Queries](/tidb-resource-control-runaway-queries.md). |
+| オプション         | 説明                                                                                    | 例                                                                                                                                                                                                                                                                                                            |
+| ------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `RU_PER_SEC`  | 1秒あたりのRUバックフィル速度                                                                      | `RU_PER_SEC = 500` 、このリソース グループが 1 秒あたり 500 RU でバックフィルされることを示します。                                                                                                                                                                                                                                            |
+| `PRIORITY`    | TiKVで処理されるタスクの絶対的な優先度                                                                 | `PRIORITY = HIGH`優先度が高いことを示します。指定されていない場合は、デフォルト値は`MEDIUM`です。                                                                                                                                                                                                                                                |
+| `BURSTABLE`   | `BURSTABLE`属性が設定されている場合、TiDB は、クォータを超えたときに、対応するリソース グループが使用可能なシステム リソースを使用することを許可します。 |                                                                                                                                                                                                                                                                                                              |
+| `QUERY_LIMIT` | クエリ実行がこの条件を満たす場合、クエリはランナウェイ クエリとして識別され、対応するアクションが実行されます。                              | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')` 、実行時間が 60 秒を超えるとクエリがランナウェイクエリと判断されることを示します。クエリは終了します。同じ SQL テキストを持つすべての SQL 文は、今後 10 分以内に即時に終了します`QUERY_LIMIT=()`または`QUERY_LIMIT=NULL` 、ランナウェイ制御が無効であることを意味します。6 [ランナウェイクエリ](/tidb-resource-control-runaway-queries.md)参照してください。 |
 
-> **Note:**
+> **注記：**
 >
-> - The `CREATE RESOURCE GROUP` statement can only be executed when the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
-> TiDB automatically creates a `default` resource group during cluster initialization. For this resource group, the default value of `RU_PER_SEC` is `UNLIMITED` (equivalent to the maximum value of the `INT` type, that is, `2147483647`) and it is in `BURSTABLE` mode. All requests that are not bound to any resource group are automatically bound to this `default` resource group. When you create a new configuration for another resource group, it is recommended to modify the `default` resource group configuration as needed.
-> - Currently, only the `default` resource group supports modifying the `BACKGROUND` configuration.
+> -   `CREATE RESOURCE GROUP`文は、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) `ON`に設定されている場合にのみ実行できます。TiDB は、クラスタの初期化中に`default`リソースグループを自動的に作成します。このリソースグループでは、デフォルト値`RU_PER_SEC`は`UNLIMITED` （ `INT`タイプの最大値である`2147483647`に相当）に設定され、 `BURSTABLE`モードになります。どのリソースグループにもバインドされていないすべてのリクエストは、この`default`リソースグループに自動的にバインドされます。別のリソースグループの新しい構成を作成する場合は、必要に応じて`default`リソースグループの設定を変更することをお勧めします。
+> -   現在、 `BACKGROUND`構成の変更をサポートしているのは`default`リソース グループのみです。
 
-## Examples
+## 例 {#examples}
 
-Create two resource groups `rg1` and `rg2`.
+2 つのリソース グループ`rg1`と`rg2`作成します。
 
 ```sql
 DROP RESOURCE GROUP IF EXISTS rg1;
@@ -136,13 +135,13 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1' or NAME = 'rg
 2 rows in set (1.30 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-MySQL also supports [CREATE RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/create-resource-group.html). However, the acceptable parameters are different from that of TiDB so that they are not compatible.
+MySQLも[リソースグループの作成](https://dev.mysql.com/doc/refman/8.0/en/create-resource-group.html)サポートしています。ただし、許容されるパラメータがTiDBと異なるため、互換性がありません。
 
-## See also
+## 参照 {#see-also}
 
-* [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
-* [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
-* [ALTER USER RESOURCE GROUP](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)
-* [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)
+-   [リソースグループの削除](/sql-statements/sql-statement-drop-resource-group.md)
+-   [リソースグループの変更](/sql-statements/sql-statement-alter-resource-group.md)
+-   [ユーザーリソースグループの変更](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)
+-   [リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)

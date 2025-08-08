@@ -1,65 +1,70 @@
 ---
 title: Subscribe via Slack
-summary: Learn how to monitor your TiDB cluster by getting alert notifications via Slack.
+summary: Slack 経由でアラート通知を受信して TiDB クラスターを監視する方法を学びます。
 ---
 
-# Subscribe via Slack
+# Slackで購読する {#subscribe-via-slack}
 
-TiDB Cloud provides you with an easy way to subscribe to alert notifications via [Slack](https://slack.com/), [email](/tidb-cloud/monitor-alert-email.md), and [Zoom](/tidb-cloud/monitor-alert-zoom.md). This document describes how to subscribe to alert notifications via Slack.
+TiDB Cloud、 [スラック](https://slack.com/) [ズーム](/tidb-cloud/monitor-alert-zoom.md)方法でアラート通知を簡単に購読できます。このドキュメントでは[メール](/tidb-cloud/monitor-alert-email.md) Slack経由でアラート通知を購読する方法について説明します。
 
-The following screenshot shows two example alerts.
+次のスクリーンショットは、 2 つのアラートの例を示しています。
 
 ![TiDB Cloud Alerts in Slack](/media/tidb-cloud/tidb-cloud-alert-subscription.png)
 
-> **Note:**
+> **注記：**
 >
-> Currently, alert subscription is only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+> 現在、アラートサブスクリプションは[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対してのみ利用可能です。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- The subscribing via Slack feature is only available for organizations that subscribe to the **Enterprise** or **Premium** support plan.
+-   Slack 経由のサブスクリプション機能は、**エンタープライズ**または**プレミアム**サポート プランに加入している組織でのみ利用できます。
 
-- To subscribe to alert notifications of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Project Owner` access to the target project in TiDB Cloud.
+-   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権またはTiDB Cloudの対象プロジェクトへの`Project Owner`アクセス権が必要です。
 
-## Subscribe to alert notifications
+## アラート通知を購読する {#subscribe-to-alert-notifications}
 
-### Step 1. Generate a Slack webhook URL
+### ステップ1. SlackのWebhook URLを生成する {#step-1-generate-a-slack-webhook-url}
 
-1. [Create a Slack app](https://api.slack.com/apps/new), if you do not have one already. Click **Create New App**, and choose **From scratch**. Enter a name, choose a workspace to associate your app with, and then click **Create App**.
-2. Go to the settings page for your app. You can load its settings via your [app's management dashboard](https://api.slack.com/apps).
-3. Click the **Incoming Webhooks** tab, and then toggle **Activate Incoming Webhooks** to **ON**.
-4. Click **Add New Webhook to Workspace**.
-5. Select a channel that you want to receive alert notifications in, and then select **Authorize**. If you need to add the incoming webhook to a private channel, you must first be in that channel.
+1.  [Slackアプリを作成する](https://api.slack.com/apps/new) （まだ作成していない場合は）を選択します。 **「Create New App（新規アプリの作成）」**をクリックし、「 **From Scratch（最初から**作成）」を選択します。名前を入力し、アプリを関連付けるワークスペースを選択して、 **「Create App（アプリの作成）」**をクリックします。
+2.  アプリの設定ページに移動します。1 から設定を読み込むことができます[アプリの管理ダッシュボード](https://api.slack.com/apps)
+3.  **[Incoming Webhooks]**タブをクリックし、 **[Activate Incoming Webhooks]**を**[ON]**に切り替えます。
+4.  **「ワークスペースに新しい Webhook を追加」**をクリックします。
+5.  アラート通知を受信するチャネルを選択し、 **「承認」**を選択します。受信Webhookをプライベートチャネルに追加する必要がある場合は、まずそのチャネルに参加する必要があります。
 
-You can see a new entry under the **Webhook URLs for Your Workspace** section in the following format: `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`.
+**「ワークスペースの Webhook URL」**セクションの下に、次の形式で新しいエントリが表示されます: `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX` 。
 
-### Step 2. Subscribe from TiDB Cloud
+### ステップ2. TiDB Cloudからサブスクライブする {#step-2-subscribe-from-tidb-cloud}
 
-> **Tip:**
+> **ヒント：**
 >
-> The alert subscription is for all alerts in the current project. If you have multiple clusters in the project, you just need to subscribe once.
+> アラートサブスクリプションは、現在のプロジェクト内のすべてのアラートに適用されます。プロジェクト内に複数のクラスターがある場合は、一度だけサブスクリプションすれば済みます。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
-3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
-4. Select **Slack** from the **Subscriber Type** drop-down list.
-5. Enter a name in the **Name** field and your Slack webhook URL in the **URL** field.
-6. Click **Test Connection**.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用してターゲット プロジェクトに切り替えます。
 
-    - If the test succeeds, the **Save** button is displayed.
-    - If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and retry the connection.
+2.  左側のナビゲーション ペインで、 **[プロジェクト設定]** &gt; **[アラート サブスクリプション]**をクリックします。
 
-7. Click **Save** to complete the subscription.
+3.  **アラート サブスクリプション**ページで、右上隅の**[サブスクライバーの追加]**をクリックします。
 
-Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the cluster. You will be directed to the **Alert Subscriber** page.
+4.  **「サブスクライバータイプ」**ドロップダウンリストから**Slack**を選択します。
 
-If an alert condition remains unchanged, the alert sends notifications every three hours.
+5.  **「名前」**フィールドに名前を入力し、 **「URL」**フィールドに Slack Webhook URL を入力します。
 
-## Unsubscribe from alert notifications
+6.  **[接続テスト]**をクリックします。
 
-If you no longer want to receive alert notifications of clusters in your project, take the following steps:
+    -   テストが成功すると、 **[保存]**ボタンが表示されます。
+    -   テストに失敗した場合は、エラーメッセージが表示されます。メッセージに従って問題を解決し、接続を再試行してください。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
-2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
-3. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
-4. Click **Unsubscribe** to confirm the unsubscription.
+7.  **「保存」**をクリックしてサブスクリプションを完了します。
+
+または、クラスターの**アラート**ページの右上隅にある**「サブスクライブ」**をクリックすることもできます。**アラートサブスクライバー**ページに移動します。
+
+アラート条件が変更されない場合、アラートは 3 時間ごとに通知を送信します。
+
+## アラート通知の購読を解除する {#unsubscribe-from-alert-notifications}
+
+プロジェクト内のクラスターのアラート通知を受信したくない場合は、次の手順を実行します。
+
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用してターゲット プロジェクトに切り替えます。
+2.  左側のナビゲーション ペインで、 **[プロジェクト設定]** &gt; **[アラート サブスクリプション]**をクリックします。
+3.  **[アラート サブスクリプション]**ページで、削除する対象のサブスクライバーの行を見つけて、 **[...]** &gt; **[サブスクリプション解除]**をクリックします。
+4.  登録解除を確認するには、 **「登録解除」を**クリックします。

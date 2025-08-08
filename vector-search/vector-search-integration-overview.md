@@ -1,87 +1,59 @@
 ---
 title: Vector Search Integration Overview
-summary: An overview of TiDB vector search integration, including supported AI frameworks, embedding models, and ORM libraries.
+summary: サポートされている AI フレームワーク、埋め込みモデル、ORM ライブラリなど、TiDB ベクトル検索統合の概要。
 ---
 
-# Vector Search Integration Overview
+# ベクター検索統合の概要 {#vector-search-integration-overview}
 
-This document provides an overview of TiDB vector search integration, including supported AI frameworks, embedding models, and Object Relational Mapping (ORM) libraries.
+このドキュメントでは、サポートされている AI フレームワーク、埋め込みモデル、オブジェクト リレーショナル マッピング (ORM) ライブラリなど、TiDB ベクトル検索統合の概要について説明します。
 
 <CustomContent platform="tidb">
 
-> **Warning:**
+> **警告：**
 >
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> ベクトル検索機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを見つけた場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
 </CustomContent>
 
-> **Note:**
+> **注記：**
 >
-> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
-## AI frameworks
+## AIフレームワーク {#ai-frameworks}
 
-TiDB provides official support for the following AI frameworks, enabling you to easily integrate AI applications developed based on these frameworks with TiDB Vector Search.
+TiDB は以下の AI フレームワークを公式にサポートしており、これらのフレームワークに基づいて開発された AI アプリケーションを TiDB Vector Search に簡単に統合できます。
 
-| AI frameworks | Tutorial                                                                                          |
-|---------------|---------------------------------------------------------------------------------------------------|
-| Langchain     | [Integrate Vector Search with LangChain](/vector-search/vector-search-integrate-with-langchain.md)   |
-| LlamaIndex    | [Integrate Vector Search with LlamaIndex](/vector-search/vector-search-integrate-with-llamaindex.md) |
+| AIフレームワーク | チュートリアル                                                                           |
+| --------- | --------------------------------------------------------------------------------- |
+| ランチェイン    | [LangChainとベクトル検索を統合する](/vector-search/vector-search-integrate-with-langchain.md) |
+| ラマインデックス  | [ベクトル検索とLlamaIndexの統合](/vector-search/vector-search-integrate-with-llamaindex.md) |
 
-Moreover, you can also use TiDB for various purposes, such as document storage and knowledge graph storage for AI applications.
+さらに、TiDB は、ドキュメントのstorageや AI アプリケーション用のナレッジ グラフのstorageなど、さまざまな目的に使用することもできます。
 
-## Embedding models and services
+## モデルとサービスの埋め込み {#embedding-models-and-services}
 
-TiDB Vector Search supports storing vectors of up to 16383 dimensions, which accommodates most embedding models.
+TiDB Vector Search は、最大 16383 次元のベクトルの保存をサポートしており、ほとんどの埋め込みモデルに対応します。
 
-You can either use self-deployed open-source embedding models or third-party embedding APIs provided by third-party embedding providers to generate vectors.
+ベクトルを生成するには、自己展開されたオープンソースの埋め込みモデルを使用するか、サードパーティの埋め込みプロバイダーが提供するサードパーティの埋め込み API を使用できます。
 
-The following table lists some mainstream embedding service providers and the corresponding integration tutorials.
+次の表には、いくつかの主要な埋め込みサービス プロバイダーと、対応する統合チュートリアルがリストされています。
 
-| Embedding service providers | Tutorial                                                                                                            |
-|-----------------------------|---------------------------------------------------------------------------------------------------------------------|
-| Jina AI                     | [Integrate Vector Search with Jina AI Embeddings API](/vector-search/vector-search-integrate-with-jinaai-embedding.md) |
+| 埋め込みサービスプロバイダー | チュートリアル                                                                                               |
+| -------------- | ----------------------------------------------------------------------------------------------------- |
+| ジナ・アイ          | [Jina AI Embeddings APIとベクター検索を統合する](/vector-search/vector-search-integrate-with-jinaai-embedding.md) |
 
-## Object Relational Mapping (ORM) libraries
+## オブジェクトリレーショナルマッピング（ORM）ライブラリ {#object-relational-mapping-orm-libraries}
 
-You can integrate TiDB Vector Search with your ORM library to interact with the TiDB database.
+TiDB Vector Search を ORM ライブラリと統合して、TiDB データベースと対話することができます。
 
-The following table lists the supported ORM libraries and the corresponding integration tutorials:
+次の表に、サポートされている ORM ライブラリと対応する統合チュートリアルを示します。
 
-<table>
-  <tr>
-    <th>Language</th>
-    <th>ORM/Client</th>
-    <th>How to install</th>
-    <th>Tutorial</th>
-  </tr>
-  <tr>
-    <td rowspan="4">Python</td>
-    <td>TiDB Vector Client</td>
-    <td><code>pip install tidb-vector[client]</code></td>
-    <td><a href="/tidb/v8.5/vector-search-get-started-using-python">Get Started with Vector Search Using Python</a></td>
-  </tr>
-  <tr>
-    <td>SQLAlchemy</td>
-    <td><code>pip install tidb-vector</code></td>
-    <td><a href="/tidb/v8.5/vector-search-integrate-with-sqlalchemy">Integrate TiDB Vector Search with SQLAlchemy</a></td>
-  </tr>
-  <tr>
-    <td>peewee</td>
-    <td><code>pip install tidb-vector</code></td>
-    <td><a href="/tidb/v8.5/vector-search-integrate-with-peewee">Integrate TiDB Vector Search with peewee</a></td>
-  </tr>
-  <tr>
-    <td>Django</td>
-    <td><code>pip install django-tidb[vector]</code></td>
-    <td><a href="/tidb/v8.5/vector-search-integrate-with-django-orm">Integrate TiDB Vector Search with Django</a></td>
-  </tr>
-</table>
+<table><tr><th>言語</th><th>ORM/クライアント</th><th>インストール方法</th><th>チュートリアル</th></tr><tr><td rowspan="4">パイソン</td><td>TiDB ベクタークライアント</td><td><code>pip install tidb-vector[client]</code></td><td> <a href="/tidb/v8.5/vector-search-get-started-using-python">Pythonを使ったベクトル検索入門</a></td></tr><tr><td>SQLアルケミー</td><td><code>pip install tidb-vector</code></td><td> <a href="/tidb/v8.5/vector-search-integrate-with-sqlalchemy">TiDBベクトル検索をSQLAlchemyと統合する</a></td></tr><tr><td>ピーウィー</td><td><code>pip install tidb-vector</code></td><td> <a href="/tidb/v8.5/vector-search-integrate-with-peewee">TiDBベクトル検索をpeeweeと統合する</a></td></tr><tr><td>ジャンゴ</td><td><code>pip install django-tidb[vector]</code></td><td> <a href="/tidb/v8.5/vector-search-integrate-with-django-orm">TiDBベクトル検索をDjangoに統合する</a></td></tr></table>

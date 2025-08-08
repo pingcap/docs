@@ -1,92 +1,88 @@
 ---
 title: TiDB Deployment FAQs
-summary: Learn about the FAQs related to TiDB deployment.
+summary: TiDB のデプロイメントに関連する FAQ について説明します。
 ---
 
-# TiDB Deployment FAQs
+# TiDB デプロイメントに関する FAQ {#tidb-deployment-faqs}
 
-This document summarizes the FAQs related to TiDB deployment.
+このドキュメントでは、TiDB のデプロイメントに関連する FAQ をまとめています。
 
-## Software and hardware requirements
+## ソフトウェアとハードウェアの要件 {#software-and-hardware-requirements}
 
-### What operating systems does TiDB support?
+### TiDB はどのオペレーティング システムをサポートしていますか? {#what-operating-systems-does-tidb-support}
 
-For the TiDB-supported operating systems, see [Software and Hardware Recommendations](/hardware-and-software-requirements.md).
+TiDB がサポートするオペレーティング システムについては、 [ソフトウェアとハードウェアの推奨事項](/hardware-and-software-requirements.md)参照してください。
 
-### What is the recommended hardware configuration for a TiDB cluster in the development, test, or production environment?
+### 開発、テスト、または本番環境における TiDB クラスターの推奨ハードウェア構成は何ですか? {#what-is-the-recommended-hardware-configuration-for-a-tidb-cluster-in-the-development-test-or-production-environment}
 
-You can deploy and run TiDB on the 64-bit generic hardware server platform in the Intel x86-64 architecture or on the hardware server platform in the ARM architecture. For the requirements and recommendations about server hardware configuration for development, test, and production environments, see [Software and Hardware Recommendations - Server requirements](/hardware-and-software-requirements.md#server-requirements).
+TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェア・サーバー・プラットフォーム、またはARMアーキテクチャのハードウェア・サーバー・プラットフォームに導入および実行できます。開発環境、テスト環境、および本番環境におけるサーバー・ハードウェア構成の要件と推奨事項については、 [ソフトウェアとハードウェアの推奨事項 - サーバー要件](/hardware-and-software-requirements.md#server-requirements)参照してください。
 
-### What's the purposes of 2 network cards of 10 gigabit?
+### 10 ギガビットのネットワーク カード 2 枚の目的は何ですか? {#what-s-the-purposes-of-2-network-cards-of-10-gigabit}
 
-As a distributed cluster, TiDB has a high demand on time, especially for PD, because PD needs to distribute unique timestamps. If the time in the PD servers is not consistent, it takes longer waiting time when switching the PD server. The bond of two network cards guarantees the stability of data transmission, and 10 gigabit guarantees the transmission speed. Gigabit network cards are prone to meet bottlenecks, therefore it is strongly recommended to use 10 gigabit network cards.
+分散型クラスタであるTiDBは、特にPDに対して高い時間要件を要求します。これは、PDが一意のタイムスタンプを配布する必要があるためです。PDサーバーの時刻が一致していないと、PDサーバーを切り替える際に待機時間が長くなります。2枚のネットワークカードの結合によりデータ転送の安定性が保証され、10ギガビットの速度により転送速度が保証されます。ギガビットネットワークカードはボトルネックになりやすいため、10ギガビットネットワークカードの使用を強くお勧めします。
 
-### Is it feasible if we don't use RAID for SSD?
+### SSD に RAID を使用しない場合は実現可能でしょうか? {#is-it-feasible-if-we-don-t-use-raid-for-ssd}
 
-If the resources are adequate, it is recommended to use RAID 10 for SSD. If the resources are inadequate, it is acceptable not to use RAID for SSD.
+リソースが十分にある場合は、SSDにRAID 10を使用することをお勧めします。リソースが不十分な場合は、SSDにRAIDを使用しなくても問題ありません。
 
-### What's the recommended configuration of TiDB components?
+### TiDB コンポーネントの推奨構成は何ですか? {#what-s-the-recommended-configuration-of-tidb-components}
 
-- TiDB has a high requirement on CPU and memory.
-- PD stores the cluster metadata and has frequent Read and Write requests. It demands a high I/O disk. A disk of low performance will affect the performance of the whole cluster. It is recommended to use SSD disks. In addition, a larger number of Regions has a higher requirement on CPU and memory.
-- TiKV has a high requirement on CPU, memory and disk. It is required to use SSD.
+-   TiDB は CPU とメモリに対して高い要件があります。
+-   PDはクラスタのメタデータを保存し、頻繁に読み取りおよび書き込みリクエストが発生します。そのため、高いI/Oディスクを必要とします。ディスクパフォーマンスが低いと、クラスタ全体のパフォーマンスに影響します。SSDディスクの使用をお勧めします。また、リージョン数が多いほど、CPUとメモリの要件が高くなります。
+-   TiKVはCPU、メモリ、ディスクに対する要件が厳しく、SSDの使用が必須です。
 
-For details, see [Software and Hardware Recommendations](/hardware-and-software-requirements.md).
+詳細は[ソフトウェアとハードウェアの推奨事項](/hardware-and-software-requirements.md)参照。
 
-## Installation and deployment
+## インストールと展開 {#installation-and-deployment}
 
-For the production environment, it is recommended to use [TiUP](/tiup/tiup-overview.md) to deploy your TiDB cluster. See [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
+本番環境では、 [TiUP](/tiup/tiup-overview.md)使用してTiDBクラスタをデプロイすることをお勧めします。3 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)参照してください。
 
-### Why the modified `toml` configuration for TiKV/PD does not take effect?
+### TiKV/PD 用に変更された<code>toml</code>構成が有効にならないのはなぜですか? {#why-the-modified-code-toml-code-configuration-for-tikv-pd-does-not-take-effect}
 
-You need to set the `--config` parameter in TiKV/PD to make the `toml` configuration effective. TiKV/PD does not read the configuration by default. Currently, this issue only occurs when deploying using Binary. For TiKV, edit the configuration and restart the service. For PD, the configuration file is only read when PD is started for the first time, after which you can modify the configuration using pd-ctl. For details, see [PD Control User Guide](/pd-control.md).
+`toml`設定を有効にするには、TiKV/PD で`--config`パラメータを設定する必要があります。TiKV/PD はデフォルトでは設定を読み込みません。現在、この問題はバイナリを使用してデプロイした場合にのみ発生します。TiKV の場合は、設定を編集してサービスを再起動してください。PD の場合は、設定ファイルは PD の初回起動時にのみ読み込まれ、その後は pd-ctl を使用して設定を変更できます。詳細は[PD Controlユーザー ガイド](/pd-control.md)参照してください。
 
-### Should I deploy the TiDB monitoring framework (Prometheus + Grafana) on a standalone machine or on multiple machines? What is the recommended CPU and memory?
+### TiDB 監視フレームワーク (Prometheus + Grafana) はスタンドアロンマシンに導入すべきでしょうか、それとも複数のマシンに導入すべきでしょうか? 推奨される CPU とメモリはどれくらいでしょうか? {#should-i-deploy-the-tidb-monitoring-framework-prometheus-grafana-on-a-standalone-machine-or-on-multiple-machines-what-is-the-recommended-cpu-and-memory}
 
-The monitoring machine is recommended to use standalone deployment. It is recommended to use an 8 core CPU with 16 GB+ memory and a 500 GB+ hard disk.
+監視マシンはスタンドアロン構成での使用を推奨します。8コアCPU、16GB以上のメモリ、500GB以上のハードディスクを搭載することを推奨します。
 
-### Why the monitor cannot display all metrics?
+### モニターがすべてのメトリックを表示できないのはなぜですか? {#why-the-monitor-cannot-display-all-metrics}
 
-Check the time difference between the machine time of the monitor and the time within the cluster. If it is large, you can correct the time and the monitor will display all the metrics.
+モニターのマシン時間とクラスター内の時間の差を確認してください。差が大きい場合は、時間を修正すると、モニターはすべてのメトリックを表示します。
 
-### How to separately record the slow query log in TiDB? How to locate the slow query SQL statement?
+### TiDB でスロークエリ ログを個別に記録するにはどうすればよいですか? スロークエリの SQL ステートメントを見つけるにはどうすればよいでしょうか? {#how-to-separately-record-the-slow-query-log-in-tidb-how-to-locate-the-slow-query-sql-statement}
 
-1. The slow query definition for TiDB is in the TiDB configuration file. The `tidb_slow_log_threshold: 300` parameter is used to configure the threshold value of the slow query (unit: millisecond).
+1.  TiDBのスロークエリ定義はTiDB設定ファイルにあります。1パラメータ`tidb_slow_log_threshold: 300`スロークエリのしきい値（単位：ミリ秒）を設定するために使用されます。
 
-2. If a slow query occurs, you can locate the `tidb-server` instance where the slow query is and the slow query time point using Grafana and find the SQL statement information recorded in the log on the corresponding node.
+2.  スロークエリが発生した場合、Grafana を使用してスロークエリが発生している`tidb-server`インスタンスとスロークエリの時刻を特定し、該当ノードのログに記録された SQL 文の情報を見つけることができます。
 
-3. In addition to the log, you can also view the slow query using the `ADMIN SHOW SLOW` command. For details, see [`ADMIN SHOW SLOW` command](/identify-slow-queries.md#admin-show-slow-command).
+3.  ログに加えて、 `ADMIN SHOW SLOW`コマンドを使用してスロークエリも表示できます。詳細は[`ADMIN SHOW SLOW`コマンド](/identify-slow-queries.md#admin-show-slow-command)参照してください。
 
-### How to add the `label` configuration if `label` of TiKV was not configured when I deployed the TiDB cluster for the first time?
+### TiDB クラスターを初めてデプロイしたときに TiKV の<code>label</code>が設定されていなかった場合、 <code>label</code>設定を追加するにはどうすればよいですか? {#how-to-add-the-code-label-code-configuration-if-code-label-code-of-tikv-was-not-configured-when-i-deployed-the-tidb-cluster-for-the-first-time}
 
-The configuration of TiDB `label` is related to the cluster deployment architecture. It is important and is the basis for PD to execute global management and scheduling. If you did not configure `label` when deploying the cluster previously, you should adjust the deployment structure by manually adding the `location-labels` information using the PD management tool `pd-ctl`, for example, `config set location-labels "zone,rack,host"` (you should configure it based on the practical `label` level name).
+TiDB `label`の設定は、クラスタのデプロイメントアーキテクチャに関連しています。これは重要であり、PDがグローバル管理とスケジューリングを実行するための基盤となります。以前のクラスタのデプロイメント時に`label`設定していない場合は、PD管理ツール`pd-ctl`を使用して`location-labels`情報を手動で追加し、デプロイメント構造を調整する必要があります（例： `config set location-labels "zone,rack,host"` ）。（実際の`label`レベル名に基づいて設定する必要があります）。
 
-For the usage of `pd-ctl`, see [PD Control User Guide](/pd-control.md).
+`pd-ctl`の使い方については[PD Controlユーザーガイド](/pd-control.md)参照してください。
 
-### Why does the `dd` command for the disk test use the `oflag=direct` option?
+### ディスク テストの<code>dd</code>コマンドが<code>oflag=direct</code>オプションを使用するのはなぜですか? {#why-does-the-code-dd-code-command-for-the-disk-test-use-the-code-oflag-direct-code-option}
 
-The Direct mode wraps the Write request into the I/O command and sends this command to the disk to bypass the file system cache and directly test the real I/O Read/Write performance of the disk.
+ダイレクト モードでは、書き込み要求を I/O コマンドにラップし、このコマンドをディスクに送信してファイル システム キャッシュをバイパスし、ディスクの実際の I/O 読み取り/書き込みパフォーマンスを直接テストします。
 
-### How to use the `fio` command to test the disk performance of the TiKV instance?
+### <code>fio</code>コマンドを使用して TiKV インスタンスのディスク パフォーマンスをテストするにはどうすればよいですか? {#how-to-use-the-code-fio-code-command-to-test-the-disk-performance-of-the-tikv-instance}
 
-- Random Read test:
-
-    {{< copyable "shell-regular" >}}
+-   ランダム読み取りテスト:
 
     ```bash
     ./fio -ioengine=psync -bs=32k -fdatasync=1 -thread -rw=randread -size=10G -filename=fio_randread_test.txt -name='fio randread test' -iodepth=4 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_result.json
     ```
 
-- The mix test of sequential Write and random Read:
-
-    {{< copyable "shell-regular" >}}
+-   シーケンシャル書き込みとランダム読み取りの混合テスト:
 
     ```bash
     ./fio -ioengine=psync -bs=32k -fdatasync=1 -thread -rw=randrw -percentage_random=100,0 -size=10G -filename=fio_randread_write_test.txt -name='fio mixed randread and sequential write test' -iodepth=4 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_write_test.json
     ```
 
-## What public cloud vendors are currently supported by TiDB?
+## 現在 TiDB でサポートされているパブリック クラウド ベンダーは何ですか? {#what-public-cloud-vendors-are-currently-supported-by-tidb}
 
-TiDB supports deployment on [Google Cloud GKE](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke), [AWS EKS](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks), and [Alibaba Cloud ACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud).
+TiDB は[Google Cloud GKE](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke) 、 [AWS EKS](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks) 、 [アリババクラウドACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud)でのデプロイメントをサポートします。
 
-In addition, TiDB is currently available on JD Cloud and UCloud.
+さらに、TiDB は現在 JD Cloud と UCloud でも利用可能です。

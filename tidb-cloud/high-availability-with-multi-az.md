@@ -1,22 +1,22 @@
 ---
 title: High Availability in TiDB Cloud Dedicated
-summary: TiDB Cloud Dedicated supports high availability with Multi-AZ deployments.
+summary: TiDB Cloud Dedicated は、マルチ AZ デプロイメントによる高可用性をサポートします。
 ---
 
-# High Availability in TiDB Cloud Dedicated
+# TiDB Cloud専用における高可用性 {#high-availability-in-tidb-cloud-dedicated}
 
-TiDB uses the Raft consensus algorithm to ensure that data is highly available and safely replicated throughout storage in Raft Groups. Data is redundantly copied between storage nodes and placed in different availability zones to protect against machine or data center failures. With automatic failover, TiDB ensures that your service is always on.
+TiDBはRaftコンセンサスアルゴリズムを使用し、 Raftグループ内のstorage全体にデータの高可用性と安全なレプリケーションを実現します。データはstorageノード間で冗長コピーされ、異なるアベイラビリティゾーンに配置されるため、マシンやデータセンターの障害から保護されます。自動フェイルオーバー機能により、TiDBはサービスの常時稼働を保証します。
 
-TiDB Cloud Dedicated clusters consist of three major components: TiDB node, TiKV node, and TiFlash node. The high availability implementation of each component for TiDB Cloud Dedicated is as follows:
+TiDB Cloud Dedicated クラスタは、TiDB ノード、TiKV ノード、 TiFlashノードという 3 つの主要コンポーネントで構成されています。TiDB TiDB Cloud Dedicated の各コンポーネントの高可用性実装は次のとおりです。
 
-* **TiDB node**
+-   **TiDBノード**
 
-    TiDB is for computing only and does not store data. It is horizontally scalable. TiDB Cloud Dedicated deploys TiDB nodes evenly to different availability zones in a region. When a user executes a SQL request, the request first passes through a load balancer deployed across availability zones, and then the load balancer distributes the request to different TiDB nodes for execution. It is recommended that each TiDB Cloud Dedicated cluster has at least two TiDB nodes for high availability.
+    TiDBはコンピューティングのみを目的としており、データの保存は行いません。水平方向に拡張可能です。TiDB TiDB Cloud Dedicatedは、リージョン内の異なるアベイラビリティゾーンにTiDBノードを均等に配置します。ユーザーがSQLリクエストを実行すると、リクエストはまず複数のアベイラビリティゾーンに展開されたロードバランサーを通過し、その後、ロードバランサーによって複数のTiDBノードに分散されて実行されます。高可用性を確保するため、各TiDB Cloud Dedicatedクラスタには少なくとも2つのTiDBノードを配置することをお勧めします。
 
-* **TiKV node**
+-   **TiKVノード**
 
-    [TiKV](https://docs.pingcap.com/tidb/stable/tikv-overview) is the row-based storage layer of TiDB Cloud Dedicated cluster with horizontal scalability. The minimum number of TiKV nodes for a TiDB Cloud Dedicated cluster is 3. TiDB Cloud Dedicated deploys TiKV nodes evenly to all availability zones (at least 3) in the region you select to achieve durability and high availability. In a typical 3-replica setup, your data is distributed evenly among the TiKV nodes across all availability zones and is persisted to the disk of each TiKV node.
+    [TiKV](https://docs.pingcap.com/tidb/stable/tikv-overview) 、水平スケーラビリティを備えたTiDB Cloud Dedicatedクラスタの行ベースのstorageレイヤーです。TiDB TiDB Cloud DedicatedクラスタのTiKVノードの最小数は3です。TiDB TiDB Cloud Dedicatedは、選択したリージョン内のすべてのアベイラビリティゾーン（少なくとも3つ）にTiKVノードを均等にデプロイすることで、耐久性と高可用性を実現します。典型的な3レプリカ構成では、データはすべてのアベイラビリティゾーンのTiKVノードに均等に分散され、各TiKVノードのディスクに永続化されます。
 
-* **TiFlash node**
+-   **TiFlashノード**
 
-    [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview), as a columnar storage extension of TiKV, is the key component that makes TiDB essentially a Hybrid Transactional/Analytical Processing (HTAP) database. In TiFlash, the columnar replicas are asynchronously replicated according to the Raft Learner consensus algorithm. TiDB Cloud Dedicated deploys TiFlash nodes evenly to different availability zones in a region. It is recommended that you configure at least two TiFlash nodes in each TiDB Cloud Dedicated cluster and create at least two replicas of the data for high availability in your production environment.
+    [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) 、TiKV の列指向storage拡張機能であり、TiDB を本質的にハイブリッドトランザクション/分析処理 (HTAP) データベースにする重要なコンポーネントです。TiFlashTiFlash、列指向レプリカはRaft Learnerコンセンサスアルゴリズムに従って非同期的に複製されます。TiDB TiDB Cloud Dedicated は、 TiFlashノードをリージョン内の異なるアベイラビリティゾーンに均等にデプロイします。本番環境での高可用性を確保するため、各TiDB Cloud Dedicated クラスターに少なくとも 2 つのTiFlashノードを設定し、少なくとも 2 つのデータレプリカを作成本番ことをお勧めします。

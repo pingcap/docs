@@ -1,94 +1,94 @@
 ---
 title: SQL
-summary: Learn about SQL concepts for TiDB.
+summary: TiDB の SQL 概念について学習します。
 ---
 
-# SQL
+# SQL {#sql}
 
-TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.0. The ecosystem tools for MySQL (PHPMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](https://docs.pingcap.com/tidb/v7.2/dev-guide-third-party-support#gui)) and the MySQL client can be used for TiDB.
+TiDBは、MySQLプロトコル、およびMySQL 5.7とMySQL 8.0の共通機能と構文と高い互換性があります。MySQLエコシステムツール（PHPMyAdmin、Navicat、MySQL Workbench、DBeaver、 [もっと](https://docs.pingcap.com/tidb/v7.2/dev-guide-third-party-support#gui) ）とMySQLクライアントはTiDBでも使用できます。
 
-However, some features of MySQL are not supported in TiDB. This could be because there is now a better way to solve the problem (such as the use of JSON instead of XML functions) or a lack of current demand versus effort required (such as stored procedures and functions). Additionally, some features might be difficult to implement in a distributed system. For more information, see [MySQL Compatibility](/mysql-compatibility.md).
+ただし、MySQLの一部の機能はTiDBではサポートされていません。これは、問題を解決するより優れた方法が存在する（XML関数の代わりにJSONを使用するなど）ため、または必要な労力に対して需要が不足している（ストアドプロシージャや関数など）ためと考えられます。さらに、一部の機能は分散システムへの実装が難しい場合があります。詳細については、 [MySQLの互換性](/mysql-compatibility.md)参照してください。
 
-## SQL statements
+## SQL文 {#sql-statements}
 
-A SQL statement is a command or instruction in SQL (Structured Query Language) composed of identifiers, parameters, variables, data types, and reserved SQL keywords. It directs the database to perform specific actions, such as retrieving, modifying, or managing data and database structures.
+SQL文は、SQL（構造化照会言語）のコマンドまたは命令であり、識別子、パラメータ、変数、データ型、および予約語SQLから構成されます。SQL文は、データやデータベース構造の取得、変更、管理など、データベースに特定のアクションを実行するよう指示します。
 
-TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensions for MySQL and TiDB-specific statements where necessary.
+TiDB は、必要に応じて MySQL および TiDB 固有のステートメントの拡張機能を使用して、ISO/IEC SQL 標準に準拠することを目的とした SQL ステートメントを使用します。
 
-SQL is divided into the following 4 types according to their functions:
+SQL は関数に応じて次の 4 つの種類に分けられます。
 
-- DDL (Data Definition Language): It is used to define database objects, including databases, tables, views, and indexes. For DDL statements in TiDB, see [Schema management / Data definition statements (DDL)](/sql-statements/sql-statement-overview.md#schema-management--data-definition-statements-ddl).
+-   DDL（データ定義言語）：データベース、テーブル、ビュー、インデックスなどのデータベースオブジェクトを定義するために使用されます。TiDBのDDL文については、 [スキーマ管理 / データ定義文（DDL）](/sql-statements/sql-statement-overview.md#schema-management--data-definition-statements-ddl)参照してください。
 
-- DML (Data Manipulation Language): It is used to manipulate application-related records. For DML statements in TiDB, see [Data manipulation statements (DML)](/sql-statements/sql-statement-overview.md#data-manipulation-statements-dml).
+-   DML（データ操作言語）：アプリケーション関連のレコードを操作するために使用されます。TiDBのDMLステートメントについては、 [データ操作ステートメント（DML）](/sql-statements/sql-statement-overview.md#data-manipulation-statements-dml)参照してください。
 
-- DQL (Data Query Language): It is used to query the records after conditional filtering.
+-   DQL (データ クエリ言語): 条件付きフィルタリング後にレコードをクエリするために使用されます。
 
-- DCL (Data Control Language): It is used to define access privileges and security levels.
+-   DCL (データ制御言語): アクセス権限とセキュリティ レベルを定義するために使用されます。
 
-To get an overview of SQL statements in TiDB, see [SQL Statement Overview](/sql-statements/sql-statement-overview.md).
+TiDB の SQL ステートメントの概要については、 [SQL文の概要](/sql-statements/sql-statement-overview.md)参照してください。
 
-## SQL mode
+## SQLモード {#sql-mode}
 
-TiDB servers operate in different SQL modes and apply these modes differently for different clients. SQL mode defines the SQL syntax that TiDB supports and the type of data validation check to perform.
+TiDB サーバーは異なる SQL モードで動作し、クライアントごとに異なるモードを適用します。SQL モードは、TiDB がサポートする SQL 構文と実行するデータ検証チェックの種類を定義します。
 
-For more information, see [SQL Mode](/sql-mode.md).
+詳細については[SQLモード](/sql-mode.md)参照してください。
 
-## Row ID generation attributes
+## 行ID生成属性 {#row-id-generation-attributes}
 
-TiDB provides three SQL attributes to optimize row ID generation and data distribution.
+TiDB は、行 ID の生成とデータ分散を最適化するための 3 つの SQL 属性を提供します。
 
-- AUTO_INCREMENT
+-   自動インクリメント
 
-- AUTO_RANDOM
+-   自動ランダム
 
-- SHARD_ROW_ID_BITS
+-   シャード行IDビット
 
-### AUTO_INCREMENT
+### 自動インクリメント {#auto-increment}
 
-`AUTO_INCREMENT` is a column attribute that is used to automatically fill in default column values. When the `INSERT` statement does not specify values for the `AUTO_INCREMENT` column, the system automatically assigns values to this column.
+`AUTO_INCREMENT` 、デフォルトの列値を自動的に入力するために使用される列属性です。2 `INSERT`ステートメントで`AUTO_INCREMENT`番目の列の値が指定されていない場合、システムは自動的にこの列に値を割り当てます。
 
-For performance reasons, `AUTO_INCREMENT` numbers are allocated in a batch of values (30 thousand by default) to each TiDB server. This means that while `AUTO_INCREMENT` numbers are guaranteed to be unique, values assigned to an `INSERT` statement will only be monotonic on a per TiDB server basis.
+パフォーマンス上の理由から、各TiDBサーバーには、 `AUTO_INCREMENT`個の数値が一括で割り当てられます（デフォルトでは3万個）。つまり、 `AUTO_INCREMENT`数値は一意であることが保証されますが、 `INSERT`ステートメントに割り当てられる値は、TiDBサーバーごとに単調なものになります。
 
-If you want the `AUTO_INCREMENT` numbers to be monotonic on all TiDB servers and your TiDB version is v6.5.0 or later, it is recommended to enable the [MySQL compatibility mode](/auto-increment.md#mysql-compatibility-mode).
+すべての TiDB サーバーで`AUTO_INCREMENT`数値を単調にしたい場合、TiDB バージョンが v6.5.0 以降であれば、 [MySQL互換モード](/auto-increment.md#mysql-compatibility-mode)有効にすることをお勧めします。
 
-For more information, see [AUTO_INCREMENT](/auto-increment.md).
+詳細については[自動インクリメント](/auto-increment.md)参照してください。
 
-### AUTO_RANDOM
+### 自動ランダム {#auto-random}
 
-`AUTO_RANDOM` is a column attribute that is used to automatically assign values to a `BIGINT` column. Values assigned automatically are random and unique. Since the value of `AUTO_RANDOM` is random and unique, `AUTO_RANDOM` is often used in place of [`AUTO_INCREMENT`](/auto-increment.md) to avoid write hotspots in a single storage node caused by TiDB assigning consecutive IDs.
+`AUTO_RANDOM` 、 `BIGINT`列に値を自動的に割り当てるために使用される列属性です。自動的に割り当てられる値はランダムかつ一意です。4 `AUTO_RANDOM`値はランダムかつ一意であるため、TiDBが連続したIDを割り当てることで単一のstorageノードに書き込みホットスポットが発生するのを回避するために、 [`AUTO_INCREMENT`](/auto-increment.md)ではなく`AUTO_RANDOM`が使用されることがよくあります。
 
-Since the value of `AUTO_RANDOM` is random and unique, `AUTO_RANDOM` is often used in place of [`AUTO_INCREMENT`](/auto-increment.md) to avoid write hotspots in a single storage node caused by TiDB assigning consecutive IDs. If the current `AUTO_INCREMENT` column is a primary key and the type is `BIGINT`, you can execute the `ALTER TABLE t MODIFY COLUMN id BIGINT AUTO_RANDOM(5);` statement to switch from `AUTO_INCREMENT` to `AUTO_RANDOM`.
+`AUTO_RANDOM`の値はランダムかつ一意であるため、TiDBが連続したIDを割り当てることで単一のstorageノードに書き込みホットスポットが発生するのを回避するため、 [`AUTO_INCREMENT`](/auto-increment.md)の代わりに`AUTO_RANDOM`使用されることがよくあります。現在の`AUTO_INCREMENT`列が主キーで、型が`BIGINT`場合、 `ALTER TABLE t MODIFY COLUMN id BIGINT AUTO_RANDOM(5);`ステートメントを実行して`AUTO_INCREMENT`から`AUTO_RANDOM`に切り替えることができます。
 
-For more information, see [AUTO_RANDOM](/auto-random.md).
+詳細については[自動ランダム](/auto-random.md)参照してください。
 
-### SHARD_ROW_ID_BITS
+### シャード行IDビット {#shard-row-id-bits}
 
-For the tables with a non-clustered primary key or no primary key, TiDB uses an implicit auto-increment row ID. When a large number of `INSERT` operations are performed, the data is written into a single Region, causing a write hot spot.
+非クラスター化主キーを持つテーブル、または主キーを持たないテーブルの場合、TiDBは暗黙的な自動インクリメント行IDを使用します。大量の`INSERT`操作が実行されると、データは単一のリージョンに書き込まれ、書き込みホットスポットが発生します。
 
-To mitigate the hot spot issue, you can configure [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md). The row IDs are scattered, and the data are written into multiple different Regions.
+ホットスポットの問題を軽減するには、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)設定します。行 ID が分散され、データが複数の異なるリージョンに書き込まれます。
 
-## Keywords
+## キーワード {#keywords}
 
-Keywords are words that have special meanings in SQL statements, such as `SELECT`, `UPDATE`, and `DELETE`.
+キーワードは、 `SELECT` 、 `UPDATE` 、 `DELETE`など、SQL ステートメントで特別な意味を持つ単語です。
 
-- Some of them can be used as identifiers directly, which are called non-reserved keywords.
+-   そのうちのいくつかは識別子として直接使用することができ、非予約キーワードと呼ばれます。
 
-- Some of them require special treatment before being used as identifiers, which are called reserved keywords.
+-   一部のキーワードは、識別子として使用する前に特別な処理が必要であり、予約語と呼ばれます。
 
-However, some non-reserved keywords might still require special treatment. It is recommended that you treat them as reserved keywords.
+ただし、予約語ではないキーワードでも特別な扱いが必要なものがあります。予約語として扱うことをお勧めします。
 
-For more information, see [Keywords](/keywords.md).
+詳細については[キーワード](/keywords.md)参照してください。
 
-## User-defined variables
+## ユーザー定義変数 {#user-defined-variables}
 
-TiDB lets you set and read the user-defined variables. The format of the user-defined variables is `@var_name`. The characters that compose `var_name` can be any characters that can compose an identifier, including the numbers `0-9`, the letters `a-zA-Z`, the underscore `_`, the dollar sign `$`, and the UTF-8 characters. In addition, it also includes the English period `.`. The user-defined variables are case-insensitive.
+TiDBでは、ユーザー定義変数の設定と読み取りが可能です。ユーザー定義変数の形式は`@var_name`です。3を構成する文字は、識別子を構成できる任意の文字（数字`0-9` 、文字`a-zA-Z` 、アンダースコア`_` 、ドル記号`$` 、UTF-8文字など）です。さらに、英語のピリオド`.`も含まれます。ユーザー定義`var_name`は大文字と小文字を区別しません。
 
-The user-defined variables are session-specific, which means a user variable defined by one client connection cannot be seen or used by other client connections.
+ユーザー定義変数はセッション固有であるため、1 つのクライアント接続で定義されたユーザー変数は、他のクライアント接続では表示または使用できません。
 
-For more information, see [User-Defined Variables](/user-defined-variables.md).
+詳細については[ユーザー定義変数](/user-defined-variables.md)参照してください。
 
-## Metadata lock
+## メタデータロック {#metadata-lock}
 
-In TiDB, a metadata lock is a mechanism introduced to manage changes to table metadata during online schema changes. When a transaction begins, it locks onto a snapshot of the current metadata. If the metadata changes during the transaction, TiDB throws an "Information schema is changed" error, preventing the transaction from committing. The metadata lock coordinates Data Manipulation Language (DML) and Data Definition Language (DDL) operations by prioritizing DMLs, ensuring that in-progress DML transactions with outdated metadata commit before applying new DDL changes, thus minimizing errors and maintaining data consistency.
+TiDBでは、メタデータロックは、オンラインスキーマ変更中にテーブルメタデータへの変更を管理するために導入されたメカニズムです。トランザクションが開始されると、現在のメタデータのスナップショットがロックされます。トランザクション中にメタデータが変更された場合、TiDBは「情報スキーマが変更されました」というエラーをスローし、トランザクションのコミットを阻止します。メタデータロックは、データ操作言語（DML）とデータ定義言語（DDL）の操作を調整し、DMLに優先順位を付けることで、古いメタデータを持つ進行中のDMLトランザクションが新しいDDL変更を適用する前にコミットされるようにします。これにより、エラーを最小限に抑え、データの一貫性を維持できます。
 
-For more information, see [Metadata Lock](/metadata-lock.md).
+詳細については[メタデータロック](/metadata-lock.md)参照してください。

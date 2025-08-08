@@ -1,13 +1,13 @@
 ---
 title: TiDB Lightning Data Sources
-summary: Learn all the data sources supported by TiDB Lightning.
+summary: TiDB Lightningでサポートされているすべてのデータ ソースについて説明します。
 ---
 
-# TiDB Lightning Data Sources
+# TiDB Lightningデータソース {#tidb-lightning-data-sources}
 
-TiDB Lightning supports importing data from multiple data sources to TiDB clusters, including CSV, SQL, and Parquet files.
+TiDB Lightning は、CSV、SQL、Parquet ファイルなど、複数のデータ ソースから TiDB クラスターへのデータのインポートをサポートしています。
 
-To specify the data source for TiDB Lightning, use the following configuration:
+TiDB Lightningのデータ ソースを指定するには、次の構成を使用します。
 
 ```toml
 [mydumper]
@@ -15,44 +15,44 @@ To specify the data source for TiDB Lightning, use the following configuration:
 data-source-dir = "/data/my_database"
 ```
 
-When TiDB Lightning is running, it looks for all files that match the pattern of `data-source-dir`.
+TiDB Lightningが実行されると、 `data-source-dir`パターンに一致するすべてのファイルが検索されます。
 
-| File | Type | Pattern |
-| --------- | -------- | ------- |
-| Schema file | Contains the `CREATE TABLE` DDL statement | `${db_name}.${table_name}-schema.sql` |
-| Schema file | Contains the `CREATE DATABASE` DDL statement| `${db_name}-schema-create.sql` |
-| Data file | If the data file contains data for a whole table, the file is imported into a table named `${db_name}.${table_name}` | <code>\${db_name}.\${table_name}.\${csv\|sql\|parquet}</code> |
-| Data file | If the data for a table is split into multiple data files, each data file must be suffixed with a number in its filename | <code>\${db_name}.\${table_name}.001.\${csv\|sql\|parquet}</code> |
-| Compressed file | If the file contains a compression suffix, such as `gzip`, `snappy`, or `zstd`, TiDB Lightning will decompress the file before importing it. Note that the Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported. | <code>\${db_name}.\${table_name}.\${csv\|sql\|parquet}.{compress}</code> |
+| ファイル     | タイプ                                                                                                                                                                                               | パターン                                                     |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| スキーマファイル | `CREATE TABLE` DDL文が含まれています                                                                                                                                                                       | `${db_name}.${table_name}-schema.sql`                    |
+| スキーマファイル | `CREATE DATABASE` DDL文が含まれています                                                                                                                                                                    | `${db_name}-schema-create.sql`                           |
+| データファイル  | データファイルにテーブル全体のデータが含まれている場合、ファイルは`${db_name}.${table_name}`名前のテーブルにインポートされます。                                                                                                                     | `${db_name}.${table_name}.${csv|sql|parquet}`            |
+| データファイル  | テーブルのデータが複数のデータファイルに分割されている場合、各データファイルのファイル名に数字を付ける必要がある。                                                                                                                                         | `${db_name}.${table_name}.001.${csv|sql|parquet}`        |
+| 圧縮ファイル   | ファイルに`gzip` 、 `snappy` 、 `zstd`などの圧縮サフィックスが含まれている場合、 TiDB Lightning はインポート前にファイルを解凍します。Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)形式である必要があります。その他の Snappy 圧縮形式はサポートされていません。 | `${db_name}.${table_name}.${csv|sql|parquet}.{compress}` |
 
-TiDB Lightning processes data in parallel as much as possible. Because files must be read in sequence, the data processing concurrency is at the file level (controlled by `region-concurrency`). Therefore, when the imported file is large, the import performance is poor. It is recommended to limit the size of the imported file to no greater than 256 MiB to achieve the best performance.
+TiDB Lightningは、可能な限り並列でデータを処理します。ファイルは順番に読み取る必要があるため、データ処理の同時実行性はファイルレベル（ `region-concurrency`で制御）で制御されます。そのため、インポートするファイルのサイズが大きい場合、インポートのパフォーマンスが低下します。最適なパフォーマンスを得るには、インポートするファイルのサイズを256MiB以下に制限することをお勧めします。
 
-## Rename databases and tables
+## データベースとテーブルの名前を変更する {#rename-databases-and-tables}
 
-TiDB Lightning follows filename patterns to import data to the corresponding database and table. If the database or table names change, you can either rename the files and then import them, or use regular expressions to replace the names online.
+TiDB Lightningは、ファイル名のパターンに従って、対応するデータベースとテーブルにデータをインポートします。データベース名またはテーブル名が変更された場合は、ファイル名を変更してからインポートするか、正規表現を使用してオンラインで名前を置換することができます。
 
-### Rename files in batch
+### ファイルを一括で名前変更 {#rename-files-in-batch}
 
-If you are using Red Hat Linux or a distribution based on Red Hat Linux, you can use the `rename` command to batch rename files in the `data-source-dir` directory. 
+Red Hat Linux または Red Hat Linux ベースのディストリビューションを使用している場合は、 `rename`コマンドを使用して、 `data-source-dir`ディレクトリ内のファイルの名前を一括変更することができます。
 
-For example:
+例えば：
 
 ```shell
 rename srcdb. tgtdb. *.sql
 ```
 
-After you modify the database name, it is recommended that you delete the `${db_name}-schema-create.sql` file that contains the `CREATE DATABASE` DDL statement from the `data-source-dir` directory. If you want to modify the table name as well, you also need to modify the table name in the `${db_name}.${table_name}-schema.sql` file that contains the `CREATE TABLE` DDL statement.
+データベース名を変更した後は、 `data-source-dir`ディレクトリから`CREATE DATABASE` DDL ステートメントを含む`${db_name}-schema-create.sql`ファイルを削除することをお勧めします。テーブル名も変更する場合は、 `CREATE TABLE` DDL ステートメントを含む`${db_name}.${table_name}-schema.sql`ファイル内のテーブル名も変更する必要があります。
 
-### Use regular expressions to replace names online
+### 正規表現を使用してオンラインで名前を置換する {#use-regular-expressions-to-replace-names-online}
 
-To use regular expressions to replace names online, you can use the `pattern` configuration within `[[mydumper.files]]` to match filenames, and replace `schema` and `table` with your desired names. For more information, see [Match customized files](#match-customized-files).
+正規表現を使ってオンラインで名前を置換するには、 `[[mydumper.files]]`内の`pattern`設定を使ってファイル名を一致させ、 `schema`と`table`希望の名前に置き換えます。詳細については、 [カスタマイズされたファイルを一致させる](#match-customized-files)参照してください。
 
-The following is an example of using regular expressions to replace names online. In this example:
+以下は、正規表現を使用してオンラインで名前を置換する例です。この例では、
 
-- The match rule for the data file `pattern` is `^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)`.
-- Specify `schema` as `'$1'`, which means that the value of the first regular expression `schema_regrex` remains unchanged. Or specify `schema` as a string, such as `'tgtdb'`, which means a fixed target database name.
-- Specify `table` as `'$2'`, which means that the value of the second regular expression `table_regrex` remains unchanged. Or specify `table` as a string, such as `'t1'`, which means a fixed target table name.
-- Specify `type` as `'$3'`, which means the data file type. You can specify `type` as either `"table-schema"` (representing the `schema.sql` file) or `"schema-schema"` (representing the `schema-create.sql` file).
+-   データファイル`pattern`の一致ルールは`^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)`です。
+-   `schema`を`'$1'`と指定すると、最初の正規表現の値`schema_regrex`は変更されません。または、 `schema` `'tgtdb'`などの文字列として指定すると、固定のターゲットデータベース名になります。
+-   `table`を`'$2'`と指定すると、2番目の正規表現の値`table_regrex`は変更されません。または、 `table` `'t1'`などの文字列として指定すると、固定のターゲットテーブル名になります。
+-   `type` `'$3'` （データファイルの種類）として指定します。5 `type` `"table-schema"` （ `schema.sql`ファイル）または`"schema-schema"` （ `schema-create.sql`ファイル）として指定できます。
 
 ```toml
 [mydumper]
@@ -73,7 +73,7 @@ table = '$2'
 type = '$3'
 ```
 
-If you are using `gzip` to back up data files, you need to configure the compression format accordingly. The matching rule of the data file `pattern` is `'^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)\.(gz)'`. You can specify `compression` as `'$4'` to represent the compressed file format. For example:
+`gzip`使用してデータファイルをバックアップする場合は、それに応じて圧縮形式を設定する必要があります。データファイル`pattern`のマッチングルールは`'^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)\.(gz)'`です。圧縮ファイル形式を表すために、 `compression` `'$4'`として指定できます。例：
 
 ```toml
 [mydumper]
@@ -97,18 +97,18 @@ type = '$3'
 compression = '$4'
 ```
 
-## CSV
+## CSV {#csv}
 
-### Schema
+### スキーマ {#schema}
 
-CSV files are schema-less. To import CSV files into TiDB, you must provide a table schema. You can provide schema by either of the following methods:
+CSVファイルはスキーマレスです。CSVファイルをTiDBにインポートするには、テーブルスキーマを提供する必要があります。スキーマは、以下のいずれかの方法で提供できます。
 
-* Create files named `${db_name}.${table_name}-schema.sql` and `${db_name}-schema-create.sql` that contain DDL statements.
-* Manually create the table schema in TiDB.
+-   DDL ステートメントを含む`${db_name}.${table_name}-schema.sql`および`${db_name}-schema-create.sql`名前のファイルを作成します。
+-   TiDB にテーブル スキーマを手動で作成します。
 
-### Configuration
+### コンフィグレーション {#configuration}
 
-You can configure the CSV format in the `[mydumper.csv]` section in the `tidb-lightning.toml` file. Most settings have a corresponding option in the [`LOAD DATA`](https://dev.mysql.com/doc/refman/8.0/en/load-data.html) statement of MySQL.
+CSV形式は、 `tidb-lightning.toml`ファイルの`[mydumper.csv]`セクションで設定できます。ほとんどの設定には、MySQLの[`LOAD DATA`](https://dev.mysql.com/doc/refman/8.0/en/load-data.html)ステートメントに対応するオプションがあります。
 
 ```toml
 [mydumper.csv]
@@ -137,140 +137,145 @@ backslash-escape = true
 trim-last-separator = false
 ```
 
-If the input of a string field such as `separator`, `delimiter`, or `terminator` involves special characters, you can use a backslash to escape the special characters. The escape sequence must be a *double-quoted* string (`"…"`). For example, `separator = "\u001f"` means using the ASCII character `0X1F` as the separator.
+`separator` 、 `delimiter` 、 `terminator`などの文字列フィールドに特殊文字を入力する場合、バックスラッシュを使用して特殊文字をエスケープできます。エスケープシーケンスは*二重引用符で囲まれた*文字列（ `"…"` ）である必要があります。例えば、 `separator = "\u001f"` ASCII文字`0X1F`区切り文字として使用することを意味します。
 
-You can use *single-quoted* strings (`'…'`) to suppress backslash escaping. For example, `terminator = '\n'` means using the two-character string, a backslash (`\`) followed by the letter `n`, as the terminator, rather than the LF `\n`.
+*シングルクォーテーションで囲まれた*文字列 ( `'…'` ) を使用すると、バックスラッシュによるエスケープを抑制できます。例えば、 `terminator = '\n'` 、LF `\n`ではなく、バックスラッシュ ( `\` ) と文字`n`の2文字の文字列を終端として使用することを意味します。
 
-For more details, see the [TOML v1.0.0 specification](https://toml.io/en/v1.0.0#string).
+詳細については[TOML v1.0.0仕様](https://toml.io/en/v1.0.0#string)参照してください。
 
-#### `separator`
+#### <code>separator</code> {#code-separator-code}
 
-- Defines the field separator.
-- Can be one or multiple characters, but must not be empty.
-- Common values:
+-   フィールドセパレーターを定義します。
 
-    * `','` for CSV (comma-separated values).
-    * `"\t"` for TSV (tab-separated values).
-    * `"\u0001"` to use the ASCII character `0x01`.
+-   1 文字または複数文字を使用できますが、空にすることはできません。
 
-- Corresponds to the `FIELDS TERMINATED BY` option in the LOAD DATA statement.
+-   共通の値:
 
-#### `delimiter`
+    -   CSV (カンマ区切り値)の場合は`','` 。
+    -   TSV (タブ区切り値)の場合は`"\t"` 。
+    -   `"\u0001"`指定すると ASCII 文字`0x01`使用されます。
 
-- Defines the delimiter used for quoting.
-- If `delimiter` is empty, all fields are unquoted.
-- Common values:
+-   LOAD DATA ステートメントの`FIELDS TERMINATED BY`オプションに対応します。
 
-    * `'"'` quotes fields with double-quote. The same as [RFC 4180](https://tools.ietf.org/html/rfc4180).
-    * `''` disables quoting.
+#### <code>delimiter</code> {#code-delimiter-code}
 
-- Corresponds to the `FIELDS ENCLOSED BY` option in the `LOAD DATA` statement.
+-   引用符に使用する区切り文字を定義します。
 
-#### `terminator`
+-   `delimiter`が空の場合、すべてのフィールドは引用符で囲まれません。
 
-- Defines the line terminator.
-- If `terminator` is empty, both `"\n"` (Line Feed) and `"\r\n"` (Carriage Return + Line Feed) are used as the line terminator.
-- Corresponds to the `LINES TERMINATED BY` option in the `LOAD DATA` statement.
+-   共通の値:
 
-#### `header`
+    -   `'"'`フィールドを二重引用符で囲みます。 [RFC 4180](https://tools.ietf.org/html/rfc4180)と同じです。
+    -   `''`引用を無効にします。
 
-- Whether *all* CSV files contain a header row.
-- If `header` is `true`, the first row is used as the *column names*. If `header` is `false`, the first row is treated as an ordinary data row.
+-   `LOAD DATA`ステートメントの`FIELDS ENCLOSED BY`オプションに対応します。
 
-#### `not-null` and `null`
+#### <code>terminator</code> {#code-terminator-code}
 
-- The `not-null` setting controls whether all fields are non-nullable.
-- If `not-null` is `false`, the string specified by `null` is transformed to the SQL NULL instead of a specific value.
-- Quoting does not affect whether a field is null.
+-   行末記号を定義します。
+-   `terminator`が空の場合、行末文字として`"\n"` (改行) と`"\r\n"` (復帰 + 改行) の両方が使用されます。
+-   `LOAD DATA`ステートメントの`LINES TERMINATED BY`オプションに対応します。
 
-    For example, in the following CSV file:
+#### <code>header</code> {#code-header-code}
+
+-   *すべての*CSV ファイルにヘッダー行が含まれているかどうか。
+-   `header`が`true`場合、最初の行は*列名*として使用されます。7 が`header` `false`場合、最初の行は通常のデータ行として扱われます。
+
+#### <code>not-null</code>と<code>null</code> {#code-not-null-code-and-code-null-code}
+
+-   `not-null`設定は、すべてのフィールドが null 不可かどうかを制御します。
+-   `not-null`が`false`の場合、 `null`で指定された文字列は特定の値ではなく SQL NULL に変換されます。
+-   引用符で囲んでも、フィールドが null かどうかには影響しません。
+
+    たとえば、次の CSV ファイルでは、
 
     ```csv
     A,B,C
     \N,"\N",
     ```
 
-    In the default settings (`not-null = false; null = '\N'`), the columns `A` and `B` are both converted to NULL after being imported to TiDB. The column `C` is an empty string `''` but not NULL.
+    デフォルト設定（ `not-null = false; null = '\N'` ）では、列`A`と`B` TiDBにインポートされた後、両方ともNULLに変換されます。列`C`空文字列`''`ですが、NULLではありません。
 
-#### `backslash-escape`
+#### <code>backslash-escape</code> {#code-backslash-escape-code}
 
-- Whether to parse backslash inside fields as escape characters.
-- If `backslash-escape` is true, the following sequences are recognized and converted:
+-   フィールド内のバックスラッシュをエスケープ文字として解析するかどうか。
 
-    | Sequence | Converted to             |
-    |----------|--------------------------|
-    | `\0`     | Null character (`U+0000`)  |
-    | `\b`     | Backspace (`U+0008`)       |
-    | `\n`     | Line feed (`U+000A`)       |
-    | `\r`     | Carriage return (`U+000D`) |
-    | `\t`     | Tab (`U+0009`)             |
-    | `\Z`     | Windows EOF (`U+001A`)     |
+-   `backslash-escape`が真の場合、次のシーケンスが認識され、変換されます。
 
-    In all other cases (for example, `\"`), the backslash is stripped, leaving the next character (`"`) in the field. The character left has no special roles (for example, delimiters) and is just an ordinary character.
+    | シーケンス | 変換された                    |
+    | ----- | ------------------------ |
+    | `\0`  | ヌル文字（ `U+0000` ）         |
+    | `\b`  | バックスペース ( `U+0008` )     |
+    | `\n`  | 改行（ `U+000A` ）           |
+    | `\r`  | キャリッジリターン（ `U+000D` ）    |
+    | `\t`  | タブ ( `U+0009` )          |
+    | `\Z`  | Windows EOF ( `U+001A` ) |
 
-- Quoting does not affect whether backslash is parsed as an escape character.
+    それ以外の場合（例えば`\"` ）、バックスラッシュは削除され、次の文字（ `"` ）がフィールドに残ります。残された文字は特別な役割（例えば区切り文字）を持たず、通常の文字として扱われます。
 
-- Corresponds to the `FIELDS ESCAPED BY '\'` option in the `LOAD DATA` statement.
+-   引用符で囲んでも、バックスラッシュがエスケープ文字として解析されるかどうかには影響しません。
 
-#### `trim-last-separator`
+-   `LOAD DATA`ステートメントの`FIELDS ESCAPED BY '\'`オプションに対応します。
 
-- Whether to treat `separator` as the line terminator and trim all trailing separators.
+#### <code>trim-last-separator</code> {#code-trim-last-separator-code}
 
-    For example, in the following CSV file:
+-   `separator`行末文字として扱い、すべての末尾の区切り文字を削除するかどうか。
+
+    たとえば、次の CSV ファイルでは、
 
     ```csv
     A,,B,,
     ```
 
-    - When `trim-last-separator = false`, this is interpreted as a row of 5 fields `('A', '', 'B', '', '')`.
-    - When `trim-last-separator = true`, this is interpreted as a row of 3 fields `('A', '', 'B')`.
+    -   `trim-last-separator = false`場合、これは 5 つのフィールド`('A', '', 'B', '', '')`の行として解釈されます。
+    -   `trim-last-separator = true`場合、これは 3 つのフィールド`('A', '', 'B')`の行として解釈されます。
 
-- This option is deprecated. Use the `terminator` option instead.
+-   このオプションは非推奨です。代わりにオプション`terminator`使用してください。
 
-    If your existing configuration is:
+    既存の構成が次の場合:
 
     ```toml
     separator = ','
     trim-last-separator = true
     ```
 
-    It is recommended to change the configuration to:
+    構成を次のように変更することをお勧めします。
 
     ```toml
     separator = ','
     terminator = ",\n" # Use ",\n" or ",'\r\n" according to your actual file.
     ```
 
-#### Non-configurable options
+#### 設定できないオプション {#non-configurable-options}
 
-TiDB Lightning does not support every option supported by the `LOAD DATA` statement. For example:
+TiDB Lightningは、 `LOAD DATA`文でサポートされているすべてのオプションをサポートしているわけではありません。例えば：
 
-* There cannot be line prefixes (`LINES STARTING BY`).
-* The header cannot be skipped (`IGNORE n LINES`) and must be valid column names.
+-   行頭語( `LINES STARTING BY` )は使用できません。
+-   ヘッダーはスキップできません（ `IGNORE n LINES` ）、有効な列名である必要があります。
 
-### Strict format
+### 厳格なフォーマット {#strict-format}
 
-TiDB Lightning works best when the input files have a uniform size of around 256 MiB. When the input is a single huge CSV file, TiDB Lightning can only process the file in one thread, which slows down the import speed.
+TiDB Lightningは、入力ファイルのサイズが256MiB程度に均一である場合に最も効果的に機能します。入力が単一の巨大なCSVファイルである場合、 TiDB Lightningはファイルを1つのスレッドでしか処理できないため、インポート速度が低下します。
 
-This can be fixed by splitting the CSV into multiple files first. For the generic CSV format, there is no way to quickly identify where a row starts or ends without reading the whole file. Therefore, TiDB Lightning by default does *not* automatically split a CSV file. However, if you are certain that the CSV input adheres to certain restrictions, you can enable the `strict-format` setting to allow TiDB Lightning to split the file into multiple 256 MiB-sized chunks for parallel processing.
+これは、CSVをまず複数のファイルに分割することで解決できます。一般的なCSV形式では、ファイル全体を読み込まなければ行の開始位置と終了位置を素早く特定する方法がありません。そのため、 TiDB LightningはデフォルトではCSVファイルを自動的に分割し*ません*。ただし、CSV入力が特定の制限に準拠していることが確実な場合は、 `strict-format`設定を有効にすると、 TiDB Lightningがファイルを256MiBサイズの複数のチャンクに分割して並列処理できるようになります。
 
 ```toml
 [mydumper]
 strict-format = true
 ```
 
-In a strict CSV file, every field occupies only a single line. In other words, one of the following must be true:
+厳密なCSVファイルでは、各フィールドは1行のみに収まります。つまり、次のいずれかの条件を満たす必要があります。
 
-* Delimiter is empty.
-* Every field does not contain the terminator itself. In the default configuration, this means every field does not contain CR (`\r`) or LF (`\n`).
+-   区切り文字が空です。
+-   各フィールドにはターミネータ自体が含まれません。デフォルト設定では、これは各フィールドに CR ( `\r` ) または LF ( `\n` ) が含まれないことを意味します。
 
-If a CSV file is not strict, but `strict-format` is wrongly set to `true`, a field spanning multiple lines may be cut in half into two chunks, causing parse failure, or even quietly importing corrupted data.
+CSV ファイルが厳密ではなく、 `strict-format`が誤って`true`に設定されている場合、複数行にまたがるフィールドが 2 つのチャンクに分割され、解析が失敗したり、破損したデータが暗黙的にインポートされたりする可能性があります。
 
-### Common configuration examples
+### 一般的な構成例 {#common-configuration-examples}
 
-#### CSV
+#### CSV {#csv}
 
-The default setting is already tuned for CSV following RFC 4180.
+デフォルト設定は、RFC 4180 に従って CSV 用にすでに調整されています。
 
 ```toml
 [mydumper.csv]
@@ -282,17 +287,15 @@ null = '\N'
 backslash-escape = true
 ```
 
-Example content:
+コンテンツの例:
 
-```
-ID,Region,Count
-1,"East",32
-2,"South",\N
-3,"West",10
-4,"North",39
-```
+    ID,Region,Count
+    1,"East",32
+    2,"South",\N
+    3,"West",10
+    4,"North",39
 
-#### TSV
+#### TSV {#tsv}
 
 ```toml
 [mydumper.csv]
@@ -304,17 +307,15 @@ null = 'NULL'
 backslash-escape = false
 ```
 
-Example content:
+コンテンツの例:
 
-```
-ID    Region    Count
-1     East      32
-2     South     NULL
-3     West      10
-4     North     39
-```
+    ID    Region    Count
+    1     East      32
+    2     South     NULL
+    3     West      10
+    4     North     39
 
-#### TPC-H DBGEN
+#### TPC-H DBGEN {#tpc-h-dbgen}
 
 ```toml
 [mydumper.csv]
@@ -326,61 +327,57 @@ not-null = true
 backslash-escape = false
 ```
 
-Example content:
+コンテンツの例:
 
-```
-1|East|32|
-2|South|0|
-3|West|10|
-4|North|39|
-```
+    1|East|32|
+    2|South|0|
+    3|West|10|
+    4|North|39|
 
-## SQL
+## SQL {#sql}
 
-When TiDB Lightning processes a SQL file, because TiDB Lightning cannot quickly split a single SQL file, it cannot improve the import speed of a single file by increasing concurrency. Therefore, when you import data from SQL files, avoid a single huge SQL file. TiDB Lightning works best when the input files have a uniform size of around 256 MiB.
+TiDB Lightning TiDB LightningはSQLファイルを処理する際に、単一のSQLファイルを迅速に分割できないため、同時実行性を高めて単一ファイルのインポート速度を向上させることができません。そのため、SQLファイルからデータをインポートする際は、巨大なSQLファイルを1つだけ使用することは避けてください。TiDB TiDB Lightningは、入力ファイルのサイズが256MiB程度に均一である場合に最も効果的に動作します。
 
-## Parquet
+## 寄木細工 {#parquet}
 
-TiDB Lightning currently only supports Parquet files generated by Amazon Aurora, Apache Hive, and Snowflake. To identify the file structure in S3, use the following configuration to match all data files:
+TiDB Lightningは現在、Amazon Aurora、Apache Hive、Snowflakeによって生成されたParquetファイルのみをサポートしています。S3内のファイル構造を識別するには、以下の設定を使用してすべてのデータファイルを一致させてください。
 
-```
-[[mydumper.files]]
-# The expression needed for parsing Amazon Aurora parquet files
-pattern = '(?i)^(?:[^/]*/)*([a-z0-9\-_]+).([a-z0-9\-_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
-schema = '$1'
-table = '$2'
-type = '$3'
-```
+    [[mydumper.files]]
+    # The expression needed for parsing Amazon Aurora parquet files
+    pattern = '(?i)^(?:[^/]*/)*([a-z0-9\-_]+).([a-z0-9\-_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
+    schema = '$1'
+    table = '$2'
+    type = '$3'
 
-Note that this configuration only shows how to match the parquet files exported by Aurora snapshot. You need to export and process the schema file separately.
+この設定は、 Auroraスナップショットによってエクスポートされた parquet ファイルを一致させる方法のみを示しています。スキーマファイルは別途エクスポートして処理する必要があります。
 
-For more information on `mydumper.files`, refer to [Match customized file](#match-customized-files).
+`mydumper.files`詳細については[カスタマイズされたファイルに一致](#match-customized-files)を参照してください。
 
-## Compressed files
+## 圧縮ファイル {#compressed-files}
 
-TiDB Lightning currently supports compressed files exported by Dumpling or compressed files that follow the naming rules. Currently, TiDB Lightning supports the following compression algorithms: `gzip`, `snappy`, and `zstd`. When the file name follows the naming rules, TiDB Lightning automatically identifies the compression algorithm and imports the file after streaming decompression, without additional configuration.
+TiDB Lightningは現在、 Dumplingでエクスポートされた圧縮ファイル、または命名規則に従った圧縮ファイルをサポートしています。現在、 TiDB Lightningは`gzip` `snappy`圧縮アルゴリズムをサポートしています。ファイル名が命名規則に従っている場合、 TiDB Lightningは`zstd`に圧縮アルゴリズムを識別し、追加の設定なしでストリーミング解凍後にファイルをインポートします。
 
-> **Note:**
+> **注記：**
 >
-> - Because TiDB Lightning cannot concurrently decompress a single large compressed file, the size of the compressed file affects the import speed. It is recommended that a source file is no greater than 256 MiB after decompression.
-> - TiDB Lightning only imports individually compressed data files and does not support importing a single compressed file with multiple data files included.
-> - TiDB Lightning does not support `parquet` files compressed through another compression tool, such as `db.table.parquet.snappy`. If you want to compress `parquet` files, you can configure the compression format for the `parquet` file writer.
-> - TiDB Lightning v6.4.0 and later versions only support the following compressed data files: `gzip`, `snappy`, and `zstd`. Other types of files cause errors. If an unsupported compressed file exists in the directory where the source data file is stored, this will cause the task to report an error. You can move those unsupported files out of the import data directory to avoid such errors.
-> - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+> -   TiDB Lightningは単一の大きな圧縮ファイルを同時に解凍できないため、圧縮ファイルのサイズはインポート速度に影響します。解凍後のソースファイルは256MiB以下にすることをお勧めします。
+> -   TiDB Lightning は個別に圧縮されたデータ ファイルのみをインポートし、複数のデータ ファイルが含まれる単一の圧縮ファイルのインポートはサポートしていません。
+> -   TiDB Lightningは、 `db.table.parquet.snappy`などの他の圧縮ツールで圧縮された`parquet`ファイル`parquet` `parquet`ライターの圧縮形式を設定できます。
+> -   TiDB Lightning v6.4.0以降のバージョンでは、 `gzip` `snappy`圧縮データファイルのみがサポートされています。その他の種類のファイルはエラーの原因となります。ソースデータファイルが保存されているディレクトリにサポートされていない圧縮ファイルが存在する場合、タスク`zstd`エラーを報告します。このようなエラーを回避するには、サポートされていないファイルをインポートデータディレクトリから移動してください。
+> -   Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。その他の Snappy 圧縮形式はサポートされていません。
 
-## Match customized files
+## カスタマイズされたファイルを一致させる {#match-customized-files}
 
-TiDB Lightning only recognizes data files that follow the naming pattern. In some cases, your data file might not follow the naming pattern, and thus data import is completed in a short time without importing any file.
+TiDB Lightningは、命名パターンに従ったデータファイルのみを認識します。場合によっては、データファイルが命名パターンに従っていない可能性があり、その場合、ファイルのインポートなしでデータのインポートが短時間で完了します。
 
-To resolve this issue, you can use `[[mydumper.files]]` to match data files in your customized expression.
+この問題を解決するには、カスタマイズした式でデータ ファイルを一致させるために`[[mydumper.files]]`使用します。
 
-Take the Aurora snapshot exported to S3 as an example. The complete path of the Parquet file is `S3://some-bucket/some-subdir/some-database/some-database.some-table/part-00000-c5a881bb-58ff-4ee6-1111-b41ecff340a3-c000.gz.parquet`.
+S3にエクスポートされたAuroraスナップショットを例に挙げます。Parquetファイルの完全パスは`S3://some-bucket/some-subdir/some-database/some-database.some-table/part-00000-c5a881bb-58ff-4ee6-1111-b41ecff340a3-c000.gz.parquet`です。
 
-Usually, `data-source-dir` is set to `S3://some-bucket/some-subdir/some-database/` to import the `some-database` database.
+通常、 `some-database`データベースをインポートするには、 `data-source-dir` `S3://some-bucket/some-subdir/some-database/`に設定します。
 
-Based on the preceding Parquet file path, you can write a regular expression like `(?i)^(?:[^/]*/)*([a-z0-9\-_]+).([a-z0-9\-_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$` to match the files. In the match group, `index=1` is `some-database`, `index=2` is `some-table`, and `index=3` is `parquet`.
+上記のParquetファイルパスに基づいて、 `(?i)^(?:[^/]*/)*([a-z0-9\-_]+).([a-z0-9\-_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$`ような正規表現を記述することでファイルに一致させることができます。一致グループでは、 `index=1`は`some-database` `index=2` `some-table`は`index=3` `parquet`なります。
 
-You can write the configuration file according to the regular expression and the corresponding index so that TiDB Lightning can recognize the data files that do not follow the default naming convention. For example:
+デフォルトの命名規則に従わないデータファイルをTiDB Lightningが認識できるように、正規表現と対応するインデックスに従って設定ファイルを記述することができます。例：
 
 ```toml
 [[mydumper.files]]
@@ -391,57 +388,59 @@ table = '$2'
 type = '$3'
 ```
 
-- **schema**: The name of the target database. The value can be:
-    - The group index obtained by using a regular expression, such as `$1`.
-    - The name of the database that you want to import, such as `db1`. All matched files are imported into `db1`.
-- **table**: The name of the target table. The value can be:
-    - The group index obtained by using a regular expression, such as `$2`.
-    - The name of the table that you want to import, such as `table1`. All matched files are imported into `table1`.
-- **type**: The file type. Supports `sql`, `parquet`, and `csv`. The value can be:
-    - The group index obtained by using a regular expression, such as `$3`.
-- **key**: The file number, such as `001` in `${db_name}.${table_name}.001.csv`.
-    - The group index obtained by using a regular expression, such as `$4`.
+-   **schema** : 対象データベースの名前。値は次のいずれかです。
+    -   正規表現を使用して取得されたグループ インデックス (例: `$1` )。
+    -   インポートするデータベースの名前（例： `db1` ）。一致したすべてのファイルは`db1`にインポートされます。
+-   **table** : 対象テーブルの名前。値は次のいずれかです。
+    -   正規表現を使用して取得されたグループ インデックス (例: `$2` )。
+    -   インポートするテーブルの名前（例： `table1` ）。一致したすべてのファイルは`table1`にインポートされます。
+-   **type** : ファイルの種類`sql` `parquet`サポートします。値は`csv`のとおりです。
+    -   正規表現を使用して取得されたグループ インデックス (例: `$3` )。
+-   **key** : ファイル番号 (例: `${db_name}.${table_name}.001.csv`の場合は`001` 。
+    -   正規表現を使用して取得されたグループ インデックス (例: `$4` )。
 
-## Import data from Amazon S3
+## Amazon S3からデータをインポートする {#import-data-from-amazon-s3}
 
-The following examples show how to import data from Amazon S3 using TiDB Lightning. For more parameter configurations, see [URI Formats of External Storage Services](/external-storage-uri.md).
+以下の例は、TiDB Lightningを使用して Amazon S3 からデータをインポートする方法を示しています。詳細なパラメータ設定については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
 
-+ Use the locally configured permissions to access S3 data:
+-   ローカルに設定された権限を使用して S3 データにアクセスします。
 
     ```bash
     tiup tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
         -d 's3://my-bucket/sql-backup'
     ```
 
-+ Use the path-style request to access S3 data:
+-   パス形式のリクエストを使用して S3 データにアクセスします。
 
     ```bash
     tiup tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
         -d 's3://my-bucket/sql-backup?force-path-style=true&endpoint=http://10.154.10.132:8088'
     ```
 
-+ Use a specific AWS IAM role ARN to access S3 data:
+-   特定の AWS IAMロール ARN を使用して S3 データにアクセスします。
 
     ```bash
     tiup tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
         -d 's3://my-bucket/test-data?role-arn=arn:aws:iam::888888888888:role/my-role'
     ```
 
-* Use access keys of an AWS IAM user to access S3 data:
+<!---->
+
+-   AWS IAMユーザーのアクセスキーを使用して S3 データにアクセスします。
 
     ```bash
     tiup tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
         -d 's3://my-bucket/test-data?access_key={my_access_key}&secret_access_key={my_secret_access_key}'
     ```
 
-* Use the combination of AWS IAM role access keys and session tokens to access S3 data:
+-   AWS IAMロールアクセスキーとセッショントークンの組み合わせを使用して、S3 データにアクセスします。
 
     ```bash
     tiup tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
         -d 's3://my-bucket/test-data?access_key={my_access_key}&secret_access_key={my_secret_access_key}&session-token={my_session_token}'
     ```
 
-## More resources
+## その他のリソース {#more-resources}
 
-- [Export to CSV files Using Dumpling](/dumpling-overview.md#export-to-csv-files)
-- [`LOAD DATA`](https://dev.mysql.com/doc/refman/8.0/en/load-data.html)
+-   [Dumplingを使用してCSVファイルにエクスポートする](/dumpling-overview.md#export-to-csv-files)
+-   [`LOAD DATA`](https://dev.mysql.com/doc/refman/8.0/en/load-data.html)

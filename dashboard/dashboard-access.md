@@ -1,66 +1,66 @@
 ---
 title: Access TiDB Dashboard
-summary: To access TiDB Dashboard, visit the specified URL in your browser. For multiple PD instances, replace the address with any PD instance address and port. Use Chrome, Firefox, or Edge browsers of newer versions. Sign in with the TiDB root account or a user-defined SQL user. The session remains valid for 24 hours. Switch between English and Chinese languages. To log out, click the user name and then the Logout button.
+summary: TiDBダッシュボードにアクセスするには、ブラウザで指定されたURLにアクセスしてください。複数のPDインスタンスがある場合は、アドレスを任意のPDインスタンスのアドレスとポートに置き換えてください。Chrome、Firefox、またはEdgeブラウザ（最新バージョン）をご利用ください。TiDBルートアカウントまたはユーザー定義のSQLユーザーでサインインしてください。セッションは24時間有効です。言語は英語と中国語で切り替えられます。ログアウトするには、ユーザー名をクリックし、「ログアウト」ボタンをクリックしてください。
 ---
 
-# Access TiDB Dashboard
+# TiDBダッシュボードにアクセスする {#access-tidb-dashboard}
 
-To access TiDB Dashboard, visit <http://127.0.0.1:2379/dashboard> via your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
+TiDBダッシュボードにアクセスするには、ブラウザから[http://127.0.0.1:2379/ダッシュボード](http://127.0.0.1:2379/dashboard)アクセスしてください。3 `127.0.0.1:2379`実際のPDインスタンスのアドレスとポートに置き換えてください。
 
-> **Note:**
+> **注記：**
 >
-> TiDB v6.5.0 (and later) and TiDB Operator v1.4.0 (and later) support deploying TiDB Dashboard as an independent Pod on Kubernetes. Using TiDB Operator, you can access the IP address of this Pod to start TiDB Dashboard. For details, see [Deploy TiDB Dashboard independently in TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently).
+> TiDB v6.5.0以降およびTiDB Operator v1.4.0以降では、Kubernetes上にTiDB Dashboardを独立したPodとしてデプロイできます。TiDB TiDB Operatorを使用すると、このPodのIPアドレスにアクセスしてTiDB Dashboardを起動できます。詳細は[TiDB ダッシュボードをTiDB Operatorで独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently)ご覧ください。
 
-## Access TiDB Dashboard when multiple PD instances are deployed
+## 複数のPDインスタンスがデプロイされている場合にTiDBダッシュボードにアクセスする {#access-tidb-dashboard-when-multiple-pd-instances-are-deployed}
 
-When multiple PD instances are deployed in your cluster and you can directly access **every** PD instance and port, you can simply replace `127.0.0.1:2379` in the <http://127.0.0.1:2379/dashboard/> address with **any** PD instance address and port.
+クラスターに複数の PD インスタンスがデプロイされていて、**すべての**PD インスタンスとポートに直接アクセスできる場合は、アドレス[http://127.0.0.1:2379/ダッシュボード/](http://127.0.0.1:2379/dashboard/)の`127.0.0.1:2379`**任意の**PD インスタンスのアドレスとポートに置き換えるだけです。
 
-> **Note:**
+> **注記：**
 >
-> If a firewall or reverse proxy is configured and you cannot directly access every PD instance, you might not be able to access TiDB Dashboard. Usually, this is because the firewall or reverse proxy is not correctly configured. See [Use TiDB Dashboard behind Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md) and [Secure TiDB Dashboard](/dashboard/dashboard-ops-security.md) to learn how to correctly configure the firewall or reverse proxy when multiple PD instances are deployed.
+> ファイアウォールまたはリバースプロキシが設定されており、すべてのPDインスタンスに直接アクセスできない場合、TiDBダッシュボードにアクセスできない可能性があります。これは通常、ファイアウォールまたはリバースプロキシが正しく設定されていないことが原因です。複数のPDインスタンスがデプロイされている場合にファイアウォールまたはリバースプロキシを正しく設定する方法については、 [リバースプロキシの背後でTiDBダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)と[セキュリティTiDBダッシュボード](/dashboard/dashboard-ops-security.md)ご覧ください。
 
-## Browser compatibility
+## ブラウザの互換性 {#browser-compatibility}
 
-You can use TiDB Dashboard in the following common desktop browsers of a relatively newer version:
+TiDB ダッシュボードは、比較的新しいバージョンの次の一般的なデスクトップ ブラウザーで使用できます。
 
-- Chrome >= 77
-- Firefox >= 68
-- Edge >= 17
+-   クローム &gt;= 77
+-   Firefox &gt;= 68
+-   エッジ &gt;= 17
 
-> **Note:**
+> **注記：**
 >
-> If you use the browsers above of earlier versions or other browsers to access TiDB Dashboard, some functions might not work properly.
+> 上記のブラウザまたは以前のバージョンのブラウザ、あるいはその他のブラウザを使用して TiDB ダッシュボードにアクセスすると、一部の関数が正しく動作しない可能性があります。
 
-## Sign in
+## サインイン {#sign-in}
 
-After accessing TiDB Dashboard, you will be directed to the user login interface.
+TiDB ダッシュボードにアクセスすると、ユーザー ログイン インターフェイスに移動します。
 
-- You can sign in to TiDB Dashboard using the TiDB `root` account.
-- You can also sign in to TiDB Dashboard via Single Sign-On (SSO). For more information, see [Configure SSO for TiDB Dashboard](/dashboard/dashboard-session-sso.md).
-- If you have created a [User-defined SQL User](/dashboard/dashboard-user.md), you can sign in using this account and the corresponding password.
+-   TiDB `root`アカウントを使用して TiDB ダッシュボードにサインインできます。
+-   TiDBダッシュボードには、シングルサインオン（SSO）経由でサインインすることもできます。詳細については、 [TiDBダッシュボードのSSOを構成する](/dashboard/dashboard-session-sso.md)ご覧ください。
+-   [ユーザー定義SQLユーザー](/dashboard/dashboard-user.md)作成した場合は、このアカウントと対応するパスワードを使用してサインインできます。
 
-If one of the following situations exists, the login might fail:
+次のいずれかの状況が存在する場合、ログインが失敗する可能性があります。
 
-- TiDB `root` user does not exist.
-- PD is not started or cannot be accessed.
-- TiDB is not started or cannot be accessed.
-- Wrong `root` password.
+-   TiDB `root`ユーザーが存在しません。
+-   PD が起動していないか、アクセスできません。
+-   TiDB が起動されていないか、アクセスできません。
+-   パスワードが`root`間違っています。
 
-Once you have signed in, the session remains valid within the next 24 hours. To learn how to sign out, refer to the [Logout](#logout) section.
+サインイン後、セッションは24時間有効です。サインアウトの方法については、 [ログアウト](#logout)セクションをご覧ください。
 
-## Switch language
+## 言語を切り替える {#switch-language}
 
-The following languages are supported in TiDB Dashboard:
+TiDB ダッシュボードでは次の言語がサポートされています。
 
-- English
-- Chinese (simplified)
+-   英語
+-   中国語（簡体字）
 
-In the **SQL User Sign In** page, you can click the **Switch Language** drop-down list to switch the interface language.
+**SQL ユーザー サインイン**ページで、**言語の**切り替えドロップダウン リストをクリックしてインターフェイス言語を切り替えることができます。
 
 ![Switch language](/media/dashboard/dashboard-access-switch-language.png)
 
-## Logout
+## ログアウト {#logout}
 
-Once you have logged in, click the login user name in the left navigation bar to switch to the user page. Click the **Logout** button on the user page to log out the current user. After logging out, you need to re-enter your username and password.
+ログイン後、左側のナビゲーションバーにあるログインユーザー名をクリックしてユーザーページに切り替えます。ユーザーページの**「ログアウト」**ボタンをクリックすると、現在のユーザーがログアウトします。ログアウト後、ユーザー名とパスワードを再度入力する必要があります。
 
 ![Logout](/media/dashboard/dashboard-access-logout.png)

@@ -1,47 +1,47 @@
 ---
 title: Quick Start with TiDB Data Migration
-summary: Learn how to quickly set up a data migration environment using TiUP Playground.
+summary: TiUP Playground を使用してデータ移行環境をすばやくセットアップする方法を学びます。
 ---
 
-# Quick Start with TiDB Data Migration
+# TiDBデータ移行のクイックスタート {#quick-start-with-tidb-data-migration}
 
-[TiDB Data Migration (DM)](/dm/dm-overview.md) is a powerful tool that replicates data from MySQL-compatible databases to TiDB. This guide shows you how to quickly set up a local TiDB DM environment for development or testing using [TiUP Playground](/tiup/tiup-playground.md), and walks you through a simple task of migrating data from a source MySQL database to a target TiDB database.
+[TiDB データ移行 (DM)](/dm/dm-overview.md) 、MySQL互換データベースからTiDBにデータを複製する強力なツールです。このガイドでは、 [TiUPプレイグラウンド](/tiup/tiup-playground.md)使用して開発またはテスト用のローカルTiDB DM環境を迅速に構築する方法と、ソースMySQLデータベースからターゲットTiDBデータベースへのデータ移行という簡単なタスクを段階的に説明します。
 
-> **Note:**
+> **注記：**
 >
-> For production deployments, see [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md).
+> 本番への展開については、 [TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)参照してください。
 
-## Step 1: Set up the test environment
+## ステップ1: テスト環境をセットアップする {#step-1-set-up-the-test-environment}
 
-[TiUP](/tiup/tiup-overview.md) is a cluster operation and maintenance tool. Its Playground feature lets you quickly launch a temporary local environment with a TiDB database and TiDB DM for development and testing.
+[TiUP](/tiup/tiup-overview.md)はクラスタ運用・保守ツールです。Playground機能を使用すると、開発・テスト用にTiDBデータベースとTiDB DMを備えた一時的なローカル環境を迅速に起動できます。
 
-1. Install TiUP:
+1.  TiUPをインストールします:
 
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-    > **Note:**
+    > **注記：**
     >
-    > If you have an existing installation of TiUP, ensure it is updated to v1.16.1 or later to use the `--dm-master` and `--dm-worker` flags. To check your current version, run the following command:
+    > 既にTiUPがインストールされている場合は、フラグ`--dm-master`と`--dm-worker`使用するには、v1.16.1 以降にアップデートされていることを確認してください。現在のバージョンを確認するには、次のコマンドを実行します。
     >
     > ```shell
     > tiup --version
     > ```
     >
-    > To upgrade TiUP to the latest version, run the following command:
+    > TiUP を最新バージョンにアップグレードするには、次のコマンドを実行します。
     >
     > ```shell
     > tiup update --self
     > ```
 
-2. Start TiUP Playground with a target TiDB database and DM components:
+2.  ターゲット TiDB データベースと DM コンポーネントを使用してTiUP Playground を起動します。
 
     ```shell
-    tiup playground {{{ .tidb-version }}} --dm-master 1 --dm-worker 1 --tiflash 0 --without-monitor
+    tiup playground v8.5.2 --dm-master 1 --dm-worker 1 --tiflash 0 --without-monitor
     ```
 
-3. Verify the environment by checking in the output whether TiDB and DM are running:
+3.  出力で TiDB と DM が実行されているかどうかを確認して環境を確認します。
 
     ```text
     TiDB Playground Cluster is started, enjoy!
@@ -51,21 +51,21 @@ summary: Learn how to quickly set up a data migration environment using TiUP Pla
     TiDB Dashboard:  http://127.0.0.1:2379/dashboard
     ```
 
-4. Keep `tiup playground` running in the current terminal and open a new terminal for the following steps.
+4.  現在のターミナルで`tiup playground`を実行したままにして、次の手順のために新しいターミナルを開きます。
 
-    This playground environment provides the running processes for the target TiDB database and the replication engine (DM-master and DM-worker). It will handle the data flow: MySQL (source) → DM (replication engine) → TiDB (target).
+    このプレイグラウンド環境は、ターゲットTiDBデータベースとレプリケーションエンジン（DMマスターとDMワーカー）の実行プロセスを提供します。MySQL（ソース）→ DM（レプリケーションエンジン）→ TiDB（ターゲット）というデータフローを処理します。
 
-## Step 2: Prepare a source database (optional)
+## ステップ2: ソースデータベースを準備する（オプション） {#step-2-prepare-a-source-database-optional}
 
-You can use one or more MySQL instances as a source database. If you already have a MySQL-compatible instance, skip to [Step 3](#step-3-configure-a-tidb-dm-source). Otherwise, take the following steps to create one for testing.
+ソースデータベースとして、1つ以上のMySQLインスタンスを使用できます。MySQL互換インスタンスを既にお持ちの場合は、 [ステップ3](#step-3-configure-a-tidb-dm-source)に進んでください。そうでない場合は、以下の手順に従ってテスト用のインスタンスを作成してください。
 
 <SimpleTab groupId="os">
 
 <div label="Docker" value="docker">
 
-You can use Docker to quickly deploy a test MySQL 8.0 instance.
+Docker を使用すると、テスト用の MySQL 8.0 インスタンスをすばやくデプロイできます。
 
-1. Run a MySQL 8.0 Docker container:
+1.  MySQL 8.0 Docker コンテナを実行します。
 
     ```shell
     docker run --name mysql80 \
@@ -74,13 +74,13 @@ You can use Docker to quickly deploy a test MySQL 8.0 instance.
         -d mysql:8.0
     ```
 
-2. Connect to MySQL:
+2.  MySQLに接続します。
 
     ```shell
     docker exec -it mysql80 mysql -uroot -pMyPassw0rd!
     ```
 
-3. Create a dedicated user with required privileges for DM testing:
+3.  DM テストに必要な権限を持つ専用ユーザーを作成します。
 
     ```sql
     CREATE USER 'tidb-dm'@'%'
@@ -90,7 +90,7 @@ You can use Docker to quickly deploy a test MySQL 8.0 instance.
     GRANT PROCESS, BACKUP_ADMIN, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, SELECT ON *.* TO 'tidb-dm'@'%';
     ```
 
-4. Create sample data:
+4.  サンプルデータを作成します。
 
     ```sql
     CREATE DATABASE hello;
@@ -110,34 +110,34 @@ You can use Docker to quickly deploy a test MySQL 8.0 instance.
 
 <div label="macOS" value="macos">
 
-On macOS, you can quickly install and start MySQL 8.0 locally using [Homebrew](https://brew.sh).
+macOS では、 [Homebrew](https://brew.sh)使用して MySQL 8.0 をローカルにすばやくインストールして起動できます。
 
-1. Update Homebrew and install MySQL 8.0:
+1.  Homebrewを更新し、MySQL 8.0 をインストールします。
 
     ```shell
     brew update
     brew install mysql@8.0
     ```
 
-2. Make MySQL commands accessible in the system path:
+2.  MySQL コマンドをシステム パスでアクセスできるようにします。
 
     ```shell
     brew link mysql@8.0 --force
     ```
 
-3. Start the MySQL service:
+3.  MySQL サービスを開始します。
 
     ```shell
     brew services start mysql@8.0
     ```
 
-4. Connect to MySQL as the `root` user:
+4.  `root`ユーザーとして MySQL に接続します。
 
     ```shell
     mysql -uroot
     ```
 
-5. Create a dedicated user with required privileges for DM testing:
+5.  DM テストに必要な権限を持つ専用ユーザーを作成します。
 
     ```sql
     CREATE USER 'tidb-dm'@'%'
@@ -147,7 +147,7 @@ On macOS, you can quickly install and start MySQL 8.0 locally using [Homebrew](h
     GRANT PROCESS, BACKUP_ADMIN, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, SELECT ON *.* TO 'tidb-dm'@'%';
     ```
 
-6. Create sample data:
+6.  サンプルデータを作成します。
 
     ```sql
     CREATE DATABASE hello;
@@ -167,46 +167,46 @@ On macOS, you can quickly install and start MySQL 8.0 locally using [Homebrew](h
 
 <div label="CentOS" value="centos">
 
-On Enterprise Linux distributions like CentOS, you can install MySQL 8.0 from the MySQL Yum repository.
+CentOS などの Enterprise Linux ディストリビューションでは、MySQL Yum リポジトリから MySQL 8.0 をインストールできます。
 
-1. Download and install the MySQL Yum repository package from [MySQL Yum repository download page](https://dev.mysql.com/downloads/repo/yum). For Linux versions other than 9, you must replace the `el9` (Enterprise Linux version 9) in the following URL while keeping `mysql80` for MySQL version 8.0:
+1.  [MySQL Yumリポジトリのダウンロードページ](https://dev.mysql.com/downloads/repo/yum)から MySQL Yum リポジトリ パッケージをダウンロードしてインストールします。Linux バージョン 9 以外の場合は、次の URL の`el9` (Enterprise Linux バージョン 9) を置き換え、MySQL バージョン 8.0 の場合は`mysql80`そのままにする必要があります。
 
     ```shell
     sudo yum install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
     ```
 
-2. Install MySQL:
+2.  MySQLをインストールします。
 
     ```shell
     sudo yum install -y mysql-community-server --nogpgcheck
     ```
 
-3. Start MySQL:
+3.  MySQLを起動します。
 
     ```shell
     sudo systemctl start mysqld
     ```
 
-4. Find the temporary root password in the MySQL log:
+4.  MySQL ログで一時的な root パスワードを見つけます。
 
     ```shell
     sudo grep 'temporary password' /var/log/mysqld.log
     ```
 
-5. Connect to MySQL as the `root` user with the temporary password:
+5.  一時パスワードを使用して`root`ユーザーとして MySQL に接続します。
 
     ```shell
     mysql -uroot -p
     ```
 
-6. Reset the `root` password:
+6.  `root`パスワードをリセットします:
 
     ```sql
     ALTER USER 'root'@'localhost'
         IDENTIFIED BY 'MyPassw0rd!';
     ```
 
-7. Create a dedicated user with required privileges for DM testing:
+7.  DM テストに必要な権限を持つ専用ユーザーを作成します。
 
     ```sql
     CREATE USER 'tidb-dm'@'%'
@@ -216,7 +216,7 @@ On Enterprise Linux distributions like CentOS, you can install MySQL 8.0 from th
     GRANT PROCESS, BACKUP_ADMIN, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, SELECT ON *.* TO 'tidb-dm'@'%';
     ```
 
-8. Create sample data:
+8.  サンプルデータを作成します。
 
     ```sql
     CREATE DATABASE hello;
@@ -236,34 +236,34 @@ On Enterprise Linux distributions like CentOS, you can install MySQL 8.0 from th
 
 <div label="Ubuntu" value="ubuntu">
 
-On Ubuntu, you can install MySQL from the official Ubuntu repository.
+Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストールできます。
 
-1. Update your package list:
+1.  パッケージリストを更新します:
 
     ```shell
     sudo apt-get update
     ```
 
-2. Install MySQL:
+2.  MySQLをインストールします。
 
     ```shell
     sudo apt-get install -y mysql-server
     ```
 
-3. Check whether the `mysql` service is running, and start the service if necessary:
+3.  `mysql`サービスが実行されているかどうかを確認し、必要に応じてサービスを開始します。
 
     ```shell
     sudo systemctl status mysql
     sudo systemctl start mysql
     ```
 
-4. Connect to MySQL as the `root` user using socket authentication:
+4.  ソケット認証を使用して`root`ユーザーとして MySQL に接続します。
 
     ```shell
     sudo mysql
     ```
 
-5. Create a dedicated user with required privileges for DM testing:
+5.  DM テストに必要な権限を持つ専用ユーザーを作成します。
 
     ```sql
     CREATE USER 'tidb-dm'@'%'
@@ -273,7 +273,7 @@ On Ubuntu, you can install MySQL from the official Ubuntu repository.
     GRANT PROCESS, BACKUP_ADMIN, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, SELECT ON *.* TO 'tidb-dm'@'%';
     ```
 
-6. Create sample data:
+6.  サンプルデータを作成します。
 
     ```sql
     CREATE DATABASE hello;
@@ -293,15 +293,15 @@ On Ubuntu, you can install MySQL from the official Ubuntu repository.
 
 </SimpleTab>
 
-## Step 3: Configure a TiDB DM source
+## ステップ3: TiDB DMソースを構成する {#step-3-configure-a-tidb-dm-source}
 
-After preparing the source MySQL database, configure TiDB DM to connect to it. To do this, create a source configuration file with the connection details and apply the configuration using the `dmctl` tool.
+ソースMySQLデータベースを準備したら、TiDB DMをそのデータベースに接続するための設定を行います。そのためには、接続の詳細を含むソース設定ファイルを作成し、 `dmctl`ツールを使用して設定を適用します。
 
-1. Create a source configuration file `mysql-01.yaml`:
+1.  ソース構成ファイル`mysql-01.yaml`を作成します。
 
-    > **Note:**
+    > **注記：**
     >
-    > This step assumes you have already created the `tidb-dm` user with replication privileges in the source database, as described in [Step 2](#step-2-prepare-a-source-database-optional).
+    > この手順では、 [ステップ2](#step-2-prepare-a-source-database-optional)で説明されているように、ソース データベースにレプリケーション権限を持つ`tidb-dm`ユーザーがすでに作成されていることを前提としています。
 
     ```yaml
     source-id: "mysql-01"
@@ -312,17 +312,17 @@ After preparing the source MySQL database, configure TiDB DM to connect to it. T
       port: 3306
     ```
 
-2. Create a DM data source:
+2.  DM データ ソースを作成します。
 
     ```shell
     tiup dmctl --master-addr 127.0.0.1:8261 operate-source create mysql-01.yaml
     ```
 
-## Step 4: Create a TiDB DM task
+## ステップ4: TiDB DMタスクを作成する {#step-4-create-a-tidb-dm-task}
 
-After configuring the source database, you can create a migration task in TiDB DM. This task references the source MySQL instance and defines the connection details for the target TiDB database.
+ソースデータベースを設定したら、TiDB DM で移行タスクを作成できます。このタスクは、ソース MySQL インスタンスを参照し、ターゲット TiDB データベースへの接続詳細を定義します。
 
-1. Create a DM task configuration file `tiup-playground-task.yaml`:
+1.  DMタスク構成ファイル`tiup-playground-task.yaml`を作成します。
 
     ```yaml
     # Task
@@ -341,35 +341,35 @@ After configuring the source database, you can create a migration task in TiDB D
       password: ""                # If the password is not empty, it is recommended to use a password encrypted with dmctl.
     ```
 
-2. Start the task using the configuration file:
+2.  構成ファイルを使用してタスクを開始します。
 
     ```shell
     tiup dmctl --master-addr 127.0.0.1:8261 start-task tiup-playground-task.yaml
     ```
 
-## Step 5: Verify the data replication
+## ステップ5: データ複製を確認する {#step-5-verify-the-data-replication}
 
-After starting the migration task, verify whether data replication is working as expected. Use the `dmctl` tool to check the task status, and connect to the target TiDB database to confirm that the data has been successfully replicated from the source MySQL database.
+移行タスクを開始したら、データレプリケーションが期待どおりに動作しているかどうかを確認します。1 `dmctl`を使用してタスクのステータスを確認し、ターゲット TiDB データベースに接続して、ソース MySQL データベースからデータが正常に複製されていることを確認します。
 
-1. Check the status of the TiDB DM task:
+1.  TiDB DM タスクのステータスを確認します。
 
     ```shell
     tiup dmctl --master-addr 127.0.0.1:8261 query-status
     ```
 
-2. Connect to the target TiDB database:
+2.  ターゲット TiDB データベースに接続します。
 
     ```shell
     mysql --host 127.0.0.1 --port 4000 -u root --prompt 'tidb> '
     ```
 
-3. Verify the replicated data. If you have created the sample data in [Step 2](#step-2-prepare-a-source-database-optional), you will see the `hello_tidb` table replicated from the MySQL source database to the target TiDB database:
+3.  複製されたデータを確認します。1 [ステップ2](#step-2-prepare-a-source-database-optional)サンプルデータを作成した場合、MySQLソースデータベースからターゲットTiDBデータベースに複製されたテーブル`hello_tidb`が表示されます。
 
     ```sql
     SELECT * FROM hello.hello_tidb;
     ```
 
-    The output is as follows:
+    出力は次のようになります。
 
     ```sql
     +----+-------------+
@@ -380,23 +380,23 @@ After starting the migration task, verify whether data replication is working as
     1 row in set (0.00 sec)
     ```
 
-## Step 6: Clean up (optional)
+## ステップ6: クリーンアップ（オプション） {#step-6-clean-up-optional}
 
-After completing your testing, you can clean up the environment by stopping the TiUP Playground, removing the source MySQL instance (if created for testing), and deleting unnecessary files.
+テストが完了したら、 TiUP Playground を停止し、ソース MySQL インスタンス (テスト用に作成された場合) を削除し、不要なファイルを削除することで、環境をクリーンアップできます。
 
-1. Stop the TiUP Playground:
+1.  TiUP Playgroundを停止します。
 
-    In the terminal where the TiUP Playground is running, press <kbd>Control</kbd>+<kbd>C</kbd> to terminate the process. This stops all TiDB and DM components and deletes the target environment.
+    TiUP Playground が実行中のターミナルで、 <kbd>Control</kbd> + <kbd>C</kbd>を押してプロセスを終了します。これにより、すべての TiDB および DM コンポーネントが停止し、ターゲット環境が削除されます。
 
-2. Stop and remove the source MySQL instance:
+2.  ソース MySQL インスタンスを停止して削除します。
 
-    If you have created a source MySQL instance for testing in [Step 2](#step-2-prepare-a-source-database-optional), stop and remove it by taking the following steps:
+    [ステップ2](#step-2-prepare-a-source-database-optional)でテスト用のソース MySQL インスタンスを作成した場合は、次の手順に従ってそれを停止し、削除します。
 
     <SimpleTab groupId="os">
 
     <div label="Docker" value="docker">
 
-    To stop and remove the Docker container:
+    Docker コンテナを停止して削除するには:
 
     ```shell
     docker stop mysql80
@@ -407,37 +407,37 @@ After completing your testing, you can clean up the environment by stopping the 
 
     <div label="macOS" value="macos">
 
-    If you installed MySQL 8.0 using Homebrew solely for testing, stop the service and uninstall it:
+    テスト目的のみでHomebrewを使用して MySQL 8.0 をインストールした場合は、サービスを停止してアンインストールします。
 
     ```shell
     brew services stop mysql@8.0
     brew uninstall mysql@8.0
     ```
 
-    > **Note:**
+    > **注記：**
     >
-    > If you want to remove all MySQL data files, delete the MySQL data directory (commonly located at `/opt/homebrew/var/mysql`).
+    > すべての MySQL データ ファイルを削除する場合は、MySQL データ ディレクトリ (通常は`/opt/homebrew/var/mysql`にあります) を削除します。
 
     </div>
 
     <div label="CentOS" value="centos">
 
-    If you installed MySQL 8.0 from the MySQL Yum repository solely for testing, stop the service and uninstall it:
+    テスト目的のみで MySQL Yum リポジトリから MySQL 8.0 をインストールした場合は、サービスを停止してアンインストールします。
 
     ```shell
     sudo systemctl stop mysqld
     sudo yum remove -y mysql-community-server
     ```
 
-    > **Note:**
+    > **注記：**
     >
-    > If you want to remove all MySQL data files, delete the MySQL data directory (commonly located at `/var/lib/mysql`).
+    > すべての MySQL データ ファイルを削除する場合は、MySQL データ ディレクトリ (通常は`/var/lib/mysql`にあります) を削除します。
 
     </div>
 
     <div label="Ubuntu" value="ubuntu">
 
-    If you installed MySQL from the official Ubuntu repository solely for testing, stop the service and uninstall it:
+    テスト目的のみで公式 Ubuntu リポジトリから MySQL をインストールした場合は、サービスを停止してアンインストールします。
 
     ```shell
     sudo systemctl stop mysql
@@ -445,31 +445,31 @@ After completing your testing, you can clean up the environment by stopping the 
     sudo apt-get autoremove -y
     ```
 
-    > **Note:**
+    > **注記：**
     >
-    > If you want to remove all MySQL data files, delete the MySQL data directory (commonly located at `/var/lib/mysql`).
+    > すべての MySQL データ ファイルを削除する場合は、MySQL データ ディレクトリ (通常は`/var/lib/mysql`にあります) を削除します。
 
     </div>
 
     </SimpleTab>
 
-3. Remove the TiDB DM configuration files if they are no longer needed:
+3.  TiDB DM 構成ファイルが不要になった場合は削除します。
 
     ```shell
     rm mysql-01.yaml tiup-playground-task.yaml
     ```
 
-4. If you no longer need TiUP, you can uninstall it:
+4.  TiUPが不要になった場合は、アンインストールできます。
 
     ```shell
     rm -rf ~/.tiup
     ```
 
-## What's next
+## 次は何？ {#what-s-next}
 
-Now that you successfully created a task that migrates data from a source MySQL database to a target TiDB database in a testing environment, you can:
+テスト環境でソース MySQL データベースからターゲット TiDB データベースにデータを移行するタスクを正常に作成したので、次の操作を実行できます。
 
-- Explore [TiDB DM Features](/dm/dm-overview.md)
-- Learn about [TiDB DM Architecture](/dm/dm-arch.md)
-- Set up [TiDB DM for a Proof of Concept or Production](/dm/deploy-a-dm-cluster-using-tiup.md)
-- Configure advanced [DM Tasks](/dm/dm-task-configuration-guide.md)
+-   探索[TiDB DM の機能](/dm/dm-overview.md)
+-   [TiDB DMアーキテクチャ](/dm/dm-arch.md)について学ぶ
+-   セットアップ[概念実証または本番環境用の TiDB DM](/dm/deploy-a-dm-cluster-using-tiup.md)
+-   高度な設定[DMタスク](/dm/dm-task-configuration-guide.md)

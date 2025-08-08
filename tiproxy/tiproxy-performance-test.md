@@ -1,56 +1,56 @@
 ---
 title: TiProxy Performance Test Report
-summary: Learn the performance of TiProxy and the comparison with HAProxy.
+summary: TiProxy のパフォーマンスと HAProxy との比較について学びます。
 ---
 
-# TiProxy Performance Test Report
+# TiProxy パフォーマンステストレポート {#tiproxy-performance-test-report}
 
-This report tests the performance of TiProxy in the OLTP scenario of Sysbench and compares it with [HAProxy](https://www.haproxy.org/).
+このレポートでは、Sysbench の OLTP シナリオで TiProxy のパフォーマンスをテストし、 [HAプロキシ](https://www.haproxy.org/)と比較します。
 
-The results are as follows:
+結果は次のとおりです。
 
-- The QPS upper limit of TiProxy is affected by the type of workload. When client concurrency is the same and the TiProxy CPU usage is below 80%, the QPS is less than 5% lower than that of HAProxy. In such cases, you can often increase the client concurrency to improve QPS. Under the same QPS, TiProxy's CPU usage is about 25% higher than HAProxy's. Therefore, you need to reserve more CPU resources.
-- The number of TiDB server instances that TiProxy can hold varies according to the type of workload. Under the basic workloads of Sysbench, a TiProxy can hold 5 to 12 TiDB server instances of the same model.
-- The row number of the query result set has a significant impact on the QPS of TiProxy, and the impact is the same as that of HAProxy.
-- The performance of TiProxy increases almost linearly with the number of vCPUs. Therefore, increasing the number of vCPUs can effectively improve the QPS upper limit.
-- The number of long connections and the frequency of creating short connections have minimal impact on the QPS of TiProxy.
-- The higher the CPU usage of TiProxy, the greater the impact of enabling [traffic capture](/tiproxy/tiproxy-traffic-replay.md) on QPS. When the CPU usage of TiProxy is about 70%, enabling traffic capture leads to approximately 3% decrease in average QPS and 7% decrease in minimum QPS. The latter decrease is caused by periodic QPS drops during traffic file compression.
+-   TiProxy の QPS 上限はワークロードの種類によって影響を受けます。クライアントの同時実行数が同じで、TiProxy の CPU 使用率が 80% 未満の場合、QPS は HAProxy より 5% 未満低くなります。このような場合、クライアントの同時実行数を増やすことで QPS を改善できる場合が多くあります。同じ QPS の場合、TiProxy の CPU 使用率は HAProxy より約 25% 高くなります。そのため、より多くの CPU リソースを確保する必要があります。
+-   TiProxyが保持できるTiDBサーバーインスタンスの数は、ワークロードの種類によって異なります。Sysbenchの基本ワークロードでは、TiProxyは同じモデルのTiDBサーバーインスタンスを5～12個保持できます。
+-   クエリ結果セットの行数は TiProxy の QPS に大きな影響を与え、その影響は HAProxy の場合と同じです。
+-   TiProxy のパフォーマンスは、vCPU の数にほぼ比例して向上します。そのため、vCPU の数を増やすことで、QPS の上限を効果的に向上させることができます。
+-   長い接続の数と短い接続を作成する頻度は、TiProxy の QPS にほとんど影響を与えません。
+-   TiProxyのCPU使用率が高いほど、 [トラフィックキャプチャ](/tiproxy/tiproxy-traffic-replay.md)有効化した場合のQPSへの影響が大きくなります。TiProxyのCPU使用率が約70%の場合、トラフィックキャプチャを有効化すると、平均QPSが約3%、最小QPSが約7%低下します。後者の低下は、トラフィックファイルの圧縮中に発生する周期的なQPS低下によって発生します。
 
-## Test environment
+## テスト環境 {#test-environment}
 
-### Hardware configuration
+### ハードウェア構成 {#hardware-configuration}
 
-| Service | Machine type | CPU model | Instance count |
-| --- | --- | --- | --- |
-| TiProxy | 4C8G | Intel(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 1 |
-| HAProxy | 4C8G | Intel(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 1 |
-| PD | 4C8G | Intel(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 3 |
-| TiDB | 8C16G | Intel(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 8 |
-| TiKV | 8C16G | Intel(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 8 |
-| Sysbench | 8C16G | Intel(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 1 |
+| サービス    | 機械タイプ | CPUモデル                                     | インスタンス数 |
+| ------- | ----- | ------------------------------------------ | ------- |
+| TiProxy | 4C8G  | インテル(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 1       |
+| HAプロキシ  | 4C8G  | インテル(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 1       |
+| PD      | 4C8G  | インテル(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 3       |
+| TiDB    | 8C16G | インテル(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 8       |
+| TiKV    | 8C16G | インテル(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 8       |
+| システムベンチ | 8C16G | インテル(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 1       |
 
-### Software
+### ソフトウェア {#software}
 
-| Service | Software version |
-| --- | --- |
-| TiProxy | v1.0.0 |
-| HAProxy | 2.9.0 |
-| PD | v8.0.0 |
-| TiDB | v8.0.0 |
-| TiKV | v8.0.0 |
-| Sysbench | 1.0.17 |
+| サービス    | ソフトウェアバージョン |
+| ------- | ----------- |
+| TiProxy | バージョン1.0.0  |
+| HAプロキシ  | 2.9.0       |
+| PD      | バージョン8.0.0  |
+| TiDB    | バージョン8.0.0  |
+| TiKV    | バージョン8.0.0  |
+| システムベンチ | 1.0.17      |
 
-### Configuration
+### コンフィグレーション {#configuration}
 
-#### TiProxy configuration
+#### TiProxy の設定 {#tiproxy-configuration}
 
-In the test, TLS is not enabled between the client and TiProxy, or between TiProxy and TiDB server.
+テストでは、クライアントと TiProxy 間、または TiProxy と TiDBサーバー間で TLS が有効になっていません。
 
 ```yaml
 proxy.conn-buffer-size: 131072
 ```
 
-#### HAProxy configuration - `haproxy.cfg` file
+#### HAProxy 設定 - <code>haproxy.cfg</code>ファイル {#haproxy-configuration-code-haproxy-cfg-code-file}
 
 ```yaml
 global                                      # Global configuration.
@@ -79,13 +79,13 @@ listen tidb-cluster                         # Configure database load balancing.
     server tidb-3 10.9.64.166:4000 check inter 2000 rise 2 fall 3
 ```
 
-## Basic workload test
+## 基本的な作業負荷テスト {#basic-workload-test}
 
-### Test plan
+### テスト計画 {#test-plan}
 
-This test aims to compare the QPS of TiProxy and HAProxy under four types of workloads: point select, read only, write only, and read write. Each type of workload is tested with different concurrency to compare the QPS of TiProxy and HAProxy.
+このテストは、ポイントセレクト、読み取り専用、書き込み専用、読み取り書き込みの4種類のワークロードにおけるTiProxyとHAProxyのQPSを比較することを目的としています。各ワークロードは異なる同時実行性でテストされ、TiProxyとHAProxyのQPSを比較します。
 
-The following command is used to perform the test:
+テストを実行するには、次のコマンドを使用します。
 
 ```bash
 sysbench $testname \
@@ -100,85 +100,85 @@ sysbench $testname \
     run --tables=32 --table-size=1000000
 ```
 
-### Point Select
+### ポイント選択 {#point-select}
 
-TiProxy test results:
+TiProxy テスト結果:
 
-| Threads | QPS     | Avg latency (ms) | P95 latency (ms) | TiProxy CPU usage | TiDB overall CPU usage |
-|---------|---------|------------------|------------------|-------------------|------------------------|
-| 20      | 41273   | 0.48             | 0.64             | 190%              | 900%                   |
-| 50      | 100255  | 0.50             | 0.62             | 330%              | 1900%                  |
-| 100     | 137688  | 0.73             | 1.01             | 400%              | 2600%                  |
+| スレッド | QPS    | 平均レイテンシー（ミリ秒） | P95レイテンシー(ミリ秒) | TiProxy CPU使用率 | TiDB 全体の CPU 使用率 |
+| ---- | ------ | ------------- | -------------- | -------------- | ---------------- |
+| 20   | 41273  | 0.48          | 0.64           | 190%           | 900%             |
+| 50   | 100255 | 0.50          | 0.62           | 330%           | 1900%            |
+| 100  | 137688 | 0.73          | 1.01           | 400%           | 2600%            |
 
-HAProxy test results:
+HAProxy テスト結果:
 
-| Threads | QPS    | Avg latency (ms) | P95 latency (ms) | HAProxy CPU usage | TiDB overall CPU usage |
-|---------|--------|------------------|------------------|-------------------|------------------------|
-| 20      | 44833  | 0.45             | 0.61             | 140%              | 1000%                  |
-| 50      | 103631 | 0.48             | 0.61             | 270%              | 2100%                  |
-| 100     | 163069 | 0.61             | 0.77             | 360%              | 3100%                  |
+| スレッド | QPS    | 平均レイテンシー（ミリ秒） | P95レイテンシー(ミリ秒) | HAProxy CPU 使用率 | TiDB 全体の CPU 使用率 |
+| ---- | ------ | ------------- | -------------- | --------------- | ---------------- |
+| 20   | 44833  | 0.45          | 0.61           | 140%            | 1000%            |
+| 50   | 103631 | 0.48          | 0.61           | 270%            | 2100%            |
+| 100  | 163069 | 0.61          | 0.77           | 360%            | 3100%            |
 
-### Read Only
+### 読み取り専用 {#read-only}
 
-TiProxy test results:
+TiProxy テスト結果:
 
-| Threads | QPS    | Avg latency (ms) | P95 latency (ms) | TiProxy CPU usage | TiDB overall CPU usage |
-|---------|--------|------------------|------------------|-------------------|------------------------|
-| 50      | 72076  | 11.09            | 12.75            | 290%              | 2500%                  |
-| 100     | 109704 | 14.58            | 17.63            | 370%              | 3800%                  |
-| 200     | 117519 | 27.21            | 32.53            | 400%              | 4100%                  |
+| スレッド | QPS    | 平均レイテンシー（ミリ秒） | P95レイテンシー(ミリ秒) | TiProxy CPU使用率 | TiDB 全体の CPU 使用率 |
+| ---- | ------ | ------------- | -------------- | -------------- | ---------------- |
+| 50   | 72076  | 11.09         | 12.75          | 290%           | 2500%            |
+| 100  | 109704 | 14.58         | 17.63          | 370%           | 3800%            |
+| 200  | 117519 | 27.21         | 32.53          | 400%           | 4100%            |
 
-HAProxy test results:
+HAProxy テスト結果:
 
-| Threads | QPS     | Avg latency (ms) | P95 latency (ms) | HAProxy CPU usage | TiDB overall CPU usage |
-|---------|---------|------------------|------------------|-------------------|------------------------|
-| 50      | 75760   | 10.56            | 12.08            | 250%              | 2600%                  |
-| 100     | 121730  | 13.14            | 15.83            | 350%              | 4200%                  |
-| 200     | 131712  | 24.27            | 30.26            | 370%              | 4500%                  |
+| スレッド | QPS    | 平均レイテンシー（ミリ秒） | P95レイテンシー(ミリ秒) | HAProxy CPU 使用率 | TiDB 全体の CPU 使用率 |
+| ---- | ------ | ------------- | -------------- | --------------- | ---------------- |
+| 50   | 75760  | 10.56         | 12.08          | 250%            | 2600%            |
+| 100  | 121730 | 13.14         | 15.83          | 350%            | 4200%            |
+| 200  | 131712 | 24.27         | 30.26          | 370%            | 4500%            |
 
-### Write Only
+### 書き込み専用 {#write-only}
 
-TiProxy test results:
+TiProxy テスト結果:
 
-| Threads | QPS     | Avg latency (ms) | P95 latency (ms) | TiProxy CPU usage | TiDB overall CPU usage |
-|---------|---------|------------------|------------------|-------------------|------------------------|
-| 100     | 81957   | 7.32             | 10.27            | 290%              | 3900%                  |
-| 300     | 103040  | 17.45            | 31.37            | 330%              | 4700%                  |
-| 500     | 104869  | 28.59            | 52.89            | 340%              | 4800%                  |
+| スレッド | QPS    | 平均レイテンシー（ミリ秒） | P95レイテンシー(ミリ秒) | TiProxy CPU使用率 | TiDB 全体の CPU 使用率 |
+| ---- | ------ | ------------- | -------------- | -------------- | ---------------- |
+| 100  | 81957  | 7.32          | 10.27          | 290%           | 3900%            |
+| 300  | 103040 | 17.45         | 31.37          | 330%           | 4700%            |
+| 500  | 104869 | 28.59         | 52.89          | 340%           | 4800%            |
 
-HAProxy test results:
+HAProxy テスト結果:
 
-| Threads | QPS     | Avg latency (ms) | P95 latency (ms) | HAProxy CPU usage | TiDB overall CPU usage |
-|---------|---------|------------------|------------------|-------------------|------------------------|
-| 100     | 81708   | 7.34             | 10.65            | 240%              | 3700%                  |
-| 300     | 106008  | 16.95            | 31.37            | 320%              | 4800%                  |
-| 500     | 122369  | 24.45            | 47.47            | 350%              | 5300%                  |
+| スレッド | QPS    | 平均レイテンシー（ミリ秒） | P95レイテンシー(ミリ秒) | HAProxy CPU 使用率 | TiDB 全体の CPU 使用率 |
+| ---- | ------ | ------------- | -------------- | --------------- | ---------------- |
+| 100  | 81708  | 7.34          | 10.65          | 240%            | 3700%            |
+| 300  | 106008 | 16.95         | 31.37          | 320%            | 4800%            |
+| 500  | 122369 | 24.45         | 47.47          | 350%            | 5300%            |
 
-### Read Write
+### 読み書き {#read-write}
 
-TiProxy test results:
+TiProxy テスト結果:
 
-| Threads | QPS    | Avg latency (ms) | P95 latency (ms) | TiProxy CPU usage | TiDB overall CPU usage |
-|---------|--------|------------------|------------------|-------------------|------------------------|
-| 50      | 58571  | 17.07            | 19.65            | 250%              | 2600%                  |
-| 100     | 88432  | 22.60            | 29.19            | 330%              | 3900%                  |
-| 200     | 108758 | 36.73            | 51.94            | 380%              | 4800%                  |
+| スレッド | QPS    | 平均レイテンシー（ミリ秒） | P95レイテンシー(ミリ秒) | TiProxy CPU使用率 | TiDB 全体の CPU 使用率 |
+| ---- | ------ | ------------- | -------------- | -------------- | ---------------- |
+| 50   | 58571  | 17.07         | 19.65          | 250%           | 2600%            |
+| 100  | 88432  | 22.60         | 29.19          | 330%           | 3900%            |
+| 200  | 108758 | 36.73         | 51.94          | 380%           | 4800%            |
 
-HAProxy test results:
+HAProxy テスト結果:
 
-| Threads | QPS     | Avg latency (ms) | P95 latency (ms) | HAProxy CPU usage | TiDB overall CPU usage |
-|---------|---------|------------------|------------------|-------------------|------------------------|
-| 50      | 61226   | 16.33            | 19.65            | 190%              | 2800%                  |
-| 100     | 96569   | 20.70            | 26.68            | 290%              | 4100%                  |
-| 200     | 120163  | 31.28            | 49.21            | 340%              | 5200%                  |
+| スレッド | QPS    | 平均レイテンシー（ミリ秒） | P95レイテンシー(ミリ秒) | HAProxy CPU 使用率 | TiDB 全体の CPU 使用率 |
+| ---- | ------ | ------------- | -------------- | --------------- | ---------------- |
+| 50   | 61226  | 16.33         | 19.65          | 190%            | 2800%            |
+| 100  | 96569  | 20.70         | 26.68          | 290%            | 4100%            |
+| 200  | 120163 | 31.28         | 49.21          | 340%            | 5200%            |
 
-## Result set test
+## 結果セットテスト {#result-set-test}
 
-### Test plan
+### テスト計画 {#test-plan}
 
-This test aims to compare the performance of TiProxy and HAProxy under different result set row numbers. This test uses 100 concurrency, and compares the QPS of TiProxy and HAProxy with result set row numbers of 10, 100, 1000, and 10000.
+このテストは、異なる結果セット行数におけるTiProxyとHAProxyのパフォーマンスを比較することを目的としています。このテストでは、同時実行数を100に設定し、結果セット行数を10、100、1000、10000とした場合のTiProxyとHAProxyのQPSを比較します。
 
-The following command is used to perform the test:
+テストを実行するには、次のコマンドを使用します。
 
 ```bash
 sysbench oltp_read_only \
@@ -200,33 +200,33 @@ sysbench oltp_read_only \
     run --tables=32 --table-size=1000000
 ```
 
-### Test results
+### テスト結果 {#test-results}
 
-TiProxy test results:
+TiProxy テスト結果:
 
-| Range size | QPS     | Avg latency (ms) | P95 latency (ms) | TiProxy CPU usage | TiDB overall CPU usage | Inbound network (MiB/s) | Outbound network (MiB/s) |
-|------------|---------|------------------|------------------|-------------------|------------------------|-------------------------|--------------------------|
-| 10         | 80157   | 1.25             | 1.61             | 340%              | 2600%                  | 140                     | 140                      |
-| 100        | 55936   | 1.79             | 2.43             | 370%              | 2800%                  | 820                     | 820                      |
-| 1000       | 10313   | 9.69             | 13.70            | 310%              | 1500%                  | 1370                    | 1370                     |
-| 10000      | 1064    | 93.88            | 142.39           | 250%              | 600%                   | 1430                    | 1430                     |
+| 範囲サイズ | QPS   | 平均レイテンシー（ミリ秒） | P95レイテンシー(ミリ秒) | TiProxy CPU使用率 | TiDB 全体の CPU 使用率 | 受信ネットワーク（MiB/秒） | 送信ネットワーク（MiB/秒） |
+| ----- | ----- | ------------- | -------------- | -------------- | ---------------- | --------------- | --------------- |
+| 10    | 80157 | 1.25          | 1.61           | 340%           | 2600%            | 140             | 140             |
+| 100   | 55936 | 1.79          | 2.43           | 370%           | 2800%            | 820             | 820             |
+| 1000  | 10313 | 9.69          | 13.70          | 310%           | 1500%            | 1370            | 1370            |
+| 10000 | 1064  | 93.88         | 142.39         | 250%           | 600%             | 1430            | 1430            |
 
-HAProxy test results:
+HAProxy テスト結果:
 
-| Range size | QPS    | Avg latency (ms) | P95 latency (ms) | HAProxy CPU usage | TiDB overall CPU usage | Inbound network (MiB/s) | Outbound network (MiB/s) |
-|------------|--------|------------------|------------------|-------------------|------------------------|-------------------------|--------------------------|
-| 10         | 94376  | 1.06             | 1.30             | 250%              | 4000%                  | 150                     | 150                      |
-| 100        | 70129  | 1.42             | 1.76             | 270%              | 3300%                  | 890                     | 890                      |
-| 1000       | 9501   | 11.18            | 14.73            | 240%              | 1500%                  | 1180                    | 1180                     |
-| 10000      | 955    | 104.61           | 320.17           | 180%              | 1200%                  | 1200                    | 1200                     |
+| 範囲サイズ | QPS   | 平均レイテンシー（ミリ秒） | P95レイテンシー(ミリ秒) | HAProxy CPU 使用率 | TiDB 全体の CPU 使用率 | 受信ネットワーク（MiB/秒） | 送信ネットワーク（MiB/秒） |
+| ----- | ----- | ------------- | -------------- | --------------- | ---------------- | --------------- | --------------- |
+| 10    | 94376 | 1.06          | 1.30           | 250%            | 4000%            | 150             | 150             |
+| 100   | 70129 | 1.42          | 1.76           | 270%            | 3300%            | 890             | 890             |
+| 1000  | 9501  | 11.18         | 14.73          | 240%            | 1500%            | 1180            | 1180            |
+| 10000 | 955   | 104.61        | 320.17         | 180%            | 1200%            | 1200            | 1200            |
 
-## Scalability test
+## スケーラビリティテスト {#scalability-test}
 
-### Test plan
+### テスト計画 {#test-plan}
 
-This test aims to verify that the performance of TiProxy is proportional to its specifications, to ensure that upgrading the specifications of TiProxy can improve its QPS upper limit. This test uses TiProxy instances with different vCPU numbers and concurrency to compare the QPS.
+このテストは、TiProxy のパフォーマンスがスペックに比例しているかどうかを検証し、TiProxy のスペックをアップグレードすることで QPS の上限を向上できるかどうかを確認することを目的としています。このテストでは、vCPU 数と同時実行数が異なる TiProxy インスタンスを使用して QPS を比較します。
 
-The following command is used to perform the test:
+テストを実行するには、次のコマンドを使用します。
 
 ```bash
 sysbench oltp_point_select \
@@ -241,28 +241,28 @@ sysbench oltp_point_select \
     run --tables=32 --table-size=1000000
 ```
 
-### Test results
+### テスト結果 {#test-results}
 
-| vCPU | Threads | QPS     | Avg latency (ms) | P95 latency (ms) | TiProxy CPU usage | TiDB overall CPU usage |
-|------|---------|---------|------------------|------------------|-------------------|------------------------|
-| 2    | 40      | 58508   | 0.68             | 0.97             | 190%              | 1200%                  |
-| 4    | 80      | 104890  | 0.76             | 1.16             | 390%              | 2000%                  |
-| 6    | 120     | 155520  | 0.77             | 1.14             | 590%              | 2900%                  |
-| 8    | 160     | 202134  | 0.79             | 1.18             | 800%              | 3900%                  |
+| 仮想CPU | スレッド | QPS    | 平均レイテンシー（ミリ秒） | P95レイテンシー(ミリ秒) | TiProxy CPU使用率 | TiDB 全体の CPU 使用率 |
+| ----- | ---- | ------ | ------------- | -------------- | -------------- | ---------------- |
+| 2     | 40   | 58508  | 0.68          | 0.97           | 190%           | 1200%            |
+| 4     | 80   | 104890 | 0.76          | 1.16           | 390%           | 2000%            |
+| 6     | 120  | 155520 | 0.77          | 1.14           | 590%           | 2900%            |
+| 8     | 160  | 202134 | 0.79          | 1.18           | 800%           | 3900%            |
 
-## Long connection test
+## 長時間接続テスト {#long-connection-test}
 
-### Test plan
+### テスト計画 {#test-plan}
 
-This test aims to verify that a large number of idle connections have minimal impact on the QPS when the client uses long connections. This test creates 5000, 10000, and 15000 idle long connections, and then executes `sysbench`.
+このテストは、クライアントが長時間接続を使用する場合、多数のアイドル接続がQPSに最小限の影響しか与えないことを検証することを目的としています。このテストでは、5,000、10,000、15,000のアイドル状態の長時間接続を作成し、 `sysbench`実行します。
 
-This test uses the default value for the `conn-buffer-size` configuration:
+このテストでは、 `conn-buffer-size`構成のデフォルト値を使用します。
 
 ```yaml
 proxy.conn-buffer-size: 32768
 ```
 
-Use the following command to perform the test:
+テストを実行するには、次のコマンドを使用します。
 
 ```bash
 sysbench oltp_point_select \
@@ -277,21 +277,21 @@ sysbench oltp_point_select \
     run --tables=32 --table-size=1000000
 ```
 
-### Test results
+### テスト結果 {#test-results}
 
-| Connection count | QPS   | Avg latency (ms) | P95 latency (ms) | TiProxy CPU usage | TiProxy memory usage (MB) | TiDB overall CPU usage |
-|------------------|-------|------------------|------------------|-------------------|---------------------------|------------------------|
-| 5000             | 96620 | 0.52             | 0.64             | 330%              | 920                       | 1800%                  |
-| 10000            | 96143 | 0.52             | 0.65             | 330%              | 1710                      | 1800%                  |
-| 15000            | 96048 | 0.52             | 0.65             | 330%              | 2570                      | 1900%                  |
+| 接続数   | QPS   | 平均レイテンシー（ミリ秒） | P95レイテンシー(ミリ秒) | TiProxy CPU使用率 | TiProxyメモリ使用量 (MB) | TiDB 全体の CPU 使用率 |
+| ----- | ----- | ------------- | -------------- | -------------- | ------------------ | ---------------- |
+| 5000  | 96620 | 0.52          | 0.64           | 330%           | 920                | 1800%            |
+| 10000 | 96143 | 0.52          | 0.65           | 330%           | 1710               | 1800%            |
+| 15000 | 96048 | 0.52          | 0.65           | 330%           | 2570               | 1900%            |
 
-## Short connection test
+## 短時間接続テスト {#short-connection-test}
 
-### Test plan
+### テスト計画 {#test-plan}
 
-This test aims to verify that frequent creation and destruction of connections have minimal impact on the QPS when the client uses short connections. This test starts another client program to create and disconnect 100, 200, and 300 short connections per second while executing `sysbench`.
+このテストは、クライアントが短い接続を使用する場合、頻繁な接続の作成と破棄がQPSに最小限の影響しか与えないことを検証することを目的としています。このテストでは、別のクライアントプログラムを起動し、 `sysbench`実行しながら、1秒あたり100、200、300の短い接続を作成および切断します。
 
-Use the following command to perform the test:
+テストを実行するには、次のコマンドを使用します。
 
 ```bash
 sysbench oltp_point_select \
@@ -306,21 +306,21 @@ sysbench oltp_point_select \
     run --tables=32 --table-size=1000000
 ```
 
-### Test results
+### テスト結果 {#test-results}
 
-| New connections per second | QPS    | Avg latency (ms) | P95 latency (ms) | TiProxy CPU usage | TiDB overall CPU usage |
-|----------------------------|--------|------------------|------------------|-------------------|------------------------|
-| 100                        | 95597  | 0.52             | 0.65             | 330%              | 1800%                  |
-| 200                        | 94692  | 0.53             | 0.67             | 330%              | 1800%                  |
-| 300                        | 94102  | 0.53             | 0.68             | 330%              | 1900%                  |
+| 1秒あたりの新規接続数 | QPS   | 平均レイテンシー（ミリ秒） | P95レイテンシー(ミリ秒) | TiProxy CPU使用率 | TiDB 全体の CPU 使用率 |
+| ----------- | ----- | ------------- | -------------- | -------------- | ---------------- |
+| 100         | 95597 | 0.52          | 0.65           | 330%           | 1800%            |
+| 200         | 94692 | 0.53          | 0.67           | 330%           | 1800%            |
+| 300         | 94102 | 0.53          | 0.68           | 330%           | 1900%            |
 
-## Traffic capture test
+## トラフィックキャプチャテスト {#traffic-capture-test}
 
-### Test plan
+### テスト計画 {#test-plan}
 
-This test aims to evaluate the performance impact of [traffic capture](/tiproxy/tiproxy-traffic-replay.md) on TiProxy. It uses TiProxy v1.3.0 and compares QPS and TiProxy CPU usage with traffic capture enabled and disabled before executing `sysbench` with different concurrency. Due to periodic QPS fluctuations caused by traffic file compression, the test compares both the average and minimum QPS.
+このテストは、TiProxyにおける[トラフィックキャプチャ](/tiproxy/tiproxy-traffic-replay.md)パフォーマンスへの影響を評価することを目的としています。TiProxy v1.3.0を使用し、トラフィックキャプチャを有効または無効にした場合のQPSとTiProxyのCPU使用率を比較した後、異なる同時実行数で`sysbench`実行します。トラフィックファイルの圧縮によって周期的にQPSが変動するため、このテストでは平均QPSと最小QPSの両方を比較します。
 
-Use the following command to perform the test:
+テストを実行するには、次のコマンドを使用します。
 
 ```bash
 sysbench oltp_read_write \
@@ -335,13 +335,13 @@ sysbench oltp_read_write \
     run --tables=32 --table-size=1000000
 ```
 
-### Test results
+### テスト結果 {#test-results}
 
-| Connection count | Traffic capture | Avg QPS | Min QPS | Avg latency (ms) | P95 latency (ms) | TiProxy CPU usage |
-| - |-----| --- | --- |-----------|-------------|-----------------|
-| 20 | Disabled | 27653 | 26999 | 14.46     | 16.12       | 140% |
-| 20 | Enabled | 27519 | 26922 | 14.53     | 16.41       | 170% |
-| 50 | Disabled | 58014 | 56416 | 17.23     | 20.74       | 270% |
-| 50 | Enabled | 56211 | 52236 | 17.79     | 21.89       | 280% |
-| 100 | Disabled | 85107 | 84369 | 23.48     | 30.26       | 370% |
-| 100 | Enabled | 79819 | 69503 | 25.04     | 31.94       | 380% |
+| 接続数 | トラフィックキャプチャ | 平均QPS | 最小QPS | 平均レイテンシー（ミリ秒） | P95レイテンシー(ミリ秒) | TiProxy CPU使用率 |
+| --- | ----------- | ----- | ----- | ------------- | -------------- | -------------- |
+| 20  | 無効          | 27653 | 26999 | 14.46         | 16.12          | 140%           |
+| 20  | 有効          | 27519 | 26922 | 14.53         | 16.41          | 170%           |
+| 50  | 無効          | 58014 | 56416 | 17.23         | 20.74          | 270%           |
+| 50  | 有効          | 56211 | 52236 | 17.79         | 21.89          | 280%           |
+| 100 | 無効          | 85107 | 84369 | 23.48         | 30.26          | 370%           |
+| 100 | 有効          | 79819 | 69503 | 25.04         | 31.94          | 380%           |

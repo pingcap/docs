@@ -1,78 +1,72 @@
 ---
 title: JSON Functions That Return JSON Values
-summary: Learn about JSON functions that return JSON values.
+summary: JSON 値を返す JSON関数について学習します。
 ---
 
-# JSON Functions That Return JSON Values
+# JSON値を返すJSON関数 {#json-functions-that-return-json-values}
 
-This document describes JSON functions that return JSON values.
+このドキュメントでは、JSON 値を返す JSON関数について説明します。
 
-## [JSON_DEPTH()](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-depth)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-depth">JSON_DEPTH()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-attribute-functions-html-function-json-depth-json-depth-a}
 
-The `JSON_DEPTH(json_doc)` function returns the maximum depth of a JSON document.
+`JSON_DEPTH(json_doc)`関数は、JSON ドキュメントの最大深度を返します。
 
-Examples:
+例:
 
-In the following example, `JSON_DEPTH()` returns `3` because there are three levels:
+次の例では、レベルが 3 つあるため、 `JSON_DEPTH()` `3`返します。
 
-- root (`$`)
-- weather (`$.weather`)
-- weather current (`$.weather.sunny`)
+-   ルート ( `$` )
+-   天気 ( `$.weather` )
+-   気象潮流 ( `$.weather.sunny` )
 
 ```sql
 SELECT JSON_DEPTH('{"weather": {"current": "sunny"}}');
 ```
 
-```
-+-------------------------------------------------+
-| JSON_DEPTH('{"weather": {"current": "sunny"}}') |
-+-------------------------------------------------+
-|                                               3 |
-+-------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +-------------------------------------------------+
+    | JSON_DEPTH('{"weather": {"current": "sunny"}}') |
+    +-------------------------------------------------+
+    |                                               3 |
+    +-------------------------------------------------+
+    1 row in set (0.00 sec)
 
-## [JSON_LENGTH()](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-length)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-length">JSON_長さ()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-attribute-functions-html-function-json-length-json-length-a}
 
-The `JSON_LENGTH(json_doc [,path])` function returns the length of a JSON document. If a `path` argument is given, it returns the length of the value within the path.
+`JSON_LENGTH(json_doc [,path])`の関数はJSONドキュメントの長さを返します。3 `path`の引数が指定された場合は、パス内の値の長さを返します。
 
-Examples:
+例:
 
-In the following example, the returned value is `1` because the only item at the root of the document is `weather`.
+次の例では、ドキュメントのルートにある唯一の項目が`weather`あるため、返される値は`1`なります。
 
 ```sql
 SELECT JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$');
 ```
 
-```
-+----------------------------------------------------------------------------+
-| JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$') |
-+----------------------------------------------------------------------------+
-|                                                                          1 |
-+----------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +----------------------------------------------------------------------------+
+    | JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$') |
+    +----------------------------------------------------------------------------+
+    |                                                                          1 |
+    +----------------------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-In the following example, the returned value is `2` because there are two items at `$.weather`: `current` and `tomorrow`.
+次の例では、 `$.weather`に`current`と`tomorrow` 2 つの項目があるため、返される値は`2`なります。
 
 ```sql
 SELECT JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$.weather');
 ```
 
-```
-+------------------------------------------------------------------------------------+
-| JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$.weather') |
-+------------------------------------------------------------------------------------+
-|                                                                                  2 |
-+------------------------------------------------------------------------------------+
-1 row in set (0.01 sec)
-```
+    +------------------------------------------------------------------------------------+
+    | JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$.weather') |
+    +------------------------------------------------------------------------------------+
+    |                                                                                  2 |
+    +------------------------------------------------------------------------------------+
+    1 row in set (0.01 sec)
 
-## [JSON_TYPE()](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-type)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-type">JSON_TYPE()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-attribute-functions-html-function-json-type-json-type-a}
 
-The `JSON_TYPE(json_val)` function returns a string indicating [the type of a JSON value](/data-type-json.md#json-value-types).
+`JSON_TYPE(json_val)`関数は[JSON値の型](/data-type-json.md#json-value-types)示す文字列を返します。
 
-Example:
+例：
 
 ```sql
 WITH demo AS (
@@ -88,81 +82,71 @@ WITH demo AS (
 SELECT v, JSON_TYPE(v) FROM demo ORDER BY 2;
 ```
 
-```
-+----------------------+--------------+
-| v                    | JSON_TYPE(v) |
-+----------------------+--------------+
-| []                   | ARRAY        |
-| true                 | BOOLEAN      |
-| 1.14                 | DOUBLE       |
-| 9.223372036854776e18 | DOUBLE       |
-| 5                    | INTEGER      |
-| null                 | NULL         |
-| {}                   | OBJECT       |
-| "foobar"             | STRING       |
-+----------------------+--------------+
-8 rows in set (0.00 sec)
-```
+    +----------------------+--------------+
+    | v                    | JSON_TYPE(v) |
+    +----------------------+--------------+
+    | []                   | ARRAY        |
+    | true                 | BOOLEAN      |
+    | 1.14                 | DOUBLE       |
+    | 9.223372036854776e18 | DOUBLE       |
+    | 5                    | INTEGER      |
+    | null                 | NULL         |
+    | {}                   | OBJECT       |
+    | "foobar"             | STRING       |
+    +----------------------+--------------+
+    8 rows in set (0.00 sec)
 
-Note that values that look the same might not have the same type, as demonstrated in the following example.
+次の例に示すように、同じに見える値が同じ型ではない場合があることに注意してください。
 
 ```sql
 SELECT '"2025-06-14"',CAST(CAST('2025-06-14' AS date) AS json);
 ```
 
-```
-+--------------+------------------------------------------+
-| "2025-06-14" | CAST(CAST('2025-06-14' AS date) AS json) |
-+--------------+------------------------------------------+
-| "2025-06-14" | "2025-06-14"                             |
-+--------------+------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------+------------------------------------------+
+    | "2025-06-14" | CAST(CAST('2025-06-14' AS date) AS json) |
+    +--------------+------------------------------------------+
+    | "2025-06-14" | "2025-06-14"                             |
+    +--------------+------------------------------------------+
+    1 row in set (0.00 sec)
 
 ```sql
 SELECT JSON_TYPE('"2025-06-14"'),JSON_TYPE(CAST(CAST('2025-06-14' AS date) AS json));
 ```
 
-```
-+---------------------------+-----------------------------------------------------+
-| JSON_TYPE('"2025-06-14"') | JSON_TYPE(CAST(CAST('2025-06-14' AS date) AS json)) |
-+---------------------------+-----------------------------------------------------+
-| STRING                    | DATE                                                |
-+---------------------------+-----------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +---------------------------+-----------------------------------------------------+
+    | JSON_TYPE('"2025-06-14"') | JSON_TYPE(CAST(CAST('2025-06-14' AS date) AS json)) |
+    +---------------------------+-----------------------------------------------------+
+    | STRING                    | DATE                                                |
+    +---------------------------+-----------------------------------------------------+
+    1 row in set (0.00 sec)
 
-## [JSON_VALID()](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-valid)
+## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-valid">JSON_VALID()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-attribute-functions-html-function-json-valid-json-valid-a}
 
-The `JSON_VALID(str)` function checks if the argument is valid JSON. This can be useful for checking a column before converting it to the `JSON` type.
+`JSON_VALID(str)`関数は、引数が有効なJSONかどうかを確認します。これは、列を`JSON`型に変換する前にチェックするのに役立ちます。
 
 ```sql
 SELECT JSON_VALID('{"foo"="bar"}');
 ```
 
-```
-+-----------------------------+
-| JSON_VALID('{"foo"="bar"}') |
-+-----------------------------+
-|                           0 |
-+-----------------------------+
-1 row in set (0.01 sec)
-```
+    +-----------------------------+
+    | JSON_VALID('{"foo"="bar"}') |
+    +-----------------------------+
+    |                           0 |
+    +-----------------------------+
+    1 row in set (0.01 sec)
 
 ```sql
 SELECT JSON_VALID('{"foo": "bar"}');
 ```
 
-```
-+------------------------------+
-| JSON_VALID('{"foo": "bar"}') |
-+------------------------------+
-|                            1 |
-+------------------------------+
-1 row in set (0.01 sec)
-```
+    +------------------------------+
+    | JSON_VALID('{"foo": "bar"}') |
+    +------------------------------+
+    |                            1 |
+    +------------------------------+
+    1 row in set (0.01 sec)
 
-## See also
+## 参照 {#see-also}
 
-- [JSON Functions Overview](/functions-and-operators/json-functions.md)
-- [JSON Data Type](/data-type-json.md)
+-   [JSON関数の概要](/functions-and-operators/json-functions.md)
+-   [JSONデータ型](/data-type-json.md)

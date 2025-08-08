@@ -1,38 +1,38 @@
 ---
 title: Import Data into TiDB Cloud Dedicated via MySQL CLI
-summary: Learn how to import Data into TiDB Cloud Dedicated via MySQL CLI.
+summary: MySQL CLI 経由でTiDB Cloud Dedicated にデータをインポートする方法を学びます。
 ---
 
-# Import Data into TiDB Cloud Dedicated via MySQL CLI
+# MySQL CLI 経由でTiDB Cloud Dedicated にデータをインポートする {#import-data-into-tidb-cloud-dedicated-via-mysql-cli}
 
-This document describes how to import data into TiDB Cloud Dedicated via the [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html). You can import data from an SQL file or a CSV file. The following sections provide step-by-step instructions for importing data from each type of file.
+このドキュメントでは、 [MySQL コマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)を介してTiDB Cloud Dedicatedにデータをインポートする方法について説明します。SQLファイルまたはCSVファイルからデータをインポートできます。以下のセクションでは、各ファイルタイプからデータをインポートする手順を段階的に説明します。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-Before you can import data via MySQL CLI to TiDB Cloud Dedicated, you need the following prerequisites:
+MySQL CLI 経由でTiDB Cloud Dedicated にデータをインポートする前に、次の前提条件を満たす必要があります。
 
-- You have access to your TiDB Cloud Dedicated cluster. If you do not have, create one following the instructions in [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
-- Install MySQL CLI on your local computer.
+-   TiDB Cloud Dedicated クラスターへのアクセス権をお持ちです。お持ちでない場合は、 [TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)手順に従ってクラスターを作成してください。
+-   ローカル コンピュータに MySQL CLI をインストールします。
 
-## Step 1. Connect to your TiDB Cloud Dedicated cluster
+## ステップ1. TiDB Cloud Dedicatedクラスタに接続する {#step-1-connect-to-your-tidb-cloud-dedicated-cluster}
 
-Connect to your TiDB cluster.
+TiDB クラスターに接続します。
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2. In the left navigation pane, click **Settings** > **Networking**.
+2.  左側のナビゲーション ペインで、 **[設定]** &gt; **[ネットワーク] を**クリックします。
 
-3. On the **Networking** page, click **Add IP Address** in the **IP Access List** area.
+3.  **[ネットワーク]**ページで、 **[IP アクセス リスト]**領域の**[IP アドレスの追加] を**クリックします。
 
-4. In the dialog, choose **Allow access from anywhere**, and then click **Confirm**.
+4.  ダイアログで、 **[どこからでもアクセスを許可する]**を選択し、 **[確認]**をクリックします。
 
-5. In the upper-right corner, click **Connect** to open the dialog for connection information.
+5.  右上隅の**[接続]**をクリックすると、接続情報のダイアログが開きます。
 
-    For more details about how to obtain the connection string, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
+    接続文字列を取得する方法の詳細については、 [パブリック接続経由でTiDB Cloud Dedicated に接続](/tidb-cloud/connect-via-standard-connection.md)参照してください。
 
-## Step 2. Define the table and insert sample data
+## ステップ2. テーブルを定義し、サンプルデータを挿入する {#step-2-define-the-table-and-insert-sample-data}
 
-Before importing data, you need to prepare the table structure and insert real sample data into it. The following is an example SQL file (`product_data.sql`) that you can use to create a table and insert sample data:
+データをインポートする前に、テーブル構造を準備し、実際のサンプルデータを挿入する必要があります。以下は、テーブルを作成してサンプルデータを挿入するために使用できるSQLファイルの例（ `product_data.sql` ）です。
 
 ```sql
 -- Create a table in your TiDB database
@@ -49,37 +49,37 @@ INSERT INTO products (product_id, product_name, price) VALUES
     (3, 'Tablet', 299.99);
 ```
 
-## Step 3. Import data from a SQL or CSV file
+## ステップ3. SQLまたはCSVファイルからデータをインポートする {#step-3-import-data-from-a-sql-or-csv-file}
 
-You can import data from an SQL file or a CSV file. The following sections provide step-by-step instructions for importing data from each type.
+SQLファイルまたはCSVファイルからデータをインポートできます。以下のセクションでは、各ファイル形式からデータをインポートする手順を段階的に説明します。
 
 <SimpleTab>
 <div label="From an SQL file">
 
-Do the following to import data from an SQL file:
+SQL ファイルからデータをインポートするには、次の手順を実行します。
 
-1. Provide a real SQL file (for example, `product_data.sql`) that contains the data you want to import. This SQL file must contain `INSERT` statements with real data.
+1.  インポートするデータを含む実際のSQLファイル（例： `product_data.sql` ）を用意してください。このSQLファイルには、実際のデータを含む`INSERT`ステートメントが含まれている必要があります。
 
-2. Use the following command to import data from the SQL file:
+2.  SQL ファイルからデータをインポートするには、次のコマンドを使用します。
 
     ```bash
     mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p<your_password> < product_data.sql
     ```
 
-> **Note:**
+> **注記：**
 >
-> The default database name used here is `test`, and you can either manually create your own database or use the `CREATE DATABASE` command in an SQL file.
+> ここで使用されるデフォルトのデータベース名は`test`ですが、独自のデータベースを手動で作成するか、SQL ファイルで`CREATE DATABASE`コマンドを使用することもできます。
 
 </div>
 <div label="From a CSV file">
 
-Do the following to import data from a CSV file:
+CSV ファイルからデータをインポートするには、次の手順を実行します。
 
-1. Create a database and schema in TiDB to match your data import needs.
+1.  データのインポートのニーズに合わせて、TiDB でデータベースとスキーマを作成します。
 
-2. Provide a sample CSV file (for example, `product_data.csv`) that contains the data you want to import. The following is an example of a CSV file:
+2.  インポートしたいデータを含むサンプルCSVファイル（例： `product_data.csv` ）をご提供ください。以下はCSVファイルの例です。
 
-    **product_data.csv:**
+    **製品データ.csv:**
 
     ```csv
     product_id,product_name,price
@@ -88,7 +88,7 @@ Do the following to import data from a CSV file:
     6,Tablet,299.99
     ```
 
-3. Use the following command to import data from the CSV file:
+3.  CSV ファイルからデータをインポートするには、次のコマンドを使用します。
 
     ```bash
     mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p<your_password> -e "LOAD DATA LOCAL INFILE '<your_csv_path>' INTO TABLE products
@@ -97,11 +97,11 @@ Do the following to import data from a CSV file:
     IGNORE 1 LINES (product_id, product_name, price);"
     ```
 
-4. Make sure to replace the paths, table name (`products` in this example), `<your_username>`, `<your_host>`, `<your_password>`, `<your_csv_path>`, `<your_ca_path>`, and other placeholders with your actual information, and replace the sample CSV data with your real dataset as needed.
+4.  パス、テーブル名 (この例では`products` )、 `<your_username>` 、 `<your_host>` 、 `<your_password>` 、 `<your_csv_path>` 、 `<your_ca_path>` 、およびその他のプレースホルダーを実際の情報に置き換え、必要に応じてサンプル CSV データを実際のデータセットに置き換えてください。
 
-> **Note:**
+> **注記：**
 >
-> For more syntax details about `LOAD DATA LOCAL INFILE`, see [`LOAD DATA`](/sql-statements/sql-statement-load-data.md).
+> `LOAD DATA LOCAL INFILE`詳細な構文については、 [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)参照してください。
 
 </div>
 </SimpleTab>
