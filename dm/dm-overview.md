@@ -87,9 +87,9 @@ DM complies with the Apache 2.0 license. For more details, see [LICENSE](https:/
 
 Before v5.4, the DM documentation is independent of the TiDB documentation. To access these earlier versions of the DM documentation, click one of the following links:
 
-- [DM v5.3 documentation](https://docs.pingcap.com/tidb-data-migration/v5.3)
-- [DM v2.0 documentation](https://docs.pingcap.com/tidb-data-migration/v2.0/)
-- [DM v1.0 documentation](https://docs.pingcap.com/tidb-data-migration/v1.0/)
+- [DM v5.3 documentation](https://docs-archive.pingcap.com/tidb-data-migration/v5.3/)
+- [DM v2.0 documentation](https://docs-archive.pingcap.com/tidb-data-migration/v2.0/)
+- [DM v1.0 documentation](https://docs-archive.pingcap.com/tidb-data-migration/v1.0/)
 
 > **Note:**
 >
