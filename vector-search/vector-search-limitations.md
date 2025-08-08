@@ -46,14 +46,14 @@ See [Vector search restrictions](/vector-search/vector-search-index.md#restricti
 <CustomContent platform="tidb">
 
 - Make sure that you are using v8.4.0 or a later version of BR to back up and restore data. Restoring tables with vector data types to TiDB clusters earlier than v8.4.0 is not supported.
-- TiDB Data Migration (DM) does not support migrating or replicating MySQL 9.0 vector data types to TiDB.
+- TiDB Data Migration (DM) does not support migrating or replicating MySQL vector data types to TiDB.
 - When TiCDC replicates vector data to a downstream that does not support vector data types, it will change the vector data types to another type. For more information, see [Compatibility with vector data types](/ticdc/ticdc-compatibility.md#compatibility-with-vector-data-types).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- The Data Migration feature in the TiDB Cloud console does not support migrating or replicating MySQL 9.0 vector data types to TiDB Cloud.
+- The Data Migration feature in the TiDB Cloud console does not support migrating or replicating MySQL vector data types to TiDB Cloud.
 
 </CustomContent>
 
