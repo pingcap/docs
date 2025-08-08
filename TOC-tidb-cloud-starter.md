@@ -312,8 +312,13 @@
   - Terraform
     - [Terraform 集成概览](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
     - [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
-    - [使用 Cluster 资源](/tidb-cloud/terraform-use-cluster-resource.md)
-    - [使用导入资源](/tidb-cloud/terraform-use-import-resource.md)
+    - [使用 `tidbcloud_serverless_cluster` 资源](/tidb-cloud/terraform-use-serverless-cluster-resource.md)
+    - [使用 `tidbcloud_serverless_branch` 资源](/tidb-cloud/terraform-use-serverless-branch-resource.md)
+    - [使用 `tidbcloud_serverless_export` 资源](/tidb-cloud/terraform-use-serverless-export-resource.md)
+    - [使用 `tidbcloud_sql_user` 资源](/tidb-cloud/terraform-use-sql-user-resource.md)
+    - [使用 `tidbcloud_import` 资源](/tidb-cloud/terraform-use-import-resource.md)
+    - [使用 `tidbcloud_cluster` 资源 (已废弃)](/tidb-cloud/terraform-use-cluster-resource.md)
+    - [迁移集群资源](/tidb-cloud/terraform-migrate-cluster-resource.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
 
