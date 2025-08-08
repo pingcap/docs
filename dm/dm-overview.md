@@ -68,7 +68,7 @@ Before using the DM tool, note the following restrictions:
 
 + Vector data type replication
 
-    - DM does not support migrating or replicating MySQL 9.0 vector data types to TiDB.
+    - DM does not support migrating or replicating MySQL vector data types to TiDB.
 
 ## Contributing
 
