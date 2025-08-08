@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless audit-log filter-rule list`.
 
 # ticloud serverless audit-log filter-rule list
 
-List audit log filter rules for a {{{ .starter }}} cluster.
+List audit log filter rules for a {{{ .starter }}} or {{{ .essential }}} cluster.
 
 ```shell
 ticloud serverless audit-log filter-rule list [flags]

@@ -105,7 +105,7 @@ At the project level, TiDB Cloud defines three roles, in which `Project Owner` c
 | Manage [database audit logging](/tidb-cloud/tidb-cloud-auditing.md) of the project. | ✅ | ❌ | ❌ | ❌ |
 | Manage [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for all {{{ .starter }}} clusters in the project. | ✅ | ❌ | ❌ | ❌ |
 | Manage cluster operations in the project, such as cluster creation, modification, and deletion. | ✅ | ❌ | ❌ | ❌ |
-| Manage branches for {{{ .starter }}} clusters in the project, such as branch creation, connection, and deletion. | ✅ | ❌ | ❌ | ❌ |
+| Manage branches for {{{ .starter }}} and {{{ .essential }}} clusters in the project, such as branch creation, connection, and deletion. | ✅ | ❌ | ❌ | ❌ |
 | Manage [recovery groups](/tidb-cloud/recovery-group-overview.md) for TiDB Cloud Dedicated clusters in the project, such as recovery group creation and deletion. | ✅ | ❌ | ❌ | ❌ |
 | Manage cluster data such as data import, data backup and restore, and data migration. | ✅ | ✅ | ❌ | ❌ |
 | Manage [Data Service](/tidb-cloud/data-service-overview.md) for data read-only operations such as using or creating endpoints to read data. | ✅ | ✅ | ✅ | ❌ |

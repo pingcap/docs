@@ -1,9 +1,9 @@
 ---
-title: Use TiDB Cloud Dedicated VPC Peering Resource
-summary: Learn how to use the TiDB Cloud Dedicated VPC peering resource to create and modify a TiDB Cloud Dedicated VPC peering.
+title: Use the `tidbcloud_dedicated_vpc_peering` Resource
+summary: Learn how to use the `tidbcloud_dedicated_vpc_peering` resource to create and modify a TiDB Cloud Dedicated VPC peering.
 ---
 
-# Use TiDB Cloud Dedicated VPC Peering Resource
+# Use the `tidbcloud_dedicated_vpc_peering` Resource
 
 This document describes how to manage a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) VPC peering with the `tidbcloud_dedicated_vpc_peering` resource.
 
@@ -15,7 +15,7 @@ The features of the `tidbcloud_dedicated_vpc_peering` resource include the follo
 
 > **Note:**
 >
-> TiDB Cloud Dedicated VPC peering resource cannot be modified. If you want to change the configuration of a TiDB Cloud Dedicated VPC peering, you need to delete the existing one, and then create a new one.
+> The `tidbcloud_dedicated_vpc_peering` resource cannot be modified. If you want to change the configuration of a TiDB Cloud Dedicated VPC peering, you need to delete the existing one, and then create a new one.
 
 ## Prerequisites
 
@@ -56,7 +56,7 @@ The following example shows how to create a TiDB Cloud Dedicated VPC peering.
 
     Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
 
-    - To use the TiDB Cloud Dedicated VPC peering resource, set the resource type as `tidbcloud_dedicated_vpc_peering`.
+    - To use the `tidbcloud_dedicated_vpc_peering` resource, set the resource type as `tidbcloud_dedicated_vpc_peering`.
     - For the resource name, you can define it as needed. For example, `example`.
     - If you do not know how to get the values of the required arguments, see [Connect to TiDB Cloud Dedicated via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md).
     - To get the TiDB Cloud Dedicated VPC peering specification information, see [tidbcloud_dedicated_vpc_peering (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_vpc_peering).
@@ -150,7 +150,7 @@ For a TiDB Cloud Dedicated VPC peering that is not managed by Terraform, you can
 
 For example, you can import a VPC peering that is not created by Terraform.
 
-1. Add an import block for the new TiDB Cloud Dedicated VPC peering resource.
+1. Add an import block for the new `tidbcloud_dedicated_vpc_peering` resource.
 
     Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,vpc_peering_id`:
 
@@ -163,7 +163,7 @@ For example, you can import a VPC peering that is not created by Terraform.
 
 2. Generate the new configuration file.
 
-    Generate the new configuration file for the new TiDB Cloud Dedicated VPC peering resource according to the import block:
+    Generate the new configuration file for the new `tidbcloud_dedicated_vpc_peering` resource according to the import block:
 
     ```shell
     terraform plan -generate-config-out=generated.tf

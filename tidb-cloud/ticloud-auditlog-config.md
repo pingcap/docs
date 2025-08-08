@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless audit-log config`.
 
 # ticloud serverless audit-log config
 
-Configure the database audit logging for a {{{ .starter }}} cluster.
+Configure the database audit logging for a {{{ .starter }}} or {{{ .essential }}} cluster.
 
 ```shell
 ticloud serverless audit-log config [flags]

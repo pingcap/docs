@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless audit-log filter-rule template`.
 
 # ticloud serverless audit-log filter-rule template
 
-Show audit log filter rule templates for a {{{ .starter }}} cluster.
+Show audit log filter rule templates for a {{{ .starter }}} or {{{ .essential }}} cluster.
 
 ```shell
 ticloud serverless audit-log filter-rule template [flags]

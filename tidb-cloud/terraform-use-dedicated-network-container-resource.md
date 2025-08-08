@@ -1,9 +1,9 @@
 ---
-title: Use TiDB Cloud Dedicated Network Container Resource
-summary: Learn how to use the TiDB Cloud Dedicated network container resource to create and modify a TiDB Cloud Dedicated network container.
+title: Use the `tidbcloud_dedicated_network_container` Resource
+summary: Learn how to use the `tidbcloud_dedicated_network_container` resource to create and modify a TiDB Cloud Dedicated network container.
 ---
 
-# Use TiDB Cloud Dedicated Network Container Resource
+# Use the `tidbcloud_dedicated_network_container` Resource
 
 This document describes how to manage a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) network container using the `tidbcloud_dedicated_network_container` resource.
 
@@ -58,7 +58,7 @@ The following example shows how to create a TiDB Cloud Dedicated network contain
 
     Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
 
-    - To use the TiDB Cloud Dedicated network container resource, set the resource type as `tidbcloud_dedicated_network_container`.
+    - To use the `tidbcloud_dedicated_network_container` resource, set the resource type as `tidbcloud_dedicated_network_container`.
     - For the resource name, you can define it as needed, for example, `example`.
     - If you do not know how to get the values of the required arguments, see [Set a CIDR for a Region](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region).
     - For more information about the TiDB Cloud Dedicated network container specification, see [tidbcloud_dedicated_network_container (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_network_container).
@@ -142,7 +142,7 @@ For a TiDB Cloud Dedicated network container that is not managed by Terraform, y
 
 For example, you can import a network container that is not created by Terraform.
 
-1. Add an import block for the new TiDB Cloud Dedicated network container resource.
+1. Add an import block for the new `tidbcloud_dedicated_network_container` resource.
 
     Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,network_container_id`:
 
@@ -155,7 +155,7 @@ For example, you can import a network container that is not created by Terraform
 
 2. Generate the new configuration file.
 
-    Generate the new configuration file for the new TiDB Cloud Dedicated network container resource according to the import block:
+    Generate the new configuration file for the new `tidbcloud_dedicated_network_container` resource according to the import block:
 
     ```shell
     terraform plan -generate-config-out=generated.tf

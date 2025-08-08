@@ -17,7 +17,7 @@ This tutorial demonstrates how to integrate the [vector search](/vector-search/v
 
 > **Note**
 >
-> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-essential), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 > **Tip**
 >
@@ -249,7 +249,7 @@ In `demo.py`, add the following code to save the vector data to your {{{ .starte
 ```python
 # ---- Saving Vectors to TiDB ----
 def save_entities_with_embedding(session, contents):
-    """Save multiple entities with their embeddings to the TiDB Serverless database."""
+    """Save multiple entities with their embeddings to the TiDB database."""
     for content in contents:
         entity = Entity(content=content, content_vec=embedding(content))
         session.add(entity)

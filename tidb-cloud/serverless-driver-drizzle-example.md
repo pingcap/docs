@@ -1,13 +1,17 @@
 ---
-title: {{{ .starter }}} Driver Drizzle Tutorial
+title: TiDB Cloud Serverless Driver Drizzle Tutorial
 summary: Learn how to use TiDB Cloud serverless driver with Drizzle.
 ---
 
-# {{{ .starter }}} Driver Drizzle Tutorial
+# TiDB Cloud Serverless Driver Drizzle Tutorial
 
 [Drizzle ORM](https://orm.drizzle.team/) is a lightweight and performant TypeScript ORM with developer experience in mind. Starting from `drizzle-orm@0.31.2`, it supports [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless), enabling you to use Drizzle over HTTPS with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md).
 
 This tutorial describes how to use TiDB Cloud serverless driver with Drizzle in Node.js environments and edge environments.
+
+> **Tip:**
+>
+> In addition to {{{ .starter }}} clusters, the steps in this document also work with {{{ .essential }}} clusters.
 
 ## Use Drizzle and TiDB Cloud serverless driver in Node.js environments
 

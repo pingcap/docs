@@ -1,15 +1,15 @@
 ---
-title: {{{ .starter }}} Driver Node.js Tutorial
+title: TiDB Cloud Serverless Driver Node.js Tutorial
 summary: Learn how to use TiDB Cloud serverless driver in a local Node.js project.
 ---
 
-# {{{ .starter }}} Driver Node.js Tutorial
+# TiDB Cloud Serverless Driver Node.js Tutorial
 
 This tutorial describes how to use TiDB Cloud serverless driver in a local Node.js project.
 
 > **Note:**
 >
-> - This tutorial is applicable to {{{ .starter }}} clusters only. 
+> - In addition to {{{ .starter }}} clusters, the steps in this document also work with {{{ .essential }}} clusters.
 > - To learn how to use TiDB Cloud serverless driver with Cloudflare Workers, Vercel Edge Functions, and Netlify Edge Functions, check out our [Insights into Automotive Sales](https://car-sales-insight.vercel.app/) and the [sample repository](https://github.com/tidbcloud/car-sales-insight).
 
 ## Before you begin

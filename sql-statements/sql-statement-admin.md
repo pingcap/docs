@@ -58,7 +58,7 @@ The above statement is used to reload the blocklist of logic optimization rules.
 
 > **Note:**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 ```sql
 ADMIN PLUGINS ENABLE plugin_name [, plugin_name] ...;
@@ -132,7 +132,7 @@ The above statement is used to view the details of some special columns of a tab
 
 > **Note:**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 ```sql
 ADMIN SHOW SLOW RECENT N;

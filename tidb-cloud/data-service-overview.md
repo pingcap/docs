@@ -11,7 +11,7 @@ Data Service enables you to access TiDB Cloud data via an HTTPS request using a 
 
 > **Note:**
 >
-> Data Service is available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters. To use Data Service in TiDB Cloud Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> Data Service is available only for TiDB Cloud Starter (formerly Serverless) hosted on AWS. To use Data Service in TiDB Cloud Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 An endpoint in Data Service is a web API that you can customize to execute SQL statements. You can specify parameters for your SQL statements, such as the value used in the `WHERE` clause. When a client calls an endpoint and provides values for the parameters in a request URL, the endpoint executes the corresponding SQL statement with the provided parameters and returns the results as part of the HTTP response.
 

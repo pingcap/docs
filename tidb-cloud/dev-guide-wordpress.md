@@ -11,7 +11,7 @@ In this tutorial, you can learn how to use {{{ .starter }}} to run WordPress for
 
 > **Note:**
 >
-> In addition to {{{ .starter }}}, this tutorial works with TiDB Cloud Dedicated and TiDB Self-Managed clusters as well. However, it is highly recommended to run WordPress with {{{ .starter }}} for cost efficiency.
+> In addition to {{{ .starter }}}, this tutorial works with {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed clusters as well. However, it is highly recommended to run WordPress with {{{ .starter }}} for cost efficiency.
 
 ## Prerequisites
 

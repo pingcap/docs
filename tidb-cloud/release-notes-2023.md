@@ -17,11 +17,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Enhance the connection experience for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
+- Enhance the connection experience for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
 
-    Refine the **Connect** dialog interface to offer {{{ .starter }}} users a smoother and more efficient connection experience. In addition, {{{ .starter }}} introduces more client types and allows you to select the desired branch for connection.
+    Refine the **Connect** dialog interface to offer TiDB Cloud Serverless users a smoother and more efficient connection experience. In addition, TiDB Cloud Serverless introduces more client types and allows you to select the desired branch for connection.
 
-    For more information, see [Connect to {{{ .starter }}}](/tidb-cloud/connect-via-standard-connection-serverless.md).
+    For more information, see [Connect to TiDB Cloud Serverless](/tidb-cloud/connect-via-standard-connection-serverless.md).
 
 ## November 28, 2023
 
@@ -35,11 +35,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) supports monitoring SQL statement RU costs.
+- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) supports monitoring SQL statement RU costs.
 
-    {{{ .starter }}} now provides detailed insights into each SQL statement's [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit). You can view both the **Total RU** and **Mean RU** costs per SQL statement. This feature helps you identify and analyze RU costs, offering opportunities for potential cost savings in your operations.
+    TiDB Cloud Serverless now provides detailed insights into each SQL statement's [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit). You can view both the **Total RU** and **Mean RU** costs per SQL statement. This feature helps you identify and analyze RU costs, offering opportunities for potential cost savings in your operations.
 
-    To check your SQL statement RU details, navigate to the **Diagnosis** page of [your {{{ .starter }}} cluster](https://tidbcloud.com/project/clusters) and then click the **SQL Statement** tab.
+    To check your SQL statement RU details, navigate to the **Diagnosis** page of [your TiDB Cloud Serverless cluster](https://tidbcloud.com/project/clusters) and then click the **SQL Statement** tab.
 
 ## November 21, 2023
 
@@ -122,9 +122,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Support using {{{ .starter }}} branches in [Vercel Preview Deployments](https://vercel.com/docs/deployments/preview-deployments), with TiDB Cloud Vercel integration.
+- Support using TiDB Cloud Serverless branches in [Vercel Preview Deployments](https://vercel.com/docs/deployments/preview-deployments), with TiDB Cloud Vercel integration.
 
-    For more information, see [Connect with {{{ .starter }}} branching](/tidb-cloud/integrate-tidbcloud-with-vercel.md#connect-with-branching).
+    For more information, see [Connect with TiDB Cloud Serverless branching](/tidb-cloud/integrate-tidbcloud-with-vercel.md#connect-with-branching).
 
 ## September 28, 2023
 
@@ -144,13 +144,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Release [TiDB Cloud serverless driver (beta)](/tidb-cloud/serverless-driver.md) for JavaScript.
 
-    TiDB Cloud serverless driver for JavaScript allows you to connect to your [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster over HTTPS. It is particularly useful in edge environments where TCP connections are limited, such as [Vercel Edge Function](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/).
+    TiDB Cloud serverless driver for JavaScript allows you to connect to your [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster over HTTPS. It is particularly useful in edge environments where TCP connections are limited, such as [Vercel Edge Function](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/).
 
     For more information, see [TiDB Cloud serverless driver (beta)](/tidb-cloud/serverless-driver.md).
 
 **Console changes**
 
-- For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, you can get an estimation of cost in the **Usage This Month** panel or while setting up the spending limit.
+- For [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, you can get an estimation of cost in the **Usage This Month** panel or while setting up the spending limit.
 
 ## September 5, 2023
 
@@ -170,7 +170,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Introduce the **Events** page for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, which provides the records of main changes to your cluster.
+- Introduce the **Events** page for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, which provides the records of main changes to your cluster.
 
     On this page, you can view the event history for the last 7 days and track important details such as the trigger time and the user who initiated an action.
 
@@ -337,7 +337,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Optimize the Import feature in TiDB Cloud, aimed at enhancing the data import experience. The following improvements have been made:
 
-    - Unified Import entry for {{{ .starter }}}: consolidate the entries for importing data, allowing you to seamlessly switch between importing local files and importing files from Amazon S3.
+    - Unified Import entry for TiDB Cloud Serverless: consolidate the entries for importing data, allowing you to seamlessly switch between importing local files and importing files from Amazon S3.
     - Streamlined configuration: importing data from Amazon S3 now only requires a single step, saving time and effort.
     - Enhanced CSV configuration: the CSV configuration settings are now located under the file type option, making it easier for you to quickly configure the necessary parameters.
     - Enhanced target table selection: support choosing the desired target tables for data import by clicking checkboxes. This improvement eliminates the need for complex expressions and simplifies the target table selection.
@@ -348,7 +348,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) now is Generally Available.
+- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) now is Generally Available.
 
 - Introduce TiDB Bot (beta), an OpenAI-powered chatbot that offers multi-language support, 24/7 real-time response, and integrated documentation access.
 
@@ -360,13 +360,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   To use TiDB Bot, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and select **Ask TiDB Bot** to start a chat.
 
-- Support [the branching feature (beta)](/tidb-cloud/branch-overview.md) for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+- Support [the branching feature (beta)](/tidb-cloud/branch-overview.md) for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
-    TiDB Cloud lets you create branches for {{{ .starter }}} clusters. A branch for a cluster is a separate instance that contains a diverged copy of data from the original cluster. It provides an isolated environment, allowing you to connect to it and experiment freely without worrying about affecting the original cluster.
+    TiDB Cloud lets you create branches for TiDB Cloud Serverless clusters. A branch for a cluster is a separate instance that contains a diverged copy of data from the original cluster. It provides an isolated environment, allowing you to connect to it and experiment freely without worrying about affecting the original cluster.
 
-    You can create branches for {{{ .starter }}} clusters created after July 5, 2023 by using either [TiDB Cloud console](/tidb-cloud/branch-manage.md) or [TiDB Cloud CLI](/tidb-cloud/ticloud-branch-create.md).
+    You can create branches for TiDB Cloud Serverless clusters created after July 5, 2023 by using either [TiDB Cloud console](/tidb-cloud/branch-manage.md) or [TiDB Cloud CLI](/tidb-cloud/ticloud-branch-create.md).
 
-    If you use GitHub for application development, you can integrate {{{ .starter }}} branching into your GitHub CI/CD pipeline, which lets you automatically test your pull requests with branches without affecting the production database. For more information, see [Integrate {{{ .starter }}} Branching (Beta) with GitHub](/tidb-cloud/branch-github-integration.md).
+    If you use GitHub for application development, you can integrate TiDB Cloud Serverless branching into your GitHub CI/CD pipeline, which lets you automatically test your pull requests with branches without affecting the production database. For more information, see [Integrate TiDB Cloud Serverless Branching (Beta) with GitHub](/tidb-cloud/branch-github-integration.md).
 
 - Support weekly backup for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters. For more information, see [Back up and restore TiDB Cloud Dedicated data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup).
 
@@ -374,15 +374,15 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Support point-in-time recovery (PITR) (beta) for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+- Support point-in-time recovery (PITR) (beta) for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
-    You can now restore your {{{ .starter }}} cluster to any point in time within the last 90 days. This feature enhances the data recovery capability of {{{ .starter }}} clusters. For example, you can use PITR when data write errors occur and you want to restore the data to an earlier state.
+    You can now restore your TiDB Cloud Serverless cluster to any point in time within the last 90 days. This feature enhances the data recovery capability of TiDB Cloud Serverless clusters. For example, you can use PITR when data write errors occur and you want to restore the data to an earlier state.
 
-    For more information, see [Back up and restore {{{ .starter }}} data](/tidb-cloud/backup-and-restore-serverless.md#restore).
+    For more information, see [Back up and restore TiDB Cloud Serverless data](/tidb-cloud/backup-and-restore-serverless.md#restore).
 
 **Console changes**
 
-- Enhance the **Usage This Month** panel on the cluster overview page for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters to provide a clearer view of your current resource usage.
+- Enhance the **Usage This Month** panel on the cluster overview page for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters to provide a clearer view of your current resource usage.
 
 - Enhance the overall navigation experience by making the following changes:
 
@@ -396,7 +396,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Remove the pre-built sample dataset for newly created [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+- Remove the pre-built sample dataset for newly created [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
 ## June 20, 2023
 
@@ -420,7 +420,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [Size your cluster](/tidb-cloud/size-your-cluster.md).
 
-- Extend the [monitoring metrics retention period](/tidb-cloud/built-in-monitoring.md#metrics-retention-policy) for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from 3 days to 7 days.
+- Extend the [monitoring metrics retention period](/tidb-cloud/built-in-monitoring.md#metrics-retention-policy) for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from 3 days to 7 days.
 
     By extending the metrics retention period, now you have access to more historical data. This helps you identify trends and patterns of the cluster for better decision-making and faster troubleshooting.
 
@@ -480,7 +480,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - In our pursuit to simplify and clarify, we have updated the names of our products:
 
-    - "{{{ .starter }}} Tier" is now called "{{{ .starter }}}".
+    - "TiDB Cloud Serverless Tier" is now called "TiDB Cloud Serverless".
     - "TiDB Cloud Dedicated Tier" is now called "TiDB Cloud Dedicated".
     - "TiDB On-Premises" is now called "TiDB Self-Managed".
 
@@ -586,7 +586,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     You can easily [monitor your cluster usage or increase your usage quota](/tidb-cloud/manage-serverless-spend-limit.md) in the **Usage This Month** area of your cluster **Overview** page. Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you increase the quota or the usage is reset upon the start of a new month.
 
-    For more information about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [{{{ .starter }}} Tier Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
+    For more information about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [TiDB Cloud Serverless Tier Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
 
 - Support backup and restore for TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
