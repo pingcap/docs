@@ -59,6 +59,12 @@ jobs:
           cd ..
           cp -r markdown-translator/output/markdowns/* docs/
 
+      - name: Update latest translation commit info
+        run: |
+          cd docs
+          SOURCE_SHA=$(git rev-parse origin/${{ github.event.inputs.from }})
+          echo '{"target":"${{ github.event.inputs.from }}","sha":"'$SOURCE_SHA'"}' > latest_translation_commit.json
+
       - name: Git commit and push
         run: |
           cd docs
