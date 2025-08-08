@@ -31,7 +31,7 @@ You can create a maximum of 200 IP firewall rules.
 
 ### Allow AWS access
 
-You can enable access from **all AWS IP addresses** by referring to the official [AWS IP address list](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html).  
+If your {{{ .starter }}} cluster is hosted on AWS, you can enable access from **all AWS IP addresses** by referring to the official [AWS IP address list](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html).  
 
 TiDB Cloud regularly updates this list and uses the reserved IP address **169.254.65.87** to represent all AWS IP addresses.
 

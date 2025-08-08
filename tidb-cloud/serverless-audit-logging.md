@@ -147,7 +147,7 @@ Currently, audit logs are stored within TiDB Cloud for 365 days. After this peri
 
 > **Note:**
 >
-> Contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) if you need to save audit logs in external storage (such as AWS S3, Azure Blob Storage, and Google Cloud Storage).
+> Contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) if you need to save audit logs in external storage (such as Amazon S3, Azure Blob Storage, Google Cloud Storage, and Alibaba Cloud OSS).
 
 To view and download audit logs, use the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-download.md):
 
