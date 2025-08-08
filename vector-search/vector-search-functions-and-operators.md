@@ -152,7 +152,7 @@ $DISTANCE(p,q)=1.0 - {\frac {\sum \limits _{i=1}^{n}{p_{i}q_{i}}}{{\sqrt {\sum \
 
 The two vectors must have the same number of dimensions. Otherwise, an error is returned.
 
-This is the [recommended](https://help.openai.com/en/articles/8984345-which-distance-function-should-i-use) function to use with embeddings created by OpenAI.
+For embeddings from OpenAI, it is [recommended](https://help.openai.com/en/articles/8984345-which-distance-function-should-i-use) that you use this function.
 
 Example:
 
