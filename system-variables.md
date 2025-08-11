@@ -2062,12 +2062,13 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: NONE
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
+- Type: String
 
 <CustomContent platform="tidb">
 
 - Default value: `OFF`
-- This variable indicates whether the TiDB server you are connected to has the Security Enhanced Mode (SEM) enabled. To change its value, you need to modify the value of `enable-sem` in your TiDB server configuration file and restart the TiDB server.
+- Possible values: `OFF`, `ON`, `CONFIG`
+- This variable indicates whether the TiDB server you are connected to has the Security Enhanced Mode (SEM) enabled. To change its value, you need to modify the value of `enable-sem` and `sem-config` in your TiDB server [configuration file](/tidb-configuration-file.md) and restart the TiDB server.
 
 </CustomContent>
 
@@ -2083,6 +2084,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
     - `RESTRICTED_STATUS_ADMIN`: The ability to see sensitive variables in the command `SHOW STATUS`.
     - `RESTRICTED_VARIABLES_ADMIN`: The ability to see and set sensitive variables in `SHOW [GLOBAL] VARIABLES` and `SET`.
     - `RESTRICTED_USER_ADMIN`: The ability to prevent other users from making changes or dropping a user account.
+- For detailed configuration, see [Security Enhanced Mode documentation](/security-enhanced-mode.md).
 
 ### tidb_enable_exchange_partition
 
