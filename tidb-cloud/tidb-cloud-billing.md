@@ -329,9 +329,9 @@ To link your TiDB Cloud account to an Alibaba Cloud billing account, take the fo
 
 1. Open the [Alibaba Cloud Marketplace page](https://marketplace.alibabacloud.com/), search for `TiDB Cloud` and select **TiDB Cloud** in the search results. The TiDB Cloud product page is displayed.
 
-2. On the TiDB Cloud product page, click **Activate Now**, and then follow the onscreen instructions to confirm the pay-as-you-go mode.
+2. On the TiDB Cloud product page, click **Activate Now**, and then follow the onscreen instructions to confirm the pay-as-you-go mode and view the activation application.
 
-3. On the subscription page, click **Subscribe**, and then click **Go to product page**. You are directed to the TiDB Cloud sign-up page.
+3. On the subscription page, locate your subscription of TiDB Cloud, and then click **Auto Login**. You are directed to the TiDB Cloud sign-up page.
 
 4. Check the notification in the upper part of the sign-up page and click **Sign in**.
 
