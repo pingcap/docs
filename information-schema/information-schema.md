@@ -120,16 +120,10 @@ Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` command. The benefi
 | `CLUSTER_MEMORY_USAGE`                                                                  | Provides a cluster-level view of the `MEMORY_USAGE` table. |
 | `CLUSTER_MEMORY_USAGE_OPS_HISTORY`                                                      | Provides a cluster-level view of the `MEMORY_USAGE_OPS_HISTORY` table. |
 | `CLUSTER_PROCESSLIST`                                                                   | Provides a cluster-level view of the `PROCESSLIST` table. |
-<<<<<<< HEAD
-| `CLUSTER_SLOW_QUERY`                                                                    | Provides a cluster-level view of the `SLOW_QUERY` table. This table is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters. |
-| `CLUSTER_STATEMENTS_SUMMARY`                                                            | Provides a cluster-level view of the `STATEMENTS_SUMMARY` table. This table is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters. |
-| `CLUSTER_STATEMENTS_SUMMARY_HISTORY`                                                    | Provides a cluster-level view of the `STATEMENTS_SUMMARY_HISTORY` table. This table is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters. |
-=======
 | `CLUSTER_SLOW_QUERY`                                                                    | Provides a cluster-level view of the `SLOW_QUERY` table. This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters. |
 | `CLUSTER_STATEMENTS_SUMMARY`                                                            | Provides a cluster-level view of the `STATEMENTS_SUMMARY` table. This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters. |
 | `CLUSTER_STATEMENTS_SUMMARY_HISTORY`                                                    | Provides a cluster-level view of the `STATEMENTS_SUMMARY_HISTORY` table. This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters. |
 | `CLUSTER_TIDB_INDEX_USAGE` | Provides a cluster-level view of the `TIDB_INDEX_USAGE` table. |
->>>>>>> d7c28f7510 (*: clarify feature unavailability on Starter and Essential clusters (#21509))
 | `CLUSTER_TIDB_TRX` | Provides a cluster-level view of the `TIDB_TRX` table. |
 | [`CLUSTER_SYSTEMINFO`](/information-schema/information-schema-cluster-systeminfo.md)    | Provides details about kernel parameter configuration for servers in the cluster. This table is not applicable to TiDB Cloud. |
 | [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md) | Provides the lock-waiting information on the TiKV server. |
