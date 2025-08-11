@@ -9,29 +9,6 @@ As described in the [Vector Search](/tidb-cloud/vector-search-overview.md) docum
 
 To improve search efficiency, you can create vector search indexes in TiDB for approximate KNN (ANN) search. When using vector indexes for vector search, TiDB can greatly improve query performance with only a slight reduction in accuracy, generally maintaining a search recall rate above 90%.
 
-<<<<<<< HEAD:tidb-cloud/vector-search-index.md
-=======
-<CustomContent platform="tidb">
-
-> **Warning:**
->
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-> **Note:**
->
-> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
-
->>>>>>> d7c28f7510 (*: clarify feature unavailability on Starter and Essential clusters (#21509)):vector-search/vector-search-index.md
 Currently, TiDB supports the [HNSW (Hierarchical Navigable Small World)](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) vector search index algorithm.
 
 ## Create the HNSW vector index
