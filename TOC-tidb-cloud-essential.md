@@ -289,7 +289,6 @@
     - [Use the `tidbcloud_serverless_export` Resource](/tidb-cloud/terraform-use-serverless-export-resource.md)
     - [Use the `tidbcloud_sql_user` Resource](/tidb-cloud/terraform-use-sql-user-resource.md)
     - [Use the `tidbcloud_import` Resource](/tidb-cloud/terraform-use-import-resource.md)
-    - [Use the `tidbcloud_cluster` Resource (Deprecated)](/tidb-cloud/terraform-use-cluster-resource.md)
     - [Migrate Cluster Resource](/tidb-cloud/terraform-migrate-cluster-resource.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
