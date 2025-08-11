@@ -83,7 +83,6 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - Possible values: `ON`, `OFF`
 - This variable controls whether the optimizer explores enforced plans during query optimization after finding an unenforced plan.
 
-<<<<<<< HEAD
 ### [`47400`](https://github.com/pingcap/tidb/issues/47400) <span class="version-mark">New in v8.4.0</span>
 
 - Default value: `ON`
