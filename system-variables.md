@@ -6567,8 +6567,6 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - In the Stale Read scenarios, this session variable is used to help record the Stable Read timestamp value.
 - This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
 
-<<<<<<< HEAD
-=======
 ### txn_scope
 
 > **Note:**
@@ -6582,7 +6580,6 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - This variable is used to set whether the current session transaction is a global transaction or a local transaction.
 - This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
 
->>>>>>> d7c28f7510 (*: clarify feature unavailability on Starter and Essential clusters (#21509))
 ### validate_password.check_user_name <span class="version-mark">New in v6.5.0</span>
 
 - Scope: GLOBAL
