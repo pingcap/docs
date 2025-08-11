@@ -122,6 +122,7 @@ To replicate [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md) t
 If the downstream TiDB cluster has [read-only mode](/system-variables.md#tidb_restricted_read_only-new-in-v520) enabled, the downstream database user also needs the `RESTRICTED_REPLICA_WRITER_ADMIN` permission.
 
 ## Eventually consistent replication in disaster scenarios by Redo Log
+
 Starting from v6.1.1, the Redo Log feature becomes GA. Starting from v5.3.0, TiCDC supports backing up incremental data from an upstream TiDB cluster to an object storage or an NFS of the downstream cluster. When the upstream cluster encounters a disaster and becomes unavailable, TiCDC can restore the downstream data to the recent eventually consistent state. This is the eventually consistent replication capability provided by TiCDC. With this capability, you can switch applications to the downstream cluster quickly, avoiding long-time downtime and improving service continuity.
 
 Currently, TiCDC can replicate incremental data from a TiDB cluster to another TiDB cluster or a MySQL-compatible database system (including Aurora, MySQL, and MariaDB). In case the upstream cluster crashes, TiCDC can restore data in the downstream cluster within 5 minutes, given the conditions that TiCDC replicates data normally before the crash, and the replication lag is small. It allows data loss of 10s at most, that is, RTO <= 5 min, and P95 RPO <= 10s.
