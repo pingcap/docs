@@ -721,6 +721,8 @@
 - API Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)   
   - [Overview](/tidb-cloud/api-overview.md) 
   - v1beta1
+    - [TiDB Cloud Starter and Essential](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless)
+    - [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated)
     - [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
     - [Data Service](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)
     - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
