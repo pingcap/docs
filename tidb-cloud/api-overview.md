@@ -21,13 +21,13 @@ The TiDB Cloud API is available in two versions:
 
 - v1beta1
     - To manage cluster-level resources:
-      - [TiDB Cloud Starter or Essential Cluster](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless): manage clusters, branches, data export tasks, and data import tasks for TiDB Cloud Starter or Essential clusters.
-      - [TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated): manage clusters, regions, private endpoint connections, and data import tasks for TiDB Cloud Dedicated clusters.
+        - [TiDB Cloud Starter or Essential Cluster](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless): manage clusters, branches, data export tasks, and data import tasks for TiDB Cloud Starter or Essential clusters.
+        - [TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated): manage clusters, regions, private endpoint connections, and data import tasks for TiDB Cloud Dedicated clusters.
     - To manage organization or project-level resources:
-      - [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing): manage billing for TiDB Cloud clusters.
-      - [Data Service](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice): manage resources in the Data Service for TiDB Cloud clusters.
-      - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam): manage API keys for TiDB Cloud clusters.
-      - [MSP (Deprecated)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
+        - [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing): manage billing for TiDB Cloud clusters.
+        - [Data Service](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice): manage resources in the Data Service for TiDB Cloud clusters.
+        - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam): manage API keys for TiDB Cloud clusters.
+        - [MSP (Deprecated)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
 - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta)
     - [Project](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project)
     - [Cluster](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Cluster)
