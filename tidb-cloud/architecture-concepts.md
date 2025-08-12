@@ -5,23 +5,41 @@ summary: Learn about architecture concepts for TiDB Cloud.
 
 # Architecture
 
-TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings the flexibility and power of [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source HTAP (Hybrid Transactional and Analytical Processing) database, to AWS, Azure, and Google Cloud.
+TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings the flexibility and power of [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source HTAP (Hybrid Transactional and Analytical Processing) database, to AWS, Azure, Google Cloud, and Alibaba Cloud.
 
 TiDB is MySQL-compatible, making it easy to migrate and work with existing applications, while offering seamless scalability to handle everything from small workloads to massive, high-performance clusters. It supports both transactional (OLTP) and analytical (OLAP) workloads in one system, simplifying operations and enabling real-time insights.
 
-TiDB Cloud provides two deployment options: **TiDB Cloud** **Serverless**, for auto-scaling, cost-efficient workloads, and **TiDB Cloud Dedicated**, for enterprise-grade applications with dedicated resources and advanced capabilities. TiDB Cloud makes it easy to scale your database, handle complex management tasks, and stay focused on developing reliable, high-performing applications.
+TiDB Cloud makes it easy to scale your database, handle complex management tasks, and stay focused on developing reliable, high-performing applications.
+
+- For AWS, TiDB Cloud provides **{{{ .starter }}}** for auto-scaling, cost-efficient workloads, and **{{{ .dedicated }}}** for enterprise-grade applications with dedicated resources and advanced capabilities.
+- For Google Cloud and Azure, TiDB Cloud provides **{{{ .dedicated }}}** for enterprise-grade applications with dedicated resources and advanced capabilities.
+- For Alibaba Cloud, TiDB Cloud provides **{{{ .starter }}}** for auto-scaling, cost-efficient workloads and **{{{ .essential }}}** for production-ready workloads with provisioned capacity.
 
 ## {{{ .starter }}}
 
-{{{ .starter }}} is a fully managed serverless solution that provides HTAP capabilities similar to traditional TiDB, while offering auto-scaling to alleviate users' burdens related to capacity planning and management complexities. It includes a free tier for basic usage, with consumption-based billing for any usage that exceeds the free limits. {{{ .starter }}} offers two types of high availability to address varying operational requirements.
+{{{ .starter }}} (formerly Serverless) is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database.
 
-By default, clusters utilizing the Zonal High Availability option have all components located within the same availability zone, which results in lower network latency.
+The Starter cluster plan is ideal for those who are getting started with TiDB Cloud. It provides developers and small teams with the following features:
 
-![{{{ .starter }}} zonal high availability](/media/tidb-cloud/serverless-zonal-high-avaliability-aws.png)
+- **No cost**: This plan is completely free, with no credit card required to get started.
+- **Storage**: Provides an initial 5 GiB of row-based storage and 5 GiB of columnar storage.
+- **Request Units**: Includes 50 million [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) for database operations.
 
-For applications that require maximum infrastructure isolation and redundancy, the Regional High Availability option distributes nodes across multiple availability zones.
+## {{{ .essential }}}
 
-![{{{ .starter }}} regional high availability](/media/tidb-cloud/serverless-regional-high-avaliability-aws.png)
+For applications experiencing growing workloads and needing scalability in real time, the Essential cluster plan provides the flexibility and performance to keep pace with your business growth with the following features:
+
+- **Enhanced capabilities**: includes all capabilities of the Starter plan, along with the capacity to handle larger and more complex workloads, as well as advanced security features.
+- **Automatic scaling**: automatically adjusts storage and computing resources to efficiently meet changing workload demands.
+- **High availability**: built-in fault tolerance and redundancy ensure your applications remain available and resilient, even during infrastructure failures.
+- **Predictable pricing**: billed based on storage and Request Capacity Units (RCUs) of the compute resources, offering transparent, usage-based pricing that scales with your needs, so you only pay for what you use without surprises.
+
+{{{ .essential }}} offers two types of high availability to address varying operational requirements.
+
+- By default, clusters utilizing the Zonal High Availability option have all components located within the same availability zone, which results in lower network latency.
+- For applications that require maximum infrastructure isolation and redundancy, the Regional High Availability option distributes nodes across multiple availability zones.
+
+For more information, see [High Availability in {{{ .starter }}} and Essential](/tidb-cloud/serverless-high-availability.md).
 
 ## TiDB Cloud Dedicated
 
@@ -33,11 +51,11 @@ Built on isolated cloud resources such as VPCs, VMs, managed Kubernetes services
 
 ## TiDB Cloud console
 
-The [TiDB Cloud console](https://tidbcloud.com/) is the web-based management interface for both {{{ .starter }}} and TiDB Cloud Dedicated. It provides tools to manage clusters, import or migrate data, monitor performance metrics, configure backups, set up security controls, and integrate with other cloud services, all from a single, user-friendly platform.
+The [TiDB Cloud console](https://tidbcloud.com/) is the web-based management interface for TiDB Cloud clusters. It provides tools to manage clusters, import or migrate data, monitor performance metrics, configure backups, set up security controls, and integrate with other cloud services, all from a single, user-friendly platform.
 
 ## TiDB Cloud CLI (Beta)
 
-The TiDB Cloud CLI, `ticloud`, allows you to manage {{{ .starter }}} and TiDB Cloud Dedicated directly from your terminal with simple commands. You can perform tasks such as:
+The TiDB Cloud CLI, `ticloud`, allows you to manage TiDB Cloud clusters directly from your terminal with simple commands. You can perform tasks such as:
 
 - Creating, deleting, and listing clusters.
 - Importing data into clusters.
@@ -56,7 +74,7 @@ For more information, see [TiDB Cloud API Overview](/tidb-cloud/api-overview.md)
 In TiDB Cloud, each cluster consists of TiDB, TiKV, and TiFlash nodes.
 
 - In a TiDB Cloud Dedicated cluster, you can fully manage the number and size of your dedicated TiDB, TiKV, and TiFlash nodes according to your performance requirements. For more information, see [Scalability](/tidb-cloud/scalability-concepts.md).
-- In a {{{ .starter }}} cluster, the number and size of TiDB, TiKV, and TiFlash nodes are automatically managed. This ensures seamless scaling, eliminating the need for users to handle node configuration or management tasks.
+- In a {{{ .starter }}} or {{{ .essential }}} cluster, the number and size of TiDB, TiKV, and TiFlash nodes are automatically managed. This ensures seamless scaling, eliminating the need for users to handle node configuration or management tasks.
 
 ### TiDB node
 

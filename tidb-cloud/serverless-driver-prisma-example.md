@@ -1,9 +1,9 @@
 ---
-title: {{{ .starter }}} Driver Prisma Tutorial
+title: TiDB Cloud Serverless Driver Prisma Tutorial
 summary: Learn how to use TiDB Cloud serverless driver with Prisma ORM.
 ---
 
-# {{{ .starter }}} Driver Prisma Tutorial
+# TiDB Cloud Serverless Driver Prisma Tutorial
 
 [Prisma](https://www.prisma.io/docs) is an open source next-generation ORM (Object-Relational Mapping) that helps developers interact with their database in an intuitive, efficient, and safe way. TiDB Cloud offers [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter), enabling you to use [Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client) over HTTPS with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). Compared with the traditional TCP way, [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter) brings the following benefits:
 
@@ -11,6 +11,10 @@ summary: Learn how to use TiDB Cloud serverless driver with Prisma ORM.
 - Ability to use Prisma Client in edge environments
 
 This tutorial describes how to use [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter) in serverless environments and edge environments.
+
+> **Tip:**
+>
+> In addition to {{{ .starter }}} clusters, the steps in this document also work with {{{ .essential }}} clusters.
 
 ## Install
 
