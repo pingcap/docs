@@ -32,7 +32,7 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 - Only the `Organization Owner` and `Project Owner` roles can create Google Cloud Private Service Connect endpoints.
 - Each TiDB cluster can handle connections from up to 10 endpoints.
 - Each Google Cloud project can have up to 10 endpoints connecting to a TiDB Cluster.
-- Starting August 12, 2025, TiDB Cloud Dedicated on Google Cloud supports more than 8 Google Private Service Connect (PSC) connections per region. The maximum number of PSC connections you can create per region depends on the NAT subnet CIDR block size:
+- Starting August 12, 2025, the maximum number of Google Private Service Connect (PSC) connections you can create per region for TiDB Cloud Dedicated clusters on Google Cloud depends on the NAT subnet CIDR block size:
     - `/20`: up to 7 PSC connections per region
     - `/19`: up to 23 PSC connections per region
     - `/18`: up to 55 PSC connections per region
