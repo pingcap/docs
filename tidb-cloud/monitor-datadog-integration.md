@@ -69,43 +69,24 @@ Depending on your [Datadog integration version](#datadog-integration-version), t
 
 ### Step 2. Install TiDB Cloud Integration in Datadog
 
-Depending on your [Datadog integration version](#datadog-integration-version), the steps are different.
-
-<SimpleTab>
-<div label="Datadog integration (Preview)">
-
-A new TiDB Cloud dashboard will be available in Datadog after the pending [PR](https://github.com/DataDog/integrations-extras/pull/2751) is merged by Datadog. Before that, you can manually import the dashboard to Datadog by taking the following steps:
-
-1. Download the JSON file for the new dashboard [here](https://github.com/pingcap/diag/blob/integration/integration/dashboards/datadog-dashboard.json).
-2. Log in to [Datadog](https://app.datadoghq.com), click **Dashboards** in the left navigation pane, and then click **+ New Dashboard** in the upper-right corner.
-3. In the displayed dialog, click **New Dashboard** to create a new blank dashboard.
-4. On the newly created dashboard page, click **Configure** in the upper-right corner, scroll down to the bottom of the displayed pane, and then click **Import dashboard JSON...**.
-5. In the displayed dialog, upload the downloaded JSON file to complete the dashboard setup.
-
-</div>
-<div label="Datadog integration (Beta)">
+> **Note:**
+>
+> If you have already installed the TiDB Cloud integration in Datadog, you can skip the following steps in this section. The [**TiDB Cloud Dynamic Tracker**](https://app.datadoghq.com/dash/integration/32021/tidb-cloud-dynamic-tracker) or [**TiDB Cloud Cluster Overview**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview) dashboard is automatically available in your Datadog [**Dashboard List**](https://app.datadoghq.com/dashboard/lists).
 
 1. Log in to [Datadog](https://app.datadoghq.com).
 2. Go to the [**TiDB Cloud Integration** page](https://app.datadoghq.com/account/settings#integrations/tidb-cloud) in Datadog.
-3. In the **Configuration** tab, click **Install Integration**. The [**TiDB Cloud Cluster Overview**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview) dashboard is displayed in your [**Dashboard List**](https://app.datadoghq.com/dashboard/lists).
+3. On the **Configuration** tab, click **Install Integration**.
 
-</div>
-</SimpleTab>
+    - For Datadog integration (Preview), the [**TiDB Cloud Dynamic Tracker**](https://app.datadoghq.com/dash/integration/32021/tidb-cloud-dynamic-tracker) dashboard appears in your [**Dashboard List**](https://app.datadoghq.com/dashboard/lists).
+    - For Datadog integration (Beta), the [**TiDB Cloud Cluster Overview**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview) dashboard appears in your [**Dashboard List**](https://app.datadoghq.com/dashboard/lists).
 
 ## View the pre-built dashboard
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the **Integrations** page.
-2. Depending on your [Datadog integration version](#datadog-integration-version), do one of the following:
+2. Click the **Dashboard** link in the **Datadog** section.
 
-    - For Datadog integration (Beta), click the **Dashboard** link in the **Datadog** section.
-    - For Datadog integration (Preview), click the **Dashboard** link in the **Datadog** section, click **Dashboard** in the left navigation pane of the opened page, and then click **TiDB Cloud Dynamic Tracker** to view the new dashboard with complete metrics.
-
-   >**Note:**
-   >
-   > For Datadog integration (Preview), note the following:
-   >
-   > - Before the pending [PR](https://github.com/DataDog/integrations-extras/pull/2751) is merged by Datadog, the **Dashboard** link redirects to the legacy dashboard, which does not include the latest metrics introduced in the preview version.
-   > - Once the pending [PR](https://github.com/DataDog/integrations-extras/pull/2751) is merged , the **Dashboard** link in the **Datadog** section will redirect to the new dashboard.
+    - For Datadog integration (Preview), the **Dashboard** link opens the new dashboard, which includes the latest metrics introduced in the preview version.
+    - For Datadog integration (Beta), the **Dashboard** link opens the legacy dashboard, which does not include the latest metrics introduced in the preview version.
 
 ## Metrics available to Datadog
 
