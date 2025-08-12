@@ -24,7 +24,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Optimize [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) metrics:
 
-    - In the [**Advanced**](/tidb-cloud/built-in-monitoring.md#advanced) category, add the following metrics to improve diagnostics: Affected Rows, Leader Count, and Region Count.
+    - In the [**Advanced**](/tidb-cloud/built-in-monitoring.md#advanced) category, add the **Affected Rows**, **Leader Count**, and **Region Count** metrics to improve diagnostics.
     - In the [**Server**](/tidb-cloud/built-in-monitoring.md#server) category, refine the **TiKV IO Bps** metric to improve accuracy and consistency.
 
   For more information, see [TiDB Cloud Built-in Metrics](/tidb-cloud/built-in-monitoring.md).
