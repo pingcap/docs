@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless audit-log filter-rule update`.
 
 # ticloud serverless audit-log filter-rule update
 
-Update an audit log filter rule for a {{{ .starter }}} cluster.
+Update an audit log filter rule for a {{{ .starter }}} or {{{ .essential }}} cluster.
 
 ```shell
 ticloud serverless audit-log filter-rule update [flags]
