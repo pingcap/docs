@@ -5,9 +5,13 @@ summary: An overview of the usage of SHOW TABLE DISTRIBUTION for the TiDB databa
 
 # SHOW TABLE DISTRIBUTION
 
-<!-- New in v9.0.0 -->
+<span class="version-mark">New in v9.0.0</span>
 
 The `SHOW TABLE DISTRIBUTION` statement shows the Region distribution information for a specified table.
+
+> **Note:**
+>
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 ## Synopsis
 

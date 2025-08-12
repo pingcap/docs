@@ -5,7 +5,7 @@ summary: An overview of the usage of DISTRIBUTE TABLE for the TiDB database.
 
 # DISTRIBUTE TABLE
 
-<!-- New in v9.0.0 -->
+<span class="version-mark">New in v9.0.0</span>
 
 > **Warning:**
 >
