@@ -8,6 +8,46 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## August 12, 2025
+
+**General changes**
+
+- Rename "TiDB Cloud Serverless" to "TiDB Cloud Starter".
+
+    The auto-scaling entry plan is now named "TiDB Cloud Starter" to better reflect its role for new users. All features, pricing, and the free usage quota remain unchanged.
+
+    Starting August 12, 2025 (PDT), your existing Serverless clusters will appear as Starter in the [TiDB Cloud console](https://tidbcloud.com). Your connection strings, endpoints, and data will remain unchanged, so you do not need to make any code changes or schedule downtime.
+
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) on Google Cloud now supports more than 8 Google Private Service Connect (PSC) connections per region by optimizing the NAT subnet allocation strategy.
+
+    For more information, see [Connect to a TiDB Cloud Dedicated Cluster via Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md#restrictions).
+
+**API changes**
+
+- Introduce TiDB Cloud Dedicated API (v1beta1) for managing the following resources automatically and efficiently:
+
+    - **Cluster**: manage your TiDB Cloud Dedicated clusters with greater flexibility.
+    - **Region**: show all available cloud regions in which you can deploy your TiDB Cloud Dedicated cluster.
+    - **Private** endpoint connection: set up secure and private connections for your clusters.
+    - **Import**: manage data import tasks for your clusters.
+
+  For more information, see [TiDB Cloud Dedicated API](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated/).
+
+- Introduce TiDB Cloud Starter and Essential API (v1beta1) for managing the following resources automatically and efficiently:
+
+    - **Cluster**: manage your TiDB Cloud Starter or Essential clusters with greater flexibility.
+    - **Branch**: manage the branches of your clusters.
+    - **Export**: manage data export tasks for your clusters.
+    - **Import**: manage data import tasks for your clusters.
+
+  For more information, see [TiDB Cloud Starter and Essential API](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless/).
+
+- TiDB Cloud IAM API (v1beta1) supports role-based access control (RBAC) for API key management at both the organization and project levels.
+
+    You can set API key roles at the organization level or project level to improve security and access control.
+
+    For more information, see [TiDB Cloud IAM API](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam/).
+
 ## July 31, 2025
 
 **General changes**
