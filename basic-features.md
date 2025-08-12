@@ -42,21 +42,21 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Window functions](/functions-and-operators/window-functions.md) | Y | Y | Y | Y | Y | Y | Y |
 | [Miscellaneous functions](/functions-and-operators/miscellaneous-functions.md) | Y | Y | Y | Y | Y | Y | Y |
 | [Operators](/functions-and-operators/operators.md) | Y | Y | Y | Y | Y | Y | Y |
-| [Character sets and collations](/character-set-and-collation.md) [^1] | Y | Y | Y | Y | Y | Y | Y 
+| [Character sets and collations](/character-set-and-collation.md) [^1] | Y | Y | Y | Y | Y | Y | Y |
 | [User-level lock](/functions-and-operators/locking-functions.md) | Y | Y | Y | Y | Y | Y | N |
 
 ## Indexing and constraints
 
 | Indexing and constraints | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| [Expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) [^2] | Y | Y | Y | Y | Y | E | E | 
+| [Expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) [^2] | Y | Y | Y | Y | Y | E | E |
 | [Columnar storage (TiFlash)](/tiflash/tiflash-overview.md) | Y | Y | Y | Y | Y | Y | Y |
 | [Use FastScan to accelerate queries in OLAP scenarios](/tiflash/use-fastscan.md) | Y | Y | Y | Y | E | N | N |
 | [RocksDB engine](/storage-engine/rocksdb-overview.md) | Y | Y | Y | Y | Y | Y | Y |
 | [Titan plugin](/storage-engine/titan-overview.md) | Y | Y | Y | Y | Y | Y | Y |
 | [Titan Level Merge](/storage-engine/titan-configuration.md#level-merge-experimental) | E | E | E | E | E | E | E |
 | [Use buckets to improve scan concurrency](/tune-region-performance.md#use-bucket-to-increase-concurrency) | E | E | E | E | E | E | N |
-| [Invisible indexes](/sql-statements/sql-statement-create-index.md#invisible-index) | Y | Y | Y | Y | Y | Y | Y | 
+| [Invisible indexes](/sql-statements/sql-statement-create-index.md#invisible-index) | Y | Y | Y | Y | Y | Y | Y |
 | [Composite `PRIMARY KEY`](/constraints.md) | Y | Y | Y | Y | Y | Y | Y |
 | [`CHECK` constraints](/constraints.md#check) | Y | Y | Y | N | N | N | N |
 | [Unique indexes](/constraints.md) | Y | Y | Y | Y | Y | Y | Y |
@@ -113,7 +113,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [MPP execution engine - compression exchange](/explain-mpp.md#mpp-version-and-exchange-data-compression) | Y | Y | Y | Y | N | N | N |
 | [TiFlash Pipeline Model](/tiflash/tiflash-pipeline-model.md) | Y | Y | Y | N | N | N | N |
 | [TiFlash replica selection strategy](/system-variables.md#tiflash_replica_read-new-in-v730) | Y | Y | Y | N | N | N | N |
-| [Index Merge](/explain-index-merge.md) | Y | Y | Y | Y | Y | Y | Y | 
+| [Index Merge](/explain-index-merge.md) | Y | Y | Y | Y | Y | Y | Y |
 | [Placement Rules in SQL](/placement-rules-in-sql.md) | Y | Y | Y | Y | Y | Y | E |
 | [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner) | E | E | E | E | E | E | E |
 | [Runtime Filter](/runtime-filter.md) | Y | Y | Y | N | N | N | N |
@@ -190,7 +190,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) | Deprecated | Deprecated | Deprecated | E | E | E | E |
 | [Lock statistics](/statistics.md#lock-statistics) | Y | Y | Y | E | E | N | N |
 | [Lightweight statistics initialization](/statistics.md#load-statistics) | Y | Y | Y | E | N | N | N |
-| [Show the progress of collecting statistics](/sql-statements/sql-statement-show-analyze-status.md) | Y | Y | Y | N | N | N | N | 
+| [Show the progress of collecting statistics](/sql-statements/sql-statement-show-analyze-status.md) | Y | Y | Y | N | N | N | N |
 
 ## Security
 
@@ -203,7 +203,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [`caching_sha2_password` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | Y | Y | Y | Y | Y |
 | [`tidb_sm3_password` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | Y | Y | Y | N | N |
 | [`tidb_auth_token` authentication](/security-compatibility-with-mysql.md#tidb_auth_token) | Y | Y | Y | Y | Y | N | N |
-| [`authentication_ldap_sasl` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | Y | N | N | N | N | 
+| [`authentication_ldap_sasl` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | Y | N | N | N | N |
 | [`authentication_ldap_simple` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | Y | Y | N | N | N |
 | [Password management](/password-management.md) | Y | Y | Y | Y | Y | N | N |
 | [MySQL compatible `GRANT` system](/privilege-management.md) | Y | Y | Y | Y | Y | Y | Y |
@@ -260,9 +260,9 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Green GC](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50) | E | E | E | E | E | E | E |
 | [Resource control](/tidb-resource-control-ru-groups.md) | Y | Y | Y | Y | N | N | N |
 | [Runaway Queries management](/tidb-resource-control-runaway-queries.md) | Y | Y | E | N | N | N | N |
-| [Background tasks management](/tidb-resource-control-background-tasks.md) | E | E | E | N | N | N | N | 
+| [Background tasks management](/tidb-resource-control-background-tasks.md) | E | E | E | N | N | N | N |
 | [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md) | Y | Y | Y | E | N | N | N |
-| [Selecting TiDB nodes for the Distributed eXecution Framework (DXF) tasks](/system-variables.md#tidb_service_scope-new-in-v740) | Y | Y | Y | N | N | N | N | 
+| [Selecting TiDB nodes for the Distributed eXecution Framework (DXF) tasks](/system-variables.md#tidb_service_scope-new-in-v740) | Y | Y | Y | N | N | N | N |
 | PD Follower Proxy (controlled by [`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530)) | Y | Y | Y | Y | Y | Y | Y |
 | [Active PD Follower](/tune-region-performance.md#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service) (controlled by [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)) | Y | E | N | N | N | N | N |
 | [PD microservices](/pd-microservices.md) | E | E | N | N | N | N | N |
