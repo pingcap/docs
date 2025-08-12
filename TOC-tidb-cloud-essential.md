@@ -216,6 +216,7 @@
   - Migrate Data into TiDB Cloud
     - [Migrate from TiDB Self-Managed to TiDB Cloud](/tidb-cloud/migrate-from-op-tidb.md)
     - [Migrate from MySQL-Compatible Databases Using AWS DMS](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
+    - [Migrate from Amazon RDS for Oracle Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
   - Import Data into TiDB Cloud
     - [Import Sample Data](/tidb-cloud/import-sample-data-serverless.md)
     - [Import Local Files](/tidb-cloud/tidb-cloud-import-local-files.md)
