@@ -131,7 +131,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Auto random](/auto-random.md) | Y | Y | Y | Y | Y | Y | Y |
 | [TTL (Time to Live)](/time-to-live.md) | Y | Y | Y | Y | E | N | N |
 | [DDL algorithm assertions](/sql-statements/sql-statement-alter-table.md) | Y | Y | Y | Y | Y | Y | Y |
-| Multi-schema change: add columns | Y | Y | Y | Y | Y | E | E | E | E | E |
+| Multi-schema change: add columns | Y | Y | Y | Y | Y | E | E |
 | [Change column type](/sql-statements/sql-statement-modify-column.md) | Y | Y | Y | Y | Y | Y | Y |
 | [Temporary tables](/temporary-tables.md) | Y | Y | Y | Y | Y | Y | Y |
 | Concurrent DDL statements | Y | Y | Y | Y | Y | N | N |
