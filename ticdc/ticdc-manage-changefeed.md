@@ -300,10 +300,10 @@ For the changefeeds created using `cdc cli` after v4.0.13, Unified Sorter is ena
 To check whether or not the Unified Sorter feature is enabled on a changefeed, you can run the following example command (assuming the IP address of the PD instance is `http://10.0.10.25:2379`):
 
 ```shell
-cdc cli --server="http://10.0.10.25:8300" changefeed query --changefeed-id=simple-replication-task | grep 'sort-engine'
+cdc cli --server="http://10.0.10.25:8300" changefeed query --changefeed-id=simple-replication-task | grep 'sort_engine'
 ```
 
-In the output of the above command, if the value of `sort-engine` is "unified", it means that Unified Sorter is enabled on the changefeed.
+In the output of the above command, if the value of `sort_engine` is "unified", it means that Unified Sorter is enabled on the changefeed.
 
 > **Note:**
 >
