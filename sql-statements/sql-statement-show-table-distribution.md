@@ -9,7 +9,7 @@ summary: An overview of the usage of SHOW TABLE DISTRIBUTION for the TiDB databa
 
 The `SHOW TABLE DISTRIBUTION` statement shows the Region distribution information for a specified table.
 
-## Syntax
+## Synopsis
 
 ```ebnf+diagram
 ShowTableDistributionStmt ::=

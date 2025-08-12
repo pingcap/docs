@@ -10,11 +10,11 @@ summary: An overview of the usage of DISTRIBUTE TABLE for the TiDB database.
 > **Warning:**
 >
 > - This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> - This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 The `DISTRIBUTE TABLE` statement redistributes and reschedules Regions of a specified table to achieve a balanced distribution at the table level. Executing this statement helps prevent Regions from being concentrated on a few TiFlash or TiKV nodes, addressing the issue of uneven region distribution in the table.
 
-## Syntax
+## Synopsis
 
 ```ebnf+diagram
 DistributeTableStmt ::=
@@ -42,7 +42,7 @@ Redistribute the Regions of the Leaders in the table `t1` on TiKV:
 ```sql
 CREATE TABLE t1 (a INT);
 ...
-DISTRIBUTE TABLE t1 RULE="leader-scatter" ENGINE="tikv" TIMEOUT="1h";
+DISTRIBUTE TABLE t1 RULE = "leader-scatter" ENGINE = "tikv" TIMEOUT = "1h";
 ```
 
 ```
@@ -58,7 +58,7 @@ Redistribute the Regions of the Learners in the table `t2` on TiFlash:
 ```sql
 CREATE TABLE t2 (a INT);
 ...
-DISTRIBUTE TABLE t2 RULE="learner-scatter" ENGINE="tiflash";
+DISTRIBUTE TABLE t2 RULE = "learner-scatter" ENGINE = "tiflash";
 ```
 
 ```
@@ -77,7 +77,7 @@ CREATE TABLE t3 ( a INT, b INT, INDEX idx(b)) PARTITION BY RANGE( a ) (
     PARTITION p2 VALUES LESS THAN (20000),
     PARTITION p3 VALUES LESS THAN (MAXVALUE) );
 ...
-DISTRIBUTE TABLE t3 PARTITION (p1, p2) RULE="peer-scatter" ENGINE="tikv";
+DISTRIBUTE TABLE t3 PARTITION (p1, p2) RULE = "peer-scatter" ENGINE = "tikv";
 ```
 
 ```
@@ -96,7 +96,7 @@ CREATE TABLE t4 ( a INT, b INT, INDEX idx(b)) PARTITION BY RANGE( a ) (
     PARTITION p2 VALUES LESS THAN (20000),
     PARTITION p3 VALUES LESS THAN (MAXVALUE) );
 ...
-DISTRIBUTE TABLE t4 PARTITION (p1, p2) RULE="learner-scatter" ENGINE="tiflash";
+DISTRIBUTE TABLE t4 PARTITION (p1, p2) RULE = "learner-scatter" ENGINE="tiflash";
 ```
 
 ```
