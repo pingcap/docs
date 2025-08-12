@@ -209,7 +209,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Password management](/password-management.md) | Y | Y | Y | Y | Y | N | N | N | N | N |
 | [MySQL compatible `GRANT` system](/privilege-management.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Dynamic Privileges](/privilege-management.md#dynamic-privileges) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Security Enhanced Mode](/system-variables.md#tidb_enable_enhanced_security) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Security Enhanced Mode](/security-enhanced-mode.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Redacted Log Files](/log-redaction.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 
 ## Data import and export

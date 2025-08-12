@@ -763,6 +763,7 @@
     - [TiDB Password Management](/password-management.md)
     - [Role-Based Access Control](/role-based-access-control.md)
     - [Certificate-Based Authentication](/certificate-authentication.md)
+    - [Security Enhanced Mode](/security-enhanced-mode.md)
   - SQL
     - SQL Language Structure and Syntax
       - Attributes
