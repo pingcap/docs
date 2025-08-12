@@ -9,7 +9,7 @@ summary: An overview of the usage of CANCEL DISTRIBUTION JOB in TiDB.
 
 The `CANCEL DISTRIBUTION JOB` statement is used to cancel a Region scheduling task created using the [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md) statement in TiDB.
 
-## Syntax diagram
+## Synopsis
 
 ```ebnf+diagram
 CancelDistributionJobsStmt ::=
