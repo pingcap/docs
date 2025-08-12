@@ -67,6 +67,7 @@ The following provides release notes you need to know when you upgrade from v8.4
 - TiDB v8.5.0 [compatibility changes](/releases/release-8.5.0.md#compatibility-changes)
 - TiDB v8.5.1 [release notes](/releases/release-8.5.1.md)
 - TiDB v8.5.2 [release notes](/releases/release-8.5.2.md)
+- TiDB v8.5.3 [compatibility changes](/releases/release-8.5.3.md#compatibility-changes)
 
 ### Step 2: Upgrade TiUP or TiUP offline mirror
 
