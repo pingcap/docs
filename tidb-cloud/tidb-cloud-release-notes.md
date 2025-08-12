@@ -28,7 +28,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - **Cluster**: manage your TiDB Cloud Dedicated clusters with greater flexibility.
     - **Region**: show all available cloud regions in which you can deploy your TiDB Cloud Dedicated cluster.
-    - **Private** endpoint connection: set up secure and private connections for your clusters.
+    - **Private endpoint connection**: set up secure and private connections for your clusters.
     - **Import**: manage data import tasks for your clusters.
 
   For more information, see [TiDB Cloud Dedicated API](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated/).
