@@ -37,7 +37,7 @@ Fields ::=
 
 You can use `LOCAL` to specify data files on the client to be imported, where the file parameter must be the file system path on the client.
 
-If you are using TiDB Cloud, to use the `LOAD DATA` statement to load local data files, you need to add the `--local-infile` option to the connection string when you connect to TiDB Cloud. 
+If you are using TiDB Cloud, to use the `LOAD DATA` statement to load local data files, you need to add the `--local-infile` option to the connection string when you connect to TiDB Cloud.
 
 - The following is an example connection string for {{{ .starter }}}:
 
