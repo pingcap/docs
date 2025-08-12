@@ -15,7 +15,7 @@ See [TiDB Cloud Dedicated Pricing Details](https://www.pingcap.com/tidb-dedicate
 
 ### Pricing for {{{ .starter }}} (formerly Serverless) {#pricing-for-starter}
 
-See [TiDB Cloud Serverless Pricing Details](https://www.pingcap.com/tidb-serverless-pricing-details/).
+See [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-serverless-pricing-details/).
 
 ### Pricing for {{{ .essential }}} {#pricing-for-essential}
 
