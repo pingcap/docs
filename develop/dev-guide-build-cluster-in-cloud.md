@@ -9,7 +9,7 @@ summary: Learn how to build a {{{ .starter }}} cluster in TiDB Cloud and connect
 
 <CustomContent platform="tidb">
 
-This document walks you through the quickest way to get started with TiDB. You will use [TiDB Cloud](https://www.pingcap.com/tidb-cloud) to create a {{{ .starter }}} cluster, connect to it, and run a sample application on it.
+This document walks you through the quickest way to get started with TiDB. You will use [TiDB Cloud](https://www.pingcap.com/tidb-cloud) to create a {{{ .starter }}} (formerly Serverless) cluster, connect to it, and run a sample application on it.
 
 If you need to run TiDB on your local machine, see [Starting TiDB Locally](/quick-start-with-tidb.md).
 
@@ -29,7 +29,11 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 3. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click **Create Cluster**.
 
+<<<<<<< HEAD
 4. On the **Create Cluster** page, **Serverless** is selected by default. Update the default cluster name if necessary, and then select the [cluster plan](https://docs.pingcap.com/tidbcloud/select-cluster-tier#cluster-plans).
+=======
+4. On the **Create Cluster** page, **Starter** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
+>>>>>>> bd9b17a3f1 (develop: update serverless to starter (#21357))
 
 5. Click **Create** to create a {{{ .starter }}} cluster.
 
