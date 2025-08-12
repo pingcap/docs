@@ -94,7 +94,7 @@ When `include-commit-ts = true` and `output-old-value = true`, the DML events of
 
 When `include-commit-ts = true`, `output-old-value = true`, and `output-field-header = true`, the DML events of this table are stored in the CSV format as follows:
 
-```
+```csv
 ticdc-meta$operation,ticdc-meta$table,ticdc-meta$schema,ticdc-meta$commit-ts,ticdc-meta$is-update,Id,LastName,FirstName,HireDate,OfficeLocation
 "I","employee","hr",433305438660591626,false,101,"Smith","Bob","2014-06-04","New York"
 "D","employee","hr",433305438660591627,true,101,"Smith","Bob","2015-10-08","Shanghai"
