@@ -14,7 +14,7 @@ To access TiDB Dashboard, visit <http://127.0.0.1:2379/dashboard> via your brows
 
 ## Access TiDB Dashboard when multiple PD instances are deployed
 
-When multiple multiple PD instances are deployed in your cluster and you can directly access **every** PD instance and port, you can simply replace `127.0.0.1:2379` in the <http://127.0.0.1:2379/dashboard/> address with **any** PD instance address and port.
+When multiple PD instances are deployed in your cluster and you can directly access **every** PD instance and port, you can simply replace `127.0.0.1:2379` in the <http://127.0.0.1:2379/dashboard/> address with **any** PD instance address and port.
 
 > **Note:**
 >

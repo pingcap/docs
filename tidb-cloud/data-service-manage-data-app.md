@@ -7,13 +7,13 @@ summary: Learn how to create, view, modify, and delete a Data App in the TiDB Cl
 
 A Data App in Data Service (beta) is a collection of endpoints that you can use to access data for a specific application. You can configure authorization settings using API keys to restrict access to endpoints in a Data App.
 
-This document describes how to manage your Data Apps in the TiDB Cloud console. On the [**Data Service**](https://tidbcloud.com/console/data-service) page, you can manage all Data Apps, endpoints, and API keys.
+This document describes how to manage your Data Apps in the TiDB Cloud console. On the [**Data Service**](https://tidbcloud.com/project/data-service) page, you can manage all Data Apps, endpoints, and API keys.
 
 ## Create a Data App
 
 To create a Data App for your project, perform the following steps:
 
-1. On the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project, click <MDSvgIcon name="icon-create-data-app" /> **Create DataApp** in the left pane.
+1. On the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project, click <MDSvgIcon name="icon-create-data-app" /> **Create DataApp** in the left pane.
 
     > **Tip:**
     >
@@ -53,7 +53,7 @@ You can edit the name, version, or description of a Data App, and manage its Git
 
 You can edit the name, version, and description of a Data App. To edit Data App properties, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the **Data App Properties** area, click <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="gray.1"><path d="M11 3.99998H6.8C5.11984 3.99998 4.27976 3.99998 3.63803 4.32696C3.07354 4.61458 2.6146 5.07353 2.32698 5.63801C2 6.27975 2 7.11983 2 8.79998V17.2C2 18.8801 2 19.7202 2.32698 20.362C2.6146 20.9264 3.07354 21.3854 3.63803 21.673C4.27976 22 5.11984 22 6.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9264 19.673 20.362C20 19.7202 20 18.8801 20 17.2V13M7.99997 16H9.67452C10.1637 16 10.4083 16 10.6385 15.9447C10.8425 15.8957 11.0376 15.8149 11.2166 15.7053C11.4184 15.5816 11.5914 15.4086 11.9373 15.0627L21.5 5.49998C22.3284 4.67156 22.3284 3.32841 21.5 2.49998C20.6716 1.67156 19.3284 1.67155 18.5 2.49998L8.93723 12.0627C8.59133 12.4086 8.41838 12.5816 8.29469 12.7834C8.18504 12.9624 8.10423 13.1574 8.05523 13.3615C7.99997 13.5917 7.99997 13.8363 7.99997 14.3255V16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>, modify the App name, version, or description, and then click **Confirm**.
 
@@ -67,14 +67,14 @@ You can add or remove linked clusters for a Data App.
 
 To link a cluster to a Data App, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
 2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
 3. In the **Linked Data Sources** area, click **Add Cluster**.
 4. In the displayed dialog box, select a cluster from the list and click **Add**.
 
 To remove a linked cluster from a Data App, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
 2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
 3. In the **Linked Data Sources** area, locate the target linked cluster you want to remove from the Data App, and click **Delete** in the **Action** column.
 4. In the displayed dialog box, confirm the removal.
@@ -97,7 +97,7 @@ For more information, see [Manage a custom domain](/tidb-cloud/data-service-cust
 
 To manage deployments, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
 2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
 3. In the **Deployment Configuration** area, click **Config**. The dialog for deployment configuration is displayed.
 4. In the dialog, choose your desired setting of **Auto Sync & Deployment** and **Review Draft**.
@@ -123,7 +123,7 @@ Data Service (beta) supports generating the OpenAPI Specification 3.0 for each D
 
 To download the OpenAPI Specification in JSON or YAML format for a Data App, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the **API Specification** area, click **Download** and select **JSON** or **YAML**.
 
@@ -137,7 +137,7 @@ Data Service (beta) provides autogenerated OpenAPI documentation for each Data A
 
 To access the OpenAPI documentation, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the upper-right corner of the page, click **View API Docs**.
 
@@ -166,7 +166,7 @@ To access the OpenAPI documentation, perform the following steps:
 
 To delete a Data App, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
 2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
 3. In the **Danger Zone** area, click **Delete Data App**. A dialog box for confirmation is displayed.
 4. Type your `<organization name>/<project name>/<data app name>`, and then click **I understand, delete**.

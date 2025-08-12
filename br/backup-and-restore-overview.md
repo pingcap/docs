@@ -17,7 +17,7 @@ BR satisfies the following requirements:
 
 ## Before you use
 
-This section describes the prerequisites for using TiDB backup and restore, including restrictions, usage tips and compatibility issues.
+This section describes the prerequisites for using TiDB backup and restore, including restrictions, usage tips and compatibility issues. For more information about the compatibility of the BR tool with other features or versions, see [Compatibility](#compatibility).
 
 ### Restrictions
 
@@ -26,7 +26,7 @@ This section describes the prerequisites for using TiDB backup and restore, incl
 - PITR does not support restoring the data of user tables or privilege tables from system tables.
 - BR does not support running multiple backup tasks on a cluster **at the same time**.
 - It is not recommended to back up tables that are being restored, because the backed-up data might be problematic.
-- When a PITR is running, you cannot run a log backup task or use TiCDC to replicate data to a downstream cluster.
+- When restoring a cluster using PITR, you cannot run a log backup task or use TiCDC to replicate data to a downstream cluster.
 
 ### Some tips
 
@@ -139,35 +139,37 @@ The compatibility information for BR before TiDB v6.6.0 is as follows:
 | TiDB v6.0, v6.1, v6.2, v6.3, v6.4, or v6.5 snapshot backup | Compatible (known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible | Compatible (BR must be v6.6) |
 | TiDB v6.3, v6.4, v6.5, or v6.6 log backup| Incompatible | Incompatible | Incompatible | Compatible | Compatible |
 
-#### BR version compatibility matrix between TiDB v6.5.0 and v8.5.0 
+#### BR version compatibility matrix between TiDB v6.5.0 and v8.5.0
 
 This section introduces the BR compatibility information for all [Long-Term Support (LTS)](/releases/versioning.md#long-term-support-releases) versions between TiDB v6.5.0 and v8.5.0 (including v6.5.0, v7.1.0, v7.5.0, v8.1.0, and v8.5.0):
 
 > **Note:**
 >
-> Known issue: in v7.2.0, some system table fields are changed to case-sensitive, which might cause cross-version backup and restore failures. For more details, see [issue #43717](https://github.com/pingcap/tidb/issues/43717).
+> Known issue: Starting from version v7.2.0, some system table fields in newly created clusters are case-insensitive. However, for clusters that are **upgraded online** from versions earlier than v7.2.0 to v7.2.0 or later, the corresponding system table fields remain case-sensitive. Backup and restore operations involving system tables between these two types of clusters might fail. For more details, see [Issue #43717](https://github.com/pingcap/tidb/issues/43717).
 
-The following table lists the compatibility matrix for full backups:
-
-| Backup version | Compatible restore versions | Incompatible restore versions |
-|:---------|:----------------|:------------------|
-| v6.5.0    | 7.1.0           | v7.5.0 and later   |
-| v7.1.0    | -                 | v7.5.0 and later  |
-| v7.5.0    | v7.5.0 and later | -                 |
-| v8.1.0    | v8.1.0 and later | -                 |
-
-The following table lists the compatibility matrix for log backups:
+The following table lists the compatibility matrix for full backups. Note that all information in the table applies to newly created clusters. For clusters upgraded from a version earlier than v7.2.0 to v7.2.0 or later, their behavior is consistent with that of backups from v7.1.0.
 
 | Backup version | Compatible restore versions | Incompatible restore versions |
 |:---------|:----------------|:------------------|
-| v6.5.0    | v7.1.0        | v7.5.0 and later  |
-| v7.1.0    | -                | v7.5.0 and later |
+| v6.5.0    | v7.1.0           | v7.5.0 and later  |
+| v7.1.0    | -                | v7.5.0 and later  |
 | v7.5.0    | v7.5.0 and later | -                 |
 | v8.1.0    | v8.1.0 and later | -                 |
+| v8.5.0    | v8.5.0 and later | -                 |
+
+The following table lists the compatibility matrix for log backups. Note that all information in the table applies to newly created clusters. For clusters upgraded from a version earlier than v7.2.0 to v7.2.0 or later, their behavior is consistent with that of backups from v7.1.0.
+
+| Backup version | Compatible restore versions | Incompatible restore versions |
+|:---------|:----------------|:------------------|
+| v6.5.0    | v7.1.0           | v7.5.0 and later  |
+| v7.1.0    | -                | v7.5.0 and later  |
+| v7.5.0    | v7.5.0 and later | -                 |
+| v8.1.0    | v8.1.0 and later | -                 |
+| v8.5.0    | v8.5.0 and later | -                 |
 
 > **Note:**
 >
-> - When only user data is backed up (full backup or log backup), all versions are compatible with each other.
+> - When only data of non-system tables is backed up (full backup or log backup), all versions are compatible with each other.
 > - In scenarios where restoring the `mysql` system table is incompatible, you can resolve the problem by setting `--with-sys-table=false` to skip restoring all system tables, or use a more fine-grained filter to just skip incompatible system tables, for example: `--filter '*.*' --filter "__TiDB_BR_Temporary_*.*" --filter '!mysql.*' --filter 'mysql.bind_info' --filter 'mysql.user' --filter 'mysql.global_priv' --filter 'mysql.global_grants' --filter 'mysql.default_roles' --filter 'mysql.role_edges' --filter '!sys.*' --filter '!INFORMATION_SCHEMA.*' --filter '!PERFORMANCE_SCHEMA.*' --filter '!METRICS_SCHEMA.*' --filter '!INSPECTION_SCHEMA.*'`.
 > - `-` means that there are no compatibility restrictions for the corresponding scenario.
 

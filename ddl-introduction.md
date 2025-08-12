@@ -1,9 +1,9 @@
 ---
-title: Execution Principles and Best Practices of DDL Statements
+title: Best Practices for DDL Execution in TiDB
 summary: Learn about how DDL statements are implemented in TiDB, the online change process, and best practices.
 ---
 
-# Execution Principles and Best Practices of DDL Statements
+# Best Practices for DDL Execution in TiDB
 
 This document provides an overview of the execution principles and best practices related to DDL statements in TiDB. The principles include the DDL Owner module and the online DDL change process.
 
@@ -86,7 +86,7 @@ To improve the user experience of DDL execution, starting from v6.2.0, TiDB enab
 + DDL statements to be performed on the same table are mutually blocked.
 + `DROP DATABASE` and DDL statements that affect all objects in the database are mutually blocked.
 + Adding indexes and column type changes on different tables can be executed concurrently.
-+ A logical DDL statement must wait for the previous logical DDL statement to be executed before it can be executed.
++ Starting from v8.2.0, [logical DDL statements](/ddl-introduction.md#types-of-ddl-statements) for different tables can be executed in parallel.
 + In other cases, DDL can be executed based on the level of availability for concurrent DDL execution.
 
 Specifically, TiDB 6.2.0 has enhanced the DDL execution framework in the following aspects:
@@ -183,6 +183,11 @@ When TiDB is adding an index, the phase of backfilling data will cause read and 
 - `ADMIN RESUME DDL JOBS job_id [, job_id]`: Used to resume the DDL tasks that have been paused. After the command is executed, the SQL statement that executes the DDL task is displayed as being executed, and the background task is resumed. For details, refer to [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md).
 
     You can only resume a paused DDL task. Otherwise, the `Job 3 can't be resumed` error is shown in the `RESULT` column.
+
+## DDL-related tables
+
+- [`information_schema.DDL_JOBS`](/information-schema/information-schema-ddl-jobs.md): Information about currently running and finished DDL jobs.
+- [`mysql.tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md): Information about [metadata lock](/metadata-lock.md) views. It can help identify what query is blocking the DDL from making progress.
 
 ## Common questions
 

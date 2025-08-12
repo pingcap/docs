@@ -5,7 +5,7 @@ summary: Learn how to migrate data from Amazon RDS for Oracle into TiDB Cloud Se
 
 # Migrate from Amazon RDS for Oracle to TiDB Cloud Using AWS DMS
 
-This document describes a step-by-step example of how to migrate data from Amazon RDS for Oracle to [TiDB Cloud Serverless](https://tidbcloud.com/console/clusters/create-cluster) using AWS Database Migration Service (AWS DMS).
+This document describes a step-by-step example of how to migrate data from Amazon RDS for Oracle to [TiDB Cloud Serverless](https://tidbcloud.com/clusters/create-cluster) using AWS Database Migration Service (AWS DMS).
 
 If you are interested in learning more about TiDB Cloud and AWS DMS, see the following:
 
@@ -24,7 +24,7 @@ If you want to migrate data from heterogeneous databases, such as PostgreSQL, Or
 At a high level, follow the following steps:
 
 1. Set up the source Amazon RDS for Oracle.
-2. Set up the target [TiDB Cloud Serverless](https://tidbcloud.com/console/clusters/create-cluster).
+2. Set up the target [TiDB Cloud Serverless](https://tidbcloud.com/project/clusters/create-cluster).
 3. Set up data migration (full load) using AWS DMS.
 
 The following diagram illustrates the high-level architecture.
@@ -71,11 +71,11 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
 ## Step 4. Create a TiDB Cloud Serverless cluster
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/console/clusters).
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/project/clusters).
 
 2. [Create a TiDB Cloud Serverless cluster](/tidb-cloud/tidb-cloud-quickstart.md).
 
-3. In the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the target cluster name to go to its overview page.
+3. In the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the target cluster name to go to its overview page.
 
 4. In the upper-right corner, click **Connect**.
 
@@ -139,7 +139,7 @@ For more information, see [Migrating your source schema to your target database 
 
 ## Step 9. Check data in the downstream TiDB cluster
 
-Connect to the [TiDB Cloud Serverless cluster](https://tidbcloud.com/console/clusters/create-cluster) and check the `admin.github_event` table data. As shown in the following screenshot, DMS successfully migrated table `github_events` and 10000 rows of data.
+Connect to the [TiDB Cloud Serverless cluster](https://tidbcloud.com/clusters/create-cluster) and check the `admin.github_event` table data. As shown in the following screenshot, DMS successfully migrated table `github_events` and 10000 rows of data.
 
 ![Check Data In TiDB](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-14.png)
 

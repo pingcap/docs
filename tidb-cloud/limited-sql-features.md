@@ -42,11 +42,13 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `SHOW BACKUPS` | Supported | Not supported [^3] |
 | `RESTORE` | Supported | Not supported [^3] |
 | `SHOW RESTORES` | Supported | Not supported [^3] |
+| `ADMIN RESET TELEMETRY_ID` | Supported | Telemetry is not supported on TiDB Cloud Serverless. |
+| `ADMIN SHOW TELEMETRY` | Not supported [^4] | Not supported [^4] |
 | `ADMIN SHOW SLOW` | Supported | Not supported [^5] |
 | `ADMIN PLUGINS ENABLE` | Supported | Not supported [^8] |
 | `ADMIN PLUGINS DISABLE` | Supported | Not supported [^8] |
 | `ALTER INSTANCE RELOAD TLS` | Supported | TiDB Cloud Serverless automatically refreshes the TLS certificate. |
-| `LOAD DATA INFILE` | Only supports `LOAD DATA LOCAL INFILE` | Only supports `LOAD DATA LOCAL INFILE` |
+| `LOAD DATA INFILE` | Supports `LOAD DATA LOCAL INFILE`, and `LOAD DATA INFILE` from Amazon S3 or Google Cloud Storage | Only supports `LOAD DATA LOCAL INFILE` |
 | `CHANGE DRAINER` | Not supported [^7] | Not supported [^7] |
 | `CHANGE PUMP` | Not supported [^7] | Not supported [^7] |
 | `FLASHBACK CLUSTER` | Supported | Not supported [^3] |
@@ -151,6 +153,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `tidb_enable_resource_control` | No limitation | Read-only [^10] |
 | `tidb_enable_slow_log` | Not supported [^4] | Not supported [^4] |
 | `tidb_enable_stmt_summary` | No limitation | Read-only [^10] |
+| `tidb_enable_telemetry` | Not supported [^4] | Not supported [^4] |
 | `tidb_enable_top_sql` | No limitation | Read-only [^10] |
 | `tidb_enable_tso_follower_proxy` | No limitation | Read-only [^10] |
 | `tidb_expensive_query_time_threshold` | Not supported [^4] | Not supported [^4] |
@@ -205,7 +208,6 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `tidb_txn_mode` | No limitation | Read-only [^10] |
 | `tidb_wait_split_region_finish` | No limitation | Read-only [^10] |
 | `tidb_wait_split_region_timeout` | No limitation | Read-only [^10] |
-| `txn_scope` | No limitation | Read-only [^10] |
 | `validate_password.enable` | No limitation | Always enabled [^9] |
 | `validate_password.length` | No limitation | At least `8` [^9] |
 | `validate_password.mixed_case_count` | No limitation | At least `1` [^9] |

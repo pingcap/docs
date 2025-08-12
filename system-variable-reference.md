@@ -291,7 +291,7 @@ Referenced in:
 
 Referenced in:
 
-- [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md)
+- [Best Practices for High-Concurrency Writes](/best-practices/high-concurrency-best-practices.md)
 - [System Variables](/system-variables.md#cte_max_recursion_depth)
 - [TiDB 5.1 Release Notes](/releases/release-5.1.0.md)
 
@@ -1206,7 +1206,7 @@ Referenced in:
 
 - [ADMIN ALTER DDL JOBS](/sql-statements/sql-statement-admin-alter-ddl.md)
 - [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
-- [System Variables](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v755-and-v850)
+- [System Variables](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850)
 - [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
 - [TiDB 7.5.5 Release Notes](/releases/release-7.5.5.md)
 
@@ -3335,7 +3335,7 @@ Referenced in:
 - [Best Practices for Read-Only Storage Nodes](/best-practices/readonly-nodes.md)
 - [Follower Read](/follower-read.md)
 - [Follower Read](/develop/dev-guide-use-follower-read.md)
-- [Local Read under Three Data Centers Deployment](/best-practices/three-dc-local-read.md)
+- [Best Practices for Local Reads in Three-Data-Center Deployments](/best-practices/three-dc-local-read.md)
 - [Optimizer Hints](/optimizer-hints.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md#tidb_replica_read-new-in-v40)
@@ -3421,7 +3421,7 @@ Referenced in:
 
 Referenced in:
 
-- [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md)
+- [Best Practices for High-Concurrency Writes](/best-practices/high-concurrency-best-practices.md)
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [Split Region](/sql-statements/sql-statement-split-region.md)
@@ -4035,6 +4035,26 @@ Referenced in:
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md#tidb_window_concurrency-new-in-v40)
 
+### tidb_workload_repository_dest
+
+- [TiDB Workload Repository](/workload-repository.md#enable-the-workload-repository)
+- [System Variables](/system-variables.md#tidb_workload_repository_dest-new-in-v900)
+
+### tidb_workload_repository_active_sampling_interval
+
+- [TiDB Workload Repository](/workload-repository.md#time-based-sampling-process-every-5-seconds-by-default)
+- [System Variables](/system-variables.md#tidb_workload_repository_active_sampling_interval-new-in-v900)
+
+### tidb_workload_repository_retention_days
+
+- [TiDB Workload Repository](/workload-repository.md#data-retention)
+- [System Variables](/system-variables.md#tidb_workload_repository_retention_days-new-in-v900)
+
+### tidb_workload_repository_snapshot_interval
+
+- [TiDB Workload Repository](/workload-repository.md#snapshot-sampling-process-hourly-by-default)
+- [System Variables](/system-variables.md#tidb_workload_repository_snapshot_interval-new-in-v900)
+
 ### tiflash_fastscan
 
 Referenced in:
@@ -4144,15 +4164,6 @@ Referenced in:
 Referenced in:
 
 - [System Variables](/system-variables.md#tx_read_ts)
-
-### txn_scope
-
-Referenced in:
-
-- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [System Variables](/system-variables.md#txn_scope)
-- [TiDB Configuration File](/tidb-configuration-file.md)
-- [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md)
 
 ### validate_password.check_user_name
 

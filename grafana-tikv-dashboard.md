@@ -411,6 +411,35 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Blob GC output file size: The size of Titan GC output file
 - Blob GC file count: The count of blob files involved in Titan GC
 
+### In Memory Engine
+
+The following metrics are related to [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md) (IME).
+
+- Ops: The number of operations per second for column families
+- Read MBps: The total bytes of read traffic in RocksDB and the in-memory engine
+- Coprocessor Handle duration: The time consumed for handling coprocessor requests
+- Region Cache Hit: The number of times data is successfully retrieved from the Region cache
+- Region Cache Hit Rate: The hit rate of Region cache
+- Region Cache Miss Reason: The reasons why data is not retrieved from the Region cache
+- Memory Usage: The memory usage of the in-memory engine
+- Region Count: The count of different types of Regions
+- GC Filter: The information about the filtering process during garbage collection (GC)
+- Region GC Duration: The time consumed for Region GC
+- Region Load Duration: The time consumed for loading Regions
+- Region Load Count: The number of Regions loaded per second
+- Region Eviction Duration: The time consumed for evicting Regions
+- Region Eviction Count: The number of Regions evicted per second
+- Write duration: The time consumed for write operations in the Region cache engine
+- 99% In-memory engine write duration per server: The 99th percentile of write duration per TiKV server for the in-memory engine
+- Prepare for write duration: The time consumed for preparing write operations in the in-memory engine
+- 99% In-memory engine prepare for write duration per server: The 99th percentile of time consumed for preparing write operations per TiKV server in the in-memory engine
+- Iterator operations: The number of different types of iterator operations
+- Seek duration: The time consumed for seek operations
+- Oldest Auto GC SafePoint: The oldest automatic GC safepoint for Regions cached in the in-memory engine
+- Newest Auto GC SafePoint: The newest automatic GC safepoint for Regions cached in the in-memory engine
+- Auto GC SafePoint Gap: The time gap between the newest automatic GC safepoint and the oldest automatic GC safepoint for Regions cached in the in-memory engine
+- Auto GC SafePoint Gap With TiKV: The gap between the TiKV automatic GC safepoint and the oldest automatic GC safepoint for Regions cached in the in-memory engine
+
 ### Pessimistic Locking
 
 - Lock Manager Thread CPU: The CPU utilization of the lock manager thread

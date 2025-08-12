@@ -43,7 +43,7 @@ This document describes the software and hardware requirements for deploying and
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>Kylin Euler V10 SP1/SP2/SP3 (SP3 is supported starting from v7.5.5)</td>
+    <td>Kylin V10 SP1/SP2/SP3 (SP3 is supported starting from v7.5.5)</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
@@ -55,7 +55,7 @@ This document describes the software and hardware requirements for deploying and
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>macOS 12 (Monterey) or later</td>
+    <td>macOS 13 (Ventura) or later</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
@@ -63,27 +63,27 @@ This document describes the software and hardware requirements for deploying and
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>Ubuntu LTS 20.04 or later</td>
+    <td>Ubuntu LTS 22.04 or later</td>
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>CentOS 8 Stream</td>
+    <td>CentOS 9 Stream</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>Debian 10 (Buster) or later</td>
+    <td>Debian 11 (Bullseye) or later</td>
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>Fedora 38 or later</td>
+    <td>Fedora 40 or later</td>
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>openSUSE Leap later than v15.5 (not including Tumbleweed)</td>
+    <td>openSUSE Leap later than v15.6 (not including Tumbleweed)</td>
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>SUSE Linux Enterprise Server 15</td>
+    <td>SUSE Linux Enterprise Server 15.6</td>
     <td>x86_64</td>
   </tr>
 </tbody>
@@ -150,7 +150,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 
 | Component | CPU     | Memory | Local Storage  | Network  | Number of Instances (Minimum Requirement) |
 | :------: | :-----: | :-----: | :----------: | :------: | :----------------: |
-| TiDB    | 8 core+   | 16 GB+  | [Disk space requirements](#disk-space-requirements) | Gigabit network card | 1 (can be deployed on the same machine with PD)      |
+| TiDB    | 8 core+   | 16 GB+  | [Storage requirements](#storage-requirements) | Gigabit network card | 1 (can be deployed on the same machine with PD)      |
 | PD      | 4 core+   | 8 GB+  | SAS, 200 GB+ | Gigabit network card | 1 (can be deployed on the same machine with TiDB)       |
 | TiKV    | 8 core+   | 32 GB+  | SAS, 200 GB+ | Gigabit network card | 3       |
 | TiFlash | 32 core+  | 64 GB+  | SSD, 200 GB+ | Gigabit network card | 1     |
@@ -225,7 +225,7 @@ As an open-source distributed SQL database, TiDB requires the following network 
 | Alertmanager | 9093 | the port for the alert web service |
 | Alertmanager | 9094 | the alert communication port |
 
-## Disk space requirements
+## Storage requirements
 
 <table>
 <thead>
@@ -268,6 +268,8 @@ As an open-source distributed SQL database, TiDB requires the following network 
   </tr>
 </tbody>
 </table>
+
+TiDB supports the XFS and Ext4 file systems. Other file systems are not recommended for production environments.  
 
 ## Web browser requirements
 

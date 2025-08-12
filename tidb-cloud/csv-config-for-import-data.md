@@ -7,7 +7,7 @@ summary: Learn how to use CSV configurations for the Import Data service on TiDB
 
 This document introduces CSV configurations for the Import Data service on TiDB Cloud.
 
-The following is the CSV Configuration window when you use the Import Data service on TiDB Cloud to import CSV files. For more information, see [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md).
+The following is the CSV Configuration window when you use the Import Data service on TiDB Cloud to import CSV files. For more information, see [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md).
 
 ![CSV Configurations](/media/tidb-cloud/import-data-csv-config.png)
 
@@ -66,3 +66,11 @@ The following is the CSV Configuration window when you use the Import Data servi
     `"{\"key1\": \"val1\", \"key2\":\"val2\" }"`
 
 - Default: `True`
+
+## NULL value
+
+- Definition: defines the string that represents a `NULL` value in the CSV file.
+
+- Default: `\N`
+
+- Custom null values are not supported in the console. You can use the [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md) instead. For more information, see [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md).

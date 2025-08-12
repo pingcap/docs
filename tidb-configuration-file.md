@@ -261,7 +261,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 > **Note:**
 >
-> - In TiDB, the `zone` label is specially used to specify the zone where a server is located. If `zone` is set to a non-null value, the corresponding value is automatically used by features such as [`txn-score`](/system-variables.md#txn_scope) and [`Follower read`](/follower-read.md).
+> - In TiDB, the `zone` label is specially used to specify the zone where a server is located. If `zone` is set to a non-null value, the corresponding value is automatically used by [`Follower read`](/follower-read.md).
 > - The `group` label has a special use in TiDB Operator. For clusters deployed using [TiDB Operator](/tidb-operator-overview.md), it is **NOT** recommended that you specify the `group` label manually.
 
 ## log
@@ -609,14 +609,14 @@ Configuration items related to performance.
 
 ### `concurrently-init-stats` <span class="version-mark">New in v8.1.0 and v7.5.2</span>
 
-+ Controls whether to initialize statistics concurrently during TiDB startup.
-+ Default value: `false`
++ Controls whether to initialize statistics concurrently during TiDB startup. This configuration item takes effect only when [`lite-init-stats`](#lite-init-stats-new-in-v710) is set to `false`.
++ Default value: `false` for versions earlier than v8.2.0, `true` for v8.2.0 and later versions.
 
 ### `lite-init-stats` <span class="version-mark">New in v7.1.0</span>
 
 + Controls whether to use lightweight statistics initialization during TiDB startup.
 + Default value: `false` for versions earlier than v7.2.0, `true` for v7.2.0 and later versions.
-+ When the value of `lite-init-stats` is `true`, statistics initialization does not load any histogram, TopN, or Count-Min Sketch of indexes or columns into memory. When the value of `lite-init-stats` is `false`, statistics initialization loads histograms, TopN, and Count-Min Sketch of indexes and primary keys into memory but does not load any histogram, TopN, or Count-Min Sketch of non-primary key columns into memory. When the optimizer needs the histogram, TopN, and Count-Min Sketch of a specific index or column, the necessary statistics are loaded into memory synchronously or asynchronously (controlled by [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)).
++ When the value of `lite-init-stats` is `true`, statistics initialization does not load any histogram, TopN, or Count-Min Sketch of indexes and columns into memory. When the value of `lite-init-stats` is `false`, statistics initialization loads histograms, TopN, and Count-Min Sketch of indexes into memory but does not load any histogram, TopN, or Count-Min Sketch of primary keys and columns into memory. When the optimizer needs the histogram, TopN, and Count-Min Sketch of a specific primary key or column, the necessary statistics are loaded into memory synchronously or asynchronously (controlled by [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)).
 + Setting `lite-init-stats` to `true` speeds up statistics initialization and reduces TiDB memory usage by avoiding unnecessary statistics loading. For details, see [Load statistics](/statistics.md#load-statistics).
 
 ### `force-init-stats` <span class="version-mark">New in v6.5.7 and v7.1.0</span>
@@ -698,6 +698,14 @@ Configuration items related to opentracing.reporter.
 + The address at which the reporter sends spans to the jaeger-agent.
 + Default value: `""`
 
+## pd-client
+
+### `pd-server-timeout`
+
++ The timeout for TiDB to send requests to PD nodes via the PD client.
++ Default value: 3
++ Unit: second
+
 ## tikv-client
 
 ### `grpc-connection-count`
@@ -764,7 +772,7 @@ Configuration items related to opentracing.reporter.
 
 ### `overload-threshold`
 
-- The threshold of the TiKV load. If the TiKV load exceeds this threshold, more `batch` packets are collected to relieve the pressure of TiKV. It is valid only when the value of `tikv-client.max-batch-size` is greater than `0`. It is recommended not to modify this value.
+- The threshold of the TiKV load. If the TiKV load exceeds this threshold, more `batch` packets are collected to relieve the pressure of TiKV. This configuration item takes effect only when both [`tikv-client.max-batch-size`](#max-batch-size) and [`tikv-client.max-batch-wait-time`](#max-batch-wait-time) are set to values greater than `0`. It is recommended not to modify this value.
 - Default value: `200`
 
 ### `copr-req-timeout` <span class="version-mark">New in v7.5.0</span>
@@ -788,7 +796,7 @@ Configuration items related to opentracing.reporter.
 
 ## tikv-client.copr-cache <span class="version-mark">New in v4.0.0</span>
 
-This section introduces configuration items related to the Coprocessor Cache feature.
+This section introduces configuration items related to the [Coprocessor Cache](/coprocessor-cache.md) feature.
 
 ### `capacity-mb`
 
@@ -828,7 +836,7 @@ Configuration related to the status of TiDB service.
 ### `record-db-label`
 
 - Determines whether to transmit the database-related QPS metrics to Prometheus.
-- Supports more metircs types than `record-db-qps`, for example, duration and statements.
+- Supports more metrics types than `record-db-qps`, for example, duration and statements.
 - Default value: `false`
 
 ## pessimistic-txn

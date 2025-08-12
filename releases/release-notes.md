@@ -14,6 +14,7 @@ To learn about the support timelines for Long-Term Support (LTS) versions of TiD
 
 ## 8.5
 
+- [8.5.2](/releases/release-8.5.2.md): 2025-06-12
 - [8.5.1](/releases/release-8.5.1.md): 2025-01-17
 - [8.5.0](/releases/release-8.5.0.md): 2024-12-19
 
@@ -45,6 +46,7 @@ To learn about the support timelines for Long-Term Support (LTS) versions of TiD
 
 ## 7.5
 
+- [7.5.6](/releases/release-7.5.6.md): 2025-03-14
 - [7.5.5](/releases/release-7.5.5.md): 2024-12-31
 - [7.5.4](/releases/release-7.5.4.md): 2024-10-15
 - [7.5.3](/releases/release-7.5.3.md): 2024-08-05
@@ -84,6 +86,7 @@ To learn about the support timelines for Long-Term Support (LTS) versions of TiD
 
 ## 6.5
 
+- [6.5.12](/releases/release-6.5.12.md): 2025-02-27
 - [6.5.11](/releases/release-6.5.11.md): 2024-09-20
 - [6.5.10](/releases/release-6.5.10.md): 2024-06-20
 - [6.5.9](/releases/release-6.5.9.md): 2024-04-12

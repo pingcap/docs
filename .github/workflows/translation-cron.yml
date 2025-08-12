@@ -1,0 +1,115 @@
+name: Translation Cron
+
+on:
+  schedule:
+    # every Wednesday at 11:00 AM
+    - cron: "0 11 * * 3"
+  workflow_dispatch:
+
+env:
+  LTS_BRANCH: i18n-ja-release-8.5
+  CLOUD_BRANCH: i18n-ja-release-8.5
+
+jobs:
+  dispatch-translation-zh:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    steps:
+      - name: Dispatch translation-zh workflow
+        run: |
+          curl \
+          -X POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: token ${{ github.token }}" \
+          https://api.github.com/repos/${{ github.repository }}/actions/workflows/translation-zh.yaml/dispatches \
+          -d '{"ref":"master"}'
+
+  # build a matrix of branches to translate, including LTS and Cloud
+  build-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - id: set-matrix
+        run: echo "matrix={\"include\":[{\"name\":\"LTS\",\"value\":\"${{ env.LTS_BRANCH }}\"},{\"name\":\"Cloud\",\"value\":\"${{ env.CLOUD_BRANCH }}\"}]}" >> $GITHUB_OUTPUT
+
+  translate-ja:
+    needs: build-matrix
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJson(needs.build-matrix.outputs.matrix) }}
+    continue-on-error: true
+
+    steps:
+      # skip the duplicate matrix job once if the LTS and Cloud branches are the same
+      - name: Skip duplicate branch
+        if: ${{ matrix.name == 'LTS' && env.LTS_BRANCH == env.CLOUD_BRANCH }}
+        run: |
+          echo "Skipping duplicate branch ${{ matrix.value }}"
+          exit 1
+
+      - uses: actions/checkout@v4
+        name: Download translator repo
+        with:
+          repository: "shczhen/markdown-translator"
+          path: "markdown-translator"
+      - uses: actions/checkout@v4
+        name: Download docs repo and specified branch
+        with:
+          ref: "${{ matrix.value }}"
+          path: "docs"
+      - uses: actions/setup-node@v4
+        name: Setup node 18
+        with:
+          node-version: 18
+
+      - run: |
+          sudo apt install tree -y
+
+      - name: Download files by comparing commits
+        run: |
+          export GH_TOKEN=${{github.token}}
+          cd docs
+          npm i
+          node scripts/filterUpdateFiles.js
+          tree tmp
+          cd ..
+      - name: Copy new files to translator folder
+        run: |
+          cp -r docs/tmp markdown-translator/markdowns
+      - name: Copy variables.json to translator folder
+        run: |
+          cp docs/tmp/variables.json docs/variables.json || true
+      - name: Config and translate
+        run: |
+          cd markdown-translator
+          echo ${{secrets.GCP_KEY}} | base64 --decode >> key.json
+          export GOOGLE_APPLICATION_CREDENTIALS=key.json
+          export PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
+          export GLOSSARY_ID=${{ secrets.GCP_GLOSSARY_ID }}
+          yarn
+          node src/index.js
+          cd ..
+      - name: Copy translated files to docs repo
+        run: |
+          cp -r markdown-translator/output/markdowns/* docs/
+
+      - name: Git commit and push
+        run: |
+          cd docs
+          git status
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "update translated files"
+          git push
+
+      - name: trigger docs-staging workflow
+        run: |
+          curl \
+          -X POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: token ${{ secrets.DOCS_STAGING }}" \
+          https://api.github.com/repos/pingcap/docs-staging/actions/workflows/update.yml/dispatches \
+          -d '{"ref":"main","inputs":{"full": "false", "repo":"${{ github.repository }}","branch":"${{ matrix.value }}"}}'

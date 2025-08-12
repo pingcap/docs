@@ -5,13 +5,13 @@ summary: Learn the definitions, rules, and guidelines in table creation.
 
 # Create a Table
 
-This document introduces how to create tables using the SQL statement and the related best practices. An example of the TiDB-based [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application) is provided to illustrate the best practices.
+This document introduces how to create tables using the SQL statement and the related best practices. An example of the TiDB-based [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application is provided to illustrate the best practices.
 
 ## Before you start
 
 Before reading this document, make sure that the following tasks are completed:
 
-- [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
 - [Create a Database](/develop/dev-guide-create-database.md).
 
@@ -292,7 +292,7 @@ ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 
 > **Note:**
 >
-> If your cluster does not contain **TiFlash** nodes, this SQL statement will report an error: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`. You can use [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-serverless-cluster) to create a TiDB Cloud Serverless cluster that includes **TiFlash**.
+> If your cluster does not contain **TiFlash** nodes, this SQL statement will report an error: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`. You can use [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-cluster) to create a {{{ .starter }}} cluster that includes **TiFlash**.
 
 Then you can go on to perform the following query:
 

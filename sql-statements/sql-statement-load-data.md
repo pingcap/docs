@@ -17,6 +17,14 @@ Starting from TiDB v7.0.0, the `LOAD DATA` SQL statement supports the following 
 >
 > The new parameter `FIELDS DEFINED NULL BY` and support for importing data from S3 and GCS are experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> For the `LOAD DATA INFILE` statement, TiDB Cloud Dedicated supports `LOAD DATA LOCAL INFILE`, and `LOAD DATA INFILE` from Amazon S3 or Google Cloud Storage, while {{{ .starter }}} only supports `LOAD DATA LOCAL INFILE`.
+
+</CustomContent>
+
 ## Synopsis
 
 ```ebnf+diagram
@@ -40,7 +48,7 @@ You can use `LOCAL` to specify data files on the client to be imported, where th
 
 If you are using TiDB Cloud, to use the `LOAD DATA` statement to load local data files, you need to add the `--local-infile` option to the connection string when you connect to TiDB Cloud. 
 
-- The following is an example connection string for TiDB Cloud Serverless:
+- The following is an example connection string for {{{ .starter }}}:
 
     ```
     mysql --connect-timeout 15 -u '<user_name>' -h <host_name> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p<your_password> --local-infile
@@ -144,6 +152,21 @@ LOAD DATA LOCAL INFILE '/mnt/evo970/data-sets/bikeshare-data/2017Q4-capitalbikes
 ```
 
 In the above example, `x'2c'` is the hexadecimal representation of the `,` character, and `b'100010'` is the binary representation of the `"` character.
+
+<CustomContent platform="tidb-cloud">
+
+The following example shows how to import data into a TiDB Cloud Dedicated cluster from Amazon S3 using the `LOAD DATA INFILE` statement:
+
+```sql
+LOAD DATA INFILE 's3://<your-bucket-name>/your-file.csv?role_arn=<The ARN of the IAM role you created for TiDB Cloud import>&external_id=<TiDB Cloud external ID (optional)>'
+INTO TABLE <your-db-name>.<your-table-name>
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
+```
+
+</CustomContent>
 
 ## MySQL compatibility
 
