@@ -37,12 +37,9 @@ For applications experiencing growing workloads and needing scalability in real 
 {{{ .essential }}} offers two types of high availability to address varying operational requirements.
 
 - By default, clusters utilizing the Zonal High Availability option have all components located within the same availability zone, which results in lower network latency.
-
-    ![{{{ .essential }}} zonal high availability](/media/tidb-cloud/serverless-zonal-high-avaliability-aws.png)
-
 - For applications that require maximum infrastructure isolation and redundancy, the Regional High Availability option distributes nodes across multiple availability zones.
 
-    ![{{{ .essential }}} regional high availability](/media/tidb-cloud/serverless-regional-high-avaliability-aws.png)
+For more information, see [High Availability in {{{ .starter }}} and Essential](/tidb-cloud/serverless-high-availability.md).
 
 ## TiDB Cloud Dedicated
 
