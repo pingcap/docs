@@ -2050,11 +2050,7 @@ Configuration items related to Raft Engine.
 ### `batch-compression-threshold`
 
 + Specifies the threshold size of a log batch. A log batch larger than this configuration is compressed. If you set this configuration item to `0`, compression is disabled.
-<<<<<<< HEAD
-+ Default value: `"4KiB"`. Before v8.1.0, the default value is `"8MiB"`.
-=======
 + Default value: `"4KiB"`. Before v8.1.0, the default value is `"8KiB"`.
->>>>>>> e5bd4210cd (tikiv: change default value of `batch-compression-threshold` from `"8KiB"` to `"4KiB"` (#21567) (#21569))
 
 ### `bytes-per-sync`
 
