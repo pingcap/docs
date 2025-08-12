@@ -12,7 +12,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Rename "TiDB Cloud Serverless" to "TiDB Cloud Starter".
+- Rename "TiDB Cloud Serverless" to "**TiDB Cloud Starter**".
 
     The auto-scaling entry plan is now named "TiDB Cloud Starter" to better reflect its role for new users. All features, pricing, and the free usage quota remain unchanged.
 
