@@ -31,6 +31,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Optimize the plan construction process for IndexScan by reducing `fmt.Sprintf()` calls [#56649](https://github.com/pingcap/tidb/issues/56649) @[crazycs520](https://github.com/crazycs520) <!--tw@lilin90: the following 2 notes-->
     - Add monitoring metrics for the merge sort stage when using Global Sort with indexes [#61025](https://github.com/pingcap/tidb/issues/61025) @[fzzf678](https://github.com/fzzf678)
     - Remove redundant log entries when the `IndexLookup` operator encounters a `context canceled` error [#61072](https://github.com/pingcap/tidb/issues/61072) @[yibin87](https://github.com/yibin87)
+    - Improve the performance when `tidb_replica_read` is set to `closest-adaptive` [#61745](https://github.com/pingcap/tidb/issues/61745) @[you06](https://github.com/you06)
+    - Reduce operational costs by decreasing the amount of monitoring metrics data in large-scale clusters [#59990](https://github.com/pingcap/tidb/issues/59990) @[zimulala](https://github.com/zimulala)
 
 + TiKV <!--tw@Oreoxmt: 8 notes-->
 
@@ -94,6 +96,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Fix the issue that the returned type of `blob` in the network protocol is inconsistent with MySQL [#60195](https://github.com/pingcap/tidb/issues/60195) @[dveeden](https://github.com/dveeden)
     - Fix the issue that the length returned by `CAST()` is incompatible with MySQL [#61350](https://github.com/pingcap/tidb/issues/61350) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that the comparison behavior of `latin1_bin` differs from that of `utf8mb4_bin` and `utf8_bin` [#60701](https://github.com/pingcap/tidb/issues/60701) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that pessimistic locks might remain when a query is terminated [#61454](https://github.com/pingcap/tidb/issues/61454) @[zyguan](https://github.com/zyguan)
+    - Fix the issue that an error occurs when TiDB executes large queries due to loading too many Regions from PD in a single request [#1704](https://github.com/tikv/client-go/issues/1704) @[you06](https://github.com/you06)
 
 + TiKV <!--tw@Oreoxmt: 6 notes-->
 
