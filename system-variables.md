@@ -3932,7 +3932,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 - Type: Float
 - Range: `[0, 18446744073709551615]`
 - Default value: `3.0`
-- Indicates the CPU cost of starting a Golang goroutine in TiDB. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+- Indicates the CPU cost of starting a Golang goroutine in TiDB. This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_copcpu_factor
 
@@ -3942,7 +3942,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 - Type: Float
 - Range: `[0, 18446744073709551615]`
 - Default value: `3.0`
-- Indicates the CPU cost for TiKV Coprocessor to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+- Indicates the CPU cost for TiKV Coprocessor to process one row. This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_correlation_exp_factor
 
@@ -3976,7 +3976,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `3.0`
-- Indicates the CPU cost for TiDB to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+- Indicates the CPU cost for TiDB to process one row. This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### `tidb_opt_derive_topn` <span class="version-mark">New in v7.0.0</span>
 
@@ -3995,7 +3995,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 - Type: Float
 - Range: `[0, 18446744073709551615]`
 - Default value: `3.0`
-- Indicates the cost for TiKV to scan one row from the disk in descending order. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+- Indicates the cost for TiKV to scan one row from the disk in descending order. This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_disk_factor
 
@@ -4005,7 +4005,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 - Type: Float
 - Range: `[0, 18446744073709551615]`
 - Default value: `1.5`
-- Indicates the I/O cost for TiDB to read or write one byte of data from or to the temporary disk. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+- Indicates the I/O cost for TiDB to read or write one byte of data from or to the temporary disk. This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_distinct_agg_push_down
 
@@ -4210,7 +4210,7 @@ mysql> desc select count(distinct a) from test.t;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `0.001`
-- Indicates the memory cost for TiDB to store one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+- Indicates the memory cost for TiDB to store one row. This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_mpp_outer_join_fixed_build_side <span class="version-mark">New in v5.1.0</span>
 
@@ -4229,7 +4229,7 @@ mysql> desc select count(distinct a) from test.t;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.0`
-- Indicates the net cost of transferring 1 byte of data through the network. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+- Indicates the net cost of transferring 1 byte of data through the network. This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_objective <span class="version-mark">New in v7.4.0</span>
 
@@ -4633,7 +4633,7 @@ SHOW WARNINGS;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.5`
-- Indicates the cost for TiKV to scan one row of data from the disk in ascending order. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+- Indicates the cost for TiKV to scan one row of data from the disk in ascending order. This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_seek_factor
 
@@ -4643,7 +4643,7 @@ SHOW WARNINGS;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `20`
-- Indicates the start-up cost for TiDB to request data from TiKV. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+- Indicates the start-up cost for TiDB to request data from TiKV. This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_skew_distinct_agg <span class="version-mark">New in v6.2.0</span>
 
@@ -4714,7 +4714,7 @@ SHOW WARNINGS;
 
 > **Warning:**
 >
-> This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 - Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -4726,7 +4726,7 @@ SHOW WARNINGS;
 
 > **Warning:**
 >
-> This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 - Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -4738,7 +4738,7 @@ SHOW WARNINGS;
 
 > **Warning:**
 >
-> This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 - Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -4750,7 +4750,7 @@ SHOW WARNINGS;
 
 > **Warning:**
 >
-> This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 - Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -4762,7 +4762,7 @@ SHOW WARNINGS;
 
 > **Warning:**
 >
-> This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 - Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -4774,7 +4774,7 @@ SHOW WARNINGS;
 
 > **Warning:**
 >
-> This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 - Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -4786,7 +4786,7 @@ SHOW WARNINGS;
 
 > **Warning:**
 >
-> This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 - Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -4798,7 +4798,7 @@ SHOW WARNINGS;
 
 > **Warning:**
 >
-> This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 - Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -4810,7 +4810,7 @@ SHOW WARNINGS;
 
 > **Warning:**
 >
-> This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 - Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -4822,7 +4822,7 @@ SHOW WARNINGS;
 
 > **Warning:**
 >
-> This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 - Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -4834,7 +4834,7 @@ SHOW WARNINGS;
 
 > **Warning:**
 >
-> This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 - Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -4846,7 +4846,7 @@ SHOW WARNINGS;
 
 > **Warning:**
 >
-> This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 - Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -4858,7 +4858,7 @@ SHOW WARNINGS;
 
 > **Warning:**
 >
-> This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 - Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -4870,7 +4870,7 @@ SHOW WARNINGS;
 
 > **Warning:**
 >
-> This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 - Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -4882,7 +4882,7 @@ SHOW WARNINGS;
 
 > **Warning:**
 >
-> This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 - Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -4894,7 +4894,7 @@ SHOW WARNINGS;
 
 > **Warning:**
 >
-> This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 - Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
