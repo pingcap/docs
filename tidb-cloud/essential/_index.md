@@ -107,9 +107,9 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 <LearningPath label="计费" icon="cloud2">
 
-[Pricing](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#pricing-for-starter/?plan=essential)
+[定价](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#pricing-for-starter/?plan=essential)
 
-[Invoices](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#invoices/?plan=essential)
+[发票](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#invoices/?plan=essential)
 
 [Credits](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#credits/?plan=essential)
 

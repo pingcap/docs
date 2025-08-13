@@ -86,7 +86,6 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 </LearningPath>
 
-
 <LearningPath label="调优" icon="tidb-cloud-tune">
 
 [调优概览](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-tune-performance-overview)
@@ -121,7 +120,7 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 [发票](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing#invoices)
 
-[积分](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing#credits)
+[Credits](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing#credits)
 
 </LearningPath>
 
