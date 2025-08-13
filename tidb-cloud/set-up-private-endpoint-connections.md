@@ -9,7 +9,7 @@ summary: AWS を使用してプライベートエンドポイント経由でTiDB
 
 > **ヒント：**
 >
-> -   プライベート エンドポイント経由でTiDB Cloud Serverless クラスターに接続する方法については、 [プライベートエンドポイント経由でTiDB Cloud Serverless に接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)参照してください。
+> -   AWS PrivateLink 経由でTiDB Cloud Starter クラスターに接続する方法については、 [AWS PrivateLink 経由でTiDB Cloud Starter に接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)参照してください。
 > -   Azure のプライベート エンドポイント経由でTiDB Cloud Dedicated クラスターに接続する方法については、 [Azure Private Link 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)参照してください。
 > -   Google Cloud のプライベート エンドポイント経由でTiDB Cloud Dedicated クラスタに接続する方法については、 [Google Cloud Private Service Connect 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)ご覧ください。
 

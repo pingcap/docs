@@ -13,7 +13,7 @@ summary: TiDB Cloudに関するよくある質問 (FAQ) について説明しま
 
 ### TiDB Cloudとは何ですか? {#what-is-tidb-cloud}
 
-TiDB Cloudは、直感的なコンソールから操作できるフルマネージドクラウドインスタンスを提供することで、TiDBクラスタの導入、管理、保守をさらに簡素化します。Amazon Web Services（AWS）、Google Cloud、Microsoft Azureに簡単に導入でき、ミッションクリティカルなアプリケーションを迅速に構築できます。
+TiDB Cloudは、直感的なコンソールから操作できるフルマネージドクラウドインスタンスを提供することで、TiDBクラスタの導入、管理、保守をさらに簡素化します。Amazon Web Services（AWS）、Google Cloud、Microsoft Azure、Alibaba Cloudに簡単に導入でき、ミッションクリティカルなアプリケーションを迅速に構築できます。
 
 TiDB Cloud は、トレーニングをほとんど受けていない、あるいは全く受けていない開発者やデータベース管理者でも、かつては複雑だったインフラストラクチャ管理やクラスタの導入といったタスクを容易に処理できるようにし、データベースの複雑さに煩わされることなく、アプリケーションに集中できるようにします。また、ボタンをクリックするだけで TiDB クラスタをスケールイン/スケールアウトできるため、必要な量と期間だけデータベースをプロビジョニングできるため、高価なリソースを無駄にすることがなくなります。
 
@@ -33,7 +33,7 @@ MySQL クライアントまたはドライバーでサポートされている�
 
 ### TiDB Cloud はどこで実行できますか? {#where-can-i-run-tidb-cloud}
 
-TiDB Cloudは現在、Amazon Web Services (AWS)、Google Cloud、Microsoft Azure で利用できます。
+TiDB Cloudは現在、Amazon Web Services (AWS)、Google Cloud、Microsoft Azure、Alibaba Cloud で利用できます。
 
 ### TiDB Cloud は、異なるクラウド サービス プロバイダー間の VPC ピアリングをサポートしていますか? {#does-tidb-cloud-support-vpc-peering-between-different-cloud-service-providers}
 
@@ -42,7 +42,7 @@ TiDB Cloudは現在、Amazon Web Services (AWS)、Google Cloud、Microsoft Azure
 ### TiDB Cloudではどのバージョンの TiDB がサポートされていますか? {#what-versions-of-tidb-are-supported-on-tidb-cloud}
 
 -   新しいTiDB Cloud Dedicated クラスターの場合、2025 年 7 月 15 日以降、デフォルトの TiDB バージョンは[バージョン8.5.2](https://docs.pingcap.com/tidb/v8.5/release-8.5.2)なります。
--   TiDB Cloud Serverless クラスターの場合、2025 年 4 月 22 日から TiDB バージョンは[バージョン7.5.2](https://docs.pingcap.com/tidb/v7.5/release-7.5.2)なります。
+-   TiDB Cloud Starter およびTiDB Cloud Essential クラスターの場合、2025 年 4 月 22 日から TiDB バージョンは[バージョン7.5.2](https://docs.pingcap.com/tidb/v7.5/release-7.5.2)なります。
 
 詳細については[TiDB Cloudリリースノート](/tidb-cloud/tidb-cloud-release-notes.md)参照してください。
 
@@ -64,7 +64,7 @@ TiDB Cloudについて学ぶ最良の方法は、ステップバイステップ�
 
 -   [TiDB Cloudの紹介](/tidb-cloud/tidb-cloud-intro.md)
 -   [始める](/tidb-cloud/tidb-cloud-quickstart.md)
--   [TiDB Cloudサーバーレスクラスタを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
+-   [TiDB Cloud StarterまたはEssential クラスタを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
 
 ### クラスターを削除するときに<code>XXX&#39;s Org/default project/Cluster0</code>何を参照しますか? {#what-does-code-xxx-s-org-default-project-cluster0-code-refer-to-when-deleting-a-cluster}
 
@@ -108,7 +108,7 @@ TiDBはMySQLとの互換性が非常に高く、MySQL互換データベースで
 
 ### TiDB Cloud は増分バックアップをサポートしていますか? {#does-tidb-cloud-support-incremental-backups}
 
-いいえ。クラスターのバックアップ保持期間内の任意の時点にデータを復元する必要がある場合は、PITR（ポイントインタイムリカバリ）を使用できます。詳細については、 [TiDB Cloud Dedicated クラスタで PITR を使用する](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)または[TiDB Cloud Serverless クラスターで PITR を使用する](/tidb-cloud/backup-and-restore-serverless.md#restore)ご覧ください。
+いいえ。クラスターのバックアップ保持期間内の任意の時点にデータを復元する必要がある場合は、PITR（ポイントインタイムリカバリ）を使用できます。詳細については、 [TiDB Cloud Dedicated クラスタで PITR を使用する](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)または[TiDB Cloud Essential クラスタで PITR を使用する](/tidb-cloud/backup-and-restore-serverless.md#restore)ご覧ください。
 
 ## HTAPに関するよくある質問 {#htap-faqs}
 
@@ -153,7 +153,7 @@ TiDB Cloud はTLS 1.2 または TLS 1.3 をサポートしています。
 
 ### TiDB クラスターは安全ですか? {#is-my-tidb-cluster-secure}
 
-TiDB Cloudでは、ニーズに応じてTiDB Cloud Dedicated クラスターまたはTiDB Cloud Serverless クラスターのいずれかを使用できます。
+TiDB Cloudでは、ニーズに応じて、 TiDB Cloud Dedicated クラスター、 TiDB Cloud Starter クラスター、またはTiDB Cloud Essential クラスターを使用できます。
 
 TiDB Cloud Dedicated クラスターの場合、 TiDB Cloud は次の対策でクラスターのセキュリティを確保します。
 
@@ -162,7 +162,7 @@ TiDB Cloud Dedicated クラスターの場合、 TiDB Cloud は次の対策で�
 -   転送中のクラスター データを暗号化するために、各クラスターのサーバー側 TLS 証明書とコンポーネント レベルの TLS 証明書を作成します。
 -   許可された送信元 IP アドレスのみがクラスターにアクセスできるように、各クラスターに IP アクセス ルールを指定します。
 
-TiDB Cloud Serverless クラスターの場合、 TiDB Cloud は次の対策でクラスターのセキュリティを確保します。
+TiDB Cloud Starter およびTiDB Cloud Essential クラスターの場合、 TiDB Cloud は次の対策でクラスターのセキュリティを確保します。
 
 -   各クラスターに独立したサブアカウントを作成します。
 -   外部接続を分離するためのファイアウォール ルールを設定します。
@@ -184,14 +184,14 @@ TiDB Cloud Dedicated クラスターの場合、クラスターに接続する�
 
 </div>
 
-<div label="TiDB Cloud Serverless">
+<div label="TiDB Cloud Starter/Essential">
 
-TiDB Cloud Serverless クラスターの場合、クラスターに接続する手順は次のように簡略化されます。
+TiDB Cloud Starter または Essential クラスターの場合、クラスターに接続する手順は次のように簡略化されます。
 
 1.  データベース ユーザーとログイン資格情報を設定します。
 2.  SQL クライアントを選択し、 TiDB Cloud UI に表示される自動生成された接続文字列を取得し、その文字列を使用して SQL クライアント経由でクラスターに接続します。
 
-詳細については[TiDB Cloudサーバーレスクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)参照してください。
+詳細については[TiDB Cloudクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)参照してください。
 
 </div>
 </SimpleTab>

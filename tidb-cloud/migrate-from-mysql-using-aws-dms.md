@@ -186,8 +186,8 @@ AWS DMS は、リレーショナルデータベース、データウェアハウ
 
 ## 参照 {#see-also}
 
--   AWS DMS をTiDB Cloud Serverless またはTiDB Cloud Dedicated に接続する方法の詳細については、 [AWS DMS をTiDB Cloudクラスターに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)参照してください。
+-   AWS DMS をTiDB Cloudクラスターに接続する方法の詳細については、 [AWS DMS をTiDB Cloudクラスターに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)参照してください。
 
 -   Aurora MySQL や Amazon Relational Database Service (RDS) などの MySQL 互換データベースからTiDB Cloudに移行する場合は、 [TiDB Cloud上のデータ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)使用することをお勧めします。
 
--   AWS DMS を使用して Amazon RDS for Oracle からTiDB Cloud Serverless に移行する場合は、 [AWS DMS を使用して Amazon RDS for Oracle からTiDB Cloud Serverless に移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)参照してください。
+-   AWS DMS を使用して Amazon RDS for Oracle からTiDB Cloudに移行する場合は、 [AWS DMS を使用して Amazon RDS for Oracle からTiDB Cloudに移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)参照してください。

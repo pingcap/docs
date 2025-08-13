@@ -7,7 +7,11 @@ summary: n8n でのTiDB Cloudノードの使用方法を学習します。
 
 [n8n](https://n8n.io/)は拡張可能なワークフロー自動化ツールです。2 [フェアコード](https://faircode.io/)配布モデルにより、n8nは常にソースコードを公開し、セルフホストが可能になり、カスタム関数、ロジック、アプリを追加できるようになります。
 
-このドキュメントでは、 TiDB Cloud Serverless クラスターを作成し、Hacker News RSS を収集して TiDB に保存し、ブリーフィング メールを送信するという自動ワークフローの構築方法を紹介します。
+このドキュメントでは、 TiDB Cloud Starter クラスターを作成し、Hacker News RSS を収集して TiDB に保存し、ブリーフィング メールを送信するという自動ワークフローの構築方法を紹介します。
+
+> **注記：**
+>
+> このドキュメントの手順は、 TiDB Cloud Starter クラスターに加えて、 TiDB Cloud Essential クラスターでも機能します。
 
 ## 前提条件: TiDB Cloud APIキーを取得する {#prerequisites-get-tidb-cloud-api-key}
 
@@ -76,9 +80,9 @@ TiDB Cloudノードはnpmリポジトリで`n8n-nodes-tidb-cloud`名前です。
 
 ![img](/media/tidb-cloud/integration-n8n-workflow-rss.jpg)
 
-### （オプション） TiDB Cloud Serverless クラスターを作成する {#optional-create-a-tidb-cloud-serverless-cluster}
+### (オプション) TiDB Cloud Starter クラスターを作成する {#optional-create-a-tidb-cloud-starter-cluster}
 
-TiDB Cloud Serverless クラスターをお持ちでない場合は、このノードを使用して作成できます。そうでない場合は、この操作をスキップしてください。
+TiDB Cloud Starter クラスターをお持ちでない場合は、このノードを使用して作成できます。そうでない場合は、この操作をスキップしてください。
 
 1.  **ワークフロー**パネルに移動し、**ワークフローの追加を**クリックします。
 2.  新しいワークフロー ワークスペースで、右上隅の**+**をクリックし、 **[すべての**フィールド] を選択します。
@@ -93,7 +97,7 @@ TiDB Cloud Serverless クラスターをお持ちでない場合は、このノ�
 
 > **注記：**
 >
-> 新しいTiDB Cloud Serverless クラスターを作成するには数秒かかります。
+> 新しいTiDB Cloud Starter クラスターを作成するには数秒かかります。
 
 ### ワークフローを作成する {#create-a-workflow}
 
@@ -212,7 +216,7 @@ TiDB Cloud Serverless クラスターをお持ちでない場合は、このノ�
 
 ワークフローを構築した後、 **「ワークフローの実行」**をクリックしてテスト実行できます。
 
-ワークフローが期待通りに実行されると、Hacker Newsのブリーフィングメールが届きます。これらのニュースコンテンツはTiDB Cloud Serverlessクラスターに記録されるため、失われる心配はありません。
+ワークフローが期待通りに実行されると、Hacker Newsのブリーフィングメールが届きます。これらのニュースコンテンツはTiDB Cloud Starterクラスターに記録されるため、失われる心配はありません。
 
 **ワークフロー**パネルでこのワークフローを有効化できるようになりました。このワークフローを使えば、Hacker Newsのトップページ記事を毎日取得できるようになります。
 
@@ -222,7 +226,7 @@ TiDB Cloud Serverless クラスターをお持ちでない場合は、このノ�
 
 TiDB Cloudノードは[通常ノード](https://docs.n8n.io/workflows/nodes/#regular-nodes)として機能し、次の 5 つの操作のみをサポートします。
 
--   **サーバーレスクラスタの作成**: TiDB Cloud Serverless クラスターを作成します。
+-   **サーバーレスクラスタの作成**: TiDB Cloud Starter クラスターを作成します。
 -   **SQL の実行**: TiDB で SQL ステートメントを実行します。
 -   **削除**: TiDB 内の行を削除します。
 -   **挿入**: TiDB に行を挿入します。

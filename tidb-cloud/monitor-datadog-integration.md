@@ -24,7 +24,7 @@ TiDB Cloud は、 2022 年 3 月 4 日から Datadog 統合 (ベータ版) を�
 
 ## 制限 {#limitation}
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでは Datadog 統合を使用できません。
+-   [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)または[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスターでは Datadog 統合を使用できません。
 
 -   クラスターのステータスが**CREATING** 、 **RESTORING** 、 **PAUSED** 、または**RESUMING**の場合、Datadog 統合は使用できません。
 
@@ -77,44 +77,24 @@ TiDB Cloud は、 2022 年 3 月 4 日から Datadog 統合 (ベータ版) を�
 
 ### ステップ2. DatadogにTiDB Cloud統合をインストールする {#step-2-install-tidb-cloud-integration-in-datadog}
 
-[Datadog統合バージョン](#datadog-integration-version)に応じて手順は異なります。
-
-<SimpleTab>
-<div label="Datadog integration (Preview)">
-
-保留中の[広報](https://github.com/DataDog/integrations-extras/pull/2751) Datadogによってマージされると、新しいTiDB CloudダッシュボードがDatadogで利用可能になります。それ以前に、以下の手順でダッシュボードをDatadogに手動でインポートできます。
-
-1.  新しいダッシュボード[ここ](https://github.com/pingcap/diag/blob/integration/integration/dashboards/datadog-dashboard.json)の JSON ファイルをダウンロードします。
-2.  [データドッグ](https://app.datadoghq.com)にログインし、左側のナビゲーション ペインで**[ダッシュボード]**をクリックして、右上隅の**[+ 新しいダッシュボード]**をクリックします。
-3.  表示されたダイアログで、 **「新しいダッシュボード」**をクリックして、新しい空のダッシュボードを作成します。
-4.  新しく作成されたダッシュボード ページで、右上隅の**[構成]**をクリックし、表示されたペインの一番下までスクロールして、 **[ダッシュボード JSON のインポート...]**をクリックします。
-5.  表示されたダイアログで、ダウンロードした JSON ファイルをアップロードしてダッシュボードのセットアップを完了します。
-
-</div>
-<div label="Datadog integration (Beta)">
+> **注記：**
+>
+> DatadogにTiDB Cloud統合を既にインストールしている場合は、このセクションの以下の手順をスキップできます。ダッシュボード[**TiDB Cloudダイナミック トラッカー**](https://app.datadoghq.com/dash/integration/32021/tidb-cloud-dynamic-tracker)または[**TiDB Cloudクラスタの概要**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview) 、Datadog [**ダッシュボードリスト**](https://app.datadoghq.com/dashboard/lists)で自動的に利用可能になります。
 
 1.  [データドッグ](https://app.datadoghq.com)にログインします。
 2.  Datadog の[**TiDB Cloud統合**ページ](https://app.datadoghq.com/account/settings#integrations/tidb-cloud)へ進みます。
-3.  **「コンフィグレーション」**タブで、 **「統合をインストール」を**クリックします。 [**TiDB Cloudクラスタの概要**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview)ダッシュボードが[**ダッシュボードリスト**](https://app.datadoghq.com/dashboard/lists)に表示されます。
+3.  **[コンフィグレーション]**タブで、 **[統合のインストール]を**クリックします。
 
-</div>
-</SimpleTab>
+    -   Datadog 統合 (プレビュー) の場合、 [**TiDB Cloudダイナミック トラッカー**](https://app.datadoghq.com/dash/integration/32021/tidb-cloud-dynamic-tracker)ダッシュボードが[**ダッシュボードリスト**](https://app.datadoghq.com/dashboard/lists)に表示されます。
+    -   Datadog 統合 (ベータ版) の場合、 [**TiDB Cloudクラスタの概要**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview)ダッシュボードが[**ダッシュボードリスト**](https://app.datadoghq.com/dashboard/lists)に表示されます。
 
 ## あらかじめ構築されたダッシュボードをビュー {#view-the-pre-built-dashboard}
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、 **「統合」**ページに移動します。
-2.  [Datadog統合バージョン](#datadog-integration-version)に応じて、次のいずれかを実行します。
+2.  **Datadog**セクションの**ダッシュボード**リンクをクリックします。
 
-    -   Datadog 統合 (ベータ版) の場合は、 **Datadog**セクションの**ダッシュボード**リンクをクリックします。
-
-    -   Datadog 統合 (プレビュー) の場合は、 **Datadog**セクションの**[ダッシュボード]**リンクをクリックし、開いたページの左側のナビゲーション ペインで**[ダッシュボード] を**クリックしてから、 **[TiDB Cloud Dynamic Tracker]**をクリックして、完全なメトリックを含む新しいダッシュボードを表示します。
-
-    > **注記：**
-    >
-    > Datadog 統合 (プレビュー) については、次の点に注意してください。
-    >
-    > -   保留中の[広報](https://github.com/DataDog/integrations-extras/pull/2751) Datadog によってマージされる前は、**ダッシュボード**リンクは、プレビュー バージョンで導入された最新のメトリックが含まれないレガシー ダッシュボードにリダイレクトされます。
-    > -   保留中の[広報](https://github.com/DataDog/integrations-extras/pull/2751)マージされると、 **Datadog**セクションの**ダッシュボード**リンクが新しいダッシュボードにリダイレクトされます。
+    -   Datadog 統合 (プレビュー) の場合、**ダッシュボード**リンクをクリックすると、プレビュー バージョンで導入された最新のメトリックを含む新しいダッシュボードが開きます。
+    -   Datadog 統合 (ベータ版) の場合、**ダッシュボード**リンクをクリックすると、プレビュー バージョンで導入された最新のメトリックが含まれない従来のダッシュボードが開きます。
 
 ## Datadogで利用可能なメトリクス {#metrics-available-to-datadog}
 

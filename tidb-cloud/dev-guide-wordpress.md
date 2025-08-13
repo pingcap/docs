@@ -1,27 +1,27 @@
 ---
-title: Connect to TiDB Cloud Serverless with WordPress
-summary: TiDB Cloud Serverlessを使ってWordPressを実行する方法を学びましょう。このチュートリアルでは、WordPress + TiDB Cloud Serverlessを数分で実行するための手順をステップバイステップで説明します。
+title: Connect to TiDB Cloud Starter with WordPress
+summary: TiDB Cloud Starterを使ってWordPressを実行する方法を学びましょう。このチュートリアルでは、WordPress + TiDB Cloud Starterを数分で実行するための手順をステップバイステップで説明します。
 ---
 
-# WordPressでTiDB Cloud Serverlessに接続する {#connect-to-tidb-cloud-serverless-with-wordpress}
+# WordPressでTiDB Cloud Starterに接続する {#connect-to-tidb-cloud-starter-with-wordpress}
 
-TiDBはMySQL互換データベース、 TiDB Cloud ServerlessはフルマネージドのTiDBサービス、そして[ワードプレス](https://github.com/WordPress)ユーザーがウェブサイトを作成・管理できる無料のオープンソースコンテンツ管理システム（CMS）です。WordPressはPHPで記述されており、MySQLデータベースを使用します。
+TiDBはMySQL互換データベース、 TiDB Cloud StarterはフルマネージドのTiDBサービス、そして[ワードプレス](https://github.com/WordPress)ユーザーがウェブサイトを作成・管理できる無料のオープンソースコンテンツ管理システム（CMS）です。WordPressはPHPで記述されており、MySQLデータベースを使用します。
 
-このチュートリアルでは、 TiDB Cloud Serverless を使用して WordPress を無料で実行する方法を学ぶことができます。
+このチュートリアルでは、 TiDB Cloud Starter を使用して WordPress を無料で実行する方法を学ぶことができます。
 
 > **注記：**
 >
-> このチュートリアルは、 TiDB Cloud Serverless に加えて、 TiDB Cloud Dedicated および TiDB Self-Managed クラスターでも動作します。ただし、コスト効率の観点から、WordPress はTiDB Cloud Serverless で実行することを強くお勧めします。
+> このチュートリアルは、 TiDB Cloud Starterに加えて、 TiDB Cloud Essential、 TiDB Cloud Dedicated、およびTiDB Self-Managedクラスタでも動作します。ただし、コスト効率の観点から、WordPressはTiDB Cloud Starterで実行することを強くお勧めします。
 
 ## 前提条件 {#prerequisites}
 
 このチュートリアルを完了するには、次のものが必要です。
 
--   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがまだない場合は、 [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って独自のTiDB Cloudクラスターを作成してください。
+-   TiDB Cloud Starter クラスター。TiDB Cloud クラスターがまだない場合は、 [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って独自のTiDB Cloudクラスターを作成してください。
 
-## TiDB Cloud ServerlessでWordPressを実行する {#run-wordpress-with-tidb-cloud-serverless}
+## TiDB Cloud StarterでWordPressを実行する {#run-wordpress-with-tidb-cloud-starter}
 
-このセクションでは、 TiDB Cloud Serverless を使用して WordPress を実行する方法を説明します。
+このセクションでは、 TiDB Cloud Starter を使用して WordPress を実行する方法を説明します。
 
 ### ステップ1: WordPressサンプルリポジトリをクローンする {#step-1-clone-the-wordpress-sample-repository}
 
@@ -48,7 +48,7 @@ cd wordpress-tidb-docker
 
 ### ステップ3: 接続情報を構成する {#step-3-configure-connection-information}
 
-TiDB Cloud Serverless への WordPress データベース接続を構成します。
+TiDB Cloud Starter への WordPress データベース接続を構成します。
 
 1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -83,11 +83,11 @@ TiDB Cloud Serverless への WordPress データベース接続を構成しま�
     TIDB_DB_NAME='test'
     ```
 
-    プレースホルダー`{}`は、接続ダイアログで取得した接続パラメータに置き換えてください。デフォルトでは、 TiDB Cloud Serverlessには`test`データベースが付属しています。TiDB TiDB Cloud Serverlessクラスター内に既に別のデータベースを作成している場合は、 `test`データベース名に置き換えてください。
+    プレースホルダー`{}`は、接続ダイアログで取得した接続パラメータに置き換えてください。デフォルトでは、 TiDB Cloud Starterには`test`データベースが付属しています。TiDB TiDB Cloud Starterクラスター内に既に別のデータベースを作成している場合は、 `test`データベース名に置き換えてください。
 
 7.  `.env`ファイルを保存します。
 
-### ステップ4: TiDB Cloud ServerlessでWordPressを起動する {#step-4-start-wordpress-with-tidb-cloud-serverless}
+### ステップ4： TiDB Cloud StarterでWordPressを起動する {#step-4-start-wordpress-with-tidb-cloud-starter}
 
 1.  WordPress を Docker コンテナとして実行するには、次のコマンドを実行します。
 
@@ -95,7 +95,7 @@ TiDB Cloud Serverless への WordPress データベース接続を構成しま�
     docker compose up -d
     ```
 
-2.  ローカル マシンでコンテナーを起動する場合は[ローカルホスト](http://localhost/)にアクセスし、WordPress がリモート マシンで実行されている場合は`http://<your_instance_ip>`アクセスして、WordPress サイトをセットアップします。
+2.  ローカル マシンでコンテナーを起動する場合は[ローカルホスト](http://localhost/)アクセスし、WordPress がリモート マシンで実行されている場合は`http://<your_instance_ip>`アクセスして、WordPress サイトをセットアップします。
 
 ### ステップ5: データベース接続を確認する {#step-5-confirm-the-database-connection}
 

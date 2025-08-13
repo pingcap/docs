@@ -15,7 +15,7 @@ SQLの配置ルールは、SQL文を使用してTiKVクラスター内のデー�
 
 > **注記：**
 >
-> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
+> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 ## 概要 {#overview}
 
@@ -72,13 +72,13 @@ TiDB Cloud Dedicated クラスターの場合、TiKV ノードのラベルは自
 
 ```sql
 SHOW PLACEMENT LABELS;
-+--------+----------------+
-| Key    | Values         |
-+--------+----------------+
-| disk   | ["ssd"]        |
-| region | ["us-east-1"]  |
-| zone   | ["us-east-1a"] |
-+--------+----------------+
++--------+----------------------------+
+| Key    | Values                     |
++--------+----------------------------+
+| disk   | ["ssd"]                    |
+| region | ["us-east-1", "us-west-1"] |
+| zone   | ["us-east-1a"]             |
++--------+----------------------------+
 3 rows in set (0.00 sec)
 ```
 

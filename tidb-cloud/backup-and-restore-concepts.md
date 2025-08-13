@@ -9,11 +9,11 @@ TiDB Cloud のバックアップと復元機能は、クラスター データ�
 
 ## 自動バックアップ {#automatic-backup}
 
-TiDB Cloud Serverless クラスターとTiDB Cloud Dedicated クラスターの両方で、スナップショット バックアップはデフォルトで自動的に作成され、バックアップ保持ポリシーに従って保存されます。
+TiDB Cloudクラスターの場合、スナップショット バックアップはデフォルトで自動的に作成され、バックアップ保持ポリシーに従って保存されます。
 
 詳細については、以下を参照してください。
 
--   [TiDB Cloud Serverless クラスターの自動バックアップ](/tidb-cloud/backup-and-restore-serverless.md#automatic-backups)
+-   [TiDB Cloud Starter およびTiDB Cloud Essential クラスターの自動バックアップ](/tidb-cloud/backup-and-restore-serverless.md#automatic-backups)
 -   [TiDB Cloud Dedicated クラスターの自動バックアップ](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)
 
 ## 手動バックアップ {#manual-backup}
@@ -38,5 +38,6 @@ TiDB Cloud Serverless クラスターとTiDB Cloud Dedicated クラスターの�
 
 ポイントインタイム リストアを実行する場合は、次の点に注意してください。
 
--   TiDB Cloud Serverless クラスターでは、ポイントインタイムリストアはスケーラブルクラスターでのみ利用可能であり、無料クラスターでは利用できません。詳細については、 [復元モード](/tidb-cloud/backup-and-restore-serverless.md#restore-mode)ご覧ください。
+-   TiDB Cloud Starter クラスターでは、ポイントインタイム リストアは使用できません。
+-   TiDB Cloud Essential クラスターでは、過去14日間の任意の時点に復元できます。詳細については、 [復元モード](/tidb-cloud/backup-and-restore-serverless.md#restore-mode)ご覧ください。
 -   TiDB Cloud Dedicated クラスターの場合は、事前に[PITRを有効にする](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)実行する必要があります。

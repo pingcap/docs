@@ -17,7 +17,7 @@ TiDB Cloudは[プロメテウス](https://prometheus.io/) APIエンドポイン�
 
 ## 制限 {#limitation}
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでは Prometheus と Grafana の統合は使用できません。
+-   [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)または[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスターでは Prometheus と Grafana の統合は使用できません。
 
 -   クラスターのステータスが**CREATING** 、 **RESTORING** 、 **PAUSED** 、または**RESUMING**の場合、Prometheus と Grafana の統合は使用できません。
 
@@ -98,14 +98,14 @@ Prometheus は、TiDB クラスターの次のメトリック データを追跡
 | tidbcloud_node_memory_used_bytes                            | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント: `tidb\|tikv\|tiflash`               | TiDB/TiKV/ TiFlashノードの使用メモリバイト                                                                                        |
 | tidbcloud_node_memory_capacity_bytes                        | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント: `tidb\|tikv\|tiflash`               | TiDB/TiKV/ TiFlashノードのメモリ容量バイト                                                                                        |
 | tidbcloud_node_storage_available_bytes                      | ゲージ      | インスタンス: `tidb-0\|tidb-1\|...`<br/>コンポーネント: `tikv\|tiflash`<br/>クラスター名: `<cluster name>`                                      | TiKV/ TiFlashノードで使用可能なディスク容量（バイト単位）                                                                                   |
-| tidbcloud_disk_read_latency                                 | ヒストグラム   | インスタンス: `tidb-0\|tidb-1\|...`<br/>コンポーネント: `tikv\|tiflash`<br/>クラスター名: `<cluster name>`<br/> `device`時`nvme.*\|dm.*`         | storageあたりの読み取りレイテンシー（秒）                                                                                              |
+| tidbcloud_disk_read_latency                                 | ヒストグラム   | インスタンス: `tidb-0\|tidb-1\|...`<br/>コンポーネント: `tikv\|tiflash`<br/>クラスター名: `<cluster name>`<br/> `device`時`nvme.*\|dm.*`         | storageデバイスあたりの読み取りレイテンシー（秒）                                                                                          |
 | tidbcloud_disk_write_latency                                | ヒストグラム   | インスタンス: `tidb-0\|tidb-1\|...`<br/>コンポーネント: `tikv\|tiflash`<br/>クラスター名: `<cluster name>`<br/> `device`時`nvme.*\|dm.*`         | storageデバイスあたりの書き込みレイテンシー（秒）                                                                                          |
 | tidbcloud_kv_request_duration                               | ヒストグラム   | インスタンス: `tidb-0\|tidb-1\|...`<br/>コンポーネント: `tikv`<br/>クラスター名: `<cluster name>`<br/> `type`時`BatchGet\|Commit\|Prewrite\|...` | タイプ別の TiKV リクエストの継続時間（秒）                                                                                              |
 | tidbcloud_component_uptime                                  | ヒストグラム   | インスタンス: `tidb-0\|tidb-1\|...`<br/>コンポーネント: `tidb\|tikv\|tiflash`<br/>クラスター名: `<cluster name>`                                | TiDBコンポーネントの稼働時間（秒）                                                                                                   |
 | tidbcloud_ticdc_owner_resolved_ts_lag                       | ゲージ      | チェンジフィードID: `<changefeed-id>`<br/>クラスター名: `<cluster name>`                                                                   | チェンジフィード所有者の解決されたタイムスタンプの遅延（秒）                                                                                        |
 | tidbcloud_changefeed_status                                 | ゲージ      | チェンジフィードID: `<changefeed-id>`<br/>クラスター名: `<cluster name>`                                                                   | チェンジフィードステータス:<br/> `-1` ：不明<br/>`0` ：正常<br/>`1` : 警告<br/>`2` : 失敗<br/>`3` : 停止<br/>`4` ：終了<br/>`6` ：警告<br/>`7` : その他 |
 | tidbcloud_resource_manager_resource_unit_read_request_unit  | ゲージ      | クラスター名: `<cluster name>`<br/>リソースグループ: `<group-name>`                                                                        | リソースマネージャによって消費される読み取り要求単位                                                                                            |
-| tidbcloud_resource_manager_resource_unit_write_request_unit | ゲージ      | クラスター名: `<cluster name>`<br/>リソースグループ: `<group-name>`                                                                        | リソースマネージャによって消費される書き込み要求単位                                                                                            |
+| tidbcloud_resource_manager_resource_unit_write_request_unit | ゲージ      | クラスター名: `<cluster name>`<br/>リソースグループ: `<group-name>`                                                                        | リソースマネージャによって消費される書き込み要求ユニット                                                                                          |
 
 ## FAQ {#faq}
 

@@ -11,7 +11,7 @@ Chat2Query API には HTTPS 経由でのみアクセスできるため、ネッ�
 
 > **注記：**
 >
-> Chat2Query APIは[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターで利用可能です。3 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでChat2Query APIをご利用になる場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+> Chat2Query APIは、AWSでホストされている[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) （現在はStarter）クラスターでのみご利用いただけます。3 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでChat2Query APIをご利用いただくには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
 ## 始める前に {#before-you-begin}
 
@@ -69,7 +69,7 @@ API キーを作成するには、次の手順を実行します。
 
 > **注記：**
 >
-> Chat2Queryデータアプリには、1日あたり100リクエストのレート制限があります。レート制限を超えた場合、APIは`429`エラーを返します。クォータを増やすには、サポートチームまでお[リクエストを送信する](https://tidb.support.pingcap.com/)ください。
+> Chat2Queryデータアプリには、1日あたり100リクエストのレート制限があります。レート制限を超えた場合、APIは`429`エラーを返します。クォータを増やすには、サポートチームまで[リクエストを送信する](https://tidb.support.pingcap.com/)ください。
 
 各 Chat2Query データ アプリには、次のエンドポイントがあります。
 

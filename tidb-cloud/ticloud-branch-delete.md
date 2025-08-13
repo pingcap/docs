@@ -5,7 +5,7 @@ summary: ticloud serverless branch delete` のリファレンス。
 
 # ticloud サーバーレスブランチの削除 {#ticloud-serverless-branch-delete}
 
-TiDB Cloud Serverless クラスターからブランチを削除します。
+TiDB Cloud Starter またはTiDB Cloud Essential クラスターからブランチを削除します。
 
 ```shell
 ticloud serverless branch delete [flags]
@@ -19,13 +19,13 @@ ticloud serverless branch rm [flags]
 
 ## 例 {#examples}
 
-対話モードでTiDB Cloud Serverless ブランチを削除します。
+対話モードでブランチを削除します。
 
 ```shell
 ticloud serverless branch delete
 ```
 
-非対話型モードでTiDB Cloud Serverless ブランチを削除します。
+非対話型モードでブランチを削除します。
 
 ```shell
 ticloud branch delete --branch-id <branch-id> --cluster-id <cluster-id>

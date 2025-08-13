@@ -8,7 +8,7 @@ aliases: ['/tidb/v8.5/tidb-resource-control/','/tidb/stable/tidb-resource-contro
 
 > **注記：**
 >
-> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
+> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 クラスター管理者は、リソース制御機能を使用して、リソース グループを作成したり、リソース グループのクォータを設定したり、ユーザーをそれらのグループにバインドしたりできます。
 
@@ -69,7 +69,7 @@ TiDBリソース制御機能は、TiDBレイヤーのフロー制御機能とTiK
 > **注記：**
 >
 > -   各書き込み操作は最終的にすべてのレプリカに複製されます（デフォルトでは、TiKV には 3 つのレプリカがあります）。各レプリケーション操作はそれぞれ異なる書き込み操作とみなされます。
-> -   上記の表は、TiDBセルフマネージドクラスターのRU計算に関係するリソースのみを示しており、ネットワークとstorageの消費量は含まれていません。TiDB TiDB Cloud ServerlessのRUについては、 [TiDB Cloud Serverless の価格詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/)参照してください。
+> -   上記の表は、TiDBセルフマネージドクラスターのRU計算に関係するリソースのみを示しており、ネットワークとstorageの消費量は含まれていません。TiDB TiDB Cloud Starter RUについては、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/)参照してください。
 > -   現在、 TiFlashリソース制御では、クエリのパイプライン タスクの実行によって消費される CPU 時間である SQL CPU と、読み取り要求ペイロードのみが考慮されます。
 
 ## リソース制御のパラメータ {#parameters-for-resource-control}
@@ -126,7 +126,7 @@ v7.4.0以降、 TiFlash設定項目`enable_resource_control`デフォルトで�
 -   [実際の作業負荷に基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
 -   [ハードウェアの展開に基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
 
-[リソースマネージャーページ](/dashboard/dashboard-resource-manager.md) TiDB ダッシュボードで確認できます。詳細については[`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#methods-for-estimating-capacity)ご覧ください。
+[リソースマネージャーページ](/dashboard/dashboard-resource-manager.md) TiDBダッシュボードで確認できます。詳細については[`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#methods-for-estimating-capacity)ご覧ください。
 
 </CustomContent>
 
@@ -207,7 +207,7 @@ ALTER USER usr2 RESOURCE GROUP rg2;
 ALTER USER 'usr3'@'%' RESOURCE GROUP `default`;
 ```
 
-詳細については[`ALTER USER ... RESOURCE GROUP`](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)参照してください。
+詳細は[`ALTER USER ... RESOURCE GROUP`](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)参照。
 
 #### 現在のセッションをリソースグループにバインドする {#bind-the-current-session-to-a-resource-group}
 
@@ -369,7 +369,7 @@ TiDBダッシュボードの現在の[`RESOURCE_GROUPS`](/information-schema/inf
 
 > **注記：**
 >
-> このセクションはTiDBセルフマネージドにのみ適用されます。現在、 TiDB Cloudはリソース制御メトリクスを提供していません。
+> このセクションはTiDBセルフマネージドにのみ適用されます。現在、 TiDB Cloudはリソース制御メトリックを提供していません。
 
 TiDB は、リソース制御に関する実行時情報を定期的に収集し、Grafana の**TiDB** &gt;**リソース制御**ダッシュボードにメトリックの視覚的なグラフを提供します。
 

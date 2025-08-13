@@ -5,7 +5,7 @@ summary: TiDB データベースに対する SHOW [BACKUPS|RESTORES] の使用�
 
 # SHOW [バックアップ|リストア] {#show-backups-restores}
 
-これらのステートメントは、TiDB インスタンスで実行された、キューに入れられた、実行中の、および最近完了した[`BACKUP`](/sql-statements/sql-statement-backup.md)および[`RESTORE`](/sql-statements/sql-statement-restore.md)タスクのリストを表示します。
+これらのステートメントは、TiDB インスタンスで実行されたキューに入れられたタスク、実行中のタスク、最近完了したタスク[`BACKUP`](/sql-statements/sql-statement-backup.md)と[`RESTORE`](/sql-statements/sql-statement-restore.md)リストを表示します。
 
 どちらのステートメントも、実行には`SUPER`権限が必要です。
 
@@ -13,7 +13,7 @@ summary: TiDB データベースに対する SHOW [BACKUPS|RESTORES] の使用�
 
 > **注記：**
 >
-> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
+> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 `br`コマンドライン ツールで開始されたバックアップと復元は表示されません。
 

@@ -5,7 +5,7 @@ summary: ticloud serverless audit-log filter-rule delete` のリファレンス�
 
 # ticloud サーバーレス監査ログフィルタールールの削除 {#ticloud-serverless-audit-log-filter-rule-delete}
 
-TiDB Cloud Serverless クラスターの監査ログ フィルター ルールを削除します。
+TiDB Cloud Starter またはTiDB Cloud Essential クラスターの監査ログ フィルター ルールを削除します。
 
 ```shell
 ticloud serverless audit-log filter-rule delete [flags]

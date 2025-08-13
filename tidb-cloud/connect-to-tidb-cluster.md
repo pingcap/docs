@@ -9,7 +9,7 @@ summary: さまざまな方法でTiDB Cloud Dedicated クラスターに接続�
 
 > **ヒント：**
 >
-> TiDB Cloud Serverless クラスターに接続する方法については、 [TiDB Cloudサーバーレスクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)参照してください。
+> TiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続する方法については、 [TiDB Cloud StarterまたはEssential クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)参照してください。
 
 TiDB Cloud上にTiDB Cloud Cloud Dedicated クラスターが作成されたら、次のいずれかの方法でそのクラスターに接続できます。
 

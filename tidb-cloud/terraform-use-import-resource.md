@@ -1,32 +1,34 @@
 ---
-title: Use Import Resource
-summary: インポート リソースを使用してインポート タスクを管理する方法を学習します。
+title: Use the `tidbcloud_import` Resource
+summary: tidbcloud_import` リソースを使用してインポート タスクを管理する方法を学習します。
 ---
 
-# インポートリソースの使用 {#use-import-resource}
+# <code>tidbcloud_import</code>リソースを使用する {#use-the-code-tidbcloud-import-code-resource}
 
 このドキュメントの`tidbcloud_import`リソースを使用して、 TiDB Cloudクラスターにデータをインポートする方法を学習できます。
 
 `tidbcloud_import`リソースの機能は次のとおりです。
 
--   TiDB Cloud Serverless およびTiDB Cloud Dedicated クラスターのインポート タスクを作成します。
+-   TiDB Cloudクラスターのインポート タスクを作成します。
 -   ローカルディスクまたは Amazon S3 バケットからデータをインポートします。
 -   進行中のインポート タスクをキャンセルします。
 
 ## 前提条件 {#prerequisites}
 
 -   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
--   [TiDB Cloud Serverless クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)または[TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
+-   TiDB Cloudクラスターを作成するには、次のいずれかのドキュメントを参照してください。
+    -   [TiDB Cloud Starter または Essential クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
+    -   [TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
 
 ## インポートタスクを作成して実行する {#create-and-run-an-import-task}
 
-インポート リソースを使用して、ローカル インポート タスクまたは Amazon S3 インポート タスクのいずれかを管理できます。
+`tidbcloud_import`リソースを使用して、ローカル インポート タスクまたは Amazon S3 インポート タスクのいずれかを管理できます。
 
 ### ローカルインポートタスクを作成して実行する {#create-and-run-a-local-import-task}
 
 > **注記：**
 >
-> ローカル ファイルのインポートは、 TiDB Cloud Serverless クラスターでのみサポートされ、 TiDB Cloud Dedicated クラスターではサポートされません。
+> ローカル ファイルのインポートは、 TiDB Cloud Starter またはTiDB Cloud Essential クラスターでのみサポートされ、 TiDB Cloud Dedicated クラスターではサポートされません。
 
 1.  インポート用のCSVファイルを作成します。例:
 
@@ -237,7 +239,7 @@ summary: インポート リソースを使用してインポート タスクを
 
 ## インポートタスクを削除する {#delete-an-import-task}
 
-Terraform の場合、インポート タスクを削除すると、対応するインポート リソースがキャンセルされます。
+Terraform の場合、インポート タスクを削除すると、対応する`tidbcloud_import`リソースがキャンセルされます。
 
 `COMPLETED`インポートタスクをキャンセルすることはできません。キャンセルした場合は、次の例のように`Delete Error`返されます。
 
@@ -278,4 +280,4 @@ Terraform の場合、インポート タスクを削除すると、対応する
 
 ## 構成 {#configurations}
 
-インポート リソースで使用可能なすべての構成を取得するには、 [構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import)参照してください。
+`tidbcloud_import`リソースで使用可能なすべての構成を取得するには、 [構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import)参照してください。

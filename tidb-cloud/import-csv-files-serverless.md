@@ -1,21 +1,25 @@
 ---
-title: Import CSV Files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud OSS into TiDB Cloud Serverless
-summary: Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service (OSS) からTiDB Cloud Serverless に CSV ファイルをインポートする方法を学習します。
+title: Import CSV Files from Cloud Storage into TiDB Cloud Starter or Essential
+summary: Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service (OSS) からTiDB Cloud Starter またはTiDB Cloud Essential に CSV ファイルをインポートする方法を学習します。
 ---
 
-# Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud OSS から CSV ファイルをTiDB Cloud Serverless にインポートする {#import-csv-files-from-amazon-s3-gcs-azure-blob-storage-or-alibaba-cloud-oss-into-tidb-cloud-serverless}
+# クラウドストレージからTiDB Cloud StarterまたはEssentialにCSVファイルをインポートする {#import-csv-files-from-cloud-storage-into-tidb-cloud-starter-or-essential}
 
-このドキュメントでは、Amazon Simple Storage Service (Amazon S3)、Google Cloud Storage (GCS)、Azure Blob Storage、または Alibaba Cloud Object Storage Service (OSS) からTiDB Cloud Serverless に CSV ファイルをインポートする方法について説明します。
+このドキュメントでは、Amazon Simple Storage Service (Amazon S3)、Google Cloud Storage (GCS)、Azure Blob Storage、または Alibaba Cloud Object Storage Service (OSS) からTiDB Cloud Starter またはTiDB Cloud Essential に CSV ファイルをインポートする方法について説明します。
+
+> **注記：**
+>
+> TiDB Cloud Dedicated については、 [クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)参照してください。
 
 ## 制限事項 {#limitations}
 
--   データの一貫性を確保するため、 TiDB Cloud Serverless では空のテーブルへのCSVファイルのインポートのみが許可されています。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントに従ってTiDB Cloud Serverless を使用して一時的な空のテーブルにデータをインポートし、 `INSERT SELECT`ステートメントを使用してデータを対象の既存テーブルにコピーします。
+-   データの一貫性を確保するため、 TiDB Cloud空のテーブルへのCSVファイルのインポートのみが許可されています。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントに従って一時的な空のテーブルにデータをインポートし、その後、 `INSERT SELECT`ステートメントを使用してデータを対象の既存テーブルにコピーします。
 
 ## ステップ1.CSVファイルを準備する {#step-1-prepare-the-csv-files}
 
 1.  CSV ファイルが 256 MB より大きい場合は、サイズがそれぞれ約 256 MB の小さなファイルに分割することを検討してください。
 
-    TiDB Cloud Serverlessは非常に大きなCSVファイルのインポートをサポートしていますが、256MB程度の複数の入力ファイルで最適なパフォーマンスを発揮します。これは、 TiDB Cloud Serverlessが複数のファイルを並列処理できるため、インポート速度が大幅に向上するからです。
+    TiDB Cloudは非常に大きなCSVファイルのインポートをサポートしていますが、256MB程度の複数の入力ファイルで最適なパフォーマンスを発揮します。これは、 TiDB Cloudが複数のファイルを並行して処理できるため、インポート速度が大幅に向上するからです。
 
 2.  CSV ファイルに次のように名前を付けます。
 
@@ -23,7 +27,7 @@ summary: Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object S
 
     -   1つのテーブルのデータが複数のCSVファイルに分割されている場合は、これらのCSVファイルに数値のサフィックスを追加してください。例： `${db_name}.${table_name}.000001.csv`と`${db_name}.${table_name}.000002.csv`数値のサフィックスは連続していなくても構いませんが、昇順である必要があります。また、すべてのサフィックスの長さを揃えるため、数値の前にゼロを追加する必要があります。
 
-    -   TiDB Cloud Serverlessは、以下の形式の圧縮ファイルのインポートをサポートしています： `.gzip` 、 `.gz` 、 `.zstd` 、 `.zst` 、 `.snappy` 。圧縮されたCSVファイルをインポートする場合は、ファイル名を`${db_name}.${table_name}.${suffix}.csv.${compress}`形式にしてください。13 `${suffix}`オプションで、「000001」などの任意の整数にすることができます。例えば、 `trips.000001.csv.gz`ファイルを`bikeshare.trips`テーブルにインポートする場合は、ファイル名を`bikeshare.trips.000001.csv.gz`に変更する必要があります。
+    -   TiDB Cloudは`.gz` `.zst`の形式の圧縮ファイルのインポートをサポートしています： `.gzip` 。 `.zstd`されたCSVファイルをインポートする場合は、ファイル名`.snappy` `${db_name}.${table_name}.${suffix}.csv.${compress}`形式にしてください。13 `${suffix}`オプションで、「000001」などの任意の整数にすることができます。例えば、 `trips.000001.csv.gz`ファイルを`bikeshare.trips`テーブルにインポートする場合は、ファイル名を`bikeshare.trips.000001.csv.gz`に変更する必要があります。
 
     > **注記：**
     >
@@ -33,9 +37,9 @@ summary: Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object S
 
 ## ステップ2. ターゲットテーブルスキーマを作成する {#step-2-create-the-target-table-schemas}
 
-CSV ファイルにはスキーマ情報が含まれていないため、CSV ファイルからTiDB Cloud Serverless にデータをインポートする前に、次のいずれかの方法でテーブル スキーマを作成する必要があります。
+CSV ファイルにはスキーマ情報が含まれていないため、CSV ファイルからTiDB Cloudにデータをインポートする前に、次のいずれかの方法でテーブル スキーマを作成する必要があります。
 
--   方法 1: TiDB Cloud Serverless で、ソース データのターゲット データベースとテーブルを作成します。
+-   方法 1: TiDB Cloudで、ソース データのターゲット データベースとテーブルを作成します。
 
 -   方法 2: CSV ファイルが保存されている Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service ディレクトリで、次のようにソース データのターゲット テーブル スキーマ ファイルを作成します。
 
@@ -43,9 +47,9 @@ CSV ファイルにはスキーマ情報が含まれていないため、CSV フ
 
         CSVファイルが[ステップ1](#step-1-prepare-the-csv-files)の命名規則に従っている場合、データのインポート時にデータベーススキーマファイルはオプションです。それ以外の場合は、データベーススキーマファイルは必須です。
 
-        各データベーススキーマファイルは`${db_name}-schema-create.sql`形式で、 `CREATE DATABASE` DDLステートメントを含んでいる必要があります。このファイルを使用して、 TiDB Cloud Serverlessはデータをインポートする際に、データを格納するための`${db_name}`データベースを作成します。
+        各データベーススキーマファイルは`${db_name}-schema-create.sql`形式で、 `CREATE DATABASE` DDLステートメントを含んでいる必要があります。このファイルを使用して、 TiDB Cloudはデータをインポートする際に、データを格納するための`${db_name}`データベースを作成します。
 
-        たとえば、次のステートメントを含む`mydb-scehma-create.sql`ファイルを作成すると、 TiDB Cloud Serverless はデータをインポートするときに`mydb`データベースを作成します。
+        たとえば、次のステートメントを含む`mydb-scehma-create.sql`ファイルを作成すると、 TiDB Cloud はデータをインポートするときに`mydb`データベースを作成します。
 
         ```sql
         CREATE DATABASE mydb;
@@ -53,11 +57,11 @@ CSV ファイルにはスキーマ情報が含まれていないため、CSV フ
 
     2.  ソース データのテーブル スキーマ ファイルを作成します。
 
-        CSV ファイルが保存されている Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service ディレクトリにテーブル スキーマ ファイルを含めない場合、 TiDB Cloud Serverless はデータをインポートしたときに対応するテーブルを作成しません。
+        CSV ファイルが保存されている Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service ディレクトリにテーブル スキーマ ファイルを含めない場合、 TiDB Cloud はデータをインポートするときに対応するテーブルを作成しません。
 
-        各テーブルスキーマファイルは`${db_name}.${table_name}-schema.sql`形式で、 `CREATE TABLE` DDLステートメントを含む必要があります。このファイルを使用することで、 TiDB Cloud Serverlessはデータをインポートする際に`${db_name}`データベースに`${db_table}`テーブルを作成します。
+        各テーブルスキーマファイルは`${db_name}.${table_name}-schema.sql`形式で、 `CREATE TABLE` DDLステートメントを含む必要があります。このファイルを使用することで、 TiDB Cloudはデータをインポートする際に`${db_name}`データベースに`${db_table}`テーブルを作成します。
 
-        たとえば、次のステートメントを含む`mydb.mytable-schema.sql`ファイルを作成すると、 TiDB Cloud Serverless はデータをインポートするときに`mydb`データベースに`mytable`テーブルを作成します。
+        たとえば、次のステートメントを含む`mydb.mytable-schema.sql`ファイルを作成すると、 TiDB Cloud はデータをインポートするときに`mydb`データベースに`mytable`テーブルを作成します。
 
         ```sql
         CREATE TABLE mytable (
@@ -72,21 +76,21 @@ CSV ファイルにはスキーマ情報が含まれていないため、CSV フ
 
 ## ステップ3. クロスアカウントアクセスを構成する {#step-3-configure-cross-account-access}
 
-TiDB Cloud Serverless が Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service バケット内の CSV ファイルにアクセスできるようにするには、次のいずれかを実行します。
+TiDB Cloud がAmazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service バケット内の CSV ファイルにアクセスできるようにするには、次のいずれかを実行します。
 
--   CSV ファイルが Amazon S3 にある場合は、 [TiDB Cloud Serverless の外部storageアクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access) 。
+-   CSV ファイルが Amazon S3 にある場合は、クラスターごとに[Amazon S3 アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access) 。
 
     バケットにアクセスするには、AWS アクセスキーまたはロール ARN のいずれかを使用できます。完了したら、アクセスキー（アクセスキー ID とシークレットアクセスキーを含む）またはロール ARN の値をメモしておいてください。これらは[ステップ4](#step-4-import-csv-files)で必要になります。
 
--   CSV ファイルが GCS にある場合は、 [TiDB Cloud Serverless の外部storageアクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-gcs-access) 。
+-   CSV ファイルが GCS にある場合は、クラスタごとに[GCS アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-gcs-access) 。
 
--   CSV ファイルが Azure Blob Storage にある場合は、 [TiDB Cloud Serverless の外部storageアクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access) 。
+-   CSV ファイルが Azure Blob Storage にある場合は、クラスターごとに[Azure Blob Storage アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access) 。
 
--   CSV ファイルが Alibaba Cloud Object Storage Service (OSS) にある場合は、 [TiDB Cloud Serverless の外部storageアクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access) 。
+-   CSV ファイルが Alibaba Cloud Object Storage Service (OSS) にある場合は、クラスターごとに[Alibaba Cloud Object Storage Service (OSS) アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access) 。
 
 ## ステップ4.CSVファイルをインポートする {#step-4-import-csv-files}
 
-CSV ファイルをTiDB Cloud Serverless にインポートするには、次の手順を実行します。
+CSV ファイルをTiDB Cloud Starter またはTiDB Cloud Essential にインポートするには、次の手順を実行します。
 
 <SimpleTab>
 <div label="Amazon S3">
@@ -154,7 +158,7 @@ CSV ファイルをTiDB Cloud Serverless にインポートするには、次の
 
     2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
-2.  **Cloud Storage からデータをインポート**をクリックします。
+2.  **「Cloud Storage からデータをインポート」**をクリックします。
 
 3.  **「クラウド ストレージからデータをインポート」**ページで、次の情報を入力します。
 
@@ -205,7 +209,7 @@ CSV ファイルをTiDB Cloud Serverless にインポートするには、次の
 
     2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
-2.  **Cloud Storage からデータをインポート**をクリックします。
+2.  **「Cloud Storage からデータをインポート」**をクリックします。
 
 3.  **「クラウド ストレージからデータをインポート」**ページで、次の情報を入力します。
 
@@ -297,7 +301,7 @@ CSV ファイルをTiDB Cloud Serverless にインポートするには、次の
 
 </SimpleTab>
 
-インポート タスクを実行するときに、サポートされていない変換または無効な変換が検出されると、 TiDB Cloud Serverless はインポート ジョブを自動的に終了し、インポート エラーを報告します。
+インポート タスクを実行するときに、サポートされていない変換または無効な変換が検出されると、 TiDB Cloud はインポート ジョブを自動的に終了し、インポート エラーを報告します。
 
 インポート エラーが発生した場合は、次の手順を実行します。
 

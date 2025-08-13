@@ -9,7 +9,7 @@ TiDB Cloud Dedicated クラスターの場合、クラスターに接続する�
 
 > **注記：**
 >
-> TiDB Cloud Serverless クラスターの場合、このドキュメントは適用されないため、代わりに[TiDB Cloud ServerlessへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を参照してください。
+> TiDB Cloud Starter またはTiDB Cloud Essential クラスターの場合、このドキュメントは適用されませんので、代わりに[TiDB Cloud Starter または Essential への TLS 接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を参照してください。
 
 1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 

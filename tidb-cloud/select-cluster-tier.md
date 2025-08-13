@@ -1,50 +1,38 @@
 ---
-title: Select Your Cluster Tier
-summary: TiDB Cloudでクラスター層を選択する方法について説明します。
+title: Select Your Cluster Plan
+summary: TiDB Cloudでクラスター プランを選択する方法について説明します。
 aliases: ['/tidbcloud/developer-tier-cluster']
 ---
 
-# Cluster Tierを選択 {#select-your-cluster-tier}
+# クラスタプランを選択 {#select-your-cluster-plan}
 
-クラスター層によって、クラスターのスループットとパフォーマンスが決まります。
+クラスター プランによって、クラスターのスループットとパフォーマンスが決まります。
 
-TiDB Cloud は、以下の 2 つのクラスター層オプションを提供します。クラスターを作成する前に、どちらのオプションがニーズに適しているかを検討する必要があります。
+TiDB Cloudは、以下のクラスタープランをご用意しています。導入直後でも、増大するアプリケーション需要に対応するための拡張でも、これらのサービスプランは必要な柔軟性と機能を提供します。クラスターを作成する前に、どのオプションがニーズに適しているかを検討してください。
 
--   [TiDB Cloudサーバーレス](#tidb-cloud-serverless)
+-   [TiDB Cloudサーバーレス](#tidb-cloud-serverless) （現在はスターター）
+-   [TiDB Cloudエッセンシャル](#essential)
 -   [TiDB Cloud専用](#tidb-cloud-dedicated)
+
+> **注記：**
+>
+> TiDB Cloudの一部機能は、 TiDB Cloud StarterおよびTiDB Cloud Essentialでは部分的にサポートされるか、サポートされません。詳細は[TiDB Cloud Starter と基本的な制限事項](/tidb-cloud/serverless-limitations.md)ご覧ください。
 
 ## TiDB Cloudサーバーレス {#tidb-cloud-serverless}
 
-<!--To be confirmed-->
+TiDB Cloud Serverless（現在はStarter）は、フルマネージドのマルチテナント型TiDBサービスです。MySQL互換データベースを瞬時に自動スケーリングし、十分な無料割り当てと、無料割り当てを超えた場合の使用量に応じた課金を提供します。
 
-TiDB Cloud Serverlessは、フルマネージドのマルチテナント型TiDBサービスです。MySQL互換データベースを瞬時に自動スケーリングし、十分な無料利用枠と、無料利用枠を超えた場合の使用量に応じた課金体系を提供します。
-
-### クラスタプラン {#cluster-plans}
-
-TiDB Cloud Serverlessは、さまざまなユーザー要件に対応する2つのサービスプランを提供しています。導入を検討されている場合でも、増大するアプリケーション需要に合わせて拡張する場合でも、これらのサービスプランは必要な柔軟性と機能を提供します。
-
-#### 無料クラスタープラン {#free-cluster-plan}
-
-無料のクラスタープランは、 TiDB Cloud Serverless を初めてご利用になる方に最適です。開発者や小規模チームに、以下の重要な機能を提供します。
+無料のクラスタープランは、 TiDB Cloud Starterを初めてご利用になる方に最適です。開発者や小規模チームに以下の重要な機能を提供します。
 
 -   **無料**: このプランは完全に無料で、開始するのにクレジットカードは必要ありません。
 -   **ストレージ**: 初期 5 GiB の行ベースのstorageと 5 GiB の列ベースのstorageを提供します。
 -   **リクエスト単位**: データベース操作用の 5,000 万[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit)が含まれます。
--   **簡単なアップグレード**: ニーズの拡大に応じて、 [スケーラブルなクラスタープラン](#scalable-cluster-plan)へのスムーズな移行を実現します。
-
-#### スケーラブルなクラスタープラン {#scalable-cluster-plan}
-
-ワークロードが増加し、リアルタイムのスケーラビリティを必要とするアプリケーションの場合、スケーラブル クラスター プランは、次の機能により、ビジネスの成長に対応できる柔軟性とパフォーマンスを提供します。
-
--   **拡張機能**: 無料のクラスター プランのすべての機能に加えて、より大規模で複雑なワークロードを処理する能力と高度なセキュリティ機能が含まれています。
--   **自動スケーリング**: 変化するワークロードの需要に効率的に対応するために、storageとコンピューティング リソースを自動的に調整します。
--   **予測可能な価格設定**: このプランではクレジットカードが必要ですが、使用したリソースに対してのみ課金されるため、コスト効率の高いスケーラビリティが保証されます。
 
 ### 使用量制限 {#usage-quota}
 
-TiDB Cloudでは、組織ごとに最大5つのクラスター（デフォルトでは[フリークラスター](#free-cluster-plan)を作成できます。TiDB TiDB Cloud Serverlessクラスターをさらに作成するには、クレジットカードを追加し、使用量に応じて[スケーラブルなクラスター](#scalable-cluster-plan)クラスターを作成する必要があります。
+TiDB Cloudでは、組織ごとにデフォルトで最大5つのTiDB Cloud Starterクラスターを無料で作成できます。さらにTiDB Cloud Starterクラスターを作成するには、クレジットカードを追加し、利用限度額を指定する必要があります。
 
-組織内の最初の 5 つのTiDB Cloud Serverless クラスターについては、無料かスケーラブルかに関係なく、 TiDB Cloud は次のようにクラスターごとに無料使用量割り当てを提供します。
+組織内の最初の 5 つのTiDB Cloud Starter クラスターについては、無料かスケーラブルかに関係なく、 TiDB Cloud は次のようにクラスターごとに無料使用量割り当てを提供します。
 
 -   行ベースのstorage: 5 GiB
 -   列指向storage: 5 GiB
@@ -54,13 +42,22 @@ TiDB Cloudでは、組織ごとに最大5つのクラスター（デフォルト
 
 クラスターが使用量クォータに達すると、新しい月[割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)始まるまで、または使用量がリセットされるまで、新規接続の試行は直ちに拒否されます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。例えば、クラスターの行ベースstorageが空きクラスターで5GiBを超えると、クラスターは自動的に新規接続の試行を制限します。
 
-さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク送信など) の RU 消費量、価格の詳細、スロットル情報の詳細については、 [TiDB Cloud Serverless の価格詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)参照してください。
+さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク送信など) の RU 消費量、価格の詳細、スロットル情報の詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)参照してください。
 
-### ユーザー名のプレフィックス {#user-name-prefix}
+## TiDB Cloudエッセンシャル {#essential} {#essential}
+
+ワークロードが増加し、リアルタイムの拡張性を必要とするアプリケーションの場合、Essential クラスター プランは次の機能により、ビジネスの成長に対応できる柔軟性とパフォーマンスを提供します。
+
+-   **拡張機能**: スターター プランのすべての機能に加えて、より大規模で複雑なワークロードを処理する能力と高度なセキュリティ機能が含まれます。
+-   **自動スケーリング**: 変化するワークロードの需要に効率的に対応するために、storageとコンピューティング リソースを自動的に調整します。
+-   **高可用性**: フォールト トレランスと冗長性が組み込まれているため、インフラストラクチャに障害が発生した場合でも、アプリケーションの可用性と回復力が維持されます。
+-   **予測可能な価格設定**: コンピューティング リソースのstorageとリクエスト容量単位 (RCU) に基づいて課金され、ニーズに合わせて拡張できる透明性の高い使用量ベースの価格設定が提供されるため、予期せぬ出費なく、使用した分だけを支払うことになります。
+
+## ユーザー名のプレフィックス {#user-name-prefix}
 
 <!--Important: Do not update the section name "User name prefix" because this section is referenced by TiDB backend error messages.-->
 
-TiDB Cloud は、各TiDB Cloud Serverless クラスターに対して、他のクラスターと区別するための一意のプレフィックスを生成します。
+TiDB Cloud Starter またはTiDB Cloud Essential クラスターごとに、 TiDB Cloud は他のクラスターと区別するために一意のプレフィックスを生成します。
 
 データベースユーザー名を使用または設定する際は、必ずユーザー名にプレフィックスを含める必要があります。例えば、クラスターのプレフィックスが`3pTAoNNegb47Uc8`であるとします。
 
@@ -72,7 +69,7 @@ TiDB Cloud は、各TiDB Cloud Serverless クラスターに対して、他の�
 
     > **注記：**
     >
-    > TiDB Cloud Serverless にはTLS接続が必要です。システム上のCAルートパスを確認するには、 [ルート証明書のデフォルトパス](/tidb-cloud/secure-connections-to-serverless-clusters.md#root-certificate-default-path)参照してください。
+    > TiDB Cloud StarterおよびTiDB Cloud EssentialはTLS接続が必要です。システム上のCAルートパスを確認するには、 [ルート証明書のデフォルトパス](/tidb-cloud/secure-connections-to-serverless-clusters.md#root-certificate-default-path)参照してください。
 
 -   データベース ユーザーを作成するには:
 
@@ -85,10 +82,6 @@ TiDB Cloud は、各TiDB Cloud Serverless クラスターに対して、他の�
 1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 2.  ターゲットクラスターの名前をクリックして概要ページに移動し、右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 3.  ダイアログで、接続文字列からプレフィックスを取得します。
-
-### TiDB Cloud Serverless の特別利用規約 {#tidb-cloud-serverless-special-terms-and-conditions}
-
-TiDB Cloudの一部の機能は、 TiDB Cloud Serverlessでは部分的にサポートされるか、サポートされません。詳細は[TiDB Cloudサーバーレスの制限](/tidb-cloud/serverless-limitations.md)ご覧ください。
 
 ## TiDB Cloud専用 {#tidb-cloud-dedicated}
 

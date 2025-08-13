@@ -8,6 +8,74 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2025年8月12日 {#august-12-2025}
+
+**一般的な変更**
+
+-   **TiDB Cloudスターター**
+
+    -   「TiDB Cloud Serverless」の名前を「TiDB Cloud Starter」に変更します。
+
+        オートスケーリングのエントリープランは、新規ユーザーにとっての役割をより明確にするため、「TiDB Cloud Starter」に名称が変更されました。すべての機能、価格、無料利用枠に変更はありません。
+
+        2025年8月12日（PDT）より、既存のサーバーレスクラスターは[TiDB Cloudコンソール](https://tidbcloud.com)にスターターとして表示されます。接続文字列、エンドポイント、データは変更されないため、コードを変更したり、ダウンタイムをスケジュールしたりする必要はありません。
+
+    -   TiDB Cloud Starter は Alibaba Cloud でプレビュー中です。
+
+-   **TiDB Cloudエッセンシャル**
+
+    [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential) Alibaba Cloud でプレビュー中です。
+
+    TiDB Cloud Essential on Alibaba Cloud は、2025年5月から限定公開プレビューを実施しています。Essential がリリースノートに正式に記載されるのは今回が初めてです。現段階では、Essential on Alibaba Cloud は、Alibaba Cloud シンガポールリージョンで利用可能な Starter と同等の機能セットを提供しています。
+
+    試す方法:
+
+    -   [TiDB Cloudコンソール](https://tidbcloud.com/)から、クラスターを作成するときにクラウド プロバイダーとして Alibaba Cloud を選択して、Essential オプションを表示します。
+    -   [Alibaba Cloud Marketplaceへの掲載](https://www.alibabacloud.com/en/marketplace/tidb?_p_lc=1)経由で Essential にアクセスすることもできます。
+
+    今後は、Alibaba Cloud のリージョン カバレッジを拡大し、AWS サポートを追加する予定です。
+
+    このプレビュー期間中に Essential on Alibaba Cloud をお試しいただくと、Web コンソールからフィードバックを共有したり、 [スラック](https://tidbcommunity.slack.com/archives/CH7TTLL7P)または[不和](https://discord.gg/ukhXbn69Nx)コミュニティに参加したりすることができます。
+
+-   **TiDB Cloud専用**
+
+    -   Google Cloud の Kubernetes Engine [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では、NAT サブネット割り当て戦略を最適化することで、リージョンごとに 8 個を超える Google Private Service Connect（PSC）接続がサポートされるようになりました。
+
+        詳細については[Google Cloud Private Service Connect 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md#restrictions)参照してください。
+
+    -   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)指標を最適化:
+
+        -   [**高度な**](/tidb-cloud/built-in-monitoring.md#advanced)カテゴリでは、**影響を受ける行**、**Leader数**、および**リージョン数の**メトリックを追加して診断を改善します。
+        -   [**サーバ**](/tidb-cloud/built-in-monitoring.md#server)カテゴリでは、 **TiKV IO Bps**メトリックを改良して、精度と一貫性を向上させます。
+
+        詳細については[TiDB Cloud組み込みメトリクス](/tidb-cloud/built-in-monitoring.md)参照してください。
+
+**APIの変更**
+
+-   以下のリソースを自動的かつ効率的に管理するためのTiDB Cloud専用 API (v1beta1) を導入します。
+
+    -   **クラスタ**: TiDB Cloud Dedicated クラスターをより柔軟に管理します。
+    -   **リージョン**: TiDB Cloud Dedicated クラスターをデプロイできるすべてのクラウド リージョンを表示します。
+    -   **プライベート エンドポイント接続**: クラスターに対して安全でプライベートな接続を設定します。
+    -   **インポート**: クラスターのデータ インポート タスクを管理します。
+
+    詳細については[TiDB Cloud専用API](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated/)参照してください。
+
+-   以下のリソースを自動的かつ効率的に管理するためのTiDB Cloud Starter および Essential API (v1beta1) を導入します。
+
+    -   **クラスタ**: TiDB Cloud Starter または Essential クラスターをより柔軟に管理します。
+    -   **ブランチ**: クラスターのブランチを管理します。
+    -   **エクスポート**: クラスターのデータ エクスポート タスクを管理します。
+    -   **インポート**: クラスターのデータ インポート タスクを管理します。
+
+    詳細については[TiDB Cloudスターターと基本 API](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless/)参照してください。
+
+-   TiDB Cloud IAM API (v1beta1) は、組織レベルとプロジェクトレベルの両方で API キー管理のロールベースのアクセス制御 (RBAC) をサポートします。
+
+    セキュリティとアクセス制御を強化するために、組織レベルまたはプロジェクト レベルで API キーのロールを設定できます。
+
+    詳細については[TiDB CloudIAM API](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam/)参照してください。
+
 ## 2025年7月31日 {#july-31-2025}
 
 **一般的な変更**

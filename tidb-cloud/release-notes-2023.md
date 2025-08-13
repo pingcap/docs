@@ -410,7 +410,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   changefeed を使用してデータを Amazon S3 にストリーミングすることをサポートします。
 
-    これにより、 TiDB CloudとAmazon S3のシームレスな統合が可能になります。1 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタからAmazon S3へのリアルタイムのデータキャプチャとレプリケーションが可能になり、下流のアプリケーションと分析機能が最新のデータにアクセスできるようになります。
+    これにより、 TiDB CloudとAmazon S3のシームレスな統合が可能になります。1 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタからAmazon S3へのリアルタイムのデータキャプチャとレプリケーションが可能になり、下流のアプリケーションと分析が最新のデータにアクセスできるようになります。
 
     詳細については[クラウドストレージにstorage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)参照してください。
 
@@ -428,7 +428,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの[**キービジュアライザー**](/tidb-cloud/tune-performance.md#key-visualizer)ページ用の新しいネイティブ Web インフラストラクチャをリリースします。
 
-    新しいインフラストラクチャにより、 **Key Visualizer**ページ内を簡単にナビゲートし、より直感的かつ効率的に必要な情報にアクセスできるようになります。また、新しいインフラストラクチャはUXに関する多くの問題を解決し、SQL診断プロセスをよりユーザーフレンドリーなものにします。
+    新しいインフラストラクチャにより、 **Key Visualizer**ページ内を簡単にナビゲートし、より直感的かつ効率的に必要な情報にアクセスできるようになりました。また、新しいインフラストラクチャはUXに関する多くの問題を解決し、SQL診断プロセスをよりユーザーフレンドリーなものにしています。
 
 ## 2023年6月6日 {#june-6-2023}
 
@@ -790,7 +790,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     -   DBあたりのQPS
     -   DBあたりの平均クエリ実行時間
-    -   DBあたりの失敗したクエリ数
+    -   DBごとの失敗したクエリ
 
     これらのメトリックを使用すると、個々のデータベースのパフォーマンスを監視し、データに基づいて意思決定を行い、アプリケーションのパフォーマンスを向上させるためのアクションを実行できます。
 

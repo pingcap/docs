@@ -5,7 +5,7 @@ summary: ticloud serverless audit-log describe` のリファレンス。
 
 # ticloud サーバーレス監査ログの説明 {#ticloud-serverless-audit-log-describe}
 
-TiDB Cloud Serverless クラスターのデータベース監査ログ構成について説明します。
+TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータベース監査ログ構成について説明します。
 
 ```shell
 ticloud serverless audit-log describe [flags]

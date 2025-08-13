@@ -5,7 +5,7 @@ summary: ticloud serverless audit-log config` のリファレンス。
 
 # ticloud サーバーレス監査ログ設定 {#ticloud-serverless-audit-log-config}
 
-TiDB Cloud Serverless クラスターのデータベース監査ログを構成します。
+TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータベース監査ログを構成します。
 
 ```shell
 ticloud serverless audit-log config [flags]

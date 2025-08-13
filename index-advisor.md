@@ -9,7 +9,7 @@ TiDB v8.5.0では、クエリパフォーマンスを向上させるインデッ
 
 > **注記：**
 >
-> 現在、この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
+> 現在、この機能は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)クラスターでは利用できません。
 
 インデックスアドバイザーはクエリを分析し、 `WHERE` 、 `GROUP BY` 、 `ORDER BY`などの句からインデックス可能な列を特定します。次に、インデックス候補を生成し、仮想インデックスを使用してパフォーマンスの向上を推定します。TiDBは遺伝的探索アルゴリズムを使用して最適なインデックスセットを選択します。まず、単一列インデックスから始めて複数列インデックスを反復的に探索し、「What-If」分析を活用して、オプティマイザプランのコストへの影響に基づいて潜在的なインデックスを評価します。アドバイザーは、インデックスなしでクエリを実行する場合と比較して全体的なコストが削減される場合に、インデックスを推奨します。
 

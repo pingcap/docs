@@ -21,7 +21,7 @@ SQL エディターの推奨使用例は次のとおりです。
 
 -   AI によって生成された SQL クエリは 100% 正確ではない可能性があり、調整が必要になる場合があります。
 -   SQL エディターは、AWS でホストされている v6.5.0 以降の TiDB クラスターでのみサポートされます。
--   SQLエディタはデフォルトで[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスタで利用可能です。SQLエディタとChat2Queryを[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタでご利用になる場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+-   SQLエディタはAWSでホストされている[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでのみご利用いただけます。3 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでSQLエディタとChat2Queryをご利用いただくには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
 ## Access SQL エディター {#access-sql-editor}
 
@@ -187,4 +187,4 @@ SQL エディターでは、次の設定を変更できます。
 
 1.  **SQL エディター**の右上隅で、 **...**をクリックし、**設定**を選択します。
 2.  必要に応じて設定を変更してください。
-3.  **[保存]を**クリックします。
+3.  **［保存］を**クリックします。

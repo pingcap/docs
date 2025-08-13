@@ -11,7 +11,7 @@ TiDB Cloud changefeed は、 TiDB Cloudから他のデータサービスへの�
 >
 > -   現在、 TiDB Cloudクラスターごとに最大 100 個の変更フィードのみが許可されます。
 > -   現在、 TiDB Cloud、変更フィードごとに最大 100 個のテーブル フィルター ルールのみが許可されます。
-> -   [TiDB Cloudサーバーレス クラスター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)の場合、changefeed 機能は使用できません。
+> -   クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、changefeed 機能は使用できません。
 
 ## Changefeedページをビュー {#view-the-changefeed-page}
 
@@ -25,7 +25,7 @@ changefeed 機能にアクセスするには、次の手順を実行します。
 
 2.  ターゲットクラスタの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「Changefeed」**をクリックします。Changefeedページが表示されます。
 
-**「変更フィード」**ページでは、変更フィードを作成したり、既存の変更フィードの一覧を表示したり、既存の変更フィードを操作したり (変更フィードのスケーリング、一時停止、再開、編集、削除など) することができます。
+**Changefeed**ページでは、変更フィードを作成したり、既存の変更フィードの一覧を表示したり、既存の変更フィードを操作したり (変更フィードのスケーリング、一時停止、再開、編集、削除など) できます。
 
 ## チェンジフィードを作成する {#create-a-changefeed}
 

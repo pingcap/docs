@@ -17,7 +17,7 @@ summary: TiDB Vector Search を Amazon Bedrock と統合して、検索拡張生
 
 > **注記**
 >
-> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
 
 > **ヒント**
 >
@@ -39,9 +39,9 @@ summary: TiDB Vector Search を Amazon Bedrock と統合して、検索拡張生
     aws configure set region <your-region>
     ```
 
--   TiDB Cloudサーバーレスクラスター
+-   TiDB Cloud Starter クラスター
 
-    独自のTiDB Cloudクラスターがない場合は、手順[TiDB Cloud Serverless クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って作成します。
+    独自のTiDB Cloudクラスターがない場合は、手順[TiDB Cloud Starter クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って作成します。
 
 -   [Amazon Bedrock に必要な権限](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html)と次のモデルへのアクセス権を持つ AWS アカウント:
 
@@ -82,7 +82,7 @@ summary: TiDB Vector Search を Amazon Bedrock と統合して、検索拡張生
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
 
-5.  環境変数を設定するには、ターミナルで以下のコマンドを実行します。コマンド内のプレースホルダーは、接続ダイアログから取得した対応する接続パラメータに置き換えてください。
+5.  環境変数を設定するには、ターミナルで以下のコマンドを実行します。コマンド内のプレースホルダーは、接続ダイアログから取得した対応する接続パラメータに置き換える必要があります。
 
     ```shell
     export TIDB_HOST=<your-tidb-host>
@@ -247,14 +247,14 @@ class Entity(Base):
 Base.metadata.create_all(engine)
 ```
 
-### ステップ7. ベクターデータをTiDB Cloud Serverlessに保存する {#step-7-save-the-vector-data-to-tidb-cloud-serverless}
+### ステップ7. ベクターデータをTiDB Cloud Starterに保存する {#step-7-save-the-vector-data-to-tidb-cloud-starter}
 
-`demo.py`で、次のコードを追加して、ベクター データをTiDB Cloud Serverless クラスターに保存します。
+`demo.py`で、次のコードを追加して、ベクター データをTiDB Cloud Starter クラスターに保存します。
 
 ```python
 # ---- Saving Vectors to TiDB ----
 def save_entities_with_embedding(session, contents):
-    """Save multiple entities with their embeddings to the TiDB Serverless database."""
+    """Save multiple entities with their embeddings to the TiDB database."""
     for content in contents:
         entity = Entity(content=content, content_vec=embedding(content))
         session.add(entity)

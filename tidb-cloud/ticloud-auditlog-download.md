@@ -5,7 +5,7 @@ summary: ticloud serverless audit-log download` のリファレンス。
 
 # ticloud サーバーレス監査ログのダウンロード {#ticloud-serverless-audit-log-download}
 
-TiDB Cloud Serverless クラスターからデータベース監査ログをダウンロードします。
+TiDB Cloud Starter またはTiDB Cloud Essential クラスターからデータベース監査ログをダウンロードします。
 
 ```shell
 ticloud serverless audit-log download [flags]

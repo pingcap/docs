@@ -9,7 +9,7 @@ TiDB システム変数は、設定が`SESSION`または`GLOBAL`スコープに�
 
 -   スコープ`SESSION`の変更は現在のセッションにのみ影響します。
 -   スコープ`GLOBAL`での変更は即時に適用されます。この変数のスコープが`SESSION`に設定されている場合、すべてのセッション（あなたのセッションを含む）は現在のセッション値を引き続き使用します。
--   変更は[`SET`ステートメント](/sql-statements/sql-statement-set-variable.md)を使用して行われます:
+-   変更は[`SET`文](/sql-statements/sql-statement-set-variable.md)を使用して行われます:
 
 ```sql
 # These two identical statements change a session variable
@@ -42,7 +42,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 >
 > 同じ単位を使用する変数は、同じリソース セットを競合する可能性があります。
 
-バージョン7.4.0以降では、 [`SET_VAR`](/optimizer-hints.md#set_varvar_namevar_value)を使用して、ステートメント実行中に一部の`SESSION`変数の値を一時的に変更できます。ステートメント実行後、現在のセッションのシステム変数の値は自動的に元の値に戻ります。このヒントは、オプティマイザーとエグゼキューターに関連する一部のシステム変数を変更するために使用できます。このドキュメントの変数には`Applies to hint SET_VAR`設定されており、これは`Yes`または`No`に設定できます。
+バージョン7.4.0以降では、 [`SET_VAR`](/optimizer-hints.md#set_varvar_namevar_value)を使用して、ステートメント実行中に一部の`SESSION`変数の値を一時的に変更できます。ステートメント実行後、現在のセッションのシステム変数の値は自動的に元の値に戻ります。このヒントは、オプティマイザーとエグゼキューターに関連する一部のシステム変数を変更するために使用できます。このドキュメントの変数には`Applies to hint SET_VAR`設定されており、 `Yes`または`No`に設定できます。
 
 -   `Applies to hint SET_VAR: Yes`に設定された変数の場合、 [`SET_VAR`](/optimizer-hints.md#set_varvar_namevar_value)ヒントを使用して、ステートメントの実行中に現在のセッションのシステム変数の値を変更できます。
 -   `Applies to hint SET_VAR: No`に設定された変数の場合、ステートメントの実行中に[`SET_VAR`](/optimizer-hints.md#set_varvar_namevar_value)ヒントを使用して現在のセッションのシステム変数の値を変更することはできません。
@@ -157,7 +157,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ### 認証_ldap_simple_auth_method_name<span class="version-mark">バージョン7.1.0の新機能</span> {#authentication-ldap-simple-auth-method-name-span-class-version-mark-new-in-v7-1-0-span}
 
 -   範囲: グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 列挙
 -   デフォルト値: `SIMPLE`
@@ -167,7 +167,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ### 認証_ldap_simple_bind_base_dn<span class="version-mark">バージョン7.1.0の新機能</span> {#authentication-ldap-simple-bind-base-dn-span-class-version-mark-new-in-v7-1-0-span}
 
 -   範囲: グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 文字列
 -   デフォルト値: &quot;&quot;
@@ -176,7 +176,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ### 認証_ldap_simple_bind_root_dn<span class="version-mark">バージョン7.1.0の新機能</span> {#authentication-ldap-simple-bind-root-dn-span-class-version-mark-new-in-v7-1-0-span}
 
 -   範囲: グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 文字列
 -   デフォルト値: &quot;&quot;
@@ -185,7 +185,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ### 認証_ldap_simple_bind_root_pwd<span class="version-mark">バージョン7.1.0の新機能</span> {#authentication-ldap-simple-bind-root-pwd-span-class-version-mark-new-in-v7-1-0-span}
 
 -   範囲: グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 文字列
 -   デフォルト値: &quot;&quot;
@@ -242,7 +242,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ### 認証_ldap_simple_tls<span class="version-mark">バージョン7.1.0の新機能</span> {#authentication-ldap-simple-tls-span-class-version-mark-new-in-v7-1-0-span}
 
 -   範囲: グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: ブール値
 -   デフォルト値: `OFF`
@@ -297,7 +297,7 @@ mysql> SELECT * FROM t1;
 ### 自動コミット {#autocommit}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: ブール値
 -   デフォルト値: `ON`
@@ -306,7 +306,7 @@ mysql> SELECT * FROM t1;
 ### ブロック暗号化モード {#block-encryption-mode}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 列挙
 -   デフォルト値: `aes-128-ecb`
@@ -316,7 +316,7 @@ mysql> SELECT * FROM t1;
 ### 文字セットクライアント {#character-set-client}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `utf8mb4`
 -   クライアントから送信されるデータの文字セット。TiDBにおける文字セットと照合順序の使用に関する詳細は[文字セットと照合順序](/character-set-and-collation.md)参照してください。必要に応じて文字セットを変更するには、 [`SET NAMES`](/sql-statements/sql-statement-set-names.md)使用することをお勧めします。
@@ -324,7 +324,7 @@ mysql> SELECT * FROM t1;
 ### 文字セット接続 {#character-set-connection}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `utf8mb4`
 -   指定された文字セットを持たない文字列リテラルの文字セット。
@@ -332,7 +332,7 @@ mysql> SELECT * FROM t1;
 ### 文字セットデータベース {#character-set-database}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `utf8mb4`
 -   この変数は、使用中のデフォルトデータベースの文字セットを示します。**この変数を設定することは推奨されません**。新しいデフォルトデータベースが選択されると、サーバーはこの変数の値を変更します。
@@ -340,7 +340,7 @@ mysql> SELECT * FROM t1;
 ### 文字セット結果 {#character-set-results}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `utf8mb4`
 -   データがクライアントに送信されるときに使用される文字セット。
@@ -348,7 +348,7 @@ mysql> SELECT * FROM t1;
 ### 文字セットサーバー {#character-set-server}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `utf8mb4`
 -   サーバーのデフォルトの文字セット。
@@ -356,7 +356,7 @@ mysql> SELECT * FROM t1;
 ### 照合接続 {#collation-connection}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `utf8mb4_bin`
 -   この変数は、現在の接続で使用されている照合順序を示します。これはMySQL変数`collation_connection`と一致します。
@@ -364,7 +364,7 @@ mysql> SELECT * FROM t1;
 ### 照合データベース {#collation-database}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `utf8mb4_bin`
 -   この変数は、使用中のデータベースのデフォルトの照合順序を示します。**この変数を設定することは推奨されません**。新しいデータベースが選択されると、TiDBはこの変数の値を変更します。
@@ -372,7 +372,7 @@ mysql> SELECT * FROM t1;
 ### 照合サーバー {#collation-server}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `utf8mb4_bin`
 -   データベースの作成時に使用されるデフォルトの照合順序。
@@ -391,7 +391,7 @@ mysql> SELECT * FROM t1;
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)ではサポートされていません。
+> この変数は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)ではサポートされていません。
 
 <CustomContent platform="tidb">
 
@@ -508,7 +508,7 @@ mysql> SELECT * FROM t1;
 ### div_precision_increment<span class="version-mark">バージョン8.0.0の新機能</span> {#div-precision-increment-span-class-version-mark-new-in-v8-0-0-span}
 
 -   スコープ: セッション | グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当：はい
 -   型: 整数
 -   デフォルト値: `4`
@@ -572,7 +572,7 @@ mysql> SELECT * FROM t1;
 ### 初期化接続 {#init-connect}
 
 -   範囲: グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: &quot;&quot;
 -   `init_connect`機能は、TiDBサーバーへの初回接続時に SQL 文を自動的に実行することを許可します。3 または`CONNECTION_ADMIN` `SUPER`権限がある場合、この`init_connect`文は実行されません。9 `init_connect`文でエラーが発生した場合、ユーザー接続は終了します。
@@ -580,7 +580,7 @@ mysql> SELECT * FROM t1;
 ### innodb_lock_wait_timeout {#innodb-lock-wait-timeout}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `50`
@@ -592,10 +592,10 @@ mysql> SELECT * FROM t1;
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `28800`
@@ -645,7 +645,7 @@ mysql> SELECT * FROM t1;
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   スコープ: セッション | グローバル
 -   クラスターに持続: はい
@@ -717,7 +717,7 @@ mysql> SELECT * FROM t1;
 ### 最大実行時間 {#max-execution-time}
 
 -   スコープ: セッション | グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当：はい
 -   型: 整数
 -   デフォルト値: `0`
@@ -744,7 +744,7 @@ mysql> SELECT * FROM t1;
 ### 最大準備済みステートメント数 {#max-prepared-stmt-count}
 
 -   範囲: グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `-1`
@@ -790,7 +790,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)ではサポートされていません。
+> この変数は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)ではサポートされていません。
 
 -   範囲: グローバル
 -   クラスターに永続化: いいえ。現在接続している TiDB インスタンスにのみ適用されます。
@@ -802,7 +802,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)ではサポートされていません。
+> この変数は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)ではサポートされていません。
 
 -   範囲: グローバル
 -   クラスターに永続化: いいえ。現在接続している TiDB インスタンスにのみ適用されます。
@@ -846,10 +846,10 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 > 現在、この変数は[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)ではサポートされていません。TiDB TiDB Cloud Dedicated クラスタではこの変数を有効にし**ないで**ください。有効にしないと、SQL クライアント接続エラーが発生する可能性があります。この制限は一時的な制御手段であり、将来のリリースで解決される予定です。
 
 -   範囲: グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: ブール値
--   デフォルト値: TiDBセルフマネージド[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合は`OFF` `ON`場合は[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)
+-   デフォルト値: TiDB Self-Managed の場合は`OFF`および[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) 、 `ON`
 
 <CustomContent platform="tidb">
 
@@ -871,7 +871,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -1261,7 +1261,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 ### tidb_auto_build_stats_concurrency <span class="version-mark">v6.5.0 の新機能</span> {#tidb-auto-build-stats-concurrency-span-class-version-mark-new-in-v6-5-0-span}
 
 -   範囲: グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `1`
@@ -1271,7 +1271,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 ### tidb_backoff_lock_fast {#tidb-backoff-lock-fast}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `10`
@@ -1408,7 +1408,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   スコープ: セッション
 -   クラスターに存続: いいえ
@@ -1506,7 +1506,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 <CustomContent platform="tidb">
 
--   デフォルト値: デフォルトでは、設定項目[`pessimistic-txn.constraint-check-in-place-pessimistic`](/tidb-configuration-file.md#constraint-check-in-place-pessimistic-new-in-v640)は`true`ているため、この変数のデフォルト値は`ON`なります。7 [`pessimistic-txn.constraint-check-in-place-pessimistic`](/tidb-configuration-file.md#constraint-check-in-place-pessimistic-new-in-v640) `false`に設定されている場合、この変数のデフォルト値は`OFF`になります。
+-   デフォルト値: デフォルトでは、設定項目[`pessimistic-txn.constraint-check-in-place-pessimistic`](/tidb-configuration-file.md#constraint-check-in-place-pessimistic-new-in-v640)は`true`ているため、この変数のデフォルト値は`ON`になります。7 [`pessimistic-txn.constraint-check-in-place-pessimistic`](/tidb-configuration-file.md#constraint-check-in-place-pessimistic-new-in-v640) `false`に設定されている場合、この変数のデフォルト値は`OFF`になります。
 
 </CustomContent>
 
@@ -1580,7 +1580,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -1596,7 +1596,8 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 > **注記：**
 >
 > -   [TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)クラスターを使用している場合、この変数を使用してインデックス作成の速度を向上させるには、TiDB クラスターが AWS でホストされており、TiDB ノードのサイズが少なくとも 8 vCPU であることを確認してください。
-> -   [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターの場合、この変数は読み取り専用です。
+> -   4つのvCPUを搭載したクラスタ[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)の場合、インデックス作成時にリソース制限がクラスタの安定性に影響を与えないように、 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)手動で無効にすることをお勧めします。この設定を無効にすると、トランザクションを使用してインデックスを作成できるようになり、クラスタ全体への影響が軽減されます。
+> -   クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合、この変数は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -1656,7 +1657,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -1670,7 +1671,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -1684,7 +1685,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   スコープ: セッション | グローバル
 -   クラスターに持続: はい
@@ -1702,7 +1703,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   スコープ: セッション
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
@@ -1730,7 +1731,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   スコープ: セッション | グローバル
 -   クラスターに持続: はい
@@ -1856,7 +1857,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   スコープ: セッション | グローバル
 -   クラスターに持続: はい
@@ -1888,7 +1889,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   スコープ: セッション | グローバル
 -   クラスターに持続: はい
@@ -1906,7 +1907,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -1994,7 +1995,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに永続化: いいえ。現在接続している TiDB インスタンスにのみ適用されます。
@@ -2137,7 +2138,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -2227,7 +2228,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -2309,7 +2310,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -2633,7 +2634,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -2649,7 +2650,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `ON`
 -   値`ON`オプション: `OFF`
--   この変数は、TiDBがチャンクオブジェクトのキャッシュを有効にするかどうかを制御します。値が`ON`の場合、TiDBはキャッシュされたチャンクオブジェクトを優先的に使用し、要求されたオブジェクトがキャッシュに存在しない場合にのみシステムから要求します。値が`OFF`場合、TiDBはシステムから直接チャンクオブジェクトを要求します。
+-   この変数は、TiDBがチャンクオブジェクトのキャッシュを有効にするかどうかを制御します。値が`ON`場合、TiDBはキャッシュされたチャンクオブジェクトを優先的に使用し、要求されたオブジェクトがキャッシュに存在しない場合にのみシステムから要求します。値が`OFF`場合、TiDBはシステムから直接チャンクオブジェクトを要求します。
 
 ### tidb_enable_shared_lock_promotion<span class="version-mark">バージョン8.3.0の新機能</span> {#tidb-enable-shared-lock-promotion-span-class-version-mark-new-in-v8-3-0-span}
 
@@ -2697,10 +2698,10 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: ブール値
 -   デフォルト値: `ON`
@@ -2736,7 +2737,7 @@ Query OK, 0 rows affected (0.09 sec)
 ### tidb_enable_table_partition {#tidb-enable-table-partition}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 列挙
 -   デフォルト値: `ON`
@@ -2749,7 +2750,7 @@ Query OK, 0 rows affected (0.09 sec)
 > v8.1.0以降、TiDBのテレメトリ機能が削除され、この変数は機能しなくなりました。これは以前のバージョンとの互換性のためだけに保持されています。
 
 -   範囲: グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: ブール値
 -   デフォルト値: `OFF`
@@ -2769,7 +2770,7 @@ Query OK, 0 rows affected (0.09 sec)
 ### tidb_enable_tiflash_read_for_write_stmt<span class="version-mark">バージョン6.3.0の新機能</span> {#tidb-enable-tiflash-read-for-write-stmt-span-class-version-mark-new-in-v6-3-0-span}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: ブール値
 -   デフォルト値: `ON`
@@ -2807,7 +2808,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -3030,7 +3031,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -3050,7 +3051,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -3066,7 +3067,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 期間
 -   デフォルト値: `10m0s`
--   範囲: TiDBセルフマネージド[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合は`[10m0s, 8760h0m0s]` `[10m0s, 168h0m0s]`場合は[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)
+-   範囲: TiDBセルフマネージド[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は`[10m0s, 8760h0m0s]`と[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) `[10m0s, 168h0m0s]`場合は[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)
 -   各GCでデータが保持される時間制限（Go Durationの形式）。GCが発生すると、現在時刻からこの値を引いた時点が安全点となります。
 
 > **注記：**
@@ -3080,7 +3081,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -3095,7 +3096,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -3113,7 +3114,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -3208,7 +3209,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -3243,7 +3244,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -3256,7 +3257,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   スコープ: セッション | グローバル
 -   クラスターに持続: はい
@@ -3290,8 +3291,8 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   デフォルト値: `-1`
 -   範囲: `[1, 256]`
 -   単位: スレッド
--   この変数は、 `hash join`アルゴリズムの同時実行性を設定するために使用されます。
--   値が`-1`の場合、代わりに値`tidb_executor_concurrency`が使用されることを意味します。
+-   この変数は、アルゴリズム`hash join`の同時実行性を設定するために使用されます。
+-   値`-1`は、代わりに値`tidb_executor_concurrency`が使用されることを意味します。
 
 ### tidb_hash_join_version <span class="version-mark">v8.4.0 の新機能</span> {#tidb-hash-join-version-span-class-version-mark-new-in-v8-4-0-span}
 
@@ -3436,7 +3437,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 > バージョン5.0以降、この変数は非推奨です。代わりに[`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50)設定してください。
 
 -   スコープ: セッション | グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `-1`
@@ -3448,7 +3449,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 ### tidb_index_merge_intersection_concurrency <span class="version-mark">v6.5.0 の新機能</span> {#tidb-index-merge-intersection-concurrency-span-class-version-mark-new-in-v6-5-0-span}
 
 -   スコープ: セッション | グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当：はい
 -   デフォルト値: `-1`
 -   範囲: `[1, 256]`
@@ -3470,7 +3471,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 ### tidb_index_serial_scan_concurrency {#tidb-index-serial-scan-concurrency}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当：はい
 -   型: 整数
 -   デフォルト値: `1`
@@ -3522,7 +3523,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   スコープ: セッション
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当：はい
@@ -3623,7 +3624,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに永続化: いいえ。現在接続している TiDB インスタンスにのみ適用されます。
@@ -3680,7 +3681,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 ### tidb_max_bytes_before_tiflash_external_group_by<span class="version-mark">バージョン7.0.0の新機能</span> {#tidb-max-bytes-before-tiflash-external-group-by-span-class-version-mark-new-in-v7-0-0-span}
 
 -   スコープ: セッション | グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当：はい
 -   型: 整数
 -   デフォルト値: `-1`
@@ -3874,7 +3875,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 ### tidb_mem_quota_query {#tidb-mem-quota-query}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `1073741824` (1 GiB)
@@ -4377,7 +4378,7 @@ mysql> desc select count(distinct a) from test.t;
 ### tidb_opt_limit_push_down_threshold {#tidb-opt-limit-push-down-threshold}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当：はい
 -   型: 整数
 -   デフォルト値: `100`
@@ -4388,7 +4389,7 @@ mysql> desc select count(distinct a) from test.t;
 ### tidb_opt_メモリ係数 {#tidb-opt-memory-factor}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当：はい
 -   タイプ: フロート
 -   範囲: `[0, 2147483647]`
@@ -4398,7 +4399,7 @@ mysql> desc select count(distinct a) from test.t;
 ### tidb_opt_mpp_outer_join_fixed_build_side <span class="version-mark">v5.1.0 の新機能</span> {#tidb-opt-mpp-outer-join-fixed-build-side-span-class-version-mark-new-in-v5-1-0-span}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当：はい
 -   タイプ: ブール値
 -   デフォルト値: `OFF`
@@ -4953,7 +4954,7 @@ SHOW WARNINGS;
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   スコープ: セッション | グローバル
 -   クラスターに持続: はい
@@ -5270,7 +5271,7 @@ SHOW WARNINGS;
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   スコープ: セッション | グローバル
 -   クラスターに持続: はい
@@ -5310,7 +5311,7 @@ SHOW WARNINGS;
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -5328,7 +5329,7 @@ SHOW WARNINGS;
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -5341,7 +5342,7 @@ SHOW WARNINGS;
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -5407,7 +5408,7 @@ SHOW WARNINGS;
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -5448,7 +5449,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 ### tidb_skip_missing_partition_stats <span class="version-mark">v7.3.0 の新機能</span> {#tidb-skip-missing-partition-stats-span-class-version-mark-new-in-v7-3-0-span}
 
 -   スコープ: セッション | グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: ブール値
 -   デフォルト値: `ON`
@@ -5565,7 +5566,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   スコープ: セッション | グローバル
 -   クラスターに持続: はい
@@ -5712,7 +5713,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -5726,7 +5727,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -5739,7 +5740,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -5765,7 +5766,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -5787,7 +5788,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -5860,7 +5861,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -5959,11 +5960,11 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 >
 > この変数を無効にすると、TiDB はメモリ使用量を正確に追跡できず、対応する SQL ステートメントのメモリ使用量を制御できなくなる可能性があります。
 
-### tidb_tso_client_batch_max_wait_time <span class="version-mark">v5.3.0 の新機能</span> {#tidb-tso-client-batch-max-wait-time-span-class-version-mark-new-in-v5-3-0-span}
+### tidb_tso_client_batch_max_wait_time<span class="version-mark">バージョン5.3.0の新機能</span> {#tidb-tso-client-batch-max-wait-time-span-class-version-mark-new-in-v5-3-0-span}
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -5973,11 +5974,11 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   範囲: `[0, 10]`
 -   単位: ミリ秒
 -   この変数は、TiDBがPDにTSOを要求する際のバッチ操作の最大待機時間を設定するために使用されます。デフォルト値は`0`で、追加の待機時間が発生しないことを意味します。
--   TiDBが利用するPDクライアントは、PDからTSOリクエストを毎回取得する際に、同時に受信したTSOリクエストを可能な限り多く収集します。そして、PDクライアントは収集したリクエストを一括して1つのRPCリクエストにマージし、PDに送信します。これにより、PDの負荷が軽減されます。
+-   TiDBが利用するPDクライアントは、PDからTSOリクエストを毎回取得する際に、同時に受信したTSOリクエストを可能な限り多く収集します。そして、PDクライアントは収集したリクエストを一括して1つのRPCリクエストにマージし、PDに送信します。これにより、PDの負荷を軽減できます。
 -   この変数を`0`より大きい値に設定すると、TiDBは各バッチマージの終了前に、この値の最大期間だけ待機します。これは、より多くのTSOリクエストを収集し、バッチ操作の効果を向上させるためです。
 -   この変数の値を増やすシナリオ:
     -   TSO 要求の圧力が高いため、PD リーダーの CPU がボトルネックになり、TSO RPC 要求のレイテンシーが長くなります。
-    -   クラスター内の TiDB インスタンスはそれほど多くありませんが、すべての TiDB インスタンスは高い同時実行性を持っています。
+    -   クラスター内の TiDB インスタンスは多くありませんが、すべての TiDB インスタンスは高い同時実行性を持っています。
 -   この変数はできるだけ小さい値に設定することをお勧めします。
 
 > **注記：**
@@ -6013,7 +6014,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
     -   TiDB と PD 間のネットワークレイテンシーは、PD が TSO を割り当てるのにかかる時間よりも大幅に長くなります (つまり、ネットワークレイテンシーがTSO RPC 期間の大部分を占めます)。
         -   TSO RPC 要求の期間を取得するには、Grafana TiDB ダッシュボードの PD クライアント セクションにある**PD TSO RPC 期間**パネルを確認します。
         -   PD TSO 割り当ての期間を取得するには、Grafana PD ダッシュボードの TiDB セクションにある**PDサーバーTSO ハンドル期間**パネルを確認します。
-    -   TiDB と PD 間の TSO RPC 要求の増加 ( `PARALLEL`の場合は 2 回、 `PARALLEL-FAST`場合は 4 回) によって生じる追加のネットワーク トラフィックは許容されます。
+    -   TiDB と PD 間の TSO RPC 要求の増加 ( `PARALLEL`回、 `PARALLEL-FAST`場合は 4 回) によって生じる追加のネットワーク トラフィックは許容されます。
 
 > **注記：**
 >
@@ -6024,10 +6025,10 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `0`
 -   範囲: `[0, 9223372036854775807]`
@@ -6037,7 +6038,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -6050,7 +6051,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -6063,7 +6064,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -6076,7 +6077,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -6089,7 +6090,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -6102,7 +6103,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
@@ -6115,7 +6116,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
@@ -6128,7 +6129,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -6212,7 +6213,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   スコープ: セッション | グローバル
 -   クラスターに持続: はい
@@ -6237,7 +6238,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   スコープ: セッション
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
@@ -6252,7 +6253,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   スコープ: セッション
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
@@ -6445,7 +6446,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   スコープ: セッション
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
@@ -6480,7 +6481,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は常に[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)に対して有効です。
+> この変数は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では常に有効になります。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -6496,10 +6497,10 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `8`
--   範囲: TiDBセルフマネージド[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合は`[0, 2147483647]` `[8, 2147483647]`場合は[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)
+-   範囲: TiDBセルフマネージド[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は`[0, 2147483647]`と[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) `[8, 2147483647]`場合は[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)
 -   この変数は、パスワードの複雑さチェックにおけるチェック項目です。パスワードの長さが十分かどうかをチェックします。デフォルトでは、パスワードの最小長さは`8`です。この変数は、 [`validate_password.enable`](#validate_passwordenable-new-in-v650)有効になっている場合にのみ有効になります。
 -   この変数の値は、式`validate_password.number_count + validate_password.special_char_count + (2 * validate_password.mixed_case_count)`より小さくてはなりません。
--   式の値が`validate_password.length`より大きくなるように`validate_password.number_count` 、 `validate_password.special_char_count` 、または`validate_password.mixed_case_count`値を変更すると、 `validate_password.length`の値は式の値と一致するように自動的に変更されます。
+-   式の値が`validate_password.length`より大きくなるように`validate_password.number_count` 、 `validate_password.special_char_count` 、または`validate_password.mixed_case_count`値を変更すると、 `validate_password.length`の値は式の値に合わせて自動的に変更されます。
 
 ### validate_password.mixed_case_count <span class="version-mark">v6.5.0 の新機能</span> {#validate-password-mixed-case-count-span-class-version-mark-new-in-v6-5-0-span}
 
@@ -6508,7 +6509,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `1`
--   範囲: TiDBセルフマネージド[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合は`[0, 2147483647]` `[1, 2147483647]`場合は[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)
+-   範囲: TiDBセルフマネージド[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は`[0, 2147483647]`と[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) `[1, 2147483647]`場合は[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)
 -   この変数は、パスワードの複雑さチェックにおけるチェック項目です。パスワードに十分な大文字と小文字が含まれているかどうかをチェックします。この変数は、 [`validate_password.enable`](#validate_passwordenable-new-in-v650)有効で、 [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) `1` （中）以上に設定されている場合にのみ有効になります。
 -   パスワードに含まれる大文字と小文字の数は、どちらも`validate_password.mixed_case_count`未満にすることはできません。例えば、この変数が`1`に設定されている場合、パスワードには少なくとも1つの大文字と1つの小文字が含まれている必要があります。
 
@@ -6519,7 +6520,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `1`
--   範囲: TiDBセルフマネージド[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合は`[0, 2147483647]` `[1, 2147483647]`場合は[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)
+-   範囲: TiDBセルフマネージド[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は`[0, 2147483647]`と[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) `[1, 2147483647]`場合は[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)
 -   この変数は、パスワードの複雑さチェックにおけるチェック項目です。パスワードに十分な数の数字が含まれているかどうかをチェックします。この変数は、 [`validate_password.enable`](#password_reuse_interval-new-in-v650)が有効で、 [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) `1` （中）以上に設定されている場合にのみ有効になります。
 
 ### validate_password.policy <span class="version-mark">v6.5.0 の新機能</span> {#validate-password-policy-span-class-version-mark-new-in-v6-5-0-span}
@@ -6529,7 +6530,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 列挙
 -   デフォルト値: `1`
--   値のオプション: TiDB Self-Managed の場合は`0` 、 `1` 、 5 、 `2` [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合は[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) 、 `1` 、 `2`
+-   値のオプション: TiDB Self-Managed の場合は`0` 、 `1` 、 `2`および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合は[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) 、 `1`および`2`
 -   この変数は、パスワードの複雑さのチェックに関するポリシーを制御します。この変数は、 [`validate_password.enable`](#password_reuse_interval-new-in-v650)有効になっている場合にのみ有効になります。この変数の値によって、 `validate_password.check_user_name`を除く他の`validate-password`変数がパスワードの複雑さのチェックにおいて有効になるかどうかが決まります。
 -   この変数の値は`0` 、 `1` 、または`2` （それぞれLOW、MEDIUM、STRONGに相当）です。ポリシーレベルによってチェック内容が異なります。
     -   0 または LOW: パスワードの長さ。
@@ -6543,7 +6544,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `1`
--   範囲: TiDBセルフマネージド[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合は`[0, 2147483647]` `[1, 2147483647]`場合は[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)
+-   範囲: TiDBセルフマネージド[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は`[0, 2147483647]`と[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) `[1, 2147483647]`場合は[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)
 -   この変数は、パスワードの複雑さチェックにおけるチェック項目です。パスワードに十分な特殊文字が含まれているかどうかをチェックします。この変数は、 [`validate_password.enable`](#password_reuse_interval-new-in-v650)が有効で、 [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) `1` （中）以上に設定されている場合にのみ有効になります。
 
 ### バージョン {#version}
@@ -6578,10 +6579,10 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **注記：**
 >
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
+> この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `28800`

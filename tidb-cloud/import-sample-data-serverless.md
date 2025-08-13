@@ -1,15 +1,15 @@
 ---
-title: Import Sample Data into TiDB Cloud Serverless
-summary: UI 経由でサンプル データをTiDB Cloud Serverless にインポートする方法を学習します。
+title: Import Sample Data (SQL Files) into TiDB Cloud Starter or Essential from Cloud Storage
+summary: UI 経由でサンプル データをTiDB Cloud Starter またはTiDB Cloud Essential にインポートする方法を学習します。
 ---
 
-# サンプルデータをTiDB Cloud Serverlessにインポートする {#import-sample-data-into-tidb-cloud-serverless}
+# クラウド ストレージからサンプル データ (SQL ファイル) をTiDB Cloud Starter または Essential にインポートする {#import-sample-data-sql-files-into-tidb-cloud-starter-or-essential-from-cloud-storage}
 
-このドキュメントでは、UIを介してTiDB Cloud Serverlessにサンプルデータをインポートする方法について説明します。使用するサンプルデータは、Capital Bikeshareのデータライセンス契約に基づいてリリースされたCapital Bikeshareのシステムデータです。サンプルデータをインポートする前に、TiDBクラスターを1つ用意する必要があります。
+このドキュメントでは、UIを介してサンプルデータ（SQLファイル）をTiDB Cloud StarterまたはTiDB Cloud Essentialにインポートする方法について説明します。使用するサンプルデータは、Capital Bikeshareのデータライセンス契約に基づいてリリースされたCapital Bikeshareのシステムデータです。サンプルデータをインポートする前に、TiDBクラスタを1つ用意する必要があります。
 
 > **注記：**
 >
-> TiDB Cloud Serverless は現在、Amazon S3 からのサンプルデータのインポートのみをサポートしています。
+> このドキュメントで使用されているサンプルデータは Amazon S3 から取得されています。
 
 1.  ターゲット クラスターの**インポート**ページを開きます。
 

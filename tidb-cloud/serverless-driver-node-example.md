@@ -9,7 +9,7 @@ summary: ローカル Node.js プロジェクトでTiDB Cloudサーバーレス 
 
 > **注記：**
 >
-> -   このチュートリアルは、 TiDB Cloud Serverless クラスターにのみ適用されます。
+> -   このドキュメントの手順は、 TiDB Cloud Starter クラスターに加えて、 TiDB Cloud Essential クラスターでも機能します。
 > -   Cloudflare Workers、Vercel Edge Functions、Netlify Edge Functions でTiDB Cloudサーバーレス ドライバーを使用する方法については、 [自動車販売に関する洞察](https://car-sales-insight.vercel.app/)と[サンプルリポジトリ](https://github.com/tidbcloud/car-sales-insight)ご覧ください。
 
 ## 始める前に {#before-you-begin}
@@ -18,7 +18,7 @@ summary: ローカル Node.js プロジェクトでTiDB Cloudサーバーレス 
 
 -   [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
 -   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
--   TiDB Cloud Serverless クラスター。お持ちでない場合は、 [TiDB Cloud Serverless クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)ご利用ください。
+-   TiDB Cloud Starter クラスター。お持ちでない場合は、 [TiDB Cloud Starterクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)選択してください。
 
 ## ステップ1. ローカルNode.jsプロジェクトを作成する {#step-1-create-a-local-node-js-project}
 
@@ -39,7 +39,7 @@ summary: ローカル Node.js プロジェクトでTiDB Cloudサーバーレス 
 
 サーバーレスドライバーはCommonJSとESモジュールの両方をサポートしています。以下の手順では、ESモジュールの使用例を示します。
 
-1.  TiDB Cloud Serverlessクラスターの概要ページで、右上隅の**「接続」**をクリックし、表示されるダイアログからデータベースの接続文字列を取得します。接続文字列は以下のようになります。
+1.  TiDB Cloud Starterクラスターの概要ページで、右上隅の**「接続」**をクリックし、表示されるダイアログからデータベースの接続文字列を取得します。接続文字列は以下のようになります。
 
         mysql://[username]:[password]@[host]/[database]
 
@@ -61,7 +61,7 @@ summary: ローカル Node.js プロジェクトでTiDB Cloudサーバーレス 
     ```js
     import { connect } from '@tidbcloud/serverless'
 
-    const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'}) // replace with your TiDB Cloud Serverless cluster information
+    const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'}) // replace with your TiDB Cloud Starter cluster information
     console.log(await conn.execute("show tables"))
     ```
 

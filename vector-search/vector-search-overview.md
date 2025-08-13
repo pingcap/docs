@@ -25,7 +25,7 @@ summary: TiDBのベクター検索について学びましょう。この機能�
 
 > **注記：**
 >
-> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
 
 ## 概念 {#concepts}
 

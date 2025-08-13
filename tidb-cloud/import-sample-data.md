@@ -1,11 +1,11 @@
 ---
-title: Import Sample Data into TiDB Cloud Dedicated
+title: Import Sample Data (SQL Files) from Cloud Storage into TiDB Cloud Dedicated
 summary: UI 経由でサンプル データをTiDB Cloud Dedicated にインポートする方法を学習します。
 ---
 
-# サンプルデータをTiDB Cloud Dedicatedにインポートする {#import-sample-data-into-tidb-cloud-dedicated}
+# クラウドストレージからTiDB Cloud Dedicated にサンプルデータ (SQL ファイル) をインポートする {#import-sample-data-sql-files-from-cloud-storage-into-tidb-cloud-dedicated}
 
-このドキュメントでは、UIを介してTiDB Cloud Dedicatedにサンプルデータをインポートする方法について説明します。使用するサンプルデータは、Capital Bikeshareのデータライセンス契約に基づいてリリースされたCapital Bikeshareのシステムデータです。サンプルデータをインポートする前に、TiDBクラスタを1つ用意する必要があります。
+このドキュメントでは、UIを介してサンプルデータ（SQLファイル）をTiDB Cloud Dedicatedにインポートする方法について説明します。使用するサンプルデータは、Capital Bikeshareのデータライセンス契約に基づいてリリースされたCapital Bikeshareのシステムデータです。サンプルデータをインポートする前に、TiDBクラスターを1つ用意する必要があります。
 
 <SimpleTab>
 <div label="Amazon S3">

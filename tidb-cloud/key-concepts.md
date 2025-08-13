@@ -37,9 +37,9 @@ TiDB Cloud Dedicated を使用すると、データ量やワークロードの�
 
 ## 高可用性 {#high-availability}
 
-TiDB Cloud は、 TiDB Cloud Serverless クラスターとTiDB Cloud Dedicated クラスターの両方で高可用性を保証します。
+TiDB Cloud は、 TiDB Cloud Starter、 TiDB Cloud Essential、およびTiDB Cloud Dedicated クラスターで高可用性を保証します。
 
--   [TiDB Cloud Serverless の高可用性](/tidb-cloud/serverless-high-availability.md)
+-   [TiDB Cloud StarterとEssentialの高可用性](/tidb-cloud/serverless-high-availability.md)
 -   [TiDB Cloud専用における高可用性](/tidb-cloud/high-availability-with-multi-az.md)
 
 ## 監視 {#monitoring}

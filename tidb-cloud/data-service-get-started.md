@@ -17,7 +17,11 @@ summary: TiDB Cloudデータ サービスを使用して HTTPS リクエスト�
 
 ## 始める前に {#before-you-begin}
 
-データアプリを作成する前に、クラスター[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)作成済みであることを確認してください。クラスターがない場合は、 [TiDB Cloud Serverless クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)の手順に従って作成してください。
+データアプリを作成する前に、AWS でホストされている[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md)クラスターを作成済みであることを確認してください。クラスターがない場合は、 [TiDB Cloud StarterまたはEssential クラスタを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)の手順に従って作成してください。
+
+> **注記：**
+>
+> データサービスはAWSでホストされている[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md)クラスターでのみご利用いただけます。TiDB TiDB Cloud Dedicatedクラスターでデータサービスをご利用になる場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
 ## サンプルデータアプリを使ってみる {#get-started-with-a-sample-data-app}
 

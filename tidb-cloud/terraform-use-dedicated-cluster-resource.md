@@ -1,9 +1,9 @@
 ---
-title: Use TiDB Cloud Dedicated Cluster Resource
-summary: TiDB Cloud Dedicated クラスター リソースを使用して、 TiDB Cloud Dedicated クラスターを作成および変更する方法を学習します。
+title: Use the `tidbcloud_dedicated_cluster` Resource
+summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedicated クラスターを作成および変更する方法を学習します。
 ---
 
-# TiDB Cloud専用クラスタリソースを使用する {#use-tidb-cloud-dedicated-cluster-resource}
+# <code>tidbcloud_dedicated_cluster</code>リソースを使用する {#use-the-code-tidbcloud-dedicated-cluster-code-resource}
 
 このドキュメントでは、 `tidbcloud_dedicated_cluster`リソースを使用して[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターを管理する方法について説明します。
 
@@ -162,7 +162,7 @@ summary: TiDB Cloud Dedicated クラスター リソースを使用して、 TiD
 
     `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    -   TiDB Cloud Dedicated クラスター リソースを使用するには、リソース タイプを`tidbcloud_dedicated_cluster`に設定します。
+    -   `tidbcloud_dedicated_cluster`リソースを使用するには、リソース タイプを`tidbcloud_dedicated_cluster`に設定します。
     -   リソース名は必要に応じて定義できます。例： `example_cluster` 。
     -   リソースの詳細については、プロジェクト ID とTiDB Cloud Dedicated クラスタの仕様情報に従って設定できます。
     -   TiDB Cloud Dedicated クラスタの仕様情報を取得するには、 [tidbcloud_dedicated_cluster (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_cluster)参照してください。
@@ -1030,7 +1030,7 @@ Terraform で管理されていない TiDB クラスターの場合は、イン�
 
 次のように、Terraform によって作成されていないクラスターをインポートします。
 
-1.  新しいTiDB Cloud Dedicated クラスター リソースのインポート ブロックを追加します。
+1.  新しい`tidbcloud_dedicated_cluster`リソースのインポート ブロックを追加します。
 
     次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}`クラスター ID に置き換えます。
 
@@ -1041,7 +1041,7 @@ Terraform で管理されていない TiDB クラスターの場合は、イン�
 
 2.  新しい構成ファイルを生成します。
 
-    インポート ブロックに従って、新しいTiDB Cloud Dedicated クラスター リソースの新しい構成ファイルを生成します。
+    インポート ブロックに従って、新しい`tidbcloud_dedicated_cluster`リソースの新しい構成ファイルを生成します。
 
     ```shell
     terraform plan -generate-config-out=generated.tf

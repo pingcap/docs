@@ -11,7 +11,9 @@ summary: Google Cloud Private Service Connect を介してTiDB Cloudクラスタ
 >
 > -   AWS のプライベートエンドポイント経由でTiDB Cloud Dedicated クラスターに接続する方法については、 [AWS PrivateLink 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)参照してください。
 > -   Azure のプライベート エンドポイント経由でTiDB Cloud Dedicated クラスターに接続する方法については、 [Azure Private Link 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)参照してください。
-> -   プライベート エンドポイント経由でTiDB Cloud Serverless クラスターに接続する方法については、 [プライベートエンドポイント経由でTiDB Cloud Serverless に接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)参照してください。
+> -   プライベート エンドポイント経由でTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続する方法については、次のドキュメントを参照してください。
+>     -   [AWS PrivateLink 経由でTiDB Cloud Starter に接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+>     -   [Alibaba Cloud プライベートエンドポイント経由でTiDB Cloud Starter または Essential に接続します](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
 
 TiDB Cloud は、 [プライベートサービスコネクト](https://cloud.google.com/vpc/docs/private-service-connect)を介して Google Cloud VPC でホストされているTiDB Cloudサービスへの、高度に安全な一方向アクセスをサポートしています。エンドポイントを作成し、それを使用してTiDB Cloudサービスに接続できます。
 
@@ -32,7 +34,12 @@ Google Cloud Private Service Connect のアーキテクチャは次のとおり�
 -   Google Cloud Private Service Connect エンドポイントを作成できるのは、ロール`Organization Owner`と`Project Owner`のみです。
 -   各 TiDB クラスターは、最大 10 個のエンドポイントからの接続を処理できます。
 -   各 Google Cloud プロジェクトには、TiDBクラスタに接続するエンドポイントを最大 10 個まで含めることができます。
--   エンドポイント サービスが構成されたプロジェクトでは、Google Cloud でホストされるTiDB Cloud Dedicated クラスタを最大 8 個作成できます。
+-   2025 年 8 月 12 日以降、Google Cloud 上のTiDB Cloud Dedicated クラスタのリージョンごとに作成できる Google Private Service Connect（PSC）接続の最大数は、NAT サブネット CIDR ブロック サイズによって異なります。
+    -   `/20` : リージョンあたり最大 7 つの PSC 接続
+    -   `/19` : リージョンあたり最大 23 の PSC 接続
+    -   `/18` : リージョンあたり最大 55 の PSC 接続
+    -   `/17` : リージョンあたり最大 119 の PSC 接続
+    -   `/16` : リージョンあたり最大 247 の PSC 接続
 -   プライベート エンドポイントと接続する TiDB クラスターは同じリージョンに配置されている必要があります。
 -   出力ファイアウォールルールは、エンドポイントの内部IPアドレスへのトラフィックを許可する必要があります。1 [暗黙の出口許可ファイアウォールルール](https://cloud.google.com/firewall/docs/firewalls#default_firewall_rules)任意の宛先IPアドレスへの出力を許可します。
 -   VPC ネットワークで出力拒否ファイアウォールルールを作成した場合、または暗黙的に許可された出力動作を変更する階層型ファイアウォールポリシーを作成した場合、エンドポイントへのアクセスに影響が出る可能性があります。この場合、エンドポイントの内部宛先 IP アドレスへのトラフィックを許可する、特定の出力許可ファイアウォールルールまたはポリシーを作成する必要があります。

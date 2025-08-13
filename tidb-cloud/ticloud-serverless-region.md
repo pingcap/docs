@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/ticloud-serverless-regions']
 
 # ticloud サーバーレスリージョン {#ticloud-serverless-region}
 
-TiDB Cloud Serverless で利用可能なすべてのリージョンを一覧表示します。
+TiDB Cloud Starter およびTiDB Cloud Essential で利用可能なすべてのリージョンを一覧表示します。
 
 ```shell
 ticloud serverless region [flags]
@@ -14,13 +14,13 @@ ticloud serverless region [flags]
 
 ## 例 {#examples}
 
-TiDB Cloud Serverless で利用可能なすべてのリージョンを一覧表示します。
+TiDB Cloud Starter およびTiDB Cloud Essential で利用可能なすべてのリージョンを一覧表示します。
 
 ```shell
 ticloud serverless region
 ```
 
-TiDB Cloud Serverless クラスターで利用可能なすべてのリージョンを JSON 形式で一覧表示します。
+TiDB Cloud Starter およびTiDB Cloud Essential で利用可能なすべてのリージョンを JSON 形式で一覧表示します。
 
 ```shell
 ticloud serverless region -o json

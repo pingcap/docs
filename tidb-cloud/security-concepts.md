@@ -164,7 +164,7 @@ TiDB Cloudは、堅牢なネットワークアクセス制御により、安全�
 
 -   仮想プライベート クラウド (VPC) 内の SQL クライアントからTiDB Cloud Dedicated クラスターへの安全な接続を有効にします。
 
--   [AWS プライベートリンク](/tidb-cloud/set-up-private-endpoint-connections.md) 、 [Azure プライベート リンク](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md) 、 [Google Cloud プライベート サービス接続](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)でサポートされています。
+-   [AWS プライベートリンク](/tidb-cloud/set-up-private-endpoint-connections.md) 、 [Azure プライベート リンク](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md) 、 [Google Cloud プライベート サービス接続](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md) 、 [Alibaba Cloud プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)でサポートされています。
 
 **ベスト プラクティス:**本番ではプライベート エンドポイントを使用して公開を最小限に抑え、構成を定期的に確認します。
 
@@ -172,7 +172,10 @@ TiDB Cloudは、堅牢なネットワークアクセス制御により、安全�
 
 -   クライアントとサーバー間の通信を暗号化して、データ転送を安全にします。
 
--   [サーバーレス](/tidb-cloud/secure-connections-to-serverless-clusters.md)と[ひたむきな](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)クラスターの両方にセットアップ ガイドが用意されています。
+-   セットアップガイド:
+
+    -   [TiDB Cloud Starter または Essential への TLS 接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)
+    -   [TiDB Cloud専用へのTLS接続](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
 
 **ベスト プラクティス:** TLS 証明書が最新であることを確認し、定期的にローテーションします。
 
@@ -202,7 +205,7 @@ TiDB Cloud は、高度な暗号化機能を使用して静的データを保護
 
 -   有効にすると、静的データとバックアップが CMEK キーで暗号化されます。
 
--   CMEK のないTiDB Cloud Dedicated クラスターの場合、 TiDB Cloud はエスクロー キーを使用します。TiDB TiDB Cloud Serverless クラスターはエスクロー キーのみに依存します。
+-   CMEK のないTiDB Cloud Dedicated クラスターの場合、 TiDB Cloud はエスクロー キーを使用します。TiDB TiDB Cloud Starter およびTiDB Cloud Essential クラスターはエスクロー キーのみに依存します。
 
 **ベストプラクティス:**
 

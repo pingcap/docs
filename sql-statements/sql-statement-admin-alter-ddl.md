@@ -7,7 +7,7 @@ summary: TiDB データベースの ADMIN ALTER DDL JOBS` の使用法の概要�
 
 > **注記：**
 >
-> 現在、この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
+> 現在、この機能は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)クラスターでは利用できません。
 
 `ADMIN ALTER DDL JOBS`文を使用すると、実行中の単一のDDLジョブのパラメータを変更できます。例:
 

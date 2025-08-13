@@ -5,7 +5,7 @@ summary: ticloud serverless update` のリファレンス。
 
 # ticloud サーバーレスアップデート {#ticloud-serverless-update}
 
-TiDB Cloud Serverless クラスターを更新します。
+TiDB Cloud Starter またはTiDB Cloud Essential クラスターを更新します。
 
 ```shell
 ticloud serverless update [flags]
@@ -13,19 +13,19 @@ ticloud serverless update [flags]
 
 ## 例 {#examples}
 
-対話モードでTiDB Cloud Serverless クラスターを更新します。
+対話モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスターを更新します。
 
 ```shell
 ticloud serverless update
 ```
 
-非対話型モードでTiDB Cloud Serverless クラスターの名前を更新します。
+非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスターの名前を更新します。
 
 ```shell
 ticloud serverless update -c <cluster-id> --display-name <new-display-mame>
 ```
 
-非対話型モードでTiDB Cloud Serverless クラスターのラベルを更新する
+非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスターのラベルを更新する
 
 ```shell
 ticloud serverless update -c <cluster-id> --labels "{\"label1\":\"value1\"}"

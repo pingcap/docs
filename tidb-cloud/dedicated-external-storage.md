@@ -8,7 +8,7 @@ aliases: ['/tidb-cloud/config-s3-and-gcs-access']
 
 ソースデータがAmazon S3バケット、Azure Blob Storageコンテナ、またはGoogle Cloud Storage（GCS）バケットに保存されている場合、 TiDB Cloudにデータをインポートまたは移行する前に、バケットへのクロスアカウントアクセスを設定する必要があります。このドキュメントでは、 TiDB Cloud Dedicatedクラスターでこれを行う方法について説明します。
 
-TiDB Cloud Serverless クラスター用にこれらの外部ストレージを構成する必要がある場合は、 [TiDB Cloud Serverless の外部ストレージアクセスを構成する](/tidb-cloud/serverless-external-storage.md)参照してください。
+TiDB Cloud Starter またはTiDB Cloud Essential クラスター用にこれらの外部ストレージを構成する必要がある場合は、 [TiDB Cloud Starter または Essential の外部ストレージアクセスを構成する](/tidb-cloud/serverless-external-storage.md)参照してください。
 
 ## Amazon S3 アクセスを構成する {#configure-amazon-s3-access}
 

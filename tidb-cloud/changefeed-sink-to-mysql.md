@@ -10,7 +10,7 @@ summary: このドキュメントでは、Sink to MySQL チェンジフィード
 > **注記：**
 >
 > -   changefeed 機能を使用するには、 TiDB Cloud Dedicated クラスターのバージョンが v6.1.3 以降であることを確認してください。
-> -   [TiDB Cloudサーバーレス クラスター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)の場合、changefeed 機能は使用できません。
+> -   クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、changefeed 機能は使用できません。
 
 ## 制限 {#restrictions}
 

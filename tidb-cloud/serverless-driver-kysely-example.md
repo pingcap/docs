@@ -22,7 +22,7 @@ summary: Kysely でTiDB Cloudサーバーレス ドライバーを使用する�
 
 -   [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
 -   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
--   TiDB Cloud Serverless クラスター。お持ちでない場合は、 [TiDB Cloud Serverless クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)ご利用ください。
+-   TiDB Cloud Starter クラスター。お持ちでない場合は、 [TiDB Cloud Starterクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)選択してください。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
@@ -69,7 +69,7 @@ summary: Kysely でTiDB Cloudサーバーレス ドライバーを使用する�
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1.  TiDB Cloud Serverlessクラスターの概要ページで、右上隅の**「接続」**をクリックし、表示されるダイアログからデータベースの接続文字列を取得します。接続文字列は以下のようになります。
+1.  TiDB Cloud Starterクラスターの概要ページで、右上隅の**「接続」**をクリックし、表示されるダイアログからデータベースの接続文字列を取得します。接続文字列は以下のようになります。
 
         mysql://[username]:[password]@[host]/[database]
 
@@ -79,9 +79,9 @@ summary: Kysely でTiDB Cloudサーバーレス ドライバーを使用する�
     export DATABASE_URL='mysql://[username]:[password]@[host]/[database]'
     ```
 
-### ステップ3. Kyselyを使ってデータをクエリする {#step-3-use-kysely-to-query-data}
+### ステップ3. Kyselyを使用してデータをクエリする {#step-3-use-kysely-to-query-data}
 
-1.  TiDB Cloud Serverless クラスターにテーブルを作成し、データを挿入します。
+1.  TiDB Cloud Starter クラスターにテーブルを作成し、データを挿入します。
 
     [TiDB Cloudコンソールの SQL エディター](/tidb-cloud/explore-data-with-chat2query.md)使用するとSQL文を実行できます。以下に例を示します。
 
@@ -156,7 +156,7 @@ summary: Kysely でTiDB Cloudサーバーレス ドライバーを使用する�
 
 -   エッジ環境を提供する[ヴェルセル](https://vercel.com/docs)アカウント。
 -   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
--   TiDB Cloud Serverless クラスター。お持ちでない場合は、 [TiDB Cloud Serverless クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)ご利用ください。
+-   TiDB Cloud Starter クラスター。お持ちでない場合は、 [TiDB Cloud Starterクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)選択してください。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
@@ -175,13 +175,13 @@ summary: Kysely でTiDB Cloudサーバーレス ドライバーを使用する�
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-TiDB Cloud Serverlessクラスターの概要ページで、右上隅の**「接続」**をクリックし、表示されるダイアログからデータベースの接続文字列を取得します。接続文字列は以下のようになります。
+TiDB Cloud Starterクラスターの概要ページで、右上隅の**「接続」**をクリックし、表示されるダイアログからデータベースの接続文字列を取得します。接続文字列は以下のようになります。
 
     mysql://[username]:[password]@[host]/[database]
 
 ### ステップ3. エッジ関数を作成する {#step-3-create-an-edge-function}
 
-1.  TiDB Cloud Serverless クラスターにテーブルを作成し、データを挿入します。
+1.  TiDB Cloud Starter クラスターにテーブルを作成し、データを挿入します。
 
     [TiDB Cloudコンソールの SQL エディター](/tidb-cloud/explore-data-with-chat2query.md)使用するとSQL文を実行できます。以下に例を示します。
 

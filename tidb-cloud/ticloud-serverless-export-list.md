@@ -5,7 +5,7 @@ summary: ticloud serverless export list` のリファレンス。
 
 # ticloud サーバーレスエクスポートリスト {#ticloud-serverless-export-list}
 
-TiDB Cloud Serverless クラスターのデータ エクスポート タスクを一覧表示します。
+TiDB Cloud Starter およびTiDB Cloud Essential クラスターのデータ エクスポート タスクを一覧表示します。
 
 ```shell
 ticloud serverless export list [flags]

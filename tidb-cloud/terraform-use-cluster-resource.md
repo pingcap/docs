@@ -1,13 +1,13 @@
 ---
-title: Use Cluster Resource (Deprecated)
+title: Use the `tidbcloud_cluster` Resource (Deprecated)
 summary: クラスター リソースを使用してTiDB Cloudクラスターを作成および変更する方法を学習します。
 ---
 
-# クラスタリソースの使用 (非推奨) {#use-cluster-resource-deprecated}
+# <code>tidbcloud_cluster</code>リソースを使用する（非推奨） {#use-the-code-tidbcloud-cluster-code-resource-deprecated}
 
 > **警告：**
 >
-> [TiDB CloudTerraform プロバイダー](https://registry.terraform.io/providers/tidbcloud/tidbcloud) v0.4.0以降、リソース`tidbcloud_cluster`非推奨となりました。代わりにリソース`tidbcloud_dedicated_cluster`またはリソース`tidbcloud_serverless_cluster`使用することをお勧めします。詳細については、 [TiDB Cloud専用クラスタリソースを使用する](/tidb-cloud/terraform-use-dedicated-cluster-resource.md)または[TiDB Cloud Serverless クラスタリソースを使用する](/tidb-cloud/terraform-use-serverless-cluster-resource.md)ご覧ください。
+> [TiDB CloudTerraform プロバイダー](https://registry.terraform.io/providers/tidbcloud/tidbcloud) v0.4.0以降、リソース`tidbcloud_cluster`非推奨となりました。代わりにリソース`tidbcloud_dedicated_cluster`またはリソース`tidbcloud_serverless_cluster`使用することをお勧めします。詳細については、 [`tidbcloud_dedicated_cluster`リソースを使用する](/tidb-cloud/terraform-use-dedicated-cluster-resource.md)または[`tidbcloud_serverless_cluster`リソースを使用する](/tidb-cloud/terraform-use-serverless-cluster-resource.md)ご覧ください。
 
 このドキュメントでは、 `tidbcloud_cluster`リソースを使用してTiDB Cloudクラスターを管理する方法を学習できます。
 
@@ -15,9 +15,9 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 `tidbcloud_cluster`リソースの機能は次のとおりです。
 
--   TiDB Cloud Serverless クラスターとTiDB Cloud Dedicated クラスターを作成します。
+-   TiDB Cloud Starter クラスターとTiDB Cloud Dedicated クラスターを作成します。
 -   TiDB Cloud Dedicated クラスターを変更します。
--   TiDB Cloud Serverless およびTiDB Cloud Dedicated クラスターを削除します。
+-   TiDB Cloud Starter クラスターとTiDB Cloud Dedicated クラスターを削除します。
 
 ## 前提条件 {#prerequisites}
 
@@ -801,13 +801,13 @@ TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次の�
 
 6.  少し待ってから、コマンド`terraform refersh`で状態を更新します。最終的にステータスは`AVAILABLE`に変更されます。
 
-これで、Terraform を使用してTiDB Cloud Dedicated クラスタを作成および管理できました。次に、 [バックアップリソース](/tidb-cloud/terraform-use-backup-resource.md)を使用してクラスタのバックアップを作成してみましょう。
+これで、Terraform を使用してTiDB Cloud Dedicated クラスタを作成および管理できました。次に、 [`tidbcloud_backup`](/tidb-cloud/terraform-use-backup-resource.md)リソースでクラスタのバックアップを作成してみましょう。
 
 ## クラスターをインポートする {#import-a-cluster}
 
 Terraform で管理されていない TiDB クラスターの場合は、インポートするだけで Terraform を使用して管理できます。
 
-たとえば、Terraform によって作成されていないクラスターをインポートしたり、 [復元リソースで作成された](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task)であるクラスターをインポートしたりできます。
+たとえば、Terraform によって作成されていないクラスターをインポートしたり、 [`tidbcloud_restore`リソースで作成された](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task)であるクラスターをインポートしたりできます。
 
 1.  次のように`import_cluster.tf`ファイルを作成します。
 

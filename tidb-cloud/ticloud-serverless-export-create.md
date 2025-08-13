@@ -5,7 +5,7 @@ summary: ticloud serverless export create` のリファレンス。
 
 # ticloud サーバーレスエクスポート作成 {#ticloud-serverless-export-create}
 
-TiDB Cloud Serverless クラスターからデータをエクスポートします。
+TiDB Cloud Starter またはTiDB Cloud Essential クラスターからデータをエクスポートします。
 
 ```shell
 ticloud serverless export create [flags]
@@ -13,37 +13,37 @@ ticloud serverless export create [flags]
 
 ## 例 {#examples}
 
-インタラクティブ モードでTiDB Cloud Serverless クラスターからデータをエクスポートします。
+対話モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスターからデータをエクスポートします。
 
 ```shell
 ticloud serverless export create
 ```
 
-非対話型モードでTiDB Cloud Serverless クラスターからローカル ファイルにデータをエクスポートします。
+非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスターからローカル ファイルにデータをエクスポートします。
 
 ```shell
 ticloud serverless export create -c <cluster-id> --filter <database.table>
 ```
 
-非対話型モードでTiDB Cloud Serverless クラスターから Amazon S3 にデータをエクスポートします。
+非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスターから Amazon S3 にデータをエクスポートします。
 
 ```shell
 ticloud serverless export create -c <cluster-id> --s3.uri <uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key> --filter <database.table>
 ```
 
-非対話型モードでTiDB Cloud Serverless クラスタから Google Cloud Storage にデータをエクスポートします。
+非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスタから Google Cloud Storage にデータをエクスポートします。
 
 ```shell
 ticloud serverless export create -c <cluster-id> --gcs.uri <uri> --gcs.service-account-key <service-account-key> --filter <database.table>
 ```
 
-非対話型モードでTiDB Cloud Serverless クラスターから Azure Blob Storage にデータをエクスポートします。
+非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスターから Azure Blob Storage にデータをエクスポートします。
 
 ```shell
 ticloud serverless export create -c <cluster-id> --azblob.uri <uri> --azblob.sas-token <sas-token> --filter <database.table>
 ```
 
-非対話型モードでTiDB Cloud Serverless クラスターから Alibaba Cloud OSS にデータをエクスポートします。
+TiDB Cloud Starter またはTiDB Cloud Essential クラスターから Alibaba Cloud OSS に非対話型モードでデータをエクスポートします。
 
 ```shell
 ticloud serverless export create -c <cluster-id> --oss.uri <uri> --oss.access-key-id <access-key-id> --oss.access-key-secret <access-key-secret> --filter <database.table>

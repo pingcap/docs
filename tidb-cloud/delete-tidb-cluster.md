@@ -28,7 +28,7 @@ summary: TiDB クラスターを削除する方法を学習します。
 
     > **注記：**
     >
-    > [TiDB Cloudサーバーレス クラスター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)削除後のデータの復元をサポートしていません。TiDB TiDB Cloud Serverless クラスターを削除し、後でデータを復元する場合は、 [TiDB Cloud Serverlessからデータをエクスポート](/tidb-cloud/serverless-export.md)参照してデータをバックアップとしてエクスポートしてください。
+    > [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスターは、削除後のデータの復元をサポートしていません。TiDB TiDB Cloud Starter またはTiDB Cloud Essential クラスターを削除し、後でデータを復元する場合は、 [TiDB Cloud StarterまたはEssentialからデータをエクスポートする](/tidb-cloud/serverless-export.md)参照してデータをバックアップとしてエクスポートしてください。
 
 5.  **「理解しましたので削除します」を**クリックします。
 

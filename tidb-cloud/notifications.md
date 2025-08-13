@@ -35,19 +35,21 @@ TiDB Cloudコンソールでは、次のようなさまざまな種類の通知�
 
 次の表は、 TiDB Cloudで使用できる通知と、そのトリガー イベントおよび受信者を示しています。
 
-| 通知                             | トリガーイベント                                                                                    | 通知受信者                                                                                             |
-| ------------------------------ | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| TiDB Cloudサーバーレス クラスターの作成      | [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターが作成されます。   | プロジェクトメンバー全員                                                                                      |
-| TiDB Cloud Serverless クラスターの削除 | TiDB Cloud Serverless クラスターが削除されます。                                                         | プロジェクトメンバー全員                                                                                      |
-| TiDB Cloud専用クラスタの作成            | [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターが作成されます。        | プロジェクトメンバー全員                                                                                      |
-| TiDB Cloud専用クラスタの削除            | TiDB Cloud Dedicated クラスターが削除されます。                                                          | プロジェクトメンバー全員                                                                                      |
-| 組織予算しきい値アラート                   | 組織[予算のしきい値](/tidb-cloud/tidb-cloud-budget.md)に到達しました。                                       | `Organization Owner` `Organization Billing Manager` `Organization Billing Viewer`                 |
-| プロジェクト予算しきい値アラート               | プロジェクト[予算のしきい値](/tidb-cloud/tidb-cloud-budget.md)に到達しました。                                   | `Organization Owner` `Organization Billing Manager` `Organization Billing Viewer` `Project Owner` |
-| サーバーレス クラスターの支出制限しきい値アラート      | 組織内のTiDB Cloud Serverless クラスターの[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)達しました。 | `Organization Owner` `Organization Billing Manager` `Organization Billing Viewer` `Project Owner` |
-| クレジットの更新                       | 組織の[クレジット](/tidb-cloud/tidb-cloud-billing.md#credits)は適用済み、完全に使用済み、再利用済み、または期限切れです。         | `Organization Owner` `Organization Billing Manager` `Organization Billing Viewer`                 |
-| 割引の更新                          | 組織の[割引](/tidb-cloud/tidb-cloud-billing.md#discounts)が適用、再利用、または期限切れです。                      | `Organization Owner` `Organization Billing Manager` `Organization Billing Viewer`                 |
-| マーケットプレイスのアップデート               | 組織は、クラウド プロバイダー マーケットプレイスを通じてサブスクリプションまたはサブスクリプション解除を行っています。                                | 組織の全メンバー                                                                                          |
-| サポートプランの更新                     | 組織のサポート プラン サブスクリプションが変更されます。                                                               | 組織の全メンバー                                                                                          |
+| 通知                            | トリガーイベント                                                                                   | 通知受信者                                                                                             |
+| ----------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| TiDB Cloud Starter クラスターの作成   | [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターが作成されます。   | プロジェクトメンバー全員                                                                                      |
+| TiDB Cloud Starter クラスターの削除   | TiDB Cloud Starter クラスターが削除されます。                                                           | プロジェクトメンバー全員                                                                                      |
+| TiDB Cloud Essential クラスターの作成 | [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスターが作成されます。             | プロジェクトメンバー全員                                                                                      |
+| TiDB Cloud Essential クラスタの削除  | [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスターが削除されます。             | プロジェクトメンバー全員                                                                                      |
+| TiDB Cloud専用クラスタの作成           | [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターが作成されます。       | プロジェクトメンバー全員                                                                                      |
+| TiDB Cloud専用クラスタの削除           | TiDB Cloud Dedicated クラスターが削除されます。                                                         | プロジェクトメンバー全員                                                                                      |
+| 組織予算しきい値アラート                  | 組織[予算のしきい値](/tidb-cloud/tidb-cloud-budget.md)に到達しました。                                      | `Organization Owner` `Organization Billing Manager` `Organization Billing Viewer`                 |
+| プロジェクト予算しきい値アラート              | プロジェクト[予算のしきい値](/tidb-cloud/tidb-cloud-budget.md)に到達しました。                                  | `Organization Owner` `Organization Billing Manager` `Organization Billing Viewer` `Project Owner` |
+| スターター クラスターの支出制限しきい値アラート      | 組織内のTiDB Cloud Starter クラスターの数が[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)達しました。 | `Organization Owner` `Organization Billing Manager` `Organization Billing Viewer` `Project Owner` |
+| クレジットの更新                      | 組織の[クレジット](/tidb-cloud/tidb-cloud-billing.md#credits)は適用済み、完全に使用済み、再利用済み、または期限切れです。        | `Organization Owner` `Organization Billing Manager` `Organization Billing Viewer`                 |
+| 割引の更新                         | 組織の[割引](/tidb-cloud/tidb-cloud-billing.md#discounts)が適用、再利用、または期限切れです。                     | `Organization Owner` `Organization Billing Manager` `Organization Billing Viewer`                 |
+| マーケットプレイスのアップデート              | 組織は、クラウド プロバイダー マーケットプレイスを通じてサブスクリプションまたはサブスクリプション解除を行っています。                               | 組織の全メンバー                                                                                          |
+| サポートプランの更新                    | 組織のサポート プラン サブスクリプションが変更されます。                                                              | 組織の全メンバー                                                                                          |
 
 ## 通知をビュー {#view-notifications}
 

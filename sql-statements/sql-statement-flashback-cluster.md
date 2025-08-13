@@ -11,7 +11,7 @@ TiDB v6.5.6、v7.1.3、v7.5.1、v7.6.0以降では、 `FLASHBACK CLUSTER TO TSO`
 
 > **警告：**
 >
-> `FLASHBACK CLUSTER TO [TIMESTAMP|TSO]`構文は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターには適用できません。予期しない結果を避けるため、 TiDB Cloud Serverless クラスターではこのステートメントを実行しないでください。
+> `FLASHBACK CLUSTER TO [TIMESTAMP|TSO]`構文は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)クラスターには適用されません。予期しない結果を避けるため、 TiDB Cloud Starter およびTiDB Cloud Essential クラスターではこのステートメントを実行しないでください。
 
 > **警告：**
 >

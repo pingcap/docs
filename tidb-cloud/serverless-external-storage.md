@@ -1,17 +1,17 @@
 ---
-title: Configure TiDB Cloud Serverless External Storage Access
+title: Configure External Storage Access for TiDB Cloud Starter or Essential
 summary: Amazon Simple Storage Service (Amazon S3) アクセスを構成する方法を学習します。
 ---
 
-# TiDB Cloud Serverless の外部ストレージアクセスを構成する {#configure-external-storage-access-for-tidb-cloud-serverless}
+# TiDB Cloud Starter または Essential の外部ストレージアクセスを構成する {#configure-external-storage-access-for-tidb-cloud-starter-or-essential}
 
-TiDB Cloud Serverless クラスター内の外部storageからデータをインポートまたはエクスポートする場合は、クロスアカウントアクセスを設定する必要があります。このドキュメントでは、 TiDB Cloud Serverless クラスターの外部storageへのアクセスを設定する方法について説明します。
+TiDB Cloudクラスター内の外部storageからデータをインポートまたはエクスポートする場合は、クロスアカウントアクセスを設定する必要があります。このドキュメントでは、TiDB Cloud Starter クラスターおよびTiDB Cloud Essential クラスターの外部storageへのアクセスを設定する方法について説明します。
 
 TiDB Cloud Dedicated クラスター用にこれらの外部ストレージを構成する必要がある場合は、 [TiDB Cloud Dedicatedの外部ストレージアクセスを構成する](/tidb-cloud/dedicated-external-storage.md)参照してください。
 
 ## Amazon S3 アクセスを構成する {#configure-amazon-s3-access}
 
-TiDB Cloud Serverless クラスターが Amazon S3 バケット内のソースデータにアクセスできるようにするには、次のいずれかの方法を使用してクラスターのバケットアクセスを設定します。
+TiDB Cloudクラスターが Amazon S3 バケット内のソースデータにアクセスできるようにするには、次のいずれかの方法を使用してクラスターのバケットアクセスを設定します。
 
 -   [ロールARNを使用する](#configure-amazon-s3-access-using-a-role-arn) : ロール ARN を使用して Amazon S3 バケットにアクセスします。
 -   [AWSアクセスキーを使用する](#configure-amazon-s3-access-using-an-aws-access-key) : IAMユーザーのアクセスキーを使用して Amazon S3 バケットにアクセスします。
@@ -22,7 +22,7 @@ TiDB Cloud Serverless クラスターが Amazon S3 バケット内のソース�
 
 > **注記：**
 >
-> Amazon S3へのロールARNアクセスは、クラウドプロバイダーとしてAWSを使用しているクラスターでのみサポートされます。別のクラウドプロバイダーを使用している場合は、代わりにAWSアクセスキーを使用してください。詳細については、 [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key)ご覧ください。
+> Amazon S3へのロールARNアクセスは、クラウドプロバイダーとしてAWSを使用しているクラスターでのみサポートされます。別のクラウドプロバイダーを使用している場合は、代わりにAWSアクセスキーを使用してください。詳細については、 [AWS アクセスキーを使用して Amazon S3 アクセスを構成する](#configure-amazon-s3-access-using-an-aws-access-key)ご覧ください。
 
 1.  ターゲット クラスターの**インポート**ページを開きます。
 
@@ -34,7 +34,7 @@ TiDB Cloud Serverless クラスターが Amazon S3 バケット内のソース�
 
     -   Amazon S3 からデータをインポートする場合は、次のようにして**[新しい ARN の追加]**ダイアログを開きます。
 
-        1.  Click **Import from S3**.
+        1.  **S3 からインポート**をクリックします。
         2.  **ファイル URI**フィールドに入力します。
         3.  **AWS ロール ARN**を選択し、[**ここをクリックして AWS CloudFormation で新規作成] を**クリックします。
 
@@ -50,7 +50,7 @@ TiDB Cloud Serverless クラスターが Amazon S3 バケット内のソース�
 
     2.  [AWS マネジメントコンソール](https://console.aws.amazon.com)にログインすると、AWS CloudFormation の**クイック作成スタック**ページにリダイレクトされます。
 
-    3.  Fill in the **Role Name**.
+    3.  **ロール名**を入力します。
 
     4.  新しいロールを作成することを確認し、 **「スタックの作成」**をクリックしてロール ARN を作成します。
 
@@ -78,10 +78,10 @@ AWS CloudFormation でロール ARN を作成するときに問題が発生し�
 
     4.  **[ポリシーの作成]**ページで、 **[JSON]**タブをクリックします。
 
-    5.  Configure the policy in the policy text field according to your needs. The following is an example that you can use to export data from and import data into a TiDB Cloud Serverless cluster.
+    5.  必要に応じて、ポリシーテキストフィールドでポリシーを設定します。以下は、 TiDB Cloudクラスターとの間でデータのエクスポートとインポートを行う例です。
 
-        -   TiDB Cloud Serverless クラスターからデータをエクスポートするには**、s3:PutObject**および**s3:ListBucket**権限が必要です。
-        -   TiDB Cloud Serverless クラスターにデータをインポートするには**、 s3:GetObject** 、 **s3:GetObjectVersion** 、および**s3:ListBucket**権限が必要です。
+        -   TiDB Cloudクラスターからデータをエクスポートするには**、s3:PutObject**および**s3:ListBucket**権限が必要です。
+        -   TiDB Cloudクラスターにデータをインポートするには**、 s3:GetObject** 、 **s3:GetObjectVersion** 、および**s3:ListBucket**権限が必要です。
 
         ```json
         {
@@ -111,10 +111,10 @@ AWS CloudFormation でロール ARN を作成するときに問題が発生し�
 
         ポリシー テキスト フィールドで、次の構成を独自の値に置き換えます。
 
-        -   `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>/*"`. For example:
+        -   `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>/*"` 。例えば:
 
             -   ソース データが`tidb-cloud-source-data`バケットのルート ディレクトリに保存されている場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`使用します。
-            -   If your source data is stored in the `mydata` directory of the bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`.
+            -   ソース データがバケットの`mydata`ディレクトリに保存されている場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`使用します。
 
             TiDB Cloud がこのディレクトリ内のすべてのファイルにアクセスできるように、ディレクトリの末尾に`/*`が追加されていることを確認してください。
 
@@ -145,7 +145,7 @@ AWS CloudFormation でロール ARN を作成するときに問題が発生し�
 
     2.  ロールを作成するには、次の情報を入力します。
 
-        -   In **Trusted entity type**, select **AWS account**.
+        -   **信頼されたエンティティタイプ**で、 **AWS アカウント**を選択します。
         -   **「AWS アカウント」**で**「別の AWS アカウント」**を選択し、 TiDB Cloudアカウント ID を**「アカウント ID」**フィールドに貼り付けます。
         -   **オプション**で、 **「外部IDが必要（サードパーティがこのロールを引き受ける場合のベストプラクティス）」**をクリックし、 TiDB Cloudの外部IDを**「外部ID」**フィールドに貼り付けます。「外部IDが必要」を指定せずにロールを作成した場合、プロジェクト内の1つのTiDBクラスターの設定が完了すると、そのプロジェクト内のすべてのTiDBクラスターが同じロールARNを使用してAmazon S3バケットにアクセスできるようになります。アカウントIDと外部IDを指定してロールを作成した場合、対応するTiDBクラスターのみがバケットにアクセスできます。
 
@@ -177,11 +177,11 @@ AWS CloudFormation でロール ARN を作成するときに問題が発生し�
 
 ## GCS アクセスを構成する {#configure-gcs-access}
 
-To allow a TiDB Cloud Serverless cluster to access your GCS bucket, you need to configure the GCS access for the bucket. You can use a service account key to configure the bucket access:
+TiDB Cloudクラスタが GCS バケットにアクセスできるようにするには、バケットの GCS アクセスを設定する必要があります。バケットアクセスの設定には、サービスアカウントキーを使用できます。
 
 サービス アカウント キーを構成するには、次の手順を実行します。
 
-1.  Google Cloud [service account page](https://console.cloud.google.com/iam-admin/serviceaccounts)で、 **「サービスアカウントを作成」**をクリックしてサービスアカウントを作成します。詳細については、 [サービスアカウントの作成](https://cloud.google.com/iam/docs/creating-managing-service-accounts)ご覧ください。
+1.  Google Cloud [サービスアカウントページ](https://console.cloud.google.com/iam-admin/serviceaccounts)で、 **「サービスアカウントを作成」**をクリックしてサービスアカウントを作成します。詳細については、 [サービスアカウントの作成](https://cloud.google.com/iam/docs/creating-managing-service-accounts)ご覧ください。
 
     1.  サービス アカウント名を入力します。
 
@@ -191,8 +191,8 @@ To allow a TiDB Cloud Serverless cluster to access your GCS bucket, you need to 
 
     4.  `Grant this service account access to project`で、必要な権限を持つ[IAMロール](https://cloud.google.com/iam/docs/understanding-roles)選択します。
 
-        -   TiDB Cloud Serverless クラスターからデータをエクスポートするには、 `storage.objects.create`権限を持つロールが必要です。
-        -   Importing data into a TiDB Cloud Serverless cluster needs a role with `storage.buckets.get`, `storage.objects.get`, and `storage.objects.list` permissions.
+        -   TiDB Cloudクラスターからデータをエクスポートするには、 `storage.objects.create`権限を持つロールが必要です。
+        -   TiDB Cloudクラスターにデータをインポートするには、 `storage.buckets.get` 、 `storage.objects.get` 、 `storage.objects.list`権限を持つロールが必要です。
 
     5.  **「続行」**をクリックして次のステップに進みます。
 
@@ -206,19 +206,19 @@ To allow a TiDB Cloud Serverless cluster to access your GCS bucket, you need to 
 
     ![service-account-key](/media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
 
-3.  デフォルトのキータイプ`JSON`を選択し、 **「作成」**をクリックしてGoogle Cloud認証情報ファイルをダウンロードします。このファイルには、TiDB Cloud ServerlessクラスタのGCSアクセスを構成する際に必要なサービスアカウントキーが含まれています。
+3.  デフォルトのキータイプ`JSON`を選択し、 **「作成」**をクリックしてGoogle Cloud認証情報ファイルをダウンロードします。このファイルには、TiDB CloudクラスタのGCSアクセスを構成する際に必要なサービスアカウントキーが含まれています。
 
 ## Azure Blob Storage アクセスを構成する {#configure-azure-blob-storage-access}
 
-TiDB Cloud Serverless が Azure Blob コンテナーにアクセスできるようにするには、コンテナーのサービス SAS トークンを作成する必要があります。
+TiDB Cloud がAzure Blob コンテナーにアクセスできるようにするには、コンテナーのサービス SAS トークンを作成する必要があります。
 
 SAS トークンは、 [Azure ARM テンプレート](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview) (推奨) または手動構成を使用して作成できます。
 
 Azure ARM テンプレートを使用して SAS トークンを作成するには、次の手順を実行します。
 
-1.  Open the **Import** page for your target cluster.
+1.  ターゲット クラスターの**インポート**ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**Clusters**](https://tidbcloud.com/project/clusters)ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
     2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
@@ -240,7 +240,7 @@ Azure ARM テンプレートを使用して SAS トークンを作成するに�
 
     4.  **「確認と作成」**または**「次へ」**をクリックして、デプロイ内容を確認します。 **「作成」**をクリックしてデプロイを開始します。
 
-    5.  After it completes, you will be redirected to the deployment overview page. Navigate to the **Outputs** section to get the SAS token.
+    5.  完了すると、デプロイの概要ページにリダイレクトされます。 **「出力」**セクションに移動して、SAS トークンを取得してください。
 
 Azure ARM テンプレートを使用して SAS トークンを作成するときに問題が発生した場合は、次の手順に従って手動で作成してください。
 
@@ -258,10 +258,10 @@ Azure ARM テンプレートを使用して SAS トークンを作成すると�
 
     2.  **許可されたリソース タイプ**セクションで、**コンテナー**と**オブジェクト**を選択します。
 
-    3.  In the **Allowed permissions** section, choose the permission as needed.
+    3.  **「許可された権限」**セクションで、必要に応じて権限を選択します。
 
-        -   TiDB Cloud Serverless クラスターからデータをエクスポートするには、**読み取り**権限と**書き込み**権限が必要です。
-        -   TiDB Cloud Serverless クラスターにデータをインポートするには、**読み取り**権限と**リスト**権限が必要です。
+        -   TiDB Cloudクラスターからデータをエクスポートするには、**読み取り**権限と**書き込み**権限が必要です。
+        -   TiDB Cloudクラスターにデータをインポートするには、**読み取り**権限と**リスト**権限が必要です。
 
     4.  必要に応じて**開始日時と有効期限**を調整します。
 
@@ -269,13 +269,13 @@ Azure ARM テンプレートを使用して SAS トークンを作成すると�
 
     ![sas-create](/media/tidb-cloud/serverless-external-storage/azure-sas-create.png)
 
-4.  Click **Generate SAS and connection string** to generate the SAS token.
+4.  SAS トークンを生成するには、 **「SAS と接続文字列の生成」を**クリックします。
 
 </details>
 
 ## Alibaba Cloud Object Storage Service (OSS) アクセスを構成する {#configure-alibaba-cloud-object-storage-service-oss-access}
 
-TiDB Cloud Serverless が Alibaba Cloud OSS バケットにアクセスできるようにするには、バケットの AccessKey ペアを作成する必要があります。
+TiDB Cloud がAlibaba Cloud OSS バケットにアクセスできるようにするには、バケットの AccessKey ペアを作成する必要があります。
 
 AccessKey ペアを構成するには、次の手順を実行します。
 
@@ -285,15 +285,15 @@ AccessKey ペアを構成するには、次の手順を実行します。
 
 2.  必要な権限を持つカスタムポリシーを作成します。詳細については、 [カスタムポリシーを作成する](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy)参照してください。
 
-    -   In the **Effect** section, select **Allow**.
+    -   **[効果]**セクションで、 **[許可]**を選択します。
 
     -   **[サービス]**セクションで、 **[オブジェクト ストレージ サービス]**を選択します。
 
     -   **「アクション」**セクションで、必要に応じて権限を選択します。
 
-        TiDB Cloud Serverless クラスターにデータをインポートするには、 **oss:GetObject** 、 **oss:GetBucketInfo** 、および**oss:ListObjects**権限を付与します。
+        TiDB Cloudクラスターにデータをインポートするには、 **oss:GetObject** 、 **oss:GetBucketInfo** 、および**oss:ListObjects**権限を付与します。
 
-        TiDB Cloud Serverless クラスターからデータをエクスポートするには、 **oss:PutObject** 、 **oss:GetBucketInfo** 、および**oss:ListBuckets**権限を付与します。
+        TiDB Cloudクラスターからデータをエクスポートするには、 **oss:PutObject** 、 **oss:GetBucketInfo** 、および**oss:ListBuckets**権限を付与します。
 
     -   **リソース**セクションで、バケットとバケット内のオブジェクトを選択します。
 

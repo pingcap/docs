@@ -5,7 +5,7 @@ summary: ticloud serverless describe` のリファレンス。
 
 # ticloud サーバーレスの説明 {#ticloud-serverless-describe}
 
-TiDB Cloud Serverless クラスターに関する情報 (クラスター構成やクラスターステータスなど) を取得します。
+TiDB Cloud Starter またはTiDB Cloud Essential クラスターに関する情報 (クラスター構成やクラスターステータスなど) を取得します。
 
 ```shell
 ticloud serverless describe [flags]
@@ -19,13 +19,13 @@ ticloud serverless get [flags]
 
 ## 例 {#examples}
 
-インタラクティブ モードでTiDB Cloud Serverless クラスターに関する情報を取得します。
+対話モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスターに関する情報を取得します。
 
 ```shell
 ticloud serverless describe
 ```
 
-非対話型モードでTiDB Cloud Serverless クラスターに関する情報を取得します。
+非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスターに関する情報を取得します。
 
 ```shell
 ticloud serverless describe --cluster-id <cluster-id>

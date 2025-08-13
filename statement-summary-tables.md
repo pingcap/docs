@@ -17,7 +17,7 @@ SQLパフォーマンスの問題をより適切に処理するために、MySQL
 
 > **注記：**
 >
-> 上記のテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> 上記のテーブルは、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
 
 このドキュメントでは、これらのテーブルについて詳しく説明し、それらを使用して SQL パフォーマンスの問題をトラブルシューティングする方法を紹介します。
 

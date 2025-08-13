@@ -9,7 +9,7 @@ summary: パブリック接続を介してTiDB Cloudクラスターに接続す�
 
 > **ヒント：**
 >
-> パブリック接続を介してTiDB Cloud Serverless クラスターに接続する方法については、 [パブリックエンドポイント経由でTiDB Cloud Serverless に接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)参照してください。
+> パブリック接続を介してTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続する方法については、 [パブリックエンドポイント経由でTiDB Cloud Starter または Essential に接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)参照してください。
 
 ## 前提条件: IPアクセスリストを構成する {#prerequisite-configure-ip-access-list}
 

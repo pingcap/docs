@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/ticloud-connect']
 
 # ticloud サーバーレスシェル {#ticloud-serverless-shell}
 
-TiDB Cloud Serverless クラスターに接続します。
+TiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続します。
 
 ```shell
 ticloud serverless shell [flags]
@@ -14,25 +14,25 @@ ticloud serverless shell [flags]
 
 ## 例 {#examples}
 
-インタラクティブ モードでTiDB Cloud Serverless クラスターに接続します。
+対話モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続します。
 
 ```shell
 ticloud serverless shell
 ```
 
-非対話型モードでデフォルトのユーザーを使用してTiDB Cloud Serverless クラスターに接続します。
+非対話型モードでデフォルトのユーザーを使用してTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続します。
 
 ```shell
 ticloud serverless shell -c <cluster-id>
 ```
 
-非対話型モードでデフォルトのユーザー名とパスワードを使用してTiDB Cloud Serverless クラスターに接続します。
+非対話型モードでデフォルトのユーザー名とパスワードを使用して、TiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続します。
 
 ```shell
 ticloud serverless shell -c <cluster-id> --password <password>
 ```
 
-非対話型モードで特定のユーザーとパスワードを使用してTiDB Cloud Serverless クラスターに接続します。
+非対話型モードで特定のユーザー名とパスワードを使用してTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続します。
 
 ```shell
 ticloud serverless shell -c <cluster-id> -u <user-name> --password <password>

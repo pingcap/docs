@@ -19,13 +19,13 @@ ticloud serverless branch get [flags]
 
 ## 例 {#examples}
 
-対話モードでTiDB Cloud Serverless クラスターのブランチ情報を取得します。
+対話モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチ情報を取得します。
 
 ```shell
 ticloud serverless branch describe
 ```
 
-非対話型モードでTiDB Cloud Serverless クラスターのブランチ情報を取得します。
+非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチ情報を取得します。
 
 ```shell
 ticloud serverless branch describe --branch-id <branch-id> --cluster-id <cluster-id>

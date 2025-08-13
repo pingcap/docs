@@ -12,6 +12,10 @@ summary: Prisma ORM でTiDB Cloudサーバーレス ドライバーを使用す�
 
 このチュートリアルでは、サーバーレス環境とエッジ環境で[@tidbcloud/プリズマアダプター](https://github.com/tidbcloud/prisma-adapter)使用する方法について説明します。
 
+> **ヒント：**
+>
+> このドキュメントの手順は、 TiDB Cloud Starter クラスターに加えて、 TiDB Cloud Essential クラスターでも機能します。
+
 ## インストール {#install}
 
 [@tidbcloud/プリズマアダプター](https://github.com/tidbcloud/prisma-adapter)と[TiDB Cloudサーバーレス ドライバー](/tidb-cloud/serverless-driver.md)両方をインストールする必要があります。5 またはお好みのパッケージマネージャーを使用し[npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)インストールできます。
@@ -43,7 +47,7 @@ datasource db {
 
 Prisma Client を使用する前に、 `@tidbcloud/prisma-adapter`で初期化する必要があります。
 
-v6.6.0 より前の`@tidbcloud/prisma-adapter`場合:
+v6.6.0 より前のバージョン`@tidbcloud/prisma-adapter`場合:
 
 ```js
 import { connect } from '@tidbcloud/serverless';
@@ -79,7 +83,7 @@ const prisma = new PrismaClient({ adapter });
 
 -   [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
 -   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
--   TiDB Cloud Serverless クラスター。お持ちでない場合は、 [TiDB Cloud Serverless クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)ご利用ください。
+-   TiDB Cloud Starter クラスター。お持ちでない場合は、 [TiDB Cloud Starterクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)選択してください。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
@@ -114,7 +118,7 @@ const prisma = new PrismaClient({ adapter });
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1.  TiDB Cloud Serverlessクラスターの概要ページで、右上隅の**「接続」**をクリックし、表示されるダイアログからデータベースの接続文字列を取得します。接続文字列は以下のようになります。
+1.  TiDB Cloud Starterクラスターの概要ページで、右上隅の**「接続」**をクリックし、表示されるダイアログからデータベースの接続文字列を取得します。接続文字列は以下のようになります。
 
         mysql://[username]:[password]@[host]:4000/[database]?sslaccept=strict
 
@@ -167,11 +171,11 @@ const prisma = new PrismaClient({ adapter });
           name  String? @db.VarChar(255)
         }
 
-3.  データベースをPrismaスキーマと同期します。TiDB TiDB Cloud Serverlessクラスターにデータベーステーブルを手動で作成するか、Prisma CLIを使用して以下の手順で自動的に作成することもできます。
+3.  データベースをPrismaスキーマと同期します。TiDB TiDB Cloud Starterクラスターにデータベーステーブルを手動で作成するか、Prisma CLIを使用して以下の手順で自動的に作成することもできます。
 
         npx prisma db push
 
-    このコマンドは、 `@tidbcloud/prisma-adapter`使用したHTTPS接続ではなく、従来のTCP接続を介してTiDB Cloud Serverlessクラスターにテーブル`user`を作成します。これは、Prisma Migrateと同じエンジンを使用しているためです。このコマンドの詳細については、 [スキーマのプロトタイプを作成する](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push)参照してください。
+    このコマンドは、 TiDB Cloud Starterクラスターに`user`テーブルを、 `@tidbcloud/prisma-adapter`使用したHTTPS接続ではなく、従来のTCP接続経由で作成します。これは、Prisma Migrateと同じエンジンを使用しているためです。このコマンドの詳細については、 [スキーマのプロトタイプを作成する](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push)参照してください。
 
 4.  Prisma クライアントを生成します:
 

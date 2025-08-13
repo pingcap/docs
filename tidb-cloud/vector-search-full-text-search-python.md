@@ -1,6 +1,6 @@
 ---
 title: Full-Text Search with Python
-summary: 全文検索を使用すると、キーワードに完全一致するドキュメントを取得できます。検索拡張生成（RAG）シナリオでは、全文検索とベクター検索を併用することで、検索品質を向上させることができます。
+summary: 全文検索を使用すると、キーワードに完全一致するドキュメントを検索できます。検索拡張生成（RAG）シナリオでは、全文検索とベクター検索を併用することで、検索品質を向上させることができます。
 aliases: ['/tidb/stable/vector-search-full-text-search-python']
 ---
 
@@ -12,7 +12,7 @@ TiDB の全文検索機能は、次の機能を提供します。
 
 -   **テキスト データを直接クエリします**。埋め込みプロセスなしで任意の文字列列を直接検索できます。
 
--   **複数言語のサポート**：高品質な検索のために言語を指定する必要はありません。TiDBは、同一テーブルに格納された複数言語の文書をサポートし、各文書に最適なテキストアナライザーを自動的に選択します。
+-   **複数言語のサポート**：高品質な検索のために言語を指定する必要はありません。TiDBは、同じテーブルに保存された複数言語の文書をサポートし、各文書に最適なテキストアナライザーを自動的に選択します。
 
 -   **関連性による並べ替え**: 広く採用されている[BM25ランキング](https://en.wikipedia.org/wiki/Okapi_BM25)アルゴリズムを使用して、検索結果を関連性によって並べ替えることができます。
 
@@ -28,9 +28,9 @@ TiDB の全文検索機能は、次の機能を提供します。
 
 全文検索機能はまだ初期段階にあり、今後も継続的に多くのお客様にご利用いただけるよう展開していきます。現在、全文検索機能は下記の製品オプションとリージョンでのみご利用いただけます。
 
--   TiDB Cloudサーバーレス: `Frankfurt (eu-central-1)`と`Singapore (ap-southeast-1)`
+-   AWS 上のTiDB Cloud Starter: `Frankfurt (eu-central-1)`と`Singapore (ap-southeast-1)`
 
-このチュートリアルを完了するには、サポート対象リージョンにTiDB Cloud Serverlessクラスターがインストールされている必要があります。まだインストールされていない場合は、手順[TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って作成してください。
+このチュートリアルを完了するには、サポートされているリージョンにTiDB Cloud Starterクラスターがあることを確認してください。まだない場合は、 [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って作成してください。
 
 ## 始めましょう {#get-started}
 
@@ -81,7 +81,7 @@ db = TiDBClient.connect(
     CA:       /etc/ssl/cert.pem
     ```
 
-    TiDB Cloud Serverless クラスターに接続するための対応する Python コードは次のようになります。
+    TiDB Cloud Starter クラスターに接続するための対応する Python コードは次のようになります。
 
     ```python
     db = TiDBClient.connect(

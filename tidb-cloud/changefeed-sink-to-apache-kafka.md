@@ -5,12 +5,12 @@ summary: このドキュメントでは、 TiDB Cloudから Apache Kafka へデ�
 
 # Apache Kafka にシンクする {#sink-to-apache-kafka}
 
-このドキュメントでは、 TiDB Cloudから Apache Kafka にデータをストリーミングするための変更フィードを作成する方法について説明します。
+このドキュメントでは、TiDB Cloudから Apache Kafka にデータをストリーミングするための変更フィードを作成する方法について説明します。
 
 > **注記：**
 >
 > -   changefeed 機能を使用するには、 TiDB Cloud Dedicated クラスターのバージョンが v6.1.3 以降であることを確認してください。
-> -   [TiDB Cloudサーバーレス クラスター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)の場合、changefeed 機能は使用できません。
+> -   クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、changefeed 機能は使用できません。
 
 ## 制限 {#restrictions}
 
@@ -58,7 +58,7 @@ TiDB Cloudは現在、セルフホスト型KafkaのPrivate Connectのみをサ�
     -   エンドポイントサービス名
     -   ブートストラップポート
 
--   Apache Kafka サービスが Google Cloud でホストされている場合は、手順[Google Cloud でセルフホスト型 Kafka プライベート サービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)に従ってネットワーク接続が適切に構成されていることを確認してください。セットアップ後、 TiDB Cloudコンソールで以下の情報を入力して変更フィードを作成してください。
+-   Apache Kafka サービスが Google Cloud でホストされている場合は、手順[Google Cloud でセルフホスト型 Kafka プライベート サービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)に従ってネットワーク接続が適切に構成されていることを確認してください。セットアップ後、 TiDB Cloudコンソールで以下の情報を入力して、変更フィードを作成します。
 
     -   Kafka アドバタイズドリスナーパターンの ID
     -   サービスアタッチメント
@@ -217,10 +217,10 @@ TiDB Cloud変更フィードが Apache Kafka にデータをストリーミン�
 
 6.  Kafka 認証構成に応じて**認証**オプションを選択します。
 
-    -   Kafka で認証が不要な場合は、デフォルトのオプション**[無効] の**ままにします。
+    -   Kafka で認証が不要な場合は、デフォルトのオプション**[Disable] の**ままにしておきます。
     -   Kafka に認証が必要な場合は、対応する認証タイプを選択し、認証用の Kafka アカウントの**ユーザー名**と**パスワード**を入力します。
 
-7.  **Kafka のバージョン**を選択してください。どのバージョンを使用すればよいか分からない場合は、 **Kafka v2**を使用してください。
+7.  **Kafkaのバージョン**を選択してください。どれを使用すればよいか分からない場合は、 **Kafka v2**を使用してください。
 
 8.  この変更フィード内のデータの**圧縮**タイプを選択します。
 

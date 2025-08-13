@@ -1,6 +1,6 @@
 ---
 title: Schema Cache
-summary: TiDB は、スキーマ情報に対して LRU (Least Recently Used) ベースのキャッシュ メカニズムを採用しており、これによりメモリ使用量が大幅に削減され、データベースやテーブルが多数存在するシナリオでのパフォーマンスが向上します。
+summary: TiDB は、スキーマ情報に対して LRU (Least Recently Used) ベースのキャッシュ メカニズムを採用しており、これによりメモリ使用量が大幅に削減され、データベースやテーブルの数が多いシナリオでのパフォーマンスが向上します。
 ---
 
 # スキーマキャッシュ {#schema-cache}
@@ -9,7 +9,7 @@ summary: TiDB は、スキーマ情報に対して LRU (Least Recently Used) ベ
 
 > **注記：**
 >
-> 現在、この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
+> 現在、この機能は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)クラスターでは利用できません。
 
 ## スキーマキャッシュを構成する {#configure-schema-cache}
 

@@ -116,4 +116,4 @@ Terraform プロバイダー (&gt;= 0.3.0) は、オプションのパラメー�
 
 ## 次のステップ {#next-step}
 
-[クラスターリソース](/tidb-cloud/terraform-use-cluster-resource.md)を使用してクラスターの管理を開始します。
+[`tidbcloud_serverless_cluster`](/tidb-cloud/terraform-use-serverless-cluster-resource.md)または[`tidbcloud_dedicated_cluster`](/tidb-cloud/terraform-use-dedicated-cluster-resource.md)リソースを使用してクラスターを管理することから始めます。

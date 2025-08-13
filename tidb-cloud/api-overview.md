@@ -17,16 +17,20 @@ API には次の機能があります。
 -   **HTTPSのみ。API**へのアクセスはHTTPS経由でのみ可能であり、ネットワーク経由で送信されるすべてのデータはTLSで暗号化されます。
 -   **キーベースのアクセスとダイジェスト認証。TiDB** TiDB Cloud APIにアクセスする前に、APIキーを生成する必要があります（ [APIキー管理](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-key-management)を参照）。すべてのリクエストは[HTTPダイジェスト認証](https://en.wikipedia.org/wiki/Digest_access_authentication)を通じて認証されるため、APIキーがネットワーク経由で送信されることはありません。
 
-TiDB Cloud API の使用を開始するには、 TiDB Cloud API ドキュメントの次のリソースを参照してください。
+TiDB Cloud API には、次の 2 つのバージョンがあります。
 
--   [始める](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Get-Started)
--   [認証](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication)
--   [レート制限](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Rate-Limiting)
--   API の完全なリファレンス
-    -   v1ベータ1
-        -   [請求する](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
-        -   [データサービス](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)
-        -   [IAMは](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
+-   v1ベータ1
+    -   クラスターレベルのリソース:
+        -   [TiDB Cloud Starter または Essential クラスタ](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless) : TiDB Cloud Starter または Essential クラスターのクラスター、ブランチ、データ エクスポート タスク、およびデータ インポート タスクを管理します。
+        -   [TiDB Cloud専用クラスタ](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated) : TiDB Cloud Dedicated クラスターのクラスター、リージョン、プライベート エンドポイント接続、およびデータ インポート タスクを管理します。
+    -   組織またはプロジェクトレベルのリソース:
+        -   [請求する](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing) : TiDB Cloudクラスターの課金を管理します。
+        -   [データサービス](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice) : TiDB Cloudクラスターのデータ サービス内のリソースを管理します。
+        -   [IAMは](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam) : TiDB Cloudクラスターの API キーを管理します。
         -   [MSP（非推奨）](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
-    -   [v1ベータ](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project)
--   [変更履歴](https://docs.pingcap.com/tidbcloud/api/v1beta#section/API-Changelog)
+-   [v1ベータ](https://docs.pingcap.com/tidbcloud/api/v1beta)
+    -   [プロジェクト](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project)
+    -   [クラスタ](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Cluster)
+    -   [バックアップ](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Backup)
+    -   [インポート（非推奨）](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Import)
+    -   [復元する](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Restore)

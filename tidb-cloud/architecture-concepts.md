@@ -5,23 +5,41 @@ summary: TiDB Cloudのアーキテクチャの概念について学習します�
 
 # アーキテクチャ {#architecture}
 
-TiDB Cloud は、オープンソースの HTAP (ハイブリッド トランザクションおよび分析処理) データベース[TiDB](https://docs.pingcap.com/tidb/stable/overview)の柔軟性とパワーを AWS、Azure、Google Cloud に提供する、完全に管理された Database-as-a-Service (DBaaS) です。
+TiDB Cloudは、オープンソースの HTAP (ハイブリッド トランザクションおよび分析処理) データベース[TiDB](https://docs.pingcap.com/tidb/stable/overview)の柔軟性とパワーを AWS、Azure、Google Cloud、Alibaba Cloud に提供する、完全に管理された Database-as-a-Service (DBaaS) です。
 
 TiDBはMySQLと互換性があり、既存のアプリケーションへの移行と連携が容易です。また、小規模なワークロードから大規模な高性能クラスタまで、あらゆるワークロードに対応できるシームレスなスケーラビリティを提供します。トランザクション（OLTP）と分析（OLAP）の両方のワークロードを1つのシステムでサポートし、運用を簡素化し、リアルタイムの洞察を実現します。
 
-TiDB Cloud には、自動スケーリングとコスト効率の高いワークロード向けの**TiDB Cloud** **Serverless**と、専用リソースと高度な機能を備えたエンタープライズグレードのアプリケーション向けの**TiDB Cloud Dedicated**という2つのデプロイメントオプションがあります。TiDB TiDB Cloudすると、データベースのスケーリング、複雑な管理タスクの処理が容易になり、信頼性が高く高性能なアプリケーションの開発に集中できます。
+TiDB Cloudすると、データベースの拡張、複雑な管理タスクの処理が容易になり、信頼性が高くパフォーマンスの高いアプリケーションの開発に集中できます。
 
-## TiDB Cloudサーバーレス {#tidb-cloud-serverless}
+-   AWS の場合、 TiDB Cloud は、自動スケーリングとコスト効率の高いワークロード向けの**TiDB Cloud Starter**と、専用リソースと高度な機能を備えたエンタープライズ グレードのアプリケーション向けの**TiDB Cloud Dedicated を**提供します。
+-   Google Cloud および Azure 向けに、 TiDB Cloud は専用リソースと高度な機能を備えたエンタープライズ グレードのアプリケーション向けに**TiDB Cloud Dedicated を**提供します。
+-   Alibaba Cloud の場合、 TiDB Cloud は、自動スケーリングとコスト効率に優れたワークロード向けの**TiDB Cloud Starter**と、プロビジョニングされた容量を備えた本番環境対応のワークロード向けの**TiDB Cloud Essential を**提供します。
 
-TiDB Cloud Serverlessは、従来のTiDBと同様のHTAP機能を提供するフルマネージドのサーバーレスソリューションです。オートスケーリング機能により、キャパシティプランニングや管理の複雑さに伴うユーザーの負担を軽減します。基本的な使用量は無料枠で提供され、無料枠を超えた使用量については使用量に応じて課金されます。TiDB TiDB Cloud Serverlessは、さまざまな運用要件に対応するために、2種類の高可用性オプションを提供しています。
+## TiDB Cloudスターター {#tidb-cloud-starter}
 
-デフォルトでは、ゾーン高可用性オプションを利用するクラスターではすべてのコンポーネントが同じ可用性ゾーン内に配置されるため、ネットワークレイテンシーが低減されます。
+TiDB Cloud Starter（旧称Serverless）は、フルマネージドのマルチテナント型TiDBサービスです。MySQL互換データベースを瞬時に自動スケーリングし、提供します。
 
-![TiDB Cloud Serverless zonal high availability](/media/tidb-cloud/serverless-zonal-high-avaliability-aws.png)
+スタータークラスタープランは、 TiDB Cloudを初めてご利用になる方に最適です。開発者や小規模チームに以下の機能を提供します。
 
-最大限のインフラストラクチャ分離と冗長性を必要とするアプリケーションの場合、リージョン高可用性オプションにより、複数の可用性ゾーンにノードが分散されます。
+-   **無料**: このプランは完全に無料で、開始するのにクレジットカードは必要ありません。
+-   **ストレージ**: 初期 5 GiB の行ベースのstorageと 5 GiB の列ベースのstorageを提供します。
+-   **リクエスト単位**: データベース操作用の 5,000 万[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit)が含まれます。
 
-![TiDB Cloud Serverless regional high availability](/media/tidb-cloud/serverless-regional-high-avaliability-aws.png)
+## TiDB Cloudエッセンシャル {#tidb-cloud-essential}
+
+ワークロードが増加し、リアルタイムの拡張性を必要とするアプリケーションの場合、Essential クラスター プランは次の機能により、ビジネスの成長に対応できる柔軟性とパフォーマンスを提供します。
+
+-   **拡張機能**: スターター プランのすべての機能に加えて、より大規模で複雑なワークロードを処理する能力と高度なセキュリティ機能が含まれます。
+-   **自動スケーリング**: 変化するワークロードの需要に効率的に対応するために、storageとコンピューティング リソースを自動的に調整します。
+-   **高可用性**: フォールト トレランスと冗長性が組み込まれているため、インフラストラクチャに障害が発生した場合でも、アプリケーションの可用性と回復力が維持されます。
+-   **予測可能な価格設定**: コンピューティング リソースのstorageとリクエスト容量単位 (RCU) に基づいて課金され、ニーズに合わせて拡張できる透明性の高い使用量ベースの価格設定が提供されるため、予期せぬ出費なく、使用した分だけを支払うことになります。
+
+TiDB Cloud Essential は、さまざまな運用要件に対応するために 2 種類の高可用性を提供します。
+
+-   デフォルトでは、ゾーン高可用性オプションを利用するクラスターではすべてのコンポーネントが同じ可用性ゾーン内に配置されるため、ネットワークレイテンシーが低減されます。
+-   最大限のインフラストラクチャ分離と冗長性を必要とするアプリケーションの場合、リージョン高可用性オプションにより、複数の可用性ゾーンにノードが分散されます。
+
+詳細については[TiDB Cloud StarterとEssentialの高可用性](/tidb-cloud/serverless-high-availability.md)参照してください。
 
 ## TiDB Cloud専用 {#tidb-cloud-dedicated}
 
@@ -33,11 +51,11 @@ VPC、VM、マネージドKubernetesサービス、クラウドstorageなどの�
 
 ## TiDB Cloudコンソール {#tidb-cloud-console}
 
-[TiDB Cloudコンソール](https://tidbcloud.com/) 、 TiDB Cloud ServerlessとTiDB Cloud Dedicatedの両方に対応するWebベースの管理インターフェースです。クラスターの管理、データのインポートまたは移行、パフォーマンス指標の監視、バックアップの設定、セキュリティ制御の設定、他のクラウドサービスとの統合など、すべて単一の使いやすいプラットフォームから実行できるツールを提供します。
+[TiDB Cloudコンソール](https://tidbcloud.com/) 、 TiDB Cloudクラスタ用のWebベースの管理インターフェースです。クラスタの管理、データのインポートまたは移行、パフォーマンスメトリックの監視、バックアップの設定、セキュリティ制御の設定、他のクラウドサービスとの統合など、すべて単一の使いやすいプラットフォームから実行できるツールを提供します。
 
 ## TiDB CloudCLI (ベータ版) {#tidb-cloud-cli-beta}
 
-TiDB Cloud CLI `ticloud` ）を使用すると、簡単なコマンドでターミナルから直接TiDB Cloud ServerlessとTiDB Cloud Dedicatedを管理できます。以下のようなタスクを実行できます。
+TiDB Cloud CLI `ticloud`を使用すると、簡単なコマンドでターミナルから直接TiDB Cloudクラスタを管理できます。以下のようなタスクを実行できます。
 
 -   クラスターの作成、削除、および一覧表示。
 -   クラスターにデータをインポートしています。
@@ -47,7 +65,7 @@ TiDB Cloud CLI `ticloud` ）を使用すると、簡単なコマンドでター�
 
 ## TiDB CloudAPI (ベータ版) {#tidb-cloud-api-beta}
 
-TiDB Cloud APIは、 TiDB Cloud ServerlessとTiDB Cloud Dedicated全体のリソースを管理するためのプログラム的なアクセスを提供するRESTベースのインターフェースです。プロジェクト、クラスタ、バックアップ、リストア、データのインポート、課金、その他のリソース管理といったタスクを自動化し、効率的に処理できます[TiDB Cloudデータサービス](/tidb-cloud/data-service-overview.md)
+TiDB Cloud APIは、 TiDB Cloud StarterとTiDB Cloud Dedicated全体のリソースを管理するためのプログラム的なアクセスを提供するRESTベースのインターフェースです。プロジェクト、クラスタ、バックアップ、リストア、データのインポート、課金、その他のリソース管理といったタスクを、 [TiDB Cloudデータサービス](/tidb-cloud/data-service-overview.md)で自動化し、効率的に処理できます。
 
 詳細については[TiDB CloudAPI の概要](/tidb-cloud/api-overview.md)参照してください。
 
@@ -56,7 +74,7 @@ TiDB Cloud APIは、 TiDB Cloud ServerlessとTiDB Cloud Dedicated全体のリソ
 TiDB Cloudでは、各クラスターは TiDB、TiKV、およびTiFlashノードで構成されます。
 
 -   TiDB Cloud Dedicated クラスターでは、パフォーマンス要件に応じて、専用の TiDB、TiKV、 TiFlashノードの数とサイズを完全に管理できます。詳細については、 [スケーラビリティ](/tidb-cloud/scalability-concepts.md)ご覧ください。
--   TiDB Cloud Serverless クラスターでは、TiDB、TiKV、 TiFlashノードの数とサイズが自動的に管理されます。これによりシームレスなスケーリングが保証され、ユーザーがノードの設定や管理を行う必要がなくなります。
+-   TiDB Cloud StarterまたはTiDB Cloud Essentialクラスターでは、TiDB、TiKV、 TiFlashノードの数とサイズが自動的に管理されます。これによりシームレスなスケーリングが保証され、ユーザーがノードの設定や管理を行う必要がなくなります。
 
 ### TiDBノード {#tidb-node}
 

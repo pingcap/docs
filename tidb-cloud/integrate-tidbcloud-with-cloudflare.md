@@ -13,13 +13,14 @@ Cloudflare WorkersはV8エンジンで動作しており、直接TCP接続がで
 
 > **注記：**
 >
-> TiDB Cloudサーバーレス ドライバーは、 TiDB Cloud Serverless でのみ使用できます。
+> TiDB Cloudサーバーレス ドライバーは、TiDB Cloud Starter およびTiDB Cloud Essential でのみ使用できます。
 
 ## 始める前に {#before-you-begin}
 
 この記事の手順を試す前に、次のものを準備する必要があります。
 
--   TiDB CloudアカウントとTiDB Cloud上のTiDB Cloud Serverlessクラスター。詳細については、 [TiDB Cloudクイックスタート](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)ご覧ください。
+-   A [TiDB Cloudアカウント](https://tidbcloud.com/signup) 。
+-   TiDB Cloud Starter またはTiDB Cloud Essential クラスター。お持ちでない場合は、 [TiDB Cloud StarterまたはEssential クラスタを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)参照してください。
 -   A [Cloudflare Workersアカウント](https://dash.cloudflare.com/login) 。
 -   [npm](https://docs.npmjs.com/about-npm)がインストールされています。
 

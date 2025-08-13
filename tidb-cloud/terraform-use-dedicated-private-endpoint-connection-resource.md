@@ -1,9 +1,9 @@
 ---
-title: Use TiDB Cloud Dedicated Private Endpoint Connection Resource
-summary: TiDB Cloud Dedicated プライベート エンドポイント接続リソースを使用して、 TiDB Cloud Dedicated プライベート エンドポイント接続を作成および変更する方法を学習します。
+title: Use `tidbcloud_dedicated_private_endpoint_connection` Resource
+summary: tidbcloud_dedicated_private_endpoint_connection` リソースを使用して、 TiDB Cloud Dedicated プライベート エンドポイント接続を作成および変更する方法を学習します。
 ---
 
-# TiDB Cloud専用プライベートエンドポイント接続リソースを使用する {#use-tidb-cloud-dedicated-private-endpoint-connection-resource}
+# <code>tidbcloud_dedicated_private_endpoint_connection</code>リソースを使用する {#use-the-code-tidbcloud-dedicated-private-endpoint-connection-code-resource}
 
 このドキュメントでは、 `tidbcloud_dedicated_private_endpoint_connection`リソースを使用して[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)プライベート エンドポイント接続を管理する方法について説明します。
 
@@ -15,7 +15,7 @@ summary: TiDB Cloud Dedicated プライベート エンドポイント接続リ�
 
 > **注記：**
 >
-> TiDB Cloud Dedicated プライベートエンドポイント接続リソースは変更できません。TiDB TiDB Cloud Dedicated プライベートエンドポイント接続を変更する場合は、既存の接続を削除してから、新しい接続を作成する必要があります。
+> `tidbcloud_dedicated_private_endpoint_connection`リソースは変更できません。TiDB TiDB Cloud Dedicated のプライベートエンドポイント接続を変更するには、既存の接続を削除してから、新しい接続を作成する必要があります。
 
 ## 前提条件 {#prerequisites}
 
@@ -53,7 +53,7 @@ summary: TiDB Cloud Dedicated プライベート エンドポイント接続リ�
 
     `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    -   TiDB Cloud Dedicated プライベート エンドポイント接続リソースを使用するには、リソース タイプを`tidbcloud_dedicated_private_endpoint_connection`に設定します。
+    -   `tidbcloud_dedicated_private_endpoint_connection`リソースを使用するには、リソース タイプを`tidbcloud_dedicated_private_endpoint_connection`に設定します。
     -   リソース名は必要に応じて定義できます。例： `example` 。
     -   必要な引数の値を取得する方法がわからない場合は、 [AWS のプライベートエンドポイント経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)参照してください。
     -   TiDB Cloud Dedicated プライベート エンドポイント接続仕様情報を取得するには、 [tidbcloud_private_endpoint_connection (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_private_endpoint_connection)参照してください。
@@ -146,7 +146,7 @@ summary: TiDB Cloud Dedicated プライベート エンドポイント接続リ�
 
 Terraform によって管理されていないTiDB Cloud Dedicated プライベート エンドポイント接続の場合は、インポートすることで Terraform による管理を開始できます。
 
-1.  新しいTiDB Cloud Dedicated プライベート エンドポイント接続リソースのインポート ブロックを追加します。
+1.  新しい`tidbcloud_dedicated_private_endpoint_connection`リソースのインポート ブロックを追加します。
 
     次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` `cluster_id,dedicated_private_endpoint_connection_id`の形式に置き換えます。
 
@@ -157,7 +157,7 @@ Terraform によって管理されていないTiDB Cloud Dedicated プライベ�
 
 2.  新しい構成ファイルを生成します。
 
-    インポート ブロックに従って、新しいTiDB Cloud Dedicated プライベート エンドポイント接続リソースの新しい構成ファイルを生成します。
+    インポート ブロックに従って、新しい`tidbcloud_dedicated_private_endpoint_connection`リソースの新しい構成ファイルを生成します。
 
     ```shell
     terraform plan -generate-config-out=generated.tf

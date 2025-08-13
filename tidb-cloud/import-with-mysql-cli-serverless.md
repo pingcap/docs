@@ -1,20 +1,20 @@
 ---
-title: Import Data into TiDB Cloud Serverless via MySQL CLI
-summary: MySQL CLI 経由でTiDB Cloud Serverless にデータをインポートする方法を学習します。
+title: Import Data into TiDB Cloud Starter or Essential via MySQL CLI
+summary: MySQL CLI 経由でTiDB Cloud Starter またはTiDB Cloud Essential にデータをインポートする方法を学習します。
 ---
 
-# MySQL CLI 経由でTiDB Cloud Serverless にデータをインポートする {#import-data-into-tidb-cloud-serverless-via-mysql-cli}
+# MySQL CLI 経由でTiDB Cloud Starter または Essential にデータをインポートする {#import-data-into-tidb-cloud-starter-or-essential-via-mysql-cli}
 
-このドキュメントでは、 [MySQL コマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)を介してTiDB Cloud Serverlessにデータをインポートする方法について説明します。SQLファイルまたはCSVファイルからデータをインポートできます。以下のセクションでは、各ファイルタイプからデータをインポートする手順を段階的に説明します。
+このドキュメントでは、 [MySQL コマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)を介してTiDB Cloud StarterまたはTiDB Cloud Essentialにデータをインポートする方法について説明します。SQLファイルまたはCSVファイルからデータをインポートできます。以下のセクションでは、各ファイルタイプからデータをインポートする手順を段階的に説明します。
 
 ## 前提条件 {#prerequisites}
 
-MySQL CLI 経由でTiDB Cloud Serverless にデータをインポートするには、次の前提条件を満たす必要があります。
+MySQL CLI 経由でTiDB Cloud Starter またはTiDB Cloud Essential にデータをインポートするには、次の前提条件を満たす必要があります。
 
--   TiDB Cloud Serverlessクラスターへのアクセス権をお持ちです。まだお持ちでない場合は、 [TiDB Cloudサーバーレスクラスタの構築](/develop/dev-guide-build-cluster-in-cloud.md)の手順に従って作成してください。
--   ローカル コンピュータに MySQL CLI をインストールします。
+-   TiDB Cloud Starter またはTiDB Cloud Essential クラスターにアクセスできます。まだお持ちでない場合は、 [TiDB Cloudクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)の手順に従って作成してください。
+-   ローカルコンピュータに MySQL CLI をインストールします。
 
-## ステップ1. TiDB Cloud Serverlessクラスターに接続する {#step-1-connect-to-your-tidb-cloud-serverless-cluster}
+## ステップ1. TiDB Cloud StarterまたはTiDB Cloud Essentialクラスターに接続する {#step-1-connect-to-your-tidb-cloud-starter-or-tidb-cloud-essential-cluster}
 
 TiDB クラスターに接続します。
 

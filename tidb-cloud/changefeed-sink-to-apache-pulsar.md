@@ -10,7 +10,7 @@ summary: このドキュメントでは、 TiDB Cloudから Apache Pulsar へデ
 > **注記：**
 >
 > -   changefeed 機能を使用して Apache Pulsar にデータを複製するには、 TiDB Cloud Dedicated クラスターのバージョンが v7.5.1 以降であることを確認してください。
-> -   [TiDB Cloudサーバーレス クラスター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)の場合、changefeed 機能は使用できません。
+> -   クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、changefeed 機能は使用できません。
 
 ## 制限 {#restrictions}
 

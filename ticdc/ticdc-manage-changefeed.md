@@ -5,7 +5,7 @@ summary: TiCDC 変更フィードを管理する方法を学びます。
 
 # チェンジフィードを管理する {#manage-changefeeds}
 
-This document describes how to create and manage TiCDC changefeeds by using the TiCDC command-line tool `cdc cli`. You can also manage changefeeds via the HTTP interface of TiCDC. For details, see [TiCDC オープンAPI](/ticdc/ticdc-open-api.md).
+このドキュメントでは、TiCDCコマンドラインツール`cdc cli`を使用してTiCDCの変更フィードを作成および管理する方法について説明します。変更フィードは、TiCDCのHTTPインターフェース経由でも管理できます。詳細については、 [TiCDC オープンAPI](/ticdc/ticdc-open-api.md)参照してください。
 
 ## レプリケーションタスクを作成する {#create-a-replication-task}
 
@@ -47,7 +47,7 @@ cdc cli changefeed list --server=http://10.0.10.25:8300
     -   `stopped` : レプリケーション タスクが停止されています (手動で一時停止されています)。
     -   `error` : レプリケーション タスクが停止しました (エラーにより)。
     -   `removed` : レプリケーションタスクは削除されています。この状態のタスクは、 `--all`オプションを指定した場合のみ表示されます。このオプションを指定せずにこれらのタスクを表示するには、 `changefeed query`コマンドを実行してください。
-    -   `finished`: The replication task is finished (data is replicated to the `target-ts`). Tasks of this state are displayed only when you have specified the `--all` option. To see these tasks when this option is not specified, run the `changefeed query` command.
+    -   `finished` : レプリケーションタスクが完了しました（データは`target-ts`にレプリケートされています）。この状態のタスクは、 `--all`オプションを指定した場合のみ表示されます。このオプションを指定せずにこれらのタスクを表示するには、 `changefeed query`コマンドを実行してください。
 
 ## 特定のレプリケーションタスクをクエリする {#query-a-specific-replication-task}
 
@@ -66,7 +66,7 @@ cdc cli changefeed query -s --server=http://10.0.10.25:8300 --changefeed-id=simp
 }
 ```
 
-In the preceding command and result:
+上記のコマンドと結果は次のとおりです。
 
 -   `state`は現在の変更フィードのレプリケーション状態です。各状態は`changefeed list`の状態と一致している必要があります。
 -   `tso` 、ダウンストリームに正常に複製された現在の変更フィード内の最大のトランザクション TSO を表します。
@@ -179,7 +179,7 @@ cdc cli changefeed resume --server=http://10.0.10.25:8300 --changefeed-id simple
 
 ## レプリケーションタスクを削除する {#remove-a-replication-task}
 
-Run the following command to remove a replication task:
+レプリケーション タスクを削除するには、次のコマンドを実行します。
 
 ```shell
 cdc cli changefeed remove --server=http://10.0.10.25:8300 --changefeed-id simple-replication-task
@@ -276,7 +276,7 @@ force-replicate = true
 >
 > v6.0.0以降、TiCDCはデフォルトでDB Sorterエンジンを使用し、Unified Sorterエンジンは使用しなくなりました。1 `sort engine`項目は設定しないことを推奨します。
 
-Unified sorter is the sorting engine in TiCDC. It can mitigate OOM problems caused by the following scenarios:
+統合ソートエンジンはTiCDCのソートエンジンです。以下のシナリオで発生するOOM問題を軽減できます。
 
 -   TiCDC のデータ複製タスクは長時間一時停止され、その間に大量の増分データが蓄積され、複製が必要になります。
 -   データ複製タスクは早いタイムスタンプから開始されるため、大量の増分データを複製する必要が生じます。
@@ -286,10 +286,10 @@ v4.0.13 以降に`cdc cli`を使用して作成された changefeed の場合、
 変更フィードで Unified Sorter 機能が有効になっているかどうかを確認するには、次のサンプル コマンドを実行します (PD インスタンスの IP アドレスが`http://10.0.10.25:2379`であると仮定)。
 
 ```shell
-cdc cli --server="http://10.0.10.25:8300" changefeed query --changefeed-id=simple-replication-task | grep 'sort-engine'
+cdc cli --server="http://10.0.10.25:8300" changefeed query --changefeed-id=simple-replication-task | grep 'sort_engine'
 ```
 
-上記のコマンドの出力で、値`sort-engine`が「unified」の場合、変更フィードで Unified Sorter が有効になっていることを意味します。
+上記のコマンドの出力で、値`sort_engine`が「unified」の場合、変更フィードで Unified Sorter が有効になっていることを意味します。
 
 > **注記：**
 >

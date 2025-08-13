@@ -24,7 +24,7 @@ summary: TiDB での IMPORT INTO の使用法の概要。
 -   `IMPORT INTO`では、同じテーブルの他のパーティションに既にデータが含まれている場合、空のパーティションへのデータのインポートはサポートされません。インポート操作を行うには、ターゲットテーブルが完全に空である必要があります。
 -   `IMPORT INTO` 、 [一時テーブル](/temporary-tables.md)または[キャッシュされたテーブル](/cached-tables.md)へのデータのインポートをサポートしていません。
 -   `IMPORT INTO` `END`やロールバックをサポートしていません。明示的なトランザクション（ `BEGIN` ）内で`IMPORT INTO`実行するとエラーが返されます。
--   `IMPORT INTO` 、 [バックアップと復元](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview) 、 [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) 、 [インデックス追加の高速化](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) 、 TiDB Lightningを使用したデータインポート、 TiCDC を使用したデータレプリケーション、 [ポイントインタイムリカバリ（PITR）](https://docs.pingcap.com/tidb/stable/br-log-architecture)などの機能との同時使用をサポートしていません。互換性に関する詳細は、 [TiDB Lightningと`IMPORT INTO`と TiCDC およびログバックアップとの互換性](https://docs.pingcap.com/tidb/stable/tidb-lightning-compatibility-and-scenarios)参照してください。
+-   `IMPORT INTO` 、 [バックアップと復元](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview) 、 [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) 、 [インデックス追加の高速化](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) 、 TiDB Lightningを使用したデータインポート、 TiCDC を使用したデータレプリケーション、 [ポイントインタイムリカバリ（PITR）](https://docs.pingcap.com/tidb/stable/br-log-architecture)の機能との同時使用をサポートしていません。互換性に関する詳細は、 [TiDB Lightningと`IMPORT INTO`と TiCDC およびログバックアップとの互換性](https://docs.pingcap.com/tidb/stable/tidb-lightning-compatibility-and-scenarios)参照してください。
 -   データのインポートプロセス中は、ターゲットテーブルに対してDDLまたはDML操作を実行しないでください。また、ターゲットデータベースに対して[`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)実行しないでください。これらの操作は、インポートの失敗やデータの不整合につながる可能性があります。また、インポートプロセス中に読み取り操作を実行することは推奨**されません**。読み取り操作と書き込み操作は、インポートが完了した後にのみ実行してください。
 -   インポートプロセスはシステムリソースを大量に消費します。TiDB Self-Managedでは、パフォーマンスを向上させるために、少なくとも32コアと64GiBのメモリを搭載したTiDBノードの使用を推奨します。TiDBはインポート時にソートされたデータをTiDB [一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)に書き込むため、フラッシュメモリなどの高性能storageメディアをTiDB Self-Managed用に構成することをお勧めします。詳細については、 [物理インポートモードの制限](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode#requirements-and-restrictions)参照してください。
 -   TiDB Self-Managedの場合、TiDB [一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)は少なくとも90GiBの空き容量が必要です。インポートするデータの量と同等以上のstorage容量を割り当てることをお勧めします。
@@ -161,7 +161,7 @@ OptionItem ::=
 
 ## <code>IMPORT INTO ... FROM FILE</code>使用法 {#code-import-into-from-file-code-usage}
 
-TiDB Self-Managed の場合、 `IMPORT INTO ... FROM FILE` Amazon S3、GCS、および TiDB ローカルstorageに保存されているファイルからのデータのインポートをサポートします。3 [TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)場合、 `IMPORT INTO ... FROM FILE` Amazon S3 および GCS に保存されているファイルからのデータのインポートをサポートします。7 [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合、 `IMPORT INTO ... FROM FILE` Amazon S3 および Alibaba Cloud OSS に保存されているファイルからのデータのインポートをサポートします。
+TiDB Self-Managed の場合、 `IMPORT INTO ... FROM FILE` Amazon S3、GCS、および TiDB ローカルstorageに保存されているファイルからのデータのインポートをサポートします。3 [TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)場合、 `IMPORT INTO ... FROM FILE` Amazon S3 および GCS に保存されているファイルからのデータのインポートをサポートします。7 および[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合、 `IMPORT INTO ... FROM FILE` Amazon S3 および Alibaba Cloud OSS に保存されているファイルからのデータのインポートをサポートします。
 
 -   Amazon S3 または GCS に保存されているデータ ファイルの場合、 `IMPORT INTO ... FROM FILE` [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)での実行をサポートします。
 
@@ -189,7 +189,7 @@ TiDB Self-Managed の場合、 `IMPORT INTO ... FROM FILE` Amazon S3、GCS、お
 
 > **注記：**
 >
-> グローバルソートは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> グローバルソートは、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
 
 `IMPORT INTO ... FROM FILE`ソースデータファイルのデータインポートジョブを複数のサブジョブに分割し、各サブジョブはインポート前に独立してデータのエンコードとソートを行います。これらのサブジョブのエンコードされたKV範囲に大きな重複がある場合（TiDBがデータをKVにエンコードする方法については、 [TiDBコンピューティング](/tidb-computing.md)参照）、TiKVはインポート中に圧縮を維持する必要があり、インポートのパフォーマンスと安定性が低下します。
 

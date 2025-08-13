@@ -5,7 +5,7 @@ summary: ticloud serverless list` のリファレンス。
 
 # ticloud サーバーレス リスト {#ticloud-serverless-list}
 
-プロジェクト内のすべてのTiDB Cloud Serverless クラスターを一覧表示します。
+プロジェクト内のすべてのTiDB Cloud Starter クラスターとTiDB Cloud Essential クラスターを一覧表示します。
 
 ```shell
 ticloud serverless list [flags]
@@ -19,19 +19,19 @@ ticloud serverless ls [flags]
 
 ## 例 {#examples}
 
-インタラクティブ モードですべてのTiDB Cloud Serverless クラスターを一覧表示します。
+対話モードですべてのTiDB Cloud Starter およびTiDB Cloud Essential クラスターを一覧表示します。
 
 ```shell
 ticloud serverless list
 ```
 
-指定されたプロジェクト内のすべてのTiDB Cloud Serverless クラスターを非対話型モードで一覧表示します。
+指定されたプロジェクト内のすべてのTiDB Cloud Starter およびTiDB Cloud Essential クラスターを非対話型モードで一覧表示します。
 
 ```shell
 ticloud serverless list -p <project-id>
 ```
 
-非対話型モードで、指定されたプロジェクト内のすべてのTiDB Cloud Serverless クラスターを JSON 形式で一覧表示します。
+非対話型モードで、指定されたプロジェクト内のすべてのTiDB Cloud Starter およびTiDB Cloud Essential クラスターを JSON 形式で一覧表示します。
 
 ```shell
 ticloud serverless list -p <project-id> -o json

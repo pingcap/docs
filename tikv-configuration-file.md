@@ -54,7 +54,7 @@ TiKV設定ファイルは、コマンドラインパラメータよりも多く�
 
 -   ログに関するコンフィグレーション項目。
 
--   バージョン5.4.0以降、TiKVとTiDBのログ設定項目の整合性`log-file`保つため、TiKVは以前の設定項目`log-rotation-timespan`廃止し、 `log-level` `log-format`以下の設定項目に変更`log-rotation-size`ました。古い設定項目のみを設定し、その値をデフォルト以外の値に設定した場合、古い設定項目と新しい設定項目の互換性は維持されます。古い設定項目と新しい設定項目の両方を設定した場合、新しい設定項目が有効になります。
+-   バージョン5.4.0以降、TiKVとTiDBのログ設定項目の整合性を保つため、TiKVは以前の設定項目`log-rotation-timespan`廃止し、 `log-level` `log-file`以下の設定`log-format`に変更`log-rotation-size`ました。古い設定項目のみを設定し、その値をデフォルト以外の値に設定した場合、古い設定項目と新しい設定項目の互換性は維持されます。古い設定項目と新しい設定項目の両方を設定した場合、新しい設定項目が有効になります。
 
 ### <code>level</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-level-code-span-class-version-mark-new-in-v5-4-0-span}
 
@@ -816,7 +816,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>region-compact-tombstones-percent</code> {#code-region-compact-tombstones-percent-code}
 
--   RocksDBの圧縮をトリガーするために必要な墓石の割合
+-   RocksDBの圧縮をトリガーするために必要なトゥームストーンの割合
 -   デフォルト値: `30`
 -   最小値: `1`
 -   最大値: `100`
@@ -2031,7 +2031,7 @@ Raft Engineに関連するコンフィグレーション項目。
 ### <code>batch-compression-threshold</code> {#code-batch-compression-threshold-code}
 
 -   ログバッチのしきい値サイズを指定します。この設定値より大きいログバッチは圧縮されます。この設定項目を`0`に設定すると、圧縮は無効になります。
--   デフォルト値: `"8KiB"`
+-   デフォルト値: `"4KiB"` 。v8.1.0 より前では、デフォルト値は`"8KiB"`です。
 
 ### <code>bytes-per-sync</code> {#code-bytes-per-sync-code}
 
@@ -2116,7 +2116,7 @@ Raft Engineに関連するコンフィグレーション項目。
 
 ### <code>compression-level</code> <span class="version-mark">v7.4.0 の新機能</span> {#code-compression-level-code-span-class-version-mark-new-in-v7-4-0-span}
 
--   Raft EngineがRaftログファイルを書き込む際に使用するLZ4アルゴリズムの圧縮効率を設定します。値が小さいほど圧縮速度は速くなりますが、圧縮率は低くなります。
+-   Raftログファイルを書き込む際にRaft Engineが使用するLZ4アルゴリズムの圧縮効率を設定します。値が小さいほど圧縮速度は速くなりますが、圧縮率は低くなります。
 -   範囲: `[1, 16]`
 -   デフォルト値: `1`
 
@@ -2474,7 +2474,7 @@ TiKV がデプロイされているマシンのリソースが限られている
 > **警告：**
 >
 > -   バックグラウンド クォータ リミッターは TiDB v6.2.0 で導入された実験的機能であり、本番環境での使用は推奨され**ません**。
-> -   この機能は、TiKV が安定して動作することを保証するため、リソースが限られた環境にのみ適しています。リソースが豊富な環境でこの機能を有効にすると、リクエスト数がピークに達したときにパフォーマンスが低下する可能性があります。
+> -   この機能は、TiKV がリソースが限られた環境で安定して動作することを保証するため、リソースが限られた環境にのみ適しています。リソースが豊富な環境でこの機能を有効にすると、リクエスト量がピークに達したときにパフォーマンスが低下する可能性があります。
 
 #### <code>background-cpu-time</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-background-cpu-time-code-span-class-version-mark-new-in-v6-2-0-span}
 
@@ -2525,7 +2525,7 @@ TiKV API V2が有効な場合にタイムスタンプの取得に関連するコ
 ### <code>renew-batch-min-size</code> {#code-renew-batch-min-size-code}
 
 -   タイムスタンプ要求内の TSO の最小数。
--   TiKVは、前期間のタイムスタンプ消費量に応じて、キャッシュされるタイムスタンプの数を調整します。必要なTSOが少数の場合、TiKVは要求されるTSOの数を`renew-batch-min-size`達するまで減らします。アプリケーションで大規模なバースト書き込みトラフィックが頻繁に発生する場合は、このパラメータを必要に応じて大きな値に設定できます。このパラメータは、単一のtikvサーバーのキャッシュサイズであることに注意してください。パラメータを大きすぎる値に設定し、クラスターに多数のtikvサーバーが含まれている場合、TSOの消費が急激に増加します。
+-   TiKVは、前期間のタイムスタンプ消費量に応じて、キャッシュされるタイムスタンプの数を調整します。必要なTSOが少数の場合、TiKVは要求されるTSOの数を`renew-batch-min-size`達するまで減らします。アプリケーションで大規模なバースト書き込みトラフィックが頻繁に発生する場合は、必要に応じてこのパラメータを大きく設定できます。このパラメータは、単一のtikvサーバーのキャッシュサイズであることに注意してください。パラメータを大きすぎる値に設定し、クラスターに多数のtikvサーバーが含まれている場合、TSOの消費が急激に増加します。
 -   Grafanaの**TiKV-RAW** &gt; **Causal timestamp**パネルでは、 **TSOバッチサイズは**、アプリケーションのワークロードに応じて動的に調整された、ローカルにキャッシュされたタイムスタンプの数です。このメトリックを参照して`renew-batch-min-size`調整できます。
 -   デフォルト値: `100`
 
@@ -2535,7 +2535,7 @@ TiKV API V2が有効な場合にタイムスタンプの取得に関連するコ
 -   デフォルトのTSO物理時間更新間隔（ `50ms` ）では、PDは最大262144個のTSOを提供します。要求されたTSOがこの数を超えると、PDはそれ以上のTSOを提供しなくなります。この設定項目は、TSOの枯渇と、TSO枯渇が他の業務に及ぼす悪影響を回避するために使用されます。高可用性を向上させるためにこの設定項目の値を増やす場合は、十分なTSOを確保するために、同時に[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)の値を減らす必要があります。
 -   デフォルト値: `8192`
 
-## リソース制御 {#resource-control}
+## リソース管理 {#resource-control}
 
 TiKVstorageレイヤーのリソース制御に関するコンフィグレーション項目。
 

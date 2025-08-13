@@ -7,7 +7,7 @@ summary: TiDB Distributed eXecution Framework (DXF) のユースケース、制�
 
 > **注記：**
 >
-> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
+> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 TiDBは、優れたスケーラビリティと弾力性を備えたコンピューティングとストレージの分離アーキテクチャを採用しています。v7.1.0以降、TiDBは分散アーキテクチャのリソースの利点をさらに活用するために、**分散実行フレームワーク（DXF）**を導入しました。DXFの目標は、タスクの統一されたスケジューリングと分散実行を実装し、全体タスクと個別タスクの両方に対して統一されたリソース管理機能を提供することで、ユーザーのリソース利用に対する期待をより適切に満たすことです。
 

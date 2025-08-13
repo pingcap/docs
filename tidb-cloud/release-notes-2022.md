@@ -110,7 +110,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
     TiDB Cloudを初めて使用する場合でも、すでにTiDB Cloudアカウントをお持ちの場合でも、AWS または GCP の請求アカウントにリンクできるようになりました。これにより、AWS または GCP Marketplace のサブスクリプションを簡単に完了できるようになります。
 
-    リンクの作り方については[AWS Marketplace または Google Cloud Marketplace からの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-azure-marketplace-or-google-cloud-marketplace)参照してください。
+    リンクの作り方については[クラウドプロバイダーマーケットプレイスからの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)参照してください。
 
 ## 2022年11月22日 {#november-22-2022}
 
@@ -239,7 +239,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **ドキュメントの変更**
 
--   [ドキュメント](/tidb-cloud/terraform-tidbcloud-provider-overview.md)足して[TiDB CloudTerraform プロバイダー](https://registry.terraform.io/providers/tidbcloud/tidbcloud)にします。
+-   [ドキュメント](/tidb-cloud/terraform-tidbcloud-provider-overview.md)足して[TiDB CloudTerraform プロバイダー](https://registry.terraform.io/providers/tidbcloud/tidbcloud)になります。
 
     TiDB Cloud Terraform Providerは、 [テラフォーム](https://www.terraform.io/)使用してクラスタ、バックアップ、リストアなどのTiDB Cloudリソースを管理できるプラグインです。リソースのプロビジョニングとインフラストラクチャワークフローを自動化するシンプルな方法をお探しの場合は、 [ドキュメント](/tidb-cloud/terraform-tidbcloud-provider-overview.md)に従ってTiDB Cloud Terraform Providerをお試しください。
 

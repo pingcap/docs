@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/ticloud-connect']
 
 # ticloud サーバーレスブランチシェル {#ticloud-serverless-branch-shell}
 
-TiDB Cloud Serverless クラスターのブランチに接続します。
+TiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチに接続します。
 
 ```shell
 ticloud serverless branch shell [flags]
@@ -14,25 +14,25 @@ ticloud serverless branch shell [flags]
 
 ## 例 {#examples}
 
-対話モードでTiDB Cloud Serverless ブランチに接続します。
+対話モードでブランチに接続します。
 
 ```shell
 ticloud serverless branch shell
 ```
 
-非対話型モードでデフォルトのユーザーを使用してTiDB Cloud Serverless ブランチに接続します。
+非対話型モードでデフォルトのユーザーを使用してブランチに接続します。
 
 ```shell
 ticloud serverless branch shell -c <cluster-id> -b <branch-id>
 ```
 
-非対話型モードでデフォルトのユーザー名とパスワードを使用してTiDB Cloud Serverless ブランチに接続します。
+非対話型モードでデフォルトのユーザー名とパスワードを使用してブランチに接続します。
 
 ```shell
 ticloud serverless branch shell -c <cluster-id> -b <branch-id> --password <password>
 ```
 
-非対話型モードで特定のユーザーとパスワードを使用してTiDB Cloud Serverless ブランチに接続します。
+非対話型モードで特定のユーザー名とパスワードを使用してブランチに接続します。
 
 ```shell
 ticloud serverless branch shell -c <cluster-id> -b <branch-id> -u <user-name> --password <password>

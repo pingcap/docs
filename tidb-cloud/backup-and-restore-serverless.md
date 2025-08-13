@@ -1,16 +1,16 @@
 ---
-title: Back Up and Restore TiDB Cloud Serverless Data
-summary: TiDB Cloud Serverless クラスターをバックアップおよび復元する方法を学びます。
+title: Back Up and Restore Data on TiDB Cloud Starter or Essential
+summary: TiDB Cloud Starter またはTiDB Cloud Essential クラスターをバックアップおよび復元する方法を学習します。
 aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# TiDB Cloudサーバーレスデータのバックアップと復元 {#back-up-and-restore-tidb-cloud-serverless-data}
+# TiDB Cloud StarterまたはEssentialでデータをバックアップおよび復元する {#back-up-and-restore-data-on-tidb-cloud-starter-or-essential}
 
-このドキュメントでは、TiDB Cloud上のTiDB Cloud Serverless クラスター データをバックアップおよび復元する方法について説明します。
+このドキュメントでは、TiDB Cloud Starter またはTiDB Cloud Essential クラスターでデータをバックアップおよび復元する方法について説明します。
 
 > **ヒント：**
 >
-> TiDB Cloud Dedicated クラスター データをバックアップおよび復元する方法については、 [TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md)参照してください。
+> TiDB Cloud Dedicated クラスターでデータをバックアップおよび復元する方法については、 [TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md)参照してください。
 
 ## バックアップページをビュー {#view-the-backup-page}
 
@@ -24,17 +24,17 @@ aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 
 ## 自動バックアップ {#automatic-backups}
 
-TiDB Cloud Serverless はクラスター データを自動的にバックアップし、バックアップ スナップショットからデータを復元して、災害発生時のデータ損失を最小限に抑えることができます。
+TiDB Cloud はクラスター データを自動的にバックアップし、バックアップ スナップショットからデータを復元して、災害発生時のデータ損失を最小限に抑えることができます。
 
 ### バックアップ設定について学ぶ {#learn-about-the-backup-setting}
 
-自動バックアップ設定は、次の表に示すように、無料クラスターとスケーラブル クラスターによって異なります。
+自動バックアップ設定は、次の表に示すように、 TiDB Cloud Starter クラスターとTiDB Cloud Essential クラスター間で異なります。
 
-| バックアップ設定   | フリークラスター | スケーラブルなクラスター |
-| ---------- | -------- | ------------ |
-| バックアップサイクル | 毎日       | 毎日           |
-| バックアップの保持  | 1日       | 14日間         |
-| バックアップ時間   | 固定時間     | 設定可能         |
+| バックアップ設定   | TiDB Cloudスターター クラスター | TiDB Cloud Essential クラスター |
+| ---------- | --------------------- | -------------------------- |
+| バックアップサイクル | 毎日                    | 毎日                         |
+| バックアップの保持  | 1日                    | 14日間                       |
+| バックアップ時間   | 固定時間                  | 設定可能                       |
 
 -   **バックアップ サイクル**は、バックアップが実行される頻度です。
 
@@ -42,12 +42,12 @@ TiDB Cloud Serverless はクラスター データを自動的にバックアッ
 
 -   **バックアップ時間は、**バックアップのスケジュールが開始される時間です。最終的なバックアップ時間は、設定されたバックアップ時間より遅くなる場合があることに注意してください。
 
-    -   フリークラスター: バックアップ時間はランダムに固定された時間です。
-    -   スケーラブルクラスター：バックアップ間隔を30分ごとに設定できます。デフォルト値はランダムに固定された時間です。
+    -   TiDB Cloud Starter クラスター: バックアップ時間はランダムに固定されます。
+    -   TiDB Cloud Essentialクラスター：バックアップ間隔を30分ごとに設定できます。デフォルト値はランダムに固定された時間です。
 
 ### バックアップ設定を構成する {#configure-the-backup-setting}
 
-スケーラブル クラスターのバックアップ時間を設定するには、次の手順を実行します。
+TiDB Cloud Essential クラスターのバックアップ時間を設定するには、次の手順を実行します。
 
 1.  クラスターの[**バックアップ**](#view-the-backup-page)ページに移動します。
 
@@ -59,22 +59,22 @@ TiDB Cloud Serverless はクラスター データを自動的にバックアッ
 
 ## 復元する {#restore}
 
-TiDB Cloud Serverless クラスターは、偶発的な損失や破損が発生した場合にデータを回復するのに役立つ復元機能を提供します。
+TiDB Cloudクラスターは、偶発的な損失や破損が発生した場合にデータを回復するのに役立つ復元機能を提供します。
 
 ### 復元モード {#restore-mode}
 
-TiDB Cloud Serverless は、クラスターのスナップショット復元とポイントインタイム復元をサポートします。
+TiDB Cloud は、クラスターのスナップショット復元とポイントインタイム復元をサポートします。
 
 -   **スナップショットの復元**: 特定のバックアップ スナップショットからクラスターを復元します。
 
 -   **ポイントインタイム リストア (ベータ)** : クラスターを特定の時点に復元します。
 
-    -   フリークラスター: サポートされていません。
-    -   スケーラブル クラスター: 過去 14 日以内の任意の時点に復元しますが、クラスターの作成時刻より前、または現在の時刻から 1 分後の時点には復元しません。
+    -   TiDB Cloud Starter クラスター: サポートされていません。
+    -   TiDB Cloud Essential クラスター: 過去 14 日以内の任意の時点に復元しますが、クラスターの作成時刻より前、または現在の時刻から 1 分後の時点には復元しません。
 
 ### 復元先 {#restore-destination}
 
-TiDB Cloud Serverless は、インプレース復元と新しいクラスターへの復元をサポートしています。
+TiDB Cloud は、インプレース復元と新しいクラスターへの復元をサポートしています。
 
 **インプレースリストア**
 
@@ -101,7 +101,7 @@ TiDB Cloud Serverless は、インプレース復元と新しいクラスター�
 
 ### 復元を実行する {#perform-the-restore}
 
-TiDB Cloud Serverless クラスターを復元するには、次の手順に従います。
+TiDB Cloudクラスターを復元するには、次の手順に従います。
 
 1.  クラスターの[**バックアップ**](#view-the-backup-page)ページに移動します。
 
@@ -120,10 +120,10 @@ TiDB Cloud Serverless クラスターを復元するには、次の手順に従�
     </div>
      <div label="Point-in-Time Restore">
 
-    スケーラブルなクラスターを特定の時点に復元するには、次の手順を実行します。
+    TiDB Cloud Essential クラスターを特定の時点に復元するには、次の手順を実行します。
 
     1.  **ポイントインタイム復元を**クリックします。
-    2.  復元したい日付と時刻を選択します。
+    2.  復元したい日時を選択します。
 
     </div>
      </SimpleTab>
@@ -138,7 +138,9 @@ TiDB Cloud Serverless クラスターを復元するには、次の手順に従�
     1.  **「新しいクラスタに復元」を**クリックします。
     2.  新しいクラスターの名前を入力します。
     3.  新しいクラスターのクラスター プランを選択します。
-    4.  スケーラブルなクラスターを選択した場合は、月間使用制限を設定し、必要に応じて詳細設定を構成します。それ以外の場合は、この手順をスキップしてください。
+
+        -   TiDB Cloud Starter クラスターを選択し、 [無料割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)より多くのリソースが必要な場合は、月間使用制限を設定します。
+        -   TiDB Cloud Essential クラスターを選択した場合は、最小 RCU と最大 RCU を設定し、必要に応じて詳細設定を構成します。
 
     </div>
      <div label="Restore in-place">
@@ -155,5 +157,5 @@ TiDB Cloud Serverless クラスターを復元するには、次の手順に従�
 ## 制限事項 {#limitations}
 
 -   TiFlashレプリカが有効になっている場合、データをTiFlashで再構築する必要があるため、復元後に一定期間使用できなくなります。
--   TiDB Cloud Serverless クラスターでは手動バックアップはサポートされていません。
+-   TiDB Cloud Starter およびTiDB Cloud Essential クラスターでは手動バックアップはサポートされていません。
 -   1 TiBを超えるデータを持つクラスターは、デフォルトでは新しいクラスターへの復元をサポートしていません。より大きなデータセットについては、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。

@@ -21,9 +21,9 @@ TiDB でのハイブリッド検索の一般的なワークフローは次のと
 
 ハイブリッド検索は、 [全文検索](/tidb-cloud/vector-search-full-text-search-python.md)検索とベクトル検索の両方を利用します。全文検索はまだ初期段階であり、より多くのお客様に継続的に展開しています。現在、全文検索は以下の製品オプションとリージョンでのみご利用いただけます。
 
--   TiDB Cloudサーバーレス: `Frankfurt (eu-central-1)`と`Singapore (ap-southeast-1)`
+-   AWS 上のTiDB Cloud Starter: `Frankfurt (eu-central-1)`と`Singapore (ap-southeast-1)`
 
-このチュートリアルを完了するには、サポート対象リージョンにTiDB Cloud Serverlessクラスターがインストールされている必要があります。まだインストールされていない場合は、手順[TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って作成してください。
+このチュートリアルを完了するには、サポートされているリージョンにTiDB Cloud Starterクラスターがあることを確認してください。まだない場合は、 [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って作成してください。
 
 ## 始めましょう {#get-started}
 
@@ -70,7 +70,7 @@ db = TiDBClient.connect(
     CA:       /etc/ssl/cert.pem
     ```
 
-    TiDB Cloud Serverless クラスターに接続するための対応する Python コードは次のようになります。
+    TiDB Cloud Starter クラスターに接続するための対応する Python コードは次のようになります。
 
     ```python
     db = TiDBClient.connect(

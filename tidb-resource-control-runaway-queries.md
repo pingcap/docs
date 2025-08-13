@@ -7,7 +7,7 @@ summary: リソース管理機能を通じて、リソースを過剰に消費�
 
 > **注記：**
 >
-> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
+> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 ランナウェイクエリとは、予想よりも多くの時間やリソースを消費するクエリです。以下では、ランナウェイクエリを管理する機能を説明するために「ランナ**ウェイクエリ」という**用語を使用します。
 

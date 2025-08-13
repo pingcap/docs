@@ -27,7 +27,7 @@ ACIDとは、トランザクションの4つの主要な特性、すなわち原
 
 Chat2Queryは、SQLエディタに統合されたAIベースの機能で、自然言語によるSQLクエリの生成、デバッグ、書き換えを支援します。詳細については、 [AI支援SQLエディターでデータを探索](/tidb-cloud/explore-data-with-chat2query.md)ご覧ください。
 
-さらに、 TiDB CloudはTiDB Cloud Serverlessクラスタ向けにChat2Query APIを提供しています。有効にすると、 TiDB Cloudは自動的に**Chat2Query**と呼ばれるシステムデータアプリと、データサービスにChat2Dataエンドポイントを作成します。このエンドポイントを呼び出すことで、AIが指示を与えることでSQL文を生成・実行できるようになります。詳細については、 [Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)ご覧ください。
+さらに、 TiDB CloudはAWSでホストされているTiDB Cloud Starterクラスター向けにChat2Query APIを提供しています。有効化すると、 TiDB Cloudは自動的に**Chat2Query**というシステムデータアプリと、データサービスにChat2Dataエンドポイントを作成します。このエンドポイントを呼び出すことで、AIが指示を与えることでSQL文を生成・実行できるようになります。詳細については、 [Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)ご覧ください。
 
 ### クレジット {#credit}
 
@@ -79,7 +79,7 @@ TiDB v5.0以降、 TiFlashノードを介した大規模並列処理（MPP）ア
 
 ### MSP顧客 {#msp-customer}
 
-マネージドサービスプロバイダー（MSP）顧客とは、 TiDB Cloudを購入し、MSPチャネルを通じて請求書を支払うエンドカスタマーです。これは[直接顧客](#direct-customer)とは区別されます。
+マネージドサービスプロバイダー（MSP）顧客とは、TiDB Cloudを購入し、MSPチャネルを通じて請求書を支払うエンドカスタマーです。これは[直接顧客](#direct-customer)とは区別されます。
 
 ### マネージドサービスプロバイダー（MSP） {#managed-service-provider-msp}
 
@@ -141,13 +141,13 @@ changefeed のレプリケーションは、コンピューティング リソ�
 
 ### リクエストユニット {#request-unit}
 
-リクエストユニット（RU）は、データベースへの単一のリクエストで消費されるリソースの量を表す測定単位です。リクエストで消費されるRUの量は、操作の種類や取得または変更されるデータの量など、さまざまな要因によって異なります。詳細については、 [TiDB Cloud Serverless の価格詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)ご覧ください。
+リクエストユニット（RU）は、データベースへの単一のリクエストで消費されるリソースの量を表す測定単位です。リクエストで消費されるRUの量は、操作の種類や取得または変更されるデータの量など、さまざまな要因によって異なります。詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)ご覧ください。
 
 ## S {#s}
 
 ### 支出限度額 {#spending-limit}
 
-支出制限とは、特定のワークロードに対して1か月に支出可能な最大金額を指します。これは、 TiDB Cloud Serverlessクラスターの予算を設定できるコスト管理メカニズムです。1 [スケーラブルなクラスター](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan)場合、支出制限は最低0.01ドルに設定する必要があります。また、スケーラブルクラスターは、要件を満たしていれば無料割り当てを持つことができます。無料割り当てを持つスケーラブルクラスターは、まず無料割り当てを使用します。
+[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md) 、特定のワークロードに対して1ヶ月あたりに支出可能な最大金額を表します。これは、 TiDB Cloud Starterクラスターの予算を設定できるコスト管理メカニズムです。支出限度額が0に設定されている場合、クラスターは無料のままです。支出限度額が0より大きい場合は、クレジットカードを追加する必要があります。
 
 ## T {#t}
 

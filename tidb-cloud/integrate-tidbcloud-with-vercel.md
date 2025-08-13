@@ -38,11 +38,11 @@ Vercel のアカウントとプロジェクトが必要です。まだお持ち�
 
 TiDB Cloudのアカウントとクラスターが必要です。まだお持ちでない場合は、以下を参照して作成してください。
 
--   [TiDB Cloud Serverless クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
+-   [TiDB Cloud Starter またはTiDB Cloud Essential クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
 
     > **注記：**
     >
-    > TiDB Cloud Vercel 統合は、 TiDB Cloud Serverless クラスターの作成をサポートしています。統合プロセス中に後からクラスターを作成することもできます。
+    > TiDB Cloud Vercel 統合では、TiDB Cloud Starter およびTiDB Cloud Essential クラスターの作成をサポートしています。また、統合プロセス中に後からクラスターを作成することもできます。
 
 -   [TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
 
@@ -71,7 +71,7 @@ TiDB Cloud Vercel統合を介して接続するには、 [Vercelの統合マー�
 
 > **注記：**
 >
-> この方法はTiDB Cloud Serverlessクラスターでのみ利用可能です。TiDB TiDB Cloud Dedicatedクラスターに接続する場合は、 [手動の方法](#connect-via-manually-setting-environment-variables)使用してください。
+> この方法は、 TiDB Cloud Starter およびTiDB Cloud Essential クラスターでのみ利用可能です。TiDB TiDB Cloud Dedicated クラスターに接続する場合は、 [手動の方法](#connect-via-manually-setting-environment-variables)使用してください。
 
 ### 統合ワークフロー {#integration-workflow}
 
@@ -89,7 +89,7 @@ TiDB Cloud Vercel統合を介して接続するには、 [Vercelの統合マー�
     1.  対象の Vercel プロジェクトを選択し、 **「次へ」**をクリックします。
     2.  ターゲットのTiDB Cloud組織とプロジェクトを選択します。
     3.  接続タイプとして**「クラスタ」**を選択します。
-    4.  対象のTiDB Cloudクラスターを選択します。 **「クラスタ」**ドロップダウンリストが空の場合、または新しいTiDB Cloud Serverlessクラスターを選択する場合は、リスト内の**「+クラスタの作成」**をクリックしてクラスターを作成してください。
+    4.  対象のTiDB Cloudクラスターを選択します。 **「クラスタ」**ドロップダウンリストが空の場合、または新しいTiDB Cloud StarterまたはTiDB Cloud Essentialクラスターを選択する場合は、リスト内の**「+クラスタの作成」**をクリックしてクラスターを作成してください。
     5.  接続するデータベースを選択します。**データベースの**ドロップダウンリストが空の場合、または新しいデータベースを選択する場合は、リスト内の**「+ データベースの作成」**をクリックしてデータベースを作成してください。
     6.  Vercelプロジェクトで使用しているフレームワークを選択してください。ターゲットフレームワークがリストにない場合は、 **「一般」**を選択してください。フレームワークによって環境変数が異なります。
     7.  プレビュー環境用の新しいブランチを作成するために**ブランチ**を有効にするかどうかを選択します。
@@ -161,22 +161,22 @@ TiDB Cloud Vercel統合を介して接続するには、 [Vercelの統合マー�
 
     ![Vercel Integration Configuration Page](/media/tidb-cloud/vercel/integration-vercel-configuration-page.png)
 
-    接続を削除すると、統合ワークフローによって設定された環境変数もVercelプロジェクトから削除されます。ただし、このアクションはTiDB Cloud Serverlessクラスターのデータには影響しません。
+    接続を削除すると、統合ワークフローによって設定された環境変数もVercelプロジェクトから削除されます。ただし、このアクションはTiDB Cloudクラスターのデータには影響しません。
 
-### TiDB Cloud Serverless ブランチに接続する {#connect-with-branching} {#connect-with-branching}
+### TiDB Cloudブランチに接続する {#connect-with-branching} {#connect-with-branching}
 
-Vercel の[プレビュー展開](https://vercel.com/docs/deployments/preview-deployments)機能を使用すると、Git プロジェクトの本番ブランチに変更をマージすることなく、ライブデプロイメントでアプリの変更をプレビューできます。 [TiDB Cloudサーバーレス ブランチ](/tidb-cloud/branch-overview.md)では、Vercel プロジェクトのブランチごとに新しいインスタンスを作成できます。これにより、本番データに影響を与えることなく、ライブデプロイメントでアプリの変更をプレビューできます。
+Vercel の[プレビュー展開](https://vercel.com/docs/deployments/preview-deployments)機能を使用すると、Git プロジェクトの本番ブランチに変更をマージすることなく、ライブデプロイメントでアプリの変更をプレビューできます。 [TiDB Cloudブランチ](/tidb-cloud/branch-overview.md)では、Vercel プロジェクトのブランチごとに新しいインスタンスを作成できます。これにより、本番データに影響を与えることなく、ライブデプロイメントでアプリの変更をプレビューできます。
 
 > **注記：**
 >
-> 現在、 TiDB Cloud Serverless ブランチは[GitHubリポジトリに関連付けられたVercelプロジェクト](https://vercel.com/docs/deployments/git/vercel-for-github)のみをサポートしています。
+> 現在、 TiDB Cloud Branching は[GitHubリポジトリに関連付けられたVercelプロジェクト](https://vercel.com/docs/deployments/git/vercel-for-github)のみをサポートしています。
 
-TiDB Cloud Serverless Branching を有効にするには、 [TiDB Cloud Vercel 統合ワークフロー](#integration-workflow)で次の点を確認する必要があります。
+TiDB Cloudブランチを有効にするには、 [TiDB Cloud Vercel 統合ワークフロー](#integration-workflow)で次の点を確認する必要があります。
 
 1.  接続タイプとして**「クラスタ」**を選択します。
 2.  **ブランチ**を有効にして、プレビュー環境用の新しいブランチを作成します。
 
-Gitリポジトリに変更をプッシュすると、Vercelはプレビューデプロイメントをトリガーします。TiDB TiDB Cloud統合により、Gitブランチ用のTiDB Cloud Serverlessブランチが自動的に作成され、環境変数が設定されます。詳細な手順は以下のとおりです。
+Gitリポジトリに変更をプッシュすると、Vercelはプレビューデプロイメントをトリガーします。TiDB TiDB Cloud統合により、 TiDB CloudクラスターのGitブランチ用のブランチが自動的に作成され、環境変数が設定されます。詳細な手順は以下のとおりです。
 
 1.  Git リポジトリに新しいブランチを作成します。
 
@@ -191,15 +191,15 @@ Gitリポジトリに変更をプッシュすると、Vercelはプレビュー�
 
     ![Vercel Preview\_Deployment](/media/tidb-cloud/vercel/vercel-preview-deployment.png)
 
-    1.  デプロイ中に、 TiDB Cloud統合により、Git ブランチと同じ名前のTiDB Cloud Serverless ブランチが自動的に作成されます。TiDB TiDB Cloud Serverless ブランチが既に存在する場合、 TiDB Cloud統合はこの手順をスキップします。
+    1.  デプロイ中に、 TiDB Cloud統合により、Git ブランチと同じ名前のブランチがクラスターに自動的に作成されます。ブランチが既に存在する場合、 TiDB Cloud統合はこの手順をスキップします。
 
         ![TiDB\_Cloud\_Branch\_Check](/media/tidb-cloud/vercel/tidbcloud-branch-check.png)
 
-    2.  TiDB Cloud Serverless ブランチの準備が整うと、 TiDB Cloud統合によって、Vercel プロジェクトのプレビュー デプロイメントで環境変数が設定されます。
+    2.  ブランチの準備ができたら、 TiDB Cloud統合によって、Vercel プロジェクトのプレビュー デプロイメントで環境変数が設定されます。
 
         ![Preview\_Envs](/media/tidb-cloud/vercel/preview-envs.png)
 
-    3.  TiDB Cloud統合では、 TiDB Cloud Serverless ブランチの準備が整うまで待機するためのブロッキングチェックも登録されます。このチェックは手動で再実行できます。
+    3.  TiDB Cloud統合では、ブランチの準備が整うまで待機するためのブロッキングチェックも登録されます。このチェックは手動で再実行できます。
 
 4.  チェックに合格したら、プレビュー デプロイメントにアクセスして変更を確認できます。
 
@@ -209,7 +209,7 @@ Gitリポジトリに変更をプッシュすると、Vercelはプレビュー�
 
 > **注記：**
 >
-> TiDB Cloudでは、組織ごとにデフォルトで最大5つのTiDB Cloud Serverless ブランチを作成できます。この制限を超えないようにするには、不要になったTiDB Cloud Serverless ブランチを削除してください。詳細については、 [TiDB Cloud Serverlessブランチを管理する](/tidb-cloud/branch-manage.md)ご覧ください。
+> TiDB Cloudの各組織では、デフォルトで最大5つのTiDB Cloud Starterクラスタブランチを作成できます。この制限を超えないようにするには、不要になったクラスタブランチを削除してください。詳細については、 [TiDB Cloudブランチの管理](/tidb-cloud/branch-manage.md)ご覧ください。
 
 ## 環境変数を手動で設定して接続する {#connect-via-manually-setting-environment-variables}
 
@@ -224,7 +224,7 @@ Gitリポジトリに変更をプッシュすると、Vercelはプレビュー�
 
     ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
 
-ここではPrismaアプリケーションを例として使用します。以下は、 TiDB Cloud ServerlessクラスターのPrismaスキーマファイルのデータソース設定です。
+ここでは、Prisma アプリケーションとTiDB Cloud Starter クラスターを例として使用します。以下は、 TiDB Cloud Starter クラスターの Prisma スキーマファイルにおけるデータソース設定です。
 
     datasource db {
         provider = "mysql"

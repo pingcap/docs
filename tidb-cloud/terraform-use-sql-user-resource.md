@@ -1,9 +1,9 @@
 ---
-title: Use SQL User Resource
-summary: SQL ユーザー リソースを使用してTiDB Cloud SQL ユーザーを作成および変更する方法を学習します。
+title: Use the `tidbcloud_sql_user` Resource
+summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザーを作成および変更する方法を学習します。
 ---
 
-# SQL ユーザー リソースを使用する {#use-sql-user-resource}
+# <code>tidbcloud_sql_user</code>リソースを使用する {#use-the-code-tidbcloud-sql-user-code-resource}
 
 このドキュメントでは、 `tidbcloud_sql_user`リソースを使用してTiDB Cloud SQL ユーザーを管理する方法について説明します。
 
@@ -17,7 +17,9 @@ summary: SQL ユーザー リソースを使用してTiDB Cloud SQL ユーザー
 ## 前提条件 {#prerequisites}
 
 -   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
--   [TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)または[TiDB Cloudサーバーレスクラスター](/tidb-cloud/create-tidb-cluster-serverless.md) 。
+-   TiDB Cloudクラスターを作成するには、次のいずれかのドキュメントを参照してください。
+    -   [TiDB Cloud Starter または Essential クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
+    -   [TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
 
 ## SQLユーザーを作成する {#create-a-sql-user}
 
@@ -51,9 +53,9 @@ summary: SQL ユーザー リソースを使用してTiDB Cloud SQL ユーザー
 
     `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    -   SQL ユーザー リソースを使用するには、リソース タイプを`tidbcloud_sql_user`に設定します。
+    -   `tidbcloud_sql_user`リソースを使用するには、リソース タイプを`tidbcloud_sql_user`に設定します。
     -   リソース名は必要に応じて定義できます。例： `example` 。
-    -   TiDB Cloud Serverless クラスター内の SQL ユーザーの場合、 `user_name`と組み込みロール`role_readonly`および`role_readwrite`ユーザー プレフィックスで始まる必要があり、 `tidbcloud_serverless_cluster`データ ソースを実行することでユーザー プレフィックスを取得できます。
+    -   TiDB Cloud Starter またはTiDB Cloud Essential クラスターの SQL ユーザーの場合、 `user_name`と組み込みロール`role_readonly`および`role_readwrite`ユーザー プレフィックスで始まる必要があり、 `tidbcloud_serverless_cluster`データ ソースを実行することでユーザー プレフィックスを取得できます。
     -   SQL ユーザー指定情報を取得するには、 [`tidbcloud_sql_user` (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/sql_user)参照してください。
 
 3.  `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
@@ -195,7 +197,7 @@ Terraform で管理されていないTiDB Cloud SQL ユーザーの場合は、T
 
 たとえば、Terraform によって作成されていない SQL ユーザーを次のようにインポートできます。
 
-1.  新しいSQLユーザーリソースのインポートブロックを追加する
+1.  新しい`tidbcloud_sql_user`リソースのインポート ブロックを追加します。
 
     次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` `cluster_id,user_name`の形式に置き換えます。
 
@@ -204,9 +206,9 @@ Terraform で管理されていないTiDB Cloud SQL ユーザーの場合は、T
           id = "${id}"
         }
 
-2.  新しい設定ファイルを生成する
+2.  新しい構成ファイルを生成します。
 
-    インポート ブロックに従って、新しい SQL ユーザー リソースの新しい構成ファイルを生成します。
+    インポート ブロックに従って、新しい`tidbcloud_sql_user`リソースの新しい構成ファイルを生成します。
 
     ```shell
     terraform plan -generate-config-out=generated.tf
@@ -216,11 +218,11 @@ Terraform で管理されていないTiDB Cloud SQL ユーザーの場合は、T
 
     その後、カレントディレクトリに`generated.tf`ファイルが作成され、そこにインポートされたリソースの設定が含まれます。ただし、必須の引数`password`設定されていないため、プロバイダーはエラーをスローします。生成された設定ファイルで、引数`password`の値を`tidbcloud_sql_user`リソースに置き換えることができます。
 
-3.  生成された構成を確認して適用する
+3.  生成された構成を確認して適用します。
 
     生成された構成ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
 
-    次に、 `terraform apply`実行してインフラストラクチャをインポートします。適用後の出力例は次のとおりです。
+    次に、 `terraform apply`を実行してインフラストラクチャをインポートします。適用後の出力例は次のとおりです。
 
     ```shell
     tidbcloud_sql_user.example: Importing... [id=10423692645600000000,example_user]

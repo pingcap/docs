@@ -9,7 +9,7 @@ summary: TiDB での SHOW PLACEMENT の使用法。
 
 > **注記：**
 >
-> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
+> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 このステートメントは、配置Driver(PD) が配置のスケジュールで行った現在の進行状況を示す`Scheduling_State`フィールドを含む結果セットを返します。
 

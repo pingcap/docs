@@ -51,7 +51,7 @@ AWS PrivateLink または VPC ピアリング接続を使用しており、ソ�
 
     ![Cross-region and cross-AZ traffic charges](/media/tidb-cloud/dm-billing-cross-region-and-az-fees.png)
 
-クロスリージョンおよびクロスAZトラフィックの料金はTiDB Cloudと同じです。詳細については[TiDB Cloudの価格詳細](https://www.pingcap.com/tidb-dedicated-pricing-details/)ご覧ください。
+クロスリージョンおよびクロスAZトラフィックの料金はTiDB Cloudと同じです。詳細については[TiDB Cloud専用料金の詳細](https://www.pingcap.com/tidb-dedicated-pricing-details/)ご覧ください。
 
 ## 参照 {#see-also}
 

@@ -11,7 +11,7 @@ TiDB Cloudを使用すると、HTAP ワークロードに応じて 1 つまた�
 
 > **注記：**
 >
-> TiDB Cloud Serverless クラスターでは、 TiFlashは常に有効になっています。無効にすることはできません。
+> TiFlashは、 TiDB Cloud StarterおよびTiDB Cloud Essentialクラスタでは常に有効になっています。無効にすることはできません。
 
 TiKVデータはデフォルトではTiFlashに複製されません。次のSQL文を使用して、 TiFlashに複製するテーブルを選択できます。
 

@@ -6,7 +6,7 @@ category: intro
 
 # TiDB Cloudとは {#what-is-tidb-cloud}
 
-[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 、オープンソースのハイブリッドトランザクションおよび分析処理（HTAP）データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)クラウドに提供する、フルマネージドの Database-as-a-Service（DBaaS）です。TiDB TiDB Cloud は、データベースの複雑な処理に煩わされることなく、アプリケーション開発に集中できるよう、データベースの導入と管理を容易にします。TiDB TiDB Cloudクラスターを作成することで、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure 上でミッションクリティカルなアプリケーションを迅速に構築できます。
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 、オープンソースのハイブリッドトランザクションおよび分析処理（HTAP）データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)クラウドに提供する、フルマネージドの Database-as-a-Service（DBaaS）です。TiDB TiDB Cloud は、データベースの複雑な処理に煩わされることなく、アプリケーション開発に集中できるよう、データベースの導入と管理を容易にします。TiDB TiDB Cloudクラスターを作成することで、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure、Alibaba Cloud 上でミッションクリティカルなアプリケーションを迅速に構築できます。
 
 ![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
 
@@ -50,7 +50,7 @@ TiDB Cloudを使用すると、次の主な機能を利用できます。
 
 -   **マルチクラウドサポート**
 
-    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB TiDB Cloud は現在、AWS、Azure、Google Cloud で利用可能です。
+    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB TiDB Cloud は現在、AWS、Azure、Google Cloud、Alibaba Cloud で利用可能です。
 
 -   **シンプルな料金プラン**
 
@@ -62,17 +62,25 @@ TiDB Cloudを使用すると、次の主な機能を利用できます。
 
 ## 展開オプション {#deployment-options}
 
-TiDB Cloud、次の 2 つのデプロイメント オプションが提供されます。
+TiDB Cloud は次の展開オプションを提供します。
 
--   [TiDB Cloudサーバーレス](https://www.pingcap.com/tidb-cloud-serverless)
+-   TiDB Cloud Serverless（Starter に名称変更）
 
-    TiDB Cloud Serverlessは、フルマネージドのマルチテナント型TiDBサービスです。MySQL互換データベースを瞬時に自動スケーリングし、豊富な無料プランをご用意しています。無料プランの上限を超えた場合は、使用量に応じた課金体系でご利用いただけます。
+    TiDB Cloud Starterは、フルマネージドのマルチテナント型TiDBサービスです。MySQL互換データベースを瞬時に自動スケーリングし、十分な無料クォータと、無料クォータを超えた場合の使用量に応じた課金を提供します。
 
--   [TiDB Cloud専用](https://www.pingcap.com/tidb-cloud-dedicated)
+    現在、 TiDB Cloud Starter は AWS で一般公開されており、Alibaba Cloud ではパブリック プレビュー中です。
 
-    TiDB Cloud Dedicated は、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番での使用を目的としています。
+-   TiDB Cloudエッセンシャル
 
-TiDB Cloud Serverless とTiDB Cloud Dedicated の機能比較については、 [TiDB: 高度なオープンソースの分散SQLデータベース](https://www.pingcap.com/get-started-tidb)参照してください。
+    ワークロードが増加し、リアルタイムの拡張性を必要とするアプリケーションに対して、 TiDB Cloud Essential はビジネスの成長に対応できる柔軟性とパフォーマンスを提供します。
+
+    現在、 TiDB Cloud EssentialはAlibaba Cloudでパブリックプレビュー中です。TiDB TiDB Cloud StarterとTiDB Cloud Essentialの機能比較については、 [Alibaba Cloud 上の TiDB](https://www.pingcap.com/partners/alibaba-cloud/)ご覧ください。
+
+-   TiDB Cloud専用
+
+    TiDB Cloud Dedicated は、ミッションクリティカルなビジネス向けに設計されており、複数の可用性ゾーンにわたる高可用性、水平スケーリング、および完全な[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)機能を提供します。
+
+    現在、 TiDB Cloud DedicatedはAWSとGoogle Cloudで一般提供されており、Azureではパブリックプレビュー中です。詳細については、 [TiDB Cloud専用](https://www.pingcap.com/tidb-cloud-dedicated)ご覧ください。
 
 ## アーキテクチャ {#architecture}
 

@@ -50,6 +50,7 @@ TiDB Cloud は次のリソースとデータ ソースをサポートしてい�
 
 -   [Terraformについて詳しくはこちら](https://www.terraform.io/docs)
 -   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)
--   [クラスタリソースの使用](/tidb-cloud/terraform-use-cluster-resource.md)
--   [バックアップリソースを使用する](/tidb-cloud/terraform-use-backup-resource.md)
--   [復元リソースを使用する](/tidb-cloud/terraform-use-restore-resource.md)
+-   [`tidbcloud_serverless_cluster`リソースを使用する](/tidb-cloud/terraform-use-serverless-cluster-resource.md)
+-   [`tidbcloud_dedicated_cluster`リソースを使用する](/tidb-cloud/terraform-use-dedicated-cluster-resource.md)
+-   [`tidbcloud_backup`リソースを使用する](/tidb-cloud/terraform-use-backup-resource.md)
+-   [`tidbcloud_restore`リソースを使用する](/tidb-cloud/terraform-use-restore-resource.md)

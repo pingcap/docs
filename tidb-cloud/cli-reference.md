@@ -21,21 +21,21 @@ TiDB Cloud CLIは、数行のコマンドでターミナルからTiDB Cloudを�
 
 ターミナルで`ticloud` CLI を使用するには、 `ticloud [command] [subcommand]`実行してください。 [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview)使用している場合は、代わりに`tiup cloud [command] [subcommand]`実行してください。
 
-| 指示            | サブコマンド                                          | 説明                                    |
-| ------------- | ----------------------------------------------- | ------------------------------------- |
-| 認証            | ログイン、ログアウト、whoami                               | ログインとログアウト                            |
-| サーバーレス（別名: s） | 作成、削除、説明、一覧表示、更新、支出制限、リージョン、シェル                 | TiDB Cloud Serverless クラスターを管理する      |
-| サーバーレスブランチ    | 作成、削除、説明、一覧表示、シェル                               | TiDB Cloud Serverlessブランチを管理する        |
-| サーバーレスインポート   | キャンセル、説明、リスト、開始                                 | TiDB Cloud Serverless インポートタスクを管理する   |
-| サーバーレスエクスポート  | 作成、説明、リスト、キャンセル、ダウンロード                          | TiDB Cloud Serverless エクスポートタスクを管理する  |
-| サーバーレスSQLユーザー | 作成、リスト、削除、更新                                    | TiDB Cloud Serverless SQL ユーザーの管理     |
-| サーバーレス監査ログ    | config、describe、filter-rule（別名:filter）、download | TiDB Cloud Serverless データベース監査ログを管理する |
-| 愛             | <li></li>                                       | TiDBボットとチャット                          |
-| 完了            | bash、fish、powershell、zsh                        | 指定されたシェルの補完スクリプトを生成する                 |
-| 設定            | 作成、削除、説明、編集、一覧表示、設定、使用                          | ユーザープロファイルを構成する                       |
-| プロジェクト        | リスト                                             | プロジェクトの管理                             |
-| アップグレード       | <li></li>                                       | CLIを最新バージョンに更新する                      |
-| ヘルプ           | 認証、構成、サーバーレス、AI、プロジェクト、アップグレード、ヘルプ、完了           | 任意のコマンドのヘルプをビュー                       |
+| 指示            | サブコマンド                                          | 説明                                                                |
+| ------------- | ----------------------------------------------- | ----------------------------------------------------------------- |
+| 認証            | ログイン、ログアウト、whoami                               | ログインとログアウト                                                        |
+| サーバーレス（別名: s） | 作成、削除、説明、一覧表示、更新、支出制限、リージョン、シェル                 | TiDB Cloud Starter またはTiDB Cloud Essential クラスターを管理する             |
+| サーバーレスブランチ    | 作成、削除、説明、一覧表示、シェル                               | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチを管理する        |
+| サーバーレスインポート   | キャンセル、説明、リスト、開始                                 | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのインポート タスクを管理します  |
+| サーバーレスエクスポート  | 作成、説明、リスト、キャンセル、ダウンロード                          | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのエクスポート タスクを管理します |
+| サーバーレスSQLユーザー | 作成、リスト、削除、更新                                    | TiDB Cloud Starter またはTiDB Cloud Essential クラスターの SQL ユーザーを管理します  |
+| サーバーレス監査ログ    | config、describe、filter-rule（別名:filter）、download | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータベース監査ログを管理します |
+| 愛             | <li></li>                                       | TiDBボットとチャット                                                      |
+| 完了            | bash、fish、powershell、zsh                        | 指定されたシェルの補完スクリプトを生成する                                             |
+| 設定            | 作成、削除、説明、編集、一覧表示、設定、使用                          | ユーザープロファイルを構成する                                                   |
+| プロジェクト        | リスト                                             | プロジェクトの管理                                                         |
+| アップグレード       | <li></li>                                       | CLIを最新バージョンに更新する                                                  |
+| ヘルプ           | 認証、構成、サーバーレス、AI、プロジェクト、アップグレード、ヘルプ、完了           | 任意のコマンドのヘルプをビュー                                                   |
 
 ## コマンドモード {#command-modes}
 

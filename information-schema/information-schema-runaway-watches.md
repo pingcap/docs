@@ -5,11 +5,11 @@ summary: RUNAWAY_WATCHES` INFORMATION_SCHEMA テーブルについて学習し�
 
 # ランナウェイウォッチ {#runaway-watches}
 
-`RUNAWAY_WATCHES`表は、予想以上にリソースを消費するランナウェイクエリの監視リストを示しています。詳細については、 [ランナウェイクエリ](/tidb-resource-control-runaway-queries.md)ご覧ください。
+`RUNAWAY_WATCHES`表は、予想以上にリソースを消費するランナウェイクエリの監視リストを示しています。詳細については、 [ランナウェイクエリ](/tidb-resource-control-runaway-queries.md)参照してください。
 
 > **注記：**
 >
-> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> このテーブルはクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
 
 ```sql
 USE INFORMATION_SCHEMA;

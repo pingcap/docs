@@ -1,22 +1,23 @@
 ---
-title: Import Apache Parquet Files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud OSS into TiDB Cloud Serverless
-summary: Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service (OSS) から Apache Parquet ファイルをTiDB Cloud Serverless にインポートする方法を学習します。
+title: Import Apache Parquet Files from Cloud Storage into TiDB Cloud Starter or Essential
+summary: Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service (OSS) から Apache Parquet ファイルをTiDB Cloud Starter またはTiDB Cloud Essential にインポートする方法を学習します。
 ---
 
-# Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud OSS から Apache Parquet ファイルをTiDB Cloud Serverless にインポートする {#import-apache-parquet-files-from-amazon-s3-gcs-azure-blob-storage-or-alibaba-cloud-oss-into-tidb-cloud-serverless}
+# Cloud Storage からTiDB Cloud Starter または Essential に Apache Parquet ファイルをインポートする {#import-apache-parquet-files-from-cloud-storage-into-tidb-cloud-starter-or-essential}
 
-TiDB Cloud Serverlessには、非圧縮形式とSnappy圧縮形式の[Apache パーケット](https://parquet.apache.org/)のデータファイルをインポートできます。このドキュメントでは、Amazon Simple Storage Service（Amazon S3）、Google Cloud Storage（GCS）、Azure Blob Storage、またはAlibaba Cloud Object Storage Service（OSS）からParquetファイルをTiDB Cloud Serverlessにインポートする方法について説明します。
+TiDB Cloud Starter またはTiDB Cloud Essential には、非圧縮形式と Snappy 圧縮形式の[Apache パーケット](https://parquet.apache.org/)のデータファイルをインポートできます。このドキュメントでは、Amazon Simple Storage Service (Amazon S3)、Google Cloud Storage (GCS)、Azure Blob Storage、または Alibaba Cloud Object Storage Service (OSS) から、Parquet ファイルをTiDB Cloud Starter またはTiDB Cloud Essential にインポートする方法について説明します。
 
 > **注記：**
 >
-> -   TiDB Cloud Serverless は、空のテーブルへの Parquet ファイルのインポートのみをサポートしています。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントに従ってTiDB Cloud Serverless を使用して一時的な空のテーブルにデータをインポートし、 `INSERT SELECT`ステートメントを使用してデータを対象の既存のテーブルにコピーします。
+> -   TiDB Cloud Dedicated については、 [クラウドストレージからTiDB Cloud Dedicated に Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files.md)参照してください。
+> -   TiDB Cloud は、空のテーブルへの Parquet ファイルのインポートのみをサポートしています。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントに従って一時的な空のテーブルにデータをインポートし、その後、 `INSERT SELECT`ステートメントを使用してデータを対象の既存のテーブルにコピーします。
 > -   Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。その他の Snappy 圧縮形式はサポートされていません。
 
 ## ステップ1. Parquetファイルを準備する {#step-1-prepare-the-parquet-files}
 
 > **注記：**
 >
-> 現在、 TiDB Cloud Serverless は、以下のいずれかのデータ型を含む Parquet ファイルのインポートをサポートしていません。インポートする Parquet ファイルにこれらのデータ型が含まれている場合は、まず[サポートされているデータ型](#supported-data-types) （例： `STRING` ）を使用して Parquet ファイルを再生成する必要があります。あるいは、AWS Glue などのサービスを使用してデータ型を簡単に変換することもできます。
+> 現在、 TiDB Cloud は、以下のいずれかのデータ型を含む Parquet ファイルのインポートをサポートしていません。インポートする Parquet ファイルにこれらのデータ型が含まれている場合は、まず[サポートされているデータ型](#supported-data-types) （例： `STRING` ）を使用して Parquet ファイルを再生成する必要があります。あるいは、AWS Glue などのサービスを使用してデータ型を簡単に変換することもできます。
 >
 > -   `LIST`
 > -   `NEST STRUCT`
@@ -26,7 +27,7 @@ TiDB Cloud Serverlessには、非圧縮形式とSnappy圧縮形式の[Apache パ
 
 1.  Parquet ファイルが 256 MB より大きい場合は、サイズがそれぞれ約 256 MB の小さなファイルに分割することを検討してください。
 
-    TiDB Cloud Serverlessは非常に大きなParquetファイルのインポートをサポートしていますが、256MB程度の複数の入力ファイルを扱う際に最適なパフォーマンスを発揮します。これは、 TiDB Cloud Serverlessが複数のファイルを並列処理できるため、インポート速度が大幅に向上するからです。
+    TiDB Cloudは非常に大きなParquetファイルのインポートをサポートしていますが、256MB程度の複数の入力ファイルで最適なパフォーマンスを発揮します。これは、 TiDB Cloudが複数のファイルを並列処理できるため、インポート速度が大幅に向上するからです。
 
 2.  Parquet ファイルに次のように名前を付けます。
 
@@ -40,9 +41,9 @@ TiDB Cloud Serverlessには、非圧縮形式とSnappy圧縮形式の[Apache パ
 
 ## ステップ2. ターゲットテーブルスキーマを作成する {#step-2-create-the-target-table-schemas}
 
-Parquet ファイルにはスキーマ情報が含まれていないため、Parquet ファイルからTiDB Cloud Serverless にデータをインポートする前に、次のいずれかの方法でテーブル スキーマを作成する必要があります。
+Parquet ファイルにはスキーマ情報が含まれていないため、Parquet ファイルからTiDB Cloudにデータをインポートする前に、次のいずれかの方法でテーブル スキーマを作成する必要があります。
 
--   方法 1: TiDB Cloud Serverless で、ソース データのターゲット データベースとテーブルを作成します。
+-   方法 1: TiDB Cloudで、ソース データのターゲット データベースとテーブルを作成します。
 
 -   方法 2: Parquet ファイルが配置されている Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service ディレクトリで、次のようにソース データのターゲット テーブル スキーマ ファイルを作成します。
 
@@ -50,9 +51,9 @@ Parquet ファイルにはスキーマ情報が含まれていないため、Par
 
         Parquetファイルが[ステップ1](#step-1-prepare-the-parquet-files)の命名規則に従っている場合、データベーススキーマファイルはデータのインポートに必須ではありません。そうでない場合は、データベーススキーマファイルは必須です。
 
-        各データベーススキーマファイルは`${db_name}-schema-create.sql`形式で、 `CREATE DATABASE` DDLステートメントを含んでいる必要があります。このファイルを使用して、 TiDB Cloud Serverlessはデータをインポートする際に、データを格納するための`${db_name}`データベースを作成します。
+        各データベーススキーマファイルは`${db_name}-schema-create.sql`形式で、 `CREATE DATABASE` DDLステートメントを含んでいる必要があります。このファイルを使用して、 TiDB Cloudはデータをインポートする際に、データを格納するための`${db_name}`データベースを作成します。
 
-        たとえば、次のステートメントを含む`mydb-scehma-create.sql`ファイルを作成すると、 TiDB Cloud Serverless はデータをインポートするときに`mydb`データベースを作成します。
+        たとえば、次のステートメントを含む`mydb-scehma-create.sql`ファイルを作成すると、 TiDB Cloud はデータをインポートするときに`mydb`データベースを作成します。
 
         ```sql
         CREATE DATABASE mydb;
@@ -60,11 +61,11 @@ Parquet ファイルにはスキーマ情報が含まれていないため、Par
 
     2.  ソース データのテーブル スキーマ ファイルを作成します。
 
-        Parquet ファイルが配置されている Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service ディレクトリにテーブル スキーマ ファイルを含めない場合、 TiDB Cloud Serverless はデータをインポートしたときに対応するテーブルを作成しません。
+        Parquet ファイルが配置されている Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service ディレクトリにテーブル スキーマ ファイルを含めない場合、 TiDB Cloud はデータをインポートするときに対応するテーブルを作成しません。
 
-        各テーブルスキーマファイルは`${db_name}.${table_name}-schema.sql`形式で、 `CREATE TABLE` DDLステートメントを含む必要があります。このファイルを使用することで、 TiDB Cloud Serverlessはデータをインポートする際に`${db_name}`データベースに`${db_table}`テーブルを作成します。
+        各テーブルスキーマファイルは`${db_name}.${table_name}-schema.sql`形式で、 `CREATE TABLE` DDLステートメントを含む必要があります。このファイルを使用することで、 TiDB Cloudはデータをインポートする際に`${db_name}`データベースに`${db_table}`テーブルを作成します。
 
-        たとえば、次のステートメントを含む`mydb.mytable-schema.sql`ファイルを作成すると、 TiDB Cloud Serverless はデータをインポートするときに`mydb`データベースに`mytable`テーブルを作成します。
+        たとえば、次のステートメントを含む`mydb.mytable-schema.sql`ファイルを作成すると、 TiDB Cloud はデータをインポートするときに`mydb`データベースに`mytable`テーブルを作成します。
 
         ```sql
         CREATE TABLE mytable (
@@ -79,21 +80,21 @@ Parquet ファイルにはスキーマ情報が含まれていないため、Par
 
 ## ステップ3. クロスアカウントアクセスを構成する {#step-3-configure-cross-account-access}
 
-TiDB Cloud Serverless が Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service バケット内の Parquet ファイルにアクセスできるようにするには、次のいずれかを実行します。
+TiDB Cloud がAmazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service バケット内の Parquet ファイルにアクセスできるようにするには、次のいずれかを実行します。
 
--   Parquet ファイルが Amazon S3 にある場合は、 [TiDB Cloud Serverless の外部storageアクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access) 。
+-   Parquet ファイルが Amazon S3 にある場合は、クラスターごとに[Amazon S3 アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access) 。
 
     バケットにアクセスするには、AWS アクセスキーまたはロール ARN のいずれかを使用できます。完了したら、アクセスキー（アクセスキー ID とシークレットアクセスキーを含む）またはロール ARN の値をメモしておいてください。これらは[ステップ4](#step-4-import-parquet-files)で必要になります。
 
--   Parquet ファイルが GCS にある場合は、 [TiDB Cloud Serverless の外部storageアクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-gcs-access) 。
+-   Parquet ファイルが GCS にある場合は、クラスタごとに[GCS アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-gcs-access) 。
 
--   Parquet ファイルが Azure Blob Storage にある場合は、 [TiDB Cloud Serverless の外部storageアクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access) 。
+-   Parquet ファイルが Azure Blob Storage にある場合は、クラスターごとに[Azure Blob Storage アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access) 。
 
--   Parquet ファイルが Alibaba Cloud Object Storage Service (OSS) にある場合は、 [TiDB Cloud Serverless の外部storageアクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access) 。
+-   Parquet ファイルが Alibaba Cloud Object Storage Service (OSS) にある場合は、クラスターごとに[Alibaba Cloud Object Storage Service (OSS) アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access) 。
 
 ## ステップ4. Parquetファイルのインポート {#step-4-import-parquet-files}
 
-Parquet ファイルをTiDB Cloud Serverless にインポートするには、次の手順を実行します。
+Parquet ファイルをTiDB Cloud Starter またはTiDB Cloud Essential にインポートするには、次の手順を実行します。
 
 <SimpleTab>
 <div label="Amazon S3">
@@ -108,7 +109,7 @@ Parquet ファイルをTiDB Cloud Serverless にインポートするには、�
 
     2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
-2.  **Cloud Storage からデータをインポート**をクリックします。
+2.  **「Cloud Storage からデータをインポート」**をクリックします。
 
 3.  **「クラウド ストレージからデータをインポート」**ページで、次の情報を入力します。
 
@@ -161,7 +162,7 @@ Parquet ファイルをTiDB Cloud Serverless にインポートするには、�
 
     2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
-2.  **「Cloud Storage からデータをインポート」**をクリックします。
+2.  **Cloud Storage からデータをインポート**をクリックします。
 
 3.  **「クラウド ストレージからデータをインポート」**ページで、次の情報を入力します。
 
@@ -212,7 +213,7 @@ Parquet ファイルをTiDB Cloud Serverless にインポートするには、�
 
     2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
-2.  **「Cloud Storage からデータをインポート」**をクリックします。
+2.  **Cloud Storage からデータをインポート**をクリックします。
 
 3.  **「クラウド ストレージからデータをインポート」**ページで、次の情報を入力します。
 
@@ -304,7 +305,7 @@ Parquet ファイルをTiDB Cloud Serverless にインポートするには、�
 
 </SimpleTab>
 
-インポート タスクを実行するときに、サポートされていない変換または無効な変換が検出されると、 TiDB Cloud Serverless はインポート ジョブを自動的に終了し、インポート エラーを報告します。
+インポート タスクを実行するときに、サポートされていない変換または無効な変換が検出されると、 TiDB Cloud はインポート ジョブを自動的に終了し、インポート エラーを報告します。
 
 インポート エラーが発生した場合は、次の手順を実行します。
 
@@ -320,7 +321,7 @@ Parquet ファイルをTiDB Cloud Serverless にインポートするには、�
 
 ## サポートされているデータ型 {#supported-data-types}
 
-次の表は、TiDB Cloud Serverless にインポートできるサポートされている Parquet データ型を示しています。
+次の表は、TiDB Cloud Starter およびTiDB Cloud Essential にインポートできるサポートされている Parquet データ型を示しています。
 
 | 寄木細工のプリミティブタイプ | Parquet論理型    | TiDBまたはMySQLの型                                                                                                                                                      |
 | -------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -336,7 +337,7 @@ Parquet ファイルをTiDB Cloud Serverless にインポートするには、�
 | バイト配列          | 弦             | 列挙型<br/>日付<br/>小数点<br/>幾何学<br/>ジオメトリコレクション<br/>JSON<br/>長文<br/>中テキスト<br/>マルチポイント<br/>マルチポリゴン<br/>数値<br/>ポイント<br/>ポリゴン<br/>セット<br/>TEXT<br/>時間<br/>小さなテキスト<br/>可変長文字 |
 | スモールイント        | 該当なし          | INT32                                                                                                                                                               |
 | SMALLINT 符号なし  | 該当なし          | INT32                                                                                                                                                               |
-| TINYINT        | 該当なし          | INT32                                                                                                                                                               |
+| タイニーイント        | 該当なし          | INT32                                                                                                                                                               |
 | TINYINT 符号なし   | 該当なし          | INT32                                                                                                                                                               |
 
 ## トラブルシューティング {#troubleshooting}

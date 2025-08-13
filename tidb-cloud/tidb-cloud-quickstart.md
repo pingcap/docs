@@ -14,7 +14,7 @@ category: quick start
 
 ## ステップ1: TiDBクラスターを作成する {#step-1-create-a-tidb-cluster}
 
-[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) TiDB Cloudを使い始めるのに最適な方法です。TiDB TiDB Cloud Serverlessクラスターを作成するには、以下の手順に従ってください。
+TiDB Cloudを使い始めるには、 [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) （現在はStarter）が最適です。TiDB TiDB Cloud Starterクラスターを作成するには、以下の手順に従ってください。
 
 1.  TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidbcloud.com/free-trial)クリックしてサインアップしてください。
 
@@ -24,17 +24,22 @@ category: quick start
 
     デフォルトでは[**クラスター**](https://tidbcloud.com/project/clusters)ページ目が表示されます。
 
-3.  新規サインアップ ユーザーの場合、 TiDB Cloud は`Cluster0`名前のデフォルトのTiDB Cloud Serverless クラスターを自動的に作成します。
+3.  新規サインアップ ユーザーの場合、 TiDB Cloud は`Cluster0`名前のデフォルトのTiDB Cloud Starter クラスターを自動的に作成します。
 
     -   このデフォルトのクラスターでTiDB Cloud機能をすぐに試すには、 [ステップ2: AI支援SQLエディターを試す](#step-2-try-ai-assisted-sql-editor)に進みます。
-    -   独自に新しいTiDB Cloud Serverless クラスターを作成するには、次の手順に従います。
+    -   新しいTiDB Cloud Starter クラスターを独自に作成するには、次の手順に従います。
 
         1.  **[クラスタの作成]を**クリックします。
-        2.  **「クラスタの作成」**ページでは、デフォルトで**「Serverless」**が選択されています。クラスターのターゲットリージョンを選択し、必要に応じてデフォルトのクラスター名を更新し、 [クラスタープラン](/tidb-cloud/select-cluster-tier.md#cluster-plans)を選択して**「作成**」をクリックします。TiDB TiDB Cloud Serverless クラスターは約30秒で作成されます。
+
+        2.  **「クラスタの作成」**ページでは、デフォルトで**「スターター」**が選択されています。クラスターのクラウドプロバイダーとターゲットリージョンを選択し、必要に応じてデフォルトのクラスター名を更新して、 **「作成」を**クリックします。TiDB TiDB Cloud Starterクラスターは約30秒で作成されます。
+
+        > **注記**
+        >
+        > 現在、 TiDB Cloud StarterはAWSで一般公開されており、Alibaba Cloudではパブリックプレビュー中です。このドキュメントの以降の手順では、AWSを例に説明します。
 
 ## ステップ2: AI支援SQLエディターを試す {#step-2-try-ai-assisted-sql-editor}
 
-TiDB Cloudコンソールに搭載されたAI支援SQLエディタを使用することで、データの価値を最大限に引き出すことができます。これにより、ローカルSQLクライアントを必要とせずに、データベースに対してSQLクエリを実行できます。クエリ結果は表やグラフで直感的に表示され、クエリログも簡単に確認できます。
+AWS でホストされているTiDB Cloud Starter クラスターでは、 TiDB Cloudコンソールに搭載された AI 支援型 SQL エディタを使用して、データの価値を最大限に高めることができます。これにより、ローカル SQL クライアントを必要とせずに、データベースに対して SQL クエリを実行できます。クエリ結果は表やグラフで直感的に表示され、クエリログも簡単に確認できます。
 
 1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページで、クラスター名をクリックして概要ページに移動し、左側のナビゲーション ペインで**[SQL エディター] を**クリックします。
 
@@ -105,18 +110,17 @@ FROM
   `t`;
 ```
 
-## ステップ3: インタラクティブなチュートリアルを試す {#step-3-try-interactive-tutorials}
+## ステップ3: コンソールでガイドツアーを試す {#step-3-try-guided-tour-on-the-console}
 
-TiDB Cloud は、 TiDB Cloudをすぐに使い始めることができるよう、丁寧に作成されたサンプルデータセットを使用したインタラクティブなチュートリアルを提供しています。これらのチュートリアルを試して、 TiDB Cloud を高性能なデータ分析に使用する方法を習得してください。
+TiDB Cloud は、 TiDB Cloudをすぐに使い始めるのに役立つ、丁寧に作成されたサンプルデータセットを含むインタラクティブなチュートリアルを提供しています。AWS でホストされているTiDB Cloud Starter クラスターの場合は、このチュートリアルを試して、 TiDB Cloud を高性能データ分析に使用する方法を学習できます。
 
-1.  コンソールの右下にある**[?]**アイコンをクリックし、 **[インタラクティブ チュートリアル]**を選択します。
-2.  チュートリアル リストで、 **Steam ゲーム統計**などの開始するチュートリアル カードを選択します。
-3.  チュートリアルで使用するTiDB Cloud Serverlessクラスターを選択し、 **「Import Dataset」**をクリックします。インポート処理には約1分かかる場合があります。
-4.  サンプル データをインポートしたら、画面の指示に従ってチュートリアルを完了します。
+1.  コンソールの右下隅にある**[?]**アイコンをクリックし、 **[SQL エディターのガイド ツアー]**を選択します。
+2.  ツアーで使用するTiDB Cloud Starterクラスターを選択し、 **「データセットのインポート」**をクリックします。インポート処理には約1分かかる場合があります。
+3.  サンプル データをインポートしたら、画面の指示に従ってツアーを完了します。
 
 ## 次は何？ {#what-s-next}
 
--   さまざまな方法を使用してクラスターに接続する方法については、 [TiDB Cloud Serverless クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)参照してください。
+-   さまざまな方法を使用してクラスターに接続する方法については、 [TiDB Cloud StarterまたはEssentialクラスターに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)参照してください。
 -   SQL エディターと Chat2Query を使用してデータを探索する方法の詳細については、 [AI支援SQLエディターでデータを探索](/tidb-cloud/explore-data-with-chat2query.md)参照してください。
 -   TiDB SQL の使用法については、 [TiDB で SQL を探索する](/basic-sql-operations.md)参照してください。
 -   ゾーン間の高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番で使用する場合は、 [TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)参照してください。

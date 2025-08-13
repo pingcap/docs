@@ -15,7 +15,7 @@ TiDB バージョンが低すぎる場合、 TiDB Cloud は定期的に均一に
 
 アップグレードリクエストを送信するには、手順[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)に従ってサポートチームにお問い合わせください。 **「説明」**欄に以下の情報をご記入ください。
 
--   クラウドプロバイダー: AWS、Azure、または Google Cloud
+-   クラウドプロバイダー: AWS、Azure、Google Cloud、または Alibaba Cloud
 -   クラスタ名: xxx
 
 TiDB Cloudテクニカルサポートがアップグレードの期間をお客様に確認いたします。アップグレードの期間が確定次第、 TiDB Cloudテクニカルサポートが確認した期間内にアップグレードを実施いたします。

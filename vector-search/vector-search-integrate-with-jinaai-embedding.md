@@ -25,7 +25,7 @@ summary: TiDB Vector Search を Jina AI Embeddings API と統合して埋め込�
 
 > **注記：**
 >
-> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
 
 ## 前提条件 {#prerequisites}
 
@@ -40,14 +40,14 @@ summary: TiDB Vector Search を Jina AI Embeddings API と統合して埋め込�
 **TiDB クラスターがない場合は、次のように作成できます。**
 
 -   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
--   [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従って、v8.4.0 以降のバージョンのローカル クラスターを作成します。
 
 </CustomContent>
@@ -87,9 +87,9 @@ pip install -r requirements.txt
 [Jina AI 埋め込み API](https://jina.ai/embeddings/)ページから Jina AI API キーを取得し、選択した TiDB デプロイメント オプションに応じて環境変数を構成します。
 
 <SimpleTab>
-<div label="TiDB Cloud Serverless">
+<div label="TiDB Cloud Starter or Essential">
 
-TiDB Cloud Serverless クラスターの場合、次の手順に従ってクラスター接続文字列を取得し、環境変数を構成します。
+TiDB Cloud Starter クラスターの場合、次の手順に従ってクラスター接続文字列を取得し、環境変数を構成します。
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 

@@ -15,7 +15,7 @@ TiDB は MySQL 互換のデータベースであり、 [マイバティス](http
 
 > **注記：**
 >
-> このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed で機能します。
+> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Dedicated、および TiDB Self-Managed で機能します。
 
 ## 前提条件 {#prerequisites}
 
@@ -30,7 +30,7 @@ TiDB は MySQL 互換のデータベースであり、 [マイバティス](http
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -38,7 +38,7 @@ TiDB は MySQL 互換のデータベースであり、 [マイバティス](http
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -61,7 +61,7 @@ cd tidb-java-mybatis-quickstart
 選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
-<div label="TiDB Cloud Serverless">
+<div label="TiDB Cloud Starter or Essential">
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -106,7 +106,7 @@ cd tidb-java-mybatis-quickstart
 
     プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに置き換えてください。
 
-    TiDB Cloud Serverless は安全な接続を必要とします。そのため、 `USE_SSL`値を`true`に設定する必要があります。
+    TiDB Cloud Starterは安全な接続を必要とします。そのため、 `USE_SSL`を`true`に設定する必要があります。
 
 7.  `env.sh`ファイルを保存します。
 

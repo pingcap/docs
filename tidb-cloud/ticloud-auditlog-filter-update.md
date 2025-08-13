@@ -5,7 +5,7 @@ summary: ticloud serverless audit-log filter-rule update` のリファレンス�
 
 # ticloud サーバーレス監査ログフィルタールールの更新 {#ticloud-serverless-audit-log-filter-rule-update}
 
-TiDB Cloud Serverless クラスターの監査ログ フィルター ルールを更新します。
+TiDB Cloud Starter またはTiDB Cloud Essential クラスターの監査ログ フィルター ルールを更新します。
 
 ```shell
 ticloud serverless audit-log filter-rule update [flags]

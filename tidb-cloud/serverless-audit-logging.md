@@ -1,15 +1,15 @@
 ---
-title: TiDB Cloud Serverless Database Audit Logging
-summary: TiDB CloudでTiDB Cloud Serverless クラスターを監査する方法について説明します。
+title: Database Audit Logging for TiDB Cloud Starter and Essential
+summary: TiDB TiDB CloudでTiDB Cloud Starter またはTiDB Cloud Essential クラスターを監査する方法について説明します。
 ---
 
-# TiDB Cloudサーバーレス データベース監査ログ (ベータ版) {#tidb-cloud-serverless-database-audit-logging-beta}
+# TiDB Cloud StarterおよびEssential向けデータベース監査ログ（ベータ版） {#database-audit-logging-beta-for-tidb-cloud-starter-and-essential}
 
-TiDB Cloud Serverless は、ユーザー アクセスの詳細 (実行された SQL ステートメントなど) の履歴をログに記録するデータベース監査ログ機能を提供します。
+TiDB Cloud Starter およびTiDB Cloud Essential は、ユーザー アクセスの詳細 (実行された SQL ステートメントなど) の履歴をログに記録するデータベース監査ログ機能を提供します。
 
 > **注記：**
 >
-> 現在、データベース監査ログ機能はリクエストに応じてのみご利用いただけます。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートをリクエスト**」をクリックしてください。次に、 **「説明」**欄に「 TiDB Cloud Serverless データベース監査ログの申請」と入力し、 **「送信」を**クリックしてください。
+> 現在、データベース監査ログ機能はリクエストに応じてのみご利用いただけます。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートをリクエスト」**をクリックしてください。次に、 **「説明」**欄に「 TiDB Cloud Starter またはTiDB Cloud Essential データベース監査ログの申請」と入力し、 **「送信**」をクリックしてください。
 
 組織のユーザー アクセス ポリシーやその他の情報セキュリティ対策の有効性を評価するには、データベース監査ログを定期的に分析することがセキュリティのベスト プラクティスです。
 
@@ -17,13 +17,13 @@ TiDB Cloud Serverless は、ユーザー アクセスの詳細 (実行された 
 
 ## 監査ログを有効にする {#enable-audit-logging}
 
-TiDB Cloud Serverless クラスターの監査ログを有効にするには、 [TiDB CloudCLI](/tidb-cloud/ticloud-auditlog-config.md)使用します。
+TiDB Cloud Starter またはTiDB Cloud Essential クラスターの監査ログを有効にするには、 [TiDB CloudCLI](/tidb-cloud/ticloud-auditlog-config.md)使用します。
 
 ```shell
 ticloud serverless audit-log config -c <cluster-id> --enabled
 ```
 
-TiDB Cloud Serverless クラスターの監査ログを無効にするには、 [TiDB CloudCLI](/tidb-cloud/ticloud-auditlog-config.md)使用します。
+TiDB Cloud Starter またはTiDB Cloud Essential クラスターの監査ログを無効にするには、 [TiDB CloudCLI](/tidb-cloud/ticloud-auditlog-config.md)使用します。
 
 ```shell
 ticloud serverless audit-log config -c <cluster-id> --enabled=false
@@ -53,7 +53,7 @@ ticloud serverless audit-log config -c <cluster-id> --enabled=false
 | 繋がり      | ハンドシェイク、接続、切断、接続のリセット、ユーザーの変更など、接続に関連するすべての操作を記録します。        | <li></li> |
 | 接続する     | 接続時のハンドシェイクのすべての操作を記録する                                     | 繋がり       |
 | 切断       | 切断のすべての操作を記録する                                              | 繋がり       |
-| ユーザーの変更  | ユーザーの変更に関するすべての操作を記録する                                      | 繋がり       |
+| ユーザーの変更  | 変更するユーザーのすべての操作を記録する                                        | 繋がり       |
 | クエリ      | データのクエリと変更に関するすべてのエラーを含む、SQL ステートメントのすべての操作を記録します。          | <li></li> |
 | 取引       | `BEGIN`など、取引に関連する`COMMIT`の操作`ROLLBACK`記録する                  | クエリ       |
 | 実行する     | `EXECUTE`ステートメントのすべての操作を記録する                                | クエリ       |
@@ -110,7 +110,7 @@ ticloud serverless audit-log filter delete --cluster-id <cluster-id> --name <rul
 
 ### データ編集 {#data-redaction}
 
-TiDB Cloud Serverlessは、監査ログ内の機密データをデフォルトで削除します。次のSQL文を例に挙げましょう。
+TiDB Cloud StarterとTiDB Cloud Essentialは、監査ログ内の機密データをデフォルトで編集します。次のSQL文を例に挙げましょう。
 
 ```sql
 INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES (1, 'Alice', '123456');
@@ -130,24 +130,24 @@ ticloud serverless audit-log config --cluster-id <cluster-id> --unredacted
 
 ### ログファイルのローテーション {#log-file-rotation}
 
-TiDB Cloud Serverless は、次のいずれかの条件が満たされると、新しい監査ログ ファイルを生成します。
+TiDB Cloud Starter およびTiDB Cloud Essential は、次のいずれかの条件が満たされると、新しい監査ログ ファイルを生成します。
 
 -   現在のログ ファイルのサイズは 100 MiB に達します。
 -   前回のログ生成から1時間が経過しました。内部のスケジュール設定によっては、ログ生成が数分遅れる場合があります。
 
 > **注記：**
 >
-> 現在、ログファイルのローテーション設定は変更できません。TiDB TiDB Cloud Serverless は、上記の条件に基づいて監査ログファイルを自動的にローテーションします。
+> 現在、ログファイルのローテーション設定は変更できません。TiDB TiDB Cloud Starter およびTiDB Cloud Essential は、上記の条件に基づいて監査ログファイルを自動的にローテーションします。
 
 ## アクセス監査ログ {#access-audit-logging}
 
-TiDB Cloud Serverless 監査ログは、 `YYYY-MM-DD-<index>.log`名前の読み取り可能なテキスト ファイルとして保存されます。
+TiDB Cloud Starter およびTiDB Cloud Essential 監査ログは、 `YYYY-MM-DD-<index>.log`という名前の読み取り可能なテキスト ファイルとして保存されます。
 
 現在、監査ログはTiDB Cloud内に365日間保存されます。この期間が経過すると、ログは自動的に削除されます。
 
 > **注記：**
 >
-> 監査ログを外部storage(AWS S3、Azure Blob Storage、Google Cloud Storage など) に保存する必要がある場合は、 [TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)お問い合わせください。
+> 監査ログを外部storage(Amazon S3、Azure Blob Storage、Google Cloud Storage、Alibaba Cloud OSS など) に保存する必要がある場合は、 [TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)お問い合わせください。
 
 監査ログを表示およびダウンロードするには、 [TiDB CloudCLI](/tidb-cloud/ticloud-auditlog-download.md)使用します。
 
@@ -160,7 +160,7 @@ ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <o
 
 > **注記：**
 >
-> TiDB Cloud Serverless は、監査ログの順序を保証しません`YYYY-MM-DD-<index>.log`という名前のログファイルには、以前の日付の監査ログが含まれている可能性があります。特定の日付（例えば 2025 年 1 月 1 日）のすべてのログを取得したい場合は、通常は`--start-date 2025-01-01`と`--end-date 2025-01-02`指定すれば問題ありません。ただし、極端な状況では、すべてのログファイルをダウンロードし、 `TIME`フィールドで順序付けする必要があるかもしれません。
+> TiDB Cloud StarterおよびTiDB Cloud Essentialは、監査ログの順序付けを保証しません`YYYY-MM-DD-<index>.log`という名前のログファイルには、以前の日付の監査ログが含まれている可能性があります。特定の日付（例えば2025年1月1日）のすべてのログを取得したい場合は、通常は`--start-date 2025-01-01`と`--end-date 2025-01-02`指定すれば問題ありません。ただし、極端な状況では、すべてのログファイルをダウンロードし、 `TIME`フィールドで順序付けする必要があるかもしれません。
 
 ## 監査ログフィールド {#audit-logging-fields}
 
@@ -226,4 +226,4 @@ ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <o
 
 -   監査ログは現在、 TiDB Cloud CLI 経由でのみ利用可能です。
 -   監査ログは現在、 TiDB Cloudにのみ保存できます。
--   TiDB Cloud Serverless は監査ログの順序を保証しません。そのため、最新のイベントを確認するには、すべてのログファイルを確認する必要がある場合があります。ログを時系列で並べ替えるには、監査ログの`TIME`フィールドを使用します。
+-   TiDB Cloud StarterおよびTiDB Cloud Essentialでは、監査ログの順序は保証されません。そのため、最新のイベントを確認するには、すべてのログファイルを確認する必要がある場合があります。ログを時系列で並べ替えるには、監査ログの`TIME`フィールドを使用できます。

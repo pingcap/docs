@@ -41,6 +41,7 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
       -U, --user string           Database user (default to "root")
 
 -   `--host`と`--port`にカンマ区切りの値を指定すると、クライアント側の負荷分散が有効になります。例えば`--host 172.16.4.1,172.16.4.2 --port 4000,4001`指定すると、プログラムはラウンドロビン方式で選択された 172.16.4.1:4000、172.16.4.1:4001、172.16.4.2:4000、172.16.4.2:4001 に接続します。
+-   ローカルデプロイメントの場合、デフォルトのデータベースホストアドレスは`127.0.0.1`です。リモートデータベースに接続する場合は、ホストとその他の関連パラメータを指定する必要があります。例: `tiup bench tpcc -H 192.168.169.31 -P 4000 -D tpcc -U root -p tidb --warehouses 4 --parts 4 prepare`
 -   `--conn-params` [クエリ文字列](https://en.wikipedia.org/wiki/Query_string)の形式に従う必要があります。データベースによってパラメータが異なる場合があります。例:
     -   `--conn-params tidb_isolation_read_engines='tiflash'` TiDB にTiFlashからの読み取りを強制します。
     -   `--conn-params sslmode=disable` 、PostgreSQL に接続するときに SSL を無効にします。

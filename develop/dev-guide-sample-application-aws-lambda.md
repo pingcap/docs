@@ -16,7 +16,7 @@ TiDB は MySQL 互換のデータベース、 [AWS Lambda関数](https://aws.ama
 
 > **注記**
 >
-> このチュートリアルは、TiDB Cloud Serverless と TiDB Self-Managed で機能します。
+> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、および TiDB Self-Managed で機能します。
 
 ## 前提条件 {#prerequisites}
 
@@ -33,7 +33,7 @@ TiDB は MySQL 互換のデータベース、 [AWS Lambda関数](https://aws.ama
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -41,7 +41,7 @@ TiDB は MySQL 互換のデータベース、 [AWS Lambda関数](https://aws.ama
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -79,7 +79,7 @@ npm install
 
 <SimpleTab>
 
-<div label="TiDB Cloud Serverless">
+<div label="TiDB Cloud Starter or Essential">
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -358,7 +358,7 @@ console.log(rsh.affectedRows);
 -   SQL インジェクションを回避するには、 [準備された文](https://github.com/sidorares/node-mysql2#using-prepared-statements)使用することをお勧めします。
 -   複雑な SQL ステートメントがあまり含まれないシナリオでは、 [続編](https://sequelize.org/) 、 [タイプORM](https://typeorm.io/) 、 [プリズマ](https://www.prisma.io/)などの ORM フレームワークを使用すると、開発効率が大幅に向上します。
 -   アプリケーション用の RESTful API を構築するには、 [API GatewayでAWS Lambdaを使用する](https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html)をお勧めします。
--   TiDB Cloud Serverless と AWS Lambda を使用して高パフォーマンス アプリケーションを設計するには、 [このブログ](https://aws.amazon.com/blogs/apn/designing-high-performance-applications-using-serverless-tidb-cloud-and-aws-lambda/)を参照してください。
+-   TiDB Cloud Starter と AWS Lambda を使用して高パフォーマンス アプリケーションを設計する場合は、 [このブログ](https://aws.amazon.com/blogs/apn/designing-high-performance-applications-using-serverless-tidb-cloud-and-aws-lambda/)を参照してください。
 
 ## 次のステップ {#next-steps}
 

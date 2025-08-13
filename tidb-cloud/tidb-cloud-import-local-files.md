@@ -1,18 +1,18 @@
 ---
-title: Import Local Files to TiDB Cloud Serverless
-summary: ローカル ファイルをTiDB Cloud Serverless にインポートする方法を学びます。
+title: Import Local Files to TiDB Cloud Starter or Essential
+summary: ローカル ファイルをTiDB Cloud Starter またはTiDB Cloud Essential にインポートする方法を学びます。
 ---
 
-# ローカルファイルをTiDB Cloud Serverlessにインポート {#import-local-files-to-tidb-cloud-serverless}
+# ローカルファイルをTiDB Cloud StarterまたはEssentialにインポートする {#import-local-files-to-tidb-cloud-starter-or-essential}
 
-ローカルファイルをTiDB Cloud Serverlessに直接インポートできます。タスク設定は数回クリックするだけで完了し、ローカルCSVデータがTiDBクラスターに素早くインポートされます。この方法を使えば、クラウドstorageや認証情報を入力する必要はなく、インポートプロセス全体が迅速かつスムーズです。
+ローカルファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialに直接インポートできます。タスク設定は数回クリックするだけで完了し、ローカルCSVデータがTiDBクラスターに素早くインポートされます。この方法を使用すると、クラウドstorageや認証情報を入力する必要がありません。インポートプロセス全体が迅速かつスムーズです。
 
 現在、この方法では、1 つのタスクに対して 1 つの CSV ファイルを既存の空のテーブルまたは新しいテーブルにインポートすることがサポートされています。
 
 ## 制限事項 {#limitations}
 
 -   現在、 TiDB Cloud は、1 つのタスクにつき 250 MiB 以内の CSV 形式のローカル ファイルのインポートのみをサポートしています。
--   ローカル ファイルのインポートは、 TiDB Cloud Serverless クラスターでのみサポートされ、 TiDB Cloud Dedicated クラスターではサポートされません。
+-   ローカル ファイルのインポートは、 TiDB Cloud Starter およびTiDB Cloud Essential クラスターでのみサポートされ、 TiDB Cloud Dedicated クラスターではサポートされません。
 -   複数のインポート タスクを同時に実行することはできません。
 
 ## ローカルファイルをインポートする {#import-local-files}
@@ -58,7 +58,7 @@ summary: ローカル ファイルをTiDB Cloud Serverless にインポートす
     >
     > TiDB Cloudの既存のテーブルに CSV ファイルをインポートし、ターゲット テーブルにソース ファイルよりも多くの列がある場合、状況に応じて余分な列が異なって処理されます。
     >
-    > -   追加列が主キーまたは一意キーでない場合、エラーは報告されません。代わりに、これらの追加列には[デフォルト値](/data-type-default-values.md)が設定されます。
+    > -   追加列が主キーまたは一意キーでない場合、エラーは報告されません。代わりに、これらの追加列には[デフォルト値](/data-type-default-values.md)設定されます。
     > -   追加列が主キーまたは一意キーであり、属性`auto_increment`または`auto_random`を持たない場合、エラーが報告されます。その場合は、以下のいずれかの戦略を選択することをお勧めします。
     >     -   これらの主キーまたは一意キーの列を含むソース ファイルを提供します。
     >     -   ターゲット テーブルの主キーと一意キーの列を、ソース ファイル内の既存の列と一致するように変更します。

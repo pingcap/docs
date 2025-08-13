@@ -9,7 +9,7 @@ summary: ビジネス ワークロードを分離するために TiDB ノード 
 
 > **注記**：
 >
-> TiDB ノード グループ機能は、 TiDB Cloud Serverless クラスターでは使用でき**ません**。
+> TiDB ノード グループ機能は、TiDB Cloud Starter またはTiDB Cloud Essential クラスターでは使用でき**ません**。
 
 ## 条項 {#terms}
 

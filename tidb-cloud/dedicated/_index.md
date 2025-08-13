@@ -26,8 +26,6 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 [HTAPを試してみる](https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart)
 
-[TiDB Cloud CLI を試す](https://docs.pingcap.com/tidbcloud/get-started-with-cli)
-
 [概念実証](https://docs.pingcap.com/tidbcloud/tidb-cloud-poc)
 
 </LearningPath>
@@ -60,17 +58,13 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 [API を使用する (ベータ版)](https://docs.pingcap.com/tidbcloud/api-overview)
 
-[TiDB Cloud CLIを使用する](https://docs.pingcap.com/tidbcloud/get-started-with-cli)
-
 </LearningPath>
 
 <LearningPath label="Migrate" icon="cloud3">
 
 [サンプルデータのインポート](https://docs.pingcap.com/tidbcloud/import-sample-data)
 
-[MySQLから](https://docs.pingcap.com/tidbcloud/migrate-data-into-tidb)
-
-[Amazon Aurora MySQLから](https://docs.pingcap.com/tidbcloud/migrate-from-aurora-bulk-import)
+[MySQLから](https://docs.pingcap.com/tidbcloud/migrate-from-mysql-using-data-migration/)
 
 [Amazon RDS for Oracleから](https://docs.pingcap.com/tidbcloud/migrate-from-oracle-using-aws-dms)
 
@@ -79,8 +73,6 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 [CSVファイルから](https://docs.pingcap.com/tidbcloud/import-csv-files)
 
 [Apache Parquetファイルから](https://docs.pingcap.com/tidbcloud/import-csv-files)
-
-[MySQL CLIを使用する場合](https://docs.pingcap.com/tidbcloud/import-with-mysql-cli)
 
 </LearningPath>
 

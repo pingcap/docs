@@ -9,14 +9,14 @@ TiDB は MySQL 互換のデータベースであり、 [MySQLワークベンチ]
 
 > **警告：**
 >
-> -   MySQL WorkbenchはMySQLとの互換性があるため、TiDBに接続できますが、MySQL WorkbenchはTiDBを完全にサポートしているわけではありません。TiDBをMySQLとして扱うため、使用中に問題が発生する可能性があります。
+> -   MySQL WorkbenchはMySQLとの互換性があるため、TiDBに接続できますが、MySQL WorkbenchはTiDBを完全にサポートしていません。TiDBをMySQLとして扱うため、使用中に問題が発生する可能性があります。
 > -   TiDB [VS Code SQLツール](/develop/dev-guide-gui-vscode-sqltools.md)公式にサポートしている他のGUIツール（ [データグリップ](/develop/dev-guide-gui-datagrip.md)など[DBeaver](/develop/dev-guide-gui-dbeaver.md)の使用をお勧めします。TiDBで完全にサポートされているGUIツールの完全なリストについては、 [TiDB でサポートされているサードパーティ ツール](/develop/dev-guide-third-party-support.md#gui)参照してください。
 
 このチュートリアルでは、MySQL Workbench を使用して TiDB クラスターに接続する方法を学習します。
 
 > **注記：**
 >
-> このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed と互換性があります。
+> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Dedicated、および TiDB Self-Managed と互換性があります。
 
 ## 前提条件 {#prerequisites}
 
@@ -29,7 +29,7 @@ TiDB は MySQL 互換のデータベースであり、 [MySQLワークベンチ]
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -37,7 +37,7 @@ TiDB は MySQL 互換のデータベースであり、 [MySQLワークベンチ]
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -47,7 +47,7 @@ TiDB は MySQL 互換のデータベースであり、 [MySQLワークベンチ]
 選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
-<div label="TiDB Cloud Serverless">
+<div label="TiDB Cloud Starter or Essential">
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -76,15 +76,15 @@ TiDB は MySQL 互換のデータベースであり、 [MySQLワークベンチ]
     -   **ホスト名**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
     -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
     -   **ユーザー名**: TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力します。
-    -   **パスワード**: **「キーチェーンに保存...」**または**「ボールトに保存」**をクリックし、 TiDB Cloud Serverless クラスターのパスワードを入力してから、 **「OK」**をクリックしてパスワードを保存します。
+    -   **パスワード**: **「キーチェーンに保存...」**または**「ボールトに保存」**をクリックし、 TiDB Cloud Starter クラスターのパスワードを入力してから、 **「OK」**をクリックしてパスワードを保存します。
 
-        ![MySQL Workbench: store the password of TiDB Cloud Serverless in keychain](/media/develop/mysql-workbench-store-password-in-keychain.png)
+        ![MySQL Workbench: store the password of TiDB Cloud Starter in keychain](/media/develop/mysql-workbench-store-password-in-keychain.png)
 
     次の図は接続パラメータの例を示しています。
 
-    ![MySQL Workbench: configure connection settings for TiDB Cloud Serverless](/media/develop/mysql-workbench-connection-config-serverless-parameters.png)
+    ![MySQL Workbench: configure connection settings for TiDB Cloud Starter](/media/develop/mysql-workbench-connection-config-serverless-parameters.png)
 
-7.  **「テスト接続」**をクリックして、 TiDB Cloud Serverless クラスターへの接続を検証します。
+7.  **「テスト接続」**をクリックして、 TiDB Cloud Starter クラスターへの接続を検証します。
 
 8.  接続テストが成功すると、 **「MySQL接続に成功しました」という**メッセージが表示されます。 **「OK」**をクリックして接続設定を保存します。
 

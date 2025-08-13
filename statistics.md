@@ -182,7 +182,7 @@ TiDBがSQL文を実行する際、オプティマイザはほとんどの場合�
     ANALYZE TABLE TableName ALL COLUMNS [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
-### パーティションの統計情報を収集する {#collect-statistics-on-partitions}
+### パーティションの統計を収集する {#collect-statistics-on-partitions}
 
 -   `PartitionNameList` in `TableName`内のすべてのパーティションの統計を収集するには、次の構文を使用します。
 
@@ -465,7 +465,7 @@ mysql> SHOW ANALYZE STATUS [ShowLikeOrWhere];
 
 > **注記：**
 >
-> [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは読み込み統計は利用できません。
+> ロード統計は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 デフォルトでは、列統計のサイズに応じて、TiDB は次のように異なる方法で統計をロードします。
 
@@ -748,7 +748,7 @@ TiDB v6.0以降、TiDBは`KILL`のステートメントを使用して、バッ�
 
 ![analyze\_concurrency](/media/analyze_concurrency.png)
 
-上図に示すように、 `tidb_build_stats_concurrency` 、 `tidb_build_sampling_stats_concurrency` 、 `tidb_analyze_partition_concurrency`上流と下流の関係にあります。実際の合計同時実行数は`tidb_build_stats_concurrency` * ( `tidb_build_sampling_stats_concurrency` + `tidb_analyze_partition_concurrency` ) です。これらの変数を変更する際には、それぞれの値も同時に考慮する必要があります。 `tidb_analyze_partition_concurrency` 、 `tidb_build_sampling_stats_concurrency` 、 `tidb_build_stats_concurrency`の順に1つずつ調整し、システムへの影響を確認することをお勧めします。これらの3つの変数の値が大きいほど、システムへのリソースオーバーヘッドが大きくなります。
+上図に示すように、 `tidb_build_stats_concurrency` 、 `tidb_build_sampling_stats_concurrency` 、 `tidb_analyze_partition_concurrency`上流と下流の関係にあります。実際の合計同時実行数は`tidb_build_stats_concurrency` * ( `tidb_build_sampling_stats_concurrency` + `tidb_analyze_partition_concurrency` ) です。これらの変数を変更する際は、それぞれの値も同時に考慮する必要があります。 `tidb_analyze_partition_concurrency` 、 `tidb_build_sampling_stats_concurrency` 、 `tidb_build_stats_concurrency`の順に1つずつ調整し、システムへの影響を確認することをお勧めします。これらの3つの変数の値が大きいほど、システムへのリソースオーバーヘッドが大きくなります。
 
 #### <code>tidb_build_stats_concurrency</code> {#code-tidb-build-stats-concurrency-code}
 

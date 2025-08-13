@@ -19,7 +19,7 @@ summary: SLOW_QUERY` INFORMATION_SCHEMA テーブルについて学習します�
 
 > **注記：**
 >
-> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> このテーブルはクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
 
 <CustomContent platform="tidb">
 
@@ -131,7 +131,7 @@ DESC SLOW_QUERY;
 
 > **注記：**
 >
-> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> このテーブルはクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
 
 <CustomContent platform="tidb">
 
@@ -265,7 +265,7 @@ SELECT /*+ AGG_TO_COP() */ COUNT(*) FROM CLUSTER_SLOW_QUERY GROUP BY user;
 
 ## 実行情報をビュー {#view-execution-information}
 
-`SLOW_QUERY`テーブルで[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)クエリを実行すると、データベースがスロークエリ情報を取得する方法に関する詳細な情報を取得できます。ただし、 `CLUSTER_SLOW_QUERY`テーブルで`EXPLAIN ANALYZE`を実行しても、この情報は取得でき**ません**。
+`SLOW_QUERY`テーブルで[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)クエリを実行すると、データベースがスロークエリ情報をどのように取得するかに関する詳細な情報を取得できます。ただし、 `CLUSTER_SLOW_QUERY`テーブルで`EXPLAIN ANALYZE`を実行しても、この情報は取得でき**ません**。
 
 例：
 

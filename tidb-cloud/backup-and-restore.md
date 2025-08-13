@@ -10,7 +10,7 @@ aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 
 > **ヒント**
 >
-> TiDB Cloud Serverless クラスターのデータをバックアップおよび復元する方法については、 [TiDB Cloudサーバーレスデータのバックアップと復元](/tidb-cloud/backup-and-restore-serverless.md)参照してください。
+> TiDB Cloud Starter またはTiDB Cloud Essential クラスターでデータをバックアップおよび復元する方法については、 [TiDB Cloud StarterまたはEssentialでデータをバックアップおよび復元する](/tidb-cloud/backup-and-restore-serverless.md)参照してください。
 
 ## 制限事項 {#limitations}
 

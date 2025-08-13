@@ -7,13 +7,13 @@ summary: TiDB データベースの Split リージョンの使用法の概要�
 
 TiDBに新しいテーブルが作成されると、デフォルトで[リージョン](/tidb-storage.md#region)つのセグメントが分割され、そのテーブルのデータが保存されます。このデフォルトの動作は、TiDB設定ファイルの`split-table`によって制御されます。このリージョン内のデータがデフォルトのリージョンサイズ制限を超えると、リージョンは2つに分割され始めます。
 
-上記のケースでは、開始時にリージョンが1つしかないため、すべての書き込みリクエストは、そのリージョンが配置されているTiKV上で発生します。新規作成されたテーブルへの書き込みが大量に発生すると、ホットスポットが発生します。
+上記のケースでは、開始時にリージョンが1つしかないため、すべての書き込みリクエストは、そのリージョンが配置されているTiKV上で発生します。新しく作成されたテーブルへの書き込みが大量に発生すると、ホットスポットが発生します。
 
 上記のシナリオのホットスポット問題を解決するために、TiDB は事前分割機能を導入しました。この機能は、指定されたパラメータに従って特定のテーブルの複数のリージョンを事前に分割し、各 TiKV ノードに分散させることができます。
 
 > **注記：**
 >
-> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
+> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 ## 概要 {#synopsis}
 
@@ -48,7 +48,7 @@ RowValue ::=
     SPLIT TABLE table_name [INDEX index_name] BETWEEN (lower_value) AND (upper_value) REGIONS region_num
     ```
 
-    `BETWEEN lower_value AND upper_value REGIONS region_num`上限、下限、そしてリージョンの量を定義します。すると、現在のリージョンは、上限と下限の間のリージョン数（ `region_num`で指定）に均等に分割されます。
+    `BETWEEN lower_value AND upper_value REGIONS region_num`上限、下限、およびリージョンの量を定義します。これにより、現在の領域は、上限と下限の間の領域数（ `region_num`で指定）に均等に分割されます。
 
 -   不均等分割の構文:
 
@@ -154,7 +154,7 @@ SPLIT TABLE t INDEX idx BETWEEN (-9223372036854775808) AND (9223372036854775807)
 SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("z") REGIONS 25;
 ```
 
-この文は、インデックス idx1 を a～z の 25 個のリージョンに分割します。リージョン1 の範囲は`[minIndexValue, b)` 、リージョン2 の範囲は`[b, c)` 、…リージョン25 の範囲は`[y, minIndexValue]`です。インデックス`idx`場合、プレフィックスが`a`のデータはリージョン1 に書き込まれ、プレフィックスが`b`のデータはリージョン2 に書き込まれます。
+この文は、インデックス idx1 を a～z の 25 個のリージョンに分割します。リージョン1 の範囲は`[minIndexValue, b)` 、リージョン2 の範囲は`[b, c)` 、…リージョン25 の範囲は`[y, minIndexValue]`です。インデックス`idx`場合、プレフィックスが`a`データはリージョン1 に書き込まれ、プレフィックスが`b`のデータはリージョン2 に書き込まれます。
 
 上記の分割方法では、 `y`と`z`プレフィックスを持つデータは両方ともリージョン25に書き込まれます。これは、上限が`z`ではなく`{` （ASCIIコードで`z`次の文字）であるためです。したがって、より正確な分割方法は次のとおりです。
 
@@ -162,7 +162,7 @@ SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("z") REGIONS 25;
 SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("{") REGIONS 26;
 ```
 
-この文は、テーブル`t`のインデックス idx1 を a~ `{`の26のリージョンに分割します。リージョン1 の範囲は`[minIndexValue, b)` 、リージョン2 の範囲は`[b, c)` 、リージョン25 の範囲は`[y, z)` 、リージョン26 の範囲は`[z, maxIndexValue)`です。
+この文は、テーブル`t`のインデックス idx1 を a~ `{`の26の領域に分割します。リージョン1 の範囲は`[minIndexValue, b)` 、リージョン2 の範囲は`[b, c)` 、…リージョン25 の範囲は`[y, z)` 、リージョン26 の範囲は`[z, maxIndexValue)`です。
 
 インデックス`idx2`の列がタイムスタンプ/日付時刻のような時間型で、インデックスのリージョンを年ごとに分割する場合:
 

@@ -7,7 +7,7 @@ summary: VPC ピアリング経由でTiDB Cloud Dedicated に接続する方法�
 
 > **注記：**
 >
-> VPCピアリング接続は、AWSおよびGoogle CloudでホストされているTiDB Cloud Dedicatedクラスターでのみ利用可能です。Azureでホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターおよび[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターにはVPCピアリングを使用して接続することはできません。
+> VPC ピアリング接続は、AWS および Google Cloud でホストされているTiDB Cloud Dedicated クラスターでのみ利用できます。
 
 アプリケーションをVPCピアリング経由でTiDB Cloudに接続するには、 TiDB Cloudで[VPCピアリング](/tidb-cloud/tidb-cloud-glossary.md#vpc-peering)設定する必要があります。このドキュメントでは、VPCピアリング接続[AWS上](#set-up-vpc-peering-on-aws)と[Google Cloudで](#set-up-vpc-peering-on-google-cloud)設定と、VPCピアリング経由でTiDB Cloudに接続する手順を説明します。
 
@@ -180,7 +180,7 @@ AWS CLI または AWS ダッシュボードを使用して、VPC ピアリング
 
     > **注記：**
     >
-    > ルートテーブルルールが正常に作成されたにもかかわらず、エラー`An error occurred (MissingParameter) when calling the CreateRoute operation: The request must contain the parameter routeTableId`が発生する場合があります。その場合は、作成されたルールを確認し、エラーを無視してください。
+    > ルートテーブルルールが正常に作成されたにもかかわらず、エラー`An error occurred (MissingParameter) when calling the CreateRoute operation: The request must contain the parameter routeTableId`発生する場合があります。その場合は、作成されたルールを確認し、エラーを無視してください。
 
     ```bash
     # Modifies the VPC attribute to enable DNS-hostname and DNS-support.

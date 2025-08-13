@@ -1,32 +1,32 @@
 ---
-title: Use TiDB Cloud Serverless Export Resource
-summary: TiDB Cloud Serverless エクスポート リソースを使用して、 TiDB Cloud Serverless エクスポート タスクを作成および変更する方法を学習します。
+title: Use `tidbcloud_serverless_export` Resource
+summary: tidbcloud_serverless_export` リソースを使用して、 TiDB Cloud Starter エクスポート タスクを作成および変更する方法を学習します。
 ---
 
-# TiDB Cloud Serverless エクスポート リソースを使用する {#use-tidb-cloud-serverless-export-resource}
+# <code>tidbcloud_serverless_export</code>リソースを使用する {#use-code-tidbcloud-serverless-export-code-resource}
 
-このドキュメントでは、 `tidbcloud_serverless_export`リソースを使用して[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)データ エクスポート タスクを管理する方法について説明します。
+このドキュメントでは、 `tidbcloud_serverless_export`リソースを使用して[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)データ エクスポート タスクを管理する方法について説明します。
 
 `tidbcloud_serverless_export`リソースの機能は次のとおりです。
 
--   TiDB Cloud Serverless のデータ エクスポート タスクを作成します。
--   TiDB Cloud Serverless データのエクスポート タスクをインポートします。
--   TiDB Cloud Serverless データのエクスポート タスクを削除します。
+-   TiDB Cloud Starter のデータ エクスポート タスクを作成します。
+-   TiDB Cloud Starter データのエクスポート タスクをインポートします。
+-   TiDB Cloud Starter データのエクスポート タスクを削除します。
 
 > **注記：**
 >
-> TiDB Cloud Serverless エクスポートリソースは変更できません。TiDB TiDB Cloud Serverless エクスポートリソースの設定を変更する場合は、既存のリソースを削除してから、新しいリソースを作成する必要があります。
+> `tidbcloud_serverless_export`リソースは変更できません。3 `tidbcloud_serverless_export`のリソースの設定を変更する場合は、既存のリソースを削除してから、新しいリソースを作成する必要があります。
 
 ## 前提条件 {#prerequisites}
 
 -   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
--   [TiDB Cloud Serverless クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md) 。
+-   [TiDB Cloud Starter クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md) 。
 
-## TiDB Cloud Serverlessデータエクスポートタスクを作成する {#create-a-tidb-cloud-serverless-data-export-task}
+## TiDB Cloud Starterデータエクスポートタスクを作成する {#create-a-tidb-cloud-starter-data-export-task}
 
-`tidbcloud_serverless_export`リソースを使用して、 TiDB Cloud Serverless データ エクスポート タスクを作成できます。
+`tidbcloud_serverless_export`リソースを使用して、 TiDB Cloud Starter データ エクスポート タスクを作成できます。
 
-次の例は、TiDB Cloud Serverless データ エクスポート タスクを作成する方法を示しています。
+次の例は、TiDB Cloud Starter データ エクスポート タスクを作成する方法を示しています。
 
 1.  エクスポート用のディレクトリを作成してそこに入ります。
 
@@ -140,13 +140,13 @@ summary: TiDB Cloud Serverless エクスポート リソースを使用して、
     }
     ```
 
-## TiDB Cloud Serverlessデータエクスポートタスクをインポートする {#import-a-tidb-cloud-serverless-data-export-task}
+## TiDB Cloud Starterデータエクスポートタスクをインポートする {#import-a-tidb-cloud-starter-data-export-task}
 
-Terraform によって管理されていない TiDB Serverless データ エクスポート タスクの場合は、インポートするだけで Terraform を使用して管理できます。
+Terraform で管理されていないTiDB Cloud Starter データ エクスポート タスクの場合は、インポートするだけで Terraform を使用して管理できます。
 
-次のように、Terraform によって作成されていないTiDB Cloud Serverless データ エクスポート タスクをインポートします。
+次のように、Terraform によって作成されていないTiDB Cloud Starter データ エクスポート タスクをインポートします。
 
-1.  新しいTiDB Cloud Serverless エクスポート リソースのインポート ブロックを追加します。
+1.  新しい`tidbcloud_serverless_export`リソースのインポート ブロックを追加します。
 
     次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` `cluster_id,export_id`の形式に置き換えます。
 
@@ -180,9 +180,9 @@ Terraform によって管理されていない TiDB Serverless データ エク�
 
 これで、インポートしたエクスポートを Terraform で管理できるようになりました。
 
-## TiDB Cloud Serverless のデータエクスポートタスクを削除する {#delete-a-tidb-cloud-serverless-data-export-task}
+## TiDB Cloud Starterデータエクスポートタスクを削除する {#delete-a-tidb-cloud-starter-data-export-task}
 
-TiDB Cloud Serverless データ エクスポート タスクを削除するには、 `tidbcloud_serverless_export`リソースの構成を削除してから、 `terraform apply`コマンドを使用してリソースを破棄します。
+TiDB Cloud Starter データ エクスポート タスクを削除するには、 `tidbcloud_serverless_export`リソースの構成を削除してから、 `terraform apply`コマンドを使用してリソースを破棄します。
 
 ```shell
 $ terraform apply

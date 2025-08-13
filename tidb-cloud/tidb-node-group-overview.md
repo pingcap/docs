@@ -11,7 +11,7 @@ TiDBノードグループを使用すると、ビジネス要件に基づいて�
 
 > **注記**：
 >
-> TiDB ノード グループ機能は、 TiDB Cloud Serverless クラスターでは使用でき**ません**。
+> TiDB ノード グループ機能は、TiDB Cloud Starter およびTiDB Cloud Essential クラスターでは使用でき**ません**。
 
 ## 実装 {#implementation}
 

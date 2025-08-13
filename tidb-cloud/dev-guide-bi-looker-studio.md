@@ -1,47 +1,47 @@
 ---
-title: Connect to TiDB Cloud Serverless with Looker Studio
-summary: Looker Studio を使用してTiDB Cloud Serverless に接続する方法を学習します。
+title: Connect to TiDB Cloud with Looker Studio
+summary: Looker Studio を使用してTiDB Cloudに接続する方法を学習します。
 ---
 
-# Looker Studio でTiDB Cloud Serverless に接続する {#connect-to-tidb-cloud-serverless-with-looker-studio}
+# Looker Studio でTiDB Cloudに接続する {#connect-to-tidb-cloud-with-looker-studio}
 
-TiDB は MySQL 互換のデータベース、 TiDB Cloud Serverless は完全に管理された TiDB サービス、 [ルッカースタジオ](https://lookerstudio.google.com/)さまざまなソースからのデータを視覚化できる無料の Web ベースの BI ツールです。
+TiDB は MySQL 互換のデータベースであり、 TiDB Cloud はTiDB をクラウドに提供する完全に管理された Database-as-a-Service (DBaaS) であり、 [ルッカースタジオ](https://lookerstudio.google.com/)さまざまなソースからのデータを視覚化できる無料の Web ベースの BI ツールです。
 
-このチュートリアルでは、Looker Studio を使用してTiDB Cloud Serverless クラスターに接続する方法を学習します。
+このチュートリアルでは、 TiDB Cloud Starter クラスターを例に、Looker Studio を使用してTiDB Cloudに接続する方法を説明します。
 
 > **注記：**
 >
-> このチュートリアルのほとんどの手順はTiDB Cloud Dedicatedでも同様に機能します。ただし、 TiDB Cloud Dedicatedの場合は、以下の点にご注意ください。
->
-> -   [ファイルからTiDB Cloudにデータをインポートする](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud)に従ってデータセットをインポートします。
-> -   [TiDB Cloud専用に接続](/tidb-cloud/connect-via-standard-connection.md)に従ってクラスタの接続情報を取得します。TiDB TiDB Cloud Dedicatedに接続する場合は、 `142.251.74.0/23`からのアクセスを許可する必要があります。Looker Studioからの接続の詳細については、 [Looker Studio ドキュメント](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article)参照してください。
+> -   このドキュメントの手順は、 TiDB Cloud Starter クラスターに加えて、 TiDB Cloud Essential クラスターでも機能します。
+> -   このチュートリアルのほとんどの手順はTiDB Cloud Dedicatedでも同様に機能します。ただし、 TiDB Cloud Dedicatedの場合は、以下の点にご注意ください。
+>     -   [ファイルからTiDB Cloudにデータをインポートする](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud)に従ってデータセットをインポートします。
+>     -   [TiDB Cloud専用に接続](/tidb-cloud/connect-via-standard-connection.md)に従ってクラスタの接続情報を取得します。TiDB TiDB Cloud Dedicatedに接続する場合は、 `142.251.74.0/23`からのアクセスを許可する必要があります。Looker Studioからの接続の詳細については、 [Looker Studio ドキュメント](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article)参照してください。
 
 ## 前提条件 {#prerequisites}
 
 このチュートリアルを完了するには、次のものが必要です。
 
 -   Googleアカウント
--   TiDB Cloudサーバーレスクラスター
+-   TiDB Cloud Starter クラスター
 
-**TiDB Cloud Serverless クラスターがない場合は、次のように作成できます。**
+**TiDB Cloud Starter クラスターがない場合は、次のように作成できます。**
 
--   [TiDB Cloud Serverless クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-cluster)
+-   [TiDB Cloud Starter クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-cluster)
 
 ## ステップ1.データセットをインポートする {#step-1-import-a-dataset}
 
-TiDB Cloud Serverless のインタラクティブ チュートリアルで提供されている S&amp;P 500 データセットをインポートできます。
+TiDB Cloud Starter のインタラクティブ チュートリアルで提供されている S&amp;P 500 データセットをインポートできます。
 
 1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、右下隅の**「？」**をクリックします。**ヘルプ**ダイアログが表示されます。
 
 2.  ダイアログで、 **[インタラクティブ チュートリアル]**をクリックし、 **[S&amp;P 500 分析]**をクリックします。
 
-3.  TiDB Cloud Serverless クラスターを選択し、 **「Import Dataset」**をクリックして S&amp;P 500 データセットをクラスターにインポートします。
+3.  TiDB Cloud Starter クラスターを選択し、 **「Import Dataset」**をクリックして S&amp;P 500 データセットをクラスターにインポートします。
 
 4.  インポート ステータスが**IMPORTED**に変わったら、 **[チュートリアルを終了]**をクリックしてこのダイアログを閉じます。
 
 インポート中に問題が発生した場合は、次の手順に従ってこのインポート タスクをキャンセルできます。
 
-1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページで、 TiDB Cloud Serverless クラスターの名前をクリックして、概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページで、 TiDB Cloud Starter クラスターの名前をクリックして、概要ページに移動します。
 2.  左側のナビゲーション ペインで、 **[データ]** &gt; **[インポート] を**クリックします。
 3.  **sp500-insight**という名前のインポート タスクを見つけて、 **[アクション**] 列の**[...]**をクリックし、 **[キャンセル]**をクリックします。
 
@@ -61,7 +61,7 @@ TiDB Cloud Serverless のインタラクティブ チュートリアルで提供
 
     > **ヒント：**
     >
-    > TiDB Cloud Serverless では、クライアントとクラスター間の安全な TLS 接続が必要なので、Looker Studio の接続設定にはこの CA 証明書が必要です。
+    > TiDB Cloud Starter では、クライアントとクラスタ間の安全な TLS 接続が必要なので、Looker Studio の接続設定にはこの CA 証明書が必要です。
 
 ## ステップ3. Looker Studioを使用してTiDBクラスタに接続する {#step-3-connect-to-your-tidb-cluster-with-looker-studio}
 
@@ -71,14 +71,14 @@ TiDB Cloud Serverless のインタラクティブ チュートリアルで提供
 
 3.  **基本**設定ペインで、接続パラメータを構成します。
 
-    -   **ホスト名または IP** : TiDB Cloud Serverless 接続ダイアログから`HOST`パラメータを入力します。
-    -   **ポート (オプション)** : TiDB Cloud Serverless 接続ダイアログから`PORT`パラメータを入力します。
+    -   **ホスト名または IP** : TiDB Cloud Starter 接続ダイアログから`HOST`パラメータを入力します。
+    -   **ポート (オプション)** : TiDB Cloud Starter 接続ダイアログから`PORT`パラメータを入力します。
     -   **データベース**: 接続先のデータベースを入力します。このチュートリアルでは`sp500insight`と入力します。
-    -   **ユーザー名**: TiDB Cloud Serverless 接続ダイアログから`USERNAME`パラメータを入力します。
-    -   **パスワード**: TiDB Cloud Serverless 接続ダイアログから`PASSWORD`パラメータを入力します。
+    -   **ユーザー名**: TiDB Cloud Starter 接続ダイアログから`USERNAME`パラメータを入力します。
+    -   **パスワード**: TiDB Cloud Starter 接続ダイアログから`PASSWORD`パラメータを入力します。
     -   **SSL を有効にする**: このオプションを選択し、 **MySQL SSL クライアントコンフィグレーションファイル**の右側にあるアップロード アイコンをクリックして、 [ステップ2](#step-2-get-the-connection-information-for-your-cluster)からダウンロードした CA ファイルをアップロードします。
 
-    ![Looker Studio: configure connection settings for TiDB Cloud Serverless](/media/tidb-cloud/looker-studio-configure-connection.png)
+    ![Looker Studio: configure connection settings for TiDB Cloud Starter](/media/tidb-cloud/looker-studio-configure-connection.png)
 
 4.  **[認証]**をクリックします。
 

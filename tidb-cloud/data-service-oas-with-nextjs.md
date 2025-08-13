@@ -11,12 +11,12 @@ summary: データ アプリの OpenAPI 仕様を使用してクライアント 
 
 Next.js で OpenAPI 仕様を使用する前に、次のものを用意してください。
 
--   TiDBクラスタ。詳細については、 [TiDB Cloud Serverless クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)または[TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)参照してください。
+-   TiDBクラスタ。詳細については、 [TiDB Cloud StarterまたはEssential クラスタを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)または[TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)参照してください。
 -   [Node.js](https://nodejs.org/en/download)
 -   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 -   [糸](https://yarnpkg.com/getting-started/install)
 
-このドキュメントでは、 TiDB Cloud Serverless クラスターを例として使用します。
+このドキュメントでは、 TiDB Cloud Starter クラスターを例として使用します。
 
 ## ステップ1. データの準備 {#step-1-prepare-data}
 

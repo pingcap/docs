@@ -9,7 +9,7 @@ TiDB Cloud内の各TiDB Cloud Dedicated クラスターに対して、IP アク�
 
 > **注記：**
 >
-> このドキュメントは[**TiDB Cloud専用**](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)に適用されます。TiDB **TiDB Cloud Serverless**の IP アクセス リストを構成する手順については、 [パブリックエンドポイント用のTiDB Cloudサーバーレス ファイアウォール ルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)参照してください。
+> このドキュメントは[**TiDB Cloud専用**](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)に適用されます。TiDB **TiDB Cloud Starter**または**TiDB Cloud Essential**の IP アクセス リストを構成する手順については、 [パブリックエンドポイント用のTiDB Cloud Starter または Essential ファイアウォールルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)参照してください。
 
 TiDB Cloud Dedicated クラスターの IP アクセス リストを構成するには、次の手順を実行します。
 

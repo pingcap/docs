@@ -18,7 +18,7 @@ summary: TiDB Cloudで顧客管理暗号化キー (CMEK) を使用する方法�
 
 -   現在、 TiDB Cloud はCMEK を提供するために AWS KMS の使用のみをサポートしています。
 -   CMEK を使用するには、プロジェクトの作成時に CMEK を有効にし、クラスタを作成する前に CMEK 関連の設定を完了する必要があります。既存のプロジェクトでは CMEK を有効にできません。
--   現在、CMEK 対応プロジェクトでは、AWS でホストされるクラスタを[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)だけ作成できます。他のクラウドプロバイダーでホストされるTiDB Cloud Dedicated クラスタと[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスタはサポートされていません。
+-   現在、CMEK 対応プロジェクトでは、AWS でホストされるクラスターを[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)つだけ作成できます。
 -   現在、CMEK 対応プロジェクトでは[デュアルリージョンバックアップ](/tidb-cloud/backup-and-restore-concepts.md#dual-region-backup)サポートされていません。
 -   現在、特定のプロジェクトでは、1 つの AWS リージョンでのみ CMEK を有効にできます。一度設定すると、同じプロジェクト内の他のリージョンにクラスターを作成することはできません。
 

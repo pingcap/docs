@@ -1,23 +1,23 @@
 ---
-title: Configure TiDB Cloud Serverless Firewall Rules for Public Endpoints 
-summary: TiDB Cloud Serverless クラスターへのパブリック アクセスを安全に実現するファイアウォール ルールを構成および管理する方法を学びます。
+title: Configure TiDB Cloud Starter or Essential Firewall Rules for Public Endpoints 
+summary: TiDB Cloud Starter またはTiDB Cloud Essential クラスターへのパブリック アクセスを使用してファイアウォール ルールを安全に構成および管理する方法を学びます。
 ---
 
-# パブリックエンドポイント用のTiDB Cloudサーバーレス ファイアウォール ルールを構成する {#configure-tidb-cloud-serverless-firewall-rules-for-public-endpoints}
+# パブリックエンドポイント用のTiDB Cloud Starter または Essential ファイアウォールルールを構成する {#configure-tidb-cloud-starter-or-essential-firewall-rules-for-public-endpoints}
 
-このドキュメントでは、TiDB Cloud Serverless のパブリック接続オプションについて説明します。インターネット経由でアクセス可能なTiDB Cloud Serverless クラスターを安全に管理するための重要な概念を学習します。
+このドキュメントでは、TiDB Cloud Starter およびTiDB Cloud Essential クラスターのパブリック接続オプションについて説明します。インターネット経由でアクセス可能なクラスターを安全に管理するための重要な概念を学習します。
 
 > **注記：**
 >
-> このドキュメントは**TiDB Cloud Serverless**に適用されます。TiDB **TiDB Cloud Dedicated**のIPアクセスリストの設定手順については、 [TiDB Cloud DedicatedのIPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)参照してください。
+> このドキュメントは**、TiDB Cloud Starter**および**TiDB Cloud Essential**に適用されます。TiDB **TiDB Cloud Dedicated**のIPアクセスリストの設定手順については、 [TiDB Cloud DedicatedのIPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)参照してください。
 
 ## パブリックエンドポイント {#public-endpoints}
 
-TiDB Cloud Serverless クラスターにパブリックアクセスを設定すると、パブリックエンドポイント経由でクラスターにアクセスできるようになります。つまり、クラスターはインターネット経由でアクセス可能になります。パブリックエンドポイントとは、公開解決可能な DNS アドレスです。「承認済みネットワーク」とは、クラスターへのアクセスを許可するために選択した IP アドレスの範囲を指します。これらの権限は、**ファイアウォールルール**を通じて適用されます。
+クラスターにパブリックアクセスを設定すると、パブリックエンドポイント経由でクラスターにアクセスできるようになります。つまり、クラスターはインターネット経由でアクセス可能になります。パブリックエンドポイントとは、公開されているDNSアドレスです。「承認済みネットワーク」とは、クラスターへのアクセスを許可するために選択したIPアドレスの範囲を指します。これらの権限は、**ファイアウォールルール**を通じて適用されます。
 
 ### パブリックアクセスの特徴 {#characteristics-of-public-access}
 
--   指定された IP アドレスのみがTiDB Cloud Serverless にアクセスできます。
+-   指定された IP アドレスのみがクラスターにアクセスできます。
     -   デフォルトではすべてのIPアドレス（ `0.0.0.0 - 255.255.255.255` ）が許可されます。
     -   クラスターの作成後に、許可された IP アドレスを更新できます。
 -   クラスターにはパブリックに解決可能な DNS 名があります。
@@ -31,15 +31,15 @@ IPアドレスへのアクセスの許可は、**ファイアウォールルー�
 
 ### AWSアクセスを許可する {#allow-aws-access}
 
-公式の[AWS IPアドレスリスト](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html)を参考にして、**すべての AWS IP アドレス**からのアクセスを有効にすることができます。
+TiDB Cloud Starter クラスターが AWS でホストされている場合は、公式の[AWS IPアドレスリスト](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html)を参照して、**すべての AWS IP アドレス**からのアクセスを有効にできます。
 
 TiDB Cloud はこのリストを定期的に更新し、予約済みの IP アドレス**169.254.65.87**を使用してすべての AWS IP アドレスを表します。
 
 ## ファイアウォールルールの作成と管理 {#create-and-manage-a-firewall-rule}
 
-このセクションでは、 TiDB Cloud Serverless クラスターのファイアウォールルールを管理する方法について説明します。パブリックエンドポイントを使用すると、 TiDB Cloud Serverless クラスターへの接続は、ファイアウォールルールで指定された IP アドレスに制限されます。
+このセクションでは、 TiDB Cloud Starter またはTiDB Cloud Essential クラスターのファイアウォールルールを管理する方法について説明します。パブリックエンドポイントを使用すると、クラスターへの接続はファイアウォールルールで指定された IP アドレスに制限されます。
 
-TiDB Cloud Serverless クラスターにファイアウォール ルールを追加するには、次の手順を実行します。
+TiDB Cloud Starter またはTiDB Cloud Essential クラスターにファイアウォール ルールを追加するには、次の手順を実行します。
 
 1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -51,8 +51,8 @@ TiDB Cloud Serverless クラスターにファイアウォール ルールを追
     >
     > 状況によっては、 TiDB Cloudコンソールで監視される IP アドレスが、インターネットへのアクセス時に使用される IP アドレスと異なる場合があります。そのため、ルールを期待どおりに機能させるには、開始 IP アドレスと終了 IP アドレスを変更する必要がある場合があります。検索エンジンなどのオンラインツールを使用して、ご自身の IP アドレスを確認できます。例えば、「what is my IP」で検索してみてください。
 
-4.  **「ルールを追加」**をクリックすると、アドレス範囲を追加できます。表示されるウィンドウで、単一のIPアドレスまたはIPアドレスの範囲を指定できます。ルールを単一のIPアドレスに限定したい場合は、 **「開始IPアドレス」**と**「終了IPアドレス」**のフィールドに同じIPアドレスを入力してください。ファイアウォールを有効にすると、管理者、ユーザー、アプリケーションは、有効な認証情報を持つTiDB Cloud Serverlessクラスター上の任意のデータベースにアクセスできるようになります。「送信」**を**クリックすると、ファイアウォールルールが追加されます。
+4.  アドレス範囲を追加するには、 **「ルールを追加」**をクリックしてください。表示されるウィンドウで、単一のIPアドレスまたはIPアドレスの範囲を指定できます。ルールを単一のIPアドレスに限定する場合は、 **「開始IPアドレス」フィールド**と**「終了IPアドレス」**フィールドに同じIPアドレスを入力してください。ファイアウォールを開くと、管理者、ユーザー、アプリケーションは、有効な資格情報を持つクラスタ上の任意のデータベースにアクセスできるようになります。「**送信」**をクリックしてファイアウォールルールを追加します。
 
 ## 次は何？ {#what-s-next}
 
--   [パブリックエンドポイント経由でTiDB Cloud Serverless に接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)
+-   [パブリックエンドポイント経由でTiDB Cloud Starter または Essential に接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)

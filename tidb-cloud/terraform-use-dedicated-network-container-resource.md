@@ -1,9 +1,9 @@
 ---
-title: Use TiDB Cloud Dedicated Network Container Resource
-summary: TiDB Cloud Dedicated ネットワーク コンテナ リソースを使用して、 TiDB Cloud Dedicated ネットワーク コンテナを作成および変更する方法を学習します。
+title: Use the `tidbcloud_dedicated_network_container` Resource
+summary: tidbcloud_dedicated_network_container` リソースを使用して、 TiDB Cloud Dedicated ネットワーク コンテナを作成および変更する方法を学習します。
 ---
 
-# TiDB Cloud専用ネットワークコンテナリソースを使用する {#use-tidb-cloud-dedicated-network-container-resource}
+# <code>tidbcloud_dedicated_network_container</code>リソースを使用する {#use-the-code-tidbcloud-dedicated-network-container-code-resource}
 
 このドキュメントでは、 `tidbcloud_dedicated_network_container`リソースを使用して[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)ネットワーク コンテナーを管理する方法について説明します。
 
@@ -56,7 +56,7 @@ summary: TiDB Cloud Dedicated ネットワーク コンテナ リソースを使
 
     `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    -   TiDB Cloud Dedicated ネットワーク コンテナ リソースを使用するには、リソース タイプを`tidbcloud_dedicated_network_container`に設定します。
+    -   `tidbcloud_dedicated_network_container`リソースを使用するには、リソース タイプを`tidbcloud_dedicated_network_container`に設定します。
     -   リソース名は、必要に応じて定義できます（例： `example` ）。
     -   必要な引数の値を取得する方法がわからない場合は、 [リージョンの CIDR を設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)参照してください。
     -   TiDB Cloud Dedicated ネットワーク コンテナ仕様の詳細については、 [tidbcloud_dedicated_network_container (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_network_container)参照してください。
@@ -140,7 +140,7 @@ Terraform で管理されていないTiDB Cloud Dedicated ネットワーク コ
 
 たとえば、Terraform によって作成されていないネットワーク コンテナーをインポートできます。
 
-1.  新しいTiDB Cloud Dedicated ネットワーク コンテナ リソースのインポート ブロックを追加します。
+1.  新しい`tidbcloud_dedicated_network_container`リソースのインポート ブロックを追加します。
 
     次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` `cluster_id,network_container_id`の形式に置き換えます。
 
@@ -151,7 +151,7 @@ Terraform で管理されていないTiDB Cloud Dedicated ネットワーク コ
 
 2.  新しい構成ファイルを生成します。
 
-    インポート ブロックに従って、新しいTiDB Cloud Dedicated ネットワーク コンテナ リソースの新しい構成ファイルを生成します。
+    インポート ブロックに従って、新しい`tidbcloud_dedicated_network_container`リソースの新しい構成ファイルを生成します。
 
     ```shell
     terraform plan -generate-config-out=generated.tf

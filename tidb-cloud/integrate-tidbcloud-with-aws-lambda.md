@@ -1,20 +1,24 @@
 ---
-title: Integrate TiDB Cloud Serverless with Amazon Lambda Using AWS CloudFormation
-summary: TiDB Cloud Serverless を Amazon Lambda および CloudFormation と統合する方法を段階的に紹介します。
+title: Integrate TiDB Cloud Starter with Amazon Lambda Using AWS CloudFormation
+summary: TiDB Cloud Starter を Amazon Lambda および CloudFormation と統合する方法を段階的に紹介します。
 ---
 
-# AWS CloudFormation を使用してTiDB Cloud Serverless を Amazon Lambda と統合する {#integrate-tidb-cloud-serverless-with-amazon-lambda-using-aws-cloudformation}
+# AWS CloudFormation を使用してTiDB Cloud Starter を Amazon Lambda と統合する {#integrate-tidb-cloud-starter-with-amazon-lambda-using-aws-cloudformation}
 
-このドキュメントでは、クラウドネイティブの分散SQLデータベースである[TiDB Cloudサーバーレス](https://www.pingcap.com/tidb-cloud/) 、サーバーレスでイベントドリブンなコンピューティングサービスである[AWS ラムダ](https://aws.amazon.com/lambda/)と統合するための手順を[AWS クラウドフォーメーション](https://aws.amazon.com/cloudformation/)から順に説明します。TiDB TiDB Cloud ServerlessをAmazon Lambdaと統合することで、 TiDB Cloud ServerlessとAWS Lambdaを介したマイクロサービスのスケーラビリティとコスト効率を活用できます。AWS CloudFormationは、Lambda関数、API Gateway、Secrets ManagerなどのAWSリソースの作成と管理を自動化します。
+このドキュメントでは、クラウドネイティブの分散SQLデータベースである[TiDB Cloudスターター](https://www.pingcap.com/tidb-cloud/) 、サーバーレスでイベントドリブンなコンピューティングサービスである[AWS ラムダ](https://aws.amazon.com/lambda/)と統合するための手順を[AWS クラウドフォーメーション](https://aws.amazon.com/cloudformation/)から順に説明します。TiDB TiDB Cloud StarterをAmazon Lambdaと統合することで、 TiDB Cloud StarterとAWS Lambdaを介したマイクロサービスのスケーラビリティとコスト効率を活用できます。AWS CloudFormationは、Lambda関数、API Gateway、Secrets ManagerなどのAWSリソースの作成と管理を自動化します。
+
+> **注記：**
+>
+> このドキュメントの手順は、 TiDB Cloud Starter クラスターに加えて、 TiDB Cloud Essential クラスターでも機能します。
 
 ## ソリューションの概要 {#solution-overview}
 
 このガイドでは、次のコンポーネントを使用して、完全に機能するオンライン書店を作成します。
 
--   AWS Lambda 関数: Sequelize ORM と Fastify API フレームワークを使用して、 TiDB Cloud Serverless クラスターからのリクエストを処理し、データをクエリします。
--   AWS Secrets Manager SDK: TiDB Cloud Serverless クラスターの接続構成を取得および管理します。
+-   AWS Lambda 関数: Sequelize ORM と Fastify API フレームワークを使用して、 TiDB Cloud Starter クラスターからのリクエストを処理し、データをクエリします。
+-   AWS Secrets Manager SDK: TiDB Cloud Starter クラスターの接続構成を取得および管理します。
 -   AWS API Gateway: HTTP リクエストルートを処理します。
--   TiDB Cloud Serverless: クラウドネイティブの分散 SQL データベース。
+-   TiDB Cloud Starter: クラウドネイティブの分散 SQL データベース。
 
 AWS CloudFormation は、Secrets Manager、API Gateway、Lambda 関数など、プロジェクトに必要なリソースを作成するために使用されます。
 
@@ -34,7 +38,7 @@ AWS CloudFormation は、Secrets Manager、API Gateway、Lambda 関数など、�
     -   [S3](https://aws.amazon.com/s3/)
     -   [IAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
 
--   [TiDB Cloud](https://tidbcloud.com)アカウントとTiDB Cloud Serverless クラスター。TiDB TiDB Cloud Serverless クラスターの接続情報を取得します。
+-   [TiDB Cloud](https://tidbcloud.com)アカウントとTiDB Cloud Starter クラスター。TiDB TiDB Cloud Starter クラスターの接続情報を取得します。
 
     ![TiDB Cloud connection information](/media/develop/aws-lambda-tidbcloud-connection-info.png)
 

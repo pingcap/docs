@@ -1,9 +1,9 @@
 ---
-title: Use Backup Resource
-summary: バックアップ リソースを使用してTiDB Cloudクラスターのバックアップを作成する方法を学習します。
+title: Use the `tidbcloud_backup` Resource
+summary: tidbcloud_backup` リソースを使用してTiDB Cloudクラスターのバックアップを作成する方法を学習します。
 ---
 
-# バックアップリソースを使用する {#use-backup-resource}
+# <code>tidbcloud_backup</code>リソースを使用する {#use-the-code-tidbcloud-backup-code-resource}
 
 このドキュメントでは、 `tidbcloud_backup`リソースを使用してTiDB Cloudクラスターのバックアップを作成する方法を学習できます。
 
@@ -15,9 +15,9 @@ summary: バックアップ リソースを使用してTiDB Cloudクラスター
 ## 前提条件 {#prerequisites}
 
 -   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
--   バックアップと復元機能は、 TiDB Cloud Serverless クラスターではご利用いただけません。バックアップリソースを使用するには、 TiDB Cloud Dedicated クラスターを作成してください。
+-   このドキュメントで紹介されているバックアップと復元機能は、TiDB Cloud Starter またはTiDB Cloud Essential クラスターではご利用いただけません`tidbcloud_backup`リソースを使用するには、 TiDB Cloud Dedicated クラスターを作成してください。
 
-## バックアップリソースを使用してバックアップを作成する {#create-a-backup-with-the-backup-resource}
+## <code>tidbcloud_backup</code>リソースを使用してバックアップを作成する {#create-a-backup-with-the-code-tidbcloud-backup-code-resource}
 
 1.  バックアップ用のディレクトリを作成してそこに入ります。
 
@@ -46,7 +46,7 @@ summary: バックアップ リソースを使用してTiDB Cloudクラスター
 
     ファイル内のリソース値 (プロジェクト ID やクラスタ ID など) を独自のものに置き換える必要があります。
 
-    Terraform を使用してクラスター リソース (たとえば、 `example_cluster` ) を管理している場合は、実際のプロジェクト ID とクラスター ID を指定せずに、次のようにバックアップ リソースを構成することもできます。
+    Terraform を使用してクラスター リソース (たとえば、 `example_cluster` ) を管理している場合は、実際のプロジェクト ID とクラスター ID を指定せずに、次のように`tidbcloud_backup`リソースを構成することもできます。
 
         resource "tidbcloud_backup" "example_backup" {
           project_id  = tidbcloud_cluster.example_cluster.project_id
@@ -137,7 +137,7 @@ summary: バックアップ リソースを使用してTiDB Cloudクラスター
 
 ステータスが`SUCCESS`に変わると、クラスターのバックアップが作成されたことを示します。作成後はバックアップを更新できないことに注意してください。
 
-これで、クラスターのバックアップが作成されました。このバックアップを使用してクラスターを復元する場合は、 [復元リソースを使用する](/tidb-cloud/terraform-use-restore-resource.md)実行できます。
+これで、クラスターのバックアップが作成されました。このバックアップを使用してクラスターを復元する場合は、 [`tidbcloud_restore`リソースを使用する](/tidb-cloud/terraform-use-restore-resource.md)実行できます。
 
 ## バックアップを更新する {#update-a-backup}
 
@@ -145,7 +145,7 @@ summary: バックアップ リソースを使用してTiDB Cloudクラスター
 
 ## バックアップを削除する {#delete-a-backup}
 
-バックアップを削除するには、対応する`backup.tf`ファイルが配置されているバックアップ ディレクトリに移動し、 `terraform destroy`コマンドを実行してバックアップ リソースを破棄します。
+バックアップを削除するには、対応する`backup.tf`ファイルが配置されているバックアップ ディレクトリに移動し、 `terraform destroy`コマンドを実行して`tidbcloud_backup`リソースを破棄します。
 
     $ terraform destroy
 

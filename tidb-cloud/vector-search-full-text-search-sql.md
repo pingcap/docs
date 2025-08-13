@@ -28,9 +28,9 @@ TiDB の全文検索機能は、次の機能を提供します。
 
 全文検索機能はまだ初期段階にあり、今後も継続的に多くのお客様にご利用いただけるよう展開していきます。現在、全文検索機能は下記の製品オプションとリージョンでのみご利用いただけます。
 
--   TiDB Cloudサーバーレス: `Frankfurt (eu-central-1)`と`Singapore (ap-southeast-1)`
+-   AWS 上のTiDB Cloud Starter: `Frankfurt (eu-central-1)`と`Singapore (ap-southeast-1)`
 
-全文検索を使用する前に、 TiDB Cloud Serverless クラスターがサポートされているリージョンに作成されていることを確認してください。まだ作成していない場合は、手順[TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って作成してください。
+全文検索を使用する前に、 TiDB Cloud Starter クラスターがサポートされているリージョンに作成されていることを確認してください。まだ作成していない場合は、手順[TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って作成してください。
 
 全文検索を実行するには、次の手順に従います。
 

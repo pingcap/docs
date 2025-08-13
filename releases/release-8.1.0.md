@@ -27,7 +27,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
     突発的なSQLクエリパフォーマンスの問題は、データベース全体のパフォーマンス低下を引き起こす可能性があり、これはデータベースの安定性における最も一般的な課題です。これらの問題の原因は、テストされていない新しいSQL文、データ量の急激な変化、実行プランの突然の変更など、多岐にわたります。これらの問題をソースコードで完全に回避することは困難です。TiDB v7.2.0では、予想以上にリソースを消費するクエリを管理し、突発的なクエリパフォーマンスの問題の影響を迅速に軽減する機能が導入されました。この機能はv8.1.0で一般提供が開始されます。
 
-    リソースグループ内のクエリの最大実行時間を設定できます。クエリの実行時間が設定値を超えると、クエリの優先度が自動的に下げられるか、クエリがキャンセルされます。また、問題のあるクエリの同時実行数が多すぎる場合、特定フェーズで過剰なリソース消費を回避するために、テキストまたは実行プランを通じて、特定されたクエリに一致するクエリを一定期間内に即座に設定することもできます。
+    リソースグループ内のクエリの最大実行時間を設定できます。クエリの実行時間が設定値を超えると、クエリの優先度が自動的に下げられるか、クエリがキャンセルされます。また、問題のあるクエリの同時実行数が多すぎる場合、特定フェーズで過剰なリソース消費を回避するために、テキストまたは実行プランを通じて、特定されたクエリに一致するクエリを一定期間内に即時に指定することもできます。
 
     TiDBはクエリの手動マークもサポートしています。1コマンド[`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)使用すると、SQLテキスト、SQLダイジェスト、または実行プランに基づいてクエリをマークできます。マークに一致するクエリはダウングレードまたはキャンセルされ、SQLブロックリストを追加する目的を達成できます。
 
@@ -117,6 +117,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 | PD             | [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry)                                                | 非推奨      | v8.1.0以降、TiDBダッシュボードのテレメトリ機能は削除され、この設定項目は機能しなくなりました。これは以前のバージョンとの互換性のためだけに保持されています。                                                                                                               |
 | TiDB Lightning | [`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-configuration)      | 修正済み     | v8.1.0 以降では、ユーザー入力に関係なく、 TiDB Lightning が`conflict.max-record-rows`の値に`conflict.threshold`の値を自動的に割り当てるため、 `conflict.max-record-rows`手動で構成する必要はありません。 `conflict.max-record-rows`将来のリリースで廃止される予定です。 |
 | TiDB Lightning | [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)                     | 修正済み     | デフォルト値を`9223372036854775807`から`10000`に変更することで、異常なタスクを迅速に中断し、対応する調整を迅速に行うことができます。これにより、異常なデータソースやテーブルスキーマ定義の誤りが原因で、インポート後に大量の競合データが発見されるというシナリオを回避し、時間と計算リソースを節約できます。                              |
+| TiKV           | [`raft-engine.batch-compression-threshold`](/tikv-configuration-file.md#batch-compression-threshold)            | 修正済み     | デフォルト値を`"8KiB"`から`"4KiB"`に変更して、 Raftログの書き込みの IOPS オーバーヘッドを削減し、圧縮率を向上させます。                                                                                                                         |
 | TiKV           | [`memory.enable-thread-exclusive-arena`](/tikv-configuration-file.md#enable-thread-exclusive-arena-new-in-v810) | 新しく追加された | 各TiKVスレッドのメモリ使用量を追跡するために、TiKVスレッドレベルでメモリ割り当てステータスを表示するかどうかを制御します。デフォルト値は`true`です。                                                                                                                 |
 | TiCDC          | [`security.client-allowed-user`](/ticdc/ticdc-server-config.md#cdc-server-configuration-file-parameters)        | 新しく追加された | クライアント認証に許可されるユーザー名をリストします。このリストに含まれていないユーザー名による認証要求は拒否されます。デフォルト値はnullです。                                                                                                                        |
 | TiCDC          | [`security.client-user-required`](/ticdc/ticdc-server-config.md#cdc-server-configuration-file-parameters)       | 新しく追加された | クライアント認証にユーザー名とパスワードを使用するかどうかを制御します。デフォルト値は`false`です。                                                                                                                                             |
@@ -266,7 +267,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
     -   TiCDC
 
-        -   TiCDC所有者ノードを退去させるAPI（ `/api/v2/owner/resign` ）を呼び出すと、TiCDCタスクが予期せず再起動する問題を修正しました[＃10781](https://github.com/pingcap/tiflow/issues/10781) @ [スドジ](https://github.com/sdojjy)
+        -   TiCDCオーナーノードを退去させるAPI（ `/api/v2/owner/resign` ）を呼び出すと、TiCDCタスクが予期せず再起動する問題を修正しました[＃10781](https://github.com/pingcap/tiflow/issues/10781) @ [スドジ](https://github.com/sdojjy)
         -   下流の Pulsar が停止しているときに、changefeed を削除すると通常の TiCDC プロセスが停止し、他の changefeed プロセスも停止するという問題を修正しました[＃10629](https://github.com/pingcap/tiflow/issues/10629) @ [アズドンメン](https://github.com/asddongmen)
         -   Grafana の**所有権履歴**パネルが不安定になる問題を修正[＃10796](https://github.com/pingcap/tiflow/issues/10796) @ [ホンユニャン](https://github.com/hongyunyan)
         -   PDを再起動するとTiCDCノードがエラー[＃10799](https://github.com/pingcap/tiflow/issues/10799) @ [3エースショーハンド](https://github.com/3AceShowHand)で再起動する可能性がある問題を修正しました

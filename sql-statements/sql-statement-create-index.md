@@ -5,7 +5,15 @@ summary: TiDB データベースの CREATE INDEX の使用法の概要。
 
 # インデックスの作成 {#create-index}
 
-This statement adds a new index to an existing table. It is an alternative syntax to [`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-alter-table.md), and included for MySQL compatibility.
+この文は既存のテーブルに新しいインデックスを追加します。これは[`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-alter-table.md)の代替構文であり、MySQLとの互換性のために用意されています。
+
+<CustomContent platform="tidb-cloud">
+
+> **注記：**
+>
+> 4つのvCPUを搭載したクラスタ[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)の場合、インデックス作成時にリソース制限がクラスタの安定性に影響を与えないように、 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)手動で無効にすることをお勧めします。この設定を無効にすると、トランザクションを使用してインデックスを作成できるようになり、クラスタ全体への影響が軽減されます。
+
+</CustomContent>
 
 ## 概要 {#synopsis}
 
@@ -138,7 +146,7 @@ CREATE TABLE t1 (
 DROP INDEX idx1 ON t1;
 ```
 
-Expression index involves various kinds of expressions. To ensure correctness, only some fully tested functions are allowed for creating an expression index. This means that only these functions are allowed in expressions in a production environment. You can get these functions by querying the [`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520) variable. Currently, the allowed functions are as follows:
+式インデックスには様々な種類の式が含まれます。正確性を保証するため、式インデックスの作成には、完全にテストされた一部の関数のみを使用できます。つまり、本番環境では、これらの関数のみが式で使用できます。これらの関数は、変数[`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520)クエリすることで取得できます。現在、使用できる関数は次のとおりです。
 
 -   [`JSON_ARRAY()`](/functions-and-operators/json-functions.md)
 -   [`JSON_ARRAY_APPEND()`](/functions-and-operators/json-functions.md)
@@ -243,7 +251,7 @@ SELECT MIN(col1) FROM t GROUP BY LOWER(col1);
 
 したがって、クエリのパフォーマンスが挿入および更新のパフォーマンスを上回る場合は、式のインデックス作成を検討できます。
 
-式インデックスはMySQLと同じ構文と制限事項を持ちます。生成された仮想列（非表示）にインデックスを作成することで実装されるため、サポートされる式はすべて[仮想生成列の制限](/generated-columns.md#limitations)継承します。
+式インデックスはMySQLと同じ構文と制限事項を持ちます。式インデックスは、生成された非表示の仮想列にインデックスを作成することで実装されるため、サポートされる式はすべて[仮想生成列の制限](/generated-columns.md#limitations)継承します。
 
 ## 多値インデックス {#multi-valued-indexes}
 
@@ -344,22 +352,22 @@ Query OK, 1 row affected (0.00 sec)
 
 詳細は[インデックスの選択 - 複数値インデックスを使用する](/choose-index.md#use-multi-valued-indexes)ご覧ください。
 
-### Limitations {#limitations}
+### 制限事項 {#limitations}
 
--   For an empty JSON array, no corresponding index record is generated.
--   The target type in `CAST(... AS ... ARRAY)` cannot be any of `BINARY`, `JSON`, `YEAR`, `FLOAT`, and `DECIMAL`. The source type must be JSON.
--   You cannot use multi-valued indexes for sorting.
--   You can only create multi-valued indexes on a JSON array.
--   A multi-valued index cannot be a primary key or a foreign key.
--   The extra storage space used by a multi-valued index = the average number of array elements per row * the space used by a normal secondary index.
--   Compared with normal indexes, DML operations will modify more index records for multi-valued indexes, so multi-valued indexes will have a greater performance impact than normal indexes.
--   Because multi-valued indexes are a special type of expression index, multi-valued indexes have the same limitations as expression indexes.
--   If a table uses multi-valued indexes, you cannot back up, replicate, or import the table using BR, TiCDC, or TiDB Lightning to a TiDB cluster earlier than v6.6.0.
+-   空の JSON 配列の場合、対応するインデックス レコードは生成されません。
+-   `CAST(... AS ... ARRAY)`のターゲットタイプは`BINARY` 、 `JSON` 、 `YEAR` 、 `FLOAT` 、 `DECIMAL`のいずれにもできません。ソースタイプは JSON である必要があります。
+-   並べ替えに複数値インデックスを使用することはできません。
+-   複数値インデックスを作成できるのは JSON 配列のみです。
+-   複数値インデックスは主キーまたは外部キーにすることはできません。
+-   複数値インデックスによって使用される追加のstorageスペース = 行あたりの配列要素の平均数 * 通常のセカンダリ インデックスによって使用されるスペース。
+-   通常のインデックスと比較すると、DML 操作では複数値インデックスのインデックス レコードがより多く変更されるため、複数値インデックスは通常のインデックスよりもパフォーマンスに大きな影響を与えます。
+-   複数値インデックスは特殊なタイプの式インデックスであるため、複数値インデックスには式インデックスと同じ制限があります。
+-   テーブルで複数値インデックスが使用されている場合、 BR、TiCDC、またはTiDB Lightningを使用して、v6.6.0 より前の TiDB クラスターにテーブルをバックアップ、複製、またはインポートすることはできません。
 -   複雑な条件を持つクエリの場合、TiDBは複数値インデックスを選択できない可能性があります。複数値インデックスでサポートされる条件パターンについては、 [複数値インデックスを使用する](/choose-index.md#use-multi-valued-indexes)を参照してください。
 
-## Invisible index {#invisible-index}
+## 目に見えないインデックス {#invisible-index}
 
-By default, invisible indexes are indexes that are ignored by the query optimizer:
+デフォルトでは、非表示のインデックスはクエリ オプティマイザーによって無視されるインデックスです。
 
 ```sql
 CREATE TABLE t1 (c1 INT, c2 INT, UNIQUE(c2));
@@ -370,22 +378,22 @@ TiDB v8.0.0 以降では、システム変数[`tidb_opt_use_invisible_indexes`](
 
 詳細は[`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)参照。
 
-## Associated system variables {#associated-system-variables}
+## 関連するシステム変数 {#associated-system-variables}
 
 `CREATE INDEX`文に関連付けられているシステム変数は`tidb_ddl_enable_fast_reorg` 、 `tidb_ddl_reorg_worker_cnt` 、 `tidb_ddl_reorg_batch_size` 、 `tidb_enable_auto_increment_in_generated` 、 `tidb_ddl_reorg_priority`です。詳細は[システム変数](/system-variables.md#tidb_ddl_reorg_worker_cnt)を参照してください。
 
-## MySQL compatibility {#mysql-compatibility}
+## MySQLの互換性 {#mysql-compatibility}
 
--   TiDB supports parsing the `FULLTEXT` syntax but does not support using the `FULLTEXT`, `HASH`, and `SPATIAL` indexes.
--   TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax for compatibility with MySQL, but ignores them.
--   Descending indexes are not supported (similar to MySQL 5.7).
+-   TiDB は`FULLTEXT`構文の解析をサポートしていますが、 `FULLTEXT` 、 `HASH` 、および`SPATIAL`インデックスの使用はサポートしていません。
+-   TiDB `RTREE` `BTREE` `HASH`インデックス タイプを受け入れますが、それらを無視します。
+-   降順インデックスはサポートされていません ( MySQL 5.7と同様)。
 -   `CLUSTERED`型の主キーをテーブルに追加することはサポートされていません。3 型`CLUSTERED`主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
--   Expression indexes are incompatible with views. When a query is executed using a view, the expression index cannot be used at the same time.
--   Expression indexes have compatibility issues with bindings. When the expression of an expression index has a constant, the binding created for the corresponding query expands its scope. For example, suppose that the expression in the expression index is `a+1`, and the corresponding query condition is `a+1 > 2`. In this case, the created binding is `a+? > ?`, which means that the query with the condition such as `a+2 > 2` is also forced to use the expression index and results in a poor execution plan. In addition, this also affects the baseline capturing and baseline evolution in SQL Plan Management (SPM).
+-   式インデックスはビューと互換性がありません。ビューを使用してクエリを実行する場合、式インデックスを同時に使用することはできません。
+-   式インデックスには、バインディングとの互換性に関する問題があります。式インデックスの式に定数が含まれる場合、対応するクエリに対して作成されるバインディングのスコープが拡張されます。例えば、式インデックス内の式が`a+1`で、対応するクエリ条件が`a+1 > 2`あるとします。この場合、作成されるバインディングは`a+? > ?`です。つまり、 `a+2 > 2`などの条件を持つクエリも式インデックスの使用を強制され、実行プランの品質が低下します。さらに、これはSQLプラン管理（SPM）におけるベースラインキャプチャとベースライン進化にも影響を及ぼします。
 -   多値インデックスで書き込まれるデータは、定義されたデータ型と完全に一致する必要があります。一致しない場合、データの書き込みは失敗します。詳細については、 [複数値インデックスを作成する](/sql-statements/sql-statement-create-index.md#create-multi-valued-indexes)参照してください。
 -   `GLOBAL`インデックス オプションを使用して`UNIQUE KEY` [グローバルインデックス](/partitioned-table.md#global-indexes)として設定することは、 [パーティションテーブル](/partitioned-table.md)の TiDB 拡張であり、MySQL とは互換性がありません。
 
-## See also {#see-also}
+## 参照 {#see-also}
 
 -   [インデックスの選択](/choose-index.md)
 -   [インデックス問題の解決方法](/wrong-index-solution.md)

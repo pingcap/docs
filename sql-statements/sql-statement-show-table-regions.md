@@ -9,7 +9,7 @@ summary: TiDB で SHOW TABLE REGIONS を使用する方法を学習します。
 
 > **注記：**
 >
-> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
+> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 ## 構文 {#syntax}
 
@@ -58,7 +58,7 @@ TableName ::=
 
 > **注記：**
 >
-> `WRITTEN_BYTES` `APPROXIMATE_SIZE(MB)`値`APPROXIMATE_KEYS`正確なデータではありません。これらは`READ_BYTES` PDがリージョンから受信したハートビート情報に基づいてPDから推定されたデータです。
+> `WRITTEN_BYTES` `APPROXIMATE_SIZE(MB)`値は正確なデータではありません。これらは`READ_BYTES` PD `APPROXIMATE_KEYS` リージョンから受信したハートビート情報に基づいてPDから推定されたデータです。
 
 ## 例 {#examples}
 

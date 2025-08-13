@@ -19,13 +19,13 @@ summary: Vector データ型で使用できる関数と演算子について学�
 
 > **注記：**
 >
-> この機能はベータ版です。予告なく変更される可能性があります。バグを見つけた場合は、GitHub で[issue](https://github.com/pingcap/tidb/issues)報告を行ってください。
+> この機能はベータ版です。予告なく変更される可能性があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
 </CustomContent>
 
 > **注記：**
 >
-> ベクトルデータ型とこれらのベクトル関数は、TiDB Self-Managed、 [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)利用できます。TiDB Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
+> ベクトルデータ型とこれらのベクトル関数は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 、および[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)使用できます。TiDB Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります (v8.5.0 以降を推奨)。
 
 ## ベクトル関数 {#vector-functions}
 
@@ -143,7 +143,7 @@ $距離(p,q)=\sqrt {\sum \limits *{i=1}^{n}{(p* {i}-q_{i})^{2}}}$
 VEC_COSINE_DISTANCE(vector1, vector2)
 ```
 
-次の式を使用して 2 つのベクトル間の[cosine distance](https://en.wikipedia.org/wiki/Cosine_similarity)計算します。
+次の式を使用して 2 つのベクトル間の[コサイン距離](https://en.wikipedia.org/wiki/Cosine_similarity)計算します。
 
 $距離(p,q)=1.0 - {\frac {\sum \limits *{i=1}^{n}{p* {i}q_{i}}}{{\sqrt {\sum \limits *{i=1}^{n}{p* {i}^{2}}}}\cdot {\sqrt {\sum \limits *{i=1}^{n}{q* {i}^{2}}}}}}$
 
@@ -166,7 +166,7 @@ $距離(p,q)=1.0 - {\frac {\sum \limits *{i=1}^{n}{p* {i}q_{i}}}{{\sqrt {\sum \l
 VEC_NEGATIVE_INNER_PRODUCT(vector1, vector2)
 ```
 
-次の式を使用して、2 つのベクトル間の[内積](https://en.wikipedia.org/wiki/Dot_product)の負の値を使用して距離を計算します。
+次の数式を使用して、2 つのベクトル間の[内積](https://en.wikipedia.org/wiki/Dot_product)の負数を使用して距離を計算します。
 
 $DISTANCE(p,q)=- INNER_PROD(p,q)=-\sum \limits *{i=1}^{n}{p* {i}q_{i}}$
 

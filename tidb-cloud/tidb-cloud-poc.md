@@ -5,7 +5,7 @@ summary: TiDB Cloudを使用して概念実証 (PoC) を実行する方法につ
 
 # TiDB Cloudで概念実証 (PoC) を実行する {#perform-a-proof-of-concept-poc-with-tidb-cloud}
 
-TiDB Cloudは、TiDBの優れた機能をすべて備えたフルマネージドクラウドデータベースを提供するDatabase-as-a-Service（DBaaS）製品です。データベースの複雑な処理に煩わされることなく、アプリケーション開発に集中できます。TiDB TiDB Cloudは現在、Amazon Web Services（AWS）、Google Cloud、Microsoft Azureでご利用いただけます。
+TiDB Cloudは、TiDBの優れた機能をすべて備えたフルマネージドクラウドデータベースを提供するDatabase-as-a-Service（DBaaS）製品です。データベースの複雑な管理に煩わされることなく、アプリケーション開発に集中できます。TiDB TiDB Cloudは現在、Amazon Web Services（AWS）、Google Cloud、Microsoft Azure、Alibaba Cloudでご利用いただけます。
 
 TiDB Cloudがお客様のビジネスニーズに最適かどうかを判断するには、概念実証（PoC）を開始することが最善の方法です。また、短期間でTiDB Cloudの主要な機能に慣れることができます。パフォーマンステストを実行することで、ワークロードがTiDB Cloud上で効率的に実行できるかどうかを確認できます。さらに、データの移行や構成の調整に必要な労力を評価することもできます。
 
@@ -13,7 +13,7 @@ TiDB Cloudがお客様のビジネスニーズに最適かどうかを判断す�
 
 PoCにご興味をお持ちでしたら、開始前に<a href="mailto:tidbcloud-support@pingcap.com">PingCAP</a>までお気軽にお問い合わせください。サポートチームがテストプランの作成をお手伝いし、PoCの手順をスムーズに進めていきます。
 
-あるいは、 [TiDB Cloudサーバーレスを作成する](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) TiDB Cloudに慣れて、すぐに評価することもできます。TiDB TiDB Cloud Serverless には[特別な利用規約](/tidb-cloud/serverless-limitations.md)制限があることにご注意ください。
+あるいは、 [TiDB Cloudスターターを作成する](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) TiDB Cloudに慣れて、すぐに評価することもできます。TiDB TiDB Cloud Starter には[特別な利用規約](/tidb-cloud/serverless-limitations.md)含まれています。
 
 ## PoC手順の概要 {#overview-of-the-poc-procedures}
 
@@ -81,13 +81,13 @@ PoC 用の[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedic
 新しく作成されたクラスターの場合は、次の構成に注意してください。
 
 -   デフォルトのタイムゾーン（ダッシュボードの**「作成時間」**列）はUTCです。以下の手順[ローカルタイムゾーンを設定する](/tidb-cloud/manage-user-access.md#set-the-time-zone-for-your-organization)で、ローカルタイムゾーンに変更できます。
--   新しいクラスタのデフォルトのバックアップ設定は、毎日データベース全体のバックアップです。希望するバックアップ時間を指定するか、手動でデータをバックアップすることもできます。デフォルトのバックアップ時間と詳細については、 [TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)参照してください。
+-   新しいクラスタのデフォルトのバックアップ設定は、毎日データベース全体のバックアップです。希望するバックアップ時間を指定するか、手動でデータをバックアップすることもできます。デフォルトのバックアップ時間および詳細については、 [TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)参照してください。
 
 ## ステップ4. スキーマとSQLを適応させる {#step-4-adapt-your-schemas-and-sql}
 
 次に、テーブルやインデックスを含むデータベース スキーマを TiDB クラスターにロードできます。
 
-PoC クレジットの数量には限りがあるため、クレジットの価値を最大化するために、 TiDB Cloud上で互換性テストや予備分析用の[TiDB Cloudサーバーレス クラスター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)作成することをお勧めします。
+PoC クレジットの数量には限りがあるため、クレジットの価値を最大化するために、 TiDB Cloud上で互換性テストや予備分析用の[TiDB Cloudスターター クラスター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)作成することをお勧めします。
 
 TiDB CloudはMySQL 8.0との互換性が非常に高くなっています。MySQLと互換性がある、またはMySQLと互換性を持たせることができる場合は、データをTiDBに直接インポートできます。
 
@@ -135,11 +135,11 @@ TiDB Cloudにはさまざまな形式のデータをインポートできます�
 ワークロードを開始した後、次の方法を使用してシステムを観察できます。
 
 -   クラスターのよく使用されるメトリクスは、クラスター概要ページで確認できます。これには、合計QPS、レイテンシ、接続数、 TiFlashリクエストQPS、 TiFlashリクエスト期間、 TiFlashストレージサイズ、TiKVストレージサイズ、TiDB CPU、TiKV CPU、TiKV IO読み取り、TiKV IO書き込みが含まれます[TiDBクラスタを監視する](/tidb-cloud/monitor-tidb-cluster.md)参照してください。
--   クラスターの[**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **「SQLステートメント」**タブを確認してください。ここでは、システムテーブルをクエリすることなくSQL実行を監視し、パフォーマンスの問題を簡単に特定できます[ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)参照してください。
+-   クラスターの[**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **「SQLステートメント」**タブを確認してください。ここでは、システムテーブルをクエリすることなく、SQL実行を監視し、パフォーマンスの問題を簡単に特定できます[ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)参照してください。
 -   クラスターの[**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **「Key Visualizer」**タブを確認します。ここで、TiDBのデータアクセスパターンとデータホットスポットを確認できます。5 [キービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)参照してください。
 -   これらのメトリクスを、お客様独自のDatadogおよびPrometheusに統合することも可能です。1 [サードパーティの監視統合](/tidb-cloud/third-party-monitoring-integrations.md)ご覧ください。
 
-次はテスト結果を評価するときです。
+次はテスト結果を評価する時です。
 
 より正確な評価を行うには、テスト前にメトリクスのベースラインを決定し、各実行のテスト結果を適切に記録してください。結果を分析することで、 TiDB Cloudがアプリケーションに適しているかどうかを判断できます。また、これらの結果はシステムの実行状態を示しており、メトリクスに応じてシステムを調整できます。例えば、
 
@@ -175,7 +175,7 @@ TiDB Cloudにはさまざまな形式のデータをインポートできます�
 
 -   バックアップ
 
-    ベンダーロックインを回避するには、毎日フルバックアップを使用してデータを新しいクラスタに移行し、 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)使用してデータをエクスポートします。詳細については、 [TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)と[TiDB Cloudサーバーレスデータのバックアップと復元](/tidb-cloud/backup-and-restore-serverless.md)参照してください。
+    ベンダーロックインを回避するには、毎日フルバックアップを使用してデータを新しいクラスタに移行し、 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)使用してデータをエクスポートします。詳細については、 [TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)と[TiDB Cloud StarterまたはEssentialでデータをバックアップおよび復元する](/tidb-cloud/backup-and-restore-serverless.md)参照してください。
 
 ## ステップ8. 環境をクリーンアップしてPoCを完了する {#step-8-clean-up-the-environment-and-finish-the-poc}
 

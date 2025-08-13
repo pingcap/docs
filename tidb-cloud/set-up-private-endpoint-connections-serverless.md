@@ -1,11 +1,11 @@
 ---
-title: Connect to TiDB Cloud Serverless via Private Endpoint
+title: Connect to TiDB Cloud Starter via AWS PrivateLink
 summary: プライベート エンドポイント経由でTiDB Cloudクラスターに接続する方法を学習します。
 ---
 
-# プライベートエンドポイント経由でTiDB Cloud Serverless に接続する {#connect-to-tidb-cloud-serverless-via-private-endpoint}
+# AWS PrivateLink 経由でTiDB Cloud Starter に接続する {#connect-to-tidb-cloud-starter-via-aws-privatelink}
 
-このドキュメントでは、プライベート エンドポイント経由でTiDB Cloud Serverless クラスターに接続する方法について説明します。
+このドキュメントでは、AWS PrivateLink を介してTiDB Cloud Starter クラスターに接続する方法について説明します。
 
 > **ヒント：**
 >
@@ -28,7 +28,7 @@ AWS PrivateLink を利用することで、エンドポイント接続は安全�
 
 ## 制限 {#restrictions}
 
--   現在、 TiDB Cloud は、エンドポイントサービスが AWS でホストされている場合にのみ、 TiDB Cloud Serverless へのプライベートエンドポイント接続をサポートしています。サービスが Google Cloud でホストされている場合、プライベートエンドポイントは適用されません。
+-   現在、 TiDB Cloud は、エンドポイントサービスが AWS でホストされている場合にのみ、 TiDB Cloud Starter への AWS PrivateLink 接続をサポートしています。サービスが他のクラウドプロバイダーでホストされている場合、AWS PrivateLink 接続は適用されません。
 -   リージョン間のプライベート エンドポイント接続はサポートされていません。
 
 ## 前提条件 {#prerequisites}
@@ -37,7 +37,7 @@ AWS VPC設定でDNSホスト名とDNS解決の両方が有効になっている�
 
 ## AWSでプライベートエンドポイントを設定する {#set-up-a-private-endpoint-with-aws}
 
-プライベート エンドポイント経由でTiDB Cloud Serverless クラスターに接続するには、次の手順に従います。
+プライベート エンドポイント経由でTiDB Cloud Starter クラスターに接続するには、次の手順に従います。
 
 1.  [TiDBクラスタを選択する](#step-1-choose-a-tidb-cluster)
 2.  [AWSインターフェースエンドポイントを作成する](#step-2-create-an-aws-interface-endpoint)
@@ -45,14 +45,14 @@ AWS VPC設定でDNSホスト名とDNS解決の両方が有効になっている�
 
 ### ステップ1. TiDBクラスターを選択する {#step-1-choose-a-tidb-cluster}
 
-1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページで、ターゲットのTiDB Cloud Serverless クラスターの名前をクリックして、概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページで、ターゲットのTiDB Cloud Starter クラスターの名前をクリックして、概要ページに移動します。
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 3.  **[接続タイプ]**ドロップダウン リストで、 **[プライベート エンドポイント]**を選択します。
 4.  **サービス名**、**アベイラビリティーゾーン ID** 、**リージョンID を**メモします。
 
     > **注記：**
     >
-    > AWS リージョンごとにプライベートエンドポイントを 1 つ作成するだけで、同じリージョンにあるすべてのTiDB Cloud Serverless クラスターで共有できます。
+    > AWS リージョンごとにプライベートエンドポイントを 1 つ作成するだけで、同じリージョンにあるすべてのTiDB Cloud Starter クラスターで共有できます。
 
 ### ステップ2. AWSインターフェースエンドポイントを作成する {#step-2-create-an-aws-interface-endpoint}
 

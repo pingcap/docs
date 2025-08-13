@@ -1,11 +1,11 @@
 ---
 title: Sink to TiDB Cloud
-summary: このドキュメントでは、 TiDB Cloud Dedicated クラスターからTiDB Cloud Serverless クラスターにデータをストリーミングする方法について説明します。この機能には、利用可能な変更フィード数とリージョン数に制限があります。前提条件として、tidb_gc_life_time の拡張、データのバックアップ、 TiDB Cloudシンクの開始位置の取得が必要です。TiDB TiDB Cloudシンクを作成するには、クラスターの概要ページに移動し、接続を確立し、テーブルとイベントフィルターをカスタマイズし、レプリケーション開始位置を入力し、変更フィード仕様を指定し、構成を確認してシンクを作成します。最後に、tidb_gc_life_time を元の値に戻します。
+summary: このドキュメントでは、TiDB Cloud Dedicated クラスターからTiDB Cloud Starter またはTiDB Cloud Essential クラスターにデータをストリーミングする方法について説明します。この機能では、利用できる変更フィードの数とリージョンに制限があります。前提条件として、tidb_gc_life_time の拡張、データのバックアップ、 TiDB Cloudシンクの開始位置の取得が必要です。TiDB TiDB Cloudシンクを作成するには、クラスターの概要ページに移動し、接続を確立し、テーブルとイベントフィルターをカスタマイズし、レプリケーション開始位置を入力し、変更フィードの仕様を指定し、構成を確認してシンクを作成します。最後に、tidb_gc_life_time を元の値に戻します。
 ---
 
 # TiDB Cloudにシンク {#sink-to-tidb-cloud}
 
-このドキュメントでは、 TiDB Cloud Dedicated クラスターからTiDB Cloud Serverless クラスターにデータをストリーミングする方法について説明します。
+このドキュメントでは、 TiDB Cloud Dedicated クラスターからTiDB Cloud Starter またはTiDB Cloud Essential クラスターにデータをストリーミングする方法について説明します。
 
 > **注記：**
 >
@@ -26,15 +26,15 @@ summary: このドキュメントでは、 TiDB Cloud Dedicated クラスター�
     -   AWS シンガポール (ap-southeast-1)
     -   AWS 東京 (ap-northeast-1)
 
--   ソースTiDB Cloud Dedicated クラスターと宛先TiDB Cloud Serverless クラスターは、同じプロジェクトと同じリージョンに存在する必要があります。
+-   ソースTiDB Cloud Dedicated クラスターと宛先TiDB Cloud Starter またはTiDB Cloud Essential クラスターは、同じプロジェクトと同じリージョンに存在する必要があります。
 
--   **TiDB Cloudへのシンク**機能は、プライベートエンドポイント経由のネットワーク接続のみをサポートします。TiDB TiDB Cloud DedicatedクラスターからTiDB Cloud Serverlessクラスターにデータをストリーミングするための変更フィードを作成すると、 TiDB Cloudは2つのクラスター間のプライベートエンドポイント接続を自動的に確立します。
+-   **TiDB Cloudへのシンク**機能は、プライベートエンドポイント経由のネットワーク接続のみをサポートします。TiDB TiDB Cloud DedicatedクラスターからTiDB Cloud StarterまたはTiDB Cloud Essentialクラスターにデータをストリーミングするための変更フィードを作成すると、 TiDB Cloudは2つのクラスター間のプライベートエンドポイント接続を自動的に確立します。
 
 ## 前提条件 {#prerequisites}
 
-**Sink to TiDB Cloud**コネクタは、一定の[TSO](https://docs.pingcap.com/tidb/stable/glossary#tso)経過した後にのみ、 TiDB Cloud Dedicated クラスターからTiDB Cloud Serverless クラスターに増分データをシンクできます。
+**Sink to TiDB Cloud**コネクタは、一定の[TSO](https://docs.pingcap.com/tidb/stable/glossary#tso)経過した後にのみ、 TiDB Cloud Dedicated クラスターからTiDB Cloud Starter またはTiDB Cloud Essential クラスターに増分データをシンクできます。
 
-変更フィードを作成する前に、ソースのTiDB Cloud Dedicated クラスターから既存のデータをエクスポートし、そのデータを宛先のTiDB Cloud Serverless クラスターにロードする必要があります。
+変更フィードを作成する前に、ソースのTiDB Cloud Dedicated クラスターから既存のデータをエクスポートし、そのデータを宛先のTiDB Cloud Starter またはTiDB Cloud Essential クラスターにロードする必要があります。
 
 1.  その間、履歴データが TiDB によってガベージ コレクションされないように、 [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)次の 2 つの操作の合計時間よりも長く延長します。
 
@@ -47,7 +47,7 @@ summary: このドキュメントでは、 TiDB Cloud Dedicated クラスター�
     SET GLOBAL tidb_gc_life_time = '720h';
     ```
 
-2.  [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)使用してTiDB Cloud Dedicated クラスターからデータをエクスポートし、 [TiDB Cloudサーバーレス インポート](/tidb-cloud/import-csv-files-serverless.md)使用して宛先のTiDB Cloud Serverless クラスターにデータをロードします。
+2.  [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)使用してTiDB Cloud Dedicated クラスターからデータをエクスポートし、 [インポート機能](/tidb-cloud/import-csv-files-serverless.md)使用して宛先のTiDB Cloud Starter またはTiDB Cloud Essential クラスターにデータをロードします。
 
 3.  [Dumplingのエクスポートファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)から、メタデータ ファイルからTiDB Cloudシンクの開始位置を取得します。
 
@@ -61,13 +61,13 @@ summary: このドキュメントでは、 TiDB Cloud Dedicated クラスター�
 
 ## TiDB Cloudシンクを作成する {#create-a-tidb-cloud-sink}
 
-前提条件を完了したら、データを宛先のTiDB Cloud Serverless クラスターにシンクできます。
+前提条件を完了したら、データを宛先のTiDB Cloud Starter またはTiDB Cloud Essential クラスターにシンクできます。
 
 1.  ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[Changefeed] を**クリックします。
 
 2.  **「Changefeed の作成」**をクリックし、宛先として**TiDB Cloud**を選択します。
 
-3.  **TiDB Cloud接続**領域で、宛先のTiDB Cloud Serverless クラスターを選択し、宛先クラスターのユーザー名とパスワードを入力します。
+3.  **TiDB Cloud接続**領域で、宛先のTiDB Cloud Starter またはTiDB Cloud Essential クラスターを選択し、宛先クラスターのユーザー名とパスワードを入力します。
 
 4.  **[次へ]**をクリックして、2 つの TiDB クラスター間の接続を確立し、変更フィードが正常に接続できるかどうかをテストします。
 
@@ -108,7 +108,7 @@ summary: このドキュメントでは、 TiDB Cloud Dedicated クラスター�
 
     変更フィード名をクリックすると、チェックポイント、レプリケーションのレイテンシー、その他のメトリックなど、変更フィードに関する詳細が表示されます。
 
-11. シンクが作成された後、 [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)元の値（デフォルト値は`10m` ）に戻します。
+11. シンクが作成された後、 [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)元の値 (デフォルト値は`10m` ) に戻します。
 
     ```sql
     SET GLOBAL tidb_gc_life_time = '10m';

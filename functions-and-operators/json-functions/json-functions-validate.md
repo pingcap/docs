@@ -9,7 +9,7 @@ summary: JSON ドキュメントを検証する JSON関数について学習し�
 
 > **注記：**
 >
-> 現在、この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
+> 現在、この機能は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)クラスターでは利用できません。
 
 ## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-validation-functions.html#function_json-schema-valid">JSON_SCHEMA_VALID()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-validation-functions-html-function-json-schema-valid-json-schema-valid-a}
 

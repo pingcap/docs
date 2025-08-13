@@ -9,6 +9,10 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 このチュートリアルでは、Node.js 環境とエッジ環境で Drizzle とTiDB Cloudサーバーレス ドライバーを使用する方法について説明します。
 
+> **ヒント：**
+>
+> このドキュメントの手順は、 TiDB Cloud Starter クラスターに加えて、 TiDB Cloud Essential クラスターでも機能します。
+
 ## Node.js環境でDrizzleとTiDB Cloudサーバーレスドライバーを使用する {#use-drizzle-and-tidb-cloud-serverless-driver-in-node-js-environments}
 
 このセクションでは、Node.js 環境で Drizzle とTiDB Cloudサーバーレス ドライバーを使用する方法について説明します。
@@ -19,7 +23,7 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 -   [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
 -   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
--   TiDB Cloud Serverless クラスター。お持ちでない場合は、 [TiDB Cloud Serverless クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)ご利用ください。
+-   TiDB Cloud Starter クラスター。お持ちでない場合は、 [TiDB Cloud Starterクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)選択してください。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
@@ -69,7 +73,7 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲットのTiDB Cloud Serverless クラスターの名前をクリックして、その概要ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲットのTiDB Cloud Starter クラスターの名前をクリックして、その概要ページに移動します。
 
 2.  概要ページで、右上隅の**[接続]**をクリックし、 **[接続**先] ドロップダウン リストで`Serverless Driver`を選択して、[**パスワードの生成]**をクリックし、ランダム パスワードを作成します。
 
@@ -89,7 +93,7 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 ### ステップ3. Drizzleを使用してデータをクエリする {#step-3-use-drizzle-to-query-data}
 
-1.  TiDB Cloud Serverless クラスターにテーブルを作成します。
+1.  TiDB Cloud Starter クラスターにテーブルを作成します。
 
     [TiDB Cloudコンソールの SQL エディター](/tidb-cloud/explore-data-with-chat2query.md)使用するとSQL文を実行できます。以下に例を示します。
 
@@ -153,7 +157,7 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 -   エッジ環境を提供する[ヴェルセル](https://vercel.com/docs)アカウント。
 -   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
--   TiDB Cloud Serverless クラスター。お持ちでない場合は、 [TiDB Cloud Serverless クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)ご利用ください。
+-   TiDB Cloud Starter クラスター。お持ちでない場合は、 [TiDB Cloud Starterクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)選択してください。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
@@ -183,7 +187,7 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲットのTiDB Cloud Serverless クラスターの名前をクリックして、その概要ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲットのTiDB Cloud Starter クラスターの名前をクリックして、その概要ページに移動します。
 
 2.  概要ページで、右上隅の**[接続]**をクリックし、 **[接続**先] ドロップダウン リストで`Serverless Driver`を選択して、[**パスワードの生成]**をクリックし、ランダム パスワードを作成します。
 
@@ -197,7 +201,7 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 ### ステップ3. エッジ関数を作成する {#step-3-create-an-edge-function}
 
-1.  TiDB Cloud Serverless クラスターにテーブルを作成します。
+1.  TiDB Cloud Starter クラスターにテーブルを作成します。
 
     [TiDB Cloudコンソールの SQL エディター](/tidb-cloud/explore-data-with-chat2query.md)使用するとSQL文を実行できます。以下に例を示します。
 

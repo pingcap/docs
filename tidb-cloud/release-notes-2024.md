@@ -84,7 +84,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   新しいメトリック: Prometheus 統合に`tidbcloud_changefeed_checkpoint_ts`追加します。
 
-    この指標は、チェンジフィードのチェックポイントタイムスタンプを追跡します。これは、下流に正常に書き込まれた最大のTSO（Timestamp Oracle）を表します。利用可能な指標の詳細については、 [TiDB Cloud をPrometheus および Grafana と統合する (ベータ版)](/tidb-cloud/monitor-prometheus-and-grafana-integration.md#metrics-available-to-prometheus)参照してください。
+    この指標は、チェンジフィードのチェックポイントタイムスタンプを追跡します。これは、ダウンストリームに正常に書き込まれた最大のTSO（Timestamp Oracle）を表します。利用可能な指標の詳細については、 [TiDB Cloud をPrometheus および Grafana と統合する (ベータ版)](/tidb-cloud/monitor-prometheus-and-grafana-integration.md#metrics-available-to-prometheus)参照してください。
 
 ## 2024年10月22日 {#october-22-2024}
 
@@ -373,7 +373,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
     TiDB Cloud Serverlessは、様々なユーザーニーズに対応するため、無料かつスケーラブルなサービスプランを提供しています。初めてご利用になる場合でも、増大するアプリケーション需要に合わせて拡張する場合でも、これらのプランは必要な柔軟性と機能を提供します。
 
-    詳細については[クラスタプラン](/tidb-cloud/select-cluster-tier.md#cluster-plans)参照してください。
+    詳細については[クラスタプラン](/tidb-cloud/select-cluster-tier.md)参照してください。
 
 -   TiDB Cloud Serverless クラスターの使用量制限に達した際のスロットリング動作を変更しました。これにより、クラスターが使用量制限に達すると、新規接続の試行が直ちに拒否され、既存のオペレーションのサービスが中断されることはありません。
 

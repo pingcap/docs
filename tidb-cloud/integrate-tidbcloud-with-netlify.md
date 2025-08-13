@@ -24,7 +24,7 @@ NetlifyアカウントとCLIが必要です。お持ちでない場合は、以�
 
 TiDB Cloudのアカウントとクラスターが必要です。まだお持ちでない場合は、以下を参照して作成してください。
 
--   [TiDB Cloud Serverless クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
+-   [TiDB Cloud Starter またはTiDB Cloud Essential クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
 -   [TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
 
 1 つのTiDB Cloudクラスターは複数の Netlify サイトに接続できます。
@@ -33,7 +33,7 @@ TiDB Cloudのアカウントとクラスターが必要です。まだお持ち�
 
 TiDB Cloud Dedicated クラスターの場合、クラスターのトラフィックフィルターですべての IP アドレス（ `0.0.0.0/0`に設定）が接続に許可されていることを確認してください。これは、Netlify デプロイメントが動的 IP アドレスを使用するためです。
 
-TiDB Cloud Serverless クラスターは、デフォルトですべての IP アドレスの接続を許可するため、トラフィック フィルターを構成する必要はありません。
+TiDB Cloud Starter およびTiDB Cloud Essential クラスターは、デフォルトですべての IP アドレスの接続を許可するため、トラフィック フィルターを構成する必要はありません。
 
 ## ステップ1. サンプルプロジェクトと接続文字列を取得する {#step-1-get-the-example-project-and-the-connection-string}
 
@@ -52,7 +52,7 @@ TiDB Cloud Serverless クラスターは、デフォルトですべての IP ア
 
 ### TiDB Cloud接続文字列を取得する {#get-the-tidb-cloud-connection-string}
 
-TiDB Cloud Serverless クラスターの場合、接続文字列は[TiDB CloudCLI](/tidb-cloud/cli-reference.md)または[TiDB Cloudコンソール](https://tidbcloud.com/)から取得できます。
+TiDB Cloud Starter またはTiDB Cloud Essential クラスターの場合、接続文字列は[TiDB CloudCLI](/tidb-cloud/cli-reference.md)または[TiDB Cloudコンソール](https://tidbcloud.com/)から取得できます。
 
 TiDB Cloud Dedicated クラスターの場合、接続文字列はTiDB Cloudコンソールからのみ取得できます。
 

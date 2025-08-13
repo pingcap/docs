@@ -24,7 +24,7 @@ TiDB Cloud は、 2023 年 4 月 11 日から New Relic 統合 (ベータ版) �
 
 ## 制限 {#limitation}
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでは New Relic 統合を使用できません。
+-   [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)または[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスターでは New Relic 統合を使用できません。
 
 -   クラスターのステータスが**CREATING** 、 **RESTORING** 、 **PAUSED** 、または**RESUMING**の場合、New Relic 統合は使用できません。
 

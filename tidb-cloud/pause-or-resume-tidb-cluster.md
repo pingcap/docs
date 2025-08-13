@@ -13,7 +13,7 @@ TiDB Cloudでは常時稼働していないTiDB Cloud Dedicated クラスター�
 
 > **注記：**
 >
-> [TiDB Cloudサーバーレス クラスター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)一時停止することはできません。
+> [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)または[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスターを一時停止することはできません。
 
 ## 制限事項 {#limitations}
 

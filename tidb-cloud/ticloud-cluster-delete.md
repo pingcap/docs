@@ -5,7 +5,7 @@ summary: ticloud serverless delete` のリファレンス。
 
 # ticloud サーバーレス削除 {#ticloud-serverless-delete}
 
-プロジェクトからTiDB Cloud Serverless クラスターを削除します。
+プロジェクトからTiDB Cloud Starter またはTiDB Cloud Essential クラスターを削除します。
 
 ```shell
 ticloud serverless delete [flags]
@@ -19,13 +19,13 @@ ticloud serverless rm [flags]
 
 ## 例 {#examples}
 
-対話モードでTiDB Cloud Serverless クラスターを削除します。
+対話モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスターを削除します。
 
 ```shell
 ticloud serverless delete
 ```
 
-非対話型モードでTiDB Cloud Serverless クラスターを削除します。
+非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスターを削除します。
 
 ```shell
 ticloud serverless delete --cluster-id <cluster-id>

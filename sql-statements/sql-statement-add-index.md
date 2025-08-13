@@ -11,6 +11,14 @@ summary: TiDB データベースの ADD INDEX の使用法の概要。
 >
 > [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)使用すると、このステートメントの操作を高速化できます。
 
+<CustomContent platform="tidb-cloud">
+
+> **注記：**
+>
+> 4つのvCPUを搭載したクラスタ[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)の場合、インデックス作成時にリソース制限がクラスタの安定性に影響を与えないように、 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)手動で無効にすることをお勧めします。この設定を無効にすると、トランザクションを使用してインデックスを作成できるようになり、クラスタ全体への影響が軽減されます。
+
+</CustomContent>
+
 <CustomContent platform="tidb">
 
 > **警告：**
