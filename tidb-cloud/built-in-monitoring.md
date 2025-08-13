@@ -60,6 +60,9 @@ The following sections illustrate the metrics on the **Metrics** page for TiDB C
 | Average / P99 Append Log Duration | avg, 99 | The average or the 99th percentile duration consumed by Raft to append logs. |
 | Average / P99 Commit Log Duration | avg, 99 | The average or the 99th percentile duration consumed by Raft to commit logs. |
 | Average / P99 Apply Log Duration | avg, 99 | The average or the 99th percentile duration consumed by Raft to apply logs. |
+| Affected Rows | {SQL type} | Rows processed per second by SQL type. |
+| Leader Count | {instance} | Number of Raft leader Regions hosted by TiKV nodes. |
+| Region Count | {instance} | Total data Regions managed by TiKV nodes. |
 
 ### Server
 
