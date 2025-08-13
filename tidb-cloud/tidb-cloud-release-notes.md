@@ -18,6 +18,19 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     Starting August 12, 2025 (PDT), your existing Serverless clusters will appear as Starter in the [TiDB Cloud console](https://tidbcloud.com). Your connection strings, endpoints, and data will remain unchanged, so you do not need to make any code changes or schedule downtime.
 
+- TiDB Cloud Essential preview on AliCloud
+
+    We are documenting the availability of TiDB Cloud Essential on AliCloud, which has been in a limited public preview since May 2025. This might be the first time many customers officially see Essential in our release notes. At this stage, Essential on Alibaba Cloud offers a feature set aligned with Starter, delivered on Alibaba Cloud Singapore region.
+
+    **How to try it:**
+
+    - From the [TiDB Cloud console](https://tidbcloud.com/), choose AliCloud as the cloud provider during cluster creation to see the Essential option.
+    - You can also access Essential via the [Alibaba Cloud Marketplace listing](https://www.alibabacloud.com/en/marketplace/tidb?_p_lc=1).
+
+    Next, we plan to expand region coverage on Alibaba Cloud and add AWS support. Capabilities and availability will continue to evolve as we approach the public preview around end of September.
+
+    If you try Essential on Alibaba Cloud during this preview, you can share feedback through our web console or join our community on [Slack](https://tidbcommunity.slack.com/archives/CH7TTLL7P) or [Discord](https://discord.gg/ukhXbn69Nx) so we can refine the experience ahead of the public preview.
+
 - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) on Google Cloud now supports more than 8 Google Private Service Connect (PSC) connections per region by optimizing the NAT subnet allocation strategy.
 
     For more information, see [Connect to a TiDB Cloud Dedicated Cluster via Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md#restrictions).
