@@ -18,10 +18,10 @@ This section describes the basic information of the upstream cluster, DM, and do
 The environment information of the upstream cluster is as follows:
 
 - MySQL version: MySQL v5.7.18
-- MySQL instance 1:
+- MySQL instance1:
     - schema `store_01` and table `[sale_01, sale_02]`
     - schema `store_02` and table `[sale_01, sale_02]`
-- MySQL instance 2:
+- MySQL instance2:
     - schema `store_01`and table `[sale_01, sale_02]`
     - schema `store_02`and table `[sale_01, sale_02]`
 - Table structure:
