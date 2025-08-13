@@ -12,15 +12,19 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Rename "TiDB Cloud Serverless" to "**TiDB Cloud Starter**".
+- **TiDB Cloud Starter**
 
-    The auto-scaling entry plan is now named "TiDB Cloud Starter" to better reflect its role for new users. All features, pricing, and the free usage quota remain unchanged.
+    - Rename "TiDB Cloud Serverless" to "TiDB Cloud Starter".
 
-    Starting August 12, 2025 (PDT), your existing Serverless clusters will appear as Starter in the [TiDB Cloud console](https://tidbcloud.com). Your connection strings, endpoints, and data will remain unchanged, so you do not need to make any code changes or schedule downtime.
+        The auto-scaling entry plan is now named "TiDB Cloud Starter" to better reflect its role for new users. All features, pricing, and the free usage quota remain unchanged.
 
-- TiDB Cloud Starter is in preview on Alibaba Cloud.
+        Starting August 12, 2025 (PDT), your existing Serverless clusters will appear as Starter in the [TiDB Cloud console](https://tidbcloud.com). Your connection strings, endpoints, and data will remain unchanged, so you do not need to make any code changes or schedule downtime.
 
-- **TiDB Cloud Essential** is in preview on Alibaba Cloud.
+    - TiDB Cloud Starter is in preview on Alibaba Cloud.
+
+- **TiDB Cloud Essential**
+
+    **TiDB Cloud Essential** is in preview on Alibaba Cloud.
 
     TiDB Cloud Essential on Alibaba Cloud has been in a limited public preview since May 2025. This is the first time Essential is officially included in the release notes. At this stage, Essential on Alibaba Cloud offers a feature set aligned with Starter, available in the Alibaba Cloud Singapore region.
 
@@ -33,16 +37,18 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     If you try Essential on Alibaba Cloud during this preview, you can share feedback through our web console or join our community on [Slack](https://tidbcommunity.slack.com/archives/CH7TTLL7P) or [Discord](https://discord.gg/ukhXbn69Nx).
 
-- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) on Google Cloud now supports more than 8 Google Private Service Connect (PSC) connections per region by optimizing the NAT subnet allocation strategy.
+- **TiDB Cloud Dedicated**
 
-    For more information, see [Connect to a TiDB Cloud Dedicated Cluster via Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md#restrictions).
+    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) on Google Cloud now supports more than 8 Google Private Service Connect (PSC) connections per region by optimizing the NAT subnet allocation strategy.
 
-- Optimize [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) metrics:
+        For more information, see [Connect to a TiDB Cloud Dedicated Cluster via Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md#restrictions).
 
-    - In the [**Advanced**](/tidb-cloud/built-in-monitoring.md#advanced) category, add the **Affected Rows**, **Leader Count**, and **Region Count** metrics to improve diagnostics.
-    - In the [**Server**](/tidb-cloud/built-in-monitoring.md#server) category, refine the **TiKV IO Bps** metric to improve accuracy and consistency.
+    - Optimize [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) metrics:
 
-  For more information, see [TiDB Cloud Built-in Metrics](/tidb-cloud/built-in-monitoring.md).
+        - In the [**Advanced**](/tidb-cloud/built-in-monitoring.md#advanced) category, add the **Affected Rows**, **Leader Count**, and **Region Count** metrics to improve diagnostics.
+        - In the [**Server**](/tidb-cloud/built-in-monitoring.md#server) category, refine the **TiKV IO Bps** metric to improve accuracy and consistency.
+
+      For more information, see [TiDB Cloud Built-in Metrics](/tidb-cloud/built-in-monitoring.md).
 
 **API changes**
 
