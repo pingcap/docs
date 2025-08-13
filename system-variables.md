@@ -4894,7 +4894,7 @@ SHOW WARNINGS;
 
 > **Warning:**
 >
-> This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 - Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
