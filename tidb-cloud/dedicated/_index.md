@@ -20,13 +20,11 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 <LearningPath label="试用" icon="cloud5">
 
-[试用 TiDB Cloud Serverless](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-quickstart)
+[试用 TiDB Cloud](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-quickstart)
 
 [试用 TiDB + AI](https://docs.pingcap.com/zh/tidbcloud/vector-search-get-started-using-python)
 
 [试用 HTAP](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-htap-quickstart)
-
-[试用 TiDB Cloud CLI](https://docs.pingcap.com/zh/tidbcloud/get-started-with-cli)
 
 [PoC](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-poc)
 
@@ -60,8 +58,6 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 [使用 API (Beta)](https://docs.pingcap.com/zh/tidbcloud/api-overview)
 
-[使用 TiDB Cloud CLI](https://docs.pingcap.com/zh/tidbcloud/get-started-with-cli)
-
 </LearningPath>
 
 <LearningPath label="迁移" icon="cloud3">
@@ -72,15 +68,11 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 [从 Amazon Aurora MySQL 迁移](https://docs.pingcap.com/zh/tidbcloud/migrate-from-aurora-bulk-import)
 
-[从 Amazon RDS for Oracle 迁移](https://docs.pingcap.com/zh/tidbcloud/migrate-from-oracle-using-aws-dms)
-
 [从 TiDB Self-Managed 迁移](https://docs.pingcap.com/zh/tidbcloud/migrate-from-op-tidb)
 
 [从 CSV 文件导入](https://docs.pingcap.com/zh/tidbcloud/import-csv-files)
 
 [从 Apache Parquet 文件导入](https://docs.pingcap.com/zh/tidbcloud/import-csv-files)
-
-[使用 MySQL CLI 导入](https://docs.pingcap.com/zh/tidbcloud/import-with-mysql-cli)
 
 </LearningPath>
 
@@ -93,7 +85,6 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 [内置告警](https://docs.pingcap.com/zh/tidbcloud/monitor-built-in-alerting)
 
 </LearningPath>
-
 
 <LearningPath label="调优" icon="tidb-cloud-tune">
 
@@ -129,7 +120,7 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 [发票](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing#invoices)
 
-[积分](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing#credits)
+[Credits](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing#credits)
 
 </LearningPath>
 
