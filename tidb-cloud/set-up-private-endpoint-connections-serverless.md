@@ -1,11 +1,11 @@
 ---
-title: Connect to {{{ .starter }}} via Private Endpoint
+title: Connect to {{{ .starter }}} via AWS PrivateLink
 summary: Learn how to connect to your TiDB Cloud cluster via private endpoint.
 ---
 
-# Connect to {{{ .starter }}} via Private Endpoint
+# Connect to {{{ .starter }}} via AWS PrivateLink
 
-This document describes how to connect to your {{{ .starter }}} cluster via private endpoint.
+This document describes how to connect to your {{{ .starter }}} cluster via AWS PrivateLink.
 
 > **Tip:**
 >
@@ -28,7 +28,7 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 ## Restrictions
 
-- Currently, TiDB Cloud supports private endpoint connection to {{{ .starter }}} only when the endpoint service is hosted in AWS. If the service is hosted in Google Cloud, the private endpoint is not applicable.
+- Currently, TiDB Cloud supports AWS PrivateLink connections to {{{ .starter }}} only when the endpoint service is hosted in AWS. If the service is hosted in other cloud providers, the AWS PrivateLink connection is not applicable.
 - Private endpoint connection across regions is not supported.
 
 ## Prerequisites

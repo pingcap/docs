@@ -166,7 +166,7 @@ TiDB Cloud ensures secure cluster connectivity and data transmission through rob
 
 - Enables secure connectivity for SQL clients within your Virtual Private Cloud (VPC) to TiDB Cloud Dedicated clusters.
 
-- Supported by [AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md), [Azure Private Link](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md), and [Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
+- Supported by [AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md), [Azure Private Link](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md), [Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md), and [Alibaba Cloud Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md).
 
 **Best practices:** Use private endpoints in production to minimize public exposure and review configurations regularly.
 
@@ -174,7 +174,10 @@ TiDB Cloud ensures secure cluster connectivity and data transmission through rob
 
 - Encrypts communication between clients and servers to secure data transmission.
 
-- Setup guides available for both [Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md) and [Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md) clusters.
+- Setup guides:
+
+    - [TLS Connections to {{{ .starter }}} or Essential](/tidb-cloud/secure-connections-to-serverless-clusters.md)
+    - [TLS Connections to TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
 
 **Best practices:** Ensure TLS certificates are current and rotate them periodically.
 
@@ -204,7 +207,7 @@ TiDB Cloud safeguards static data with advanced encryption capabilities, ensurin
 
 - Encrypts static data and backups with CMEK keys when enabled.
 
-- For TiDB Cloud Dedicated clusters without CMEK, TiDB Cloud uses escrow keys; {{{ .starter }}} clusters rely exclusively on escrow keys.
+- For TiDB Cloud Dedicated clusters without CMEK, TiDB Cloud uses escrow keys; {{{ .starter }}} and {{{ .essential }}} clusters rely exclusively on escrow keys.
 
 **Best practices:**
 

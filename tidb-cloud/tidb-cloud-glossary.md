@@ -27,7 +27,7 @@ ACID refers to the four key properties of a transaction: atomicity, consistency,
 
 Chat2Query is an AI-powered feature integrated into SQL Editor that assists users in generating, debugging, or rewriting SQL queries using natural language instructions. For more information, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
 
-In addition, TiDB Cloud provides a Chat2Query API for {{{ .starter }}} clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+In addition, TiDB Cloud provides a Chat2Query API for {{{ .starter }}} clusters hosted on AWS. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
 ### Credit
 
@@ -147,7 +147,7 @@ A Request Unit (RU) is a unit of measure used to represent the amount of resourc
 
 ### Spending limit
 
-Spending limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that enables you to set a budget for your {{{ .starter }}} clusters. For [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan), the spending limit must be set to a minimum of $0.01. Also, the scalable cluster can have a free quota if it meets the qualifications. The scalable cluster with a free quota will consume the free quota first.
+[Spending limit](/tidb-cloud/manage-serverless-spend-limit.md) refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that enables you to set a budget for your {{{ .starter }}} clusters. If the spending limit is set to 0, the cluster remains free. If the spending limit is greater than 0, you need to add a credit card.
 
 ## T
 
