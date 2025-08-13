@@ -18,13 +18,15 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     Starting August 12, 2025 (PDT), your existing Serverless clusters will appear as Starter in the [TiDB Cloud console](https://tidbcloud.com). Your connection strings, endpoints, and data will remain unchanged, so you do not need to make any code changes or schedule downtime.
 
-- TiDB Cloud Starter and **TiDB Cloud Essential** are in preview on Alibaba Cloud. 
+- TiDB Cloud Starter is in preview on Alibaba Cloud.
 
-    TiDB Cloud Starter and TiDB Cloud Essential on Alibaba Cloud have been in a limited public preview since May 2025. This is the first time Essential is officially included in the release notes. At this stage, Essential on Alibaba Cloud offers a feature set aligned with Starter, available in the Alibaba Cloud Singapore region.
+- **TiDB Cloud Essential** are in preview on Alibaba Cloud.
+
+    TiDB Cloud Essential on Alibaba Cloud has been in a limited public preview since May 2025. This is the first time Essential is officially included in the release notes. At this stage, Essential on Alibaba Cloud offers a feature set aligned with Starter, available in the Alibaba Cloud Singapore region.
 
     How to try it:
 
-    - From the [TiDB Cloud console](https://tidbcloud.com/), choose Alibaba Cloud as the cloud provider during cluster creation to see the Essential option.
+    - From the [TiDB Cloud console](https://tidbcloud.com/), choose Alibaba Cloud as the cloud provider  when creating a cluster to view the Essential option.
     - You can also access Essential via the [Alibaba Cloud Marketplace listing](https://www.alibabacloud.com/en/marketplace/tidb?_p_lc=1).
 
   Next, we plan to expand region coverage on Alibaba Cloud and add AWS support.
