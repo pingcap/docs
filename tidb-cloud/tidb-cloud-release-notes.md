@@ -27,7 +27,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - From the [TiDB Cloud console](https://tidbcloud.com/), choose AliCloud as the cloud provider during cluster creation to see the Essential option.
     - You can also access Essential via the [Alibaba Cloud Marketplace listing](https://www.alibabacloud.com/en/marketplace/tidb?_p_lc=1).
 
-    Next, we plan to expand region coverage on Alibaba Cloud and add AWS support. Capabilities and availability will continue to evolve as we approach the public preview around end of September.
+  Next, we plan to expand region coverage on Alibaba Cloud and add AWS support. Capabilities and availability will continue to evolve as we approach the public preview around end of September.
 
     If you try Essential on Alibaba Cloud during this preview, you can share feedback through our web console or join our community on [Slack](https://tidbcommunity.slack.com/archives/CH7TTLL7P) or [Discord](https://discord.gg/ukhXbn69Nx) so we can refine the experience ahead of the public preview.
 
