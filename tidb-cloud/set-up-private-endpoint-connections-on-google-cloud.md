@@ -34,7 +34,12 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 - Only the `Organization Owner` and `Project Owner` roles can create Google Cloud Private Service Connect endpoints.
 - Each TiDB cluster can handle connections from up to 10 endpoints.
 - Each Google Cloud project can have up to 10 endpoints connecting to a TiDB Cluster.
-- You can create up to 8 TiDB Cloud Dedicated clusters hosted on Google Cloud in a project with the endpoint service configured.
+- Starting August 12, 2025, the maximum number of Google Private Service Connect (PSC) connections you can create per region for TiDB Cloud Dedicated clusters on Google Cloud depends on the NAT subnet CIDR block size:
+    - `/20`: up to 7 PSC connections per region
+    - `/19`: up to 23 PSC connections per region
+    - `/18`: up to 55 PSC connections per region
+    - `/17`: up to 119 PSC connections per region
+    - `/16`: up to 247 PSC connections per region
 - The private endpoint and the TiDB cluster to be connected must be located in the same region.
 - Egress firewall rules must permit traffic to the internal IP address of the endpoint. The [implied allow egress firewall rule](https://cloud.google.com/firewall/docs/firewalls#default_firewall_rules) permits egress to any destination IP address.
 - If you have created egress deny firewall rules in your VPC network, or if you have created hierarchical firewall policies that modify the implied allowed egress behavior, access to the endpoint might be affected. In this case, you need to create a specific egress allow firewall rule or policy to permit traffic to the internal destination IP address of the endpoint.
