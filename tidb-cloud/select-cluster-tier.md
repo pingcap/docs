@@ -1,14 +1,14 @@
 ---
-title: 选择集群套餐
-summary: 了解如何在 TiDB Cloud 上选择集群套餐。
+title: 选择你的集群规格
+summary: 了解如何在 TiDB Cloud 上选择你的集群规格。
 aliases: ['/tidbcloud/developer-tier-cluster']
 ---
 
-# 选择集群套餐
+# 选择你的集群规格
 
-集群套餐决定了集群的吞吐量和性能。
+集群规格决定了你的集群的吞吐量和性能。
 
-TiDB Cloud 提供以下两种集群套餐选项。在创建集群之前，你需要考虑哪个选项更适合你的需求。
+TiDB Cloud 提供以下两种集群规格选项。在创建集群之前，你需要考虑哪种选项更适合你的需求。
 
 - [TiDB Cloud Serverless](#tidb-cloud-serverless)
 - [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
@@ -16,87 +16,87 @@ TiDB Cloud 提供以下两种集群套餐选项。在创建集群之前，你需
 ## TiDB Cloud Serverless
 
 <!--To be confirmed-->
-TiDB Cloud Serverless 是一个完全托管的多租户 TiDB 产品。它提供即时、自动扩展的 MySQL 兼容数据库，并提供慷慨的免费套餐，超出免费限制后按使用量计费。
+TiDB Cloud Serverless 是一种全托管的多租户 TiDB 服务。它提供了一个即时、自动弹性扩缩的 MySQL 兼容数据库，并在超出免费额度后，采用按量计费模式，同时提供了丰富的免费额度。
 
 ### 集群方案
 
-TiDB Cloud Serverless 提供两种服务方案以满足不同用户的需求。无论你是刚刚开始使用，还是需要扩展以满足不断增长的应用程序需求，这些服务方案都能提供你所需的灵活性和能力。
+TiDB Cloud Serverless 提供两种服务方案，以满足不同用户的需求。无论你是刚刚开始使用，还是需要扩展以应对不断增长的应用需求，这些服务方案都能为你提供所需的灵活性和能力。
 
 #### 免费集群方案
 
-免费集群方案非常适合刚开始使用 TiDB Cloud Serverless 的用户。它为开发者和小型团队提供以下基本功能：
+免费集群方案非常适合刚开始使用 TiDB Cloud Serverless 的用户。它为开发者和小型团队提供以下基本特性：
 
-- **免费**：此方案完全免费，无需信用卡即可开始使用。
-- **存储**：提供初始 5 GiB 的行存储和 5 GiB 的列存储。
-- **请求单位**：包含 50 百万[请求单位 (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) 用于数据库操作。
-- **轻松升级**：随着需求增长，可以平滑过渡到[可扩展集群方案](#可扩展集群方案)。
+- **No cost**：该方案完全免费，无需信用卡即可开始使用。
+- **Storage**：提供初始 5 GiB 的行存储和 5 GiB 的列存储。
+- **Request Units**：包含 5000 万 [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) 用于数据库操作。
+- **Easy upgrade**：当你的需求增长时，可以平滑升级到 [scalable cluster plan](#scalable-cluster-plan)。
 
 #### 可扩展集群方案
 
-对于工作负载不断增长并需要实时扩展的应用程序，可扩展集群方案通过以下功能提供灵活性和性能，以跟上你的业务增长：
+对于需要实时扩展以应对不断增长的工作负载的应用，可扩展集群方案提供了灵活性和性能，帮助你的业务持续增长，具备以下特性：
 
-- **增强功能**：包含免费集群方案的所有功能，同时具备处理更大和更复杂工作负载的能力，以及高级安全功能。
-- **自动扩展**：自动调整存储和计算资源，以高效满足不断变化的工作负载需求。
-- **可预测定价**：虽然此方案需要信用卡，但你只需为使用的资源付费，确保成本效益的可扩展性。
+- **Enhanced capabilities**：包含免费集群方案的所有能力，并具备处理更大、更复杂工作负载的能力，以及高级安全特性。
+- **Automatic scaling**：自动调整存储和计算资源，以高效应对变化的工作负载需求。
+- **Predictable pricing**：虽然该方案需要信用卡，但你只需为实际使用的资源付费，确保扩展的性价比。
 
 ### 使用配额
 
-对于 TiDB Cloud 中的每个组织，默认情况下你最多可以创建五个[免费集群](#免费集群方案)。要创建更多 TiDB Cloud Serverless 集群，你需要添加信用卡并创建[可扩展集群](#可扩展集群方案)。
+在 TiDB Cloud 的每个组织中，默认最多可以创建 5 个 [免费集群](#free-cluster-plan)。如需创建更多 TiDB Cloud Serverless 集群，你需要添加信用卡并创建 [可扩展集群](#scalable-cluster-plan) 进行使用。
 
-对于你组织中的前五个 TiDB Cloud Serverless 集群，无论是免费还是可扩展集群，TiDB Cloud 都为每个集群提供以下免费使用配额：
+对于组织中的前 5 个 TiDB Cloud Serverless 集群（无论是免费还是可扩展），TiDB Cloud 为每个集群提供如下免费使用配额：
 
 - 行存储：5 GiB
 - 列存储：5 GiB
-- 请求单位 (RUs)：每月 50 百万 RUs
+- Request Units (RUs)：每月 5000 万 RUs
 
-请求单位 (RU) 是用于表示单个数据库请求消耗的资源量的度量单位。请求消耗的 RU 数量取决于各种因素，如操作类型或正在检索或修改的数据量。
+Request Unit (RU) 是用于衡量单次数据库请求所消耗资源量的单位。每个请求消耗的 RU 数量取决于多种因素，例如操作类型或检索/修改的数据量。
 
-一旦集群达到其使用配额，它会立即拒绝任何新的连接尝试，直到你[增加配额](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)或在新月份开始时重置使用量。在达到配额之前建立的现有连接将保持活动状态，但会经历限流。例如，当免费集群的行存储超过 5 GiB 时，集群会自动限制任何新的连接尝试。
+一旦集群达到其使用配额，将立即拒绝任何新的连接尝试，直到你 [增加配额](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) 或在新月开始时重置使用量。已建立的连接在达到配额前会保持活跃，但会受到限流。例如，当免费集群的行存储超过 5 GiB 时，集群会自动限制任何新的连接尝试。
 
-要了解不同资源（包括读取、写入、SQL CPU 和网络出口）的 RU 消耗、定价详情和限流信息，请参见 [TiDB Cloud Serverless 定价详情](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)。
+如需了解不同资源（包括读、写、SQL CPU 和网络出口）的 RU 消耗、定价详情及限流信息，请参见 [TiDB Cloud Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)。
 
 ### 用户名前缀
 
 <!--Important: Do not update the section name "User name prefix" because this section is referenced by TiDB backend error messages.-->
 
-对于每个 TiDB Cloud Serverless 集群，TiDB Cloud 生成一个唯一的前缀以区分它与其他集群。
+对于每个 TiDB Cloud Serverless 集群，TiDB Cloud 会生成一个唯一的前缀，以便与其他集群区分。
 
-每当你使用或设置数据库用户名时，你必须在用户名中包含前缀。例如，假设你的集群前缀是 `3pTAoNNegb47Uc8`。
+每当你使用或设置数据库用户名时，必须在用户名中包含该前缀。例如，假设你的集群前缀为 `3pTAoNNegb47Uc8`。
 
-- 要连接到你的集群：
+- 连接到你的集群：
 
     ```shell
     mysql -u '3pTAoNNegb47Uc8.root' -h <host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_root_path> -p
     ```
 
-    > **注意：**
+    > **Note:**
     >
-    > TiDB Cloud Serverless 需要 TLS 连接。要在你的系统上找到 CA 根路径，请参见[根证书默认路径](/tidb-cloud/secure-connections-to-serverless-clusters.md#root-certificate-default-path)。
+    > TiDB Cloud Serverless 要求使用 TLS 连接。要查找你系统上的 CA 根证书路径，请参见 [Root certificate default path](/tidb-cloud/secure-connections-to-serverless-clusters.md#root-certificate-default-path)。
 
-- 要创建数据库用户：
+- 创建数据库用户：
 
     ```sql
     CREATE USER '3pTAoNNegb47Uc8.jeffrey';
     ```
 
-要获取集群的前缀，请执行以下步骤：
+获取你的集群前缀，请按照以下步骤操作：
 
-1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面。
-2. 点击目标集群的名称进入其概览页面，然后点击右上角的**连接**。此时会显示一个连接对话框。
+1. 进入 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+2. 点击目标集群名称进入其概览页面，然后点击右上角的 **Connect**。此时会弹出连接对话框。
 3. 在对话框中，从连接字符串中获取前缀。
 
-### TiDB Cloud Serverless 特殊条款和条件
+### TiDB Cloud Serverless 特殊条款与条件
 
-某些 TiDB Cloud 功能在 TiDB Cloud Serverless 上部分支持或不支持。详细信息请参见 [TiDB Cloud Serverless 限制](/tidb-cloud/serverless-limitations.md)。
+部分 TiDB Cloud 功能在 TiDB Cloud Serverless 上仅部分支持或不支持。详情请参见 [TiDB Cloud Serverless Limitations](/tidb-cloud/serverless-limitations.md)。
 
 ## TiDB Cloud Dedicated
 
-TiDB Cloud Dedicated 适用于生产环境，具有跨可用区高可用性、水平扩展和 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) 的优势。
+TiDB Cloud Dedicated 适用于生产环境，具备跨可用区高可用性、水平扩展和 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) 等优势。
 
-对于 TiDB Cloud Dedicated 集群，你可以根据业务需求轻松自定义 TiDB、TiKV 和 TiFlash 的集群大小。对于每个 TiKV 节点和 TiFlash 节点，节点上的数据会在不同的可用区中复制和分布，以实现[高可用性](/tidb-cloud/high-availability-with-multi-az.md)。
+对于 TiDB Cloud Dedicated 集群，你可以根据业务需求自定义 TiDB、TiKV 和 TiFlash 的集群规模。对于每个 TiKV 节点和 TiFlash 节点，节点上的数据会在不同可用区进行复制和分布，以实现 [高可用性](/tidb-cloud/high-availability-with-multi-az.md)。
 
-要创建 TiDB Cloud Dedicated 集群，你需要[添加付款方式](/tidb-cloud/tidb-cloud-billing.md#payment-method)或[申请概念验证 (PoC) 试用](/tidb-cloud/tidb-cloud-poc.md)。
+要创建 TiDB Cloud Dedicated 集群，你需要 [添加支付方式](/tidb-cloud/tidb-cloud-billing.md#payment-method) 或 [申请 PoC（概念验证）试用](/tidb-cloud/tidb-cloud-poc.md)。
 
-> **注意：**
+> **Note:**
 >
-> 集群创建后，你无法减少节点存储。
+> 集群创建后，节点存储空间无法减少。

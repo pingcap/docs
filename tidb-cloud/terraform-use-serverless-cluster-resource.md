@@ -1,32 +1,32 @@
 ---
-title: Use TiDB Cloud Serverless Cluster Resource
-summary: Learn how to use the TiDB Cloud Serverless cluster resource to create and modify a TiDB Cloud Serverless cluster.
+title: 使用 TiDB Cloud Serverless 集群资源
+summary: 了解如何使用 TiDB Cloud Serverless 集群资源来创建和修改 TiDB Cloud Serverless 集群。
 ---
 
-# Use TiDB Cloud Serverless Cluster Resource
+# 使用 TiDB Cloud Serverless 集群资源
 
-This document describes how to manage a [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster with the `tidbcloud_serverless_cluster` resource.
+本文档介绍如何使用 `tidbcloud_serverless_cluster` 资源管理 [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 集群。
 
-In addition, you will also learn how to get the necessary information with the `tidbcloud_projects` data source.
+此外，你还将学习如何通过 `tidbcloud_projects` 数据源获取所需的信息。
 
-The features of the `tidbcloud_serverless_cluster` resource include the following:
+`tidbcloud_serverless_cluster` 资源的功能包括：
 
-- Create TiDB Cloud Serverless clusters.
-- Modify TiDB Cloud Serverless clusters.
-- Import TiDB Cloud Serverless clusters.
-- Delete TiDB Cloud Serverless clusters.
+- 创建 TiDB Cloud Serverless 集群。
+- 修改 TiDB Cloud Serverless 集群。
+- 导入 TiDB Cloud Serverless 集群。
+- 删除 TiDB Cloud Serverless 集群。
 
-## Prerequisites
+## 前置条件
 
-- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
+- [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 或更高版本。
 
-## Get project IDs using the `tidbcloud_projects` data source
+## 使用 `tidbcloud_projects` 数据源获取项目 ID
 
-Each TiDB cluster belongs to a project. Before creating a TiDB Cloud Serverless cluster, you need to obtain the ID of the project where you want to create the cluster. If no `project_id` is specified, the default project will be used.
+每个 TiDB 集群都属于一个项目。在创建 TiDB Cloud Serverless 集群之前，你需要获取要创建集群的项目 ID。如果未指定 `project_id`，则会使用默认项目。
 
-To retrieve the information about all available projects, use the `tidbcloud_projects` data source as follows:
+要检索所有可用项目的信息，可以按如下方式使用 `tidbcloud_projects` 数据源：
 
-1. In the `main.tf` file created when you [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md), add the `data` and `output` blocks as follows:
+1. 在你 [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) 时创建的 `main.tf` 文件中，添加如下的 `data` 和 `output` 块：
 
     ```
     terraform {
@@ -52,21 +52,21 @@ To retrieve the information about all available projects, use the `tidbcloud_pro
     }
     ```
 
-    - Use the `data` block to define the data source of TiDB Cloud, including the data source type and the data source name.
+    - 使用 `data` 块定义 TiDB Cloud 的数据源，包括数据源类型和数据源名称。
 
-        - To use the projects data source, set the data source type as `tidbcloud_projects`.
-        - For the data source name, you can define it as needed. For example, `"example_project"`.
-        - For the `tidbcloud_projects` data source, you can use the `page` and `page_size` attributes to limit the maximum number of projects you want to check.
+        - 若要使用项目数据源，将数据源类型设置为 `tidbcloud_projects`。
+        - 数据源名称可以根据需要自定义，例如 `"example_project"`。
+        - 对于 `tidbcloud_projects` 数据源，可以使用 `page` 和 `page_size` 属性限制你想要查看的最大项目数量。
 
-    - Use the `output` block to define the data source information to be displayed in the output, and expose the information for other Terraform configurations to use.
+    - 使用 `output` 块定义要在输出中显示的数据源信息，并将信息暴露给其他 Terraform 配置使用。
 
-        The `output` block works similarly to returned values in programming languages. See [Terraform documentation](https://www.terraform.io/language/values/outputs) for more details.
+        `output` 块的作用类似于编程语言中的返回值。更多详情请参见 [Terraform 文档](https://www.terraform.io/language/values/outputs)。
 
-    To get all the available configurations for the resources and data sources, see the [Terraform provider configuration documentation](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
+    要获取所有资源和数据源的可用配置，请参见 [Terraform provider 配置文档](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)。
 
-2. Run the `terraform apply` command to apply the configurations. You need to type `yes` at the confirmation prompt to proceed.
+2. 运行 `terraform apply` 命令以应用配置。你需要在确认提示时输入 `yes` 以继续。
 
-    To skip the prompt, use `terraform apply --auto-approve`:
+    若要跳过提示，可以使用 `terraform apply --auto-approve`：
 
     ```shell
     $ terraform apply --auto-approve
@@ -117,17 +117,17 @@ To retrieve the information about all available projects, use the `tidbcloud_pro
     ])
     ```
 
-Now, you can get all the available projects from the output. Copy one of the project IDs that you need.
+现在，你可以从输出中获取所有可用项目。复制你需要的项目 ID。
 
-## Create a TiDB Cloud Serverless cluster
+## 创建 TiDB Cloud Serverless 集群
 
-You can create a TiDB Cloud Serverless cluster using the `tidbcloud_serverless_cluster` resource.
+你可以使用 `tidbcloud_serverless_cluster` 资源来创建 TiDB Cloud Serverless 集群。
 
-The following example shows how to create a TiDB Cloud Serverless cluster.
+以下示例展示了如何创建一个 TiDB Cloud Serverless 集群。
 
-1. Create a directory for the cluster and enter it.
+1. 为集群创建一个目录并进入该目录。
 
-2. Create a `cluster.tf` file:
+2. 创建一个 `cluster.tf` 文件：
 
     ```
     terraform {
@@ -155,14 +155,14 @@ The following example shows how to create a TiDB Cloud Serverless cluster.
     }
     ```
 
-    Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
+    使用 `resource` 块定义 TiDB Cloud 的资源，包括资源类型、资源名称和资源详情。
 
-    - To use the TiDB Cloud Serverless cluster resource, set the resource type as `tidbcloud_serverless_cluster`.
-    - For the resource name, you can define it as needed. For example, `example`.
-    - For the resource details, you can configure them according to the Project ID and the TiDB Cloud Serverless cluster specification information.
-    - To get the TiDB Cloud Serverless cluster specification information, see [tidbcloud_serverless_cluster (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster).
+    - 若要使用 TiDB Cloud Serverless 集群资源，将资源类型设置为 `tidbcloud_serverless_cluster`。
+    - 资源名称可以根据需要自定义，例如 `example`。
+    - 资源详情可以根据项目 ID 及 TiDB Cloud Serverless 集群的规格信息进行配置。
+    - 获取 TiDB Cloud Serverless 集群规格信息，请参见 [tidbcloud_serverless_cluster (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster)。
 
-3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
+3. 运行 `terraform apply` 命令。应用资源时不建议使用 `terraform apply --auto-approve`。
 
     ```shell
     $ terraform apply
@@ -208,13 +208,13 @@ The following example shows how to create a TiDB Cloud Serverless cluster.
         Enter a value:
     ```
 
-    In the preceding result, Terraform generates an execution plan for you, which describes the actions that Terraform will take:
+    在上述结果中，Terraform 为你生成了一个执行计划，描述了 Terraform 将要执行的操作：
 
-    - You can check the differences between the configurations and the states.
-    - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
-    - `known after apply` indicates that you will get the corresponding value after `apply`.
+    - 你可以检查配置与状态之间的差异。
+    - 你还可以看到本次 `apply` 的结果。它将新增一个资源，不会有资源被更改或销毁。
+    - `known after apply` 表示你将在 `apply` 后获得对应的值。
 
-4. If everything in your plan looks fine, type `yes` to continue:
+4. 如果你的计划没有问题，输入 `yes` 继续：
 
     ```shell
     Do you want to perform these actions?
@@ -229,7 +229,7 @@ The following example shows how to create a TiDB Cloud Serverless cluster.
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-5. Use the `terraform show` or `terraform state show tidbcloud_serverless_cluster.${resource-name}` command to inspect the state of your resource. The former command shows the states of all resources and data sources.
+5. 使用 `terraform show` 或 `terraform state show tidbcloud_serverless_cluster.${resource-name}` 命令检查资源的状态。前者会显示所有资源和数据源的状态。
 
     ```shell
     $ terraform state show tidbcloud_serverless_cluster.example
@@ -289,16 +289,16 @@ The following example shows how to create a TiDB Cloud Serverless cluster.
     }
     ```
 
-## Modify a TiDB Cloud Serverless cluster
+## 修改 TiDB Cloud Serverless 集群
 
-For a TiDB Cloud Serverless cluster, you can use Terraform to manage resources. The arguments that you can modify include:
+对于 TiDB Cloud Serverless 集群，你可以使用 Terraform 管理资源。可修改的参数包括：
 
-- `display_name`: The display name of the cluster.
-- `spending_limit`: The spending limit of the cluster.
-- `endpoints.public.disabled`: Whether to disable the public endpoint.
-- `automated_backup_policy.start_time`: The UTC time of day in `HH:mm` format when the automated backup starts.
+- `display_name`：集群的显示名称。
+- `spending_limit`：集群的消费上限。
+- `endpoints.public.disabled`：是否禁用公网连接。
+- `automated_backup_policy.start_time`：自动备份开始的 UTC 时间，格式为 `HH:mm`。
 
-To modify a TiDB Cloud Serverless cluster, you can modify the configuration of the `tidbcloud_serverless_cluster` resource, then use the `terraform apply` command to apply the changes. For example, you can modify the `display_name` and `spending_limit` as follows:
+要修改 TiDB Cloud Serverless 集群，可以修改 `tidbcloud_serverless_cluster` 资源的配置，然后使用 `terraform apply` 命令应用更改。例如，你可以如下修改 `display_name` 和 `spending_limit`：
 
 ```
 resource "tidbcloud_serverless_cluster" "example" {
@@ -313,7 +313,7 @@ resource "tidbcloud_serverless_cluster" "example" {
 }
 ```
 
-Then, run the `terraform apply` command to apply the changes:
+然后，运行 `terraform apply` 命令应用更改：
 
 ```shell
 $ terraform apply
@@ -359,7 +359,7 @@ tidbcloud_serverless_cluster.example: Modifications complete after 8s
 Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
 ```
 
-Then, you can use the `terraform show` or `terraform state show tidbcloud_serverless_cluster.${resource-name}` command to inspect the state of your resource. The former command shows the states of all resources and data sources.
+然后，你可以使用 `terraform show` 或 `terraform state show tidbcloud_serverless_cluster.${resource-name}` 命令检查资源的状态。前者会显示所有资源和数据源的状态。
 
 ```shell
 $ terraform state show tidbcloud_serverless_cluster.example
@@ -418,15 +418,15 @@ resource "tidbcloud_serverless_cluster" "example" {
 }
 ```
 
-## Import a TiDB Cloud Serverless cluster
+## 导入 TiDB Cloud Serverless 集群
 
-For a TiDB Cloud Serverless cluster that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+对于未被 Terraform 管理的 TiDB Cloud Serverless 集群，你可以通过导入的方式让 Terraform 管理它。
 
-Import a TiDB Cloud Serverless cluster that is not created by Terraform as follows:
+导入未由 Terraform 创建的 TiDB Cloud Serverless 集群，操作如下：
 
-1. Add an import block for the new TiDB Cloud Serverless cluster resource.
+1. 为新的 TiDB Cloud Serverless 集群资源添加 import 块。
 
-    Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the cluster ID:
+    在你的 `.tf` 文件中添加如下 import 块，将 `example` 替换为你想要的资源名称，将 `${id}` 替换为集群 ID：
 
     ```
     import {
@@ -435,21 +435,21 @@ Import a TiDB Cloud Serverless cluster that is not created by Terraform as follo
     }
     ```
 
-2. Generate the new configuration file.
+2. 生成新的配置文件。
 
-    Generate the new configuration file for the new TiDB Cloud Serverless cluster resource according to the import block:
+    根据 import 块为新的 TiDB Cloud Serverless 集群资源生成新的配置文件：
 
       ```shell
       terraform plan -generate-config-out=generated.tf
       ```
 
-    Do not specify an existing `.tf` filename in the preceding command. Otherwise, Terraform will return an error.
+    上述命令中不要指定已存在的 `.tf` 文件名，否则 Terraform 会返回错误。
 
-3. Review and apply the generated configuration.
+3. 审查并应用生成的配置。
 
-    Review the generated configuration file to ensure that it meets your needs. Optionally, you can move the contents of this file to your preferred location.
+    审查生成的配置文件，确保其符合你的需求。你也可以选择将该文件内容移动到你喜欢的位置。
 
-    Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
+    然后，运行 `terraform apply` 导入你的基础设施。应用后，示例输出如下：
 
     ```shell
     tidbcloud_serverless_cluster.example: Importing... 
@@ -458,11 +458,11 @@ Import a TiDB Cloud Serverless cluster that is not created by Terraform as follo
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
 
-Now you can manage the imported cluster with Terraform.
+现在你可以使用 Terraform 管理已导入的集群。
 
-## Delete a TiDB Cloud Serverless cluster
+## 删除 TiDB Cloud Serverless 集群
 
-To delete a TiDB Cloud Serverless cluster, you can delete the configuration of the `tidbcloud_serverless_cluster` resource, then use the `terraform apply` command to destroy the resource:
+要删除 TiDB Cloud Serverless 集群，可以删除 `tidbcloud_serverless_cluster` 资源的配置，然后使用 `terraform apply` 命令销毁该资源：
 
 ```shell
 $ terraform apply
@@ -542,7 +542,7 @@ tidbcloud_serverless_cluster.example: Destruction complete after 1s
 Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
 ```
 
-Now, if you run the `terraform show` command, it will show no managed resources because the resource has been cleared:
+现在，如果你运行 `terraform show` 命令，将不会显示任何受管资源，因为该资源已被清除：
 
 ```
 $ terraform show

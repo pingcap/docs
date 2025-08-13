@@ -1,33 +1,33 @@
 ---
-title: Use SQL User Resource
-summary: Learn how to use the SQL user resource to create and modify a TiDB Cloud SQL user.
+title: 使用 SQL 用户资源
+summary: 了解如何使用 SQL 用户资源在 TiDB Cloud 中创建和修改 SQL 用户。
 ---
 
-# Use SQL User Resource
+# 使用 SQL 用户资源
 
-This document describes how to manage TiDB Cloud SQL users using the `tidbcloud_sql_user` resource.
+本文档介绍如何使用 `tidbcloud_sql_user` 资源管理 TiDB Cloud SQL 用户。
 
-The features of the `tidbcloud_sql_user` resource include the following:
+`tidbcloud_sql_user` 资源的功能包括：
 
-- Create TiDB Cloud SQL users.
-- Modify TiDB Cloud SQL users.
-- Import TiDB Cloud SQL users.
-- Delete TiDB Cloud SQL users.
+- 创建 TiDB Cloud SQL 用户。
+- 修改 TiDB Cloud SQL 用户。
+- 导入 TiDB Cloud SQL 用户。
+- 删除 TiDB Cloud SQL 用户。
 
-## Prerequisites
+## 前置条件
 
-- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
-- [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md) or [a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+- [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 或更高版本。
+- [创建 TiDB Cloud 专属集群](/tidb-cloud/create-tidb-cluster.md) 或 [创建 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md)。
 
-## Create a SQL user
+## 创建 SQL 用户
 
-You can create a SQL user using the `tidbcloud_sql_user` resource.
+你可以使用 `tidbcloud_sql_user` 资源来创建 SQL 用户。
 
-The following example shows how to create a TiDB Cloud SQL user.
+以下示例展示了如何创建一个 TiDB Cloud SQL 用户。
 
-1. Create a directory for the SQL user and enter it.
+1. 为 SQL 用户创建一个目录并进入该目录。
 
-2. Create a `sql_user.tf` file:
+2. 创建一个 `sql_user.tf` 文件：
 
     ```
     terraform {
@@ -51,14 +51,14 @@ The following example shows how to create a TiDB Cloud SQL user.
     }
     ```
 
-    Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
+    使用 `resource` 块定义 TiDB Cloud 的资源，包括资源类型、资源名称和资源详情。
 
-    - To use the SQL user resource, set the resource type as `tidbcloud_sql_user`.
-    - For the resource name, you can define it as needed. For example, `example`.
-    - For SQL users in the TiDB Cloud Serverless cluster, the `user_name` and builtin role `role_readonly` and `role_readwrite` must start with the user prefix, you can get the user prefix by running the `tidbcloud_serverless_cluster` data source.
-    - To get the SQL user specification information, see [`tidbcloud_sql_user` (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/sql_user).
+    - 要使用 SQL 用户资源，需要将资源类型设置为 `tidbcloud_sql_user`。
+    - 资源名称可以根据需要自定义，例如 `example`。
+    - 对于 TiDB Cloud Serverless 集群中的 SQL 用户，`user_name` 以及内置角色 `role_readonly` 和 `role_readwrite` 必须以用户前缀开头，你可以通过运行 `tidbcloud_serverless_cluster` 数据源获取用户前缀。
+    - 获取 SQL 用户的详细配置信息，请参见 [`tidbcloud_sql_user` (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/sql_user)。
 
-3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
+3. 运行 `terraform apply` 命令。应用资源时，不建议使用 `terraform apply --auto-approve`。
 
     ```shell
     $ terraform apply
@@ -86,13 +86,13 @@ The following example shows how to create a TiDB Cloud SQL user.
       Enter a value:
     ```
 
-    In the preceding result, Terraform generates an execution plan for you, which describes the actions Terraform will take:
+    在上述结果中，Terraform 为你生成了一个执行计划，描述了 Terraform 将要执行的操作：
 
-    - You can check the differences between the configurations and the states.
-    - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
-    - `known after apply` indicates that you will get the corresponding value after `apply`.
+    - 你可以检查配置与当前状态之间的差异。
+    - 你还可以看到本次 `apply` 的结果。它将新增一个资源，不会有资源被更改或销毁。
+    - `known after apply` 表示你将在 `apply` 后获得对应的值。
 
-4. If everything in your plan looks fine, type `yes` to continue:
+4. 如果你的计划内容无误，输入 `yes` 继续：
 
     ```shell
     Do you want to perform these actions?
@@ -107,7 +107,7 @@ The following example shows how to create a TiDB Cloud SQL user.
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-5. Use the `terraform show` or `terraform state show tidbcloud_sql_user.${resource-name}` command to inspect the state of your resource. The former command shows the states of all resources and data sources.
+5. 使用 `terraform show` 或 `terraform state show tidbcloud_sql_user.${resource-name}` 命令检查资源的状态。前者会显示所有资源和数据源的状态。
 
     ```shell
     $ terraform state show tidbcloud_sql_user.example                 
@@ -120,13 +120,13 @@ The following example shows how to create a TiDB Cloud SQL user.
       }
     ```
 
-## Change the password or user roles of a SQL user
+## 修改 SQL 用户的密码或用户角色
 
-You can use Terraform to change the password or user roles of a SQL user as follows:
+你可以通过 Terraform 修改 SQL 用户的密码或用户角色，方法如下：
 
-1. In the `sql_user.tf` file that is used when you [create the SQL user](#create-a-sql-user), change the `password`, `builtin_role`, and `custom_roles` (if applicable).
+1. 在你 [创建 SQL 用户](#create-a-sql-user) 时使用的 `sql_user.tf` 文件中，修改 `password`、`builtin_role` 以及（如适用）`custom_roles`。
 
-    For example:
+    例如：
 
     ```
     resource "tidbcloud_sql_user" "example" {
@@ -137,7 +137,7 @@ You can use Terraform to change the password or user roles of a SQL user as foll
     }
     ```
 
-2. Run the `terraform apply` command:
+2. 运行 `terraform apply` 命令：
 
     ```shell
     $ terraform apply
@@ -167,9 +167,9 @@ You can use Terraform to change the password or user roles of a SQL user as foll
 
     ```
 
-    In the preceding execution plan, password and builtin role will be changed.
+    在上述执行计划中，密码和内置角色将会被更改。
 
-3. If everything in your plan looks fine, type `yes` to continue:
+3. 如果你的计划内容无误，输入 `yes` 继续：
 
     ```shell
       Enter a value: yes
@@ -180,7 +180,7 @@ You can use Terraform to change the password or user roles of a SQL user as foll
     Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
     ```
 
-4. Use `terraform state show tidbcloud_sql_user.${resource-name}` to check the state:
+4. 使用 `terraform state show tidbcloud_sql_user.${resource-name}` 检查状态：
 
     ```
     $ terraform state show tidbcloud_sql_user.example
@@ -193,17 +193,17 @@ You can use Terraform to change the password or user roles of a SQL user as foll
     }
     ```
 
-The `builtin_role` is changed to `role_readonly`. The `password` is not shown because it is a sensitive value.
+`builtin_role` 已更改为 `role_readonly`。`password` 未显示，因为它是敏感值。
 
-## Import a SQL user
+## 导入 SQL 用户
 
-For a TiDB Cloud SQL user that is not managed by Terraform, you can use Terraform to manage it by importing it.
+对于未被 Terraform 管理的 TiDB Cloud SQL 用户，你可以通过导入的方式让 Terraform 管理它。
 
-For example, you can import a SQL user that is not created by Terraform as follows:
+例如，你可以按如下方式导入一个非 Terraform 创建的 SQL 用户：
 
-1. Add an import block for the new SQL user resource
+1. 为新的 SQL 用户资源添加 import 块
 
-    Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,user_name`:
+    在你的 `.tf` 文件中添加如下 import 块，将 `example` 替换为你期望的资源名称，将 `${id}` 替换为 `cluster_id,user_name` 的格式：
 
     ```
     import {
@@ -212,23 +212,23 @@ For example, you can import a SQL user that is not created by Terraform as follo
     }
     ```
 
-2. Generate the new configuration file
+2. 生成新的配置文件
 
-    Generate the new configuration file for the new SQL user resource according to the import block:
+    根据 import 块为新的 SQL 用户资源生成配置文件：
 
     ```shell
     terraform plan -generate-config-out=generated.tf
     ```
 
-    Do not specify an existing `.tf` filename in the preceding command. Otherwise, Terraform will return an error.
+    上述命令中不要指定已存在的 `.tf` 文件名，否则 Terraform 会返回错误。
 
-    Then the `generated.tf` file is created in the current directory, which contains the configuration of the imported resource. But the provider will throw an error because the required argument `password` is not set. You can replace the value of `password` argument to the `tidbcloud_sql_user` resource in the generated configuration file.
+    然后，当前目录下会生成 `generated.tf` 文件，包含了被导入资源的配置信息。但由于未设置必需参数 `password`，provider 会抛出错误。你可以在生成的配置文件中为 `tidbcloud_sql_user` 资源的 `password` 参数赋值。
 
-3. Review and apply the generated configuration
+3. 审查并应用生成的配置
 
-    Review the generated configuration file to ensure that it meets your needs. Optionally, you can move the contents of this file to your preferred location.
+    审查生成的配置文件，确保其符合你的需求。你也可以选择将该文件内容移动到你喜欢的位置。
 
-    Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
+    然后，运行 `terraform apply` 导入你的基础设施。应用后，示例输出如下：
 
     ```shell
     tidbcloud_sql_user.example: Importing... [id=10423692645600000000,example_user]
@@ -237,11 +237,11 @@ For example, you can import a SQL user that is not created by Terraform as follo
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
 
-Now you can manage the imported SQL user with Terraform.
+现在你可以使用 Terraform 管理被导入的 SQL 用户。
 
-## Delete a SQL user
+## 删除 SQL 用户
 
-To delete a SQL user, you can delete the configuration of the `tidbcloud_sql_user` resource, then use the `terraform apply` command to destroy the resource:
+要删除 SQL 用户，你可以删除 `tidbcloud_sql_user` 资源的配置，然后使用 `terraform apply` 命令销毁该资源：
 
 ```shell
   $ terraform apply
@@ -275,7 +275,7 @@ To delete a SQL user, you can delete the configuration of the `tidbcloud_sql_use
   Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
 ```
 
-Now, if you run the `terraform show` command, you will get nothing because the resource has been cleared:
+现在，如果你运行 `terraform show` 命令，将不会有任何输出，因为资源已被清除：
 
 ```
 $ terraform show
