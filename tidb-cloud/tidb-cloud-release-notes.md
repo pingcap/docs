@@ -24,7 +24,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Essential**
 
-    **TiDB Cloud Essential** is in preview on Alibaba Cloud.
+    TiDB Cloud Essential is in preview on Alibaba Cloud.
 
     TiDB Cloud Essential on Alibaba Cloud has been in a limited public preview since May 2025. This is the first time Essential is officially included in the release notes. At this stage, Essential on Alibaba Cloud offers a feature set aligned with Starter, available in the Alibaba Cloud Singapore region.
 
