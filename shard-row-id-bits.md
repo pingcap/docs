@@ -19,7 +19,7 @@ To mitigate the hot spot issue, you can configure `SHARD_ROW_ID_BITS`. The row I
 
 When you set `SHARD_ROW_ID_BITS = S`, the structure of `_tidb_rowid` is as follows:
 
-| Signed bit |  Shard bits | Auto-increment bits |
+| Sign bit |  Shard bits | Auto-increment bits |
 |--------|--------|--------------|
 | 1 bit | `S` bits | `63-S` bits |
 
