@@ -53,6 +53,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
 + PD <!--tw@Oreoxmt: 2 notes-->
 
+    - (dup): release-8.5.3.md > 改进提升> PD - 增加了 GO Runtime 相关监控 [#8931](https://github.com/tikv/pd/issues/8931) @[bufferflies](https://github.com/bufferflies)
     - Add more metrics for Golang Runtime, details can be seen at the runtime panel [#8931](https://github.com/tikv/pd/issues/8931) @[bufferflies](https://github.com/bufferflies)
     - 减少一些非必要 error 日志 [#9370](https://github.com/tikv/pd/issues/9370) @[bufferflies](https://github.com/bufferflies)
 
