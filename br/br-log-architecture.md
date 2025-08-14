@@ -122,11 +122,7 @@ Log backup generates the following types of files:
 
 Explanation of the backup file directory structure:
 
-<<<<<<< HEAD
 - `backupmeta` directory: stores backup metadata files. Starting from v8.5.3 and v9.0.0, the naming convention of these files changes from `{resolved_ts}-{uuid}.meta` to `{flushTs}-{minDefaultTs}-{minTs}-{maxTs}.meta`. The filename contains the following timestamp fields:
-=======
-- `backupmeta` directory: stores backup metadata files. Starting from v8.5.3, the naming convention of these files changes from `{resolved_ts}-{uuid}.meta` to `{flushTs}-{minDefaultTs}-{minTs}-{maxTs}.meta`. The filename contains the following timestamp fields:
->>>>>>> ed87e438f9 (v8.5.3: log backup: update metafile format (#21412) (#21577))
     - `flushTs`: the timestamp when the backup file is periodically uploaded to the external storage. This value is obtained from PD and is globally unique.
     - `minDefaultTs` (only applicable to Write CF files): the earliest transaction start time covered by this backup.
     - `minTs` and `maxTs`: the minimum and maximum timestamps of all key-value data included in the backup file.
