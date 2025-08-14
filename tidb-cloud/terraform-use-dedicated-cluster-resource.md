@@ -1,9 +1,9 @@
 ---
-title: Use TiDB Cloud Dedicated Cluster Resource
-summary: Learn how to use the TiDB Cloud Dedicated cluster resource to create and modify a TiDB Cloud Dedicated cluster.
+title: Use the `tidbcloud_dedicated_cluster` Resource
+summary: Learn how to use the `tidbcloud_dedicated_cluster` resource to create and modify a TiDB Cloud Dedicated cluster.
 ---
 
-# Use TiDB Cloud Dedicated Cluster Resource
+# Use the `tidbcloud_dedicated_cluster` Resource
 
 This document describes how to manage a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster with the `tidbcloud_dedicated_cluster` resource.
 
@@ -166,7 +166,7 @@ You can create a TiDB Cloud Dedicated cluster using the `tidbcloud_dedicated_clu
 
     Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
 
-    - To use the TiDB Cloud Dedicated cluster resource, set the resource type as `tidbcloud_dedicated_cluster`.
+    - To use the `tidbcloud_dedicated_cluster` resource, set the resource type as `tidbcloud_dedicated_cluster`.
     - For the resource name, you can define it as needed. For example, `example_cluster`.
     - For the resource details, you can configure them according to the Project ID and the TiDB Cloud Dedicated cluster specification information. 
     - To get the TiDB Cloud Dedicated cluster specification information, see [tidbcloud_dedicated_cluster (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_cluster).
@@ -1054,7 +1054,7 @@ For a TiDB cluster that is not managed by Terraform, you can use Terraform to ma
 
 Import a cluster that is not created by Terraform as follows:
 
-1. Add an import block for the new TiDB Cloud Dedicated cluster resource.
+1. Add an import block for the new `tidbcloud_dedicated_cluster` resource.
 
     Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the cluster ID:
 
@@ -1067,7 +1067,7 @@ Import a cluster that is not created by Terraform as follows:
 
 2. Generate the new configuration file.
 
-    Generate the new configuration file for the new TiDB Cloud Dedicated cluster resource according to the import block:
+    Generate the new configuration file for the new `tidbcloud_dedicated_cluster` resource according to the import block:
 
       ```shell
       terraform plan -generate-config-out=generated.tf

@@ -1,9 +1,9 @@
 ---
-title: {{{ .starter }}} Driver Kysely Tutorial
+title: TiDB Cloud Serverless Driver Kysely Tutorial
 summary: Learn how to use TiDB Cloud serverless driver with Kysely.
 ---
 
-# {{{ .starter }}} Driver Kysely Tutorial
+# TiDB Cloud Serverless Driver Kysely Tutorial
 
 [Kysely](https://kysely.dev/docs/intro) is a type-safe and autocompletion-friendly TypeScript SQL query builder. TiDB Cloud offers [@tidbcloud/kysely](https://github.com/tidbcloud/kysely), enabling you to use Kysely over HTTPS with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). Compared with the traditional TCP way, [@tidbcloud/kysely](https://github.com/tidbcloud/kysely) brings the following benefits:
 

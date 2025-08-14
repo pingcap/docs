@@ -1,9 +1,9 @@
 ---
-title: Use {{{ .starter }}} Cluster Resource
-summary: Learn how to use the {{{ .starter }}} cluster resource to create and modify a {{{ .starter }}} cluster.
+title: Use the `tidbcloud_serverless_cluster` Resource
+summary: Learn how to use the `tidbcloud_serverless_cluster` resource to create and modify a {{{ .starter }}} cluster.
 ---
 
-# Use {{{ .starter }}} Cluster Resource
+# Use the `tidbcloud_serverless_cluster` Resource
 
 This document describes how to manage a [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster with the `tidbcloud_serverless_cluster` resource.
 
@@ -157,7 +157,7 @@ The following example shows how to create a {{{ .starter }}} cluster.
 
     Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
 
-    - To use the {{{ .starter }}} cluster resource, set the resource type as `tidbcloud_serverless_cluster`.
+    - To use the `tidbcloud_serverless_cluster` resource, set the resource type as `tidbcloud_serverless_cluster`.
     - For the resource name, you can define it as needed. For example, `example`.
     - For the resource details, you can configure them according to the Project ID and the {{{ .starter }}} cluster specification information.
     - To get the {{{ .starter }}} cluster specification information, see [tidbcloud_serverless_cluster (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster).
@@ -424,7 +424,7 @@ For a {{{ .starter }}} cluster that is not managed by Terraform, you can use Ter
 
 Import a {{{ .starter }}} cluster that is not created by Terraform as follows:
 
-1. Add an import block for the new {{{ .starter }}} cluster resource.
+1. Add an import block for the new `tidbcloud_serverless_cluster` resource.
 
     Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the cluster ID:
 
@@ -437,7 +437,7 @@ Import a {{{ .starter }}} cluster that is not created by Terraform as follows:
 
 2. Generate the new configuration file.
 
-    Generate the new configuration file for the new {{{ .starter }}} cluster resource according to the import block:
+    Generate the new configuration file for the new `tidbcloud_serverless_cluster` resource according to the import block:
 
       ```shell
       terraform plan -generate-config-out=generated.tf
