@@ -1,16 +1,16 @@
 ---
-title: Sink to Cloud Storage
+title: Stream Data from TiDB Cloud Dedicated to Cloud Storage
 summary: This document explains how to create a changefeed to stream data from TiDB Cloud to Amazon S3 or GCS. It includes restrictions, configuration steps for the destination, replication, and specification, as well as starting the replication process.
 ---
 
-# Sink to Cloud Storage
+# Stream Data from TiDB Cloud Dedicated to Cloud Storage
 
-This document describes how to create a changefeed to stream data from TiDB Cloud to cloud storage. Currently, Amazon S3 and GCS are supported.
+This document describes how to create a changefeed to stream data from TiDB Cloud Dedicated to cloud storage. Currently, Amazon S3 and GCS are supported.
 
 > **Note:**
 >
 > - To stream data to cloud storage, make sure that your TiDB cluster version is v7.1.1 or later. To upgrade your TiDB Cloud Dedicated cluster to v7.1.1 or later, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
-> - For [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, the changefeed feature is unavailable.
+> - For [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, streaming data to cloud storage is currently not supported.
 
 ## Restrictions
 
