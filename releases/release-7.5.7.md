@@ -149,7 +149,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 + TiKV <!--tw@qiancai: 1 note-->
 
     - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-    - 修复 Unsafe Recovery 被某些 TiFlash 副本阻塞，导致无法推进的问题 [18197](https://github.com/tikv/tikv/issues/18197) @[v01dstar](https://github.com/v01dstar)
+    - Fix the issue that Online Unsafe Recovery might be blocked by certain TiFlash replicas, preventing the commit index from advancing [18197](https://github.com/tikv/tikv/issues/18197) @[v01dstar](https://github.com/v01dstar)
     - (dup): release-8.5.3.md > Bug fixes> TiKV - Fix the issue that TiKV might use a compression algorithm that the client cannot decode [#18079](https://github.com/tikv/tikv/issues/18079) @[ekexium](https://github.com/ekexium)
     - (dup): release-8.5.3.md > Bug fixes> TiKV - Fix the issue that TiKV allows excessive SST ingest requests under high concurrency [#18452](https://github.com/tikv/tikv/issues/18452) @[hbisheng](https://github.com/hbisheng)
     - (dup): release-8.3.0.md > Bug fixes> TiKV - Fix the issue that `Ingestion picked level` and `Compaction Job Size(files)` are displayed incorrectly in the TiKV dashboard in Grafana [#15990](https://github.com/tikv/tikv/issues/15990) @[Connor1996](https://github.com/Connor1996)
@@ -161,11 +161,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
 + PD <!--tw@qiancai: 5 notes-->
 
-    - Fix the issue that the `split-merge-interval` configuration item might not take effect when you modify its value repeatedly (such as changing it from `1s` to `1h` and back to `1s`) [#8404](https://github.com/tikv/pd/issues/8404) @[lhy1024](https://github.com/lhy1024)
-    - Fix the issue that the default value of `lease` is not correctly set [#9156](https://github.com/tikv/pd/issues/9156) @[rleungx](https://github.com/rleungx)
-    - Fix the issue that pd goroutine leak due to the dashboard connections don't close well [#9402](https://github.com/tikv/pd/issues/9402) @[baurine](https://github.com/baurine)
-    - Fix the issue that the new store cna't be balanced [#9145](https://github.com/tikv/pd/issues/9145) @[bufferflies](https://github.com/bufferflies)
-    - Fix the issue that client can't get any tso after enabled the variable `tidb_enable_tso_follower_proxy`[#9188](https://github.com/tikv/pd/issues/9188) @[Tema](https://github.com/Tema)
+    - (dup): release-8.3.0.md > Bug fixes> PD - Fix the issue that the `split-merge-interval` configuration item might not take effect when you modify its value repeatedly (such as changing it from `1s` to `1h` and back to `1s`) [#8404](https://github.com/tikv/pd/issues/8404) @[lhy1024](https://github.com/lhy1024)
+    - (dup): release-8.5.2.md > Bug fixes> PD - Fix the issue that the default value of `lease` is not correctly set [#9156](https://github.com/tikv/pd/issues/9156) @[rleungx](https://github.com/rleungx)
+    - (dup): release-8.5.3.md > Bug fixes> PD  Fix the issue that improperly closing TiDB Dashboard TCP connections could lead to PD goroutine leaks [#9402](https://github.com/tikv/pd/issues/9402) @[baurine](https://github.com/baurine)
+    - (dup): release-8.5.3.md > Bug fixes> PD - Fix the issue that newly added TiKV nodes might fail to be scheduled [#9145](https://github.com/tikv/pd/issues/9145) @[bufferflies](https://github.com/bufferflies)
+    - Fix the issue that enabling `tidb_enable_tso_follower_proxy` might cause the TSO service to become unavailable [#9188](https://github.com/tikv/pd/issues/9188) @[Tema](https://github.com/Tema)
 
 + TiFlash <!--tw@qiancai: 5 notes-->
 
@@ -177,10 +177,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - (dup): release-8.5.2.md > Bug fixes> TiFlash - Fix the issue that TiFlash might fail to restart after inserting a single row of data larger than 16 MiB [#10052](https://github.com/pingcap/tiflash/issues/10052) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - (dup): release-8.5.3.md > Bug fixes> TiFlash - Fix the issue that missing resource control low token signals lead to query throttling [#10137](https://github.com/pingcap/tiflash/issues/10137) @[guo-shaoge](https://github.com/guo-shaoge)
     - (dup): release-8.5.2.md > Bug fixes> TiFlash - Fix the issue that TiFlash might return the `Exception: Block schema mismatch` error when executing SQL statements containing `GROUP BY ... WITH ROLLUP` [#10110](https://github.com/pingcap/tiflash/issues/10110) @[gengliqi](https://github.com/gengliqi)
-    - 降低因为 SSL 重新加载导致 TiFlash crash 的可能性(#8535) [#8535](https://github.com/pingcap/tiflash/issues/8535) @[windtalker](https://github.com/windtalker)
-    - 修复 TiFlash 报错 fmt::v10::format_error unmatched '}' in format string [#9087](https://github.com/pingcap/tiflash/issues/9087) @[windtalker](https://github.com/windtalker)
-    - 修复执行包含 `GROUP BY ... WITH ROLLUP` 的 SQL 语句时，可能会出现 `Exception: Block schema mismatch` 报错的问题 [#10110](https://github.com/pingcap/tiflash/issues/10110) @[gengliqi](https://github.com/gengliqi)
-    - 修复 TiFlash resource control 信号丢失导致的非预期的查询受限问题 [#10137](https://github.com/pingcap/tiflash/issues/10137) @[guo-shaoge](https://github.com/guo-shaoge)
 
 + Tools
 
@@ -194,7 +190,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
     + TiCDC <!--tw@qiancai: 1 note-->
 
-        - Fix a bug that may cause changefeed with storage sink getting stuck [#9162](https://github.com/pingcap/tiflow/issues/9162) @[asddongmen](https://github.com/asddongmen)
+        - Fix the issue that the changefeed might get stuck when using external storage as the downstream [#9162](https://github.com/pingcap/tiflow/issues/9162) @[asddongmen](https://github.com/asddongmen)
         - (dup): release-8.5.2.md > Bug fixes> Tools> TiCDC - Fix the issue that the changefeed might get stuck after the replication traffic exceeds the traffic threshold of the downstream Kafka [#12110](https://github.com/pingcap/tiflow/issues/12110) @[3AceShowHand](https://github.com/3AceShowHand)
         - (dup): release-6.5.12.md > Bug fixes> Tools> TiCDC - Fix the issue that using the `--overwrite-checkpoint-ts` parameter in the `changefeed pause` command might cause the changefeed to be stuck [#12055](https://github.com/pingcap/tiflow/issues/12055) @[hongyunyan](https://github.com/hongyunyan)
         - (dup): release-8.5.3.md > Bug fixes> Tools> TiCDC - Fix the issue that evaluating event filter expressions on tables containing virtual columns might cause a panic [#12206](https://github.com/pingcap/tiflow/issues/12206) @[lidezhu](https://github.com/lidezhu)
