@@ -136,7 +136,7 @@ The parameters are as follows:
     QUERY WATCH REMOVE 1;
     ```
 
-- Remove all watch items of a specific resource group (New in v9.0.0):
+- <span class="version-mark">New in v9.0.0</span> Remove all watch items of a specific resource group:
 
     ```sql
     QUERY WATCH REMOVE RESOURCE GROUP rg1;
