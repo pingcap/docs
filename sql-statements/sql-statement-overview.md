@@ -131,6 +131,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) | Imports data into a table via the [Physical Import Mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode) of TiDB Lightning. |
 | [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) | Loads data into a table from Amazon S3 or Google Cloud Storage. |
 | [`SHOW IMPORT JOB`](/sql-statements/sql-statement-show-import-job.md) | Shows the status of an import job. |
+| [`SHOW IMPORT GROUP`](/sql-statements/sql-statement-show-import-group.md) | Shows the status of a group of import jobs. |
 
 ## Backup & restore
 
