@@ -389,7 +389,7 @@ If you can confirm that the tables operated by TiDB Lightning Physical Import Mo
 
 ## What are the compatibility limitations between BR (Backup & Restore) and TiCDC?
 
-BR (Backup & Restore) also directly generates SST files and imports them into the TiKV cluster. A changefeed cannot fully capture this kind of data change. For details, refer to [What are the compatibility limitations between TiDB Lightning Physical Import Mode and TiCDC?](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-tidb-lightning-physical-import-mode-and-ticdc).
+BR (Backup & Restore) also directly generates SST files and imports them into the TiKV cluster. A changefeed cannot fully capture data imported in this manner. For details, refer to [What are the compatibility limitations between TiDB Lightning Physical Import Mode and TiCDC?](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-tidb-lightning-physical-import-mode-and-ticdc).
 
 Different versions of BR handle this differently:
 
