@@ -395,7 +395,7 @@ Different versions of BR handle this differently:
 
 - For versions before v8.2.0, if a changefeed task already exists on the cluster, BR will refuse to create a restore task.
 
-- Starting from v8.2.0, a restore task is only allowed to be created if the backupTs of the data restored by BR is earlier than the checkpointTs of all changefeeds on the cluster.
+- Starting from v8.2.0, a restore task is only allowed to be created if the `backupTs` of the data restored by BR is earlier than the `checkpointTs` of all changefeeds on the cluster.
 
 ## After a changefeed resumes from pause, its replication latency gets higher and higher and returns to normal only after a few minutes. Why?
 
