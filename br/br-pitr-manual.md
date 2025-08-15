@@ -606,7 +606,7 @@ If such inconsistency occurs during the time range `[t1, t2)`, you cannot direct
 - Restore data up to `t1` (to retrieve data before the inconsistent period).
 - Perform a new snapshot backup after `t2`, and use it as the base for future PITR operations.
 
-## Abort restore operations
+### Abort restore operations
 
 If a restore operation fails, you can use the `tiup br abort` command to clean up registry entries and checkpoint data. This command automatically locates and removes relevant metadata based on the original restore parameters, including entries in the `mysql.tidb_restore_registry` table and checkpoint data (regardless of whether it is stored in a local database or external storage).
 
@@ -614,9 +614,7 @@ If a restore operation fails, you can use the `tiup br abort` command to clean u
 >
 > The `abort` command only cleans up metadata. You need to manually delete any actual restored data from the cluster.
 
-### Usage examples
-
-Use the same parameters as in the original restore command:
+The usage examples of aborting restore operations using the same parameters as the original restore command are as follows:
 
 ```shell
 # Abort a PITR operation
