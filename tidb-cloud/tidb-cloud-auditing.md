@@ -40,7 +40,7 @@ To enable audit logging for AWS, take the following steps:
 
 Specify an Amazon S3 bucket in your corporate-owned AWS account as a destination to which TiDB Cloud writes the audit logs.
 
-> Note:
+> **Note:**
 >
 > Do not enable object lock on the AWS S3 bucket. Enabling object lock will prevent TiDB Cloud from pushing audit log files to S3.
 
