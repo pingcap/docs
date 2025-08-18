@@ -36,7 +36,7 @@ TiProxy introduces two types of costs:
 - Node costs. For more information, see [Node Cost](https://www.pingcap.com/tidb-dedicated-pricing-details/#node-cost)
 - Data transfer costs. For more information, see [Data Transfer Cost](https://www.pingcap.com/tidb-dedicated-pricing-details/#data-transfer-cost). TiProxy will prioritize routing traffic to the TiDB instances in the same availability zone (AZ). However, if the TiDB workloads are uneven, it will also route traffic to other AZs, resulting in additional data transfer costs.
 
-You can view the TiProxy bill on the billing page. For more information, see [View TiProxy bills](/tidb-cloud/tiproxy-management.md#view-tiproxy-bills).
+You can view the TiProxy bill on the **Billing** page. For more information, see [View TiProxy bills](/tidb-cloud/tiproxy-management.md#view-tiproxy-bills).
 
 ## SLA impact
 
