@@ -145,7 +145,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - Fix the issue that Plan Cache is incorrectly skipped with predicate simplification[#61513](https://github.com/pingcap/tidb/issues/61513) @[hawkingrei](https://github.com/hawkingrei)
     - Fix the issue that executing `ADMIN CANCEL DDL JOBS` while adding an index causes the index-adding process to hang [#61087](https://github.com/pingcap/tidb/issues/61087) @[tangenta](https://github.com/tangenta)
     - Fix the issue that `ADMIN CHECK` still returns success even after some internal SQL executions fail [#61612](https://github.com/pingcap/tidb/issues/61612) @[joechenrh](https://github.com/joechenrh)
-    - Fix the issue that data and indexes became inconsistent after adding an index after multi-schema change [#61255](https://github.com/pingcap/tidb/issues/61255) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that data and indexes became inconsistent after adding multiple indexes through multi-schema change [#61255](https://github.com/pingcap/tidb/issues/61255) @[tangenta](https://github.com/tangenta)
 
 + TiKV <!--tw@qiancai: 1 note-->
 
