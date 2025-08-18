@@ -371,7 +371,7 @@ When upstream write traffic is at peak hours, the downstream may fail to consume
 
 ## What are the compatibility limitations between TiDB Lightning Physical Import Mode and TiCDC?
 
-TiDB Lightning [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) directly generates SST files and imports them into the TiKV cluster. Since this import method does not involve the regular data writing process, it does not generate change log records. In most cases, a changefeed cannot observe this kind of data change. Only during the initialization phase of the changefeed or when Region changes (such as split/merge/leader transfer) trigger incremental scans might this kind of data change be observed. Therefore, a changefeed cannot fully capture data imported via TiDB Lightning Physical Import Mode.
+TiDB Lightning [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) directly generates SST files and imports them into the TiKV cluster. Because this import method does not involve the regular data writing process, it does not generate change log records. In most cases, a changefeed cannot observe this kind of data change. Only during the initialization phase of the changefeed or when Region changes (such as split/merge/leader transfer) trigger incremental scans might this kind of data change be observed. Therefore, a changefeed cannot fully capture data imported via TiDB Lightning Physical Import Mode.
 
 If the tables operated by TiDB Lightning Physical Import Mode overlap with the tables monitored by the changefeed, various unknown errors may occur due to incomplete data capture, such as a changefeed stalling or data inconsistency between upstream and downstream. If you need to use TiDB Lightning Physical Import Mode to import tables replicated by TiCDC, follow these steps:
 
@@ -379,7 +379,7 @@ If the tables operated by TiDB Lightning Physical Import Mode overlap with the t
 
 2. Use TiDB Lightning physical import mode to restore data separately in the upstream and downstream clusters of TiCDC.
 
-3. After the restoration is complete and the data consistency of the corresponding tables in the upstream and downstream clusters has been verified, use the timestamp (TSO) after the completion of TiDB Lightning Physical Import Mode as the start-ts of the TiCDC replication task to create a new TiCDC replication task for incremental replication.
+3. After the restoration is complete and the data consistency of the corresponding tables in the upstream and downstream clusters has been verified, use the timestamp (TSO) after the completion of TiDB Lightning Physical Import Mode as the `start-ts` of the TiCDC replication task to create a new TiCDC replication task for incremental replication.
 
     ```shell
     cdc cli changefeed create -c "upstream-to-downstream-some-tables" --start-ts=431434047157698561 --sink-uri="mysql://root@127.0.0.1:4000? time-zone="
@@ -393,7 +393,7 @@ BR (Backup & Restore) also directly generates SST files and imports them into th
 
 Different versions of BR handle this differently:
 
-- For versions before v8.2.0, if a changefeed task already exists on the cluster, BR will refuse to create a restore task.
+- Before v8.2.0, if a changefeed task already exists on the cluster, BR refuses to create a restore task.
 
 - Starting from v8.2.0, a restore task is only allowed to be created if the `backupTs` of the data restored by BR is earlier than the `checkpointTs` of all changefeeds on the cluster.
 
