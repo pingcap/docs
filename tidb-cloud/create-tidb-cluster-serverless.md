@@ -15,11 +15,24 @@ This document describes how to create a {{{ .starter }}} or {{{ .essential }}} c
 
 If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/signup) to sign up for an account.
 
+<CustomContent language="en,zh">
+
 - You can either sign up with email and password so that you can manage your password using TiDB Cloud, or sign up with your Google, GitHub, or Microsoft account.
 - For AWS Marketplace users, you can also sign up through AWS Marketplace. To do that, search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
 - For Azure Marketplace users, you can also sign up through Azure Marketplace. To do that, search for `TiDB Cloud` in [Azure Marketplace](https://azuremarketplace.microsoft.com), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
 - For Google Cloud Marketplace users, you can also sign up through Google Cloud Marketplace. To do that, search for `TiDB Cloud` in [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
 - For Alibaba Cloud Marketplace users, you can also sign up through Alibaba Cloud Marketplace. To do that, search for `TiDB Cloud` in [Alibaba Cloud Marketplace](https://marketplace.alibabacloud.com/), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+- You can either sign up with email and password so that you can manage your password using TiDB Cloud, or sign up with your Google, GitHub, or Microsoft account.
+- For AWS Marketplace users, you can also sign up through AWS Marketplace. To do that, search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+- For Azure Marketplace users, you can also sign up through Azure Marketplace. To do that, search for `TiDB Cloud` in [Azure Marketplace](https://azuremarketplace.microsoft.com), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+- For Google Cloud Marketplace users, you can also sign up through Google Cloud Marketplace. To do that, search for `TiDB Cloud` in [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+
+</CustomContent>
 
 ## Steps
 
@@ -31,8 +44,18 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
 3. Select a cluster plan and the cloud provider.
 
+    <CustomContent language="en,zh">
+
     - For AWS, you can start with a **Starter** cluster.
     - For Alibaba Cloud, you can start with a **Starter** cluster and later upgrade to an **Essential** cluster as your needs grow.
+
+    </CustomContent>
+
+    <CustomContent language="ja">
+
+    For AWS, you can start with a **Starter** cluster.
+
+    </CustomContent>
 
     For more information, see [cluster plans](/tidb-cloud/select-cluster-tier.md).
 

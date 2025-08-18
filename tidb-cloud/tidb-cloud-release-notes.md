@@ -12,6 +12,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
+<CustomContent language="en,zh">
+
 - **TiDB Cloud Starter**
 
     - Rename "TiDB Cloud Serverless" to "TiDB Cloud Starter".
@@ -49,6 +51,33 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
         - In the [**Server**](/tidb-cloud/built-in-monitoring.md#server) category, refine the **TiKV IO Bps** metric to improve accuracy and consistency.
 
       For more information, see [TiDB Cloud Built-in Metrics](/tidb-cloud/built-in-monitoring.md).
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+- **TiDB Cloud Starter**
+
+    Rename "TiDB Cloud Serverless" to "TiDB Cloud Starter".
+
+    The auto-scaling entry plan is now named "TiDB Cloud Starter" to better reflect its role for new users. All features, pricing, and the free usage quota remain unchanged.
+
+    Starting August 12, 2025 (PDT), your existing Serverless clusters will appear as Starter in the [TiDB Cloud console](https://tidbcloud.com). Your connection strings, endpoints, and data will remain unchanged, so you do not need to make any code changes or schedule downtime.
+
+- **TiDB Cloud Dedicated**
+
+    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) on Google Cloud now supports more than 8 Google Private Service Connect (PSC) connections per region by optimizing the NAT subnet allocation strategy.
+
+        For more information, see [Connect to a TiDB Cloud Dedicated Cluster via Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md#restrictions).
+
+    - Optimize [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) metrics:
+
+        - In the [**Advanced**](/tidb-cloud/built-in-monitoring.md#advanced) category, add the **Affected Rows**, **Leader Count**, and **Region Count** metrics to improve diagnostics.
+        - In the [**Server**](/tidb-cloud/built-in-monitoring.md#server) category, refine the **TiKV IO Bps** metric to improve accuracy and consistency.
+
+      For more information, see [TiDB Cloud Built-in Metrics](/tidb-cloud/built-in-monitoring.md).
+
+</CustomContent>
 
 **API changes**
 

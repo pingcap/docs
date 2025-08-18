@@ -32,9 +32,21 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
         1. Click **Create Cluster**.
         2. On the **Create Cluster** page, **Starter** is selected by default. Select the cloud provider and target region for your cluster, update the default cluster name if necessary, and then click **Create**. Your {{{ .starter }}} cluster will be created in approximately 30 seconds.
 
+        <CustomContent language="en,zh">
+
         > **Note**
         >
         > Currently, {{{ .starter }}} is generally available on AWS and in public preview on Alibaba Cloud. The subsequent steps in this document use AWS as an example.
+
+        </CustomContent>
+
+        <CustomContent language="ja">
+
+        > **Note**
+        >
+        > Currently, {{{ .starter }}} is generally available on AWS. The subsequent steps in this document use AWS as an example.
+
+        </CustomContent>
 
 ## Step 2: Try AI-assisted SQL Editor
 

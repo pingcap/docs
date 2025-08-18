@@ -5,15 +5,28 @@ summary: Learn about architecture concepts for TiDB Cloud.
 
 # Architecture
 
-TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings the flexibility and power of [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source HTAP (Hybrid Transactional and Analytical Processing) database, to AWS, Azure, Google Cloud, and Alibaba Cloud.
+<CustomContent language="en,zh">TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings the flexibility and power of [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source HTAP (Hybrid Transactional and Analytical Processing) database, to Amazon Web Services (AWS), Google Cloud, Microsoft Azure, and Alibaba Cloud.</CustomContent>
+
+<CustomContent language="ja">TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings the flexibility and power of [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source HTAP (Hybrid Transactional and Analytical Processing) database, to Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.</CustomContent>
 
 TiDB is MySQL-compatible, making it easy to migrate and work with existing applications, while offering seamless scalability to handle everything from small workloads to massive, high-performance clusters. It supports both transactional (OLTP) and analytical (OLAP) workloads in one system, simplifying operations and enabling real-time insights.
 
 TiDB Cloud makes it easy to scale your database, handle complex management tasks, and stay focused on developing reliable, high-performing applications.
 
+<CustomContent language="en,zh">
+
 - For AWS, TiDB Cloud provides **{{{ .starter }}}** for auto-scaling, cost-efficient workloads, and **{{{ .dedicated }}}** for enterprise-grade applications with dedicated resources and advanced capabilities.
 - For Google Cloud and Azure, TiDB Cloud provides **{{{ .dedicated }}}** for enterprise-grade applications with dedicated resources and advanced capabilities.
 - For Alibaba Cloud, TiDB Cloud provides **{{{ .starter }}}** for auto-scaling, cost-efficient workloads and **{{{ .essential }}}** for production-ready workloads with provisioned capacity.
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+- For AWS, TiDB Cloud provides **{{{ .starter }}}** for auto-scaling, cost-efficient workloads, and **{{{ .dedicated }}}** for enterprise-grade applications with dedicated resources and advanced capabilities.
+- For Google Cloud and Azure, TiDB Cloud provides **{{{ .dedicated }}}** for enterprise-grade applications with dedicated resources and advanced capabilities.
+
+</CustomContent>
 
 ## {{{ .starter }}}
 

@@ -21,6 +21,8 @@ To connect to a {{{ .starter }}} or {{{ .essential }}} cluster via public endpoi
 
 3. In the dialog, keep the default setting of the connection type as `Public`, and select your preferred connection method and operating system to get the corresponding connection string.
 
+    <CustomContent language="en,zh">
+
     > **Note:**
     >
     > - Keeping the connection type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to {{{ .starter }}} or Essential](/tidb-cloud/secure-connections-to-serverless-clusters.md).
@@ -28,6 +30,17 @@ To connect to a {{{ .starter }}} or {{{ .essential }}} cluster via public endpoi
     >
     >     - [Connect to {{{ .starter }}} via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
     >     - [Connect to {{{ .starter }}} or Essential via Alibaba Cloud Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+
+    </CustomContent>
+
+    <CustomContent language="ja">
+
+    > **Note:**
+    >
+    > - Keeping the connection type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to {{{ .starter }}} or Essential](/tidb-cloud/secure-connections-to-serverless-clusters.md).
+    > - If you choose **Private Endpoint** in the **Connection Type** drop-down list, it means that the connection is via private endpoint. For more information, see [Connect to {{{ .starter }}} via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
+
+    </CustomContent>
 
 4. TiDB Cloud lets you create [branches](/tidb-cloud/branch-overview.md) for your {{{ .starter }}} or {{{ .essential }}} cluster. After a branch is created, you can choose to connect to the branch via the **Branch** drop-down list. `main` represents the cluster itself.
 

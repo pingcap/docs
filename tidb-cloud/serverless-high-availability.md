@@ -25,6 +25,8 @@ TiDB Cloud extends these capabilities with two types of high availability to mee
 
 When you create a cluster with the default zonal high availability, all components, including Gateway, TiDB, TiKV, and TiFlash compute/write nodes, run in the same availability zone. The placement of these components in the data plane offer infrastructure redundancy with virtual machine pools, which minimizes failover time and network latency due to colocation.
 
+<CustomContent language="en,zh">
+
 - The following diagram shows the architecture of zonal high availability on AWS:
 
     ![zonal high availability on AWS](/media/tidb-cloud/zonal-high-avaliability-aws.png)
@@ -32,6 +34,16 @@ When you create a cluster with the default zonal high availability, all componen
 - The following diagram shows the architecture of zonal high availability on Alibaba Cloud:
 
     ![zonal high availability on Alibaba Cloud](/media/tidb-cloud/zonal-high-avaliability-alibaba-cloud.png)
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+The following diagram shows the architecture of zonal high availability on AWS:
+
+![zonal high availability on AWS](/media/tidb-cloud/zonal-high-avaliability-aws.png)
+
+</CustomContent>
 
 In zonal high availability architecture:
 
@@ -43,11 +55,25 @@ In zonal high availability architecture:
 
 TiDB Cloud ensures a transparent failover process for your applications. During a failover:
 
+<CustomContent language="en,zh">
+
 - A new replica is created to replace the failed one.
 
 - Servers providing storage services recover local caches from persisted data on Amazon S3 or Alibaba Cloud OSS (depending on your cloud provider), restoring the system to a consistent state with the replicas.
 
 In the storage layer, persisted data is regularly pushed to Amazon S3 or Alibaba Cloud OSS (depending on your cloud provider) for high durability. Moreover, immediate updates are not only replicated across multiple TiKV servers but also stored on the EBS of each server, which further replicates the data for additional durability. TiDB automatically resolves issues by backing off and retrying in milliseconds, ensuring the failover process remains seamless for client applications.
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+- A new replica is created to replace the failed one.
+
+- Servers providing storage services recover local caches from persisted data on Amazon S3 (depending on your cloud provider), restoring the system to a consistent state with the replicas.
+
+In the storage layer, persisted data is regularly pushed to Amazon S3 for high durability. Moreover, immediate updates are not only replicated across multiple TiKV servers but also stored on the EBS of each server, which further replicates the data for additional durability. TiDB automatically resolves issues by backing off and retrying in milliseconds, ensuring the failover process remains seamless for client applications.
+
+</CustomContent>
 
 The gateway and computing layers are stateless, so failover involves restarting them elsewhere immediately. Applications should implement retry logic for their connections. While the zonal setup provides high availability, it cannot handle an entire zone failure. If the zone becomes unavailable, downtime will occur until the zone and its dependent services are restored.
 
@@ -60,6 +86,8 @@ When you create a cluster with regional high availability, critical OLTP (Online
 > - Regional high availability is currently in beta.
 > - You can enable regional high availability when you create a {{{ .essential }}} cluster.
 
+<CustomContent language="en,zh">
+
 The following diagram shows the architecture of regional high availability on Alibaba Cloud:
 
 ![regional high availability](/media/tidb-cloud/regional-high-avaliability-alibaba-cloud.png)
@@ -69,6 +97,8 @@ In regional high availability architecture:
 - The Placement Driver (PD) and TiKV are deployed across multiple availability zones, and data is always replicated redundantly across zones to ensure the highest level of availability.
 - Data is replicated across TiFlash write nodes within the primary availability zone.
 - TiDB servers and TiFlash compute nodes read from and write to these TiKV and TiFlash write nodes, which are safeguarded by storage-level replication.
+
+</CustomContent>
 
 ### Failover process
 
@@ -94,9 +124,21 @@ TiDB Cloud provides robust automated backup mechanisms to ensure continuous data
 
 These automated backups enable you to restore your database either from a full backup or from a specific point in time by combining full backups with continuous transaction logs. This flexibility ensures that you can recover your database to a precise point just before an incident occurs.
 
+<CustomContent language="en,zh">
+
 > **Note:**
 >
 > Automatic backups, including snapshot-based and continuous backups for Point-in-Time Recovery (PITR), are performed on Amazon S3 or Alibaba Cloud OSS (depending on your cloud provider), which provides regional-level high durability.
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+> **Note:**
+>
+> Automatic backups, including snapshot-based and continuous backups for Point-in-Time Recovery (PITR), are performed on Amazon S3, which provides regional-level high durability.
+
+</CustomContent>
 
 ## Impact on sessions during failures
 
