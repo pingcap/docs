@@ -5,7 +5,7 @@ summary: Learn how to upgrade TiDB using TiUP.
 
 # Upgrade TiDB Using TiUP
 
-This document applies to upgrading to TiDB v8.5.x from the following versions: v6.1.x, v6.5.x, v7.1.x, v7.5.x, v8.1.x, v8.2.0, v8.3.0, and v8.4.0
+This document applies to upgrading to TiDB v8.5.x from the following versions: v6.1.x, v6.5.x, v7.1.x, v7.5.x, v8.1.x, v8.2.0, v8.3.0, and v8.4.0.
 
 > **Warning:**
 >
