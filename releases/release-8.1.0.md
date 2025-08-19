@@ -173,7 +173,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
-| [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402-and-deprecated-in-v810) | Deprecated | Starting from v8.1.0, the telemetry feature in TiDB is removed, and this variable is no longer functional. It is retained solely for compatibility with earlier versions. |
+| [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) | Deprecated | Starting from v8.1.0, the telemetry feature in TiDB is removed, and this variable is no longer functional. It is retained solely for compatibility with earlier versions. |
 | [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) | Modified | Changes the value range from `[0, 18446744073709551615]` to `(0, 1]`. |
 | [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) | Modified | Changes the default value from `OFF` to `ON`. This means that Distributed eXecution Framework (DXF) is enabled by default, which fully utilizes the resources of the TiDB cluster and greatly improves the performance of `ADD INDEX` and `IMPORT INTO` tasks. If you want to upgrade a cluster with the DXF enabled to v8.1.0 or later, disable the DXF (by setting `tidb_enable_dist_task` to `OFF`) before the upgrade, which avoids `ADD INDEX` operations during the upgrade causing data index inconsistency. After the upgrade, you can manually enable the DXF. |
 | [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) | Modified | Changes the optional value from `""` or `background` to a string with a length of up to 64 characters, which enables you to control the service scope of each TiDB node more flexibly. Valid characters include digits `0-9`, letters `a-zA-Z`, underscores `_`, and hyphens `-`. The Distributed eXecution Framework (DXF) determines which TiDB nodes can be scheduled to execute distributed tasks based on the value of this variable. For specific rules, see [Task scheduling](/tidb-distributed-execution-framework.md#task-scheduling). |
@@ -182,7 +182,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 
 | Configuration file | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
-| TiDB| [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402-and-deprecated-in-v810) | Deprecated | Starting from v8.1.0, the telemetry feature in TiDB is removed, and this configuration item is no longer functional. It is retained solely for compatibility with earlier versions. |
+| TiDB| [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) | Deprecated | Starting from v8.1.0, the telemetry feature in TiDB is removed, and this configuration item is no longer functional. It is retained solely for compatibility with earlier versions. |
 | TiDB| [`concurrently-init-stats`](/tidb-configuration-file.md#concurrently-init-stats-new-in-v810-and-v752) | Newly added | Controls whether to initialize statistics concurrently during TiDB startup. The default value is `false`. |
 | PD | [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry) | Deprecated | Starting from v8.1.0, the telemetry feature in TiDB Dashboard is removed, and this configuration item is no longer functional. It is retained solely for compatibility with earlier versions. |
 | TiDB Lightning | [`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-configuration) | Modified | Starting from v8.1.0, there is no need to configure `conflict.max-record-rows` manually, because TiDB Lightning automatically assigns the value of `conflict.max-record-rows` with the value of `conflict.threshold`, regardless of the user input. `conflict.max-record-rows` will be deprecated in a future release. |
@@ -199,7 +199,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 
 * Starting from v8.1.0, the telemetry feature in TiDB and TiDB Dashboard is removed:
 
-    * The system variable [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402-and-deprecated-in-v810), the TiDB configuration item [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402-and-deprecated-in-v810), and the PD configuration item [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry) are deprecated and no longer functional.
+    * The system variable [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402), the TiDB configuration item [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402), and the PD configuration item [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry) are deprecated and no longer functional.
     * The `ADMIN SHOW TELEMETRY` syntax is removed.
     * The `TELEMETRY` and `TELEMETRY_ID` keywords are removed.
 

@@ -392,7 +392,7 @@ mysql> SELECT * FROM t1;
 
 > **Note:**
 >
-> This variable is not supported on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is not supported on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
 
 <CustomContent platform="tidb">
 
@@ -593,7 +593,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -646,7 +646,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -806,7 +806,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 > **Note:**
 >
-> This variable is not supported on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is not supported on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
@@ -818,7 +818,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 > **Note:**
 >
-> This variable is not supported on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is not supported on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
@@ -865,7 +865,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `ON` for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)
+- Default value: `OFF` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `ON` for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)
 
 <CustomContent platform="tidb">
 
@@ -887,7 +887,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -1429,7 +1429,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
 
 - Scope: SESSION
 - Persists to cluster: No
@@ -1609,7 +1609,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -1625,7 +1625,8 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 > **Note:**
 >
 > - If you are using a [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) cluster, to improve the speed for index creation using this variable, make sure that your TiDB cluster is hosted on AWS and your TiDB node size is at least 8 vCPU.
-> - For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters, this variable is read-only.
+> - For [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) clusters with 4 vCPU, it is recommended to manually disable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) to prevent resource limitations from affecting cluster stability during index creation. Disabling this setting allows indexes to be created using transactions, which reduces the overall impact on the cluster.
+> - For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters, this variable is read-only.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -1685,7 +1686,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -1699,7 +1700,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -1713,7 +1714,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -1731,7 +1732,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
 
 - Scope: SESSION
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
@@ -1759,7 +1760,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -1885,7 +1886,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -1917,7 +1918,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -1935,7 +1936,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -2023,7 +2024,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
@@ -2166,7 +2167,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -2256,7 +2257,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -2338,7 +2339,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -2662,7 +2663,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -2726,7 +2727,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -2771,21 +2772,23 @@ Query OK, 0 rows affected (0.09 sec)
 - Default value: `ON`
 - This variable is deprecated since v8.4.0. Its value will be fixed to the default value `ON`, that is, [table partitioning](/partitioned-table.md) is enabled by default.
 
-### tidb_enable_telemetry <span class="version-mark">New in v4.0.2 and deprecated in v8.1.0</span>
+### tidb_enable_telemetry <span class="version-mark">New in v4.0.2</span>
 
 > **Warning:**
 >
-> Starting from v8.1.0, the telemetry feature in TiDB is removed, and this variable is no longer functional. It is retained solely for compatibility with earlier versions.
+> - For versions earlier than v8.1.0, TiDB periodically reports telemetry data to PingCAP.
+> - For versions from v8.1.0 to v8.5.1, TiDB removes the telemetry feature and the `tidb_enable_telemetry` variable no longer takes effect. It is retained solely for compatibility with earlier versions.
+> - Starting from v8.5.3, TiDB reintroduces the telemetry feature. However, it only logs telemetry-related information locally and no longer sends data to PingCAP over the network.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF`
+- Default value: `ON`. Starting from v8.5.3, the default value is changed from `OFF` to `ON`.
 
 <CustomContent platform="tidb">
 
-- Before v8.1.0, this variable controls whether to enable the telemetry collection in TiDB.
+- This variable controls whether the telemetry feature is enabled in TiDB. Starting from v8.5.3, this variable only takes effect when the [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) configuration item of the TiDB instance is set to `true`.
 
 </CustomContent>
 
@@ -2836,7 +2839,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -3059,7 +3062,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -3079,7 +3082,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -3095,7 +3098,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Duration
 - Default value: `10m0s`
-- Range: `[10m0s, 8760h0m0s]` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `[10m0s, 168h0m0s]` for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)
+- Range: `[10m0s, 8760h0m0s]` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `[10m0s, 168h0m0s]` for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)
 - The time limit during which data is retained for each GC, in the format of Go Duration. When a GC happens, the current time minus this value is the safe point.
 
 > **Note:**
@@ -3109,7 +3112,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -3124,7 +3127,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -3142,7 +3145,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -3237,7 +3240,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -3272,7 +3275,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -3285,7 +3288,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -3547,7 +3550,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: SESSION
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -3647,7 +3650,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
@@ -4155,7 +4158,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 - Type: Float
 - Range: `[0, 18446744073709551615]`
 - Default value: `3.0`
-- Indicates the CPU cost of starting a Golang goroutine in TiDB. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+- Indicates the CPU cost of starting a Golang goroutine in TiDB. This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_copcpu_factor
 
@@ -4165,7 +4168,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 - Type: Float
 - Range: `[0, 18446744073709551615]`
 - Default value: `3.0`
-- Indicates the CPU cost for TiKV Coprocessor to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+- Indicates the CPU cost for TiKV Coprocessor to process one row. This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_correlation_exp_factor
 
@@ -4199,7 +4202,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `3.0`
-- Indicates the CPU cost for TiDB to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+- Indicates the CPU cost for TiDB to process one row. This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### `tidb_opt_derive_topn` <span class="version-mark">New in v7.0.0</span>
 
@@ -4218,7 +4221,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 - Type: Float
 - Range: `[0, 18446744073709551615]`
 - Default value: `3.0`
-- Indicates the cost for TiKV to scan one row from the disk in descending order. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+- Indicates the cost for TiKV to scan one row from the disk in descending order. This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_disk_factor
 
@@ -4228,7 +4231,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 - Type: Float
 - Range: `[0, 18446744073709551615]`
 - Default value: `1.5`
-- Indicates the I/O cost for TiDB to read or write one byte of data from or to the temporary disk. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+- Indicates the I/O cost for TiDB to read or write one byte of data from or to the temporary disk. This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_distinct_agg_push_down
 
@@ -4433,7 +4436,7 @@ mysql> desc select count(distinct a) from test.t;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `0.001`
-- Indicates the memory cost for TiDB to store one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+- Indicates the memory cost for TiDB to store one row. This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_mpp_outer_join_fixed_build_side <span class="version-mark">New in v5.1.0</span>
 
@@ -4452,7 +4455,7 @@ mysql> desc select count(distinct a) from test.t;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.0`
-- Indicates the net cost of transferring 1 byte of data through the network. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+- Indicates the net cost of transferring 1 byte of data through the network. This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_objective <span class="version-mark">New in v7.4.0</span>
 
@@ -4866,7 +4869,7 @@ SHOW WARNINGS;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.5`
-- Indicates the cost for TiKV to scan one row of data from the disk in ascending order. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+- Indicates the cost for TiKV to scan one row of data from the disk in ascending order. This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_seek_factor
 
@@ -4876,7 +4879,7 @@ SHOW WARNINGS;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `20`
-- Indicates the start-up cost for TiDB to request data from TiKV. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+- Indicates the start-up cost for TiDB to request data from TiKV. This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_skew_distinct_agg <span class="version-mark">New in v6.2.0</span>
 
@@ -4930,6 +4933,210 @@ SHOW WARNINGS;
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to control whether to allow `INSERT`, `REPLACE`, and `UPDATE` statements to operate on the `_tidb_rowid` column. This variable can be used only when you import data using TiDB tools.
+
+### tidb_opt_hash_agg_cost_factor <span class="version-mark">New in v8.5.3 and v9.0.0</span>
+
+> **Warning:**
+>
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+- Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1`
+
+### tidb_opt_hash_join_cost_factor <span class="version-mark">New in v8.5.3 and v9.0.0</span>
+
+> **Warning:**
+>
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+- Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1`
+
+### tidb_opt_index_join_cost_factor <span class="version-mark">New in v8.5.3 and v9.0.0</span>
+
+> **Warning:**
+>
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+- Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1`
+
+### tidb_opt_index_lookup_cost_factor <span class="version-mark">New in v8.5.3 and v9.0.0</span>
+
+> **Warning:**
+>
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+- Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1`
+
+### tidb_opt_index_merge_cost_factor <span class="version-mark">New in v8.5.3 and v9.0.0</span>
+
+> **Warning:**
+>
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+- Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1`
+
+### tidb_opt_index_reader_cost_factor <span class="version-mark">New in v8.5.3 and v9.0.0</span>
+
+> **Warning:**
+>
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+- Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1`
+
+### tidb_opt_index_scan_cost_factor <span class="version-mark">New in v8.5.3 and v9.0.0</span>
+
+> **Warning:**
+>
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+- Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1`
+
+### tidb_opt_limit_cost_factor <span class="version-mark">New in v8.5.3 and v9.0.0</span>
+
+> **Warning:**
+>
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+- Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1`
+
+### tidb_opt_merge_join_cost_factor <span class="version-mark">New in v8.5.3 and v9.0.0</span>
+
+> **Warning:**
+>
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+- Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1`
+
+### tidb_opt_sort_cost_factor <span class="version-mark">New in v8.5.3 and v9.0.0</span>
+
+> **Warning:**
+>
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+- Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1`
+
+### tidb_opt_stream_agg_cost_factor <span class="version-mark">New in v8.5.3 and v9.0.0</span>
+
+> **Warning:**
+>
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+- Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1`
+
+### tidb_opt_table_full_scan_cost_factor <span class="version-mark">New in v8.5.3 and v9.0.0</span>
+
+> **Warning:**
+>
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+- Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1`
+
+### tidb_opt_table_range_scan_cost_factor <span class="version-mark">New in v8.5.3 and v9.0.0</span>
+
+> **Warning:**
+>
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+- Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1`
+
+### tidb_opt_table_reader_cost_factor <span class="version-mark">New in v8.5.3 and v9.0.0</span>
+
+> **Warning:**
+>
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+- Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1`
+
+### tidb_opt_table_rowid_cost_factor <span class="version-mark">New in v8.5.3 and v9.0.0</span>
+
+> **Warning:**
+>
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+- Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1`
+
+### tidb_opt_table_tiflash_scan_cost_factor <span class="version-mark">New in v8.5.3 and v9.0.0</span>
+
+> **Warning:**
+>
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+- Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1`
+
+### tidb_opt_topn_cost_factor <span class="version-mark">New in v8.5.3 and v9.0.0</span>
+
+> **Warning:**
+>
+> This variable is used internally by the [cost model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+- Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1`
 
 ### tidb_optimizer_selectivity_level
 
@@ -4999,7 +5206,7 @@ SHOW WARNINGS;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -5316,7 +5523,7 @@ SHOW WARNINGS;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -5356,7 +5563,7 @@ SHOW WARNINGS;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5374,7 +5581,7 @@ SHOW WARNINGS;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5387,7 +5594,7 @@ SHOW WARNINGS;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5453,7 +5660,7 @@ SHOW WARNINGS;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5611,7 +5818,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -5758,7 +5965,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5772,7 +5979,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5785,7 +5992,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5811,7 +6018,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5833,7 +6040,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5906,7 +6113,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -6009,7 +6216,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -6064,7 +6271,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -6077,7 +6284,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -6090,7 +6297,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -6103,7 +6310,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -6116,7 +6323,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -6129,7 +6336,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -6142,7 +6349,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
@@ -6155,7 +6362,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
@@ -6168,7 +6375,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -6246,7 +6453,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -6271,7 +6478,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: SESSION
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
@@ -6286,7 +6493,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: SESSION
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
@@ -6593,7 +6800,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 
 > **Note:**
 >
-> This variable is always enabled for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is always enabled for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -6609,7 +6816,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `8`
-- Range: `[0, 2147483647]` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `[8, 2147483647]` for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)
+- Range: `[0, 2147483647]` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `[8, 2147483647]` for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)
 - This variable is a check item in the password complexity check. It checks whether the password length is sufficient. By default, the minimum password length is `8`. This variable takes effect only when [`validate_password.enable`](#validate_passwordenable-new-in-v650) is enabled.
 - The value of this variable must not be smaller than the expression: `validate_password.number_count + validate_password.special_char_count + (2 * validate_password.mixed_case_count)`.
 - If you change the value of `validate_password.number_count`, `validate_password.special_char_count`, or `validate_password.mixed_case_count` such that the expression value is larger than `validate_password.length`, the value of `validate_password.length` is automatically changed to match the expression value.
@@ -6621,7 +6828,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1`
-- Range: `[0, 2147483647]` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `[1, 2147483647]` for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)
+- Range: `[0, 2147483647]` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `[1, 2147483647]` for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)
 - This variable is a check item in the password complexity check. It checks whether the password contains sufficient uppercase and lowercase letters. This variable takes effect only when [`validate_password.enable`](#validate_passwordenable-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to `1` (MEDIUM) or larger.
 - Neither the number of uppercase letters nor the number of lowercase letters in the password can be fewer than the value of `validate_password.mixed_case_count`. For example, when the variable is set to `1`, the password must contain at least one uppercase letter and one lowercase letter.
 
@@ -6632,7 +6839,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1`
-- Range: `[0, 2147483647]` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `[1, 2147483647]` for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)
+- Range: `[0, 2147483647]` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `[1, 2147483647]` for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)
 - This variable is a check item in the password complexity check. It checks whether the password contains sufficient numbers. This variable takes effect only when [`validate_password.enable`](#password_reuse_interval-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to `1` (MEDIUM) or larger.
 
 ### validate_password.policy <span class="version-mark">New in v6.5.0</span>
@@ -6642,7 +6849,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `1`
-- Value options: `0`, `1`, and `2` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated); `1` and `2` for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)
+- Value options: `0`, `1`, and `2` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated); `1` and `2` for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)
 - This variable controls the policy for the password complexity check. This variable takes effect only when [`validate_password.enable`](#password_reuse_interval-new-in-v650) is enabled. The value of this variable determines whether other `validate-password` variables take effect in the password complexity check, except for `validate_password.check_user_name`.
 - This value of this variable can be `0`, `1`, or `2` (corresponds to LOW, MEDIUM, or STRONG). Different policy levels have different checks:
     - 0 or LOW: password length.
@@ -6656,7 +6863,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1`
-- Range: `[0, 2147483647]` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `[1, 2147483647]` for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)
+- Range: `[0, 2147483647]` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `[1, 2147483647]` for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)
 - This variable is a check item in the password complexity check. It checks whether the password contains sufficient special characters. This variable takes effect only when [`validate_password.enable`](#password_reuse_interval-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to `1` (MEDIUM) or larger.
 
 ### version
@@ -6691,7 +6898,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes

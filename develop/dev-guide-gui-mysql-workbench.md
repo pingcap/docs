@@ -16,7 +16,7 @@ In this tutorial, you can learn how to connect to your TiDB cluster using MySQL 
 
 > **Note:**
 >
-> This tutorial is compatible with {{{ .starter }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> This tutorial is compatible with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -47,7 +47,7 @@ To complete this tutorial, you need:
 Connect to your TiDB cluster depending on the TiDB deployment option you have selected.
 
 <SimpleTab>
-<div label="{{{ .starter }}}">
+<div label="{{{ .starter }}} or Essential">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 

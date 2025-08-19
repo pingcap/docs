@@ -15,7 +15,7 @@ In this tutorial, you can learn how to use TiDB and node-mysql2 to accomplish th
 
 > **Note:**
 >
-> This tutorial works with {{{ .starter }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> This tutorial works with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -77,7 +77,7 @@ npm install mysql2 dotenv --save
 Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
-<div label="{{{ .starter }}}">
+<div label="{{{ .starter }}} or Essential">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -246,7 +246,7 @@ void main();
 
 > **Note**
 >
-> For {{{ .starter }}}, you **MUST** enable TLS connection via `TIDB_ENABLE_SSL` when using public endpoint. However, you **don't** have to specify an SSL CA certificate via `TIDB_CA_PATH`, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default, which is trusted by {{{ .starter }}}.
+> For {{{ .starter }}} and {{{ .essential }}}, you **MUST** enable TLS connection via `TIDB_ENABLE_SSL` when using public endpoint. However, you **don't** have to specify an SSL CA certificate via `TIDB_CA_PATH`, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default, which is trusted by {{{ .starter }}}.
 
 ### Insert data
 

@@ -28,6 +28,7 @@ quote = '"'
 null = '\N'
 include-commit-ts = true
 output-old-value = false
+output-field-header = false # New in v9.0.0
 ```
 
 ## Transactional constraints
@@ -50,6 +51,12 @@ In the CSV file, each column is defined as follows:
 - Column 4: The `commit-ts` of the source transaction. This column is optional.
 - Column 5: The `is-update` column only exists when the value of `output-old-value` is true, which is used to identify whether the row data change comes from the UPDATE event (the value of the column is true) or the INSERT/DELETE event (the value is false).
 - Column 6 to the last column: One or more columns with data changes.
+
+When `output-field-header = true`, the CSV file includes a header row. The column names in the header row are as follows:
+
+| Column 1 | Column 2 | Column 3 | Column 4 (optional) | Column 5 (optional) | Column 6 | ... | Last column |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `ticdc-meta$operation` | `ticdc-meta$table` | `ticdc-meta$schema` | `ticdc-meta$commit-ts` | `ticdc-meta$is-update` | The first column with data changes | ... | The last column with data changes |
 
 Assume that table `hr.employee` is defined as follows:
 
@@ -76,6 +83,19 @@ When `include-commit-ts = true` and `output-old-value = false`, the DML events o
 When `include-commit-ts = true` and `output-old-value = true`, the DML events of this table are stored in the CSV format as follows:
 
 ```
+"I","employee","hr",433305438660591626,false,101,"Smith","Bob","2014-06-04","New York"
+"D","employee","hr",433305438660591627,true,101,"Smith","Bob","2015-10-08","Shanghai"
+"I","employee","hr",433305438660591627,true,101,"Smith","Bob","2015-10-08","Los Angeles"
+"D","employee","hr",433305438660591629,false,101,"Smith","Bob","2017-03-13","Dallas"
+"I","employee","hr",433305438660591630,false,102,"Alex","Alice","2017-03-14","Shanghai"
+"D","employee","hr",433305438660591630,true,102,"Alex","Alice","2017-03-14","Beijing"
+"I","employee","hr",433305438660591630,true,102,"Alex","Alice","2018-06-15","Beijing"
+```
+
+When `include-commit-ts = true`, `output-old-value = true`, and `output-field-header = true`, the DML events of this table are stored in the CSV format as follows:
+
+```csv
+ticdc-meta$operation,ticdc-meta$table,ticdc-meta$schema,ticdc-meta$commit-ts,ticdc-meta$is-update,Id,LastName,FirstName,HireDate,OfficeLocation
 "I","employee","hr",433305438660591626,false,101,"Smith","Bob","2014-06-04","New York"
 "D","employee","hr",433305438660591627,true,101,"Smith","Bob","2015-10-08","Shanghai"
 "I","employee","hr",433305438660591627,true,101,"Smith","Bob","2015-10-08","Los Angeles"

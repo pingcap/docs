@@ -16,7 +16,7 @@ In this tutorial, you can learn how to use TiDB along with [Spring Data JPA](htt
 
 > **Note:**
 >
-> This tutorial works with {{{ .starter }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> This tutorial works with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -62,7 +62,7 @@ cd tidb-java-springboot-jpa-quickstart
 Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
-<div label="{{{ .starter }}}">
+<div label="{{{ .starter }}} or Essential">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 

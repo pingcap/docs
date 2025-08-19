@@ -16,7 +16,7 @@ In this tutorial, you can learn how to use TiDB and SQLAlchemy to accomplish the
 
 > **Note:**
 >
-> This tutorial works with {{{ .starter }}}, TiDB Cloud Dedicated, and TiDB Self-Managed clusters.
+> This tutorial works with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed clusters.
 
 ## Prerequisites
 
@@ -75,7 +75,7 @@ You can also use other database drivers, such as [mysqlclient](https://github.co
 Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
-<div label="{{{ .starter }}}">
+<div label="{{{ .starter }}} or Essential">
 
 > **Note:**
 >
