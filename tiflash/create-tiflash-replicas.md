@@ -159,10 +159,10 @@ During this process, each TiKV instance performs a full table scan and sends a s
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer
     ```
 
-    > In the preceding command, you need to replace `v<CLUSTER_VERSION>` with the actual cluster version, such as `{{{ .tidb-version }}}` and `<PD_ADDRESS>:2379` with the address of any PD node. For example:
+    > In the preceding command, you need to replace `v<CLUSTER_VERSION>` with the actual cluster version, such as `v{{{ .tidb-version }}}` and `<PD_ADDRESS>:2379` with the address of any PD node. For example:
     >
     > ```shell
-    > tiup ctl:{{{ .tidb-version }}} pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
+    > tiup ctl:v{{{ .tidb-version }}} pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
     > ```
 
     If the cluster contains many Regions on the old TiFlash nodes, PD needs to rebalance them to the new TiFlash nodes. You need to adjust the `remove-peer` limit accordingly.
