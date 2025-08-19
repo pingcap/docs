@@ -81,11 +81,11 @@ By default, the task types that are marked as background tasks are `""`, and the
     The output is as follows:
 
     ```
-    +---------+------------+----------+-----------+-------------+-------------------------------------------+
-    | NAME    | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT | BACKGROUND                                |
-    +---------+------------+----------+-----------+-------------+-------------------------------------------+
-    | default | UNLIMITED  | MEDIUM   | YES       | NULL        | TASK_TYPES='br,ddl', UTILIZATION_LIMIT=30 |
-    +---------+------------+----------+-----------+-------------+-------------------------------------------+
+    +---------+------------+----------+-----------------+-------------+-------------------------------------------+
+    | NAME    | RU_PER_SEC | PRIORITY | BURSTABLE       | QUERY_LIMIT | BACKGROUND                                |
+    +---------+------------+----------+-----------------+-------------+-------------------------------------------+
+    | default | UNLIMITED  | MEDIUM   | UNLIMITED       | NULL        | TASK_TYPES='br,ddl', UTILIZATION_LIMIT=30 |
+    +---------+------------+----------+-----------------+-------------+-------------------------------------------+
     ```
 
 5. To explicitly mark tasks in the current session as the background type, you can use `tidb_request_source_type` to explicitly specify the task type. The following is an example:
