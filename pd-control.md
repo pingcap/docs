@@ -171,7 +171,7 @@ Usage:
 }
 
 >> config show cluster-version                // Display the current version of the cluster, which is the current minimum version of TiKV nodes in the cluster and does not correspond to the binary version.
-"8.5.1"
+"8.5.3"
 ```
 
 - `max-snapshot-count` controls the maximum number of snapshots that a single store receives or sends out at the same time. The scheduler is restricted by this configuration to avoid taking up normal application resources. When you need to improve the speed of adding replicas or balancing, increase this value.
@@ -309,7 +309,7 @@ Usage:
 - `cluster-version` is the version of the cluster, which is used to enable or disable some features and to deal with the compatibility issues. By default, it is the minimum version of all normally running TiKV nodes in the cluster. You can set it manually only when you need to roll it back to an earlier version.
 
     ```bash
-    config set cluster-version 8.5.1              // Set the version of the cluster to 8.5.1
+    config set cluster-version 8.5.3              // Set the version of the cluster to 8.5.3
     ```
 
 - `replication-mode` controls the replication mode of Regions in the dual data center scenario. See [Enable the DR Auto-Sync mode](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode) for details.
