@@ -129,13 +129,13 @@ The two vectors must have the same number of dimensions. Otherwise, an error is 
 Example:
 
 ```sql
-SELECT VEC_L2_DISTANCE('[0,3]', '[4,0]');
+SELECT VEC_L2_DISTANCE('[0, 3]', '[4, 0]');
 ```
 
 ```
-+-----------------------------------+
-| VEC_L2_DISTANCE('[0,3]', '[4,0]') |
-+-----------------------------------+
++-------------------------------------+
+| VEC_L2_DISTANCE('[0, 3]', '[4, 0]') |
++-------------------------------------+
 |                                 5 |
 +-----------------------------------+
 ```
@@ -183,13 +183,13 @@ The two vectors must have the same number of dimensions. Otherwise, an error is 
 Example:
 
 ```sql
-SELECT VEC_NEGATIVE_INNER_PRODUCT('[1,2]', '[3,4]');
+SELECT VEC_NEGATIVE_INNER_PRODUCT('[1, 2]', '[3, 4]');
 ```
 
 ```
-+----------------------------------------------+
-| VEC_NEGATIVE_INNER_PRODUCT('[1,2]', '[3,4]') |
-+----------------------------------------------+
++------------------------------------------------+
+| VEC_NEGATIVE_INNER_PRODUCT('[1, 2]', '[3, 4]') |
++------------------------------------------------+
 |                                          -11 |
 +----------------------------------------------+
 ```
@@ -209,13 +209,13 @@ The two vectors must have the same number of dimensions. Otherwise, an error is 
 Example:
 
 ```sql
-SELECT VEC_L1_DISTANCE('[0,0]', '[3,4]');
+SELECT VEC_L1_DISTANCE('[0, 0]', '[3, 4]');
 ```
 
 ```
-+-----------------------------------+
-| VEC_L1_DISTANCE('[0,0]', '[3,4]') |
-+-----------------------------------+
++-------------------------------------+
+| VEC_L1_DISTANCE('[0, 0]', '[3, 4]') |
++-------------------------------------+
 |                                 7 |
 +-----------------------------------+
 ```
@@ -231,15 +231,15 @@ Returns the dimension of a vector.
 Examples:
 
 ```sql
-SELECT VEC_DIMS('[1,2,3]');
+SELECT VEC_DIMS('[1, 2, 3]');
 ```
 
 ```
-+---------------------+
-| VEC_DIMS('[1,2,3]') |
-+---------------------+
-|                   3 |
-+---------------------+
++-----------------------+
+| VEC_DIMS('[1, 2, 3]') |
++-----------------------+
+|                     3 |
++-----------------------+
 ```
 
 ```sql
@@ -267,13 +267,13 @@ $NORM(p)=\sqrt {\sum \limits _{i=1}^{n}{p_{i}^{2}}}$
 Example:
 
 ```sql
-SELECT VEC_L2_NORM('[3,4]');
+SELECT VEC_L2_NORM('[3, 4]');
 ```
 
 ```
-+----------------------+
-| VEC_L2_NORM('[3,4]') |
-+----------------------+
++-----------------------+
+| VEC_L2_NORM('[3, 4]') |
++-----------------------+
 |                    5 |
 +----------------------+
 ```
@@ -289,7 +289,7 @@ Converts a string into a vector. In many cases conversion is done implicitly, fo
 Example:
 
 ```sql
-SELECT VEC_FROM_TEXT('[1,2]') + VEC_FROM_TEXT('[3,4]');
+SELECT VEC_FROM_TEXT('[1, 2]') + VEC_FROM_TEXT('[3, 4]');
 ```
 
 ```
@@ -311,13 +311,13 @@ Converts a vector into a string.
 Example:
 
 ```sql
-SELECT VEC_AS_TEXT('[1.000,   2.5]');
+SELECT VEC_AS_TEXT('[1.000, 2.5]');
 ```
 
 ```
-+-------------------------------+
-| VEC_AS_TEXT('[1.000,   2.5]') |
-+-------------------------------+
++-----------------------------+
+| VEC_AS_TEXT('[1.000, 2.5]') |
++-----------------------------+
 | [1,2.5]                       |
 +-------------------------------+
 ```
