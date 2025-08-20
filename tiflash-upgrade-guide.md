@@ -82,7 +82,7 @@ If you do not enable [dynamic pruning mode](/partitioned-table.md#dynamic-prunin
 
 ## From v5.x or v6.0 to v6.2
 
-In TiDB v6.2, TiFlash upgrades its data storage format to the V3 version for reducing write amplification and improving TiFlash stability. Therefore, when you upgrade from v5.x, v6.0, or v6.1 to v6.2 or later versions, besides functional changes in [TiFlash Proxy](#tiflash-proxy) and [Dynamic pruning](#dynamic-pruning), you also need to pay attention to the functional change in PageStorage.
+In TiDB v6.2, TiFlash upgrades its data storage format to V3 to reduce write amplification and improve TiFlash stability. When you upgrade from v5.x, v6.0, or v6.1 to v6.2 or a later version, in addition to the functional changes in [TiFlash Proxy](#tiflash-proxy) and [Dynamic pruning](#dynamic-pruning), you also need to pay attention to the functional change in PageStorage.
 
 ### PageStorage
 
