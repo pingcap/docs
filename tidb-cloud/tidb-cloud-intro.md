@@ -50,7 +50,15 @@ With TiDB Cloud, you can get the following key features:
 
 - **Multi-Cloud Support**
 
-    <CustomContent language="en,zh">Stay flexible without cloud vendor lock-in. TiDB Cloud is currently available on AWS, Azure, Google Cloud, and Alibaba Cloud.</CustomContent><CustomContent language="ja">Stay flexible without cloud vendor lock-in. TiDB Cloud is currently available on AWS, Azure, and Google Cloud.</CustomContent>
+    <CustomContent language="en,zh">
+
+    Stay flexible without cloud vendor lock-in. TiDB Cloud is currently available on AWS, Azure, Google Cloud, and Alibaba Cloud.</CustomContent>
+
+    <CustomContent language="ja">
+
+    Stay flexible without cloud vendor lock-in. TiDB Cloud is currently available on AWS, Azure, and Google Cloud.
+
+    </CustomContent>
 
 - **Simple Pricing Plans**
 
@@ -68,7 +76,11 @@ TiDB Cloud provides the following deployment options:
 
     {{{ .starter }}} is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free quota and consumption based billing once free limits are exceeded.
 
-    <CustomContent language="en,zh">Currently, {{{ .starter }}} is generally available on AWS and in public preview on Alibaba Cloud.</CustomContent>
+    <CustomContent language="en,zh">
+
+    Currently, {{{ .starter }}} is generally available on AWS and in public preview on Alibaba Cloud.
+
+    </CustomContent>
 
 - {{{ .essential }}}
 
