@@ -118,7 +118,7 @@ You can check whether tables still use the old data format on Grafana: **TiFlash
 > - v7.4.0
 > - v7.5.0 to v7.5.1
 > 
-> It is recommended to choose v6.5.10, v7.1.6, v7.5.2, or later versions where this issue has been fixed as the target version for upgrading.
+> It is recommended that you upgrade to v6.5.10, v7.1.6, v7.5.2, or a later version where this issue has been fixed.
 
 **Workaround for downgrading TiFlash in testing or other special scenarios**
 
