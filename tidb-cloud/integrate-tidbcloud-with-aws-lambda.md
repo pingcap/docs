@@ -5,7 +5,7 @@ summary: TiDB Cloud Starter を Amazon Lambda および CloudFormation と統合
 
 # AWS CloudFormation を使用してTiDB Cloud Starter を Amazon Lambda と統合する {#integrate-tidb-cloud-starter-with-amazon-lambda-using-aws-cloudformation}
 
-このドキュメントでは、クラウドネイティブの分散SQLデータベースである[TiDB Cloudスターター](https://www.pingcap.com/tidb-cloud/) 、サーバーレスでイベントドリブンなコンピューティングサービスである[AWS ラムダ](https://aws.amazon.com/lambda/)と統合するための手順を[AWS クラウドフォーメーション](https://aws.amazon.com/cloudformation/)から順に説明します。TiDB TiDB Cloud StarterをAmazon Lambdaと統合することで、 TiDB Cloud StarterとAWS Lambdaを介したマイクロサービスのスケーラビリティとコスト効率を活用できます。AWS CloudFormationは、Lambda関数、API Gateway、Secrets ManagerなどのAWSリソースの作成と管理を自動化します。
+このドキュメントでは、クラウドネイティブの分散SQLデータベースである[TiDB Cloudスターター](https://www.pingcap.com/tidb-cloud-starter/) 、サーバーレスでイベントドリブンなコンピューティングサービスである[AWS ラムダ](https://aws.amazon.com/lambda/)と統合するための手順を[AWS クラウドフォーメーション](https://aws.amazon.com/cloudformation/)から順に説明します。TiDB TiDB Cloud StarterをAmazon Lambdaと統合することで、 TiDB Cloud StarterとAWS Lambdaを介したマイクロサービスのスケーラビリティとコスト効率を活用できます。AWS CloudFormationは、Lambda関数、API Gateway、Secrets ManagerなどのAWSリソースの作成と管理を自動化します。
 
 > **注記：**
 >
@@ -111,7 +111,7 @@ AWS リソースを作成するために`us-east-1`以外の別の AWS リージ
 
 ## ステップ1. AWS CloudFormationを使用して書店プロジェクトをセットアップする {#step-1-set-up-the-bookshop-project-using-aws-cloudformation}
 
-AWS CloudFormation を使用してブックショップ プロジェクトをセットアップするには、次の手順を実行します。
+AWS CloudFormation を使用してブックショッププロジェクトをセットアップするには、次の手順を実行します。
 
 1.  AWS マネジメントコンソールに移動し、 [AWS CloudFormation サービス](https://console.aws.amazon.com/cloudformation)にアクセスします。
 2.  **[スタックの作成]** &gt; **[新しいリソースを使用 (標準)]**をクリックします。

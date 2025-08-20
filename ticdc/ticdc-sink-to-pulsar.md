@@ -1,6 +1,6 @@
 ---
 title: Replicate Data to Pulsar
-summary: TiCDC を使用して Pulsar にデータを複製する方法を学びます。
+summary: TiCDC を使用してデータを Pulsar に複製する方法を学びます。
 ---
 
 # Pulsarにデータを複製する {#replicate-data-to-pulsar}
@@ -23,7 +23,7 @@ cdc cli changefeed create \
 
 Create changefeed successfully!
 ID: simple-replication-task
-Info: {"upstream_id":7277814241002263370,"namespace":"default","id":"simple-replication-task","sink_uri":"pulsar://127.0.0.1:6650/consumer-test?protocol=canal-json","create_time":"2025-06-12T14:42:32.000904+08:00","start_ts":444203257406423044,"config":{"memory_quota":1073741824,"case_sensitive":false,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":false,"bdr_mode":false,"sync_point_interval":600000000000,"sync_point_retention":86400000000000,"filter":{"rules":["pulsar_test.*"]},"mounter":{"worker_num":16},"sink":{"protocol":"canal-json","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false,"binary_encoding_method":"base64"},"dispatchers":[{"matcher":["pulsar_test.*"],"partition":"","topic":"test_{schema}_{table}"}],"encoder_concurrency":16,"terminator":"\r\n","date_separator":"day","enable_partition_separator":true,"only_output_updated_columns":false,"delete_only_output_handle_key_columns":false,"pulsar_config":{"connection-timeout":30,"operation-timeout":30,"batching-max-messages":1000,"batching-max-publish-delay":10,"send-timeout":30},"advance_timeout":150},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"use_file_backend":false},"scheduler":{"enable_table_across_nodes":false,"region_threshold":100000,"write_key_threshold":0},"integrity":{"integrity_check_level":"none","corruption_handle_level":"warn"}},"state":"normal","creator_version":"v8.5.2","resolved_ts":444203257406423044,"checkpoint_ts":444203257406423044,"checkpoint_time":"2025-06-12 14:42:31.410"}
+Info: {"upstream_id":7277814241002263370,"namespace":"default","id":"simple-replication-task","sink_uri":"pulsar://127.0.0.1:6650/consumer-test?protocol=canal-json","create_time":"2025-08-14T14:42:32.000904+08:00","start_ts":444203257406423044,"config":{"memory_quota":1073741824,"case_sensitive":false,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":false,"bdr_mode":false,"sync_point_interval":600000000000,"sync_point_retention":86400000000000,"filter":{"rules":["pulsar_test.*"]},"mounter":{"worker_num":16},"sink":{"protocol":"canal-json","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false,"binary_encoding_method":"base64"},"dispatchers":[{"matcher":["pulsar_test.*"],"partition":"","topic":"test_{schema}_{table}"}],"encoder_concurrency":16,"terminator":"\r\n","date_separator":"day","enable_partition_separator":true,"only_output_updated_columns":false,"delete_only_output_handle_key_columns":false,"pulsar_config":{"connection-timeout":30,"operation-timeout":30,"batching-max-messages":1000,"batching-max-publish-delay":10,"send-timeout":30},"advance_timeout":150},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"use_file_backend":false},"scheduler":{"enable_table_across_nodes":false,"region_threshold":100000,"write_key_threshold":0},"integrity":{"integrity_check_level":"none","corruption_handle_level":"warn"}},"state":"normal","creator_version":"v8.5.3","resolved_ts":444203257406423044,"checkpoint_ts":444203257406423044,"checkpoint_time":"2025-08-14 14:42:31.410"}
 ```
 
 各パラメータの意味は次のとおりです。
@@ -35,7 +35,7 @@ Info: {"upstream_id":7277814241002263370,"namespace":"default","id":"simple-repl
 -   `--target-ts` : チェンジフィードのターゲットTSO。TiCDCクラスターはこのTSOでデータのプルを停止します。デフォルトでは空であり、TiCDCはデータのプルを自動的に停止しません。
 -   `--config` : changefeed設定ファイル[TiCDC チェンジフィード構成パラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
-## Pulsar を設定するには、Sink URI と changefeed config を使用します。 {#use-sink-uri-and-changefeed-config-to-configure-pulsar}
+## Sink URIとchangefeed configを使用してPulsarを構成する {#use-sink-uri-and-changefeed-config-to-configure-pulsar}
 
 Sink URI を使用して TiCDC ターゲット システムの接続情報を指定し、changefeed config を使用して Pulsar に関連するパラメータを構成できます。
 
@@ -66,7 +66,7 @@ URI で設定可能なパラメータは次のとおりです。
 | `pulsar`                      | 下流Pulsarのスキーム。値は`pulsar` 、 `pulsar+ssl` 、 `pulsar+http` 、 `pulsar+https`いずれかで、v8.2.0以降では`pulsar+http`と`pulsar+https`サポートされています。                                       |
 | `127.0.0.1`                   | ダウンストリーム Pulsar がサービスを提供する IP アドレス。                                                                                                                                   |
 | `6650`                        | 下流 Pulsar の接続ポート。                                                                                                                                                     |
-| `persistent://abc/def/yktest` | 前の設定例 1 に示されているように、このパラメータは Pulsar のテナント、名前空間、トピックを指定するために使用されます。                                                                                                     |
+| `persistent://abc/def/yktest` | 前の構成例 1 に示されているように、このパラメータは Pulsar のテナント、名前空間、トピックを指定するために使用されます。                                                                                                     |
 | `yktest`                      | 上記の設定例 2 に示すように、指定したいトピックがPulsarのデフォルトテナント`public`のデフォルト名前空間`default`にある場合、トピック名のみ（例： `yktest` ）でURIを設定できます。これは、トピックを`persistent://public/default/yktest`と指定するのと同じです。 |
 
 ### Changefeed 設定パラメータ {#changefeed-config-parameters}
@@ -138,7 +138,7 @@ send-timeout=30
 
 ### ベストプラクティス {#best-practice}
 
--   チェンジフィードを作成する際は、パラメータ`protocol`指定する必要があります。現在、Pulsar へのデータレプリケーションには`canal-json`プロトコルのみがサポートされています。
+-   チェンジフィードを作成する際は、パラメータ`protocol`指定する必要があります。現在、Pulsarへのデータレプリケーションにはプロトコル`canal-json`のみがサポートされています。
 -   `pulsar-producer-cache-size`パラメータは、Pulsarクライアントにキャッシュされるプロデューサーの数を示します。Pulsarでは各プロデューサーが1つのトピックにしか対応できないため、TiCDCはプロデューサーのキャッシュにLRU方式を採用しており、デフォルトの制限は10240です。複製する必要があるトピックの数がデフォルト値よりも多い場合は、この数を増やす必要があります。
 
 ### TLS暗号化伝送 {#tls-encrypted-transmission}
@@ -310,7 +310,7 @@ dispatchers = [
 
 たとえば、 `matcher = ['test.*'], topic = {schema}_{table}`ような`dispatchers`構成の場合、DDL イベントは次のように送信されます。
 
--   DDLイベントが単一のテーブルのみに関係する場合、DDLイベントは適切なトピックにそのままディスパッチされます。例えば、DDLイベント`DROP TABLE test.table1`場合、イベントは`test_table1`名前のトピックにディスパッチされます。
+-   DDLイベントが単一のテーブルのみに関係する場合、DDLイベントはそのまま適切なトピックにディスパッチされます。例えば、DDLイベント`DROP TABLE test.table1`場合、イベントは`test_table1`名前のトピックにディスパッチされます。
 
 -   DDLイベントが複数のテーブルに関係する場合（ `RENAME TABLE` 、 `DROP TABLE` 、 `DROP VIEW`いずれも複数のテーブルに関係する可能性があります）、単一のDDLイベントは複数のイベントに分割され、適切なトピックにディスパッチされます。例えば、DDLイベント`RENAME TABLE test.table1 TO test.table10, test.table2 TO test.table20`場合、処理は次のようになります。
 

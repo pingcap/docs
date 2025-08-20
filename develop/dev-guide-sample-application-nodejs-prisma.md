@@ -127,7 +127,7 @@ npm install prisma typescript ts-node @types/node --save-dev
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストをまだ設定していない場合は、 **[IP アクセス リストの設定] を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
+    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
     TiDB Cloud Dedicatedは、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPCピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ご覧ください。
 
@@ -268,7 +268,7 @@ void main();
 
 接続が成功すると、ターミナルには次のように TiDB クラスターのバージョンが出力されます。
 
-    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.5.2)
+    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.5.3)
     🆕 Created a new player with ID 1.
     ℹ️ Got Player 1: Player { id: 1, coins: 100, goods: 100 }
     🔢 Added 50 coins and 50 goods to player 1, now player 1 has 150 coins and 150 goods.

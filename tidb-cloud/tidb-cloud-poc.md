@@ -69,6 +69,16 @@ PoC 用の[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedic
 
 2.  PoC 用のTiDB Cloud Dedicated クラスターを作成するには、 [TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。
 
+    > **注記：**
+    >
+    > TiDB Cloud Dedicated クラスターを作成する前に、次のいずれかの支払い方法を追加する必要があります。
+    >
+    > -   クラスター作成ページの画面上の指示に従って、クレジットカードを追加します。
+    > -   電信送金で支払うには、 TiDB Cloudサポート チームにお問い合わせください。
+    > -   クラウド マーケットプレイス (AWS、Azure、または Google Cloud) を通じてTiDB Cloudにサインアップし、クラウド プロバイダー アカウントを使用して支払います。
+    >
+    > PoC クレジットは、PoC 期間中に発生した対象費用を相殺するために自動的に使用されます。
+
 クラスタを作成する前に、クラスタのサイズを決定するためのキャパシティプランニングを行うことをお勧めします。TiDB、TiKV、またはTiFlashノードの数を概算し、パフォーマンス要件に合わせてクラスタをスケールアウトすることも可能です。詳細については、以下のドキュメントをご覧いただくか、サポートチームにお問い合わせください。
 
 -   見積りの実践の詳細については、 [TiDBのサイズ](/tidb-cloud/size-your-cluster.md)参照してください。
@@ -135,11 +145,11 @@ TiDB Cloudにはさまざまな形式のデータをインポートできます�
 ワークロードを開始した後、次の方法を使用してシステムを観察できます。
 
 -   クラスターのよく使用されるメトリクスは、クラスター概要ページで確認できます。これには、合計QPS、レイテンシ、接続数、 TiFlashリクエストQPS、 TiFlashリクエスト期間、 TiFlashストレージサイズ、TiKVストレージサイズ、TiDB CPU、TiKV CPU、TiKV IO読み取り、TiKV IO書き込みが含まれます[TiDBクラスタを監視する](/tidb-cloud/monitor-tidb-cluster.md)参照してください。
--   クラスターの[**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **「SQLステートメント」**タブを確認してください。ここでは、システムテーブルをクエリすることなく、SQL実行を監視し、パフォーマンスの問題を簡単に特定できます[ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)参照してください。
+-   クラスターの[**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **「SQLステートメント」**タブを確認してください。ここでは、システムテーブルをクエリすることなくSQL実行を監視し、パフォーマンスの問題を簡単に特定できます[ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)参照してください。
 -   クラスターの[**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **「Key Visualizer」**タブを確認します。ここで、TiDBのデータアクセスパターンとデータホットスポットを確認できます。5 [キービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)参照してください。
 -   これらのメトリクスを、お客様独自のDatadogおよびPrometheusに統合することも可能です。1 [サードパーティの監視統合](/tidb-cloud/third-party-monitoring-integrations.md)ご覧ください。
 
-次はテスト結果を評価する時です。
+次はテスト結果を評価するときです。
 
 より正確な評価を行うには、テスト前にメトリクスのベースラインを決定し、各実行のテスト結果を適切に記録してください。結果を分析することで、 TiDB Cloudがアプリケーションに適しているかどうかを判断できます。また、これらの結果はシステムの実行状態を示しており、メトリクスに応じてシステムを調整できます。例えば、
 

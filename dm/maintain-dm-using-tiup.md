@@ -131,7 +131,7 @@ tiup dm scale-in prod-cluster -N 172.16.5.140:8262
 
 ## クラスターをスケールアウトする {#scale-out-a-cluster}
 
-スケールアウト操作にはTiUP DMコンポーネントは、まずノードの SSH 接続を確認し、ターゲット ノードに必要なディレクトリを作成し、次にデプロイメント操作を実行して、ノード サービスを開始します。
+スケールアウト操作には、デプロイメントと同様の内部ロジックがあります。TiUP TiUP DMコンポーネントは、まずノードの SSH 接続を確認し、ターゲット ノードに必要なディレクトリを作成し、次にデプロイメント操作を実行して、ノード サービスを開始します。
 
 たとえば、クラスター`prod-cluster`内の DM ワーカー ノードをスケール アウトするには、次の手順を実行します (DM マスターのスケール アウトにも同様の手順があります)。
 
@@ -348,7 +348,7 @@ tiup dmctl --master-addr master1:8261 operate-source create /tmp/source1.yml
 
 次に、 `--native-ssh`コマンドライン フラグを使用して、システムネイティブのコマンドライン ツールを有効にできます。
 
--   クラスターをデプロイ: `tiup dm deploy <cluster-name> <version> <topo> --native-ssh` `<cluster-name>`にクラスターの名前、 `<version>`にデプロイする DM バージョン ( `v8.5.2`など)、 `<topo>`にトポロジ ファイル名を入力します。
+-   クラスターをデプロイ: `tiup dm deploy <cluster-name> <version> <topo> --native-ssh` `<cluster-name>`にクラスターの名前、 `<version>`にデプロイする DM バージョン ( `v8.5.3`など)、 `<topo>`にトポロジ ファイル名を入力します。
 -   クラスターを起動します: `tiup dm start <cluster-name> --native-ssh` .
 -   クラスターのアップグレード: `tiup dm upgrade ... --native-ssh`
 

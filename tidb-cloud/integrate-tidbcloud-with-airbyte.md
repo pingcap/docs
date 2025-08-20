@@ -56,9 +56,9 @@ Airbyteのバナーが表示されたら、ユーザー名( `airbyte` )とパス
 
 3.  **SSL 接続**を有効にし、 **JDBC URL パラメータ**で TLS プロトコルを**TLSv1.2**または**TLSv1.3**に設定します。
 
-    > 注記：
+    > **注記：**
     >
-    > -   TiDB CloudはTLS接続をサポートしています。TLSv1.2**と****TLSv1.3**の中から、例えば`enabledTLSProtocols=TLSv1.2` TLSプロトコルを選択できます。
+    > -   TiDB CloudはTLS接続をサポートしています。TLSv1.2**と****TLSv1.3** （例： `enabledTLSProtocols=TLSv1.2` ）の中から、ご希望のTLSプロトコルを選択できます。
     > -   JDBC 経由でTiDB Cloudへの TLS 接続を無効にする場合は、JDBC URL パラメータで useSSL を`false`に設定し、SSL 接続を閉じる必要があります (例: `useSSL=false` )。
     > -   TiDB Cloud Starter とTiDB Cloud Essential は TLS 接続のみをサポートします。
 
@@ -74,7 +74,7 @@ TiDB コネクタの詳細については、 [TiDBソース](https://docs.airbyt
 
 ソースと宛先を設定したら、接続を構築して構成できます。
 
-以下の手順では、ソースと宛先の両方にTiDBを使用します。他のコネクタではパラメータが異なる場合があります。
+以下の手順では、TiDBをソースと宛先の両方として使用します。他のコネクタではパラメータが異なる場合があります。
 
 1.  サイドバーの**「接続」**をクリックし、 **「新しい接続」**をクリックします。
 
@@ -97,7 +97,7 @@ TiDB コネクタの詳細については、 [TiDBソース](https://docs.airbyt
 
     ![Set up connection](/media/tidb-cloud/integration-airbyte-connection.jpg)
 
-7.  デフォルトの正規化モードを使用するには、 **「正規化と変換」**を「正規化され**た表形式データ」**に設定するか、ジョブのdbtファイルを設定すると便利です。正規化の詳細については、 [変換と正規化](https://docs.airbyte.com/operator-guides/transformation-and-normalization/transformations-with-dbt)を参照してください。
+7.  デフォルトの正規化モードを使用するには、 **「正規化と変換」**を**「正規化された表形式データ」**に設定するか、ジョブのdbtファイルを設定すると便利です。正規化の詳細については、 [変換と正規化](https://docs.airbyte.com/operator-guides/transformation-and-normalization/transformations-with-dbt)を参照してください。
 
 8.  **[接続の設定]を**クリックします。
 

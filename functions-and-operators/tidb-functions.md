@@ -65,7 +65,7 @@ summary: TiDB 固有の関数の使用法について学習します。
 
 例:
 
-ユーザー`user1`を作成し、 2 つのリソース グループ`rg1`と`rg2`を作成し、ユーザー`user1`リソース グループ`rg1`にバインドします。
+ユーザー`user1`を作成し、リソース グループ`rg1`と`rg2` 2 つのリソース グループを作成し、ユーザー`user1`リソース グループ`rg1`にバインドします。
 
 ```sql
 CREATE USER 'user1';
@@ -175,7 +175,7 @@ TIDB_DECODE_KEY(START_KEY): {"_tidb_rowid":1958897,"table_id":"59"}
 1 row in set (0.00 sec)
 ```
 
-次の例では、テーブル`t2`に複合クラスター化主キーがあります。JSON 出力を見ると、主キーを構成する両方の列の名前と値を含む`handle`が確認できます。
+次の例では、テーブル`t2`複合クラスター化主キーがあります。JSON 出力を見ると、主キーを構成する両方の列の名前と値を含む`handle`が確認できます。
 
 ```sql
 SHOW CREATE TABLE t2\G
@@ -467,7 +467,7 @@ SELECT *, TIDB_ROW_CHECKSUM() FROM t WHERE id = 1;
 
 ## TIDB_シャード {#tidb-shard}
 
-`TIDB_SHARD()`関数は、インデックスホットスポットを分散させるためのシャードインデックスを作成します。シャードインデックスとは、 `TIDB_SHARD()`関数を先頭に付けた式インデックスです。
+`TIDB_SHARD()`関数は、インデックスのホットスポットを分散させるためのシャードインデックスを作成します。シャードインデックスは、 `TIDB_SHARD()`関数で始まる式インデックスです。
 
 -   作成:
 
@@ -528,11 +528,11 @@ SELECT TIDB_VERSION()\G
 
 ```sql
 *************************** 1. row ***************************
-TIDB_VERSION(): Release Version: v8.5.2
+TIDB_VERSION(): Release Version: v8.5.3
 Edition: Community
 Git Commit Hash: 821e491a20fbab36604b36b647b5bae26a2c1418
 Git Branch: HEAD
-UTC Build Time: 2025-06-12 19:16:25
+UTC Build Time: 2025-08-14 19:16:25
 GoVersion: go1.21.10
 Race Enabled: false
 Check Table Before Drop: false

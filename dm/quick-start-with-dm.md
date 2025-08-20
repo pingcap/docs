@@ -38,7 +38,7 @@ summary: TiUP Playground を使用してデータ移行環境をすばやくセ�
 2.  ターゲット TiDB データベースと DM コンポーネントを使用してTiUP Playground を起動します。
 
     ```shell
-    tiup playground v8.5.2 --dm-master 1 --dm-worker 1 --tiflash 0 --without-monitor
+    tiup playground v8.5.3 --dm-master 1 --dm-worker 1 --tiflash 0 --without-monitor
     ```
 
 3.  出力で TiDB と DM が実行されているかどうかを確認して環境を確認します。
@@ -167,7 +167,7 @@ macOS では、 [Homebrew](https://brew.sh)使用して MySQL 8.0 をローカ�
 
 <div label="CentOS" value="centos">
 
-CentOS などの Enterprise Linux ディストリビューションでは、MySQL Yum リポジトリから MySQL 8.0 をインストールできます。
+CentOS などのエンタープライズ Linux ディストリビューションでは、MySQL Yum リポジトリから MySQL 8.0 をインストールできます。
 
 1.  [MySQL Yumリポジトリのダウンロードページ](https://dev.mysql.com/downloads/repo/yum)から MySQL Yum リポジトリ パッケージをダウンロードしてインストールします。Linux バージョン 9 以外の場合は、次の URL の`el9` (Enterprise Linux バージョン 9) を置き換え、MySQL バージョン 8.0 の場合は`mysql80`そのままにする必要があります。
 

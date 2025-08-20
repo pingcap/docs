@@ -29,7 +29,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 1.  次の変数を決定します。
 
     -   `${component}` : 置換するコンポーネントの名前 ( `tidb` 、 `tikv` 、 `pd`など)。
-    -   `${version}` :コンポーネントのバージョン ( `v8.5.2`や`v7.5.4`など)。
+    -   `${version}` :コンポーネントのバージョン ( `v8.5.3`や`v7.5.4`など)。
     -   `${os}` :オペレーティングシステム（ `linux` ）。
     -   `${arch}` :コンポーネント`arm64`実行されるプラットフォーム( `amd64` )。
 
@@ -87,7 +87,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ### -N, --node {#n-node}
 
--   置換するノードを指定します。このオプションの値は、カンマ区切りのノードIDのリストです。ノードIDは、 `tiup cluster display`コマンドで返される[クラスターステータステーブル](/tiup/tiup-component-cluster-display.md)の最初の列から取得できます。
+-   置換するノードを指定します。このオプションの値は、カンマ区切りのノードIDのリストです。ノードIDは、 `tiup cluster display`コマンドで返される[クラスターステータステーブル](/tiup/tiup-component-cluster-display.md)の1列目から取得できます。
 -   データ型: `STRINGS`
 -   このオプションを指定しないと、 TiUP はデフォルトで置換するノードを選択しません。
 

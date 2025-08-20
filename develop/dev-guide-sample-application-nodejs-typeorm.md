@@ -230,7 +230,7 @@ npm start
 
 接続が成功すると、ターミナルには次のように TiDB クラスターのバージョンが出力されます。
 
-    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.5.2)
+    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.5.3)
     🆕 Created a new player with ID 2.
     ℹ️ Got Player 2: Player { id: 2, coins: 100, goods: 100 }
     🔢 Added 50 coins and 50 goods to player 2, now player 2 has 100 coins and 150 goods.

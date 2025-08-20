@@ -172,7 +172,7 @@ TiDB Cloudサーバーレス ドライバーは、接続レベルと SQL レベ�
 
 > **注記：**
 >
-> ユーザー名、パスワード、またはデータベース名に特殊文字が含まれている場合、URLで渡す際にこれらの文字[パーセンテージエンコード](https://en.wikipedia.org/wiki/Percent-encoding)エンコードする必要があります。例えば、パスワードが`password1@//?`場合、URLでは`password1%40%2F%2F%3F`にエンコードする必要があります。
+> ユーザー名、パスワード、またはデータベース名に特殊文字が含まれている場合は、URLで渡す際にこれらの文字[パーセンテージエンコード](https://en.wikipedia.org/wiki/Percent-encoding)エンコードする必要があります。例えば、パスワードが`password1@//?`場合、URLでは`password1%40%2F%2F%3F`にエンコードする必要があります。
 
 `url`設定されている場合、 `host` 、 `username` 、 `password` 、 `database`個別に設定する必要はありません。以下のコードは同等です。
 
@@ -275,7 +275,7 @@ TiDB と Javascript 間の型マッピングは次のとおりです。
 
 | TiDBデータ型     | Javascriptタイプ |
 | ------------ | ------------- |
-| TINYINT      | 番号            |
+| タイニーイント      | 番号            |
 | 符号なし TINYINT | 番号            |
 | ブール          | 番号            |
 | スモールイント      | 番号            |
@@ -333,7 +333,7 @@ TiDB Cloudサーバーレス ドライバーは、次の ORM と統合されて�
 
 サーバーレス ドライバー自体は無料ですが、ドライバーを使用してデータにアクセスすると、 [リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit)とstorage使用量が発生します。
 
--   TiDB Cloud Starter クラスターの場合、価格は[TiDB Cloud Starterの価格](https://www.pingcap.com/tidb-serverless-pricing-details/)モデルに従います。
+-   TiDB Cloud Starter クラスターの場合、価格は[TiDB Cloud Starterの価格](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)モデルに従います。
 -   TiDB Cloud Essential クラスターの場合、価格は[TiDB Cloud Essentialの価格](/tidb-cloud/tidb-cloud-billing.md#pricing-for-essential)モデルに従います。
 
 ## 制限事項 {#limitations}

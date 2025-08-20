@@ -28,7 +28,7 @@ PD Controlを使用するには、 `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd
 
 > **注記：**
 >
-> リンク内の`{version}` TiDBのバージョン番号を示します。例えば、 `amd64`アーキテクチャの`v8.5.2`のダウンロードリンクは`https://download.pingcap.org/tidb-community-server-v8.5.2-linux-amd64.tar.gz`です。
+> リンク内の`{version}` TiDBのバージョン番号を示します。例えば、 `amd64`アーキテクチャの`v8.5.3`のダウンロードリンクは`https://download.pingcap.org/tidb-community-server-v8.5.3-linux-amd64.tar.gz`です。
 
 ### ソースコードからコンパイルする {#compile-from-source-code}
 
@@ -66,7 +66,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 ### <code>--cacert</code> {#code-cacert-code}
 
--   信頼されたCAの証明書ファイルへのパスをPEM形式で指定します
+-   信頼された CA の証明書ファイルへのパスを PEM 形式で指定します。
 -   デフォルト： &quot;&quot;
 
 ### <code>--cert</code> {#code-cert-code}
@@ -76,7 +76,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 ### <code>--detach</code> / <code>-d</code> {#code-detach-code-code-d-code}
 
--   単一のコマンドラインモードを使用する（readline に入らない）
+-   単一のコマンドラインモードを使用します（readline には入りません）
 -   デフォルト: true
 
 ### <code>--help</code> / <code>-h</code> {#code-help-code-code-h-code}
@@ -171,7 +171,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 }
 
 >> config show cluster-version                // Display the current version of the cluster, which is the current minimum version of TiKV nodes in the cluster and does not correspond to the binary version.
-"8.5.1"
+"8.5.3"
 ```
 
 -   `max-snapshot-count` 、単一のストアが同時に受信または送信するスナップショットの最大数を制御します。スケジューラは、通常のアプリケーションリソースの消費を回避するために、この設定によって制限されます。レプリカの追加やバランシングの速度を向上させる必要がある場合は、この値を増やしてください。
@@ -192,7 +192,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set max-merge-region-size 16 // Set the upper limit on the size of Region Merge to 16 MiB
     ```
 
--   `max-merge-region-keys`リージョンマージのキー数の上限を制御します。2 `regionKeyCount`指定された値を超えると、PDは隣接するリージョンとマージしません。
+-   `max-merge-region-keys` 、リージョンマージのキー数の上限を制御します。2 `regionKeyCount`指定された値を超えると、PD は隣接するリージョンとマージしません。
 
     ```bash
     config set max-merge-region-keys 50000 // Set the upper limit on keyCount to 50000
@@ -310,7 +310,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 -   `cluster-version`はクラスターのバージョンで、一部の機能を有効化または無効化したり、互換性の問題に対処したりするために使用されます。デフォルトでは、クラスター内で正常に稼働しているすべての TiKV ノードの最小バージョンです。以前のバージョンにロールバックする必要がある場合にのみ、手動で設定できます。
 
     ```bash
-    config set cluster-version 8.5.1              // Set the version of the cluster to 8.5.1
+    config set cluster-version 8.5.3             // Set the version of the cluster to 8.5.3
     ```
 
 -   `replication-mode` 、デュアルデータセンターシナリオにおけるリージョンのレプリケーションモードを制御します。詳細は[DR自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)参照してください。
@@ -756,7 +756,7 @@ time: 43.12698ms
 
 このコマンドを使用して、指定された範囲`[startkey, endkey)`内のすべてのリージョンを照会します。 `endKey`のない範囲もサポートされています。
 
-パラメータ`limit`キーの数を制限します。デフォルト値は`limit`で`16` 、値`-1`はキーの数を無制限にすることを意味します。
+パラメータ`limit`キーの数を制限します。デフォルト値`limit`は`16`で、値`-1`はキーの数を無制限にすることを意味します。
 
 使用法：
 
@@ -1303,7 +1303,7 @@ unsafe remove-failed-stores show
 ]
 ```
 
-## Jq形式のJSON出力の使用法 {#jq-formatted-json-output-usage}
+## Jq形式のJSON出力の使用 {#jq-formatted-json-output-usage}
 
 ### <code>store</code>の出力を簡素化 {#simplify-the-output-of-code-store-code}
 
@@ -1354,7 +1354,7 @@ store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"en
 
 ### レプリカの数に応じて領域をフィルタリングする {#filter-regions-according-to-the-number-of-replicas}
 
-たとえば、レプリカ数が 3 ではないすべてのリージョンをフィルタリングするには、次のようにします。
+たとえば、レプリカ数が 3 ではないすべてのリージョンを除外するには、次のようにします。
 
 ```bash
 >> region --jq=".regions[] | {id: .id, peer_stores: [.peers[].store_id] | select(length != 3)}"

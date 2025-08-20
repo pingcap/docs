@@ -64,7 +64,7 @@ tiup mirror clone <target-dir> [global-version] [flags]
 
 -   完全なクローンを使用するかどうかを決定します
 
-    `--full`フラグを指定すると、公式ミラーを完全に複製できます。
+    `--full`フラグを指定すると、公式ミラーを完全にクローンできます。
 
     > **注記：**
     >
@@ -82,9 +82,9 @@ tiup mirror clone <target-dir> [global-version] [flags]
 
     コンポーネントの1つのバージョンのみ（すべてのバージョンではなく）を複製したい場合は、 `--<component>=<version>`使用してそのバージョンを指定します。例：
 
-    -   `tiup mirror clone <target-dir> --tidb v8.5.2`コマンドを実行して、TiDBコンポーネントの v8.5.2 バージョンのクローンを作成します。
-    -   `tiup mirror clone <target-dir> --tidb v8.5.2 --tikv all`コマンドを実行して、TiDBコンポーネントの v8.5.2 バージョンと TiKVコンポーネントのすべてのバージョンのクローンを作成します。
-    -   `tiup mirror clone <target-dir> v8.5.2`コマンドを実行して、クラスター内のすべてのコンポーネントの v8.5.2 バージョンを複製します。
+    -   `tiup mirror clone <target-dir> --tidb v8.5.3`コマンドを実行して、TiDBコンポーネントの v8.5.3 バージョンのクローンを作成します。
+    -   `tiup mirror clone <target-dir> --tidb v8.5.3 --tikv all`コマンドを実行して、TiDBコンポーネントの v8.5.3 バージョンと TiKVコンポーネントのすべてのバージョンのクローンを作成します。
+    -   `tiup mirror clone <target-dir> v8.5.3`コマンドを実行して、クラスター内のすべてのコンポーネントの v8.5.3 バージョンを複製します。
 
 クローン作成後、署名キーが自動的に設定されます。
 

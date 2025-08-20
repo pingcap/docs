@@ -90,7 +90,7 @@ tiup cluster upgrade <cluster-name> <version> --transfer-timeout 600
 
 > **注記：**
 >
-> 上記のコマンドで、 `<cluster-name>`と`<version>`実際のクラスター名とクラスターバージョンに置き換えてください。例えば、バージョンはv8.5.2となります。
+> 上記のコマンドで、 `<cluster-name>`と`<version>`実際のクラスター名とクラスターバージョンに置き換える必要があります。例えば、バージョンはv8.5.3となります。
 
 ### アップグレードに関する注意事項 {#upgrade-cautions}
 
@@ -131,15 +131,15 @@ TiCDC クラスターをアップグレードする場合は、次の点に注�
 
     上記のコマンドでは、 `gc-ttl` 48 時間に設定されています。
 
-3.  `tiup cluster reload -R cdc`コマンドを実行して構成を再読み込みします。
+3.  `tiup cluster reload <cluster-name> -R cdc`コマンドを実行して構成を再読み込みします。
 
 ## TiUPを使用して TiCDC を停止および起動する {#stop-and-start-ticdc-using-tiup}
 
 TiUPを使用すると、TiCDCノードを簡単に停止および起動できます。コマンドは以下のとおりです。
 
--   TiCDCを停止: `tiup cluster stop -R cdc`
--   TiCDC を開始: `tiup cluster start -R cdc`
--   TiCDC を再起動: `tiup cluster restart -R cdc`
+-   TiCDCを停止: `tiup cluster stop <cluster-name> -R cdc`
+-   TiCDC を開始: `tiup cluster start <cluster-name> -R cdc`
+-   TiCDC を再起動: `tiup cluster restart <cluster-name> -R cdc`
 
 ## TiCDC の TLS を有効にする {#enable-tls-for-ticdc}
 
@@ -147,7 +147,7 @@ TiUPを使用すると、TiCDCノードを簡単に停止および起動でき�
 
 ## コマンドラインツールを使用して TiCDC のステータスをビュー {#view-ticdc-status-using-the-command-line-tool}
 
-TiCDC クラスターのステータスを表示するには、以下のコマンドを実行します。1 `v<CLUSTER_VERSION>` TiCDC クラスターのバージョン（例： `v8.5.2` ）に置き換える必要があります。
+TiCDC クラスターのステータスを表示するには、以下のコマンドを実行します。1 `v<CLUSTER_VERSION>` TiCDC クラスターのバージョン（例： `v8.5.3` ）に置き換える必要があります。
 
 ```shell
 tiup cdc:v<CLUSTER_VERSION> cli capture list --server=http://10.0.10.25:8300

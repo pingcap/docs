@@ -69,9 +69,9 @@ TiDB Cloudでは、組織ごとに最大5つのクラスター（デフォルト
 
 リクエストユニット（RU）は、クエリまたはトランザクションのリソース消費量を追跡するために使用される測定単位です。これは、データベース内の特定のリクエストを処理するために必要な計算リソースを見積もることができる指標です。リクエストユニットは、 TiDB Cloud Starterサービスの課金単位でもあります。
 
-クラスターが使用量クォータに達すると、新しい月の開始時に使用[割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)がリセットされるまで、新規接続の試行は直ちに拒否されます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。
+クラスターが使用量クォータに達すると、新しい月の開始時に使用量がリセットされるか、 [割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)なるまで、新規接続の試行は直ちに拒否されます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。
 
-さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク送信など) の RU 消費量、価格の詳細、スロットル情報の詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)参照してください。
+さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク送信など) の RU 消費量、価格の詳細、スロットル情報の詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)参照してください。
 
 追加のクォータを持つTiDB Cloud Starterクラスターを作成する場合は、クラスター作成ページで月間使用制限を設定できます。詳細については、 [TiDB Cloud Starter クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)ご覧ください。
 

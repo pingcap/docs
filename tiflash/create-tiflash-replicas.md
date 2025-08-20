@@ -21,7 +21,7 @@ ALTER TABLE table_name SET TIFLASH REPLICA count;
 
 > **注記：**
 >
-> [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターの場合、 TiFlashレプリカの`count` `2`しか設定できません。7 `1`設定した場合、実行時に自動的に`2`に調整されます。2 より大きい数に設定した場合、レプリカ数に関するエラーが発生します。
+> [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターの場合、 TiFlashレプリカの`count` `2`しか設定できません。7 `1`設定した場合、実行時に自動的に`2`に調整されます。2 より大きい数に設定した場合、レプリカ数に関するエラーが発生します。
 
 同じテーブルに対して複数のDDL文を実行した場合、最後に実行された文のみが確実に有効になります。次の例では、テーブル`tpch50`に対して2つのDDL文が実行されていますが、2番目の文（レプリカを削除する文）のみが確実に有効になります。
 
@@ -159,10 +159,10 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer
     ```
 
-    > 上記のコマンドでは、 `v<CLUSTER_VERSION>`実際のクラスターバージョン（ `v8.5.2` `<PD_ADDRESS>:2379`任意のPDノードのアドレスなど）に置き換える必要があります。例：
+    > 上記のコマンドでは、 `v<CLUSTER_VERSION>`実際のクラスターバージョン（ `v8.5.3` `<PD_ADDRESS>:2379`任意のPDノードのアドレスなど）に置き換える必要があります。例：
     >
     > ```shell
-    > tiup ctl:v8.5.2 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
+    > tiup ctl:v8.5.3 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
     > ```
 
     クラスターに古いTiFlashノード上のリージョンが多数含まれている場合、PDはそれらを新しいTiFlashノードに再配分する必要があります。それに応じて`remove-peer`制限を調整する必要があります。

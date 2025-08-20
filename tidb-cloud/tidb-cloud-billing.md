@@ -15,7 +15,7 @@ TiDB Cloud は消費したリソースに応じて料金が発生します。
 
 ### TiDB Cloud Starter (旧称 Serverless) の価格 {#pricing-for-starter} {#pricing-for-starter}
 
-[TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-serverless-pricing-details/)参照。
+[TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)参照。
 
 ### TiDB Cloud Essential の価格 {#pricing-for-essential} {#pricing-for-essential}
 
@@ -154,7 +154,7 @@ TiDB Cloudは、概念実証（PoC）ユーザーに一定数のクレジット�
 >
 > PoC を申請するには、 [TiDB Cloudで概念実証 (PoC) を実行する](/tidb-cloud/tidb-cloud-poc.md)参照してください。
 
-クレジットの詳細情報（合計クレジット数、利用可能なクレジット数、現在の使用状況、ステータスなど）は、 **[クレジット]**タブで確認できます。
+クレジットの詳細情報（合計クレジット数、使用可能なクレジット数、現在の使用状況、ステータスなど）は、 **[クレジット]**タブで確認できます。
 
 クレジット情報を表示するには、次の手順を実行します。
 
@@ -222,7 +222,7 @@ TiDB Cloudは、概念実証（PoC）ユーザーに一定数のクレジット�
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用して対象の組織に切り替えます。
 2.  左側のナビゲーション ペインで、 **[請求]**をクリックします。
 3.  **「請求」**ページで、 **「お支払い方法」**タブをクリックします。
-4.  クレジットカードの一覧からクレジットカードを選択し、それをデフォルトのクレジットカードとして設定するように求めるメッセージが表示されたら**「はい」**をクリックします。
+4.  クレジットカードの一覧からクレジットカードを選択し、それをデフォルトのクレジットカードとして設定するように求めるメッセージが表示されたら**[はい]**をクリックします。
 
 ## 契約 {#contract}
 
@@ -241,7 +241,7 @@ TiDB Cloudは、概念実証（PoC）ユーザーに一定数のクレジット�
 
 組織内で`Organization Owner`または`Organization Billing Manager`ロールを担っている場合は、 TiDB Cloudアカウントをクラウドプロバイダー（AWS、Azure、Google Cloud、またはAlibaba Cloud）の請求アカウントにリンクできます。それ以外の場合は、このセクションをスキップしてください。
 
-TiDB Cloudを初めて使用し、 TiDB Cloudアカウントを持っていない場合は、クラウド プロバイダーのマーケットプレイスを通じてTiDB Cloudアカウントにサインアップし、クラウド プロバイダーの請求アカウントを通じて使用料を支払うことができます。
+TiDB Cloudを初めて使用し、 TiDB Cloudアカウントをお持ちでない場合は、クラウド プロバイダーのマーケットプレイスを通じてTiDB Cloudアカウントにサインアップし、クラウド プロバイダーの請求アカウントを通じて使用料を支払うことができます。
 
 -   [AWS マーケットプレイス](https://aws.amazon.com/marketplace)からサインアップするには、 [AWS マーケットプレイス](https://aws.amazon.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudにサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定します。
 -   [Azureマーケットプレイス](https://azuremarketplace.microsoft.com)からサインアップするには、 [Azureマーケットプレイス](https://azuremarketplace.microsoft.com)で`TiDB Cloud`を検索し、 TiDB Cloudにサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定します。
@@ -309,7 +309,7 @@ TiDB Cloudアカウントを Google Cloud 請求先アカウントにリンク�
 
 2.  TiDB Cloud製品ページで、 **「SUBSCRIBE」**をクリックします。サブスクリプションページが表示されます。
 
-3.  サブスクリプションページで**「Subscribe（サブスクライブ）** 」をクリックし、「 **Go to product page（製品ページへ移動）** 」をクリックします。TiDB TiDB Cloudのサインアップページに移動します。
+3.  サブスクリプションページで**「Subscribe（登録）** 」をクリックし、「 **Go to product page（製品ページへ移動）」**をクリックします。TiDB TiDB Cloudのサインアップページに移動します。
 
 4.  サインアップページの上部にある通知を確認し、 **「サインイン」**をクリックします。
 

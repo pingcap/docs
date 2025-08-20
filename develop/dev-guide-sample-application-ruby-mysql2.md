@@ -190,7 +190,7 @@ ruby app.rb
 
 接続が成功すると、コンソールに次のように TiDB クラスターのバージョンが出力されます。
 
-    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.5.2)
+    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.5.3)
     ⏳ Loading sample game data...
     ✅ Loaded sample game data.
 
@@ -228,7 +228,7 @@ client = Mysql2::Client.new(options)
 
 > **注記**
 >
-> [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合、パブリックエンドポイントを使用するときは`DATABASE_ENABLE_SSL`で TLS 接続を有効にする**必要があります**が、mysql2 gem はファイルが見つかるまで特定の順序で既存の CA 証明書を検索するため、 `DATABASE_SSL_CA`で SSL CA 証明書を指定する必要は**ありません**。
+> [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合、パブリックエンドポイントを使用するときは`DATABASE_ENABLE_SSL`で TLS 接続を有効にする**必要が**ありますが、mysql2 gem はファイルが見つかるまで特定の順序で既存の CA 証明書を検索するため、 `DATABASE_SSL_CA`で SSL CA 証明書を指定する必要は**ありません**。
 
 ### データを挿入する {#insert-data}
 

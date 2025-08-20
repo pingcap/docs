@@ -97,7 +97,7 @@ summary: TiUPプレイグラウンドを使用して TiDB Self-Managed をすぐ
     -   TiDB のバージョンと各コンポーネントのインスタンスの数を指定するには、次のようなコマンドを実行します。
 
         ```shell
-        tiup playground v8.5.2 --db 2 --pd 3 --kv 3
+        tiup playground v8.5.3 --db 2 --pd 3 --kv 3
         ```
 
         このコマンドは、少なくとも10GiBのメモリと4つのCPUコアを搭載したマシンで実行することをお勧めします。リソースが不足すると、システムがクラッシュする可能性があります。
@@ -211,7 +211,7 @@ summary: TiUPプレイグラウンドを使用して TiDB Self-Managed をすぐ
     -   TiDB のバージョンと各コンポーネントのインスタンスの数を指定するには、次のようなコマンドを実行します。
 
         ```shell
-        tiup playground v8.5.2 --db 2 --pd 3 --kv 3
+        tiup playground v8.5.3 --db 2 --pd 3 --kv 3
         ```
 
         利用可能なすべてのバージョンを表示するには、 `tiup list tidb`実行します。
@@ -412,7 +412,7 @@ TiDB クラスターを展開する前に、ターゲット マシンが次の�
     ```
 
     -   `<cluster-name>` : クラスター名を設定します。
-    -   `<version>` : TiDBクラスターのバージョンを設定します（例： `v8.5.2` ） `tiup list tidb`コマンドを実行すると、サポートされているすべてのTiDBバージョンを確認できます。
+    -   `<version>` : TiDBクラスターのバージョンを設定します（例： `v8.5.3` ） `tiup list tidb`コマンドを実行すると、サポートされているすべてのTiDBバージョンを確認できます。
     -   `--user` : 環境を初期化するユーザーを指定します。
     -   `-p` : ターゲット マシンに接続するために使用するパスワードを指定します。
 
@@ -493,7 +493,7 @@ TiDB クラスターを展開する前に、ターゲット マシンが次の�
 アプリケーション開発者であり、TiDB を使用してアプリケーションを迅速に構築したい場合は、次の手順に従ってください。
 
 -   [開発者ガイドの概要](/develop/dev-guide-overview.md)
--   [TiDB Cloudサーバーレスクラスタの構築](/develop/dev-guide-build-cluster-in-cloud.md)
+-   [TiDB Cloudスタータークラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
 -   [アプリケーション例](/develop/dev-guide-sample-application-java-jdbc.md)
 
 TiFlashを使用した分析ソリューションをお探しの場合は、次の手順に従ってください。

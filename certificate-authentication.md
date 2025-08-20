@@ -11,7 +11,7 @@ TiDBは、ユーザーがTiDBにログインするための証明書ベースの
 
 -   セキュリティキーと証明書を作成する
 -   TiDBとクライアントの証明書を構成する
--   ユーザーがログインするときに検証するユーザー証明書情報を設定します
+-   ユーザーがログインするときに検証されるユーザー証明書情報を構成する
 -   証明書の更新と置き換え
 
 ドキュメントの残りの部分では、これらの操作を実行する方法について詳しく説明します。
@@ -229,7 +229,7 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
 
 ### ユーザー証明書情報を取得する {#get-user-certificate-information}
 
-ユーザー証明書情報は、X.509 証明書属性の確認に使用される`REQUIRE SUBJECT` 、 `REQUIRE ISSUER` 、 `REQUIRE SAN` 、および`REQUIRE CIPHER`で指定できます。
+ユーザー証明書情報は、X.509 証明書属性を確認するために使用される`REQUIRE SUBJECT` 、 `REQUIRE ISSUER` 、 `REQUIRE SAN` 、および`REQUIRE CIPHER`で指定できます。
 
 -   `REQUIRE SUBJECT` : ログイン時のクライアント証明書のサブジェクト情報を指定します。このオプションを指定すると、 `require ssl`またはx509を設定する必要はありません。指定する情報は、 [クライアントキーと証明書を生成する](#generate-client-key-and-certificate)で入力したサブジェクト情報と一致します。
 
@@ -311,7 +311,7 @@ MySQL クライアントに接続し、次のステートメントを実行し�
 出力:
 
     --------------
-    mysql  Ver 8.5.1 for Linux on x86_64 (MySQL Community Server - GPL)
+    mysql  Ver 8.5.3 for Linux on x86_64 (MySQL Community Server - GPL)
 
     Connection id:       1
     Current database:    test
@@ -375,7 +375,7 @@ CA証明書は、クライアントとサーバー間の相互検証の基盤と
     cat ca-cert.new.pem ca-cert.old.pem > ca-cert.pem
     ```
 
-上記の操作が完了したら、新しく作成された統合CA証明書を使用してTiDBサーバーを再起動します。サーバーは新しいCA証明書と古いCA証明書の両方を受け入れるようになります。
+上記の操作後、新しく作成された統合CA証明書を使用してTiDBサーバーを再起動します。サーバーは新しいCA証明書と古いCA証明書の両方を受け入れるようになります。
 
 また、クライアントが古い CA 証明書と新しい CA 証明書の両方を受け入れるように、古い CA 証明書を結合された証明書に置き換えます。
 
@@ -402,7 +402,7 @@ CA証明書は、クライアントとサーバー間の相互検証の基盤と
     sudo openssl x509 -req -in client-req.new.pem -days 365000 -CA ca-cert.pem -CAkey ca-key.pem -set_serial 01 -out client-cert.new.pem
     ```
 
-3.  新しいクライアント キーと証明書を使用して、クライアント (MySQL など) を TiDB に接続します。
+3.  クライアント (MySQL など) が新しいクライアント キーと証明書を使用して TiDB に接続できるようにします。
 
     ```bash
     mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key /path/to/client-key.new.pem --ssl-ca /path/to/ca-cert.pem
@@ -427,7 +427,7 @@ CA証明書は、クライアントとサーバー間の相互検証の基盤と
     sudo openssl x509 -req -in server-req.new.pem -days 365000 -CA ca-cert.pem -CAkey ca-key.pem -set_serial 01 -out server-cert.new.pem
     ```
 
-3.  新しいサーバーキーと証明書を使用するようにTiDBサーバーを設定してください。詳細は[TiDBサーバーを構成する](#configure-tidb-and-the-client-to-use-certificates)参照してください。
+3.  新しいサーバーキーと証明書を使用するようにTiDBサーバーを設定します。詳細は[TiDBサーバーを構成する](#configure-tidb-and-the-client-to-use-certificates)参照してください。
 
 ## 証明書のポリシーベースのアクセス制御 {#policy-based-access-control-for-certificates}
 

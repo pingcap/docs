@@ -30,7 +30,7 @@ TiDB Cloudは、 [チェンジフィード](/tidb-cloud/changefeed-overview.md)�
 
 ### 価格 {#price}
 
-各 TiCDC RCU でサポートされているリージョンとTiDB Cloudの価格については、 [チェンジフィードコスト](https://www.pingcap.com/tidb-cloud-pricing-details/#changefeed-cost)参照してください。
+各 TiCDC RCU でサポートされているリージョンとTiDB Cloudの価格については、 [チェンジフィードコスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#changefeed-cost)参照してください。
 
 ## プライベートデータリンクコスト {#private-data-link-cost}
 

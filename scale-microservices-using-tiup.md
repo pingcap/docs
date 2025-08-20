@@ -128,7 +128,7 @@ tiup cluster display <cluster-name>
 
     TiDB Cluster: <cluster-name>
 
-    TiDB Version: v8.5.2
+    TiDB Version: v8.5.3
 
     ID       Role         Host    Ports                            Status  Data Dir        Deploy Dir
 
@@ -228,7 +228,7 @@ PD マイクロサービスが有効になっていないクラスターの場�
     tiup cluster edit-config <cluster-name>
     ```
 
-    `pd_mode: ms`に`global`加算します。
+    `pd_mode: ms`に`global`加算します:
 
     ```ini
     global:

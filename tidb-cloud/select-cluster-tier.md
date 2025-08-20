@@ -32,7 +32,7 @@ TiDB Cloud Serverless（現在はStarter）は、フルマネージドのマル�
 
 TiDB Cloudでは、組織ごとにデフォルトで最大5つのTiDB Cloud Starterクラスターを無料で作成できます。さらにTiDB Cloud Starterクラスターを作成するには、クレジットカードを追加し、利用限度額を指定する必要があります。
 
-組織内の最初の 5 つのTiDB Cloud Starter クラスターについては、無料かスケーラブルかに関係なく、 TiDB Cloud は次のようにクラスターごとに無料使用量割り当てを提供します。
+組織内の最初の 5 つのTiDB Cloud Starter クラスターについては、無料かスケーラブルかに関係なく、 TiDB Cloud は次のようにクラスターごとに無料使用量の割り当てを提供します。
 
 -   行ベースのstorage: 5 GiB
 -   列指向storage: 5 GiB
@@ -42,7 +42,7 @@ TiDB Cloudでは、組織ごとにデフォルトで最大5つのTiDB Cloud Star
 
 クラスターが使用量クォータに達すると、新しい月[割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)始まるまで、または使用量がリセットされるまで、新規接続の試行は直ちに拒否されます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。例えば、クラスターの行ベースstorageが空きクラスターで5GiBを超えると、クラスターは自動的に新規接続の試行を制限します。
 
-さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク送信など) の RU 消費量、価格の詳細、スロットル情報の詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)参照してください。
+さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク送信など) の RU 消費量、価格の詳細、スロットル情報の詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)参照してください。
 
 ## TiDB Cloudエッセンシャル {#essential} {#essential}
 
@@ -59,7 +59,7 @@ TiDB Cloudでは、組織ごとにデフォルトで最大5つのTiDB Cloud Star
 
 TiDB Cloud Starter またはTiDB Cloud Essential クラスターごとに、 TiDB Cloud は他のクラスターと区別するために一意のプレフィックスを生成します。
 
-データベースユーザー名を使用または設定する際は、必ずユーザー名にプレフィックスを含める必要があります。例えば、クラスターのプレフィックスが`3pTAoNNegb47Uc8`であるとします。
+データベースユーザー名を使用または設定する場合は、必ずユーザー名にプレフィックスを含める必要があります。例えば、クラスターのプレフィックスが`3pTAoNNegb47Uc8`であるとします。
 
 -   クラスターに接続するには:
 

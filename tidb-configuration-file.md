@@ -171,13 +171,14 @@ TiDB 設定ファイルは、コマンドラインパラメータよりも多く
 -   デフォルト値: `64`
 -   現在、有効な値の範囲は`[64, 512]`です。
 
-### <code>enable-telemetry</code><span class="version-mark">バージョン 4.0.2 で新規、バージョン 8.1.0 で非推奨</span> {#code-enable-telemetry-code-span-class-version-mark-new-in-v4-0-2-and-deprecated-in-v8-1-0-span}
+### <code>enable-telemetry</code> <span class="version-mark">v4.0.2 の新機能</span> {#code-enable-telemetry-code-span-class-version-mark-new-in-v4-0-2-span}
 
 > **警告：**
 >
-> v8.1.0以降、TiDBのテレメトリ機能は削除され、この設定項目は機能しなくなりました。これは以前のバージョンとの互換性のためだけに保持されています。
+> -   v8.1.0からv8.5.1のバージョンでは、TiDBはテレメトリ機能を削除し、この設定項目は無効になります。これは、以前のバージョンとの互換性のためだけに保持されています。
+> -   v8.5.3以降、TiDBはテレメトリ機能を再度導入しました。ただし、テレメトリ関連情報はローカルにのみ記録され、ネットワーク経由でPingCAPにデータが送信されなくなりました。
 
--   v8.1.0 より前では、この構成項目は TiDB インスタンスでテレメトリ収集を有効にするかどうかを制御します。
+-   TiDB インスタンスでテレメトリ収集を有効にするかどうかを制御します。
 -   デフォルト値: `false`
 
 ### <code>deprecate-integer-display-length</code> {#code-deprecate-integer-display-length-code}
@@ -765,7 +766,7 @@ opentracing.reporter に関連するコンフィグレーション項目。
 
 ### <code>max-batch-wait-time</code> {#code-max-batch-wait-time-code}
 
--   `max-batch-wait-time`待機すると、データパケットが大きなパケットに一括カプセル化され、TiKVノードに送信されます。これは、 `tikv-client.max-batch-size`の値が`0`より大きい場合にのみ有効です。この値を変更しないことを推奨します。
+-   `max-batch-wait-time`を待機すると、データパケットが大きなパケットに一括カプセル化され、TiKVノードに送信されます。これは、 `tikv-client.max-batch-size`の値が`0`より大きい場合にのみ有効です。この値を変更しないことを推奨します。
 -   デフォルト値: `0`
 -   単位: ナノ秒
 
@@ -944,7 +945,7 @@ TiDB サービスのステータスに関連するコンフィグレーション
 
 -   この構成は、TiDBサーバーで実行されるステートメントのデフォルトの優先順位を変更するために使用されます。
 -   デフォルト値: `NO_PRIORITY`
--   デフォルト値`NO_PRIORITY` 、ステートメントの優先度が強制的に変更されないことを意味します。その他のオプションは、昇順で`LOW_PRIORITY` 、 `DELAYED` 、 `HIGH_PRIORITY`です。
+-   デフォルト値`NO_PRIORITY` 、ステートメントの優先度が強制的に変更されないことを意味します。その他のオプションは、昇順に`LOW_PRIORITY` 、 `DELAYED` 、 `HIGH_PRIORITY`です。
 -   v6.1.0 より前では、この構成は`force-priority`で設定されます。
 
 > **注記：**

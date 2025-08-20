@@ -189,7 +189,7 @@ npm start
 
 接続が成功すると、コンソールに次のように TiDB クラスターのバージョンが出力されます。
 
-    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.5.2)
+    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.5.3)
     ⏳ Loading sample game data...
     ✅ Loaded sample game data.
 
@@ -321,7 +321,7 @@ conn.query('DELETE FROM players WHERE id = ?;', [1], (err, ok) => {
     >
     > この機能を使用して SQL インジェクションを回避したり、バッチ挿入/更新の効率を向上したりする場合は、代わりに[MySQL2](https://github.com/sidorares/node-mysql2)パッケージを使用することをお勧めします。
 
--   ORM フレームワークを使用すると、 [続編](https://sequelize.org/) 、 [タイプORM](https://typeorm.io/) 、 [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)などの多数の複雑な SQL ステートメントを使用しないシナリオで開発効率が向上します。
+-   ORM フレームワークを使用すると、 [続編](https://sequelize.org/)などの複雑な SQL ステートメント[タイプORM](https://typeorm.io/)多数使用せずにシナリオの開発効率[プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)向上させることができます。
 
 -   データベース内の大きな数値 ( `BIGINT`と`DECIMAL`列) を処理する場合は、 `supportBigNumbers: true`オプションを有効にすることをお勧めします。
 

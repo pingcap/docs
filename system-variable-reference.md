@@ -718,7 +718,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [PythonでTiDB + AIを使い始める](/vector-search/vector-search-get-started-using-python.md)
 -   [TiDBベクトル検索をJina AI Embeddings APIと統合する](/vector-search/vector-search-integrate-with-jinaai-embedding.md)
 -   [TiDBベクトル検索をSQLAlchemyと統合する](/vector-search/vector-search-integrate-with-sqlalchemy.md)
--   [LangChainとベクトル検索を統合する](/vector-search/vector-search-integrate-with-langchain.md)
+-   [ベクトル検索をLangChainと統合する](/vector-search/vector-search-integrate-with-langchain.md)
 -   [ベクトル検索とLlamaIndexの統合](/vector-search/vector-search-integrate-with-llamaindex.md)
 -   [システム変数](/system-variables.md#ssl_ca)
 
@@ -1980,7 +1980,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [システム変数](/system-variables.md#tidb_enable_telemetry-new-in-v402-and-deprecated-in-v810)
+-   [システム変数](/system-variables.md#tidb_enable_telemetry-new-in-v402)
 -   [TiDB 8.1.0 リリースノート](/releases/release-8.1.0.md)
 -   [TiDB 6.6.0 リリースノート](/releases/release-6.6.0.md)
 -   [TiDB 6.5.1 リリースノート](/releases/release-6.5.1.md)
@@ -2456,7 +2456,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [TiUPベンチコンポーネントを使用したTiDBのストレステスト](/tiup/tiup-bench.md)
 -   [システム変数](/system-variables.md#tidb_isolation_read_engines-new-in-v40)
 -   [TiFlash互換性に関する注意事項](/tiflash/tiflash-compatibility.md)
--   [ファストスキャンを使用する](/tiflash/use-fastscan.md)
+-   [FastScanを使用する](/tiflash/use-fastscan.md)
 -   [TiDB を使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)
 -   [TiDB 4.0.2 リリースノート](/releases/release-4.0.2.md)
 
@@ -2794,7 +2794,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [非トランザクションDML文](/non-transactional-dml.md)
+-   [非トランザクションDMLステートメント](/non-transactional-dml.md)
 -   [システム変数](/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610)
 -   [TiDB 6.1.0 リリースノート](/releases/release-6.1.0.md)
 
@@ -3304,7 +3304,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [遅いクエリを特定する](/identify-slow-queries.md)
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [ログ編集](/log-redaction.md)
--   [非トランザクションDMLステートメント](/non-transactional-dml.md)
+-   [非トランザクションDML文](/non-transactional-dml.md)
 -   [システム変数](/system-variables.md#tidb_redact_log)
 -   [TiDB 8.3.0 リリースノート](/releases/release-8.3.0.md)
 -   [TiDB 8.1.1 リリースノート](/releases/release-8.1.1.md)
@@ -4154,7 +4154,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 -   [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)
 
-### パスワードの検証、ユーザー名のチェック {#validate-password-check-user-name}
+### パスワードの検証、ユーザー名の確認 {#validate-password-check-user-name}
 
 参照先:
 

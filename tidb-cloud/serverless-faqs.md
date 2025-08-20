@@ -24,7 +24,7 @@ TiDB Cloudの Serverless 層は、Starter に名前が変更される前は、�
 
 「サーバーレス」は、サービスが舞台裏でどのように動作するかを正確に反映していますが、初めて使用するユーザーの多くは、この用語が抽象的で、さまざまな意味が詰め込まれていると感じました。
 
-このエントリー層の目的をより明確にするため、 TiDB Cloudを使った構築を最も早く開始できる「Starter」に名称を変更しました。Serverless層に関するこれまでの内容はそのままです。
+このエントリー層の目的をより明確にするため、 TiDB Cloudを使った構築を最も早く開始できる「Starter」に名称を変更しました。Serverless層に関する既存の内容はそのままです。
 
 -   行ベースと列ベースの両方のstorageを備えた完全に管理されたデータベースで、ハイブリッド OLTP および OLAP ワークロードに最適です。
 -   自動かつリクエスト主導型のスケーリング。容量計画や手動の調整は必要ありません。
@@ -49,7 +49,7 @@ TiDB Cloud StarterをGoogle CloudやAzureを含む他のクラウドプラット
 
 ### TiDB Cloud Starterが利用可能になる前にDeveloper Tierクラスターを作成しました。そのクラスターをまだ使用できますか？ {#i-created-a-developer-tier-cluster-before-tidb-cloud-starter-was-available-can-i-still-use-my-cluster}
 
-はい、 Developer TierクラスターはTiDB Cloud Starter クラスターに自動的に移行されており、以前の使用状況に支障をきたすことなく、ユーザー エクスペリエンスが向上します。
+はい、 Developer TierクラスターはTiDB Cloud Starter クラスターに自動的に移行されており、以前の使用に影響を与えることなく、ユーザー エクスペリエンスが向上します。
 
 ### TiDB Cloud Starter の列指向storageとは何ですか? {#what-is-columnar-storage-in-tidb-cloud-starter}
 
@@ -84,7 +84,7 @@ TiFlashレプリカの設定方法の詳細については、 [TiFlashレプリ�
 
 ### リクエストユニットとは何ですか? {#what-are-request-units}
 
-TiDB Cloud Starterは従量課金モデルを採用しており、storage容量とクラスターの使用量に対してのみ料金が発生します。このモデルでは、SQLクエリ、一括操作、バックグラウンドジョブなど、すべてのクラスターアクティビティが[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit)で定量化されます。RUは、クラスターで開始されたリクエストの規模と複雑さを表す抽象的な指標です。詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/)ご覧ください。
+TiDB Cloud Starterは従量課金モデルを採用しており、storage容量とクラスターの使用量に対してのみ料金が発生します。このモデルでは、SQLクエリ、一括操作、バックグラウンドジョブなど、すべてのクラスターアクティビティが[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit)で定量化されます。RUは、クラスターで開始されたリクエストの規模と複雑さを表す抽象的な指標です。詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)ご覧ください。
 
 ### TiDB Cloud Starter には無料プランはありますか? {#is-there-any-free-plan-available-for-tidb-cloud-starter}
 
@@ -106,7 +106,7 @@ TiDB Cloud Starter クラスターに月間使用制限が設定されている�
 
 個々のSQL文のRU消費量を取得するには、SQL文[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption)使用できます。ただし、 `EXPLAIN ANALYZE`で返されるRU使用量には、出力RUは含まれていないことに注意してください。出力使用量はゲートウェイで個別に測定され、TiDBサーバーには認識されないためです。
 
-クラスターで使用されているRUとstorageを確認するには、クラスターの概要ページの**「今月の使用状況」**ペインをご覧ください。このペインに表示される過去のリソース使用状況データとリアルタイムのリソース使用状況を参考に、クラスターのリソース消費量を追跡し、適切な使用制限を見積もることができます。無料クォータで要件を満たせない場合は、追加リソースの使用制限を編集できます。詳細については、 [TiDB Cloud Starter 使用量割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)ご覧ください。
+クラスターで使用されているRUとstorageを確認するには、クラスターの概要ページの**「今月の使用状況」**ペインをご覧ください。このペインに表示される過去のリソース使用状況データとリアルタイムのリソース使用状況に基づいて、クラスターのリソース消費量を追跡し、適切な使用制限を見積もることができます。無料クォータで要件を満たせない場合は、追加リソースの使用制限を編集できます。詳細については、 [TiDB Cloud Starter 使用量割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)ご覧ください。
 
 ### 消費される RU の数を最小限に抑えるためにワークロードを最適化するにはどうすればよいでしょうか? {#how-can-i-optimize-my-workload-to-minimize-the-number-of-rus-consumed}
 
@@ -140,7 +140,7 @@ TiDB Cloud Starter クラスターのデータ インポート プロセス中�
 
 TiDB Cloud Starter の列指向storageの料金は、行指向storageの料金とほぼ同じです。列指向storageを使用すると、データ（インデックスなし）を保存するための追加のレプリカが作成されます。行指向ストレージから列指向storageへのデータのレプリケーションには追加料金は発生しません。
 
-詳細な価格情報については、 [TiDB Cloud Starterの価格詳細](https://www.pingcap.com/tidb-serverless-pricing-details/)参照してください。
+詳細な価格情報については、 [TiDB Cloud Starterの価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)参照してください。
 
 ### 列指向storageを使用するとコストは高くなりますか? {#is-using-columnar-storage-more-expensive}
 

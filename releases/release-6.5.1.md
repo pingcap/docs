@@ -15,8 +15,8 @@ TiDB バージョン: 6.5.1
 
 -   2023年2月20日以降、TiDBおよびTiDBダッシュボードの新しいバージョン（v6.5.1を含む）では、 [テレメトリ機能](/telemetry.md)デフォルトで無効化され、使用状況情報は収集されず、PingCAPと共有されません。これらのバージョンにアップグレードする前に、クラスターがデフォルトのテレメトリ設定を使用している場合、アップグレード後にテレメトリ機能が無効化されます。具体的なバージョンについては、 [TiDB リリース タイムライン](/releases/release-timeline.md)参照してください。
 
-    -   [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402-and-deprecated-in-v810)システム変数のデフォルト値が`ON`から`OFF`に変更されます。
-    -   TiDB [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402-and-deprecated-in-v810)構成項目のデフォルト値が`true`から`false`に変更されます。
+    -   [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402)システム変数のデフォルト値が`ON`から`OFF`に変更されます。
+    -   TiDB [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)構成項目のデフォルト値が`true`から`false`に変更されます。
     -   PD [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry)構成項目のデフォルト値が`true`から`false`に変更されます。
 
 -   v1.11.3 以降、新規に導入されたTiUPではテレメトリ機能がデフォルトで無効化され、使用状況情報は収集されません。v1.11.3 より前のバージョンのTiUPから v1.11.3 以降のバージョンにアップグレードした場合、テレメトリ機能はアップグレード前と同じ状態を維持します。
@@ -55,7 +55,7 @@ TiDB バージョン: 6.5.1
 -   TiKV
 
     -   1コア未満のCPUでTiKVの起動をサポート[＃13586](https://github.com/tikv/tikv/issues/13586) [＃13752](https://github.com/tikv/tikv/issues/13752) [＃14017](https://github.com/tikv/tikv/issues/14017) @ [andreid-db](https://github.com/andreid-db)
-    -   統合読み取りプールのスレッド制限（ `readpool.unified.max-thread-count` ）をCPUクォータの10倍に増やし、高同時実行クエリ[＃13690](https://github.com/tikv/tikv/issues/13690) @ [v01dstar](https://github.com/v01dstar)をより適切に処理します。
+    -   統合読み取りプールのスレッド制限（ `readpool.unified.max-thread-count` ）をCPUクォータの10倍に増やし、高同時実行クエリ[＃13690](https://github.com/tikv/tikv/issues/13690) @ [v01dスター](https://github.com/v01dstar)をより適切に処理します。
     -   デフォルト値の`resolved-ts.advance-ts-interval`を`"1s"`から`"20s"`に変更して、リージョン間のトラフィック[＃14100](https://github.com/tikv/tikv/issues/14100) @ [金星の上](https://github.com/overvenus)を削減します。
 
 -   TiFlash

@@ -88,7 +88,7 @@ TiUPを使用して TiDB クラスターをオフラインでデプロイする�
 
 > **ヒント：**
 >
-> リンク内の`{version}`はTiDBのバージョン番号を示し、 `{arch}`システムのアーキテクチャ`amd64`または`arm64`を示します。例えば、 `amd64`アーキテクチャの`v8.5.2`のダウンロードリンクは`https://download.pingcap.org/tidb-community-toolkit-v8.5.2-linux-amd64.tar.gz`です。
+> リンク内の`{version}`はTiDBのバージョン番号を示し、 `{arch}`システムのアーキテクチャ`amd64`または`arm64`を示します。例えば、 `amd64`アーキテクチャの`v8.5.3`のダウンロードリンクは`https://download.pingcap.org/tidb-community-toolkit-v8.5.3-linux-amd64.tar.gz`です。
 
 **方法2** ： `tiup mirror clone`を使用してオフラインコンポーネントパッケージを手動でパックします。詳細な手順は次のとおりです。
 
@@ -306,13 +306,13 @@ alertmanager_servers:
 3.  TiDB クラスターをデプロイ。
 
     ```shell
-    tiup cluster deploy tidb-test v8.5.2 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
+    tiup cluster deploy tidb-test v8.5.3 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
 上記のコマンド`tiup cluster deploy`では、次のようになります。
 
 -   `tidb-test`は、デプロイする TiDB クラスターの名前です。
--   `v8.5.2`はデプロイする TiDB クラスタのバージョンです。2 `tiup list tidb`実行すると、サポートされている最新バージョンを確認できます。
+-   `v8.5.3`はデプロイする TiDB クラスタのバージョンです。2 `tiup list tidb`実行すると、サポートされている最新バージョンを確認できます。
 -   `topology.yaml`は初期化構成ファイルです。
 -   `--user root` 、クラスタのデプロイメントを完了するために、 `root`ユーザーとしてターゲットマシンにログインすることを示します。4 `root`ユーザーは、ターゲットマシンに対して`ssh`と`sudo`権限を持つ必要があります。または、 `ssh`と`sudo`権限を持つ他のユーザーを使用してデプロイメントを完了することもできます。
 -   `[-i]`と`[-p]`オプションです。ターゲットマシンへのログインをパスワードなしで設定している場合、これらのパラメータは不要です。そうでない場合は、2つのパラメータのいずれかを選択してください。4 `[-i]` 、ターゲットマシンにアクセスできるルートユーザー（または`--user`で指定された他のユーザー）の秘密鍵です。8 `[-p]` 、ユーザーパスワードを対話的に入力するために使用されます。

@@ -11,4 +11,4 @@ TiDB Cloud、データ処理もGiB単位で課金されます。データ処理�
 
 ## 価格 {#pricing}
 
-TiDB Cloudリカバリ グループがサポートされているリージョンと価格については、 [回復グループコスト](https://www.pingcap.com/tidb-cloud-pricing-details/#recovery-group-cost)参照してください。
+TiDB Cloudリカバリ グループがサポートされているリージョンと価格については、 [回復グループコスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#recovery-group-cost)参照してください。

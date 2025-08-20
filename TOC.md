@@ -19,7 +19,7 @@
 -   開発する
     -   [概要](/develop/dev-guide-overview.md)
     -   クイックスタート
-        -   [TiDB Cloudサーバーレスクラスタの構築](/develop/dev-guide-build-cluster-in-cloud.md)
+        -   [TiDB Cloudスタータークラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
         -   [TiDB の CRUD SQL](/develop/dev-guide-tidb-crud-sql.md)
     -   アプリケーション例
         -   Java
@@ -1094,6 +1094,7 @@
     -   [リリースサポートポリシー](https://www.pingcap.com/tidb-release-support-policy/)
     -   [TiDB インストール パッケージ](/binary-package.md)
     -   バージョン8.5
+        -   [8.5.3](/releases/release-8.5.3.md)
         -   [8.5.2](/releases/release-8.5.2.md)
         -   [8.5.1](/releases/release-8.5.1.md)
         -   [8.5.0](/releases/release-8.5.0.md)

@@ -26,11 +26,11 @@ API を使用して、TiCDC クラスターで次のメンテナンス操作を�
 -   [レプリケーションタスクを再開する](#resume-a-replication-task)
 -   [レプリケーションサブタスクリストを照会する](#query-the-replication-subtask-list)
 -   [特定のレプリケーションサブタスクをクエリする](#query-a-specific-replication-subtask)
--   [Query the TiCDC service process list](#query-the-ticdc-service-process-list)
+-   [TiCDC サービス プロセス リストを照会する](#query-the-ticdc-service-process-list)
 -   [所有者ノードの退去](#evict-an-owner-node)
 -   [TiCDCサーバーのログレベルを動的に調整する](#dynamically-adjust-the-log-level-of-the-ticdc-server)
 
-The request body and returned values of all APIs are in JSON format. A successful request returns a `200 OK` message. The following sections describe the specific usage of the APIs.
+すべてのAPIのリクエストボディと戻り値はJSON形式です。リクエストが成功すると、 `200 OK`メッセージが返されます。以下のセクションでは、APIの具体的な使用方法について説明します。
 
 以下の例では、TiCDCサーバーのリスニングIPアドレスは`127.0.0.1` 、ポートは`8300`です。TiCDCサーバーの起動時に、 `--addr=ip:port`でTiCDCにバインドされたIPアドレスとポートを指定できます。
 
@@ -92,7 +92,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/status
 
 ```json
 {
-  "version": "v8.5.2",
+  "version": "v8.5.3",
   "git_hash": "10413bded1bdb2850aa6d7b94eb375102e9c44dc",
   "id": "d2912e63-3349-447c-90ba-72a4e04b5e9e",
   "pid": 1447,
@@ -235,7 +235,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 
 | パラメータ名           | 説明                                                                                                     |
 | :--------------- | :----------------------------------------------------------------------------------------------------- |
-| `changefeed_id`  | `STRING` type. The ID of the replication task. (Optional)                                              |
+| `changefeed_id`  | `STRING`型。レプリケーションタスクのID。（オプション）                                                                       |
 | `replica_config` | レプリケーションタスクのコンフィグレーションパラメータ。(オプション)                                                                    |
 | **`sink_uri`**   | `STRING`型。レプリケーションタスクのダウンストリームアドレス。（**必須**）                                                            |
 | `start_ts`       | `UINT64`型。変更フィードの開始TSOを指定します。TiCDCクラスターは、このTSOからデータのプルを開始します。デフォルト値は現在時刻です。（オプション）                     |
@@ -253,8 +253,8 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `consistent`              | REDOログの設定パラメータ。(オプション)                                                                                                                                            |
 | `enable_sync_point`       | `BOOLEAN`型。2 `sync point`有効にするかどうかを決定します。（オプション）                                                                                                                  |
 | `filter`                  | `filter`の設定パラメータ。（オプション）                                                                                                                                          |
-| `force_replicate`         | `BOOLEAN` type. The default value is `false`. When you set it to `true`, the replication task forcibly replicates the tables without unique indexes. (Optional)   |
-| `ignore_ineligible_table` | `BOOLEAN` type. The default value is `false`. When you set it to `true`, the replication task ignores the tables that cannot be replicated. (Optional)            |
+| `force_replicate`         | `BOOLEAN`型。デフォルト値は`false`です`true`に設定すると、レプリケーションタスクは一意のインデックスを持たないテーブルを強制的にレプリケートします。（オプション）                                                                      |
+| `ignore_ineligible_table` | `BOOLEAN`型。デフォルト値は`false`です`true`に設定すると、レプリケーションタスクはレプリケートできないテーブルを無視します。（オプション）                                                                                  |
 | `memory_quota`            | `UINT64`型。レプリケーションタスクのメモリクォータ。（オプション）                                                                                                                             |
 | `mounter`                 | `mounter`の設定パラメータ。（オプション）                                                                                                                                         |
 | `sink`                    | `sink`の設定パラメータ。（オプション）                                                                                                                                            |
@@ -341,7 +341,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 -   `default` : `table`モードでイベントを送信します。
 -   `ts` : 行変更の commitTs を使用してハッシュ値を作成し、イベントをディスパッチします。
 -   `index-value` : 選択した HandleKey 列の名前と値を使用してハッシュ値を作成し、イベントをディスパッチします。
--   `table`: uses the schema name of the table and the table name to create the hash value and dispatch events.
+-   `table` : テーブルのスキーマ名とテーブル名を使用してハッシュ値を作成し、イベントをディスパッチします。
 
 `sink.dispatchers`は配列です。パラメータは以下のとおりです。
 
@@ -369,7 +369,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | :----------------- | :------------------------------------------------------------------------------------------------------ |
 | `output_old_value` | `BOOLEAN`型。行データが変更される前に値を出力するかどうかを制御します。デフォルト値は`true`です。無効にすると、UPDATE イベントは &quot;p&quot; フィールドを出力しません。 |
 
-`sink.debezium` parameters are described as follows:
+`sink.debezium`パラメータは次のように記述されます。
 
 | パラメータ名             | 説明                                                                                            |
 | :----------------- | :-------------------------------------------------------------------------------------------- |
@@ -540,7 +540,7 @@ curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v2
 
 ### パラメータの説明 {#parameter-descriptions}
 
-#### Path parameters {#path-parameters}
+#### パスパラメータ {#path-parameters}
 
 | パラメータ名          | 説明                                  |
 | :-------------- | :---------------------------------- |
@@ -685,7 +685,7 @@ changefeed 設定を変更するには、 `pause the replication task -> modify 
 
 ## レプリケーションタスクリストをクエリする {#query-the-replication-task-list}
 
-This API is a synchronous interface. If the request is successful, the basic information of all replication tasks (changefeed) in the TiCDC cluster is returned.
+このAPIは同期インターフェースです。リクエストが成功すると、TiCDCクラスター内のすべてのレプリケーションタスク（変更フィード）の基本情報が返されます。
 
 ### リクエストURI {#request-uri}
 
@@ -759,7 +759,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds?state=normal
 
 ### 例 {#example}
 
-The following request queries the detailed information of the replication task with the ID `test1`.
+次のリクエストは、ID `test1`のレプリケーション タスクの詳細情報を照会します。
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1
@@ -779,7 +779,7 @@ JSONレスポンスボディの意味はセクション[レプリケーション
 
 #### パスパラメータ {#path-parameter}
 
-| Parameter name  | 説明                                   |
+| パラメータ名          | 説明                                   |
 | :-------------- | :----------------------------------- |
 | `changefeed_id` | クエリするレプリケーション タスク (changefeed) の ID。 |
 
@@ -969,7 +969,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/processors
 
 ### パラメータの説明 {#parameter-descriptions}
 
-#### Path parameters {#path-parameters}
+#### パスパラメータ {#path-parameters}
 
 | パラメータ名          | 説明                             |
 | :-------------- | :----------------------------- |
