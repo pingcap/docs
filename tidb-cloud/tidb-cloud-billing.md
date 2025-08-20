@@ -39,8 +39,6 @@ See the detailed pricing for each available Alibaba Cloud region below.
 | Row-based storage with dual-layer encryption (per GiB/month) | $0.36 |
 | Columnar storage with dual-layer encryption (per GiB/month) | $0.09 |
 
-</CustomContent>
-
 #### Throttling
 
 For {{{ .essential }}} clusters, the throttling policy is based on the provisioned Request Capacity Units (RCUs). When the workload exceeds the maximum RCU capacity, the cluster will automatically throttle incoming requests to maintain stability. Existing connections will experience throttling, but new connection attempts will be accepted as long as they don't exceed the maximum RCU limit. This ensures predictable performance while protecting the cluster from overload.
@@ -48,6 +46,8 @@ For {{{ .essential }}} clusters, the throttling policy is based on the provision
 #### Billing cycle
 
 Each TiDB Cloud bill, corresponding to the previous month's usage, is finalized at the start of every new month. This finalized bill is charged to your default payment method, typically occurring between the 3rd and 9th day of the respective month. If your usage within the current month reaches or exceeds $500, an automatic charge will be initiated. Note that the billing cycle operates strictly in accordance with the UTC (+00:00) time zone.
+
+</CustomContent>
 
 ## Invoices
 
