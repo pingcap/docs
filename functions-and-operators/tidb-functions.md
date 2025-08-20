@@ -542,7 +542,7 @@ SELECT TIDB_VERSION()\G
 
 ```sql
 *************************** 1. row ***************************
-TIDB_VERSION(): Release Version: v5.1.0-alpha-13-gd5e0ed0aa-dirty
+TIDB_VERSION(): Release Version: v{{{ .tidb-version }}}
 Edition: Community
 Git Commit Hash: d5e0ed0aaed72d2f2dfe24e9deec31cb6cb5fdf0
 Git Branch: master

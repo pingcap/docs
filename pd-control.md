@@ -28,7 +28,7 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 
 > **Note:**
 >
-> `{version}` in the link indicates the version number of TiDB. For example, the download link for `{{{ .tidb-version }}}` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-{{{ .tidb-version }}}-linux-amd64.tar.gz`.
+> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v{{{ .tidb-version }}}` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v{{{ .tidb-version }}}-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
@@ -171,7 +171,7 @@ Usage:
 }
 
 >> config show cluster-version                // Display the current version of the cluster, which is the current minimum version of TiKV nodes in the cluster and does not correspond to the binary version.
-"5.2.2"
+"{{{ .tidb-version }}}"
 ```
 
 - `max-snapshot-count` controls the maximum number of snapshots that a single store receives or sends out at the same time. The scheduler is restricted by this configuration to avoid taking up normal application resources. When you need to improve the speed of adding replicas or balancing, increase this value.
@@ -307,7 +307,7 @@ Usage:
 - `cluster-version` is the version of the cluster, which is used to enable or disable some features and to deal with the compatibility issues. By default, it is the minimum version of all normally running TiKV nodes in the cluster. You can set it manually only when you need to roll it back to an earlier version.
 
     ```bash
-    config set cluster-version 1.0.8              // Set the version of the cluster to 1.0.8
+    config set cluster-version {{{ .tidb-version }}}              // Set the version of the cluster to {{{ .tidb-version }}}
     ```
 
 - `replication-mode` controls the replication mode of Regions in the dual data center scenario. See [Enable the DR Auto-Sync mode](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode) for details.
