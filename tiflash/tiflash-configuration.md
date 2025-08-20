@@ -472,6 +472,13 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 - Default value: `false`
 - Value options: `true`, `false`
 
+##### `enable_version_chain` <span class="version-mark">New in v9.0.0</span>
+
+- Controls the algorithm that TiFlash uses to implement MVCC filtering. If it is set to `1`, the VersionChain algorithm is used. If it is set to `0`, the DeltaIndex algorithm is used.
+- In most cases, the VersionChain algorithm provides noticeably better table scan performance compared with the DeltaIndex algorithm, because it improves MVCC filtering efficiency by avoiding data sorting.
+- Default value: `1`
+- Value options: `1`, `0`
+
 #### security <span class="version-mark">New in v4.0.5</span>
 
 Configure security related settings.
