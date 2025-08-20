@@ -52,7 +52,9 @@ With TiDB Cloud, you can get the following key features:
 
     <CustomContent language="en,zh">
 
-    Stay flexible without cloud vendor lock-in. TiDB Cloud is currently available on AWS, Azure, Google Cloud, and Alibaba Cloud.</CustomContent>
+    Stay flexible without cloud vendor lock-in. TiDB Cloud is currently available on AWS, Azure, Google Cloud, and Alibaba Cloud.
+
+    </CustomContent>
 
     <CustomContent language="ja">
 
