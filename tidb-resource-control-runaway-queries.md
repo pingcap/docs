@@ -41,7 +41,9 @@ There are three methods for `WATCH` to match for quick identification:
 
 The `DURATION` option in `WATCH` indicates the duration of the identification item, which is infinite by default.
 
-After a watch item is added, neither the matching feature nor the `ACTION` is changed or deleted whenever the `QUERY_LIMIT` configuration is changed or deleted. You can use `QUERY WATCH REMOVE` to remove a watch item.
+After a watch item is added, neither the matching feature nor the `ACTION` is changed or deleted whenever the `QUERY_LIMIT` configuration is changed or deleted.
+
+You can use `QUERY WATCH REMOVE` to remove a watch item, or use `QUERY WATCH REMOVE RESOURCE GROUP` (New in v9.0.0) to remove all watch items of a specific resource group in a batch.
 
 The parameters of `QUERY_LIMIT` are as follows:
 
@@ -136,6 +138,12 @@ The parameters are as follows:
 
     ```sql
     QUERY WATCH REMOVE 1;
+    ```
+
+- <span class="version-mark">New in v9.0.0</span> Remove all watch items of a specific resource group:
+
+    ```sql
+    QUERY WATCH REMOVE RESOURCE GROUP rg1;
     ```
 
 ## Observability
