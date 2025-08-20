@@ -106,9 +106,9 @@ You can check whether tables still use the old data format on Grafana: **TiFlash
 - Only V3: Number of tables using PageStorage V3 (including partitions)
 - Mix Mode: Number of tables with data format converted from PageStorage V2 to PageStorage V3 (including partitions)
 
-> **Notice:**
+> **Note:**
 >
-> The following patch versions have a known issue (Issue [#9039](https://github.com/pingcap/tiflash/issues/9039)). Upgrading to these versions may cause TiFlash data corruption after the upgrade.
+> The following patch versions have a known issue (Issue [#9039](https://github.com/pingcap/tiflash/issues/9039)). Upgrading to these versions might cause TiFlash data corruption.
 > 
 > - v6.5.0 to v6.5.9
 > - v6.6.0
