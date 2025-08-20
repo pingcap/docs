@@ -84,7 +84,7 @@ For more information about how to set up TiFlash replicas, see [Create TiFlash r
 
 ### What are Request Units?
 
-{{{ .starter }}} adopts a pay-as-you-go model, meaning that you only pay for the storage space and cluster usage. In this model, all cluster activities such as SQL queries, bulk operations, and background jobs are quantified in [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit). RU is an abstract measurement for the size and intricacy of requests initiated on your cluster. For more information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/).
+{{{ .starter }}} adopts a pay-as-you-go model, meaning that you only pay for the storage space and cluster usage. In this model, all cluster activities such as SQL queries, bulk operations, and background jobs are quantified in [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit). RU is an abstract measurement for the size and intricacy of requests initiated on your cluster. For more information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
 
 ### Is there any free plan available for {{{ .starter }}}?
 
@@ -140,7 +140,7 @@ During the data import process of a {{{ .starter }}} cluster, RU consumption occ
 
 The pricing for columnar storage in {{{ .starter }}} is similar to that for row-based storage. When you use columnar storage, an additional replica is created to store your data (without indexes). The replication of data from row-based to columnar storage does not incur extra charges.
 
-For detailed pricing information, see [{{{ .starter }}} pricing details](https://www.pingcap.com/tidb-serverless-pricing-details/).
+For detailed pricing information, see [{{{ .starter }}} pricing details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
 
 ### Is using columnar storage more expensive?
 

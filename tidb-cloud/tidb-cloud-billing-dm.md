@@ -33,7 +33,7 @@ The Data Migration job measures incremental data migration performance in rows/s
 
 ## Price
 
-To learn about the supported regions and the price of TiDB Cloud for each Data Migration RCU, see [Data Migration Cost](https://www.pingcap.com/tidb-cloud-pricing-details/#dm-cost).
+To learn about the supported regions and the price of TiDB Cloud for each Data Migration RCU, see [Data Migration Cost](https://www.pingcap.com/tidb-dedicated-pricing-details/#dm-cost).
 
 The Data Migration job is in the same region as the target TiDB node.
 

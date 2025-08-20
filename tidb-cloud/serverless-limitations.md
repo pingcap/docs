@@ -71,7 +71,7 @@ The Request Unit (RU) is a unit of measurement used to track the resource consum
 
 Once a cluster reaches its usage quota, it immediately denies any new connection attempts until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) or the usage is reset upon the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling.
 
-To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
+To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
 
 If you want to create a {{{ .starter }}} cluster with an additional quota, you can set the monthly spending limit on the cluster creation page. For more information, see [Create a {{{ .starter }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
 
