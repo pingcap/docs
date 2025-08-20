@@ -1,32 +1,32 @@
 ---
 title: RESTORE | TiDB SQL 语句参考
-summary: 关于 TiDB 数据库中 RESTORE 的用法概述。
+summary: TiDB 数据库中 RESTORE 的用法概述。
 ---
 
 # RESTORE
 
-此语句执行从之前由 [`BACKUP` 语句](/sql-statements/sql-statement-backup.md) 生成的备份归档的分布式还原。
+该语句用于从之前由 [`BACKUP` 语句](/sql-statements/sql-statement-backup.md) 生成的备份归档中执行分布式恢复操作。
 
 > **Warning:**
 >
-> - 此功能为实验性功能。不建议在生产环境中使用。此功能可能在未提前通知的情况下被更改或移除。如发现 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
-> - 此功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群中不可用。
+> - 该功能为实验性特性。不建议在生产环境中使用。该功能可能会在没有提前通知的情况下更改或移除。如果你发现了 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
+> - 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
-`RESTORE` 语句使用与 [BR 工具](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview) 相同的引擎，但还原过程由 TiDB 自身驱动，而非单独的 BR 工具。BR 的所有优点和注意事项也适用于此。在此特别强调，**`RESTORE` 目前不符合 ACID**。在运行 `RESTORE` 之前，请确保满足以下条件：
+`RESTORE` 语句使用与 [BR 工具](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview) 相同的引擎，不同之处在于恢复过程由 TiDB 自身驱动，而不是由独立的 BR 工具驱动。BR 的所有优点和注意事项在此同样适用。特别地，**`RESTORE` 目前不符合 ACID**。在运行 `RESTORE` 之前，请确保满足以下要求：
 
-* 集群处于“离线”状态，当前 TiDB 会话是唯一访问所有待还原表的活跃 SQL 连接。
-* 执行全量还原时，待还原的表不应已存在，因为可能会覆盖已有数据，导致数据与索引不一致。
-* 执行增量还原时，表应处于创建备份时的 `LAST_BACKUP` 时间戳的完全相同状态。
+* 集群处于“离线”状态，当前 TiDB 会话是唯一访问所有被恢复表的活跃 SQL 连接。
+* 当执行全量恢复时，被恢复的表不应已存在，否则现有数据可能会被覆盖，导致数据与索引之间不一致。
+* 当执行增量恢复时，表应与创建备份时的 `LAST_BACKUP` 时间戳处于完全相同的状态。
 
-运行 `RESTORE` 需要具有 `RESTORE_ADMIN` 或 `SUPER` 权限。此外，执行还原的 TiDB 节点和集群中的所有 TiKV 节点都必须对目标具有读取权限。
+运行 `RESTORE` 需要 `RESTORE_ADMIN` 或 `SUPER` 权限。此外，执行恢复的 TiDB 节点以及集群中的所有 TiKV 节点都必须拥有目标存储的读取权限。
 
-`RESTORE` 是阻塞操作，只有在整个还原任务完成、失败或取消后才会结束。建议准备长连接以执行 `RESTORE`。可以使用 [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md) 语句取消任务。
+`RESTORE` 语句为阻塞型，只有在整个恢复任务完成、失败或被取消后才会结束。建议为 `RESTORE` 准备一个长时间保持的连接。可以使用 [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md) 语句取消该任务。
 
-每次只能执行一个 `BACKUP` 和 `RESTORE` 任务。如果在同一 TiDB 服务器上已有 `BACKUP` 或 `RESTORE` 任务在运行，新发起的 `RESTORE` 将等待所有之前的任务完成。
+同一时间只能执行一个 `BACKUP` 或 `RESTORE` 任务。如果同一 TiDB 服务器上已有 `BACKUP` 或 `RESTORE` 任务在运行，新的 `RESTORE` 执行将会等待所有前序任务完成。
 
-`RESTORE` 仅支持 "tikv" 存储引擎。使用 "unistore" 引擎执行 `RESTORE` 将失败。
+`RESTORE` 只能用于 "tikv" 存储引擎。若在 "unistore" 引擎下使用 `RESTORE` 会失败。
 
-## 概要语法
+## 语法
 
 ```ebnf+diagram
 RestoreStmt ::=
@@ -52,7 +52,8 @@ Boolean ::=
 
 ## 示例
 
-### 从备份归档还原
+### 从备份归档恢复
+
 
 ```sql
 RESTORE DATABASE * FROM 'local:///mnt/backup/2020/04/';
@@ -67,25 +68,27 @@ RESTORE DATABASE * FROM 'local:///mnt/backup/2020/04/';
 1 row in set (28.961 sec)
 ```
 
-上述示例中，所有数据从本地文件系统的备份归档中还原。数据以 SST 文件的形式，从 `/mnt/backup/2020/04/` 目录中读取，目录分布在所有 TiDB 和 TiKV 节点上。
+在上述示例中，所有数据都从本地文件系统的备份归档中恢复。数据以 SST 文件的形式，从分布在所有 TiDB 和 TiKV 节点的 `/mnt/backup/2020/04/` 目录中读取。
 
-第一行结果的描述如下：
+上述结果的第一行各列说明如下：
 
-| 列名 | 描述 |
+| 列名 | 说明 |
 | :-------- | :--------- |
 | `Destination` | 读取的目标 URL |
-| `Size` |  备份归档的总大小（字节） |
+| `Size` | 备份归档的总大小，单位为字节 |
 | `BackupTS` | （未使用） |
-| `Queue Time` | 以当前时区为准，`RESTORE` 任务排队的时间戳 |
-| `Execution Time` | 以当前时区为准，`RESTORE` 任务开始执行的时间戳 |
+| `Queue Time` | `RESTORE` 任务排队时的时间戳（当前时区） |
+| `Execution Time` | `RESTORE` 任务开始执行时的时间戳（当前时区） |
 
-### 部分还原
+### 部分恢复
 
-你可以指定要还原的数据库或表。如果备份归档中缺少某些数据库或表，它们将被忽略，`RESTORE` 将不执行任何操作而完成。
+你可以指定要恢复的数据库或表。如果某些数据库或表在备份归档中不存在，它们会被忽略，因此 `RESTORE` 会直接完成而不做任何操作。
+
 
 ```sql
 RESTORE DATABASE `test` FROM 'local:///mnt/backup/2020/04/';
 ```
+
 
 ```sql
 RESTORE TABLE `test`.`sbtest01`, `test`.`sbtest02` FROM 'local:///mnt/backup/2020/04/';
@@ -93,15 +96,17 @@ RESTORE TABLE `test`.`sbtest01`, `test`.`sbtest02` FROM 'local:///mnt/backup/202
 
 ### 外部存储
 
-BR 支持从 S3 或 GCS 还原数据：
+BR 支持从 S3 或 GCS 恢复数据：
+
 
 ```sql
 RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/';
 ```
 
-URL 语法详见 [URI Formats of External Storage Services](/external-storage-uri.md)。
+URL 语法详见 [外部存储服务的 URI 格式](/external-storage-uri.md)。
 
-在云环境中，如果不希望分发凭证，可以将 `SEND_CREDENTIALS_TO_TIKV` 选项设置为 `FALSE`：
+在云环境下，如果不希望分发凭证，可以将 `SEND_CREDENTIALS_TO_TIKV` 选项设置为 `FALSE`：
+
 
 ```sql
 RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/'
@@ -110,25 +115,26 @@ RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/'
 
 ### 性能调优
 
-使用 `RATE_LIMIT` 限制每个 TiKV 节点的平均下载速度，以减少网络带宽压力。
+使用 `RATE_LIMIT` 可以限制每个 TiKV 节点的平均下载速度，以减少网络带宽占用。
 
-在还原完成之前，`RESTORE` 默认会对备份文件中的数据进行校验和验证，以确保正确性。单个表的校验和任务默认并发数为 4，可以通过 `CHECKSUM_CONCURRENCY` 参数调整。如果你确信数据验证不必要，可以将 `CHECKSUM` 参数设置为 `FALSE` 来禁用校验。
+在恢复完成前，`RESTORE` 默认会对备份文件中的数据进行校验，以验证数据正确性。单表校验任务的默认并发度为 4，你可以通过 `CHECKSUM_CONCURRENCY` 参数进行调整。如果你确信无需数据校验，可以通过将 `CHECKSUM` 参数设置为 `FALSE` 来关闭校验。
 
-如果已备份统计信息，默认会在还原过程中一并还原统计信息。如果不需要还原统计信息，可以将 `LOAD_STATS` 参数设置为 `FALSE`。
+如果统计信息已被备份，恢复时默认会一并恢复。如果你不需要恢复统计信息，可以将 `LOAD_STATS` 参数设置为 `FALSE`。
 
 <CustomContent platform="tidb">
 
-系统 [privilege tables](/privilege-management.md#privilege-table) 默认会被还原。如果不需要还原系统权限表，可以将 `WITH_SYS_TABLE` 参数设置为 `FALSE`。
+系统 [权限表](/privilege-management.md#privilege-table) 默认会被恢复。如果你不需要恢复系统权限表，可以将 `WITH_SYS_TABLE` 参数设置为 `FALSE`。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-系统 [privilege tables](https://docs.pingcap.com/tidb/stable/privilege-management#privilege-table) 默认会被还原。如果不需要还原系统权限表，可以将 `WITH_SYS_TABLE` 参数设置为 `FALSE`。
+系统 [权限表](https://docs.pingcap.com/tidb/stable/privilege-management#privilege-table) 默认会被恢复。如果你不需要恢复系统权限表，可以将 `WITH_SYS_TABLE` 参数设置为 `FALSE`。
 
 </CustomContent>
 
-默认情况下，还原任务在完成前不会等待 TiFlash 副本完全创建。如果需要等待，可以将 `WAIT_TIFLASH_READY` 参数设置为 `TRUE`。
+默认情况下，恢复任务不会等待 TiFlash 副本完全创建后再完成。如果你需要恢复任务等待 TiFlash 副本就绪，可以将 `WAIT_TIFLASH_READY` 参数设置为 `TRUE`。
+
 
 ```sql
 RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-06/'
@@ -137,11 +143,12 @@ RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-06/'
     CHECKSUM = FALSE;
 ```
 
-### 增量还原
+### 增量恢复
 
-没有专门的语法用于执行增量还原。TiDB 会自动识别备份归档是全量还是增量，并采取相应措施。你只需按正确的顺序应用每个增量还原。
+执行增量恢复无需特殊语法。TiDB 会自动识别备份归档是全量还是增量，并采取相应操作。你只需按正确顺序依次应用每个增量恢复。
 
-例如，如果备份任务如下创建：
+例如，若备份任务如下创建：
+
 
 ```sql
 BACKUP DATABASE `test` TO 's3://example-bucket/full-backup'  SNAPSHOT = 413612900352000;
@@ -149,7 +156,8 @@ BACKUP DATABASE `test` TO 's3://example-bucket/inc-backup-1' SNAPSHOT = 41497185
 BACKUP DATABASE `test` TO 's3://example-bucket/inc-backup-2' SNAPSHOT = 416353458585600 LAST_BACKUP = 414971854848000;
 ```
 
-那么在还原时也应按相同顺序执行：
+则恢复时应按相同顺序执行：
+
 
 ```sql
 RESTORE DATABASE * FROM 's3://example-bucket/full-backup';
@@ -159,9 +167,9 @@ RESTORE DATABASE * FROM 's3://example-bucket/inc-backup-2';
 
 ## MySQL 兼容性
 
-此语句是 TiDB 对 MySQL 语法的扩展。
+该语句为 TiDB 对 MySQL 语法的扩展。
 
-## 相关链接
+## 另请参阅
 
 * [BACKUP](/sql-statements/sql-statement-backup.md)
 * [SHOW RESTORES](/sql-statements/sql-statement-show-backups.md)

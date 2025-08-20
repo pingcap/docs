@@ -5,19 +5,19 @@ summary: SHOW PLACEMENT FOR 在 TiDB 中的用法。
 
 # SHOW PLACEMENT FOR
 
-`SHOW PLACEMENT FOR` 总结了所有的放置选项，并以规范的形式展示特定表、数据库模式或分区的放置信息。
+`SHOW PLACEMENT FOR` 总结了所有的放置选项，并以规范形式展示指定表、数据库模式或分区的放置信息。
 
-> **Note:**
+> **注意：**
 >
-> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> 该功能在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
-该语句返回一个结果集，其中 `Scheduling_State` 字段表示放置调度程序（PD）在调度放置方面的当前进展：
+该语句返回的结果集中，`Scheduling_State` 字段表示 Placement Driver（PD）在调度放置时的当前进度：
 
-* `PENDING`：PD 尚未开始调度放置。这可能表示放置规则在语义上是正确的，但目前无法被集群满足。例如，如果 `FOLLOWERS=4`，但只有 3 个 TiKV 存储节点作为候选追随者。
-* `INPROGRESS`：PD 正在进行放置调度。
+* `PENDING`：PD 尚未开始调度放置。这可能表示放置规则在语义上是正确的，但当前集群无法满足。例如，若 `FOLLOWERS=4`，但只有 3 个 TiKV 节点可作为 follower。
+* `INPROGRESS`：PD 正在调度放置。
 * `SCHEDULED`：PD 已成功完成放置调度。
 
-## 概要
+## 语法
 
 ```ebnf+diagram
 ShowStmt ::=
@@ -26,7 +26,7 @@ ShowStmt ::=
 ShowPlacementTarget ::=
     DatabaseSym DBName
 |   "TABLE" TableName
-|   "TABLE" "TableName" "PARTITION" Identifier
+|   "TABLE" TableName "PARTITION" Identifier
 ```
 
 ## 示例
@@ -81,7 +81,7 @@ Scheduling_State | PENDING
 
 该语句是 TiDB 对 MySQL 语法的扩展。
 
-## 相关链接
+## 另请参阅
 
 * [Placement Rules in SQL](/placement-rules-in-sql.md)
 * [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)

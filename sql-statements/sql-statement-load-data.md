@@ -1,30 +1,30 @@
 ---
-title: LOAD DATA | TiDB SQL 语句参考
-summary: 关于在 TiDB 数据库中使用 LOAD DATA 的概述。
+title: LOAD DATA | TiDB SQL Statement Reference
+summary: TiDB 数据库中 LOAD DATA 的用法概述。
 ---
 
 # LOAD DATA
 
-`LOAD DATA` 语句批量将数据加载到 TiDB 表中。
+`LOAD DATA` 语句用于批量将数据加载到 TiDB 表中。
 
-从 TiDB v7.0.0 版本开始，`LOAD DATA` SQL 语句支持以下功能：
+从 TiDB v7.0.0 开始，`LOAD DATA` SQL 语句支持以下功能：
 
 - 支持从 S3 和 GCS 导入数据
 - 新增参数 `FIELDS DEFINED NULL BY`
 
 > **Warning:**
 >
-> 新的参数 `FIELDS DEFINED NULL BY` 以及对从 S3 和 GCS 导入数据的支持为实验性功能。建议不要在生产环境中使用此功能。此功能可能在未提前通知的情况下被更改或移除。如发现 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
+> 新参数 `FIELDS DEFINED NULL BY` 以及从 S3 和 GCS 导入数据的功能目前为实验性特性。不建议在生产环境中使用。该功能可能会在没有提前通知的情况下变更或移除。如果你发现了 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
 
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
 >
-> 对于 `LOAD DATA INFILE` 语句，TiDB Cloud Dedicated 支持 `LOAD DATA LOCAL INFILE`，以及从 Amazon S3 或 Google Cloud Storage 导入 `LOAD DATA INFILE`，而 {{{ .starter }}} 仅支持 `LOAD DATA LOCAL INFILE`。
+> 对于 `LOAD DATA INFILE` 语句，TiDB Cloud Dedicated 支持 `LOAD DATA LOCAL INFILE`，以及从 Amazon S3 或 Google Cloud Storage 的 `LOAD DATA INFILE`，而 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 仅支持 `LOAD DATA LOCAL INFILE`。
 
 </CustomContent>
 
-## 概要
+## 语法
 
 ```ebnf+diagram
 LoadDataStmt ::=
@@ -39,21 +39,21 @@ Fields ::=
     | 'DEFINED' 'NULL' 'BY' stringLit ('OPTIONALLY' 'ENCLOSED')?)?
 ```
 
-## 参数
+## 参数说明
 
 ### `LOCAL`
 
-你可以使用 `LOCAL` 来指定在客户端要导入的数据文件，其中文件参数必须是客户端的文件系统路径。
+你可以使用 `LOCAL` 指定要导入的客户端本地数据文件，此时文件参数必须为客户端文件系统路径。
 
-如果你使用 TiDB Cloud，要使用 `LOAD DATA` 语句加载本地数据文件，连接时需要添加 `--local-infile` 选项。
+如果你在使用 TiDB Cloud，想通过 `LOAD DATA` 语句加载本地数据文件，连接 TiDB Cloud 时需要在连接字符串中添加 `--local-infile` 选项。
 
-- 以下是 {{{ .starter }}} 的示例连接字符串：
+- 以下是 {{{ .starter }}} 的连接字符串示例：
 
     ```
     mysql --connect-timeout 15 -u '<user_name>' -h <host_name> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p<your_password> --local-infile
     ```
 
-- 以下是 TiDB Cloud Dedicated 的示例连接字符串：
+- 以下是 TiDB Cloud Dedicated 的连接字符串示例：
 
     ```
     mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_path> --tls-version="TLSv1.2" -u root -h <host_name> -P 4000 -D test -p<your_password> --local-infile
@@ -63,75 +63,75 @@ Fields ::=
 
 <CustomContent platform="tidb">
 
-如果未指定 `LOCAL`，文件参数必须是有效的 S3 或 GCS 路径，详细信息请参见 [external storage](/br/backup-and-restore-storages.md)。
+如果你未指定 `LOCAL`，则文件参数必须为合法的 S3 或 GCS 路径，具体格式详见 [外部存储](/br/backup-and-restore-storages.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-如果未指定 `LOCAL`，文件参数必须是有效的 S3 或 GCS 路径，详细信息请参见 [external storage](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)。
+如果你未指定 `LOCAL`，则文件参数必须为合法的 S3 或 GCS 路径，具体格式详见 [外部存储](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)。
 
 </CustomContent>
 
-当数据文件存储在 S3 或 GCS 上时，你可以导入单个文件或使用通配符 `*` 来匹配多个文件进行导入。注意，通配符不支持递归处理子目录中的文件。以下是一些示例：
+当数据文件存储在 S3 或 GCS 上时，你可以导入单个文件，也可以使用通配符 `*` 匹配多个文件进行导入。注意，通配符不会递归处理子目录下的文件。以下是一些示例：
 
 - 导入单个文件：`s3://<bucket-name>/path/to/data/foo.csv`
 - 导入指定路径下的所有文件：`s3://<bucket-name>/path/to/data/*`
 - 导入指定路径下所有以 `.csv` 结尾的文件：`s3://<bucket-name>/path/to/data/*.csv`
 - 导入指定路径下所有以 `foo` 开头的文件：`s3://<bucket-name>/path/to/data/foo*`
-- 导入指定路径下所有以 `foo` 开头并以 `.csv` 结尾的文件：`s3://<bucket-name>/path/to/data/foo*.csv`
+- 导入指定路径下所有以 `foo` 开头且以 `.csv` 结尾的文件：`s3://<bucket-name>/path/to/data/foo*.csv`
 
 ### `Fields`、`Lines` 和 `Ignore Lines`
 
-你可以使用 `Fields` 和 `Lines` 参数来指定数据格式的处理方式。
+你可以通过 `Fields` 和 `Lines` 参数指定数据格式的处理方式。
 
 - `FIELDS TERMINATED BY`：指定字段分隔符。
-- `FIELDS ENCLOSED BY`：指定字段的包裹字符。
-- `LINES TERMINATED BY`：指定行终止符，如果你希望以特定字符结束一行。
+- `FIELDS ENCLOSED BY`：指定字段包裹字符。
+- `LINES TERMINATED BY`：指定行结束符，如果你希望以某个字符结尾。
 
-你可以使用 `DEFINED NULL BY` 来指定数据文件中 NULL 值的表示方式。
+你可以使用 `DEFINED NULL BY` 指定数据文件中 NULL 值的表示方式。
 
-- 与 MySQL 行为一致，如果 `ESCAPED BY` 不为空，例如使用默认值 `\`，那么 `\N` 会被视为 NULL。
-- 如果使用 `DEFINED NULL BY`，例如 `DEFINED NULL BY 'my-null'`，那么 `my-null` 会被视为 NULL。
-- 如果使用 `DEFINED NULL BY ... OPTIONALLY ENCLOSED`，例如 `DEFINED NULL BY 'my-null' OPTIONALLY ENCLOSED`，那么 `my-null` 和 `"my-null"`（假设 `ENCLOSED BY '"'`）都会被视为 NULL。
-- 如果不使用 `DEFINED NULL BY` 或 `DEFINED NULL BY ... OPTIONALLY ENCLOSED`，但使用 `ENCLOSED BY`，例如 `ENCLOSED BY '"'`，那么 `NULL` 会被视为 NULL。这与 MySQL 的行为一致。
-- 在其他情况下，不会被视为 NULL。
+- 与 MySQL 行为一致，如果 `ESCAPED BY` 不为 null，例如使用默认值 `\`，则 `\N` 会被视为 NULL 值。
+- 如果你使用 `DEFINED NULL BY`，如 `DEFINED NULL BY 'my-null'`，则 `my-null` 会被视为 NULL 值。
+- 如果你使用 `DEFINED NULL BY ... OPTIONALLY ENCLOSED`，如 `DEFINED NULL BY 'my-null' OPTIONALLY ENCLOSED`，则 `my-null` 和 `"my-null"`（假设 `ENCLOSED BY '"'`）都会被视为 NULL 值。
+- 如果你未使用 `DEFINED NULL BY` 或 `DEFINED NULL BY ... OPTIONALLY ENCLOSED`，但使用了 `ENCLOSED BY`，如 `ENCLOSED BY '"'`，则 `NULL` 会被视为 NULL 值。此行为与 MySQL 一致。
+- 其他情况下，不会被视为 NULL 值。
 
-以下是一个示例数据格式：
+以如下数据格式为例：
 
 ```
 "bob","20","street 1"\r\n
 "alice","33","street 1"\r\n
 ```
 
-如果你想提取 `bob`、`20` 和 `street 1`，可以将字段分隔符指定为 `','`，包裹字符为 `'\"'`：
+如果你想提取 `bob`、`20` 和 `street 1`，需要将字段分隔符指定为 `','`，包裹字符指定为 `'\"'`：
 
 ```sql
 FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n'
 ```
 
-如果不指定上述参数，默认处理方式为：
+如果你未指定上述参数，导入数据时默认按如下方式处理：
 
 ```sql
 FIELDS TERMINATED BY '\t' ENCLOSED BY '' ESCAPED BY '\\'
 LINES TERMINATED BY '\n' STARTING BY ''
 ```
 
-你可以通过配置 `IGNORE <number> LINES` 参数来忽略文件的前 `<number>` 行。例如，配置 `IGNORE 1 LINES` 时，会忽略文件的第一行。
+你可以通过配置 `IGNORE <number> LINES` 参数，忽略文件的前 `number` 行。例如，配置 `IGNORE 1 LINES` 时，文件的第一行会被忽略。
 
 ## 示例
 
-以下示例使用 `LOAD DATA` 导入数据，指定逗号为字段分隔符，忽略包裹数据的双引号，且忽略文件的第一行。
+以下示例使用 `LOAD DATA` 导入数据。指定逗号为字段分隔符，忽略包裹数据的双引号，文件的第一行被忽略。
 
 <CustomContent platform="tidb">
 
-如果你看到 `ERROR 1148 (42000): the used command is not allowed with this TiDB version`，请参考 [ERROR 1148 (42000): the used command is not allowed with this TiDB version](/error-codes.md#mysql-native-error-messages) 进行排查。
+如果你遇到 `ERROR 1148 (42000): the used command is not allowed with this TiDB version`，请参考 [ERROR 1148 (42000): the used command is not allowed with this TiDB version](/error-codes.md#mysql-native-error-messages) 进行排查。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-如果你看到 `ERROR 1148 (42000): the used command is not allowed with this TiDB version`，请参考 [ERROR 1148 (42000): the used command is not allowed with this TiDB version](https://docs.pingcap.com/tidb/stable/error-codes#mysql-native-error-messages) 进行排查。
+如果你遇到 `ERROR 1148 (42000): the used command is not allowed with this TiDB version`，请参考 [ERROR 1148 (42000): the used command is not allowed with this TiDB version](https://docs.pingcap.com/tidb/stable/error-codes#mysql-native-error-messages) 进行排查。
 
 </CustomContent>
 
@@ -144,7 +144,7 @@ Query OK, 815264 rows affected (39.63 sec)
 Records: 815264  Deleted: 0  Skipped: 0  Warnings: 0
 ```
 
-`LOAD DATA` 还支持使用十六进制 ASCII 字符表达式或二进制 ASCII 字符表达式作为 `FIELDS ENCLOSED BY` 和 `FIELDS TERMINATED BY` 的参数。示例如下：
+`LOAD DATA` 还支持使用十六进制 ASCII 字符表达式或二进制 ASCII 字符表达式作为 `FIELDS ENCLOSED BY` 和 `FIELDS TERMINATED BY` 的参数。如下示例：
 
 ```sql
 LOAD DATA LOCAL INFILE '/mnt/evo970/data-sets/bikeshare-data/2017Q4-capitalbikeshare-tripdata.csv' INTO TABLE trips FIELDS TERMINATED BY x'2c' ENCLOSED BY b'100010' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (duration, start_date, end_date, start_station_number, start_station, end_station_number, end_station, bike_number, member_type);
@@ -154,10 +154,10 @@ LOAD DATA LOCAL INFILE '/mnt/evo970/data-sets/bikeshare-data/2017Q4-capitalbikes
 
 <CustomContent platform="tidb-cloud">
 
-以下示例演示如何通过 `LOAD DATA INFILE` 语句，将数据从 Amazon S3 导入到 TiDB Cloud Dedicated 集群中：
+以下示例展示了如何使用 `LOAD DATA INFILE` 语句从 Amazon S3 向 TiDB Cloud Dedicated 集群导入数据：
 
 ```sql
-LOAD DATA INFILE 's3://<your-bucket-name>/your-file.csv?role_arn=<你为 TiDB Cloud 导入创建的 IAM 角色的 ARN>&external_id=<TiDB Cloud 外部 ID（可选）>'
+LOAD DATA INFILE 's3://<your-bucket-name>/your-file.csv?role_arn=<The ARN of the IAM role you created for TiDB Cloud import>&external_id=<TiDB Cloud external ID (optional)>'
 INTO TABLE <your-db-name>.<your-table-name>
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -169,22 +169,22 @@ IGNORE 1 LINES;
 
 ## MySQL 兼容性
 
-`LOAD DATA` 语句的语法与 MySQL 兼容，但字符集选项会被解析但忽略。如果你发现任何语法兼容性差异，可以 [提交 bug](https://docs.pingcap.com/tidb/stable/support)。
+`LOAD DATA` 语句的语法与 MySQL 兼容，字符集相关选项会被解析但会被忽略。如果你发现任何语法兼容性差异，可以[报告 bug](https://docs.pingcap.com/tidb/stable/support)。
 
 <CustomContent platform="tidb">
 
 > **Note:**
 >
-> - 在 TiDB v4.0.0 之前的版本中，`LOAD DATA` 每提交 20000 行，且无法配置。
-> - 在 TiDB v4.0.0 至 v6.6.0 版本中，TiDB 默认在一个事务中提交所有行。但如果你希望 `LOAD DATA` 每次提交固定数量的行，可以设置 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) 为所需的行数。
-> - 从 TiDB v7.0.0 开始，`tidb_dml_batch_size` 不再对 `LOAD DATA` 生效，TiDB 会在一个事务中提交所有行。
-> - 从 TiDB v4.0.0 或更早版本升级后，可能会出现 `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` 错误。解决此问题的推荐方法是增加 `txn-total-size-limit` 在你的 `tidb.toml` 文件中的值。
-> - 在 TiDB v7.6.0 之前的版本中，无论事务中提交了多少行，`LOAD DATA` 不会被 [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) 语句回滚。
-> - 在 TiDB v7.6.0 之前的版本中，`LOAD DATA` 语句始终在乐观事务模式下执行，不受 TiDB 事务模式配置影响。
-> - 从 v7.6.0 开始，TiDB 以与其他 DML 语句相同的方式在事务中处理 `LOAD DATA`：
->     - `LOAD DATA` 不会提交当前事务，也不会开启新事务。
->     - `LOAD DATA` 受 TiDB 事务模式设置（乐观或悲观事务）影响。
->     - 事务中的 `LOAD DATA` 可以通过事务中的 [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) 语句回滚。
+> - TiDB v4.0.0 之前的版本，`LOAD DATA` 每 20000 行提交一次，且不可配置。
+> - TiDB v4.0.0 到 v6.6.0 版本，默认一次事务提交所有行。但如果你需要 `LOAD DATA` 语句每固定行数提交一次，可以设置 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) 为期望的行数。
+> - 从 TiDB v7.0.0 开始，`tidb_dml_batch_size` 对 `LOAD DATA` 不再生效，TiDB 会一次事务提交所有行。
+> - 从 TiDB v4.0.0 或更早版本升级后，可能会出现 `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`。推荐的解决方法是增加 `tidb.toml` 文件中的 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) 配置值。
+> - TiDB v7.6.0 之前的版本，无论事务中提交多少行，`LOAD DATA` 在显式事务中不会被 [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) 语句回滚。
+> - TiDB v7.6.0 之前的版本，`LOAD DATA` 语句始终以乐观事务模式执行，与 TiDB 事务模式配置无关。
+> - 从 v7.6.0 开始，TiDB 处理 `LOAD DATA` 事务的方式与其他 DML 语句一致：
+>     - `LOAD DATA` 语句不会提交当前事务，也不会开启新事务。
+>     - `LOAD DATA` 语句会受到 TiDB 事务模式（乐观或悲观事务）的影响。
+>     - 事务中的 `LOAD DATA` 语句可以被该事务内的 [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) 语句回滚。
 
 </CustomContent>
 
@@ -192,20 +192,20 @@ IGNORE 1 LINES;
 
 > **Note:**
 >
-> - 在 TiDB v4.0.0 之前的版本中，`LOAD DATA` 每提交 20000 行，且无法配置。
-> - 在 TiDB v4.0.0 至 v6.6.0 版本中，TiDB 默认在一个事务中提交所有行。但如果你希望 `LOAD DATA` 每次提交固定数量的行，可以设置 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) 为所需的行数。
-> - 从 v7.0.0 开始，`tidb_dml_batch_size` 不再对 `LOAD DATA` 生效，TiDB 会在一个事务中提交所有行。
-> - 升级自 TiDB v4.0.0 或更早版本后，可能会出现 `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` 错误。解决方案是联系 [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) 增加 `txn-total-size-limit` 的值。
-> - 在 TiDB v7.6.0 之前的版本中，无论事务中提交了多少行，`LOAD DATA` 不会被 [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) 语句回滚。
-> - 在 TiDB v7.6.0 之前的版本中，`LOAD DATA` 始终在乐观事务模式下执行，不受 TiDB 事务模式配置影响。
-> - 从 v7.6.0 开始，TiDB 以与其他 DML 语句相同的方式在事务中处理 `LOAD DATA`：
->     - `LOAD DATA` 不会提交当前事务，也不会开启新事务。
->     - `LOAD DATA` 受 TiDB 事务模式设置（乐观或悲观事务）影响。
->     - 事务中的 `LOAD DATA` 可以通过事务中的 [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) 语句回滚。
+> - TiDB v4.0.0 之前的版本，`LOAD DATA` 每 20000 行提交一次，且不可配置。
+> - TiDB v4.0.0 到 v6.6.0 版本，默认一次事务提交所有行。但如果你需要 `LOAD DATA` 语句每固定行数提交一次，可以设置 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) 为期望的行数。
+> - 从 v7.0.0 开始，`tidb_dml_batch_size` 对 `LOAD DATA` 不再生效，TiDB 会一次事务提交所有行。
+> - 从 TiDB v4.0.0 或更早版本升级后，可能会出现 `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`。如需解决该错误，可以联系 [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) 增加 [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) 配置值。
+> - TiDB v7.6.0 之前的版本，无论事务中提交多少行，`LOAD DATA` 在显式事务中不会被 [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) 语句回滚。
+> - TiDB v7.6.0 之前的版本，`LOAD DATA` 语句始终以乐观事务模式执行，与 TiDB 事务模式配置无关。
+> - 从 v7.6.0 开始，TiDB 处理 `LOAD DATA` 事务的方式与其他 DML 语句一致：
+>     - `LOAD DATA` 语句不会提交当前事务，也不会开启新事务。
+>     - `LOAD DATA` 语句会受到 TiDB 事务模式（乐观或悲观事务）的影响。
+>     - 事务中的 `LOAD DATA` 语句可以被该事务内的 [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) 语句回滚。
 
 </CustomContent>
 
-## 另请参见
+## 另请参阅
 
 <CustomContent platform="tidb">
 
