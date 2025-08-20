@@ -8,7 +8,7 @@ summary: An overview of the usage of DISTRIBUTE TABLE for the TiDB database.
 > **Warning:**
 >
 > - This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> - This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 The `DISTRIBUTE TABLE` statement redistributes and reschedules Regions of a specified table to achieve a balanced distribution at the table level. Executing this statement helps prevent Regions from being concentrated on a few TiFlash or TiKV nodes, addressing the issue of uneven region distribution in the table.
 
