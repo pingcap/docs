@@ -140,7 +140,7 @@ During the data import process of a {{{ .starter }}} cluster, RU consumption occ
 
 The pricing for columnar storage in {{{ .starter }}} is similar to that for row-based storage. When you use columnar storage, an additional replica is created to store your data (without indexes). The replication of data from row-based to columnar storage does not incur extra charges.
 
-For detailed pricing information, see [{{{ .starter }}} pricing details](https://www.pingcap.com/tidb-serverless-pricing-details/).
+For detailed pricing information, see [{{{ .starter }}} pricing details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
 
 ### Is using columnar storage more expensive?
 
