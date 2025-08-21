@@ -1854,9 +1854,16 @@ SET tidb_query_log_max_len = 20
 >
 > This TiDB variable is not applicable to TiDB Cloud.
 
+<<<<<<< HEAD
 </CustomContent>
 
 - Scope: SESSION | GLOBAL
+=======
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Enumeration
+>>>>>>> ad5a4464e1 (Update the scope of system-variable ”tidb_redact_log“ (#21513))
 - Default value: `OFF`
 - This variable controls whether to hide user information in the SQL statement being recorded into the TiDB log and slow log.
 - When you set the variable to `1`, user information is hidden. For example, if the executed SQL statement is `insert into t values (1,2)`, the statement is recorded as `insert into t values (?,?)` in the log.
