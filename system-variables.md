@@ -2695,9 +2695,13 @@ explain select * from t where age=5;
 >
 > This TiDB variable is not applicable to TiDB Cloud.
 
+<<<<<<< HEAD
 </CustomContent>
 
 - Scope: SESSION | GLOBAL
+=======
+- Scope: GLOBAL
+>>>>>>> ad5a4464e1 (Update the scope of system-variable ”tidb_redact_log“ (#21513))
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
