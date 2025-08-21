@@ -8,7 +8,10 @@
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [Credits](/credits.md)
+<<<<<<< HEAD
   - [Roadmap](https://docs.pingcap.com/tidb/dev/tidb-roadmap)
+=======
+>>>>>>> a2e187ce75 (*: remove TiDB roadmap from TOC, home, index, add warning (#21628))
 - Get Started
   - [Quick Start with TiDB](/quick-start-with-tidb.md)
   - [Quick Start with HTAP](/quick-start-with-htap.md)
