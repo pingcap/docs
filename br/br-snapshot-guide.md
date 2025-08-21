@@ -151,6 +151,7 @@ When you perform a snapshot backup, BR backs up system tables as tables with the
 - Starting from BR v5.1.0, when you back up snapshots, BR automatically backs up the **system tables** in the `mysql` schema, but does not restore these system tables by default.
 - Starting from v6.2.0, BR lets you specify `--with-sys-table` to restore **data in some system tables**.
 - Starting from v7.6.0, BR enables `--with-sys-table` by default, which means that BR restores **data in some system tables** by default.
+- Starting from v9.0.0, BR lets you specify `--fast-load-sys-tables` to restore system tables physically. This approach uses the `RENAME TABLE` DDL statement to atomically swap the system tables in the `__TiDB_BR_Temporary_mysql` database with the system tables in the `mysql` database. Unlike the logical restoration of system tables using the `REPLACE INTO` SQL statement, physical restoration completely overwrites the existing data in the system tables.
 
 **BR can restore data in the following system tables:**
 
