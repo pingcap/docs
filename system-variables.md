@@ -1856,7 +1856,7 @@ SET tidb_query_log_max_len = 20
 
 </CustomContent>
 
-- Scope: SESSION | GLOBAL
+- Scope: GLOBAL
 - Default value: `OFF`
 - This variable controls whether to hide user information in the SQL statement being recorded into the TiDB log and slow log.
 - When you set the variable to `1`, user information is hidden. For example, if the executed SQL statement is `insert into t values (1,2)`, the statement is recorded as `insert into t values (?,?)` in the log.
