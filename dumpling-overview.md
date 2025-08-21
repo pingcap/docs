@@ -233,7 +233,7 @@ export AWS_ACCESS_KEY_ID=${AccessKey}
 export AWS_SECRET_ACCESS_KEY=${SecretKey}
 ```
 
-Dumpling also supports reading credential files from `~/.aws/credentials`, and profile option. For more information about URI parameter descriptions, see [URI Formats of External Storage Services](/external-storage-uri.md).
+Dumpling also supports reading credential files from `~/.aws/credentials` and authenticating with AWS profiles. For more information about URI parameter descriptions, see [URI Formats of External Storage Services](/external-storage-uri.md).
 
 To use the default credentials:
 
