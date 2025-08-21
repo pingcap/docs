@@ -91,7 +91,11 @@ Documentation for TiDB application developers.
 
 <DocHomeCard href="https://docs.pingcap.com/tidbcloud/dev-guide-overview" icon="cloud-dev" label="Developer Guide">
 
+<<<<<<< HEAD
 Documentation for TiDB Cloud application developers.
+=======
+TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.0.
+>>>>>>> b570cc8627 (*: remove TiDB roadmap from TOC, home, index, add warning (#21628) (#21637))
 
 </DocHomeCard>
 
