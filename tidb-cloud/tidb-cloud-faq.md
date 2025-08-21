@@ -13,7 +13,7 @@ This document lists the most frequently asked questions about TiDB Cloud.
 
 ### What is TiDB Cloud?
 
-TiDB Cloud makes deploying, managing, and maintaining your TiDB clusters even simpler with a fully managed cloud instance that you control through an intuitive console. You are able to easily deploy on Amazon Web Services (AWS), Google Cloud, Microsoft Azure, or Alibaba Cloud to quickly build mission-critical applications.
+TiDB Cloud makes deploying, managing, and maintaining your TiDB clusters even simpler with a fully managed cloud instance that you control through an intuitive console. <CustomContent language="en,zh">You are able to easily deploy on Amazon Web Services (AWS), Google Cloud, Microsoft Azure, or Alibaba Cloud to quickly build mission-critical applications.</CustomContent><CustomContent language="ja">You are able to easily deploy on Amazon Web Services (AWS), Google Cloud, or Microsoft Azure to quickly build mission-critical applications.</CustomContent>
 
 TiDB Cloud allows developers and DBAs with little or no training to handle once-complex tasks such as infrastructure management and cluster deployment with ease, to focus on your applications, not the complexities of your database. And by scaling TiDB clusters in or out with a simple click of a button, you no longer waste costly resources because you are able to provision your databases for exactly how much and how long you need them.
 
@@ -33,7 +33,7 @@ You can use any language supported by the MySQL client or driver.
 
 ### Where can I run TiDB Cloud?
 
-TiDB Cloud is currently available on Amazon Web Services (AWS), Google Cloud, Microsoft Azure, and Alibaba Cloud.
+<CustomContent language="en,zh">TiDB Cloud is currently available on Amazon Web Services (AWS), Google Cloud, Microsoft Azure, and Alibaba Cloud.</CustomContent><CustomContent language="ja">TiDB Cloud is currently available on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.</CustomContent>
 
 ### Does TiDB Cloud support VPC peering between different cloud service providers?
 

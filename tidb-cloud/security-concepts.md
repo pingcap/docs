@@ -164,9 +164,21 @@ TiDB Cloud ensures secure cluster connectivity and data transmission through rob
 
 ### Private endpoints
 
+<CustomContent language="en,zh">
+
 - Enables secure connectivity for SQL clients within your Virtual Private Cloud (VPC) to TiDB Cloud Dedicated clusters.
 
 - Supported by [AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md), [Azure Private Link](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md), [Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md), and [Alibaba Cloud Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md).
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+- Enables secure connectivity for SQL clients within your Virtual Private Cloud (VPC) to TiDB Cloud Dedicated clusters.
+
+- Supported by [AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md), [Azure Private Link](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md), and [Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
+
+</CustomContent>
 
 **Best practices:** Use private endpoints in production to minimize public exposure and review configurations regularly.
 

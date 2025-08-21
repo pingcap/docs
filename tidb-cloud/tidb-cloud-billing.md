@@ -17,6 +17,8 @@ See [TiDB Cloud Dedicated Pricing Details](https://www.pingcap.com/tidb-dedicate
 
 See [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
 
+<CustomContent language="en,zh">
+
 ### Pricing for {{{ .essential }}} {#pricing-for-essential}
 
 > **Tip:**
@@ -45,15 +47,29 @@ For {{{ .essential }}} clusters, the throttling policy is based on the provision
 
 Each TiDB Cloud bill, corresponding to the previous month's usage, is finalized at the start of every new month. This finalized bill is charged to your default payment method, typically occurring between the 3rd and 9th day of the respective month. If your usage within the current month reaches or exceeds $500, an automatic charge will be initiated. Note that the billing cycle operates strictly in accordance with the UTC (+00:00) time zone.
 
+</CustomContent>
+
 ## Invoices
 
 If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can manage the invoice information of TiDB Cloud. Otherwise, skip this section.
 
 After you set up the payment method, TiDB Cloud will generate an invoice once your cost reaches a quota, which is $500 by default. If you want to raise the quota or receive one invoice per month, you can [contact our sales](https://www.pingcap.com/contact-us/).
 
+<CustomContent language="en,zh">
+
 > **Note:**
 >
 > If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), [Azure Marketplace](https://azuremarketplace.microsoft.com/), [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), or [Alibaba Cloud Marketplace](https://marketplace.alibabacloud.com/), you can pay through your AWS account, Azure account, Google Cloud account, or Alibaba Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+> **Note:**
+>
+> If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), [Azure Marketplace](https://azuremarketplace.microsoft.com/), or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your AWS account, Azure account, or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
+
+</CustomContent>
 
 After you contact our sales for receiving an invoice on a monthly basis, TiDB Cloud will generate the invoice for the previous month at the beginning of each month.
 
@@ -190,9 +206,21 @@ To view the discount information, perform the following steps:
 
 If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can manage the payment information of TiDB Cloud. Otherwise, skip this section.
 
+<CustomContent language="en,zh">
+
 > **Note:**
 >
 > If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), [Azure Marketplace](https://azuremarketplace.microsoft.com/), [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), or [Alibaba Cloud Marketplace](https://marketplace.alibabacloud.com/), you can pay through your AWS account, Azure account, Google Cloud account, or Alibaba Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+> **Note:**
+>
+> If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), [Azure Marketplace](https://azuremarketplace.microsoft.com/), or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your AWS account, Azure account, or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
+
+</CustomContent>
 
 The fee is deducted from a bound credit card according to your cluster usage. To add a valid credit card, you can use either of the following methods:
 
@@ -239,9 +267,21 @@ To learn more about contracts, feel free to [contact our sales](https://www.ping
 
 ## Billing from cloud provider marketplace
 
+<CustomContent language="en,zh">
+
 If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can link your TiDB Cloud account to the billing account of your cloud provider (AWS, Azure, Google Cloud, or Alibaba Cloud). Otherwise, skip this section.
 
+</CustomContent>
+
+<CustomContent language="ja">
+
+If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can link your TiDB Cloud account to the billing account of your cloud provider (AWS, Azure, or Google Cloud). Otherwise, skip this section.
+
+</CustomContent>
+
 If you are new to TiDB Cloud and do not have a TiDB Cloud account, you can sign up for a TiDB Cloud account through the marketplace of your cloud provider, and pay for the usage via the billing account of your cloud provider.
+
+<CustomContent language="en,zh">
 
 - To sign up through [AWS Marketplace](https://aws.amazon.com/marketplace), search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
 - To sign up through [Azure Marketplace](https://azuremarketplace.microsoft.com), search for `TiDB Cloud` in [Azure Marketplace](https://azuremarketplace.microsoft.com), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
@@ -249,6 +289,18 @@ If you are new to TiDB Cloud and do not have a TiDB Cloud account, you can sign 
 - To sign up through [Alibaba Cloud Marketplace](https://marketplace.alibabacloud.com/), search for `TiDB Cloud` in [Alibaba Cloud Marketplace](https://marketplace.alibabacloud.com/), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
 
 If you already have a TiDB Cloud account and you want to pay for the usage via your AWS, Azure, Google Cloud, or Alibaba Cloud billing account, you can link your TiDB Cloud account to your AWS, Azure, Google Cloud, or Alibaba Cloud billing account.
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+- To sign up through [AWS Marketplace](https://aws.amazon.com/marketplace), search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+- To sign up through [Azure Marketplace](https://azuremarketplace.microsoft.com), search for `TiDB Cloud` in [Azure Marketplace](https://azuremarketplace.microsoft.com), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+- To sign up through [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), search for `TiDB Cloud` in [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+
+If you already have a TiDB Cloud account and you want to pay for the usage via your AWS, Azure, or Google Cloud billing account, you can link your TiDB Cloud account to your AWS, Azure, or Google Cloud billing account.
+
+</CustomContent>
 
 <SimpleTab>
 <div label="AWS Marketplace">
@@ -323,6 +375,8 @@ To link your TiDB Cloud account to a Google Cloud billing account, take the foll
 
 </div>
 
+<CustomContent language="en,zh">
+
 <div label="Alibaba Cloud Marketplace">
 
 To link your TiDB Cloud account to an Alibaba Cloud billing account, take the following steps:
@@ -344,4 +398,5 @@ To link your TiDB Cloud account to an Alibaba Cloud billing account, take the fo
     > If your organization already has a payment method in TiDB Cloud, the existing payment method for this organization will be replaced by the newly added Alibaba Cloud billing account.
 
 </div>
+</CustomContent>
 </SimpleTab>
