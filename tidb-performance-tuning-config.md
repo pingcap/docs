@@ -151,7 +151,7 @@ These settings help ensure efficient resource utilization and minimize potential
 Add the following configuration items to the TiFlash-learner configuration file:
 
 ```toml
-[raftstore-proxy.server]
+[server]
 snap-io-max-bytes-per-sec = "300MiB"
 ```
 
