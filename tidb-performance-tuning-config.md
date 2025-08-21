@@ -152,12 +152,12 @@ These settings help ensure efficient resource utilization and minimize potential
 >
 > TiKV implements flow control at the scheduler layer to ensure system stability. When critical thresholds are breached, including those for pending compaction bytes or write queue sizes, TiKV begins rejecting write requests and returns a ServerIsBusy error. This error indicates that the background compaction processes cannot keep pace with the current rate of foreground write operations. Flow control activation typically results in latency spikes and reduced query throughput (QPS drops). To prevent these performance degradations, comprehensive capacity planning is essential, along with proper configuration of compaction parameters and storage settings.
 
-### TiFlash configurations
+### TiFlash-learner configurations
 
-Add the following configuration items to the TiFlash configuration file:
+Add the following configuration items to the TiFlash-learner configuration file:
 
 ```toml
-[raftstore-proxy.server]
+[server]
 snap-io-max-bytes-per-sec = "300MiB"
 ```
 
