@@ -20,6 +20,14 @@ All Gemini models are available for use under the `gemini/` prefix when you brin
 
 For a full list of available models, please refer to [Gemini Documentation](https://ai.google.dev/gemini-api/docs/embeddings).
 
+## Availability
+
+This feature is currently available in these regions and offerings:
+
+- Starter: AWS Frankfurt (eu-central-1)
+- Starter: AWS Oregon (us-west-2)
+- Starter: AWS N. Virginia (us-east-1)
+
 ## SQL Usage Example
 
 To use Gemini models, a [Gemini API key](https://ai.google.dev/gemini-api/docs/api-key) is required:

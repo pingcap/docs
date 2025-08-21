@@ -48,6 +48,14 @@ Alternatively, all Cohere models are available for use under the `cohere/` prefi
 
 For a full list of Cohere models, please refer to [Cohere's Documentation](https://docs.cohere.com/docs/cohere-embed).
 
+## Availability
+
+This feature is currently available in these regions and offerings:
+
+- Starter: AWS Frankfurt (eu-central-1)
+- Starter: AWS Oregon (us-west-2)
+- Starter: AWS N. Virginia (us-east-1)
+
 ## SQL Usage Example (TiDB Cloud Hosted)
 
 Create table:
@@ -160,7 +168,7 @@ LIMIT 2;
 
 ## Options (BYOK)
 
-All [Cohere options](https://docs.cohere.com/docs/embed) are supported via the `additional_json_options` parameter of the `EMBED_TEXT()` function.
+All [Cohere embedding options](https://docs.cohere.com/v2/reference/embed) are supported via the `additional_json_options` parameter of the `EMBED_TEXT()` function.
 
 **Example: Specify different `input_type` for Search vs Insert**
 
@@ -192,7 +200,7 @@ CREATE TABLE sample (
 );
 ```
 
-For all available options, please refer to [Cohere's Documentation](https://docs.cohere.com/docs/embed).
+For all available options, please refer to [Cohere's Documentation](https://docs.cohere.com/v2/reference/embed).
 
 ## Python Usage Example
 

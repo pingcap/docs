@@ -28,6 +28,14 @@ All OpenAI models are available for use under the `openai/` prefix when you brin
 
 For a full list of available models, please refer to [OpenAI Documentation](https://platform.openai.com/docs/guides/embeddings).
 
+## Availability
+
+This feature is currently available in these regions and offerings:
+
+- Starter: AWS Frankfurt (eu-central-1)
+- Starter: AWS Oregon (us-west-2)
+- Starter: AWS N. Virginia (us-east-1)
+
 ## SQL Usage Example
 
 To use OpenAI models, an [OpenAI API key](https://platform.openai.com/api-keys) is required:

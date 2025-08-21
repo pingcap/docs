@@ -15,6 +15,14 @@ To use Auto Embedding, here's the basic workflow:
 2. **Insert text data** - vectors are automatically generated and stored concurrently
 3. **Query using text** - use `VEC_EMBED_COSINE_DISTANCE()` or `VEC_EMBED_L2_DISTANCE()` to find semantically similar content
 
+## Availability
+
+This feature is currently available in these regions and offerings:
+
+- Starter: AWS Frankfurt (eu-central-1)
+- Starter: AWS Oregon (us-west-2)
+- Starter: AWS N. Virginia (us-east-1)
+
 ## Quick Start Example
 
 > **Tip:**

@@ -10,6 +10,14 @@ HuggingFace models are available for use under the `huggingface/` prefix when yo
 
 For your convenience, we provided a few popular models below. For a full list of available models, please refer to [HuggingFace Models](https://huggingface.co/models?library=sentence-transformers&inference_provider=hf-inference&sort=trending). Note that not all models are provided by HuggingFace Inference API or always working.
 
+## Availability
+
+This feature is currently available in these regions and offerings:
+
+- Starter: AWS Frankfurt (eu-central-1)
+- Starter: AWS Oregon (us-west-2)
+- Starter: AWS N. Virginia (us-east-1)
+
 ## multilingual-e5-large
 
 - Name: `huggingface/intfloat/multilingual-e5-large`

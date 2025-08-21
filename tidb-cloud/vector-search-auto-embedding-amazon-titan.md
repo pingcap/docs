@@ -25,6 +25,14 @@ TiDB Cloud provides the following [Amazon Titan embedding model](https://docs.aw
 
 You may learn more from [its official documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html).
 
+## Availability
+
+This feature is currently available in these regions and offerings:
+
+- Starter: AWS Frankfurt (eu-central-1)
+- Starter: AWS Oregon (us-west-2)
+- Starter: AWS N. Virginia (us-east-1)
+
 ## SQL Usage Example
 
 ```sql
