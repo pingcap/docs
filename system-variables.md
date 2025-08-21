@@ -3573,7 +3573,7 @@ SHOW WARNINGS;
 
 </CustomContent>
 
-- Scope: SESSION | GLOBAL
+- Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
