@@ -74,7 +74,7 @@ CREATE TABLE sample (
 
 > **Note**:
 >
-> For Cohere model, you must specify `input_type` in the `EMBED_TEXT()`. `'{"input_type": "search_document", "input_type@search": "search_query"}'` means `input_type` is set to `search_document` when inserting data, and is set to `search_query` when performing vector search queries.
+> For the Cohere model, you must specify `input_type` in the `EMBED_TEXT()` function. For example, `'{"input_type": "search_document", "input_type@search": "search_query"}'` means that `input_type` is set to `search_document` for data insertion and `search_query` for vector searches.
 >
 > The `@search` suffix is used to mark that field to take effect only when it is used for vector search queries.
 
@@ -113,9 +113,9 @@ Result:
 
 ## Options (TiDB Cloud Hosted)
 
-Both Embed v3 and Multilingual Embed v3 models supports following options, which need to specified via the `additional_json_options` parameter of the `EMBED_TEXT()` function.
+Both the Embed v3 and Multilingual Embed v3 models support the following options, which you can specify via the `additional_json_options` parameter of the `EMBED_TEXT()` function.
 
-- `input_type` – **Required**. Prepends special tokens to differentiate each type from one another. You should not mix different types together, except when mixing types for for search and retrieval. In this case, embed your corpus with the `search_document` type and embedded queries with type `search_query` type.
+- `input_type` – **Required**. Prepends special tokens to differentiate each type from one another. You should not mix different types together, except when mixing types for search and retrieval. In this case, embed your corpus with the `search_document` type and embed queries with the `search_query` type.
 
   - `search_document` – In search use-cases, use `search_document` when you encode documents for embeddings that you store in a vector database.
   - `search_query` – Use `search_query` when querying your vector DB to find relevant documents.
