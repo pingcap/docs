@@ -15,7 +15,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
 <!--tw@Oreoxmt: 1 notes-->
 
-- 将系统变量 `tidb_enable_historical_stats` 的默认值从 `ON` 修改为 `OFF`，即默认关闭历史统计信息，避免潜在的稳定性问题 [#53048](https://github.com/pingcap/tidb/issues/53048) @[hawkingrei](https://github.com/hawkingrei)
+- Change the default value of `tidb_enable_historical_stats` from `ON` to `OFF`, which turns off historical statistics to avoid potential stability issues [#53048](https://github.com/pingcap/tidb/issues/53048) @[hawkingrei](https://github.com/hawkingrei)
 
 ## Improvements
 
@@ -26,18 +26,18 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - (dup): release-8.5.3.md > Improvements> TiDB - Add flow control interfaces for Region splitting and data ingestion during data import [#61553](https://github.com/pingcap/tidb/issues/61553) @[tangenta](https://github.com/tangenta)
     - (dup): release-8.2.0.md > Improvements> TiDB - Optimize the performance of obtaining data distribution information when performing simple queries on tables with large data volumes [#53850](https://github.com/pingcap/tidb/issues/53850) @[you06](https://github.com/you06)
     - (dup): release-8.5.3.md > Improvements> TiDB - Add a monitoring metric to observe the write speed to TiKV during index addition [#60925](https://github.com/pingcap/tidb/issues/60925) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    - 优化了 DML 在 DDL 执行期间的加锁逻辑，减少了 DML 和 DDL 操作的锁冲突，提高了某些场景下 DDL 的性能。但是由于在此过程中也会引入额外的二级索引加锁操作，可能会造成 DML 性能轻微下降 [#62337](https://github.com/pingcap/tidb/issues/62337) @[lcwangchao](https://github.com/lcwangchao)
-    - 调整 `tidb_opt_ordering_index_selectivity_threshold` 值为 1 时的行为，增强变量的控制能力 [#60242](https://github.com/pingcap/tidb/issues/60242) @[time-and-fate](https://github.com/time-and-fate)
-    - 避免 ANALYZE 执行完成后需要刷新整个集群的统计信息，从而导致 ANALYZE 执行时间过长的情况 [#57631](https://github.com/pingcap/tidb/issues/57631) @[0xPoe](https://github.com/0xPoe)
-    - 常量折叠可以将带有 NOT NULL 约束的列上进行的 IS NULL 计算折叠为 FALSE [#62050](https://github.com/pingcap/tidb/issues/62050) @[hawkingrei](https://github.com/hawkingrei)
-    - 优化器支持更多 JOIN 的常量传播 [#51700](https://github.com/pingcap/tidb/issues/51700) @[hawkingrei](https://github.com/hawkingrei)
-    - 优化在 DML 与 DDL 存在较多锁冲突时，合并 temp index 的性能 [#61433](https://github.com/pingcap/tidb/issues/61433) @[tangenta](https://github.com/tangenta)
+    - Optimize the locking logic of DML during DDL execution to reduce lock conflicts between DML and DDL operations, improving DDL performance in some scenarios. However, due to the additional secondary index locking operations, DML performance might decrease slightly [#62337](https://github.com/pingcap/tidb/issues/62337) @[lcwangchao](https://github.com/lcwangchao)
+    - Improve the behavior when the system variable `tidb_opt_ordering_index_selectivity_threshold` is set to `1`, enhancing the control capability of this variable [#60242](https://github.com/pingcap/tidb/issues/60242) @[time-and-fate](https://github.com/time-and-fate)
+    - Avoid refreshing statistics information across the entire cluster after `ANALYZE` statement execution, reducing the execution time of `ANALYZE` [#57631](https://github.com/pingcap/tidb/issues/57631) @[0xPoe](https://github.com/0xPoe)
+    - Support constant folding for columns with `NOT NULL` constraints, folding `IS NULL` evaluations into `FALSE` [#62050](https://github.com/pingcap/tidb/issues/62050) @[hawkingrei](https://github.com/hawkingrei)
+    - The optimizer supports constant propagation in more types of `JOIN` operations [#51700](https://github.com/pingcap/tidb/issues/51700) @[hawkingrei](https://github.com/hawkingrei)
+    - Improve the performance of temporary index merging when extensive lock conflicts exist between DML and DDL operations [#61433](https://github.com/pingcap/tidb/issues/61433) @[tangenta](https://github.com/tangenta)
 
 + TiKV <!--tw@Oreoxmt: 2 notes-->
 
     - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-    - 优化 TiKV compaction 触发逻辑，按回收效率排序对所有数据段依序处理，降低 MVCC 冗余数据对性能的影响 [#18571](https://github.com/tikv/tikv/issues/18571) @[v01dstar](https://github.com/v01dstar)
-    - 优化 async snapshot 和 write 在有大量 SST 文件的环境中的尾延迟 [#18743](https://github.com/tikv/tikv/issues/18743) @[Connor1996](https://github.com/Connor1996)
+    - Optimize the trigger logic of TiKV compaction to process all data segments in order of reclamation efficiency, reducing the performance impact of MVCC redundant data [#18571](https://github.com/tikv/tikv/issues/18571) @[v01dstar](https://github.com/v01dstar)
+    - Optimize the tail latency of async snapshot and write operations in environments with a large number of SST files [#18743](https://github.com/tikv/tikv/issues/18743) @[Connor1996](https://github.com/Connor1996)
     - (dup): release-8.1.2.md > Improvements> TiKV - Improve the speed of Region Merge in scenarios with empty tables and small Regions [#17376](https://github.com/tikv/tikv/issues/17376) @[LykxSassinator](https://github.com/LykxSassinator)
     - (dup): release-8.5.3.md > Improvements> TiKV - Optimize the handling of `CompactedEvent` in Raftstore by moving it to the `split-check` worker, reducing blocking on the main Raftstore thread [#18532](https://github.com/tikv/tikv/issues/18532) @[LykxSassinator](https://github.com/LykxSassinator)
     - (dup): release-8.1.0.md > Improvements> TiKV - Add metrics for memory usage per thread [#15927](https://github.com/tikv/tikv/issues/15927) @[Connor1996](https://github.com/Connor1996)
@@ -53,9 +53,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
 + PD <!--tw@Oreoxmt: 2 notes-->
 
-    - (dup): release-8.5.3.md > 改进提升> PD - 增加了 GO Runtime 相关监控 [#8931](https://github.com/tikv/pd/issues/8931) @[bufferflies](https://github.com/bufferflies)
-    - Add more metrics for Golang Runtime, details can be seen at the runtime panel [#8931](https://github.com/tikv/pd/issues/8931) @[bufferflies](https://github.com/bufferflies)
-    - 减少一些非必要 error 日志 [#9370](https://github.com/tikv/pd/issues/9370) @[bufferflies](https://github.com/bufferflies)
+    - (dup): release-8.5.3.md > Improvements> PD - Add GO runtime-related monitoring metrics in Prometheus [#8931](https://github.com/tikv/pd/issues/8931) @[bufferflies](https://github.com/bufferflies)
+    - Reduce unnecessary error logs [#9370](https://github.com/tikv/pd/issues/9370) @[bufferflies](https://github.com/bufferflies)
 
 + TiFlash
 
@@ -70,7 +69,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     + Backup & Restore (BR) <!--tw@Oreoxmt: 1 note-->
 
         - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - 在 Amazon EC2 上部署 TiDB 时，BR 支持 AWS 的 Instance Metadata Service Version 2 (IMDSv2)。你可以在 EC2 实例上进行相关配置，使 BR 可以使用与实例关联的 IAM 角色以适当的权限访问 Amazon S3 [#16443](https://github.com/tikv/tikv/issues/16443) @[pingyu](https://github.com/pingyu)
+        - When deploying TiDB on Amazon EC2, BR supports AWS Instance Metadata Service Version 2 (IMDSv2). You can configure your EC2 instance to allow BR to use the IAM role associated with the instance for appropriate permissions to access Amazon S3 [#16443](https://github.com/tikv/tikv/issues/16443) @[pingyu](https://github.com/pingyu)
         - (dup): release-8.5.3.md > Improvements> Tools> Backup & Restore (BR) - The Download API of TiKV supports filtering out data within a certain time range when downloading backup files, which avoids importing outdated or future data versions during restore [#18399](https://github.com/tikv/tikv/issues/18399) @[3pointer](https://github.com/3pointer)
 
     + TiCDC
