@@ -8,7 +8,6 @@
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [Credits](/credits.md)
-  - [Roadmap](/tidb-roadmap.md)
 - Get Started
   - [Quick Start with TiDB](/quick-start-with-tidb.md)
   - [Quick Start with HTAP](/quick-start-with-htap.md)
