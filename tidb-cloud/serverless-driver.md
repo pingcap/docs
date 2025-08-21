@@ -1,16 +1,20 @@
 ---
-title: {{{ .starter }}} Driver (Beta)
-summary: Learn how to connect to {{{ .starter }}} from serverless and edge environments.
+title: TiDB Cloud Serverless Driver (Beta)
+summary: Learn how to connect to {{{ .starter }}} or {{{ .essential }}} from serverless and edge environments.
 aliases: ['/tidbcloud/serverless-driver-config']
 ---
 
-# {{{ .starter }}} Driver (Beta)
+# TiDB Cloud Serverless Driver (Beta)
 
-## Why use {{{ .starter }}} Driver (Beta)
+> **Note:**
+>
+> The serverless driver is in beta and only applicable to {{{ .starter }}} or {{{ .essential }}} clusters.
+
+## Why use TiDB Cloud Serverless Driver (Beta)
 
 Traditional TCP-based MySQL drivers are not suitable for serverless functions due to their expectation of long-lived, persistent TCP connections, which contradict the short-lived nature of serverless functions. Moreover, in edge environments such as [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/), where comprehensive TCP support and full Node.js compatibility may be lacking, these drivers may not work at all.
 
-[TiDB Cloud serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to your {{{ .starter }}} cluster over HTTP, which is generally supported by serverless environments. With it, it is now possible to connect to {{{ .starter }}} clusters from edge environments and reduce connection overhead with TCP while keeping the similar development experience of traditional TCP-based MySQL drivers. 
+[TiDB Cloud serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript lets you to connect to your {{{ .starter }}} or {{{ .essential }}} cluster over HTTP, which is generally supported by serverless environments. With it, it is now possible to connect to {{{ .starter }}} or {{{ .essential }}} clusters from edge environments and reduce connection overhead with TCP while keeping the similar development experience of traditional TCP-based MySQL drivers. 
 
 > **Note:**
 >
@@ -26,11 +30,11 @@ npm install @tidbcloud/serverless
 
 ## Use the serverless driver
 
-You can use the serverless driver to query data of a {{{ .starter }}} cluster or perform interactive transactions.
+You can use the serverless driver to query data of a {{{ .starter }}} or {{{ .essential }}} cluster or perform interactive transactions.
 
 ### Query
 
-To query data from a {{{ .starter }}} cluster, you need to create a connection first. Then you can use the connection to execute raw SQL queries. For example:
+To query data from a {{{ .starter }}} or {{{ .essential }}} cluster, you need to create a connection first. Then you can use the connection to execute raw SQL queries. For example:
 
 ```ts
 import { connect } from '@tidbcloud/serverless'
@@ -154,10 +158,10 @@ At the connection level, you can make the following configurations:
 
 | Name         | Type     | Default value | Description                                                                                                                                                                                                                                                                                                                                                  |
 |--------------|----------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `username`   | string   | N/A           | Username of {{{ .starter }}}                                                                                                                                                                                                                                                                                                                                  |
-| `password`   | string   | N/A           | Password of {{{ .starter }}}                                                                                                                                                                                                                                                                                                                                  |
-| `host`       | string   | N/A           | Hostname of {{{ .starter }}}                                                                                                                                                                                                                                                                                                                                  |
-| `database`   | string   | `test`        | Database of {{{ .starter }}}                                                                                                                                                                                                                                                                                                                                  |
+| `username`   | string   | N/A           | Username of the cluster.                                                                                                                                                                                                                                                                                                                                     |
+| `password`   | string   | N/A           | Password of the cluster.                                                                                                                                                                                                                                                                                                                                     |
+| `host`       | string   | N/A           | Hostname of the cluster.                                                                                                                                                                                                                                                                                                                                     |
+| `database`   | string   | `test`        | Database of the cluster.                                                                                                                                                                                                                                                                                                                                     |
 | `url`        | string   | N/A           | The URL for the database, in the `mysql://[username]:[password]@[host]/[database]` format, where `database` can be skipped if you intend to connect to the default database.                                                                                                                                                                                 |
 | `fetch`      | function | global fetch  | Custom fetch function. For example, you can use the `undici` fetch in node.js.                                                                                                                                                                                                                                                                               |
 | `arrayMode`  | bool     | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.                                                                                                                                                                                                                                                         |
@@ -267,9 +271,9 @@ DDL is supported and the following SQL statements are supported:  `SELECT`, `SHO
 
 ### Data type mapping
 
-The type mapping between {{{ .starter }}} and Javascript is as follows:
+The type mapping between TiDB and Javascript is as follows:
 
-| {{{ .starter }}} type | Javascript type |
+| TiDB data type | Javascript type |
 |----------------------|-----------------|
 | TINYINT              | number          |
 | UNSIGNED TINYINT     | number          |
@@ -310,7 +314,7 @@ The type mapping between {{{ .starter }}} and Javascript is as follows:
 
 > **Note:**
 >
-> Make sure to use the default `utf8mb4` character set in {{{ .starter }}} for the type conversion to JavaScript strings, because TiDB Cloud serverless driver uses the UTF-8 encoding to decode them to strings. 
+> Make sure to use the default `utf8mb4` character set in TiDB Cloud for the type conversion to JavaScript strings, because TiDB Cloud serverless driver uses the UTF-8 encoding to decode them to strings. 
 
 > **Note:**
 >
@@ -327,7 +331,10 @@ TiDB Cloud serverless driver has been integrated with the following ORMs:
 
 ## Pricing
 
-The serverless driver itself is free, but accessing data with the driver generates [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) and storage usage. The pricing follows the [{{{ .starter }}} pricing](https://www.pingcap.com/tidb-serverless-pricing-details/) model.
+The serverless driver itself is free, but accessing data with the driver generates [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) and storage usage.
+
+- For {{{ .starter }}} clusters, the pricing follows the [{{{ .starter }}} pricing](https://www.pingcap.com/tidb-cloud-starter-pricing-details/) model.
+- For {{{ .essential }}} clusters, the pricing follows the [{{{ .essential }}} pricing](/tidb-cloud/tidb-cloud-billing.md#pricing-for-essential) model.
 
 ## Limitations
 

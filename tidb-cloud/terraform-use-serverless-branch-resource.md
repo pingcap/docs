@@ -1,9 +1,9 @@
 ---
-title: Use {{{ .starter }}} Branch Resource
+title: Use `tidbcloud_serverless_branch` Resource
 summary: Learn how to use the serverless branch resource to create and modify a {{{ .starter }}} branch.
 ---
 
-# Use {{{ .starter }}} Branch Resource
+# Use the `tidbcloud_serverless_branch` Resource
 
 This document describes how to manage a [{{{ .starter }}} branch](/tidb-cloud/branch-manage.md) using the `tidbcloud_serverless_branch` resource.
 
@@ -15,7 +15,7 @@ The features of the `tidbcloud_serverless_branch` resource include the following
 
 > **Note:**
 >
-> {{{ .starter }}} branch resource cannot be modified. If you want to change the configuration of a serverless branch resource, you need to delete the existing one and create a new one.
+> The `tidbcloud_serverless_branch` resource cannot be modified. If you want to change the configuration of a serverless branch resource, you need to delete the existing one and create a new one.
 
 ## Prerequisites
 
@@ -164,7 +164,7 @@ For a {{{ .starter }}} branch that is not managed by Terraform, you can use Terr
 
 Import a {{{ .starter }}} branch that is not created by Terraform as follows:
 
-1. Add an import block for the new {{{ .starter }}} branch resource.
+1. Add an import block for the new `tidbcloud_serverless_branch` resource.
 
     Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,branch_id`:
 
@@ -177,7 +177,7 @@ Import a {{{ .starter }}} branch that is not created by Terraform as follows:
 
 2. Generate the new configuration file.
 
-    Generate the new configuration file for the new {{{ .starter }}} branch resource according to the import block:
+    Generate the new configuration file for the new `tidbcloud_serverless_branch` resource according to the import block:
 
       ```shell
       terraform plan -generate-config-out=generated.tf

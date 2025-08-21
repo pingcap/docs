@@ -7,7 +7,7 @@ summary: Provides an overview of TiDB Cloud CLI.
 
 > **Note:**
 >
-> TiDB Cloud CLI is in beta.
+> Currently, TiDB Cloud CLI is in beta and not applicable to TiDB Cloud Dedicated clusters.
 
 TiDB Cloud CLI is a command line interface, which allows you to operate TiDB Cloud from your terminal with a few lines of commands. In the TiDB Cloud CLI, you can easily manage your TiDB Cloud clusters, import data to your clusters, and perform more operations.
 
@@ -24,12 +24,12 @@ To use the `ticloud` CLI in your terminal, run `ticloud [command] [subcommand]`.
 | Command               | Subcommand                                                            | Description                                    |
 |-----------------------|-----------------------------------------------------------------------|------------------------------------------------|
 | auth                  | login, logout, whoami                                                 | Login and logout                               |
-| serverless (alias: s) | create, delete, describe, list, update, spending-limit, region, shell | Manage {{{ .starter }}} clusters          |
-| serverless branch     | create, delete, describe, list, shell                                 | Manage {{{ .starter }}} branches          |
-| serverless import     | cancel, describe, list, start                                         | Manage {{{ .starter }}} import tasks      |
-| serverless export     | create, describe, list, cancel, download                              | Manage {{{ .starter }}} export tasks      |
-| serverless sql-user   | create, list, delete, update                                          | Manage {{{ .starter }}} SQL users         |
-| serverless audit-log  | config, describe, filter-rule (alias: filter), download                                    | Manage {{{ .starter }}} database audit logging         |
+| serverless (alias: s) | create, delete, describe, list, update, spending-limit, region, shell | Manage {{{ .starter }}} or {{{ .essential }}} cluster          |
+| serverless branch     | create, delete, describe, list, shell                                 | Manage branches for your {{{ .starter }}} or {{{ .essential }}} cluster          |
+| serverless import     | cancel, describe, list, start                                         | Manage import tasks for your {{{ .starter }}} or {{{ .essential }}} cluster      |
+| serverless export     | create, describe, list, cancel, download                              | Manage export tasks for your {{{ .starter }}} or {{{ .essential }}} cluster      |
+| serverless sql-user   | create, list, delete, update                                          | Manage SQL users for your {{{ .starter }}} or {{{ .essential }}} cluster         |
+| serverless audit-log  | config, describe, filter-rule (alias: filter), download                                    | Manage database audit logging for your {{{ .starter }}} or {{{ .essential }}} cluster         |
 | ai                    | -                                                                     | Chat with TiDB Bot                             |
 | completion            | bash, fish, powershell, zsh                                           | Generate completion script for specified shell |
 | config                | create, delete, describe, edit, list, set, use                        | Configure user profiles                        |

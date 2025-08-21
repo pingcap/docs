@@ -5,7 +5,7 @@ summary: Learn about how to perform a Proof of Concept (PoC) with TiDB Cloud.
 
 # Perform a Proof of Concept (PoC) with TiDB Cloud
 
-TiDB Cloud is a Database-as-a-Service (DBaaS) product that delivers everything great about TiDB in a fully managed cloud database. It helps you focus on your applications, instead of the complexities of your database. TiDB Cloud is currently available on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.
+TiDB Cloud is a Database-as-a-Service (DBaaS) product that delivers everything great about TiDB in a fully managed cloud database. It helps you focus on your applications, instead of the complexities of your database. <CustomContent language="en,zh">TiDB Cloud is currently available on Amazon Web Services (AWS), Google Cloud, Microsoft Azure, and Alibaba Cloud.</CustomContent><CustomContent language="ja">TiDB Cloud is currently available on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.</CustomContent>
 
 Initiating a proof of concept (PoC) is the best way to determine whether TiDB Cloud is the best fit for your business needs. It will also get you familiar with the key features of TiDB Cloud in a short time. By running performance tests, you can see whether your workload can run efficiently on TiDB Cloud. You can also evaluate the efforts required to migrate your data and adapt configurations.
 
@@ -68,6 +68,15 @@ To create a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud
     Once you submit the form, the TiDB Cloud Support team will review your application, contact you, and transfer credits to your account once the application is approved. You can also contact a PingCAP support engineer to assist with your PoC procedures to ensure the PoC runs as smoothly as possible.
 
 2. Refer to [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md) to create a TiDB Cloud Dedicated cluster for the PoC.
+
+   > **Note:**
+   >
+   > Before creating a TiDB Cloud Dedicated cluster, you must add one of the following payment methods:
+   >  - Add a credit card by following the on-screen instructions on the cluster creation page.
+   >  - Contact the TiDB Cloud Support team to pay by wire transfer.
+   >  - Sign up for TiDB Cloud through a cloud marketplace (AWS, Azure, or Google Cloud) to pay using your cloud provider account.
+   >
+   > Your PoC credits will automatically be used to offset eligible expenses incurred during the PoC period.
 
 Capacity planning is recommended for cluster sizing before you create a cluster. You can start with estimated numbers of TiDB, TiKV, or TiFlash nodes, and scale out the cluster later to meet performance requirements. You can find more details in the following documents or consult our support team.
 
@@ -175,7 +184,7 @@ Now the workload testing is finished, you can explore more features, for example
 
 - Backup
 
-    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) and [Back Up and Restore {{{ .starter }}} Data](/tidb-cloud/backup-and-restore-serverless.md).
+    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) and [Back Up and Restore Data on {{{ .starter }}} or Essential](/tidb-cloud/backup-and-restore-serverless.md).
 
 ## Step 8. Clean up the environment and finish the PoC
 

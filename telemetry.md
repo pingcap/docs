@@ -11,7 +11,8 @@ When the telemetry feature is enabled, TiUP and TiSpark collect usage informatio
 >
 > - Starting from TiUP v1.11.3, the telemetry feature in TiUP is disabled by default, which means TiUP usage information is not collected by default. If you upgrade from a TiUP version earlier than v1.11.3 to v1.11.3 or a later version, the telemetry feature keeps the same status as before the upgrade.
 > - Starting from TiSpark v3.0.3, the telemetry feature in TiSpark is disabled by default, which means TiSpark usage information is not collected by default.
-> - Starting from v8.1.0, the telemetry feature in TiDB and TiDB Dashboard is removed.
+> - For versions from v8.1.0 to v8.5.1, the telemetry feature in TiDB and TiDB Dashboard is removed.
+> - Starting from v8.5.3, TiDB reintroduces the telemetry feature. However, it only logs telemetry-related information locally and no longer sends data to PingCAP over the network.
 
 ## What is shared when telemetry is enabled?
 

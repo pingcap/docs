@@ -9,7 +9,7 @@ The `TIDB_SERVERS_INFO` table provides information about TiDB servers in the TiD
 
 > **Note:**
 >
-> This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> This table is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -50,7 +50,7 @@ The output is as follows:
          PORT: 4000
   STATUS_PORT: 10080
         LEASE: 45s
-      VERSION: 8.0.11-TiDB-{{{ .tidb-version }}}
+      VERSION: 8.0.11-TiDB-v{{{ .tidb-version }}}
      GIT_HASH: 827d8ff2d22ac4c93ae1b841b79d468211e1d393
 BINLOG_STATUS: Off
        LABELS:

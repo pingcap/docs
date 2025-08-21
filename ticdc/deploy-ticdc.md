@@ -90,7 +90,7 @@ tiup cluster upgrade <cluster-name> <version> --transfer-timeout 600
 
 > **Note:**
 >
-> In the preceding command, you need to replace `<cluster-name>` and `<version>` with the actual cluster name and cluster version. For example, the version can be {{{ .tidb-version }}}.
+> In the preceding command, you need to replace `<cluster-name>` and `<version>` with the actual cluster name and cluster version. For example, the version can be v{{{ .tidb-version }}}.
 
 ### Upgrade cautions
 
@@ -129,15 +129,15 @@ This section describes how to use the [`tiup cluster edit-config`](/tiup/tiup-co
 
     In the preceding command, `gc-ttl` is set to 48 hours.
 
-3. Run the `tiup cluster reload -R cdc` command to reload the configuration.
+3. Run the `tiup cluster reload <cluster-name> -R cdc` command to reload the configuration.
 
 ## Stop and start TiCDC using TiUP
 
 You can use TiUP to easily stop and start TiCDC nodes. The commands are as follows:
 
-- Stop TiCDC: `tiup cluster stop -R cdc`
-- Start TiCDC: `tiup cluster start -R cdc`
-- Restart TiCDC: `tiup cluster restart -R cdc`
+- Stop TiCDC: `tiup cluster stop <cluster-name> -R cdc`
+- Start TiCDC: `tiup cluster start <cluster-name> -R cdc`
+- Restart TiCDC: `tiup cluster restart <cluster-name> -R cdc`
 
 ## Enable TLS for TiCDC
 
@@ -145,7 +145,7 @@ See [Enable TLS Between TiDB Components](/enable-tls-between-components.md).
 
 ## View TiCDC status using the command-line tool
 
-Run the following command to view the TiCDC cluster status. Note that you need to replace `v<CLUSTER_VERSION>` with the TiCDC cluster version, such as `{{{ .tidb-version }}}`:
+Run the following command to view the TiCDC cluster status. Note that you need to replace `v<CLUSTER_VERSION>` with the TiCDC cluster version, such as `v{{{ .tidb-version }}}`:
 
 ```shell
 tiup cdc:v<CLUSTER_VERSION> cli capture list --server=http://10.0.10.25:8300

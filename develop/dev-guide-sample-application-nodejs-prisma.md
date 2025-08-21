@@ -15,7 +15,7 @@ In this tutorial, you can learn how to use TiDB and Prisma to accomplish the fol
 
 > **Note:**
 >
-> This tutorial works with {{{ .starter }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> This tutorial works with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -77,7 +77,7 @@ npm install prisma typescript ts-node @types/node --save-dev
 Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
-<div label="{{{ .starter }}}">
+<div label="{{{ .starter }}} or Essential">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -270,7 +270,7 @@ void main();
 If the connection is successful, the terminal will output the version of the TiDB cluster as follows:
 
 ```
-🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-{{{ .tidb-version }}})
+🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v{{{ .tidb-version }}})
 🆕 Created a new player with ID 1.
 ℹ️ Got Player 1: Player { id: 1, coins: 100, goods: 100 }
 🔢 Added 50 coins and 50 goods to player 1, now player 1 has 150 coins and 150 goods.

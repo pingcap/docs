@@ -1,7 +1,6 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-- [Docs Home](https://docs.pingcap.com/)
 - About TiDB Self-Managed
   - [What is TiDB Self-Managed](/overview.md)
   - [TiDB 8.5 Release Notes](/releases/release-8.5.0.md)
@@ -9,7 +8,6 @@
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [Credits](/credits.md)
-  - [Roadmap](https://docs.pingcap.com/tidb/dev/tidb-roadmap)
 - Get Started
   - [Quick Start with TiDB](/quick-start-with-tidb.md)
   - [Quick Start with HTAP](/quick-start-with-htap.md)
@@ -1094,6 +1092,7 @@
   - [Release Support Policy](https://www.pingcap.com/tidb-release-support-policy/)
   - [TiDB Installation Packages](/binary-package.md)
   - v8.5
+    - [8.5.3](/releases/release-8.5.3.md)
     - [8.5.2](/releases/release-8.5.2.md)
     - [8.5.1](/releases/release-8.5.1.md)
     - [8.5.0](/releases/release-8.5.0.md)
