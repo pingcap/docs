@@ -1,6 +1,6 @@
 ---
 title: SHOW TABLE REGIONS
-summary: 学习如何在 TiDB 中使用 SHOW TABLE REGIONS。
+summary: 了解如何在 TiDB 中使用 SHOW TABLE REGIONS。
 ---
 
 # SHOW TABLE REGIONS
@@ -9,7 +9,7 @@ summary: 学习如何在 TiDB 中使用 SHOW TABLE REGIONS。
 
 > **Note:**
 >
-> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
 ## 语法
 
@@ -18,7 +18,7 @@ SHOW TABLE [table_name] REGIONS [WhereClauseOptional];
 SHOW TABLE [table_name] INDEX [index_name] REGIONS [WhereClauseOptional];
 ```
 
-## 概述
+## 语法说明
 
 ```ebnf+diagram
 ShowTableRegionStmt ::=
@@ -28,41 +28,41 @@ TableName ::=
     (SchemaName ".")? Identifier
 ```
 
-执行 `SHOW TABLE REGIONS` 后返回以下列：
+执行 `SHOW TABLE REGIONS` 会返回以下列：
 
-* `REGION_ID`：Region ID。
-* `START_KEY`：Region 的起始键。
-* `END_KEY`：Region 的结束键。
+* `REGION_ID`：Region 的 ID。
+* `START_KEY`：Region 的起始 key。
+* `END_KEY`：Region 的结束 key。
 * `LEADER_ID`：Region 的 Leader ID。
-* `LEADER_STORE_ID`：Region Leader 所在的存储（TiKV）ID。
+* `LEADER_STORE_ID`：Region Leader 所在的 store（TiKV）ID。
 * `PEERS`：所有 Region 副本的 ID。
-* `SCATTERING`：Region 是否正在调度。`1` 表示是。
-* `WRITTEN_BYTES`：在一次心跳周期内估算写入 Region 的数据量，单位为字节。
-* `READ_BYTES`：在一次心跳周期内估算从 Region 读取的数据量，单位为字节。
-* `APPROXIMATE_SIZE(MB)`：Region 中估算的数据量，单位为兆字节（MB）。
-* `APPROXIMATE_KEYS`：Region 中估算的 Keys 数量。
+* `SCATTERING`：Region 是否正在调度。`1` 表示为 true。
+* `WRITTEN_BYTES`：在一个心跳周期内写入该 Region 的数据量估算，单位为字节。
+* `READ_BYTES`：在一个心跳周期内从该 Region 读取的数据量估算，单位为字节。
+* `APPROXIMATE_SIZE(MB)`：Region 内数据的估算量，单位为 MB。
+* `APPROXIMATE_KEYS`：Region 内 key 的估算数量。
 
 <CustomContent platform="tidb">
 
-* `SCHEDULING_CONSTRAINTS`：与该 Region 所属表或分区相关联的 [放置策略设置](/placement-rules-in-sql.md)。
+* `SCHEDULING_CONSTRAINTS`：与 Region 所属表或分区相关联的 [placement policy 设置](/placement-rules-in-sql.md)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-* `SCHEDULING_CONSTRAINTS`：与该 Region 所属表或分区相关联的放置策略设置。
+* `SCHEDULING_CONSTRAINTS`：与 Region 所属表或分区相关联的 placement policy 设置。
 
 </CustomContent>
 
-* `SCHEDULING_STATE`：具有放置策略的 Region 的调度状态。
+* `SCHEDULING_STATE`：拥有 placement policy 的 Region 的调度状态。
 
 > **Note:**
 >
-> `WRITTEN_BYTES`、`READ_BYTES`、`APPROXIMATE_SIZE(MB)` 和 `APPROXIMATE_KEYS` 的值并非精确数据，而是基于 PD 从 Region 接收的心跳信息估算得出的数据。
+> `WRITTEN_BYTES`、`READ_BYTES`、`APPROXIMATE_SIZE(MB)`、`APPROXIMATE_KEYS` 的值并非精确数据，而是 PD 根据 Region 上报的心跳信息估算得出。
 
 ## 示例
 
-创建一个数据量足够填充多个 Region 的示例表：
+创建一个示例表，并插入足够多的数据以填充多个 Region：
 
 ```sql
 CREATE TABLE t1 (
@@ -88,7 +88,7 @@ SELECT SLEEP(5);
 SHOW TABLE t1 REGIONS;
 ```
 
-输出应显示该表被拆分成多个 Region。`REGION_ID`、`START_KEY` 和 `END_KEY` 可能不会完全匹配：
+输出结果应显示该表被拆分为多个 Region。`REGION_ID`、`START_KEY` 和 `END_KEY` 可能不会完全对应：
 
 ```sql
 ...
@@ -100,11 +100,12 @@ mysql> SHOW TABLE t1 REGIONS;
 |        96 | t_75_r_31717 | t_75_r_63434 |        97 |               1 | 97    |          0 |             0 |          0 |                   97 |                0 |                        |                  |
 |         2 | t_75_r_63434 |              |         3 |               1 | 3     |          0 |     269323514 |   66346110 |                  245 |           162020 |                        |                  |
 +-----------+--------------+--------------+-----------+-----------------+-------+------------+---------------+------------+----------------------+------------------+------------------------+------------------+
+3 rows in set (0.00 sec)
 ```
 
-在上方输出中，`START_KEY` 为 `t_75_r_31717` 和 `END_KEY` 为 `t_75_r_63434` 表示在这个范围内的主键数据存储在该 Region 中。前缀 `t_75_` 表示这是表（`t`）的 Region，内部表 ID 为 `75`。空的 `START_KEY` 或 `END_KEY` 表示负无穷或正无穷。
+在上述输出中，`START_KEY` 为 `t_75_r_31717`，`END_KEY` 为 `t_75_r_63434`，表示主键在 `31717` 到 `63434` 之间的数据存储在该 Region 中。前缀 `t_75_` 表示该 Region 属于内部表 ID 为 `75` 的表（`t`）。`START_KEY` 或 `END_KEY` 为空时，分别表示负无穷或正无穷。
 
-TiDB 会根据需要自动重新平衡 Regions。若要手动重新平衡，可以使用 `SPLIT TABLE REGION` 语句：
+TiDB 会根据需要自动进行 Region 的重新均衡。若需手动均衡，可使用 `SPLIT TABLE REGION` 语句：
 
 ```sql
 mysql> SPLIT TABLE t1 BETWEEN (31717) AND (63434) REGIONS 2;
@@ -113,7 +114,7 @@ mysql> SPLIT TABLE t1 BETWEEN (31717) AND (63434) REGIONS 2;
 +--------------------+----------------------+
 |                  1 |                    1 |
 +--------------------+----------------------+
-1 行，耗时 42.34 秒
+1 row in set (42.34 sec)
 
 mysql> SHOW TABLE t1 REGIONS;
 +-----------+--------------+--------------+-----------+-----------------+-------+------------+---------------+------------+----------------------+------------------+------------------------+------------------+
@@ -124,12 +125,13 @@ mysql> SHOW TABLE t1 REGIONS;
 |        96 | t_75_r_47575 | t_75_r_63434 |        97 |               1 | 97    |          0 |          1526 |          0 |                   48 |                0 |                        |                  |
 |         2 | t_75_r_63434 |              |         3 |               1 | 3     |          0 |             0 |   55752049 |                   60 |                0 |                        |                  |
 +-----------+--------------+--------------+-----------+-----------------+-------+------------+---------------+------------+----------------------+------------------+------------------------+------------------+
+4 rows in set (0.00 sec)
 ```
 
-上述输出显示，Region 96 被拆分，生成了新的 Region 98。表中的其他 Region 未受拆分操作影响。统计信息确认了这一点：
+上述输出显示 Region 96 被拆分，创建了新的 Region 98。表中的其他 Region 未受拆分操作影响。可通过输出统计信息确认：
 
-* `TOTAL_SPLIT_REGION` 表示新拆分的 Region 数量，此例为 1。
-* `SCATTER_FINISH_RATIO` 表示新拆分的 Region 成功散布的比例，`1.0` 表示全部散布完成。
+* `TOTAL_SPLIT_REGION` 表示新拆分出的 Region 数量。本例中为 1。
+* `SCATTER_FINISH_RATIO` 表示新拆分 Region 的调度完成率。`1.0` 表示所有 Region 均已调度完成。
 
 更详细的示例：
 
@@ -145,16 +147,17 @@ mysql> SHOW TABLE t REGIONS;
 | 3         | t_43_r_80000 |              | 93        | 8               | 5, 73, 93     | 0          | 0             | 0          | 1                    | 0                |                        |                  |
 | 98        | t_43_        | t_43_r       | 99        | 1               | 99, 100, 101  | 0          | 0             | 0          | 1                    | 0                |                        |                  |
 +-----------+--------------+--------------+-----------+-----------------+---------------+------------+---------------+------------+----------------------+------------------+------------------------+------------------+
+6 rows in set
 ```
 
-在这个例子中：
+在上述示例中：
 
-* 表 t 对应六个 Region。其中，`102`、`106`、`110`、`114` 和 `3` 存储行数据，`98` 存储索引数据。
-* `START_KEY` 和 `END_KEY` 中的 `t_43` 表示表前缀和 ID，`_r` 表示表 t 的记录数据前缀，`_i` 表示索引数据前缀。
-* `102` 区域的 `START_KEY` 和 `END_KEY` 表示，范围在 `[-inf, 20000)` 的记录数据存储在该 Region 中。类似地，可以计算出其他 Region（`106`、`110`、`114`、`3`）的数据存储范围。
-* `98` 区域存储索引数据。表 t 的索引数据起始键为 `t_43_i`，存储在 `98` 区域中。
+* 表 t 对应 6 个 Region。其中 `102`、`106`、`110`、`114`、`3` 存储行数据，`98` 存储索引数据。
+* Region `102` 的 `START_KEY` 和 `END_KEY` 中，`t_43` 表示表前缀和表 ID，`_r` 表示表 t 的记录数据前缀，`_i` 表示索引数据前缀。
+* Region `102` 的 `START_KEY` 和 `END_KEY` 表示记录数据范围为 `[-inf, 20000)`。同理，可以计算出 Region (`106`、`110`、`114`、`3`) 的数据存储范围。
+* Region `98` 存储索引数据。表 t 的索引数据起始 key 为 `t_43_i`，该范围属于 Region `98`。
 
-若要查看对应 store 1 中表 t 的 Region，可使用 `WHERE` 条件：
+如需查看 store 1 上对应表 t 的 Region，可使用 `WHERE` 子句：
 
 ```sql
 test> SHOW TABLE t REGIONS WHERE leader_store_id =1;
@@ -165,7 +168,7 @@ test> SHOW TABLE t REGIONS WHERE leader_store_id =1;
 +-----------+-----------+---------+-----------+-----------------+--------------+------------+---------------+------------+----------------------+------------------+------------------------+------------------+
 ```
 
-可以使用 `SPLIT TABLE REGION` 将索引数据拆分成多个 Region。例如，将表 t 的索引 `name` 在 `[a,z]` 范围内拆分成两个 Region：
+使用 `SPLIT TABLE REGION` 可将索引数据拆分为多个 Region。如下例，将表 t 的索引数据 `name` 在 `[a,z]` 范围内拆分为 2 个 Region。
 
 ```sql
 test> SPLIT TABLE t INDEX name BETWEEN ("a") AND ("z") REGIONS 2;
@@ -174,10 +177,10 @@ test> SPLIT TABLE t INDEX name BETWEEN ("a") AND ("z") REGIONS 2;
 +--------------------+----------------------+
 | 2                  | 1.0                  |
 +--------------------+----------------------+
-1 行
+1 row in set
 ```
 
-此时，表 t 对应的 Region 数变为七个。其中，五个（`102`、`106`、`110`、`114`、`3`）存储表 t 的行数据，另外两个（`135`、`98`）存储索引 `name`。
+此时表 t 对应 7 个 Region。其中 5 个（`102`、`106`、`110`、`114`、`3`）存储表 t 的记录数据，另外 2 个（`135`、`98`）存储索引数据 `name`。
 
 ```sql
 test> SHOW TABLE t REGIONS;
@@ -192,13 +195,14 @@ test> SHOW TABLE t REGIONS;
 | 135       | t_43_i_1_                   | t_43_i_1_016d80000000000000 | 139       | 2               | 138, 139, 140 | 0          | 35            | 0          | 1                    | 0                |                        |                  |
 | 98        | t_43_i_1_016d80000000000000 | t_43_r                      | 99        | 1               | 99, 100, 101  | 0          | 0             | 0          | 1                    | 0                |                        |                  |
 +-----------+-----------------------------+-----------------------------+-----------+-----------------+---------------+------------+---------------+------------+----------------------+------------------+------------------------+------------------+
+7 rows in set
 ```
 
 ## MySQL 兼容性
 
 该语句是 TiDB 对 MySQL 语法的扩展。
 
-## 相关链接
+## 另请参阅
 
 * [SPLIT REGION](/sql-statements/sql-statement-split-region.md)
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)

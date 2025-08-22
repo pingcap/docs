@@ -1,6 +1,6 @@
 ---
 title: QUERY WATCH
-summary: 关于在 TiDB 数据库中使用 QUERY WATCH 的概述。
+summary: TiDB 数据库中 QUERY WATCH 的用法概述。
 ---
 
 # QUERY WATCH
@@ -9,9 +9,9 @@ summary: 关于在 TiDB 数据库中使用 QUERY WATCH 的概述。
 
 > **Note:**
 >
-> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> 此功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 AddQueryWatchStmt ::=
@@ -52,14 +52,14 @@ DropQueryWatchStmt ::=
     "QUERY" "WATCH" "REMOVE" NUM
 ```
 
-## Parameters
+## 参数
 
-请参见 [`QUERY WATCH` parameters](/tidb-resource-control-runaway-queries.md#query-watch-parameters)。
+参见 [`QUERY WATCH` 参数](/tidb-resource-control-runaway-queries.md#query-watch-parameters)。
 
 ## MySQL 兼容性
 
 该语句是 TiDB 对 MySQL 语法的扩展。
 
-## 相关链接
+## 另请参阅
 
-* [Runaway Queries](/tidb-resource-control-runaway-queries.md)
+* [失控查询](/tidb-resource-control-runaway-queries.md)
