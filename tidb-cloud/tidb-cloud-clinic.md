@@ -56,6 +56,7 @@ The dashboards and their content are subject to change. Currently, the following
 - TiDB-Resource-Control
 - TiFlash-Summary
 - TiKV-Details
+- TiProxy-Summary
 - User-Node-Info
 
 ## Analyze top slow queries
