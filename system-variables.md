@@ -1750,7 +1750,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: String
 - Default value: `0`
 - Range: `[0, 1PiB]`
-- This variable limits the write bandwidth from **a single TiDB node to a single TiKV replica** during index backfilling. It only takes effect when index creation acceleration is enabled (controlled by the [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) variable). Note that when [Global Sort](/tidb-global-sort.md) is enabled, multiple TiDB nodes can write to TiKV concurrently. When the data size in your cluster is quite large (such as billions of rows), limiting the write bandwidth for index creation can effectively reduce the impact on application workloads.
+- This variable limits the write bandwidth from **a single TiDB node to a single TiKV node** during index backfilling. It only takes effect when index creation acceleration is enabled (controlled by the [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) variable). Note that when [Global Sort](/tidb-global-sort.md) is enabled, multiple TiDB nodes can write to TiKV concurrently. When the data size in your cluster is quite large (such as billions of rows), limiting the write bandwidth for index creation can effectively reduce the impact on application workloads.
 - The default value `0` means no write bandwidth limit.
 - You can specify the value of this variable either with a unit or without a unit.
     - When you specify the value without a unit, the default unit is bytes per second. For example, `67108864` represents `64MiB` per second.
