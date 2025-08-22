@@ -5,26 +5,26 @@ summary: 了解如何通过 TiDB Cloud CLI 管理 TiDB Cloud 资源。
 
 # TiDB Cloud CLI 快速入门
 
-TiDB Cloud 提供命令行界面（CLI）[`ticloud`](https://github.com/tidbcloud/tidbcloud-cli)，让你可以通过几行命令在终端中与 TiDB Cloud 交互。例如，你可以使用 `ticloud` 轻松执行以下操作：
+TiDB Cloud 提供了一个命令行界面（CLI）[`ticloud`](https://github.com/tidbcloud/tidbcloud-cli)，你可以通过在终端输入几行命令与 TiDB Cloud 进行交互。例如，你可以使用 `ticloud` 轻松完成以下操作：
 
 - 创建、删除和列出你的集群。
-- 向集群导入数据。
-- 从集群导出数据。
+- 向你的集群导入数据。
+- 从你的集群导出数据。
 
-> **注意：**
+> **Note:**
 >
 > TiDB Cloud CLI 目前处于 beta 阶段。
 
 ## 开始之前
 
-- 拥有 TiDB Cloud 账户。如果没有，请[注册免费试用](https://tidbcloud.com/free-trial)。
+- 拥有一个 TiDB Cloud 账号。如果你还没有账号，请[注册免费试用](https://tidbcloud.com/free-trial)。
 
 ## 安装
 
 <SimpleTab>
 <div label="macOS/Linux">
 
-对于 macOS 或 Linux，你可以使用以下任一方法安装 `ticloud`：
+对于 macOS 或 Linux，你可以通过以下任意一种方式安装 `ticloud`：
 
 - 通过脚本安装（推荐）
 
@@ -40,13 +40,13 @@ TiDB Cloud 提供命令行界面（CLI）[`ticloud`](https://github.com/tidbclou
 
 - 手动安装
 
-    从[发布页面](https://github.com/tidbcloud/tidbcloud-cli/releases/latest)下载预编译的二进制文件，并将其复制到所需的安装位置。
+    从 [releases](https://github.com/tidbcloud/tidbcloud-cli/releases/latest) 页面下载预编译的二进制文件，并将其复制到你希望安装的位置。
 
 - 在 GitHub Actions 中安装
 
-    要在 GitHub Action 中设置 `ticloud`，请使用 [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli)。
+    如果需要在 GitHub Action 中设置 `ticloud`，请使用 [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli)。
 
-如果你没有 MySQL 命令行客户端，请安装它。你可以通过包管理器安装：
+如果你还没有安装 MySQL 命令行客户端，可以通过包管理器进行安装：
 
 - 基于 Debian 的发行版：
 
@@ -70,54 +70,54 @@ TiDB Cloud 提供命令行界面（CLI）[`ticloud`](https://github.com/tidbclou
 
 <div label="Windows">
 
-对于 Windows，你可以使用以下任一方法安装 `ticloud`：
+对于 Windows，你可以通过以下任意一种方式安装 `ticloud`：
 
 - 手动安装
 
-    从[发布页面](https://github.com/tidbcloud/tidbcloud-cli/releases/latest)下载预编译的二进制文件，并将其复制到所需的安装位置。
+    从 [releases](https://github.com/tidbcloud/tidbcloud-cli/releases/latest) 页面下载预编译的二进制文件，并将其复制到你希望安装的位置。
 
 - 在 GitHub Actions 中安装
 
-    要在 GitHub Actions 中设置 `ticloud`，请使用 [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli)。
+    如果需要在 GitHub Actions 中设置 `ticloud`，请使用 [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli)。
 
-如果你没有 MySQL 命令行客户端，请安装它。你可以参考 [MySQL Installer for Windows](https://dev.mysql.com/doc/refman/8.0/en/mysql-installer.html) 中的安装说明。要在 Windows 上启动 `ticloud connect`，你需要将包含 `mysql.exe` 的目录添加到 PATH 环境变量中。
+如果你还没有安装 MySQL 命令行客户端，可以参考 [MySQL Installer for Windows](https://dev.mysql.com/doc/refman/8.0/en/mysql-installer.html) 中的安装说明。在 Windows 上启动 `ticloud connect` 时，你需要将包含 `mysql.exe` 的目录添加到 PATH 环境变量中。
 
 </div>
 </SimpleTab>
 
 ## 快速入门
 
-[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 是开始使用 TiDB Cloud 的最佳方式。在本节中，你将学习如何使用 TiDB Cloud CLI 创建 TiDB Cloud Serverless 集群。
+[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 是体验 TiDB Cloud 的最佳方式。本节将介绍如何使用 TiDB Cloud CLI 创建一个 TiDB Cloud Serverless 集群。
 
 ### 创建用户配置文件或登录 TiDB Cloud
 
-在使用 TiDB Cloud CLI 创建集群之前，你需要创建用户配置文件或登录 TiDB Cloud。
+在使用 TiDB Cloud CLI 创建集群之前，你需要先创建用户配置文件或登录 TiDB Cloud。
 
-- 使用你的 [TiDB Cloud API 密钥](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)创建用户配置文件：
+- 使用你的 [TiDB Cloud API key](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management) 创建用户配置文件：
 
     ```shell
     ticloud config create
     ```
 
-    > **警告：**
+    > **Warning:**
     >
-    > 配置文件名称**不能**包含 `.`。
+    > 配置文件名 **MUST NOT** 包含 `.`。
 
-- 通过身份验证登录 TiDB Cloud：
+- 通过认证登录 TiDB Cloud：
 
     ```shell
     ticloud auth login
     ```
 
-    登录成功后，OAuth 令牌将分配给当前配置文件。如果不存在配置文件，令牌将分配给名为 `default` 的配置文件。
+    登录成功后，OAuth token 会分配给当前配置文件。如果没有配置文件，token 会分配给名为 `default` 的配置文件。
 
-> **注意：**
+> **Note:**
 >
-> 在上述两种方法中，TiDB Cloud API 密钥优先于 OAuth 令牌。如果两者都可用，将使用 API 密钥。
+> 在上述两种方式中，TiDB Cloud API key 的优先级高于 OAuth token。如果两者都存在，将优先使用 API key。
 
 ### 创建 TiDB Cloud Serverless 集群
 
-要创建 TiDB Cloud Serverless 集群，请输入以下命令，然后按照 CLI 提示提供所需信息：
+要创建 TiDB Cloud Serverless 集群，输入以下命令，并根据 CLI 提示填写所需信息：
 
 ```shell
 ticloud serverless create
@@ -131,13 +131,13 @@ ticloud serverless create
 ticloud --help
 ```
 
-验证你是否使用最新版本：
+验证你当前使用的是否为最新版本：
 
 ```shell
 ticloud version
 ```
 
-如果不是，请更新到最新版本：
+如果不是最新版本，请更新到最新版：
 
 ```shell
 ticloud update
@@ -159,16 +159,16 @@ tiup cloud --help
 tiup cloud serverless create
 ```
 
-通过 TiUP 更新到最新版本：
+通过 TiUP 更新到最新版：
 
 ```shell
 tiup update cloud
 ```
 
-## 下一步
+## 后续操作
 
-查看 [CLI 参考](/tidb-cloud/cli-reference.md)以探索 TiDB Cloud CLI 的更多功能。
+查阅 [CLI 参考](/tidb-cloud/cli-reference.md) 以探索 TiDB Cloud CLI 的更多功能。
 
 ## 反馈
 
-如果你对 TiDB Cloud CLI 有任何问题或建议，欢迎创建[议题](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)。同时，我们也欢迎任何贡献。
+如果你对 TiDB Cloud CLI 有任何问题或建议，欢迎创建 [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)。同时也欢迎任何贡献。
