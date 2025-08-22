@@ -126,8 +126,6 @@ hide_commit: true
 
 <LearningPath label="Reference" icon="cloud-dev">
 
-[TiDB Roadmap](https://docs.pingcap.com/tidb/dev/tidb-roadmap)
-
 [TiDB Configuration File Parameters](https://docs.pingcap.com/tidb/v7.1/tidb-configuration-file)
 
 [TiDB Command-line Flags](https://docs.pingcap.com/tidb/v7.1/command-line-flags-for-tidb-configuration)
