@@ -155,7 +155,6 @@ This interface is used to submit a replication task to TiCDC. If the request is 
       "max_log_size": 0,
       "storage": "string"
     },
-    "enable_old_value": true,
     "enable_sync_point": true,
     "filter": {
       "event_filters": [
@@ -402,7 +401,6 @@ If the request is successful, `200 OK` is returned. If the request fails, an err
       "max_log_size": 0,
       "storage": "string"
     },
-    "enable_old_value": true,
     "enable_sync_point": true,
     "filter": {
       "event_filters": [
@@ -588,7 +586,6 @@ To modify the changefeed configuration, follow the steps of `pause the replicati
       "max_log_size": 0,
       "storage": "string"
     },
-    "enable_old_value": true,
     "enable_sync_point": true,
     "filter": {
       "event_filters": [
