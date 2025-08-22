@@ -559,4 +559,20 @@ If the `CDC:ErrMySQLDuplicateEntryCDC` error occurs frequently, you can enable T
 mysql://user:password@host:port/?safe-mode=true
 ```
 
-In safe mode, TiCDC splits the `UPDATE` operation into `DELETE + REPLACE INTO` for execution, thus avoiding the unique key conflict error.
+## Why do TiCDC replication tasks to Kafka often fail with `broken pipe` errors?
+
+TiCDC uses the Sarama client to replicate data to Kafka. To avoid out-of-order data, TiCDC disables the automatic retry mechanism of Sarama (by setting the retry count to 0). As a result, if the connection between TiCDC and Kafka is closed by Kafka after being idle for some time, subsequent writes from TiCDC will trigger a `write: broken pipe` error, causing the replication task to fail.
+
+Although the changefeed might fail due to this error, TiCDC automatically restarts the affected changefeed, so the replication task can continue running normally. Note that during the restart process, the replication latency (lag) of the changefeed might temporarily increase by a small amount, typically within 30 seconds, before automatically returning to normal.
+
+If your application is highly sensitive to changefeed latency, it is recommended to do the following:
+
+1. Increase the Kafka connection idle timeout in the Kafka broker configuration file. For example:
+
+    ```properties
+    connections.max.idle.ms=86400000  # Set to 1 day
+    ```
+
+    It is recommended to adjust the value of `connections.max.idle.ms` according to your actual replication workload. For example, if a TiCDC changefeed always replicates data within several minutes, you can set `connections.max.idle.ms` to several minutes instead of a very large value.
+
+2. Restart Kafka to apply the configuration change. This prevents connections from being closed prematurely and helps reduce `broken pipe` errors.
