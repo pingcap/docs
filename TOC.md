@@ -9,7 +9,6 @@
     -   [MySQLの互換性](/mysql-compatibility.md)
     -   [TiDB の制限](/tidb-limitations.md)
     -   [クレジット](/credits.md)
-    -   [ロードマップ](https://docs.pingcap.com/tidb/dev/tidb-roadmap)
 -   始める
     -   [TiDB クイックスタート](/quick-start-with-tidb.md)
     -   [HTAP のクイックスタート](/quick-start-with-htap.md)
@@ -19,7 +18,7 @@
 -   開発する
     -   [概要](/develop/dev-guide-overview.md)
     -   クイックスタート
-        -   [TiDB Cloudスタータークラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
+        -   [{{{ .starter }}}クラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
         -   [TiDB の CRUD SQL](/develop/dev-guide-tidb-crud-sql.md)
     -   アプリケーション例
         -   Java
@@ -323,7 +322,7 @@
         -   [TiDB トラブルシューティング マップ](/tidb-troubleshooting-map.md)
         -   [TiDBクラスタ設定のトラブルシューティング](/troubleshoot-tidb-cluster.md)
         -   [TiFlashのトラブルシューティング](/tiflash/troubleshoot-tiflash.md)
-    -   問題シナリオ
+    -   問題のシナリオ
         -   遅いクエリ
             -   [遅いクエリを特定する](/identify-slow-queries.md)
             -   [遅いクエリを分析する](/analyze-slow-queries.md)
@@ -566,7 +565,7 @@
             -   [ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)
             -   [Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)
             -   [SQL 式を使用して DML をフィルタリングする](/dm/feature-expression-filter.md)
-            -   [オンライン DDL ツールのサポート](/dm/dm-online-ddl-tool-support.md)
+            -   [オンラインDDLツールのサポート](/dm/dm-online-ddl-tool-support.md)
             -   [暗号化と復号化のための秘密鍵をカスタマイズする](/dm/dm-customized-secret-key.md)
             -   データ移行タスクの管理
                 -   [タスクの事前チェック](/dm/dm-precheck.md)

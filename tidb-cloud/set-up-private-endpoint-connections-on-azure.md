@@ -7,13 +7,27 @@ summary: Azure Private Link 経由でTiDB Cloud Dedicated クラスタに接続�
 
 このドキュメントでは、 [Azure プライベート リンク](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview)を介してTiDB Cloud Dedicated クラスターに接続する方法について説明します。
 
+<CustomContent language="en,zh">
+
 > **ヒント：**
 >
 > -   AWS のプライベートエンドポイント経由でTiDB Cloud Dedicated クラスターに接続する方法については、 [AWS PrivateLink 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)参照してください。
 > -   Google Cloud のプライベートエンドポイント経由でTiDB Cloud Dedicated クラスタに接続する方法については、 [Google Cloud Private Service Connect 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)ご覧ください。
-> -   プライベート エンドポイント経由でTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続する方法については、次のドキュメントを参照してください。
->     -   [AWS PrivateLink 経由でTiDB Cloud Starter に接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
->     -   [Alibaba Cloud プライベートエンドポイント経由でTiDB Cloud Starter または Essential に接続します](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+> -   プライベート エンドポイント経由で {{{ .starter }}} または {{{ .essential }}} クラスターに接続する方法については、次のドキュメントをご覧ください。
+>     -   [AWS PrivateLink 経由で {{{ .starter }}} に接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+>     -   [Alibaba Cloud プライベートエンドポイント経由で {{{ .starter }}} または Essential に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+> **ヒント：**
+>
+> -   AWS のプライベートエンドポイント経由でTiDB Cloud Dedicated クラスターに接続する方法については、 [AWS PrivateLink 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)参照してください。
+> -   Google Cloud のプライベートエンドポイント経由でTiDB Cloud Dedicated クラスタに接続する方法については、 [Google Cloud Private Service Connect 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)ご覧ください。
+> -   プライベート エンドポイント経由で {{{ .starter }}} または {{{ .essential }}} クラスターに接続する方法については、 [AWS PrivateLink 経由で {{{ .starter }}} に接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)参照してください。
+
+</CustomContent>
 
 TiDB Cloud は、 Azure 仮想ネットワークでホストされているTiDB Cloudサービスへの、 [Azure プライベート リンク](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview)経由の高度に安全な一方向アクセスをサポートします。これは、サービスがお客様の仮想ネットワーク内にあるかのように機能します。仮想ネットワーク内にプライベートエンドポイントを作成し、権限を持つエンドポイント経由でTiDB Cloudサービスに接続できます。
 

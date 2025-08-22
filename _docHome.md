@@ -6,7 +6,7 @@ hide_leftNav: true
 summary: TiDBドキュメントでは、データ移行やアプリケーション構築など、 TiDB CloudとTiDB Self-Managedの使用方法に関するガイドとリファレンスを提供しています。TiDB TiDB Cloudは、クラウドネイティブな分散SQLデータベースのパワーに簡単にアクセスできる、フルマネージドのDatabase-as-a-Service（データベース・アズ・ア・サービス）です。TiDBは、MySQLとの互換性、水平スケーラビリティ、高可用性を備えたオープンソースの分散SQLデータベースです。開発者は、アプリケーション開発に関するドキュメントにアクセスしたり、TiDB Playground、PingCAP Education、コミュニティ参加の機会などの追加リソースを活用したりできます。
 ---
 
-<DocHomeContainer title="TiDB ドキュメント" subTitle="Explore how-to guides and references to get started with TiDB Cloud and TiDB Self-Managed, migrate data smoothly, and build applications with ease." ctaLabel="Start TiDB Cloud for Free" ctaLink="https://tidbcloud.com/free-trial">
+<DocHomeContainer title="TiDB ドキュメント" subTitle="Explore the how-to guides and references you need to use {{{ .starter }}}, TiDB Cloud Dedicated and TiDB Self-Managed, migrate data, and build your applications on the database." ctaLabel="Start {{{ .starter }}} for Free" ctaLink="https://tidbcloud.com/free-trial">
 
 <DocHomeSection label="TiDB Cloud" anchor="tidb-cloud" id="tidb-cloud">
 
@@ -32,9 +32,15 @@ TiDB Cloudを簡単に使い始めるためのガイド。
 
 </DocHomeCard>
 
-<DocHomeCard href="/tidbcloud/vector-search-overview" label="Vector Search in TiDB Cloud (Beta)" icon="cloud-vector-mauve">
+<DocHomeCard href="/tidbcloud/vector-search-overview" label="Vector Search in {{{ .starter }}} (Beta)" icon="cloud-vector-mauve">
 
-TiDB Cloud のネイティブなベクトル検索サポートを活用して、AI アプリケーションを構築しましょう。
+AI アプリケーションを構築するには、 {{{{ .starter }}} の Vector Search のネイティブ サポートを調べてください。
+
+</DocHomeCard>
+
+<DocHomeCard href="/tidbcloud/tidb-cloud-roadmap" label="TiDB Cloud Roadmap" icon="cloud-roadmap-mauve">
+
+TiDB Cloudの計画されている機能とリリース。
 
 </DocHomeCard>
 
@@ -83,12 +89,6 @@ TiDB Self-Managed を使用するアプリケーション開発者向け。
 <DocHomeCard href="/tidb/stable/mysql-compatibility" label="MySQL Compatibility" icon="oss-mysql-blue">
 
 TiDB は、MySQL プロトコルおよびMySQL 5.7と MySQL 8.0 の共通機能と構文と高い互換性があります。
-
-</DocHomeCard>
-
-<DocHomeCard href="/tidb/dev/tidb-roadmap" label="TiDB Self-Managed Roadmap" icon="oss-roadmap-blue">
-
-TiDB Self-Managed の計画されている機能とリリース日。
 
 </DocHomeCard>
 

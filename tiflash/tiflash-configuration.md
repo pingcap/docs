@@ -365,12 +365,12 @@ I/O トラフィック制限設定を構成します。
 
 ##### <code>cop_pool_size</code><span class="version-mark">バージョン5.0の新機能</span> {#code-cop-pool-size-code-span-class-version-mark-new-in-v5-0-span}
 
--   TiFlashコプロセッサーが同時に実行するCOPリクエストの最大数を指定します。リクエスト数が指定値を超えた場合、超過分のリクエストはキューに入れられます。設定値が`0`に設定されているか未設定の場合は、デフォルト値（物理コア数の2倍）が使用されます。
+-   TiFlashコプロセッサーが同時に実行できるcopリクエストの最大数を指定します。リクエスト数がこの値を超えても、10倍以内の場合、超過したリクエストはキューに入れられます。リクエスト数がこの値の10倍を超える場合、超過したリクエストはTiFlashによって拒否されます。設定値が`0`に設定されている場合、または設定されていない場合は、デフォルト値（物理コア数の2倍）が使用されます。
 -   デフォルト値: 物理コア数の2倍
 
 ##### <code>cop_pool_handle_limit</code><span class="version-mark">バージョン5.0の新機能</span> {#code-cop-pool-handle-limit-code-span-class-version-mark-new-in-v5-0-span}
 
--   TiFlashコプロセッサーが同時に処理できるCOPリクエストの最大数を指定します。これには、実行中のリクエストとキューで待機中のリクエストが含まれます。リクエスト数が指定値を超えると、エラー`TiFlash Server is Busy`が返されます。
+-   TiFlashコプロセッサーが同時に処理できるcopリクエストの最大数を指定します。これには、実行中のリクエストとキューで待機中のリクエストが含まれます。リクエスト数が指定値を超えた場合、エラー`TiFlash Server is Busy`が返されます。
 -   `-1`制限がないことを示し、 `0`デフォルト値の`10 * cop_pool_size`使用することを示します。
 
 ##### <code>cop_pool_max_queued_seconds</code><span class="version-mark">バージョン5.0の新機能</span> {#code-cop-pool-max-queued-seconds-code-span-class-version-mark-new-in-v5-0-span}

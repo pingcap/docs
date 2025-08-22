@@ -7,13 +7,27 @@ summary: Google Cloud Private Service Connect を介してTiDB Cloudクラスタ
 
 このドキュメントでは、 [プライベートサービスコネクト](https://cloud.google.com/vpc/docs/private-service-connect)を介してTiDB Cloud Dedicated クラスタに接続する方法について説明します。Google Cloud Private Service Connect は、Google Cloud が提供するプライベート エンドポイント サービスです。
 
+<CustomContent language="en,zh">
+
 > **ヒント：**
 >
 > -   AWS のプライベートエンドポイント経由でTiDB Cloud Dedicated クラスターに接続する方法については、 [AWS PrivateLink 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)参照してください。
 > -   Azure のプライベート エンドポイント経由でTiDB Cloud Dedicated クラスターに接続する方法については、 [Azure Private Link 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)参照してください。
-> -   プライベート エンドポイント経由でTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続する方法については、次のドキュメントを参照してください。
->     -   [AWS PrivateLink 経由でTiDB Cloud Starter に接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
->     -   [Alibaba Cloud プライベートエンドポイント経由でTiDB Cloud Starter または Essential に接続します](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+> -   プライベート エンドポイント経由で {{{ .starter }}} または {{{ .essential }}} クラスターに接続する方法については、次のドキュメントをご覧ください。
+>     -   [AWS PrivateLink 経由で {{{ .starter }}} に接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+>     -   [Alibaba Cloud プライベートエンドポイント経由で {{{ .starter }}} または Essential に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+> **ヒント：**
+>
+> -   AWS のプライベートエンドポイント経由でTiDB Cloud Dedicated クラスターに接続する方法については、 [AWS PrivateLink 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)参照してください。
+> -   Azure のプライベート エンドポイント経由でTiDB Cloud Dedicated クラスターに接続する方法については、 [Azure Private Link 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)参照してください。
+> -   プライベート エンドポイント経由で {{{ .starter }}} または {{{ .essential }}} クラスターに接続する方法については、 [AWS PrivateLink 経由で {{{ .starter }}} に接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)参照してください。
+
+</CustomContent>
 
 TiDB Cloud は、 [プライベートサービスコネクト](https://cloud.google.com/vpc/docs/private-service-connect)を介して Google Cloud VPC でホストされているTiDB Cloudサービスへの、高度に安全な一方向アクセスをサポートしています。エンドポイントを作成し、それを使用してTiDB Cloudサービスに接続できます。
 
@@ -26,7 +40,7 @@ Google Cloud Private Service Connect のアーキテクチャは次のとおり�
 プライベート エンドポイントとエンドポイント サービスの詳細な定義については、次の Google Cloud ドキュメントをご覧ください。
 
 -   [プライベートサービスコネクト](https://cloud.google.com/vpc/docs/private-service-connect)
--   [エンドポイントを介して公開されたサービスにアクセスする](https://cloud.google.com/vpc/docs/configure-private-service-connect-services)
+-   [エンドポイントを通じて公開されたサービスにアクセスする](https://cloud.google.com/vpc/docs/configure-private-service-connect-services)
 
 ## 制限 {#restrictions}
 

@@ -81,7 +81,7 @@ TiFlash Proxyはv6.1.0（TiKV v6.0.0と連動）にアップグレードされ�
 
 ## v5.x または v6.0 から v6.2 へ {#from-v5-x-or-v6-0-to-v6-2}
 
-TiDB v6.2では、 TiFlashのデータstorage形式がV3バージョンにアップグレードされます。そのため、 TiFlashをv5.xまたはv6.0からv6.2にアップグレードする場合は、 [TiFlashプロキシ](#tiflash-proxy)と[動的剪定](#dynamic-pruning)の機能変更に加えて、PageStorageの機能変更にも注意する必要があります。
+TiDB v6.2では、 TiFlashのデータstorageフォーマットがV3にアップグレードされ、書き込み増幅の低減とTiFlashの安定性向上が図られています。v5.x、v6.0、またはv6.1からv6.2以降のバージョンにアップグレードする場合は、 [TiFlashプロキシ](#tiflash-proxy)と[動的剪定](#dynamic-pruning)の機能変更に加えて、PageStorageの機能変更にも注意する必要があります。
 
 ### ページストレージ {#pagestorage}
 
@@ -104,13 +104,24 @@ TiFlash v6.2.0はデフォルトでPageStorage V3バージョン[`format_version
 -   V3のみ: PageStorage V3を使用しているテーブルの数（パーティションを含む）
 -   混合モード: PageStorage V2 から PageStorage V3 に変換されたデータ形式を持つテーブルの数 (パーティションを含む)
 
+> **注記：**
+>
+> 以下のパッチバージョンには既知の問題（問題[＃9039](https://github.com/pingcap/tiflash/issues/9039) ）があります。これらのバージョンにアップグレードすると、 TiFlashデータが破損する可能性があります。
+>
+> -   v6.5.0 から v6.5.9
+> -   バージョン6.6.0
+> -   バージョン7.0.0
+> -   v7.1.0 から v7.1.5
+> -   バージョン7.2.0
+> -   バージョン7.3.0
+> -   バージョン7.4.0
+> -   v7.5.0 から v7.5.1
+>
+> この問題が修正された v6.5.10、v7.1.6、v7.5.2 以降のバージョンにアップグレードすることをお勧めします。
+
 **テストやその他の特別なシナリオでTiFlashをダウングレードするための回避策**
 
 対象のTiFlashノードを強制的にスケールインし、TiKVからデータを再度複製することができます。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)参照してください。
-
-## v6.1からv6.2へ {#from-v6-1-to-v6-2}
-
-TiFlashをv6.1からv6.2にアップグレードする際は、データstorage形式の変更にご注意ください。詳細は[ページストレージ](#pagestorage)ご覧ください。
 
 ## v6.x または v7.x から<code>storage.format_version = 5</code>が設定された v7.3 へ {#from-v6-x-or-v7-x-to-v7-3-with-code-storage-format-version-5-code-configured}
 

@@ -12,6 +12,8 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **一般的な変更**
 
+<CustomContent language="en,zh">
+
 -   **TiDB Cloudスターター**
 
     -   「TiDB Cloud Serverless」の名前を「TiDB Cloud Starter」に変更します。
@@ -49,6 +51,33 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
         -   [**サーバ**](/tidb-cloud/built-in-monitoring.md#server)カテゴリでは、 **TiKV IO Bps**メトリックを改良して、精度と一貫性を向上させます。
 
         詳細については[TiDB Cloud組み込みメトリクス](/tidb-cloud/built-in-monitoring.md)参照してください。
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+-   **TiDB Cloudスターター**
+
+    「TiDB Cloud Serverless」の名前を「TiDB Cloud Starter」に変更します。
+
+    オートスケーリングのエントリープランは、新規ユーザーにとっての役割をより明確にするため、「TiDB Cloud Starter」に名称が変更されました。すべての機能、価格、無料利用枠に変更はありません。
+
+    2025年8月12日（PDT）より、既存のサーバーレスクラスターは[TiDB Cloudコンソール](https://tidbcloud.com)にスターターとして表示されます。接続文字列、エンドポイント、データは変更されないため、コードを変更したり、ダウンタイムをスケジュールしたりする必要はありません。
+
+-   **TiDB Cloud専用**
+
+    -   Google Cloud の Kubernetes Engine [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では、NAT サブネット割り当て戦略を最適化することで、リージョンごとに 8 個を超える Google Private Service Connect（PSC）接続がサポートされるようになりました。
+
+        詳細については[Google Cloud Private Service Connect 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md#restrictions)参照してください。
+
+    -   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)指標を最適化:
+
+        -   [**高度な**](/tidb-cloud/built-in-monitoring.md#advanced)カテゴリでは、**影響を受ける行**、**Leader数**、および**リージョン数の**メトリックを追加して診断を改善します。
+        -   [**サーバ**](/tidb-cloud/built-in-monitoring.md#server)カテゴリでは、 **TiKV IO Bps**メトリックを改良して、精度と一貫性を向上させます。
+
+        詳細については[TiDB Cloud組み込みメトリクス](/tidb-cloud/built-in-monitoring.md)参照してください。
+
+</CustomContent>
 
 **APIの変更**
 
@@ -108,7 +137,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     TiKV ノードの[vCPUとRAMのサイズを変更する](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)追加すると、 TiDB Cloud は、クラスターの内部サービスに新しい構成をサポートするために追加の容量が必要かどうかを自動的に確認します。
 
-    -   拡張が必要な場合は、 TiDB Cloud は続行する前に確認を求めます。
+    -   拡張が必要な​​場合は、 TiDB Cloud は続行する前に確認を求めます。
     -   スケーリング後の現在の内部サービス容量がすでに必要なサイズよりも大きい場合、 TiDB Cloud は、クラスターの安定性に影響を与える可能性のある不要な変更を回避するために、内部サービスの既存の構成を保持します。
 
 **コンソールの変更**

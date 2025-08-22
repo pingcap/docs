@@ -13,19 +13,21 @@ TiDB Cloud は消費したリソースに応じて料金が発生します。
 
 [TiDB Cloud専用料金の詳細](https://www.pingcap.com/tidb-dedicated-pricing-details/)参照。
 
-### TiDB Cloud Starter (旧称 Serverless) の価格 {#pricing-for-starter} {#pricing-for-starter}
+### {{{ .starter }}} (旧称 Serverless) の料金 {#pricing-for-starter} {#pricing-for-starter}
 
-[TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)参照。
+[{{{ .starter }}} 価格の詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)参照。
 
-### TiDB Cloud Essential の価格 {#pricing-for-essential} {#pricing-for-essential}
+<CustomContent language="en,zh">
+
+### {{{ .essential }}} の価格 {#pricing-for-essential} {#pricing-for-essential}
 
 > **ヒント：**
 >
-> 現在、 TiDB Cloud EssentialはAlibaba Cloudでパブリックプレビュー段階にあり、Alibaba Cloudシンガポールリージョンでのみご利用いただけます。Alibaba Cloudの他のリージョンをご希望の場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md#access-pingcap-help-center)お問い合わせください。
+> 現在、{{{ .essential }}} は Alibaba Cloud でパブリックプレビュー段階にあり、Alibaba Cloud シンガポールリージョンでのみご利用いただけます。Alibaba Cloud の他のリージョンをご希望の場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md#access-pingcap-help-center)お問い合わせください。
 
-TiDB Cloud Essential の場合、アプリケーションによる実際の使用量で**はなく**、プロビジョニングされたリクエスト容量ユニット (RCU) の数に基づいて課金されます。
+{{{ .essential }}} の場合、アプリケーションによる実際の使用量で**はなく**、プロビジョニングされたリクエスト容量ユニット (RCU) の数に基づいて課金されます。
 
-**リクエスト容量ユニット（RCU）は、** TiDB Cloud Essential クラスターにプロビジョニングされたコンピューティング容量を表す測定単位です。1 RCU は、1 秒あたり一定数の RU を処理できる固定量のコンピューティングリソースを提供します。プロビジョニングする RCU の数によって、クラスターのベースラインパフォーマンスとスループット容量が決まります。
+**リクエスト容量ユニット（RCU）は**、{{{ .essential }}} クラスターにプロビジョニングされたコンピューティング容量を表す測定単位です。1 RCU は、1 秒あたり一定数の RU を処理できる固定量のコンピューティングリソースを提供します。プロビジョニングする RCU の数によって、クラスターのベースラインパフォーマンスとスループット容量が決まります。
 
 利用可能な各 Alibaba Cloud リージョンの詳細な料金については以下をご覧ください。
 
@@ -39,11 +41,13 @@ TiDB Cloud Essential の場合、アプリケーションによる実際の使�
 
 #### スロットリング {#throttling}
 
-TiDB Cloud Essential クラスターでは、スロットリングポリシーはプロビジョニングされたリクエスト容量ユニット (RCU) に基づいて適用されます。ワークロードが最大 RCU 容量を超えると、クラスターは安定性を維持するために、受信リクエストを自動的にスロットリングします。既存の接続はスロットリングされますが、最大 RCU 制限を超えない限り、新しい接続試行は受け入れられます。これにより、クラスターを過負荷から保護しながら、予測可能なパフォーマンスが確保されます。
+{{{ .essential }}} クラスターの場合、スロットリングポリシーはプロビジョニングされたリクエスト容量ユニット（RCU）に基づいて適用されます。ワークロードが最大RCU容量を超えると、クラスターは安定性を維持するために受信リクエストを自動的にスロットリングします。既存の接続はスロットリングされますが、最大RCU制限を超えない限り、新しい接続試行は受け入れられます。これにより、クラスターを過負荷から保護しながら、予測可能なパフォーマンスが確保されます。
 
 #### 請求サイクル {#billing-cycle}
 
 TiDB Cloud の請求書は、前月のご利用分に応じて、毎月月初に確定します。この確定請求書は、お客様のデフォルトのお支払い方法に請求され、通常は当該月の3日から9日の間に行われます。当月中のご利用額が500ドルに達するか、それを超える場合、自動的に請求が開始されます。請求サイクルはUTC (+00:00) タイムゾーンに厳密に従って計算されますのでご注意ください。
+
+</CustomContent>
 
 ## 請求書 {#invoices}
 
@@ -51,9 +55,21 @@ TiDB Cloud の請求書は、前月のご利用分に応じて、毎月月初に
 
 お支払い方法を設定すると、 TiDB Cloud は、ご利用料金がクォータ（デフォルトでは 500 ドル）に達すると請求書を発行します。クォータを増やしたい場合、または毎月 1 件の請求書を受け取りたい場合は、 [営業担当にお問い合わせください](https://www.pingcap.com/contact-us/)クリックしてください。
 
+<CustomContent language="en,zh">
+
 > **注記：**
 >
 > [AWS マーケットプレイス](https://aws.amazon.com/marketplace) 、 [Azureマーケットプレイス](https://azuremarketplace.microsoft.com/) 、 [Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace) 、または[アリババクラウドマーケットプレイス](https://marketplace.alibabacloud.com/)を通じてTiDB Cloudにサインアップした場合、AWS アカウント、Azure アカウント、Google Cloud アカウント、または Alibaba Cloud アカウントを通じて直接支払いを行うことはできますが、 TiDB Cloudコンソールで支払い方法の追加や請求書のダウンロードを行うことはできません。
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+> **注記：**
+>
+> [AWS マーケットプレイス](https://aws.amazon.com/marketplace) 、 [Azureマーケットプレイス](https://azuremarketplace.microsoft.com/) 、または[Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)を通じてTiDB Cloudにサインアップした場合、AWS アカウント、Azure アカウント、または Google Cloud アカウントを通じて直接支払いを行うことができますが、 TiDB Cloudコンソールで支払い方法の追加や請求書のダウンロードを行うことはできません。
+
+</CustomContent>
 
 月ごとに請求書を受け取るために弊社の営業部に連絡すると、 TiDB Cloud は毎月初めに前月の請求書を発行します。
 
@@ -154,7 +170,7 @@ TiDB Cloudは、概念実証（PoC）ユーザーに一定数のクレジット�
 >
 > PoC を申請するには、 [TiDB Cloudで概念実証 (PoC) を実行する](/tidb-cloud/tidb-cloud-poc.md)参照してください。
 
-クレジットの詳細情報（合計クレジット数、使用可能なクレジット数、現在の使用状況、ステータスなど）は、 **[クレジット]**タブで確認できます。
+クレジットの詳細情報（合計クレジット数、利用可能なクレジット数、現在の使用状況、ステータスなど）は、 **[クレジット]**タブで確認できます。
 
 クレジット情報を表示するには、次の手順を実行します。
 
@@ -190,9 +206,21 @@ TiDB Cloudは、概念実証（PoC）ユーザーに一定数のクレジット�
 
 組織内で`Organization Owner`または`Organization Billing Manager`役割を担っている場合は、 TiDB Cloudの支払い情報を管理できます。それ以外の場合は、このセクションをスキップしてください。
 
+<CustomContent language="en,zh">
+
 > **注記：**
 >
 > [AWS マーケットプレイス](https://aws.amazon.com/marketplace) 、 [Azureマーケットプレイス](https://azuremarketplace.microsoft.com/) 、 [Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace) 、または[アリババクラウドマーケットプレイス](https://marketplace.alibabacloud.com/)を通じてTiDB Cloudにサインアップした場合、AWS アカウント、Azure アカウント、Google Cloud アカウント、または Alibaba Cloud アカウントを通じて直接支払いを行うことはできますが、 TiDB Cloudコンソールで支払い方法の追加や請求書のダウンロードを行うことはできません。
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+> **注記：**
+>
+> [AWS マーケットプレイス](https://aws.amazon.com/marketplace) 、 [Azureマーケットプレイス](https://azuremarketplace.microsoft.com/) 、または[Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)を通じてTiDB Cloudにサインアップした場合、AWS アカウント、Azure アカウント、または Google Cloud アカウントを通じて直接支払いを行うことができますが、 TiDB Cloudコンソールで支払い方法の追加や請求書のダウンロードを行うことはできません。
+
+</CustomContent>
 
 料金は、クラスターの使用量に応じて、紐付けられたクレジットカードから差し引かれます。有効なクレジットカードを追加するには、以下のいずれかの方法をご利用ください。
 
@@ -222,7 +250,7 @@ TiDB Cloudは、概念実証（PoC）ユーザーに一定数のクレジット�
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用して対象の組織に切り替えます。
 2.  左側のナビゲーション ペインで、 **[請求]**をクリックします。
 3.  **「請求」**ページで、 **「お支払い方法」**タブをクリックします。
-4.  クレジットカードの一覧からクレジットカードを選択し、それをデフォルトのクレジットカードとして設定するように求めるメッセージが表示されたら**[はい]**をクリックします。
+4.  クレジットカードの一覧からクレジットカードを選択し、それをデフォルトのクレジットカードとして設定するように求めるメッセージが表示されたら**「はい」**をクリックします。
 
 ## 契約 {#contract}
 
@@ -239,9 +267,21 @@ TiDB Cloudは、概念実証（PoC）ユーザーに一定数のクレジット�
 
 ## クラウドプロバイダーマーケットプレイスからの請求 {#billing-from-cloud-provider-marketplace}
 
+<CustomContent language="en,zh">
+
 組織内で`Organization Owner`または`Organization Billing Manager`ロールを担っている場合は、 TiDB Cloudアカウントをクラウドプロバイダー（AWS、Azure、Google Cloud、またはAlibaba Cloud）の請求アカウントにリンクできます。それ以外の場合は、このセクションをスキップしてください。
 
-TiDB Cloudを初めて使用し、 TiDB Cloudアカウントをお持ちでない場合は、クラウド プロバイダーのマーケットプレイスを通じてTiDB Cloudアカウントにサインアップし、クラウド プロバイダーの請求アカウントを通じて使用料を支払うことができます。
+</CustomContent>
+
+<CustomContent language="ja">
+
+組織内で`Organization Owner`または`Organization Billing Manager`ロールを担っている場合は、 TiDB Cloudアカウントをクラウドプロバイダー（AWS、Azure、またはGoogle Cloud）の請求アカウントにリンクできます。それ以外の場合は、このセクションをスキップしてください。
+
+</CustomContent>
+
+TiDB Cloudを初めて使用し、 TiDB Cloudアカウントを持っていない場合は、クラウド プロバイダーのマーケットプレイスを通じてTiDB Cloudアカウントにサインアップし、クラウド プロバイダーの請求アカウントを通じて使用料を支払うことができます。
+
+<CustomContent language="en,zh">
 
 -   [AWS マーケットプレイス](https://aws.amazon.com/marketplace)からサインアップするには、 [AWS マーケットプレイス](https://aws.amazon.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudにサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定します。
 -   [Azureマーケットプレイス](https://azuremarketplace.microsoft.com)からサインアップするには、 [Azureマーケットプレイス](https://azuremarketplace.microsoft.com)で`TiDB Cloud`を検索し、 TiDB Cloudにサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定します。
@@ -249,6 +289,18 @@ TiDB Cloudを初めて使用し、 TiDB Cloudアカウントをお持ちでな�
 -   [アリババクラウドマーケットプレイス](https://marketplace.alibabacloud.com/)からサインアップするには、 [アリババクラウドマーケットプレイス](https://marketplace.alibabacloud.com/)で`TiDB Cloud`を検索し、 TiDB Cloudにサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定します。
 
 すでにTiDB Cloudアカウントをお持ちで、AWS、Azure、Google Cloud、または Alibaba Cloud の請求アカウントを通じて使用料を支払う場合は、 TiDB Cloudアカウントを AWS、Azure、Google Cloud、または Alibaba Cloud の請求アカウントにリンクできます。
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+-   [AWS マーケットプレイス](https://aws.amazon.com/marketplace)からサインアップするには、 [AWS マーケットプレイス](https://aws.amazon.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudにサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定します。
+-   [Azureマーケットプレイス](https://azuremarketplace.microsoft.com)からサインアップするには、 [Azureマーケットプレイス](https://azuremarketplace.microsoft.com)で`TiDB Cloud`を検索し、 TiDB Cloudにサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定します。
+-   [Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)からサインアップするには、 [Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudにサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定します。
+
+すでにTiDB Cloudアカウントをお持ちで、AWS、Azure、または Google Cloud の請求アカウントを通じて使用料を支払う場合は、 TiDB Cloudアカウントを AWS、Azure、または Google Cloud の請求アカウントにリンクできます。
+
+</CustomContent>
 
 <SimpleTab>
 <div label="AWS Marketplace">
@@ -309,7 +361,7 @@ TiDB Cloudアカウントを Google Cloud 請求先アカウントにリンク�
 
 2.  TiDB Cloud製品ページで、 **「SUBSCRIBE」**をクリックします。サブスクリプションページが表示されます。
 
-3.  サブスクリプションページで**「Subscribe（登録）** 」をクリックし、「 **Go to product page（製品ページへ移動）」**をクリックします。TiDB TiDB Cloudのサインアップページに移動します。
+3.  サブスクリプションページで**「Subscribe（サブスクライブ）** 」をクリックし、「 **Go to product page（製品ページへ移動）** 」をクリックします。TiDB TiDB Cloudのサインアップページに移動します。
 
 4.  サインアップページの上部にある通知を確認し、 **「サインイン」**をクリックします。
 
@@ -322,6 +374,8 @@ TiDB Cloudアカウントを Google Cloud 請求先アカウントにリンク�
     > 組織にすでにTiDB Cloudで支払い方法がある場合、この組織の既存の支払い方法は、新しく追加された Google Cloud 請求先アカウントに置き換えられます。
 
 </div>
+
+<CustomContent language="en,zh">
 
 <div label="Alibaba Cloud Marketplace">
 
@@ -344,4 +398,5 @@ TiDB Cloudアカウントを Alibaba Cloud 請求アカウントにリンクす�
     > 組織にすでにTiDB Cloudで支払い方法がある場合、この組織の既存の支払い方法は、新しく追加された Alibaba Cloud 請求アカウントに置き換えられます。
 
 </div>
+</CustomContent>
 </SimpleTab>

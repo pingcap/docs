@@ -152,12 +152,12 @@ soft-pending-compaction-bytes-limit = "192GiB"
 >
 > TiKVは、システムの安定性を確保するために、スケジューラレイヤーでフロー制御を実装しています。保留中の圧縮バイト数や書き込みキューサイズなどの重要なしきい値を超えると、TiKVは書き込み要求を拒否し、ServerIsBusyエラーを返します。このエラーは、バックグラウンドの圧縮プロセスがフォアグラウンドの書き込み操作の現在の速度に追いつけないことを示します。フロー制御を有効にすると、通常、レイテンシーの急上昇とクエリスループットの低下（QPSの低下）が発生します。こうしたパフォーマンスの低下を防ぐには、包括的なキャパシティプランニングに加え、圧縮パラメータとstorage設定を適切に構成することが不可欠です。
 
-### TiFlash構成 {#tiflash-configurations}
+### TiFlash- 学習者構成 {#tiflash-learner-configurations}
 
-TiFlash構成ファイルに次の構成項目を追加します。
+TiFlash-learner 構成ファイルに次の構成項目を追加します。
 
 ```toml
-[raftstore-proxy.server]
+[server]
 snap-io-max-bytes-per-sec = "300MiB"
 ```
 
@@ -374,7 +374,7 @@ SET GLOBAL tidb_low_resolution_tso=ON;
 -   TiDB と PD 間のネットワークレイテンシーは、PD が TSO を割り当てるのにかかる時間よりも大幅に長くなります (つまり、ネットワークレイテンシーがTSO RPC 期間の大部分を占めます)。
     -   TSO RPC 要求の期間を取得するには、Grafana TiDB ダッシュボードの PD クライアント セクションにある**PD TSO RPC 期間**パネルを確認します。
     -   PD TSO 割り当ての期間を取得するには、Grafana PD ダッシュボードの TiDB セクションにある**PDサーバーTSO ハンドル期間**パネルを確認します。
--   TiDB と PD 間の TSO RPC 要求の増加 ( `PARALLEL`の場合は 2 回、 `PARALLEL-FAST`場合は 4 回) によって生じる追加のネットワーク トラフィックは許容されます。
+-   TiDB と PD 間の TSO RPC 要求の増加 ( `PARALLEL`回、 `PARALLEL-FAST`場合は 4 回) によって生じる追加のネットワーク トラフィックは許容されます。
 
 パラレルモードを切り替えるには、次のコマンドを実行します。
 
