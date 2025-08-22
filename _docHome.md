@@ -67,23 +67,7 @@ Walks you through the quickest way to get started with TiDB
 
 <DocHomeCard href="https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup" icon="cloud7" label="Deploy a Local TiDB Cluster">
 
-<<<<<<< HEAD
 Learn how to deploy TiDB locally in production
-=======
-Learn how to deploy TiDB locally in a production environment.
-
-</DocHomeCard>
-
-<DocHomeCard href="/tidb/stable/dev-guide-overview" label="Developer Guide" icon="oss-developer-blue">
-
-For application developers using TiDB Self-Managed.
-
-</DocHomeCard>
-
-<DocHomeCard href="/tidb/stable/mysql-compatibility" label="MySQL Compatibility" icon="oss-mysql-blue">
-
-TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.0.
->>>>>>> b570cc8627 (*: remove TiDB roadmap from TOC, home, index, add warning (#21628) (#21637))
 
 </DocHomeCard>
 

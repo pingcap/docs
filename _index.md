@@ -126,13 +126,7 @@ hide_commit: true
 
 <LearningPath label="Reference" icon="cloud-dev">
 
-<<<<<<< HEAD
-[TiDB Roadmap](https://docs.pingcap.com/tidb/dev/tidb-roadmap)
-
 [TiDB Configuration File Parameters](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file)
-=======
-[TiDB Configuration File Parameters](https://docs.pingcap.com/tidb/v8.5/tidb-configuration-file)
->>>>>>> b570cc8627 (*: remove TiDB roadmap from TOC, home, index, add warning (#21628) (#21637))
 
 [TiDB Command-line Flags](https://docs.pingcap.com/tidb/v6.5/command-line-flags-for-tidb-configuration)
 
