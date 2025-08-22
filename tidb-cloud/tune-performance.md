@@ -79,12 +79,3 @@ On the **Key Visualizer** page, a large heat map shows changes on access traffic
 
 For more information, see [Key Visualizer](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer).
 
-## Index Insight (beta)
-
-The Index Insight feature in TiDB Cloud provides powerful capabilities to optimize query performance by offering recommended indexes for slow queries that are not utilizing indexes effectively.
-
-> **Note:**
->
-> Index Insight is currently in beta and only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
-
-For more information, see [Index Insight](/tidb-cloud/index-insight.md).
