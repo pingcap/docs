@@ -6,8 +6,7 @@ aliases: ["/tidb/stable/vector-search-auto-embedding-overview"]
 
 # Auto Embedding Overview
 
-Auto Embedding is a powerful feature that allows you to use vector search with pure text instead of bringing your own vectors.
-With Auto Embedding, you can insert text data directly and perform semantic searches using text queries, while TiDB automatically handles the vector conversion behind the scenes.
+Auto Embedding is a powerful feature that allows you to use vector search with pure text instead of bringing your own vectors. With Auto Embedding, you can insert text data directly and perform semantic searches using text queries, while TiDB automatically handles the vector conversion behind the scenes.
 
 To use Auto Embedding, here's the basic workflow:
 
@@ -114,29 +113,28 @@ LIMIT 3;
 
 TiDB Cloud supports various embedding models. Choose the one that best fits your needs:
 
-| Embedding Model | Documentation                                                                       | Hosted by TiDB Cloud [<sup>1</sup>](#hosted-models) | BYOK [<sup>2</sup>](#byok-models) |
-| --------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------- | --------------------------------- |
-| Amazon Titan    | [Amazon Titan Embeddings](/tidb-cloud/vector-search-auto-embedding-amazon-titan.md) | ✅                                                  |                                   |
-| Cohere          | [Cohere Embeddings](/tidb-cloud/vector-search-auto-embedding-cohere.md)             | ✅                                                  | ✅                                |
-| Jina AI         | [Jina AI Embeddings](/tidb-cloud/vector-search-auto-embedding-jina-ai.md)           |                                                     | ✅                                |
-| OpenAI          | [OpenAI Embeddings](/tidb-cloud/vector-search-auto-embedding-openai.md)             |                                                     | ✅                                |
-| Gemini          | [Gemini Embeddings](/tidb-cloud/vector-search-auto-embedding-gemini.md)             |                                                     | ✅                                |
+| Embedding Model | Documentation                                                                       | Hosted by TiDB Cloud <sup>1</sup> | BYOK <sup>2</sup> |
+| --------------- | ----------------------------------------------------------------------------------- | --------------------------------- | ----------------- |
+| Amazon Titan    | [Amazon Titan Embeddings](/tidb-cloud/vector-search-auto-embedding-amazon-titan.md) | ✅                                |                   |
+| Cohere          | [Cohere Embeddings](/tidb-cloud/vector-search-auto-embedding-cohere.md)             | ✅                                | ✅                |
+| Jina AI         | [Jina AI Embeddings](/tidb-cloud/vector-search-auto-embedding-jina-ai.md)           |                                   | ✅                |
+| OpenAI          | [OpenAI Embeddings](/tidb-cloud/vector-search-auto-embedding-openai.md)             |                                   | ✅                |
+| Gemini          | [Gemini Embeddings](/tidb-cloud/vector-search-auto-embedding-gemini.md)             |                                   | ✅                |
 
 You can also use open-source embedding models via following inference services supported by TiDB Cloud:
 
-| Embedding Model       | Documentation                                                                     | Hosted by TiDB Cloud [<sup>1</sup>](#hosted-models) | BYOK [<sup>2</sup>](#byok-models) | Example Supported Models      |
-| --------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------- | --------------------------------- | ----------------------------- |
-| HuggingFace Inference | [HuggingFace Embeddings](/tidb-cloud/vector-search-auto-embedding-huggingface.md) |                                                     | ✅                                | bge-m3, multilingual-e5-large |
-| NVIDIA NIM            | [NVIDIA NIM Embeddings](/tidb-cloud/vector-search-auto-embedding-nvidia-nim.md)   |                                                     | ✅                                | bge-m3, nv-embed-v1           |
+| Embedding Model       | Documentation                                                                     | Hosted by TiDB Cloud <sup>1</sup> | BYOK <sup>2</sup> | Example Supported Models      |
+| --------------------- | --------------------------------------------------------------------------------- | --------------------------------- | ----------------- | ----------------------------- |
+| HuggingFace Inference | [HuggingFace Embeddings](/tidb-cloud/vector-search-auto-embedding-huggingface.md) |                                   | ✅                | bge-m3, multilingual-e5-large |
+| NVIDIA NIM            | [NVIDIA NIM Embeddings](/tidb-cloud/vector-search-auto-embedding-nvidia-nim.md)   |                                   | ✅                | bge-m3, nv-embed-v1           |
 
-<a name="hosted-models"></a> <sup>1</sup> Hosted models are hosted by TiDB Cloud and don't require any API keys. They are currently free to use.
+<sup>1</sup> Hosted models are hosted by TiDB Cloud and don't require any API keys. They are currently free to use.
 
-<a name="byok-models"></a> <sup>2</sup> BYOK (Bring Your Own Key) models require you to provide your own API keys of the corresponding embedding provider. TiDB Cloud does not charge for the usage of BYOK models. You are responsible for managing and monitoring the costs associated with using these models.
+<sup>2</sup> BYOK (Bring Your Own Key) models require you to provide your own API keys of the corresponding embedding provider. TiDB Cloud does not charge for the usage of BYOK models. You are responsible for managing and monitoring the costs associated with using these models.
 
 ## How Auto Embedding Works
 
-Auto Embedding uses the [`EMBED_TEXT()`](#embed_text) function to automatically convert text into vector embeddings using your chosen embedding model.
-The generated vectors are stored in `VECTOR` columns and can be used for semantic similarity searches using text queries with [`VEC_EMBED_COSINE_DISTANCE()`](#vec_embed_cosine_distance) or [`VEC_EMBED_L2_DISTANCE()`](#vec_embed_l2_distance).
+Auto Embedding uses the [`EMBED_TEXT()`](#embed_text) function to automatically convert text into vector embeddings using your chosen embedding model. The generated vectors are stored in `VECTOR` columns and can be used for semantic similarity searches using text queries with [`VEC_EMBED_COSINE_DISTANCE()`](#vec_embed_cosine_distance) or [`VEC_EMBED_L2_DISTANCE()`](#vec_embed_l2_distance).
 
 Under the hood, [`VEC_EMBED_COSINE_DISTANCE()`](#vec_embed_cosine_distance) and [`VEC_EMBED_L2_DISTANCE()`](#vec_embed_l2_distance) will be translated into [`VEC_COSINE_DISTANCE()`](/vector-search/vector-search-functions-and-operators.md#vec_cosine_distance) and [`VEC_L2_DISTANCE()`](/vector-search/vector-search-functions-and-operators.md#vec_l2_distance) with the text query automatically converted into a vector embedding.
 
