@@ -1750,11 +1750,12 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: String
 - Default value: `0`
 - Range: `[0, 1PiB]`
-- This variable limits the write bandwidth for each TiKV node and only takes effect when index creation acceleration is enabled (controlled by the [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) variable). When the data size in your cluster is quite large (such as billions of rows), limiting the write bandwidth for index creation can effectively reduce the impact on application workloads.
+- This variable limits the write bandwidth of each TiDB node to TiKV node and only takes effect when index creation acceleration is enabled (controlled by the [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) variable). When the data size in your cluster is quite large (such as billions of rows), limiting the write bandwidth for index creation can effectively reduce the impact on application workloads.
 - The default value `0` means no write bandwidth limit.
 - You can specify the value of this variable either with a unit or without a unit.
     - When you specify the value without a unit, the default unit is bytes per second. For example, `67108864` represents `64MiB` per second.
     - When you specify the value with a unit, supported units include KiB, MiB, GiB, and TiB. For example, `'1GiB`' represents 1 GiB per second, and `'256MiB'` represents 256 MiB per second.
+- When the Distributed eXecution Framework (DXF) is enabled, this write limit applies to each TiDB node separately. For example, if you add an index with 4 TiDB nodes, setting this variable to `64MiB` means the maximum write speed to one TiKV is `256MiB/s`. For more information on configuring this variable, see [Limit the write speed to TiKV](/sql-statements/sql-statement-import-into.md#limit-the-write-speed-to-tikv). The only difference is that you should monitor the speed through Grafana: **TiDB** > **DDL** > **Add Index Backfill Import Speed**.
 
 ### tidb_ddl_reorg_worker_cnt
 
