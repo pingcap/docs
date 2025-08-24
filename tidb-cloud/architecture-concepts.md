@@ -36,7 +36,7 @@ TiDB Cloudすると、データベースの拡張、複雑な管理タスクの�
 
 </CustomContent>
 
-## {{{ .スターター }}} {#starter}
+## TiDB Cloud Starter {#starter}
 
 {{{ .starter }}} (旧称 Serverless) は、フルマネージドのマルチテナント TiDB サービスです。MySQL 互換で、瞬時に自動スケーリング可能なデータベースを提供します。
 
@@ -46,7 +46,7 @@ TiDB Cloudすると、データベースの拡張、複雑な管理タスクの�
 -   **ストレージ**: 初期 5 GiB の行ベースのstorageと 5 GiB の列ベースのstorageを提供します。
 -   **リクエスト単位**: データベース操作用の 5,000 万[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit)が含まれます。
 
-## {{{ 。不可欠 }}} {#essential}
+## TiDB Cloud Essential {#essential}
 
 ワークロードが増加し、リアルタイムの拡張性を必要とするアプリケーションの場合、Essential クラスター プランは次の機能により、ビジネスの成長に対応できる柔軟性とパフォーマンスを提供します。
 
