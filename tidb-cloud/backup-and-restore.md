@@ -84,7 +84,7 @@ To configure the backup schedule for your TiDB Cloud Dedicated cluster, perform 
 
         > **Warning**
         >
-        > - When weekly backup is enabled, the Point-in-time Restore feature is enabled by default and cannot be disabled.
+        > - When weekly backup is enabled, the Point-in-time Restore feature is enabled by default and you can disable it manually.
         > - If you change the backup cycle from weekly to daily, the Point-in-time Restore feature remains its original setting. You can manually disable it if needed.
 
     - In **Backup Time**, schedule a start time for the daily or weekly cluster backup.
