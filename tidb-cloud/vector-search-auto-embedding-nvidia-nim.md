@@ -1,7 +1,6 @@
 ---
 title: NVIDIA NIM Embeddings
 summary: Learn how to use NVIDIA NIM embedding models in TiDB Cloud.
-aliases: ["/tidb/stable/vector-search-auto-embedding-nvidia-nim"]
 ---
 
 # NVIDIA NIM Embeddings

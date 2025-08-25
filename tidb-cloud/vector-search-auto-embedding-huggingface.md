@@ -1,7 +1,6 @@
 ---
 title: HuggingFace Embeddings
 summary: Learn how to use HuggingFace embedding models in TiDB Cloud.
-aliases: ["/tidb/stable/vector-search-auto-embedding-huggingface"]
 ---
 
 # HuggingFace Embeddings

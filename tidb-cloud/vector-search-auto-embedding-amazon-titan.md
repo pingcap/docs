@@ -1,7 +1,6 @@
 ---
 title: Amazon Titan Embeddings
 summary: Learn how to use Amazon Titan embedding models in TiDB Cloud.
-aliases: ["/tidb/stable/vector-search-auto-embedding-amazon-titan"]
 ---
 
 # Amazon Titan Embeddings

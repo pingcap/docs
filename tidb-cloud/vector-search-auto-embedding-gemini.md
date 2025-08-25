@@ -1,7 +1,6 @@
 ---
 title: Gemini Embeddings
 summary: Learn how to use Google Gemini embedding models in TiDB Cloud.
-aliases: ["/tidb/stable/vector-search-auto-embedding-gemini"]
 ---
 
 # Gemini Embeddings

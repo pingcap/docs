@@ -1,7 +1,6 @@
 ---
 title: Cohere Embeddings
 summary: Learn how to use Cohere embedding models in TiDB Cloud.
-aliases: ["/tidb/stable/vector-search-auto-embedding-cohere"]
 ---
 
 # Cohere Embeddings
