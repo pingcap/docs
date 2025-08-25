@@ -6,34 +6,38 @@ aliases: ["/tidb/stable/vector-search-auto-embedding-amazon-titan"]
 
 # Amazon Titan Embeddings
 
-## Available Models
+This document describes how to use Amazon Titan embedding models with [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches from text queries.
 
-TiDB Cloud provides the following [Amazon Titan embedding model](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html) natively. No API key required.
+> **Note:**
+>
+> Currently, [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} clusters in the following AWS regions:
+>
+> - `Frankfurt (eu-central-1)`
+> - `Oregon (us-west-2)`
+> - `N. Virginia (us-east-1)`
+
+## Available models
+
+TiDB Cloud provides the following [Amazon Titan embedding model](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html) natively. No API key is required.
 
 **Amazon Titan Text Embedding V2 model**
 
 - Name: `tidbcloud_free/amazon/titan-embed-text-v2`
 - Dimensions: 1024 (default), 512, 256
-- Distance Metric: Cosine / L2
-- Languages – English (100+ languages in preview)
-- Supported use cases – RAG, document search, reranking, classification, etc.
-- Max input text tokens: 8,192
-- Max input text characters: 50,000
+- Distance metric: Cosine / L2
+- Languages: English (100+ languages in preview)
+- Typical use cases: RAG, document search, reranking, and classification
+- Maximum input text tokens: 8,192
+- Maximum input text characters: 50,000
 - Price: Free
 - Hosted by TiDB Cloud: ✅
 - Bring Your Own Key: ❌
 
-For more details, see [its official documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html).
+For more information about this model, see [Amazon Bedrock documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html).
 
-## Availability
+## SQL usage example
 
-This feature is currently available in these regions and offerings:
-
-- Starter: AWS Frankfurt (eu-central-1)
-- Starter: AWS Oregon (us-west-2)
-- Starter: AWS N. Virginia (us-east-1)
-
-## SQL Usage Example
+The following example shows how to use the Amazon Titan embedding model with Auto Embedding.
 
 ```sql
 CREATE TABLE sample (
@@ -78,12 +82,12 @@ Result:
 
 ## Options
 
-You can specify additional options via the `additional_json_options` parameter of the `EMBED_TEXT()` function.
+You can specify the following options via the `additional_json_options` parameter of the `EMBED_TEXT()` function:
 
-- `normalize` – (optional) Flag indicating whether or not to normalize the output embedding. Defaults to true.
-- `dimensions` – (optional) The number of dimensions the output embedding should have. The following values are accepted: 1024 (default), 512, 256.
+- `normalize` (optional): whether to normalize the output embedding. Defaults to `true`.
+- `dimensions` (optional): the number of dimensions of the output embedding. Supported values: `1024` (default), `512`, and `256`.
 
-**Example: Use alternative dimensions via `dimensions`**
+**Example: Use an alternative dimension**
 
 ```sql
 CREATE TABLE sample (
@@ -127,11 +131,11 @@ Result:
 +------+----------------------------------------------------------------+
 ```
 
-## Python Usage Example
+## Python usage example
 
 See [PyTiDB Documentation](https://pingcap.github.io/ai/guides/auto-embedding/).
 
-## See Also
+## See also
 
 - [Auto Embedding Overview](/tidb-cloud/vector-search-auto-embedding-overview.md)
 - [Vector Search](/vector-search/vector-search-overview.md)

@@ -6,13 +6,25 @@ aliases: ["/tidb/stable/vector-search-auto-embedding-openai"]
 
 # OpenAI Embeddings
 
-All OpenAI models are available for use under the `openai/` prefix when you bring your own OpenAI API key. To name a few:
+This document describes how to use OpenAI embedding models with [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches from text queries.
+
+> **Note:**
+>
+> Currently, [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} clusters in the following AWS regions:
+>
+> - `Frankfurt (eu-central-1)`
+> - `Oregon (us-west-2)`
+> - `N. Virginia (us-east-1)`
+
+## Available models
+
+All OpenAI models are available for use with the `openai/` prefix if you provide your own OpenAI API key (BYOK). For example:
 
 **text-embedding-3-small**
 
 - Name: `openai/text-embedding-3-small`
 - Dimensions: 512 - 1536 (default: 1536)
-- Distance Metric: Cosine / L2
+- Distance metric: Cosine / L2
 - Price: Charged by OpenAI
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
@@ -21,24 +33,16 @@ All OpenAI models are available for use under the `openai/` prefix when you brin
 
 - Name: `openai/text-embedding-3-large`
 - Dimensions: 256 - 3072 (default: 3072)
-- Distance Metric: Cosine / L2
+- Distance metric: Cosine / L2
 - Price: Charged by OpenAI
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
 
-For a full list of available models, please refer to [OpenAI Documentation](https://platform.openai.com/docs/guides/embeddings).
+For a full list of available models, see [OpenAI Documentation](https://platform.openai.com/docs/guides/embeddings).
 
-## Availability
+## SQL usage example
 
-This feature is currently available in these regions and offerings:
-
-- Starter: AWS Frankfurt (eu-central-1)
-- Starter: AWS Oregon (us-west-2)
-- Starter: AWS N. Virginia (us-east-1)
-
-## SQL Usage Example
-
-To use OpenAI models, an [OpenAI API key](https://platform.openai.com/api-keys) is required:
+To use OpenAI models, you must specify an [OpenAI API key](https://platform.openai.com/api-keys) as follows:
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_KEY = 'your-openai-api-key-here';
@@ -88,7 +92,7 @@ Result:
 
 All [OpenAI embedding options](https://platform.openai.com/docs/api-reference/embeddings/create) are supported via the `additional_json_options` parameter of the `EMBED_TEXT()` function.
 
-**Example: Use alternative dimensions for text-embedding-3-large**
+**Example: Use an alternative dimension for text-embedding-3-large**
 
 ```sql
 CREATE TABLE sample (
@@ -102,13 +106,13 @@ CREATE TABLE sample (
 );
 ```
 
-For all available options, please refer to [OpenAI Documentation](https://platform.openai.com/docs/api-reference/embeddings/create).
+For all available options, see [OpenAI Documentation](https://platform.openai.com/docs/api-reference/embeddings/create).
 
-## Python Usage Example
+## Python usage example
 
 See [PyTiDB Documentation](https://pingcap.github.io/ai/guides/auto-embedding/).
 
-## See Also
+## See also
 
 - [Auto Embedding Overview](/tidb-cloud/vector-search-auto-embedding-overview.md)
 - [Vector Search](/vector-search/vector-search-overview.md)

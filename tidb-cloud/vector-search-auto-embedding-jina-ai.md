@@ -6,14 +6,26 @@ aliases: ["/tidb/stable/vector-search-auto-embedding-jina-ai"]
 
 # Jina AI Embeddings
 
-All Jina AI models are available for use under the `jina_ai/` prefix when you bring your own Jina AI API key. To name a few:
+This document describes how to use Jina AI embedding models with [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches from text queries.
+
+> **Note:**
+>
+> Currently, [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} clusters in the following AWS regions:
+>
+> - `Frankfurt (eu-central-1)`
+> - `Oregon (us-west-2)`
+> - `N. Virginia (us-east-1)`
+
+## Available models
+
+All Jina AI models are available for use with the `jina_ai/` prefix if you bring your own Jina AI API key (BYOK). For example:
 
 **jina-embeddings-v4**
 
 - Name: `jina_ai/jina-embeddings-v4`
 - Dimensions: 2048
-- Distance Metric: Cosine / L2
-- Max input text tokens: 32K
+- Distance metric: Cosine / L2
+- Maximum input text tokens: 32K
 - Price: Charged by Jina AI
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
@@ -22,25 +34,17 @@ All Jina AI models are available for use under the `jina_ai/` prefix when you br
 
 - Name: `jina_ai/jina-embeddings-v3`
 - Dimensions: 1024
-- Distance Metric: Cosine / L2
-- Max input text tokens: 8K
+- Distance metric: Cosine / L2
+- Maximum input text tokens: 8K
 - Price: Charged by Jina AI
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
 
-For a full list of available models, please refer to [Jina AI Documentation](https://jina.ai/embeddings/).
+For a full list of available models, see [Jina AI Documentation](https://jina.ai/embeddings/).
 
-## Availability
+## SQL usage example
 
-This feature is currently available in these regions and offerings:
-
-- Starter: AWS Frankfurt (eu-central-1)
-- Starter: AWS Oregon (us-west-2)
-- Starter: AWS N. Virginia (us-east-1)
-
-## SQL Usage Example
-
-To use Jina AI models, a [Jina AI API key](https://jina.ai/) is required:
+To use Jina AI models, you must specify a [Jina AI API key](https://jina.ai/) as follows:
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_JINA_AI_API_KEY = 'your-jina-ai-api-key-here';
@@ -84,7 +88,9 @@ Result:
 +------+----------------------------------------------------------------+
 ```
 
-> **Note**: Replace `'your-jina-ai-api-key-here'` with your actual Jina AI API key.
+> **Note:**
+>
+> Replace `'your-jina-ai-api-key-here'` with your actual Jina AI API key.
 
 ## Options
 
@@ -104,7 +110,7 @@ CREATE TABLE sample (
 );
 ```
 
-**Example: Use alternative dimensions**
+**Example: Use an alternative dimension**
 
 ```sql
 CREATE TABLE sample (
@@ -118,9 +124,9 @@ CREATE TABLE sample (
 );
 ```
 
-For all available options, please refer to [Jina AI Documentation](https://jina.ai/embeddings/).
+For all available options, see [Jina AI Documentation](https://jina.ai/embeddings/).
 
-## Python Usage Example
+## Python usage example
 
 See [PyTiDB Documentation](https://pingcap.github.io/ai/guides/auto-embedding/).
 

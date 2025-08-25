@@ -6,24 +6,28 @@ aliases: ["/tidb/stable/vector-search-auto-embedding-nvidia-nim"]
 
 # NVIDIA NIM Embeddings
 
-Embedding models hosted on NVIDIA NIM are available for use under the `nvidia_nim/` prefix when you bring your own [NVIDIA NIM API key](https://build.nvidia.com/settings/api-keys).
+This document describes how to use NVIDIA NIM embedding models with [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches from text queries.
 
-For your convenience, we provided a few popular models below. For a full list of available models, please refer to [NVIDIA NIM Text-to-embedding Models](https://build.nvidia.com/models?filters=usecase%3Ausecase_text_to_embedding).
+> **Note:**
+>
+> Currently, [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} clusters in the following AWS regions:
+>
+> - `Frankfurt (eu-central-1)`
+> - `Oregon (us-west-2)`
+> - `N. Virginia (us-east-1)`
 
-## Availability
+## Available models
 
-This feature is currently available in these regions and offerings:
+Embedding models hosted on NVIDIA NIM are available for use with the `nvidia_nim/` prefix if you bring your own [NVIDIA NIM API key](https://build.nvidia.com/settings/api-keys) (BYOK). For example:
 
-- Starter: AWS Frankfurt (eu-central-1)
-- Starter: AWS Oregon (us-west-2)
-- Starter: AWS N. Virginia (us-east-1)
+For your convenience, the following section takes a popular model as an example to show how to use it with Auto Embedding. For a full list of available models, see [NVIDIA NIM Text-to-embedding Models](https://build.nvidia.com/models?filters=usecase%3Ausecase_text_to_embedding).
 
 ## bge-m3
 
 - Name: `nvidia_nim/baai/bge-m3`
 - Dimensions: 1024
-- Distance Metric: Cosine / L2
-- Max input text tokens: 8192
+- Distance metric: Cosine / L2
+- Maximum input text tokens: 8192
 - Price: Charged by NVIDIA
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
@@ -73,11 +77,11 @@ Result:
 +------+----------------------------------------------------------------+
 ```
 
-## Python Usage Example
+## Python usage example
 
 See [PyTiDB Documentation](https://pingcap.github.io/ai/guides/auto-embedding/).
 
-## See Also
+## See also
 
 - [Auto Embedding Overview](/tidb-cloud/vector-search-auto-embedding-overview.md)
 - [Vector Search](/vector-search/vector-search-overview.md)

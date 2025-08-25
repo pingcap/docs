@@ -6,23 +6,27 @@ aliases: ["/tidb/stable/vector-search-auto-embedding-huggingface"]
 
 # HuggingFace Embeddings
 
-HuggingFace models are available for use under the `huggingface/` prefix when you bring your own [HuggingFace Inference API](https://huggingface.co/docs/inference-providers/index) key.
+This document describes how to use HuggingFace embedding models with [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches from text queries.
 
-For your convenience, we provided a few popular models below. For a full list of available models, please refer to [HuggingFace Models](https://huggingface.co/models?library=sentence-transformers&inference_provider=hf-inference&sort=trending). Note that not all models are provided by HuggingFace Inference API or always working.
+> **Note:**
+>
+> Currently, [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} clusters in the following AWS regions:
+>
+> - `Frankfurt (eu-central-1)`
+> - `Oregon (us-west-2)`
+> - `N. Virginia (us-east-1)`
 
-## Availability
+## Available models
 
-This feature is currently available in these regions and offerings:
+HuggingFace models are available for use with the `huggingface/` prefix if you bring your own [HuggingFace Inference API](https://huggingface.co/docs/inference-providers/index) key (BYOK).
 
-- Starter: AWS Frankfurt (eu-central-1)
-- Starter: AWS Oregon (us-west-2)
-- Starter: AWS N. Virginia (us-east-1)
+For your convenience, the following sections take several popular models as examples to show how to use them with Auto Embedding. For a full list of available models, see [HuggingFace Models](https://huggingface.co/models?library=sentence-transformers&inference_provider=hf-inference&sort=trending). Note that not all models are provided by HuggingFace Inference API or always working.
 
 ## multilingual-e5-large
 
 - Name: `huggingface/intfloat/multilingual-e5-large`
 - Dimensions: 1024
-- Distance Metric: Cosine / L2
+- Distance metric: Cosine / L2
 - Price: Charged by HuggingFace
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
@@ -66,7 +70,7 @@ LIMIT 2;
 
 - Name: `huggingface/BAAI/bge-m3`
 - Dimensions: 1024
-- Distance Metric: Cosine / L2
+- Distance metric: Cosine / L2
 - Price: Charged by HuggingFace
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
@@ -108,7 +112,7 @@ LIMIT 2;
 
 - Name: `huggingface/sentence-transformers/all-MiniLM-L6-v2`
 - Dimensions: 384
-- Distance Metric: Cosine / L2
+- Distance metric: Cosine / L2
 - Price: Charged by HuggingFace
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
@@ -152,7 +156,7 @@ LIMIT 2;
 
 - Name: `huggingface/sentence-transformers/all-mpnet-base-v2`
 - Dimensions: 768
-- Distance Metric: Cosine / L2
+- Distance metric: Cosine / L2
 - Price: Charged by HuggingFace
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
@@ -192,12 +196,14 @@ LIMIT 2;
 
 ## Qwen3-Embedding-0.6B
 
-Note: HuggingFace Inference API might be not stable fo r this model.
+> **Note:**
+>
+> HuggingFace Inference API might be not stable for this model.
 
 - Name: `huggingface/Qwen/Qwen3-Embedding-0.6B`
 - Dimensions: 1024
-- Distance Metric: Cosine / L2
-- Max input text tokens: 512
+- Distance metric: Cosine / L2
+- Maximum input text tokens: 512
 - Price: Charged by HuggingFace
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
@@ -235,11 +241,11 @@ ORDER BY
 LIMIT 2;
 ```
 
-## Python Usage Example
+## Python usage example
 
 See [PyTiDB Documentation](https://pingcap.github.io/ai/guides/auto-embedding/).
 
-## See Also
+## See also
 
 - [Auto Embedding Overview](/tidb-cloud/vector-search-auto-embedding-overview.md)
 - [Vector Search](/vector-search/vector-search-overview.md)

@@ -1,39 +1,39 @@
 ---
 title: Auto Embedding Overview
-summary: Learn how to use Auto Embedding to perform semantic search using pure text instead of vectors.
+summary: Learn how to use Auto Embedding to perform semantic searches with plain text instead of vectors.
 aliases: ["/tidb/stable/vector-search-auto-embedding-overview"]
 ---
 
 # Auto Embedding Overview
 
-Auto Embedding is a powerful feature that allows you to use vector search with pure text instead of bringing your own vectors. With Auto Embedding, you can insert text data directly and perform semantic searches using text queries, while TiDB automatically handles the vector conversion behind the scenes.
+The Auto Embedding feature lets you perform vector searches directly with plain text, without providing your own vectors. With this feature, you can insert text data directly and perform semantic searches using text queries, while TiDB automatically converts the text into vectors behind the scenes.
 
-To use Auto Embedding, here's the basic workflow:
+To use Auto Embedding, the basic workflow is as follows:
 
-1. **Define a table** with a text column and a generated vector column using `EMBED_TEXT()`
-2. **Insert text data** - vectors are automatically generated and stored concurrently
-3. **Query using text** - use `VEC_EMBED_COSINE_DISTANCE()` or `VEC_EMBED_L2_DISTANCE()` to find semantically similar content
+1. **Define a table** with a text column and a generated vector column using `EMBED_TEXT()`.
+2. **Insert text data** — vectors are automatically generated and stored concurrently.
+3. **Query using text** — use `VEC_EMBED_COSINE_DISTANCE()` or `VEC_EMBED_L2_DISTANCE()` to find semantically similar content.
 
 ## Availability
 
-This feature is currently available in these regions and offerings:
+Currently, Auto Embedding is only available on {{{ .starter }}} clusters in the following AWS regions:
 
-- Starter: AWS Frankfurt (eu-central-1)
-- Starter: AWS Oregon (us-west-2)
-- Starter: AWS N. Virginia (us-east-1)
+- `Frankfurt (eu-central-1)`
+- `Oregon (us-west-2)`
+- `N. Virginia (us-east-1)`
 
-## Quick Start Example
+## Quick start example
 
 > **Tip:**
 >
 > For Python usage, see [PyTiDB Documentation](https://pingcap.github.io/ai/guides/auto-embedding/).
 
-Here's a simple example showing how to use Auto Embedding with cosine distance. No API keys are required:
+The following is a simple example that shows how to use Auto Embedding with cosine distance to perform semantic searches. No API key is required in this example.
 
 ```sql
 -- Create a table with auto-embedding
 -- The dimension of the vector column must match the dimension of the embedding model,
--- otherwise an error will be returned when inserting data.
+-- otherwise TiDB returns an error when inserting data.
 CREATE TABLE documents (
     id INT PRIMARY KEY AUTO_INCREMENT,
     content TEXT,
@@ -42,7 +42,7 @@ CREATE TABLE documents (
     ) STORED
 );
 
--- Insert text data (vectors generated automatically)
+-- Insert text data (vectors are generated automatically)
 INSERT INTO documents (content) VALUES
     ("Electric vehicles reduce air pollution in cities."),
     ("Solar panels convert sunlight into renewable energy."),
@@ -71,14 +71,14 @@ Results:
 +----+--------------------------------------------------------------+
 ```
 
-For other models, see [Available Text Embedding Models](#available-text-embedding-models) below.
+The preceding example uses the Amazon Titan model. For other models, see [Available text embedding models](#available-text-embedding-models).
 
-## Auto Embedding + Vector Index
+## Auto Embedding + Vector index
 
-Auto embedding is compatible with [Vector Index](/vector-search/vector-search-index.md) for better query performance. Define a vector index over the generated vector column, and it will be used automatically:
+Auto Embedding is compatible with [Vector index](/vector-search/vector-search-index.md) for better query performance. You can define a vector index on the generated vector column, and it will be used automatically:
 
 ```sql
--- Create a table with auto-embedding and vector index over the generated vector
+-- Create a table with auto-embedding and a vector index
 CREATE TABLE documents (
     id INT PRIMARY KEY AUTO_INCREMENT,
     content TEXT,
@@ -88,7 +88,7 @@ CREATE TABLE documents (
     VECTOR INDEX ((VEC_COSINE_DISTANCE(content_vector)))
 );
 
--- Insert text data (vectors generated automatically)
+-- Insert text data (vectors are generated automatically)
 INSERT INTO documents (content) VALUES
     ("Electric vehicles reduce air pollution in cities."),
     ("Solar panels convert sunlight into renewable energy."),
@@ -96,7 +96,7 @@ INSERT INTO documents (content) VALUES
     ("Deep learning algorithms improve medical diagnosis accuracy."),
     ("Blockchain technology enhances data security systems.");
 
--- Search for semantically similar content using text query over vector index using the same VEC_EMBED_COSINE_DISTANCE() function
+-- Search for semantically similar content with a text query on the vector index using the same VEC_EMBED_COSINE_DISTANCE() function
 SELECT id, content FROM documents
 ORDER BY VEC_EMBED_COSINE_DISTANCE(
     content_vector,
@@ -107,9 +107,11 @@ LIMIT 3;
 
 > **Note:**
 >
-> You must use `VEC_COSINE_DISTANCE` or `VEC_L2_DISTANCE` when defining the vector index, while using `VEC_EMBED_COSINE_DISTANCE` or `VEC_EMBED_L2_DISTANCE` when performing vector search queries.
+> - When defining a vector index, use `VEC_COSINE_DISTANCE` or `VEC_L2_DISTANCE`.
+>
+> - When running queries, use `VEC_EMBED_COSINE_DISTANCE` or `VEC_EMBED_L2_DISTANCE`.
 
-## Available Text Embedding Models
+## Available text embedding models
 
 TiDB Cloud supports various embedding models. Choose the one that best fits your needs:
 
@@ -128,17 +130,17 @@ You can also use open-source embedding models via following inference services s
 | HuggingFace Inference | [HuggingFace Embeddings](/tidb-cloud/vector-search-auto-embedding-huggingface.md) |                                   | ✅                | bge-m3, multilingual-e5-large |
 | NVIDIA NIM            | [NVIDIA NIM Embeddings](/tidb-cloud/vector-search-auto-embedding-nvidia-nim.md)   |                                   | ✅                | bge-m3, nv-embed-v1           |
 
-<sup>1</sup> Hosted models are hosted by TiDB Cloud and don't require any API keys. They are currently free to use.
+<sup>1</sup> Hosted models are hosted by TiDB Cloud and do not require any API keys. They are currently free to use.
 
-<sup>2</sup> BYOK (Bring Your Own Key) models require you to provide your own API keys of the corresponding embedding provider. TiDB Cloud does not charge for the usage of BYOK models. You are responsible for managing and monitoring the costs associated with using these models.
+<sup>2</sup> BYOK (Bring Your Own Key) models require you to provide your own API keys from the corresponding embedding provider. TiDB Cloud does not charge for the usage of BYOK models. You are responsible for managing and monitoring the costs associated with using these models.
 
-## How Auto Embedding Works
+## How Auto Embedding works
 
-Auto Embedding uses the [`EMBED_TEXT()`](#embed_text) function to automatically convert text into vector embeddings using your chosen embedding model. The generated vectors are stored in `VECTOR` columns and can be used for semantic similarity searches using text queries with [`VEC_EMBED_COSINE_DISTANCE()`](#vec_embed_cosine_distance) or [`VEC_EMBED_L2_DISTANCE()`](#vec_embed_l2_distance).
+Auto Embedding uses the [`EMBED_TEXT()`](#embed_text) function to convert text into vector embeddings with your chosen embedding model. The generated vectors are stored in `VECTOR` columns and can be queried with plain text using [`VEC_EMBED_COSINE_DISTANCE()`](#vec_embed_cosine_distance) or [`VEC_EMBED_L2_DISTANCE()`](#vec_embed_l2_distance).
 
-Under the hood, [`VEC_EMBED_COSINE_DISTANCE()`](#vec_embed_cosine_distance) and [`VEC_EMBED_L2_DISTANCE()`](#vec_embed_l2_distance) will be translated into [`VEC_COSINE_DISTANCE()`](/vector-search/vector-search-functions-and-operators.md#vec_cosine_distance) and [`VEC_L2_DISTANCE()`](/vector-search/vector-search-functions-and-operators.md#vec_l2_distance) with the text query automatically converted into a vector embedding.
+Internally, [`VEC_EMBED_COSINE_DISTANCE()`](#vec_embed_cosine_distance) and [`VEC_EMBED_L2_DISTANCE()`](#vec_embed_l2_distance) are executed as [`VEC_COSINE_DISTANCE()`](/vector-search/vector-search-functions-and-operators.md#vec_cosine_distance) and [`VEC_L2_DISTANCE()`](/vector-search/vector-search-functions-and-operators.md#vec_l2_distance), with the text query automatically converted into a vector embedding.
 
-## Key Functions
+## Key functions
 
 ### EMBED_TEXT()
 
@@ -174,7 +176,7 @@ Use this function in `ORDER BY` clauses to rank results by L2 distance. It uses 
 
 See [PyTiDB Documentation](https://pingcap.github.io/ai/guides/auto-embedding/).
 
-## See Also
+## See also
 
 - [Vector Data Types](/vector-search/vector-search-data-types.md)
 - [Vector Functions and Operators](/vector-search/vector-search-functions-and-operators.md)

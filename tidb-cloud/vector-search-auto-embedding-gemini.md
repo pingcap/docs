@@ -6,31 +6,35 @@ aliases: ["/tidb/stable/vector-search-auto-embedding-gemini"]
 
 # Gemini Embeddings
 
-All Gemini models are available for use under the `gemini/` prefix when you bring your own Gemini API key.
+This document describes how to use Gemini embedding models with [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches from text queries.
+
+> **Note:**
+>
+> Currently, [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} clusters in the following AWS regions:
+>
+> - `Frankfurt (eu-central-1)`
+> - `Oregon (us-west-2)`
+> - `N. Virginia (us-east-1)`
+
+## Available models
+
+All Gemini models are available for use with the `gemini/` prefix if you bring your own Gemini API key (BYOK). For example:
 
 **gemini-embedding-001**
 
 - Name: `gemini/gemini-embedding-001`
 - Dimensions: 128–3072 (default: 3072)
-- Distance Metric: Cosine / L2
-- Max input text tokens: 2048
+- Distance metric: Cosine / L2
+- Maximum input text tokens: 2048
 - Price: Charged by Google
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
 
-For a full list of available models, please refer to [Gemini documentation](https://ai.google.dev/gemini-api/docs/embeddings).
+For a full list of available models, see [Gemini documentation](https://ai.google.dev/gemini-api/docs/embeddings).
 
-## Availability
+## SQL usage example
 
-This feature is currently available in these regions and offerings:
-
-- Starter: AWS Frankfurt (eu-central-1)
-- Starter: AWS Oregon (us-west-2)
-- Starter: AWS N. Virginia (us-east-1)
-
-## SQL Usage Example
-
-To use Gemini models, a [Gemini API key](https://ai.google.dev/gemini-api/docs/api-key) is required:
+To use Gemini models, you must specify a [Gemini API key](https://ai.google.dev/gemini-api/docs/api-key) as follows:
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_GEMINI_API_KEY = 'your-gemini-api-key-here';
@@ -74,13 +78,15 @@ Result:
 +------+----------------------------------------------------------------+
 ```
 
-> **Note**: Replace `'your-gemini-api-key-here'` with your actual Gemini API key.
+> **Note:**
+>
+> Replace `'your-gemini-api-key-here'` with your actual Gemini API key.
 
 ## Options
 
 All [Gemini options](https://ai.google.dev/gemini-api/docs/embeddings) are supported via the `additional_json_options` parameter of the `EMBED_TEXT()` function.
 
-**Example: Specify task type to improve quality**
+**Example: Specify the task type to improve quality**
 
 ```sql
 CREATE TABLE sample (
@@ -94,7 +100,7 @@ CREATE TABLE sample (
 );
 ```
 
-**Example: Use alternative dimensions**
+**Example: Use an alternative dimension**
 
 ```sql
 CREATE TABLE sample (
@@ -108,13 +114,13 @@ CREATE TABLE sample (
 );
 ```
 
-For all available options, please refer to [Gemini documentation](https://ai.google.dev/gemini-api/docs/embeddings).
+For all available options, see [Gemini documentation](https://ai.google.dev/gemini-api/docs/embeddings).
 
-## Python Usage Example
+## Python usage example
 
 See [PyTiDB Documentation](https://pingcap.github.io/ai/guides/auto-embedding/).
 
-## See Also
+## See also
 
 - [Auto Embedding Overview](/tidb-cloud/vector-search-auto-embedding-overview.md)
 - [Vector Search](/vector-search/vector-search-overview.md)

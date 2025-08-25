@@ -6,18 +6,28 @@ aliases: ["/tidb/stable/vector-search-auto-embedding-cohere"]
 
 # Cohere Embeddings
 
-## Available Models
+This document describes how to use Cohere embedding models with [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches from text queries.
 
-TiDB Cloud provides the following [Cohere](https://cohere.com/) embedding models natively. No API key required.
+> **Note:**
+>
+> Currently, [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} clusters in the following AWS regions:
+>
+> - `Frankfurt (eu-central-1)`
+> - `Oregon (us-west-2)`
+> - `N. Virginia (us-east-1)`
+
+## Available models
+
+TiDB Cloud provides the following [Cohere](https://cohere.com/) embedding models natively. No API key is required.
 
 **Cohere Embed v3 model**
 
 - Name: `tidbcloud_free/cohere/embed-english-v3`
 - Dimensions: 1024
-- Distance Metric: Cosine / L2
+- Distance metric: Cosine / L2
 - Languages: English
-- Max input text tokens: 512 (1 token is about 4 characters)
-- Max input text characters: 2,048
+- Maximum input text tokens: 512 (about 4 characters per token)
+- Maximum input text characters: 2,048
 - Price: Free
 - Hosted by TiDB Cloud: ✅ `tidbcloud_free/cohere/embed-english-v3`
 - Bring Your Own Key: ✅ `cohere/embed-english-v3.0`
@@ -26,39 +36,31 @@ TiDB Cloud provides the following [Cohere](https://cohere.com/) embedding models
 
 - Name: `tidbcloud_free/cohere/embed-multilingual-v3`
 - Dimensions: 1024
-- Distance Metric: Cosine / L2
+- Distance metric: Cosine / L2
 - Languages: 100+ languages
-- Max input text tokens: 512 (1 token is about 4 characters)
-- Max input text characters: 2,048
+- Maximum input text tokens: 512 (about 4 characters per token)
+- Maximum input text characters: 2,048
 - Price: Free
 - Hosted by TiDB Cloud: ✅ `tidbcloud_free/cohere/embed-multilingual-v3`
 - Bring Your Own Key: ✅ `cohere/embed-multilingual-v3.0`
 
-Alternatively, all Cohere models are available for use under the `cohere/` prefix when you bring your own Cohere API key. To name a few:
+Alternatively, all Cohere models are available for use with the `cohere/` prefix if you bring your own Cohere API key (BYOK). For example:
 
 **Cohere Embed v4 model**
 
 - Name: `cohere/embed-v4.0`
 - Dimensions: 256, 512, 1024, 1536 (default)
-- Distance Metric: Cosine / L2
-- Max input text tokens: 128k
+- Distance metric: Cosine / L2
+- Maximum input text tokens: 128k
 - Price: Charged by Cohere
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
 
-For a full list of Cohere models, please refer to [Cohere's Documentation](https://docs.cohere.com/docs/cohere-embed).
+For a full list of Cohere models, see [Cohere Documentation](https://docs.cohere.com/docs/cohere-embed).
 
-## Availability
+## SQL usage example (TiDB Cloud hosted)
 
-This feature is currently available in these regions and offerings:
-
-- Starter: AWS Frankfurt (eu-central-1)
-- Starter: AWS Oregon (us-west-2)
-- Starter: AWS N. Virginia (us-east-1)
-
-## SQL Usage Example (TiDB Cloud Hosted)
-
-Create table:
+The following example shows how to use the Cohere embedding model hosted by TiDB Cloud with Auto Embedding.
 
 ```sql
 CREATE TABLE sample (
@@ -72,11 +74,11 @@ CREATE TABLE sample (
 );
 ```
 
-> **Note**:
+> **Note:**
 >
-> For the Cohere model, you must specify `input_type` in the `EMBED_TEXT()` function. For example, `'{"input_type": "search_document", "input_type@search": "search_query"}'` means that `input_type` is set to `search_document` for data insertion and `search_query` for vector searches.
+> For the Cohere embedding model, you must specify `input_type` in the `EMBED_TEXT()` function when defining the table. For example, `'{"input_type": "search_document", "input_type@search": "search_query"}'` means that `input_type` is set to `search_document` for data insertion and `search_query` is automatically applied during vector searches.
 >
-> The `@search` suffix is used to mark that field to take effect only when it is used for vector search queries.
+> The `@search` suffix indicates that the field takes effect only during vector search queries, so you do not need to specify `input_type` again when writing a query.
 
 Insert and query data:
 
@@ -111,28 +113,25 @@ Result:
 +------+----------------------------------------------------------------+
 ```
 
-## Options (TiDB Cloud Hosted)
+## Options (TiDB Cloud hosted)
 
-Both the Embed v3 and Multilingual Embed v3 models support the following options, which you can specify via the `additional_json_options` parameter of the `EMBED_TEXT()` function.
+Both the **Embed v3** and **Multilingual Embed v3** models support the following options, which you can specify via the `additional_json_options` parameter of the `EMBED_TEXT()` function.
 
-- `input_type` – **Required**. Prepends special tokens to differentiate each type from one another. You should not mix different types together, except when mixing types for search and retrieval. In this case, embed your corpus with the `search_document` type and embed queries with the `search_query` type.
+- `input_type` (required): prepends special tokens to indicate the purpose of the embedding. You must use the same input type consistently when generating embeddings for the same task, otherwise embeddings will be mapped to different semantic spaces and become incompatible. The only exception is semantic search, where documents are embedded with `search_document` and queries are embedded with `search_query`.
+    - `search_document`: generates embeddings from documents to store in a vector database.
+    - `search_query`: generates embeddings from queries to search against stored embeddings in a vector database.
+    - `classification`: generates embeddings to be used as input for a text classifier.
+    - `clustering`: generates embeddings for clustering tasks.
 
-  - `search_document` – In search use-cases, use `search_document` when you encode documents for embeddings that you store in a vector database.
-  - `search_query` – Use `search_query` when querying your vector DB to find relevant documents.
-  - `classification` – Use `classification` when using embeddings as an input to a text classifier.
-  - `clustering` – Use `clustering` to cluster the embeddings.
+- `truncate` (optional): controls how the API handles inputs longer than the maximum token length. You can specify one of the following values:
 
-- `truncate` - (optional) Specifies how the API handles inputs longer than the maximum token length. Use one of the following:
+    - `NONE` (default): returns an error when the input exceeds the maximum input token length.
+    - `START`: discards text from the beginning until the input fits.
+    - `END`: discards text from the end until the input fits.
 
-  - `NONE` – (Default) Returns an error when the input exceeds the maximum input token length.
-  - `START` – Discards the start of the input.
-  - `END` – Discards the end of the input.
+## SQL usage example (BYOK)
 
-  If you specify `START` or `END`, the model discards the input until the remaining input is exactly the maximum input token length for the model.
-
-## SQL Usage Example (BYOK)
-
-To use BYOK Cohere models, a Cohere API key is required:
+To use Bring Your Own Key (BYOK) Cohere models, you must specify a Cohere API key as follows:
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_COHERE_API_KEY = 'your-cohere-api-key-here';
@@ -166,15 +165,17 @@ ORDER BY
 LIMIT 2;
 ```
 
-> **Note**: Replace `'your-cohere-api-key-here'` with your actual Cohere API key. You can obtain an API key from the [Cohere Dashboard](https://dashboard.cohere.com/).
+> **Note**
+>
+> Replace `'your-cohere-api-key-here'` with your actual Cohere API key. You can obtain an API key from the [Cohere Dashboard](https://dashboard.cohere.com/).
 
 ## Options (BYOK)
 
 All [Cohere embedding options](https://docs.cohere.com/v2/reference/embed) are supported via the `additional_json_options` parameter of the `EMBED_TEXT()` function.
 
-**Example: Specify different `input_type` for Search vs Insert**
+**Example: Specify different `input_type` for search and insert operations**
 
-The `@search` suffix can be used to mark any field to take effect only when it is used for vector search queries.
+Use the `@search` suffix to indicates that the field takes effect only during vector search queries.
 
 ```sql
 CREATE TABLE sample (
@@ -188,7 +189,7 @@ CREATE TABLE sample (
 );
 ```
 
-**Example: Use alternative dimensions**
+**Example: Use an alternative dimension**
 
 ```sql
 CREATE TABLE sample (
@@ -202,13 +203,13 @@ CREATE TABLE sample (
 );
 ```
 
-For all available options, please refer to [Cohere's Documentation](https://docs.cohere.com/v2/reference/embed).
+For all available options, see [Cohere Documentation](https://docs.cohere.com/v2/reference/embed).
 
-## Python Usage Example
+## Python usage example
 
 See [PyTiDB Documentation](https://pingcap.github.io/ai/guides/auto-embedding/).
 
-## See Also
+## See also
 
 - [Auto Embedding Overview](/tidb-cloud/vector-search-auto-embedding-overview.md)
 - [Vector Search](/vector-search/vector-search-overview.md)
