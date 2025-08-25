@@ -59,11 +59,32 @@ const filterLink = (srcList = []) => {
 };
 
 export const getAllMdList = (tocFile) => {
+  if (!fs.existsSync(tocFile)) {
+    console.log(`TOC file not found: ${tocFile}`);
+    return [];
+  }
+
   const tocFileContent = fs.readFileSync(tocFile);
   const mdAst = generateMdAstFromFile(tocFileContent);
   const linkList = extractLinkNodeFromAst(mdAst);
-  const filteredLinkList = filterLink(linkList);
+  const filteredLinkList = filterLink(linkList).map((link) =>
+    link.replace(/^\.?\//, "")
+  );
   return filteredLinkList;
+};
+
+export const CLOUD_TOC_LIST = [
+  "TOC-tidb-cloud.md",
+  "TOC-tidb-cloud-essential.md",
+  "TOC-tidb-cloud-starter.md",
+];
+
+export const getAllCloudMdList = (tocFiles = CLOUD_TOC_LIST) => {
+  // Get all MD files from multiple TOCs and deduplicate
+  const allFilteredLinkLists = tocFiles.map((tocFile) => getAllMdList(tocFile));
+  const flattenedList = allFilteredLinkLists.flat();
+  const allFilePaths = [...new Set(flattenedList)]; // Deduplicate
+  return allFilePaths;
 };
 
 const checkDestDir = (destPath) => {
