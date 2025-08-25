@@ -434,7 +434,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Introduce [Index Insight (beta)](/tidb-cloud/index-insight.md) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, which optimizes query performance by providing index recommendations for slow queries.
+- Introduce Index Insight (beta) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, which optimizes query performance by providing index recommendations for slow queries.
 
     With Index Insight, you can improve the overall application performance and efficiency of your database operations in the following ways:
 
@@ -444,8 +444,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - Improved application efficiency: By using Index Insight to optimize database performance, applications running on TiDB Cloud can handle larger workloads and serve more users concurrently, which makes scaling operations of applications more efficient.
 
   To use Index Insight, navigate to the **Diagnosis** page of your TiDB Cloud Dedicated cluster and click the **Index Insight BETA** tab.
-
-    For more information, see [Use Index Insight (beta)](/tidb-cloud/index-insight.md).
 
 - Introduce [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_release_notes), an interactive platform for experiencing the full capabilities of TiDB, without registration or installation.
 
