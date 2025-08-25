@@ -445,8 +445,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   To use Index Insight, navigate to the **Diagnosis** page of your TiDB Cloud Dedicated cluster and click the **Index Insight BETA** tab.
 
-    For more information, see [Use Index Insight (beta)](https://docs.pingcap.com/tidbcloud/index-insight).
-
 - Introduce [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_release_notes), an interactive platform for experiencing the full capabilities of TiDB, without registration or installation.
 
     TiDB Playground is an interactive platform designed to provide a one-stop-shop experience for exploring the capabilities of TiDB, such as scalability, MySQL compatibility, and real-time analytics.
