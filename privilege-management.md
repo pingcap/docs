@@ -430,7 +430,7 @@ Requires the `INSERT` and `SELECT` privileges for the table.
 
 `SHOW PROCESSLIST` requires the `PROCESS` privilege to show connections belonging to other users.
 
-`SHOW IMPORT JOB` requires the `SUPER` privilege to show connections belonging to other users. Otherwise, it only shows jobs created by the current user.
+`SHOW IMPORT JOB` and `SHOW IMPORT GROUP` require the `SUPER` privilege to show connections belonging to other users. Otherwise, it only shows jobs created by the current user.
 
 `SHOW STATS_LOCKED` requires the `SELECT` privilege to the `mysql.stats_table_locked` table.
 
