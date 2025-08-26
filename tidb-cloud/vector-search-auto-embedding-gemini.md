@@ -24,7 +24,7 @@ All Gemini models are available for use with the `gemini/` prefix if you bring y
 - Name: `gemini/gemini-embedding-001`
 - Dimensions: 128–3072 (default: 3072)
 - Distance metric: Cosine / L2
-- Maximum input text tokens: 2048
+- Maximum input text tokens: 2,048
 - Price: Charged by Google
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
@@ -34,6 +34,10 @@ For a full list of available models, see [Gemini documentation](https://ai.googl
 ## SQL usage example
 
 To use Gemini models, you must specify a [Gemini API key](https://ai.google.dev/gemini-api/docs/api-key) as follows:
+
+> **Note:**
+>
+> Replace `'your-gemini-api-key-here'` with your actual Gemini API key.
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_GEMINI_API_KEY = 'your-gemini-api-key-here';
@@ -76,10 +80,6 @@ Result:
 |    4 | Java's syntax is used in Android apps.                         |
 +------+----------------------------------------------------------------+
 ```
-
-> **Note:**
->
-> Replace `'your-gemini-api-key-here'` with your actual Gemini API key.
 
 ## Options
 

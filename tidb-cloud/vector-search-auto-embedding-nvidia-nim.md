@@ -26,7 +26,7 @@ For your convenience, the following section takes a popular model as an example 
 - Name: `nvidia_nim/baai/bge-m3`
 - Dimensions: 1024
 - Distance metric: Cosine / L2
-- Maximum input text tokens: 8192
+- Maximum input text tokens: 8,192
 - Price: Charged by NVIDIA
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅

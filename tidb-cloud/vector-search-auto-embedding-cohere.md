@@ -50,7 +50,7 @@ Alternatively, all Cohere models are available for use with the `cohere/` prefix
 - Name: `cohere/embed-v4.0`
 - Dimensions: 256, 512, 1024, 1536 (default)
 - Distance metric: Cosine / L2
-- Maximum input text tokens: 128k
+- Maximum input text tokens: 128,000
 - Price: Charged by Cohere
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
@@ -75,9 +75,9 @@ CREATE TABLE sample (
 
 > **Note:**
 >
-> For the Cohere embedding model, you must specify `input_type` in the `EMBED_TEXT()` function when defining the table. For example, `'{"input_type": "search_document", "input_type@search": "search_query"}'` means that `input_type` is set to `search_document` for data insertion and `search_query` is automatically applied during vector searches.
+> - For the Cohere embedding model, you must specify `input_type` in the `EMBED_TEXT()` function when defining the table. For example, `'{"input_type": "search_document", "input_type@search": "search_query"}'` means that `input_type` is set to `search_document` for data insertion and `search_query` is automatically applied during vector searches.
 >
-> The `@search` suffix indicates that the field takes effect only during vector search queries, so you do not need to specify `input_type` again when writing a query.
+> - The `@search` suffix indicates that the field takes effect only during vector search queries, so you do not need to specify `input_type` again when writing a query.
 
 Insert and query data:
 

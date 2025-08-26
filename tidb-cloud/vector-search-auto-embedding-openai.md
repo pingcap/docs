@@ -22,7 +22,7 @@ All OpenAI models are available for use with the `openai/` prefix if you bring y
 **text-embedding-3-small**
 
 - Name: `openai/text-embedding-3-small`
-- Dimensions: 512 - 1536 (default: 1536)
+- Dimensions: 512-1536 (default: 1536)
 - Distance metric: Cosine / L2
 - Price: Charged by OpenAI
 - Hosted by TiDB Cloud: ❌
@@ -31,7 +31,7 @@ All OpenAI models are available for use with the `openai/` prefix if you bring y
 **text-embedding-3-large**
 
 - Name: `openai/text-embedding-3-large`
-- Dimensions: 256 - 3072 (default: 3072)
+- Dimensions: 256-3072 (default: 3072)
 - Distance metric: Cosine / L2
 - Price: Charged by OpenAI
 - Hosted by TiDB Cloud: ❌
@@ -42,6 +42,10 @@ For a full list of available models, see [OpenAI Documentation](https://platform
 ## SQL usage example
 
 To use OpenAI models, you must specify an [OpenAI API key](https://platform.openai.com/api-keys) as follows:
+
+> **Note:**
+>
+> Replace `'your-openai-api-key-here'` with your actual OpenAI API key.
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_KEY = 'your-openai-api-key-here';
@@ -84,10 +88,6 @@ Result:
 |    4 | Java's syntax is used in Android apps.                         |
 +------+----------------------------------------------------------------+
 ```
-
-> **Note:**
->
-> Replace `'your-openai-api-key-here'` with your actual OpenAI API key.
 
 ## Options
 
