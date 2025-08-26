@@ -23,7 +23,7 @@ TiDB Cloud provides the following [Amazon Titan embedding model](https://docs.aw
 
 - Name: `tidbcloud_free/amazon/titan-embed-text-v2`
 - Dimensions: 1024 (default), 512, 256
-- Distance metric: Cosine / L2
+- Distance metric: Cosine, L2
 - Languages: English (100+ languages in preview)
 - Typical use cases: RAG, document search, reranking, and classification
 - Maximum input text tokens: 8,192
