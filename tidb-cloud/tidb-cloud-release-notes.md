@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Starter**
 
-    - Introduce Auto Embedding (Beta) in TiDB Cloud Starter, making it simple to convert your text into vectors without additional setup. This  feature enables faster development of semantic search, RAG, reranking, and classification in TiDB Cloud with less integration overhead.
+    - Introduce Auto Embedding (Beta) in [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless), making it simple to convert your text into vectors without additional setup. This  feature enables faster development of semantic search, RAG, reranking, and classification in TiDB Cloud with less integration overhead.
 
         - **Auto Embedding with popular LLM providers**: Amazon Titan, OpenAI, Cohere, Gemini, Jina AI, Hugging Face, NVIDIA NIM.
         - **Native integration with AWS Bedrock**: managed embedding models with a free quota, including Amazon Titan and Cohere text embedding models from AWS Bedrock.
