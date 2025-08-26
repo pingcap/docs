@@ -1727,7 +1727,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 Example:
 
-Assume a cluster has 4 TiDB nodes and several TiKV nodes. In this cluster, each TiDB node can perform index backfilling, Regions are evenly distributed across all TiKV nodes, and `tidb_ddl_reorg_max_write_speed` is set to `100MiB`:
+Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In this cluster, each TiDB node can perform index backfilling, and Regions are evenly distributed across all TiKV nodes. If you set `tidb_ddl_reorg_max_write_speed` to `100MiB`:
 
 - When Global Sort is disabled, only one TiDB node writes to TiKV at a time. In this case, the maximum write bandwidth per TiKV node is `100MiB`.
 - When Global Sort is enabled, all 4 TiDB nodes can write to TiKV simultaneously. In this case, the maximum write bandwidth per TiKV node is `4 * 100MiB = 400MiB`.
