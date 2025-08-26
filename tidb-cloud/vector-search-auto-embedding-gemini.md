@@ -23,7 +23,7 @@ All Gemini models are available for use with the `gemini/` prefix if you bring y
 
 - Name: `gemini/gemini-embedding-001`
 - Dimensions: 128–3072 (default: 3072)
-- Distance metric: Cosine / L2
+- Distance metric: Cosine, L2
 - Maximum input text tokens: 2,048
 - Price: Charged by Google
 - Hosted by TiDB Cloud: ❌

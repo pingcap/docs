@@ -23,7 +23,7 @@ All Jina AI models are available for use with the `jina_ai/` prefix if you bring
 
 - Name: `jina_ai/jina-embeddings-v4`
 - Dimensions: 2048
-- Distance metric: Cosine / L2
+- Distance metric: Cosine, L2
 - Maximum input text tokens: 32,000
 - Price: Charged by Jina AI
 - Hosted by TiDB Cloud: ❌
@@ -33,7 +33,7 @@ All Jina AI models are available for use with the `jina_ai/` prefix if you bring
 
 - Name: `jina_ai/jina-embeddings-v3`
 - Dimensions: 1024
-- Distance metric: Cosine / L2
+- Distance metric: Cosine, L2
 - Maximum input text tokens: 8,000
 - Price: Charged by Jina AI
 - Hosted by TiDB Cloud: ❌

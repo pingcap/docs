@@ -23,7 +23,7 @@ All OpenAI models are available for use with the `openai/` prefix if you bring y
 
 - Name: `openai/text-embedding-3-small`
 - Dimensions: 512-1536 (default: 1536)
-- Distance metric: Cosine / L2
+- Distance metric: Cosine, L2
 - Price: Charged by OpenAI
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
@@ -32,7 +32,7 @@ All OpenAI models are available for use with the `openai/` prefix if you bring y
 
 - Name: `openai/text-embedding-3-large`
 - Dimensions: 256-3072 (default: 3072)
-- Distance metric: Cosine / L2
+- Distance metric: Cosine, L2
 - Price: Charged by OpenAI
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅

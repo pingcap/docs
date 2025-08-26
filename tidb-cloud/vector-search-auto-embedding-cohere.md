@@ -23,7 +23,7 @@ TiDB Cloud provides the following [Cohere](https://cohere.com/) embedding models
 
 - Name: `tidbcloud_free/cohere/embed-english-v3`
 - Dimensions: 1024
-- Distance metric: Cosine / L2
+- Distance metric: Cosine, L2
 - Languages: English
 - Maximum input text tokens: 512 (about 4 characters per token)
 - Maximum input text characters: 2,048
@@ -35,7 +35,7 @@ TiDB Cloud provides the following [Cohere](https://cohere.com/) embedding models
 
 - Name: `tidbcloud_free/cohere/embed-multilingual-v3`
 - Dimensions: 1024
-- Distance metric: Cosine / L2
+- Distance metric: Cosine, L2
 - Languages: 100+ languages
 - Maximum input text tokens: 512 (about 4 characters per token)
 - Maximum input text characters: 2,048
@@ -49,7 +49,7 @@ Alternatively, all Cohere models are available for use with the `cohere/` prefix
 
 - Name: `cohere/embed-v4.0`
 - Dimensions: 256, 512, 1024, 1536 (default)
-- Distance metric: Cosine / L2
+- Distance metric: Cosine, L2
 - Maximum input text tokens: 128,000
 - Price: Charged by Cohere
 - Hosted by TiDB Cloud: ❌

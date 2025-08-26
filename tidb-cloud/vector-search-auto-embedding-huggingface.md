@@ -25,7 +25,7 @@ For your convenience, the following sections take several popular models as exam
 
 - Name: `huggingface/intfloat/multilingual-e5-large`
 - Dimensions: 1024
-- Distance metric: Cosine / L2
+- Distance metric: Cosine, L2
 - Price: Charged by HuggingFace
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
@@ -69,7 +69,7 @@ LIMIT 2;
 
 - Name: `huggingface/BAAI/bge-m3`
 - Dimensions: 1024
-- Distance metric: Cosine / L2
+- Distance metric: Cosine, L2
 - Price: Charged by HuggingFace
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
@@ -111,7 +111,7 @@ LIMIT 2;
 
 - Name: `huggingface/sentence-transformers/all-MiniLM-L6-v2`
 - Dimensions: 384
-- Distance metric: Cosine / L2
+- Distance metric: Cosine, L2
 - Price: Charged by HuggingFace
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
@@ -155,7 +155,7 @@ LIMIT 2;
 
 - Name: `huggingface/sentence-transformers/all-mpnet-base-v2`
 - Dimensions: 768
-- Distance metric: Cosine / L2
+- Distance metric: Cosine, L2
 - Price: Charged by HuggingFace
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
@@ -201,7 +201,7 @@ LIMIT 2;
 
 - Name: `huggingface/Qwen/Qwen3-Embedding-0.6B`
 - Dimensions: 1024
-- Distance metric: Cosine / L2
+- Distance metric: Cosine, L2
 - Maximum input text tokens: 512
 - Price: Charged by HuggingFace
 - Hosted by TiDB Cloud: ❌
