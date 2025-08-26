@@ -210,8 +210,8 @@
     - [TiKV Follower Read](/follower-read.md)
     - [Coprocessor Cache](/coprocessor-cache.md)
     - Garbage Collection (GC)
-       - [Overview](/garbage-collection-overview.md)
-       - [Configuration](/garbage-collection-configuration.md)
+      - [Overview](/garbage-collection-overview.md)
+      - [Configuration](/garbage-collection-configuration.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
@@ -240,6 +240,15 @@
   - Get Started
     - [Get Started with SQL](/vector-search/vector-search-get-started-using-sql.md)
     - [Get Started with Python](/vector-search/vector-search-get-started-using-python.md)
+  - Auto Embedding
+    - [Overview](/tidb-cloud/vector-search-auto-embedding-overview.md)
+    - [Amazon Titan Embeddings](/tidb-cloud/vector-search-auto-embedding-amazon-titan.md)
+    - [Cohere Embeddings](/tidb-cloud/vector-search-auto-embedding-cohere.md)
+    - [Jina AI Embeddings](/tidb-cloud/vector-search-auto-embedding-jina-ai.md)
+    - [OpenAI Embeddings](/tidb-cloud/vector-search-auto-embedding-openai.md)
+    - [Gemini Embeddings](/tidb-cloud/vector-search-auto-embedding-gemini.md)
+    - [HuggingFace Embeddings](/tidb-cloud/vector-search-auto-embedding-huggingface.md)
+    - [NVIDIA NIM Embeddings](/tidb-cloud/vector-search-auto-embedding-nvidia-nim.md)
   - Integrations
     - [Overview](/vector-search/vector-search-integration-overview.md)
     - AI Frameworks
@@ -658,8 +667,8 @@
     - [TSO](/tso.md)
   - Storage Engines
     - TiKV
-        - [TiKV Overview](/tikv-overview.md)
-        - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
+      - [TiKV Overview](/tikv-overview.md)
+      - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
     - TiFlash
       - [TiFlash Overview](/tiflash/tiflash-overview.md)
       - [Spill to Disk](/tiflash/tiflash-spill-disk.md)
