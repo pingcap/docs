@@ -136,10 +136,6 @@ The following TiKV configuration items can be modified dynamically:
 | `raftstore.raft-entry-cache-life-time` | The maximum remaining time allowed for the log cache in memory |
 | `raftstore.split-region-check-tick-interval` | The time interval at which to check whether the Region split is needed |
 | `raftstore.region-split-check-diff` | The maximum value by which the Region data is allowed to exceed before Region split |
-| `raftstore.region-compact-check-interval` | The time interval at which to check whether it is necessary to manually trigger RocksDB compaction |
-| `raftstore.region-compact-check-step` | The number of Regions checked at one time for each round of manual compaction |
-| `raftstore.region-compact-min-tombstones` | The number of tombstones required to trigger RocksDB compaction |
-| `raftstore.region-compact-tombstones-percent` | The proportion of tombstone required to trigger RocksDB compaction |
 | `raftstore.pd-heartbeat-tick-interval` | The time interval at which a Region's heartbeat to PD is triggered |
 | `raftstore.pd-store-heartbeat-tick-interval` | The time interval at which a store's heartbeat to PD is triggered |
 | `raftstore.snap-mgr-gc-tick-interval` | The time interval at which the recycle of expired snapshot files is triggered |
@@ -188,6 +184,12 @@ The following TiKV configuration items can be modified dynamically:
 | `gc.max-write-bytes-per-sec` | The maximum bytes that can be written into RocksDB per second |
 | `gc.enable-compaction-filter` | Whether to enable compaction filter |
 | `gc.compaction-filter-skip-version-check` | Whether to skip the cluster version check of compaction filter (not released) |
+| `gc.auto-compaction.check-interval` | The time interval for checking whether to trigger TiKV automatic (RocksDB) compaction |
+| `gc.auto-compaction.tombstone-num-threshold` | The number of RocksDB tombstones required to trigger TiKV automatic (RocksDB) compaction |
+| `gc.auto-compaction.tombstone-percent-threshold` | The percentage of RocksDB tombstones required to trigger TiKV automatic (RocksDB) compaction |
+| `gc.auto-compaction.redundant-rows-threshold` | The number of redundant MVCC rows required to trigger TiKV automatic (RocksDB) compaction |
+| `gc.auto-compaction.redundant-rows-percent-threshold` | The percentage of redundant MVCC rows required to trigger TiKV automatic (RocksDB) compaction |
+| `gc.auto-compaction.bottommost-level-force` | Whether to force the bottommost files in RocksDB to participate in compaction |
 | `{db-name}.max-total-wal-size` | The maximum size of total WAL |
 | `{db-name}.max-background-jobs` | The number of background threads in RocksDB |
 | `{db-name}.max-background-flushes` | The maximum number of flush threads in RocksDB |
