@@ -27,7 +27,7 @@ Currently, Auto Embedding is only available on {{{ .starter }}} clusters in the 
 >
 > For Python usage, see [PyTiDB Documentation](https://pingcap.github.io/ai/guides/auto-embedding/).
 
-The following is a simple example that shows how to use Auto Embedding with cosine distance to perform semantic searches. No API key is required in this example.
+The following example shows how to use Auto Embedding with cosine distance to perform a semantic search. No API key is required in this example.
 
 ```sql
 -- Create a table with auto-embedding
@@ -58,7 +58,7 @@ ORDER BY VEC_EMBED_COSINE_DISTANCE(
 LIMIT 3;
 ```
 
-Results:
+The output is as follows:
 
 ```
 +----+--------------------------------------------------------------+
@@ -106,15 +106,15 @@ LIMIT 3;
 
 > **Note:**
 >
-> - When defining a vector index, use `VEC_COSINE_DISTANCE` or `VEC_L2_DISTANCE`.
+> - When defining a vector index, use `VEC_COSINE_DISTANCE()` or `VEC_L2_DISTANCE()`.
 >
-> - When running queries, use `VEC_EMBED_COSINE_DISTANCE` or `VEC_EMBED_L2_DISTANCE`.
+> - When running queries, use `VEC_EMBED_COSINE_DISTANCE()` or `VEC_EMBED_L2_DISTANCE()`.
 
 ## Available text embedding models
 
 TiDB Cloud supports various embedding models. Choose the one that best fits your needs:
 
-| Embedding Model | Documentation                                                                       | Hosted by TiDB Cloud <sup>1</sup> | BYOK <sup>2</sup> |
+| Embedding model | Documentation                                                                       | Hosted by TiDB Cloud <sup>1</sup> | BYOK <sup>2</sup> |
 | --------------- | ----------------------------------------------------------------------------------- | --------------------------------- | ----------------- |
 | Amazon Titan    | [Amazon Titan Embeddings](/tidb-cloud/vector-search-auto-embedding-amazon-titan.md) | ✅                                |                   |
 | Cohere          | [Cohere Embeddings](/tidb-cloud/vector-search-auto-embedding-cohere.md)             | ✅                                | ✅                |
@@ -122,12 +122,12 @@ TiDB Cloud supports various embedding models. Choose the one that best fits your
 | OpenAI          | [OpenAI Embeddings](/tidb-cloud/vector-search-auto-embedding-openai.md)             |                                   | ✅                |
 | Gemini          | [Gemini Embeddings](/tidb-cloud/vector-search-auto-embedding-gemini.md)             |                                   | ✅                |
 
-You can also use open-source embedding models via following inference services supported by TiDB Cloud:
+You can also use open-source embedding models through the following inference services that TiDB Cloud supports:
 
-| Embedding Model       | Documentation                                                                     | Hosted by TiDB Cloud <sup>1</sup> | BYOK <sup>2</sup> | Example Supported Models      |
+| Embedding model       | Documentation                                                                     | Hosted by TiDB Cloud <sup>1</sup> | BYOK <sup>2</sup> | Example supported models      |
 | --------------------- | --------------------------------------------------------------------------------- | --------------------------------- | ----------------- | ----------------------------- |
-| HuggingFace Inference | [HuggingFace Embeddings](/tidb-cloud/vector-search-auto-embedding-huggingface.md) |                                   | ✅                | bge-m3, multilingual-e5-large |
-| NVIDIA NIM            | [NVIDIA NIM Embeddings](/tidb-cloud/vector-search-auto-embedding-nvidia-nim.md)   |                                   | ✅                | bge-m3, nv-embed-v1           |
+| HuggingFace Inference | [HuggingFace Embeddings](/tidb-cloud/vector-search-auto-embedding-huggingface.md) |                                   | ✅                | `bge-m3`, `multilingual-e5-large` |
+| NVIDIA NIM            | [NVIDIA NIM Embeddings](/tidb-cloud/vector-search-auto-embedding-nvidia-nim.md)   |                                   | ✅                | `bge-m3`, `nv-embed-v1`           |
 
 <sup>1</sup> Hosted models are hosted by TiDB Cloud and do not require any API keys. They are currently free to use.
 
@@ -141,7 +141,7 @@ Internally, [`VEC_EMBED_COSINE_DISTANCE()`](#vec_embed_cosine_distance) and [`VE
 
 ## Key functions
 
-### EMBED_TEXT()
+### `EMBED_TEXT()`
 
 Converts text to vector embeddings:
 
@@ -149,9 +149,9 @@ Converts text to vector embeddings:
 EMBED_TEXT("model_name", text_content[, additional_json_options])
 ```
 
-Use this function in `GENERATED ALWAYS AS` clauses to automatically create embeddings when inserting text data.
+Use this function in `GENERATED ALWAYS AS` clauses to automatically generate embeddings when inserting text data.
 
-### VEC_EMBED_COSINE_DISTANCE()
+### `VEC_EMBED_COSINE_DISTANCE()`
 
 Calculates cosine similarity between a stored vector and a text query:
 
@@ -161,7 +161,7 @@ VEC_EMBED_COSINE_DISTANCE(vector_column, "query_text")
 
 Use this function in `ORDER BY` clauses to rank results by cosine distance. It uses the same calculation as [`VEC_COSINE_DISTANCE()`](/vector-search/vector-search-functions-and-operators.md#vec_cosine_distance), but automatically generates the embedding for the query text.
 
-### VEC_EMBED_L2_DISTANCE()
+### `VEC_EMBED_L2_DISTANCE()`
 
 Calculates L2 (Euclidean) distance between a stored vector and a text query:
 
