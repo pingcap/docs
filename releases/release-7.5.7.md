@@ -13,9 +13,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
 ## Compatibility changes
 
-<!--tw@Oreoxmt: 1 notes-->
+<!--tw@Oreoxmt: 2 notes-->
 
-- Change the default value of `tidb_enable_historical_stats` from `ON` to `OFF`, which turns off historical statistics to avoid potential stability issues [#53048](https://github.com/pingcap/tidb/issues/53048) @[hawkingrei](https://github.com/hawkingrei)
+- Change the default value of [`tidb_enable_historical_stats`](/system-variables.md#tidb_enable_historical_stats) from `ON` to `OFF`, which turns off historical statistics to avoid potential stability issues [#53048](https://github.com/pingcap/tidb/issues/53048) @[hawkingrei](https://github.com/hawkingrei)
+- TiKV deprecates the following configuration items and replaces them with the new [`gc.auto-compaction`](/tikv-configuration-file.md#gc.auto-compaction) configuration group, which controls automatic compaction behavior:
+
+    - Deprecated configuration items: [`region-compact-check-interval`](/tikv-configuration-file.md#region-compact-check-interval), [`region-compact-check-step`](/tikv-configuration-file.md#region-compact-check-step), [`region-compact-min-tombstones`](/tikv-configuration-file.md#region-compact-min-tombstones), [`region-compact-tombstones-percent`](/tikv-configuration-file.md#region-compact-tombstones-percent), [`region-compact-min-redundant-rows`](/tikv-configuration-file.md#region-compact-min-redundant-rows-new-in-v710), and [`region-compact-redundant-rows-percent`](/tikv-configuration-file.md#region-compact-redundant-rows-percent-new-in-v710).
+    - New configuration items: `gc.auto-compaction.check-interval`, `gc.auto-compaction.tombstone-num-threshold`, `gc.auto-compaction.tombstone-percent-threshold`, `gc.auto-compaction.redundant-rows-threshold`, `gc.auto-compaction.redundant-rows-percent-threshold`, and `gc.auto-compaction.bottommost-level-force`.
 
 ## Improvements
 
