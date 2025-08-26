@@ -1,25 +1,23 @@
 ---
-title: 使用 `tidbcloud_sql_user` 资源
-summary: 了解如何使用 `tidbcloud_sql_user` 资源来创建和修改 TiDB Cloud SQL 用户。
+title: 使用 SQL 用户资源
+summary: 了解如何使用 SQL 用户资源在 TiDB Cloud 中创建和修改 SQL 用户。
 ---
 
-# 使用 `tidbcloud_sql_user` 资源
+# 使用 SQL 用户资源
 
 本文档介绍如何使用 `tidbcloud_sql_user` 资源管理 TiDB Cloud SQL 用户。
 
 `tidbcloud_sql_user` 资源的功能包括：
 
-- 创建 TiDB Cloud SQL 用户
-- 修改 TiDB Cloud SQL 用户
-- 导入 TiDB Cloud SQL 用户
-- 删除 TiDB Cloud SQL 用户
+- 创建 TiDB Cloud SQL 用户。
+- 修改 TiDB Cloud SQL 用户。
+- 导入 TiDB Cloud SQL 用户。
+- 删除 TiDB Cloud SQL 用户。
 
 ## 前置条件
 
-- [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 或更高版本
-- 参考以下文档之一创建 TiDB Cloud 集群：
-    - [创建 Starter 或 Essential 集群](/tidb-cloud/create-tidb-cluster-serverless.md)
-    - [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)
+- [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 或更高版本。
+- [创建 TiDB Cloud 专属集群](/tidb-cloud/create-tidb-cluster.md) 或 [创建 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md)。
 
 ## 创建 SQL 用户
 
@@ -53,14 +51,14 @@ summary: 了解如何使用 `tidbcloud_sql_user` 资源来创建和修改 TiDB C
     }
     ```
 
-    使用 `resource` 块来定义 TiDB Cloud 的资源，包括资源类型、资源名称和资源详情。
+    使用 `resource` 块定义 TiDB Cloud 的资源，包括资源类型、资源名称和资源详情。
 
-    - 要使用 `tidbcloud_sql_user` 资源，需要将资源类型设置为 `tidbcloud_sql_user`。
+    - 要使用 SQL 用户资源，需要将资源类型设置为 `tidbcloud_sql_user`。
     - 资源名称可以根据需要自定义，例如 `example`。
-    - 对于 Starter 或 Essential 集群中的 SQL 用户，`user_name` 以及内置角色 `role_readonly` 和 `role_readwrite` 必须以用户前缀开头，你可以通过运行 `tidbcloud_serverless_cluster` 数据源获取用户前缀。
-    - 要获取 SQL 用户的详细规范信息，请参见 [`tidbcloud_sql_user` (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/sql_user)。
+    - 对于 TiDB Cloud Serverless 集群中的 SQL 用户，`user_name` 以及内置角色 `role_readonly` 和 `role_readwrite` 必须以用户前缀开头，你可以通过运行 `tidbcloud_serverless_cluster` 数据源获取用户前缀。
+    - 获取 SQL 用户的详细配置信息，请参见 [`tidbcloud_sql_user` (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/sql_user)。
 
-3. 运行 `terraform apply` 命令。在应用资源时，不建议使用 `terraform apply --auto-approve`。
+3. 运行 `terraform apply` 命令。应用资源时，不建议使用 `terraform apply --auto-approve`。
 
     ```shell
     $ terraform apply
@@ -90,11 +88,11 @@ summary: 了解如何使用 `tidbcloud_sql_user` 资源来创建和修改 TiDB C
 
     在上述结果中，Terraform 为你生成了一个执行计划，描述了 Terraform 将要执行的操作：
 
-    - 你可以检查配置和当前状态之间的差异。
+    - 你可以检查配置与当前状态之间的差异。
     - 你还可以看到本次 `apply` 的结果。它将新增一个资源，不会有资源被更改或销毁。
     - `known after apply` 表示你将在 `apply` 后获得对应的值。
 
-4. 如果你的计划没有问题，输入 `yes` 继续：
+4. 如果你的计划内容无误，输入 `yes` 继续：
 
     ```shell
     Do you want to perform these actions?
@@ -122,11 +120,11 @@ summary: 了解如何使用 `tidbcloud_sql_user` 资源来创建和修改 TiDB C
       }
     ```
 
-## 修改 SQL 用户的密码或角色
+## 修改 SQL 用户的密码或用户角色
 
-你可以通过 Terraform 修改 SQL 用户的密码或角色，操作如下：
+你可以通过 Terraform 修改 SQL 用户的密码或用户角色，方法如下：
 
-1. 在你 [创建 SQL 用户](#create-a-sql-user) 时使用的 `sql_user.tf` 文件中，修改 `password`、`builtin_role` 和 `custom_roles`（如适用）。
+1. 在你 [创建 SQL 用户](#create-a-sql-user) 时使用的 `sql_user.tf` 文件中，修改 `password`、`builtin_role` 以及（如适用）`custom_roles`。
 
     例如：
 
@@ -171,7 +169,7 @@ summary: 了解如何使用 `tidbcloud_sql_user` 资源来创建和修改 TiDB C
 
     在上述执行计划中，密码和内置角色将会被更改。
 
-3. 如果你的计划没有问题，输入 `yes` 继续：
+3. 如果你的计划内容无误，输入 `yes` 继续：
 
     ```shell
       Enter a value: yes
@@ -203,9 +201,9 @@ summary: 了解如何使用 `tidbcloud_sql_user` 资源来创建和修改 TiDB C
 
 例如，你可以按如下方式导入一个非 Terraform 创建的 SQL 用户：
 
-1. 为新的 `tidbcloud_sql_user` 资源添加 import 块。
+1. 为新的 SQL 用户资源添加 import 块
 
-    在你的 `.tf` 文件中添加如下 import 块，将 `example` 替换为你想要的资源名称，将 `${id}` 替换为 `cluster_id,user_name` 的格式：
+    在你的 `.tf` 文件中添加如下 import 块，将 `example` 替换为你期望的资源名称，将 `${id}` 替换为 `cluster_id,user_name` 的格式：
 
     ```
     import {
@@ -214,9 +212,9 @@ summary: 了解如何使用 `tidbcloud_sql_user` 资源来创建和修改 TiDB C
     }
     ```
 
-2. 生成新的配置文件。
+2. 生成新的配置文件
 
-    根据 import 块为新的 `tidbcloud_sql_user` 资源生成新的配置文件：
+    根据 import 块为新的 SQL 用户资源生成配置文件：
 
     ```shell
     terraform plan -generate-config-out=generated.tf
@@ -224,9 +222,9 @@ summary: 了解如何使用 `tidbcloud_sql_user` 资源来创建和修改 TiDB C
 
     上述命令中不要指定已存在的 `.tf` 文件名，否则 Terraform 会返回错误。
 
-    然后，当前目录下会生成 `generated.tf` 文件，包含被导入资源的配置信息。但由于未设置必需参数 `password`，provider 会抛出错误。你可以在生成的配置文件中为 `tidbcloud_sql_user` 资源的 `password` 参数赋值。
+    然后，当前目录下会生成 `generated.tf` 文件，包含了被导入资源的配置信息。但由于未设置必需参数 `password`，provider 会抛出错误。你可以在生成的配置文件中为 `tidbcloud_sql_user` 资源的 `password` 参数赋值。
 
-3. 审查并应用生成的配置。
+3. 审查并应用生成的配置
 
     审查生成的配置文件，确保其符合你的需求。你也可以选择将该文件内容移动到你喜欢的位置。
 

@@ -22,18 +22,18 @@ summary: 了解如何删除 TiDB 集群。
     - 如果你至少有一个手动或自动备份，你可以看到备份的数量以及备份的计费策略。点击 **Continue** 并输入 `<organization name>/<project name>/<cluster name>`。
     - 如果你没有任何备份，只需输入 `<organization name>/<project name>/<cluster name>`。
 
-    如果你希望将来恢复该集群，请确保你已经备份了该集群。否则，你将无法再恢复它。关于如何备份 TiDB Cloud Dedicated 集群的更多信息，请参见 [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md)。
+    如果你希望将来恢复该集群，请确保你已经对集群进行了备份。否则，将无法再恢复。关于如何备份 TiDB Cloud Dedicated 集群的更多信息，请参见 [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md)。
 
     > **注意：**
     >
-    > [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 和 [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) 集群在删除后不支持数据恢复。如果你想删除 {{{ .starter }}} 或 {{{ .essential }}} 集群并在将来恢复其数据，请参见 [Export Data from {{{ .starter }}} or Essential](/tidb-cloud/serverless-export.md) 将你的数据导出作为备份。
+    > [TiDB Cloud Serverless 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 在删除后不支持数据恢复。如果你想删除 TiDB Cloud Serverless 集群并在将来恢复其数据，请参见 [Export Data from TiDB Cloud Serverless](/tidb-cloud/serverless-export.md) 将你的数据导出作为备份。
 
 5. 点击 **I understand, delete it**。
 
     一旦已备份的 TiDB Cloud Dedicated 集群被删除，该集群现有的备份文件会被移动到回收站。
 
     - 自动备份将在保留期结束后过期并自动删除。如果你没有修改，默认保留期为 7 天。
-    - 手动备份会一直保留在回收站，直到被手动删除。
+    - 手动备份会一直保留在回收站，直到你手动删除。
 
     > **注意：**
     >

@@ -9,9 +9,9 @@ summary: 了解如何通过 SQL Shell 连接到你的 TiDB 集群。
 
 > **注意：**
 >
-> 你无法使用 SQL Shell 连接到 [Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 或 [Essential](/tidb-cloud/select-cluster-tier.md#essential)。要连接到你的 Serverless 或 Essential 集群，请参阅 [Connect to Serverless or Essential Cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md)。
+> 你无法使用 SQL Shell 连接到 [TiDB Cloud Serverless 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)。要连接到你的 TiDB Cloud Serverless 集群，请参阅 [连接到 TiDB Cloud Serverless 集群](/tidb-cloud/connect-to-tidb-cluster-serverless.md)。
 
-要使用 SQL shell 连接到你的 TiDB 集群，请执行以下步骤：
+要使用 SQL shell 连接到你的 TiDB 集群，请按照以下步骤操作：
 
 1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并导航到你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 

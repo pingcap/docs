@@ -7,7 +7,7 @@ summary: 了解如何在 TiDB Cloud 中使用客户管理的加密密钥（CMEK�
 
 客户管理的加密密钥（Customer-Managed Encryption Key，CMEK）允许你通过使用完全由你控制的对称加密密钥，保护 TiDB Cloud 专属集群中的静态数据安全。该密钥被称为 CMEK 密钥。
 
-一旦为项目启用 CMEK，该项目下创建的所有集群都会使用 CMEK 密钥对其静态数据进行加密。此外，这些集群生成的任何备份数据也会使用同一密钥进行加密。如果未启用 CMEK，TiDB Cloud 会使用托管密钥对你集群中的所有静态数据进行加密。
+一旦为项目启用 CMEK，该项目下创建的所有集群都会使用 CMEK 密钥对其静态数据进行加密。此外，这些集群生成的任何备份数据也会使用同一密钥进行加密。如果未启用 CMEK，TiDB Cloud 会使用托管密钥对集群中静态数据进行加密。
 
 > **注意：**
 >
@@ -17,8 +17,8 @@ summary: 了解如何在 TiDB Cloud 中使用客户管理的加密密钥（CMEK�
 ## 限制
 
 - 目前，TiDB Cloud 仅支持使用 AWS KMS 提供 CMEK。
-- 若要使用 CMEK，你需要在创建项目时启用 CMEK，并在创建集群前完成 CMEK 相关配置。无法为已有项目启用 CMEK。
-- 目前，在启用 CMEK 的项目中，只能创建托管于 AWS 的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
+- 若要使用 CMEK，需在创建项目时启用 CMEK，并在创建集群前完成 CMEK 相关配置。无法为已存在的项目启用 CMEK。
+- 目前，在启用 CMEK 的项目中，只能创建托管于 AWS 的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。不支持托管于其他云服务商的 TiDB Cloud Dedicated 集群和 [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 集群。
 - 目前，在启用 CMEK 的项目中，不支持 [双区域备份](/tidb-cloud/backup-and-restore-concepts.md#dual-region-backup)。
 - 目前，对于同一个项目，只能为一个 AWS 区域启用 CMEK。配置完成后，无法在同一项目下的其他区域创建集群。
 
@@ -26,17 +26,17 @@ summary: 了解如何在 TiDB Cloud 中使用客户管理的加密密钥（CMEK�
 
 如果你希望使用自己账户下的 KMS 对数据进行加密，请按照以下步骤操作。
 
-### 步骤 1. 创建启用 CMEK 的项目
+### 步骤 1. 创建支持 CMEK 的项目
 
-如果你拥有组织的 `Organization Owner` 角色，可以通过 TiDB Cloud 控制台或 API 创建启用 CMEK 的项目。
+如果你拥有组织的 `Organization Owner` 角色，可以通过 TiDB Cloud 控制台或 API 创建支持 CMEK 的项目。
 
 <SimpleTab groupId="method">
 <div label="Use Console" value="console">
 
-要创建启用 CMEK 的项目，请按照以下步骤操作：
+要创建支持 CMEK 的项目，请执行以下操作：
 
 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，使用左上角的下拉框切换到目标组织。
-2. 在左侧导航栏，点击 **Projects**。
+2. 在左侧导航栏点击 **Projects**。
 3. 在 **Projects** 页面，点击右上角的 **Create New Project**。
 4. 填写项目名称。
 5. 选择启用项目的 CMEK 能力。
@@ -58,15 +58,15 @@ summary: 了解如何在 TiDB Cloud 中使用客户管理的加密密钥（CMEK�
 
 > **注意：**
 >
-> 请确保密钥的策略符合要求，并且没有权限不足或账户问题等错误。这些错误可能导致使用该密钥创建集群失败。
+> 请确保密钥的策略符合要求，并且没有权限不足或账户问题等错误。这些错误可能导致集群无法正确使用该密钥创建。
 
 <SimpleTab groupId="method">
 <div label="Use Console" value="console">
 
-要完成项目的 CMEK 配置，请按照以下步骤操作：
+要完成项目的 CMEK 配置，请执行以下操作：
 
 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，使用左上角的下拉框切换到目标项目。
-2. 在左侧导航栏，点击 **Project Settings** > **Encryption Access**。
+2. 在左侧导航栏点击 **Project Settings** > **Encryption Access**。
 3. 在 **Encryption Access** 页面，点击 **Create Encryption Key** 进入密钥创建页面。
 4. 密钥提供方仅支持 AWS KMS。你可以选择加密密钥可用的区域。
 5. 复制并保存 JSON 文件为 `ROLE-TRUST-POLICY.JSON`。该文件描述了信任关系。
@@ -125,10 +125,10 @@ summary: 了解如何在 TiDB Cloud 中使用客户管理的加密密钥（CMEK�
     }
     ```
 
-    - `<pingcap-account>` 是你集群运行所在的账户。如果你不清楚该账户，请联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。
+    - `<pingcap-account>` 是你的集群运行所在的账户。如果你不清楚该账户，请联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。
     - `<region>` 是你希望创建集群的区域，例如 `us-west-2`。如果你不想指定区域，可以将 `<region>` 替换为通配符 `*`，并放在 `StringLike` 块中。
-    - 有关上述 EBS 相关策略的更多信息，请参考 [AWS documentation](https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-caller-account)。
-    - 有关上述 S3 相关策略的更多信息，请参考 [AWS blog](https://repost.aws/knowledge-center/s3-bucket-access-default-encryption)。
+    - 有关上述 EBS 相关策略，请参考 [AWS 文档](https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-caller-account)。
+    - 有关上述 S3 相关策略，请参考 [AWS 博客](https://repost.aws/knowledge-center/s3-bucket-access-default-encryption)。
 
 2. 调用 TiDB Cloud API 的 [Configure AWS CMEK](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateAwsCmek) 接口。
 
@@ -139,7 +139,7 @@ summary: 了解如何在 TiDB Cloud 中使用客户管理的加密密钥（CMEK�
 
 > **注意：**
 >
-> 该功能未来会进一步增强，后续功能可能需要额外的权限，因此该策略要求可能会发生变化。
+> 该功能未来会进一步增强，后续功能可能需要额外的权限。因此，该策略要求可能会发生变化。
 
 ### 步骤 3. 创建集群
 
@@ -151,9 +151,9 @@ summary: 了解如何在 TiDB Cloud 中使用客户管理的加密密钥（CMEK�
 
 ## 轮换 CMEK
 
-你可以在 AWS KMS 上配置 [自动 CMEK 轮换](http://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html)。启用轮换后，无需在 TiDB Cloud 项目的 **Encryption Access** 设置中更新，包括 CMEK ID。
+你可以在 AWS KMS 上配置 [自动 CMEK 轮换](http://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html)。启用轮换后，无需在 TiDB Cloud 项目的 **Encryption Access** 设置中更新 CMEK ID。
 
-## 撤销和恢复 CMEK
+## 撤销与恢复 CMEK
 
 如果你需要临时撤销 TiDB Cloud 对 CMEK 的访问权限，请按照以下步骤操作：
 
@@ -164,7 +164,7 @@ summary: 了解如何在 TiDB Cloud 中使用客户管理的加密密钥（CMEK�
 >
 > 在 AWS KMS 上撤销 CMEK 后，正在运行的集群不会受到影响。但当你暂停集群并尝试恢复时，由于无法访问 CMEK，集群将无法正常恢复。
 
-在撤销 TiDB Cloud 对 CMEK 的访问权限后，如果需要恢复访问权限，请按照以下步骤操作：
+撤销 TiDB Cloud 对 CMEK 的访问权限后，如果需要恢复访问权限，请按照以下步骤操作：
 
 1. 在 AWS KMS 控制台恢复 CMEK 访问策略。
 2. 在 TiDB Cloud 控制台恢复该项目下的所有集群。

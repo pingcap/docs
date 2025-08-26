@@ -9,7 +9,7 @@ TiDB Cloud 的监控为你提供了工具和集成，能够监督集群性能、
 
 ## 内置指标
 
-内置指标是指 TiDB Cloud 收集并在 **Metrics** 页面展示的集群标准指标全集。通过这些指标，你可以轻松识别性能问题，并判断当前的数据库部署是否满足你的需求。
+内置指标是指 TiDB Cloud 收集并在 **Metrics** 页面展示的集群全套标准指标。通过这些指标，你可以轻松识别性能问题，并判断当前的数据库部署是否满足你的需求。
 
 更多信息，参见 [TiDB Cloud Built-in Metrics](/tidb-cloud/built-in-monitoring.md)。
 

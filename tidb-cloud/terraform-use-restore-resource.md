@@ -1,9 +1,9 @@
 ---
-title: 使用 `tidbcloud_restore` 资源
-summary: 了解如何使用 `tidbcloud_restore` 资源来创建和修改恢复任务。
+title: 使用 Restore 资源
+summary: 了解如何使用 restore 资源。
 ---
 
-# 使用 `tidbcloud_restore` 资源
+# 使用 Restore 资源
 
 你可以在本文档中学习如何使用 `tidbcloud_restore` 资源来管理恢复任务。
 
@@ -14,7 +14,7 @@ summary: 了解如何使用 `tidbcloud_restore` 资源来创建和修改恢复�
 ## 前置条件
 
 - [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)。
-- 本文介绍的备份与恢复功能不适用于 starter 和 essential 集群。要使用 `tidbcloud_restore` 资源，请确保你已创建 TiDB Cloud 专属集群。
+- 备份与恢复功能不支持 TiDB Cloud Serverless 集群。要使用恢复资源，请确保你已创建 TiDB Cloud 专属集群。
 
 ## 创建恢复任务
 
@@ -181,7 +181,7 @@ summary: 了解如何使用 `tidbcloud_restore` 资源来创建和修改恢复�
 
 6. 当集群状态变为 `AVAILABLE` 后，恢复任务会变为 `RUNNING`，最终变为 `SUCCESS`。
 
-注意，恢复后的集群不会被 Terraform 管理。你可以通过[导入集群](/tidb-cloud/terraform-use-cluster-resource.md#import-a-cluster)来管理恢复后的集群。
+需要注意的是，恢复后的集群不会被 Terraform 管理。你可以通过[导入集群](/tidb-cloud/terraform-use-cluster-resource.md#import-a-cluster)来管理恢复后的集群。
 
 ## 更新恢复任务
 

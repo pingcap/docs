@@ -1,11 +1,11 @@
 ---
-title: 使用 `tidbcloud_backup` 资源
-summary: 了解如何使用 `tidbcloud_backup` 资源为 TiDB Cloud 集群创建备份。
+title: 使用 Backup 资源
+summary: 了解如何使用 backup 资源为 TiDB Cloud 集群创建备份。
 ---
 
-# 使用 `tidbcloud_backup` 资源
+# 使用 Backup 资源
 
-你可以通过本文档学习如何使用 `tidbcloud_backup` 资源为 TiDB Cloud 集群创建备份。
+你可以在本文档中学习如何使用 `tidbcloud_backup` 资源为 TiDB Cloud 集群创建备份。
 
 `tidbcloud_backup` 资源的功能包括：
 
@@ -15,9 +15,9 @@ summary: 了解如何使用 `tidbcloud_backup` 资源为 TiDB Cloud 集群创建
 ## 前置条件
 
 - [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)。
-- 本文介绍的备份与恢复功能不适用于 starter 或 essential 集群。要使用 `tidbcloud_backup` 资源，请确保你已创建 TiDB Cloud 专属集群。
+- 备份与恢复功能不支持 TiDB Cloud Serverless 集群。要使用备份资源，请确保你已创建 TiDB Cloud 专属集群。
 
-## 使用 `tidbcloud_backup` 资源创建备份
+## 使用 backup 资源创建备份
 
 1. 创建一个用于备份的目录并进入该目录。
 
@@ -48,7 +48,7 @@ summary: 了解如何使用 `tidbcloud_backup` 资源为 TiDB Cloud 集群创建
 
     你需要将文件中的资源值（如 project ID 和 cluster ID）替换为你自己的。
 
-    如果你已经通过 Terraform 管理了一个集群资源（例如 `example_cluster`），也可以如下配置 `tidbcloud_backup` 资源，无需指定实际的 project ID 和 cluster ID。
+    如果你已经通过 Terraform 管理了一个集群资源（例如 `example_cluster`），也可以如下配置备份资源，无需指定实际的 project ID 和 cluster ID。
 
     ```
     resource "tidbcloud_backup" "example_backup" {
@@ -147,7 +147,7 @@ summary: 了解如何使用 `tidbcloud_backup` 资源为 TiDB Cloud 集群创建
 
 当 status 变为 `SUCCESS` 时，表示你已为集群创建了备份。请注意，备份在创建后无法更新。
 
-现在，你已经为集群创建了备份。如果你想使用该备份恢复集群，可以[使用 `tidbcloud_restore` 资源](/tidb-cloud/terraform-use-restore-resource.md)。
+现在，你已经为集群创建了备份。如果你想使用该备份恢复集群，可以[使用 restore 资源](/tidb-cloud/terraform-use-restore-resource.md)。
 
 ## 更新备份
 
@@ -155,7 +155,7 @@ summary: 了解如何使用 `tidbcloud_backup` 资源为 TiDB Cloud 集群创建
 
 ## 删除备份
 
-要删除备份，请进入包含对应 `backup.tf` 文件的备份目录，然后运行 `terraform destroy` 命令以销毁 `tidbcloud_backup` 资源。
+要删除备份，请进入包含对应 `backup.tf` 文件的备份目录，然后运行 `terraform destroy` 命令销毁备份资源。
 
 ```
 $ terraform destroy

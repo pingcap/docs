@@ -1,21 +1,17 @@
 ---
 title:  使用 AWS DMS 将 Amazon RDS for Oracle 迁移到 TiDB Cloud
-summary: 学习如何使用 AWS 数据库迁移服务（AWS DMS）将数据从 Amazon RDS for Oracle 迁移到 {{{ .starter }}}。
+summary: 了解如何使用 AWS Database Migration Service (AWS DMS) 将数据从 Amazon RDS for Oracle 迁移到 TiDB Cloud Serverless。
 ---
 
 # 使用 AWS DMS 将 Amazon RDS for Oracle 迁移到 TiDB Cloud
 
-本文档描述了如何使用 AWS 数据库迁移服务（AWS DMS），将数据从 Amazon RDS for Oracle 迁移到 [{{{ .starter }}}](https://tidbcloud.com/clusters/create-cluster) 的分步示例。
-
-> **提示：**
->
-> 除了 {{{ .starter }}} 集群外，本文档中的步骤同样适用于 {{{ .essential }}} 集群。
+本文档描述了如何使用 AWS Database Migration Service (AWS DMS) 将数据从 Amazon RDS for Oracle 迁移到 [TiDB Cloud Serverless](https://tidbcloud.com/clusters/create-cluster) 的分步示例。
 
 如果你想了解更多关于 TiDB Cloud 和 AWS DMS 的信息，请参阅以下内容：
 
 - [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)
-- [TiDB 开发者指南](https://docs.pingcap.com/tidbcloud/dev-guide-overview)
-- [AWS DMS 文档](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.html)
+- [TiDB Developer Guide](https://docs.pingcap.com/tidbcloud/dev-guide-overview)
+- [AWS DMS Documentation](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.html)
 
 ## 为什么使用 AWS DMS？
 
@@ -28,10 +24,10 @@ AWS DMS 是一项云服务，可以实现关系型数据库、数据仓库、NoS
 总体上，按照以下步骤操作：
 
 1. 搭建源端 Amazon RDS for Oracle。
-2. 搭建目标端 [{{{ .starter }}}](https://tidbcloud.com/project/clusters/create-cluster)。
+2. 搭建目标端 [TiDB Cloud Serverless](https://tidbcloud.com/project/clusters/create-cluster)。
 3. 使用 AWS DMS 设置数据迁移（全量加载）。
 
-下图展示了高层次的架构示意。
+下图展示了高层次的架构。
 
 ![Architecture](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-0.png)
 
@@ -48,7 +44,7 @@ AWS DMS 是一项云服务，可以实现关系型数据库、数据仓库、NoS
 
 ## 步骤 1. 创建 VPC
 
-登录 [AWS 控制台](https://console.aws.amazon.com/vpc/home#vpcs:) 并创建一个 AWS VPC。你需要在该 VPC 中创建 Oracle RDS 和 DMS 实例。
+登录 [AWS 控制台](https://console.aws.amazon.com/vpc/home#vpcs:) 并创建一个 AWS VPC。你需要在该 VPC 中后续创建 Oracle RDS 和 DMS 实例。
 
 关于如何创建 VPC 的详细说明，请参阅 [创建 VPC](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#Create-VPC)。
 
@@ -56,9 +52,9 @@ AWS DMS 是一项云服务，可以实现关系型数据库、数据仓库、NoS
 
 ## 步骤 2. 创建 Oracle 数据库实例
 
-在你刚刚创建的 VPC 中创建一个 Oracle 数据库实例，并记住密码，同时授予其公网访问权限。你必须启用公网访问才能使用 AWS Schema Conversion Tool。注意，在生产环境中不推荐授予公网访问权限。
+在你刚刚创建的 VPC 中创建一个 Oracle 数据库实例，并记住密码，同时授予其公网访问权限。你必须启用公网访问以使用 AWS Schema Conversion Tool。注意，在生产环境中不推荐授予公网访问权限。
 
-关于如何创建 Oracle 数据库实例的详细说明，请参阅 [创建 Oracle 数据库实例并连接到数据库](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html)。
+关于如何创建 Oracle 数据库实例的详细说明，请参阅 [创建 Oracle 数据库实例并连接数据库](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html)。
 
 ![Create Oracle RDS](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-2.png)
 
@@ -73,11 +69,11 @@ AWS DMS 是一项云服务，可以实现关系型数据库、数据仓库、NoS
 
 ![Oracle RDS Data](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-3.png)
 
-## 步骤 4. 创建 {{{ .starter }}} 集群
+## 步骤 4. 创建 TiDB Cloud Serverless 集群
 
 1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/project/clusters)。
 
-2. [创建一个 {{{ .starter }}} 集群](/tidb-cloud/tidb-cloud-quickstart.md)。
+2. [创建 TiDB Cloud Serverless 集群](/tidb-cloud/tidb-cloud-quickstart.md)。
 
 3. 在 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称进入其概览页面。
 
@@ -87,19 +83,19 @@ AWS DMS 是一项云服务，可以实现关系型数据库、数据仓库、NoS
 
 ## 步骤 5. 创建 AWS DMS 复制实例
 
-1. 进入 AWS DMS 控制台的 [Replication instances](https://console.aws.amazon.com/dms/v2/home#replicationInstances) 页面，并切换到对应的区域。
+1. 进入 AWS DMS 控制台的 [Replication instances](https://console.aws.amazon.com/dms/v2/home#replicationInstances) 页面，并切换到对应区域。
 
-2. 在 VPC 中创建一个 `dms.t3.large` 类型的 AWS DMS 复制实例。
+2. 在 VPC 中创建一个 `dms.t3.large` 的 AWS DMS 复制实例。
 
     ![Create AWS DMS Instance](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-8.png)
 
-> **注意：**
+> **Note:**
 >
-> 有关创建可用于 {{{ .starter }}} 的 AWS DMS 复制实例的详细步骤，请参阅 [连接 AWS DMS 到 TiDB Cloud 集群](/tidb-cloud/tidb-cloud-connect-aws-dms.md)。
+> 关于创建可用于 TiDB Cloud Serverless 的 AWS DMS 复制实例的详细步骤，请参阅 [连接 AWS DMS 到 TiDB Cloud 集群](/tidb-cloud/tidb-cloud-connect-aws-dms.md)。
 
 ## 步骤 6. 创建 DMS 端点
 
-1. 在 [AWS DMS 控制台](https://console.aws.amazon.com/dms/v2/home) 左侧菜单点击 `Endpoints`。
+1. 在 [AWS DMS 控制台](https://console.aws.amazon.com/dms/v2/home) 左侧点击 `Endpoints` 菜单项。
 
 2. 创建 Oracle 源端点和 TiDB 目标端点。
 
@@ -111,9 +107,9 @@ AWS DMS 是一项云服务，可以实现关系型数据库、数据仓库、NoS
 
     ![Create AWS DMS Target endpoint](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-10.png)
 
-> **注意：**
+> **Note:**
 >
-> 有关创建 {{{ .starter }}} DMS 端点的详细步骤，请参阅 [连接 AWS DMS 到 TiDB Cloud 集群](/tidb-cloud/tidb-cloud-connect-aws-dms.md)。
+> 关于创建 TiDB Cloud Serverless DMS 端点的详细步骤，请参阅 [连接 AWS DMS 到 TiDB Cloud 集群](/tidb-cloud/tidb-cloud-connect-aws-dms.md)。
 
 ## 步骤 7. 迁移表结构
 
@@ -143,13 +139,13 @@ AWS DMS 是一项云服务，可以实现关系型数据库、数据仓库、NoS
 
 ## 步骤 9. 检查下游 TiDB 集群中的数据
 
-连接到 [{{{ .starter }}} 集群](https://tidbcloud.com/clusters/create-cluster)，检查 `admin.github_event` 表中的数据。如下面截图所示，DMS 已成功迁移表 `github_events` 及 10000 行数据。
+连接到 [TiDB Cloud Serverless 集群](https://tidbcloud.com/clusters/create-cluster)，检查 `admin.github_event` 表中的数据。如下面截图所示，DMS 已成功迁移表 `github_events` 及 10000 行数据。
 
 ![Check Data In TiDB](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-14.png)
 
 ## 总结
 
-通过 AWS DMS，你可以按照本文档的示例成功地将数据从任意上游 AWS RDS 数据库迁移。
+通过 AWS DMS，你可以按照本文档的示例成功将数据从任意上游 AWS RDS 数据库迁移。
 
 如果在迁移过程中遇到任何问题或失败，可以在 [CloudWatch](https://console.aws.amazon.com/cloudwatch/home) 中查看日志信息以排查问题。
 

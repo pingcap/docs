@@ -7,16 +7,16 @@ summary: 学习如何使用 Data App 的 OpenAPI 规范生成客户端代码并�
 
 本文介绍如何使用 [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) 的 OpenAPI 规范生成客户端代码，并开发 Next.js 应用。
 
-## 在开始之前
+## 开始之前
 
 在将 OpenAPI 规范与 Next.js 配合使用之前，请确保你已具备以下条件：
 
-- 一个 TiDB 集群。更多信息，参见 [创建 Starter 或 Essential 集群](/tidb-cloud/create-tidb-cluster-serverless.md) 或 [创建 TiDB Cloud 专属集群](/tidb-cloud/create-tidb-cluster.md)。
+- 一个 TiDB 集群。更多信息，参见 [创建 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md) 或 [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)。
 - [Node.js](https://nodejs.org/en/download)
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - [yarn](https://yarnpkg.com/getting-started/install)
 
-本文以 Starter 集群为例。
+本文以 TiDB Cloud Serverless 集群为例。
 
 ## 步骤 1. 准备数据
 
@@ -45,7 +45,7 @@ VALUES ('tidb', 'https://github.com/pingcap/tidb'),
 
 ## 步骤 2. 创建 Data App
 
-数据插入完成后，前往 [TiDB Cloud 控制台](https://tidbcloud.com)的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。创建一个关联到你的 TiDB 集群的 Data App，为该 Data App 创建 API 密钥，并在 Data App 中创建一个 `GET /repositories` 的接口。该接口对应的 SQL 语句如下，用于查询 `test.repository` 表中的所有行：
+数据插入完成后，前往 [TiDB Cloud 控制台](https://tidbcloud.com)的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。创建一个关联到你的 TiDB 集群的 Data App，为该 Data App 创建一个 API key，然后在 Data App 中创建一个 `GET /repositories` 的 endpoint。该 endpoint 对应的 SQL 语句如下，用于查询 `test.repository` 表中的所有行：
 
 ```sql
 SELECT * FROM test.repository;
@@ -71,7 +71,7 @@ SELECT * FROM test.repository;
     cd hello-repos
     ```
 
-2. 安装依赖项。
+2. 安装依赖。
 
     本文使用 [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) 根据 OpenAPI 规范自动生成 API 客户端库。
 
@@ -139,22 +139,22 @@ SELECT * FROM test.repository;
     yarn run openapi-generator-cli generate -i oas/doc.json --generator-name typescript-fetch -o gen/api
     ```
 
-    该命令会以 `oas/doc.json` 规范为输入，生成客户端代码并输出到 `gen/api` 目录。
+    该命令以 `oas/doc.json` 规范为输入，生成客户端代码并输出到 `gen/api` 目录。
 
 ## 步骤 4. 开发你的 Next.js 应用
 
 你可以使用生成的客户端代码开发 Next.js 应用。
 
-1. 在 `hello-repos` 项目目录下，创建 `.env.local` 文件，并添加以下变量，然后将变量值设置为你的 Data App 的公钥和私钥。
+1. 在 `hello-repos` 项目目录下，创建 `.env.local` 文件，并添加以下变量，然后将变量值设置为你的 Data App 的 public key 和 private key。
 
     ```
     TIDBCLOUD_DATA_SERVICE_PUBLIC_KEY=YOUR_PUBLIC_KEY
     TIDBCLOUD_DATA_SERVICE_PRIVATE_KEY=YOUR_PRIVATE_KEY
     ```
 
-    有关如何为 Data App 创建 API 密钥，参见 [创建 API 密钥](/tidb-cloud/data-service-api-key.md#create-an-api-key)。
+    有关如何为 Data App 创建 API key，参见 [创建 API key](/tidb-cloud/data-service-api-key.md#create-an-api-key)。
 
-2. 在 `hello-repos` 项目目录下，将 `app/page.tsx` 的内容替换为以下代码，该代码会从 `GET /repositories` 接口获取数据并进行渲染：
+2. 在 `hello-repos` 项目目录下，将 `app/page.tsx` 的内容替换为以下代码，该代码会从 `GET /repositories` endpoint 获取数据并进行渲染：
 
     ```js
     import {DefaultApi, Configuration} from "../gen/api"
@@ -192,13 +192,13 @@ SELECT * FROM test.repository;
     >    });
     >  ```
     >
-    > 请确保将 `basePath` 替换为你的 Data App 实际的 endpoint 路径。要获取 `${YOUR_REGION}` 和 `{YOUR_DATA_APP_ID}`，请在接口 **Properties** 面板中查看 **Endpoint URL**。
+    > 请确保将 `basePath` 替换为你的 Data App 实际的 endpoint 路径。要获取 `${YOUR_REGION}` 和 `{YOUR_DATA_APP_ID}`，请在 endpoint 的 **Properties** 面板中查看 **Endpoint URL**。
 
 ## 步骤 5. 预览你的 Next.js 应用
 
 > **注意：**
 >
-> 在预览前，请确保所有必需的依赖项已安装并正确配置。
+> 在预览前，请确保所有必需的依赖已安装并正确配置。
 
 要在本地开发服务器中预览你的应用，请运行以下命令：
 

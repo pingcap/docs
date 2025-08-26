@@ -6,13 +6,13 @@ aliases: ['/tidbcloud/use-htap-cluster']
 
 # TiDB Cloud HTAP 快速入门
 
-[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) 指的是混合事务与分析处理（Hybrid Transactional and Analytical Processing）。TiDB Cloud 中的 HTAP 集群由 [TiKV](https://tikv.org)（为事务处理设计的行存储引擎）和 [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)（为分析处理设计的列存储引擎）组成。你的应用数据首先存储在 TiKV 中，然后通过 Raft 共识算法实时同步到 TiFlash。因此，这是从行存储到列存储的实时复制。
+[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) 指的是混合事务与分析处理。TiDB Cloud 中的 HTAP 集群由 [TiKV](https://tikv.org)（为事务处理设计的行存储引擎）和 [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)（为分析处理设计的列存储引擎）组成。你的应用数据首先存储在 TiKV 中，然后通过 Raft 共识算法实时同步到 TiFlash。因此，这是从行存储到列存储的实时复制。
 
 本教程将引导你以简单的方式体验 TiDB Cloud 的混合事务与分析处理（HTAP）特性。内容包括如何将表复制到 TiFlash、如何使用 TiFlash 运行查询，以及如何体验性能提升。
 
 ## 开始之前
 
-在体验 HTAP 特性之前，请按照 [TiDB Cloud 快速入门](/tidb-cloud/tidb-cloud-quickstart.md) 创建一个 {{{ .starter }}} 集群，并将 **Steam Game Stats** 示例数据集导入到集群中。
+在体验 HTAP 特性之前，请按照 [TiDB Cloud 快速入门](/tidb-cloud/tidb-cloud-quickstart.md) 创建一个 TiDB Cloud Serverless 集群，并将 **Steam Game Stats** 示例数据集导入到该集群中。
 
 ## 操作步骤
 
@@ -20,7 +20,7 @@ aliases: ['/tidbcloud/use-htap-cluster']
 
 创建包含 TiFlash 节点的集群后，TiKV 默认不会将数据复制到 TiFlash。你需要在 TiDB 的 MySQL 客户端中执行 DDL 语句，指定需要复制的表。之后，TiDB 会在 TiFlash 中相应地创建指定表的副本。
 
-例如，要将（**Steam Game Stats** 示例数据集中的）`games` 表复制到 TiFlash，执行以下语句：
+例如，要将（**Steam Game Stats** 示例数据集中的）`games` 表复制到 TiFlash，可以执行以下语句：
 
 ```sql
 USE game;
@@ -30,7 +30,7 @@ USE game;
 ALTER TABLE games SET TIFLASH REPLICA 2;
 ```
 
-要检查复制进度，执行以下语句：
+要检查复制进度，可以执行以下语句：
 
 ```sql
 SELECT TABLE_SCHEMA, TABLE_NAME, TABLE_ID, REPLICA_COUNT, LOCATION_LABELS, AVAILABLE, PROGRESS FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'game' and TABLE_NAME = 'games';
@@ -47,7 +47,7 @@ SELECT TABLE_SCHEMA, TABLE_NAME, TABLE_ID, REPLICA_COUNT, LOCATION_LABELS, AVAIL
 
 在上述语句的结果中：
 
-- `AVAILABLE` 表示某个表的 TiFlash 副本是否可用。`1` 表示可用，`0` 表示不可用。一旦副本变为可用，该状态不会再变化。
+- `AVAILABLE` 表示指定表的 TiFlash 副本是否可用。`1` 表示可用，`0` 表示不可用。一旦副本变为可用，该状态不会再变化。
 - `PROGRESS` 表示复制的进度。取值范围为 `0` 到 `1`。`1` 表示至少有一个副本已完成复制。
 
 ### 步骤 2. 使用 HTAP 查询数据

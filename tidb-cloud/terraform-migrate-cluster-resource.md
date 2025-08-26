@@ -5,7 +5,7 @@ summary: 了解如何将集群资源迁移到无服务器或专用集群资源�
 
 # 将集群资源迁移到无服务器或专用集群资源
 
-从 TiDB Cloud Terraform Provider v0.4.0 开始，`tidbcloud_cluster` 资源被两个新资源所替代：`tidbcloud_serverless_cluster` 和 `tidbcloud_dedicated_cluster`。如果你正在使用 TiDB Cloud Terraform Provider v0.4.0 或更高版本，可以按照本文档将你的 `tidbcloud_cluster` 资源迁移到 `tidbcloud_serverless_cluster` 或 `tidbcloud_dedicated_cluster` 资源。
+从 TiDB Cloud Terraform Provider v0.4.0 开始，`tidbcloud_cluster` 资源被两个新资源所取代：`tidbcloud_serverless_cluster` 和 `tidbcloud_dedicated_cluster`。如果你正在使用 TiDB Cloud Terraform Provider v0.4.0 或更高版本，可以按照本文档将你的 `tidbcloud_cluster` 资源迁移到 `tidbcloud_serverless_cluster` 或 `tidbcloud_dedicated_cluster` 资源。
 
 > **Tip:**
 >
@@ -41,19 +41,19 @@ terraform state rm ${your_target_cluster_resource}
 
 在你的 `.tf` 文件中，找到目标集群资源的配置并删除对应的代码。
 
-## 第 4 步：为新集群资源添加 import 块
+## 第 4 步：为新的无服务器或专用集群资源添加 import 块
 
-- 如果你的目标集群是 {{{ .starter }}}，请将以下 import 块添加到你的 `.tf` 文件中，将 `example` 替换为你期望的资源名称，并将 `${id}` 替换为你在 [第 1 步](#第-1-步识别需要迁移的-tidbcloud_cluster-资源) 获取的集群 ID：
+- 如果你的目标集群是 TiDB Cloud Serverless，请将以下 import 块添加到你的 `.tf` 文件中，将 `example` 替换为你期望的资源名称，并将 `${id}` 替换为你在 [第 1 步](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate) 获取的集群 ID：
 
     ```
-    # {{{ .starter }}}
+    # TiDB Cloud Serverless
     import {
       to = tidbcloud_serverless_cluster.example
       id = "${id}"
     }
     ```
 
-- 如果你的目标集群是 TiDB Cloud Dedicated，请将以下 import 块添加到你的 `.tf` 文件中，将 `example` 替换为你期望的资源名称，并将 `${id}` 替换为你在 [第 1 步](#第-1-步识别需要迁移的-tidbcloud_cluster-资源) 获取的集群 ID：
+- 如果你的目标集群是 TiDB Cloud Dedicated，请将以下 import 块添加到你的 `.tf` 文件中，将 `example` 替换为你期望的资源名称，并将 `${id}` 替换为你在 [第 1 步](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate) 获取的集群 ID：
 
     ```
     # TiDB Cloud Dedicated

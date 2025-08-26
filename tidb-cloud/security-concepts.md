@@ -5,27 +5,27 @@ summary: 了解 TiDB Cloud 的安全概念。
 
 # Security
 
-TiDB Cloud 提供了一个强大且灵活的安全框架，旨在保护数据、实施访问控制，并满足现代合规标准。该框架将先进的安全特性与高效的运维能力相结合，以支持大规模组织的需求。
+TiDB Cloud 提供了强大且灵活的安全框架，旨在保护数据、实施访问控制，并满足现代合规标准。该框架将先进的安全特性与高效的运维能力相结合，以支持大规模组织的需求。
 
 **Key components**
 
 - **Identity and Access Management (IAM)**：为 TiDB Cloud 控制台和数据库环境提供安全且灵活的身份认证与权限管理。
 
-- **Network access control**：可配置的连接选项，包括私有终端节点、VPC 对等、TLS 加密和 IP 访问列表。
+- **Network access control**：可配置的连接选项，包括私有终端节点、VPC 对等连接、TLS 加密和 IP 访问列表。
 
 - **Data access control**：高级加密能力，如 Customer-Managed Encryption Keys (CMEK)，用于保护静态数据安全。
 
-- **Audit logging**：对控制台操作和数据库操作进行全面的活动追踪，确保问责和透明。
+- **Audit logging**：对控制台操作和数据库操作的全面活动追踪，确保问责性和透明性。
 
 通过集成这些能力，TiDB Cloud 使组织能够保护敏感数据、简化访问控制并优化安全运维。
 
 ## Identity and access management (IAM)
 
-TiDB Cloud 采用身份与访问管理（IAM）来安全高效地管理控制台和数据库环境中的用户身份和权限。IAM 功能通过多种认证选项、基于角色的访问控制以及分层资源结构，满足组织的安全与合规需求。
+TiDB Cloud 采用 Identity and Access Management (IAM) 来安全高效地管理控制台和数据库环境中的用户身份与权限。IAM 功能通过多种认证选项、基于角色的访问控制以及分层资源结构，满足组织的安全与合规需求。
 
 ### TiDB Cloud user accounts
 
-TiDB Cloud 用户账户是管理身份和访问资源的基础。每个账户代表平台内的个人或实体，并支持多种认证方式以适应组织需求：
+TiDB Cloud 用户账户是管理资源身份和访问的基础。每个账户代表平台内的个人或实体，并支持多种认证方式以适应组织需求：
 
 - **Default username and password**
 
@@ -47,7 +47,7 @@ TiDB Cloud 用户账户是管理身份和访问资源的基础。每个账户代
 
     - 通过 OIDC 或 SAML 协议与企业身份提供方（IdP）集成。
 
-    - 支持如 MFA 强制、密码过期策略和域名限制等功能。
+    - 支持 MFA 强制、密码过期策略和域名限制等功能。
 
     - **Best practice**：适用于有高级安全和合规要求的大型组织。
 
@@ -164,9 +164,9 @@ TiDB Cloud 通过强大的网络访问控制，确保集群连接和数据传输
 
 ### Private endpoints
 
-- 允许你在自己的虚拟私有云（VPC）内安全连接到 TiDB Cloud Dedicated 集群。
+- 允许你在自己的 Virtual Private Cloud (VPC) 内安全连接到 TiDB Cloud Dedicated 集群。
 
-- 支持 [AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md)、[Azure Private Link](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)、[Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md) 和 [Alibaba Cloud Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)。
+- 支持 [AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md)、[Azure Private Link](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md) 和 [Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)。
 
 **Best practices:** 在生产环境中使用私有终端节点以最小化公网暴露，并定期检查配置。
 
@@ -174,10 +174,7 @@ TiDB Cloud 通过强大的网络访问控制，确保集群连接和数据传输
 
 - 加密客户端与服务器之间的通信，保障数据传输安全。
 
-- 配置指南：
-
-    - [TLS Connections to {{{ .starter }}} or Essential](/tidb-cloud/secure-connections-to-serverless-clusters.md)
-    - [TLS Connections to TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
+- 提供 [Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md) 和 [Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md) 集群的配置指南。
 
 **Best practices:** 确保 TLS 证书为最新，并定期轮换。
 
@@ -195,7 +192,7 @@ TiDB Cloud 通过强大的网络访问控制，确保集群连接和数据传输
 
 - 详细信息参见 [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md)。
 
-**Best practices:** 定期审计和更新访问列表以保持安全。
+**Best practices:** 定期审计和更新访问列表，确保安全。
 
 ## Data access control
 
@@ -203,19 +200,19 @@ TiDB Cloud 通过高级加密能力保护静态数据，确保安全性并符合
 
 **Customer-Managed Encryption Key (CMEK)**
 
-- 让组织对 TiDB Cloud Dedicated 集群的加密拥有完全控制权。
+- 为组织提供对 TiDB Cloud Dedicated 集群加密的完全控制权。
 
 - 启用后，使用 CMEK 密钥对静态数据和备份进行加密。
 
-- 对于未启用 CMEK 的 TiDB Cloud Dedicated 集群，TiDB Cloud 使用托管密钥；{{{ .starter }}} 和 {{{ .essential }}} 集群仅依赖托管密钥。
+- 对于未启用 CMEK 的 TiDB Cloud Dedicated 集群，TiDB Cloud 使用托管密钥；TiDB Cloud Serverless 集群仅依赖托管密钥。
 
 **Best practices:**
 
-- 定期轮换 CMEK 密钥，以增强安全性并满足合规标准。
+- 定期轮换 CMEK 密钥，以提升安全性并满足合规标准。
 
-- 始终使用 CMEK 密钥加密备份，提升保护力度。
+- 始终使用 CMEK 密钥加密备份，增强保护。
 
-- 针对如 HIPAA 和 GDPR 等有严格合规要求的行业，优先使用 CMEK。
+- 针对如 HIPAA 和 GDPR 等有严格合规要求的行业，建议使用 CMEK。
 
 详细信息参见 [Encryption at Rest Using Customer-Managed Encryption Keys](/tidb-cloud/tidb-cloud-encrypt-cmek.md)。
 
@@ -231,7 +228,7 @@ TiDB Cloud 提供全面的审计日志功能，用于监控用户活动和数据
 
 - 将日志集成到 SIEM 工具，实现实时监控和告警。
 
-- 设置日志保留策略以满足合规要求。
+- 设置日志保留策略，以满足合规要求。
 
 ### Database audit logging
 
@@ -239,7 +236,7 @@ TiDB Cloud 提供全面的审计日志功能，用于监控用户活动和数据
 
 **Best practices:**
 
-- 定期审查日志，发现异常活动或未授权访问。
+- 定期检查日志，发现异常活动或未授权访问。
 
 - 利用日志进行合规报告和取证分析。
 

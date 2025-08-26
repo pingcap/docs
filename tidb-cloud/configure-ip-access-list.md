@@ -9,7 +9,7 @@ summary: 了解如何配置允许访问你的 TiDB Cloud Dedicated 集群的 IP 
 
 > **注意：**
 >
-> 本文档适用于 [**TiDB Cloud Dedicated**](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)。关于为 **{{{ .starter }}}** 或 **{{{ .essential }}}** 配置 IP 访问列表的说明，请参见 [为 {{{ .starter }}} 或 Essential 公共端点配置防火墙规则](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)。
+> 本文档适用于 [**TiDB Cloud Dedicated**](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)。如果你需要为 **TiDB Cloud Serverless** 配置 IP 访问列表，请参见 [Configure TiDB Cloud Serverless Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)。
 
 要为你的 TiDB Cloud Dedicated 集群配置 IP 访问列表，请按照以下步骤操作：
 

@@ -1,19 +1,19 @@
 ---
-title: SQL 代理账号
+title: SQL Proxy Account
 summary: 了解 TiDB Cloud 中的 SQL 代理账号。
 ---
 
 # SQL 代理账号
 
-SQL 代理账号是 TiDB Cloud 自动为 TiDB Cloud 用户创建的 SQL 用户账号，用于通过 [SQL 编辑器](/tidb-cloud/explore-data-with-chat2query.md) 或 [数据服务](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice) 代表用户访问数据库。例如，`testuser@pingcap.com` 是一个 TiDB Cloud 用户账号，而 `3jhEcSimm7keKP8.testuser._41mqK6H4` 是其对应的 SQL 代理账号。
+SQL 代理账号是 TiDB Cloud 自动为 TiDB Cloud 用户创建的 SQL 用户账号，用于通过 [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) 或 [Data Service](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice) 代表用户访问数据库。例如，`testuser@pingcap.com` 是一个 TiDB Cloud 用户账号，而 `3jhEcSimm7keKP8.testuser._41mqK6H4` 则是其对应的 SQL 代理账号。
 
-SQL 代理账号为在 TiDB Cloud 中访问数据库提供了一种安全的、基于令牌的认证机制。通过消除传统的用户名和密码凭证，SQL 代理账号提升了安全性并简化了访问管理。
+SQL 代理账号为在 TiDB Cloud 中访问数据库提供了一种安全的、基于令牌的身份验证机制。通过消除传统的用户名和密码凭证，SQL 代理账号提升了安全性并简化了访问管理。
 
 SQL 代理账号的主要优势如下：
 
 - 增强安全性：通过使用 JWT 令牌，降低了与静态凭证相关的风险。
-- 精简访问：仅限于 SQL 编辑器和数据服务访问，确保精确的访问控制。
-- 易于管理：简化了开发者和管理员在 TiDB Cloud 上的认证流程。
+- 精简访问控制：仅限于 SQL Editor 和 Data Service 访问，确保精确的权限管理。
+- 易于管理：为开发者和管理员简化了 TiDB Cloud 的身份验证流程。
 
 ## 识别 SQL 代理账号
 
@@ -44,47 +44,47 @@ SQL 代理账号的主要优势如下：
 
 ## SQL 代理账号用户名
 
-在某些情况下，SQL 代理账号的用户名与 TiDB Cloud 用户名完全相同，但在其他情况下则不完全相同。SQL 代理账号的用户名由 TiDB Cloud 用户邮箱地址的长度决定。规则如下：
+在某些情况下，SQL 代理账号的用户名与 TiDB Cloud 用户名完全相同，但在其他情况下则不完全相同。SQL 代理账号的用户名由 TiDB Cloud 用户邮箱地址的长度决定，规则如下：
 
 | 环境 | 邮箱长度 | 用户名格式 |
 | ----------- | ------------ | --------------- |
-| TiDB Cloud 专属版 | <= 32 个字符 | 完整邮箱地址 |
-| TiDB Cloud 专属版 | > 32 个字符 | `prefix($email, 23)_prefix(base58(sha1($email)), 8)` |
-| serverless | <= 15 个字符 | `serverless_unique_prefix + "." + email` |
-| serverless | > 15 个字符 | `serverless_unique_prefix + "." + prefix($email, 6)_prefix(base58(sha1($email)), 8)` |
+| TiDB Cloud Dedicated | <= 32 个字符 | 完整邮箱地址 |
+| TiDB Cloud Dedicated | > 32 个字符 | `prefix($email, 23)_prefix(base58(sha1($email)), 8)` |
+| TiDB Cloud Serverless | <= 15 个字符 | `serverless_unique_prefix + "." + email` |
+| TiDB Cloud Serverless | > 15 个字符 | `serverless_unique_prefix + "." + prefix($email, 6)_prefix(base58(sha1($email)), 8)` |
 
 示例：
 
 | 环境 | 邮箱地址 | SQL 代理账号用户名 |
 | ----------- | ----- | -------- |
-| TiDB Cloud 专属版 | `user@pingcap.com` | `user@pingcap.com` |
-| TiDB Cloud 专属版 | `longemailaddressexample@pingcap.com` | `longemailaddressexample_48k1jwL9` |
-| serverless | `u1@pingcap.com` | `{user_name_prefix}.u1@pingcap.com` |
-| serverless | `longemailaddressexample@pingcap.com` | `{user_name_prefix}.longem_48k1jwL9`|
+| TiDB Cloud Dedicated | `user@pingcap.com` | `user@pingcap.com` |
+| TiDB Cloud Dedicated | `longemailaddressexample@pingcap.com` | `longemailaddressexample_48k1jwL9` |
+| TiDB Cloud Serverless | `u1@pingcap.com` | `{user_name_prefix}.u1@pingcap.com` |
+| TiDB Cloud Serverless | `longemailaddressexample@pingcap.com` | `{user_name_prefix}.longem_48k1jwL9`|
 
 > **Note:**
 >
-> 在上表中，`{user_name_prefix}` 是 TiDB Cloud 为区分 serverless 集群而生成的唯一前缀。详情请参见 serverless 集群的 [用户名前缀](/tidb-cloud/select-cluster-tier.md#user-name-prefix)。
+> 在上表中，`{user_name_prefix}` 是 TiDB Cloud 为区分 TiDB Cloud Serverless 集群而生成的唯一前缀。详情请参见 TiDB Cloud Serverless 集群的 [user name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix)。
 
 ## SQL 代理账号密码
 
-由于 SQL 代理账号基于 JWT 令牌认证，因此无需为这些账号管理密码。安全令牌由系统自动管理。
+由于 SQL 代理账号基于 JWT 令牌，因此无需为这些账号管理密码。安全令牌由系统自动管理。
 
 ## SQL 代理账号角色
 
 SQL 代理账号的角色取决于 TiDB Cloud 用户的 IAM 角色：
 
 - 组织级别：
-    - 组织所有者：role_admin
-    - 组织账单管理员：无代理账号
-    - 组织查看者：无代理账号
-    - 组织控制台审计管理员：无代理账号
+    - Organization Owner: role_admin
+    - Organization Billing Manager: 无代理账号
+    - Organization Viewer: 无代理账号
+    - Organization Console Audit Manager: 无代理账号
 
 - 项目级别：
-    - 项目所有者：role_admin
-    - 项目数据访问读写：role_readwrite
-    - 项目数据访问只读：role_readonly
+    - Project Owner: role_admin
+    - Project Data Access Read-Write: role_readwrite
+    - Project Data Access Read-Only: role_readonly
 
 ## SQL 代理账号访问控制
 
-SQL 代理账号基于 JWT 令牌，仅可用于数据服务和 SQL 编辑器访问。无法通过用户名和密码使用 SQL 代理账号访问 TiDB Cloud 集群。
+SQL 代理账号基于 JWT 令牌，仅可用于 Data Service 和 SQL Editor 访问。无法通过用户名和密码使用 SQL 代理账号访问 TiDB Cloud 集群。

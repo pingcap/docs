@@ -9,7 +9,7 @@ summary: 了解如何配置 root 密码以连接到你的集群。
 
 > **注意：**
 >
-> 对于 Starter 或 Essential 集群，本篇文档不适用，你可以参考 [TLS Connection to Starter or Essential](/tidb-cloud/secure-connections-to-serverless-clusters.md)。
+> 对于 TiDB Cloud Serverless 集群，本篇文档不适用，你可以参考 [TLS Connection to TiDB Cloud Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md)。
 
 1. 在 TiDB Cloud 控制台中，进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 
@@ -24,4 +24,4 @@ summary: 了解如何配置 root 密码以连接到你的集群。
 
 > **提示：**
 >
-> 如果你正在查看集群的概览页面，也可以点击页面右上角的 **...**，选择 **Password Settings**，并进行这些设置。
+> 如果你正在查看集群的概览页面，也可以点击页面右上角的 **...**，选择 **Password Settings**，并进行相关设置。

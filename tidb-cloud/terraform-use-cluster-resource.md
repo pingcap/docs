@@ -1,13 +1,13 @@
 ---
-title: 使用 `tidbcloud_cluster` 资源（已弃用）
+title: 使用 Cluster 资源（已弃用）
 summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
 ---
 
-# 使用 `tidbcloud_cluster` 资源（已弃用）
+# 使用 Cluster 资源（已弃用）
 
 > **Warning:**
 >
-> 从 [TiDB Cloud Terraform Provider](https://registry.terraform.io/providers/tidbcloud/tidbcloud) v0.4.0 开始，`tidbcloud_cluster` 资源已被弃用。推荐使用 `tidbcloud_dedicated_cluster` 或 `tidbcloud_serverless_cluster` 资源。更多信息请参见 [使用 `tidbcloud_dedicated_cluster` 资源](/tidb-cloud/terraform-use-dedicated-cluster-resource.md) 或 [使用 `tidbcloud_serverless_cluster` 资源](/tidb-cloud/terraform-use-serverless-cluster-resource.md)。
+> 从 [TiDB Cloud Terraform Provider](https://registry.terraform.io/providers/tidbcloud/tidbcloud) v0.4.0 开始，`tidbcloud_cluster` 资源已被弃用。推荐使用 `tidbcloud_dedicated_cluster` 或 `tidbcloud_serverless_cluster` 资源。更多信息请参见 [使用 TiDB Cloud 专属集群资源](/tidb-cloud/terraform-use-dedicated-cluster-resource.md) 或 [使用 TiDB Cloud Serverless 集群资源](/tidb-cloud/terraform-use-serverless-cluster-resource.md)。
 
 你可以在本文档中学习如何使用 `tidbcloud_cluster` 资源管理 TiDB Cloud 集群。
 
@@ -15,9 +15,9 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
 
 `tidbcloud_cluster` 资源的功能包括：
 
-- 创建 {{{ .starter }}} 和 TiDB Cloud 专属集群（Dedicated）。
+- 创建 TiDB Cloud Serverless 和 TiDB Cloud 专属集群。
 - 修改 TiDB Cloud 专属集群。
-- 删除 {{{ .starter }}} 和 TiDB Cloud 专属集群。
+- 删除 TiDB Cloud Serverless 和 TiDB Cloud 专属集群。
 
 ## 前置条件
 
@@ -25,7 +25,7 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
 
 ## 使用 `tidbcloud_projects` 数据源获取项目 ID
 
-每个 TiDB 集群都属于一个项目。在你创建 TiDB 集群之前，需要获取你想要创建集群的项目 ID。
+每个 TiDB 集群都属于一个项目。在创建 TiDB 集群之前，你需要获取要创建集群的项目 ID。
 
 要查看所有可用项目的信息，可以按如下方式使用 `tidbcloud_projects` 数据源：
 
@@ -58,15 +58,15 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
 
    - 使用 `data` 块定义 TiDB Cloud 的数据源，包括数据源类型和数据源名称。
 
-      - 若要使用项目数据源，需将数据源类型设置为 `tidbcloud_projects`。
-      - 数据源名称可根据你的需求自定义，例如 "example_project"。
-      - 对于 `tidbcloud_projects` 数据源，可以通过 `page` 和 `page_size` 属性限制你想要查询的最大项目数。
+      - 若要使用项目数据源，将数据源类型设置为 `tidbcloud_projects`。
+      - 数据源名称可根据需要自定义，例如 "example_project"。
+      - 对于 `tidbcloud_projects` 数据源，可以通过 `page` 和 `page_size` 属性限制你要查询的最大项目数。
 
-   - 使用 `output` 块定义需要在输出中显示的数据源信息，并将其暴露给其他 Terraform 配置使用。
+   - 使用 `output` 块定义要在输出中显示的数据源信息，并将信息暴露给其他 Terraform 配置使用。
 
       `output` 块的作用类似于编程语言中的返回值。详见 [Terraform 文档](https://www.terraform.io/language/values/outputs)。
 
-   若要获取所有资源和数据源的可用配置，请参见此 [配置文档](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)。
+   要获取所有资源和数据源的可用配置项，请参见此 [配置文档](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)。
 
 2. 运行 `terraform apply` 命令以应用配置。你需要在确认提示时输入 `yes` 以继续。
 
@@ -125,7 +125,7 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
 
 ## 使用 `tidbcloud_cluster_specs` 数据源获取集群规格信息
 
-在创建集群之前，你需要获取集群规格信息，其中包含所有可用的配置值（如支持的云服务商、区域和节点规格等）。
+在创建集群之前，你需要获取集群规格信息，其中包含所有可用的配置值（如支持的云服务商、区域和节点规格）。
 
 要获取集群规格信息，可以按如下方式使用 `tidbcloud_cluster_specs` 数据源：
 
@@ -267,7 +267,7 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
 - `region` 表示 `cloud_provider` 的区域。
 - `node_quantity_range` 显示节点数量的最小值和扩容步长。
 - `node_size` 表示节点规格。
-- `storage_size_gib_range` 显示你可以为节点设置的最小和最大存储容量。
+- `storage_size_gib_range` 显示你可为节点设置的最小和最大存储空间。
 
 ## 使用 cluster 资源创建集群
 
@@ -277,7 +277,7 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
 
 你可以使用 `tidbcloud_cluster` 资源创建集群。
 
-以下示例展示如何创建一个 TiDB Cloud 专属集群（Dedicated）。
+以下示例展示如何创建一个 TiDB Cloud 专属集群。
 
 1. 为集群创建一个目录并进入该目录。
 
@@ -324,8 +324,8 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
 
     使用 `resource` 块定义 TiDB Cloud 的资源，包括资源类型、资源名称和资源详情。
 
-    - 若要使用集群资源，需将资源类型设置为 `tidbcloud_cluster`。
-    - 资源名称可根据你的需求自定义，例如 `example_cluster`。
+    - 若要使用集群资源，将资源类型设置为 `tidbcloud_cluster`。
+    - 资源名称可根据需要自定义，例如 `example_cluster`。
     - 资源详情可根据项目 ID 和集群规格信息进行配置。
 
 3. 运行 `terraform apply` 命令。应用资源时不推荐使用 `terraform apply --auto-approve`。
@@ -380,7 +380,7 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
 
    - 你可以检查配置与当前状态的差异。
    - 你还可以看到本次 `apply` 的结果。将新增一个资源，不会有资源被更改或销毁。
-   - `known after apply` 表示该值会在 `apply` 后获得。
+   - `known after apply` 表示你将在 `apply` 后获得该值。
 
 4. 如果计划中的内容无误，输入 `yes` 继续：
 
@@ -433,9 +433,9 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
     }
     ```
 
-    此时集群状态为 `CREATING`。你需要等待状态变为 `AVAILABLE`，通常至少需要 10 分钟。
+    此时集群状态为 `CREATING`。你需要等待其变为 `AVAILABLE`，通常至少需要 10 分钟。
 
-6. 如果你想查看最新状态，可运行 `terraform refresh` 命令更新状态，然后再运行 `terraform state show tidbcloud_cluster.${resource-name}` 命令查看状态。
+6. 如果你想查看最新状态，运行 `terraform refresh` 命令以更新状态，然后运行 `terraform state show tidbcloud_cluster.${resource-name}` 命令显示状态。
 
     ```
     $ terraform refresh
@@ -607,7 +607,7 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
 
 ### 扩容 TiDB 集群
 
-当 TiDB 集群状态为 `AVAILABLE` 时，你可以对其进行扩容。
+当集群状态为 `AVAILABLE` 时，你可以扩容 TiDB 集群。
 
 1. 在 [创建集群](#create-a-cluster-using-the-cluster-resource) 时使用的 `cluster.tf` 文件中，编辑 `components` 配置。
 
@@ -687,7 +687,7 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
 
 ### 暂停或恢复集群
 
-当集群状态为 `AVAILABLE` 时可以暂停集群，状态为 `PAUSED` 时可以恢复集群。
+当集群状态为 `AVAILABLE` 时你可以暂停集群，状态为 `PAUSED` 时可以恢复集群。
 
 - 设置 `paused = true` 可暂停集群。
 - 设置 `paused = false` 可恢复集群。
@@ -703,7 +703,7 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
      }
    ```
 
-2. 运行 `terraform apply` 命令并在检查后输入 `yes`：
+2. 运行 `terraform apply` 命令并检查后输入 `yes`：
 
    ```
    $ terraform apply
@@ -832,17 +832,17 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
    }
    ```
 
-6. 稍等片刻，然后使用 `terraform refersh` 命令更新状态。最终状态会变为 `AVAILABLE`。
+6. 稍等片刻后，使用 `terraform refersh` 命令更新状态，最终状态会变为 `AVAILABLE`。
 
-现在，你已经使用 Terraform 创建并管理了 TiDB Cloud 专属集群。接下来，你可以尝试通过 [`tidbcloud_backup`](/tidb-cloud/terraform-use-backup-resource.md) 资源为集群创建备份。
+现在，你已经使用 Terraform 创建并管理了 TiDB Cloud 专属集群。接下来，你可以尝试通过我们的 [备份资源](/tidb-cloud/terraform-use-backup-resource.md) 为集群创建备份。
 
 ## 导入集群
 
 对于未被 Terraform 管理的 TiDB 集群，你可以通过导入的方式让 Terraform 管理它。
 
-例如，你可以导入一个非 Terraform 创建的集群，或导入一个 [通过 `tidbcloud_restore` 资源创建的集群](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task)。
+例如，你可以导入一个非 Terraform 创建的集群，或导入一个 [通过 restore 资源创建的集群](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task)。
 
-1. 创建如下 `import_cluster.tf` 文件：
+1. 创建 `import_cluster.tf` 文件如下：
 
     ```
     terraform {
@@ -909,7 +909,7 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
     }
     ```
 
-4. 若要使用 Terraform 管理该集群，可以将上一步的输出复制到你的配置文件中。注意需要删除 `id` 和 `status` 两行，因为它们将由 Terraform 控制：
+4. 若要通过 Terraform 管理集群，可以将上一步的输出复制到你的配置文件中。注意需要删除 `id` 和 `status` 两行，因为它们将由 Terraform 控制：
 
     ```
     resource "tidbcloud_cluster" "import_cluster" {
@@ -946,7 +946,7 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
     $ terraform fmt
     ```
 
-6. 为确保配置和状态一致，可以执行 `terraform plan` 或 `terraform apply`。如果看到 `No changes`，则导入成功。
+6. 为确保配置与状态一致，可以执行 `terraform plan` 或 `terraform apply`。如果看到 `No changes`，则说明导入成功。
 
     ```
     $ terraform apply

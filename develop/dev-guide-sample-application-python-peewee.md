@@ -1,6 +1,6 @@
 ---
 title: 使用 peewee 连接 TiDB
-summary: 学习如何使用 peewee 连接 TiDB。本教程提供了可与 TiDB 搭配使用的 Python 示例代码片段。
+summary: 学习如何使用 peewee 连接 TiDB。本教程提供了适用于 TiDB 的 Python 示例代码片段，演示如何使用 peewee 进行操作。
 ---
 
 # 使用 peewee 连接 TiDB
@@ -15,7 +15,7 @@ TiDB 是一个兼容 MySQL 的数据库，[peewee](https://docs.peewee-orm.com/)
 
 > **Note:**
 >
-> 本教程适用于 {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated 以及 TiDB 自建集群。
+> 本教程适用于 TiDB Cloud Serverless、TiDB Cloud Dedicated 以及 TiDB 自建集群。
 
 ## 前置条件
 
@@ -29,16 +29,16 @@ TiDB 是一个兼容 MySQL 的数据库，[peewee](https://docs.peewee-orm.com/)
 
 **如果你还没有 TiDB 集群，可以按如下方式创建：**
 
-- （推荐）参考[创建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md) 创建你自己的 TiDB Cloud 集群。
-- 参考[部署本地测试 TiDB 集群](/quick-start-with-tidb.md#deploy-a-local-test-cluster) 或 [部署生产环境 TiDB 集群](/production-deployment-using-tiup.md) 创建本地集群。
+- （推荐）参考[创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)来创建你自己的 TiDB Cloud 集群。
+- 参考[部署本地测试 TiDB 集群](/quick-start-with-tidb.md#deploy-a-local-test-cluster)或[部署生产环境 TiDB 集群](/production-deployment-using-tiup.md)来创建本地集群。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
 **如果你还没有 TiDB 集群，可以按如下方式创建：**
 
-- （推荐）参考[创建 {{{ .starter }}} 集群](/develop/dev-guide-build-cluster-in-cloud.md) 创建你自己的 TiDB Cloud 集群。
-- 参考[部署本地测试 TiDB 集群](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) 或 [部署生产环境 TiDB 集群](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) 创建本地集群。
+- （推荐）参考[创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md)来创建你自己的 TiDB Cloud 集群。
+- 参考[部署本地测试 TiDB 集群](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)或[部署生产环境 TiDB 集群](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)来创建本地集群。
 
 </CustomContent>
 
@@ -46,7 +46,7 @@ TiDB 是一个兼容 MySQL 的数据库，[peewee](https://docs.peewee-orm.com/)
 
 本节演示如何运行示例应用代码并连接到 TiDB。
 
-### 步骤 1：克隆示例应用仓库
+### 第 1 步：克隆示例应用仓库
 
 在终端窗口中运行以下命令，克隆示例代码仓库：
 
@@ -55,9 +55,9 @@ git clone https://github.com/tidb-samples/tidb-python-peewee-quickstart.git
 cd tidb-python-peewee-quickstart
 ```
 
-### 步骤 2：安装依赖
+### 第 2 步：安装依赖
 
-运行以下命令，为示例应用安装所需的依赖包（包括 peewee 和 PyMySQL）：
+运行以下命令，安装示例应用所需的依赖包（包括 peewee 和 PyMySQL）：
 
 ```shell
 pip install -r requirements.txt
@@ -65,16 +65,16 @@ pip install -r requirements.txt
 
 #### 为什么要使用 PyMySQL？
 
-peewee 是一个支持多种数据库的 ORM 库。它为数据库提供了高级抽象，帮助开发者以更面向对象的方式编写 SQL 语句。但 peewee 并不自带数据库驱动。要连接数据库，你需要安装数据库驱动。本示例应用使用 PyMySQL 作为数据库驱动，它是一个纯 Python 实现的 MySQL 客户端库，兼容 TiDB，并可在所有平台上安装。更多信息请参考 [peewee 官方文档](https://docs.peewee-orm.com/en/latest/peewee/database.html?highlight=mysql#using-mysql)。
+peewee 是一个支持多种数据库的 ORM 库。它为数据库操作提供了高级抽象，帮助开发者以更面向对象的方式编写 SQL 语句。然而，peewee 并不自带数据库驱动。要连接数据库，你需要安装相应的数据库驱动。本示例应用使用 PyMySQL 作为数据库驱动，它是一个纯 Python 实现的 MySQL 客户端库，兼容 TiDB，并可在所有平台上安装。更多信息请参考 [peewee 官方文档](https://docs.peewee-orm.com/en/latest/peewee/database.html?highlight=mysql#using-mysql)。
 
-### 步骤 3：配置连接信息
+### 第 3 步：配置连接信息
 
 根据你选择的 TiDB 部署方式，连接到你的 TiDB 集群。
 
 <SimpleTab>
-<div label="{{{ .starter }}} or Essential">
+<div label="TiDB Cloud Serverless">
 
-1. 进入 [**Clusters**](https://{{{.console-url}}}/project/clusters) 页面，点击目标集群名称进入集群概览页。
+1. 进入 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称进入集群概览页。
 
 2. 点击右上角的 **Connect**，弹出连接对话框。
 
@@ -93,9 +93,9 @@ peewee 是一个支持多种数据库的 ORM 库。它为数据库提供了高�
 
     > **Tip:**
     > 
-    > 如果你之前已创建过密码，可以继续使用原密码，或点击 **Reset Password** 生成新密码。
+    > 如果你之前已经创建过密码，可以继续使用原密码，或点击 **Reset Password** 生成新密码。
 
-5. 运行以下命令，将 `.env.example` 复制并重命名为 `.env`：
+5. 运行以下命令，复制 `.env.example` 并重命名为 `.env`：
 
     ```shell
     cp .env.example .env
@@ -127,9 +127,9 @@ peewee 是一个支持多种数据库的 ORM 库。它为数据库提供了高�
 
     如果你还未配置 IP 访问列表，请点击 **Configure IP Access List**，或参考 [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) 进行配置后再首次连接。
 
-    除了 **Public** 连接类型，TiDB Cloud Dedicated 还支持 **Private Endpoint** 和 **VPC Peering** 连接类型。更多信息请参考 [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)。
+    除了 **Public** 连接类型，TiDB Cloud Dedicated 还支持 **Private Endpoint** 和 **VPC Peering** 连接类型。更多信息请参见 [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)。
 
-4. 运行以下命令，将 `.env.example` 复制并重命名为 `.env`：
+4. 运行以下命令，复制 `.env.example` 并重命名为 `.env`：
 
     ```shell
     cp .env.example .env
@@ -151,9 +151,9 @@ peewee 是一个支持多种数据库的 ORM 库。它为数据库提供了高�
 6. 保存 `.env` 文件。
 
 </div>
-<div label="TiDB Self-Managed">
+<div label="TiDB 自建集群">
 
-1. 运行以下命令，将 `.env.example` 复制并重命名为 `.env`：
+1. 运行以下命令，复制 `.env.example` 并重命名为 `.env`：
 
     ```shell
     cp .env.example .env
@@ -176,7 +176,7 @@ peewee 是一个支持多种数据库的 ORM 库。它为数据库提供了高�
 </div>
 </SimpleTab>
 
-### 步骤 4：运行代码并检查结果
+### 第 4 步：运行代码并检查结果
 
 1. 执行以下命令运行示例代码：
 
@@ -216,7 +216,7 @@ def get_db_engine():
     )
 ```
 
-使用该函数时，需要将 `${tidb_host}`、`${tidb_port}`、`${tidb_user}`、`${tidb_password}`、`${tidb_db_name}` 和 `${ca_path}` 替换为你 TiDB 集群的实际值。
+使用该函数时，你需要将 `${tidb_host}`、`${tidb_port}`、`${tidb_user}`、`${tidb_password}`、`${tidb_db_name}` 和 `${ca_path}` 替换为你 TiDB 集群的实际值。
 
 ### 定义数据表
 
@@ -303,7 +303,7 @@ Player.delete().where(Player.coins == 100).execute()
 
 - 通过 [peewee 官方文档](https://docs.peewee-orm.com/) 学习更多 peewee 的用法。
 - 通过 [开发者指南](/develop/dev-guide-overview.md) 各章节，学习 TiDB 应用开发最佳实践，例如 [插入数据](/develop/dev-guide-insert-data.md)、[更新数据](/develop/dev-guide-update-data.md)、[删除数据](/develop/dev-guide-delete-data.md)、[单表读取](/develop/dev-guide-get-data-from-single-table.md)、[事务](/develop/dev-guide-transaction-overview.md) 以及 [SQL 性能优化](/develop/dev-guide-optimize-sql-overview.md)。
-- 通过专业的 [TiDB 开发者课程](https://www.pingcap.com/education/)，考试通过后获得 [TiDB 认证](https://www.pingcap.com/education/certification/)。
+- 通过专业的 [TiDB 开发者课程](https://www.pingcap.com/education/)，并在通过考试后获得 [TiDB 认证](https://www.pingcap.com/education/certification/)。
 
 ## 需要帮助？
 

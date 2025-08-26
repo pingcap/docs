@@ -1,23 +1,23 @@
 ---
-title: 通过公网连接到 TiDB Cloud Dedicated
-summary: 了解如何通过公网连接到你的 TiDB Cloud 集群。
+title: 通过公共连接接入 TiDB Cloud Dedicated
+summary: 了解如何通过公共连接接入你的 TiDB Cloud 集群。
 ---
 
-# 通过公网连接到 TiDB Cloud Dedicated
+# 通过公共连接接入 TiDB Cloud Dedicated
 
-本文档介绍如何通过公网连接到你的 TiDB Cloud Dedicated 集群。公网连接会暴露一个带有流量过滤器的公网端点，因此你可以通过 SQL 客户端从你的笔记本电脑连接到 TiDB Cloud Dedicated 集群。
+本文档介绍如何通过公共连接接入你的 TiDB Cloud Dedicated 集群。公共连接会暴露一个带有流量过滤器的公共端点，因此你可以通过 SQL 客户端从你的笔记本电脑连接到 TiDB Cloud Dedicated 集群。
 
 > **Tip:**
 >
-> 如果你想了解如何通过公网连接到 {{{ .starter }}} 或 {{{ .essential }}} 集群，请参见 [Connect to {{{ .starter }}} or Essential via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)。
+> 如果你想了解如何通过公共连接接入 TiDB Cloud Serverless 集群，请参见 [Connect to TiDB Cloud Serverless via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)。
 
-## 前提条件：配置 IP 访问列表
+## 前置条件：配置 IP 访问列表
 
-对于公网连接，TiDB Cloud Dedicated 只允许来自 IP 访问列表中的地址的客户端连接。如果你还没有配置 IP 访问列表，请按照 [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md) 中的步骤，在首次连接前进行配置。
+对于公共连接，TiDB Cloud Dedicated 只允许来自 IP 访问列表中的地址的客户端连接。如果你还没有配置 IP 访问列表，请按照 [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md) 中的步骤，在首次连接前进行配置。
 
 ## 连接到集群
 
-要通过公网连接到 TiDB Cloud Dedicated 集群，请按照以下步骤操作：
+要通过公共连接接入 TiDB Cloud Dedicated 集群，请按照以下步骤操作：
 
 1. 打开目标集群的概览页面。
 
@@ -33,7 +33,7 @@ summary: 了解如何通过公网连接到你的 TiDB Cloud 集群。
 
 3. 在连接对话框中，从 **Connection Type** 下拉列表中选择 **Public**。
 
-    如果你还没有配置 IP 访问列表，请点击 **Configure IP Access List**，或按照 [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md) 的步骤，在首次连接前进行配置。
+    如果你还没有配置 IP 访问列表，请点击 **Configure IP Access List**，或按照 [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md) 中的步骤，在首次连接前进行配置。
 
 4. 点击 **CA cert** 下载用于 TLS 连接 TiDB 集群的 CA 证书。该 CA 证书默认支持 TLS 1.2 版本。
 

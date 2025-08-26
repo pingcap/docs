@@ -1,34 +1,32 @@
 ---
-title: 使用 `tidbcloud_import` 资源
-summary: 了解如何使用 `tidbcloud_import` 资源管理导入任务。
+title: 使用 Import 资源
+summary: 学习如何使用 import 资源管理导入任务。
 ---
 
-# 使用 `tidbcloud_import` 资源
+# 使用 Import 资源
 
 你可以在本文档中学习如何使用 `tidbcloud_import` 资源将数据导入到 TiDB Cloud 集群。
 
 `tidbcloud_import` 资源的功能包括：
 
-- 为 TiDB Cloud 集群创建导入任务。
+- 为 TiDB Cloud Serverless 和 TiDB Cloud Dedicated 集群创建导入任务。
 - 支持从本地磁盘或 Amazon S3 存储桶导入数据。
 - 取消正在进行的导入任务。
 
 ## 前置条件
 
 - [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)。
-- 参考以下文档之一创建 TiDB Cloud 集群：
-    - [创建 Starter 或 Essential 集群](/tidb-cloud/create-tidb-cluster-serverless.md) 
-    - [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)。
+- [创建 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md) 或 [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)。
 
 ## 创建并运行导入任务
 
-你可以使用 `tidbcloud_import` 资源管理本地导入任务或 Amazon S3 导入任务。
+你可以使用 import 资源管理本地导入任务或 Amazon S3 导入任务。
 
 ### 创建并运行本地导入任务
 
 > **Note:**
 >
-> 本地文件导入仅支持 Starter 或 Essential 集群，不支持 TiDB Cloud Dedicated 集群。
+> 本地文件导入仅支持 TiDB Cloud Serverless 集群，不支持 TiDB Cloud Dedicated 集群。
 
 1. 创建一个用于导入的 CSV 文件。例如：
 
@@ -247,7 +245,7 @@ summary: 了解如何使用 `tidbcloud_import` 资源管理导入任务。
    tidbcloud_import.example_s3_parquet: Creation complete after 4s [id=781076]
    ```
 
-3. 使用 `terraform refresh` 和 `terraform state show tidbcloud_import.${resource-name}` 更新并查看导入任务的状态。
+3. 使用 `terraform refresh` 和 `terraform state show tidbcloud_import.${resource-name}` 更新并检查导入任务的状态。
 
 ## 更新导入任务
 
@@ -255,7 +253,7 @@ summary: 了解如何使用 `tidbcloud_import` 资源管理导入任务。
 
 ## 删除导入任务
 
-对于 Terraform，删除导入任务意味着取消对应的 `tidbcloud_import` 资源。
+对于 Terraform，删除导入任务意味着取消对应的 import 资源。
 
 你无法取消状态为 `COMPLETED` 的导入任务。否则，你会收到如下所示的 `Delete Error`：
 
@@ -300,4 +298,4 @@ Destroy complete! Resources: 1 destroyed.
 
 ## 配置项
 
-请参见 [配置文档](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import) 获取 `tidbcloud_import` 资源的所有可用配置项。
+请参阅 [配置文档](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import) 获取 import 资源的所有可用配置项。

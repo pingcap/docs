@@ -9,7 +9,7 @@ summary: 了解如何通过 Zapier 将 TiDB Cloud 连接到 5000+ 应用。
 
 在 Zapier 上使用 [TiDB Cloud app](https://zapier.com/apps/tidb-cloud/integrations) 可以让你：
 
-- 使用 TiDB，这是一款兼容 MySQL 的 HTAP 数据库，无需本地搭建。
+- 使用 TiDB，这是一款兼容 MySQL 的 HTAP 数据库。无需本地搭建。
 - 更便捷地管理你的 TiDB Cloud。
 - 将 TiDB Cloud 连接到 5000+ 应用，实现工作流自动化。
 
@@ -19,7 +19,7 @@ summary: 了解如何通过 Zapier 将 TiDB Cloud 连接到 5000+ 应用。
 
 [Zap Templates](https://platform.zapier.com/partners/zap-templates) 是为公开可用的 Zapier 集成预先选定应用和核心字段的现成集成或 Zap。
 
-在本节中，我们将以 **Add new Github global events to TiDB rows** 模板为例，创建一个工作流。在此工作流中，每当你的 GitHub 账户产生新的全局事件（任何 [GitHub 事件](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types)，无论是你发起还是针对你的，发生在任意仓库），Zapier 都会向你的 TiDB Cloud 集群添加一行新数据。
+本节将以 **Add new Github global events to TiDB rows** 模板为例，创建一个工作流。在该工作流中，每当你的 GitHub 账户产生新的全局事件（任何 [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types) 发生在你或与你有关的任何仓库上），Zapier 会向你的 TiDB Cloud 集群添加一行新数据。
 
 ### 前置条件
 
@@ -27,11 +27,11 @@ summary: 了解如何通过 Zapier 将 TiDB Cloud 连接到 5000+ 应用。
 
 - 一个 [Zapier 账户](https://zapier.com/app/login)。
 - 一个 [GitHub 账户](https://github.com/login)。
-- 一个 [TiDB Cloud 账户](https://tidbcloud.com/signup) 以及 TiDB Cloud 上的一个 {{{ .starter }}} 集群。更多详情请参见 [TiDB Cloud 快速上手](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster)。
+- 一个 [TiDB Cloud 账户](https://tidbcloud.com/signup) 以及在 TiDB Cloud 上的 TiDB Cloud Serverless 集群。更多详情请参见 [TiDB Cloud 快速入门](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster)。
 
 ### 步骤 1：获取模板
 
-访问 [Zapier 上的 TiDB Cloud App](https://zapier.com/apps/tidb-cloud/integrations)。选择 **Add new Github global events to TiDB rows** 模板并点击 **Try it**。随后你将进入编辑页面。
+访问 [TiDB Cloud App on Zapier](https://zapier.com/apps/tidb-cloud/integrations)。选择 **Add new Github global events to TiDB rows** 模板并点击 **Try it**。随后你将进入编辑页面。
 
 ### 步骤 2：设置触发器
 
@@ -71,13 +71,13 @@ summary: 了解如何通过 Zapier 将 TiDB Cloud 连接到 5000+ 应用。
 
     在此步骤，你需要指定 TiDB Cloud 集群中的某个表来存储事件数据。如果你还没有表，可以在此步骤创建。
 
-    1. 从下拉列表中选择项目名称和集群名称。你的集群连接信息会自动显示。
+    1. 在下拉列表中选择项目名称和集群名称。你的集群连接信息会自动显示。
 
         ![Set up project name and cluster name](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-project-and-cluster.png)
 
     2. 输入你的密码。
 
-    3. 从下拉列表中选择数据库。
+    3. 在下拉列表中选择数据库。
 
         ![Set up database name](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-databse.png)
 
@@ -89,7 +89,7 @@ summary: 了解如何通过 Zapier 将 TiDB Cloud 连接到 5000+ 应用。
 
 4. 测试动作
 
-    点击 **Test action**，Zapier 会创建该表。你也可以跳过测试，首次运行此工作流时表会被创建。
+    点击 **Test action**，Zapier 会创建该表。你也可以跳过测试，首次运行该工作流时表会被创建。
 
 ### 步骤 4：设置 `Create Row in TiDB Cloud` 动作
 
@@ -117,7 +117,7 @@ summary: 了解如何通过 Zapier 将 TiDB Cloud 连接到 5000+ 应用。
 
 4. 测试动作
 
-    点击 **Test action**，即可在表中创建一行新数据。检查你的 TiDB Cloud 集群，可以看到数据已成功写入。
+    点击 **Test action**，即可在表中创建一行新数据。如果你检查 TiDB Cloud 集群，可以发现数据已成功写入。
 
    ```sql
    mysql> SELECT * FROM test.github_global_event;
@@ -135,11 +135,11 @@ summary: 了解如何通过 Zapier 将 TiDB Cloud 连接到 5000+ 应用。
 
 ![Publish the zap](/media/tidb-cloud/zapier/zapier-tidbcloud-publish.png)
 
-现在，这个 zap 会自动将你 GitHub 账户的所有全局事件记录到 TiDB Cloud。
+现在，该 zap 会自动将你 GitHub 账户的所有全局事件记录到 TiDB Cloud。
 
 ## 触发器与动作
 
-[触发器和动作](https://zapier.com/how-it-works) 是 Zapier 的核心概念。通过组合不同的触发器和动作，你可以创建各种自动化工作流。
+[Triggers and actions](https://zapier.com/how-it-works) 是 Zapier 的核心概念。通过组合不同的触发器和动作，你可以创建各种自动化工作流。
 
 本节介绍 TiDB Cloud App 在 Zapier 上提供的触发器和动作。
 
@@ -147,29 +147,29 @@ summary: 了解如何通过 Zapier 将 TiDB Cloud 连接到 5000+ 应用。
 
 下表列出了 TiDB Cloud App 支持的触发器。
 
-| 触发器                  | 描述                                                                 |
-| ---------------------- |---------------------------------------------------------------------|
-| New Cluster            | 当新集群被创建时触发。                                               |
-| New Table              | 当新表被创建时触发。                                                 |
-| New Row                | 当新行被创建时触发。仅获取最近 10000 条新行。                        |
-| New Row (Custom Query) | 当你提供的自定义查询返回新行时触发。                                 |
+| Trigger                | Description                                                                 |
+| ---------------------- |-----------------------------------------------------------------------------|
+| New Cluster            | 当新集群被创建时触发。                                                     |
+| New Table              | 当新表被创建时触发。                                                       |
+| New Row                | 当新行被创建时触发。仅获取最近 10000 条新行。                               |
+| New Row (Custom Query) | 当你提供的自定义查询返回新行时触发。                                       |
 
 ### 动作
 
-下表列出了 TiDB Cloud App 支持的动作。注意部分动作需要额外资源，你需要提前准备相应资源。
+下表列出了 TiDB Cloud App 支持的动作。注意部分动作需要额外资源，你需要提前准备好相应资源。
 
-| 动作 | 描述 | 资源 |
+| Action | Description | Resource |
 |---|---|---|
-| Find Cluster | 查找已存在的 {{{ .starter }}} 或 TiDB Cloud Dedicated 集群。 | 无 |
-| Create Cluster | 创建新集群。仅支持创建 {{{ .starter }}} 集群。 | 无 |
-| Find Database | 查找已存在的数据库。 | 一个 {{{ .starter }}} 集群 |
-| Create Database | 创建新数据库。 | 一个 {{{ .starter }}} 集群 |
-| Find Table | 查找已存在的表。 | 一个 {{{ .starter }}} 集群和一个数据库 |
-| Create Table | 创建新表。 | 一个 {{{ .starter }}} 集群和一个数据库 |
-| Create Row | 创建新行。 | 一个 {{{ .starter }}} 集群、一个数据库和一个表 |
-| Update Row | 更新已存在的行。 | 一个 {{{ .starter }}} 集群、一个数据库和一个表 |
-| Find Row | 通过查找列在表中查找行。 | 一个 {{{ .starter }}} 集群、一个数据库和一个表 |
-| Find Row (Custom Query) | 通过你提供的自定义查询在表中查找行。 | 一个 {{{ .starter }}} 集群、一个数据库和一个表 |
+| Find Cluster | 查找已存在的 TiDB Cloud Serverless 或 TiDB Cloud Dedicated 集群。 | None |
+| Create Cluster | 创建新集群。仅支持创建 TiDB Cloud Serverless 集群。 | None |
+| Find Database | 查找已存在的数据库。 | 一个 TiDB Cloud Serverless 集群 |
+| Create Database | 创建新数据库。 | 一个 TiDB Cloud Serverless 集群 |
+| Find Table | 查找已存在的表。 | 一个 TiDB Cloud Serverless 集群和一个数据库 |
+| Create Table | 创建新表。 | 一个 TiDB Cloud Serverless 集群和一个数据库 |
+| Create Row | 创建新行。 | 一个 TiDB Cloud Serverless 集群、一个数据库和一个表 |
+| Update Row | 更新已存在的行。 | 一个 TiDB Cloud Serverless 集群、一个数据库和一个表 |
+| Find Row | 通过查找列在表中查找行。 | 一个 TiDB Cloud Serverless 集群、一个数据库和一个表 |
+| Find Row (Custom Query) | 通过你提供的自定义查询在表中查找行。 | 一个 TiDB Cloud Serverless 集群、一个数据库和一个表 |
 
 ## TiDB Cloud App 模板
 
@@ -195,17 +195,17 @@ Zapier 需要你的 **TiDB Cloud API key** 来连接 TiDB Cloud 账户。Zapier 
 
 Zapier 触发器可以通过轮询 API 调用定期检查新数据（间隔取决于你的 Zapier 计划）。
 
-TiDB Cloud 触发器提供了一个轮询 API 调用，会返回大量结果。但大多数结果 Zapier 之前已经见过，也就是说大多数结果是重复的。
+TiDB Cloud 触发器提供了一个轮询 API 调用，会返回大量结果。但大多数结果 Zapier 之前已经见过，即大多数结果是重复的。
 
-由于我们不希望当某个项目在你的 API 中出现在多个不同轮询中时多次触发动作，TiDB Cloud 触发器会用 `id` 字段对数据进行去重。
+由于我们不希望当某个项目在你的 API 中出现在多个不同轮询中时多次触发动作，TiDB Cloud 触发器会用 `id` 字段进行数据去重。
 
-`New Cluster` 和 `New Table` 触发器直接使用 `cluster_id` 或 `table_id` 作为 `id` 字段进行去重。这两个触发器你无需做任何操作。
+`New Cluster` 和 `New Table` 触发器直接用 `cluster_id` 或 `table_id` 作为 `id` 字段进行去重。对于这两个触发器你无需做任何操作。
 
 **New Row Trigger**
 
 `New Row` 触发器每次最多获取 10000 条结果。因此，如果某些新行未包含在这 10000 条结果中，则无法触发 Zapier。
 
-一种避免这种情况的方法是在触发器中指定 `Order By` 配置。例如，一旦你按创建时间对行排序，新行总会包含在这 10000 条结果中。
+避免这种情况的一种方式是在触发器中指定 `Order By` 配置。例如，一旦你按创建时间对行排序，新行总会包含在这 10000 条结果中。
 
 `New Row` 触发器还采用灵活策略生成 `id` 字段进行去重。生成 `id` 字段的顺序如下：
 
@@ -219,7 +219,7 @@ TiDB Cloud 触发器提供了一个轮询 API 调用，会返回大量结果。�
 
 `New Row (Custom Query)` 触发器每次最多获取 1,000,000 条结果。1,000,000 是一个很大的数字，仅用于保护整个系统。建议你的查询包含 `ORDER BY` 和 `LIMIT`。
 
-为了去重，你的查询结果必须有唯一的 id 字段。否则，你会收到 `You must return the results with id field` 错误。
+为了去重，你的查询结果必须有唯一的 id 字段。否则会收到 `You must return the results with id field` 错误。
 
 确保你的自定义查询在 30 秒内执行完毕。否则会收到超时错误。
 
@@ -229,8 +229,8 @@ TiDB Cloud 触发器提供了一个轮询 API 调用，会返回大量结果。�
 
 1. 选择 `Find Table` 动作
 
-2. 在 `set up action` 步骤中，勾选 `Create TiDB Cloud Table if it doesn’t exist yet?` 选项以启用 `find and create`。
+2. 在 `set up action` 步骤，勾选 `Create TiDB Cloud Table if it doesn’t exist yet?` 以启用 `find and create`。
 
    ![Find and create](/media/tidb-cloud/zapier/zapier-tidbcloud-find-and-create.png)
 
-此工作流会在表不存在时自动创建表。注意，如果你测试动作，表会被直接创建。
+该工作流会在表不存在时自动创建表。注意，如果你测试动作，表会被直接创建。

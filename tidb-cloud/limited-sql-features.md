@@ -5,13 +5,13 @@ summary: 了解 TiDB Cloud 上受限的 SQL 功能。
 
 # TiDB Cloud 上受限的 SQL 功能
 
-TiDB Cloud 支持几乎所有 TiDB 支持的工作负载，但 TiDB 自建版与 TiDB Cloud 之间存在一些功能差异。本文档描述了 TiDB Cloud 上 SQL 功能的限制。我们正在不断弥补 TiDB 自建版与 TiDB Cloud 之间的功能差距。如果你需要这些尚未支持的功能或能力，请[联系我们](/tidb-cloud/tidb-cloud-support.md)提交功能需求。
+TiDB Cloud 支持几乎所有 TiDB 支持的工作负载，但 TiDB 自建版与 TiDB Cloud 专属版/Serverless 之间存在一些功能差异。本文档描述了 TiDB Cloud 上 SQL 功能的限制。我们正在不断弥补 TiDB 自建版与 TiDB Cloud 专属版/Serverless 之间的功能差距。如果你需要这些尚未支持的功能或能力，请[联系我们](/tidb-cloud/tidb-cloud-support.md)提交功能需求。
 
 ## 语句
 
 ### 副本放置与范围管理
 
-| 语句 | TiDB Cloud 专属集群 | starter 和 essential |
+| 语句 | TiDB Cloud 专属版 | TiDB Cloud Serverless |
 |:-|:-|:-|
 | `ALTER PLACEMENT POLICY` | 支持 | 不支持 [^1] |
 | `CREATE PLACEMENT POLICY` | 支持 | 不支持 [^1] |
@@ -25,7 +25,7 @@ TiDB Cloud 支持几乎所有 TiDB 支持的工作负载，但 TiDB 自建版与
 
 ### 资源组
 
-| 语句 | TiDB Cloud 专属集群 | starter 和 essential |
+| 语句 | TiDB Cloud 专属版 | TiDB Cloud Serverless |
 |:-|:-|:-|
 | `ALTER RESOURCE GROUP` | 支持 | 不支持 [^2] |
 | `CALIBRATE RESOURCE` | 不支持 | 不支持 [^2] |
@@ -36,18 +36,18 @@ TiDB Cloud 支持几乎所有 TiDB 支持的工作负载，但 TiDB 自建版与
 
 ### 其他
 
-| 语句 | TiDB Cloud 专属集群 | starter 和 essential |
+| 语句 | TiDB Cloud 专属版 | TiDB Cloud Serverless |
 |:-|:-|:-|
 | `BACKUP` | 支持 | 不支持 [^3] |
 | `SHOW BACKUPS` | 支持 | 不支持 [^3] |
 | `RESTORE` | 支持 | 不支持 [^3] |
 | `SHOW RESTORES` | 支持 | 不支持 [^3] |
-| `ADMIN RESET TELEMETRY_ID` | 支持 | starter 和 essential 不支持遥测功能。 |
+| `ADMIN RESET TELEMETRY_ID` | 支持 | TiDB Cloud Serverless 不支持 Telemetry。 |
 | `ADMIN SHOW TELEMETRY` | 不支持 [^4] | 不支持 [^4] |
 | `ADMIN SHOW SLOW` | 支持 | 不支持 [^5] |
 | `ADMIN PLUGINS ENABLE` | 支持 | 不支持 [^8] |
 | `ADMIN PLUGINS DISABLE` | 支持 | 不支持 [^8] |
-| `ALTER INSTANCE RELOAD TLS` | 支持 | starter 和 essential 会自动刷新 TLS 证书。 |
+| `ALTER INSTANCE RELOAD TLS` | 支持 | TiDB Cloud Serverless 会自动刷新 TLS 证书。 |
 | `LOAD DATA INFILE` | 支持 `LOAD DATA LOCAL INFILE`，以及从 Amazon S3 或 Google Cloud Storage 加载 `LOAD DATA INFILE` | 仅支持 `LOAD DATA LOCAL INFILE` |
 | `CHANGE DRAINER` | 不支持 [^7] | 不支持 [^7] |
 | `CHANGE PUMP` | 不支持 [^7] | 不支持 [^7] |
@@ -64,13 +64,13 @@ TiDB Cloud 支持几乎所有 TiDB 支持的工作负载，但 TiDB 自建版与
 
 ## 函数与运算符
 
-| 函数与运算符 | TiDB Cloud 专属集群 | starter 和 essential |
+| 函数与运算符 | TiDB Cloud 专属版 | TiDB Cloud Serverless |
 |:-|:-|:-|
-| `SLEEP` | 无限制 | [`SLEEP()` 函数](https://docs.pingcap.com/tidbcloud/miscellaneous-functions)有最大 300 秒的休眠时间限制。|
+| `SLEEP` | 无限制 | [`SLEEP()` 函数](https://docs.pingcap.com/tidbcloud/miscellaneous-functions) 有限制，最长仅支持 300 秒的休眠时间。|
 
 ## 系统表
 
-| 数据库 | 表 | TiDB Cloud 专属集群 | starter 和 essential |
+| 数据库 | 表 | TiDB Cloud 专属版 | TiDB Cloud Serverless |
 |:-|:-|:-|:-|
 | `information_schema` | `ATTRIBUTES` | 支持 | 不支持 [^1] |
 | `information_schema` | `CLUSTER_CONFIG` | 不支持 [^4] | 不支持 [^4] |
@@ -121,7 +121,7 @@ TiDB Cloud 支持几乎所有 TiDB 支持的工作负载，但 TiDB 自建版与
 
 ## 系统变量
 
-| 变量 | TiDB Cloud 专属集群 | starter 和 essential |
+| 变量 | TiDB Cloud 专属版 | TiDB Cloud Serverless |
 |:-|:-|:-|
 | `datadir` | 无限制 | 不支持 [^1] |
 | `interactive_timeout` | 无限制 | 只读 [^10] |
@@ -217,26 +217,26 @@ TiDB Cloud 支持几乎所有 TiDB 支持的工作负载，但 TiDB 自建版与
 | `validate_password.special_char_count` | 无限制 | 至少为 `1` [^9] |
 | `wait_timeout` | 无限制 | 只读 [^10] |
 
-[^1]: starter 和 essential 不支持数据副本放置配置。
+[^1]: TiDB Cloud Serverless 不支持数据副本放置相关配置。
 
-[^2]: starter 和 essential 不支持资源组配置。
+[^2]: TiDB Cloud Serverless 不支持资源组相关配置。
 
-[^3]: 在 starter 或 essential 上进行 [备份与恢复](/tidb-cloud/backup-and-restore-serverless.md) 操作时，你可以使用 TiDB Cloud 控制台。
+[^3]: 在 TiDB Cloud Serverless 上进行 [备份与恢复](/tidb-cloud/backup-and-restore-serverless.md) 操作时，你可以使用 TiDB Cloud 控制台。
 
 [^4]: 该功能在 [安全增强模式（SEM）](/system-variables.md#tidb_enable_enhanced_security) 下不可用。
 
-[^5]: 在 starter 或 essential 上追踪 [慢查询](/tidb-cloud/tune-performance.md#slow-query) 时，你可以使用 TiDB Cloud 控制台。
+[^5]: 在 TiDB Cloud Serverless 上追踪 [慢查询](/tidb-cloud/tune-performance.md#slow-query) 时，你可以使用 TiDB Cloud 控制台。
 
-[^6]: 在 starter 或 essential 上进行 [语句分析](/tidb-cloud/tune-performance.md#statement-analysis) 时，你可以使用 TiDB Cloud 控制台。
+[^6]: 在 TiDB Cloud Serverless 上进行 [SQL 语句分析](/tidb-cloud/tune-performance.md#statement-analysis) 时，你可以使用 TiDB Cloud 控制台。
 
 [^7]: TiDB Cloud 不支持 Drainer 和 Pump。
 
-[^8]: starter 和 essential 不支持插件功能。
+[^8]: TiDB Cloud Serverless 不支持插件。
 
-[^9]: starter 和 essential 强制执行强密码策略。
+[^9]: TiDB Cloud Serverless 强制执行强密码策略。
 
-[^10]: 该变量在 starter 和 essential 上为只读。
+[^10]: 该变量在 TiDB Cloud Serverless 上为只读。
 
-[^11]: starter 和 essential 不支持通过 `${tidb-server-status-port}` 下载 `PLAN REPLAYER` 导出的文件，如[示例](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information)所示。starter 和 essential 会为你生成一个 [预签名 URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) 用于下载文件。请注意，该 URL 在生成后 10 小时内有效。
+[^11]: TiDB Cloud Serverless 不支持通过 `${tidb-server-status-port}` 下载 `PLAN REPLAYER` 导出的文件，如[示例](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information)所示。相反，TiDB Cloud Serverless 会为你生成一个 [预签名 URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) 用于下载文件。请注意，该 URL 在生成后 10 小时内有效。
 
 [^12]: 不支持。在 TiDB Cloud 专属集群上启用 `require_secure_transport` 会导致 SQL 客户端连接失败。
