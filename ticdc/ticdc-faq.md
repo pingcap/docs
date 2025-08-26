@@ -498,6 +498,11 @@ If the `CDC:ErrMySQLDuplicateEntryCDC` error occurs frequently, you can enable T
 mysql://user:password@host:port/?safe-mode=true
 ```
 
+<<<<<<< HEAD
+=======
+In safe mode, TiCDC splits the `UPDATE` operation into `DELETE + REPLACE INTO` for execution, thus avoiding the unique key conflict error.
+
+>>>>>>> 391726d062 (cdc: add solution for kafka broken pipe error (#21650) (#21661))
 ## Why do TiCDC replication tasks to Kafka often fail with `broken pipe` errors?
 
 TiCDC uses the Sarama client to replicate data to Kafka. To avoid out-of-order data, TiCDC disables the automatic retry mechanism of Sarama (by setting the retry count to 0). As a result, if the connection between TiCDC and Kafka is closed by Kafka after being idle for some time, subsequent writes from TiCDC will trigger a `write: broken pipe` error, causing the replication task to fail.
