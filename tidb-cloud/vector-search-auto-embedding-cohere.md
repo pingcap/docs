@@ -132,6 +132,10 @@ Both the **Embed v3** and **Multilingual Embed v3** models support the following
 
 To use Bring Your Own Key (BYOK) Cohere models, you must specify a Cohere API key as follows:
 
+> **Note**
+>
+> Replace `'your-cohere-api-key-here'` with your actual Cohere API key. You can obtain an API key from the [Cohere Dashboard](https://dashboard.cohere.com/).
+
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_COHERE_API_KEY = 'your-cohere-api-key-here';
 
@@ -163,10 +167,6 @@ ORDER BY
   )
 LIMIT 2;
 ```
-
-> **Note**
->
-> Replace `'your-cohere-api-key-here'` with your actual Cohere API key. You can obtain an API key from the [Cohere Dashboard](https://dashboard.cohere.com/).
 
 ## Options (BYOK)
 

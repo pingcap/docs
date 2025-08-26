@@ -45,6 +45,10 @@ For a full list of available models, see [Jina AI Documentation](https://jina.ai
 
 To use Jina AI models, you must specify a [Jina AI API key](https://jina.ai/) as follows:
 
+> **Note:**
+>
+> Replace `'your-jina-ai-api-key-here'` with your actual Jina AI API key.
+
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_JINA_AI_API_KEY = 'your-jina-ai-api-key-here';
 
@@ -86,10 +90,6 @@ Result:
 |    4 | Java's syntax is used in Android apps.                         |
 +------+----------------------------------------------------------------+
 ```
-
-> **Note:**
->
-> Replace `'your-jina-ai-api-key-here'` with your actual Jina AI API key.
 
 ## Options
 
