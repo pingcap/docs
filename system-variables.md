@@ -1784,6 +1784,16 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - This variable is renamed from the variable [`tidb_ddl_version`](https://docs-archive.pingcap.com/tidb/v7.6/system-variables#tidb_ddl_version-new-in-v760) that is introduced in v7.6.0. Starting from v8.0.0, `tidb_ddl_version` no longer takes effect.
 - Starting from TiDB v8.5.0, the accelerated table creation feature is enabled by default for newly created clusters, with `tidb_enable_fast_create_table` set to `ON`. For clusters upgraded from v8.4.0 or earlier versions, the default value of `tidb_enable_fast_create_table` remains unchanged.
 
+### tidb_opt_selectivity_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 1]`
+- Default value: `0.8`
+- Indicates the pseudo selectivity for TiDB optimizer. In some cases, the optimizer cannot intuitively deduce the selectivity of the predicate through statistical information. In this case, this pseudo selectivity value is used. It is **NOT** recommended to modify its value.
+
 ### tidb_default_string_match_selectivity <span class="version-mark">New in v6.2.0</span>
 
 - Scope: SESSION | GLOBAL
