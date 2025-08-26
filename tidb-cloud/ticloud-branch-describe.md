@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless branch describe
-summary: `ticloud serverless branch describe` 的参考文档。
+summary: "`ticloud serverless branch describe` 的参考文档。"
 ---
 
 # ticloud serverless branch describe

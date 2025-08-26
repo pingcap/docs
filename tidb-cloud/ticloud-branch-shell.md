@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless branch shell
-summary: `ticloud serverless branch shell` 的参考文档。
+summary: "`ticloud serverless branch shell` 的参考文档。"
 aliases: ['/tidbcloud/ticloud-connect']
 ---
 

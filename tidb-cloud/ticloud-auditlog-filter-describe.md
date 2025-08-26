@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless audit-log filter-rule describe
-summary: `ticloud serverless audit-log filter-rule describe` 的参考文档。
+summary: "`ticloud serverless audit-log filter-rule describe` 的参考文档。"
 ---
 
 # ticloud serverless audit-log filter-rule describe

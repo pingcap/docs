@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless update
-summary: `ticloud serverless update` 的参考文档。
+summary: "`ticloud serverless update` 的参考文档。"
 ---
 
 # ticloud serverless update

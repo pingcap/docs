@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless sql-user update
-summary: `ticloud serverless sql-user update` 的参考文档。
+summary: "`ticloud serverless sql-user update` 的参考文档。"
 ---
 
 # ticloud serverless sql-user update
