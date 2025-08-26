@@ -17,7 +17,7 @@ This document describes how to use OpenAI embedding models with [Auto Embedding]
 
 ## Available models
 
-All OpenAI models are available for use with the `openai/` prefix if you provide your own OpenAI API key (BYOK). For example:
+All OpenAI models are available for use with the `openai/` prefix if you bring your own OpenAI API key (BYOK). For example:
 
 **text-embedding-3-small**
 
@@ -85,7 +85,9 @@ Result:
 +------+----------------------------------------------------------------+
 ```
 
-> **Note**: Replace `'your-openai-api-key-here'` with your actual OpenAI API key.
+> **Note:**
+>
+> Replace `'your-openai-api-key-here'` with your actual OpenAI API key.
 
 ## Options
 

@@ -17,7 +17,7 @@ This document describes how to use NVIDIA NIM embedding models with [Auto Embedd
 
 ## Available models
 
-Embedding models hosted on NVIDIA NIM are available for use with the `nvidia_nim/` prefix if you bring your own [NVIDIA NIM API key](https://build.nvidia.com/settings/api-keys) (BYOK). For example:
+Embedding models hosted on NVIDIA NIM are available for use with the `nvidia_nim/` prefix if you bring your own [NVIDIA NIM API key](https://build.nvidia.com/settings/api-keys) (BYOK).
 
 For your convenience, the following section takes a popular model as an example to show how to use it with Auto Embedding. For a full list of available models, see [NVIDIA NIM Text-to-embedding Models](https://build.nvidia.com/models?filters=usecase%3Ausecase_text_to_embedding).
 
