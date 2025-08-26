@@ -1,45 +1,49 @@
 ---
-title: 导入示例数据到 TiDB Cloud Serverless
-summary: 了解如何通过 UI 将示例数据导入到 TiDB Cloud Serverless。
+title: 将示例数据导入 TiDB Cloud Serverless
+summary: 了解如何通过 UI 将示例数据导入 TiDB Cloud Serverless。
 ---
 
-# 导入示例数据到 TiDB Cloud Serverless
+# 将示例数据导入 TiDB Cloud Serverless
 
-本文介绍如何通过 UI 将示例数据导入到 TiDB Cloud Serverless。使用的示例数据是 Capital Bikeshare 的系统数据，根据 Capital Bikeshare 数据许可协议发布。在导入示例数据之前，你需要有一个 TiDB 集群。
+本文档介绍了如何通过 UI 将示例数据导入 TiDB Cloud Serverless。所使用的示例数据为 Capital Bikeshare 的系统数据，根据 Capital Bikeshare 数据许可协议发布。在导入示例数据之前，你需要拥有一个 TiDB 集群。
 
 > **注意：**
 >
 > TiDB Cloud Serverless 目前仅支持从 Amazon S3 导入示例数据。
 
-1. 打开目标集群的**导入**页面。
+1. 打开目标集群的 **Import** 页面。
 
-    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)并导航到项目的[**集群**](https://tidbcloud.com/project/clusters)页面。
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，并进入你项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 
         > **提示：**
         >
-        > 你可以使用左上角的组合框在组织、项目和集群之间切换。
+        > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
 
-    2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏中点击**数据** > **导入**。
+    2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
 
-2. 选择**从云存储导入数据**，然后点击 **Amazon S3**。
+2. 点击 **Import data from Cloud Storage**。
 
-3. 在**从 Amazon S3 导入数据**页面上，配置以下源数据信息：
+3. 在 **Import Data from Cloud Storage** 页面，填写以下信息：
 
-    - **导入文件数量**：对于示例数据，选择**多个文件**。
-    - **包含架构文件**：对于示例数据，选择**是**。
-    - **数据格式**：选择 **SQL**。
-    - **文件夹 URI** 或**文件 URI**：输入示例数据 URI `s3://tidbcloud-sample-data/data-ingestion/`。
-    - **存储桶访问**：对于示例数据，你只能使用 Role ARN 访问其存储桶。对于你自己的数据，你可以使用 AWS 访问密钥或 Role ARN 访问你的存储桶。
-        - **AWS Role ARN**：输入 `arn:aws:iam::801626783489:role/import-sample-access`。
-        - **AWS 访问密钥**：对于示例数据，跳过此选项。
+   - **Storage Provider**：选择 **Amazon S3**。
+   - **Source Files URI**：输入示例数据 URI `s3://tidbcloud-sample-data/data-ingestion/`。
+   - **Credential**：
+      - **AWS Role ARN**：输入 `arn:aws:iam::801626783489:role/import-sample-access`。
+      - **AWS Access Key**：对于示例数据可跳过此项。
 
-4. 点击**连接** > **开始导入**。
+4. 点击 **Next**。
 
-当数据导入进度显示**已完成**时，你已成功将示例数据和数据库架构导入到 TiDB Cloud Serverless 中的数据库。
+5. 在 **Destination Mapping** 部分，保持选中 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项，并选择 **SQL** 作为数据格式。
+
+6. 点击 **Next**。
+
+7. 查看扫描结果，检查发现的数据文件及其对应的目标表，然后点击 **Start Import**。
+
+8. 当导入进度显示为 **Completed** 时，检查已导入的表。
 
 连接到集群后，你可以在终端中运行一些查询来检查结果，例如：
 
-1. 获取起始站为 "12th & U St NW" 的行程记录：
+1. 获取起点为 "12th & U St NW" 的骑行记录：
 
     ```sql
     use bikeshare;
@@ -66,7 +70,7 @@ summary: 了解如何通过 UI 将示例数据导入到 TiDB Cloud Serverless。
     +-----------------+---------------+---------------------+---------------------+--------------------+------------------+-------------------------------------------+----------------+-----------+------------+-----------+------------+---------------+
     ```
 
-2. 获取电动自行车的行程记录：
+2. 获取使用电动自行车的骑行记录：
 
     ```sql
     use bikeshare;

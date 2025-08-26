@@ -1,17 +1,17 @@
 ---
-title: 设置资源组
-summary: 关于在 TiDB 数据库中使用 SET RESOURCE GROUP 的概述。
+title: SET RESOURCE GROUP
+summary: TiDB 数据库中 SET RESOURCE GROUP 的用法概述。
 ---
 
 # SET RESOURCE GROUP
 
 `SET RESOURCE GROUP` 用于为当前会话设置资源组。
 
-> **注意：**
+> **Note:**
 >
-> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> 此功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
-## 概要
+## 语法
 
 **SetResourceGroupStmt:**
 
@@ -26,10 +26,10 @@ ResourceGroupName ::=
 
 ## 权限
 
-执行此语句需要满足以下配置和权限：
+执行该语句需要满足以下配置和权限要求：
 
 1. 系统变量 [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) 设置为 `ON`。
-2. 当系统变量 [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) 设置为 `ON` 时，你需要拥有 `SUPER` 或 `RESOURCE_GROUP_ADMIN` 或 `RESOURCE_GROUP_USER` 权限；当其设置为 `OFF` 时，则不需要这些权限。
+2. 当系统变量 [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) 设置为 `ON` 时，你需要拥有 `SUPER` 或 `RESOURCE_GROUP_ADMIN` 或 `RESOURCE_GROUP_USER` 权限；当其设置为 `OFF` 时，不需要这些权限。
 
 ## 示例
 
@@ -41,7 +41,7 @@ CREATE RESOURCE GROUP 'rg1' RU_PER_SEC = 1000;
 ALTER USER 'user1' RESOURCE GROUP `rg1`;
 ```
 
-使用 `user1` 登录并查看绑定到当前用户的资源组。
+使用 `user1` 登录并查看当前用户绑定的资源组。
 
 ```sql
 SELECT CURRENT_RESOURCE_GROUP();
@@ -56,7 +56,7 @@ SELECT CURRENT_RESOURCE_GROUP();
 1 row in set (0.00 sec)
 ```
 
-执行 `SET RESOURCE GROUP` 将当前会话的资源组设置为 `rg2`。
+执行 `SET RESOURCE GROUP`，将当前会话的资源组设置为 `rg2`。
 
 ```sql
 SET RESOURCE GROUP `rg2`;
@@ -72,7 +72,7 @@ SELECT CURRENT_RESOURCE_GROUP();
 1 row in set (0.00 sec)
 ```
 
-执行 `SET RESOURCE GROUP` 指定当前会话使用默认资源组。
+执行 `SET RESOURCE GROUP`，指定当前会话使用默认资源组。
 
 ```sql
 SET RESOURCE GROUP `default`;
@@ -90,9 +90,9 @@ SELECT CURRENT_RESOURCE_GROUP();
 
 ## MySQL 兼容性
 
-MySQL 也支持 [SET RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/set-resource-group.html)。但接受的参数与 TiDB 不同，不兼容。
+MySQL 也支持 [SET RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/set-resource-group.html)。但其接受的参数与 TiDB 不同，二者不兼容。
 
-## 相关链接
+## 参考
 
 * [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
 * [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)

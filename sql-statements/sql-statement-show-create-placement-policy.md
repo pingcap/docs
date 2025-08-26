@@ -1,17 +1,17 @@
 ---
 title: SHOW CREATE PLACEMENT POLICY
-summary: 在 TiDB 中使用 SHOW CREATE PLACEMENT POLICY。
+summary: SHOW CREATE PLACEMENT POLICY 在 TiDB 中的用法。
 ---
 
 # SHOW CREATE PLACEMENT POLICY
 
-`SHOW CREATE PLACEMENT POLICY` 用于显示一个放置策略的定义。可以用来查看当前放置策略的定义，并在另一个 TiDB 集群中重建它。
+`SHOW CREATE PLACEMENT POLICY` 用于显示一个放置策略（placement policy）的定义。你可以使用它查看当前放置策略的定义，并在另一个 TiDB 集群中重新创建该策略。
 
 > **Note:**
 >
-> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> 此功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 ShowCreatePlacementPolicyStmt ::=
@@ -21,8 +21,7 @@ PolicyName ::=
     Identifier
 ```
 
-## Examples
-
+## 示例
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4;
@@ -41,11 +40,11 @@ Create Policy | CREATE PLACEMENT POLICY `p1` PRIMARY_REGION="us-east-1" REGIONS=
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
 该语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 另请参阅
 
 * [Placement Rules in SQL](/placement-rules-in-sql.md)
 * [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)

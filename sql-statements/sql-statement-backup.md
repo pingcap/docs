@@ -1,28 +1,28 @@
 ---
 title: BACKUP | TiDB SQL 语句参考
-summary: 关于在 TiDB 数据库中使用 BACKUP 的概述。
+summary: TiDB 数据库 BACKUP 语句用法概述。
 ---
 
 # BACKUP
 
-此语句用于对 TiDB 集群进行分布式备份。
+该语句用于对 TiDB 集群执行分布式备份。
 
 > **Warning:**
 >
-> - 该功能为实验性特性。不建议在生产环境中使用。此功能可能在未提前通知的情况下被更改或移除。如发现 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
-> - 在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> - 该功能为实验性特性。不建议在生产环境中使用。该功能可能会在没有提前通知的情况下更改或移除。如果你发现了 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
+> - 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
-`BACKUP` 语句使用的引擎与 [BR 工具](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview) 相同，但备份过程由 TiDB 自身驱动，而非单独的 BR 工具。BR 的所有优点和警告也适用于此语句。
+`BACKUP` 语句使用与 [BR 工具](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview) 相同的引擎，不同之处在于备份过程由 TiDB 自身驱动，而不是独立的 BR 工具。BR 的所有优势和注意事项同样适用于该语句。
 
-执行 `BACKUP` 需要拥有 `BACKUP_ADMIN` 或 `SUPER` 权限。此外，执行备份的 TiDB 节点和集群中的所有 TiKV 节点必须对目标存储具有读写权限。在启用 [Security Enhanced Mode](/system-variables.md#tidb_enable_enhanced_security) 时，不允许使用本地存储（存储路径以 `local://` 开头）。
+执行 `BACKUP` 需要 `BACKUP_ADMIN` 或 `SUPER` 权限。此外，执行备份的 TiDB 节点以及集群中的所有 TiKV 节点都必须对目标路径具有读写权限。当启用 [增强安全模式](/system-variables.md#tidb_enable_enhanced_security) 时，不允许使用本地存储（以 `local://` 开头的存储路径）。
 
-`BACKUP` 语句会阻塞，直到整个备份任务完成、失败或取消。建议准备长连接以执行 `BACKUP`。可以使用 [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md) 语句取消任务。
+`BACKUP` 语句会被阻塞，直到整个备份任务完成、失败或被取消。建议为执行 `BACKUP` 准备一个长时间保持的连接。可以使用 [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md) 语句取消该任务。
 
-一次只能执行一个 `BACKUP` 和 [`RESTORE`](/sql-statements/sql-statement-restore.md) 任务。如果在同一 TiDB 服务器上已在执行 `BACKUP` 或 `RESTORE`，新的 `BACKUP` 执行将等待直到之前的任务完成。
+同一时间只能执行一个 `BACKUP` 或 [`RESTORE`](/sql-statements/sql-statement-restore.md) 任务。如果同一 TiDB 服务器上已经有 `BACKUP` 或 `RESTORE` 语句在执行，新的 `BACKUP` 执行会等待所有前序任务完成。
 
-`BACKUP` 仅能与 "tikv" 存储引擎配合使用。使用 "unistore" 引擎时，备份将失败。
+`BACKUP` 只能用于 "tikv" 存储引擎。若在 "unistore" 引擎下使用 `BACKUP` 会失败。
 
-## 概要
+## 语法
 
 ```ebnf+diagram
 BackupStmt ::=
@@ -68,19 +68,19 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/2020/04/';
 1 row in set (58.453 sec)
 ```
 
-上述示例中，`test` 数据库被备份到本地文件系统。数据以 SST 文件形式存储在 `/mnt/backup/2020/04/` 目录中，分布在所有 TiDB 和 TiKV 节点上。
+在上面的示例中，`test` 数据库被备份到本地文件系统。数据以 SST 文件的形式分布式地保存在所有 TiDB 和 TiKV 节点的 `/mnt/backup/2020/04/` 目录下。
 
-第一行结果的描述如下：
+上述结果的第一行各列含义如下：
 
-| 列名 | 描述 |
+| 列名 | 说明 |
 | :-------- | :--------- |
 | `Destination` | 目标 URL |
-| `Size` |  备份归档的总大小（字节） |
-| `BackupTS` | 备份创建时的快照 TSO（对 [增量备份](#incremental-backup) 有用） |
-| `Queue Time` | `BACKUP` 任务排队的时间（当前时区） |
-| `Execution Time` | `BACKUP` 任务开始执行的时间（当前时区） |
+| `Size` |  备份归档的总大小，单位为字节 |
+| `BackupTS` | 创建备份时快照的 TSO（用于 [增量备份](#incremental-backup)） |
+| `Queue Time` | `BACKUP` 任务进入队列的时间戳（当前时区） |
+| `Execution Time` | `BACKUP` 任务开始执行的时间戳（当前时区） |
 
-### 备份表
+### 备份数据表
 
 ```sql
 BACKUP TABLE `test`.`sbtest01` TO 'local:///mnt/backup/sbtest01/';
@@ -96,7 +96,7 @@ BACKUP TABLE sbtest02, sbtest03, sbtest04 TO 'local:///mnt/backup/sbtest/';
 BACKUP DATABASE * TO 'local:///mnt/backup/full/';
 ```
 
-注意，系统表（`mysql.*`、`INFORMATION_SCHEMA.*`、`PERFORMANCE_SCHEMA.*` 等）不会包含在备份中。
+注意，系统表（`mysql.*`、`INFORMATION_SCHEMA.*`、`PERFORMANCE_SCHEMA.*` 等）不会被包含在备份中。
 
 ### 外部存储
 
@@ -106,9 +106,9 @@ BR 支持将数据备份到 S3 或 GCS：
 BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/?access-key={YOUR_ACCESS_KEY}&secret-access-key={YOUR_SECRET_KEY}';
 ```
 
-URL 语法在 [外部存储服务的 URI 格式](/external-storage-uri.md) 中有详细说明。
+URL 语法详见 [外部存储服务的 URI 格式](/external-storage-uri.md)。
 
-在云环境中，若不希望分发凭证，可以将 `SEND_CREDENTIALS_TO_TIKV` 选项设置为 `FALSE`：
+在云环境下，如果不希望分发凭证，可以将 `SEND_CREDENTIALS_TO_TIKV` 选项设置为 `FALSE`：
 
 ```sql
 BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/'
@@ -117,17 +117,17 @@ BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/'
 
 ### 性能调优
 
-使用 `RATE_LIMIT` 限制每个 TiKV 节点的平均上传速度，以减少网络带宽占用。
+使用 `RATE_LIMIT` 可以限制每个 TiKV 节点的平均上传速度，以减少网络带宽占用。
 
-在备份完成之前，`BACKUP` 默认会对集群中的数据进行校验和验证，以确保正确性。单个表的校验任务默认并发数为 4，可以通过 `CHECKSUM_CONCURRENCY` 参数调整。如果你确信不需要数据验证，可以将 `CHECKSUM` 参数设置为 `FALSE` 来禁用。
+在备份完成前，`BACKUP` 默认会对集群中的数据进行校验（checksum），以验证数据正确性。单表校验任务的默认并发数为 4，可以通过 `CHECKSUM_CONCURRENCY` 参数进行调整。如果你确信无需数据校验，可以将 `CHECKSUM` 参数设置为 `FALSE` 以关闭校验。
 
-若要指定 BR 执行备份表和索引的并发任务数，使用 `CONCURRENCY` 参数。该参数控制 BR 内部的线程池大小，从而优化备份操作的性能和效率。
+如需指定 BR 备份表和索引时可执行的并发任务数，可使用 `CONCURRENCY` 参数。该参数控制 BR 内部的线程池大小，从而优化备份操作的性能和效率。
 
-每个任务代表一个表范围或索引范围，依据备份方案而定。对于一个有一个索引的表，使用两个任务来备份此表。`CONCURRENCY` 的默认值为 `4`。如果需要备份大量表或索引，可以增加其值。
+一个任务代表一个表范围或一个索引范围，具体取决于备份的 schema。对于一个带有一个索引的表，备份该表会使用两个任务。`CONCURRENCY` 的默认值为 `4`。如果需要备份大量表或索引，可以适当增大该值。
 
-统计信息默认不备份。若要备份统计信息，需要将 `IGNORE_STATS` 参数设置为 `FALSE`。
+统计信息默认不会被备份。如需备份统计信息，需要将 `IGNORE_STATS` 参数设置为 `FALSE`。
 
-默认情况下，备份生成的 SST 文件使用 `zstd` 压缩算法。如需使用其他压缩算法，可以通过 `COMPRESSION_TYPE` 参数指定。支持的算法包括 `lz4`、`zstd` 和 `snappy`。还可以通过 `COMPRESSION_LEVEL` 参数调整压缩级别；级别越高，压缩比越大，但 CPU 消耗也越高。
+备份生成的 SST 文件默认使用 `zstd` 压缩算法。如有需要，可以通过 `COMPRESSION_TYPE` 参数指定其他压缩算法。支持的算法包括 `lz4`、`zstd` 和 `snappy`。你还可以通过 `COMPRESSION_LEVEL` 参数调整压缩级别，级别数值越高，压缩比越高，但 CPU 消耗也越大。
 
 ```sql
 BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-06/'
@@ -138,23 +138,23 @@ BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-06/'
 
 ### 快照
 
-指定时间戳、TSO 或相对时间以备份历史数据。
+可以通过指定时间戳、TSO 或相对时间来备份历史数据。
 
 ```sql
--- 相对时间
+-- relative time
 BACKUP DATABASE `test` TO 'local:///mnt/backup/hist01'
     SNAPSHOT = 36 HOUR AGO;
 
--- 时间戳（当前时区）
+-- timestamp (in current time zone)
 BACKUP DATABASE `test` TO 'local:///mnt/backup/hist02'
     SNAPSHOT = '2020-04-01 12:00:00';
 
--- 时间戳 Oracle
+-- timestamp oracle
 BACKUP DATABASE `test` TO 'local:///mnt/backup/hist03'
     SNAPSHOT = 415685305958400;
 ```
 
-支持的相对时间单位包括：
+相对时间支持的单位有：
 
 * MICROSECOND
 * SECOND
@@ -163,27 +163,27 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/hist03'
 * DAY
 * WEEK
 
-注意，按照 SQL 标准，单位始终为单数。
+注意，按照 SQL 标准，单位始终为单数形式。
 
 ### 增量备份
 
-提供 `LAST_BACKUP` 选项，只备份自上次备份以来的变更数据。
+通过指定 `LAST_BACKUP` 选项，仅备份上次备份到当前快照之间的变更数据。
 
 ```sql
--- 时间戳（当前时区）
+-- timestamp (in current time zone)
 BACKUP DATABASE `test` TO 'local:///mnt/backup/hist02'
     LAST_BACKUP = '2020-04-01 12:00:00';
 
--- 时间戳 Oracle
+-- timestamp oracle
 BACKUP DATABASE `test` TO 'local:///mnt/backup/hist03'
     LAST_BACKUP = 415685305958400;
 ```
 
 ## MySQL 兼容性
 
-此语句为 TiDB 对 MySQL 语法的扩展。
+该语句是 TiDB 对 MySQL 语法的扩展。
 
-## 相关链接
+## 参见
 
 * [RESTORE](/sql-statements/sql-statement-restore.md)
 * [SHOW BACKUPS](/sql-statements/sql-statement-show-backups.md)

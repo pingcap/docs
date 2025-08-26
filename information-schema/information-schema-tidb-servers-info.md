@@ -5,18 +5,18 @@ summary: 了解 `TIDB_SERVERS_INFO` INFORMATION_SCHEMA 表。
 
 # TIDB_SERVERS_INFO
 
-`TIDB_SERVERS_INFO` 表提供关于 TiDB 集群中 TiDB 服务器（即，tidb-server 进程）的信息。
+`TIDB_SERVERS_INFO` 表提供了关于 TiDB 集群中 TiDB 服务器（即 tidb-server 进程）的信息。
 
 > **Note:**
 >
-> 该表在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> 该表在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC tidb_servers_info;
 ```
 
-输出结果如下：
+输出如下：
 
 ```sql
 +---------------+--------------+------+------+---------+-------+
@@ -41,7 +41,7 @@ DESC tidb_servers_info;
 SELECT * FROM TIDB_SERVERS_INFO\G
 ```
 
-输出结果如下：
+输出如下：
 
 ```sql
 *************************** 1. row ***************************
@@ -50,7 +50,7 @@ SELECT * FROM TIDB_SERVERS_INFO\G
          PORT: 4000
   STATUS_PORT: 10080
         LEASE: 45s
-      VERSION: 8.0.11-TiDB-{{{ .tidb-version }}}
+      VERSION: 8.0.11-TiDB-v{{{ .tidb-version }}}
      GIT_HASH: 827d8ff2d22ac4c93ae1b841b79d468211e1d393
 BINLOG_STATUS: Off
        LABELS:

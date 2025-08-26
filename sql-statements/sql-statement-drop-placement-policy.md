@@ -1,17 +1,17 @@
 ---
 title: DROP PLACEMENT POLICY
-summary: TiDB 中 ALTER PLACEMENT POLICY 的使用。
+summary: 在 TiDB 中使用 ALTER PLACEMENT POLICY。
 ---
 
 # DROP PLACEMENT POLICY
 
-`DROP PLACEMENT POLICY` 用于删除之前创建的放置策略。
+`DROP PLACEMENT POLICY` 用于删除之前创建的放置策略（placement policy）。
 
 > **Note:**
 >
-> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 DropPolicyStmt ::=
@@ -23,19 +23,19 @@ PolicyName ::=
 
 ## 示例
 
-只有当放置策略未被任何表或分区引用时，才能删除。
+只有当放置策略未被任何表或分区引用时，才能删除该放置策略。
 
 ```sql
 CREATE PLACEMENT POLICY p1 FOLLOWERS=4;
 CREATE TABLE t1 (a INT PRIMARY KEY) PLACEMENT POLICY=p1;
-DROP PLACEMENT POLICY p1;  -- 此语句会失败，因为放置策略 p1 被引用。
+DROP PLACEMENT POLICY p1;  -- 此语句会失败，因为放置策略 p1 仍被引用。
 
--- 查找引用放置策略的表和分区。
+-- 查询哪些表和分区引用了该放置策略。
 SELECT table_schema, table_name FROM information_schema.tables WHERE tidb_placement_policy_name='p1';
 SELECT table_schema, table_name FROM information_schema.partitions WHERE tidb_placement_policy_name='p1';
 
-ALTER TABLE t1 PLACEMENT POLICY=default;  -- 从 t1 中移除放置策略。
-DROP PLACEMENT POLICY p1;  -- 成功。
+ALTER TABLE t1 PLACEMENT POLICY=default;  -- 从 t1 表中移除放置策略。
+DROP PLACEMENT POLICY p1;  -- 删除成功。
 ```
 
 ```sql
@@ -63,7 +63,7 @@ Query OK, 0 rows affected (0.21 sec)
 
 该语句是 TiDB 对 MySQL 语法的扩展。
 
-## 相关链接
+## 另请参阅
 
 * [Placement Rules in SQL](/placement-rules-in-sql.md)
 * [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
