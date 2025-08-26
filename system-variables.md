@@ -1750,11 +1750,18 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: String
 - Default value: `0`
 - Range: `[0, 1PiB]`
-- This variable limits the write bandwidth for each TiKV node and only takes effect when index creation acceleration is enabled (controlled by the [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) variable). When the data size in your cluster is quite large (such as billions of rows), limiting the write bandwidth for index creation can effectively reduce the impact on application workloads.
+- This variable limits the write bandwidth from **a single TiDB node to a single TiKV node** during index backfilling. It only takes effect when index creation acceleration is enabled (controlled by the [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) variable). Note that when [Global Sort](/tidb-global-sort.md) is enabled, multiple TiDB nodes can write to TiKV concurrently. When the data size in your cluster is quite large (such as billions of rows), limiting the write bandwidth for index creation can effectively reduce the impact on application workloads.
 - The default value `0` means no write bandwidth limit.
 - You can specify the value of this variable either with a unit or without a unit.
     - When you specify the value without a unit, the default unit is bytes per second. For example, `67108864` represents `64MiB` per second.
     - When you specify the value with a unit, supported units include KiB, MiB, GiB, and TiB. For example, `'1GiB`' represents 1 GiB per second, and `'256MiB'` represents 256 MiB per second.
+
+Example:
+
+Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In this cluster, each TiDB node can perform index backfilling, and Regions are evenly distributed across all TiKV nodes. If you set `tidb_ddl_reorg_max_write_speed` to `100MiB`:
+
+- When Global Sort is disabled, only one TiDB node writes to TiKV at a time. In this case, the maximum write bandwidth per TiKV node is `100MiB`.
+- When Global Sort is enabled, all 4 TiDB nodes can write to TiKV simultaneously. In this case, the maximum write bandwidth per TiKV node is `4 * 100MiB = 400MiB`.
 
 ### tidb_ddl_reorg_worker_cnt
 
