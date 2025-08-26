@@ -1,35 +1,35 @@
 ---
-title: Use TiDB Cloud Dedicated VPC Peering Resource
-summary: Learn how to use the TiDB Cloud Dedicated VPC peering resource to create and modify a TiDB Cloud Dedicated VPC peering.
+title: 使用 `tidbcloud_dedicated_vpc_peering` 资源
+summary: 了解如何使用 `tidbcloud_dedicated_vpc_peering` 资源来创建和修改 TiDB Cloud 专属 VPC 对等连接。
 ---
 
-# Use TiDB Cloud Dedicated VPC Peering Resource
+# 使用 `tidbcloud_dedicated_vpc_peering` 资源
 
-This document describes how to manage a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) VPC peering with the `tidbcloud_dedicated_vpc_peering` resource.
+本文档介绍如何使用 `tidbcloud_dedicated_vpc_peering` 资源管理 [TiDB Cloud 专属](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) VPC 对等连接。
 
-The features of the `tidbcloud_dedicated_vpc_peering` resource include the following:
+`tidbcloud_dedicated_vpc_peering` 资源的功能包括：
 
-- Create TiDB Cloud Dedicated VPC peering.
-- Import TiDB Cloud Dedicated VPC peering.
-- Delete TiDB Cloud Dedicated VPC peering.
+- 创建 TiDB Cloud 专属 VPC 对等连接。
+- 导入 TiDB Cloud 专属 VPC 对等连接。
+- 删除 TiDB Cloud 专属 VPC 对等连接。
 
 > **Note:**
 >
-> TiDB Cloud Dedicated VPC peering resource cannot be modified. If you want to change the configuration of a TiDB Cloud Dedicated VPC peering, you need to delete the existing one, and then create a new one.
+> `tidbcloud_dedicated_vpc_peering` 资源无法被修改。如果你想更改 TiDB Cloud 专属 VPC 对等连接的配置，需要先删除现有的对等连接，然后重新创建一个新的。
 
-## Prerequisites
+## 前置条件
 
-- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
+- [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 或更高版本。
 
-## Create a TiDB Cloud Dedicated VPC peering
+## 创建 TiDB Cloud 专属 VPC 对等连接
 
-You can create a TiDB Cloud Dedicated VPC peering using the `tidbcloud_dedicated_vpc_peering` resource.
+你可以使用 `tidbcloud_dedicated_vpc_peering` 资源来创建 TiDB Cloud 专属 VPC 对等连接。
 
-The following example shows how to create a TiDB Cloud Dedicated VPC peering.
+以下示例展示了如何创建一个 TiDB Cloud 专属 VPC 对等连接。
 
-1. Create a directory for the TiDB Cloud Dedicated VPC peering and enter it.
+1. 为 TiDB Cloud 专属 VPC 对等连接创建一个目录并进入该目录。
 
-2. Create a `vpc_peering.tf` file:
+2. 创建一个 `vpc_peering.tf` 文件：
 
     ```
     terraform {
@@ -54,14 +54,14 @@ The following example shows how to create a TiDB Cloud Dedicated VPC peering.
     }
     ```
 
-    Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
+    使用 `resource` 块来定义 TiDB Cloud 的资源，包括资源类型、资源名称和资源详情。
 
-    - To use the TiDB Cloud Dedicated VPC peering resource, set the resource type as `tidbcloud_dedicated_vpc_peering`.
-    - For the resource name, you can define it as needed. For example, `example`.
-    - If you do not know how to get the values of the required arguments, see [Connect to TiDB Cloud Dedicated via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md).
-    - To get the TiDB Cloud Dedicated VPC peering specification information, see [tidbcloud_dedicated_vpc_peering (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_vpc_peering).
+    - 要使用 `tidbcloud_dedicated_vpc_peering` 资源，需要将资源类型设置为 `tidbcloud_dedicated_vpc_peering`。
+    - 资源名称可以根据需要自定义，例如 `example`。
+    - 如果你不知道如何获取所需参数的值，请参见 [通过 VPC Peering 连接到 TiDB Cloud 专属集群](/tidb-cloud/set-up-vpc-peering-connections.md)。
+    - 如需获取 TiDB Cloud 专属 VPC 对等连接的详细规范信息，请参见 [tidbcloud_dedicated_vpc_peering (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_vpc_peering)。
 
-3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
+3. 运行 `terraform apply` 命令。应用资源时，不建议使用 `terraform apply --auto-approve`。
 
     ```shell
     $ terraform apply
@@ -98,13 +98,13 @@ The following example shows how to create a TiDB Cloud Dedicated VPC peering.
         Enter a value:
     ```
 
-    In the preceding result, Terraform generates an execution plan for you, which describes the actions Terraform will take:
+    在上述结果中，Terraform 为你生成了一个执行计划，描述了 Terraform 将要执行的操作：
 
-    - You can check the differences between the configurations and the states.
-    - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
-    - `known after apply` indicates that you will get the corresponding value after `apply`.
+    - 你可以检查配置与当前状态之间的差异。
+    - 你还可以看到本次 `apply` 的结果。它将新增一个资源，不会有资源被更改或销毁。
+    - `known after apply` 表示你将在 `apply` 之后获得对应的值。
 
-4. If everything in your plan looks fine, type `yes` to continue:
+4. 如果你的计划没有问题，输入 `yes` 继续：
 
     ```shell
     Do you want to perform these actions?
@@ -117,9 +117,9 @@ The following example shows how to create a TiDB Cloud Dedicated VPC peering.
     tidbcloud_dedicated_vpc_peering.example: Still creating... [10s elapsed]
     ```
 
-    The status of the resource will remain `Creating` until you approve the VPC peering connection in your cloud provider console. After you approve the VPC peering connection, you can take [Approve and Configure the VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md#step-2-approve-and-configure-the-vpc-peering) as a reference, the status will change to `Active`.
+    资源的状态会保持为 `Creating`，直到你在云服务商控制台中批准 VPC 对等连接。批准后，你可以参考 [批准并配置 VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md#step-2-approve-and-configure-the-vpc-peering)，状态会变为 `Active`。
 
-5. Use the `terraform show` or `terraform state show tidbcloud_dedicated_vpc_peering.${resource-name}` command to inspect the state of your resource. The former command shows the states of all resources and data sources.
+5. 使用 `terraform show` 或 `terraform state show tidbcloud_dedicated_vpc_peering.${resource-name}` 命令检查资源的状态。前者会显示所有资源和数据源的状态。
 
     ```shell
     $ terraform state show tidbcloud_dedicated_vpc_peering.example
@@ -144,15 +144,15 @@ The following example shows how to create a TiDB Cloud Dedicated VPC peering.
     }
     ```
 
-## Import a TiDB Cloud Dedicated VPC peering
+## 导入 TiDB Cloud 专属 VPC 对等连接
 
-For a TiDB Cloud Dedicated VPC peering that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+对于未被 Terraform 管理的 TiDB Cloud 专属 VPC 对等连接，你可以通过导入的方式让 Terraform 管理它。
 
-For example, you can import a VPC peering that is not created by Terraform.
+例如，你可以导入一个不是通过 Terraform 创建的 VPC 对等连接。
 
-1. Add an import block for the new TiDB Cloud Dedicated VPC peering resource.
+1. 为新的 `tidbcloud_dedicated_vpc_peering` 资源添加一个 import 块。
 
-    Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,vpc_peering_id`:
+    在你的 `.tf` 文件中添加如下 import 块，将 `example` 替换为你想要的资源名称，将 `${id}` 替换为 `cluster_id,vpc_peering_id` 的格式：
 
     ```
     import {
@@ -161,23 +161,23 @@ For example, you can import a VPC peering that is not created by Terraform.
     }
     ```
 
-2. Generate the new configuration file.
+2. 生成新的配置文件。
 
-    Generate the new configuration file for the new TiDB Cloud Dedicated VPC peering resource according to the import block:
+    根据 import 块为新的 `tidbcloud_dedicated_vpc_peering` 资源生成新的配置文件：
 
     ```shell
     terraform plan -generate-config-out=generated.tf
     ```
 
-    Do not specify an existing `.tf` filename in the preceding command. Otherwise, Terraform will return an error.
+    上述命令中不要指定已存在的 `.tf` 文件名，否则 Terraform 会返回错误。
 
-    Then the `generated.tf` file is created in the current directory, which contains the configuration of the imported resource.
+    然后，当前目录下会生成 `generated.tf` 文件，包含了被导入资源的配置信息。
 
-3. Review and apply the generated configuration.
+3. 审查并应用生成的配置。
 
-    Review the generated configuration file to ensure that it meets your needs. Optionally, you can move the contents of this file to your preferred location.
+    审查生成的配置文件，确保其符合你的需求。你也可以选择将该文件内容移动到你喜欢的位置。
 
-    Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
+    然后，运行 `terraform apply` 导入你的基础设施。应用后，示例输出如下：
 
     ```shell
     tidbcloud_dedicated_vpc_peering.example: Importing... [id=aws-1934187953894000000,example]
@@ -186,11 +186,11 @@ For example, you can import a VPC peering that is not created by Terraform.
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
 
-Now you can manage the imported TiDB Cloud Dedicated VPC peering with Terraform.
+现在你可以使用 Terraform 管理已导入的 TiDB Cloud 专属 VPC 对等连接。
 
-## Delete a TiDB Cloud Dedicated VPC peering
+## 删除 TiDB Cloud 专属 VPC 对等连接
 
-To delete a TiDB Cloud Dedicated VPC peering, you can delete the configuration of the `tidbcloud_dedicated_vpc_peering` resource, and then use the `terraform apply` command to destroy the resource:
+要删除 TiDB Cloud 专属 VPC 对等连接，你可以删除 `tidbcloud_dedicated_vpc_peering` 资源的配置，然后使用 `terraform apply` 命令销毁该资源：
 
 ```shell
   $ terraform apply
@@ -236,7 +236,7 @@ To delete a TiDB Cloud Dedicated VPC peering, you can delete the configuration o
   Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
 ```
 
-Now, if you run the `terraform show` command, you will get nothing because the resource has been cleared:
+此时，如果你运行 `terraform show` 命令，将不会有任何输出，因为该资源已被清除：
 
 ```
 $ terraform show

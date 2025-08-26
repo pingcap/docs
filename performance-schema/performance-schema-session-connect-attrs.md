@@ -5,20 +5,21 @@ summary: 了解 `SESSION_CONNECT_ATTRS` performance_schema 表。
 
 # SESSION\_CONNECT\_ATTRS
 
-`SESSION_CONNECT_ATTRS` 表提供关于连接属性的信息。会话属性是客户端在建立连接时发送的键值对。
+`SESSION_CONNECT_ATTRS` 表提供了关于连接属性的信息。会话属性是客户端在建立连接时发送的键值对。
 
 常见属性：
 
-| Attribute Name    | Example       | Description                |
-|-------------------|---------------|----------------------------|
-| `_client_name`    | `libmysql`    | 客户端库名称               |
-| `_client_version` | `8.0.33`      | 客户端库版本               |
-| `_os`             | `Linux`       | 操作系统                   |
-| `_pid`            | `712927`      | 进程ID                     |
-| `_platform`       | `x86_64`      | CPU 架构                   |
-| `program_name`    | `mysqlsh`     | 程序名称                   |
+| 属性名            | 示例           | 描述                   |
+|-------------------|---------------|------------------------|
+| `_client_name`    | `libmysql`    | 客户端库名称           |
+| `_client_version` | `8.0.33`      | 客户端库版本           |
+| `_os`             | `Linux`       | 操作系统               |
+| `_pid`            | `712927`      | 进程 ID                |
+| `_platform`       | `x86_64`      | CPU 架构               |
+| `program_name`    | `mysqlsh`     | 程序名称               |
 
 你可以通过以下方式查看 `SESSION_CONNECT_ATTRS` 表的列信息：
+
 
 ```sql
 USE performance_schema;
@@ -38,6 +39,7 @@ DESCRIBE session_connect_attrs;
 
 你可以通过以下方式查看存储在 `SESSION_CONNECT_ATTRS` 表中的会话属性信息：
 
+
 ```sql
 USE performance_schema;
 TABLE SESSION_CONNECT_ATTRS;
@@ -48,7 +50,7 @@ TABLE SESSION_CONNECT_ATTRS;
 | PROCESSLIST_ID | ATTR_NAME       | ATTR_VALUE | ORDINAL_POSITION |
 +----------------+-----------------+------------+------------------+
 |        2097154 | _client_name    | libmysql   |                0 |
-|        2097154 | _client_version | 8.5.1      |                1 |
+|        2097154 | _client_version | {{{ .tidb-version }}}      |                1 |
 |        2097154 | _os             | Linux      |                2 |
 |        2097154 | _pid            | 1299203    |                3 |
 |        2097154 | _platform       | x86_64     |                4 |
@@ -61,4 +63,4 @@ TABLE SESSION_CONNECT_ATTRS;
 * `PROCESSLIST_ID`：会话的 Processlist ID。
 * `ATTR_NAME`：属性名称。
 * `ATTR_VALUE`：属性值。
-* `ORDINAL_POSITION`：键值对的序号位置。
+* `ORDINAL_POSITION`：名称/值对的顺序位置。

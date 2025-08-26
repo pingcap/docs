@@ -1,17 +1,17 @@
 ---
 title: CREATE PLACEMENT POLICY
-summary: 在 TiDB 中使用 CREATE PLACEMENT POLICY。
+summary: CREATE PLACEMENT POLICY 在 TiDB 中的用法。
 ---
 
 # CREATE PLACEMENT POLICY
 
-`CREATE PLACEMENT POLICY` 用于创建一个命名的放置策略，之后可以将其分配给表、分区或数据库模式。
+`CREATE PLACEMENT POLICY` 用于创建一个命名的放置策略（placement policy），之后可以将该策略分配给表、分区或数据库模式。
 
 > **Note:**
 >
-> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 集群上不可用。
+> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 CreatePolicyStmt ::=
@@ -47,13 +47,13 @@ AdvancedPlacementOption ::=
 |   "SURVIVAL_PREFERENCES" EqOpt stringLit
 ```
 
-## Examples
+## 示例
 
 > **Note:**
 >
-> 要了解你的集群中可用的区域，请参见 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)。
+> 若要了解你的集群中有哪些可用的 region，请参见 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)。
 >
-> 如果没有看到任何可用区域，可能是你的 TiKV 安装没有正确设置标签。
+> 如果你没有看到任何可用的 region，可能是你的 TiKV 安装未正确设置 label。
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4;
@@ -74,11 +74,11 @@ Query OK, 0 rows affected (0.10 sec)
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
 该语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 另请参阅
 
 * [Placement Rules in SQL](/placement-rules-in-sql.md)
 * [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
