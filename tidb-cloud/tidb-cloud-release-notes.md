@@ -14,11 +14,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Starter**
 
-    - Introduce Auto Embedding (Beta) in [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless), making it simple to convert your text into vectors without additional setup. This  feature enables faster development of semantic search, RAG, reranking, and classification in TiDB Cloud with less integration overhead.
+    - Introduce Auto Embedding (Beta) in [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless), making it simple to convert your text into vectors without additional setup. This feature enables faster development of semantic search, RAG, reranking, and classification in TiDB Cloud with less integration overhead.
 
-        - **Auto Embedding with popular LLM providers**: Amazon Titan, OpenAI, Cohere, Gemini, Jina AI, Hugging Face, NVIDIA NIM.
+        - **Auto Embedding with popular LLM providers**: Amazon Titan, OpenAI, Cohere, Gemini, Jina AI, Hugging Face, and NVIDIA NIM.
         - **Native integration with AWS Bedrock**: managed embedding models with a free quota, including Amazon Titan and Cohere text embedding models from AWS Bedrock.
-        - **SQL and Python support**, with examples for creating, storing, and querying embeddings.
+        - **SQL and Python support**, with code examples for creating, storing, and querying embeddings.
 
       For more information, see [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md).
 
@@ -26,7 +26,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) no longer supports the Index Insight (beta) feature.
 
-        It is recommended that you use [Index Advisor](/index-advisor.md) instead, which is available for TiDB v8.5.0 and later versions. Index Advisor introduces the RECOMMEND INDEX SQL statement, which helps optimize your workload by recommending indexes that improve query performance.
+        It is recommended that you use [Index Advisor](/index-advisor.md) instead, which is available for TiDB v8.5.0 and later versions. Index Advisor introduces the `RECOMMEND INDEX` SQL statement, which helps optimize your workload by recommending indexes that improve query performance.
 
     - You can now manually disable the Point-in-time Restore feature on [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters with weekly backups enabled.
 
