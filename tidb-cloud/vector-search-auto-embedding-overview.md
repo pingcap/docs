@@ -129,9 +129,9 @@ You can also use open-source embedding models through the following inference se
 | HuggingFace Inference | [HuggingFace Embeddings](/tidb-cloud/vector-search-auto-embedding-huggingface.md) |                                   | ✅                | `bge-m3`, `multilingual-e5-large` |
 | NVIDIA NIM            | [NVIDIA NIM Embeddings](/tidb-cloud/vector-search-auto-embedding-nvidia-nim.md)   |                                   | ✅                | `bge-m3`, `nv-embed-v1`           |
 
-<sup>1</sup> Hosted models are hosted by TiDB Cloud and do not require any API keys. They are currently free to use.
+&#8203;<sup>1</sup> Hosted models are hosted by TiDB Cloud and do not require any API keys. Currently, these hosted models are free to use, but certain usage limits might be applied to keep it available to everyone.
 
-<sup>2</sup> BYOK (Bring Your Own Key) models require you to provide your own API keys from the corresponding embedding provider. TiDB Cloud does not charge for the usage of BYOK models. You are responsible for managing and monitoring the costs associated with using these models.
+&#8203;<sup>2</sup> BYOK (Bring Your Own Key) models require you to provide your own API keys from the corresponding embedding provider. TiDB Cloud does not charge for the usage of BYOK models. You are responsible for managing and monitoring the costs associated with using these models.
 
 ## How Auto Embedding works
 
