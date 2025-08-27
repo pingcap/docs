@@ -167,7 +167,6 @@
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - Analyze Performance
       - [Use the Diagnosis Page](/tidb-cloud/tune-performance.md)
-        - [Use Index Insight](/tidb-cloud/index-insight.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
       - [Use Statement Summary Tables](/statement-summary-tables.md)
     - SQL Tuning
       - [Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
@@ -216,8 +215,8 @@
     - [TiKV Follower Read](/follower-read.md)
     - [Coprocessor Cache](/coprocessor-cache.md)
     - Garbage Collection (GC)
-       - [Overview](/garbage-collection-overview.md)
-       - [Configuration](/garbage-collection-configuration.md)
+      - [Overview](/garbage-collection-overview.md)
+      - [Configuration](/garbage-collection-configuration.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
   - Optimize Resource Allocation
     - Resource Manager
@@ -326,8 +325,8 @@
     - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
     - [TLS Connections to TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
   - Data Access Control
-      - [Encryption at Rest Using Customer-Managed Encryption Keys](/tidb-cloud/tidb-cloud-encrypt-cmek.md)
-      - [User-Controlled Log Redaction](/tidb-cloud/tidb-cloud-log-redaction.md)
+    - [Encryption at Rest Using Customer-Managed Encryption Keys](/tidb-cloud/tidb-cloud-encrypt-cmek.md)
+    - [User-Controlled Log Redaction](/tidb-cloud/tidb-cloud-log-redaction.md)
   - Database Access Control
     - [Configure Cluster Password Settings](/tidb-cloud/configure-security-settings.md)
   - Audit Management
@@ -673,8 +672,8 @@
   - [Use UUIDs](/best-practices/uuid.md)
   - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
   - [Schema Cache](/schema-cache.md)
-- API Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)   
-  - [Overview](/tidb-cloud/api-overview.md) 
+- API Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [Overview](/tidb-cloud/api-overview.md)
   - v1beta1
     - [TiDB Cloud Starter and Essential](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless)
     - [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated)
@@ -692,8 +691,8 @@
     - [TSO](/tso.md)
   - Storage Engines
     - TiKV
-        - [TiKV Overview](/tikv-overview.md)
-        - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
+      - [TiKV Overview](/tikv-overview.md)
+      - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
     - TiFlash
       - [TiFlash Overview](/tiflash/tiflash-overview.md)
       - [Spill to Disk](/tiflash/tiflash-spill-disk.md)

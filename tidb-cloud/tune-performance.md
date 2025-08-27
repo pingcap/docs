@@ -1,11 +1,12 @@
 ---
 title: Analyze and Tune Performance
 summary: Learn how to analyze and tune performance of your TiDB Cloud cluster.
+aliases: ['/tidbcloud/index-insight']
 ---
 
 # Analyze and Tune Performance
 
-TiDB Cloud provides [Slow Query](#slow-query), [Statement Analysis](#statement-analysis), [Key Visualizer](#key-visualizer), and [Index Insight (beta)](#index-insight-beta) to analyze performance.
+TiDB Cloud provides [Slow Query](#slow-query), [Statement Analysis](#statement-analysis), and [Key Visualizer](#key-visualizer) to analyze performance.
 
 - Slow Query lets you search and view all slow queries in your TiDB cluster, and explore the bottlenecks of each slow query by viewing its execution plan, SQL execution information, and other details.
 
@@ -13,11 +14,9 @@ TiDB Cloud provides [Slow Query](#slow-query), [Statement Analysis](#statement-a
 
 - Key Visualizer helps you observe TiDB's data access patterns and data hotspots.
 
-- Index Insight provides you with meaningful and actionable index recommendations.
-
 > **Note:**
 >
-> Currently, **Key Visualizer** and **Index Insight (beta)** are only available on TiDB Cloud Dedicated clusters.
+> Currently, **Key Visualizer** is only available on TiDB Cloud Dedicated clusters.
 
 ## View the Diagnosis page
 
@@ -78,13 +77,3 @@ To view the key analytics, perform the following steps:
 On the **Key Visualizer** page, a large heat map shows changes on access traffic over time. The average values ​​along each axis of the heat map are shown below and on the right side. The left side is the table name, index name and other information.
 
 For more information, see [Key Visualizer](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer).
-
-## Index Insight (beta)
-
-The Index Insight feature in TiDB Cloud provides powerful capabilities to optimize query performance by offering recommended indexes for slow queries that are not utilizing indexes effectively.
-
-> **Note:**
->
-> Index Insight is currently in beta and only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
-
-For more information, see [Index Insight](/tidb-cloud/index-insight.md).
