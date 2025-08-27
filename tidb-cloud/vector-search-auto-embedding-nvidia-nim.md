@@ -30,7 +30,7 @@ For your convenience, the following section takes a popular model as an example 
 - Price: Charged by NVIDIA
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
-- Docs: https://docs.api.nvidia.com/nim/reference/baai-bge-m3
+- Docs: <https://docs.api.nvidia.com/nim/reference/baai-bge-m3>
 
 Example:
 

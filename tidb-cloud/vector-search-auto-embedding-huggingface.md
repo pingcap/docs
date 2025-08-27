@@ -29,7 +29,7 @@ For your convenience, the following sections take several popular models as exam
 - Price: Charged by HuggingFace
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
-- Project home: https://huggingface.co/intfloat/multilingual-e5-large
+- Project home: <https://huggingface.co/intfloat/multilingual-e5-large>
 
 Example:
 
@@ -73,7 +73,7 @@ LIMIT 2;
 - Price: Charged by HuggingFace
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
-- Project home: https://huggingface.co/BAAI/bge-m3
+- Project home: <https://huggingface.co/BAAI/bge-m3>
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_HUGGINGFACE_API_KEY = 'your-huggingface-api-key-here';
@@ -115,7 +115,7 @@ LIMIT 2;
 - Price: Charged by HuggingFace
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
-- Project home: https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2
+- Project home: <https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2>
 
 Example:
 
@@ -159,7 +159,7 @@ LIMIT 2;
 - Price: Charged by HuggingFace
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
-- Project home: https://huggingface.co/sentence-transformers/all-mpnet-base-v2
+- Project home: <https://huggingface.co/sentence-transformers/all-mpnet-base-v2>
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_HUGGINGFACE_API_KEY = 'your-huggingface-api-key-here';
@@ -206,7 +206,7 @@ LIMIT 2;
 - Price: Charged by HuggingFace
 - Hosted by TiDB Cloud: ❌
 - Bring Your Own Key: ✅
-- Project home: https://huggingface.co/Qwen/Qwen3-Embedding-0.6B
+- Project home: <https://huggingface.co/Qwen/Qwen3-Embedding-0.6B>
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_HUGGINGFACE_API_KEY = 'your-huggingface-api-key-here';
