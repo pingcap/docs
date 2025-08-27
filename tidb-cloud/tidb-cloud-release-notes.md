@@ -8,6 +8,32 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## August 26, 2025
+
+**General changes**
+
+- **TiDB Cloud Starter**
+
+    - Introduce Auto Embedding (Beta) in [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless), making it simple to convert your text into vectors without additional setup. This feature enables faster development of semantic search, RAG, reranking, and classification in TiDB Cloud with less integration overhead.
+
+        - **Auto Embedding with popular LLM providers**: Amazon Titan, OpenAI, Cohere, Gemini, Jina AI, Hugging Face, and NVIDIA NIM.
+        - **Native integration with AWS Bedrock**: managed embedding models with a free quota, including Amazon Titan and Cohere text embedding models from AWS Bedrock.
+        - **SQL and Python support**, with code examples for creating, storing, and querying embeddings.
+
+      For more information, see [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md).
+
+- **TiDB Cloud Dedicated**
+
+    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) no longer supports the Index Insight (beta) feature.
+
+        It is recommended that you use [Index Advisor](/index-advisor.md) instead, which is available for TiDB v8.5.0 and later versions. Index Advisor introduces the `RECOMMEND INDEX` SQL statement, which helps optimize your workload by recommending indexes that improve query performance.
+
+    - You can now manually disable the Point-in-time Restore feature on [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters with weekly backups enabled.
+
+        This enhancement helps reduce costs for clusters that do not require Point-in-time Restore for high RPO protection.
+
+        For more information, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md).
+
 ## August 12, 2025
 
 **General changes**
