@@ -147,7 +147,7 @@ The following steps describe how to clean up backup data that exceeds the backup
 > - `pitr-batch-size`: cumulative **bytes per batch** (default **16 MiB**).
 > - `pitr-batch-count`: **number of files per batch** (default **8**).
 >
-> These two batch thresholds are evaluated independently. Whichever threshold is reached first closes the current batch and starts the next, while the other threshold is ignored for that batch.
+> When determining whether to start the next batch, these two thresholds are evaluated independently: whichever threshold is reached first closes the current batch and starts the next, while the other threshold is ignored for that batch.
 
 
 Testing scenario 1 (on [TiDB Cloud](https://tidbcloud.com)) is as follows:
