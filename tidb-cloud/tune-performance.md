@@ -1,11 +1,12 @@
 ---
 title: Analyze and Tune Performance
 summary: TiDB Cloudクラスターのパフォーマンスを分析および調整する方法を学びます。
+aliases: ['/tidbcloud/index-insight']
 ---
 
 # パフォーマンスの分析と調整 {#analyze-and-tune-performance}
 
-TiDB Cloud は、パフォーマンスを分析するために[遅いクエリ](#slow-query) 、 [ステートメント分析](#statement-analysis) 、 [キービジュアライザー](#key-visualizer) 、 [インデックスインサイト（ベータ版）](#index-insight-beta)を提供します。
+TiDB Cloud は、パフォーマンスを分析するために[遅いクエリ](#slow-query) 、 [ステートメント分析](#statement-analysis) 、 [キービジュアライザー](#key-visualizer)提供します。
 
 -   Slow Query を使用すると、TiDB クラスター内のすべてのスロー クエリを検索して表示し、実行プラン、SQL 実行情報、その他の詳細を表示して各スロー クエリのボトルネックを調査できます。
 
@@ -13,11 +14,9 @@ TiDB Cloud は、パフォーマンスを分析するために[遅いクエリ](
 
 -   Key Visualizer を使用すると、TiDB のデータ アクセス パターンとデータ ホットスポットを観察できます。
 
--   Index Insight は、有意義かつ実用的なインデックス推奨事項を提供します。
-
 > **注記：**
 >
-> 現在、 **Key Visualizer**と**Index Insight (ベータ版)**は、 TiDB Cloud Dedicated クラスターでのみ利用できます。
+> 現在、 **Key Visualizer は**TiDB Cloud Dedicated クラスターでのみ使用できます。
 
 ## 診断ページをビュー {#view-the-diagnosis-page}
 
@@ -78,13 +77,3 @@ TiDB Cloud は、パフォーマンスを分析するために[遅いクエリ](
 **Key Visualizer**ページでは、アクセストラフィックの推移を時系列で表示する大きなヒートマップが表示されます。ヒートマップの各軸の平均値（平均値）は、下部と右側に表示されます。左側には、テーブル名、インデックス名などの情報が表示されます。
 
 詳細については[キービジュアライザー](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer)参照してください。
-
-## インデックスインサイト（ベータ版） {#index-insight-beta}
-
-TiDB Cloudの Index Insight 機能は、インデックスを効果的に使用していない低速クエリに対して推奨インデックスを提供することで、クエリ パフォーマンスを最適化する強力な機能を提供します。
-
-> **注記：**
->
-> Index Insight は現在ベータ版であり、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでのみ使用できます。
-
-詳細については[インデックスインサイト](/tidb-cloud/index-insight.md)参照してください。

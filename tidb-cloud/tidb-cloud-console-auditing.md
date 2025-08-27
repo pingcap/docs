@@ -5,7 +5,7 @@ summary: TiDB Cloudコンソールの監査ログ機能について学習しま�
 
 # コンソール監査ログ {#console-audit-logging}
 
-TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユーザーのさまざまな行動や操作を追跡するのに役立つコンソール監査ログ機能を提供します。例えば、組織へのユーザー招待やクラスター作成などの操作を追跡できます。
+TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユーザーのさまざまな行動や操作を追跡するのに役立つコンソール監査ログ機能を提供します。例えば、ユーザーを組織に招待したり、クラスターを作成したりするなどの操作を追跡できます。
 
 ## 前提条件 {#prerequisites}
 
@@ -160,6 +160,7 @@ TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー�
 | ブランチルートパスワードの設定        | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチのルート パスワードを設定する |
 | 接続ブランチGitHub           | クラスターをGitHubリポジトリに接続してブランチ統合を有効にする                                   |
 | ブランチを切断GitHub          | ブランチ統合を無効にするには、クラスターを GitHub リポジトリから切断します。                           |
+| 認証方法の更新                | Cloud Organization SSO の認証方法を更新する                                    |
 
 ## コンソール監査ログフィールド {#console-audit-log-fields}
 

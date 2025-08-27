@@ -8,6 +8,32 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2025年8月26日 {#august-26-2025}
+
+**一般的な変更**
+
+-   **TiDB Cloudスターター**
+
+    -   [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)で自動埋め込み（ベータ版）を導入しました。これにより、追加の設定なしでテキストをベクターに変換するのが簡単になります。この機能により、 TiDB Cloudにおけるセマンティック検索、RAG、リランキング、分類の開発が、統合オーバーヘッドの削減とともに迅速化されます。
+
+        -   **人気の LLM プロバイダーによる自動埋め込み**: Amazon Titan、OpenAI、Cohere、Gemini、Jina AI、Hugging Face、NVIDIA NIM。
+        -   **AWS Bedrock とのネイティブ統合**: AWS Bedrock の Amazon Titan および Cohere テキスト埋め込みモデルを含む、無料クォータで管理される埋め込みモデル。
+        -   **SQL および Python のサポート**、埋め込みの作成、保存、クエリのコード例。
+
+        詳細については[自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)参照してください。
+
+-   **TiDB Cloud専用**
+
+    -   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では Index Insight (ベータ) 機能はサポートされなくなりました。
+
+        代わりに、TiDB v8.5.0 以降のバージョンで利用可能な[インデックスアドバイザー](/index-advisor.md)使用することをお勧めします。Index Advisor は`RECOMMEND INDEX` SQL ステートメントを導入しており、クエリのパフォーマンスを向上させるインデックスを推奨することでワークロードの最適化に役立ちます。
+
+    -   週次バックアップが有効になっている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで、ポイントインタイム リストア機能を手動で無効にできるようになりました。
+
+        この機能強化により、高 RPO 保護のためのポイントインタイム リストアを必要としないクラスターのコストが削減されます。
+
+        詳細については[TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md)参照してください。
+
 ## 2025年8月12日 {#august-12-2025}
 
 **一般的な変更**

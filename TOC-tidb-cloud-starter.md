@@ -219,6 +219,7 @@
 -   データの移行またはインポート
     -   [概要](/tidb-cloud/tidb-cloud-migration-overview.md)
     -   TiDB Cloudへのデータ移行
+        -   [TiDBセルフマネージドからTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)
         -   [大規模データセットの MySQL シャードの移行とマージ](/tidb-cloud/migrate-sql-shards.md)
         -   [AWS DMS を使用して Amazon RDS for Oracle から移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
     -   TiDB Cloudへのデータのインポート
@@ -241,6 +242,15 @@
     -   始める
         -   [SQLを始めよう](/vector-search/vector-search-get-started-using-sql.md)
         -   [Pythonを始めよう](/vector-search/vector-search-get-started-using-python.md)
+    -   自動埋め込み
+        -   [概要](/tidb-cloud/vector-search-auto-embedding-overview.md)
+        -   [Amazon Titan 埋め込み](/tidb-cloud/vector-search-auto-embedding-amazon-titan.md)
+        -   [コヒーレ埋め込み](/tidb-cloud/vector-search-auto-embedding-cohere.md)
+        -   [Jina AI 埋め込み](/tidb-cloud/vector-search-auto-embedding-jina-ai.md)
+        -   [OpenAI埋め込み](/tidb-cloud/vector-search-auto-embedding-openai.md)
+        -   [ジェミニ埋め込み](/tidb-cloud/vector-search-auto-embedding-gemini.md)
+        -   [HuggingFaceの埋め込み](/tidb-cloud/vector-search-auto-embedding-huggingface.md)
+        -   [NVIDIA NIM 埋め込み](/tidb-cloud/vector-search-auto-embedding-nvidia-nim.md)
     -   統合
         -   [概要](/vector-search/vector-search-integration-overview.md)
         -   AIフレームワーク

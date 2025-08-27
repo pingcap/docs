@@ -33,7 +33,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 
 ## サポートされているKafkaのバージョン {#supported-kafka-versions}
 
-次の表は、各 TiCDC バージョンでサポートされる最小の Kafka バージョンを示しています。
+次の表は、各 TiCDC バージョンでサポートされる最小 Kafka バージョンを示しています。
 
 | TiCDCバージョン                     | サポートされている最小の Kafka バージョン |
 | :----------------------------- | :----------------------- |
@@ -111,10 +111,11 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 -   独自のKafkaトピックを作成することをお勧めします。少なくとも、トピックがKafkaブローカーに送信できる各メッセージの最大データ量と、下流のKafkaパーティションの数を設定する必要があります。チェンジフィードを作成する場合、これらの2つの設定はそれぞれ`max-message-bytes`と`partition-num`に対応します。
 -   まだ存在しないトピックでチェンジフィードを作成した場合、TiCDCは`partition-num`と`replication-factor`パラメータを使用してトピックを作成しようとします。これらのパラメータは明示的に指定することをお勧めします。
 -   ほとんどの場合、 `canal-json`プロトコルを使用することをお勧めします。
+-   TiCDCにおけるアップストリームデータの変更頻度が低い場合（例えば、10分以上データの変更がないなど）は、Kafkaブローカー設定ファイルでKafka接続アイドルタイムアウトを増やすことをお勧めします。詳細については、 [TiCDC の Kafka へのレプリケーション タスクが`broken pipe`エラーで頻繁に失敗する理由](/ticdc/ticdc-faq.md#why-do-ticdc-replication-tasks-to-kafka-often-fail-with-broken-pipe-errors)参照してください。
 
 > **注記：**
 >
-> `protocol`が`open-protocol`場合、TiCDC は複数のイベントを 1 つの Kafka メッセージにエンコードし、 `max-message-bytes`で指定された長さを超えるメッセージの生成を回避します。1 行の変更イベントのエンコード結果が`max-message-bytes`を超える場合、changefeed はエラーを報告し、ログを出力。
+> `protocol`が`open-protocol`場合、TiCDC は複数のイベントを 1 つの Kafka メッセージにエンコードし、 `max-message-bytes`で指定された長さを超えるメッセージの生成を回避します。1 行の変更イベントのエンコード結果が`max-message-bytes`を超える場合、変更フィードはエラーを報告し、ログを出力。
 
 ### TiCDCはKafkaの認証と認可を使用します {#ticdc-uses-the-authentication-and-authorization-of-kafka}
 
@@ -191,7 +192,7 @@ dispatchers = [
 
 ### TiCDC を AWS Glue スキーマレジストリと統合する {#integrate-ticdc-with-aws-glue-schema-registry}
 
-バージョン7.4.0以降、TiCDCは、ユーザーがデータレプリケーションに[アブロプロトコル](/ticdc/ticdc-avro-protocol.md)選択した場合、スキーマレジストリとして[AWS Glue スキーマレジストリ](https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html)使用をサポートします。設定例は次のとおりです。
+v7.4.0以降、TiCDCは、ユーザーがデータレプリケーションに[アブロプロトコル](/ticdc/ticdc-avro-protocol.md)選択した場合、スキーマレジストリとして[AWS Glue スキーマレジストリ](https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html)使用をサポートします。設定例は次のとおりです。
 
 ```shell
 ./cdc cli changefeed create --server=127.0.0.1:8300 --changefeed-id="kafka-glue-test" --sink-uri="kafka://127.0.0.1:9092/topic-name?&protocol=avro&replication-factor=3" --config changefeed_glue.toml
@@ -276,7 +277,7 @@ Topic 式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
 
 ### パーティションディスパッチャ {#partition-dispatchers}
 
-`partition = "xxx"`パーティションディスパッチャを指定するために使用できます。5つのディスパッチャ（ `default` 、 `index-value` 、 `columns` 、 `table` 、 `ts`がサポートされています。ディスパッチャのルールは次のとおりです。
+`partition = "xxx"`パーティションディスパッチャを指定するために使用できます。3、5、7、9、11 `default` `index-value` `ts`のディスパッチャ`columns`サポートされて`table`ます。ディスパッチャのルールは次のとおりです。
 
 -   `default` : デフォルトで`table`ディスパッチャルールを使用します。スキーマ名とテーブル名に基づいてパーティション番号が計算され、テーブルからのデータが必ず同じパーティションに送信されます。その結果、1つのテーブルからのデータは1つのパーティションにのみ存在し、順序付けが保証されます。ただし、このディスパッチャルールは送信スループットを制限し、コンシューマーを追加しても消費速度を向上させることはできません。
 -   `index-value` : 主キー、一意のインデックス、または`index`で明示的に指定されたインデックスのいずれかを使用してパーティション番号を計算し、テーブルデータを複数のパーティションに分散します。単一のテーブルのデータは複数のパーティションに送信され、各パーティションのデータは順序付けされます。コンシューマーを追加することで、消費速度を向上させることができます。このディスパッチャは、同じ行への更新が同じパーティションに送信されるようにすることで、その行の順序付けされた処理を保証します。
@@ -414,7 +415,7 @@ large-message-handle-compression = "none"
 
 v7.3.0以降、TiCDC Kafkaシンクは、メッセージサイズが制限を超えた場合にハンドルキーのみを送信することをサポートします。これにより、メッセージサイズが大幅に削減され、Kafkaトピックの制限を超えたメッセージサイズに起因するチェンジフィードエラーやタスクの失敗を回避できます。ハンドルキーとは、以下のものを指します。
 
--   複製するテーブルに主キーがある場合、主キーがハンドル キーになります。
+-   複製するテーブルに主キーがある場合、主キーはハンドル キーになります。
 -   テーブルに主キーがなく、NOT NULL 一意キーがある場合、NOT NULL 一意キーがハンドル キーになります。
 
 サンプル構成は次のとおりです。

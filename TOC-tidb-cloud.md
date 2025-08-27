@@ -136,7 +136,7 @@
         -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md)
         -   [Azure のプライベート エンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
         -   [プライベートエンドポイント経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
-        -   [VPCピアリング経由で接続](/tidb-cloud/set-up-vpc-peering-connections.md)
+        -   [VPC ピアリング経由で接続](/tidb-cloud/set-up-vpc-peering-connections.md)
         -   [SQL シェル経由で接続する](/tidb-cloud/connect-via-sql-shell.md)
     -   [TiDB Cloud専用クラスタのスケール](/tidb-cloud/scale-tidb-cluster.md)
     -   [TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md)
@@ -168,7 +168,6 @@
         -   [概要](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
         -   パフォーマンスを分析する
             -   [診断ページを使用する](/tidb-cloud/tune-performance.md)
-                -   [インデックスインサイトを使用する](/tidb-cloud/index-insight.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
             -   [使用ステートメント概要表](/statement-summary-tables.md)
         -   SQLチューニング
             -   [概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
@@ -591,7 +590,7 @@
         -   [分離レベル](/transaction-isolation-levels.md)
         -   [楽観的トランザクション](/optimistic-transaction.md)
         -   [悲観的な取引](/pessimistic-transaction.md)
-        -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
+        -   [非トランザクションDML文](/non-transactional-dml.md)
         -   [パイプラインDML](/pipelined-dml.md)
     -   [ビュー](/views.md)
     -   [パーティショニング](/partitioned-table.md)
@@ -720,7 +719,7 @@
             -   [TPC-C パフォーマンステストレポート](/tidb-cloud/v7.5-performance-benchmarking-with-tpcc.md)
             -   [Sysbenchパフォーマンステストレポート](/tidb-cloud/v7.5-performance-benchmarking-with-sysbench.md)
         -   TiDB v7.1
-            -   [TPC-C パフォーマンステストレポート](/tidb-cloud/v7.1-performance-benchmarking-with-tpcc.md)
+            -   [TPC-Cパフォーマンステストレポート](/tidb-cloud/v7.1-performance-benchmarking-with-tpcc.md)
             -   [Sysbenchパフォーマンステストレポート](/tidb-cloud/v7.1-performance-benchmarking-with-sysbench.md)
         -   TiDB v6.5
             -   [TPC-C パフォーマンステストレポート](/tidb-cloud/v6.5-performance-benchmarking-with-tpcc.md)
@@ -746,7 +745,7 @@
         -   接続: IMチケットの作成とサブスクリプションの更新
             -   [Slack 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
             -   [Larkでチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
-        -   接続: サポートチケットのIMインタラクション
+        -   接続: サポートチケットの IM 対話
             -   [Slack経由でサポートチケットとやり取りする](/tidb-cloud/connected-slack-ticket-interaction.md)
             -   [Lark経由でサポートチケットとやり取りする](/tidb-cloud/connected-lark-ticket-interaction.md)
     -   [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)

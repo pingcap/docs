@@ -144,7 +144,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   JavaScript のリリース[TiDB Cloudサーバーレス ドライバー (ベータ版)](/tidb-cloud/serverless-driver.md) 。
 
-    TiDB CloudのJavaScript用サーバーレスドライバーを使用すると、HTTPS経由で[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターに接続できます。特に、TCP接続数が[Vercelエッジ関数](https://vercel.com/docs/functions/edge-functions)や[Cloudflareワーカー](https://workers.cloudflare.com/)などに制限されているエッジ環境で役立ちます。
+    TiDB CloudのJavaScript用サーバーレスドライバーを使用すると、HTTPS経由で[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターに接続できます。特に、TCP接続数が[Vercelエッジ関数](https://vercel.com/docs/functions/edge-functions)や[Cloudflareワーカー](https://workers.cloudflare.com/)など制限されているエッジ環境で役立ちます。
 
     詳細については[TiDB Cloudサーバーレス ドライバー (ベータ版)](/tidb-cloud/serverless-driver.md)参照してください。
 
@@ -410,7 +410,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   changefeed を使用してデータを Amazon S3 にストリーミングすることをサポートします。
 
-    これにより、 TiDB CloudとAmazon S3のシームレスな統合が可能になります。1 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタからAmazon S3へのリアルタイムのデータキャプチャとレプリケーションが可能になり、下流のアプリケーションと分析が最新のデータにアクセスできるようになります。
+    これにより、 TiDB CloudとAmazon S3のシームレスな統合が可能になります。1 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタからAmazon S3へのリアルタイムのデータキャプチャとレプリケーションが可能になり、下流のアプリケーションと分析機能が最新のデータにアクセスできるようになります。
 
     詳細については[クラウドストレージにstorage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)参照してください。
 
@@ -428,13 +428,13 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの[**キービジュアライザー**](/tidb-cloud/tune-performance.md#key-visualizer)ページ用の新しいネイティブ Web インフラストラクチャをリリースします。
 
-    新しいインフラストラクチャにより、 **Key Visualizer**ページ内を簡単にナビゲートし、より直感的かつ効率的に必要な情報にアクセスできるようになりました。また、新しいインフラストラクチャはUXに関する多くの問題を解決し、SQL診断プロセスをよりユーザーフレンドリーなものにしています。
+    新しいインフラストラクチャにより、 **Key Visualizer**ページ内を簡単にナビゲートし、より直感的かつ効率的に必要な情報にアクセスできるようになります。また、新しいインフラストラクチャはUXに関する多くの問題を解決し、SQL診断プロセスをよりユーザーフレンドリーなものにします。
 
 ## 2023年6月6日 {#june-6-2023}
 
 **一般的な変更**
 
--   [インデックスインサイト（ベータ版）](/tidb-cloud/index-insight.md) for [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターを導入します。これは、遅いクエリに対してインデックスの推奨を提供することで、クエリ パフォーマンスを最適化します。
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに Index Insight (ベータ版) を導入します。これは、低速クエリに対してインデックスの推奨事項を提供することで、クエリ パフォーマンスを最適化します。
 
     Index Insight を使用すると、次の方法でアプリケーション全体のパフォーマンスとデータベース操作の効率を向上させることができます。
 
@@ -444,8 +444,6 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
     -   アプリケーション効率の向上: Index Insight を使用してデータベース パフォーマンスを最適化することで、 TiDB Cloudで実行されるアプリケーションはより大きなワークロードを処理し、より多くのユーザーに同時にサービスを提供できるようになり、アプリケーションのスケーリング操作がより効率的になります。
 
     Index Insight を使用するには、 TiDB Cloud Dedicated クラスターの**診断**ページに移動し、 **Index Insight BETA**タブをクリックします。
-
-    詳細については[Index Insight（ベータ版）を使用する](/tidb-cloud/index-insight.md)参照してください。
 
 -   登録やインストールなしで TiDB の全機能を体験できるインタラクティブ プラットフォーム[TiDB プレイグラウンド](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_cloud_release_notes)をご紹介します。
 
@@ -697,7 +695,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     詳細については[TiDB Cloud組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md)参照してください。
 
--   TiDB Cloudのヘルプ関連の情報とアクションを 1 か所に統合します。
+-   TiDB Cloudのヘルプ関連の情報とアクションを 1 か所に統合​​します。
 
     これで、 [TiDB Cloudコンソール](https://tidbcloud.com/)右下隅にある**[?]**をクリックして、 [TiDB Cloudヘルプ情報](/tidb-cloud/tidb-cloud-support.md)すべて取得し、サポートに問い合わせることができます。
 

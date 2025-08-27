@@ -155,7 +155,6 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
       "max_log_size": 0,
       "storage": "string"
     },
-    "enable_old_value": true,
     "enable_sync_point": true,
     "filter": {
       "event_filters": [
@@ -402,7 +401,6 @@ curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v2
       "max_log_size": 0,
       "storage": "string"
     },
-    "enable_old_value": true,
     "enable_sync_point": true,
     "filter": {
       "event_filters": [
@@ -498,22 +496,22 @@ curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v2
 
 パラメータの説明は次のとおりです。
 
-| パラメータ名            | 説明                                                                                  |
-| :---------------- | :---------------------------------------------------------------------------------- |
-| `admin_job_type`  | `INTEGER`タイプ。管理ジョブのタイプ。                                                             |
-| `checkpoint_time` | `STRING`タイプ。レプリケーションタスクの現在のチェックポイントのフォーマットされた時刻。                                    |
-| `checkpoint_ts`   | `STRING`タイプ。レプリケーション タスクの現在のチェックポイントの TSO。                                          |
-| `config`          | レプリケーションタスクの設定。構造と意味は、レプリケーションタスク作成時の`replica_config`の設定と同じです。                      |
-| `create_time`     | `STRING`型。レプリケーションタスクが作成された時刻。                                                      |
-| `creator_version` | `STRING`タイプ。レプリケーションタスク作成時の TiCDC バージョン。                                            |
-| `error`           | レプリケーション タスク エラー。                                                                   |
-| `id`              | `STRING`タイプ。レプリケーション タスク ID。                                                        |
-| `resolved_ts`     | `UINT64`タイプ。レプリケーション タスクは ts を解決しました。                                               |
-| `sink_uri`        | `STRING`タイプ。レプリケーション タスク シンクの URI。                                                  |
-| `start_ts`        | `UINT64`タイプ。レプリケーションタスクが開始されます。                                                     |
-| `state`           | `STRING`型。レプリケーションタスクの`failed` 。2、4、6、8、10 `stopped` `normal`か`finished`なります`error` |
-| `target_ts`       | `UINT64`タイプ。レプリケーションタスクのターゲット ts。                                                   |
-| `task_status`     | レプリケーション タスクのディスパッチの詳細なステータス。                                                       |
+| パラメータ名            | 説明                                                                                     |
+| :---------------- | :------------------------------------------------------------------------------------- |
+| `admin_job_type`  | `INTEGER`タイプ。管理ジョブのタイプ。                                                                |
+| `checkpoint_time` | `STRING`タイプ。レプリケーションタスクの現在のチェックポイントのフォーマットされた時刻。                                       |
+| `checkpoint_ts`   | `STRING`タイプ。レプリケーション タスクの現在のチェックポイントの TSO。                                             |
+| `config`          | レプリケーションタスクの設定。構造と意味は、レプリケーションタスク作成時の`replica_config`の設定と同じです。                         |
+| `create_time`     | `STRING`型。レプリケーションタスクが作成された時刻。                                                         |
+| `creator_version` | `STRING`タイプ。レプリケーションタスク作成時の TiCDC バージョン。                                               |
+| `error`           | レプリケーション タスク エラー。                                                                      |
+| `id`              | `STRING`タイプ。レプリケーション タスク ID。                                                           |
+| `resolved_ts`     | `UINT64`タイプ。レプリケーション タスクは ts を解決しました。                                                  |
+| `sink_uri`        | `STRING`タイプ。レプリケーション タスク シンクの URI。                                                     |
+| `start_ts`        | `UINT64`タイプ。レプリケーションタスクが開始されます。                                                        |
+| `state`           | `STRING`型。レプリケーションタスクのステータス。2、4、6、8、10 `stopped` `normal`か`finished`なり`failed` `error` |
+| `target_ts`       | `UINT64`タイプ。レプリケーションタスクのターゲット ts。                                                      |
+| `task_status`     | レプリケーション タスクのディスパッチの詳細なステータス。                                                          |
 
 `task_status`パラメータは次のように記述されます。
 
@@ -588,7 +586,6 @@ changefeed 設定を変更するには、 `pause the replication task -> modify 
       "max_log_size": 0,
       "storage": "string"
     },
-    "enable_old_value": true,
     "enable_sync_point": true,
     "filter": {
       "event_filters": [

@@ -16,7 +16,7 @@ cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://ro
 ```shell
 Create changefeed successfully!
 ID: simple-replication-task
-Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2025-08-14T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v8.5.3"}
+Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2025-08-14T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v8.5.3"}
 ```
 
 -   `--changefeed-id` : レプリケーションタスクのID。形式は正規表現`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`に一致する必要があります。このIDが指定されていない場合、TiCDCは自動的にUUID（バージョン4形式）をIDとして生成します。
@@ -184,7 +184,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 -   v6.1.0 以降、TiDB はパーティションとトピックの 2 種類のイベント ディスパッチャーをサポートしています。
 -   マッチャーのマッチング構文は、フィルター ルール構文と同じです。
 -   この構成項目は、ダウンストリームが MQ の場合にのみ有効になります。
--   下流のMQがPulsarの場合、 `partition`のルーティングルール`index-value` `ts`のいずれにも指定されていない場合、各Pulsarメッセージはキーとして設定した文字列を使用してルーティングされます。例えば、あるマッチャーのルーティングルール`table`文字列`code`に指定すると、そのマッチャー`default`一致するすべてのPulsarメッセージは`code`をキーとしてルーティングされます。
+-   下流のMQがPulsarの場合、 `partition`のルーティングルール`index-value` `ts`いずれにも指定されていない場合、各Pulsarメッセージはキーとして設定した文字列を使用してルーティングされます。例えば、あるマッチャーのルーティングルール`table`文字列`code`に指定すると、そのマッチャー`default`一致するすべてのPulsarメッセージは`code`をキーとしてルーティングされます。
 
 #### <code>column-selectors</code> <span class="version-mark">v7.5.0 の新機能</span> {#code-column-selectors-code-span-class-version-mark-new-in-v7-5-0-span}
 

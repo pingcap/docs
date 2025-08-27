@@ -1,6 +1,6 @@
 ---
 title: TiCDC FAQs
-summary: Learn the FAQs you might encounter when you use TiCDC.
+summary: TiCDC を使用する際に遭遇する可能性のある FAQ について説明します。
 ---
 
 # TiCDC よくある質問 {#ticdc-faqs}
@@ -16,13 +16,13 @@ summary: Learn the FAQs you might encounter when you use TiCDC.
 レプリケーションタスクの`start-ts` 、上流TiDBクラスタ内のタイムスタンプOracle（TSO）に対応します。TiCDCは、レプリケーションタスクでこのTSOにデータを要求します。したがって、レプリケーションタスクの`start-ts` 、以下の要件を満たす必要があります。
 
 -   `start-ts`という値は、現在の TiDB クラスターの`tikv_gc_safe_point`値よりも大きいです。それ以外の場合、タスクの作成時にエラーが発生します。
--   Before starting a task, ensure that the downstream has all data before `start-ts`. For scenarios such as replicating data to message queues, if the data consistency between upstream and downstream is not required, you can relax this requirement according to your application need.
+-   タスクを開始する前に、下流にすべてのデータが揃っていることを確認してください`start-ts` 。メッセージキューにデータを複製するなどのシナリオでは、上流と下流の間でデータの整合性が要求されない場合は、アプリケーションのニーズに応じてこの要件を緩和できます。
 
 `start-ts`指定しない場合、または`start-ts` `0`として指定した場合、レプリケーション タスクが開始されると、TiCDC は現在の TSO を取得し、この TSO からタスクを開始します。
 
 ## TiCDC でタスクを作成するときに一部のテーブルを複製できないのはなぜですか? {#why-can-t-some-tables-be-replicated-when-i-create-a-task-in-ticdc}
 
-When you execute `cdc cli changefeed create` to create a replication task, TiCDC checks whether the upstream tables meet the [レプリケーション要件](/ticdc/ticdc-overview.md#best-practices). If some tables do not meet the requirements, `some tables are not eligible to replicate` is returned with a list of ineligible tables. You can choose `Y` or `y` to continue creating the task, and all updates on these tables are automatically ignored during the replication. If you choose an input other than `Y` or `y`, the replication task is not created.
+`cdc cli changefeed create`実行してレプリケーションタスクを作成すると、TiCDC は上流のテーブルが[レプリケーション要件](/ticdc/ticdc-overview.md#best-practices)満たしているかどうかを確認します。要件を満たしていないテーブルがある場合は、 `some tables are not eligible to replicate`不適格なテーブルのリストが返されます。7 または`Y` `y`選択してタスクの作成を続行すると、これらのテーブルに対するすべての更新はレプリケーション中に自動的に無視されます。11 または`y` `Y`の入力を選択した場合、レプリケーションタスクは作成されません。
 
 ## TiCDC レプリケーション タスクの状態を確認するにはどうすればよいですか? {#how-do-i-view-the-state-of-ticdc-replication-tasks}
 
@@ -87,7 +87,7 @@ cdc cli changefeed list --server=http://127.0.0.1:8300
 
     -   **方法 1** : 変更フィードのチェックポイントを照会します (推奨)。
 
-        すべてのレプリケーション タスクのチェックポイントを表示するには、 [TiCDC command-line tool](/ticdc/ticdc-manage-changefeed.md) `cdc cli`使用します。
+        すべてのレプリケーション タスクのチェックポイントを表示するには、 [TiCDC コマンドラインツール](/ticdc/ticdc-manage-changefeed.md) `cdc cli`使用します。
 
         ```shell
         cdc cli changefeed list --server=http://127.0.0.1:8300
@@ -118,7 +118,7 @@ cdc cli changefeed list --server=http://127.0.0.1:8300
 
         > **注記：**
         >
-        > The Syncpoint update interval is controlled by the [`sync-point-interval`](/ticdc/ticdc-upstream-downstream-check.md#enable-syncpoint) configuration item. For the most up-to-date replication progress, use method 1.
+        > 同期ポイントの更新間隔は、 [`sync-point-interval`](/ticdc/ticdc-upstream-downstream-check.md#enable-syncpoint)設定項目によって制御されます。最新のレプリケーションの進行状況を確認するには、方法1を使用してください。
 
         下流TiDBで次のSQL文を実行して上流TSO（ `primary_ts` ）と下流TSO（ `secondary_ts` ）を取得します。
 
@@ -126,7 +126,7 @@ cdc cli changefeed list --server=http://127.0.0.1:8300
         SELECT * FROM tidb_cdc.syncpoint_v1;
         ```
 
-        The output is as follows:
+        出力は次のようになります。
 
         ```sql
         +------------------+------------+--------------------+--------------------+---------------------+
@@ -138,7 +138,7 @@ cdc cli changefeed list --server=http://127.0.0.1:8300
         +------------------+------------+--------------------+--------------------+---------------------+
         ```
 
-        In the output, each row shows the upstream TiDB snapshot at `primary_ts` matches the downstream TiDB snapshot at `secondary_ts`.
+        出力では、各行に、上流の TiDB スナップショット`primary_ts`下流の TiDB スナップショット`secondary_ts`と一致することが示されています。
 
         レプリケーションの進行状況を表示するには、最新の`primary_ts`読み取り可能な時間形式に変換します。
 
@@ -156,15 +156,15 @@ cdc cli changefeed list --server=http://127.0.0.1:8300
         +------------------------------------+
         ```
 
-        If the time corresponding to the latest `primary_ts` is greater than or equal to the upstream TiDB cluster's TSO obtained in step 1, then TiCDC has replicated all updates downstream.
+        最新の`primary_ts`に対応する時間が、手順 1 で取得した上流 TiDB クラスターの TSO 以上である場合、TiCDC はすべての更新を下流に複製しています。
 
-## What is <code>gc-ttl</code> in TiCDC? {#what-is-code-gc-ttl-code-in-ticdc}
+## TiCDC の<code>gc-ttl</code>とは何ですか? {#what-is-code-gc-ttl-code-in-ticdc}
 
 v4.0.0-rc.1以降、PDはサービスレベルのGCセーフポイントの設定において外部サービスをサポートします。どのサービスでもGCセーフポイントを登録・更新できます。PDは、このGCセーフポイント以降のキーバリューデータがGCによってクリーンアップされないようにします。
 
 レプリケーション タスクが利用できないか中断された場合、この機能により、TiCDC によって消費されるデータが GC によってクリーンアップされることなく TiKV に保持されます。
 
-When starting the TiCDC server, you can specify the Time To Live (TTL) duration of GC safepoint by configuring `gc-ttl`. You can also [TiUPを使用して変更する](/ticdc/deploy-ticdc.md#modify-ticdc-cluster-configurations-using-tiup) `gc-ttl`. The default value is 24 hours. In TiCDC, this value means:
+TiCDCサーバーの起動時に、GCセーフポイントのTime To Live（TTL）期間を`gc-ttl`設定することで指定できます。また、 [TiUPを使用して変更する](/ticdc/deploy-ticdc.md#modify-ticdc-cluster-configurations-using-tiup) `gc-ttl`設定することもできます。デフォルト値は24時間です。TiCDCでは、この値は以下の意味を持ちます。
 
 -   TiCDC サービスが停止した後、GC セーフポイントが PD に保持される最大時間。
 -   TiKVのGCがTiCDCのGCセーフポイントによってブロックされている場合、 `gc-ttl` TiCDCレプリケーションタスクの最大レプリケーション遅延を示します。レプリケーションタスクの遅延が`gc-ttl`で設定された値を超えると、レプリケーションタスクは`failed`状態になり、 `ErrGCTTLExceeded`エラーを報告します。この状態は回復できず、GCセーフポイントの進行をブロックしなくなります。
@@ -183,7 +183,7 @@ TiCDCサービスの起動後にレプリケーションタスクが開始され
 
 TiCDC がサービス GC セーフポイントに設定するデフォルトの Time-To-Live (TTL) は 24 時間です。つまり、TiCDC サービスが中断されてから 24 時間以内に回復できる場合、GC メカニズムは、レプリケーションを続行するために TiCDC が必要とするデータを削除しません。
 
-## How to recover a replication task after it fails? {#how-to-recover-a-replication-task-after-it-fails}
+## レプリケーション タスクが失敗した後に回復するにはどうすればよいですか? {#how-to-recover-a-replication-task-after-it-fails}
 
 1.  `cdc cli changefeed query`使用してレプリケーション タスクのエラー情報を照会し、できるだけ早くエラーを修正します。
 2.  値を`gc-ttl`に増やすと、エラーを修正するための時間が長くなり、エラーが修正された後にレプリケーションの遅延が`gc-ttl`超えたためにレプリケーション タスクが`failed`ステータスにならないようになります。
@@ -191,22 +191,22 @@ TiCDC がサービス GC セーフポイントに設定するデフォルトの 
 
 ## TiCDC タイムゾーンと上流/下流データベースのタイムゾーンの関係を理解するにはどうすればよいでしょうか? {#how-to-understand-the-relationship-between-the-ticdc-time-zone-and-the-time-zones-of-the-upstream-downstream-databases}
 
-|                      |                                   上流タイムゾーン                                  |                                     TiCDCタイムゾーン                                    |                               下流タイムゾーン                               |
-| :------------------: | :-------------------------------------------------------------------------: | :--------------------------------------------------------------------------------: | :------------------------------------------------------------------: |
-| Configuration method |                  See [タイムゾーンのサポート](/configure-time-zone.md)                 |                       TiCDCサーバーを起動するときに`--tz`パラメータを使用して設定されます                      |                  `sink-uri`の`time-zone`パラメータを使用して構成                  |
-|          説明          | アップストリーム TiDB のタイムゾーン。タイムスタンプ タイプの DML 操作と、タイムスタンプ タイプの列に関連する DDL 操作に影響します。 | TiCDC は、アップストリーム TiDB のタイムゾーンが TiCDC のタイムゾーン構成と同じであると想定し、タイムスタンプ列に対して関連する操作を実行します。 | ダウンストリーム MySQL は、ダウンストリームのタイムゾーン設定に従って、DML および DDL 操作のタイムスタンプを処理します。 |
+|              |                                   上流タイムゾーン                                  |                                     TiCDCタイムゾーン                                    |                               下流タイムゾーン                               |
+| :----------: | :-------------------------------------------------------------------------: | :--------------------------------------------------------------------------------: | :------------------------------------------------------------------: |
+| コンフィグレーション方法 |                   [タイムゾーンのサポート](/configure-time-zone.md)参照                  |                       TiCDCサーバーを起動するときに`--tz`パラメータを使用して設定されます                      |                  `sink-uri`の`time-zone`パラメータを使用して構成                  |
+|      説明      | アップストリーム TiDB のタイムゾーン。タイムスタンプ タイプの DML 操作と、タイムスタンプ タイプの列に関連する DDL 操作に影響します。 | TiCDC は、アップストリーム TiDB のタイムゾーンが TiCDC のタイムゾーン構成と同じであると想定し、タイムスタンプ列に対して関連する操作を実行します。 | ダウンストリーム MySQL は、ダウンストリームのタイムゾーン設定に従って、DML および DDL 操作のタイムスタンプを処理します。 |
 
 > **注記：**
 >
 > TiCDCサーバーのタイムゾーンを設定する際は、時刻型の変換に使用されるため、注意してください。上流のタイムゾーン、TiCDCのタイムゾーン、下流のタイムゾーンは統一してください。TiCDCサーバーは、以下の優先順位でタイムゾーンを選択します。
 >
 > -   TiCDC はまず`--tz`を使用して指定されたタイムゾーンを使用します。
-> -   When `--tz` is not available, TiCDC tries to read the time zone set using the `TZ` environment variable.
-> -   When the `TZ` environment variable is not available, TiCDC uses the default time zone of the machine.
+> -   `--tz`が利用できない場合、TiCDC は`TZ`環境変数を使用してタイム ゾーン セットを読み取ろうとします。
+> -   `TZ`環境変数が使用できない場合、TiCDC はマシンのデフォルトのタイムゾーンを使用します。
 
-## What is the default behavior of TiCDC if I create a replication task without specifying the configuration file in <code>--config</code>? {#what-is-the-default-behavior-of-ticdc-if-i-create-a-replication-task-without-specifying-the-configuration-file-in-code-config-code}
+## <code>--config</code>で構成ファイルを指定せずにレプリケーション タスクを作成した場合、TiCDC のデフォルトの動作はどうなりますか? {#what-is-the-default-behavior-of-ticdc-if-i-create-a-replication-task-without-specifying-the-configuration-file-in-code-config-code}
 
-If you use the `cdc cli changefeed create` command without specifying the `-config` parameter, TiCDC creates the replication task in the following default behaviors:
+`-config`パラメータを指定せずに`cdc cli changefeed create`コマンドを使用すると、TiCDC は次のデフォルト動作でレプリケーション タスクを作成します。
 
 -   システムテーブルを除くすべてのテーブルを複製します
 -   [有効なインデックス](/ticdc/ticdc-overview.md#best-practices)含むテーブルのみを複製します
@@ -224,7 +224,7 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127
 > -   この機能は TiCDC 4.0.2 で導入されました。
 > -   TiCDC は現在、Kafka などの MQ シンクへのデータ変更の Canal-JSON 形式での出力のみをサポートしています。
 
-For more information, refer to [TiCDC チェンジフィード構成](/ticdc/ticdc-changefeed-config.md).
+詳細については[TiCDC チェンジフィード構成](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 ## TiCDC から Kafka へのレイテンシーがどんどん高くなるのはなぜですか? {#why-does-the-latency-from-ticdc-to-kafka-become-higher-and-higher}
 
@@ -232,7 +232,7 @@ For more information, refer to [TiCDC チェンジフィード構成](/ticdc/tic
 -   Kafka の次のパラメータを調整します。
 
     -   `server.properties`の`message.max.bytes`値を`1073741824` (1 GB) に増やします。
-    -   Increase the `replica.fetch.max.bytes` value in `server.properties` to `1073741824` (1 GB).
+    -   `server.properties`の`replica.fetch.max.bytes`値を`1073741824` (1 GB) に増やします。
     -   `consumer.properties`の`fetch.message.max.bytes`値を増やして、 `message.max.bytes`値より大きくします。
 
 ## TiCDC がデータを Kafka に複製する場合、TiDB 内の単一メッセージの最大サイズを制御できますか? {#when-ticdc-replicates-data-to-kafka-can-i-control-the-maximum-size-of-a-single-message-in-tidb}
@@ -272,9 +272,9 @@ Kafka メッセージのキーの`ts` 18 ビット右に移動すると、Unix �
 
 TiCDC オープン プロトコルでは、タイプ コード`6` `null`表します。
 
-| タイプ | Code | 出力例                | Note |
-| :-- | :--- | :----------------- | :--- |
-| ヌル  | 6    | `{"t":6,"v":null}` |      |
+| タイプ | コード | 出力例                | 注記 |
+| :-- | :-- | :----------------- | :- |
+| ヌル  | 6   | `{"t":6,"v":null}` |    |
 
 詳細については[TiCDCオープンプロトコル列タイプコード](/ticdc/ticdc-open-protocol.md#column-type-code)を参照してください。
 
@@ -284,7 +284,7 @@ TiCDC オープン プロトコルでは、タイプ コード`6` `null`表し�
 -   `INSERT`イベントには`"u"`フィールドのみが含まれます
 -   `DELETE`イベントには`"d"`フィールドのみが含まれます
 
-For more information, refer to [オープンプロトコル行変更イベント形式](/ticdc/ticdc-open-protocol.md#row-changed-event).
+詳細については[オープンプロトコル行変更イベント形式](/ticdc/ticdc-open-protocol.md#row-changed-event)を参照してください。
 
 ## TiCDC はどのくらいの PDstorageを使用しますか? {#how-much-pd-storage-does-ticdc-use}
 
@@ -303,7 +303,7 @@ v6.0.0以降、TiCDCはメタデータstorageメカニズムを最適化し、�
 TiCDCは、大規模トランザクション（5GBを超える）を部分的にサポートしています。シナリオによっては、以下のリスクが発生する可能性があります。
 
 -   プライマリ-セカンダリレプリケーションのレイテンシーが大幅に増加する可能性があります。
--   When TiCDC's internal processing capacity is insufficient, the replication task error `ErrBufferReachLimit` might occur.
+-   TiCDC の内部処理能力が不足すると、レプリケーション タスク エラー`ErrBufferReachLimit`発生する可能性があります。
 -   TiCDC の内部処理能力が不足している場合、または TiCDC のダウンストリームのスループット能力が不足している場合、メモリ不足 (OOM) が発生する可能性があります。
 
 TiCDC v6.2以降、単一テーブルトランザクションを複数のトランザクションに分割できるようになりました。これにより、大規模トランザクションのレプリケーションにおけるレイテンシーとメモリ消費量を大幅に削減できます。したがって、アプリケーションでトランザクションのアトミック性に対する要件がそれほど高くない場合は、レプリケーションのレイテンシーとOOM（オブジェクトオーバーヘッド）を回避するために、大規模トランザクションの分割を有効にすることを推奨します。分割を有効にするには、シンクURIパラメータの値を[`transaction-atomicity`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)から`none`に設定してください。
@@ -325,11 +325,11 @@ TiCDC v6.2以降、単一テーブルトランザクションを複数のトラ�
 -   列の精度を変更する。例：DECIMAL(10, 3) -&gt; DECIMAL(10, 2)
 -   列の UNSIGNED または SIGNED 属性の変更 (例: INT UNSIGNED -&gt; INT SIGNED)
 
-TiDB v7.1.0より前のバージョンでは、TiCDCは新旧のデータが同一のDMLイベントを下流に複製します。下流がMySQLの場合、これらのDMLイベントは、下流がDDL文を受信して実行するまでデータ変更を引き起こしません。しかし、下流がKafkaまたはクラウドstorageサービスの場合、TiCDCは冗長データの行を下流に書き込みます。
+TiDB v7.1.0より前のバージョンでは、TiCDCは新旧のデータが同一のDMLイベントを下流に複製します。下流がMySQLの場合、これらのDMLイベントは、下流がDDL文を受信して​​実行するまでデータ変更を引き起こしません。しかし、下流がKafkaまたはクラウドstorageサービスの場合、TiCDCは冗長データの行を下流に書き込みます。
 
 TiDB v7.1.0 以降、TiCDC はこれらの冗長な DML イベントを削除し、ダウンストリームに複製しなくなりました。
 
-## The default value of the time type field is inconsistent when replicating a DDL statement to the downstream MySQL 5.7. What can I do? {#the-default-value-of-the-time-type-field-is-inconsistent-when-replicating-a-ddl-statement-to-the-downstream-mysql-5-7-what-can-i-do}
+## DDL文を下流のMySQL 5.7に複製する際に、時間型フィールドのデフォルト値が一致しません。どうすればよいでしょうか？ {#the-default-value-of-the-time-type-field-is-inconsistent-when-replicating-a-ddl-statement-to-the-downstream-mysql-5-7-what-can-i-do}
 
 上流のTiDBで`create table test (id int primary key, ts timestamp)`の文が実行されたとします。TiCDCがこの文を下流のMySQL 5.7に複製する際、MySQLはデフォルト設定を使用します。複製後のテーブルスキーマは以下のとおりです。3 `timestamp`フィールドのデフォルト値は`CURRENT_TIMESTAMP`なります。
 
@@ -363,7 +363,7 @@ v6.1.3以降のバージョンでは、デフォルト値の`safe-mode`が`false
 
 上流の書き込みトラフィックがピーク時になると、下流側ですべてのデータをタイムリーに消費できず、データが蓄積される可能性があります。TiCDCは、蓄積されたデータをディスクで処理します。TiCDCは通常の動作中にディスクにデータを書き込む必要がありますが、ディスクへの書き込みは100ミリ秒以内のレイテンシーにしかならないため、これがレプリケーションのスループットとレイテンシーネックになることは通常ありません。TiCDCはメモリを使用してディスクからのデータの読み取りを高速化し、レプリケーションのパフォーマンスを向上させます。
 
-## Why does replication using TiCDC stall or even stop after data restore using TiDB Lightning physical import mode and BR from upstream? {#why-does-replication-using-ticdc-stall-or-even-stop-after-data-restore-using-tidb-lightning-physical-import-mode-and-br-from-upstream}
+## TiDB Lightning物理インポート モードとアップストリームからのBRを使用してデータを復元した後、TiCDC を使用したレプリケーションが停止したり、停止したりするのはなぜですか? {#why-does-replication-using-ticdc-stall-or-even-stop-after-data-restore-using-tidb-lightning-physical-import-mode-and-br-from-upstream}
 
 現在、TiCDC は[TiDB Lightning物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)およびBRと完全に互換性がありません。そのため、TiCDC によってレプリケートされたテーブルでは、 TiDB Lightning物理インポートモードとBRの使用は避けてください。そうしないと、TiCDC レプリケーションの停止、レプリケーションレイテンシーの大幅な上昇、データ損失などの未知のエラーが発生する可能性があります。
 
@@ -371,7 +371,7 @@ TiCDC によって複製された一部のテーブルのデータを復元す�
 
 1.  これらのテーブルに関連する TiCDC レプリケーション タスクを削除します。
 
-2.  Use TiDB Lightning physical import mode or BR to restore data separately in the upstream and downstream clusters of TiCDC.
+2.  TiDB Lightning物理インポート モードまたはBRを使用して、TiCDC の上流クラスターと下流クラスターでデータを個別に復元します。
 
 3.  復元が完了し、上流クラスターと下流クラスター間のデータ整合性が検証されたら、上流バックアップのタイムスタンプ（TSO）をタスクの`start-ts`として、増分レプリケーション用の新しい TiCDC レプリケーションタスクを作成します。例えば、上流クラスターのBRバックアップのスナップショットのタイムスタンプが`431434047157698561`であると仮定すると、以下のコマンドを使用して新しい TiCDC レプリケーションタスクを作成できます。
 
@@ -385,7 +385,7 @@ TiCDC によって複製された一部のテーブルのデータを復元す�
 
 ## 異なるリージョンにある 2 つの TiDB クラスター間でデータをレプリケートするには、TiCDC をどのようにデプロイすればよいですか? {#how-should-i-deploy-ticdc-to-replicate-data-between-two-tidb-cluster-located-in-different-regions}
 
-For TiCDC versions earlier than v6.5.2, it is recommended that you deploy TiCDC in the downstream TiDB cluster. If the network latency between the upstream and downstream is high, for example, more than 100 ms, the latency produced when TiCDC executes SQL statements to the downstream might increase dramatically due to the MySQL transmission protocol issues. This results in a decrease in system throughput. However, deploying TiCDC in the downstream can greatly ease this problem. After optimization, starting from TiCDC v6.5.2, it is recommended that you deploy TiCDC in the upstream TiDB cluster.
+TiCDC v6.5.2より前のバージョンでは、TiCDCをダウンストリームTiDBクラスタにデプロイすることをお勧めします。アップストリームとダウンストリーム間のネットワークレイテンシーが高い場合（例えば100ミリ秒を超える場合）、MySQL転送プロトコルの問題により、TiCDCがダウンストリームにSQL文を実行する際のレイテンシーが大幅に増加する可能性があります。その結果、システムスループットが低下します。しかし、ダウンストリームにTiCDCをデプロイすることで、この問題を大幅に軽減できます。最適化後、TiCDC v6.5.2以降では、TiCDCをアップストリームTiDBクラスタにデプロイすることをお勧めします。
 
 ## DML および DDL ステートメントの実行順序は何ですか? {#what-is-the-order-of-executing-dml-and-ddl-statements}
 
@@ -397,7 +397,7 @@ For TiCDC versions earlier than v6.5.2, it is recommended that you deploy TiCDC 
 
 ## アップストリーム データとダウンストリーム データが一貫しているかどうかをどのように確認すればよいですか? {#how-should-i-check-whether-the-upstream-and-downstream-data-is-consistent}
 
-If the downstream is a TiDB cluster or MySQL instance, it is recommended that you compare the data using [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md).
+ダウンストリームが TiDB クラスターまたは MySQL インスタンスの場合は、 [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)使用してデータを比較することをお勧めします。
 
 ## 単一テーブルのレプリケーションは単一のTiCDCノードでのみ実行できます。複数のTiCDCノードを使用して複数テーブルのデータをレプリケーションすることは可能ですか？ {#replication-of-a-single-table-can-only-be-run-on-a-single-ticdc-node-will-it-be-possible-to-use-multiple-ticdc-nodes-to-replicate-data-of-multiple-tables}
 
@@ -446,9 +446,9 @@ TiDBにはトランザクションタイムアウト機構があります。ト�
 
 生成列には、仮想生成列と保存生成列が含まれます。TiCDCは仮想生成列を無視し、保存生成列のみを下流に複製します。ただし、下流がMySQLまたはMySQL互換データベース（Kafkaなどのstorageサービスではない）である場合、保存生成列も無視されます。
 
-> **Note:**
+> **注記：**
 >
-> When replicating stored generated columns to Kafka or a storage service and then writing them back to MySQL, `Error 3105 (HY000): The value specified for generated column 'xx' in table 'xxx' is not allowed` might occur. To avoid this error, you can use [オープンプロトコル](/ticdc/ticdc-open-protocol.md#ticdc-open-protocol) for replication. The output of this protocol includes [列のビットフラグ](/ticdc/ticdc-open-protocol.md#bit-flags-of-columns), which can distinguish whether a column is a generated column.
+> 保存された生成列をKafkaまたはstorageサービスにレプリケーションし、その後MySQLに書き戻すと、 `Error 3105 (HY000): The value specified for generated column 'xx' in table 'xxx' is not allowed`発生する可能性があります。このエラーを回避するには、レプリケーションに[オープンプロトコル](/ticdc/ticdc-open-protocol.md#ticdc-open-protocol)使用します。このプロトコルの出力には[列のビットフラグ](/ticdc/ticdc-open-protocol.md#bit-flags-of-columns)含まれており、列が生成列かどうかを区別できます。
 
 ## 頻繁に発生する<code>CDC:ErrMySQLDuplicateEntryCDC</code>エラーを解決するにはどうすればよいですか? {#how-do-i-resolve-frequent-code-cdc-errmysqlduplicateentrycdc-code-errors}
 
@@ -458,7 +458,7 @@ TiCDC を使用してデータを TiDB または MySQL に複製する場合、�
 
 エラーの原因：TiDBは、同一トランザクション内の同一行に対する`DELETE + INSERT`操作を、1つの`UPDATE`行の変更として結合します。TiCDCがこれらの変更を更新として下流に複製する際、一意のキー値を交換しようとする`UPDATE`操作によって競合が発生する可能性があります。
 
-Taking the following table as an example:
+次の表を例に挙げます。
 
 ```sql
 CREATE TABLE data_table (
@@ -468,7 +468,7 @@ CREATE TABLE data_table (
 ) CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 ```
 
-If the upstream attempts to swap the `value` field of the two rows in the table:
+アップストリームがテーブル内の 2 つの行の`value`のフィールドを交換しようとした場合:
 
 ```sql
 DELETE FROM data_table WHERE id = 1;
@@ -486,8 +486,26 @@ UPDATE data_table SET value = 'v1' WHERE id = 2;
 
 2 番目`UPDATE`ステートメントを実行するときにダウンストリーム テーブルにまだ`v1`が含まれている場合、 `value`列の一意キー制約に違反し、 `CDC:ErrMySQLDuplicateEntryCDC`エラーが発生します。
 
-If the `CDC:ErrMySQLDuplicateEntryCDC` error occurs frequently, you can enable TiCDC safe mode by setting the `safe-mode=true` parameter in the [`sink-uri`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb) configuration:
+`CDC:ErrMySQLDuplicateEntryCDC`エラーが頻繁に発生する場合は、 [`sink-uri`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)構成で`safe-mode=true`パラメータを設定することで TiCDC セーフ モードを有効にすることができます。
 
     mysql://user:password@host:port/?safe-mode=true
 
 セーフ モードでは、TiCDC は`UPDATE`操作を`DELETE + REPLACE INTO`に分割して実行し、一意のキーの競合エラーを回避します。
+
+## Kafka への TiCDC レプリケーション タスクが<code>broken pipe</code>エラーで頻繁に失敗するのはなぜですか? {#why-do-ticdc-replication-tasks-to-kafka-often-fail-with-code-broken-pipe-code-errors}
+
+TiCDCはSaramaクライアントを使用してKafkaにデータを複製します。データの順序が乱れるのを防ぐため、TiCDCはSaramaの自動再試行メカニズムを無効化します（再試行回数を0に設定）。その結果、TiCDCとKafka間の接続が一定時間アイドル状態になった後にKafkaによって切断された場合、TiCDCからの後続の書き込みは`write: broken pipe`エラーを引き起こし、レプリケーションタスクが失敗します。
+
+このエラーにより変更フィードが失敗する可能性がありますが、TiCDC は影響を受けた変更フィードを自動的に再起動するため、レプリケーションタスクは正常に実行を継続できます。再起動プロセス中、変更フィードのレプリケーションレイテンシー（ラグ）が一時的にわずかに（通常は 30 秒以内）増加する場合がありますが、その後自動的に正常に戻ります。
+
+アプリケーションが changefeed のレイテンシーに非常に敏感な場合は、次の操作を実行することをお勧めします。
+
+1.  Kafkaブローカー設定ファイルで、Kafka接続のアイドルタイムアウトを増やします。例：
+
+    ```properties
+    connections.max.idle.ms=86400000  # Set to 1 day
+    ```
+
+    実際のレプリケーションワークロードに応じて、 `connections.max.idle.ms`の値を調整することをお勧めします。例えば、TiCDCの変更フィードが常に数分以内にデータをレプリケートする場合は、非常に大きな値ではなく、数分程度の`connections.max.idle.ms`に設定できます。
+
+2.  設定変更を適用するには、Kafka を再起動してください。これにより、接続が途中で閉じられるのを防ぎ、 `broken pipe`を減らすことができます。
