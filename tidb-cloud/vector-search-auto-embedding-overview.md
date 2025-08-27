@@ -149,7 +149,7 @@ Converts text to vector embeddings:
 EMBED_TEXT("model_name", text_content[, additional_json_options])
 ```
 
-Use this function in `GENERATED ALWAYS AS` clauses to automatically generate embeddings when inserting text data.
+Use this function in `GENERATED ALWAYS AS` clauses to automatically generate embeddings when inserting or updating text data.
 
 ### `VEC_EMBED_COSINE_DISTANCE()`
 
