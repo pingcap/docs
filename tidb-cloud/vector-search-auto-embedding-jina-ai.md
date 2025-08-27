@@ -127,7 +127,7 @@ For all available options, see [Jina AI Documentation](https://jina.ai/embedding
 
 ## Python usage example
 
-See [PyTiDB Documentation](https://pingcap.github.io/ai/guides/auto-embedding/).
+See [PyTiDB Documentation](https://pingcap.github.io/ai/integrations/embedding-jinaai/).
 
 ## See Also
 
