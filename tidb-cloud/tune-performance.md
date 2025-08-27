@@ -16,11 +16,7 @@ TiDB Cloud provides [Slow Query](#slow-query), [Statement Analysis](#statement-a
 
 > **Note:**
 >
-<<<<<<< HEAD
 > Currently, **Key Visualizer** and **Index Insight (beta)** are only available on TiDB Cloud Dedicated clusters.
-=======
-> Currently, **Key Visualizer** is unavailable for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
->>>>>>> a0870d4bba (cloud: remove index insight (#21648))
 
 ## View the Diagnosis page
 
