@@ -14,35 +14,51 @@ category: quick start
 
 ## 第 1 步：创建 TiDB 集群
 
-[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 是体验 TiDB Cloud 的最佳方式。要创建 TiDB Cloud Serverless 集群，请按照以下步骤操作：
+[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)（现称为 Starter）是体验 TiDB Cloud 的最佳方式。要创建 TiDB Cloud Serverless 集群，请按照以下步骤操作：
 
-1. 如果你还没有 TiDB Cloud 账号，请点击 [这里](https://tidbcloud.com/free-trial) 注册。
+1. 如果你还没有 TiDB Cloud 账号，请点击[这里](https://tidbcloud.com/free-trial)注册。
 
-    你可以使用邮箱和密码注册并通过 TiDB Cloud 管理密码，或者选择使用 Google、GitHub 或 Microsoft 账号进行单点登录（SSO）到 TiDB Cloud。
+    你可以使用邮箱和密码注册并由 TiDB Cloud 管理密码，或者选择使用 Google、GitHub 或 Microsoft 账号进行单点登录（SSO）到 TiDB Cloud。
 
-2. [登录](https://tidbcloud.com/) 你的 TiDB Cloud 账号。
+2. [登录](https://tidbcloud.com/)你的 TiDB Cloud 账号。
 
     默认会显示 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 
 3. 对于新注册用户，TiDB Cloud 会自动为你创建一个名为 `Cluster0` 的默认 TiDB Cloud Serverless 集群。
 
-    - 如果你想立即使用该默认集群体验 TiDB Cloud 的功能，请继续阅读 [第 2 步：体验 AI 辅助 SQL 编辑器](#step-2-try-ai-assisted-sql-editor)。
+    - 如果你想立即使用该默认集群体验 TiDB Cloud 的功能，请继续查看 [第 2 步：体验 AI 辅助 SQL 编辑器](#step-2-try-ai-assisted-sql-editor)。
     - 如果你想自行创建新的 TiDB Cloud Serverless 集群，请按照以下步骤操作：
 
         1. 点击 **Create Cluster**。
-        2. 在 **Create Cluster** 页面，**Serverless** 会被默认选中。选择你的集群目标区域，如有需要可修改默认集群名称，选择你的 [集群方案](/tidb-cloud/select-cluster-tier.md#cluster-plans)，然后点击 **Create**。你的 TiDB Cloud Serverless 集群将在大约 30 秒内创建完成。
+        2. 在 **Create Cluster** 页面，默认选择 **Starter**。选择你的集群所需的云服务商和目标区域，如有需要可修改默认集群名称，然后点击 **Create**。你的 TiDB Cloud Serverless 集群将在大约 30 秒内创建完成。
+
+        <CustomContent language="en,zh">
+
+        > **注意**
+        >
+        > 目前，TiDB Cloud Serverless 已在 AWS 上正式可用，并在阿里云上公测。本文档后续步骤以 AWS 为例。
+
+        </CustomContent>
+
+        <CustomContent language="ja">
+
+        > **注意**
+        >
+        > 目前，TiDB Cloud Serverless 已在 AWS 上正式可用。本文档后续步骤以 AWS 为例。
+
+        </CustomContent>
 
 ## 第 2 步：体验 AI 辅助 SQL 编辑器
 
-你可以在 TiDB Cloud 控制台中使用内置的 AI 辅助 SQL 编辑器，最大化数据价值。这样你无需本地 SQL 客户端即可对数据库运行 SQL 查询，并可直观地以表格或图表形式查看查询结果，轻松查看查询日志。
+对于托管在 AWS 上的 TiDB Cloud Serverless 集群，你可以在 TiDB Cloud 控制台中使用内置的 AI 辅助 SQL 编辑器，最大化数据价值。你无需本地 SQL 客户端即可对数据库运行 SQL 查询，并可直观地以表格或图表形式查看查询结果，轻松查看查询日志。
 
 1. 在 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击某个集群名称进入其概览页面，然后在左侧导航栏点击 **SQL Editor**。
 
-2. 若要体验 TiDB Cloud 的 AI 能力，请按照屏幕提示允许 PingCAP 和 AWS Bedrock 使用你的代码片段进行研究和服务改进，然后点击 **Save and Get Started**。
+2. 若要体验 TiDB Cloud 的 AI 能力，请按照页面提示允许 PingCAP 和 AWS Bedrock 使用你的代码片段进行研究和服务改进，然后点击 **Save and Get Started**。
 
 3. 在 SQL Editor 中，按下 macOS 的 <kbd>⌘</kbd> + <kbd>I</kbd>（或 Windows/Linux 的 <kbd>Control</kbd> + <kbd>I</kbd>），即可指示 [Chat2Query (beta)](/tidb-cloud/tidb-cloud-glossary.md#chat2query) 自动生成 SQL 查询语句。
 
-    例如，若要创建一个包含两列（`id` 和 `name`）的新表 `test.t`，你可以输入 `use test;` 指定数据库，按下 <kbd>⌘</kbd> + <kbd>I</kbd>，输入 `create a new table t with id and name` 作为指令，然后按 **Enter**，让 AI 自动生成相应的 SQL 语句。
+    例如，若要创建一个包含两列（`id` 和 `name`）的新表 `test.t`，你可以输入 `use test;` 指定数据库，按下 <kbd>⌘</kbd> + <kbd>I</kbd>，输入指令 `create a new table t with id and name`，然后按 **Enter**，让 AI 自动生成相应的 SQL 语句。
 
     对于生成的语句，你可以点击 **Accept** 接受并根据需要进一步编辑，或点击 **Discard** 拒绝。
 
@@ -80,7 +96,7 @@ category: quick start
 
 运行查询后，你可以在页面底部立即看到查询日志和结果。
 
-如果想让 AI 生成更多 SQL 语句，可以像下面的示例一样输入更多指令：
+如需让 AI 生成更多 SQL 语句，你可以输入更多指令，如下例所示：
 
 ```sql
 use test;
@@ -105,18 +121,17 @@ FROM
   `t`;
 ```
 
-## 第 3 步：体验交互式教程
+## 第 3 步：体验控制台引导式教程
 
-TiDB Cloud 提供了配套示例数据集的交互式教程，帮助你快速上手 TiDB Cloud。你可以通过这些教程学习如何使用 TiDB Cloud 进行高性能数据分析。
+TiDB Cloud 提供了交互式教程和精心设计的示例数据集，帮助你快速上手 TiDB Cloud。对于托管在 AWS 上的 TiDB Cloud Serverless 集群，你可以通过该教程学习如何使用 TiDB Cloud 进行高性能数据分析。
 
-1. 点击控制台右下角的 **?** 图标，选择 **Interactive Tutorials**。
-2. 在教程列表中，选择一个教程卡片开始，例如 **Steam Game Stats**。
-3. 选择你想用于本教程的 TiDB Cloud Serverless 集群，点击 **Import Dataset**。导入过程大约需要 1 分钟。
-4. 示例数据导入完成后，按照屏幕提示完成教程。
+1. 点击控制台右下角的 **?** 图标，选择 **Guided tour of SQL Editor**。
+2. 选择你想用于体验的 TiDB Cloud Serverless 集群，点击 **Import Dataset**。导入过程大约需要 1 分钟。
+3. 示例数据导入完成后，按照页面提示完成整个引导流程。
 
 ## 后续操作
 
-- 了解如何通过不同方式连接你的集群，请参见 [连接到 TiDB Cloud Serverless 集群](/tidb-cloud/connect-to-tidb-cluster-serverless.md)。
-- 获取更多关于如何使用 SQL Editor 和 Chat2Query 探索数据的信息，请参见 [使用 AI 辅助 SQL 编辑器探索数据](/tidb-cloud/explore-data-with-chat2query.md)。
-- 了解 TiDB SQL 的用法，请参见 [使用 TiDB 探索 SQL](/basic-sql-operations.md)。
-- 若需生产环境下具备跨可用区高可用、水平扩展和 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) 优势的集群，请参见 [创建 TiDB Cloud 专属集群](/tidb-cloud/create-tidb-cluster.md)。
+- 了解如何通过不同方式连接你的集群，请参见 [连接到 TiDB Cloud Serverless 或 Essential 集群](/tidb-cloud/connect-to-tidb-cluster-serverless.md)。
+- 了解如何使用 SQL Editor 和 Chat2Query 探索你的数据，请参见 [使用 AI 辅助 SQL 编辑器探索数据](/tidb-cloud/explore-data-with-chat2query.md)。
+- 了解 TiDB SQL 的使用方法，请参见 [使用 TiDB 探索 SQL](/basic-sql-operations.md)。
+- 若需生产环境使用，享受跨可用区高可用、水平扩展和 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) 等优势，请参见 [创建 TiDB Cloud 专属集群](/tidb-cloud/create-tidb-cluster.md)。
