@@ -42,7 +42,7 @@ The following functions are designed specifically for [Vector data types](/vecto
 
 **Other vector functions:**
 
-| Function Name                   | Description                                         |
+| Function name                   | Description                                         |
 | ------------------------------- | --------------------------------------------------- |
 | [`VEC_DIMS`](#vec_dims)           | Returns the dimension of a vector                   |
 | [`VEC_L2_NORM`](#vec_l2_norm)     | Calculates the L2 norm (Euclidean norm) of a vector |
