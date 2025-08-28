@@ -284,7 +284,7 @@ SELECT VEC_L2_NORM('[3, 4]');
 VEC_FROM_TEXT(string)
 ```
 
-Converts a string into a vector. In many cases conversion is done implicitly, for example when inserting data into a column that has the `VECTOR` data type. This function explicitly converts for cases where implicit conversion is not possible.
+Converts a string into a vector. In many cases, this conversion is done implicitly, for example when inserting data into a column with the `VECTOR` data type. However, in expressions where implicit conversion is not supported (such as arithmetic operations on vectors), you need to explicitly call this function.
 
 Example:
 
