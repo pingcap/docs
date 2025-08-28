@@ -33,7 +33,7 @@ The following functions are designed specifically for [Vector data types](/vecto
 
 **Vector distance functions:**
 
-| Function Name                                               | Description                                                      | Supported by VECTOR index |
+| Function name                                               | Description                                                      | Supported by [vector index](/vector-search/vector-search-index.md#vector-search-index) |
 | ----------------------------------------------------------- | ---------------------------------------------------------------- |---------------------------|
 | [`VEC_L2_DISTANCE`](#vec_l2_distance)                       | Calculates L2 distance (Euclidean distance) between two vectors  | Yes                       |
 | [`VEC_COSINE_DISTANCE`](#vec_cosine_distance)               | Calculates the cosine distance between two vectors               | Yes                       |
