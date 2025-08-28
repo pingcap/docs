@@ -310,6 +310,16 @@ Unless you need to write complex SQL statements, it is recommended to use [ORM](
 - Reduce [boilerplate code](https://en.wikipedia.org/wiki/Boilerplate_code) for managing connections and transactions.
 - Manipulate data with data objects instead of a number of SQL statements.
 
+### MySQL compatibility
+
+When inserting data of the DECIMAL type, if the number of decimal places exceeds the number defined for the field, MySQL will perform a TRUNCATE operation and insert the data successfully, regardless of how many extra decimal places there are.
+
+In TiDB versions v8.1.2 and earlier:
+- If the number of decimal places exceeds the field's defined limit but does not exceed 72, TiDB will also perform a TRUNCATE and insert the data successfully.
+- However, if the number of decimal places exceeds 72, the write operation will fail and return an error.
+
+Starting from TiDB v8.1.3, TiDB's behavior aligns with that of MySQL: regardless of how many decimal places are exceeded, it will perform a TRUNCATE operation and insert the data successfully.
+
 ## Next steps
 
 - Learn more usage of MySQL Connector/J from [the documentation of MySQL Connector/J](https://dev.mysql.com/doc/connector-j/en/).
