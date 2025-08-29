@@ -3,7 +3,7 @@
   "tidb-version": "v8.5.2",
   "tidb-release-date": "2025-06-12",
   "self-managed": "TiDB Self-Managed",
-  "starter": "TiDB Cloud Serverless",
+  "starter": "TiDB Cloud Starter",
   "essential": "TiDB Cloud Essential",
   "dedicated": "TiDB Cloud Dedicated",
   "console-url": "tidbcloud.com"
