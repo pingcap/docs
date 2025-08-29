@@ -149,7 +149,6 @@ The following steps describe how to clean up backup data that exceeds the backup
 >
 > When determining whether to start the next batch, these two thresholds are evaluated independently: whichever threshold is reached first closes the current batch and starts the next, while the other threshold is ignored for that batch.
 
-
 Testing scenario 1 (on [TiDB Cloud](https://tidbcloud.com)) is as follows:
 
 - The number of TiKV nodes (8 core, 16 GB memory): 21
