@@ -312,13 +312,13 @@ Unless you need to write complex SQL statements, it is recommended to use [ORM](
 
 ### MySQL compatibility
 
-When inserting data of the DECIMAL type, if the number of decimal places exceeds the number defined for the field, MySQL will perform a TRUNCATE operation and insert the data successfully, regardless of how many extra decimal places there are.
+When you insert data into a `DECIMAL` column, if the number of decimal places exceeds the defined scale, MySQL performs a `TRUNCATE` operation and inserts the data successfully, regardless of how many extra decimal places there are.
 
 In TiDB versions v8.1.2 and earlier:
-- If the number of decimal places exceeds the field's defined limit but does not exceed 72, TiDB will also perform a TRUNCATE and insert the data successfully.
-- However, if the number of decimal places exceeds 72, the write operation will fail and return an error.
+- If the number of decimal places exceeds the column's defined scale but does not exceed 72, TiDB also performs a `TRUNCATE` operation and inserts the data successfully.
+- However, if the number of decimal places exceeds 72, the write operation fails and returns an error.
 
-Starting from TiDB v8.1.3, TiDB's behavior aligns with that of MySQL: regardless of how many decimal places are exceeded, it will perform a TRUNCATE operation and insert the data successfully.
+Starting from TiDB v8.1.3, TiDB's behavior aligns with that of MySQL: regardless of the number of excess decimal places, it performs a `TRUNCATE` operation and inserts the data successfully.
 
 ## Next steps
 
