@@ -49,6 +49,73 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
+### --pd-version
+
+- Specifies the version of PD. If this option is set, the version of PD will no longer be consistent with the cluster version.
+- Data type: `STRINGS`
+- If this option is not set, the version of PD remains consistent with the cluster version.
+
+### --tikv-version
+
+- Specifies the version of TiKV. If this option is set, the version of TiKV will no longer be consistent with the cluster version.
+- Data type: `STRINGS`
+- If this option is not set, the version of TiKV remains consistent with the cluster version.
+
+### --tikv-cdc-version
+
+- Specifies the version of TiKV CDC. If this option is set, the version of TiKV CDC will no longer be consistent with the cluster version.
+- Data type: `STRINGS`
+- If this option is not set, the version of TiKV CDC remains consistent with the cluster version.
+
+### --tiflash-version
+
+- Specifies the version of TiFlash. If this option is set, the version of TiFlash will no longer be consistent with the cluster version.
+- Data type: `STRINGS`
+- If this option is not set, the version of TiFlash remains consistent with the cluster version.
+
+### --cdc-version
+
+- Specifies the version of TiCDC. If this option is set, the version of TiCDC will no longer be consistent with the cluster version.
+- Data type: `STRINGS`
+- If this option is not set, the version of TiCDC remains consistent with the cluster version.
+
+### --tiproxy-version
+
+- Specifies the version of TiProxy. If this option is set, the version of TiProxy will no longer be consistent with the cluster version.
+- Data type: `STRINGS`
+- If this option is not set, the version of TiProxy remains consistent with the cluster version.
+
+### --tidb-dashboard-version
+
+- Specifies the version of TiDB Dashboard. If this option is set, the version of TiDB Dashboard will no longer be consistent with the cluster version.
+- Data type: `STRINGS`
+- If this option is not set, the version of TiDB Dashboard remains consistent with the cluster version.
+
+### --alertmanager-version
+
+- Specifies the version of Alertmanager. If this option is set, the version of Alertmanager will no longer be consistent with the cluster version.
+- Data type: `STRINGS`
+- If this option is not set, the version of alert manager remains consistent with the cluster version.
+
+### --blackbox-exporter-version
+
+- Specifies the version of Blackbox Exporter. If this option is set, the version of Blackbox Exporter will no longer be consistent with the cluster version.
+- Data type: `STRINGS`
+- If this option is not set, the version of Blackbox Exporter remains consistent with the cluster version.
+
+### --node-exporter-version
+
+- Specifies the version of Node Exporter. If this option is set, the version of Node Exporter will no longer be consistent with the cluster version.
+- Data type: `STRINGS`
+- If this option is not set, the version of Node Exporter remains consistent with the cluster version.
+
+### --restart-timeout
+
+- Specifies the waiting time after upgrading a component during a rolling upgrade.
+- Data type: `STRINGS`. Any type that can be parsed by [`golang time.ParseDuration`](https://pkg.go.dev/time#ParseDuration) is supported.
+- Default: `0`
+- If this option is not specified, there will be no waiting time after upgrading a component.
+
 ### -h, --help
 
 - Prints the help information.
