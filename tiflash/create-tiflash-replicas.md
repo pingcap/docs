@@ -234,7 +234,7 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
 
 3. PD schedules the replicas of table `t` to different availability zones based on the `server.labels` in the TiFlash node's `learner_config` and the table's replica count `count`, ensuring availability. For details, see [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md). You can use the following SQL statement to verify the distribution of a table's Regions across TiFlash nodes:
 
-    ```SQL
+    ```sql
     -- Non-partitioned table
     SELECT table_id, p.store_id, address, COUNT(p.region_id) 
     FROM
@@ -248,6 +248,7 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
       AND p.store_id = s.store_id
       AND JSON_EXTRACT(s.label, '$[0].value') = 'tiflash'
     GROUP BY table_id, p.store_id, address;
+
     -- Partitioned table
     SELECT table_id, r.partition_name, p.store_id, address, COUNT(p.region_id)
     FROM
