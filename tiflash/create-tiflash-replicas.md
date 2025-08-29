@@ -220,7 +220,7 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
 
     Note that the `flash.proxy.labels` configuration in earlier versions cannot handle special characters in the available zone name correctly. It is recommended to use the `server.labels` in `learner_config` to configure the name of an available zone.
 
-2. After starting a cluster, specify the number of TiFlash replicas that meet high availability requirements when creating replicas. The syntax is as follows:
+2. After starting a cluster, specify the number of TiFlash replicas for high availability. The syntax is as follows:
 
     ```sql
     ALTER TABLE table_name SET TIFLASH REPLICA count;
@@ -275,4 +275,4 @@ TiFlash supports configuring the replica selection strategy for different zones.
 
 > **Note:**
 >
-> In the syntax `ALTER TABLE table_name SET TIFLASH REPLICA count LOCATION LABELS location_labels;`, if `location_labels` contains multiple labels, it cannot be correctly parsed and used to set Placement Rules. Therefore, it is not recommended to use `LOCATION LABELS` to configure TiFlash replicas.
+> In the syntax `ALTER TABLE table_name SET TIFLASH REPLICA count LOCATION LABELS location_labels;`, if you specify multiple labels for `location_labels`, TiDB cannot parse them correctly to set Placement Rules. Therefore, do not use `LOCATION LABELS` to configure TiFlash replicas.
