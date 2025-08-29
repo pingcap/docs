@@ -89,7 +89,7 @@ When you use [Stale Read](/stale-read.md), an outdated schema version might trig
     - For one million tables, use BR instances with 32 GiB or more memory.
     - For three million tables, use BR instances with 64 GiB or more memory.
 * BR log backup and snapshot restore consume additional TiKV memory. It is recommended to use TiKV instances with 32 GiB or more memory.
-* Adjust BR configurations [`pitr-batch-count` and `pitr-concurrency`](/br/use-br-command-line-tool.md#common-options) as needed to improve log restore speed.
+* Adjust BR configurations [`pitr-batch-count` and `pitr-concurrency`](/br/br-pitr-manual.md#restore-to-a-specified-point-in-time-pitr) as needed to improve log restore speed.
 
 ## Import data with TiDB Lightning
 
