@@ -80,7 +80,11 @@ jobs:
           cp -r docs/tmp markdown-translator/markdowns
       - name: Copy variables.json to translator folder
         run: |
-          cp docs/tmp/variables.json docs/variables.json || true
+          cp docs/variables.json markdown-translator/markdowns/variables.json
+          if [ -f docs/tmp/variables.json ]; then
+            cp docs/tmp/variables.json markdown-translator/markdowns/variables.json
+            cp docs/tmp/variables.json docs/variables.json
+          fi
       - name: Config and translate
         run: |
           cd markdown-translator

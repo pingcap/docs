@@ -37,7 +37,6 @@ We are constantly filling in the feature gaps between TiDB Cloud Serverless and 
 - [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently unavailable.
 - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md) is currently unavailable.
 - [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer) is currently unavailable.
-- [Index Insight](/tidb-cloud/tune-performance.md#index-insight-beta) is currently unavailable.
 
 ### Self-service upgrades
 

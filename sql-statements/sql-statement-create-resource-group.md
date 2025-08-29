@@ -33,7 +33,9 @@ DirectResourceGroupOption ::=
     "RU_PER_SEC" EqOpt stringLit
 |   "PRIORITY" EqOpt ResourceGroupPriorityOption
 |   "BURSTABLE"
-|   "BURSTABLE" EqOpt Boolean
+|   "BURSTABLE" EqOpt "MODERATED"
+|   "BURSTABLE" EqOpt "UNLIMITED"
+|   "BURSTABLE" EqOpt "OFF"
 |   "QUERY_LIMIT" EqOpt '(' ResourceGroupRunawayOptionList ')'
 |   "QUERY_LIMIT" EqOpt '(' ')'
 |   "QUERY_LIMIT" EqOpt "NULL"
@@ -81,13 +83,13 @@ TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU
 |---------------|-------------------------------------|------------------------|
 | `RU_PER_SEC`  | Rate of RU backfilling per second   | `RU_PER_SEC = 500` indicates that this resource group is backfilled with 500 RUs per second    |
 | `PRIORITY`    | The absolute priority of tasks to be processed on TiKV  | `PRIORITY = HIGH` indicates that the priority is high. If not specified, the default value is `MEDIUM`. |
-| `BURSTABLE`   | If the `BURSTABLE` attribute is set, TiDB allows the corresponding resource group to use the available system resources when the quota is exceeded. |
+| `BURSTABLE`   | Whether to allow the resource group to overuse the available remaining system resources | Starting from v9.0.0, the following three modes are supported: `OFF` indicates that the resource group is not allowed to overuse any remaining system resources. `MODERATED` indicates that the resource group is allowed to overuse remaining system resources to a limited extent. `UNLIMITED` indicates that the resource group can overuse remaining system resources without limitation. If no value is specified for `BURSTABLE`, the `MODERATED` mode is enabled by default. |
 | `QUERY_LIMIT` | When the query execution meets this condition, the query is identified as a runaway query and the corresponding action is executed. | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')` indicates that the query is identified as a runaway query when the execution time exceeds 60 seconds. The query is terminated. All SQL statements with the same SQL text will be terminated immediately in the coming 10 minutes. `QUERY_LIMIT=()` or `QUERY_LIMIT=NULL` means that runaway control is not enabled. See [Runaway Queries](/tidb-resource-control-runaway-queries.md). |
 
 > **Note:**
 >
 > - The `CREATE RESOURCE GROUP` statement can only be executed when the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
-> TiDB automatically creates a `default` resource group during cluster initialization. For this resource group, the default value of `RU_PER_SEC` is `UNLIMITED` (equivalent to the maximum value of the `INT` type, that is, `2147483647`) and it is in `BURSTABLE` mode. All requests that are not bound to any resource group are automatically bound to this `default` resource group. When you create a new configuration for another resource group, it is recommended to modify the `default` resource group configuration as needed.
+> TiDB automatically creates a `default` resource group during cluster initialization. For this resource group, the default value of `RU_PER_SEC` is `UNLIMITED` (equivalent to the maximum value of the `INT` type, that is, `2147483647`) and its `BURSTABLE` mode is `UNLIMTED`. All requests that are not bound to any resource group are automatically bound to this `default` resource group. You cannot delete the `default` resource group, but can modify its RU configuration.
 > - Currently, only the `default` resource group supports modifying the `BACKGROUND` configuration.
 
 ## Examples
@@ -127,12 +129,12 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1' or NAME = 'rg
 ```
 
 ```sql
-+------+------------+----------+-----------+---------------------------------+
-| NAME | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT                     |
-+------+------------+----------+-----------+---------------------------------+
-| rg1  | 100        | HIGH     | YES       | NULL                            |
-| rg2  | 200        | MEDIUM   | NO        | EXEC_ELAPSED=100ms, ACTION=KILL |
-+------+------------+----------+-----------+---------------------------------+
++------+------------+----------+----------------+---------------------------------+
+| NAME | RU_PER_SEC | PRIORITY | BURSTABLE      | QUERY_LIMIT                     |
++------+------------+----------+----------------+---------------------------------+
+| rg1  | 100        | HIGH     | MODERATED      | NULL                            |
+| rg2  | 200        | MEDIUM   | OFF            | EXEC_ELAPSED=100ms, ACTION=KILL |
++------+------------+----------+----------------+---------------------------------+
 2 rows in set (1.30 sec)
 ```
 

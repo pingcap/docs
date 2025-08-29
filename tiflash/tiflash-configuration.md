@@ -375,7 +375,7 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 
 ##### `cop_pool_size` <span class="version-mark">New in v5.0</span>
 
-- Specifies the maximum number of cop requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to `0` or not set, the default value is used, which is twice the number of physical cores.
+- Specifies the maximum number of cop requests that TiFlash Coprocessor can execute concurrently. When the number of requests exceeds this value but remains within 10 times the value, the exceeded requests are queued. When the number of requests exceeds 10 times this value, the exceeded requests are rejected by TiFlash. If the configuration value is set to `0` or not set, the default value is used, which is twice the number of physical cores.
 - Default value: twice the number of physical cores
 
 ##### `cop_pool_handle_limit` <span class="version-mark">New in v5.0</span>
@@ -471,6 +471,13 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 - The magic hash function generates more evenly distributed hash values, reducing hash collisions effectively. However, it is slower than CRC32. It is recommended to enable this configuration when the NDV (number of distinct values) of the `GROUP BY` key is high to optimize aggregation performance.
 - Default value: `false`
 - Value options: `true`, `false`
+
+##### `enable_version_chain` <span class="version-mark">New in v9.0.0</span>
+
+- Controls the algorithm that TiFlash uses to implement MVCC filtering. If it is set to `1`, the VersionChain algorithm is used. If it is set to `0`, the DeltaIndex algorithm is used.
+- In most cases, the VersionChain algorithm provides noticeably better table scan performance compared with the DeltaIndex algorithm, because it improves MVCC filtering efficiency by avoiding data sorting.
+- Default value: `1`
+- Value options: `1`, `0`
 
 #### security <span class="version-mark">New in v4.0.5</span>
 

@@ -5,14 +5,18 @@ summary: Learn about what's coming in the future for TiDB.
 
 # TiDB Roadmap
 
+> **Warning:**
+>
+> This roadmap might contain outdated information. We are working on updating it to reflect the latest product plans and development priorities.
+
 This roadmap provides a look into the proposed future. This will be continually updated as we release long-term stable (LTS) versions. The purpose is to provide visibility into what is coming, so that you can more closely follow the progress, learn about the key milestones on the way, and give feedback as the development work goes on.
 
 In the course of development, this roadmap is subject to change based on user needs and feedback. **DO NOT** schedule your release plans according to the content of the roadmap. If you have a feature request or want to prioritize a feature, please file an issue on [GitHub](https://github.com/pingcap/tidb/issues).
 
 > **Note:**
-> 
+>
 > - If not marked as GA, these features are experimental.
-> - These are non-exhaustive plans and are subject to change. 
+> - These are non-exhaustive plans and are subject to change.
 > - Features might differ per service subscriptions.
 
 ## Rolling roadmap highlights

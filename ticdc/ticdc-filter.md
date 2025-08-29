@@ -55,6 +55,22 @@ ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DM
 Description of configuration parameters:
 
 - `matcher`: the database and table that this event filter rule applies to. The syntax is the same as [table filter](/table-filter.md).
+
+    > **Note:**
+    >
+    > `matcher` matches the database name, so you need to pay extra attention when configuring it. For example, when the `event-filters` configuration is as follows:
+    >
+    > ```toml
+    > [filter]
+    > [[filter.event-filters]]
+    > matcher = ["test.t1"]
+    > ignore-sql = ["^drop"]
+    > ```
+    >
+    > `ignore-sql = ["^drop"]` not only filters out `DROP TABLE test.t1` but also filters out `DROP DATABASE test`, because `matcher` contains the database name `test`.
+    >
+    > If you only want to filter out the specified table instead of the entire database, modify the `ignore-sql` value to `["drop table"]`.
+
 - `ignore-event`: the event type to be ignored. This parameter accepts an array of strings. You can configure multiple event types. Currently, the following event types are supported:
 
     | Event           | Type | Alias | Description         |
