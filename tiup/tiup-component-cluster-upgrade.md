@@ -49,8 +49,6 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
-<<<<<<< HEAD
-=======
 ### --pd-version
 
 - Specifies the version of PD. If this option is set, the version of PD will no longer be consistent with the cluster version.
@@ -95,7 +93,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 ### --alertmanager-version
 
-- Specifies the version of alert manager. If this option is set, the version of alert manager will no longer be consistent with the cluster version.
+- Specifies the version of Alertmanager. If this option is set, the version of Alertmanager will no longer be consistent with the cluster version.
 - Data type: `STRINGS`
 - If this option is not set, the version of alert manager remains consistent with the cluster version.
 
@@ -118,7 +116,6 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 - Default: `0`
 - If this option is not specified, there will be no waiting time after upgrading a component.
 
->>>>>>> 010422ffe1 (tiup: add `tiup cluster tls` (#21681))
 ### -h, --help
 
 - Prints the help information.
