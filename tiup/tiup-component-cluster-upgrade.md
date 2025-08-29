@@ -116,6 +116,12 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 - Data type: `STRINGS`
 - If this option is not set, the version of Node Exporter remains consistent with the cluster version.
 
+## --restart-timeout uint
+
+- Specifies the interval between rolling upgrades, that is, the waiting time after upgrading a component.
+- Data type: `STRINGS`
+- If this option is not specified, there will be no waiting time after upgrading a component.
+
 ### -h, --help
 
 - Prints the help information.
