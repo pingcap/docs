@@ -314,7 +314,8 @@ Unless you need to write complex SQL statements, it is recommended to use [ORM](
 
 When you insert data into a `DECIMAL` column, if the number of decimal places exceeds the defined scale, MySQL performs a `TRUNCATE` operation and inserts the data successfully, regardless of how many extra decimal places there are.
 
-In TiDB versions v8.1.2 and earlier:
+In TiDB v8.1.2 and earlier versions:
+
 - If the number of decimal places exceeds the column's defined scale but does not exceed 72, TiDB also performs a `TRUNCATE` operation and inserts the data successfully.
 - However, if the number of decimal places exceeds 72, the write operation fails and returns an error.
 
