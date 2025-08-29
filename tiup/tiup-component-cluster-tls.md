@@ -19,27 +19,30 @@ tiup cluster tls <cluster-name> <enable/disable> [flags]
 
 ### --clean-certificate
 
-- When TLS is disabled, specify this option to clean up previously generated certificates.
+- When you disable TLS, use this option to clean up previously generated certificates.
 - Data type: `BOOLEAN`
-- If this option is not specified, old certificates might be reused when TLS is enabled again.
+- Default: `false`
+- If you do not specify this option, old certificates might be reused when you enable TLS again.
 
 ### --force
 
-- Forces the process of enabling or disabling TLS, regardless of the current TLS status of the cluster.
+- Forces enabling or disabling TLS, regardless of the cluster's current TLS status.
 - Data type: `BOOLEAN`
-- If this option is not specified, the operation will be skipped when the current state matches the requested state.
+- Default: `false`
+- If you do not specify this option, the operation is skipped if the cluster is already in the requested state.
 
 ### --reload-certificate
 
-- When TLS is enabled, specify this option to regenerate certificates.
+- When you enable TLS, use this option to regenerate certificates.
 - Data type: `BOOLEAN`
-- If this option is not specified, new certificates will not be generated if certificates already exist.
+- Default: `false`
+- If you do not specify this option, new certificates are not generated if certificates already exist.
 
 ### -h, --help
 
 - Prints the help information.
 - Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+- Default: `false`
 
 ## Output
 
