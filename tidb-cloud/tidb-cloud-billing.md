@@ -23,7 +23,7 @@ See [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starte
 
 > **Tip:**
 >
-> Currently, {{{ .essential }}} is in public preview on Alibaba Cloud and is only available in the Alibaba Cloud Singapore region. To request other regions on Alibaba Cloud, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md#access-pingcap-help-center).
+> Currently, {{{ .essential }}} is in public preview on Alibaba Cloud and is only available in the selected Alibaba Cloud regions. To request other regions on Alibaba Cloud, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md#access-pingcap-help-center).
 
 For {{{ .essential }}}, you are charged based on the number of provisioned Request Capacity Units (RCUs), **not** on the actual usage by your application.
 
