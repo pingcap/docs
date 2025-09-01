@@ -276,4 +276,4 @@ TiFlash supports configuring the replica selection strategy for different zones.
 
 > **Note:**
 >
-> In the syntax `ALTER TABLE table_name SET TIFLASH REPLICA count LOCATION LABELS location_labels;`, if you specify multiple labels for `location_labels`, TiDB cannot parse them correctly to set Placement Rules. Therefore, do not use `LOCATION LABELS` to configure TiFlash replicas.
+> In the syntax `ALTER TABLE table_name SET TIFLASH REPLICA count LOCATION LABELS location_labels;`, if you specify multiple labels for `location_labels`, TiDB cannot parse them correctly to set placement rules. Therefore, do not use `LOCATION LABELS` to configure TiFlash replicas.
