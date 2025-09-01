@@ -221,11 +221,7 @@ You can scale out clusters on the console by yourself. If you need to scale in a
 
 Once your application for the PoC is approved, you will receive credits in your account. Generally, the credits are sufficient for a 14-day PoC. The credits are charged by the type of nodes and the number of nodes, on an hourly basis. For more information, see [TiDB Cloud Billing](/tidb-cloud/tidb-cloud-billing.md#credits).
 
-To check the credits left for your PoC, go to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your target project, as shown in the following screenshot.
-
-![TiDB Cloud PoC Credits](/media/tidb-cloud/poc-points.png)
-
-Alternatively, you can also switch to your target organization using the combo box in the upper-left corner of the TiDB Cloud console, click **Billing** in the left navigation pane, and then click the **Credits** tab to view the credit information.
+To check the total credits, available credits, and current credit usage for your PoC, switch to your target organization using the combo box in the upper-left corner of the TiDB Cloud console, click **Billing** in the left navigation pane, and then click the **Credits** tab.
 
 To save credits, remove the cluster that you are not using. Currently, you cannot stop a cluster. You need to ensure that your backups are up to date before removing a cluster, so you can restore the cluster later when you want to resume your PoC.
 
