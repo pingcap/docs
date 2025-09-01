@@ -245,7 +245,7 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
     ALTER TABLE t SET TIFLASH REPLICA 2;
     ```
 
-3. PD schedules the replicas of table `t` to different availability zones based on the `server.labels` in the TiFlash node's `learner_config` and the table's replica count `count`, ensuring availability. You can use the following SQL statement to verify the distribution of a table's Regions across TiFlash nodes:
+3. PD schedules the replicas of the table `t` to different availability zones based on the `server.labels` in the TiFlash node's `learner_config` and the number (`count`) of the table's replicas, ensuring availability. For more information, see [Schedule Replicas by Topology Labels](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels/). You can use the following SQL statement to verify the distribution of a table's Regions across TiFlash nodes:
 
     ```sql
     -- Non-partitioned table
