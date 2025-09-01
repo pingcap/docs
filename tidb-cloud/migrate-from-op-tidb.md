@@ -201,7 +201,7 @@ Do the following to export data from the upstream TiDB cluster to Amazon S3 usin
 
 After you export data from the TiDB Self-Managed cluster to Amazon S3, you need to migrate the data to TiDB Cloud.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), get the Account ID and external ID of your target cluster according to the following documentation:
+1. In the [TiDB Cloud console](https://tidbcloud.com/), get the Account ID and External ID of your target cluster according to the following documentation:
 
    - For TiDB Cloud Dedicated clusters, see [Step 2. Configure Amazon S3 access](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access-using-a-role-arn).
    - For {{{ .starter }}} or {{{ .essential }}} clusters, see [Step 2. Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access-using-a-role-arn).
