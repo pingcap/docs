@@ -129,3 +129,6 @@ For Datadog integration (Preview), the following additional metrics are also ava
 | tidb_cloud.dm_syncer_replication_lag_bucket | gauge | instance: `instance`<br/>cluster_name: `<cluster name>` | Replicate lag (bucket) of Data Migration. |
 | tidb_cloud.dm_syncer_replication_lag_gauge | gauge | instance: `instance`<br/>task: `task`<br/>cluster_name: `<cluster name>` | Replicate lag (gauge) of Data Migration. |
 | tidb_cloud.dm_relay_read_error_count | gauge | instance: `instance`<br/>cluster_name: `<cluster name>` | Fail to read binlog from master. |
+| tidb_cloud.node_memory_available_bytes | gauge | cluster_name: <cluster name><br>instance: tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…<br>component: tidb\|tikv\|tiflash | The available memory of TiDB/TiKV/TiFlash nodes, in bytes. |
+| tidb_cloud.cdc_changefeed_replica_rows | gauge | changefeed_id: <changefeed-id><br>cluster_name: <cluster name> | The number of events that TiCDC nodes write to the downstream per second. |
+
