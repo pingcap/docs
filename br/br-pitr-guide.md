@@ -116,7 +116,13 @@ The following steps describe how to clean up backup data that exceeds the backup
 >
 > External storage only contains KV data of a single replica. Therefore, the data size in external storage does not represent the actual data size restored in the cluster. BR restores all replicas according to the number of replicas configured for the cluster. The more replicas there are, the more data can be actually restored.
 > The default replica number for all clusters in the test is 3.
-> To improve the overall restore performance, you can modify the [`import.num-threads`](/tikv-configuration-file.md#import) item in the TiKV configuration file and the [`concurrency`](/br/use-br-command-line-tool.md#common-options) option in the BR command.
+> To improve the overall restore performance, you can modify the [`import.num-threads`](/tikv-configuration-file.md#import) item in the TiKV configuration file and the [`pitr-concurrency`](/br/br-pitr-manual.md#restore-to-a-specified-point-in-time-pitr) option in the BR command.
+> When the upstream cluster has **many Regions** and a **short flush interval**, PITR generates a large number of small files. This increases batching and dispatching overhead during restore. To raise the number of files processed per batch, you can **moderately** increase the values of the following parameters:
+>
+> - `pitr-batch-size`: cumulative **bytes per batch** (default **16 MiB**).
+> - `pitr-batch-count`: **number of files per batch** (default **8**).
+>
+> When determining whether to start the next batch, these two thresholds are evaluated independently: whichever threshold is reached first closes the current batch and starts the next, while the other threshold is ignored for that batch.
 
 Testing scenario 1 (on [TiDB Cloud](https://tidbcloud.com)) is as follows:
 
