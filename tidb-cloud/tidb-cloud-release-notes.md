@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Dedicated**
 
-    - Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v8.5.2](https://docs.pingcap.com/tidb/stable/release-8.5.2/) to [v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3/).
+    - Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v8.5.2](https://docs.pingcap.com/tidb/v8.5/release-8.5.2/) to [v8.5.3](https://docs.pingcap.com/tidb/v8.5/release-8.5.3/).
 
 ## August 26, 2025
 
