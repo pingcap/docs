@@ -33,16 +33,16 @@ The following functions are designed specifically for [Vector data types](/vecto
 
 **Vector distance functions:**
 
-| Function Name                                             | Description                                                      |
-| --------------------------------------------------------- | ---------------------------------------------------------------- |
-| [`VEC_L2_DISTANCE`](#vec_l2_distance)                       | Calculates L2 distance (Euclidean distance) between two vectors  |
-| [`VEC_COSINE_DISTANCE`](#vec_cosine_distance)               | Calculates the cosine distance between two vectors               |
-| [`VEC_NEGATIVE_INNER_PRODUCT`](#vec_negative_inner_product) | Calculates the negative of the inner product between two vectors |
-| [`VEC_L1_DISTANCE`](#vec_l1_distance)                       | Calculates L1 distance (Manhattan distance) between two vectors  |
+| Function name                                               | Description                                                      | Supported by [vector index](/vector-search/vector-search-index.md#vector-search-index) |
+| ----------------------------------------------------------- | ---------------------------------------------------------------- |---------------------------|
+| [`VEC_L2_DISTANCE`](#vec_l2_distance)                       | Calculates L2 distance (Euclidean distance) between two vectors  | Yes                       |
+| [`VEC_COSINE_DISTANCE`](#vec_cosine_distance)               | Calculates the cosine distance between two vectors               | Yes                       |
+| [`VEC_NEGATIVE_INNER_PRODUCT`](#vec_negative_inner_product) | Calculates the negative of the inner product between two vectors | No                        |
+| [`VEC_L1_DISTANCE`](#vec_l1_distance)                       | Calculates L1 distance (Manhattan distance) between two vectors  | No                        |
 
 **Other vector functions:**
 
-| Function Name                   | Description                                         |
+| Function name                   | Description                                         |
 | ------------------------------- | --------------------------------------------------- |
 | [`VEC_DIMS`](#vec_dims)           | Returns the dimension of a vector                   |
 | [`VEC_L2_NORM`](#vec_l2_norm)     | Calculates the L2 norm (Euclidean norm) of a vector |
@@ -124,17 +124,20 @@ Calculates the [L2 distance](https://en.wikipedia.org/wiki/Euclidean_distance) (
 
 $DISTANCE(p,q)=\sqrt {\sum \limits _{i=1}^{n}{(p_{i}-q_{i})^{2}}}$
 
-The two vectors must have the same dimension. Otherwise, an error is returned.
+The two vectors must have the same number of dimensions. Otherwise, an error is returned.
 
 Example:
 
 ```sql
-[tidb]> SELECT VEC_L2_DISTANCE('[0,3]', '[4,0]');
-+-----------------------------------+
-| VEC_L2_DISTANCE('[0,3]', '[4,0]') |
-+-----------------------------------+
-|                                 5 |
-+-----------------------------------+
+SELECT VEC_L2_DISTANCE('[0, 3]', '[4, 0]');
+```
+
+```
++-------------------------------------+
+| VEC_L2_DISTANCE('[0, 3]', '[4, 0]') |
++-------------------------------------+
+|                                   5 |
++-------------------------------------+
 ```
 
 ### VEC_COSINE_DISTANCE
@@ -147,12 +150,17 @@ Calculates the [cosine distance](https://en.wikipedia.org/wiki/Cosine_similarity
 
 $DISTANCE(p,q)=1.0 - {\frac {\sum \limits _{i=1}^{n}{p_{i}q_{i}}}{{\sqrt {\sum \limits _{i=1}^{n}{p_{i}^{2}}}}\cdot {\sqrt {\sum \limits _{i=1}^{n}{q_{i}^{2}}}}}}$
 
-The two vectors must have the same dimension. Otherwise, an error is returned.
+The two vectors must have the same number of dimensions. Otherwise, an error is returned.
+
+For embeddings from OpenAI, it is [recommended](https://help.openai.com/en/articles/6824809-embeddings-faq) that you use this function.
 
 Example:
 
 ```sql
-[tidb]> SELECT VEC_COSINE_DISTANCE('[1, 1]', '[-1, -1]');
+SELECT VEC_COSINE_DISTANCE('[1, 1]', '[-1, -1]');
+```
+
+```
 +-------------------------------------------+
 | VEC_COSINE_DISTANCE('[1, 1]', '[-1, -1]') |
 +-------------------------------------------+
@@ -170,17 +178,20 @@ Calculates the distance by using the negative of the [inner product](https://en.
 
 $DISTANCE(p,q)=- INNER\_PROD(p,q)=-\sum \limits _{i=1}^{n}{p_{i}q_{i}}$
 
-The two vectors must have the same dimension. Otherwise, an error is returned.
+The two vectors must have the same number of dimensions. Otherwise, an error is returned.
 
 Example:
 
 ```sql
-[tidb]> SELECT VEC_NEGATIVE_INNER_PRODUCT('[1,2]', '[3,4]');
-+----------------------------------------------+
-| VEC_NEGATIVE_INNER_PRODUCT('[1,2]', '[3,4]') |
-+----------------------------------------------+
-|                                          -11 |
-+----------------------------------------------+
+SELECT VEC_NEGATIVE_INNER_PRODUCT('[1, 2]', '[3, 4]');
+```
+
+```
++------------------------------------------------+
+| VEC_NEGATIVE_INNER_PRODUCT('[1, 2]', '[3, 4]') |
++------------------------------------------------+
+|                                            -11 |
++------------------------------------------------+
 ```
 
 ### VEC_L1_DISTANCE
@@ -193,17 +204,20 @@ Calculates the [L1 distance](https://en.wikipedia.org/wiki/Taxicab_geometry) (Ma
 
 $DISTANCE(p,q)=\sum \limits _{i=1}^{n}{|p_{i}-q_{i}|}$
 
-The two vectors must have the same dimension. Otherwise, an error is returned.
+The two vectors must have the same number of dimensions. Otherwise, an error is returned.
 
 Example:
 
 ```sql
-[tidb]> SELECT VEC_L1_DISTANCE('[0,0]', '[3,4]');
-+-----------------------------------+
-| VEC_L1_DISTANCE('[0,0]', '[3,4]') |
-+-----------------------------------+
-|                                 7 |
-+-----------------------------------+
+SELECT VEC_L1_DISTANCE('[0, 0]', '[3, 4]');
+```
+
+```
++-------------------------------------+
+| VEC_L1_DISTANCE('[0, 0]', '[3, 4]') |
++-------------------------------------+
+|                                   7 |
++-------------------------------------+
 ```
 
 ### VEC_DIMS
@@ -217,14 +231,22 @@ Returns the dimension of a vector.
 Examples:
 
 ```sql
-[tidb]> SELECT VEC_DIMS('[1,2,3]');
-+---------------------+
-| VEC_DIMS('[1,2,3]') |
-+---------------------+
-|                   3 |
-+---------------------+
+SELECT VEC_DIMS('[1, 2, 3]');
+```
 
-[tidb]> SELECT VEC_DIMS('[]');
+```
++-----------------------+
+| VEC_DIMS('[1, 2, 3]') |
++-----------------------+
+|                     3 |
++-----------------------+
+```
+
+```sql
+SELECT VEC_DIMS('[]');
+```
+
+```
 +----------------+
 | VEC_DIMS('[]') |
 +----------------+
@@ -245,12 +267,15 @@ $NORM(p)=\sqrt {\sum \limits _{i=1}^{n}{p_{i}^{2}}}$
 Example:
 
 ```sql
-[tidb]> SELECT VEC_L2_NORM('[3,4]');
-+----------------------+
-| VEC_L2_NORM('[3,4]') |
-+----------------------+
-|                    5 |
-+----------------------+
+SELECT VEC_L2_NORM('[3, 4]');
+```
+
+```
++-----------------------+
+| VEC_L2_NORM('[3, 4]') |
++-----------------------+
+|                     5 |
++-----------------------+
 ```
 
 ### VEC_FROM_TEXT
@@ -259,12 +284,15 @@ Example:
 VEC_FROM_TEXT(string)
 ```
 
-Converts a string into a vector.
+Converts a string into a vector. In many cases, this conversion is done implicitly, for example when inserting data into a column of the `VECTOR` data type. However, in expressions where implicit conversion is not supported (such as arithmetic operations on vectors), you need to explicitly call this function.
 
 Example:
 
 ```sql
-[tidb]> SELECT VEC_FROM_TEXT('[1,2]') + VEC_FROM_TEXT('[3,4]');
+SELECT VEC_FROM_TEXT('[1, 2]') + VEC_FROM_TEXT('[3, 4]');
+```
+
+```
 +-------------------------------------------------+
 | VEC_FROM_TEXT('[1,2]') + VEC_FROM_TEXT('[3,4]') |
 +-------------------------------------------------+
@@ -283,12 +311,15 @@ Converts a vector into a string.
 Example:
 
 ```sql
-[tidb]> SELECT VEC_AS_TEXT('[1.000,   2.5]');
-+-------------------------------+
-| VEC_AS_TEXT('[1.000,   2.5]') |
-+-------------------------------+
-| [1,2.5]                       |
-+-------------------------------+
+SELECT VEC_AS_TEXT('[1.000, 2.5]');
+```
+
+```
++-----------------------------+
+| VEC_AS_TEXT('[1.000, 2.5]') |
++-----------------------------+
+| [1,2.5]                     |
++-----------------------------+
 ```
 
 ## MySQL compatibility
