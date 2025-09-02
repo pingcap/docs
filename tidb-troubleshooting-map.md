@@ -502,7 +502,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
     This error is returned when you commit a transaction that has not been committed for a long time (over 590 seconds).
 
-    If your application needs to execute a transaction of such a long time, you can increase the `[tikv-client] max-txn-time-use = 590` parameter and the GC lifetime to avoid this issue. It is recommended to check whether your application needs such a long transaction time.
+    If your application needs to execute a transaction of such a long time, you can increase [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) to avoid this issue. It is recommended to check whether your application needs such a long transaction time.
 
 - 7.1.3 `coprocessor.go` reports `request outdated`.
 
