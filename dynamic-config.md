@@ -191,12 +191,12 @@ The following TiKV configuration items can be modified dynamically:
 | `gc.max-write-bytes-per-sec` | The maximum bytes that can be written into RocksDB per second |
 | `gc.enable-compaction-filter` | Whether to enable compaction filter |
 | `gc.compaction-filter-skip-version-check` | Whether to skip the cluster version check of compaction filter (not released) |
-| `gc.auto-compaction.check-interval` | The time interval for checking whether to trigger TiKV automatic (RocksDB) compaction |
+| `gc.auto-compaction.check-interval` | The time interval at which TiKV checks whether to trigger automatic (RocksDB) compaction |
 | `gc.auto-compaction.tombstone-num-threshold` | The number of RocksDB tombstones required to trigger TiKV automatic (RocksDB) compaction |
 | `gc.auto-compaction.tombstone-percent-threshold` | The percentage of RocksDB tombstones required to trigger TiKV automatic (RocksDB) compaction |
 | `gc.auto-compaction.redundant-rows-threshold` | The number of redundant MVCC rows required to trigger TiKV automatic (RocksDB) compaction |
 | `gc.auto-compaction.redundant-rows-percent-threshold` | The percentage of redundant MVCC rows required to trigger TiKV automatic (RocksDB) compaction |
-| `gc.auto-compaction.bottommost-level-force` | Whether to force the bottommost files in RocksDB to participate in compaction |
+| `gc.auto-compaction.bottommost-level-force` | Whether to force compaction on the bottommost level files in RocksDB |
 | `{db-name}.max-total-wal-size` | The maximum size of total WAL |
 | `{db-name}.max-background-jobs` | The number of background threads in RocksDB |
 | `{db-name}.max-background-flushes` | The maximum number of flush threads in RocksDB |
