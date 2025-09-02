@@ -1,0 +1,119 @@
+name: Sync Cloud ZH TOC Files
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  EN_BRANCH: release-8.5
+  ZH_BRANCH: i18n-zh-release-8.5
+
+jobs:
+  sync-toc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        name: Checkout ZH branch
+        with:
+          ref: "${{ env.ZH_BRANCH }}"
+          path: "docs"
+          token: ${{ github.token }}
+          
+      - name: Copy script from main branch (temporary)
+        run: |
+          mkdir -p temp_scripts
+          curl -H "Authorization: Bearer ${{ github.token }}" \
+               -H "Accept: application/vnd.github.v3.raw" \
+               -L "https://api.github.com/repos/${{ github.repository }}/contents/scripts/sync-en-cloud-toc-changes-to-zh.py" \
+               -o temp_scripts/sync-en-cloud-toc-changes-to-zh.py
+
+      - uses: actions/setup-python@v5
+        name: Setup Python 3.11
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: |
+          pip install "google-genai>=0.3,<1"
+
+      - name: Configure Git
+        run: |
+          cd docs
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+      - name: Run TOC sync script
+        env:
+          GEMINI_API_TOKEN: ${{ secrets.GEMINI_API_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          cp temp_scripts/sync-en-cloud-toc-changes-to-zh.py docs/
+          cd docs
+          python sync-en-cloud-toc-changes-to-zh.py
+          rm sync-en-cloud-toc-changes-to-zh.py # Remove the script file so it won't be included in PR
+
+      - name: Clean up temporary files
+        run: |
+          rm -rf temp_scripts
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          cd docs
+          if git diff --quiet; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "No changes detected"
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected"
+          fi
+
+      - name: Set build ID
+        id: build_id
+        if: steps.check_changes.outputs.changes == 'true'
+        run: echo "id=$(date +'%Y%m%d')-$(date +%s)" >> $GITHUB_OUTPUT
+
+      - name: Create PR
+        if: steps.check_changes.outputs.changes == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          path: "docs"
+          token: ${{ github.token }}
+          branch: sync-zh-toc-${{ steps.build_id.outputs.id }}
+          base: ${{ env.ZH_BRANCH }}
+          title: "i18n-zh-release-8.5: sync ZH TOC changes ${{ steps.build_id.outputs.id }}"
+          body: |
+            ### What is changed, added or deleted? (Required)
+
+            Sync Chinese Cloud TOC files based on English TOC updates from ${{ env.EN_BRANCH }} branch.
+
+            ### Which TiDB version(s) do your changes apply to? (Required)
+
+            <!-- Fill in "x" in [] to tick the checkbox below.-->
+
+            **Tips for choosing the affected version(s):**
+
+            By default, **CHOOSE MASTER ONLY** so your changes will be applied to the next TiDB major or minor releases. If your PR involves a product feature behavior change or a compatibility change, **CHOOSE THE AFFECTED RELEASE BRANCH(ES) AND MASTER**.
+
+            For details, see [tips for choosing the affected versions](https://github.com/pingcap/docs/blob/master/CONTRIBUTING.md#guideline-for-choosing-the-affected-versions).
+
+            - [x] ${{ env.ZH_BRANCH }}
+
+            ### What is the related PR or file link(s)?
+
+            <!--Reference link(s) will help reviewers review your PR quickly.-->
+
+            - This PR syncs TOC changes from: ${{ env.EN_BRANCH }}
+            - Other reference link(s):
+
+            ### Do your changes match any of the following descriptions?
+
+            - [ ] Delete files
+            - [ ] Change aliases
+            - [ ] Need modification after applied to another branch <!-- If yes, please comment "/label version-specific-changes-required" below to trigger the bot to add the label. -->
+            - [ ] Might cause conflicts after applied to another branch
+          delete-branch: true
