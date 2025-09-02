@@ -5,15 +5,10 @@ summary: Use TiSpark to provide an HTAP solution to serve as a one-stop solution
 
 # TiSpark User Guide
 
-![TiSpark architecture](/media/tispark-architecture.png)
-
-## TiSpark vs TiFlash
-
-[TiSpark](https://github.com/pingcap/tispark) is a thin layer built for running Apache Spark on top of TiDB/TiKV to answer the complex OLAP queries. It takes advantages of both the Spark platform and the distributed TiKV cluster and seamlessly glues to TiDB, the distributed OLTP database, to provide a Hybrid Transactional/Analytical Processing (HTAP) solution to serve as a one-stop solution for both online transactions and analysis.
-
-[TiFlash](/tiflash/tiflash-overview.md) is another tool that enables HTAP. Both TiFlash and TiSpark allow the use of multiple hosts to execute OLAP queries on OLTP data. TiFlash stores data in a columnar format, which allows more efficient analytical queries. TiFlash and TiSpark can be used together.
-
-## What is TiSpark
+> **Warning:**
+>
+> - TiSpark does not guarantee compatibility with TiDB v7.0.0 and later versions.
+> - TiSpark does not guarantee compatibility with Spark v3.4.0 and later versions.
 
 TiSpark depends on the TiKV cluster and the PD cluster. You also need to set up a Spark cluster. This document provides a brief introduction to how to setup and use TiSpark. It requires some basic knowledge of Apache Spark. For more information, see [Apache Spark website](https://spark.apache.org/docs/latest/index.html).
 
@@ -32,6 +27,16 @@ Also, TiSpark supports distributed writes to TiKV. Compared with writes to TiDB 
 > **Warning:**
 >
 > Because TiSpark accesses TiKV directly, the access control mechanisms used by TiDB Server are not applicable to TiSpark. Since TiSpark v2.5.0, TiSpark supports user authentication and authorization, for more information, see [Security](/tispark-overview.md#security).
+
+The following diagram shows the architecture of TiSpark.
+
+![TiSpark architecture](/media/tispark-architecture.png)
+
+## TiSpark vs TiFlash
+
+[TiSpark](https://github.com/pingcap/tispark) is a thin layer built for running Apache Spark on top of TiDB/TiKV to answer complex OLAP queries. It takes advantage of both the Spark platform and the distributed TiKV cluster and seamlessly integrates with TiDB, the distributed OLTP database, to provide a Hybrid Transactional/Analytical Processing (HTAP) solution to serve as a one-stop solution for both online transactions and analysis.
+
+[TiFlash](/tiflash/tiflash-overview.md) is another tool that enables HTAP. Both TiFlash and TiSpark allow the use of multiple hosts to execute OLAP queries on OLTP data. TiFlash stores data in a columnar format, which allows more efficient analytical queries. TiFlash and TiSpark can be used together.
 
 ## Requirements
 
@@ -101,10 +106,13 @@ You can choose TiSpark version according to your TiDB and Spark version.
 
 TiSpark 2.4.4, 2.5.2, 3.0.2, 3.1.1, and 3.2.3 are the latest stable versions and are highly recommended.
 
+<<<<<<< HEAD
 > **Note:**
 >
 > TiSpark does not guarantee compatibility with TiDB v7.0.0 and later versions.
 
+=======
+>>>>>>> e9de9f0521 (TiSpark: highlight compatibility and restructure overview (#21705))
 ### Get TiSpark jar
 
 You can get the TiSpark jar using one of the following methods:
