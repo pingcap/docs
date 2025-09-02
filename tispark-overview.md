@@ -105,14 +105,6 @@ You can choose TiSpark version according to your TiDB and Spark version.
 | 3.2.x            | 6.x, 5.x, 4.x          | 3.0.x, 3.1.x, 3.2.x, 3.3.x|2.12|
 
 TiSpark 2.4.4, 2.5.2, 3.0.2, 3.1.1, and 3.2.3 are the latest stable versions and are highly recommended.
-
-<<<<<<< HEAD
-> **Note:**
->
-> TiSpark does not guarantee compatibility with TiDB v7.0.0 and later versions.
-
-=======
->>>>>>> e9de9f0521 (TiSpark: highlight compatibility and restructure overview (#21705))
 ### Get TiSpark jar
 
 You can get the TiSpark jar using one of the following methods:
