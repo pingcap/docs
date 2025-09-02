@@ -22,7 +22,7 @@ jobs:
           ref: "${{ env.ZH_BRANCH }}"
           path: "docs"
           token: ${{ github.token }}
-          
+
       - name: Copy script from main branch (temporary)
         run: |
           mkdir -p temp_scripts

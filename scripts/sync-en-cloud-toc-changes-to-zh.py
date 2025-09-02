@@ -1,3 +1,13 @@
+# This script is used to sync the changes from the English TOC files to the Chinese TOC files. Detailed steps are as follows:
+# 1. The script automatically gets the latest commit of the English TOC file from GitHub and the earlier commit of the English TOC file from the Chinese TOC file in the same repository.
+# 2. It compares two English commits and performs the following operations:
+#     - If the commit numbers are the same, skip the update for that TOC file.
+#     - If the commit numbers are different, update the Chinese TOC with the following operations:
+#         a. Updates the Chinese TOC according to the English diff.
+#         b. Generates bilingual terms based on the old version of the Chinese and English TOC files.
+#         c. Update the modified English lines in the Chinese TOC with Chinese based on the bilingual terms.
+#         d. Translate the remaining English in the Chinese TOC using AI.
+
 import re
 import os
 import sys
