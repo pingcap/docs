@@ -549,19 +549,13 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
     You can increase the GC lifetime by modifying the [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) system variable. Generally, it is not recommended to modify this parameter, because changing it might cause many old versions to pile up if this transaction has a large number of `UPDATE` and `DELETE` statements.
 
-- 7.1.2 `txn takes too much time`.
-
-    This error is returned when you commit a transaction that has not been committed for a long time (over 590 seconds).
-
-    If your application needs to execute a transaction of such a long time, you can increase the `[tikv-client] max-txn-time-use = 590` parameter and the GC lifetime to avoid this issue. It is recommended to check whether your application needs such a long transaction time.
-
-- 7.1.3 `coprocessor.go` reports `request outdated`.
+- 7.1.2 `coprocessor.go` reports `request outdated`.
 
     This error is returned when the coprocessor request sent to TiKV waits in a queue at TiKV for over 60 seconds.
 
     You need to investigate why the TiKV coprocessor is in a long queue.
 
-- 7.1.4 `region_cache.go` reports a large number of `switch region peer to next due to send request fail`, and the error message is `context deadline exceeded`.
+- 7.1.3 `region_cache.go` reports a large number of `switch region peer to next due to send request fail`, and the error message is `context deadline exceeded`.
 
     The request for TiKV timed out and triggers the region cache to switch the request to other nodes. You can continue to run the `grep "<addr> cancelled` command on the `addr` field in the log and take the following steps according to the `grep` results:
 
@@ -572,7 +566,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
     - `wait response is cancelled`: The request timed out after it is sent to TiKV. You need to check the response time of the corresponding TiKV address and the Region logs in PD and KV at that time.
 
-- 7.1.5 `distsql.go` reports `inconsistent index`.
+- 7.1.4 `distsql.go` reports `inconsistent index`.
 
     The data index seems to be inconsistent. Run the `admin check table <TableName>` command on the table where the reported index is. If the check fails, disable garbage collection by running the following command, and [report a bug](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&template=bug-report.md):
 
