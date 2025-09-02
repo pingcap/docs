@@ -1,4 +1,3 @@
-<img width="1258" height="862" alt="image" src="https://github.com/user-attachments/assets/4d55ceaf-4185-4803-8e18-69725fef9ae7" />---
 title: Integrate TiDB Cloud with New Relic (Preview)
 summary: Learn how to monitor your TiDB cluster with the New Relic integration.
 ---
