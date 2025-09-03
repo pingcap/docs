@@ -184,7 +184,7 @@ The following TiKV configuration items can be modified dynamically:
 | `gc.max-write-bytes-per-sec` | The maximum bytes that can be written into RocksDB per second |
 | `gc.enable-compaction-filter` | Whether to enable compaction filter |
 | `gc.compaction-filter-skip-version-check` | Whether to skip the cluster version check of compaction filter (not released) |
-| `gc.auto-compaction.check-interval` | The time interval at which TiKV checks whether to trigger automatic (RocksDB) compaction |
+| `gc.auto-compaction.check-interval` | The interval at which TiKV checks whether to trigger automatic (RocksDB) compaction |
 | `gc.auto-compaction.tombstone-num-threshold` | The number of RocksDB tombstones required to trigger TiKV automatic (RocksDB) compaction |
 | `gc.auto-compaction.tombstone-percent-threshold` | The percentage of RocksDB tombstones required to trigger TiKV automatic (RocksDB) compaction |
 | `gc.auto-compaction.redundant-rows-threshold` | The number of redundant MVCC rows required to trigger TiKV automatic (RocksDB) compaction |
