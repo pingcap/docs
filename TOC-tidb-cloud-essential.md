@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: 68fed3b6508cb56dc77800008c1d13ef40b1a8a6-->
+# 目录 <!--Corresponding EN commit: 35d5a6dc54318b02cb90c105d8b0a51ea475af43-->
 
 ## 快速开始
 
@@ -214,11 +214,12 @@
 - 迁移或导入数据
   - [概览](/tidb-cloud/tidb-cloud-migration-overview.md)
   - 将数据迁移到 TiDB Cloud
+    - [从自运维 TiDB 迁移到 TiDB Cloud](/tidb-cloud/migrate-from-op-tidb.md)
     - [迁移和合并大型数据集的 MySQL 分片](/tidb-cloud/migrate-sql-shards.md)
     - [使用 AWS DMS 从 Amazon RDS for Oracle 迁移](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
   - 将数据导入 TiDB Cloud
-    - [导入示例数据](/tidb-cloud/import-sample-data-serverless.md)
     - [导入本地文件](/tidb-cloud/tidb-cloud-import-local-files.md)
+    - [从云存储导入示例数据（SQL 文件）](/tidb-cloud/import-sample-data-serverless.md)
     - [从云存储导入 CSV 文件](/tidb-cloud/import-csv-files-serverless.md)
     - [从云存储导入 Parquet 文件](/tidb-cloud/import-parquet-files-serverless.md)
     - [使用 MySQL CLI 导入](/tidb-cloud/import-with-mysql-cli-serverless.md)
@@ -227,6 +228,7 @@
     - [数据导入的命名约定](/tidb-cloud/naming-conventions-for-data-import.md)
     - [导入数据的 CSV 配置](/tidb-cloud/csv-config-for-import-data.md)
     - [排查从 Amazon S3 导入数据期间的访问被拒绝错误](/tidb-cloud/troubleshoot-import-access-denied-error.md)
+    - [将 AWS DMS 连接到 TiDB Cloud 集群](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - 向量搜索 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [概述](/vector-search/vector-search-overview.md)
   - 快速上手
