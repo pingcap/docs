@@ -23,7 +23,7 @@ See [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starte
 
 > **Tip:**
 >
-> Currently, {{{ .essential }}} is in public preview on Alibaba Cloud and is only available in the Alibaba Cloud Singapore region. To request other regions on Alibaba Cloud, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md#access-pingcap-help-center).
+> Currently, {{{ .essential }}} is in public preview on Alibaba Cloud and is only available in the following regions: Jakarta, Mexico, Singapore, and Tokyo. To request other regions on Alibaba Cloud, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md#access-pingcap-help-center).
 
 For {{{ .essential }}}, you are charged based on the number of provisioned Request Capacity Units (RCUs), **not** on the actual usage by your application.
 
@@ -31,13 +31,13 @@ A **Request Capacity Unit (RCU)** is a unit of measure used to represent the pro
 
 See the detailed pricing for each available Alibaba Cloud region below.
 
-| Resource | Singapore |
-|----------|-----------|
-| Compute (per RCU/month) | $0.24 |
-| Row-based storage (per GiB/month) | $0.24 |
-| Columnar storage (per GiB/month) | $0.06 |
-| Row-based storage with dual-layer encryption (per GiB/month) | $0.36 |
-| Columnar storage with dual-layer encryption (per GiB/month) | $0.09 |
+| Resource | Jakarta | Mexico | Singapore | Tokyo |
+|----------|---------|--------|-----------|-------|
+| Compute (per RCU/month) | $0.27 | $0.22 | $0.24 | $0.28 |
+| Row-based storage (per GiB/month) | $0.24 | $0.24 | $0.24 | $0.24 |
+| Columnar storage (per GiB/month) | $0.06 | $0.06 | $0.06 | $0.06 |
+| Row-based storage with dual-layer encryption (per GiB/month) | $0.36 | $0.36 | $0.36 | $0.36 |
+| Columnar storage with dual-layer encryption (per GiB/month) | $0.09 | $0.09 | $0.09 | $0.09 |
 
 #### Throttling
 
