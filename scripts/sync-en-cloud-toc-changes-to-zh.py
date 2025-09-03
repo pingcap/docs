@@ -12,20 +12,29 @@ import re
 import os
 import sys
 import json
+import logging
 from urllib.request import urlopen, Request
+from urllib.error import URLError, HTTPError
 from google import genai
 
-repo_owner = "qiancai"
-repo_name = "docs"
-en_branch = "release-8.5"
-zh_branch = "i18n-zh-release-8.5"
-toc_file_names = ["TOC-tidb-cloud-starter.md", "TOC-tidb-cloud-essential.md", "TOC-tidb-cloud.md"]
+REPO_OWNER = "pingcap"
+REPO_NAME = "docs"
+EN_BRANCH = "release-8.5"
+ZH_BRANCH = "i18n-zh-release-8.5"
+TOC_FILE_NAMES = ["TOC-tidb-cloud-starter.md", "TOC-tidb-cloud-essential.md", "TOC-tidb-cloud.md"]
+TOC_HEADER_LINE_COUNT = 3  # The Starting line to create bilingual terms
+TEMP_TOC_FILENAME = "en_cloud_toc.md" # The filename of the temporary English TOC content
+
+
+# ========== Logging Configuration ==========
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 # ========== AI Configuration ==========
-model_name = "gemini-2.0-flash"
+MODEL_NAME = "gemini-2.0-flash"
 genai_token = os.getenv("GEMINI_API_TOKEN")
 if not genai_token:
-    print("Error: GEMINI_API_TOKEN environment variable must be set")
+    logger.error("GEMINI_API_TOKEN environment variable must be set")
     sys.exit(1)
 
 client = genai.Client(api_key=genai_token)
@@ -35,8 +44,8 @@ def read_file_from_repo(file_path):
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             return f.read()
-    except Exception as e:
-        print(f"Error reading file {file_path}: {e}")
+    except IOError as e:
+        logger.error(f"Error reading file {file_path}: {e}")
         return None
 
 def write_file_to_repo(file_path, content):
@@ -45,8 +54,8 @@ def write_file_to_repo(file_path, content):
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(content)
         return True
-    except Exception as e:
-        print(f"Error writing file {file_path}: {e}")
+    except IOError as e:
+        logger.error(f"Error writing file {file_path}: {e}")
         return False
 
 def extract_commit_from_target_file(target_file):
@@ -67,14 +76,14 @@ def extract_commit_from_target_file(target_file):
                 match = re.search(r'EN commit:\s*([a-f0-9]{40})', line)
                 if match:
                     commit_sha = match.group(1)
-                    print(f"Found earlier EN commit in target file: {commit_sha}")
+                    logger.info(f"Found earlier EN commit in target file: {commit_sha}")
                     return commit_sha
         
-        print("[ERROR] No EN commit comment found in target file")
+        logger.error("No EN commit comment found in target file")
         return None
         
     except Exception as e:
-        print(f"Error reading target file for commit extraction: {e}")
+        logger.error(f"Error reading target file for commit extraction: {e}")
         return None
 
 def get_latest_commit_sha(repo_owner, repo_name, branch, toc_file_name):
@@ -98,23 +107,21 @@ def get_latest_commit_sha(repo_owner, repo_name, branch, toc_file_name):
             
         if data and len(data) > 0:
             latest_commit = data[0]['sha']
-            
-            print(f"Latest commit: {latest_commit}")
-            
+            logger.info(f"Latest commit: {latest_commit}")
             return latest_commit
         else:
-            print("No commits found for the specified file")
+            logger.warning("No commits found for the specified file")
             return None
             
-    except Exception as e:
-        print(f"Error fetching latest commit: {e}")
+    except (URLError, HTTPError, json.JSONDecodeError) as e:
+        logger.error(f"Error fetching latest commit: {e}")
         return None
 
 def get_github_compare_diff(base_commit, head_commit):
-    """Fetch unified diff from GitHub compare endpoint (.diff) for the repo {repo_owner}/{repo_name}"""
+    """Fetch unified diff from GitHub compare endpoint (.diff) for the repo {REPO_OWNER}/{REPO_NAME}"""
     try:
-        url = f"https://github.com/{repo_owner}/{repo_name}/compare/{base_commit}...{head_commit}.diff"
-        print(f"Fetching compare diff from: {url}")
+        url = f"https://github.com/{REPO_OWNER}/{REPO_NAME}/compare/{base_commit}...{head_commit}.diff"
+        logger.info(f"Fetching compare diff from: {url}")
         headers = {
             "User-Agent": "tidb-docs-sync/1.0",
             "Accept": "application/vnd.github.v3.diff",
@@ -127,8 +134,8 @@ def get_github_compare_diff(base_commit, head_commit):
             content_bytes = resp.read()
             # GitHub serves UTF-8
             return content_bytes.decode("utf-8", errors="replace")
-    except Exception as e:
-        print(f"Error fetching GitHub compare diff: {e}")
+    except (URLError, HTTPError) as e:
+        logger.error(f"Error fetching GitHub compare diff: {e}")
         return None
 
 def parse_github_diff_for_file(diff_text, target_rel_path):
@@ -274,27 +281,27 @@ def apply_hunks_by_line_numbers(target_file, hunks, earlier_commit, latest_commi
         if not success:
             return False, {}
 
-        print(f"Successfully applied {len(hunks)} hunks to {target_file}")
+        logger.info(f"Successfully applied {len(hunks)} hunks to {target_file}")
         return True, modified_lines
     except Exception as e:
-        print(f"Error applying hunks: {e}")
+        logger.error(f"Error applying hunks: {e}")
         return False, {}
 
 def sync_toc_files_using_github_compare(commit1, commit2, source_file, target_file):
     """Sync by fetching compare diff from GitHub and applying hunks by line numbers."""
-    print(f"Fetching GitHub compare diff between {commit1} and {commit2}...")
+    logger.info(f"Fetching GitHub compare diff between {commit1} and {commit2}...")
     diff_text = get_github_compare_diff(commit1, commit2)
     if not diff_text:
-        print("No diff content retrieved from GitHub")
+        logger.warning("No diff content retrieved from GitHub")
         return False, {}
 
-    print("Parsing diff for target file hunks...")
+    logger.info("Parsing diff for target file hunks...")
     hunks = parse_github_diff_for_file(diff_text, source_file)
     if not hunks:
-        print(f"No hunks found for file: {source_file}")
+        logger.info(f"No hunks found for file: {source_file}")
         return False, {}
 
-    print(f"Found {len(hunks)} hunks for {source_file}. Applying to {target_file} by line numbers...")
+    logger.info(f"Found {len(hunks)} hunks for {source_file}. Applying to {target_file} by line numbers...")
     sync_status, modified_lines = apply_hunks_by_line_numbers(target_file, hunks, commit1, commit2)
     return sync_status, modified_lines
 
@@ -304,7 +311,7 @@ def create_bilingual_comparison(target_toc_file):
     
     # Read both files
     zh_content = read_file_from_repo(target_toc_file)
-    en_content = read_file_from_repo("en_toc_content.md")
+    en_content = read_file_from_repo(TEMP_TOC_FILENAME)
     
     if not zh_content or not en_content:
         return []
@@ -313,12 +320,12 @@ def create_bilingual_comparison(target_toc_file):
     en_lines = en_content.splitlines(True)
     
     # Process from line 4 onwards (index 3)
-    start_line = 3  # 0-based index for line 4
+    start_line = TOC_HEADER_LINE_COUNT
     
     # Ensure both files have the same number of lines
     min_lines = min(len(zh_lines), len(en_lines))
     
-    print(f"Processing {min_lines - start_line} lines starting from line {start_line + 1}")
+    logger.info(f"Processing {min_lines - start_line} lines starting from line {start_line + 1}")
     
     for i in range(start_line, min_lines):
         zh_line = zh_lines[i].rstrip('\n\r')
@@ -338,9 +345,9 @@ def create_bilingual_comparison(target_toc_file):
         # Only add non-empty cleaned lines
         if zh_cleaned.strip() and en_cleaned.strip():
             bilingual_list.append([zh_cleaned, en_cleaned, i + 1])
-            #print(f"Bilingual items: Line {i + 1}: '{en_cleaned}' -> '{zh_cleaned}'")
+            logger.debug(f"Bilingual items: Line {i + 1}: '{en_cleaned}' -> '{zh_cleaned}'")
     
-    print(f"Created bilingual list with {len(bilingual_list)} entries")
+    logger.info(f"Created bilingual list with {len(bilingual_list)} entries")
     return bilingual_list
 
 def replace_content_with_translation(bilingual_list, modified_lines, target_toc_file):
@@ -351,11 +358,14 @@ def replace_content_with_translation(bilingual_list, modified_lines, target_toc_
         return modified_lines
     target_lines = content.splitlines(True)
     
+    # Optimize lookup by creating a dictionary for O(1) lookups
+    bilingual_map = {en_text: zh_text for zh_text, en_text, _ in bilingual_list}
+    
     replaced_count = 0
     matched_lines = set()
     
-    print(f"Found {len(modified_lines)} modified lines to process.")
-    print(f"Modified lines: {list(modified_lines.keys())}")
+    logger.info(f"Found {len(modified_lines)} modified lines to process.")
+    logger.debug(f"Modified lines: {list(modified_lines.keys())}")
     
     # Process each modified line
     for line_number in modified_lines.keys():
@@ -373,39 +383,35 @@ def replace_content_with_translation(bilingual_list, modified_lines, target_toc_
                 prefix = ''
                 cleaned_content = line_content.rstrip()
             
-            # Try to find exact match in bilingual list
-            for j, entry in enumerate(bilingual_list):
-                zh_text, en_text = entry[0], entry[1]
-                
-                if cleaned_content == en_text:
-                    # Found match! Replace with Chinese translation
-                    new_line = prefix + zh_text
-                    target_lines[line_index] = new_line + '\n'
-                    replaced_count += 1
-                    matched_lines.add(line_number)
-                    
-                    #print(f"Matched line {line_number}: '{en_text}' -> '{zh_text}'")
-                    break
+            # Try to find exact match in bilingual map (O(1) lookup)
+            if cleaned_content in bilingual_map:
+                # Found match! Replace with Chinese translation
+                zh_text = bilingual_map[cleaned_content]
+                new_line = prefix + zh_text
+                target_lines[line_index] = new_line + '\n'
+                replaced_count += 1
+                matched_lines.add(line_number)
+                logger.debug(f"Matched line {line_number}: '{cleaned_content}' -> '{zh_text}'")
     
     # Write back the updated content
     if replaced_count > 0:
         updated_content = ''.join(target_lines)
         write_file_to_repo(target_toc_file, updated_content)
-        print(f"Applied {replaced_count} existing translations.")
+        logger.info(f"Applied {replaced_count} existing translations.")
     
     # Return unmatched lines for AI translation
     unmatched_lines = {k: v for k, v in modified_lines.items() if k not in matched_lines}
-    print(f"Lines needing AI translation: {len(unmatched_lines)}")
+    logger.info(f"Lines needing AI translation: {len(unmatched_lines)}")
     
     return unmatched_lines
 
 def translate_content(modified_lines, target_file):
     """Translate English content to Chinese using Gemini API with JSON format"""
     if not modified_lines:
-        print("No content to translate.")
+        logger.info("No content to translate.")
         return {}
     
-    print(f"Translating {len(modified_lines)} lines using Gemini API...")
+    logger.info(f"Translating {len(modified_lines)} lines using Gemini API...")
     
     # Read the target file to get original formatted lines
     content = read_file_from_repo(target_file)
@@ -422,12 +428,12 @@ def translate_content(modified_lines, target_file):
             translation_json[str(line_num)] = original_line
     
     if not translation_json:
-        print("No valid content to translate after processing.")
+        logger.warning("No valid content to translate after processing.")
         return {}
     
     # Create JSON string for the prompt
     json_input = json.dumps(translation_json, ensure_ascii=False, indent=2)
-    print(f"Translation JSON input: {json_input}")
+    logger.debug(f"Translation JSON input: {json_input}")
     
     # Create translation prompt
     prompt = f"""Please translate the following TOC (Table of Contents) entries from English to Chinese.
@@ -445,29 +451,27 @@ Input JSON:
 Return only the JSON with Chinese translations that preserve all original formatting."""
     
     try:
-        print("Sending translation request to Gemini API...")
+        logger.info("Sending translation request to Gemini API...")
         response = client.models.generate_content(
-            model=model_name, contents=prompt
+            model=MODEL_NAME, contents=prompt
         )
         
         if response.text:
             # Extract JSON from response
             response_text = response.text.strip()
-            print(f"Translation JSON response: {response_text}")
+            logger.debug(f"Translation JSON response: {response_text}")
             
             # Try to find and parse JSON from the response
             try:
-                # Remove any markdown code blocks if present
-                if '```json' in response_text:
-                    start = response_text.find('```json') + 7
-                    end = response_text.find('```', start)
-                    json_text = response_text[start:end].strip()
+                # Use regex to find JSON block more robustly
+                json_text = response_text
+                match = re.search(r"```json\s*([\s\S]*?)\s*```", response_text)
+                if match:
+                    json_text = match.group(1).strip()
                 elif '```' in response_text:
                     start = response_text.find('```') + 3
                     end = response_text.find('```', start)
                     json_text = response_text[start:end].strip()
-                else:
-                    json_text = response_text
                 
                 # Parse the JSON
                 translated_json = json.loads(json_text)
@@ -478,38 +482,38 @@ Return only the JSON with Chinese translations that preserve all original format
                     line_num = int(line_num_str)
                     zh_modified_lines[line_num] = translated_text
                     original_text = modified_lines.get(line_num, "")
-                    #print(f"Line {line_num}: '{original_text}' -> '{translated_text}'")
+                    logger.debug(f"Line {line_num}: '{original_text}' -> '{translated_text}'")
                 
-                print(f"Translation completed. Processed {len(zh_modified_lines)} lines.")
+                logger.info(f"Translation completed. Processed {len(zh_modified_lines)} lines.")
                 return zh_modified_lines
                 
             except (json.JSONDecodeError, ValueError) as e:
-                print(f"Error parsing JSON response: {e}")
-                print(f"Response was: {response_text}")
-                # Fallback: return original content
-                return {line_num: content for line_num, content in modified_lines.items()}
+                logger.error(f"Error parsing JSON response: {e}")
+                logger.error(f"Response was: {response_text}")
+                # Fallback: return empty dict to prevent writing untranslated content
+                return {}
         else:
-            print("Error: Empty response from Gemini API")
-            return {line_num: content for line_num, content in modified_lines.items()}
+            logger.error("Empty response from Gemini API")
+            return {}
                 
     except Exception as e:
-        print(f"Error during translation: {e}")
-        # Fallback: return original content
-        return {line_num: content for line_num, content in modified_lines.items()}
+        logger.error(f"Error during translation: {e}")
+        # Fallback: return empty dict to prevent writing untranslated content
+        return {}
 
 def update_toc_file(zh_modified_lines, target_file):
     """Apply translated content to specific lines in the target TOC file"""
     if not zh_modified_lines:
-        print("No translated content to apply.")
+        logger.info("No translated content to apply.")
         return
     
-    print(f"Applying {len(zh_modified_lines)} translated lines to {target_file}...")
+    logger.info(f"Applying {len(zh_modified_lines)} translated lines to {target_file}...")
     
     try:
         # Read the target file
         content = read_file_from_repo(target_file)
         if not content:
-            print(f"Error: Could not read target file {target_file}")
+            logger.error(f"Could not read target file {target_file}")
             return
         target_lines = content.splitlines(True)
         
@@ -524,85 +528,89 @@ def update_toc_file(zh_modified_lines, target_file):
                 target_lines[line_index] = translated_content
                 applied_count += 1
             else:
-                print(f"Warning: Line number {line_num} is out of range (file has {len(target_lines)} lines)")
+                logger.warning(f"Line number {line_num} is out of range (file has {len(target_lines)} lines)")
         
         # Write the updated content back to the file
         updated_content = ''.join(target_lines)
         write_file_to_repo(target_file, updated_content)
         
-        print(f"\nSuccessfully applied {applied_count} translations to {target_file}")
+        logger.info(f"Successfully applied {applied_count} translations to {target_file}")
         
     except Exception as e:
-        print(f"Error updating TOC file: {e}")
+        logger.error(f"Error updating TOC file: {e}")
         raise
 
 def cleanup_temp_files():
     """Clean up temporary files"""
     try:
-        if os.path.exists("en_toc_content.md"):
-            os.remove("en_toc_content.md")
-            print("Cleaned up temporary file: en_toc_content.md")
+        if os.path.exists(TEMP_TOC_FILENAME):
+            os.remove(TEMP_TOC_FILENAME)
+            logger.info(f"Cleaned up temporary file: {TEMP_TOC_FILENAME}")
     except Exception as e:
-        print(f"Warning: Could not clean up temporary files: {e}")
+        logger.warning(f"Could not clean up temporary files: {e}")
+
+def process_toc_file(toc_file_name):
+    """Process a single TOC file for synchronization"""
+    target_toc_file = toc_file_name
+
+    logger.info("-" * 50)
+    logger.info(f"Processing {toc_file_name}...")
+
+    logger.info("Extracting EN commit SHA from target file...")
+    earlier_commit = extract_commit_from_target_file(target_toc_file)
+
+    logger.info("Fetching latest commit SHA for TOC file...")
+    latest_commit = get_latest_commit_sha(REPO_OWNER, REPO_NAME, EN_BRANCH, toc_file_name)
+
+    # If earlier_commit is different from latest_commit, sync the TOC file.
+    if earlier_commit and latest_commit and earlier_commit != latest_commit:
+        # Download the EN TOC content from the earlier commit for comparison
+        en_toc_path = f"https://raw.githubusercontent.com/{REPO_OWNER}/{REPO_NAME}/{earlier_commit}/{toc_file_name}"
+        logger.info(f"Downloading EN TOC content from: {en_toc_path}")
+        en_toc_content = urlopen(en_toc_path).read().decode("utf-8")
+        
+        # Write en_toc_content to a file for bilingual comparison
+        write_file_to_repo(TEMP_TOC_FILENAME, en_toc_content)
+
+        logger.info("Creating bilingual comparison...")
+        bilingual_list = create_bilingual_comparison(target_toc_file)
+        
+        logger.info("Running TOC sync using GitHub compare diff...")
+        sync_status, modified_lines = sync_toc_files_using_github_compare(
+            earlier_commit,
+            latest_commit,
+            toc_file_name,
+            target_toc_file,
+        )
+        
+        if sync_status:
+            logger.info("TOC file sync completed successfully!")
+            
+            # Match with existing bilingual translations
+            unmatched_lines = replace_content_with_translation(bilingual_list, modified_lines, target_toc_file)
+            
+            # Use AI to translate remaining unmatched lines
+            if unmatched_lines:
+                logger.info(f"Using AI to translate {len(unmatched_lines)} unmatched lines...")
+                zh_modified_lines = translate_content(unmatched_lines, target_toc_file)
+                update_toc_file(zh_modified_lines, target_toc_file)
+                logger.info("AI translations have been applied successfully!")
+            else:
+                logger.info("All lines were matched with existing translations. No AI translation needed.")
+        else:
+            logger.error("TOC file sync failed!")
+    else:
+        if earlier_commit == latest_commit:
+            logger.info(f"Earlier commit is the same as latest commit. No sync needed for {toc_file_name}.")
+        else:
+            logger.warning(f"Skipping sync for {toc_file_name} due to missing commit information. Check logs for errors.")
 
 if __name__ == "__main__":
-
-    for toc_file_name in toc_file_names:
-
-        target_toc_file = toc_file_name
-
-        print("-" * 50)
-        print(f"Processing {toc_file_name}...")
-
-        print("Extracting EN commit SHA from target file...")
-        earlier_commit = extract_commit_from_target_file(target_toc_file)
-
-        print("Fetching latest commit SHA for TOC file...")
-        latest_commit = get_latest_commit_sha(repo_owner, repo_name, en_branch, toc_file_name)
-
-        # If earlier_commit is different from latest_commit, sync the TOC file.
-        if earlier_commit and latest_commit and earlier_commit != latest_commit:
-            # Download the EN TOC content from the earlier commit for comparison
-            en_toc_path = f"https://raw.githubusercontent.com/{repo_owner}/{repo_name}/{earlier_commit}/{toc_file_name}"
-            print(f"Downloading EN TOC content from: {en_toc_path}")
-            en_toc_content = urlopen(en_toc_path).read().decode("utf-8")
-            
-            # Write en_toc_content to a file for bilingual comparison
-            write_file_to_repo("en_toc_content.md", en_toc_content)
-
-            print("Creating bilingual comparison...")
-            bilingual_list = create_bilingual_comparison(target_toc_file)
-            
-            print("Running TOC sync using GitHub compare diff...")
-            sync_status, modified_lines = sync_toc_files_using_github_compare(
-                earlier_commit,
-                latest_commit,
-                toc_file_name,
-                target_toc_file,
-            )
-            
-            if sync_status:
-                print("TOC file sync completed successfully!")
-                
-                # Match with existing bilingual translations
-                unmatched_lines = replace_content_with_translation(bilingual_list, modified_lines, target_toc_file)
-                
-                # Use AI to translate remaining unmatched lines
-                if unmatched_lines:
-                    print(f"Using AI to translate {len(unmatched_lines)} unmatched lines...")
-                    zh_modified_lines = translate_content(unmatched_lines, target_toc_file)
-                    update_toc_file(zh_modified_lines, target_toc_file)
-                    print("AI translations have been applied successfully!")
-                else:
-                    print("All lines were matched with existing translations. No AI translation needed.")
-            else:
-                print("TOC file sync failed!")
-        else:
-            if earlier_commit == latest_commit:
-                print(f"Earlier commit is the same as latest commit. No sync needed for {toc_file_name}.")
-            else:
-                print(f"Skipping sync for {toc_file_name} due to missing commit information. Check logs for errors.")
+    logger.info("Starting TOC synchronization process...")
+    
+    for toc_file_name in TOC_FILE_NAMES:
+        process_toc_file(toc_file_name)
     
     # Clean up temporary files
     cleanup_temp_files()
-    print("Script execution completed.")
+    logger.info("Script execution completed.")
