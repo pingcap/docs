@@ -45,7 +45,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
     CREATE TABLE table_name like t;
     ```
 
--   v4.0.6より前のバージョンでは、 TiDB Lightningを使用してデータをインポートする前にTiFlashレプリカを作成すると、データのインポートは失敗します。テーブルのTiFlashレプリカを作成する前に、テーブルにデータをインポートする必要があります。
+-   v4.0.6より前のバージョンでは、 TiDB Lightningを使用してデータをインポートする前にTiFlashレプリカを作成すると、データのインポートに失敗します。テーブルのTiFlashレプリカを作成する前に、テーブルにデータをインポートする必要があります。
 
 -   TiDB とTiDB Lightning の両方が v4.0.6 以降であれば、テーブルにTiFlashレプリカがあるかどうかに関係なく、 TiDB Lightningを使用してそのテーブルにデータをインポートできます。ただし、 TiDB Lightning のプロセスは、Lightning ホストの NIC 帯域幅、 TiFlashノードの CPU とディスク負荷、およびTiFlashレプリカの数に応じて遅くなる可能性があります。
 
@@ -231,47 +231,50 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
 
     以前のバージョンでは、 `flash.proxy.labels`設定では、利用可能なゾーン名に含まれる特殊文字を正しく処理できないことに注意してください。利用可能なゾーン名を設定するには、 `learner_config`の`server.labels`を使用することをお勧めします。
 
-2.  クラスターを起動した後、レプリカを作成するときにラベルを指定します。
+2.  クラスターを起動した後、高可用性を実現するためにTiFlashレプリカの数を指定します。構文は次のとおりです。
 
     ```sql
-    ALTER TABLE table_name SET TIFLASH REPLICA count LOCATION LABELS location_labels;
+    ALTER TABLE table_name SET TIFLASH REPLICA count;
     ```
 
     例えば：
 
     ```sql
-    ALTER TABLE t SET TIFLASH REPLICA 2 LOCATION LABELS "zone";
+    ALTER TABLE t SET TIFLASH REPLICA 2;
     ```
 
-3.  PDはラベルに基づいてレプリカをスケジュールします。この例では、PDはテーブル`t`の2つのレプリカをそれぞれ2つの利用可能なゾーンにスケジュールしています。スケジュール状況はpd-ctlで確認できます。
+3.  PDは、 TiFlashノードの`learner_config` `server.labels`テーブルのレプリカ数（ `count` ）に基づいて、テーブル`t`のレプリカを異なるアベイラビリティゾーンにスケジュールし、可用性を確保します。詳細については、 [トポロジラベルによるレプリカのスケジュール](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels/)参照してください。次のSQL文を使用して、 TiFlashノード間のテーブルのリージョンの分散を確認できます。
 
-    ```shell
-    > tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store
+    ```sql
+    -- Non-partitioned table
+    SELECT table_id, p.store_id, address, COUNT(p.region_id) 
+    FROM
+      information_schema.tikv_region_status r,
+      information_schema.tikv_region_peers p,
+      information_schema.tikv_store_status s
+    WHERE
+      r.db_name = 'test' 
+      AND r.table_name = 'table_to_check'
+      AND r.region_id = p.region_id 
+      AND p.store_id = s.store_id
+      AND JSON_EXTRACT(s.label, '$[0].value') = 'tiflash'
+    GROUP BY table_id, p.store_id, address;
 
-        ...
-        "address": "172.16.5.82:23913",
-        "labels": [
-          { "key": "engine", "value": "tiflash"},
-          { "key": "zone", "value": "z1" }
-        ],
-        "region_count": 4,
-
-        ...
-        "address": "172.16.5.81:23913",
-        "labels": [
-          { "key": "engine", "value": "tiflash"},
-          { "key": "zone", "value": "z1" }
-        ],
-        "region_count": 5,
-        ...
-
-        "address": "172.16.5.85:23913",
-        "labels": [
-          { "key": "engine", "value": "tiflash"},
-          { "key": "zone", "value": "z2" }
-        ],
-        "region_count": 9,
-        ...
+    -- Partitioned table
+    SELECT table_id, r.partition_name, p.store_id, address, COUNT(p.region_id)
+    FROM
+      information_schema.tikv_region_status r,
+      information_schema.tikv_region_peers p,
+      information_schema.tikv_store_status s
+    WHERE 
+      r.db_name = 'test' 
+      AND r.table_name = 'table_to_check' 
+      AND r.partition_name LIKE 'p202312%'
+      AND r.region_id = p.region_id 
+      AND p.store_id = s.store_id
+      AND JSON_EXTRACT(s.label, '$[0].value') = 'tiflash'
+    GROUP BY table_id, r.partition_name, p.store_id, address
+    ORDER BY table_id, r.partition_name, p.store_id;
     ```
 
 <CustomContent platform="tidb">
@@ -281,3 +284,7 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
 TiFlashは、異なるゾーンに対するレプリカ選択戦略の設定をサポートしています。詳細については、 [`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730)参照してください。
 
 </CustomContent>
+
+> **注記：**
+>
+> 構文`ALTER TABLE table_name SET TIFLASH REPLICA count LOCATION LABELS location_labels;`において、 `location_labels`に複数のラベルを指定すると、TiDBはそれらを正しく解析して配置ルールを設定できません。したがって、 TiFlashレプリカの設定には`LOCATION LABELS`使用しないでください。

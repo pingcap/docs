@@ -13,7 +13,7 @@ summary: tiup cluster upgradeコマンドは、指定したクラスターを特
 tiup cluster upgrade <cluster-name> <version> [flags]
 ```
 
--   `<cluster-name>` : 操作対象のクラスター名。クラスター名を忘れた場合は、 [クラスターリスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
+-   `<cluster-name>` : 操作対象のクラスタ名。クラスタ名を忘れた場合は、 [クラスターリスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
 -   `<version>` : アップグレード先のバージョン（例： `v8.5.3` ）。現在、現在のクラスターよりも上位のバージョンへのアップグレードのみが許可されており、ダウングレードは許可されていません。また、ナイトリーバージョンへのアップグレードも許可されていません。
 
 ## オプション {#options}
@@ -115,6 +115,13 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 -   Node Exporterのバージョンを指定します。このオプションを設定すると、Node Exporterのバージョンとクラスターのバージョンが一致しなくなります。
 -   データ型: `STRINGS`
 -   このオプションが設定されていない場合、Node Exporter のバージョンはクラスターのバージョンと一致したままになります。
+
+### --再起動タイムアウト {#restart-timeout}
+
+-   ローリング アップグレード中にコンポーネントをアップグレードした後の待機時間を指定します。
+-   データ型: `STRINGS` [`golang time.ParseDuration`](https://pkg.go.dev/time#ParseDuration)で解析できるすべての型がサポートされます。
+-   デフォルト: `0`
+-   このオプションを指定しないと、コンポーネントのアップグレード後に待機時間は発生しません。
 
 ### -h, --help {#h-help}
 

@@ -89,7 +89,7 @@ SaaS マルチテナントシナリオでは、各ユーザーは通常、TiDB �
     -   100 万個のテーブルの場合は、32 GiB 以上のメモリを備えたBRインスタンスを使用します。
     -   300 万個のテーブルの場合は、64 GiB 以上のメモリを備えたBRインスタンスを使用します。
 -   BRログバックアップとスナップショットリストアは追加のTiKVメモリを消費します。32GiB以上のメモリを搭載したTiKVインスタンスの使用をお勧めします。
--   ログの復元速度を向上させるには、必要に応じてBR構成[`pitr-batch-count`と`pitr-concurrency`](/br/use-br-command-line-tool.md#common-options)調整します。
+-   ログの復元速度を向上させるには、必要に応じてBR構成[`pitr-batch-count`と`pitr-concurrency`](/br/br-pitr-manual.md#restore-to-a-specified-point-in-time-pitr)調整します。
 
 ## TiDB Lightningでデータをインポートする {#import-data-with-tidb-lightning}
 

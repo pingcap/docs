@@ -153,7 +153,7 @@ OOM のトラブルシューティングの詳細については、 [TiDB OOM �
 
 -   3.3.2 実行計画の調査
 
-    -   `explain analyze {SQL}` 。実行時間が許容範囲内であれば、 `explain analyze`結果の`count`と`row` `execution info`結果の 6 を比較してください`TableScan/IndexScan`行目に大きな差がある場合は、統計情報に誤りがある可能性があります。他の行にも大きな差がある場合は、統計情報に問題があるわけではない可能性があります。
+    -   `explain analyze {SQL}` 。実行時間が許容範囲内であれば、 `explain analyze`結果の`count`と`execution info`の`row`を比較してください`TableScan/IndexScan`行目に大きな差がある場合は、統計情報に誤りがある可能性があります。他の行にも大きな差がある場合は、統計情報に問題があるわけではない可能性があります。
 
     -   `select count(*)` 。実行プランに`join`操作が含まれている場合、 `explain analyze`長い時間がかかる可能性があります`TableScan/IndexScan`の条件で`select count(*)`実行し、 `explain`結果の`row count`情報と比較することで、統計情報に問題があるかどうかを確認できます。
 
@@ -161,7 +161,7 @@ OOM のトラブルシューティングの詳細については、 [TiDB OOM �
 
     -   v3.0 以降のバージョンでは、 `SQL Bind`機能を使用して実行プランをバインドします。
 
-    -   統計を更新してください。問題の原因が統計[統計をダンプする](/statistics.md#export-statistics)にあるとほぼ確信できる場合は、統計が古い場合（例えば、 `show stats_meta`の`modify count/row count`特定の値（例えば0.3）より大きい場合や、テーブルに時間列のインデックスがある場合など）は、 `analyze table`を使用して回復を試みることができます。9 `auto analyze`設定されている場合は、システム変数`tidb_auto_analyze_ratio`大きすぎないか（例えば、0.3より大きい）、および現在の時刻が`tidb_auto_analyze_start_time`から`tidb_auto_analyze_end_time`間であるかどうかを確認してください。
+    -   統計を更新してください。問題の原因が統計[統計をダンプする](/statistics.md#export-statistics)にあるとほぼ確信できる場合は、統計情報の更新を行ってください。統計情報が古い場合（例えば、 `show stats_meta`の`modify count/row count`が特定の値（例えば0.3）より大きい場合や、テーブルに時間列のインデックスがある場合など）は、 `analyze table`を使用して復旧を試みることができます`auto analyze`設定されている場合は、システム変数`tidb_auto_analyze_ratio`大きすぎないか（例えば0.3より大きい場合）、および現在の時刻が`tidb_auto_analyze_start_time`から`tidb_auto_analyze_end_time`間であるかどうかを確認してください。
 
     -   その他の状況では、 [バグを報告する](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&#x26;template=bug-report.md) 。
 
@@ -352,7 +352,7 @@ TiDBは、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-st
 
 -   5.2.1 PD はLeaderを切り替えます。
 
-    -   原因1：ディスク。PDノードが配置されているディスクのI/O負荷が最大になっています。PDノードが、I/O需要の高い他のコンポーネントと同時にデプロイされているかどうか、またディスクの健全性を確認してください。Grafanaのモニターメトリクス（**ディスクパフォーマンス**、**レイテンシー**/**負荷**）を確認することで原因を確認できます。必要に応じて、FIOツールを使用してディスクのチェック**を**実行することもできます。中国語版は[ケース292](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case292.md)ご覧ください。
+    -   原因1：ディスク。PDノードが配置されているディスクのI/O負荷が最大になっています。PDノードが、I/O需要の高い他のコンポーネントと同時にデプロイされているかどうか、またディスクの健全性を確認してください。Grafanaのモニターメトリクス（**ディスクパフォ​​ーマンス**、**レイテンシー**/**負荷**）を確認することで原因を確認できます。必要に応じて、FIOツールを使用してディスクのチェック**を**実行することもできます。中国語版は[ケース292](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case292.md)ご覧ください。
 
     -   原因2：ネットワーク。PDログに`lost the TCP streaming connection`表示されています。PDノード間のネットワークに問題がないか確認し、 **Grafana** -&gt; **PD** -&gt; **etcd**モニターの`round trip`確認して原因を特定する必要があります。中国語版は[ケース177](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case177.md)ご覧ください。
 
@@ -418,7 +418,7 @@ TiDBは、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-st
         -   増分レプリケーション プロセス中に`invalid connection`エラーのみが発生した場合、DM はタスクを自動的に再試行します。
         -   DM が再試行しない、またはバージョンの問題により自動的に再試行できない場合 (自動再試行は v1.0.0-rc.1 で導入されています)、 `stop-task`使用してタスクを停止し、 `start-task`使用してタスクを再起動します。
 
--   6.1.5 リレーユニットがエラー`event from * in * diff from passed-in event *`報告するか、またはレプリケーションタスクが`get binlog error ERROR 1236 (HY000) and binlog checksum mismatch, data may be corrupted returned`のbinlogの取得または解析に失敗するエラーで中断されます。
+-   6.1.5 リレーユニットがエラー`event from * in * diff from passed-in event *`報告するか、またはレプリケーションタスクが`get binlog error ERROR 1236 (HY000) and binlog checksum mismatch, data may be corrupted returned`などのbinlogの取得または解析に失敗するエラーで中断されます。
 
     -   DM がリレー ログまたは増分レプリケーションをプルするプロセス中に、アップストリームbinlogファイルのサイズが 4 GB を超えると、この 2 つのエラーが発生する可能性があります。
 
@@ -499,19 +499,13 @@ TiDBは、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-st
 
     GCの有効期間を延ばすには、システム変数[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)変更します。ただし、このパラメータを変更すると、トランザクションに`UPDATE`と`DELETE`ステートメントが多数含まれる場合、古いバージョンが大量に蓄積される可能性があるため、通常は変更を推奨しません。
 
--   7.1.2 `txn takes too much time` .
-
-    このエラーは、長時間 (590 秒以上) コミットされていないトランザクションをコミットした場合に返されます。
-
-    アプリケーションでこのような長時間のトランザクションを実行する必要がある場合は、 `[tikv-client] max-txn-time-use = 590`パラメータとGC有効期間を増やすことでこの問題を回避できます。アプリケーションでこのような長時間のトランザクション実行が必要かどうかを確認することをお勧めします。
-
--   7.1.3 `coprocessor.go`レポート`request outdated` 。
+-   7.1.2 `coprocessor.go`レポート`request outdated` 。
 
     このエラーは、TiKV に送信されたコプロセッサ要求が TiKV のキューで 60 秒以上待機している場合に返されます。
 
     TiKV コプロセッサが長いキューに入っている理由を調査する必要があります。
 
--   7.1.4 `region_cache.go` `switch region peer to next due to send request fail`という大きな数値を報告し、エラーメッセージは`context deadline exceeded`です。
+-   7.1.3 `region_cache.go` `switch region peer to next due to send request fail`という大きな数値を報告し、エラーメッセージは`context deadline exceeded`です。
 
     TiKV へのリクエストがタイムアウトし、リージョンキャッシュがトリガーされてリクエストが他のノードに切り替えられました。ログの`addr`のフィールドに対して`grep "<addr> cancelled`コマンドを引き続き実行し、 `grep`結果に応じて以下の手順を実行してください。
 
@@ -522,7 +516,7 @@ TiDBは、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-st
 
     -   `wait response is cancelled` : リクエストはTiKVに送信された後、タイムアウトしました。対応するTiKVアドレスの応答時間と、その時点のリージョンのPDおよびKVログを確認する必要があります。
 
--   7.1.5 `distsql.go`レポート`inconsistent index` 。
+-   7.1.4 `distsql.go`レポート`inconsistent index` 。
 
     データインデックスに不整合があるようです。報告されたインデックスがあるテーブルでコマンド`admin check table <TableName>`を実行してください。チェックに失敗した場合は、次のコマンドを実行してガベージコレクションを無効にし、 [バグを報告する](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&#x26;template=bug-report.md)実行します。
 

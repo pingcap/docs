@@ -198,6 +198,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
 -   [システム変数](/system-variables.md#autocommit)
 -   [取引](/transaction-overview.md)
@@ -264,6 +265,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [文字セットと照合順序](/character-set-and-collation.md)
+-   [SQLに関するよくある質問](/faq/sql-faq.md)
 -   [文字列関数](/functions-and-operators/string-functions.md)
 -   [システム変数](/system-variables.md#collation_connection)
 -   [ビュー](/information-schema/information-schema-views.md)
@@ -373,7 +375,9 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [外部キー制約](/foreign-key.md)
+-   [パイプラインDML](/pipelined-dml.md)
 -   [システム変数](/system-variables.md#foreign_key_checks)
+-   [TiCDC データレプリケーション機能](/ticdc/ticdc-data-replication-capabilities.md)
 -   [TiDB 6.6.0 リリースノート](/releases/release-6.6.0.md)
 
 ### グループ連結最大長 {#group-concat-max-len}
@@ -434,6 +438,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/best-practices/java-app-best-practices.md)
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#interactive_timeout)
 -   [TiDBクラスタ管理に関する FAQ](/faq/manage-cluster-faq.md)
@@ -579,10 +584,10 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [システム変数](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)
 -   [TiDBの機能](/basic-features.md)
 -   [リージョンパフォーマンスの調整](/tune-region-performance.md)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 -   [TiDB 8.5.0 リリースノート](/releases/release-8.5.0.md)
 -   [TiDB 7.6.0 リリースノート](/releases/release-7.6.0.md)
 
@@ -625,6 +630,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [TiDBクライアントとサーバー間のTLSを有効にする](/enable-tls-between-clients-and-servers.md)
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する](https://docs.pingcap.com/tidbcloud/migrate-from-mysql-using-data-migration)
 -   [システム変数](/system-variables.md#require_secure_transport-new-in-v610)
 -   [TiDB Cloud専用へのTLS接続](https://docs.pingcap.com/tidbcloud/tidb-cloud-tls-connect-to-dedicated)
 -   [2022年のTiDB Cloudリリースノート](https://docs.pingcap.com/tidbcloud/release-notes-2022)
@@ -718,7 +724,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [PythonでTiDB + AIを使い始める](/vector-search/vector-search-get-started-using-python.md)
 -   [TiDBベクトル検索をJina AI Embeddings APIと統合する](/vector-search/vector-search-integrate-with-jinaai-embedding.md)
 -   [TiDBベクトル検索をSQLAlchemyと統合する](/vector-search/vector-search-integrate-with-sqlalchemy.md)
--   [ベクトル検索をLangChainと統合する](/vector-search/vector-search-integrate-with-langchain.md)
+-   [LangChainとベクトル検索を統合する](/vector-search/vector-search-integrate-with-langchain.md)
 -   [ベクトル検索とLlamaIndexの統合](/vector-search/vector-search-integrate-with-llamaindex.md)
 -   [システム変数](/system-variables.md#ssl_ca)
 
@@ -813,10 +819,10 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [TiDBでCH-benCHmarkテストを実行する方法](/benchmark/benchmark-tidb-using-ch.md)
 -   [TiUPベンチコンポーネントを使用したTiDBのストレステスト](/tiup/tiup-bench.md)
 -   [システム変数](/system-variables.md#tidb_analyze_column_options-new-in-v830)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 -   [TiDB 8.3.0 リリースノート](/releases/release-8.3.0.md)
 
 ### tidb_analyze_distsql_scan_concurrency {#tidb-analyze-distsql-scan-concurrency}
@@ -844,6 +850,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [統計入門](/statistics.md)
+-   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720)
 -   [TiDB 8.2.0 リリースノート](/releases/release-8.2.0.md)
 -   [TiDB 7.2.0 リリースノート](/releases/release-7.2.0.md)
@@ -870,6 +877,8 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [SaaS マルチテナントシナリオで数百万のテーブルを処理するためのベストプラクティス](/best-practices/saas-best-practices.md)
+-   [統計入門](/statistics.md)
 -   [システム変数](/system-variables.md#tidb_auto_analyze_concurrency-new-in-v840)
 -   [TiDB 8.4.0 リリースノート](/releases/release-8.4.0.md)
 
@@ -877,6 +886,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [SQLチューニングの実践ガイド](/sql-tuning-best-practice.md)
 -   [統計入門](/statistics.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_auto_analyze_end_time)
@@ -890,6 +900,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [統計入門](/statistics.md)
 -   [システム変数](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640)
+-   [TiDB 8.2.0 リリースノート](/releases/release-8.2.0.md)
 -   [TiDB 7.6.0 リリースノート](/releases/release-7.6.0.md)
 -   [TiDB 6.4.0 リリースノート](/releases/release-6.4.0.md)
 
@@ -897,6 +908,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [SQLチューニングの実践ガイド](/sql-tuning-best-practice.md)
 -   [統計入門](/statistics.md)
 -   [統計情報を表示_健康](/sql-statements/sql-statement-show-stats-healthy.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
@@ -912,6 +924,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [SQLチューニングの実践ガイド](/sql-tuning-best-practice.md)
 -   [統計入門](/statistics.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_auto_analyze_start_time)
@@ -923,6 +936,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [SaaS マルチテナントシナリオで数百万のテーブルを処理するためのベストプラクティス](/best-practices/saas-best-practices.md)
 -   [システム変数](/system-variables.md#tidb_auto_build_stats_concurrency-new-in-v650)
 -   [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
 
@@ -946,6 +960,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [バッチ処理](/batch-processing.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_batch_commit)
 -   [TiDB 3.0 ベータ版リリースノート](/releases/release-3.0-beta.md)
@@ -955,6 +970,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [バッチ処理](/batch-processing.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_batch_delete)
 
@@ -962,6 +978,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [バッチ処理](/batch-processing.md)
 -   [システム変数](/system-variables.md#tidb_batch_insert)
 -   [TiDB 2.0.6 リリースノート](/releases/release-2.0.6.md)
 
@@ -969,6 +986,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)
 -   [システム変数](/system-variables.md#tidb_batch_pending_tiflash_count-new-in-v60)
 
 ### tidb_broadcast_join_threshold_count {#tidb-broadcast-join-threshold-count}
@@ -995,6 +1013,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [SaaS マルチテナントシナリオで数百万のテーブルを処理するためのベストプラクティス](/best-practices/saas-best-practices.md)
 -   [統計入門](/statistics.md)
 -   [システム変数](/system-variables.md#tidb_build_sampling_stats_concurrency-new-in-v750)
 -   [TiDB 7.5.0 リリースノート](/releases/release-7.5.0.md)
@@ -1010,6 +1029,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [TiDB v7.1.3 のTiDB Cloud TPC-C パフォーマンス テスト レポート](https://docs.pingcap.com/tidbcloud/v7.1-performance-benchmarking-with-tpcc)
 -   [TiDB v7.5.0 のTiDB Cloud TPC-C パフォーマンス テスト レポート](https://docs.pingcap.com/tidbcloud/v7.5-performance-benchmarking-with-tpcc)
 -   [TiDB v8.1.0 のTiDB Cloud TPC-C パフォーマンス テスト レポート](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-tpcc)
+-   [TiDB v8.5.0 のTiDB Cloud TPC-C パフォーマンス テスト レポート](https://docs.pingcap.com/tidbcloud/v8.5-performance-benchmarking-with-tpcc)
 -   [TiDB 7.5.0 リリースノート](/releases/release-7.5.0.md)
 
 ### tidb_capture_plan_baselines {#tidb-capture-plan-baselines}
@@ -1120,6 +1140,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [プライマリクラスタとセカンダリクラスタに基づくDRソリューション](/dr-secondary-cluster.md)
 -   [フラッシュバッククラスター](/sql-statements/sql-statement-flashback-cluster.md)
+-   [TiDBクラスタの移行とアップグレード](/tidb-upgrade-migration-guide.md)
 -   [`tidb_external_ts`変数を使用して履歴データを読み取る](/tidb-external-ts.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_current_ts)
@@ -1140,6 +1161,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
 -   [管理者 SHOW DDL [ジョブ|ジョブクエリ]](/sql-statements/sql-statement-admin-show-ddl.md)
 -   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
 -   [インポート先](/sql-statements/sql-statement-import-into.md)
@@ -1185,8 +1207,8 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [管理者による DDL ジョブの変更](/sql-statements/sql-statement-admin-alter-ddl.md)
 -   [管理者 SHOW DDL [ジョブ|ジョブクエリ]](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [TiDB での DDL 実行のベストプラクティス](/ddl-introduction.md)
 -   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
--   [DDL ステートメントの実行原則とベストプラクティス](/ddl-introduction.md)
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [性能チューニングのベストプラクティス](/develop/dev-guide-optimize-sql-best-practices.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
@@ -1209,6 +1231,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [システム変数](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850)
 -   [TiDB 8.5.0 リリースノート](/releases/release-8.5.0.md)
 -   [TiDB 7.5.5 リリースノート](/releases/release-7.5.5.md)
+-   [TiDB 6.5.12 リリースノート](/releases/release-6.5.12.md)
 
 ### tidb_ddl_reorg_priority {#tidb-ddl-reorg-priority}
 
@@ -1229,8 +1252,8 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [管理者による DDL ジョブの変更](/sql-statements/sql-statement-admin-alter-ddl.md)
 -   [管理者 SHOW DDL [ジョブ|ジョブクエリ]](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [TiDB での DDL 実行のベストプラクティス](/ddl-introduction.md)
 -   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
--   [DDL ステートメントの実行原則とベストプラクティス](/ddl-introduction.md)
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [性能チューニングのベストプラクティス](/develop/dev-guide-optimize-sql-best-practices.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
@@ -1283,6 +1306,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [TiDB v7.1.3 のTiDB Cloud TPC-C パフォーマンス テスト レポート](https://docs.pingcap.com/tidbcloud/v7.1-performance-benchmarking-with-tpcc)
 -   [TiDB v7.5.0 のTiDB Cloud TPC-C パフォーマンス テスト レポート](https://docs.pingcap.com/tidbcloud/v7.5-performance-benchmarking-with-tpcc)
 -   [TiDB v8.1.0 のTiDB Cloud TPC-C パフォーマンス テスト レポート](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-tpcc)
+-   [TiDB v8.5.0 のTiDB Cloud TPC-C パフォーマンス テスト レポート](https://docs.pingcap.com/tidbcloud/v8.5-performance-benchmarking-with-tpcc)
 -   [TiDB メモリ制御](/configure-memory-usage.md)
 -   [TiDB OOM の問題のトラブルシューティング](/troubleshoot-tidb-oom.md)
 -   [Dumplingを使用してデータをエクスポートする](/dumpling-overview.md)
@@ -1292,6 +1316,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [バッチ処理](/batch-processing.md)
 -   [データをロード](/sql-statements/sql-statement-load-data.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_dml_batch_size)
@@ -1304,13 +1329,14 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [IMPORT INTO とTiDB Lightning の比較](/tidb-lightning/import-into-vs-tidb-lightning.md)
 -   [コストの高いクエリを特定する](/identify-expensive-queries.md)
+-   [パイプラインDML](/pipelined-dml.md)
 -   [システム変数](/system-variables.md#tidb_dml_type-new-in-v800)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 -   [TiDBの機能](/basic-features.md)
 -   [TiDB メモリ制御](/configure-memory-usage.md)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 -   [TiDB 8.4.0 リリースノート](/releases/release-8.4.0.md)
 -   [TiDB 8.3.0 リリースノート](/releases/release-8.3.0.md)
 -   [TiDB 8.1.0 リリースノート](/releases/release-8.1.0.md)
@@ -1363,12 +1389,12 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [統計入門](/statistics.md)
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
 -   [システム変数](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)
 -   [PLAN REPLAYERを使用してクラスタのオンサイト情報を保存および復元する](/sql-plan-replayer.md)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 -   [TiDB 6.1.0 リリースノート](/releases/release-6.1.0.md)
 
 ### tidb_enable_auto_analyze_priority_queue {#tidb-enable-auto-analyze-priority-queue}
@@ -1395,6 +1421,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [バッチ処理](/batch-processing.md)
 -   [システム変数](/system-variables.md#tidb_enable_batch_dml)
 -   [2022年のTiDB Cloudリリースノート](https://docs.pingcap.com/tidbcloud/release-notes-2022)
 
@@ -1485,6 +1512,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)
 -   [TiDB グローバルソート](/tidb-global-sort.md)
 -   [TiDB スムーズアップグレード](/smooth-upgrade-tidb.md)
+-   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 -   [TiDB 8.1.0 リリースノート](/releases/release-8.1.0.md)
 -   [TiDB 7.5.0 リリースノート](/releases/release-7.5.0.md)
 -   [TiDB 7.3.0 リリースノート](/releases/release-7.3.0.md)
@@ -1495,6 +1523,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [バックアップ](/sql-statements/sql-statement-backup.md)
+-   [用語集](/glossary.md)
 -   [インポート先](/sql-statements/sql-statement-import-into.md)
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_enable_enhanced_security)
@@ -1526,6 +1555,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [`tidb_external_ts`変数を使用して履歴データを読み取る](/tidb-external-ts.md)
 -   [システム変数](/system-variables.md#tidb_enable_external_ts_read-new-in-v640)
 -   [上流および下流のクラスタのデータ検証とスナップショットの読み取り](/ticdc/ticdc-upstream-downstream-check.md)
+-   [ステイル読み取りの使用シナリオ](/stale-read.md)
 -   [TiDB 6.4.0 リリースノート](/releases/release-6.4.0.md)
 
 ### tidb_enable_fast_analyze {#tidb-enable-fast-analyze}
@@ -1628,7 +1658,6 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [オプティマイザヒント](/optimizer-hints.md)
 -   [システム変数](/system-variables.md#tidb_enable_inl_join_inner_multi_pattern-new-in-v700)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 -   [TiDB 8.4.0 リリースノート](/releases/release-8.4.0.md)
 -   [TiDB 8.3.0 リリースノート](/releases/release-8.3.0.md)
 -   [TiDB 7.0.0 リリースノート](/releases/release-7.0.0.md)
@@ -1637,9 +1666,9 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [システム変数](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840)
 -   [TiDBの機能](/basic-features.md)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 -   [TiDB 8.4.0 リリースノート](/releases/release-8.4.0.md)
 
 ### tidb_enable_lazy_cursor_fetch {#tidb-enable-lazy-cursor-fetch}
@@ -1709,9 +1738,9 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [SQL 非準備実行プランキャッシュ](/sql-non-prepared-plan-cache.md)
 -   [システム変数](/system-variables.md#tidb_enable_non_prepared_plan_cache)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 -   [TiDB 7.4.0 リリースノート](/releases/release-7.4.0.md)
 -   [TiDB 7.2.0 リリースノート](/releases/release-7.2.0.md)
 -   [TiDB 7.1.0 リリースノート](/releases/release-7.1.0.md)
@@ -1835,6 +1864,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [システム変数](/system-variables.md#tidb_enable_plan_replayer_capture)
 -   [PLAN REPLAYERを使用してクラスタのオンサイト情報を保存および復元する](/sql-plan-replayer.md)
 -   [TiDB 6.6.0 リリースノート](/releases/release-6.6.0.md)
+-   [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
 
 ### tidb_enable_plan_replayer_continuous_capture {#tidb-enable-plan-replayer-continuous-capture}
 
@@ -1843,6 +1873,12 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [システム変数](/system-variables.md#tidb_enable_plan_replayer_continuous_capture-new-in-v700)
 -   [PLAN REPLAYERを使用してクラスタのオンサイト情報を保存および復元する](/sql-plan-replayer.md)
 -   [TiDB 7.0.0 リリースノート](/releases/release-7.0.0.md)
+
+### tidb_enable_point_get_cache {#tidb-enable-point-get-cache}
+
+参照先:
+
+-   [システム変数](/system-variables.md#tidb_enable_point_get_cache)
 
 ### tidb_enable_prepared_plan_cache {#tidb-enable-prepared-plan-cache}
 
@@ -1944,6 +1980,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [統計入門](/statistics.md)
 -   [システム変数](/system-variables.md#tidb_enable_stats_owner-new-in-v840)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 -   [TiDB 8.4.0 リリースノート](/releases/release-8.4.0.md)
@@ -1980,6 +2017,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_enable_telemetry-new-in-v402)
 -   [TiDB 8.1.0 リリースノート](/releases/release-8.1.0.md)
 -   [TiDB 6.6.0 リリースノート](/releases/release-6.6.0.md)
@@ -2025,7 +2063,11 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [PDマイクロサービス](/pd-microservices.md)
 -   [システム変数](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530)
 -   [TiDBの機能](/basic-features.md)
+-   [TiDB 8.5.2 リリースノート](/releases/release-8.5.2.md)
+-   [TiDB 8.5.1 リリースノート](/releases/release-8.5.1.md)
 -   [TiDB 8.5.0 リリースノート](/releases/release-8.5.0.md)
+-   [TiDB 7.5.6 リリースノート](/releases/release-7.5.6.md)
+-   [TiDB 6.5.12 リリースノート](/releases/release-6.5.12.md)
 -   [TiDB 5.3 リリースノート](/releases/release-5.3.0.md)
 
 ### tidb_enable_unsafe_substitute {#tidb-enable-unsafe-substitute}
@@ -2052,6 +2094,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [キーワード](/keywords.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_enable_window_function)
 -   [ウィンドウ関数](/functions-and-operators/window-functions.md)
@@ -2194,6 +2237,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [フラッシュバックデータベース](/sql-statements/sql-statement-flashback-database.md)
 -   [フラッシュバックテーブル](/sql-statements/sql-statement-flashback-table.md)
 -   [ガベージコレクションのコンフィグレーション](/garbage-collection-configuration.md)
+-   [TiDBクラスタの移行とアップグレード](/tidb-upgrade-migration-guide.md)
 -   [システム変数`tidb_snapshot`を使用して履歴データを読み取る](/read-historical-data.md)
 -   [Kafka にデータを複製する](/ticdc/ticdc-sink-to-kafka.md)
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
@@ -2216,6 +2260,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [ガベージコレクションのコンフィグレーション](/garbage-collection-configuration.md)
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [パイプラインDML](/pipelined-dml.md)
 -   [システム変数](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)
 -   [TiDB 6.1.0 リリースノート](/releases/release-6.1.0.md)
 
@@ -2266,6 +2311,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [システム変数](/system-variables.md#tidb_gogc_tuner_max_value-new-in-v750)
+-   [TiDB 8.5.1 リリースノート](/releases/release-8.5.1.md)
 -   [TiDB 7.5.5 リリースノート](/releases/release-7.5.5.md)
 -   [TiDB 7.5.0 リリースノート](/releases/release-7.5.0.md)
 
@@ -2274,6 +2320,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [システム変数](/system-variables.md#tidb_gogc_tuner_min_value-new-in-v750)
+-   [TiDB 8.5.1 リリースノート](/releases/release-8.5.1.md)
 -   [TiDB 7.5.5 リリースノート](/releases/release-7.5.5.md)
 -   [TiDB 7.5.0 リリースノート](/releases/release-7.5.0.md)
 
@@ -2292,9 +2339,9 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_guarantee_linearizability-new-in-v50)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 
 ### tidb_hash_exchange_with_new_collation {#tidb-hash-exchange-with-new-collation}
 
@@ -2351,15 +2398,22 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [TiDBのタイムアウト](/develop/dev-guide-timeouts-in-tidb.md)
 -   [TiDB 7.6.0 リリースノート](/releases/release-7.6.0.md)
 
+### tidb_ignore_inlist_plan_digest {#tidb-ignore-inlist-plan-digest}
+
+参照先:
+
+-   [システム変数](/system-variables.md#tidb_ignore_inlist_plan_digest-new-in-v760)
+-   [TiDB 7.6.0 リリースノート](/releases/release-7.6.0.md)
+
 ### tidb_ignore_prepared_cache_close_stmt {#tidb-ignore-prepared-cache-close-stmt}
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [パフォーマンス分析とチューニング](/performance-tuning-methods.md)
 -   [OLTPシナリオの性能チューニングの実践](/performance-tuning-practices.md)
 -   [SQL 準備済み実行プランキャッシュ](/sql-prepared-plan-cache.md)
 -   [システム変数](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 -   [TiDB 6.0.0 リリースノート](/releases/release-6.0.0-dmr.md)
 
 ### tidb_index_join_batch_size {#tidb-index-join-batch-size}
@@ -2421,6 +2475,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [TiDB v7.1.3 のTiDB Cloud TPC-C パフォーマンス テスト レポート](https://docs.pingcap.com/tidbcloud/v7.1-performance-benchmarking-with-tpcc)
 -   [TiDB v7.5.0 のTiDB Cloud TPC-C パフォーマンス テスト レポート](https://docs.pingcap.com/tidbcloud/v7.5-performance-benchmarking-with-tpcc)
 -   [TiDB v8.1.0 のTiDB Cloud TPC-C パフォーマンス テスト レポート](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-tpcc)
+-   [TiDB v8.5.0 のTiDB Cloud TPC-C パフォーマンス テスト レポート](https://docs.pingcap.com/tidbcloud/v8.5-performance-benchmarking-with-tpcc)
 -   [TiDB OOM の問題のトラブルシューティング](/troubleshoot-tidb-oom.md)
 
 ### tidb_init_chunk_size {#tidb-init-chunk-size}
@@ -2436,8 +2491,8 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [システム変数](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 -   [TiDB 8.4.0 リリースノート](/releases/release-8.4.0.md)
 
 ### tidb_instance_plan_cache_reserved_percentage {#tidb-instance-plan-cache-reserved-percentage}
@@ -2487,6 +2542,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [パイプラインDML](/pipelined-dml.md)
 -   [システム変数](/system-variables.md#tidb_last_txn_info-new-in-v409)
 
 ### tidb_load_based_replica_read_threshold {#tidb-load-based-replica-read-threshold}
@@ -2525,9 +2581,9 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_low_resolution_tso)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 -   [TiDB 8.5.0 リリースノート](/releases/release-8.5.0.md)
 -   [TiDB 8.3.0 リリースノート](/releases/release-8.3.0.md)
 -   [TiDB 8.0.0 リリースノート](/releases/release-8.0.0.md)
@@ -2577,10 +2633,10 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_max_chunk_size)
 -   [TiDBトランザクション分離レベル](/transaction-isolation-levels.md)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 -   [TiDB 7.6.0 リリースノート](/releases/release-7.6.0.md)
 -   [TiDB 7.5.1 リリースノート](/releases/release-7.5.1.md)
 -   [TiDB 7.1.3 リリースノート](/releases/release-7.1.3.md)
@@ -2663,6 +2719,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [コストの高いクエリを特定する](/identify-expensive-queries.md)
 -   [非トランザクションDML文](/non-transactional-dml.md)
 -   [オプティマイザヒント](/optimizer-hints.md)
+-   [パイプラインDML](/pipelined-dml.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_mem_quota_query)
 -   [2022年のTiDB Cloudリリースノート](https://docs.pingcap.com/tidbcloud/release-notes-2022)
@@ -2794,7 +2851,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [非トランザクションDMLステートメント](/non-transactional-dml.md)
+-   [非トランザクションDML文](/non-transactional-dml.md)
 -   [システム変数](/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610)
 -   [TiDB 6.1.0 リリースノート](/releases/release-6.1.0.md)
 
@@ -2809,10 +2866,10 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_opt_agg_push_down)
 -   [TiFlash のパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 -   [TiDB 7.3.0 リリースノート](/releases/release-7.3.0.md)
 -   [TiDB 7.1.1 リリースノート](/releases/release-7.1.1.md)
 -   [TiDB 6.5.4 リリースノート](/releases/release-6.5.4.md)
@@ -2870,9 +2927,9 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [ウィンドウ関数からTopNまたはLimitを導出する](/derive-topn-from-window.md)
 -   [システム変数](/system-variables.md#tidb_opt_derive_topn-new-in-v700)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 -   [TiDB 7.0.0 リリースノート](/releases/release-7.0.0.md)
 
 ### tidb_opt_desc_factor {#tidb-opt-desc-factor}
@@ -2893,12 +2950,12 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [クエリの最適化](/agg-distinct-optimization.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_opt_distinct_agg_push_down)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 -   [TiFlash のパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 
 ### tidb_opt_enable_correlation_adjustment {#tidb-opt-enable-correlation-adjustment}
 
@@ -2938,8 +2995,8 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [システム変数](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 -   [TiDB 7.3.0 リリースノート](/releases/release-7.3.0.md)
 
 ### tidb_opt_enable_non_eval_scalar_subquery {#tidb-opt-enable-non-eval-scalar-subquery}
@@ -2955,11 +3012,11 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [制御実行計画](/control-execution-plan.md)
 -   [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
 -   [SQL 非準備実行プランキャッシュ](/sql-non-prepared-plan-cache.md)
 -   [システム変数](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 -   [TiDB 7.2.0 リリースノート](/releases/release-7.2.0.md)
 -   [TiDB 7.1.0 リリースノート](/releases/release-7.1.0.md)
 
@@ -2970,6 +3027,55 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [システム変数](/system-variables.md#tidb_opt_force_inline_cte-new-in-v630)
 -   [TiDB 7.3.0 リリースノート](/releases/release-7.3.0.md)
 -   [TiDB 6.3.0 リリースノート](/releases/release-6.3.0.md)
+
+### tidb_opt_hash_agg_コスト係数 {#tidb-opt-hash-agg-cost-factor}
+
+参照先:
+
+-   [システム変数](/system-variables.md#tidb_opt_hash_agg_cost_factor-new-in-v853-and-v900)
+-   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
+
+### tidb_opt_hash_join_cost_factor {#tidb-opt-hash-join-cost-factor}
+
+参照先:
+
+-   [システム変数](/system-variables.md#tidb_opt_hash_join_cost_factor-new-in-v853-and-v900)
+-   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
+
+### tidb_opt_index_join_cost_factor {#tidb-opt-index-join-cost-factor}
+
+参照先:
+
+-   [システム変数](/system-variables.md#tidb_opt_index_join_cost_factor-new-in-v853-and-v900)
+-   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
+
+### tidb_opt_index_lookup_コスト係数 {#tidb-opt-index-lookup-cost-factor}
+
+参照先:
+
+-   [システム変数](/system-variables.md#tidb_opt_index_lookup_cost_factor-new-in-v853-and-v900)
+-   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
+
+### tidb_opt_index_merge_cost_factor {#tidb-opt-index-merge-cost-factor}
+
+参照先:
+
+-   [システム変数](/system-variables.md#tidb_opt_index_merge_cost_factor-new-in-v853-and-v900)
+-   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
+
+### tidb_opt_index_reader_cost_factor {#tidb-opt-index-reader-cost-factor}
+
+参照先:
+
+-   [システム変数](/system-variables.md#tidb_opt_index_reader_cost_factor-new-in-v853-and-v900)
+-   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
+
+### tidb_opt_index_scan_cost_factor {#tidb-opt-index-scan-cost-factor}
+
+参照先:
+
+-   [システム変数](/system-variables.md#tidb_opt_index_scan_cost_factor-new-in-v853-and-v900)
+-   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 
 ### tidb_opt_insubq_to_join_and_agg {#tidb-opt-insubq-to-join-and-agg}
 
@@ -2991,10 +3097,18 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [TiDB 6.4.0 リリースノート](/releases/release-6.4.0.md)
 -   [TiDB 3.0.0-rc.1 リリースノート](/releases/release-3.0.0-rc.1.md)
 
+### tidb_opt_limit_cost_factor {#tidb-opt-limit-cost-factor}
+
+参照先:
+
+-   [システム変数](/system-variables.md#tidb_opt_limit_cost_factor-new-in-v853-and-v900)
+-   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
+
 ### tidb_opt_limit_push_down_threshold {#tidb-opt-limit-push-down-threshold}
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [システム変数](/system-variables.md#tidb_opt_limit_push_down_threshold)
 -   [TiDB 5.2 リリースノート](/releases/release-5.2.0.md)
 
@@ -3004,6 +3118,13 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_opt_memory_factor)
+
+### tidb_opt_merge_join_コスト係数 {#tidb-opt-merge-join-cost-factor}
+
+参照先:
+
+-   [システム変数](/system-variables.md#tidb_opt_merge_join_cost_factor-new-in-v853-and-v900)
+-   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 
 ### tidb_opt_mpp_outer_join_fixed_build_side {#tidb-opt-mpp-outer-join-fixed-build-side}
 
@@ -3092,6 +3213,55 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [システム変数](/system-variables.md#tidb_opt_skew_distinct_agg-new-in-v620)
 -   [TiDB 6.2.0 リリースノート](/releases/release-6.2.0.md)
 
+### tidb_opt_sort_cost_factor {#tidb-opt-sort-cost-factor}
+
+参照先:
+
+-   [システム変数](/system-variables.md#tidb_opt_sort_cost_factor-new-in-v853-and-v900)
+-   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
+
+### tidb_opt_stream_agg_コスト係数 {#tidb-opt-stream-agg-cost-factor}
+
+参照先:
+
+-   [システム変数](/system-variables.md#tidb_opt_stream_agg_cost_factor-new-in-v853-and-v900)
+-   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
+
+### tidb_opt_table_full_scan_コスト係数 {#tidb-opt-table-full-scan-cost-factor}
+
+参照先:
+
+-   [システム変数](/system-variables.md#tidb_opt_table_full_scan_cost_factor-new-in-v853-and-v900)
+-   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
+
+### tidb_opt_table_range_scan_cost_factor {#tidb-opt-table-range-scan-cost-factor}
+
+参照先:
+
+-   [システム変数](/system-variables.md#tidb_opt_table_range_scan_cost_factor-new-in-v853-and-v900)
+-   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
+
+### tidb_opt_table_reader_コスト係数 {#tidb-opt-table-reader-cost-factor}
+
+参照先:
+
+-   [システム変数](/system-variables.md#tidb_opt_table_reader_cost_factor-new-in-v853-and-v900)
+-   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
+
+### tidb_opt_table_rowid_コスト係数 {#tidb-opt-table-rowid-cost-factor}
+
+参照先:
+
+-   [システム変数](/system-variables.md#tidb_opt_table_rowid_cost_factor-new-in-v853-and-v900)
+-   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
+
+### tidb_opt_table_tiflash_scan_コスト係数 {#tidb-opt-table-tiflash-scan-cost-factor}
+
+参照先:
+
+-   [システム変数](/system-variables.md#tidb_opt_table_tiflash_scan_cost_factor-new-in-v853-and-v900)
+-   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
+
 ### tidb_opt_three_stage_distinct_agg {#tidb-opt-three-stage-distinct-agg}
 
 参照先:
@@ -3105,12 +3275,20 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [システム変数](/system-variables.md#tidb_opt_tiflash_concurrency_factor)
 
+### tidb_opt_topn_コスト係数 {#tidb-opt-topn-cost-factor}
+
+参照先:
+
+-   [システム変数](/system-variables.md#tidb_opt_topn_cost_factor-new-in-v853-and-v900)
+-   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
+
 ### tidb_opt_use_invisible_indexes {#tidb-opt-use-invisible-indexes}
 
 参照先:
 
 -   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)
 -   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
+-   [データベーススキーマ](https://docs.pingcap.com/tidbcloud/database-schema-concepts)
 -   [システム変数](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)
 -   [TiDB 8.0.0 リリースノート](/releases/release-8.0.0.md)
 
@@ -3252,10 +3430,10 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [OLTPシナリオの性能チューニングの実践](/performance-tuning-practices.md)
 -   [システム変数](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)
 -   [TiDBトランザクション分離レベル](/transaction-isolation-levels.md)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 -   [TiDB 7.0.0 リリースノート](/releases/release-7.0.0.md)
 -   [TiDB 6.3.0 リリースノート](/releases/release-6.3.0.md)
 -   [TiDB 6.0.0 リリースノート](/releases/release-6.0.0-dmr.md)
@@ -3328,18 +3506,19 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [システム変数](/system-variables.md#tidb_remove_orderby_in_subquery-new-in-v610)
 -   [TiDB 7.2.0 リリースノート](/releases/release-7.2.0.md)
 
-### tidb_replica_read {#tidb-replica-read}
+### tidb_レプリカ_読み取り {#tidb-replica-read}
 
 参照先:
 
+-   [3つのデータセンター展開におけるローカル読み取りのベストプラクティス](/best-practices/three-dc-local-read.md)
 -   [読み取り専用ストレージノードのベストプラクティス](/best-practices/readonly-nodes.md)
 -   [Follower Read](/follower-read.md)
 -   [Follower Read](/develop/dev-guide-use-follower-read.md)
--   [3つのデータセンター展開におけるローカル読み取りのベストプラクティス](/best-practices/three-dc-local-read.md)
 -   [オプティマイザヒント](/optimizer-hints.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_replica_read-new-in-v40)
 -   [パブリッククラウドにおけるTiDBのベストプラクティス](/best-practices-on-public-cloud.md)
+-   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 -   [TiDB 7.0.0 リリースノート](/releases/release-7.0.0.md)
 -   [TiDB 6.6.0 リリースノート](/releases/release-6.6.0.md)
 -   [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
@@ -3405,9 +3584,9 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [ランタイムフィルター](/runtime-filter.md)
 -   [システム変数](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 -   [TiDB 7.3.0 リリースノート](/releases/release-7.3.0.md)
 
 ### tidb_runtime_filter_type {#tidb-runtime-filter-type}
@@ -3435,6 +3614,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [SaaS マルチテナントシナリオで数百万のテーブルを処理するためのベストプラクティス](/best-practices/saas-best-practices.md)
 -   [スキーマキャッシュ](/schema-cache.md)
 -   [システム変数](/system-variables.md#tidb_schema_cache_size-new-in-v800)
 -   [TiDB 8.5.0 リリースノート](/releases/release-8.5.0.md)
@@ -3446,6 +3626,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [SaaS マルチテナントシナリオで数百万のテーブルを処理するためのベストプラクティス](/best-practices/saas-best-practices.md)
 -   [システム変数](/system-variables.md#tidb_schema_version_cache_limit-new-in-v740)
 -   [TiDB 7.4.0 リリースノート](/releases/release-7.4.0.md)
 
@@ -3521,6 +3702,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [SQL 準備済み実行プランキャッシュ](/sql-prepared-plan-cache.md)
 -   [システム変数](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)
 -   [TiDB v8.1.0 のTiDB Cloud Sysbench パフォーマンス テスト レポート](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-sysbench)
+-   [TiDB v8.5.0 のTiDB Cloud Sysbench パフォーマンス テスト レポート](https://docs.pingcap.com/tidbcloud/v8.5-performance-benchmarking-with-sysbench)
 -   [TiDB 7.4.0 リリースノート](/releases/release-7.4.0.md)
 -   [TiDB 7.1.0 リリースノート](/releases/release-7.1.0.md)
 
@@ -3587,6 +3769,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [SQLチューニングの実践ガイド](/sql-tuning-best-practice.md)
 -   [遅いクエリを特定する](/identify-slow-queries.md)
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [コンフィグレーションを動的に変更する](/dynamic-config.md)
@@ -3608,6 +3791,14 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_slow_query_file)
+
+### tidb_slow_txn_log_threshold {#tidb-slow-txn-log-threshold}
+
+参照先:
+
+-   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [システム変数](/system-variables.md#tidb_slow_txn_log_threshold-new-in-v700)
+-   [TiDB 7.0.0 リリースノート](/releases/release-7.0.0.md)
 
 ### tidb_スナップショット {#tidb-snapshot}
 
@@ -3649,8 +3840,10 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [SaaS マルチテナントシナリオで数百万のテーブルを処理するためのベストプラクティス](/best-practices/saas-best-practices.md)
 -   [システム変数](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610)
 -   [TiDB OOM の問題のトラブルシューティング](/troubleshoot-tidb-oom.md)
+-   [TiDB 8.5.1 リリースノート](/releases/release-8.5.1.md)
 -   [TiDB 7.4.0 リリースノート](/releases/release-7.4.0.md)
 -   [TiDB 6.1.0 リリースノート](/releases/release-6.1.0.md)
 
@@ -3667,6 +3860,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [統計入門](/statistics.md)
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)
@@ -3779,6 +3973,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [システム変数](/system-variables.md#tidb_store_batch_size)
 -   [TiDB 7.1.0 リリースノート](/releases/release-7.1.0.md)
 -   [TiDB 6.6.0 リリースノート](/releases/release-6.6.0.md)
+-   [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
 
 ### tidb_store_limit {#tidb-store-limit}
 
@@ -3799,6 +3994,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [TiDBクラスタの移行とアップグレード](/tidb-upgrade-migration-guide.md)
 -   [システム変数](/system-variables.md#tidb_super_read_only-new-in-v531)
 -   [TiDB 5.4.1 リリースノート](/releases/release-5.4.1.md)
 -   [TiDB 5.3.1 リリースノート](/releases/release-5.3.1.md)
@@ -3872,8 +4068,8 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [システム変数](/system-variables.md#tidb_tso_client_rpc_mode-new-in-v840)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 -   [TiDB 8.4.0 リリースノート](/releases/release-8.4.0.md)
 
 ### tidb_ttl_delete_batch_size {#tidb-ttl-delete-batch-size}
@@ -3890,6 +4086,8 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_ttl_delete_rate_limit-new-in-v650)
+-   [TiDB 8.5.1 リリースノート](/releases/release-8.5.1.md)
+-   [TiDB 7.5.6 リリースノート](/releases/release-7.5.6.md)
 -   [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
 
 ### tidb_ttl_delete_worker_count {#tidb-ttl-delete-worker-count}
@@ -3982,20 +4180,22 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 -   [トランザクション制限](/develop/dev-guide-transaction-restraints.md)
 -   [TiDB Lightning のトラブルシューティング](/tidb-lightning/troubleshoot-tidb-lightning.md)
+-   [TiDB 8.5.2 リリースノート](/releases/release-8.5.2.md)
 -   [TiDB 7.6.0 リリースノート](/releases/release-7.6.0.md)
 
 ### tidb_txn_mode {#tidb-txn-mode}
 
 参照先:
 
+-   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [楽観的なトランザクションと悲観的なトランザクション](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
+-   [MySQL互換データベースにデータを複製する](/ticdc/ticdc-sink-to-mysql.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_txn_mode)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 -   [TiDB 悲観的トランザクションモード](/pessimistic-transaction.md)
 -   [取引](/transaction-overview.md)
--   [tidb パフォーマンスチューニング設定](/tidb-performance-tuning-config.md)
 -   [TiDB 6.0.0 リリースノート](/releases/release-6.0.0-dmr.md)
 -   [TiDB 5.0 リリースノート](/releases/release-5.0.0.md)
 -   [TiDB 3.0.8 リリースノート](/releases/release-3.0.8.md)
@@ -4096,6 +4296,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [システム変数](/system-variables.md#tikv_client_read_timeout-new-in-v740)
+-   [TiDB v8.5.0 のTiDB Cloudパフォーマンスのハイライト](https://docs.pingcap.com/tidbcloud/v8.5-performance-highlights)
 -   [TiDB 7.5.1 リリースノート](/releases/release-7.5.1.md)
 -   [TiDB 7.4.0 リリースノート](/releases/release-7.4.0.md)
 
@@ -4104,6 +4305,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [日付と時刻の型](/data-type-date-and-time.md)
+-   [TiDBセルフマネージドからTiDB Cloudへの移行](https://docs.pingcap.com/tidbcloud/migrate-from-op-tidb)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [SQL 準備済み実行プランキャッシュ](/sql-prepared-plan-cache.md)
 -   [システム変数](/system-variables.md#time_zone)
@@ -4124,6 +4326,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [サードパーティ製ツールとの既知の非互換性の問題](/develop/dev-guide-third-party-tools-compatibility.md)
 -   [トランザクションの設定](/sql-statements/sql-statement-set-transaction.md)
 -   [システム変数](/system-variables.md#transaction_isolation)
+-   [TiDBトランザクション分離レベル](/transaction-isolation-levels.md)
 -   [TiDB 6.0.0 リリースノート](/releases/release-6.0.0-dmr.md)
 
 ### トランザクション分離 {#tx-isolation}

@@ -46,14 +46,14 @@ summary: TiDB ベクトル検索の制限について学習します。
 <CustomContent platform="tidb">
 
 -   データのバックアップとリストアには、 BRの v8.4.0 以降を使用してください。ベクトルデータ型のテーブルを v8.4.0 より前の TiDB クラスターにリストアすることはサポートされていません。
--   TiDB データ移行 (DM) は、MySQL 9.0 ベクトル データ型の TiDB への移行または複製をサポートしていません。
+-   TiDB データ移行 (DM) は、MySQL ベクトル データ型の TiDB への移行または複製をサポートしていません。
 -   TiCDCは、ベクターデータ型をサポートしていない下流にベクターデータを複製する場合、ベクターデータ型を別の型に変更します。詳細については、 [ベクトルデータ型との互換性](/ticdc/ticdc-compatibility.md#compatibility-with-vector-data-types)参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   TiDB Cloudコンソールのデータ移行機能では、MySQL 9.0 ベクトル データ型のTiDB Cloudへの移行または複製はサポートされていません。
+-   TiDB Cloudコンソールのデータ移行機能では、MySQL ベクトル データ型のTiDB Cloudへの移行または複製はサポートされていません。
 
 </CustomContent>
 

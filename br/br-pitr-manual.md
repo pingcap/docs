@@ -112,7 +112,7 @@ tiup br log start \
 ただし、セキュリティ要件が高いシナリオでは、固定の暗号化キーをコマンドラインで直接渡すことを望まない場合があります。セキュリティをさらに強化するには、マスターキーベースの暗号化システムを使用して暗号化キーを管理できます。このシステムは、ログバックアップファイルごとに異なるデータキーを生成し、マスターキーのローテーションをサポートします。以下のパラメータを使用して設定できます。
 
 -   `--master-key-crypter-method` : マスターキーに基づく暗号化アルゴリズム`aes128-ctr` 、または`aes256-ctr` `aes192-ctr`かになります。デフォルト値は`plaintext`で、データは暗号化されません。
--   `--master-key` ：マスターキーの設定。ローカルディスクに保存されたマスターキー、またはクラウドキー管理サービス（KMS）によって管理されたマスターキーのいずれかになります。
+-   `--master-key` ：マスターキーの設定。ローカルディスクに保存されたマスターキー、またはクラウドキー管理サービス（KMS）によって管理されたマスターキーを使用できます。
 
 ローカル ディスクに保存されているマスター キーを使用して暗号化します。
 
@@ -424,6 +424,9 @@ Usage:
 Flags:
   --full-backup-storage string specify the backup full storage. fill it if want restore full backup before restore log.
   -h, --help                   help for point
+  --pitr-batch-count uint32    specify the batch count to restore log. (default 8)
+  --pitr-batch-size uint32     specify the batch size to restore log. (default 16777216)
+  --pitr-concurrency uint32    specify the concurrency to restore log. (default 16)
   --restored-ts string         the point of restore, used for log restore. support TSO or datetime, e.g. '400036290571534337' or '2018-05-11 01:42:23+0800'
   --start-ts string            the start timestamp which log restore from. support TSO or datetime, e.g. '400036290571534337' or '2018-05-11 01:42:23+0800'
 
@@ -439,6 +442,9 @@ Global Flags:
 出力例には共通パラメータのみが表示されています。これらのパラメータの説明は以下のとおりです。
 
 -   `--full-backup-storage` : スナップショット（フル）バックアップのstorageアドレス。PITRを使用する場合は、このパラメータを指定し、復元タイムスタンプ前の最新のスナップショットバックアップを選択します。ログバックアップデータのみを復元する場合は、このパラメータを省略できます。リカバリクラスターを初めて初期化する場合は、スナップショットバックアップを指定する必要があります。現在、 BRはログバックアップのstorageとしてAmazon S3、GCS、Azure Blob Storageをサポートしています。詳細は[外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
+-   `--pitr-batch-count` : ログデータを復元する際の、1 回のバッチで処理できるファイルの最大数。このしきい値に達すると、現在のバッチは直ちに終了し、次のバッチが開始されます。
+-   `--pitr-batch-size` : ログデータを復元する際の、1バッチあたりの最大データサイズ（バイト単位）。このしきい値に達すると、現在のバッチは直ちに終了し、次のバッチが開始されます。
+-   `--pitr-concurrency` : ログ復元中の同時タスク数。各同時タスクは、一度に1バッチのログデータを復元します。
 -   `--restored-ts` : データを復元するタイムスタンプ。このパラメータが指定されていない場合、 BRはログバックアップで利用可能な最新のタイムスタンプ、つまりバックアップデータのチェックポイントにデータを復元します。
 -   `--start-ts` : ログバックアップデータを復元する開始タイムスタンプ。ログバックアップデータのみを復元する必要がある場合は、このパラメータを指定する必要があります。
 -   `--pd` : 復元クラスターの PD アドレス。

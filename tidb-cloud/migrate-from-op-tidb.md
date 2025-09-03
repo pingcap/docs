@@ -201,11 +201,10 @@ Dumplingを使用してアップストリーム TiDB クラスターから Amazo
 
 TiDB セルフマネージド クラスターから Amazon S3 にデータをエクスポートした後、そのデータをTiDB Cloudに移行する必要があります。
 
-1.  TiDB CloudコンソールでクラスターのアカウントIDと外部IDを取得します。詳細については、 [ステップ2. Amazon S3アクセスを構成する](/tidb-cloud/tidb-cloud-auditing.md#step-2-configure-amazon-s3-access)参照してください。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)では、次のドキュメントに従って、ターゲット クラスターのアカウント ID と外部 ID を取得します。
 
-    次のスクリーンショットは、アカウント ID と外部 ID を取得する方法を示しています。
-
-    ![Get the Account ID and External ID](/media/tidb-cloud/op-to-cloud-get-role-arn.png)
+    -   TiDB Cloud Dedicated クラスターについては、 [ロール ARN を使用して Amazon S3 アクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access-using-a-role-arn)参照してください。
+    -   TiDB Cloud Starter またはTiDB Cloud Essential クラスターについては、 [ロール ARN を使用して Amazon S3 アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access-using-a-role-arn)参照してください。
 
 2.  Amazon S3 のアクセス権限を設定します。通常、以下の読み取り専用権限が必要です。
 
@@ -269,7 +268,10 @@ TiDB セルフマネージド クラスターから Amazon S3 にデータをエ
 
 5.  ロールARNを取得します[AWSコンソール &gt; IAM &gt; アクセス管理 &gt; ロール](https://console.aws.amazon.com/iamv2/home#/roles)に進みます。リージョンに切り替えます。作成したロールをクリックし、ARNをメモします。これはTiDB Cloudにデータをインポートする際に使用します。
 
-6.  TiDB Cloudにデータをインポートします。1 [クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)参照してください。
+6.  TiDB Cloudにデータをインポートします。
+
+    -   TiDB Cloud Dedicated クラスターについては、 [クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)参照してください。
+    -   TiDB Cloud Starter またはTiDB Cloud Essential クラスターについては、 [クラウドストレージからTiDB Cloud StarterまたはEssentialにCSVファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)参照してください。
 
 ## 増分データを複製する {#replicate-incremental-data}
 
@@ -313,7 +315,7 @@ TiDB セルフマネージド クラスターから Amazon S3 にデータをエ
 
     -   `--changefeed-id` : レプリケーションタスクのID。形式は ^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$ 正規表現に一致する必要があります。このIDが指定されていない場合、TiCDCは自動的にUUID（バージョン4形式）をIDとして生成します。
 
-    -   `--start-ts` : チェンジフィードの開始TSOを指定します。このTSOからTiCDCクラスターはデータのプルを開始します。デフォルト値は現在時刻です。
+    -   `--start-ts` : チェンジフィードの開始TSOを指定します。このTSOから、TiCDCクラスターはデータのプルを開始します。デフォルト値は現在時刻です。
 
     詳細については[TiCDC 変更フィードの CLI とコンフィグレーションパラメータ](https://docs.pingcap.com/tidb/dev/ticdc-changefeed-config)参照してください。
 

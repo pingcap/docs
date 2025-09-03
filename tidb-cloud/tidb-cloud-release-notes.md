@@ -8,6 +8,14 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2025年9月2日 {#september-2-2025}
+
+**一般的な変更**
+
+-   **TiDB Cloud専用**
+
+    -   新しい[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン8.5.2](https://docs.pingcap.com/tidb/v8.5/release-8.5.2/)から[バージョン8.5.3](https://docs.pingcap.com/tidb/v8.5/release-8.5.3/)にアップグレードします。
+
 ## 2025年8月26日 {#august-26-2025}
 
 **一般的な変更**

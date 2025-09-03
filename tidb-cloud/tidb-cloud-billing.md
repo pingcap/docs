@@ -13,35 +13,35 @@ TiDB Cloud は消費したリソースに応じて料金が発生します。
 
 [TiDB Cloud専用料金の詳細](https://www.pingcap.com/tidb-dedicated-pricing-details/)参照。
 
-### {{{ .starter }}} (旧称 Serverless) の料金 {#pricing-for-starter} {#pricing-for-starter}
+### TiDB Cloud Starter (旧称 Serverless) の価格 {#pricing-for-starter} {#pricing-for-starter}
 
-[{{{ .starter }}} 価格の詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)参照。
+[TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)参照。
 
 <CustomContent language="en,zh">
 
-### {{{ .essential }}} の価格 {#pricing-for-essential} {#pricing-for-essential}
+### TiDB Cloud Essential の価格 {#pricing-for-essential} {#pricing-for-essential}
 
 > **ヒント：**
 >
-> 現在、{{{ .essential }}} は Alibaba Cloud でパブリックプレビュー段階にあり、Alibaba Cloud シンガポールリージョンでのみご利用いただけます。Alibaba Cloud の他のリージョンをご希望の場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md#access-pingcap-help-center)お問い合わせください。
+> 現在、 TiDB Cloud EssentialはAlibaba Cloudでパブリックプレビュー段階にあり、ジャカルタ、メキシコ、シンガポール、東京の4つのリージョンでのみご利用いただけます。Alibaba Cloudの他のリージョンをご希望の場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md#access-pingcap-help-center)お問い合わせください。
 
-{{{ .essential }}} の場合、アプリケーションによる実際の使用量で**はなく**、プロビジョニングされたリクエスト容量ユニット (RCU) の数に基づいて課金されます。
+TiDB Cloud Essential の場合、アプリケーションによる実際の使用量で**はなく**、プロビジョニングされたリクエスト容量ユニット (RCU) の数に基づいて課金されます。
 
-**リクエスト容量ユニット（RCU）は**、{{{ .essential }}} クラスターにプロビジョニングされたコンピューティング容量を表す測定単位です。1 RCU は、1 秒あたり一定数の RU を処理できる固定量のコンピューティングリソースを提供します。プロビジョニングする RCU の数によって、クラスターのベースラインパフォーマンスとスループット容量が決まります。
+**リクエスト容量ユニット（RCU）は、** TiDB Cloud Essential クラスターにプロビジョニングされたコンピューティング容量を表す測定単位です。1 RCU は、1 秒あたり一定数の RU を処理できる固定量のコンピューティングリソースを提供します。プロビジョニングする RCU の数によって、クラスターのベースラインパフォーマンスとスループット容量が決まります。
 
 利用可能な各 Alibaba Cloud リージョンの詳細な料金については以下をご覧ください。
 
-| リソース                             | シンガポール |
-| -------------------------------- | ------ |
-| コンピューティング（RCU あたり/月）             | 0.24ドル |
-| 行ベースのstorage（GiB/月あたり）           | 0.24ドル |
-| 列指向storage（GiB/月あたり）             | 0.06ドル |
-| 二重層暗号化を備えた行ベースのstorage（GiB/月あたり） | 0.36ドル |
-| 二重層暗号化を備えた列指向storage（GiB/月あたり）   | 0.09ドル |
+| リソース                             | ジャカルタ  | メキシコ   | シンガポール | 東京     |
+| -------------------------------- | ------ | ------ | ------ | ------ |
+| コンピューティング（RCU あたり/月）             | 0.27ドル | 0.22ドル | 0.24ドル | 0.28ドル |
+| 行ベースのstorage（GiB/月あたり）           | 0.24ドル | 0.24ドル | 0.24ドル | 0.24ドル |
+| 列指向storage（GiB/月あたり）             | 0.06ドル | 0.06ドル | 0.06ドル | 0.06ドル |
+| 二重層暗号化を備えた行ベースのstorage（GiB/月あたり） | 0.36ドル | 0.36ドル | 0.36ドル | 0.36ドル |
+| 二重層暗号化を備えた列指向storage（GiB/月あたり）   | 0.09ドル | 0.09ドル | 0.09ドル | 0.09ドル |
 
 #### スロットリング {#throttling}
 
-{{{ .essential }}} クラスターの場合、スロットリングポリシーはプロビジョニングされたリクエスト容量ユニット（RCU）に基づいて適用されます。ワークロードが最大RCU容量を超えると、クラスターは安定性を維持するために受信リクエストを自動的にスロットリングします。既存の接続はスロットリングされますが、最大RCU制限を超えない限り、新しい接続試行は受け入れられます。これにより、クラスターを過負荷から保護しながら、予測可能なパフォーマンスが確保されます。
+TiDB Cloud Essential クラスターでは、スロットリングポリシーはプロビジョニングされたリクエスト容量ユニット (RCU) に基づいて適用されます。ワークロードが最大 RCU 容量を超えると、クラスターは安定性を維持するために、受信リクエストを自動的にスロットリングします。既存の接続はスロットリングされますが、最大 RCU 制限を超えない限り、新しい接続試行は受け入れられます。これにより、クラスターを過負荷から保護しながら、予測可能なパフォーマンスが確保されます。
 
 #### 請求サイクル {#billing-cycle}
 
@@ -275,11 +275,11 @@ TiDB Cloudは、概念実証（PoC）ユーザーに一定数のクレジット�
 
 <CustomContent language="ja">
 
-組織内で`Organization Owner`または`Organization Billing Manager`ロールを担っている場合は、 TiDB Cloudアカウントをクラウドプロバイダー（AWS、Azure、またはGoogle Cloud）の請求アカウントにリンクできます。それ以外の場合は、このセクションをスキップしてください。
+組織内で`Organization Owner`または`Organization Billing Manager`ロールを担っている場合は、 TiDB Cloudアカウントをクラウドプロバイダー（AWS、Azure、またはGoogle Cloud）の請求先アカウントにリンクできます。それ以外の場合は、このセクションをスキップしてください。
 
 </CustomContent>
 
-TiDB Cloudを初めて使用し、 TiDB Cloudアカウントを持っていない場合は、クラウド プロバイダーのマーケットプレイスを通じてTiDB Cloudアカウントにサインアップし、クラウド プロバイダーの請求アカウントを通じて使用料を支払うことができます。
+TiDB Cloudを初めて使用し、 TiDB Cloudアカウントをお持ちでない場合は、クラウド プロバイダーのマーケットプレイスを通じてTiDB Cloudアカウントにサインアップし、クラウド プロバイダーの請求アカウントを通じて使用料を支払うことができます。
 
 <CustomContent language="en,zh">
 

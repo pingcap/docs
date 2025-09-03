@@ -233,13 +233,13 @@ tiup cluster stop ${cluster-name}
 tiup cluster destroy ${cluster-name}
 ```
 
-<!-- ## Switch from Prometheus to VictoriaMetrics
+## PrometheusからVictoriaMetricsへの切り替え {#switch-from-prometheus-to-victoriametrics}
 
-In large-scale clusters, Prometheus might encounter performance bottlenecks when handling a large number of instances. Starting from TiUP v1.16.3, TiUP supports switching the monitoring component from Prometheus to VictoriaMetrics (VM) to provide better scalability, higher performance, and lower resource consumption.
+大規模クラスターでは、Prometheus は多数のインスタンスを処理する際にパフォーマンスのボトルネックが発生する可能性があります。TiUP v1.16.3 以降では、監視コンポーネントを Prometheus から VictoriaMetrics (VM) に切り替えることで、スケーラビリティ、パフォーマンス、リソース消費量を削減できます。
 
-### Set up VictoriaMetrics for a new deployment
+### 新しいデプロイメント用に VictoriaMetrics を設定する {#set-up-victoriametrics-for-a-new-deployment}
 
-By default, TiUP uses Prometheus as the metrics monitoring component. To use VictoriaMetrics instead of Prometheus in a new deployment, configure the topology file as follows:
+デフォルトでは、 TiUP はメトリクス監視コンポーネントとして Prometheus を使用します。新しいデプロイメントで Prometheus の代わりに VictoriaMetrics を使用するには、トポロジファイルを次のように設定します。
 
 ```yaml
 # Monitoring server configuration
@@ -258,19 +258,19 @@ grafana_servers:
     use_vm_as_datasource: true
 ```
 
-### Migrate an existing deployment to VictoriaMetrics
+### 既存のデプロイメントを VictoriaMetrics に移行する {#migrate-an-existing-deployment-to-victoriametrics}
 
-You can perform the migration without affecting running instances. Existing metrics will remain in Prometheus, while TiUP will write new metrics to VictoriaMetrics.
+実行中のインスタンスに影響を与えることなく移行を実行できます。既存のメトリクスはPrometheusに残り、 TiUPは新しいメトリクスをVictoriaMetricsに書き込みます。
 
-#### Enable VictoriaMetrics remote write
+#### VictoriaMetrics リモート書き込みを有効にする {#enable-victoriametrics-remote-write}
 
-1. Edit the cluster configuration:
+1.  クラスター構成を編集します。
 
     ```bash
     tiup cluster edit-config ${cluster-name}
     ```
 
-2. Under `monitoring_servers`, set `prom_remote_write_to_vm` to `true`:
+2.  `monitoring_servers`の下で`prom_remote_write_to_vm`を`true`に設定します:
 
     ```yaml
     monitoring_servers:
@@ -279,21 +279,21 @@ You can perform the migration without affecting running instances. Existing metr
         prom_remote_write_to_vm: true
     ```
 
-3. Reload the configuration to apply the changes:
+3.  変更を適用するには、構成を再ロードします。
 
     ```bash
     tiup cluster reload ${cluster-name} -R prometheus
     ```
 
-#### Switch the default data source to VictoriaMetrics
+#### デフォルトのデータソースをVictoriaMetricsに切り替える {#switch-the-default-data-source-to-victoriametrics}
 
-1. Edit the cluster configuration:
+1.  クラスター構成を編集します。
 
     ```bash
     tiup cluster edit-config ${cluster-name}
     ```
 
-2. Under `grafana_servers`, set `use_vm_as_datasource` to `true`:
+2.  `grafana_servers`の下で`use_vm_as_datasource`を`true`に設定します:
 
     ```yaml
     grafana_servers:
@@ -302,23 +302,23 @@ You can perform the migration without affecting running instances. Existing metr
         use_vm_as_datasource: true
     ```
 
-3. Reload the configuration to apply the changes:
+3.  変更を適用するには、構成を再ロードします。
 
     ```bash
     tiup cluster reload ${cluster-name} -R grafana
     ```
 
-#### View historical metrics generated before the switch (optional)
+#### 切り替え前に生成された履歴メトリックをビュー（オプション） {#view-historical-metrics-generated-before-the-switch-optional}
 
-If you need to view historical metrics generated before the switch, switch the data source of Grafana as follows:
+切り替え前に生成された履歴メトリックを表示する必要がある場合は、次のように Grafana のデータ ソースを切り替えます。
 
-1. Edit the cluster configuration:
+1.  クラスター構成を編集します。
 
     ```bash
     tiup cluster edit-config ${cluster-name}
     ```
 
-2. Under `grafana_servers`, comment out `use_vm_as_datasource`:
+2.  `grafana_servers`の下で、 `use_vm_as_datasource`コメントアウトします。
 
     ```yaml
     grafana_servers:
@@ -327,27 +327,27 @@ If you need to view historical metrics generated before the switch, switch the d
         # use_vm_as_datasource: true
     ```
 
-3. Reload the configuration to apply the changes:
+3.  変更を適用するには、構成をリロードします。
 
     ```bash
     tiup cluster reload ${cluster-name} -R grafana
     ```
 
-4. To switch back to VictoriaMetrics, repeat the steps in [Switch the default data source to VictoriaMetrics](#switch-the-default-data-source-to-victoriametrics).
+4.  VictoriaMetrics に戻るには、 [デフォルトのデータソースをVictoriaMetricsに切り替える](#switch-the-default-data-source-to-victoriametrics)の手順を繰り返します。
 
-### Clean up old metrics and services
+### 古い指標とサービスをクリーンアップする {#clean-up-old-metrics-and-services}
 
-After confirming that the old metrics have expired, you can perform the following steps to remove redundant services and files. This does not affect the running cluster.
+古いメトリックの有効期限が切れていることを確認した後、以下の手順で冗長なサービスとファイルを削除できます。これは実行中のクラスターには影響しません。
 
-#### Set Prometheus to agent mode
+#### Prometheusをエージェントモードに設定する {#set-prometheus-to-agent-mode}
 
-1. Edit the cluster configuration:
+1.  クラスター構成を編集します。
 
     ```bash
     tiup cluster edit-config ${cluster-name}
     ```
 
-2. Under `monitoring_servers`, set `enable_prom_agent_mode` to `true`, and ensure you also set `prom_remote_write_to_vm` and `use_vm_as_datasource` correctly:
+2.  `monitoring_servers`の下で、 `enable_prom_agent_mode`を`true`に設定し、 `prom_remote_write_to_vm`と`use_vm_as_datasource`正しく設定されていることを確認します。
 
     ```yaml
     monitoring_servers:
@@ -361,15 +361,15 @@ After confirming that the old metrics have expired, you can perform the followin
         use_vm_as_datasource: true
     ```
 
-3. Reload the configuration to apply the changes:
+3.  変更を適用するには、構成をリロードします。
 
     ```bash
     tiup cluster reload ${cluster-name} -R prometheus
     ```
 
-#### Remove expired data directories
+#### 期限切れのデータディレクトリを削除する {#remove-expired-data-directories}
 
-1. In the configuration file, locate the `data_dir` path of the monitoring server:
+1.  設定ファイルで、監視サーバーの`data_dir`パスを見つけます。
 
     ```yaml
     monitoring_servers:
@@ -378,9 +378,8 @@ After confirming that the old metrics have expired, you can perform the followin
         data_dir: "/tidb-data/prometheus-8249"
     ```
 
-2. Remove the data directory:
+2.  データディレクトリを削除します。
 
     ```bash
     rm -rf /tidb-data/prometheus-8249
     ```
--->

@@ -18,7 +18,7 @@
 -   開発する
     -   [概要](/develop/dev-guide-overview.md)
     -   クイックスタート
-        -   [{{{ .starter }}}クラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
+        -   [TiDB Cloudスタータークラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
         -   [TiDB の CRUD SQL](/develop/dev-guide-tidb-crud-sql.md)
     -   アプリケーション例
         -   Java
@@ -203,7 +203,7 @@
         -   [TiCDC の UPDATE イベントの分割動作](/ticdc/ticdc-split-update-behavior.md)
         -   出力プロトコル
             -   [TiCDC Avroプロトコル](/ticdc/ticdc-avro-protocol.md)
-            -   [TiCDC Canal- JSON プロトコル](/ticdc/ticdc-canal-json.md)
+            -   [TiCDC Canal-JSON プロトコル](/ticdc/ticdc-canal-json.md)
             -   [TiCDC CSV プロトコル](/ticdc/ticdc-csv.md)
             -   [TiCDC デベジウムプロトコル](/ticdc/ticdc-debezium.md)
             -   [TiCDCオープンプロトコル](/ticdc/ticdc-open-protocol.md)
@@ -322,7 +322,7 @@
         -   [TiDB トラブルシューティング マップ](/tidb-troubleshooting-map.md)
         -   [TiDBクラスタ設定のトラブルシューティング](/troubleshoot-tidb-cluster.md)
         -   [TiFlashのトラブルシューティング](/tiflash/troubleshoot-tiflash.md)
-    -   問題のシナリオ
+    -   問題シナリオ
         -   遅いクエリ
             -   [遅いクエリを特定する](/identify-slow-queries.md)
             -   [遅いクエリを分析する](/analyze-slow-queries.md)
@@ -511,6 +511,7 @@
                 -   [tiup cluster start](/tiup/tiup-component-cluster-start.md)
                 -   [tiup cluster stop](/tiup/tiup-component-cluster-stop.md)
                 -   [tiup cluster template](/tiup/tiup-component-cluster-template.md)
+                -   [tiup クラスター tls](/tiup/tiup-component-cluster-tls.md)
                 -   [tiup cluster upgrade](/tiup/tiup-component-cluster-upgrade.md)
             -   TiUP DMコマンド
                 -   [概要](/tiup/tiup-component-dm.md)

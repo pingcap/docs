@@ -5,15 +5,10 @@ summary: TiSpark を使用して、オンライン トランザクションと�
 
 # TiSpark ユーザーガイド {#tispark-user-guide}
 
-![TiSpark architecture](/media/tispark-architecture.png)
-
-## TiSparkとTiFlash {#tispark-vs-tiflash}
-
-[ティスパーク](https://github.com/pingcap/tispark) 、TiDB/TiKV上でApache Sparkを実行し、複雑なOLAPクエリに応答するために構築された薄いレイヤーです。Sparkプラットフォームと分散型TiKVクラスターの両方の利点を活用し、分散型OLTPデータベースであるTiDBとシームレスに連携することで、オンライントランザクションと分析の両方をワンストップで提供するハイブリッドトランザクション/分析処理（HTAP）ソリューションを提供します。
-
-[TiFlash](/tiflash/tiflash-overview.md) HTAPを可能にするもう一つのツールです。TiFlashとTiSparkはどちらも、複数のホストを使用してOLTPデータに対してOLAPクエリを実行できます。TiFlashはデータを列形式で保存するため、より効率的な分析クエリを実行できます。TiFlashとTiSparkは併用可能です。
-
-## TiSparkとは {#what-is-tispark}
+> **警告：**
+>
+> -   TiSpark は、TiDB v7.0.0 以降のバージョンとの互換性を保証しません。
+> -   TiSpark は、Spark v3.4.0 以降のバージョンとの互換性を保証しません。
 
 TiSparkはTiKVクラスターとPDクラスターに依存します。Sparkクラスターもセットアップする必要があります。このドキュメントでは、TiSparkのセットアップと使用方法について簡単に説明します。Apache Sparkに関する基本的な知識が必要です。詳細については、 [Apache Sparkのウェブサイト](https://spark.apache.org/docs/latest/index.html)ご覧ください。
 
@@ -32,6 +27,16 @@ TiDB でのデータ処理には、Spark エコシステムのツールを使用
 > **警告：**
 >
 > TiSparkはTiKVに直接アクセスするため、TiDBサーバーで使用されるアクセス制御メカニズムはTiSparkには適用できません。TiSpark v2.5.0以降、TiSparkはユーザー認証と認可をサポートしています。詳細については、 [Security](/tispark-overview.md#security)参照してください。
+
+次の図は TiSpark のアーキテクチャを示しています。
+
+![TiSpark architecture](/media/tispark-architecture.png)
+
+## TiSparkとTiFlash {#tispark-vs-tiflash}
+
+[ティスパーク](https://github.com/pingcap/tispark) 、TiDB/TiKV上でApache Sparkを実行し、複雑なOLAPクエリに応答するために構築された薄いレイヤーです。Sparkプラットフォームと分散型TiKVクラスターの両方の利点を活用し、分散型OLTPデータベースであるTiDBとシームレスに統合することで、オンライントランザクションと分析の両方をワンストップで提供するハイブリッドトランザクション/分析処理（HTAP）ソリューションを提供します。
+
+[TiFlash](/tiflash/tiflash-overview.md) HTAPを可能にするもう一つのツールです。TiFlashとTiSparkはどちらも、複数のホストを使用してOLTPデータに対してOLAPクエリを実行できます。TiFlashはデータを列形式で保存するため、より効率的な分析クエリを実行できます。TiFlashとTiSparkは併用可能です。
 
 ## 要件 {#requirements}
 
@@ -98,10 +103,6 @@ TiDB および Spark のバージョンに応じて、TiSpark のバージョン
 | 3.2.x            | 6.x、5.x、4.x        | 3.0.x、3.1.x、3.2.x、3.3.x | 2.12       |
 
 TiSpark 2.4.4、2.5.3、3.0.3、3.1.7、および 3.2.3 は最新の安定バージョンであり、強く推奨されます。
-
-> **注記：**
->
-> TiSpark は TiDB v7.0.0 以降のバージョンとの互換性を保証しません。また、Spark v3.4.0 以降のバージョンとの互換性も保証しません。
 
 ### TiSpark jarを入手する {#get-tispark-jar}
 
@@ -451,7 +452,7 @@ TiSpark は統計情報を次の目的で使用します。
 -   最小の推定コストでクエリ プランで使用するインデックスを決定します。
 -   効率的なブロードキャスト参加を可能にする小さなテーブル ブロードキャスト。
 
-To allow TiSpark to access statistic information, make sure that relevant tables have been analyzed.
+TiSpark が統計情報にアクセスできるようにするには、関連するテーブルが分析されていることを確認してください。
 
 テーブルを分析する方法の詳細については、 [統計入門](/statistics.md)参照してください。
 
