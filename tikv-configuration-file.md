@@ -2242,7 +2242,7 @@ Configures the behavior of TiKV automatic compaction.
 
 ### `check-interval` <span class="version-mark">New in v7.5.7 and v9.0.0</span>
 
-+ The time interval at which TiKV checks whether to trigger automatic compaction. Within this interval, Regions that meet the automatic compaction conditions are processed based on priority. When the interval elapses, TiKV rescans Region information and recalculates priorities.
++ The interval at which TiKV checks whether to trigger automatic compaction. Within this interval, Regions that meet the automatic compaction conditions are processed based on priority. When the interval elapses, TiKV rescans Region information and recalculates priorities.
 + Default value: `"300s"`
 
 ### `tombstone-num-threshold` <span class="version-mark">New in v7.5.7 and v9.0.0</span>
