@@ -245,7 +245,7 @@ The following configuration items only take effect for the TiFlash disaggregated
 
 - Specifies the maximum number of seconds that the TiFlash server waits for when you shut down the TiFlash server, which allows the remaining MPP tasks to execute and does not accept any new MPP tasks. If all the MPP tasks are finished before this timeout, TiFlash will shut down immediately.
 - Default value: `600`
-- When one TiFlash server is waiting for shutdown (in the grace period), the TiDB will not send any new task to this TiFlash server.
+- When one TiFlash server is waiting for shutdown (in the grace period), the TiDB will not send any new MPP task to this TiFlash server.
 
 #### flash.proxy
 
