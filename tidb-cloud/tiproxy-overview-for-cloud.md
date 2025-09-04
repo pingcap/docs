@@ -11,7 +11,7 @@ For more information, see [TiProxy Overview](https://docs.pingcap.com/tidb/stabl
 
 > **Note:**
 >
-> Currently, TiProxy is only available for TiDB Cloud Dedicated clusters.
+> Currently, TiProxy is only available on TiDB Cloud Dedicated clusters.
 
 ## Scenarios
 

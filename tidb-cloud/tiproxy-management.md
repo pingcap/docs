@@ -9,7 +9,7 @@ This document describes how to enable, disable, view, and modify TiProxy.
 
 > **Note:**
 >
-> Currently, TiProxy is only available for TiDB Cloud Dedicated clusters.
+> Currently, TiProxy is only available on TiDB Cloud Dedicated clusters.
 
 ## Enable TiProxy
 
