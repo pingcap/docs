@@ -284,7 +284,7 @@ Parameter descriptions：
 
 ## Manage root certificates for TiDB Cloud Dedicated
 
-TiDB Cloud Dedicated uses certificates from [AWS Private Certificate Authority](https://aws.amazon.com/private-ca/) as a Certificate Authority (CA) for TLS connections between clients and TiDB Cloud Dedicated clusters. Usually, the private key of CA certificate is stored securely in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
+TiDB Cloud Dedicated uses certificates from [AWS Private Certificate Authority](https://aws.amazon.com/private-ca/) as a Certificate Authority (CA) for TLS connections between clients and TiDB Cloud Dedicated clusters. Usually, the private key of the CA certificate is stored securely in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
 
 ## FAQs
 
