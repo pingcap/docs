@@ -15,7 +15,7 @@ TiDB Cloud 提供了强大且灵活的安全框架，旨在保护数据、实施
 
 - **Data access control**：高级加密能力，如 Customer-Managed Encryption Keys (CMEK)，用于保护静态数据安全。
 
-- **Audit logging**：对控制台操作和数据库操作的全面活动追踪，确保问责性和透明性。
+- **Audit logging**：对控制台操作和数据库操作进行全面的活动追踪，确保问责和透明。
 
 通过集成这些能力，TiDB Cloud 使组织能够保护敏感数据、简化访问控制并优化安全运维。
 
@@ -31,7 +31,7 @@ TiDB Cloud 用户账户是管理资源身份和访问的基础。每个账户代
 
     - 用户通过邮箱地址和密码创建账户。
 
-    - 适用于没有外部身份提供方的小型团队或个人。
+    - 适用于没有外部身份提供商的小型团队或个人。
 
 - **Standard SSO authentication**
 
@@ -45,9 +45,9 @@ TiDB Cloud 用户账户是管理资源身份和访问的基础。每个账户代
 
 - **Organization SSO authentication**
 
-    - 通过 OIDC 或 SAML 协议与企业身份提供方（IdP）集成。
+    - 通过 OIDC 或 SAML 协议与企业身份提供商（IdP）集成。
 
-    - 支持 MFA 强制、密码过期策略和域名限制等功能。
+    - 支持如 MFA 强制、密码过期策略和域名限制等功能。
 
     - **Best practice**：适用于有高级安全和合规要求的大型组织。
 
@@ -67,7 +67,7 @@ TiDB Cloud 通过基于用户和基于角色的权限，提供细粒度的数据
 
 数据库用户账户存储在 `mysql.user` 系统表中，并通过用户名和客户端主机唯一标识。
 
-在数据库初始化期间，TiDB 会自动创建一个默认账户：`'root'@'%'`。
+在数据库初始化时，TiDB 会自动创建一个默认账户：`'root'@'%'`。
 
 详细信息参见 [TiDB User Account Management](https://docs.pingcap.com/tidb/stable/user-account-management#user-names-and-passwords)。
 
@@ -143,12 +143,12 @@ TiDB Cloud 通过分层结构（组织、项目和集群）管理用户和资源
 ### Key features
 
 - **Granular permissions**:
-    - 可在组织和项目级别分配特定角色，实现精确的访问控制。
+    - 可在组织和项目级分配特定角色，实现精确的访问控制。
 
     - 通过合理规划角色分配，确保灵活性和安全性。
 
 - **Billing management**:
-    - 账单在组织级别统一管理，并可为每个项目提供详细拆分。
+    - 账单在组织级统一管理，并可为每个项目提供详细拆分。
 
 ### Identity and Access Management (IAM) Roles
 
@@ -164,9 +164,21 @@ TiDB Cloud 通过强大的网络访问控制，确保集群连接和数据传输
 
 ### Private endpoints
 
-- 允许你在自己的 Virtual Private Cloud (VPC) 内安全连接到 TiDB Cloud Dedicated 集群。
+<CustomContent language="en,zh">
 
-- 支持 [AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md)、[Azure Private Link](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md) 和 [Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)。
+- 允许你在自己的 Virtual Private Cloud (VPC) 内的 SQL 客户端安全连接到 TiDB Cloud Dedicated 集群。
+
+- 支持 [AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md)、[Azure Private Link](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)、[Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md) 和 [Alibaba Cloud Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)。
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+- Enables secure connectivity for SQL clients within your Virtual Private Cloud (VPC) to TiDB Cloud Dedicated clusters.
+
+- Supported by [AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md), [Azure Private Link](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md), and [Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
+
+</CustomContent>
 
 **Best practices:** 在生产环境中使用私有终端节点以最小化公网暴露，并定期检查配置。
 
@@ -174,9 +186,12 @@ TiDB Cloud 通过强大的网络访问控制，确保集群连接和数据传输
 
 - 加密客户端与服务器之间的通信，保障数据传输安全。
 
-- 提供 [Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md) 和 [Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md) 集群的配置指南。
+- 配置指南：
 
-**Best practices:** 确保 TLS 证书为最新，并定期轮换。
+    - [TLS Connections to TiDB Cloud Starter or Essential](/tidb-cloud/secure-connections-to-serverless-clusters.md)
+    - [TLS Connections to TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
+
+**Best practices:** 确保 TLS 证书为最新，并定期轮换证书。
 
 ### VPC peering
 
@@ -184,7 +199,7 @@ TiDB Cloud 通过强大的网络访问控制，确保集群连接和数据传输
 
 - 详细信息参见 [Connect to TiDB Cloud Dedicated via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)。
 
-**Best practices:** 用于关键业务负载，避免公网暴露，并监控性能。
+**Best practices:** 用于关键业务负载以避免公网暴露，并监控性能。
 
 ### IP access list
 
@@ -192,7 +207,7 @@ TiDB Cloud 通过强大的网络访问控制，确保集群连接和数据传输
 
 - 详细信息参见 [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md)。
 
-**Best practices:** 定期审计和更新访问列表，确保安全。
+**Best practices:** 定期审计和更新访问列表以保持安全。
 
 ## Data access control
 
@@ -204,13 +219,13 @@ TiDB Cloud 通过高级加密能力保护静态数据，确保安全性并符合
 
 - 启用后，使用 CMEK 密钥对静态数据和备份进行加密。
 
-- 对于未启用 CMEK 的 TiDB Cloud Dedicated 集群，TiDB Cloud 使用托管密钥；TiDB Cloud Serverless 集群仅依赖托管密钥。
+- 对于未启用 CMEK 的 TiDB Cloud Dedicated 集群，TiDB Cloud 使用托管密钥；TiDB Cloud Starter 和 TiDB Cloud Essential 集群仅使用托管密钥。
 
 **Best practices:**
 
-- 定期轮换 CMEK 密钥，以提升安全性并满足合规标准。
+- 定期轮换 CMEK 密钥以提升安全性并满足合规标准。
 
-- 始终使用 CMEK 密钥加密备份，增强保护。
+- 始终使用 CMEK 密钥加密备份以增强保护。
 
 - 针对如 HIPAA 和 GDPR 等有严格合规要求的行业，建议使用 CMEK。
 
@@ -228,7 +243,7 @@ TiDB Cloud 提供全面的审计日志功能，用于监控用户活动和数据
 
 - 将日志集成到 SIEM 工具，实现实时监控和告警。
 
-- 设置日志保留策略，以满足合规要求。
+- 设置日志保留策略以满足合规要求。
 
 ### Database audit logging
 
@@ -236,7 +251,7 @@ TiDB Cloud 提供全面的审计日志功能，用于监控用户活动和数据
 
 **Best practices:**
 
-- 定期检查日志，发现异常活动或未授权访问。
+- 定期审查日志，排查异常活动或未授权访问。
 
 - 利用日志进行合规报告和取证分析。
 
