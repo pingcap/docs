@@ -122,7 +122,7 @@ This is because TiDB retains dropped tables and databases for a certain period o
 
 ### Why are there RU consumptions when I'm not actively running any queries?
 
-RU consumptions can occur in various scenarios. One common scenario is during background queries, such as synchronizing schema changes between TiDB instances. Another scenario is when certain web console features generate queries, like loading schemas. These processes use RUs even without explicit user triggers.
+RU consumptions can occur in various scenarios. One common scenario is during background queries, including but not limited to synchronizing schema changes between TiDB instances, executing DDL jobs, refreshing privileges, refreshing SQL bindings, and refreshing global variables. Another scenario is when certain web console features generate queries, like loading schemas. These processes use RUs even without explicit user triggers.
 
 ### Why is there a spike in RU usage when my workload is steady?
 
