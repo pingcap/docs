@@ -80,8 +80,8 @@ The following sections illustrate the metrics on the **Metrics** page for TiDB C
 | TiFlash Storage Usage | node, limit | The storage usage statistics or upper limit of each TiFlash node. |
 | TiProxy CPU Usage | node | The CPU usage statistics of each TiProxy node. The upper limit is 100%. |
 | TiProxy Connections | node | The number of connections on each TiProxy node. |
-| TiProxy Throughput | node | The transferred bytes per second on each TiProxy node. |
-| TiProxy Sessions Migration Reasons | reason | The number of session migrations that happen every minute and the reason for them. |
+| TiProxy Throughput | node | The bytes transferred per second on each TiProxy node. |
+| TiProxy Sessions Migration Reasons | reason | The number of session migrations that happen every minute and the reasons for them. |
 
 ## Metrics for TiDB Cloud Serverless clusters
 
