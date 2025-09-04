@@ -354,6 +354,9 @@ Usage:
 Flags:
   --full-backup-storage string specify the backup full storage. fill it if want restore full backup before restore log.
   -h, --help                   help for point
+  --pitr-batch-count uint32    specify the batch count to restore log. (default 8)
+  --pitr-batch-size uint32     specify the batch size to restore log. (default 16777216)
+  --pitr-concurrency uint32    specify the concurrency to restore log. (default 16)
   --restored-ts string         the point of restore, used for log restore. support TSO or datetime, e.g. '400036290571534337' or '2018-05-11 01:42:23+0800'
   --start-ts string            the start timestamp which log restore from. support TSO or datetime, e.g. '400036290571534337' or '2018-05-11 01:42:23+0800'
 
@@ -369,6 +372,9 @@ Global Flags:
 The example output only shows the common parameters. These parameters are described as follows:
 
 - `--full-backup-storage`: the storage address for the snapshot (full) backup. To use PITR, specify this parameter and choose the latest snapshot backup before the restore timestamp. To restore only log backup data, you can omit this parameter. Note that when initializing the recovery cluster for the first time, you must specify a snapshot backup. Currently, BR supports Amazon S3, GCS, and Azure Blob Storage as the storage for log backup. For details, see [URI Formats of External Storage Services](/external-storage-uri.md).
+- `--pitr-batch-count`: the maximum number of files in a single batch when restoring log data. Once this threshold is reached, the current batch ends immediately and the next batch starts.
+- `--pitr-batch-size`: the maximum data size (in bytes) in a single batch when restoring log data. Once this threshold is reached, the current batch ends immediately and the next batch starts.
+- `--pitr-concurrency`: the number of concurrent tasks during log restore. Each concurrent task restores one batch of log data at a time.
 - `--restored-ts`: the timestamp that you want to restore data to. If this parameter is not specified, BR restores data to the latest timestamp available in the log backup, that is, the checkpoint of the backup data.
 - `--start-ts`: the start timestamp that you want to restore log backup data from. If you only need to restore log backup data, you must specify this parameter.
 - `--pd`: the PD address of the restore cluster.
