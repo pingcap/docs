@@ -131,7 +131,7 @@
 ## 指南
 
 - 管理集群
-  - [选择您的集群方案](/tidb-cloud/select-cluster-tier.md)
+  - [选择集群方案](/tidb-cloud/select-cluster-tier.md)
   - 管理 TiDB Cloud 集群
     - [创建 TiDB Cloud 集群](/tidb-cloud/create-tidb-cluster-serverless.md)
     - 连接到 TiDB Cloud 集群
@@ -218,7 +218,7 @@
 - 迁移或导入数据
   - [概览](/tidb-cloud/tidb-cloud-migration-overview.md)
   - 将数据迁移到 TiDB Cloud
-    - [从 TiDB 自部署迁移到 TiDB Cloud](/tidb-cloud/migrate-from-op-tidb.md)
+    - [从本地部署的 TiDB 迁移到 TiDB Cloud](/tidb-cloud/migrate-from-op-tidb.md)
     - [迁移和合并大型数据集的 MySQL 分片](/tidb-cloud/migrate-sql-shards.md)
     - [使用 AWS DMS 从 Amazon RDS for Oracle 迁移](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
   - 将数据导入 TiDB Cloud
