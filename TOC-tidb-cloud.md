@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: 68fed3b6508cb56dc77800008c1d13ef40b1a8a6-->
+# 目录 <!--Corresponding EN commit: 3d8a0e345ee4eee02da096908dca0ae685b3153e-->
 
 ## 快速开始
 
@@ -167,7 +167,6 @@
     - [概览](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - 分析性能
       - [使用 Diagnosis 页面](/tidb-cloud/tune-performance.md)
-        - [使用 Index Insight](/tidb-cloud/index-insight.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
       - [通过 Statement Summary 表](/statement-summary-tables.md)
     - SQL 调优
       - [概览](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
@@ -216,8 +215,8 @@
     - [TiKV Follower Read](/follower-read.md)
     - [下推计算结果缓存](/coprocessor-cache.md)
     - 垃圾回收 (GC)
-       - [GC 机制简介](/garbage-collection-overview.md)
-       - [GC 配置](/garbage-collection-configuration.md)
+      - [GC 机制简介](/garbage-collection-overview.md)
+      - [GC 配置](/garbage-collection-configuration.md)
     - [TiFlash 调优](/tiflash/tune-tiflash-performance.md)
   - 优化资源分配
     - 资源管理
@@ -239,7 +238,7 @@
     - [使用 AWS DMS 从 MySQL 兼容数据库迁移](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
     - [使用 AWS DMS 从 Amazon RDS for Oracle 迁移](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
   - 将数据导入 TiDB Cloud Dedicated
-    - [导入示例数据](/tidb-cloud/import-sample-data.md)
+    - [从云存储导入示例数据 (SQL 文件)](/tidb-cloud/import-sample-data.md)
     - [从云存储导入 CSV 文件](/tidb-cloud/import-csv-files.md)
     - [从云存储导入 Parquet 文件](/tidb-cloud/import-parquet-files.md)
     - [使用 MySQL CLI 导入](/tidb-cloud/import-with-mysql-cli.md)
@@ -271,10 +270,6 @@
       - [SQLAlchemy](/vector-search/vector-search-integrate-with-sqlalchemy.md)
       - [peewee](/vector-search/vector-search-integrate-with-peewee.md)
       - [Django](/vector-search/vector-search-integrate-with-django-orm.md)
-  - 文本搜索
-    - [使用 SQL 进行全文搜索](/tidb-cloud/vector-search-full-text-search-sql.md)
-    - [使用 Python 进行全文搜索](/tidb-cloud/vector-search-full-text-search-python.md)
-    - [混合搜索](/tidb-cloud/vector-search-hybrid-search.md)
   - 参考
     - [向量数据类型](/vector-search/vector-search-data-types.md)
     - [向量函数和操作符](/vector-search/vector-search-functions-and-operators.md)
@@ -330,8 +325,8 @@
     - [通过 VPC Peering 连接](/tidb-cloud/set-up-vpc-peering-connections.md)
     - [通过 TLS 连接](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
   - 数据访问控制
-      - [使用客户管理的加密密钥进行静态加密](/tidb-cloud/tidb-cloud-encrypt-cmek.md)
-      - [用户可控的日志脱敏](/tidb-cloud/tidb-cloud-log-redaction.md)
+    - [使用客户管理的加密密钥进行静态加密](/tidb-cloud/tidb-cloud-encrypt-cmek.md)
+    - [用户可控的日志脱敏](/tidb-cloud/tidb-cloud-log-redaction.md)
   - 数据库访问控制
     - [配置集群密码设置](/tidb-cloud/configure-security-settings.md)
   - 审计管理
@@ -677,9 +672,11 @@
   - [使用 UUID](/best-practices/uuid.md)
   - [TiDB 加速建表](/accelerated-table-creation.md)
   - [Schema 缓存](/schema-cache.md)
-- API 参考 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)   
-  - [概述](/tidb-cloud/api-overview.md) 
+- API 参考 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [概述](/tidb-cloud/api-overview.md)
   - v1beta1
+    - [TiDB Cloud Starter 和 Essential](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless)
+    - [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated)
     - [计费](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
     - [数据服务](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)
     - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
@@ -694,8 +691,8 @@
     - [TSO](/tso.md)
   - 存储引擎
     - TiKV
-        - [TiKV 简介](/tikv-overview.md)
-        - [RocksDB 简介](/storage-engine/rocksdb-overview.md)
+      - [TiKV 简介](/tikv-overview.md)
+      - [RocksDB 简介](/storage-engine/rocksdb-overview.md)
     - TiFlash
       - [TiFlash 简介](/tiflash/tiflash-overview.md)
       - [TiFlash 数据落盘](/tiflash/tiflash-spill-disk.md)

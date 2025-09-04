@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: 68fed3b6508cb56dc77800008c1d13ef40b1a8a6-->
+# 目录 <!--Corresponding EN commit: 3d8a0e345ee4eee02da096908dca0ae685b3153e-->
 
 ## 快速开始
 
@@ -131,7 +131,7 @@
 ## 指南
 
 - 管理集群
-  - [选择集群套餐](/tidb-cloud/select-cluster-tier.md)
+  - [选择集群方案](/tidb-cloud/select-cluster-tier.md)
   - 管理 TiDB Cloud 集群
     - [创建 TiDB Cloud 集群](/tidb-cloud/create-tidb-cluster-serverless.md)
     - 连接到 TiDB Cloud 集群
@@ -210,19 +210,20 @@
     - [TiKV Follower Read](/follower-read.md)
     - [下推计算结果缓存](/coprocessor-cache.md)
     - 垃圾回收 (GC)
-       - [GC 机制简介](/garbage-collection-overview.md)
-       - [GC 配置](/garbage-collection-configuration.md)
+      - [GC 机制简介](/garbage-collection-overview.md)
+      - [GC 配置](/garbage-collection-configuration.md)
     - [TiFlash 调优](/tiflash/tune-tiflash-performance.md)
   - [升级 TiDB 集群](/tidb-cloud/upgrade-tidb-cluster.md)
   - [删除 TiDB 集群](/tidb-cloud/delete-tidb-cluster.md)
 - 迁移或导入数据
   - [概览](/tidb-cloud/tidb-cloud-migration-overview.md)
   - 将数据迁移到 TiDB Cloud
+    - [从本地部署的 TiDB 迁移到 TiDB Cloud](/tidb-cloud/migrate-from-op-tidb.md)
     - [迁移和合并大型数据集的 MySQL 分片](/tidb-cloud/migrate-sql-shards.md)
     - [使用 AWS DMS 从 Amazon RDS for Oracle 迁移](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
   - 将数据导入 TiDB Cloud
-    - [导入示例数据](/tidb-cloud/import-sample-data-serverless.md)
     - [导入本地文件](/tidb-cloud/tidb-cloud-import-local-files.md)
+    - [从云存储导入示例数据（SQL 文件）](/tidb-cloud/import-sample-data-serverless.md)
     - [从云存储导入 CSV 文件](/tidb-cloud/import-csv-files-serverless.md)
     - [从云存储导入 Parquet 文件](/tidb-cloud/import-parquet-files-serverless.md)
     - [使用 MySQL CLI 导入](/tidb-cloud/import-with-mysql-cli-serverless.md)
@@ -240,6 +241,15 @@
   - 快速上手
     - [使用 SQL 开始向量搜索](/vector-search/vector-search-get-started-using-sql.md)
     - [使用 Python 开始向量搜索](/vector-search/vector-search-get-started-using-python.md)
+  - 自动嵌入
+    - [概览](/tidb-cloud/vector-search-auto-embedding-overview.md)
+    - [Amazon Titan Embeddings](/tidb-cloud/vector-search-auto-embedding-amazon-titan.md)
+    - [Cohere Embeddings](/tidb-cloud/vector-search-auto-embedding-cohere.md)
+    - [Jina AI Embeddings](/tidb-cloud/vector-search-auto-embedding-jina-ai.md)
+    - [OpenAI Embeddings](/tidb-cloud/vector-search-auto-embedding-openai.md)
+    - [Gemini Embeddings](/tidb-cloud/vector-search-auto-embedding-gemini.md)
+    - [HuggingFace Embeddings](/tidb-cloud/vector-search-auto-embedding-huggingface.md)
+    - [NVIDIA NIM Embeddings](/tidb-cloud/vector-search-auto-embedding-nvidia-nim.md)
   - 集成
     - [集成概览](/vector-search/vector-search-integration-overview.md)
     - AI 框架
@@ -253,6 +263,10 @@
       - [SQLAlchemy](/vector-search/vector-search-integrate-with-sqlalchemy.md)
       - [peewee](/vector-search/vector-search-integrate-with-peewee.md)
       - [Django](/vector-search/vector-search-integrate-with-django-orm.md)
+  - 文本搜索
+    - [使用 SQL 进行全文搜索](/tidb-cloud/vector-search-full-text-search-sql.md)
+    - [使用 Python 进行全文搜索](/tidb-cloud/vector-search-full-text-search-python.md)
+    - [混合搜索](/tidb-cloud/vector-search-hybrid-search.md)
   - 参考
     - [向量数据类型](/vector-search/vector-search-data-types.md)
     - [向量函数和操作符](/vector-search/vector-search-functions-and-operators.md)
@@ -654,8 +668,8 @@
     - [TSO](/tso.md)
   - 存储引擎
     - TiKV
-        - [TiKV 简介](/tikv-overview.md)
-        - [RocksDB 简介](/storage-engine/rocksdb-overview.md)
+      - [TiKV 简介](/tikv-overview.md)
+      - [RocksDB 简介](/storage-engine/rocksdb-overview.md)
     - TiFlash
       - [TiFlash 简介](/tiflash/tiflash-overview.md)
       - [TiFlash 数据落盘](/tiflash/tiflash-spill-disk.md)
