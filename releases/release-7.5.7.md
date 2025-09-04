@@ -108,7 +108,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - Fix the issue that row count estimation for `JOIN` can be highly inaccurate when column or index statistics are missing [#61602](https://github.com/pingcap/tidb/issues/61602) @[qw4990](https://github.com/qw4990)
     - Fix the issue that the default value of the system variable `tidb_cost_model_version` is set incorrectly [#61565](https://github.com/pingcap/tidb/issues/61565) @[hawkingrei](https://github.com/hawkingrei)
     - Fix the issue that statistics might be incorrect when the first column of a table is a virtual generated column [#61606](https://github.com/pingcap/tidb/issues/61606) @[winoros](https://github.com/winoros)
-    - Fix the issue that Plan Cache is incorrectly skipped with predicate simplification[#61513](https://github.com/pingcap/tidb/issues/61513) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that Plan Cache is incorrectly skipped with predicate simplification [#61513](https://github.com/pingcap/tidb/issues/61513) @[hawkingrei](https://github.com/hawkingrei)
     - Fix the issue that executing `ADMIN CANCEL DDL JOBS` while adding an index causes the index-adding process to hang [#61087](https://github.com/pingcap/tidb/issues/61087) @[tangenta](https://github.com/tangenta)
     - Fix the issue that `ADMIN CHECK` still returns success even after some internal SQL executions fail [#61612](https://github.com/pingcap/tidb/issues/61612) @[joechenrh](https://github.com/joechenrh)
     - Fix the issue that data and indexes became inconsistent after adding multiple indexes through multi-schema change [#61255](https://github.com/pingcap/tidb/issues/61255) @[tangenta](https://github.com/tangenta)
@@ -116,7 +116,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 + TiKV
 
     - Fix the issue that a deadlock might be triggered during CPU profiling [#18474](https://github.com/tikv/tikv/issues/18474) @[YangKeao](https://github.com/YangKeao)
-    - Fix the issue that Online Unsafe Recovery might be blocked by certain TiFlash replicas, preventing the commit index from advancing [18197](https://github.com/tikv/tikv/issues/18197) @[v01dstar](https://github.com/v01dstar)
+    - Fix the issue that Online Unsafe Recovery might be blocked by certain TiFlash replicas, preventing the commit index from advancing [#18197](https://github.com/tikv/tikv/issues/18197) @[v01dstar](https://github.com/v01dstar)
     - Fix the issue that TiKV might use a compression algorithm that the client cannot decode [#18079](https://github.com/tikv/tikv/issues/18079) @[ekexium](https://github.com/ekexium)
     - Fix the issue that TiKV allows excessive SST ingest requests under high concurrency [#18452](https://github.com/tikv/tikv/issues/18452) @[hbisheng](https://github.com/hbisheng)
     - Fix the issue that `Ingestion picked level` and `Compaction Job Size(files)` are displayed incorrectly in the TiKV dashboard in Grafana [#15990](https://github.com/tikv/tikv/issues/15990) @[Connor1996](https://github.com/Connor1996)
