@@ -8,7 +8,7 @@ aliases: ['/tidbcloud/tidb-cloud-tls-connect-to-dedicated-tier']
 
 On TiDB Cloud, establishing TLS connections is one of the basic security practices for connecting to TiDB Cloud Dedicated clusters. You can configure multiple TLS connections from your client, application, and development tools to your TiDB Cloud Dedicated cluster to protect data transmission security. For security reasons, TiDB Cloud Dedicated only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions.
 
-To ensure data security, CA Certificate for your TiDB Cloud Dedicated cluster is hosted on [AWS Private Certificate Authority](https://aws.amazon.com/private-ca/). The private key of CA certificate is stored in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
+To ensure data security, the CA certificate for your TiDB Cloud Dedicated cluster is hosted on [AWS Private Certificate Authority](https://aws.amazon.com/private-ca/). The private key of the CA certificate is stored in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
 
 ## Prerequisites
 
