@@ -9,6 +9,10 @@ TiProxy is the official proxy component of PingCAP. It is placed between the cli
 
 For more information, see [TiProxy Overview](https://docs.pingcap.com/tidb/stable/tiproxy-overview).
 
+> **Note:**
+>
+> Currently, TiProxy is only available for TiDB Cloud Dedicated clusters.
+
 ## Scenarios
 
 TiProxy is suitable for the following scenarios:
