@@ -3032,49 +3032,49 @@ Referenced in:
 
 Referenced in:
 
-- [System Variables](/system-variables.md#tidb_opt_hash_agg_cost_factor-new-in-v853-and-v900)
+- [System Variables](/system-variables.md#tidb_opt_hash_agg_cost_factor-new-in-v853)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 
 ### tidb_opt_hash_join_cost_factor
 
 Referenced in:
 
-- [System Variables](/system-variables.md#tidb_opt_hash_join_cost_factor-new-in-v853-and-v900)
+- [System Variables](/system-variables.md#tidb_opt_hash_join_cost_factor-new-in-v853)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 
 ### tidb_opt_index_join_cost_factor
 
 Referenced in:
 
-- [System Variables](/system-variables.md#tidb_opt_index_join_cost_factor-new-in-v853-and-v900)
+- [System Variables](/system-variables.md#tidb_opt_index_join_cost_factor-new-in-v853)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 
 ### tidb_opt_index_lookup_cost_factor
 
 Referenced in:
 
-- [System Variables](/system-variables.md#tidb_opt_index_lookup_cost_factor-new-in-v853-and-v900)
+- [System Variables](/system-variables.md#tidb_opt_index_lookup_cost_factor-new-in-v853)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 
 ### tidb_opt_index_merge_cost_factor
 
 Referenced in:
 
-- [System Variables](/system-variables.md#tidb_opt_index_merge_cost_factor-new-in-v853-and-v900)
+- [System Variables](/system-variables.md#tidb_opt_index_merge_cost_factor-new-in-v853)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 
 ### tidb_opt_index_reader_cost_factor
 
 Referenced in:
 
-- [System Variables](/system-variables.md#tidb_opt_index_reader_cost_factor-new-in-v853-and-v900)
+- [System Variables](/system-variables.md#tidb_opt_index_reader_cost_factor-new-in-v853)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 
 ### tidb_opt_index_scan_cost_factor
 
 Referenced in:
 
-- [System Variables](/system-variables.md#tidb_opt_index_scan_cost_factor-new-in-v853-and-v900)
+- [System Variables](/system-variables.md#tidb_opt_index_scan_cost_factor-new-in-v853)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 
 ### tidb_opt_insubq_to_join_and_agg
@@ -3101,7 +3101,7 @@ Referenced in:
 
 Referenced in:
 
-- [System Variables](/system-variables.md#tidb_opt_limit_cost_factor-new-in-v853-and-v900)
+- [System Variables](/system-variables.md#tidb_opt_limit_cost_factor-new-in-v853)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 
 ### tidb_opt_limit_push_down_threshold
@@ -3123,7 +3123,7 @@ Referenced in:
 
 Referenced in:
 
-- [System Variables](/system-variables.md#tidb_opt_merge_join_cost_factor-new-in-v853-and-v900)
+- [System Variables](/system-variables.md#tidb_opt_merge_join_cost_factor-new-in-v853)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 
 ### tidb_opt_mpp_outer_join_fixed_build_side
@@ -3217,49 +3217,49 @@ Referenced in:
 
 Referenced in:
 
-- [System Variables](/system-variables.md#tidb_opt_sort_cost_factor-new-in-v853-and-v900)
+- [System Variables](/system-variables.md#tidb_opt_sort_cost_factor-new-in-v853)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 
 ### tidb_opt_stream_agg_cost_factor
 
 Referenced in:
 
-- [System Variables](/system-variables.md#tidb_opt_stream_agg_cost_factor-new-in-v853-and-v900)
+- [System Variables](/system-variables.md#tidb_opt_stream_agg_cost_factor-new-in-v853)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 
 ### tidb_opt_table_full_scan_cost_factor
 
 Referenced in:
 
-- [System Variables](/system-variables.md#tidb_opt_table_full_scan_cost_factor-new-in-v853-and-v900)
+- [System Variables](/system-variables.md#tidb_opt_table_full_scan_cost_factor-new-in-v853)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 
 ### tidb_opt_table_range_scan_cost_factor
 
 Referenced in:
 
-- [System Variables](/system-variables.md#tidb_opt_table_range_scan_cost_factor-new-in-v853-and-v900)
+- [System Variables](/system-variables.md#tidb_opt_table_range_scan_cost_factor-new-in-v853)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 
 ### tidb_opt_table_reader_cost_factor
 
 Referenced in:
 
-- [System Variables](/system-variables.md#tidb_opt_table_reader_cost_factor-new-in-v853-and-v900)
+- [System Variables](/system-variables.md#tidb_opt_table_reader_cost_factor-new-in-v853)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 
 ### tidb_opt_table_rowid_cost_factor
 
 Referenced in:
 
-- [System Variables](/system-variables.md#tidb_opt_table_rowid_cost_factor-new-in-v853-and-v900)
+- [System Variables](/system-variables.md#tidb_opt_table_rowid_cost_factor-new-in-v853)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 
 ### tidb_opt_table_tiflash_scan_cost_factor
 
 Referenced in:
 
-- [System Variables](/system-variables.md#tidb_opt_table_tiflash_scan_cost_factor-new-in-v853-and-v900)
+- [System Variables](/system-variables.md#tidb_opt_table_tiflash_scan_cost_factor-new-in-v853)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 
 ### tidb_opt_three_stage_distinct_agg
@@ -3279,7 +3279,7 @@ Referenced in:
 
 Referenced in:
 
-- [System Variables](/system-variables.md#tidb_opt_topn_cost_factor-new-in-v853-and-v900)
+- [System Variables](/system-variables.md#tidb_opt_topn_cost_factor-new-in-v853)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 
 ### tidb_opt_use_invisible_indexes
