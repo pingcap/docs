@@ -20,7 +20,7 @@ TiDB Cloud extends these capabilities with two types of high availability to mee
 > **Note:**
 >
 > - For {{{ .starter }}} clusters, only zonal high availability is enabled and is not configurable.
-> - For {{{ .essential }}} clusters, regional high availability is enabled by default.
+> - For {{{ .essential }}} clusters, regional high availability is enabled by default, and you can change it to zonal high availability as needed.
 
 ## Zonal high availability architecture
 
