@@ -12,9 +12,25 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
+<CustomContent language="en,zh">
+
+- **TiDB Cloud Essential**
+
+    - Support three new Alibaba Cloud regions for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) clusters: `Jakarta (ap-southeast-5)`, `Mexico (na-south-1)`, and `Tokyo (ap-northeast-1)`.
+
 - **TiDB Cloud Dedicated**
 
     - Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v8.5.2](https://docs.pingcap.com/tidb/v8.5/release-8.5.2/) to [v8.5.3](https://docs.pingcap.com/tidb/v8.5/release-8.5.3/).
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+- **TiDB Cloud Dedicated**
+
+    - Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v8.5.2](https://docs.pingcap.com/tidb/v8.5/release-8.5.2/) to [v8.5.3](https://docs.pingcap.com/tidb/v8.5/release-8.5.3/).
+
+</CustomContent>
 
 ## August 26, 2025
 
