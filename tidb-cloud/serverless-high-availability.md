@@ -1,9 +1,9 @@
 ---
-title: High Availability in {{{ .starter }}} and Essential
-summary: Learn about the high availability architecture of {{{ .starter }}} and Essential. Discover Zonal and Regional High Availability options, automated backups, failover processes, and how TiDB ensures data durability and business continuity.
+title: High Availability in Essential
+summary: Learn about the high availability architecture of Essential. Discover Zonal and Regional High Availability options, automated backups, failover processes, and how TiDB ensures data durability and business continuity.
 ---
 
-# High Availability in {{{ .starter }}} and Essential
+# High Availability in Essential
 
 TiDB Cloud is designed with robust mechanisms to maintain high availability and data durability by default, preventing single points of failure and ensuring continuous service even in the face of disruptions. As a fully managed service based on the battle-tested TiDB Open Source product, it inherits TiDB's core high availability (HA) features and augments them with additional cloud-native capabilities.
 
@@ -19,7 +19,7 @@ TiDB Cloud extends these capabilities with two types of high availability to mee
 
 > **Note:**
 >
-> - Currently high availability is not available on {{{ .starter }}} clusters.
+> Currently high availability is not available on {{{ .starter }}} clusters.
 
 ## Zonal high availability architecture
 
