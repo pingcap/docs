@@ -49,7 +49,7 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 ## `--initialize-secure`
 
-- Bootstraps tidb-server in secure mode
+- Bootstraps tidb-server in secure mode. This will setup a root account with the `auth_socket` authentication method, requiring initial access to be over a socket connection.
 - Default: `false`
 
 ## `--initialize-sql-file`
