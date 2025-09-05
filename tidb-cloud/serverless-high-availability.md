@@ -1,9 +1,9 @@
 ---
-title: High Availability in Essential
-summary: Learn about the high availability architecture of Essential. Discover Zonal and Regional High Availability options, automated backups, failover processes, and how TiDB ensures data durability and business continuity.
+title: High Availability in {{{ .starter }}} and Essential
+summary: Learn about the high availability architecture of {{{ .starter }}} and Essential. Discover Zonal and Regional High Availability options, automated backups, failover processes, and how TiDB ensures data durability and business continuity.
 ---
 
-# High Availability in Essential
+# High Availability in {{{ .starter }}} and Essential
 
 TiDB Cloud is designed with robust mechanisms to maintain high availability and data durability by default, preventing single points of failure and ensuring continuous service even in the face of disruptions. As a fully managed service based on the battle-tested TiDB Open Source product, it inherits TiDB's core high availability (HA) features and augments them with additional cloud-native capabilities.
 
@@ -15,11 +15,12 @@ TiDB Cloud extends these capabilities with two types of high availability to mee
 
 - **Zonal high availability**: This option places all nodes within a single availability zone, reducing network latency. It ensures high availability without requiring application-level redundancy across zones, making it suitable for applications that prioritize low latency within a single zone. For more information, see [Zonal high availability architecture](#zonal-high-availability-architecture).
 
-- **Regional high availability (default)**: This option distributes nodes across multiple availability zones, offering maximum infrastructure isolation and redundancy. It provides the highest level of availability but requires application-level redundancy across zones. It is recommended to choose this option if you need maximum availability protection against infrastructure failures within a zone. Note that it increases latency and might incur cross-zone data transfer fees. Regional high availability is available by default in all cloud regions that support {{{ .essential }}}. For more information, see [Regional high availability architecture](#regional-high-availability-architecture).
+- **Regional high availability**: This option distributes nodes across multiple availability zones, offering maximum infrastructure isolation and redundancy. It provides the highest level of availability but requires application-level redundancy across zones. It is recommended to choose this option if you need maximum availability protection against infrastructure failures within a zone. Note that it increases latency and might incur cross-zone data transfer fees. For more information, see [Regional high availability architecture](#regional-high-availability-architecture).
 
 > **Note:**
 >
-> Currently high availability is not available on {{{ .starter }}} clusters.
+> - For {{{ .starter }}} clusters, only zonal high availability is enabled and is not configurable.
+> - For {{{ .essential }}} clusters, regional high availability is enabled by default.
 
 ## Zonal high availability architecture
 
