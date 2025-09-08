@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Managing Indexes and Identifying Unused Indexes
-summary: Learn the best practices for managing indexes and identifying unused indexes in TiDB.
+summary: Learn the best practices for managing and optimizing indexes, identifying and removing unused indexes in TiDB.
 ---
 
 # Best Practices for Managing Indexes and Identifying Unused Indexes
@@ -10,20 +10,20 @@ Indexes are essential for optimizing database query performance, reducing the ne
 - Unused indexes: these indexes are once relevant but are no longer selected by the query optimizer, consuming storage and adding unnecessary overhead to write operations.
 - Inefficient indexes: some indexes are used by the optimizer but scan more data than expected, increasing disk I/O and slowing down query performance.
 
-If left unaddressed, these indexing issues can cause higher storage costs, degraded performance, and operational inefficiencies. In a distributed SQL database like TiDB, indexing inefficiencies have an even greater impact due to the scale of distributed queries and the complexity of multi-node coordination. That is why regular index audits are crucial for maintaining an optimized database. 
+If left unaddressed, these indexing issues can cause higher storage costs, degraded performance, and operational inefficiencies. In a distributed SQL database like TiDB, indexing inefficiencies have an even greater impact due to the scale of distributed queries and the complexity of multi-node coordination. That is why regular index audits are crucial for keeping your database optimized.
 
 Proactively identifying and optimizing indexes helps:
 
 - Reduce storage overhead: removing unused indexes frees up disk space and reduces long-term storage costs.
 - Improve write performance: write-heavy workloads (such as `INSERT`, `UPDATE`, and `DELETE`) perform better when unnecessary index maintenance is eliminated.
-- Optimize query execution: efficient indexes reduce the number of rows scanned, improving query speed and response times.
+- Optimize query execution: efficient indexes reduce the number of rows scanned, improving query speed and response time.
 - Streamline database management: fewer and well-optimized indexes simplify backups, recovery, and schema changes.
 
-Because indexes evolve with changing business logic, regular index audits are a standard part of database maintenance. TiDB provides built-in observability tools to help you detect, evaluate, and optimize indexes without risk.
+Because indexes evolve with changing business logic, regular index audits are a standard part of database maintenance. TiDB provides built-in observability tools to help you detect, evaluate, and optimize indexes safely and effectively.
 
 TiDB v8.0.0 introduces the [`INFORMATION_SCHEMA.TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) table and the [`mysql.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) table to help you track index usage patterns and make data-driven decisions. 
 
-This document describes the tools that you can use to detect and eliminate unused or inefficient indexes, thus improving TiDB's performance and stability.
+This document describes the tools that you can use to detect and remove unused or inefficient indexes, thus improving TiDB's performance and stability.
 
 ## TiDB index optimization: a data-driven approach
 
