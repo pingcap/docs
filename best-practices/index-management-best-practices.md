@@ -281,13 +281,13 @@ To maintain high performance and efficient resource usage, regular index optimiz
 
 1. **Monitor index usage regularly.**
 
-    - Use [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) and [`CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md#cluster_tidb_index_usage) to track index activity.
-    - Identify unused indexes with [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) and evaluate whether they can be removed.
+    - Use [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) and [`CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md#cluster_tidb_index_usage) to track index usage activity.
+    - Identify unused indexes using [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md), and evaluate whether they can be removed.
     - Monitor query execution plans to detect inefficient indexes that might cause excessive I/O.
 
 2. **Validate before removing indexes.**
 
-    - Use [`ALTER TABLE ... INVISIBLE`](/sql-statements/sql-statement-alter-table.md) to make an index invisible to temporarily disable an index and observe the impact before permanent deletion.
+    - Use [`ALTER TABLE ... INVISIBLE`](/sql-statements/sql-statement-alter-table.md) to make an index invisible to temporarily disable an index, and observe the impact before permanent deletion.
     - If query performance remains stable, proceed with index removal.
     - Ensure a sufficient observation period to account for all query patterns before making a final decision.
 
@@ -295,7 +295,7 @@ To maintain high performance and efficient resource usage, regular index optimiz
 
     - Consolidating redundant indexes can reduce storage overhead and improve write performance. If multiple indexes serve similar queries, they might be candidates for merging into a single, more efficient index.
 
-        - To find indexes with overlapping prefixes (which might indicate redundancy), run the following:
+        - To find indexes with overlapping prefixes (which might indicate redundancy), run the following SQL statement:
 
             ```sql
             SELECT TABLE_SCHEMA, TABLE_NAME, INDEX_NAME, COLUMN_NAME, SEQ_IN_INDEX
@@ -306,7 +306,7 @@ To maintain high performance and efficient resource usage, regular index optimiz
 
         - If two indexes have the same leading columns, consider merging them into a composite index instead.
 
-    - Improve selectivity. Low-selectivity indexes (those filtering too many rows) can be optimized by:
+    - Improve selectivity. Low-selectivity indexes (those filtering too many rows) can be optimized as follows:
 
         - Adding additional columns to improve filtering efficiency.
         - Changing index structure (for example, prefix indexes, composite indexes).
