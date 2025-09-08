@@ -44,7 +44,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
         - **Native integration with AWS Bedrock**: managed embedding models with a free quota, including Amazon Titan and Cohere text embedding models from AWS Bedrock.
         - **SQL and Python support**, with code examples for creating, storing, and querying embeddings.
 
-      For more information, see [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md).
+      For more information, see [Auto Embedding](https://docs.pingcap.com/tidbcloud/vector-search-auto-embedding-overview/?plan=starter).
 
 - **TiDB Cloud Dedicated**
 
