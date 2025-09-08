@@ -170,8 +170,7 @@ You can create a TiDB Cloud Dedicated cluster using the `tidbcloud_dedicated_clu
 
     - To use the `tidbcloud_dedicated_cluster` resource, set the resource type as `tidbcloud_dedicated_cluster`.
     - For the resource name, you can define it as needed. For example, `example_cluster`.
-    - For the resource details, you can configure them according to the Project ID and the TiDB Cloud Dedicated cluster specification information. 
-    - To get the TiDB Cloud Dedicated cluster specification information, see [tidbcloud_dedicated_cluster (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_cluster).
+    - For resource details, you can configure them according to the Project ID and the [`tidbcloud_dedicated_cluster` specification](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_cluster).
 
 3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
 

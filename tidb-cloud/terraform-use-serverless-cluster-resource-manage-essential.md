@@ -160,9 +160,7 @@ You can create a {{{ .essential }}} cluster using the `tidbcloud_serverless_clus
 
     - To use the `tidbcloud_serverless_cluster` resource, set the resource type as `tidbcloud_serverless_cluster`.
     - For the resource name, you can define it as needed. For example, `example`.
-    - For the resource details, you can configure them according to the Project ID and the {{{ .essential }}} cluster specification information.
-    - For creating a {{{ .essential }}} cluster, you must specify the `auto_scaling` attribute.
-    - To get the {{{ .essential }}} cluster specification information, see [tidbcloud_serverless_cluster (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster).
+    - For resource details, you can configure them according to the Project ID and the [`tidbcloud_serverless_cluster` specification](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster). To create a {{{ .essential }}} cluster, you must specify the `auto_scaling` attribute in resource details.
 
 3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
 
