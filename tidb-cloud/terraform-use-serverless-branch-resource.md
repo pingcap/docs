@@ -160,7 +160,7 @@ The following example shows how to create a {{{ .starter }}} or {{{ .essential }
 
 ## Import a {{{ .starter }}} or {{{ .essential }}} branch
 
-For a {{{ .starter }}} or {{{ .essential }}} branch that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+For a {{{ .starter }}} or {{{ .essential }}} branch that is not managed by Terraform, you can bring it under Terraform management by importing it.
 
 Import a {{{ .starter }}} or {{{ .essential }}} branch that is not created by Terraform as follows:
 

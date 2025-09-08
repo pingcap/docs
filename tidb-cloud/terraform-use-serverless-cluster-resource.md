@@ -7,7 +7,7 @@ summary: Learn how to use the `tidbcloud_serverless_cluster` resource to create 
 
 This document describes how to manage a [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster with the `tidbcloud_serverless_cluster` resource.
 
-In addition, you will also learn how to get the necessary information with the `tidbcloud_projects` data source.
+You will also learn how to get the necessary information with the `tidbcloud_projects` data source.
 
 The features of the `tidbcloud_serverless_cluster` resource include the following:
 
@@ -123,11 +123,11 @@ Now, you can get all the available projects from the output. Copy one of the pro
 
 You can create a {{{ .starter }}} cluster using the `tidbcloud_serverless_cluster` resource.
 
-The following example shows how to create a {{{ .starter }}} cluster.
-
 1. Create a directory for the cluster and enter it.
 
-2. Create a `cluster.tf` file:
+2. Create a `cluster.tf` file.
+
+    The following is an example of the `cluster.tf` file:
 
     ```
     terraform {
@@ -420,9 +420,8 @@ resource "tidbcloud_serverless_cluster" "example" {
 
 ## Import a {{{ .starter }}} cluster
 
-For a {{{ .starter }}} cluster that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+For a {{{ .starter }}} cluster that is not managed by Terraform, you can bring it under Terraform management by importing it.
 
-Import a {{{ .starter }}} cluster that is not created by Terraform as follows:
 
 1. Add an import block for the new `tidbcloud_serverless_cluster` resource.
 
@@ -542,7 +541,7 @@ tidbcloud_serverless_cluster.example: Destruction complete after 1s
 Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
 ```
 
-Now, if you run the `terraform show` command, it will show no managed resources because the resource has been cleared:
+Now, if you run the `terraform show` command, it will show no managed resources because the resource has been destroyed:
 
 ```
 $ terraform show
