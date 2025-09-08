@@ -123,11 +123,11 @@ Now, you can get all the available projects from the output. Copy one of the pro
 
 You can create a {{{ .essential }}} cluster using the `tidbcloud_serverless_cluster` resource.
 
-The following example shows how to create a {{{ .essential }}} cluster.
-
 1. Create a directory for the cluster and enter it.
 
-2. Create a `cluster.tf` file:
+2. Create a `cluster.tf` file.
+
+    The following is an example of the `cluster.tf` file:
 
     ```
     terraform {
@@ -429,8 +429,6 @@ resource "tidbcloud_serverless_cluster" "example" {
 
 For a {{{ .essential }}} cluster that is not managed by Terraform, you can bring it under Terraform management by importing it.
 
-Import a {{{ .essential }}} cluster that is not created by Terraform as follows:
-
 1. Add an import block for the new `tidbcloud_serverless_cluster` resource.
 
     Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the cluster ID:
@@ -469,7 +467,7 @@ Now you can manage the imported cluster with Terraform.
 
 ## Delete a {{{ .essential }}} cluster
 
-To delete a {{{ .essential }}} cluster, you can remove the `tidbcloud_serverless_cluster` resource block from your configuration file, and then run the `terraform apply` command to destroy the resource:
+To delete a {{{ .essential }}} cluster, you can delete the configuration of the `tidbcloud_serverless_cluster` resource, then use the `terraform apply` command to destroy the resource:
 
 ```shell
 $ terraform apply
@@ -550,7 +548,7 @@ tidbcloud_serverless_cluster.example: Destruction complete after 1s
 Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
 ```
 
-Now, if you run the `terraform show` command, it will show no managed resources because the resource has been destroyed:
+Now, if you run the `terraform show` command, it will show no managed resources because the resource has been cleared:
 
 ```
 $ terraform show
