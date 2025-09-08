@@ -1,17 +1,17 @@
 ---
 title: Use `tidbcloud_serverless_export` Resource
-summary: Learn how to use the `tidbcloud_serverless_export` resource to create and modify a {{{ .starter }}} or {{{ .essential }}} export task.
+summary: Learn how to use the `tidbcloud_serverless_export` resource to create and modify data export tasks for {{{ .starter }}} or {{{ .essential }}} clusters.
 ---
 
 # Use `tidbcloud_serverless_export` Resource
 
-This document describes how to manage a [{{{ .starter }}} or {{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) data export task using the `tidbcloud_serverless_export` resource.
+This document describes how to manage data export tasks for {{{ .starter }}} or {{{ .essential }}} clusters using the `tidbcloud_serverless_export` resource.
 
 The features of the `tidbcloud_serverless_export` resource include the following:
 
-- Create {{{ .starter }}} or {{{ .essential }}} data export tasks.
-- Import {{{ .starter }}} or {{{ .essential }}} data export tasks.
-- Delete {{{ .starter }}} or {{{ .essential }}} data export tasks.
+- Create data export tasks for {{{ .starter }}} or {{{ .essential }}} clusters.
+- Import data export tasks for {{{ .starter }}} or {{{ .essential }}} clusters.
+- Delete data export tasks for {{{ .starter }}} or {{{ .essential }}} clusters.
 
 > **Note:**
 >
@@ -22,15 +22,15 @@ The features of the `tidbcloud_serverless_export` resource include the following
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
 - [Create a {{{ .starter }}} or {{{ .essential }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
 
-## Create a {{{ .starter }}} or {{{ .essential }}} data export task
+## Create a data export task for a {{{ .starter }}} or {{{ .essential }}} cluster
 
-You can create a {{{ .starter }}} or {{{ .essential }}} data export task using the `tidbcloud_serverless_export` resource.
-
-The following example shows how to create a {{{ .starter }}} or {{{ .essential }}} data export task.
+You can create a data export task for a {{{ .starter }}} or {{{ .essential }}} cluster using the `tidbcloud_serverless_export` resource.
 
 1. Create a directory for the export and enter it.
 
-2. Create a `export.tf` file:
+2. Create a `export.tf` file for the data export task.
+
+    The following is an example of the `export.tf` file:
 
     ```
     terraform {
@@ -142,11 +142,9 @@ The following example shows how to create a {{{ .starter }}} or {{{ .essential }
     }
     ```
 
-## Import a {{{ .starter }}} or {{{ .essential }}} data export task
+## Import a data export task for a {{{ .starter }}} or {{{ .essential }}} cluster
 
-For a {{{ .starter }}} or {{{ .essential }}} data export task that is not managed by Terraform, you can use Terraform to manage it just by importing it.
-
-Import a {{{ .starter }}} or {{{ .essential }}} data export task that is not created by Terraform as follows:
+If a data export task for a {{{ .starter }}} or {{{ .essential }}} cluster is not managed by Terraform, you can bring it under Terraform management by importing it.
 
 1. Add an import block for the new `tidbcloud_serverless_export` resource.
 
@@ -184,9 +182,9 @@ Import a {{{ .starter }}} or {{{ .essential }}} data export task that is not cre
 
 Now you can manage the imported export with Terraform.
 
-## Delete a {{{ .starter }}} or {{{ .essential }}} data export task
+## Delete a data export task for a {{{ .starter }}} or {{{ .essential }}} cluster
 
-To delete a {{{ .starter }}} or {{{ .essential }}} data export task, you can delete the configuration of the `tidbcloud_serverless_export` resource, then use the `terraform apply` command to destroy the resource:
+To delete a data export task for a {{{ .starter }}} or {{{ .essential }}} cluster, you can delete the configuration of the `tidbcloud_serverless_export` resource, then use the `terraform apply` command to destroy the resource:
 
 ```shell
 $ terraform apply
