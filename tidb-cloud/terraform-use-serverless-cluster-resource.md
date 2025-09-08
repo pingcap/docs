@@ -541,7 +541,7 @@ tidbcloud_serverless_cluster.example: Destruction complete after 1s
 Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
 ```
 
-Now, if you run the `terraform show` command, it will show no managed resources because the resource has been cleared:
+Now, if you run the `terraform show` command, it will show no managed resources because the resource has been destroyed:
 
 ```
 $ terraform show
