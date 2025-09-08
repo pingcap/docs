@@ -27,7 +27,7 @@ This document describes the tools that you can use to detect and remove unused o
 
 ## TiDB index optimization: a data-driven approach
 
-Indexes are essential for query performance, but removing them without proper analysis can lead to unexpected regressions or even system instability. To ensure safe and effective index management, TiDB provides built-in observability tools that allow you to:
+Indexes are essential for query performance, but removing them without proper analysis can lead to unexpected regressions or even system instability. To ensure safe and effective index management, TiDB provides built-in observability tools that let you do the following:
 
 - Track index usage in real-time: identify how often an index is accessed and whether it contributes to performance improvements.
 - Detect unused indexes: locate indexes that have not been used since the database is last restarted.
@@ -42,21 +42,21 @@ TiDB simplifies index optimization by introducing the following powerful tools:
 
 By using these observability tools, you can confidently clean up redundant indexes without risking performance degradation.
 
-## Track index usage with `TIDB_INDEX_USAGE`
+## Track index usage using `TIDB_INDEX_USAGE`
 
 Introduced in [TiDB v8.0.0](/releases/release-8.0.0.md), the `TIDB_INDEX_USAGE` system table provides real-time insights into how indexes are used, helping you optimize query performance and remove unnecessary indexes.
 
-With `TIDB_INDEX_USAGE`, you can:
+Specifically, you can use the `TIDB_INDEX_USAGE` system table to do the following:
 
 - Detect unused indexes: identify indexes that have not been accessed by queries, helping determine which ones can be safely removed.
 - Analyze index efficiency: track how frequently an index is used and whether it contributes to efficient query execution.
 - Evaluate query patterns: understand how indexes affect read operations, data scans, and key-value (KV) requests.
 
-Starting from [TiDB v8.4.0](/releases/release-8.4.0.md), the table also includes primary keys in clustered tables, offering deeper visibility into index performance.
+Starting from [TiDB v8.4.0](/releases/release-8.4.0.md), the `TIDB_INDEX_USAGE` system table also includes primary keys in clustered tables, offering deeper visibility into index performance.
 
 ### Key metrics in `TIDB_INDEX_USAGE`
 
-Run the following SQL statement to check the fields in `TIDB_INDEX_USAGE`:
+If you want to check the fields in the `TIDB_INDEX_USAGE` system table, run the following SQL statement:
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -85,11 +85,11 @@ DESC TIDB_INDEX_USAGE;
 14 rows in set (0.00 sec)
 ```
 
-For the explanations of these columns, see [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md).
+For explanations of these columns, see [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md).
 
 ### Identify unused and inefficient indexes using `TIDB_INDEX_USAGE`
 
-Identify unused and inefficient indexes using `TIDB_INDEX_USAGE` as follows:
+This section describes how to identify unused and inefficient indexes using the `TIDB_INDEX_USAGE` system table.
 
 - Unused indexes:
 
@@ -101,21 +101,21 @@ Identify unused and inefficient indexes using `TIDB_INDEX_USAGE` as follows:
     - Large values in `PERCENTAGE_ACCESS_100` suggest full index scans, which might indicate an inefficient index.
     - Compare `ROWS_ACCESS_TOTAL` and `QUERY_TOTAL` to determine whether the index scans too many rows relative to its usage.
 
-By leveraging `TIDB_INDEX_USAGE`, you can gain detailed insights into index performance, making it easier to remove unnecessary indexes and optimize query execution.
+By using the `TIDB_INDEX_USAGE` system table, you can gain detailed insights into index performance, making it easier to remove unnecessary indexes and optimize query execution.
 
 ### Considerations when using `TIDB_INDEX_USAGE`
 
-Take the following into consideration when you use `TIDB_INDEX_USAGE`.
+Take the following into consideration when you use the `TIDB_INDEX_USAGE` system table.
 
 #### Data updates are delayed
 
-To minimize performance impact, `TIDB_INDEX_USAGE` does not update instantly. Index usage metrics might be delayed by up to 5 minutes. Take this delay into consideration when you analyze queries.
+To minimize performance impact, `TIDB_INDEX_USAGE` does not update instantly. Index usage metrics might be delayed by up to 5 minutes. Keep this latency in mind when you analyze queries.
 
 #### Index usage data is not persisted
 
-`TIDB_INDEX_USAGE` stores data in memory, meaning it does not persist across node restarts.
+The `TIDB_INDEX_USAGE` system table stores data in memory, meaning it does not persist across node restarts.
 
-If a TiDB node is restarted, all index usage statistics from that node will be cleared.
+When a TiDB node restarts, all index usage statistics from that node are cleared.
 
 #### Track historical data
 
@@ -125,7 +125,7 @@ You can periodically export index usage snapshots using the following SQL statem
 SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEX_USAGE INTO OUTFILE '/backup/index_usage_snapshot.csv';
 ```
 
-This allows for historical tracking by comparing snapshots over time to detect trends in index usage and make more informed pruning decisions.
+This enables historical tracking by comparing snapshots over time, helping you detect trends in index usage and make more informed pruning decisions.
 
 ## Consolidate index usage data across TiDB nodes using `CLUSTER_TIDB_INDEX_USAGE`
 
