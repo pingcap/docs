@@ -103,9 +103,9 @@ This section describes how to identify unused and inefficient indexes using the 
 
 By using the `TIDB_INDEX_USAGE` system table, you can gain detailed insights into index performance, making it easier to remove unnecessary indexes and optimize query execution.
 
-### Considerations when using `TIDB_INDEX_USAGE`
+### Use `TIDB_INDEX_USAGE` effectively
 
-Take the following into consideration when you use the `TIDB_INDEX_USAGE` system table.
+The following points help you use the `TIDB_INDEX_USAGE` system table effectively.
 
 #### Data updates are delayed
 
@@ -131,9 +131,9 @@ This enables historical tracking by comparing snapshots over time, helping you d
 
 Because TiDB is a distributed SQL database, query workloads are spread across multiple nodes. Each TiDB node tracks its own local index usage. For a global view of index performance, TiDB provides the [`CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md#cluster_tidb_index_usage) system table. This view consolidates index usage data from all TiDB nodes, ensuring that distributed query workloads are fully accounted for when optimizing indexing strategies.
 
-Unlike `TIDB_INDEX_USAGE`, which provides insights at the node level, this cluster-wide view `CLUSTER_TIDB_INDEX_USAGE` lets you:
+Unlike `TIDB_INDEX_USAGE`, which provides insights at the node level, this cluster-wide view `CLUSTER_TIDB_INDEX_USAGE` lets you do the following:
 
-- Detect inconsistencies in index usage. For example, an index might be frequently used on some nodes but unused on others.
+- Detect inconsistencies in index usage. For example, an index might be frequently used on some nodes while remaining unused on others.
 - Analyze global index patterns for distributed queries, ensuring indexing decisions reflect real-world workload distribution.
 - Optimize indexing strategies across all nodes, improving query efficiency for multi-node deployments.
 
@@ -158,13 +158,13 @@ The following tables show the key differences between `TIDB_INDEX_USAGE` and `CL
 | Index tracking   | Data is local to each database.                      | Provides a centralized cluster-wide view                |
 | Primary use case | Debugs index usage at the database instance level    | Analyzes global index patterns and multi-node behavior  |
 
-### Considerations when using `CLUSTER_TIDB_INDEX_USAGE`
+### Use `CLUSTER_TIDB_INDEX_USAGE` effectively
 
-Because this system table consolidates data from multiple nodes, consider the following:
+Because the `CLUSTER_TIDB_INDEX_USAGE` system table consolidates data from multiple nodes, consider the following:
 
 - Delayed data updates
 
-    To minimize performance impact, `CLUSTER_TIDB_INDEX_USAGE` does not update instantly. Index usage metrics might be delayed by up to 5 minutes. Take this delay into consideration when you analyze queries.
+    To minimize performance impact, `CLUSTER_TIDB_INDEX_USAGE` does not update instantly. Index usage metrics might be delayed by up to 5 minutes. Keep this latency in mind when you analyze queries.
 
 - Memory-based storage
 
