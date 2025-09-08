@@ -5,9 +5,9 @@ summary: Learn how to use the `tidbcloud_serverless_cluster` resource to create 
 
 # Use the `tidbcloud_serverless_cluster` Resource
 
-This document describes how to manage a [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster with the `tidbcloud_serverless_cluster` resource.
+This document describes how to manage a [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) cluster with the `tidbcloud_serverless_cluster` resource.
 
-In addition, you will also learn how to get the necessary information with the `tidbcloud_projects` data source.
+You will also learn how to get the necessary information with the `tidbcloud_projects` data source.
 
 The features of the `tidbcloud_serverless_cluster` resource include the following:
 
@@ -427,7 +427,7 @@ resource "tidbcloud_serverless_cluster" "example" {
 
 ## Import a {{{ .essential }}} cluster
 
-For a {{{ .essential }}} cluster that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+For a {{{ .essential }}} cluster that is not managed by Terraform, you can bring it under Terraform management by importing it.
 
 Import a {{{ .essential }}} cluster that is not created by Terraform as follows:
 
@@ -469,7 +469,7 @@ Now you can manage the imported cluster with Terraform.
 
 ## Delete a {{{ .essential }}} cluster
 
-To delete a {{{ .essential }}} cluster, you can delete the configuration of the `tidbcloud_serverless_cluster` resource, then use the `terraform apply` command to destroy the resource:
+To delete a {{{ .essential }}} cluster, you can remove the `tidbcloud_serverless_cluster` resource block from your configuration file, and then run the `terraform apply` command to destroy the resource:
 
 ```shell
 $ terraform apply
@@ -550,7 +550,7 @@ tidbcloud_serverless_cluster.example: Destruction complete after 1s
 Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
 ```
 
-Now, if you run the `terraform show` command, it will show no managed resources because the resource has been cleared:
+Now, if you run the `terraform show` command, it will show no managed resources because the resource has been destroyed:
 
 ```
 $ terraform show
