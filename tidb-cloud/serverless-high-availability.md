@@ -11,16 +11,16 @@ TiDB Cloud is designed with robust mechanisms to maintain high availability and 
 
 TiDB ensures high availability and data durability using the Raft consensus algorithm. This algorithm consistently replicates data changes across multiple nodes, allowing TiDB to handle read and write requests even in the event of node failures or network partitions. This approach provides both high data durability and fault tolerance.
 
-TiDB Cloud extends these capabilities with two types of high availability to meet different operational requirements:
+TiDB Cloud extends these capabilities with zonal high availability and regional high availability to meet different operational requirements.
+
+> **Note:**
+>
+> - For {{{ .starter }}} clusters, only zonal high availability is enabled, and is not configurable.
+> - For {{{ .essential }}} clusters, regional high availability is enabled by default, and you can change it to zonal high availability as needed.
 
 - **Zonal high availability**: This option places all nodes within a single availability zone, reducing network latency. It ensures high availability without requiring application-level redundancy across zones, making it suitable for applications that prioritize low latency within a single zone. For more information, see [Zonal high availability architecture](#zonal-high-availability-architecture).
 
 - **Regional high availability**: This option distributes nodes across multiple availability zones, offering maximum infrastructure isolation and redundancy. It provides the highest level of availability but requires application-level redundancy across zones. It is recommended to choose this option if you need maximum availability protection against infrastructure failures within a zone. Note that it increases latency and might incur cross-zone data transfer fees. This feature is available in regions with more than three availability zones and can only be enabled during cluster creation. For more information, see [Regional high availability architecture](#regional-high-availability-architecture).
-
-> **Note:**
->
-> - For {{{ .starter }}} clusters, only zonal high availability is enabled and is not configurable.
-> - For {{{ .essential }}} clusters, regional high availability is enabled by default, and you can change it to zonal high availability as needed.
 
 ## Zonal high availability architecture
 
