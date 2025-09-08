@@ -21,7 +21,7 @@ Proactively identifying and optimizing indexes helps:
 
 Because indexes evolve with changing business logic, regular index audits are a standard part of database maintenance. TiDB provides built-in observability tools to help you detect, evaluate, and optimize indexes safely and effectively.
 
-TiDB v8.0.0 introduces the [`INFORMATION_SCHEMA.TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) table and the [`mysql.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) table to help you track index usage patterns and make data-driven decisions. 
+TiDB v8.0.0 introduces the [`INFORMATION_SCHEMA.TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) table and the [`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) table to help you track index usage patterns and make data-driven decisions. 
 
 This document describes the tools that you can use to detect and remove unused or inefficient indexes, thus improving TiDB's performance and stability.
 
@@ -174,9 +174,9 @@ By using `CLUSTER_TIDB_INDEX_USAGE`, you can gain a global perspective on index 
 
 ## Identify unused indexes using `schema_unused_indexes`
 
-Manually analyzing index usage data can be time-consuming. To simplify this process, TiDB provides `schema_unused_indexes`, a system view that lists indexes that have not been used since the database is last restarted.
+Manually analyzing index usage data can be time-consuming. To simplify this process, TiDB provides [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md), a system view that lists indexes that have not been used since the database is last restarted.
 
-This provides a quick way for you to:
+This provides a quick way for you to do the following:
 
 - Identify indexes that are no longer in use, reducing unnecessary storage costs.
 - Speed up DML operations by eliminating indexes that add overhead to `INSERT`, `UPDATE`, and `DELETE` queries.
@@ -207,6 +207,8 @@ A result similar to the following is returned:
 
 ### Considerations when using `schema_unused_indexes`
 
+Take the following points into consideration when you use `schema_unused_indexes`.
+
 #### Indexes are considered unused only since the last restart
 
 - If a TiDB node restarts, the usage tracking data is reset.
@@ -230,17 +232,17 @@ For clusters upgraded from an earlier version to TiDB v8.0.0 or later, you must 
 
 For more information, see [Manually create the `schema_unused_indexes` view](/sys-schema/sys-schema-unused-indexes.md#manually-create-the-schema_unused_indexes-view). 
 
-## Safely test index removal with invisible indexes
+## Safely test index removal using invisible indexes
 
 Removing an index without proper validation can lead to unexpected performance issues, especially if the index is infrequently used but still critical for certain queries. 
 
-To mitigate this risk, TiDB provides invisible indexes, allowing you to temporarily disable an index without deleting it. By using invisible indexes, you can validate index removal decisions without risk, ensuring a more controlled and predictable database optimization process.
+To mitigate this risk, TiDB provides invisible indexes, allowing you to temporarily disable an index without deleting it. By using invisible indexes, you can safely validate index removal decisions, ensuring a more controlled and predictable database optimization process.
 
 ### What are invisible indexes?
 
 An invisible index remains in the database but is ignored by the TiDB optimizer. You can use [`ALTER TABLE ... INVISIBLE`](/sql-statements/sql-statement-alter-table.md) to make an index invisible to test whether the index is truly unnecessary without permanently removing it.
 
-Key benefits of invisible indexes include:
+Key benefits of invisible indexes are as follows:
 
 - **Safe index testing**: queries will no longer use the index, but it can be quickly restored if needed.
 - **Zero disruption to index storage**: the index remains intact, ensuring no need for costly re-creation.
@@ -259,7 +261,7 @@ After making the index invisible, observe the system's query performance:
 - If performance remains unchanged, the index is likely unnecessary and can be safely removed.
 - If query latency increases, the index might still be needed.
 
-### Considerations when using invisible indexes
+### Use invisible indexes effectively
 
 - **Test during off-peak hours**: monitor performance impact in a controlled environment.
 - **Use query monitoring tools**: analyze query execution plans before and after marking an index invisible.
