@@ -16,7 +16,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Starter**
 
-    - For newly created [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, only zonal high availability is enabled, and it is not configurable. 
+    - For newly created [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, only zonal high availability is enabled, and it is not configurable.
     - For existing TiDB Cloud Starter clusters with regional high availability enabled before **September 9, 2025**, regional high availability remains supported and is not affected.
 
 - **TiDB Cloud Essential**
