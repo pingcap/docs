@@ -8,6 +8,25 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## September 9, 2025
+
+**High availability changes**
+
+- **TiDB Cloud Starter**
+
+    - For newly created [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, only zonal high availability is enabled, and it is not configurable.
+    - For existing TiDB Cloud Starter clusters with regional high availability enabled before **September 9, 2025**, regional high availability remains supported and is not affected.
+
+<CustomContent language="en,zh">
+
+- **TiDB Cloud Essential**
+
+    - For newly created [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) clusters, regional high availability is enabled by default, and you can change it to zonal high availability as needed during cluster creation.
+
+  For more information, see [High Availability in TiDB Cloud Starter and Essential](/tidb-cloud/serverless-high-availability.md).
+
+</CustomContent>
+
 ## September 2, 2025
 
 **General changes**
