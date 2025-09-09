@@ -21,7 +21,11 @@ We are constantly filling in the feature gaps between {{{ .starter }}}/Essential
 ### Connection
 
 - Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to {{{ .starter }}} or {{{ .essential }}} clusters. 
-- No [IP Access list](/tidb-cloud/configure-ip-access-list.md) support.
+- No [Firewall Rules](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md) support for Private Endpoint.
+
+> **Note:**
+> Due to the [limitations of AWS Global Accelerator](https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works.html#about-idle-timeout), the idle timeout for a Public Endpoint network connection on AWS is 340 seconds. Additionally, you cannot use TCP keep-alive packets to maintain an open connection to the Public Endpoint on AWS.
+>
 
 ### Encryption
 

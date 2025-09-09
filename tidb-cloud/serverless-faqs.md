@@ -80,6 +80,9 @@ Once a TiFlash replica is set up for a table, TiDB automatically replicates data
 
 For more information about how to set up TiFlash replicas, see [Create TiFlash replicas](/tiflash/create-tiflash-replicas.md).
 
+### Why is my connection disconnected after being idle for several minutes?
+Connections to the Public Endpoint inherit many limitations from the network providers of the applications all the way to TiDB Cloud. Intermediate devices may impose short idle timeouts and interrupt your connection prematurely. For more information see [Connection limitations](/tidb-cloud/serverless-limitations.md#connection).
+
 ## Billing and metering FAQs
 
 ### What are Request Units?
