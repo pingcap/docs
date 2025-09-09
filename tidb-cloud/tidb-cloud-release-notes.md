@@ -10,9 +10,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## September 9, 2025
 
-**General changes**
-
-- High availability changes
+**High availability changes**
 
 - **TiDB Cloud Starter**
 
