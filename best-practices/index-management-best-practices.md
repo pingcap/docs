@@ -224,7 +224,7 @@ Some indexes might be rarely used but still essential for specific queries, batc
 
 If the index appears in important but infrequent queries, it is recommended to keep it or make it invisible first.
 
-You can use [invisible indexes](#safely-test-index-removal-with-invisible-indexes) to safely test whether an index can be removed without impacting performance.
+You can use [invisible indexes](#safely-test-index-removal-using-invisible-indexes) to safely test whether an index can be removed without impacting performance.
 
 ### Manually create the `schema_unused_indexes` view
 
