@@ -251,12 +251,12 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `check_gc_safe_point`     | `BOOLEAN`型。レプリケーションタスクの開始時刻がGC時刻よりも前であるかどうかを確認するかどうかを指定します。デフォルト値は`true`です。（オプション）                                                                                |
 | `consistent`              | REDOログの設定パラメータ。(オプション)                                                                                                                                            |
 | `enable_sync_point`       | `BOOLEAN`型。2 `sync point`有効にするかどうかを決定します。（オプション）                                                                                                                  |
-| `filter`                  | `filter`の設定パラメータ。（オプション）                                                                                                                                          |
+| `filter`                  | `filter`の設定パラメータ。(オプション)                                                                                                                                          |
 | `force_replicate`         | `BOOLEAN`型。デフォルト値は`false`です`true`に設定すると、レプリケーションタスクは一意のインデックスを持たないテーブルを強制的にレプリケートします。（オプション）                                                                      |
 | `ignore_ineligible_table` | `BOOLEAN`型。デフォルト値は`false`です`true`に設定すると、レプリケーションタスクはレプリケートできないテーブルを無視します。（オプション）                                                                                  |
 | `memory_quota`            | `UINT64`型。レプリケーションタスクのメモリクォータ。（オプション）                                                                                                                             |
-| `mounter`                 | `mounter`の設定パラメータ。（オプション）                                                                                                                                         |
-| `sink`                    | `sink`の設定パラメータ。（オプション）                                                                                                                                            |
+| `mounter`                 | `mounter`の設定パラメータ。(オプション)                                                                                                                                         |
+| `sink`                    | `sink`の設定パラメータ。(オプション)                                                                                                                                            |
 | `sync_point_interval`     | `STRING`型。返される値は`UINT64`型のナノ秒単位の時間であることに注意してください。4 `sync point`が有効な場合、このパラメータは同期ポイントが上流と下流のスナップショットを同期させる間隔を指定します。デフォルト値は`10m`で、最小値は`30s`です。（オプション）               |
 | `sync_point_retention`    | `STRING`型。返される値は`UINT64`型のナノ秒単位の時間であることに注意してください。4 `sync point`が有効な場合、このパラメータは、下流テーブルにおける同期ポイントによるデータの保持期間を指定します。この期間を超えると、データはクリーンアップされます。デフォルト値は`24h`です。（オプション） |
 
@@ -379,7 +379,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 次のリクエストは、ID が`test5`で`blackhome://` `sink_uri`あるレプリケーション タスクを作成します。
 
 ```shell
-curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v2/changefeeds -d '{"changefeed_id":"test5","sink_uri":"blackhole://"}'
+curl -X POST -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/changefeeds -d '{"changefeed_id":"test5","sink_uri":"blackhole://"}'
 ```
 
 リクエストが成功した場合は`200 OK`返されます。リクエストが失敗した場合は、エラーメッセージとエラーコードが返されます。
@@ -496,22 +496,22 @@ curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v2
 
 パラメータの説明は次のとおりです。
 
-| パラメータ名            | 説明                                                                                     |
-| :---------------- | :------------------------------------------------------------------------------------- |
-| `admin_job_type`  | `INTEGER`タイプ。管理ジョブのタイプ。                                                                |
-| `checkpoint_time` | `STRING`タイプ。レプリケーションタスクの現在のチェックポイントのフォーマットされた時刻。                                       |
-| `checkpoint_ts`   | `STRING`タイプ。レプリケーション タスクの現在のチェックポイントの TSO。                                             |
-| `config`          | レプリケーションタスクの設定。構造と意味は、レプリケーションタスク作成時の`replica_config`の設定と同じです。                         |
-| `create_time`     | `STRING`型。レプリケーションタスクが作成された時刻。                                                         |
-| `creator_version` | `STRING`タイプ。レプリケーションタスク作成時の TiCDC バージョン。                                               |
-| `error`           | レプリケーション タスク エラー。                                                                      |
-| `id`              | `STRING`タイプ。レプリケーション タスク ID。                                                           |
-| `resolved_ts`     | `UINT64`タイプ。レプリケーション タスクは ts を解決しました。                                                  |
-| `sink_uri`        | `STRING`タイプ。レプリケーション タスク シンクの URI。                                                     |
-| `start_ts`        | `UINT64`タイプ。レプリケーションタスクが開始されます。                                                        |
-| `state`           | `STRING`型。レプリケーションタスクのステータス。2、4、6、8、10 `stopped` `normal`か`finished`なり`failed` `error` |
-| `target_ts`       | `UINT64`タイプ。レプリケーションタスクのターゲット ts。                                                      |
-| `task_status`     | レプリケーション タスクのディスパッチの詳細なステータス。                                                          |
+| パラメータ名            | 説明                                                                                  |
+| :---------------- | :---------------------------------------------------------------------------------- |
+| `admin_job_type`  | `INTEGER`タイプ。管理ジョブのタイプ。                                                             |
+| `checkpoint_time` | `STRING`タイプ。レプリケーションタスクの現在のチェックポイントのフォーマットされた時刻。                                    |
+| `checkpoint_ts`   | `STRING`タイプ。レプリケーション タスクの現在のチェックポイントの TSO。                                          |
+| `config`          | レプリケーションタスクの設定。構造と意味は、レプリケーションタスク作成時の`replica_config`の設定と同じです。                      |
+| `create_time`     | `STRING`型。レプリケーションタスクが作成された時刻。                                                      |
+| `creator_version` | `STRING`タイプ。レプリケーションタスク作成時の TiCDC バージョン。                                            |
+| `error`           | レプリケーション タスク エラー。                                                                   |
+| `id`              | `STRING`タイプ。レプリケーション タスク ID。                                                        |
+| `resolved_ts`     | `UINT64`タイプ。レプリケーション タスクは ts を解決しました。                                               |
+| `sink_uri`        | `STRING`タイプ。レプリケーション タスク シンクの URI。                                                  |
+| `start_ts`        | `UINT64`タイプ。レプリケーションタスクが開始されます。                                                     |
+| `state`           | `STRING`型。レプリケーションタスクの`failed` 。2、4、6、8、10 `stopped` `normal`か`finished`なります`error` |
+| `target_ts`       | `UINT64`タイプ。レプリケーションタスクのターゲット ts。                                                   |
+| `task_status`     | レプリケーション タスクのディスパッチの詳細なステータス。                                                       |
 
 `task_status`パラメータは次のように記述されます。
 
@@ -675,7 +675,7 @@ changefeed 設定を変更するには、 `pause the replication task -> modify 
 次のリクエストは、ID `test1`のレプリケーション タスクの`target_ts` `32`に更新します。
 
 ```shell
- curl -X PUT -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v2/changefeeds/test1 -d '{"target_ts":32}'
+curl -X PUT -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/changefeeds/test1 -d '{"target_ts":32}'
 ```
 
 リクエストが成功した場合は`200 OK`返されます。リクエストが失敗した場合は、エラーメッセージとエラーコードが返されます。JSONレスポンスボディの意味は[レプリケーションタスクを作成する](#create-a-replication-task)セクションと同じです。詳細は3のセクションを参照してください。
@@ -1065,7 +1065,7 @@ curl -X POST http://127.0.0.1:8300/api/v2/owner/resign
 ### 例 {#example}
 
 ```shell
-curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v2/log -d '{"log_level":"debug"}'
+curl -X POST -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/log -d '{"log_level":"debug"}'
 ```
 
 リクエストが成功した場合は`200 OK`返されます。リクエストが失敗した場合は、エラーメッセージとエラーコードが返されます。

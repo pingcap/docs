@@ -566,7 +566,7 @@
             -   [ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)
             -   [Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)
             -   [SQL 式を使用して DML をフィルタリングする](/dm/feature-expression-filter.md)
-            -   [オンラインDDLツールのサポート](/dm/dm-online-ddl-tool-support.md)
+            -   [オンライン DDL ツールのサポート](/dm/dm-online-ddl-tool-support.md)
             -   [暗号化と復号化のための秘密鍵をカスタマイズする](/dm/dm-customized-secret-key.md)
             -   データ移行タスクの管理
                 -   [タスクの事前チェック](/dm/dm-precheck.md)
@@ -1113,6 +1113,7 @@
     -   バージョン7.6
         -   [7.6.0-DMR](/releases/release-7.6.0.md)
     -   バージョン7.5
+        -   [7.5.7](/releases/release-7.5.7.md)
         -   [7.5.6](/releases/release-7.5.6.md)
         -   [7.5.5](/releases/release-7.5.5.md)
         -   [7.5.4](/releases/release-7.5.4.md)

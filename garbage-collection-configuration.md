@@ -99,3 +99,15 @@ show config where type = 'tikv' and name like '%enable-compaction-filter%';
 | tikv | 172.16.5.35:20163 | gc.enable-compaction-filter | true  |
 +------+-------------------+-----------------------------+-------+
 ```
+
+<CustomContent platform="tidb">
+
+> **注記：**
+>
+> 圧縮フィルター機構を使用すると、GCの進行が遅れ、TiKVスキャンのパフォーマンスに影響する可能性があります。ワークロードに多数のコプロセッサリクエストが含まれており、パネル[**TiKV詳細 &gt;コプロセッサー詳細**](/grafana-tikv-dashboard.md#coprocessor-detail)で**「Total Ops Details」**の呼び出し回数が`next()`または`prev()`と、呼び出し回数が`processed_keys`回を大幅に上回っている場合は、以下の対策を講じることができます。
+>
+> -   v7.1.3 より前のバージョンの TiDB では、GC を高速化するために Compaction Filter を無効にすることをお勧めします。
+> -   TiDBバージョンv7.1.3からv7.5.6では、各リージョン[`region-compact-min-redundant-rows`](/tikv-configuration-file.md#region-compact-min-redundant-rows-new-in-v710)の冗長バージョンの数と冗長バージョン[`region-compact-redundant-rows-percent`](/tikv-configuration-file.md#region-compact-redundant-rows-percent-new-in-v710)の割合に基づいて自動的にコンパクションが実行され、コンパクションフィルタGCのパフォーマンスが向上します。この場合、コンパクションフィルタを無効にするのではなく、これらの設定項目を調整してください。
+> -   v7.5.7以降、 [`region-compact-min-redundant-rows`](/tikv-configuration-file.md#region-compact-min-redundant-rows-new-in-v710)と[`region-compact-redundant-rows-percent`](/tikv-configuration-file.md#region-compact-redundant-rows-percent-new-in-v710)非推奨となりました。TiDBは[`gc.auto-compaction.redundant-rows-threshold`](/tikv-configuration-file.md#redundant-rows-threshold-new-in-v757)と[`gc.auto-compaction.redundant-rows-percent-threshold`](/tikv-configuration-file.md#redundant-rows-percent-threshold-new-in-v757)に基づいて自動的にコンパクションを実行するようになりました。この場合、コンパクションフィルターを無効にするのではなく、これらの設定項目を調整してください。
+
+</CustomContent>

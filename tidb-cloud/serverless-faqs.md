@@ -20,11 +20,11 @@ TiDB Cloud Starterは、お客様と組織に完全なHTAP機能を備えたTiDB
 
 TiDB Cloud Starter は、2025 年 8 月 12 日よりTiDB Cloud Serverless の新しい名前になります。
 
-TiDB Cloudの Serverless 層は、Starter に名前が変更される前は、何千人もの開発者のエントリ ポイントとして機能し、自動的にスケーリングされ、数秒で起動し、十分な無料割り当てを超えるまでコストがかからない、本番環境対応のデータベースを提供していました。
+Starter に名前が変更される前、 TiDB Cloudの Serverless 層は何千人もの開発者のエントリ ポイントとして機能し、自動的にスケーリングされ、数秒で起動し、十分な無料割り当てを超えるまでコストがかからない、本番環境対応のデータベースを提供していました。
 
 「サーバーレス」は、サービスが舞台裏でどのように動作するかを正確に反映していますが、初めて使用するユーザーの多くは、この用語が抽象的で、さまざまな意味が詰め込まれていると感じました。
 
-このエントリー層の目的をより明確にするため、 TiDB Cloudを使った構築を最も早く開始できる「Starter」に名称を変更しました。Serverless層に関する既存の内容はそのままです。
+このエントリー層の目的をより明確にするため、 TiDB Cloudを使った構築を最も早く開始できる「Starter」に名称を変更しました。Serverless層に関するこれまでの内容はそのままです。
 
 -   行ベースと列ベースの両方のstorageを備えた完全に管理されたデータベースで、ハイブリッド OLTP および OLAP ワークロードに最適です。
 -   自動かつリクエスト主導型のスケーリング。容量計画や手動の調整は必要ありません。
@@ -49,7 +49,7 @@ TiDB Cloud StarterをGoogle CloudやAzureを含む他のクラウドプラット
 
 ### TiDB Cloud Starterが利用可能になる前にDeveloper Tierクラスターを作成しました。そのクラスターをまだ使用できますか？ {#i-created-a-developer-tier-cluster-before-tidb-cloud-starter-was-available-can-i-still-use-my-cluster}
 
-はい、 Developer TierクラスターはTiDB Cloud Starter クラスターに自動的に移行されており、以前の使用に影響を与えることなく、ユーザー エクスペリエンスが向上します。
+はい、 Developer TierクラスターはTiDB Cloud Starter クラスターに自動的に移行されており、以前の使用状況に支障をきたすことなく、ユーザー エクスペリエンスが向上します。
 
 ### TiDB Cloud Starter の列指向storageとは何ですか? {#what-is-columnar-storage-in-tidb-cloud-starter}
 
@@ -80,6 +80,10 @@ TiDB Cloud Starter での列指向storageの使用は、 TiFlashでの使用と�
 
 TiFlashレプリカの設定方法の詳細については、 [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)参照してください。
 
+### 数分間アイドル状態が続いた後に接続が切断されるのはなぜですか? {#why-is-my-connection-disconnected-after-being-idle-for-several-minutes}
+
+パブリックエンドポイント経由で接続する場合、接続は様々なネットワークプロバイダーや中間デバイスを経由します。これらのデバイスにはそれぞれ短いアイドルタイムアウトが設定されている場合があり、接続が途中で中断される可能性があります。詳しくは[接続制限](/tidb-cloud/serverless-limitations.md#connection)ご覧ください。
+
 ## 請求と計測に関するよくある質問 {#billing-and-metering-faqs}
 
 ### リクエストユニットとは何ですか? {#what-are-request-units}
@@ -106,7 +110,7 @@ TiDB Cloud Starter クラスターに月間使用制限が設定されている�
 
 個々のSQL文のRU消費量を取得するには、SQL文[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption)使用できます。ただし、 `EXPLAIN ANALYZE`で返されるRU使用量には、出力RUは含まれていないことに注意してください。出力使用量はゲートウェイで個別に測定され、TiDBサーバーには認識されないためです。
 
-クラスターで使用されているRUとstorageを確認するには、クラスターの概要ページの**「今月の使用状況」**ペインをご覧ください。このペインに表示される過去のリソース使用状況データとリアルタイムのリソース使用状況に基づいて、クラスターのリソース消費量を追跡し、適切な使用制限を見積もることができます。無料クォータで要件を満たせない場合は、追加リソースの使用制限を編集できます。詳細については、 [TiDB Cloud Starter 使用量割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)ご覧ください。
+クラスターで使用されているRUとstorageを確認するには、クラスターの概要ページの**「今月の使用状況」**ペインをご覧ください。このペインに表示される過去のリソース使用状況データとリアルタイムのリソース使用状況を参考に、クラスターのリソース消費量を追跡し、適切な使用制限を見積もることができます。無料クォータで要件を満たせない場合は、追加リソースの使用制限を編集できます。詳細については、 [TiDB Cloud Starter 使用量割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)ご覧ください。
 
 ### 消費される RU の数を最小限に抑えるためにワークロードを最適化するにはどうすればよいでしょうか? {#how-can-i-optimize-my-workload-to-minimize-the-number-of-rus-consumed}
 
@@ -114,7 +118,7 @@ TiDB Cloud Starter クラスターに月間使用制限が設定されている�
 
 ### TiDB Cloud Starter のstorageはどのように計測されますか? {#how-storage-is-metered-for-tidb-cloud-starter}
 
-storageは、 TiDB Cloud Starter クラスターに保存されるデータ量（月間GiB単位）に基づいて課金されます。これは、すべてのテーブルとインデックスの合計サイズ（データ圧縮とレプリカを除く）と、その月のデータの保存時間数を掛けて算出されます。
+storageは、 TiDB Cloud Starter クラスターに保存されるデータ量（月間GiB単位）に基づいて課金されます。これは、すべてのテーブルとインデックスの合計サイズ（データ圧縮とレプリカを除く）と、その月のデータの保存時間数を掛け合わせることで算出されます。
 
 ### テーブルまたはデータベースをすぐに削除した後でも、storage使用量のサイズが変更されないのはなぜですか? {#why-does-the-storage-usage-size-remain-unchanged-after-dropping-a-table-or-database-immediately}
 
@@ -122,7 +126,7 @@ storageは、 TiDB Cloud Starter クラスターに保存されるデータ量�
 
 ### クエリをアクティブに実行していないのに RU が消費されるのはなぜですか? {#why-are-there-ru-consumptions-when-i-m-not-actively-running-any-queries}
 
-RU の消費は様々なシナリオで発生する可能性があります。よくあるシナリオの一つは、TiDB インスタンス間のスキーマ変更の同期など、バックグラウンドクエリの実行時です。もう一つのシナリオは、スキーマの読み込みなど、特定の Web コンソール機能がクエリを生成する場合です。これらのプロセスは、明示的なユーザートリガーがなくても RU を使用します。
+RU の消費は様々なシナリオで発生する可能性があります。一般的なシナリオの一つは、バックグラウンドクエリの実行時です。これには、TiDB インスタンス間のスキーマ変更の同期、DDL ジョブの実行、権限の更新、SQL バインディングの更新、グローバル変数の更新などが含まれますが、これらに限定されません。別のシナリオとしては、スキーマの読み込みなど、特定の Web コンソール機能がクエリを生成する場合が挙げられます。これらのプロセスは、明示的なユーザートリガーがなくても RU を使用します。
 
 ### ワークロードが安定しているのに、RU 使用量が急増するのはなぜですか? {#why-is-there-a-spike-in-ru-usage-when-my-workload-is-steady}
 

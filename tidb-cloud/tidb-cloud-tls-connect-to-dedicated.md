@@ -8,7 +8,7 @@ aliases: ['/tidbcloud/tidb-cloud-tls-connect-to-dedicated-tier']
 
 TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの接続における基本的なセキュリティ対策の一つです。クライアント、アプリケーション、開発ツールからTiDB Cloud Dedicated クラスタへの複数の TLS 接続を設定することで、データ転送のセキュリティを保護できます。セキュリティ上の理由から、 TiDB Cloud Dedicated は TLS 1.2 および TLS 1.3 のみをサポートし、TLS 1.0 および TLS 1.1 はサポートしていません。
 
-データのセキュリティを確保するため、 TiDB Cloud Dedicated クラスターの TiDB クラスター CA は[AWS 証明書マネージャー (ACM)](https://aws.amazon.com/certificate-manager/)でホストされ、TiDB クラスターの秘密キーは[FIPS 140-2 レベル 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139)セキュリティ標準を満たす AWS 管理のハードウェアセキュリティモジュール (HSM) に保存されます。
+データのセキュリティを確保するため、 TiDB Cloud Dedicated クラスターの CA 証明書は[AWS プライベート認証局](https://aws.amazon.com/private-ca/)でホストされています。CA 証明書の秘密鍵は、 [FIPS 140-2 レベル 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139)セキュリティ標準を満たす AWS 管理のハードウェアセキュリティモジュール (HSM) に保存されます。
 
 ## 前提条件 {#prerequisites}
 
@@ -270,7 +270,7 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 
 ## TiDB Cloud Dedicatedのルート証明書を管理する {#manage-root-certificates-for-tidb-cloud-dedicated}
 
-TiDB Cloud Dedicated は、クライアントとTiDB Cloud Dedicated クラスター間の TLS 接続に、 [AWS 証明書マネージャー (ACM)](https://aws.amazon.com/certificate-manager/)の証明書を認証局 (CA) として使用します。通常、ACM のルート証明書は、 [FIPS 140-2 レベル 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139)セキュリティ基準を満たす AWS マネージドハードウェアセキュリティモジュール (HSM) に安全に保管されます。
+TiDB Cloud Dedicated は、クライアントとTiDB Cloud Dedicated クラスター間の TLS 接続に、 [AWS プライベート認証局](https://aws.amazon.com/private-ca/)の証明書を認証局 (CA) として使用します。通常、CA 証明書の秘密鍵は、 [FIPS 140-2 レベル 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139)セキュリティ標準を満たす AWS マネージドハードウェアセキュリティモジュール (HSM) に安全に保管されます。
 
 ## よくある質問 {#faqs}
 

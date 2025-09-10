@@ -8,13 +8,48 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2025年9月9日 {#september-9-2025}
+
+**高可用性の変更**
+
+-   **TiDB Cloudスターター**
+
+    -   新しく作成された[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでは、ゾーン高可用性のみが有効になっており、構成できません。
+    -   **2025 年 9 月 9 日**より前にリージョン高可用性が有効にされた既存のTiDB Cloud Starter クラスターの場合、リージョン高可用性は引き続きサポートされ、影響を受けません。
+
+<CustomContent language="en,zh">
+
+-   **TiDB Cloudエッセンシャル**
+
+    -   新しく作成された[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスターでは、リージョン高可用性がデフォルトで有効になっていますが、クラスターの作成時に必要に応じてゾーン高可用性に変更できます。
+
+    詳細については[TiDB Cloud StarterとEssentialの高可用性](/tidb-cloud/serverless-high-availability.md)参照してください。
+
+</CustomContent>
+
 ## 2025年9月2日 {#september-2-2025}
 
 **一般的な変更**
 
+<CustomContent language="en,zh">
+
+-   **TiDB Cloudエッセンシャル**
+
+    -   [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスターに対して`Jakarta (ap-southeast-5)` `Mexico (na-south-1)` 3 つの新しい Alibaba Cloud リージョン`Tokyo (ap-northeast-1)`サポートします。
+
 -   **TiDB Cloud専用**
 
     -   新しい[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン8.5.2](https://docs.pingcap.com/tidb/v8.5/release-8.5.2/)から[バージョン8.5.3](https://docs.pingcap.com/tidb/v8.5/release-8.5.3/)にアップグレードします。
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+-   **TiDB Cloud専用**
+
+    -   新しい[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン8.5.2](https://docs.pingcap.com/tidb/v8.5/release-8.5.2/)から[バージョン8.5.3](https://docs.pingcap.com/tidb/v8.5/release-8.5.3/)にアップグレードします。
+
+</CustomContent>
 
 ## 2025年8月26日 {#august-26-2025}
 
@@ -28,7 +63,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
         -   **AWS Bedrock とのネイティブ統合**: AWS Bedrock の Amazon Titan および Cohere テキスト埋め込みモデルを含む、無料クォータで管理される埋め込みモデル。
         -   **SQL および Python のサポート**、埋め込みの作成、保存、クエリのコード例。
 
-        詳細については[自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)参照してください。
+        詳細については[自動埋め込み](https://docs.pingcap.com/tidbcloud/vector-search-auto-embedding-overview/?plan=starter)参照してください。
 
 -   **TiDB Cloud専用**
 

@@ -103,7 +103,7 @@ show warnings;
 1 row in set (0.00 sec)
 ```
 
-バッチ変更はアトミック性を保証するものではありません。一部のインスタンスでは変更が成功し、他のインスタンスでは失敗する可能性があります。1 `set tikv key=val`使用して TiKV クラスター全体の設定を変更すると、一部のインスタンスで変更が失敗する可能性があります。3 `show warnings`使用して結果を確認できます。
+バッチ変更はアトミック性を保証するものではありません。一部のインスタンスでは変更が成功し、他のインスタンスでは失敗する可能性があります。1 `set tikv key=val`使用して TiKV クラスター全体の設定を変更した場合、一部のインスタンスでは変更が失敗する可能性があります。3 `show warnings`使用して結果を確認できます。
 
 変更が失敗した場合は、該当するステートメントを再実行するか、失敗したインスタンスを個別に変更する必要があります。ネットワークの問題やマシンの障害により一部のTiKVインスタンスにアクセスできない場合は、復旧後にこれらのインスタンスを変更してください。
 
@@ -119,16 +119,12 @@ show warnings;
 | `raftstore.raft-log-gc-threshold`                         | 残存Raftログの最大許容数に関するソフト制限                                                                                                                   |
 | `raftstore.raft-log-gc-count-limit`                       | 許容される残存Raftログ数のハードリミット                                                                                                                    |
 | `raftstore.raft-log-gc-size-limit`                        | 残余Raftの許容サイズに関する厳密な制限                                                                                                                     |
-| `raftstore.raft-max-size-per-msg`                         | 生成が許可される単一のメッセージパケットのサイズのソフト制限                                                                                                            |
+| `raftstore.raft-max-size-per-msg`                         | 生成できる単一のメッセージパケットのサイズのソフト制限                                                                                                               |
 | `raftstore.raft-entry-max-size`                           | 単一のRaftログの最大サイズに対するハード制限                                                                                                                  |
 | `raftstore.raft-entry-cache-life-time`                    | メモリ内のログキャッシュに許容される最大残り時間                                                                                                                  |
 | `raftstore.max-apply-unpersisted-log-limit`               | コミットされたが永続化されていないRaftログの最大数を適用できます                                                                                                        |
 | `raftstore.split-region-check-tick-interval`              | リージョン分割が必要かどうかを確認する時間間隔                                                                                                                   |
 | `raftstore.region-split-check-diff`                       | リージョン分割前にリージョンデータが超過できる最大値                                                                                                                |
-| `raftstore.region-compact-check-interval`                 | RocksDB 圧縮を手動でトリガーする必要があるかどうかを確認する時間間隔                                                                                                    |
-| `raftstore.region-compact-check-step`                     | 手動圧縮の各ラウンドで一度にチェックされる領域の数                                                                                                                 |
-| `raftstore.region-compact-min-tombstones`                 | RocksDBの圧縮をトリガーするために必要なトゥームストーンの数                                                                                                         |
-| `raftstore.region-compact-tombstones-percent`             | RocksDBの圧縮をトリガーするために必要なトゥームストーンの割合                                                                                                        |
 | `raftstore.pd-heartbeat-tick-interval`                    | PDへのリージョンのハートビートがトリガーされる時間間隔                                                                                                              |
 | `raftstore.pd-store-heartbeat-tick-interval`              | 店舗のPDへのハートビートがトリガーされる時間間隔                                                                                                                 |
 | `raftstore.snap-mgr-gc-tick-interval`                     | 期限切れのスナップショットファイルのリサイクルがトリガーされる時間間隔                                                                                                       |
@@ -182,6 +178,12 @@ show warnings;
 | `gc.max-write-bytes-per-sec`                              | RocksDBに1秒あたり書き込める最大バイト数                                                                                                                  |
 | `gc.enable-compaction-filter`                             | 圧縮フィルタを有効にするかどうか                                                                                                                          |
 | `gc.compaction-filter-skip-version-check`                 | 圧縮フィルタのクラスタバージョンチェックをスキップするかどうか（未リリース）                                                                                                    |
+| `gc.auto-compaction.check-interval`                       | TiKVが自動（RocksDB）圧縮をトリガーするかどうかを確認する間隔                                                                                                      |
+| `gc.auto-compaction.tombstone-num-threshold`              | TiKV自動（RocksDB）圧縮をトリガーするために必要なRocksDBトゥームストーンの数                                                                                           |
+| `gc.auto-compaction.tombstone-percent-threshold`          | TiKV自動（RocksDB）圧縮をトリガーするために必要なRocksDBトゥームストーンの割合                                                                                          |
+| `gc.auto-compaction.redundant-rows-threshold`             | TiKV自動（RocksDB）圧縮をトリガーするために必要な冗長MVCC行の数                                                                                                   |
+| `gc.auto-compaction.redundant-rows-percent-threshold`     | TiKV自動（RocksDB）圧縮をトリガーするために必要な冗長MVCC行の割合                                                                                                  |
+| `gc.auto-compaction.bottommost-level-force`               | RocksDB の最下層ファイルの圧縮を強制するかどうか                                                                                                              |
 | `{db-name}.max-total-wal-size`                            | 合計WALの最大サイズ                                                                                                                               |
 | `{db-name}.max-background-jobs`                           | RocksDBのバックグラウンドスレッドの数                                                                                                                    |
 | `{db-name}.max-background-flushes`                        | RocksDBのフラッシュスレッドの最大数                                                                                                                     |
@@ -374,9 +376,9 @@ select @@tidb_slow_log_threshold;
 
 ### TiFlash構成を動的に変更する {#modify-tiflash-configuration-dynamically}
 
-現在、システム変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)を使用してTiFlash構成`max_threads`変更できます。この変数は、 TiFlash が要求を実行するための最大同時実行性を指定します。
+現在、システム変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)を使用してTiFlash構成`max_threads`変更できます。この変数は、 TiFlash が要求を実行するための最大同時実行性を指​​定します。
 
-デフォルト値は`tidb_max_tiflash_threads` `-1` 、このシステム変数は無効であり、 TiFlash設定ファイルの設定に依存することを示します。 `tidb_max_tiflash_threads`を使用すると、 `max_threads`から 10 に設定できます。
+デフォルト値は`tidb_max_tiflash_threads` `-1` 、このシステム変数は無効であり、 TiFlash設定ファイルの設定に依存することを示します。 `tidb_max_tiflash_threads`使用すると、 `max_threads`から 10 に設定できます。
 
 ```sql
 set tidb_max_tiflash_threads = 10;

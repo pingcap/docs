@@ -461,7 +461,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [TiDB 2.1.17 リリースノート](/releases/release-2.1.17.md)
 -   [TiDB 2.1 RC2 リリースノート](/releases/release-2.1-rc.2.md)
 
-### バインディングからの最後の計画 {#last-plan-from-binding}
+### バインディングからの最後のプラン {#last-plan-from-binding}
 
 参照先:
 
@@ -2511,7 +2511,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [TiUPベンチコンポーネントを使用したTiDBのストレステスト](/tiup/tiup-bench.md)
 -   [システム変数](/system-variables.md#tidb_isolation_read_engines-new-in-v40)
 -   [TiFlash互換性に関する注意事項](/tiflash/tiflash-compatibility.md)
--   [FastScanを使用する](/tiflash/use-fastscan.md)
+-   [ファストスキャンを使用する](/tiflash/use-fastscan.md)
 -   [TiDB を使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)
 -   [TiDB 4.0.2 リリースノート](/releases/release-4.0.2.md)
 
@@ -2717,7 +2717,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [エラーコードとトラブルシューティング](/error-codes.md)
 -   [テーブル結合を使用する文を説明する](/explain-joins.md)
 -   [コストの高いクエリを特定する](/identify-expensive-queries.md)
--   [非トランザクションDML文](/non-transactional-dml.md)
+-   [非トランザクションDMLステートメント](/non-transactional-dml.md)
 -   [オプティマイザヒント](/optimizer-hints.md)
 -   [パイプラインDML](/pipelined-dml.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
@@ -3032,49 +3032,49 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [システム変数](/system-variables.md#tidb_opt_hash_agg_cost_factor-new-in-v853-and-v900)
+-   [システム変数](/system-variables.md#tidb_opt_hash_agg_cost_factor-new-in-v853)
 -   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 
 ### tidb_opt_hash_join_cost_factor {#tidb-opt-hash-join-cost-factor}
 
 参照先:
 
--   [システム変数](/system-variables.md#tidb_opt_hash_join_cost_factor-new-in-v853-and-v900)
+-   [システム変数](/system-variables.md#tidb_opt_hash_join_cost_factor-new-in-v853)
 -   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 
 ### tidb_opt_index_join_cost_factor {#tidb-opt-index-join-cost-factor}
 
 参照先:
 
--   [システム変数](/system-variables.md#tidb_opt_index_join_cost_factor-new-in-v853-and-v900)
+-   [システム変数](/system-variables.md#tidb_opt_index_join_cost_factor-new-in-v853)
 -   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 
 ### tidb_opt_index_lookup_コスト係数 {#tidb-opt-index-lookup-cost-factor}
 
 参照先:
 
--   [システム変数](/system-variables.md#tidb_opt_index_lookup_cost_factor-new-in-v853-and-v900)
+-   [システム変数](/system-variables.md#tidb_opt_index_lookup_cost_factor-new-in-v853)
 -   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 
 ### tidb_opt_index_merge_cost_factor {#tidb-opt-index-merge-cost-factor}
 
 参照先:
 
--   [システム変数](/system-variables.md#tidb_opt_index_merge_cost_factor-new-in-v853-and-v900)
+-   [システム変数](/system-variables.md#tidb_opt_index_merge_cost_factor-new-in-v853)
 -   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 
 ### tidb_opt_index_reader_cost_factor {#tidb-opt-index-reader-cost-factor}
 
 参照先:
 
--   [システム変数](/system-variables.md#tidb_opt_index_reader_cost_factor-new-in-v853-and-v900)
+-   [システム変数](/system-variables.md#tidb_opt_index_reader_cost_factor-new-in-v853)
 -   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 
 ### tidb_opt_index_scan_cost_factor {#tidb-opt-index-scan-cost-factor}
 
 参照先:
 
--   [システム変数](/system-variables.md#tidb_opt_index_scan_cost_factor-new-in-v853-and-v900)
+-   [システム変数](/system-variables.md#tidb_opt_index_scan_cost_factor-new-in-v853)
 -   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 
 ### tidb_opt_insubq_to_join_and_agg {#tidb-opt-insubq-to-join-and-agg}
@@ -3101,7 +3101,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [システム変数](/system-variables.md#tidb_opt_limit_cost_factor-new-in-v853-and-v900)
+-   [システム変数](/system-variables.md#tidb_opt_limit_cost_factor-new-in-v853)
 -   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 
 ### tidb_opt_limit_push_down_threshold {#tidb-opt-limit-push-down-threshold}
@@ -3123,7 +3123,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [システム変数](/system-variables.md#tidb_opt_merge_join_cost_factor-new-in-v853-and-v900)
+-   [システム変数](/system-variables.md#tidb_opt_merge_join_cost_factor-new-in-v853)
 -   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 
 ### tidb_opt_mpp_outer_join_fixed_build_side {#tidb-opt-mpp-outer-join-fixed-build-side}
@@ -3217,49 +3217,49 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [システム変数](/system-variables.md#tidb_opt_sort_cost_factor-new-in-v853-and-v900)
+-   [システム変数](/system-variables.md#tidb_opt_sort_cost_factor-new-in-v853)
 -   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 
 ### tidb_opt_stream_agg_コスト係数 {#tidb-opt-stream-agg-cost-factor}
 
 参照先:
 
--   [システム変数](/system-variables.md#tidb_opt_stream_agg_cost_factor-new-in-v853-and-v900)
+-   [システム変数](/system-variables.md#tidb_opt_stream_agg_cost_factor-new-in-v853)
 -   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 
 ### tidb_opt_table_full_scan_コスト係数 {#tidb-opt-table-full-scan-cost-factor}
 
 参照先:
 
--   [システム変数](/system-variables.md#tidb_opt_table_full_scan_cost_factor-new-in-v853-and-v900)
+-   [システム変数](/system-variables.md#tidb_opt_table_full_scan_cost_factor-new-in-v853)
 -   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 
 ### tidb_opt_table_range_scan_cost_factor {#tidb-opt-table-range-scan-cost-factor}
 
 参照先:
 
--   [システム変数](/system-variables.md#tidb_opt_table_range_scan_cost_factor-new-in-v853-and-v900)
+-   [システム変数](/system-variables.md#tidb_opt_table_range_scan_cost_factor-new-in-v853)
 -   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 
 ### tidb_opt_table_reader_コスト係数 {#tidb-opt-table-reader-cost-factor}
 
 参照先:
 
--   [システム変数](/system-variables.md#tidb_opt_table_reader_cost_factor-new-in-v853-and-v900)
+-   [システム変数](/system-variables.md#tidb_opt_table_reader_cost_factor-new-in-v853)
 -   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 
 ### tidb_opt_table_rowid_コスト係数 {#tidb-opt-table-rowid-cost-factor}
 
 参照先:
 
--   [システム変数](/system-variables.md#tidb_opt_table_rowid_cost_factor-new-in-v853-and-v900)
+-   [システム変数](/system-variables.md#tidb_opt_table_rowid_cost_factor-new-in-v853)
 -   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 
 ### tidb_opt_table_tiflash_scan_コスト係数 {#tidb-opt-table-tiflash-scan-cost-factor}
 
 参照先:
 
--   [システム変数](/system-variables.md#tidb_opt_table_tiflash_scan_cost_factor-new-in-v853-and-v900)
+-   [システム変数](/system-variables.md#tidb_opt_table_tiflash_scan_cost_factor-new-in-v853)
 -   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 
 ### tidb_opt_three_stage_distinct_agg {#tidb-opt-three-stage-distinct-agg}
@@ -3279,7 +3279,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [システム変数](/system-variables.md#tidb_opt_topn_cost_factor-new-in-v853-and-v900)
+-   [システム変数](/system-variables.md#tidb_opt_topn_cost_factor-new-in-v853)
 -   [TiDB 8.5.3 リリースノート](/releases/release-8.5.3.md)
 
 ### tidb_opt_use_invisible_indexes {#tidb-opt-use-invisible-indexes}
@@ -3482,7 +3482,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [遅いクエリを特定する](/identify-slow-queries.md)
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [ログ編集](/log-redaction.md)
--   [非トランザクションDML文](/non-transactional-dml.md)
+-   [非トランザクションDMLステートメント](/non-transactional-dml.md)
 -   [システム変数](/system-variables.md#tidb_redact_log)
 -   [TiDB 8.3.0 リリースノート](/releases/release-8.3.0.md)
 -   [TiDB 8.1.1 リリースノート](/releases/release-8.1.1.md)
@@ -3506,7 +3506,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [システム変数](/system-variables.md#tidb_remove_orderby_in_subquery-new-in-v610)
 -   [TiDB 7.2.0 リリースノート](/releases/release-7.2.0.md)
 
-### tidb_レプリカ_読み取り {#tidb-replica-read}
+### tidb_replica_read {#tidb-replica-read}
 
 参照先:
 
@@ -3808,7 +3808,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [フラッシュバッククラスター](/sql-statements/sql-statement-flashback-cluster.md)
 -   [フラッシュテーブル](/sql-statements/sql-statement-flush-tables.md)
 -   [インポート先](/sql-statements/sql-statement-import-into.md)
--   [非トランザクションDML文](/non-transactional-dml.md)
+-   [非トランザクションDMLステートメント](/non-transactional-dml.md)
 -   [システム変数`tidb_snapshot`を使用して履歴データを読み取る](/read-historical-data.md)
 -   [Kafka にデータを複製する](/ticdc/ticdc-sink-to-kafka.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)

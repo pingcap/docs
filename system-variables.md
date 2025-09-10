@@ -9,7 +9,7 @@ TiDB システム変数は、設定が`SESSION`または`GLOBAL`スコープに�
 
 -   スコープ`SESSION`の変更は現在のセッションにのみ影響します。
 -   スコープ`GLOBAL`での変更は即時に適用されます。この変数のスコープが`SESSION`に設定されている場合、すべてのセッション（あなたのセッションを含む）は現在のセッション値を引き続き使用します。
--   変更は[`SET`文](/sql-statements/sql-statement-set-variable.md)を使用して行われます:
+-   変更は[`SET`ステートメント](/sql-statements/sql-statement-set-variable.md)を使用して行われます:
 
 ```sql
 # These two identical statements change a session variable
@@ -119,7 +119,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ### 認証_ldap_sasl_max_pool_size<span class="version-mark">バージョン7.1.0の新機能</span> {#authentication-ldap-sasl-max-pool-size-span-class-version-mark-new-in-v7-1-0-span}
 
 -   範囲: グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `1000`
@@ -129,7 +129,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ### 認証_ldap_sasl_server_host<span class="version-mark">バージョン7.1.0の新機能</span> {#authentication-ldap-sasl-server-host-span-class-version-mark-new-in-v7-1-0-span}
 
 -   範囲: グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 文字列
 -   デフォルト値: &quot;&quot;
@@ -138,7 +138,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ### 認証_ldap_sasl_server_port<span class="version-mark">バージョン7.1.0の新機能</span> {#authentication-ldap-sasl-server-port-span-class-version-mark-new-in-v7-1-0-span}
 
 -   範囲: グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `389`
@@ -157,7 +157,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ### 認証_ldap_simple_auth_method_name<span class="version-mark">バージョン7.1.0の新機能</span> {#authentication-ldap-simple-auth-method-name-span-class-version-mark-new-in-v7-1-0-span}
 
 -   範囲: グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 列挙
 -   デフォルト値: `SIMPLE`
@@ -167,7 +167,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ### 認証_ldap_simple_bind_base_dn<span class="version-mark">バージョン7.1.0の新機能</span> {#authentication-ldap-simple-bind-base-dn-span-class-version-mark-new-in-v7-1-0-span}
 
 -   範囲: グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 文字列
 -   デフォルト値: &quot;&quot;
@@ -176,7 +176,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ### 認証_ldap_simple_bind_root_dn<span class="version-mark">バージョン7.1.0の新機能</span> {#authentication-ldap-simple-bind-root-dn-span-class-version-mark-new-in-v7-1-0-span}
 
 -   範囲: グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 文字列
 -   デフォルト値: &quot;&quot;
@@ -203,7 +203,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ### 認証_ldap_simple_init_pool_size<span class="version-mark">バージョン7.1.0の新機能</span> {#authentication-ldap-simple-init-pool-size-span-class-version-mark-new-in-v7-1-0-span}
 
 -   範囲: グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `10`
@@ -213,7 +213,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ### 認証_ldap_simple_max_pool_size<span class="version-mark">バージョン7.1.0の新機能</span> {#authentication-ldap-simple-max-pool-size-span-class-version-mark-new-in-v7-1-0-span}
 
 -   範囲: グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `1000`
@@ -223,7 +223,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ### 認証_ldap_simple_server_host<span class="version-mark">バージョン7.1.0の新機能</span> {#authentication-ldap-simple-server-host-span-class-version-mark-new-in-v7-1-0-span}
 
 -   範囲: グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 文字列
 -   デフォルト値: &quot;&quot;
@@ -232,7 +232,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ### 認証_ldap_simple_server_port<span class="version-mark">バージョン7.1.0の新機能</span> {#authentication-ldap-simple-server-port-span-class-version-mark-new-in-v7-1-0-span}
 
 -   範囲: グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `389`
@@ -251,7 +251,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ### 自動増分 {#auto-increment-increment}
 
 -   スコープ: セッション | グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `1`
@@ -261,7 +261,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ### 自動インクリメントオフセット {#auto-increment-offset}
 
 -   スコープ: セッション | グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `1`
@@ -526,7 +526,7 @@ mysql> SELECT * FROM t1;
 ### 外部キーチェック {#foreign-key-checks}
 
 -   スコープ: セッション | グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: ブール値
 -   デフォルト値: v6.6.0 より前のバージョンでは、デフォルト値は`OFF`です。v6.6.0 以降では、デフォルト値は`ON`です。
@@ -535,7 +535,7 @@ mysql> SELECT * FROM t1;
 ### グループ連結最大長 {#group-concat-max-len}
 
 -   スコープ: セッション | グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `1024`
@@ -580,7 +580,7 @@ mysql> SELECT * FROM t1;
 ### innodb_lock_wait_timeout {#innodb-lock-wait-timeout}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `50`
@@ -696,7 +696,7 @@ mysql> SELECT * FROM t1;
 ### password_reuse_interval <span class="version-mark">v6.5.0 の新機能</span> {#password-reuse-interval-span-class-version-mark-new-in-v6-5-0-span}
 
 -   範囲: グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `0`
@@ -744,7 +744,7 @@ mysql> SELECT * FROM t1;
 ### 最大準備済みステートメント数 {#max-prepared-stmt-count}
 
 -   範囲: グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `-1`
@@ -777,7 +777,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 ### pd_enable_follower_handle_region<span class="version-mark">バージョン7.6.0の新機能</span> {#pd-enable-follower-handle-region-span-class-version-mark-new-in-v7-6-0-span}
 
 -   範囲: グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: ブール値
 -   デフォルト値: `OFF`
@@ -1015,7 +1015,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 ### tidb_allow_tiflash_cop<span class="version-mark">バージョン7.3.0の新機能</span> {#tidb-allow-tiflash-cop-span-class-version-mark-new-in-v7-3-0-span}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: ブール値
 -   デフォルト値: `OFF`
@@ -1261,7 +1261,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 ### tidb_auto_build_stats_concurrency <span class="version-mark">v6.5.0 の新機能</span> {#tidb-auto-build-stats-concurrency-span-class-version-mark-new-in-v6-5-0-span}
 
 -   範囲: グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `1`
@@ -1271,7 +1271,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 ### tidb_backoff_lock_fast {#tidb-backoff-lock-fast}
 
 -   スコープ: セッション | グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `10`
@@ -1793,7 +1793,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
     この変数は、TiDB内で自動的にコミットされる暗黙的なトランザクションと内部的に実行されるトランザクションには影響しません。これらのトランザクションの最大再試行回数は、値`tidb_retry_limit`によって決定されます。
 
-    詳細は[再試行の制限](/optimistic-transaction.md#limits-of-retry)参照。
+    詳細については[再試行の制限](/optimistic-transaction.md#limits-of-retry)参照してください。
 
     <CustomContent platform="tidb">
 
@@ -1962,7 +1962,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 > 現在、カスケードプランナーは実験的機能です。本番環境でのご利用は推奨されません。
 
 -   スコープ: セッション | グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当：はい
 -   タイプ: ブール値
 -   デフォルト値: `OFF`
@@ -1971,7 +1971,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 ### tidb_enable_check_constraint<span class="version-mark">バージョン7.2.0の新機能</span> {#tidb-enable-check-constraint-span-class-version-mark-new-in-v7-2-0-span}
 
 -   範囲: グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: ブール値
 -   デフォルト値: `OFF`
@@ -1994,7 +1994,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   デフォルト値: `ON`
 -   `ON` `INT_ONLY`値: `OFF`
 -   この変数は、主キーをデフォルトで[クラスター化インデックス](/clustered-indexes.md)として作成するかどうかを制御するために使用されます。ここでの「デフォルト」とは、ステートメントでキーワード`CLUSTERED` / `NONCLUSTERED`が明示的に指定されていないことを意味します。サポートされる値は`OFF` 、 `ON` 、 `INT_ONLY`です。
-    -   `OFF` 、主キーがデフォルトで非クラスター化インデックスとして作成されることを示します。
+    -   `OFF`主キーがデフォルトで非クラスター化インデックスとして作成されることを示します。
     -   `ON` 、主キーがデフォルトでクラスター化インデックスとして作成されることを示します。
     -   `INT_ONLY` 、動作が設定項目`alter-primary-key`によって制御されることを示します。4 `alter-primary-key` `true`に設定すると、すべての主キーはデフォルトで非クラスター化インデックスとして作成されます`false`に設定すると、整数列で構成される主キーのみがクラスター化インデックスとして作成されます。
 
@@ -2354,7 +2354,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   デフォルト値: `ON`
 -   TiDB v6.2.0 では、以前のコストモデルの実装がリファクタリングされています。この変数は、リファクタリングされたコストモデルの実装を有効にするかどうかを制御します。
 -   リファクタリングされたコスト モデルでは以前と同じコスト式が使用され、プランの決定は変更されないため、この変数はデフォルトで有効になっています。
--   クラスターをv6.1からv6.2にアップグレードした場合、この変数は`OFF`ままです。手動で有効化することをお勧めします。クラスターをv6.1より前のバージョンからアップグレードした場合、この変数はデフォルトで`ON`に設定されます。
+-   クラスターをv6.1からv6.2にアップグレードした場合、この変数は`OFF`ままとなり、手動で有効化することをお勧めします。クラスターをv6.1より前のバージョンからアップグレードした場合、この変数はデフォルトで`ON`に設定されます。
 
 ### tidb_enable_new_only_full_group_by_check <span class="version-mark">v6.1.0 の新機能</span> {#tidb-enable-new-only-full-group-by-check-span-class-version-mark-new-in-v6-1-0-span}
 
@@ -2657,7 +2657,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `ON`
 -   値`ON`オプション: `OFF`
--   この変数は、TiDBがチャンクオブジェクトのキャッシュを有効にするかどうかを制御します。値が`ON`の場合、TiDBはキャッシュされたチャンクオブジェクトを優先的に使用し、要求されたオブジェクトがキャッシュに存在しない場合にのみシステムから要求します。値が`OFF`場合、TiDBはシステムから直接チャンクオブジェクトを要求します。
+-   この変数は、TiDBがチャンクオブジェクトのキャッシュを有効にするかどうかを制御します。値が`ON`場合、TiDBはキャッシュされたチャンクオブジェクトを優先的に使用し、要求されたオブジェクトがキャッシュに存在しない場合にのみシステムから要求します。値が`OFF`場合、TiDBはシステムから直接チャンクオブジェクトを要求します。
 
 ### tidb_enable_shared_lock_promotion<span class="version-mark">バージョン8.3.0の新機能</span> {#tidb-enable-shared-lock-promotion-span-class-version-mark-new-in-v8-3-0-span}
 
@@ -2739,7 +2739,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 > **注記：**
 >
-> MySQLでは`FLOAT`型に対して精度を指定できるため、この設定は型`DOUBLE`にのみ適用されます。この動作はMySQL 8.0.17以降では非推奨であり、 `FLOAT`または`DOUBLE`型に対して精度を指定することは推奨されません。
+> MySQLでは`FLOAT`型に対して精度を指定できるため、この設定は型`DOUBLE`にのみ適用されます。この動作はMySQL 8.0.17以降では非推奨となり、 `FLOAT`または`DOUBLE`型に対して精度を指定することは推奨されません。
 
 ### tidb_enable_table_partition {#tidb-enable-table-partition}
 
@@ -3126,7 +3126,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 > この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   範囲: グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 列挙
 -   デフォルト値: `LEGACY`
@@ -3413,7 +3413,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 ### tidb_index_join_double_read_penalty_cost_rate <span class="version-mark">v6.6.0 の新機能</span> {#tidb-index-join-double-read-penalty-cost-rate-span-class-version-mark-new-in-v6-6-0-span}
 
 -   スコープ: セッション | グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当：はい
 -   タイプ: フロート
 -   デフォルト値: `0`
@@ -3429,7 +3429,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 > バージョン5.0以降、この変数は非推奨です。代わりに[`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50)設定してください。
 
 -   スコープ: セッション | グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `-1`
@@ -3585,7 +3585,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 <CustomContent platform="tidb">
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `"1s"`
 -   範囲: `[0s, 1h]`
@@ -3597,7 +3597,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 <CustomContent platform="tidb-cloud">
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `"1s"`
 -   範囲: `[0s, 1h]`
@@ -3609,7 +3609,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 ### <code>tidb_load_binding_timeout</code><span class="version-mark">バージョン8.0.0の新機能</span> {#code-tidb-load-binding-timeout-code-span-class-version-mark-new-in-v8-0-0-span}
 
 -   範囲: グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `200`
@@ -3620,7 +3620,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 ### <code>tidb_lock_unchanged_keys</code> <span class="version-mark">v7.1.1 および v7.3.0 の新機能</span> {#code-tidb-lock-unchanged-keys-code-span-class-version-mark-new-in-v7-1-1-and-v7-3-0-span}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: ブール値
 -   デフォルト値: `ON`
@@ -3679,7 +3679,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 ### tidb_max_auto_analyze_time <span class="version-mark">v6.1.0 の新機能</span> {#tidb-max-auto-analyze-time-span-class-version-mark-new-in-v6-1-0-span}
 
 -   範囲: グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `43200` (12 時間)
@@ -3746,7 +3746,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 ### tidb_max_bytes_before_tiflash_external_sort<span class="version-mark">バージョン7.0.0の新機能</span> {#tidb-max-bytes-before-tiflash-external-sort-span-class-version-mark-new-in-v7-0-0-span}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当：はい
 -   型: 整数
 -   デフォルト値: `-1`
@@ -3774,7 +3774,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 ### tidb_max_chunk_size {#tidb-max-chunk-size}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `1024`
@@ -3942,7 +3942,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 
 <CustomContent platform="tidb">
 
--   この変数は、tidb-server のメモリアラームをトリガーするメモリ使用率を設定します。デフォルトでは、TiDB のメモリ使用量が総メモリの 70% を超え、かつ[警報条件](/configure-memory-usage.md#trigger-the-alarm-of-excessive-memory-usage)のいずれかの条件を満たすと、TiDB はアラームログを出力。
+-   この変数は、tidb-server のメモリアラームをトリガーするメモリ使用率を設定します。デフォルトでは、TiDB のメモリ使用量が総メモリの 70% を超え、かつ[警報条件](/configure-memory-usage.md#trigger-the-alarm-of-excessive-memory-usage)のいずれかの条件に該当すると、TiDB はアラームログを出力。
 -   この変数が`0`または`1`に設定されている場合、メモリしきい値アラーム機能は無効になります。
 -   この変数が`0`より大きく`1`より小さい値に設定されている場合、メモリしきい値アラーム機能が有効になっていることを意味します。
 
@@ -4240,7 +4240,7 @@ mysql> desc select count(distinct a) from test.t;
 ### tidb_opt_enable_correlation_adjustment {#tidb-opt-enable-correlation-adjustment}
 
 -   スコープ: セッション | グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当：はい
 -   タイプ: ブール値
 -   デフォルト値: `ON`
@@ -4249,7 +4249,7 @@ mysql> desc select count(distinct a) from test.t;
 ### tidb_opt_enable_hash_join <span class="version-mark">v6.5.6、v7.1.2、v7.4.0 の新機能</span> {#tidb-opt-enable-hash-join-span-class-version-mark-new-in-v6-5-6-v7-1-2-and-v7-4-0-span}
 
 -   スコープ: セッション | グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: ブール値
 -   デフォルト値: `ON`
@@ -4259,7 +4259,7 @@ mysql> desc select count(distinct a) from test.t;
 ### tidb_opt_enable_non_eval_scalar_subquery<span class="version-mark">バージョン7.3.0の新機能</span> {#tidb-opt-enable-non-eval-scalar-subquery-span-class-version-mark-new-in-v7-3-0-span}
 
 -   スコープ: セッション | グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: ブール値
 -   デフォルト値: `OFF`
@@ -4268,7 +4268,7 @@ mysql> desc select count(distinct a) from test.t;
 ### tidb_opt_enable_late_materialization<span class="version-mark">バージョン7.0.0の新機能</span> {#tidb-opt-enable-late-materialization-span-class-version-mark-new-in-v7-0-0-span}
 
 -   スコープ: セッション | グローバル
--   クラスターに存続: はい
+-   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当：はい
 -   タイプ: ブール値
 -   デフォルト値: `ON`
@@ -4911,7 +4911,7 @@ SHOW WARNINGS;
 -   デフォルト値: `OFF`
 -   この変数は、 `_tidb_rowid`列目に対して`INSERT` `REPLACE`ステートメントを実行するかどうかを制御するために使用されます。この変数は`UPDATE` TiDBツールを使用してデータをインポートする場合にのみ使用できます。
 
-### tidb_opt_hash_agg_cost_factor <span class="version-mark">v8.5.3 および v9.0.0 の新機能</span> {#tidb-opt-hash-agg-cost-factor-span-class-version-mark-new-in-v8-5-3-and-v9-0-0-span}
+### tidb_opt_hash_agg_cost_factor <span class="version-mark">v8.5.3 の新機能</span> {#tidb-opt-hash-agg-cost-factor-span-class-version-mark-new-in-v8-5-3-span}
 
 > **警告：**
 >
@@ -4923,7 +4923,7 @@ SHOW WARNINGS;
 -   範囲: `[0, 2147483647]`
 -   デフォルト値: `1`
 
-### tidb_opt_hash_join_cost_factor <span class="version-mark">v8.5.3 および v9.0.0 の新機能</span> {#tidb-opt-hash-join-cost-factor-span-class-version-mark-new-in-v8-5-3-and-v9-0-0-span}
+### tidb_opt_hash_join_cost_factor <span class="version-mark">v8.5.3 の新機能</span> {#tidb-opt-hash-join-cost-factor-span-class-version-mark-new-in-v8-5-3-span}
 
 > **警告：**
 >
@@ -4935,7 +4935,7 @@ SHOW WARNINGS;
 -   範囲: `[0, 2147483647]`
 -   デフォルト値: `1`
 
-### tidb_opt_index_join_cost_factor <span class="version-mark">v8.5.3 および v9.0.0 の新機能</span> {#tidb-opt-index-join-cost-factor-span-class-version-mark-new-in-v8-5-3-and-v9-0-0-span}
+### tidb_opt_index_join_cost_factor <span class="version-mark">v8.5.3 の新機能</span> {#tidb-opt-index-join-cost-factor-span-class-version-mark-new-in-v8-5-3-span}
 
 > **警告：**
 >
@@ -4947,7 +4947,7 @@ SHOW WARNINGS;
 -   範囲: `[0, 2147483647]`
 -   デフォルト値: `1`
 
-### tidb_opt_index_lookup_cost_factor <span class="version-mark">v8.5.3 および v9.0.0 の新機能</span> {#tidb-opt-index-lookup-cost-factor-span-class-version-mark-new-in-v8-5-3-and-v9-0-0-span}
+### tidb_opt_index_lookup_cost_factor<span class="version-mark">バージョン8.5.3の新機能</span> {#tidb-opt-index-lookup-cost-factor-span-class-version-mark-new-in-v8-5-3-span}
 
 > **警告：**
 >
@@ -4959,7 +4959,7 @@ SHOW WARNINGS;
 -   範囲: `[0, 2147483647]`
 -   デフォルト値: `1`
 
-### tidb_opt_index_merge_cost_factor <span class="version-mark">v8.5.3 および v9.0.0 の新機能</span> {#tidb-opt-index-merge-cost-factor-span-class-version-mark-new-in-v8-5-3-and-v9-0-0-span}
+### tidb_opt_index_merge_cost_factor <span class="version-mark">v8.5.3 の新機能</span> {#tidb-opt-index-merge-cost-factor-span-class-version-mark-new-in-v8-5-3-span}
 
 > **警告：**
 >
@@ -4971,7 +4971,7 @@ SHOW WARNINGS;
 -   範囲: `[0, 2147483647]`
 -   デフォルト値: `1`
 
-### tidb_opt_index_reader_cost_factor <span class="version-mark">v8.5.3 および v9.0.0 の新機能</span> {#tidb-opt-index-reader-cost-factor-span-class-version-mark-new-in-v8-5-3-and-v9-0-0-span}
+### tidb_opt_index_reader_cost_factor <span class="version-mark">v8.5.3 の新機能</span> {#tidb-opt-index-reader-cost-factor-span-class-version-mark-new-in-v8-5-3-span}
 
 > **警告：**
 >
@@ -4983,7 +4983,7 @@ SHOW WARNINGS;
 -   範囲: `[0, 2147483647]`
 -   デフォルト値: `1`
 
-### tidb_opt_index_scan_cost_factor <span class="version-mark">v8.5.3 および v9.0.0 の新機能</span> {#tidb-opt-index-scan-cost-factor-span-class-version-mark-new-in-v8-5-3-and-v9-0-0-span}
+### tidb_opt_index_scan_cost_factor <span class="version-mark">v8.5.3 の新機能</span> {#tidb-opt-index-scan-cost-factor-span-class-version-mark-new-in-v8-5-3-span}
 
 > **警告：**
 >
@@ -4995,7 +4995,7 @@ SHOW WARNINGS;
 -   範囲: `[0, 2147483647]`
 -   デフォルト値: `1`
 
-### tidb_opt_limit_cost_factor <span class="version-mark">v8.5.3 および v9.0.0 の新機能</span> {#tidb-opt-limit-cost-factor-span-class-version-mark-new-in-v8-5-3-and-v9-0-0-span}
+### tidb_opt_limit_cost_factor <span class="version-mark">v8.5.3 の新機能</span> {#tidb-opt-limit-cost-factor-span-class-version-mark-new-in-v8-5-3-span}
 
 > **警告：**
 >
@@ -5007,7 +5007,7 @@ SHOW WARNINGS;
 -   範囲: `[0, 2147483647]`
 -   デフォルト値: `1`
 
-### tidb_opt_merge_join_cost_factor <span class="version-mark">v8.5.3 および v9.0.0 の新機能</span> {#tidb-opt-merge-join-cost-factor-span-class-version-mark-new-in-v8-5-3-and-v9-0-0-span}
+### tidb_opt_merge_join_cost_factor <span class="version-mark">v8.5.3 の新機能</span> {#tidb-opt-merge-join-cost-factor-span-class-version-mark-new-in-v8-5-3-span}
 
 > **警告：**
 >
@@ -5019,7 +5019,7 @@ SHOW WARNINGS;
 -   範囲: `[0, 2147483647]`
 -   デフォルト値: `1`
 
-### tidb_opt_sort_cost_factor <span class="version-mark">v8.5.3 および v9.0.0 の新機能</span> {#tidb-opt-sort-cost-factor-span-class-version-mark-new-in-v8-5-3-and-v9-0-0-span}
+### tidb_opt_sort_cost_factor<span class="version-mark">バージョン8.5.3の新機能</span> {#tidb-opt-sort-cost-factor-span-class-version-mark-new-in-v8-5-3-span}
 
 > **警告：**
 >
@@ -5031,7 +5031,7 @@ SHOW WARNINGS;
 -   範囲: `[0, 2147483647]`
 -   デフォルト値: `1`
 
-### tidb_opt_stream_agg_cost_factor <span class="version-mark">v8.5.3 および v9.0.0 の新機能</span> {#tidb-opt-stream-agg-cost-factor-span-class-version-mark-new-in-v8-5-3-and-v9-0-0-span}
+### tidb_opt_stream_agg_cost_factor <span class="version-mark">v8.5.3 の新機能</span> {#tidb-opt-stream-agg-cost-factor-span-class-version-mark-new-in-v8-5-3-span}
 
 > **警告：**
 >
@@ -5043,7 +5043,7 @@ SHOW WARNINGS;
 -   範囲: `[0, 2147483647]`
 -   デフォルト値: `1`
 
-### tidb_opt_table_full_scan_cost_factor <span class="version-mark">v8.5.3 および v9.0.0 の新機能</span> {#tidb-opt-table-full-scan-cost-factor-span-class-version-mark-new-in-v8-5-3-and-v9-0-0-span}
+### tidb_opt_table_full_scan_cost_factor <span class="version-mark">v8.5.3 の新機能</span> {#tidb-opt-table-full-scan-cost-factor-span-class-version-mark-new-in-v8-5-3-span}
 
 > **警告：**
 >
@@ -5055,7 +5055,7 @@ SHOW WARNINGS;
 -   範囲: `[0, 2147483647]`
 -   デフォルト値: `1`
 
-### tidb_opt_table_range_scan_cost_factor <span class="version-mark">v8.5.3 および v9.0.0 の新機能</span> {#tidb-opt-table-range-scan-cost-factor-span-class-version-mark-new-in-v8-5-3-and-v9-0-0-span}
+### tidb_opt_table_range_scan_cost_factor<span class="version-mark">バージョン8.5.3の新機能</span> {#tidb-opt-table-range-scan-cost-factor-span-class-version-mark-new-in-v8-5-3-span}
 
 > **警告：**
 >
@@ -5067,7 +5067,7 @@ SHOW WARNINGS;
 -   範囲: `[0, 2147483647]`
 -   デフォルト値: `1`
 
-### tidb_opt_table_reader_cost_factor <span class="version-mark">v8.5.3 および v9.0.0 の新機能</span> {#tidb-opt-table-reader-cost-factor-span-class-version-mark-new-in-v8-5-3-and-v9-0-0-span}
+### tidb_opt_table_reader_cost_factor <span class="version-mark">v8.5.3 の新機能</span> {#tidb-opt-table-reader-cost-factor-span-class-version-mark-new-in-v8-5-3-span}
 
 > **警告：**
 >
@@ -5079,7 +5079,7 @@ SHOW WARNINGS;
 -   範囲: `[0, 2147483647]`
 -   デフォルト値: `1`
 
-### tidb_opt_table_rowid_cost_factor <span class="version-mark">v8.5.3 および v9.0.0 の新機能</span> {#tidb-opt-table-rowid-cost-factor-span-class-version-mark-new-in-v8-5-3-and-v9-0-0-span}
+### tidb_opt_table_rowid_cost_factor<span class="version-mark">バージョン8.5.3の新機能</span> {#tidb-opt-table-rowid-cost-factor-span-class-version-mark-new-in-v8-5-3-span}
 
 > **警告：**
 >
@@ -5091,7 +5091,7 @@ SHOW WARNINGS;
 -   範囲: `[0, 2147483647]`
 -   デフォルト値: `1`
 
-### tidb_opt_table_tiflash_scan_cost_factor <span class="version-mark">v8.5.3 および v9.0.0 の新機能</span> {#tidb-opt-table-tiflash-scan-cost-factor-span-class-version-mark-new-in-v8-5-3-and-v9-0-0-span}
+### tidb_opt_table_tiflash_scan_cost_factor<span class="version-mark">バージョン8.5.3の新機能</span> {#tidb-opt-table-tiflash-scan-cost-factor-span-class-version-mark-new-in-v8-5-3-span}
 
 > **警告：**
 >
@@ -5103,7 +5103,7 @@ SHOW WARNINGS;
 -   範囲: `[0, 2147483647]`
 -   デフォルト値: `1`
 
-### tidb_opt_topn_cost_factor <span class="version-mark">v8.5.3 および v9.0.0 の新機能</span> {#tidb-opt-topn-cost-factor-span-class-version-mark-new-in-v8-5-3-and-v9-0-0-span}
+### tidb_opt_topn_cost_factor <span class="version-mark">v8.5.3 の新機能</span> {#tidb-opt-topn-cost-factor-span-class-version-mark-new-in-v8-5-3-span}
 
 > **警告：**
 >
@@ -5384,7 +5384,7 @@ SHOW WARNINGS;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当：はい
 -   タイプ: 列挙
 -   デフォルト値: `leader`
--   可能な値: `leader` 、 `follower` 、 `leader-and-follower` 、 `prefer-leader` 、 `closest-replicas` 、 `closest-adaptive` 、 `learner` 。値`learner`はバージョン6.6.0で導入されました。
+-   可能な値: `leader` 、 `follower` 、 `leader-and-follower` 、 `prefer-leader` 、 `closest-replicas` 、 `closest-adaptive` 、 `learner` 。値`learner`バージョン6.6.0で導入されました。
 -   この変数は、TiDB がデータを読み取る場所を制御するために使用されます。
 -   使用方法と実装の詳細については、 [Followerが読んだ](/follower-read.md)参照してください。
 
@@ -6227,7 +6227,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
     -   TiDB と PD 間のネットワークレイテンシーは、PD が TSO を割り当てるのにかかる時間よりも大幅に長くなります (つまり、ネットワークレイテンシーがTSO RPC 期間の大部分を占めます)。
         -   TSO RPC 要求の期間を取得するには、Grafana TiDB ダッシュボードの PD クライアント セクションにある**PD TSO RPC 期間**パネルを確認します。
         -   PD TSO 割り当ての期間を取得するには、Grafana PD ダッシュボードの TiDB セクションにある**PDサーバーTSO ハンドル期間**パネルを確認します。
-    -   TiDB と PD 間の TSO RPC 要求の増加 ( `PARALLEL`の場合は 2 回、 `PARALLEL-FAST`場合は 4 回) によって生じる追加のネットワーク トラフィックは許容されます。
+    -   TiDB と PD 間の TSO RPC 要求の増加 ( `PARALLEL`回、 `PARALLEL-FAST`場合は 4 回) によって生じる追加のネットワーク トラフィックは許容されます。
 
 > **注記：**
 >
@@ -6610,7 +6610,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 ### タイムゾーン {#time-zone}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `SYSTEM`
 -   この変数は現在のタイムゾーンを返します。値は「-8:00」のようなオフセット、または「America/Los_Angeles」のような名前付きゾーンで指定できます。
@@ -6628,7 +6628,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 ### トランザクション分離 {#transaction-isolation}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 列挙
 -   デフォルト値: `REPEATABLE-READ`
@@ -6724,7 +6724,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   デフォルト値: `1`
 -   範囲: TiDBセルフマネージド[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は`[0, 2147483647]`と[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) `[1, 2147483647]`場合は[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)
 -   この変数は、パスワードの複雑さチェックにおけるチェック項目です。パスワードに十分な大文字と小文字が含まれているかどうかをチェックします。この変数は、 [`validate_password.enable`](#validate_passwordenable-new-in-v650)有効で、 [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) `1` （中）以上に設定されている場合にのみ有効になります。
--   パスワード内の大文字と小文字の数は、どちらも`validate_password.mixed_case_count`未満にすることはできません。例えば、変数が`1`に設定されている場合、パスワードには少なくとも1つの大文字と1つの小文字が含まれている必要があります。
+-   パスワードに含まれる大文字と小文字の数は、どちらも`validate_password.mixed_case_count`未満にすることはできません。例えば、この変数が`1`に設定されている場合、パスワードには少なくとも1つの大文字と1つの小文字が含まれている必要があります。
 
 ### validate_password.number_count <span class="version-mark">v6.5.0 の新機能</span> {#validate-password-number-count-span-class-version-mark-new-in-v6-5-0-span}
 
@@ -6753,7 +6753,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 ### validate_password.special_char_count <span class="version-mark">v6.5.0 の新機能</span> {#validate-password-special-char-count-span-class-version-mark-new-in-v6-5-0-span}
 
 -   範囲: グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `1`
@@ -6795,7 +6795,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 > この変数は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   型: 整数
 -   デフォルト値: `28800`
@@ -6810,10 +6810,10 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   デフォルト値: `0`
 -   この読み取り専用変数は、以前実行されたステートメントで発生した警告の数を示します。
 
-### ウィンドウイング_使用_高精度 {#windowing-use-high-precision}
+### ウィンドウイング_高精度使用 {#windowing-use-high-precision}
 
 -   スコープ: セッション | グローバル
--   クラスターに持続: はい
+-   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: ブール値
 -   デフォルト値: `ON`
