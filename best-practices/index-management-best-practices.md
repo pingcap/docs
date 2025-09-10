@@ -37,7 +37,7 @@ Indexes are essential for query performance, but removing them without proper an
 TiDB simplifies index optimization by introducing the following powerful tools:
 
 - `INFORMATION_SCHEMA.TIDB_INDEX_USAGE`: monitors index usage patterns and query frequency.
-- `mysql.schema_unused_indexes`: lists indexes that have not been used since the database is last restarted.
+- `sys.schema_unused_indexes`: lists indexes that have not been used since the database is last restarted.
 - Invisible indexes: allows you to test the impact of removing an index before permanently deleting it.
 
 By using these observability tools, you can confidently clean up redundant indexes without risking performance degradation.
