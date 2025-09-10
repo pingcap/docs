@@ -1792,7 +1792,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Float
 - Range: `[0, 1]`
 - Default value: `0.8`
-- This variable specifies the pseudo selectivity for the TiDB optimizer. In some cases where the optimizer cannot deduce the selectivity of a predicate from statistics, TiDB optimizer uses this pseudo selectivity value instead. It is **NOT** recommended that you modify this value.
+- This variable specifies the pseudo selectivity for the TiDB optimizer. In some cases where the optimizer cannot deduce the selectivity of a predicate from statistics, the optimizer uses this pseudo selectivity value instead. It is **NOT** recommended that you modify this value.
 
 ### tidb_default_string_match_selectivity <span class="version-mark">New in v6.2.0</span>
 
