@@ -22,7 +22,17 @@ DM supports migrating data from different sources to TiDB clusters. Based on the
 |MySQL 8.0|GA|Does not support binlog transaction compression [Transaction_payload_event](https://dev.mysql.com/doc/refman/8.0/en/binary-log-transaction-compression.html)|
 |MariaDB < 10.1.2|Incompatible|Incompatible with binlog of the time type|
 |MariaDB 10.1.2 ~ 10.5.10|Experimental||
-|MariaDB > 10.5.10|Incompatible|Permission errors reported in the check procedure|
+|MariaDB > 10.5.10|Not tested|Should work for most cases bypassing the precheck. See [MariaDB notes](#mariadb-notes).|
+
+### Foreign Keys with CASCADE operations
+
+- DM will create Foreign Keys contraints on the target, but those are not enforced when transactions are applied by setting seesion variable [`foreign_key_checks = OFF`](/system-variables.md#foreign_key_checks). 
+- DM does **not** honor CASCADE behavior by default; users relying on `ON DELETE/UPDATE CASCADE` must **not** assume cascades will be replicated. 
+
+### MariaDB notes
+
+- MariaDB versions later than 10.5.10 should work for most cases, but DM **precheck will fail** due to MariaDB 10.5+ privilege name changes (e.g., mentions of `BINLOG MONITOR`, `REPLICATION SLAVE ADMIN`, `REPLICATION MASTER ADMIN`) and return `[code=26005] fail to check synchronization configuration` with errors in **replication** and **dump** privilege checkers.
+- [DM precheck](/dm/dm-precheck.md) can be **bypassed** by adding `ignore-checking-items: ["all"]` in the DM task.
 
 ## Target databases
 
