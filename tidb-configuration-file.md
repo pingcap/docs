@@ -635,6 +635,10 @@ Configuration items related to performance.
 
 ### skip-init-stats <span class="version-mark">New in v9.0.0</span>
 
+> **Warning:**
+>
+> Please never set this configuration item to `true` in the production environment unless you fully understand the impact of doing so.
+
 + Controls whether to skip statistics initialization during TiDB startup.
 + Default value: `false`
 + When the value of `skip-init-stats` is `true`, TiDB skips statistics initialization during startup. This configuration item is useful when you want to quickly start TiDB without waiting for statistics initialization, especially when there are a large number of tables and partitions. **However, this is a very special scenario. In most cases, please never set this configuration item to `true`, otherwise the optimizer might generate suboptimal execution plans due to the lack of statistics.**
