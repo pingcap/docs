@@ -140,10 +140,10 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Unit: byte
 - Value range: `[3072, 3072*4]`  
 - Version history:  
-- - MySQL: The maximum index length is fixed at 3072 Bytes.  
-- - TiDB v3.0.7 and earlier: The limit is 3072 × 4 Bytes.  
-- - TiDB v3.0.8 ~ v3.0.10: The limit is 3072 Bytes.  
-- - TiDB v3.0.11 and later: Introduced the `max-index-length` configuration option to ensure compatibility with different TiDB versions and MySQL.  
+- - MySQL: The maximum index length is fixed at 3072 bytes.
+- - TiDB v3.0.7 and earlier: The limit is 3072 * 4 bytes.
+- - TiDB v3.0.8 ~ v3.0.10: The limit is 3072 bytes.
+- - TiDB v3.0.11 and later: Introduces the `max-index-length` configuration option to ensure compatibility with different TiDB versions and MySQL.
 
 ### `table-column-count-limit` <span class="version-mark">New in v5.0</span>
 
