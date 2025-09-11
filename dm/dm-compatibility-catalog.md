@@ -1,6 +1,6 @@
 ---
 title: Compatibility Catalog of TiDB Data Migration
-summary: This document describes the compatibility between DM versions and upstream/downstream databases.
+summary: This document describes DM compatibility with upstream and downstream databases.
 ---
 
 # Compatibility Catalog of TiDB Data Migration
@@ -8,7 +8,7 @@ summary: This document describes the compatibility between DM versions and upstr
 DM supports migrating data from different sources to TiDB clusters. Based on the data source type, DM has four compatibility levels:
 
 - **Generally available (GA)**: The application scenario has been verified and passed GA testing.
-- **Experimental**: The common application scenarios have been verified, but coverage is limited or involves only a small number of users. Occasional issues are possible, and the verification using your specific scenario is highly recommended.
+- **Experimental**: The common application scenarios have been verified, but coverage is limited or involves only a small number of users. Occasional issues are possible, so you should verify compatibility in your specific scenario.
 - **Not tested**: DM aims for MySQL protocol and binlog compatibility, but not all MySQL forks/versions are part of DM test matrix. However, if the forks/versions protocols and binlog formats are MySQL-compatible, these are expected to work. You must verify in your environment before use.
 - **Incompatible**: DM has known blocking issues and production use is not recommended.
 
@@ -24,16 +24,16 @@ DM supports migrating data from different sources to TiDB clusters. Based on the
 | MariaDB 10.1.2 ~ 10.5.10 | Experimental | |
 | **MariaDB > 10.5.10** | Not tested | **Should work for most cases** after bypassing precheck. See [MariaDB notes](#mariadb-notes). |
 
-### DM is incompatible with Foreign keys CASCADE operations
+### Incompatibility with foreign key CASCADE operations
 
-- DM creates foreign key **constraints** on the target, but they are not enforced while applying transactions because the DM sets the session variable [`foreign_key_checks=OFF`](/system-variables.md#foreign_key_checks).
-- DM does **not** honor `ON DELETE/UPDATE CASCADE` behavior by default and it is not recommended to enable `foreign_key_checks` via DM task session variable. If your workload relies on cascades, **do not assume** cascade effects will be replicated.
+- DM creates foreign key **constraints** on the target, but they are not enforced while applying transactions because DM sets the session variable [`foreign_key_checks=OFF`](/system-variables.md#foreign_key_checks).
+- DM does **not** honor `ON DELETE/UPDATE CASCADE` behavior by default, and we do not recommend enabling `foreign_key_checks` via a DM task session variable. If your workload relies on cascades, **do not assume** cascade effects will be replicated.
 
 ### MariaDB notes
 
-- For MariaDB **10.5.11 and later**, DM **precheck will fail** due to privilege name changes and return:  
+- For MariaDB **10.5.11 and later**, DM **precheck will fail** due to privilege name changes and returns:  
   `[code=26005] fail to check synchronization configuration`  
-  with errors in the replication and dump privilege checkers (e.g., mentions of `BINLOG MONITOR`, `REPLICATION SLAVE ADMIN`, `REPLICATION MASTER ADMIN`).
+  with errors in the replication and dump privilege checkers (for example, mentions of `BINLOG MONITOR`, `REPLICATION SLAVE ADMIN`, `REPLICATION MASTER ADMIN`).
 - You can **bypass precheck** by adding  
   `ignore-checking-items: ["all"]` in the DM task. See [DM precheck](/dm/dm-precheck.md) for details.
 
