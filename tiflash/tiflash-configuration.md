@@ -253,7 +253,7 @@ The following configuration items only take effect for the TiFlash disaggregated
 
 ##### `graceful_wait_shutdown_timeout` <span class="version-mark">New in v9.0.0</span>
 
-- Specifies the maximum number of seconds that the TiFlash server waits for when you shut down the TiFlash server, which allows the remaining MPP tasks to execute and does not accept any new MPP tasks. If all the MPP tasks are finished before this timeout, TiFlash will shut down immediately.
+- Controls the maximum wait time when shutting down a TiFlash server. During this period, TiFlash continues running unfinished MPP tasks but does not accept new ones. If all running MPP tasks finish before this timeout, TiFlash shuts down immediately; otherwise, it is forcibly shut down after the wait time expires.  
 - Default value: `600`
 - When one TiFlash server is waiting for shutdown (in the grace period), the TiDB will not send any new MPP task to this TiFlash server.
 
