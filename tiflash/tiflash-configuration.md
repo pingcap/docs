@@ -251,7 +251,7 @@ The following configuration items only take effect for the TiFlash disaggregated
 - This configuration item only takes effect for the TiFlash disaggregated storage and compute architecture mode. For details, see [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md).
 - Value options: `"tiflash_write"`, `"tiflash_compute"`
 
-##### `graceful_wait_shutdown_timeout`
+##### `graceful_wait_shutdown_timeout` <span class="version-mark">New in v9.0.0</span>
 
 - Specifies the maximum number of seconds that the TiFlash server waits for when you shut down the TiFlash server, which allows the remaining MPP tasks to execute and does not accept any new MPP tasks. If all the MPP tasks are finished before this timeout, TiFlash will shut down immediately.
 - Default value: `600`
