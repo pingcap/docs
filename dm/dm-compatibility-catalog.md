@@ -22,7 +22,7 @@ DM supports migrating data from different sources to TiDB clusters. Based on the
 | MySQL 8.0 | GA | Does not support binlog transaction compression [Transaction_payload_event](https://dev.mysql.com/doc/refman/8.0/en/binary-log-transaction-compression.html) |
 | MariaDB < 10.1.2 | Incompatible | Incompatible with binlog of the time type |
 | MariaDB 10.1.2 ~ 10.5.10 | Experimental | |
-| **MariaDB > 10.5.10** | Not tested | **Should work for most cases** after bypassing precheck. See [MariaDB notes](#mariadb-notes). |
+| MariaDB > 10.5.10 | Not tested | Should work for most cases after bypassing precheck. See [MariaDB notes](#mariadb-notes). |
 
 ### Incompatibility with foreign key CASCADE operations
 
