@@ -11,7 +11,7 @@ on:
 
 
 env:
-  CN_CLOUD_BRANCH: feat-manual-translation
+  CN_CLOUD_BRANCH: i18n-zh-release-8.5
 
 jobs:
   translate:
