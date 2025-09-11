@@ -2,6 +2,13 @@ name: Translation(zh) by AI
 
 on:
   workflow_dispatch:
+    inputs:
+      file_names:
+        description: 'Specify file names to translate (comma-separated list)'
+        required: false
+        type: string
+        default: ''
+
 
 env:
   CN_CLOUD_BRANCH: i18n-zh-release-8.5
@@ -35,7 +42,11 @@ jobs:
           export GH_TOKEN=${{github.token}}
           cd docs
           npm i
-          node scripts/filterUpdateFiles.js --cloud
+          if [ -n "${{ inputs.file_names }}" ]; then
+            node scripts/fetchFiles.js --files "${{ inputs.file_names }}"
+          else
+            node scripts/filterUpdateFiles.js --cloud
+          fi
           tree tmp
           cd ..
       - name: Copy new files to translator folder
