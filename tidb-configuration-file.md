@@ -633,6 +633,12 @@ Configuration items related to performance.
 + When the value of `force-init-stats` is `true`, TiDB needs to wait until statistics initialization is finished before providing services upon startup. Note that if there are a large number of tables and partitions and the value of [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) is `false`, setting `force-init-stats` to `true` might prolong the time it takes for TiDB to start providing services.
 + When the value of `force-init-stats` is `false`, TiDB can still provide services before statistics initialization is finished, but the optimizer uses pseudo statistics to make decisions, which might result in suboptimal execution plans.
 
+### skip-init-stats <span class="version-mark">New in v9.0.0</span>
+
++ Controls whether to skip statistics initialization during TiDB startup.
++ Default value: `false`
++ When the value of `skip-init-stats` is `true`, TiDB skips statistics initialization during startup. This configuration item is useful when you want to quickly start TiDB without waiting for statistics initialization, especially when there are a large number of tables and partitions. However, this is a very special scenario. In most cases, please never set this configuration item to `true`, otherwise the optimizer might generate suboptimal execution plans due to the lack of statistics.
+
 ## opentracing
 
 Configuration items related to opentracing.
