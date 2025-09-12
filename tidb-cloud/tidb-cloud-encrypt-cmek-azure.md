@@ -154,5 +154,5 @@ If you need to temporarily revoke TiDB Cloud's access to CMEK, follow these step
 
 After disabling TiDB Cloud's access to CMEK, if you need to restore the access, follow these steps:
 
-1. On the Azure Key Vault console, select the encryption key and **Enable**.
+1. On the Azure Key Vault console, select the encryption key and click **Enable**.
 2. On the TiDB Cloud console, restore the corresponding clusters in the project.
