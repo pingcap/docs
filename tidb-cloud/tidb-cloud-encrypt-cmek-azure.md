@@ -58,7 +58,7 @@ To complete the CMEK configuration for Azure Key Vault of the project, take the 
 
 3. On the **Encryption Access** page, click **Create Encryption Key** to enter the key creation page.
 
-4. Choose **Key Management Service** as **Azure Key Vault**. You can choose the region where the encryption key can be used. 
+4. Choose **Key Management Service** as **Azure Key Vault**. You can choose the region where the encryption key can be used.
 
 5. Create a Service Principal for the TiDB-provided Enterprise Application if you do not already have one in your tenant. For more information, refer to [Application and service principal objects in Microsoft Entra ID](https://learn.microsoft.com/azure/active-directory/develop/app-objects-and-service-principals). To create the Service Principal, run the following command as shown in the **Create Service Principal** section:
 
