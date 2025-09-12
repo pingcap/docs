@@ -75,37 +75,50 @@ To complete the CMEK configuration for Azure Key Vault of the project, take the 
 
 8. Assign the **Key Vault Crypto Officer** role to your current user for the Key Vault.
 
-9. Assign the **Key Vault Crypto Service Encryption User** role to the created service principal for the key. To assign role on Azure Portal: 
+   * In the Azure Portal, navigate to your Key Vault.
+   * Click on **Access control (IAM)**, then select **Add** > **Add role assignment**.
+   * Search for and select the **Key Vault Crypto Officer** role, then click **Next**.
+   * On the **Members** tab, set **Assign access to** as **User, group, or service principal**.
+   * Click **+ Select members**, then search for and select your current user as the member. Click **Select** to confirm.
+   * Review the settings and click **Review + assign** to complete the role assignment.
 
-   * Enter the encryption key object you created just now, then click **Add role assignment** in the **Add** dropdown button. Search and choose **Key Vault Crypto Service Encryption User** role and **Next**. 
-   * In the **Members** tab, choose Assign access to **User, group, or service principal**. Click **+ Select members**, a side-panel will show on the right of the page. In the search box, search the TiDB-provided **Enterprise Application Name** and select as member. Then click **Select** button on the bottom to continue.
-   * Revierw the configuration and click **Review + assign** to complete the role assignment.
+9. Assign the **Key Vault Crypto Service Encryption User** role to the TiDB-provided enterprise application for the encryption key.
 
+   * Go to the specific encryption key object you created in your Key Vault.
+   * Click **Add role assignment** in the **Add** dropdown button.
+   * Search for and select the **Key Vault Crypto Service Encryption User** role, then click **Next**.
+   * On the **Members** tab, choose **Assign access to**: **User, group, or service principal**.
+   * Click **+ Select members**. In the search box, enter the TiDB-provided **Enterprise Application Name** and select it as the member. Click **Select** to confirm your choice.
+   * Review the configuration and click **Review + assign** to complete the role assignment.
+   
 10. Click **Test Encryption Key && Create** in TiDB console to validate the configuration and create the encryption key.
     </div>
 <div label="Use Azure Resource Manager" value="console">
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), switch to your target project using the combo box in the upper-left corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), use the combo box in the upper-left corner to switch to your target project.
 
-2. In the left navigation pane, click **Project Settings** > **Encryption Access**.
+2. In the left navigation panel, go to **Project Settings** > **Encryption Access**.
 
-3. On the **Encryption Access** page, click **Create Encryption Key** to enter the key creation page.
+3. On the **Encryption Access** page, click **Create Encryption Key** to start the key creation process.
 
-4. Choose **Key Management Service** as **Azure Key Vault**. You can choose the region where the encryption key can be used. 
+4. Under **Key Management Service**, select **Azure Key Vault**. You can also specify the region where the encryption key will be available.
 
-5. Create a Service Principal for the TiDB-provided Enterprise Application if you do not already have one in your tenant. For more information, refer to [Application and service principal objects in Microsoft Entra ID](https://learn.microsoft.com/azure/active-directory/develop/app-objects-and-service-principals). To create the Service Principal, run the following command as shown in the **Create Service Principal** section:
+5. If you do not already have a Service Principal for the TiDB-provided Enterprise Application in your tenant, create one. For more information, see [Application and service principal objects in Microsoft Entra ID](https://learn.microsoft.com/azure/active-directory/develop/app-objects-and-service-principals). To create the Service Principal, run the following command as described in the **Create Service Principal** section:
 
    ```
    az ad sp create --id {Microsoft_Entra_Application_ID}
    ```
 
-6. Open the [Azure Resource Manager with TiDB custom deployment template](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Ftcidm.blob.core.windows.net%2Fcmek%2Fazure_cmek_rmt.json%3Fsv%3D2015-04-05%26ss%3Db%26srt%3Dco%26sp%3Drl%26se%3D2029-03-01T00%3A00%3A01.0000000Z%26sig%3DIA02CymcFpYCwoTsqCSJVD%2F8Khh%2F0UAPrkKDeLMIIFc%3D). Select your **Subscription** and **Resource Group**, then complete the **Instance Details** section:
+6. Open the [Azure Resource Manager with the TiDB custom deployment template](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Ftcidm.blob.core.windows.net%2Fcmek%2Fazure_cmek_rmt.json%3Fsv%3D2015-04-05%26ss%3Db%26srt%3Dco%26sp%3Drl%26se%3D2029-03-01T00%3A00%3A01.0000000Z%26sig%3DIA02CymcFpYCwoTsqCSJVD%2F8Khh%2F0UAPrkKDeLMIIFc%3D) in the Azure Portal. Choose your **Subscription** and **Resource Group**, then fill out the **Instance Details** section as follows:
 
-   - **Region**: The location where the key vault and key are created. This must match your cluster’s region.
-   - **Key Vault Name**: Name of your Azure Key Vault.
-   - **Key Name**: Full key name to be created in the key vault. On the TiDB console, enter the key name prefix and click the **Copy** icon to get the full key name.
-   - **Enterprise App Service Principal Id**: The Service Principal ID for the TiDB-managed enterprise app. To obtain this, run:
-     `az ad sp show --id {microsoft_enterprise_app_id} --query id -o tsv`. (Replace `{microsoft_enterprise_app_id}` with the actual ID shown in the TiDB console)
+   - **Region**: Select the location where both the key vault will be created. This must match your cluster’s region.
+   - **Key Vault Name**: Enter the name of your Azure Key Vault.
+   - **Key Name**: Provide the full key name to be created in the key vault. In the TiDB console, enter the key name prefix and use the **Copy** icon to obtain the full key name.
+   - **Enterprise App Service Principal Id**: Enter the Service Principal ID for the TiDB-managed enterprise application. To retrieve the **Service Principal ID**, run (replace the `{microsoft_enterprise_app_id}` to the actual ID shown in the TiDB console):
+     
+     ```shell
+     az ad sp show --id {microsoft_enterprise_app_id} --query id -o tsv
+     ```
 
 </div>
 </SimpleTab>
