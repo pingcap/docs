@@ -71,7 +71,7 @@ To complete the CMEK configuration for Azure Key Vault of the project, take the 
    * Make sure **purge protection is enabled** on the Key Vault.
    * The **region** must match the cluster's region.
 
-7. Provide your Key Vault name and Key name prefix in the TiDB Cloud console. A unique suffix will be added to the key name for enhanced security. Copy the full key name and create a new encryption key in the Key Vault on Azure portal. For more information, refer to [Create your encryption key](https://learn.microsoft.com/azure/key-vault/keys/quick-create-portal).
+7. Provide your Key Vault name and Key name prefix in the TiDB Cloud console. A unique suffix will be added to the key name for enhanced security. Copy the full key name and create a new encryption key in the Key Vault in the Azure portal. For more information, refer to [Create your encryption key](https://learn.microsoft.com/azure/key-vault/keys/quick-create-portal).
 
 8. Assign the **Key Vault Crypto Officer** role to your current user for the Key Vault.
 
