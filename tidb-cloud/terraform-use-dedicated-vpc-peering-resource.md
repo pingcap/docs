@@ -146,7 +146,7 @@ The following example shows how to create a TiDB Cloud Dedicated VPC peering.
 
 ## Import a TiDB Cloud Dedicated VPC peering
 
-For a TiDB Cloud Dedicated VPC peering that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+For a TiDB Cloud Dedicated VPC peering that is not managed by Terraform, you can bring it under Terraform management by importing it.
 
 For example, you can import a VPC peering that is not created by Terraform.
 

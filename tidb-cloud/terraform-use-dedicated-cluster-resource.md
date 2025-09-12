@@ -7,7 +7,7 @@ summary: Learn how to use the `tidbcloud_dedicated_cluster` resource to create a
 
 This document describes how to manage a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster with the `tidbcloud_dedicated_cluster` resource.
 
-In addition, you will also learn how to get the necessary information with the `tidbcloud_projects` data source and use the `tidbcloud_dedicated_node_group` resource to manage TiDB node groups of your TiDB Cloud Dedicated cluster.
+You will also learn how to get the necessary information with the `tidbcloud_projects` data source and use the `tidbcloud_dedicated_node_group` resource to manage TiDB node groups of your TiDB Cloud Dedicated cluster.
 
 The features of the `tidbcloud_dedicated_cluster` resource include the following:
 
@@ -130,7 +130,9 @@ You can create a TiDB Cloud Dedicated cluster using the `tidbcloud_dedicated_clu
 
 1. Create a directory for the cluster and enter it.
 
-2. Create a `cluster.tf` file:
+2. Create a `cluster.tf` file.
+
+    The following is an example of the `cluster.tf` file:
 
     ```
     terraform {
@@ -168,8 +170,7 @@ You can create a TiDB Cloud Dedicated cluster using the `tidbcloud_dedicated_clu
 
     - To use the `tidbcloud_dedicated_cluster` resource, set the resource type as `tidbcloud_dedicated_cluster`.
     - For the resource name, you can define it as needed. For example, `example_cluster`.
-    - For the resource details, you can configure them according to the Project ID and the TiDB Cloud Dedicated cluster specification information. 
-    - To get the TiDB Cloud Dedicated cluster specification information, see [tidbcloud_dedicated_cluster (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_cluster).
+    - For resource details, you can configure them according to the Project ID and the [`tidbcloud_dedicated_cluster` specification](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_cluster).
 
 3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
 
@@ -1050,7 +1051,7 @@ $ terraform show
 
 ## Import a cluster
 
-For a TiDB cluster that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+For a TiDB cluster that is not managed by Terraform, you can bring it under Terraform management by importing it.
 
 Import a cluster that is not created by Terraform as follows:
 

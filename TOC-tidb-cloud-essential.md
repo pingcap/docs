@@ -286,7 +286,7 @@
   - Terraform
     - [Terraform Integration Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
     - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
-    - [Use the `tidbcloud_serverless_cluster` Resource](/tidb-cloud/terraform-use-serverless-cluster-resource.md)
+    - [Use the `tidbcloud_serverless_cluster` Resource](/tidb-cloud/terraform-use-serverless-cluster-resource-manage-essential.md)
     - [Use the `tidbcloud_serverless_branch` Resource](/tidb-cloud/terraform-use-serverless-branch-resource.md)
     - [Use the `tidbcloud_serverless_export` Resource](/tidb-cloud/terraform-use-serverless-export-resource.md)
     - [Use the `tidbcloud_sql_user` Resource](/tidb-cloud/terraform-use-sql-user-resource.md)

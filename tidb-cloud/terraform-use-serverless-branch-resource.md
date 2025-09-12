@@ -1,17 +1,17 @@
 ---
 title: Use `tidbcloud_serverless_branch` Resource
-summary: Learn how to use the serverless branch resource to create and modify a {{{ .starter }}} branch.
+summary: Learn how to use the serverless branch resource to create and modify a {{{ .starter }}} or {{{ .essential }}} branch.
 ---
 
 # Use the `tidbcloud_serverless_branch` Resource
 
-This document describes how to manage a [{{{ .starter }}} branch](/tidb-cloud/branch-manage.md) using the `tidbcloud_serverless_branch` resource.
+This document describes how to manage a [{{{ .starter }}} or {{{ .essential }}} branch](/tidb-cloud/branch-manage.md) using the `tidbcloud_serverless_branch` resource.
 
 The features of the `tidbcloud_serverless_branch` resource include the following:
 
-- Create {{{ .starter }}} branches.
-- Import {{{ .starter }}} branches.
-- Delete {{{ .starter }}} branches.
+- Create {{{ .starter }}} or {{{ .essential }}} branches.
+- Import {{{ .starter }}} or {{{ .essential }}} branches.
+- Delete {{{ .starter }}} or {{{ .essential }}} branches.
 
 > **Note:**
 >
@@ -20,13 +20,13 @@ The features of the `tidbcloud_serverless_branch` resource include the following
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
-- [Create a {{{ .starter }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+- [Create a {{{ .starter }}} or {{{ .essential }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
 
-## Create a {{{ .starter }}} branch
+## Create a {{{ .starter }}} or {{{ .essential }}} branch
 
-You can create a {{{ .starter }}} branch using the `tidbcloud_serverless_branch` resource.
+You can create a {{{ .starter }}} or {{{ .essential }}} branch using the `tidbcloud_serverless_branch` resource.
 
-The following example shows how to create a {{{ .starter }}} branch.
+The following example shows how to create a {{{ .starter }}} or {{{ .essential }}} branch.
 
 1. Create a directory for the branch and enter it.
 
@@ -158,11 +158,11 @@ The following example shows how to create a {{{ .starter }}} branch.
     }
     ```
 
-## Import a {{{ .starter }}} branch
+## Import a {{{ .starter }}} or {{{ .essential }}} branch
 
-For a {{{ .starter }}} branch that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+For a {{{ .starter }}} or {{{ .essential }}} branch that is not managed by Terraform, you can bring it under Terraform management by importing it.
 
-Import a {{{ .starter }}} branch that is not created by Terraform as follows:
+Import a {{{ .starter }}} or {{{ .essential }}} branch that is not created by Terraform as follows:
 
 1. Add an import block for the new `tidbcloud_serverless_branch` resource.
 
@@ -200,9 +200,9 @@ Import a {{{ .starter }}} branch that is not created by Terraform as follows:
 
 Now you can manage the imported branch with Terraform.
 
-## Delete a {{{ .starter }}} branch
+## Delete a {{{ .starter }}} or {{{ .essential }}} branch
 
-To delete a {{{ .starter }}} branch, you can delete the configuration of the `tidbcloud_serverless_branch` resource, then use the `terraform apply` command to destroy the resource:
+To delete a {{{ .starter }}} or {{{ .essential }}} branch, you can delete the configuration of the `tidbcloud_serverless_branch` resource, then use the `terraform apply` command to destroy the resource:
 
 ```shell
 $ terraform apply
