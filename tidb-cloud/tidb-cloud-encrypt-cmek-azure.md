@@ -152,7 +152,7 @@ If you need to temporarily revoke TiDB Cloud's access to CMEK, follow these step
 >
 > After you revoke CMEK on Azure Key Vault, your running clusters are not affected. However, when you pause a cluster and then restore the cluster, the cluster will not be able to restore normally because it cannot access CMEK.
 
-After disable TiDB Cloud's access to CMEK, if you need to restore the access, follow these steps:
+After disabling TiDB Cloud's access to CMEK, if you need to restore the access, follow these steps:
 
 1. On the Azure Key Vault console, select the encryption key and **Enable**.
 2. On the TiDB Cloud console, restore the corresponding clusters in the project.
