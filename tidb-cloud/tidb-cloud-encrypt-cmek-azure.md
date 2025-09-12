@@ -1,6 +1,6 @@
 ---
-title: Encryption at Rest Using Customer-Managed Encryption Keys
-summary: Learn about how to use Customer-Managed Encryption Key (CMEK) in TiDB Cloud.
+title: Encryption at Rest Using Customer-Managed Encryption Keys on Azure
+summary: Learn how to use a Customer-Managed Encryption Key (CMEK) on Azure in TiDB Cloud.
 ---
 
 # Encryption at Rest Using Customer-Managed Encryption Keys on Azure
