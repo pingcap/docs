@@ -60,7 +60,7 @@ To complete the CMEK configuration for Azure Key Vault of the project, take the 
 
 4. Choose **Key Management Service** as **Azure Key Vault**. You can choose the region where the encryption key can be used.
 
-5. Create a Service Principal for the TiDB-provided Enterprise Application if you do not already have one in your tenant. For more information, refer to [Application and service principal objects in Microsoft Entra ID](https://learn.microsoft.com/azure/active-directory/develop/app-objects-and-service-principals). To create the Service Principal, run the following command as shown in the **Create Service Principal** section:
+5. Create a Service Principal for the TiDB-provided Enterprise Application if one does not already exist in your tenant. For details, see [Application and service principal objects in Microsoft Entra ID](https://learn.microsoft.com/azure/active-directory/develop/app-objects-and-service-principals). The **Microsoft Entra Application Name** and **ID** needed for this process are provided in the TiDB Cloud console and will be used in subsequent steps. To create the Service Principal, run the following command as shown in the **Create Service Principal** section:
 
    ```
    az ad sp create --id {Microsoft_Entra_Application_ID}
@@ -71,9 +71,9 @@ To complete the CMEK configuration for Azure Key Vault of the project, take the 
    * Make sure **purge protection is enabled** on the Key Vault.
    * The **region** must match the cluster's region.
 
-7. Provide your Key Vault name and Key name prefix in the TiDB Cloud console. A unique suffix will be added to the key name for enhanced security. Copy the full key name and create a new encryption key in the Key Vault in the Azure portal. For more information, refer to [Create your encryption key](https://learn.microsoft.com/azure/key-vault/keys/quick-create-portal).
+7. Provide your Key Vault name and Key name in the TiDB Cloud console. A unique suffix will be added to the key name for enhanced security. Copy the full key name and create a new encryption key in the Key Vault in the Azure portal. For more information, refer to [Create your encryption key](https://learn.microsoft.com/azure/key-vault/keys/quick-create-portal).
 
-8. Assign the **Key Vault Crypto Officer** role to your current user for the Key Vault.
+8. Assign the **Key Vault Crypto Officer** role to your current user on the Key Vault to enable key management capabilities.
 
    * In the Azure Portal, navigate to your Key Vault.
    * Click on **Access control (IAM)**, then select **Add** > **Add role assignment**.
@@ -150,7 +150,7 @@ If you need to temporarily revoke TiDB Cloud's access to CMEK, follow these step
 
 > **Note:**
 >
-> After you disabling CMEK on Azure Key Vault, your running clusters are not affected. However, if you pause a cluster and then try to resume it, the cluster will not be able to resume because it cannot access CMEK.
+> After you disable CMEK on Azure Key Vault, your running clusters will become unavailable within a few minutes because they will no longer be able to access the CMEK.
 
 After disabling TiDB Cloud's access to CMEK, if you need to restore the access, follow these steps:
 
