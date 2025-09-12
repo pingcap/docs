@@ -229,7 +229,7 @@ TiDB Cloud safeguards static data with advanced encryption capabilities, ensurin
 
 - Leverage CMEK for industries requiring strict compliance, such as HIPAA and GDPR.
 
-For more information, see [Encryption at Rest Using Customer-Managed Encryption Keys](/tidb-cloud/tidb-cloud-encrypt-cmek.md).
+For more information, see [Encryption at Rest Using Customer-Managed Encryption Keys on AWS](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md) and [Encryption at Rest Using Customer-Managed Encryption Keys on Azure](/tidb-cloud/tidb-cloud-encrypt-cmek-azure.md).
 
 ## Audit logging
 
