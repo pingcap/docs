@@ -3,7 +3,7 @@ title: Encryption at Rest Using Customer-Managed Encryption Keys
 summary: Learn about how to use Customer-Managed Encryption Key (CMEK) in TiDB Cloud.
 ---
 
-# Encryption at Rest Using Customer-Managed Encryption Keys
+# Encryption at Rest Using Customer-Managed Encryption Keys on AWS
 
 Customer-Managed Encryption Key (CMEK) allows you to secure your static data in a TiDB Cloud Dedicated cluster by utilizing a symmetric encryption key that is under your complete control. This key is referred to as the CMEK key.
 
@@ -11,16 +11,15 @@ Once CMEK is enabled for a project, all clusters created within that project enc
 
 > **Note:**
 >
-> - CMEK is similar to Bring Your Own Key (BYOK). With BYOK, you typically generate the key locally and upload it. However, TiDB Cloud only supports keys generated within [AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html).
-> - Currently, this feature is only available upon request. If you need to try out this feature, contact [support](/tidb-cloud/tidb-cloud-support.md).
+> - CMEK is similar to Bring Your Own Key (BYOK). With BYOK, you typically generate the key locally and upload it. However, TiDB Cloud supports keys generated within [AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html).
 
 ## Restrictions
 
-- Currently, TiDB Cloud only supports using AWS KMS to provide CMEK.
+- Currently, TiDB Cloud only supports using AWS KMS and Azure Key Vault to provide CMEK.
 - To use CMEK, you need to enable CMEK when creating a project and complete CMEK-related configurations before creating a cluster. You cannot enable CMEK for existing projects.
-- Currently, in CMEK-enabled projects, you can only create [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS.
+- Currently, in CMEK-enabled projects, you can only create [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS and Azure.
 - Currently, in CMEK-enabled projects, [dual region backup](/tidb-cloud/backup-and-restore-concepts.md#dual-region-backup) is not supported.
-- Currently, for a specific project, you can only enable CMEK for one AWS region. Once you have configured it, you cannot create clusters in other regions within the same project.
+- Currently, in CMEK-enabled projects, you can enable CMEK on AWS and Azure. Each cloud provider allows configuring a unique encryption key per region. Clusters may only be created in regions where an encryption key has been configured for the selected cloud provider.
 
 ## Enable CMEK
 
