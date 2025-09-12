@@ -93,7 +93,7 @@ To complete the CMEK configuration for Azure Key Vault of the project, take the 
    
 10. Click **Test Encryption Key && Create** in TiDB console to validate the configuration and create the encryption key.
     </div>
-<div label="Use Azure Resource Manager" value="console">
+<div label="Use Azure Resource Manager" value="arm">
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), use the combo box in the upper-left corner to switch to your target project.
 
