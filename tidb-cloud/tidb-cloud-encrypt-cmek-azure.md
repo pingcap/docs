@@ -114,7 +114,7 @@ To complete the CMEK configuration for Azure Key Vault of the project, take the 
    - **Region**: Select the location where both the key vault will be created. This must match your cluster’s region.
    - **Key Vault Name**: Enter the name of your Azure Key Vault.
    - **Key Name**: Provide the full key name to be created in the key vault. In the TiDB console, enter the key name prefix and use the **Copy** icon to obtain the full key name.
-   - **Enterprise App Service Principal Id**: Enter the Service Principal ID for the TiDB-managed enterprise application. To retrieve the **Service Principal ID**, run (replace the `{microsoft_enterprise_app_id}` to the actual ID shown in the TiDB console):
+   - **Enterprise App Service Principal Id**: Enter the Service Principal ID for the TiDB-managed enterprise application. To retrieve the **Service Principal ID**, run (replace `{microsoft_enterprise_app_id}` with the actual ID shown in the TiDB Cloud console):
      
      ```shell
      az ad sp show --id {microsoft_enterprise_app_id} --query id -o tsv
