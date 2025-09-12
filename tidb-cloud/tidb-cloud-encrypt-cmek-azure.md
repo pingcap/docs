@@ -146,7 +146,7 @@ You can [configure cryptographic key auto-rotation in Azure Key Vault](https://l
 If you need to temporarily revoke TiDB Cloud's access to CMEK, follow these steps:
 
 1. On the TiDB Cloud console, pause the corresponding clusters in the project.
-2. On the Azure Key Vault console, right click on the encryption key and select **Disable**.
+2. On the Azure Key Vault console, right-click on the encryption key and select **Disable**.
 
 > **Note:**
 >
