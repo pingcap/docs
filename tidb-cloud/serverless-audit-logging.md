@@ -258,6 +258,9 @@ ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-n
 
 ### Edit a filter rule
 
+<SimpleTab>
+<div label="Console">
+
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
    > **Tip:**
@@ -266,11 +269,9 @@ ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-n
 
 2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
-3. On the **DB Audit Logging** page, Choose the filter rule you want to delete and click **...**.
+3. On the **DB Audit Logging** page, find the filter rule you want to edit, click **...** in its row, and then click **Edit**.
 
-4. Click **Edit**.
-
-5. Fill in the `Filter Name`, `SQL Users`, and `Filter Rules` fields in the **Add Filter Rule** pop-up dialog, and then click **Confirm**.
+4. Fill in the `Filter Name` and `Filter Rules` fields in the **Edit Filter Rule** pop-up dialog, and then click **Confirm**.
 
 </div>
 
@@ -285,6 +286,9 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 
 ### Disable a filter rule
 
+<SimpleTab>
+<div label="Console">
+
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
    > **Tip:**
@@ -293,7 +297,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 
 2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
-3. On the **DB Audit Logging** page, Choose the filter rule you want to disable
+3. On the **DB Audit Logging** page, Choose the filter rule you want to disable.
 
 4. switch the slider to disable the filter rule.
 
@@ -309,6 +313,9 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 </SimpleTab>
 
 ### Delete a filter rule
+
+<SimpleTab>
+<div label="Console">
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
