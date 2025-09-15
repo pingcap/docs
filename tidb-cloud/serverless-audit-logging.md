@@ -125,7 +125,9 @@ Here is the summary of all event classes in database audit logging:
 | AUDIT              | Record all operations related to setting TiDB database auditing, including setting system variables and calling system functions | -                   |
 | AUDIT_FUNC_CALL    | Record all operations of calling system functions related to TiDB database auditing               | AUDIT
 
-## Enable Audit Logging
+## Configure audit logging
+
+### Enable audit logging
 
 You can enable audit logging for a {{{ .essential }}} cluster.
 
@@ -165,9 +167,9 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled --cloud-sto
 </div>
 </SimpleTab>
 
-## Configure audit logging
+### Edit audit logging
 
-You can configure the audit logging for a {{{ .essential }}} cluster after enabling it.
+You can Edit the audit logging for a {{{ .essential }}} cluster after enabling it.
 
 <SimpleTab>
 <div label="Console">
@@ -195,7 +197,7 @@ ticloud serverless audit-log config update -c <cluster-id> --rotation-size-mib <
 </div>
 </SimpleTab>
 
-## Disable audit logging
+### Disable audit logging
 
 You can disable audit logging for a {{{ .essential }}} cluster.
 
@@ -252,6 +254,7 @@ You can manage audit logging filter rules in the [TiDB Cloud console](https://ti
 
 ```shell
 ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-name <rule-name> --rule '{"users":["%@%"],"filters":[{}]}'
+```
  
 </div>
 </SimpleTab>
@@ -340,10 +343,9 @@ ticloud serverless audit-log filter delete --cluster-id <cluster-id> --filter-ru
 </div>
 </SimpleTab>
 
-
 ## Access audit logging with TiDB Cloud Storage
 
-{{{ .essential }}} audit logs are stored as readable text files named `YYYY-MM-DD-<index>.log`. When you store audit logs in TiDB Cloud, you can access and download them via the [TiDB Cloud Console](https://tidbcloud.com/) or by using the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-download.md).
+{{{ .essential }}} audit logs are stored as readable text files named `YYYY-MM-DD-<index>.log`. When you store audit logs in TiDB Cloud, you can access and download them.
 
 > **Note:**
 >
