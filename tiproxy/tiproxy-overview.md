@@ -106,7 +106,7 @@ The following steps describe how to deploy TiProxy when creating a new cluster.
 
     ```yaml
     component_versions:
-      tiproxy: "v1.2.0"
+      tiproxy: "v1.3.2"
     server_configs:
       tiproxy:
         ha.virtual-ip: "10.0.1.10/24"
@@ -138,7 +138,7 @@ For clusters that do not have TiProxy deployed, you can enable TiProxy by scalin
 
     ```yaml
     component_versions:
-      tiproxy: "v1.2.0"
+      tiproxy: "v1.3.2"
     server_configs:
       tiproxy:
         ha.virtual-ip: "10.0.1.10/24"
