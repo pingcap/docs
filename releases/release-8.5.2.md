@@ -75,12 +75,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Fix the issue that Resolved-TS monitoring and logs might be abnormal [#17989](https://github.com/tikv/tikv/issues/17989) @[ekexium](https://github.com/ekexium)
     - Fix the issue that Region merge might lead to TiKV abnormal exit due to Raft index mismatch [#18129](https://github.com/tikv/tikv/issues/18129) @[glorv](https://github.com/glorv)
     - Fix the issue that TiKV cannot report heartbeats to PD when the disk is stuck [#17939](https://github.com/tikv/tikv/issues/17939) @[LykxSassinator](https://github.com/LykxSassinator)
-    - Fix the issue that a deadlock might occur when GC Worker is under heavy load [#18214](https://github.com/tikv/tikv/issues/18214) @[zyguan](https://github.com/zyguan)
+    - Fix the issue that a deadlock might occur when the GC worker is under heavy load [#18214](https://github.com/tikv/tikv/issues/18214) @[zyguan](https://github.com/zyguan)
     - Fix the issue that time rollback might cause abnormal RocksDB flow control, leading to performance jitter [#17995](https://github.com/tikv/tikv/issues/17995) @[LykxSassinator](https://github.com/LykxSassinator)
     - Fix the issue that CDC connections might cause resource leakage when encountering exceptions [#18245](https://github.com/tikv/tikv/issues/18245) @[wlwilliamx](https://github.com/wlwilliamx)
     - Fix the issue that the leader could not be quickly elected after Region split [#17602](https://github.com/tikv/tikv/issues/17602) @[LykxSassinator](https://github.com/LykxSassinator)
     - Fix the issue that the latest written data might not be readable when only one-phase commit (1PC) is enabled and Async Commit is not enabled [#18117](https://github.com/tikv/tikv/issues/18117) @[zyguan](https://github.com/zyguan)
-
+    - Fix the issue that the GC worker unexpectedly prints error logs [#18213](https://github.com/tikv/tikv/issues/18213) @[ekexium](https://github.com/ekexium)
+    
 + PD
 
     - Fix the concurrency issue that might arise when forwarding TSO in microservice scenarios [#9091](https://github.com/tikv/pd/issues/9091) @[lhy1024](https://github.com/lhy1024)
