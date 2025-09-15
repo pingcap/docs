@@ -1,6 +1,6 @@
 ---
 title: Compatibility Catalog of TiDB Data Migration
-summary: This document describes DM compatibility with upstream and downstream databases.
+summary: This document describes the compatibility of DM with upstream and downstream databases.
 ---
 
 # Compatibility Catalog of TiDB Data Migration
@@ -8,9 +8,9 @@ summary: This document describes DM compatibility with upstream and downstream d
 DM supports migrating data from different sources to TiDB clusters. Based on the data source type, DM has four compatibility levels:
 
 - **Generally available (GA)**: The application scenario has been verified and passed GA testing.
-- **Experimental**: The common application scenarios have been verified, but coverage is limited or involves only a small number of users. Occasional issues are possible, so you should verify compatibility in your specific scenario.
-- **Not tested**: DM aims for MySQL protocol and binlog compatibility, but not all MySQL forks/versions are part of DM test matrix. However, if the forks/versions protocols and binlog formats are MySQL-compatible, these are expected to work. You must verify in your environment before use.
-- **Incompatible**: DM has known blocking issues and production use is not recommended.
+- **Experimental**: The common application scenarios have been verified, but coverage is limited or involves only a small number of users. Occasional issues are possible, so you need to verify compatibility in your specific scenario.
+- **Not tested**: DM aims to be compatible with the MySQL protocol and binlog. However, not all MySQL forks or versions are included in the DM test matrix. If a fork or version uses MySQL-compatible protocols and binlog formats, it is expected to work, but you must verify compatibility in your own environment before use.
+- **Incompatible**: DM has known blocking issues, so production use is not recommended.
 
 ## Data sources
 
@@ -22,22 +22,23 @@ DM supports migrating data from different sources to TiDB clusters. Based on the
 | MySQL 8.0 | GA | Does not support binlog transaction compression [Transaction_payload_event](https://dev.mysql.com/doc/refman/8.0/en/binary-log-transaction-compression.html) |
 | MariaDB < 10.1.2 | Incompatible | Incompatible with binlog of the time type |
 | MariaDB 10.1.2 ~ 10.5.10 | Experimental | |
-| MariaDB > 10.5.10 | Not tested | Should work for most cases after bypassing precheck. See [MariaDB notes](#mariadb-notes). |
+| MariaDB > 10.5.10 | Not tested | Expected to work in most cases after bypassing the precheck. See [MariaDB notes](#mariadb-notes). |
 
 ### Incompatibility with foreign key CASCADE operations
 
 - DM creates foreign key **constraints** on the target, but they are not enforced while applying transactions because DM sets the session variable [`foreign_key_checks=OFF`](/system-variables.md#foreign_key_checks).
-- DM does **not** honor `ON DELETE/UPDATE CASCADE` behavior by default, and we do not recommend enabling `foreign_key_checks` via a DM task session variable. If your workload relies on cascades, **do not assume** cascade effects will be replicated.
+- DM does **not** support `ON DELETE/UPDATE CASCADE` behavior by default, and enabling `foreign_key_checks` via a DM task session variable is not recommended. If your workload relies on cascades, **do not assume** that cascade effects will be replicated.
 
 ### MariaDB notes
 
-- For MariaDB **10.5.11 and later**, DM **precheck will fail** due to privilege name changes (for example, `BINLOG MONITOR`, `REPLICATION SLAVE ADMIN`, `REPLICATION MASTER ADMIN`) and returns `[code=26005] fail to check synchronization configuration` with errors in the replication privilege, dump privilege, and dump connection number checkers.
-- You can **bypass precheck** by adding `ignore-checking-items: ["all"]` in the DM task. See [DM precheck](/dm/dm-precheck.md) for details.
+- For MariaDB **10.5.11 and later**, the DM **precheck fails** due to privilege name changes (for example, `BINLOG MONITOR`, `REPLICATION SLAVE ADMIN`, `REPLICATION MASTER ADMIN`). The error appears as `[code=26005] fail to check synchronization configuration` in the replication privilege, dump privilege, and dump connection number checkers.
+- You can **bypass the precheck** by adding `ignore-checking-items: ["all"]` in the DM task. See [DM precheck](/dm/dm-precheck.md) for details.
 
 ## Target databases
 
-> **Warning:**  
-> DM v5.3.0 is not recommended. If you enabled GTID replication without relay log in DM v5.3.0, data replication can fail with low probability.
+> **Warning:**
+>
+> DM v5.3.0 is not recommended. Enabling GTID replication without relay log in DM v5.3.0 might cause data replication to fail, although the probability is low.
 
 | Target database | Compatibility level | DM version |
 | - | - | - |
