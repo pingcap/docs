@@ -50,7 +50,7 @@ You can store the audit logs to the following locations:
 
 ### TiDB Cloud
 
-you can store audit logs in TiDB Cloud and download them to your local machine. The audit logs will be expired and deleted after 365 days. To request longer storage duration, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+You can store audit logs in TiDB Cloud and download them to your local machine. The audit logs will be expired and deleted after 365 days. To request longer storage duration, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ### Amazon S3
 
@@ -68,7 +68,7 @@ For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-ex
 To store audit logs to Google Cloud Storage, you need to provide the following information:
 
 - URI: `gs://<bucket-name>/<folder-path>/`
-- Access credential: a **base64 encoded** [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your bucket. Make sure the service account key has the `storage.objects.create` and `storage.objects.delete` permission.
+- Access credential: a **base64 encoded** [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your bucket. Make sure the service account key has the `storage.objects.create` and `storage.objects.delete` permissions.
 
 For more information, see [Configure GCS access](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
 
@@ -123,7 +123,7 @@ Here is the summary of all event classes in database audit logging:
 | SELECT        | Record all operations of the `SELECT` statements                                                   | QUERY         |
 | QUERY_DDL          | Record all operations of the DDL statements                                                      | QUERY               |
 | AUDIT              | Record all operations related to setting TiDB database auditing, including setting system variables and calling system functions | -                   |
-| AUDIT_FUNC_CALL    | Record all operations of calling system functions related to TiDB database auditing               | AUDIT       
+| AUDIT_FUNC_CALL    | Record all operations of calling system functions related to TiDB database auditing               | AUDIT
 
 ## Enable Audit Logging
 
@@ -160,7 +160,7 @@ Take s3 storage as an example. Run the following command to enable audit logging
 ticloud serverless audit-log config update -c <cluster-id> --enabled --cloud-storage S3 --s3.uri <s3-url> --s3.access-key-id <s3-access-key-id>  --s3.secret-access-key <s3-secret-access-key> --rotation-size-mib <size-in-mb> --rotation-interval-minutes <interval-in-minutes> --unredacted=<true|false>
 ```
 
-`--rotation-size-mib`, `--rotation-interval-minutes`, and `--unredacted` are optional parameters. If not specified, the default values will be used.
+`--rotation-size-mib`, `--rotation-interval-minutes`, and `--unredacted` are optional parameters. If you do not specify them, the default values are used.
  
 </div>
 </SimpleTab>
@@ -251,8 +251,7 @@ You can manage audit logging filter rules in the [TiDB Cloud console](https://ti
 <div label="CLI">
 
 ```shell
-ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-name <rule-name> --rule '{"users":["%@%"],"filters":[{}]}
-```
+ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-name <rule-name> --rule '{"users":["%@%"],"filters":[{}]}'
  
 </div>
 </SimpleTab>
@@ -355,9 +354,9 @@ ticloud serverless audit-log filter delete --cluster-id <cluster-id> --filter-ru
 
 2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
-3. On the **DB Audit Logging** page, you can view the list of audit logs under `TiDB Cloud Storage`. 
+3. On the **DB Audit Logging** page, you can view the list of audit logs under `TiDB Cloud Storage`.
 
-4. To download an audit log, select the audit logs and then click **Download**.
+4. To download audit logs, select one or more logs from the list and then click **Download**.
 
 </div>
 
