@@ -1986,9 +1986,11 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 
 ### tidb_enable_cascades_planner
 
-> **Warning:**
+> **Note:**
 >
-> Currently, cascades planner is an experimental feature. It is not recommended that you use it in production environments.
+> The cascades planner is a new optimizer framework introduced in TiDB. It is designed with compatibility in mind to ensure alignment with the existing optimizer logic, while also reserving extensibility for future enhancements. The framework enables the optimizer to make cost-based optimization (CBO) decisions among multiple candidate logical execution plans.
+>
+> Currently, when the cascades planner is enabled, the limited number of logical rules means that execution plans may not show significant performance improvements. However, as the [TiDB Cascades Rule Evolution Project](https://github.com/pingcap/tidb/issues/61528) advances, the cascades planner will provide greater flexibility and applicability, enhancing optimization capabilities for complex query scenarios.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
