@@ -80,7 +80,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Fix the issue that CDC connections might cause resource leakage when encountering exceptions [#18245](https://github.com/tikv/tikv/issues/18245) @[wlwilliamx](https://github.com/wlwilliamx)
     - Fix the issue that the leader could not be quickly elected after Region split [#17602](https://github.com/tikv/tikv/issues/17602) @[LykxSassinator](https://github.com/LykxSassinator)
     - Fix the issue that the latest written data might not be readable when only one-phase commit (1PC) is enabled and Async Commit is not enabled [#18117](https://github.com/tikv/tikv/issues/18117) @[zyguan](https://github.com/zyguan)
-    - Fix the issue where the GC worker unexpectedly prints error logs [#18213](https://github.com/tikv/tikv/issues/18213) @[ekexium](https://github.com/ekexium)
+    - Fix the issue that the GC worker unexpectedly prints error logs [#18213](https://github.com/tikv/tikv/issues/18213) @[ekexium](https://github.com/ekexium)
     
 + PD
 
