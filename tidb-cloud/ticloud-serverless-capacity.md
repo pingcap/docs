@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless capacity
-summary: `ticloud serverless capacity` 的参考文档。
+summary: "`ticloud serverless capacity` 的参考文档。"
 ---
 
 # ticloud serverless capacity
