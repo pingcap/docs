@@ -74,28 +74,15 @@ TiDB Cloud supports snapshot restore and point-in-time restore for your cluster.
 
 ### Restore destination
 
-TiDB Cloud supports restoring in-place and restoring to a new cluster.
+TiDB Cloud supports restoring data to a new cluster.
 
-**In-place restore**
-
-Restore to the current cluster will overwrite existing data. Note the following:
-
-- Existing connections will be terminated once the restore is started.
-- The cluster will be unavailable, and new connections will be blocked during the restore process.
-- Restore will affect tables in the `mysql` schema. Any changes to user credentials, permissions, or system variables will be reverted to their state at the backup time.
-
-**Restore to a new cluster**
-
-Create and restore to the new cluster. Note the following:
-
-- User credentials and permissions from the source cluster will not be restored to the new cluster.
+> **Note:**
+>
+> User credentials and permissions from the source cluster will not be restored to the new cluster.
 
 ### Restore timeout
 
-The restore process typically completes within a few minutes. If the restore takes longer than three hours, it is automatically canceled. The outcome of a canceled restore depends on the destination:
-
-- **In-place restore**: the cluster status changes from **Restoring** to **Available**, and the cluster becomes accessible.
-- **Restore to a new cluster**: the new cluster is deleted and the source cluster remains unchanged.
+The restore process typically completes within a few minutes. If the restore takes longer than three hours, it is automatically canceled and the new cluster is deleted, while the source cluster remains unchanged.
 
 If the data is corrupted after a canceled restore and cannot be recovered, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance.
 
@@ -105,9 +92,9 @@ To restore your TiDB Cloud cluster, follow these steps:
 
 1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
-2. Click **Restore**. The setting window displays.
+2. Click **Restore**.
 
-3. In **Restore Mode**, you can choose to restore from a specific backup or any point in time.
+3. On the **Restore** page, you can choose to restore from a specific backup or any point in time.
 
     <SimpleTab>
     <div label="Snapshot Restore">
@@ -128,12 +115,7 @@ To restore your TiDB Cloud cluster, follow these steps:
     </div>
     </SimpleTab>
 
-4. In **Destination**, you can choose to restore to a new cluster or restore in-place.
-
-    <SimpleTab>
-    <div label="Restore to a new cluster">
-
-    To restore to a new cluster, take the following steps:
+4. In **Destination**, you can choose to restore to a new cluster.
 
     1. Click **Restore to a New Cluster**.
     2. Enter a name for the new cluster.
@@ -141,14 +123,6 @@ To restore your TiDB Cloud cluster, follow these steps:
 
         - If you choose a {{{ .starter }}} cluster and need more resources than the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota), set a monthly spending limit.
         - If you choose a {{{ .essential }}} cluster, set the minimum RCU and maximum RCU, and then configure advanced settings as needed.
-
-    </div>
-    <div label="Restore in-place">
-
-    To restore in-place, click **In-place Restore**.
-
-    </div>
-    </SimpleTab>
 
 5. Click **Restore** to begin the restore process.
 
