@@ -123,7 +123,7 @@ Here is the summary of all event classes in database audit logging:
 | SELECT        | Record all operations of the `SELECT` statements                                                   | QUERY         |
 | QUERY_DDL          | Record all operations of the DDL statements                                                      | QUERY               |
 | AUDIT              | Record all operations related to setting TiDB database auditing, including setting system variables and calling system functions | -                   |
-| AUDIT_FUNC_CALL    | Record all operations of calling system functions related to TiDB database auditing               | AUDIT
+| AUDIT_FUNC_CALL    | Record all operations of calling system functions related to TiDB database auditing               | AUDIT |
 
 ## Configure audit logging
 
@@ -300,7 +300,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 
 2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
-3. On the **DB Audit Logging** page, Choose the filter rule you want to disable.
+3. On the **DB Audit Logging** page, choose the filter rule you want to disable.
 
 4. switch the slider to disable the filter rule.
 
@@ -328,7 +328,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 
 2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
-3. On the **DB Audit Logging** page, Choose the filter rule you want to delete and click **...**.
+3. On the **DB Audit Logging** page, choose the filter rule you want to delete and click **...**.
 
 4. Click **Delete** and then click **I understand. Delete it** in the pop-up dialog to delete the filter rule.
 
