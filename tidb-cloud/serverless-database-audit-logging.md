@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/serverless-audit-logging']
 
 # Database Audit Logging (Beta) for {{{ .essential }}}
 
-{{{ .essential }}} provide you with a database audit logging feature to record a history of user access details (such as any SQL statements executed) in logs.
+{{{ .essential }}} provides you with a database audit logging feature to record a history of user access details (such as any SQL statements executed) in logs.
 
 > **Note:**
 >
@@ -20,7 +20,7 @@ The audit logging feature is disabled by default. To audit a cluster, you need t
 
 ### Data redaction
 
-{{{ .essential }}} redact sensitive data in the audit logs by default. Take the following SQL statement as an example:
+{{{ .essential }}} redacts sensitive data in the audit logs by default. Take the following SQL statement as an example:
 
 ```sql 
 INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES (1, 'Alice', '123456');
@@ -34,14 +34,14 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 
 ### Log file rotation
 
-{{{ .essential }}} generate a new audit log file when either of the following conditions is met:
+{{{ .essential }}} generates a new audit log file when either of the following conditions is met:
 
 - The size of the current log file reaches rotation size (100 MB by default).
 - Rotation interval (one hour by default) has passed since the previous log generation. Depending on the internal scheduling mechanism, log generation might be delayed by a few minutes.
 
 ## Audit logging locations
 
-You can store the audit logs to the following locations:
+You can store the audit logs in the following locations:
 
 - TiDB Cloud
 - [Amazon S3](https://aws.amazon.com/s3/)
@@ -51,7 +51,7 @@ You can store the audit logs to the following locations:
 
 ### TiDB Cloud
 
-You can store audit logs in TiDB Cloud and download them to your local machine. The audit logs will be expired and deleted after 365 days. To request longer storage duration, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+You can store audit logs in TiDB Cloud and download them to your local machine. The audit logs expire and are deleted after 365 days. To request longer storage duration, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ### Amazon S3
 
@@ -59,8 +59,8 @@ To store audit logs to Amazon S3, you need to provide the following information:
 
 - URI: `s3://<bucket-name>/<folder-path>/`
 - One of the following access credentials:
-    - [An access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` and `s3:ListBucket` permissions.
-    - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN (Amazon Resource Name) has the `s3:PutObject` permissions. Note that only clusters hosted on AWS support the role ARN.
+    - [An access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): Make sure the access key has the `s3:PutObject` and `s3:ListBucket` permissions.
+    - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): Make sure the role ARN (Amazon Resource Name) has the `s3:PutObject` permissions. Note that only clusters hosted on AWS support the role ARN.
 
 For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
 
@@ -93,7 +93,7 @@ For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) 
 
 ## Audit logging filter rules
 
-To filter the audit logging, you need to create a filter rule to specify which events to log.
+To filter audit logs, you need to create a filter rule to specify which events to log.
 
 The filter rule contains the following fields:
 
@@ -124,7 +124,7 @@ Here is the summary of all event classes in database audit logging:
 | SELECT        | Record all operations of the `SELECT` statements                                                   | QUERY         |
 | QUERY_DDL          | Record all operations of the DDL statements                                                      | QUERY               |
 | AUDIT              | Record all operations related to setting TiDB database auditing, including setting system variables and calling system functions | -                   |
-| AUDIT_FUNC_CALL    | Record all operations of calling system functions related to TiDB database auditing               | AUDIT |
+| AUDIT_FUNC_CALL    | Record all operations of calling system functions related to TiDB database auditing               | AUDIT               |
 
 ## Configure audit logging
 
@@ -151,13 +151,13 @@ You can enable audit logging for a {{{ .essential }}} cluster.
 
 4. Select the storage location of the audit logs and fill in the necessary information, then click **Test Connection and Next** or **Next**. For more information about the available storage locations, see [Audit logging locations](#audit-logging-locations).
 
-5. In the **Database Audit Logging Setting** pop-up, fill the log file rotation and log redaction settings, and then click **Save**.
+5. In the **Database Audit Logging Setting** pop-up, fill in the log file rotation and log redaction settings, and then click **Save**.
 
 </div>
 
 <div label="CLI">
 
-Take s3 storage as an example. Run the following command to enable audit logging and store the audit logs to Amazon S3:
+Take Amazon S3 storage as an example. Run the following command to enable audit logging and store the audit logs to Amazon S3:
 
 ```shell
 ticloud serverless audit-log config update -c <cluster-id> --enabled --cloud-storage S3 --s3.uri <s3-url> --s3.access-key-id <s3-access-key-id>  --s3.secret-access-key <s3-secret-access-key> --rotation-size-mib <size-in-mb> --rotation-interval-minutes <interval-in-minutes> --unredacted=<true|false>
@@ -170,7 +170,7 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled --cloud-sto
 
 ### Edit audit logging
 
-You can Edit the audit logging for a {{{ .essential }}} cluster after enabling it.
+You can edit the audit logging for a {{{ .essential }}} cluster after enabling it.
 
 <SimpleTab>
 <div label="Console">
@@ -442,4 +442,4 @@ When the event class is `AUDIT` or a subclass of `AUDIT`, the audit logs contain
 
 ## Audit logging limitations
 
-- Do not guarantee the sequential order of audit logs, which means you might have to review all log files to view the latest events. To sort the logs chronologically, you can use the `TIME` field in the audit logs.
+- {{{ .essential }}} does not guarantee the sequential order of audit logs, which means you might have to review all log files to view the latest events. To sort the logs chronologically, you can use the `TIME` field in the audit logs.
