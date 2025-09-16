@@ -35,8 +35,8 @@ ticloud serverless audit-log filter-rule list -c <cluster-id> -o json
 
 | Flag                    | Description                                                                                       | Required | Note                                                 |
 |-------------------------|---------------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | The cluster ID of the audit log filter rules to be listed.                                        | No       | Only works in non-interactive mode.                  |
-| -o, --output string     | Output format, one of ["human", "json"]. For the complete result, please use json format. (default "human") | No       | Works in both interactive and non-interactive modes. |
+| -c, --cluster-id string | The ID of the cluster.                                                                            | No       | Only works in non-interactive mode.                  |
+| -o, --output string     | Specifies the output format. Valid values are `human` (default) or `json`. For the complete result, use the `json` format. | No       | Works in both interactive and non-interactive modes. |
 | -h, --help              | Shows help information for this command.                                                          | No       | Works in both interactive and non-interactive modes. |
 
 ## Inherited flags

@@ -49,7 +49,7 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled=false
 |------|-------------|----------|------|
 | --azblob.sas-token string | The SAS token of Azure Blob. | No | Only works in non-interactive mode. |
 | --azblob.uri string | The Azure Blob URI in `azure://<account>.blob.core.windows.net/<container>/<path>` format. | No | Only works in non-interactive mode. |
-| --cloud-storage string | The cloud storage. One of ["TIDB_CLOUD", "S3", "GCS", "AZURE_BLOB", "OSS"]. | No | Only works in non-interactive mode. |
+| --cloud-storage string | The cloud storage. One of [`"TIDB_CLOUD"`, `"S3"`, `"GCS"`, `"AZURE_BLOB"`, `"OSS"`]. | No | Only works in non-interactive mode. |
 | -c, --cluster-id string | The ID of the cluster to be updated. | Yes | Only works in non-interactive mode. |
 | --enabled | Enable or disable database audit logging. | No | Only works in non-interactive mode. |
 | --gcs.service-account-key string | The base64 encoded service account key of GCS. | No | Only works in non-interactive mode. |
@@ -59,9 +59,9 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled=false
 | --oss.uri string | The OSS URI in `oss://<bucket>/<path>` format. | No | Only works in non-interactive mode. |
 | --rotation-interval-minutes int32 | The rotation interval in minutes, range [10, 1440]. | No | Only works in non-interactive mode. |
 | --rotation-size-mib int32 | The rotation size in MiB, range [1, 1024]. | No | Only works in non-interactive mode. |
-| --s3.access-key-id string | The access key ID of the S3. You only need to set one of the s3.role-arn and [s3.access-key-id, s3.secret-access-key]. | No | Only works in non-interactive mode. |
-| --s3.role-arn string | The role arn of the S3. You only need to set one of the s3.role-arn and [s3.access-key-id, s3.secret-access-key]. | No | Only works in non-interactive mode. |
-| --s3.secret-access-key string | The secret access key of the S3. You only need to set one of the s3.role-arn and [s3.access-key-id, s3.secret-access-key]. | No | Only works in non-interactive mode. |
+| --s3.access-key-id string | The access key ID of S3. You only need to set one of the `s3.role-arn` and [`s3.access-key-id`, `s3.secret-access-key`]. | No | Only works in non-interactive mode. |
+| --s3.role-arn string | The role ARN of S3. You only need to set one of the `s3.role-arn` and [`s3.access-key-id`, `s3.secret-access-key`]. | No | Only works in non-interactive mode. |
+| --s3.secret-access-key string | The secret access key of S3. You only need to set one of the `s3.role-arn` and [`s3.access-key-id`, `s3.secret-access-key`]. | No | Only works in non-interactive mode. |
 | --s3.uri string | The S3 URI in `s3://<bucket>/<path>` format. | No | Only works in non-interactive mode. |
 | --unredacted | Unredact or redact the database audit log. | No | Only works in non-interactive mode. |
 | -h, --help | Shows help information for this command. | No | Works in both interactive and non-interactive modes. |
@@ -76,4 +76,4 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled=false
 
 ## Feedback
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any
+If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.

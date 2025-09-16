@@ -19,13 +19,13 @@ Create a filter rule in interactive mode:
 ticloud serverless audit-log filter-rule create
 ```
 
-Create a filter rule which filters all audit logs in non-interactive mode:
+Create a filter rule to capture all audit logs in non-interactive mode:
 
 ```shell
 ticloud serverless audit-log filter-rule create --cluster-id <cluster-id> --display-name <rule-name> --rule '{"users":["%@%"],"filters":[{}]}'
 ```
 
-Create a filter rule which filters QUERY and EXECUTE for `test.t` and filters QUERY for all tables in non-interactive mode:
+Create a filter rule to capture `QUERY` and `EXECUTE` events for the `test.t` table, and `QUERY` events for all tables in non-interactive mode:
 
 ```shell
 ticloud serverless audit-log filter-rule create --cluster-id <cluster-id> --display-name <rule-name> --rule '{"users":["%@%"],"filters":[{"classes":["QUERY","EXECUTE"],"tables":["test.t"]},{"classes":["QUERY"]}]}'
@@ -37,7 +37,7 @@ ticloud serverless audit-log filter-rule create --cluster-id <cluster-id> --disp
 |-------------------------|-------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
 | -c, --cluster-id string | The ID of the cluster.                                                                                      | Yes      | Only works in non-interactive mode.                  |
 | --display-name string   | The display name of the filter rule.                                                                        | Yes      | Only works in non-interactive mode.                  |
-| --rule string           | Filter rule expressions. Use "ticloud serverless audit-log filter template" to see filter templates.        | Yes      | Only works in non-interactive mode.                  |
+| --rule string           | Filter rule expressions. Use `ticloud serverless audit-log filter-rule template` to see filter templates.        | Yes      | Only works in non-interactive mode.                  |
 | -h, --help              | Shows help information for this command.                                                                    | No       | Works in both interactive and non-interactive modes. |
 
 ## Inherited flags
