@@ -344,7 +344,7 @@ ticloud serverless audit-log filter delete --cluster-id <cluster-id> --filter-ru
 
 ## Access audit logging with TiDB Cloud Storage
 
-{{{ .essential }}} audit logs are stored as readable text files named `YYYY-MM-DD-<index>.log`. When you store audit logs in TiDB Cloud, you can access and download them.
+When you store audit logs in TiDB Cloud, {{{ .essential }}} stores them as readable text files named `YYYY-MM-DD-<index>.log`, which you can access and download.
 
 > **Note:**
 >
