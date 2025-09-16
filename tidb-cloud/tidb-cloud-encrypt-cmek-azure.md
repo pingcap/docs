@@ -71,7 +71,7 @@ To configure CMEK using the TiDB Cloud console and Azure portal, take the follow
 
 8. Assign the **Key Vault Crypto Officer** role to your current user:
 
-    1. In the Azure portal, navigate to your Key Vault.
+    1. In the [Azure portal](https://portal.azure.com/), navigate to your Key Vault.
     2. Click **Access control (IAM)**, and then click **Add** > **Add role assignment**.
     3. Search for and select the **Key Vault Crypto Officer** role, then click **Next**.
     4. On the **Members** tab, set **Assign access to** as **User, group, or service principal**.
@@ -146,7 +146,7 @@ You can configure [cryptographic key auto-rotation](https://learn.microsoft.com/
 
 If you need to temporarily revoke TiDB Cloud's access to CMEK, follow these steps:
 
-1. In the TiDB Cloud console, pause the corresponding cluster in the project.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), pause the corresponding cluster in the project.
 2. In the Azure Key Vault console, right-click the encryption key and select **Disable**.
 
 > **Note:**
