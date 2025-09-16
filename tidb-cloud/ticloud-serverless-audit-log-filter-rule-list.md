@@ -47,8 +47,6 @@ ticloud serverless audit-log filter-rule list -c <cluster-id> -o json
 | --no-color           | Disable color output.                                                                                | No       | Only works in non-interactive mode.                                                                              |
 | -P, --profile string | Profile to use from your configuration file.                                                         | No       | Works in both interactive and non-interactive modes.                                                             |
 
-## SEE ALSO
-
 ## Feedback
 
 If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
