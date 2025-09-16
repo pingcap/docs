@@ -101,7 +101,7 @@ The filter rule contains the following fields:
 - `filters`: A list of filter objects. Each filter object can contain the following fields:
 
     - `classes`: A list of event classes to filter audit events. For example, `["QUERY", "EXECUTE"]`.
-    - `tables`: A list of table filters. For more information, see [Table filters].
+    - `tables`: A list of table filters. For more information, see [Table filter](https://docs.pingcap.com/tidb/stable/table-filter/).
     - `statusCodes`: A list of status codes to filter audit events. `1` means success, `0` means failure.
 
 Here is the summary of all event classes in database audit logging:
@@ -400,7 +400,7 @@ All classes of audit logs contain the following information:
 | STATUS_CODE   | The status code of the audit record. `1` means success, and `0` means failure.                       |
 | KEYSPACE_NAME | The keyspace name of the audit record. |
 | SERVERLESS_TENANT_ID           | The ID of the serverless tenant that the cluster belongs to. |
-| SERVERLESS_TSERVERLESS_PROJECT_ID         | The ID of the serverless project that the cluster belongs to. |
+| SERVERLESS_PROJECT_ID         | The ID of the serverless project that the cluster belongs to. |
 | SERVERLESS_CLUSTER_ID          | The ID of the serverless cluster that the audit record belongs to. |
 | REASON        | The error message of the audit record. Only recorded when an error occurs during the operation. |
 
