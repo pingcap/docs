@@ -1,9 +1,9 @@
 ---
-title: Connect to {{{ .starter }}} or Essential via Public Endpoint
+title: Connect to {{{ .starter }}}, Essential, or Premium via Public Endpoint
 summary: Learn how to connect to your {{{ .starter }}} or {{{ .essential }}} cluster via public endpoint.
 ---
 
-# Connect to {{{ .starter }}} or Essential via Public Endpoint
+# Connect to {{{ .starter }}}, Essential, or Premium via Public Endpoint
 
 This document describes how to connect to your {{{ .starter }}} or {{{ .essential }}} cluster via a public endpoint, using a SQL client from your computer, as well as how to disable a public endpoint.
 
@@ -25,11 +25,11 @@ To connect to a {{{ .starter }}} or {{{ .essential }}} cluster via public endpoi
 
     > **Note:**
     >
-    > - Keeping the connection type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to {{{ .starter }}} or Essential](/tidb-cloud/secure-connections-to-serverless-clusters.md).
+    > - Keeping the connection type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to {{{ .starter }}}, Essential, or Premium](/tidb-cloud/secure-connections-to-serverless-clusters.md).
     > - If you choose **Private Endpoint** in the **Connection Type** drop-down list, it means that the connection is via private endpoint. For more information, see the following documents:
     >
     >     - [Connect to {{{ .starter }}} via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-    >     - [Connect to {{{ .starter }}} or Essential via Alibaba Cloud Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+    >     - [Connect to {{{ .starter }}}, Essential, or Premium via Alibaba Cloud Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
 
     </CustomContent>
 
@@ -37,7 +37,7 @@ To connect to a {{{ .starter }}} or {{{ .essential }}} cluster via public endpoi
 
     > **Note:**
     >
-    > - Keeping the connection type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to {{{ .starter }}} or Essential](/tidb-cloud/secure-connections-to-serverless-clusters.md).
+    > - Keeping the connection type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to {{{ .starter }}}, Essential, or Premium](/tidb-cloud/secure-connections-to-serverless-clusters.md).
     > - If you choose **Private Endpoint** in the **Connection Type** drop-down list, it means that the connection is via private endpoint. For more information, see [Connect to {{{ .starter }}} via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
 
     </CustomContent>
@@ -51,7 +51,7 @@ To connect to a {{{ .starter }}} or {{{ .essential }}} cluster via public endpoi
     > **Note:**
     >
     > When you connect to a {{{ .starter }}} or {{{ .essential }}} cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
-    > Your client IP must be in the allowed IP rules of the public endpoint of your cluster. For more information, see [Configure {{{ .starter }}} or Essential Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md).
+    > Your client IP must be in the allowed IP rules of the public endpoint of your cluster. For more information, see [Configure {{{ .starter }}}, Essential, or Premium Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md).
 
 ## Disable a public endpoint
 

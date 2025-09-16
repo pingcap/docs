@@ -84,7 +84,7 @@ pip install sqlalchemy pymysql sentence-transformers tidb-vector python-dotenv
 Configure the cluster connection string depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
-<div label="{{{ .starter }}} or Essential">
+<div label="{{{ .starter }}}, Essential, or Premium">
 
 For a {{{ .starter }}} cluster, take the following steps to obtain the cluster connection string and configure environment variables:
 

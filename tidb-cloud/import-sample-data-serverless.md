@@ -1,9 +1,9 @@
 ---
-title: Import Sample Data (SQL Files) into {{{ .starter }}} or Essential from Cloud Storage
+title: Import Sample Data (SQL Files) into {{{ .starter }}}, Essential, or Premium from Cloud Storage
 summary: Learn how to import sample data into {{{ .starter }}} or {{{ .essential }}} via the UI.
 ---
 
-# Import Sample Data (SQL Files) into {{{ .starter }}} or Essential from Cloud Storage
+# Import Sample Data (SQL Files) into {{{ .starter }}}, Essential, or Premium from Cloud Storage
 
 This document describes how to import the sample data (SQL files) into {{{ .starter }}} or {{{ .essential }}} via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
 

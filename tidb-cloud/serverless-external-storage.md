@@ -1,9 +1,9 @@
 ---
-title: Configure External Storage Access for {{{ .starter }}} or Essential
+title: Configure External Storage Access for {{{ .starter }}}, Essential, or Premium
 summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access.
 ---
 
-# Configure External Storage Access for {{{ .starter }}} or Essential
+# Configure External Storage Access for {{{ .starter }}}, Essential, or Premium
 
 If you want to import data from or export data to an external storage in a TiDB Cloud cluster, you need to configure cross-account access. This document describes how to configure access to an external storage for {{{ .starter }}} and {{{ .essential }}} clusters.
 

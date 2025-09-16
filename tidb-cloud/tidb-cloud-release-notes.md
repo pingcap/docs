@@ -161,7 +161,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Introduce TiDB Cloud Starter and Essential API (v1beta1) for managing the following resources automatically and efficiently:
 
-    - **Cluster**: manage your TiDB Cloud Starter or Essential clusters with greater flexibility.
+    - **Cluster**: manage your TiDB Cloud Starter, Essential, or Premium clusters with greater flexibility.
     - **Branch**: manage the branches of your clusters.
     - **Export**: manage data export tasks for your clusters.
     - **Import**: manage data import tasks for your clusters.

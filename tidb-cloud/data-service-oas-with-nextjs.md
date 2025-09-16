@@ -11,7 +11,7 @@ This document introduces how to use the OpenAPI Specification of a [Data App](/t
 
 Before using OpenAPI Specification with Next.js, make sure that you have the following:
 
-- A TiDB cluster. For more information, see [Create a {{{ .starter }}} or Essential Cluster](/tidb-cloud/create-tidb-cluster-serverless.md) or [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
+- A TiDB cluster. For more information, see [Create a {{{ .starter }}}, Essential, or Premium Cluster](/tidb-cloud/create-tidb-cluster-serverless.md) or [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
 - [Node.js](https://nodejs.org/en/download)
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - [yarn](https://yarnpkg.com/getting-started/install)

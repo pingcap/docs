@@ -72,7 +72,7 @@ peewee is an ORM library that works with multiple databases. It provides a high-
 Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
-<div label="{{{ .starter }}} or Essential">
+<div label="{{{ .starter }}}, Essential, or Premium">
 
 1. Navigate to the [**Clusters**](https://{{{.console-url}}}/project/clusters) page, and then click the name of your target cluster to go to its overview page.
 

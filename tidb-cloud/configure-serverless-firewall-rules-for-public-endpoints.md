@@ -1,9 +1,9 @@
 ---
-title: Configure {{{ .starter }}} or Essential Firewall Rules for Public Endpoints 
+title: Configure {{{ .starter }}}, Essential, or Premium Firewall Rules for Public Endpoints 
 summary: Learn how to configure and manage firewall rules with public access to your {{{ .starter }}} or {{{ .essential }}} cluster securely.
 ---
 
-# Configure {{{ .starter }}} or Essential Firewall Rules for Public Endpoints
+# Configure {{{ .starter }}}, Essential, or Premium Firewall Rules for Public Endpoints
 
 This document describes the public connectivity option for {{{ .starter }}} and {{{ .essential }}} clusters. You will learn key concepts for securely managing a cluster accessible via the internet.
 
@@ -55,4 +55,4 @@ To add firewall rules to a {{{ .starter }}} or {{{ .essential }}} cluster, take 
 
 ## What's next
 
-- [Connect to {{{ .starter }}} or Essential via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
+- [Connect to {{{ .starter }}}, Essential, or Premium via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)

@@ -1,9 +1,9 @@
 ---
-title: Connect to Your {{{ .starter }}} or Essential Cluster
+title: Connect to Your {{{ .starter }}}, Essential, or Premium Cluster
 summary: Learn how to connect to your {{{ .starter }}} or {{{ .essential }}} cluster via different methods.
 ---
 
-# Connect to Your {{{ .starter }}} or Essential Cluster
+# Connect to Your {{{ .starter }}}, Essential, or Premium Cluster
 
 This document describes how to connect to your {{{ .starter }}} or {{{ .essential }}} cluster.
 

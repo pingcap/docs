@@ -64,7 +64,7 @@ The best way to learn about TiDB Cloud is to follow our step-by-step tutorial. C
 
 - [TiDB Cloud Introduction](/tidb-cloud/tidb-cloud-intro.md)
 - [Get Started](/tidb-cloud/tidb-cloud-quickstart.md)
-- [Create a {{{ .starter }}} or Essential Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [Create a {{{ .starter }}}, Essential, or Premium Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
 
 ### What does `XXX's Org/default project/Cluster0` refer to when deleting a cluster?
 
@@ -186,7 +186,7 @@ For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](/tidb-c
 
 <div label="{{{ .starter }}}/Essential">
 
-For a {{{ .starter }}} or Essential cluster, the steps to connect to your cluster are simplified as follows:
+For a {{{ .starter }}}, Essential, or Premium cluster, the steps to connect to your cluster are simplified as follows:
 
 1. Set a database user and login credential.
 2. Choose a SQL client, get an auto-generated connection string displayed on the TiDB Cloud UI, and then connect to your cluster through the SQL client using the string.

@@ -1,9 +1,9 @@
 ---
-title: Import Local Files to {{{ .starter }}} or Essential
+title: Import Local Files to {{{ .starter }}}, Essential, or Premium
 summary: Learn how to import local files to {{{ .starter }}} or {{{ .essential }}}.
 ---
 
-# Import Local Files to {{{ .starter }}} or Essential
+# Import Local Files to {{{ .starter }}}, Essential, or Premium
 
 You can import local files to {{{ .starter }}} or {{{ .essential }}} directly. It only takes a few clicks to complete the task configuration, and then your local CSV data will be quickly imported to your TiDB cluster. Using this method, you do not need to provide the cloud storage and credentials. The whole importing process is quick and smooth.
 

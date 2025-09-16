@@ -188,7 +188,7 @@ TiDB Cloud ensures secure cluster connectivity and data transmission through rob
 
 - Setup guides:
 
-    - [TLS Connections to {{{ .starter }}} or Essential](/tidb-cloud/secure-connections-to-serverless-clusters.md)
+    - [TLS Connections to {{{ .starter }}}, Essential, or Premium](/tidb-cloud/secure-connections-to-serverless-clusters.md)
     - [TLS Connections to TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
 
 **Best practices:** Ensure TLS certificates are current and rotate them periodically.

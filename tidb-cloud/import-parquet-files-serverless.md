@@ -1,9 +1,9 @@
 ---
-title: Import Apache Parquet Files from Cloud Storage into {{{ .starter }}} or Essential
+title: Import Apache Parquet Files from Cloud Storage into {{{ .starter }}}, Essential, or Premium
 summary: Learn how to import Apache Parquet files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into {{{ .starter }}} or {{{ .essential }}}.
 ---
 
-# Import Apache Parquet Files from Cloud Storage into {{{ .starter }}} or Essential
+# Import Apache Parquet Files from Cloud Storage into {{{ .starter }}}, Essential, or Premium
 
 You can import both uncompressed and Snappy compressed [Apache Parquet](https://parquet.apache.org/) format data files to {{{ .starter }}} or {{{ .essential }}}. This document describes how to import Parquet files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into {{{ .starter }}} or {{{ .essential }}}.
 

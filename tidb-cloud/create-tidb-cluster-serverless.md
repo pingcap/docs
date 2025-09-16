@@ -1,9 +1,9 @@
 ---
-title: Create a {{{ .starter }}} or Essential Cluster
+title: Create a {{{ .starter }}}, Essential, or Premium Cluster
 summary: Learn how to create a {{{ .starter }}} or {{{ .essential }}} cluster.
 ---
 
-# Create a {{{ .starter }}} or Essential Cluster
+# Create a {{{ .starter }}}, Essential, or Premium Cluster
 
 This document describes how to create a {{{ .starter }}} or {{{ .essential }}} cluster in the [TiDB Cloud console](https://tidbcloud.com/).
 
