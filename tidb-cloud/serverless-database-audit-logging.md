@@ -1,6 +1,7 @@
 ---
 title: Database Audit Logging for {{{ .essential }}}
 summary: Learn about how to audit a {{{ .essential }}} cluster in TiDB Cloud.
+aliases: ['/tidbcloud/serverless-audit-logging']
 ---
 
 # Database Audit Logging (Beta) for {{{ .essential }}}
@@ -228,8 +229,6 @@ ticloud serverless audit-log config update -c <cluster-id> --disabled=true
 </SimpleTab>
 
 ## Manage audit logging filter rules
-
-You can manage audit logging filter rules in the [TiDB Cloud console](https://tidbcloud.com/) or by using the [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-config.md).
 
 ### Create a filter rule
 
