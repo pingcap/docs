@@ -12,8 +12,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-<CustomContent language="en,zh">
-
 - **TiDB Cloud Dedicated**
 
     - Encryption at Rest with Customer-Managed Encryption Keys (CMEK) is available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on Azure.
@@ -31,8 +29,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
         3. Create a TiDB Cloud Dedicated cluster hosted on Azure in the same region as your CMEK configuration.
   
       For more information, see [Encryption at Rest Using Customer-Managed Encryption Keys on Azure](/tidb-cloud/tidb-cloud-encrypt-cmek-azure.md).
-
-</CustomContent>
 
 ## September 9, 2025
 
