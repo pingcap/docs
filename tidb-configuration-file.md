@@ -616,6 +616,10 @@ Configuration items related to performance.
 
 ### `concurrently-init-stats` <span class="version-mark">New in v8.1.0 and v7.5.2</span>
 
+> **Warning:**
+>
+> Starting from v9.0.0, the `concurrently-init-stats` configuration item is deprecated and TiDB always initializes statistics concurrently during startup.
+
 + Controls whether to initialize statistics concurrently during TiDB startup. This configuration item takes effect only when [`lite-init-stats`](#lite-init-stats-new-in-v710) is set to `false`.
 + Default value: `false` for versions earlier than v8.2.0, `true` for v8.2.0 and later versions.
 
