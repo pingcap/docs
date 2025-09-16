@@ -143,7 +143,7 @@ To complete the CMEK configuration of the project, take the following steps:
 
 ### Step 3. Create a cluster
 
-Under the project created in [Step 1](#step-1-create-a-cmek-enabled-project), create a TiDB Cloud Dedicated cluster hosted on AWS. For detailed steps, refer to [this document](/tidb-cloud/create-tidb-cluster.md). Ensure that the region where the cluster is located is the same as that in [Step 2](#step-2-complete-the-cmek-configuration-of-the-project).
+Under the project created in [Step 1](#step-1-create-a-cmek-enabled-project), create a TiDB Cloud Dedicated cluster hosted on AWS. For detailed steps, refer to [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md). Ensure that the region where the cluster is located is the same as that in [Step 2](#step-2-complete-the-cmek-configuration-of-the-project).
 
 > **Note:**
 >
@@ -167,4 +167,4 @@ If you need to temporarily revoke TiDB Cloud's access to CMEK, follow these step
 After revoking TiDB Cloud's access to CMEK, if you need to restore the access, follow these steps:
 
 1. On the AWS KMS console, restore the CMEK access policy.
-2. On the TiDB Cloud console, restore all clusters in the project.
+2. In the TiDB Cloud console, restore all clusters in the project.
