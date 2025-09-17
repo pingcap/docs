@@ -136,7 +136,7 @@
         -   TiDB Cloudクラスタに接続する
             -   [接続の概要](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
             -   [パブリックエンドポイント経由で接続](/tidb-cloud/connect-via-standard-connection-serverless.md)
-            -   [Alibaba Cloud のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+            -   [プライベートエンドポイント経由でAlibaba Cloudに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
         -   支店![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
             -   [概要](/tidb-cloud/branch-overview.md)
             -   [ブランチの管理](/tidb-cloud/branch-manage.md)
@@ -148,7 +148,7 @@
         -   [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)
         -   [TiFlashからデータを読み取る](/tiflash/use-tidb-to-read-tiflash.md)
         -   [MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)
-        -   [ファストスキャンを使用する](/tiflash/use-fastscan.md)
+        -   [FastScanを使用する](/tiflash/use-fastscan.md)
         -   [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
         -   [TiFlashクエリ結果のマテリアライゼーション](/tiflash/tiflash-results-materialization.md)
         -   [TiFlash遅延マテリアライゼーション](/tiflash/tiflash-late-materialization.md)
@@ -181,7 +181,7 @@
                     -   [サブクエリ関連の最適化](/subquery-optimization.md)
                     -   [カラムの剪定](/column-pruning.md)
                     -   [相関サブクエリの非相関](/correlated-subquery-optimization.md)
-                    -   [最大/最小を排除](/max-min-eliminate.md)
+                    -   [最大値/最小値を排除](/max-min-eliminate.md)
                     -   [Predicate Push Down](/predicate-push-down.md)
                     -   [パーティションプルーニング](/partition-pruning.md)
                     -   [TopNとLimit Push Down](/topn-limit-push-down.md)
@@ -202,7 +202,7 @@
                 -   [概要](/control-execution-plan.md)
                 -   [オプティマイザヒント](/optimizer-hints.md)
                 -   [SQLプラン管理](/sql-plan-management.md)
-                -   [最適化ルールのブロックリストと式プッシュダウン](/blocklist-control-plan.md)
+                -   [最適化ルールのブロックリストと式のプッシュダウン](/blocklist-control-plan.md)
                 -   [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
         -   [TiKV Follower Readの調整](/follower-read.md)
         -   [コプロセッサーキャッシュ](/coprocessor-cache.md)
@@ -223,6 +223,7 @@
         -   [Cloud Storage からサンプルデータ (SQL ファイル) をインポートする](/tidb-cloud/import-sample-data-serverless.md)
         -   [クラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)
         -   [クラウドストレージからParquetファイルをインポートする](/tidb-cloud/import-parquet-files-serverless.md)
+        -   [クラウドストレージからスナップショットファイルをインポートする](/tidb-cloud/import-snapshot-files-serverless.md)
         -   [MySQL CLI によるインポート](/tidb-cloud/import-with-mysql-cli-serverless.md)
     -   参照
         -   [TiDB Cloudの外部ストレージアクセスを構成する](/tidb-cloud/serverless-external-storage.md)
@@ -262,7 +263,7 @@
         -   [アイデンティティアクセス管理](/tidb-cloud/manage-user-access.md)
         -   [OAuth 2.0](/tidb-cloud/oauth2.md)
     -   ネットワークアクセス制御
-        -   [Alibaba Cloud のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+        -   [プライベートエンドポイント経由でAlibaba Cloudに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
         -   [パブリックエンドポイントのファイアウォールルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
         -   [TiDB CloudへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)
     -   監査管理
@@ -287,7 +288,7 @@
     -   テラフォーム
         -   [Terraform 統合の概要](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
         -   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)
-        -   [`tidbcloud_serverless_cluster`リソースを使用する](/tidb-cloud/terraform-use-serverless-cluster-resource.md)
+        -   [`tidbcloud_serverless_cluster`リソースを使用する](/tidb-cloud/terraform-use-serverless-cluster-resource-manage-essential.md)
         -   [`tidbcloud_serverless_branch`リソースを使用する](/tidb-cloud/terraform-use-serverless-branch-resource.md)
         -   [`tidbcloud_serverless_export`リソースを使用する](/tidb-cloud/terraform-use-serverless-export-resource.md)
         -   [`tidbcloud_sql_user`リソースを使用する](/tidb-cloud/terraform-use-sql-user-resource.md)
@@ -492,7 +493,7 @@
     -   [パーティショニング](/partitioned-table.md)
     -   [一時テーブル](/temporary-tables.md)
     -   [キャッシュされたテーブル](/cached-tables.md)
-    -   [外部キー制約](/foreign-key.md)
+    -   [FOREIGN KEY制約](/foreign-key.md)
     -   文字セットと照合順序
         -   [概要](/character-set-and-collation.md)
         -   [GBK](/character-set-gbk.md)
@@ -568,7 +569,7 @@
     -   認証
         -   [ログイン](/tidb-cloud/ticloud-auth-login.md)
         -   [ログアウト](/tidb-cloud/ticloud-auth-logout.md)
-        -   [誰だ？](/tidb-cloud/ticloud-auth-whoami.md)
+        -   [だれだ](/tidb-cloud/ticloud-auth-whoami.md)
     -   サーバーレス
         -   [容量](/tidb-cloud/ticloud-serverless-capacity.md)
         -   [作成する](/tidb-cloud/ticloud-cluster-create.md)
@@ -657,7 +658,7 @@
         -   接続: IMチケットの作成とサブスクリプションの更新
             -   [Slack 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
             -   [Larkでチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
-        -   接続: サポートチケットのIMインタラクション
+        -   接続: サポートチケットの IM 対話
             -   [Slack経由でサポートチケットとやり取りする](/tidb-cloud/connected-slack-ticket-interaction.md)
             -   [Lark経由でサポートチケットとやり取りする](/tidb-cloud/connected-lark-ticket-interaction.md)
     -   [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)

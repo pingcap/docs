@@ -144,7 +144,7 @@ summary: tidbcloud_dedicated_vpc_peering` リソースを使用して、 TiDB Cl
 
 ## TiDB Cloud Dedicated VPC ピアリングをインポートする {#import-a-tidb-cloud-dedicated-vpc-peering}
 
-Terraform で管理されていないTiDB Cloud Dedicated VPC ピアリングの場合は、インポートするだけで Terraform を使用して管理できます。
+Terraform によって管理されていないTiDB Cloud Dedicated VPC ピアリングの場合は、インポートすることで Terraform の管理下に置くことができます。
 
 たとえば、Terraform によって作成されていない VPC ピアリングをインポートできます。
 
@@ -173,7 +173,7 @@ Terraform で管理されていないTiDB Cloud Dedicated VPC ピアリングの
 
     生成された構成ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
 
-    次に、 `terraform apply`を実行してインフラストラクチャをインポートします。適用後の出力例は次のとおりです。
+    次に、 `terraform apply`実行してインフラストラクチャをインポートします。適用後、出力例は次のようになります。
 
     ```shell
     tidbcloud_dedicated_vpc_peering.example: Importing... [id=aws-1934187953894000000,example]
@@ -182,7 +182,7 @@ Terraform で管理されていないTiDB Cloud Dedicated VPC ピアリングの
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
 
-これで、インポートしたTiDB Cloud Dedicated VPC ピアリングを Terraform を使用して管理できるようになりました。
+これで、インポートしたTiDB Cloud Dedicated VPC ピアリングを Terraform で管理できるようになりました。
 
 ## TiDB Cloud Dedicated VPC ピアリングを削除する {#delete-a-tidb-cloud-dedicated-vpc-peering}
 

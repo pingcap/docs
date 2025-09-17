@@ -136,7 +136,7 @@ summary: tidbcloud_dedicated_network_container` リソースを使用して、 T
 
 ## TiDB Cloud専用ネットワークコンテナをインポートする {#import-a-tidb-cloud-dedicated-network-container}
 
-Terraform で管理されていないTiDB Cloud Dedicated ネットワーク コンテナの場合は、インポートするだけで Terraform を使用して管理できます。
+Terraform によって管理されていないTiDB Cloud Dedicated ネットワーク コンテナの場合は、インポートすることで Terraform の管理下に置くことができます。
 
 たとえば、Terraform によって作成されていないネットワーク コンテナーをインポートできます。
 
@@ -165,7 +165,7 @@ Terraform で管理されていないTiDB Cloud Dedicated ネットワーク コ
 
     生成された構成ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
 
-    次に、 `terraform apply`を実行してインフラストラクチャをインポートします。適用後の出力例は次のとおりです。
+    次に、 `terraform apply`実行してインフラストラクチャをインポートします。適用後、出力例は次のようになります。
 
     ```shell
     tidbcloud_dedicated_network_container.example: Importing... [id=10423692645683000000,example]

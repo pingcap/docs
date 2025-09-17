@@ -1,28 +1,28 @@
 ---
 title: Use the `tidbcloud_serverless_cluster` Resource
-summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Starter クラスターを作成および変更する方法を学習します。
+summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Essential クラスターを作成および変更する方法を学習します。
 ---
 
 # <code>tidbcloud_serverless_cluster</code>リソースを使用する {#use-the-code-tidbcloud-serverless-cluster-code-resource}
 
-このドキュメントでは、 `tidbcloud_serverless_cluster`リソースを使用して[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターを管理する方法について説明します。
+このドキュメントでは、 `tidbcloud_serverless_cluster`リソースを使用して[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスターを管理する方法について説明します。
 
 また、 `tidbcloud_projects`データ ソースを使用して必要な情報を取得する方法も学習します。
 
 `tidbcloud_serverless_cluster`リソースの機能は次のとおりです。
 
--   TiDB Cloud Starter クラスターを作成します。
--   TiDB Cloud Starter クラスターを変更します。
--   TiDB Cloud Starter クラスターをインポートします。
--   TiDB Cloud Starter クラスターを削除します。
+-   TiDB Cloud Essential クラスターを作成します。
+-   TiDB Cloud Essential クラスターを変更します。
+-   TiDB Cloud Essential クラスターをインポートします。
+-   TiDB Cloud Essential クラスターを削除します。
 
 ## 前提条件 {#prerequisites}
 
--   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
+-   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.2以降。
 
 ## <code>tidbcloud_projects</code>データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-code-tidbcloud-projects-code-data-source}
 
-各TiDBクラスタはプロジェクトに属します。TiDB TiDB Cloud Starterクラスタを作成する前に、クラスタを作成するプロジェクトのIDを取得する必要があります。1 `project_id`指定されていない場合は、デフォルトのプロジェクトが使用されます。
+各TiDBクラスタはプロジェクトに属します。TiDB TiDB Cloud Essentialクラスタを作成する前に、クラスタを作成するプロジェクトのIDを取得する必要があります。1 `project_id`指定されていない場合は、デフォルトのプロジェクトが使用されます。
 
 利用可能なすべてのプロジェクトに関する情報を取得するには、次のように`tidbcloud_projects`データ ソースを使用します。
 
@@ -117,9 +117,9 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Sta
 
 これで、出力から利用可能なすべてのプロジェクトを取得できます。必要なプロジェクトIDを1つコピーしてください。
 
-## TiDB Cloud Starter クラスターを作成する {#create-a-tidb-cloud-starter-cluster}
+## TiDB Cloud Essential クラスターを作成する {#create-a-tidb-cloud-essential-cluster}
 
-`tidbcloud_serverless_cluster`リソースを使用して、 TiDB Cloud Starter クラスターを作成できます。
+`tidbcloud_serverless_cluster`リソースを使用して、 TiDB Cloud Essential クラスターを作成できます。
 
 1.  クラスターのディレクトリを作成してそこに入ります。
 
@@ -143,8 +143,9 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Sta
         resource "tidbcloud_serverless_cluster" "example" {
           project_id = "1372813089454000000"
           display_name = "test-tf"
-          spending_limit = {
-            monthly = 1
+          auto_scaling = {
+            min_rcu = 3000
+            max_rcu = 4000
           }
           region = {
             name = "regions/aws-us-east-1"
@@ -155,7 +156,7 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Sta
 
     -   `tidbcloud_serverless_cluster`リソースを使用するには、リソース タイプを`tidbcloud_serverless_cluster`に設定します。
     -   リソース名は必要に応じて定義できます。例： `example` 。
-    -   リソースの詳細については、プロジェクト ID と[`tidbcloud_serverless_cluster`仕様](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster)に応じて設定できます。
+    -   リソースの詳細は、プロジェクトIDと[`tidbcloud_serverless_cluster`仕様](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster)に応じて設定できます。TiDB TiDB Cloud Essentialクラスターを作成するには、リソース詳細で`auto_scaling`属性を指定する必要があります。
 
 3.  `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 
@@ -185,8 +186,9 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Sta
                 + name           = "regions/aws-us-east-1"
                 + region_id      = (known after apply)
             }
-            + spending_limit          = {
-                + monthly = 1
+            + auto_scaling            = {
+                + max_rcu = 4000
+                + min_rcu = 3000
             }
             + state                   = (known after apply)
             + update_time             = (known after apply)
@@ -274,8 +276,9 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Sta
             name           = "regions/aws-us-east-1"
             region_id      = "us-east-1"
         }
-        spending_limit          = {
-            monthly = 1
+        auto_scaling = {
+            min_rcu = 3000
+            max_rcu = 4000
         }
         state                   = "ACTIVE"
         update_time             = "2025-06-16T07:04:48Z"
@@ -284,22 +287,23 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Sta
     }
     ```
 
-## TiDB Cloud Starter クラスターを変更する {#modify-a-tidb-cloud-starter-cluster}
+## TiDB Cloud Essential クラスターを変更する {#modify-a-tidb-cloud-essential-cluster}
 
-TiDB Cloud Starterクラスタでは、Terraformを使用してリソースを管理できます。変更可能な引数は次のとおりです。
+TiDB Cloud Essential クラスタでは、Terraform を使用してリソースを管理できます。変更可能な引数は次のとおりです。
 
 -   `display_name` : クラスターの表示名。
--   `spending_limit` : クラスターの使用制限。
+-   `auto_scaling` : クラスターの自動スケーリング構成。
 -   `endpoints.public.disabled` : パブリックエンドポイントを無効にするかどうか。
 -   `automated_backup_policy.start_time` : 自動バックアップが開始される時点の UTC 時刻 ( `HH:mm`形式)。
 
-TiDB Cloud Starterクラスターを変更するには、 `tidbcloud_serverless_cluster`のリソースの構成を変更し、 `terraform apply`コマンドを使用して変更を適用します。例えば、 `display_name`と`spending_limit`次のように変更できます。
+TiDB Cloud Essentialクラスターを変更するには、 `tidbcloud_serverless_cluster`のリソースの設定を変更し、 `terraform apply`コマンドを使用して変更を適用します。例えば、 `display_name`と`auto_scaling`リソースを次のように変更できます。
 
     resource "tidbcloud_serverless_cluster" "example" {
       project_id = "1372813089454000000"
       display_name = "test-tf-modified"
-      spending_limit = {
-        monthly = 2
+      auto_scaling = {
+        min_rcu = 4000
+        max_rcu = 5000
       }
       region = {
         name = "regions/aws-us-east-1"
@@ -329,8 +333,9 @@ Terraform will perform the following actions:
           - "tidb.cloud/organization" = "1372813089187041280"
           - "tidb.cloud/project"      = "1372813089454543324"
         } -> (known after apply)
-      ~ spending_limit          = {
-          ~ monthly = 1 -> 2
+      ~ auto_scaling            = {
+          ~ min_rcu = 3000 -> 4000
+          ~ max_rcu = 4000 -> 5000
         }
       ~ state                   = "ACTIVE" -> (known after apply)
       ~ update_time             = "2025-06-16T07:04:57Z" -> (known after apply)
@@ -401,8 +406,9 @@ resource "tidbcloud_serverless_cluster" "example" {
         name           = "regions/aws-us-east-1"
         region_id      = "us-east-1"
     }
-    spending_limit          = {
-        monthly = 2
+    auto_scaling = {
+        min_rcu = 4000
+        max_rcu = 5000
     }
     state                   = "ACTIVE"
     update_time             = "2025-06-16T07:04:57Z"
@@ -411,9 +417,9 @@ resource "tidbcloud_serverless_cluster" "example" {
 }
 ```
 
-## TiDB Cloud Starter クラスターをインポートする {#import-a-tidb-cloud-starter-cluster}
+## TiDB Cloud Essential クラスターをインポートする {#import-a-tidb-cloud-essential-cluster}
 
-Terraform によって管理されていないTiDB Cloud Starter クラスターの場合は、インポートすることで Terraform の管理下に置くことができます。
+Terraform によって管理されていないTiDB Cloud Essential クラスターの場合は、インポートすることで Terraform の管理下に置くことができます。
 
 1.  新しい`tidbcloud_serverless_cluster`リソースのインポート ブロックを追加します。
 
@@ -449,9 +455,9 @@ Terraform によって管理されていないTiDB Cloud Starter クラスター
 
 これで、インポートしたクラスターを Terraform で管理できるようになりました。
 
-## TiDB Cloud Starter クラスターを削除する {#delete-a-tidb-cloud-starter-cluster}
+## TiDB Cloud Essential クラスターを削除する {#delete-a-tidb-cloud-essential-cluster}
 
-TiDB Cloud Starter クラスターを削除するには、 `tidbcloud_serverless_cluster`リソースの構成を削除してから、 `terraform apply`コマンドを使用してリソースを破棄します。
+TiDB Cloud Essential クラスターを削除するには、 `tidbcloud_serverless_cluster`リソースの構成を削除し、 `terraform apply`コマンドを使用してリソースを破棄します。
 
 ```shell
 $ terraform apply
@@ -508,8 +514,9 @@ Terraform will perform the following actions:
           - name           = "regions/aws-us-east-1" -> null
           - region_id      = "us-east-1" -> null
         } -> null
-      - spending_limit          = {
-          - monthly = 2 -> null
+      - auto_scaling            = {
+          - min_rcu = 4000 -> null
+          - max_rcu = 5000 -> null
         } -> null
       - state                   = "ACTIVE" -> null
       - update_time             = "2025-06-16T07:04:57Z" -> null

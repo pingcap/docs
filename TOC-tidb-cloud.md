@@ -138,7 +138,7 @@
         -   [プライベートエンドポイント経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
         -   [VPC ピアリング経由で接続](/tidb-cloud/set-up-vpc-peering-connections.md)
         -   [SQL シェル経由で接続する](/tidb-cloud/connect-via-sql-shell.md)
-    -   [TiDB Cloud専用クラスタのスケール](/tidb-cloud/scale-tidb-cluster.md)
+    -   [TiDB Cloud専用クラスタのスケーリング](/tidb-cloud/scale-tidb-cluster.md)
     -   [TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md)
     -   [TiDB Cloud専用クラスタを一時停止または再開する](/tidb-cloud/pause-or-resume-tidb-cluster.md)
     -   [メンテナンスウィンドウの設定](/tidb-cloud/configure-maintenance-window.md)
@@ -150,7 +150,7 @@
         -   [FastScanを使用する](/tiflash/use-fastscan.md)
         -   [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
         -   [TiFlashクエリ結果のマテリアライゼーション](/tiflash/tiflash-results-materialization.md)
-        -   [TiFlash遅延マテリアライゼーション](/tiflash/tiflash-late-materialization.md)
+        -   [TiFlash遅延実体化](/tiflash/tiflash-late-materialization.md)
         -   [互換性](/tiflash/tiflash-compatibility.md)
         -   [パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)
     -   監視と警告
@@ -159,7 +159,7 @@
         -   [組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md)
         -   アラート通知を購読する
             -   [メールで購読する](/tidb-cloud/monitor-alert-email.md)
-            -   [Slackで購読する](/tidb-cloud/monitor-alert-slack.md)
+            -   [Slackで登録する](/tidb-cloud/monitor-alert-slack.md)
             -   [Zoomで登録する](/tidb-cloud/monitor-alert-zoom.md)
         -   [クラスタイベント](/tidb-cloud/tidb-cloud-events.md)
         -   [サードパーティのメトリクス統合](/tidb-cloud/third-party-monitoring-integrations.md)
@@ -189,7 +189,7 @@
                     -   [サブクエリ関連の最適化](/subquery-optimization.md)
                     -   [カラムの剪定](/column-pruning.md)
                     -   [相関サブクエリの非相関](/correlated-subquery-optimization.md)
-                    -   [最大/最小を排除](/max-min-eliminate.md)
+                    -   [最大値/最小値を排除](/max-min-eliminate.md)
                     -   [Predicate Push Down](/predicate-push-down.md)
                     -   [パーティションプルーニング](/partition-pruning.md)
                     -   [TopNとLimit Push Down](/topn-limit-push-down.md)
@@ -210,7 +210,7 @@
                 -   [概要](/control-execution-plan.md)
                 -   [オプティマイザヒント](/optimizer-hints.md)
                 -   [SQLプラン管理](/sql-plan-management.md)
-                -   [最適化ルールのブロックリストと式プッシュダウン](/blocklist-control-plan.md)
+                -   [最適化ルールのブロックリストと式のプッシュダウン](/blocklist-control-plan.md)
                 -   [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
             -   [インデックスアドバイザー](/index-advisor.md)
         -   [TiKV Follower Readの調整](/follower-read.md)
@@ -220,6 +220,7 @@
             -   [コンフィグレーション](/garbage-collection-configuration.md)
         -   [TiFlash のパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md)
     -   リソース割り当ての最適化
+        -   [リソース割り当ての概要](/tidb-cloud/optimize-resource-allocation.md)
         -   リソースマネージャー
             -   [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)
             -   [ランナウェイクエリの管理](/tidb-resource-control-runaway-queries.md)
@@ -242,6 +243,7 @@
         -   [Cloud Storage からサンプルデータ (SQL ファイル) をインポートする](/tidb-cloud/import-sample-data.md)
         -   [クラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)
         -   [クラウドストレージからParquetファイルをインポートする](/tidb-cloud/import-parquet-files.md)
+        -   [クラウドストレージからスナップショットファイルをインポートする](/tidb-cloud/import-snapshot-files.md)
         -   [MySQL CLI によるインポート](/tidb-cloud/import-with-mysql-cli.md)
     -   参照
         -   [TiDB Cloud Dedicatedの外部ストレージアクセスを構成する](/tidb-cloud/dedicated-external-storage.md)
@@ -281,7 +283,7 @@
 -   データサービス![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
     -   [概要](/tidb-cloud/data-service-overview.md)
     -   [始める](/tidb-cloud/data-service-get-started.md)
-    -   Chat2Query API
+    -   チャット2クエリAPI
         -   [始める](/tidb-cloud/use-chat2query-api.md)
         -   [マルチラウンドChat2Queryを開始する](/tidb-cloud/use-chat2query-sessions.md)
         -   [ナレッジベースを使用する](/tidb-cloud/use-chat2query-knowledge.md)
@@ -304,7 +306,7 @@
     -   [クラウドストレージへ](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
     -   参照
         -   [AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
-        -   [Azure でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)
+        -   [Azure でセルフホスト型 Kafka プライベート リンク サービスを設定する](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)
         -   [Google Cloud でセルフホスト型 Kafka プライベート サービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)
 -   災害復旧
     -   [回復グループの概要](/tidb-cloud/recovery-group-overview.md)
@@ -326,7 +328,8 @@
         -   [VPC ピアリング経由で接続](/tidb-cloud/set-up-vpc-peering-connections.md)
         -   [TiDB Cloud専用へのTLS接続](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
     -   データアクセス制御
-        -   [顧客管理の暗号化キーを使用した保存時の暗号化](/tidb-cloud/tidb-cloud-encrypt-cmek.md)
+        -   [AWS での顧客管理の暗号化キーを使用した保存時の暗号化](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)
+        -   [Azure での顧客管理の暗号化キーを使用した保存時の暗号化](/tidb-cloud/tidb-cloud-encrypt-cmek-azure.md)
         -   [ユーザー制御のログ編集](/tidb-cloud/tidb-cloud-log-redaction.md)
     -   データベースアクセス制御
         -   [クラスタパスワード設定を構成する](/tidb-cloud/configure-security-settings.md)
@@ -590,13 +593,13 @@
         -   [分離レベル](/transaction-isolation-levels.md)
         -   [楽観的トランザクション](/optimistic-transaction.md)
         -   [悲観的な取引](/pessimistic-transaction.md)
-        -   [非トランザクションDML文](/non-transactional-dml.md)
+        -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
         -   [パイプラインDML](/pipelined-dml.md)
     -   [ビュー](/views.md)
     -   [パーティショニング](/partitioned-table.md)
     -   [一時テーブル](/temporary-tables.md)
     -   [キャッシュされたテーブル](/cached-tables.md)
-    -   [外部キー制約](/foreign-key.md)
+    -   [FOREIGN KEY制約](/foreign-key.md)
     -   文字セットと照合順序
         -   [概要](/character-set-and-collation.md)
         -   [GBK](/character-set-gbk.md)
@@ -676,7 +679,7 @@
 -   APIリファレンス![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
     -   [概要](/tidb-cloud/api-overview.md)
     -   v1ベータ1
-        -   [TiDB Cloudスターターとエッセンシャル](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless)
+        -   [TiDB Cloud StarterとEssential](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless)
         -   [TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated)
         -   [請求する](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
         -   [データサービス](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)
@@ -703,26 +706,26 @@
         -   [再販業者の顧客](/tidb-cloud/cppo-customer.md)
     -   TiDB 分散実行フレームワーク (DXF)
         -   [導入](/tidb-distributed-execution-framework.md)
-        -   [TiDB グローバルソート](/tidb-global-sort.md)
+        -   [TiDBグローバルソート](/tidb-global-sort.md)
     -   [TiDB Cloud専用制限とクォータ](/tidb-cloud/limitations-and-quotas.md)
     -   [TiDB Cloudの SQL 機能が制限されている](/tidb-cloud/limited-sql-features.md)
     -   [TiDB の制限](/tidb-limitations.md)
     -   ベンチマーク
         -   TiDB v8.5
             -   [パフォーマンスのハイライト](/tidb-cloud/v8.5-performance-highlights.md)
-            -   [TPC-C パフォーマンステストレポート](/tidb-cloud/v8.5-performance-benchmarking-with-tpcc.md)
+            -   [TPC-Cパフォーマンステストレポート](/tidb-cloud/v8.5-performance-benchmarking-with-tpcc.md)
             -   [Sysbenchパフォーマンステストレポート](/tidb-cloud/v8.5-performance-benchmarking-with-sysbench.md)
         -   TiDB v8.1
-            -   [TPC-C パフォーマンステストレポート](/tidb-cloud/v8.1-performance-benchmarking-with-tpcc.md)
+            -   [TPC-Cパフォーマンステストレポート](/tidb-cloud/v8.1-performance-benchmarking-with-tpcc.md)
             -   [Sysbenchパフォーマンステストレポート](/tidb-cloud/v8.1-performance-benchmarking-with-sysbench.md)
         -   TiDB v7.5
-            -   [TPC-C パフォーマンステストレポート](/tidb-cloud/v7.5-performance-benchmarking-with-tpcc.md)
+            -   [TPC-Cパフォーマンステストレポート](/tidb-cloud/v7.5-performance-benchmarking-with-tpcc.md)
             -   [Sysbenchパフォーマンステストレポート](/tidb-cloud/v7.5-performance-benchmarking-with-sysbench.md)
         -   TiDB v7.1
             -   [TPC-Cパフォーマンステストレポート](/tidb-cloud/v7.1-performance-benchmarking-with-tpcc.md)
             -   [Sysbenchパフォーマンステストレポート](/tidb-cloud/v7.1-performance-benchmarking-with-sysbench.md)
         -   TiDB v6.5
-            -   [TPC-C パフォーマンステストレポート](/tidb-cloud/v6.5-performance-benchmarking-with-tpcc.md)
+            -   [TPC-Cパフォーマンステストレポート](/tidb-cloud/v6.5-performance-benchmarking-with-tpcc.md)
             -   [Sysbenchパフォーマンステストレポート](/tidb-cloud/v6.5-performance-benchmarking-with-sysbench.md)
     -   [システム変数](/system-variables.md)
     -   [サーバーステータス変数](/status-variables.md)
@@ -740,7 +743,7 @@
         -   [コネクテッド：クリニックサービス](/tidb-cloud/tidb-cloud-clinic.md)
         -   [接続：IMでのAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)
         -   接続済み: TiDB Cloudアラートの IM サブスクリプション
-            -   [Slackで購読する](/tidb-cloud/monitor-alert-slack.md)
+            -   [Slackで登録する](/tidb-cloud/monitor-alert-slack.md)
             -   [Zoomで登録する](/tidb-cloud/monitor-alert-zoom.md)
         -   接続: IMチケットの作成とサブスクリプションの更新
             -   [Slack 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-slack-ticket-creation.md)

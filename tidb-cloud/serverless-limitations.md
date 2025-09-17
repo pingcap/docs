@@ -4,13 +4,13 @@ summary: TiDB Cloud Starter の制限について説明します。
 aliases: ['/tidbcloud/serverless-tier-limitations']
 ---
 
-# TiDB Cloud StarterとEssentialの制限とクォータ {#limitations-and-quotas-of-tidb-cloud-starter-and-essential}
+# TiDB Cloud StarterおよびEssentialの制限とクォータ {#limitations-and-quotas-of-tidb-cloud-starter-and-essential}
 
 <!-- markdownlint-disable MD026 -->
 
 TiDB Cloud StarterおよびEssentialは、TiDBがサポートするほぼすべてのワークロードで動作しますが、TiDB Self-ManagedまたはTiDB Cloud Dedicatedクラスタと比較して機能に若干の違いがあります。このドキュメントでは、TiDB Cloud StarterおよびTiDB Cloud Essentialの制限事項について説明します。
 
-TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを継続的に埋めています。ギャップを埋める機能や性能が必要な場合は、機能リクエストに[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)または[お問い合わせ](https://www.pingcap.com/contact-us/?from=en)ご記入ください。
+TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを継続的に埋めています。ギャップを埋める機能や性能が必要な場合は、機能リクエストに[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)または[お問い合わせ](https://www.pingcap.com/contact-us/?from=en)使用してください。
 
 ## 制限事項 {#limitations}
 
@@ -20,8 +20,8 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 ### 繋がり {#connection}
 
--   [パブリックエンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)と[プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)のみ使用できます。5 [VPCピアリング](/tidb-cloud/set-up-vpc-peering-connections.md) TiDB Cloud StarterまたはTiDB Cloud Essentialクラスターに接続するためには使用できません。
--   プライベートエンドポイントのサポート[ファイアウォールルール](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md) 。
+-   [パブリックエンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)と[プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)のみ使用できます。5 [VPC ピアリング](/tidb-cloud/set-up-vpc-peering-connections.md) TiDB Cloud StarterまたはTiDB Cloud Essentialクラスターに接続するためには使用できません。
+-   プライベートエンドポイントの[ファイアウォールルール](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)サポート。
 
 > **注記：**
 >
@@ -29,8 +29,8 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 ### 暗号化 {#encryption}
 
--   TiDB Cloud Starter またはTiDB Cloud Essential クラスターに保存されるデータは、クラスターを管理するクラウドプロバイダーが提供する暗号化ツールを使用して暗号化されます。TiDB TiDB Cloud Starter（使用制限 &gt; 0）およびTiDB Cloud Essential クラスターでは、クラスター作成プロセス中にオプションで第 2レイヤーの暗号化を利用できます。これにより、保存時のデフォルトの暗号化よりも高いレベルのセキュリティが確保されます。
--   [顧客管理暗号化キー（CMEK）](/tidb-cloud/tidb-cloud-encrypt-cmek.md)使用は現在利用できません。
+-   TiDB Cloud Starter またはTiDB Cloud Essential クラスターに保存されるデータは、クラスターを管理するクラウドプロバイダーが提供する暗号化ツールを使用して暗号化されます。TiDB TiDB Cloud Starter（使用制限が 0 より大きい）およびTiDB Cloud Essential クラスターでは、クラスター作成プロセス中にオプションで第 2レイヤーの暗号化を利用できます。これにより、保存時のデフォルトの暗号化よりも高いレベルのセキュリティが確保されます。
+-   [顧客管理暗号鍵（CMEK）](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)使用は現在利用できません。
 
 ### メンテナンスウィンドウ {#maintenance-window}
 
@@ -44,7 +44,7 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 ### セルフサービスアップグレード {#self-service-upgrades}
 
--   TiDB Cloud Starter とTiDB Cloud Essential は、TiDB のフルマネージド デプロイメントです。TiDB TiDB Cloud Starter とTiDB Cloud Essential のメジャーバージョンとマイナーバージョンのアップグレードはTiDB Cloudによって処理されるため、ユーザーが開始することはできません。
+-   TiDB Cloud StarterとTiDB Cloud Essentialは、TiDBのフルマネージドデプロイメントです。TiDB TiDB Cloud StarterとTiDB Cloud EssentialのメジャーバージョンとマイナーバージョンのアップグレードはTiDB Cloudによって処理されるため、ユーザーが開始することはできません。
 
 ### ストリームデータ {#stream-data}
 
@@ -64,15 +64,15 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 TiDB Cloudでは、組織ごとに最大5つのクラスター（デフォルトでは[無料のTiDB Cloud Starterクラスター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)を作成できます。TiDB TiDB Cloud Starterクラスターをさらに作成するには、クレジットカード情報と使用量に応じた[毎月の支出限度額を設定する](/tidb-cloud/manage-serverless-spend-limit.md)追加する必要があります。
 
-組織内の最初の 5 つのTiDB Cloud Starter クラスターに対して、 TiDB Cloud は次のようにクラスターごとに無料使用量割り当てを提供します。
+組織内の最初の 5 つのTiDB Cloud Starter クラスターについては、 TiDB Cloud は次のようにクラスターごとに無料使用量割り当てを提供します。
 
 -   行ベースのstorage: 5 GiB
 -   列指向storage: 5 GiB
--   [リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 月間5,000万RU
+-   [リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 月間5000万RU
 
 リクエストユニット（RU）は、クエリまたはトランザクションのリソース消費量を追跡するために使用される測定単位です。これは、データベース内の特定のリクエストを処理するために必要な計算リソースを見積もることができる指標です。リクエストユニットは、 TiDB Cloud Starterサービスの課金単位でもあります。
 
-クラスターが使用量クォータに達すると、新しい月の開始時に使用[割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)がリセットされるまで、新規接続の試行は直ちに拒否されます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。
+クラスターが使用量のクォータに達すると、新しい接続試行はすべて拒否されます。これは、 [割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)指定するか、新しい月の開始時に使用量がリセットされるまで続きます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。
 
 さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク送信など) の RU 消費量、価格の詳細、スロットル情報の詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)参照してください。
 
