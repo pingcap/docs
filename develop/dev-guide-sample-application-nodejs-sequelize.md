@@ -15,7 +15,7 @@ TiDB 是兼容 MySQL 的数据库，[Sequelize](https://sequelize.org/) 是 Node
 
 > **Note**
 >
-> 本教程适用于 {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud 专属集群，以及自建 TiDB 集群。
+> 本教程适用于 {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated 集群，以及自建 TiDB 集群。
 
 ## 前置条件
 
@@ -127,7 +127,7 @@ npm install
 
     如果你还未配置 IP 访问列表，请点击 **Configure IP Access List**，或参考 [配置 IP 访问列表](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) 进行配置后再首次连接。
 
-    除了 **Public** 连接类型，TiDB Cloud 专属集群还支持 **Private Endpoint** 和 **VPC Peering** 连接类型。更多信息请参考 [连接到你的 TiDB Cloud 专属集群](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)。
+    除了 **Public** 连接类型，TiDB Cloud Dedicated 集群还支持 **Private Endpoint** 和 **VPC Peering** 连接类型。更多信息请参考 [连接到你的 TiDB Cloud Dedicated 集群](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)。
 
 4. 运行以下命令，将 `.env.example` 复制并重命名为 `.env`：
 

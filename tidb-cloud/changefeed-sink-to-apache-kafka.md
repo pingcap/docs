@@ -9,7 +9,7 @@ summary: 本文档介绍如何创建变更订阅（changefeed），将数据从 
 
 > **Note:**
 >
-> - 要使用变更订阅功能，请确保你的 TiDB Cloud 专属集群版本为 v6.1.3 或更高版本。
+> - 要使用变更订阅功能，请确保你的 TiDB Cloud Dedicated 集群版本为 v6.1.3 或更高版本。
 > - 对于 [TiDB Cloud Serverless 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)，暂不支持变更订阅功能。
 
 ## 限制

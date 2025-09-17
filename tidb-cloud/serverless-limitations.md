@@ -8,9 +8,9 @@ aliases: ['/tidbcloud/serverless-tier-limitations']
 
 <!-- markdownlint-disable MD026 -->
 
-TiDB Cloud Starter 和 Essential 支持几乎所有 TiDB 支持的工作负载，但与 TiDB 自建版或 TiDB Cloud 专属集群相比，存在一些功能差异。本文档介绍了 TiDB Cloud Starter 和 TiDB Cloud Essential 的限制。
+TiDB Cloud Starter 和 Essential 支持几乎所有 TiDB 支持的工作负载，但与 TiDB 自建版或 TiDB Cloud Dedicated 集群相比，存在一些功能差异。本文档介绍了 TiDB Cloud Starter 和 TiDB Cloud Essential 的限制。
 
-我们正在不断缩小 TiDB Cloud Starter/Essential 与 TiDB Cloud 专属集群之间的功能差距。如果你需要这些尚未支持的功能或能力，请使用 [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 或 [联系我们](https://www.pingcap.com/contact-us/?from=en) 提交功能需求。
+我们正在不断缩小 TiDB Cloud Starter/Essential 与 TiDB Cloud Dedicated 集群之间的功能差距。如果你需要这些尚未支持的功能或能力，请使用 [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 或 [联系我们](https://www.pingcap.com/contact-us/?from=en) 提交功能需求。
 
 ## 限制
 

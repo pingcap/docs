@@ -1,17 +1,17 @@
 ---
-title: 通过 AWS PrivateLink 连接到 TiDB Cloud 专属集群
+title: 通过 AWS PrivateLink 连接到 TiDB Cloud Dedicated 集群
 summary: 了解如何通过私有终端节点使用 AWS 连接到你的 TiDB Cloud 集群。
 ---
 
-# 通过 AWS PrivateLink 连接到 TiDB Cloud 专属集群
+# 通过 AWS PrivateLink 连接到 TiDB Cloud Dedicated 集群
 
-本文档介绍如何通过 [AWS PrivateLink](https://aws.amazon.com/privatelink) 连接到你的 TiDB Cloud 专属集群。
+本文档介绍如何通过 [AWS PrivateLink](https://aws.amazon.com/privatelink) 连接到你的 TiDB Cloud Dedicated 集群。
 
 > **提示：**
 >
 > - 如需了解如何通过私有终端节点连接到 TiDB Cloud Serverless 集群，请参见 [Connect to TiDB Cloud Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)。
-> - 如需了解如何通过 Azure 私有终端节点连接到 TiDB Cloud 专属集群，请参见 [Connect to a TiDB Cloud Dedicated Cluster via Azure Private Link](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)。
-> - 如需了解如何通过 Google Cloud 私有终端节点连接到 TiDB Cloud 专属集群，请参见 [Connect to a TiDB Cloud Dedicated Cluster via Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)。
+> - 如需了解如何通过 Azure 私有终端节点连接到 TiDB Cloud Dedicated 集群，请参见 [Connect to a TiDB Cloud Dedicated Cluster via Azure Private Link](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)。
+> - 如需了解如何通过 Google Cloud 私有终端节点连接到 TiDB Cloud Dedicated 集群，请参见 [Connect to a TiDB Cloud Dedicated Cluster via Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)。
 
 TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink) 实现对托管在 AWS VPC 中的 TiDB Cloud 服务的高度安全且单向的访问，就像服务部署在你自己的 VPC 中一样。你的 VPC 中会暴露一个私有终端节点，你可以通过该终端节点并具备相应权限后连接到 TiDB Cloud 服务。
 
@@ -43,7 +43,7 @@ TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink) �
 
 ## 设置私有终端节点连接并连接到你的集群
 
-要通过私有终端节点连接到 TiDB Cloud 专属集群，请完成以下步骤：
+要通过私有终端节点连接到 TiDB Cloud Dedicated 集群，请完成以下步骤：
 
 1. [选择 TiDB 集群](#step-1-select-a-tidb-cluster)
 2. [创建 AWS 接口终端节点](#step-2-create-an-aws-interface-endpoint)
@@ -67,7 +67,7 @@ TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink) �
 
 > **注意：**
 >
-> 对于 2023 年 3 月 28 日之后创建的每个 TiDB Cloud 专属集群，系统会在集群创建后 3 到 4 分钟内自动创建对应的终端节点服务。
+> 对于 2023 年 3 月 28 日之后创建的每个 TiDB Cloud Dedicated 集群，系统会在集群创建后 3 到 4 分钟内自动创建对应的终端节点服务。
 
 如果你看到 `TiDB Private Link Service is ready` 消息，说明对应的终端节点服务已就绪。你可以提供以下信息来创建终端节点。
 

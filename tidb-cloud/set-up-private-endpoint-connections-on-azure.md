@@ -1,18 +1,18 @@
 ---
-title: 通过 Azure Private Link 连接 TiDB Cloud 专属集群
-summary: 了解如何通过 Azure Private Link 连接 TiDB Cloud 专属集群。
+title: 通过 Azure Private Link 连接 TiDB Cloud Dedicated 集群
+summary: 了解如何通过 Azure Private Link 连接 TiDB Cloud Dedicated 集群。
 ---
 
-# 通过 Azure Private Link 连接 TiDB Cloud 专属集群
+# 通过 Azure Private Link 连接 TiDB Cloud Dedicated 集群
 
-本文档介绍如何通过 [Azure Private Link](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview) 连接你的 TiDB Cloud 专属集群。
+本文档介绍如何通过 [Azure Private Link](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview) 连接你的 TiDB Cloud Dedicated 集群。
 
 <CustomContent language="en,zh">
 
 > **提示：**
 >
-> - 如需了解如何通过 AWS 私有终端节点连接 TiDB Cloud 专属集群，请参见 [通过 AWS PrivateLink 连接 TiDB Cloud 专属集群](/tidb-cloud/set-up-private-endpoint-connections.md)。
-> - 如需了解如何通过 Google Cloud 私有终端节点连接 TiDB Cloud 专属集群，请参见 [通过 Google Cloud Private Service Connect 连接 TiDB Cloud 专属集群](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
+> - 如需了解如何通过 AWS 私有终端节点连接 TiDB Cloud Dedicated 集群，请参见 [通过 AWS PrivateLink 连接 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections.md)。
+> - 如需了解如何通过 Google Cloud 私有终端节点连接 TiDB Cloud Dedicated 集群，请参见 [通过 Google Cloud Private Service Connect 连接 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
 > - 如需了解如何通过私有终端节点连接 TiDB Cloud Starter 或 TiDB Cloud Essential 集群，请参见以下文档：
 >     - [通过 AWS PrivateLink 连接 TiDB Cloud Starter](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
 >     - [通过阿里云私有终端节点连接 TiDB Cloud Starter 或 Essential](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
@@ -50,7 +50,7 @@ Azure Private Link 的架构如下所示：[^1]
 
 ## 使用 Azure Private Link 设置私有终端节点
 
-要通过私有终端节点连接你的 TiDB Cloud 专属集群，请完成以下步骤：
+要通过私有终端节点连接你的 TiDB Cloud Dedicated 集群，请完成以下步骤：
 
 1. [选择 TiDB 集群](#step-1-select-a-tidb-cluster)
 2. [创建 Azure 私有终端节点](#step-2-create-an-azure-private-endpoint)
@@ -75,7 +75,7 @@ Azure Private Link 的架构如下所示：[^1]
 
     > **注意：**
     >
-    > 对于每个 TiDB Cloud 专属集群，相关的终端节点服务会在集群创建后 3 到 4 分钟内自动创建。
+    > 对于每个 TiDB Cloud Dedicated 集群，相关的终端节点服务会在集群创建后 3 到 4 分钟内自动创建。
 
 2. 登录 [Azure portal](https://portal.azure.com/)，然后使用复制的 TiDB Cloud 资源 ID 为你的集群创建私有终端节点，具体步骤如下：
 

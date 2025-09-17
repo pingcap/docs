@@ -1,11 +1,11 @@
 ---
-title: 创建 TiDB Cloud 专属集群
-summary: 了解如何创建你的 TiDB Cloud 专属集群。
+title: 创建 TiDB Cloud Dedicated 集群
+summary: 了解如何创建你的 TiDB Cloud Dedicated 集群。
 ---
 
-# 创建 TiDB Cloud 专属集群
+# 创建 TiDB Cloud Dedicated 集群
 
-本教程将指导你注册并创建一个 TiDB Cloud 专属集群。
+本教程将指导你注册并创建一个 TiDB Cloud Dedicated 集群。
 
 > **Tip:**
 >
@@ -37,9 +37,9 @@ summary: 了解如何创建你的 TiDB Cloud 专属集群。
 
 4. 若要进入项目的集群列表页面，在 **Projects** 页面点击项目名称。
 
-## 步骤 2. 创建 TiDB Cloud 专属集群
+## 步骤 2. 创建 TiDB Cloud Dedicated 集群
 
-如果你拥有 `Organization Owner` 或 `Project Owner` 角色，可以按照以下步骤创建 TiDB Cloud 专属集群：
+如果你拥有 `Organization Owner` 或 `Project Owner` 角色，可以按照以下步骤创建 TiDB Cloud Dedicated 集群：
 
 1. 进入你项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 
@@ -55,7 +55,7 @@ summary: 了解如何创建你的 TiDB Cloud 专属集群。
 
         > **Note:**
         >
-        > - 目前，TiDB Cloud 专属集群在 Azure 上的支持处于公开预览阶段。
+        > - 目前，TiDB Cloud Dedicated 集群在 Azure 上的支持处于公开预览阶段。
         > - 如果你是通过 [AWS Marketplace](https://aws.amazon.com/marketplace) 注册的 TiDB Cloud，云服务商为 AWS，且无法在 TiDB Cloud 中更改。
         > - 如果你是通过 [Azure Marketplace](https://azuremarketplace.microsoft.com) 注册的 TiDB Cloud，云服务商为 Azure Cloud，且无法在 TiDB Cloud 中更改。
         > - 如果你是通过 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace) 注册的 TiDB Cloud，云服务商为 Google Cloud，且无法在 TiDB Cloud 中更改。

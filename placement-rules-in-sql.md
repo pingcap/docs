@@ -60,13 +60,13 @@ tikv-server --labels region=<region>,zone=<zone>,host=<host>
 
 > **Note:**
 >
-> 对于 TiDB Cloud 专属集群，可以跳过这些 label 配置步骤，因为 TiDB Cloud 专属集群中的 TiKV 节点 label 已自动配置。
+> 对于 TiDB Cloud Dedicated 集群，可以跳过这些 label 配置步骤，因为 TiDB Cloud Dedicated 集群中的 TiKV 节点 label 已自动配置。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-对于 TiDB Cloud 专属集群，TiKV 节点的 label 已自动配置。
+对于 TiDB Cloud Dedicated 集群，TiKV 节点的 label 已自动配置。
 
 </CustomContent>
 

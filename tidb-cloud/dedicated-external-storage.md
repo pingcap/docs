@@ -1,18 +1,18 @@
 ---
-title: 为 TiDB Cloud 专属集群配置外部存储访问
+title: 为 TiDB Cloud Dedicated 集群配置外部存储访问
 summary: 了解如何配置 Amazon Simple Storage Service (Amazon S3)、Google Cloud Storage (GCS) 和 Azure Blob Storage 的访问权限。
 aliases: ['/tidb-cloud/config-s3-and-gcs-access']
 ---
 
-# 为 TiDB Cloud 专属集群配置外部存储访问
+# 为 TiDB Cloud Dedicated 集群配置外部存储访问
 
-如果你的源数据存储在 Amazon S3 存储桶、Azure Blob Storage 容器或 Google Cloud Storage (GCS) 存储桶中，在将数据导入或迁移到 TiDB Cloud 之前，你需要为存储桶配置跨账号访问权限。本文档介绍了如何为 TiDB Cloud 专属集群进行相关配置。
+如果你的源数据存储在 Amazon S3 存储桶、Azure Blob Storage 容器或 Google Cloud Storage (GCS) 存储桶中，在将数据导入或迁移到 TiDB Cloud 之前，你需要为存储桶配置跨账号访问权限。本文档介绍了如何为 TiDB Cloud Dedicated 集群进行相关配置。
 
 如果你需要为 TiDB Cloud Serverless 集群配置这些外部存储，请参见 [为 TiDB Cloud Serverless 配置外部存储访问](/tidb-cloud/serverless-external-storage.md)。
 
 ## 配置 Amazon S3 访问权限
 
-要允许 TiDB Cloud 专属集群访问你 Amazon S3 存储桶中的源数据，可以通过以下任一方式为集群配置存储桶访问权限：
+要允许 TiDB Cloud Dedicated 集群访问你 Amazon S3 存储桶中的源数据，可以通过以下任一方式为集群配置存储桶访问权限：
 
 - [使用 Role ARN](#configure-amazon-s3-access-using-a-role-arn)（推荐）：使用 Role ARN 访问你的 Amazon S3 存储桶。
 - [使用 AWS 访问密钥](#configure-amazon-s3-access-using-an-aws-access-key)：使用 IAM 用户的访问密钥访问你的 Amazon S3 存储桶。
@@ -215,7 +215,7 @@ aliases: ['/tidb-cloud/config-s3-and-gcs-access']
 
 ## 配置 Azure Blob Storage 访问权限
 
-要允许 TiDB Cloud 专属集群访问你的 Azure Blob 容器，需要为容器配置 Azure Blob 访问权限。你可以使用账户 SAS token 配置容器访问：
+要允许 TiDB Cloud Dedicated 集群访问你的 Azure Blob 容器，需要为容器配置 Azure Blob 访问权限。你可以使用账户 SAS token 配置容器访问：
 
 1. 在 [Azure Storage account](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts) 页面，点击包含目标容器的存储账户。
 
@@ -227,7 +227,7 @@ aliases: ['/tidb-cloud/config-s3-and-gcs-access']
 
     1. 在 **Allowed services** 下选择 **Blob**。
     2. 在 **Allowed resource types** 下选择 **Container** 和 **Object**。
-    3. 在 **Allowed permissions** 下选择所需权限。例如，导入数据到 TiDB Cloud 专属集群需要 **Read** 和 **List**。
+    3. 在 **Allowed permissions** 下选择所需权限。例如，导入数据到 TiDB Cloud Dedicated 集群需要 **Read** 和 **List**。
     4. 根据需要调整 **Start and expiry date/time**。出于安全考虑，建议设置与数据导入时间线相符的过期时间。
     5. 其他设置保持默认值。
 
@@ -239,4 +239,4 @@ aliases: ['/tidb-cloud/config-s3-and-gcs-access']
 
 > **Note:**
 >
-> 在开始数据导入前，请测试连接和权限，确保 TiDB Cloud 专属集群能够访问指定的 Azure Blob 容器及文件。
+> 在开始数据导入前，请测试连接和权限，确保 TiDB Cloud Dedicated 集群能够访问指定的 Azure Blob 容器及文件。

@@ -1,18 +1,18 @@
 ---
-title: 从云存储导入 CSV 文件到 TiDB Cloud 专属集群
-summary: 了解如何将 CSV 文件从 Amazon S3、GCS 或 Azure Blob Storage 导入到 TiDB Cloud 专属集群。
+title: 从云存储导入 CSV 文件到 TiDB Cloud Dedicated 集群
+summary: 了解如何将 CSV 文件从 Amazon S3、GCS 或 Azure Blob Storage 导入到 TiDB Cloud Dedicated 集群。
 aliases: ['/tidbcloud/migrate-from-amazon-s3-or-gcs','/tidbcloud/migrate-from-aurora-bulk-import']
 ---
 
-# 从云存储导入 CSV 文件到 TiDB Cloud 专属集群
+# 从云存储导入 CSV 文件到 TiDB Cloud Dedicated 集群
 
-本文档介绍如何将 CSV 文件从 Amazon Simple Storage Service（Amazon S3）、Google Cloud Storage（GCS）或 Azure Blob Storage 导入到 TiDB Cloud 专属集群。
+本文档介绍如何将 CSV 文件从 Amazon Simple Storage Service（Amazon S3）、Google Cloud Storage（GCS）或 Azure Blob Storage 导入到 TiDB Cloud Dedicated 集群。
 
 ## 限制
 
 - 为确保数据一致性，TiDB Cloud 仅允许将 CSV 文件导入到空表中。若需将数据导入已存在且包含数据的表，可以按照本文档将数据导入到一个临时空表中，然后使用 `INSERT SELECT` 语句将数据复制到目标已存在的表中。
 
-- 如果 TiDB Cloud 专属集群已开启 [changefeed](/tidb-cloud/changefeed-overview.md) 或已启用 [Point-in-time Restore](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)，则无法向该集群导入数据（**Import Data** 按钮会被禁用），因为当前数据导入功能使用的是 [物理导入模式](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)。在该模式下，导入的数据不会生成变更日志，因此 changefeed 和 Point-in-time Restore 无法检测到导入的数据。
+- 如果 TiDB Cloud Dedicated 集群已开启 [changefeed](/tidb-cloud/changefeed-overview.md) 或已启用 [Point-in-time Restore](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)，则无法向该集群导入数据（**Import Data** 按钮会被禁用），因为当前数据导入功能使用的是 [物理导入模式](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)。在该模式下，导入的数据不会生成变更日志，因此 changefeed 和 Point-in-time Restore 无法检测到导入的数据。
 
 ## 第 1 步：准备 CSV 文件
 

@@ -239,4 +239,4 @@ TiDB Cloud 支持几乎所有 TiDB 支持的工作负载，但 TiDB 自建版与
 
 [^11]: TiDB Cloud Serverless 不支持通过 `${tidb-server-status-port}` 下载 `PLAN REPLAYER` 导出的文件，如[示例](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information)所示。相反，TiDB Cloud Serverless 会为你生成一个 [预签名 URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) 用于下载文件。请注意，该 URL 在生成后 10 小时内有效。
 
-[^12]: 不支持。在 TiDB Cloud 专属集群上启用 `require_secure_transport` 会导致 SQL 客户端连接失败。
+[^12]: 不支持。在 TiDB Cloud Dedicated 集群上启用 `require_secure_transport` 会导致 SQL 客户端连接失败。

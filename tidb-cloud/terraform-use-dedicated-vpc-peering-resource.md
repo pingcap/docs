@@ -58,7 +58,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_vpc_peering` 资源来创建和
 
     - 要使用 `tidbcloud_dedicated_vpc_peering` 资源，需要将资源类型设置为 `tidbcloud_dedicated_vpc_peering`。
     - 资源名称可以根据需要自定义，例如 `example`。
-    - 如果你不知道如何获取所需参数的值，请参见 [通过 VPC Peering 连接到 TiDB Cloud 专属集群](/tidb-cloud/set-up-vpc-peering-connections.md)。
+    - 如果你不知道如何获取所需参数的值，请参见 [通过 VPC Peering 连接到 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-vpc-peering-connections.md)。
     - 如需获取 TiDB Cloud 专属 VPC 对等连接的详细规范信息，请参见 [tidbcloud_dedicated_vpc_peering (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_vpc_peering)。
 
 3. 运行 `terraform apply` 命令。应用资源时，不建议使用 `terraform apply --auto-approve`。

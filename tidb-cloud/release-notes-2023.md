@@ -11,7 +11,7 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
 **通用变更**
 
-- [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 支持恢复失败的 changefeed，无需重新创建，节省你的操作成本。
+- [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 支持恢复失败的 changefeed，无需重新创建，节省你的操作成本。
 
     详细信息参见 [Changefeed 状态](/tidb-cloud/changefeed-overview.md#changefeed-states)。
 
@@ -27,11 +27,11 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
 **通用变更**
 
-- [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 支持从备份中恢复 SQL 绑定。
+- [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 支持从备份中恢复 SQL 绑定。
 
-    现在，TiDB Cloud 专属集群在从备份恢复时，默认会恢复用户账户和 SQL 绑定。该增强适用于 v6.2.0 及以上版本的集群，简化了数据恢复流程。SQL 绑定的恢复确保了查询相关配置和优化的顺利回归，为你提供更全面、高效的恢复体验。
+    现在，TiDB Cloud Dedicated 集群在从备份恢复时，默认会恢复用户账户和 SQL 绑定。该增强适用于 v6.2.0 及以上版本的集群，简化了数据恢复流程。SQL 绑定的恢复确保了查询相关配置和优化的顺利回归，为你提供更全面、高效的恢复体验。
 
-    详细信息参见 [备份与恢复 TiDB Cloud 专属集群数据](/tidb-cloud/backup-and-restore.md)。
+    详细信息参见 [备份与恢复 TiDB Cloud Dedicated 集群数据](/tidb-cloud/backup-and-restore.md)。
 
 **控制台变更**
 
@@ -55,9 +55,9 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
 **通用变更**
 
-- 从 TiDB Cloud 专属集群恢复数据时，默认行为已由不恢复用户账户改为恢复所有用户账户。
+- 从 TiDB Cloud Dedicated 集群恢复数据时，默认行为已由不恢复用户账户改为恢复所有用户账户。
 
-    详细信息参见 [备份与恢复 TiDB Cloud 专属集群数据](/tidb-cloud/backup-and-restore.md)。
+    详细信息参见 [备份与恢复 TiDB Cloud Dedicated 集群数据](/tidb-cloud/backup-and-restore.md)。
 
 - 引入 changefeed 事件过滤器。
 
@@ -90,9 +90,9 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
 **通用变更**
 
-- [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 支持 Google Cloud 上的双区域备份（Beta）。
+- [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 支持 Google Cloud 上的双区域备份（Beta）。
 
-    部署在 Google Cloud 上的 TiDB Cloud 专属集群可无缝对接 Google Cloud Storage。与 Google Cloud Storage 的 [Dual-regions](https://cloud.google.com/storage/docs/locations#location-dr) 功能类似，TiDB Cloud 专属集群的双区域需选择同一多区域下的两个区域。例如，东京和大阪同属 `ASIA` 多区域，可共同用于双区域存储。
+    部署在 Google Cloud 上的 TiDB Cloud Dedicated 集群可无缝对接 Google Cloud Storage。与 Google Cloud Storage 的 [Dual-regions](https://cloud.google.com/storage/docs/locations#location-dr) 功能类似，TiDB Cloud Dedicated 集群的双区域需选择同一多区域下的两个区域。例如，东京和大阪同属 `ASIA` 多区域，可共同用于双区域存储。
 
     详细信息参见 [开启双区域备份](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup)。
 
@@ -106,11 +106,11 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
 **通用变更**
 
-- 支持 [AWS 上部署的 TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的 [双区域备份（Beta）](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup)。
+- 支持 [AWS 上部署的 TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的 [双区域备份（Beta）](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup)。
 
     你现在可以在云服务商的不同地理区域间复制备份。该功能为数据保护和灾难恢复提供了额外保障。
 
-    详细信息参见 [备份与恢复 TiDB Cloud 专属集群数据](/tidb-cloud/backup-and-restore.md)。
+    详细信息参见 [备份与恢复 TiDB Cloud Dedicated 集群数据](/tidb-cloud/backup-and-restore.md)。
 
 - 数据迁移现已支持物理模式和逻辑模式迁移现有数据。
 
@@ -138,7 +138,7 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
 **通用变更**
 
-- 移除 [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的 2 vCPU TiDB 和 TiKV 节点选项。
+- 移除 [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的 2 vCPU TiDB 和 TiKV 节点选项。
 
     2 vCPU 选项已不再出现在 **Create Cluster** 或 **Modify Cluster** 页面。
 
@@ -162,9 +162,9 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
     详细信息参见 [限流](/tidb-cloud/data-service-api-key.md#rate-limiting)。
 
-- [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 新增支持 AWS 区域：圣保罗（sa-east-1）。
+- [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 新增支持 AWS 区域：圣保罗（sa-east-1）。
 
-- 每个 [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的 IP 访问列表支持最多添加 100 个 IP 地址。
+- 每个 [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的 IP 访问列表支持最多添加 100 个 IP 地址。
 
     详细信息参见 [配置 IP 访问列表](/tidb-cloud/configure-ip-access-list.md)。
 
@@ -178,7 +178,7 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
 **API 变更**
 
-- 发布多项 TiDB Cloud API 接口，用于管理 [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的 [AWS PrivateLink](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc) 或 [Google Cloud Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect)：
+- 发布多项 TiDB Cloud API 接口，用于管理 [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的 [AWS PrivateLink](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc) 或 [Google Cloud Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect)：
 
     - 为集群创建私有端点服务
     - 获取集群的私有端点服务信息
@@ -193,9 +193,9 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
 **通用变更**
 
-- [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 支持 Google Cloud [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect)。
+- [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 支持 Google Cloud [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect)。
 
-    你现在可以为部署在 Google Cloud 上的 TiDB Cloud 专属集群创建私有端点并建立安全连接。
+    你现在可以为部署在 Google Cloud 上的 TiDB Cloud Dedicated 集群创建私有端点并建立安全连接。
 
     主要优势：
 
@@ -205,7 +205,7 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
   详细信息参见 [通过 Google Cloud 私有端点连接](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)。
 
-- 支持通过 changefeed 将 [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的数据流式写入 [Google Cloud Storage (GCS)](https://cloud.google.com/storage)。
+- 支持通过 changefeed 将 [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的数据流式写入 [Google Cloud Storage (GCS)](https://cloud.google.com/storage)。
 
     你可以使用自己的 GCS 存储桶并精确配置权限，将 TiDB Cloud 的数据流式写入 GCS。数据复制到 GCS 后，你可按需分析数据变更。
 
@@ -236,7 +236,7 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
     详细信息参见 [高级属性](/tidb-cloud/data-service-manage-endpoint.md#advanced-properties)。
 
-- 禁用 2023 年 8 月 15 日后在 AWS 上新建的 [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的负载均衡优化，包括：
+- 禁用 2023 年 8 月 15 日后在 AWS 上新建的 [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的负载均衡优化，包括：
 
     - 扩容 AWS 上的 TiDB 节点时，不再自动迁移现有连接到新节点。
     - 缩容 AWS 上的 TiDB 节点时，不再自动迁移现有连接到可用节点。
@@ -271,13 +271,13 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
     详细信息参见 [在 Postman 中运行 Data App](/tidb-cloud/data-service-postman-integration.md)。
 
-- [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 新增 **Pausing** 状态，支持低成本暂停，暂停期间不计费。
+- [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 新增 **Pausing** 状态，支持低成本暂停，暂停期间不计费。
 
     当你点击 **Pause**，集群会先进入 **Pausing** 状态，暂停完成后状态变为 **Paused**。
 
     只有状态变为 **Paused** 后，集群才能恢复，解决了因频繁点击 **Pause** 和 **Resume** 导致的异常恢复问题。
 
-    详细信息参见 [暂停或恢复 TiDB Cloud 专属集群](/tidb-cloud/pause-or-resume-tidb-cluster.md)。
+    详细信息参见 [暂停或恢复 TiDB Cloud Dedicated 集群](/tidb-cloud/pause-or-resume-tidb-cluster.md)。
 
 ## 2023 年 7 月 26 日
 
@@ -306,7 +306,7 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
 **通用变更**
 
-- 新建 [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的默认 TiDB 版本由 [v6.5.3](https://docs.pingcap.com/tidb/v6.5/release-6.5.3) 升级至 [v7.1.1](https://docs.pingcap.com/tidb/v7.1/release-7.1.1)。
+- 新建 [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的默认 TiDB 版本由 [v6.5.3](https://docs.pingcap.com/tidb/v6.5/release-6.5.3) 升级至 [v7.1.1](https://docs.pingcap.com/tidb/v7.1/release-7.1.1)。
 
 **控制台变更**
 
@@ -329,7 +329,7 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
   各角色权限详情参见 [用户角色](/tidb-cloud/manage-user-access.md#user-roles)。
 
-- [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)（AWS）支持客户自管加密密钥（CMEK）（Beta）。
+- [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)（AWS）支持客户自管加密密钥（CMEK）（Beta）。
 
     你可以基于 AWS KMS 创建 CMEK，对存储在 EBS 和 S3 的数据进行加密，操作均可在 TiDB Cloud 控制台完成，确保数据由客户自主管理密钥，提升安全性。
 
@@ -368,7 +368,7 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
     如果你使用 GitHub 进行应用开发，可将分支集成到 CI/CD 流程，实现自动化测试而不影响生产库。详细信息参见 [将 TiDB Cloud Serverless 分支（Beta）集成到 GitHub](/tidb-cloud/branch-github-integration.md)。
 
-- [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 支持每周自动备份。详细信息参见 [开启自动备份](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)。
+- [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 支持每周自动备份。详细信息参见 [开启自动备份](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)。
 
 ## 2023 年 7 月 4 日
 
@@ -402,7 +402,7 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
 **通用变更**
 
-- 新建 [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的默认 TiDB 版本由 [v6.5.2](https://docs.pingcap.com/tidb/v6.5/release-6.5.2) 升级至 [v6.5.3](https://docs.pingcap.com/tidb/v6.5/release-6.5.3)。
+- 新建 [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的默认 TiDB 版本由 [v6.5.2](https://docs.pingcap.com/tidb/v6.5/release-6.5.2) 升级至 [v6.5.3](https://docs.pingcap.com/tidb/v6.5/release-6.5.3)。
 
 ## 2023 年 6 月 13 日
 
@@ -410,11 +410,11 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
 - 支持通过 changefeed 将数据流式写入 Amazon S3。
 
-    该功能实现 TiDB Cloud 与 Amazon S3 的无缝集成，支持将 [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的数据实时捕获并复制到 Amazon S3，确保下游应用和分析系统获取最新数据。
+    该功能实现 TiDB Cloud 与 Amazon S3 的无缝集成，支持将 [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的数据实时捕获并复制到 Amazon S3，确保下游应用和分析系统获取最新数据。
 
     详细信息参见 [流式写入云存储](/tidb-cloud/changefeed-sink-to-cloud-storage.md)。
 
-- [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的 16 vCPU TiKV 节点最大存储由 4 TiB 提升至 6 TiB。
+- [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的 16 vCPU TiKV 节点最大存储由 4 TiB 提升至 6 TiB。
 
     该增强提升了集群的数据存储能力，提高了工作负载扩展效率，满足数据增长需求。
 
@@ -426,7 +426,7 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
 **控制台变更**
 
-- [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的 [**Key Visualizer**](/tidb-cloud/tune-performance.md#key-visualizer) 页面发布全新原生 Web 架构。
+- [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的 [**Key Visualizer**](/tidb-cloud/tune-performance.md#key-visualizer) 页面发布全新原生 Web 架构。
 
     新架构让你更便捷地浏览 **Key Visualizer** 页面，获取所需信息，提升 SQL 诊断体验和用户友好性。
 
@@ -434,7 +434,7 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
 **通用变更**
 
-- [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 引入 Index Insight（Beta），为慢查询提供索引优化建议，提升查询性能。
+- [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 引入 Index Insight（Beta），为慢查询提供索引优化建议，提升查询性能。
 
     通过 Index Insight，你可以：
 
@@ -479,7 +479,7 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 - 为简化和明晰产品命名，我们更新了产品名称：
 
     - "TiDB Cloud Serverless Tier" 现称为 "TiDB Cloud Serverless"
-    - "TiDB Cloud Dedicated Tier" 现称为 "TiDB Cloud 专属集群"
+    - "TiDB Cloud Dedicated Tier" 现称为 "TiDB Cloud Dedicated 集群"
     - "TiDB On-Premises" 现称为 "TiDB 自管版"
 
     名称焕新，性能如一。你的体验始终是我们的首要任务。
@@ -535,7 +535,7 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
 - 支持导入压缩文件。你可以导入 `.gzip`、`.gz`、`.zstd`、`.zst`、`.snappy` 格式的 CSV 和 SQL 文件。该功能提升了数据导入效率，降低数据传输成本。
 
-    详细信息参见 [从云存储导入 CSV 文件到 TiDB Cloud 专属集群](/tidb-cloud/import-csv-files.md) 及 [导入示例数据](/tidb-cloud/import-sample-data.md)。
+    详细信息参见 [从云存储导入 CSV 文件到 TiDB Cloud Dedicated 集群](/tidb-cloud/import-csv-files.md) 及 [导入示例数据](/tidb-cloud/import-sample-data.md)。
 
 - [Serverless 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 支持基于 AWS PrivateLink 的私有端点连接，作为新的网络访问管理选项。
 
@@ -975,7 +975,7 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
 **通用变更**
 
-- 支持通过增加 **Node Size(vCPU + RAM)** 扩容 AWS 上（2022 年 12 月 31 日后创建）的 TiDB Cloud 专属集群的 TiDB、TiKV、TiFlash 节点。
+- 支持通过增加 **Node Size(vCPU + RAM)** 扩容 AWS 上（2022 年 12 月 31 日后创建）的 TiDB Cloud Dedicated 集群的 TiDB、TiKV、TiFlash 节点。
 
     你可通过 [TiDB Cloud 控制台](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram) 或 [TiDB Cloud API (beta)](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) 增加节点规格。
 

@@ -21,12 +21,12 @@ TiDB Cloud 为你提供了数据库审计日志功能，用于在日志中记录
 
 ## 前提条件
 
-- 你正在使用 TiDB Cloud 专属集群。审计日志功能不支持 TiDB Cloud Serverless 集群。
+- 你正在使用 TiDB Cloud Dedicated 集群。审计日志功能不支持 TiDB Cloud Serverless 集群。
 - 你拥有组织的 `Organization Owner` 或 `Project Owner` 角色。否则，你无法在 TiDB Cloud 控制台中看到数据库审计相关选项。详情请参见 [用户角色](/tidb-cloud/manage-user-access.md#user-roles)。
 
 ## 启用审计日志
 
-TiDB Cloud 支持将 TiDB Cloud 专属集群的审计日志记录到你的云存储服务。在启用数据库审计日志前，请先在集群所在的云服务商上配置你的云存储服务。
+TiDB Cloud 支持将 TiDB Cloud Dedicated 集群的审计日志记录到你的云存储服务。在启用数据库审计日志前，请先在集群所在的云服务商上配置你的云存储服务。
 
 > **注意：**
 >

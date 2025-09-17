@@ -44,11 +44,11 @@ summary: 了解如何将你的 TiDB Cloud 集群连接到 Vercel 项目。
     >
     > TiDB Cloud Vercel 集成支持创建 TiDB Cloud Serverless 集群。你也可以在集成过程中创建。
 
-- [创建 TiDB Cloud 专属集群（Dedicated）](/tidb-cloud/create-tidb-cluster.md)
+- [创建 TiDB Cloud Dedicated 集群（Dedicated）](/tidb-cloud/create-tidb-cluster.md)
 
     > **注意：**
     >
-    > 对于 TiDB Cloud 专属集群，请确保集群的流量过滤器允许所有 IP 地址（设置为 `0.0.0.0/0`）进行连接，因为 Vercel 部署使用 [动态 IP 地址](https://vercel.com/guides/how-to-allowlist-deployment-ip-address)。
+    > 对于 TiDB Cloud Dedicated 集群，请确保集群的流量过滤器允许所有 IP 地址（设置为 `0.0.0.0/0`）进行连接，因为 Vercel 部署使用 [动态 IP 地址](https://vercel.com/guides/how-to-allowlist-deployment-ip-address)。
 
 要[通过 TiDB Cloud Vercel 集成与 Vercel 集成](#connect-via-the-tidb-cloud-vercel-integration)，你需要是 TiDB Cloud 组织的 `Organization Owner` 角色，或目标项目的 `Project Owner` 角色。更多信息参见 [用户角色](/tidb-cloud/manage-user-access.md#user-roles)。
 
@@ -71,7 +71,7 @@ summary: 了解如何将你的 TiDB Cloud 集群连接到 Vercel 项目。
 
 > **注意：**
 >
-> 此方法仅适用于 TiDB Cloud Serverless 集群。如果你需要连接 TiDB Cloud 专属集群，请使用[手动方法](#connect-via-manually-setting-environment-variables)。
+> 此方法仅适用于 TiDB Cloud Serverless 集群。如果你需要连接 TiDB Cloud Dedicated 集群，请使用[手动方法](#connect-via-manually-setting-environment-variables)。
 
 ### 集成流程
 

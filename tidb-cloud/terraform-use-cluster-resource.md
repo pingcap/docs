@@ -7,7 +7,7 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
 
 > **Warning:**
 >
-> 从 [TiDB Cloud Terraform Provider](https://registry.terraform.io/providers/tidbcloud/tidbcloud) v0.4.0 开始，`tidbcloud_cluster` 资源已被弃用。推荐使用 `tidbcloud_dedicated_cluster` 或 `tidbcloud_serverless_cluster` 资源。更多信息请参见 [使用 TiDB Cloud 专属集群资源](/tidb-cloud/terraform-use-dedicated-cluster-resource.md) 或 [使用 TiDB Cloud Serverless 集群资源](/tidb-cloud/terraform-use-serverless-cluster-resource.md)。
+> 从 [TiDB Cloud Terraform Provider](https://registry.terraform.io/providers/tidbcloud/tidbcloud) v0.4.0 开始，`tidbcloud_cluster` 资源已被弃用。推荐使用 `tidbcloud_dedicated_cluster` 或 `tidbcloud_serverless_cluster` 资源。更多信息请参见 [使用 TiDB Cloud Dedicated 集群资源](/tidb-cloud/terraform-use-dedicated-cluster-resource.md) 或 [使用 TiDB Cloud Serverless 集群资源](/tidb-cloud/terraform-use-serverless-cluster-resource.md)。
 
 你可以在本文档中学习如何使用 `tidbcloud_cluster` 资源管理 TiDB Cloud 集群。
 
@@ -15,9 +15,9 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
 
 `tidbcloud_cluster` 资源的功能包括：
 
-- 创建 TiDB Cloud Serverless 和 TiDB Cloud 专属集群。
-- 修改 TiDB Cloud 专属集群。
-- 删除 TiDB Cloud Serverless 和 TiDB Cloud 专属集群。
+- 创建 TiDB Cloud Serverless 和 TiDB Cloud Dedicated 集群。
+- 修改 TiDB Cloud Dedicated 集群。
+- 删除 TiDB Cloud Serverless 和 TiDB Cloud Dedicated 集群。
 
 ## 前置条件
 
@@ -277,7 +277,7 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
 
 你可以使用 `tidbcloud_cluster` 资源创建集群。
 
-以下示例展示如何创建一个 TiDB Cloud 专属集群。
+以下示例展示如何创建一个 TiDB Cloud Dedicated 集群。
 
 1. 为集群创建一个目录并进入该目录。
 
@@ -476,9 +476,9 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
 
 当状态为 `AVAILABLE` 时，表示你的 TiDB 集群已创建并可用。
 
-## 修改 TiDB Cloud 专属集群
+## 修改 TiDB Cloud Dedicated 集群
 
-对于 TiDB Cloud 专属集群，你可以通过 Terraform 管理集群资源，包括：
+对于 TiDB Cloud Dedicated 集群，你可以通过 Terraform 管理集群资源，包括：
 
 - 为集群添加 TiFlash 组件。
 - 扩容集群。
@@ -834,7 +834,7 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
 
 6. 稍等片刻后，使用 `terraform refersh` 命令更新状态，最终状态会变为 `AVAILABLE`。
 
-现在，你已经使用 Terraform 创建并管理了 TiDB Cloud 专属集群。接下来，你可以尝试通过我们的 [备份资源](/tidb-cloud/terraform-use-backup-resource.md) 为集群创建备份。
+现在，你已经使用 Terraform 创建并管理了 TiDB Cloud Dedicated 集群。接下来，你可以尝试通过我们的 [备份资源](/tidb-cloud/terraform-use-backup-resource.md) 为集群创建备份。
 
 ## 导入集群
 

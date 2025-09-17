@@ -1,20 +1,20 @@
 ---
 title: 使用 `tidbcloud_dedicated_cluster` 资源
-summary: 了解如何使用 `tidbcloud_dedicated_cluster` 资源来创建和修改 TiDB Cloud 专属集群。
+summary: 了解如何使用 `tidbcloud_dedicated_cluster` 资源来创建和修改 TiDB Cloud Dedicated 集群。
 ---
 
 # 使用 `tidbcloud_dedicated_cluster` 资源
 
-本文档介绍如何使用 `tidbcloud_dedicated_cluster` 资源管理 [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)。
+本文档介绍如何使用 `tidbcloud_dedicated_cluster` 资源管理 [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)。
 
-此外，你还将学习如何通过 `tidbcloud_projects` 数据源获取所需信息，并使用 `tidbcloud_dedicated_node_group` 资源管理 TiDB Cloud 专属集群的 TiDB 节点组。
+此外，你还将学习如何通过 `tidbcloud_projects` 数据源获取所需信息，并使用 `tidbcloud_dedicated_node_group` 资源管理 TiDB Cloud Dedicated 集群的 TiDB 节点组。
 
 `tidbcloud_dedicated_cluster` 资源的功能包括：
 
-- 创建 TiDB Cloud 专属集群
-- 修改 TiDB Cloud 专属集群
-- 导入 TiDB Cloud 专属集群
-- 删除 TiDB Cloud 专属集群
+- 创建 TiDB Cloud Dedicated 集群
+- 修改 TiDB Cloud Dedicated 集群
+- 导入 TiDB Cloud Dedicated 集群
+- 删除 TiDB Cloud Dedicated 集群
 
 ## 前置条件
 
@@ -22,7 +22,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_cluster` 资源来创建和修�
 
 ## 使用 `tidbcloud_projects` 数据源获取项目 ID
 
-每个 TiDB Cloud 专属集群都属于一个项目。在创建 TiDB Cloud 专属集群之前，你需要获取要创建集群的项目 ID。如果未指定 `project_id`，则会使用默认项目。
+每个 TiDB Cloud Dedicated 集群都属于一个项目。在创建 TiDB Cloud Dedicated 集群之前，你需要获取要创建集群的项目 ID。如果未指定 `project_id`，则会使用默认项目。
 
 要获取所有可用项目的信息，可以按如下方式使用 `tidbcloud_projects` 数据源：
 
@@ -119,14 +119,14 @@ summary: 了解如何使用 `tidbcloud_dedicated_cluster` 资源来创建和修�
 
 现在，你可以从输出中获取所有可用项目。复制你需要的项目 ID。
 
-## 创建 TiDB Cloud 专属集群
+## 创建 TiDB Cloud Dedicated 集群
 
 > **Note:**
 >
 > - 在开始之前，请确保你已在 [TiDB Cloud 控制台](https://tidbcloud.com) 设置了 CIDR。更多信息请参见 [设置 CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)。
 > - 你也可以 [创建 `dedicated_network_container` 资源](/tidb-cloud/terraform-use-dedicated-network-container-resource.md) 来管理你的 CIDR。
 
-你可以按如下方式使用 `tidbcloud_dedicated_cluster` 资源创建 TiDB Cloud 专属集群：
+你可以按如下方式使用 `tidbcloud_dedicated_cluster` 资源创建 TiDB Cloud Dedicated 集群：
 
 1. 为集群创建一个目录并进入该目录。
 
@@ -168,8 +168,8 @@ summary: 了解如何使用 `tidbcloud_dedicated_cluster` 资源来创建和修�
 
     - 若要使用 `tidbcloud_dedicated_cluster` 资源，将资源类型设置为 `tidbcloud_dedicated_cluster`。
     - 资源名称可根据需要自定义，例如 `example_cluster`。
-    - 资源详情可根据项目 ID 及 TiDB Cloud 专属集群的规格信息进行配置。
-    - 获取 TiDB Cloud 专属集群规格信息，请参见 [tidbcloud_dedicated_cluster (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_cluster)。
+    - 资源详情可根据项目 ID 及 TiDB Cloud Dedicated 集群的规格信息进行配置。
+    - 获取 TiDB Cloud Dedicated 集群规格信息，请参见 [tidbcloud_dedicated_cluster (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_cluster)。
 
 3. 运行 `terraform apply` 命令。应用资源时不建议使用 `terraform apply --auto-approve`。
 
@@ -245,7 +245,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_cluster` 资源来创建和修�
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-    创建 TiDB Cloud 专属集群通常至少需要 10 分钟。
+    创建 TiDB Cloud Dedicated 集群通常至少需要 10 分钟。
 
 5. 使用 `terraform show` 或 `terraform state show tidbcloud_dedicated_cluster.${resource-name}` 命令检查资源状态。前者会显示所有资源和数据源的状态。
 
@@ -381,9 +381,9 @@ summary: 了解如何使用 `tidbcloud_dedicated_cluster` 资源来创建和修�
     }
     ```
 
-## 修改 TiDB Cloud 专属集群
+## 修改 TiDB Cloud Dedicated 集群
 
-对于 TiDB Cloud 专属集群，你可以通过 Terraform 管理资源，包括：
+对于 TiDB Cloud Dedicated 集群，你可以通过 Terraform 管理资源，包括：
 
 - 为集群添加 TiFlash 组件
 - 对集群进行扩缩容
@@ -565,7 +565,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_cluster` 资源来创建和修�
 
 ### 集群扩缩容
 
-当集群状态为 `ACTIVE` 时，你可以对 TiDB Cloud 专属集群进行扩缩容。
+当集群状态为 `ACTIVE` 时，你可以对 TiDB Cloud Dedicated 集群进行扩缩容。
 
 1. 在 [创建集群](#create-a-tidb-cloud-dedicated-cluster) 时使用的 `cluster.tf` 文件中，编辑 `tidb_node_setting`、`tikv_node_setting` 和 `tiflash_node_setting` 的配置。
 
@@ -1090,9 +1090,9 @@ $ terraform show
 
 现在你可以使用 Terraform 管理已导入的集群。
 
-## 删除 TiDB Cloud 专属集群
+## 删除 TiDB Cloud Dedicated 集群
 
-要删除 TiDB Cloud 专属集群，可以删除 `tidbcloud_dedicated_cluster` 资源的配置，然后使用 `terraform apply` 命令销毁资源：
+要删除 TiDB Cloud Dedicated 集群，可以删除 `tidbcloud_dedicated_cluster` 资源的配置，然后使用 `terraform apply` 命令销毁资源：
 
 ```shell
   $ terraform apply

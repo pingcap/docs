@@ -1,18 +1,18 @@
 ---
-title: 通过 Google Cloud Private Service Connect 连接 TiDB Cloud 专属集群
+title: 通过 Google Cloud Private Service Connect 连接 TiDB Cloud Dedicated 集群
 summary: 了解如何通过 Google Cloud Private Service Connect 连接你的 TiDB Cloud 集群。
 ---
 
-# 通过 Google Cloud Private Service Connect 连接 TiDB Cloud 专属集群
+# 通过 Google Cloud Private Service Connect 连接 TiDB Cloud Dedicated 集群
 
-本文档介绍如何通过 [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) 连接你的 TiDB Cloud 专属集群。Google Cloud Private Service Connect 是 Google Cloud 提供的私有端点服务。
+本文档介绍如何通过 [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) 连接你的 TiDB Cloud Dedicated 集群。Google Cloud Private Service Connect 是 Google Cloud 提供的私有端点服务。
 
 <CustomContent language="en,zh">
 
 > **提示：**
 >
-> - 如需了解如何通过 AWS 私有端点连接 TiDB Cloud 专属集群，请参见 [通过 AWS PrivateLink 连接 TiDB Cloud 专属集群](/tidb-cloud/set-up-private-endpoint-connections.md)。
-> - 如需了解如何通过 Azure 私有端点连接 TiDB Cloud 专属集群，请参见 [通过 Azure Private Link 连接 TiDB Cloud 专属集群](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)。
+> - 如需了解如何通过 AWS 私有端点连接 TiDB Cloud Dedicated 集群，请参见 [通过 AWS PrivateLink 连接 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections.md)。
+> - 如需了解如何通过 Azure 私有端点连接 TiDB Cloud Dedicated 集群，请参见 [通过 Azure Private Link 连接 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)。
 > - 如需了解如何通过私有端点连接 TiDB Cloud Starter 或 TiDB Cloud Essential 集群，请参见以下文档：
 >     - [通过 AWS PrivateLink 连接 TiDB Cloud Starter](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
 >     - [通过阿里云私有端点连接 TiDB Cloud Starter 或 Essential](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
@@ -44,11 +44,11 @@ Google Cloud Private Service Connect 的架构如下所示：[^1]
 
 ## 限制
 
-- 此功能适用于 2023 年 4 月 13 日之后创建的 TiDB Cloud 专属集群。对于更早创建的集群，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md) 获取帮助。
+- 此功能适用于 2023 年 4 月 13 日之后创建的 TiDB Cloud Dedicated 集群。对于更早创建的集群，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md) 获取帮助。
 - 只有 `Organization Owner` 和 `Project Owner` 角色可以创建 Google Cloud Private Service Connect 端点。
 - 每个 TiDB 集群最多可处理来自 10 个端点的连接。
 - 每个 Google Cloud 项目最多可有 10 个端点连接到一个 TiDB 集群。
-- 自 2025 年 8 月 12 日起，你在 Google Cloud 上为 TiDB Cloud 专属集群每个区域可创建的 Google Private Service Connect (PSC) 连接数上限取决于 NAT 子网 CIDR 块的大小：
+- 自 2025 年 8 月 12 日起，你在 Google Cloud 上为 TiDB Cloud Dedicated 集群每个区域可创建的 Google Private Service Connect (PSC) 连接数上限取决于 NAT 子网 CIDR 块的大小：
     - `/20`：每个区域最多 7 个 PSC 连接
     - `/19`：每个区域最多 23 个 PSC 连接
     - `/18`：每个区域最多 55 个 PSC 连接
@@ -65,7 +65,7 @@ Google Cloud Private Service Connect 的架构如下所示：[^1]
 
 ## 通过 Google Cloud Private Service Connect 设置私有端点
 
-要通过私有端点连接到你的 TiDB Cloud 专属集群，请完成[前置条件](#prerequisites)并按照以下步骤操作：
+要通过私有端点连接到你的 TiDB Cloud Dedicated 集群，请完成[前置条件](#prerequisites)并按照以下步骤操作：
 
 1. [选择 TiDB 集群](#step-1-select-a-tidb-cluster)
 2. [创建 Google Cloud 私有端点](#step-2-create-a-google-cloud-private-endpoint)

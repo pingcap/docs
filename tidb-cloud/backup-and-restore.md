@@ -1,12 +1,12 @@
 ---
-title: 备份和恢复 TiDB Cloud 专属集群数据
-summary: 了解如何备份和恢复你的 TiDB Cloud 专属集群。
+title: 备份和恢复 TiDB Cloud Dedicated 集群数据
+summary: 了解如何备份和恢复你的 TiDB Cloud Dedicated 集群。
 aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# 备份和恢复 TiDB Cloud 专属集群数据
+# 备份和恢复 TiDB Cloud Dedicated 集群数据
 
-本文档介绍了如何在 TiDB Cloud 上备份和恢复你的 TiDB Cloud 专属集群数据。TiDB Cloud 专属集群支持自动备份和手动备份。你还可以将备份数据恢复到新集群，或从回收站恢复已删除的集群。
+本文档介绍了如何在 TiDB Cloud 上备份和恢复你的 TiDB Cloud Dedicated 集群数据。TiDB Cloud Dedicated 集群支持自动备份和手动备份。你还可以将备份数据恢复到新集群，或从回收站恢复已删除的集群。
 
 > **提示**
 >
@@ -14,9 +14,9 @@ aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 
 ## 限制
 
-- 对于 v6.2.0 及以上版本的集群，TiDB Cloud 专属集群默认支持从备份中恢复用户账户和 SQL 绑定。
-- TiDB Cloud 专属集群不支持恢复存储在 `mysql` schema 中的系统变量。
-- 建议你先导入数据，然后执行一次**手动**快照备份，最后开启 Point-in-time Restore（时间点恢复）。因为通过 TiDB Cloud 控制台导入的数据**不会**生成变更日志，无法被自动检测和备份。更多信息请参见 [从云存储导入 CSV 文件到 TiDB Cloud 专属集群](/tidb-cloud/import-csv-files.md)。
+- 对于 v6.2.0 及以上版本的集群，TiDB Cloud Dedicated 集群默认支持从备份中恢复用户账户和 SQL 绑定。
+- TiDB Cloud Dedicated 集群不支持恢复存储在 `mysql` schema 中的系统变量。
+- 建议你先导入数据，然后执行一次**手动**快照备份，最后开启 Point-in-time Restore（时间点恢复）。因为通过 TiDB Cloud 控制台导入的数据**不会**生成变更日志，无法被自动检测和备份。更多信息请参见 [从云存储导入 CSV 文件到 TiDB Cloud Dedicated 集群](/tidb-cloud/import-csv-files.md)。
 - 如果你多次开启和关闭 Point-in-time Restore，只能选择最近一次开启 Point-in-time Restore 后的可恢复范围内的时间点，之前的可恢复范围将无法访问。
 - **不要**同时修改 **Point-in-time Restore** 和 **Dual Region Backup** 的开关。
 
@@ -34,13 +34,13 @@ aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 
 ### 开启自动备份
 
-TiDB Cloud 专属集群支持 [快照备份](https://docs.pingcap.com/tidb/stable/br-snapshot-guide) 和 [日志备份](https://docs.pingcap.com/tidb/stable/br-pitr-guide)。快照备份可以让你将数据恢复到备份时的状态。默认情况下，快照备份会自动执行，并根据你的备份保留策略进行存储。你可以随时关闭自动备份。
+TiDB Cloud Dedicated 集群支持 [快照备份](https://docs.pingcap.com/tidb/stable/br-snapshot-guide) 和 [日志备份](https://docs.pingcap.com/tidb/stable/br-pitr-guide)。快照备份可以让你将数据恢复到备份时的状态。默认情况下，快照备份会自动执行，并根据你的备份保留策略进行存储。你可以随时关闭自动备份。
 
 #### 开启 Point-in-time Restore
 
 > **注意**
 >
-> Point-in-time Restore（时间点恢复）功能仅支持 v6.4.0 及以上版本的 TiDB Cloud 专属集群。
+> Point-in-time Restore（时间点恢复）功能仅支持 v6.4.0 及以上版本的 TiDB Cloud Dedicated 集群。
 
 该功能支持将任意时间点的数据恢复到新集群。你可以用它来：
 
@@ -50,7 +50,7 @@ TiDB Cloud 专属集群支持 [快照备份](https://docs.pingcap.com/tidb/stabl
 
 强烈建议开启此功能。其费用与快照备份相同。更多信息请参见 [数据备份费用](https://www.pingcap.com/tidb-dedicated-pricing-details#backup-storage-cost)。
 
-要为你的 TiDB Cloud 专属集群开启此功能，请执行以下步骤：
+要为你的 TiDB Cloud Dedicated 集群开启此功能，请执行以下步骤：
 
 1. 进入集群的 [**Backup**](#view-the-backup-page) 页面。
 
@@ -68,9 +68,9 @@ TiDB Cloud 专属集群支持 [快照备份](https://docs.pingcap.com/tidb/stabl
 
 #### 配置备份计划
 
-TiDB Cloud 专属集群支持每日和每周备份计划。默认情况下，备份计划为每日。你可以选择一天或一周中的特定时间启动快照备份。
+TiDB Cloud Dedicated 集群支持每日和每周备份计划。默认情况下，备份计划为每日。你可以选择一天或一周中的特定时间启动快照备份。
 
-要为你的 TiDB Cloud 专属集群配置备份计划，请执行以下步骤：
+要为你的 TiDB Cloud Dedicated 集群配置备份计划，请执行以下步骤：
 
 1. 进入集群的 [**Backup**](#view-the-backup-page) 页面。
 
@@ -107,13 +107,13 @@ TiDB Cloud 专属集群支持每日和每周备份计划。默认情况下，备
 > **注意：**
 >
 > - 目前，双区域备份功能仅适用于托管在 AWS 和 Google Cloud 上的集群。
-> - 托管在 Google Cloud 上的 TiDB Cloud 专属集群可无缝对接 Google Cloud Storage。与 Google Cloud Storage 类似，**TiDB Cloud 专属集群仅支持在同一 multi-region code 下的 Google 双区域存储配对**。例如，在亚洲，目前必须将东京和大阪配对为双区域存储。更多信息请参见 [Dual-regions](https://cloud.google.com/storage/docs/locations#location-dr)。
+> - 托管在 Google Cloud 上的 TiDB Cloud Dedicated 集群可无缝对接 Google Cloud Storage。与 Google Cloud Storage 类似，**TiDB Cloud Dedicated 集群仅支持在同一 multi-region code 下的 Google 双区域存储配对**。例如，在亚洲，目前必须将东京和大阪配对为双区域存储。更多信息请参见 [Dual-regions](https://cloud.google.com/storage/docs/locations#location-dr)。
 
-TiDB Cloud 专属集群支持双区域备份，通过将集群所在区域的备份复制到另一个不同区域。开启该功能后，所有备份会自动复制到指定区域，实现跨区域数据保护和灾备能力。预计约 99% 的数据可在一小时内复制到次级区域。
+TiDB Cloud Dedicated 集群支持双区域备份，通过将集群所在区域的备份复制到另一个不同区域。开启该功能后，所有备份会自动复制到指定区域，实现跨区域数据保护和灾备能力。预计约 99% 的数据可在一小时内复制到次级区域。
 
 双区域备份费用包括备份存储用量和跨区域数据传输费用。更多信息请参见 [数据备份费用](https://www.pingcap.com/tidb-dedicated-pricing-details#backup-storage-cost)。
 
-要为你的 TiDB Cloud 专属集群开启双区域备份，请执行以下步骤：
+要为你的 TiDB Cloud Dedicated 集群开启双区域备份，请执行以下步骤：
 
 1. 进入集群的 [**Backup**](#view-the-backup-page) 页面。
 
@@ -131,7 +131,7 @@ TiDB Cloud 专属集群支持双区域备份，通过将集群所在区域的备
 >
 > 关闭自动备份会默认关闭 point-in-time restore。
 
-要关闭 TiDB Cloud 专属集群的自动备份，请执行以下步骤：
+要关闭 TiDB Cloud Dedicated 集群的自动备份，请执行以下步骤：
 
 1. 进入集群的 [**Backup**](#view-the-backup-page) 页面。
 
@@ -147,7 +147,7 @@ TiDB Cloud 专属集群支持双区域备份，通过将集群所在区域的备
 >
 > 禁用双区域备份不会立即删除次级区域的备份。这些备份会根据备份保留计划稍后清理。如需立即移除，可手动[删除备份](#delete-backups)。
 
-要关闭 TiDB Cloud 专属集群的双区域备份，请执行以下步骤：
+要关闭 TiDB Cloud Dedicated 集群的双区域备份，请执行以下步骤：
 
 1. 进入集群的 [**Backup**](#view-the-backup-page) 页面。
 
@@ -164,9 +164,9 @@ TiDB Cloud 专属集群支持双区域备份，通过将集群所在区域的备
 > **注意**
 >
 > - 手动备份会被无限期保留，直到你手动删除或账户关闭。
-> - 删除 TiDB Cloud 专属集群后，现有的手动备份会被移入回收站，直至手动删除或账户关闭。
+> - 删除 TiDB Cloud Dedicated 集群后，现有的手动备份会被移入回收站，直至手动删除或账户关闭。
 
-要为你的 TiDB Cloud 专属集群执行手动备份，请执行以下步骤：
+要为你的 TiDB Cloud Dedicated 集群执行手动备份，请执行以下步骤：
 
 1. 进入集群的 [**Backup**](#view-the-backup-page) 页面。
 
@@ -180,7 +180,7 @@ TiDB Cloud 专属集群支持双区域备份，通过将集群所在区域的备
 
 #### 删除备份文件
 
-要删除 TiDB Cloud 专属集群的现有备份文件，请执行以下步骤：
+要删除 TiDB Cloud Dedicated 集群的现有备份文件，请执行以下步骤：
 
 1. 进入集群的 [**Backup**](#view-the-backup-page) 页面。
 
@@ -188,7 +188,7 @@ TiDB Cloud 专属集群支持双区域备份，通过将集群所在区域的备
 
 #### 删除正在运行的备份任务
 
-要删除 TiDB Cloud 专属集群正在运行的备份任务，操作方式与 [**删除备份文件**](#delete-backup-files) 类似。
+要删除 TiDB Cloud Dedicated 集群正在运行的备份任务，操作方式与 [**删除备份文件**](#delete-backup-files) 类似。
 
 1. 进入集群的 [**Backup**](#view-the-backup-page) 页面。
 
@@ -202,7 +202,7 @@ TiDB Cloud 专属集群支持双区域备份，通过将集群所在区域的备
 >
 > 当你从备份恢复 TiDB 集群时，恢复过程会保留原有的时区设置，不会覆盖。
 
-要将 TiDB Cloud 专属集群的数据从备份恢复到新集群，请执行以下步骤：
+要将 TiDB Cloud Dedicated 集群的数据从备份恢复到新集群，请执行以下步骤：
 
 1. 进入集群的 [**Backup**](#view-the-backup-page) 页面。
 
