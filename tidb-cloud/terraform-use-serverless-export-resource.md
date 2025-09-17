@@ -1,36 +1,36 @@
 ---
-title: 使用 TiDB Cloud Serverless Export 资源
-summary: 了解如何使用 TiDB Cloud Serverless export 资源来创建和修改 TiDB Cloud Serverless 导出任务。
+title: 使用 `tidbcloud_serverless_export` 资源
+summary: 了解如何使用 `tidbcloud_serverless_export` 资源为 TiDB Cloud Starter 或 TiDB Cloud Essential 集群创建和修改数据导出任务。
 ---
 
-# 使用 TiDB Cloud Serverless Export 资源
+# 使用 `tidbcloud_serverless_export` 资源
 
-本文档介绍了如何使用 `tidbcloud_serverless_export` 资源管理 [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 数据导出任务。
+本文档介绍如何使用 `tidbcloud_serverless_export` 资源管理 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的数据导出任务。
 
 `tidbcloud_serverless_export` 资源的功能包括：
 
-- 创建 TiDB Cloud Serverless 数据导出任务。
-- 导入 TiDB Cloud Serverless 数据导出任务。
-- 删除 TiDB Cloud Serverless 数据导出任务。
+- 为 TiDB Cloud Starter 或 TiDB Cloud Essential 集群创建数据导出任务。
+- 导入 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的数据导出任务。
+- 删除 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的数据导出任务。
 
 > **Note:**
 >
-> TiDB Cloud Serverless export 资源无法被修改。如果你想更改 TiDB Cloud Serverless export 资源的配置，需要先删除现有资源，然后重新创建一个新的资源。
+> `tidbcloud_serverless_export` 资源无法被修改。如果你想更改 `tidbcloud_serverless_export` 资源的配置，需要先删除现有资源，然后重新创建。
 
 ## 前置条件
 
 - [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 或更高版本。
-- [创建一个 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md)。
+- [创建 TiDB Cloud Starter 或 TiDB Cloud Essential 集群](/tidb-cloud/create-tidb-cluster-serverless.md)。
 
-## 创建 TiDB Cloud Serverless 数据导出任务
+## 为 TiDB Cloud Starter 或 TiDB Cloud Essential 集群创建数据导出任务
 
-你可以使用 `tidbcloud_serverless_export` 资源来创建 TiDB Cloud Serverless 数据导出任务。
-
-以下示例展示了如何创建一个 TiDB Cloud Serverless 数据导出任务。
+你可以使用 `tidbcloud_serverless_export` 资源为 TiDB Cloud Starter 或 TiDB Cloud Essential 集群创建数据导出任务。
 
 1. 为导出任务创建一个目录并进入该目录。
 
-2. 创建一个 `export.tf` 文件：
+2. 创建一个用于数据导出任务的 `export.tf` 文件。
+
+    以下是 `export.tf` 文件的示例：
 
     ```
     terraform {
@@ -51,14 +51,14 @@ summary: 了解如何使用 TiDB Cloud Serverless export 资源来创建和修�
     }
     ```
 
-    使用 `resource` 块来定义 TiDB Cloud 的资源，包括资源类型、资源名称和资源详情。
+    使用 `resource` 块定义 TiDB Cloud 的资源，包括资源类型、资源名称和资源详情。
 
-    - 要使用 serverless export 资源，需要将资源类型设置为 `tidbcloud_serverless_export`。
+    - 要使用 serverless export 资源，将资源类型设置为 `tidbcloud_serverless_export`。
     - 资源名称可以根据需要自定义，例如 `example`。
     - 资源详情可以根据 serverless export 规范信息进行配置。
     - 获取 serverless export 规范信息，请参见 [tidbcloud_serverless_export (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_export)。
 
-3. 运行 `terraform apply` 命令。应用资源时，不推荐使用 `terraform apply --auto-approve`。
+3. 运行 `terraform apply` 命令。应用资源时，不建议使用 `terraform apply --auto-approve`。
 
     ```shell
     $ terraform apply
@@ -94,13 +94,13 @@ summary: 了解如何使用 TiDB Cloud Serverless export 资源来创建和修�
         Enter a value:
     ```
 
-    在上述结果中，Terraform 为你生成了一个执行计划，描述了 Terraform 将要执行的操作：
+    在上述结果中，Terraform 会为你生成一个执行计划，描述 Terraform 将要执行的操作：
 
-    - 你可以检查配置和状态之间的差异。
+    - 你可以检查配置和当前状态之间的差异。
     - 你还可以看到本次 `apply` 的结果。它将新增一个资源，不会有资源被更改或销毁。
-    - `known after apply` 表示你将在 `apply` 之后获得对应的值。
+    - `known after apply` 表示在 `apply` 之后你将获得对应的值。
 
-4. 如果你的计划内容没有问题，输入 `yes` 继续：
+4. 如果你的计划没有问题，输入 `yes` 继续：
 
     ```shell
     Do you want to perform these actions?
@@ -115,11 +115,11 @@ summary: 了解如何使用 TiDB Cloud Serverless export 资源来创建和修�
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-    在本示例中，`tidbcloud_serverless_export.example` 资源将创建一个导出任务，用于导出整个集群的数据。
+    在本例中，`tidbcloud_serverless_export.example` 资源将创建一个导出任务，用于导出整个集群的数据。
 
     该资源是非同步的。你可以使用 `terraform refresh` 获取其最新状态。
 
-5. 使用 `terraform show` 或 `terraform state show tidbcloud_serverless_export.${resource-name}` 命令检查你的资源状态。前者会显示所有资源和数据源的状态。
+5. 使用 `terraform show` 或 `terraform state show tidbcloud_serverless_export.${resource-name}` 命令检查资源的状态。前者会显示所有资源和数据源的状态。
 
     ```shell
     $ terraform state show tidbcloud_serverless_export.example
@@ -142,13 +142,11 @@ summary: 了解如何使用 TiDB Cloud Serverless export 资源来创建和修�
     }
     ```
 
-## 导入 TiDB Cloud Serverless 数据导出任务
+## 为 TiDB Cloud Starter 或 TiDB Cloud Essential 集群导入数据导出任务
 
-对于未被 Terraform 管理的 TiDB Serverless 数据导出任务，你可以通过导入的方式让 Terraform 管理它。
+如果某个 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的数据导出任务未被 Terraform 管理，你可以通过导入将其纳入 Terraform 管理。
 
-导入一个非 Terraform 创建的 TiDB Cloud Serverless 数据导出任务，操作如下：
-
-1. 为新的 TiDB Cloud Serverless export 资源添加一个 import 块。
+1. 为新的 `tidbcloud_serverless_export` 资源添加一个 import 块。
 
     在你的 `.tf` 文件中添加如下 import 块，将 `example` 替换为你期望的资源名称，将 `${id}` 替换为 `cluster_id,export_id` 的格式：
 
@@ -184,9 +182,9 @@ summary: 了解如何使用 TiDB Cloud Serverless export 资源来创建和修�
 
 现在你可以使用 Terraform 管理已导入的导出任务。
 
-## 删除 TiDB Cloud Serverless 数据导出任务
+## 删除 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的数据导出任务
 
-要删除 TiDB Cloud Serverless 数据导出任务，你可以删除 `tidbcloud_serverless_export` 资源的配置，然后使用 `terraform apply` 命令销毁该资源：
+要删除 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的数据导出任务，你可以删除 `tidbcloud_serverless_export` 资源的配置，然后使用 `terraform apply` 命令销毁该资源：
 
 ```shell
 $ terraform apply

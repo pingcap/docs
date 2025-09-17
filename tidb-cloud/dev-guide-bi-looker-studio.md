@@ -1,69 +1,69 @@
 ---
-title: 使用 Looker Studio 连接 TiDB Cloud Serverless
-summary: 学习如何使用 Looker Studio 连接 TiDB Cloud Serverless。
+title: 使用 Looker Studio 连接 TiDB Cloud
+summary: 了解如何使用 Looker Studio 连接 TiDB Cloud。
 ---
 
-# 使用 Looker Studio 连接 TiDB Cloud Serverless
+# 使用 Looker Studio 连接 TiDB Cloud
 
-TiDB 是一个兼容 MySQL 的数据库，TiDB Cloud Serverless 是 TiDB 的全托管云服务，[Looker Studio](https://lookerstudio.google.com/) 是一款免费的基于 Web 的 BI 工具，可以可视化来自多种数据源的数据。
+TiDB 是一个兼容 MySQL 的数据库，TiDB Cloud 是一款完全托管的数据库即服务（DBaaS），可将 TiDB 部署到你的云环境中，[Looker Studio](https://lookerstudio.google.com/) 是一款免费的基于 Web 的 BI 工具，可以可视化来自多种数据源的数据。
 
-在本教程中，你将学习如何使用 Looker Studio 连接到你的 TiDB Cloud Serverless 集群。
+本教程以 TiDB Cloud Starter 集群为例，演示如何使用 Looker Studio 连接 TiDB Cloud。
 
-> **Note:**
+> **注意：**
 >
-> 本教程中的大多数步骤同样适用于 TiDB Cloud Dedicated。但对于 TiDB Cloud Dedicated，你需要注意以下事项：
-> 
-> - 按照 [从文件导入数据到 TiDB Cloud](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud) 导入你的数据集。
-> - 按照 [连接到 TiDB Cloud Dedicated](/tidb-cloud/connect-via-standard-connection.md) 获取你的集群连接信息。连接 TiDB Cloud Dedicated 时，你需要允许来自 `142.251.74.0/23` 的访问。关于 Looker Studio 连接的更多信息，请参见 [Looker Studio 文档](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article)。
+> - 除了 TiDB Cloud Starter 集群外，本文档中的步骤同样适用于 TiDB Cloud Essential 集群。
+> - 本教程的大部分步骤也适用于 TiDB Cloud Dedicated。但对于 TiDB Cloud Dedicated，你需要注意以下事项：
+>     - 按照 [从文件导入数据到 TiDB Cloud](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud) 导入你的数据集。
+>     - 按照 [连接到 TiDB Cloud Dedicated](/tidb-cloud/connect-via-standard-connection.md) 获取你的集群连接信息。连接 TiDB Cloud Dedicated 时，你需要允许来自 `142.251.74.0/23` 的访问。关于 Looker Studio 的连接详情，请参阅 [Looker Studio 文档](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article)。
 
 ## 前置条件
 
 完成本教程，你需要：
 
 - 一个 Google 账号
-- 一个 TiDB Cloud Serverless 集群
+- 一个 TiDB Cloud Starter 集群
 
-**如果你还没有 TiDB Cloud Serverless 集群，可以按如下方式创建：**
+**如果你还没有 TiDB Cloud Starter 集群，可以按如下方式创建：**
 
-- [创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-cluster)
+- [创建 TiDB Cloud Starter 集群](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-cluster)
 
-## 第 1 步：导入数据集
+## 步骤 1. 导入数据集
 
-你可以导入 TiDB Cloud Serverless 交互式教程中提供的 S&P 500 数据集。
+你可以导入 TiDB Cloud Starter 交互式教程中提供的 S&P 500 数据集。
 
-1. 进入 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击右下角的 **?**。会弹出 **Help** 对话框。
+1. 进入 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击右下角的 **?**。此时会弹出 **Help** 对话框。
 
 2. 在对话框中，点击 **Interactive Tutorials**，然后点击 **S&P 500 Analysis**。
 
-3. 选择你的 TiDB Cloud Serverless 集群，然后点击 **Import Dataset**，将 S&P 500 数据集导入到你的集群中。
+3. 选择你的 TiDB Cloud Starter 集群，然后点击 **Import Dataset**，将 S&P 500 数据集导入到你的集群中。
 
 4. 当导入状态变为 **IMPORTED** 后，点击 **Exit Tutorial** 关闭该对话框。
 
-如果在导入过程中遇到任何问题，你可以按如下方式取消该导入任务：
+如果在导入过程中遇到问题，你可以按如下方式取消该导入任务：
 
-1. 在 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击你的 TiDB Cloud Serverless 集群名称，进入集群概览页面。
+1. 在 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击你的 TiDB Cloud Starter 集群名称，进入其概览页面。
 2. 在左侧导航栏，点击 **Data** > **Import**。
 3. 找到名为 **sp500-insight** 的导入任务，在 **Action** 列点击 **...**，然后点击 **Cancel**。
 
-## 第 2 步：获取集群连接信息
+## 步骤 2. 获取集群连接信息
 
-1. 进入 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称，进入集群概览页面。
+1. 进入 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称，进入其概览页面。
 
 2. 点击右上角的 **Connect**，弹出连接对话框。
 
 3. 在连接对话框中，将 **Connect With** 设置为 `General`，然后点击 **Generate Password** 生成一个随机密码。
 
-    > **Tip:**
+    > **提示：**
     >
-    > 如果你之前已经创建过密码，请使用原有密码，或点击 **Reset Password** 生成新密码。
+    > 如果你之前已经创建过密码，请使用原密码，或点击 **Reset Password** 生成新密码。
 
 4. 下载 [CA cert](https://letsencrypt.org/certs/isrgrootx1.pem)。
 
-    > **Tip:**
+    > **提示：**
     >
-    > TiDB Cloud Serverless 要求客户端与集群之间建立安全的 TLS 连接，因此你需要在 Looker Studio 的连接设置中使用该 CA 证书。
+    > TiDB Cloud Starter 要求客户端与集群之间建立安全的 TLS 连接，因此你需要在 Looker Studio 的连接设置中使用该 CA 证书。
 
-## 第 3 步：使用 Looker Studio 连接 TiDB 集群
+## 步骤 3. 使用 Looker Studio 连接 TiDB 集群
 
 1. 登录 [Looker Studio](https://lookerstudio.google.com/)，在左侧导航栏点击 **Create** > **Report**。
 
@@ -71,26 +71,26 @@ TiDB 是一个兼容 MySQL 的数据库，TiDB Cloud Serverless 是 TiDB 的全�
 
 3. 在 **BASIC** 设置面板中，配置连接参数。
 
-    - **Host Name or IP**：输入 TiDB Cloud Serverless 连接对话框中的 `HOST` 参数。
-    - **Port(Optional)**：输入 TiDB Cloud Serverless 连接对话框中的 `PORT` 参数。
+    - **Host Name or IP**：输入 TiDB Cloud Starter 连接对话框中的 `HOST` 参数。
+    - **Port(Optional)**：输入 TiDB Cloud Starter 连接对话框中的 `PORT` 参数。
     - **Database**：输入你要连接的数据库。本教程中输入 `sp500insight`。
-    - **Username**：输入 TiDB Cloud Serverless 连接对话框中的 `USERNAME` 参数。
-    - **Password**：输入 TiDB Cloud Serverless 连接对话框中的 `PASSWORD` 参数。
-    - **Enable SSL**：勾选该选项，然后点击 **MySQL SSL Client Configuration Files** 右侧的上传图标，上传在 [第 2 步](#step-2-get-the-connection-information-for-your-cluster) 下载的 CA 文件。
+    - **Username**：输入 TiDB Cloud Starter 连接对话框中的 `USERNAME` 参数。
+    - **Password**：输入 TiDB Cloud Starter 连接对话框中的 `PASSWORD` 参数。
+    - **Enable SSL**：勾选此项，然后点击 **MySQL SSL Client Configuration Files** 右侧的上传图标，上传在 [步骤 2](#step-2-get-the-connection-information-for-your-cluster) 下载的 CA 文件。
 
-    ![Looker Studio: configure connection settings for TiDB Cloud Serverless](/media/tidb-cloud/looker-studio-configure-connection.png)
+    ![Looker Studio: 配置 TiDB Cloud Starter 连接设置](/media/tidb-cloud/looker-studio-configure-connection.png)
 
 4. 点击 **AUTHENTICATE**。
 
-如果认证成功，你可以看到数据库中的表。
+认证成功后，你可以看到数据库中的表。
 
-## 第 4 步：创建一个简单的图表
+## 步骤 4. 创建一个简单图表
 
-现在，你可以将 TiDB 集群作为数据源，基于数据创建一个简单的图表。
+现在，你可以将 TiDB 集群作为数据源，创建一个简单的数据图表。
 
 1. 在右侧面板点击 **CUSTOM QUERY**。
 
-    ![Looker Studio: custom query](/media/tidb-cloud/looker-studio-custom-query.png)
+    ![Looker Studio: 自定义查询](/media/tidb-cloud/looker-studio-custom-query.png)
 
 2. 将以下代码复制到 **Enter Custom Query** 区域，然后点击右下角的 **Add**。
 
@@ -118,19 +118,19 @@ TiDB 是一个兼容 MySQL 的数据库，TiDB Cloud Serverless 是 TiDB 的全�
         - **Dimension**：`sector`
         - **Metric**：`companies` 和 `total_market_cap`
     - 在 **STYLE** 标签页：
-      - Series #1：选择 `Line` 选项并设置为 `Right` 轴
-      - Series #2：选择 `Bars` 选项并设置为 `Left` 轴
-    - 其他字段保持默认
+      - Series #1：选择 `Line` 选项并设置为 `Right` 轴。
+      - Series #2：选择 `Bars` 选项并设置为 `Left` 轴。
+    - 其他字段保持默认。
 
-此时，你可以看到类似如下的组合图表：
+此时，你可以看到如下所示的组合图表：
 
-![Looker Studio: A simple Combo chart](/media/tidb-cloud/looker-studio-simple-chart.png)
+![Looker Studio: 一个简单的组合图表](/media/tidb-cloud/looker-studio-simple-chart.png)
 
 ## 后续步骤
 
-- 通过 [Looker Studio 帮助中心](https://support.google.com/looker-studio) 学习更多 Looker Studio 的用法。
-- 通过 [开发者指南](/develop/dev-guide-overview.md) 中的各章节，学习 TiDB 应用开发的最佳实践，例如 [插入数据](/develop/dev-guide-insert-data.md)、[更新数据](/develop/dev-guide-update-data.md)、[删除数据](/develop/dev-guide-delete-data.md)、[单表读取](/develop/dev-guide-get-data-from-single-table.md)、[事务](/develop/dev-guide-transaction-overview.md) 和 [SQL 性能优化](/develop/dev-guide-optimize-sql-overview.md)。
-- 通过专业的 [TiDB 开发者课程](https://www.pingcap.com/education/) 学习，并在通过考试后获得 [TiDB 认证](https://www.pingcap.com/education/certification/)。
+- 通过 [Looker Studio 帮助中心](https://support.google.com/looker-studio) 了解更多 Looker Studio 的用法。
+- 通过 [开发者指南](/develop/dev-guide-overview.md) 各章节，学习 TiDB 应用开发最佳实践，例如 [插入数据](/develop/dev-guide-insert-data.md)、[更新数据](/develop/dev-guide-update-data.md)、[删除数据](/develop/dev-guide-delete-data.md)、[单表读取](/develop/dev-guide-get-data-from-single-table.md)、[事务](/develop/dev-guide-transaction-overview.md) 和 [SQL 性能优化](/develop/dev-guide-optimize-sql-overview.md)。
+- 通过专业的 [TiDB 开发者课程](https://www.pingcap.com/education/)，考试通过后获得 [TiDB 认证](https://www.pingcap.com/education/certification/)。
 
 ## 需要帮助？
 
