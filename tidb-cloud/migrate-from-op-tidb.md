@@ -271,7 +271,7 @@ After you export data from the TiDB Self-Managed cluster to Amazon S3, you need 
 6. Import data to TiDB Cloud.
 
     - For TiDB Cloud Dedicated clusters, see [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md).
-    - For {{{ .starter }}} or {{{ .essential }}} clusters, see [Import CSV Files from Cloud Storage into {{{ .starter }}} or Essential](/tidb-cloud/import-csv-files-serverless.md).
+    - For {{{ .starter }}} or {{{ .essential }}} clusters, see [Import CSV Files from Cloud Storage into {{{ .starter }}}, Essential, or Premium](/tidb-cloud/import-csv-files-serverless.md).
 
 ## Replicate incremental data
 

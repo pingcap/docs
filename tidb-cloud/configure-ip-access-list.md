@@ -9,7 +9,7 @@ For each TiDB Cloud Dedicated cluster in TiDB Cloud, you can configure an IP acc
 
 > **Note:**
 >
-> This document applies to [**TiDB Cloud Dedicated**](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For instructions on configuring an IP access list for **{{{ .starter }}}** or **{{{ .essential }}}**, see [Configure {{{ .starter }}} or Essential Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md).
+> This document applies to [**TiDB Cloud Dedicated**](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For instructions on configuring an IP access list for **{{{ .starter }}}** or **{{{ .essential }}}**, see [Configure {{{ .starter }}}, Essential, or Premium Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md).
 
 To configure an IP access list for your TiDB Cloud Dedicated cluster, take the following steps:
 

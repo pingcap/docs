@@ -1,15 +1,15 @@
 ---
-title: Connect to {{{ .starter }}} or Essential via Alibaba Cloud Private Endpoint
+title: Connect to {{{ .starter }}}, Essential, or Premium via Alibaba Cloud Private Endpoint
 summary: Learn how to connect to your TiDB Cloud cluster via Alibaba Cloud private endpoint.
 ---
 
-# Connect to {{{ .starter }}} or Essential via Alibaba Cloud Private Endpoint
+# Connect to {{{ .starter }}}, Essential, or Premium via Alibaba Cloud Private Endpoint
 
-This tutorial walks you through the steps to connect to your {{{ .starter }}} or Essential cluster via a private endpoint on Alibaba Cloud. Connecting through a private endpoint allows secure and private communication between your services and your TiDB Cloud cluster without using the public internet.
+This tutorial walks you through the steps to connect to your {{{ .starter }}}, Essential, or Premium cluster via a private endpoint on Alibaba Cloud. Connecting through a private endpoint allows secure and private communication between your services and your TiDB Cloud cluster without using the public internet.
 
 > **Tip:**
 >
-> To learn how to connect to a {{{ .starter }}} or Essential cluster via AWS PrivateLink, see [Connect to TiDB Cloud via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
+> To learn how to connect to a {{{ .starter }}}, Essential, or Premium cluster via AWS PrivateLink, see [Connect to TiDB Cloud via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
 
 ## Restrictions
 

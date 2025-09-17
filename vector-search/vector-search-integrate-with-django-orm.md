@@ -103,7 +103,7 @@ For more information, refer to [django-tidb repository](https://github.com/pingc
 Configure the environment variables depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
-<div label="{{{ .starter }}} or Essential">
+<div label="{{{ .starter }}}, Essential, or Premium">
 
 For a {{{ .starter }}} cluster, take the following steps to obtain the cluster connection string and configure environment variables:
 

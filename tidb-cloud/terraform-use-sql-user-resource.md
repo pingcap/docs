@@ -18,7 +18,7 @@ The features of the `tidbcloud_sql_user` resource include the following:
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 or later.
 - Refer to one of the following documents to create a TiDB Cloud cluster:
-    - [Create a {{{ .starter }}} or Essential cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+    - [Create a {{{ .starter }}}, Essential, or Premium cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
     - [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
 
 ## Create a SQL user

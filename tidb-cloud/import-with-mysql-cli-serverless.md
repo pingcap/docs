@@ -1,9 +1,9 @@
 ---
-title: Import Data into {{{ .starter }}} or Essential via MySQL CLI
+title: Import Data into {{{ .starter }}}, Essential, or Premium via MySQL CLI
 summary: Learn how to import Data into {{{ .starter }}} or {{{ .essential }}} via MySQL CLI.
 ---
 
-# Import Data into {{{ .starter }}} or Essential via MySQL CLI
+# Import Data into {{{ .starter }}}, Essential, or Premium via MySQL CLI
 
 This document describes how to import data into {{{ .starter }}} or {{{ .essential }}} via the [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html). You can import data from an SQL file or a CSV file. The following sections provide step-by-step instructions for importing data from each type of file.
 

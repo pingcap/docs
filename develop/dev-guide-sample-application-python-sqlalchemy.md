@@ -74,7 +74,7 @@ You can also use other database drivers, such as [mysqlclient](https://github.co
 Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
-<div label="{{{ .starter }}} or Essential">
+<div label="{{{ .starter }}}, Essential, or Premium">
 
 > **Note:**
 >

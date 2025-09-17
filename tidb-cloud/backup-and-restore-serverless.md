@@ -1,10 +1,10 @@
 ---
-title: Back Up and Restore Data on {{{ .starter }}} or Essential
+title: Back Up and Restore Data on {{{ .starter }}}, Essential, or Premium
 summary: Learn how to back up and restore your {{{ .starter }}} or {{{ .essential }}} clusters.
 aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# Back Up and Restore Data on {{{ .starter }}} or Essential
+# Back Up and Restore Data on {{{ .starter }}}, Essential, or Premium
 
 This document describes how to back up and restore your data on {{{ .starter }}} or {{{ .essential }}} clusters.
 

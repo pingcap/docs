@@ -78,7 +78,7 @@ bundle add mysql2 dotenv
 Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
-<div label="{{{ .starter }}} or Essential">
+<div label="{{{ .starter }}}, Essential, or Premium">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -112,7 +112,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
    > **Note**
    >
-   > For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), TLS connection **MUST** be enabled via `DATABASE_ENABLE_SSL` when using public endpoint.
+   > For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), and {{{ .premium }}}, TLS connection **MUST** be enabled via `DATABASE_ENABLE_SSL` when using public endpoint.
 
 7. Save the `.env` file.
 
@@ -231,7 +231,7 @@ client = Mysql2::Client.new(options)
 
 > **Note**
 >
-> For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), TLS connection **MUST** be enabled via `DATABASE_ENABLE_SSL` when using public endpoint, but you **don't** have to specify an SSL CA certificate via `DATABASE_SSL_CA`, because mysql2 gem will search for existing CA certificates in a particular order until a file is discovered.
+> For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), and {{{ .premium }}}, TLS connection **MUST** be enabled via `DATABASE_ENABLE_SSL` when using public endpoint, but you **don't** have to specify an SSL CA certificate via `DATABASE_SSL_CA`, because mysql2 gem will search for existing CA certificates in a particular order until a file is discovered.
 
 ### Insert data
 
