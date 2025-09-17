@@ -15,7 +15,7 @@ summary: TiDB 数据库中 ADD INDEX 的用法概述。
 
 > **Note:**
 >
-> 对于 [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)（4 vCPU），建议手动关闭 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)，以防止在创建索引时资源受限影响集群稳定性。关闭该设置后，索引将通过事务方式创建，从而降低对集群的整体影响。
+> 对于 [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)（4 vCPU），建议手动关闭 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)，以防止在创建索引时资源受限影响集群稳定性。关闭该设置后，索引将通过事务方式创建，从而降低对集群的整体影响。
 
 </CustomContent>
 

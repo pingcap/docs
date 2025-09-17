@@ -22,7 +22,7 @@ TiDB 允许客户端会话获取表锁，以便与其他会话协作访问表，
 > 表锁功能默认是关闭的。
 >
 > - 对于 TiDB 自建集群，要启用表锁功能，需要在所有 TiDB 实例的配置文件中将 [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400) 设置为 `true`。
-> - 对于 TiDB Cloud 专属集群，要启用表锁功能，需要联系 [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) 将 [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400) 设置为 `true`。
+> - 对于 TiDB Cloud Dedicated 集群，要启用表锁功能，需要联系 [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) 将 [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400) 设置为 `true`。
 > - 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)，不支持将 [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400) 设置为 `true`。
 
 ## 语法

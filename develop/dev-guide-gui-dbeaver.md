@@ -11,7 +11,7 @@ TiDB 是一个兼容 MySQL 的数据库，[DBeaver Community](https://dbeaver.io
 
 > **注意：**
 >
-> 本教程兼容 {}、{}、TiDB Cloud 专属集群以及自托管 TiDB。
+> 本教程兼容 {{{ .starter }}}、{{{ .essential }}}、TiDB Cloud Dedicated 集群以及自托管 TiDB。
 
 ## 前提条件
 
@@ -94,7 +94,7 @@ TiDB 是一个兼容 MySQL 的数据库，[DBeaver Community](https://dbeaver.io
 
     如果你还未配置 IP 访问列表，点击 **Configure IP Access List**，或参照 [配置 IP 访问列表](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) 进行首次连接前的配置。
 
-    除了 **Public** 连接类型，TiDB Cloud Dedicated 还支持 **Private Endpoint** 和 **VPC Peering** 连接类型。更多信息参见 [连接到你的 TiDB Cloud 专属集群](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)。
+    除了 **Public** 连接类型，TiDB Cloud Dedicated 还支持 **Private Endpoint** 和 **VPC Peering** 连接类型。更多信息参见 [连接到你的 TiDB Cloud Dedicated 集群](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)。
 
 4. 启动 DBeaver，点击左上角的 **New Database Connection**。在 **Connect to a database** 对话框中，从列表中选择 **TiDB**，然后点击 **Next**。
 

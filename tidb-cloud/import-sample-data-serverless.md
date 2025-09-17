@@ -1,15 +1,15 @@
 ---
-title: 将示例数据导入 TiDB Cloud Serverless
-summary: 了解如何通过 UI 将示例数据导入 TiDB Cloud Serverless。
+title: 从云存储将示例数据（SQL 文件）导入到 TiDB Cloud Starter 或 Essential
+summary: 了解如何通过 UI 将示例数据导入到 TiDB Cloud Starter 或 TiDB Cloud Essential。
 ---
 
-# 将示例数据导入 TiDB Cloud Serverless
+# 从云存储将示例数据（SQL 文件）导入到 TiDB Cloud Starter 或 Essential
 
-本文档介绍了如何通过 UI 将示例数据导入 TiDB Cloud Serverless。所使用的示例数据为 Capital Bikeshare 的系统数据，根据 Capital Bikeshare 数据许可协议发布。在导入示例数据之前，你需要拥有一个 TiDB 集群。
+本文档介绍如何通过 UI 将示例数据（SQL 文件）导入到 TiDB Cloud Starter 或 TiDB Cloud Essential。所使用的示例数据为 Capital Bikeshare 的系统数据，根据 Capital Bikeshare 数据许可协议发布。在导入示例数据之前，你需要拥有一个 TiDB 集群。
 
 > **注意：**
 >
-> TiDB Cloud Serverless 目前仅支持从 Amazon S3 导入示例数据。
+> 本文档中使用的示例数据来自 Amazon S3。
 
 1. 打开目标集群的 **Import** 页面。
 
@@ -26,10 +26,10 @@ summary: 了解如何通过 UI 将示例数据导入 TiDB Cloud Serverless。
 3. 在 **Import Data from Cloud Storage** 页面，填写以下信息：
 
    - **Storage Provider**：选择 **Amazon S3**。
-   - **Source Files URI**：输入示例数据 URI `s3://tidbcloud-sample-data/data-ingestion/`。
+   - **Source Files URI**：输入示例数据的 URI `s3://tidbcloud-sample-data/data-ingestion/`。
    - **Credential**：
       - **AWS Role ARN**：输入 `arn:aws:iam::801626783489:role/import-sample-access`。
-      - **AWS Access Key**：对于示例数据可跳过此项。
+      - **AWS Access Key**：对于示例数据，此项可跳过。
 
 4. 点击 **Next**。
 

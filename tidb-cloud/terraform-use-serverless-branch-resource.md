@@ -1,32 +1,32 @@
 ---
-title: 使用 TiDB Cloud Serverless Branch 资源
-summary: 了解如何使用 serverless branch 资源来创建和修改 TiDB Cloud Serverless 分支。
+title: 使用 `tidbcloud_serverless_branch` 资源
+summary: 了解如何使用 serverless branch 资源来创建和修改 TiDB Cloud Starter 或 TiDB Cloud Essential 分支。
 ---
 
-# 使用 TiDB Cloud Serverless Branch 资源
+# 使用 `tidbcloud_serverless_branch` 资源
 
-本文档介绍如何使用 `tidbcloud_serverless_branch` 资源来管理 [TiDB Cloud Serverless 分支](/tidb-cloud/branch-manage.md)。
+本文档介绍如何使用 `tidbcloud_serverless_branch` 资源管理 [TiDB Cloud Starter 或 TiDB Cloud Essential 分支](/tidb-cloud/branch-manage.md)。
 
 `tidbcloud_serverless_branch` 资源的功能包括：
 
-- 创建 TiDB Cloud Serverless 分支。
-- 导入 TiDB Cloud Serverless 分支。
-- 删除 TiDB Cloud Serverless 分支。
+- 创建 TiDB Cloud Starter 或 TiDB Cloud Essential 分支。
+- 导入 TiDB Cloud Starter 或 TiDB Cloud Essential 分支。
+- 删除 TiDB Cloud Starter 或 TiDB Cloud Essential 分支。
 
 > **Note:**
 >
-> TiDB Cloud Serverless branch 资源无法被修改。如果你想更改 serverless branch 资源的配置，需要先删除现有资源，再创建一个新的资源。
+> `tidbcloud_serverless_branch` 资源无法被修改。如果你想更改 serverless branch 资源的配置，需要先删除现有资源，再创建一个新的资源。
 
 ## 前置条件
 
 - [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 或更高版本。
-- [创建 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md)。
+- [创建 TiDB Cloud Starter 或 TiDB Cloud Essential 集群](/tidb-cloud/create-tidb-cluster-serverless.md)。
 
-## 创建 TiDB Cloud Serverless 分支
+## 创建 TiDB Cloud Starter 或 TiDB Cloud Essential 分支
 
-你可以使用 `tidbcloud_serverless_branch` 资源来创建 TiDB Cloud Serverless 分支。
+你可以使用 `tidbcloud_serverless_branch` 资源来创建 TiDB Cloud Starter 或 TiDB Cloud Essential 分支。
 
-以下示例展示了如何创建一个 TiDB Cloud Serverless 分支。
+以下示例展示了如何创建 TiDB Cloud Starter 或 TiDB Cloud Essential 分支。
 
 1. 为分支创建一个目录并进入该目录。
 
@@ -53,14 +53,14 @@ summary: 了解如何使用 serverless branch 资源来创建和修改 TiDB Clou
     }
     ```
 
-    使用 `resource` 块来定义 TiDB Cloud 的资源，包括资源类型、资源名称和资源详情。
+    使用 `resource` 块定义 TiDB Cloud 的资源，包括资源类型、资源名称和资源详情。
 
-    - 要使用 serverless branch 资源，需要将资源类型设置为 `tidbcloud_serverless_branch`。
+    - 要使用 serverless branch 资源，将资源类型设置为 `tidbcloud_serverless_branch`。
     - 资源名称可以根据需要自定义，例如 `example`。
     - 资源详情可以根据 serverless branch 规范信息进行配置。
     - 获取 serverless branch 规范信息，请参见 [tidbcloud_serverless_branch (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_branch)。
 
-3. 运行 `terraform apply` 命令。在应用资源时，不建议使用 `terraform apply --auto-approve`。
+3. 运行 `terraform apply` 命令。应用资源时，不建议使用 `terraform apply --auto-approve`。
 
     ```shell
     $ terraform apply
@@ -118,7 +118,7 @@ summary: 了解如何使用 serverless branch 资源来创建和修改 TiDB Clou
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-5. 使用 `terraform show` 或 `terraform state show tidbcloud_serverless_branch.${resource-name}` 命令来查看你的资源状态。前者会显示所有资源和数据源的状态。
+5. 使用 `terraform show` 或 `terraform state show tidbcloud_serverless_branch.${resource-name}` 命令检查你的资源状态。前者会显示所有资源和数据源的状态。
 
     ```shell
     $ terraform state show tidbcloud_serverless_branch.example 
@@ -158,13 +158,13 @@ summary: 了解如何使用 serverless branch 资源来创建和修改 TiDB Clou
     }
     ```
 
-## 导入 TiDB Cloud Serverless 分支
+## 导入 TiDB Cloud Starter 或 TiDB Cloud Essential 分支
 
-对于未被 Terraform 管理的 TiDB Cloud Serverless 分支，你可以通过导入的方式让 Terraform 管理它。
+对于未被 Terraform 管理的 TiDB Cloud Starter 或 TiDB Cloud Essential 分支，你可以通过导入操作将其纳入 Terraform 管理。
 
-导入一个非 Terraform 创建的 TiDB Cloud Serverless 分支，操作如下：
+导入未通过 Terraform 创建的 TiDB Cloud Starter 或 TiDB Cloud Essential 分支，操作如下：
 
-1. 为新的 TiDB Cloud Serverless branch 资源添加一个 import 块。
+1. 为新的 `tidbcloud_serverless_branch` 资源添加 import 块。
 
     在你的 `.tf` 文件中添加如下 import 块，将 `example` 替换为你期望的资源名称，将 `${id}` 替换为 `cluster_id,branch_id` 的格式：
 
@@ -177,19 +177,19 @@ summary: 了解如何使用 serverless branch 资源来创建和修改 TiDB Clou
 
 2. 生成新的配置文件。
 
-    根据 import 块为新的 TiDB Cloud Serverless branch 资源生成新的配置文件：
+    根据 import 块为新的 `tidbcloud_serverless_branch` 资源生成新的配置文件：
 
       ```shell
       terraform plan -generate-config-out=generated.tf
       ```
 
-    在上述命令中不要指定已存在的 `.tf` 文件名，否则 Terraform 会返回错误。
+    上述命令中不要指定已存在的 `.tf` 文件名，否则 Terraform 会返回错误。
 
 3. 审查并应用生成的配置。
 
     审查生成的配置文件，确保其符合你的需求。你也可以选择将该文件内容移动到你喜欢的位置。
 
-    然后，运行 `terraform apply` 来导入你的基础设施。应用后，示例输出如下：
+    然后，运行 `terraform apply` 导入你的基础设施。应用后，示例输出如下：
 
     ```shell
     tidbcloud_serverless_branch.example: Importing... 
@@ -200,9 +200,9 @@ summary: 了解如何使用 serverless branch 资源来创建和修改 TiDB Clou
 
 现在你可以使用 Terraform 管理已导入的分支。
 
-## 删除 TiDB Cloud Serverless 分支
+## 删除 TiDB Cloud Starter 或 TiDB Cloud Essential 分支
 
-要删除 TiDB Cloud Serverless 分支，你可以删除 `tidbcloud_serverless_branch` 资源的配置，然后使用 `terraform apply` 命令销毁该资源：
+要删除 TiDB Cloud Starter 或 TiDB Cloud Essential 分支，你可以删除 `tidbcloud_serverless_branch` 资源的配置，然后使用 `terraform apply` 命令销毁该资源：
 
 ```shell
 $ terraform apply

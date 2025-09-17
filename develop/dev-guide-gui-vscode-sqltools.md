@@ -11,7 +11,7 @@ TiDB 是兼容 MySQL 的数据库，[Visual Studio Code (VS Code)](https://code.
 
 > **注意：**
 >
-> - 本教程兼容 {}、{}、TiDB Cloud 专属集群和自托管 TiDB。
+> - 本教程兼容 {{{ .starter }}}、{{{ .essential }}}、TiDB Cloud Dedicated 集群以及自托管 TiDB。
 > - 本教程同样适用于 Visual Studio Code 远程开发环境，如 [GitHub Codespaces](https://github.com/features/codespaces)、[Visual Studio Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) 和 [Visual Studio Code WSL](https://code.visualstudio.com/docs/remote/wsl)。
 
 ## 前置条件

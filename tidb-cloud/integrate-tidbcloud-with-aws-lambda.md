@@ -1,20 +1,24 @@
 ---
-title: 使用 AWS CloudFormation 集成 TiDB Cloud Serverless 与 Amazon Lambda
-summary: 逐步介绍如何将 TiDB Cloud Serverless 与 Amazon Lambda 及 CloudFormation 集成。
+title: 使用 AWS CloudFormation 集成 TiDB Cloud Starter 与 Amazon Lambda
+summary: 逐步介绍如何通过 AWS CloudFormation 将 TiDB Cloud Starter 与 Amazon Lambda 集成。
 ---
 
-# 使用 AWS CloudFormation 集成 TiDB Cloud Serverless 与 Amazon Lambda
+# 使用 AWS CloudFormation 集成 TiDB Cloud Starter 与 Amazon Lambda
 
-本文档提供了一个分步指南，介绍如何使用 [AWS CloudFormation](https://aws.amazon.com/cloudformation/) 将 [TiDB Cloud Serverless](https://www.pingcap.com/tidb-cloud/)，一款云原生分布式 SQL 数据库，与 [AWS Lambda](https://aws.amazon.com/lambda/)，一项无服务器、事件驱动的计算服务集成。通过将 TiDB Cloud Serverless 与 Amazon Lambda 集成，你可以利用 TiDB Cloud Serverless 和 AWS Lambda 的微服务架构，实现高扩展性和成本效益。AWS CloudFormation 可自动化创建和管理 AWS 资源，包括 Lambda 函数、API Gateway 和 Secrets Manager。
+本文档提供了一个分步指南，介绍如何使用 [AWS CloudFormation](https://aws.amazon.com/cloudformation/) 将 [TiDB Cloud Starter](https://www.pingcap.com/tidb-cloud-starter/)，一款云原生分布式 SQL 数据库，与 [AWS Lambda](https://aws.amazon.com/lambda/)，一项无服务器、事件驱动的计算服务集成。通过将 TiDB Cloud Starter 与 Amazon Lambda 集成，你可以利用 TiDB Cloud Starter 和 AWS Lambda 的微服务架构，实现高扩展性和成本效益。AWS CloudFormation 可自动化创建和管理 AWS 资源，包括 Lambda 函数、API Gateway 和 Secrets Manager。
+
+> **注意：**
+>
+> 除了 TiDB Cloud Starter 集群外，本文档中的步骤同样适用于 TiDB Cloud Essential 集群。
 
 ## 方案概述
 
-在本指南中，你将创建一个功能完整的在线书店项目，包含以下组件：
+在本指南中，你将创建一个功能完善的在线书店项目，包含以下组件：
 
-- AWS Lambda Function：使用 Sequelize ORM 和 Fastify API 框架处理请求并查询 TiDB Cloud Serverless 集群中的数据。
-- AWS Secrets Manager SDK：获取并管理 TiDB Cloud Serverless 集群的连接配置信息。
+- AWS Lambda Function：处理请求并通过 Sequelize ORM 和 Fastify API 框架从 TiDB Cloud Starter 集群查询数据。
+- AWS Secrets Manager SDK：获取并管理 TiDB Cloud Starter 集群的连接配置信息。
 - AWS API Gateway：处理 HTTP 请求路由。
-- TiDB Cloud Serverless：云原生分布式 SQL 数据库。
+- TiDB Cloud Starter：云原生分布式 SQL 数据库。
 
 AWS CloudFormation 用于为该项目创建所需的资源，包括 Secrets Manager、API Gateway 和 Lambda Functions。
 
@@ -33,7 +37,7 @@ AWS CloudFormation 用于为该项目创建所需的资源，包括 Secrets Mana
     - [Lambda services](https://aws.amazon.com/lambda/)
     - [S3](https://aws.amazon.com/s3/)
     - [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
-- 一个 [TiDB Cloud](https://tidbcloud.com) 账号和一个 TiDB Cloud Serverless 集群。获取你的 TiDB Cloud Serverless 集群的连接信息：
+- 一个 [TiDB Cloud](https://tidbcloud.com) 账号和一个 TiDB Cloud Starter 集群。获取你的 TiDB Cloud Starter 集群的连接信息：
 
     ![TiDB Cloud connection information](/media/develop/aws-lambda-tidbcloud-connection-info.png)
 
@@ -42,8 +46,8 @@ AWS CloudFormation 用于为该项目创建所需的资源，包括 Secrets Mana
 
 > **注意：**
 >
-> - 创建 AWS 资源时，建议将集群区域选择为 `us-east-1`。这是因为本示例中的 Lambda 函数代码将区域硬编码为 `us-east-1`，且代码包存储在 `us-east-1` 区域。
-> - 如果你使用其他区域，需要按照以下说明修改 Lambda 函数代码，重新构建并将代码包上传到你自己的 S3 bucket。
+> - 在创建 AWS 资源时，建议将集群区域选择为 `us-east-1`。这是因为本示例中的 Lambda 函数代码将区域硬编码为 `us-east-1`，且代码包也存储在 `us-east-1` 区域。
+> - 如果你使用其他区域，需要按照下述说明修改 Lambda 函数代码，重新构建并将代码包上传到你自己的 S3 bucket。
 
 <details>
 <summary>如果你使用的区域不是 <code>us-east-1</code>，请修改并重新构建 Lambda 函数代码</summary>
@@ -52,7 +56,7 @@ AWS CloudFormation 用于为该项目创建所需的资源，包括 Secrets Mana
 
 如果你在 `us-east-1` 以外的 AWS 区域创建 AWS 资源，则需要修改 Lambda 函数代码，重新构建，并将代码包上传到你自己的 S3 bucket。
 
-为避免本地开发环境问题，建议你使用云原生开发环境，如 [Gitpod](https://www.gitpod.io/)。
+为避免本地开发环境问题，推荐使用云原生开发环境，如 [Gitpod](https://www.gitpod.io/)。
 
 要重新构建并上传代码包到你自己的 S3 bucket，请执行以下操作：
 
@@ -63,7 +67,7 @@ AWS CloudFormation 用于为该项目创建所需的资源，包括 Secrets Mana
 2. 修改 Lambda 函数代码。
 
     1. 在左侧边栏打开 `aws-lambda-cloudformation/src/secretManager.ts` 文件。
-    2. 定位到第 22 行，修改 `region` 变量为你自己的区域。
+    2. 找到第 22 行，将 `region` 变量修改为你自己的区域。
 
 3. 重新构建代码包。
 
@@ -91,7 +95,7 @@ AWS CloudFormation 用于为该项目创建所需的资源，包括 Secrets Mana
             ```
 
         2. 检查 `aws-lambda-cloudformation/dist/index.zip` 文件。
-        3. 右键点击 `index.zip` 文件并选择 **Download**。
+        3. 右键点击 `index.zip` 文件，选择 **Download**。
 
 4. 将重新构建的代码包上传到你自己的 S3 bucket。
 
@@ -113,13 +117,13 @@ AWS CloudFormation 用于为该项目创建所需的资源，包括 Secrets Mana
     1. 在 **Prerequisite** 区域，选择 **Choose an existing template**。
     2. 在 **Specify template** 区域，选择 **Upload a template file**，点击 **Choose file** 上传模板文件（YAML 或 JSON 格式），然后点击 **Next**。
 
-        如果你还没有该文件，请从 [GitHub](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest) 下载。该文件包含用于创建项目所需资源的 AWS CloudFormation 模板。
+        如果你还没有该文件，可以从 [GitHub](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest) 下载。该文件包含用于创建项目所需资源的 AWS CloudFormation 模板。
 
         ![Create a stack](/media/develop/aws-lambda-cf-create-stack.png)
 
     3. 指定堆栈详细信息。
 
-        - 如果你使用 `us-east-1` 作为集群区域，请按照下图填写各项字段：
+        - 如果你使用 `us-east-1` 作为集群区域，请按照下图填写各项内容：
 
             ![Specify AWS Lambda stack details](/media/develop/aws-lambda-cf-stack-config.png)
 
@@ -127,7 +131,7 @@ AWS CloudFormation 用于为该项目创建所需的资源，包括 Secrets Mana
             - **S3Bucket**：输入存放 zip 文件的 S3 bucket 名称。
             - **S3Key**：输入 S3 key。
             - **TiDBDatabase**：输入 TiDB Cloud 集群名称。
-            - **TiDBHost**：输入 TiDB Cloud 数据库访问的主机 URL。请填写 `localhost`。
+            - **TiDBHost**：输入 TiDB Cloud 数据库访问的主机 URL。请输入 `localhost`。
             - **TiDBPassword**：输入 TiDB Cloud 数据库访问密码。
             - **TiDBPort**：输入 TiDB Cloud 数据库访问端口。
             - **TiDBUser**：输入 TiDB Cloud 数据库访问用户名。
@@ -135,7 +139,7 @@ AWS CloudFormation 用于为该项目创建所需的资源，包括 Secrets Mana
         - 如果你使用的 AWS 区域不是 `us-east-1`，请按照以下步骤操作：
 
             1. 参考 [如果你使用的区域不是 `us-east-1`，请修改并重新构建 Lambda 函数代码](#prerequisites) 修改 Lambda 函数代码，重新构建并上传代码包到你自己的 S3 bucket。
-            2. 在堆栈详细信息字段中，根据你的配置填写 `S3Bucket` 和 `S3Key` 参数。
+            2. 在堆栈详细信息字段中，根据你的配置在 `S3Bucket` 和 `S3Key` 参数中指定 S3 bucket 名称和区域。
             3. 其他字段按照上图填写。
 
     4. 配置堆栈选项。你可以使用默认配置。

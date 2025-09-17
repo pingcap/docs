@@ -5,7 +5,7 @@ summary: 了解如何配置 root 密码以连接到你的集群。
 
 # 配置集群密码设置
 
-对于 TiDB Cloud 专属集群，你可以配置 root 密码以及允许连接到你集群的 IP 地址。
+对于 TiDB Cloud Dedicated 集群，你可以配置 root 密码以及允许连接到你集群的 IP 地址。
 
 > **注意：**
 >

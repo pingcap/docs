@@ -1,11 +1,11 @@
 ---
-title: 暂停或恢复 TiDB Cloud 专属集群
-summary: 了解如何暂停或恢复 TiDB Cloud 专属集群。
+title: 暂停或恢复 TiDB Cloud Dedicated 集群
+summary: 了解如何暂停或恢复 TiDB Cloud Dedicated 集群。
 ---
 
-# 暂停或恢复 TiDB Cloud 专属集群
+# 暂停或恢复 TiDB Cloud Dedicated 集群
 
-你可以在 TiDB Cloud 中轻松暂停和恢复并非始终运行的 TiDB Cloud 专属集群。
+你可以在 TiDB Cloud 中轻松暂停和恢复并非始终运行的 TiDB Cloud Dedicated 集群。
 
 暂停操作不会影响存储在集群中的数据，只是停止监控信息的收集和计算资源的消耗。暂停后，你可以随时恢复集群。
 

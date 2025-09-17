@@ -5,7 +5,7 @@ summary: 了解如何确定你的 TiDB Cloud 集群规模。
 
 # 确定你的 TiDB 规模
 
-本文档介绍如何确定 TiDB Cloud 专属集群的规模。
+本文档介绍如何确定 TiDB Cloud Dedicated 集群的规模。
 
 > **Note:**
 >

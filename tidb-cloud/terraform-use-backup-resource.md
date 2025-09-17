@@ -9,13 +9,13 @@ summary: 了解如何使用 backup 资源为 TiDB Cloud 集群创建备份。
 
 `tidbcloud_backup` 资源的功能包括：
 
-- 为 TiDB Cloud 专属集群创建备份。
-- 删除 TiDB Cloud 专属集群的备份。
+- 为 TiDB Cloud Dedicated 集群创建备份。
+- 删除 TiDB Cloud Dedicated 集群的备份。
 
 ## 前置条件
 
 - [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)。
-- 备份与恢复功能不支持 TiDB Cloud Serverless 集群。要使用备份资源，请确保你已创建 TiDB Cloud 专属集群。
+- 备份与恢复功能不支持 TiDB Cloud Serverless 集群。要使用备份资源，请确保你已创建 TiDB Cloud Dedicated 集群。
 
 ## 使用 backup 资源创建备份
 

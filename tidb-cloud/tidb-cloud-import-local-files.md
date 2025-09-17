@@ -1,18 +1,18 @@
 ---
-title: Import Local Files to TiDB Cloud Serverless
-summary: Learn how to import local files to TiDB Cloud Serverless.
+title: 将本地文件导入 TiDB Cloud Starter 或 Essential
+summary: 了解如何将本地文件导入 TiDB Cloud Starter 或 TiDB Cloud Essential。
 ---
 
-# 将本地文件导入 TiDB Cloud Serverless
+# 将本地文件导入 TiDB Cloud Starter 或 Essential
 
-你可以直接将本地文件导入 TiDB Cloud Serverless。只需几次点击即可完成任务配置，你的本地 CSV 数据就会被快速导入到 TiDB 集群中。使用此方法，无需提供云存储和凭证，整个导入过程快速且流畅。
+你可以直接将本地文件导入 TiDB Cloud Starter 或 TiDB Cloud Essential。只需几步简单操作即可完成任务配置，你的本地 CSV 数据就会被快速导入到 TiDB 集群中。使用此方法，无需提供云存储和凭证，整个导入过程快速且流畅。
 
 目前，该方法支持每个任务导入一个 CSV 文件到现有的空表或新建表中。
 
 ## 限制
 
-- 目前，TiDB Cloud 仅支持每个任务导入一个小于 250 MiB 的本地 CSV 文件。
-- 本地文件导入仅支持 TiDB Cloud Serverless 集群，不支持 TiDB Cloud Dedicated 集群。
+- 目前，TiDB Cloud 仅支持每个任务导入一个大小不超过 250 MiB 的本地 CSV 文件。
+- 本地文件导入仅支持 TiDB Cloud Starter 和 TiDB Cloud Essential 集群，不支持 TiDB Cloud Dedicated 集群。
 - 你不能同时运行多个导入任务。
 
 ## 导入本地文件
@@ -25,7 +25,7 @@ summary: Learn how to import local files to TiDB Cloud Serverless.
         >
         > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
 
-    2. 点击目标集群名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+    2. 点击目标集群的名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
 
 2. 在 **Import** 页面，你可以直接将本地文件拖拽到上传区域，或点击 **Upload a local file** 选择并上传目标本地文件。请注意，每个任务只能上传一个小于 250 MiB 的 CSV 文件。如果你的本地文件大于 250 MiB，请参见 [如何导入大于 250 MiB 的本地文件？](#how-to-import-a-local-file-larger-than-250-mib)。
 
@@ -36,11 +36,11 @@ summary: Learn how to import local files to TiDB Cloud Serverless.
     你可以看到可配置的数据表列列表。每一行显示 TiDB Cloud 推断出的表列名、推断出的表列类型，以及来自 CSV 文件的预览数据。
 
     - 如果你将数据导入 TiDB Cloud 中的现有表，列列表会从表定义中提取，预览数据会按列名映射到对应的列。
-    - 如果你需要创建新表，列列表会从 CSV 文件中提取，列类型由 TiDB Cloud 推断。例如，如果预览数据全为整数，则推断的列类型为整数。
+    - 如果你需要新建表，列列表会从 CSV 文件中提取，列类型由 TiDB Cloud 推断。例如，如果预览数据全为整数，则推断的列类型为整数。
 
 5. 配置列名和数据类型。
 
-    如果 CSV 文件的第一行记录了列名，请确保已勾选 **Use first row as column name**，该选项默认已选中。
+    如果 CSV 文件的第一行记录了列名，请确保已勾选 **Use first row as column name**，该选项默认勾选。
 
     如果 CSV 文件没有列名行，请不要勾选 **Use first row as column name**。此时：
 
@@ -48,15 +48,15 @@ summary: Learn how to import local files to TiDB Cloud Serverless.
     - 如果需要 TiDB Cloud 创建目标表，请为每一列输入名称。列名需满足以下要求：
 
         * 名称只能由 Unicode BMP 字符组成，不能包含空字符 `\u0000` 和空白字符。
-        * 名称长度需小于 65 个字符。
+        * 名称长度必须小于 65 个字符。
 
         你也可以根据需要更改数据类型。
 
     > **Note:**
     >
-    > 当你将 CSV 文件导入 TiDB Cloud 的现有表且目标表比源文件多出列时，额外的列会根据不同情况进行处理：
-    > - 如果多出的列不是主键或唯一键，不会报错，这些列会被填充为其 [默认值](/data-type-default-values.md)。
-    > - 如果多出的列是主键或唯一键，且没有 `auto_increment` 或 `auto_random` 属性，则会报错。此时建议选择以下策略之一：
+    > 当你将 CSV 文件导入 TiDB Cloud 中的现有表且目标表的列多于源文件时，额外的列会根据不同情况进行处理：
+    > - 如果额外的列不是主键或唯一键，不会报错，这些额外的列会被填充为其 [默认值](/data-type-default-values.md)。
+    > - 如果额外的列是主键或唯一键，且没有 `auto_increment` 或 `auto_random` 属性，则会报错。此时建议选择以下策略之一：
     >   - 提供包含这些主键或唯一键列的源文件。
     >   - 修改目标表的主键和唯一键列，使其与源文件中的现有列匹配。
     >   - 将主键或唯一键列的属性设置为 `auto_increment` 或 `auto_random`。
@@ -69,7 +69,7 @@ summary: Learn how to import local files to TiDB Cloud Serverless.
 
 7. 如有需要，可编辑 CSV 配置。
 
-   你也可以点击 **Edit CSV configuration**，对反斜杠转义、分隔符和定界符进行更细粒度的配置。关于 CSV 配置的更多信息，请参见 [导入数据的 CSV 配置](/tidb-cloud/csv-config-for-import-data.md)。
+   你也可以点击 **Edit CSV configuration**，对反斜杠转义、分隔符和定界符等进行更细致的配置。关于 CSV 配置的更多信息，请参见 [导入数据的 CSV 配置](/tidb-cloud/csv-config-for-import-data.md)。
 
 8. 点击 **Start Import**。
 
@@ -79,13 +79,13 @@ summary: Learn how to import local files to TiDB Cloud Serverless.
 
 10. 在 **Import** 页面，你可以点击 **...** > **View**，在 **Action** 列查看导入任务详情。
 
-## FAQ
+## 常见问题
 
-### TiDB Cloud 的 Import 功能是否支持只导入指定的部分列？
+### TiDB Cloud 的 Import 功能是否只能导入指定的部分列？
 
-不支持。目前，使用 Import 功能时只能将 CSV 文件的所有列导入到现有表中。
+不能。目前，使用 Import 功能时，只能将 CSV 文件的所有列导入到现有表中。
 
-如需只导入指定的部分列，你可以使用 MySQL 客户端连接 TiDB 集群，然后通过 [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data) 指定要导入的列。例如：
+如果只想导入指定的部分列，可以使用 MySQL 客户端连接 TiDB 集群，然后通过 [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data) 指定要导入的列。例如：
 
 ```sql
 CREATE TABLE `import_test` (
@@ -99,15 +99,15 @@ LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE import_test FIELDS TERMINATED BY ',
 
 如果你使用 `mysql` 并遇到 `ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`，可以在连接字符串中添加 `--local-infile=true`。
 
-### 为什么将数据导入 TiDB Cloud 后，无法查询列名为保留关键字的列？
+### 为什么将数据导入 TiDB Cloud 后，无法查询带有保留关键字的列？
 
-如果列名为 TiDB 的保留 [关键字](/keywords.md)，查询该列时需要用反引号 `` ` `` 包裹列名。例如，列名为 `order`，则需要用 `` `order` `` 查询该列。
+如果列名是 TiDB 的保留 [关键字](/keywords.md)，在查询该列时需要用反引号 `` ` `` 包裹列名。例如，如果列名为 `order`，则需要用 `` `order` `` 进行查询。
 
 ### 如何导入大于 250 MiB 的本地文件？
 
-如果文件大于 250 MiB，你可以使用 [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md) 进行导入。更多信息请参见 [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md)。
+如果文件大于 250 MiB，可以使用 [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md) 进行导入。更多信息请参见 [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md)。
 
-另外，你也可以使用 `split [-l ${line_count}]` 工具将其拆分为多个小文件（仅适用于 Linux 或 macOS）。例如，运行 `split -l 100000 tidb-01.csv small_files`，即可按每 100000 行将名为 `tidb-01.csv` 的文件拆分，拆分后的文件名为 `small_files${suffix}`。然后，你可以将这些小文件逐个导入 TiDB Cloud。
+另外，你也可以使用 `split [-l ${line_count}]` 工具将其拆分为多个小文件（仅适用于 Linux 或 macOS）。例如，运行 `split -l 100000 tidb-01.csv small_files`，即可按行数 100000 拆分名为 `tidb-01.csv` 的文件，拆分后的文件名为 `small_files${suffix}`。然后，你可以将这些小文件逐个导入 TiDB Cloud。
 
 参考如下脚本：
 

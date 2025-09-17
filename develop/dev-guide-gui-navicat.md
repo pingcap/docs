@@ -11,7 +11,7 @@ TiDB 是兼容 MySQL 的数据库，[Navicat](https://www.navicat.com) 是一套
 
 > **注意：**
 >
-> 本教程兼容 {}、{}、TiDB Cloud 专属集群和自托管 TiDB。
+> 本教程兼容 {{{ .starter }}}、{{{ .essential }}}、TiDB Cloud Dedicated 集群以及自托管 TiDB。
 
 ## 前提条件
 
@@ -95,7 +95,7 @@ TiDB 是兼容 MySQL 的数据库，[Navicat](https://www.navicat.com) 是一套
 
     如果你还未配置 IP 访问列表，点击 **Configure IP Access List**，或参照 [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) 进行首次连接前的配置。
 
-    除了 **Public** 连接类型，TiDB Cloud 专属集群还支持 **Private Endpoint** 和 **VPC Peering** 连接类型。更多信息参见 [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)。
+    除了 **Public** 连接类型，TiDB Cloud Dedicated 集群还支持 **Private Endpoint** 和 **VPC Peering** 连接类型。更多信息参见 [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)。
 
 4. 点击 **CA cert** 下载 CA 证书。
 
@@ -109,7 +109,7 @@ TiDB 是兼容 MySQL 的数据库，[Navicat](https://www.navicat.com) 是一套
     - **Host**：输入 TiDB Cloud 连接对话框中的 `HOST` 参数。
     - **Port**：输入 TiDB Cloud 连接对话框中的 `PORT` 参数。
     - **User Name**：输入 TiDB Cloud 连接对话框中的 `USERNAME` 参数。
-    - **Password**：输入 TiDB Cloud 专属集群的密码。
+    - **Password**：输入 TiDB Cloud Dedicated 集群的密码。
 
     ![Navicat: configure connection general panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-general.png)
 
@@ -117,7 +117,7 @@ TiDB 是兼容 MySQL 的数据库，[Navicat](https://www.navicat.com) 是一套
 
     ![Navicat: configure connection SSL panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-ssl.png)
 
-8. **Test Connection** 测试与 TiDB Cloud 专属集群的连接。
+8. **Test Connection** 测试与 TiDB Cloud Dedicated 集群的连接。
 
 9. 如果连接测试成功，你会看到 **Connection Successful** 消息。点击 **OK** 完成连接配置。
 

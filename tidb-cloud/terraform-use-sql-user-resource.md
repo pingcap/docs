@@ -17,7 +17,7 @@ summary: 了解如何使用 SQL 用户资源在 TiDB Cloud 中创建和修改 SQ
 ## 前置条件
 
 - [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 或更高版本。
-- [创建 TiDB Cloud 专属集群](/tidb-cloud/create-tidb-cluster.md) 或 [创建 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md)。
+- [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md) 或 [创建 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md)。
 
 ## 创建 SQL 用户
 

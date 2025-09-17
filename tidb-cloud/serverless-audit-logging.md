@@ -1,15 +1,15 @@
 ---
-title: TiDB Cloud Serverless 数据库审计日志
-summary: 了解如何在 TiDB Cloud 中对 TiDB Cloud Serverless 集群进行审计。
+title: TiDB Cloud Starter 和 Essential 的数据库审计日志
+summary: 了解如何在 TiDB Cloud 中对 TiDB Cloud Starter 或 TiDB Cloud Essential 集群进行审计。
 ---
 
-# TiDB Cloud Serverless 数据库审计日志（Beta）
+# TiDB Cloud Starter 和 Essential 的数据库审计日志（Beta）
 
-TiDB Cloud Serverless 为你提供了数据库审计日志功能，用于在日志中记录用户访问的详细历史（如执行的所有 SQL 语句）。
+TiDB Cloud Starter 和 TiDB Cloud Essential 为你提供数据库审计日志功能，用于在日志中记录用户访问的历史详情（如执行的所有 SQL 语句）。
 
 > **Note:**
 >
-> 目前，数据库审计日志功能仅支持按需申请。若需申请此功能，请点击 [TiDB Cloud 控制台](https://tidbcloud.com) 右下角的 **?**，然后点击 **Request Support**。在 **Description** 字段填写 “Apply for TiDB Cloud Serverless database audit logging”，并点击 **Submit**。
+> 目前，数据库审计日志功能仅支持按需申请。若需申请此功能，请点击 [TiDB Cloud 控制台](https://tidbcloud.com) 右下角的 **?**，然后点击 **Request Support**。在 **Description** 字段填写 “Apply for TiDB Cloud Starter or TiDB Cloud Essential database audit logging”，并点击 **Submit**。
 
 为了评估你所在组织的用户访问策略及其他信息安全措施的有效性，定期分析数据库审计日志是一项安全最佳实践。
 
@@ -17,13 +17,13 @@ TiDB Cloud Serverless 为你提供了数据库审计日志功能，用于在日�
 
 ## 启用审计日志
 
-要为 TiDB Cloud Serverless 集群启用审计日志，请使用 [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-config.md)。
+要为 TiDB Cloud Starter 或 TiDB Cloud Essential 集群启用审计日志，请使用 [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-config.md)。
 
 ```shell
 ticloud serverless audit-log config -c <cluster-id> --enabled
 ```
 
-要为 TiDB Cloud Serverless 集群禁用审计日志，请使用 [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-config.md)。
+要为 TiDB Cloud Starter 或 TiDB Cloud Essential 集群禁用审计日志，请使用 [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-config.md)。
 
 ```shell
 ticloud serverless audit-log config -c <cluster-id> --enabled=false
@@ -31,7 +31,7 @@ ticloud serverless audit-log config -c <cluster-id> --enabled=false
 
 > **Note:**
 >
-> 仅启用审计日志功能不会生成审计日志。你还需要配置过滤器以指定需要记录的事件。更多信息，参见 [管理审计日志过滤规则](#manage-audit-logging-filter-rules)。
+> 仅启用审计日志不会生成审计日志。你还需要配置过滤器以指定需要记录的事件。更多信息，参见 [管理审计日志过滤规则](#manage-audit-logging-filter-rules)。
 
 ## 管理审计日志过滤规则
 
@@ -110,7 +110,7 @@ ticloud serverless audit-log filter delete --cluster-id <cluster-id> --name <rul
 
 ### 数据脱敏
 
-TiDB Cloud Serverless 默认会对审计日志中的敏感数据进行脱敏。以下 SQL 语句为例：
+TiDB Cloud Starter 和 TiDB Cloud Essential 默认会对审计日志中的敏感数据进行脱敏。以下 SQL 语句为例：
 
 ```sql 
 INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES (1, 'Alice', '123456');
@@ -130,24 +130,24 @@ ticloud serverless audit-log config --cluster-id <cluster-id> --unredacted
 
 ### 日志文件轮转
 
-当满足以下任一条件时，TiDB Cloud Serverless 会生成新的审计日志文件：
+当满足以下任一条件时，TiDB Cloud Starter 和 TiDB Cloud Essential 会生成新的审计日志文件：
 
 - 当前日志文件大小达到 100 MiB。
 - 距离上一次日志生成已过去 1 小时。根据内部调度机制，日志生成可能会延迟几分钟。
 
 > **Note:**
 >
-> 目前，日志文件轮转设置不可配置。TiDB Cloud Serverless 会根据上述条件自动轮转审计日志文件。
+> 目前，日志文件轮转设置不可配置。TiDB Cloud Starter 和 TiDB Cloud Essential 会根据上述条件自动轮转审计日志文件。
 
 ## 访问审计日志
 
-TiDB Cloud Serverless 审计日志以可读文本文件的形式存储，文件名为 `YYYY-MM-DD-<index>.log`。
+TiDB Cloud Starter 和 TiDB Cloud Essential 的审计日志以可读文本文件的形式存储，文件名为 `YYYY-MM-DD-<index>.log`。
 
-目前，审计日志会在 TiDB Cloud 内部保存 365 天。超过此期限后，日志会被自动删除。
+目前，审计日志会在 TiDB Cloud 内部存储 365 天。超过此期限后，日志会被自动删除。
 
 > **Note:**
 >
-> 如果你需要将审计日志保存到外部存储（如 AWS S3、Azure Blob Storage 和 Google Cloud Storage），请联系 [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)。
+> 如果你需要将审计日志保存到外部存储（如 Amazon S3、Azure Blob Storage、Google Cloud Storage 和阿里云 OSS），请联系 [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)。
 
 要查看和下载审计日志，请使用 [TiDB Cloud CLI](/tidb-cloud/ticloud-auditlog-download.md)：
 
@@ -155,17 +155,17 @@ TiDB Cloud Serverless 审计日志以可读文本文件的形式存储，文件�
 ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <output-path> --start-date <start-date> --end-date <end-date>
 ```
 
-- `start-date`：你希望下载的审计日志的起始日期，格式为 `YYYY-MM-DD`，例如 `2025-01-01`。
-- `end-date`：你希望下载的审计日志的结束日期，格式为 `YYYY-MM-DD`，例如 `2025-01-01`。
+- `start-date`：你想要下载的审计日志的起始日期，格式为 `YYYY-MM-DD`，例如 `2025-01-01`。
+- `end-date`：你想要下载的审计日志的结束日期，格式为 `YYYY-MM-DD`，例如 `2025-01-01`。
 
 > **Note:**
 >
-> TiDB Cloud Serverless 不保证审计日志的顺序性。名为 `YYYY-MM-DD-<index>.log` 的日志文件可能包含前几天的审计日志。
-> 如果你希望获取某一天（如 2025 年 1 月 1 日）的所有日志，通常指定 `--start-date 2025-01-01` 和 `--end-date 2025-01-02` 即可。但在极端情况下，你可能需要下载所有日志文件并根据 `TIME` 字段进行排序。
+> TiDB Cloud Starter 和 TiDB Cloud Essential 不保证审计日志的顺序性。名为 `YYYY-MM-DD-<index>.log` 的日志文件可能包含前几天的审计日志。
+> 如果你想获取某一天（如 2025 年 1 月 1 日）的所有日志，通常指定 `--start-date 2025-01-01` 和 `--end-date 2025-01-02` 即可。但在极端情况下，你可能需要下载所有日志文件并根据 `TIME` 字段进行排序。
 
 ## 审计日志字段
 
-对于审计日志中的每条数据库事件记录，TiDB 提供了以下字段：
+对于审计日志中的每条数据库事件记录，TiDB 提供以下字段：
 
 ### 通用信息
 
@@ -182,7 +182,7 @@ ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <o
 | TABLES        | 与本次审计记录相关的访问表                                              |
 | STATUS_CODE   | 审计记录的状态码。`1` 表示成功，`0` 表示失败。                       |
 | KEYSPACE_NAME | 审计记录的 keyspace 名称。 |
-| SERVERLESS_TENANT_ID           | 集群所属的 serverless tenant ID。 |
+| SERVERLESS_TENANT_ID           | 集群所属的 serverless 租户 ID。 |
 | SERVERLESS_TSERVERLESS_PROJECT_ID         | 集群所属的 serverless 项目 ID。 |
 | SERVERLESS_CLUSTER_ID          | 审计记录所属的 serverless 集群 ID。 |
 | REASON        | 审计记录的错误信息。仅在操作发生错误时记录。 |
@@ -227,4 +227,4 @@ ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <o
 
 - 目前仅可通过 TiDB Cloud CLI 获取审计日志。
 - 目前审计日志只能存储在 TiDB Cloud 内部。
-- TiDB Cloud Serverless 不保证审计日志的顺序性，这意味着你可能需要查看所有日志文件以获取最新事件。若需按时间顺序排序日志，可以使用审计日志中的 `TIME` 字段。
+- TiDB Cloud Starter 和 TiDB Cloud Essential 不保证审计日志的顺序性，这意味着你可能需要查看所有日志文件以获取最新事件。若需按时间顺序排序日志，可以使用审计日志中的 `TIME` 字段。

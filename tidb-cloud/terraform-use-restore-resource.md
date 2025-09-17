@@ -9,12 +9,12 @@ summary: 了解如何使用 restore 资源。
 
 `tidbcloud_restore` 资源的功能包括：
 
-- 根据你的备份为 TiDB Cloud 专属集群创建恢复任务。
+- 根据你的备份为 TiDB Cloud Dedicated 集群创建恢复任务。
 
 ## 前置条件
 
 - [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)。
-- 备份与恢复功能不支持 TiDB Cloud Serverless 集群。要使用恢复资源，请确保你已创建 TiDB Cloud 专属集群。
+- 备份与恢复功能不支持 TiDB Cloud Serverless 集群。要使用恢复资源，请确保你已创建 TiDB Cloud Dedicated 集群。
 
 ## 创建恢复任务
 

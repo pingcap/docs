@@ -13,7 +13,7 @@ summary: 了解如何为你的集群配置维护时间窗口。
 
 > **Note:**
 >
-> 维护时间窗口功能仅适用于 [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)。
+> 维护时间窗口功能仅适用于 [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)。
 
 ## 维护时间窗口期间允许和不允许的操作
 
