@@ -1,33 +1,33 @@
 ---
 title: 使用 `tidbcloud_dedicated_vpc_peering` 资源
-summary: 了解如何使用 `tidbcloud_dedicated_vpc_peering` 资源来创建和修改 TiDB Cloud 专属 VPC 对等连接。
+summary: 了解如何使用 `tidbcloud_dedicated_vpc_peering` 资源来创建和修改 TiDB Cloud Dedicated VPC 对等连接。
 ---
 
 # 使用 `tidbcloud_dedicated_vpc_peering` 资源
 
-本文档介绍如何使用 `tidbcloud_dedicated_vpc_peering` 资源管理 [TiDB Cloud 专属](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) VPC 对等连接。
+本文档介绍如何使用 `tidbcloud_dedicated_vpc_peering` 资源管理 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) VPC 对等连接。
 
 `tidbcloud_dedicated_vpc_peering` 资源的功能包括：
 
-- 创建 TiDB Cloud 专属 VPC 对等连接。
-- 导入 TiDB Cloud 专属 VPC 对等连接。
-- 删除 TiDB Cloud 专属 VPC 对等连接。
+- 创建 TiDB Cloud Dedicated VPC 对等连接。
+- 导入 TiDB Cloud Dedicated VPC 对等连接。
+- 删除 TiDB Cloud Dedicated VPC 对等连接。
 
 > **Note:**
 >
-> `tidbcloud_dedicated_vpc_peering` 资源无法被修改。如果你想更改 TiDB Cloud 专属 VPC 对等连接的配置，需要先删除现有的对等连接，然后重新创建一个新的。
+> `tidbcloud_dedicated_vpc_peering` 资源无法被修改。如果你想更改 TiDB Cloud Dedicated VPC 对等连接的配置，需要先删除现有的对等连接，然后重新创建一个新的。
 
 ## 前置条件
 
 - [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 或更高版本。
 
-## 创建 TiDB Cloud 专属 VPC 对等连接
+## 创建 TiDB Cloud Dedicated VPC 对等连接
 
-你可以使用 `tidbcloud_dedicated_vpc_peering` 资源来创建 TiDB Cloud 专属 VPC 对等连接。
+你可以使用 `tidbcloud_dedicated_vpc_peering` 资源来创建 TiDB Cloud Dedicated VPC 对等连接。
 
-以下示例展示了如何创建一个 TiDB Cloud 专属 VPC 对等连接。
+以下示例展示了如何创建一个 TiDB Cloud Dedicated VPC 对等连接。
 
-1. 为 TiDB Cloud 专属 VPC 对等连接创建一个目录并进入该目录。
+1. 为 TiDB Cloud Dedicated VPC 对等连接创建一个目录并进入该目录。
 
 2. 创建一个 `vpc_peering.tf` 文件：
 
@@ -58,10 +58,10 @@ summary: 了解如何使用 `tidbcloud_dedicated_vpc_peering` 资源来创建和
 
     - 要使用 `tidbcloud_dedicated_vpc_peering` 资源，需要将资源类型设置为 `tidbcloud_dedicated_vpc_peering`。
     - 资源名称可以根据需要自定义，例如 `example`。
-    - 如果你不知道如何获取所需参数的值，请参见 [通过 VPC Peering 连接到 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-vpc-peering-connections.md)。
-    - 如需获取 TiDB Cloud 专属 VPC 对等连接的详细规范信息，请参见 [tidbcloud_dedicated_vpc_peering (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_vpc_peering)。
+    - 如果你不知道如何获取所需参数的值，请参见 [通过 VPC Peering 连接到 TiDB Cloud Dedicated](/tidb-cloud/set-up-vpc-peering-connections.md)。
+    - 要获取 TiDB Cloud Dedicated VPC 对等连接的规格信息，请参见 [tidbcloud_dedicated_vpc_peering (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_vpc_peering)。
 
-3. 运行 `terraform apply` 命令。应用资源时，不建议使用 `terraform apply --auto-approve`。
+3. 运行 `terraform apply` 命令。在应用资源时，不推荐使用 `terraform apply --auto-approve`。
 
     ```shell
     $ terraform apply
@@ -102,7 +102,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_vpc_peering` 资源来创建和
 
     - 你可以检查配置与当前状态之间的差异。
     - 你还可以看到本次 `apply` 的结果。它将新增一个资源，不会有资源被更改或销毁。
-    - `known after apply` 表示你将在 `apply` 之后获得对应的值。
+    - `known after apply` 表示你会在 `apply` 之后获得对应的值。
 
 4. 如果你的计划没有问题，输入 `yes` 继续：
 
@@ -144,9 +144,9 @@ summary: 了解如何使用 `tidbcloud_dedicated_vpc_peering` 资源来创建和
     }
     ```
 
-## 导入 TiDB Cloud 专属 VPC 对等连接
+## 导入 TiDB Cloud Dedicated VPC 对等连接
 
-对于未被 Terraform 管理的 TiDB Cloud 专属 VPC 对等连接，你可以通过导入的方式让 Terraform 管理它。
+对于未被 Terraform 管理的 TiDB Cloud Dedicated VPC 对等连接，你可以通过导入将其纳入 Terraform 管理。
 
 例如，你可以导入一个不是通过 Terraform 创建的 VPC 对等连接。
 
@@ -186,11 +186,11 @@ summary: 了解如何使用 `tidbcloud_dedicated_vpc_peering` 资源来创建和
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
 
-现在你可以使用 Terraform 管理已导入的 TiDB Cloud 专属 VPC 对等连接。
+现在你可以使用 Terraform 管理已导入的 TiDB Cloud Dedicated VPC 对等连接。
 
-## 删除 TiDB Cloud 专属 VPC 对等连接
+## 删除 TiDB Cloud Dedicated VPC 对等连接
 
-要删除 TiDB Cloud 专属 VPC 对等连接，你可以删除 `tidbcloud_dedicated_vpc_peering` 资源的配置，然后使用 `terraform apply` 命令销毁该资源：
+要删除 TiDB Cloud Dedicated VPC 对等连接，你可以删除 `tidbcloud_dedicated_vpc_peering` 资源的配置，然后使用 `terraform apply` 命令销毁该资源：
 
 ```shell
   $ terraform apply
@@ -236,7 +236,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_vpc_peering` 资源来创建和
   Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
 ```
 
-此时，如果你运行 `terraform show` 命令，将不会有任何输出，因为该资源已被清除：
+现在，如果你运行 `terraform show` 命令，将不会有任何输出，因为该资源已经被清除：
 
 ```
 $ terraform show
