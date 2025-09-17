@@ -11,7 +11,7 @@ TiDB 是一个兼容 MySQL 的数据库，[DBeaver Community](https://dbeaver.io
 
 > **注意：**
 >
-> 本教程兼容 {}、{}、TiDB Cloud Dedicated 集群以及自托管 TiDB。
+> 本教程兼容 {{{ .starter }}}、{{{ .essential }}}、TiDB Cloud Dedicated 集群以及自托管 TiDB。
 
 ## 前提条件
 
