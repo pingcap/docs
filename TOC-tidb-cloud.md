@@ -242,6 +242,7 @@
     - [Import Sample Data (SQL Files) from Cloud Storage](/tidb-cloud/import-sample-data.md)
     - [Import CSV Files from Cloud Storage](/tidb-cloud/import-csv-files.md)
     - [Import Parquet Files from Cloud Storage](/tidb-cloud/import-parquet-files.md)
+    - [Import Snapshot Files from Cloud Storage](/tidb-cloud/import-snapshot-files.md)
     - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli.md)
   - Reference
     - [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/dedicated-external-storage.md)
