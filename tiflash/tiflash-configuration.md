@@ -450,6 +450,7 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 
 - Controls whether to enable the TiFlash resource control feature. When it is set to `true`, TiFlash uses the [pipeline execution model](/tiflash/tiflash-pipeline-model.md).
 - Default value: `true`
+- Value options: `true`, `false`
 
 ##### `task_scheduler_thread_soft_limit` <span class="version-mark">New in v6.0.0</span>
 
