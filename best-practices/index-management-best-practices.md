@@ -129,12 +129,6 @@ This enables historical tracking by comparing snapshots over time, helping you d
 
 Because TiDB is a distributed SQL database, query workloads are spread across multiple nodes. Each TiDB node tracks its own local index usage. For a global view of index performance, TiDB provides the [`CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md#cluster_tidb_index_usage) system table. This view consolidates index usage data from all TiDB nodes, ensuring that distributed query workloads are fully accounted for when optimizing indexing strategies.
 
-Unlike `TIDB_INDEX_USAGE`, which provides insights at the node level, this cluster-wide view `CLUSTER_TIDB_INDEX_USAGE` lets you do the following:
-
-- Detect inconsistencies in index usage. For example, an index might be frequently used on some nodes while remaining unused on others.
-- Analyze global index patterns for distributed queries, ensuring indexing decisions reflect real-world workload distribution.
-- Optimize indexing strategies across all nodes, improving query efficiency for multi-node deployments.
-
 Different TiDB nodes might experience different query workloads. An index that appears unused on some nodes might still be critical elsewhere. To segment index analysis by workload, run the following SQL statement:
 
 ```sql
