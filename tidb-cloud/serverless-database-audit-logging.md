@@ -104,7 +104,7 @@ The filter rule contains the following fields:
     - `tables`: A list of table filters. For more information, see [Table Filter](https://docs.pingcap.com/tidb/stable/table-filter/).
     - `statusCodes`: A list of status codes to filter audit events. `1` means success, and `0` means failure.
 
-The following tables shows all event classes in database audit logging:
+The following table shows all event classes in database audit logging:
 
 | Event Class   | Description                                                                                      | Parent-class   |
 |---------------|--------------------------------------------------------------------------------------------------|---------------|
