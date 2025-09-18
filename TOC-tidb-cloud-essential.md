@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: 35d5a6dc54318b02cb90c105d8b0a51ea475af43-->
+# 目录 <!--Corresponding EN commit: 30f10619d951f29048f30f5451e93b43c85a859c-->
 
 ## 快速开始
 
@@ -222,6 +222,7 @@
     - [从云存储导入示例数据（SQL 文件）](/tidb-cloud/import-sample-data-serverless.md)
     - [从云存储导入 CSV 文件](/tidb-cloud/import-csv-files-serverless.md)
     - [从云存储导入 Parquet 文件](/tidb-cloud/import-parquet-files-serverless.md)
+    - [从云存储导入快照文件](/tidb-cloud/import-snapshot-files-serverless.md)
     - [使用 MySQL CLI 导入](/tidb-cloud/import-with-mysql-cli-serverless.md)
   - 参考
     - [为 TiDB Cloud 配置外部存储访问](/tidb-cloud/serverless-external-storage.md)
@@ -286,7 +287,7 @@
   - Terraform
     - [Terraform 集成概览](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
     - [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
-    - [使用 `tidbcloud_serverless_cluster` 资源](/tidb-cloud/terraform-use-serverless-cluster-resource.md)
+    - [使用 `tidbcloud_serverless_cluster` 资源](/tidb-cloud/terraform-use-serverless-cluster-resource-manage-essential.md)
     - [使用 `tidbcloud_serverless_branch` 资源](/tidb-cloud/terraform-use-serverless-branch-resource.md)
     - [使用 `tidbcloud_serverless_export` 资源](/tidb-cloud/terraform-use-serverless-export-resource.md)
     - [使用 `tidbcloud_sql_user` 资源](/tidb-cloud/terraform-use-sql-user-resource.md)
