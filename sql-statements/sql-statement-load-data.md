@@ -62,6 +62,10 @@ If you are using TiDB Cloud, to use the `LOAD DATA` statement to load local data
     mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_path> --tls-version="TLSv1.2" -u root -h <host_name> -P 4000 -D test -p<your_password> --local-infile
     ```
 
+### `REPLACE` and `IGNORE`
+
+This sets how duplicate data is handled. With `REPLACE` existing data is overwritten and with `IGNORE` duplicate rows are ignored, keeping existing data. By default duplicate data leads to errors.
+
 ### S3 and GCS storage
 
 <CustomContent platform="tidb">
