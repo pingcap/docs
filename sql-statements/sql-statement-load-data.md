@@ -33,6 +33,9 @@ LoadDataStmt ::=
 
 LocalOpt ::= ('LOCAL')?
 
+DuplicateOpt ::=
+    ( 'IGNORE' | 'REPLACE' )?
+
 Fields ::=
     ('TERMINATED' 'BY' stringLit
     | ('OPTIONALLY')? 'ENCLOSED' 'BY' stringLit
