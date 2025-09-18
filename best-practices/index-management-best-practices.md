@@ -5,7 +5,7 @@ summary: Learn the best practices for managing and optimizing indexes, identifyi
 
 # Best Practices for Managing Indexes and Identifying Unused Indexes
 
-Indexes are essential for optimizing database query performance, reducing the need to scan large amounts of data. However, as applications evolve, business logic changes, and data volume grows, indexing inefficiencies emerge, including the following:
+Indexes are essential for optimizing database query performance, reducing the need to scan large amounts of data. However, as applications evolve, business logic changes, and data volume grows, the original index design can also encounter issues, including the following:
 
 - Unused indexes: these indexes are once relevant but are no longer selected by the query optimizer, consuming storage and adding unnecessary overhead to write operations.
 - Inefficient indexes: some indexes are used by the optimizer but scan more data than expected, increasing disk I/O and slowing down query performance.
@@ -105,7 +105,7 @@ By using the `TIDB_INDEX_USAGE` system table, you can gain detailed insights int
 
 ### Use `TIDB_INDEX_USAGE` effectively
 
-The following points help you use the `TIDB_INDEX_USAGE` system table effectively.
+The following points help you understand and use the `TIDB_INDEX_USAGE` system table correctly.
 
 #### Data updates are delayed
 
@@ -113,9 +113,7 @@ To minimize performance impact, `TIDB_INDEX_USAGE` does not update instantly. In
 
 #### Index usage data is not persisted
 
-The `TIDB_INDEX_USAGE` system table stores data in memory, meaning it does not persist across node restarts.
-
-When a TiDB node restarts, all index usage statistics from that node are cleared.
+The `TIDB_INDEX_USAGE` system table stores data in memory of each TiDB node, and is not persisted. When a TiDB node restarts, all index usage statistics from that node are cleared.
 
 #### Track historical data
 
@@ -244,7 +242,7 @@ An invisible index remains in the database but is ignored by the TiDB optimizer.
 
 Key benefits of invisible indexes are as follows:
 
-- **Safe index testing**: queries will no longer use the index, but it can be quickly restored if needed.
+- **Safe index testing**: queries will no longer use the index, but the related optimizer statistics are still maintained. You can quickly restore it at any time if needed.
 - **Zero disruption to index storage**: the index remains intact, ensuring no need for costly re-creation.
 - **Performance monitoring**: as a DBA, you can observe query behavior without the index before making a final decision.
 
