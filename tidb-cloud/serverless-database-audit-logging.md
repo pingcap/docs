@@ -153,7 +153,7 @@ You can enable audit logging for a {{{ .essential }}} cluster.
 
 4. Select the storage location of the audit logs and fill in the necessary information, then click **Test Connection and Next** or **Next**. For more information about the available storage locations, see [Audit logging locations](#audit-logging-locations).
 
-5. In the **Database Audit Logging Setting** dialog box, fill in the log file rotation and log redaction settings, and then click **Save**.
+5. In the **Database Audit Logging Settings** dialog box, fill in the log file rotation and log redaction settings, and then click **Save**.
 
 </div>
 
@@ -187,7 +187,7 @@ You can edit the audit logging for a {{{ .essential }}} cluster after enabling i
 
 3. On the **DB Audit Logging** page, click **Settings**.
 
-4. In the **Database Audit Logging Setting** dialog box, fill the log file rotation and log redaction settings, and then click **Save**.
+4. In the **Database Audit Logging Settings** dialog box, fill the log file rotation and log redaction settings, and then click **Save**.
 
 </div>
 
@@ -217,7 +217,7 @@ You can disable audit logging for a {{{ .essential }}} cluster.
 
 3. On the **DB Audit Logging** page, click **...** in the upper-right corner, and then click **Disable**.
 
-4. Click **Disable** in the dialog box to disable audit logging.
+4. In the **Disable DB Audit Logging** dialog box, click **Disable**.
 
 </div>
 
@@ -232,7 +232,7 @@ ticloud serverless audit-log config update -c <cluster-id> --disabled=true
 
 ## Manage audit logging filter rules
 
-You can create, edit, disable, and delete a filter rule.
+You can create, edit, disable, and delete a audit logging filter rule.
 
 ### Create a filter rule
 
@@ -251,7 +251,7 @@ To create a filter rule, define which users and events you want to capture in th
 
 3. On the **DB Audit Logging** page, click **Add Filter Rule**.
 
-4. Fill in the `Filter Name`, `SQL Users`, and `Filter Rules` fields in the **Add Filter Rule** dialog box, and then click **Confirm**. For more information about the fields, see [Audit logging filter rules](#audit-logging-filter-rules).
+4. Fill in the **Filter Name**, **SQL Users**, and **Filter Rule** fields in the **Add Filter Rule** dialog box, and then click **Confirm**. For more information about the fields, see [Audit logging filter rules](#audit-logging-filter-rules).
 
 </div>
 
@@ -279,7 +279,7 @@ ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-n
 
 3. On the **DB Audit Logging** page, find the filter rule you want to edit, click **...** in its row, and then click **Edit**.
 
-4. Fill in the `Filter Name` and `Filter Rules` fields in the **Edit Filter Rule** dialog box, and then click **Confirm**.
+4. Fill in the **Filter Name** and **Filter Rule** fields in the **Edit Filter Rule** dialog box, and then click **Confirm**.
 
 </div>
 
@@ -335,7 +335,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 
 3. On the **DB Audit Logging** page, choose the filter rule you want to delete and click **...**.
 
-4. Click **Delete** and then click **I understand. Delete it** in the dialog box to delete the filter rule.
+4. Click **Delete** and then click **I understand. Delete it** to delete the filter rule.
 
 </div>
 
