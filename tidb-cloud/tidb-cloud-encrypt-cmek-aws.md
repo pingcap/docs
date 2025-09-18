@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/tidb-cloud-encrypt-cmek']
 
 # 使用客户管理加密密钥（CMEK）在 AWS 上实现静态数据加密
 
-客户管理加密密钥（Customer-Managed Encryption Key，CMEK）允许你通过使用完全由你控制的对称加密密钥，来保护 TiDB Cloud 专属集群中的静态数据安全。该密钥被称为 CMEK 密钥。
+客户管理加密密钥（Customer-Managed Encryption Key，CMEK）允许你通过使用完全由你控制的对称加密密钥，来保护 TiDB Cloud Dedicated 集群中的静态数据安全。该密钥被称为 CMEK 密钥。
 
 一旦为项目启用 CMEK，该项目下创建的所有集群都会使用 CMEK 密钥对其静态数据进行加密。此外，这些集群生成的任何备份数据也会使用同一密钥进行加密。如果未启用 CMEK，TiDB Cloud 会使用托管密钥（escrow key）对集群中的所有静态数据进行加密。
 
@@ -18,7 +18,7 @@ aliases: ['/tidbcloud/tidb-cloud-encrypt-cmek']
 
 - 目前，TiDB Cloud 仅支持使用 AWS KMS 和 Azure Key Vault 提供 CMEK。
 - 若要使用 CMEK，需在创建项目时启用 CMEK，并在创建集群前完成 CMEK 相关配置。无法为已存在的项目启用 CMEK。
-- 目前，在已启用 CMEK 的项目中，只能创建托管在 AWS 和 Azure 上的 [TiDB Cloud 专属集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)。
+- 目前，在已启用 CMEK 的项目中，只能创建托管在 AWS 和 Azure 上的 [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)。
 - 目前，在已启用 CMEK 的项目中，不支持 [双区域备份](/tidb-cloud/backup-and-restore-concepts.md#dual-region-backup)。
 - 目前，在已启用 CMEK 的项目中，可以在 AWS 和 Azure 上启用 CMEK。对于每个云服务商，每个区域只能配置一个唯一的加密密钥。你只能在已为所选云服务商配置加密密钥的区域创建集群。
 
@@ -143,7 +143,7 @@ aliases: ['/tidbcloud/tidb-cloud-encrypt-cmek']
 
 ### 步骤 3. 创建集群
 
-在 [步骤 1](#step-1-create-a-cmek-enabled-project) 创建的项目下，创建托管在 AWS 上的 TiDB Cloud 专属集群。详细步骤请参考 [创建 TiDB Cloud 专属集群](/tidb-cloud/create-tidb-cluster.md)。请确保集群所在区域与 [步骤 2](#step-2-complete-the-cmek-configuration-of-the-project) 中配置的区域一致。
+在 [步骤 1](#step-1-create-a-cmek-enabled-project) 创建的项目下，创建托管在 AWS 上的 TiDB Cloud Dedicated 集群。详细步骤请参考 [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)。请确保集群所在区域与 [步骤 2](#step-2-complete-the-cmek-configuration-of-the-project) 中配置的区域一致。
 
 > **注意：**
 >

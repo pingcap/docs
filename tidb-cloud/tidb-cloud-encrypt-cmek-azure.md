@@ -5,7 +5,7 @@ summary: 了解如何使用客户管理的加密密钥（CMEK）对托管在 Azu
 
 # 在 Azure 上使用客户管理的加密密钥进行静态数据加密
 
-客户管理的加密密钥（Customer-Managed Encryption Key，CMEK）允许你通过使用完全由你控制的对称加密密钥，来保护 TiDB Cloud 专属集群中的静态数据。该密钥被称为 CMEK 密钥。
+客户管理的加密密钥（Customer-Managed Encryption Key，CMEK）允许你通过使用完全由你控制的对称加密密钥，来保护 TiDB Cloud Dedicated 集群中的静态数据。该密钥被称为 CMEK 密钥。
 
 一旦为项目启用 CMEK，该项目下创建的所有集群都会使用 CMEK 密钥对其静态数据进行加密。此外，这些集群生成的任何备份数据也会使用同一密钥进行加密。如果未启用 CMEK，TiDB Cloud 会使用托管密钥（escrow key）对你集群中的所有静态数据进行加密。
 
