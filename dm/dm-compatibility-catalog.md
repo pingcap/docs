@@ -1,6 +1,6 @@
 ---
 title: Compatibility Catalog of TiDB Data Migration
-summary: This document describes the compatibility of DM with upstream and downstream databases.
+summary: This document describes the compatibility of TiDB Data Migration (DM) with upstream and downstream databases.
 ---
 
 # Compatibility Catalog of TiDB Data Migration
@@ -8,7 +8,7 @@ summary: This document describes the compatibility of DM with upstream and downs
 DM supports migrating data from different sources to TiDB clusters. Based on the data source type, DM has four compatibility levels:
 
 - **Generally available (GA)**: The application scenario has been verified and passed GA testing.
-- **Experimental**: The common application scenarios have been verified, but coverage is limited or involves only a small number of users. Occasional issues are possible, so you need to verify compatibility in your specific scenario.
+- **Experimental**: Common application scenarios have been verified, but coverage is limited or involves only a small number of users. Occasional issues are possible, so you need to verify compatibility in your specific scenario.
 - **Not tested**: DM aims to be compatible with the MySQL protocol and binlog. However, not all MySQL forks or versions are included in the DM test matrix. If a fork or version uses MySQL-compatible protocols and binlog formats, it is expected to work, but you must verify compatibility in your own environment before use.
 - **Incompatible**: DM has known blocking issues, so production use is not recommended.
 
@@ -27,7 +27,7 @@ DM supports migrating data from different sources to TiDB clusters. Based on the
 ### Incompatibility with foreign key CASCADE operations
 
 - DM creates foreign key **constraints** on the target, but they are not enforced while applying transactions because DM sets the session variable [`foreign_key_checks=OFF`](/system-variables.md#foreign_key_checks).
-- DM does **not** support `ON DELETE/UPDATE CASCADE` behavior by default, and enabling `foreign_key_checks` via a DM task session variable is not recommended. If your workload relies on cascades, **do not assume** that cascade effects will be replicated.
+- DM does **not** support `ON DELETE CASCADE` or `ON UPDATE CASCADE` behavior by default, and enabling `foreign_key_checks` via a DM task session variable is not recommended. If your workload relies on cascades, **do not assume** that cascade effects will be replicated.
 
 ### MariaDB notes
 
