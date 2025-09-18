@@ -1,28 +1,28 @@
 ---
 title: 使用 `tidbcloud_serverless_cluster` 资源
-summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修改 TiDB Cloud Starter 集群。
+summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修改 TiDB Cloud Essential 集群。
 ---
 
 # 使用 `tidbcloud_serverless_cluster` 资源
 
-本文档介绍如何使用 `tidbcloud_serverless_cluster` 资源管理 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 集群。
+本文档介绍如何使用 `tidbcloud_serverless_cluster` 资源管理 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 集群。
 
 你还将学习如何通过 `tidbcloud_projects` 数据源获取所需的信息。
 
 `tidbcloud_serverless_cluster` 资源的功能包括：
 
-- 创建 TiDB Cloud Starter 集群
-- 修改 TiDB Cloud Starter 集群
-- 导入 TiDB Cloud Starter 集群
-- 删除 TiDB Cloud Starter 集群
+- 创建 TiDB Cloud Essential 集群
+- 修改 TiDB Cloud Essential 集群
+- 导入 TiDB Cloud Essential 集群
+- 删除 TiDB Cloud Essential 集群
 
 ## 前置条件
 
-- [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0 或更高版本。
+- [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.2 或更高版本。
 
 ## 使用 `tidbcloud_projects` 数据源获取项目 ID
 
-每个 TiDB 集群都属于一个项目。在创建 TiDB Cloud Starter 集群之前，你需要获取要创建集群的项目 ID。如果未指定 `project_id`，则会使用默认项目。
+每个 TiDB 集群都属于一个项目。在创建 TiDB Cloud Essential 集群之前，你需要获取要创建集群的项目 ID。如果未指定 `project_id`，则会使用默认项目。
 
 要检索所有可用项目的信息，可以按如下方式使用 `tidbcloud_projects` 数据源：
 
@@ -56,13 +56,13 @@ summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修
 
         - 若要使用项目数据源，将数据源类型设置为 `tidbcloud_projects`。
         - 数据源名称可以根据需要自定义，例如 `"example_project"`。
-        - 对于 `tidbcloud_projects` 数据源，可以使用 `page` 和 `page_size` 属性来限制你想要查看的最大项目数。
+        - 对于 `tidbcloud_projects` 数据源，可以使用 `page` 和 `page_size` 属性来限制你想要查看的最大项目数量。
 
     - 使用 `output` 块定义要在输出中显示的数据源信息，并将信息暴露给其他 Terraform 配置使用。
 
-        `output` 块的作用类似于编程语言中的返回值。更多详情可参考 [Terraform 官方文档](https://www.terraform.io/language/values/outputs)。
+        `output` 块的作用类似于编程语言中的返回值。详见 [Terraform 文档](https://www.terraform.io/language/values/outputs)。
 
-    若要获取所有资源和数据源的可用配置，请参见 [Terraform provider 配置文档](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)。
+    要获取所有资源和数据源的可用配置，请参阅 [Terraform provider 配置文档](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)。
 
 2. 运行 `terraform apply` 命令以应用配置。你需要在确认提示时输入 `yes` 以继续。
 
@@ -119,9 +119,9 @@ summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修
 
 现在，你可以从输出中获取所有可用的项目。复制你需要的项目 ID。
 
-## 创建 TiDB Cloud Starter 集群
+## 创建 TiDB Cloud Essential 集群
 
-你可以使用 `tidbcloud_serverless_cluster` 资源来创建 TiDB Cloud Starter 集群。
+你可以使用 `tidbcloud_serverless_cluster` 资源来创建 TiDB Cloud Essential 集群。
 
 1. 为集群创建一个目录并进入该目录。
 
@@ -146,8 +146,9 @@ summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修
     resource "tidbcloud_serverless_cluster" "example" {
       project_id = "1372813089454000000"
       display_name = "test-tf"
-      spending_limit = {
-        monthly = 1
+      auto_scaling = {
+        min_rcu = 3000
+        max_rcu = 4000
       }
       region = {
         name = "regions/aws-us-east-1"
@@ -159,9 +160,9 @@ summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修
 
     - 若要使用 `tidbcloud_serverless_cluster` 资源，将资源类型设置为 `tidbcloud_serverless_cluster`。
     - 资源名称可以根据需要自定义，例如 `example`。
-    - 资源详情可根据项目 ID 及 [`tidbcloud_serverless_cluster` 规范](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster) 进行配置。
+    - 资源详情可以根据项目 ID 以及 [`tidbcloud_serverless_cluster` 规范](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster) 进行配置。要创建 TiDB Cloud Essential 集群，必须在资源详情中指定 `auto_scaling` 属性。
 
-3. 运行 `terraform apply` 命令。应用资源时，不建议使用 `terraform apply --auto-approve`。
+3. 运行 `terraform apply` 命令。应用资源时不建议使用 `terraform apply --auto-approve`。
 
     ```shell
     $ terraform apply
@@ -189,8 +190,9 @@ summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修
                 + name           = "regions/aws-us-east-1"
                 + region_id      = (known after apply)
             }
-            + spending_limit          = {
-                + monthly = 1
+            + auto_scaling            = {
+                + max_rcu = 4000
+                + min_rcu = 3000
             }
             + state                   = (known after apply)
             + update_time             = (known after apply)
@@ -211,7 +213,7 @@ summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修
 
     - 你可以检查配置与当前状态之间的差异。
     - 你还可以看到本次 `apply` 的结果。它将新增一个资源，不会有资源被更改或销毁。
-    - `known after apply` 表示在 `apply` 之后你将获得对应的值。
+    - `known after apply` 表示你将在 `apply` 后获得相应的值。
 
 4. 如果你的计划没有问题，输入 `yes` 继续：
 
@@ -278,8 +280,9 @@ summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修
             name           = "regions/aws-us-east-1"
             region_id      = "us-east-1"
         }
-        spending_limit          = {
-            monthly = 1
+        auto_scaling = {
+            min_rcu = 3000
+            max_rcu = 4000
         }
         state                   = "ACTIVE"
         update_time             = "2025-06-16T07:04:48Z"
@@ -288,23 +291,24 @@ summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修
     }
     ```
 
-## 修改 TiDB Cloud Starter 集群
+## 修改 TiDB Cloud Essential 集群
 
-对于 TiDB Cloud Starter 集群，你可以使用 Terraform 管理资源。可修改的参数包括：
+对于 TiDB Cloud Essential 集群，你可以使用 Terraform 管理资源。可修改的参数包括：
 
 - `display_name`：集群的显示名称
-- `spending_limit`：集群的消费上限
-- `endpoints.public.disabled`：是否禁用公网连接
+- `auto_scaling`：集群的自动扩缩容配置
+- `endpoints.public.disabled`：是否禁用公网连接端点
 - `automated_backup_policy.start_time`：自动备份开始的 UTC 时间，格式为 `HH:mm`
 
-要修改 TiDB Cloud Starter 集群，可以修改 `tidbcloud_serverless_cluster` 资源的配置，然后使用 `terraform apply` 命令应用更改。例如，你可以如下修改 `display_name` 和 `spending_limit`：
+要修改 TiDB Cloud Essential 集群，可以修改 `tidbcloud_serverless_cluster` 资源的配置，然后使用 `terraform apply` 命令应用更改。例如，你可以如下修改 `display_name` 和 `auto_scaling`：
 
 ```
 resource "tidbcloud_serverless_cluster" "example" {
   project_id = "1372813089454000000"
   display_name = "test-tf-modified"
-  spending_limit = {
-    monthly = 2
+  auto_scaling = {
+    min_rcu = 4000
+    max_rcu = 5000
   }
   region = {
     name = "regions/aws-us-east-1"
@@ -335,8 +339,9 @@ Terraform will perform the following actions:
           - "tidb.cloud/organization" = "1372813089187041280"
           - "tidb.cloud/project"      = "1372813089454543324"
         } -> (known after apply)
-      ~ spending_limit          = {
-          ~ monthly = 1 -> 2
+      ~ auto_scaling            = {
+          ~ min_rcu = 3000 -> 4000
+          ~ max_rcu = 4000 -> 5000
         }
       ~ state                   = "ACTIVE" -> (known after apply)
       ~ update_time             = "2025-06-16T07:04:57Z" -> (known after apply)
@@ -407,8 +412,9 @@ resource "tidbcloud_serverless_cluster" "example" {
         name           = "regions/aws-us-east-1"
         region_id      = "us-east-1"
     }
-    spending_limit          = {
-        monthly = 2
+    auto_scaling = {
+        min_rcu = 4000
+        max_rcu = 5000
     }
     state                   = "ACTIVE"
     update_time             = "2025-06-16T07:04:57Z"
@@ -417,13 +423,13 @@ resource "tidbcloud_serverless_cluster" "example" {
 }
 ```
 
-## 导入 TiDB Cloud Starter 集群
+## 导入 TiDB Cloud Essential 集群
 
-对于未被 Terraform 管理的 TiDB Cloud Starter 集群，你可以通过导入将其纳入 Terraform 管理。
+对于未被 Terraform 管理的 TiDB Cloud Essential 集群，你可以通过导入将其纳入 Terraform 管理。
 
 1. 为新的 `tidbcloud_serverless_cluster` 资源添加 import 块。
 
-    在你的 `.tf` 文件中添加如下 import 块，将 `example` 替换为你期望的资源名称，将 `${id}` 替换为集群 ID：
+    在你的 `.tf` 文件中添加如下 import 块，将 `example` 替换为你想要的资源名称，将 `${id}` 替换为集群 ID：
 
     ```
     import {
@@ -457,9 +463,9 @@ resource "tidbcloud_serverless_cluster" "example" {
 
 现在你可以使用 Terraform 管理已导入的集群。
 
-## 删除 TiDB Cloud Starter 集群
+## 删除 TiDB Cloud Essential 集群
 
-要删除 TiDB Cloud Starter 集群，可以删除 `tidbcloud_serverless_cluster` 资源的配置，然后使用 `terraform apply` 命令销毁该资源：
+要删除 TiDB Cloud Essential 集群，可以删除 `tidbcloud_serverless_cluster` 资源的配置，然后使用 `terraform apply` 命令销毁资源：
 
 ```shell
 $ terraform apply
@@ -516,8 +522,9 @@ Terraform will perform the following actions:
           - name           = "regions/aws-us-east-1" -> null
           - region_id      = "us-east-1" -> null
         } -> null
-      - spending_limit          = {
-          - monthly = 2 -> null
+      - auto_scaling            = {
+          - min_rcu = 4000 -> null
+          - max_rcu = 5000 -> null
         } -> null
       - state                   = "ACTIVE" -> null
       - update_time             = "2025-06-16T07:04:57Z" -> null

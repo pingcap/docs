@@ -7,7 +7,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_cluster` 资源来创建和修�
 
 本文档介绍如何使用 `tidbcloud_dedicated_cluster` 资源管理 [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)。
 
-此外，你还将学习如何通过 `tidbcloud_projects` 数据源获取所需信息，并使用 `tidbcloud_dedicated_node_group` 资源管理 TiDB Cloud Dedicated 集群的 TiDB 节点组。
+你还将学习如何通过 `tidbcloud_projects` 数据源获取所需信息，并使用 `tidbcloud_dedicated_node_group` 资源管理 TiDB Cloud Dedicated 集群的 TiDB 节点组。
 
 `tidbcloud_dedicated_cluster` 资源的功能包括：
 
@@ -26,7 +26,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_cluster` 资源来创建和修�
 
 要获取所有可用项目的信息，可以按如下方式使用 `tidbcloud_projects` 数据源：
 
-1. 在你 [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) 时创建的 `main.tf` 文件中，添加如下 `data` 和 `output` 块：
+1. 在你 [获取 TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) 时创建的 `main.tf` 文件中，添加如下的 `data` 和 `output` 块：
 
     ```
     terraform {
@@ -55,18 +55,18 @@ summary: 了解如何使用 `tidbcloud_dedicated_cluster` 资源来创建和修�
     - 使用 `data` 块定义 TiDB Cloud 的数据源，包括数据源类型和数据源名称。
 
         - 若要使用项目数据源，将数据源类型设置为 `tidbcloud_projects`。
-        - 数据源名称可根据需要自定义，例如 `"example_project"`。
+        - 数据源名称可以根据需要自定义，例如 `"example_project"`。
         - 对于 `tidbcloud_projects` 数据源，可以使用 `page` 和 `page_size` 属性限制你想要查看的最大项目数量。
 
     - 使用 `output` 块定义要在输出中显示的数据源信息，并将信息暴露给其他 Terraform 配置使用。
 
-        `output` 块的作用类似于编程语言中的返回值。更多信息请参见 [Terraform 文档](https://www.terraform.io/language/values/outputs)。
+        `output` 块的作用类似于编程语言中的返回值。更多信息请参见 [Terraform 官方文档](https://www.terraform.io/language/values/outputs)。
 
     若要获取所有资源和数据源的可用配置，请参见 [Terraform provider 配置文档](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)。
 
-2. 运行 `terraform apply` 命令以应用配置。你需要在确认提示时输入 `yes` 以继续。
+2. 运行 `terraform apply` 命令以应用配置。在确认提示时需要输入 `yes` 以继续。
 
-    若要跳过提示，可使用 `terraform apply --auto-approve`：
+    若要跳过提示，可以使用 `terraform apply --auto-approve`：
 
     ```shell
     $ terraform apply --auto-approve
@@ -130,7 +130,9 @@ summary: 了解如何使用 `tidbcloud_dedicated_cluster` 资源来创建和修�
 
 1. 为集群创建一个目录并进入该目录。
 
-2. 创建 `cluster.tf` 文件：
+2. 创建一个 `cluster.tf` 文件。
+
+    以下是 `cluster.tf` 文件的示例：
 
     ```
     terraform {
@@ -167,9 +169,8 @@ summary: 了解如何使用 `tidbcloud_dedicated_cluster` 资源来创建和修�
     使用 `resource` 块定义 TiDB Cloud 的资源，包括资源类型、资源名称和资源详情。
 
     - 若要使用 `tidbcloud_dedicated_cluster` 资源，将资源类型设置为 `tidbcloud_dedicated_cluster`。
-    - 资源名称可根据需要自定义，例如 `example_cluster`。
-    - 资源详情可根据项目 ID 及 TiDB Cloud Dedicated 集群的规格信息进行配置。
-    - 获取 TiDB Cloud Dedicated 集群规格信息，请参见 [tidbcloud_dedicated_cluster (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_cluster)。
+    - 资源名称可以根据需要自定义，例如 `example_cluster`。
+    - 资源详情可根据项目 ID 及 [`tidbcloud_dedicated_cluster` 规范](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_cluster) 进行配置。
 
 3. 运行 `terraform apply` 命令。应用资源时不建议使用 `terraform apply --auto-approve`。
 
@@ -224,13 +225,13 @@ summary: 了解如何使用 `tidbcloud_dedicated_cluster` 资源来创建和修�
       Enter a value:
     ```
 
-    在上述结果中，Terraform 会为你生成一个执行计划，描述 Terraform 将要执行的操作：
+    在上述结果中，Terraform 为你生成了一个执行计划，描述了 Terraform 将要执行的操作：
 
     - 你可以检查配置与当前状态之间的差异。
-    - 你也可以看到本次 `apply` 的结果。将新增一个资源，不会有资源被更改或销毁。
+    - 你也可以看到本次 `apply` 的结果。将会新增一个资源，没有资源被更改或销毁。
     - `known after apply` 表示你将在 `apply` 后获得该值。
 
-4. 如果计划中的内容无误，输入 `yes` 继续：
+4. 如果计划中的内容没有问题，输入 `yes` 继续：
 
     ```shell
     Do you want to perform these actions?
@@ -310,7 +311,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_cluster` 资源来创建和修�
     }
     ```
 
-6. 如果你想从远端同步状态，运行 `terraform refresh` 命令以更新状态，然后运行 `terraform state show tidbcloud_dedicated_cluster.${resource-name}` 命令查看状态。
+6. 如果你想从远端同步状态，运行 `terraform refresh` 命令以更新状态，然后运行 `terraform state show tidbcloud_dedicated_cluster.${resource-name}` 命令显示状态。
 
     ```shell
     $ terraform refresh
@@ -480,7 +481,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_cluster` 资源来创建和修�
 
     在上述执行计划中，将会添加 TiFlash，且有一个资源会被更改。
 
-3. 如果计划中的内容无误，输入 `yes` 继续：
+3. 如果计划中的内容没有问题，输入 `yes` 继续：
 
     ```shell
       Enter a value: yes
@@ -569,7 +570,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_cluster` 资源来创建和修�
 
 1. 在 [创建集群](#create-a-tidb-cloud-dedicated-cluster) 时使用的 `cluster.tf` 文件中，编辑 `tidb_node_setting`、`tikv_node_setting` 和 `tiflash_node_setting` 的配置。
 
-    例如，若要增加 1 个 TiDB 节点、3 个 TiKV 节点（TiKV 节点数需为 3 的倍数，因为其扩缩容步长为 3），以及 1 个 TiFlash 节点，可以按如下方式编辑配置：
+    例如，若要增加 1 个 TiDB 节点、增加 3 个 TiKV 节点（TiKV 节点数需为 3 的倍数，因为其扩缩容步长为 3），以及增加 1 个 TiFlash 节点，可以按如下方式编辑配置：
 
     ```
      tidb_node_setting = {
@@ -668,7 +669,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_cluster` 资源来创建和修�
 
 ### 暂停或恢复集群
 
-当集群状态为 `ACTIVE` 时可以暂停集群，状态为 `PAUSED` 时可以恢复集群。
+当集群状态为 `ACTIVE` 时可以暂停集群，当集群状态为 `PAUSED` 时可以恢复集群。
 
 - 设置 `paused = true` 可暂停集群。
 - 设置 `paused = false` 可恢复集群。
@@ -919,7 +920,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_cluster` 资源来创建和修�
 
 1. 在 [创建集群](#create-a-tidb-cloud-dedicated-cluster) 时使用的 `cluster.tf` 文件中，编辑 `tidbcloud_dedicated_node_group` 的配置。
 
-    例如，将节点数更改为 `1`，可按如下方式编辑配置：
+    例如，若要将节点数更改为 `1`，可按如下方式编辑配置：
 
     ```
     resource "tidbcloud_dedicated_node_group" "example_group" {
@@ -1050,9 +1051,9 @@ $ terraform show
 
 ## 导入集群
 
-对于未被 Terraform 管理的 TiDB 集群，你可以通过导入的方式让 Terraform 管理它。
+对于未被 Terraform 管理的 TiDB 集群，你可以通过导入将其纳入 Terraform 管理。
 
-导入未由 Terraform 创建的集群，操作如下：
+按如下方式导入未由 Terraform 创建的集群：
 
 1. 为新的 `tidbcloud_dedicated_cluster` 资源添加 import 块。
 
@@ -1191,7 +1192,7 @@ $ terraform show
     Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
   ```
 
-现在，如果你运行 `terraform show` 命令，将不会显示任何受管资源，因为资源已被清除：
+现在，如果你运行 `terraform show` 命令，将不会有任何托管资源，因为资源已被清除：
 
 ```
 $ terraform show

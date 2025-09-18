@@ -7,9 +7,9 @@ summary: 了解如何使用 `tidbcloud_dedicated_network_container` 资源来创
 
 本文档介绍了如何使用 `tidbcloud_dedicated_network_container` 资源来管理 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 网络容器。
 
-网络容器是一个逻辑网络资源，允许你为特定项目和区域定义和管理一个 CIDR 块（IP 地址范围）。该 CIDR 块用于为 TiDB Cloud Dedicated 集群创建 VPC，并且在该区域设置 VPC 对等连接之前是必需的。
+网络容器是一个逻辑网络资源，可以让你为特定项目和区域定义和管理一个 CIDR 块（IP 地址范围）。该 CIDR 块用于为 TiDB Cloud Dedicated 集群创建 VPC，并且在该区域设置 VPC 对等连接之前是必需的。
 
-在向某个区域添加 VPC 对等连接请求之前，你必须先为该区域设置 CIDR 块并创建首个 TiDB Cloud Dedicated 集群。创建第一个集群后，TiDB Cloud 会自动创建关联的 VPC，从而使你能够与你应用的 VPC 建立对等连接。
+在向某个区域添加 VPC 对等连接请求之前，你必须先为该区域设置 CIDR 块并创建首个 TiDB Cloud Dedicated 集群。创建第一个集群后，TiDB Cloud 会自动创建关联的 VPC，从而使你能够与应用的 VPC 建立对等连接。
 
 `tidbcloud_dedicated_network_container` 资源的功能包括：
 
@@ -17,7 +17,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_network_container` 资源来创
 - 导入 TiDB Cloud Dedicated 网络容器。
 - 删除 TiDB Cloud Dedicated 网络容器。
 
-> **Note:**
+> **注意：**
 >
 > 如果 TiDB Cloud Dedicated 网络容器的状态为 `ACTIVE`，则无法修改或删除。请确保在应用 `tidbcloud_network_container` 资源前，其配置是正确的。
 
@@ -99,7 +99,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_network_container` 资源来创
 
     - 你可以检查配置与当前状态之间的差异。
     - 你还可以看到本次 `apply` 的结果。它将新增一个资源，不会有资源被更改或销毁。
-    - `known after apply` 表示你会在 `apply` 后获得对应的值。
+    - `known after apply` 表示你将在 `apply` 后获得对应的值。
 
 4. 如果你的计划内容无误，输入 `yes` 继续：
 
@@ -138,7 +138,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_network_container` 资源来创
 
 ## 导入 TiDB Cloud Dedicated 网络容器
 
-对于未被 Terraform 管理的 TiDB Cloud Dedicated 网络容器，你可以通过导入的方式让 Terraform 管理它。
+对于未被 Terraform 管理的 TiDB Cloud Dedicated 网络容器，你可以通过导入操作将其纳入 Terraform 管理。
 
 例如，你可以导入一个不是通过 Terraform 创建的网络容器。
 
@@ -163,7 +163,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_network_container` 资源来创
 
     上述命令中不要指定已存在的 `.tf` 文件名，否则 Terraform 会返回错误。
 
-    然后，`generated.tf` 文件会在当前目录下生成，包含了被导入资源的配置信息。
+    然后，当前目录下会生成 `generated.tf` 文件，其中包含了被导入资源的配置信息。
 
 3. 审查并应用生成的配置。
 
@@ -178,7 +178,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_network_container` 资源来创
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
 
-现在你可以使用 Terraform 管理被导入的 TiDB Cloud Dedicated 网络容器了。
+现在你可以使用 Terraform 管理已导入的 TiDB Cloud Dedicated 网络容器。
 
 ## 删除 TiDB Cloud Dedicated 网络容器
 

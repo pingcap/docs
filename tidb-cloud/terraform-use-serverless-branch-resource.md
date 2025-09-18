@@ -13,7 +13,7 @@ summary: 了解如何使用 serverless branch 资源来创建和修改 TiDB Clou
 - 导入 TiDB Cloud Starter 或 TiDB Cloud Essential 分支。
 - 删除 TiDB Cloud Starter 或 TiDB Cloud Essential 分支。
 
-> **Note:**
+> **注意：**
 >
 > `tidbcloud_serverless_branch` 资源无法被修改。如果你想更改 serverless branch 资源的配置，需要先删除现有资源，再创建一个新的资源。
 
@@ -55,12 +55,12 @@ summary: 了解如何使用 serverless branch 资源来创建和修改 TiDB Clou
 
     使用 `resource` 块定义 TiDB Cloud 的资源，包括资源类型、资源名称和资源详情。
 
-    - 要使用 serverless branch 资源，将资源类型设置为 `tidbcloud_serverless_branch`。
+    - 要使用 serverless branch 资源，需要将资源类型设置为 `tidbcloud_serverless_branch`。
     - 资源名称可以根据需要自定义，例如 `example`。
     - 资源详情可以根据 serverless branch 规范信息进行配置。
     - 获取 serverless branch 规范信息，请参见 [tidbcloud_serverless_branch (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_branch)。
 
-3. 运行 `terraform apply` 命令。应用资源时，不建议使用 `terraform apply --auto-approve`。
+3. 运行 `terraform apply` 命令。在应用资源时，不推荐使用 `terraform apply --auto-approve`。
 
     ```shell
     $ terraform apply
@@ -98,7 +98,7 @@ summary: 了解如何使用 serverless branch 资源来创建和修改 TiDB Clou
 
     在上述结果中，Terraform 为你生成了一个执行计划，描述了 Terraform 将要执行的操作：
 
-    - 你可以检查配置与当前状态之间的差异。
+    - 你可以检查配置和状态之间的差异。
     - 你还可以看到本次 `apply` 的结果。它将新增一个资源，不会有资源被更改或销毁。
     - `known after apply` 表示在 `apply` 之后你将获得对应的值。
 
@@ -164,7 +164,7 @@ summary: 了解如何使用 serverless branch 资源来创建和修改 TiDB Clou
 
 导入未通过 Terraform 创建的 TiDB Cloud Starter 或 TiDB Cloud Essential 分支，操作如下：
 
-1. 为新的 `tidbcloud_serverless_branch` 资源添加 import 块。
+1. 为新的 `tidbcloud_serverless_branch` 资源添加一个 import 块。
 
     在你的 `.tf` 文件中添加如下 import 块，将 `example` 替换为你期望的资源名称，将 `${id}` 替换为 `cluster_id,branch_id` 的格式：
 
@@ -183,7 +183,7 @@ summary: 了解如何使用 serverless branch 资源来创建和修改 TiDB Clou
       terraform plan -generate-config-out=generated.tf
       ```
 
-    上述命令中不要指定已存在的 `.tf` 文件名，否则 Terraform 会返回错误。
+    在上述命令中不要指定已存在的 `.tf` 文件名，否则 Terraform 会返回错误。
 
 3. 审查并应用生成的配置。
 

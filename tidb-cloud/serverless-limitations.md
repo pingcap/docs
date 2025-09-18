@@ -29,7 +29,7 @@ TiDB Cloud Starter 和 Essential 支持几乎所有 TiDB 支持的工作负载�
 
 ### 加密
 
-- 你在 TiDB Cloud Starter 或 TiDB Cloud Essential 集群中持久化的数据，会使用管理你集群的云服务商所提供的加密工具进行加密。对于 TiDB Cloud Starter（消费额度 > 0）和 TiDB Cloud Essential 集群，在集群创建过程中可选启用第二层加密，为默认的静态加密提供额外的安全保障。
+- 你在 TiDB Cloud Starter 或 TiDB Cloud Essential 集群中持久化的数据，使用由管理你集群的云服务商提供的加密工具进行加密。对于 TiDB Cloud Starter（消费额度 > 0）和 TiDB Cloud Essential 集群，在集群创建过程中可选启用第二层加密，为默认的静态加密提供额外的安全保障。
 - 目前不支持使用 [客户自管加密密钥（CMEK）](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)。
 
 ### 维护窗口
@@ -44,7 +44,7 @@ TiDB Cloud Starter 和 Essential 支持几乎所有 TiDB 支持的工作负载�
 
 ### 自助升级
 
-- TiDB Cloud Starter 和 TiDB Cloud Essential 是 TiDB 的全托管部署。TiDB Cloud Starter 和 TiDB Cloud Essential 的主版本和小版本升级均由 TiDB Cloud 负责，用户无法自行发起升级。
+- TiDB Cloud Starter 和 TiDB Cloud Essential 是 TiDB 的全托管部署。TiDB Cloud Starter 和 TiDB Cloud Essential 的主版本和小版本升级由 TiDB Cloud 统一管理，用户无法自行发起升级。
 
 ### 流式数据
 
@@ -62,9 +62,9 @@ TiDB Cloud Starter 和 Essential 支持几乎所有 TiDB 支持的工作负载�
 
 ## 使用配额
 
-在 TiDB Cloud 的每个组织下，默认最多可以创建 5 个 [免费 TiDB Cloud Starter 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)。如需创建更多 TiDB Cloud Starter 集群，你需要添加信用卡并为使用量 [设置每月消费额度](/tidb-cloud/manage-serverless-spend-limit.md)。
+在 TiDB Cloud 的每个组织中，默认最多可以创建 5 个 [免费 TiDB Cloud Starter 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)。如需创建更多 TiDB Cloud Starter 集群，你需要添加信用卡并为使用量 [设置每月消费额度](/tidb-cloud/manage-serverless-spend-limit.md)。
 
-对于你组织下的前 5 个 TiDB Cloud Starter 集群，TiDB Cloud 为每个集群提供如下免费使用配额：
+对于你组织中的前 5 个 TiDB Cloud Starter 集群，TiDB Cloud 为每个集群提供如下免费使用配额：
 
 - 行存储：5 GiB
 - 列存储：5 GiB
@@ -72,10 +72,10 @@ TiDB Cloud Starter 和 Essential 支持几乎所有 TiDB 支持的工作负载�
 
 Request Unit（RU）是用于衡量查询或事务资源消耗的单位。它是一种指标，可以帮助你估算处理特定数据库请求所需的计算资源。Request Unit 也是 TiDB Cloud Starter 服务的计费单位。
 
-一旦集群达到其使用配额，将立即拒绝所有新的连接请求，直到你 [提升配额](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) 或新月开始时用量被重置。已在达到配额前建立的连接会保持活跃，但会受到限流影响。
+一旦集群达到其使用配额，将立即拒绝所有新的连接尝试，直到你 [增加配额](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) 或新月开始时用量被重置。已在达到配额前建立的连接会保持活跃，但会受到限流影响。
 
 如需了解不同资源（包括读、写、SQL CPU 和网络出口）的 RU 消耗、定价详情及限流信息，请参阅 [TiDB Cloud Starter Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)。
 
-如果你希望创建配额更高的 TiDB Cloud Starter 集群，可以在集群创建页面设置每月消费额度。更多信息请参见 [创建 TiDB Cloud Starter 集群](/tidb-cloud/create-tidb-cluster-serverless.md)。
+如果你希望创建配额更高的 TiDB Cloud Starter 集群，可以在集群创建页面设置每月消费额度。更多信息请参阅 [创建 TiDB Cloud Starter 集群](/tidb-cloud/create-tidb-cluster-serverless.md)。
 
-在创建 TiDB Cloud Starter 集群后，你仍然可以在集群概览页面查看和编辑消费额度。更多信息请参见 [管理 TiDB Cloud Starter 集群的消费额度](/tidb-cloud/manage-serverless-spend-limit.md)。
+集群创建后，你仍然可以在集群概览页面查看和编辑消费额度。更多信息请参阅 [管理 TiDB Cloud Starter 集群的消费额度](/tidb-cloud/manage-serverless-spend-limit.md)。
