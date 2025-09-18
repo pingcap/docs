@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: 3d8a0e345ee4eee02da096908dca0ae685b3153e-->
+# 目录 <!--Corresponding EN commit: 30f10619d951f29048f30f5451e93b43c85a859c-->
 
 ## 快速开始
 
@@ -226,6 +226,7 @@
     - [从云存储导入示例数据（SQL 文件）](/tidb-cloud/import-sample-data-serverless.md)
     - [从云存储导入 CSV 文件](/tidb-cloud/import-csv-files-serverless.md)
     - [从云存储导入 Parquet 文件](/tidb-cloud/import-parquet-files-serverless.md)
+    - [从云存储导入快照文件](/tidb-cloud/import-snapshot-files-serverless.md)
     - [使用 MySQL CLI 导入](/tidb-cloud/import-with-mysql-cli-serverless.md)
   - 参考
     - [为 TiDB Cloud 配置外部存储访问](/tidb-cloud/serverless-external-storage.md)
