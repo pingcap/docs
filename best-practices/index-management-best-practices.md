@@ -34,7 +34,7 @@ Indexes are essential for query performance, but removing them without proper an
 - Assess index efficiency: evaluate whether an index filters data effectively or causes excessive I/O overhead.
 - Safely test index removal: temporarily make an index invisible before deleting it to ensure no queries depend on it.
 
-TiDB simplifies index optimization by introducing the following powerful tools:
+TiDB simplifies index optimization by introducing the following tools:
 
 - `INFORMATION_SCHEMA.TIDB_INDEX_USAGE`: monitors index usage patterns and query frequency.
 - `sys.schema_unused_indexes`: lists indexes that have not been used since the database is last restarted.
