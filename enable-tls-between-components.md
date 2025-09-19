@@ -228,6 +228,50 @@ To verify the caller's identity for a component, you need to mark the certificat
         cert-allowed-cn = ["tiproxy", "tidb", "test-client", "prometheus"]
     ```
 
+## Validating TLS between TiDB components
+
+After configuring TLS for communication between TiDB components, you can use the following commands to verify that TLS has been successfully enabled:
+
+- TiDB
+
+    The following command will print out the certificate configured for TiDB and the SSL handshake details.
+
+    ```sh
+    openssl s_client -connect <tidb_host>:10080 -cert /path/to/client.pem -key /path/to/client-key.pem -CAfile ./ca.crt < /dev/null
+    ```
+
+- PD
+
+    The following command will print out the certificate configured for PD and the SSL handshake details.
+
+    ```sh
+    openssl s_client -connect <pd_host>:2379 -cert /path/to/client.pem -key /path/to/client-key.pem -CAfile ./ca.crt < /dev/null
+    ```
+
+- TiKV
+
+    The following command will print out the certificate configured for TiKV and the SSL handshake details.
+
+    ```sh
+    openssl s_client -connect <tikv_host>:20160 -cert /path/to/client.pem -key /path/to/client-key.pem -CAfile ./ca.crt < /dev/null
+    ```
+
+- TiFlash (New in v4.0.5)
+
+    The following command will print out the certificate configured for TiFlash and the SSL handshake details.
+
+    ```sh
+    openssl s_client -connect <tiflash_host>:<tiflash_port> -cert /path/to/client.pem -key /path/to/client-key.pem -CAfile ./ca.crt < /dev/null
+    ```
+
+- TiProxy
+
+    The following command will print out the certificate configured for TiProxy and the SSL handshake details.
+
+    ```sh
+    openssl s_client -connect <tiproxy_host>:3080 -cert /path/to/client.pem -key /path/to/client-key.pem -CAfile ./ca.crt < /dev/null
+    ```
+
 ## Reload certificates
 
 - If your TiDB cluster is deployed in a local data center, to reload the certificates and keys, TiDB, PD, TiKV, TiFlash, TiCDC, TiProxy, and all kinds of clients reread the current certificates and key files each time a new connection is created, without restarting the TiDB cluster.
