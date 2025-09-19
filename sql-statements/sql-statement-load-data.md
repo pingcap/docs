@@ -64,7 +64,7 @@ If you are using TiDB Cloud, to use the `LOAD DATA` statement to load local data
 
 ### `REPLACE` and `IGNORE`
 
-You can use `REPLACE` and `IGNORE` to specify how duplicate data is handled. 
+You can use `REPLACE` and `IGNORE` to specify how duplicate data is handled.
 
 - `REPLACE`: existing data is overwritten.
 - `IGNORE`: duplicate rows are ignored, keeping existing data.
