@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW [FULL] PROCESSLIST for the TiDB databa
 
 # SHOW [FULL] PROCESSLIST
 
-This statement lists the current sessions connected to the same TiDB server. The `Info` column contains the query text, which will be truncated unless the optional keyword `FULL` is specified.
+This statement lists the current sessions connected to the same TiDB server. The `Info` column contains the query text, which will be truncated unless the optional keyword `FULL` is specified. The [`information_schema.cluster_processlist`](/information-schema/information-schema-processlist.md#cluster_processlist) table can be used to see the cluster wide processlist.
 
 ## Synopsis
 
@@ -25,6 +25,10 @@ mysql> SHOW PROCESSLIST;
 +------+------+-----------------+------+---------+------+------------+------------------+
 1 rows in set (0.00 sec)
 ```
+
+## Permissions
+
+Unless the user has the `PROCESS` privilege the processlist will only show the sessions belonging to the user itself.
 
 ## MySQL compatibility
 
