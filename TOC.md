@@ -436,6 +436,7 @@
   - [Use TiDB](/best-practices/tidb-best-practices.md)
   - [Manage DDL](/ddl-introduction.md)
   - [Optimize Multi-Column Indexes](/best-practices/multi-column-index-best-practices.md)
+  - [Manage Indexes and Identify Unused Indexes](/best-practices/index-management-best-practices.md)
   - [Handle Millions of Tables in SaaS Multi-Tenant Scenarios](/best-practices/saas-best-practices.md)
   - [Use UUIDs as Primary Keys](/best-practices/uuid.md)
   - [Develop Java Applications](/best-practices/java-app-best-practices.md)
