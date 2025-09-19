@@ -20,6 +20,8 @@ To avoid this risk, it is recommended to set a root password during deployment:
 - For deployments using TiUP, refer to [Deploy TiDB Cluster Using TiUP](/production-deployment-using-tiup.md#step-7-start-a-tidb-cluster) to generate a random password for the root user.
 - For deployments using TiDB Operator, refer to [Set initial account and password](https://docs.pingcap.com/tidb-in-kubernetes/stable/initialize-a-cluster#set-initial-account-and-password) to set the root password.
 
+You can also use the [`--initialize-secure`](/command-line-flags-for-tidb-configuration.md#--initialize-secure) option to restrict network access for the initial root user.
+
 ## Enable password complexity checks
 
 By default, TiDB does not enforce password complexity policies, which might lead to the use of weak or empty passwords, increasing security risks.
