@@ -773,3 +773,7 @@
     -   [[2023-11-14] TiDB Cloud専用スケール機能メンテナンスのお知らせ](/tidb-cloud/notification-2023-11-14-scale-feature-maintenance.md)
     -   [[2023-09-26] TiDB Cloudコンソールメンテナンスのお知らせ](/tidb-cloud/notification-2023-09-26-console-maintenance.md)
     -   [[2023-08-31] TiDB Cloudコンソールメンテナンスのお知らせ](/tidb-cloud/notification-2023-08-31-console-maintenance.md)
+
+## _BUILD_ALLOWLIST
+
+- [Manage Database Users and Roles](/tidb-cloud/configure-sql-users.md)
