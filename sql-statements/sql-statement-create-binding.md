@@ -313,7 +313,7 @@ Empty set (0.002 sec)
 
 ## Permissions
 
-The `CREATE BINDING` statements requires the `SUPER` privilege.
+The `CREATE BINDING` statement requires the `SUPER` privilege.
 
 ## MySQL compatibility
 
