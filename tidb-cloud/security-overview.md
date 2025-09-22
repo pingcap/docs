@@ -9,8 +9,8 @@ TiDB Cloud provides a comprehensive and flexible security framework, covering al
 
 ## Identity and Access Management
 
-TiDB Cloud supports multiple authentication methods, including email/password login, standard SSO, and organization-level SSO.
-The system provides layered role and permission management and can enable multi-factor authentication (MFA) to further enhance account security. Flexible identity and access controls allow users to manage project and resource access with fine-grained permissions, ensuring the principle of least privilege is maintained.
+TiDB Cloud supports multiple authentication methods, including email and password login, standard SSO, and organization-level SSO.
+The system provides layered role and permission management, and you can enable multi-factor authentication (MFA) to further enhance account security. Flexible identity and access controls allow you to manage project and resource access with fine-grained permissions, ensuring that you can maintain the principle of least privilege.
 
 ## Network Security and Isolation
 
