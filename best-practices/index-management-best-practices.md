@@ -142,7 +142,7 @@ This helps determine whether an index is truly unused across all nodes or only f
 
 ### Key differences between `TIDB_INDEX_USAGE` and `CLUSTER_TIDB_INDEX_USAGE`
 
-The following tables show the key differences between `TIDB_INDEX_USAGE` and `CLUSTER_TIDB_INDEX_USAGE`.
+The following table shows the key differences between `TIDB_INDEX_USAGE` and `CLUSTER_TIDB_INDEX_USAGE`:
 
 | Feature          | `TIDB_INDEX_USAGE`                                   | `CLUSTER_TIDB_INDEX_USAGE`                              |
 | ---------------- | ---------------------------------------------------- | ------------------------------------------------------- |
