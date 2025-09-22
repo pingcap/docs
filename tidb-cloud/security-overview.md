@@ -5,7 +5,7 @@ summary: Learn about the comprehensive security framework of TiDB Cloud, includi
 
 # Security Overview
 
-TiDB Cloud provides a comprehensive and flexible security framework, covering all stages of the data lifecycle. The platform offers full protection across identity and access management, network access control, data-at-rest protection, database access control, and audit logging.
+TiDB Cloud provides a comprehensive and flexible security framework, covering all stages of the data lifecycle. The platform offers full protection across identity and access management, network security and isolation, data protection, database access control, and audit logging.
 
 ## Identity and Access Management
 
