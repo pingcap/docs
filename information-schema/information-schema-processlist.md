@@ -99,3 +99,7 @@ SELECT * FROM information_schema.cluster_processlist;
 | 10.0.1.21:10080 | 14  | u2   | 10.0.1.1 | test | Query   | 0    | autocommit | select max(field0) from usertable                    | 496 | 05-28 03:54:21.230(416976223923077225) | default        |
 +-----------------+-----+------+----------+------+---------+------+------------+------------------------------------------------------+-----+----------------------------------------+----------------+
 ```
+
+## Permissions
+
+Unless the user has the `PROCESS` privilege the processlist will only show the sessions belonging to the user itself.
