@@ -637,7 +637,7 @@ Configuration items related to performance.
 
 > **Warning:**
 >
-> This config is designed for maintenance only. Do not set this configuration item in instances that accept regular workloads. 
+> This configuration item is for maintenance purposes only. Do not enable it on TiDB instances that handle regular workloads. 
 
 + Controls whether to skip statistics initialization during TiDB startup.
 + Default value: `false`
