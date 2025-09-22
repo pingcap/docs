@@ -174,7 +174,7 @@ When you use `CREATE BINDING ... FROM HISTORY USING PLAN DIGEST`, the binding ca
 =======
 ## Permissions
 
-The `CREATE BINDING` statements requires the `SUPER` privilege.
+The `CREATE BINDING` statement requires the `SUPER` privilege.
 
 ## MySQL compatibility
 
