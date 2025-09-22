@@ -155,4 +155,4 @@ SELECT * FROM information_schema.cluster_processlist;
 
 ## Permissions
 
-Unless the user has the `PROCESS` privilege the processlist will only show the sessions belonging to the user itself.
+If the current user does not have the `PROCESS` privilege, `PROCESSLIST` only shows the requests from the user’s own sessions.
