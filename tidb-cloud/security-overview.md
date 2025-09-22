@@ -24,8 +24,8 @@ Combined with robust key management mechanisms, users can control the lifecycle 
 
 ## Database Access Control
 
-TiDB Cloud provides a user- and role-based access control mechanism, supporting a combination of static and dynamic privileges. Users can be assigned roles to manage and distribute permissions in a more fine-grained way.
-For Dedicated Clusters, the root account password can be configured and managed, and access can be restricted through IP allowlists to protect sensitive accounts.
+TiDB Cloud provides a user- and role-based access control mechanism, supporting a combination of static and dynamic privileges. You can assign roles to users to manage and distribute permissions in a more fine-grained way.
+For Dedicated Clusters, you can configure and manage the root account password and restrict access through IP access lists to protect sensitive accounts.
 
 ## Audit Logging
 
