@@ -19,8 +19,8 @@ All communications can be encrypted using TLS to ensure the confidentiality and 
 
 ## Data Protection
 
-For cluster types that support Customer-Managed Encryption Keys (CMEK), TiDB Cloud provides encryption for both static data and backups.
-Combined with robust key management mechanisms, users can control the lifecycle and usage of encryption keys, further enhancing data security and compliance.
+For cluster types that support Customer-Managed Encryption Keys (CMEK), TiDB Cloud provides encryption for both data at rest and backups.
+Combined with robust key management mechanisms, you can control the lifecycle and usage of encryption keys, further enhancing data security and compliance.
 
 ## Database Access Control
 
