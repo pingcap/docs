@@ -14,8 +14,8 @@ The system provides layered role and permission management and can enable multi-
 
 ## Network Security and Isolation
 
-The platform provides private endpoints, VPC Peering, and IP access lists to implement network isolation and access control.
-All communications can be encrypted using TLS to ensure the confidentiality and integrity of data in transit. Network access controls ensure that only authorized sources can access cluster resources, enhancing overall security.
+The platform provides `private endpoints`, `VPC Peering`, and `IP access lists` to implement network isolation and access control.
+You can encrypt all communications using TLS to ensure the confidentiality and integrity of data in transit. Network access controls ensure that only authorized sources can access cluster resources, enhancing overall security.
 
 ## Data Protection
 
