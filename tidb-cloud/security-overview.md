@@ -27,7 +27,7 @@ Combined with robust key management mechanisms, users can control the lifecycle 
 TiDB Cloud provides a user- and role-based access control mechanism, supporting a combination of static and dynamic privileges. Users can be assigned roles to manage and distribute permissions in a more fine-grained way.
 For Dedicated Clusters, the root account password can be configured and managed, and access can be restricted through IP allowlists to protect sensitive accounts.
 
-## Identity and Access Management
+## Audit Logging
 
 TiDB Cloud provides audit logs for both console and database operations to support activity tracking, compliance monitoring, and security incident investigation.
-Audit mechanisms record user actions, operation times, and sources, providing reliable evidence for enterprise security management.
+Audit mechanisms record your actions, operation times, and sources, providing reliable evidence for enterprise security management.
