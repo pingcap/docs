@@ -16,13 +16,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - Support user-controlled splitting of `UPDATE` events in [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) changefeeds.
   
-        In TiDB Cloud Dedicated clusters, you can configure whether to keep `UPDATE` events as raw events or split them into separate `DELETE` and `INSERT` events. This feature  provides greater flexibility for advanced replication scenarios. 
+        In TiDB Cloud Dedicated clusters, you can configure whether to keep `UPDATE` events as raw events or split them into separate `DELETE` and `INSERT` events. This feature provides greater flexibility for advanced replication scenarios. 
   
         This feature is supported only for non-SQL destinations such as Kafka and S3.
 
         For more information, see [Split primary or unique key `UPDATE` events for non-MySQL sinks](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks).
 
-    - Provide a new node size for TiDB Cloud Dedicated clusters hosted  on Google Cloud-:32 vCPU, 64 GiB. 
+    - Provide a new node size for TiDB Cloud Dedicated clusters hosted on Google Cloud: 32 vCPU, 64 GiB. 
   
         This new node size is available for TiDB nodes.
 
