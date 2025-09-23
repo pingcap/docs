@@ -11,11 +11,11 @@ TiDB Cloud provides a comprehensive and flexible security framework, covering al
 
 TiDB Cloud supports multiple authentication methods, including email and password login, standard SSO, and organization-level SSO.
 
-The system provides layered role and permission management, and you can enable multi-factor authentication (MFA) to further enhance account security. Flexible identity and access controls allow you to manage project and resource access with fine-grained permissions, ensuring that you can maintain the principle of least privilege.
+TiDB Cloud provides layered role and permission management, and you can enable multi-factor authentication (MFA) to strengthen account security. Flexible identity and access controls let you manage project and resource access with fine-grained permissions, ensuring that you can maintain the principle of least privilege.
 
 ## Network Security and Isolation
 
-The platform provides `private endpoints`, `VPC Peering`, and `IP access lists` to implement network isolation and access control.
+TiDB Cloud provides private endpoints, VPC Peering, and IP access lists for network isolation and access control.
 
 You can encrypt all communications using TLS to ensure the confidentiality and integrity of data in transit. Network access controls ensure that only authorized sources can access cluster resources, enhancing overall security.
 
@@ -27,11 +27,12 @@ Combined with robust key management mechanisms, you can control the lifecycle an
 
 ## Database Access Control
 
-TiDB Cloud provides a user- and role-based access control mechanism, supporting a combination of static and dynamic privileges. You can assign roles to users to manage and distribute permissions in a more fine-grained way.
+TiDB Cloud provides a user- and role-based access control mechanism, combining static and dynamic privileges. You can assign roles to users to manage and distribute permissions in a more fine-grained way.
 
-For Dedicated Clusters, you can configure and manage the root account password and restrict access through IP access lists to protect sensitive accounts.
+For TiDB Cloud Dedicated clusters, you can configure and manage the root account password and restrict access through IP access lists to protect sensitive accounts.
 
 ## Audit Logging
 
 TiDB Cloud provides audit logs for both console and database operations to support activity tracking, compliance monitoring, and security incident investigation.
-Audit mechanisms record your actions, operation times, and sources, providing reliable evidence for enterprise security management.
+
+Audit logs record your actions, operation times, and sources, providing reliable evidence for enterprise security management.
