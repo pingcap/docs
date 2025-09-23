@@ -1,5 +1,5 @@
 ---
-title: {{{ .starter }}} FAQs
+title: "{{{ .starter }}} FAQs"
 summary: Learn about the most frequently asked questions (FAQs) relating to {{{ .starter }}}.
 aliases: ['/tidbcloud/serverless-tier-faqs']
 ---
