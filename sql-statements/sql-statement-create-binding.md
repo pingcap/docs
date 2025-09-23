@@ -168,6 +168,10 @@ mysql> SELECT @@LAST_PLAN_FROM_BINDING;
 
 ```
 
+## Statement truncation
+
+The `CREATE BINDING` statement can fail if it is used with `FROM HISTORY USING PLAN DIGEST` and if the statement is truncated because it is longer than [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40). If this happens it is recommended to increase `tidb_stmt_summary_max_sql_length`.
+
 ## MySQL compatibility
 
 This statement is a TiDB extension to MySQL syntax.
