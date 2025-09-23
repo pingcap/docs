@@ -5,7 +5,7 @@ summary: Learn about the comprehensive security framework of TiDB Cloud, includi
 
 # Security Overview
 
-TiDB Cloud provides a comprehensive and flexible security framework, covering all stages of the data lifecycle. The platform offers full protection across identity and access management, network security and isolation, data protection, database access control, and audit logging.
+TiDB Cloud provides a comprehensive and flexible security framework, covering all stages of the data lifecycle. The platform offers full protection across identity and access management, network security and isolation, data access control, database access control, and audit logging.
 
 ## Identity and access management
 
@@ -31,7 +31,7 @@ For more information, see [Encryption at Rest Using Customer-Managed Encryption 
 
 TiDB Cloud provides a user- and role-based access control mechanism, combining static and dynamic privileges. You can assign roles to users to manage and distribute permissions in a more fine-grained way.
 
-For TiDB Cloud Dedicated clusters, you can [configure and manage the root account password](/tidb-cloud/configure-security-settings.md) and restrict access through [IP access lists](/tidb-cloud/configure-ip-access-list.md) to protect sensitive accounts.
+For [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, you can [configure and manage the root account password](/tidb-cloud/configure-security-settings.md) and restrict access through [IP access lists](/tidb-cloud/configure-ip-access-list.md) to protect sensitive accounts.
 
 ## Audit logging
 
