@@ -180,7 +180,9 @@ For more information, see [How to create a topic](https://pulsar.apache.org/docs
 
         If you want the changefeed to send Pulsar messages of a table to different partitions, choose this distribution method. The specified column values of a row changelog will determine which partition the changelog is sent to. This distribution method ensures orderliness in each partition and guarantees that changelogs with the same column values are sent to the same partition.
 
-7. Click **Next**.
+7. In the **Split Event** area, choose whether to split `UPDATE` events into separate `DELETE` and `INSERT` events or keep as raw `UPDATE` events. For more information, see [Split primary or unique key UPDATE events for non-MySQL sinks](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks).
+
+8. Click **Next**.
 
 ## Step 4. Configure specification and review
 

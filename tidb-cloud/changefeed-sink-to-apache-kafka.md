@@ -287,7 +287,9 @@ The steps vary depending on the connectivity method you select.
     - **Replication Factor**: controls how many Kafka servers each Kafka message is replicated to. The valid value ranges from [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) to the number of Kafka brokers.
     - **Partition Number**: controls how many partitions exist in a topic. The valid value range is `[1, 10 * the number of Kafka brokers]`.
 
-10. Click **Next**.
+10. In the **Split Event** area, choose whether to split `UPDATE` events into separate `DELETE` and `INSERT` events or keep as raw `UPDATE` events. For more information, see [Split primary or unique key UPDATE events for non-MySQL sinks](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks).
+
+11. Click **Next**.
 
 ## Step 4. Configure your changefeed specification
 
