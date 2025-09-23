@@ -155,7 +155,7 @@ Click **Next** to establish the connection from the TiDB Cloud Dedicated cluster
     >
     > These two parameters will affect the quantity of objects generated in cloud storage for each individual database table. If there are a large number of tables, using the same configuration will increase the number of objects generated and subsequently raise the cost of invoking the cloud storage API. Therefore, it is recommended to configure these parameters appropriately based on your Recovery Point Objective (RPO) and cost requirements.
 
-6. In the **Split Event** area, choose whether `UPDATE` events should be split into separate `DELETE` and `INSERT` events, or retained as raw `UPDATE` events. For more details, see [TiCDC Behavior in Splitting UPDATE Events](/ticdc/ticdc-split-update-behavior.md/#split-primary-or-unique-key-update-events-for-non-mysql-sinks).
+6. In the **Split Event** area, choose whether `UPDATE` events should be split into separate `DELETE` and `INSERT` events, or retained as raw `UPDATE` events. For more details, see [Split primary or unique key `UPDATE` events for non-MySQL sinks](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks).
 
 ## Step 3. Configure specification
 
