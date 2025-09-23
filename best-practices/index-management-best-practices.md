@@ -113,7 +113,7 @@ To minimize performance impact, `TIDB_INDEX_USAGE` does not update instantly. In
 
 #### Index usage data is not persisted
 
-The `TIDB_INDEX_USAGE` system table stores data in memory of each TiDB node, and is not persisted. When a TiDB node restarts, all index usage statistics from that node are cleared.
+The `TIDB_INDEX_USAGE` system table stores data in memory of each TiDB instance, and is not persisted. When a TiDB node restarts, all index usage statistics from that node are cleared.
 
 #### Track historical data
 
@@ -146,9 +146,9 @@ The following table shows the key differences between `TIDB_INDEX_USAGE` and `CL
 
 | Feature          | `TIDB_INDEX_USAGE`                                   | `CLUSTER_TIDB_INDEX_USAGE`                              |
 | ---------------- | ---------------------------------------------------- | ------------------------------------------------------- |
-| Scope            | Tracks index usage within a single database.         | Aggregates index usage across the entire TiDB cluster   |
-| Index tracking   | Data is local to each database.                      | Provides a centralized cluster-wide view                |
-| Primary use case | Debugs index usage at the database instance level    | Analyzes global index patterns and multi-node behavior  |
+| Scope            | Tracks index usage within a single database instance.         | Aggregates index usage across the entire TiDB cluster.   |
+| Index tracking   | Data is local to each database instance.                      | Provides a centralized cluster-wide view.               |
+| Primary use case | Debugs index usage at the database instance level.    | Analyzes global index patterns and multi-node behavior.  |
 
 ### Use `CLUSTER_TIDB_INDEX_USAGE` effectively
 
