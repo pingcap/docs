@@ -313,6 +313,7 @@
   - [Failover and Reprotect Databases](/tidb-cloud/recovery-group-failover.md)
   - [Delete a Recovery Group](/tidb-cloud/recovery-group-delete.md)
 - Security
+  - [Security Overview](/tidb-cloud/security-overview.md)
   - Identity Access Control
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
     - [Standard SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md)
