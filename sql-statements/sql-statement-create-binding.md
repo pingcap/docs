@@ -312,7 +312,7 @@ Empty set (0.002 sec)
 
 ## Statement truncation
 
-The `CREATE BINDING` statement can fail if it is used with `FROM HISTORY USING PLAN DIGEST` and if the statement is truncated because it is longer than [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40). If this happens it is recommended to increase `tidb_stmt_summary_max_sql_length`.
+If you use `CREATE BINDING` with `FROM HISTORY USING PLAN DIGEST`, the statement can fail if it is truncated for being longer than [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40). If this happens, increase `tidb_stmt_summary_max_sql_length`.
 
 ## MySQL compatibility
 
