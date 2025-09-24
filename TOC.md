@@ -436,6 +436,7 @@
   - [Use TiDB](/best-practices/tidb-best-practices.md)
   - [Manage DDL](/ddl-introduction.md)
   - [Optimize Multi-Column Indexes](/best-practices/multi-column-index-best-practices.md)
+  - [Manage Indexes and Identify Unused Indexes](/best-practices/index-management-best-practices.md)
   - [Handle Millions of Tables in SaaS Multi-Tenant Scenarios](/best-practices/saas-best-practices.md)
   - [Use UUIDs as Primary Keys](/best-practices/uuid.md)
   - [Develop Java Applications](/best-practices/java-app-best-practices.md)
@@ -1084,6 +1085,7 @@
   - [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
   - [TiDB Workload Repository](/workload-repository.md)
+  - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/online-workloads-and-add-index-operations.md)
 - FAQs
   - [FAQ Summary](/faq/faq-overview.md)
   - [TiDB FAQs](/faq/tidb-faq.md)
