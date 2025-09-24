@@ -115,7 +115,7 @@ To restore your TiDB Cloud cluster, follow these steps:
     </div>
     </SimpleTab>
 
-4. In **Destination**, you can choose to restore to a new cluster.
+4. In **Destination**, you can restore to a new cluster.
 
     1. Click **Restore to a New Cluster**.
     2. Enter a name for the new cluster.
