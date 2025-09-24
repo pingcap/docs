@@ -4,7 +4,7 @@
 
 # 目次 {#table-of-contents}
 
-## 始めましょう {#get-started}
+## 始める {#get-started}
 
 -   TiDB Cloudを選ぶ理由
     -   [TiDB Cloudの紹介](/tidb-cloud/tidb-cloud-intro.md)
@@ -61,7 +61,7 @@
         -   [SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md)
         -   [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md)
         -   [ジャンゴ](/develop/dev-guide-sample-application-python-django.md)
-    -   Node.js
+    -   ノード.js
         -   [ノード-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
         -   [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
         -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
@@ -314,6 +314,7 @@
     -   [データベースのフェイルオーバーと再保護](/tidb-cloud/recovery-group-failover.md)
     -   [リカバリグループを削除する](/tidb-cloud/recovery-group-delete.md)
 -   Security
+    -   [Securityの概要](/tidb-cloud/security-overview.md)
     -   アイデンティティアクセス制御
         -   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)
         -   [標準SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)
@@ -694,7 +695,7 @@
         -   [スケジュール](/tidb-scheduling.md)
         -   [TSO](/tso.md)
     -   ストレージエンジン
-        -   TiKV
+        -   ティクブ
             -   [TiKVの概要](/tikv-overview.md)
             -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
         -   TiFlash
@@ -774,6 +775,6 @@
     -   [[2023-09-26] TiDB Cloudコンソールメンテナンスのお知らせ](/tidb-cloud/notification-2023-09-26-console-maintenance.md)
     -   [[2023-08-31] TiDB Cloudコンソールメンテナンスのお知らせ](/tidb-cloud/notification-2023-08-31-console-maintenance.md)
 
-## _BUILD_ALLOWLIST
+## _BUILD_ALLOWLIST {#build-allowlist}
 
-- [Manage Database Users and Roles](/tidb-cloud/configure-sql-users.md)
+-   [データベースユーザーとロールの管理](/tidb-cloud/configure-sql-users.md)

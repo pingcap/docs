@@ -17,7 +17,7 @@ TiDB バージョン: 8.5.2
 
     -   TTLテーブルと関連する統計収集タスクのGCの実行を所有者ノードに制限することで、オーバーヘッド[＃59357](https://github.com/pingcap/tidb/issues/59357) @ [lcwangchao](https://github.com/lcwangchao)を削減します。
 
--   TiKV
+-   ティクブ
 
     -   `import.num-threads`構成項目を動的に変更するサポート[＃17807](https://github.com/tikv/tikv/issues/17807) @ [リドリスR](https://github.com/RidRisR)
 
@@ -69,7 +69,7 @@ TiDB バージョン: 8.5.2
     -   グローバルソート機能が有効になっている場合、リージョンサイズが 256 MiB [＃59962](https://github.com/pingcap/tidb/issues/59962) @ [D3ハンター](https://github.com/D3Hunter)であるにもかかわらず、 `ADD INDEX` DDL 操作で SST ファイルが 96 MiB に分割される問題を修正しました。
     -   グローバルソート機能を有効にした状態でデータのインポート中にメモリ使用量が 80% を超えると TiDB サーバーのメモリ(OOM) が発生する問題を修正[＃59508](https://github.com/pingcap/tidb/issues/59508) @ [D3ハンター](https://github.com/D3Hunter)
 
--   TiKV
+-   ティクブ
 
     -   `txn_status_cache` [＃18384](https://github.com/tikv/tikv/issues/18384) @ [エキシウム](https://github.com/ekexium)で潜在的なデッドロックが発生する可能性がある問題を修正
     -   解決済み-TSの監視とログが異常になる可能性がある問題を修正[＃17989](https://github.com/tikv/tikv/issues/17989) @ [エキシウム](https://github.com/ekexium)
@@ -96,11 +96,12 @@ TiDB バージョン: 8.5.2
     -   PDノードがLeader[＃9051](https://github.com/tikv/pd/issues/9051) @ [rleungx](https://github.com/rleungx)でない場合でもTSOを生成する可能性がある問題を修正しました
     -   PDLeader[＃9017](https://github.com/tikv/pd/issues/9017)対[rleungx](https://github.com/rleungx)切り替え時にリージョン同期が間に合わない問題を修正しました
     -   デフォルト値`lease`が正しく設定されていない問題を修正[＃9156](https://github.com/tikv/pd/issues/9156) @ [rleungx](https://github.com/rleungx)
+    -   `tidb_enable_tso_follower_proxy`有効にすると TSO サービスが利用できなくなる可能性がある問題を修正[＃9188](https://github.com/tikv/pd/issues/9188) @ [テーマ](https://github.com/Tema)
 
 -   TiFlash
 
     -   ソート中にデータが溢れてTiFlashがクラッシュする可能性がある問題を修正[9999](https://github.com/pingcap/tiflash/issues/9999) @ [ウィンドトーカー](https://github.com/windtalker)
-    -   `GROUP BY ... WITH ROLLUP` [＃10110](https://github.com/pingcap/tiflash/issues/10110) @ [ゲンリチ](https://github.com/gengliqi)を含むSQL文を実行するとTiFlashが`Exception: Block schema mismatch`エラーを返す可能性がある問題を修正しました。
+    -   `GROUP BY ... WITH ROLLUP` [＃10110](https://github.com/pingcap/tiflash/issues/10110) @ [ゲンリキ](https://github.com/gengliqi)を含むSQL文を実行するとTiFlashが`Exception: Block schema mismatch`エラーを返す可能性がある問題を修正しました。
     -   分散storageおよびコンピューティングアーキテクチャで、 TiFlashコンピューティング ノードがリージョンピア[＃9750](https://github.com/pingcap/tiflash/issues/9750) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)を追加するためのターゲット ノードとして誤って選択される可能性がある問題を修正しました。
     -   特定の状況でTiFlash が予期せず終了したときにエラー スタック トレースを印刷できないことがある問題を修正[＃9902](https://github.com/pingcap/tiflash/issues/9902) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)
     -   大量のデータをインポートした後にTiFlash のメモリ使用量が高くなる可能性がある問題を修正[＃9812](https://github.com/pingcap/tiflash/issues/9812) @ [カルビンネオ](https://github.com/CalvinNeo)

@@ -4,7 +4,7 @@
 
 # 目次 {#table-of-contents}
 
-## 始めましょう {#get-started}
+## 始める {#get-started}
 
 -   TiDB Cloudを選ぶ理由
     -   [TiDB Cloudの紹介](/tidb-cloud/tidb-cloud-intro.md)
@@ -59,7 +59,7 @@
         -   [SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md)
         -   [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md)
         -   [ジャンゴ](/develop/dev-guide-sample-application-python-django.md)
-    -   Node.js
+    -   ノード.js
         -   [ノード-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
         -   [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
         -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
@@ -256,6 +256,7 @@
     -   [パフォーマンスの向上](/vector-search/vector-search-improve-performance.md)
     -   [制限事項](/vector-search/vector-search-limitations.md)
 -   Security
+    -   [Securityの概要](/tidb-cloud/security-overview.md)
     -   アイデンティティアクセス制御
         -   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)
         -   [標準SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)
@@ -569,7 +570,7 @@
     -   認証
         -   [ログイン](/tidb-cloud/ticloud-auth-login.md)
         -   [ログアウト](/tidb-cloud/ticloud-auth-logout.md)
-        -   [だれだ](/tidb-cloud/ticloud-auth-whoami.md)
+        -   [誰だ](/tidb-cloud/ticloud-auth-whoami.md)
     -   サーバーレス
         -   [容量](/tidb-cloud/ticloud-serverless-capacity.md)
         -   [作成する](/tidb-cloud/ticloud-cluster-create.md)

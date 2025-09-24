@@ -8,6 +8,24 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2025年9月23日 {#september-23-2025}
+
+**一般的な変更**
+
+-   **TiDB Cloud専用**
+
+    -   `UPDATE`イベントを[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)変更フィードに分割するユーザー制御をサポートします。
+
+        TiDB Cloud Dedicated クラスターでは、 `UPDATE`イベントを生イベントとして保持するか、 `DELETE`と`INSERT`イベントに分割するかを設定できます。この機能により、高度なレプリケーションシナリオにおいて柔軟性が向上します。
+
+        この機能は、Apache KafkaやAmazon S3などの非SQL出力先でのみサポートされます。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md) [アパッチパルサーに沈む](/tidb-cloud/changefeed-sink-to-apache-pulsar.md)参照して[クラウドストレージに保存](/tidb-cloud/changefeed-sink-to-cloud-storage.md) 。
+
+        分割動作の詳細については、 [MySQL以外のシンクの主キーまたは一意キーの`UPDATE`イベントを分割する](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)参照してください。
+
+    -   Google Cloud でホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに新しいノード サイズ`32 vCPU, 64 GiB`指定します。
+
+        この新しいノード サイズは、TiDB ノードで使用できます。
+
 ## 2025年9月16日 {#september-16-2025}
 
 **一般的な変更**

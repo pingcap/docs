@@ -9,7 +9,7 @@ summary: このドキュメントでは、 TiDB Cloudから Amazon S3 または 
 
 > **注記：**
 >
-> -   クラウドstorageにデータをストリーミングするには、TiDBクラスタのバージョンがv7.1.1以降であることを確認してください。TiDB TiDB Cloud Dedicatedクラスタをv7.1.1以降にアップグレードするには、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md) .
+> -   クラウドstorageにデータをストリーミングするには、TiDB クラスタのバージョンが v7.1.1 以降であることを確認してください。TiDB TiDB Cloud Dedicated クラスタを v7.1.1 以降にアップグレードするには、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)実行します。
 > -   クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、changefeed 機能は使用できません。
 
 ## 制限 {#restrictions}
@@ -46,12 +46,12 @@ summary: このドキュメントでは、 TiDB Cloudから Amazon S3 または 
 
         ![Create a role](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-create-role.png)
 
-    3.  ロールの名前、説明、ID、およびロール開始ステージを入力します。ロールの作成後は、ロール名を変更できません。
+    3.  ロールの名前、説明、ID、およびロールの起動ステージを入力します。ロールの作成後は、ロール名を変更できません。
 
     4.  **「権限の追加」**をクリックします。次の権限をロールに追加し、 **「追加」**をクリックします。
 
         -   storage.buckets.get
-        -   storage.オブジェクト.作成
+        -   storage.objects.create
         -   storage.オブジェクト.削除
         -   storage.objects.get
         -   storage.objects.list
@@ -59,9 +59,9 @@ summary: このドキュメントでは、 TiDB Cloudから Amazon S3 または 
 
     ![Add permissions](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-assign-permission.png)
 
-3.  [バケツ](https://console.cloud.google.com/storage/browser)ページ目に進み、 TiDB Cloudアクセスさせたい GCS バケットを選択します。GCS バケットは TiDB クラスタと同じリージョンにある必要があります。
+3.  [バケツ](https://console.cloud.google.com/storage/browser)ページ目に移動し、 TiDB Cloud がアクセスする GCS バケットを選択します。GCS バケットは TiDB クラスタと同じリージョンにある必要があります。
 
-4.  **バケットの詳細**ページで、 **「権限」**タブをクリックし、 **「アクセス権の付与」**をクリックします。
+4.  **バケットの詳細**ページで、 **[権限]**タブをクリックし、 **[アクセスを許可]**をクリックします。
 
     ![Grant Access to the bucket ](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-grant-access-1.png)
 
@@ -77,7 +77,7 @@ summary: このドキュメントでは、 TiDB Cloudから Amazon S3 または 
 
 6.  **バケットの詳細**ページで、**オブジェクト**タブをクリックします。
 
-    -   バケットの gsutil URI を取得するには、コピーボタンをクリックし、先頭に`gs://`追加します。例えば、バケット名が`test-sink-gcs`場合、URI は`gs://test-sink-gcs/`になります。
+    -   バケットのgsutil URIを取得するには、コピーボタンをクリックし、プレフィックスとして`gs://`追加します。例えば、バケット名が`test-sink-gcs`場合、URIは`gs://test-sink-gcs/`なります。
 
         ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri01.png)
 
@@ -102,8 +102,8 @@ summary: このドキュメントでは、 TiDB Cloudから Amazon S3 または 
     ![the table filter of changefeed](/media/tidb-cloud/changefeed/sink-to-s3-02-table-filter.jpg)
 
     -   **フィルタールール**: この列でフィルタールールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加すると、 TiDB CloudはTiDB内のすべてのテーブルをクエリし、ルールに一致するテーブルのみを右側のボックスに表示されます。フィルタールールは最大100件まで追加できます。
-    -   **有効なキーを持つテーブル**: この列には、主キーや一意のインデックスなど、有効なキーを持つテーブルが表示されます。
-    -   **有効なキーのないテーブル**: この列には、主キーまたは一意キーを持たないテーブルが表示されます。これらのテーブルは、一意の識別子がないと、下流で重複イベントを処理する際にデータの不整合が発生する可能性があるため、レプリケーション中に問題が発生します。データの整合性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意のキーまたは主キーを追加することをお勧めします。または、フィルタールールを使用してこれらのテーブルを除外することもできます。例えば、ルール`"!test.tbl1"`を使用してテーブル`test.tbl1`除外できます。
+    -   **有効なキーを持つテーブル**: この列には、主キーや一意のインデックスなどの有効なキーを持つテーブルが表示されます。
+    -   **有効なキーのないテーブル**: この列には、主キーまたは一意キーがないテーブルが表示されます。これらのテーブルは、一意の識別子がないと、下流で重複イベントを処理する際にデータの不整合が発生する可能性があるため、レプリケーション中に問題が発生します。データの整合性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意のキーまたは主キーを追加することをお勧めします。または、フィルタールールを使用してこれらのテーブルを除外することもできます。例えば、ルール`"!test.tbl1"`を使用してテーブル`test.tbl1`除外できます。
 
 2.  **イベント フィルター**をカスタマイズして、複製するイベントをフィルターします。
 
@@ -113,10 +113,10 @@ summary: このドキュメントでは、 TiDB Cloudから Amazon S3 または 
         -   **SQLを無視**: 指定した式に一致するDDLイベントを除外します。例えば、 `^drop`指定すると`DROP`で始まる文が除外され、 `add column`指定すると`ADD COLUMN`含む文が除外されます。
         -   **挿入値式を無視**: 特定の条件を満たす`INSERT`文を除外します。例えば、 `id >= 100`指定すると、 `id`が100以上の`INSERT`文が除外されます。
         -   **新しい値の更新式を無視**: 新しい値が指定条件に一致する`UPDATE`文を除外します。例えば、 `gender = 'male'`指定すると、 `gender`が`male`になる更新は除外されます。
-        -   **古い値の更新式を無視**: 古い値が指定条件に一致する`UPDATE`ステートメントを除外します。例えば、 `age < 18`指定すると、古い値`age`が18より小さい更新が除外されます。
+        -   **更新前の値を無視**: 指定した条件に一致する古い値を持つステートメントを`UPDATE`除外します。例えば、 `age < 18`指定すると、古い値`age`が18未満となる更新は除外されます。
         -   **削除値式を無視**: 指定された条件を満たす`DELETE`文を除外します。例えば、 `name = 'john'`指定すると、 `name`が`'john'`なる`DELETE`文が除外されます。
 
-3.  **[レプリケーションの開始位置]**領域で、次のいずれかのレプリケーション位置を選択します。
+3.  **[レプリケーション開始位置]**領域で、次のいずれかのレプリケーション位置を選択します。
 
     -   今からレプリケーションを開始します
     -   特定の[TSO](https://docs.pingcap.com/tidb/stable/glossary#tso)からレプリケーションを開始する
@@ -132,9 +132,9 @@ summary: このドキュメントでは、 TiDB Cloudから Amazon S3 または 
     -   **バイナリエンコード方式**: バイナリデータのエンコード方式。base64（デフォルト）または**hex****を**選択できます。AWS DMS と統合する場合は**hex を**使用してください。
     -   **日付区切り**: 年、月、日に基づいてデータを回転するか、まったく回転しないことを選択します。
     -   **区切り文字**: CSVファイル内の値を区切る文字を指定します。最も一般的に使用される区切り文字はカンマ( `,` )です。
-    -   **引用符**: 区切り文字または特殊文字を含む値を囲む文字を指定します。通常、引用符には二重引用符 ( `"` ) が使用されます。
-    -   **Null/空値**：CSVファイル内でNull値または空値をどのように表現するかを指定します。これは、データを適切に処理および解釈するために重要です。
-    -   **コミット T を含める**: CSV 行に[`commit-ts`](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#replicate-change-data-to-storage-services)含めるかどうかを制御します。
+    -   **引用符**: 区切り文字または特殊文字を含む値を囲む文字を指定します。引用符としては通常、二重引用符 ( `"` ) が使用されます。
+    -   **Null/空値**：CSVファイル内でNull値または空値をどのように表現するかを指定します。これは、データの適切な処理と解釈に重要です。
+    -   **コミット Ts を含める**: CSV 行に[`commit-ts`](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#replicate-change-data-to-storage-services)含めるかどうかを制御します。
 
     </div>
      <div label="Configure Canal-JSON format">
@@ -157,6 +157,8 @@ summary: このドキュメントでは、 TiDB Cloudから Amazon S3 または 
     > **注記：**
     >
     > これら2つのパラメータは、クラウドstorageに生成される各データベーステーブルごとのオブジェクト数に影響します。テーブル数が多い場合、同じ設定を使用すると生成されるオブジェクト数が増加し、クラウドstorageAPIの呼び出しコストが増加します。したがって、RPO（Recovery Point Objective：復旧時点目標）とコスト要件に基づいて、これらのパラメータを適切に設定することをお勧めします。
+
+6.  **「イベントの分割」**エリアでは、 `UPDATE`イベントを`DELETE`つと`INSERT`イベントに分割するか、 `UPDATE`イベントのままにするかを選択します。詳細については、 [MySQL以外のシンクの主キーまたは一意キーのUPDATEイベントを分割する](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)参照してください。
 
 ## ステップ3. 仕様を構成する {#step-3-configure-specification}
 

@@ -14,13 +14,13 @@ TiDB v7.0.0 以降、 `LOAD DATA` SQL ステートメントは次の機能をサ
 
 > **警告：**
 >
-> 新しいパラメータ`FIELDS DEFINED NULL BY`とS3およびGCSからのデータのインポートサポートは実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
+> 新しいパラメータ`FIELDS DEFINED NULL BY`と S3 および GCS からのデータインポートのサポートは実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)報告してください。
 
 <CustomContent platform="tidb-cloud">
 
 > **注記：**
 >
-> `LOAD DATA INFILE`ステートメントの場合、 TiDB Cloud Dedicated は Amazon S3 または Google Cloud Storage から`LOAD DATA LOCAL INFILE` 、 `LOAD DATA INFILE`サポートしますが、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) `LOAD DATA LOCAL INFILE`のみをサポートします。
+> `LOAD DATA INFILE`ステートメントの場合、 TiDB Cloud Dedicated は Amazon S3 または Google Cloud Storage の`LOAD DATA LOCAL INFILE` 、 `LOAD DATA INFILE`サポートしますが、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) `LOAD DATA LOCAL INFILE`のみをサポートします。
 
 </CustomContent>
 
@@ -31,6 +31,9 @@ LoadDataStmt ::=
     'LOAD' 'DATA' LocalOpt 'INFILE' stringLit DuplicateOpt 'INTO' 'TABLE' TableName CharsetOpt Fields Lines IgnoreLines ColumnNameOrUserVarListOptWithBrackets LoadDataSetSpecOpt
 
 LocalOpt ::= ('LOCAL')?
+
+DuplicateOpt ::=
+    ( 'IGNORE' | 'REPLACE' )?
 
 Fields ::=
     ('TERMINATED' 'BY' stringLit
@@ -55,6 +58,15 @@ TiDB Cloudを使用している場合、 `LOAD DATA`ステートメントを使�
 
         mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_path> --tls-version="TLSv1.2" -u root -h <host_name> -P 4000 -D test -p<your_password> --local-infile
 
+### <code>REPLACE</code>と<code>IGNORE</code> {#code-replace-code-and-code-ignore-code}
+
+`REPLACE`と`IGNORE`使用して、重複データの処理方法を指定できます。
+
+-   `REPLACE` : 既存のデータは上書きされます。
+-   `IGNORE` : 重複行は無視され、既存のデータは保持されます。
+
+デフォルトでは、重複したデータはエラーの原因となります。
+
 ### S3とGCSstorage {#s3-and-gcs-storage}
 
 <CustomContent platform="tidb">
@@ -75,7 +87,7 @@ TiDB Cloudを使用している場合、 `LOAD DATA`ステートメントを使�
 -   指定されたパス内のすべてのファイルをインポート: `s3://<bucket-name>/path/to/data/*`
 -   指定されたパスの下にある`.csv`で終わるすべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/*.csv`
 -   指定されたパスの下にある`foo`で始まるすべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/foo*`
--   指定されたパスの下にある、先頭が`foo`で末尾が`.csv`すべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/foo*.csv`
+-   指定されたパスの下にある、先頭が`foo` 、末尾が`.csv`すべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/foo*.csv`
 
 ### <code>Fields</code> 、 <code>Lines</code> 、 <code>Ignore Lines</code> {#code-fields-code-code-lines-code-and-code-ignore-lines-code}
 
@@ -87,9 +99,9 @@ TiDB Cloudを使用している場合、 `LOAD DATA`ステートメントを使�
 
 `DEFINED NULL BY`使用すると、データ ファイル内で NULL 値をどのように表現するかを指定できます。
 
--   MySQL の動作と一致して、 `ESCAPED BY` NULL でない場合、たとえばデフォルト値`\`使用されている場合、 `\N` NULL 値と見なされます。
--   `DEFINED NULL BY 'my-null'`などのように`DEFINED NULL BY`使用すると、 `my-null` NULL 値と見なされます。
--   `DEFINED NULL BY ... OPTIONALLY ENCLOSED`使用する場合、 `DEFINED NULL BY 'my-null' OPTIONALLY ENCLOSED` 、 `my-null` 、 `"my-null"` ( `ENCLOSED BY '"`と想定) は NULL 値と見なされます。
+-   MySQL の動作と一致して、 `ESCAPED BY` NULL でない場合、たとえばデフォルト値`\`使用されると、 `\N` NULL 値と見なされます。
+-   `DEFINED NULL BY 'my-null'`ように`DEFINED NULL BY`使用すると、 `my-null` NULL 値と見なされます。
+-   `DEFINED NULL BY ... OPTIONALLY ENCLOSED`使用する場合、 `DEFINED NULL BY 'my-null' OPTIONALLY ENCLOSED` 、 `my-null` 、 `"my-null"` ( `ENCLOSED BY '"`仮定) は NULL 値と見なされます。
 -   `DEFINED NULL BY`や`DEFINED NULL BY ... OPTIONALLY ENCLOSED`ではなく`ENCLOSED BY` （例えば`ENCLOSED BY '"'`を使用した場合、 `NULL` NULL 値とみなされます。この動作はMySQLと一致しています。
 -   それ以外の場合は、NULL 値とはみなされません。
 
@@ -111,7 +123,7 @@ FIELDS TERMINATED BY '\t' ENCLOSED BY '' ESCAPED BY '\\'
 LINES TERMINATED BY '\n' STARTING BY ''
 ```
 
-`IGNORE <number> LINES`パラメータを設定すると、ファイルの最初の`number`行を無視できます。例えば、 `IGNORE 1 LINES`設定すると、ファイルの最初の行が無視されます。
+`IGNORE <number> LINES`パラメータを設定することで、ファイルの最初の`number`行を無視できます。例えば、 `IGNORE 1 LINES`設定すると、ファイルの最初の行が無視されます。
 
 ## 例 {#examples}
 
@@ -163,7 +175,7 @@ IGNORE 1 LINES;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-`LOAD DATA`文の構文はMySQLと互換性がありますが、文字セットオプションは解析されますが無視されます。構文の互換性に違いがある場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
+`LOAD DATA`文の構文はMySQLの構文と互換性がありますが、文字セットオプションは解析されますが無視されます。構文の互換性に違いがある場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
 
 <CustomContent platform="tidb">
 
@@ -171,12 +183,12 @@ IGNORE 1 LINES;
 >
 > -   TiDB v4.0.0 より前のバージョンでは、20000 行ごとに`LOAD DATA`コミットが実行され、これは構成できません。
 > -   TiDB v4.0.0 から v6.6.0 までのバージョンでは、TiDB はデフォルトですべての行を 1 つのトランザクションでコミットします。ただし、 `LOAD DATA`ステートメントで一定数の行をコミットする必要がある場合は、必要な行数を[`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)に設定できます。
-> -   TiDB v7.0.0 以降、 `tidb_dml_batch_size` `LOAD DATA`には影響しなくなり、TiDB は 1 つのトランザクションですべての行をコミットします。
-> -   TiDB v4.0.0以前のバージョンからアップグレードすると、 `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`発生する場合があります。このエラーを解決するには、 `tidb.toml`ファイルの[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)値を増やすことをお勧めします。
+> -   TiDB v7.0.0 以降では、 `tidb_dml_batch_size` `LOAD DATA`には影響しなくなり、TiDB は 1 つのトランザクションですべての行をコミットします。
+> -   TiDB v4.0.0 以前のバージョンからアップグレードすると、 `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`発生する場合があります。このエラーを解決するには、 `tidb.toml`ファイルの[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)値を増やすことをお勧めします。
 > -   TiDB v7.6.0 より前のバージョンでは、トランザクションでコミットされる行数に関係なく、明示的なトランザクションの[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)ステートメントによって`LOAD DATA`ロールバックされることはありません。
 > -   TiDB v7.6.0 より前のバージョンでは、TiDB トランザクション モードの構成に関係なく、 `LOAD DATA`ステートメントは常に楽観的トランザクション モードで実行されます。
 > -   v7.6.0 以降、TiDB は他の DML ステートメントと同じ方法で`LOAD DATA` in トランザクションを処理します。
->     -   `LOAD DATA`ステートメントは、現在のトランザクションをコミットせず、新しいトランザクションも開始しません。
+>     -   `LOAD DATA`ステートメントは、現在のトランザクションをコミットせず、新しいトランザクションを開始しません。
 >     -   `LOAD DATA`ステートメントは、TiDB トランザクション モード設定 (楽観的または悲観的トランザクション) の影響を受けます。
 >     -   トランザクション内の`LOAD DATA`のステートメントは、トランザクション内の[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)のステートメントによってロールバックできます。
 
@@ -189,11 +201,11 @@ IGNORE 1 LINES;
 > -   TiDB v4.0.0 より前のバージョンでは、20000 行ごとに`LOAD DATA`コミットが実行され、これは構成できません。
 > -   TiDB v4.0.0 から v6.6.0 までのバージョンでは、TiDB はデフォルトですべての行を 1 つのトランザクションでコミットします。ただし、 `LOAD DATA`ステートメントで一定数の行をコミットする必要がある場合は、必要な行数を[`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)に設定できます。
 > -   v7.0.0 以降、 `tidb_dml_batch_size` `LOAD DATA`には影響しなくなり、 TiDB は 1 つのトランザクションですべての行をコミットします。
-> -   TiDB v4.0.0以前のバージョンからアップグレードすると、 `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`発生する場合があります。このエラーを解決するには、 [TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)連絡して[`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)値を増やしてください。
+> -   TiDB v4.0.0以前のバージョンからアップグレードすると、 `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`発生する場合があります。このエラーを解決するには、 [TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)連絡して[`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)値を増やすことができます。
 > -   TiDB v7.6.0 より前のバージョンでは、トランザクションでコミットされる行数に関係なく、明示的なトランザクションの[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)ステートメントによって`LOAD DATA`ロールバックされることはありません。
 > -   TiDB v7.6.0 より前のバージョンでは、TiDB トランザクション モードの構成に関係なく、 `LOAD DATA`ステートメントは常に楽観的トランザクション モードで実行されます。
 > -   v7.6.0 以降、TiDB は他の DML ステートメントと同じ方法で`LOAD DATA` in トランザクションを処理します。
->     -   `LOAD DATA`ステートメントは、現在のトランザクションをコミットせず、新しいトランザクションも開始しません。
+>     -   `LOAD DATA`ステートメントは、現在のトランザクションをコミットせず、新しいトランザクションを開始しません。
 >     -   `LOAD DATA`ステートメントは、TiDB トランザクション モード設定 (楽観的または悲観的トランザクション) の影響を受けます。
 >     -   トランザクション内の`LOAD DATA`のステートメントは、トランザクション内の[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)のステートメントによってロールバックできます。
 
