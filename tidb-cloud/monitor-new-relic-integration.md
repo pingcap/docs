@@ -1,17 +1,17 @@
 ---
-title: Integrate TiDB Cloud with New Relic (Preview)
+title: Integrate TiDB Cloud with New Relic 
 summary: Learn how to monitor your TiDB cluster with the New Relic integration.
 ---
 
-# Integrate TiDB Cloud with New Relic (Preview)
+# Integrate TiDB Cloud with New Relic 
 
-TiDB Cloud supports New Relic integration (Preview). You can configure TiDB Cloud to send metrics of your TiDB clusters to [New Relic](https://newrelic.com/). After that, you can directly view these metrics in your New Relic dashboards.
+TiDB Cloud supports New Relic integration . You can configure TiDB Cloud to send metrics of your TiDB clusters to [New Relic](https://newrelic.com/). After that, you can directly view these metrics in your New Relic dashboards.
 
 ## New Relic integration version
 
-TiDB Cloud has supported New Relic integration (Beta) since April 11, 2023. Starting from July 31, 2025, TiDB Cloud introduces an enhanced preview version of the integration.
+TiDB Cloud has supported New Relic integration (Beta) since April 11, 2023. Starting from July 31, 2025, TiDB Cloud introduces an enhanced  version of the integration.
 
-- **New Relic integration (Preview)**: if no Datadog or New Relic integration remains undeleted within your organization by July 31, 2025, TiDB Cloud provides the preview version of New Relic integration so you can experience the latest enhancements.
+- **New Relic integration**: if no Datadog or New Relic integration remains undeleted within your organization by July 31, 2025, TiDB Cloud provides the optimized version of New Relic integration so you can experience the latest enhancements.
 - **New Relic integration (Beta)**: if at least one Datadog or New Relic integration remains undeleted within your organization by July 31, 2025, TiDB Cloud retains both existing and new integrations in the beta version to avoid affecting current dashboards. We will also proactively reach out to you to discuss a suitable migration plan and timeline.
 
 ## Prerequisites
@@ -37,11 +37,11 @@ TiDB Cloud has supported New Relic integration (Beta) since April 11, 2023. Star
 Depending on your [New Relic integration version](#new-relic-integration-version), the steps to access the integration page are different.
 
 <SimpleTab>
-<div label="New Relic integration (Preview)">
+<div label="New Relic integration">
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Integrations**.
-3. On the **Integrations** page, click **Integration to New Relic (Preview)**.
+3. On the **Integrations** page, click **Integration to New Relic **.
 4. Enter your API key of New Relic and choose the site of New Relic.
 5. Click **Test Integration**.
 
@@ -72,7 +72,7 @@ Depending on your [New Relic integration version](#new-relic-integration-version
 Depending on your [New Relic integration version](#new-relic-integration-version), the steps are different.
 
 <SimpleTab>
-<div label="New Relic integration (Preview)">
+<div label="New Relic integration">
 
 A new TiDB Cloud dashboard will be available in New Relic after the pending [PR](https://github.com/newrelic/newrelic-quickstarts/pull/2681) is merged by New Relic. Before that, you can manually import the dashboard to New Relic by taking the following steps:
 
@@ -125,7 +125,7 @@ A new TiDB Cloud dashboard will be available in New Relic after the pending [PR]
 
 3. Depending on your [New Relic integration version](#new-relic-integration-version), do one of the following:
 
-    - For New Relic integration (Preview), click **TiDB Cloud Dynamic Tracker** to view the new dashboard.
+    - For New Relic integration, click **TiDB Cloud Dynamic Tracker** to view the new dashboard.
     - For New Relic integration (Beta), click **TiDB Cloud Monitoring** to view the legacy dashboard.
 
 ## Metrics available to New Relic
@@ -151,7 +151,7 @@ New Relic tracks the following metrics for your TiDB clusters.
 | tidb_cloud.node_memory_used_bytes | gauge | cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…<br/><br/>component: tidb\|tikv\|tiflash | The used memory of TiDB/TiKV/TiFlash nodes, in bytes. |
 | tidb_cloud.node_memory_capacity_bytes | gauge | cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…<br/><br/>component: tidb\|tikv\|tiflash | The memory capacity of TiDB/TiKV/TiFlash nodes, in bytes. |
 
-For New Relic integration (Preview), the following additional metrics are also available:
+For the optimized New Relic integration, the following additional metrics are also available:
 
 | Metric name  | Metric type | Labels | Description                                   |
 | :------------| :---------- | :------| :----------------------------------------------------- |
