@@ -41,7 +41,7 @@ Depending on your [New Relic integration version](#new-relic-integration-version
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Integrations**.
-3. On the **Integrations** page, click **Integration to New Relic **.
+3. On the **Integrations** page, click **Integration to New Relic**.
 4. Enter your API key of New Relic and choose the site of New Relic.
 5. Click **Test Integration**.
 
