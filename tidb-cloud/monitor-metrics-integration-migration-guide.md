@@ -23,7 +23,7 @@ New metrics integration is now managed at the individual cluster level, providin
 
 4. Type "**Delete**" in the pop-up window to confirm deletion of the legacy integration.
 
-### Step 2. Enable the New Integration for Every Clusters
+### Step 2. Enable the new integration for each cluster
 
 Repeat the following steps for each dedicated cluster under the project to create a new integration.
 
@@ -35,7 +35,7 @@ Repeat the following steps for each dedicated cluster under the project to creat
 
 ## Impact Statement
 
-Deleting the project-level integration will immediately stop all clusters under the project from sending metrics downstream, causing temporary loss of downstream data and interrupting integration-related services (such as monitoring and alerts) until the new integration is created.
+Deleting the project-level integration immediately stops all clusters under the project from sending metrics downstream. This causes a temporary loss of downstream data and interrupts integration-related services (such as monitoring and alerts) until you create the new integration.
 
 ## Contact support
 
