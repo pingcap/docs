@@ -268,6 +268,7 @@
     - [TLS Connections to TiDB Cloud](/tidb-cloud/secure-connections-to-serverless-clusters.md)
   - Audit Management
     - [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md)
+    - [Database Audit Logging](/tidb-cloud/essential-database-audit-logging.md)
 - Billing
   - [Invoices](/tidb-cloud/tidb-cloud-billing.md#invoices)
   - [Billing Details](/tidb-cloud/tidb-cloud-billing.md#billing-details)
