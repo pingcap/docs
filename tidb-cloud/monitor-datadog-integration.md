@@ -1,17 +1,17 @@
 ---
-title: Integrate TiDB Cloud with Datadog (Preview)
+title: Integrate TiDB Cloud with Datadog 
 summary: Learn how to monitor your TiDB cluster with the Datadog integration.
 ---
 
-# Integrate TiDB Cloud with Datadog (Preview)
+# Integrate TiDB Cloud with Datadog 
 
-TiDB Cloud supports Datadog integration (Preview). You can configure TiDB Cloud to send metrics about your TiDB clusters to [Datadog](https://www.datadoghq.com/). After that, you can view these metrics in your Datadog dashboards directly.
+TiDB Cloud supports Datadog integration . You can configure TiDB Cloud to send metrics about your TiDB clusters to [Datadog](https://www.datadoghq.com/). After that, you can view these metrics in your Datadog dashboards directly.
 
 ## Datadog integration version
 
-TiDB Cloud has supported Datadog integration (Beta) since March 04, 2022. Starting from July 31, 2025, TiDB Cloud introduces an enhanced preview version of the integration.
+TiDB Cloud has supported Datadog integration (Beta) since March 04, 2022. Starting from July 31, 2025, TiDB Cloud introduces an enhanced version of the integration.
 
-- **Datadog integration (Preview)**: if no Datadog or New Relic integration remains undeleted within your organization by July 31, 2025, TiDB Cloud provides the preview version of Datadog integration for your organization to experience the latest enhancements.
+- **Datadog integration **: if no Datadog or New Relic integration remains undeleted within your organization by July 31, 2025, TiDB Cloud provides the optimized version of Datadog integration for your organization to experience the latest enhancements.
 - **Datadog integration (Beta)**: if at least one Datadog or New Relic integration remains undeleted within your organization by July 31, 2025, TiDB Cloud retains both existing and new integrations in the beta version to avoid affecting current dashboards. We will also proactively reach out to you to discuss a suitable migration plan and timeline.
 
 ## Prerequisites
@@ -37,11 +37,11 @@ TiDB Cloud has supported Datadog integration (Beta) since March 04, 2022. Starti
 Depending on your [Datadog integration version](#datadog-integration-version), the steps to access the integration page are different.
 
 <SimpleTab>
-<div label="Datadog integration (Preview)">
+<div label="Datadog integration ">
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Integrations**.
-3. On the **Integrations** page, click **Integration to Datadog (PREVIEW)**.
+3. On the **Integrations** page, click **Integration to Datadog **.
 4. Enter your Datadog API key and choose your Datadog site.
 5. Click **Test Integration**.
 
@@ -77,7 +77,7 @@ Depending on your [Datadog integration version](#datadog-integration-version), t
 2. Go to the [**TiDB Cloud Integration** page](https://app.datadoghq.com/account/settings#integrations/tidb-cloud) in Datadog.
 3. On the **Configuration** tab, click **Install Integration**.
 
-    - For Datadog integration (Preview), the [**TiDB Cloud Dynamic Tracker**](https://app.datadoghq.com/dash/integration/32021/tidb-cloud-dynamic-tracker) dashboard appears in your [**Dashboard List**](https://app.datadoghq.com/dashboard/lists).
+    - For Datadog integration , the [**TiDB Cloud Dynamic Tracker**](https://app.datadoghq.com/dash/integration/32021/tidb-cloud-dynamic-tracker) dashboard appears in your [**Dashboard List**](https://app.datadoghq.com/dashboard/lists).
     - For Datadog integration (Beta), the [**TiDB Cloud Cluster Overview**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview) dashboard appears in your [**Dashboard List**](https://app.datadoghq.com/dashboard/lists).
 
 ## View the pre-built dashboard
@@ -85,8 +85,8 @@ Depending on your [Datadog integration version](#datadog-integration-version), t
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the **Integrations** page.
 2. Click the **Dashboard** link in the **Datadog** section.
 
-    - For Datadog integration (Preview), the **Dashboard** link opens the new dashboard, which includes the latest metrics introduced in the preview version.
-    - For Datadog integration (Beta), the **Dashboard** link opens the legacy dashboard, which does not include the latest metrics introduced in the preview version.
+    - For Datadog integration , the **Dashboard** link opens the new dashboard, which includes the latest metrics introduced in the new version.
+    - For Datadog integration (Beta), the **Dashboard** link opens the legacy dashboard, which does not include the latest metrics introduced in the new version.
 
 ## Metrics available to Datadog
 
@@ -111,7 +111,7 @@ Datadog tracks the following metrics for your TiDB clusters.
 | tidb_cloud.node_memory_used_bytes | gauge | cluster_name: `<cluster name>`<br/>instance: tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…<br/>component: tidb\|tikv\|tiflash | The used memory of TiDB/TiKV/TiFlash nodes, in bytes. |
 | tidb_cloud.node_memory_capacity_bytes | gauge | cluster_name: `<cluster name>`<br/>instance: tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…<br/>component: tidb\|tikv\|tiflash | The memory capacity of TiDB/TiKV/TiFlash nodes, in bytes. |
 
-For Datadog integration (Preview), the following additional metrics are also available:
+For Datadog integration, the following additional metrics are also available:
 
 | Metric name  | Metric type | Labels | Description                                   |
 | :------------| :---------- | :------| :----------------------------------------------------- |
