@@ -1,5 +1,5 @@
 ---
-title: Integrate TiDB Cloud with New Relic 
+title: Integrate TiDB Cloud with New Relic
 summary: Learn how to monitor your TiDB cluster with the New Relic integration.
 ---
 
