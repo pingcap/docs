@@ -1,5 +1,5 @@
 import {
-  getAllMdList,
+  getAllCloudMdList,
   copySingleFileSync,
   copyFileWithCustomContentSync,
   copyDirectoryWithCustomContentSync,
@@ -25,9 +25,9 @@ const extractFilefromList = (
 };
 
 const main = () => {
-  const filteredLinkList = getAllMdList("TOC-tidb-cloud.md");
+  const allFilePaths = getAllCloudMdList();
 
-  extractFilefromList(filteredLinkList, ".", "./tmp");
+  extractFilefromList(allFilePaths, "./", "./tmp");
   copySingleFileSync("TOC-tidb-cloud.md", "./tmp/TOC.md");
   copyDirectoryWithCustomContentSync(
     "./tidb-cloud/",
