@@ -3,7 +3,7 @@ title: Integrate TiDB Cloud with New Relic
 summary: Learn how to monitor your TiDB cluster with the New Relic integration.
 ---
 
-# Integrate TiDB Cloud with New Relic 
+# Integrate TiDB Cloud with New Relic
 
 TiDB Cloud supports New Relic integration . You can configure TiDB Cloud to send metrics of your TiDB clusters to [New Relic](https://newrelic.com/). After that, you can directly view these metrics in your New Relic dashboards.
 
