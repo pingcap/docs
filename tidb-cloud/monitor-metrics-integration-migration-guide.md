@@ -1,11 +1,11 @@
 ---
-title: Metrics Integration Migration Guide
-summary: Learn how to migrate from the legacy to the new metrics integration.
+title: Migrate Datadog and New Relic Integrations
+summary: Learn how to migrate from the legacy to the new metrics integration for Datadog and New Relic.
 ---
 
 # Metrics Integration Migration Guide
 
-New metrics integration is now managed at the individual cluster level, providing more granular control and configuration. The legacy project-level metrics integration will be deprecated. This guide provides detailed instructions for migrating from the legacy project-level integration to the new cluster-level integration.
+New metrics integration is now managed at the individual cluster level, providing more granular control and configuration. The legacy project-level metrics integration for Datadog and New Relic will be deprecated. This guide provides detailed instructions for migrating from the legacy project-level integration to the new cluster-level integration, for Datadog and New Relic.
 
 ## Prerequisites
 
