@@ -311,6 +311,10 @@ Empty set (0.002 sec)
 1 row in set (0.002 sec)
 ```
 
+## Permissions
+
+The `CREATE BINDING` statement requires the `SUPER` privilege.
+
 ## MySQL compatibility
 
 This statement is a TiDB extension to MySQL syntax.
