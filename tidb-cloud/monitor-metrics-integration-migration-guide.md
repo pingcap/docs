@@ -23,8 +23,6 @@ New metrics integration is now managed at the individual cluster level, providin
 
 4. Type "**Delete**" in the pop-up window to confirm deletion of the legacy integration.
 
-![disable-legacy-integration](/media/tidb-cloud/disable-legacy-integration.png)
-
 ### Step 2. Enable the New Integration for Every Clusters
 
 Repeat the following steps for each dedicated cluster under the project to create a new integration.
@@ -34,8 +32,6 @@ Repeat the following steps for each dedicated cluster under the project to creat
 2. In the left navigation panel, click **Settings** > **Integrations**.
 
 3. On the **Integrations** page, create new integrations on demand. For more details on how to create integrations, see [Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration.md) and [Integrate TiDB Cloud with New Relic](/tidb-cloud/monitor-new-relic-integration.md).
-
-![create-new-integration](/media/tidb-cloud/create-new-integration.png)
 
 ## Impact Statement
 
