@@ -1,6 +1,6 @@
 ---
 title: Metrics Integration Migration Guide
-summary: Learn how to migrate from legacy metrics integration to new metrics integration.
+summary: Learn how to migrate from the legacy to the new metrics integration.
 ---
 
 # Metrics Integration Migration Guide
