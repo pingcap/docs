@@ -12,7 +12,7 @@ TiDB Cloud supports New Relic integration. You can configure TiDB Cloud to send 
 TiDB Cloud has supported New Relic integration (Beta) since April 11, 2023. Starting from July 31, 2025, TiDB Cloud introduces an enhanced version of the integration. Starting from September 30, 2025, New Relic integration becomes generally available (GA).
 
 - **New Relic integration**: if no Datadog or New Relic integration remains undeleted within your organization by July 31, 2025, TiDB Cloud provides the optimized version of New Relic integration so you can experience the latest enhancements.
-- **New Relic integration (Beta)**: if at least one Datadog or New Relic integration remains undeleted within your organization by July 31, 2025, TiDB Cloud retains both existing and new integrations in the beta version to avoid affecting current dashboards. For more information about how to migrate Datadog and New Relic integrations, see (Migrate Datadog and New Relic Integrations)[/tidb-cloud/monitor-metrics-integration-migration-guide.md].
+- **New Relic integration (Beta)**: if at least one Datadog or New Relic integration remains undeleted within your organization by July 31, 2025, TiDB Cloud retains both existing and new integrations in the beta version to avoid affecting current dashboards. For more information about how to migrate Datadog and New Relic integrations, see [Migrate Datadog and New Relic Integrations](/tidb-cloud/monitor-metrics-integration-migration-guide.md).
 
 ## Prerequisites
 
