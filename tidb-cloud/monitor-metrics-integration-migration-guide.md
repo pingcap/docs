@@ -5,7 +5,7 @@ summary: Learn how to migrate from the legacy project-level metrics integration 
 
 # Migrate Datadog and New Relic Integrations
 
-New metrics integration is now managed at the individual cluster level, providing more granular control and configuration. The legacy project-level metrics integration for Datadog and New Relic will be deprecated. This guide provides detailed instructions for migrating from the legacy project-level integration to the new cluster-level integration, for Datadog and New Relic.
+TiDB Cloud now manages Datadog and New Relic integrations at the cluster level, offering more granular control and configuration. The legacy project-level Datadog and New Relic integrations will be deprecated on September 30, 2025. If your organization is still using legacy integrations, follow this guide to migrate to the new cluster-level integrations and minimize disruptions to your metrics-related services.
 
 ## Prerequisites
 
