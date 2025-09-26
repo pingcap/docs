@@ -37,7 +37,7 @@ TiDB Cloud has supported the project-level Datadog integration (Beta) since Marc
 Depending on your [Datadog integration version](#datadog-integration-version), the steps to access the integration page are different.
 
 <SimpleTab>
-<div label="Datadog integration">
+<div label="Cluster-level Datadog integration">
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Integrations**.
