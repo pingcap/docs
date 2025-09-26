@@ -20,7 +20,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
   
         For more information, see [Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration.md) and [Integrate TiDB Cloud with New Relic](/tidb-cloud/monitor-new-relic-integration.md).
   
-        For more information about how to migrate existing Datadog and New Relic integrations to cluster-level, see [Migrate Datadog and New Relic Integrations](/tidb-cloud/monitor-metrics-integration-migration-guide.md).
+        For more information about how to migrate existing Datadog and New Relic integrations to the cluster level, see [Migrate Datadog and New Relic Integrations](/tidb-cloud/monitor-metrics-integration-migration-guide.md).
 
 ## September 23, 2025
 
