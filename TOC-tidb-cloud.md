@@ -162,6 +162,7 @@
       - [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
     - [Cluster Events](/tidb-cloud/tidb-cloud-events.md)
     - [Third-Party Metrics Integrations](/tidb-cloud/third-party-monitoring-integrations.md)
+      - [Migrate Datadog and New Relic Integrations](/tidb-cloud/monitor-metrics-integration-migration-guide.md)
     - [TiDB Cloud Clinic](/tidb-cloud/tidb-cloud-clinic.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
