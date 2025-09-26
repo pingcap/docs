@@ -85,8 +85,8 @@ Depending on your [Datadog integration version](#datadog-integration-version), t
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the **Integrations** page.
 2. Click the **Dashboard** link in the **Datadog** section.
 
-    - For Datadog integration, the **Dashboard** link opens the new dashboard, which includes the latest metrics introduced in the enhanced version.
-    - For Datadog integration (Beta), the **Dashboard** link opens the legacy dashboard, which does not include the latest metrics introduced in the enhanced version.
+    - For cluster-level Datadog integration, the **Dashboard** link opens the new dashboard, which includes the latest metrics introduced in the enhanced version.
+    - For legacy project-level Datadog integration (Beta), the **Dashboard** link opens the legacy dashboard, which does not include the latest metrics introduced in the enhanced version.
 
 ## Metrics available to Datadog
 
