@@ -8,6 +8,20 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## September 30, 2025
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Datadog and New Relic integrations are now generally available (GA) for TiDB Cloud Dedicated clusters.
+  
+        This feature enables you to seamlessly ship the metrics of your [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster to Datadog or New Relic, allowing for advanced alerting in a unified platform.
+  
+        For more information, see [Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration.md) and [Integrate TiDB Cloud with New Relic](/tidb-cloud/monitor-new-relic-integration.md).
+  
+        For more information about how to migrate Datadog and New Relic integrations, see [Migrate Datadog and New Relic Integrations](/tidb-cloud/monitor-metrics-integration-migration-guide.md).
+
 ## September 23, 2025
 
 **General changes**
