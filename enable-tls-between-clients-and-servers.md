@@ -51,7 +51,7 @@ If the certificate parameters are correct, TiDB outputs `mysql protocol server s
 
 ## Configure TiProxy to use TLS connections
 
-By specifying the [sql-tls](/tiproxy/tiproxy-configuration.md#sql-tls) in the [TiProxy](/tiproxy/tiproxy-overview.md) configuration TiProxy is able to accept TLS connections. For more details on this and how to enable TLS on backend connections see [TiProxy Security](/tiproxy/tiproxy-overview.md#security).
+By specifying the [`sql-tls`](/tiproxy/tiproxy-configuration.md#sql-tls) settings in the [TiProxy](/tiproxy/tiproxy-overview.md) configuration, you can enable TiProxy to accept TLS connections. For more details on this and how to enable TLS on backend connections, see [TiProxy Security](/tiproxy/tiproxy-overview.md#security).
 
 ## Configure the MySQL client to use TLS connections
 
