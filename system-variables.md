@@ -4636,9 +4636,7 @@ SHOW WARNINGS;
 - Type: Float
 - Range: `[0, 1]`
 - Default value: `0`
-- This variable controls the ratio of risk between the original predicate
-selectivity estimate and the potential skew estimate for an equality predicate, when the
-value is not found in TopN or histogram buckets.
+- This variable controls the ratio of risk between the original predicate selectivity estimate and the potential skew estimate for an equality predicate, when the value is not found in TopN or histogram buckets.
 
 
 ### tidb_opt_risk_range_skew_ratio <span class="version-mark">New in v9.0.0</span>
@@ -4652,10 +4650,7 @@ value is not found in TopN or histogram buckets.
 - Type: Float
 - Range: `[0, 1]`
 - Default value: `0`
-- This variable controls the ratio of risk between the original predicate
-selectivity estimate and the potential skew estimate for a range predicate, when the
-search range is found within a single histogram bucket or entirely outside the range
-of all histogram buckets.
+- This variable controls the ratio of risk between the original predicate selectivity estimate and the potential skew estimate for a range predicate, when the search range is found within a single histogram bucket or entirely outside the range of all histogram buckets.
 
 ### tidb_opt_scan_factor
 
