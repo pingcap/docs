@@ -163,7 +163,7 @@
     - [Cluster Events](/tidb-cloud/tidb-cloud-events.md)
     - Third-Party Metrics Integrations
       - [Overview](/tidb-cloud/third-party-monitoring-integrations.md)
-      - [Migrate Datadog and New Relic Integrations](/tidb-cloud/monitor-metrics-integration-migration-guide.md)
+      - [Migrate Datadog and New Relic Integrations](/tidb-cloud/migrate-metrics-integrations.md)
     - [TiDB Cloud Clinic](/tidb-cloud/tidb-cloud-clinic.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
