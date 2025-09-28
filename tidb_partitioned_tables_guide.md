@@ -305,7 +305,7 @@ Query OK, 0 rows affected (0.52 sec)
 
 When a partitioned table contains global indexes, performing certain DDL operations such as DROP PARTITION, TRUNCATE PARTITION, or REORG PARTITION requires synchronously updating the global index values. This can significantly increase the execution time of these DDL operations.
 
-If you need to drop partitions frequently and minimize the performance impact the the system, it's better to use **Local Indexes** for faster and more efficient operations.
+If you need to drop partitions frequently and minimize the performance impact on the system, it's better to use **local indexes** for faster and more efficient operations.
 
 ## Mitigating Write Hotspot Issues
 
