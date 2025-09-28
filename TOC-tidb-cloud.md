@@ -313,7 +313,7 @@
   - [故障转移和重新保护数据库](/tidb-cloud/recovery-group-failover.md)
   - [删除恢复组](/tidb-cloud/recovery-group-delete.md)
 - 安全
-  - [Security Overview](/tidb-cloud/security-overview.md)
+  - [安全概览](/tidb-cloud/security-overview.md)
   - 身份访问控制
     - [密码验证](/tidb-cloud/tidb-cloud-password-authentication.md)
     - [标准 SSO 身份验证](/tidb-cloud/tidb-cloud-sso-authentication.md)
