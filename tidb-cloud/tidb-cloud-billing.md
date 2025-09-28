@@ -21,6 +21,8 @@ See [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starte
 
 ### Pricing for {{{ .essential }}} {#pricing-for-essential}
 
+<!-- ToDo: Replace the section content with the website link when the Pricing page for Essential is ready -->
+
 > **Tip:**
 >
 > Currently, {{{ .essential }}} is in public preview on Alibaba Cloud and is only available in the following regions: Jakarta, Mexico, Singapore, and Tokyo. To request other regions on Alibaba Cloud, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md#access-pingcap-help-center).
