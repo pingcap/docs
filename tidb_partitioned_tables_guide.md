@@ -550,7 +550,7 @@ To avoid hotspots when a new table or partition is created, it is often benefici
 **Identify the minimum and maximum values** from existing production data so that incoming writes are more likely to target different pre-allocated regions. Example query for existing data:
 
 ```sql
-SELECT MIN(id), MAX(id) FROM employees;
+SELECT MIN(id), MAX(id) FROM employees2;
 ```
 
 - If the table is **new** and has no historical data, estimate the min/max values based on your business logic and expected data range.
