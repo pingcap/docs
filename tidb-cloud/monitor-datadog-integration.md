@@ -77,8 +77,8 @@ Depending on your [Datadog integration version](#datadog-integration-version), t
 2. Go to the [**TiDB Cloud Integration** page](https://app.datadoghq.com/account/settings#integrations/tidb-cloud) in Datadog.
 3. On the **Configuration** tab, click **Install Integration**.
 
-    - For Datadog integration, the [**TiDB Cloud Dynamic Tracker**](https://app.datadoghq.com/dash/integration/32021/tidb-cloud-dynamic-tracker) dashboard appears in your [**Dashboard List**](https://app.datadoghq.com/dashboard/lists).
-    - For Datadog integration (Beta), the [**TiDB Cloud Cluster Overview**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview) dashboard appears in your [**Dashboard List**](https://app.datadoghq.com/dashboard/lists).
+    - For cluster-level Datadog integration, the [**TiDB Cloud Dynamic Tracker**](https://app.datadoghq.com/dash/integration/32021/tidb-cloud-dynamic-tracker) dashboard appears in your [**Dashboard List**](https://app.datadoghq.com/dashboard/lists).
+    - For legacy project-level Datadog integration (Beta), the [**TiDB Cloud Cluster Overview**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview) dashboard appears in your [**Dashboard List**](https://app.datadoghq.com/dashboard/lists).
 
 ## View the pre-built dashboard
 
