@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: 30f10619d951f29048f30f5451e93b43c85a859c-->
+# 目录 <!--Corresponding EN commit: 07b75662984c9bc38e1dd23a0f7bc5edcf29e627-->
 
 ## 快速开始
 
@@ -292,6 +292,7 @@
   - [数据应用配置文件](/tidb-cloud/data-service-app-config-files.md)
   - [响应和状态代码](/tidb-cloud/data-service-response-and-status-code.md)
 - 安全
+  - [安全概览](/tidb-cloud/security-overview.md)
   - 身份访问控制
     - [密码验证](/tidb-cloud/tidb-cloud-password-authentication.md)
     - [标准 SSO 身份验证](/tidb-cloud/tidb-cloud-sso-authentication.md)

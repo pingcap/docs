@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: 30f10619d951f29048f30f5451e93b43c85a859c-->
+# 目录 <!--Corresponding EN commit: 07b75662984c9bc38e1dd23a0f7bc5edcf29e627-->
 
 ## 快速开始
 
@@ -313,6 +313,7 @@
   - [故障转移和重新保护数据库](/tidb-cloud/recovery-group-failover.md)
   - [删除恢复组](/tidb-cloud/recovery-group-delete.md)
 - 安全
+  - [Security Overview](/tidb-cloud/security-overview.md)
   - 身份访问控制
     - [密码验证](/tidb-cloud/tidb-cloud-password-authentication.md)
     - [标准 SSO 身份验证](/tidb-cloud/tidb-cloud-sso-authentication.md)
@@ -772,6 +773,10 @@
   - [[2023-11-14] TiDB Cloud Dedicated Scale 功能维护通知](/tidb-cloud/notification-2023-11-14-scale-feature-maintenance.md)
   - [[2023-09-26] TiDB Cloud 控制台维护通知](/tidb-cloud/notification-2023-09-26-console-maintenance.md)
   - [[2023-08-31] TiDB Cloud 控制台维护通知](/tidb-cloud/notification-2023-08-31-console-maintenance.md)
+
+## _BUILD_ALLOWLIST
+
+- [Manage Database Users and Roles](/tidb-cloud/configure-sql-users.md)
 
 ## _BUILD_ALLOWLIST
 
