@@ -777,7 +777,3 @@
 ## _BUILD_ALLOWLIST
 
 - [Manage Database Users and Roles](/tidb-cloud/configure-sql-users.md)
-
-## _BUILD_ALLOWLIST
-
-- [Manage Database Users and Roles](/tidb-cloud/configure-sql-users.md)
