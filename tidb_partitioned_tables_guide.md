@@ -687,4 +687,4 @@ Query OK, 0 rows affected, 1 warning (2 hours 31 min 57.05 sec)
 
 TiDB offers two approaches for converting tables between partitioned and non-partitioned states:
 
-- Choose the offline method when your system can accommodate a maintenance window, as it delivers much better performance. Use online DDL only when zero downtime is a strict requirement.
+- Choose an offline method like `IMPORT INTO` when your system can accommodate a maintenance window, as it delivers much better performance. Use online DDL only when zero downtime is a strict requirement.
