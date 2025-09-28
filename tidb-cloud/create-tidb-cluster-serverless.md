@@ -44,20 +44,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
 3. Select a cluster plan and the cloud provider.
 
-    <CustomContent language="en,zh">
-
-    - For AWS, you can start with a **Starter** cluster.
-    - For Alibaba Cloud, you can start with a **Starter** cluster and later upgrade to an **Essential** cluster as your needs grow.
-
-    </CustomContent>
-
-    <CustomContent language="ja">
-
-    For AWS, you can start with a **Starter** cluster.
-
-    </CustomContent>
-
-    For more information, see [cluster plans](/tidb-cloud/select-cluster-tier.md).
+    You can start with a **Starter** cluster and later upgrade to an **Essential** cluster as your needs grow. For more information, see [cluster plans](/tidb-cloud/select-cluster-tier.md).
 
 4. Select a region where you want to host your cluster.
 
