@@ -86,7 +86,7 @@ Depending on your [Datadog integration version](#datadog-integration-version), t
 2. Click the **Dashboard** link in the **Datadog** section.
 
     - For cluster-level Datadog integration, the **Dashboard** link opens the new dashboard, which includes the latest metrics introduced in the enhanced version.
-    - For legacy project-level Datadog integration (Beta), the **Dashboard** link opens the legacy dashboard, which does not include the latest metrics introduced in the enhanced version.
+    - For legacy project-level Datadog integration (Beta), the **Dashboard** link opens the legacy dashboard, which does not include the latest metrics introduced in the cluster-level Datadog integration.
 
 ## Metrics available to Datadog
 
