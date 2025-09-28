@@ -179,7 +179,7 @@ The performance overhead of partitioned tables in TiDB depends significantly on 
 #### Recommendation
 
 - Avoid partitioned tables unless truly necessary. For most OLTP workloads, a well-indexed non-partitioned table performs better and is easier to manage.
-- If you must use partitioned tables, benchmark both global Index and local Index strategies under your workload.
+- If you must use partitioned tables, benchmark both global index and local index strategies under your workload.
 - Use global indexes when query performance across partitions is critical.
 - Choose local indexes only if your main concern is DDL efficiency, such as fast DROP PARTITION, and the performance side effect from the partition table is acceptable.
 
