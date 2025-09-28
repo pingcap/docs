@@ -197,7 +197,7 @@ The performance overhead of partitioned tables in TiDB depends significantly on 
 #### Recommendation
 
 - Avoid partitioned tables unless truly necessary. For most OLTP workloads, a well-indexed non-partitioned table performs better and is easier to manage.
-- If you must use partitioned tables, benchmark both global Index and local Index strategies under your workload.
+- If you must use partitioned tables, benchmark both global index and local index strategies under your workload.
 - Use global indexes when query performance across partitions is critical.
 - Choose local indexes only if your main concern is DDL efficiency, such as fast DROP PARTITION, and the performance side effect from the partition table is acceptable.
 
@@ -323,7 +323,7 @@ Query OK, 0 rows affected (0.52 sec)
 
 When a partitioned table contains global indexes, performing certain DDL operations such as DROP PARTITION, TRUNCATE PARTITION, or REORG PARTITION requires synchronously updating the global index values. This can significantly increase the execution time of these DDL operations.
 
-If you need to drop partitions frequently and minimize the performance impact the the system, it's better to use **Local Indexes** for faster and more efficient operations.
+If you need to drop partitions frequently and minimize the performance impact on the system, it's better to use **local indexes** for faster and more efficient operations.
 
 ## Mitigating Write Hotspot Issues
 
@@ -705,4 +705,4 @@ Query OK, 0 rows affected, 1 warning (2 hours 31 min 57.05 sec)
 
 TiDB offers two approaches for converting tables between partitioned and non-partitioned states:
 
-- Choose the offline method when your system can accommodate a maintenance window, as it delivers much better performance. Use online DDL only when zero downtime is a strict requirement.
+- Choose an offline method like `IMPORT INTO` when your system can accommodate a maintenance window, as it delivers much better performance. Use online DDL only when zero downtime is a strict requirement.
