@@ -646,7 +646,7 @@ INSERT INTO fa_new SELECT * FROM fa;
 -- 120 million rows copied in 1h 52m 47s
 ```
 
-### Method 2: Pipeline DML INSERT INTO ... SELECT...
+### Method 2: Pipeline DML INSERT INTO ... SELECT ...
 
 ```sql
 SET tidb_dml_type = "bulk";
