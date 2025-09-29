@@ -29,7 +29,7 @@ By understanding these aspects, you can make informed decisions on whether and h
 
 > **Note:** If you're new to partitioned tables in TiDB, we recommend reviewing the [Partitioned Table User Guide](https://docs.pingcap.com/tidb/stable/partitioned-table) first to better understand key concepts like partition pruning, global vs. local indexes, and partition strategies.
 
-## Improving Query Efficiency
+## Improving query efficiency
 
 ### Partition Pruning
 
