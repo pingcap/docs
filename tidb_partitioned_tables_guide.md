@@ -43,7 +43,7 @@ Partition pruning is most beneficial in scenarios where query predicates match t
 - **Multi-tenant or category-based datasets**: Partitioning by tenant ID or category enables queries to focus on a small subset of partitions.
 - **Hybrid Transactional/Analytical Processing (HTAP)**: Especially for range partitioning, TiDB can leverage partition pruning in analytical workloads on TiFlash to skip irrelevant partitions and scan only the necessary subset, preventing **full table scans** on large datasets.
 
-For more use cases, please refer to https://docs.pingcap.com/tidb/stable/partition-pruning/
+For more use cases, see [Partition Pruning](https://docs.pingcap.com/tidb/stable/partition-pruning/).
 
 ### Query Performance on Secondary Index: Non-Partitioned Table vs. Local Index vs. Global Index
 
