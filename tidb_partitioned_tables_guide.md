@@ -631,7 +631,7 @@ When working with large tables (e.g., 120 million rows), transforming between pa
 
 1. Batch DML: `INSERT INTO ... SELECT ...`
 2. Pipeline DML: `INSERT INTO ... SELECT ...`
-3. Import into: `IMPORT INTO ... FROM SELECT ...`
+3. `IMPORT INTO`: `IMPORT INTO ... FROM SELECT ...`
 4. Online DDL: Direct schema transformation via `ALTER TABLE`
 
 This section compares the efficiency and implications of these methods in both directions of conversion, and provides best practice recommendations.
