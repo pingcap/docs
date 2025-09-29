@@ -1,4 +1,4 @@
-# Mastering TiDB Partitioned Tables
+# Best Practices for Using TiDB Partitioned Tables
 
 ## Introduction
 
