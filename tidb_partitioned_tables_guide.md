@@ -77,7 +77,6 @@ CREATE TABLE `fa` (
   KEY `index_fa_on_account_id` (`account_id`),
   KEY `index_fa_on_user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
-AUTO_INCREMENT=1284046228560811404
 PARTITION BY RANGE (`yeardate`)
 (PARTITION `fa_2024001` VALUES LESS THAN (2024001),
 PARTITION `fa_2024002` VALUES LESS THAN (2024002),
