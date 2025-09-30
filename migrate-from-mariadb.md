@@ -32,7 +32,7 @@ Prepare the following based on the strategy you choose:
 
 TiDB is [compatible with MySQL](/mysql-compatibility.md), and MySQL and MariaDB have a lot of functionality in common. However, there might be MariaDB-specific features that might not be compatible with TiDB that you should be aware of before migrating.
 
-Besides checking the items in this section, it is recommended that you also check the [Compatibility & Differences](https://mariadb.com/docs/release-notes/community-server/about/compatibility-and-differences) in the MariaDB documentation.
+Besides checking the items in this section, it is recommended that you also check the [Compatibility and Differences](https://mariadb.com/docs/release-notes/community-server/about/compatibility-and-differences) in the MariaDB documentation.
 
 ### Authentication
 
