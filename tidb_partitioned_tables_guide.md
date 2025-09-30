@@ -626,7 +626,7 @@ show table employees2 PARTITION (p4) regions;
 
 ## Converting Between Partitioned and Non-Partitioned Tables
 
-When working with large tables (e.g., 120 million rows), transforming between partitioned and non-partitioned schemas is sometimes required for performance tuning or schema design changes. TiDB supports several main approaches for such transformations:
+When working with large tables (e.g. in this example 120 million rows), transforming between partitioned and non-partitioned schemas is sometimes required for performance tuning or schema design changes. TiDB supports several main approaches for such transformations:
 
 1. Batch DML: `INSERT INTO ... SELECT ...`
 2. Pipeline DML: `INSERT INTO ... SELECT ...`
