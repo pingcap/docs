@@ -7,13 +7,13 @@ summary: Learn how to migrate incremental data from MySQL-compatible databases h
 
 This document describes how to migrate incremental data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, or Azure Database for MySQL) or self-hosted source database to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
 
-For instructions about how to migrate existing data or both existing data and incremental data, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
+For instructions about how to migrate existing data or both existing data and incremental data, see [Migrate MySQL-Compatible Databases to TiDB Cloud Essential Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration-essential.md).
 
 ## Limitations
 
 > **Note**:
 >
-> This section only includes limitations about incremental data migration. It is recommended that you also read the general limitations. See [Limitations](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations).
+> This section only includes limitations about incremental data migration. It is recommended that you also read the general limitations. See [Limitations](/tidb-cloud/migrate-from-mysql-using-data-migration-essential.md#limitations).
 
 - If the target table is not yet created in the target database, the migration job will report an error as follows and fail. In this case, you need to manually create the target table and then retry the migration job.
 
@@ -38,13 +38,13 @@ If you specify GTID as the start position to migrate incremental data, note the 
 
 > **Note**:
 >
-> This section only includes prerequisites about incremental data migration. It is recommended that you also read the [general prerequisites](/tidb-cloud/migrate-from-mysql-using-data-migration.md#prerequisites).
+> This section only includes prerequisites about incremental data migration. It is recommended that you also read the [general prerequisites](/tidb-cloud/migrate-from-mysql-using-data-migration-essential.md#prerequisites).
 
 If you want to use GTID to specify the start position, make sure that the GTID is enabled in the source database. The operations vary depending on the database type.
 
 ### For Amazon RDS and Amazon Aurora MySQL
 
-For Amazon RDS and Amazon Aurora MySQL, you need to create a new modifiable parameter group (that is, not the default parameter group) and then modify the following parameters in the parameter group and restart the instance application.
+For Amazon RDS and Amazon Aurora MySQL, you need to create a new modifiable parameter group (that is, not the default parameter group), modify the following parameters in the parameter group, and then restart the instance to apply the changes.
 
 - `gtid_mode`
 - `enforce_gtid_consistency`
@@ -142,7 +142,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
    - **Data source**: the data source type.
    - **Region**: the region of the data source, which is required for cloud databases only.
-   - **Connectivity method**: the connection method for the data source. Currently, you can choose public IP, VPC Peering, or Private Link according to your connection method.
+   - **Connectivity method**: the connection method for the data source. You can choose public IP or Private Link according to your connection method.
    - **Hostname or IP address** (for public IP and VPC Peering): the hostname or IP address of the data source.
    - **Service Name** (for Private Link): the endpoint service name.
    - **Port**: the port of the data source.
@@ -151,7 +151,7 @@ On the **Create Migration Job** page, configure the source and target connection
    - **SSL/TLS**: if you enable SSL/TLS, you need to upload the certificates of the data source, including any of the following:
         - only the CA certificate
         - the client certificate and client key
-        - the CA certificate, client certificate and client key
+        - the CA certificate, client certificate, and client key
 
 3. Fill in the target connection profile.
 
@@ -163,7 +163,7 @@ On the **Create Migration Job** page, configure the source and target connection
 5. Take action according to the message you see:
 
     - If you use Public IP, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
-    - If you use AWS Private Link, you are prompted to accept the endpoint request. Go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), and click **Endpoint services** to accept the endpoint request.
+    - If you use AWS Private Link, you are prompted to accept the endpoint request. Go to the [AWS VPC console](https://console.aws.amazon.com/vpc/home), and click **Endpoint services** to accept the endpoint request.
 
 ## Step 3: Choose migration job type
 

@@ -37,9 +37,9 @@ You can create up to 100 migration jobs for each organization. To create more mi
 
 ### Limitations of incremental data migration
 
-- During incremental data migration, if the table to be migrated already exists in the target database with duplicate keys, an error is reported and the migration is interrupted. In this situation, you need to make sure whether the MySQL source data is accurate. If yes, click the "Restart" button of the migration job, and the migration job will replace the target TiDB Cloud cluster's conflicting records with the MySQL source records.
+- During incremental data migration, if the table to be migrated already exists in the target database with duplicate keys, an error is reported and the migration is interrupted. In this situation, you need to verify that the MySQL source data is accurate. If it is, click the "Restart" button of the migration job, and the migration job will replace the target TiDB Cloud cluster's conflicting records with the MySQL source records.
 
-- During incremental replication (migrating ongoing changes to your cluster), if the migration job recovers from an abrupt error, it might open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are migrated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are migrated to the target TiDB Cloud cluster to make sure that all the data during the abrupt error has been migrated smoothly to the target TiDB Cloud cluster. In this scenario, for MySQL source tables without primary keys or non-null unique indexes, some data might be duplicated in the target TiDB Cloud cluster because the data might be inserted repeatedly into the target TiDB Cloud cluster.
+- During incremental replication (migrating ongoing changes to your cluster), if the migration job recovers from an abrupt error, it might open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are migrated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are migrated to the target TiDB Cloud cluster to ensure that all the data during the abrupt error has been migrated smoothly to the target TiDB Cloud cluster. In this scenario, for MySQL source tables without primary keys or non-null unique indexes, some data might be duplicated in the target TiDB Cloud cluster because the data might be inserted repeatedly into the target TiDB Cloud cluster.
 
 - In the following scenarios, if the migration job takes longer than 24 hours, do not purge binary logs in the source database to ensure that Data Migration can get consecutive binary logs for incremental replication:
 
@@ -85,7 +85,7 @@ SHOW VARIABLES WHERE Variable_name IN
 If necessary, change the source MySQL instance configurations to match the required values.
 
 <details>
-<summary> Configure a self‑managed MySQL instance </summary>
+<summary> Configure a self-managed MySQL instance </summary>
 
 1. Open `/etc/my.cnf` and add the following:
 
@@ -150,16 +150,16 @@ Regardless of the connection method, it is strongly recommended to use TLS/SSL f
 When using public endpoints, you can verify network connectivity and access both now and later during the DM job creation process. TiDB Cloud will provide specific egress IP addresses and prompt instructions at that time.
 
 1. Identify and record the source MySQL instance's endpoint hostname (FQDN) or public IP address.
-2. Ensure you have the required permissions to modify the firewall or security group rules for your database. Refer to your cloud provider's documentation for guidance as follows:
+2. Ensure you have the required permissions to modify the firewall or security group rules for your database. Refer to your cloud provider's documentation for guidance.
 3. Optional: Verify connectivity to your source database from a machine with public internet access using the appropriate certificate for in-transit encryption:
 
     ```shell
     mysql -h <public-host> -P <port> -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
     ```
 
-4. Later, during the Data Migration job setup, TiDB Cloud will provide an egress IP range. At that time, you need to add this IP range to your database's firewall or security‑group rules following the same procedure above.
+4. Later, during the Data Migration job setup, TiDB Cloud will provide an egress IP range. At that time, you need to add this IP range to your database's firewall or security-group rules following the same procedure above.
 
-#### Private link or private endpoint
+#### Private link or private endpoint
 
 If you use a provider-native private link or private endpoint, create a private endpoint for your source MySQL instance (RDS, Aurora, or Azure Database for MySQL).
 
@@ -277,7 +277,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
         - Option 2: Client certificate authentication
 
-            - If your MySQL server is configured for client certificate authentication, upload **Client Certificate** and  **Client private key**.
+            - If your MySQL server is configured for client certificate authentication, upload **Client Certificate** and **Client private key**.
             - In this option, TiDB Cloud presents its certificate to the MySQL server for authentication, but TiDB Cloud does not verify the MySQL server's certificate.
             - This option is typically used when the MySQL server is configured with options such as `REQUIRE SUBJECT '...'` or `REQUIRE ISSUER '...'` without `REQUIRE X509`, allowing it to check specific attributes of the client certificate without full CA validation of that client certificate.
             - This option is often used when the MySQL server accepts client certificates in self-signed or custom PKI environments. Note that this configuration is vulnerable to man-in-the-middle attacks and is not recommended for production environments unless other network-level controls guarantee server authenticity.
@@ -305,11 +305,11 @@ On the **Create Migration Job** page, configure the source and target connection
     - If you use **Public IP** as the connectivity method, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
     - If you use **Private Link** as the connectivity method, you are prompted to accept the endpoint request:
         - For AWS: go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), click **Endpoint services**, and accept the endpoint request from TiDB Cloud.
-        - For Azure: go to the [Azure portal](https://portal.azure.com), search for your MySQL Flexible Server by name, click **Setting** > **Networking** in the left navigation pane, locate the **Private endpoint** section on the right side, and then approve the pending connection request from TiDB Cloud.
+        - For Azure: go to the [Azure portal](https://portal.azure.com), search for your MySQL Flexible Server by name, click **Settings** > **Networking** in the left navigation pane, locate the **Private endpoint** section on the right side, and then approve the pending connection request from TiDB Cloud.
 
 ## Step 3: Choose migration job type
 
-In the **Choose the objects to be migrated** step, you can choose existing data migration, incremental data migration, or both.
+In the **Choose migration job type** step, you can choose existing data migration, incremental data migration, or both.
 
 ### Migrate existing data and incremental data
 
@@ -323,7 +323,7 @@ This mode exports data from MySQL source databases as SQL statements and then ex
 
 To migrate only the incremental data of the source database to TiDB Cloud, choose **Incremental data migration**. In this case, the migration job does not migrate the existing data of the source database to TiDB Cloud, but only migrates the ongoing changes of the source database that are explicitly specified by the migration job.
 
-For detailed instructions about incremental data migration, see [Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md).
+For detailed instructions about incremental data migration, see [Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Essential Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration-essential.md).
 
 ## Step 4: Choose the objects to be migrated
 
@@ -339,7 +339,7 @@ For detailed instructions about incremental data migration, see [Migrate Only In
 
 On the **Precheck** page, you can view the precheck results. If the precheck fails, you need to operate according to **Failed** or **Warning** details, and then click **Check again** to recheck.
 
-If there are only warnings on some check items, you can evaluate the risk and consider whether to ignore the warnings. If all warnings are ignored, the migration job will automatically go on to the next step.
+If there are only warnings on some check items, you can evaluate the risk and consider whether to ignore the warnings. If all warnings are ignored, the migration job will automatically proceed to the next step.
 
 For more information about errors and solutions, see [Precheck errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#precheck-errors-and-solutions).
 
