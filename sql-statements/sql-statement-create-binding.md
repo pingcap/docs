@@ -314,7 +314,7 @@ Empty set (0.002 sec)
 ## SQL statement truncation
 
 When you use `CREATE BINDING ... FROM HISTORY USING PLAN DIGEST`, the binding can fail if the SQL statement stored in [statement summary tables](/statement-summary-tables.md) for that digest is truncated because it is longer than [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40). In this case, you need to increase `tidb_stmt_summary_max_sql_length`.
-=======
+
 ## Permissions
 
 The `CREATE BINDING` statement requires the `SUPER` privilege.
