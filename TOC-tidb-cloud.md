@@ -162,7 +162,9 @@
             -   [Slackで登録する](/tidb-cloud/monitor-alert-slack.md)
             -   [Zoomで登録する](/tidb-cloud/monitor-alert-zoom.md)
         -   [クラスタイベント](/tidb-cloud/tidb-cloud-events.md)
-        -   [サードパーティのメトリクス統合](/tidb-cloud/third-party-monitoring-integrations.md)
+        -   サードパーティのメトリクス統合
+            -   [概要](/tidb-cloud/third-party-monitoring-integrations.md)
+            -   [DatadogとNew Relicの統合の移行](/tidb-cloud/migrate-metrics-integrations.md)
         -   [TiDB Cloudクリニック](/tidb-cloud/tidb-cloud-clinic.md)
     -   パフォーマンスの調整
         -   [概要](/tidb-cloud/tidb-cloud-tune-performance-overview.md)

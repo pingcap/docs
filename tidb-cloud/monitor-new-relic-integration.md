@@ -1,18 +1,18 @@
 ---
-title: Integrate TiDB Cloud with New Relic (Preview)
+title: Integrate TiDB Cloud with New Relic
 summary: New Relic 統合を使用して TiDB クラスターを監視する方法を学習します。
 ---
 
-# TiDB Cloudと New Relic の統合（プレビュー） {#integrate-tidb-cloud-with-new-relic-preview}
+# TiDB CloudとNew Relicの統合 {#integrate-tidb-cloud-with-new-relic}
 
-TiDB CloudはNew Relicとの連携（プレビュー）をサポートしています。TiDB TiDB Cloudを設定して、TiDBクラスターのメトリクスを[ニューレリック](https://newrelic.com/)に送信できます。その後、これらのメトリクスをNew Relicダッシュボードで直接確認できるようになります。
+TiDB CloudはNew Relicとの連携をサポートしています。TiDB TiDB Cloudを設定して、TiDBクラスターのメトリクスを[ニューレリック](https://newrelic.com/)に送信できます。その後、これらのメトリクスをNew Relicダッシュボードで直接確認できるようになります。
 
 ## New Relic統合バージョン {#new-relic-integration-version}
 
-TiDB Cloud は、 2023 年 4 月 11 日から New Relic 統合 (ベータ版) をサポートしています。2025 年 7 月 31 日から、 TiDB Cloud は統合の拡張プレビュー バージョンを導入します。
+TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統合（ベータ版）をサポートしています。2025年7月31日より、 TiDB CloudはクラスターレベルのNew Relic統合（プレビュー版）を導入します。2025年9月30日より、クラスターレベルのNew Relic統合が一般提供（GA）されます。
 
--   **New Relic 統合 (プレビュー)** : 2025 年 7 月 31 日までに組織内に削除されていない Datadog または New Relic 統合がない場合、 TiDB Cloud はNew Relic 統合のプレビュー バージョンを提供して、最新の機能強化を体験できるようにします。
--   **New Relic 連携（ベータ版）** ：2025年7月31日までに組織内で Datadog または New Relic 連携が少なくとも1つ削除されていない場合、 TiDB Cloud は既存の連携と新規の連携の両方をベータ版で保持し、現在のダッシュボードへの影響を回避します。また、適切な移行プランとタイムラインについてご相談させていただきます。
+-   **クラスター レベルの New Relic 統合**: 2025 年 7 月 31 日までに組織内に削除されていないレガシー プロジェクト レベルの Datadog または New Relic 統合がない場合、 TiDB Cloud は、組織が最新の機能強化を体験できるように、クラスター レベルの New Relic 統合を提供します。
+-   **レガシープロジェクトレベルの New Relic 統合（ベータ版）** ：2025年7月31日までに組織内でレガシープロジェクトレベルの Datadog または New Relic 統合が少なくとも1つ削除されていない場合、 TiDB Cloud は既存の統合と新規の統合の両方を組織内のプロジェクトレベルで保持し、現在のダッシュボードへの影響を回避します。レガシープロジェクトレベルの New Relic 統合は、2025年10月31日に廃止されることにご注意ください。組織でこれらのレガシー統合をまだ使用している場合は、手順[DatadogとNew Relicの統合の移行](/tidb-cloud/migrate-metrics-integrations.md)に従って新しいクラスターレベルの統合に移行し、メトリクス関連サービスへの影響を最小限に抑えてください。
 
 ## 前提条件 {#prerequisites}
 
@@ -37,25 +37,25 @@ TiDB Cloud は、 2023 年 4 月 11 日から New Relic 統合 (ベータ版) �
 [New Relic統合バージョン](#new-relic-integration-version)に応じて、統合ページにアクセスする手順は異なります。
 
 <SimpleTab>
-<div label="New Relic integration (Preview)">
+<div label="Cluster-level New Relic integration">
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
 2.  左側のナビゲーション ペインで、 **[設定]** &gt; **[統合]**をクリックします。
 
-3.  **「統合」**ページで、 **「New Relic への統合 (プレビュー)」**をクリックします。
+3.  **「統合」**ページで、 **「New Relic への統合」を**クリックします。
 
 4.  New Relic の API キーを入力し、New Relic のサイトを選択します。
 
 5.  **[統合のテスト]**をクリックします。
 
     -   テストが成功すると、 **「確認」**ボタンが表示されます。
-    -   テストに失敗した場合はエラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、統合を再試行してください。
+    -   テストに失敗した場合は、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、統合を再試行してください。
 
 6.  **「確認」**をクリックして統合を完了します。
 
 </div>
-<div label="New Relic integration (Beta)">
+<div label="Legacy project-level New Relic integration (Beta)">
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用してターゲット プロジェクトに切り替えます。
 
@@ -68,7 +68,7 @@ TiDB Cloud は、 2023 年 4 月 11 日から New Relic 統合 (ベータ版) �
 5.  **[統合のテスト]**をクリックします。
 
     -   テストが成功すると、 **「確認」**ボタンが表示されます。
-    -   テストに失敗した場合はエラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、統合を再試行してください。
+    -   テストに失敗した場合は、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、統合を再試行してください。
 
 6.  **「確認」**をクリックして統合を完了します。
 
@@ -80,9 +80,9 @@ TiDB Cloud は、 2023 年 4 月 11 日から New Relic 統合 (ベータ版) �
 [New Relic統合バージョン](#new-relic-integration-version)に応じて手順は異なります。
 
 <SimpleTab>
-<div label="New Relic integration (Preview)">
+<div label="Cluster-level New Relic integration">
 
-保留中の[広報](https://github.com/newrelic/newrelic-quickstarts/pull/2681) New Relicにマージされると、新しいTiDB CloudダッシュボードがNew Relicで利用できるようになります。それ以前に、以下の手順でダッシュボードをNew Relicに手動でインポートできます。
+保留中の[広報](https://github.com/newrelic/newrelic-quickstarts/pull/2681) New Relicにマージされると、新しいTiDB CloudダッシュボードがNew Relicで利用できるようになります。それ以前に、以下の手順でダッシュボードをNew Relicに手動でインポートすることもできます。
 
 1.  新しいダッシュボード用の JSON ファイルを準備します。
 
@@ -118,7 +118,7 @@ TiDB Cloud は、 2023 年 4 月 11 日から New Relic 統合 (ベータ版) �
 3.  表示されたダイアログで、準備した JSON ファイルのすべてのコンテンツをテキスト領域に貼り付け、 **[ダッシュボードのインポート]**をクリックします。
 
 </div>
-<div label="New Relic integration (Beta)">
+<div label="Legacy project-level New Relic integration (Beta)">
 
 1.  [ニューレリック](https://one.newrelic.com/)にログインします。
 2.  **「データを追加」**をクリックし、 `TiDB Cloud`を検索して**TiDB Cloud監視**ページに移動します。または、「 [リンク](https://one.newrelic.com/marketplace?state=79bf274b-0c01-7960-c85c-3046ca96568e)をクリックして直接ページにアクセスすることもできます。
@@ -131,12 +131,12 @@ TiDB Cloud は、 2023 年 4 月 11 日から New Relic 統合 (ベータ版) �
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、 **「統合」**ページに移動します。
 
-2.  **New Relic**セクションの**ダッシュボード**リンクをクリックすると、TiDB クラスターの事前構築されたダッシュボードが表示されます。
+2.  **New Relic**セクションの**ダッシュボード**リンクをクリックすると、TiDB クラスターの事前構築済みダッシュボードが表示されます。
 
 3.  [New Relic統合バージョン](#new-relic-integration-version)に応じて、次のいずれかを実行します。
 
-    -   New Relic 統合 (プレビュー) の場合は、 **TiDB Cloud Dynamic Tracker**をクリックして新しいダッシュボードを表示します。
-    -   New Relic 統合 (ベータ版) の場合は、 **TiDB Cloud Monitoring**をクリックしてレガシー ダッシュボードを表示します。
+    -   クラスターレベルの New Relic 統合の場合、 **TiDB Cloud Dynamic Tracker**をクリックして新しいダッシュボードを表示します。
+    -   レガシー プロジェクト レベルの New Relic 統合 (ベータ版) の場合は、 **TiDB Cloud Monitoring**をクリックしてレガシー ダッシュボードを表示します。
 
 ## New Relicで利用可能なメトリクス {#metrics-available-to-new-relic}
 
@@ -152,7 +152,7 @@ New Relic は、TiDB クラスターの次のメトリクスを追跡します�
 | tidb_cloud.db_active_connections           | ゲージ      | クラスター名: `<cluster name>`<br/><br/>インスタンス: tidb-0|tidb-1…<br/><br/>コンポーネント: `tidb`                                                     | アクティブな接続の数。                                                                                            |
 | tidb_cloud.db_disconnections               | ゲージ      | 結果: OK|エラー|未定<br/><br/>クラスター名: `<cluster name>`<br/><br/>インスタンス: tidb-0|tidb-1…<br/><br/>コンポーネント: `tidb`                              | 切断されたクライアントの数。                                                                                         |
 | tidb_cloud.db_command_per_second           | ゲージ      | タイプ: Query|StmtPrepare|...<br/><br/>クラスター名: `<cluster name>`<br/><br/>インスタンス: tidb-0|tidb-1…<br/><br/>コンポーネント: `tidb`                 | TiDB が 1 秒あたりに処理したコマンドの数。コマンド実行結果の成功または失敗によって分類されます。                                                   |
-| tidb_cloud.db_queries_using_plan_cache_ops | ゲージ      | クラスター名: `<cluster name>`<br/><br/>インスタンス: tidb-0|tidb-1…<br/><br/>コンポーネント: `tidb`                                                     | [プランキャッシュ](/sql-prepared-plan-cache.md)回使用するクエリの統計。実行プランキャッシュは、プリペアドステートメントコマンドのみをサポートします。             |
+| tidb_cloud.db_queries_using_plan_cache_ops | ゲージ      | クラスター名: `<cluster name>`<br/><br/>インスタンス: tidb-0|tidb-1…<br/><br/>コンポーネント: `tidb`                                                     | [プランキャッシュ](/sql-prepared-plan-cache.md)回使用されるクエリの統計。実行プランキャッシュは、プリペアドステートメントコマンドのみをサポートします。            |
 | tidb_cloud.db_transaction_per_second       | ゲージ      | txn_mode:悲観的|楽観的<br/><br/>タイプ: 中止|コミット|...<br/><br/>クラスター名: `<cluster name>`<br/><br/>インスタンス: tidb-0|tidb-1…<br/><br/>コンポーネント: `tidb` | 1 秒あたりに実行されるトランザクションの数。                                                                                |
 | tidb_cloud.node_storage_used_bytes         | ゲージ      | クラスター名: `<cluster name>`<br/><br/>インスタンス: tikv-0|tikv-1…|tiflash-0|tiflash-1…<br/><br/>コンポーネント: tikv|tiflash                          | TiKV/ TiFlashノードのディスク使用量（バイト単位）。                                                                       |
 | tidb_cloud.node_storage_capacity_bytes     | ゲージ      | クラスター名: `<cluster name>`<br/><br/>インスタンス: tikv-0|tikv-1…|tiflash-0|tiflash-1…<br/><br/>コンポーネント: tikv|tiflash                          | TiKV/ TiFlashノードのディスク容量 (バイト単位)。                                                                       |
@@ -161,24 +161,24 @@ New Relic は、TiDB クラスターの次のメトリクスを追跡します�
 | tidb_cloud.node_memory_used_bytes          | ゲージ      | クラスター名: `<cluster name>`<br/><br/>インスタンス: tidb-0|tidb-1…|tikv-0…|tiflash-0…<br/><br/>コンポーネント: tidb|tikv|tiflash                       | TiDB/TiKV/ TiFlashノードの使用済みメモリ(バイト単位)。                                                                  |
 | tidb_cloud.node_memory_capacity_bytes      | ゲージ      | クラスター名: `<cluster name>`<br/><br/>インスタンス: tidb-0|tidb-1…|tikv-0…|tiflash-0…<br/><br/>コンポーネント: tidb|tikv|tiflash                       | TiDB/TiKV/ TiFlashノードのメモリ容量 (バイト単位)。                                                                   |
 
-New Relic 統合 (プレビュー) では、次の追加メトリックも利用できます。
+クラスターレベルの New Relic 統合では、次の追加メトリックも利用できます。
 
-| メトリック名                                                                  | メトリックタイプ | ラベル                                                                                                                                         | 説明                                                                                                                                                              |
-| :---------------------------------------------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| tidb_cloud.node_storage_available_bytes                                 | ゲージ      | インスタンス: `tidb-0\|tidb-1\|...`<br/><br/>コンポーネント: `tikv\|tiflash`<br/><br/>クラスター名: `<cluster name>`                                           | TiKV またはTiFlashノードで使用可能なディスク容量 (バイト単位)。                                                                                                                         |
-| tidb_cloud.node_disk_read_latency                                       | ゲージ      | インスタンス: `tidb-0\|tidb-1\|...`<br/><br/>コンポーネント: `tikv\|tiflash`<br/><br/>クラスター名: `<cluster name>`<br/><br/> `device`時`nvme.*\|dm.*`         | storageデバイスごとの読み取りレイテンシー(秒単位)。                                                                                                                                  |
-| tidb_cloud.node_disk_write_latency                                      | ゲージ      | インスタンス: `tidb-0\|tidb-1\|...`<br/><br/>コンポーネント: `tikv\|tiflash`<br/><br/>クラスター名: `<cluster name>`<br/><br/> `device`時`nvme.*\|dm.*`         | storageデバイスごとの書き込みレイテンシー(秒単位)。                                                                                                                                  |
-| tidb_cloud.db_kv_request_duration                                       | ゲージ      | インスタンス: `tidb-0\|tidb-1\|...`<br/><br/>コンポーネント: `tikv`<br/><br/>クラスター名: `<cluster name>`<br/><br/> `type`時`BatchGet\|Commit\|Prewrite\|...` | タイプ別の TiKV リクエストの期間 (秒単位)。                                                                                                                                      |
-| tidb_cloud.db_component_uptime                                          | ゲージ      | インスタンス: `tidb-0\|tidb-1\|...`<br/><br/>コンポーネント: `tidb\|tikv\|tiflash`<br/><br/>クラスター名: `<cluster name>`                                     | TiDB コンポーネントの稼働時間 (秒単位)。                                                                                                                                        |
-| tidb_cloud.cdc_changefeed_latency (別名 cdc_changefeed_checkpoint_ts_lag) | ゲージ      | チェンジフィードID: `<changefeed-id>`<br/><br/>クラスター名: `<cluster name>`                                                                             | 変更フィード所有者のチェックポイント タイムスタンプの遅延 (秒単位)。                                                                                                                            |
-| tidb_cloud.cdc_changefeed_resolved_ts_lag                               | ゲージ      | チェンジフィードID: `<changefeed-id>`<br/><br/>クラスター名: `<cluster name>`                                                                             | 変更フィード所有者の解決されたタイムスタンプの遅延 (秒単位)。                                                                                                                                |
-| tidb_cloud.cdc_changefeed_status                                        | ゲージ      | チェンジフィードID: `<changefeed-id>`<br/><br/>クラスター名: `<cluster name>`                                                                             | チェンジフィードステータス:<br/><br/> `-1` : 不明<br/><br/>`0` : 正常<br/><br/>`1` ：警告<br/><br/>`2` : 失敗<br/><br/>`3` : 停止<br/><br/>`4` ：終了<br/><br/>`6` : 警告<br/><br/>`7` : その他 |
-| tidb_cloud.resource_manager_resource_unit_read_request_unit             | ゲージ      | クラスター名: `<cluster name>`<br/><br/>リソースグループ: `<group-name>`                                                                                  | リソース マネージャーによって消費される読み取り要求単位 (RU)。                                                                                                                              |
-| tidb_cloud.resource_manager_resource_unit_write_request_unit            | ゲージ      | クラスター名: `<cluster name>`<br/><br/>リソースグループ: `<group-name>`                                                                                  | リソース マネージャーによって消費される書き込み要求単位 (RU)。                                                                                                                              |
-| tidb_cloud.dm_task_state                                                | ゲージ      | インスタンス: `instance`<br/><br/>タスク: `task`<br/><br/>クラスター名: `<cluster name>`                                                                   | データ移行のタスクの状態:<br/><br/> `0` : 無効<br/><br/>`1` ：新<br/><br/>`2` ：ランニング<br/><br/>`3` : 一時停止<br/><br/>`4` : 停止<br/><br/>`5` ：終了<br/><br/>`15` : エラー                 |
-| tidb_cloud.dm_syncer_replication_lag_bucket                             | ゲージ      | インスタンス: `instance`<br/><br/>クラスター名: `<cluster name>`                                                                                        | データ移行の遅延 (バケット) を複製します。                                                                                                                                         |
-| tidb_cloud.dm_syncer_replication_lag_gauge                              | ゲージ      | インスタンス: `instance`<br/><br/>タスク: `task`<br/><br/>クラスター名: `<cluster name>`                                                                   | データ移行の遅延 (ゲージ) を複製します。                                                                                                                                          |
-| tidb_cloud.dm_relay_read_error_count                                    | ゲージ      | インスタンス: `instance`<br/><br/>クラスター名: `<cluster name>`                                                                                        | マスターからのbinlogの読み取りに失敗しました。                                                                                                                                      |
-| tidb_cloud.node_memory_available_bytes                                  | ゲージ      | クラスター名: `<cluster name>`<br/><br/>インスタンス: tidb-0|tidb-1…|tikv-0…|tiflash-0…<br/><br/>コンポーネント: tidb|tikv|tiflash                             | TiDB/TiKV/ TiFlashノードの使用可能なメモリ(バイト単位)。                                                                                                                          |
-| tidb_cloud.cdc_changefeed_replica_rows                                  | ゲージ      | チェンジフィードID: `<changefeed-id>`<br/><br/>クラスター名: `<cluster name>`                                                                             | TiCDC ノードが 1 秒あたりにダウンストリームに書き込むイベントの数。                                                                                                                          |
-| tidb_cloud.node_cpu_seconds_total_rate                                  | ゲージ      | クラスター名: `<cluster name>`<br/><br/>インスタンス: tidb-0|tidb-1…|tikv-0…|tiflash-0…<br/><br/>コンポーネント: tidb|tikv|tiflash                             | TiDB/TiKV/ TiFlashノードの CPU 使用率。                                                                                                                                 |
+| メトリック名                                                                  | メトリックタイプ | ラベル                                                                                                                                         | 説明                                                                                                                                                               |
+| :---------------------------------------------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| tidb_cloud.node_storage_available_bytes                                 | ゲージ      | インスタンス: `tidb-0\|tidb-1\|...`<br/><br/>コンポーネント: `tikv\|tiflash`<br/><br/>クラスター名: `<cluster name>`                                           | TiKV またはTiFlashノードで使用可能なディスク容量 (バイト単位)。                                                                                                                          |
+| tidb_cloud.node_disk_read_latency                                       | ゲージ      | インスタンス: `tidb-0\|tidb-1\|...`<br/><br/>コンポーネント: `tikv\|tiflash`<br/><br/>クラスター名: `<cluster name>`<br/><br/> `device`時`nvme.*\|dm.*`         | storageデバイスごとの読み取りレイテンシー(秒単位)。                                                                                                                                   |
+| tidb_cloud.node_disk_write_latency                                      | ゲージ      | インスタンス: `tidb-0\|tidb-1\|...`<br/><br/>コンポーネント: `tikv\|tiflash`<br/><br/>クラスター名: `<cluster name>`<br/><br/> `device`時`nvme.*\|dm.*`         | storageデバイスごとの書き込みレイテンシー(秒単位)。                                                                                                                                   |
+| tidb_cloud.db_kv_request_duration                                       | ゲージ      | インスタンス: `tidb-0\|tidb-1\|...`<br/><br/>コンポーネント: `tikv`<br/><br/>クラスター名: `<cluster name>`<br/><br/> `type`時`BatchGet\|Commit\|Prewrite\|...` | タイプ別の TiKV リクエストの期間 (秒単位)。                                                                                                                                       |
+| tidb_cloud.db_component_uptime                                          | ゲージ      | インスタンス: `tidb-0\|tidb-1\|...`<br/><br/>コンポーネント: `tidb\|tikv\|tiflash`<br/><br/>クラスター名: `<cluster name>`                                     | TiDB コンポーネントの稼働時間 (秒単位)。                                                                                                                                         |
+| tidb_cloud.cdc_changefeed_latency (別名 cdc_changefeed_checkpoint_ts_lag) | ゲージ      | チェンジフィードID: `<changefeed-id>`<br/><br/>クラスター名: `<cluster name>`                                                                             | 変更フィード所有者のチェックポイント タイムスタンプの遅延 (秒単位)。                                                                                                                             |
+| tidb_cloud.cdc_changefeed_resolved_ts_lag                               | ゲージ      | チェンジフィードID: `<changefeed-id>`<br/><br/>クラスター名: `<cluster name>`                                                                             | 変更フィード所有者の解決されたタイムスタンプの遅延 (秒単位)。                                                                                                                                 |
+| tidb_cloud.cdc_changefeed_status                                        | ゲージ      | チェンジフィードID: `<changefeed-id>`<br/><br/>クラスター名: `<cluster name>`                                                                             | チェンジフィードステータス:<br/><br/> `-1` : 不明<br/><br/>`0` : 正常<br/><br/>`1` : 警告<br/><br/>`2` : 失敗<br/><br/>`3` : 停止<br/><br/>`4` ：終了<br/><br/>`6` : 警告<br/><br/>`7` : その他 |
+| tidb_cloud.resource_manager_resource_unit_read_request_unit             | ゲージ      | クラスター名: `<cluster name>`<br/><br/>リソースグループ: `<group-name>`                                                                                  | リソース マネージャーによって消費される読み取り要求単位 (RU)。                                                                                                                               |
+| tidb_cloud.resource_manager_resource_unit_write_request_unit            | ゲージ      | クラスター名: `<cluster name>`<br/><br/>リソースグループ: `<group-name>`                                                                                  | リソース マネージャーによって消費される書き込み要求単位 (RU)。                                                                                                                               |
+| tidb_cloud.dm_task_state                                                | ゲージ      | インスタンス: `instance`<br/><br/>タスク: `task`<br/><br/>クラスター名: `<cluster name>`                                                                   | データ移行のタスクの状態:<br/><br/> `0` : 無効<br/><br/>`1` : 新<br/><br/>`2` ：ランニング<br/><br/>`3` : 一時停止<br/><br/>`4` : 停止<br/><br/>`5` ：終了<br/><br/>`15` : エラー                 |
+| tidb_cloud.dm_syncer_replication_lag_bucket                             | ゲージ      | インスタンス: `instance`<br/><br/>クラスター名: `<cluster name>`                                                                                        | データ移行の遅延 (バケット) を複製します。                                                                                                                                          |
+| tidb_cloud.dm_syncer_replication_lag_gauge                              | ゲージ      | インスタンス: `instance`<br/><br/>タスク: `task`<br/><br/>クラスター名: `<cluster name>`                                                                   | データ移行の遅延 (ゲージ) を複製します。                                                                                                                                           |
+| tidb_cloud.dm_relay_read_error_count                                    | ゲージ      | インスタンス: `instance`<br/><br/>クラスター名: `<cluster name>`                                                                                        | マスターからのbinlogの読み取りに失敗しました。                                                                                                                                       |
+| tidb_cloud.node_memory_available_bytes                                  | ゲージ      | クラスター名: `<cluster name>`<br/><br/>インスタンス: tidb-0|tidb-1…|tikv-0…|tiflash-0…<br/><br/>コンポーネント: tidb|tikv|tiflash                             | TiDB/TiKV/ TiFlashノードの使用可能なメモリ(バイト単位)。                                                                                                                           |
+| tidb_cloud.cdc_changefeed_replica_rows                                  | ゲージ      | チェンジフィードID: `<changefeed-id>`<br/><br/>クラスター名: `<cluster name>`                                                                             | TiCDC ノードが 1 秒あたりにダウンストリームに書き込むイベントの数。                                                                                                                           |
+| tidb_cloud.node_cpu_seconds_total_rate                                  | ゲージ      | クラスター名: `<cluster name>`<br/><br/>インスタンス: tidb-0|tidb-1…|tikv-0…|tiflash-0…<br/><br/>コンポーネント: tidb|tikv|tiflash                             | TiDB/TiKV/ TiFlashノードの CPU 使用率。                                                                                                                                  |

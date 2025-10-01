@@ -9,7 +9,7 @@ summary: TiDB データベースでの CREATE BINDING の使用。
 
 `BINDING` `GLOBAL`または`SESSION`基準で表されます。デフォルトは`SESSION`です。
 
-バインドされたSQL文はパラメータ化され、システムテーブルに格納されます。SQLクエリが処理される際、パラメータ化されたSQL文とシステムテーブル内のバインドされたSQL文が整合しており、システム変数`tidb_use_plan_baselines`が`ON` （デフォルト）に設定されている限り、対応するオプティマイザヒントが利用可能です。複数の実行プランが利用可能な場合、オプティマイザは最もコストの低いプランをバインドします。詳細については、 [バインディングを作成する](/sql-plan-management.md#create-a-binding)参照してください。
+バインドされたSQL文はパラメータ化され、システムテーブルに格納されます。SQLクエリが処理される際、パラメータ化されたSQL文とシステムテーブル内のバインドされたSQL文が一致し、システム変数`tidb_use_plan_baselines`が`ON` （デフォルト）に設定されている限り、対応するオプティマイザヒントが利用可能です。複数の実行プランが利用可能な場合、オプティマイザは最もコストの低いプランをバインドします。詳細については、 [バインディングを作成する](/sql-plan-management.md#create-a-binding)参照してください。
 
 ## 概要 {#synopsis}
 
@@ -308,14 +308,18 @@ Empty set (0.002 sec)
 1 row in set (0.002 sec)
 ```
 
+## SQL文の切り捨て {#sql-statement-truncation}
+
+`CREATE BINDING ... FROM HISTORY USING PLAN DIGEST`使用すると、そのダイジェストの[明細書要約表](/statement-summary-tables.md)に格納されているSQL文が[`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40)より長いために切り捨てられ、バインディングが失敗する可能性があります。この場合、 `tidb_stmt_summary_max_sql_length`増やす必要があります。
+
 ## MySQLの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
 ## 参照 {#see-also}
 
--   [DROP [グローバル|セッション] バインディング](/sql-statements/sql-statement-drop-binding.md)
+-   [[グローバル|セッション]バインディングの削除](/sql-statements/sql-statement-drop-binding.md)
 -   [[グローバル|セッション]バインディングを表示](/sql-statements/sql-statement-show-bindings.md)
--   [テーブルを分析する](/sql-statements/sql-statement-analyze-table.md)
+-   [表を分析する](/sql-statements/sql-statement-analyze-table.md)
 -   [オプティマイザヒント](/optimizer-hints.md)
 -   [SQLプラン管理](/sql-plan-management.md)

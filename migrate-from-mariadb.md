@@ -32,11 +32,11 @@ summary: MariaDB から TiDB にデータを移行する方法を学びます。
 
 TiDBは[MySQLと互換性あり](/mysql-compatibility.md)あり、MySQLとMariaDBには多くの共通機能があります。ただし、MariaDB固有の機能の中にはTiDBと互換性がないものもあるため、移行前に注意が必要です。
 
-このセクションの項目を確認するだけでなく、MariaDB ドキュメントの[互換性と相違点](https://mariadb.com/kb/en/compatibility-differences/)も確認することをお勧めします。
+このセクションの項目を確認するだけでなく、MariaDB ドキュメントの[互換性と相違点](https://mariadb.com/docs/release-notes/community-server/about/compatibility-and-differences)も確認することをお勧めします。
 
 ### 認証 {#authentication}
 
-[MySQLとのSecurity互換性](/security-compatibility-with-mysql.md)ドキュメントでは、TiDB がサポートする認証方法をリストしています。TiDB は MariaDB のいくつかの認証方法をサポートしていません。つまり、アカウントに新しいパスワードハッシュを作成するか、その他の特別な対策を講じる必要がある場合があります。
+[MySQLとのSecurity互換性](/security-compatibility-with-mysql.md)ドキュメントでは、TiDB がサポートする認証方法をリストしています。TiDB は MariaDB のいくつかの認証方法をサポートしていません。つまり、アカウントに新しいパスワードハッシュを作成するか、その他の特別な対策を講じる必要がある可能性があります。
 
 使用されている認証方法を確認するには、次のステートメントを実行します。
 
@@ -61,7 +61,7 @@ GROUP BY
 
 ### システムバージョン管理されたテーブル {#system-versioned-tables}
 
-TiDBは[システムバージョン管理されたテーブル](https://mariadb.com/kb/en/system-versioned-tables/)サポートしていません。ただし、TiDBは[`AS OF TIMESTAMP`](/as-of-timestamp.md)サポートしており、システムバージョン管理されたテーブルのユースケースの一部を置き換える可能性があります。
+TiDBは[システムバージョン管理されたテーブル](https://mariadb.com/docs/server/reference/sql-structure/temporal-tables/system-versioned-tables)サポートしていません。ただし、TiDBは[`AS OF TIMESTAMP`](/as-of-timestamp.md)サポートしており、システムバージョン管理されたテーブルのユースケースの一部を置き換える可能性があります。
 
 次のステートメントを使用して、影響を受けるテーブルを確認できます。
 
@@ -119,7 +119,7 @@ WHERE
 
 ### ストレージエンジン {#storage-engines}
 
-MariaDBは、 `InnoDB`といったローカルデータ用のstorageエンジンを提供しています。これら`MyISAM`データ形式はTiDBでは直接サポートされていませんが、これらのストレージエンジンの移行は問題なく行えます。ただし、 `Aria`storageエンジンや`Spider`など、一部のエンジンはデータをサーバーの外部に配置します。このようなテーブルをTiDBに移行することは可能ですが、TiDBはTiDBクラスターの外部にデータを保存する機能`CONNECT`提供していません。
+MariaDBは、 `InnoDB`といったローカルデータ用のstorageエンジンを提供しています。 `Aria` `MyISAM`データ形式はTiDBでは直接サポートされていませんが、これらの移行は問題なく行えます。ただし、 `CONNECT`storageエンジンや`Spider`など、一部のエンジンはデータをサーバーの外部に配置します。このようなテーブルをTiDBに移行することは可能ですが、TiDBはTiDBクラスターの外部にデータを保存する機能を提供していません。
 
 使用しているstorageエンジンを確認するには、次のステートメントを実行します。
 
@@ -150,7 +150,7 @@ GROUP BY
 
 ### 構文 {#syntax}
 
-MariaDBは、 `DELETE` 、 `INSERT` 、 `REPLACE`ステートメントで`RETURNING`キーワードをサポートしています。TiDBはこれらのステートメントをサポートしていません。アプリケーションとクエリのログを調べて、移行に影響があるかどうかを確認することをお勧めします。
+MariaDBは、 `DELETE` 、 `INSERT` 、 `REPLACE`ステートメントで`RETURNING`キーワードをサポートしています。TiDBはこれらのステートメントをサポートしていません。移行に影響があるかどうかを確認するには、アプリケーションとクエリのログを確認することをお勧めします。
 
 ### データ型 {#data-types}
 
@@ -292,7 +292,7 @@ DMを使用するには、 [TiUPクラスター](/dm/deploy-a-dm-cluster-using-t
 
 MariaDBでbinlogsが有効になっていること、および`binlog_format` `ROW`に設定されていることを確認してください。5と`binlog_annotate_row_events=OFF` `log_bin_compress=OFF`設定することも推奨されます。
 
-また、権限レベル`SUPER` 、または権限レベル`BINLOG MONITOR`と権限レベル`REPLICATION MASTER ADMIN`を持つアカウントも必要です。このアカウントには、移行するスキーマに対する読み取り権限も必要です。
+また、権限`SUPER` 、または権限`BINLOG MONITOR`と権限`REPLICATION MASTER ADMIN`を持つアカウントも必要です。このアカウントには、移行するスキーマに対する読み取り権限も必要です。
 
 `SUPER`権限を持つアカウントを使用していない場合は、TiDB が MariaDB 固有の権限を確認する方法をまだ知らないため、DM 構成に以下を追加する必要がある可能性があります。
 
@@ -310,7 +310,7 @@ MariaDB から MariaDB へのレプリケーションの場合のように、最
 
 ### ステップ3. ユーザーアカウントと権限を移行する {#step-3-migrate-user-accounts-and-permissions}
 
-ユーザーと権限を移行する方法については、 [ユーザーと権限をエクスポートする](#export-users-and-grants)参照してください。
+ユーザーと権限の移行方法については、 [ユーザーと権限をエクスポートする](#export-users-and-grants)参照してください。
 
 ### ステップ4. データをテストする {#step-4-test-your-data}
 
@@ -322,7 +322,7 @@ TiDB に切り替えるには、次の手順を実行する必要があります
 
 1.  アプリケーションを停止します。
 2.  レプリケーションの遅延を監視します。0 秒になるはずです。
-3.  アプリケーションが TiDB に接続するように構成を変更し、再度起動します。
+3.  アプリケーションの構成を TiDB に接続するように変更し、再度起動します。
 
 レプリケーションの遅延を確認するには、 [`query-status &#x3C;taskname>`](/dm/dm-query-status.md#detailed-query-result)から`dmctl`実行し、 `subTaskStatus`で`"synced: true"`を確認します。
 
@@ -342,4 +342,4 @@ TiDB に切り替えるには、次の手順を実行する必要があります
 
 ## データを検証する {#validate-data}
 
-[同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)使用して、MariaDB と TiDB のデータが同一かどうかを検証できます。
+[同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)使用して、MariaDB と TiDB のデータが同じかどうかを検証できます。

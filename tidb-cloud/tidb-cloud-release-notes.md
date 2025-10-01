@@ -8,6 +8,20 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2025年9月30日 {#september-30-2025}
+
+**一般的な変更**
+
+-   **TiDB Cloud専用**
+
+    -   Datadog と New Relic の統合が[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して一般提供 (GA) されました。
+
+        TiDB Cloudは、DatadogとNew Relicの連携をクラスターレベルで管理できるようになり、よりきめ細かな制御と設定が可能になります。この機能により、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのメトリクスをDatadogまたはNew Relicにシームレスに送信できるようになり、統合プラットフォームで高度なアラート機能を実現できます。
+
+        統合手順については、 [TiDB CloudとDatadogの統合](/tidb-cloud/monitor-datadog-integration.md)と[TiDB CloudとNew Relicの統合](/tidb-cloud/monitor-new-relic-integration.md)参照してください。
+
+        既存の Datadog と New Relic の統合をクラスター レベルに移行するには、 [DatadogとNew Relicの統合の移行](/tidb-cloud/migrate-metrics-integrations.md)参照してください。
+
 ## 2025年9月23日 {#september-23-2025}
 
 **一般的な変更**

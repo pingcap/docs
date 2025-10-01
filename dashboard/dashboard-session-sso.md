@@ -7,7 +7,7 @@ summary: TiDBダッシュボードは、サインイン認証にOIDCベースの
 
 TiDBダッシュボードは、SQLベースの[OIDC](https://openid.net/connect/)サインオン（SSO）をサポートしています。TiDBダッシュボードのSSO機能を有効にすると、設定されたSSOサービスがサインイン認証に使用され、SQLユーザーのパスワードを入力せずにTiDBダッシュボードにアクセスできるようになります。
 
-## OIDC SSOを構成する {#configure-oidc-sso}
+## OIDC SSO を構成する {#configure-oidc-sso}
 
 ### SSOを有効にする {#enable-sso}
 
@@ -15,7 +15,11 @@ TiDBダッシュボードは、SQLベースの[OIDC](https://openid.net/connect/
 
 2.  左側のサイドバーにあるユーザー名をクリックして、設定ページにアクセスします。
 
-3.  **[シングル サインオン]**セクションで、 **[有効] を選択して、TiDB ダッシュボードにサインインするときに SSO を使用します**。
+3.  **[シングル サインオン]**セクションで、 **[有効にする] を選択して、TiDB ダッシュボードにサインインするときに SSO を使用します**。
+
+    > **注記：**
+    >
+    > アカウントに`SYSTEM_VARIABLES_ADMIN`権限がない場合、 **「TiDBダッシュボードへのサインイン時にSSOを有効にする」**オプションは無効になります。権限の詳細については、 [TiDBダッシュボードのユーザー管理](/dashboard/dashboard-user.md)ご覧ください。
 
 4.  フォームの**OIDC クライアント ID**と**OIDC 検出 URL**フィールドに入力します。
 
@@ -34,7 +38,7 @@ TiDBダッシュボードは、SQLベースの[OIDC](https://openid.net/connect/
     >
     > 入力したパスワードは暗号化されて保存されます。SQLユーザーのパスワードを変更すると、SSOサインインが失敗します。その場合は、パスワードを再入力することでSSOを復旧できます。
 
-6.  **「承認して保存」を**クリックします。
+6.  **[承認して保存]を**クリックします。
 
     ![Sample Step](/media/dashboard/dashboard-session-sso-enable-2.png)
 
@@ -74,11 +78,11 @@ SQLユーザーのパスワードを変更すると、SSOサインインは失�
 
     ![Sample Step](/media/dashboard/dashboard-session-sso-reauthorize.png)
 
-4.  **「承認して保存」を**クリックします。
+4.  **[承認して保存]を**クリックします。
 
 ## SSO経由でサインイン {#sign-in-via-sso}
 
-TiDB ダッシュボードに SSO が設定されると、次の手順に従って SSO 経由でサインインできるようになります。
+TiDB ダッシュボードに SSO が設定されると、次の手順に従って SSO 経由でサインインできます。
 
 1.  TiDB ダッシュボードのサインイン ページで、 **[会社アカウントでサインイン] を**クリックします。
 
@@ -88,7 +92,7 @@ TiDB ダッシュボードに SSO が設定されると、次の手順に従っ�
 
 3.  サインインを完了するために、TiDB ダッシュボードにリダイレクトされます。
 
-## 例1: TiDBダッシュボードのSSOサインインにOktaを使用する {#example-1-use-okta-for-tidb-dashboard-sso-sign-in}
+## 例 1: TiDB ダッシュボードの SSO サインインに Okta を使用する {#example-1-use-okta-for-tidb-dashboard-sso-sign-in}
 
 [オクタ](https://www.okta.com/)はOIDC SSOアイデンティティサービスであり、TiDBダッシュボードのSSO機能と互換性があります。以下の手順では、OktaをTiDBダッシュボードのSSOプロバイダーとして使用できるように、OktaとTiDBダッシュボードを設定する方法を説明します。
 
@@ -186,7 +190,7 @@ Oktaと同様に、 [オーソ0](https://auth0.com/)もOIDC SSOアイデンテ�
 
 1.  Auth0 の**[設定]**タブの**基本情報**の**クライアント****ID を、TiDB ダッシュボードの OIDC クライアント**ID に入力します。
 
-2.  **OIDC検出URL**に、**ドメイン**フィールドの値の先頭に`https://` 、末尾に`/`を付けたもの（例： `https://example.us.auth0.com/` ）を入力します。認証を完了し、設定を保存します。
+2.  **OIDC検出URL**に、**ドメイン**フィールドの値の先頭に`https://` 、末尾に`/`入力します（例： `https://example.us.auth0.com/` ）。認証を完了し、設定を保存します。
 
     ![Settings](/media/dashboard/dashboard-session-sso-auth0-settings-3.png)
 
@@ -222,7 +226,7 @@ Oktaと同様に、 [オーソ0](https://auth0.com/)もOIDC SSOアイデンテ�
 
 1.  前の手順で保存した**クライアント ID**を TiDB ダッシュボードの**OIDC クライアント ID**に入力します。
 
-2.  **OIDC検出URL**に、**ドメイン**フィールドの値の先頭に`https://` 、末尾に`/`を付けたもの（例： `https://casdoor.example.com/` ）を入力します。認証を完了し、設定を保存します。
+2.  **OIDC検出URL**に、**ドメイン**フィールドの値の先頭に`https://` 、末尾に`/`入力します（例： `https://casdoor.example.com/` ）。認証を完了し、設定を保存します。
 
     ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-3.png)
 
