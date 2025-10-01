@@ -1,17 +1,17 @@
 ---
 title: CREATE [GLOBAL|SESSION] BINDING
-summary: Use of CREATE BINDING in TiDB database.
+summary: 在 TiDB 数据库中使用 CREATE BINDING。
 ---
 
 # CREATE [GLOBAL|SESSION] BINDING
 
-This statement creates a new execution plan binding in TiDB. Binding can be used to inject a hint into a statement without requiring changes to the underlying query.
+该语句用于在 TiDB 中创建新的执行计划绑定。绑定可以用于向语句注入 Hint，而无需更改底层查询。
 
-A `BINDING` can be on either a `GLOBAL` or `SESSION` basis. The default is `SESSION`.
+`BINDING` 可以是 `GLOBAL`（全局）或 `SESSION`（会话）级别。默认级别为 `SESSION`。
 
-The bound SQL statement is parameterized and stored in the system table. When a SQL query is processed, as long as the parameterized SQL statement and a bound one in the system table are consistent and the system variable `tidb_use_plan_baselines` is set to `ON` (default), the corresponding optimizer hint is available. If multiple execution plans are available, the optimizer chooses to bind the plan with the least cost. For more information, see [Create a binding](/sql-plan-management.md#create-a-binding).
+被绑定的 SQL 语句会被参数化并存储在系统表中。当 SQL 查询被处理时，只要参数化后的 SQL 语句与系统表中的绑定语句一致，并且系统变量 `tidb_use_plan_baselines` 设置为 `ON`（默认），则会应用相应的优化器 Hint。如果存在多个执行计划，优化器会选择成本最低的绑定计划。更多信息，参见 [创建绑定](/sql-plan-management.md#create-a-binding)。
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 CreateBindingStmt ::=
@@ -33,18 +33,16 @@ StringLiteralOrUserVariable ::=
 
 ****
 
-## Examples
+## 示例
 
-You can create a binding according to a SQL statement or a historical execution plan.
+你可以根据 SQL 语句或历史执行计划创建绑定。
 
-When you create a binding according to a historical execution plan, you need to specify the corresponding Plan Digest:
+当你根据历史执行计划创建绑定时，需要指定对应的 Plan Digest：
 
-- You can use either the string literal or user variable of the string type to specify the Plan Digest.
-- You can specify multiple Plan Digests to create bindings for multiple statements at the same time. In this case, you can specify multiple strings, and include multiple digests in each string. Note that the strings or digests need to be separated by commas.
+- 你可以使用字符串字面量或字符串类型的用户变量来指定 Plan Digest。
+- 你可以指定多个 Plan Digest，以便同时为多条语句创建绑定。在这种情况下，你可以指定多个字符串，并在每个字符串中包含多个 digest。注意，字符串或 digest 之间需要用逗号分隔。
 
-The following example shows how to create a binding according to a SQL statement.
-
-{{< copyable "sql" >}}
+以下示例展示了如何根据 SQL 语句创建绑定。
 
 ```sql
 mysql> CREATE TABLE t1 (
@@ -146,7 +144,7 @@ mysql> EXPLAIN ANALYZE SELECT * FROM t1 WHERE b = 123;
 3 rows in set (0.01 sec)
 ```
 
-The following example shows how to create a binding according to a historical execution plan.
+以下示例展示了如何根据历史执行计划创建绑定。
 
 ```sql
 USE test;
@@ -162,14 +160,14 @@ SELECT * FROM t1 WHERE t1.a IN (SELECT a FROM t2);
 SELECT @@LAST_PLAN_FROM_BINDING;
 ```
 
-Method 1:
+方法 1：
 
 ```sql
 SELECT query_sample_text, stmt_type, table_names, plan_digest FROM information_schema.statements_summary_history WHERE table_names LIKE '%test.t1%' AND stmt_type != 'CreateTable';
 CREATE GLOBAL BINDING FROM HISTORY USING PLAN DIGEST 'e72819cf99932f63a548156dbf433adda60e10337e89dcaa8638b4caf16f64d8,c291edc36b2482738d3389d335f37efc76290be2930330fe5034c5f4c42eeb36,8dc146249484f4a6ab219bfe9effa6b7a18aeed3764d49b610da61ac347ab914,73b2dec866595688ea416675f88ccb3456eb8e7443a79cd816695b688e07ac6b';
 ```
 
-Method 2:
+方法 2：
 
 ```sql
 SELECT @digests:=GROUP_CONCAT(plan_digest) FROM information_schema.statements_summary_history WHERE table_names LIKE '%test.t1%' AND stmt_type != 'CreateTable';
@@ -310,11 +308,15 @@ Empty set (0.002 sec)
 1 row in set (0.002 sec)
 ```
 
-## MySQL compatibility
+## SQL 语句截断
 
-This statement is a TiDB extension to MySQL syntax.
+当你使用 `CREATE BINDING ... FROM HISTORY USING PLAN DIGEST` 时，如果 [语句摘要表](/statement-summary-tables.md) 中存储的该 digest 的 SQL 语句因长度超过 [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40) 而被截断，则绑定可能会失败。在这种情况下，你需要增大 `tidb_stmt_summary_max_sql_length`。
 
-## See also
+## MySQL 兼容性
+
+该语句是 TiDB 对 MySQL 语法的扩展。
+
+## 另请参阅
 
 * [DROP [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-drop-binding.md)
 * [SHOW [GLOBAL|SESSION] BINDINGS](/sql-statements/sql-statement-show-bindings.md)
