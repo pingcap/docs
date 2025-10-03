@@ -82,7 +82,7 @@ Non-replicable DDLs include:
 - [`ALTER TABLE ... EXCHANGE PARTITION`](/sql-statements/sql-statement-alter-table.md)
 - [`ALTER TABLE ... MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md): you can modify the attributes of the column except `default value` and `comment`
 - [`ALTER TABLE ... REORGANIZE PARTITION`](/sql-statements/sql-statement-alter-table.md)
-- [`ATLER TABLE ... TRUNCATE PARTITION`](/sql-statements/sql-statement-alter-table.md)
+- [`ALTER TABLE ... TRUNCATE PARTITION`](/sql-statements/sql-statement-alter-table.md)
 - [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md)
 - [`DROP TABLE`](/sql-statements/sql-statement-drop-table.md)
 - [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md)
