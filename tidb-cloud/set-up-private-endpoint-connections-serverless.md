@@ -30,7 +30,7 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 - Currently, TiDB Cloud supports AWS PrivateLink connections to {{{ .starter }}} only when the endpoint service is hosted in AWS. If the service is hosted in other cloud providers, the AWS PrivateLink connection is not applicable.
 - Private endpoint connection across regions is not supported.
-- The private endpoint is shared among all the clusters within the same region.
+- The private endpoint is shared among all {{{ .starter }}} clusters within the same region.
 
 ## Prerequisites
 
