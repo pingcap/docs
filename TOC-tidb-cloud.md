@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: 07b75662984c9bc38e1dd23a0f7bc5edcf29e627-->
+# 目录 <!--Corresponding EN commit: 4a4d9a913bb5e56520c60a01f28dae7f637e5f23-->
 
 ## 快速开始
 
@@ -161,7 +161,9 @@
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)
       - [通过 Zoom 订阅](/tidb-cloud/monitor-alert-zoom.md)
     - [集群事件](/tidb-cloud/tidb-cloud-events.md)
-    - [第三方指标集成](/tidb-cloud/third-party-monitoring-integrations.md)
+    - 第三方指标集成
+      - [概览](/tidb-cloud/third-party-monitoring-integrations.md)
+      - [迁移 Datadog 和 New Relic 集成](/tidb-cloud/migrate-metrics-integrations.md)
     - [Connected：Clinic 服务](/tidb-cloud/tidb-cloud-clinic.md)
   - 性能调优
     - [概览](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
