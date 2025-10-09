@@ -6311,7 +6311,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `0`
 - Range: `[0, 1]`
-- This variable controls when TiDB triggers the circuit breaker. A value of `0` (default) disables the circuit breaker. A value between `0.01` and `1` enables it, causing the circuit breaker to trigger when the error rate of specific requests to PD meets or exceeds the threshold.
+- This variable controls when TiDB triggers the circuit breaker. Setting a value of `0` (default) disables the circuit breaker. Setting a value between `0.01` and `1` enables it, causing the circuit breaker to trigger when the error rate of specific requests sent to PD reaches or exceeds the threshold.
 
 ### tidb_ttl_delete_rate_limit <span class="version-mark">New in v6.5.0</span>
 
