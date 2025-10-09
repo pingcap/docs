@@ -4638,7 +4638,6 @@ SHOW WARNINGS;
 - Default value: `0`
 - This variable controls the ratio of risk between the original predicate selectivity estimate and the potential skew estimate for an equality predicate, when the value is not found in TopN or histogram buckets.
 
-
 ### tidb_opt_risk_range_skew_ratio <span class="version-mark">New in v9.0.0</span>
 
 > **Warning:**
