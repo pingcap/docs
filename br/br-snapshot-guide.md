@@ -202,8 +202,7 @@ The impact of backup on cluster performance can be reduced by limiting the backu
 ### Performance and impact of snapshot restore
 
 - During data restore, TiDB tries to fully utilize the TiKV CPU, disk IO, and network bandwidth resources. Therefore, it is recommended to restore the backup data on an empty cluster to avoid affecting the running applications.
-<<<<<<< HEAD
-- The speed of restoring backup data is much related with the cluster configuration, deployment, and running applications. In internal tests, the restore speed of a single TiKV node can reach 100 MiB/s. The performance and impact of snapshot restore are varied in different user scenarios and should be tested in actual environments.
+- The speed of restoring backup data is much related with the cluster configuration, deployment, and running applications. The performance and impact of snapshot restore are varied in different user scenarios and should be tested in actual environments.
 - BR provides a coarse-grained Region scattering algorithm to accelerate Region restore in large-scale Region scenarios. The algorithm is controlled by the command-line parameter `--granularity="coarse-grained"` and is enabled by default. This algorithm ensures that each TiKV node receives stable and evenly distributed download tasks, thus fully utilizing the resources of each TiKV node and achieving a rapid parallel recovery. In several real-world cases, the snapshot restore speed of the cluster is improved by about 3 times in large-scale Region scenarios. The following is an example:
 
     ```bash
@@ -216,10 +215,7 @@ The impact of backup on cluster performance can be reduced by limiting the backu
     --log-file restorefull.log
     ```
 
-=======
-- The speed of restoring backup data is much related with the cluster configuration, deployment, and running applications. The performance and impact of snapshot restore are varied in different user scenarios and should be tested in actual environments.
-- BR provides a coarse-grained Region scattering algorithm to accelerate Region restore in large-scale Region scenarios. This algorithm ensures that each TiKV node receives stable and evenly distributed download tasks, thus fully utilizing the resources of each TiKV node and achieving a rapid parallel recovery. In several real-world cases, the snapshot restore speed of the cluster is improved by about 3 times in large-scale Region scenarios.
->>>>>>> 4b4c43632d (br: removed the sentence about the outdated restore speed (#21859))
+
 - Starting from v8.0.0, the `br` command-line tool introduces the `--tikv-max-restore-concurrency` parameter to control the maximum number of files that BR downloads and ingests per TiKV node. By configuring this parameter, you can also control the maximum length of the job queue (the maximum length of the job queue = 32 \* the number of TiKV nodes \* `--tikv-max-restore-concurrency`), thereby controlling the memory consumption of the BR node.
 
     In normal cases, `--tikv-max-restore-concurrency` is automatically adjusted based on the cluster configuration, so manual configuration is unnecessary. If the **TiKV-Details** > **Backup & Import** > **Import RPC count** monitoring metric in Grafana shows that the number of files BR downloads remains close to 0 for a long time while the number of files that BR ingests consistently reaches the upper limit, it indicates that ingesting file tasks pile up and the job queue has reached its maximum length. In this case, you can take the following measures to alleviate the task pilling-up issue:
