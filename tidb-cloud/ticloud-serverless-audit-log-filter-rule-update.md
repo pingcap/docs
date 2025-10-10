@@ -45,7 +45,7 @@ ticloud serverless audit-log filter-rule update --cluster-id <cluster-id> --filt
 | --display-name string   | The display name of the filter rule.                                                                        | No       | Only works in non-interactive mode.                  |
 | --enabled               | Enables or disables the filter rule.                                                                          | No       | Only works in non-interactive mode.                  |
 | --filter-rule-id string | The ID of the filter rule.                                                                                  | Yes      | Only works in non-interactive mode.                  |
-| --rule string           | Complete filter rule expressions. Use "ticloud serverless audit-log filter template" to see filter templates. | No       | Only works in non-interactive mode.                  |
+| --rule string           | Complete filter rule expressions. Use [`ticloud serverless audit-log filter template`](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-template.md) to see filter templates. | No       | Only works in non-interactive mode.                  |
 | -h, --help              | Shows help information for this command.                                                                    | No       | Works in both interactive and non-interactive modes. |
 
 ## Inherited flags

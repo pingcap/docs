@@ -44,8 +44,8 @@ ticloud serverless audit-log filter-rule create --cluster-id <cluster-id> --disp
 
 | Flag                 | Description                                                                                          | Required | Note                                                                                                             |
 |----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
-| -D, --debug          | Enable debug mode.                                                                                   | No       | Works in both interactive and non-interactive modes.                                                             |
-| --no-color           | Disable color output.                                                                                | No       | Only works in non-interactive mode.                                                                              |
+| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both interactive and non-interactive modes.                                                             |
+| --no-color           | Disables color output.                                                                                | No       | Only works in non-interactive mode.                                                                              |
 | -P, --profile string | Profile to use from your configuration file.                                                         | No       | Works in both interactive and non-interactive modes.                                                             |
 
 ## Feedback

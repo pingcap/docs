@@ -34,15 +34,15 @@ ticloud serverless audit-log download -c <cluster-id> --start-date <start-date> 
 | --end-date string       | The end date of the audit log you want to download in the format of `YYYY-MM-DD`, for example, `2025-01-01`.   | Yes      | Only works in non-interactive mode.                  |
 | --output-path string    | The path to download the audit logs. If not specified, logs are downloaded to the current directory.  | No       | Only works in non-interactive mode.                  |
 | --concurrency int       | Download concurrency. By default, the value is `3`.                                                             | No       | Works in both interactive and non-interactive modes. |
-| --force                 | Download without confirmation.                                                                | No       | Works in both interactive and non-interactive modes. |
+| --force                 | Downloads without confirmation.                                                                | No       | Works in both interactive and non-interactive modes. |
 | -h, --help              | Shows help information for this command.                                                      | No       | Works in both interactive and non-interactive modes. |
 
 ## Inherited flags
 
 | Flag                 | Description                                                                                          | Required | Note                                                                                                             |
 |----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
-| -D, --debug          | Enable debug mode.                                                                                   | No       | Works in both interactive and non-interactive modes.                                                             |
-| --no-color           | Disable color output.                                                                                | No       | Only works in non-interactive mode.                                                                              |
+| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both interactive and non-interactive modes.                                                             |
+| --no-color           | Disables color output.                                                                                | No       | Only works in non-interactive mode.                                                                              |
 | -P, --profile string | Profile to use from your configuration file.                                                         | No       | Works in both interactive and non-interactive modes.                                                             |
 
 ## Feedback
