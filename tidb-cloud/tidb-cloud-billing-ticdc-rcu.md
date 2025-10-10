@@ -23,6 +23,13 @@ The following table lists the specifications and corresponding replication perfo
 | 24 RCUs       | 60,000 rows/s                   |
 | 32 RCUs       | 80,000 rows/s                   |
 | 40 RCUs       | 100,000 rows/s                  |
+| 64 RCUs       | 160,000 rows/s                  |
+| 96 RCUs       | 240,000 rows/s                  |
+| 128 RCUs      | 320,000 rows/s                  |
+| 192 RCUs      | 480,000 rows/s                  |
+| 256 RCUs      | 640,000 rows/s                  |
+| 320 RCUs      | 800,000 rows/s                  |
+| 384 RCUs      | 960,000 rows/s                  |
 
 > **Note:**
 >
