@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless audit-log filter-rule update`.
 
 # ticloud serverless audit-log filter-rule update
 
-Update an audit log filter rule for a TiDB Cloud Essential cluster.
+Update an audit log filter rule for a {{{ .essential }}} cluster.
 
 ```shell
 ticloud serverless audit-log filter-rule update [flags]
@@ -43,7 +43,7 @@ ticloud serverless audit-log filter-rule update --cluster-id <cluster-id> --filt
 |-------------------------|-------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
 | -c, --cluster-id string | The ID of the cluster.                                                                                      | Yes      | Only works in non-interactive mode.                  |
 | --display-name string   | The display name of the filter rule.                                                                        | No       | Only works in non-interactive mode.                  |
-| --enabled               | Enable or disable the filter rule.                                                                          | No       | Only works in non-interactive mode.                  |
+| --enabled               | Enables or disables the filter rule.                                                                          | No       | Only works in non-interactive mode.                  |
 | --filter-rule-id string | The ID of the filter rule.                                                                                  | Yes      | Only works in non-interactive mode.                  |
 | --rule string           | Complete filter rule expressions. Use "ticloud serverless audit-log filter template" to see filter templates. | No       | Only works in non-interactive mode.                  |
 | -h, --help              | Shows help information for this command.                                                                    | No       | Works in both interactive and non-interactive modes. |
@@ -52,8 +52,8 @@ ticloud serverless audit-log filter-rule update --cluster-id <cluster-id> --filt
 
 | Flag                 | Description                                                                                          | Required | Note                                                                                                             |
 |----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
-| -D, --debug          | Enable debug mode.                                                                                   | No       | Works in both interactive and non-interactive modes.                                                             |
-| --no-color           | Disable color output.                                                                                | No       | Only works in non-interactive mode.                                                                              |
+| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both interactive and non-interactive modes.                                                             |
+| --no-color           | Disables color output.                                                                                | No       | Only works in non-interactive mode.                                                                              |
 | -P, --profile string | Profile to use from your configuration file.                                                         | No       | Works in both interactive and non-interactive modes.                                                             |
 
 ## Feedback

@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless audit-log download`.
 
 # ticloud serverless audit-log download
 
-Download the database audit log files from a TiDB Cloud Essential cluster.
+Download the database audit log files from a {{{ .essential }}} cluster.
 
 ```shell
 ticloud serverless audit-log download [flags]
@@ -33,7 +33,7 @@ ticloud serverless audit-log download -c <cluster-id> --start-date <start-date> 
 | --start-date string     | The start date of the audit log you want to download in the format of `YYYY-MM-DD`, for example, `2025-01-01`. | Yes      | Only works in non-interactive mode.                  |
 | --end-date string       | The end date of the audit log you want to download in the format of `YYYY-MM-DD`, for example, `2025-01-01`.   | Yes      | Only works in non-interactive mode.                  |
 | --output-path string    | The path to download the audit logs. If not specified, logs are downloaded to the current directory.  | No       | Only works in non-interactive mode.                  |
-| --concurrency int       | Download concurrency. (default 3)                                                             | No       | Works in both interactive and non-interactive modes. |
+| --concurrency int       | Download concurrency. By default, the value is `3`.                                                             | No       | Works in both interactive and non-interactive modes. |
 | --force                 | Download without confirmation.                                                                | No       | Works in both interactive and non-interactive modes. |
 | -h, --help              | Shows help information for this command.                                                      | No       | Works in both interactive and non-interactive modes. |
 

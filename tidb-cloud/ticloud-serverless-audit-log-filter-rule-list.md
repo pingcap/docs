@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless audit-log filter-rule list`.
 
 # ticloud serverless audit-log filter-rule list
 
-List audit log filter rules for a TiDB Cloud Essential cluster.
+List audit log filter rules for a{{{ .essential }}} cluster.
 
 ```shell
 ticloud serverless audit-log filter-rule list [flags]
@@ -43,8 +43,8 @@ ticloud serverless audit-log filter-rule list -c <cluster-id> -o json
 
 | Flag                 | Description                                                                                          | Required | Note                                                                                                             |
 |----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
-| -D, --debug          | Enable debug mode.                                                                                   | No       | Works in both interactive and non-interactive modes.                                                             |
-| --no-color           | Disable color output.                                                                                | No       | Only works in non-interactive mode.                                                                              |
+| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both interactive and non-interactive modes.                                                             |
+| --no-color           | Disables color output.                                                                                | No       | Only works in non-interactive mode.                                                                              |
 | -P, --profile string | Profile to use from your configuration file.                                                         | No       | Works in both interactive and non-interactive modes.                                                             |
 
 ## Feedback

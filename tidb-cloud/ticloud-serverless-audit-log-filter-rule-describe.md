@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless audit-log filter-rule describe`.
 
 # ticloud serverless audit-log filter-rule describe
 
-Describe an audit log filter rule for a TiDB Cloud Essential cluster.
+Describe an audit log filter rule for a {{{ .essential }}} cluster.
 
 ```shell
 ticloud serverless audit-log filter-rule describe [flags]
@@ -37,8 +37,8 @@ ticloud serverless audit-log filter-rule describe --cluster-id <cluster-id> --fi
 
 | Flag                 | Description                                                                                          | Required | Note                                                                                                             |
 |----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
-| -D, --debug          | Enable debug mode.                                                                                   | No       | Works in both interactive and non-interactive modes.                                                             |
-| --no-color           | Disable color output.                                                                                | No       | Only works in non-interactive mode.                                                                              |
+| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both interactive and non-interactive modes.                                                             |
+| --no-color           | Disables color output.                                                                                | No       | Only works in non-interactive mode.                                                                              |
 | -P, --profile string | Profile to use from your configuration file.                                                         | No       | Works in both interactive and non-interactive modes.                                                             |
 
 ## Feedback

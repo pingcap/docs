@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless audit-log config update`.
 
 # ticloud serverless audit-log config update
 
-Update the database audit logging configuration for a TiDB Cloud Essential cluster.
+Update the database audit logging configuration for a {{{ .essential }}} cluster.
 
 ```shell
 ticloud serverless audit-log config update [flags]
@@ -57,8 +57,8 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled=false
 | --oss.access-key-id string | The access key ID of the OSS. | No | Only works in non-interactive mode. |
 | --oss.access-key-secret string | The access key secret of the OSS. | No | Only works in non-interactive mode. |
 | --oss.uri string | The OSS URI in `oss://<bucket>/<path>` format. | No | Only works in non-interactive mode. |
-| --rotation-interval-minutes int32 | The rotation interval in minutes, range [10, 1440]. | No | Only works in non-interactive mode. |
-| --rotation-size-mib int32 | The rotation size in MiB, range [1, 1024]. | No | Only works in non-interactive mode. |
+| --rotation-interval-minutes int32 | The rotation interval in minutes. Valid range: [10, 1440]. | No | Only works in non-interactive mode. |
+| --rotation-size-mib int32 | The rotation size in MiB. Valid range: [1, 1024]. | No | Only works in non-interactive mode. |
 | --s3.access-key-id string | The access key ID of S3. You only need to set one of the `s3.role-arn` and [`s3.access-key-id`, `s3.secret-access-key`]. | No | Only works in non-interactive mode. |
 | --s3.role-arn string | The role ARN of S3. You only need to set one of the `s3.role-arn` and [`s3.access-key-id`, `s3.secret-access-key`]. | No | Only works in non-interactive mode. |
 | --s3.secret-access-key string | The secret access key of S3. You only need to set one of the `s3.role-arn` and [`s3.access-key-id`, `s3.secret-access-key`]. | No | Only works in non-interactive mode. |
