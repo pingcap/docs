@@ -355,7 +355,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - [Export data from TiDB Cloud Serverless clusters](/tidb-cloud/serverless-export.md)
     - [Import data from local storage into TiDB Cloud Serverless clusters](/tidb-cloud/ticloud-import-start.md)
     - [Authenticate via OAuth](/tidb-cloud/ticloud-auth-login.md)
-    - [Ask questions via TiDB Bot](/tidb-cloud/ticloud-ai.md)
 
   Before upgrading your TiDB Cloud CLI, note that this new CLI is incompatible with previous versions. For example, `ticloud cluster` in CLI commands is now updated to `ticloud serverless`. For more information, see [TiDB Cloud CLI reference](/tidb-cloud/cli-reference.md).
 
