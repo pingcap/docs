@@ -89,17 +89,29 @@ When you create a cluster with regional high availability, critical OLTP (Online
 
 <CustomContent language="en,zh">
 
-The following diagram shows the architecture of regional high availability on Alibaba Cloud:
+- The following diagram shows the architecture of regional high availability on Alibaba Cloud:
 
-![regional high availability](/media/tidb-cloud/regional-high-avaliability-alibaba-cloud.png)
+    ![regional high availability](/media/tidb-cloud/regional-high-avaliability-alibaba-cloud.png)
+
+- The following diagram shows the architecture of regional high availability on AWS:
+
+    ![regional high availability](/media/tidb-cloud/regional-high-avaliability-aws.png)
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+The following diagram shows the architecture of regional high availability on AWS:
+
+![regional high availability](/media/tidb-cloud/regional-high-avaliability-aws.png)
+
+</CustomContent>
 
 In regional high availability architecture:
 
 - The Placement Driver (PD) and TiKV are deployed across multiple availability zones, and data is always replicated redundantly across zones to ensure the highest level of availability.
 - Data is replicated across TiFlash write nodes within the primary availability zone.
 - TiDB servers and TiFlash compute nodes read from and write to these TiKV and TiFlash write nodes, which are safeguarded by storage-level replication.
-
-</CustomContent>
 
 ### Failover process
 
