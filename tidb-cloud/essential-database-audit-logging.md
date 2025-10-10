@@ -1,5 +1,5 @@
 ---
-title: Database Audit Logging for {{{ .essential }}}
+title: Database Audit Logging (Beta) for {{{ .essential }}}
 summary: Learn about how to audit a {{{ .essential }}} cluster in TiDB Cloud.
 aliases: ['/tidbcloud/serverless-audit-logging']
 ---
@@ -20,9 +20,9 @@ The audit logging feature is disabled by default. To audit a cluster, you need t
 
 ### Data redaction
 
-{{{ .essential }}} redacts sensitive data in the audit logs by default. Take the following SQL statement as an example:
+By default, {{{ .essential }}} redacts sensitive data in audit logs. Take the following SQL statement as an example:
 
-```sql 
+```sql
 INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES (1, 'Alice', '123456');
 ```
 
@@ -36,8 +36,8 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 
 {{{ .essential }}} generates a new audit log file when either of the following conditions is met:
 
-- The size of the current log file reaches rotation size (100 MB by default).
-- Rotation interval (one hour by default) has passed since the previous log generation. Depending on the internal scheduling mechanism, log generation might be delayed by a few minutes.
+- The current log file reaches the rotation size (100 MiB by default).
+- The rotation interval (one hour by default) has passed since the previous log generation. Depending on the internal scheduling mechanism, log generation might be delayed by a few minutes.
 
 ## Audit logging locations
 
@@ -51,43 +51,43 @@ You can store the audit logs in the following locations:
 
 ### TiDB Cloud
 
-You can store audit logs in TiDB Cloud and download them to your local machine. The audit logs expire and are deleted after 365 days. To request longer storage duration, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+You can store audit logs in TiDB Cloud and download them to your local machine. Audit logs expire and are deleted after 365 days. To request a longer retention period, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ### Amazon S3
 
-To store audit logs to Amazon S3, you need to provide the following information:
+To store audit logs in Amazon S3, you need to provide the following information:
 
 - URI: `s3://<bucket-name>/<folder-path>/`
-- One of the following access credentials:
-    - [An access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): Make sure the access key has the `s3:PutObject` and `s3:ListBucket` permissions.
-    - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): Make sure the role ARN (Amazon Resource Name) has the `s3:PutObject` permissions. Note that only clusters hosted on AWS support the role ARN.
+- Access credentials: choose one of the following:
+    - An [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) with the `s3:PutObject` and `s3:ListBucket` permissions.
+    - A [role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) with the `s3:PutObject` permission. Only clusters hosted on AWS support using a role ARN.
 
 For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
 
 ### Google Cloud Storage
 
-To store audit logs to Google Cloud Storage, you need to provide the following information:
+To store audit logs in Google Cloud Storage, you need to provide the following information:
 
 - URI: `gs://<bucket-name>/<folder-path>/`
-- Access credential: a [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your bucket. Make sure the service account key has the `storage.objects.create` and `storage.objects.delete` permissions.
+- Access credential: a [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) with the `storage.objects.create` and `storage.objects.delete` permissions.
 
 For more information, see [Configure GCS access](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
 
 ### Azure Blob Storage
 
-To store audit logs to Azure Blob Storage, you need to provide the following information:
+To store audit logs in Azure Blob Storage, you need to provide the following information:
 
 - URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` or `https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
-- Access credential: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) for your Azure Blob Storage container. Make sure the SAS token has the `Read` and `Write` permissions on the `Container` and `Object` resources.
+- Access credential: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) with `Read` and `Write` permissions on the `Container` and `Object` resources.
 
 For more information, see [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
 
 ### Alibaba Cloud OSS
 
-To store audit logs to Alibaba Cloud OSS, you need to provide the following information:
+To store audit logs in Alibaba Cloud OSS, you need to provide the following information:
 
 - URI: `oss://<bucket-name>/<folder-path>/`
-- Access credential: An [AccessKey pair](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair) for your Alibaba Cloud account. Make sure the AccessKey pair has the `oss:PutObject` and `oss:GetBucketInfo` permissions to allow data export to the OSS bucket.
+- Access credential: an [AccessKey pair](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair) with the `oss:PutObject` and `oss:GetBucketInfo` permissions to allow data export to the OSS bucket.
 
 For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
 
@@ -106,7 +106,7 @@ The filter rule contains the following fields:
 
 The following table shows all event classes in database audit logging:
 
-| Event Class   | Description                                                                                      | Parent-class   |
+| Event class   | Description                                                                                      | Parent-class   |
 |---------------|--------------------------------------------------------------------------------------------------|---------------|
 | `CONNECTION`    | Records all operations related to connections, such as handshaking, connections, disconnections, connection reset, and changing users | -             |
 | `CONNECT`       | Records all operations of the handshaking in connections                                          | `CONNECTION`    |
@@ -132,40 +132,40 @@ You can enable, edit, and disable audit logging.
 
 ### Enable audit logging
 
-You can enable audit logging for a {{{ .essential }}} cluster.
+You can enable audit logging for a {{{ .essential }}} cluster using the TiDB Cloud console or the TiDB Cloud CLI.
 
 > **Note:**
 >
-> Only enabling audit logging will not generate audit logs. You need to configure filters to specify what events to log. For more information, see [Manage audit logging filter rules](#manage-audit-logging-filter-rules).
+> Enabling audit logging alone does not generate audit logs. You must also configure filters to specify which events to log. For more information, see [Manage audit logging filter rules](#manage-audit-logging-filter-rules).
 
 <SimpleTab>
 <div label="Console">
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
-   > **Tip:**
-   >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > **Tip:**
+    >
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
 3. On the **DB Audit Logging** page, click **Enable**.
 
-4. Select the storage location of the audit logs and fill in the necessary information, then click **Test Connection and Next** or **Next**. For more information about the available storage locations, see [Audit logging locations](#audit-logging-locations).
+4. Select a storage location for the audit logs and fill in the required information. Then click **Test Connection and Next** or **Next**. For more information about available storage locations, see [Audit logging locations](#audit-logging-locations).
 
-5. In the **Database Audit Logging Settings** dialog box, fill in the log file rotation and log redaction settings, and then click **Save**.
+5. In the **Database Audit Logging Settings** dialog, fill in the log file rotation and log redaction settings, and then click **Save**.
 
 </div>
 
 <div label="CLI">
 
-Take Amazon S3 storage as an example. Run the following command to enable audit logging and store the audit logs to Amazon S3:
+Take Amazon S3 storage as an example. To enable audit logging and store audit logs in Amazon S3, run the following command:
 
 ```shell
-ticloud serverless audit-log config update -c <cluster-id> --enabled --cloud-storage S3 --s3.uri <s3-url> --s3.access-key-id <s3-access-key-id>  --s3.secret-access-key <s3-secret-access-key> --rotation-size-mib <size-in-mb> --rotation-interval-minutes <interval-in-minutes> --unredacted=<true|false>
+ticloud serverless audit-log config update -c <cluster-id> --enabled --cloud-storage S3 --s3.uri <s3-url> --s3.access-key-id <s3-access-key-id> --s3.secret-access-key <s3-secret-access-key> --rotation-size-mib <size-in-mb> --rotation-interval-minutes <interval-in-minutes> --unredacted=<true|false>
 ```
 
-`--rotation-size-mib`, `--rotation-interval-minutes`, and `--unredacted` are optional parameters. If you do not specify them, the default values are used.
+The `--rotation-size-mib`, `--rotation-interval-minutes`, and `--unredacted` parameters are optional. If you do not specify them, the default values are used.
  
 </div>
 </SimpleTab>
@@ -187,11 +187,13 @@ You can edit the audit logging for a {{{ .essential }}} cluster after enabling i
 
 3. On the **DB Audit Logging** page, click **Settings**.
 
-4. In the **Database Audit Logging Settings** dialog box, fill the log file rotation and log redaction settings, and then click **Save**.
+4. In the **Database Audit Logging Settings** dialog, update the log file rotation or log redaction settings, and then click **Save**.
 
 </div>
 
 <div label="CLI">
+
+To update the audit logging settings using the TiDB Cloud CLI, run the following command:
 
 ```shell
 ticloud serverless audit-log config update -c <cluster-id> --rotation-size-mib <size-in-mb> --rotation-interval-minutes <interval-in-minutes> --unredacted=<true|false>
@@ -217,11 +219,13 @@ You can disable audit logging for a {{{ .essential }}} cluster.
 
 3. On the **DB Audit Logging** page, click **...** in the upper-right corner, and then click **Disable**.
 
-4. In the **Disable DB Audit Logging** dialog box, click **Disable**.
+4. In the **Disable DB Audit Logging** dialog, click **Disable**.
 
 </div>
 
 <div label="CLI">
+
+To disable audit logging using the TiDB Cloud CLI, run the following command:
 
 ```shell
 ticloud serverless audit-log config update -c <cluster-id> --disabled=true
@@ -232,7 +236,7 @@ ticloud serverless audit-log config update -c <cluster-id> --disabled=true
 
 ## Manage audit logging filter rules
 
-You can create, edit, disable, and delete a audit logging filter rule.
+You can create, edit, disable, and delete an audit logging filter rule.
 
 ### Create a filter rule
 
@@ -243,19 +247,21 @@ To create a filter rule, define which users and events you want to capture in th
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
-   > **Tip:**
-   >
-   > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > **Tip:**
+    >
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
 2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
 3. On the **DB Audit Logging** page, click **Add Filter Rule**.
 
-4. Fill in the **Filter Name**, **SQL Users**, and **Filter Rule** fields in the **Add Filter Rule** dialog box, and then click **Confirm**. For more information about the fields, see [Audit logging filter rules](#audit-logging-filter-rules).
+4. In the **Add Filter Rule** dialog, fill in the **Filter Name**, **SQL Users**, and **Filter Rule** fields, and then click **Confirm**. For more information about these fields, see [Audit logging filter rules](#audit-logging-filter-rules).
 
 </div>
 
 <div label="CLI">
+
+To create a filter rule using the TiDB Cloud CLI, run the following command:
 
 ```shell
 ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-name <rule-name> --rule '{"users":["%@%"],"filters":[{}]}'
@@ -277,13 +283,15 @@ ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-n
 
 2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
-3. On the **DB Audit Logging** page, find the filter rule you want to edit, click **...** in its row, and then click **Edit**.
+3. On the **DB Audit Logging** page, locate the filter rule you want to edit, click **...** in its row, and then click **Edit**.
 
-4. Fill in the **Filter Name** and **Filter Rule** fields in the **Edit Filter Rule** dialog box, and then click **Confirm**.
+4. In the **Edit Filter Rule** dialog, update the **Filter Name** or **Filter Rule** field, and then click **Confirm**.
 
 </div>
 
 <div label="CLI">
+
+To edit a filter rule using the TiDB Cloud CLI, run the following command:
 
 ```shell
 ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-rule-id <rule-id> --rule '{"users":["%@%"],"filters":[{"classes":["QUERY"],"tables":["test.t"]}]}'
@@ -305,13 +313,13 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 
 2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
-3. On the **DB Audit Logging** page, choose the filter rule that you want to disable.
-
-4. Turn off the slider to disable the filter rule.
+3. On the **DB Audit Logging** page, locate the filter rule you want to disable, and turn off the toggle to disable the filter rule.
 
 </div>
 
 <div label="CLI">
+
+To disable a filter rule using the TiDB Cloud CLI, run the following command:
 
 ```shell
 ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-rule-id <rule-id> --enabled=false
@@ -333,9 +341,9 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 
 2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
-3. On the **DB Audit Logging** page, choose the filter rule you want to delete and click **...**.
+3. On the **DB Audit Logging** page, locate the filter rule you want to delete and click **...**.
 
-4. Click **Delete** and then click **I understand. Delete it** to delete the filter rule.
+4. Click **Delete**, and then click **I understand. Delete it** to confirm.
 
 </div>
 
@@ -350,12 +358,12 @@ ticloud serverless audit-log filter delete --cluster-id <cluster-id> --filter-ru
 
 ## Access audit logging with TiDB Cloud Storage
 
-When you store audit logs in TiDB Cloud, {{{ .essential }}} stores them as readable text files named `YYYY-MM-DD-<index>.log`, which you can access and download.
+When you store audit logs in TiDB Cloud, {{{ .essential }}} saves them as readable text files named `YYYY-MM-DD-<index>.log`. You can view and download these files from the TiDB Cloud console or using the TiDB Cloud CLI.
 
 > **Note:**
 >
-> {{{ .essential }}} does not guarantee sequential ordering of audit logs. The log file named `YYYY-MM-DD-<index>.log` might contain the audit logs in previous days.
-> If you want to retrieve all logs from a specific date (for example, January 1, 2025), specifying `--start-date 2025-01-01` and `--end-date 2025-01-02` usually works. But under extreme conditions, you might need to download all log files and order them by the `TIME` field.
+> - {{{ .essential }}} does not guarantee that audit logs are stored in sequential order. A log file named `YYYY-MM-DD-<index>.log` might contain entries from earlier dates.
+> - To retrieve all logs for a specific date (for example, January 1, 2025), set `--start-date 2025-01-01` and `--end-date 2025-01-02`. In some cases, you might need to download all log files and sort them by the `TIME` field.
 
 <SimpleTab>
 <div label="Console">
@@ -368,7 +376,7 @@ When you store audit logs in TiDB Cloud, {{{ .essential }}} stores them as reada
 
 2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 
-3. On the **DB Audit Logging** page, you can view the list of audit logs under `TiDB Cloud Storage`.
+3. On the **DB Audit Logging** page, you can view the list of audit logs under **TiDB Cloud Storage**.
 
 4. To download audit logs, select one or more logs from the list and then click **Download**.
 
@@ -376,12 +384,14 @@ When you store audit logs in TiDB Cloud, {{{ .essential }}} stores them as reada
 
 <div label="CLI">
 
+To download audit logs using the TiDB Cloud CLI, run the following command:
+
 ```shell
 ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <output-path> --start-date <start-date> --end-date <end-date>
 ```
 
-- `start-date`: The start date of the audit log that you want to download in the format of `YYYY-MM-DD`, for example `2025-01-01`.
-- `end-date`: The end date of the audit log that you want to download in the format of `YYYY-MM-DD`, for example `2025-01-01`.
+- `start-date`: the start date of the audit logs to download, in the format of `YYYY-MM-DD`, for example, `2025-01-01`.
+- `end-date`: the end date of the audit logs to download, in the format of `YYYY-MM-DD`, for example, `2025-01-01`.
  
 </div>
 </SimpleTab>
@@ -448,4 +458,4 @@ When the event class is `AUDIT` or a subclass of `AUDIT`, the audit logs contain
 
 ## Audit logging limitations
 
-{{{ .essential }}} does not guarantee the sequential order of audit logs, which means that you might have to review all log files to view the latest events. To sort the logs chronologically, you can use the `TIME` field in the audit logs.
+{{{ .essential }}} does not guarantee the sequential order of audit logs, which means that you might have to review all log files find the most recent events. To sort the logs chronologically, you can use the `TIME` field in the audit logs.
