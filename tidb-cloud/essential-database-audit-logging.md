@@ -69,7 +69,7 @@ For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-ex
 To store audit logs to Google Cloud Storage, you need to provide the following information:
 
 - URI: `gs://<bucket-name>/<folder-path>/`
-- Access credential: a **base64 encoded** [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your bucket. Make sure the service account key has the `storage.objects.create` and `storage.objects.delete` permissions.
+- Access credential: a [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your bucket. Make sure the service account key has the `storage.objects.create` and `storage.objects.delete` permissions.
 
 For more information, see [Configure GCS access](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
 
