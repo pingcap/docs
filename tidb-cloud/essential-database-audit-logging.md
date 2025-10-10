@@ -41,7 +41,7 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 
 ## Audit logging locations
 
-You can store the audit logs in the following locations:
+You can store audit logs in the following locations:
 
 - TiDB Cloud
 - [Amazon S3](https://aws.amazon.com/s3/)
@@ -59,7 +59,7 @@ To store audit logs in Amazon S3, you need to provide the following information:
 
 - URI: `s3://<bucket-name>/<folder-path>/`
 - Access credentials: choose one of the following:
-    - An [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) with the `s3:PutObject` and `s3:ListBucket` permissions.
+    - An [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) with the `s3:PutObject` permissions.
     - A [role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) with the `s3:PutObject` permission. Only clusters hosted on AWS support using a role ARN.
 
 For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
