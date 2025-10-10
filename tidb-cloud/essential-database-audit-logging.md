@@ -125,6 +125,11 @@ The following table shows all event classes in database audit logging:
 | `QUERY_DDL`     | Records all operations of the DDL statements                                                        | `QUERY`       |
 | `AUDIT`         | Records all operations related to setting TiDB database auditing, including setting system variables and calling system functions | -                   |
 | `AUDIT_FUNC_CALL` | Records all operations of calling system functions related to TiDB Cloud database auditing        | `AUDIT`       |
+| `AUDIT_SET_SYS_VAR` | Records all operations of setting system variables        | `AUDIT`       |
+
+> **Note:**
+>
+> The `AUDIT` event class and its subclasses are always recorded in audit logs and cannot be filtered out.
 
 ## Configure audit logging
 
