@@ -59,7 +59,7 @@ To store audit logs in Amazon S3, you need to provide the following information:
 
 - URI: `s3://<bucket-name>/<folder-path>/`
 - Access credentials: choose one of the following:
-    - An [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) with the `s3:PutObject` permissions.
+    - An [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) with the `s3:PutObject` permission.
     - A [role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) with the `s3:PutObject` permission. Only clusters hosted on AWS support using a role ARN.
 
 For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
@@ -406,13 +406,13 @@ All classes of audit logs contain the following information:
 
 | Field         | Description                                                                                   |
 |---------------|-----------------------------------------------------------------------------------------------|
-| `ID`            | The unique identifier that identifies the audit record of an operation                        |
-| `TIME`          | The timestamp of the audit record                                                             |
-| `EVENT`         | The event classes of the audit record. Multiple event types are separated by commas (`,`)     |
-| `USER`          | The username of the audit record                                                              |
-| `ROLES`         | The roles of the user at the time of the operation                                            |
-| `CONNECTION_ID` | The identifier of the user's connection                                                       |
-| `TABLES`        | The accessed tables related to this audit record                                              |
+| `ID`            | The unique identifier that identifies the audit record of an operation.                        |
+| `TIME`          | The timestamp of the audit record.                                                             |
+| `EVENT`         | The event classes of the audit record. Multiple event types are separated by commas (`,`).     |
+| `USER`          | The username of the audit record.                                                              |
+| `ROLES`         | The roles of the user at the time of the operation.                                            |
+| `CONNECTION_ID` | The identifier of the user's connection.                                                       |
+| `TABLES`        | The accessed tables related to this audit record.                                              |
 | `STATUS_CODE`   | The status code of the audit record. `1` means success, and `0` means failure.                |
 | `KEYSPACE_NAME` | The keyspace name of the audit record.                                                        |
 | `SERVERLESS_TENANT_ID`           | The ID of the serverless tenant that the cluster belongs to.                 |
