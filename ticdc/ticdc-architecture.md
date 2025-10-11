@@ -15,7 +15,7 @@ Starting from v9.0.0, TiCDC introduces a new architecture that improves real-tim
 > **Warning:**
 >
 > The TiCDC new architecture is currently experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> The TiCDC new architecture does not yet support all the functionalities available in the [classic architecture](/ticdc/ticdc-classic-architecture.md). For more details, see [Limitations](#limitations).
+> The TiCDC new architecture does not yet support all the functionalities available in the [classic architecture](/ticdc/ticdc-classic-architecture.md). For more information, see [Limitations](#limitations).
 
 ## Architectural design
 
