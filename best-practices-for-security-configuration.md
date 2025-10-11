@@ -58,7 +58,7 @@ By default, TiDB Dashboard is designed for trusted users. The default port inclu
 
 By default, TiDB installation includes several privileged interfaces for inter-component communication. These ports typically do not need to be accessible to users, because they are primarily for internal communication. Exposing these ports on public networks increases the attack surface, violates the principle of least privilege, and raises the risk of security vulnerabilities. The following table lists the default listening ports in a TiDB cluster:
 
-| Component                | Default port | Protocol       |
+| Component         | Default port| Protocol   |
 |-------------------|-------------|------------|
 | TiDB              | 4000        | MySQL      |
 | TiDB              | 10080       | HTTP       |
@@ -70,10 +70,10 @@ By default, TiDB installation includes several privileged interfaces for inter-c
 | TiFlash           | 20170       | Protocol   |
 | TiFlash           | 20292       | HTTP       |
 | TiFlash           | 8234        | HTTP       |
-| TiFlow            |  8261 | HTTP  |
-| TiFlow            |  8291 | HTTP  |
-| TiFlow            |  8262     | HTTP  |
-| TiFlow            |  8300    | HTTP       |
+| DM master         | 8261        | HTTP       |
+| DM master         | 8291        | HTTP       |
+| DM worker         | 8262        | HTTP       |
+| TiCDC             | 8300        | HTTP       |
 | TiDB Lightning    | 8289        | HTTP       |
 | TiDB Operator     | 6060        | HTTP       |
 | TiDB Dashboard    | 2379        | HTTP       |
@@ -92,7 +92,7 @@ By default, TiDB installation includes several privileged interfaces for inter-c
 | AlertManager      | 9093        | HTTP       |
 | AlertManager      | 9094        | Protocol   |
 | Node Exporter     | 9100        | HTTP       |
-| Blackbox Exporter | 9115       | HTTP       |
+| Blackbox Exporter | 9115        | HTTP       |
 | NG Monitoring     | 12020       | HTTP       |
 
 It is recommended to only expose the `4000` port for the database and the `9000` port for the Grafana dashboard to ordinary users, while restricting access to other ports using network security policies or firewalls. The following is an example of using `iptables` to restrict port access:
