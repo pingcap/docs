@@ -6434,6 +6434,10 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 ### tidb_txn_entry_size_limit <span class="version-mark">New in v7.6.0</span>
 
+> **Warning:**
+>
+> The [optimistic transaction model](/optimistic-transaction.md) will be deprecated and might be removed in a future release. Starting from TiDB v7.1.0, it is **STRONGLY NOT RECOMMENDED** to set the value of `tidb_txn_mode` to `"optimistic"` or `""`.
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
