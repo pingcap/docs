@@ -183,7 +183,6 @@
     - [Log Filter](/ticdc/ticdc-filter.md)
     - [DDL Replication](/ticdc/ticdc-ddl.md)
     - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
-  - [TiCDC New Architecture](/ticdc/ticdc-new-arch.md)
   - Monitor and Alert
     - [Monitoring Metrics Summary](/ticdc/ticdc-summary-monitor.md)
     - [Monitoring Metrics Details](/ticdc/monitor-ticdc.md)
@@ -193,7 +192,9 @@
     - [Integrate with Confluent and Snowflake](/ticdc/integrate-confluent-using-ticdc.md)
     - [Integrate with Apache Kafka and Apache Flink](/replicate-data-to-kafka.md)
   - Reference
-    - [TiCDC Architecture](/ticdc/ticdc-architecture.md)
+    - TiCDC Architecture
+      - [TiCDC New Architecture](/ticdc/ticdc-architecture.md)
+      - [TiCDC Classic Architecture](/ticdc/ticdc-classic-architecture.md)
     - [TiCDC Server Configurations](/ticdc/ticdc-server-config.md)
     - [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md)
     - [TiCDC Client Authentication](/ticdc/ticdc-client-authentication.md)
