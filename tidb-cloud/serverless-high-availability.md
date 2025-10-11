@@ -89,13 +89,13 @@ When you create a cluster with regional high availability, critical OLTP (Online
 
 <CustomContent language="en,zh">
 
-- The following diagram shows the architecture of regional high availability on Alibaba Cloud:
-
-    ![regional high availability](/media/tidb-cloud/regional-high-avaliability-alibaba-cloud.png)
-
 - The following diagram shows the architecture of regional high availability on AWS:
 
     ![regional high availability](/media/tidb-cloud/regional-high-avaliability-aws.png)
+
+- The following diagram shows the architecture of regional high availability on Alibaba Cloud:
+
+    ![regional high availability](/media/tidb-cloud/regional-high-avaliability-alibaba-cloud.png)
 
 </CustomContent>
 
