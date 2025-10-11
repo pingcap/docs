@@ -85,8 +85,6 @@ By default, TiDB installation includes several privileged interfaces for inter-c
 | TiDB Lightning    | 8289        | HTTP       |
 | TiDB Operator     | 6060        | HTTP       |
 | TiDB Dashboard    | 2379        | HTTP       |
-| TiDB Binlog       | 8250        | HTTP       |
-| TiDB Binlog       | 8249        | HTTP       |
 | TMS               | 8082        | HTTP       |
 | TEM               | 8080        | HTTP       |
 | TEM               | 8000        | HTTP       |
