@@ -61,7 +61,12 @@ This section describes how to deploy and change TiProxy using TiUP. For how to d
 
 1. Before TiUP v1.15.0, you need to manually generate a self-signed certificate.
 
+<<<<<<< HEAD
     Generate a self-signed certificate for the TiDB instance and place the certificate on all TiDB instances to ensure that all TiDB instances have the same certificate. For detailed steps, see [Generate self-signed certificates](/generate-self-signed-certificates.md).
+=======
+- To deploy TiProxy using TiDB Operator, see the [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tiproxy) documentation.
+- To quickly deploy TiProxy locally using TiUP, see [Deploy TiProxy](/tiup/tiup-playground.md#deploy-tiproxy).
+>>>>>>> 68a95fe787 (Fix tiproxy links that used zh version of docs (#21868))
 
 2. Configure the TiDB instances.
 
