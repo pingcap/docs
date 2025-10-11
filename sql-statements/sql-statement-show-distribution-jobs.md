@@ -15,7 +15,7 @@ The `SHOW DISTRIBUTION JOBS` statement shows all current Region distribution job
 
 </CustomContent>
 
-## Syntax
+## Synopsis
 
 ```ebnf+diagram
 ShowDistributionJobsStmt ::=
