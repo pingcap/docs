@@ -228,7 +228,7 @@ To verify the caller's identity for a component, you need to mark the certificat
         cert-allowed-cn = ["tiproxy", "tidb", "test-client", "prometheus"]
     ```
 
-## Validating TLS between TiDB components
+## Validate TLS between TiDB components
 
 After configuring TLS for communication between TiDB components, you can use the following commands to verify that TLS has been successfully enabled. These commands print the certificate and TLS handshake details for each component.
 
