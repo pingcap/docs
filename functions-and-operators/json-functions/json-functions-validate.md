@@ -7,6 +7,10 @@ summary: Learn about JSON functions that validate JSON documents.
 
 This document describes JSON functions that validate JSON documents.
 
+> **Note:**
+>
+> Currently, this feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
+
 ## [JSON_SCHEMA_VALID()](https://dev.mysql.com/doc/refman/8.0/en/json-validation-functions.html#function_json-schema-valid)
 
 The `JSON_SCHEMA_VALID(schema, json_doc)` function validate a JSON document against a schema to ensure data integrity and consistency.
@@ -130,7 +134,7 @@ SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables"]}',@j);
 1 row in set (0.00 sec)
 ```
 
-In the preceding output, you can see that see that validation of the presence of the `fruits` and `vegetables` attributes succeeds.
+In the preceding output, you can see that the validation of the presence of the `fruits` and `vegetables` attributes succeeds.
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables","grains"]}',@j);
@@ -145,7 +149,7 @@ SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables","grains"]}',@j);
 1 row in set (0.00 sec)
 ```
 
-In the preceding output, you can see that see that validation of the presence of the `fruits`, `vegetables` and `grains` attributes fails because `grains` is not present.
+In the preceding output, you can see that the validation of the presence of the `fruits`, `vegetables` and `grains` attributes fails because `grains` is not present.
 
 Now validate that `fruits` is an array.
 

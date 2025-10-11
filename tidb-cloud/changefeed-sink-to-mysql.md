@@ -91,9 +91,9 @@ If you do not load the existing data, you need to create corresponding target ta
 
 After completing the prerequisites, you can sink your data to MySQL.
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
+1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Data** > **Changefeed** in the left navigation pane.
 
-2. Click **Create Changefeed**, and select **MySQL** as **Target Type**.
+2. Click **Create Changefeed**, and select **MySQL** as **Destination**.
 
 3. Fill in the MySQL endpoints, user name, and password in **MySQL Connection**.
 

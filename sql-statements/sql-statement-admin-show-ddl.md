@@ -90,7 +90,7 @@ The `ADMIN SHOW DDL JOBS` statement is used to view the 10 jobs in the current D
     - `paused`: indicates that the operation has been paused. This state only appears when you use the [`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) command to pause the DDL job. You can use the [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md) command to resume the DDL job.
     - `done`: indicates that the operation has been successfully executed on the TiDB owner node, but other TiDB nodes have not yet synchronized the changes performed by this DDL job.
 - `COMMENTS`: contains additional information for diagnostic purposes.
-    - `ingest`: ingest tasks for accelerated adding index backfill configured via [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)。
+    - `ingest`: ingest tasks for accelerated adding index backfill configured via [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630).
     - `txn`: transaction-based index backfill after [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is disabled.
     - `txn-merge`: transactional backfilling with a temporary index that gets merged with the original index when the backfilling is finished.
     - `DXF`: tasks executed with Distributed eXecution Framework (DXF) configured via [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710).

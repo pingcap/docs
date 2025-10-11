@@ -72,19 +72,21 @@ You can grant roles to a user at the organization level or at the project level.
 
 At the organization level, TiDB Cloud defines four roles, in which `Organization Owner` can invite members and grant organization roles to members.
 
-| Permission  | `Organization Owner` | `Organization Billing Admin` | `Organization Console Audit Admin` | `Organization Member` |
-|---|---|---|---|---|
-| Manage organization settings, such as projects, API keys, and time zones. | ✅ | ❌ | ❌ | ❌ |
-| Invite users to or remove users from an organization, and edit organization roles of users. | ✅ | ❌ | ❌ | ❌ |
-| All the permissions of `Project Owner` for all projects in the organization. | ✅ | ❌ | ❌ | ❌ |
-| Create projects with Customer-Managed Encryption Key (CMEK) enabled | ✅ | ❌ | ❌ | ❌ |
-| View bills, use [cost explorer](/tidb-cloud/tidb-cloud-billing.md#cost-explorer), and edit payment information for the organization. | ✅ | ✅ | ❌ | ❌ |
-| Manage TiDB Cloud [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md) for the organization. | ✅ | ❌ | ✅ | ❌ |
-| View users in the organization and projects in which the member belong to. | ✅ | ✅ | ✅ | ✅ |
+| Permission  | `Organization Owner` | `Organization Billing Manager` | `Organization Billing Viewer` | `Organization Console Audit Manager` | `Organization Viewer` |
+|---|---|---|---|---|---|
+| Manage organization settings, such as projects, API keys, and time zones. | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Invite users to or remove users from an organization, and edit organization roles of users. | ✅ | ❌ | ❌ | ❌ | ❌ |
+| All the permissions of `Project Owner` for all projects in the organization. | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Create projects with Customer-Managed Encryption Key (CMEK) enabled. | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Edit payment information for the organization. | ✅ | ✅ | ❌ | ❌ | ❌ |
+| View bills and use [cost explorer](/tidb-cloud/tidb-cloud-billing.md#cost-explorer). | ✅ | ✅ | ✅ | ❌ | ❌ |
+| Manage TiDB Cloud [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md) for the organization. | ✅ | ❌ | ❌ | ✅ | ❌ |
+| View users in the organization and projects in which the member belong to. | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 > **Note:**
 >
-> The `Organization Console Audit Admin` role is used to manage audit logging in the TiDB Cloud console, instead of database audit logging. To manage database auditing, use the `Project Owner` role at the project level.
+> - The `Organization Console Audit Manager` role (renamed from `Organization Console Audit Admin`) is used to manage audit logging in the TiDB Cloud console, instead of database audit logging. To manage database auditing, use the `Project Owner` role at the project level.
+> - The `Organization Billing Manager` role is renamed from `Organization Billing Admin`, and the `Organization Viewer` role is renamed from `Organization Member`.
 
 ### Project roles
 
@@ -93,42 +95,41 @@ At the project level, TiDB Cloud defines three roles, in which `Project Owner` c
 > **Note:**
 >
 > - `Organization Owner` has all the permissions of <code>Project Owner</code> for all projects so `Organization Owner` can invite project members and grant project roles to members too.
-> - Each project role has all the permissions of <code>Organization Member</code> by default.
+> - Each project role has all the permissions of <code>Organization Viewer</code> by default.
 > - If a user in your organization does not belong to any projects, the user does not have any project permissions.
 
-| Permission  | `Project Owner` | `Project Data Access Read-Write` | `Project Data Access Read-Only` |
-|---|---|---|---|
-| Manage project settings | ✅ | ❌ | ❌ |
-| Invite users to or remove users from a project, and edit project roles of users. | ✅ | ❌ | ❌ |
-| Manage [database audit logging](/tidb-cloud/tidb-cloud-auditing.md) of the project. | ✅ | ❌ | ❌ |
-| Manage [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for all TiDB Cloud Serverless clusters in the project. | ✅ | ❌ | ❌ |
-| Manage cluster operations in the project, such as cluster creation, modification, and deletion. | ✅ | ❌ | ❌ |
-| Manage branches for TiDB Cloud Serverless clusters in the project, such as branch creation, connection, and deletion. | ✅ | ❌ | ❌ |
-| Manage [recovery groups](/tidb-cloud/recovery-group-overview.md) for TiDB Cloud Dedicated clusters in the project, such as recovery group creation and deletion. | ✅ | ❌ | ❌ |
-| Manage cluster data such as data import, data backup and restore, and data migration. | ✅ | ✅ | ❌ |
-| Manage [Data Service](/tidb-cloud/data-service-overview.md) for data read-only operations such as using or creating endpoints to read data. | ✅ | ✅ | ✅ |
-| Manage [Data Service](/tidb-cloud/data-service-overview.md) for data read and write operations. | ✅ | ✅ | ❌ |
-| View cluster data using [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md). | ✅ | ✅ | ✅ |
-| Modify and delete cluster data using [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md). | ✅ | ✅ | ❌ |
-| View clusters in the project, view cluster backup records, and manage [changefeeds](/tidb-cloud/changefeed-overview.md). | ✅ | ✅ | ✅ |
+| Permission  | `Project Owner` | `Project Data Access Read-Write` | `Project Data Access Read-Only` | `Project Viewer` |
+|---|---|---|---|---|
+| Manage project settings | ✅ | ❌ | ❌ | ❌ |
+| Invite users to or remove users from a project, and edit project roles of users. | ✅ | ❌ | ❌ | ❌ |
+| Manage [database audit logging](/tidb-cloud/tidb-cloud-auditing.md) of the project. | ✅ | ❌ | ❌ | ❌ |
+| Manage [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for all TiDB Cloud Serverless clusters in the project. | ✅ | ❌ | ❌ | ❌ |
+| Manage cluster operations in the project, such as cluster creation, modification, and deletion. | ✅ | ❌ | ❌ | ❌ |
+| Manage branches for TiDB Cloud Serverless clusters in the project, such as branch creation, connection, and deletion. | ✅ | ❌ | ❌ | ❌ |
+| Manage [recovery groups](/tidb-cloud/recovery-group-overview.md) for TiDB Cloud Dedicated clusters in the project, such as recovery group creation and deletion. | ✅ | ❌ | ❌ | ❌ |
+| Manage cluster data such as data import, data backup and restore, and data migration. | ✅ | ✅ | ❌ | ❌ |
+| Manage [Data Service](/tidb-cloud/data-service-overview.md) for data read-only operations such as using or creating endpoints to read data. | ✅ | ✅ | ✅ | ❌ |
+| Manage [Data Service](/tidb-cloud/data-service-overview.md) for data read and write operations. | ✅ | ✅ | ❌ | ❌ |
+| View cluster data using [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md). | ✅ | ✅ | ✅ | ❌ |
+| Modify and delete cluster data using [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md). | ✅ | ✅ | ❌ | ❌ |
+| Manage [changefeeds](/tidb-cloud/changefeed-overview.md). | ✅ | ✅ | ✅ | ❌ |
+| Review and reset cluster passwords. | ✅ | ❌ | ❌ | ❌ |
+| View cluster overview, backup records, metrics, events, and [changefeeds](/tidb-cloud/changefeed-overview.md) in the project. | ✅ | ✅ | ✅ | ✅ |
 
 ## Manage organization access
 
-### View organizations
+### View and switch between organizations
 
-To check which organizations you belong to, take the following steps:
+To view and switch between organizations, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
-2. Click **Organization Settings**. You can view your organization on the page that is displayed.
+1. In the [TiDB Cloud console](https://tidbcloud.com), click the combo box in the upper-left corner. The list of organizations and projects you belong to is displayed.
 
-### Switch between organizations
+    > **Tip:**
+    >
+    > - If you are currently on the page of a specific cluster, after clicking the combo box in the upper-left corner, you also need to click ← in the combo box to return to the organization and project list.
+    > - If you are a member of multiple organizations, you can click the target organization name in the combo box to switch your account between organizations.
 
-If you are a member of multiple organizations, you can switch your account between organizations.
-
-To switch between organizations, take the following steps:
-
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
-2. Click the name of the organization you want to switch to.
+2. To view the detailed information of your organization such as the organization ID and time zone, click the organization name, and then click **Organization Settings** > **General** in the left navigation pane.
 
 ### Set the time zone for your organization
 
@@ -136,9 +137,9 @@ If you are in the `Organization Owner` role, you can modify the system display t
 
 To change the local timezone setting, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 
-2. Click **Organization Settings**. The organization settings page is displayed.
+2. In the left navigation pane, click **Organization Settings** > **General**.
 
 3. In the **Time Zone** section, select your time zone from the drop-down list.
 
@@ -154,11 +155,11 @@ If you are in the `Organization Owner` role, you can invite users to your organi
 
 To invite a member to an organization, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 
-2. Click **Organization Settings**. The organization settings page is displayed.
+2. In the left navigation pane, click **Organization Settings** > **Users**.
 
-3. Click the **Users** tab in the left navigation pane, and then select **By Organization**.
+3. On the **Users** page, click the **By Organization** tab.
 
 4. Click **Invite**.
 
@@ -185,11 +186,11 @@ If you are in the `Organization Owner` role, you can modify organization roles o
 
 To modify the organization role of a member, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 
-2. Click **Organization Settings**. The organization settings page is displayed.
+2. In the left navigation pane, click **Organization Settings** > **Users**.
 
-3. Click the **Users** tab in the left navigation pane, and then select **By Organization**.
+3. On the **Users** page, click the **By Organization** tab.
 
 4. Click the role of the target member, and then modify the role.
 
@@ -203,27 +204,28 @@ To remove a member from an organization, take the following steps:
 >
 > If a member is removed from an organization, the member is removed from the belonged projects either.
 
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 
-2. Click **Organization Settings**. The organization settings page is displayed.
+2. In the left navigation pane, click **Organization Settings** > **Users**.
 
-3. Click the **Users** tab in the left navigation pane, and then select **By Organization**.
+3. On the **Users** page, click the **By Organization** tab.
 
-4. Click **Delete** in the user row that you want to delete.
+4. In the row of the target member, click **...** > **Delete**.
 
 ## Manage project access
 
-### View projects
+### View and switch between projects
 
-To check which project you belong to, take the following steps:
+To view and switch between projects, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
+1. In the [TiDB Cloud console](https://tidbcloud.com), click the combo box in the upper-left corner. The list of organizations and projects you belong to is displayed.
 
-2. Click **Organization Settings**, and then click the **Projects** tab in the left navigation pane. The **Projects** tab is displayed.
+    > **Tip:**
+    >
+    > - If you are currently on the page of a specific cluster, after clicking the combo box in the upper-left corner, you also need to click ← in the combo box to return to the organization and project list.
+    > - If you are a member of multiple projects, you can click the target project name in the combo box to switch between projects.
 
-> **Tip:**
->
-> If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+2. To view the detailed information of your project, click the project name, and then click **Project Settings** in the left navigation pane.
 
 ### Create a project
 
@@ -235,11 +237,11 @@ If you are in the `Organization Owner` role, you can create projects in your org
 
 To create a new project, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 
-2. Click **Organization Settings**, and then click the **Projects** tab in the left navigation pane. The **Projects** tab is displayed.
+2. In the left navigation pane, click **Projects**.
 
-3. Click **Create New Project**.
+3. On the **Projects** page, click **Create New Project**.
 
 4. Enter your project name.
 
@@ -251,11 +253,11 @@ If you are in the `Organization Owner` role, you can rename any projects in your
 
 To rename a project, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 
-2. Click **Organization Settings**, and then click the **Projects** tab in the left navigation pane. The **Projects** tab is displayed.
+2. In the left navigation pane, click **Projects**.
 
-3. In the row of your project to be renamed, click **Rename**.
+3. In the row of your project to be renamed, click **...** > **Rename**.
 
 4. Enter a new project name.
 
@@ -271,11 +273,11 @@ If you are in the `Organization Owner` or `Project Owner` role, you can invite m
 
 To invite a member to a project, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 
-2. Click **Organization Settings**. The organization settings page is displayed.
+2. In the left navigation pane, click **Organization Settings** > **Users**.
 
-3. Click the **User Management** tab, select **By Project**, and then select your project from the drop-down list.
+3. On the **Users** page, click the **By Project** tab, and then choose your project in the drop-down list.
 
 4. Click **Invite**.
 
@@ -301,13 +303,13 @@ If you are in the `Organization Owner` role, you can modify project roles of all
 
 To modify the project role of a member, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 
-2. Click **Organization Settings**. The organization settings page is displayed.
+2. In the left navigation pane, click **Organization Settings** > **Users**.
 
-3. Click the **User Management** tab, select **By Projects**, and then choose your project in the drop-down list.
+3. On the **Users** page, click the **By Project** tab, and then choose your project in the drop-down list.
 
-4. Click the role of the target member, and then modify the role.
+4. In the row of the target member, click the role in the **Role** column, and then choose a new role from the drop-down list.
 
 ### Remove a project member
 
@@ -315,20 +317,20 @@ If you are in the `Organization Owner` or `Project Owner` role, you can remove p
 
 To remove a member from a project, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 
-2. Click **Organization Settings**. The organization settings page is displayed.
+2. In the left navigation pane, click **Organization Settings** > **Users**.
 
-3. Click the **User Management** tab, and then select the **By Project**.
+3. On the **Users** page, click the **By Project** tab, and then choose your project in the drop-down list.
 
-4. Click **Delete** in the user row that you want to delete.
+4. In the row of the target member, click **...** > **Delete**.
 
 ## Manage user profiles
 
 In TiDB Cloud, you can easily manage your profile, including your first name, last name, and phone number.
 
-1. Click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner of the TiDB Cloud console.
+1. In the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner.
 
-2. Click **Account Settings**. The **Profile** tab is displayed by default.
+2. Click **Account Settings**.
 
-3. Update the profile information, and then click **Save**.
+3. In the displayed dialog, update the profile information, and then click **Update**.

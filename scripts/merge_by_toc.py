@@ -10,10 +10,13 @@ from __future__ import print_function, unicode_literals
 import re
 import os
 import sys
+import json
+import unicodedata
 
 followups = []
 in_toc = False
 contents = []
+in_allowlist = False
 
 hyper_link_pattern = re.compile(r"\[(.*?)\]\((.*?)(#.*?)?\)")
 toc_line_pattern = re.compile(r"([\-\+]+)\s\[(.*?)\]\((.*?)(#.*?)?\)")
@@ -44,7 +47,15 @@ with open(entry_file) as fp:
     for line in fp:
         if not in_toc and not line.startswith("<!-- "):
             in_toc = True
+        elif line.strip() == "## _BUILD_ALLOWLIST":
+            in_allowlist = True
+        elif in_allowlist and line.startswith("#"):
+            in_allowlist = False
         elif in_toc and not line.startswith("#") and line.strip():
+            # Skip processing if we're in the allowlist section
+            if in_allowlist:
+                continue
+
             ## get level from space length
             level_space_str = level_pattern.findall(line)[0][:-1]
             level = len(level_space_str) // 2 + 1  ## python divide get integer
@@ -91,6 +102,69 @@ for tp, lv, f in followups:
         tag = tag[3:]
     file_link_name[f] = tag.lower().replace(" ", "-")
 
+def load_variables():
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    variables_path = os.path.join(current_dir, "../variables.json")
+    try:
+        with open(variables_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception as e:
+        return {}
+variable_pattern = re.compile(r"{{{\s*\.(.+?)\s*}}}")
+
+def get_value_by_path(obj, path):
+    keys = path.split(".")
+    for key in keys:
+        if isinstance(obj, dict) and key in obj:
+            obj = obj[key]
+        else:
+            return ""
+    return str(obj)
+
+def replace_variables(text, variables):
+    def replacer(match):
+        path = match.group(1).strip()
+        value = get_value_by_path(variables, path)
+        return str(value) if value != "" else match.group(0)
+    return variable_pattern.sub(replacer, text)
+
+def slugify(title):
+    slug = title.strip().lower()
+    slug = unicodedata.normalize('NFKD', slug)
+    slug = re.sub(r"[^\w\s-]", "", slug)  # remove punctuation
+    slug = re.sub(r"[\s_]+", "-", slug)   # spaces and underscores to dash
+    return slug
+
+custom_id_map = {}  # key = custom-id, value = slugified title
+
+heading_with_custom_id_pattern = re.compile(r"^(#+)\s+(.*?)(?:\s+\{#([^\}]+)\})?$", re.MULTILINE)
+
+def extract_custom_ids_and_clean(chapter):
+    def repl(match):
+        hashes = match.group(1)
+        title = match.group(2).strip()
+        custom_id = match.group(3)
+
+        if custom_id:
+            anchor = slugify(title)
+            custom_id_map[custom_id] = anchor
+            return f"{hashes} {title}"  # remove the `{#...}`
+        else:
+            return match.group(0)
+
+    return heading_with_custom_id_pattern.sub(repl, chapter)
+
+def replace_custom_id_links(content):
+    # [text](/path#custom-id) → [text](#anchor-text)
+    def repl(match):
+        text, url, frag = match.group(1), match.group(2), match.group(3)
+        if frag and frag.startswith("#"):
+            cid = frag[1:]
+            if cid in custom_id_map:
+                return f"[{text}](#{custom_id_map[cid]})"
+        return match.group(0)
+
+    return hyper_link_pattern.sub(repl, content)
 
 def replace_link_wrap(chapter, name):
 
@@ -140,6 +214,7 @@ def replace_heading_func(diff_level=0):
 def remove_copyable(match):
     return ""
 
+variables = load_variables()
 
 # stage 3, concat files
 for type_, level, name in followups:
@@ -151,9 +226,11 @@ for type_, level, name in followups:
         try:
             with open(name) as fp:
                 chapter = fp.read()
+                chapter = replace_variables(chapter, variables)
                 chapter = replace_link_wrap(chapter, name)
                 chapter = copyable_snippet_pattern.sub(remove_copyable, chapter)
-
+                chapter = extract_custom_ids_and_clean(chapter)
+                chapter = replace_custom_id_links(chapter)
                 # This block is to filter <CustomContent paltform="xxx"> xxx </CustomContent>
                 try:
                     custom_content_platform = sys.argv[3]

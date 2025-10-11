@@ -97,7 +97,7 @@ Before you start the migration, make sure you have read the following:
 
     ![Copy the public and private network IP addresses](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-copy-ip.png)
 
-2. In the TiDB Cloud console, go to the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target cluster, and then click **Connect** in the upper-right corner to get the TiDB Cloud database connection information.
+2. In the TiDB Cloud console, go to the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your target cluster, and then click **Connect** in the upper-right corner to get the TiDB Cloud database connection information.
 
 3. Under **Step 1: Create traffic filter** in the dialog, click **Edit**, enter the public and private network IP addresses that you copied from the AWS DMS console, and then click **Update Filter**. It is recommended to add the public IP address and private IP address of the AWS DMS replication instance to the TiDB cluster traffic filter at the same time. Otherwise, AWS DMS might not be able to connect to the TiDB cluster in some scenarios.
 

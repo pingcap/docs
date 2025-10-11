@@ -61,15 +61,23 @@ The following are descriptions of sink URI parameters and parameter values that 
 | `root`        | The username of the downstream database. To replicate data to TiDB or other MySQL-compatible databases, make sure that the downstream database user has [certain permissions](#permissions-required-for-the-downstream-database-user).                             |
 | `12345678`       | The password of the downstream database (can be encoded using Base64).                                      |
 | `127.0.0.1`    | The IP address of the downstream database.                               |
-| `3306`         | The port for the downstream data.                                 |
-| `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, `16` by default).       |
+| `3306`         | The port for the downstream database.                                 |
+| `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, the default value is `16`, and the maximum value is `1024`). |
 | `cache-prep-stmts` | Controls whether to use prepared statements when executing SQL in the downstream and enable prepared statement cache on the client side (optional, `true` by default). |
-| `max-txn-row`  | The size of a transaction batch that can be executed to the downstream (optional, `256` by default). |
+| `multi-stmt-enable` | Controls whether the SQL statements executed downstream support multiple SQL statements separated by semicolons (optional, the default value is `true`). If it is set to `false`, each SQL statement is executed as a separate transaction. If it is set to `true`, `cache-prep-stmts` does not take effect. |
+| `max-txn-row` | The batch size of SQL statements executed to the downstream (optional, the default value is `256`, and the maximum value is `2048`). |
+| `max-multi-update-row` | The batch size of `UPDATE ROWS` SQL statements executed to the downstream when batch write (`batch-dml-enable`) is enabled, always less than `max-txn-row` (optional, the default value is `40`, and the maximum value is `256`). |
+| `max-multi-update-row-size` | When batch write (`batch-dml-enable`) is enabled, this parameter controls the batch processing size (in bytes) for `UPDATE ROWS` SQL statements executed to the downstream. If the average size of a single row exceeds this threshold, each row is executed as an independent SQL statement (optional, the default value is `1024`, and the maximum value is `8192`). |
 | `ssl-ca` | The path of the CA certificate file needed to connect to the downstream MySQL instance (optional).  |
 | `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional). |
 | `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional). |
 | `time-zone` | The time zone used when connecting to the downstream MySQL instance, which is effective since v4.0.8. This is an optional parameter. If this parameter is not specified, the time zone of TiCDC service processes is used. If this parameter is set to an empty value, such as `time-zone=""`, no time zone is specified when TiCDC connects to the downstream MySQL instance and the default time zone of the downstream is used. |
 | `transaction-atomicity`  |  The atomicity level of a transaction. This is an optional parameter, with the default value of `none`. When the value is `table`, TiCDC ensures the atomicity of a single-table transaction. When the value is `none`, TiCDC splits the single-table transaction.  |
+| `batch-dml-enable` | Enables the batch write (batch-dml) feature (optional, the default value is `true`). |
+| `read-timeout` | The go-sql-driver parameter, [I/O read timeout](https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-readtimeout) (optional, the default value is `2m`). |
+| `write-timeout` | The go-sql-driver parameter, [I/O write timeout](https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-writetimeout) (optional, the default value is `2m`). |
+| `timeout` | The go-sql-driver parameter, [timeout for establishing connections](https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-timeout), also known as dial timeout (optional, the default value is `2m`). |
+| `tidb-txn-mode` | Specifies the [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) environment variable (optional, the default value is `optimistic`). |
 | `safe-mode` | Specifies how TiCDC handles `INSERT` and `UPDATE` statements when replicating data to the downstream. When it is `true`, TiCDC converts all upstream `INSERT` statements to `REPLACE INTO` statements, and all `UPDATE` statements to `DELETE` + `REPLACE INTO` statements. Before v6.1.3, the default value of this parameter is `true`. Starting from v6.1.3, the default value is changed to `false`. When TiCDC starts, it obtains a current timestamp `ThresholdTs`. For `INSERT` and `UPDATE` statements with `CommitTs` less than `ThresholdTs`, TiCDC converts them to `REPLACE INTO` statements and `DELETE` + `REPLACE INTO` statements respectively. For `INSERT` and `UPDATE` statements with `CommitTs` greater than or equal to `ThresholdTs`, `INSERT` statements are directly replicated to the downstream, while the behavior of `UPDATE` statements follows the [TiCDC Behavior in Splitting UPDATE Events](/ticdc/ticdc-split-update-behavior.md). |
 
 To encode the database password in the sink URI using Base64, use the following command:
@@ -115,7 +123,7 @@ If the downstream TiDB cluster has [read-only mode](/system-variables.md#tidb_re
 
 ## Eventually consistent replication in disaster scenarios
 
-Starting from v6.1.1, this feature becomes GA. Starting from v5.3.0, TiCDC supports backing up incremental data from an upstream TiDB cluster to an object storage or an NFS of the downstream cluster. When the upstream cluster encounters a disaster and becomes unavailable, TiCDC can restore the downstream data to the recent eventually consistent state. This is the eventually consistent replication capability provided by TiCDC. With this capability, you can switch applications to the downstream cluster quickly, avoiding long-time downtime and improving service continuity.
+The eventually consistent replication feature in TiCDC uses redo logs to ensure data consistency in the event of an upstream disaster. Starting from v6.1.1, this feature becomes GA. Starting from v5.3.0, TiCDC supports backing up incremental data from an upstream TiDB cluster to an object storage or an NFS of the downstream cluster. When the upstream cluster encounters a disaster and becomes unavailable, TiCDC can restore the downstream data to the recent eventually consistent state. With this capability, you can switch applications to the downstream cluster quickly, avoiding long-time downtime and improving service continuity.
 
 Currently, TiCDC can replicate incremental data from a TiDB cluster to another TiDB cluster or a MySQL-compatible database system (including Aurora, MySQL, and MariaDB). In case the upstream cluster crashes, TiCDC can restore data in the downstream cluster within 5 minutes, given the conditions that TiCDC replicates data normally before the crash, and the replication lag is small. It allows data loss of 10s at most, that is, RTO <= 5 min, and P95 RPO <= 10s.
 
@@ -169,5 +177,5 @@ cdc redo apply --tmp-dir="/tmp/cdc/redo/apply" \
 In this command:
 
 - `tmp-dir`: Specifies the temporary directory for downloading TiCDC incremental data backup files.
-- `storage`: Specifies the address for storing the TiCDC incremental data backup files, either an URI of object storage or an NFS directory.
+- `storage`: Specifies the address for storing the TiCDC incremental data backup files, either a URI of object storage or an NFS directory.
 - `sink-uri`: Specifies the secondary cluster address to restore the data to. Scheme can only be `mysql`.

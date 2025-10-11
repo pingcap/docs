@@ -559,6 +559,10 @@ Usage:
 
 ### `member [delete | leader_priority | leader [show | resign | transfer <member_name>]]`
 
+> **Note:**
+>
+> **DO NOT** use the `member delete` command to remove PD nodes in a production environment. To remove a PD node, see [Scale in a TiDB/PD/TiKV cluster](/scale-tidb-using-tiup.md#scale-in-a-tidbpdtikv-cluster) and [Manually Scale TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster/).
+
 Use this command to view the PD members, remove a specified member, or configure the priority of leader.
 
 Usage:
@@ -1336,15 +1340,37 @@ store --jq='.stores[].store | select(.state_name!="Up") | {id, address, state_na
 
 ### Query all TiFlash nodes
 
-{{< copyable "" >}}
-
 ```bash
 store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"engine","value":"tiflash"}])) | {id, address, state_name}'
 ```
 
 ```
-{"id":1,"address":"127.0.0.1:20161""state_name":"Up"}
-{"id":5,"address":"127.0.0.1:20162""state_name":"Up"}
+{"id":1,"address":"127.0.0.1:20161","state_name":"Up"}
+{"id":5,"address":"127.0.0.1:20162","state_name":"Up"}
+...
+```
+
+### Query TiFlash nodes in the disaggregated storage and compute architecture
+
+Query TiFlash Write Nodes in the [disaggregated storage and compute architecture](/tiflash/tiflash-disaggregated-and-s3.md):
+
+```bash
+store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"engine","value":"tiflash"}, {"key":"engine_role","value":"write"}])) | {id, address, labels, state_name}'
+```
+
+```
+{"id":130,"address":"172.31.8.1:10161","labels":[{"key":"engine_role","value":"write"},{"key":"engine","value":"tiflash"}],"state_name":"Up"}
+...
+```
+
+Query TiFlash Compute Nodes in the [disaggregated storage and compute architecture](/tiflash/tiflash-disaggregated-and-s3.md):
+
+```bash
+store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"engine","value":"tiflash_compute"}])) | {id, address, labels, state_name}'
+```
+
+```json
+{"id":131,"address":"172.31.9.1:10161","labels":[{"key":"engine","value":"tiflash_compute"}],"state_name":"Up"}
 ...
 ```
 

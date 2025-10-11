@@ -5,7 +5,7 @@ summary: Learn the terms about TiCDC and their definitions.
 
 # TiCDC Glossary
 
-This glossary provides TiCDC-related terms and definitions. These terms appears in TiCDC logs, monitoring metrics, configurations, and documents.
+This glossary provides TiCDC-related terms and definitions. These terms appear in TiCDC logs, monitoring metrics, configurations, and documents.
 
 For TiDB-related terms and definitions, see [TiDB glossary](/glossary.md).
 

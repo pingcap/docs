@@ -1,7 +1,6 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-- [Docs Home](https://docs.pingcap.com/)
 - About TiDB Self-Managed
   - [What is TiDB Self-Managed](/overview.md)
   - [TiDB 8.5 Release Notes](/releases/release-8.5.0.md)
@@ -9,7 +8,6 @@
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [Credits](/credits.md)
-  - [Roadmap](/tidb-roadmap.md)
 - Get Started
   - [Quick Start with TiDB](/quick-start-with-tidb.md)
   - [Quick Start with HTAP](/quick-start-with-htap.md)
@@ -19,7 +17,7 @@
 - Develop
   - [Overview](/develop/dev-guide-overview.md)
   - Quick Start
-    - [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
+    - [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
   - Example Applications
     - Java
@@ -48,6 +46,8 @@
     - Ruby
       - [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
       - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
+    - C#
+      - [C#](/develop/dev-guide-sample-application-cs.md)
   - Connect to TiDB
     - GUI Database Tools
       - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
@@ -195,6 +195,7 @@
     - TiCDC Architecture
       - [TiCDC New Architecture](/ticdc/ticdc-architecture.md)
       - [TiCDC Classic Architecture](/ticdc/ticdc-classic-architecture.md)
+    - [TiCDC Data Replication Capabilities](/ticdc/ticdc-data-replication-capabilities.md)
     - [TiCDC Server Configurations](/ticdc/ticdc-server-config.md)
     - [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md)
     - [TiCDC Client Authentication](/ticdc/ticdc-client-authentication.md)
@@ -230,6 +231,7 @@
     - [Use TiUP](/upgrade-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
     - [TiDB Smooth Upgrade](/smooth-upgrade-tidb.md)
+    - [Migrate and Upgrade a TiDB Cluster](/tidb-upgrade-migration-guide.md)
     - [TiFlash Upgrade Guide](/tiflash-upgrade-guide.md)
   - Scale
     - [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
@@ -281,6 +283,37 @@
   - [Monitoring API](/tidb-monitoring-api.md)
   - [Deploy Monitoring Services](/deploy-monitoring-services.md)
   - [Upgrade Monitoring Services](/upgrade-monitoring-services.md)
+  - TiDB Dashboard
+    - [Overview](/dashboard/dashboard-intro.md)
+    - Maintain
+      - [Deploy](/dashboard/dashboard-ops-deploy.md)
+      - [Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md)
+      - [User Management](/dashboard/dashboard-user.md)
+      - [Secure](/dashboard/dashboard-ops-security.md)
+    - [Access](/dashboard/dashboard-access.md)
+    - [Overview Page](/dashboard/dashboard-overview.md)
+    - [Cluster Info Page](/dashboard/dashboard-cluster-info.md)
+    - [Top SQL Page](/dashboard/top-sql.md)
+    - [Key Visualizer Page](/dashboard/dashboard-key-visualizer.md)
+    - [Metrics Relation Graph](/dashboard/dashboard-metrics-relation.md)
+    - SQL Statements Analysis
+      - [SQL Statements Page](/dashboard/dashboard-statement-list.md)
+      - [SQL Details Page](/dashboard/dashboard-statement-details.md)
+    - [Slow Queries Page](/dashboard/dashboard-slow-query.md)
+    - Cluster Diagnostics
+      - [Access Cluster Diagnostics Page](/dashboard/dashboard-diagnostics-access.md)
+      - [View Diagnostics Report](/dashboard/dashboard-diagnostics-report.md)
+      - [Use Diagnostics](/dashboard/dashboard-diagnostics-usage.md)
+    - [Monitoring Page](/dashboard/dashboard-monitoring.md)
+    - [Search Logs Page](/dashboard/dashboard-log-search.md)
+    - [Resource Manager Page](/dashboard/dashboard-resource-manager.md)
+    - Instance Profiling
+      - [Manual Profiling](/dashboard/dashboard-profiling.md)
+      - [Continuous Profiling](/dashboard/continuous-profiling.md)
+    - Session Management and Configuration
+      - [Share Session](/dashboard/dashboard-session-share.md)
+      - [Configure SSO](/dashboard/dashboard-session-sso.md)
+    - [FAQ](/dashboard/dashboard-faq.md)
   - [Export Grafana Snapshots](/exporting-grafana-snapshots.md)
   - [TiDB Cluster Alert Rules](/alert-rules.md)
   - [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
@@ -390,22 +423,9 @@
       - [Perform Stale Read Using `tidb_read_staleness`](/tidb-read-staleness.md)
       - [Perform Stale Read Using `tidb_external_ts`](/tidb-external-ts.md)
     - [Use the `tidb_snapshot` System Variable](/read-historical-data.md)
-  - Best Practices
-    - [Use TiDB](/best-practices/tidb-best-practices.md)
-    - [Java Application Development](/best-practices/java-app-best-practices.md)
-    - [Use HAProxy](/best-practices/haproxy-best-practices.md)
-    - [Highly Concurrent Write](/best-practices/high-concurrency-best-practices.md)
-    - [Grafana Monitoring](/best-practices/grafana-monitor-best-practices.md)
-    - [PD Scheduling](/best-practices/pd-scheduling-best-practices.md)
-    - [TiKV Performance Tuning with Massive Regions](/best-practices/massive-regions-best-practices.md)
-    - [Three-node Hybrid Deployment](/best-practices/three-nodes-hybrid-deployment.md)
-    - [Local Read Under Three Data Centers Deployment](/best-practices/three-dc-local-read.md)
-    - [Use UUIDs](/best-practices/uuid.md)
-    - [Read-Only Storage Nodes](/best-practices/readonly-nodes.md)
   - [Use Placement Rules](/configure-placement-rules.md)
   - [Use Load Base Split](/configure-load-base-split.md)
   - [Use Store Limit](/configure-store-limit.md)
-  - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
   - [Batch Processing](/batch-processing.md)
   - Use PD Microservices
     - [PD Microservices Overview](/pd-microservices.md)
@@ -414,6 +434,22 @@
     - [TSO Configuration Flags](/command-line-flags-for-tso-configuration.md)
     - [Scheduling Configuration File](/scheduling-configuration-file.md)
     - [Scheduling Configuration Flags](/command-line-flags-for-scheduling-configuration.md)
+- Best Practices
+  - [Use TiDB](/best-practices/tidb-best-practices.md)
+  - [Manage DDL](/ddl-introduction.md)
+  - [Optimize Multi-Column Indexes](/best-practices/multi-column-index-best-practices.md)
+  - [Manage Indexes and Identify Unused Indexes](/best-practices/index-management-best-practices.md)
+  - [Handle Millions of Tables in SaaS Multi-Tenant Scenarios](/best-practices/saas-best-practices.md)
+  - [Use UUIDs as Primary Keys](/best-practices/uuid.md)
+  - [Develop Java Applications](/best-practices/java-app-best-practices.md)
+  - [Handle High-Concurrency Writes](/best-practices/high-concurrency-best-practices.md)
+  - [Tune TiKV Performance with Massive Regions](/best-practices/massive-regions-best-practices.md)
+  - [Tune PD Scheduling](/best-practices/pd-scheduling-best-practices.md)
+  - [Use Read-Only Storage Nodes](/best-practices/readonly-nodes.md)
+  - [Use HAProxy for Load Balancing](/best-practices/haproxy-best-practices.md)
+  - [Monitor TiDB Using Grafana](/best-practices/grafana-monitor-best-practices.md)
+  - [Three-Node Hybrid Deployment](/best-practices/three-nodes-hybrid-deployment.md)
+  - [Local Reads in Three-Data-Center Deployments](/best-practices/three-dc-local-read.md)
 - TiDB Tools
   - [Overview](/ecosystem-tool-user-guide.md)
   - [Use Cases](/ecosystem-tool-user-case.md)
@@ -478,6 +514,7 @@
         - [tiup cluster start](/tiup/tiup-component-cluster-start.md)
         - [tiup cluster stop](/tiup/tiup-component-cluster-stop.md)
         - [tiup cluster template](/tiup/tiup-component-cluster-template.md)
+        - [tiup cluster tls](/tiup/tiup-component-cluster-tls.md)
         - [tiup cluster upgrade](/tiup/tiup-component-cluster-upgrade.md)
       - TiUP DM Commands
         - [Overview](/tiup/tiup-component-dm.md)
@@ -777,7 +814,9 @@
       - [`BATCH`](/sql-statements/sql-statement-batch.md)
       - [`BEGIN`](/sql-statements/sql-statement-begin.md)
       - [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)
+      - [`CANCEL DISTRIBUTION JOB`](/sql-statements/sql-statement-cancel-distribution-job.md)
       - [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
+      - [`CANCEL TRAFFIC JOBS`](/sql-statements/sql-statement-cancel-traffic-jobs.md)
       - [`COMMIT`](/sql-statements/sql-statement-commit.md)
       - [`CREATE BINDING`](/sql-statements/sql-statement-create-binding.md)
       - [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)
@@ -794,6 +833,7 @@
       - [`DELETE`](/sql-statements/sql-statement-delete.md)
       - [`DESC`](/sql-statements/sql-statement-desc.md)
       - [`DESCRIBE`](/sql-statements/sql-statement-describe.md)
+      - [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md)
       - [`DO`](/sql-statements/sql-statement-do.md)
       - [`DROP BINDING`](/sql-statements/sql-statement-drop-binding.md)
       - [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md)
@@ -858,6 +898,7 @@
       - [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)
       - [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)
       - [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)
+      - [`SHOW DISTRIBUTION JOBS`](/sql-statements/sql-statement-show-distribution-jobs.md)
       - [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)
       - [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md)
       - [`SHOW FIELDS FROM`](/sql-statements/sql-statement-show-fields-from.md)
@@ -880,10 +921,12 @@
       - [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)
       - [`SHOW STATS_TOPN`](/sql-statements/sql-statement-show-stats-topn.md)
       - [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)
+      - [`SHOW TABLE DISTRIBUTION`](/sql-statements/sql-statement-show-table-distribution.md)
       - [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md)
       - [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)
       - [`SHOW TABLE STATUS`](/sql-statements/sql-statement-show-table-status.md)
       - [`SHOW TABLES`](/sql-statements/sql-statement-show-tables.md)
+      - [`SHOW TRAFFIC JOBS`](/sql-statements/sql-statement-show-traffic-jobs.md)
       - [`SHOW VARIABLES`](/sql-statements/sql-statement-show-variables.md)
       - [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md)
       - [`SHUTDOWN`](/sql-statements/sql-statement-shutdown.md)
@@ -891,6 +934,8 @@
       - [`START TRANSACTION`](/sql-statements/sql-statement-start-transaction.md)
       - [`TABLE`](/sql-statements/sql-statement-table.md)
       - [`TRACE`](/sql-statements/sql-statement-trace.md)
+      - [`TRAFFIC CAPTURE`](/sql-statements/sql-statement-traffic-capture.md)
+      - [`TRAFFIC REPLAY`](/sql-statements/sql-statement-traffic-replay.md)
       - [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)
       - [`UNLOCK STATS`](/sql-statements/sql-statement-unlock-stats.md)
       - [`UPDATE`](/sql-statements/sql-statement-update.md)
@@ -930,12 +975,13 @@
       - [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md)
       - [GROUP BY Modifiers](/functions-and-operators/group-by-modifier.md)
       - [Window Functions](/functions-and-operators/window-functions.md)
-      - [Miscellaneous Functions](/functions-and-operators/miscellaneous-functions.md)
-      - [Precision Math](/functions-and-operators/precision-math.md)
-      - [Set Operations](/functions-and-operators/set-operators.md)
       - [Sequence Functions](/functions-and-operators/sequence-functions.md)
-      - [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)
+      - [Utility Functions](/functions-and-operators/utility-functions.md)
+      - [Miscellaneous Functions](/functions-and-operators/miscellaneous-functions.md)
       - [TiDB Specific Functions](/functions-and-operators/tidb-functions.md)
+      - [Precision Math](/functions-and-operators/precision-math.md)
+      - [Set Operations](/functions-and-operators/set-operators.md)      
+      - [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)      
       - [Comparisons between Functions and Syntax of Oracle and TiDB](/oracle-functions-to-tidb.md)
     - [Clustered Indexes](/clustered-indexes.md)
     - [Vector Index](/vector-search/vector-search-index.md)
@@ -962,6 +1008,7 @@
     - System Tables
       - `mysql` Schema
         - [Overview](/mysql-schema/mysql-schema.md)
+        - [`tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md)
         - [`user`](/mysql-schema/mysql-schema-user.md)
       - INFORMATION_SCHEMA
         - [Overview](/information-schema/information-schema.md)
@@ -1034,43 +1081,13 @@
     - [Metadata Lock](/metadata-lock.md)
     - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
     - [Schema Cache](/schema-cache.md)
-  - UI
-    - TiDB Dashboard
-      - [Overview](/dashboard/dashboard-intro.md)
-      - Maintain
-        - [Deploy](/dashboard/dashboard-ops-deploy.md)
-        - [Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md)
-        - [User Management](/dashboard/dashboard-user.md)
-        - [Secure](/dashboard/dashboard-ops-security.md)
-      - [Access](/dashboard/dashboard-access.md)
-      - [Overview Page](/dashboard/dashboard-overview.md)
-      - [Cluster Info Page](/dashboard/dashboard-cluster-info.md)
-      - [Top SQL Page](/dashboard/top-sql.md)
-      - [Key Visualizer Page](/dashboard/dashboard-key-visualizer.md)
-      - [Metrics Relation Graph](/dashboard/dashboard-metrics-relation.md)
-      - SQL Statements Analysis
-        - [SQL Statements Page](/dashboard/dashboard-statement-list.md)
-        - [SQL Details Page](/dashboard/dashboard-statement-details.md)
-      - [Slow Queries Page](/dashboard/dashboard-slow-query.md)
-      - Cluster Diagnostics
-        - [Access Cluster Diagnostics Page](/dashboard/dashboard-diagnostics-access.md)
-        - [View Diagnostics Report](/dashboard/dashboard-diagnostics-report.md)
-        - [Use Diagnostics](/dashboard/dashboard-diagnostics-usage.md)
-      - [Monitoring Page](/dashboard/dashboard-monitoring.md)
-      - [Search Logs Page](/dashboard/dashboard-log-search.md)
-      - [Resource Manager Page](/dashboard/dashboard-resource-manager.md)
-      - Instance Profiling
-        - [Manual Profiling](/dashboard/dashboard-profiling.md)
-        - [Continuous Profiling](/dashboard/continuous-profiling.md)
-      - Session Management and Configuration
-        - [Share Session](/dashboard/dashboard-session-share.md)
-        - [Configure SSO](/dashboard/dashboard-session-sso.md)
-      - [FAQ](/dashboard/dashboard-faq.md)
   - [Telemetry](/telemetry.md)
   - [Error Codes](/error-codes.md)
   - [Table Filter](/table-filter.md)
   - [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
+  - [TiDB Workload Repository](/workload-repository.md)
+  - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/online-workloads-and-add-index-operations.md)
 - FAQs
   - [FAQ Summary](/faq/faq-overview.md)
   - [TiDB FAQs](/faq/tidb-faq.md)
@@ -1087,8 +1104,11 @@
   - [All Releases](/releases/release-notes.md)
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
+  - [Release Support Policy](https://www.pingcap.com/tidb-release-support-policy/)
   - [TiDB Installation Packages](/binary-package.md)
   - v8.5
+    - [8.5.3](/releases/release-8.5.3.md)
+    - [8.5.2](/releases/release-8.5.2.md)
     - [8.5.1](/releases/release-8.5.1.md)
     - [8.5.0](/releases/release-8.5.0.md)
   - v8.4
@@ -1106,6 +1126,7 @@
   - v7.6
     - [7.6.0-DMR](/releases/release-7.6.0.md)
   - v7.5
+    - [7.5.7](/releases/release-7.5.7.md)
     - [7.5.6](/releases/release-7.5.6.md)
     - [7.5.5](/releases/release-7.5.5.md)
     - [7.5.4](/releases/release-7.5.4.md)

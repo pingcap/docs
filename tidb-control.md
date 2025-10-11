@@ -179,7 +179,7 @@ tidb-ctl base64decode [table_id] [base64_data]
     alter table t add column e varchar(20);
     ```
 
-2. Obtian MVCC data using the HTTP API interface:
+2. Obtain MVCC data using the HTTP API interface:
 
     ```shell
     $ curl "http://$IP:10080/mvcc/index/test/t/a/1?a=1"

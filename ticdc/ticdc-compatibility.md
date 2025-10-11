@@ -28,6 +28,13 @@ In the physical import mode, TiDB Lightning imports data by inserting SST files 
     1. Use the offline import tool provided by your downstream system to import TiDB Lightning's input files.
     2. Create a changefeed to replicate subsequent incremental data written through SQL. For more information, see [Create a replication task](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task).
 
+## Compatibility with TiFlash
+
+Currently, when you use TiCDC to replicate tables to a downstream TiDB cluster, creating TiFlash replicas for the tables is not supported, which means that TiCDC does not support replicating TiFlash-related DDL statements, such as:
+
+* `ALTER TABLE table_name SET TIFLASH REPLICA count;`
+* `ALTER DATABASE db_name SET TIFLASH REPLICA count;`
+
 ## CLI and configuration file compatibility
 
 * In TiCDC v4.0.0, `ignore-txn-commit-ts` is removed and `ignore-txn-start-ts` is added, which uses start_ts to filter transactions.

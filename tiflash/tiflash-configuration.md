@@ -8,28 +8,6 @@ aliases: ['/docs/dev/tiflash/tiflash-configuration/','/docs/dev/reference/tiflas
 
 This document introduces the configuration parameters related to the deployment and use of TiFlash.
 
-## PD scheduling parameters
-
-You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note that you can use `tiup ctl:v<CLUSTER_VERSION> pd` to replace `pd-ctl -u <pd_ip:pd_port>` when using tiup to deploy and manage your cluster.
-
-- [`replica-schedule-limit`](/pd-configuration-file.md#replica-schedule-limit): determines the rate at which the replica-related operator is generated. The parameter affects operations such as making nodes offline and add replicas.
-
-  > **Note:**
-  >
-  > The value of this parameter should be less than that of `region-schedule-limit`. Otherwise, the normal Region scheduling among TiKV nodes is affected.
-
-- `store-balance-rate`: limits the rate at which Regions of each TiKV/TiFlash store are scheduled. Note that this parameter takes effect only when the stores have newly joined the cluster. If you want to change the setting for existing stores, use the following command.
-
-  > **Note:**
-  >
-  > Since v4.0.2, the `store-balance-rate` parameter has been deprecated and changes have been made to the `store limit` command. See [store-limit](/configure-store-limit.md) for details.
-
-    - Execute the `pd-ctl -u <pd_ip:pd_port> store limit <store_id> <value>` command to set the scheduling rate of a specified store. To get `store_id`, you can execute the `pd-ctl -u <pd_ip:pd_port> store` command.
-    - If you do not set the scheduling rate for Regions of a specified store, this store inherits the setting of `store-balance-rate`.
-    - You can execute the `pd-ctl -u <pd_ip:pd_port> store limit` command to view the current setting value of `store-balance-rate`.
-
-- [`replication.location-labels`](/pd-configuration-file.md#location-labels): indicates the topological relationship of TiKV instances. The order of the keys indicates the layering relationship of different labels. If TiFlash is enabled, you need to use [`pd-ctl config placement-rules`](/pd-control.md#config-show--set-option-value--placement-rules) to set the default value. For details, see [geo-distributed-deployment-topology](/geo-distributed-deployment-topology.md).
-
 ## TiFlash configuration parameters
 
 This section introduces the configuration parameters of TiFlash.
@@ -87,6 +65,8 @@ This section introduces the configuration parameters of TiFlash.
 
 - The path in which the TiFlash temporary files are stored.
 - By default, it is the first directory in [`path`](#path) or in [`storage.latest.dir`](#dir-1) appended with `"/tmp"`.
+- Starting from v9.0.0, it is recommended that you use the [`storage.temp`](#storagetemp-new-in-v900) configuration instead of `tmp_path`, because it supports setting a capacity limit to control temporary file space usage.
+- When `storage.temp` is configured, the `tmp_path` configuration does not take effect.
 
 <!-- Example: `"/tidb-data/tiflash-9000/tmp"` -->
 
@@ -97,14 +77,15 @@ Configure storage path related settings.
 ##### `format_version`
 
 - The DTFile format.
-- Default value: `7`
-- Value options: `2`, `3`, `4`, `5`, `6`, `7`
+- Default value: `8`
+- Value options: `2`, `3`, `4`, `5`, `6`, `7`, `8`
     - `format_version = 2`: the default format for versions < v6.0.0.
     - `format_version = 3`: the default format for v6.0.0 and v6.1.x, which provides more data validation features.
     - `format_version = 4`: the default format for versions from v6.2.0 to v7.3.0, which reduces write amplification and background task resource consumption.
     - `format_version = 5`: introduced in v7.3.0, the default format for versions from v7.4.0 to v8.3.0, which reduces the number of physical files by merging smaller files.
     - `format_version = 6`: introduced in v8.4.0, which partially supports the building and storage of vector indexes.
-    - `format_version = 7`: introduced in v8.4.0, the default format for v8.4.0 and later versions, which supports the build and storage of vector indexes.
+    - `format_version = 7`, introduced in v8.4.0, the default format for v8.4.0 and v8.5.x, which supports the build and storage of vector indexes.
+    - `format_version = 8`, introduced in v9.0.0, the default format for v9.0.0 and later versions, which supports a new string serialization scheme that improves string read and write performance.
 
 #### storage.main
 
@@ -120,6 +101,14 @@ Configure storage path related settings.
 - Unit: Byte. Note that human-readable numbers such as `"10GB"` are not supported yet.
 - The size of the `capacity` list should be the same with the [`storage.main.dir`](#dir) size.
 
+#### `storage.api_version` <span class="version-mark">New in v9.0.0</span>
+
+- The API version that TiFlash uses to communicate with PD and TiKV.
+- Value options:
+    - `1`: TiFlash uses API V1 to communicate with PD and TiKV.
+    - `2`: TiFlash uses API V2 to communicate with PD and TiKV to support the multi-tenancy feature.
+- Default value: `1`
+
 #### storage.latest
 
 ##### `dir`
@@ -134,6 +123,24 @@ Configure storage path related settings.
 - The maximum storage capacity of each directory in [`storage.latest.dir`](#dir-1). If it is not set, or is set to multiple `0`, the actual disk (the disk where the directory is located) capacity is used.
 
 <!-- Example: `[10737418240, 10737418240]` -->
+
+#### storage.temp <span class="version-mark">New in v9.0.0</span>
+
+##### `dir`
+
+- The directory in which the temporary spill files generated during query execution are stored.
+- By default, it is the first directory in [`storage.latest.dir`](#dir-1) appended with `"/tmp"`.
+
+##### `capacity`
+
+- Limits the total space usage of the temporary file directory. If the temporary spill files generated during query execution exceed this limit, the query fails with an error.
+- Unit: Byte. Formats such as `"10GB"` are not supported.
+- Range: `[0, 9223372036854775807]`
+- If this value is not set or is set to `0`, temporary files are not subject to a space limit and can use the entire disk capacity.
+- If a value greater than `0` is set, TiFlash performs the following checks at startup:
+    - `storage.temp.capacity` must be less than or equal to the total space of the disk where `storage.temp.dir` is located.
+    - If `storage.temp.dir` is a subdirectory of `storage.main.dir` and `storage.main.capacity` is greater than `0`, then `storage.temp.capacity` must be less than or equal to `storage.main.capacity`. The same check applies if it is a subdirectory of `storage.latest.dir`.
+- This configuration item does not support hot-reloading. You must restart the TiFlash process for changes to take effect.
 
 #### storage.io_rate_limit <span class="version-mark">New in v5.2.0</span>
 
@@ -382,13 +389,13 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 
 - The memory usage limit for the generated intermediate data in all queries.
 - When the value is an integer, the unit is byte. For example, `34359738368` means 32 GiB of memory limit, and `0` means no limit.
-- When the value is a floating-point number in the range of `[0.0, 1.0)`, it means the ratio of the allowed memory usage to the total memory of the node. For example, `0.8` means 80% of the total memory, and `0.0` means no limit.
+- Starting from v6.6.0, you can set the value to a floating-point number in the range of `[0.0, 1.0)`. This number represents the ratio of the allowed memory usage to the total node memory. For example, `0.8` means 80% of the total memory, and `0.0` means no limit.
 - When the queries attempt to consume memory that exceeds this limit, the queries are terminated and an error is reported.
-- Default value: `0.8`, which means 80% of the total memory.
+- Default value: `0.8`, which means 80% of the total memory. Before v6.6.0, the default value is `0`, which means no limit.
 
 ##### `cop_pool_size` <span class="version-mark">New in v5.0</span>
 
-- Specifies the maximum number of cop requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to `0` or not set, the default value is used, which is twice the number of physical cores.
+- Specifies the maximum number of cop requests that TiFlash Coprocessor can execute concurrently. When the number of requests exceeds this value but remains within 10 times the value, the exceeded requests are queued. When the number of requests exceeds 10 times this value, the exceeded requests are rejected by TiFlash. If the configuration value is set to `0` or not set, the default value is used, which is twice the number of physical cores.
 - Default value: twice the number of physical cores
 
 ##### `cop_pool_handle_limit` <span class="version-mark">New in v5.0</span>
@@ -437,6 +444,13 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 - Specifies the minimum ratio of valid data in a PageStorage data file. When the ratio of valid data in a PageStorage data file is less than the value of this configuration, GC is triggered to compact data in the file.
 - Default value: `0.5`
 
+##### `disagg_blocklist_wn_store_id` <span class="version-mark">New in v9.0.0</span>
+
+- In the disaggregated storage and compute architecture, specifies the TiFlash Write Nodes that TiFlash Compute Nodes do not send requests to.
+- The value is a comma-separated string of `store_id` values. For example, setting it to `"140,141"` means that TiFlash Compute Nodes will not send requests to TiFlash Write Nodes with `store_id` `140` or `141`. You can use [pd-ctl](/pd-control.md#query-tiflash-nodes-in-the-disaggregated-storage-and-compute-architecture) to query the `store_id` of TiFlash Write Nodes in the cluster.
+- If the value is an empty string `""`, it means that TiFlash Compute Nodes send requests to all TiFlash Write Nodes.
+- Default value: `""`
+
 ##### `max_bytes_before_external_group_by` <span class="version-mark">New in v7.0.0</span>
 
 - Specifies the maximum memory available for the Hash Aggregation operator with the `GROUP BY` key before a disk spill is triggered. When the memory usage exceeds the threshold, Hash Aggregation reduces memory usage by [spilling to disk](/tiflash/tiflash-spill-disk.md).
@@ -455,6 +469,8 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 ##### `enable_resource_control` <span class="version-mark">New in v7.4.0</span>
 
 - Controls whether to enable the TiFlash resource control feature. When it is set to `true`, TiFlash uses the [pipeline execution model](/tiflash/tiflash-pipeline-model.md).
+- Default value: `true`
+- Value options: `true`, `false`
 
 ##### `task_scheduler_thread_soft_limit` <span class="version-mark">New in v6.0.0</span>
 
@@ -469,7 +485,21 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 ##### `task_scheduler_active_set_soft_limit` <span class="version-mark">New in v6.4.0</span>
 
 - This item is used for the MinTSO scheduler. It specifies the maximum number of queries that can run simultaneously in a TiFlash instance. For more information, see [TiFlash MinTSO Scheduler](/tiflash/tiflash-mintso-scheduler.md).
-- Default value: `0`, which means twice the number of logical CPU cores
+- Default value: Before v7.4.0, the default value is `vcpu * 0.25`, which means a quarter of the number of vCPUs. Starting from v7.4.0, the default value is `vcpu * 2`, which means twice the number of vCPUs.
+
+##### `hashagg_use_magic_hash` <span class="version-mark">New in v9.0.0</span>
+
+- Controls the hash function TiFlash uses for aggregation. When set to `true`, TiFlash HashAgg uses the magic hash instead of the default CRC32.
+- The magic hash function generates more evenly distributed hash values, reducing hash collisions effectively. However, it is slower than CRC32. It is recommended to enable this configuration when the NDV (number of distinct values) of the `GROUP BY` key is high to optimize aggregation performance.
+- Default value: `false`
+- Value options: `true`, `false`
+
+##### `enable_version_chain` <span class="version-mark">New in v9.0.0</span>
+
+- Controls the algorithm that TiFlash uses to implement MVCC filtering. If it is set to `1`, the VersionChain algorithm is used. If it is set to `0`, the DeltaIndex algorithm is used.
+- In most cases, the VersionChain algorithm provides noticeably better table scan performance compared with the DeltaIndex algorithm, because it improves MVCC filtering efficiency by avoiding data sorting.
+- Default value: `1`
+- Value options: `1`, `0`
 
 #### security <span class="version-mark">New in v4.0.5</span>
 
@@ -585,27 +615,18 @@ The parameters in `tiflash-learner.toml` are basically the same as those in TiKV
 
 - Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see [Configure encryption](/encryption-at-rest.md#configure-encryption).
 
-### Schedule replicas by topology labels
+#### server
 
-See [Set available zones](/tiflash/create-tiflash-replicas.md#set-available-zones).
+##### `labels`
+
+- Specifies server attributes, such as `{ zone = "us-west-1", disk = "ssd" }`. For more information about how to schedule replicas using labels, see [Set available zones](/tiflash/create-tiflash-replicas.md#set-available-zones).
+- Default value: `{}`
 
 ### Multi-disk deployment
 
 TiFlash supports multi-disk deployment. If there are multiple disks in your TiFlash node, you can make full use of those disks by configuring the parameters described in the following sections. For TiFlash's configuration template to be used for TiUP, see [The complex template for the TiFlash topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml).
 
-#### Multi-disk deployment with TiDB version earlier than v4.0.9
-
-For TiDB clusters earlier than v4.0.9, TiFlash only supports storing the main data of the storage engine on multiple disks. You can set up a TiFlash node on multiple disks by specifying the `path` (`data_dir` in TiUP) and `path_realtime_mode` configuration.
-
-If there are multiple data storage directories in `path`, separate each with a comma. For example, `/nvme_ssd_a/data/tiflash,/sata_ssd_b/data/tiflash,/sata_ssd_c/data/tiflash`. If there are multiple disks in your environment, it is recommended that each directory corresponds to one disk and you put disks with the best performance at the front to maximize the performance of all disks.
-
-If there are multiple disks with similar I/O metrics on your TiFlash node, you can leave the `path_realtime_mode` parameter to the default value (or you can explicitly set it to `false`). It means that data will be evenly distributed among all storage directories. However, the latest data is written only to the first directory, so the corresponding disk is busier than other disks.
-
-If there are multiple disks with different I/O metrics on your TiFlash node, it is recommended to set `path_realtime_mode` to `true` and put disks with the best I/O metrics at the front of `path`. It means that the first directory only stores the latest data, and the older data are evenly distributed among the other directories. Note that in this case, the capacity of the first directory should be planned as 10% of the total capacity of all directories.
-
-#### Multi-disk deployment with TiDB v4.0.9 or later
-
-For TiDB clusters with v4.0.9 or later versions, TiFlash supports storing the main data and the latest data of the storage engine on multiple disks. If you want to deploy a TiFlash node on multiple disks, it is recommended to specify your storage directories in the `[storage]` section to make full use of your node. Note that the configurations earlier than v4.0.9 (`path` and `path_realtime_mode`) are still supported.
+For TiDB clusters with v4.0.9 or later versions, TiFlash supports storing the main data and the latest data of the storage engine on multiple disks. If you want to deploy a TiFlash node on multiple disks, it is recommended to specify your storage directories in the `[storage]` section to make full use of the I/O performance of your node.
 
 If there are multiple disks with similar I/O metrics on your TiFlash node, it is recommended to specify corresponding directories in the `storage.main.dir` list and leave `storage.latest.dir` empty. TiFlash will distribute I/O pressure and data among all directories.
 

@@ -26,6 +26,8 @@ tiup br log start --task-name=pitr --pd "${PD_IP}:2379" \
 --storage 's3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
+### Query the status of the log backup
+
 After the log backup task starts, it runs in the background of the TiDB cluster until you stop it manually. During this process, the TiDB change logs are regularly backed up to the specified storage in small batches. To query the status of the log backup task, run the following command:
 
 ```shell
@@ -37,14 +39,51 @@ Expected output:
 ```
 ● Total 1 Tasks.
 > #1 <
-    name: pitr
-    status: ● NORMAL
-    start: 2022-05-13 11:09:40.7 +0800
-      end: 2035-01-01 00:00:00 +0800
-    storage: s3://backup-101/log-backup
+           name: pitr
+         status: ● NORMAL
+          start: 2022-05-13 11:09:40.7 +0800
+            end: 2035-01-01 00:00:00 +0800
+        storage: s3://backup-101/log-backup
     speed(est.): 0.00 ops/s
 checkpoint[global]: 2022-05-13 11:31:47.2 +0800; gap=4m53s
 ```
+
+The fields are explained as follows:
+
+- `name`: the name of the log backup task.
+- `status`: the status of the log backup task, including `NORMAL`, `PAUSED`, and `ERROR`.
+- `start`: the start timestamp of the log backup task.
+- `end`: the end timestamp of the log backup task. Currently, this field does not take effect.
+- `storage`: the URI of the external storage for the log backup.
+- `speed(est.)`: the current data transfer rate of the log backup. This value is estimated based on traffic samples taken in the past few seconds. For more accurate traffic statistics, you can check the `Log Backup` row in the **[TiKV-Details](/grafana-tikv-dashboard.md#tikv-details-dashboard)** dashboard at Grafana.
+- `checkpoint[global]`: the current progress of the log backup. You can use PITR to restore to a point in time before this timestamp.
+
+If the log backup task is paused, the `log status` command outputs additional fields to display the details of the pause. For example:
+
+```
+● Total 1 Tasks.
+> #1 <
+              name: pitr
+            status: ○ ERROR
+               <......>
+        pause-time: 2025-03-14T14:35:06+08:00
+    pause-operator: atelier.local
+pause-operator-pid: 64618
+     pause-payload: The checkpoint is at 2025-03-14T14:34:54+08:00, now it is 2025-03-14T14:35:06+08:00, the lag is too huge (11.956113s) hence pause the task to avoid impaction to the cluster
+```
+
+The meanings of these additional fields are as follows:
+
+- `pause-time`: the time when the pause operation is executed.
+- `pause-operator`: the hostname of the machine that executes the pause operation.
+- `pause-operator-pid`: the PID of the process that executes the pause operation.
+- `pause-payload`: additional information attached when the task is paused.
+
+If the pause is due to an error in TiKV, you might also see additional error reports from TiKV:
+
+- `error[store=*]`: the error code on TiKV.
+- `error-happen-at[store=*]`: the time when the error occurs on TiKV.
+- `error-message[store=*]`: the error message on TiKV.
 
 ### Run full backup regularly
 
@@ -119,7 +158,13 @@ The following steps describe how to clean up backup data that exceeds the backup
 >
 > External storage only contains KV data of a single replica. Therefore, the data size in external storage does not represent the actual data size restored in the cluster. BR restores all replicas according to the number of replicas configured for the cluster. The more replicas there are, the more data can be actually restored.
 > The default replica number for all clusters in the test is 3.
-> To improve the overall restore performance, you can modify the [`import.num-threads`](/tikv-configuration-file.md#import) item in the TiKV configuration file and the [`pitr-concurrency`](/br/use-br-command-line-tool.md#common-options) option in the BR command.
+> To improve the overall restore performance, you can modify the [`import.num-threads`](/tikv-configuration-file.md#import) item in the TiKV configuration file and the [`pitr-concurrency`](/br/br-pitr-manual.md#restore-to-a-specified-point-in-time-pitr) option in the BR command.
+> When the upstream cluster has **many Regions** and a **short flush interval**, PITR generates a large number of small files. This increases batching and dispatching overhead during restore. To raise the number of files processed per batch, you can **moderately** increase the values of the following parameters:
+>
+> - `pitr-batch-size`: cumulative **bytes per batch** (default **16 MiB**).
+> - `pitr-batch-count`: **number of files per batch** (default **8**).
+>
+> When determining whether to start the next batch, these two thresholds are evaluated independently: whichever threshold is reached first closes the current batch and starts the next, while the other threshold is ignored for that batch.
 
 Testing scenario 1 (on [TiDB Cloud](https://tidbcloud.com)) is as follows:
 

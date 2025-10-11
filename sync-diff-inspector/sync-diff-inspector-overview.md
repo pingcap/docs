@@ -6,18 +6,9 @@ aliases: ['/docs/dev/sync-diff-inspector/sync-diff-inspector-overview/','/docs/d
 
 # sync-diff-inspector User Guide
 
-[sync-diff-inspector](https://github.com/pingcap/tidb-tools/tree/master/sync_diff_inspector) is a tool used to compare data stored in the databases with the MySQL protocol. For example, it can compare the data in MySQL with that in TiDB, the data in MySQL with that in MySQL, or the data in TiDB with that in TiDB. In addition, you can also use this tool to repair data in the scenario where a small amount of data is inconsistent.
+[sync-diff-inspector](https://github.com/pingcap/tiflow/tree/master/sync_diff_inspector) is a tool used to compare data stored in the databases with the MySQL protocol. For example, it can compare the data in MySQL with that in TiDB, the data in MySQL with that in MySQL, or the data in TiDB with that in TiDB. In addition, you can also use this tool to repair data in the scenario where a small amount of data is inconsistent.
 
-This guide introduces the key features of sync-diff-inspector and describes how to configure and use this tool. To download sync-diff-inspector, use one of the following methods:
-
-+ Binary package. The sync-diff-inspector binary package is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
-+ Docker image. Execute the following command to download:
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    docker pull pingcap/tidb-tools:latest
-    ```
+This guide introduces the key features of sync-diff-inspector and describes how to configure and use this tool.
 
 ## Key features
 
@@ -27,6 +18,36 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 * Support [data check in the sharding scenario](/sync-diff-inspector/shard-diff.md)
 * Support [data check for TiDB upstream-downstream clusters](/ticdc/ticdc-upstream-downstream-check.md)
 * Support [data check in the DM replication scenario](/sync-diff-inspector/dm-diff.md)
+
+## Install sync-diff-inspector
+
+The installation method varies depending on your TiDB version:
+
+For TiDB v9.0.0 and later versions:
+
++ Install using TiUP:
+
+    ```shell
+    tiup install sync-diff-inspector
+    ```
+
++ Binary package. The sync-diff-inspector binary package is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
+
++ Docker image. Execute the following command to download:
+
+    ```shell
+    docker pull pingcap/sync-diff-inspector:latest
+    ```
+
+For TiDB versions before v9.0.0:
+
++ Binary package from the legacy [`tidb-tools`](https://github.com/pingcap/tidb-tools) repository. The sync-diff-inspector binary package is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
+
++ Docker image (legacy version). Execute the following command to download:
+
+    ```shell
+    docker pull pingcap/tidb-tools:latest
+    ```
 
 ## Restrictions of sync-diff-inspector
 
@@ -38,16 +59,15 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 
 ## Database privileges for sync-diff-inspector
 
-sync-diff-inspector needs to obtain the information of table schema and to query data. The required database privileges are as follows:
+To access table schemas and query data, sync-diff-inspector requires specific database privileges. Grant the following privileges on both the upstream and downstream databases:
 
-* Upstream database
-    - `SELECT` (checks data for comparison)
-    - `SHOW_DATABASES` (views database name)
-    - `RELOAD` (views table schema)
-* Downstream database
-    - `SELECT` (checks data for comparison)
-    - `SHOW_DATABASES` (views database name)
-    - `RELOAD` (views table schema)
+- `SELECT`: required to compare data.
+- `RELOAD`: required to view table schemas.
+
+> **Note**:
+> 
+> - **DO NOT** grant the [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md) privilege on all databases (`*.*`). Otherwise, sync-diff-inspector will attempt to access inaccessible databases, which causes errors.
+> - For MySQL data sources, ensure that the [`skip_show_database`](https://dev.mysql.com/doc/refman/8.4/en/server-system-variables.html#sysvar_skip_show_database) system variable is set to `OFF`. If this variable is set to `ON`, the check might fail.
 
 ## Configuration file description
 
@@ -283,8 +303,6 @@ A SQL file contains the tale to which the chunk belong and the range information
   DIFF COLUMNS ╏   `K`   ╏                `C`                 ╏               `PAD`
 ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╋╍╍╍╍╍╍╍╍╍╋╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╋╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍
   source data  ╏ 2501808 ╏ 'hello'                            ╏ 'world'
-╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╋╍╍╍╍╍╍╍╍╍╋╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╋╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍
-  target data  ╏ 5003616 ╏ '0709824117-9809973320-4456050422' ╏ '1714066100-7057807621-1425865505'
 ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╋╍╍╍╍╍╍╍╍╍╋╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╋╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍
 */
 REPLACE INTO `sbtest`.`sbtest99`(`id`,`k`,`c`,`pad`) VALUES (3700000,2501808,'hello','world');

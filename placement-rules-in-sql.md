@@ -15,7 +15,7 @@ This feature can fulfill the following use cases:
 
 > **Note:**
 >
-> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 ## Overview
 
@@ -60,7 +60,7 @@ For detailed configuration methods, see the following examples:
 
 > **Note:**
 >
-> For TiDB Cloud Dedicated clusters, you can skip these label configuration steps because the labels on TiKV nodes in TiDB Cloud Dedicated clusters are configured automatically.
+> For {{{ .dedicated }}} clusters, you can skip these label configuration steps because the labels on TiKV nodes in {{{ .dedicated }}} clusters are configured automatically.
 
 </CustomContent>
 
@@ -74,13 +74,13 @@ To view all available labels in the current TiKV cluster, you can use the [`SHOW
 
 ```sql
 SHOW PLACEMENT LABELS;
-+--------+----------------+
-| Key    | Values         |
-+--------+----------------+
-| disk   | ["ssd"]        |
-| region | ["us-east-1"]  |
-| zone   | ["us-east-1a"] |
-+--------+----------------+
++--------+----------------------------+
+| Key    | Values                     |
++--------+----------------------------+
+| disk   | ["ssd"]                    |
+| region | ["us-east-1", "us-west-1"] |
+| zone   | ["us-east-1a"]             |
++--------+----------------------------+
 3 rows in set (0.00 sec)
 ```
 
@@ -231,7 +231,7 @@ You can configure `CONSTRAINTS`, `FOLLOWER_CONSTRAINTS`, and `LEARNER_CONSTRAINT
 
 | CONSTRAINTS format | Description |
 |----------------------------|-----------------------------------------------------------------------------------------------------------|
-| List format  | If a constraint to be specified applies to all replicas, you can use a key-value list format. Each key starts with `+` or `-`. For example: <br/><ul><li>`[+region=us-east-1]` means placing data on nodes  that have a `region` label as `us-east-1`.</li><li>`[+region=us-east-1,-type=fault]` means placing data on nodes that have a `region` label as `us-east-1` but do not have a `type` label as `fault`.</li></ul><br/>  |
+| List format  | If a constraint to be specified applies to all replicas, you can use a key-value list format. Each key starts with `+` or `-`. For example: <br/><ul><li>`[+region=us-east-1]` means placing data on nodes that have a `region` label as `us-east-1`.</li><li>`[+region=us-east-1,-type=fault]` means placing data on nodes that have a `region` label as `us-east-1` but do not have a `type` label as `fault`.</li></ul><br/>  |
 | Dictionary format | If you need to specify different numbers of replicas for different constraints, you can use the dictionary format. For example: <br/><ul><li>`FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";` means placing one Follower in `us-east-1`, one Follower in `us-east-2`, and one Follower in `us-west-1`.</li><li>`FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+type=scale-node": 1,"+region=us-west-1": 1}';` means placing one Follower on a node that is located in the `us-east-1` region and has the `type` label as `scale-node`, and one Follower in `us-west-1`.</li></ul>The dictionary format supports each key starting with `+` or `-` and allows you to configure the special `#evict-leader` attribute. For example, `FOLLOWER_CONSTRAINTS='{"+region=us-east-1":1, "+region=us-east-2": 2, "+region=us-west-1,#evict-leader": 1}'` means that the Leaders elected in `us-west-1` will be evicted as much as possible during disaster recovery.|
 
 > **Note:**

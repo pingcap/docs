@@ -41,21 +41,21 @@ If you have data files in SQL, CSV, Parquet, or Aurora Snapshot formats, you can
 
 - Import sample data (SQL file) to TiDB Cloud
 
-    You can import sample data (SQL file) to TiDB Cloud to quickly get familiar with the TiDB Cloud interface and the import process. For more information, see [Import Sample Data to TiDB Cloud](/tidb-cloud/import-sample-data.md).
+    You can import sample data (SQL file) to TiDB Cloud to quickly get familiar with the TiDB Cloud interface and the import process. For more information, see [Import Sample Data to TiDB Cloud Serverless](/tidb-cloud/import-sample-data-serverless.md) and [Import Sample Data to TiDB Cloud Dedicated](/tidb-cloud/import-sample-data.md).
 
-- Import CSV files from Amazon S3 or GCS into TiDB Cloud
+- Import CSV files from Amazon S3, Google Cloud Storage (GCS), or Azure Blob Storage into TiDB Cloud
 
-    You can import CSV files from Amazon S3 or GCS into TiDB Cloud. For more information, see [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md).
+    You can import CSV files from Amazon S3, Google Cloud Storage (GCS), or Azure Blob Storage into TiDB Cloud. For more information, see [Import CSV Files from Cloud Storage into TiDB Cloud Serverless](/tidb-cloud/import-csv-files-serverless.md) and [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md).
 
-- Import Apache Parquet files from Amazon S3 or GCS into TiDB Cloud
+- Import Apache Parquet files from Amazon S3, Google Cloud Storage (GCS), or Azure Blob Storage into TiDB Cloud
 
-    You can import Parquet files from Amazon S3 or GCS into TiDB Cloud. For more information, see [Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-parquet-files.md).
+    You can import Parquet files from Amazon S3, Google Cloud Storage (GCS), or Azure Blob Storage into TiDB Cloud. For more information, see [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Serverless](/tidb-cloud/import-parquet-files-serverless.md) and [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-parquet-files.md).
 
 ## Reference
 
-### Configure Amazon S3 access and GCS access
+### Configure cloud storage access
 
-If your source data is stored in Amazon S3 or Google Cloud Storage (GCS) buckets, before importing or migrating the data to TiDB Cloud, you need to configure access to the buckets. For more information, see [Configure Amazon S3 access and GCS access](/tidb-cloud/config-s3-and-gcs-access.md).
+If your source data is stored in Amazon S3, Google Cloud Storage (GCS) buckets, or Azure Blob Storage containers, before importing or migrating the data to TiDB Cloud, you need to configure access to the storage. For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md) and [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/dedicated-external-storage.md).
 
 ### Naming conventions for data import
 

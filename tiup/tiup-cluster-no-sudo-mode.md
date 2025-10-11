@@ -13,25 +13,46 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
 
 ## Prepare the user and configure the SSH mutual trust
 
-1. Take the `tidb` user as an example. Log in to all the target machines and create a user named `tidb` using the `root` user with the following command. In no-sudo mode, configuring passwordless sudo for the `tidb` user is unnecessary, that is, you do not need to add the `tidb` user to the `sudoers` file.
-   
-    ```shell
-    adduser tidb
-    ```
-   
+This document takes the `tidb` user as an example.
+
+1. Log in to all the target machines as the `root` user, create a user named `tidb` and configure the system resource limits for this user as follows:
+
+    > **Note:**
+    >
+    > In no-sudo mode, configuring passwordless sudo for the `tidb` user is unnecessary, that is, you do not need to add the `tidb` user to the `sudoers` file.
+
+    1. Add the `tidb` user:
+
+        ```shell
+        adduser tidb
+        ```
+
+    2. Configure the resource limits for the `tidb` user:
+
+        ```shell
+        cat << EOF >>/etc/security/limits.conf
+        tidb           soft    nofile         1000000
+        tidb           hard    nofile         1000000
+        tidb           soft    stack          32768
+        tidb           hard    stack          32768
+        tidb           soft    core           unlimited
+        tidb           hard    core           unlimited
+        EOF
+        ```
+
 2. Start the `systemd user` mode for the `tidb` user on each target machine. This step is required and do not skip it.
 
     1. Use the `tidb` user to set the `XDG_RUNTIME_DIR` environment variable.
-   
+
         ```shell
         sudo -iu tidb  # Switch to the tidb user
         mkdir -p ~/.bashrc.d
         echo "export XDG_RUNTIME_DIR=/run/user/$(id -u)" > ~/.bashrc.d/systemd
         source ~/.bashrc.d/systemd
         ```
-   
+
     2. Use the `root` user to start the user service.
-   
+
         ```shell
         $ uid=$(id -u tidb) # Get the ID of the tidb user
         $ systemctl start user@${uid}.service
@@ -52,7 +73,7 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
                 └─pulseaudio.service
                   └─3358 /usr/bin/pulseaudio --daemonize=no --log-target=journal
         ```
-       
+
     3. Execute `systemctl --user`. If no errors occur, it indicates that the `systemd user` mode has started successfully.
 
 3. Use the `root` user to execute the following command to enable lingering for the systemd user `tidb`.
@@ -94,7 +115,7 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
     ```shell
     tiup cluster template > topology.yaml
     ```
-   
+
 2. Edit the topology file.
 
     Compared with the regular mode, when using TiUP in no-sudo mode, you need to add a line `systemd_mode: "user"` in the `global` module of the `topology.yaml` file. The `systemd_mode` parameter is used to set whether to use the `systemd user` mode. If this parameter is not set, the default value is `system`, meaning sudo permissions are required.
@@ -111,7 +132,7 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
       arch: "amd64"
       ...
     ```
-   
+
 ## Manually repair failed check items
 
 > **Note:**
@@ -125,7 +146,7 @@ Node            Check         Result  Message
 ----            -----         ------  -------
 192.168.124.27  thp           Fail    THP is enabled, please disable it for best performance
 192.168.124.27  command       Pass    numactl: policy: default
-192.168.124.27  os-version    Pass    OS is CentOS Stream 8 
+192.168.124.27  os-version    Pass    OS is CentOS Stream 8
 192.168.124.27  network       Pass    network speed of ens160 is 10000MB
 192.168.124.27  disk          Warn    mount point / does not have 'noatime' option set
 192.168.124.27  disk          Fail    multiple components tikv:/home/blackcat/data/tidb-deploy/tikv-20160/data/tidb-data,tikv:/home/blackcat/data/tidb-deploy/tikv-20161/data/tidb-data are using the same partition 192.168.124.27:/ as data dir

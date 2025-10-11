@@ -65,7 +65,7 @@ When you upgrade TiFlash from v5.x or v6.0 to v6.1, pay attention to the functio
 
 TiFlash Proxy is upgraded in v6.1.0 (aligned with TiKV v6.0.0). The new version has upgraded the RocksDB version. After you upgrade TiFlash to v6.1, the data format is converted to the new version automatically.
 
-In regular upgrades, the data conversion does not involve any risks. However, if you need to downgrade TiFlash from v6.1 to any earlier version in special scenarios (for example, testing or verification scenarios), the earlier version might fail to parse the new RocksDB configuration. As as result, TiFlash will fail to restart. It is recommended that you fully test and verify the upgrade process and prepare an emergency plan.
+In regular upgrades, the data conversion does not involve any risks. However, if you need to downgrade TiFlash from v6.1 to any earlier version in special scenarios (for example, testing or verification scenarios), the earlier version might fail to parse the new RocksDB configuration. As result, TiFlash will fail to restart. It is recommended that you fully test and verify the upgrade process and prepare an emergency plan.
 
 **Workaround for downgrading TiFlash in testing or other special scenarios**
 
@@ -83,7 +83,7 @@ If you do not enable [dynamic pruning mode](/partitioned-table.md#dynamic-prunin
 
 ## From v5.x or v6.0 to v6.2
 
-In TiDB v6.2, TiFlash upgrades its data storage format to the V3 version. Therefore, when you upgrade TiFlash from v5.x or v6.0 to v6.2, besides functional changes in [TiFlash Proxy](#tiflash-proxy) and [Dynamic pruning](#dynamic-pruning), you also need to pay attention to the functional change in PageStorage.
+In TiDB v6.2, TiFlash upgrades its data storage format to V3 to reduce write amplification and improve TiFlash stability. When you upgrade from v5.x, v6.0, or v6.1 to v6.2 or a later version, in addition to the functional changes in [TiFlash Proxy](#tiflash-proxy) and [Dynamic pruning](#dynamic-pruning), you also need to pay attention to the functional change in PageStorage.
 
 ### PageStorage
 
@@ -106,13 +106,24 @@ You can check whether tables still use the old data format on Grafana: **TiFlash
 - Only V3: Number of tables using PageStorage V3 (including partitions)
 - Mix Mode: Number of tables with data format converted from PageStorage V2 to PageStorage V3 (including partitions)
 
+> **Note:**
+>
+> The following patch versions have a known issue (Issue [#9039](https://github.com/pingcap/tiflash/issues/9039)). Upgrading to these versions might cause TiFlash data corruption.
+> 
+> - v6.5.0 to v6.5.9
+> - v6.6.0
+> - v7.0.0
+> - v7.1.0 to v7.1.5
+> - v7.2.0
+> - v7.3.0
+> - v7.4.0
+> - v7.5.0 to v7.5.1
+> 
+> It is recommended that you upgrade to v6.5.10, v7.1.6, v7.5.2, or a later version where this issue has been fixed.
+
 **Workaround for downgrading TiFlash in testing or other special scenarios**
 
 You can forcibly scale in the target TiFlash node and then replicate data from TiKV again. For detailed steps, see [Scale in a TiFlash cluster](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster).
-
-## From v6.1 to v6.2
-
-When you upgrade TiFlash from v6.1 to v6.2, pay attention to the change in data storage format. For details, see [PageStorage](#pagestorage).
 
 ## From v6.x or v7.x to v7.3 with `storage.format_version = 5` configured
 
@@ -127,6 +138,10 @@ Starting from v7.4, to reduce the read and write amplification generated during 
 ## From v7.x to v8.4 or a later version
 
 Starting from v8.4, the underlying storage format of TiFlash is updated to support [vector search](/vector-search/vector-search-overview.md). Therefore, after TiFlash is upgraded to v8.4 or a later version, in-place downgrading to the original version is not supported.
+
+## From v8.x to v9.0 or a later version
+
+Starting from v9.0.0, TiFlash optimizes the storage format of string data to improve the string read and write performance. Therefore, after TiFlash is upgraded to v9.0.0 or a later version, in-place downgrading to the original version is not supported.
 
 **Workaround for downgrading TiFlash in testing or other special scenarios**
 

@@ -14,6 +14,7 @@ This statement is a TiDB extension syntax, used to view the status of TiDB and c
 - [`ADMIN REPAIR`](#admin-repair-statement)
 - [`ADMIN SHOW NEXT_ROW_ID`](#admin-show-next_row_id-statement)
 - [`ADMIN SHOW SLOW`](#admin-show-slow-statement)
+- [`ADMIN CREATE WORKLOAD SNAPSHOT`](#admin-create-workload-snapshot-statement)
 
 ## DDL related statement
 
@@ -59,7 +60,7 @@ The above statement is used to reload the blocklist of logic optimization rules.
 
 > **Note:**
 >
-> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 ```sql
 ADMIN PLUGINS ENABLE plugin_name [, plugin_name] ...;
@@ -133,7 +134,7 @@ The above statement is used to view the details of some special columns of a tab
 
 > **Note:**
 >
-> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 ```sql
 ADMIN SHOW SLOW RECENT N;
@@ -148,6 +149,28 @@ ADMIN SHOW SLOW TOP [INTERNAL | ALL] N;
 For details, refer to [`ADMIN SHOW SLOW` command](/identify-slow-queries.md#admin-show-slow-command).
 
 </CustomContent>
+
+## `ADMIN CREATE WORKLOAD SNAPSHOT` statement
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB statement is not applicable to TiDB Cloud.
+
+</CustomContent>
+
+<CustomContent platform="tidb">
+
+The following SQL statement will trigger a manual snapshot in the [Workload Repository](/workload-repository.md):
+
+</CustomContent>
+
+```sql
+ADMIN CREATE WORKLOAD SNAPSHOT;
+```
+
+Note that the Workload Repository must be enabled for this statement to take effect. Otherwise, it will generate an error.
 
 ## Synopsis
 
@@ -186,6 +209,7 @@ AdminStmt ::=
         | 'FLUSH' ('SESSION' | 'INSTANCE') 'PLAN_CACHE'
         | 'SET' 'BDR' 'ROLE' ( 'PRIMARY' | 'SECONDARY' )
         | 'UNSET' 'BDR' 'ROLE'
+        | 'CREATE' 'WORKLOAD' 'SNAPSHOT'
     )
 
 NumList ::=

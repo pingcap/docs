@@ -9,7 +9,7 @@ This document introduces subquery statements and categories in TiDB.
 
 ## Overview
 
-An subquery is a query within another SQL query. With subquery, the query result can be used in another query.
+A subquery is a query within another SQL query. With subquery, the query result can be used in another query.
 
 The following takes the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application as an example to introduce subquery.
 

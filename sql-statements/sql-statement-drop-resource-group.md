@@ -9,7 +9,7 @@ You can use the `DROP RESOURCE GROUP` statement to drop a resource group.
 
 > **Note:**
 >
-> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 ## Synopsis
 
@@ -55,11 +55,11 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
 ```
 
 ```sql
-+------+------------+----------+-----------+-------------+
-| NAME | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT |
-+------+------------+----------+-----------+-------------+
-| rg1  | 500        | MEDIUM   | YES       | NULL        |
-+------+------------+----------+-----------+-------------+
++------+------------+----------+----------------+-------------+
+| NAME | RU_PER_SEC | PRIORITY | BURSTABLE      | QUERY_LIMIT |
++------+------------+----------+----------------+-------------+
+| rg1  | 500        | MEDIUM   | MODERATED      | NULL        |
++------+------------+----------+----------------+-------------+
 1 row in set (0.01 sec)
 ```
 

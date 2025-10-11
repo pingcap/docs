@@ -382,6 +382,8 @@ To check whether the NTP service is installed and whether it synchronizes with t
         506 Cannot talk to daemon
         ```
 
+    - If the offset appears to be too high, you can run the `chronyc makestep` command to immediately correct the time offset. Otherwise, `chronyd` will gradually correct the time offset.
+
 To make the NTP service start synchronizing as soon as possible, run the following command. Replace `pool.ntp.org` with your NTP server.
 
 ```bash
@@ -707,10 +709,12 @@ Take the following steps to check the current operating system configuration and
 
     ```bash
     cat << EOF >>/etc/security/limits.conf
-    tidb           soft    nofile          1000000
-    tidb           hard    nofile          1000000
+    tidb           soft    nofile         1000000
+    tidb           hard    nofile         1000000
     tidb           soft    stack          32768
     tidb           hard    stack          32768
+    tidb           soft    core           unlimited
+    tidb           hard    core           unlimited
     EOF
     ```
 

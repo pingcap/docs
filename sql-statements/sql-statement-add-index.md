@@ -12,6 +12,14 @@ The `ALTER TABLE.. ADD INDEX` statement adds an index to an existing table. This
 >
 > The [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md) can be used to speed up the operation of this statement.
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> For [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters with 4 vCPU, it is recommended to manually disable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) to prevent resource limitations from affecting cluster stability during index creation. Disabling this setting allows indexes to be created using transactions, which reduces the overall impact on the cluster.
+
+</CustomContent>
+
 <CustomContent platform="tidb">
 
 > **Warning:**
@@ -38,7 +46,7 @@ IndexPartSpecification
 
 IndexOption
          ::= 'KEY_BLOCK_SIZE' '='? LengthNum
-           | IndexType
+           | 'USING' IndexType
            | 'WITH' 'PARSER' Identifier
            | 'COMMENT' stringLit
            | 'VISIBLE'

@@ -92,7 +92,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/status
 
 ```json
 {
-  "version": "v8.5.0",
+  "version": "{{{ .tidb-version }}}",
   "git_hash": "10413bded1bdb2850aa6d7b94eb375102e9c44dc",
   "id": "d2912e63-3349-447c-90ba-72a4e04b5e9e",
   "pid": 1447,
@@ -155,7 +155,6 @@ This interface is used to submit a replication task to TiCDC. If the request is 
       "max_log_size": 0,
       "storage": "string"
     },
-    "enable_old_value": true,
     "enable_sync_point": true,
     "filter": {
       "event_filters": [
@@ -380,7 +379,7 @@ The `sink.csv` parameters are described as follows:
 The following request creates a replication task with an ID of `test5` and `sink_uri` of `blackhome://`.
 
 ```shell
-curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v2/changefeeds -d '{"changefeed_id":"test5","sink_uri":"blackhole://"}'
+curl -X POST -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/changefeeds -d '{"changefeed_id":"test5","sink_uri":"blackhole://"}'
 ```
 
 If the request is successful, `200 OK` is returned. If the request fails, an error message and error code are returned.
@@ -402,7 +401,6 @@ If the request is successful, `200 OK` is returned. If the request fails, an err
       "max_log_size": 0,
       "storage": "string"
     },
-    "enable_old_value": true,
     "enable_sync_point": true,
     "filter": {
       "event_filters": [
@@ -588,7 +586,6 @@ To modify the changefeed configuration, follow the steps of `pause the replicati
       "max_log_size": 0,
       "storage": "string"
     },
-    "enable_old_value": true,
     "enable_sync_point": true,
     "filter": {
       "event_filters": [
@@ -678,7 +675,7 @@ The meanings of the above parameters are the same as those in the [Create a repl
 The following request updates the `target_ts` of the replication task with the ID `test1` to `32`.
 
 ```shell
- curl -X PUT -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v2/changefeeds/test1 -d '{"target_ts":32}'
+curl -X PUT -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/changefeeds/test1 -d '{"target_ts":32}'
 ```
 
 If the request is successful, `200 OK` is returned. If the request fails, an error message and error code are returned. The meanings of the JSON response body are the same as those in the [Create a replication task](#create-a-replication-task) section. See that section for details.
@@ -1068,7 +1065,7 @@ This API is a synchronous interface. If the request is successful, `200 OK` is r
 ### Example
 
 ```shell
-curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v2/log -d '{"log_level":"debug"}'
+curl -X POST -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/log -d '{"log_level":"debug"}'
 ```
 
 If the request is successful, `200 OK` is returned. If the request fails, an error message and error code are returned.
