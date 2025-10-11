@@ -97,7 +97,7 @@ The **Metrics** page provides two tabs for metrics of {{{ .starter }}} and {{{ .
 | Capacity vs Usage (RU/s) | Provisioned capacity (RCU), Consumed RU/s | The provisioned capacity (RCU) and the consumed Request Units (RU) per second to the {{{ .essential }}} clusters. |
 | Used Storage Size | Row-based storage, Columnar storage | The size of the row store and the size of the column store. |
 | Query Per Second | All | The number of SQL statements executed per second, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
-| Query Duration | All | The duration from receiving a request from the client to the {{{ .starter }}} or {{{ .essential }}} cluster until the cluster executes the request and returns the result to the client. |
+| Query Duration | Avg, P99 | The duration from receiving a request from the client to the {{{ .starter }}} or {{{ .essential }}} cluster until the cluster executes the request and returns the result to the client. |
 | Total Connection | All | The number of connections to the {{{ .starter }}} or {{{ .essential }}} cluster. |
 
 ### Cluster Status
@@ -110,13 +110,13 @@ The following table illustrates the cluster-level main advanced metrics under th
 | Capacity vs Usage (RU/s) | Provisioned capacity (RCU), Consumed RU/s | The provisioned capacity (RCU) and the consumed Request Units (RU) per second to the {{{ .essential }}} clusters. |
 | Used Storage Size | Row-based storage, Columnar storage | The size of the row store and the size of the column store. |
 | Query Per Second | All, {SQL type} | The number of SQL statements executed per second, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
-| Query Duration | avg-{SQL type}, P99-{SQL type} | The average or the 99th percentile duration from receiving a request from the client to the {{{ .starter }}} or {{{ .essential }}} cluster until the cluster executes the request and returns the result to the client. |
+| Query Duration | Avg, P99, P99-{SQL type} | The duration from receiving a request from the client to the {{{ .starter }}} or {{{ .essential }}} cluster until the cluster executes the request and returns the result to the client. |
 | Failed Query | All | The number of SQL statement execution errors per second. |
 | Transaction Per Second | All | The number of transactions executed per second. |
-| Transaction Duration | avg, P99 | The average and the 99th percentile execution duration of transactions. |
-| Lock wait | P95, P99 | The 95th and the 99th percentile durations are the times taken by transactions waiting to acquire pessimistic locks. High values indicate contention for the same rows or keys. |
+| Transaction Duration | Avg, P99 | The execution duration of transactions. |
+| Lock wait | P95, P99 | Time spent by transactions waiting to acquire pessimistic locks. High values indicate contention on the same rows or keys. |
 | Total Connection | All | The number of connections to the {{{ .starter }}} or {{{ .essential }}} cluster. |
-| Idle Connection Duration | P99, P99(in-txn), P99(not-in-txn) | The 99th percentile time connections remained idle while inside an open transaction. Long values usually indicate slow app logic or long-running transactions. |
+| Idle Connection Duration | P99, P99(in-txn), P99(not-in-txn) | The time connections remained idle while inside an open transaction. Long values usually indicate slow app logic or long-running transactions. |
 
 
 ### Database Status
