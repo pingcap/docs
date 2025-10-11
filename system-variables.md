@@ -6716,6 +6716,25 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
     - `force_streaming`: TiFlash directly sends data to the next stage of HashAgg without pre-aggregation.
     - `auto`: TiFlash automatically chooses whether to perform pre-aggregation based on the current workload's aggregation degree.
 
+### tiflash_hash_join_version <span class="version-mark">New in v9.0.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Enumeration
+- Default value: `legacy`.
+- Value options: `legacy`, `optimized`
+- This variable is used to control whether TiFlash uses an optimized version of hash join. The value is `legacy` by default, which means the optimized version is not used. If it is set to `optimized`, TiFlash uses the optimized version to execute hash join for better performance.
+
+> **Note:**
+>
+> - Currently, the optimized hash join only supports inner join. For other joins, even if `tiflash_hash_join_version` is set to `optimized`, TiFlash still uses the `legacy` hash join.
+> - Currently, the optimized hash join in TiFlash does not support spilling data to disk when the memory usage exceeds the limit. As a result, if both [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740) and [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740) are set to values greater than `0`, or if [`tidb_max_bytes_before_tiflash_external_join`](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700) is greater than `0`, TiFlash still uses the `legacy` hash join.
+
 ### tikv_client_read_timeout <span class="version-mark">New in v7.4.0</span>
 
 - Scope: SESSION | GLOBAL
