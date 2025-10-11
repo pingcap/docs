@@ -3,7 +3,7 @@ title: SHOW TABLE DISTRIBUTION
 summary: An overview of the usage of SHOW TABLE DISTRIBUTION for the TiDB database.
 ---
 
-# SHOW TABLE DISTRIBUTION <span class="version-mark">New in v9.0.0</span>
+# SHOW TABLE DISTRIBUTION <span class="version-mark">New in v8.5.4</span>
 
 The `SHOW TABLE DISTRIBUTION` statement shows the Region distribution information for a specified table.
 
