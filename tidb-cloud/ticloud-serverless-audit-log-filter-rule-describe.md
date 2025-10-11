@@ -39,7 +39,7 @@ ticloud serverless audit-log filter-rule describe --cluster-id <cluster-id> --fi
 |----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
 | -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both interactive and non-interactive modes.                                                             |
 | --no-color           | Disables color output.                                                                                | No       | Only works in non-interactive mode.                                                                              |
-| -P, --profile string | Profile to use from your configuration file.                                                         | No       | Works in both interactive and non-interactive modes.                                                             |
+| -P, --profile string | Specifies the profile to use from your configuration file.                                                         | No       | Works in both interactive and non-interactive modes.                                                             |
 
 ## Feedback
 

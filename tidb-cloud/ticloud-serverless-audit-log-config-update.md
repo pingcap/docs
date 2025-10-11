@@ -25,7 +25,7 @@ Unredact the database audit log in non-interactive mode:
 ticloud serverless audit-log config update -c <cluster-id> --unredacted
 ```
 
-Enable database audit logging with S3 Cloud Storage in non-interactive mode:
+Enable database audit logging with Amazon S3 storage in non-interactive mode:
 
 ```shell
 ticloud serverless audit-log config update -c <cluster-id> --enabled --cloud-storage S3 --s3.uri <s3-uri> --s3.access-key-id <s3-access-key-id> --s3.secret-access-key <s3-secret-access-key>
@@ -47,22 +47,22 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled=false
 
 | Flag | Description | Required | Note |
 |------|-------------|----------|------|
-| --azblob.sas-token string | The SAS token of Azure Blob. | No | Only works in non-interactive mode. |
-| --azblob.uri string | The Azure Blob URI in `azure://<account>.blob.core.windows.net/<container>/<path>` format. | No | Only works in non-interactive mode. |
-| --cloud-storage string | The cloud storage. Valid options: [`"TIDB_CLOUD"`, `"S3"`, `"GCS"`, `"AZURE_BLOB"`, `"OSS"`]. | No | Only works in non-interactive mode. |
+| --azblob.sas-token string | The SAS token of Azure Blob Storage. | No | Only works in non-interactive mode. |
+| --azblob.uri string | The Azure Blob Storage URI in `azure://<account>.blob.core.windows.net/<container>/<path>` format. | No | Only works in non-interactive mode. |
+| --cloud-storage string | The cloud storage provider. Valid options: `"TIDB_CLOUD"`, `"S3"`, `"GCS"`, `"AZURE_BLOB"`, and `"OSS"`. | No | Only works in non-interactive mode. |
 | -c, --cluster-id string | The ID of the cluster to be updated. | Yes | Only works in non-interactive mode. |
 | --enabled | Enables or disables database audit logging. | No | Only works in non-interactive mode. |
-| --gcs.service-account-key string | The base64 encoded service account key of GCS. | No | Only works in non-interactive mode. |
-| --gcs.uri string | The GCS URI in the `gs://<bucket>/<path>` format. | No | Only works in non-interactive mode. |
-| --oss.access-key-id string | The access key ID of the OSS. | No | Only works in non-interactive mode. |
-| --oss.access-key-secret string | The access key secret of the OSS. | No | Only works in non-interactive mode. |
-| --oss.uri string | The OSS URI in the `oss://<bucket>/<path>` format. | No | Only works in non-interactive mode. |
+| --gcs.service-account-key string | The Base64-encoded service account key of Google Cloud Storage. | No | Only works in non-interactive mode. |
+| --gcs.uri string | The Google Cloud Storage URI in `gs://<bucket>/<path>` format. | No | Only works in non-interactive mode. |
+| --oss.access-key-id string | The access key ID of Alibaba Cloud Object Storage Service (OSS). | No | Only works in non-interactive mode. |
+| --oss.access-key-secret string | The access key secret of Alibaba Cloud OSS. | No | Only works in non-interactive mode. |
+| --oss.uri string | The Alibaba Cloud OSS URI in `oss://<bucket>/<path>` format. | No | Only works in non-interactive mode. |
 | --rotation-interval-minutes int32 | The rotation interval in minutes. Valid range: `[10, 1440]`. | No | Only works in non-interactive mode. |
 | --rotation-size-mib int32 | The rotation size in MiB. Valid range: `[1, 1024]`. | No | Only works in non-interactive mode. |
-| --s3.access-key-id string | The access key ID of S3. You only need to set one of the `s3.role-arn` and [`s3.access-key-id`, `s3.secret-access-key`]. | No | Only works in non-interactive mode. |
-| --s3.role-arn string | The role ARN of S3. You only need to set one of the `s3.role-arn` and [`s3.access-key-id`, `s3.secret-access-key`]. | No | Only works in non-interactive mode. |
-| --s3.secret-access-key string | The secret access key of S3. You only need to set one of the `s3.role-arn` and [`s3.access-key-id`, `s3.secret-access-key`]. | No | Only works in non-interactive mode. |
-| --s3.uri string | The S3 URI in the `s3://<bucket>/<path>` format. | No | Only works in non-interactive mode. |
+| --s3.access-key-id string | The access key ID of Amazon S3. You only need to set either `--s3.role-arn` or both `--s3.access-key-id` and `--s3.secret-access-key`. | No | Only works in non-interactive mode. |
+| --s3.role-arn string | The role ARN of Amazon S3. You only need to set either `--s3.role-arn` or both `--s3.access-key-id` and `--s3.secret-access-key`. | No | Only works in non-interactive mode. |
+| --s3.secret-access-key string | The secret access key of Amazon S3. You only need to set either `--s3.role-arn` or both `--s3.access-key-id` and `--s3.secret-access-key`. | No | Only works in non-interactive mode. |
+| --s3.uri string | The Amazon S3 URI in `s3://<bucket>/<path>` format. | No | Only works in non-interactive mode. |
 | --unredacted | Unredacts or redacts the database audit log. | No | Only works in non-interactive mode. |
 | -h, --help | Shows help information for this command. | No | Works in both interactive and non-interactive modes. |
 
@@ -72,7 +72,7 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled=false
 |------|-------------|----------|------|
 | -D, --debug | Enables debug mode. | No | Works in both interactive and non-interactive modes. |
 | --no-color | Disables color output. | No | Only works in non-interactive mode. |
-| -P, --profile string | Profile to use from your configuration file. | No | Works in both interactive and non-interactive modes. |
+| -P, --profile string | Specifies the profile to use from your configuration file. | No | Works in both interactive and non-interactive modes. |
 
 ## Feedback
 

@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless audit-log config describe`.
 
 # ticloud serverless audit-log config describe
 
-Describe the database audit logging configuration for a TiDB Cloud Essential cluster.
+Describe the database audit logging configuration for a {{{ .essential }}} cluster.
 
 ```shell
 ticloud serverless audit-log config describe [flags]
@@ -36,9 +36,9 @@ ticloud serverless audit-log config describe -c <cluster-id>
 
 | Flag                 | Description                                                                                          | Required | Note                                                                                                             |
 |----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
-| -D, --debug          | Enable debug mode.                                                                                   | No       | Works in both interactive and non-interactive modes.                                                             |
-| --no-color           | Disable color output.                                                                                | No       | Only works in non-interactive mode.                                                                              |
-| -P, --profile string | Profile to use from your configuration file.                                                         | No       | Works in both interactive and non-interactive modes.                                                             |
+| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both interactive and non-interactive modes.                                                             |
+| --no-color           | Disables color output.                                                                                | No       | Only works in non-interactive mode.                                                                              |
+| -P, --profile string | Specifies the profile to use from your configuration file.                                                         | No       | Works in both interactive and non-interactive modes.                                                             |
 
 ## Feedback
 
