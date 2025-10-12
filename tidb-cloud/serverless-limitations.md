@@ -20,6 +20,7 @@ We are constantly filling in the feature gaps between {{{ .starter }}}/Essential
 
 ### Connection
 
+- Database client connections that are held open longer than 30 minutes may be terminated unexpectedly. We recommend starting with a 5 minutes maxiumm connection lifetime and increasing the connection lifetime if there is an impact on tail latency.
 - Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to {{{ .starter }}} or {{{ .essential }}} clusters. 
 - No [IP Access list](/tidb-cloud/configure-ip-access-list.md) support.
 
