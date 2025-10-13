@@ -47,7 +47,7 @@ For more use cases, see [Partition Pruning](https://docs.pingcap.com/tidb/stable
 
 ### Query Performance on Secondary Index: Non-Partitioned Table vs. Local Index vs. Global Index
 
-In TiDB, local indexes are the default indexing strategy for partitioned tables. Each partition maintains its own set of indexes, while a Global Index refers to an index that spans all partitions in a partitioned table. Unlike Local Indexes, which are partition-specific and stored separately within each partition, a Global Index maintains a single, unified index across the entire table. This index includes references to all rows, regardless of which partition they belong to, and thus can provide global queries and operations, such as joins or lookups, with faster access.
+In TiDB, local indexes are the default for partitioned tables. Each partition has its own set of indexes. A global index, on the other hand, covers the whole table in one index. This means it keeps track of all rows across all partitions. Global indexes can be faster for queries across multiple partitions because local indexes needs to do one lookup in each partition separately, while global index only needs one lookup for the whole table.
 
 #### What Did We Test
 
@@ -71,13 +71,13 @@ CREATE TABLE `fa` (
   `account_id` bigint(20) NOT NULL,
   `sid` bigint(20) DEFAULT NULL,
   `user_id` bigint NOT NULL,
-  `yeardate` int NOT NULL,
-  PRIMARY KEY (`id`,`yeardate`) /*T![clustered_index] CLUSTERED */,
+  `date` int NOT NULL,
+  PRIMARY KEY (`id`,`date`) /*T![clustered_index] CLUSTERED */,
   KEY `index_fa_on_sid` (`sid`),
   KEY `index_fa_on_account_id` (`account_id`),
   KEY `index_fa_on_user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
-PARTITION BY RANGE (`yeardate`)
+PARTITION BY RANGE (`date`)
 (PARTITION `fa_2024001` VALUES LESS THAN (2024001),
 PARTITION `fa_2024002` VALUES LESS THAN (2024002),
 PARTITION `fa_2024003` VALUES LESS THAN (2024003),
@@ -637,13 +637,55 @@ This section compares the efficiency and implications of these methods in both d
 
 ### Method 1: Batch DML INSERT INTO ... SELECT ...
 
-**By Default**
+#### Table Schema: `fa`
+```sql
+CREATE TABLE `fa` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `account_id` bigint(20) NOT NULL,
+  `sid` bigint(20) DEFAULT NULL,
+  `user_id` bigint NOT NULL,
+  `date` int NOT NULL,
+  PRIMARY KEY (`id`,`date`) /*T![clustered_index] CLUSTERED */,
+  KEY `index_fa_on_sid` (`sid`),
+  KEY `index_fa_on_account_id` (`account_id`),
+  KEY `index_fa_on_user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
+PARTITION BY RANGE (`date`)
+(PARTITION `fa_2024001` VALUES LESS THAN (2024001),
+PARTITION `fa_2024002` VALUES LESS THAN (2024002),
+PARTITION `fa_2024003` VALUES LESS THAN (2024003),
+...
+...
+PARTITION `fa_2024366` VALUES LESS THAN (2024366))
+```
+
+
+#### Table Schema: `fa_new`
+```sql
+CREATE TABLE `fa` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `account_id` bigint(20) NOT NULL,
+  `sid` bigint(20) DEFAULT NULL,
+  `user_id` bigint NOT NULL,
+  `date` int NOT NULL,
+  PRIMARY KEY (`id`,`date`) /*T![clustered_index] CLUSTERED */,
+  KEY `index_fa_on_sid` (`sid`),
+  KEY `index_fa_on_account_id` (`account_id`),
+  KEY `index_fa_on_user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
+);
+```
+
+#### Description
+Supports bi-directional import, suitable for very large datasets.
+### Method 1: By Default
 
 ```sql
 SET tidb_mem_quota_query = 0;
 INSERT INTO fa_new SELECT * FROM fa;
 -- 120 million rows copied in 1h 52m 47s
 ```
+
 
 ### Method 2: Pipeline DML INSERT INTO ... SELECT ...
 
@@ -680,7 +722,7 @@ mysql> alter table fa REMOVE PARTITIONING;
 ```sql
 SET @@global.tidb_ddl_reorg_worker_cnt = 16;
 SET @@global.tidb_ddl_reorg_batch_size = 4096;
-ALTER TABLE fa PARTITION BY RANGE (`yearweek`)
+ALTER TABLE fa PARTITION BY RANGE (`date`)
 (PARTITION `fa_2024001` VALUES LESS THAN (2024001),
 PARTITION `fa_2024002` VALUES LESS THAN (2024002),
 ...
