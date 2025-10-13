@@ -205,18 +205,6 @@ To verify the caller's identity for a component, you need to mark the certificat
     cert-allowed-cn = ["tidb", "tikv", "tiflash", "prometheus"]
     ```
 
-<<<<<<< HEAD
-=======
-- TiProxy (New in v1.4.0)
-
-    Configure in the configuration file:
-
-    ```toml
-    [security]
-        [server-http-tls]
-        cert-allowed-cn = ["tiproxy", "tidb", "test-client", "prometheus"]
-    ```
-
 ## Validate TLS between TiDB components
 
 After configuring TLS for communication between TiDB components, you can use the following commands to verify that TLS has been successfully enabled. These commands print the certificate and TLS handshake details for each component.
@@ -251,7 +239,6 @@ After configuring TLS for communication between TiDB components, you can use the
     openssl s_client -connect <tiproxy_host>:3080 -cert /path/to/client.pem -key /path/to/client-key.pem -CAfile ./ca.crt < /dev/null
     ```
 
->>>>>>> 68f2e3cd87 (security: add steps to validate TLS between components (#21811))
 ## Reload certificates
 
 - If your TiDB cluster is deployed in a local data center, to reload the certificates and keys, TiDB, PD, TiKV, TiFlash, TiCDC, and all kinds of clients reread the current certificates and key files each time a new connection is created, without restarting the TiDB cluster.
