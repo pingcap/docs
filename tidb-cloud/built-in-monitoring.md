@@ -84,7 +84,7 @@ The following sections illustrate the metrics on the **Metrics** page for TiDB C
 
 ## Metrics for {{{ .starter }}} and {{{ .essential }}} clusters
 
-The **Metrics** page provides two tabs for metrics of {{{ .starter }}} and {{{ .essential }}} clusters:
+The **Metrics** page provides the following tabs for metrics of {{{ .starter }}} and {{{ .essential }}} clusters:
 
 - **Overview**: displays the cluster-level core metrics.
 - **Cluster Status**: displays the cluster-level main advanced metrics.
