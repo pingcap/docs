@@ -107,7 +107,6 @@ The following table illustrates the cluster-level main metrics under the **Clust
 | Total Connection | All | The number of connections to the {{{ .starter }}} or {{{ .essential }}} cluster. |
 | Idle Connection Duration | P99, P99(in-txn), P99(not-in-txn) | The time connections remained idle while inside an open transaction. Long durations typically indicate slow application logic or long-running transactions. |
 
-
 ### Database Status
 
 The following table illustrates the database-level main metrics under the **Database Status** tab.
