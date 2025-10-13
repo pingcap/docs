@@ -307,16 +307,7 @@ Dropping a partition on a table with a Global Index took **76 seconds**, while t
 **Global Index**
 
 ```sql
-mysql> alter table A drop partition A_2024363;
-Query OK, 0 rows affected (1 min 16.02 sec)
-```
-
-**Local Index**
-
-```sql
-mysql> alter table A drop partition A_2024363;
-Query OK, 0 rows affected (0.52 sec)
-```
+ALTER TABLE A DROP PARTITION A_2024363;
 
 #### Recommendation
 
