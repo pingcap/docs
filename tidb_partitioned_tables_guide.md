@@ -218,7 +218,7 @@ To compare the performance of TTL and partition drop, we configured TTL to execu
 #### Findings
 
 **TTL Performance:**
-- On a high-write table, TTL runs every 10 minutes.
+- On a write-heavy table, TTL runs every 10 minutes.
 - With 50 threads, each TTL job took 8–10 minutes, deleting 7–11 million rows.
 - With 100 threads, it handled up to 20 million rows, but execution time increased to 15–30 minutes, with greater variance.
 - TTL jobs impacted system performance under high load due to extra scanning and deletion activity, reducing overall QPS.
