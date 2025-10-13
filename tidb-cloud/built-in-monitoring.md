@@ -105,7 +105,7 @@ The following table illustrates the cluster-level main metrics under the **Clust
 | Transaction Duration | Avg, P99 | The execution duration of transactions. |
 | Lock wait | P95, P99 | Time spent by transactions waiting to acquire pessimistic locks. High values indicate contention on the same rows or keys. |
 | Total Connection | All | The number of connections to the {{{ .starter }}} or {{{ .essential }}} cluster. |
-| Idle Connection Duration | P99, P99(in-txn), P99(not-in-txn) | The time connections remained idle while inside an open transaction. Long values usually indicate slow app logic or long-running transactions. |
+| Idle Connection Duration | P99, P99(in-txn), P99(not-in-txn) | The time connections remained idle while inside an open transaction. Long durations typically indicate slow application logic or long-running transactions. |
 
 
 ### Database Status
