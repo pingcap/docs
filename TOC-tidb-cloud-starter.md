@@ -226,6 +226,7 @@
     - [Import Sample Data (SQL Files) from Cloud Storage](/tidb-cloud/import-sample-data-serverless.md)
     - [Import CSV Files from Cloud Storage](/tidb-cloud/import-csv-files-serverless.md)
     - [Import Parquet Files from Cloud Storage](/tidb-cloud/import-parquet-files-serverless.md)
+    - [Import Snapshot Files from Cloud Storage](/tidb-cloud/import-snapshot-files-serverless.md)
     - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli-serverless.md)
   - Reference
     - [Configure External Storage Access for TiDB Cloud](/tidb-cloud/serverless-external-storage.md)
@@ -291,6 +292,7 @@
   - [Data App Configuration Files](/tidb-cloud/data-service-app-config-files.md)
   - [Response and Status Code](/tidb-cloud/data-service-response-and-status-code.md)
 - Security
+  - [Security Overview](/tidb-cloud/security-overview.md)
   - Identity Access Control
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
     - [Standard SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md)
@@ -645,7 +647,6 @@
       - [delete](/tidb-cloud/ticloud-serverless-authorized-network-delete.md)
       - [list](/tidb-cloud/ticloud-serverless-authorized-network-list.md)
       - [update](/tidb-cloud/ticloud-serverless-authorized-network-update.md)
-  - [ai](/tidb-cloud/ticloud-ai.md)
   - [completion](/tidb-cloud/ticloud-completion.md)
   - config
     - [create](/tidb-cloud/ticloud-config-create.md)
