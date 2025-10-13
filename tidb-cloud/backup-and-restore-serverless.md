@@ -88,13 +88,13 @@ If the data is corrupted after a canceled restore and cannot be recovered, conta
 
 ### Perform the restore
 
-To restore your TiDB Cloud cluster, follow these steps:
+To restore your data to a new cluster, take the following steps:
 
 1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
 2. Click **Restore**.
 
-3. On the **Restore** page, you can choose to restore from a specific backup or any point in time.
+3. In **Restore Mode**, you can choose to restore from a specific backup or any point in time.
 
     <SimpleTab>
     <div label="Snapshot Restore">
@@ -115,16 +115,13 @@ To restore your TiDB Cloud cluster, follow these steps:
     </div>
     </SimpleTab>
 
-4. In **Destination**, you can restore to a new cluster.
+4. Enter a name for the new cluster.
+5. Choose a plan for the new cluster and update the capacity as needed.
 
-    1. Click **Restore to a New Cluster**.
-    2. Enter a name for the new cluster.
-    3. Choose the cluster plan for the new cluster.
+    - If you choose a {{{ .starter }}} cluster and need more resources than the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota), set a monthly spending limit.
+    - If you choose a {{{ .essential }}} cluster, set the minimum RCU and maximum RCU, and then configure advanced settings as needed.
 
-        - If you choose a {{{ .starter }}} cluster and need more resources than the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota), set a monthly spending limit.
-        - If you choose a {{{ .essential }}} cluster, set the minimum RCU and maximum RCU, and then configure advanced settings as needed.
-
-5. Click **Restore** to begin the restore process.
+6. Click **Restore** to begin the restore process.
 
 Once the restore process begins, the cluster status changes to **Restoring**. The cluster will remain unavailable until the restore is complete and the status changes to **Available**.
 
