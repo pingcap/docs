@@ -91,6 +91,9 @@ The **Metrics** page provides the following tabs for metrics of {{{ .starter }}}
 - **Database Status**: displays the database-level main metrics.
 
 ### Overview
+
+The following table illustrates the cluster-level core metrics under the **Overview** tab.
+
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
 | Request Units | RU per second | The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction to the {{{ .starter }}} cluster. In addition to queries that you run, Request Units can be consumed by background activities, so when the QPS is 0, the Request Units per second might not be zero. |
