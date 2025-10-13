@@ -76,10 +76,6 @@ TiDB Cloud supports snapshot restore and point-in-time restore for your cluster.
 
 TiDB Cloud supports restoring data to a new cluster.
 
-> **Note:**
->
-> User credentials and permissions from the source cluster will not be restored to the new cluster.
-
 ### Restore timeout
 
 The restore process typically completes within a few minutes. If the restore takes longer than three hours, it is automatically canceled and the new cluster is deleted, while the source cluster remains unchanged.
@@ -87,6 +83,10 @@ The restore process typically completes within a few minutes. If the restore tak
 If the data is corrupted after a canceled restore and cannot be recovered, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance.
 
 ### Perform the restore
+
+> **Note:**
+>
+> User credentials and permissions from the source cluster will not be restored to the new cluster.
 
 To restore your data to a new cluster, take the following steps:
 
