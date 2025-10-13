@@ -91,7 +91,7 @@ The **Metrics** page provides the following tabs for metrics of {{{ .starter }}}
 
 ### Cluster Status
 
-The following table illustrates the cluster-level main advanced metrics under the **Cluster Status** tab.
+The following table illustrates the cluster-level main metrics under the **Cluster Status** tab.
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
