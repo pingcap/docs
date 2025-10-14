@@ -225,7 +225,8 @@ To compare the performance of TTL and partition drop, we configured TTL to execu
 
 **Partition Drop Performance:**
 - DROP PARTITION removes an entire data segment instantly, with minimal resource usage.
-- DROP PARTITION is a metadata-level operation, making it much faster and more predictable than TTL, especially when managing large volumes of historical data.
+- `ALTER TABLE ... DROP PARTITION` removes an entire data segment instantly, with minimal resource usage.
+- `ALTER TABLE ... DROP PARTITION` is a metadata-level operation, making it much faster and more predictable than TTL, especially when managing large volumes of historical data.
 
 #### How to Use TTL and Partition Drop in TiDB
 
@@ -322,7 +323,7 @@ If you need to drop partitions frequently and minimize the performance impact on
 
 In TiDB, **write hotspots** occur when incoming write traffic is unevenly distributed across Regions.
 
-This is common when the primary key is **monotonically increasing**—for example, an AUTO_INCREMENT primary key with AUTO_ID_CACHE=1, or secondary index on datetime column with default value set to CURRENT_TIMESTAMP—because new rows and index entries are always appended to the "rightmost" Region. Over time, this can lead to:
+This is common when the primary key is **monotonically increasing**—for example, an `AUTO_INCREMENT` primary key with `AUTO_ID_CACHE=1`, or secondary index on datetime column with default value set to `CURRENT_TIMESTAMP`—because new rows and index entries are always appended to the "rightmost" Region. Over time, this can lead to:
 
 - A single Region handling most of the write workload, while other Regions remain idle.
 - Higher write latency and reduced throughput.
@@ -463,7 +464,7 @@ PARTITION BY RANGE ( YEAR(hired) ) (
 );
 ```
 
-Adding the [merge_option=deny](https://docs.pingcap.com/tidb/stable/table-attributes/#control-the-region-merge-behavior-using-table-attributes) attribute to a table or partition can prevent the merging of empty regions. However, when a partition is dropped, the regions belonging to that partition will still be merged automatically.
+Adding the [merge_option=deny](/table-attributes.md#control-the-region-merge-behavior-using-table-attributes) attribute to a table or partition can prevent the merging of empty regions. However, when a partition is dropped, the regions belonging to that partition will still be merged automatically.
 
 ```sql
 -- table
