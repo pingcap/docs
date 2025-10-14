@@ -31,7 +31,7 @@ TiDB Cloud makes it easy to scale your database, handle complex management tasks
 
 <CustomContent language="ja">
 
-- For AWS, TiDB Cloud provides **{{{ .starter }}}** for auto-scaling, cost-efficient workloads, and **{{{ .dedicated }}}** for enterprise-grade applications with dedicated resources and advanced capabilities.
+- For AWS, TiDB Cloud provides **{{{ .starter }}}** for auto-scaling, cost-efficient workloads, **{{{ .essential }}}** for production-ready workloads with provisioned capacity, and **{{{ .dedicated }}}** for enterprise-grade applications with dedicated resources and advanced capabilities.
 - For Google Cloud and Azure, TiDB Cloud provides **{{{ .dedicated }}}** for enterprise-grade applications with dedicated resources and advanced capabilities.
 
 </CustomContent>
