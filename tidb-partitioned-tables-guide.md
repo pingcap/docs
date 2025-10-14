@@ -152,7 +152,6 @@ ALTER TABLE <table_name>
 ADD UNIQUE INDEX <index_name> (col1, col2) GLOBAL;
 ```
 
-
 Adds a global index to an existing partitioned table.
 
 - The `GLOBAL` keyword must be explicitly specified.
