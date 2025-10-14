@@ -323,7 +323,7 @@ If you need to drop partitions frequently and minimize the performance impact on
 
 In TiDB, **write hotspots** occur when incoming write traffic is unevenly distributed across Regions.
 
-This is common when the primary key is **monotonically increasing**—for example, an AUTO_INCREMENT primary key with AUTO_ID_CACHE=1, or secondary index on datetime column with default value set to CURRENT_TIMESTAMP—because new rows and index entries are always appended to the "rightmost" Region. Over time, this can lead to:
+This is common when the primary key is **monotonically increasing**—for example, an `AUTO_INCREMENT` primary key with `AUTO_ID_CACHE=1`, or secondary index on datetime column with default value set to `CURRENT_TIMESTAMP`—because new rows and index entries are always appended to the "rightmost" Region. Over time, this can lead to:
 
 - A single Region handling most of the write workload, while other Regions remain idle.
 - Higher write latency and reduced throughput.
