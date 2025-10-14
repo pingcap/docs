@@ -464,7 +464,7 @@ PARTITION BY RANGE ( YEAR(hired) ) (
 );
 ```
 
-Adding the [merge_option=deny](https://docs.pingcap.com/tidb/stable/table-attributes/#control-the-region-merge-behavior-using-table-attributes) attribute to a table or partition can prevent the merging of empty regions. However, when a partition is dropped, the regions belonging to that partition will still be merged automatically.
+Adding the [merge_option=deny](/table-attributes.md#control-the-region-merge-behavior-using-table-attributes) attribute to a table or partition can prevent the merging of empty regions. However, when a partition is dropped, the regions belonging to that partition will still be merged automatically.
 
 ```sql
 -- table
