@@ -162,9 +162,14 @@ ALTER TABLE <table_name>
 ADD UNIQUE INDEX <index_name> (col1, col2) GLOBAL;
 ```
 
-- Adds a global index to an existing partitioned table.
-- GLOBAL must be explicitly specified.
-- You can also use ADD INDEX for non-unique global indexes.
+
+Adds a global index to an existing partitioned table.
+
+- The `GLOBAL` keyword must be explicitly specified.
+- For non-unique global indexes, use `ADD INDEX` instead of `ADD UNIQUE INDEX`.
+  - Not supported in v8.5.x
+  - Available starting from v9.0.0-beta.1
+  - Expected to be included in the next LTS release
 
 **Option 2: Define Inline on Table Creation**
 
