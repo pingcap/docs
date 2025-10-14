@@ -35,11 +35,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         For applications experiencing growing workloads and needing scalability in real time, TiDB Cloud Essential provides the flexibility and performance to keep pace with your business growth.
 
-        <!-- For more information, see [Essential intro blog](the link will be added here after the blog is published. -->
+        <!-- For more information, see [TiDB Cloud Essential public preview is live on AWS and Alibaba Cloud](the link will be added here after the blog is published.) -->
 
     - Database audit logging is now available in the [TiDB Cloud console](https://tidbcloud.com) for TiDB Cloud Essential and supports customizing rotation settings.
 
-        You can configure to restore database audit logs in TiDB Cloud, Amazon S3, Google Cloud Storage, Azure Blob Storage, or Alibaba Cloud OSS.
+        You can configure database audit logs to be stored in TiDB Cloud, Amazon S3, Google Cloud Storage, Azure Blob Storage, or Alibaba Cloud OSS.
 
         For more information, see [Database Audit Logging for TiDB Cloud Essential](/tidb-cloud/essential-database-audit-logging.md).
 
@@ -51,7 +51,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - The [**Metrics**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) adds the following metrics for faster diagnosis and capacity planning:
 
-        - Capacity vs Usage (RU/s): visualizes provisioned RU capacity versus actual RU consumption to spot headroom and tune autoscaling.
+        - `Capacity vs Usage (RU/s)`: visualizes provisioned RU capacity versus actual RU consumption to spot headroom and tune autoscaling.
         - `Lock-wait (P95/P99)`: monitors lock wait time percentiles to surface contention hotspots.
         - `Idle Connection Duration (P99 incl. not/in txn)`: identifies long-lived idle connections, both in-transaction and not-in-transaction, to adjust pooler limits and timeouts.
 
