@@ -619,7 +619,6 @@
         - [update](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-update.md)
         - [template](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-template.md)
       - [download](/tidb-cloud/ticloud-serverless-audit-log-download.md)
-  - [ai](/tidb-cloud/ticloud-ai.md)
   - [completion](/tidb-cloud/ticloud-completion.md)
   - config
     - [create](/tidb-cloud/ticloud-config-create.md)
