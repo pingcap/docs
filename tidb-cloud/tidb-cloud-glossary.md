@@ -135,9 +135,9 @@ The place where the data of deleted clusters with valid backups is stored. Once 
 
 A separate database that can be located in the same or different region and contains the same data. A replica is often used for disaster recovery purposes or to improve performance.
 
-### Replication Capacity Unit
+### Replication Capacity Unit (RCU)
 
-The replication of changefeed is charged according to the computing resources, which is the TiCDC replication capacity unit.
+TiDB Cloud measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Replication Capacity Units (RCUs). When you create a changefeed for a cluster, you can select an appropriate specification. The higher the RCU, the better the replication performance. You will be charged for these TiCDC changefeed RCUs. See [Changefeed Cost](https://www.pingcap.com/tidb-dedicated-pricing-details/#changefeed-cost).
 
 ### Request Unit
 
