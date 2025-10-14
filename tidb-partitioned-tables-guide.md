@@ -95,11 +95,13 @@ WHERE `fa`.`sid` IN (
 #### Findings
 
 Data came from a table with **366 range partitions** (for example, by date).
-- The **Average Query Time** was obtained from the statement_summary view.
+
+- The **Average Query Time** was obtained from the `statement_summary` view.
 - The query used a **secondary index** and returned **400 rows**.
 
 Metrics collected:
-- **Average Query Time**: from statement_summary
+
+- **Average Query Time**: from `statement_summary`
 - **Cop Tasks** (Index Scan + Table Lookup): from execution plan
 
 #### Test Results
