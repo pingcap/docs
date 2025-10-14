@@ -216,10 +216,10 @@ To compare the performance of TTL and partition drop, we configured TTL to execu
 
 **TTL Performance:**
 
-    - On a write-heavy table, TTL runs every 10 minutes.
-    - With 50 threads, each TTL job took 8—10 minutes, deleted 7—11 million rows.
-    - With 100 threads, it handled up to 20 million rows, but execution time increased to 15—30 minutes, with greater variance.
-    - TTL jobs impacted system performance under high load due to extra scanning and deletion activity, reducing overall QPS.
+  - On a write-heavy table, TTL runs every 10 minutes.
+  - With 50 threads, each TTL job took 8—10 minutes, deleted 7—11 million rows.
+  - With 100 threads, it handled up to 20 million rows, but execution time increased to 15—30 minutes, with greater variance.
+  - TTL jobs impacted system performance under high load due to extra scanning and deletion activity, reducing overall QPS.
 
 **Partition Drop Performance:**
 
@@ -640,7 +640,7 @@ When working with large tables (for example in this example 120 million rows), t
 
 This section compares the efficiency and implications of these methods in both directions of conversion, and provides best practice recommendations.
 
-#### Table Schema: `fa`
+### Table Schema: `fa`
 
 ```sql
 CREATE TABLE `fa` (
@@ -663,7 +663,7 @@ PARTITION `fa_2024003` VALUES LESS THAN (2024003),
 PARTITION `fa_2024366` VALUES LESS THAN (2024366));
 ```
 
-#### Table Schema: `fa_new`
+### Table Schema: `fa_new`
 
 ```sql
 CREATE TABLE `fa` (
@@ -683,7 +683,7 @@ CREATE TABLE `fa` (
 
 These examples show converting a partitioned table to a non-partitioned table, but the same methods also work for converting a non-partitioned table to a partitioned table.
 
-### Method 1: Batch DML INSERT INTO ... SELECT ...
+### Method 1: Batch DML INSERT INTO ... SELECT
 
 ```sql
 SET tidb_mem_quota_query = 0;
@@ -691,7 +691,7 @@ INSERT INTO fa_new SELECT * FROM fa;
 -- 120 million rows copied in 1h 52m 47s
 ```
 
-### Method 2: Pipeline DML INSERT INTO ... SELECT ...
+### Method 2: Pipeline DML INSERT INTO ... SELECT
 
 ```sql
 SET tidb_dml_type = "bulk";
@@ -701,7 +701,7 @@ INSERT INTO fa_new SELECT * FROM fa;
 -- 120 million rows copied in 58m 42s
 ```
 
-### Method 3: IMPORT INTO ... FROM SELECT ...
+### Method 3: IMPORT INTO ... FROM SELECT
 
 ```sql
 mysql> import into fa_new from select * from fa with thread=32,disable_precheck;
