@@ -15,8 +15,8 @@ This document examines partitioned tables in TiDB from multiple angles, includin
 ## Agenda
 
 - Improving query efficiency
-  - Partition pruning
-  - Query performance comparison: Non-Partitioned Table vs. Local Index vs. Global Index
+    - Partition pruning
+    - Query performance comparison: Non-Partitioned Table vs. Local Index vs. Global Index
 - Facilitating bulk data deletion
   - Data cleanup efficiency: TTL vs. Direct Partition Drop
   - Partition drop efficiency: Local Index vs Global Index
