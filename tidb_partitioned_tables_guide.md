@@ -39,7 +39,7 @@ By understanding these aspects, you can make informed decisions on whether and h
 
 Partition pruning is most beneficial in scenarios where query predicates match the partitioning strategy. Common use cases include:
 
-- **Time-series data queries**: When data is partitioned by time ranges (e.g., daily, monthly), queries restricted to a specific time period can quickly skip unrelated partitions.
+- **Time-series data queries**: When data is partitioned by time ranges (for example, daily, monthly), queries restricted to a specific time period can quickly skip unrelated partitions.
 - **Multi-tenant or category-based datasets**: Partitioning by tenant ID or category enables queries to focus on a small subset of partitions.
 - **Hybrid Transactional/Analytical Processing (HTAP)**: Especially for range partitioning, TiDB can leverage partition pruning in analytical workloads on TiFlash to skip irrelevant partitions and scan only the necessary subset, preventing **full table scans** on large datasets.
 
@@ -106,7 +106,7 @@ WHERE `fa`.`sid` IN (
 
 #### Findings
 
-Data came from a table with **366 range partitions** (e.g., by date).
+Data came from a table with **366 range partitions** (for example, by date).
 - The **Average Query Time** was obtained from the statement_summary view.
 - The query used a **secondary index** and returned **400 rows**.
 
@@ -196,7 +196,7 @@ The performance overhead of partitioned tables in TiDB depends significantly on 
 - The more partitions you have, the more severe the potential performance degradation.
 - With a smaller number of partitions, the impact may not be as noticeable, but it's still workload-dependent.
 - For local indexes, if a query does not include effective partition pruning conditions, the number of partitions directly correlates with the number of RPCs triggered. This means more partitions will likely result in more RPCs, leading to higher latency.
-- For global indexes, the number of RPCs and the degree of performance regression depend on both the number of partitions involved and how many rows need to be retrieved (i.e., the number of rows requiring table lookups).
+- For global indexes, the number of RPCs and the degree of performance regression depend on both the number of partitions involved and how many rows need to be retrieved (that is, the number of rows requiring table lookups).
 
 #### Recommendation
 
@@ -625,7 +625,7 @@ show table employees2 PARTITION (p4) regions;
 
 ## Converting Between Partitioned and Non-Partitioned Tables
 
-When working with large tables (e.g. in this example 120 million rows), transforming between partitioned and non-partitioned schemas is sometimes required for performance tuning or schema design changes. TiDB supports several main approaches for such transformations:
+When working with large tables (for example in this example 120 million rows), transforming between partitioned and non-partitioned schemas is sometimes required for performance tuning or schema design changes. TiDB supports several main approaches for such transformations:
 
 1. Batch DML: `INSERT INTO ... SELECT ...`
 2. Pipeline DML: `INSERT INTO ... SELECT ...`
