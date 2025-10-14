@@ -27,7 +27,7 @@ This document examines partitioned tables in TiDB from multiple angles, includin
 
 By understanding these aspects, you can make informed decisions on whether and how to implement partitioning in your TiDB environment.
 
-> **Note:** If you're new to partitioned tables in TiDB, we recommend reviewing the [Partitioned Table User Guide](https://docs.pingcap.com/tidb/stable/partitioned-table) first to better understand key concepts like partition pruning, global vs. local indexes, and partition strategies.
+> **Note:** If you're new to partitioned tables in TiDB, we recommend reviewing the [Partitioned Table User Guide](/partitioned-table.md) first to better understand key concepts like partition pruning, global vs. local indexes, and partition strategies.
 
 ## Improving query efficiency
 
@@ -83,7 +83,7 @@ PARTITION `fa_2024002` VALUES LESS THAN (2024002),
 PARTITION `fa_2024003` VALUES LESS THAN (2024003),
 ...
 ...
-PARTITION `fa_2024366` VALUES LESS THAN (2024366))
+PARTITION `fa_2024366` VALUES LESS THAN (2024366));
 ```
 
 #### SQL
@@ -247,7 +247,7 @@ CREATE TABLE `ad_cache` (
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 TTL=`expire_time` + INTERVAL 0 DAY TTL_ENABLE='ON'
-TTL_JOB_INTERVAL='10m'
+TTL_JOB_INTERVAL='10m';
 ```
 
 **Drop Partition (Range INTERVAL partitioning)**
@@ -273,14 +273,14 @@ PARTITION BY RANGE COLUMNS (create_time)
 INTERVAL (10 MINUTE)
 FIRST PARTITION LESS THAN ('2025-02-19 18:00:00')
 ...
-LAST PARTITION LESS THAN ('2025-02-19 20:00:00')
+LAST PARTITION LESS THAN ('2025-02-19 20:00:00');
 ```
 
 It's required to run DDL alter table partition ... to change the FIRST PARTITION and LAST PARTITION periodically. These two DDL statements can drop the old partitions and create new ones.
 
 ```sql
-ALTER TABLE ad_cache FIRST PARTITION LESS THAN ("${nextTimestamp}")
-ALTER TABLE ad_cache LAST PARTITION LESS THAN ("${nextTimestamp}")
+ALTER TABLE ad_cache FIRST PARTITION LESS THAN ("${nextTimestamp}");
+ALTER TABLE ad_cache LAST PARTITION LESS THAN ("${nextTimestamp}");
 ```
 
 #### Recommendation
@@ -308,6 +308,7 @@ Dropping a partition on a table with a Global Index took **76 seconds**, while t
 
 ```sql
 ALTER TABLE A DROP PARTITION A_2024363;
+```
 
 #### Recommendation
 
@@ -374,7 +375,7 @@ PARTITION BY KEY (id) PARTITIONS 16;
 When converting a non-partitioned table to a partitioned table, TiDB creates a separate Region for each partition. This may significantly increase the total Region count. Queries that do not filter by the partition key cannot take advantage of partition pruning, forcing TiDB to scan all partitions. This increases the number of coprocessor (cop) tasks and can slow down queries. Example:
 
 ```sql
-select * from server_info where `serial_no` = ?
+select * from server_info where `serial_no` = ?;
 ```
 
 **Mitigation**: Add a **global index** on the filtering columns used by these queries to reduce scanning overhead. While creating a global index can significantly slow down DROP PARTITION operations, **hash and key partitioned tables do not support DROP PARTITION**. In practice, such partitions are rarely removed, making global indexes a feasible solution in these scenarios. Example:
@@ -414,6 +415,15 @@ However, if the initial write traffic to this new partition is **very high**, th
 
 **Impact:**
 This imbalance can cause that TiKV node to trigger **flow control**, leading to a sharp drop in QPS, a spike in write latency, and increased CPU usage on the affected node, which in turn may impact the overall read and write performance of the cluster.
+
+
+### Summary Table
+
+| Approach | Read Hotspot Risk | Write Hotspot Risk | Operational Complexity | Query Performance | Data Cleanup |
+|---|---|---|---|---|---|
+| NONCLUSTERED Partitioned | Low (with merge_option=deny) | Low (auto pre-split) | Low | Moderate (extra lookups) | Fast (DROP PARTITION) |
+| CLUSTERED Partitioned | Medium (manual intervention) | Medium (manual split) | High | High (direct access) | Fast (DROP PARTITION) |
+| CLUSTERED Non-partitioned | None | Medium (single table) | Low | High | Slow (DELETE/TTL) |
 
 #### Solutions
 
@@ -485,15 +495,15 @@ A common practice is to split the number of regions to **match** the number of T
 To split regions for the primary key of all partitions in a partitioned table, you can use a command like:
 
 ```sql
-SPLIT PARTITION TABLE employees INDEX `PRIMARY` BETWEEN (1, "1970-01-01") AND (100000, "9999-12-31") REGIONS <tikv_num * 1 or 2>;
+SPLIT PARTITION TABLE employees INDEX `PRIMARY` BETWEEN (1, "1970-01-01") AND (100000, "9999-12-31") REGIONS <number_of_regions>;
 ```
 
-This example will split each partition's primary key range into `<tikv_num * 1 or 2>` regions between the specified boundary values.
+This example will split each partition's primary key range into `<number_of_regions>` regions between the specified boundary values.
 
 **Splitting Regions for the secondary index of all partitions.**
 
 ```sql
-SPLIT PARTITION TABLE employees INDEX `idx_employees_on_store_id` BETWEEN (1) AND (1000) REGIONS <tikv_num * 1 or 2>;
+SPLIT PARTITION TABLE employees INDEX `idx_employees_on_store_id` BETWEEN (1) AND (1000) REGIONS <number_of_regions>;
 ```
 
 **(Optional) When adding a new partition, you MUST manually split regions for its primary key and indices.**
@@ -503,9 +513,9 @@ ALTER TABLE employees ADD PARTITION (PARTITION p4 VALUES LESS THAN (2011));
 
 SHOW TABLE employees PARTITION (p4) regions;
 
-SPLIT PARTITION TABLE employees INDEX `PRIMARY` BETWEEN (1, "2006-01-01") AND (100000, "2011-01-01") REGIONS <tikv num * 1 or 2>;
+SPLIT PARTITION TABLE employees INDEX `PRIMARY` BETWEEN (1, "2006-01-01") AND (100000, "2011-01-01") REGIONS <number_of_regions>;
 
-SPLIT PARTITION TABLE employees PARTITION (p4) INDEX `idx_employees2_on_store_id` BETWEEN (1) AND (1000) REGIONS <tikv num * 1 or 2>;
+SPLIT PARTITION TABLE employees PARTITION (p4) INDEX `idx_employees2_on_store_id` BETWEEN (1) AND (1000) REGIONS <number_of_regions>;
 
 SHOW TABLE employees PARTITION (p4) regions;
 ```
@@ -572,13 +582,13 @@ A common practice is to split the number of regions to **match** the number of T
 **Splitting regions for all partitions**
 
 ```sql
-SPLIT PARTITION TABLE employees2 BETWEEN (1,"1970-01-01") AND (100000,"9999-12-31") REGIONS <tikv_num * 1 or 2>;
+SPLIT PARTITION TABLE employees2 BETWEEN (1,"1970-01-01") AND (100000,"9999-12-31") REGIONS <number_of_regions>;
 ```
 
 **Splitting regions for the secondary index of all partitions.**
 
 ```sql
-SPLIT PARTITION TABLE employees2 INDEX `idx_employees2_on_store_id` BETWEEN (1) AND (1000) REGIONS <tikv_num * 1 or 2>;
+SPLIT PARTITION TABLE employees2 INDEX `idx_employees2_on_store_id` BETWEEN (1) AND (1000) REGIONS <number_of_regions>;
 ```
 
 **(Optional) When adding a new partition, you MUST manually split regions for the specific partition and its indices.**
@@ -588,9 +598,9 @@ ALTER TABLE employees2 ADD PARTITION (PARTITION p4 VALUES LESS THAN (2011));
 
 show table employees2 PARTITION (p4) regions;
 
-SPLIT PARTITION TABLE employees2 PARTITION (p4) BETWEEN (1,"2006-01-01") AND (100000,"2011-01-01") REGIONS <tikv_num * 1 or 2>;
+SPLIT PARTITION TABLE employees2 PARTITION (p4) BETWEEN (1,"2006-01-01") AND (100000,"2011-01-01") REGIONS <number_of_regions>;
 
-SPLIT PARTITION TABLE employees2 PARTITION (p4) INDEX `idx_employees2_on_store_id` BETWEEN (1) AND (1000) REGIONS <tikv_num * 1 or 2>;
+SPLIT PARTITION TABLE employees2 PARTITION (p4) INDEX `idx_employees2_on_store_id` BETWEEN (1) AND (1000) REGIONS <number_of_regions>;
 
 show table employees2 PARTITION (p4) regions;
 ```
@@ -607,13 +617,6 @@ show table employees2 PARTITION (p4) regions;
 **Recommendation:**
 - Best suited for use cases that require stable performance and do not benefit from partition-based data management.
 
-### Summary Table
-
-| Approach | Read Hotspot Risk | Write Hotspot Risk | Operational Complexity | Query Performance | Data Cleanup |
-|---|---|---|---|---|---|
-| NONCLUSTERED Partitioned | Low (with merge_option=deny) | Low (auto pre-split) | Low | Moderate (extra lookups) | Fast (DROP PARTITION) |
-| CLUSTERED Partitioned | Medium (manual intervention) | Medium (manual split) | High | High (direct access) | Fast (DROP PARTITION) |
-| CLUSTERED Non-partitioned | None | Medium (single table) | Low | High | Slow (DELETE/TTL) |
 
 ## Converting Between Partitioned and Non-Partitioned Tables
 
@@ -625,8 +628,6 @@ When working with large tables (e.g. in this example 120 million rows), transfor
 4. Online DDL: Direct schema transformation via `ALTER TABLE`
 
 This section compares the efficiency and implications of these methods in both directions of conversion, and provides best practice recommendations.
-
-### Method 1: Batch DML INSERT INTO ... SELECT ...
 
 #### Table Schema: `fa`
 ```sql
@@ -647,7 +648,7 @@ PARTITION `fa_2024002` VALUES LESS THAN (2024002),
 PARTITION `fa_2024003` VALUES LESS THAN (2024003),
 ...
 ...
-PARTITION `fa_2024366` VALUES LESS THAN (2024366))
+PARTITION `fa_2024366` VALUES LESS THAN (2024366));
 ```
 
 
@@ -663,13 +664,12 @@ CREATE TABLE `fa` (
   KEY `index_fa_on_sid` (`sid`),
   KEY `index_fa_on_account_id` (`account_id`),
   KEY `index_fa_on_user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 ```
 
 #### Description
-Supports bi-directional import, suitable for very large datasets.
-### Method 1: By Default
+This example shows converting a partitioned table to a non-partitioned table, but the same methods also work for converting a non-partitioned table to a partitioned table.
+### Method 1: Batch DML INSERT INTO ... SELECT ...
 
 ```sql
 SET tidb_mem_quota_query = 0;
@@ -703,8 +703,7 @@ Records: 120000000, ID: c1d04eec-fb49-49bb-af92-bf3d6e2d3d87
 ```sql
 SET @@global.tidb_ddl_reorg_worker_cnt = 16;
 SET @@global.tidb_ddl_reorg_batch_size = 4096;
-
-mysql> alter table fa REMOVE PARTITIONING;
+alter table fa REMOVE PARTITIONING;
 -- real 170m12.024s (≈ 2h 50m)
 ```
 
@@ -737,4 +736,4 @@ Query OK, 0 rows affected, 1 warning (2 hours 31 min 57.05 sec)
 
 TiDB offers two approaches for converting tables between partitioned and non-partitioned states:
 
-In this experiment, the table structures have been anonymized. For more detailed information on the usage of [TTL (Time To Live)](/time-to-live.md).
+Choose an offline method like [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) when your system can accommodate a maintenance window, as it delivers much better performance. Use online DDL only when zero downtime is a strict requirement.
