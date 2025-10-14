@@ -6,7 +6,7 @@ Partitioned tables in TiDB offer a versatile approach to managing large datasets
 
 A common use case is **range partitioning combined with local indexes**, which enables efficient historical data cleanup through operations like [`ALTER TABLE ... DROP PARTITION`](/sql-statements/sql-statement-alter-table.md). This method not only removes obsolete data almost instantly but also retains high query efficiency when filtering by the partition key. However, after migrating from non-partitioned to partitioned tables, queries that cannot benefit from partition pruning—such as those lacking partition key filters—may experience degraded performance. In such cases, [**global indexes**](https://docs.pingcap.com/tidb/stable/partitioned-table/#global-indexes) can be introduced to mitigate the performance impact by providing a unified index structure across all partitions.
 
-Another frequent scenario is using **hash or key partitioning** to address write hotspot issues, especially in workloads relying on [AUTO_INCREMENT-style IDs](/auto-increment.md) where sequential inserts can overload specific TiKV regions. Distributing writes across partitions helps balance load, but similar to range partitioning, queries without partition-pruning conditions may suffer performance drawbacks—again, a situation where global indexes can help.
+Another frequent scenario is using **hash or key partitioning** to address write hotspot issues, especially in workloads relying on [AUTO_INCREMENT-style IDs](/autoincrement.md) where sequential inserts can overload specific TiKV regions. Distributing writes across partitions helps balance load, but similar to range partitioning, queries without partition-pruning conditions may suffer performance drawbacks—again, a situation where global indexes can help.
 
 While partitioning offers clear benefits, it also presents **common challenges**, such as **hotspots caused by newly created range partitions**. To address this, TiDB provides techniques for automatic or manual region pre-splitting, ensuring balanced data distribution and avoiding bottlenecks.
 
@@ -225,8 +225,7 @@ To compare the performance of TTL and partition drop, we configured TTL to execu
 
 **Partition Drop Performance:**
 - DROP PARTITION removes an entire data segment instantly, with minimal resource usage.
-- `ALTER TABLE ... DROP PARTITION` removes an entire data segment instantly, with minimal resource usage.
-- `ALTER TABLE ... DROP PARTITION` is a metadata-level operation, making it much faster and more predictable than TTL, especially when managing large volumes of historical data.
+- DROP PARTITION is a metadata-level operation, making it much faster and more predictable than TTL, especially when managing large volumes of historical data.
 
 #### How to Use TTL and Partition Drop in TiDB
 
@@ -323,7 +322,7 @@ If you need to drop partitions frequently and minimize the performance impact on
 
 In TiDB, **write hotspots** occur when incoming write traffic is unevenly distributed across Regions.
 
-This is common when the primary key is **monotonically increasing**—for example, an `AUTO_INCREMENT` primary key with `AUTO_ID_CACHE=1`, or secondary index on datetime column with default value set to `CURRENT_TIMESTAMP`—because new rows and index entries are always appended to the "rightmost" Region. Over time, this can lead to:
+This is common when the primary key is **monotonically increasing**—for example, an AUTO_INCREMENT primary key with AUTO_ID_CACHE=1, or secondary index on datetime column with default value set to CURRENT_TIMESTAMP—because new rows and index entries are always appended to the "rightmost" Region. Over time, this can lead to:
 
 - A single Region handling most of the write workload, while other Regions remain idle.
 - Higher write latency and reduced throughput.
@@ -464,7 +463,7 @@ PARTITION BY RANGE ( YEAR(hired) ) (
 );
 ```
 
-Adding the [merge_option=deny](/table-attributes.md#control-the-region-merge-behavior-using-table-attributes) attribute to a table or partition can prevent the merging of empty regions. However, when a partition is dropped, the regions belonging to that partition will still be merged automatically.
+Adding the [merge_option=deny](https://docs.pingcap.com/tidb/stable/table-attributes/#control-the-region-merge-behavior-using-table-attributes) attribute to a table or partition can prevent the merging of empty regions. However, when a partition is dropped, the regions belonging to that partition will still be merged automatically.
 
 ```sql
 -- table
@@ -669,7 +668,7 @@ CREATE TABLE `fa` (
 ```
 
 #### Description
-This example shows converting a partitioned table to a non-partitioned table, but the same methods also work for converting a non-partitioned table to a partitioned table.
+These examples show converting a partitioned table to a non-partitioned table, but the same methods also work for converting a non-partitioned table to a partitioned table.
 ### Method 1: Batch DML INSERT INTO ... SELECT ...
 
 ```sql
