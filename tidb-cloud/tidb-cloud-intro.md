@@ -96,6 +96,12 @@ TiDB Cloud provides the following deployment options:
 
     </CustomContent>
 
+    <CustomContent language="ja">
+
+    Currently, {{{ .essential }}} is in public preview on AWS.
+
+    </CustomContent>
+
 - TiDB Cloud Dedicated
 
     TiDB Cloud Dedicated is designed for mission-critical businesses, offering high availability across multiple availability zones, horizontal scaling, and full [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) capabilities.
