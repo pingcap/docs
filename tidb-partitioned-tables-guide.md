@@ -143,6 +143,7 @@ Metrics collected:
 | IndexRangeScan_5(Build)| 398.73  | 90633.73  | 400     | cop[tikv] | table:fa, index:index_fa_on_sid(sid) | time:10.8ms, loops:800, cop_task:{num:600, max:65.6ms, min:1.02ms, avg:22.2ms, p95:45.1ms, max_proc_keys:5, p95_proc_keys:3, tot_proc:6.81s, tot_wait:4.77s, copr_cache_hit_ratio:0.00, build_task_duration:172.8ms, max_distsql_concurrency:3}, rpc_info:{Cop:{num_rpc:600, total_time:13.3s}}, tikv_task:{proc max:54ms, min:0s, avg:13.9ms, p80:20ms, p95:30ms, iters:600, tasks:600}, scan_detail:{total_process_keys:400, total_process_keys_size:22800, total_keys:29680, get_snapshot_time:2.47s, rocksdb:{key_skipped_count:400, block:{cache_hit_count:117580, read_count:29437, read_byte:104.9 MB, read_time:3.24s}}}, time_detail:{total_process_time:6.81s, total_suspend_time:1.51s, total_wait_time:4.77s, total_kv_read_wall_time:8.31s, tikv_wall_time:13.2s}} | range:[1696125963161,...,1696317134004], keep order:false, stats:partial[...] | N/A | N/A |
 | TableRowIDScan_6(Probe)| 398.73  | 165221.49 | 400     | cop[tikv] | table:fa                             | time:514ms, loops:434, cop_task:{num:375, max:31.6ms, min:0s, avg:1.33ms, p95:1.67ms, max_proc_keys:2, p95_proc_keys:2, tot_proc:220.7ms, tot_wait:242.2ms, copr_cache_hit_ratio:0.00, build_task_duration:27.8ms, max_distsql_concurrency:1, max_extra_concurrency:1, store_batch_num:69}, rpc_info:{Cop:{num_rpc:306, total_time:495.5ms}}, tikv_task:{proc max:6ms, min:0s, avg:597.3µs, p80:1ms, p95:1ms, iters:375, tasks:375}, scan_detail:{total_process_keys:400, total_process_keys_size:489856, total_keys:800, get_snapshot_time:158.3ms, rocksdb:{key_skipped_count:400, block:{cache_hit_count:3197, read_count:803, read_byte:10.2 MB, read_time:113.5ms}}}, time_detail:{total_process_time:220.7ms, total_suspend_time:5.39ms, total_wait_time:242.2ms, total_kv_read_wall_time:224ms, tikv_wall_time:430.5ms}} | keep order:false, stats:partial[...] | N/A | N/A |
 ```
+
 [Similar detailed execution plans for partitioned tables with global and local indexes would follow...]
 
 #### How to Create a Global Index on a Partitioned Table in TiDB
@@ -154,14 +155,13 @@ ALTER TABLE <table_name>
 ADD UNIQUE INDEX <index_name> (col1, col2) GLOBAL;
 ```
 
-
 Adds a global index to an existing partitioned table.
 
 - The `GLOBAL` keyword must be explicitly specified.
 - For non-unique global indexes, use `ADD INDEX` instead of `ADD UNIQUE INDEX`.
-  - Not supported in v8.5.x
-  - Available starting from v9.0.0-beta.1
-  - Expected to be included in the next LTS release
+    - Not supported in v8.5.x
+    - Available starting from v9.0.0-beta.1
+    - Expected to be included in the next LTS release
 
 **Option 2: Define Inline on Table Creation**
 
@@ -215,10 +215,10 @@ To compare the performance of TTL and partition drop, we configured TTL to execu
 #### Findings
 
 **TTL Performance:**
-- On a write-heavy table, TTL runs every 10 minutes.
-- With 50 threads, each TTL job took 8—10 minutes, deleted 7—11 million rows.
-- With 100 threads, it handled up to 20 million rows, but execution time increased to 15—30 minutes, with greater variance.
-- TTL jobs impacted system performance under high load due to extra scanning and deletion activity, reducing overall QPS.
+ - On a write-heavy table, TTL runs every 10 minutes.
+ - With 50 threads, each TTL job took 8—10 minutes, deleted 7—11 million rows.
+ - With 100 threads, it handled up to 20 million rows, but execution time increased to 15—30 minutes, with greater variance.
+ - TTL jobs impacted system performance under high load due to extra scanning and deletion activity, reducing overall QPS.
 
 **Partition Drop Performance:**
 
