@@ -1,5 +1,5 @@
 # Best Practices for Using TiDB Partitioned Tables
-
+This guide introduces how to use partitioned tables in TiDB to improve performance, simplify data management, and handle large-scale datasets efficiently.
 ## Introduction
 
 Partitioned tables in TiDB offer a versatile approach to managing large datasets, improving query efficiency, facilitating bulk data deletion, and alleviating write hotspot issues. By dividing data into logical segments, TiDB can leverage **partition pruning** to skip irrelevant data during query execution, reducing resource consumption and accelerating performance—particularly in OLAP workloads with massive datasets.
@@ -10,24 +10,9 @@ Another frequent scenario is using **hash or key partitioning** to address write
 
 While partitioning offers clear benefits, it also presents **common challenges**, such as **hotspots caused by newly created range partitions**. To address this, TiDB provides techniques for automatic or manual region pre-splitting, ensuring balanced data distribution and avoiding bottlenecks.
 
-This document examines partitioned tables in TiDB from multiple angles, including query optimization, data cleanup, write scalability, and index management. Through detailed scenarios and best practices, it aims to equip you with the knowledge to make informed decisions about when and how to adopt partitioning strategies in your TiDB environment.
+This document examines partitioned tables in TiDB from multiple angles, including query optimization, data cleanup, write scalability, and index management. Through detailed scenarios and best practices, it provides practical guidance on optimizing partitioned table design and performance tuning in TiDB.  
 
-## Agenda
-
-- Improving query efficiency
-    - Partition pruning
-    - Query performance comparison: Non-Partitioned Table vs. Local Index vs. Global Index
-- Facilitating bulk data deletion
-  - Data cleanup efficiency: TTL vs. Direct Partition Drop
-  - Partition drop efficiency: Local Index vs Global Index
-- Mitigating write hotspot issues
-- Partition management challenge
-  - How to avoid hotspots caused by new range partitions
-- Converting between partitioned and non-partitioned tables
-
-By understanding these aspects, you can make informed decisions on whether and how to implement partitioning in your TiDB environment.
-
-> **Note:** If you're new to partitioned tables in TiDB, we recommend reviewing the [Partitioned Table User Guide](/partitioned-table.md) first to better understand key concepts like partition pruning, global vs. local indexes, and partition strategies.
+> **Note:** To get started with the fundamentals, refer to the [Partitioned Table User Guide](/partitioned-table.md), which explains key concepts such as partition pruning, index types, and partitioning methods.
 
 ## Improving query efficiency
 
