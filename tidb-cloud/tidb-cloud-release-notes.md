@@ -51,11 +51,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - The [**Metrics**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) adds the following metrics for faster diagnosis and capacity planning:
 
-        - `Capacity vs Usage (RU/s)`: visualizes provisioned RU capacity versus actual RU consumption to spot headroom and tune autoscaling.
+        - `Capacity vs Usage (RU/s)`: visualizes provisioned Request Unit (RU) capacity versus actual RU consumption to spot headroom and tune autoscaling.
         - `Lock-wait (P95/P99)`: monitors lock wait time percentiles to surface contention hotspots.
         - `Idle Connection Duration (P99 incl. not/in txn)`: identifies long-lived idle connections, both in-transaction and not-in-transaction, to adjust pooler limits and timeouts.
 
-        For more information, see [TiDB Cloud Built-in Metrics](/tidb-cloud/built-in-monitoring.md)
+      For more information, see [TiDB Cloud Built-in Metrics](/tidb-cloud/built-in-monitoring.md).
 
 ## September 30, 2025
 
