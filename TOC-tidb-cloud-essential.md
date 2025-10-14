@@ -608,6 +608,18 @@
       - [delete](/tidb-cloud/ticloud-serverless-authorized-network-delete.md)
       - [list](/tidb-cloud/ticloud-serverless-authorized-network-list.md)
       - [update](/tidb-cloud/ticloud-serverless-authorized-network-update.md)
+    - audit-log
+      - config
+        - [update](/tidb-cloud/ticloud-serverless-audit-log-config-update.md)
+        - [describe](/tidb-cloud/ticloud-serverless-audit-log-config-describe.md)
+      - filter-rule
+        - [create](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-create.md)
+        - [delete](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-delete.md)
+        - [describe](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-describe.md)
+        - [list](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-list.md)
+        - [update](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-update.md)
+        - [template](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-template.md)
+      - [download](/tidb-cloud/ticloud-serverless-audit-log-download.md)
   - [completion](/tidb-cloud/ticloud-completion.md)
   - config
     - [create](/tidb-cloud/ticloud-config-create.md)
