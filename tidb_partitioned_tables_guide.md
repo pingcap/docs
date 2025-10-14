@@ -15,8 +15,8 @@ This document examines partitioned tables in TiDB from multiple angles, includin
 ## Agenda
 
 - Improving query efficiency
-  - Partition pruning
-  - Query performance comparison: Non-Partitioned Table vs. Local Index vs. Global Index
+    - Partition pruning
+    - Query performance comparison: Non-Partitioned Table vs. Local Index vs. Global Index
 - Facilitating bulk data deletion
   - Data cleanup efficiency: TTL vs. Direct Partition Drop
   - Partition drop efficiency: Local Index vs Global Index
@@ -52,6 +52,7 @@ In TiDB, local indexes are the default for partitioned tables. Each partition ha
 #### What Did We Test
 
 We evaluated query performance across three table configurations in TiDB:
+
 - Non-Partitioned Table
 - Partitioned Table with Global Index
 - Partitioned Table with Local Index
