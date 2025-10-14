@@ -20,6 +20,8 @@ To avoid this risk, it is recommended to set a root password during deployment:
 - For deployments using TiUP, refer to [Deploy TiDB Cluster Using TiUP](/production-deployment-using-tiup.md#step-7-start-a-tidb-cluster) to generate a random password for the root user.
 - For deployments using TiDB Operator, refer to [Set initial account and password](https://docs.pingcap.com/tidb-in-kubernetes/stable/initialize-a-cluster#set-initial-account-and-password) to set the root password.
 
+You can also use the [`--initialize-secure`](/command-line-flags-for-tidb-configuration.md#--initialize-secure) option to restrict network access for the initial root user.
+
 ## Enable password complexity checks
 
 By default, TiDB does not enforce password complexity policies, which might lead to the use of weak or empty passwords, increasing security risks.
@@ -64,7 +66,7 @@ By default, TiDB Dashboard is designed for trusted users. The default port inclu
 
 By default, TiDB installation includes several privileged interfaces for inter-component communication. These ports typically do not need to be accessible to users, because they are primarily for internal communication. Exposing these ports on public networks increases the attack surface, violates the principle of least privilege, and raises the risk of security vulnerabilities. The following table lists the default listening ports in a TiDB cluster:
 
-| Component                | Default port | Protocol       |
+| Component         | Default port| Protocol   |
 |-------------------|-------------|------------|
 | TiDB              | 4000        | MySQL      |
 | TiDB              | 10080       | HTTP       |
@@ -76,10 +78,10 @@ By default, TiDB installation includes several privileged interfaces for inter-c
 | TiFlash           | 20170       | Protocol   |
 | TiFlash           | 20292       | HTTP       |
 | TiFlash           | 8234        | HTTP       |
-| TiFlow            |  8261 | HTTP  |
-| TiFlow            |  8291 | HTTP  |
-| TiFlow            |  8262     | HTTP  |
-| TiFlow            |  8300    | HTTP       |
+| DM master         | 8261        | HTTP       |
+| DM master         | 8291        | HTTP       |
+| DM worker         | 8262        | HTTP       |
+| TiCDC             | 8300        | HTTP       |
 | TiDB Lightning    | 8289        | HTTP       |
 | TiDB Operator     | 6060        | HTTP       |
 | TiDB Dashboard    | 2379        | HTTP       |
@@ -98,7 +100,7 @@ By default, TiDB installation includes several privileged interfaces for inter-c
 | AlertManager      | 9093        | HTTP       |
 | AlertManager      | 9094        | Protocol   |
 | Node Exporter     | 9100        | HTTP       |
-| Blackbox Exporter | 9115       | HTTP       |
+| Blackbox Exporter | 9115        | HTTP       |
 | NG Monitoring     | 12020       | HTTP       |
 
 It is recommended to only expose the `4000` port for the database and the `9000` port for the Grafana dashboard to ordinary users, while restricting access to other ports using network security policies or firewalls. The following is an example of using `iptables` to restrict port access:

@@ -161,7 +161,9 @@
       - [Subscribe via Slack](/tidb-cloud/monitor-alert-slack.md)
       - [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
     - [Cluster Events](/tidb-cloud/tidb-cloud-events.md)
-    - [Third-Party Metrics Integrations](/tidb-cloud/third-party-monitoring-integrations.md)
+    - Third-Party Metrics Integrations
+      - [Overview](/tidb-cloud/third-party-monitoring-integrations.md)
+      - [Migrate Datadog and New Relic Integrations](/tidb-cloud/migrate-metrics-integrations.md)
     - [TiDB Cloud Clinic](/tidb-cloud/tidb-cloud-clinic.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
@@ -242,6 +244,7 @@
     - [Import Sample Data (SQL Files) from Cloud Storage](/tidb-cloud/import-sample-data.md)
     - [Import CSV Files from Cloud Storage](/tidb-cloud/import-csv-files.md)
     - [Import Parquet Files from Cloud Storage](/tidb-cloud/import-parquet-files.md)
+    - [Import Snapshot Files from Cloud Storage](/tidb-cloud/import-snapshot-files.md)
     - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli.md)
   - Reference
     - [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/dedicated-external-storage.md)
@@ -312,6 +315,7 @@
   - [Failover and Reprotect Databases](/tidb-cloud/recovery-group-failover.md)
   - [Delete a Recovery Group](/tidb-cloud/recovery-group-delete.md)
 - Security
+  - [Security Overview](/tidb-cloud/security-overview.md)
   - Identity Access Control
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
     - [Standard SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md)
@@ -326,7 +330,8 @@
     - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
     - [TLS Connections to TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
   - Data Access Control
-    - [Encryption at Rest Using Customer-Managed Encryption Keys](/tidb-cloud/tidb-cloud-encrypt-cmek.md)
+    - [Encryption at Rest Using Customer-Managed Encryption Keys on AWS](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)
+    - [Encryption at Rest Using Customer-Managed Encryption Keys on Azure](/tidb-cloud/tidb-cloud-encrypt-cmek-azure.md)
     - [User-Controlled Log Redaction](/tidb-cloud/tidb-cloud-log-redaction.md)
   - Database Access Control
     - [Configure Cluster Password Settings](/tidb-cloud/configure-security-settings.md)
@@ -770,3 +775,7 @@
   - [[2023-11-14] TiDB Cloud Dedicated Scale Feature Maintenance Notification](/tidb-cloud/notification-2023-11-14-scale-feature-maintenance.md)
   - [[2023-09-26] TiDB Cloud Console Maintenance Notification](/tidb-cloud/notification-2023-09-26-console-maintenance.md)
   - [[2023-08-31] TiDB Cloud Console Maintenance Notification](/tidb-cloud/notification-2023-08-31-console-maintenance.md)
+
+## _BUILD_ALLOWLIST
+
+- [Manage Database Users and Roles](/tidb-cloud/configure-sql-users.md)

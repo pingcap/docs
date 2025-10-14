@@ -2681,8 +2681,8 @@ TiKV MVCC in-memory engine (IME) configuration items related to the storage laye
 > + After the in-memory engine is enabled, `block-cache.capacity` automatically decreases by 10%.
 > + If you manually configure `capacity`, `block-cache.capacity` does not automatically decrease. In this case, you need to manually adjust its value to avoid OOM.
 
-+ Controls the maximum memory size that the in-memory engine can use. The maximum value is 5 GiB. You can manually configure it to use more memory.
-+ Default value: 10% of the system memory.
++ Controls the maximum memory size that the [TiKV MVCC in-memory engine](/tikv-in-memory-engine.md) can use. The memory capacity determines the number of Regions that can be cached. When the capacity is full, the in-memory engine loads new Regions and evicts cached Regions based on the redundancy of Region MVCC.
++ Default value: `min(10% of the total system memory, 5 GiB)`
 
 ### `gc-run-interval` <span class="version-mark">New in v8.5.0</span>
 
