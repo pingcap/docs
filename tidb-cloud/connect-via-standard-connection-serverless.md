@@ -28,7 +28,7 @@ To connect to a {{{ .starter }}} or {{{ .essential }}} cluster via public endpoi
     > - Keeping the connection type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to {{{ .starter }}} or Essential](/tidb-cloud/secure-connections-to-serverless-clusters.md).
     > - If you choose **Private Endpoint** in the **Connection Type** drop-down list, it means that the connection is via private endpoint. For more information, see the following documents:
     >
-    >     - [Connect to {{{ .starter }}} via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+    >     - [Connect to {{{ .starter }}} or Essential via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
     >     - [Connect to {{{ .starter }}} or Essential via Alibaba Cloud Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
 
     </CustomContent>
@@ -38,7 +38,7 @@ To connect to a {{{ .starter }}} or {{{ .essential }}} cluster via public endpoi
     > **Note:**
     >
     > - Keeping the connection type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to {{{ .starter }}} or Essential](/tidb-cloud/secure-connections-to-serverless-clusters.md).
-    > - If you choose **Private Endpoint** in the **Connection Type** drop-down list, it means that the connection is via private endpoint. For more information, see [Connect to {{{ .starter }}} via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
+    > - If you choose **Private Endpoint** in the **Connection Type** drop-down list, it means that the connection is via private endpoint. For more information, see [Connect to {{{ .starter }}} or Essential via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
 
     </CustomContent>
 

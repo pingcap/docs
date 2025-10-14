@@ -43,7 +43,7 @@ For {{{ .starter }}} or {{{ .essential }}}, your clients can connect to clusters
 
 - To connect to a {{{ .starter }}} or {{{ .essential }}} cluster via private endpoint, refer to the following documents to set up a private endpoint first and deploy the replication instance in private subnets.
 
-    - [Connect to {{{ .starter }}} via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+    - [Connect to {{{ .starter }}} or Essential via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
     - [Connect to {{{ .starter }}} or Essential via Alibaba Cloud Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
 
 </CustomContent>
@@ -56,7 +56,7 @@ For {{{ .starter }}} or {{{ .essential }}}, your clients can connect to clusters
 
     - Deploy the replication instance in private subnets and route traffic in the private subnets to public subnets. In this case, you need at least three subnets, two private subnets, and one public subnet. The two private subnets form a subnet group where the replication instance lives. Then you need to create a NAT gateway in the public subnet and route traffic of the two private subnets to the NAT gateway. For more information, see [Access the internet from a private subnet](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access).
 
-- To connect to a {{{ .starter }}} or {{{ .essential }}} cluster via private endpoint, refer to [Connect to {{{ .starter }}} via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) to set up a private endpoint first and deploy the replication instance in private subnets.
+- To connect to a {{{ .starter }}} or {{{ .essential }}} cluster via private endpoint, refer to [Connect to {{{ .starter }}} or Essential via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) to set up a private endpoint first and deploy the replication instance in private subnets.
 
 </CustomContent>
 
