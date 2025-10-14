@@ -52,6 +52,7 @@ In TiDB, local indexes are the default for partitioned tables. Each partition ha
 #### What Did We Test
 
 We evaluated query performance across three table configurations in TiDB:
+
 - Non-Partitioned Table
 - Partitioned Table with Global Index
 - Partitioned Table with Local Index
