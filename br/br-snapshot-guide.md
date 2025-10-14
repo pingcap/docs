@@ -151,6 +151,7 @@ When you perform a snapshot backup, BR backs up system tables as tables with the
 - Starting from BR v5.1.0, when you back up snapshots, BR automatically backs up the **system tables** in the `mysql` schema, but does not restore these system tables by default.
 - Starting from v6.2.0, BR lets you specify `--with-sys-table` to restore **data in some system tables**.
 - Starting from v7.6.0, BR enables `--with-sys-table` by default, which means that BR restores **data in some system tables** by default.
+- Starting from v9.0.0, BR lets you specify `--fast-load-sys-tables` to restore system tables physically. This approach uses the `RENAME TABLE` DDL statement to atomically swap the system tables in the `__TiDB_BR_Temporary_mysql` database with the system tables in the `mysql` database. Unlike the logical restoration of system tables using the `REPLACE INTO` SQL statement, physical restoration completely overwrites the existing data in the system tables.
 
 **BR can restore data in the following system tables:**
 
@@ -263,7 +264,7 @@ The impact of backup on cluster performance can be reduced by limiting the backu
 ### Performance and impact of snapshot restore
 
 - During data restore, TiDB tries to fully utilize the TiKV CPU, disk IO, and network bandwidth resources. Therefore, it is recommended to restore the backup data on an empty cluster to avoid affecting the running applications.
-- The speed of restoring backup data is much related with the cluster configuration, deployment, and running applications. In internal tests, the restore speed of a single TiKV node can reach 100 MiB/s. The performance and impact of snapshot restore are varied in different user scenarios and should be tested in actual environments.
+- The speed of restoring backup data is much related with the cluster configuration, deployment, and running applications. The performance and impact of snapshot restore are varied in different user scenarios and should be tested in actual environments.
 - BR provides a coarse-grained Region scattering algorithm to accelerate Region restore in large-scale Region scenarios. This algorithm ensures that each TiKV node receives stable and evenly distributed download tasks, thus fully utilizing the resources of each TiKV node and achieving a rapid parallel recovery. In several real-world cases, the snapshot restore speed of the cluster is improved by about 3 times in large-scale Region scenarios.
 - Starting from v8.0.0, the `br` command-line tool introduces the `--tikv-max-restore-concurrency` parameter to control the maximum number of files that BR downloads and ingests per TiKV node. By configuring this parameter, you can also control the maximum length of the job queue (the maximum length of the job queue = 32 \* the number of TiKV nodes \* `--tikv-max-restore-concurrency`), thereby controlling the memory consumption of the BR node.
 

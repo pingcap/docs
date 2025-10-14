@@ -44,7 +44,7 @@ Consider an application that handles both transaction and BI workloads. To preve
 5. Optional: For storage layer isolation, configure [Placement Rules](/configure-placement-rules.md) or [Resource Control](/tidb-resource-control-ru-groups.md).
 6. Direct transaction and BI clients to connect to their respective virtual IP addresses.
 
-<img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-balance-label.png" alt="Label-based Load Balancing" width="600" />
+<img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-balance-label-v2.png" alt="Label-based Load Balancing" width="600" />
 
 Example configuration for this topology:
 
@@ -56,7 +56,7 @@ server_configs:
   tiproxy:
     balance.label-name: "app"
   tidb:
-    graceful-wait-before-shutdown: 15
+    graceful-wait-before-shutdown: 30
 
 tiproxy_servers:
   - host: tiproxy-host-1
@@ -161,7 +161,7 @@ component_versions:
   tiproxy: "v1.1.0"
 server_configs:
   tidb:
-    graceful-wait-before-shutdown: 15
+    graceful-wait-before-shutdown: 30
 tiproxy_servers:
   - host: tiproxy-host-1
     config:

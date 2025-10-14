@@ -21,7 +21,7 @@ The parameter of the above command is described as follows:
 
 > **Note:**
 >
-> For a [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) cluster, the `count` of TiFlash replicas can only be `2`. If you set it to `1`, it will be automatically adjusted to `2` for execution. If you set it to a number larger than 2, you will get an error about the replica count.
+> For a [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) cluster, the `count` of TiFlash replicas can only be `2`. If you set it to `1`, it will be automatically adjusted to `2` for execution. If you set it to a number larger than 2, you will get an error about the replica count.
 
 If you execute multiple DDL statements on the same table, only the last statement is ensured to take effect. In the following example, two DDL statements are executed on the table `tpch50`, but only the second statement (to delete the replica) takes effect.
 
@@ -134,7 +134,12 @@ SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>
 
 </CustomContent>
 
-Before TiFlash replicas are added, each TiKV instance performs a full table scan and sends the scanned data to TiFlash as a "snapshot" to create replicas. By default, TiFlash replicas are added slowly with fewer resources usage in order to minimize the impact on the online service. If there are spare CPU and disk IO resources in your TiKV and TiFlash nodes, you can accelerate TiFlash replication by performing the following steps.
+The TiDB cluster triggers the TiFlash replica replication process when you perform any of the following operations:
+
+* Add TiFlash replicas for a table.
+* Add a new TiFlash instance, causing PD to schedule the TiFlash replicas from original instances to the new TiFlash instance.
+
+During this process, each TiKV instance performs a full table scan and sends a snapshot of the scanned data to TiFlash to create the replica. By default, to minimize the impact on TiKV and TiFlash production workloads, TiFlash adds replicas at a slower rate and uses fewer resources. If your TiKV and TiFlash nodes have sufficient CPU and disk I/O resources, you can accelerate TiFlash replication by performing the following steps.
 
 1. Temporarily increase the snapshot write speed limit for each TiKV and TiFlash instance by using the [Dynamic Config SQL statement](https://docs.pingcap.com/tidb/stable/dynamic-config):
 
@@ -146,9 +151,9 @@ Before TiFlash replicas are added, each TiKV instance performs a full table scan
 
     After executing these SQL statements, the configuration changes take effect immediately without restarting the cluster. However, since the replication speed is still restricted by the PD limit globally, you cannot observe the acceleration for now.
 
-2. Use [PD Control](https://docs.pingcap.com/tidb/stable/pd-control) to progressively ease the new replica speed limit.
+2. Use [PD Control](https://docs.pingcap.com/tidb/stable/pd-control) to progressively ease the replica scheduling speed limit.
 
-    The default new replica speed limit is 30, which means, approximately 30 Regions add TiFlash replicas every minute. Executing the following command will adjust the limit to 60 for all TiFlash instances, which doubles the original speed:
+    The default new replica speed limit is 30, which means approximately 30 Regions add or remove TiFlash replicas on one TiFlash instance every minute. Executing the following command will adjust the limit to 60 for all TiFlash instances, which doubles the original speed:
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer
@@ -160,20 +165,28 @@ Before TiFlash replicas are added, each TiKV instance performs a full table scan
     > tiup ctl:v8.5.0 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
     > ```
 
-    Within a few minutes, you will observe a significant increase in CPU and disk IO resource usage of the TiFlash nodes, and TiFlash should create replicas faster. At the same time, the TiKV nodes' CPU and disk IO resource usage increases as well.
+    If the cluster contains many Regions on the old TiFlash nodes, PD needs to rebalance them to the new TiFlash nodes. You need to adjust the `remove-peer` limit accordingly.
+
+    ```shell
+    tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 remove-peer
+    ```
+
+    Within a few minutes, you will observe a significant increase in CPU and disk IO resource usage of the TiFlash nodes, and TiFlash creates replicas faster. At the same time, the TiKV nodes' CPU and disk IO resource usage increases as well.
 
     If the TiKV and TiFlash nodes still have spare resources at this point and the latency of your online service does not increase significantly, you can further ease the limit, for example, triple the original speed:
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 90 add-peer
+    tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 90 remove-peer
     ```
 
 3. After the TiFlash replication is complete, revert to the default configuration to reduce the impact on online services.
 
-    Execute the following PD Control command to restore the default new replica speed limit:
+    Execute the following PD Control command to restore the default replica scheduling speed limit:
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 30 add-peer
+    tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 30 remove-peer
     ```
 
     Execute the following SQL statements to restore the default snapshot write speed limit:
@@ -220,47 +233,50 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
 
     Note that the `flash.proxy.labels` configuration in earlier versions cannot handle special characters in the available zone name correctly. It is recommended to use the `server.labels` in `learner_config` to configure the name of an available zone.
 
-2. After starting a cluster, specify the labels when creating replicas.
+2. After starting a cluster, specify the number of TiFlash replicas for high availability. The syntax is as follows:
 
     ```sql
-    ALTER TABLE table_name SET TIFLASH REPLICA count LOCATION LABELS location_labels;
+    ALTER TABLE table_name SET TIFLASH REPLICA count;
     ```
 
     For example:
 
     ```sql
-    ALTER TABLE t SET TIFLASH REPLICA 2 LOCATION LABELS "zone";
+    ALTER TABLE t SET TIFLASH REPLICA 2;
     ```
 
-3. PD schedules the replicas based on the labels. In this example, PD respectively schedules two replicas of the table `t` to two available zones. You can use pd-ctl to view the scheduling.
+3. PD schedules the replicas of the table `t` to different availability zones based on the `server.labels` in the TiFlash node's `learner_config` and the number (`count`) of the table's replicas, ensuring availability. For more information, see [Schedule Replicas by Topology Labels](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels/). You can use the following SQL statement to verify the distribution of a table's Regions across TiFlash nodes:
 
-    ```shell
-    > tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store
+    ```sql
+    -- Non-partitioned table
+    SELECT table_id, p.store_id, address, COUNT(p.region_id) 
+    FROM
+      information_schema.tikv_region_status r,
+      information_schema.tikv_region_peers p,
+      information_schema.tikv_store_status s
+    WHERE
+      r.db_name = 'test' 
+      AND r.table_name = 'table_to_check'
+      AND r.region_id = p.region_id 
+      AND p.store_id = s.store_id
+      AND JSON_EXTRACT(s.label, '$[0].value') = 'tiflash'
+    GROUP BY table_id, p.store_id, address;
 
-        ...
-        "address": "172.16.5.82:23913",
-        "labels": [
-          { "key": "engine", "value": "tiflash"},
-          { "key": "zone", "value": "z1" }
-        ],
-        "region_count": 4,
-
-        ...
-        "address": "172.16.5.81:23913",
-        "labels": [
-          { "key": "engine", "value": "tiflash"},
-          { "key": "zone", "value": "z1" }
-        ],
-        "region_count": 5,
-        ...
-
-        "address": "172.16.5.85:23913",
-        "labels": [
-          { "key": "engine", "value": "tiflash"},
-          { "key": "zone", "value": "z2" }
-        ],
-        "region_count": 9,
-        ...
+    -- Partitioned table
+    SELECT table_id, r.partition_name, p.store_id, address, COUNT(p.region_id)
+    FROM
+      information_schema.tikv_region_status r,
+      information_schema.tikv_region_peers p,
+      information_schema.tikv_store_status s
+    WHERE 
+      r.db_name = 'test' 
+      AND r.table_name = 'table_to_check' 
+      AND r.partition_name LIKE 'p202312%'
+      AND r.region_id = p.region_id 
+      AND p.store_id = s.store_id
+      AND JSON_EXTRACT(s.label, '$[0].value') = 'tiflash'
+    GROUP BY table_id, r.partition_name, p.store_id, address
+    ORDER BY table_id, r.partition_name, p.store_id;
     ```
 
 <CustomContent platform="tidb">
@@ -270,3 +286,7 @@ For more information about scheduling replicas by using labels, see [Schedule Re
 TiFlash supports configuring the replica selection strategy for different zones. For more information, see [`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730).
 
 </CustomContent>
+
+> **Note:**
+>
+> In the syntax `ALTER TABLE table_name SET TIFLASH REPLICA count LOCATION LABELS location_labels;`, if you specify multiple labels for `location_labels`, TiDB cannot parse them correctly to set placement rules. Therefore, do not use `LOCATION LABELS` to configure TiFlash replicas.

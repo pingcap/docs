@@ -16,6 +16,7 @@ import unicodedata
 followups = []
 in_toc = False
 contents = []
+in_allowlist = False
 
 hyper_link_pattern = re.compile(r"\[(.*?)\]\((.*?)(#.*?)?\)")
 toc_line_pattern = re.compile(r"([\-\+]+)\s\[(.*?)\]\((.*?)(#.*?)?\)")
@@ -46,7 +47,15 @@ with open(entry_file) as fp:
     for line in fp:
         if not in_toc and not line.startswith("<!-- "):
             in_toc = True
+        elif line.strip() == "## _BUILD_ALLOWLIST":
+            in_allowlist = True
+        elif in_allowlist and line.startswith("#"):
+            in_allowlist = False
         elif in_toc and not line.startswith("#") and line.strip():
+            # Skip processing if we're in the allowlist section
+            if in_allowlist:
+                continue
+
             ## get level from space length
             level_space_str = level_pattern.findall(line)[0][:-1]
             level = len(level_space_str) // 2 + 1  ## python divide get integer

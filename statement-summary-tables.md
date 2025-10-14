@@ -18,7 +18,7 @@ Therefore, starting from v4.0.0-rc.1, TiDB provides system tables in `informatio
 
 > **Note:**
 >
-> The preceding tables are not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> The preceding tables are not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 This document details these tables and introduces how to use them to troubleshoot SQL performance issues.
 
@@ -466,6 +466,11 @@ Fields related to network traffic:
 - `SUM_UNPACKED_BYTES_RECEIVED_TIFLASH_TOTAL`: total bytes received by SQL statements from TiFlash, including bytes received between TiFlash nodes.
 - `SUM_UNPACKED_BYTES_SENT_TIFLASH_CROSS_ZONE`: bytes sent from SQL statements to TiFlash across availability zones, including bytes sent between TiFlash nodes across availability zones.
 - `SUM_UNPACKED_BYTES_RECEIVED_TIFLASH_CROSS_ZONE`: bytes received by SQL statements from TiFlash across availability zones, including bytes received between TiFlash nodes across availability zones.
+
+Fields related to storage engines:
+
+- `STORAGE_KV`: introduced in v9.0.0, indicates whether the previous execution of SQL statements of this category read data from TiKV.
+- `STORAGE_MPP`: introduced in v9.0.0, indicates whether the previous execution of SQL statements of this category read data from TiFlash.
 
 ### `statements_summary_evicted` fields description
 

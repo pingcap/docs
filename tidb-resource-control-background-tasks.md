@@ -8,8 +8,12 @@ summary: Introduces how to control background tasks through Resource Control.
 > **Warning:**
 >
 > This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://docs.pingcap.com/tidb/stable/support) on GitHub.
-> 
+>
 > The background task management in resource control is based on TiKV's dynamic adjustment of resource quotas for CPU/IO utilization. Therefore, it relies on the available resource quota of each instance. If multiple components or instances are deployed on a single server, it is mandatory to set the appropriate resource quota for each instance through `cgroup`. It is difficult to achieve the expected effect in deployment with shared resources such as TiUP Playground.
+
+> **Note:**
+>
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 Background tasks, such as data backup and automatic statistics collection, are low-priority but consume many resources. These tasks are usually triggered periodically or irregularly. During execution, they consume a lot of resources, thus affecting the performance of online high-priority tasks.
 
@@ -77,11 +81,11 @@ By default, the task types that are marked as background tasks are `""`, and the
     The output is as follows:
 
     ```
-    +---------+------------+----------+-----------+-------------+-------------------------------------------+
-    | NAME    | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT | BACKGROUND                                |
-    +---------+------------+----------+-----------+-------------+-------------------------------------------+
-    | default | UNLIMITED  | MEDIUM   | YES       | NULL        | TASK_TYPES='br,ddl', UTILIZATION_LIMIT=30 |
-    +---------+------------+----------+-----------+-------------+-------------------------------------------+
+    +---------+------------+----------+-----------------+-------------+-------------------------------------------+
+    | NAME    | RU_PER_SEC | PRIORITY | BURSTABLE       | QUERY_LIMIT | BACKGROUND                                |
+    +---------+------------+----------+-----------------+-------------+-------------------------------------------+
+    | default | UNLIMITED  | MEDIUM   | UNLIMITED       | NULL        | TASK_TYPES='br,ddl', UTILIZATION_LIMIT=30 |
+    +---------+------------+----------+-----------------+-------------+-------------------------------------------+
     ```
 
 5. To explicitly mark tasks in the current session as the background type, you can use `tidb_request_source_type` to explicitly specify the task type. The following is an example:

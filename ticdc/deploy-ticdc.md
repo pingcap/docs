@@ -129,15 +129,15 @@ This section describes how to use the [`tiup cluster edit-config`](/tiup/tiup-co
 
     In the preceding command, `gc-ttl` is set to 48 hours.
 
-3. Run the `tiup cluster reload -R cdc` command to reload the configuration.
+3. Run the `tiup cluster reload <cluster-name> -R cdc` command to reload the configuration.
 
 ## Stop and start TiCDC using TiUP
 
 You can use TiUP to easily stop and start TiCDC nodes. The commands are as follows:
 
-- Stop TiCDC: `tiup cluster stop -R cdc`
-- Start TiCDC: `tiup cluster start -R cdc`
-- Restart TiCDC: `tiup cluster restart -R cdc`
+- Stop TiCDC: `tiup cluster stop <cluster-name> -R cdc`
+- Start TiCDC: `tiup cluster start <cluster-name> -R cdc`
+- Restart TiCDC: `tiup cluster restart <cluster-name> -R cdc`
 
 ## Enable TLS for TiCDC
 

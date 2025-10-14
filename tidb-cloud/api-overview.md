@@ -3,7 +3,7 @@ title: TiDB Cloud API Overview
 summary: Learn about what is TiDB Cloud API, its features, and how to use API to manage your TiDB Cloud clusters.
 ---
 
-# TiDB Cloud API Overview <span style="color: #fff; background-color: #00bfff; border-radius: 4px; font-size: 0.5em; vertical-align: middle; margin-left: 16px; padding: 0 2px;">Beta</span>
+# TiDB Cloud API Overview (Beta)
 
 > **Note:**
 >
@@ -27,6 +27,6 @@ To start using TiDB Cloud API, refer to the following resources in TiDB Cloud AP
         - [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
         - [Data Service](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)
         - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
-        - [MSP](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
+        - [MSP (Deprecated)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
     - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project)
 - [Changelog](https://docs.pingcap.com/tidbcloud/api/v1beta#section/API-Changelog)
