@@ -41,7 +41,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         You can configure database audit logs to be stored in TiDB Cloud, Amazon S3, Google Cloud Storage, Azure Blob Storage, or Alibaba Cloud OSS.
 
-        For more information, see [Database Audit Logging for TiDB Cloud Essential](/tidb-cloud/essential-database-audit-logging.md).
+        Currently, this feature is in beta. For more information, see [Database Audit Logging for TiDB Cloud Essential](/tidb-cloud/essential-database-audit-logging.md).
 
     - TiDB Cloud Essential adds a new event `ResourceLimitation` that notifies you when Request Capacity Units (RCUs) consumption of your cluster reaches the configured maximum multiple times within one hour.
 
