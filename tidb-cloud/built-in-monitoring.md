@@ -103,7 +103,7 @@ The following table illustrates the cluster-level main metrics under the **Clust
 | Failed Query | All | The number of SQL statement execution errors per second. |
 | Transaction Per Second | All | The number of transactions executed per second. |
 | Transaction Duration | Avg, P99 | The execution duration of transactions. |
-| Lock wait | P95, P99 | Time spent by transactions waiting to acquire pessimistic locks. High values indicate contention on the same rows or keys. |
+| Lock-wait | P95, P99 | Time spent by transactions waiting to acquire pessimistic locks. High values indicate contention on the same rows or keys. |
 | Total Connection | All | The number of connections to the {{{ .starter }}} or {{{ .essential }}} cluster. |
 | Idle Connection Duration | P99, P99(in-txn), P99(not-in-txn) | The time that connections remain idle while inside an open transaction. Long durations typically indicate slow application logic or long-running transactions. |
 
