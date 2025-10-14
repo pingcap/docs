@@ -215,10 +215,11 @@ To compare the performance of TTL and partition drop, we configured TTL to execu
 #### Findings
 
 **TTL Performance:**
- - On a write-heavy table, TTL runs every 10 minutes.
- - With 50 threads, each TTL job took 8—10 minutes, deleted 7—11 million rows.
- - With 100 threads, it handled up to 20 million rows, but execution time increased to 15—30 minutes, with greater variance.
- - TTL jobs impacted system performance under high load due to extra scanning and deletion activity, reducing overall QPS.
+
+    - On a write-heavy table, TTL runs every 10 minutes.
+    - With 50 threads, each TTL job took 8—10 minutes, deleted 7—11 million rows.
+    - With 100 threads, it handled up to 20 million rows, but execution time increased to 15—30 minutes, with greater variance.
+    - TTL jobs impacted system performance under high load due to extra scanning and deletion activity, reducing overall QPS.
 
 **Partition Drop Performance:**
 
@@ -227,7 +228,7 @@ To compare the performance of TTL and partition drop, we configured TTL to execu
 
 #### How to Use TTL and Partition Drop in TiDB
 
-In this experiment, the table structures have been anonymized. For more detailed information on the usage of TTL (Time To Live), please refer to the official documentation at https://docs.pingcap.com/tidb/stable/time-to-live/.
+In this experiment, the table structures have been anonymized. For more detailed information on the usage of TTL (Time To Live), please refer to the official documentation at [Periodically Delete Data Using TTL (Time to Live)](/time-to-live.md) .
 
 **TTL schema**
 
@@ -418,7 +419,6 @@ However, if the initial write traffic to this new partition is **very high**, th
 **Impact:**
 
 This imbalance can cause that TiKV node to trigger **flow control**, leading to a sharp drop in QPS, a spike in write latency, and increased CPU usage on the affected node, which in turn may impact the overall read and write performance of the cluster.
-
 
 ### Summary Table
 
@@ -629,7 +629,6 @@ show table employees2 PARTITION (p4) regions;
 
 - Best suited for use cases that require stable performance and do not benefit from partition-based data management.
 
-
 ## Converting Between Partitioned and Non-Partitioned Tables
 
 When working with large tables (for example in this example 120 million rows), transforming between partitioned and non-partitioned schemas is sometimes required for performance tuning or schema design changes. TiDB supports several main approaches for such transformations:
@@ -664,7 +663,6 @@ PARTITION `fa_2024003` VALUES LESS THAN (2024003),
 PARTITION `fa_2024366` VALUES LESS THAN (2024366));
 ```
 
-
 #### Table Schema: `fa_new`
 
 ```sql
@@ -692,7 +690,6 @@ SET tidb_mem_quota_query = 0;
 INSERT INTO fa_new SELECT * FROM fa;
 -- 120 million rows copied in 1h 52m 47s
 ```
-
 
 ### Method 2: Pipeline DML INSERT INTO ... SELECT ...
 
