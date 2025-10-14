@@ -114,7 +114,7 @@ Metrics collected:
 
 **Non-partitioned table**
 
-```yaml
+```
 | id                        | estRows | estCost   | actRows | task      | access object                        | execution info | operator info | memory   | disk |
 |---------------------------|---------|-----------|---------|-----------|--------------------------------------|----------------|---------------|----------|------|
 | IndexLookUp_7             | 398.73  | 787052.13 | 400     | root      |                                      | time:11.5ms, loops:2, index_task:{total_time:3.34ms, fetch_handle:3.34ms, build:600ns, wait:2.86µs}, table_task:{total_time:7.55ms, num:1, concurrency:5}, next:{wait_index:3.49ms, wait_table_lookup_build:492.5µs, wait_table_lookup_resp:7.05ms} |  | 706.7 KB | N/A  |
@@ -124,7 +124,7 @@ Metrics collected:
 
 **Partition table with global index**
 
-```yaml
+```
 | id                     | estRows | estCost   | actRows | task      | access object                                   | execution info | operator info | memory   | disk |
 |------------------------|---------|-----------|---------|-----------|-------------------------------------------------|----------------|---------------|----------|------|
 | IndexLookUp_8          | 398.73  | 786959.21 | 400     | root      | partition:all                                   | time:12.8ms, loops:2, index_task:{total_time:2.71ms, fetch_handle:2.71ms, build:528ns, wait:3.23µs}, table_task:{total_time:9.03ms, num:1, concurrency:5}, next:{wait_index:3.27ms, wait_table_lookup_build:1.49ms, wait_table_lookup_resp:7.53ms} |  | 693.9 KB | N/A  |
@@ -134,7 +134,7 @@ Metrics collected:
 
 **Partition table with local index**
 
-```yaml
+```
 | id                     | estRows | estCost   | actRows | task      | access object                        | execution info | operator info | memory  | disk  |
 |------------------------|---------|-----------|---------|-----------|--------------------------------------|----------------|---------------|---------|-------|
 | IndexLookUp_7          | 398.73  | 784450.63 | 400     | root      | partition:all                        | time:290.8ms, loops:2, index_task:{total_time:103.6ms, fetch_handle:7.74ms, build:133.2µs, wait:95.7ms}, table_task:{total_time:551.1ms, num:217, concurrency:5}, next:{wait_index:179.6ms, wait_table_lookup_build:391µs, wait_table_lookup_resp:109.5ms} |  | 4.30 MB | N/A  |
@@ -151,6 +151,7 @@ Metrics collected:
 ALTER TABLE <table_name>
 ADD UNIQUE INDEX <index_name> (col1, col2) GLOBAL;
 ```
+
 
 Adds a global index to an existing partitioned table.
 
