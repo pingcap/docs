@@ -225,7 +225,8 @@ To compare the performance of TTL and partition drop, we configured TTL to execu
 
 **Partition Drop Performance:**
 - DROP PARTITION removes an entire data segment instantly, with minimal resource usage.
-- DROP PARTITION is a metadata-level operation, making it much faster and more predictable than TTL, especially when managing large volumes of historical data.
+- `ALTER TABLE ... DROP PARTITION` removes an entire data segment instantly, with minimal resource usage.
+- `ALTER TABLE ... DROP PARTITION` is a metadata-level operation, making it much faster and more predictable than TTL, especially when managing large volumes of historical data.
 
 #### How to Use TTL and Partition Drop in TiDB
 
