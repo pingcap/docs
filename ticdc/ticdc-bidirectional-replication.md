@@ -159,7 +159,7 @@ After the check is completed, you can stop the changefeed to stop bi-directional
     >
     > Do not set the BDR role in other scenarios, for example, setting `PRIMARY`, `SECONDARY`, and no BDR roles at the same time. If you set the BDR role incorrectly, TiDB cannot guarantee data correctness and consistency during data replication.
 
-- Usually do not use [`AUTO_INCREMENT`](/auto-increment.md) or `AUTO_RANDOM` to avoid data conflicts in the replicated tables. If you need to use `AUTO_INCREMENT` or `AUTO_RANDOM`, you can set different `auto_increment_increment` and `auto_increment_offset` for different clusters to ensure that different clusters can be assigned different primary keys. For example, if there are three TiDB clusters (A, B, and C) in bi-directional replication, you can set them as follows:
+- Usually do not use [`AUTO_INCREMENT`](/auto-increment.md) or [`AUTO_RANDOM`](/auto-random.md) to avoid data conflicts in the replicated tables. If you need to use `AUTO_INCREMENT` or `AUTO_RANDOM`, you can set different `auto_increment_increment` and `auto_increment_offset` for different clusters to ensure that different clusters can be assigned different primary keys. For example, if there are three TiDB clusters (A, B, and C) in bi-directional replication, you can set them as follows:
 
     - In Cluster A, set `auto_increment_increment=3` and `auto_increment_offset=2000`
     - In Cluster B, set `auto_increment_increment=3` and `auto_increment_offset=2001`
