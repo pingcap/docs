@@ -375,7 +375,7 @@ PARTITION BY KEY (id) PARTITIONS 16;
 When converting a non-partitioned table to a partitioned table, TiDB creates a separate Region for each partition. This may significantly increase the total Region count. Queries that do not filter by the partition key cannot take advantage of partition pruning, forcing TiDB to scan all partitions. This increases the number of coprocessor (cop) tasks and can slow down queries. Example:
 
 ```sql
-select * from server_info where `serial_no` = ?;
+SELECT * FROM server_info WHERE `serial_no` = ?;
 ```
 
 **Mitigation**: Add a **global index** on the filtering columns used by these queries to reduce scanning overhead. While creating a global index can significantly slow down DROP PARTITION operations, **hash and key partitioned tables do not support DROP PARTITION**. In practice, such partitions are rarely removed, making global indexes a feasible solution in these scenarios. Example:
