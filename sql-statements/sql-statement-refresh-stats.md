@@ -1,7 +1,6 @@
 ---
 title: REFRESH STATS
 summary: Learn how to reload statistics into memory for specific tables or the whole TiDB cluster.
-aliases: ['/docs/dev/sql-statements/sql-statement-refresh-stats/']
 ---
 
 # REFRESH STATS
