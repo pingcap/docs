@@ -1,11 +1,11 @@
 ---
-title: Create a {{{ .starter }}} or Essential Cluster
-summary: Learn how to create a {{{ .starter }}} or {{{ .essential }}} cluster.
+title: Create a Premium instance
+summary: Learn how to create a Premium instance. 
 ---
 
-# Create a {{{ .starter }}} or Essential Cluster
+# Create a Premium instance
 
-This document describes how to create a {{{ .starter }}} or {{{ .essential }}} cluster in the [TiDB Cloud console](https://tidbcloud.com/).
+This document describes how to create a Premium instance in the [TiDB Cloud console](https://tidbcloud.com/).
 
 > **Tip:**
 >
@@ -34,44 +34,39 @@ If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/sign
 
 </CustomContent>
 
+> **Note:**
+>
+> Currently, TiDB Cloud Premium is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for TiDB Cloud Premium" in the **Description** field and click **Submit**.
+
+
 ## Steps
 
-If you are in the `Organization Owner` or the `Project Owner` role, you can create a {{{ .starter }}} or {{{ .essential }}} cluster as follows:
+If you are in the `Organization Owner` or the `Instance Creator` role, you can create a Premium instance as follows:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and then navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).At the bottom of the left navigation bar, locate the "Switch to Private Preview" entry and click it to enter the Premium Preview interface. If you cannot see this entry, it might be because your organization has not been invited to the Premium Private Preview yet. In this case, please contact Tech Support.
 
-2. Click **Create Cluster**.
+2. Navigate to the [**TiDB Instances**] page.
 
-3. Select a cluster plan.
+3. Click **Create Instance**.
 
-    You can start with a **Starter** cluster and later upgrade to an **Essential** cluster as your needs grow. For more information, see [cluster plans](/tidb-cloud/select-cluster-tier.md).
+4. Input instance name .
 
-4. Choose a cloud provider and a region where you want to host your cluster.
+5. Choose a cloud provider and a region where you want to host your instance.
 
-5. Update the default cluster name if necessary.
+6. Update the capacity of the instance.
 
-6. Update the capacity of the cluster.
+    - You must specify both a minimum and maximum number of Request Capacity Units (RCUs) for your instance.
 
-    - **Starter** plan:
-
-        - You can update the spending limit for your cluster. If the spending limit is set to 0, the cluster remains free. If the spending limit is greater than 0, you need to add a credit card before creating the cluster.
-
-        - By default, each organization can create up to five [free Starter clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). To create additional Starter clusters, you must add a credit card and specify a spending limit.
-
-    - **Essential** plan:
-
-        - You must specify both a minimum and maximum number of Request Capacity Units (RCUs) for your cluster.
-
-        - RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your cluster within this range based on demand.
+    - RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your instance within this range based on demand.
 
 7. Click **Create**.
 
-    The cluster creation process starts and your TiDB Cloud cluster will be created in approximately 30 seconds.
+    The instance creation process begins. If this is your first instance in the selected region, provisioning typically takes about 30 minutes. If you already have an existing instance in the region, the process is faster and usually completes within about 1 minute.
 
 ## What's next
 
-After your cluster is created, follow the instructions in [Connect to TiDB Cloud via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) to create a password for your cluster.
+After your instance is created, follow the instructions in [Connect to TiDB Cloud via Public Endpoint](/tidb-cloud/connect-via-standard-connection-premium.md) to create a password for your instance.
 
 > **Note:**
 >
-> If you do not set a password, you cannot connect to the cluster.
+> If you do not set a password, you cannot connect to the instance.
