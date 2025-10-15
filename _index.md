@@ -5,7 +5,7 @@ hide_commit: true
 summary: TiDBは、ハイブリッドトランザクションおよび分析処理（HTAP）ワークロードをサポートするオープンソースの分散SQLデータベースです。このガイドでは、機能、 TiFlash、開発、導入、移行、保守、監視、チューニング、ツール、リファレンスに関する情報を提供します。クイックスタートから高度な設定やツールまで、TiDBのあらゆる情報を網羅しています。
 ---
 
-<LearningPathContainer platform="tidb" title="TiDBセルフマネージド" subTitle="TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. Find the guide, samples, and references you need to use TiDB.">
+<LearningPathContainer platform="tidb" title="TiDB Self-Managed" subTitle="TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. Find the guide, samples, and references you need to use TiDB.">
 
 <!-- Localization note for TiDB:
 
