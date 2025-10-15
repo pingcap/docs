@@ -12,13 +12,13 @@ TiDB 的全文检索功能提供以下能力：
 
 - **直接查询文本数据**：你可以直接在任意字符串列上进行检索，无需进行嵌入处理。
 
-- **多语言支持**：无需指定语言即可获得高质量检索。TiDB 的文本分析器支持同一张表中多种语言混合的文档，并会自动为每个文档选择最佳分析器。
+- **支持多语言**：无需指定语言即可获得高质量检索。TiDB 的文本分析器支持同一张表中多种语言混合的文档，并会自动为每个文档选择最佳分析器。
 
 - **按相关性排序**：检索结果可以通过广泛采用的 [BM25 排序](https://en.wikipedia.org/wiki/Okapi_BM25) 算法按相关性排序。
 
 - **与 SQL 完全兼容**：所有 SQL 特性，如预过滤、后过滤、分组和关联查询等，都可以与全文检索结合使用。
 
-> **Tip:**
+> **提示：**
 >
 > 关于 Python 的用法，请参见 [使用 Python 进行全文检索](/tidb-cloud/vector-search-full-text-search-python.md)。
 >
@@ -26,19 +26,19 @@ TiDB 的全文检索功能提供以下能力：
 
 ## 快速开始
 
-全文检索目前仍处于早期阶段，我们正在持续向更多用户开放。目前，全文检索仅在以下产品选项和区域可用：
+全文检索目前仍处于早期阶段，我们正在持续向更多用户开放。目前，全文检索仅在以下区域的 TiDB Cloud Starter 和 TiDB Cloud Essential 上可用：
 
-- TiDB Cloud Serverless：`Frankfurt (eu-central-1)` 和 `Singapore (ap-southeast-1)`
+- AWS：`法兰克福 (eu-central-1)` 和 `新加坡 (ap-southeast-1)`
 
-在使用全文检索前，请确保你的 TiDB Cloud Serverless 集群已创建在支持的区域。如果还没有集群，请按照 [创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md) 进行创建。
+在使用全文检索前，请确保你的 TiDB Cloud Starter 集群已创建在支持的区域。如果还没有，请按照 [创建 TiDB Cloud Starter 集群](/develop/dev-guide-build-cluster-in-cloud.md) 进行创建。
 
-要进行全文检索，请按照以下步骤操作：
+要执行全文检索，请按照以下步骤操作：
 
-1. [**创建全文索引**](#create-a-full-text-index)：创建带有全文索引的表，或为已有表添加全文索引。
+1. [**创建全文索引**](#创建全文索引)：创建带有全文索引的表，或为已有表添加全文索引。
 
-2. [**插入文本数据**](#insert-text-data)：向表中插入文本数据。
+2. [**插入文本数据**](#插入文本数据)：向表中插入文本数据。
 
-3. [**执行全文检索**](#perform-a-full-text-search)：使用文本查询和全文检索函数进行全文检索。
+3. [**执行全文检索**](#执行全文检索)：使用文本查询和全文检索函数进行全文检索。
 
 ### 创建全文索引
 
@@ -78,14 +78,14 @@ ALTER TABLE stock_items ADD FULLTEXT INDEX (title) WITH PARSER MULTILINGUAL ADD_
 
 向带有全文索引的表插入数据与向其他表插入数据完全相同。
 
-例如，你可以执行以下 SQL 语句插入多种语言的数据。TiDB 的多语言解析器会自动处理这些文本。
+例如，你可以执行以下 SQL 语句插入多语言数据。TiDB 的多语言解析器会自动处理这些文本。
 
 ```sql
 INSERT INTO stock_items VALUES (1, "イヤホン bluetooth ワイヤレスイヤホン ");
 INSERT INTO stock_items VALUES (2, "完全ワイヤレスイヤホン/ウルトラノイズキャンセリング 2.0 ");
 INSERT INTO stock_items VALUES (3, "ワイヤレス ヘッドホン Bluetooth 5.3 65時間再生 ヘッドホン 40mm HD ");
 INSERT INTO stock_items VALUES (4, "楽器用 オンイヤーヘッドホン 密閉型【国内正規品】");
-INSERT INTO stock_items VALUES (5, "ワイヤレスイヤホン ハイブリッドANC搭载 40dBまでアクティブノイズキャンセル");
+INSERT INTO stock_items VALUES (5, "ワイヤレスイヤホン ハイブリッドANC搭載 40dBまでアクティブノイズキャンセル");
 INSERT INTO stock_items VALUES (6, "Lightweight Bluetooth Earbuds with 48 Hours Playtime");
 INSERT INTO stock_items VALUES (7, "True Wireless Noise Cancelling Earbuds - Compatible with Apple & Android, Built-in Microphone");
 INSERT INTO stock_items VALUES (8, "In-Ear Earbud Headphones with Mic, Black");
@@ -100,7 +100,7 @@ INSERT INTO stock_items VALUES (15, "皎月银 国家补贴 心率血氧监测 �
 
 ### 执行全文检索
 
-要进行全文检索，你可以使用 `FTS_MATCH_WORD()` 函数。
+要执行全文检索，你可以使用 `FTS_MATCH_WORD()` 函数。
 
 **示例：检索最相关的 10 个文档**
 
@@ -122,7 +122,7 @@ SELECT * FROM stock_items
 |    5 | ワイヤレスイヤホン ハイブリッドANC搭载 40dBまでアクティブノイズキャンセル                                            |
 +------+-----------------------------------------------------------------------------------------------------------+
 
--- 尝试用另一种语言进行检索：
+-- 尝试用另一种语言检索：
 SELECT * FROM stock_items
     WHERE fts_match_word("蓝牙耳机", title)
     ORDER BY fts_match_word("蓝牙耳机", title)
@@ -152,11 +152,11 @@ SELECT COUNT(*) FROM stock_items
 +----------+
 ```
 
-## 高级示例：与其他表联合检索
+## 进阶示例：与其他表联合检索
 
 你可以将全文检索与其他 SQL 特性（如关联查询和子查询）结合使用。
 
-假设你有一张 `users` 表和一张 `tickets` 表，并希望基于作者姓名的全文检索查找其创建的工单：
+假设你有一张 `users` 表和一张 `tickets` 表，并希望根据作者姓名的全文检索结果查找其创建的工单：
 
 ```sql
 CREATE TABLE users(
@@ -179,7 +179,7 @@ INSERT INTO tickets VALUES (2, "Ticket 2", 1);
 INSERT INTO tickets VALUES (3, "Ticket 3", 2);
 ```
 
-你可以使用子查询根据作者姓名查找匹配的用户 ID，然后在外层查询中使用这些 ID 进行关联查询，获取相关工单信息：
+你可以通过子查询根据作者姓名检索匹配的用户 ID，然后在外层查询中使用这些 ID 进行关联，获取相关工单信息：
 
 ```sql
 SELECT t.title AS TICKET_TITLE, u.id AS AUTHOR_ID, u.name AS AUTHOR_NAME FROM tickets t
@@ -198,13 +198,13 @@ WHERE t.author_id IN
 +--------------+-----------+-------------+
 ```
 
-## 相关文档
+## 参见
 
 - [混合检索](/tidb-cloud/vector-search-hybrid-search.md)
 
 ## 反馈与帮助
 
-全文检索目前仍处于早期阶段，开放范围有限。如果你希望在尚未开放的区域体验全文检索，或有任何反馈和帮助需求，欢迎联系我们：
+全文检索目前仍处于早期阶段，开放范围有限。如果你希望在尚未开放的区域体验全文检索，或有任何反馈与帮助需求，欢迎联系我们：
 
 <CustomContent platform="tidb">
 

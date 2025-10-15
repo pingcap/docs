@@ -19,23 +19,22 @@ TiDB Cloud CLI 是一个命令行界面，允许你通过几行命令在终端�
 
 下表列出了 TiDB Cloud CLI 支持的命令。
 
-在终端中使用 `ticloud` CLI 时，运行 `ticloud [command] [subcommand]`。如果你使用的是 [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview)，则使用 `tiup cloud [command] [subcommand]`。
+要在终端中使用 `ticloud` CLI，请运行 `ticloud [command] [subcommand]`。如果你在使用 [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview)，请改用 `tiup cloud [command] [subcommand]`。
 
 | Command               | Subcommand                                                            | Description                                    |
 |-----------------------|-----------------------------------------------------------------------|------------------------------------------------|
 | auth                  | login, logout, whoami                                                 | 登录与登出                                     |
-| serverless (alias: s) | create, delete, describe, list, update, spending-limit, region, shell | 管理 TiDB Cloud Serverless 集群                |
-| serverless branch     | create, delete, describe, list, shell                                 | 管理 TiDB Cloud Serverless 分支                |
-| serverless import     | cancel, describe, list, start                                         | 管理 TiDB Cloud Serverless 导入任务            |
-| serverless export     | create, describe, list, cancel, download                              | 管理 TiDB Cloud Serverless 导出任务            |
-| serverless sql-user   | create, list, delete, update                                          | 管理 TiDB Cloud Serverless SQL 用户            |
-| serverless audit-log  | config, describe, filter-rule (alias: filter), download                                    | 管理 TiDB Cloud Serverless 数据库审计日志      |
-| ai                    | -                                                                     | 与 TiDB Bot 聊天                               |
+| serverless (alias: s) | create, delete, describe, list, update, spending-limit, region, shell | 管理 TiDB Cloud Starter 或 TiDB Cloud Essential 集群          |
+| serverless branch     | create, delete, describe, list, shell                                 | 管理 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的分支          |
+| serverless import     | cancel, describe, list, start                                         | 管理 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的导入任务      |
+| serverless export     | create, describe, list, cancel, download                              | 管理 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的导出任务      |
+| serverless sql-user   | create, list, delete, update                                          | 管理 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的 SQL 用户         |
+| serverless audit-log  | config, describe, filter-rule (alias: filter), download                                    | 管理 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的数据库审计日志         |
 | completion            | bash, fish, powershell, zsh                                           | 为指定 shell 生成补全脚本                     |
 | config                | create, delete, describe, edit, list, set, use                        | 配置用户配置文件                               |
 | project               | list                                                                  | 管理项目                                       |
-| upgrade                | -                                                                     | 将 CLI 升级到最新版本                          |
-| help                  | auth, config, serverless, ai, project, upgrade, help, completion            | 查看任意命令的帮助信息                         |
+| upgrade               | -                                                                     | 将 CLI 升级到最新版本                          |
+| help                  | auth, config, serverless, project, upgrade, help, completion          | 查看任意命令的帮助文档                         |
 
 ## 命令模式
 
@@ -51,7 +50,7 @@ TiDB Cloud CLI 针对部分命令提供了两种模式，便于使用：
 
 ## 用户配置文件
 
-对于 TiDB Cloud CLI，用户配置文件是与用户相关的一组属性，包括配置文件名称、公钥、私钥和 OAuth token。要使用 TiDB Cloud CLI，你必须拥有一个用户配置文件。
+对于 TiDB Cloud CLI，用户配置文件是与用户相关的一组属性，包括配置文件名、公钥、私钥和 OAuth token。要使用 TiDB Cloud CLI，你必须拥有一个用户配置文件。
 
 ### 使用 TiDB Cloud API key 创建用户配置文件
 
@@ -121,10 +120,10 @@ Current profile has been changed to default
 
 | Flag                 | Description                                             | Required | Note                                                                                                             |
 |----------------------|---------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
-| --no-color           | 禁用输出中的颜色。                                      | No       | 仅在非交互模式下生效。在交互模式下，禁用颜色可能会影响部分 UI 组件的显示。                                      |
-| -P, --profile string | 指定本次命令使用的激活用户配置文件。                    | No       | 适用于非交互和交互模式。                                                                                         |
-| -D, --debug          | 启用调试模式                                            | No       | 适用于非交互和交互模式。                                                                                         |
+| --no-color           | 禁用输出中的颜色。                                      | 否       | 仅在非交互模式下生效。在交互模式下，禁用颜色可能会影响部分 UI 组件的显示。                                       |
+| -P, --profile string | 指定本次命令使用的激活用户配置文件。                    | 否       | 适用于非交互模式和交互模式。                                                                                     |
+| -D, --debug          | 启用调试模式                                            | 否       | 适用于非交互模式和交互模式。                                                                                  |
 
 ## 反馈
 
-如果你对 TiDB Cloud CLI 有任何问题或建议，欢迎在 [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose) 页面提交。同时也欢迎任何贡献。
+如果你对 TiDB Cloud CLI 有任何问题或建议，欢迎在 [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose) 页面提交。同时，我们也欢迎任何贡献。
