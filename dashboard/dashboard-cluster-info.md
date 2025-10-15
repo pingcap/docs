@@ -89,4 +89,4 @@ The list includes the following information:
 
 > **Note:**
 >
-> The Disk list might not show disk information for some hosts, depending on the component type, partition configuration, and deployment method. In these cases, a yellow warning icon (⚠️) is displayed. If you hover over the icon, a tooltip with the message "Failed to get host information" appears. This is expected behavior.
+> The **Disks** list might not display disk information for some hosts, depending on the component type, partition configuration, and deployment method. In these cases, a yellow warning icon (⚠️) appears. If you hover over the icon, a tooltip with the message "Failed to get host information" appears. This is expected behavior.
