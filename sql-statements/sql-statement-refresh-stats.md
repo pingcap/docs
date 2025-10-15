@@ -11,7 +11,7 @@ When you run `REFRESH STATS`, TiDB reuses the statistics initialization routines
 
 > **Warning:**
 >
-> This statement exists primarily for BR workflows that must reload statistics after a physical restore. Outside of BR, only run it when you explicitly debug in-memory statistics, and do not execute it on production clusters during ordinary operations.
+> This statement is built for BR's internal restore workflow and BR runs it automatically when needed. Do not execute it manually unless you are debugging in-memory statistics, and never run it on production clusters as part of routine operations.
 
 ## Synopsis
 
