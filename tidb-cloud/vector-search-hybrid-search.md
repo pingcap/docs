@@ -6,7 +6,7 @@ aliases: ['/tidb/stable/vector-search-hybrid-search']
 
 # Hybrid Search
 
-通过使用全文检索，你可以基于精确关键词检索文档。通过使用向量检索，你可以基于语义相似度检索文档。那么，能否将这两种检索方式结合起来，以提升检索质量并覆盖更多场景？答案是可以，这种方式被称为混合检索（hybrid search），并且在 AI 应用中被广泛使用。
+通过使用全文检索，你可以基于精确关键词检索文档。通过使用向量检索，你可以基于语义相似度检索文档。我们能否将这两种检索方式结合起来，以提升检索质量并覆盖更多场景？答案是可以，这种方法被称为混合检索（hybrid search），并且在 AI 应用中被广泛使用。
 
 在 TiDB 中，混合检索的一般流程如下：
 
@@ -15,15 +15,15 @@ aliases: ['/tidb/stable/vector-search-hybrid-search']
 
 ![Hybrid Search](/media/vector-search/hybrid-search-overview.svg)
 
-本教程演示如何在 TiDB 中使用 [pytidb](https://github.com/pingcap/pytidb) Python SDK 实现混合检索，该 SDK 内置了 embedding 和 reranking 支持。使用 pytidb 并非强制要求 —— 你也可以直接通过 SQL 进行检索，并使用自定义的 reranking 模型。
+本教程演示了如何在 TiDB 中使用 [pytidb](https://github.com/pingcap/pytidb) Python SDK 实现混合检索，该 SDK 内置了 embedding 和 reranking 支持。使用 pytidb 并非强制要求 —— 你也可以直接通过 SQL 进行检索，并使用你自己的重排序模型。
 
 ## 前置条件
 
-混合检索依赖于 [全文检索](/tidb-cloud/vector-search-full-text-search-python.md) 和向量检索。全文检索目前仍处于早期阶段，我们正在持续向更多用户开放。目前，全文检索仅在以下产品选项和区域可用：
+全文检索目前仍处于早期阶段，我们正在持续向更多用户开放。目前，全文检索仅在以下区域的 TiDB Cloud Starter 和 TiDB Cloud Essential 上可用：
 
-- TiDB Cloud Serverless：`Frankfurt (eu-central-1)` 和 `Singapore (ap-southeast-1)`
+- AWS: `Frankfurt (eu-central-1)` 和 `Singapore (ap-southeast-1)`
 
-要完成本教程，请确保你拥有位于支持区域的 TiDB Cloud Serverless 集群。如果还没有，请参考 [创建 TiDB Cloud Serverless 集群](/develop/dev-guide-build-cluster-in-cloud.md) 进行创建。
+要完成本教程，请确保你在支持的区域拥有一个 TiDB Cloud Starter 集群。如果还没有，请参考 [创建 TiDB Cloud Starter 集群](/develop/dev-guide-build-cluster-in-cloud.md) 进行创建。
 
 ## 快速开始
 
@@ -70,7 +70,7 @@ db = TiDBClient.connect(
    CA:       /etc/ssl/cert.pem
    ```
 
-   则连接 TiDB Cloud Serverless 集群的 Python 代码如下：
+   则连接 TiDB Cloud Starter 集群的 Python 代码如下：
 
    ```python
    db = TiDBClient.connect(
@@ -82,7 +82,7 @@ db = TiDBClient.connect(
    )
    ```
 
-   注意，上述示例仅用于演示。你需要使用自己的参数，并妥善保管。
+   注意，上述示例仅用于演示。你需要使用你自己的参数，并妥善保管。
 
 ### 步骤 3. 创建数据表
 
@@ -106,7 +106,7 @@ class Chunk(TableModel, table=True):
     text: str = Field()
     text_vec: list[float] = text_embed.VectorField(
         source_field="text"
-    )  # 👈 定义向量字段。
+    )  # 👈 Define the vector field.
     user_id: int = Field()
 
 table = db.create_table(schema=Chunk)
@@ -117,9 +117,9 @@ table = db.create_table(schema=Chunk)
 ```python
 table.bulk_insert(
     [
-        Chunk(id=2, text="bar", user_id=2),   # 👈 text 字段会自动嵌入为向量
-        Chunk(id=3, text="baz", user_id=3),   # 并存储到 "text_vec" 字段
-        Chunk(id=4, text="qux", user_id=4),   # 中。
+        Chunk(id=2, text="bar", user_id=2),   # 👈 The text field will be embedded to a
+        Chunk(id=3, text="baz", user_id=3),   # vector and stored in the "text_vec" field
+        Chunk(id=4, text="qux", user_id=4),   # automatically.
     ]
 )
 ```
@@ -135,7 +135,7 @@ jinaai = Reranker(model_name="jina_ai/jina-reranker-m0")
 
 df = (
   table.search("<query>", search_type="hybrid")
-    .rerank(jinaai, "text")  # 👈 使用 jinaai 模型对查询结果重排序。
+    .rerank(jinaai, "text")  # 👈 Rerank the query result using the jinaai model.
     .limit(2)
     .to_pandas()
 )
@@ -143,7 +143,7 @@ df = (
 
 完整示例请参考 [pytidb hybrid search demo](https://github.com/pingcap/pytidb/tree/main/examples/hybrid_search)。
 
-## 相关链接
+## 相关阅读
 
 - [pytidb Python SDK 文档](https://github.com/pingcap/pytidb)
 
@@ -151,7 +151,7 @@ df = (
 
 ## 反馈与帮助
 
-全文检索目前仍处于早期阶段，开放范围有限。如果你希望在尚未开放的区域体验全文检索，或有任何反馈和帮助需求，欢迎联系我们：
+全文检索目前仍处于早期阶段，开放范围有限。如果你希望在尚未开放的区域体验全文检索，或有任何反馈或需要帮助，欢迎联系我们：
 
 <CustomContent platform="tidb">
 

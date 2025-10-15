@@ -9,7 +9,7 @@ summary: 在 TiDB 数据库中使用 CREATE BINDING。
 
 `BINDING` 可以是 `GLOBAL`（全局）或 `SESSION`（会话）级别。默认级别为 `SESSION`。
 
-被绑定的 SQL 语句会被参数化并存储在系统表中。当 SQL 查询被处理时，只要参数化后的 SQL 语句与系统表中的绑定语句一致，并且系统变量 `tidb_use_plan_baselines` 设置为 `ON`（默认），则会生效相应的优化器 Hint。如果存在多个执行计划，优化器会选择成本最低的绑定计划。更多信息，参见 [创建绑定](/sql-plan-management.md#create-a-binding)。
+被绑定的 SQL 语句会被参数化并存储在系统表中。当 SQL 查询被处理时，只要参数化后的 SQL 语句与系统表中的绑定语句一致，并且系统变量 `tidb_use_plan_baselines` 设置为 `ON`（默认），则会应用相应的优化器 Hint。如果存在多个执行计划，优化器会选择成本最低的绑定计划。更多信息请参见 [创建绑定](/sql-plan-management.md#create-a-binding)。
 
 ## 语法
 
@@ -40,7 +40,7 @@ StringLiteralOrUserVariable ::=
 当你根据历史执行计划创建绑定时，需要指定对应的 Plan Digest：
 
 - 你可以使用字符串字面量或字符串类型的用户变量来指定 Plan Digest。
-- 你可以指定多个 Plan Digest，以便同时为多条语句创建绑定。在这种情况下，可以指定多个字符串，并在每个字符串中包含多个 digest。注意字符串或 digest 之间需要用逗号分隔。
+- 你可以指定多个 Plan Digest，以便同时为多条语句创建绑定。在这种情况下，你可以指定多个字符串，并在每个字符串中包含多个 digest。注意字符串或 digest 之间需要用逗号分隔。
 
 以下示例展示了如何根据 SQL 语句创建绑定。
 
@@ -310,7 +310,11 @@ Empty set (0.002 sec)
 
 ## SQL 语句截断
 
-当你使用 `CREATE BINDING ... FROM HISTORY USING PLAN DIGEST` 时，如果 [语句摘要表](/statement-summary-tables.md) 中存储的该 digest 的 SQL 语句因长度超过 [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40) 而被截断，则绑定可能会失败。此时，你需要增大 `tidb_stmt_summary_max_sql_length` 的值。
+当你使用 `CREATE BINDING ... FROM HISTORY USING PLAN DIGEST` 时，如果 [语句摘要表](/statement-summary-tables.md) 中存储的该 digest 的 SQL 语句因长度超过 [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40) 而被截断，则绑定可能会失败。在这种情况下，你需要增大 `tidb_stmt_summary_max_sql_length`。
+
+## 权限
+
+`CREATE BINDING` 语句需要 `SUPER` 权限。
 
 ## MySQL 兼容性
 

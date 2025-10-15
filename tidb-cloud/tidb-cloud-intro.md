@@ -6,7 +6,7 @@ category: intro
 
 # 什么是 TiDB Cloud
 
-[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 是一款全托管的数据库即服务（DBaaS），将 [TiDB](https://docs.pingcap.com/tidb/stable/overview) —— 一个开源的 HTAP（混合事务与分析处理）数据库 —— 带到你的云端。TiDB Cloud 提供了一种简单的方式来部署和管理数据库，让你专注于应用开发，而无需关注数据库的复杂性。<CustomContent language="en,zh">你可以在 Amazon Web Services (AWS)、Google Cloud、Microsoft Azure 和阿里云上创建 TiDB Cloud 集群，快速构建关键业务应用。</CustomContent><CustomContent language="ja">You can create TiDB Cloud clusters to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.</CustomContent>
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 是一款全托管的数据库即服务（DBaaS），将 [TiDB](https://docs.pingcap.com/tidb/stable/overview) —— 一款开源的 HTAP（混合事务与分析处理）数据库 —— 带到你的云端。TiDB Cloud 提供了简单的数据库部署和管理方式，让你专注于应用开发，而无需关注数据库的复杂性。<CustomContent language="en,zh">你可以在 Amazon Web Services (AWS)、Google Cloud、Microsoft Azure 和阿里云上创建 TiDB Cloud 集群，快速构建关键业务应用。</CustomContent><CustomContent language="ja">You can create TiDB Cloud clusters to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.</CustomContent>
 
 ![TiDB Cloud 概览](/media/tidb-cloud/tidb-cloud-overview.png)
 
@@ -34,11 +34,11 @@ TiDB Cloud 让你几乎无需培训即可轻松处理如基础设施管理和集
 
 - **High Availability and Reliability**
 
-    天生高可用架构。数据在多个可用区间进行复制，支持每日备份和自动故障转移，确保业务连续性，无论是硬件故障、网络分区还是数据中心丢失。
+    天生高可用的架构设计。数据在多个可用区间复制，支持每日备份和自动故障转移，无论遇到硬件故障、网络分区还是数据中心丢失，都能保障业务连续性。
 
 - **Real-Time Analytics**
 
-    内置分析引擎，实时获得分析查询结果。TiDB Cloud 能在当前数据上运行一致性的分析查询，不会影响关键业务应用。
+    内置分析引擎，实时获取分析查询结果。TiDB Cloud 能在当前数据上运行一致性的分析查询，不会影响关键业务应用。
 
 - **Enterprise Grade Security**
 
@@ -64,7 +64,7 @@ TiDB Cloud 让你几乎无需培训即可轻松处理如基础设施管理和集
 
 - **Simple Pricing Plans**
 
-    只为实际使用量付费，价格透明，无隐藏费用。
+    只需为实际使用的资源付费，价格透明，无隐藏费用。
 
 - **World-Class Support**
 
@@ -86,19 +86,27 @@ TiDB Cloud 提供以下部署选项：
 
 - TiDB Cloud Essential
 
-    针对业务负载持续增长、需要实时扩展的应用，TiDB Cloud Essential 提供灵活性和性能，助力你的业务持续发展。
+    针对业务负载持续增长、需要实时扩展的应用，TiDB Cloud Essential 提供了灵活性和性能，助力你的业务持续发展。
 
     <CustomContent language="en,zh">
 
-    目前，TiDB Cloud Essential 在阿里云上公测。关于 TiDB Cloud Starter 与 TiDB Cloud Essential 的功能对比，请参见 [TiDB on Alibaba Cloud](https://www.pingcap.com/partners/alibaba-cloud/)。
+    目前，TiDB Cloud Essential 在 AWS 和阿里云上处于公测阶段。
+
+    关于 TiDB Cloud Starter 与 TiDB Cloud Essential 在阿里云上的功能对比，详见 [TiDB on Alibaba Cloud](https://www.pingcap.com/partners/alibaba-cloud/)。
+
+    </CustomContent>
+
+    <CustomContent language="ja">
+
+    Currently, TiDB Cloud Essential is in public preview on AWS.
 
     </CustomContent>
 
 - TiDB Cloud Dedicated
 
-    TiDB Cloud Dedicated 专为关键业务场景设计，支持多可用区高可用、横向扩展以及完整的 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) 能力。
+    TiDB Cloud Dedicated 专为关键业务场景设计，支持跨多个可用区的高可用、横向扩展以及完整的 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) 能力。
 
-    目前，TiDB Cloud Dedicated 已在 AWS 和 Google Cloud 正式发布，并在 Azure 上公测。更多信息请参见 [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated)。
+    目前，TiDB Cloud Dedicated 已在 AWS 和 Google Cloud 上正式发布，并在 Azure 上公测。更多信息请参见 [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated)。
 
 ## 架构
 
@@ -108,10 +116,10 @@ TiDB Cloud 提供以下部署选项：
 
     对于每个 TiDB Cloud 集群，所有 TiDB 节点及辅助节点（包括 TiDB Operator 节点和日志节点）都部署在同一个 VPC 内。
 
-- TiDB Cloud Central Services
+- TiDB Cloud 中央服务
 
     中央服务（包括计费、告警、元数据存储、控制台 UI 等）独立部署。你可以通过互联网访问控制台 UI 来操作 TiDB 集群。
 
 - 你的 VPC
 
-    你可以通过私有终端节点连接或 VPC 对等连接接入 TiDB 集群。详情请参见 [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md) 或 [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md)。
+    你可以通过私有终端节点连接或 VPC 对等连接接入 TiDB 集群。详细信息请参见 [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md) 或 [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md)。
