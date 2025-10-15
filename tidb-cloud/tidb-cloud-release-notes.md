@@ -31,11 +31,23 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Essential**
 
+    <CustomContent language="en,zh">
+
     - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) is in public preview on AWS and Alibaba Cloud.
 
         For applications experiencing growing workloads and needing scalability in real time, TiDB Cloud Essential provides the flexibility and performance to keep pace with your business growth.
 
-        <!-- For more information, see [TiDB Cloud Essential public preview is live on AWS and Alibaba Cloud](the link will be added here after the blog is published.) -->
+        For more information, see [TiDB Cloud Essential: Now Available on AWS and Alibaba Cloud](https://www.pingcap.com/blog/tidb-cloud-essential-now-available-public-preview-aws-alibaba-cloud/).
+
+    </CustomContent>
+
+    <CustomContent language="ja">
+
+    - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) is in public preview on AWS.
+
+        For applications experiencing growing workloads and needing scalability in real time, TiDB Cloud Essential provides the flexibility and performance to keep pace with your business growth.
+
+    </CustomContent>
 
     - Database audit logging is now available in the [TiDB Cloud console](https://tidbcloud.com) for TiDB Cloud Essential and supports customizing rotation settings.
 
