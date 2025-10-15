@@ -33,6 +33,7 @@ Automatic backup settings vary between {{{ .starter }}} clusters and {{{ .essent
 | Backup setting   | {{{ .starter }}} (free) | {{{ .starter }}} (with spending limit > 0) | {{{ .essential }}} |
 |------------------|----------------------------|----------------------------|----------------------------|
 | Backup Cycle     | Daily                      | Daily                      | Daily                      |
+| Backup Retention | 1 day                      | 30 days                    | 30 days                    |
 | Backup Time      | Fixed time                 | Configurable               | Configurable               |
 
 - **Backup Cycle** is the frequency at which backups are taken.
