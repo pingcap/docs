@@ -30,11 +30,10 @@ TiDB Cloud automatically backs up your cluster data, allowing you to restore dat
 
 Automatic backup settings vary between {{{ .starter }}} clusters and {{{ .essential }}} clusters, as shown in the following table:
 
-| Backup setting   | {{{ .starter }}} clusters | {{{ .essential }}} clusters |
-|------------------|----------------------------|----------------------------|
-| Backup Cycle     | Daily                      | Daily                      |
-| Backup Retention | 1 day                      | 14 days                    |
-| Backup Time      | Fixed time                 | Configurable               |
+| Backup setting   | {{{ .starter }}} (free) | {{{ .starter }}} (with spending limit > 0) | {{{ .essential }}} |
+|------------------|----------------------------|----------------------------|----------------------------|
+| Backup Cycle     | Daily                      | Daily                      | Daily                      |
+| Backup Time      | Fixed time                 | Configurable               | Configurable               |
 
 - **Backup Cycle** is the frequency at which backups are taken.
 
@@ -42,8 +41,8 @@ Automatic backup settings vary between {{{ .starter }}} clusters and {{{ .essent
 
 - **Backup Time** is the time when the backup starts to be scheduled. Note that the final backup time might fall behind the configured backup time.
 
-    - {{{ .starter }}} clusters: the backup time is a randomly fixed time.
-    - {{{ .essential }}} clusters: you can configure the backup time to every half an hour. The default value is a randomly fixed time.
+    - For a free {{{ .starter }}} cluster, the backup time is a randomly fixed time.
+    - For a {{{ .starter }}} (with spending limit > 0) or {{{ .essential }}} cluster, you can configure the backup time to every half an hour. The default value is a randomly fixed time.
 
 ### Configure the backup setting
 
@@ -70,7 +69,7 @@ TiDB Cloud supports snapshot restore and point-in-time restore for your cluster.
 - **Point-in-Time Restore (beta)**: restores your cluster to a specific time.
 
     - {{{ .starter }}} clusters: not supported.
-    - {{{ .essential }}} clusters: restores to any time within the last 14 days, but not before the cluster creation time or after the current time minus one minute.
+    - {{{ .essential }}} clusters: restores to any time within the last 30 days, but not before the cluster creation time or after the current time minus one minute.
 
 ### Restore destination
 
