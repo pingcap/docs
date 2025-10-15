@@ -1,6 +1,6 @@
 ---
 title: tiup mirror set
-summary: "tiup mirror set` コマンドは、現在のミラーをローカルファイルシステムとリモートネットワークアドレスの間で切り替えます。公式ミラーアドレスは ` <a href="https://tiup-mirrors.pingcap.com`">https://tiup-mirrors.pingcap.com</a>です。ミラーアドレスを設定するには、`tiup mirror set <mirror-addr>` を使用します。中間者攻撃を防ぐため、ネットワークミラーのルート証明書を指定するには、`-r, --root` オプションを使用します。出力は生成されません。"
+summary: tiup mirror set コマンドは、現在のミラーをローカルファイルシステムとリモートネットワークアドレスの間で切り替えます。公式ミラーアドレスはです。ミラーアドレスを設定するには、`tiup mirror set <mirror-addr>` を使用します。中間者攻撃を防ぐため、ネットワークミラーのルート証明書を指定するには、`-r, --root` オプションを使用します。出力は生成されません。
 ---
 
 # tiup mirror set {#tiup-mirror-set}
