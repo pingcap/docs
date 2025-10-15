@@ -1,13 +1,20 @@
----
+<img width="3682" height="432" alt="image" src="https://github.com/user-attachments/assets/57327a10-1819-49ba-bb83-b672fa2269c4" />---
 title: Integrate TiDB Cloud with Prometheus and Grafana
 summary: Learn how to monitor your TiDB cluster with the Prometheus and Grafana integration.
 ---
 
 # Integrate TiDB Cloud with Prometheus and Grafana
 
-TiDB Cloud provides a [Prometheus](https://prometheus.io/) API endpoint (beta). If you have a Prometheus service, you can monitor key metrics of TiDB Cloud from the endpoint easily.
+TiDB Cloud provides a [Prometheus](https://prometheus.io/) API endpoint. If you have a Prometheus service, you can monitor key metrics of TiDB Cloud from the endpoint easily.
 
 This document describes how to configure your Prometheus service to read key metrics from the TiDB Cloud endpoint and how to view the metrics using [Grafana](https://grafana.com/).
+
+## Prometheus integration version
+
+TiDB Cloud has supported the project-level Prometheus integration (Beta) since March 4, 2022(?please help update the date). Starting from October 21, 2025, TiDB Cloud introduces the cluster-level Prometheus integration (Preview).
+
+- **Cluster-level Prometheus integration (Preview)**: if no legacy project-level Prometheus integration remains undeleted within your organization by October 21, 2025, TiDB Cloud provides the cluster-level Prometheus integration (Preview) for your organization to experience the latest enhancements.
+- **Legacy project-level Prometheus integration (Beta)**: if at least one legacy project-level Prometheus integration remains undeleted within your organization by October 21, 2025, TiDB Cloud retains both existing and new integrations at the project level for your organization to avoid affecting current dashboards. 
 
 ## Prerequisites
 
