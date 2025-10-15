@@ -1,8 +1,11 @@
+---
+title: Best Practices for Using TiDB Partitioned Tables
+summary: Learn best practices for using TiDB partitioned tables to improve performance, simplify data management, and handle large-scale datasets efficiently.
+---
+
 # Best Practices for Using TiDB Partitioned Tables
 
 This guide introduces how to use partitioned tables in TiDB to improve performance, simplify data management, and handle large-scale datasets efficiently.
-
-## Introduction
 
 Partitioned tables in TiDB offer a versatile approach to managing large datasets, improving query efficiency, facilitating bulk data deletion, and alleviating write hotspot issues. By dividing data into logical segments, TiDB can leverage **partition pruning** to skip irrelevant data during query execution, reducing resource consumption and accelerating performance—particularly in OLAP workloads with massive datasets.
 
@@ -14,15 +17,17 @@ While partitioning offers clear benefits, it also presents **common challenges**
 
 This document examines partitioned tables in TiDB from multiple angles, including query optimization, data cleanup, write scalability, and index management. Through detailed scenarios and best practices, it provides practical guidance on optimizing partitioned table design and performance tuning in TiDB.  
 
-> **Note:** To get started with the fundamentals, refer to the [Partitioned Table User Guide](/partitioned-table.md), which explains key concepts such as partition pruning, index types, and partitioning methods.
+> **Note:** 
+>
+> To get started with the fundamentals, refer to [Partitioning](/partitioned-table.md), which explains key concepts such as partition pruning, index types, and partitioning methods.
 
-## Improving query efficiency
+## Improve query efficiency
 
-### Partition Pruning
+### Partition pruning
 
 **Partition pruning** is an optimization technique that allows TiDB to reduce the amount of data scanned when executing queries against partitioned tables. Instead of scanning all partitions, TiDB analyzes the query's filter conditions and determines which partitions may contain relevant data, scanning only those partitions. This significantly improves query performance by reducing I/O and computation overhead.
 
-#### Applicable Scenarios
+#### Applicable scenarios
 
 Partition pruning is most beneficial in scenarios where query predicates match the partitioning strategy. Common use cases include:
 
@@ -32,19 +37,19 @@ Partition pruning is most beneficial in scenarios where query predicates match t
 
 For more use cases, see [Partition Pruning](https://docs.pingcap.com/tidb/stable/partition-pruning/).
 
-### Query Performance on Secondary Index: Non-Partitioned Table vs. Local Index vs. Global Index
+### Query performance on secondary indexes: non-partitioned tables vs. local indexes vs. global indexes
 
 In TiDB, local indexes are the default for partitioned tables. Each partition has its own set of indexes. A global index, on the other hand, covers the whole table in one index. This means it keeps track of all rows across all partitions. Global indexes can be faster for queries across multiple partitions because local indexes needs to do one lookup in each partition separately, while global index only needs one lookup for the whole table.
 
-#### What Did We Test
+#### What did we test
 
 We evaluated query performance across three table configurations in TiDB:
 
-- Non-Partitioned Table
-- Partitioned Table with Global Index
-- Partitioned Table with Local Index
+- Non-partitioned tables
+- Partitioned tables with global indexes
+- Partitioned tables with local indexes
 
-#### Test Setup
+#### Test setup
 
 - The query **accesses data via a secondary index** and uses IN conditions across multiple values.
 - The **partitioned table** had **366 partitions**, defined by **range partitioning on a datetime column**.
@@ -94,17 +99,17 @@ WHERE `fa`.`sid` IN (
 
 #### Findings
 
-Data came from a table with **366 range partitions** (for example, by date).
+Data comes from a table with **366 range partitions** (for example, by date).
 
-- The **Average Query Time** was obtained from the `statement_summary` view.
-- The query used a **secondary index** and returned **400 rows**.
+- The **Average Query Time** is obtained from the `statement_summary` view.
+- The query uses a **secondary index** and returns **400 rows**.
 
 Metrics collected:
 
 - **Average Query Time**: from `statement_summary`
 - **Cop Tasks** (Index Scan + Table Lookup): from execution plan
 
-#### Test Results
+#### Test results
 
 | Configuration | Average Query Time | Cop task for index range scan | Cop task for table lookup | Total Cop tasks | Key Takeaways |
 |---|---|---|---|---|---|
@@ -112,7 +117,7 @@ Metrics collected:
 | Partitioned Table with Local Index | 108 ms | 600 | 375 | 975 | When the partition key is not used in the query condition, local index queries will scan all partitions. |
 | Partitioned Table with Global Index | 14.8 ms | 69 | 383 | 452 | Improving index scan efficiency, but table lookups can still be expensive if many rows match. |
 
-#### Execution Plan Examples
+#### Execution plan examples
 
 **Non-partitioned table**
 
@@ -124,7 +129,7 @@ Metrics collected:
 | TableRowIDScan_6(Probe)   | 398.73  | 166072.78 | 400     | cop[tikv] | table:fa                             | time:7.01ms, loops:2, cop_task:{num:79, max:4.98ms, min:0s, avg:514.9µs, p95:3.75ms, max_proc_keys:10, p95_proc_keys:5, tot_proc:15ms, tot_wait:21.4ms, copr_cache_hit_ratio:0.00, build_task_duration:341.2µs, max_distsql_concurrency:1, max_extra_concurrency:7, store_batch_num:62}, rpc_info:{Cop:{num_rpc:17, total_time:40.5ms}}, tikv_task:{proc max:0s, min:0s, avg:0s, p80:0s, p95:0s, iters:79, tasks:79}, scan_detail:{total_process_keys:400, total_process_keys_size:489856, total_keys:800, get_snapshot_time:20.8ms, rocksdb:{key_skipped_count:400, block:{cache_hit_count:1600}}}, time_detail:{total_process_time:15ms, total_wait_time:21.4ms, tikv_wall_time:10.9ms} | keep order:false | N/A | N/A |
 ```
 
-**Partition table with global index**
+**Partition tables with global indexes**
 
 ```
 | id                     | estRows | estCost   | actRows | task      | access object                                   | execution info | operator info | memory   | disk |
@@ -134,7 +139,7 @@ Metrics collected:
 | TableRowIDScan_6(Probe)| 398.73  | 165221.64 | 400     | cop[tikv] | table:fa                                        | time:7.47ms, loops:2, cop_task:{num:383, max:4.07ms, min:0s, avg:488.5µs, p95:2.59ms, max_proc_keys:2, p95_proc_keys:1, tot_proc:203.3ms, tot_wait:429.5ms, copr_cache_hit_ratio:0.00, build_task_duration:1.3ms, max_distsql_concurrency:1, max_extra_concurrency:31, store_batch_num:305}, rpc_info:{Cop:{num_rpc:78, total_time:186.3ms}}, tikv_task:{proc max:3ms, min:0s, avg:517µs, p80:1ms, p95:1ms, iters:383, tasks:383}, scan_detail:{total_process_keys:400, total_process_keys_size:489856, total_keys:800, get_snapshot_time:2.99ms, rocksdb:{key_skipped_count:400, block:{cache_hit_count:1601, read_count:799, read_byte:10.1 MB, read_time:131.6ms}}}, time_detail:{total_process_time:203.3ms, total_suspend_time:6.31ms, total_wait_time:429.5ms, total_kv_read_wall_time:198ms, tikv_wall_time:163ms} | keep order:false, stats:partial[...] | N/A | N/A |
 ```
 
-**Partition table with local index**
+**Partition tables with local indexes**
 
 ```
 | id                     | estRows | estCost   | actRows | task      | access object                        | execution info | operator info | memory  | disk  |
@@ -146,9 +151,9 @@ Metrics collected:
 
 [Similar detailed execution plans for partitioned tables with global and local indexes would follow...]
 
-#### How to Create a Global Index on a Partitioned Table in TiDB
+#### How to create a global index on a partitioned table in TiDB
 
-**Option 1: Add via ALTER TABLE**
+**Option 1: add via ALTER TABLE**
 
 ```sql
 ALTER TABLE <table_name>
@@ -163,7 +168,7 @@ Adds a global index to an existing partitioned table.
     - Available starting from v9.0.0-beta.1
     - Expected to be included in the next LTS release
 
-**Option 2: Define Inline on Table Creation**
+**Option 2: Define inline on table creation**
 
 ```sql
 CREATE TABLE t (
@@ -190,27 +195,27 @@ The performance overhead of partitioned tables in TiDB depends significantly on 
 - For local indexes, if a query does not include effective partition pruning conditions, the number of partitions directly correlates with the number of RPCs triggered. This means more partitions will likely result in more RPCs, leading to higher latency.
 - For global indexes, the number of RPCs and the degree of performance regression depend on both the number of partitions involved and how many rows need to be retrieved (that is, the number of rows requiring table lookups).
 
-#### Recommendation
+#### Recommendations
 
 - Avoid partitioned tables unless truly necessary. For most OLTP workloads, a well-indexed non-partitioned table performs better and is easier to manage.
 - If you must use partitioned tables, benchmark both global index and local index strategies under your workload.
 - Use global indexes when query performance across partitions is critical.
 - Choose local indexes only if your main concern is DDL efficiency, such as fast DROP PARTITION, and the performance side effect from the partition table is acceptable.
 
-## Facilitating Bulk Data Deletion
+## Facilitate bulk data deletion
 
-### Data Cleanup Efficiency: TTL vs. Direct Partition Drop
+### Data cleanup efficiency: TTL vs. direct partition drop
 
-In TiDB, historical data cleanup can be handled either by **TTL (Time-to-Live)** or **manual partition drop**. While both methods serve the same purpose, they differ significantly in performance. Our tests show that dropping partitions is generally faster and less resource-intensive, making it a better choice for large datasets and frequent purging needs.
+In TiDB, you can clear up historical data either by **TTL (Time-to-Live)** or **manual partition drop**. While both methods serve the same purpose, they differ significantly in performance. Our tests show that dropping partitions is generally faster and less resource-intensive, making it a better choice for large datasets and frequent purging needs.
 
 #### What's the difference?
 
-- **TTL**: Automatically removes data based on its age, but may be slower due to the need to scan and clean data over time.
-- **Partition Drop**: Deletes an entire partition at once, making it much faster, especially when dealing with large datasets.
+- **TTL**: automatically removes data based on its age, but might be slower due to the need to scan and clean data over time.
+- **Partition Drop**: deletes an entire partition at once, making it much faster, especially when dealing with large datasets.
 
-#### What Did We Test
+#### What did we test
 
-To compare the performance of TTL and partition drop, we configured TTL to execute every 10 minutes and created a partitioned version of the same table, dropping one partition at the same interval for comparison. Both approaches were tested under background write loads of 50 and 100 concurrent threads. We measured key metrics such as execution time, system resource utilization, and the total number of rows deleted.
+To compare the performance of TTL and partition drop, we configure TTL to execute every 10 minutes and create a partitioned version of the same table, dropping one partition at the same interval for comparison. Both approaches are tested under background write loads of 50 and 100 concurrent threads. We measure key metrics such as execution time, system resource utilization, and the total number of rows deleted.
 
 #### Findings
 
@@ -221,14 +226,14 @@ To compare the performance of TTL and partition drop, we configured TTL to execu
 - With 100 threads, it handled up to 20 million rows, but execution time increased to 15—30 minutes, with greater variance.
 - TTL jobs impacted system performance under high load due to extra scanning and deletion activity, reducing overall QPS.
 
-**Partition Drop Performance:**
+**Partition drop performance:**
 
 - DROP PARTITION removes an entire data segment instantly, with minimal resource usage.
 - DROP PARTITION is a metadata-level operation, making it much faster and more predictable than TTL, especially when managing large volumes of historical data.
 
-#### How to Use TTL and Partition Drop in TiDB
+#### How to use TTL and partition drop in TiDB
 
-In this experiment, the table structures have been anonymized. For more detailed information on the usage of TTL (Time To Live), please refer to the official documentation at [Periodically Delete Data Using TTL (Time to Live)](/time-to-live.md) .
+In this experiment, the table structures have been anonymized. For more detailed information on the usage of TTL (Time To Live), see [Periodically Delete Data Using TTL (Time to Live)](/time-to-live.md) .
 
 **TTL schema**
 
@@ -275,33 +280,37 @@ FIRST PARTITION LESS THAN ('2025-02-19 18:00:00')
 LAST PARTITION LESS THAN ('2025-02-19 20:00:00');
 ```
 
-It's required to run DDL alter table partition ... to change the FIRST PARTITION and LAST PARTITION periodically. These two DDL statements can drop the old partitions and create new ones.
+It is required to run `ALTER TABLE PARTITION ...` to change the `FIRST PARTITION` and `LAST PARTITION` periodically. These two DDL statements can drop the old partitions and create new ones.
 
 ```sql
 ALTER TABLE ad_cache FIRST PARTITION LESS THAN ("${nextTimestamp}");
 ALTER TABLE ad_cache LAST PARTITION LESS THAN ("${nextTimestamp}");
 ```
 
-#### Recommendation
+#### Recommendations
 
-For workloads with **large or time-based data cleanup**, prefer using **partitioned tables with DROP PARTITION**. It offers better performance, lower system impact, and simpler management. TTL is still useful for finer-grained or background cleanup but may not be optimal under high write pressure or when deleting large volumes of data quickly.
+For workloads with **large or time-based data cleanup**, it is recommended to use **partitioned tables with DROP PARTITION**. It offers better performance, lower system impact, and simpler management. 
 
-### Partition Drop Efficiency: Local Index vs Global Index
+TTL is still useful for finer-grained or background cleanup, but might not be optimal under high write pressure or when deleting large volumes of data quickly.
 
-Partition table with Global Index requires synchronous updates to the global index, potentially increasing significant execution time for DDL operations, such as DROP PARTITION, TRUNCATE PARTITION, or REORG PARTITION. In this section, the tests show that DROP PARTITION is much slower when using a **Global Index** compared to a **Local Index**. This should be considered when designing partitioned tables.
+### Partition drop efficiency: local index vs. global index
 
-#### What Did We Test
+Partition tables with global indexes require synchronous updates to the global index, potentially increasing significant execution time for DDL operations, such as `DROP PARTITION`, `TRUNCATE PARTITION`, or `REORG PARTITION`. 
 
-We created a table with **366 partitions** and tested the DROP PARTITION performance using both **Global Index** and **Local Index**. The total number of rows was **1 billion**.
+In this section, the tests show that `DROP PARTITION` is much slower when using a global index compared to a local index**. Take this into consideration when you design partitioned tables.
 
-| Index Type | Duration (drop partition) |
-|---|---|
-| Global Index | 1 min 16.02 s |
-| Local Index | 0.52 s |
+#### What did we test
+
+Create a table with **366 partitions** and test the `DROP PARTITION` performance using both global indexes and local indexes. The total number of rows is **1 billion**.
+
+| Index Type   | Duration (drop partition) |
+|--------------|---------------------------|
+| Global Index | 1 min 16.02 s             |
+| Local Index  | 0.52 s                    |
 
 #### Findings
 
-Dropping a partition on a table with a Global Index took **76 seconds**, while the same operation with a Local Index took only **0.52 seconds**. The reason is that Global Indexes span all partitions and require more complex updates, while Local Indexes are limited to individual partitions and are easier to handle.
+Dropping a partition on a table with a global index takes **76 seconds**, while the same operation with a local index takes only **0.52 seconds**. The reason is that global indexes span all partitions and require more complex updates, while local indexes are limited to individual partitions and are easier to handle.
 
 **Global Index**
 
@@ -309,15 +318,13 @@ Dropping a partition on a table with a Global Index took **76 seconds**, while t
 ALTER TABLE A DROP PARTITION A_2024363;
 ```
 
-#### Recommendation
+#### Recommendations
 
-When a partitioned table contains global indexes, performing certain DDL operations such as DROP PARTITION, TRUNCATE PARTITION, or REORG PARTITION requires synchronously updating the global index values. This can significantly increase the execution time of these DDL operations.
+When a partitioned table contains global indexes, performing certain DDL operations such as `DROP PARTITION`, `TRUNCATE PARTITION`, or `REORG PARTITION` requires synchronously updating the global index values. This can significantly increase the execution time of these DDL operations.
 
-If you need to drop partitions frequently and minimize the performance impact on the system, it's better to use **local indexes** for faster and more efficient operations.
+If you need to drop partitions frequently and minimize the performance impact on the system, it is recommended to use **local indexes** for faster and more efficient operations.
 
-## Mitigating Write Hotspot Issues
-
-### Background
+## Mitigate write hotspot issues
 
 In TiDB, **write hotspots** occur when incoming write traffic is unevenly distributed across Regions.
 
@@ -329,7 +336,7 @@ This is common when the primary key is **monotonically increasing**—for exampl
 
 **Partitioned tables** can help mitigate this problem. By applying **hash** or **key** partitioning on the primary key, TiDB can spread inserts across multiple partitions (and therefore multiple Regions), reducing hotspot contention.
 
-### How It Works
+### How it works
 
 TiDB stores table data in **Regions**, each covering a continuous range of row keys.
 
@@ -346,9 +353,9 @@ When the primary key is AUTO_INCREMENT and the secondary indexes on datetime col
 - Each partition has its own set of Regions, often distributed across different TiKV nodes.
 - Inserts are spread across multiple Regions in parallel, improving load distribution and throughput.
 
-### Use Case
+### Use cases
 
-If a table with an AUTO_INCREMENT primary key experiences heavy bulk inserts and suffers from write hotspot issues, applying **hash** or **key** partitioning on the primary key can help distribute the write load more evenly.
+If a table with an [`AUTO_INCREMENT`](/auto-increment.md) primary key experiences heavy bulk inserts and suffers from write hotspot issues, applying **hash** or **key** partitioning on the primary key can help distribute the write load more evenly.
 
 ```sql
 CREATE TABLE server_info (
@@ -379,39 +386,39 @@ When converting a non-partitioned table to a partitioned table, TiDB creates a s
 SELECT * FROM server_info WHERE `serial_no` = ?;
 ```
 
-**Mitigation**: Add a **global index** on the filtering columns used by these queries to reduce scanning overhead. While creating a global index can significantly slow down DROP PARTITION operations, **hash and key partitioned tables do not support DROP PARTITION**. In practice, such partitions are rarely removed, making global indexes a feasible solution in these scenarios. Example:
+**Mitigation**: add a **global index** on the filtering columns used by these queries to reduce scanning overhead. While creating a global index can significantly slow down `DROP PARTITION` operations, **hash and key partitioned tables do not support DROP PARTITION**. In practice, such partitions are rarely removed, making global indexes a feasible solution in these scenarios. Example:
 
 ```sql
 ALTER TABLE server_info ADD UNIQUE INDEX(serial_no, id) GLOBAL;
 ```
 
-## Partition Management Challenge
+## Partition management challenges
 
-### How to Avoid Hotspots Caused by New Range Partitions
+### How to avoid Hotspots caused by new range partitions
 
 #### Overview
 
 New range partitions in a partitioned table can easily lead to hotspot issues in TiDB. This section outlines common scenarios and mitigation strategies to avoid read and write hotspots caused by range partitions.
 
-#### Common Hotspot Scenarios
+#### Common hotspot scenarios
 
-**Read Hotspot**
+**Read hotspot**
 
 When using **range-partitioned tables**, if queries do **not** filter data using the partition key, new empty partitions can easily become read hotspots.
 
-**Root Cause:**
+**Root cause:**
 
 By default, TiDB creates an empty region for each partition when the table is created. If no data is written for a while, multiple empty partitions' regions may be merged into a **single region**.
 
-**Impact:**
+**impact:**
 
 When a query does **not filter by partition key**, TiDB will **scan all partitions** (as seen in the execution plan partition:all). As a result, the single region holding multiple empty partitions will be scanned repeatedly, leading to a **read hotspot**.
 
-**Write Hotspot**
+**Write hotspot**
 
 When using a time-based field as the partition key, a write hotspot may occur when switching to a new partition:
 
-**Root Cause:**
+**Root cause:**
 In TiDB, any newly created table or partition initially contains only **one region** (data block), which is randomly placed on a single TiKV node. As data begins to be written, this region will eventually **split** into multiple regions, and PD will schedule these new regions to other TiKV nodes.
 
 However, if the initial write traffic to this new partition is **very high**, the TiKV node hosting that single initial region will be under heavy write pressure. In such cases, it may not have enough spare resources (I/O capacity, CPU cycles) to handle both the application writes and the scheduling of newly split regions to other TiKV nodes. This can delay region distribution, keeping most writes concentrated on the same node for longer than desired.
@@ -430,24 +437,24 @@ This imbalance can cause that TiKV node to trigger **flow control**, leading to 
 
 #### Solutions
 
-**1. NONCLUSTERED Partitioned Table**
+**1. NONCLUSTERED partitioned table**
 
 **Pros:**
 
-- When a new partition is created in a **NONCLUSTERED Partitioned Table** configured with SHARD_ROW_ID_BITS and [PRE_SPLIT_REGIONS](https://docs.pingcap.com/tidb/stable/sql-statement-split-region/#pre_split_regions), the regions can be **automatically pre-split**, significantly reducing manual intervention.
+- When a new partition is created in a **NONCLUSTERED Partitioned Table** configured with `SHARD_ROW_ID_BITS` and [PRE_SPLIT_REGIONS](/sql-statements//sql-statement-split-region.md#pre_split_regions), the regions can be **automatically pre-split**, significantly reducing manual intervention.
 - Lower operational overhead.
 
 **Cons:**
 
 - Queries using **Point Get** or **Table Range Scan** will require **more table lookups**, which can degrade read performance for such query types.
 
-**Recommendation:**
+**Recommendation**
 
 - Suitable for workloads where write scalability and operational ease are more critical than low-latency reads.
 
-**Best Practices**
+**Best practices**
 
-Create a partitioned table with SHARD_ROW_ID_BITS and PRE_SPLIT_REGIONS to pre-split table regions. The value of PRE_SPLIT_REGIONS must be less than or equal to that of SHARD_ROW_ID_BITS. The number of pre-split Regions for each partition is 2^(PRE_SPLIT_REGIONS).
+Create a partitioned table with `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` to pre-split table regions. The value of `PRE_SPLIT_REGIONS` must be less than or equal to that of `SHARD_ROW_ID_BITS`. The number of pre-split Regions for each partition is `2^(PRE_SPLIT_REGIONS)`.
 
 ```sql
 CREATE TABLE employees (
@@ -469,7 +476,7 @@ PARTITION BY RANGE ( YEAR(hired) ) (
 );
 ```
 
-Adding the [merge_option=deny](https://docs.pingcap.com/tidb/stable/table-attributes/#control-the-region-merge-behavior-using-table-attributes) attribute to a table or partition can prevent the merging of empty regions. However, when a partition is dropped, the regions belonging to that partition will still be merged automatically.
+Adding the [`merge_option=deny`](/table-attributes.md#control-the-region-merge-behavior-using-table-attributes) attribute to a table or partition can prevent the merging of empty regions. However, when a partition is dropped, the regions belonging to that partition will still be merged automatically.
 
 ```sql
 -- table
@@ -536,11 +543,11 @@ SHOW TABLE employees PARTITION (p4) regions;
 
 - **Manual region splitting** is required when creating new partitions, increasing operational complexity.
 
-**Recommendation:**
+**Recommendation**
 
 - Ideal when low-latency point queries are important and operational resources are available to manage region splitting.
 
-**Best Practices**
+**Best practices**
 
 Create a CLUSTERED partitioned table.
 
@@ -564,13 +571,13 @@ PARTITION BY RANGE ( YEAR(hired) ) (
 );
 ```
 
-Adding the [merge_option=deny](https://docs.pingcap.com/tidb/stable/table-attributes/#control-the-region-merge-behavior-using-table-attributes) attribute to a table or partition can prevent the merging of empty regions. However, when a partition is dropped, the regions belonging to that partition will still be merged automatically.
+Adding the [`merge_option=deny`](/table-attributes.md#control-the-region-merge-behavior-using-table-attributes) attribute to a table or partition can prevent the merging of empty regions. However, when a partition is dropped, the regions belonging to that partition will still be merged automatically.
 
 ```sql
 ALTER TABLE employees2 ATTRIBUTES 'merge_option=deny';
 ```
 
-**Determining split boundaries based on existing business data**
+**Determine split boundaries based on existing business data**
 
 To avoid hotspots when a new table or partition is created, it is often beneficial to **pre-split** regions before heavy writes begin. To make pre-splitting effective, configure the **lower and upper boundaries** for region splitting based on the **actual business data distribution**. Avoid setting excessively wide boundaries, as this can result in real data not being effectively distributed across TiKV nodes, defeating the purpose of pre-splitting.
 
@@ -588,29 +595,25 @@ SELECT MIN(id), MAX(id) FROM employees2;
 
 A common practice is to split the number of regions to **match** the number of TiKV nodes, or to be **twice** the number of TiKV nodes. This helps ensure that data is more evenly distributed across the cluster from the start.
 
-**Splitting regions for all partitions**
+**Split Regions for all partitions.**
 
 ```sql
 SPLIT PARTITION TABLE employees2 BETWEEN (1,"1970-01-01") AND (100000,"9999-12-31") REGIONS <number_of_regions>;
 ```
 
-**Splitting regions for the secondary index of all partitions.**
+**Split Regions for the secondary index of all partitions.**
 
 ```sql
 SPLIT PARTITION TABLE employees2 INDEX `idx_employees2_on_store_id` BETWEEN (1) AND (1000) REGIONS <number_of_regions>;
 ```
 
-**(Optional) When adding a new partition, you MUST manually split regions for the specific partition and its indices.**
+**(Optional) When adding a new partition, you MUST manually split Regions for the specific partition and its indexes.**
 
 ```sql
 ALTER TABLE employees2 ADD PARTITION (PARTITION p4 VALUES LESS THAN (2011));
-
 show table employees2 PARTITION (p4) regions;
-
 SPLIT PARTITION TABLE employees2 PARTITION (p4) BETWEEN (1,"2006-01-01") AND (100000,"2011-01-01") REGIONS <number_of_regions>;
-
 SPLIT PARTITION TABLE employees2 PARTITION (p4) INDEX `idx_employees2_on_store_id` BETWEEN (1) AND (1000) REGIONS <number_of_regions>;
-
 show table employees2 PARTITION (p4) regions;
 ```
 
@@ -629,7 +632,7 @@ show table employees2 PARTITION (p4) regions;
 
 - Best suited for use cases that require stable performance and do not benefit from partition-based data management.
 
-## Converting Between Partitioned and Non-Partitioned Tables
+## Converte between partitioned and non-partitioned tables
 
 When working with large tables (for example in this example 120 million rows), transforming between partitioned and non-partitioned schemas is sometimes required for performance tuning or schema design changes. TiDB supports several main approaches for such transformations:
 
@@ -640,7 +643,7 @@ When working with large tables (for example in this example 120 million rows), t
 
 This section compares the efficiency and implications of these methods in both directions of conversion, and provides best practice recommendations.
 
-### Table Schema: `fa`
+### Table schema: `fa`
 
 ```sql
 CREATE TABLE `fa` (
@@ -663,7 +666,7 @@ PARTITION `fa_2024003` VALUES LESS THAN (2024003),
 PARTITION `fa_2024366` VALUES LESS THAN (2024366));
 ```
 
-### Table Schema: `fa_new`
+### Table schema: `fa_new`
 
 ```sql
 CREATE TABLE `fa` (
@@ -683,7 +686,7 @@ CREATE TABLE `fa` (
 
 These examples show converting a partitioned table to a non-partitioned table, but the same methods also work for converting a non-partitioned table to a partitioned table.
 
-### Method 1: Batch DML INSERT INTO ... SELECT
+### Method 1: Batch DML `INSERT INTO ... SELECT`
 
 ```sql
 SET tidb_mem_quota_query = 0;
@@ -691,7 +694,7 @@ INSERT INTO fa_new SELECT * FROM fa;
 -- 120 million rows copied in 1h 52m 47s
 ```
 
-### Method 2: Pipeline DML INSERT INTO ... SELECT
+### Method 2: Pipeline DML `INSERT INTO ... SELECT`
 
 ```sql
 SET tidb_dml_type = "bulk";
@@ -701,7 +704,7 @@ INSERT INTO fa_new SELECT * FROM fa;
 -- 120 million rows copied in 58m 42s
 ```
 
-### Method 3: IMPORT INTO ... FROM SELECT
+### Method 3: `IMPORT INTO ... FROM SELECT`
 
 ```sql
 mysql> import into fa_new from select * from fa with thread=32,disable_precheck;
@@ -745,8 +748,8 @@ Query OK, 0 rows affected, 1 warning (2 hours 31 min 57.05 sec)
 | Method 4: Online DDL (From partition table to non-partitioned table) | 2 h 50 m |
 | Method 4: Online DDL (From non-partition table to partitioned table) | 2 h 31 m |
 
-### Recommendation
+### Recommendations
 
 TiDB offers two approaches for converting tables between partitioned and non-partitioned states:
 
-Choose an offline method like [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) when your system can accommodate a maintenance window, as it delivers much better performance. Use online DDL only when zero downtime is a strict requirement.
+Choose an offline method such as [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) when your system can accommodate a maintenance window, as it delivers much better performance. Use online DDL only when zero downtime is a strict requirement.
