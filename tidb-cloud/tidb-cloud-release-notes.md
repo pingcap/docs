@@ -8,6 +8,59 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## October 14, 2025
+
+**General changes**
+
+- **TiDB Cloud Starter**
+
+    - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) no longer supports database audit logging.
+
+        Currently, only [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) support database audit logging. Existing TiDB Cloud Starter clusters currently using database audit logging are not affected.
+
+    - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) removes the in-place restore feature, which means you can no longer restore a backup directly to the same cluster. This change helps prevent accidental overwrites of active production data and potential data loss.
+
+        To restore your data, you can [restore the backup to a new cluster](/tidb-cloud/backup-and-restore-serverless.md#perform-the-restore). After validating the restored data, switch your application to the new cluster. Previously restored data in existing clusters remains intact, and no action is required unless you perform a new restore.
+
+        For safer restore and migration workflows with more control and flexibility, consider using [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential).
+
+    - The [**Metrics**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page for [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) adds the following metrics for faster diagnosis and capacity planning:
+
+        - `Lock-wait (P95/P99)`: monitors lock wait time percentiles to surface contention hotspots.
+        - `Idle Connection Duration (P99 incl. not/in txn)`: identifies long-lived idle connections, both in-transaction and not-in-transaction, to adjust pooler limits and timeouts.
+
+- **TiDB Cloud Essential**
+
+    - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) is in public preview on AWS <CustomContent language="en,zh">and Alibaba Cloud</CustomContent>.
+
+        For applications experiencing growing workloads and needing scalability in real time, TiDB Cloud Essential provides the flexibility and performance to keep pace with your business growth.
+
+        <CustomContent language="en,zh">
+
+        For more information, see [TiDB Cloud Essential: Now Available on AWS and Alibaba Cloud](https://www.pingcap.com/blog/tidb-cloud-essential-now-available-public-preview-aws-alibaba-cloud/).
+
+        </CustomContent>
+
+    - Database audit logging is now available in the [TiDB Cloud console](https://tidbcloud.com) for TiDB Cloud Essential and supports customizing rotation settings.
+
+        You can configure database audit logs to be stored in TiDB Cloud, Amazon S3, Google Cloud Storage, Azure Blob Storage, or Alibaba Cloud OSS.
+
+        Currently, this feature is in beta. For more information, see [Database Audit Logging for TiDB Cloud Essential](/tidb-cloud/essential-database-audit-logging.md).
+
+    - TiDB Cloud Essential adds a new event `ResourceLimitation` that notifies you when Request Capacity Units (RCUs) consumption of your cluster reaches the configured maximum multiple times within one hour.
+
+        Usage exceeding the limit might be throttled. To avoid service impact, consider increasing the maximum RCU.
+
+        For more information about events, see [TiDB Cloud Cluster Events](/tidb-cloud/tidb-cloud-events.md).
+
+    - The [**Metrics**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) adds the following metrics for faster diagnosis and capacity planning:
+
+        - `Capacity vs Usage (RU/s)`: visualizes provisioned Request Unit (RU) capacity versus actual RU consumption to spot headroom and tune autoscaling.
+        - `Lock-wait (P95/P99)`: monitors lock wait time percentiles to surface contention hotspots.
+        - `Idle Connection Duration (P99 incl. not/in txn)`: identifies long-lived idle connections, both in-transaction and not-in-transaction, to adjust pooler limits and timeouts.
+
+      For more information, see [TiDB Cloud Built-in Metrics](/tidb-cloud/built-in-monitoring.md).
+
 ## September 30, 2025
 
 **General changes**
