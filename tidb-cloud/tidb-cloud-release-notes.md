@@ -37,7 +37,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         <CustomContent language="en,zh">
 
-        For more information, see [TiDB Cloud Essential: Now Available on AWS and Alibaba Cloud](https://www.pingcap.com/blog/tidb-cloud-essential-now-available-public-preview-aws-alibaba-cloud/).
+        For more information, see [TiDB Cloud Essential Now Available in Public Preview on AWS and Alibaba Cloud](https://www.pingcap.com/blog/tidb-cloud-essential-now-available-public-preview-aws-alibaba-cloud/).
 
         </CustomContent>
 
