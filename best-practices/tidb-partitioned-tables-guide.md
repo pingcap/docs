@@ -419,6 +419,7 @@ When a query does **not filter by partition key**, TiDB will **scan all partitio
 When using a time-based field as the partition key, a write hotspot may occur when switching to a new partition:
 
 **Root cause:**
+
 In TiDB, any newly created table or partition initially contains only **one region** (data block), which is randomly placed on a single TiKV node. As data begins to be written, this region will eventually **split** into multiple regions, and PD will schedule these new regions to other TiKV nodes.
 
 However, if the initial write traffic to this new partition is **very high**, the TiKV node hosting that single initial region will be under heavy write pressure. In such cases, it may not have enough spare resources (I/O capacity, CPU cycles) to handle both the application writes and the scheduling of newly split regions to other TiKV nodes. This can delay region distribution, keeping most writes concentrated on the same node for longer than desired.
