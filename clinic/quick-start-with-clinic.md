@@ -32,9 +32,7 @@ PingCAPクリニックを使用する前に、Diag をインストールし、�
 2.  クリニックサーバーにログインします。
 
     <SimpleTab groupId="clinicServer">
-     <div label="Clinic Server for international users" value="clinic-us">
-
-
+    <div label="Clinic Server for international users" value="clinic-us">
 
     > **注記：**
     >
@@ -47,13 +45,11 @@ PingCAPクリニックを使用する前に、Diag をインストールし、�
     [中国本土のユーザー向けクリニックサーバー](https://clinic.pingcap.com.cn)に進み、 **「AskTUGを続ける」**を選択してAskTUGコミュニティのログインページに進みます。AskTUGアカウントをお持ちでない場合は、このページでアカウントを作成してください。
 
     </div>
-     </SimpleTab>
+    </SimpleTab>
 
 3.  Clinic Server 上に組織を作成します。組織は TiDB クラスターの集合です。作成した組織に診断データをアップロードできます。
 
 4.  データをアップロードするには、アクセストークンを取得してください。Diag を通じて収集したデータをアップロードする際は、データが安全に分離されていることを確認するために、ユーザー認証用のトークンが必要です。クリニックサーバーから既にトークンを取得している場合は、そのトークンを再利用できます。
-
-
 
     ![An example of a token](/media/clinic-get-token.png)
 
