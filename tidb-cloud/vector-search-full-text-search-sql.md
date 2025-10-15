@@ -26,9 +26,9 @@ The full-text search feature in TiDB provides the following capabilities:
 
 ## Get started
 
-Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available for the following product option and regions:
+Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available on {{{ .starter }}} and {{{ .essential }}} in the following regions:
 
-- {{{ .starter }}} on AWS: `Frankfurt (eu-central-1)` and `Singapore (ap-southeast-1)`
+- AWS: `Frankfurt (eu-central-1)` and `Singapore (ap-southeast-1)`
 
 Before using full-text search, make sure your {{{ .starter }}} cluster is created in a supported region. If you don't have one, follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create it.
 
