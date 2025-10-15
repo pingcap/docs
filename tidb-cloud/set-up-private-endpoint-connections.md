@@ -5,17 +5,17 @@ summary: AWS を使用してプライベートエンドポイント経由でTiDB
 
 # AWS PrivateLink 経由でTiDB Cloud専用クラスタに接続する {#connect-to-a-tidb-cloud-dedicated-cluster-via-aws-privatelink}
 
-このドキュメントでは、 [AWS プライベートリンク](https://aws.amazon.com/privatelink)を介してTiDB Cloud Dedicated クラスターに接続する方法について説明します。
+このドキュメントでは、 [AWS プライベートリンク](https://aws.amazon.com/privatelink)経由でTiDB Cloud Dedicated クラスターに接続する方法について説明します。
 
 > **ヒント：**
 >
-> -   AWS PrivateLink 経由でTiDB Cloud Starter クラスターに接続する方法については、 [AWS PrivateLink 経由でTiDB Cloud Starter に接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)参照してください。
+> -   AWS PrivateLink 経由でTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続する方法については、 [AWS PrivateLink 経由でTiDB Cloud Starter または Essential に接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)参照してください。
 > -   Azure のプライベート エンドポイント経由でTiDB Cloud Dedicated クラスターに接続する方法については、 [Azure Private Link 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)参照してください。
 > -   Google Cloud のプライベート エンドポイント経由でTiDB Cloud Dedicated クラスタに接続する方法については、 [Google Cloud Private Service Connect 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)ご覧ください。
 
-TiDB Cloudは、AWS VPCでホストされているTiDB Cloudサービスへの、 [AWS プライベートリンク](https://aws.amazon.com/privatelink)経由の高度に安全な一方向アクセスをサポートします。まるでお客様のVPC内にあるかのようにアクセス可能です。VPC内にプライベートエンドポイントが公開されており、権限があればエンドポイント経由でTiDB Cloudサービスへの接続を作成できます。
+TiDB Cloudは、AWS VPCでホストされているTiDB Cloudサービスへの、 [AWS プライベートリンク](https://aws.amazon.com/privatelink)経由の高度に安全な一方向アクセスをサポートします。まるでお客様のVPC内にあるかのように機能します。VPC内にプライベートエンドポイントが公開されており、権限があればエンドポイント経由でTiDB Cloudサービスへの接続を作成できます。
 
-AWS PrivateLink を利用することで、エンドポイント接続は安全かつプライベートになり、データがパブリックインターネットに公開されることはありません。さらに、エンドポイント接続は CIDR オーバーラップをサポートし、ネットワーク管理が容易になります。
+AWS PrivateLink を利用することで、エンドポイント接続は安全かつプライベートであり、データがパブリックインターネットに公開されることはありません。さらに、エンドポイント接続は CIDR オーバーラップをサポートし、ネットワーク管理が容易になります。
 
 プライベート エンドポイントのアーキテクチャは次のとおりです。
 
@@ -31,10 +31,10 @@ AWS PrivateLink を利用することで、エンドポイント接続は安全�
 -   プライベート エンドポイントを作成できるのは、ロール`Organization Owner`と`Project Owner`のみです。
 -   プライベート エンドポイントと接続する TiDB クラスターは同じリージョンに配置されている必要があります。
 
-ほとんどのシナリオでは、VPCピアリングではなくプライベートエンドポイント接続を使用することをお勧めします。ただし、以下のシナリオでは、プライベートエンドポイント接続ではなくVPCピアリングを使用する必要があります。
+ほとんどのシナリオでは、VPC ピアリングではなくプライベートエンドポイント接続を使用することをお勧めします。ただし、以下のシナリオでは、プライベートエンドポイント接続ではなく VPC ピアリングを使用する必要があります。
 
 -   高可用性を実現するために、ソースTiDBクラスターからターゲットTiDBクラスターへリージョンをまたいでデータをレプリケートするために、 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)クラスターを使用しています。現在、プライベートエンドポイントはリージョン間接続をサポートしていません。
--   TiCDC クラスターを使用して、ダウンストリーム クラスター (Amazon Aurora、MySQL、Kafka など) にデータをレプリケートしていますが、エンドポイント サービスを独自に維持することはできません。
+-   TiCDC クラスターを使用してダウンストリーム クラスター (Amazon Aurora、MySQL、Kafka など) にデータをレプリケートしていますが、エンドポイント サービスを独自に維持することはできません。
 -   PD または TiKV ノードに直接接続しています。
 
 ## 前提条件 {#prerequisites}
@@ -69,7 +69,7 @@ AWS VPC設定でDNSホスト名とDNS解決の両方が有効になっている�
 >
 > 2023 年 3 月 28 日以降に作成されたTiDB Cloud Dedicated クラスターごとに、クラスターの作成後 3 ～ 4 分後に対応するエンドポイント サービスが自動的に作成されます。
 
-`TiDB Private Link Service is ready`メッセージが表示された場合、対応するエンドポイントサービスは準備完了です。エンドポイントを作成するには、以下の情報を入力してください。
+`TiDB Private Link Service is ready`メッセージが表示された場合、対応するエンドポイントサービスは準備完了です。エンドポイントを作成するには、以下の情報を提供してください。
 
 1.  **「VPC ID」**と**「サブネットID」の**フィールドに入力します。これらのIDは[AWS マネジメントコンソール](https://console.aws.amazon.com/)で確認できます。サブネットが複数ある場合は、IDをスペースで区切って入力してください。
 2.  **[コマンドの生成]**をクリックすると、次のエンドポイント作成コマンドが取得されます。
@@ -92,7 +92,7 @@ AWS CLI を使用して VPC インターフェイスエンドポイントを作�
 >
 > -   コマンドを実行する前に、AWS CLI をインストールして設定しておく必要があります。詳細は[AWS CLI 設定の基本](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)参照してください。
 >
-> -   サービスが3つ以上のアベイラビリティゾーン（AZ）にまたがっている場合、VPCエンドポイントサービスがサブネットのAZをサポートしていないことを示すエラーメッセージが表示されます。この問題は、選択したリージョンに、TiDBクラスターが配置されているAZに加えて、追加のAZが存在する場合に発生します。この場合、 [PingCAPテクニカルサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)お問い合わせください。
+> -   サービスが3つ以上のアベイラビリティゾーン（AZ）にまたがっている場合、VPCエンドポイントサービスがサブネットのAZをサポートしていないことを示すエラーメッセージが表示されます。この問題は、選択したリージョンに、TiDBクラスターが配置されているAZに加えて、追加のAZが存在する場合に発生します。この場合、 [PingCAP テクニカルサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)お問い合わせください。
 
 </div>
 <div label="Use AWS Console">
@@ -119,7 +119,7 @@ AWS マネジメントコンソールを使用して VPC インターフェイ�
 
     > **ヒント：**
     >
-    > サービスが3つ以上のアベイラビリティゾーン（AZ）にまたがっている場合、 **「サブネット」**エリアでAZを選択できない場合があります。この問題は、選択したリージョンに、TiDBクラスターが配置されているAZに加えて、追加のAZが存在する場合に発生します。その場合は、 [PingCAPテクニカルサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)お問い合わせください。
+    > サービスが3つ以上のアベイラビリティゾーン（AZ）にまたがっている場合、 **「サブネット」**エリアでAZを選択できない場合があります。この問題は、選択したリージョンに、TiDBクラスターが配置されているAZに加えて、追加のAZが存在する場合に発生します。その場合は、 [PingCAP テクニカルサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)お問い合わせください。
 
 8.  **[Securityグループ]**領域で、セキュリティ グループを適切に選択します。
 
@@ -147,7 +147,7 @@ AWS マネジメントコンソールを使用して VPC インターフェイ�
 
 ### ステップ4. プライベートDNSを有効にする {#step-4-enable-private-dns}
 
-AWS でプライベート DNS を有効にします。AWS CLI または AWS マネジメントコンソールを使用できます。
+AWSでプライベートDNSを有効にします。AWS CLIまたはAWSマネジメントコンソールを使用できます。
 
 <SimpleTab>
 <div label="Use AWS CLI">
@@ -158,7 +158,7 @@ AWS CLI を使用してプライベート DNS を有効にするには、 **「�
 aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-dns-enabled
 ```
 
-または、クラスターの**「ネットワーク」**ページでコマンドを見つけることもできます。プライベートエンドポイントを探し、 **「アクション」**列で**「...** * &gt; **DNSを有効にする」**をクリックします。
+または、クラスターの**「ネットワーク」**ページでコマンドを見つけることもできます。プライベートエンドポイントを探し、 **「アクション」**列で**「...** *」&gt; **「DNSを有効にする」**をクリックします。
 
 </div>
 <div label="Use AWS Console">
@@ -168,7 +168,7 @@ AWS マネジメントコンソールでプライベート DNS を有効にす�
 1.  **VPC** &gt;**エンドポイント**に移動します。
 2.  エンドポイント ID を右クリックし、 **[プライベート DNS 名の変更]**を選択します。
 3.  **このエンドポイントに対して有効にする**チェックボックスをオンにします。
-4.  **「変更を保存」を**クリックします。
+4.  **[変更を保存]を**クリックします。
 
     ![Enable private DNS](/media/tidb-cloud/private-endpoint/enable-private-dns.png)
 
@@ -202,7 +202,7 @@ AWS マネジメントコンソールでプライベート DNS を有効にす�
 -   **削除中**: プライベート エンドポイントを削除しています。
 -   **失敗**: プライベートエンドポイントの作成に失敗しました。その行の**「編集」を**クリックすると、作成を再試行できます。
 
-プライベート エンドポイント サービスの可能なステータスについては、次のように説明されています。
+プライベート エンドポイント サービスの可能なステータスについては、次のように説明されます。
 
 -   **作成中**: エンドポイント サービスを作成中です。これには 3 ～ 5 分かかります。
 -   **アクティブ**: プライベート エンドポイントが作成されたかどうかに関係なく、エンドポイント サービスが作成されます。

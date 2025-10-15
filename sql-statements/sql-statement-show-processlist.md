@@ -5,7 +5,7 @@ summary: TiDB データベースの SHOW [FULL] PROCESSLIST の使用法の概�
 
 # プロセスリストを[完全]表示 {#show-full-processlist}
 
-このステートメントは、同じTiDBサーバーに接続されている現在のセッションを一覧表示します。1列目`Info`はクエリテキストが含まれますが、オプションのキーワード`FULL`が指定されていない限り、切り捨てられます。
+このステートメントは、同じTiDBサーバーに接続されている現在のセッションを一覧表示します。1列`Info`にはクエリテキストが含まれますが、オプションのキーワード`FULL`が指定されていない限り、切り捨てられます。クラスター全体のプロセスリストを表示するには、 [`INFORMATION_SCHEMA.CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md#cluster_processlist)列目を使用してください。
 
 ## 概要 {#synopsis}
 
@@ -25,6 +25,10 @@ mysql> SHOW PROCESSLIST;
 +------+------+-----------------+------+---------+------+------------+------------------+
 1 rows in set (0.00 sec)
 ```
+
+## 権限 {#permissions}
+
+現在のユーザーに`PROCESS`権限がない場合、 `SHOW PROCESSLIST`ユーザー自身のセッションからのリクエストのみを表示します。
 
 ## MySQLの互換性 {#mysql-compatibility}
 

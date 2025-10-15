@@ -14,15 +14,22 @@ TiDB Cloudは、 [チェンジフィード](/tidb-cloud/changefeed-overview.md)�
 
 次の表は、変更フィードの仕様と対応するレプリケーション パフォーマンスを示しています。
 
-| 仕様     | 最大のレプリケーションパフォーマンス |
-| ------ | ------------------ |
-| 2台のRCU | 5,000行/秒           |
-| 4台のRCU | 10,000行/秒          |
-| 8台のRCU | 20,000行/秒          |
-| 16 RCU | 40,000行/秒          |
-| 24 RCU | 60,000行/秒          |
-| 32 RCU | 80,000行/秒          |
-| 40 RCU | 100,000行/秒         |
+| 仕様      | 最大のレプリケーションパフォーマンス |
+| ------- | ------------------ |
+| 2台のRCU  | 5,000行/秒           |
+| 4つのRCU  | 10,000行/秒          |
+| 8 RCU   | 20,000行/秒          |
+| 16 RCU  | 40,000行/秒          |
+| 24 RCU  | 60,000行/秒          |
+| 32 RCU  | 80,000行/秒          |
+| 40 RCU  | 100,000行/秒         |
+| 64 RCU  | 160,000行/秒         |
+| 96 RCU  | 240,000行/秒         |
+| 128 RCU | 320,000行/秒         |
+| 192 RCU | 480,000行/秒         |
+| 256 RCU | 640,000行/秒         |
+| 320 RCU | 80万行/秒             |
+| 384 RCU | 960,000行/秒         |
 
 > **注記：**
 >
@@ -32,8 +39,8 @@ TiDB Cloudは、 [チェンジフィード](/tidb-cloud/changefeed-overview.md)�
 
 各 TiCDC RCU でサポートされているリージョンとTiDB Cloudの価格については、 [チェンジフィードコスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#changefeed-cost)参照してください。
 
-## プライベートデータリンクコスト {#private-data-link-cost}
+## プライベートデータリンクのコスト {#private-data-link-cost}
 
 **プライベートリンク**または**プライベートサービスコネクトの**ネットワーク接続方法を選択した場合、追加の**プライベートデータリンク**料金が発生します。これらの料金は[データ転送コスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#data-transfer-cost)カテゴリに該当します。
 
-**プライベート データ リンク**の料金は**$0.01/GiB**で、**処理済みデータ**[AWS インターフェースエンドポイントの料金](https://aws.amazon.com/privatelink/pricing/#Interface_Endpoint_pricing) 、**コンシューマー データ処理**[Google Cloud プライベート サービス コネクトの料金](https://cloud.google.com/vpc/pricing#psc-forwarding-rules) 、**受信/送信データ処理**[Azure プライベート リンクの料金](https://azure.microsoft.com/en-us/pricing/details/private-link/)と同じです。
+**プライベート データ リンク**の料金は**$0.01/GiB**で、**データ処理量**[AWS インターフェースエンドポイントの料金](https://aws.amazon.com/privatelink/pricing/#Interface_Endpoint_pricing) 、**コンシューマー データ処理量**[Google Cloud プライベート サービス コネクトの料金](https://cloud.google.com/vpc/pricing#psc-forwarding-rules) 、**受信/送信データ処理量**[Azure Private Link の料金](https://azure.microsoft.com/en-us/pricing/details/private-link/)と同じです。

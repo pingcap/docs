@@ -302,7 +302,7 @@
         -   [OAuth 2.0](/tidb-cloud/oauth2.md)
     -   ネットワークアクセス制御
         -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-        -   [Alibaba Cloud のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+        -   [プライベートエンドポイント経由でAlibaba Cloudに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
         -   [パブリックエンドポイントのファイアウォールルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
         -   [TiDB CloudへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)
     -   監査管理
@@ -648,7 +648,6 @@
             -   [消去](/tidb-cloud/ticloud-serverless-authorized-network-delete.md)
             -   [リスト](/tidb-cloud/ticloud-serverless-authorized-network-list.md)
             -   [アップデート](/tidb-cloud/ticloud-serverless-authorized-network-update.md)
-    -   [愛](/tidb-cloud/ticloud-ai.md)
     -   [完了](/tidb-cloud/ticloud-completion.md)
     -   設定
         -   [作成する](/tidb-cloud/ticloud-config-create.md)

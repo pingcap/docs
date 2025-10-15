@@ -69,7 +69,7 @@ TiProxy が適しているシナリオでは TiProxy を使用し、アプリケ
 
 その他の展開方法については、次のドキュメントを参照してください。
 
--   TiDB Operatorを使用して TiProxy をデプロイするには、 [TiDB Operator](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-tiproxy)ドキュメントを参照してください。
+-   TiDB Operatorを使用して TiProxy をデプロイするには、 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tiproxy)ドキュメントを参照してください。
 -   TiUPを使用して TiProxy をローカルに素早く展開するには、 [TiProxyをデプロイ](/tiup/tiup-playground.md#deploy-tiproxy)参照してください。
 
 ### TiProxyでクラスターを作成する {#create-a-cluster-with-tiproxy}

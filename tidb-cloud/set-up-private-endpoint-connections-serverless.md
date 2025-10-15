@@ -1,11 +1,11 @@
 ---
-title: Connect to TiDB Cloud Starter via AWS PrivateLink
+title: Connect to TiDB Cloud Starter or Essential via AWS PrivateLink
 summary: プライベート エンドポイント経由でTiDB Cloudクラスターに接続する方法を学習します。
 ---
 
-# AWS PrivateLink 経由でTiDB Cloud Starter に接続する {#connect-to-tidb-cloud-starter-via-aws-privatelink}
+# AWS PrivateLink 経由でTiDB Cloud Starter または Essential に接続します {#connect-to-tidb-cloud-starter-or-essential-via-aws-privatelink}
 
-このドキュメントでは、AWS PrivateLink を介してTiDB Cloud Starter クラスターに接続する方法について説明します。
+このドキュメントでは、AWS PrivateLink を介してTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続する方法について説明します。
 
 > **ヒント：**
 >
@@ -15,7 +15,7 @@ summary: プライベート エンドポイント経由でTiDB Cloudクラスタ
 
 TiDB Cloudは、AWS VPCでホストされているTiDB Cloudサービスへの、 [AWS プライベートリンク](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&#x26;privatelink-blogs.sort-order=desc)経由の高度に安全な一方向アクセスをサポートします。まるでお客様のVPC内にあるかのようにアクセス可能です。VPC内にプライベートエンドポイントが公開されており、権限があればエンドポイント経由でTiDB Cloudサービスへの接続を作成できます。
 
-AWS PrivateLink を利用することで、エンドポイント接続は安全かつプライベートになり、データがパブリックインターネットに公開されることはありません。さらに、エンドポイント接続は CIDR オーバーラップをサポートし、ネットワーク管理が容易になります。
+AWS PrivateLink を利用することで、エンドポイント接続は安全かつプライベートであり、データがパブリックインターネットに公開されることはありません。さらに、エンドポイント接続は CIDR オーバーラップをサポートし、ネットワーク管理が容易になります。
 
 プライベート エンドポイントのアーキテクチャは次のとおりです。
 
@@ -28,7 +28,7 @@ AWS PrivateLink を利用することで、エンドポイント接続は安全�
 
 ## 制限 {#restrictions}
 
--   現在、 TiDB Cloud は、エンドポイントサービスが AWS でホストされている場合にのみ、 TiDB Cloud Starter への AWS PrivateLink 接続をサポートしています。サービスが他のクラウドプロバイダーでホストされている場合、AWS PrivateLink 接続は適用されません。
+-   現在、 TiDB Cloud は、エンドポイントサービスが AWS でホストされている場合にのみ AWS PrivateLink 接続をサポートしています。サービスが他のクラウドプロバイダーでホストされている場合は、AWS PrivateLink 接続はご利用いただけません。
 -   リージョン間のプライベート エンドポイント接続はサポートされていません。
 
 ## 前提条件 {#prerequisites}
@@ -37,7 +37,7 @@ AWS VPC設定でDNSホスト名とDNS解決の両方が有効になっている�
 
 ## AWSでプライベートエンドポイントを設定する {#set-up-a-private-endpoint-with-aws}
 
-プライベート エンドポイント経由でTiDB Cloud Starter クラスターに接続するには、次の手順に従います。
+プライベート エンドポイント経由でTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続するには、次の手順に従います。
 
 1.  [TiDBクラスタを選択する](#step-1-choose-a-tidb-cluster)
 2.  [AWSインターフェースエンドポイントを作成する](#step-2-create-an-aws-interface-endpoint)
@@ -45,14 +45,14 @@ AWS VPC設定でDNSホスト名とDNS解決の両方が有効になっている�
 
 ### ステップ1. TiDBクラスターを選択する {#step-1-choose-a-tidb-cluster}
 
-1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページで、ターゲットのTiDB Cloud Starter クラスターの名前をクリックして、概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページで、対象のTiDB Cloud Starter またはTiDB Cloud Essential クラスターの名前をクリックして、概要ページに移動します。
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 3.  **[接続タイプ]**ドロップダウン リストで、 **[プライベート エンドポイント]**を選択します。
 4.  **サービス名**、**アベイラビリティーゾーン ID** 、**リージョンID を**メモします。
 
     > **注記：**
     >
-    > AWS リージョンごとにプライベートエンドポイントを 1 つ作成するだけで、同じリージョンにあるすべてのTiDB Cloud Starter クラスターで共有できます。
+    > AWS リージョンごとにプライベートエンドポイントを 1 つだけ作成すれば、同じリージョンにあるすべてのTiDB Cloud Starter またはTiDB Cloud Essential クラスターで共有できます。
 
 ### ステップ2. AWSインターフェースエンドポイントを作成する {#step-2-create-an-aws-interface-endpoint}
 
@@ -92,7 +92,7 @@ AWS マネジメントコンソールを使用して VPC インターフェイ�
 
 AWS CLI を使用して VPC インターフェイスエンドポイントを作成するには、次の手順を実行します。
 
-1.  **VPC ID**と**サブネット ID**を取得するには、AWS マネジメントコンソールに移動し、該当するセクションでそれらを見つけます[ステップ1](#step-1-choose-a-tidb-cluster)で確認した**アベイラビリティーゾーン ID**を必ず入力してください。
+1.  **VPC ID**と**サブネットID**を取得するには、AWSマネジメントコンソールに移動し、関連セクションでそれらを見つけます[ステップ1](#step-1-choose-a-tidb-cluster)で確認した**アベイラビリティゾーンIDを**必ず入力してください。
 2.  以下のコマンドをコピーし、関連する引数を取得した情報に置き換えて、ターミナルで実行します。
 
 ```bash

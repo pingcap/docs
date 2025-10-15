@@ -1,6 +1,6 @@
 ---
 title: Connect AWS DMS to TiDB Cloud clusters
-summary: AWS Database Migration Service (AWS DMS) を使用して、TiDB クラウドから、またはTiDB Cloudにデータを移行する方法を学びます。
+summary: AWS Database Migration Service (AWS DMS) を使用して、 TiDB Cloudとの間でデータを移行する方法を学びます。
 ---
 
 # AWS DMS をTiDB Cloudクラスターに接続する {#connect-aws-dms-to-tidb-cloud-clusters}
@@ -14,13 +14,13 @@ summary: AWS Database Migration Service (AWS DMS) を使用して、TiDB クラ�
 DMS関連リソースを管理するための十分なアクセス権を持つAWSアカウントをお持ちであることが前提となります。お持ちでない場合は、以下のAWSドキュメントをご参照ください。
 
 -   [AWSアカウントにサインアップする](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.SettingUp.html#sign-up-for-aws)
--   [AWS データベース移行サービスの ID およびアクセス管理](https://docs.aws.amazon.com/dms/latest/userguide/security-iam.html)
+-   [AWS Database Migration Service の ID およびアクセス管理](https://docs.aws.amazon.com/dms/latest/userguide/security-iam.html)
 
 ### TiDB Cloudアカウントと TiDB クラスター {#a-tidb-cloud-account-and-a-tidb-cluster}
 
-TiDB Cloudアカウントと {{{ .starter }}}、{{{ .essential }}}、またはTiDB Cloud Dedicated クラスターが必要です。お持ちでない場合は、以下のドキュメントを参照して作成してください。
+TiDB Cloudアカウントと、 TiDB Cloud Starter、 TiDB Cloud Essential、またはTiDB Cloud Dedicated クラスターをお持ちであることが前提となります。お持ちでない場合は、以下のドキュメントを参照して作成してください。
 
--   [{{{ .starter }}} または Essential クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
+-   [TiDB Cloud Starter または Essential クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
 -   [TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
 
 ## ネットワークを構成する {#configure-network}
@@ -29,34 +29,34 @@ DMSリソースを作成する前に、DMSがTiDB Cloudクラスターと通信�
 
 <SimpleTab>
 
-<div label="{{{ .starter }}} or Essential">
+<div label="TiDB Cloud Starter or Essential">
 
-{{{ .starter }}} または {{{ .essential }}} の場合、クライアントはパブリック エンドポイントまたはプライベート エンドポイントを介してクラスターに接続できます。
+TiDB Cloud Starter またはTiDB Cloud Essential の場合、クライアントはパブリック エンドポイントまたはプライベート エンドポイントを介してクラスターに接続できます。
 
 <CustomContent language="en,zh">
 
--   [パブリックエンドポイント経由で {{{ .starter }}} または Essential クラスターに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)場合、次のいずれかを実行して、DMS レプリケーション インスタンスがインターネットにアクセスできることを確認します。
+-   [パブリックエンドポイント経由でTiDB Cloud Starter または Essential クラスターに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)場合、次のいずれかを実行して、DMS レプリケーション インスタンスがインターネットにアクセスできることを確認します。
 
     -   レプリケーションインスタンスをパブリックサブネットにデプロイ、 **「パブリックアクセス**可能」を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)参照してください。
 
     -   レプリケーションインスタンスをプライベートサブネットにデプロイ、プライベートサブネット内のトラフィックをパブリックサブネットにルーティングします。この場合、少なくとも3つのサブネット（プライベートサブネット2つとパブリックサブネット1つ）が必要です。2つのプライベートサブネットは、レプリケーションインスタンスが存在するサブネットグループを形成します。次に、パブリックサブネットにNATゲートウェイを作成し、2つのプライベートサブネットのトラフィックをNATゲートウェイにルーティングする必要があります。詳細については、 [プライベートサブネットからインターネットにアクセスする](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)参照してください。
 
--   プライベート エンドポイント経由で {{{ .starter }}} または {{{ .essential }}} クラスターに接続するには、次のドキュメントを参照して、まずプライベート エンドポイントを設定し、レプリケーション インスタンスをプライベート サブネットにデプロイしてください。
+-   プライベート エンドポイント経由でTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続するには、次のドキュメントを参照して、まずプライベート エンドポイントを設定し、プライベート サブネットにレプリケーション インスタンスをデプロイします。
 
-    -   [AWS PrivateLink 経由で {{{ .starter }}} に接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-    -   [Alibaba Cloud プライベートエンドポイント経由で {{{ .starter }}} または Essential に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+    -   [AWS PrivateLink 経由でTiDB Cloud Starter または Essential に接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+    -   [Alibaba Cloud プライベートエンドポイント経由でTiDB Cloud Starter または Essential に接続します](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
 
 </CustomContent>
 
 <CustomContent language="ja">
 
--   [パブリックエンドポイント経由で {{{ .starter }}} または Essential クラスターに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)場合、次のいずれかを実行して、DMS レプリケーション インスタンスがインターネットにアクセスできることを確認します。
+-   [パブリックエンドポイント経由でTiDB Cloud Starter または Essential クラスターに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)場合、次のいずれかを実行して、DMS レプリケーション インスタンスがインターネットにアクセスできることを確認します。
 
     -   レプリケーションインスタンスをパブリックサブネットにデプロイ、 **「パブリックアクセス**可能」を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)参照してください。
 
     -   レプリケーションインスタンスをプライベートサブネットにデプロイ、プライベートサブネット内のトラフィックをパブリックサブネットにルーティングします。この場合、少なくとも3つのサブネット（プライベートサブネット2つとパブリックサブネット1つ）が必要です。2つのプライベートサブネットは、レプリケーションインスタンスが存在するサブネットグループを形成します。次に、パブリックサブネットにNATゲートウェイを作成し、2つのプライベートサブネットのトラフィックをNATゲートウェイにルーティングする必要があります。詳細については、 [プライベートサブネットからインターネットにアクセスする](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)参照してください。
 
--   プライベート エンドポイント経由で {{{ .starter }}} または {{{ .essential }}} クラスターに接続するには、まず[AWS PrivateLink 経由で {{{ .starter }}} に接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)参照してプライベート エンドポイントを設定し、レプリケーション インスタンスをプライベート サブネットにデプロイします。
+-   プライベート エンドポイント経由でTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続するには、まず[AWS PrivateLink 経由でTiDB Cloud Starter または Essential に接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してプライベート エンドポイントを設定し、レプリケーション インスタンスをプライベート サブネットにデプロイします。
 
 </CustomContent>
 
@@ -66,7 +66,7 @@ DMSリソースを作成する前に、DMSがTiDB Cloudクラスターと通信�
 
 TiDB Cloud Dedicated の場合、クライアントはパブリック エンドポイント、プライベート エンドポイント、または VPC ピアリングを介してクラスターに接続できます。
 
--   [パブリックエンドポイント経由でTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/connect-via-standard-connection.md)実行するには、DMS レプリケーションインスタンスがインターネットにアクセスできることを確認するために、次のいずれかを実行します。さらに、レプリケーションインスタンスまたは NAT ゲートウェイのパブリック IP アドレスをクラスターの[IPアクセスリスト](/tidb-cloud/configure-ip-access-list.md)に追加する必要があります。
+-   [パブリックエンドポイント経由でTiDB Cloud Dedicated クラスターに接続する](/tidb-cloud/connect-via-standard-connection.md)については、DMS レプリケーションインスタンスがインターネットにアクセスできることを確認するために、次のいずれかを実行します。さらに、レプリケーションインスタンスまたは NAT ゲートウェイのパブリック IP アドレスをクラスターの[IPアクセスリスト](/tidb-cloud/configure-ip-access-list.md)に追加する必要があります。
 
     -   レプリケーションインスタンスをパブリックサブネットにデプロイ、 **「パブリックアクセス**可能」を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)参照してください。
 
@@ -74,7 +74,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
 -   プライベート エンドポイント経由でTiDB Cloud Dedicated クラスターに接続するには、 [プライベートエンドポイントを設定する](/tidb-cloud/set-up-private-endpoint-connections.md) 、プライベート サブネットにレプリケーション インスタンスをデプロイします。
 
--   VPC ピアリング経由でTiDB Cloud Dedicated クラスターに接続するには、まず[VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)目のプライベート サブネットにレプリケーション インスタンスをデプロイします。
+-   VPC ピアリング経由でTiDB Cloud Dedicated クラスターに接続するには、 [VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md) 、プライベート サブネットにレプリケーション インスタンスをデプロイします。
 
 </div>
 </SimpleTab>
@@ -90,7 +90,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 3.  インスタンス名、ARN、説明を入力します。
 
 4.  **インスタンス構成**セクションで、インスタンスを構成します。
-    -   **インスタンスクラス**：適切なインスタンスクラスを選択します。詳細については、 [レプリケーションインスタンスタイプの選択](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Types.html)参照してください。
+    -   **インスタンスクラス**: 適切なインスタンスクラスを選択します。詳細については、 [レプリケーションインスタンスタイプの選択](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Types.html)参照してください。
     -   **エンジン バージョン**: デフォルト構成を維持します。
     -   **高可用性**: ビジネス ニーズに応じて、**マルチ AZ**または**シングル AZ**を選択します。
 
@@ -115,7 +115,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
 接続に関しては、 TiDB Cloudクラスターをソースとして使用する場合とターゲットとして使用する場合の手順は似ていますが、DMS ではソースとターゲットでデータベース設定要件が異なります。詳細については、 [MySQLをソースとして使用する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.html)または[MySQLをターゲットとして使用する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.html)参照してください。TiDB TiDB Cloudクラスターをソースとして使用する場合、TiDB は MySQL binlogをサポートしていないため、**既存のデータの移行**のみが可能です。
 
-1.  AWS DMS コンソールで[**エンドポイント**](https://console.aws.amazon.com/dms/v2/home#endpointList)ページに移動し、対応するリージョンに切り替えます。
+1.  AWS DMS コンソールで、 [**エンドポイント**](https://console.aws.amazon.com/dms/v2/home#endpointList)ページに移動し、対応するリージョンに切り替えます。
 
     ![Create endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-create-endpoint.png)
 
@@ -129,20 +129,20 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
     <SimpleTab>
 
-    <div label="{{{ .starter }}} or Essential">
+    <div label="TiDB Cloud Starter or Essential">
 
     -   **サーバー名**: クラスターの`HOST` 。
     -   **ポート**: クラスターの`PORT` 。
     -   **ユーザー名**: 移行先クラスターのユーザー。DMSの要件を満たしていることを確認してください。
     -   **パスワード**: クラスター ユーザーのパスワード。
     -   **セキュリティ Socket Layer (SSL) モード**：パブリックエンドポイント経由で接続する場合は、トランスポートセキュリティを確保するために、モードを**verify-full**に設定することを強くお勧めします。プライベートエンドポイント経由で接続する場合は、モードを**none**に設定できます。
-    -   （オプション） **CA証明書**： [ISRGルートX1証明書](https://letsencrypt.org/certs/isrgrootx1.pem)使用します。詳細については、 [{{{ .starter }}} または Essential への TLS 接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)参照してください。
+    -   （オプション） **CA証明書**： [ISRGルートX1証明書](https://letsencrypt.org/certs/isrgrootx1.pem)使用します。詳細については、 [TiDB Cloud Starter または Essential への TLS 接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)参照してください。
 
     </div>
 
     <div label="TiDB Cloud Dedicated">
 
-    -   **サーバー名**: TiDB Cloud Dedicated クラスターの`HOST` 。
+    -   **サーバー名**: TiDB Cloud専用クラスターの`HOST` 。
     -   **ポート**: TiDB Cloud Dedicated クラスターの`PORT` 。
     -   **ユーザー名**：移行用のTiDB Cloud専用クラスタのユーザー。DMS要件を満たしていることを確認してください。
     -   **パスワード**: TiDB Cloud Dedicated クラスター ユーザーのパスワード。

@@ -136,6 +136,7 @@
         -   TiDB Cloudクラスタに接続する
             -   [接続の概要](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
             -   [パブリックエンドポイント経由で接続](/tidb-cloud/connect-via-standard-connection-serverless.md)
+            -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
             -   [プライベートエンドポイント経由でAlibaba Cloudに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
         -   支店![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
             -   [概要](/tidb-cloud/branch-overview.md)
@@ -151,7 +152,7 @@
         -   [FastScanを使用する](/tiflash/use-fastscan.md)
         -   [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
         -   [TiFlashクエリ結果のマテリアライゼーション](/tiflash/tiflash-results-materialization.md)
-        -   [TiFlash遅延マテリアライゼーション](/tiflash/tiflash-late-materialization.md)
+        -   [TiFlash遅延実体化](/tiflash/tiflash-late-materialization.md)
         -   [互換性](/tiflash/tiflash-compatibility.md)
         -   [パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)
     -   監視と警告
@@ -249,6 +250,10 @@
             -   [SQLアルケミー](/vector-search/vector-search-integrate-with-sqlalchemy.md)
             -   [ピーウィー](/vector-search/vector-search-integrate-with-peewee.md)
             -   [Django ORM](/vector-search/vector-search-integrate-with-django-orm.md)
+    -   テキスト検索
+        -   [SQLによる全文検索](/tidb-cloud/vector-search-full-text-search-sql.md)
+        -   [Pythonによる全文検索](/tidb-cloud/vector-search-full-text-search-python.md)
+        -   [ハイブリッド検索](/tidb-cloud/vector-search-hybrid-search.md)
     -   参照
         -   [ベクトルデータ型](/vector-search/vector-search-data-types.md)
         -   [ベクトル関数と演算子](/vector-search/vector-search-functions-and-operators.md)
@@ -264,11 +269,13 @@
         -   [アイデンティティアクセス管理](/tidb-cloud/manage-user-access.md)
         -   [OAuth 2.0](/tidb-cloud/oauth2.md)
     -   ネットワークアクセス制御
+        -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
         -   [プライベートエンドポイント経由でAlibaba Cloudに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
         -   [パブリックエンドポイントのファイアウォールルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
         -   [TiDB CloudへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)
     -   監査管理
         -   [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)
+        -   [データベース監査ログ](/tidb-cloud/essential-database-audit-logging.md)
 -   請求する
     -   [請求書](/tidb-cloud/tidb-cloud-billing.md#invoices)
     -   [請求の詳細](/tidb-cloud/tidb-cloud-billing.md#billing-details)
@@ -608,7 +615,18 @@
             -   [消去](/tidb-cloud/ticloud-serverless-authorized-network-delete.md)
             -   [リスト](/tidb-cloud/ticloud-serverless-authorized-network-list.md)
             -   [アップデート](/tidb-cloud/ticloud-serverless-authorized-network-update.md)
-    -   [愛](/tidb-cloud/ticloud-ai.md)
+        -   監査ログ
+            -   設定
+                -   [アップデート](/tidb-cloud/ticloud-serverless-audit-log-config-update.md)
+                -   [説明する](/tidb-cloud/ticloud-serverless-audit-log-config-describe.md)
+            -   フィルタールール
+                -   [作成する](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-create.md)
+                -   [消去](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-delete.md)
+                -   [説明する](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-describe.md)
+                -   [リスト](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-list.md)
+                -   [アップデート](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-update.md)
+                -   [テンプレート](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-template.md)
+            -   [ダウンロード](/tidb-cloud/ticloud-serverless-audit-log-download.md)
     -   [完了](/tidb-cloud/ticloud-completion.md)
     -   設定
         -   [作成する](/tidb-cloud/ticloud-config-create.md)

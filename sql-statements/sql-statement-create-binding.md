@@ -312,6 +312,10 @@ Empty set (0.002 sec)
 
 `CREATE BINDING ... FROM HISTORY USING PLAN DIGEST`使用すると、そのダイジェストの[明細書要約表](/statement-summary-tables.md)に格納されているSQL文が[`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40)より長いために切り捨てられ、バインディングが失敗する可能性があります。この場合、 `tidb_stmt_summary_max_sql_length`増やす必要があります。
 
+## 権限 {#permissions}
+
+`CREATE BINDING`ステートメントには`SUPER`権限が必要です。
+
 ## MySQLの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL 構文に対する TiDB 拡張です。

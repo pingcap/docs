@@ -17,7 +17,7 @@ summary: サブクエリに関連する最適化を理解します。
 
 サブクエリには、 `select * from t where t.a in (select * from t2 where t.b=t2.b)`ようにサブクエリ以外の列が含まれる場合があります。サブクエリ内の`t.b`列はサブクエリに属しておらず、サブクエリの外部から導入されています。このようなサブクエリは通常「相関サブクエリ」と呼ばれ、外部から導入された列は「相関列」と呼ばれます。相関サブクエリの最適化については、 [相関サブクエリの非相関](/correlated-subquery-optimization.md)参照してください。この記事では、相関列を含まないサブクエリに焦点を当てています。
 
-デフォルトでは、サブクエリは[TiDB実行プランの理解](/explain-overview.md)で述べた`semi join`実行方法を使用します。一部の特殊なサブクエリについては、TiDBはパフォーマンス向上のために論理的な書き換えを行います。
+デフォルトでは、サブクエリは[セミ結合（相関サブクエリ）](/explain-subqueries.md#semi-join-correlated-subquery)で述べた`semi join`実行方法として使用します。一部の特殊なサブクエリについては、TiDBはパフォーマンス向上のために論理的な書き換えを実行します。
 
 ## <code>... &lt; ALL (SELECT ... FROM ...)</code>または<code>... &gt; ANY (SELECT ... FROM ...)</code> {#code-x3c-all-select-from-code-or-code-any-select-from-code}
 
@@ -28,13 +28,13 @@ summary: サブクエリに関連する最適化を理解します。
 
 ## <code>... != ANY (SELECT ... FROM ...)</code> {#code-any-select-from-code}
 
-この場合、サブクエリのすべての値が一意であれば、クエリとそれらを比較するだけで十分です。サブクエリ内の異なる値の数が複数ある場合は、不等式が存在することになります。したがって、このようなサブクエリは次のように書き換えることができます。
+この場合、サブクエリのすべての値が一意であれば、クエリをそれらと比較するだけで十分です。サブクエリ内の異なる値の数が複数ある場合は、不等式が存在する必要があります。したがって、このようなサブクエリは次のように書き換えることができます。
 
 -   `select * from t where t.id != any (select s.id from s)`は`select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s) where (t.id != s.id or cnt_distinct > 1)`に書き換えられる
 
 ## <code>... = ALL (SELECT ... FROM ...)</code> {#code-all-select-from-code}
 
-この場合、サブクエリ内の異なる値の数が複数あると、この式の結果は必ず偽になります。そのため、TiDBではこのようなサブクエリは次のような形式に書き換えられます。
+この場合、サブクエリ内の異なる値の数が複数ある場合、この式の結果は必ず偽になります。そのため、TiDBではこのようなサブクエリは次のような形式に書き換えられます。
 
 -   `select * from t where t.id = all (select s.id from s)`は`select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s ) where (t.id = s.id and cnt_distinct <= 1)`に書き換えられる
 
@@ -42,7 +42,7 @@ summary: サブクエリに関連する最適化を理解します。
 
 この場合、 `IN`のサブクエリは`SELECT ... FROM ... GROUP ...`に書き換えられ、その後`JOIN`の通常形式に書き換えられます。
 
-例えば、 `select * from t1 where t1.a in (select t2.a from t2)` `select t1.* from t1, (select distinct(a) a from t2) t2 where t1.a = t2. The form of a`と書き換えられます。ここでの`DISTINCT`属性は、 `t2.a` `UNIQUE`属性を持つ場合、自動的に除去されます。
+例えば、 `select * from t1 where t1.a in (select t2.a from t2)` `select t1.* from t1, (select distinct(a) a from t2) t2 where t1.a = t2. The form of a`に書き換えられます。ここでの`DISTINCT`属性は、 `t2.a` `UNIQUE`属性を持つ場合、自動的に除去されます。
 
 ```sql
 explain select * from t1 where t1.a in (select t2.a from t2);
@@ -61,7 +61,7 @@ explain select * from t1 where t1.a in (select t2.a from t2);
 +------------------------------+---------+-----------+------------------------+----------------------------------------------------------------------------+
 ```
 
-この書き換えは、 `IN`サブクエリが比較的小さく、外部クエリが比較的大きい場合にパフォーマンスが向上します。これは、書き換えを行わないと、t2を駆動テーブルとして`index join`のサブクエリを使用することが不可能になるためです。ただし、書き換え中に集計を自動的に削除できず、 `t2`テーブルが比較的大きい場合、この書き換えがクエリのパフォーマンスに影響を与えるという欠点があります。現在、この最適化を制御するために変数[tidb_opt_insubq_to_join_and_agg](/system-variables.md#tidb_opt_insubq_to_join_and_agg)使用されています。この最適化が適切でない場合は、手動で無効にすることができます。
+この書き換えは、 `IN`サブクエリが比較的小さく、外部クエリが比較的大きい場合にパフォーマンスが向上します。これは、書き換えを行わないと、t2を駆動テーブルとして`index join`のクエリを使用することが不可能になるためです。ただし、書き換え中に集計を自動的に削除できず、 `t2`テーブルが比較的大きい場合、この書き換えがクエリのパフォーマンスに影響を与えるという欠点があります。現在、この最適化を制御するために変数[tidb_opt_insubq_to_join_and_agg](/system-variables.md#tidb_opt_insubq_to_join_and_agg)使用されています。この最適化が適切でない場合は、手動で無効にすることができます。
 
 ## <code>EXISTS</code>サブクエリと<code>... &gt;/&gt;=/&lt;/&lt;=/=/!= (SELECT ... FROM ...)</code> {#code-exists-code-subquery-and-code-x3c-x3c-select-from-code}
 
@@ -85,7 +85,7 @@ explain select * from t1 where exists (select * from t2);
 
 前述の最適化では、オプティマイザが自動的に文の実行を最適化します。さらに、 [`SEMI_JOIN_REWRITE`](/optimizer-hints.md#semi_join_rewrite)ヒントを追加して文をさらに書き換えることもできます。
 
-このヒントをクエリの書き換えに使用しない場合、実行プランでハッシュ結合が選択されると、準結合クエリはハッシュテーブルの構築にサブクエリのみを使用します。この場合、サブクエリの結果が外部クエリの結果よりも大きいと、実行速度が予想よりも遅くなる可能性があります。
+このヒントをクエリの書き換えに使用しない場合、実行プランでハッシュ結合が選択されると、準結合クエリはハッシュテーブルの構築にサブクエリのみを使用します。この場合、サブクエリの結果が外部クエリの結果よりも大きい場合、実行速度が予想よりも遅くなる可能性があります。
 
 同様に、実行プランでインデックス結合が選択されている場合、準結合クエリは駆動テーブルとして外部クエリのみを使用できます。この場合、サブクエリの結果が外部クエリの結果よりも小さい場合、実行速度が予想よりも遅くなる可能性があります。
 

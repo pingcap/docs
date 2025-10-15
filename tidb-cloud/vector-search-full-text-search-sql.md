@@ -1,6 +1,6 @@
 ---
 title: Full-Text Search with SQL
-summary: 全文検索を使用すると、キーワードに完全一致するドキュメントを検索できます。検索拡張生成（RAG）シナリオでは、全文検索とベクター検索を併用することで、検索品質を向上させることができます。
+summary: 全文検索を使用すると、正確なキーワードでドキュメントを検索できます。検索拡張生成（RAG）シナリオでは、全文検索とベクター検索を併用することで、検索品質を向上させることができます。
 aliases: ['/tidb/stable/vector-search-full-text-search-sql']
 ---
 
@@ -26,9 +26,9 @@ TiDB の全文検索機能は、次の機能を提供します。
 
 ## 始めましょう {#get-started}
 
-全文検索機能はまだ初期段階にあり、今後も継続的に多くのお客様にご利用いただけるよう展開していきます。現在、全文検索機能は下記の製品オプションとリージョンでのみご利用いただけます。
+全文検索機能はまだ初期段階にあり、今後も継続的にお客様への展開を進めていきます。現在、全文検索機能は、以下のリージョンにおいて、 TiDB Cloud Starter およびTiDB Cloud Essential でのみご利用いただけます。
 
--   AWS 上のTiDB Cloud Starter: `Frankfurt (eu-central-1)`と`Singapore (ap-southeast-1)`
+-   AWS: `Frankfurt (eu-central-1)`と`Singapore (ap-southeast-1)`
 
 全文検索を使用する前に、 TiDB Cloud Starter クラスターがサポートされているリージョンに作成されていることを確認してください。まだ作成していない場合は、手順[TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って作成してください。
 
@@ -72,7 +72,7 @@ ALTER TABLE stock_items ADD FULLTEXT INDEX (title) WITH PARSER MULTILINGUAL ADD_
 
 -   `STANDARD` : 高速、英語コンテンツに適しており、スペースと句読点で単語を分割します。
 
--   `MULTILINGUAL` : 英語、中国語、日本語、韓国語など複数の言語をサポートします。
+-   `MULTILINGUAL` : 英語、中国語、日本語、韓国語を含む複数の言語をサポートします。
 
 ### テキストデータを挿入する {#insert-text-data}
 
@@ -179,7 +179,7 @@ INSERT INTO tickets VALUES (2, "Ticket 2", 1);
 INSERT INTO tickets VALUES (3, "Ticket 3", 2);
 ```
 
-サブクエリを使用して、作成者の名前に基づいて一致するユーザー ID を見つけ、これらの ID を外部クエリで使用して、関連するチケット情報を取得および結合することができます。
+サブクエリを使用して、作成者の名前に基づいて一致するユーザー ID を見つけ、これらの ID を外部クエリで使用して関連するチケット情報を取得および結合することができます。
 
 ```sql
 SELECT t.title AS TICKET_TITLE, u.id AS AUTHOR_ID, u.name AS AUTHOR_NAME FROM tickets t

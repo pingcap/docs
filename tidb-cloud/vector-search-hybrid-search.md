@@ -10,20 +10,20 @@ aliases: ['/tidb/stable/vector-search-hybrid-search']
 
 TiDB でのハイブリッド検索の一般的なワークフローは次のとおりです。
 
-1.  **全文検索**や**ベクター検索**には TiDB を使用します。
+1.  **全文検索**と**ベクター検索**には TiDB を使用します。
 2.  **再ランク付け機能**を使用して、両方の検索の結果を結合します。
 
 ![Hybrid Search](/media/vector-search/hybrid-search-overview.svg)
 
-このチュートリアルでは、埋め込みと再ランキングの組み込みサポートを提供する[pytidb](https://github.com/pingcap/pytidb) Python SDKを使用して、TiDBのハイブリッド検索を使用する方法を説明します。pytidbの使用は完全にオプションです。SQLを使用して直接検索を実行し、必要に応じて独自の再ランキングモデルを使用することもできます。
+このチュートリアルでは、埋め込みと再ランキングの組み込みサポートを提供する[pytidb](https://github.com/pingcap/pytidb) Python SDK を使用して、TiDB のハイブリッド検索を使用する方法を説明します。pytidb の使用は完全にオプションです。SQL を直接使用して検索を実行し、必要に応じて独自の再ランキングモデルを使用することもできます。
 
 ## 前提条件 {#prerequisites}
 
-ハイブリッド検索は、 [全文検索](/tidb-cloud/vector-search-full-text-search-python.md)検索とベクトル検索の両方を利用します。全文検索はまだ初期段階であり、より多くのお客様に継続的に展開しています。現在、全文検索は以下の製品オプションとリージョンでのみご利用いただけます。
+全文検索機能はまだ初期段階にあり、今後も継続的にお客様への展開を進めていきます。現在、全文検索機能は、以下のリージョンにおいて、 TiDB Cloud Starter およびTiDB Cloud Essential でのみご利用いただけます。
 
--   AWS 上のTiDB Cloud Starter: `Frankfurt (eu-central-1)`と`Singapore (ap-southeast-1)`
+-   AWS: `Frankfurt (eu-central-1)`と`Singapore (ap-southeast-1)`
 
-このチュートリアルを完了するには、サポートされているリージョンにTiDB Cloud Starterクラスターがあることを確認してください。まだない場合は、 [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って作成してください。
+このチュートリアルを完了するには、サポートされているリージョンにTiDB Cloud Starter クラスターがあることを確認してください。クラスターがない場合は、 [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って作成してください。
 
 ## 始めましょう {#get-started}
 
@@ -53,7 +53,7 @@ db = TiDBClient.connect(
 )
 ```
 
-これらの接続パラメータは[TiDB Cloudコンソール](https://tidbcloud.com)から取得できます:
+これらの接続パラメータは[TiDB Cloudコンソール](https://tidbcloud.com)から取得できます。
 
 1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -82,7 +82,7 @@ db = TiDBClient.connect(
     )
     ```
 
-    上記の例はデモンストレーションのみを目的としていることに注意してください。パラメータには独自の値を入力し、安全な状態に保ってください。
+    上記の例はデモンストレーションのみを目的としていることに注意してください。パラメータにはご自身で値を入力し、安全な状態に保ってください。
 
 ### ステップ3. テーブルを作成する {#step-3-create-a-table}
 

@@ -3,13 +3,13 @@ title: TiDB Cloud CLI Reference
 summary: TiDB Cloud CLI の概要を説明します。
 ---
 
-# TiDB Cloud CLI リファレンス（ベータ版） {#tidb-cloud-cli-reference-beta}
+# TiDB Cloud CLI リファレンス (ベータ版) {#tidb-cloud-cli-reference-beta}
 
 > **注記：**
 >
 > 現在、 TiDB Cloud CLI はベータ版であり、 TiDB Cloud Dedicated クラスターには適用されません。
 
-TiDB Cloud CLIは、数行のコマンドでターミナルからTiDB Cloudを操作できるコマンドラインインターフェースです。TiDB TiDB Cloud CLIでは、 TiDB Cloudクラスタの管理、クラスタへのデータのインポート、その他多くの操作を簡単に実行できます。
+TiDB Cloud CLIは、数行のコマンドでターミナルからTiDB Cloudを操作できるコマンドラインインターフェースです。TiDB TiDB Cloud CLIでは、 TiDB Cloudクラスターの管理、クラスターへのデータのインポート、その他の操作を簡単に実行できます。
 
 ## 始める前に {#before-you-begin}
 
@@ -17,35 +17,34 @@ TiDB Cloud CLIは、数行のコマンドでターミナルからTiDB Cloudを�
 
 ## 利用可能なコマンド {#commands-available}
 
-次の表は、TiDB Cloud CLI で使用できるコマンドの一覧です。
+次の表に、 TiDB Cloud CLI で使用できるコマンドを示します。
 
 ターミナルで`ticloud` CLI を使用するには、 `ticloud [command] [subcommand]`実行してください。 [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview)使用している場合は、代わりに`tiup cloud [command] [subcommand]`実行してください。
 
-| 指示            | サブコマンド                                          | 説明                                                                |
-| ------------- | ----------------------------------------------- | ----------------------------------------------------------------- |
-| 認証            | ログイン、ログアウト、whoami                               | ログインとログアウト                                                        |
-| サーバーレス（別名: s） | 作成、削除、説明、一覧表示、更新、支出制限、リージョン、シェル                 | TiDB Cloud Starter またはTiDB Cloud Essential クラスターを管理する             |
-| サーバーレスブランチ    | 作成、削除、説明、一覧表示、シェル                               | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチを管理する        |
-| サーバーレスインポート   | キャンセル、説明、リスト、開始                                 | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのインポート タスクを管理します  |
-| サーバーレスエクスポート  | 作成、説明、リスト、キャンセル、ダウンロード                          | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのエクスポート タスクを管理します |
-| サーバーレスSQLユーザー | 作成、リスト、削除、更新                                    | TiDB Cloud Starter またはTiDB Cloud Essential クラスターの SQL ユーザーを管理します  |
-| サーバーレス監査ログ    | config、describe、filter-rule（別名:filter）、download | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータベース監査ログを管理します |
-| 愛             | <li></li>                                       | TiDBボットとチャット                                                      |
-| 完了            | bash、fish、powershell、zsh                        | 指定されたシェルの補完スクリプトを生成する                                             |
-| 設定            | 作成、削除、説明、編集、一覧表示、設定、使用                          | ユーザープロファイルを構成する                                                   |
-| プロジェクト        | リスト                                             | プロジェクトの管理                                                         |
-| アップグレード       | <li></li>                                       | CLIを最新バージョンに更新する                                                  |
-| ヘルプ           | 認証、構成、サーバーレス、AI、プロジェクト、アップグレード、ヘルプ、完了           | 任意のコマンドのヘルプをビュー                                                   |
+| 指示            | サブコマンド                                           | 説明                                                                |
+| ------------- | ------------------------------------------------ | ----------------------------------------------------------------- |
+| 認証            | ログイン、ログアウト、whoami                                | ログインとログアウト                                                        |
+| サーバーレス（別名: s） | 作成、削除、説明、一覧表示、更新、支出制限、リージョン、シェル                  | TiDB Cloud Starter またはTiDB Cloud Essential クラスターを管理する             |
+| サーバーレスブランチ    | 作成、削除、説明、一覧表示、シェル                                | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチを管理する        |
+| サーバーレスインポート   | キャンセル、説明、リスト、開始                                  | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのインポート タスクを管理します  |
+| サーバーレスエクスポート  | 作成、説明、リスト、キャンセル、ダウンロード                           | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのエクスポート タスクを管理します |
+| サーバーレスSQLユーザー | 作成、リスト、削除、更新                                     | TiDB Cloud Starter またはTiDB Cloud Essential クラスターの SQL ユーザーを管理します  |
+| サーバーレス監査ログ    | config、describe、filter-rule（別名: filter）、download | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータベース監査ログを管理します |
+| 完了            | bash、fish、powershell、zsh                         | 指定されたシェルの補完スクリプトを生成する                                             |
+| 設定            | 作成、削除、説明、編集、一覧表示、設定、使用                           | ユーザープロファイルを構成する                                                   |
+| プロジェクト        | リスト                                              | プロジェクトの管理                                                         |
+| アップグレード       | <li></li>                                        | CLIを最新バージョンに更新する                                                  |
+| ヘルプ           | 認証、構成、サーバーレス、プロジェクト、アップグレード、ヘルプ、完了               | 任意のコマンドのヘルプをビュー                                                   |
 
 ## コマンドモード {#command-modes}
 
-TiDB Cloud CLI では、一部のコマンドに簡単に使用できる 2 つのモードが用意されています。
+TiDB Cloud CLI では、簡単に使用できるように、一部のコマンドに 2 つのモードが用意されています。
 
 -   インタラクティブモード
 
     フラグなしでコマンドを実行すると ( `ticloud config create`など)、CLI によって入力が求められます。
 
--   非対話型モード
+-   非対話モード
 
     コマンドを実行するときに必要なすべての引数とフラグ (例: `ticloud config create --profile-name <profile-name> --public-key <public-key> --private-key <private-key>` ) を指定する必要があります。
 

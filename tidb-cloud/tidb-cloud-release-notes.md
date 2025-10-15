@@ -8,6 +8,59 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2025年10月14日 {#october-14-2025}
+
+**一般的な変更**
+
+-   **TiDB Cloudスターター**
+
+    -   [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)データベース監査ログはサポートされなくなりました。
+
+        現在、データベース監査ログをサポートしているのは[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)と[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)のみです。データベース監査ログを使用している既存のTiDB Cloud Starter クラスターには影響しません。
+
+    -   [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)インプレースリストア機能が削除され、バックアップを同じクラスタに直接リストアできなくなります。この変更により、アクティブな本番本番データの誤った上書きや潜在的なデータ損失を防ぐことができます。
+
+        データを復元するには、 [バックアップを新しいクラスターに復元する](/tidb-cloud/backup-and-restore-serverless.md#perform-the-restore) . 復元されたデータを検証した後、アプリケーションを新しいクラスターに切り替えます。既存のクラスターに復元されたデータはそのまま残り、新たな復元を実行しない限り、何もする必要はありません。
+
+        より安全で制御性と柔軟性に優れた復元および移行ワークフローを実現するには、 [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)使用を検討してください。
+
+    -   [**メトリクス**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページ[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)では、より迅速な診断と容量計画のために次のメトリックが追加されます。
+
+        -   `Lock-wait (P95/P99)` : ロック待機時間のパーセンタイルを監視して競合ホットスポットを表面化させます。
+        -   `Idle Connection Duration (P99 incl. not/in txn)` : プーラーの制限とタイムアウトを調整するために、トランザクション中とトランザクション外での長時間アイドル状態の接続を識別します。
+
+-   **TiDB Cloudエッセンシャル**
+
+    -   [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)はAWSでパブリックプレビュー中です<customcontent language="en,zh">アリババクラウド</customcontent>。
+
+        ワークロードが増加し、リアルタイムの拡張性を必要とするアプリケーションに対して、 TiDB Cloud Essential はビジネスの成長に対応できる柔軟性とパフォーマンスを提供します。
+
+        <CustomContent language="en,zh">
+
+        詳細については[TiDB Cloud Essential が AWS と Alibaba Cloud でパブリックプレビューとして利用可能になりました](https://www.pingcap.com/blog/tidb-cloud-essential-now-available-public-preview-aws-alibaba-cloud/)参照してください。
+
+        </CustomContent>
+
+    -   データベース監査ログがTiDB Cloud Essential [TiDB Cloudコンソール](https://tidbcloud.com)で利用できるようになりました。また、ローテーション設定のカスタマイズもサポートされます。
+
+        データベース監査ログをTiDB Cloud、Amazon S3、Google Cloud Storage、Azure Blob Storage、または Alibaba Cloud OSS に保存するように構成できます。
+
+        現在、この機能はベータ版です。詳細については、 [TiDB Cloud Essential のデータベース監査ログ](/tidb-cloud/essential-database-audit-logging.md)ご覧ください。
+
+    -   TiDB Cloud Essential では、クラスターのリクエスト容量単位 (RCU) 消費量が 1 時間以内に設定された最大値に複数回達したときに通知する新しいイベント`ResourceLimitation`が追加されました。
+
+        使用量の上限を超えると、処理能力が制限される可能性があります。サービスへの影響を避けるため、最大RCUを増やすことをご検討ください。
+
+        イベントの詳細については、 [TiDB Cloudクラスタイベント](/tidb-cloud/tidb-cloud-events.md)参照してください。
+
+    -   [**メトリクス**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページ[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、より迅速な診断と容量計画のために次のメトリックが追加されます。
+
+        -   `Capacity vs Usage (RU/s)` : プロビジョニングされたリクエスト ユニット (RU) 容量と実際の RU 消費量を視覚化して、余裕を見つけて自動スケーリングを調整します。
+        -   `Lock-wait (P95/P99)` : ロック待機時間のパーセンタイルを監視して競合ホットスポットを表面化させます。
+        -   `Idle Connection Duration (P99 incl. not/in txn)` : プーラーの制限とタイムアウトを調整するために、トランザクション中とトランザクション外での長時間アイドル状態の接続を識別します。
+
+        詳細については[TiDB Cloud組み込みメトリクス](/tidb-cloud/built-in-monitoring.md)参照してください。
+
 ## 2025年9月30日 {#september-30-2025}
 
 **一般的な変更**
@@ -302,8 +355,6 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 -   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)データベース監査ログ（ベータ版）がリクエストに応じて利用可能になりました。この機能を使用すると、ユーザーアクセスの詳細（実行されたSQL文など）の履歴をログに記録できます。
 
     この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートをリクエスト」**をクリックします。次に、「説明」フィールドに「 TiDB Cloud Serverless データベース監査ログの申請」と入力し、 **「送信」を**クリックします。
-
-    詳細については[TiDB Cloudサーバーレス データベース監査ログ](/tidb-cloud/serverless-audit-logging.md)参照してください。
 
 -   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)ユーザー制御のログ編集をサポートします。
 

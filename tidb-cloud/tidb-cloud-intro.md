@@ -6,7 +6,7 @@ category: intro
 
 # TiDB Cloudとは {#what-is-tidb-cloud}
 
-[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 、オープンソースのハイブリッドトランザクションおよび分析処理（HTAP）データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)クラウドに提供する、フルマネージドの Database-as-a-Service（DBaaS）です。TiDB TiDB Cloud は、データベースの複雑な処理に煩わされることなく、アプリケーションに集中できるよう、データベースの導入と管理を容易にします。<customcontent language="en,zh"> TiDB Cloudクラスターを作成して、Amazon Web Services (AWS)、Google Cloud、Microsoft Azure、Alibaba Cloud 上でミッションクリティカルなアプリケーションを迅速に構築できます。</customcontent><customcontent language="ja"> TiDB Cloudクラスターを作成して、Amazon Web Services (AWS)、Google Cloud、Microsoft Azure 上でミッションクリティカルなアプリケーションを迅速に構築できます。</customcontent>
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 、オープンソースのハイブリッドトランザクションおよび分析処理（HTAP）データベースである[ティドブ](https://docs.pingcap.com/tidb/stable/overview)クラウドに提供する、フルマネージドの Database-as-a-Service（DBaaS）です。TiDB TiDB Cloud は、データベースの複雑な処理に煩わされることなく、アプリケーションに集中できるよう、データベースの導入と管理を容易にします。<customcontent language="en,zh"> TiDB Cloudクラスターを作成して、Amazon Web Services (AWS)、Google Cloud、Microsoft Azure、Alibaba Cloud 上でミッションクリティカルなアプリケーションを迅速に構築できます。</customcontent><customcontent language="ja"> TiDB Cloudクラスターを作成して、Amazon Web Services (AWS)、Google Cloud、Microsoft Azure 上でミッションクリティカルなアプリケーションを迅速に構築できます。</customcontent>
 
 ![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
 
@@ -20,7 +20,7 @@ TiDB Cloud を使用すると、ほとんどまたはまったくトレーニン
 
 TiDB Cloudの詳細については、次のビデオをご覧ください。
 
-<iframe width="600" height="450" src="https://www.youtube.com/embed/skCV9BEmjbo?enablejsapi=1" title="TiDB Cloud を選ぶ理由" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="600" height="450" src="https://www.youtube.com/embed/skCV9BEmjbo?enablejsapi=1" title="Why TiDB Cloud?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 TiDB Cloudを使用すると、次の主な機能を利用できます。
 
@@ -58,13 +58,13 @@ TiDB Cloudを使用すると、次の主な機能を利用できます。
 
     <CustomContent language="ja">
 
-    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB TiDB Cloud は現在、AWS、Azure、Google Cloud でご利用いただけます。
+    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB TiDB Cloud は現在、AWS、Azure、Google Cloud で利用可能です。
 
     </CustomContent>
 
 -   **シンプルな料金プラン**
 
-    透明性が高く、前払い価格設定で、隠れた料金がなく、使用した分だけお支払いいただけます。
+    透明性のある前払い価格設定で、使用した分だけお支払いいただけます。隠れた料金はありません。
 
 -   **世界クラスのサポート**
 
@@ -76,21 +76,29 @@ TiDB Cloud は次の展開オプションを提供します。
 
 -   TiDB Cloud Serverless（Starter に名称変更）
 
-    {{{ .starter }}} は、フルマネージドのマルチテナント TiDB サービスです。MySQL 互換データベースを瞬時に自動スケーリングし、十分な無料割り当てと、無料割り当てを超えた場合の使用量に応じた課金を提供します。
+    TiDB Cloud Starterは、フルマネージドのマルチテナント型TiDBサービスです。MySQL互換データベースを瞬時に自動スケーリングし、十分な無料クォータと、無料クォータを超えた場合の使用量に応じた課金体系を提供します。
 
     <CustomContent language="en,zh">
 
-    現在、 {{{ .starter }}} は AWS で一般公開されており、Alibaba Cloud ではパブリック プレビュー段階です。
+    現在、 TiDB Cloud Starter は AWS で一般公開されており、Alibaba Cloud ではパブリック プレビュー中です。
 
     </CustomContent>
 
--   TiDB Cloud Essential
+-   TiDB Cloudエッセンシャル
 
-    ワークロードが増加し、リアルタイムの拡張性を必要とするアプリケーションの場合、{{{ .essential }}} は、ビジネスの成長に対応できる柔軟性とパフォーマンスを提供します。
+    ワークロードが増加し、リアルタイムの拡張性を必要とするアプリケーションに対して、 TiDB Cloud Essential はビジネスの成長に対応できる柔軟性とパフォーマンスを提供します。
 
     <CustomContent language="en,zh">
 
-    現在、{{{ .essential }}} は Alibaba Cloud でパブリックプレビュー中です。{{{ .starter }}} と {{{ .essential }}} の機能比較については、 [Alibaba Cloud 上の TiDB](https://www.pingcap.com/partners/alibaba-cloud/)ご覧ください。
+    現在、 TiDB Cloud Essential は AWS および Alibaba Cloud でパブリック プレビュー中です。
+
+    Alibaba Cloud 上のTiDB Cloud Starter とTiDB Cloud Essential の機能比較については、 [Alibaba Cloud 上の TiDB](https://www.pingcap.com/partners/alibaba-cloud/)参照してください。
+
+    </CustomContent>
+
+    <CustomContent language="ja">
+
+    現在、 TiDB Cloud Essential は AWS でパブリックプレビュー中です。
 
     </CustomContent>
 

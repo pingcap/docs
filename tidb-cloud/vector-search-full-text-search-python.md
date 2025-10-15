@@ -1,6 +1,6 @@
 ---
 title: Full-Text Search with Python
-summary: 全文検索を使用すると、キーワードに完全一致するドキュメントを検索できます。検索拡張生成（RAG）シナリオでは、全文検索とベクター検索を併用することで、検索品質を向上させることができます。
+summary: 全文検索を使用すると、正確なキーワードでドキュメントを検索できます。検索拡張生成（RAG）シナリオでは、全文検索とベクター検索を併用することで、検索品質を向上させることができます。
 aliases: ['/tidb/stable/vector-search-full-text-search-python']
 ---
 
@@ -12,7 +12,7 @@ TiDB の全文検索機能は、次の機能を提供します。
 
 -   **テキスト データを直接クエリします**。埋め込みプロセスなしで任意の文字列列を直接検索できます。
 
--   **複数言語のサポート**：高品質な検索のために言語を指定する必要はありません。TiDBは、同じテーブルに保存された複数言語の文書をサポートし、各文書に最適なテキストアナライザーを自動的に選択します。
+-   **複数言語のサポート**：高品質な検索のために言語を指定する必要はありません。TiDBは、同じテーブルに保存された複数言語のドキュメントをサポートし、各ドキュメントに最適なテキストアナライザーを自動的に選択します。
 
 -   **関連性による並べ替え**: 広く採用されている[BM25ランキング](https://en.wikipedia.org/wiki/Okapi_BM25)アルゴリズムを使用して、検索結果を関連性によって並べ替えることができます。
 
@@ -26,17 +26,17 @@ TiDB の全文検索機能は、次の機能を提供します。
 
 ## 前提条件 {#prerequisites}
 
-全文検索機能はまだ初期段階にあり、今後も継続的に多くのお客様にご利用いただけるよう展開していきます。現在、全文検索機能は下記の製品オプションとリージョンでのみご利用いただけます。
+全文検索機能はまだ初期段階にあり、今後も継続的にお客様への展開を進めていきます。現在、全文検索機能は、以下のリージョンにおいて、 TiDB Cloud Starter およびTiDB Cloud Essential でのみご利用いただけます。
 
--   AWS 上のTiDB Cloud Starter: `Frankfurt (eu-central-1)`と`Singapore (ap-southeast-1)`
+-   AWS: `Frankfurt (eu-central-1)`と`Singapore (ap-southeast-1)`
 
-このチュートリアルを完了するには、サポートされているリージョンにTiDB Cloud Starterクラスターがあることを確認してください。まだない場合は、 [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って作成してください。
+このチュートリアルを完了するには、サポートされているリージョンにTiDB Cloud Starter クラスターがあることを確認してください。クラスターがない場合は、 [TiDB Cloud Starter クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って作成してください。
 
 ## 始めましょう {#get-started}
 
 ### ステップ1. <a href="https://github.com/pingcap/pytidb">pytidb</a> Python SDKをインストールする {#step-1-install-the-a-href-https-github-com-pingcap-pytidb-pytidb-a-python-sdk}
 
-[pytidb](https://github.com/pingcap/pytidb)はTiDBの公式Python SDKで、開発者がAIアプリケーションを効率的に構築できるように設計されています。ベクトル検索と全文検索のサポートが組み込まれています。
+[pytidb](https://github.com/pingcap/pytidb)はTiDBの公式Python SDKであり、開発者がAIアプリケーションを効率的に構築できるように設計されています。ベクトル検索と全文検索のサポートが組み込まれています。
 
 SDK をインストールするには、次のコマンドを実行します。
 
@@ -64,7 +64,7 @@ db = TiDBClient.connect(
 )
 ```
 
-これらの接続パラメータは[TiDB Cloudコンソール](https://tidbcloud.com)から取得できます:
+これらの接続パラメータは[TiDB Cloudコンソール](https://tidbcloud.com)から取得できます。
 
 1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -93,7 +93,7 @@ db = TiDBClient.connect(
     )
     ```
 
-    上記の例はデモンストレーションのみを目的としていることに注意してください。パラメータには独自の値を入力し、安全な状態に保ってください。
+    上記の例はデモンストレーションのみを目的としていることに注意してください。パラメータにはご自身で値を入力し、安全な状態に保ってください。
 
 ### ステップ3. テーブルとフルテキストインデックスを作成する {#step-3-create-a-table-and-a-full-text-index}
 

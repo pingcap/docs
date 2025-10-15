@@ -71,17 +71,17 @@ TiDBのインストールには、デフォルトでコンポーネント間通�
 | ティドブ            | 4000     | MySQL      |
 | ティドブ            | 10080    | HTTP       |
 | TiKV            | 20160    | プロトコル      |
-| ティクブ            | 20180    | HTTP       |
+| TiKV            | 20180    | HTTP       |
 | PD              | 2379     | HTTP/プロトコル |
 | PD              | 2380     | プロトコル      |
 | TiFlash         | 3930     | プロトコル      |
 | TiFlash         | 20170    | プロトコル      |
 | TiFlash         | 20292    | HTTP       |
 | TiFlash         | 8234     | HTTP       |
-| ティフロー           | 8261     | HTTP       |
-| ティフロー           | 8291     | HTTP       |
-| ティフロー           | 8262     | HTTP       |
-| ティフロー           | 8300     | HTTP       |
+| DMマスター          | 8261     | HTTP       |
+| DMマスター          | 8291     | HTTP       |
+| DMワーカー          | 8262     | HTTP       |
+| TiCDC           | 8300     | HTTP       |
 | TiDB Lightning  | 8289     | HTTP       |
 | TiDB Operator   | 6060     | HTTP       |
 | TiDBダッシュボード     | 2379     | HTTP       |
@@ -121,6 +121,6 @@ TiDB ダッシュボードにアクセスする必要がある場合は、別[�
 
 ## サードパーティのMySQL脆弱性スキャナーからの誤検知を解決する {#resolving-false-positives-from-third-party-mysql-vulnerability-scanners}
 
-ほとんどの脆弱性スキャナーは、MySQLの脆弱性をバージョン情報に基づいて検出します。TiDBはMySQLプロトコルと互換性がありますが、MySQL自体は互換性がないため、バージョンベースの脆弱性スキャンは誤検知につながる可能性があります。脆弱性スキャンは原則に基づく評価に重点を置くことをお勧めします。コンプライアンススキャンツールが特定のMySQLバージョンを必要とする場合は、 [サーバーのバージョン番号を変更する](/faq/high-reliability-faq.md#does-tidb-support-modifying-the-mysql-version-string-of-the-server-to-a-specific-one-that-is-required-by-the-security-vulnerability-scanning-tool)使用して要件を満たすことができます。
+ほとんどの脆弱性スキャナーは、MySQLの脆弱性をバージョン情報に基づいて検出します。TiDBはMySQLプロトコルと互換性がありますが、MySQL自体は互換性がないため、バージョンベースの脆弱性スキャンは誤検知につながる可能性があります。脆弱性スキャンは原則に基づく評価に重点を置くことをお勧めします。コンプライアンススキャンツールが特定のMySQLバージョンを要求する場合は、 [サーバーのバージョン番号を変更する](/faq/high-reliability-faq.md#does-tidb-support-modifying-the-mysql-version-string-of-the-server-to-a-specific-one-that-is-required-by-the-security-vulnerability-scanning-tool)使用して要件を満たすことができます。
 
 サーバーのバージョン番号を変更することで、脆弱性スキャナーによる誤検知を回避できます。1 [`server-version`](/tidb-configuration-file.md#server-version)値は、TiDB ノードが現在の TiDB バージョンを確認するために使用されます。TiDB クラスターをアップグレードする前に、予期しない動作を回避するために、 `server-version`値が空であるか、実際の TiDB バージョンであることを確認してください。
