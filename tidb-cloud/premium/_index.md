@@ -97,9 +97,9 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Manage User Profiles](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles/?plan=premium)
 
-[Manage organization access](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-organization-access/?plan=premium)
+[Manage Organization Access](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-organization-access/?plan=premium)
 
-[Manage project access](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-project-access/?plan=premium)
+[Manage Project Access](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-project-access/?plan=premium)
 
 [Configure Firewall Rules for Public Endpoints](https://docs.pingcap.com/tidbcloud/configure-serverless-firewall-rules-for-public-endpoints/?plan=premium)
 
