@@ -32,16 +32,30 @@ TiDB Cloud has supported the project-level Prometheus integration (Beta) since M
 
 ### Step 1. Get a scrape_config file for Prometheus
 
-Before configuring your Prometheus service to read metrics of TiDB Cloud, you need to generate a `scrape_config` YAML file in TiDB Cloud first. The `scrape_config` file contains a unique bearer token that allows the Prometheus service to monitor any database clusters in the current project.
+Before configuring your Prometheus service to read metrics of TiDB Cloud, you need to generate a `scrape_config` YAML file in TiDB Cloud first. The `scrape_config` file contains a unique bearer token that allows the Prometheus service to monitor your target database clusters.
 
-To get the `scrape_config` file for Prometheus, do the following:
+Depending on your [Prometheus integration version](#prometheus-integration-version), the steps to get the `scrape_config` file for Prometheus and access the integration page are different.
+
+<SimpleTab>
+<div label="Cluster-level Prometheus integration (Preview)">
+
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
+2. In the left navigation pane, click **Settings** > **Integrations**.
+3. On the **Integrations** page, click **Integration to Prometheus(Preview)**.
+4. Click **Add File** to generate and show the scrape_config file for the current cluster.
+5. Make a copy of the scrape_config file content for later use.
+
+</div>
+<div label="Legacy project-level Prometheus integration (Beta)">
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Project Settings** > **Integrations**.
 3. On the **Integrations** page, click **Integration to Prometheus (BETA)**.
 4. Click **Add File** to generate and show the scrape_config file for the current project.
-
 5. Make a copy of the `scrape_config` file content for later use.
+
+</div>
+</SimpleTab>
 
     > **Note:**
     >
