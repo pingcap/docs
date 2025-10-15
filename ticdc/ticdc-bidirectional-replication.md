@@ -44,22 +44,25 @@ Replicable DDLs are the DDLs that can be directly executed and replicated to oth
 
 Replicable DDLs include:
 
-- `CREATE DATABASE`
-- `CREATE TABLE`
-- `ADD COLUMN`: the column can be `null`, or has `not null` and `default value` at the same time
-- `ADD NON-UNIQUE INDEX`
-- `DROP INDEX`
-- `MODIFY COLUMN`: you can only modify the `default value` and `comment` of the column
-- `ALTER COLUMN DEFAULT VALUE`
-- `MODIFY TABLE COMMENT`
-- `RENAME INDEX`
-- `ADD TABLE PARTITION`
-- `DROP PRIMARY KEY`
-- `ALTER TABLE INDEX VISIBILITY`
-- `ALTER TABLE TTL`
-- `ALTER TABLE REMOVE TTL`
-- `CREATE VIEW`
-- `DROP VIEW`
+- [`ALTER TABLE ... ADD COLUMN`](/sql-statements/sql-statement-add-column.md): the column can be `null`, or has `not null` and `default value` at the same time
+- [`ALTER TABLE ... ADD INDEX`](/sql-statements/sql-statement-add-index.md) (non-unique)
+- [`ALTER TABLE ... ADD PARTITION`](/sql-statements/sql-statement-alter-table.md)
+- [`ALTER TABLE ... ALTER COLUMN DROP DEFAULT`](/sql-statements/sql-statement-alter-table.md)
+- [`ALTER TABLE ... ALTER COLUMN SET DEFAULT`](/sql-statements/sql-statement-alter-table.md)
+- [`ALTER TABLE ... COMMENT=...`](/sql-statements/sql-statement-alter-table.md)
+- [`ALTER TABLE ... DROP PRIMARY KEY`](/sql-statements/sql-statement-alter-table.md)
+- [`ALTER TABLE ... MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md): you can only modify the `default value` and `comment` of the column
+- [`ALTER TABLE ... RENAME INDEX`](/sql-statements/sql-statement-rename-index.md)
+- [`ALTER TABLE ... ALTER INDEX ... INVISIBLE`](/sql-statements/sql-statement-alter-table.md)
+- [`ALTER TABLE ... ALTER INDEX ... VISIBLE`](/sql-statements/sql-statement-alter-table.md)
+- [`ALTER TABLE REMOVE TTL`](/sql-statements/sql-statement-alter-table.md)
+- [`ALTER TABLE TTL`](/sql-statements/sql-statement-alter-table.md)
+- [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)
+- [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md)
+- [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)
+- [`CREATE VIEW`](/sql-statements/sql-statement-create-view.md)
+- [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)
+- [`DROP VIEW`](/sql-statements/sql-statement-drop-view.md)
 
 ### Non-replicable DDLs
 
@@ -67,23 +70,24 @@ Non-replicable DDLs are the DDLs that have a great impact on the business, and m
 
 Non-replicable DDLs include:
 
-- `DROP DATABASE`
-- `DROP TABLE`
-- `ADD COLUMN`: the column is `not null` and does not have a `default value`
-- `DROP COLUMN`
-- `ADD UNIQUE INDEX`
-- `TRUNCATE TABLE`
-- `MODIFY COLUMN`: you can modify the attributes of the column except `default value` and `comment`
-- `RENAME TABLE`
-- `DROP PARTITION`
-- `TRUNCATE PARTITION`
-- `ALTER TABLE CHARACTER SET`
-- `ALTER DATABASE CHARACTER SET`
-- `RECOVER TABLE`
-- `ADD PRIMARY KEY`
-- `REBASE AUTO ID`
-- `EXCHANGE PARTITION`
-- `REORGANIZE PARTITION`
+- [`ALTER DATABASE CHARACTER SET`](/sql-statements/sql-statement-alter-table.md)
+- [`ALTER TABLE ... ADD COLUMN`](/sql-statements/sql-statement-alter-table.md): the column is `not null` and does not have a `default value`
+- [`ALTER TABLE ... ADD PRIMARY KEY`](/sql-statements/sql-statement-alter-table.md)
+- [`ALTER TABLE ... ADD UNIQUE INDEX`](/sql-statements/sql-statement-alter-table.md)
+- [`ALTER TABLE ... AUTO_INCREMENT=...`](/sql-statements/sql-statement-alter-table.md)
+- [`ALTER TABLE ... AUTO_RANDOM_BASE=...`](/sql-statements/sql-statement-alter-table.md)
+- [`ALTER TABLE ... CHARACTER SET=...`](/sql-statements/sql-statement-alter-table.md)
+- [`ALTER TABLE ... DROP COLUMN`](/sql-statements/sql-statement-alter-table.md)
+- [`ALTER TABLE ... DROP PARTITION`](/sql-statements/sql-statement-alter-table.md)
+- [`ALTER TABLE ... EXCHANGE PARTITION`](/sql-statements/sql-statement-alter-table.md)
+- [`ALTER TABLE ... MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md): you can modify the attributes of the column except `default value` and `comment`
+- [`ALTER TABLE ... REORGANIZE PARTITION`](/sql-statements/sql-statement-alter-table.md)
+- [`ALTER TABLE ... TRUNCATE PARTITION`](/sql-statements/sql-statement-alter-table.md)
+- [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md)
+- [`DROP TABLE`](/sql-statements/sql-statement-drop-table.md)
+- [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md)
+- [`RENAME TABLE`](/sql-statements/sql-statement-rename-table.md)
+- [`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md)
 
 ## DDL replication
 
@@ -102,6 +106,9 @@ In short, in BDR mode, TiCDC only replicates replicable DDLs in the PRIMARY clus
 
     ```sql
     ADMIN SET BDR ROLE PRIMARY;
+    ```
+
+    ```
     Query OK, 0 rows affected
     Time: 0.003s
 
@@ -152,7 +159,7 @@ After the check is completed, you can stop the changefeed to stop bi-directional
     >
     > Do not set the BDR role in other scenarios, for example, setting `PRIMARY`, `SECONDARY`, and no BDR roles at the same time. If you set the BDR role incorrectly, TiDB cannot guarantee data correctness and consistency during data replication.
 
-- Usually do not use `AUTO_INCREMENT` or `AUTO_RANDOM` to avoid data conflicts in the replicated tables. If you need to use `AUTO_INCREMENT` or `AUTO_RANDOM`, you can set different `auto_increment_increment` and `auto_increment_offset` for different clusters to ensure that different clusters can be assigned different primary keys. For example, if there are three TiDB clusters (A, B, and C) in bi-directional replication, you can set them as follows:
+- Usually do not use [`AUTO_INCREMENT`](/auto-increment.md) or [`AUTO_RANDOM`](/auto-random.md) to avoid data conflicts in the replicated tables. If you need to use `AUTO_INCREMENT` or `AUTO_RANDOM`, you can set different `auto_increment_increment` and `auto_increment_offset` for different clusters to ensure that different clusters can be assigned different primary keys. For example, if there are three TiDB clusters (A, B, and C) in bi-directional replication, you can set them as follows:
 
     - In Cluster A, set `auto_increment_increment=3` and `auto_increment_offset=2000`
     - In Cluster B, set `auto_increment_increment=3` and `auto_increment_offset=2001`
