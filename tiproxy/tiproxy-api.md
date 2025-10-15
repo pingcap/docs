@@ -1,17 +1,17 @@
 ---
 title: TiProxy API
-summary: TiProxy API を使用して、構成、ヘルス ステータス、監視データにアクセスする方法を学習します。
+summary: TiProxy API を使用して構成、ヘルス ステータス、監視データにアクセスする方法を学習します。
 ---
 
 # TiProxy API {#tiproxy-api}
 
-[TiProxy](/tiproxy/tiproxy-overview.md) 、構成、ヘルス ステータス、監視データにアクセスするための API エンドポイントを提供します。
+[TiProxy](/tiproxy/tiproxy-overview.md) 、構成、ヘルス ステータス、および監視データにアクセスするための API エンドポイントを提供します。
 
 > **注記：**
 >
-> TiProxy APIはデバッグ用に特別に設計されており、TiProxyに将来導入される機能と完全に互換性がない可能性があります。情報取得のためにこのツールをアプリケーションやユーティリティの開発に組み込むことは推奨されません。
+> TiProxy APIはデバッグ用に特別に設計されており、TiProxyに将来導入される機能との互換性が完全には保証されない可能性があります。情報取得のためにこのツールをアプリケーションやユーティリティの開発に組み込むことは推奨されません。
 
-TiProxy APIにアクセスするためのアドレスは`http://${host}:${port}${path}`です。3 `${host}:${port}` TiProxy設定項目[`api.addr`](/tiproxy/tiproxy-configuration.md#addr-1)で指定され、 `${path}`アクセスする特定のAPIエンドポイントです。例：
+TiProxy APIにアクセスするためのアドレスは`http://${host}:${port}${path}`です。3 `${host}:${port}` TiProxy設定項目[`api.addr`](/tiproxy/tiproxy-configuration.md#addr-1)で指定され、 `${path}`アクセスしたい特定のAPIエンドポイントです。例：
 
 ```bash
 curl http://127.0.0.1:3080/api/admin/config/
@@ -37,7 +37,7 @@ curl http://127.0.0.1:3080/api/admin/config/
 curl "http://127.0.0.1:3080/api/admin/config/?format=json"
 ```
 
-## TiProxy構成を設定する {#set-tiproxy-configuration}
+## TiProxy設定を設定する {#set-tiproxy-configuration}
 
 現在、TiProxyの設定変更にはTOML形式のみを使用できます。指定されていない設定項目は変更されないため、変更したい項目のみを指定してください。
 
@@ -97,7 +97,7 @@ level='warning'
 
 ## TiProxy のヘルスステータスを取得する {#get-tiproxy-health-status}
 
-このエンドポイントは、TiProxy のヘルスステータスと設定のチェックサムを取得するために使用されます。TiProxy が正常に動作している場合、このエンドポイントは設定のチェックサムを返します。TiProxy がシャットダウンまたはオフラインの場合は、エラーを返します。
+このエンドポイントは、TiProxy のヘルスステータスと設定のチェックサムを取得するために使用されます。TiProxy が正常に動作している場合、このエンドポイントは設定のチェックサムを返します。TiProxy がシャットダウンまたはオフラインの場合、エラーを返します。
 
 ### リクエストURI {#request-uri}
 
@@ -126,3 +126,9 @@ curl http://127.0.0.1:3080/api/debug/health
 ```bash
 curl http://127.0.0.1:3080/metrics/
 ```
+
+## アクセス制御 {#access-control}
+
+[`server-http-tls`](/tiproxy/tiproxy-configuration.md#server-http-tls)でTLSを有効にし、 [安全](/tiproxy/tiproxy-configuration.md#security)セクションの`server-http-tls`サブセクションにある`cert-allowed-cn`オプションを設定することで、TiProxy APIへのアクセスを制限できます。TiProxyはクライアント証明書の共通名（CN）を[コンポーネント呼び出し元のIDを確認する](/enable-tls-between-components.md#verify-component-callers-identity)に使用します。
+
+TLS が有効になっていない場合は、代わりにファイアウォール ルールを使用してアクセスを制御できます。
