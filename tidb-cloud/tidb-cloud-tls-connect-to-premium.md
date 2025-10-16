@@ -1,7 +1,7 @@
 ---
 title: TLS Connections to TiDB Cloud Premium
 summary: Introduce TLS connections in TiDB Cloud premium.
-aliases: ['/tidbcloud/tidb-cloud-tls-connect-to-dedicated-tier']
+aliases: ['/tidb-cloud/tidb-cloud-tls-connect-to-dedicated-tier']
 ---
 
 # TLS Connections to TiDB Cloud Premium
