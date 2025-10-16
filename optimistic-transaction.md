@@ -73,6 +73,10 @@ In the optimistic transaction model, transactions might fail to be committed bec
 
 ### Automatic retry
 
+> **Note:**
+>
+> Starting from TiDB v3.0, the automatic retry of transactions is disabled by default. It is not recommended to enable the automatic retry because it might **break the transaction isolation level**. 
+
 If a write-write conflict occurs during the transaction commit, TiDB automatically retries the SQL statement that includes write operations. You can enable the automatic retry by setting `tidb_disable_txn_auto_retry` to `OFF` and set the retry limit by configuring `tidb_retry_limit`:
 
 ```toml
