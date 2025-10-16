@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: 07b75662984c9bc38e1dd23a0f7bc5edcf29e627-->
+# 目录 <!--Corresponding EN commit: 234f9a0f7f16ec892a2c3bb09dfaeab81e9d527d-->
 
 ## 快速开始
 
@@ -135,6 +135,7 @@
     - 连接到 TiDB Cloud 集群
       - [连接概览](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
       - [通过 Public Endpoint 连接](/tidb-cloud/connect-via-standard-connection-serverless.md)
+      - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
       - [通过 Alibaba Cloud Private Endpoint 连接](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
     - 分支 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
       - [概览](/tidb-cloud/branch-overview.md)
@@ -248,6 +249,10 @@
       - [SQLAlchemy](/vector-search/vector-search-integrate-with-sqlalchemy.md)
       - [peewee](/vector-search/vector-search-integrate-with-peewee.md)
       - [Django](/vector-search/vector-search-integrate-with-django-orm.md)
+  - Text Search
+    - [Full-Text Search with SQL](/tidb-cloud/vector-search-full-text-search-sql.md)
+    - [Full-Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md)
+    - [Hybrid Search](/tidb-cloud/vector-search-hybrid-search.md)
   - 参考
     - [向量数据类型](/vector-search/vector-search-data-types.md)
     - [向量函数和操作符](/vector-search/vector-search-functions-and-operators.md)
@@ -263,11 +268,13 @@
     - [身份访问管理](/tidb-cloud/manage-user-access.md)
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - 网络访问控制
+    - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
     - [通过 Alibaba Cloud Private Endpoint 连接](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
     - [为 Public Endpoint 配置防火墙规则](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
     - [通过 TLS 连接](/tidb-cloud/secure-connections-to-serverless-clusters.md)
   - 审计管理
     - [控制台审计日志](/tidb-cloud/tidb-cloud-console-auditing.md)
+    - [Database Audit Logging](/tidb-cloud/essential-database-audit-logging.md)
 - 账单
   - [发票](/tidb-cloud/tidb-cloud-billing.md#invoices)
   - [账单详情](/tidb-cloud/tidb-cloud-billing.md#billing-details)
@@ -607,7 +614,18 @@
       - [delete](/tidb-cloud/ticloud-serverless-authorized-network-delete.md)
       - [list](/tidb-cloud/ticloud-serverless-authorized-network-list.md)
       - [update](/tidb-cloud/ticloud-serverless-authorized-network-update.md)
-  - [ai](/tidb-cloud/ticloud-ai.md)
+    - audit-log
+      - config
+        - [update](/tidb-cloud/ticloud-serverless-audit-log-config-update.md)
+        - [describe](/tidb-cloud/ticloud-serverless-audit-log-config-describe.md)
+      - filter-rule
+        - [create](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-create.md)
+        - [delete](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-delete.md)
+        - [describe](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-describe.md)
+        - [list](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-list.md)
+        - [update](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-update.md)
+        - [template](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-template.md)
+      - [download](/tidb-cloud/ticloud-serverless-audit-log-download.md)
   - [completion](/tidb-cloud/ticloud-completion.md)
   - config
     - [create](/tidb-cloud/ticloud-config-create.md)
