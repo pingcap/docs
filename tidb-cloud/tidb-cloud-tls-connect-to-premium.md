@@ -274,7 +274,7 @@ connection.connect(function(err) {
 });
 ```
 
-Parameter descriptions：
+Parameter descriptions:
 
 - Set `ssl: {minVersion: 'TLSv1.2'}` to restrict the versions of the TLS protocol. If you want to use TLS 1.3, you can set the version to `TLSv1.3`.
 - Set `ssl: {ca: fs.readFileSync('<CA_path>')}` to read your local CA path of the downloaded TiDB cluster `ca.pem`.
