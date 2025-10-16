@@ -3,9 +3,9 @@ title: TiDB Cloud Cluster Events
 summary: 了解如何使用 Events 页面查看 TiDB Cloud 集群的事件。
 ---
 
-# TiDB Cloud 集群事件
+# TiDB Cloud Cluster Events
 
-TiDB Cloud 会在集群层级记录历史事件。一个 *event* 表示你的 TiDB Cloud 集群发生了某种变更。你可以在 **Events** 页面查看已记录的事件，包括事件类型、状态、消息、触发时间和触发用户。
+TiDB Cloud 会在集群层级记录历史事件。一个 *event* 表示你的 TiDB Cloud 集群发生了一次变更。你可以在 **Events** 页面查看已记录的事件，包括事件类型、状态、消息、触发时间和触发用户。
 
 本文档介绍如何使用 **Events** 页面查看 TiDB Cloud 集群的事件，并列出了支持的事件类型。
 
@@ -42,8 +42,8 @@ TiDB Cloud 会记录以下类型的集群事件：
 | ScaleChangefeed |   扩容 changefeed 规格 |  
 | FailedChangefeed |   changefeed 失败 |  
 | ImportData |   向集群导入数据 |  
-| UpdateSpendingLimit |   更新 TiDB Cloud Serverless 弹性集群的消费上限 |  
-| ResourceLimitation |   更新 TiDB Cloud Serverless 集群的资源限制 |  
+| UpdateSpendingLimit |   更新 TiDB Cloud Starter 集群的消费额度 |  
+| ResourceLimitation |   更新 TiDB Cloud Starter 或 TiDB Cloud Essential 集群的资源限制 |  
 
 对于每个事件，都会记录以下信息：
 
