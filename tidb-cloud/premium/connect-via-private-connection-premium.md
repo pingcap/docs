@@ -183,7 +183,7 @@ The possible statuses of a private endpoint are explained as follows:
 
 - **Not Configured**: The endpoint service is created but the private endpoint is not created yet.
 - **Pending**: Waiting for processing.
-- **Active**: Your private endpoint is ready to use. You cannot edit the private endpoint of this status.
+- **Active**: Your private endpoint is ready to use. You cannot edit a private endpoint in this status.
 - **Deleting**: The private endpoint is being deleted.
 - **Failed**: The private endpoint creation fails. You can click **Edit** of that row to retry the creation.
 
