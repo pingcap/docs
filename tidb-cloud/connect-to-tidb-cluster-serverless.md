@@ -1,11 +1,11 @@
 ---
-title: Connect to Your {{{ .starter }}} or Essential Cluster
-summary: Learn how to connect to your {{{ .starter }}} or {{{ .essential }}} cluster via different methods.
+title: Connect to Your TiDB Cluster
+summary: Learn how to connect to your {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium}}} cluster via different methods.
 ---
 
-# Connect to Your {{{ .starter }}} or Essential Cluster
+# Connect to Your TiDB Cluster
 
-This document describes how to connect to your {{{ .starter }}} or {{{ .essential }}} cluster.
+This document describes how to connect to your {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium}}} cluster.
 
 > **Tip:**
 >
@@ -13,7 +13,7 @@ This document describes how to connect to your {{{ .starter }}} or {{{ .essentia
 
 ## Connection methods
 
-After your {{{ .starter }}} or {{{ .essential }}} cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
+After your {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium}}} cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
 
 - Direct connections
 
@@ -37,7 +37,7 @@ In the preceding connection methods, you can choose your desired one based on yo
 
 ## Network
 
-There are two network connection types for {{{ .starter }}} and {{{ .essential }}}:
+There are two network connection types for {{{ .starter }}}, {{{ .essential }}} and {{{ .premium}}}:
 
 - [Private endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) (recommended)
 
@@ -47,7 +47,12 @@ There are two network connection types for {{{ .starter }}} and {{{ .essential }
 
   The standard connection exposes a public endpoint, so you can connect to your TiDB cluster via a SQL client from your laptop.
 
-  {{{ .starter }}} and {{{ .essential }}} require [TLS connections](/tidb-cloud/secure-connections-to-serverless-clusters.md), which ensures the security of data transmission from your applications to TiDB clusters.
+  To ensure the security of data transmission from your application to the TiDB cluster, TLS connections must be enabled on the public endpoint.
+
+    - [TLS Connections](/tidb-cloud/secure-connections-to-serverless-clusters.md) to TiDB Cloud Starter or Essential
+
+    - [TLS Connections](/tidbcloud/tidb-cloud-tls-connect-to-premium.md) to TiDB Cloud Premium
+
 
 The following table shows the network you can use in different connection methods:
 
