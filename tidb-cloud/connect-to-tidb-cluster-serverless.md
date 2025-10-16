@@ -13,7 +13,7 @@ This document describes how to connect to your {{{ .starter }}}, {{{ .essential 
 
 ## Connection methods
 
-After your {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium}}} cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
+After your {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium }}} cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
 
 - Direct connections
 
