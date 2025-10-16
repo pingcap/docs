@@ -40,11 +40,11 @@ Make sure that DNS hostnames and DNS resolution are both enabled in your AWS VPC
 
 To connect to your TiDB Cloud Premium instance via a private endpoint, complete the follow these steps:
 
-1. [Select a TiDB instance](#step-1-select-a-tidb-cluster)
+1. [Select a TiDB instance](#step-1-select-a-tidb-instance)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
 3. [Create a private endpoint connection](#step-3-create-a-private-endpoint-connection)
 4. [Enable private DNS](#step-4-enable-private-dns)
-5. [Connect to your TiDB instance](#step-5-connect-to-your-tidb-cluster)
+5. [Connect to your TiDB instance](#step-5-connect-to-your-tidb-instance)
 
 If you have multiple instances, you need to repeat these steps for each instance that you want to connect to using AWS PrivateLink.
 
