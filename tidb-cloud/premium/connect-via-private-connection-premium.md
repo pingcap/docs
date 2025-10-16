@@ -10,7 +10,7 @@ This document describes how to connect to your TiDB Cloud Premium instance via [
 > **Tip:**
 >
 > - To learn how to connect to a {{{ .starter }}} cluster via AWS PrivateLink, see [Connect to {{{ .starter }}} via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
-> - To learn how to connect to a TiDB Cloud Premium instance via private endpoint with AlibabaCloud, see [Connect to a TiDB Cloud Premium instance via Alibaba Cloud Private Link](/tidb-cloud/connect-via-private-connection-premium-on-alicloud.md).
+> - To learn how to connect to a TiDB Cloud Premium instance via private endpoint with Alibaba Cloud, see [Connect to a TiDB Cloud Premium instance via Alibaba Cloud Private Link](/tidb-cloud/connect-via-private-connection-premium-on-alicloud.md).
 
 TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service hosted in an AWS VPC via [AWS PrivateLink](https://aws.amazon.com/privatelink), as if the service were in your own VPC. A private endpoint is exposed in your VPC and you can create a connection to the TiDB Cloud service via the endpoint with permission.
 
