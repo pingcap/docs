@@ -51,7 +51,7 @@ There are two network connection types for {{{ .starter }}}, {{{ .essential }}} 
 
     - [TLS Connections](/tidb-cloud/secure-connections-to-serverless-clusters.md) to TiDB Cloud Starter or Essential
 
-    - [TLS Connections](/tidbcloud/tidb-cloud-tls-connect-to-premium.md) to TiDB Cloud Premium
+    - [TLS Connections](/tidb-cloud/tidb-cloud-tls-connect-to-premium.md) to TiDB Cloud Premium
 
 
 The following table shows the network you can use in different connection methods:
