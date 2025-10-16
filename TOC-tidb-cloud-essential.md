@@ -135,7 +135,7 @@
     - 连接到 TiDB Cloud 集群
       - [连接概览](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
       - [通过 Public Endpoint 连接](/tidb-cloud/connect-via-standard-connection-serverless.md)
-      - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+      - [通过 AWS Private Endpoint 连接](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
       - [通过 Alibaba Cloud Private Endpoint 连接](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
     - 分支 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
       - [概览](/tidb-cloud/branch-overview.md)
@@ -249,10 +249,10 @@
       - [SQLAlchemy](/vector-search/vector-search-integrate-with-sqlalchemy.md)
       - [peewee](/vector-search/vector-search-integrate-with-peewee.md)
       - [Django](/vector-search/vector-search-integrate-with-django-orm.md)
-  - Text Search
-    - [Full-Text Search with SQL](/tidb-cloud/vector-search-full-text-search-sql.md)
-    - [Full-Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md)
-    - [Hybrid Search](/tidb-cloud/vector-search-hybrid-search.md)
+  - 文本搜索
+    - [使用 SQL 进行全文搜索](/tidb-cloud/vector-search-full-text-search-sql.md)
+    - [使用 Python 进行全文搜索](/tidb-cloud/vector-search-full-text-search-python.md)
+    - [混合搜索](/tidb-cloud/vector-search-hybrid-search.md)
   - 参考
     - [向量数据类型](/vector-search/vector-search-data-types.md)
     - [向量函数和操作符](/vector-search/vector-search-functions-and-operators.md)
@@ -274,7 +274,7 @@
     - [通过 TLS 连接](/tidb-cloud/secure-connections-to-serverless-clusters.md)
   - 审计管理
     - [控制台审计日志](/tidb-cloud/tidb-cloud-console-auditing.md)
-    - [Database Audit Logging](/tidb-cloud/essential-database-audit-logging.md)
+    - [数据库审计日志](/tidb-cloud/essential-database-audit-logging.md)
 - 账单
   - [发票](/tidb-cloud/tidb-cloud-billing.md#invoices)
   - [账单详情](/tidb-cloud/tidb-cloud-billing.md#billing-details)
