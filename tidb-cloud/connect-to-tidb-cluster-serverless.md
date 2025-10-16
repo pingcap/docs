@@ -5,7 +5,7 @@ summary: Learn how to connect to your {{{ .starter }}}, {{{ .essential }}}, or {
 
 # Connect to Your TiDB Cluster
 
-This document describes how to connect to your {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium}}} cluster.
+This document describes how to connect to your {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium }}} cluster.
 
 > **Tip:**
 >
