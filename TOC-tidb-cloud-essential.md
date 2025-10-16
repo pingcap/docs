@@ -268,7 +268,7 @@
     - [身份访问管理](/tidb-cloud/manage-user-access.md)
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - 网络访问控制
-    - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+    - [通过 AWS Private Endpoint 连接](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
     - [通过 Alibaba Cloud Private Endpoint 连接](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
     - [为 Public Endpoint 配置防火墙规则](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
     - [通过 TLS 连接](/tidb-cloud/secure-connections-to-serverless-clusters.md)
