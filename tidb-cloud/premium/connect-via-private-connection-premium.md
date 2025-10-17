@@ -1,6 +1,6 @@
 ---
 title: Connect to a TiDB Cloud Premium instance via AWS PrivateLink
-summary: Learn how to connect to your TiDB Cloud instance via private endpoint with AWS.
+summary: Learn how to connect to your TiDB Cloud Premium instance via private endpoint with AWS.
 ---
 
 # Connect to a TiDB Cloud Premium instance via AWS PrivateLink
