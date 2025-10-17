@@ -159,7 +159,7 @@ After completing the prerequisites, you can sink your data to MySQL.
 
 11. The sink starts soon, and you can see the status of the sink changes from **Creating** to **Running**.
 
-     Click the changefeed name, and you can see more details about the changefeed, such as the checkpoint, replication latency, and other metrics.
+    Click the changefeed name, and you can see more details about the changefeed, such as the checkpoint, replication latency, and other metrics.
 
 12. If you have [loaded the existing data](#load-existing-data-optional) using Dumpling, you need to restore the GC time to its original value (the default value is `10m`) after the sink is created:
 
