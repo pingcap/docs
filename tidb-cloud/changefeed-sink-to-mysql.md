@@ -113,7 +113,7 @@ After completing the prerequisites, you can sink your data to MySQL.
 3. In **Connectivity Method**:
 
     * If using **VPC Peering** or **Public IP**, fill in your MySQL endpoint.
-    * If using **Private Endpoint**, select the **Sink Private Endpoint** which is prepared in the [Network](#network) section.
+    * If using **Private Endpoint**, select the **Sink Private Endpoint** that you prepared in the [Network](#network) section.
 
 4. Fill in the MySQL user name, and password in **MySQL Connection**.
 
