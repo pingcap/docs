@@ -57,7 +57,7 @@ If your MySQL service is in a Google Cloud VPC that has no public internet acces
 <div label="Private Endpoint">
 Private Connect leverages **Private Link** or **Private Service Connect** technologies from cloud providers to enable resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly within your VPC.
 
-- Ensure your MySQL service is connective though private endpoint. Provide the following information in the TiDB Cloud console to create the changefeed:
+- Ensure your MySQL service is connectable though private endpoint. Provide the following information in the TiDB Cloud console to create the changefeed:
 
     - The Sink Private Link, follow [Setup Private Endpoint for Changefeed](/tidb-cloud/set-up-sink-private-endpoint.md) to create one.
     - The MySQL Ports
@@ -115,7 +115,7 @@ After completing the prerequisites, you can sink your data to MySQL.
     * If using **VPC Peering** or **Public IP**, fill in your MySQL endpoint.
     * If using **Private Endpoint**, select the **Sink Private Endpoint** which is prepared in the [Network](#network) section.
 
-4. Fill in the MySQL endpoints, user name, and password in **MySQL Connection**.
+4. Fill in the MySQL user name, and password in **MySQL Connection**.
 
 5. Click **Next** to test whether TiDB can connect to MySQL successfully:
 

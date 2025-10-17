@@ -1,9 +1,9 @@
 ---
-title: Setup Private Endpoint for Changefeed
-summary: Learn how to setup a private endpoint for Changefeed.
+title: Set Up Private Endpoint for Changefeed
+summary: Learn how to set up private endpoint for changefeed.
 ---
 
-# Setup Private Endpoint for Changefeed
+# Set Up Private Endpoint for Changefeed
 
 This document explains how to create a private endpoint for changefeed in TiDB Cloud Dedicated, enabling you to sink data downstream to Self-Hosted Kafka or MySQL.
 
@@ -30,7 +30,7 @@ For AWS, prepare the following information. Refer to [Step 2. Expose the Kafka c
 - If the private endpoint is created for an Apache Kafka service, you can use either a TiDB managed domain or your own custom domain for the advertised listener.
   - For a TiDB managed domain, prepare the ID for the Kafka Advertised Listener Pattern.
   - For a custom domain, prepare your primary domain and subdomains for the corresponding availability zones.
-</div>
+  </div>
 
 <div label="Google Cloud">
 For Google Cloud, prepare the following information. Refer to [Step 2. Expose the Kafka cluster as Private Service Connect](https://docs.pingcap.com/tidbcloud/setup-self-hosted-kafka-private-service-connect/#step-2-expose-the-kafka-cluster-as-private-service-connect) for more details.
@@ -39,7 +39,7 @@ For Google Cloud, prepare the following information. Refer to [Step 2. Expose th
 - If the private endpoint is created for an Apache Kafka service, you can use either a TiDB managed domain or your own custom domain for the advertised listener.
   - For a TiDB managed domain, prepare the ID for the Kafka Advertised Listener Pattern.
   - For a custom domain, prepare your root domain.
-</div>
+  </div>
 
 <div label="Azure">
 For Azure, prepare the following information. Refer to [Step 2. Expose the Kafka cluster as Private Link Service](https://docs.pingcap.com/tidbcloud/setup-azure-self-hosted-kafka-private-link-service/#step-2-expose-the-kafka-cluster-as-private-link-service) for more details.
@@ -48,16 +48,16 @@ For Azure, prepare the following information. Refer to [Step 2. Expose the Kafka
 - If the private endpoint is created for an Apache Kafka service, you can use either a TiDB managed domain or your own custom domain for the advertised listener.
   - For a TiDB managed domain, prepare the ID for the Kafka Advertised Listener Pattern.
   - For a custom domain, prepare your root domain.
-</div>
-</SimpleTab>
+  </div>
+  </SimpleTab>
 
-## Step 1. Open the Private Endpoint for Changefeed
+## Step 1. Open the private endpoint creation page
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
 2. Navigate to the cluster overview page of the TiDB cluster, then click **Settings** > **Networking**.
 3. Click **Create Private Endpoint** in the **Private Endpoint for Changefeed** section.
 
-## Step 2. Configure the Private Endpoint for Changefeed
+## Step 2. Configure the private endpoint for changefeed
 
 The configuration steps vary depending on the cloud provider where your cluster is deployed.
 
@@ -69,7 +69,7 @@ The configuration steps vary depending on the cloud provider where your cluster 
 
 3. Enter the **Endpoint Service Name** that you configured in [Set Up Self-Hosted Kafka Private Link Service in AWS](https://docs.pingcap.com/tidbcloud/setup-aws-self-hosted-kafka-private-link-service/).
 
-4. Select the **Number of Availability Zones**. Make sure you select the same **Number of AZs** and **AZ IDs** as your Kafka deployment.
+4. Select the **Number of Availability Zones**. Ensure the **Number of AZs** and **AZ IDs** are the same as your Kafka deployment.
 
 5. If this private endpoint is created specifically for Apache Kafka, the **Advertised Listener for Kafka** is required. Enable the switch.
 
@@ -87,7 +87,7 @@ The configuration steps vary depending on the cloud provider where your cluster 
 
 2. Enter a **Name** for this **Private Endpoint**.
 
-3. Enter the **Service Attachment** that you configured in [Setup Self Hosted Kafka Private Service Connect in Google Cloud](https://docs.pingcap.com/tidbcloud/setup-self-hosted-kafka-private-service-connect/).
+3. Enter the **Service Attachment** that you configured in [Set up Self Hosted Kafka Private Service Connect in Google Cloud](https://docs.pingcap.com/tidbcloud/setup-self-hosted-kafka-private-service-connect/).
 
 4. If this private endpoint is created specifically for Apache Kafka, the **Advertised Listener for Kafka** is required. Enable the switch.
 
@@ -118,8 +118,3 @@ The configuration steps vary depending on the cloud provider where your cluster 
 6. Click **Create** to validate the configurations and create the private endpoint.
 </div>
 </SimpleTab>
-
-
-
-
-

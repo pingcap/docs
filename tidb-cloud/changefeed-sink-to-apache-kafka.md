@@ -136,7 +136,7 @@ The steps vary depending on the connectivity method you select.
 <div label="Private Link (AWS)">
 
 1. In **Connectivity Method**, select **Private Link**.
-2. Select the **Sink Private Endpoint** which is prepared in the [Network](#network) section. Make sure the Sink Private Endpoint's AZs match the same AZ of the Kafka Deployment.
+2. Select the **Sink Private Endpoint** that you prepared in the [Network](#network) section. Make sure the Sink Private Endpoint's AZs match the same AZ of the Kafka Deployment.
 3. Fill in the **Bootstrap Ports**. It is recommended that you set at least one port for one AZ. You can use commas `,` to separate multiple ports.
 4. Select an **Authentication** option according to your Kafka authentication configuration.
 
@@ -154,7 +154,7 @@ The steps vary depending on the connectivity method you select.
 <div label="Private Service Connect (Google Cloud)">
 
 1. In **Connectivity Method**, select **Private Service Connect**.    
-2. Select the **Sink Private Endpoint** which is prepared in the [Network](#network) section.
+2. Select the **Sink Private Endpoint** that you prepared in the [Network](#network) section.
 3. Fill in the **Bootstrap Ports**. It is recommended that you provide more than one port. You can use commas `,` to separate multiple ports. 
 4. Select an **Authentication** option according to your Kafka authentication configuration.
 
@@ -172,7 +172,7 @@ The steps vary depending on the connectivity method you select.
 <div label="Private Link (Azure)">
 
 1. In **Connectivity Method**, select **Private Link**.
-2. Select the **Sink Private Endpoint** which is prepared in the [Network](#network) section.
+2. Select the **Sink Private Endpoint** that you prepared in the [Network](#network) section.
 3. Fill in the **Bootstrap Ports**. It is recommended that you set at least one port for one AZ. You can use commas `,` to separate multiple ports.
 4. Select an **Authentication** option according to your Kafka authentication configuration.
 
