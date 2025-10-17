@@ -190,7 +190,7 @@ The possible statuses of a private endpoint are explained as follows:
 The possible statuses of a private endpoint service are explained as follows:
 
 - **Creating**: The endpoint service is being created, which takes 3 to 5 minutes.
-- **Active**: The endpoint service is created, no matter whether the private endpoint is created or not.
+- **Active**: The endpoint service is created, regardless of whether the private endpoint is created or not.
 - **Deleting**: The endpoint service or the instance is being deleted, which takes 3 to 5 minutes.
 
 ## Troubleshooting
