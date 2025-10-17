@@ -29,11 +29,11 @@ The monitoring dashboard **TiCDC-New-Arch** for [TiCDC New Architecture](/ticdc/
 
 The monitoring dashboard for TiCDC new architecture mainly includes the following sections:
 
-- [**Summary**](#summary)：The summary information of the TiCDC cluster
-- [**Server**](#server)：The summary information of TiKV nodes and TiCDC nodes in the TiDB cluster
-- [**Log Puller**](#log-puller)：The detailed information of the TiCDC Log Puller module
-- [**Event Store**](#event-store)：The detailed information of the TiCDC Event Store module
-- [**Sink**](#sink)：The detailed information of the TiCDC Sink module
+- [**Summary**](#summary): The summary information of the TiCDC cluster
+- [**Server**](#server): The summary information of TiKV nodes and TiCDC nodes in the TiDB cluster
+- [**Log Puller**](#log-puller): The detailed information of the TiCDC Log Puller module
+- [**Event Store**](#event-store): The detailed information of the TiCDC Event Store module
+- [**Sink**](#sink): The detailed information of the TiCDC Sink module
 
 ### Summary
 
