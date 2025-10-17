@@ -39,7 +39,7 @@ The monitoring dashboard for TiCDC new architecture mainly includes the followin
 
 The following is an example of the **Summary** panel:
 
-![Summary](/media/ticdc/ticdc-new-arch-metric-1.png)
+![Summary](/media/ticdc/ticdc-new-arch-metric-summary.png)
 
 The description of each metric in the **Summary** panel is as follows:
 
@@ -57,7 +57,7 @@ The description of each metric in the **Summary** panel is as follows:
 
 The following is an example of the **Server** panel:
 
-![Server](/media/ticdc/ticdc-new-arch-metric-2.png)
+![Server](/media/ticdc/ticdc-new-arch-metric-server.png)
 
 The description of each metric in the **Server** panel is as follows:
 
@@ -73,7 +73,7 @@ The description of each metric in the **Server** panel is as follows:
 
 The following is an example of the **Log Puller** panel:
 
-![Log Puller](/media/ticdc/ticdc-new-arch-metric-3.png)
+![Log Puller](/media/ticdc/ticdc-new-arch-metric-log-puller.png)
 
 The description of each metric in the **Log Puller** panel is as follows:
 
@@ -88,7 +88,7 @@ The description of each metric in the **Log Puller** panel is as follows:
 
 The following is an example of the **Event Store** panel:
 
-![Event Store](/media/ticdc/ticdc-new-arch-metric-4.png)
+![Event Store](/media/ticdc/ticdc-new-arch-metric-event-store.png)
 
 The description of each metric in the **Event Store** panel is as follows:
 
@@ -113,7 +113,7 @@ The description of each metric in the **Event Store** panel is as follows:
 
 The following is an example of the **Sink** panel:
 
-![Sink](/media/ticdc/ticdc-new-arch-metric-5.png)
+![Sink](/media/ticdc/ticdc-new-arch-metric-sink.png)
 
 The description of each metric in the **Sink** panel is as follows:
 
