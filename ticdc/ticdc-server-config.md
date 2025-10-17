@@ -33,8 +33,8 @@ The following describes the configuration file specified by the `config` option 
 ### `newarch` <span class="version-mark">New in v8.5.4-release.1</span>
 
 - Controls whether to enable the [TiCDC new architecture](/ticdc/ticdc-architecture.md).
+- Default value: `false`, indicating that the [TiCDC classic architecture](/ticdc/ticdc-classic-architecture.md) is used.
 - When it is set to `true`, the TiCDC new architecture is enabled.
-- By default, `newarch` is not specified, indicating that the classic architecture is used. `newarch` applies only to the new architecture. If `newarch` is added to the configuration file of the TiCDC classic architecture, it might cause parsing failures.
 
 <!-- The configuration method of the following parameters is the same as that of CLI parameters, but the CLI parameters have higher priorities. -->
 

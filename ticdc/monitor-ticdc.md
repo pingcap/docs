@@ -103,7 +103,7 @@ The description of each metric in the **Event Store** panel is as follows:
 - Compressed Rows/s: The number of rows compressed per second in Event Store (triggered only when row size exceeds the threshold)
 - Write Duration: The time consumed by Event Store write operations
 - Write Batch Size: The batch size of a single write operation
-- Write Batch Event Count: The number of rows included in a single write batch
+- Write Batch Event Count: The number of row change events included in a single write batch
 - Data Size On Disk: The total data size that Event Store occupies on disk
 - Data Size In Memory: The total data size that Event Store occupies in memory
 - Scan Requests/s: The number of scan requests that Event Store executes per second
