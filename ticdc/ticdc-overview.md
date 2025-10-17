@@ -53,7 +53,7 @@ TiCDC has the following key capabilities:
     >
     > Since v6.2, you can use the sink URI parameter [`transaction-atomicity`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb) to control whether to split single-table transactions. Splitting single-table transactions can greatly reduce the latency and memory consumption of replicating large transactions.
 
-## TiCDC architecture
+## TiCDC architecture overview
 
 TiCDC is an incremental data replication tool for TiDB, which is highly available through PD's etcd. The replication process consists of the following steps:
 
@@ -70,6 +70,8 @@ The components in the architecture diagram are described as follows:
 - TiKV Server: TiKV nodes in a TiDB cluster. When data changes occur, TiKV nodes send the changes as change logs (KV change logs) to TiCDC nodes. If TiCDC nodes detect that the change logs are not continuous, they will actively request the TiKV nodes to provide change logs.
 - TiCDC: TiCDC nodes where TiCDC processes run. Each node runs a TiCDC process. Each process pulls data changes from one or more tables in TiKV nodes and replicates the changes to the downstream system through the sink component.
 - PD: The scheduling module in a TiDB cluster. This module is responsible for scheduling cluster data and usually consists of three PD nodes. PD provides high availability through the etcd cluster. In the etcd cluster, TiCDC stores its metadata, such as node status information and changefeed configurations.
+
+In implementation, both the [new architecture](/ticdc/ticdc-architecture.md) and the [classic architecture](/ticdc/ticdc-classic-architecture.md) of TiCDC are built on the same incremental data replication model. Compared with the classic architecture, the new architecture refactors and optimizes task scheduling and replication mechanisms, significantly improving the performance, scalability, and stability of real-time data replication while reducing resource costs.
 
 As shown in the architecture diagram, TiCDC supports replicating data to TiDB, MySQL, Kafka, and storage services.
 
