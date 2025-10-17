@@ -30,6 +30,9 @@ Before creating a changefeed, you need to complete the following prerequisites:
 
 Make sure that your TiDB Cluster can connect to the MySQL service.
 
+<SimpleTab>
+<div label="VPC Peering">
+
 If your MySQL service is in an AWS VPC that has no public internet access, take the following steps:
 
 1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster.
@@ -49,6 +52,18 @@ If your MySQL service is in a Google Cloud VPC that has no public internet acces
 3. Modify the ingress firewall rules of the VPC where MySQL is located.
 
     You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the ingress firewall rules. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL endpoint.
+</div>
+
+<div label="Private Endpoint">
+Private Connect leverages **Private Link** or **Private Service Connect** technologies from cloud providers to enable resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly within your VPC.
+
+- Ensure your MySQL service is connective though private endpoint. Provide the following information in the TiDB Cloud console to create the changefeed:
+
+    - The Sink Private Link, follow [Setup Private Endpoint for Changefeed](/tidb-cloud/set-up-sink-private-endpoint.md) to create one.
+    - The MySQL Ports
+</div>
+
+</SimpleTab>
 
 ### Load existing data (optional)
 
@@ -95,21 +110,26 @@ After completing the prerequisites, you can sink your data to MySQL.
 
 2. Click **Create Changefeed**, and select **MySQL** as **Destination**.
 
-3. Fill in the MySQL endpoints, user name, and password in **MySQL Connection**.
+3. In **Connectivity Method**:
 
-4. Click **Next** to test whether TiDB can connect to MySQL successfully:
+    * If using **VPC Peering** or **Public IP**, fill in your MySQL endpoint.
+    * If using **Private Endpoint**, select the **Sink Private Endpoint** which is prepared in the [Network](#network) section.
+
+4. Fill in the MySQL endpoints, user name, and password in **MySQL Connection**.
+
+5. Click **Next** to test whether TiDB can connect to MySQL successfully:
 
     - If yes, you are directed to the next step of configuration.
     - If not, a connectivity error is displayed, and you need to handle the error. After the error is resolved, click **Next** again.
 
-5. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](/table-filter.md).
+6. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](/table-filter.md).
 
     - **Case Sensitive**: you can set whether the matching of database and table names in filter rules is case-sensitive. By default, matching is case-insensitive.
     - **Filter Rules**: you can set filter rules in this column. By default, there is a rule `*.*`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays only the tables that match the rules in the box on the right. You can add up to 100 filter rules.
     - **Tables with valid keys**: this column displays the tables that have valid keys, including primary keys or unique indexes.
     - **Tables without valid keys**: this column shows tables that lack primary keys or unique keys. These tables present a challenge during replication because the absence of a unique identifier can result in inconsistent data when the downstream handles duplicate events. To ensure data consistency, it is recommended to add unique keys or primary keys to these tables before initiating the replication. Alternatively, you can add filter rules to exclude these tables. For example, you can exclude the table `test.tbl1` by using the rule `"!test.tbl1"`.
 
-6. Customize **Event Filter** to filter the events that you want to replicate.
+7. Customize **Event Filter** to filter the events that you want to replicate.
 
     - **Tables matching**: you can set which tables the event filter will be applied to in this column. The rule syntax is the same as that used for the preceding **Table Filter** area. You can add up to 10 event filter rules per changefeed.
     - **Event Filter**: you can use the following event filters to exclude specific events from the changefeed:
@@ -120,28 +140,28 @@ After completing the prerequisites, you can sink your data to MySQL.
         - **Ignore update old value expression**: excludes `UPDATE` statements where the old value matches a specified condition. For example, `age < 18` excludes updates where the old value of `age` is less than 18.
         - **Ignore delete value expression**: excludes `DELETE` statements that meet a specified condition. For example, `name = 'john'` excludes `DELETE` statements where `name` is `'john'`.
 
-7. In **Start Replication Position**, configure the starting position for your MySQL sink.
+8. In **Start Replication Position**, configure the starting position for your MySQL sink.
 
     - If you have [loaded the existing data](#load-existing-data-optional) using Dumpling, select **Start replication from a specific TSO** and fill in the TSO that you get from Dumpling exported metadata files.
     - If you do not have any data in the upstream TiDB cluster, select **Start replication from now on**.
     - Otherwise, you can customize the start time point by choosing **Start replication from a specific time**.
 
-8. Click **Next** to configure your changefeed specification.
+9. Click **Next** to configure your changefeed specification.
 
     - In the **Changefeed Specification** area, specify the number of Replication Capacity Units (RCUs) to be used by the changefeed.
     - In the **Changefeed Name** area, specify a name for the changefeed.
 
-9. Click **Next** to review the changefeed configuration.
+10. Click **Next** to review the changefeed configuration.
 
     If you confirm that all configurations are correct, check the compliance of cross-region replication, and click **Create**.
 
     If you want to modify some configurations, click **Previous** to go back to the previous configuration page.
 
-10. The sink starts soon, and you can see the status of the sink changes from **Creating** to **Running**.
+11. The sink starts soon, and you can see the status of the sink changes from **Creating** to **Running**.
 
-    Click the changefeed name, and you can see more details about the changefeed, such as the checkpoint, replication latency, and other metrics.
+     Click the changefeed name, and you can see more details about the changefeed, such as the checkpoint, replication latency, and other metrics.
 
-11. If you have [loaded the existing data](#load-existing-data-optional) using Dumpling, you need to restore the GC time to its original value (the default value is `10m`) after the sink is created:
+12. If you have [loaded the existing data](#load-existing-data-optional) using Dumpling, you need to restore the GC time to its original value (the default value is `10m`) after the sink is created:
 
 {{< copyable "sql" >}}
 
