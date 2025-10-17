@@ -5,7 +5,7 @@ summary: Learn how to set up private endpoint for changefeed.
 
 # Set Up Private Endpoint for Changefeed
 
-This document explains how to create a private endpoint for changefeed in TiDB Cloud Dedicated, enabling you to sink data downstream to Self-Hosted Kafka or MySQL.
+This document explains how to create a private endpoint for changefeed in TiDB Cloud Dedicated, enabling you to sink data downstream to self-hosted Kafka or MySQL.
 
 ## Restrictions
 
