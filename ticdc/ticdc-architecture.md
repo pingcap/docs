@@ -59,7 +59,7 @@ When this feature is enabled, TiCDC automatically splits and distributes tables 
 - The table Region count exceeds the configured threshold (`100000` by default, adjustable via `scheduler.region-threshold`).
 - The table write traffic exceeds the configured threshold (disabled by default, configurable via `scheduler.write-key-threshold`).
 
-## Compatibility notes
+## Compatibility
 
 ### Handling of server-level errors
 
@@ -103,7 +103,7 @@ The new TiCDC architecture incorporates all functionalities of the classic archi
 - [Pulsar Sink](/ticdc/ticdc-sink-to-pulsar.md)
 - [Storage Sink](/ticdc/ticdc-sink-to-cloud-storage.md)
 
-In addition, the new TiCDC architecture currently does not support splitting large transactions into multiple batches for downstream replication. As a result, there is still a risk of OOM when processing extremely large transactions. Make sure to evaluate and mitigate this risk appropriately when using it.
+In addition, the new TiCDC architecture currently does not support splitting large transactions into multiple batches for downstream replication. As a result, there is still a risk of OOM when processing extremely large transactions. Make sure to evaluate and mitigate this risk appropriately before using the new architecture.
 
 ## Deployment steps
 
@@ -165,7 +165,7 @@ You can deploy the TiCDC new architecture using TiUP or TiDB Operator.
 
     For example:
 
-    ```
+    ```yaml
     spec:
       ticdc:
         baseImage: pingcap/ticdc
@@ -194,7 +194,7 @@ You can deploy the TiCDC new architecture using TiUP or TiDB Operator.
         kubectl edit tc ${cluster_name} -n ${namespace}
         ```
 
-        ```
+        ```yaml
         spec:
           ticdc:
             baseImage: pingcap/ticdc
