@@ -13,7 +13,7 @@ This document describes how to configure your Prometheus service to read key met
 
 TiDB Cloud has supported the project-level Prometheus integration (Beta) since March 4, 2022(?please help update the date). Starting from October 21, 2025, TiDB Cloud introduces the cluster-level Prometheus integration (Preview).
 
-- **Cluster-level Prometheus integration (Preview)**: if no legacy project-level Prometheus integration remains undeleted within your organization by October 21, 2025, TiDB Cloud provides the cluster-level Prometheus integration (Preview) for your organization to experience the latest enhancements.
+- **Cluster-level Prometheus integration (Preview)**: if no legacy project-level Prometheus integration remains undeleted within your organization by October 21, 2025, TiDB Cloud provides the cluster-level Prometheus integration (Preview) for your organization to experience the latest enhancements. This feature is currently available for Dedicated clusters on AWS and GCP, and we are working to bring it to Azure in the near future.
 - **Legacy project-level Prometheus integration (Beta)**: if at least one legacy project-level Prometheus integration remains undeleted within your organization by October 21, 2025, TiDB Cloud retains both existing and new integrations at the project level for your organization to avoid affecting current dashboards. 
 
 ## Prerequisites
