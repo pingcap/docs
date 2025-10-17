@@ -10,7 +10,7 @@ This document describes the classic architecture and working principles of TiCDC
 > **Note:**
 >
 > - This document applies to TiCDC versions earlier than v8.5.4-release.1.
-> - Starting from v8.5.4-release.1, TiCDC introduces a new architecture that improves real-time data replication performance, scalability, and stability while reducing resource costs. For more information, see [TiCDC New Architecture](/ticdc/ticdc-classic-architecture.md).
+> - Starting from v8.5.4-release.1, TiCDC introduces a new architecture that improves real-time data replication performance, scalability, and stability while reducing resource costs. For more information, see [TiCDC New Architecture](/ticdc/ticdc-architecture.md).
 
 ## TiCDC classic architecture
 

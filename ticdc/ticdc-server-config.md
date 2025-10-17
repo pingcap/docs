@@ -30,9 +30,9 @@ The following are descriptions of options available in a `cdc server` command:
 
 The following describes the configuration file specified by the `config` option in the `cdc server` command. You can find the default configuration file in [`pkg/cmd/util/ticdc.toml`](https://github.com/pingcap/tiflow/blob/master/pkg/cmd/util/ticdc.toml).
 
-### `newarch` <span class="version-mark">New in v9.0.0</span>
+### `newarch` <span class="version-mark">New in v8.5.4-release.1</span>
 
-- Controls whether to enable the [TiCDC new architecture](/ticdc/ticdc-new-arch.md).
+- Controls whether to enable the [TiCDC new architecture](/ticdc/ticdc-architecture.md).
 - When it is set to `true`, the TiCDC new architecture is enabled.
 - By default, `newarch` is not specified, indicating that the classic architecture is used. `newarch` applies only to the new architecture. If `newarch` is added to the configuration file of the TiCDC classic architecture, it might cause parsing failures.
 
