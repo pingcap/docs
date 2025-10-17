@@ -10,7 +10,7 @@ This document explains how to create a private endpoint for changefeed in TiDB C
 ## Restrictions
 
 - Only Organization Owner and Project Owner roles can create private endpoints for changefeeds.
-- Within the same VPC, each Private Endpoint Service in AWS, Service Attachment in Google Cloud, or Private Link Service in Azure can have up to 5 private endpoints. If you exceed this limit, please remove any unused private endpoints before creating new ones.
+- Within the same VPC, each Private Endpoint Service in AWS, Service Attachment in Google Cloud, or Private Link Service in Azure can have up to 5 private endpoints. If you exceed this limit, remove any unused private endpoints before creating new ones.
 
 ## Prerequisites
 
