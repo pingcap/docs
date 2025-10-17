@@ -60,7 +60,7 @@ Private Connect leverages **Private Link** or **Private Service Connect** techno
 - Ensure your MySQL service is connectable though private endpoint. Provide the following information in the TiDB Cloud console to create the changefeed:
 
     - The Sink Private Link, follow [Setup Private Endpoint for Changefeed](/tidb-cloud/set-up-sink-private-endpoint.md) to create one.
-    - The MySQL Ports
+    - The MySQL Port
 </div>
 
 </SimpleTab>
