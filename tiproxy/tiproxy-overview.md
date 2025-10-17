@@ -69,7 +69,7 @@ This section describes how to deploy and change TiProxy using TiUP. You can eith
 
 For other deployment methods, refer to the following documents:
 
-- To deploy TiProxy using TiDB Operator, see the [TiDB Operator](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-tiproxy) documentation.
+- To deploy TiProxy using TiDB Operator, see the [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tiproxy) documentation.
 - To quickly deploy TiProxy locally using TiUP, see [Deploy TiProxy](/tiup/tiup-playground.md#deploy-tiproxy).
 
 ### Create a cluster with TiProxy

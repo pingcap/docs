@@ -173,7 +173,7 @@ To verify the caller's identity for a component, you need to mark the certificat
 > **Note:**
 >
 > - Starting from v8.4.0, the PD configuration item `cert-allowed-cn` supports multiple values. You can configure multiple `Common Name` in the `cluster-verify-cn` configuration item for TiDB and in the `cert-allowed-cn` configuration item for other components as needed. Note that TiUP uses a separate identifier when querying component status. For example, if the cluster name is `test`, TiUP uses `test-client` as the `Common Name`.
-> - For v8.3.0 and earlier versions, the PD configuration item `cert-allowed-cn` can only be set to a single value. Therefore, the `Common Name` of all authentication objects must be set to the same value. For related configuration examples, see [v8.3.0 documentation](https://docs.pingcap.com/tidb/v8.3/enable-tls-between-components).
+> - For v8.3.0 and earlier versions, the PD configuration item `cert-allowed-cn` can only be set to a single value. Therefore, the `Common Name` of all authentication objects must be set to the same value. For related configuration examples, see [v8.3.0 documentation](https://docs-archive.pingcap.com/tidb/v8.3/enable-tls-between-components/).
 
 - TiDB
 
@@ -226,6 +226,40 @@ To verify the caller's identity for a component, you need to mark the certificat
     [security]
         [server-http-tls]
         cert-allowed-cn = ["tiproxy", "tidb", "test-client", "prometheus"]
+    ```
+
+## Validate TLS between TiDB components
+
+After configuring TLS for communication between TiDB components, you can use the following commands to verify that TLS has been successfully enabled. These commands print the certificate and TLS handshake details for each component.
+
+- TiDB
+
+    ```sh
+    openssl s_client -connect <tidb_host>:10080 -cert /path/to/client.pem -key /path/to/client-key.pem -CAfile ./ca.crt < /dev/null
+    ```
+
+- PD
+
+    ```sh
+    openssl s_client -connect <pd_host>:2379 -cert /path/to/client.pem -key /path/to/client-key.pem -CAfile ./ca.crt < /dev/null
+    ```
+
+- TiKV
+
+    ```sh
+    openssl s_client -connect <tikv_host>:20160 -cert /path/to/client.pem -key /path/to/client-key.pem -CAfile ./ca.crt < /dev/null
+    ```
+
+- TiFlash (New in v4.0.5)
+
+    ```sh
+    openssl s_client -connect <tiflash_host>:<tiflash_port> -cert /path/to/client.pem -key /path/to/client-key.pem -CAfile ./ca.crt < /dev/null
+    ```
+
+- TiProxy
+
+    ```sh
+    openssl s_client -connect <tiproxy_host>:3080 -cert /path/to/client.pem -key /path/to/client-key.pem -CAfile ./ca.crt < /dev/null
     ```
 
 ## Reload certificates
