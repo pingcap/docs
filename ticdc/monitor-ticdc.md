@@ -61,10 +61,10 @@ The following is an example of the **Server** panel:
 
 The description of each metric in the **Server** panel is as follows:
 
-- Uptime: Time for which TiKV nodes and TiCDC nodes have been running
+- Uptime: The time for which TiKV nodes and TiCDC nodes have been running
 - Goroutine Count: The number of Goroutines in TiCDC nodes
 - Open FD Count: The number of file handles opened by TiCDC nodes
-- CPU Usage: CPU usage of TiCDC nodes
+- CPU Usage: The CPU usage of TiCDC nodes
 - Memory Usage: The memory usage of TiCDC nodes
 - Ownership History: The historical record of Owner nodes in the TiCDC cluster
 - PD Leader History: The historical record of PD Leader nodes in the upstream TiDB cluster
