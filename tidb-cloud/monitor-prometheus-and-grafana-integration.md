@@ -1,4 +1,3 @@
-<img width="3682" height="432" alt="image" src="https://github.com/user-attachments/assets/57327a10-1819-49ba-bb83-b672fa2269c4" />---
 title: Integrate TiDB Cloud with Prometheus and Grafana
 summary: Learn how to monitor your TiDB cluster with the Prometheus and Grafana integration.
 ---
