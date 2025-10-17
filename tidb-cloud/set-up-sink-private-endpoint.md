@@ -28,8 +28,8 @@ For AWS, prepare the following information. Refer to [Step 2. Expose the Kafka c
 - Private Endpoint Service
 - Availability Zones where your downstream service is located
 - If the private endpoint is created for an Apache Kafka service, you can use either a TiDB managed domain or your own custom domain for the advertised listener.
-  - For a TiDB managed domain, prepare the ID for the Kafka Advertised Listener Pattern.
-  - For a custom domain, prepare your primary domain and subdomains for the corresponding availability zones.
+  - For TiDB managed domain, provide the ID for the Kafka Advertised Listener Pattern. TiDB generates broker addresses with subdomains per AZ. Configure your Kafka service’s advertised listener with these broker URLs.
+  - For custom domain, provide your root domain and specify the exact subdomain for each availability zone for your brokers.
   </div>
 
 <div label="Google Cloud">
