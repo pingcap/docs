@@ -25,7 +25,7 @@ By separating the architecture into stateful and stateless components, the TiCDC
 
 ## Comparison between the classic and new architectures
 
-The new architecture is designed to address common issues during continuous system scaling, such as performance bottlenecks, insufficient stability, and limited scalability. Compared with the classic architecture, the new architecture achieves significant optimizations in the following key dimensions:
+The new architecture is designed to address common issues during continuous system scaling, such as performance bottlenecks, insufficient stability, and limited scalability. Compared with the [classic architecture](/ticdc/ticdc-classic-architecture.md), the new architecture achieves significant optimizations in the following key dimensions:
 
 | Feature | TiCDC classic architecture | TiCDC new architecture |
 | ------------------------ | ---------------------------------------- | ---------------------------------------- |
@@ -114,6 +114,8 @@ You can deploy the TiCDC new architecture using TiUP or TiDB Operator.
 <SimpleTab>
 <div label="TiUP">
 
+To deploy the TiCDC new architecture using TiUP, take the following steps:
+
 1. If your TiDB cluster does not have TiCDC nodes yet, refer to [Scale out a TiCDC cluster](/scale-tidb-using-tiup.md#scale-out-a-ticdc-cluster) to add new TiCDC nodes in the cluster. Otherwise, skip this step.
 
 2. Download the TiCDC binary package for the new architecture.
@@ -160,6 +162,8 @@ You can deploy the TiCDC new architecture using TiUP or TiDB Operator.
 
 </div>
 <div label="TiDB Operator">
+
+To deploy the TiCDC new architecture using TiUP, take the following steps:
 
 - If your TiDB cluster does not include a TiCDC component, refer to [Add TiCDC to an existing TiDB cluster](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-ticdc/#add-ticdc-to-an-existing-tidb-cluster) to add new TiCDC nodes. When doing so, specify the TiCDC image version as the new architecture version in the cluster configuration file.
 
