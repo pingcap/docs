@@ -242,4 +242,4 @@ For more command usage methods and details, see [Manage Changefeeds](/ticdc/ticd
 
 Currently, the monitoring dashboard **TiCDC-New-Arch** for the TiCDC new architecture is not managed by TiUP yet. To view this dashboard in Grafana, you need to manually import the [TiCDC monitoring metrics file](https://github.com/pingcap/ticdc/blob/master/metrics/grafana/ticdc_new_arch.json).
 
-For detailed descriptions of each monitoring metric, see [TiCDC New Architecture Monitoring Metrics](/ticdc/monitor-ticdc.md#ticdc-new-architecture-metrics).
+For detailed descriptions of each monitoring metric, see [Metrics for TiCDC in the new architecture](/ticdc/monitor-ticdc.md#metrics-for-ticdc-in-the-new-architecture).
