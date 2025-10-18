@@ -182,7 +182,7 @@ The following is an example of the **Changefeed** panel:
 
 - Changefeed catch-up ETA: The estimated time needed for the replication task to catch up with the upstream cluster data. When the upstream write speed is faster than the TiCDC replication speed, the metric might be extremely large. Because TiCDC replication speed is subject to many factors, this metric is for reference only and might not be the actual replication time.
 
-## Events
+### Events
 
 The following is an example of the **Events** panel:
 
