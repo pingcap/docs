@@ -15,7 +15,7 @@ cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://ro
 
 ## Metrics for TiCDC in the new architecture
 
-The monitoring dashboard **TiCDC-New-Arch** for [TiCDC New Architecture](/ticdc/ticdc-architecture.md) is not yet integrated into TiUP. To view the relevant monitoring information on Grafana, you need to manually import the TiCDC monitoring metrics file:
+The monitoring dashboard **TiCDC-New-Arch** for [TiCDC New Architecture](/ticdc/ticdc-architecture.md) is not yet integrated into TiUP. To view the related monitoring data on Grafana, you need to manually import the TiCDC monitoring metrics file:
 
 1. Download the monitoring metrics file for TiCDC in the new architecture:
 
@@ -23,7 +23,7 @@ The monitoring dashboard **TiCDC-New-Arch** for [TiCDC New Architecture](/ticdc/
     wget https://raw.githubusercontent.com/pingcap/ticdc/refs/heads/release-8.5/metrics/grafana/ticdc_new_arch.json
     ```
 
-2. Import the downloaded metrics file on the Grafana page.
+2. Import the downloaded metrics file on Grafana:
 
     ![Import Metrics File](/media/ticdc/ticdc-new-arch-import-grafana.png)
 
@@ -62,12 +62,12 @@ The following is an example of the **Server** panel:
 The description of each metric in the **Server** panel is as follows:
 
 - Uptime: The time for which TiKV nodes and TiCDC nodes have been running
-- Goroutine Count: The number of Goroutines in TiCDC nodes
+- Goroutine Count: The number of Goroutines on TiCDC nodes
 - Open FD Count: The number of file handles opened by TiCDC nodes
 - CPU Usage: The CPU usage of TiCDC nodes
 - Memory Usage: The memory usage of TiCDC nodes
-- Ownership History: The historical record of Owner nodes in the TiCDC cluster
-- PD Leader History: The historical record of PD Leader nodes in the upstream TiDB cluster
+- Ownership History: The historical records of Owner nodes in the TiCDC cluster
+- PD Leader History: The historical records of PD Leader nodes in the upstream TiDB cluster
 
 ### Log Puller
 
@@ -99,7 +99,7 @@ The description of each metric in the **Event Store** panel is as follows:
 - Input Event Count/s: The number of events that Event Store processes per second
 - Input Bytes/s: The amount of data that Event Store processes per second
 - Write Requests/s: The number of write requests that Event Store executes per second
-- Write Worker Busy Ratio: The ratio of IO time to total runtime for Event Store write threads
+- Write Worker Busy Ratio: The ratio of I/O time to total runtime for Event Store write threads
 - Compressed Rows/s: The number of rows compressed per second in Event Store (triggered only when row size exceeds the threshold)
 - Write Duration: The time consumed by Event Store write operations
 - Write Batch Size: The batch size of a single write operation
@@ -118,9 +118,9 @@ The following is an example of the **Sink** panel:
 The description of each metric in the **Sink** panel is as follows:
 
 - Output Row Batch Count: The average number of rows per DML batch written by the Sink module
-- Output Row Count(per second): The number of DML rows written to downstream per second
+- Output Row Count (per second): The number of DML rows written to downstream per second
 - Output DDL Executing Duration: The time consumed by executing DDL events for the changefeed on the current node
-- Sink Error Count / m: The number of error messages reported per minute by the Sink module
+- Sink Error Count / m: The number of errors reported per minute by the Sink module
 - Output DDL Count / Minutes: The number of DDLs executed per minute for the changefeed on the current node
 
 ## Metrics for TiCDC in the classic architecture

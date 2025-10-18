@@ -10,7 +10,7 @@ Starting from TiCDC v8.5.4-release.1, TiCDC introduces a new architecture that i
 - **Higher single-node performance**: a single node can replicate up to 500,000 tables, achieving replication throughput of up to 190 MiB/s on a single node in wide table scenarios.
 - **Enhanced scalability**: cluster replication capability scales almost linearly. A single cluster can expand to over 100 nodes, support more than 10,000 changefeeds, and replicate millions of tables within a single changefeed.
 - **Improved stability**: changefeed latency is reduced and performance is more stable in scenarios with high traffic, frequent DDL operations, and cluster scaling events. Resource isolation and priority scheduling reduce interference between multiple changefeed tasks.
-- **Lower resource costs**: with improved resource utilization and reduced redundancy, CPU and memory resource usage is reduced by up to 50% in typical scenarios.
+- **Lower resource costs**: with improved resource utilization and reduced redundancy, CPU and memory resource usage can decrease by up to 50% in typical scenarios.
 
 ## Architectural design
 
@@ -18,7 +18,7 @@ Starting from TiCDC v8.5.4-release.1, TiCDC introduces a new architecture that i
 
 The TiCDC new architecture consists of two core components: Log Service and Downstream Adapter.
 
-- Log Service: as the core data service layer, Log Service fetches information such as row changes and DDL events from the upstream TiDB cluster, and then temporarily stores the change data on local disk. It also responds to data requests from the Downstream Adapter, periodically merging and sorting DML and DDL data and pushing the sorted data to the Downstream Adapter.
+- Log Service: as the core data service layer, Log Service fetches information such as row changes and DDL events from the upstream TiDB cluster, and then temporarily stores the change data on local disks. It also responds to data requests from the Downstream Adapter, periodically merging and sorting DML and DDL data and pushing the sorted data to the Downstream Adapter.
 - Downstream Adapter: as the downstream data replication adaptation layer, Downstream Adapter handles user-initiated changefeed operations. It schedules and generates related replication tasks, fetches data from the Log Service, and replicates the fetched data to downstream systems.
 
 By separating the architecture into stateful and stateless components, the TiCDC new architecture significantly improves system scalability, reliability, and flexibility. Log Service, as the stateful component, focuses on data acquisition, sorting, and storage. Decoupling it from changefeed processing logic enables data sharing across multiple changefeeds, effectively improving resource utilization and reducing system overhead. Downstream Adapter, as the stateless component, uses a lightweight scheduling mechanism that allows quick migration of replication tasks between instances. It can dynamically adjust the splitting and merging of replication tasks based on workload changes, ensuring low-latency replication in various scenarios.
@@ -157,7 +157,7 @@ To deploy the TiCDC new architecture using TiUP, take the following steps:
 </div>
 <div label="TiDB Operator">
 
-To deploy the TiCDC new architecture using TiUP, take the following steps:
+To deploy the TiCDC new architecture using TiDB Operator, take the following steps:
 
 - If your TiDB cluster does not include a TiCDC component, refer to [Add TiCDC to an existing TiDB cluster](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-ticdc/#add-ticdc-to-an-existing-tidb-cluster) to add new TiCDC nodes. When doing so, specify the TiCDC image version as the new architecture version in the cluster configuration file.
 
