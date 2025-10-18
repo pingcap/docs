@@ -15,7 +15,7 @@ cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://ro
 
 ## Metrics for TiCDC in the new architecture
 
-The monitoring dashboard **TiCDC-New-Arch** for [TiCDC New Architecture](/ticdc/ticdc-architecture.md) is not yet integrated into TiUP. To view the related monitoring data on Grafana, you need to manually import the TiCDC monitoring metrics file:
+The monitoring dashboard **TiCDC-New-Arch** for [TiCDC New Architecture](/ticdc/ticdc-architecture.md) is not managed by TiUP yet. To view the related monitoring data on Grafana, you need to manually import the TiCDC monitoring metrics file:
 
 1. Download the monitoring metrics file for TiCDC in the new architecture:
 
