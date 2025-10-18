@@ -46,8 +46,9 @@ The new architecture is designed to address common issues during continuous syst
 If your workload meets any of the following conditions, it is recommended to switch from the [classic TiCDC architecture](/ticdc/ticdc-classic-architecture.md) to the new architecture for better performance and stability:
 
 - Bottlenecks in incremental scan performance: incremental scan tasks take an excessively long time to complete, leading to continuously increasing replication latency.
+- Ultra-high traffic scenarios: the total changefeed traffic exceeds 700 MiB/s.
 - Single tables with high-throughput writes in MySQL sink: the target table has **only one primary key or non-null unique key**.
-- Large-scale table replication: the number of tables to be replicated exceeds 100,000.  
+- Large-scale table replication: the number of tables to be replicated exceeds 100,000.
 - Frequent DDL operations causing latency: frequent execution of DDL statements significantly increases replication latency.
 
 ## New features
