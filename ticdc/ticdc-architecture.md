@@ -5,7 +5,7 @@ summary: Introduces the features, architectural design, deployment guide, and no
 
 # TiCDC New Architecture
 
-Starting from TiCDC v8.5.4-release.1, TiCDC introduces a new architecture that improves the performance, scalability, and stability of real-time data replication while reducing resource costs. This new architecture redesigns TiCDC core components and optimizes its data processing workflows, offering the following advantages:
+Starting from [TiCDC v8.5.4-release.1](https://github.com/pingcap/ticdc/releases/tag/v8.5.4-release.1), TiCDC introduces a new architecture that improves the performance, scalability, and stability of real-time data replication while reducing resource costs. This new architecture redesigns TiCDC core components and optimizes its data processing workflows, offering the following advantages:
 
 - **Higher single-node performance**: a single node can replicate up to 500,000 tables, achieving replication throughput of up to 190 MiB/s on a single node in wide table scenarios.
 - **Enhanced scalability**: cluster replication capability scales almost linearly. A single cluster can expand to over 100 nodes, support more than 10,000 changefeeds, and replicate millions of tables within a single changefeed.
