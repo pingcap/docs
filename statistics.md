@@ -768,7 +768,7 @@ When you analyze regular columns, you can use the [`tidb_distsql_scan_concurrenc
 
 #### `tidb_index_serial_scan_concurrency`
 
-When you analyze index columns, you can use the [`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency) variable to control the number of Regions to be read at one time. The default value is `1`. Note that changing the value will affect query performance. Adjust the value carefully.
+[`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency) is deprecated and read-only. Index statistics collection now follows [`tidb_analyze_distsql_scan_concurrency`](/system-variables.md#tidb_analyze_distsql_scan_concurrency), so adjust that variable to change the number of Regions read for index statistics.
 
 ## See also
 

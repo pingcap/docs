@@ -564,9 +564,9 @@ Configures how CSV files are parsed.
 
 #### `index-serial-scan-concurrency`
 
-- Sets the TiDB session variable to speed up the Checksum and Analyze operations. For more information, see [Control `ANALYZE` concurrency](/statistics.md#control-analyze-concurrency).
-
-<!-- Example: `20` -->
+> **Warning:**
+>
+> Deprecated. TiDB Lightning keeps this option for compatibility, but TiDB now ignores the underlying `tidb_index_serial_scan_concurrency` system variable. Sequential index scans follow [`tidb_executor_concurrency`](/system-variables.md#tidb_executor_concurrency-new-in-v50), and index statistics collection follows [`tidb_analyze_distsql_scan_concurrency`](/system-variables.md#tidb_analyze_distsql_scan_concurrency).
 
 #### `checksum-table-concurrency`
 

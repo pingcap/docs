@@ -3506,15 +3506,16 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_index_serial_scan_concurrency
 
-- Scope: SESSION | GLOBAL
+> **Warning:**
+>
+> This variable is deprecated and cannot be modified. Sequential index scans now follow [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50), and [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) uses [`tidb_analyze_distsql_scan_concurrency`](#tidb_analyze_distsql_scan_concurrency) to control index read concurrency.
+
+- Scope: SESSION | GLOBAL (read-only)
 - Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
-- Type: Integer
-- Default value: `1`
-- Range: `[1, 256]`
-- Unit: Threads
-- This variable is used to set the concurrency of the `serial scan` operation.
-- Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Read-only integer alias
+- Default value: matches the current value of [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50)
+- This variable remains only for backward compatibility. Adjust [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) to affect sequential index scans, or [`tidb_analyze_distsql_scan_concurrency`](#tidb_analyze_distsql_scan_concurrency) to tune index statistics collection.
 
 ### tidb_init_chunk_size
 
