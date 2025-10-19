@@ -76,7 +76,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'tidb%';
 | tidb_index_lookup_concurrency       | 4                   |
 | tidb_index_lookup_join_concurrency  | 4                   |
 | tidb_index_lookup_size              | 20000               |
-| tidb_index_serial_scan_concurrency  | 5                   |
+| tidb_index_serial_scan_concurrency  | 1                   |
 | tidb_init_chunk_size                | 32                  |
 | tidb_isolation_read_engines         | tikv, tiflash, tidb |
 | tidb_low_resolution_tso             | 0                   |
