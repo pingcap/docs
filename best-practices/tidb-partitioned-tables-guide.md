@@ -200,7 +200,7 @@ The performance overhead of partitioned tables in TiDB depends significantly on 
 
 - The more partitions you have, the more severe the potential performance degrades.
 - With a smaller number of partitions, the impact might not be as noticeable, but it is still workload-dependent.
-- For local indexes, if a query does not include effective partition pruning conditions, the number of partitions directly correlates with the number of RPCs triggered. This means more partitions will likely result in more RPCs, leading to higher latency.
+- For local indexes, if a query does not include effective partition pruning conditions, the number of partitions directly correlates with the number of RPCs (Remote Procedure Call) triggered. This means more partitions will likely result in more RPCs, leading to higher latency.
 - For global indexes, the number of RPCs and the degree of performance regression depend on both the number of partitions involved and how many rows need to be retrieved (that is, the number of rows requiring table lookups).
 
 #### Recommendations
@@ -225,7 +225,7 @@ To compare the performance of TTL and partition drop, the test case in this sect
 
 #### Findings
 
-**TTL Performance:**
+**TTL performance:**
 
 - On a write-heavy table, TTL runs every 10 minutes.
 - With 50 threads, each TTL job takes 8 to 10 minutes, deleted 7 to 11 million rows.
@@ -237,7 +237,7 @@ To compare the performance of TTL and partition drop, the test case in this sect
 - `DROP PARTITION` removes an entire data segment instantly, with minimal resource usage.
 - `DROP PARTITION` is a metadata-level operation, making it much faster and more predictable than TTL, especially when managing large volumes of historical data.
 
-#### How to use TTL and partition drop in TiDB
+#### Use TTL and partition drop in TiDB
 
 In this test case, the table structures have been anonymized. For more detailed information on the usage of TTL, see [Periodically Delete Data Using TTL (Time to Live)](/time-to-live.md) .
 
