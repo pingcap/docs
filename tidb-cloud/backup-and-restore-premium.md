@@ -129,7 +129,7 @@ To restore your data to a new instance, take the following steps:
     </div>
     <div label="Point-in-Time Restore">
 
-    To restore to a specific point in time for a {{{ .essential }}} instance, take the following steps:
+    To restore to a specific point in time for a Premium instance, take the following steps:
 
     1. Click **Point-in-Time Restore**.
     2. Select the date and time you want to restore to.
