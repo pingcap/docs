@@ -153,7 +153,7 @@ Once the restore process begins, the instance status changes to **Restoring**. T
 
 ### Restore from Recycle Bin
 
-To restore a deleted instance from recycle bin, take the following steps:
+To restore a deleted instance from the Recycle Bin, take the following steps:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com),  and then navigate to the [TiDB instance](https://staging.tidbcloud.com/tidbs?orgId=1369847559692509630&uiMode=new-offerings-preview) page. In the top-right corner, click **Recycle Bin**.
 
