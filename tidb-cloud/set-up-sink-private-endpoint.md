@@ -1,61 +1,57 @@
 ---
-title: Set Up Private Endpoint for Changefeed
-summary: Learn how to set up private endpoint for changefeed.
+title: Set Up Private Endpoint for Changefeeds
+summary: Learn how to set up a private endpoint for changefeeds.
 ---
 
-# Set Up Private Endpoint for Changefeed
+# Set Up Private Endpoint for Changefeeds
 
-This document explains how to create a private endpoint for changefeed in TiDB Cloud Dedicated, enabling you to sink data downstream to self-hosted Kafka or MySQL.
+This document describes how to create a private endpoint for changefeeds of your TiDB Cloud Dedicated clusters, enabling you to stream data to self-hosted Kafka or MySQL.
 
 ## Restrictions
 
-- Only Organization Owner, Project Owner and Project Data Access Read-Write roles can create private endpoints for changefeeds.
-- Within the same VPC, each Private Endpoint Service in AWS, Service Attachment in Google Cloud, or Private Link Service in Azure can have up to 5 private endpoints. If you exceed this limit, remove any unused private endpoints before creating new ones.
+Within the same VPC, each Private Endpoint Service in AWS, Service Attachment in Google Cloud, or Private Link Service in Azure can have up to 5 private endpoints. If this limit is exceeded, remove any unused private endpoints before creating new ones.
 
 ## Prerequisites
 
-- Set up your network connection
+- Check permissions for private endpoint creation
+- Set up your network connection 
+### Permissions
+
+Only users with the `Organization Owner`, `Project Owner` or `Project Data Access Read-Write` roles in your organization can create private endpoints for changefeeds. For more information about roles in TiDB Cloud, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
 
 ### Network
 
-Private Connect leverages **Private Link** or **Private Service Connect** technologies from cloud providers, allowing resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly within your VPC.
+Private endpoints leverage **Private Link** or **Private Service Connect** technologies from cloud providers, allowing resources in your VPC to connect to services in other VPCs through private IP addresses, as if those services were hosted directly within your VPC.
 
 <SimpleTab>
 
 <div label="AWS">
-For AWS, prepare the following information. Refer to [Step 2. Expose the Kafka cluster as Private Link Service](https://docs.pingcap.com/tidbcloud/setup-aws-self-hosted-kafka-private-link-service/#step-2-expose-the-kafka-cluster-as-private-link-service) for more details.
+If your changefeed downstream service is hosted on AWS, note down the following information:
 
-- Private Endpoint Service
-- Availability Zones where your downstream service is located
-- If the private endpoint is created for an Apache Kafka service, you can use either a TiDB managed domain or your own custom domain for the advertised listener.
-  - For TiDB managed domain, provide the ID for the Kafka Advertised Listener Pattern. TiDB generates broker addresses with subdomains per AZ. Configure your Kafka service’s advertised listener with these broker URLs.
-  - For custom domain, provide your root domain and specify the exact subdomain for each availability zone for your brokers.
+- The name of the Private Endpoint Service for your downstream service
+- Availability zones (AZs) where your downstream service is located
+
+If the Private Endpoint Service is not available for your downstream service, follow [Step 2. Expose the Kafka cluster as Private Link Service](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service) to set up the load balancer and the Private Link Service.
   </div>
 
 <div label="Google Cloud">
-For Google Cloud, prepare the following information. Refer to [Step 2. Expose the Kafka cluster as Private Service Connect](https://docs.pingcap.com/tidbcloud/setup-self-hosted-kafka-private-service-connect/#step-2-expose-the-kafka-cluster-as-private-service-connect) for more details.
+If your changefeed downstream service is hosted on Google Cloud, note down the Service Attachment information of your downstream service.
 
-- Service Attachment
-- If the private endpoint is created for an Apache Kafka service, you can use either a TiDB managed domain or your own custom domain for the advertised listener.
-  - For a TiDB managed domain, prepare the ID for the Kafka Advertised Listener Pattern.
-  - For a custom domain, prepare your root domain.
+If Service Attachment is not available for your downstream service, follow [Step 2. Expose Kafka-proxy as Private Service Connect Service](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md#step-2-expose-kafka-proxy-as-private-service-connect-service) to get the Service Attachment information.
   </div>
 
 <div label="Azure">
-For Azure, prepare the following information. Refer to [Step 2. Expose the Kafka cluster as Private Link Service](https://docs.pingcap.com/tidbcloud/setup-azure-self-hosted-kafka-private-link-service/#step-2-expose-the-kafka-cluster-as-private-link-service) for more details.
+If your changefeed downstream service is hosted on Azure, note down the alias of the Private Link Service of your downstream service.
 
-- Alias of the Private Link Service
-- If the private endpoint is created for an Apache Kafka service, you can use either a TiDB managed domain or your own custom domain for the advertised listener.
-  - For a TiDB managed domain, prepare the ID for the Kafka Advertised Listener Pattern.
-  - For a custom domain, prepare your root domain.
+If the Private Endpoint Service is not available for your downstream service, follow [Step 2. Expose the Kafka cluster as Private Link Service](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service) to set up the load balancer and the Private Link Service.
   </div>
   </SimpleTab>
 
 ## Step 1. Open the private endpoint creation page
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
-2. Navigate to the cluster overview page of the TiDB cluster, then click **Settings** > **Networking**.
-3. Click **Create Private Endpoint** in the **Private Endpoint for Changefeed** section.
+2. Navigate to the overview page of your TiDB Cloud Dedicated cluster, and then click **Settings** > **Networking** in the left navigation pane.
+3. In the **Private Endpoint for Changefeed** section, click **Create Private Endpoint**.
 
 ## Step 2. Configure the private endpoint for changefeed
 
@@ -63,57 +59,57 @@ The configuration steps vary depending on the cloud provider where your cluster 
 
 <SimpleTab>
 <div label="AWS">
-1. Authorize the [AWS Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts) of TiDB Cloud to create an endpoint for your endpoint service. The AWS Principal is provided in the tip on the web page.
+1. On the **Create Sink Private Endpoint** page, enter a name for the private endpoint.
 
-2. Enter a **Name** for this **Private Endpoint**.
+2. Follow the tip to authorize the [AWS Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts) of TiDB Cloud to create an endpoint.
 
-3. Enter the **Endpoint Service Name** that you configured in [Set Up Self-Hosted Kafka Private Link Service in AWS](https://docs.pingcap.com/tidbcloud/setup-aws-self-hosted-kafka-private-link-service/).
+3. Enter the **Endpoint Service Name** that you noted down when [setting up the network](#network).
 
-4. Select the **Number of Availability Zones**. Ensure the **Number of AZs** and **AZ IDs** are the same as your Kafka deployment.
+4. Select the **Number of Availability Zones**. Ensure the **Number of AZs** and **AZ IDs** match your Kafka deployment.
 
-5. If this private endpoint is created specifically for Apache Kafka, the **Advertised Listener for Kafka** is required. Enable the switch.
+5. If this private endpoint is created for Apache Kafka, enable the **Advertised Listener for Kafka** option.
 
-6. The advertised listener for Kafka supports both **TiDB Managed Domain** and **Custom Domain**.
+6. Configure the advertised listener for Kafka using either **TiDB Managed Domain** or **Custom Domain**.
 
-   - If using **TiDB Managed Domain**, enter the same unique ID in the **Kafka Advertised Listener Pattern** that you used when setting up the Kafka Private Link Service in the **Network** section.
+   - To use **TiDB Managed Domain** for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate** to let TiDB generate broker addresses with subdomains per availability zone.
 
-   - If using a **Custom Domain**, enter the root domain and click the **Check** button next to it. Then enter the broker subdomains for the corresponding availability zones.
+   - To use your own **Custom Domain** for advertised listeners, enter the root domain, click **Check**, and then specify the broker subdomains for the corresponding availability zones.
 
 7. Click **Create** to validate the configurations and create the private endpoint.
 </div>
 
 <div label="Google Cloud">
-1. Authorize the [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) of TiDB Cloud to pre-approve endpoint creation for your Private Service Connect service, or manually approve the endpoint connection request when received. The project ID is provided in the tip on the web page.
+1. On the **Create Sink Private Endpoint** page, enter a name for the private endpoint.
 
-2. Enter a **Name** for this **Private Endpoint**.
+2. Follow the tip to authorize the [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) of TiDB Cloud to pre-approve endpoint creation, or manually approve the endpoint connection request when you receive it.
 
-3. Enter the **Service Attachment** that you configured in [Set up Self Hosted Kafka Private Service Connect in Google Cloud](https://docs.pingcap.com/tidbcloud/setup-self-hosted-kafka-private-service-connect/).
+3. Enter the **Service Attachment** that you noted down when [setting up the network](#network).
 
-4. If this private endpoint is created specifically for Apache Kafka, the **Advertised Listener for Kafka** is required. Enable the switch.
+4. If this private endpoint is created for Apache Kafka, enable the **Advertised Listener for Kafka** option.
 
-5. The advertised listener for Kafka supports both **TiDB Managed Domain** and **Custom Domain**.
+5. Configure the advertised listener for Kafka using either **TiDB Managed Domain** or **Custom Domain**.
 
-   - If using **TiDB Managed Domain**, enter the same unique ID in the **Kafka Advertised Listener Pattern** that you used when setting up the Kafka Private Service Connect in the **Network** section.
+   - To use **TiDB Managed Domain** for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate** to let TiDB generate broker addresses with subdomains per availability zone.
 
-   - If using a **Custom Domain**, enter the root domain and click the **Check** button next to it. Then enter the broker subdomain.
+   - To use your own **Custom Domain** for advertised listeners, enter the root domain, click **Check**, and then specify the broker subdomains for the corresponding availability zones.
 
 6. Click **Create** to validate the configurations and create the private endpoint.
 </div>
 
 <div label="Azure">
-1. Authorize the Azure subscription of TiDB Cloud or allow anyone with your alias to access your Private Link service before creating the changefeed. The Azure subscription is provided in the **Reminders before proceeding** tip on the web page. For more information about Private Link service visibility, see [Control service exposure](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview#control-service-exposure) in Azure documentation.
+1. On the **Create Sink Private Endpoint** page, enter a name for the private endpoint.
 
-2. Enter a **Name** for this **Private Endpoint**.
+2. Follow the tip to authorize the Azure subscription of TiDB Cloud or allow anyone with your alias to access your Private Link service before creating the changefeed. For more information about Private Link service visibility, see [Control service exposure](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview#control-service-exposure) in Azure documentation.
 
-3. Enter the **Alias of Private Link Service** that you configured in [Set Up Self-Hosted Kafka Private Link Service in Azure](https://docs.pingcap.com/tidbcloud/setup-azure-self-hosted-kafka-private-link-service/).
+3. Enter the **Alias of Private Link Service** that you noted down when [setting up the network](#network).
 
-4. If this private endpoint is created specifically for Apache Kafka, the **Advertised Listener for Kafka** is required. Enable the switch.
+5. If this private endpoint is created for Apache Kafka, enable the **Advertised Listener for Kafka** option.
 
-5. The advertised listener for Kafka supports both **TiDB Managed Domain** and **Custom Domain**.
+5.  Configure the advertised listener for Kafka using either **TiDB Managed Domain** or **Custom Domain**.
 
-   - If using **TiDB Managed Domain**, enter the same unique ID in the **Kafka Advertised Listener Pattern** that you used when setting up the Kafka Private Link Service in the **Network** section.
+   - To use **TiDB Managed Domain** for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate** to let TiDB generate broker addresses with subdomains per availability zone.
 
-   - If using a **Custom Domain**, enter the root domain and click the **Check** button next to it. Then enter the broker subdomain.
+   - To use your own **Custom Domain** for advertised listeners, enter the root domain, click **Check**, and then specify the broker subdomains for the corresponding availability zones.
 
 6. Click **Create** to validate the configurations and create the private endpoint.
 </div>
