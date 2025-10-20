@@ -140,7 +140,7 @@ To restore your data to a new instance, take the following steps:
 
 4. Click **Next** to proceed to the **Restore to a New TiDB** page.
 
-5. Configure your new TiDB instance for restoration. The steps are the same as [creating a new TiDB instance]()
+5. Configure your new TiDB instance for restoration. The steps are the same as [creating a new TiDB instance](/tidb-cloud/create-tidb-cluster-premium.md)
 
    > **Note:** The cloud provider and region for the new instance will match those of the backup.
 
