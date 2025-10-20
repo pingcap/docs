@@ -108,7 +108,7 @@ TiDB Cloud supports restoring data to a new instancee.
 
 > **Note:**
 >
-> User credentials and permissions from the source instance will **not** be restored to the new instance, You must recreate any users and permissions manually in the new instance.
+> User credentials and permissions from the source instance will **not** be restored to the new instance. You must recreate any users and permissions manually in the new instance.
 
 To restore your data to a new instance, take the following steps:
 
