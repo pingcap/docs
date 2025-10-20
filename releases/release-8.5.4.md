@@ -36,9 +36,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + PD
 
-    - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-    - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-    - (dup): release-7.5.7.md > Improvements> PD - Reduce unnecessary error logs [#9370](https://github.com/tikv/pd/issues/9370) @[bufferflies](https://github.com/bufferflies)
+    - degrade some unecessary error log [#9370](https://github.com/tikv/pd/issues/9370) @[bufferflies](https://github.com/bufferflies)
+    - upgrade the golang and dependent version[#9788](https://github.com/tikv/pd/issues/9788) @[JmPotato](https://github.com/JmPotato)
+    - support to distribute table feature, make scatter easier #[8986](https://github.com/tikv/pd/issues/8986)  @[bufferflies](https://github.com/bufferflies)
 
 + TiFlash
 
@@ -91,9 +91,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + PD
 
-    - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-    - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
-    - (dup): release-9.0.0.md(beta.1) > Bug fixes> PD - Fix the issue that the PD client retry policy is not properly initialized [#9013](https://github.com/tikv/pd/issues/9013) @[rleungx](https://github.com/rleungx)
+    - Fix PD Client initial strategy not work well [#9013](https://github.com/tikv/pd/issues/9013) @[rleungx](https://github.com/rleungx)
+    - Fix the wrong APIS of the `/config` 和 `/members`  [#9797](https://github.com/tikv/pd/issues/9797) @[lhy1024](https://github.com/lhy1024) 
+    - Fix the handler way of the tso error #[9188](https://github.com/tikv/pd/issues/9188) @[Tema](https://github.com/Tema)
+    - Fix the bucket split still work even if the bucket doesn't report #[9726](https://github.com/tikv/pd/issues/9726) @[bufferflies](https://github.com/bufferflies)
+    - Fix the wrong token allocation of the resource manager #[9455](https://github.com/tikv/pd/issues/9455)  @[JmPotato](https://github.com/JmPotato)
+    - Fix the placement rule revert after pd leader changed #[9602](https://github.com/tikv/pd/issues/9602) @[okJiang](https://github.com/okJiang)
+    - Fix the ttl configuration not work #[9343](https://github.com/tikv/pd/issues/9343) @[lhy1024](https://github.com/lhy1024)
 
 + TiFlash
 
