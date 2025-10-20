@@ -59,7 +59,7 @@ Compared with {{{ .starter }}} clusters and {{{ .essential }}} clusters, TiDB Pr
 
   - For Premium instances, **daily backups** can be configured to start at a preferred time (in 30-minute intervals), while **hourly backups** always run on the hour.
 
- ### Configure the backup settings
+### Configure the backup settings
 
 To configure backups for a Premium instance, follow these steps:
 
