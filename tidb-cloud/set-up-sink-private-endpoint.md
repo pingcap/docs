@@ -14,7 +14,8 @@ Within the same VPC, each Private Endpoint Service in AWS, Service Attachment in
 ## Prerequisites
 
 - Check permissions for private endpoint creation
-- Set up your network connection 
+- Set up your network connection
+
 ### Permissions
 
 Only users with the `Organization Owner`, `Project Owner` or `Project Data Access Read-Write` roles in your organization can create private endpoints for changefeeds. For more information about roles in TiDB Cloud, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
@@ -24,28 +25,33 @@ Only users with the `Organization Owner`, `Project Owner` or `Project Data Acces
 Private endpoints leverage **Private Link** or **Private Service Connect** technologies from cloud providers, allowing resources in your VPC to connect to services in other VPCs through private IP addresses, as if those services were hosted directly within your VPC.
 
 <SimpleTab>
-
 <div label="AWS">
+
 If your changefeed downstream service is hosted on AWS, note down the following information:
 
 - The name of the Private Endpoint Service for your downstream service
 - Availability zones (AZs) where your downstream service is located
 
 If the Private Endpoint Service is not available for your downstream service, follow [Step 2. Expose the Kafka cluster as Private Link Service](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service) to set up the load balancer and the Private Link Service.
-  </div>
+
+</div>
 
 <div label="Google Cloud">
+
 If your changefeed downstream service is hosted on Google Cloud, note down the Service Attachment information of your downstream service.
 
 If Service Attachment is not available for your downstream service, follow [Step 2. Expose Kafka-proxy as Private Service Connect Service](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md#step-2-expose-kafka-proxy-as-private-service-connect-service) to get the Service Attachment information.
-  </div>
+
+</div>
 
 <div label="Azure">
+
 If your changefeed downstream service is hosted on Azure, note down the alias of the Private Link Service of your downstream service.
 
 If the Private Endpoint Service is not available for your downstream service, follow [Step 2. Expose the Kafka cluster as Private Link Service](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service) to set up the load balancer and the Private Link Service.
-  </div>
-  </SimpleTab>
+
+</div>
+</SimpleTab>
 
 ## Step 1. Open the private endpoint creation page
 
@@ -59,6 +65,7 @@ The configuration steps vary depending on the cloud provider where your cluster 
 
 <SimpleTab>
 <div label="AWS">
+
 1. On the **Create Sink Private Endpoint** page, enter a name for the private endpoint.
 
 2. Follow the tip to authorize the [AWS Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts) of TiDB Cloud to create an endpoint.
@@ -72,13 +79,14 @@ The configuration steps vary depending on the cloud provider where your cluster 
 6. Configure the advertised listener for Kafka using either **TiDB Managed Domain** or **Custom Domain**.
 
    - To use **TiDB Managed Domain** for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate** to let TiDB generate broker addresses with subdomains per availability zone.
-
    - To use your own **Custom Domain** for advertised listeners, enter the root domain, click **Check**, and then specify the broker subdomains for the corresponding availability zones.
 
 7. Click **Create** to validate the configurations and create the private endpoint.
+
 </div>
 
 <div label="Google Cloud">
+
 1. On the **Create Sink Private Endpoint** page, enter a name for the private endpoint.
 
 2. Follow the tip to authorize the [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) of TiDB Cloud to pre-approve endpoint creation, or manually approve the endpoint connection request when you receive it.
@@ -90,27 +98,28 @@ The configuration steps vary depending on the cloud provider where your cluster 
 5. Configure the advertised listener for Kafka using either **TiDB Managed Domain** or **Custom Domain**.
 
    - To use **TiDB Managed Domain** for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate** to let TiDB generate broker addresses with subdomains per availability zone.
-
    - To use your own **Custom Domain** for advertised listeners, enter the root domain, click **Check**, and then specify the broker subdomains for the corresponding availability zones.
 
 6. Click **Create** to validate the configurations and create the private endpoint.
+
 </div>
 
 <div label="Azure">
+
 1. On the **Create Sink Private Endpoint** page, enter a name for the private endpoint.
 
 2. Follow the tip to authorize the Azure subscription of TiDB Cloud or allow anyone with your alias to access your Private Link service before creating the changefeed. For more information about Private Link service visibility, see [Control service exposure](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview#control-service-exposure) in Azure documentation.
 
 3. Enter the **Alias of Private Link Service** that you noted down when [setting up the network](#network).
 
-5. If this private endpoint is created for Apache Kafka, enable the **Advertised Listener for Kafka** option.
+4. If this private endpoint is created for Apache Kafka, enable the **Advertised Listener for Kafka** option.
 
-5.  Configure the advertised listener for Kafka using either **TiDB Managed Domain** or **Custom Domain**.
+5. Configure the advertised listener for Kafka using either **TiDB Managed Domain** or **Custom Domain**.
 
-   - To use **TiDB Managed Domain** for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate** to let TiDB generate broker addresses with subdomains per availability zone.
-
-   - To use your own **Custom Domain** for advertised listeners, enter the root domain, click **Check**, and then specify the broker subdomains for the corresponding availability zones.
+    - To use **TiDB Managed Domain** for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate** to let TiDB generate broker addresses with subdomains per availability zone.
+    - To use your own **Custom Domain** for advertised listeners, enter the root domain, click **Check**, and then specify the broker subdomains for the corresponding availability zones.
 
 6. Click **Create** to validate the configurations and create the private endpoint.
+
 </div>
 </SimpleTab>
