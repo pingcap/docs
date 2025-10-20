@@ -12,7 +12,7 @@ Backup files can originate from the following sources:
 
 - Active TiDB Cloud Premium instances
 - TiDB Cloud Dedicated clusters
-- The recycle bin for backups from deleted Dedicated clusters or Premium instances
+- The Recycle Bin for backups from deleted Dedicated clusters or Premium instances
 
 > **Tip:**
 >
