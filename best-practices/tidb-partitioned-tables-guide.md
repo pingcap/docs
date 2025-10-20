@@ -39,7 +39,7 @@ For more use cases, see [Partition Pruning](https://docs.pingcap.com/tidb/stable
 
 ### Query performance on secondary indexes: non-partitioned tables vs. local indexes vs. global indexes
 
-In TiDB, local indexes are the default for partitioned tables. Each partition has its own set of indexes. A global index, on the other hand, covers the whole table in one index. This means it keeps track of all rows across all partitions. Global indexes can be faster for queries across multiple partitions because local indexes needs to do one lookup in each partition separately, while global index only needs one lookup for the whole table.
+In TiDB, local indexes are the default for partitioned tables. Each partition has its own set of indexes. A global index, on the other hand, covers the whole table in one index. This means it keeps track of all rows across all partitions. global indexes can be faster for queries across multiple partitions because local indexes needs to do one lookup in each partition separately, while global index only needs one lookup for the whole table.
 
 #### Types of tables to be tested
 
@@ -51,8 +51,7 @@ We evaluated query performance across three table configurations in TiDB:
 
 #### Test setup
 
-- The query accesses data via a secondary index and uses `IN` conditions across multiple values.
-- The partitioned table contains 366 partitions, defined by range partitioning on a datetime column.
+- The **partitioned table** had **365 partitions**, defined by **range partitioning on a date column**.
 - Each matching key returns multiple rows, simulating a high-volume OLTP-style query pattern.
 - The **impact of different partition counts** is also evaluated to understand how partition granularity influences latency and index performance.
 
@@ -73,12 +72,12 @@ CREATE TABLE `fa` (
   KEY `index_fa_on_user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 PARTITION BY RANGE (`date`)
-(PARTITION `fa_2024001` VALUES LESS THAN (2024001),
-PARTITION `fa_2024002` VALUES LESS THAN (2024002),
-PARTITION `fa_2024003` VALUES LESS THAN (2024003),
+(PARTITION `fa_2024001` VALUES LESS THAN (2025001),
+PARTITION `fa_2024002` VALUES LESS THAN (2025002),
+PARTITION `fa_2024003` VALUES LESS THAN (2025003),
 ...
 ...
-PARTITION `fa_2024366` VALUES LESS THAN (2024366));
+PARTITION `fa_2024365` VALUES LESS THAN (2025365));
 ```
 
 #### SQL
@@ -98,12 +97,12 @@ WHERE `fa`.`sid` IN (
 ```
 
 - Query filters on secondary index, but does not include the partition key.
-- Causes local indexes to scan across all partitions due to lack of pruning.
+- Causes local indexes key lookup for each partition due to lack of pruning.
 - Table lookup tasks are significantly higher for partitioned tables.
 
 #### Findings
 
-Data comes from a table with 366 range partitions (for example, by date).
+Data comes from a table with 365 range partitions (for example, by date).
 
 - The **Average Query Time** is obtained from the `statement_summary` view.
 - The query uses a secondary index and returns 400 rows.
@@ -157,8 +156,6 @@ The following sections describe similar detailed execution plans for partitioned
 
 #### Create a global index on a partitioned table in TiDB
 
-<!--
-
 There are two options for you to create a global index on a partitioned table in TiDB.
 
 ##### Option 1: add via `ALTER TABLE`
@@ -169,13 +166,15 @@ You can use `ALTER TABLE` to add a global index to an existing partitioned table
 ALTER TABLE <table_name>
 ADD UNIQUE INDEX <index_name> (col1, col2) GLOBAL;
 ```
+**Note:** 
+> In TiDB v8.5.x and earlier versions, global indexes can only be created on unique columns. Starting from v9.0.0 (currently in beta), global indexes on non-unique columns are supported. This limitation will be removed in the next LTS version.
 
 - The `GLOBAL` keyword must be explicitly specified.
 - For non-unique global indexes, use `ADD INDEX` instead of `ADD UNIQUE INDEX`.
     - Not supported in v8.5.0 and later versions
     - Available starting from v9.0.0-beta.1
     - Expected to be included in the next LTS release
--->
+
 You can define inline when creating a table to create a global index. 
 
 ```sql
@@ -200,14 +199,14 @@ The performance overhead of partitioned tables in TiDB depends significantly on 
 
 - The more partitions you have, the more severe the potential performance degrades.
 - With a smaller number of partitions, the impact might not be as noticeable, but it is still workload-dependent.
-- For local indexes, if a query does not include effective partition pruning conditions, the number of partitions directly correlates with the number of RPCs (Remote Procedure Call) triggered. This means more partitions will likely result in more RPCs, leading to higher latency.
-- For global indexes, the number of RPCs and the degree of performance regression depend on both the number of partitions involved and how many rows need to be retrieved (that is, the number of rows requiring table lookups).
+- For local indexes, if a query does not include effective partition pruning conditions, the number of partitions directly correlates with the number of [Remote Procedure Calls (RPCs)](https://docs.pingcap.com/tidb/stable/glossary/#remote-procedure-call-rpc) triggered. This means more partitions will likely result in more RPCs, leading to higher latency.
+- For global indexes, the number of RPCs and the degree of performance regression depend on both the number of partitions involved and how many rows need to be retrieved (that is, the number of rows requiring table lookups). Note that for very large tables where data is already distributed across many Regions, accessing data through a global index may have similar performance to a non-partitioned table, as both scenarios require multiple cross-Region RPCs.
 
 #### Recommendations
 
 - Avoid partitioned tables unless necessary. For most OLTP workloads, a well-indexed non-partitioned table performs better and is easier to manage.
-- If you must use partitioned tables, benchmark both global index and local index strategies under your workload.
-- Use global indexes when query performance across partitions is critical.
+- If you know all queries will make use of good partitioning pruning (matching only a few partitions) then local indexes are good
+- If you know critical queries does not have good partitioning pruning (matching many partitions) then Global index is to recommend.
 - Use local indexes only if your main concern is DDL efficiency (such as fast `DROP PARTITION`) and the performance side effect from the partition table is acceptable.
 
 ## Facilitate bulk data deletion
@@ -286,7 +285,7 @@ FIRST PARTITION LESS THAN ('2025-02-19 18:00:00')
 LAST PARTITION LESS THAN ('2025-02-19 20:00:00');
 ```
 
-It is required to run `ALTER TABLE PARTITION ...` to change the `FIRST PARTITION` and `LAST PARTITION` periodically. These two DDL statements can drop the old partitions and create new ones.
+You are required to run DDL statements like `ALTER TABLE PARTITION ...` to change the `FIRST PARTITION` and `LAST PARTITION` periodically. These two DDL statements can drop the old partitions and create new ones.
 
 ```sql
 ALTER TABLE ad_cache FIRST PARTITION LESS THAN ("${nextTimestamp}");
@@ -301,13 +300,13 @@ TTL is still useful for finer-grained or background cleanup, but might not be op
 
 ### Partition drop efficiency: local index vs. global index
 
-Partition tables with global indexes require synchronous updates to the global index, potentially increasing significant execution time for DDL operations, such as `DROP PARTITION`, `TRUNCATE PARTITION`, or `REORG PARTITION`. 
+A partitioned table with a global index requires synchronous updates to the global index, which can significantly increase the execution time for DDL operations, such as `DROP PARTITION`, `TRUNCATE PARTITION`, or `REORGANIZE PARTITION`.
 
-In this section, the tests show that `DROP PARTITION` is much slower when using a global index compared to a local index**. Take this into consideration when you design partitioned tables.
+In this section, the tests show that `DROP PARTITION` is much slower when using a **global index** compared to a **local index**. This should be considered when you design partitioned tables.
 
 #### Test case
 
-This test case creates a table with 366 partitions and tests the `DROP PARTITION` performance using both global indexes and local indexes. The total number of rows is 1 billion.
+This test case creates a table with 365 partitions and tests the `DROP PARTITION` performance using both global indexes and local indexes. The total number of rows is 1 billion.
 
 | Index Type   | Duration (drop partition) |
 |--------------|---------------------------|
@@ -316,7 +315,7 @@ This test case creates a table with 366 partitions and tests the `DROP PARTITION
 
 #### Findings
 
-Dropping a partition on a table with a global index takes **76 seconds**, while the same operation with a local index takes only **0.52 seconds**. The reason is that global indexes span all partitions and require more complex updates, while local indexes are limited to individual partitions and are easier to handle.
+Dropping a partition on a table with a global index takes **76 seconds**, while the same operation with a local index takes only **0.52 seconds**. The reason is that global indexes span all partitions and require more complex updates, while local indexes can just be dropped together with the partition data.
 
 **Global Index**
 
@@ -326,7 +325,7 @@ ALTER TABLE A DROP PARTITION A_2024363;
 
 #### Recommendations
 
-When a partitioned table contains global indexes, performing certain DDL operations such as `DROP PARTITION`, `TRUNCATE PARTITION`, or `REORG PARTITION` requires synchronously updating the global index values. This can significantly increase the execution time of these DDL operations.
+When a partitioned table contains global indexes, performing certain DDL operations such as `DROP PARTITION`, `TRUNCATE PARTITION`, or `REORGANIZE PARTITION` requires synchronously updating the global index values. This can significantly increase the execution time of these DDL operations.
 
 If you need to drop partitions frequently and minimize the performance impact on the system, it is recommended to use **local indexes** for faster and more efficient operations.
 
@@ -386,7 +385,7 @@ PARTITION BY KEY (id) PARTITIONS 16;
 
 **Potential Query Performance Drop Without Partition Pruning**
 
-When converting a non-partitioned table to a partitioned table, TiDB creates a separate Region for each partition. This might significantly increase the total Region count. Queries that do not filter by the partition key cannot take advantage of partition pruning, forcing TiDB to scan all partitions. This increases the number of coprocessor (cop) tasks and can slow down queries. Example:
+When converting a non-partitioned table to a partitioned table, TiDB creates a separate Regions for each partition. This might significantly increase the total Region count. Queries that do not filter by the partition key cannot take advantage of partition pruning, forcing TiDB to scan all partitions. This increases the number of coprocessor (cop) tasks and can slow down queries. Example:
 
 ```sql
 SELECT * FROM server_info WHERE `serial_no` = ?;
@@ -525,7 +524,7 @@ This example will split each partition's primary key range into `<number_of_regi
 SPLIT PARTITION TABLE employees INDEX `idx_employees_on_store_id` BETWEEN (1) AND (1000) REGIONS <number_of_regions>;
 ```
 
-**(Optional) When adding a new partition, you MUST manually split regions for its primary key and indices.**
+**(Optional) When adding a new partition, you should manually split regions for its primary key and indices.**
 
 ```sql
 ALTER TABLE employees ADD PARTITION (PARTITION p4 VALUES LESS THAN (2011));
@@ -664,12 +663,12 @@ CREATE TABLE `fa` (
   KEY `index_fa_on_user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 PARTITION BY RANGE (`date`)
-(PARTITION `fa_2024001` VALUES LESS THAN (2024001),
-PARTITION `fa_2024002` VALUES LESS THAN (2024002),
-PARTITION `fa_2024003` VALUES LESS THAN (2024003),
+(PARTITION `fa_2024001` VALUES LESS THAN (2025001),
+PARTITION `fa_2024002` VALUES LESS THAN (2025002),
+PARTITION `fa_2024003` VALUES LESS THAN (2025003),
 ...
 ...
-PARTITION `fa_2024366` VALUES LESS THAN (2024366));
+PARTITION `fa_2024365` VALUES LESS THAN (2025365));
 ```
 
 ### Table schema: `fa_new`
@@ -723,8 +722,8 @@ Records: 120000000, ID: c1d04eec-fb49-49bb-af92-bf3d6e2d3d87
 **From partition table to non-partitioned table**
 
 ```sql
-SET @@global.tidb_ddl_reorg_worker_cnt = 16;
-SET @@global.tidb_ddl_reorg_batch_size = 4096;
+SET @@global.tidb_ddl_REORGANIZE_worker_cnt = 16;
+SET @@global.tidb_ddl_REORGANIZE_batch_size = 4096;
 alter table fa REMOVE PARTITIONING;
 -- real 170m12.024 s (≈ 2 h 50 m)
 ```
@@ -732,14 +731,14 @@ alter table fa REMOVE PARTITIONING;
 **From non-partition table to partitioned table**
 
 ```sql
-SET @@global.tidb_ddl_reorg_worker_cnt = 16;
-SET @@global.tidb_ddl_reorg_batch_size = 4096;
+SET @@global.tidb_ddl_REORGANIZE_worker_cnt = 16;
+SET @@global.tidb_ddl_REORGANIZE_batch_size = 4096;
 ALTER TABLE fa PARTITION BY RANGE (`date`)
-(PARTITION `fa_2024001` VALUES LESS THAN (2024001),
-PARTITION `fa_2024002` VALUES LESS THAN (2024002),
+(PARTITION `fa_2024001` VALUES LESS THAN (2025001),
+PARTITION `fa_2024002` VALUES LESS THAN (2025002),
 ...
-PARTITION `fa_2024365` VALUES LESS THAN (2024365),
-PARTITION `fa_2024366` VALUES LESS THAN (2024366));
+PARTITION `fa_2024365` VALUES LESS THAN (2025365),
+PARTITION `fa_2024365` VALUES LESS THAN (2025365ƒf));
 
 Query OK, 0 rows affected, 1 warning (2 hours 31 min 57.05 sec)
 ```
