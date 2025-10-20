@@ -1130,13 +1130,19 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_analyze_distsql_scan_concurrency <span class="version-mark">New in v7.6.0</span>
 
+> **Note:**
+>
+> Before v7.6.0, it controlled by the variable `tidb_distsql_scan_concurrency`.
+> So please consider change the value of `tidb_distsql_scan_concurrency` if you want to adjust the concurrency of scanning TiKV regions in versions earlier than v7.6.0.
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `4`
 - Range: `[0, 4294967295]`. In versions earlier than v8.2.0, the minimum value is `1`. When you set it to `0`, it adaptively adjusts the concurrency based on the cluster size.
-- This variable is used to set the concurrency of the `scan` operation when executing the `ANALYZE` operation.
+- Used to control the concurrency of scanning TiKV regions.
+- Used to control the concurrency of scanning regions for special indexes (indexes generated from virtual columns).
 
 ### tidb_analyze_partition_concurrency
 
@@ -1145,7 +1151,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `2`. The default value is `1` for v7.4.0 and earlier versions.
 - Range: `[1, 128]`. Before v8.4.0, the value range is `[1, 18446744073709551615]`.
-- This variable specifies the concurrency for writing collected statistics when TiDB analyzes a partitioned table.
+- For manual/auto analyze: used to control the concurrency for saving analyze results (writing TopN and histograms to system tables).
 
 ### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
 
@@ -1189,7 +1195,7 @@ mysql> SELECT @@tidb_analyze_skip_column_types;
 +----------------------------------+
 | @@tidb_analyze_skip_column_types |
 +----------------------------------+
-| json,blob,mediumblob,longblob    |
+| json,blob,mediumblob,longblob,text,mediumtext,longtext        |
 +----------------------------------+
 1 row in set (0.00 sec)
 
@@ -1287,7 +1293,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 256]`
-- This variable is used to set the concurrency of executing the automatic update of statistics.
+- For auto analyze: used to control the concurrency of table or partition analysis — for example, how many partition or table tasks can be processed simultaneously.
 
 ### tidb_backoff_lock_fast
 
@@ -1400,8 +1406,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `2`. The default value is `4` for v7.4.0 and earlier versions.
 - Range: `[1, 256]`
 - Unit: Threads
-- This variable is used to set the concurrency of executing the `ANALYZE` statement.
-- When the variable is set to a larger value, the execution performance of other queries is affected.
+- For manual analyze: used to control the concurrency of table or partition analysis — for example, how many partition or table tasks can be processed simultaneously.
 
 ### tidb_build_sampling_stats_concurrency <span class="version-mark">New in v7.5.0</span>
 
@@ -1412,8 +1417,8 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Unit: Threads
 - Default value: `2`
 - Range: `[1, 256]`
-- This variable is used to set the sampling concurrency in the `ANALYZE` process.
-- When the variable is set to a larger value, the execution performance of other queries is affected.
+- Used to control the concurrency level for merging samples collected from different regions.
+- Used to control the concurrency for special indexes (such as indexes on generated virtual columns), for example, how many indexes can collect statistics simultaneously.
 
 ### tidb_capture_plan_baselines <span class="version-mark">New in v4.0</span>
 
@@ -3506,6 +3511,10 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_index_serial_scan_concurrency
 
+> **Warning:**
+>
+> This variable is deprecated and cannot be modified. Sequential index scans now follow [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50), and [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) uses [`tidb_analyze_distsql_scan_concurrency`](#tidb_analyze_distsql_scan_concurrency-new-in-v760) to control index read concurrency.
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -3513,8 +3522,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `1`
 - Range: `[1, 256]`
 - Unit: Threads
-- This variable is used to set the concurrency of the `serial scan` operation.
-- Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
+- This variable remains only for backward compatibility. Adjust [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) to affect sequential index scans, or [`tidb_analyze_distsql_scan_concurrency`](#tidb_analyze_distsql_scan_concurrency-new-in-v760) to tune index statistics collection.
 
 ### tidb_init_chunk_size
 
@@ -4035,7 +4043,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `1`
-- This variable specifies the concurrency of merging statistics for a partitioned table when TiDB analyzes the partitioned table.
+- Used to control the concurrency for merging TopN results of partitioned tables.
 
 ### tidb_enable_async_merge_global_stats <span class="version-mark">New in v7.5.0</span>
 
