@@ -4297,6 +4297,24 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `OFF`
 - This variable controls whether to enable the [Cross-database binding](/sql-plan-management.md#cross-database-binding) feature.
 
+### tidb_opt_enable_no_decorrelate_in_select <span class="version-mark">New in v8.5.4</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to apply the hint [`NO_DECORRELATE`](/optimizer-hints.md#no_decorrelate) at the session/global level for all queries with a subquery in the select list.
+
+### tidb_opt_enable_semi_join_rewrite <span class="version-mark">New in v8.5.4</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to apply the hint [`SEMI_JOIN_REWRITE`](/optimizer-hints.md#semi_join_rewrite) at the session/global level for all queries that contain subqueries.
+
 ### tidb_opt_fix_control <span class="version-mark">New in v6.5.3 and v7.1.0</span>
 
 <CustomContent platform="tidb">
