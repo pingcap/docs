@@ -1,3 +1,4 @@
+---
 title: Integrate TiDB Cloud with Prometheus and Grafana
 summary: Learn how to monitor your TiDB cluster with the Prometheus and Grafana integration.
 ---
