@@ -102,7 +102,7 @@ TiDB Cloud supports snapshot restore and point-in-time restore for your instance
 
 ### Restore destination
 
-TiDB Cloud supports restoring data to a new instancee.
+TiDB Cloud supports restoring data to a new instance.
 
 ### Restore to a new instance
 
