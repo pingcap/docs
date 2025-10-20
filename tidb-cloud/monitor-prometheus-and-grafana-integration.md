@@ -47,7 +47,7 @@ Depending on your [Prometheus integration version](#prometheus-integration-versi
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Integrations**.
 3. On the **Integrations** page, click **Integration to Prometheus(Preview)**.
-4. Click **Add File** to generate and show the scrape_config file for the current cluster.
+4. Click **Add File** to generate and show the `scrape_config` file for the current cluster.
 5. Make a copy of the scrape_config file content for later use.
 
 </div>
