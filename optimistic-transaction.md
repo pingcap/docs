@@ -68,9 +68,14 @@ However, TiDB transactions also have the following disadvantages:
 >
 > Starting from v8.0.0, the [`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry) system variable is deprecated, and TiDB no longer supports automatic retries of optimistic transactions. It is recommended to use the [Pessimistic transaction mode](/pessimistic-transaction.md). If you encounter optimistic transaction conflicts, you can capture the error and retry transactions in your application.
 
-In the optimistic transaction model, transactions might fail to be committed because of write–write conflict in heavy contention scenarios. Starting from v3.0.8, TiDB uses the [pessimistic transaction mode](/pessimistic-transaction.md) by default, the same as MySQL. This means that TiDB and MySQL add locks during the execution of write-type SQL statements, and its Repeatable Read isolation level allows for current reads, so commits generally do not encounter exceptions. To lower the difficulty of adapting applications, TiDB provides an internal retry mechanism.
+In the optimistic transaction model, transactions might fail to be committed because of write–write conflict in heavy contention scenarios. Starting from v3.0.8, TiDB uses the [pessimistic transaction mode](/pessimistic-transaction.md) by default, the same as MySQL. This means that TiDB and MySQL add locks during the execution of write-type SQL statements, and its Repeatable Read isolation level allows for current reads, so commits generally do not encounter exceptions.
 
 ### Automatic retry
+
+> **Note:**
+>
+> - Starting from TiDB v3.0.0, the automatic retry of transactions is disabled by default, because it can **break the transaction isolation level**. 
+> - Starting from TiDB v8.0.0, automatic retries of optimistic transactions are no longer supported.
 
 If a write-write conflict occurs during the transaction commit, TiDB automatically retries the SQL statement that includes write operations. You can enable the automatic retry by setting `tidb_disable_txn_auto_retry` to `OFF` and set the retry limit by configuring `tidb_retry_limit`:
 
