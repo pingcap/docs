@@ -135,6 +135,8 @@ Prometheus tracks the following metric data for your TiDB clusters.
 
 For cluster-level Prometheus integration, the following additional metrics are also available:
 
+| Metric name |  Metric type  | Labels | Description |
+|:--- |:--- |:--- |:--- |
 | tidbcloud_dm_task_status | gauge | instance: `instance`<br/>task: `task`<br/>cluster_name: `<cluster name>` | Task State of Data Migration:<br/>0: Invalid<br/>1: New<br/>2: Running<br/>3: Paused<br/>4: Stopped<br/>5: Finished<br/>15: Error |
 | tidbcloud_dm_syncer_replication_lag_bucket | gauge | instance: `instance`<br/>cluster_name: `<cluster name>` | Replicate lag (bucket) of Data Migration. |
 | tidbcloud_dm_syncer_replication_lag_gauge | gauge | instance: `instance`<br/>task: `task`<br/>cluster_name: `<cluster name>` | Replicate lag (gauge) of Data Migration. |
