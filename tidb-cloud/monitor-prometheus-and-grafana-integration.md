@@ -102,7 +102,7 @@ To improve data security, it is a general best practice to periodically rotate `
 1. Follow [Step 1](#step-1-get-a-scrape_config-file-for-prometheus) to create a new `scrape_config` file for Prometheus.
 2. Add the content of the new file to your Prometheus configuration file.
 3. Once you have confirmed that your Prometheus service is still able to read from TiDB Cloud, remove the content of the old `scrape_config` file from your Prometheus configuration file.
-4. On the **Integrations** page of your project/cluster, delete the corresponding old `scrape_config` file to block anyone else from using it to read from the TiDB Cloud Prometheus endpoint.
+4. On the **Integrations** page of your project or cluster, delete the corresponding old `scrape_config` file to block anyone else from using it to read from the TiDB Cloud Prometheus endpoint.
 
 ## Metrics available to Prometheus
 
