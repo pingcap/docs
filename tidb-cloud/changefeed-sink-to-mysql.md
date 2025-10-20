@@ -28,7 +28,7 @@ Before creating a changefeed, you need to complete the following prerequisites:
 
 ### Network
 
-Make sure that your TiDB Cluster can connect to the MySQL service.
+Make sure that your TiDB Cloud cluster can connect to the MySQL service.
 
 <SimpleTab>
 <div label="VPC Peering">
@@ -52,15 +52,15 @@ If your MySQL service is in a Google Cloud VPC that has no public internet acces
 3. Modify the ingress firewall rules of the VPC where MySQL is located.
 
     You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the ingress firewall rules. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL endpoint.
+
 </div>
 
 <div label="Private Endpoint">
-Private Connect leverages **Private Link** or **Private Service Connect** technologies from cloud providers to enable resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly within your VPC.
 
-- Ensure your MySQL service is connectable though private endpoint. Provide the following information in the TiDB Cloud console to create the changefeed:
+Private endpoints leverage **Private Link** or **Private Service Connect** technologies from cloud providers, enabling resources in your VPC to connect to services in other VPCs through private IP addresses, as if those services were hosted directly within your VPC.
 
-    - The Sink Private Link, follow [Setup Private Endpoint for Changefeed](/tidb-cloud/set-up-sink-private-endpoint.md) to create one.
-    - The MySQL Port
+You can connect your TiDB Cloud cluster to your MySQL service securely through a private endpoint. If the private endpoint is not available for your MySQL service, follow [Set Up Private Endpoint for Changefeeds](/tidb-cloud/set-up-sink-private-endpoint.md) to create one.
+
 </div>
 
 </SimpleTab>
@@ -110,12 +110,12 @@ After completing the prerequisites, you can sink your data to MySQL.
 
 2. Click **Create Changefeed**, and select **MySQL** as **Destination**.
 
-3. In **Connectivity Method**:
+3. In **Connectivity Method**, choose the method to connect to your MySQL service.
 
-    * If using **VPC Peering** or **Public IP**, fill in your MySQL endpoint.
-    * If using **Private Endpoint**, select the **Sink Private Endpoint** that you prepared in the [Network](#network) section.
+    - If you choose **VPC Peering** or **Public IP**, fill in your MySQL endpoint.
+    - If you choose **Private Endpoint**, select the private endpoint that you created in the [Network](#network) section, and fill in the MySQL port for your MySQL service.
 
-4. Fill in the MySQL user name, and password in **MySQL Connection**.
+4. In **Authentication**, fill in the MySQL user name and password of your MySQL service.
 
 5. Click **Next** to test whether TiDB can connect to MySQL successfully:
 

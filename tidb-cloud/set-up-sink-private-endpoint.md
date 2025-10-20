@@ -22,7 +22,7 @@ Only users with the `Organization Owner`, `Project Owner` or `Project Data Acces
 
 ### Network
 
-Private endpoints leverage **Private Link** or **Private Service Connect** technologies from cloud providers, allowing resources in your VPC to connect to services in other VPCs through private IP addresses, as if those services were hosted directly within your VPC.
+Private endpoints leverage **Private Link** or **Private Service Connect** technologies from cloud providers, enabling resources in your VPC to connect to services in other VPCs through private IP addresses, as if those services were hosted directly within your VPC.
 
 <SimpleTab>
 <div label="AWS">
