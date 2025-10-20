@@ -48,7 +48,7 @@ Depending on your [Prometheus integration version](#prometheus-integration-versi
 2. In the left navigation pane, click **Settings** > **Integrations**.
 3. On the **Integrations** page, click **Integration to Prometheus(Preview)**.
 4. Click **Add File** to generate and show the `scrape_config` file for the current cluster.
-5. Make a copy of the scrape_config file content for later use.
+5. Make a copy of the `scrape_config` file content for later use.
 
 </div>
 <div label="Legacy project-level Prometheus integration (Beta)">
