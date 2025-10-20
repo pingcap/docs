@@ -604,7 +604,6 @@
     - [TiDB Cloud Partners](/tidb-cloud/tidb-cloud-partners.md)
     - [MSP Customer](/tidb-cloud/managed-service-provider-customer.md)
     - [Reseller's Customer](/tidb-cloud/cppo-customer.md)
-  - [{{{ .starter }}} and Essential Limitations](/tidb-cloud/serverless-limitations.md)
   - [Limited SQL Features on TiDB Cloud](/tidb-cloud/limited-sql-features.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [System Variables](/system-variables.md)
