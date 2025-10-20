@@ -87,7 +87,7 @@ To delete an existing backup file for your TiDB Cloud Premium , perform the foll
 
 ## Restore
 
-TiDB Cloud provides restore functionality to help recover data in case of accidental loss or corruption. You can restore from backups of active instances or from deleted  in the Recycle Bin.
+TiDB Cloud provides restore functionality to help recover data in case of accidental loss or corruption. You can restore from backups of active instances or from deleted instances in the Recycle Bin.
 
 
 ### Restore mode
