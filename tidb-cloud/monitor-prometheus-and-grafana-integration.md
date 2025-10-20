@@ -37,7 +37,7 @@ TiDB Cloud has supported the project-level Prometheus integration (Beta) since M
 
 ### Step 1. Get a scrape_config file for Prometheus
 
-Before configuring your Prometheus service to read metrics of TiDB Cloud, you need to generate a `scrape_config` YAML file in TiDB Cloud first. The `scrape_config` file contains a unique bearer token that allows the Prometheus service to monitor your target database clusters.
+Before configuring your Prometheus service to read metrics of TiDB Cloud, you need to generate a `scrape_config` YAML file in TiDB Cloud first. The `scrape_config` file contains a unique bearer token that allows the Prometheus service to monitor your target clusters.
 
 Depending on your [Prometheus integration version](#prometheus-integration-version), the steps to get the `scrape_config` file for Prometheus and access the integration page are different.
 
