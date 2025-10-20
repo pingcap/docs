@@ -125,7 +125,7 @@ The description of each metric in the **Sink** panel is as follows:
 
 ## Metrics for TiCDC in the classic architecture
 
-If you use TiUP to deploy the TiDB cluster, you can see a sub-dashboard for TiCDC in the monitoring system which is deployed at the same time.
+If you use TiUP to deploy the TiDB cluster, you can see a sub-dashboard for TiCDC in the [classic architecture](/ticdc/ticdc-classic-architecture.md) on Grafana, which is deployed at the same time as TiDB.
 
 The description of each panel is as follows:
 

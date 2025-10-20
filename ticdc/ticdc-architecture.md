@@ -100,7 +100,7 @@ The new TiCDC architecture incorporates all functionalities of the classic archi
 
 In addition, the new TiCDC architecture currently does not support splitting large transactions into multiple batches for downstream replication. As a result, there is still a risk of OOM when processing extremely large transactions. Make sure to evaluate and mitigate this risk appropriately before using the new architecture.
 
-## Deployment steps
+## Upgrade guide
 
 The TiCDC new architecture can only be deployed in TiDB clusters of v7.5.0 or later versions. Before deployment, make sure your TiDB cluster meets this version requirement.
 
