@@ -1944,7 +1944,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
-- This variable is used to control whether to enable the usage statistics collection for SQL plan bindings. Every six hours, the usage of bindinfo will be written into TiKV.
+- This variable controls whether to enable the usage statistics collection for SQL plan bindings. When this variable is enabled, TiDB writes the usage information of SQL plan bindings to TiKV every six hours.
 
 ### tidb_enable_cascades_planner
 
