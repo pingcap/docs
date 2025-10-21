@@ -7,7 +7,7 @@ summary: An overview of the usage of IMPORT INTO in TiDB.
 
 The `IMPORT INTO` statement is used to import data in formats such as `CSV`, `SQL`, and `PARQUET` into an empty table in TiDB via the [Physical Import Mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode) of TiDB Lightning.
 
-For TiDB Self-Managed, `IMPORT INTO` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage. For [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `IMPORT INTO` supports importing data from files stored in Amazon S3 and GCS. For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), `IMPORT INTO` supports importing data from files stored in Amazon S3 and Alibaba Cloud OSS.
+For TiDB Self-Managed, `IMPORT INTO` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage. For [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `IMPORT INTO` supports importing data from files stored in Amazon S3 and GCS. For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter), `IMPORT INTO` supports importing data from files stored in Amazon S3 and Alibaba Cloud OSS.
 
 - For data files stored in Amazon S3 or GCS, `IMPORT INTO` supports running in the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md).
 
@@ -160,7 +160,7 @@ The supported options are described as follows:
 
 > **Note:**
 >
-> Global Sort is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
+> Global Sort is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 `IMPORT INTO` splits the data import job of a source data file into multiple sub-jobs, each sub-job independently encoding and sorting data before importing. If the encoded KV ranges of these sub-jobs have significant overlap (to learn how TiDB encodes data to KV, see [TiDB computing](/tidb-computing.md)), TiKV needs to keep compaction during import, leading to a decrease in import performance and stability.
 
