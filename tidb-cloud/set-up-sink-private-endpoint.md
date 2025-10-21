@@ -5,7 +5,7 @@ summary: Learn how to set up a private endpoint for changefeeds.
 
 # Set Up Private Endpoint for Changefeeds
 
-This document describes how to create a private endpoint for changefeeds in your TiDB Cloud Dedicated clusters, enabling you to securely stream data to self-hosted Kafka or MySQL through private connectivity.
+This document describes how to create a private endpoint for changefeeds in your [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, enabling you to securely stream data to self-hosted Kafka or MySQL through private connectivity.
 
 ## Restrictions
 
@@ -18,7 +18,13 @@ Within the same VPC, each Private Endpoint Service in AWS, Service Attachment in
 
 ### Permissions
 
-Only users with the `Organization Owner`, `Project Owner` or `Project Data Access Read-Write` roles in your organization can create private endpoints for changefeeds. For more information about roles in TiDB Cloud, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
+Only users with any of the following roles in your organization can create private endpoints for changefeeds:
+
+- `Organization Owner`
+- `Project Owner`
+- `Project Data Access Read-Write`
+
+For more information about roles in TiDB Cloud, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
 
 ### Network
 
@@ -56,6 +62,7 @@ If the Private Endpoint Service is not available for your downstream service, fo
 ## Step 1. Open the Networking page for your cluster
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
+
 2. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your target cluster to go to its overview page.
 
     > **Tip:**
