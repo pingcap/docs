@@ -24,7 +24,7 @@ TiDB Cloud has supported the project-level New Relic integration (Beta) since Ap
 
 ## Limitation
 
-- You cannot use the New Relic integration in [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) or [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) clusters.
+- New Relic integrations now are only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
 - New Relic integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 
