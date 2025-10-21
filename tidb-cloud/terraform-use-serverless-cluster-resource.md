@@ -5,7 +5,7 @@ summary: Learn how to use the `tidbcloud_serverless_cluster` resource to create 
 
 # Use the `tidbcloud_serverless_cluster` Resource
 
-This document describes how to manage a [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) cluster with the `tidbcloud_serverless_cluster` resource.
+This document describes how to manage a [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster with the `tidbcloud_serverless_cluster` resource.
 
 You will also learn how to get the necessary information with the `tidbcloud_projects` data source.
 

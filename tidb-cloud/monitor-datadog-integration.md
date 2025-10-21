@@ -24,7 +24,7 @@ TiDB Cloud has supported the project-level Datadog integration (Beta) since Marc
 
 ## Limitation
 
-- You cannot use the Datadog integration in [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) or [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) clusters.
+- You cannot use the Datadog integration in [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) or [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) clusters.
 
 - Datadog integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 

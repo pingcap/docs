@@ -37,7 +37,7 @@ Get started with the 5-minute [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-qu
 
 ### How many {{{ .starter }}} clusters can I create in TiDB Cloud?
 
-For each organization in TiDB Cloud, you can create a maximum of five [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) clusters by default. To create more {{{ .starter }}} clusters, you need to add a credit card and set the [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for the usage.
+For each organization in TiDB Cloud, you can create a maximum of five [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters by default. To create more {{{ .starter }}} clusters, you need to add a credit card and set the [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for the usage.
 
 ### Are all TiDB Cloud features fully supported on {{{ .starter }}}?
 
