@@ -5,7 +5,7 @@ summary: Learn some key metrics displayed on the Grafana TiCDC dashboard.
 
 # TiCDC Monitoring Metrics Details
 
-If you use TiUP to deploy the TiDB cluster, you can see a sub-dashboard for TiCDC in the monitoring system which is deployed at the same time. You can get an overview of TiCDC's current status from the TiCDC dashboard, where the key metrics are displayed. This document provides a detailed description of these key metrics.
+You can get an overview of TiCDC's current status from the TiCDC dashboard, where the key metrics are displayed. This document provides a detailed description of these key metrics.
 
 The metric description in this document is based on the following replication task example, which replicates data to MySQL using the default configuration.
 
@@ -13,9 +13,119 @@ The metric description in this document is based on the following replication ta
 cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task"
 ```
 
-The TiCDC dashboard contains four monitoring panels. See the following screenshot:
+## Metrics for TiCDC in the new architecture
 
-![TiCDC Dashboard - Overview](/media/ticdc/ticdc-dashboard-overview.png)
+The monitoring dashboard **TiCDC-New-Arch** for [TiCDC New Architecture](/ticdc/ticdc-architecture.md) is not managed by TiUP yet. To view the related monitoring data on Grafana, you need to manually import the TiCDC monitoring metrics file:
+
+1. Download the monitoring metrics file for TiCDC in the new architecture:
+
+    ```shell
+    wget https://raw.githubusercontent.com/pingcap/ticdc/refs/heads/release-8.5/metrics/grafana/ticdc_new_arch.json
+    ```
+
+2. Import the downloaded metrics file on Grafana:
+
+    ![Import Metrics File](/media/ticdc/ticdc-new-arch-import-grafana.png)
+
+The monitoring dashboard for TiCDC new architecture mainly includes the following sections:
+
+- [**Summary**](#summary): The summary information of the TiCDC cluster
+- [**Server**](#server): The summary information of TiKV nodes and TiCDC nodes in the TiDB cluster
+- [**Log Puller**](#log-puller): The detailed information of the TiCDC Log Puller module
+- [**Event Store**](#event-store): The detailed information of the TiCDC Event Store module
+- [**Sink**](#sink): The detailed information of the TiCDC Sink module
+
+### Summary
+
+The following is an example of the **Summary** panel:
+
+![Summary](/media/ticdc/ticdc-new-arch-metric-summary.png)
+
+The description of each metric in the **Summary** panel is as follows:
+
+- Changefeed Checkpoint Lag: The lag of a replication task between downstream and upstream
+- Changefeed ResolvedTs Lag: The lag between the internal processing progress of TiCDC nodes and the upstream database
+- Upstream Write Bytes/s: The write throughput of the upstream database
+- TiCDC Input Bytes/s: The amount of data that TiCDC receives from the upstream per second
+- Sink Event Row Count/s: The number of rows that TiCDC writes to the downstream per second
+- Sink Write Bytes/s: The amount of data that TiCDC writes to the downstream per second
+- The Status of Changefeeds: The status of each changefeed
+- Table Dispatcher Count: The number of dispatchers corresponding to each changefeed
+- Memory Quota: The memory quota and usage of the Event Collector; excessive usage might cause throttling
+
+### Server
+
+The following is an example of the **Server** panel:
+
+![Server](/media/ticdc/ticdc-new-arch-metric-server.png)
+
+The description of each metric in the **Server** panel is as follows:
+
+- Uptime: The time for which TiKV nodes and TiCDC nodes have been running
+- Goroutine Count: The number of Goroutines on TiCDC nodes
+- Open FD Count: The number of file handles opened by TiCDC nodes
+- CPU Usage: The CPU usage of TiCDC nodes
+- Memory Usage: The memory usage of TiCDC nodes
+- Ownership History: The historical records of Owner nodes in the TiCDC cluster
+- PD Leader History: The historical records of PD Leader nodes in the upstream TiDB cluster
+
+### Log Puller
+
+The following is an example of the **Log Puller** panel:
+
+![Log Puller](/media/ticdc/ticdc-new-arch-metric-log-puller.png)
+
+The description of each metric in the **Log Puller** panel is as follows:
+
+- Input Events/s: The number of events that TiCDC receives per second
+- Unresolved Region Request Count: The number of Region incremental scan requests that TiCDC has sent but not yet completed
+- Region Request Finish Scan Duration: The time consumed by Region incremental scans
+- Subscribed Region Count: The total number of subscribed Regions
+- Memory Quota: The memory quota and usage of Log Puller; excessive usage might cause throttling
+- Resolved Ts Batch Size (Regions): The number of Regions included in a single Resolved Ts event
+
+### Event Store
+
+The following is an example of the **Event Store** panel:
+
+![Event Store](/media/ticdc/ticdc-new-arch-metric-event-store.png)
+
+The description of each metric in the **Event Store** panel is as follows:
+
+- Resolved Ts Lag: The lag between Event Store processing progress and the upstream database
+- Register Dispatcher StartTs Lag: The lag between dispatcher registration StartTs and the current time
+- Subscriptions Resolved Ts Lag: The lag between subscription processing progress and the upstream database
+- Subscriptions Data GC Lag: The lag between subscription data GC progress and the current time
+- Input Event Count/s: The number of events that Event Store processes per second
+- Input Bytes/s: The amount of data that Event Store processes per second
+- Write Requests/s: The number of write requests that Event Store executes per second
+- Write Worker Busy Ratio: The ratio of I/O time to total runtime for Event Store write threads
+- Compressed Rows/s: The number of rows compressed per second in Event Store (triggered only when row size exceeds the threshold)
+- Write Duration: The time consumed by Event Store write operations
+- Write Batch Size: The batch size of a single write operation
+- Write Batch Event Count: The number of row change events included in a single write batch
+- Data Size On Disk: The total data size that Event Store occupies on disk
+- Data Size In Memory: The total data size that Event Store occupies in memory
+- Scan Requests/s: The number of scan requests that Event Store executes per second
+- Scan Bytes/s: The amount of data that Event Store scans per second
+
+### Sink
+
+The following is an example of the **Sink** panel:
+
+![Sink](/media/ticdc/ticdc-new-arch-metric-sink.png)
+
+The description of each metric in the **Sink** panel is as follows:
+
+- Output Row Batch Count: The average number of rows per DML batch written by the Sink module
+- Output Row Count (per second): The number of DML rows written to downstream per second
+- Output DDL Executing Duration: The time consumed by executing DDL events for the changefeed on the current node
+- Sink Error Count / m: The number of errors reported per minute by the Sink module
+- Output DDL Count / Minutes: The number of DDLs executed per minute for the changefeed on the current node
+
+## Metrics for TiCDC in the classic architecture
+
+If you use TiUP to deploy the TiDB cluster, you can see a sub-dashboard for TiCDC in the [classic architecture](/ticdc/ticdc-classic-architecture.md) on Grafana, which is deployed at the same time as TiDB.
 
 The description of each panel is as follows:
 
@@ -24,7 +134,7 @@ The description of each panel is as follows:
 - [**Events**](#events): The detail information about the data flow within the TiCDC cluster
 - [**TiKV**](#tikv): TiKV information related to TiCDC
 
-## Server
+### Server
 
 The following is an example of the **Server** panel:
 
@@ -40,7 +150,7 @@ The description of each metric in the **Server** panel is as follows:
 - CPU usage: The CPU usage of TiCDC nodes
 - Memory usage: The memory usage of TiCDC nodes
 
-## Changefeed
+### Changefeed
 
 The following is an example of the **Changefeed** panel:
 
@@ -72,7 +182,7 @@ The following is an example of the **Changefeed** panel:
 
 - Changefeed catch-up ETA: The estimated time needed for the replication task to catch up with the upstream cluster data. When the upstream write speed is faster than the TiCDC replication speed, the metric might be extremely large. Because TiCDC replication speed is subject to many factors, this metric is for reference only and might not be the actual replication time.
 
-## Events
+### Events
 
 The following is an example of the **Events** panel:
 
@@ -102,7 +212,7 @@ The description of each metric in the **Events** panel is as follows:
 - KV client dispatch events/s: The number of events that the KV client module dispatches among the TiCDC nodes
 - KV client batch resolved size: The batch size of resolved timestamp messages that TiKV sends to TiCDC
 
-## TiKV
+### TiKV
 
 The following is an example of the **TiKV** panel:
 
