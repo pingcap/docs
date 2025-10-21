@@ -14,17 +14,17 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Starter**
 
-    - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) no longer supports database audit logging.
+    - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) no longer supports database audit logging.
 
         Currently, only [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) support database audit logging. Existing TiDB Cloud Starter clusters currently using database audit logging are not affected.
 
-    - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) removes the in-place restore feature, which means you can no longer restore a backup directly to the same cluster. This change helps prevent accidental overwrites of active production data and potential data loss.
+    - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) removes the in-place restore feature, which means you can no longer restore a backup directly to the same cluster. This change helps prevent accidental overwrites of active production data and potential data loss.
 
         To restore your data, you can [restore the backup to a new cluster](/tidb-cloud/backup-and-restore-serverless.md#perform-the-restore). After validating the restored data, switch your application to the new cluster. Previously restored data in existing clusters remains intact, and no action is required unless you perform a new restore.
 
         For safer restore and migration workflows with more control and flexibility, consider using [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential).
 
-    - The [**Metrics**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page for [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) adds the following metrics for faster diagnosis and capacity planning:
+    - The [**Metrics**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page for [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) adds the following metrics for faster diagnosis and capacity planning:
 
         - `Lock-wait (P95/P99)`: monitors lock wait time percentiles to surface contention hotspots.
         - `Idle Connection Duration (P99 incl. not/in txn)`: identifies long-lived idle connections, both in-transaction and not-in-transaction, to adjust pooler limits and timeouts.
@@ -121,7 +121,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Starter**
 
-    - For newly created [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, only zonal high availability is enabled, and it is not configurable.
+    - For newly created [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) clusters, only zonal high availability is enabled, and it is not configurable.
     - For existing TiDB Cloud Starter clusters with regional high availability enabled before **September 9, 2025**, regional high availability remains supported and is not affected.
 
 <CustomContent language="en,zh">
@@ -164,7 +164,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Starter**
 
-    - Introduce Auto Embedding (Beta) in [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless), making it simple to convert your text into vectors without additional setup. This feature enables faster development of semantic search, RAG, reranking, and classification in TiDB Cloud with less integration overhead.
+    - Introduce Auto Embedding (Beta) in [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter), making it simple to convert your text into vectors without additional setup. This feature enables faster development of semantic search, RAG, reranking, and classification in TiDB Cloud with less integration overhead.
 
         - **Auto Embedding with popular LLM providers**: Amazon Titan, OpenAI, Cohere, Gemini, Jina AI, Hugging Face, and NVIDIA NIM.
         - **Native integration with AWS Bedrock**: managed embedding models with a free quota, including Amazon Titan and Cohere text embedding models from AWS Bedrock.
@@ -318,7 +318,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Enhance the cloud storage data import experience for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+- Enhance the cloud storage data import experience for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) clusters.
 
     The import process is now streamlined into a 3-step wizard with intelligent pre-checks. This new wizard guides you through connection setup, file mapping, and bucket scanning. With the scanning, TiDB Cloud shows you exactly which files will be imported and their target destinations before the import, significantly reducing configuration complexity and preventing import failures.
 
@@ -352,7 +352,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) database audit logging (beta) is now available upon request. This feature lets you record a history of user access details (such as any SQL statements executed) in logs.
+- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) database audit logging (beta) is now available upon request. This feature lets you record a history of user access details (such as any SQL statements executed) in logs.
 
     To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for TiDB Cloud Serverless database audit logging" in the Description field and click **Submit**.
 
@@ -436,7 +436,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Full-text search (beta) now available in [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) for AI applications.
+- Full-text search (beta) now available in [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) for AI applications.
 
     TiDB Cloud Serverless now supports full-text search (beta), enabling AI and Retrieval-Augmented Generation (RAG) applications to retrieve content by exact keywords. This complements vector search, which retrieves content by semantic similarity. Combining both methods significantly improves retrieval accuracy and answer quality in RAG workflows. Key features include:
 
@@ -474,17 +474,17 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Data export to Alibaba Cloud OSS is now supported. 
 
-    [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters now support exporting data to [Alibaba Cloud Object Storage Service (OSS)](https://www.alibabacloud.com/en/product/object-storage-service) using an [AccessKey pair](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair).
+    [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) clusters now support exporting data to [Alibaba Cloud Object Storage Service (OSS)](https://www.alibabacloud.com/en/product/object-storage-service) using an [AccessKey pair](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair).
 
     For more information, see [Export Data from TiDB Cloud Serverless](/tidb-cloud/serverless-export.md#alibaba-cloud-oss).
 
-- Upgrade the TiDB version of [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v7.1.3](https://docs.pingcap.com/tidb/v7.1/release-7.1.3) to [v7.5.2](https://docs.pingcap.com/tidb/v7.5/release-7.5.2).
+- Upgrade the TiDB version of [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) clusters from [v7.1.3](https://docs.pingcap.com/tidb/v7.1/release-7.1.3) to [v7.5.2](https://docs.pingcap.com/tidb/v7.5/release-7.5.2).
 
 ## April 15, 2025
 
 **General changes**
 
-- Support importing data from [Alibaba Cloud Object Storage Service (OSS)](https://www.alibabacloud.com/en/product/object-storage-service) into [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+- Support importing data from [Alibaba Cloud Object Storage Service (OSS)](https://www.alibabacloud.com/en/product/object-storage-service) into [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) clusters.
 
     This feature simplifies data migration to TiDB Cloud Serverless. You can use an AccessKey pair to authenticate.
 
@@ -535,7 +535,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Support firewall rules for public endpoints in [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+- Support firewall rules for public endpoints in [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) clusters.
 
     You can now configure firewall rules for TiDB Cloud Serverless clusters to control access via public endpoints. Specify allowed IP addresses or ranges directly in the [TiDB Cloud console](https://tidbcloud.com/) to enhance security.
 
@@ -576,7 +576,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   For more information, see [Connected Care Overview](/tidb-cloud/connected-care-overview.md).
 
-- Support importing data from GCS and Azure Blob Storage into [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+- Support importing data from GCS and Azure Blob Storage into [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) clusters.
 
     TiDB Cloud Serverless now supports importing data from Google Cloud Storage (GCS) and Azure Blob Storage. You can use a Google Cloud service account key or an Azure shared access signature (SAS) token to authenticate. This feature simplifies data migration to TiDB Cloud Serverless.
 
@@ -586,7 +586,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Support importing a single local CSV file of up to 250 MiB per task to [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, increased from the previous limit of 50 MiB.
+- Support importing a single local CSV file of up to 250 MiB per task to [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) clusters, increased from the previous limit of 50 MiB.
 
     For more information, see [Import Local Files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md).
 
@@ -642,7 +642,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   For more information, see [Identity Access Management](/tidb-cloud/manage-user-access.md#organization-roles).
 
-- Regional high availability (beta) for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+- Regional high availability (beta) for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) clusters.
 
     This feature is designed for workloads that require maximum infrastructure redundancy and business continuity. Key functions include:
 
@@ -660,7 +660,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Strengthen the data export service:
 
-    - Support exporting data from [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) to Google Cloud Storage and Azure Blob Storage through the [TiDB Cloud console](https://tidbcloud.com/).
+    - Support exporting data from [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) to Google Cloud Storage and Azure Blob Storage through the [TiDB Cloud console](https://tidbcloud.com/).
 
     - Support exporting data in Parquet files through the [TiDB Cloud console](https://tidbcloud.com/).
 
