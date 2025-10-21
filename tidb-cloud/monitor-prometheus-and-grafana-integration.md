@@ -25,7 +25,7 @@ TiDB Cloud has supported the project-level Prometheus integration (Beta) since M
 
 - To integrate TiDB Cloud with Prometheus, you must have a self-hosted or managed Prometheus service.
 
-- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Project Owner` access in TiDB Cloud. To view the integration page, you need at least the `Project Viewer` role to access the target clusters under the project in TiDB Cloud.
+- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Project Owner` access in TiDB Cloud. To view the integration page, you need at least the `Project Viewer` role to access the target clusters under your project in TiDB Cloud.
 
 ## Limitation
 
@@ -46,7 +46,7 @@ Depending on your [Prometheus integration version](#prometheus-integration-versi
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Integrations**.
-3. On the **Integrations** page, click **Integration to Prometheus(Preview)**.
+3. On the **Integrations** page, click **Integration to Prometheus (Preview)**.
 4. Click **Add File** to generate and show the `scrape_config` file for the current cluster.
 5. Make a copy of the `scrape_config` file content for later use.
 
