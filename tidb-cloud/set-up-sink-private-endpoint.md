@@ -81,7 +81,7 @@ The configuration steps vary depending on the cloud provider where your cluster 
 1. On the **Networking** page, click **Create Private Endpoint** in the **AWS Private Endpoint for Changefeed** section.
 2. In the **Create Private Endpoint for Changefeed** dialog, enter a name for the private endpoint.
 3. Follow the reminder to authorize the [AWS Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts) of TiDB Cloud to create an endpoint.
-4. Enter the **Endpoint Service Name** that that you collected in the [Network](#network) section.
+4. Enter the **Endpoint Service Name** that you collected in the [Network](#network) section.
 5. Select the **Number of AZs**. Ensure that the number of AZs and the AZ IDs match your Kafka deployment.
 6. If this private endpoint is created for Apache Kafka, enable the **Advertised Listener for Kafka** option.
 7. Configure the advertised listener for Kafka using either **TiDB Managed** domain or **Custom** domain.
@@ -98,7 +98,7 @@ The configuration steps vary depending on the cloud provider where your cluster 
 1. On the **Networking** page, click **Create Private Endpoint** in the **Google Cloud Private Endpoint for Changefeed** section.
 2. In the **Create Private Endpoint for Changefeed** dialog, enter a name for the private endpoint.
 3. Follow the reminder to authorize the [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) of TiDB Cloud to pre-approve endpoint creation, or manually approve the endpoint connection request when you receive it.
-4. Enter the **Service Attachment** that that you collected in the [Network](#network) section.
+4. Enter the **Service Attachment** that you collected in the [Network](#network) section.
 5. If this private endpoint is created for Apache Kafka, enable the **Advertised Listener for Kafka** option.
 6. Configure the advertised listener for Kafka using either **TiDB Managed** domain or **Custom** domain.
 
