@@ -100,7 +100,7 @@ The configuration steps vary depending on the cloud provider where your cluster 
 3. Follow the reminder to authorize the [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) of TiDB Cloud to pre-approve endpoint creation, or manually approve the endpoint connection request when you receive it.
 4. Enter the **Service Attachment** that you collected in the [Network](#network) section.
 5. If this private endpoint is created for Apache Kafka, enable the **Advertised Listener for Kafka** option.
-6. Configure the advertised listener for Kafka using either **TiDB Managed** domain or **Custom** domain.
+6. Configure the advertised listener for Kafka using either the **TiDB Managed** domain or the **Custom** domain.
 
     - To use the **TiDB Managed** domain for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate**. TiDB will generate broker addresses with subdomains for each availability zone.
     - To use your own **Custom** domain for advertised listeners, switch the domain type to **Custom**, enter the root domain in the **Custom Domain** field, click **Check**, and then specify the broker subdomains for each availability zone.
