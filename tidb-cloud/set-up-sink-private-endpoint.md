@@ -120,6 +120,7 @@ The configuration steps vary depending on the cloud provider where your cluster 
 
     - To use **TiDB Managed** domain for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate**. TiDB will generate broker addresses with subdomains for each availability zone.
     - To use your own **Custom** domain for advertised listeners, switch the domain type to **Custom**, enter the root domain in the **Custom Domain** field, click **Check**, and then specify the broker subdomains for each availability zone.
+
 7. Click **Create** to validate the configurations and create the private endpoint.
 
 </div>
