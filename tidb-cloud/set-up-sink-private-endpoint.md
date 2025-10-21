@@ -84,9 +84,9 @@ The configuration steps vary depending on the cloud provider where your cluster 
 4. Enter the **Endpoint Service Name** that you collected in the [Network](#network) section.
 5. Select the **Number of AZs**. Ensure that the number of AZs and the AZ IDs match your Kafka deployment.
 6. If this private endpoint is created for Apache Kafka, enable the **Advertised Listener for Kafka** option.
-7. Configure the advertised listener for Kafka using either **TiDB Managed** domain or **Custom** domain.
+7. Configure the advertised listener for Kafka using either the **TiDB Managed** domain or the **Custom** domain.
 
-    - To use **TiDB Managed** domain for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate**. TiDB will generate broker addresses with subdomains for each availability zone.
+    - To use the **TiDB Managed** domain for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate**. TiDB will generate broker addresses with subdomains for each availability zone.
     - To use your own **Custom** domain for advertised listeners, switch the domain type to **Custom**, enter the root domain in the **Custom Domain** field, click **Check**, and then specify the broker subdomains for each availability zone.
 
 8. Click **Create** to validate the configurations and create the private endpoint.
@@ -102,7 +102,7 @@ The configuration steps vary depending on the cloud provider where your cluster 
 5. If this private endpoint is created for Apache Kafka, enable the **Advertised Listener for Kafka** option.
 6. Configure the advertised listener for Kafka using either **TiDB Managed** domain or **Custom** domain.
 
-    - To use **TiDB Managed** domain for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate**. TiDB will generate broker addresses with subdomains for each availability zone.
+    - To use the **TiDB Managed** domain for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate**. TiDB will generate broker addresses with subdomains for each availability zone.
     - To use your own **Custom** domain for advertised listeners, switch the domain type to **Custom**, enter the root domain in the **Custom Domain** field, click **Check**, and then specify the broker subdomains for each availability zone.
 
 7. Click **Create** to validate the configurations and create the private endpoint.
@@ -116,9 +116,9 @@ The configuration steps vary depending on the cloud provider where your cluster 
 3. Follow the reminder to authorize the Azure subscription of TiDB Cloud or allow anyone with your alias to access your Private Link service before creating the changefeed. For more information about Private Link service visibility, see [Control service exposure](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview#control-service-exposure) in Azure documentation.
 4. Enter the **Alias of Private Link Service** that you collected in the [Network](#network) section.
 5. If this private endpoint is created for Apache Kafka, enable the **Advertised Listener for Kafka** option.
-6. Configure the advertised listener for Kafka using either **TiDB Managed** domain or **Custom** domain.
+6. Configure the advertised listener for Kafka using either the **TiDB Managed** domain or the **Custom** domain.
 
-    - To use **TiDB Managed** domain for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate**. TiDB will generate broker addresses with subdomains for each availability zone.
+    - To use the **TiDB Managed** domain for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate**. TiDB will generate broker addresses with subdomains for each availability zone.
     - To use your own **Custom** domain for advertised listeners, switch the domain type to **Custom**, enter the root domain in the **Custom Domain** field, click **Check**, and then specify the broker subdomains for each availability zone.
 
 7. Click **Create** to validate the configurations and create the private endpoint.
