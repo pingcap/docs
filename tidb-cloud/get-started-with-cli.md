@@ -87,7 +87,7 @@ Install the MySQL command-line client if you do not have it. You can refer to th
 
 ## Quick start
 
-[{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) is the best way to get started with TiDB Cloud. In this section, you will learn how to create a {{{ .starter }}} cluster with TiDB Cloud CLI.
+[{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) is the best way to get started with TiDB Cloud. In this section, you will learn how to create a {{{ .starter }}} cluster with TiDB Cloud CLI.
 
 ### Create a user profile or log into TiDB Cloud
 
