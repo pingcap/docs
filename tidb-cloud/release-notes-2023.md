@@ -584,7 +584,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     You can easily [monitor your cluster usage or increase your usage quota](/tidb-cloud/manage-serverless-spend-limit.md) in the **Usage This Month** area of your cluster **Overview** page. Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you increase the quota or the usage is reset upon the start of a new month.
 
-    For more information about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [TiDB Cloud Serverless Tier Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
+    For more information about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [TiDB Cloud Serverless Tier Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details).
 
 - Support backup and restore for TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#starter) clusters.
 
