@@ -223,6 +223,7 @@ In TiDB, you can clear up historical data either by TTL (Time-to-Live) or manual
 To compare the performance of TTL and partition drop, the test case in this section configures TTL to execute every 10 minutes and create a partitioned version of the same table, dropping one partition at the same interval for comparison. Both approaches are tested under background write loads of 50 and 100 concurrent threads. This test case measures key metrics such as execution time, system resource utilization, and the total number of rows deleted.
 
 #### Findings
+> **Note**: The performance benefits described below apply to partitioned tables without global indexes. 
 
 **TTL performance:**
 
@@ -233,8 +234,8 @@ To compare the performance of TTL and partition drop, the test case in this sect
 
 **Partition drop performance:**
 
-- `DROP PARTITION` removes an entire data segment instantly, with minimal resource usage.
-- `DROP PARTITION` is a metadata-level operation, making it much faster and more predictable than TTL, especially when managing large volumes of historical data.
+- `ALTER TABLE ... DROP PARTITION` removes an entire data segment instantly, with minimal resource usage.
+- `ALTER TABLE ... DROP PARTITION` is a metadata-level operation, making it much faster and more predictable than TTL, especially when managing large volumes of historical data.
 
 #### Use TTL and partition drop in TiDB
 
@@ -244,14 +245,14 @@ The following is the TTL schema.
 
 ```sql
 CREATE TABLE `ad_cache` (
-  `session` varchar(255) NOT NULL,
-  `ad_id` varbinary(255) NOT NULL,
+  `session_id` varchar(255) NOT NULL,
+  `external_id` varbinary(255) NOT NULL,
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `suffix` bigint(20) NOT NULL,
+  `id_suffix` bigint(20) NOT NULL,
   `expire_time` timestamp NULL DEFAULT NULL,
-  `data` mediumblob DEFAULT NULL,
-  `version` int(11) DEFAULT NULL,
-  `is_delete` tinyint(1) DEFAULT NULL,
+  `cache_data` mediumblob DEFAULT NULL,
+  `data_version` int(11) DEFAULT NULL,
+  `is_deleted` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`session`, `ad_id`, `create_time`, `suffix`)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
@@ -325,25 +326,26 @@ ALTER TABLE A DROP PARTITION A_2024363;
 
 #### Recommendations
 
-When a partitioned table contains global indexes, performing certain DDL operations such as `DROP PARTITION`, `TRUNCATE PARTITION`, or `REORGANIZE PARTITION` requires synchronously updating the global index values. This can significantly increase the execution time of these DDL operations.
+When a partitioned table contains global indexes, executing certain DDL operations such as `DROP PARTITION`, `TRUNCATE PARTITION`, or `REORGANIZE PARTITION` requires updating the global index entries to reflect the changes. This update must be performed immediately to ensure consistency, which can significantly increase the execution time of these DDL operations.
 
 If you need to drop partitions frequently and minimize the performance impact on the system, it is recommended to use **local indexes** for faster and more efficient operations.
 
 ## Mitigate write hotspot issues
 
-In TiDB, **write hotspots** occur when incoming write traffic is unevenly distributed across Regions.
+In TiDB, **write hotspots** can occur when incoming write traffic is unevenly distributed across Regions.
 
-This is common when the primary key is **monotonically increasing**—for example, an AUTO_INCREMENT primary key with AUTO_ID_CACHE=1, or secondary index on datetime column with default value set to CURRENT_TIMESTAMP—because new rows and index entries are always appended to the "rightmost" Region. Over time, this can lead to:
+This is common when the primary key is **monotonically increasing**—for example, an `AUTO_INCREMENT` primary key with `AUTO_ID_CACHE=1`, or secondary index on datetime column with default value set to `CURRENT_TIMESTAMP`—because new rows and index entries are always appended to the "rightmost" Region. Over time, this can lead to:
 
-- A single Region handling most of the write workload, while other Regions remain idle.
+- A single [Region](https://docs.pingcap.com/tidb/stable/tidb-storage/#region) handling most of the write workload, while other Regions remain idle.
 - Higher write latency and reduced throughput.
 - Limited performance gains from scaling out TiKV nodes, as the bottleneck remains concentrated on one Region.
 
 **Partitioned tables** can help mitigate this problem. By applying **hash** or **key** partitioning on the primary key, TiDB can spread inserts across multiple partitions (and therefore multiple Regions), reducing hotspot contention.
+> **Note**: This section uses partitioned tables as an example for mitigating read/write hotspots. TiDB also provides other features such as `AUTO_RANDOM` and `SHARD_ROW_ID_BITS` for hotspot mitigation. When using partitioned tables in certain scenarios, you may need to set `merge_option=deny` to maintain partition boundaries. For more details, see [issue #58128](https://github.com/pingcap/tidb/issues/58128).
 
 ### How it works
 
-TiDB stores table data in **Regions**, each covering a continuous range of row keys.
+TiDB stores table data and indexes in **Regions**, each covering a continuous range of row keys.
 
 When the primary key is AUTO_INCREMENT and the secondary indexes on datetime columns are monotonically increasing:
 
@@ -378,20 +380,20 @@ PARTITION BY KEY (id) PARTITIONS 16;
 
 ### Pros
 
-- **Balanced Write Load** — Hotspots are spread across multiple partitions, reducing contention and improving insert performance.
+- **Balanced Write Load** — Hotspots are spread across multiple partitions, and therefore multiple **Regions**, reducing contention and improving insert performance.
 - **Query Optimization via Partition Pruning** — If queries already filter by the partition key, TiDB can prune unused partitions, scanning less data and improving query speed.
 
 ### Cons
 
 **Potential Query Performance Drop Without Partition Pruning**
 
-When converting a non-partitioned table to a partitioned table, TiDB creates a separate Regions for each partition. This might significantly increase the total Region count. Queries that do not filter by the partition key cannot take advantage of partition pruning, forcing TiDB to scan all partitions. This increases the number of coprocessor (cop) tasks and can slow down queries. Example:
+When converting a non-partitioned table to a partitioned table, TiDB creates separate Regions for each partition. This may significantly increase the total Region count. Queries that do not filter by the partition key cannot take advantage of partition pruning, forcing TiDB to scan all partitions or do index lookups in all partitions. This increases the number of coprocessor (cop) tasks and can slow down queries. Example:
 
 ```sql
 SELECT * FROM server_info WHERE `serial_no` = ?;
 ```
 
-**Mitigation**: add a **global index** on the filtering columns used by these queries to reduce scanning overhead. While creating a global index can significantly slow down `DROP PARTITION` operations, **hash and key partitioned tables do not support DROP PARTITION**. In practice, such partitions are rarely removed, making global indexes a feasible solution in these scenarios. Example:
+**Mitigation**: add a **global index** on the filtering columns used by these queries to reduce scanning overhead. While creating a global index can significantly slow down `DROP PARTITION` operations, **hash and key partitioned tables do not support DROP PARTITION**. In practice, such partitions are rarely truncated, making global indexes a feasible solution in these scenarios. Example:
 
 ```sql
 ALTER TABLE server_info ADD UNIQUE INDEX(serial_no, id) GLOBAL;
@@ -424,7 +426,7 @@ When a query does **not filter by partition key**, TiDB will **scan all partitio
 When using a time-based field as the partition key, a write hotspot might occur when switching to a new partition:
 
 **Root cause:**
-In TiDB, any newly created table or partition initially contains only **one region** (data block), which is randomly placed on a single TiKV node. As data begins to be written, this region will eventually **split** into multiple regions, and PD will schedule these new regions to other TiKV nodes.
+In TiDB, newly created partitions initially contain only **one region** on a single TiKV node. As writes concentrate on this single region, it must **split** into multiple regions before writes can be distributed across multiple TiKV nodes. This splitting process is the main cause of the temporary write hotspot. 
 
 However, if the initial write traffic to this new partition is **very high**, the TiKV node hosting that single initial region will be under heavy write pressure. In such cases, it might not have enough spare resources (I/O capacity, CPU cycles) to handle both the application writes and the scheduling of newly split regions to other TiKV nodes. This can delay region distribution, keeping most writes concentrated on the same node for longer than desired.
 
@@ -738,7 +740,7 @@ ALTER TABLE fa PARTITION BY RANGE (`date`)
 PARTITION `fa_2024002` VALUES LESS THAN (2025002),
 ...
 PARTITION `fa_2024365` VALUES LESS THAN (2025365),
-PARTITION `fa_2024365` VALUES LESS THAN (2025365ƒf));
+PARTITION `fa_2024365` VALUES LESS THAN (2025365));
 
 Query OK, 0 rows affected, 1 warning (2 hours 31 min 57.05 sec)
 ```
