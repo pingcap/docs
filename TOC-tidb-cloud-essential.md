@@ -240,7 +240,7 @@
     - [Overview](/vector-search/vector-search-integration-overview.md)
     - AI Frameworks
       - [LlamaIndex](/vector-search/vector-search-integrate-with-llamaindex.md)
-      - [Langchain](/vector-search/vector-search-integrate-with-langchain.md)
+      - [LangChain](/vector-search/vector-search-integrate-with-langchain.md)
     - AI Services
       - [Amazon Bedrock](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md)
     - Embedding Models/Services

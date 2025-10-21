@@ -30,6 +30,12 @@ The following are descriptions of options available in a `cdc server` command:
 
 The following describes the configuration file specified by the `config` option in the `cdc server` command. You can find the default configuration file in [`pkg/cmd/util/ticdc.toml`](https://github.com/pingcap/tiflow/blob/master/pkg/cmd/util/ticdc.toml).
 
+### `newarch` <span class="version-mark">New in v8.5.4-release.1</span>
+
+- Controls whether to enable the [TiCDC new architecture](/ticdc/ticdc-architecture.md).
+- Default value: `false`, indicating that the [TiCDC classic architecture](/ticdc/ticdc-classic-architecture.md) is used.
+- When it is set to `true`, the TiCDC new architecture is enabled.
+
 <!-- The configuration method of the following parameters is the same as that of CLI parameters, but the CLI parameters have higher priorities. -->
 
 ### `addr`
