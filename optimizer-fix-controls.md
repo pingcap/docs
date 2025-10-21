@@ -119,7 +119,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 > **Note:**
 >
-> This is only available for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-starter).
+> This is only available for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter).
 
 - Default value: `ON`
 - Possible values: `ON`, `OFF`

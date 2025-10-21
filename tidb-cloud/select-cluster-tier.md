@@ -10,7 +10,7 @@ The cluster plan determines the throughput and performance of your cluster.
 
 TiDB Cloud provides the following options of cluster plans. Whether you are just getting started or scaling to meet the increasing application demands, these service plans provide the flexibility and capability you need. Before creating a cluster, you need to consider which option suits your need better.
 
-- [TiDB Cloud Starter](#tidb-cloud-starter)
+- [TiDB Cloud Starter](#starter)
 - [{{{ .essential }}}](#essential)
 - [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
 
@@ -18,7 +18,7 @@ TiDB Cloud provides the following options of cluster plans. Whether you are just
 >
 > Some of TiDB Cloud features are partially supported or not supported on {{{ .starter }}} and {{{ .essential }}}. See [{{{ .starter }}} and Essential Limitations](/tidb-cloud/serverless-limitations.md) for details.
 
-## TiDB Cloud Starter
+## {{{ .starter }}} {#starter}
 
 TiDB Cloud Starter is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free quota and consumption based billing once free limits are exceeded.
 

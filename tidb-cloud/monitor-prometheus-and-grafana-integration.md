@@ -17,7 +17,7 @@ This document describes how to configure your Prometheus service to read key met
 
 ## Limitation
 
-- You cannot use the Prometheus and Grafana integration in [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) or [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) clusters.
+- You cannot use the Prometheus and Grafana integration in [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) or [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) clusters.
 
 - Prometheus and Grafana integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 
