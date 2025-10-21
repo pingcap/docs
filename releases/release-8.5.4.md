@@ -53,7 +53,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     + TiCDC
 
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
+        - Fix the issue that configuring the column dispatcher with virtual columns might cause a panic. [#12241](https://github.com/pingcap/tiflow/issues/12241) @[wk989898](https://github.com/wk989898)
+        - Fix the issue that closing ddl puller might cause a panic. [#12244](https://github.com/pingcap/tiflow/issues/12244) @[wk989898](https://github.com/wk989898)
+        - Support discarding unsupported DDL by setting `ignore-txn-start-ts` in filter. [#12286](https://github.com/pingcap/tiflow/issues/12286) @[asddongmen](https://github.com/asddongmen)
+        - Fix the issue that using Azure Downstream might cause stuck. [#12277] (https://github.com/pingcap/tiflow/issues/12277) @[zurakutsia](https://github.com/zurakutsia)
+        - Fix the issue that `drop foreign key` is not replicated to downstream [#12328](https://github.com/pingcap/tiflow/issues/12328) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the panic issue when subscribe the region and meet rollback and prewrite entry [#19048](https://github.com/tikv/tikv/issues/19048) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix a TiKV assertion panic [#18498](https://github.com/tikv/tikv/issues/18498) @[tharanga](https://github.com/tharanga)
         - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[Contributor GitHub ID](https://github.com/${github-id})
 
     + TiDB Data Migration (DM)
