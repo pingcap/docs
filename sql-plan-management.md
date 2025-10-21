@@ -478,7 +478,7 @@ SHOW binding_cache status;
 1 row in set (0.00 sec)
 ```
 
-### Binding Usage 
+### Binding usage
 
 Binding Usage helps you collect usage statistics of SQL bindings, which can assist you in identifying and managing unused bindings. You can use these statistics to optimize your binding management strategy, such as removing bindings that are no longer needed or adjusting existing bindings to improve query performance.
 
