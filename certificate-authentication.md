@@ -306,7 +306,7 @@ After the above configuration, the following items will be verified when you log
 
 + SSL is used; the CA that issues the client certificate is consistent with the CA configured in the server.
 + The `issuer` information of the client certificate matches the information specified in `REQUIRE ISSUER`.
-+ The cipher of the connection matches the information specified in `REQUIRE CIPHER`.
++ The cipher used for the connection matches the one specified in `REQUIRE CIPHER`.
 + The `Subject Alternative Name` information of the client certificate matches the information specified in `REQUIRE SAN`.
 
 You can log into TiDB only after all the above items are verified. Otherwise, the `ERROR 1045 (28000): Access denied` error is returned. You can use the following command to check the TLS version, the cipher algorithm and whether the current connection uses the certificate for the login.
