@@ -113,7 +113,7 @@ After completing the prerequisites, you can sink your data to MySQL.
 3. In **Connectivity Method**, choose the method to connect to your MySQL service.
 
     - If you choose **VPC Peering** or **Public IP**, fill in your MySQL endpoint.
-    - If you choose **Private Endpoint**, select the private endpoint that you created in the [Network](#network) section, and fill in the MySQL port for your MySQL service.
+    - If you choose **Private Link**, select the private endpoint that you created in the [Network](#network) section, and then fill in the MySQL port for your MySQL service.
 
 4. In **Authentication**, fill in the MySQL user name and password of your MySQL service.
 

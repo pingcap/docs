@@ -125,7 +125,7 @@ The steps vary depending on the connectivity method you select.
 <div label="Private Link (AWS)">
 
 1. In **Connectivity Method**, select **Private Link**.
-2. In **Sink Private Endpoint**, select the private endpoint that you created in the [Network](#network) section. Make sure the AZs of the private endpoint match the AZs of the Kafka deployment.
+2. In **Private Endpoint**, select the private endpoint that you created in the [Network](#network) section. Make sure the AZs of the private endpoint match the AZs of the Kafka deployment.
 3. Fill in the **Bootstrap Ports** that you obtained from the [Network](#network) section. It is recommended that you set at least one port for one AZ. You can use commas `,` to separate multiple ports.
 4. Select an **Authentication** option according to your Kafka authentication configuration.
 
@@ -143,7 +143,7 @@ The steps vary depending on the connectivity method you select.
 <div label="Private Service Connect (Google Cloud)">
 
 1. In **Connectivity Method**, select **Private Service Connect**.    
-2. In **Sink Private Endpoint**, select the private endpoint that you created in the [Network](#network) section.
+2. In **Private Endpoint**, select the private endpoint that you created in the [Network](#network) section.
 3. Fill in the **Bootstrap Ports** that you obtained from the [Network](#network) section. It is recommended that you provide more than one port. You can use commas `,` to separate multiple ports. 
 4. Select an **Authentication** option according to your Kafka authentication configuration.
 
@@ -161,7 +161,7 @@ The steps vary depending on the connectivity method you select.
 <div label="Private Link (Azure)">
 
 1. In **Connectivity Method**, select **Private Link**.
-2. In **Sink Private Endpoint**, select the private endpoint that you created in the [Network](#network) section.
+2. In **Private Endpoint**, select the private endpoint that you created in the [Network](#network) section.
 3. Fill in the **Bootstrap Ports** that you obtained in the [Network](#network) section. It is recommended that you set at least one port for one AZ. You can use commas `,` to separate multiple ports.
 4. Select an **Authentication** option according to your Kafka authentication configuration.
 
