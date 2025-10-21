@@ -10,7 +10,7 @@ The cluster plan determines the throughput and performance of your cluster.
 
 TiDB Cloud provides the following options of cluster plans. Whether you are just getting started or scaling to meet the increasing application demands, these service plans provide the flexibility and capability you need. Before creating a cluster, you need to consider which option suits your need better.
 
-- [TiDB Cloud Starter](#tidb-cloud-serverless)
+- [TiDB Cloud Starter](#tidb-cloud-starter)
 - [{{{ .essential }}}](#essential)
 - [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
 
