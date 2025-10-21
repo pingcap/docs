@@ -24,7 +24,7 @@ TiDB Cloud has supported the project-level Datadog integration (Beta) since Marc
 
 ## Limitation
 
-- Datadog integration now is only available for in [{{{ .dedicated }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+- Datadog integrations now are only available for [{{{ .dedicated }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
 - Datadog integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 
