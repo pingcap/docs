@@ -8,6 +8,26 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## October 21, 2025
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) enhances the private endpoint feature for [Changefeeds](/tidb-cloud/changefeed-overview.md) to simplify configuration, improve security, and provide greater flexibility for data sinks.
+
+        - **Simplified configuration**: private endpoint creation is now independent of changefeed creation, allowing multiple changefeeds within the same project to share a single private endpoint, thereby reducing redundant configurations.
+        - **Private link sinks for MySQL**: offers a more secure way to sink data to MySQL, and now also supports sinking data directly to another TiDB Cloud Dedicated cluster via private link.
+        - **Custom domain support**: when using self-hosted Kafka services, you can configure custom domains for data sinks to enhance security and make advertised listener updates more flexible without requiring server restarts.
+
+      For more information, see [Set Up Private Endpoint for Changefeeds](/tidb-cloud/set-up-sink-private-endpoint.md).
+
+    - [Prometheus integrations (Preview)](/tidb-cloud/monitor-prometheus-and-grafana-integration.md) are now available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+
+        TiDB Cloud now manages Prometheus integrations at the cluster level, offering more granular control and configuration. This feature enables you to seamlessly ship the metrics of your [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster to Prometheus, allowing for advanced alerting in a unified platform.
+
+        For more information, see [Integrate TiDB Cloud with Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md).
+
 ## October 14, 2025
 
 **General changes**
