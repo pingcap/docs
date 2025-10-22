@@ -11,7 +11,7 @@ Before accessing TiDB Cloud, [create a TiDB Cloud account](https://tidbcloud.com
 
 ## Organizations and instances
 
-TiDB Cloud provides a hierarchical structure based on organizations and projects to facilitate the management of TiDB Cloud users and clusters. If you are an organization owner, you can create multiple projects in your organization.
+TiDB Cloud provides a hierarchical structure based on organizations and instances to facilitate the management of TiDB Cloud users and clusters. If you are an organization owner, you can create multiple instance in your organization.
 
 For example:
 
@@ -111,7 +111,7 @@ To view and switch between organizations, take the following steps:
 
     > **Tip:**
     >
-    > - If you are currently on the page of a specific instance, after clicking the combo box in the upper-left corner, you also need to click ← in the combo box to return to the organization and project list.
+    > - If you are currently on the page of a specific instance, after clicking the combo box in the upper-left corner, you also need to click ← in the combo box to return to the organization list.
     > - If you are a member of multiple organizations, you can click the target organization name in the combo box to switch your account between organizations.
 
 2. To view the detailed information of your organization such as the organization ID and time zone, click the organization name, and then click **Organization Settings** > **General** in the left navigation pane.
@@ -136,7 +136,7 @@ If you are in the `Organization Owner` role, you can invite users to your organi
 
 > **Note:**
 >
-> You can also [invite a user to your instance](#invite-a-project-member) directly according to your need, which also makes the user your organization member.
+> You can also [invite a user to your instance](#invite-an-instance-member) directly according to your need, which also makes the user your organization member.
 
 To invite a member to an organization, take the following steps:
 
@@ -153,7 +153,7 @@ To invite a member to an organization, take the following steps:
     > **Tip:**
     >
     > - If you want to invite multiple members at one time, you can enter multiple email addresses.
-    > - The invited user does not belong to any projects by default. To invite a user to a project, see [Invite a project member](#invite-a-project-member).
+    > - The invited user does not belong to any instances by default. To invite a user to a instance, see [Invite an instance member](#invite-an-instance-member).
 
 6. Click **Confirm**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
 
@@ -227,7 +227,7 @@ To invite a member to a instance, take the following steps:
 
 7. After receiving this email, the user needs to click the link in the email to verify the identity, and a new page shows.
 
-8. If the invited email address has not been signed up for a TiDB Cloud account, the user is directed to the sign-up page to create an account. If the email address has been signed up for a TiDB Cloud account, the user is directed to the sign-in page. After sign-in, the account joins the project automatically.
+8. If the invited email address has not been signed up for a TiDB Cloud account, the user is directed to the sign-up page to create an account. If the email address has been signed up for a TiDB Cloud account, the user is directed to the sign-in page. After sign-in, the account joins the instance automatically.
 
 > **Note:**
 >
@@ -243,7 +243,7 @@ To modify the instance role of a member, take the following steps:
 
 2. In the left navigation pane, click **Organization Settings** > **Users**.
 
-3. On the **Users** page, and then choose your project in the drop-down list.
+3. On the **Users** page, and then choose your instance in the drop-down list.
 
 4. In the row of the target member, click the role in the **Role** column, and then choose a new role from the drop-down list.
 
