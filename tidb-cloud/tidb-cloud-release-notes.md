@@ -18,7 +18,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         - **Simplified configuration**: private endpoint creation is now independent of changefeed creation, allowing multiple changefeeds within the same project to share a single private endpoint, thereby reducing redundant configurations.
         - **Private link sinks for MySQL**: offers a more secure way to sink data to MySQL, and now also supports sinking data directly to another TiDB Cloud Dedicated cluster via private link.
-        - **Custom domain support**: using self-hosted Kafka services, you can configure custom domains for data sink to enhance security and make advertised listener updates more flexible without requiring server restarts.
+        - **Custom domain support**: when using self-hosted Kafka services, you can configure custom domains for data sinks to enhance security and make advertised listener updates more flexible without requiring server restarts.
 
       For more information, see [Set Up Private Endpoint for Changefeeds](/tidb-cloud/set-up-sink-private-endpoint.md).
 
