@@ -81,7 +81,7 @@ At the organization level, TiDB Cloud defines four roles, in which `Organization
 
 ### Instance roles
 
-At the instance level, TiDB Cloud defines three roles.
+At the instance level, TiDB Cloud defines two roles.
 
 > **Note:**
 >
@@ -142,22 +142,22 @@ To invite a member to an organization, take the following steps:
 
 2. In the left navigation pane, click **Organization Settings** > **Users**.
 
-3. On the **Users** page, click the **By Organization** tab.
-
-4. Click **Invite**.
+3. On the **Users** page, click **Invite User**.
 
 5. Enter the email address of the user to be invited, and then select an organization role for the user.
 
     > **Tip:**
-    >
+    > - The default role at organization level is `Organization Viewer`.
     > - If you want to invite multiple members at one time, you can enter multiple email addresses.
     > - The invited user does not belong to any instances by default. To invite a user to a instance, see [Invite an instance member](#invite-an-instance-member).
 
-6. Click **Confirm**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
+6. If you only need assign the user an orgnization role, and not assign any instance roles or project roles, turn off the switch of **Add access for projects and instance**.
+
+7. Click **Invite**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
 
 7. After receiving this email, the user needs to click the link in the email to verify the identity, and a new page shows.
 
-8. If the invited email address has not been signed up for a TiDB Cloud account, the user is directed to the sign-up page to create an account. If the email address has been signed up for a TiDB Cloud account, the user is directed to the sign-in page, and after sign-in, the account joins the organization automatically.
+8. If the invited email address has not been signed up for a TiDB Cloud account, the user is directed to the sign-up page to create an account.
 
 > **Note:**
 >
@@ -173,9 +173,7 @@ To modify the organization role of a member, take the following steps:
 
 2. In the left navigation pane, click **Organization Settings** > **Users**.
 
-3. On the **Users** page, click the **By Organization** tab.
-
-4. Click the role of the target member, and then modify the role.
+3. On the **Users** page, click the **...** > **Edit Permission** of the target member.
 
 ### Remove an organization member
 
@@ -191,9 +189,7 @@ To remove a member from an organization, take the following steps:
 
 2. In the left navigation pane, click **Organization Settings** > **Users**.
 
-3. On the **Users** page, click the **By Organization** tab.
-
-4. In the row of the target member, click **...** > **Delete**.
+3. On the **Users** page, click **...** > **Delete** in the row of the target member,
 
 ## Manage instance access
 
