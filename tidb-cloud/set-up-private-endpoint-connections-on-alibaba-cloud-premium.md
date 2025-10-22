@@ -83,7 +83,7 @@ To view the statuses of private endpoints or private endpoint services, navigate
 The possible statuses of a private endpoint are explained as follows:
 
 - **Pending**: waiting for processing.
-- **Active**: your private endpoint is ready to use. 
+- **Active**: The private endpoint is ready for use.
 - **Deleting**: the private endpoint is being deleted.
 - **Failed**: the private endpoint creation fails. You can delete the Endpoint connection and create a new one.
 
