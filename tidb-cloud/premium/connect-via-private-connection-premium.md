@@ -29,9 +29,6 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 - Only the `Organization Owner`  roles can create private endpoint connections.
 - The private endpoint and the TiDB instance to be connected must be located in the same region.
-
-
-
 ## Prerequisites
 
 Make sure that DNS hostnames and DNS resolution are both enabled in your AWS VPC settings. They are disabled by default when you create a VPC in the [AWS Management Console](https://console.aws.amazon.com/).
@@ -177,6 +174,7 @@ After you have accepted the private endpoint connection, you are redirected back
 ### Private endpoint status reference
 
 When you use private endpoint connections, the statuses of private endpoints or private endpoint services is displayed on your instance-level **Networking** page: 
+
 - switch to your target instance using the combo box in the upper-left corner, and then click **Settings** > **Networking** in the left navigation pane.
 
 The possible statuses of a private endpoint are explained as follows:
