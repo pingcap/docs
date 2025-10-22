@@ -5,13 +5,13 @@ summary: Learn how to manage identity access in TiDB Cloud.
 
 # Identity Access Management
 
-This document describes how to manage access to organizations, instances, roles, and user profiles in TiDB Cloud.
+This document describes how to manage access to organizations, instances, roles and user profiles in TiDB Cloud.
 
 Before accessing TiDB Cloud, [create a TiDB Cloud account](https://tidbcloud.com/free-trial). You can either sign up with email and password so that you can [manage your password using TiDB Cloud](/tidb-cloud/tidb-cloud-password-authentication.md), or choose your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
 
 ## Organizations and instances
 
-TiDB Cloud provides a hierarchical structure based on organizations and instances to facilitate the management of TiDB Cloud users and clusters. If you are an organization owner, you can create multiple instance in your organization.
+TiDB Cloud provides a hierarchical structure based on organizations and instances to facilitate the management of TiDB Cloud users and TiDB instances. If you are an organization owner, you can create multiple TiDB instance in your organization.
 
 For example:
 
@@ -26,7 +26,7 @@ For example:
 Under this structure:
 
 - To access an organization, a user must be a member of that organization.
-- To access an instance, a user must at least have the read access to the instnace in that organization.
+- To access an instance, a user must at least have the read access to the instance in that organization.
 
 For more information about user roles and permissions, see [User Roles](#user-roles).
 
@@ -36,7 +36,7 @@ An organization can contain multiple instances.
 
 TiDB Cloud calculates billing at the organization level and provides the billing details for each instance.
 
-If you are an organization owner, you have the highest permission in your organization.
+If you are an `Organization Owner`, you have the highest permission in your organization.
 
 For example, you can do the following:
 
@@ -46,11 +46,11 @@ For example, you can do the following:
 
 ### Instances
 
-If you are a instance admin, you can manage instance settings.
+If you are an `Instance Admin`, you can manage instance settings.
 
 For example, you can do the following:
 
-- Delete the instance according to your business nee.
+- Delete the instance according to your business needs.
 - Configure instance settings.
 
 ## User roles
@@ -84,7 +84,7 @@ At the instance level, TiDB Cloud defines three roles.
 
 > **Note:**
 >
-> - `Organization Owner` has all the permissions of <code>Instance Owner</code> for all instances.
+> - `Organization Owner` has all the permissions of <code>Instance Admin</code> for all instances.
 > - Each instance role has all the permissions of <code>Organization Viewer</code> by default.
 > - If a user in your organization does not belong to any instances, the user does not have any instance permissions.
 
@@ -92,14 +92,11 @@ At the instance level, TiDB Cloud defines three roles.
 |---|---|---|
 | Manage instance settings | ✅ | ❌ |
 | Manage [database audit logging](/tidb-cloud/tidb-cloud-auditing.md) of the instance. | ✅ | ❌ |
-| Manage [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for all {{{ .starter }}} clusters in the instance. | ✅ | ❌ |
-| Manage instance operations, such as cluster creation, modification, and deletion. | ✅ | ❌ |
-| Manage branches for {{{ .starter }}} and {{{ .essential }}} clusters in the instance, such as branch creation, connection, and deletion. | ✅ | ❌ |
-| Manage [recovery groups](/tidb-cloud/recovery-group-overview.md) for TiDB Cloud Dedicated clusters in the instance, such as recovery group creation and deletion. | ✅ | ❌ |
-| Manage cluster data such as data import, data backup and restore, and data migration. | ✅ | ❌ |
+| Manage instance operations, such as instance creation, modification, and deletion. | ✅ | ❌ |
+| Manage instance data such as data import, data backup and restore, and data migration. | ✅ | ❌ |
 | Manage [changefeeds](/tidb-cloud/changefeed-overview.md). | ✅ | ❌ |
-| Review and reset cluster passwords. | ✅ | ❌ |
-| View cluster overview, backup records, metrics, events, and [changefeeds](/tidb-cloud/changefeed-overview.md) in the instance. | ✅ | ✅ |
+| Review and reset instance passwords. | ✅ | ❌ |
+| View instance overview, backup records, metrics, events, and [changefeeds](/tidb-cloud/changefeed-overview.md) in the instance. | ✅ | ✅ |
 
 ## Manage organization access
 
