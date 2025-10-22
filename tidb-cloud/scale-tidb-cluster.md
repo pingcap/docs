@@ -7,7 +7,7 @@ summary: TiDB Cloudクラスターを拡張する方法を学びます。
 
 > **注記：**
 >
-> -   [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)は、アプリケーションのワークロードの変化に応じて自動的にスケーリングされます。ただし、 TiDB Cloud Starter またはTiDB Cloud Essential クラスターは手動でスケーリングできません。
+> -   [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)は、アプリケーションのワークロードの変化に応じて自動的にスケーリングされます。ただし、 TiDB Cloud Starter またはTiDB Cloud Essential クラスターは手動でスケーリングできません。
 > -   クラスターが**MODIFYING**ステータスにある場合、そのクラスターに対して新しいスケーリング操作を実行することはできません。
 
 TiDB クラスターは次の次元で拡張できます。
@@ -32,7 +32,7 @@ TiDB、TiKV、またはTiFlashノードの数を増減できます。
 
 > **警告：**
 >
-> TiKV またはTiFlashノードの数を減らすとリスクが生じ、残りのノードでstorage容量不足、過剰な CPU 使用率、または過剰なメモリ使用率が発生する可能性があります。
+> TiKV またはTiFlashノード数を減らすとリスクが生じ、残りのノードでstorage容量不足、過剰な CPU 使用率、または過剰なメモリ使用率が発生する可能性があります。
 
 TiDB、TiKV、またはTiFlashノードの数を変更するには、次の手順を実行します。
 
@@ -59,8 +59,8 @@ TiDB、TiKV、またはTiFlashノードの vCPU と RAM を増減できます。
 > **注記：**
 >
 > -   vCPU と RAM の変更は、次のクラスターでのみ可能です。
->     -   AWS でホストされ、2022/12/31 以降に作成されました。
->     -   Google Cloud でホストされ、2023/04/26 以降に作成されました。
+>     -   AWS でホストされ、2022/12/31 以降に作成されています。
+>     -   Google Cloud でホストされ、2023/04/26 以降に作成されています。
 >     -   Azure でホストされます。
 > -   AWS では、vCPU と RAM の変更にクールダウン期間があります。TiDB クラスターが AWS でホストされている場合、TiKV またはTiFlashの vCPU と RAM を変更した後、再度変更するには少なくとも 6 時間待つ必要があります。
 > -   vCPUを減らす前に、TiKVまたはTiFlashの現在のノードstorageが、対象のvCPUの最大ノードstorageを超えていないことを確認してください。詳細は[TiKVノードstorage](/tidb-cloud/size-your-cluster.md#tikv-node-storage-size)と[TiFlashノードstorage](/tidb-cloud/size-your-cluster.md#tiflash-node-storage)参照してください。いずれかのコンポーネントの現在のstorageが上限を超えている場合は、vCPUを減らすことはできません。
@@ -90,7 +90,7 @@ TiKV またはTiFlashのstorageを増やすことができます。
 > **警告：**
 >
 > -   実行中のクラスターの場合、AWS、Azure、Google Cloud では、インプレースstorage容量のダウングレードは許可されません。
-> -   AWS と Azure では、storage変更にクールダウン期間があります。TiDB クラスターが AWS または Azure でホストされている場合、TiKV またはTiFlashのstorage、vCPU、RAM を変更した後、再度変更するには少なくとも 6 時間待つ必要があります。
+> -   AWS と Azure では、storage変更のクールダウン期間があります。TiDB クラスターが AWS または Azure でホストされている場合、TiKV またはTiFlashのstorage、または vCPU と RAM を変更した後、再度変更するには少なくとも 6 時間待つ必要があります。
 
 TiKV またはTiFlashのstorageを変更するには、次の手順を実行します。
 
@@ -108,4 +108,4 @@ TiKV またはTiFlashのstorageを変更するには、次の手順を実行し�
 
 5.  右側のペインでクラスター サイズを確認し、 **[確認]**をクリックします。
 
-TiKVノードまたはTiFlashノードのstorageは、TiDB Cloud APIを使用して[TiDB Cloud Dedicated クラスターを変更する](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)エンドポイント経由で変更することもできます。現在、 TiDB Cloud APIはまだベータ版です。詳細については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)ご覧ください。
+TiDB Cloud APIを使用して、 [TiDB Cloud Dedicated クラスターを変更する](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)エンドポイント経由でTiKVノードまたはTiFlashノードのstorageを変更することもできます。現在、 TiDB Cloud APIはまだベータ版です。詳細については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)ご覧ください。

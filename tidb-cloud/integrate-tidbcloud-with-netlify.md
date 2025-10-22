@@ -5,7 +5,7 @@ summary: TiDB Cloudクラスターを Netlify プロジェクトに接続する�
 
 # TiDB Cloudと Netlify を統合する {#integrate-tidb-cloud-with-netlify}
 
-[ネットリファイ](https://netlify.com/)は、最新のWebプロジェクトを自動化するためのオールインワンプラットフォームです。ホスティングインフラストラクチャ、継続的インテグレーション、デプロイメントパイプラインを単一のワークフローに置き換え、プロジェクトの拡大に合わせてサーバーレス関数、ユーザー認証、フォーム処理などの動的な機能を統合します。
+[ネットリファイ](https://netlify.com/)は、最新のWebプロジェクトを自動化するためのオールインワンプラットフォームです。ホスティングインフラストラクチャ、継続的インテグレーション、デプロイメントパイプラインを単一のワークフローに置き換え、プロジェクトの拡大に​​合わせてサーバーレス関数、ユーザー認証、フォーム処理などの動的な機能を統合します。
 
 このドキュメントでは、TiDB CloudをデータベースバックエンドとしてNetlifyにフルスタックアプリをデプロイする方法について説明します。また、 TiDB Cloudサーバーレスドライバーを使用してNetlifyエッジ機能を使用する方法についても説明します。
 
@@ -29,9 +29,9 @@ TiDB Cloudのアカウントとクラスターが必要です。まだお持ち�
 
 1 つのTiDB Cloudクラスターは複数の Netlify サイトに接続できます。
 
-### TiDB Cloudのトラフィックフィルターで許可されるすべての IP アドレス {#all-ip-addresses-allowed-for-traffic-filter-in-tidb-cloud}
+### TiDB Cloudのトラフィック フィルターで許可されるすべての IP アドレス {#all-ip-addresses-allowed-for-traffic-filter-in-tidb-cloud}
 
-TiDB Cloud Dedicated クラスターの場合、クラスターのトラフィックフィルターですべての IP アドレス（ `0.0.0.0/0`に設定）が接続に許可されていることを確認してください。これは、Netlify デプロイメントが動的 IP アドレスを使用するためです。
+TiDB Cloud Dedicated クラスターの場合、クラスターのトラフィックフィルターですべての IP アドレス（ `0.0.0.0/0`に設定）が接続に許可されていることを確認してください。これは、Netlify デプロイメントで動的 IP アドレスが使用されるためです。
 
 TiDB Cloud Starter およびTiDB Cloud Essential クラスターは、デフォルトですべての IP アドレスの接続を許可するため、トラフィック フィルターを構成する必要はありません。
 
@@ -61,7 +61,7 @@ TiDB Cloud Dedicated クラスターの場合、接続文字列はTiDB Cloudコ�
 
 > **ヒント：**
 >
-> Cloud CLI をインストールしていない場合は、次の手順に進む前に、クイック インストールの[TiDB Cloud CLI クイックスタート](/tidb-cloud/get-started-with-cli.md)を参照してください。
+> Cloud CLI をインストールしていない場合は、次の手順を実行する前に、クイック インストールの[TiDB Cloud CLI クイックスタート](/tidb-cloud/get-started-with-cli.md)を参照してください。
 
 1.  対話モードでクラスターの接続文字列を取得します。
 
@@ -212,7 +212,7 @@ TiDB Cloud Dedicated クラスターの場合、接続文字列はTiDB Cloudコ�
     netlify dev
     ```
 
-    次に、ブラウザで`http://localhost:3000/`に移動して、UI を調べます。
+    次に、ブラウザで`http://localhost:3000/`に移動して、その UI を調べます。
 
 6.  アプリをNetlifyにデプロイ。ローカルプレビューに問題がなければ、以下のコマンドでサイトをNetlifyにデプロイできます。1 `--trigger`ローカルファイルをアップロードせずにデプロイすることを意味します。ローカルで変更を加えた場合は、GitHubリポジトリにコミットしたことを確認してください。
 
@@ -256,4 +256,4 @@ TiDB Cloud Dedicated クラスターの場合、接続文字列はTiDB Cloudコ�
     netlify deploy --prod --trigger
     ```
 
-その後、Netlifyコンソールにアクセスしてデプロイメントの状態を確認できます。デプロイメントが完了すると、 `https://<netlify-host>/api/hello` URLからエッジ関数にアクセスできます。
+その後、Netlifyコンソールにアクセスしてデプロイメントの状態を確認できます。デプロイメントが完了すると、 `https://<netlify-host>/api/hello` URLからエッジ機能にアクセスできます。

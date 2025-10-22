@@ -11,7 +11,7 @@ TiDB は MySQL 互換のデータベース、 [レール](https://github.com/rai
 
 -   環境を設定します。
 -   Rails を使用して TiDB クラスターに接続します。
--   アプリケーションをビルドして実行します。オプションで、ActiveRecord ORM を使用した基本的な CRUD 操作については[サンプルコードスニペット](#sample-code-snippets)参照してください。
+-   アプリケーションをビルドして実行します。オプションとして、ActiveRecord ORMを使用した基本的なCRUD操作については[サンプルコードスニペット](#sample-code-snippets)参照してください。
 
 > **注記：**
 >
@@ -47,7 +47,7 @@ TiDB は MySQL 互換のデータベース、 [レール](https://github.com/rai
 
 ### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
-サンプル コード リポジトリのクローンを作成するには、ターミナル ウィンドウで次のコマンドを実行します。
+ターミナル ウィンドウで次のコマンドを実行して、サンプル コード リポジトリのクローンを作成します。
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-ruby-rails-quickstart.git
@@ -93,7 +93,7 @@ bundle add mysql2 dotenv
     cp .env.example .env
     ```
 
-6.  `.env`ファイルを編集し、 `DATABASE_URL`環境変数を以下のように設定し、接続ダイアログから接続文字列を変数値としてコピーします。
+6.  `.env`ファイルを編集し、 `DATABASE_URL`環境変数を次のように設定し、接続ダイアログから接続文字列を変数値としてコピーします。
 
     ```dotenv
     DATABASE_URL='mysql2://{user}:{password}@{host}:{port}/{database_name}?ssl_mode=verify_identity'
@@ -101,7 +101,7 @@ bundle add mysql2 dotenv
 
     > **注記**
     >
-    > [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合、パブリックエンドポイントを使用する場合は、 `ssl_mode=verify_identity`クエリパラメータを使用して TLS 接続を有効にする**必要があります**。
+    > [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合、パブリックエンドポイントを使用する場合は、 `ssl_mode=verify_identity`クエリパラメータを使用して TLS 接続を有効にする**必要があります**。
 
 7.  `.env`ファイルを保存します。
 
@@ -114,7 +114,7 @@ bundle add mysql2 dotenv
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
+    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
     TiDB Cloud Dedicatedは、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPCピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ご覧ください。
 
@@ -198,7 +198,7 @@ bundle add mysql2 dotenv
 
 完全なサンプル コードとその実行方法については、 [tidb-samples/tidb-ruby-rails-クイックスタート](https://github.com/tidb-samples/tidb-ruby-rails-quickstart)リポジトリを参照してください。
 
-### 接続オプションを使用して TiDB に接続する {#connect-to-tidb-with-connection-options}
+### 接続オプションを使用してTiDBに接続する {#connect-to-tidb-with-connection-options}
 
 `config/database.yml`の次のコードは、環境変数で定義されたオプションを使用して TiDB への接続を確立します。
 
@@ -222,7 +222,7 @@ production:
 
 > **注記**
 >
-> [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)については、パブリックエンドポイントを使用する場合、 `DATABASE_URL`の`ssl_mode`クエリパラメータを`verify_identity`に設定して TLS 接続を有効にする**必要が**ありますが、mysql2 gem はファイルが見つかるまで特定の順序で既存の CA 証明書を検索するため、 `DATABASE_URL`で SSL CA 証明書を指定する必要は**ありません**。
+> [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)については、パブリック エンドポイントを使用する場合、 `DATABASE_URL`の`ssl_mode`クエリ パラメータを`verify_identity`に設定して TLS 接続を有効にする**必要が**ありますが、mysql2 gem はファイルが見つかるまで特定の順序で既存の CA 証明書を検索するため、 `DATABASE_URL`で SSL CA 証明書を指定する必要は**ありません**。
 
 ### データを挿入する {#insert-data}
 
@@ -273,13 +273,13 @@ player.destroy
 3.  /etc/ssl/ca-bundle.pem # OpenSUSE
 4.  /etc/ssl/cert.pem # MacOS / Alpine (docker コンテナ)
 
-CA証明書のパスを手動で指定することも可能ですが、複数の環境への導入シナリオでは、異なるマシンや環境によってCA証明書の保存場所が異なる可能性があるため、この方法では大きな不便が生じる可能性があります。そのため、異なる環境への導入における柔軟性と容易さを確保するため、 `sslca` ～ `nil`設定をお勧めします。
+CA証明書のパスを手動で指定することも可能ですが、複数の環境への導入シナリオでは、異なるマシンや環境によってCA証明書の保存場所が異なる場合があり、大きな不便が生じる可能性があります。そのため、柔軟性と容易さの観点から、 `sslca` ～ `nil`設定をお勧めします。
 
 ## 次のステップ {#next-steps}
 
 -   ActiveRecord ORM の使い方を[ActiveRecordのドキュメント](https://guides.rubyonrails.org/active_record_basics.html)から詳しく学びます。
 -   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
--   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## ヘルプが必要ですか? {#need-help}
 

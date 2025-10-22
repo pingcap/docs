@@ -25,7 +25,7 @@ summary: Vector データ型で使用できる関数と演算子について学�
 
 > **注記：**
 >
-> ベクトルデータ型とこれらのベクトル関数は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 、および[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)使用できます。TiDB Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります (v8.5.0 以降を推奨)。
+> ベクトルデータ型とこれらのベクトル関数は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 、および[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)使用できます。TiDB Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります (v8.5.0 以降を推奨)。
 
 ## ベクトル関数 {#vector-functions}
 
@@ -44,7 +44,7 @@ summary: Vector データ型で使用できる関数と演算子について学�
 
 | 関数名                               | 説明                          |
 | --------------------------------- | --------------------------- |
-| [`VEC_DIMS`](#vec_dims)           | ベクトルの次元を返します                |
+| [`VEC_DIMS`](#vec_dims)           | ベクトルの次元を返す                  |
 | [`VEC_L2_NORM`](#vec_l2_norm)     | ベクトルのL2ノルム（ユークリッドノルム）を計算します |
 | [`VEC_FROM_TEXT`](#vec_from_text) | 文字列をベクトルに変換する               |
 | [`VEC_AS_TEXT`](#vec_as_text)     | ベクトルを文字列に変換する               |
@@ -90,7 +90,7 @@ summary: Vector データ型で使用できる関数と演算子について学�
 | [`&#x3C;=`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_less-than-or-equal)          | 以下演算子                |
 | [`NOT BETWEEN ... AND ...`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-between) | 値が範囲内にないか確認する        |
 | [`!=` 、 `&lt;&gt;`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-equal)           | 等しくない演算子             |
-| [`NOT IN()`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-in)                     | 値が値セット内にないかどうかを確認します |
+| [`NOT IN()`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-in)                     | 値が値のセット内にないかどうかを確認する |
 
 ベクトルの比較方法の詳細については、 [ベクトルデータ型 | 比較](/vector-search/vector-search-data-types.md#comparison)参照してください。
 
@@ -170,7 +170,7 @@ SELECT VEC_COSINE_DISTANCE('[1, 1]', '[-1, -1]');
 VEC_NEGATIVE_INNER_PRODUCT(vector1, vector2)
 ```
 
-次の数式を使用して、2 つのベクトル間の[内積](https://en.wikipedia.org/wiki/Dot_product)の負数を使用して距離を計算します。
+次の数式を使用して、2 つのベクトル間の[内積](https://en.wikipedia.org/wiki/Dot_product)の負の値を使用して距離を計算します。
 
 $DISTANCE(p,q)=- INNER_PROD(p,q)=-\sum \limits *{i=1}^{n}{p* {i}q_{i}}$
 
@@ -306,7 +306,7 @@ SELECT VEC_AS_TEXT('[1.000, 2.5]');
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-ベクトル関数およびベクトル データ型に対する組み込み関数と演算子の拡張使用は TiDB 固有のものであり、MySQL ではサポートされていません。
+ベクトル関数と、ベクトル データ型に対する組み込み関数および演算子の拡張使用は TiDB 固有のものであり、MySQL ではサポートされていません。
 
 ## 参照 {#see-also}
 

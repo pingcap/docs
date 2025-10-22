@@ -10,21 +10,21 @@ summary: TiDB データベースの RESTORE の使用法の概要。
 > **警告：**
 >
 > -   この機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
-> -   この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
+> -   この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 `RESTORE`ステートメントは[BRツール](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)と同じエンジンを使用しますが、リストアプロセスは別のBRツールではなく TiDB 自体によって実行されます。BRの利点と注意事項はすべてここにも適用されます。特に、 **`RESTORE`現在ACID準拠ではありません**。 `RESTORE`実行する前に、以下の要件が満たされていることを確認してください。
 
--   クラスターは「オフライン」であり、現在の TiDB セッションは復元中のすべてのテーブルにアクセスするための唯一のアクティブな SQL 接続です。
+-   クラスターは「オフライン」であり、現在の TiDB セッションは復元されるすべてのテーブルにアクセスするための唯一のアクティブな SQL 接続です。
 -   完全な復元を実行する場合、既存のデータが上書きされ、データとインデックスの間に不整合が生じる可能性があるため、復元対象のテーブルがすでに存在していてはいけません。
 -   増分復元が実行されている場合、テーブルはバックアップが作成された時点の`LAST_BACKUP`のタイムスタンプとまったく同じ状態になっている必要があります。
 
-`RESTORE`実行するには、 `RESTORE_ADMIN`または`SUPER`権限が必要です。さらに、リストアを実行するTiDBノードとクラスター内のすべてのTiKVノードの両方に、リストア先からの読み取り権限が必要です。
+`RESTORE`実行するには、 `RESTORE_ADMIN`または`SUPER`権限が必要です。さらに、復元を実行するTiDBノードとクラスター内のすべてのTiKVノードの両方に、復元先からの読み取り権限が必要です。
 
-`RESTORE`文はブロッキングであり、復元タスク全体が完了、失敗、またはキャンセルされた後にのみ終了します。3 `RESTORE`を実行するには、長時間持続する接続を用意する必要があります。タスクは[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)文を使用してキャンセルできます。
+`RESTORE`文はブロッキングであり、復元タスク全体が完了、失敗、またはキャンセルされた後にのみ終了します。3 `RESTORE`実行するには、長時間持続する接続を用意する必要があります。タスクは[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)文を使用してキャンセルできます。
 
 一度に実行できるタスク`BACKUP`と`RESTORE` 1 つだけです。同じ TiDBサーバー上でタスク番号`BACKUP`または`RESTORE`既に実行されている場合、新しいタスク`RESTORE`実行は、前のタスクがすべて完了するまで待機します。
 
-`RESTORE` 「tikv」storageエンジンでのみ使用できます。2 `RESTORE` 「unistore」エンジンで使用すると失敗します。
+`RESTORE` 「tikv」storageエンジンでのみ使用できます。「unistore」エンジンで`RESTORE`使用すると失敗します。
 
 ## 概要 {#synopsis}
 
@@ -112,7 +112,7 @@ RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/'
 
 `RATE_LIMIT`使用すると、TiKV ノードあたりの平均ダウンロード速度が制限され、ネットワーク帯域幅が削減されます。
 
-復元が完了する前に、 `RESTORE`指定すると、バックアップファイルのデータに対してチェックサムが実行され、データの正確性が検証されます。単一テーブルに対するチェックサムタスクのデフォルトの同時実行数は 4 ですが、 `CHECKSUM_CONCURRENCY`パラメータを使用して調整できます。データ検証が不要であると確信できる場合は、 `CHECKSUM`パラメータを`FALSE`に設定することでチェックを無効にすることができます。
+復元が完了する前に、 `RESTORE`指定すると、バックアップファイルのデータに対してチェックサムが実行され、データの正確性が検証されます。単一テーブルに対するチェックサムタスクのデフォルトの同時実行数は 4 ですが、 `CHECKSUM_CONCURRENCY`パラメータを使用して調整できます。データ検証が不要であると確信できる場合は、 `CHECKSUM`パラメータを`FALSE`に設定することでチェックを無効化できます。
 
 統計情報がバックアップされている場合、復元時にデフォルトで復元されます。統計情報を復元する必要がない場合は、 `LOAD_STATS`パラメータを`FALSE`に設定できます。
 
@@ -128,7 +128,7 @@ RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/'
 
 </CustomContent>
 
-デフォルトでは、復元タスクはTiFlashレプリカが完全に作成されるまで待機せずに完了します。復元タスクを待機させる必要がある場合は、パラメータ`WAIT_TIFLASH_READY` `TRUE`に設定できます。
+デフォルトでは、復元タスクはTiFlashレプリカが完全に作成されるまで待機せずに完了します。復元タスクを待機させる必要がある場合は、パラメータ`WAIT_TIFLASH_READY` `TRUE`に設定してください。
 
 ```sql
 RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-06/'
@@ -139,7 +139,7 @@ RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-06/'
 
 ### 増分復元 {#incremental-restore}
 
-増分リストアを実行するための特別な構文はありません。TiDBはバックアップアーカイブが完全か増分かを認識し、適切なアクションを実行します。各増分リストアを正しい順序で適用するだけで済みます。
+増分リストアを実行するための特別な構文はありません。TiDBはバックアップアーカイブが完全バックアップか増分バックアップかを認識し、適切なアクションを実行します。各増分リストアを正しい順序で適用するだけで済みます。
 
 たとえば、次のようにバックアップ タスクが作成されたとします。
 

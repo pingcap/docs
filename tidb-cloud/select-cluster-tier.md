@@ -10,7 +10,7 @@ aliases: ['/tidbcloud/developer-tier-cluster']
 
 TiDB Cloudは、以下のクラスタープランをご用意しています。導入直後でも、増大するアプリケーション需要に対応するための拡張でも、これらのサービスプランは必要な柔軟性と機能を提供します。クラスターを作成する前に、どのオプションがニーズに適しているかを検討してください。
 
--   [TiDB Cloudサーバーレス](#tidb-cloud-serverless) （現在はスターター）
+-   [TiDB Cloudスターター](#starter)
 -   [TiDB Cloudエッセンシャル](#essential)
 -   [TiDB Cloud専用](#tidb-cloud-dedicated)
 
@@ -18,15 +18,15 @@ TiDB Cloudは、以下のクラスタープランをご用意しています。�
 >
 > TiDB Cloudの一部機能は、 TiDB Cloud StarterおよびTiDB Cloud Essentialでは部分的にサポートされるか、サポートされません。詳細は[TiDB Cloud Starter と基本的な制限事項](/tidb-cloud/serverless-limitations.md)ご覧ください。
 
-## TiDB Cloudサーバーレス {#tidb-cloud-serverless}
+## TiDB Cloudスターター {#starter} {#starter}
 
-TiDB Cloud Serverless（現在はStarter）は、フルマネージドのマルチテナント型TiDBサービスです。MySQL互換データベースを瞬時に自動スケーリングし、十分な無料割り当てと、無料割り当てを超えた場合の使用量に応じた課金を提供します。
+TiDB Cloud Starterは、フルマネージドのマルチテナント型TiDBサービスです。MySQL互換データベースを瞬時に自動スケーリングし、十分な無料クォータと、無料クォータを超えた場合の使用量に応じた課金体系を提供します。
 
 無料のクラスタープランは、 TiDB Cloud Starterを初めてご利用になる方に最適です。開発者や小規模チームに以下の重要な機能を提供します。
 
 -   **無料**: このプランは完全に無料で、開始するのにクレジットカードは必要ありません。
 -   **ストレージ**: 初期 5 GiB の行ベースのstorageと 5 GiB の列ベースのstorageを提供します。
--   **リクエスト単位**: データベース操作用の 5,000 万[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit)が含まれます。
+-   **リクエスト単位**: データベース操作用に 5000 万[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit)が含まれます。
 
 ### 使用量制限 {#usage-quota}
 
@@ -40,7 +40,7 @@ TiDB Cloudでは、組織ごとにデフォルトで最大5つのTiDB Cloud Star
 
 リクエストユニット（RU）は、データベースへの単一のリクエストで消費されるリソースの量を表す測定単位です。リクエストで消費されるRUの量は、操作の種類や取得または変更されるデータの量など、さまざまな要因によって異なります。
 
-クラスターが使用量クォータに達すると、新しい月[割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)始まるまで、または使用量がリセットされるまで、新規接続の試行は直ちに拒否されます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。例えば、クラスターの行ベースstorageが空きクラスターで5GiBを超えると、クラスターは自動的に新規接続の試行を制限します。
+クラスターが使用量クォータに達すると、新しい月の開始時に使用[割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)がリセットされるまで、新規接続の試行は直ちに拒否されます。クォータに達する前に確立された既存の接続はアクティブのままですが、スロットリングが発生します。例えば、クラスターの行ベースstorageが空きクラスターで5GiBを超えると、クラスターは自動的に新規接続の試行を制限します。
 
 さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク送信など) の RU 消費量、価格の詳細、スロットル情報の詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)参照してください。
 
@@ -50,7 +50,7 @@ TiDB Cloudでは、組織ごとにデフォルトで最大5つのTiDB Cloud Star
 
 -   **拡張機能**: スターター プランのすべての機能に加えて、より大規模で複雑なワークロードを処理する能力と高度なセキュリティ機能が含まれます。
 -   **自動スケーリング**: 変化するワークロードの需要に効率的に対応するために、storageとコンピューティング リソースを自動的に調整します。
--   **高可用性**: フォールト トレランスと冗長性が組み込まれているため、インフラストラクチャに障害が発生した場合でも、アプリケーションの可用性と回復力が維持されます。
+-   **高可用性**: フォールト トレランスと冗長性が組み込まれているため、インフラストラクチャに障害が発生した場合でも、アプリケーションの可用性と回復力を維持できます。
 -   **予測可能な価格設定**: コンピューティング リソースのstorageとリクエスト容量単位 (RCU) に基づいて課金され、ニーズに合わせて拡張できる透明性の高い使用量ベースの価格設定が提供されるため、予期せぬ出費なく、使用した分だけを支払うことになります。
 
 ## ユーザー名のプレフィックス {#user-name-prefix}
@@ -59,7 +59,7 @@ TiDB Cloudでは、組織ごとにデフォルトで最大5つのTiDB Cloud Star
 
 TiDB Cloud Starter またはTiDB Cloud Essential クラスターごとに、 TiDB Cloud は他のクラスターと区別するために一意のプレフィックスを生成します。
 
-データベースユーザー名を使用または設定する場合は、必ずユーザー名にプレフィックスを含める必要があります。例えば、クラスターのプレフィックスが`3pTAoNNegb47Uc8`であるとします。
+データベースユーザー名を使用または設定する際は、必ずユーザー名にプレフィックスを含める必要があります。例えば、クラスターのプレフィックスが`3pTAoNNegb47Uc8`であるとします。
 
 -   クラスターに接続するには:
 
@@ -85,9 +85,9 @@ TiDB Cloud Starter またはTiDB Cloud Essential クラスターごとに、 TiD
 
 ## TiDB Cloud専用 {#tidb-cloud-dedicated}
 
-TiDB Cloud Dedicated は、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番での使用を目的としています。
+TiDB Cloud Dedicated は、クロスゾーンの高可用性、水平スケーリング、 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番環境向けです。
 
-TiDB Cloud Dedicated クラスターでは、ビジネスニーズに合わせて TiDB、TiKV、 TiFlashのクラスターサイズを簡単にカスタマイズできます。各 TiKV ノードとTiFlashノードでは、ノード上のデータが複製され、異なるアベイラビリティゾーンに[高可用性](/tidb-cloud/high-availability-with-multi-az.md)日間分散されます。
+TiDB Cloud Dedicated クラスターでは、ビジネスニーズに合わせて TiDB、TiKV、 TiFlashのクラスターサイズを簡単にカスタマイズできます。各 TiKV ノードとTiFlashノードでは、ノード上のデータが[高可用性](/tidb-cloud/high-availability-with-multi-az.md)間、異なるアベイラビリティゾーンに複製され、分散されます。
 
 TiDB Cloud Dedicated クラスターを作成するには、 [支払い方法を追加する](/tidb-cloud/tidb-cloud-billing.md#payment-method)または[概念実証（PoC）トライアルに申し込む](/tidb-cloud/tidb-cloud-poc.md)が必要です。
 

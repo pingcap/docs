@@ -5,7 +5,7 @@ summary: C#を使用してTiDBに接続する方法を学びます。このチ�
 
 # C#でTiDBに接続する {#connect-to-tidb-with-c}
 
-C#（「Cシャープ」と発音）は、Microsoftによって開発された.NETファミリーのプログラミング言語の一つです。他の.NET言語には、VB.NETやF#などがあります。このチュートリアルでは、C#とMySQL Connector/NETを使用して、C#アプリケーションをMySQLプロトコル経由でTiDBに接続します。これは、TiDBが[MySQLと互換性あり](/mysql-compatibility.md)という高度なセキュリティを備えているためです。
+C#（発音は「Cシャープ」）は、Microsoftによって開発された.NETファミリーのプログラミング言語の一つです。他の.NET言語には、VB.NETやF#などがあります。このチュートリアルでは、C#とMySQL Connector/NETを使用して、C#アプリケーションをMySQLプロトコル経由でTiDBに接続します。これは、TiDBが[MySQLと互換性あり](/mysql-compatibility.md) .
 
 .NETはWindowsでよく使用されますが、macOSとLinuxでも利用できます。すべてのプラットフォームで、コマンドとコードはほぼ同じで、プロンプトとファイルパスにわずかな違いがあるだけです。
 
@@ -13,7 +13,7 @@ C#（「Cシャープ」と発音）は、Microsoftによって開発された.N
 
 -   [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download)ダウンロードしてください。
 -   このチュートリアルでは、 `dotnet`コマンドラインツールを使用します。または、Visual Studio Code IDE を使用して C# コードを操作することもできます。
--   このチュートリアルを完了するには、TiDBインスタンスへのアクセスが必要です。TiDB TiDB Cloudの[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-serverless)または[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-dedicated)クラスター、あるいは`tiup playground`で開始したような TiDB Self-Managed クラスターを使用できます。
+-   このチュートリアルを完了するには、TiDBインスタンスへのアクセスが必要です。TiDB TiDB Cloudの[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)または[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-dedicated)クラスター、あるいは`tiup playground`で開始したような TiDB セルフマネージドクラスターを使用できます。
 
 ## ステップ1. コンソールプロジェクトを設定する {#step-1-set-up-a-console-project}
 
@@ -28,7 +28,7 @@ C#（「Cシャープ」と発音）は、Microsoftによって開発された.N
 
 ## ステップ2. MySql.Dataパッケージを追加する {#step-2-add-the-mysql-data-package}
 
-.NET用のパッケージマネージャーはNuGetです。MySQL Connector/NETのNuGetパッケージ名は[MySql.データ](https://www.nuget.org/packages/MySql.Data)で、.NETアプリケーションでMySQLプロトコルをサポートします。バージョンを指定しない場合は、NuGetは最新の安定バージョン（例：バージョン9.3.0）をインストールします。
+.NET用のパッケージマネージャーはNuGetと呼ばれます。MySQL Connector/NETのNuGetパッケージ名は[MySQL.データ](https://www.nuget.org/packages/MySql.Data)で、.NETアプリケーションでMySQLプロトコルのサポートを提供します。バージョンを指定しない場合、NuGetは最新の安定バージョン（例：バージョン9.3.0）をインストールします。
 
     $ cd tidb_cs
     $ dotnet add package MySql.Data
@@ -93,9 +93,9 @@ public class Tutorial1
 }
 ```
 
-指定されたIPとポートのTiDBインスタンスに接続します。TiDB TiDB Cloudを使用する場合は、接続文字列パラメータ（ホスト名、ポート、ユーザー名、パスワードなど）を[TiDB Cloudコンソール](https://tidbcloud.com/)に記載されている詳細情報に置き換えてください。
+指定されたIPとポート上のTiDBインスタンスに接続します。TiDB TiDB Cloudを使用する場合は、接続文字列パラメータ（ホスト名、ポート、ユーザー名、パスワードなど）を[TiDB Cloudコンソール](https://tidbcloud.com/)に記載されている詳細情報に置き換えてください。
 
-コードはデータベースに接続し、そのバージョンを出力、 [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version)を使用して SQL クエリを実行し、より詳細なバージョン情報を取得し、最後にこの結果を出力。
+コードはデータベースに接続し、そのバージョンを出力、次に[`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version)を使用して SQL クエリを実行し、より詳細なバージョン情報を取得し、最後にこの結果を出力。
 
 ## ステップ4. プログラムを実行する {#step-4-run-the-program}
 

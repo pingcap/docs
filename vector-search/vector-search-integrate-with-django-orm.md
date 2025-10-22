@@ -19,13 +19,13 @@ summary: TiDB Vector Search を Django ORM と統合して埋め込みを保存�
 
 > **注記：**
 >
-> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを見つけた場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
+> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
 </CustomContent>
 
 > **注記：**
 >
-> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
+> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## 前提条件 {#prerequisites}
 
@@ -90,7 +90,7 @@ pip install Django django-tidb mysqlclient numpy python-dotenv
 
 mysqlclient のインストールで問題が発生した場合は、mysqlclient の公式ドキュメントを参照してください。
 
-#### <code>django-tidb</code>とは何か {#what-is-code-django-tidb-code}
+#### <code>django-tidb</code>とは {#what-is-code-django-tidb-code}
 
 `django-tidb` Django 用の TiDB 方言であり、Django ORM を拡張して TiDB 固有の機能 (たとえば、Vector Search) をサポートし、TiDB と Django 間の互換性の問題を解決します。
 
@@ -105,7 +105,7 @@ mysqlclient のインストールで問題が発生した場合は、mysqlclient
 <SimpleTab>
 <div label="TiDB Cloud Starter or Essential">
 
-TiDB Cloud Starter クラスターの場合、次の手順に従ってクラスター接続文字列を取得し、環境変数を構成します。
+TiDB Cloud Starter クラスターの場合、クラスター接続文字列を取得し、環境変数を構成するには、次の手順を実行します。
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -194,11 +194,11 @@ python manage.py runserver
 
 ブラウザを開いて`http://127.0.0.1:8000`アクセスし、デモアプリケーションをお試しください。利用可能なAPIパスは以下のとおりです。
 
-| APIパス                                   | 説明                      |
-| --------------------------------------- | ----------------------- |
-| `POST: /insert_documents`               | 埋め込みのあるドキュメントを挿入します。    |
-| `GET: /get_nearest_neighbors_documents` | 3 つの最も近い近傍ドキュメントを取得します。 |
-| `GET: /get_documents_within_distance`   | 一定の距離内にある書類を取得します。      |
+| APIパス                                   | 説明                   |
+| --------------------------------------- | -------------------- |
+| `POST: /insert_documents`               | 埋め込みのあるドキュメントを挿入します。 |
+| `GET: /get_nearest_neighbors_documents` | 3 つの最近傍ドキュメントを取得します。 |
+| `GET: /get_documents_within_distance`   | 一定の距離内にある書類を取得します。   |
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
@@ -206,7 +206,7 @@ python manage.py runserver
 
 ### TiDBクラスタに接続する {#connect-to-the-tidb-cluster}
 
-ファイル`sample_project/settings.py`に次の構成を追加します。
+ファイル`sample_project/settings.py`に次の設定を追加します。
 
 ```python
 dotenv.load_dotenv()
@@ -260,7 +260,7 @@ Document.objects.create(content="tree", embedding=[1, 0, 0])
 
 ### 最も近い文書を検索する {#search-the-nearest-neighbor-documents}
 
-TiDB Vector は次の距離関数をサポートしています。
+TiDB Vector は次の距離関数をサポートしています:
 
 -   `L1Distance`
 -   `L2Distance`

@@ -21,14 +21,14 @@ summary: TiDB クラスターを削除する方法を学習します。
 
 4.  クラスター削除ウィンドウで、削除を確認します。
 
-    -   手動または自動バックアップが少なくとも1つある場合は、バックアップの数とバックアップの課金ポリシーを確認できます。 **「続行」**をクリックし、 `<organization name>/<project name>/<cluster name>`と入力してください。
+    -   手動または自動バックアップが少なくとも1つある場合は、バックアップの数とバックアップの課金ポリシーを確認できます。 **「続行」**をクリックし、 `<organization name>/<project name>/<cluster name>`入力してください。
     -   バックアップがない場合は、 `<organization name>/<project name>/<cluster name>`と入力してください。
 
     将来クラスタを復元する場合は、クラスタのバックアップを必ず作成してください。バックアップがないと、復元できなくなります。TiDB TiDB Cloud Dedicatedクラスタのバックアップ方法の詳細については、 [TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md)参照してください。
 
     > **注記：**
     >
-    > [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスターは、削除後のデータの復元をサポートしていません。TiDB TiDB Cloud Starter またはTiDB Cloud Essential クラスターを削除し、後でデータを復元する場合は、 [TiDB Cloud StarterまたはEssentialからデータをエクスポートする](/tidb-cloud/serverless-export.md)参照してデータをバックアップとしてエクスポートしてください。
+    > [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスターは、削除後のデータの復元をサポートしていません。TiDB TiDB Cloud Starter またはTiDB Cloud Essential クラスターを削除し、後でデータを復元する場合は、 [TiDB Cloud StarterまたはEssentialからデータをエクスポートする](/tidb-cloud/serverless-export.md)参照してデータをバックアップとしてエクスポートしてください。
 
 5.  **「理解しましたので削除します」を**クリックします。
 

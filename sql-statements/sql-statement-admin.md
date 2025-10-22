@@ -1,6 +1,6 @@
 ---
 title: ADMIN | TiDB SQL Statement Reference
-summary: TiDB データベースにおける ADMIN の使用法の概要。
+summary: TiDB データベースの ADMIN の使用法の概要。
 ---
 
 # 管理者 {#admin}
@@ -14,7 +14,7 @@ summary: TiDB データベースにおける ADMIN の使用法の概要。
 -   [`ADMIN SHOW NEXT_ROW_ID`](#admin-show-next_row_id-statement)
 -   [`ADMIN SHOW SLOW`](#admin-show-slow-statement)
 
-## DDL関連のステートメント {#ddl-related-statement}
+## DDL関連ステートメント {#ddl-related-statement}
 
 <CustomContent platform="tidb-cloud">
 
@@ -58,7 +58,7 @@ ADMIN RELOAD opt_rule_blacklist;
 
 > **注記：**
 >
-> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
+> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 ```sql
 ADMIN PLUGINS ENABLE plugin_name [, plugin_name] ...;
@@ -70,7 +70,7 @@ ADMIN PLUGINS ENABLE plugin_name [, plugin_name] ...;
 ADMIN PLUGINS DISABLE plugin_name [, plugin_name] ...;
 ```
 
-上記のステートメントは、プラグイン`plugin_name`を無効にするために使用されます。
+上記のステートメントは、 `plugin_name`プラグインを無効にするために使用されます。
 
 ## <code>ADMIN BINDINGS</code>関連のステートメント {#code-admin-bindings-code-related-statement}
 
@@ -78,7 +78,7 @@ ADMIN PLUGINS DISABLE plugin_name [, plugin_name] ...;
 ADMIN FLUSH BINDINGS;
 ```
 
-上記のステートメントは、SQL プランのバインディング情報を永続化するために使用されます。
+上記のステートメントは、SQL プランのバインディング情報を保持するために使用されます。
 
 ```sql
 ADMIN CAPTURE BINDINGS;
@@ -90,7 +90,7 @@ ADMIN CAPTURE BINDINGS;
 ADMIN EVOLVE BINDINGS;
 ```
 
-自動バインディング機能を有効にすると、SQLプランのバインディング情報の更新が`bind-info-leave` （デフォルト値は`3s` ）ごとにトリガーされます。上記のステートメントは、この更新をプロアクティブにトリガーするために使用されます。
+自動バインディング機能を有効にすると、SQLプランのバインディング情報の更新は`bind-info-leave`回ごとにトリガーされます（デフォルト値は`3s` ）。上記のステートメントは、この更新を事前にトリガーするために使用されます。
 
 ```sql
 ADMIN RELOAD BINDINGS;
@@ -126,13 +126,13 @@ ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT;
 ADMIN SHOW t NEXT_ROW_ID;
 ```
 
-上記の文は、テーブル内の特定の列の詳細を表示するために使用されています。出力は[テーブルの次の行IDを表示](/sql-statements/sql-statement-show-table-next-rowid.md)と同じです。
+上記の文は、テーブル内の特定の列の詳細を表示するために使用されます。出力は[テーブルNEXT_ROW_IDを表示](/sql-statements/sql-statement-show-table-next-rowid.md)と同じです。
 
 ## <code>ADMIN SHOW SLOW</code>ステートメント {#code-admin-show-slow-code-statement}
 
 > **注記：**
 >
-> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
+> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 ```sql
 ADMIN SHOW SLOW RECENT N;
@@ -201,7 +201,7 @@ TableNameList ::=
 
 ## 例 {#examples}
 
-現在実行中のDDLジョブキュー内の、完了した最新の10件のDDLジョブを表示するには、以下のコマンドを実行します。1 `NUM`指定しない場合は、デフォルトで完了した最新の10件のDDLジョブのみが表示されます。
+現在実行中のDDLジョブキュー内の最新の完了済みDDLジョブ10件を表示するには、以下のコマンドを実行します。1 `NUM`指定しない場合は、デフォルトで最新の完了済みDDLジョブ10件のみが表示されます。
 
 ```sql
 ADMIN SHOW DDL JOBS;
@@ -240,7 +240,7 @@ ADMIN SHOW DDL JOBS 5;
     | 40     | test    | t1         | drop column   | none                 | 32        | 37       | 0         | 2019-01-10 12:33:08.212 +0800 CST | 2019-01-10 12:33:09.78 +0800 CST  | synced        |
     +--------+---------+------------+---------------------+----------------+-----------+----------+-----------+-----------------------------------+-----------------------------------+---------------+
 
-テーブルの特定の列の詳細を表示するには、次のコマンドを実行します。出力は[テーブルの次の行IDを表示](/sql-statements/sql-statement-show-table-next-rowid.md)と同じです。
+テーブルの特定の列の詳細を表示するには、次のコマンドを実行します。出力は[テーブルNEXT_ROW_IDを表示](/sql-statements/sql-statement-show-table-next-rowid.md)と同じです。
 
 ```sql
 ADMIN SHOW t NEXT_ROW_ID;
@@ -275,14 +275,14 @@ ADMIN SHOW DDL JOBS 5 WHERE state != 'synced' AND db_name = 'test';
 -   `JOB_TYPE` : DDL 操作のタイプ。
 -   `SCHEMA_STATE` : スキーマの現在の状態。2 が`JOB_TYPE` `add index`場合はインデックスの状態、 `JOB_TYPE`が`add column`場合は列の状態、 `JOB_TYPE`が`create table`の場合はテーブルの状態です。一般的な状態には以下が含まれます。
     -   `none` ：存在しないことを示します。2または`drop` `create`操作が失敗してロールバックされた場合、通常は`none`状態になります。
-    -   `delete only` ：これら`write reorganization` 4つの状態は中間状態です。中間状態からの変換`write only`非常に高速であるため、 `write reorganization`の状態は通常の操作では確認できません。8番目の状態は`add index` `delete reorganization`でのみ確認でき、これはインデックスデータが追加されていることを意味します。
+    -   `delete only` ：これら`write reorganization` 4つの状態は中間状態です。中間状態からの変換`write only`非常に速いため、これらの状態`delete reorganization`通常の操作では見えません。8 `write reorganization`の状態は`add index`操作でのみ確認できます。これは、インデックスデータが追加されていることを意味します。
     -   `public` ：存在し使用可能であることを示します。2や`add index/column`などの操作が完了すると、通常は`public`状態になり、作成されたテーブル/列/インデックスが正常に読み書き可能になったこと`create table`意味します。
 -   `SCHEMA_ID` : DDL 操作が実行されるデータベースの ID。
 -   `TABLE_ID` : DDL 操作が実行されるテーブルの ID。
 -   `ROW_COUNT` : `add index`操作を実行するときに追加されたデータ行の数。
 -   `START_TIME` : DDL 操作の開始時刻。
 -   `END_TIME` : DDL 操作の終了時刻。
--   `STATE` : DDL操作の状態。一般的な状態は次のとおりです。
+-   `STATE` : DDL操作の状態。一般的な状態には以下が含まれます。
     -   `none` : 操作タスクはDDLジョブキューに入れられましたが、前のタスクの完了を待機しているため、まだ実行されていません。別の理由としては、ドロップ操作の実行後に状態`none`になりますが、すぐに状態`synced`に更新され、すべてのTiDBインスタンスがこの状態に同期されたことが考えられます。
     -   `running` : 操作が実行中であることを示します。
     -   `synced` : 操作が正常に実行され、すべての TiDB インスタンスがこの状態に同期されていることを示します。

@@ -5,12 +5,12 @@ summary: このドキュメントでは、 TiDB Cloudから Apache Kafka へデ�
 
 # Apache Kafka にシンクする {#sink-to-apache-kafka}
 
-このドキュメントでは、 TiDB Cloudから Apache Kafka にデータをストリーミングするための変更フィードを作成する方法について説明します。
+このドキュメントでは、TiDB Cloudから Apache Kafka にデータをストリーミングするための変更フィードを作成する方法について説明します。
 
 > **注記：**
 >
 > -   changefeed 機能を使用するには、 TiDB Cloud Dedicated クラスターのバージョンが v6.1.3 以降であることを確認してください。
-> -   クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、changefeed 機能は使用できません。
+> -   クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、changefeed 機能は使用できません。
 
 ## 制限 {#restrictions}
 
@@ -52,23 +52,9 @@ Private Connect は、クラウド プロバイダーの**Private Link**また�
 
 TiDB Cloudは現在、セルフホスト型KafkaのPrivate Connectのみをサポートしています。MSK、Confluent Kafka、その他のKafka SaaSサービスとの直接統合はサポートしていません。これらのKafka SaaSサービスにPrivate Connect経由で接続するには、 [kafkaプロキシ](https://github.com/grepplabs/kafka-proxy)を仲介としてデプロイし、Kafkaサービスをセルフホスト型Kafkaとして公開します。詳細な例については、 [Google Cloud で Kafka-proxy を使用してセルフホスト型 Kafka プライベート サービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy)参照してください。この設定は、すべてのKafka SaaSサービスで共通です。
 
--   Apache Kafka サービスが AWS でホストされている場合は、手順[AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)に従ってネットワーク接続が適切に設定されていることを確認してください。セットアップ後、 TiDB Cloudコンソールで以下の情報を入力して、変更フィードを作成します。
-
-    -   Kafka アドバタイズドリスナーパターンの ID
-    -   エンドポイントサービス名
-    -   ブートストラップポート
-
--   Apache Kafka サービスが Google Cloud でホストされている場合は、手順[Google Cloud でセルフホスト型 Kafka プライベート サービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)に従ってネットワーク接続が適切に構成されていることを確認してください。セットアップ後、 TiDB Cloudコンソールで以下の情報を入力して、変更フィードを作成します。
-
-    -   Kafka アドバタイズドリスナーパターンの ID
-    -   サービスアタッチメント
-    -   ブートストラップポート
-
--   Apache Kafka サービスが Azure でホストされている場合は、手順[Azure でセルフホスト型 Kafka プライベート リンク サービスを設定する](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)に従ってネットワーク接続が適切に構成されていることを確認してください。セットアップ後、 TiDB Cloudコンソールで以下の情報を入力して、変更フィードを作成します。
-
-    -   Kafka アドバタイズドリスナーパターンの ID
-    -   プライベートリンクサービスの別名
-    -   ブートストラップポート
+-   Apache Kafka サービスが AWS でホストされている場合は、 [AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)に従ってネットワーク接続を構成し、**ブートストラップ ポート**情報を取得してから、 [Changefeeds のプライベート エンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)に従ってプライベート エンドポイントを作成します。
+-   Apache Kafka サービスが Google Cloud でホストされている場合は、 [Google Cloud でセルフホスト型 Kafka プライベート サービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)に従ってネットワーク接続を構成し、**ブートストラップ ポート**情報を取得してから、 [Changefeeds のプライベート エンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)に従ってプライベート エンドポイントを作成します。
+-   Apache Kafka サービスが Azure でホストされている場合は、 [Azure でセルフホスト型 Kafka プライベート リンク サービスを設定する](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)に従ってネットワーク接続を構成し、**ブートストラップ ポート**情報を取得してから、 [Changefeeds のプライベート エンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)に従ってプライベート エンドポイントを作成します。
 
 </div>
 <div label="VPC Peering">
@@ -144,95 +130,55 @@ TiDB Cloud変更フィードが Apache Kafka にデータをストリーミン�
 <div label="Private Link (AWS)">
 
 1.  **[接続方法]**で**[プライベート リンク]**を選択します。
-
-2.  TiDB Cloudの[AWS プリンシパル](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts)エンドポイントサービスのエンドポイント作成を承認します。AWS プリンシパルは、Web ページのヒントに記載されています。
-
-3.  **ネットワーク**セクションで[AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)選択するときに、必ず**Kafka デプロイメントの****AZ の数**と AZ ID を選択し、 **Kafka アドバタイズ リスナー パターン**に同じ一意の ID を入力してください。
-
-4.  [AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)で設定した**エンドポイント サービス名**を入力します。
-
-5.  **ブートストラップポート**を入力してください。1つのAZにつき少なくとも1つのポートを設定することをお勧めします。複数のポートを指定する場合は、カンマ`,`で区切ることができます。
-
-6.  Kafka 認証構成に応じて**認証**オプションを選択します。
+2.  **「プライベートエンドポイント」**で、セクション[ネットワーク](#network)で作成したプライベートエンドポイントを選択します。プライベートエンドポイントのAZがKafkaデプロイメントのAZと一致していることを確認してください。
+3.  セクション[ネットワーク](#network)で取得した**ブートストラップポート**を入力してください。1つのAZにつき少なくとも1つのポートを設定することをお勧めします。複数のポートを指定する場合は、カンマ`,`で区切ることができます。
+4.  Kafka 認証構成に応じて**認証**オプションを選択します。
 
     -   Kafka で認証が不要な場合は、デフォルトのオプション**[Disable] の**ままにしておきます。
     -   Kafka に認証が必要な場合は、対応する認証タイプを選択し、認証用の Kafka アカウントの**ユーザー名**と**パスワード**を入力します。
-
-7.  **Kafka のバージョン**を選択してください。どのバージョンを使用すればよいか分からない場合は、 **Kafka v2**を使用してください。
-
-8.  この変更フィード内のデータの**圧縮**タイプを選択します。
-
-9.  Kafka で TLS 暗号化が有効になっていて、Kafka 接続に TLS 暗号化を使用する場合は、 **TLS 暗号化**オプションを有効にします。
-
-10. **「次へ」**をクリックしてネットワーク接続をテストします。テストが成功すると、次のページに進みます。
-
-11. TiDB Cloud は**Private Link**のエンドポイントを作成します。これには数分かかる場合があります。
-
-12. エンドポイントが作成されたら、クラウド プロバイダー コンソールにログインし、接続要求を承認します。
-
-13. [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、接続リクエストを承認したことを確認してください。TiDB TiDB Cloudは接続をテストし、テストが成功すると次のページに進みます。
+5.  **Kafka のバージョン**を選択してください。どのバージョンを使用すればよいか分からない場合は、 **Kafka v2**を使用してください。
+6.  この変更フィード内のデータの**圧縮**タイプを選択します。
+7.  Kafka で TLS 暗号化が有効になっていて、Kafka 接続に TLS 暗号化を使用する場合は、 **TLS 暗号化**オプションを有効にします。
+8.  **「次へ」**をクリックしてネットワーク接続をテストします。テストが成功すると、次のページに進みます。
+9.  TiDB Cloud は**Private Link**のエンドポイントを作成します。これには数分かかる場合があります。
+10. エンドポイントが作成されたら、クラウド プロバイダー コンソールにログインし、接続要求を承認します。
+11. [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、接続リクエストを承認したことを確認してください。TiDB TiDB Cloudは接続をテストし、テストが成功すると次のページに進みます。
 
 </div>
 <div label="Private Service Connect (Google Cloud)">
 
 1.  **[接続方法]**で、 **[プライベート サービス接続]**を選択します。
-
-2.  **ネットワーク**セクションで[Google Cloud でセルフホスト型 Kafka プライベート サービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)入力するときに、 **Kafka アドバタイズ リスナー パターン**に同じ一意の ID を入力するようにしてください。
-
-3.  [Google Cloud でセルフホスト型 Kafka プライベート サービス接続をセットアップする](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)で設定した**サービスアタッチメント**を入力します。
-
-4.  **ブートストラップポート**を入力してください。複数のポートを指定することをお勧めします。複数のポートを指定する場合は、カンマ`,`で区切ることができます。
-
-5.  Kafka 認証構成に応じて**認証**オプションを選択します。
+2.  **[プライベート エンドポイント]**で、セクション[ネットワーク](#network)で作成したプライベート エンドポイントを選択します。
+3.  セクション[ネットワーク](#network)で取得した**ブートストラップポート**を入力してください。複数のポートを指定することをお勧めします。複数のポートを指定する場合は、カンマ`,`で区切ることができます。
+4.  Kafka 認証構成に応じて**認証**オプションを選択します。
 
     -   Kafka で認証が不要な場合は、デフォルトのオプション**[Disable] の**ままにしておきます。
     -   Kafka に認証が必要な場合は、対応する認証タイプを選択し、認証用の Kafka アカウントの**ユーザー名**と**パスワード**を入力します。
-
-6.  **Kafka のバージョン**を選択してください。どのバージョンを使用すればよいか分からない場合は、 **Kafka v2**を使用してください。
-
-7.  この変更フィード内のデータの**圧縮**タイプを選択します。
-
-8.  Kafka で TLS 暗号化が有効になっていて、Kafka 接続に TLS 暗号化を使用する場合は、 **TLS 暗号化**オプションを有効にします。
-
-9.  **「次へ」**をクリックしてネットワーク接続をテストします。テストが成功すると、次のページに進みます。
-
-10. TiDB Cloud は**Private Service Connect**のエンドポイントを作成します。これには数分かかる場合があります。
-
-11. エンドポイントが作成されたら、クラウド プロバイダー コンソールにログインし、接続要求を承認します。
-
-12. [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、接続リクエストを承認したことを確認してください。TiDB TiDB Cloudは接続をテストし、テストが成功すると次のページに進みます。
+5.  **Kafka のバージョン**を選択してください。どのバージョンを使用すればよいか分からない場合は、 **Kafka v2**を使用してください。
+6.  この変更フィード内のデータの**圧縮**タイプを選択します。
+7.  Kafka で TLS 暗号化が有効になっていて、Kafka 接続に TLS 暗号化を使用する場合は、 **TLS 暗号化**オプションを有効にします。
+8.  **「次へ」**をクリックしてネットワーク接続をテストします。テストが成功すると、次のページに進みます。
+9.  TiDB Cloud は**Private Service Connect**のエンドポイントを作成します。これには数分かかる場合があります。
+10. エンドポイントが作成されたら、クラウド プロバイダー コンソールにログインし、接続要求を承認します。
+11. [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、接続リクエストを承認したことを確認してください。TiDB TiDB Cloudは接続をテストし、テストが成功すると次のページに進みます。
 
 </div>
 <div label="Private Link (Azure)">
 
 1.  **[接続方法]**で**[プライベート リンク]**を選択します。
-
-2.  変更フィードを作成する前に、 TiDB Cloudの Azure サブスクリプションを承認するか、エイリアスを持つすべてのユーザーが Private Link サービスにアクセスできるようにしてください。Azure サブスクリプションは、Web ページの「**続行する前に確認する」ヒント**に記載されています。Private Link サービスの可視性に関する詳細については、Azure ドキュメントの[制御サービスの公開](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview#control-service-exposure)参照してください。
-
-3.  **ネットワーク**セクションで[Azure でセルフホスト型 Kafka プライベート リンク サービスを設定する](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)入力するときは、必ず**Kafka アドバタイズ リスナー パターン**に同じ一意の ID を入力してください。
-
-4.  [Azure でセルフホスト型 Kafka プライベート リンク サービスを設定する](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)で設定した**プライベートリンクサービスのエイリアス**を入力します。
-
-5.  **ブートストラップポート**を入力してください。1つのAZにつき少なくとも1つのポートを設定することをお勧めします。複数のポートを指定する場合は、カンマ`,`で区切ることができます。
-
-6.  Kafka 認証構成に応じて**認証**オプションを選択します。
+2.  **[プライベート エンドポイント]**で、セクション[ネットワーク](#network)で作成したプライベート エンドポイントを選択します。
+3.  セクション[ネットワーク](#network)で取得した**ブートストラップポート**を入力してください。1つのAZにつき少なくとも1つのポートを設定することをお勧めします。複数のポートを指定する場合は、カンマ`,`で区切ることができます。
+4.  Kafka 認証構成に応じて**認証**オプションを選択します。
 
     -   Kafka で認証が不要な場合は、デフォルトのオプション**[Disable] の**ままにしておきます。
     -   Kafka に認証が必要な場合は、対応する認証タイプを選択し、認証用の Kafka アカウントの**ユーザー名**と**パスワード**を入力します。
-
-7.  **Kafka のバージョン**を選択してください。どのバージョンを使用すればよいか分からない場合は、 **Kafka v2**を使用してください。
-
-8.  この変更フィード内のデータの**圧縮**タイプを選択します。
-
-9.  Kafka で TLS 暗号化が有効になっていて、Kafka 接続に TLS 暗号化を使用する場合は、 **TLS 暗号化**オプションを有効にします。
-
-10. **「次へ」**をクリックしてネットワーク接続をテストします。テストが成功すると、次のページに進みます。
-
-11. TiDB Cloud は**Private Link**のエンドポイントを作成します。これには数分かかる場合があります。
-
-12. エンドポイントが作成されたら、 [Azureポータル](https://portal.azure.com/)にログインし、接続要求を承認します。
-
-13. [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、接続リクエストを承認したことを確認してください。TiDB TiDB Cloudは接続をテストし、テストが成功すると次のページに進みます。
+5.  **Kafka のバージョン**を選択してください。どのバージョンを使用すればよいか分からない場合は、 **Kafka v2**を使用してください。
+6.  この変更フィード内のデータの**圧縮**タイプを選択します。
+7.  Kafka で TLS 暗号化が有効になっていて、Kafka 接続に TLS 暗号化を使用する場合は、 **TLS 暗号化**オプションを有効にします。
+8.  **「次へ」**をクリックしてネットワーク接続をテストします。テストが成功すると、次のページに進みます。
+9.  TiDB Cloud は**Private Link**のエンドポイントを作成します。これには数分かかる場合があります。
+10. エンドポイントが作成されたら、 [Azureポータル](https://portal.azure.com/)にログインし、接続要求を承認します。
+11. [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、接続リクエストを承認したことを確認してください。TiDB TiDB Cloudは接続をテストし、テストが成功すると次のページに進みます。
 
 </div>
 </SimpleTab>

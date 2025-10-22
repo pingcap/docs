@@ -1,6 +1,6 @@
 ---
 title: CLUSTER_INFO
-summary: CLUSTER_INFO` クラスター トポロジ情報テーブルについて説明します。
+summary: CLUSTER_INFO` クラスター トポロジ情報テーブルについて学習します。
 ---
 
 # クラスター情報 {#cluster-info}
@@ -9,7 +9,7 @@ summary: CLUSTER_INFO` クラスター トポロジ情報テーブルについ�
 
 > **注記：**
 >
-> このテーブルはクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
+> このテーブルはクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
 
 ```sql
 USE information_schema;
@@ -36,7 +36,7 @@ desc cluster_info;
 
 -   `TYPE` : インスタンスタイプ。オプションの値は`tidb` 、 `pd` 、 `tikv`です。
 -   `INSTANCE` : インスタンス アドレス`IP:PORT`の形式の文字列です。
--   `STATUS_ADDRESS` : HTTP APIのサービスアドレス。tikv-ctl、pd-ctl、tidb-ctlの一部のコマンドはこのAPIとこのアドレスを使用する場合があります。また、このアドレスを使用して、クラスタの詳細情報を取得することもできます。詳細は[TiDB HTTP API ドキュメント](https://github.com/pingcap/tidb/blob/release-8.5/docs/tidb_http_api.md)を参照してください。
+-   `STATUS_ADDRESS` : HTTP APIのサービスアドレス。tikv-ctl、pd-ctl、tidb-ctlの一部のコマンドはこのAPIとこのアドレスを使用する場合があります。また、このアドレスを使用して、クラスターの詳細情報を取得することもできます。詳細は[TiDB HTTP API ドキュメント](https://github.com/pingcap/tidb/blob/release-8.5/docs/tidb_http_api.md)を参照してください。
 -   `VERSION` : 対応するインスタンスのセマンティックバージョン番号。MySQLのバージョン番号との互換性を保つため、TiDBのバージョンは`${mysql-version}-${tidb-version}`の形式で表示されます。
 -   `GIT_HASH` : インスタンス バージョンをコンパイルするときの Git コミット ハッシュ。2 つのインスタンスが完全に一貫したバージョンであるかどうかを識別するために使用されます。
 -   `START_TIME` : 対応するインスタンスの開始時刻。

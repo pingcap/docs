@@ -13,7 +13,7 @@ TiDB Cloudでは常時稼働していないTiDB Cloud Dedicated クラスター�
 
 > **注記：**
 >
-> [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)または[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスターを一時停止することはできません。
+> クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)または[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)を一時停止することはできません。
 
 ## 制限事項 {#limitations}
 
@@ -27,7 +27,7 @@ TiDB Cloudでは常時稼働していないTiDB Cloud Dedicated クラスター�
 一時停止の期間と動作は、組織の作成日によって異なります。
 
 -   2024 年 11 月 12 日以降に作成された組織は、標準の一時停止動作に従い、最大一時停止期間は 7 日間となります。
--   2024年11月12日以前に作成された組織は、互換性のある一時停止動作に従い、より長い一時停止期間が認められます。これらの組織は、段階的に標準の7日間の制限に移行します。
+-   2024年11月12日以前に作成された組織は、互換性のある一時停止動作に従い、より長い一時停止期間が許可されます。これらの組織は、段階的に標準の7日間の制限に移行します。
 
 <SimpleTab>
 <div label="Standard pause behavior">
@@ -47,7 +47,7 @@ TiDB Cloudでは常時稼働していないTiDB Cloud Dedicated クラスター�
 
 -   TiDB Cloud はクラスターの[自動バックアップ](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)停止します。
 
--   一時停止の最大期間は7日間です。7日以内に手動でクラスターを再開しない場合は、 TiDB Cloudによって自動的に再開されます。
+-   一時停止の最大期間は7日間です。7日以内にクラスターを手動で再開しない場合、 TiDB Cloudによって自動的に再開されます。
 
 -   自動再開のスケジュールは、クラスターの概要ページから確認できます。TiDB TiDB Cloud は、クラスターが自動的に再開される 24 時間前に、組織のオーナーとプロジェクトのオーナーに通知メールを送信します。
 
@@ -56,7 +56,7 @@ TiDB Cloudでは常時稼働していないTiDB Cloud Dedicated クラスター�
 
 > **注記：**
 >
-> 組織が2024年11月12日より前に作成された場合、クラスターは引き続き互換性のある一時停止動作に従います。TiDB TiDB Cloudは、新しい標準の一時停止動作に移行する前に通知します。
+> 組織が2024年11月12日より前に作成された場合、クラスターは引き続き互換性のある一時停止動作に従います。新しい標準の一時停止動作に移行する前に、 TiDB Cloud通知が届きます。
 
 クラスターが一時停止されている場合は、次の点に注意してください。
 
@@ -110,7 +110,7 @@ TiDB Cloud APIを使用してクラスターを一時停止することもでき
 
 1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-2.  再開したいクラスターで、 **「再開」**をクリックします。「**クラスターの再開」**ダイアログが表示されます。
+2.  再開するクラスターで、 **「再開」**をクリックします。「**クラスターの再開」**ダイアログが表示されます。
 
     > **注記：**
     >
@@ -120,4 +120,4 @@ TiDB Cloud APIを使用してクラスターを一時停止することもでき
 
 クラスターのサイズによっては、再開に数分かかる場合があります。再開後、クラスターのステータスは**「再開中」**から**「使用可能」**に変わります。
 
-TiDB Cloud APIを使用してクラスタを再開することもできます。現在、 TiDB Cloud APIはまだベータ版です。詳細については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)ご覧ください。
+TiDB Cloud APIを使用してクラスターを再開することもできます。現在、 TiDB Cloud APIはまだベータ版です。詳細については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)ご覧ください。

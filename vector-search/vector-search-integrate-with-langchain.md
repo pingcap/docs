@@ -3,7 +3,7 @@ title: Integrate Vector Search with LangChain
 summary: TiDB Vector Search を LangChain と統合する方法を学びます。
 ---
 
-# ベクトル検索をLangChainと統合する {#integrate-vector-search-with-langchain}
+# LangChainとベクトル検索を統合する {#integrate-vector-search-with-langchain}
 
 このチュートリアルでは、TiDB の[ベクトル検索](/vector-search/vector-search-overview.md)機能を[ランチェーン](https://python.langchain.com/)と統合する方法を説明します。
 
@@ -19,13 +19,13 @@ summary: TiDB Vector Search を LangChain と統合する方法を学びます�
 
 > **注記：**
 >
-> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを見つけた場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
+> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
 </CustomContent>
 
 > **注記：**
 >
-> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
+> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 > **ヒント**
 >
@@ -36,7 +36,7 @@ summary: TiDB Vector Search を LangChain と統合する方法を学びます�
 このチュートリアルを完了するには、次のものが必要です。
 
 -   [Python 3.8以上](https://www.python.org/downloads/)個インストールされました。
--   [Jupyterノートブック](https://jupyter.org/install)個インストールされました。
+-   [ジュピターノートブック](https://jupyter.org/install)個インストールされました。
 -   [ギット](https://git-scm.com/downloads)個インストールされました。
 -   TiDB クラスター。
 
@@ -96,7 +96,7 @@ from langchain_text_splitters import CharacterTextSplitter
 <SimpleTab>
 <div label="TiDB Cloud Starter or Essential">
 
-TiDB Cloud Starter クラスターの場合、次の手順に従ってクラスター接続文字列を取得し、環境変数を構成します。
+TiDB Cloud Starter クラスターの場合、クラスター接続文字列を取得し、環境変数を構成するには、次の手順を実行します。
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -192,9 +192,9 @@ text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
 docs = text_splitter.split_documents(documents)
 ```
 
-### ステップ5. ドキュメントベクトルを埋め込んで保存する {#step-5-embed-and-store-document-vectors}
+### ステップ5. ドキュメントベクターを埋め込んで保存する {#step-5-embed-and-store-document-vectors}
 
-TiDBベクトルストアは、ベクトル間の類似性を測定するために、コサイン距離( `consine` )とユークリッド距離( `l2` )の両方をサポートしています。デフォルトの戦略はコサイン距離です。
+TiDBベクトルストアは、ベクトル間の類似性を測定するために、コサイン距離（ `consine` ）とユークリッド距離（ `l2` ）の両方をサポートしています。デフォルトの戦略はコサイン距離です。
 
 次のコードは、ベクトル検索に最適化された`embedded_documents`名前のテーブルを TiDB に作成します。
 
@@ -323,7 +323,7 @@ We’re securing commitments and supporting partners in South and Central Americ
 
 ### レトリーバーとして使用する {#use-as-a-retriever}
 
-Langchainにおいて、 [レトリーバー](https://python.langchain.com/v0.2/docs/concepts/#retrievers)は非構造化クエリへの応答としてドキュメントを取得するインターフェースであり、ベクターストアよりも多くの機能を提供します。以下のコードは、TiDBベクターストアを取得子として使用する方法を示しています。
+Langchainにおいて、 [レトリーバー](https://python.langchain.com/v0.2/docs/concepts/#retrievers)は非構造化クエリへの応答としてドキュメントを取得するインターフェースであり、ベクターストアよりも多くの機能を提供します。次のコードは、TiDBベクターストアを取得子として使用する方法を示しています。
 
 ```python
 retriever = vector_store.as_retriever(
@@ -366,7 +366,7 @@ vector_store.drop_vectorstore()
 TiDBベクターストア内の各ドキュメントは、JSONオブジェクト内のキーと値のペアとして構造化されたメタデータとペアにすることができます。キーは常に文字列で、値は以下のいずれかの型になります。
 
 -   弦
--   数値: 整数または浮動小数点数
+-   数値: 整数または浮動小数点
 -   ブール値: `true`または`false`
 
 たとえば、有効なメタデータ ペイロードは次のとおりです。
@@ -378,12 +378,12 @@ TiDBベクターストア内の各ドキュメントは、JSONオブジェクト
 }
 ```
 
-### メタデータフィルターの構文 {#metadata-filter-syntax}
+### メタデータフィルタ構文 {#metadata-filter-syntax}
 
 利用可能なフィルターは次のとおりです。
 
 -   `$or` : 指定された条件のいずれかに一致するベクトルを選択します。
--   `$and` : 指定されたすべての条件に一致するベクトルを選択します。
+-   `$and` : 指定された条件すべてに一致するベクトルを選択します。
 -   `$eq` : 指定された値と等しい。
 -   `$ne` : 指定された値と等しくありません。
 -   `$gt` : 指定された値より大きい。
@@ -640,7 +640,7 @@ airport_details.get("result")
 
 ### データをクリーンアップする {#clean-up-data}
 
-最後に、作成されたテーブルを削除してリソースをクリーンアップします。
+最後に、作成したテーブルを削除してリソースをクリーンアップします。
 
 ```python
 vector_store.tidb_vector_client.execute("DROP TABLE airplan_routes")

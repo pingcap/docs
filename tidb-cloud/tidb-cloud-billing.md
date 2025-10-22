@@ -11,9 +11,9 @@ TiDB Cloud は消費したリソースに応じて料金が発生します。
 
 ### TiDB Cloud Dedicatedの価格 {#pricing-for-tidb-cloud-dedicated}
 
-[TiDB Cloud専用プランの料金詳細](https://www.pingcap.com/tidb-dedicated-pricing-details/)参照。
+[TiDB Cloud専用料金の詳細](https://www.pingcap.com/tidb-dedicated-pricing-details/)参照。
 
-### TiDB Cloud Starter (旧称 Serverless) の価格 {#pricing-for-starter} {#pricing-for-starter}
+### TiDB Cloud Starter の価格 {#pricing-for-starter} {#pricing-for-starter}
 
 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)参照。
 

@@ -21,14 +21,20 @@ summary: TiCDC で使用される CLI と構成パラメータについて学習
 -   `log-level` : TiCDCプロセス実行時のログレベル。デフォルト値は`"info"`です。
 -   `ca` : TLS 接続用の PEM 形式の CA 証明書ファイルのパスを指定します (オプション)。
 -   `cert` : TLS 接続用の PEM 形式の証明書ファイルのパスを指定します (オプション)。
--   `cert-allowed-cn` : TLS 接続用の PEM 形式の共通名のパスを指定します (オプション)。
+-   `cert-allowed-cn` : TLS 接続の PEM 形式の共通名のパスを指定します (オプション)。
 -   `key` : TLS 接続用の PEM 形式の秘密鍵ファイルのパスを指定します (オプション)。
--   `tz` : TiCDCサービスが使用するタイムゾーン。TiCDCは、 `TIMESTAMP`などの時間データ型を内部的に変換するとき、またはデータを下流に複製するときにこのタイムゾーンを使用します。デフォルトは、プロセスが実行されるローカルタイムゾーンです。4（ `sink-uri` ）と`tz` `time-zone`指定した場合、内部TiCDCプロセスは`tz`で指定されたタイムゾーンを使用し、シンクは`time-zone`で指定されたタイムゾーンを使用して下流にデータを複製します。14で指定されたタイムゾーン`sink-uri` `tz` `time-zone`指定されたタイムゾーンと同じであることを確認してください。
+-   `tz` : TiCDCサービスが使用するタイムゾーン。TiCDCは、 `TIMESTAMP`などの時間データ型を内部的に変換する場合、またはデータをダウンストリームに複製する場合にこのタイムゾーンを使用します。デフォルトは、プロセスが実行されるローカルタイムゾーンです。4（ `sink-uri` ）と`tz` `time-zone`指定すると、TiCDC内部プロセスは`tz`で指定されたタイムゾーンを使用し、シンクは`time-zone`で指定されたタイムゾーンを使用してダウンストリームにデータを複製します。14で指定されたタイムゾーンが`tz` （ `sink-uri` ）で指定されたタイムゾーンと同じであること`time-zone`確認してください。
 -   `cluster-id` : (オプション) TiCDC クラスターの ID。デフォルト値は`default`です。 `cluster-id` TiCDC クラスターの一意の識別子です。同じ`cluster-id`を持つ TiCDC ノードは同じクラスターに属します。 `cluster-id`の長さは最大 128 文字です。 `cluster-id` `^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$`のパターンに従う必要があり、 `owner` 、 `capture` 、 `task` 、 `changefeed` 、 `job` 、 `meta`のいずれかにすることはできません。
 
 ## <code>cdc server</code>構成ファイルのパラメータ {#code-cdc-server-code-configuration-file-parameters}
 
 以下は、コマンド`cdc server`の`config`オプションで指定される設定ファイルについて説明します。デフォルトの設定ファイルは[`pkg/cmd/util/ticdc.toml`](https://github.com/pingcap/tiflow/blob/master/pkg/cmd/util/ticdc.toml)にあります。
+
+### <code>newarch</code> <span class="version-mark">v8.5.4-release.1 の新機能</span> {#code-newarch-code-span-class-version-mark-new-in-v8-5-4-release-1-span}
+
+-   [TiCDCの新しいアーキテクチャ](/ticdc/ticdc-architecture.md)有効にするかどうかを制御します。
+-   デフォルト値: `false` 、 [TiCDC クラシックアーキテクチャ](/ticdc/ticdc-classic-architecture.md)が使用されることを示します。
+-   `true`に設定すると、TiCDC の新しいアーキテクチャが有効になります。
 
 <!-- The configuration method of the following parameters is the same as that of CLI parameters, but the CLI parameters have higher priorities. -->
 
@@ -109,7 +115,7 @@ summary: TiCDC で使用される CLI と構成パラメータについて学習
 
 ### <code>owner-flush-interval</code> {#code-owner-flush-interval-code}
 
--   TiCDCクラスタのオーナーモジュールがレプリケーションの進行状況をプッシュしようとする間隔を指定します。このパラメータはオプションで、デフォルト値は`50000000`ナノ秒（つまり50ミリ秒）です。
+-   TiCDCクラスタ内のオーナーモジュールがレプリケーションの進行状況をプッシュしようとする間隔を指定します。このパラメータはオプションで、デフォルト値は`50000000`ナノ秒（つまり50ミリ秒）です。
 -   このパラメータは、数値のみを指定する（たとえば、 `40000000`に設定すると 40000000 ナノ秒、つまり 40 ミリ秒を表します）、または数値と単位の両方を指定する（たとえば、直接`40ms`に設定する）という 2 つの方法で設定できます。
 -   デフォルト値: `50000000` 、つまり50ミリ秒
 
@@ -144,7 +150,7 @@ summary: TiCDC で使用される CLI と構成パラメータについて学習
 -   保持するログファイルの数を指定します。このパラメータはオプションです。
 -   デフォルト値: `0` 、すべてのログファイルを保持することを示します
 
-### 仕分け機 {#sorter}
+### ソーター {#sorter}
 
 #### <code>cache-size-in-mb</code> {#code-cache-size-in-mb-code}
 
@@ -154,7 +160,7 @@ summary: TiCDC で使用される CLI と構成パラメータについて学習
 
 #### <code>sorter-dir</code> {#code-sorter-dir-code}
 
--   ソートファイルが保存されるディレクトリを、データディレクトリ（ `data-dir` ）を基準として指定します。このパラメータはオプションです。
+-   ソートファイルを保存するディレクトリを、データディレクトリ（ `data-dir` ）を基準として指定します。このパラメータはオプションです。
 -   デフォルト値: `"/tmp/sorter"`
 
 ### kvクライアント {#kv-client}
@@ -175,4 +181,4 @@ summary: TiCDC で使用される CLI と構成パラメータについて学習
 -   このパラメータは次の 2 つの方法で設定できます。
     -   数字のみを指定します。たとえば、 `50000000` 50000000ナノ秒（50ミリ秒）を表します。
     -   数値と単位の両方を指定します（例： `50ms`
--   Default value: `60000000000` (1 minute)
+-   デフォルト値: `60000000000` (1分)

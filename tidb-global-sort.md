@@ -7,7 +7,7 @@ summary: TiDB グローバル ソートの使用例、制限、使用方法、�
 
 <!-- markdownlint-disable MD046 -->
 
-# TiDB グローバルソート {#tidb-global-sort}
+# TiDBグローバルソート {#tidb-global-sort}
 
 > **注記：**
 >
@@ -16,17 +16,17 @@ summary: TiDB グローバル ソートの使用例、制限、使用方法、�
 
 > **注記：**
 >
-> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
+> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 ## 概要 {#overview}
 
-TiDBのグローバルソート機能は、データのインポートとDDL（データ定義言語）操作の安定性と効率性を向上させます[TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)の汎用演算子として機能し、クラウド上でグローバルソートサービスを提供します。
+TiDBのグローバルソート機能は、データインポートとDDL（データ定義言語）操作の安定性と効率性を向上させます[TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)の汎用演算子として機能し、クラウド上でグローバルソートサービスを提供します。
 
 現在、グローバルソート機能は、クラウドstorageとして Amazon S3 の使用をサポートしています。
 
 ## ユースケース {#use-cases}
 
-グローバルソート機能は、 `IMPORT INTO`と`CREATE INDEX`の安定性と効率性を向上させます。タスクによって処理されるデータをグローバルにソートすることで、TiKVへのデータ書き込みの安定性、制御性、スケーラビリティが向上します。これにより、データインポートおよびDDLタスクのユーザーエクスペリエンスが向上し、より高品質なサービスが提供されます。
+グローバルソート機能は、 `IMPORT INTO`と`CREATE INDEX`の安定性と効率性を向上させます。タスクによって処理されるデータをグローバルにソートすることで、TiKVへのデータ書き込みの安定性、制御性、スケーラビリティが向上します。これにより、データインポートやDDLタスクのユーザーエクスペリエンスが向上し、より高品質なサービスが提供されます。
 
 グローバル ソート機能は、統合された DXF 内でタスクを実行し、グローバル スケールでのデータの効率的かつ並列的なソートを保証します。
 
@@ -38,7 +38,7 @@ TiDBのグローバルソート機能は、データのインポートとDDL（�
 
 グローバルソートを有効にするには、次の手順に従います。
 
-1.  DXFを有効にするには、 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)を`ON`に設定します。v8.1.0以降では、この変数はデフォルトで有効になっています。v8.1.0以降のバージョンで新しく作成されたクラスターでは、この手順をスキップできます。
+1.  DXFを有効にするには、値を[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)から`ON`に設定します。v8.1.0以降では、この変数はデフォルトで有効になっています。v8.1.0以降のバージョンで新しく作成されたクラスターでは、この手順をスキップできます。
 
     ```sql
     SET GLOBAL tidb_enable_dist_task = ON;
@@ -46,7 +46,7 @@ TiDBのグローバルソート機能は、データのインポートとDDL（�
 
 <CustomContent platform="tidb">
 
-2.  [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)正しいクラウドstorageパスに設定してください。3 [例](/br/backup-and-restore-storages.md)参照してください。
+2.  [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)正しいクラウドstorageパスに設定します。3 [例](/br/backup-and-restore-storages.md)参照してください。
 
     ```sql
     SET GLOBAL tidb_cloud_storage_uri = 's3://my-bucket/test-data?role-arn=arn:aws:iam::888888888888:role/my-role'
@@ -55,7 +55,7 @@ TiDBのグローバルソート機能は、データのインポートとDDL（�
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-2.  [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)正しいクラウドstorageパスに設定してください。3 [例](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)参照してください。
+2.  [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)正しいクラウドstorageパスに設定します。3 [例](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)参照してください。
 
     ```sql
     SET GLOBAL tidb_cloud_storage_uri = 's3://my-bucket/test-data?role-arn=arn:aws:iam::888888888888:role/my-role'
@@ -65,7 +65,7 @@ TiDBのグローバルソート機能は、データのインポートとDDL（�
 
 > **注記：**
 >
-> [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)場合、 [`CLOUD_STORAGE_URI`](/sql-statements/sql-statement-import-into.md#withoptions)オプションを使用してクラウドstorageのパスを指定することもできます。 [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)と`CLOUD_STORAGE_URI`両方に有効なクラウドstorageのパスが設定されている場合、 `CLOUD_STORAGE_URI`の設定が[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)にも適用されます。
+> [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)については、 [`CLOUD_STORAGE_URI`](/sql-statements/sql-statement-import-into.md#withoptions)オプションを使用してクラウドstorageのパスを指定することもできます。 [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)と`CLOUD_STORAGE_URI`両方に有効なクラウドstorageのパスが設定されている場合、 `CLOUD_STORAGE_URI`の設定が[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)に有効になります。
 
 ## 実施原則 {#implementation-principles}
 
@@ -82,11 +82,11 @@ TiDBのグローバルソート機能は、データのインポートとDDL（�
     1.  TiDB ノードはそれらをキーと値のペアにエンコードします。
     2.  TiDB ノードは、キーと値のペアを複数のブロック データ セグメントに分類します (データ セグメントはローカルに分類されます)。各セグメントは 1 つのファイルであり、クラウドstorageにアップロードされます。
 
-2.  TiDBノードは、各セグメントの実際のキーと値の範囲（統計ファイルと呼ばれます）も連続して記録します。これは、スケーラブルなソート実装の重要な準備となります。これらのファイルは、実際のデータと共にクラウドstorageにアップロードされます。
+2.  TiDBノードは、各セグメントの実際のキーと値の範囲（統計ファイルと呼ばれます）も連続して記録します。これは、スケーラブルなソート実装のための重要な準備です。これらのファイルは、実際のデータと共にクラウドstorageにアップロードされます。
 
-### ステップ2: データを並べ替えて分配する {#step-2-sort-and-distribute-data}
+### ステップ2: データを分類して分配する {#step-2-sort-and-distribute-data}
 
-ステップ1では、グローバルソートプログラムはソート済みブロックのリストと、それらに対応する統計ファイルを取得します。これらの統計ファイルから、ローカルソート済みブロックの数が得られます。また、このプログラムはPDが分割と分散に使用できる実数データスコープも備えています。以下の手順が実行されます。
+ステップ1では、グローバルソートプログラムはソート済みブロックのリストと対応する統計ファイルを取得します。これらの統計ファイルから、ローカルソート済みブロックの数が得られます。また、このプログラムはPDが分割と分散に使用できる実データスコープも備えています。以下の手順が実行されます。
 
 1.  統計ファイル内のレコードを並べ替えて、ほぼ均等なサイズの範囲に分割します。これは、並列で実行されるサブタスクです。
 2.  サブタスクを TiDB ノードに分散して実行します。

@@ -19,19 +19,19 @@ summary: TiDB ベクトル検索の制限について学習します。
 
 > **注記：**
 >
-> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを見つけた場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
+> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
 </CustomContent>
 
 > **注記：**
 >
-> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
+> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## ベクトルデータ型の制限 {#vector-data-type-limitations}
 
 -   [ベクター](/vector-search/vector-search-data-types.md)最大 16383 次元をサポートします。
 -   ベクトル データ型では、 `NaN` 、 `Infinity` 、または`-Infinity`値を格納できません。
--   ベクトルデータ型は倍精度浮動小数点数を格納できません。ベクトル列に倍精度浮動小数点数を挿入または格納すると、TiDB はそれを単精度浮動小数点数に変換します。
+-   ベクトルデータ型は倍精度浮動小数点数を格納できません。ベクトル列に倍精度浮動小数点数を挿入または格納すると、TiDB はそれらを単精度浮動小数点数に変換します。
 -   ベクター列は主キーとして、または主キーの一部として使用することはできません。
 -   ベクター列は、一意のインデックスとして、または一意のインデックスの一部として使用することはできません。
 -   ベクター列はパーティション キーとして、またはパーティション キーの一部として使用することはできません。
@@ -45,9 +45,9 @@ summary: TiDB ベクトル検索の制限について学習します。
 
 <CustomContent platform="tidb">
 
--   データのバックアップとリストアには、 BRの v8.4.0 以降を使用してください。ベクトルデータ型のテーブルを v8.4.0 より前の TiDB クラスターにリストアすることはサポートされていません。
+-   データのバックアップとリストアには、 BRの v8.4.0 以降を使用してください。ベクターデータ型のテーブルを v8.4.0 より前の TiDB クラスターにリストアすることはサポートされていません。
 -   TiDB データ移行 (DM) は、MySQL ベクトル データ型の TiDB への移行または複製をサポートしていません。
--   TiCDCは、ベクターデータ型をサポートしていない下流にベクターデータを複製する場合、ベクターデータ型を別の型に変更します。詳細については、 [ベクトルデータ型との互換性](/ticdc/ticdc-compatibility.md#compatibility-with-vector-data-types)参照してください。
+-   TiCDCは、ベクターデータ型をサポートしていないダウンストリームにベクターデータを複製する場合、ベクターデータ型を別の型に変更します。詳細については、 [ベクトルデータ型との互換性](/ticdc/ticdc-compatibility.md#compatibility-with-vector-data-types)参照してください。
 
 </CustomContent>
 

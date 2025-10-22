@@ -5,11 +5,11 @@ summary: TIKV_STORE_STATUS` INFORMATION_SCHEMA テーブルについて学習し
 
 # TIKV_ストア_ステータス {#tikv-store-status}
 
-表`TIKV_STORE_STATUS`は、クラスターに割り当てられた ID、アドレスとポート、現在のノードのステータス、容量、リージョンリーダーの数など、PD の API 経由の TiKV ノードの基本情報が表示されます。
+`TIKV_STORE_STATUS`番目の表には、クラスターに割り当てられた ID、アドレスとポート、現在のノードのステータス、容量、リージョンリーダーの数など、PD の API 経由の TiKV ノードの基本情報が表示されます。
 
 > **注記：**
 >
-> このテーブルはクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
+> このテーブルはクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
 
 ```sql
 USE INFORMATION_SCHEMA;

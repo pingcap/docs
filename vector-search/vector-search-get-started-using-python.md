@@ -21,13 +21,13 @@ summary: Python と TiDB Vector Search を使用してセマンティック検�
 
 > **注記：**
 >
-> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを見つけた場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
+> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
 </CustomContent>
 
 > **注記：**
 >
-> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
+> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## 前提条件 {#prerequisites}
 
@@ -86,7 +86,7 @@ pip install sqlalchemy pymysql sentence-transformers tidb-vector python-dotenv
 <SimpleTab>
 <div label="TiDB Cloud Starter or Essential">
 
-TiDB Cloud Starter クラスターの場合、次の手順に従ってクラスター接続文字列を取得し、環境変数を構成します。
+TiDB Cloud Starter クラスターの場合、クラスター接続文字列を取得し、環境変数を構成するには、次の手順を実行します。
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -229,7 +229,7 @@ vector_store.insert(
 
 このステップでは、既存のドキュメント内のどの単語にも直接一致しない「a swimming animal」を検索します。
 
-次のコードでは、 `text_to_embedding()`関数を再度使用してクエリ テキストをベクター埋め込みに変換し、その埋め込みを使用してクエリを実行して、最も近い上位 3 つの一致を検索します。
+次のコードでは、 `text_to_embedding()`関数を再度使用してクエリ テキストをベクトル埋め込みに変換し、その埋め込みを使用してクエリを実行して、最も近い上位 3 つの一致を検索します。
 
 ```python
 def print_result(query, result):

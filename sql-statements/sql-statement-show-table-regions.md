@@ -9,7 +9,7 @@ summary: TiDB で SHOW TABLE REGIONS を使用する方法を学習します。
 
 > **注記：**
 >
-> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
+> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 ## 構文 {#syntax}
 
@@ -37,8 +37,8 @@ TableName ::=
 -   `LEADER_STORE_ID` :リージョンリーダーが所在する店舗の ID (TiKV)。
 -   `PEERS` : すべてのリージョンレプリカの ID。
 -   `SCATTERING` :リージョンがスケジュールされているかどうか。2 `1` true を意味します。
--   `WRITTEN_BYTES` ：1ハートビートサイクル内にリージョンに書き込まれるデータの推定量。単位はバイトです。
--   `READ_BYTES` ：1ハートビートサイクル内にリージョンから読み取られるデータの推定量。単位はバイトです。
+-   `WRITTEN_BYTES` : 1ハートビートサイクル内にリージョンに書き込まれるデータの推定量。単位はバイトです。
+-   `READ_BYTES` : 1ハートビートサイクル内でリージョンから読み取られるデータの推定量。単位はバイトです。
 -   `APPROXIMATE_SIZE(MB)` :リージョン内の推定データ量。単位はメガバイト（MB）です。
 -   `APPROXIMATE_KEYS` :リージョン内のキーの推定数。
 
@@ -58,7 +58,7 @@ TableName ::=
 
 > **注記：**
 >
-> `WRITTEN_BYTES` `APPROXIMATE_SIZE(MB)`値は正確なデータではありません。これらは`READ_BYTES` PD `APPROXIMATE_KEYS` リージョンから受信したハートビート情報に基づいてPDから推定されたデータです。
+> `WRITTEN_BYTES` `APPROXIMATE_SIZE(MB)`値`APPROXIMATE_KEYS`正確なデータではありません。これらは`READ_BYTES` PDがリージョンから受信したハートビート情報に基づいてPDが推定したデータです。
 
 ## 例 {#examples}
 
@@ -103,9 +103,9 @@ mysql> SHOW TABLE t1 REGIONS;
 3 rows in set (0.00 sec)
 ```
 
-上記の出力では、 `t_75_r_31717`のうち 1 と`END_KEY` `t_75_r_63434`うち`START_KEY`は、PRIMARY KEY が`31717`から`63434`のデータがこのリージョンに格納されていることを示しています。プレフィックス`t_75_` 、これが内部テーブル ID が`75`であるテーブル ( `t` ) のリージョンであることを示しています。19 または`END_KEY` `START_KEY`のキー値は、それぞれ負の無限大または正の無限大を示します。
+上記の出力では、 `t_75_r_31717` `t_75_r_63434` 1 と`END_KEY`の`START_KEY`は、PRIMARY KEY が`31717`から`63434`のデータがこのリージョンに格納されていることを示しています。プレフィックス`t_75_` 、これが内部テーブル ID が`75`であるテーブル ( `t` ) のリージョンであることを示しています。19 または`END_KEY` `START_KEY`値が空の場合、それぞれ負の無限大または正の無限大を示します。
 
-TiDBは必要に応じてリージョンのリバランスを自動的に行います。手動でリバランスする場合は、 `SPLIT TABLE REGION`ステートメントを使用します。
+TiDBは必要に応じてリージョンを自動的に再調整します。手動で再調整する場合は、 `SPLIT TABLE REGION`ステートメントを使用します。
 
 ```sql
 mysql> SPLIT TABLE t1 BETWEEN (31717) AND (63434) REGIONS 2;
@@ -128,7 +128,7 @@ mysql> SHOW TABLE t1 REGIONS;
 4 rows in set (0.00 sec)
 ```
 
-上記の出力は、リージョン96が分割され、新しいリージョン98が作成されたことを示しています。テーブル内の残りのリージョンは、分割操作の影響を受けませんでした。これは出力統計によって確認できます。
+上記の出力は、リージョン96が分割され、新しいリージョン98が作成されたことを示しています。テーブル内の残りのリージョンは分割操作の影響を受けませんでした。これは出力統計によって確認できます。
 
 -   `TOTAL_SPLIT_REGION`新しく分割されたリージョンの数を示します。この例では、その数は1です。
 -   `SCATTER_FINISH_RATIO` 、新しく分割された領域が正常に分散される割合を示します。2 `1.0` 、すべての領域が分散されることを意味します。
@@ -155,7 +155,7 @@ mysql> SHOW TABLE t REGIONS;
 -   テーブル t は6つの領域に対応して`114`ます。これらの領域の`102` 、 `106` `110`は行データが格納され、 `3` `98`インデックスデータが格納されます。
 -   リージョン`102`の`START_KEY`と`END_KEY`場合、 `t_43`テーブル プレフィックスと ID を示します。9 `_r`テーブル t 内のレコード データのプレフィックスです。11 `_i`インデックス データのプレフィックスです。
 -   リージョン`102` `START_KEY` `114`範囲`END_KEY` `[-inf, 20000)`レコードデータ`110`格納されていることを意味します。同様に、 `3` `106`のデータstorage範囲も計算できます。
--   リージョン`98`インデックスデータが格納されています。テーブルtのインデックスデータの開始キーは`t_43_i`で、これはリージョン`98`範囲内にあります。
+-   リージョン`98`インデックスデータが格納されています。テーブルtのインデックスデータの開始キーは`t_43_i`で、これはリージョン`98`範囲内です。
 
 ストア 1 のテーブル t に対応するリージョンを確認するには、 `WHERE`句を使用します。
 

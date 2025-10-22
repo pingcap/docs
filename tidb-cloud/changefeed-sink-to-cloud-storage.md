@@ -10,7 +10,7 @@ summary: このドキュメントでは、 TiDB Cloudから Amazon S3 または 
 > **注記：**
 >
 > -   クラウドstorageにデータをストリーミングするには、TiDB クラスタのバージョンが v7.1.1 以降であることを確認してください。TiDB TiDB Cloud Dedicated クラスタを v7.1.1 以降にアップグレードするには、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)実行します。
-> -   クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、changefeed 機能は使用できません。
+> -   クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、changefeed 機能は使用できません。
 
 ## 制限 {#restrictions}
 
@@ -159,7 +159,7 @@ summary: このドキュメントでは、 TiDB Cloudから Amazon S3 または 
     >
     > これら2つのパラメータは、クラウドstorageに生成される各データベーステーブルごとのオブジェクト数に影響します。テーブル数が多い場合、同じ設定を使用すると生成されるオブジェクト数が増加し、クラウドstorageAPIの呼び出しコストが増加します。したがって、RPO（Recovery Point Objective：復旧時点目標）とコスト要件に基づいて、これらのパラメータを適切に設定することをお勧めします。
 
-6.  **「イベントの分割」**エリアでは、 `UPDATE`イベントを`DELETE`つと`INSERT`イベントに分割するか、 `UPDATE`イベントのままにするかを選択します。詳細については、 [MySQL以外のシンクの主キーまたは一意キーのUPDATEイベントを分割する](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)参照してください。
+6.  **「イベントの分割」**エリアでは、 `UPDATE`イベントを`DELETE`つと`INSERT`イベントに分割するか、 `UPDATE`イベントのままにするかを選択します。詳細については、 [MySQL 以外のシンクの主キーまたは一意キーの UPDATE イベントを分割する](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)参照してください。
 
 ## ステップ3. 仕様を構成する {#step-3-configure-specification}
 

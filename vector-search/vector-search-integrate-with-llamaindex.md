@@ -19,13 +19,13 @@ summary: TiDB Vector Search を LlamaIndex と統合する方法を学びます�
 
 > **注記：**
 >
-> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを見つけた場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
+> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
 </CustomContent>
 
 > **注記：**
 >
-> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
+> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 > **ヒント**
 >
@@ -36,7 +36,7 @@ summary: TiDB Vector Search を LlamaIndex と統合する方法を学びます�
 このチュートリアルを完了するには、次のものが必要です。
 
 -   [Python 3.8以上](https://www.python.org/downloads/)個インストールされました。
--   [Jupyterノートブック](https://jupyter.org/install)個インストールされました。
+-   [ジュピターノートブック](https://jupyter.org/install)個インストールされました。
 -   [ギット](https://git-scm.com/downloads)個インストールされました。
 -   TiDB クラスター。
 
@@ -95,7 +95,7 @@ from llama_index.vector_stores.tidbvector import TiDBVectorStore
 <SimpleTab>
 <div label="TiDB Cloud Starter or Essential">
 
-TiDB Cloud Starter クラスターの場合、次の手順に従ってクラスター接続文字列を取得し、環境変数を構成します。
+TiDB Cloud Starter クラスターの場合、クラスター接続文字列を取得し、環境変数を構成するには、次の手順を実行します。
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -134,7 +134,7 @@ TiDB Cloud Starter クラスターの場合、次の手順に従ってクラス�
 </div>
 <div label="TiDB Self-Managed">
 
-このドキュメントでは、埋め込みモデルプロバイダーとして[オープンAI](https://platform.openai.com/docs/introduction)使用します。この手順では、TiDB クラスターの接続文字列と[OpenAI APIキー](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key)指定する必要があります。
+このドキュメントでは、埋め込みモデルプロバイダーとして[オープンAI](https://platform.openai.com/docs/introduction)使用します。このステップでは、TiDB クラスターの接続文字列と[OpenAI APIキー](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key)指定する必要があります。
 
 環境変数を設定するには、以下のコードを実行します。接続文字列とOpenAI APIキーの入力を求められます。
 
@@ -192,7 +192,7 @@ for index, document in enumerate(documents):
    document.metadata = {"book": "paul_graham"}
 ```
 
-### ステップ5. ドキュメントベクトルを埋め込んで保存する {#step-5-embed-and-store-document-vectors}
+### ステップ5. ドキュメントベクターを埋め込んで保存する {#step-5-embed-and-store-document-vectors}
 
 #### ステップ5.1 TiDBベクトルストアを初期化する {#step-5-1-initialize-the-tidb-vector-store}
 
@@ -210,7 +210,7 @@ tidbvec = TiDBVectorStore(
 
 実行が成功すると、TiDB データベース内の`paul_graham_test`テーブルを直接表示してアクセスできるようになります。
 
-#### ステップ5.2 埋め込みの生成と保存 {#step-5-2-generate-and-store-embeddings}
+#### ステップ5.2 埋め込みを生成して保存する {#step-5-2-generate-and-store-embeddings}
 
 次のコードは、ドキュメントを解析し、埋め込みを生成し、TiDB ベクトル ストアに保存します。
 
@@ -250,7 +250,7 @@ publishing essays online, developing spam filters, painting, hosting dinner part
 a building for office use.
 ```
 
-### ステップ7. メタデータフィルターを使って検索する {#step-7-search-with-metadata-filters}
+### ステップ7.メタデータフィルターを使って検索する {#step-7-search-with-metadata-filters}
 
 検索を絞り込むには、メタデータ フィルターを使用して、適用したフィルターに一致する特定の最も近い結果を取得できます。
 

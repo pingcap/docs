@@ -19,24 +19,24 @@ summary: サポートされている AI フレームワーク、埋め込みモ�
 
 > **注記：**
 >
-> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを見つけた場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
+> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
 </CustomContent>
 
 > **注記：**
 >
-> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
+> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## AIフレームワーク {#ai-frameworks}
 
 TiDB は以下の AI フレームワークを公式にサポートしており、これらのフレームワークに基づいて開発された AI アプリケーションを TiDB Vector Search に簡単に統合できます。
 
-| AIフレームワーク | チュートリアル                                                                           |
-| --------- | --------------------------------------------------------------------------------- |
-| ランチェイン    | [LangChainとベクトル検索を統合する](/vector-search/vector-search-integrate-with-langchain.md) |
-| ラマインデックス  | [ベクトル検索とLlamaIndexの統合](/vector-search/vector-search-integrate-with-llamaindex.md) |
+| AIフレームワーク | チュートリアル                                                                             |
+| --------- | ----------------------------------------------------------------------------------- |
+| ランチェイン    | [LangChainとベクトル検索を統合する](/vector-search/vector-search-integrate-with-langchain.md)   |
+| ラマインデックス  | [LlamaIndexとベクター検索を統合する](/vector-search/vector-search-integrate-with-llamaindex.md) |
 
-さらに、TiDB は、ドキュメントのstorageや AI アプリケーション用のナレッジ グラフのstorageなど、さまざまな目的に使用することもできます。
+さらに、TiDB は、ドキュメントのstorageや AI アプリケーション用のナレッジ グラフのstorageなど、さまざまな用途に使用できます。
 
 ## モデルとサービスの埋め込み {#embedding-models-and-services}
 
@@ -44,7 +44,7 @@ TiDB Vector Search は、最大 16383 次元のベクトルの保存をサポー
 
 ベクトルを生成するには、自己展開されたオープンソースの埋め込みモデルを使用するか、サードパーティの埋め込みプロバイダーが提供するサードパーティの埋め込み API を使用できます。
 
-次の表には、いくつかの主要な埋め込みサービス プロバイダーと、対応する統合チュートリアルがリストされています。
+次の表に、いくつかの主要な埋め込みサービス プロバイダーと、対応する統合チュートリアルを示します。
 
 | 埋め込みサービスプロバイダー | チュートリアル                                                                                               |
 | -------------- | ----------------------------------------------------------------------------------------------------- |
@@ -56,4 +56,4 @@ TiDB Vector Search を ORM ライブラリと統合して、TiDB データベー
 
 次の表に、サポートされている ORM ライブラリと対応する統合チュートリアルを示します。
 
-<table><tr><th>言語</th><th>ORM/クライアント</th><th>インストール方法</th><th>チュートリアル</th></tr><tr><td rowspan="4">パイソン</td><td>TiDB ベクタークライアント</td><td><code>pip install tidb-vector[client]</code></td><td> <a href="/tidb/v8.5/vector-search-get-started-using-python">Pythonを使ったベクトル検索入門</a></td></tr><tr><td>SQLアルケミー</td><td><code>pip install tidb-vector</code></td><td> <a href="/tidb/v8.5/vector-search-integrate-with-sqlalchemy">TiDBベクトル検索をSQLAlchemyと統合する</a></td></tr><tr><td>ピーウィー</td><td><code>pip install tidb-vector</code></td><td> <a href="/tidb/v8.5/vector-search-integrate-with-peewee">TiDBベクトル検索をpeeweeと統合する</a></td></tr><tr><td>ジャンゴ</td><td><code>pip install django-tidb[vector]</code></td><td> <a href="/tidb/v8.5/vector-search-integrate-with-django-orm">TiDBベクトル検索をDjangoに統合する</a></td></tr></table>
+<table><tr><th>言語</th><th>ORM/クライアント</th><th>インストール方法</th><th>チュートリアル</th></tr><tr><td rowspan="4">パイソン</td><td>TiDB ベクタークライアント</td><td><code>pip install tidb-vector[client]</code></td><td> <a href="/tidb/v8.5/vector-search-get-started-using-python">Pythonを使ったベクトル検索を始めよう</a></td></tr><tr><td>SQLアルケミー</td><td><code>pip install tidb-vector</code></td><td> <a href="/tidb/v8.5/vector-search-integrate-with-sqlalchemy">TiDBベクトル検索をSQLAlchemyと統合する</a></td></tr><tr><td>ピーウィー</td><td><code>pip install tidb-vector</code></td><td> <a href="/tidb/v8.5/vector-search-integrate-with-peewee">TiDBベクトル検索をpeeweeと統合する</a></td></tr><tr><td>ジャンゴ</td><td><code>pip install django-tidb[vector]</code></td><td> <a href="/tidb/v8.5/vector-search-integrate-with-django-orm">TiDBベクトル検索をDjangoに統合する</a></td></tr></table>

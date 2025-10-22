@@ -5,11 +5,11 @@ summary: TIKV_REGION_STATUS` information_schema テーブルについて学習�
 
 # TIKV_REGION_STATUS {#tikv-region-status}
 
-`TIKV_REGION_STATUS`番目の表には、リージョンID、開始キー値と終了キー値、読み取りおよび書き込みトラフィックなど、PD の API 経由の TiKV リージョンの基本情報が表示されます。
+`TIKV_REGION_STATUS`表には、リージョンID、開始キー値と終了キー値、読み取りおよび書き込みトラフィックなど、PD の API 経由の TiKV リージョンの基本情報が表示されています。
 
 > **注記：**
 >
-> このテーブルはクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
+> このテーブルはクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -55,12 +55,12 @@ DESC TIKV_REGION_STATUS;
 -   `DB_NAME` : `TABLE_ID`が属するデータベースの名前。
 -   `TABLE_NAME` :リージョンが属するテーブルの名前。
 -   `IS_INDEX` :リージョンデータがインデックスかどうか。0 はインデックスではないことを意味し、1 はインデックスであることを意味します。現在のリージョンにテーブルデータとインデックスデータの両方が含まれている場合、レコードは複数行になります。2 `IS_INDEX`それぞれ 0 と 1 です。
--   `INDEX_ID` ：リージョンが属するインデックスのID。2が`IS_INDEX`の場合、この列の値はNULLになります。
--   `INDEX_NAME` ： リージョンが属するインデックスの名前。2が`IS_INDEX`の場合、この列の値はNULLになります。
+-   `INDEX_ID` :リージョンが属するインデックスのID。2が`IS_INDEX`の場合、この列の値はNULLになります。
+-   `INDEX_NAME` :リージョンが属するインデックス名。2 が`IS_INDEX`の場合、この列の値は NULL になります。
 -   `IS_PARTITION` :リージョンが属するテーブルがパーティション化されているかどうか。
 -   `PARTITION_ID` :リージョンが属するテーブルがパーティション化されている場合、この列にはリージョンが属するパーティションの ID が表示されます。
 -   `PARTITION_NAME` :リージョンが属するテーブルがパーティション化されている場合、この列にはリージョンが属するパーティションの名前が表示されます。
--   `EPOCH_CONF_VER` ：リージョン設定のバージョン番号。ピアが追加または削除されると、バージョン番号が増加します。
+-   `EPOCH_CONF_VER` :リージョン設定のバージョン番号。ピアが追加または削除されると、バージョン番号が増加します。
 -   `EPOCH_VERSION` :リージョンの現在のバージョン番号。リージョンが分割または結合されると、バージョン番号が増加します。
 -   `WRITTEN_BYTES` :リージョンに書き込まれたデータの量 (バイト)。
 -   `READ_BYTES` :リージョンから読み取られたデータの量 (バイト)。

@@ -5,11 +5,11 @@ summary: TiDB データベースの LOAD STATS の使用法の概要。
 
 # 負荷統計 {#load-stats}
 
-`LOAD STATS`ステートメントは統計を TiDB にロードするために使用されます。
+`LOAD STATS`ステートメントは、統計を TiDB にロードするために使用されます。
 
 > **注記：**
 >
-> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
+> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 ## 概要 {#synopsis}
 

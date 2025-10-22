@@ -7,7 +7,7 @@ summary: TiDB データベースの ADMIN ALTER DDL JOBS` の使用法の概要�
 
 > **注記：**
 >
-> 現在、この機能は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)クラスターでは利用できません。
+> 現在、この機能はクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 `ADMIN ALTER DDL JOBS`文を使用すると、実行中の単一のDDLジョブのパラメータを変更できます。例:
 
@@ -20,7 +20,7 @@ ADMIN ALTER DDL JOBS 101 THREAD = 8;
 
 `ADMIN ALTER DDL JOBS`文でサポートされているDDLジョブタイプには、 `ADD INDEX` 、 `MODIFY COLUMN` 、 `REORGANIZE PARTITION`あります。その他のDDLジョブタイプの場合、 `ADMIN ALTER DDL JOBS`実行すると`unsupported DDL operation`エラーが返されます。
 
-現在、 `ADMIN ALTER DDL JOBS`実行して変更できるのは、単一の DDL ジョブのパラメータのみです。複数の DDL ジョブ ID のパラメータを同時に変更することはサポートされていません。
+現在、 `ADMIN ALTER DDL JOBS`実行して変更できるのは単一の DDL ジョブのパラメータのみです。複数の DDL ジョブ ID のパラメータを同時に変更することはサポートされていません。
 
 さまざまな DDL ジョブでサポートされているパラメータとそれに対応するシステム変数は次のとおりです。
 
@@ -28,9 +28,9 @@ ADMIN ALTER DDL JOBS 101 THREAD = 8;
 
     -   `THREAD` : DDLジョブの同時実行数。初期値は`tidb_ddl_reorg_worker_cnt`に設定されます。
     -   `BATCH_SIZE` : バッチサイズ。初期値は[`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)に設定されます。
-    -   `MAX_WRITE_SPEED` : 各TiKVにインデックスレコードをインポートする際の最大帯域幅制限。初期値は[`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850)に設定されます。
+    -   `MAX_WRITE_SPEED` : 各TiKVにインデックスレコードをインポートするための最大帯域幅制限。初期値は[`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850)に設定されます。
 
-    現在、上記のパラメータは、送信され、 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)無効になった後に実行される`ADD INDEX`ジョブに対してのみ機能します。
+    現在、上記のパラメータは、送信されて[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が無効になった後に実行される`ADD INDEX`ジョブに対してのみ機能します。
 
 -   `MODIFY COLUMN` :
     -   `THREAD` : DDLジョブの同時実行数。初期値は`tidb_ddl_reorg_worker_cnt`に設定されます。
@@ -42,7 +42,7 @@ ADMIN ALTER DDL JOBS 101 THREAD = 8;
 
 前述のパラメータの値の範囲は、対応するシステム変数の値の範囲と一致しています。
 
-`ADMIN ALTER DDL JOBS`実行中の DDL ジョブにのみ有効です。DDL ジョブが存在しないか、すでに完了している場合、このステートメントを実行するとエラー`ddl job is not running`が返されます。
+`ADMIN ALTER DDL JOBS`実行中の DDL ジョブにのみ有効です。DDL ジョブが存在しないか、すでに完了している場合、このステートメントを実行すると`ddl job is not running`エラーが返されます。
 
 このステートメントの例を次に示します。
 

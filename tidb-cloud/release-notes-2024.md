@@ -38,7 +38,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   新しい[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン7.5.4](https://docs.pingcap.com/tidb/v7.5/release-7.5.4)から[バージョン8.1.1](https://docs.pingcap.com/tidb/stable/release-8.1.1)にアップグレードします。
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 、次のシナリオで大容量データの書き込みコストを最大 80% 削減します。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter) 、次のシナリオで大容量データの書き込みコストを最大 80% 削減します。
 
     -   [自動コミットモード](/transaction-overview.md#autocommit)で 16 MiB を超える書き込み操作を実行する場合。
     -   [楽観的取引モデル](/optimistic-transaction.md)で 16 MiB を超える書き込み操作を実行する場合。
@@ -110,8 +110,8 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
     TiDB Cloud CLI は次の新機能を提供します。
 
-    -   [`ticloud serverless sql-user`](/tidb-cloud/ticloud-serverless-sql-user-create.md)経由で[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターの SQL ユーザー管理をサポートします。
-    -   [`ticloud serverless create`](/tidb-cloud/ticloud-cluster-create.md)および[`ticloud serverless update`](/tidb-cloud/ticloud-serverless-update.md)の[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターのパブリック エンドポイントを無効にすることを許可します。
+    -   [`ticloud serverless sql-user`](/tidb-cloud/ticloud-serverless-sql-user-create.md)経由で[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)クラスターの SQL ユーザー管理をサポートします。
+    -   [`ticloud serverless create`](/tidb-cloud/ticloud-cluster-create.md)および[`ticloud serverless update`](/tidb-cloud/ticloud-serverless-update.md)の[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)クラスターのパブリック エンドポイントを無効にすることを許可します。
     -   OAuth 認証を使用するときに現在のユーザーに関する情報を取得するための[`ticloud auth whoami`](/tidb-cloud/ticloud-auth-whoami.md)コマンドを追加します。
     -   ソース テーブルを柔軟に選択するために`--where` [`ticloud serverless export create`](/tidb-cloud/ticloud-serverless-export-create.md)の`--sql` 、および`--filter`フラグをサポートします。
     -   CSV および Parquet ファイルへのデータのエクスポートをサポートします。
@@ -158,7 +158,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
     詳細については[TiDB Cloud専用に接続](/tidb-cloud/connect-to-tidb-cluster.md)参照してください。
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)および[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデータ インポート エクスペリエンスを強化します。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデータ インポート エクスペリエンスを強化します。
 
     -   **インポート**ページのレイアウトをより明確なレイアウトに改良します。
     -   TiDB Cloud Serverless クラスターとTiDB Cloud Dedicated クラスターのインポート手順を統合します。
@@ -240,7 +240,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)ベクトル検索をサポートします (ベータ版)。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)ベクトル検索をサポートします (ベータ版)。
 
     ベクター検索（ベータ版）機能は、ドキュメント、画像、音声、動画など、様々なデータタイプを対象としたセマンティック類似検索を実行するための高度な検索ソリューションを提供します。この機能により、開発者は使い慣れたMySQLスキルを用いて、生成型人工知能（AI）機能を備えたスケーラブルなアプリケーションを容易に構築できます。主な機能は以下のとおりです。
 
@@ -251,7 +251,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
     詳細については[ベクトル検索（ベータ版）の概要](/vector-search/vector-search-overview.md)参照してください。
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)では、組織の所有者に毎週のメールレポートが提供されるようになりました。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)では、組織の所有者に毎週のメールレポートが提供されるようになりました。
 
     これらのレポートは、クラスターのパフォーマンスとアクティビティに関する洞察を提供します。毎週自動的に更新されるため、クラスターに関する最新情報を常に把握し、データに基づいた意思決定を行ってクラスターを最適化できます。
 
@@ -294,13 +294,13 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
     詳細については[回復グループを始める](/tidb-cloud/recovery-group-get-started.md)参照してください。
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)列storage[TiFlash](/tiflash/tiflash-overview.md)課金と計測 (ベータ版) を導入します。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)列storage[TiFlash](/tiflash/tiflash-overview.md)課金と計測 (ベータ版) を導入します。
 
     2024年6月30日まで、 TiDB Cloud Serverlessクラスターの列指向storageは100%割引で無料のままです。この日以降、各TiDB Cloud Serverlessクラスターには、列指向storage用に5GiBの無料割り当てが含まれます。無料割り当てを超えた使用量については、課金が発生します。
 
     詳細については[TiDB Cloud Serverless の価格詳細](https://www.pingcap.com/tidb-serverless-pricing-details/#storage)参照してください。
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) [存続時間（TTL）](/time-to-live.md)サポートします。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter) [存続時間（TTL）](/time-to-live.md)サポートします。
 
 ## 2024年5月28日 {#may-28-2024}
 
@@ -368,7 +368,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターに対して、**無料**と**スケーラブルの**2 つのサービス プランを導入します。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)クラスターに対して、**無料**と**スケーラブルの**2 つのサービス プランを導入します。
 
     TiDB Cloud Serverlessは、様々なユーザーニーズに対応するため、無料かつスケーラブルなサービスプランを提供しています。初めてご利用になる場合でも、増大するアプリケーション需要に対応して拡張する場合でも、これらのプランは必要な柔軟性と機能を提供します。
 
@@ -404,7 +404,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターの TiDB バージョンを[バージョン6.6.0](https://docs.pingcap.com/tidb/v6.6/release-6.6.0)から[バージョン7.1.3](https://docs.pingcap.com/tidb/v7.1/release-7.1.3)にアップグレードします。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)クラスターの TiDB バージョンを[バージョン6.6.0](https://docs.pingcap.com/tidb/v6.6/release-6.6.0)から[バージョン7.1.3](https://docs.pingcap.com/tidb/v7.1/release-7.1.3)にアップグレードします。
 
 ## 2024年2月20日 {#february-20-2024}
 

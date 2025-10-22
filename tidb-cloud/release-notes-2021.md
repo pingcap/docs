@@ -35,12 +35,12 @@ summary: 2021 年のTiDB Cloudのリリース ノートについて説明しま�
 
 バグ修正:
 
--   Developer Tierでディスクがいっぱいになると TiKV がクラッシュする問題を修正しました
+-   Developer Tierでディスクがいっぱいになると発生する TiKV クラッシュの問題を修正しました
 -   HTMLインジェクションの脆弱性を修正
 
 ## 2021年11月8日 {#november-8-2021}
 
--   Launch [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 、 TiDB Cloudの 1 年間の無料トライアルが提供されます。
+-   Launch [Developer Tier](/tidb-cloud/select-cluster-tier.md#starter) 、 TiDB Cloudの 1 年間の無料トライアルが提供されます。
 
     各Developer Tierクラスターはフル機能の TiDB クラスターであり、次のものが含まれます。
 
@@ -58,7 +58,7 @@ summary: 2021 年のTiDB Cloudのリリース ノートについて説明しま�
 ## 2021年10月11日 {#october-11-2021}
 
 -   サポート[TiDB Cloudの請求詳細の表示とエクスポート](/tidb-cloud/tidb-cloud-billing.md#billing-details) （各サービスおよび各プロジェクトの費用を含む）
--   TiDB Cloudの内部機能に関するいくつかの問題を修正
+-   TiDB Cloud内部機能のいくつかの問題を修正
 
 ## 2021年9月16日 {#september-16-2021}
 
@@ -96,7 +96,7 @@ summary: 2021 年のTiDB Cloudのリリース ノートについて説明しま�
 ## 2021年6月24日 {#june-24-2021}
 
 -   Auroraスナップショットを TiDB インスタンスにインポートする際の parquet ファイルの解析エラーを修正しました
--   PoCユーザーがクラスタを作成し、クラスタ構成を変更したときに推定時間が更新されない問題を修正しました。
+-   PoCユーザーがクラスターを作成し、クラスター構成を変更したときに推定時間が更新されない問題を修正しました。
 
 ## 2021年6月16日 {#june-16-2021}
 
@@ -110,7 +110,7 @@ summary: 2021 年のTiDB Cloudのリリース ノートについて説明しま�
 
 一般的な
 
--   TiDB Cloudは現在パブリックプレビュー中です。1 [サインアップ](https://tidbcloud.com/signup)クリックして、以下のいずれかのトライアルオプションを選択してください。
+-   TiDB Cloudは現在パブリックプレビュー中です。1 [サインアップ](https://tidbcloud.com/signup)クリックして、以下のトライアルオプションのいずれかを選択してください。
 
     -   48時間無料トライアル
     -   2週間のPoC無料トライアル
@@ -120,7 +120,7 @@ summary: 2021 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   サインアッププロセスにメール認証とロボット対策のreCAPTCHAが追加されました
 -   [TiDB Cloudサービス契約](https://pingcap.com/legal/tidb-cloud-services-agreement)と[PingCAPプライバシーポリシー](https://pingcap.com/legal/privacy-policy/)が更新されました
--   コンソールの申請フォームに記入して[概念実証](/tidb-cloud/tidb-cloud-poc.md)申請することができます。
+-   コンソールで申請フォームに記入して[概念実証](/tidb-cloud/tidb-cloud-poc.md)申請することができます
 -   UIを介してサンプルデータをTiDB Cloudクラスタにインポートできます
 -   混乱を避けるため、同じ名前のクラスターは許可されません。
 -   **サポートメニュー**の**「フィードバックを送信」**をクリックするとフィードバックを送信できます。

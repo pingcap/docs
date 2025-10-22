@@ -1,6 +1,6 @@
 ---
 title: SET RESOURCE GROUP
-summary: TiDB データベースでの SET RESOURCE GROUP の使用法の概要。
+summary: TiDB データベースにおける SET RESOURCE GROUP の使用法の概要。
 ---
 
 # リソースグループの設定 {#set-resource-group}
@@ -9,7 +9,7 @@ summary: TiDB データベースでの SET RESOURCE GROUP の使用法の概要�
 
 > **注記：**
 >
-> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
+> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 ## 概要 {#synopsis}
 
@@ -41,7 +41,7 @@ CREATE RESOURCE GROUP 'rg1' RU_PER_SEC = 1000;
 ALTER USER 'user1' RESOURCE GROUP `rg1`;
 ```
 
-ログインして、現在のユーザーにバインドされているリソース グループを表示するには、 `user1`使用します。
+`user1`使用してログインし、現在のユーザーにバインドされているリソース グループを表示します。
 
 ```sql
 SELECT CURRENT_RESOURCE_GROUP();

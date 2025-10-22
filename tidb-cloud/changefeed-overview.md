@@ -9,9 +9,9 @@ TiDB Cloud changefeed は、 TiDB Cloudから他のデータサービスへの�
 
 > **注記：**
 >
-> -   現在、 TiDB Cloudクラスターごとに最大 100 個の変更フィードのみが許可されます。
+> -   現在、 TiDB Cloud、クラスターごとに最大 100 個の変更フィードのみが許可されます。
 > -   現在、 TiDB Cloud、変更フィードごとに最大 100 個のテーブル フィルター ルールのみが許可されます。
-> -   クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、changefeed 機能は使用できません。
+> -   クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、changefeed 機能は使用できません。
 
 ## Changefeedページをビュー {#view-the-changefeed-page}
 
@@ -23,13 +23,13 @@ changefeed 機能にアクセスするには、次の手順を実行します。
     >
     > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲットクラスタの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「Changefeed」**をクリックします。Changefeedページが表示されます。
+2.  ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「Changefeed」**をクリックします。Changefeedページが表示されます。
 
 **Changefeed**ページでは、変更フィードを作成したり、既存の変更フィードの一覧を表示したり、既存の変更フィードを操作したり (変更フィードのスケーリング、一時停止、再開、編集、削除など) できます。
 
 ## チェンジフィードを作成する {#create-a-changefeed}
 
-変更フィードを作成するには、チュートリアルを参照してください。
+チェンジフィードを作成するには、チュートリアルを参照してください。
 
 -   [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
 -   [MySQLに沈む](/tidb-cloud/changefeed-sink-to-mysql.md)
@@ -73,7 +73,7 @@ changefeed 機能にアクセスするには、次の手順を実行します。
 
 2.  一時停止する変更フィードを見つけて、 **[アクション**] 列の**[...]** &gt; **[一時停止] を**クリックします。
 
-3.  changefeed のステータスが`Paused`に変わったら、 **...** &gt;**編集を**クリックして、対応する changefeed を編集します。
+3.  changefeed のステータスが`Paused`に変更されたら、 **[...]** &gt; **[編集]**をクリックして、対応する changefeed を編集します。
 
     TiDB Cloud はデフォルトで changefeed 設定を設定します。以下の設定を変更できます。
 
@@ -102,7 +102,7 @@ TiDB Cloudの変更フィードに対する課金の詳細については、 [�
 -   `CREATING` : レプリケーション タスクを作成中です。
 -   `RUNNING` : レプリケーション タスクは正常に実行され、チェックポイント ts は正常に進行します。
 -   `EDITING` : レプリケーション タスクが編集中です。
--   `PAUSING` : レプリケーション タスクは一時停止中です。
+-   `PAUSING` : レプリケーション タスクは一時停止されています。
 -   `PAUSED` : レプリケーション タスクは一時停止されています。
 -   `RESUMING` : レプリケーション タスクが再開されています。
 -   `DELETING` : レプリケーション タスクが削除されています。

@@ -11,7 +11,7 @@ summary: TiDB Cloud Starter クラスターの支出制限を管理する方法�
 
 支出制限とは、特定のワークロードに対して1か月あたりに支出可能な最大金額を指します。これは、 TiDB Cloud Starterクラスターの予算を設定できるコスト管理メカニズムです。
 
-TiDB Cloudでは、組織ごとに最大5つの[無料のTiDB Cloud Starterクラスター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)をデフォルトで作成できます。TiDB TiDB Cloud Starterクラスターをさらに作成するには、クレジットカード情報を追加し、月間使用量の上限を設定する必要があります。ただし、クラスターを追加する前に既存のクラスターの一部を削除すれば、クレジットカード情報なしで新しいクラスターを作成できます。
+TiDB Cloudでは、組織ごとに最大5つの[無料のTiDB Cloud Starterクラスター](/tidb-cloud/select-cluster-tier.md#starter)をデフォルトで作成できます。TiDB TiDB Cloud Starterクラスターをさらに作成するには、クレジットカード情報を追加し、月間使用量の上限を設定する必要があります。ただし、クラスターを追加する前に既存のクラスターの一部を削除すれば、クレジットカード情報なしで新しいクラスターを作成できます。
 
 ## 使用量制限 {#usage-quota}
 
@@ -19,15 +19,15 @@ TiDB Cloudでは、組織ごとに最大5つの[無料のTiDB Cloud Starterク�
 
 -   行ベースのstorage: 5 GiB
 -   列指向storage: 5 GiB
--   [リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 月間5,000万RU
+-   [リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 月間5000万RU
 
-クラスターが使用量クォータに達すると、新しい月[割り当てを増やす](#update-spending-limit)始まるまで、または使用量がリセットされるまで、新規接続の試行は直ちに拒否されます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。例えば、クラスターの行ベースstorageが空きクラスターで5GiBを超えると、クラスターは自動的に新規接続の試行を制限します。
+クラスターが使用量クォータに達すると、新しい月の開始時に使用[割り当てを増やす](#update-spending-limit)がリセットされるまで、新規接続の試行は直ちに拒否されます。クォータに達する前に確立された既存の接続はアクティブのままですが、スロットリングが発生します。例えば、クラスターの行ベースstorageが空きクラスターで5GiBを超えると、クラスターは自動的に新規接続の試行を制限します。
 
 さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク送信など) の RU 消費量、価格の詳細、スロットル情報の詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)参照してください。
 
 追加のクォータを持つTiDB Cloud Starterクラスターを作成する場合は、クラスター作成ページで使用制限を編集できます。詳細については、 [TiDB Cloud Starter クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)ご覧ください。
 
-## 支出限度額の更新 {#update-spending-limit}
+## 支出限度額を更新する {#update-spending-limit}
 
 TiDB Cloud Starterの無料クラスターでは、クラスター作成時に月間使用制限を設定することで、使用量クォータを増やすことができます。既存のクラスターの場合は、月間使用制限を直接調整できます。
 
@@ -45,4 +45,4 @@ TiDB Cloud Starter クラスターの使用制限を更新するには、次の�
 
 3.  必要に応じて月間利用限度額を編集してください。お支払い方法を追加していない場合は、限度額を編集した後にクレジットカードを追加する必要があります。
 
-4.  **「支出限度額の更新」**をクリックします。
+4.  **[支出限度額の更新]を**クリックします。

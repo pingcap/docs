@@ -155,7 +155,7 @@
         -   [FastScanを使用する](/tiflash/use-fastscan.md)
         -   [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
         -   [TiFlashクエリ結果のマテリアライゼーション](/tiflash/tiflash-results-materialization.md)
-        -   [TiFlash遅延マテリアライゼーション](/tiflash/tiflash-late-materialization.md)
+        -   [TiFlash遅延実体化](/tiflash/tiflash-late-materialization.md)
         -   [互換性](/tiflash/tiflash-compatibility.md)
         -   [パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)
     -   監視と警告
@@ -256,7 +256,7 @@
         -   [概要](/vector-search/vector-search-integration-overview.md)
         -   AIフレームワーク
             -   [ラマインデックス](/vector-search/vector-search-integrate-with-llamaindex.md)
-            -   [ランチェイン](/vector-search/vector-search-integrate-with-langchain.md)
+            -   [ランチェーン](/vector-search/vector-search-integrate-with-langchain.md)
         -   AIサービス
             -   [アマゾンの岩盤](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md)
         -   モデル/サービスの埋め込み
@@ -610,7 +610,7 @@
     -   認証
         -   [ログイン](/tidb-cloud/ticloud-auth-login.md)
         -   [ログアウト](/tidb-cloud/ticloud-auth-logout.md)
-        -   [誰だ](/tidb-cloud/ticloud-auth-whoami.md)
+        -   [だれだ](/tidb-cloud/ticloud-auth-whoami.md)
     -   サーバーレス
         -   [容量](/tidb-cloud/ticloud-serverless-capacity.md)
         -   [作成する](/tidb-cloud/ticloud-cluster-create.md)

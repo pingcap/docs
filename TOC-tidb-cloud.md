@@ -150,7 +150,7 @@
         -   [FastScanを使用する](/tiflash/use-fastscan.md)
         -   [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
         -   [TiFlashクエリ結果のマテリアライゼーション](/tiflash/tiflash-results-materialization.md)
-        -   [TiFlash遅延実体化](/tiflash/tiflash-late-materialization.md)
+        -   [TiFlash遅延マテリアライゼーション](/tiflash/tiflash-late-materialization.md)
         -   [互換性](/tiflash/tiflash-compatibility.md)
         -   [パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)
     -   監視と警告
@@ -266,7 +266,7 @@
         -   [概要](/vector-search/vector-search-integration-overview.md)
         -   AIフレームワーク
             -   [ラマインデックス](/vector-search/vector-search-integrate-with-llamaindex.md)
-            -   [ランチェイン](/vector-search/vector-search-integrate-with-langchain.md)
+            -   [ランチェーン](/vector-search/vector-search-integrate-with-langchain.md)
         -   AIサービス
             -   [アマゾンの岩盤](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md)
         -   モデル/サービスの埋め込み
@@ -310,6 +310,7 @@
         -   [AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
         -   [Azure でセルフホスト型 Kafka プライベート リンク サービスを設定する](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)
         -   [Google Cloud でセルフホスト型 Kafka プライベート サービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)
+        -   [Changefeeds のプライベート エンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)
 -   災害復旧
     -   [回復グループの概要](/tidb-cloud/recovery-group-overview.md)
     -   [始める](/tidb-cloud/recovery-group-get-started.md)

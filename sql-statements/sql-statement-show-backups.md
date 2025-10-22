@@ -3,7 +3,7 @@ title: SHOW [BACKUPS|RESTORES] | TiDB SQL Statement Reference
 summary: TiDB データベースに対する SHOW [BACKUPS|RESTORES] の使用法の概要。
 ---
 
-# SHOW [バックアップ|リストア] {#show-backups-restores}
+# 表示 [バックアップ|復元] {#show-backups-restores}
 
 これらのステートメントは、TiDB インスタンスで実行されたキューに入れられたタスク、実行中のタスク、最近完了したタスク[`BACKUP`](/sql-statements/sql-statement-backup.md)と[`RESTORE`](/sql-statements/sql-statement-restore.md)リストを表示します。
 
@@ -13,7 +13,7 @@ summary: TiDB データベースに対する SHOW [BACKUPS|RESTORES] の使用�
 
 > **注記：**
 >
-> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
+> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 `br`コマンドライン ツールで開始されたバックアップと復元は表示されません。
 
@@ -57,19 +57,19 @@ SHOW BACKUPS;
 | :--------------- | :------------------------------------------------------------------- |
 | `Destination`    | 宛先 URL（秘密鍵の漏洩を防ぐため、すべてのパラメータを削除）                                     |
 | `State`          | タスクの状態                                                               |
-| `Progress`       | 現在の状態における進捗状況の推定値（パーセンテージ）                                           |
+| `Progress`       | 現在の状態における進捗状況の推定値（パーセント）                                             |
 | `Queue_time`     | タスクがキューに入れられたとき                                                      |
-| `Execution_time` | タスクが開始されたとき。キューイングタスクの場合は値が`0000-00-00 00:00:00`なります。                |
+| `Execution_time` | タスクが開始されたとき。キューイングタスクの場合は値は`0000-00-00 00:00:00`です。                  |
 | `Finish_time`    | タスクが終了したときのタイムスタンプ。キューイングおよび実行中のタスクの場合、値は`0000-00-00 00:00:00`になります。 |
 | `Connection`     | このタスクを実行している接続ID                                                     |
 | `Message`        | 詳細を記載したメッセージ                                                         |
 
-可能な状態は次のとおりです。
+可能な状態は次のとおりです:
 
 | 州      | 説明          |
 | :----- | :---------- |
 | バックアップ | バックアップを作成する |
-| 待って    | 処刑を待つ       |
+| 待って    | 実行待ち        |
 | チェックサム | チェックサム操作の実行 |
 
 接続 ID は、 [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを介してバックアップ/復元タスクをキャンセルするために使用できます。

@@ -74,7 +74,7 @@ TiDB Cloudを使用すると、次の主な機能を利用できます。
 
 TiDB Cloud は次の展開オプションを提供します。
 
--   TiDB Cloud Serverless（Starter に名称変更）
+-   TiDB Cloudスターター
 
     TiDB Cloud Starterは、フルマネージドのマルチテナント型TiDBサービスです。MySQL互換データベースを瞬時に自動スケーリングし、十分な無料クォータと、無料クォータを超えた場合の使用量に応じた課金体系を提供します。
 

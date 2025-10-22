@@ -37,7 +37,7 @@ Starter に名前が変更される前、 TiDB Cloudの Serverless 層は何千�
 
 ### TiDB Cloudで作成できるTiDB Cloud Starter クラスターの数はいくつですか? {#how-many-tidb-cloud-starter-clusters-can-i-create-in-tidb-cloud}
 
-TiDB Cloudでは、組織ごとにデフォルトで最大5つの[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターを作成できます。TiDB TiDB Cloud Starter クラスターをさらに作成するには、クレジットカードを追加し、使用量を[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)設定する必要があります。
+TiDB Cloudでは、組織ごとにデフォルトで最大5つの[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)クラスターを作成できます。TiDB TiDB Cloud Starterクラスターをさらに作成するには、クレジットカードを追加し、使用量を[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)設定する必要があります。
 
 ### TiDB Cloud Starter ではすべてのTiDB Cloud機能が完全にサポートされていますか? {#are-all-tidb-cloud-features-fully-supported-on-tidb-cloud-starter}
 

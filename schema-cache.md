@@ -1,19 +1,19 @@
 ---
 title: Schema Cache
-summary: TiDB は、スキーマ情報に対して LRU (Least Recently Used) ベースのキャッシュ メカニズムを採用しており、これによりメモリ使用量が大幅に削減され、データベースやテーブルの数が多いシナリオでのパフォーマンスが向上します。
+summary: TiDB は、スキーマ情報に対して LRU (Least Recently Used) ベースのキャッシュ メカニズムを採用しており、これによりメモリ使用量が大幅に削減され、多数のデータベースとテーブルがあるシナリオでのパフォーマンスが向上します。
 ---
 
 # スキーマキャッシュ {#schema-cache}
 
-マルチテナントのシナリオによっては、数十万、あるいは数百万ものデータベースとテーブルが存在する場合があります。これらすべてのデータベースとテーブルのスキーマ情報をメモリにロードすると、大量のメモリを消費するだけでなく、アクセスパフォーマンスも低下します。この問題に対処するため、TiDBはLRU（Least Recently Used：最長時間未使用）に似たスキーマキャッシュメカニズムを導入しています。メモリにキャッシュされるのは、最も最近アクセスされたデータベースとテーブルのスキーマ情報のみです。
+マルチテナントのシナリオによっては、数十万、あるいは数百万ものデータベースやテーブルが存在する場合があります。これらすべてのデータベースとテーブルのスキーマ情報をメモリにロードすると、大量のメモリを消費するだけでなく、アクセスパフォーマンスも低下します。この問題に対処するため、TiDBはLRU（Least Recently Used：最長時間未使用）に似たスキーマキャッシュメカニズムを導入しています。メモリにキャッシュされるのは、最も最近アクセスされたデータベースとテーブルのスキーマ情報のみです。
 
 > **注記：**
 >
-> 現在、この機能は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)クラスターでは利用できません。
+> 現在、この機能はクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 ## スキーマキャッシュを構成する {#configure-schema-cache}
 
-システム変数[`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)構成することにより、スキーマ キャッシュ機能を有効にすることができます。
+システム変数[`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)構成することで、スキーマ キャッシュ機能を有効にすることができます。
 
 ## ベストプラクティス {#best-practices}
 
@@ -35,13 +35,13 @@ summary: TiDB は、スキーマ情報に対して LRU (Least Recently Used) ベ
 
 </CustomContent>
 
-## 既知の制限 {#known-limitations}
+## 既知の制限事項 {#known-limitations}
 
 多数のデータベースとテーブルがあるシナリオでは、次の既知の問題が存在します。
 
 -   1 つのクラスター内のテーブル数は 300 万を超えることはできません。
 
--   1 つのクラスター内のテーブル数が 300,000 を超える場合は、値[`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)を`0`に設定しないでください。TiDB でメモリ不足 (OOM) が発生する可能性があります。
+-   1 つのクラスター内のテーブル数が 300,000 を超える場合は、値[`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)を`0`に設定しないでください。TiDB のメモリ不足 (OOM) が発生する可能性があります。
 
 -   外部キーを使用すると、クラスター内の DDL 操作の実行時間が長くなる可能性があります。
 
@@ -63,4 +63,4 @@ summary: TiDB は、スキーマ情報に対して LRU (Least Recently Used) ベ
 
     -   監視パネルでスキーマキャッシュのヒット率とサイズをビュー、キャッシュ設定が適切かどうかを評価します。スキーマキャッシュのサイズを適切に増やすことで、頻繁な削除を削減できます。
     -   ID ジャンプを防ぐには[`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache)を`1`に設定します。
-    -   ID 範囲が狭くなりすぎないように、シャード ビットおよび予約ビットを`AUTO_RANDOM`に適切に構成します。
+    -   ID 範囲が狭くなりすぎないように、シャード ビットと予約ビットを`AUTO_RANDOM`に適切に構成します。

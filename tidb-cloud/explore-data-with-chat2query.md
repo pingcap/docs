@@ -7,7 +7,7 @@ summary: TiDB Cloudコンソールで AI 支援 SQL エディターを使用し�
 
 [TiDB Cloudコンソール](https://tidbcloud.com/)に組み込まれた AI 支援 SQL エディターを使用して、データの価値を最大化できます。
 
-SQLエディタでは、SQLクエリを手動で記述するか、macOSでは<kbd>⌘</kbd> + <kbd>I</kbd> （WindowsまたはLinuxでは<kbd>Control</kbd> + <kbd>I</kbd> ）を押して[Chat2Query（ベータ版）](/tidb-cloud/tidb-cloud-glossary.md#chat2query) SQLクエリを自動生成させることができます。これにより、ローカルSQLクライアントなしでデータベースに対してSQLクエリを実行できます。クエリ結果は表やグラフで直感的に表示でき、クエリログも簡単に確認できます。
+SQLエディタでは、SQLクエリを手動で記述するか、macOSでは<kbd>⌘</kbd> + <kbd>I</kbd> （WindowsまたはLinuxでは<kbd>Control</kbd> + <kbd>I</kbd> ）を押して[Chat2Query（ベータ版）](/tidb-cloud/tidb-cloud-glossary.md#chat2query) SQLクエリを自動生成させることができます。これにより、ローカルSQLクライアントがなくても、データベースに対してSQLクエリを実行できます。クエリ結果は表やグラフで直感的に表示でき、クエリログも簡単に確認できます。
 
 ## ユースケース {#use-cases}
 
@@ -21,11 +21,11 @@ SQL エディターの推奨使用例は次のとおりです。
 
 -   AI によって生成された SQL クエリは 100% 正確ではない可能性があり、調整が必要になる場合があります。
 -   SQL エディターは、AWS でホストされている v6.5.0 以降の TiDB クラスターでのみサポートされます。
--   SQLエディタはAWSでホストされている[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでのみご利用いただけます。3 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでSQLエディタとChat2Queryをご利用いただくには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+-   SQLエディタはAWSでホストされている[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)クラスターでのみご利用いただけます。3 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでSQLエディタとChat2Queryをご利用いただくには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
 ## Access SQL エディター {#access-sql-editor}
 
-1.  プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+1.  プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページ目に移動します。
 
     > **ヒント：**
     >
@@ -38,19 +38,19 @@ SQL エディターの推奨使用例は次のとおりです。
     > 次の場合、 **SQL エディターの**エントリは灰色で表示され、クリックできません。
     >
     > -   TiDB Cloud Dedicated クラスターはバージョン 6.5.0 より前のバージョンです。SQL エディターを使用するには、クラスターをアップグレードするために契約番号[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)必要です。
-    > -   TiDB Cloud Dedicated クラスターは作成されたばかりで、SQL エディタの実行環境はまだ準備中です。この場合は、数分お待ちいただくと Chat2Query が利用可能になります。
+    > -   TiDB Cloud Dedicated クラスターは作成されたばかりで、SQL エディタの実行環境はまだ準備中です。この場合は、数分お待ちいただければ Chat2Query が利用可能になります。
     > -   TiDB Cloud Dedicated クラスターは[一時停止](/tidb-cloud/pause-or-resume-tidb-cluster.md)です。
 
-## AI による SQL クエリ生成を有効または無効にする {#enable-or-disable-ai-to-generate-sql-queries}
+## AI による SQL クエリの生成を有効または無効にする {#enable-or-disable-ai-to-generate-sql-queries}
 
-PingCAPは、ユーザーデータのプライバシーとセキュリティを最優先に考えています。SQLエディターのChat2QueryのAI機能は、SQLクエリを生成するためにデータベーススキーマのみにアクセスし、データ自体にはアクセスしません。詳細については、 [Chat2Queryのプライバシーに関するFAQ](https://www.pingcap.com/privacy-policy/privacy-chat2query)ご覧ください。
+PingCAPは、ユーザーデータのプライバシーとセキュリティを最優先に考えています。SQLエディターのChat2QueryのAI機能は、SQLクエリを生成するためにデータベーススキーマのみにアクセスし、データ自体にはアクセスしません。詳細については、 [Chat2Queryプライバシーに関するFAQ](https://www.pingcap.com/privacy-policy/privacy-chat2query)ご覧ください。
 
 Chat2Query に初めてアクセスすると、PingCAP と Amazon Bedrock がコードスニペットを使用してサービスを調査および改善することを許可するかどうかを尋ねるダイアログが表示されます。
 
 -   AI が SQL クエリを生成できるようにするには、チェックボックスをオンにして、 **「保存して開始」を**クリックします。
 -   AI による SQL クエリの生成を無効にするには、このダイアログを直接閉じます。
 
-初回アクセス後も、次のように AI 設定を変更できます。
+初回アクセス後でも、次のように AI 設定を変更できます。
 
 -   AI を有効にするには、Chat2Query の右上隅にある**「データ探索のための AI パワーを有効にする」**をクリックします。
 -   AIを無効にするには、<mdsvgicon name="icon-top-account-settings"> [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある**[アカウント設定]**をクリックし、 **[AI とプライバシー]**タブをクリックして、 **[AI を活用したデータ探索]**オプションを無効にします。</mdsvgicon>
@@ -66,7 +66,7 @@ SQL エディターでは、独自のデータセットを使用して SQL ク�
 
     macOSの場合:
 
-    -   AI が有効になっている場合は、 **⌘ + I**を押して指示に従い、 **Enter キー**を押すだけで、AI が SQL クエリを自動的に生成します。
+    -   AI が有効になっている場合は、 **⌘ + I**を押して指示に従い、 **Enter キー**を押すだけで、AI によって SQL クエリが自動的に生成されます。
 
         Chat2Queryによって生成されたSQLクエリの場合は、 **「承認」**をクリックしてクエリを承認し、編集を続行します。クエリが要件を満たしていない場合は、 **「破棄」**をクリックして拒否します。または、 **「再生成」**をクリックして、Chat2Queryに新しいクエリをリクエストします。
 
@@ -96,7 +96,7 @@ SQL エディターでは、独自のデータセットを使用して SQL ク�
 
     -   エディタにクエリが1つしかない場合は、それを実行するには**⌘ + Enter**を押すか、 <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**走る**。
 
-    -   エディターに複数のクエリがある場合、そのうちの 1 つまたは複数のクエリを連続して実行するには、カーソルで対象クエリの行を選択し、 **⌘ + Enter キー**を押すか、 **[実行]**をクリックします。
+    -   エディターに複数のクエリがある場合、1 つまたは複数のクエリを連続して実行するには、カーソルで対象クエリの行を選択し、 **⌘ + Enter キー**を押すか、 **[実行]**をクリックします。
 
     -   エディター内のすべてのクエリを順番に実行するには、 **⇧ + ⌘ + Enter を**押すか、カーソルですべてのクエリの行を選択して**「実行」**をクリックします。
 
@@ -144,7 +144,7 @@ SQL エディターでは、Chat2Query を使用して既存の SQL クエリを
 >
 > Chat2QueryはAIアルゴリズムを使用して最適化と修正を提案します。クエリを確定する前に、これらの提案をよく確認することをお勧めします。
 
-## SQL ファイルの管理 {#manage-sql-files}
+## SQLファイルを管理する {#manage-sql-files}
 
 SQL エディターでは、SQL クエリをさまざまな SQL ファイルに保存し、次のように SQL ファイルを管理できます。
 
@@ -168,7 +168,7 @@ Chat2Query では、次のようにして Chat2Query データ アプリにア�
 
 ## SQL ファイルからエンドポイントを生成する {#generate-an-endpoint-from-a-sql-file}
 
-TiDB クラスター向けに、 TiDB Cloud はカスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスできる[データサービス（ベータ版）](/tidb-cloud/data-service-overview.md)機能を提供します。SQL エディターでは、以下の手順で SQL ファイルからデータサービス (ベータ版) のエンドポイントを生成できます。
+TiDB クラスター向けに、 TiDB Cloud はカスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスできる[データサービス（ベータ版）](/tidb-cloud/data-service-overview.md)機能を提供しています。SQL エディターでは、以下の手順で SQL ファイルからデータサービス (ベータ版) のエンドポイントを生成できます。
 
 1.  カーソルをファイル名の上に移動し、ファイル名の横にある**[...]**をクリックして、 **[エンドポイントの生成]**を選択します。
 2.  **[エンドポイントの生成]**ダイアログ ボックスで、エンドポイントを生成するデータ アプリを選択し、エンドポイント名を入力します。
@@ -176,7 +176,7 @@ TiDB クラスター向けに、 TiDB Cloud はカスタム API エンドポイ�
 
 詳細については[エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)参照してください。
 
-## SQLエディタの設定を管理する {#manage-sql-editor-settings}
+## SQLエディターの設定を管理する {#manage-sql-editor-settings}
 
 SQL エディターでは、次の設定を変更できます。
 

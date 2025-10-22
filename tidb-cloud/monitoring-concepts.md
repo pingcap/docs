@@ -39,6 +39,6 @@ TiDB Cloud を使用すると、次のいずれかのサードパーティ メ�
 
 -   [Datadog統合](/tidb-cloud/monitor-datadog-integration.md)
 
--   [Prometheus と Grafana の統合 (ベータ版)](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
+-   [PrometheusとGrafanaの統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
 
 -   [New Relicとの統合](/tidb-cloud/monitor-new-relic-integration.md)

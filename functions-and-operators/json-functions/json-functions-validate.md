@@ -9,11 +9,11 @@ summary: JSON ドキュメントを検証する JSON関数について学習し�
 
 > **注記：**
 >
-> 現在、この機能は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)クラスターでは利用できません。
+> 現在、この機能はクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 ## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-validation-functions.html#function_json-schema-valid">JSON_SCHEMA_VALID()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-validation-functions-html-function-json-schema-valid-json-schema-valid-a}
 
-`JSON_SCHEMA_VALID(schema, json_doc)`関数は、JSON ドキュメントをスキーマに対して検証し、データの整合性と一貫性を確保します。
+`JSON_SCHEMA_VALID(schema, json_doc)`関数は、データの整合性と一貫性を確保するために、スキーマに対して JSON ドキュメントを検証します。
 
 これを[チェック](/constraints.md#check)制約と一緒に使用すると、テーブルが変更されたときに自動スキーマ検証を行うことができます。
 
@@ -35,19 +35,19 @@ summary: JSON ドキュメントを検証する JSON関数について学習し�
 | `exclusiveMinimum`     | `number` / `integer` | 値が最小値（含まない）より大きいかどうかをテストします               |
 | `maxlength`            | `string`             | 値の長さが指定された値を超えていないかどうかをテストします             |
 | `minLength`            | `string`             | 値の長さが指定された値以上かどうかをテストします                  |
-| `format`               | `string`             | 文字列が名前付きフォーマットに一致するかどうかをテストします            |
+| `format`               | `string`             | 文字列が名前付きフォーマットと一致するかどうかをテストします            |
 | `pattern`              | `string`             | 文字列がパターンに一致するかどうかをテストします                  |
 | `items`                | `array`              | 配列の項目に適用するスキーマ                            |
 | `prefixItems`          | `array`              | 配列の位置項目に適用するスキーマ                          |
 | `maxItems`             | `array`              | 配列内の項目数が指定された値を超えていないかどうかをテストします          |
 | `minItems`             | `array`              | 配列内の項目数が指定された値以上かどうかをテストします               |
 | `uniqueItems`          | `array`              | 配列内の項目が一意かどうかをテストします`true` / `false`      |
-| `contains`             | `array`              | 配列に含まれるアイテムのスキーマを設定します                    |
+| `contains`             | `array`              | 配列に含まれる項目のスキーマを設定します                      |
 | `maxContains`          | `array`              | `contains`と一緒に使用して、アイテムが存在できる最大回数をテストします。 |
 | `minContains`          | `array`              | `contains`と一緒に使用して、アイテムが存在できる最小回数をテストします。 |
 | `properties`           | `object`             | オブジェクトのプロパティに適用するスキーマ                     |
 | `patternProperties`    | `object`             | プロパティ名のパターンマッチングに基づいて特定のプロパティに適用するスキーマ    |
-| `additionalProperties` | `object`             | 追加プロパティが許可されるかどうか、 `true` / `false`       |
+| `additionalProperties` | `object`             | 追加のプロパティが許可されるかどうか、 `true` / `false`      |
 | `minProperties`        | `object`             | オブジェクトが持つことができるプロパティの最小数をテストします           |
 | `maxProperties`        | `object`             | オブジェクトが持つことができるプロパティの最大数をテストします           |
 | `required`             | `object`             | 指定されたプロパティ名がオブジェクト内に存在するかどうかをテストします       |
@@ -154,7 +154,7 @@ SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array"}}}',@j);
     +-----------------------------------------------------------------------+
     1 row in set (0.01 sec)
 
-上記の出力は、 `fruits`が配列であることを確認します。
+上記の出力は、 `fruits`が配列であることを確認しています。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "string"}}}',@j);
@@ -244,7 +244,7 @@ SELECT JSON_SCHEMA_VALID('{"type": "string", "pattern": "^Ti"}', '"PingCAP"');
     +------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-値が特定の名前付き形式に一致するかどうかを確認できます。検証可能な形式には`ipv4` 、 `ipv6` 、 `time` 、 `date` 、 `duration` 、 `email` 、 `hostname` 、 `uuid` 、 `uri`などがあります。
+値が特定の名前付きフォーマットに一致するかどうかを確認できます。検証可能なフォーマットには`ipv4` 、 `ipv6` 、 `time` 、 `date` 、 `duration` 、 `email` 、 `hostname` 、 `uuid` 、 `uri`などがあります。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"format": "ipv4"}', '"127.0.0.1"');
@@ -340,7 +340,7 @@ SELECT JSON_SCHEMA_VALID('{"anyOf": [{"type": "string"},{"type": "integer"}]}', 
 
 ## MySQLの互換性 {#mysql-compatibility}
 
--   `JSON_SCHEMA_VALID()`で検証するスキーマが無効な場合（例： `{"type": "sting"}` ）、MySQL はそれを受け入れますが、TiDB はエラーを返します。 `"sting"`にスペルミスがあり、正しくは`"string"`です。
+-   `JSON_SCHEMA_VALID()`で検証するスキーマが無効な場合（例： `{"type": "sting"}` ）、MySQL はそれを受け入れる可能性がありますが、TiDB はエラーを返します。 `"sting"`にスペルミスがあり、正しくは`"string"`です。
 -   MySQL は、JSON スキーマ標準の古いドラフト バージョンを使用します。
 
 ## 参照 {#see-also}

@@ -3,13 +3,13 @@ title: TIDB_HOT_REGIONS_HISTORY
 summary: TIDB_HOT_REGIONS_HISTORY` information_schema テーブルについて学習します。
 ---
 
-# TIDB_ホットリージョン履歴 {#tidb-hot-regions-history}
+# TIDB_HOT_REGIONS_HISTORY {#tidb-hot-regions-history}
 
 `TIDB_HOT_REGIONS_HISTORY`テーブルは、PD によってローカルに定期的に記録される履歴ホット領域に関する情報を提供します。
 
 > **注記：**
 >
-> このテーブルはクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
+> このテーブルはクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
 
 <CustomContent platform="tidb">
 
@@ -73,11 +73,11 @@ DESC tidb_hot_regions_history;
 
 > **注記：**
 >
-> `UPDATE_TIME` 、 `REGION_ID` 、 `STORE_ID` 、 `PEER_ID` 、 `IS_LEARNER` 、 `IS_LEADER` 、 `TYPE`フィールドは、実行のためにPDサーバーにプッシュダウンされます。テーブル使用によるオーバーヘッドを削減するには、検索の期間を指定し、できるだけ多くの条件を指定する必要があります。例えば、 `select * from tidb_hot_regions_history where store_id = 11 and update_time > '2020-05-18 20:40:00' and update_time < '2020-05-18 21:40:00' and type='write'`です。
+> `UPDATE_TIME` 、 `REGION_ID` 、 `STORE_ID` 、 `PEER_ID` 、 `IS_LEARNER` 、 `IS_LEADER` 、 `TYPE`各フィールドは、実行のためにPDサーバーにプッシュダウンされます。テーブル使用時のオーバーヘッドを削減するには、検索の期間を指定し、できるだけ多くの条件を指定する必要があります。例えば、 `select * from tidb_hot_regions_history where store_id = 11 and update_time > '2020-05-18 20:40:00' and update_time < '2020-05-18 21:40:00' and type='write'`ように指定します。
 
 ## 一般的なユーザーシナリオ {#common-user-scenarios}
 
--   特定の期間内でホットな地域をクエリします。1 `update_time`実際の時間に置き換えてください。
+-   特定の期間内のホットリージョンをクエリします。1 `update_time`実際の時間に置き換えてください。
 
     ```sql
     SELECT * FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00';
@@ -85,7 +85,7 @@ DESC tidb_hot_regions_history;
 
     > **注記：**
     >
-    > `UPDATE_TIME` Unix タイムスタンプもサポートします。たとえば、 `update_time >TIMESTAMP('2021-08-18 21:40:00')`や`update_time > FROM_UNIXTIME(1629294000.000)`です。
+    > `UPDATE_TIME` Unix タイムスタンプもサポートします。例えば、 `update_time >TIMESTAMP('2021-08-18 21:40:00')`や`update_time > FROM_UNIXTIME(1629294000.000)`です。
 
 -   特定の期間におけるテーブル内の人気地域をクエリします。1と`update_time` `table_name`実際の値に置き換えてください。
 

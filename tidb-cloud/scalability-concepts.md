@@ -5,9 +5,9 @@ summary: TiDB Cloudのスケーラビリティの概念について学習しま�
 
 # スケーラビリティ {#scalability}
 
-TiDB Cloud は、さまざまなワークロードのニーズを満たすために、柔軟なスケーラビリティを備えた複数の導入オプションを提供します。
+TiDB Cloud は、さまざまなワークロードのニーズを満たすために、柔軟なスケーラビリティを備えた複数の展開オプションを提供します。
 
--   [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 、プロトタイピング、開発、初期段階のワークロードに最適です。自動スケーリング機能が組み込まれているため、 TiDB Cloudをシンプルかつコスト効率よく導入できます。
+-   [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter) 、プロトタイピング、開発、初期段階のワークロードに最適です。自動スケーリングが組み込まれているため、 TiDB Cloudをシンプルかつコスト効率よく導入できます。
 -   [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential) 、トラフィックやデータ量の増加に応じて、より堅牢なスケーラビリティと予測可能なパフォーマンスを必要とする本番ワークロード向けに構築されています。
 -   TiDB Cloud Dedicatedでは、データ量やワークロードの変化に合わせて、コンピューティングリソースとstorageリソースを個別に調整できます。TiDB TiDB Cloud Dedicatedは、サービスを中断することなくスケーリングできます。この柔軟性により、組織は高いパフォーマンスと可用性を維持しながら、インフラストラクチャコストを最適化できます。
 
@@ -15,7 +15,7 @@ TiDB Cloud は、さまざまなワークロードのニーズを満たすため
 >
 > TiDB Cloud Dedicated クラスターのサイズを決定する方法については、 [TiDBのサイズを決定する](/tidb-cloud/size-your-cluster.md)参照してください。
 
-## 垂直および水平スケーリング {#vertical-and-horizontal-scaling}
+## 垂直方向と水平方向のスケーリング {#vertical-and-horizontal-scaling}
 
 TiDB Cloud Dedicated は、垂直 (スケールアップ) スケーリングと水平 (スケールアウト) スケーリングの両方をサポートします。
 
@@ -26,13 +26,13 @@ TiDB Cloud Dedicated では、垂直スケーリングと水平スケーリン�
 
 ## TiDBのスケーラビリティ {#tidb-scalability}
 
-TiDBはコンピューティング専用であり、データの保存は行いません。TiDBのノード数、vCPU、RAMを設定できます。
+TiDBはコンピューティングのみを目的としており、データの保存は行いません。TiDBのノード数、vCPU、RAMを設定できます。
 
 一般に、TiDB のパフォーマンスは TiDB ノードの数に応じて直線的に増加します。
 
 ## TiKVのスケーラビリティ {#tikv-scalability}
 
-TiKVは行ベースのデータの保存を担当します。TiKVのノード数、vCPU、RAM、storageを設定できます。TiKVノードの数は少なくとも1セット（3つの異なる利用可能なゾーンに3ノード）で、3ノードずつ増加する必要があります。
+TiKVは行ベースのデータの保存を担います。TiKVのノード数、vCPU、RAM、storageを設定できます。TiKVノードの数は少なくとも1セット（3つの異なる利用可能なゾーンに3ノード）で、3ノードずつ増加する必要があります。
 
 TiDB Cloudは、耐久性と高可用性を実現するために、選択したリージョン内の3つの利用可能なゾーンにTiKVノードを均等にデプロイします。典型的な3レプリカ構成では、データはすべてのアベイラビリティゾーンにわたるTiKVノードに均等に分散され、各TiKVノードのディスクに永続化されます。TiKVは主にデータstorageに使用されますが、TiKVノードのパフォーマンスはワークロードによっても異なります。
 

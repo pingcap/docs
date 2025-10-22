@@ -9,7 +9,7 @@ summary: RUNAWAY_WATCHES` INFORMATION_SCHEMA テーブルについて学習し�
 
 > **注記：**
 >
-> このテーブルはクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
+> このテーブルはクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -83,7 +83,7 @@ RESOURCE_GROUP_NAME: default
 QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT EXACT TO 'select * from sbtest.sbtest1';
 ```
 
-ランナウェイクエリの監視リストを再度クエリします。
+ランナウェイクエリのウォッチリストを再度クエリします。
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G
@@ -145,6 +145,6 @@ RESOURCE_GROUP_NAME: default
     -   `Plan`プランダイジェストが一致していることを示します。この場合、 `WATCH_TEXT`列目にプランダイジェストが表示されます。
     -   `Similar` SQLダイジェストが一致したことを示します。この場合、 `WATCH_TEXT`列目にSQLダイジェストが表示されます。
     -   `Exact` SQLテキストが一致したことを示します。この場合、 `WATCH_TEXT`列目にSQLテキストが表示されます。
--   `SOURCE` : 監視対象項目のソース。2 `QUERY_LIMIT`で識別された場合は、識別された TiDB IP アドレスが表示されます。手動で追加された場合は`manual`表示されます。
+-   `SOURCE` : 監視対象項目のソース。2 `QUERY_LIMIT`ルールで識別された場合は、識別された TiDB IP アドレスが表示されます。手動で追加された場合は`manual`表示されます。
 -   `ACTION` : 識別後の対応する操作。
--   `RULE` : 識別ルール。現在設定されている3つのルールは`ElapsedTime` 、 `ProcessedKeys` 、 `RequestUnit`です。形式は`ProcessedKeys = 666(10)`で、 `666`は実際の値、 `10`閾値です。
+-   `RULE` : 識別ルール。現在設定されている3つのルールは`ElapsedTime` 、 `ProcessedKeys` 、 `RequestUnit`です。フォーマットは`ProcessedKeys = 666(10)`で、 `666`は実際の値、 `10`閾値です。

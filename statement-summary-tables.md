@@ -3,7 +3,7 @@ title: Statement Summary Tables
 summary: TiDB のステートメント サマリー テーブルについて学習します。
 ---
 
-# 明細書概要表 {#statement-summary-tables}
+# 明細書要約表 {#statement-summary-tables}
 
 SQLパフォーマンスの問題をより適切に処理するために、MySQLは統計情報を使用してSQLを監視するためのテーブルを[明細書要約表](https://dev.mysql.com/doc/refman/8.0/en/performance-schema-statement-summary-tables.html) `performance_schema`提供しています。これらのテーブルのうち、 `events_statements_summary_by_digest`レイテンシー、実行時間、スキャンされた行数、フルテーブルスキャンなどの豊富なフィールドを備えており、SQLの問題を特定するのに非常に役立ちます。
 
@@ -17,7 +17,7 @@ SQLパフォーマンスの問題をより適切に処理するために、MySQL
 
 > **注記：**
 >
-> 上記のテーブルは、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
+> 上記のテーブルは、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では使用できません。
 
 このドキュメントでは、これらのテーブルについて詳しく説明し、それらを使用して SQL パフォーマンスの問題をトラブルシューティングする方法を紹介します。
 
@@ -42,7 +42,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 `statements_summary` 、SQL 監視メトリックの集計結果が格納されます。通常、各監視メトリックには最大値と平均値が含まれます。例えば、実行レイテンシーメトリックは、 `AVG_LATENCY` （平均レイテンシー）と`MAX_LATENCY` （最大レイテンシー）の 2 つのフィールドに対応します。
 
-監視指標を最新に保つため、テーブル`statements_summary`のデータは定期的にクリアされ、最新の集計結果のみが保持・表示されます。定期的なデータクリアはシステム変数`tidb_stmt_summary_refresh_interval`によって制御されます。クリア直後にクエリを実行した場合、表示されるデータが非常に少なくなる可能性があります。
+監視メトリックを最新に保つため、 `statements_summary`テーブルのデータは定期的にクリアされ、最新の集計結果のみが保持・表示されます。定期的なデータクリアは`tidb_stmt_summary_refresh_interval`システム変数によって制御されます。クリア直後にクエリを実行した場合、表示されるデータが非常に少なくなる可能性があります。
 
 以下はクエリ`statements_summary`の出力例です。
 
@@ -84,7 +84,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 ## <code>statements_summary_history</code> {#code-statements-summary-history-code}
 
-`statements_summary_history`のテーブルスキーマは`statements_summary`と同一です。5 `statements_summary_history` 、特定の時間範囲の履歴データを保存します。履歴データを確認することで、異常のトラブルシューティングや、異なる時間範囲の監視メトリックの比較が可能になります。
+`statements_summary_history`のテーブルスキーマは`statements_summary`と同一です。5 `statements_summary_history` 、指定した時間範囲の履歴データを保存します。履歴データを確認することで、異常のトラブルシューティングや、異なる時間範囲の監視メトリクスの比較が可能になります。
 
 フィールド`SUMMARY_BEGIN_TIME`と`SUMMARY_END_TIME` 、履歴時間範囲の開始時刻と終了時刻を表します。
 
@@ -100,7 +100,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 </CustomContent>
 
-`statements_summary_evicted`テーブルは、エビクションが発生した期間と、その期間中にエビクションされたSQLダイジェストの数を記録します。このテーブルは、 `tidb_stmt_summary_max_stmt_count`ワークロードに対して適切に設定されているかどうかを評価するのに役立ちます。このテーブルにレコードが含まれている場合、ある時点でSQLダイジェストの数が`tidb_stmt_summary_max_stmt_count`超えたことを示します。
+`statements_summary_evicted`テーブルは、エビクションが発生した期間と、その期間中にエビクションされた SQL ダイジェストの数を記録します。このテーブルは、 `tidb_stmt_summary_max_stmt_count`ワークロードに対して適切に設定されているかどうかを評価するのに役立ちます。このテーブルにレコードが含まれている場合、ある時点で SQL ダイジェストの数が`tidb_stmt_summary_max_stmt_count`超えたことを示します。
 
 <CustomContent platform="tidb">
 
@@ -152,12 +152,12 @@ set global tidb_stmt_summary_refresh_interval = 1800;
 set global tidb_stmt_summary_history_size = 24;
 ```
 
-上記の設定が有効になると、テーブル`statements_summary`は30分ごとにクリアされ、テーブル`statements_summary_history`には最大3000種類のSQL文が格納されます。テーブル`statements_summary_history`には、各種類について直近24期間のデータが格納されます。テーブル`statements_summary_evicted`は、ステートメントサマリーからSQL文が削除された直近24期間が記録されます。テーブル`statements_summary_evicted`は30分ごとに更新されます。
+上記の設定が有効になると、テーブル`statements_summary`は30分ごとにクリアされ、テーブル`statements_summary_history`には最大3000種類のSQL文が格納されます。テーブル`statements_summary_history`には、各種類について過去24期間分のデータが格納されます。テーブル`statements_summary_evicted`には、SQL文がステートメントサマリーから削除された過去24期間分のデータが記録されます。テーブル`statements_summary_evicted`は30分ごとに更新されます。
 
 > **注記：**
 >
-> -   あるSQLタイプが毎分出現する場合、 `statements_summary_history`直近12時間分のデータを保存します。あるSQLタイプが毎日0:00から0:30までしか出現しない場合、 `statements_summary_history`直近24期間分のデータを保存します（各期間は1日）。したがって、 `statements_summary_history`直近24日間分のデータを保存します。
-> -   `tidb_stmt_summary_history_size` `tidb_stmt_summary_max_stmt_count`設定項目はメモリ使用量に影響します。これらの設定は、ニーズ、SQLサイズ、SQL数、マシン構成に応じて調整することをお勧めします。あまり大きな値に設定すること`tidb_stmt_summary_max_sql_length`お勧めしません。メモリ使用量は`tidb_stmt_summary_history_size` * `tidb_stmt_summary_max_stmt_count` * `tidb_stmt_summary_max_sql_length` * `3`で計算できます。
+> -   SQLタイプが毎分出現する場合、 `statements_summary_history`直近12時間分のデータを保存します。SQLタイプが毎日00:00から00:30までしか出現しない場合、 `statements_summary_history`直近24期間分のデータを保存します（各期間は1日）。したがって、 `statements_summary_history`直近24日間分のSQLタイプを保存します。
+> -   `tidb_stmt_summary_history_size` `tidb_stmt_summary_max_stmt_count`設定項目はメモリ使用量に影響します。これらの設定は、ニーズ、SQLサイズ、SQL数、マシン構成に応じて調整することをお勧めします。あまり大きな値に設定すること`tidb_stmt_summary_max_sql_length`推奨されません。メモリ使用量は`tidb_stmt_summary_history_size` * `tidb_stmt_summary_max_stmt_count` * `tidb_stmt_summary_max_sql_length` * `3`で計算できます。
 
 ### ステートメントサマリーの適切なサイズを設定する {#set-a-proper-size-for-statement-summary}
 
@@ -217,7 +217,7 @@ select * from information_schema.statements_summary_evicted;
 
 <CustomContent platform="tidb-cloud">
 
-このセクションはTiDB Self-Managedにのみ適用されます。TiDB TiDB Cloudの場合、 `tidb_stmt_summary_enable_persistent`パラメータの値はデフォルトで`false`設定されており、動的な変更はサポートされていません。
+このセクションは TiDB Self-Managed にのみ適用されます。TiDB TiDB Cloudの場合、 `tidb_stmt_summary_enable_persistent`パラメータの値はデフォルトで`false`設定されており、動的な変更はサポートされません。
 
 </CustomContent>
 
@@ -227,13 +227,13 @@ select * from information_schema.statements_summary_evicted;
 
 <CustomContent platform="tidb">
 
-セクション[制限](#limitation)で説明したように、ステートメントサマリーテーブルはデフォルトでメモリに保存されます。TiDBサーバーを再起動すると、すべてのステートメントサマリーが失われます。v6.6.0以降、TiDBは設定項目[`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660)試験的に提供し、ユーザーがステートメントサマリーの永続性を有効または無効にできるようになりました。
+セクション[制限](#limitation)で説明したように、ステートメントサマリーテーブルはデフォルトでメモリに保存されます。TiDBサーバーが再起動すると、すべてのステートメントサマリーは失われます。v6.6.0以降、TiDBは設定項目[`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660)試験的に提供し、ユーザーがステートメントサマリーの永続性を有効または無効にできるようになりました。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-セクション[制限](#limitation)で説明したように、ステートメントサマリーテーブルはデフォルトでメモリに保存されます。TiDBサーバーを再起動すると、すべてのステートメントサマリーが失われます。v6.6.0以降、TiDBは設定項目`tidb_stmt_summary_enable_persistent`試験的に提供し、ユーザーがステートメントサマリーの永続性を有効または無効にできるようになりました。
+セクション[制限](#limitation)で説明したように、ステートメントサマリーテーブルはデフォルトでメモリに保存されます。TiDBサーバーが再起動すると、すべてのステートメントサマリーは失われます。v6.6.0以降、TiDBは設定項目`tidb_stmt_summary_enable_persistent`試験的に提供し、ユーザーがステートメントサマリーの永続性を有効または無効にできるようになりました。
 
 </CustomContent>
 
@@ -249,7 +249,7 @@ tidb_stmt_summary_enable_persistent = true
 # tidb_stmt_summary_file_max_backups = 0
 ```
 
-ステートメントサマリーの永続化を有効にすると、メモリには現在のリアルタイムデータのみが保持され、履歴データは保持されません。リアルタイムデータが履歴データとして更新されると、履歴データはセクション[パラメータ設定](#parameter-configuration)で説明した間隔`tidb_stmt_summary_refresh_interval`でディスクに書き込まれます。テーブル`statements_summary_history`または`cluster_statements_summary_history`に対するクエリは、メモリ内データとディスク上のデータの両方を組み合わせた結果を返します。
+ステートメントサマリーの永続化を有効にすると、メモリには現在のリアルタイムデータのみが保持され、履歴データは保持されません。リアルタイムデータが履歴データとして更新されると、履歴データは[パラメータ設定](#parameter-configuration)セクションで説明した間隔`tidb_stmt_summary_refresh_interval`でディスクに書き込まれます。5または`statements_summary_history` `cluster_statements_summary_history`テーブルに対するクエリは、メモリ内データとディスク上のデータの両方を組み合わせた結果を返します。
 
 <CustomContent platform="tidb">
 
@@ -274,7 +274,7 @@ SELECT avg_latency, exec_count, query_sample_text
     WHERE digest_text LIKE 'select * from employee%';
 ```
 
-`1ms`と`0.3ms` `avg_latency`の正常範囲内と考えられます。したがって、サーバー側が原因ではないと考えられます。クライアント側またはネットワーク側のトラブルシューティングを行ってください。
+`1ms`と`0.3ms` `avg_latency`の正常範囲内と考えられます。したがって、サーバー側が原因ではないと考えられます。クライアント側またはネットワーク側でトラブルシューティングを行うことができます。
 
 ```sql
 +-------------+------------+------------------------------------------+
@@ -337,7 +337,7 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
 実行時間に関連するフィールド:
 
 -   `SUMMARY_BEGIN_TIME` : 現在の要約期間の開始時刻。
--   `SUMMARY_END_TIME` : 現在の集計期間の終了時刻。
+-   `SUMMARY_END_TIME` : 現在の要約期間の終了時刻。
 -   `FIRST_SEEN` : このカテゴリの SQL 文が初めて表示された時刻。
 -   `LAST_SEEN` : このカテゴリの SQL 文が最後に確認された時刻。
 
@@ -383,7 +383,7 @@ TiDBサーバーに関連するフィールド:
 -   `MAX_MEM` : 使用される最大メモリ(バイト)。
 -   `AVG_DISK` : 使用された平均ディスク容量 (バイト)。
 -   `MAX_DISK` : 使用される最大ディスク容量 (バイト)。
--   `AVG_TIDB_CPU_TIME` : このカテゴリのSQL文が消費するTiDBサーバーCPU時間の平均。Top Top SQL機能が有効な場合にのみ意味のある値が表示されます。それ以外の場合は、値は常に`0`です。
+-   `AVG_TIDB_CPU_TIME` : このカテゴリのSQL文が消費するTiDBサーバーCPU時間の平均。Top Top SQL機能が有効になっている場合にのみ意味のある値が表示されます。それ以外の場合は、値は常に`0`です。
 
 </CustomContent>
 
@@ -393,8 +393,8 @@ TiKVコプロセッサータスクに関連するフィールド:
 -   `MAX_COP_PROCESS_TIME` :コプロセッサータスクの最大実行時間。
 -   `MAX_COP_PROCESS_ADDRESS` : 実行時間が最大となるコプロセッサータスクのアドレス。
 -   `MAX_COP_WAIT_TIME` :コプロセッサータスクの最大待機時間。
--   `MAX_COP_WAIT_ADDRESS` : 待機時間が最大となるコプロセッサータスクのアドレス。
--   `AVG_PROCESS_TIME` : TiKV での SQL ステートメントの平均処理時間。
+-   `MAX_COP_WAIT_ADDRESS` : 最大待機時間を持つコプロセッサータスクのアドレス。
+-   `AVG_PROCESS_TIME` : TiKV 内の SQL ステートメントの平均処理時間。
 -   `MAX_PROCESS_TIME` : TiKV での SQL ステートメントの最大処理時間。
 -   `AVG_WAIT_TIME` : TiKV 内の SQL ステートメントの平均待機時間。
 -   `MAX_WAIT_TIME` : TiKV での SQL ステートメントの最大待機時間。
@@ -414,10 +414,10 @@ TiKVコプロセッサータスクに関連するフィールド:
 -   `MAX_COMMIT_TIME` : コミット フェーズの最長時間。
 -   `AVG_GET_COMMIT_TS_TIME` : `commit_ts`を取得する平均時間。
 -   `MAX_GET_COMMIT_TS_TIME` : `commit_ts`取得するのに要した最長時間。
--   `AVG_COMMIT_BACKOFF_TIME` : コミット フェーズ中に SQL ステートメントで再試行を必要とするエラーが発生した場合の再試行前の平均待機時間。
+-   `AVG_COMMIT_BACKOFF_TIME` : コミット フェーズ中に SQL ステートメントで再試行を必要とするエラーが発生した場合の再試行までの平均待機時間。
 -   `MAX_COMMIT_BACKOFF_TIME` : コミット フェーズ中に SQL ステートメントで再試行を必要とするエラーが発生した場合の再試行前の最大待機時間。
 -   `AVG_RESOLVE_LOCK_TIME` : トランザクション間で発生したロックの競合を解決するための平均時間。
--   `MAX_RESOLVE_LOCK_TIME` : トランザクション間で発生したロックの競合を解決するのに最長時間かかりました。
+-   `MAX_RESOLVE_LOCK_TIME` : トランザクション間で発生したロック競合の解決に最も長い時間がかかりました。
 -   `AVG_LOCAL_LATCH_WAIT_TIME` : ローカル トランザクションの平均待機時間。
 -   `MAX_LOCAL_LATCH_WAIT_TIME` : ローカル トランザクションの最大待機時間。
 -   `AVG_WRITE_KEYS` : 書き込まれたキーの平均数。
@@ -428,8 +428,8 @@ TiKVコプロセッサータスクに関連するフィールド:
 -   `MAX_PREWRITE_REGIONS` : 事前書き込みフェーズ中のリージョンの最大数。
 -   `AVG_TXN_RETRY` : トランザクション再試行の平均回数。
 -   `MAX_TXN_RETRY` : トランザクション再試行の最大回数。
--   `SUM_BACKOFF_TIMES` : このカテゴリの SQL 文で再試行を必要とするエラーが発生した場合の再試行の合計。
--   `BACKOFF_TYPES` : 再試行を必要とするすべてのエラーの種類と、各種類の再試行回数。フィールドの形式は`type:number`です。エラーの種類が複数ある場合は、それぞれをカンマで区切ります（例: `txnLock:2,pdRPC:1` ）。
+-   `SUM_BACKOFF_TIMES` : このカテゴリの SQL 文で再試行が必要なエラーが発生した場合の再試行の合計。
+-   `BACKOFF_TYPES` : 再試行が必要なすべてのエラーの種類と、各種類の再試行回数。フィールドの形式は`type:number`です。エラーの種類が複数ある場合は、それぞれをカンマで区切ります（例： `txnLock:2,pdRPC:1` ）。
 -   `AVG_AFFECTED_ROWS` : 影響を受ける行の平均数。
 -   `PREV_SAMPLE_TEXT` : 現在のSQL文が`COMMIT`の場合、 `PREV_SAMPLE_TEXT` `COMMIT`の前の文です。この場合、SQL文はダイジェストと`prev_sample_text`によってグループ化されます。つまり、 `prev_sample_text`が異なる`COMMIT`の文が異なる行にグループ化されます。現在のSQL文が`COMMIT`でない場合、 `PREV_SAMPLE_TEXT`フィールドは空文字列になります。
 
@@ -439,7 +439,7 @@ TiKVコプロセッサータスクに関連するフィールド:
 -   `MAX_REQUEST_UNIT_WRITE` : SQL ステートメントによって消費される書き込み RU の最大数。
 -   `AVG_REQUEST_UNIT_READ` : SQL ステートメントによって消費される読み取り RU の平均数。
 -   `MAX_REQUEST_UNIT_READ` : SQL ステートメントによって消費される読み取り RU の最大数。
--   `AVG_QUEUED_RC_TIME` : SQL ステートメントを実行するときに使用可能な RU の平均待機時間。
+-   `AVG_QUEUED_RC_TIME` : SQL ステートメントを実行するときに使用可能な RU を待機する平均時間。
 -   `MAX_QUEUED_RC_TIME` : SQL ステートメントを実行するときに使用可能な RU の最大待機時間。
 -   `RESOURCE_GROUP` : SQL ステートメントにバインドされたリソース グループ。
 

@@ -9,11 +9,11 @@ summary: 通知の種類、目的、表示方法など、 TiDB Cloudコンソー
 
 ## 通知の種類 {#notification-types}
 
-TiDB Cloudコンソールでは、次のようなさまざまな種類の通知が届く場合があります。
+TiDB Cloudコンソールでは、次のようなさまざまな種類の通知を受け取る場合があります。
 
 -   **情報通知**
 
-    機能の使用に関するヒント、アプリケーションの変更、今後のイベントのリマインダーなど、役立つ更新情報を提供します。
+    機能の使用に関するヒント、アプリケーションの変更、今後のイベントのリマインダーなどの役立つ更新情報を提供します。
 
 -   **実用的な通知**
 
@@ -37,7 +37,7 @@ TiDB Cloudコンソールでは、次のようなさまざまな種類の通知�
 
 | 通知                            | トリガーイベント                                                                                   | 通知受信者                                                                                             |
 | ----------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
-| TiDB Cloud Starter クラスターの作成   | [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターが作成されます。   | プロジェクトメンバー全員                                                                                      |
+| TiDB Cloud Starter クラスターの作成   | [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)クラスターが作成されます。                 | プロジェクトメンバー全員                                                                                      |
 | TiDB Cloud Starter クラスターの削除   | TiDB Cloud Starter クラスターが削除されます。                                                           | プロジェクトメンバー全員                                                                                      |
 | TiDB Cloud Essential クラスターの作成 | [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスターが作成されます。             | プロジェクトメンバー全員                                                                                      |
 | TiDB Cloud Essential クラスタの削除  | [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスターが削除されます。             | プロジェクトメンバー全員                                                                                      |

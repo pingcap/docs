@@ -8,7 +8,7 @@ summary: サードパーティのメトリクス統合の使用方法を学習�
 TiDB Cloud を次のサードパーティ メトリック サービスと統合して、 TiDB Cloudアラートを受信し、これらのサービスで TiDB クラスターのパフォーマンス メトリックを表示できます。
 
 -   [Datadog統合](#datadog-integration)
--   [Prometheus と Grafana の統合 (ベータ版)](#prometheus-and-grafana-integration-beta)
+-   [PrometheusとGrafanaの統合](#prometheus-and-grafana-integration)
 -   [New Relicとの統合](#new-relic-integration)
 
 ## Datadog統合 {#datadog-integration}
@@ -17,7 +17,7 @@ Datadog 統合を使用すると、TiDB クラスターに関するメトリッ�
 
 詳細な統合手順と Datadog が追跡するメトリクスのリストについては、 [TiDB CloudとDatadogの統合](/tidb-cloud/monitor-datadog-integration.md)を参照してください。
 
-## Prometheus と Grafana の統合 (ベータ版) {#prometheus-and-grafana-integration-beta}
+## PrometheusとGrafanaの統合 {#prometheus-and-grafana-integration}
 
 PrometheusとGrafanaの統合により、 TiDB CloudからPrometheus用の`scrape_config`ファイルを取得し、そのファイルの内容を使用してPrometheusを設定できます。これらのメトリクスはGrafanaダッシュボードで確認できます。
 

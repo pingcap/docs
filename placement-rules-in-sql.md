@@ -10,23 +10,23 @@ SQLの配置ルールは、SQL文を使用してTiKVクラスター内のデー�
 この機能は、次のユースケースを満たすことができます。
 
 -   複数のデータセンターにデータをデプロイ、高可用性戦略を最適化するためのルールを構成します。
--   異なるアプリケーションからの複数のデータベースを結合し、異なるユーザーのデータを物理的に分離することで、インスタンス内の異なるユーザーの分離要件を満たします。
--   重要なデータのレプリカの数を増やして、アプリケーションの可用性とデータの信頼性を向上させます。
+-   異なるアプリケーションからの複数のデータベースをマージし、異なるユーザーのデータを物理的に分離することで、インスタンス内の異なるユーザーの分離要件を満たします。
+-   重要なデータのレプリカ数を増やして、アプリケーションの可用性とデータの信頼性を向上させます。
 
 > **注記：**
 >
-> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
+> この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 ## 概要 {#overview}
 
 SQL 機能の配置ルールを使用すると、次のように、粗い粒度から細かい粒度までのさまざまなレベルのデータに対して必要な配置ポリシーを構成[配置ポリシーを作成する](#create-and-attach-placement-policies)ます。
 
-| レベル     | 説明                                                                                                                                                           |
-| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| クラスタ    | デフォルトでは、TiDBはクラスタごとに3つのレプリカのポリシーを設定します。クラスタのグローバル配置ポリシーを設定できます。詳細については、 [クラスタ全体のレプリカ数を指定する](#specify-the-number-of-replicas-globally-for-a-cluster)参照してください。 |
-| データベース  | 特定のデータベースに対して配置ポリシーを設定できます。詳細については、 [データベースのデフォルトの配置ポリシーを指定する](#specify-a-default-placement-policy-for-a-database)参照してください。                                  |
-| テーブル    | 特定のテーブルに対して配置ポリシーを設定できます。詳細については、 [テーブルの配置ポリシーを指定する](#specify-a-placement-policy-for-a-table)参照してください。                                                       |
-| パーティション | テーブル内の異なる行にパーティションを作成し、パーティションの配置ポリシーを個別に設定できます。詳細については、 [パーティションテーブルの配置ポリシーを指定する](#specify-a-placement-policy-for-a-partitioned-table)参照してください。             |
+| レベル     | 説明                                                                                                                                                               |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| クラスタ    | デフォルトでは、TiDBはクラスタごとに3つのレプリカのポリシーを設定します。クラスタのグローバル配置ポリシーを設定できます。詳細については、 [クラスタのレプリカ数をグローバルに指定する](#specify-the-number-of-replicas-globally-for-a-cluster)参照してください。 |
+| データベース  | 特定のデータベースに対して配置ポリシーを設定できます。詳細については、 [データベースのデフォルトの配置ポリシーを指定する](#specify-a-default-placement-policy-for-a-database)参照してください。                                      |
+| テーブル    | 特定のテーブルに対して配置ポリシーを設定できます。詳細については、 [テーブルの配置ポリシーを指定する](#specify-a-placement-policy-for-a-table)参照してください。                                                           |
+| パーティション | テーブル内の異なる行にパーティションを作成し、パーティションごとに配置ポリシーを個別に設定できます。詳細については、 [パーティションテーブルの配置ポリシーを指定する](#specify-a-placement-policy-for-a-partitioned-table)参照してください。               |
 
 > **ヒント：**
 >
@@ -35,8 +35,8 @@ SQL 機能の配置ルールを使用すると、次のように、粗い粒度�
 ## 制限事項 {#limitations}
 
 -   メンテナンスを簡素化するために、クラスター内の配置ポリシーの数を 10 以下に制限することをお勧めします。
--   配置ポリシーを適用するテーブルとパーティションの総数は、10,000個以下に制限することをお勧めします。ポリシーを適用するテーブルとパーティションが多すぎると、PDの計算ワークロードが増加し、サービスパフォーマンスに影響を及ぼす可能性があります。
--   他の複雑な配置ポリシーを使用するのではなく、このドキュメントに示されている例に従って SQL 機能の配置ルールを使用することをお勧めします。
+-   配置ポリシーを適用するテーブルとパーティションの総数は、10,000個以下に制限することをお勧めします。ポリシーを適用するテーブルとパーティションが多すぎると、PDの計算ワークロードが増加し、サービスパフォーマンスに影響を与える可能性があります。
+-   他の複雑な配置ポリシーを使用するのではなく、このドキュメントに示されている例に従って、SQL 機能の配置ルールを使用することをお勧めします。
 
 ## 前提条件 {#prerequisites}
 
@@ -44,7 +44,7 @@ SQL 機能の配置ルールを使用すると、次のように、粗い粒度�
 
 <CustomContent platform="tidb">
 
-配置ポリシーを作成する際、TiDBはポリシーで指定されたラベルが存在するかどうかを確認しません。代わりに、ポリシーをアタッチする際に確認を実行します。そのため、配置ポリシーをアタッチする前に、各TiKVノードに正しいラベルが設定されていることを確認してください。TiDBセルフマネージドクラスタの設定方法は次のとおりです。
+配置ポリシーを作成する際、TiDBはポリシーで指定されたラベルが存在するかどうかを確認しません。代わりに、ポリシーをアタッチする際に確認を実行します。したがって、配置ポリシーをアタッチする前に、各TiKVノードに正しいラベルが設定されていることを確認してください。TiDBセルフマネージドクラスタの設定方法は次のとおりです。
 
     tikv-server --labels region=<region>,zone=<zone>,host=<host>
 
@@ -64,11 +64,11 @@ SQL 機能の配置ルールを使用すると、次のように、粗い粒度�
 
 <CustomContent platform="tidb-cloud">
 
-TiDB Cloud Dedicated クラスターの場合、TiKV ノードのラベルは自動的に構成されます。
+TiDB Cloud Dedicated クラスターの場合、TiKV ノード上のラベルは自動的に構成されます。
 
 </CustomContent>
 
-現在の TiKV クラスターで使用可能なすべてのラベルを表示するには、次[`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)ステートメントを使用します。
+現在の TiKV クラスターで使用可能なすべてのラベルを表示するには、次の[`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)ステートメントを使用します。
 
 ```sql
 SHOW PLACEMENT LABELS;
@@ -96,8 +96,8 @@ SHOW PLACEMENT LABELS;
 
     この声明では、
 
-    -   `PRIMARY_REGION="us-east-1"`オプションは、 `region`ラベルのノードにRaft Leaders を`us-east-1`として配置することを意味します。
-    -   オプション`REGIONS="us-east-1,us-west-1"`は`region`ラベルのノードに`us-east-1`として、 `region`ラベルのノードに`us-west-1`としてRaft Followers を配置することを意味します。
+    -   `PRIMARY_REGION="us-east-1"`オプションは、 `region`ラベルのノードにRaftリーダーを`us-east-1`として配置することを意味します。
+    -   `REGIONS="us-east-1,us-west-1"`オプションは、 `region`ラベルのノードに`us-east-1`として、 `region`ラベルのノードに`us-west-1`としてRaft Follower を配置することを意味します。
 
     構成可能な配置オプションとその意味の詳細については、 [配置オプション](#placement-option-reference)参照してください。
 
@@ -212,11 +212,11 @@ DROP PLACEMENT POLICY myplacementpolicy;
 
 ### 高度な配置オプション {#advanced-placement-options}
 
-高度な構成オプションは、複雑なシナリオの要件を満たすためのデータ配置の柔軟性を高めます。ただし、高度なオプションの構成は通常のオプションよりも複雑であり、クラスタトポロジとTiDBデータシャーディングに関する深い理解が必要です。
+高度な構成オプションを使用すると、複雑なシナリオの要件を満たすためのデータ配置をより柔軟に行うことができます。ただし、高度なオプションの構成は通常のオプションよりも複雑であり、クラスタトポロジとTiDBデータシャーディングに関する深い理解が必要です。
 
 | オプション名                 | 説明                                                                           |
 | ---------------------- | ---------------------------------------------------------------------------- |
-| `CONSTRAINTS`          | すべてのロールに適用される制約のリスト。例: `CONSTRAINTS="[+disk=ssd]"` 。                         |
+| `CONSTRAINTS`          | すべてのロールに適用される制約のリスト。例： `CONSTRAINTS="[+disk=ssd]"` 。                         |
 | `LEADER_CONSTRAINTS`   | Leaderにのみ適用される制約のリスト。                                                        |
 | `FOLLOWER_CONSTRAINTS` | フォロワーにのみ適用される制約のリスト。                                                         |
 | `LEARNER_CONSTRAINTS`  | 学習者にのみ適用される制約のリスト。                                                           |
@@ -239,9 +239,9 @@ DROP PLACEMENT POLICY myplacementpolicy;
 
 ## 基本的な例 {#basic-examples}
 
-### クラスタ全体のレプリカ数を指定する {#specify-the-number-of-replicas-globally-for-a-cluster}
+### クラスタのレプリカ数をグローバルに指定する {#specify-the-number-of-replicas-globally-for-a-cluster}
 
-クラスターが初期化された後、デフォルトのレプリカ数は`3`です。クラスターにさらに多くのレプリカが必要な場合は、配置ポリシーを設定してこの数を増やし、クラスターレベルで[`ALTER RANGE`](/sql-statements/sql-statement-alter-range.md)指定してポリシーを適用できます。例:
+クラスターが初期化された後、デフォルトのレプリカ数は`3`です。クラスターにさらにレプリカが必要な場合は、配置ポリシーを設定してこの数を増やし、クラスターレベルで[`ALTER RANGE`](/sql-statements/sql-statement-alter-range.md)指定してポリシーを適用できます。例:
 
 ```sql
 CREATE PLACEMENT POLICY five_replicas FOLLOWERS=4;
@@ -276,7 +276,7 @@ CREATE TABLE t4 (a INT);  -- Creates a table t4. The default placement policy p3
 ALTER PLACEMENT POLICY p3 FOLLOWERS=3; -- `FOLLOWERS=3` applies to the table attached with policy p3 (that is, table t4).
 ```
 
-表からパーティションへのポリシー継承は、前述の例のポリシー継承とは異なることに注意してください。表のデフォルトポリシーを変更すると、新しいポリシーはその表内のパーティションにも適用されます。ただし、表がデータベースからポリシーを継承するのは、ポリシーを指定せずに作成された場合のみです。表がデータベースからポリシーを継承した後は、データベースのデフォルトポリシーを変更しても、その表には適用されません。
+表からパーティションへのポリシーの継承は、前述の例のポリシーの継承とは異なることに注意してください。表のデフォルトポリシーを変更すると、新しいポリシーはその表内のパーティションにも適用されます。ただし、表がデータベースからポリシーを継承するのは、ポリシーを指定せずに作成された場合のみです。表がデータベースからポリシーを継承した後は、データベースのデフォルトポリシーを変更しても、その表には適用されません。
 
 ### テーブルの配置ポリシーを指定する {#specify-a-placement-policy-for-a-table}
 
@@ -326,7 +326,7 @@ ALTER TABLE t1 PARTITION p1 PLACEMENT POLICY=storageforhistorydata;
 
 ## 高可用性の例 {#high-availability-examples}
 
-TiKV ノードが 3 つのリージョンに分散され、各リージョンに 3 つの利用可能なゾーンが含まれる、次のトポロジを持つクラスターがあるとします。
+TiKV ノードが 3 つのリージョンに分散され、各リージョンに 3 つの利用可能なゾーンが含まれている、次のトポロジを持つクラスターがあるとします。
 
 ```sql
 SELECT store_id,address,label from INFORMATION_SCHEMA.TIKV_STORE_STATUS;
@@ -348,7 +348,7 @@ SELECT store_id,address,label from INFORMATION_SCHEMA.TIKV_STORE_STATUS;
 
 ### 生存の好みを指定する {#specify-survival-preferences}
 
-正確なデータ分散については特に気にしないが、災害復旧要件を満たすことを優先する場合は、オプション`SURVIVAL_PREFERENCES`使用してデータ存続の設定を指定できます。
+正確なデータ分散については特に気にせず、災害復旧要件を満たすことを優先する場合は、オプション`SURVIVAL_PREFERENCES`使用してデータ存続の設定を指定できます。
 
 前の例と同様に、TiDB クラスターは 3 つのリージョンに分散されており、各リージョンには 3 つのゾーンが含まれています。このクラスターの配置ポリシーを作成する際、 `SURVIVAL_PREFERENCES`次のように設定すると仮定します。
 
@@ -359,8 +359,8 @@ CREATE PLACEMENT POLICY singleaz CONSTRAINTS="[+region=us-east-1]" SURVIVAL_PREF
 
 配置ポリシーを作成したら、必要に応じて対応するテーブルに添付できます。
 
--   `multiaz`配置ポリシーが関連付けられているテーブルの場合、データは異なるリージョンの 3 つのレプリカに配置され、データ分離のクロスリージョン存続目標、次にクロスゾーン存続目標、最後にクロスホスト存続目標を満たすことが優先されます。
--   `singleaz`配置ポリシーが割り当てられたテーブルの場合、データは最初に`us-east-1`リージョンの 3 つのレプリカに配置され、その後、データ分離のゾーン間存続目標が満たされます。
+-   `multiaz`配置ポリシーがアタッチされたテーブルの場合、データは異なるリージョンの 3 つのレプリカに配置され、データ分離のクロスリージョン存続目標、次にクロスゾーン存続目標、最後にクロスホスト存続目標を満たすことが優先されます。
+-   `singleaz`配置ポリシーがアタッチされたテーブルの場合、データは最初に`us-east-1`リージョンの 3 つのレプリカに配置され、その後、データ分離のゾーン間の存続目標が満たされます。
 
 <CustomContent platform="tidb">
 
@@ -410,7 +410,7 @@ SHOW PLACEMENT;
 CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-east-1]" FOLLOWER_CONSTRAINTS='{"+region=us-east-1": 1, "+region=us-east-2": 2, "+region=us-west-1": 1}';
 ```
 
-この配置ポリシーを作成し、目的のデータに適用すると、そのデータのRaftLeaderレプリカは`LEADER_CONSTRAINTS`オプションで指定された`us-east-1`リージョンに配置され、その他のデータのレプリカは`FOLLOWER_CONSTRAINTS`オプションで指定されたリージョンに配置されます。7リージョンのノード停止など、クラスターに障害が発生した場合でも、 `FOLLOWER_CONSTRAINTS`で指定され`us-east-1`リージョンであっても、他のリージョンから新しいLeaderが選出されることに注意してください。つまり、サービスの可用性の確保が最優先されます。
+この配置ポリシーを作成し、目的のデータに適用すると、そのデータのRaftLeaderレプリカは`LEADER_CONSTRAINTS`オプションで指定された`us-east-1`リージョンに配置され、その他のデータのレプリカは`FOLLOWER_CONSTRAINTS`オプションで指定されたリージョンに配置されます。7 `us-east-1`のノード停止など、クラスターに障害が発生した場合、 `FOLLOWER_CONSTRAINTS`で指定されたリージョンであっても、他のリージョンから新しいLeaderが選出されることに注意してください。つまり、サービスの可用性の確保が最優先されます。
 
 `us-east-1`リージョンで障害が発生した場合、 `us-west-1`に新しいリーダーを配置したくない場合は、そのリージョンで新しく選出されたリーダーを排除するための特別な`evict-leader`属性を構成できます。
 
@@ -430,7 +430,7 @@ CREATE TABLE t1 (a INT) PLACEMENT POLICY=eastandwest;
 -   `PRIMARY_REGION`リーダーの配布地域を指定します。このオプションでは1つの地域のみ指定できます。
 -   `SCHEDULE`オプションは、TiDB がフォロワーの分散をどのようにバランスさせるかを指定します。
     -   デフォルトの`EVEN`スケジュール ルールにより、すべてのリージョンにわたってフォロワーがバランスよく分散されます。
-    -   十分な数のFollowerレプリカをリージョン`PRIMARY_REGION` （つまり`us-east-1` ）に配置する場合は、スケジュールルール`MAJORITY_IN_PRIMARY`使用できます。このスケジュールルールでは、可用性を多少犠牲にすることで、レイテンシーのレイテンシを低く抑えることができます。プライマリリージョンに障害が発生した場合、 `MAJORITY_IN_PRIMARY`では自動フェイルオーバーは提供されません。
+    -   十分な数のFollowerレプリカを`PRIMARY_REGION` （つまり`us-east-1` ）に配置したい場合は、 `MAJORITY_IN_PRIMARY`スケジュールルールを使用できます。このスケジュールルールでは、可用性を多少犠牲にすることで、レイテンシーのレイテンシを低く抑えることができます。プライマリリージョンに障害が発生した場合、 `MAJORITY_IN_PRIMARY`では自動フェイルオーバーは提供されません。
 
 ## データ分離の例 {#data-isolation-examples}
 
@@ -445,9 +445,9 @@ CREATE TABLE list (id INT, name VARCHAR(50), purchased DATE)
 PLACEMENT POLICY=app_list
 ```
 
-この例では、制約は`[+app=order]`ようなリスト形式を使用して指定されています。また、 `{+app=order: 3}`ような辞書形式を使用して指定することもできます。
+この例では、制約は`[+app=order]`ようなリスト形式で指定されています。また、 `{+app=order: 3}`ような辞書形式で指定することもできます。
 
-例のステートメントを実行すると、TiDB は`app_order`データを`app`ラベルの TiKV ノードに`order`として配置し、 `app_list`データを`app`ラベルの TiKV ノードに`list_collection`として配置して、storage内で物理的なデータ分離を実現します。
+例のステートメントを実行すると、TiDB は`app_order`データを`app`ラベルが`order` TiKV ノードに配置し、 `app_list`データを`app`ラベルが`list_collection` TiKV ノードに配置して、storage内で物理的なデータ分離を実現します。
 
 ## 互換性 {#compatibility}
 
@@ -456,7 +456,7 @@ PLACEMENT POLICY=app_list
 -   一時テーブルは配置ポリシーをサポートしていません。
 -   配置ポリシーは、保存中のデータが正しい TiKV ノードに存在することを保証するだけで、転送中のデータ (ユーザー クエリまたは内部操作経由) が特定のリージョンでのみ発生することを保証するものではありません。
 -   データのTiFlashレプリカを構成するには、配置ポリシーを使用するのではなく、 [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)実行する必要があります。
--   構文糖衣規則は設定`PRIMARY_REGION`と`REGIONS`に許可されています。将来的には、設定`PRIMARY_RACK` 、 `PRIMARY_ZONE` 、 `PRIMARY_HOST`にも多様性を追加する予定です[問題番号 #18030](https://github.com/pingcap/tidb/issues/18030)を参照してください。
+-   構文糖衣規則は設定`PRIMARY_REGION`と`REGIONS`に許可されています。将来的には、設定`PRIMARY_RACK` 、 `PRIMARY_ZONE` 、 `PRIMARY_HOST`にも多様性を追加する予定です[問題 #18030](https://github.com/pingcap/tidb/issues/18030)を参照してください。
 
 ## ツールとの互換性 {#compatibility-with-tools}
 

@@ -9,7 +9,7 @@ summary: TiFlashレプリカを作成する方法を学びます。
 
 ## テーブルのTiFlashレプリカを作成する {#create-tiflash-replicas-for-tables}
 
-TiFlashが TiKV クラスターに接続されても、デフォルトではデータレプリケーションは開始されません。MySQL クライアント経由で TiDB に DDL ステートメントを送信することで、特定のテーブルのTiFlashレプリカを作成できます。
+TiFlashがTiKVクラスターに接続されても、デフォルトではデータレプリケーションは開始されません。MySQLクライアント経由でTiDBにDDL文を送信することで、特定のテーブルのTiFlashレプリカを作成できます。
 
 ```sql
 ALTER TABLE table_name SET TIFLASH REPLICA count;
@@ -21,7 +21,7 @@ ALTER TABLE table_name SET TIFLASH REPLICA count;
 
 > **注記：**
 >
-> [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターの場合、 TiFlashレプリカの`count` `2`しか設定できません。7 `1`設定した場合、実行時に自動的に`2`に調整されます。2 より大きい数に設定した場合、レプリカ数に関するエラーが発生します。
+> [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)クラスターの場合、 TiFlashレプリカの`count` `2`しか設定できません。7 `1`設定した場合、実行時に自動的に`2`に調整されます。2 より大きい数に設定した場合、レプリカ数に関するエラーが発生します。
 
 同じテーブルに対して複数のDDL文を実行した場合、最後に実行された文のみが確実に有効になります。次の例では、テーブル`tpch50`に対して2つのDDL文が実行されていますが、2番目の文（レプリカを削除する文）のみが確実に有効になります。
 
@@ -37,9 +37,9 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 2;
 ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 ```
 
-**注記:**
+**注:**
 
--   上記の DDL ステートメントを通じてテーブル`t` TiFlashに複製されると、次のステートメントを使用して作成されたテーブルも自動的にTiFlashに複製されます。
+-   上記の DDL ステートメントを使用してテーブル`t` TiFlashに複製されると、次のステートメントを使用して作成されたテーブルも自動的にTiFlashに複製されます。
 
     ```sql
     CREATE TABLE table_name like t;
@@ -47,7 +47,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 
 -   v4.0.6より前のバージョンでは、 TiDB Lightningを使用してデータをインポートする前にTiFlashレプリカを作成すると、データのインポートに失敗します。テーブルのTiFlashレプリカを作成する前に、テーブルにデータをインポートする必要があります。
 
--   TiDB とTiDB Lightning の両方が v4.0.6 以降であれば、テーブルにTiFlashレプリカがあるかどうかに関係なく、 TiDB Lightningを使用してそのテーブルにデータをインポートできます。ただし、 TiDB Lightning のプロセスは、Lightning ホストの NIC 帯域幅、 TiFlashノードの CPU とディスク負荷、およびTiFlashレプリカの数に応じて遅くなる可能性があります。
+-   TiDB とTiDB Lightning の両方が v4.0.6 以降の場合、テーブルにTiFlashレプリカがあるかどうかに関係なく、 TiDB Lightningを使用してそのテーブルにデータをインポートできます。ただし、 TiDB Lightning のプロセスは、Lightning ホストの NIC 帯域幅、 TiFlashノードの CPU とディスク負荷、およびTiFlashレプリカの数に応じて遅くなる可能性があります。
 
 -   PDスケジューリングのパフォーマンスが低下するため、1,000を超えるテーブルを複製することは推奨されません。この制限は、今後のバージョンで削除される予定です。
 
@@ -60,7 +60,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 
 ### レプリケーションの進行状況を確認する {#check-replication-progress}
 
-特定のテーブルのTiFlashレプリカのステータスを確認するには、次の文を使用します。テーブルは`WHERE`句で指定します。3 `WHERE`の句を削除すると、すべてのテーブルのレプリカステータスを確認できます。
+特定のテーブルのTiFlashレプリカのステータスを確認するには、次のステートメントを使用します。テーブルは`WHERE`句で指定します。3 `WHERE`の句を削除すると、すべてのテーブルのレプリカステータスを確認できます。
 
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>' and TABLE_NAME = '<table_name>';
@@ -68,8 +68,8 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>
 
 上記のステートメントの結果は次のようになります。
 
--   `AVAILABLE` 、このテーブルのTiFlashレプリカが使用可能かどうかを示します。2 `1`使用可能、 `0`使用不可を意味します。レプリカが使用可能になると、このステータスは変更されません。DDL ステートメントを使用してレプリカ数を変更すると、レプリケーション ステータスは再計算されます。
--   `PROGRESS`レプリケーションの進行状況を表します。値は`0.0`から`1.0`までです。6 `1`少なくとも1つのレプリカがレプリケートされていることを意味します。
+-   `AVAILABLE` 、このテーブルのTiFlashレプリカが使用可能かどうかを示します。2 `1`使用可能、 `0`使用不可を意味します。レプリカが使用可能になると、このステータスは変更されません。DDL ステートメントを使用してレプリカの数を変更すると、レプリケーション ステータスは再計算されます。
+-   `PROGRESS`レプリケーションの進行状況を表します。値は`0.0`から`1.0`までです。6 `1`少なくとも 1 つのレプリカがレプリケートされていることを意味します。
 
 ## データベースのTiFlashレプリカを作成する {#create-tiflash-replicas-for-databases}
 
@@ -97,18 +97,18 @@ ALTER DATABASE db_name SET TIFLASH REPLICA count;
 
 > **注記：**
 >
-> -   この文は実際には一連のDDL操作を実行しますが、これらの操作はリソースを大量に消費します。文の実行中に中断された場合、実行された操作はロールバックされず、実行されていない操作は続行されません。
+> -   この文は実際には一連のDDL操作を実行しますが、これらの操作はリソースを大量に消費します。文の実行中に中断された場合、実行済みの操作はロールバックされず、未実行の操作は続行されません。
 >
 > -   ステートメント実行後、**このデータベース内のすべてのテーブルがレプリケートされる**まで、 TiFlashレプリカの数を設定したり、このデータベースに対してDDL操作を実行したりしないでください。そうしないと、次のような予期しない結果が発生する可能性があります。
 >     -   TiFlashレプリカの数を 2 に設定し、データベース内のすべてのテーブルがレプリケートされる前にその数を 1 に変更した場合、すべてのテーブルのTiFlashレプリカの最終的な数は必ずしも 1 または 2 になるとは限りません。
 >     -   ステートメントを実行した後、ステートメントの実行が完了する前にこのデータベースにテーブルを作成すると、これらの新しいテーブルに対してTiFlashレプリカが作成される**場合と作成されない場合があります**。
->     -   ステートメントの実行後、ステートメントの実行が完了する前にデータベース内のテーブルのインデックスを追加すると、ステートメントがハングし、インデックスが追加された後にのみ再開される可能性があります。
+>     -   ステートメントを実行した後、ステートメントの実行が完了する前にデータベース内のテーブルのインデックスを追加すると、ステートメントがハングし、インデックスが追加された後にのみ再開される可能性があります。
 >
 > -   ステートメントの実行が完了した**後に**このデータベースにテーブルを作成した場合、これらの新しいテーブルに対してTiFlashレプリカは自動的に作成されません。
 >
 > -   このステートメントは、システム テーブル、ビュー、一時テーブル、およびTiFlashでサポートされていない文字セットを持つテーブルをスキップします。
 
-> -   システム変数[`tidb_batch_pending_tiflash_count`](/system-variables.md#tidb_batch_pending_tiflash_count-new-in-v60)設定することで、実行中に利用不可のままにできるテーブルの数を制御できます。この値を下げると、レプリケーション中のクラスターへの負荷を軽減できます。ただし、この制限はリアルタイムではないため、設定を適用した後でも利用不可のテーブル数が制限を超える可能性があります。
+> -   システム変数[`tidb_batch_pending_tiflash_count`](/system-variables.md#tidb_batch_pending_tiflash_count-new-in-v60)設定することで、実行中に利用不可のままにできるテーブルの数を制御できます。この値を下げると、レプリケーション中のクラスターへの負荷を軽減できます。ただし、この制限はリアルタイムではないため、設定適用後も利用不可のテーブルの数が制限を超える可能性があります。
 
 ### レプリケーションの進行状況を確認する {#check-replication-progress}
 
@@ -118,7 +118,7 @@ ALTER DATABASE db_name SET TIFLASH REPLICA count;
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>';
 ```
 
-データベース内のTiFlashレプリカのないテーブルをチェックするには、次の SQL ステートメントを実行します。
+データベース内にTiFlashレプリカのないテーブルをチェックするには、次の SQL ステートメントを実行します。
 
 ```sql
 SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>" and TABLE_NAME not in (SELECT TABLE_NAME FROM information_schema.tiflash_replica where TABLE_SCHEMA = "<db_name>");
@@ -134,7 +134,7 @@ SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>
 
 </CustomContent>
 
-TiDB クラスターは、次のいずれかの操作を実行すると、 TiFlashレプリカ レプリケーション プロセスをトリガーします。
+TiDB クラスターは、次のいずれかの操作を実行すると、 TiFlashレプリカのレプリケーション プロセスをトリガーします。
 
 -   テーブルにTiFlashレプリカを追加します。
 -   新しいTiFlashインスタンスを追加すると、PD は元のインスタンスのTiFlashレプリカを新しいTiFlashインスタンスにスケジュールします。
@@ -149,29 +149,29 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
     SET CONFIG tiflash `raftstore-proxy.server.snap-io-max-bytes-per-sec` = '300MiB';
     ```
 
-    これらのSQL文を実行すると、クラスターを再起動することなく設定変更が即座に反映されます。ただし、レプリケーション速度はPD制限によってグローバルに制限されているため、現時点では高速化の効果を確認することはできません。
+    これらのSQL文を実行すると、クラスターを再起動することなく設定変更が即座に有効になります。ただし、レプリケーション速度はPD制限によってグローバルに制限されているため、現時点では高速化の効果を確認することはできません。
 
 2.  レプリカのスケジュール速度制限を段階的に緩和するには、 [PD Control](https://docs.pingcap.com/tidb/stable/pd-control)使用します。
 
-    デフォルトの新規レプリカ速度制限は30です。これは、1つのTiFlashインスタンス上で毎分約30のリージョンがTiFlashレプリカを追加または削除することを意味します。以下のコマンドを実行すると、すべてのTiFlashインスタンスの制限が60に調整され、速度は元の2倍になります。
+    デフォルトの新規レプリカ速度制限は30です。これは、1分間に約30のリージョンが1つのTiFlashインスタンス上でTiFlashレプリカを追加または削除することを意味します。以下のコマンドを実行すると、すべてのTiFlashインスタンスの制限が60に調整され、速度は元の2倍になります。
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer
     ```
 
-    > 上記のコマンドでは、 `v<CLUSTER_VERSION>`実際のクラスターバージョン（ `v8.5.3` `<PD_ADDRESS>:2379`任意のPDノードのアドレスなど）に置き換える必要があります。例：
+    > 上記のコマンドでは、 `v<CLUSTER_VERSION>`実際のクラスターバージョン（ `v8.5.3`など）に置き換え、 `<PD_ADDRESS>:2379`任意の PD ノードのアドレスに置き換える必要があります。例:
     >
     > ```shell
     > tiup ctl:v8.5.3 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
     > ```
 
-    クラスターに古いTiFlashノード上のリージョンが多数含まれている場合、PDはそれらを新しいTiFlashノードに再配分する必要があります。それに応じて`remove-peer`制限を調整する必要があります。
+    クラスターに古いTiFlashノード上のリージョンが多数含まれている場合、PDはそれらを新しいTiFlashノードに再バランスする必要があります。それに応じて`remove-peer`制限を調整する必要があります。
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 remove-peer
     ```
 
-    数分以内に、 TiFlashノードのCPUとディスクIOリソース使用量が大幅に増加し、 TiFlashによるレプリカ作成速度が向上します。同時に、TiKVノードのCPUとディスクIOリソース使用量も増加します。
+    数分以内に、 TiFlashノードのCPUとディスクIOリソース使用量が大幅に増加し、 TiFlashによるレプリカ作成速度が速くなります。同時に、TiKVノードのCPUとディスクIOリソース使用量も増加します。
 
     この時点で TiKV ノードとTiFlashノードにまだ余分なリソースがあり、オンライン サービスのレイテンシーが大幅に増加しない場合は、制限をさらに緩和して、たとえば元の速度を 3 倍にすることができます。
 

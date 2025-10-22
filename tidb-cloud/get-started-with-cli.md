@@ -87,7 +87,7 @@ MySQLコマンドラインクライアントがインストールされていな
 
 ## クイックスタート {#quick-start}
 
-[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) TiDB Cloudを使い始めるのに最適な方法です。このセクションでは、 TiDB Cloud CLIを使用してTiDB Cloud Serverlessクラスターを作成する方法を学びます。
+[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter) TiDB Cloudを使い始めるのに最適な方法です。このセクションでは、 TiDB Cloud CLIを使用してTiDB Cloud Starterクラスターを作成する方法を学びます。
 
 ### ユーザープロファイルを作成するか、 TiDB Cloudにログインしてください {#create-a-user-profile-or-log-into-tidb-cloud}
 
@@ -115,9 +115,9 @@ TiDB Cloud CLI を使用してクラスターを作成する前に、ユーザ�
 >
 > 上記の2つの方法では、 TiDB Cloud APIキーがOAuthトークンよりも優先されます。両方利用可能な場合は、APIキーが使用されます。
 
-### TiDB Cloud Serverless クラスターを作成する {#create-a-tidb-cloud-serverless-cluster}
+### TiDB Cloud Starter クラスターを作成する {#create-a-tidb-cloud-starter-cluster}
 
-TiDB Cloud Serverless クラスターを作成するには、次のコマンドを入力し、CLI プロンプトに従って必要な情報を入力します。
+TiDB Cloud Starter クラスターを作成するには、次のコマンドを入力し、CLI プロンプトに従って必要な情報を入力します。
 
 ```shell
 ticloud serverless create
@@ -125,7 +125,7 @@ ticloud serverless create
 
 ## TiDB CloudCLIを使用する {#use-the-tidb-cloud-cli}
 
-利用可能なすべてのコマンドをビュー:
+利用可能なすべてのコマンドをビュー。
 
 ```shell
 ticloud --help
@@ -145,9 +145,9 @@ ticloud update
 
 ### TiUP経由でTiDB Cloud CLI を使用する {#use-the-tidb-cloud-cli-through-tiup}
 
-TiDB Cloud CLI は、コンポーネント名が`cloud`の[TiUP](https://tiup.io/)からも利用できます。
+TiDB Cloud CLI は、コンポーネント名が`cloud`である[TiUP](https://tiup.io/)からも利用できます。
 
-利用可能なすべてのコマンドをビュー:
+利用可能なすべてのコマンドをビュー。
 
 ```shell
 tiup cloud --help
@@ -165,7 +165,7 @@ TiUPによる最新バージョンへのアップデート:
 tiup update cloud
 ```
 
-## 次は何？ {#what-s-next}
+## 次は何か {#what-s-next}
 
 TiDB Cloud CLI のその他の機能については、 [CLIリファレンス](/tidb-cloud/cli-reference.md)ご覧ください。
 

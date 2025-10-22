@@ -9,7 +9,7 @@ summary: TiDB CloudでTiDB Cloud Starter クラスターを構築し、それに
 
 <CustomContent platform="tidb">
 
-このドキュメントでは、TiDB を使い始めるための最も簡単な方法を解説します。1 [TiDB Cloud](https://www.pingcap.com/tidb-cloud)使用してTiDB Cloud Starter（旧称 Serverless）クラスターを作成し、接続して、サンプルアプリケーションを実行します。
+このドキュメントでは、TiDBを使い始めるための最も簡単な方法を解説します。1 [TiDB Cloud](https://www.pingcap.com/tidb-cloud)使用してTiDB Cloud Starterクラスターを作成し、接続し、サンプルアプリケーションを実行します。
 
 ローカルマシンで TiDB を実行する必要がある場合は、 [ローカルで TiDB を起動する](/quick-start-with-tidb.md)参照してください。
 
@@ -39,13 +39,13 @@ summary: TiDB CloudでTiDB Cloud Starter クラスターを構築し、それに
 
 7.  ダイアログで、希望する接続方法とオペレーティングシステムを選択して、対応する接続文字列を取得します。このドキュメントでは、MySQLクライアントを例として使用します。
 
-8.  **「パスワード生成」をクリックすると、ランダムなパスワード**が生成されます。生成されたパスワードは再度表示されないため、安全な場所に保管してください。ルートパスワードを設定しないと、クラスターに接続できません。
+8.  **「パスワードを生成」**をクリックすると、ランダムなパスワードが生成されます。生成されたパスワードは再度表示されないため、安全な場所に保管してください。ルートパスワードを設定しないと、クラスターに接続できません。
 
 <CustomContent platform="tidb">
 
 > **注記：**
 >
-> [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターの場合、クラスターに接続する際には、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix)参照してください。
+> [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)クラスターの場合、クラスターに接続する際には、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix)参照してください。
 
 </CustomContent>
 
@@ -53,7 +53,7 @@ summary: TiDB CloudでTiDB Cloud Starter クラスターを構築し、それに
 
 > **注記：**
 >
-> [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターの場合、クラスターに接続する際には、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)参照してください。
+> [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)クラスターの場合、クラスターに接続する際には、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)参照してください。
 
 </CustomContent>
 
@@ -104,7 +104,7 @@ mysql --version
 
 <div label="Linux">
 
-Linux の場合、以下は Ubuntu を例にしています。
+Linux の場合、次の例では Ubuntu を取り上げます。
 
 ```shell
 apt-get install mysql-client

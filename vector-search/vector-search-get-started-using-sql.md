@@ -7,7 +7,7 @@ summary: SQL ステートメントを使用して TiDB で Vector Search をす�
 
 TiDB は MySQL 構文を拡張して[ベクトル検索](/vector-search/vector-search-overview.md)サポートし、新しい[ベクトルデータ型](/vector-search/vector-search-data-types.md)といくつかの[ベクトル関数](/vector-search/vector-search-functions-and-operators.md)を導入します。
 
-このチュートリアルでは、SQL文だけでTiDB Vector Searchを使い始める方法を説明します。1 [MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.4/en/mysql.html)使って以下の操作を実行する方法を学習します。
+このチュートリアルでは、SQL文だけを使ってTiDB Vector Searchを使い始める方法を説明します。1 [MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.4/en/mysql.html)使って以下の操作を実行する方法を学習します。
 
 -   TiDB クラスターに接続します。
 -   ベクターテーブルを作成します。
@@ -26,13 +26,13 @@ TiDB は MySQL 構文を拡張して[ベクトル検索](/vector-search/vector-s
 
 > **注記：**
 >
-> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを見つけた場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
+> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
 </CustomContent>
 
 > **注記：**
 >
-> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
+> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## 前提条件 {#prerequisites}
 
@@ -121,7 +121,7 @@ Query OK, 0 rows affected (0.27 sec)
 
 ### ステップ3. テーブルにベクトル埋め込みを挿入する {#step-3-insert-vector-embeddings-to-the-table}
 
-[ベクトル埋め込み](/vector-search/vector-search-overview.md#vector-embedding)を`embedded_documents`テーブルに挿入します。
+[ベクトル埋め込み](/vector-search/vector-search-overview.md#vector-embedding)を持つ 3 つのドキュメントを`embedded_documents`テーブルに挿入します。
 
 ```sql
 INSERT INTO embedded_documents
@@ -167,7 +167,7 @@ SELECT * FROM embedded_documents;
 
 全文検索と同様に、ベクター検索を使用する場合、ユーザーはアプリケーションに検索用語を提供します。
 
-この例では、検索語は「泳ぐ動物」であり、対応するベクトル埋め込みは`[1,2,3]`であると仮定されています。実際のアプリケーションでは、埋め込みモデルを使用してユーザーの検索語をベクトル埋め込みに変換する必要があります。
+この例では、検索語は「泳ぐ動物」であり、対応するベクトル埋め込みは`[1,2,3]`と仮定されています。実際のアプリケーションでは、埋め込みモデルを使用してユーザーの検索語をベクトル埋め込みに変換する必要があります。
 
 次のSQL文を実行すると、TiDBはテーブル内のベクトル埋め込み間のコサイン距離（ `vec_cosine_distance` ）を計算してソートし、 `[1,2,3]`に最も近い上位3つのドキュメントを識別します。
 

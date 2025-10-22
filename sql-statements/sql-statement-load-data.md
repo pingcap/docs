@@ -20,7 +20,7 @@ TiDB v7.0.0 以降、 `LOAD DATA` SQL ステートメントは次の機能をサ
 
 > **注記：**
 >
-> `LOAD DATA INFILE`ステートメントの場合、 TiDB Cloud Dedicated は Amazon S3 または Google Cloud Storage の`LOAD DATA LOCAL INFILE` 、 `LOAD DATA INFILE`サポートしますが、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) `LOAD DATA LOCAL INFILE`のみをサポートします。
+> `LOAD DATA INFILE`ステートメントの場合、 TiDB Cloud Dedicated は Amazon S3 または Google Cloud Storage の`LOAD DATA LOCAL INFILE` 、 `LOAD DATA INFILE`サポートしますが、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) `LOAD DATA LOCAL INFILE`のみをサポートします。
 
 </CustomContent>
 

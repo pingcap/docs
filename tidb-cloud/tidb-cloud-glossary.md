@@ -135,11 +135,11 @@ TiDB v5.0以降、 TiFlashノードを介した大規模並列処理（MPP）ア
 
 同じリージョンまたは別のリージョンに配置され、同じデータを含む独立したデータベース。レプリカは、災害復旧やパフォーマンス向上のためによく使用されます。
 
-### レプリケーション容量単位 {#replication-capacity-unit}
+### レプリケーション容量ユニット (RCU) {#replication-capacity-unit-rcu}
 
-changefeed のレプリケーションは、コンピューティング リソース (TiCDC レプリケーション容量単位) に応じて課金されます。
+TiDB Cloudは、 [チェンジフィード](/tidb-cloud/changefeed-overview.md)の容量をTiCDCレプリケーション容量ユニット（RCU）で測定します。クラスターの変更フィードを作成する際に、適切な仕様を選択できます。RCUが大きいほど、レプリケーションパフォーマンスが向上します。これらのTiCDC変更フィードRCUに対して料金が発生します。詳細については、 [チェンジフィードコスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#changefeed-cost)ご覧ください。
 
-### リクエスト容量単位 {#request-capacity-unit}
+### リクエスト容量単位 (RCU) {#request-capacity-unit-rcu}
 
 リクエスト容量ユニット（RCU）は、 TiDB Cloud Essential クラスターにプロビジョニングされたコンピューティング容量を表す測定単位です。1 RCU は、1 秒あたり一定数の RU を処理できる固定量のコンピューティングリソースを提供します。プロビジョニングする RCU の数によって、クラスターのベースラインパフォーマンスとスループット容量が決まります。詳細については、 [TiDB Cloud Essential の価格詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)ご覧ください。
 
@@ -157,7 +157,7 @@ changefeed のレプリケーションは、コンピューティング リソ�
 
 ### TiDB クラスター {#tidb-cluster}
 
-機能的な作業データベースを形成する[ティドブ](https://docs.pingcap.com/tidb/stable/tidb-computing) 、 [ティクブ](https://docs.pingcap.com/tidb/stable/tidb-storage) 、 [配置Driver](https://docs.pingcap.com/tidb/stable/tidb-scheduling) (PD)、および[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)ノードの集合。
+機能的な作業データベースを形成する[ティドブ](https://docs.pingcap.com/tidb/stable/tidb-computing) 、 [TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage) 、 [配置Driver](https://docs.pingcap.com/tidb/stable/tidb-scheduling) (PD)、および[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)ノードの集合。
 
 ### TiDBノード {#tidb-node}
 

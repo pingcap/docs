@@ -9,15 +9,15 @@ TiDB v8.5.0では、クエリパフォーマンスを向上させるインデッ
 
 > **注記：**
 >
-> 現在、この機能は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)クラスターでは利用できません。
+> 現在、この機能はクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
-インデックスアドバイザーはクエリを分析し、 `WHERE` 、 `GROUP BY` 、 `ORDER BY`などの句からインデックス可能な列を特定します。次に、インデックス候補を生成し、仮想インデックスを使用してパフォーマンスの向上を推定します。TiDBは遺伝的探索アルゴリズムを使用して最適なインデックスセットを選択します。まず、単一列インデックスから始めて複数列インデックスを反復的に探索し、「What-If」分析を活用して、オプティマイザプランのコストへの影響に基づいて潜在的なインデックスを評価します。アドバイザーは、インデックスなしでクエリを実行する場合と比較して全体的なコストが削減される場合に、インデックスを推奨します。
+インデックスアドバイザーはクエリを分析し、 `WHERE` 、 `GROUP BY` 、 `ORDER BY`などの句からインデックス可能な列を特定します。次に、インデックス候補を生成し、仮想インデックスを使用してパフォーマンスの向上を推定します。TiDBは遺伝的探索アルゴリズムを使用して最適なインデックスセットを選択します。まず、単一列インデックスから始めて複数列インデックスを反復的に探索し、「What-If」分析を活用して、オプティマイザプランのコストへの影響に基づいて潜在的なインデックスを評価します。アドバイザーは、インデックスを使用しないクエリ実行と比較して全体的なコストが削減される場合に、インデックスを推奨します。
 
-効率的なインデックス管理を確実にするために、Index Advisor は[新しいインデックスの推奨](#recommend-indexes-using-the-recommend-index-statement)に加えて[非アクティブなインデックスの削除](#remove-unused-indexes)提案します。
+効率的なインデックス管理を確実にするために、Index Advisor は[新しいインデックスの推奨](#recommend-indexes-using-the-recommend-index-statement)に加えて[非アクティブなインデックスを削除する](#remove-unused-indexes)提案します。
 
 ## <code>RECOMMEND INDEX</code>ステートメントを使用してインデックスを推奨する {#recommend-indexes-using-the-code-recommend-index-code-statement}
 
-TiDBでは、インデックスアドバイザータスク用のSQL文`RECOMMEND INDEX`が導入されています。サブコマンド`RUN`は、過去のワークロードを分析し、推奨事項をシステムテーブルに保存します。オプション`FOR`を使用すると、過去に実行されていないSQL文であっても、特定のSQL文をターゲットにすることができます。また、高度な制御のためにオプション[オプション](#recommend-index-options)追加することもできます。構文は次のとおりです。
+TiDBでは、インデックスアドバイザータスク用のSQL文`RECOMMEND INDEX`が導入されました。サブコマンド`RUN`は、過去のワークロードを分析し、推奨事項をシステムテーブルに保存します。オプション`FOR`を使用すると、過去に実行されたことがないSQL文であっても、特定のSQL文をターゲットにすることができます。また、高度な制御のためにオプション[オプション](#recommend-index-options)追加することもできます。構文は次のとおりです。
 
 ```sql
 RECOMMEND INDEX RUN [ FOR <SQL> ] [<Options>] 
@@ -41,9 +41,9 @@ RECOMMEND INDEX RUN for "SELECT a, b FROM t WHERE a = 1 AND b = 1"\G
 create_index_statement: CREATE INDEX idx_a_b ON t(a,b);
 ```
 
-インデックス アドバイザーは、 `a`と`b`単一列インデックスを個別に評価し、最終的にそれらを 1 つのインデックスに結合して、最適なパフォーマンスを実現します。
+インデックス アドバイザーは、 `a`と`b`単一列インデックスを個別に評価し、最終的にそれらを 1 つのインデックスに結合してパフォーマンスを最適化します。
 
-以下の`EXPLAIN`の結果は、インデックスなしの場合と、推奨される2列の仮想インデックスを使用した場合のクエリ実行を比較したものです。Index Advisorは内部的に両方のケースを評価し、コストが最小となるオプションを選択します。Index Advisorは`a`と`b`についても1列の仮想インデックスを検討しますが、これらは2列の結合インデックスよりも優れたパフォーマンスを提供しません。簡潔にするため、実行プランは省略しています。
+以下の`EXPLAIN`の結果は、インデックスなしと推奨される2列の仮想インデックスを使用したクエリ実行を比較したものです。Index Advisorは内部的に両方のケースを評価し、コストが最小となるオプションを選択します。Index Advisorは`a`と`b`についても1列の仮想インデックスを検討しますが、これらは2列の結合インデックスよりも優れたパフォーマンスを提供しません。簡潔にするため、実行プランは省略しています。
 
 ```sql
 EXPLAIN FORMAT='VERBOSE' SELECT a, b FROM t WHERE a=1 AND b=1;
@@ -114,7 +114,7 @@ RECOMMEND INDEX SET <option> = <value>;
 RECOMMEND INDEX SHOW OPTION;
 ```
 
-利用可能なオプションは次のとおりです。
+次のオプションが利用可能です。
 
 -   `timeout` : `RECOMMEND INDEX`コマンドの実行に許可される最大時間を指定します。
 -   `max_num_index` : `RECOMMEND INDEX`の結果に含めるインデックスの最大数を指定します。
@@ -136,7 +136,7 @@ RECOMMEND INDEX SHOW OPTION;
 4 rows in set (0.00 sec)
 ```
 
-オプションを変更するには、 `RECOMMEND INDEX SET`ステートメントを使用します。例えば、 `timeout`オプションを変更するには次のようにします。
+オプションを変更するには、 `RECOMMEND INDEX SET`ステートメントを使用します。例えば、 `timeout`オプションを変更するには、次のようにします。
 
 ```sql
 RECOMMEND INDEX SET timeout='20s';
@@ -147,7 +147,7 @@ Query OK, 1 row affected (0.00 sec)
 
 インデックス推奨機能には次の制限があります。
 
--   現在、 [準備された文](/develop/dev-guide-prepared-statement.md)サポートされていません。 `RECOMMEND INDEX RUN`ステートメントは、 `Prepare`および`Execute`プロトコルを介して実行されたクエリのインデックスを推奨できません。
+-   現在、 [準備された文](/develop/dev-guide-prepared-statement.md)サポートされていません。 `RECOMMEND INDEX RUN`ステートメントは、 `Prepare`および`Execute`プロトコルを介して実行されるクエリのインデックスを推奨できません。
 -   現在、インデックスを削除するための推奨事項は提供されていません。
 -   現在、Index Advisor のユーザー インターフェイス (UI) はまだ利用できません。
 
@@ -157,7 +157,7 @@ v8.0.0以降のバージョンでは、 [`schema_unused_indexes`](/sys-schema/sy
 
 ### <code>sys.schema_unused_indexes</code>を使用する {#use-code-sys-schema-unused-indexes-code}
 
-[`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)ビューは、すべての TiDB インスタンスの前回の起動以降に使用されていないインデックスを特定します。このビューは、スキーマ、テーブル、列情報を含むシステムテーブルに基づいており、スキーマ、テーブル、インデックス名を含む各インデックスの完全な仕様を提供します。このビューをクエリすることで、どのインデックスを非表示にするか、または削除するかを決定できます。
+[`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)ビューは、すべての TiDB インスタンスの最後の起動以降に使用されていないインデックスを識別します。このビューは、スキーマ、テーブル、列情報を含むシステムテーブルに基づいており、スキーマ、テーブル、インデックス名を含む各インデックスの完全な仕様を提供します。このビューをクエリすることで、どのインデックスを非表示にするか、または削除するかを決定できます。
 
 > **警告：**
 >
@@ -169,7 +169,7 @@ v8.0.0以降のバージョンでは、 [`schema_unused_indexes`](/sys-schema/sy
 
 ### <code>INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE</code>を使用する {#use-code-information-schema-cluster-tidb-index-usage-code}
 
-[`INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)テーブルは、選択性バケット、最終アクセス時刻、アクセスされた行数などの指標を提供します。次の例は、このテーブルに基づいて未使用または非効率的なインデックスを特定するクエリを示しています。
+[`INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)テーブルは、選択性バケット、最終アクセス時刻、アクセスされた行などの指標を提供します。次の例は、このテーブルに基づいて未使用または非効率的なインデックスを識別するクエリを示しています。
 
 ```sql
 -- Find indexes that have not been accessed in the last 30 days.
@@ -194,7 +194,7 @@ WHERE last_access_time IS NOT NULL AND percentage_access_0 + percentage_access_0
 
 仮説インデックス（Hypo Indexes）は、 `CREATE INDEX`ステートメントではなく、 [クエリヒント](/optimizer-hints.md)と同様のSQLコメントを使用して作成されます。このアプローチにより、インデックスを物理的にマテリアライズするオーバーヘッドなしに、軽量な実験が可能になります。
 
-例えば、 `/*+ HYPO_INDEX(t, idx_ab, a, b) */`のコメントは、クエリプランナーに、テーブル`t`列`a`と`b`に`idx_ab`という仮想インデックスを作成するよう指示します。プランナーはインデックスのメタデータを生成しますが、物理的には実現しません。該当する場合、プランナーはクエリの最適化時にこの仮想インデックスを考慮しますが、インデックス作成に伴うコストは発生しません。
+例えば、 `/*+ HYPO_INDEX(t, idx_ab, a, b) */`のコメントは、テーブル`t`の列`a`と`b`に`idx_ab`という仮想インデックスを作成するようクエリプランナーに指示します。プランナーはインデックスのメタデータを生成しますが、物理的にマテリアライズすることはありません。該当する場合、プランナーはクエリの最適化時にこの仮想インデックスを考慮しますが、インデックス作成に伴うコストは発生しません。
 
 `RECOMMEND INDEX`アドバイザーは、仮想インデックスを用いて「What-If」分析を行い、様々なインデックスの潜在的なメリットを評価します。また、仮想インデックスを直接使用して、インデックスの作成に進む前に様々な設計を試すこともできます。
 
@@ -222,6 +222,6 @@ EXPLAIN FORMAT='verbose' SELECT /*+ HYPO_INDEX(t, idx_ab, a, b) */ a, b FROM t W
 +------------------------+---------+---------+-----------+-----------------------------+-------------------------------------------------+
 ```
 
-この例では、 `HYPO_INDEX`のコメントは仮想インデックスを指定しています。このインデックスを使用すると、フルテーブルスキャン（ `TableFullScan` ）の代わりにインデックス範囲スキャン（ `IndexRangeScan` ）が有効になり、推定コストが`392133.42`から`2.20`に削減されます。
+この例では、 `HYPO_INDEX`のコメントは仮想インデックスを指定しています。このインデックスを使用すると、フルテーブルスキャン（ `TableFullScan` ）ではなくインデックス範囲スキャン（ `IndexRangeScan` ）が有効になり、推定コストが`392133.42`から`2.20`に削減されます。
 
 TiDBは、ワークロード内のクエリに基づいて、ワークロードにメリットをもたらす可能性のあるインデックス候補を自動的に生成します。仮想インデックスを使用して潜在的なメリットを推定し、最も効果的なインデックスを推奨します。

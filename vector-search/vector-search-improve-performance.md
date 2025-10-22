@@ -19,13 +19,13 @@ TiDB Vector Searchを使用すると、画像、ドキュメント、その他�
 
 > **注記：**
 >
-> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを見つけた場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
+> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
 </CustomContent>
 
 > **注記：**
 >
-> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
+> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## ベクトル列にベクトル検索インデックスを追加する {#add-vector-search-index-for-vector-columns}
 
@@ -33,7 +33,7 @@ TiDB Vector Searchを使用すると、画像、ドキュメント、その他�
 
 ## ベクトルインデックスが完全に構築されていることを確認する {#ensure-vector-indexes-are-fully-built}
 
-大量のベクターデータを挿入すると、その一部がデルタレイヤーで永続化を待機している可能性があります。このようなデータのベクターインデックスは、データが永続化された後に構築されます。すべてのベクターデータがインデックス化されるまで、ベクター検索のパフォーマンスは最適ではありません。インデックス構築の進行状況を確認するには、 [インデックス構築の進行状況をビュー](/vector-search/vector-search-index.md#view-index-build-progress)参照してください。
+大量のベクターデータを挿入すると、その一部がデルタレイヤーに保持され、永続化を待機している可能性があります。このようなデータのベクターインデックスは、データが永続化された後に構築されます。すべてのベクターデータがインデックス化されるまで、ベクター検索のパフォーマンスは最適ではありません。インデックス構築の進行状況を確認するには、 [インデックス構築の進行状況をビュー](/vector-search/vector-search-index.md#view-index-build-progress)参照してください。
 
 ## ベクトルの次元を減らすか埋め込みを短くする {#reduce-vector-dimensions-or-shorten-embeddings}
 
@@ -41,13 +41,13 @@ TiDB Vector Searchを使用すると、画像、ドキュメント、その他�
 
 パフォーマンスを最適化するには、可能な限りベクトル次元を減らすことを検討してください。これは通常、別の埋め込みモデルへの切り替えが必要になります。モデルを切り替える際には、モデルの変更がベクトルクエリの精度に与える影響を評価する必要があります。
 
-OpenAI `text-embedding-3-large`などの特定の埋め込みモデルは[短縮埋め込み](https://openai.com/index/new-embedding-models-and-api-updates/)サポートしています。これは、埋め込みの概念表現特性を失うことなく、ベクトルシーケンスの末尾からいくつかの数値を削除します。このような埋め込みモデルを使用して、ベクトルの次元を削減することもできます。
+OpenAI `text-embedding-3-large`などの特定の埋め込みモデルは[埋め込みの短縮](https://openai.com/index/new-embedding-models-and-api-updates/)サポートしています。これは、埋め込みの概念表現特性を失うことなく、ベクトルシーケンスの末尾からいくつかの数値を削除します。このような埋め込みモデルを使用して、ベクトルの次元を削減することもできます。
 
 ## 結果からベクター列を除外する {#exclude-vector-columns-from-the-results}
 
-ベクター埋め込みデータは通常サイズが大きく、検索プロセスでのみ使用されます。クエリ結果からベクター列を除外することで、TiDBサーバーとSQLクライアント間で転送されるデータ量を大幅に削減し、クエリパフォーマンスを向上させることができます。
+ベクトル埋め込みデータは通常サイズが大きく、検索プロセスでのみ使用されます。クエリ結果からベクトル列を除外することで、TiDBサーバーとSQLクライアント間で転送されるデータ量を大幅に削減し、クエリパフォーマンスを向上させることができます。
 
-ベクター列を除外するには、すべての列を取得するために`SELECT *`使用するのではなく、取得する列を`SELECT`句で明示的にリストします。
+ベクター列を除外するには、 `SELECT *`使用してすべての列を取得するのではなく、 `SELECT`句で取得する列を明示的にリストします。
 
 ## インデックスをウォームアップする {#warm-up-the-index}
 

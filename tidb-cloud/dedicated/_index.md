@@ -56,7 +56,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 [ストリームデータ](http://docs.pingcap.com/tidbcloud/changefeed-overview)
 
-[API を使用する (ベータ版)](https://docs.pingcap.com/tidbcloud/api-overview)
+[API を使用する（ベータ版）](https://docs.pingcap.com/tidbcloud/api-overview)
 
 </LearningPath>
 
@@ -106,7 +106,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 [ユーザープロファイルの管理](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles)
 
-[組織のアクセスを管理する](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-organization-access)
+[組織アクセスの管理](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-organization-access)
 
 [プロジェクトアクセスの管理](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-project-access)
 

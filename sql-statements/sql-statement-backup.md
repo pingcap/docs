@@ -10,7 +10,7 @@ summary: TiDB データベースの BACKUP の使用法の概要。
 > **警告：**
 >
 > -   この機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
-> -   この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
+> -   この機能は、クラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
 `BACKUP`ステートメントは[BRツール](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)と同じエンジンを使用しますが、バックアッププロセスは別のBRツールではなく TiDB 自体によって実行されますBRの利点と警告はすべてこのステートメントにも適用されます。
 
@@ -18,9 +18,9 @@ summary: TiDB データベースの BACKUP の使用法の概要。
 
 `BACKUP`文は、バックアップタスク全体が完了、失敗、またはキャンセルされるまでブロックされます。3 `BACKUP`実行するには、長時間持続する接続を準備する必要があります。タスクは[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)文を使用してキャンセルできます。
 
-一度に実行できるタスク`BACKUP`と[`RESTORE`](/sql-statements/sql-statement-restore.md) 1 つだけです。同じ TiDBサーバー上で既に`BACKUP`または`RESTORE`ステートメントが実行中の場合、新しい`BACKUP`実行は、前のすべてのタスクが完了するまで待機します。
+`BACKUP`と[`RESTORE`](/sql-statements/sql-statement-restore.md)タスクは一度に 1 つだけ実行できます。同じ TiDBサーバー上で`BACKUP`または`RESTORE`ステートメントが既に実行されている場合、新しい`BACKUP`実行は、前のすべてのタスクが完了するまで待機します。
 
-`BACKUP` 「tikv」storageエンジンでのみ使用できます。2 `BACKUP` 「unistore」エンジンで使用すると失敗します。
+`BACKUP` 「tikv」storageエンジンでのみ使用できます。「unistore」エンジンで`BACKUP`使用すると失敗します。
 
 ## 概要 {#synopsis}
 
@@ -119,11 +119,11 @@ BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/'
 
 `RATE_LIMIT`使用すると、TiKV ノードあたりの平均アップロード速度が制限され、ネットワーク帯域幅が削減されます。
 
-バックアップが完了する前に、 `BACKUP`指定すると、クラスタ上のデータに対してチェックサムが実行され、データの正確性が検証されます。デフォルトでは、単一テーブルに対するチェックサムタスクの同時実行数は4ですが、 `CHECKSUM_CONCURRENCY`パラメータを使用して調整できます。データ検証が不要であると確信できる場合は、 `CHECKSUM`パラメータを`FALSE`に設定することで、チェックを無効にすることができます。
+バックアップが完了する前に、 `BACKUP`指定すると、クラスタ上のデータに対してチェックサムが実行され、データの正確性が検証されます。単一テーブルに対するチェックサムタスクのデフォルトの同時実行数は 4 ですが、 `CHECKSUM_CONCURRENCY`パラメータを使用して調整できます。データ検証が不要であると確信できる場合は、 `CHECKSUM`パラメータを`FALSE`に設定することでチェックを無効化できます。
 
-BR がテーブルとインデックスのバックアップに同時に実行できるタスク数を指定するには、パラメータ`CONCURRENCY`使用します。このパラメータはBR内のスレッドプールサイズを制御し、バックアップ操作のパフォーマンスと効率を最適化します。
+BR がテーブルとインデックスのバックアップに同時に実行できるタスクの数を指定するには、パラメータ`CONCURRENCY`使用します。このパラメータはBR内のスレッドプールサイズを制御し、バックアップ操作のパフォーマンスと効率を最適化します。
 
-1つのタスクは、バックアップスキーマに応じて、1つのテーブル範囲または1つのインデックス範囲を表します。1つのテーブルと1つのインデックスの場合、このテーブルのバックアップには2つのタスクが使用されます。デフォルト値は`CONCURRENCY`で、 `4`です。多数のテーブルまたはインデックスをバックアップする必要がある場合は、この値を増やしてください。
+1つのタスクは、バックアップスキーマに応じて、1つのテーブル範囲または1つのインデックス範囲を表します。1つのテーブルと1つのインデックスの場合、このテーブルのバックアップには2つのタスクが使用されます。デフォルト値は`CONCURRENCY`ですが、 `4`です。多数のテーブルまたはインデックスをバックアップする必要がある場合は、この値を大きくしてください。
 
 統計はデフォルトではバックアップされません。統計情報をバックアップするには、 `IGNORE_STATS`パラメータを`FALSE`に設定する必要があります。
 

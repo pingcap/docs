@@ -11,13 +11,13 @@ summary: TiDB Vector Search を Amazon Bedrock と統合して、検索拡張生
 
 > **注記：**
 >
-> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを見つけた場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
+> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
 </CustomContent>
 
 > **注記**
 >
-> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
+> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 > **ヒント**
 >
@@ -45,8 +45,8 @@ summary: TiDB Vector Search を Amazon Bedrock と統合して、検索拡張生
 
 -   [Amazon Bedrock に必要な権限](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html)と次のモデルへのアクセス権を持つ AWS アカウント:
 
-    -   **Amazon Titan Embeddings** ( `amazon.titan-embed-text-v2:0` ) テキスト埋め込みの生成に使用される
-    -   **Meta Llama 3** ( `us.meta.llama3-2-3b-instruct-v1:0` )、テキスト生成に使用される
+    -   **Amazon Titan Embeddings** ( `amazon.titan-embed-text-v2:0` ) テキスト埋め込みの生成に使用
+    -   **Meta Llama 3** ( `us.meta.llama3-2-3b-instruct-v1:0` )、テキスト生成に使用
 
     アクセスできない場合は、 [Amazon Bedrock 基盤モデルへのアクセスをリクエストする](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html#getting-started-model-access)の手順に従ってください。
 
@@ -296,7 +296,7 @@ def save_entities_with_embedding(session, contents):
     python3 demo.py
     ```
 
-    期待される出力は次のようになります。
+    予想される出力は次のようになります。
 
         Generated answer:  What is the main purpose of TiDB?
              What are the key features of TiDB?

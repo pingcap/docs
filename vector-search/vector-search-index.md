@@ -21,13 +21,13 @@ summary: ベクトル検索インデックスを構築して使用し、TiDB で
 
 > **注記：**
 >
-> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを見つけた場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
+> ベクター検索機能はベータ版です。予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 
 </CustomContent>
 
 > **注記：**
 >
-> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
+> ベクトル検索機能は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)利用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 現在、TiDB は[HNSW（階層的ナビゲート可能なスモールワールド）](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world)ベクトル検索インデックス アルゴリズムをサポートしています。
 
@@ -41,7 +41,7 @@ summary: ベクトル検索インデックスを構築して使用し、TiDB で
 -   ベクトル検索インデックスが設定された列を直接削除することはサポートされていません。このような列を削除するには、まずその列のベクトル検索インデックスを削除し、次に列自体を削除します。
 -   ベクトル インデックスを持つ列の型の変更はサポートされていません。
 -   ベクトル検索インデックスを[見えない](/sql-statements/sql-statement-alter-index.md)に設定することはサポートされていません。
--   [保存時の暗号化](https://docs.pingcap.com/tidb/stable/encryption-at-rest)有効になっているTiFlashノード上でのベクター検索インデックスの構築はサポートされていません。
+-   [保存時の暗号化](https://docs.pingcap.com/tidb/stable/encryption-at-rest)有効になっているTiFlashノード上でベクトル検索インデックスを構築することはサポートされていません。
 
 ## HNSWベクトルインデックスを作成する {#create-the-hnsw-vector-index}
 
@@ -49,7 +49,7 @@ summary: ベクトル検索インデックスを構築して使用し、TiDB で
 
 TiDB では、次のいずれかの方法で、 [ベクトルデータ型](/vector-search/vector-search-data-types.md)の列に対して HNSW インデックスを作成できます。
 
--   テーブルを作成するときは、次の構文を使用して HNSW インデックスのベクター列を指定します。
+-   テーブルを作成するときは、次の構文を使用して HNSW インデックスのベクトル列を指定します。
 
     ```sql
     CREATE TABLE foo (
@@ -84,7 +84,7 @@ HNSW ベクトル インデックスを作成するときは、ベクトルの�
 
 ベクトルインデックスは、固定次元のベクトル列（例えば、 `VECTOR(3)`と定義された列）に対してのみ作成できます。ベクトル距離は、同じ次元のベクトル間でのみ計算できるため、非固定次元のベクトル列（例えば、 `VECTOR`と定義された列）には作成できません。
 
-ベクター検索インデックスの制限事項と制約については、 [制限](#restrictions)参照してください。
+ベクター検索インデックスの制限と制約については、 [制限](#restrictions)参照してください。
 
 ## ベクトルインデックスを使用する {#use-the-vector-index}
 
@@ -101,7 +101,7 @@ LIMIT 10
 
 ## フィルター付きベクトルインデックスを使用する {#use-the-vector-index-with-filters}
 
-プレフィルター（ `WHERE`句を使用）を含むクエリは、SQLセマンティクスに従ってK近傍をクエリしていないため、ベクトルインデックスを利用できません。例：
+プレフィルタ（ `WHERE`句を使用）を含むクエリは、SQLセマンティクスに従ってK近傍検索を実行していないため、ベクトルインデックスを利用できません。例：
 
 ```sql
 -- For the following query, the `WHERE` filter is performed before KNN, so the vector index cannot be used:
@@ -144,7 +144,7 @@ SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
 +---------------+------------+----------+-------------+---------------+-----------+----------+------------+---------------------+-------------------------+--------------------+------------------------+---------------+------------------+
 ```
 
--   インデックス構築の進捗状況は、 `ROWS_STABLE_INDEXED`と`ROWS_STABLE_NOT_INDEXED`列で確認できます。5が`ROWS_STABLE_NOT_INDEXED`になると、インデックス構築が完了します。
+-   インデックス構築の進行状況は、 `ROWS_STABLE_INDEXED`と`ROWS_STABLE_NOT_INDEXED`列で確認できます。5が`ROWS_STABLE_NOT_INDEXED`になると、インデックス構築が完了します。
 
     参考までに、768次元の500MiBベクターデータセットのインデックス作成には最大20分かかる場合があります。インデクサーは複数のテーブルに対して並列実行できます。現在、インデクサーの優先度や速度の調整はサポートされていません。
 
@@ -186,7 +186,7 @@ LIMIT 10;
 9 rows in set (0.01 sec)
 ```
 
-**例: Top Kを指定していないためベクトルインデックスは使用されません**
+**例: Top Kを指定していないため、ベクトルインデックスは使用されません。**
 
 ```sql
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
@@ -204,7 +204,7 @@ LIMIT 10;
 6 rows in set, 1 warning (0.01 sec)
 ```
 
-ベクトル インデックスが使用できない場合、原因の特定に役立つ警告が表示される場合があります。
+ベクトル インデックスが使用できない場合、原因の調査に役立つ警告が表示される場合があります。
 
 ```sql
 -- Using a wrong distance function:
@@ -226,7 +226,7 @@ ANN index not used: index can be used only when ordering by vec_cosine_distance(
 
 ## ベクトル検索のパフォーマンスを分析する {#analyze-vector-search-performance}
 
-ベクトル インデックスの使用方法に関する詳細情報を確認するには、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)ステートメントを実行し、出力の`execution info`番目の列を確認します。
+ベクトル インデックスの使用方法に関する詳細情報を確認するには、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)ステートメントを実行し、出力の`execution info`列を確認します。
 
 ```sql
 [tidb]> EXPLAIN ANALYZE SELECT * FROM vector_table_with_index
@@ -252,16 +252,16 @@ LIMIT 10;
 
 > **注記：**
 >
-> 実行情報は内部情報です。フィールドとフォーマットは予告なく変更される場合があります。これらに依存しないでください。
+> 実行情報は内部情報です。フィールドとフォーマットは予告なく変更される場合があります。これらの情報に依存しないでください。
 
 いくつかの重要なフィールドの説明:
 
 -   `vector_index.load.total` : インデックスの読み込みにかかる合計時間。複数のベクターインデックスが並行して読み込まれる可能性があるため、このフィールドは実際のクエリ時間よりも長くなる可能性があります。
 -   `vector_index.load.from_s3` : S3 からロードされたインデックスの数。
 -   `vector_index.load.from_disk` : ディスクからロードされたインデックスの数。インデックスは以前にS3からダウンロード済みです。
--   `vector_index.load.from_cache` : キャッシュから読み込まれたインデックスの数。インデックスは以前にS3からダウンロード済みです。
--   `vector_index.search.total` : インデックス内の検索にかかる合計時間。レイテンシーが大きい場合、通常、インデックスがコールド状態（一度もアクセスされていない、またはかなり前にアクセスされている状態）であるため、インデックス検索時に大量のI/O操作が発生します。複数のベクターインデックスが並列で検索される可能性があるため、このフィールドは実際のクエリ時間よりも長くなる場合があります。
--   `vector_index.search.discarded_nodes` : 検索中に参照されたが破棄されたベクトル行の数。これらの破棄されたベクトルは検索結果には考慮されません。この値が大きい場合、通常、 `UPDATE`または`DELETE`ステートメントによって多くの古い行が発生していることを示します。
+-   `vector_index.load.from_cache` : キャッシュからロードされたインデックスの数。インデックスは以前にS3からダウンロード済みです。
+-   `vector_index.search.total` : インデックス内の検索にかかる合計時間。レイテンシーが大きい場合、通常、インデックスがコールド状態（一度もアクセスされていない、またはかなり前にアクセスされている状態）であるため、インデックス検索時に大量のI/O操作が発生します。複数のベクターインデックスが並列で検索される可能性があるため、このフィールドは実際のクエリ時間よりも長くなる可能性があります。
+-   `vector_index.search.discarded_nodes` : 検索中に訪問されたが破棄されたベクトル行の数。これらの破棄されたベクトルは検索結果には考慮されません。この値が大きい場合、通常、 `UPDATE`または`DELETE`ステートメントによって多くの古い行が発生していることを示します。
 
 出力の解釈については、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md) 、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) 、および[EXPLAIN コマンド](/explain-walkthrough.md)参照してください。
 

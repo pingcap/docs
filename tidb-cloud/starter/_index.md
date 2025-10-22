@@ -49,7 +49,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 [データのバックアップと復元](https://docs.pingcap.com/tidbcloud/backup-and-restore-serverless/?plan=starter)
 
-[API を使用する (ベータ版)](https://docs.pingcap.com/tidbcloud/api-overview/?plan=starter)
+[API を使用する（ベータ版）](https://docs.pingcap.com/tidbcloud/api-overview/?plan=starter)
 
 [TiDB Cloud CLIを使用する](https://docs.pingcap.com/tidbcloud/get-started-with-cli/?plan=starter)
 
@@ -97,9 +97,9 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 [ユーザープロファイルの管理](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles/?plan=starter)
 
-[組織のアクセスを管理する](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-organization-access/?plan=starter)
+[組織アクセスの管理](https://docs.pingcap.com/tidbcloud/manage-user-access/?plan=starter#manage-organization-access)
 
-[プロジェクトアクセスの管理](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-project-access/?plan=starter)
+[プロジェクトアクセスの管理](https://docs.pingcap.com/tidbcloud/manage-user-access/?plan=starter#manage-project-access)
 
 [パブリックエンドポイントのファイアウォールルールを構成する](https://docs.pingcap.com/tidbcloud/configure-serverless-firewall-rules-for-public-endpoints/?plan=starter)
 

@@ -25,7 +25,7 @@ summary: TiDB の Vector データ型について学習します。
 
 > **注記：**
 >
-> ベクトルデータ型は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)使用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります (v8.5.0 以降を推奨)。
+> ベクトルデータ型は、TiDB Self-Managed、 [TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) [TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)使用できます[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) Self-Managed およびTiDB Cloud Dedicated の場合、TiDB バージョンは v8.4.0 以降である必要があります (v8.5.0 以降を推奨)。
 
 現在、次のベクター データ型が利用可能です。
 
@@ -36,7 +36,7 @@ summary: TiDB の Vector データ型について学習します。
 
 -   ベクトル インデックスのサポート: ベクトルの検索を高速化するために[ベクター検索インデックス](/vector-search/vector-search-index.md)構築できます。
 -   次元の強制: 異なる次元のベクトルの挿入を禁止する次元を指定できます。
--   最適化されたstorage形式: ベクター データ型はベクター データの処理に最適化されており、 `JSON`型に比べて優れたスペース効率とパフォーマンスを提供します。
+-   最適化されたstorage形式: ベクター データ型はベクター データの処理に最適化されており、 `JSON`型と比較して優れたスペース効率とパフォーマンスを実現します。
 
 ## 構文 {#syntax}
 
@@ -79,7 +79,7 @@ ERROR 1105 (HY000): vector has 2 dimensions, does not fit VECTOR(3)
 
 ## 異なる次元のベクトルを保存する {#store-vectors-with-different-dimensions}
 
-`VECTOR`型の次元パラメータを省略することで、同じ列に異なる次元のベクトルを保存できます。
+`VECTOR`型の次元パラメータを省略すると、同じ列に異なる次元のベクトルを保存できます。
 
 ```sql
 CREATE TABLE vector_table (
@@ -107,7 +107,7 @@ INSERT INTO vector_table VALUES (2, '[0.3, 0.5]');       -- 2 dimensions vector,
 異なる次元を持つ 2 つのベクトルは、次の規則に従って辞書式比較を使用して比較されます。
 
 -   2 つのベクトルは最初から要素ごとに比較され、各要素は数値的に比較されます。
--   最初の不一致要素によって、どのベクトルが辞書式に他より*小さい*か*大きいかが*決まります。
+-   最初の不一致要素によって、どのベクトルが辞書式に他のベクトルより*小さい*か*大きいかが*決まります。
 -   あるベクトルが別のベクトルの接頭辞である場合、短いベクトルは辞書順でもう一方より*小さくなります*。例えば、 `[1,2,3] < [1,2,3,0]` 。
 -   同じ長さで同一の要素を持つベクトルは辞書的に*等しい*です。
 -   空ベクトルは、辞書順で空でないベクトルよりも*小さい*。例えば、 `[] < [1]` 。
@@ -137,7 +137,7 @@ INSERT INTO vector_table VALUES (2, '[0.3, 0.5]');       -- 2 dimensions vector,
 
 ## 算術 {#arithmetic}
 
-ベクトルデータ型は、算術演算`+` （加算）と`-` （減算）をサポートします。ただし、異なる次元のベクトル間の算術演算はサポートされておらず、エラーが発生します。
+ベクトルデータ型は算術演算`+` （加算）と`-` （減算）をサポートします。ただし、異なる次元のベクトル間の算術演算はサポートされておらず、エラーが発生します。
 
 例:
 
@@ -164,7 +164,7 @@ ERROR 1105 (HY000): vectors have different dimensions: 1 and 3
 
 ## キャスト {#cast}
 
-### ベクター⇔文字列間のキャスト {#cast-between-vector-string}
+### ベクトル ⇔ 文字列間のキャスト {#cast-between-vector-string}
 
 Vector と String 間のキャストを行うには、次の関数を使用します。
 
@@ -173,7 +173,7 @@ Vector と String 間のキャストを行うには、次の関数を使用し�
 -   `VEC_FROM_TEXT` : 文字列 ⇒ ベクトル
 -   `VEC_AS_TEXT` : ベクトル ⇒ 文字列
 
-ユーザビリティを向上させるため、ベクトル相関距離関数など、ベクトルデータ型のみをサポートする関数を呼び出す場合は、形式に準拠した文字列を渡すだけで済みます。この場合、TiDB は自動的に暗黙的なキャストを実行します。
+ユーザビリティを向上させるため、ベクトル相関距離関数など、ベクトルデータ型のみをサポートする関数を呼び出す場合は、形式に準拠した文字列を渡すこともできます。この場合、TiDB は自動的に暗黙的なキャストを実行します。
 
 ```sql
 -- The VEC_DIMS function only accepts VECTOR arguments, so you can directly pass in a string for an implicit cast.
@@ -204,7 +204,7 @@ Vector と String 間のキャストを行うには、次の関数を使用し�
 1 row in set (0.01 sec)
 ```
 
-複数のデータ型を受け入れる演算子または関数を使用する場合、文字列をその演算子または関数に渡す前に、文字列型を明示的にベクター型にキャストする必要があります。これは、TiDB がこのような場合、暗黙的なキャストを行わないためです。例えば、比較演算を実行する前に、文字列を明示的にベクター型にキャストする必要があります。そうしないと、TiDB は文字列をベクター数値ではなく文字列値として比較します。
+複数のデータ型を受け入れる演算子または関数を使用する場合、文字列をその演算子または関数に渡す前に、文字列型を明示的にベクター型にキャストする必要があります。これは、TiDBが暗黙的なキャストを行わないためです。例えば、比較演算を実行する前に、文字列をベクターに明示的にキャストする必要があります。そうしないと、TiDBは文字列をベクター数値ではなく文字列値として比較します。
 
 ```sql
 -- Because string is given, TiDB is comparing strings:
@@ -241,7 +241,7 @@ Vector と String 間のキャストを行うには、次の関数を使用し�
 
 追加のキャスト関数については、 [ベクトル関数と演算子](/vector-search/vector-search-functions-and-operators.md)参照してください。
 
-### ベクター⇔他のデータ型間のキャスト {#cast-between-vector-other-data-types}
+### ベクターと他のデータ型間のキャスト {#cast-between-vector-other-data-types}
 
 現在、 Vector と他のデータ型（ `JSON`など）間の直接キャストはサポートされていません。この制限を回避するには、SQL文でキャストする際の中間データ型として String を使用してください。
 
