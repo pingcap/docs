@@ -30,7 +30,6 @@ TiDB Cloud has supported the project-level Prometheus integration (Beta) since M
 ## Limitation
 
 - Prometheus and Grafana integrations now are only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
-
 - Prometheus and Grafana integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 
 ## Steps
