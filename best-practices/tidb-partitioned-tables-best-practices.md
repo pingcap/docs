@@ -223,7 +223,10 @@ In TiDB, you can clear up historical data either by TTL (Time-to-Live) or manual
 To compare the performance of TTL and partition drop, the test case in this section configures TTL to execute every 10 minutes and create a partitioned version of the same table, dropping one partition at the same interval for comparison. Both approaches are tested under background write loads of 50 and 100 concurrent threads. This test case measures key metrics such as execution time, system resource utilization, and the total number of rows deleted.
 
 #### Findings
-> **Note**: The performance benefits described below apply to partitioned tables without global indexes. 
+
+> **Note:**
+>
+> The performance benefits described in this section only apply to partitioned tables without global indexes. 
 
 **TTL performance:**
 
