@@ -8,7 +8,7 @@ summary: Learn how to use third-party metrics integrations.
 You can integrate TiDB Cloud with the following third-party metrics services to receive TiDB Cloud alerts and view the performance metrics of your TiDB cluster in these services:
 
 - [Datadog integration](#datadog-integration)
-- [Prometheus and Grafana integration (Beta)](#prometheus-and-grafana-integration-beta)
+- [Prometheus and Grafana integration](#prometheus-and-grafana-integration)
 - [New Relic integration](#new-relic-integration)
 
 ## Datadog integration
@@ -17,7 +17,7 @@ With the Datadog integration, you can configure TiDB Cloud to send metric data a
 
 For the detailed integration steps and a list of metrics that Datadog tracks, refer to [Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration.md).
 
-## Prometheus and Grafana integration (Beta)
+## Prometheus and Grafana integration
 
 With the Prometheus and Grafana integration, you can get a `scrape_config` file for Prometheus from TiDB Cloud and use the content from the file to configure Prometheus. You can view these metrics in your Grafana dashboards.
 

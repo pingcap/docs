@@ -11,13 +11,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Currently, after upgrading the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.3.0](https://docs-archive.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs-archive.pingcap.com/tidb/v6.4/release-6.4.0), the cold start becomes slower in certain circumstances. So we roll back the default TiDB version of all Serverless Tier clusters from v6.4.0 to v6.3.0, then fix the problem as soon as possible, and upgrade it later again.
+- Currently, after upgrading the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#starter) clusters from [v6.3.0](https://docs-archive.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs-archive.pingcap.com/tidb/v6.4/release-6.4.0), the cold start becomes slower in certain circumstances. So we roll back the default TiDB version of all Serverless Tier clusters from v6.4.0 to v6.3.0, then fix the problem as soon as possible, and upgrade it later again.
 
 ## December 27, 2022
 
 **General changes**
 
-- Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.3.0](https://docs-archive.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs-archive.pingcap.com/tidb/v6.4/release-6.4.0).
+- Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#starter) clusters from [v6.3.0](https://docs-archive.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs-archive.pingcap.com/tidb/v6.4/release-6.4.0).
 
 - The point-in-time recovery (PITR) for Dedicated Tier clusters is now in General Availability (GA).
 
@@ -169,7 +169,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-* Developer Tier is upgraded to [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). Serverless Tier, a fully-managed, auto-scaling deployment of TiDB, is now available. It is still in beta and free to use.
+* Developer Tier is upgraded to [Serverless Tier](/tidb-cloud/select-cluster-tier.md#starter). Serverless Tier, a fully-managed, auto-scaling deployment of TiDB, is now available. It is still in beta and free to use.
 
     * A Serverless Tier cluster still contains fully functional HTAP ability as Dedicated Tier clusters.
     * Serverless Tier offers you faster cluster creation time and instantaneous cold start time. Compared with Developer Tier, the creation time reduces from minutes to seconds.
@@ -247,7 +247,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.2.0](https://docs-archive.pingcap.com/tidb/v6.2/release-6.2.0) to [v6.3.0](https://docs-archive.pingcap.com/tidb/v6.3/release-6.3.0).
+* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#starter) clusters from [v6.2.0](https://docs-archive.pingcap.com/tidb/v6.2/release-6.2.0) to [v6.3.0](https://docs-archive.pingcap.com/tidb/v6.3/release-6.3.0).
 
 **Console changes**
 
@@ -310,7 +310,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     In the new design, the entrances of upgrade to Dedicated Tier, cluster connection, and data import are highlighted.
 
-* Introduce Playground for [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+* Introduce Playground for [Developer Tier](/tidb-cloud/select-cluster-tier.md#starter) clusters.
 
     Playground contains a pre-loaded dataset of GitHub events, which allows you to get started with TiDB Cloud by running queries instantly, without importing your data or connecting to a client.
 
@@ -374,7 +374,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) to [v6.2.0](https://docs-archive.pingcap.com/tidb/v6.2/release-6.2.0).
+* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#starter) clusters from [v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) to [v6.2.0](https://docs-archive.pingcap.com/tidb/v6.2/release-6.2.0).
 
 **API changes**
 
@@ -441,19 +441,19 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## July 26, 2022
 
-* Support automatic hibernation and resuming for new [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
+* Support automatic hibernation and resuming for new [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#starter).
 
     A Developer Tier cluster will not be deleted after 7 days of inactivity so you can still use it at any time until the one-year free trial ends. After 24 hours of inactivity, the Developer Tier cluster will hibernate automatically. To resume the cluster, either send a new connection to the cluster or click the **Resume** button in the TiDB Cloud console. The cluster will be resumed within 50 seconds and back to service automatically.
 
-* Add a user name prefix limitation for new [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
+* Add a user name prefix limitation for new [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#starter).
 
     Whenever you use or set a database user name, you must include the prefix for your cluster in the user name. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
 
-* Disable the backup and restore feature for [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
+* Disable the backup and restore feature for [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#starter).
 
     The backup and restore feature (including both automatic backup and manual backup) is disabled for Developer Tier clusters. You can still use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
 
-* Increase the storage size of a [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster from 500 MiB to 1 GiB.
+* Increase the storage size of a [Developer Tier](/tidb-cloud/select-cluster-tier.md#starter) cluster from 500 MiB to 1 GiB.
 * Add breadcrumbs to the TiDB Cloud console to improve the navigation experience.
 * Support configuring multiple filter rules when you import data into TiDB Cloud.
 * Remove the **Traffic Filters** page from **Project Settings**, and remove the **Add Rules from Default Set** button from the **Connect to TiDB** dialog.
@@ -526,7 +526,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## May 19, 2022
 
-* Add the support of the AWS region `Frankfurt` for [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster creation.
+* Add the support of the AWS region `Frankfurt` for [Developer Tier](/tidb-cloud/select-cluster-tier.md#starter) cluster creation.
 
 ## May 18, 2022
 
@@ -550,7 +550,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 TiDB Cloud is now in General Availability. You can [sign up](https://tidbcloud.com/signup) and select one of the following options:
 
-* Get started with [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) for free.
+* Get started with [Developer Tier](/tidb-cloud/select-cluster-tier.md#starter) for free.
 * <a href="mailto:tidbcloud-support@pingcap.com">Contact us</a> to apply for a 14-day PoC trial for free.
 * Get full access with [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
 
