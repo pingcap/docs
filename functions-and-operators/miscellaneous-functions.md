@@ -5,7 +5,7 @@ summary: 了解 TiDB 中的杂项函数。
 
 # 杂项函数
 
-TiDB 支持 MySQL 8.0 中大多数的 [杂项函数](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html)。
+TiDB 支持大多数 MySQL 8.0 中的 [杂项函数](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html)。
 
 ## 支持的函数
 
@@ -25,8 +25,8 @@ TiDB 支持 MySQL 8.0 中大多数的 [杂项函数](https://dev.mysql.com/doc/r
 | [`IS_IPV6()`](#is_ipv6)                  | 判断参数是否为 IPv6 地址               |
 | [`IS_UUID()`](#is_uuid)                  | 判断参数是否为 UUID                       |
 | [`NAME_CONST()`](#name_const)            | 可用于重命名列名               |
-| [`SLEEP()`](#sleep)                      | 休眠指定秒数。注意，对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群，`SLEEP()` 函数有最大 300 秒的休眠时间限制。       |
-| [`UUID()`](#uuid)                        | 返回一个全局唯一标识符（UUID）       |
+| [`SLEEP()`](#sleep)                      | 休眠指定秒数。注意，对于 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群，`SLEEP()` 函数有最大 300 秒的休眠时间限制。       |
+| [`UUID()`](#uuid)                        | 返回全局唯一标识符（UUID）       |
 | [`UUID_TO_BIN()`](#uuid_to_bin)          | 将 UUID 从文本格式转换为二进制格式    |
 | [`VALUES()`](#values)                    | 定义在 INSERT 期间要使用的值    |
 
@@ -57,14 +57,14 @@ SELECT ANY_VALUE(id),GROUP_CONCAT(id),name FROM fruits GROUP BY name;
 4 rows in set (0.00 sec)
 ```
 
-在上述示例中，TiDB 对第一个 `SELECT` 语句返回错误，因为 `id` 列是非聚合列且未包含在 `GROUP BY` 子句中。为了解决该问题，第二个 `SELECT` 查询使用 `ANY_VALUE()` 从每个分组中获取任意一个值，并使用 `GROUP_CONCAT()` 将每个分组内的所有 `id` 列的值拼接为一个字符串。该方法可以在不更改 SQL 模式的情况下，获取每个分组的一个值以及该分组的所有值。
+在上述示例中，TiDB 对第一个 `SELECT` 语句返回错误，因为 `id` 列是非聚合列且未包含在 `GROUP BY` 子句中。为了解决该问题，第二个 `SELECT` 查询使用 `ANY_VALUE()` 从每个分组中获取任意一个值，并使用 `GROUP_CONCAT()` 将每个分组内的所有 `id` 列的值拼接为一个字符串。该方法可以让你在不更改 SQL 模式的情况下，获取每个分组的一个值以及该分组的所有值。
 
 ### BIN_TO_UUID()
 
-`BIN_TO_UUID()` 和 `UUID_TO_BIN()` 可用于在文本格式 UUID 和二进制格式之间进行转换。两个函数都接受两个参数。
+`BIN_TO_UUID()` 和 `UUID_TO_BIN()` 可用于在文本格式 UUID 和二进制格式之间进行转换。这两个函数都接受两个参数。
 
 - 第一个参数指定要转换的值。
-- 第二个参数（可选）用于控制二进制格式中字段的排序。
+- 第二个参数（可选）控制二进制格式中字段的排序。
 
 ```sql
 SET @a := UUID();
@@ -145,7 +145,7 @@ TABLE t1;
 
 ### INET_ATON()
 
-`INET_ATON()` 函数将点分十进制表示的 IPv4 地址转换为可以高效存储的数值。
+`INET_ATON()` 函数将点分十进制表示的 IPv4 地址转换为可以高效存储的数值版本。
 
 ```sql
 SELECT INET_ATON('127.0.0.1');
@@ -416,4 +416,4 @@ TABLE t1;
 
 | 名称 | 描述  |
 |:------------|:-----------------------------------------------------------------------------------------------|
-| [`UUID_SHORT()`](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html#function_uuid-short)            | 提供一个在特定假设下唯一的 UUID，但这些假设在 TiDB 中不成立 [TiDB #4620](https://github.com/pingcap/tidb/issues/4620) |
+| [`UUID_SHORT()`](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html#function_uuid-short)            | 在某些假设成立的情况下提供唯一的 UUID，但这些假设在 TiDB 中不成立 [TiDB #4620](https://github.com/pingcap/tidb/issues/4620) |

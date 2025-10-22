@@ -7,19 +7,19 @@ summary: 了解 `SLOW_QUERY` INFORMATION_SCHEMA 表。
 
 <CustomContent platform="tidb">
 
-`SLOW_QUERY` 表提供当前节点的慢查询信息，这些信息是 TiDB [慢日志文件](/tidb-configuration-file.md#slow-query-file) 的解析结果。表中的列名与慢日志中的字段名一一对应。
+`SLOW_QUERY` 表提供当前节点的慢查询信息，这些信息是 TiDB [慢日志文件](/tidb-configuration-file.md#slow-query-file)的解析结果。表中的列名与慢日志中的字段名一一对应。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-`SLOW_QUERY` 表提供当前节点的慢查询信息，这些信息是 TiDB [慢日志文件](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#slow-query-file) 的解析结果。表中的列名与慢日志中的字段名一一对应。
+`SLOW_QUERY` 表提供当前节点的慢查询信息，这些信息是 TiDB [慢日志文件](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#slow-query-file)的解析结果。表中的列名与慢日志中的字段名一一对应。
 
 </CustomContent>
 
-> **注意：**
+> **Note:**
 >
-> 该表在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该表在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
 <CustomContent platform="tidb">
 
@@ -129,9 +129,9 @@ DESC SLOW_QUERY;
 
 `CLUSTER_SLOW_QUERY` 表提供整个集群所有节点的慢查询信息，这些信息是 TiDB 慢日志文件的解析结果。你可以像使用 `SLOW_QUERY` 表一样使用 `CLUSTER_SLOW_QUERY` 表。`CLUSTER_SLOW_QUERY` 表的表结构与 `SLOW_QUERY` 表的区别在于多了一个 `INSTANCE` 列。`INSTANCE` 列表示该慢查询信息所在的 TiDB 节点地址。
 
-> **注意：**
+> **Note:**
 >
-> 该表在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该表在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
 <CustomContent platform="tidb">
 
@@ -257,7 +257,7 @@ DESC SELECT COUNT(*) FROM CLUSTER_SLOW_QUERY WHERE user = 'u1';
 
 在上述执行计划中，`user = u1` 条件被下推到其他（`cop`）TiDB 节点，聚合算子也被下推（图中的 `StreamAgg` 算子）。
 
-目前，由于系统表没有收集统计信息，有时某些聚合算子无法下推，导致执行较慢。此时，你可以手动指定 SQL HINT，将聚合算子下推。例如：
+目前，由于系统表没有统计信息，有时某些聚合算子无法下推，导致执行较慢。此时，你可以手动指定 SQL HINT，将聚合算子下推。例如：
 
 ```sql
 SELECT /*+ AGG_TO_COP() */ COUNT(*) FROM CLUSTER_SLOW_QUERY GROUP BY user;
@@ -265,7 +265,7 @@ SELECT /*+ AGG_TO_COP() */ COUNT(*) FROM CLUSTER_SLOW_QUERY GROUP BY user;
 
 ## 查看执行信息
 
-通过在 `SLOW_QUERY` 表上执行 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) 查询，你可以获得数据库获取慢查询信息的详细过程信息。但在 `CLUSTER_SLOW_QUERY` 表上执行 `EXPLAIN ANALYZE` 时**不会**返回这些信息。
+通过在 `SLOW_QUERY` 表上执行 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) 查询，你可以获得数据库获取慢查询信息的详细过程信息。但在 `CLUSTER_SLOW_QUERY` 表上执行 `EXPLAIN ANALYZE` 时，**不会**返回这些信息。
 
 示例：
 
@@ -313,10 +313,10 @@ read_size: 4.06 MB
 
 | 字段 | 说明 |
 |---|---|
-| `initialize` | 初始化耗时 |
-| `read_file` | 读取慢日志文件耗时 |
-| `parse_log.time` | 解析慢日志文件耗时 |
+| `initialize` | 初始化所花费的时间 |
+| `read_file` | 读取慢日志文件所花费的时间 |
+| `parse_log.time` | 解析慢日志文件所花费的时间 |
 | `parse_log.concurrency` | 解析慢日志文件的并发度（由 [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) 设置） |
-| `total_file` | 慢日志文件总数 |
+| `total_file` | 慢日志文件的总数 |
 | `read_file` | 实际读取的慢日志文件数 |
-| `read_size` | 从日志文件读取的字节数 |
+| `read_size` | 从日志文件中读取的字节数 |

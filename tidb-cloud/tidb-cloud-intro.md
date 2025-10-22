@@ -6,15 +6,15 @@ category: intro
 
 # 什么是 TiDB Cloud
 
-[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 是一款全托管的数据库即服务（DBaaS），将 [TiDB](https://docs.pingcap.com/tidb/stable/overview) —— 一个开源的 HTAP（混合事务与分析处理）数据库 —— 带到你的云端。TiDB Cloud 提供了一种简单的方式来部署和管理数据库，让你专注于应用开发，而无需关注数据库的复杂性。<CustomContent language="en,zh">你可以在 Amazon Web Services (AWS)、Google Cloud、Microsoft Azure 和阿里云上创建 TiDB Cloud 集群，快速构建关键业务应用。</CustomContent><CustomContent language="ja">You can create TiDB Cloud clusters to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.</CustomContent>
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 是一款全托管的数据库即服务（DBaaS），将 [TiDB](https://docs.pingcap.com/tidb/stable/overview) —— 一个开源的 HTAP（混合事务与分析处理）数据库 —— 带到你的云端。TiDB Cloud 提供了一种简单的方式来部署和管理数据库，让你专注于应用程序本身，而无需关注数据库的复杂性。<CustomContent language="en,zh">你可以在 Amazon Web Services (AWS)、Google Cloud、Microsoft Azure 和阿里云上创建 TiDB Cloud 集群，快速构建关键业务应用。</CustomContent><CustomContent language="ja">You can create TiDB Cloud clusters to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.</CustomContent>
 
-![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
+![TiDB Cloud 概览](/media/tidb-cloud/tidb-cloud-overview.png)
 
 ## 为什么选择 TiDB Cloud
 
 TiDB Cloud 让你几乎无需培训即可轻松处理如基础设施管理和集群部署等复杂任务。
 
-- 开发者和数据库管理员（DBA）可以轻松应对大量在线流量，并快速分析跨多个数据集的大规模数据。
+- 开发者和数据库管理员（DBA）可以轻松应对大量在线流量，并能快速分析跨多个数据集的大规模数据。
 
 - 各类规模的企业都可以轻松部署和管理 TiDB Cloud，无需预付费用，灵活应对业务增长。
 
@@ -26,7 +26,7 @@ TiDB Cloud 让你几乎无需培训即可轻松处理如基础设施管理和集
 
 - **Fast and Customized Scaling**
 
-    弹性且透明地扩展到数百个节点以应对关键业务负载，同时保持 ACID 事务。无需进行分片操作。你还可以根据业务需求分别扩展计算节点和存储节点。
+    弹性且透明地扩展至数百个节点以应对关键负载，同时保持 ACID 事务。无需进行分片操作。你还可以根据业务需求分别扩展计算节点和存储节点。
 
 - **MySQL Compatibility**
 
@@ -64,7 +64,7 @@ TiDB Cloud 让你几乎无需培训即可轻松处理如基础设施管理和集
 
 - **Simple Pricing Plans**
 
-    只为实际使用量付费，价格透明，无隐藏费用。
+    只为实际使用的资源付费，价格透明，无隐藏费用。
 
 - **World-Class Support**
 
@@ -74,7 +74,7 @@ TiDB Cloud 让你几乎无需培训即可轻松处理如基础设施管理和集
 
 TiDB Cloud 提供以下部署选项：
 
-- TiDB Cloud Serverless（现已更名为 Starter）
+- TiDB Cloud Starter
 
     TiDB Cloud Starter 是一款全托管的多租户 TiDB 服务。它提供即时、自动扩缩容的 MySQL 兼容数据库，并在超出免费额度后按用量计费。
 
@@ -110,13 +110,13 @@ TiDB Cloud 提供以下部署选项：
 
 ## 架构
 
-![TiDB Cloud architecture](/media/tidb-cloud/tidb-cloud-architecture.png)
+![TiDB Cloud 架构](/media/tidb-cloud/tidb-cloud-architecture.png)
 
 - TiDB VPC（虚拟私有云）
 
-    对于每个 TiDB Cloud 集群，所有 TiDB 节点及辅助节点（包括 TiDB Operator 节点和日志节点）都部署在同一个 VPC 中。
+    对于每个 TiDB Cloud 集群，所有 TiDB 节点及辅助节点（包括 TiDB Operator 节点和日志节点）都部署在同一个 VPC 内。
 
-- TiDB Cloud Central Services
+- TiDB Cloud 中央服务
 
     中央服务（包括计费、告警、元数据存储、Dashboard UI 等）独立部署。你可以通过互联网访问 Dashboard UI 来操作 TiDB 集群。
 

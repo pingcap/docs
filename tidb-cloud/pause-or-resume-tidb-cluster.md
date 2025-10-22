@@ -1,11 +1,11 @@
 ---
-title: 暂停或恢复 TiDB Cloud Dedicated 集群
-summary: 了解如何暂停或恢复 TiDB Cloud Dedicated 集群。
+title: 暂停或恢复 TiDB Cloud 专属集群
+summary: 了解如何暂停或恢复 TiDB Cloud 专属集群。
 ---
 
-# 暂停或恢复 TiDB Cloud Dedicated 集群
+# 暂停或恢复 TiDB Cloud 专属集群
 
-你可以在 TiDB Cloud 中轻松暂停和恢复并非始终运行的 TiDB Cloud Dedicated 集群。
+你可以在 TiDB Cloud 中轻松暂停和恢复并非始终运行的 TiDB Cloud 专属集群。
 
 暂停操作不会影响存储在集群中的数据，只是停止监控信息的收集和计算资源的消耗。暂停后，你可以随时恢复集群。
 
@@ -13,21 +13,21 @@ summary: 了解如何暂停或恢复 TiDB Cloud Dedicated 集群。
 
 > **注意：**
 >
-> 你无法暂停 [TiDB Cloud Serverless 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)。
+> 你无法暂停 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 或 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 集群。
 
 ## 限制
 
 - 只有当集群处于 **Available** 状态时，你才能暂停集群。如果集群处于 **Modifying** 等其他状态，你必须等待当前操作完成后才能暂停集群。
 - 当有数据导入任务正在进行时，无法暂停集群。你可以等待导入任务完成或取消导入任务。
-- 当有备份任务正在进行时，无法暂停集群。你可以等待当前备份任务完成或[删除正在运行的备份任务](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job)。
-- 如果集群存在任何 [changefeeds](/tidb-cloud/changefeed-overview.md)，则无法暂停集群。你需要[删除现有的 changefeed](/tidb-cloud/changefeed-overview.md#delete-a-changefeed) 后才能暂停集群。
+- 当有备份任务正在进行时，无法暂停集群。你可以等待当前备份任务完成，或[删除正在运行的备份任务](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job)。
+- 如果集群存在任何 [changefeeds](/tidb-cloud/changefeed-overview.md)，则无法暂停。你需要[删除现有的 changefeed](/tidb-cloud/changefeed-overview.md#delete-a-changefeed) 后才能暂停集群。
 
 ## 暂停 TiDB 集群
 
 暂停时长和行为取决于你的组织创建日期：
 
-- 2024 年 11 月 12 日之后创建的组织，采用标准暂停行为，最长暂停时长为 7 天。
-- 2024 年 11 月 12 日及之前创建的组织，采用兼容暂停行为，允许更长的暂停时长。这些组织将逐步过渡到标准的 7 天限制。
+- 2024 年 11 月 12 日之后创建的组织，遵循标准暂停行为，最长暂停时长为 7 天。
+- 2024 年 11 月 12 日及之前创建的组织，遵循兼容暂停行为，允许更长的暂停时长。这些组织将逐步过渡到标准的 7 天限制。
 
 <SimpleTab>
 <div label="Standard pause behavior">
@@ -51,7 +51,7 @@ summary: 了解如何暂停或恢复 TiDB Cloud Dedicated 集群。
 
 > **注意：**
 >
-> 如果你的组织是在 2024 年 11 月 12 日之前创建的，集群仍采用兼容暂停行为。TiDB Cloud 会在过渡到新的标准暂停行为前通知你。
+> 如果你的组织是在 2024 年 11 月 12 日之前创建的，集群仍然遵循兼容暂停行为。TiDB Cloud 会在过渡到新的标准暂停行为前通知你。
 
 当集群被暂停时，请注意以下事项：
 
@@ -86,7 +86,7 @@ summary: 了解如何暂停或恢复 TiDB Cloud Dedicated 集群。
 
     点击 **Pause** 后，集群会先进入 **Pausing** 状态。暂停操作完成后，集群会变为 **Paused** 状态。
 
-你也可以通过 TiDB Cloud API 暂停集群。目前，TiDB Cloud API 仍处于 beta 阶段。更多信息请参见 [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta)。
+你也可以使用 TiDB Cloud API 暂停集群。目前，TiDB Cloud API 仍处于 beta 阶段。更多信息请参见 [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta)。
 
 ## 恢复 TiDB 集群
 
@@ -103,10 +103,10 @@ summary: 了解如何暂停或恢复 TiDB Cloud Dedicated 集群。
 
     > **注意：**
     >
-    > 处于 **Pausing** 状态的集群无法恢复。
+    > 你无法恢复处于 **Pausing** 状态的集群。
 
 3. 在对话框中点击 **Resume** 以确认你的选择。集群状态会变为 **Resuming**。
 
 根据你的集群规模，恢复集群可能需要几分钟。集群恢复后，状态会从 **Resuming** 变为 **Available**。
 
-你也可以通过 TiDB Cloud API 恢复集群。目前，TiDB Cloud API 仍处于 beta 阶段。更多信息请参见 [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta)。
+你也可以使用 TiDB Cloud API 恢复集群。目前，TiDB Cloud API 仍处于 beta 阶段。更多信息请参见 [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta)。
