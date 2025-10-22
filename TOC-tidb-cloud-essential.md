@@ -135,6 +135,7 @@
     - Connect to Your TiDB Cloud Cluster
       - [Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
       - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
+      - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
       - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
     - Branch ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
       - [Overview](/tidb-cloud/branch-overview.md)
@@ -239,7 +240,7 @@
     - [Overview](/vector-search/vector-search-integration-overview.md)
     - AI Frameworks
       - [LlamaIndex](/vector-search/vector-search-integrate-with-llamaindex.md)
-      - [Langchain](/vector-search/vector-search-integrate-with-langchain.md)
+      - [LangChain](/vector-search/vector-search-integrate-with-langchain.md)
     - AI Services
       - [Amazon Bedrock](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md)
     - Embedding Models/Services
@@ -248,6 +249,10 @@
       - [SQLAlchemy](/vector-search/vector-search-integrate-with-sqlalchemy.md)
       - [peewee](/vector-search/vector-search-integrate-with-peewee.md)
       - [Django ORM](/vector-search/vector-search-integrate-with-django-orm.md)
+  - Text Search
+    - [Full-Text Search with SQL](/tidb-cloud/vector-search-full-text-search-sql.md)
+    - [Full-Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md)
+    - [Hybrid Search](/tidb-cloud/vector-search-hybrid-search.md)
   - Reference
     - [Vector Data Types](/vector-search/vector-search-data-types.md)
     - [Vector Functions and Operators](/vector-search/vector-search-functions-and-operators.md)
@@ -263,11 +268,13 @@
     - [Identity Access Management](/tidb-cloud/manage-user-access.md)
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - Network Access Control
+    - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
     - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
     - [Configure Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
     - [TLS Connections to TiDB Cloud](/tidb-cloud/secure-connections-to-serverless-clusters.md)
   - Audit Management
     - [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md)
+    - [Database Audit Logging](/tidb-cloud/essential-database-audit-logging.md)
 - Billing
   - [Invoices](/tidb-cloud/tidb-cloud-billing.md#invoices)
   - [Billing Details](/tidb-cloud/tidb-cloud-billing.md#billing-details)
@@ -607,6 +614,18 @@
       - [delete](/tidb-cloud/ticloud-serverless-authorized-network-delete.md)
       - [list](/tidb-cloud/ticloud-serverless-authorized-network-list.md)
       - [update](/tidb-cloud/ticloud-serverless-authorized-network-update.md)
+    - audit-log
+      - config
+        - [update](/tidb-cloud/ticloud-serverless-audit-log-config-update.md)
+        - [describe](/tidb-cloud/ticloud-serverless-audit-log-config-describe.md)
+      - filter-rule
+        - [create](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-create.md)
+        - [delete](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-delete.md)
+        - [describe](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-describe.md)
+        - [list](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-list.md)
+        - [update](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-update.md)
+        - [template](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-template.md)
+      - [download](/tidb-cloud/ticloud-serverless-audit-log-download.md)
   - [completion](/tidb-cloud/ticloud-completion.md)
   - config
     - [create](/tidb-cloud/ticloud-config-create.md)

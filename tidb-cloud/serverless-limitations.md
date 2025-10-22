@@ -20,7 +20,7 @@ We are constantly filling in the feature gaps between {{{ .starter }}}/Essential
 
 ### Connection
 
-- Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to {{{ .starter }}} or {{{ .essential }}} clusters. 
+- Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to {{{ .starter }}} or {{{ .essential }}} clusters.
 - No [Firewall Rules](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md) support for Private Endpoint.
 
 > **Note:**
@@ -38,7 +38,7 @@ We are constantly filling in the feature gaps between {{{ .starter }}}/Essential
 
 ### Monitoring and diagnosis
 
-- [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently unavailable.
+- [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently unavailable.
 - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md) is currently unavailable.
 - [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer) is currently unavailable.
 
@@ -62,7 +62,7 @@ We are constantly filling in the feature gaps between {{{ .starter }}}/Essential
 
 ## Usage quota
 
-For each organization in TiDB Cloud, you can create a maximum of five [free {{{ .starter }}} clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) by default. To create more {{{ .starter }}} clusters, you need to add a credit card and [set a monthly spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for the usage.
+For each organization in TiDB Cloud, you can create a maximum of five [free {{{ .starter }}} clusters](/tidb-cloud/select-cluster-tier.md#starter) by default. To create more {{{ .starter }}} clusters, you need to add a credit card and [set a monthly spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for the usage.
 
 For the first five {{{ .starter }}} clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
 

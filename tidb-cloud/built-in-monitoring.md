@@ -82,7 +82,7 @@ The following sections illustrate the metrics on the **Metrics** page for TiDB C
 | TiFlash IO MBps | node-write, node-read | The total bytes of read and write in each TiFlash node. |
 | TiFlash Storage Usage | node, limit | The storage usage statistics or upper limit of each TiFlash node. |
 
-## Metrics for {{{ .starter }}} and Essential clusters
+## Metrics for {{{ .starter }}} and {{{ .essential }}} clusters
 
 The **Metrics** page provides two tabs for metrics of {{{ .starter }}} and {{{ .essential }}} clusters:
 
@@ -95,14 +95,17 @@ The following table illustrates the cluster-level main metrics under the **Clust
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| Request Units | RU per second | The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction. In addition to queries that you run, Request Units can be consumed by background activities, so when the QPS is 0, the Request Units per second might not be zero. |
+| Request Units | RU per second | The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction in a {{{ .starter }}} cluster. Besides user queries, background activities can also consume RUs, so when QPS is 0, RU usage per second might still be nonzero.|
+| Capacity vs Usage (RU/s) | Provisioned capacity (RCU), Consumed RU/s | The Request Capacity Units (RCUs) and the consumed Request Units (RU) per second in a {{{ .essential }}} cluster. |
 | Used Storage Size | Row-based storage, Columnar storage | The size of the row store and the size of the column store. |
 | Query Per Second | All, {SQL type} | The number of SQL statements executed per second, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
-| Average Query Duration | All, {SQL type} | The duration from receiving a request from the client to the {{{ .starter }}} or {{{ .essential }}} cluster until the cluster executes the request and returns the result to the client. |
+| Query Duration | Avg, P99, P99-{SQL type} | The duration from receiving a request from the client to the {{{ .starter }}} or {{{ .essential }}} cluster until the cluster executes the request and returns the result to the client. |
 | Failed Query | All | The number of SQL statement execution errors per second. |
 | Transaction Per Second | All | The number of transactions executed per second. |
-| Average Transaction Duration | All | The average execution duration of transactions. |
+| Transaction Duration | Avg, P99 | The execution duration of transactions. |
+| Lock-wait | P95, P99 | Time spent by transactions waiting to acquire pessimistic locks. High values indicate contention on the same rows or keys. |
 | Total Connection | All | The number of connections to the {{{ .starter }}} or {{{ .essential }}} cluster. |
+| Idle Connection Duration | P99, P99(in-txn), P99(not-in-txn) | The time that connections remain idle while inside an open transaction. Long durations typically indicate slow application logic or long-running transactions. |
 
 ### Database Status
 
