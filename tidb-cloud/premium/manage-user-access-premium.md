@@ -144,16 +144,16 @@ To invite a member to an organization, take the following steps:
 
 3. On the **Users** page, click **Invite User**.
 
-5. Enter the email address of the user to be invited, and then select an organization role for the user.
+4. Enter the email address of the user to be invited, and then select an organization role for the user.
 
     > **Tip:**
     > - The default role at organization level is `Organization Viewer`.
     > - If you want to invite multiple members at one time, you can enter multiple email addresses.
     > - The invited user does not belong to any instances by default. To invite a user to a instance, see [Invite an instance member](#invite-an-instance-member).
 
-6. If you only need assign the user an orgnization role, and not assign any instance roles or project roles, turn off the switch of **Add access for projects and instance**.
+5. If you only need assign the user an orgnization role, and not assign any instance roles or project roles, turn off the switch of **Add access for projects and instance**.
 
-7. Click **Invite**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
+6. Click **Invite**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
 
 7. After receiving this email, the user needs to click the link in the email to verify the identity, and a new page shows.
 
@@ -173,7 +173,7 @@ To modify the organization role of a member, take the following steps:
 
 2. In the left navigation pane, click **Organization Settings** > **Users**.
 
-3. On the **Users** page, click the **...** > **Edit Permission** of the target member.
+3. On the **Users** page, click **...** > **Edit Permission** of the target member.
 
 ### Remove an organization member
 
@@ -207,21 +207,19 @@ To invite a member to a instance, take the following steps:
 
 2. In the left navigation pane, click **Organization Settings** > **Users**.
 
-3. On the **Users** page, and then choose your instance in the list.
+3. On the **Users** page, click **Invite User**.
 
-4. Click **Invite**.
+4. Enter the email address of the user to be invited, and then select an organization role for the user. 
 
-5. Enter the email address of the user to be invited, and then select a instance role for the user.
+5. Make sure the switch "Add access for projects and instances" on. Click **Add access** and then select the resources to assign roles
 
-    > **Tip:**
-    >
-    > If you want to invite multiple members at one time, you can enter multiple email addresses.
+6. Select an instance role for the user
 
-6. Click **Confirm**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
+6. Click **Add access**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
 
 7. After receiving this email, the user needs to click the link in the email to verify the identity, and a new page shows.
 
-8. If the invited email address has not been signed up for a TiDB Cloud account, the user is directed to the sign-up page to create an account. If the email address has been signed up for a TiDB Cloud account, the user is directed to the sign-in page. After sign-in, the account joins the instance automatically.
+8. If the invited email address has not been signed up for a TiDB Cloud account, the user is directed to the sign-up page to create an account.
 
 > **Note:**
 >
@@ -237,23 +235,8 @@ To modify the instance role of a member, take the following steps:
 
 2. In the left navigation pane, click **Organization Settings** > **Users**.
 
-3. On the **Users** page, and then choose your instance in the drop-down list.
+3. On the **Users** page, click **...** > **Edit Permission** of the target member.
 
-4. In the row of the target member, click the role in the **Role** column, and then choose a new role from the drop-down list.
-
-### Remove an instance member
-
-If you are in the `Organization Owner` role, you can remove instance members.
-
-To remove a member from an instance, take the following steps:
-
-1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
-
-2. In the left navigation pane, click **Organization Settings** > **Users**.
-
-3. On the **Users** page,  and then choose your instance in the drop-down list.
-
-4. In the row of the target member, click **...** > **Delete**.
 
 ## Manage user profiles
 
