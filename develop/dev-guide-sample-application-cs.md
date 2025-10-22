@@ -13,11 +13,11 @@ C#（发音为 “C-Sharp”）是 .NET 家族中的一种编程语言，由 Mic
 
 - 下载 [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download)。
 - 本教程使用 `dotnet` 命令行工具。你也可以使用 Visual Studio Code IDE 来编写 C# 代码。
-- 要完成本教程，你需要有一个 TiDB 实例的访问权限。你可以使用 TiDB Cloud 上的 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-serverless) 或 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-dedicated) 集群，或者使用 `tiup playground` 启动的 TiDB 自建集群。
+- 要完成本教程，你需要有一个 TiDB 实例的访问权限。你可以使用 TiDB Cloud 上的 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 或 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-dedicated) 集群，或者使用 `tiup playground` 启动的 TiDB 自建集群。
 
-## 步骤 1. 创建控制台项目
+## 第 1 步：创建控制台项目
 
-使用 `console` 模板创建一个新项目。这会生成一个名为 `tidb_cs` 的新目录。在运行以下命令前，请先切换到你希望创建该目录的位置，或者直接指定完整路径。
+使用 `console` 模板创建一个新项目。这会生成一个名为 `tidb_cs` 的新目录。在运行以下命令前，请先切换到你希望创建该目录的位置，或者指定完整路径。
 
 ```
 $ dotnet new console -o tidb_cs
@@ -28,7 +28,7 @@ Restoring /home/dvaneeden/tidb_cs/tidb_cs.csproj:
 Restore succeeded.
 ```
 
-## 步骤 2. 添加 MySql.Data 包
+## 第 2 步：添加 MySql.Data 包
 
 .NET 的包管理器叫做 NuGet。MySQL Connector/NET 的 NuGet 包名称为 [MySql.Data](https://www.nuget.org/packages/MySql.Data)，它为 .NET 应用程序提供了 MySQL 协议的支持。如果你没有指定版本，NuGet 会安装最新的稳定版本（例如 9.3.0 版本）。
 
@@ -56,7 +56,7 @@ info : Writing assets file to disk. Path: /home/dvaneeden/tidb_cs/obj/project.as
 log  : Restored /home/dvaneeden/tidb_cs/tidb_cs.csproj (in 551 ms).
 ```
 
-## 步骤 3. 更新代码
+## 第 3 步：更新代码
 
 将 `Program.cs` 中的 “Hello World” 示例替换为以下代码。
 
@@ -97,20 +97,20 @@ public class Tutorial1
 }
 ```
 
-这段代码会连接到指定 IP 和端口的 TiDB 实例。如果你使用 TiDB Cloud，请将连接字符串参数（如 hostname、port、user 和 password）替换为 [TiDB Cloud 控制台](https://tidbcloud.com/) 中提供的详细信息。
+这段代码会连接到指定 IP 和端口的 TiDB 实例。如果你使用 TiDB Cloud，请将连接字符串参数（如主机名、端口、用户和密码）替换为 [TiDB Cloud 控制台](https://tidbcloud.com/) 提供的详细信息。
 
-该代码会连接数据库，打印其版本信息，然后通过执行 [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version) SQL 查询获取更详细的版本信息，并最终输出该结果。
+该代码会连接数据库，打印其版本信息，然后使用 [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version) 执行 SQL 查询以获取更详细的版本信息，并最终打印该结果。
 
-## 步骤 4. 运行程序
+## 第 4 步：运行程序
 
 ```
 $ dotnet run
 Connecting to TiDB...
 
-Connected to: 8.0.11-TiDB-v{{{ .tidb-version }}}
+Connected to: 8.0.11-TiDB-v8.5.3
 
 Version details:
-Release Version: v{{{ .tidb-version }}}
+Release Version: v8.5.3
 Edition: Community
 Git Commit Hash: f43a13324440f92209e2a9f04c0bbe9cf763978d
 Git Branch: HEAD

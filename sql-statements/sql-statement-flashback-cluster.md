@@ -5,24 +5,24 @@ summary: 了解在 TiDB 数据库中使用 FLASHBACK CLUSTER 的方法。
 
 # FLASHBACK CLUSTER
 
-TiDB v6.4.0 引入了 `FLASHBACK CLUSTER TO TIMESTAMP` 语法。你可以使用该语法将集群恢复到某个特定的时间点。在指定时间戳时，你可以设置一个 datetime 值或使用时间函数。datetime 的格式如 '2016-10-08 16:45:26.999'，最小时间单位为毫秒。但在大多数情况下，指定以秒为单位的时间戳就足够了，例如 '2016-10-08 16:45:26'。
+TiDB v6.4.0 引入了 `FLASHBACK CLUSTER TO TIMESTAMP` 语法。你可以使用该语法将集群恢复到某个特定的时间点。在指定时间戳时，你可以设置一个 datetime 值，或者使用时间函数。datetime 的格式类似于 '2016-10-08 16:45:26.999'，最小时间单位为毫秒。但在大多数情况下，使用秒作为时间单位指定时间戳就足够了，例如 '2016-10-08 16:45:26'。
 
 从 v6.5.6、v7.1.3、v7.5.1 和 v7.6.0 开始，TiDB 引入了 `FLASHBACK CLUSTER TO TSO` 语法。该语法允许你使用 [TSO](/tso.md) 来指定更精确的数据恢复时间点，从而提升数据恢复的灵活性。
 
 > **Warning:**
 >
-> `FLASHBACK CLUSTER TO [TIMESTAMP|TSO]` 语法不适用于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群。为避免出现不可预期的结果，请不要在 {{{ .starter }}} 和 {{{ .essential }}} 集群上执行该语句。
+> `FLASHBACK CLUSTER TO [TIMESTAMP|TSO]` 语法不适用于 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群。为避免出现不可预期的结果，请不要在 TiDB Cloud Starter 和 TiDB Cloud Essential 集群上执行该语句。
 
 > **Warning:**
 >
-> - 在指定恢复时间点时，请确保检查目标 timestamp 或 TSO 的有效性，避免指定超过 PD 当前分配的最大 TSO（可在 Grafana PD 面板的 `Current TSO` 查看）的未来时间。否则，可能会破坏并发处理的线性一致性和事务隔离级别，导致严重的数据正确性问题。
-> - 在 `FLASHBACK CLUSTER` 执行期间，数据清理过程不保证事务一致性。在 `FLASHBACK CLUSTER` 完成后，如果你打算使用 TiDB 的任何历史版本读取功能（如 [Stale Read](/stale-read.md) 或 [`tidb_snapshot`](/read-historical-data.md)），请确保指定的历史 timestamp 不在 `FLASHBACK CLUSTER` 执行期间。读取包含未被 FLASHBACK 完全恢复数据的历史版本，可能会破坏并发处理的线性一致性和事务隔离级别，导致严重的数据正确性问题。
+> - 在指定恢复时间点时，请务必检查目标 timestamp 或 TSO 的有效性，避免指定超过 PD 当前分配的最大 TSO（可在 Grafana PD 面板的 `Current TSO` 查看）的未来时间。否则，可能会破坏并发处理的线性一致性和事务隔离级别，导致严重的数据正确性问题。
+> - 在执行 `FLASHBACK CLUSTER` 期间，数据清理过程不保证事务一致性。在 `FLASHBACK CLUSTER` 完成后，如果你打算使用 TiDB 的任何历史版本读取功能（如 [Stale Read](/stale-read.md) 或 [`tidb_snapshot`](/read-historical-data.md)），请确保指定的历史时间戳不在 `FLASHBACK CLUSTER` 执行期间。读取包含未被 FLASHBACK 完全恢复数据的历史版本，可能会破坏并发处理的线性一致性和事务隔离级别，导致严重的数据正确性问题。
 
 <CustomContent platform="tidb">
 
 > **Warning:**
 >
-> 在 TiDB v7.1.0 中使用该功能时，部分 Region 可能在 FLASHBACK 操作完成后仍处于 FLASHBACK 过程中。建议避免在 v7.1.0 中使用该功能。详情可参考 issue [#44292](https://github.com/pingcap/tidb/issues/44292)。
+> 当你在 TiDB v7.1.0 中使用该功能时，即使 FLASHBACK 操作完成，部分 Region 可能仍处于 FLASHBACK 过程中。建议避免在 v7.1.0 中使用该功能。详情可参考 issue [#44292](https://github.com/pingcap/tidb/issues/44292)。
 >
 > 如果你遇到该问题，可以使用 [TiDB 快照备份与恢复](/br/br-snapshot-guide.md) 功能进行数据恢复。
 
@@ -57,29 +57,29 @@ FlashbackToTimestampStmt
 <CustomContent platform='tidb'>
 
 * 只有拥有 `SUPER` 权限的用户才能执行 `FLASHBACK CLUSTER` SQL 语句。
-* `FLASHBACK CLUSTER` 不支持回滚修改 PD 相关信息的 DDL 语句，如 `ALTER TABLE ATTRIBUTE`、`ALTER TABLE REPLICA` 和 `CREATE PLACEMENT POLICY`。
+* `FLASHBACK CLUSTER` 不支持回滚修改 PD 相关信息的 DDL 语句，例如 `ALTER TABLE ATTRIBUTE`、`ALTER TABLE REPLICA` 和 `CREATE PLACEMENT POLICY`。
 * 在 `FLASHBACK` 语句指定的时间点，不能存在未完全执行的 DDL 语句。如果存在此类 DDL，TiDB 会拒绝执行。
 * 在执行 `FLASHBACK CLUSTER` 前，TiDB 会断开所有相关连接，并禁止对这些表的读写操作，直到 `FLASHBACK CLUSTER` 语句执行完成。
 * `FLASHBACK CLUSTER` 语句在执行后无法取消，TiDB 会持续重试直到成功。
-* 在执行 `FLASHBACK CLUSTER` 期间，如需备份数据，只能使用 [Backup & Restore](/br/br-snapshot-guide.md) 并指定早于 `FLASHBACK CLUSTER` 开始时间的 `BackupTS`。此外，在 `FLASHBACK CLUSTER` 执行期间，开启 [日志备份](/br/br-pitr-guide.md) 会失败。因此，建议在 `FLASHBACK CLUSTER` 完成后再开启日志备份。
-* 如果 `FLASHBACK CLUSTER` 语句导致元数据（表结构、数据库结构）回滚，相关修改 **不会** 被 TiCDC 同步。因此，你需要手动暂停任务，等待 `FLASHBACK CLUSTER` 完成后，手动同步上下游的 schema 定义以确保一致。之后需要重新创建 TiCDC changefeed。
+* 在执行 `FLASHBACK CLUSTER` 期间，如果需要备份数据，只能使用 [Backup & Restore](/br/br-snapshot-guide.md) 并指定早于 `FLASHBACK CLUSTER` 开始时间的 `BackupTS`。此外，在 `FLASHBACK CLUSTER` 执行期间，开启 [日志备份](/br/br-pitr-guide.md) 会失败。因此，建议在 `FLASHBACK CLUSTER` 完成后再开启日志备份。
+* 如果 `FLASHBACK CLUSTER` 语句导致元数据（表结构、数据库结构）回滚，相关修改 **不会** 被 TiCDC 同步。因此，你需要手动暂停任务，等待 `FLASHBACK CLUSTER` 完成后，手动同步上下游的表结构定义，确保一致。之后需要重新创建 TiCDC changefeed。
 
 </CustomContent>
 
 <CustomContent platform='tidb-cloud'>
 
 * 只有拥有 `SUPER` 权限的用户才能执行 `FLASHBACK CLUSTER` SQL 语句。
-* `FLASHBACK CLUSTER` 不支持回滚修改 PD 相关信息的 DDL 语句，如 `ALTER TABLE ATTRIBUTE`、`ALTER TABLE REPLICA` 和 `CREATE PLACEMENT POLICY`。
+* `FLASHBACK CLUSTER` 不支持回滚修改 PD 相关信息的 DDL 语句，例如 `ALTER TABLE ATTRIBUTE`、`ALTER TABLE REPLICA` 和 `CREATE PLACEMENT POLICY`。
 * 在 `FLASHBACK` 语句指定的时间点，不能存在未完全执行的 DDL 语句。如果存在此类 DDL，TiDB 会拒绝执行。
 * 在执行 `FLASHBACK CLUSTER` 前，TiDB 会断开所有相关连接，并禁止对这些表的读写操作，直到 `FLASHBACK CLUSTER` 语句执行完成。
 * `FLASHBACK CLUSTER` 语句在执行后无法取消，TiDB 会持续重试直到成功。
-* 如果 `FLASHBACK CLUSTER` 语句导致元数据（表结构、数据库结构）回滚，相关修改 **不会** 被 TiCDC 同步。因此，你需要手动暂停任务，等待 `FLASHBACK CLUSTER` 完成后，手动同步上下游的 schema 定义以确保一致。之后需要重新创建 TiCDC changefeed。
+* 如果 `FLASHBACK CLUSTER` 语句导致元数据（表结构、数据库结构）回滚，相关修改 **不会** 被 TiCDC 同步。因此，你需要手动暂停任务，等待 `FLASHBACK CLUSTER` 完成后，手动同步上下游的表结构定义，确保一致。之后需要重新创建 TiCDC changefeed。
 
 </CustomContent>
 
 ## 示例
 
-以下示例展示了如何将集群 flashback 到某个特定 timestamp，以恢复新插入的数据：
+以下示例展示了如何将集群 flashback 到某个特定时间戳，以恢复新插入的数据：
 
 ```sql
 mysql> CREATE TABLE t(a INT);
@@ -160,7 +160,7 @@ mysql> SELECT * FROM t;
 1 row in set (0.01 sec)
 ```
 
-如果在 `FLASHBACK` 语句指定的时间点存在未完全执行的 DDL 语句，则 `FLASHBACK` 语句会执行失败：
+如果在 `FLASHBACK` 语句指定的时间点存在未完全执行的 DDL 语句，则 `FLASHBACK` 语句会失败：
 
 ```sql
 mysql> ALTER TABLE t ADD INDEX k(a);

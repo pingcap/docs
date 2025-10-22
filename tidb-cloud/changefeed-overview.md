@@ -11,7 +11,7 @@ TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数�
 >
 > - 目前，TiDB Cloud 每个集群最多只允许创建 100 个 changefeed。
 > - 目前，TiDB Cloud 每个 changefeed 最多只允许配置 100 条表过滤规则。
-> - 对于 [TiDB Cloud Serverless 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)，暂不支持 changefeed 功能。
+> - 对于 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 和 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 集群，changefeed 功能不可用。
 
 ## 查看 Changefeed 页面
 
@@ -40,16 +40,16 @@ TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数�
 
 1. 进入目标 TiDB 集群的 [**Changefeed**](#view-the-changefeed-page) 页面。
 2. 找到你想要查询的 changefeed，在 **Action** 列点击 **...** > **View**。
-3. 你可以在页面的 **Specification** 区域看到当前 TiCDC Replication Capacity Units（RCU）。
+3. 你可以在页面的 **Specification** 区域看到当前的 TiCDC Replication Capacity Units（RCU）。
 
 ## 扩缩容 changefeed
 
-你可以通过扩容或缩容 changefeed 来调整其 TiCDC Replication Capacity Units（RCU）。
+你可以通过扩容或缩容 changefeed 来更改 TiCDC Replication Capacity Units（RCU）。
 
 > **注意：**
 >
-> - 若要对某个集群的 changefeed 进行扩缩容，需确保该集群的所有 changefeed 均为 2023 年 3 月 28 日之后创建。
-> - 如果某个集群存在 2023 年 3 月 28 日之前创建的 changefeed，则该集群的所有 changefeed（包括新建的）均不支持扩缩容。
+> - 若要对集群的 changefeed 进行扩缩容，请确保该集群的所有 changefeed 均为 2023 年 3 月 28 日之后创建。
+> - 如果集群中存在 2023 年 3 月 28 日之前创建的 changefeed，则该集群的所有 changefeed（无论是已有的还是新建的）均不支持扩缩容。
 
 1. 进入目标 TiDB 集群的 [**Changefeed**](#view-the-changefeed-page) 页面。
 2. 找到你想要扩缩容的 changefeed，在 **Action** 列点击 **...** > **Scale Up/Down**。
@@ -67,11 +67,11 @@ TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数�
 
 > **注意：**
 >
-> TiDB Cloud 目前仅支持在暂停状态下编辑 changefeed。
+> TiDB Cloud 目前仅允许在 changefeed 处于暂停状态时进行编辑。
 
 1. 进入目标 TiDB 集群的 [**Changefeed**](#view-the-changefeed-page) 页面。
 2. 找到你想要暂停的 changefeed，在 **Action** 列点击 **...** > **Pause**。
-3. 当 changefeed 状态变为 `Paused` 后，点击 **...** > **Edit** 编辑对应的 changefeed。
+3. 当 changefeed 状态变为 `Paused` 后，点击 **...** > **Edit**，即可编辑对应的 changefeed。
 
     TiDB Cloud 会默认填充 changefeed 配置。你可以修改以下配置项：
 
@@ -80,7 +80,7 @@ TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数�
     - TiDB Cloud sink：**TiDB Cloud Connection**、**Table Filter** 和 **Event Filter**。
     - Cloud storage sink：**Storage Endpoint**、**Table Filter** 和 **Event Filter**。
 
-4. 编辑配置后，点击 **...** > **Resume** 恢复对应的 changefeed。
+4. 编辑配置后，点击 **...** > **Resume**，恢复对应的 changefeed。
 
 ## 删除 changefeed
 
@@ -89,11 +89,11 @@ TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数�
 
 ## Changefeed 计费
 
-关于 TiDB Cloud 中 changefeed 的计费方式，请参见 [Changefeed 计费](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)。
+要了解 TiDB Cloud 中 changefeed 的计费方式，请参见 [Changefeed billing](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)。
 
 ## Changefeed 状态
 
-复制任务的状态表示复制任务的运行状态。在运行过程中，复制任务可能因错误失败，或被手动暂停、恢复。这些操作会导致复制任务状态的变化。
+复制任务的状态表示复制任务的运行状态。在运行过程中，复制任务可能因错误而失败，或被手动暂停、恢复。这些操作会导致复制任务状态的变化。
 
 各状态说明如下：
 

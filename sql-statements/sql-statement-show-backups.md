@@ -1,23 +1,23 @@
 ---
 title: SHOW [BACKUPS|RESTORES] | TiDB SQL Statement Reference
-summary: An overview of the usage of SHOW [BACKUPS|RESTORES] for the TiDB database.
+summary: TiDB 数据库中 SHOW [BACKUPS|RESTORES] 的用法概述。
 ---
 
 # SHOW [BACKUPS|RESTORES]
 
-These statements show a list of all queued, running and recently finished [`BACKUP`](/sql-statements/sql-statement-backup.md) and [`RESTORE`](/sql-statements/sql-statement-restore.md) tasks that were executed on a TiDB instance.
+这些语句会显示在 TiDB 实例上执行的所有已排队、正在运行和最近完成的 [`BACKUP`](/sql-statements/sql-statement-backup.md) 及 [`RESTORE`](/sql-statements/sql-statement-restore.md) 任务的列表。
 
-Both statements require `SUPER` privilege to run.
+这两个语句都需要 `SUPER` 权限才能执行。
 
-Use `SHOW BACKUPS` to query `BACKUP` tasks and use `SHOW RESTORES` to query `RESTORE` tasks.
+使用 `SHOW BACKUPS` 查询 `BACKUP` 任务，使用 `SHOW RESTORES` 查询 `RESTORE` 任务。
 
 > **Note:**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> 该功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
-Backups and restores that were started with the `br` commandline tool are not shown.
+通过 `br` 命令行工具启动的备份和恢复任务不会显示在这里。
 
-## Synopsis
+## 语法
 
 ```ebnf+diagram
 ShowBRIEStmt ::=
@@ -28,19 +28,15 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Examples
+## 示例
 
-In one connection, execute the following statement:
-
-{{< copyable "sql" >}}
+在一个连接中，执行以下语句：
 
 ```sql
 BACKUP DATABASE `test` TO 's3://example-bucket/backup-01';
 ```
 
-Before the backup completes, run `SHOW BACKUPS` in a new connection:
-
-{{< copyable "sql" >}}
+在备份完成之前，在新的连接中运行 `SHOW BACKUPS`：
 
 ```sql
 SHOW BACKUPS;
@@ -55,30 +51,28 @@ SHOW BACKUPS;
 1 row in set (0.00 sec)
 ```
 
-The first row of the result above is described as follows:
+上面结果的第一行各列含义如下：
 
-| Column | Description |
+| 列名 | 描述 |
 | :-------- | :--------- |
-| `Destination` | The destination URL (with all parameters stripped to avoid leaking secret keys) |
-| `State` | State of the task |
-| `Progress` | Estimated progress in the current state as a percentage |
-| `Queue_time` | When the task was queued |
-| `Execution_time` | When the task was started; the value is `0000-00-00 00:00:00` for queueing tasks |
-| `Finish_time` | The timestamp when the task finished; the value is `0000-00-00 00:00:00` for queueing and running tasks |
-| `Connection` | Connection ID running this task |
-| `Message` | Message with details |
+| `Destination` | 目标 URL（已去除所有参数以避免泄露密钥） |
+| `State` | 任务的状态 |
+| `Progress` | 当前状态下的预计进度百分比 |
+| `Queue_time` | 任务被排队的时间 |
+| `Execution_time` | 任务开始执行的时间；对于排队中的任务，该值为 `0000-00-00 00:00:00` |
+| `Finish_time` | 任务完成时的时间戳；对于排队和运行中的任务，该值为 `0000-00-00 00:00:00` |
+| `Connection` | 执行该任务的连接 ID |
+| `Message` | 详细信息 |
 
-The possible states are:
+可能的状态有：
 
-| State | Description |
+| State | 描述 |
 | :-----|:------------|
-| Backup | Making a backup |
-| Wait | Waiting for execution |
-| Checksum | Running a checksum operation |
+| Backup | 正在进行备份 |
+| Wait | 等待执行 |
+| Checksum | 正在执行校验和操作 |
 
-The connection ID can be used to cancel a backup/restore task via the [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md) statement.
-
-{{< copyable "sql" >}}
+你可以使用连接 ID 通过 [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md) 语句取消备份/恢复任务。
 
 ```sql
 KILL TIDB QUERY 4;
@@ -88,29 +82,25 @@ KILL TIDB QUERY 4;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-### Filtering
+### 过滤
 
-Use the `LIKE` clause to filter out tasks by matching the destination URL against a wildcard expression.
-
-{{< copyable "sql" >}}
+使用 `LIKE` 子句，通过通配符表达式匹配目标 URL 来筛选任务。
 
 ```sql
 SHOW BACKUPS LIKE 's3://%';
 ```
 
-Use the `WHERE` clause to filter by columns.
-
-{{< copyable "sql" >}}
+使用 `WHERE` 子句按列进行筛选。
 
 ```sql
 SHOW BACKUPS WHERE `Progress` < 25.0;
 ```
 
-## MySQL compatibility
+## MySQL 兼容性
 
-This statement is a TiDB extension to MySQL syntax.
+该语句是 TiDB 对 MySQL 语法的扩展。
 
-## See also
+## 参见
 
 * [BACKUP](/sql-statements/sql-statement-backup.md)
 * [RESTORE](/sql-statements/sql-statement-restore.md)

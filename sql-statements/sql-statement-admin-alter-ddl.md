@@ -1,13 +1,13 @@
 ---
 title: ADMIN ALTER DDL JOBS
-summary: 关于 TiDB 数据库中 `ADMIN ALTER DDL JOBS` 用法的概述。
+summary: 关于在 TiDB 数据库中使用 `ADMIN ALTER DDL JOBS` 的概述。
 ---
 
 # ADMIN ALTER DDL JOBS
 
 > **Note:**
 >
-> 目前，该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群上不可用。
+> 目前，该功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群上不可用。
 
 `ADMIN ALTER DDL JOBS` 语句允许你修改单个正在运行的 DDL 任务的参数。例如：
 
@@ -29,7 +29,7 @@ ADMIN ALTER DDL JOBS 101 THREAD = 8;
     - `BATCH_SIZE`：批处理大小。初始值由 [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size) 设置。
     - `MAX_WRITE_SPEED`：向每个 TiKV 导入索引记录的最大带宽限制。初始值由 [`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850) 设置。
 
-  目前，上述参数仅对在禁用 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) 后提交并运行的 `ADD INDEX` 任务生效。
+  目前，上述参数仅对在关闭 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) 后提交并运行的 `ADD INDEX` 任务生效。
 
 - `MODIFY COLUMN`：
     - `THREAD`：DDL 任务的并发度。初始值由 `tidb_ddl_reorg_worker_cnt` 设置。
@@ -84,7 +84,7 @@ AlterJobOption ::=
 
 该语句是 TiDB 对 MySQL 语法的扩展。
 
-## 另请参阅
+## 参考
 
 * [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
 * [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)

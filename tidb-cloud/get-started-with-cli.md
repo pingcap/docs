@@ -87,7 +87,7 @@ TiDB Cloud 提供了一个命令行界面（CLI）[`ticloud`](https://github.com
 
 ## 快速入门
 
-[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 是体验 TiDB Cloud 的最佳方式。本节将介绍如何使用 TiDB Cloud CLI 创建一个 TiDB Cloud Serverless 集群。
+[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 是开始体验 TiDB Cloud 的最佳方式。本节将介绍如何使用 TiDB Cloud CLI 创建一个 TiDB Cloud Starter 集群。
 
 ### 创建用户配置文件或登录 TiDB Cloud
 
@@ -115,9 +115,9 @@ TiDB Cloud 提供了一个命令行界面（CLI）[`ticloud`](https://github.com
 >
 > 在上述两种方式中，TiDB Cloud API key 的优先级高于 OAuth token。如果两者都存在，将优先使用 API key。
 
-### 创建 TiDB Cloud Serverless 集群
+### 创建 TiDB Cloud Starter 集群
 
-要创建 TiDB Cloud Serverless 集群，输入以下命令，并根据 CLI 提示填写所需信息：
+要创建 TiDB Cloud Starter 集群，输入以下命令，并根据 CLI 提示填写所需信息：
 
 ```shell
 ticloud serverless create
@@ -171,4 +171,4 @@ tiup update cloud
 
 ## 反馈
 
-如果你对 TiDB Cloud CLI 有任何问题或建议，欢迎创建 [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)。同时也欢迎任何贡献。
+如果你对 TiDB Cloud CLI 有任何疑问或建议，欢迎创建 [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)。同时也欢迎任何贡献。

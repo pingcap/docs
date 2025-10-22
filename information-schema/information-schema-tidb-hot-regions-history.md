@@ -9,7 +9,7 @@ summary: 了解 `TIDB_HOT_REGIONS_HISTORY` information_schema 表。
 
 > **Note:**
 >
-> 该表在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该表在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
 <CustomContent platform="tidb">
 
@@ -19,7 +19,7 @@ summary: 了解 `TIDB_HOT_REGIONS_HISTORY` information_schema 表。
 
 <CustomContent platform="tidb-cloud">
 
-默认情况下，记录间隔为 10 分钟，热点 Region 历史信息的保留周期为 7 天。
+默认情况下，记录间隔为 10 分钟，保留热点 Region 历史信息的周期为 7 天。
 
 </CustomContent>
 
@@ -76,7 +76,7 @@ DESC tidb_hot_regions_history;
 >
 > `UPDATE_TIME`、`REGION_ID`、`STORE_ID`、`PEER_ID`、`IS_LEARNER`、`IS_LEADER` 和 `TYPE` 字段会下推到 PD 服务器执行。为了减少使用该表的开销，你必须指定查询的时间范围，并尽可能多地指定查询条件。例如：`select * from tidb_hot_regions_history where store_id = 11 and update_time > '2020-05-18 20:40:00' and update_time < '2020-05-18 21:40:00' and type='write'`。
 
-## 常见使用场景
+## 常见用户场景
 
 * 查询指定时间段内的热点 Region。请将 `update_time` 替换为你的实际时间。
 

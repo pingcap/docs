@@ -9,7 +9,7 @@ summary: TiDB 数据库中 SET RESOURCE GROUP 的用法概述。
 
 > **Note:**
 >
-> 此功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
 ## 语法
 
@@ -26,7 +26,7 @@ ResourceGroupName ::=
 
 ## 权限
 
-执行该语句需要满足以下配置和权限要求：
+执行该语句需要以下配置和权限：
 
 1. 系统变量 [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) 设置为 `ON`。
 2. 当系统变量 [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) 设置为 `ON` 时，你需要拥有 `SUPER` 或 `RESOURCE_GROUP_ADMIN` 或 `RESOURCE_GROUP_USER` 权限；当其设置为 `OFF` 时，不需要这些权限。
@@ -92,7 +92,7 @@ SELECT CURRENT_RESOURCE_GROUP();
 
 MySQL 也支持 [SET RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/set-resource-group.html)。但其接受的参数与 TiDB 不同，二者不兼容。
 
-## 参考
+## 另请参阅
 
 * [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
 * [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)

@@ -5,11 +5,11 @@ summary: TiDB 数据库中 SHOW PLUGINS 的用法概述。
 
 # SHOW PLUGINS
 
-`SHOW PLUGINS` 用于显示 TiDB 中已安装的所有插件，包括每个插件的状态和版本信息。
+`SHOW PLUGINS` 显示 TiDB 中已安装的所有插件，包括每个插件的状态和版本信息。
 
 > **Note:**
 >
-> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
 ## 语法
 
