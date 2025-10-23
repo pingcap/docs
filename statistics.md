@@ -762,13 +762,9 @@ When analyzing ordinary columns, you can use [`tidb_build_sampling_stats_concurr
 
 When running the `ANALYZE` statement, you can use [`tidb_analyze_partition_concurrency`](/system-variables.md#tidb_analyze_partition_concurrency) to control the concurrency of reading and writing statistics for a partitioned table. The default value is `2`. The default value is `1` for v7.4.0 and earlier versions.
 
-#### `tidb_distsql_scan_concurrency`
+#### `tidb_analyze_distsql_scan_concurrency`
 
-When you analyze regular columns, you can use the [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) variable to control the number of Regions to be read at one time. The default value is `15`. Note that changing the value will affect query performance. Adjust the value carefully.
-
-#### `tidb_index_serial_scan_concurrency`
-
-When you analyze index columns, you can use the [`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency) variable to control the number of Regions to be read at one time. The default value is `1`. Note that changing the value will affect query performance. Adjust the value carefully.
+When you analyze regular columns, you can use the [`tidb_analyze_distsql_scan_concurrency`](/system-variables.md#tidb_analyze_distsql_scan_concurrency) variable to control the number of Regions to be read at one time. Starting from v7.6.0, this variable also controls the scan concurrency of index serial scans during ANALYZE. For versions earlier than v7.6.0, the scan concurrency of index serial scans during ANALYZE is controlled by the [`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency)) variable.  The default value is `4`. Note that changing the value will affect query performance. Adjust the value carefully.
 
 ## See also
 
