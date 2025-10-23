@@ -75,10 +75,6 @@ TiDB Cloud supports snapshot restore and point-in-time restore for your cluster.
     - {{{ .starter }}} clusters: not supported.
     - {{{ .essential }}} clusters: restores to any time within the backup retention, but not before the cluster creation time or after the current time minus one minute.
 
-> **Note:**
->
-> The {{{ .starter }}} clusters with spending limit grater than 0 in AWS provider still support Point-in-Time Restore for compatibility.
-
 ### Restore destination
 
 TiDB Cloud supports restoring data to a new cluster.
