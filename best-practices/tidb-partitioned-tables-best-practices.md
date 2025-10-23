@@ -33,7 +33,7 @@ Partition pruning is most beneficial in scenarios where query predicates match t
 
 - **Time-series data queries**: When data is partitioned by time ranges (for example, daily, monthly), queries restricted to a specific time period can quickly skip unrelated partitions.
 - **Multi-tenant or category-based datasets**: Partitioning by tenant ID or category enables queries to focus on a small subset of partitions.
-- **Hybrid Transactional/Analytical Processing (HTAP)**: Especially for range partitioning, TiDB can leverage partition pruning in analytical workloads on TiFlash to skip irrelevant partitions and scan only the necessary subset, preventing **full table scans** on large datasets.
+- **Hybrid Transactional and Analytical Processing (HTAP)**: Especially for range partitioning, TiDB can leverage partition pruning in analytical workloads on TiFlash to skip irrelevant partitions and scan only the necessary subset, preventing **full table scans** on large datasets.
 
 For more use cases, see [Partition Pruning](https://docs.pingcap.com/tidb/stable/partition-pruning/).
 
