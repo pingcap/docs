@@ -38,7 +38,7 @@ If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/sign
 
 ## Steps
 
-If you are in the `Organization Owner` or the `Instance Creator` role, you can create a TiDB Cloud Premium instance as follows:
+If you are in the `Organization Owner` role, you can create a TiDB Cloud Premium instance as follows:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and then click **Switch to Private Preview** in the lower-left corner to open the **TiDB Instances** page for TiDB Cloud Premium.
 
