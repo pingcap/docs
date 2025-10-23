@@ -2909,6 +2909,30 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Default value: ""
 - This variable is used to set the time point at which the data is read by the session. For example, when you set the variable to "2017-11-11 20:20:20" or a TSO number like "400036290571534337", the current session reads the data of this moment.
 
+<<<<<<< HEAD
+=======
+### tidb_source_id <span class="version-mark">New in v6.5.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `1`
+- Range: `[1, 15]`
+
+<CustomContent platform="tidb">
+
+- This variable is used to configure the different cluster IDs in a [bidirectional replication](/ticdc/ticdc-bidirectional-replication.md) cluster.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- This variable is used to configure the different cluster IDs in a [bidirectional replication](https://docs.pingcap.com/tidb/stable/ticdc-bidirectional-replication) cluster.
+
+</CustomContent>
+
+>>>>>>> 1e9dac24d7 (ticdc: fix wrong names in bidirectional replication (#21928))
 ### tidb_stats_cache_mem_quota <span class="version-mark">New in v6.1.0</span>
 
 > **Warning:**
