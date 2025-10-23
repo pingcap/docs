@@ -77,7 +77,7 @@ TiDB Cloud supports snapshot restore and point-in-time restore for your cluster.
 
 > **Note:**
 >
-> The {{{ .starter }}} clusters with spending limit in AWS provider still support Point-in-Time Restore for compatibility.
+> The {{{ .starter }}} clusters with spending limit grater than 0 in AWS provider still support Point-in-Time Restore for compatibility.
 
 ### Restore destination
 
