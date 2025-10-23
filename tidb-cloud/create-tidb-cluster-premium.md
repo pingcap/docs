@@ -1,15 +1,16 @@
 ---
-title: Create a Premium instance
-summary: Learn how to create a Premium instance. 
+title: Create a TiDB Cloud Premium instance
+summary: Learn how to create a TiDB Cloud Premium instance. 
 ---
 
-# Create a Premium instance
+# Create a TiDB Cloud Premium instance
 
-This document describes how to create a Premium instance in the [TiDB Cloud console](https://tidbcloud.com/).
+This document describes how to create a TiDB Cloud Premium instance in the [TiDB Cloud console](https://tidbcloud.com/).
 
-> **Tip:**
+> **Note:**
 >
-> To learn how to create a TiDB Cloud Dedicated cluster, see [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md).
+> - Currently, TiDB Cloud Premium is only available upon request. To request it, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for TiDB Cloud Premium" in the **Description** field and click **Submit**.
+> - To learn how to create a TiDB Cloud Dedicated cluster, see [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md).
 
 ## Before you begin
 
@@ -34,34 +35,29 @@ If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/sign
 
 </CustomContent>
 
-> **Note:**
->
-> Currently, TiDB Cloud Premium is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for TiDB Cloud Premium" in the **Description** field and click **Submit**.
-
 
 ## Steps
 
-If you are in the `Organization Owner` or the `Instance Creator` role, you can create a Premium instance as follows:
+If you are in the `Organization Owner` or the `Instance Creator` role, you can create a TiDB Cloud Premium instance as follows:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).At the bottom of the left navigation bar, locate the "Switch to Private Preview" entry and click it to enter the Premium Preview interface. If you cannot see this entry, it might be because your organization has not been invited to the Premium Private Preview yet. In this case, please contact Tech Support.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and then click **Switch to Private Preview** in the lower-left corner to open the **TiDB Instances** page for TiDB Cloud Premium.
 
-2. Navigate to the [**TiDB Instances**] page.
+    > **Note:**
+    >
+    > If **Switch to Private Preview** is not visible in the lower-left corner of your TiDB Cloud console, it means that your organization has not been invited to the private preview of TiDB Cloud Premium. In this case, you can click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support** to apply for TiDB Cloud Premium.
 
-3. Click **Create Instance**.
 
-4. Input instance name .
+2. On the **TiDB Instances** page, click **Create Instance**.
+3. Enter a name for your TiDB Cloud Premium instance.
 
-5. Choose a cloud provider and a region where you want to host your instance.
+4. Choose a cloud provider and a region where you want to host your instance.
+5. Specify both a minimum and maximum number of Request Capacity Units (RCUs) for your instance
 
-6. Update the capacity of the instance.
+    RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your instance within this range based on demand.
 
-    - You must specify both a minimum and maximum number of Request Capacity Units (RCUs) for your instance.
+6. Click **Create**.
 
-    - RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your instance within this range based on demand.
-
-7. Click **Create**.
-
-    The instance creation process begins. If this is your first instance in the selected region, provisioning typically takes about 30 minutes. If you already have an existing instance in the region, the process is faster and usually completes within about 1 minute.
+    The instance creation process begins. If this is your first instance in the selected region, provisioning typically takes about 30 minutes. If the selected region already has existing instances, the process is faster and usually completes within about 1 minute.
 
 ## What's next
 
