@@ -34,6 +34,36 @@ It is a common practice that the connection pool size is well adjusted according
 
 The application needs to return the connection after finishing using it. It is recommended that the application uses the corresponding connection pool monitoring (such as **metricRegistry**) to locate connection pool issues in time.
 
+### Configure the lifetime of connections
+
+When a TiDB server is shut down or restarted for maintenance or due to hardware failure, client connections may be reset, leading to application disruptions. It is recommended to close and reconnect long-running database connections at least once a day.
+
+<SimpleTab>
+<div label="HikariCP">
+
+- **maxLifetime**: The maximum lifetime of a connection in the pool.
+
+</div>
+
+<div label="tomcat-jdbc">
+
+- **maxAge**: The maximum lifetime of a connection in the pool.
+
+</div>
+
+<div label="c3p0">
+
+- **maxConnectionAge**: The maximum lifetime of a connection in the pool.
+
+</div>
+
+<div label="dbcp">
+
+- **maxConnLifetimeMillis**: The maximum lifetime of a connection in the pool.
+
+</div>
+</SimpleTab>
+
 ### Probe configuration
 
 The connection pool maintains persistent connections from clients to TiDB as follows:
