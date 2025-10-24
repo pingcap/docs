@@ -33,7 +33,7 @@ Automatic backup settings vary between {{{ .starter }}} clusters and {{{ .essent
 | Backup setting   | {{{ .starter }}} (free) | {{{ .starter }}} (with spending limit > 0) | {{{ .essential }}} |
 |------------------|----------------------------|----------------------------|----------------------------|
 | Backup Cycle     | Daily                      | Daily                      | Daily                      |
-| Backup Retention | 1 day                      | up to 30 days              | up to 30 days              |
+| Backup Retention | 1 day                      | Up to 30 days              | Up to 30 days              |
 | Backup Time      | Fixed time                 | Configurable               | Configurable               |
 
 - **Backup Cycle** is the frequency at which backups are taken.
@@ -41,7 +41,7 @@ Automatic backup settings vary between {{{ .starter }}} clusters and {{{ .essent
 - **Backup Retention** is the duration for which backups are retained. Expired backups cannot be restored.
 
     - For a free {{{ .starter }}} cluster, the backup retention is 1 day.
-    - For a {{{ .starter }}} (with spending limit > 0) or {{{ .essential }}} cluster, you can configure the backup retention between 1 and 30 days. The default value is 14 days.
+    - For a {{{ .starter }}} (with spending limit > 0) or {{{ .essential }}} cluster, you can configure the backup retention to any value between 1 and 30 days. The default retention is 14 days.
 
 - **Backup Time** is the time when the backup starts to be scheduled. Note that the final backup time might fall behind the configured backup time.
 
