@@ -22,7 +22,7 @@ We are constantly filling in the feature gaps between {{{ .starter }}}/Essential
 
 - Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to {{{ .starter }}} or {{{ .essential }}} clusters.
 - No [Firewall Rules](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md) support for Private Endpoint.
-- Database client connections that remain open for more than 30 minutes may be terminated unexpectedly. When a server is shut down or restarted, client connections can be reset after this duration, resulting in application disruptions. It is recommended to start with a maximum connection lifetime of 5 minutes and extend it if you notice a negative impact on tail latency. Refer to the [recommended settings for connection pools](/develop/dev-guide-connection-parameters.md#connection-pools-and-connection-parameters) for additional information.
+- Your database client connections might be terminated unexpectedly if they remain open for more than 30 minutes. This can happen when a server shuts down or restarts, leading to application disruptions. To prevent this, you should configure a maximum connection lifetime. We recommend starting with 5 minutes and increasing it if you do not see a negative impact on tail latency. For more details, see [Recommended settings for connection pools](/develop/dev-guide-connection-parameters.md#connection-pools-and-connection-parameters).
 
 > **Note:**
 >
