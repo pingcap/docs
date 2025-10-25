@@ -207,29 +207,33 @@ Do the following to export data from the upstream TiDB cluster to Amazon S3 usin
 
 After you export data from the TiDB Self-Managed cluster to Amazon S3, you need to migrate the data to TiDB Cloud Premium.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to your TiDB Cloud Premium cluster, click **Data → Import**, and choose **Import data from Cloud Storage** > **Amazon S3**. Copy the **Account ID** and **External ID** supplied in the wizard—you will need them when configuring AWS IAM.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to your TiDB Cloud Premium cluster, click **Data → Import**, and choose **Import data from Cloud Storage** > **Amazon S3**. Make a note of the **Account ID** and **External ID** displayed in the wizard—these values are embedded in the CloudFormation template.
 
-2. Configure access permissions for Amazon S3. Usually you need the following read-only permissions:
+2. In the **Source Connection** dialog, select **AWS Role ARN**, then click **Click here to create new one with AWS CloudFormation** and follow the on-screen guidance. If your organization cannot launch CloudFormation stacks, see [Manually create the IAM role](#manually-create-the-iam-role-optional).
 
-    - s3:GetObject
-    - s3:GetObjectVersion
-    - s3:ListBucket
-    - s3:GetBucketLocation
+    - Open the pre-filled CloudFormation template in the AWS console.
+    - Provide a role name, review the permissions, and acknowledge the IAM warning.
+    - Create the stack and wait for the status to change to **CREATE_COMPLETE**.
+    - On the **Outputs** tab, copy the newly generated Role ARN.
+    - Return to TiDB Cloud Premium, paste the Role ARN, and click **Confirm**. The wizard stores the ARN for subsequent import jobs.
 
-    If the S3 bucket uses server-side encryption SSE-KMS, you also need to add the KMS permission.
+3. Continue with the remaining steps in the import wizard, using the saved Role ARN when prompted.
 
-    - kms:Decrypt
+#### Manually create the IAM role (optional)
 
-3. Configure the access policy. Go to the [AWS Console > IAM > Access Management > Policies](https://console.aws.amazon.com/iamv2/home#/policies) and switch to your region to check if the access policy for TiDB Cloud Premium exists already. If it does not exist, create a policy following this document [Creating policies on the JSON tab](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html).
+If your organization cannot deploy CloudFormation stacks, create the access policy and IAM role manually:
 
-    The following is an example template for the json policy.
+1. In AWS IAM, create a policy that grants the following actions on your bucket (and KMS key, if applicable):
+
+    - `s3:GetObject`
+    - `s3:GetObjectVersion`
+    - `s3:ListBucket`
+    - `s3:GetBucketLocation`
+    - `kms:Decrypt` (only when SSE-KMS encryption is enabled)
+
+    The JSON template below shows the required structure. Replace the placeholders with your bucket path, bucket ARN, and (if needed) KMS key ARN.
 
     ```json
-    ## Create a json policy template
-    ##<Your customized directory>: fill in the path to the folder in the S3 bucket where the data files to be imported are located.
-    ##<Your S3 bucket ARN>: fill in the ARN of the S3 bucket. You can click the Copy ARN button on the S3 Bucket Overview page to get it.
-    ##<Your AWS KMS ARN>: fill in the ARN for the S3 bucket KMS key. You can get it from S3 bucket > Properties > Default encryption > AWS KMS Key ARN. For more information, see https://docs.aws.amazon.com/AmazonS3/latest/userguide/viewing-bucket-key-settings.html
-
     {
         "Version": "2012-10-17",
         "Statement": [
@@ -248,8 +252,7 @@ After you export data from the TiDB Self-Managed cluster to Amazon S3, you need 
                     "s3:GetBucketLocation"
                 ],
                 "Resource": "<Your S3 bucket ARN>"
-            }
-            // If you have enabled SSE-KMS for the S3 bucket, you need to add the following permissions.
+            },
             {
                 "Effect": "Allow",
                 "Action": [
@@ -257,19 +260,13 @@ After you export data from the TiDB Self-Managed cluster to Amazon S3, you need 
                 ],
                 "Resource": "<Your AWS KMS ARN>"
             }
-            ,
-            {
-                "Effect": "Allow",
-                "Action": "kms:Decrypt",
-                "Resource": "<Your AWS KMS ARN>"
-            }
         ]
     }
     ```
 
-4. Configure the role. See [Creating an IAM role (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html). In the Account ID field, enter the TiDB Cloud Premium Account ID and TiDB Cloud Premium External ID you noted in Step 1.
+2. Create an IAM role that trusts TiDB Cloud Premium by supplying the **Account ID** and **External ID** noted in Step 1. Attach the policy from the previous step to this role.
 
-5. Get the Role-ARN. Go to [AWS Console > IAM > Access Management > Roles](https://console.aws.amazon.com/iamv2/home#/roles). Switch to your region. Click the role you have created, and note down the ARN. You will use it when importing data into TiDB Cloud Premium.
+3. Copy the resulting Role ARN and enter it in the TiDB Cloud Premium import wizard.
 
 6. Import data to TiDB Cloud Premium by following [Import data from Amazon S3 into TiDB Cloud Premium](/tidb-cloud/premium/import-from-s3-premium.md).
 
