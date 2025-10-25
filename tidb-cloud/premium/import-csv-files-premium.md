@@ -129,26 +129,20 @@ To import the CSV files to TiDB Cloud Premium, take the following steps:
     >
     > When a single file is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud Premium automatically populates the **Source** field with the file name. In this case, you only need to select the target database and table for data import.
 
-    - To let TiDB Cloud Premium automatically map all source files that follow the [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **CSV** as the data format.
-
-        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example: `TableName.01.csv`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
-
-            - `my-data?.csv`: matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
-            - `my-data*.csv`: matches all CSV files that start with `my-data`, such as `my-data-2023.csv` and `my-data-final.csv`.
-
-        - **Target Database** and **Target Table**: select the target database and table to import the data to.
+    - Leave automatic mapping enabled to apply the [file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to your source files and target tables. Keep **CSV** selected as the data format.
 
     - **Advanced options**: expand the panel to view the `Ignore compatibility checks (advanced)` toggle. Leave it disabled unless you intentionally want to bypass schema compatibility validation.
 
     > **Note:**
     >
-    > Manual mapping is coming soon. The UI shows the related controls in a disabled state today, but the workflow below remains accurate for the upcoming release:
+    > Manual mapping is coming soon. When the toggle becomes available, clear the automatic mapping option and configure the mapping manually:
+    >
+    > - **Source**: enter a filename pattern such as `TableName.01.csv`. Wildcards `*` and `?` are supported (for example, `my-data*.csv`).
+    > - **Target Database** and **Target Table**: choose the destination objects for the matched files.
 
 6. TiDB Cloud Premium automatically scans the source path. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
 
 7. When the import progress shows **Completed**, check the imported tables.
-
-8. When the import progress shows **Completed**, check the imported tables.
 
 </div>
 
@@ -186,20 +180,16 @@ To import the CSV files to TiDB Cloud Premium, take the following steps:
     >
     > When a single file is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and TiDB Cloud Premium automatically populates the **Source** field with the file name. In this case, you only need to select the target database and table for data import.
 
-    - To let TiDB Cloud Premium automatically map all source files that follow the [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **CSV** as the data format.
-
-        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example: `TableName.01.csv`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
-
-            - `my-data?.csv`: matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
-            - `my-data*.csv`: matches all CSV files that start with `my-data`, such as `my-data-2023.csv` and `my-data-final.csv`.
-
-        - **Target Database** and **Target Table**: select the target database and table to import the data to.
+    - Leave automatic mapping enabled to apply the [file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to your source files and target tables. Keep **CSV** selected as the data format.
 
     - **Advanced options**: expand the panel to view the `Ignore compatibility checks (advanced)` toggle. Leave it disabled unless you intentionally want to bypass schema compatibility validation.
 
     > **Note:**
     >
-    > Manual mapping is coming soon. The UI shows the related controls in a disabled state today, but the workflow below remains accurate for the upcoming release:
+    > Manual mapping is coming soon. When the toggle becomes available, clear the automatic mapping option and configure the mapping manually:
+    >
+    > - **Source**: enter a filename pattern such as `TableName.01.csv`. Wildcards `*` and `?` are supported (for example, `my-data*.csv`).
+    > - **Target Database** and **Target Table**: choose the destination objects for the matched files.
 
 6. TiDB Cloud Premium automatically scans the source path. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
 
