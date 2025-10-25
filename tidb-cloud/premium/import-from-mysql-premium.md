@@ -19,7 +19,7 @@ This document describes how to import data into TiDB Cloud Premium using the [My
 
 ## Prerequisites
 
-Before you can import data via the MySQL Command-Line Client to a TiDB Cloud Premium instance, you need the following prerequisites:
+Before you can import data to a TiDB Cloud Premium instance via the MySQL Command-Line Client, you need the following prerequisites:
 
 - You have access to your TiDB Cloud Premium instance.
 - Install the MySQL Command-Line Client (`mysql`) on your local computer.
@@ -72,7 +72,7 @@ Use the MySQL Command-Line Client to load data into the schema you created in St
 
 Do the following to import data from an SQL file:
 
-1. Provide a real SQL file (for example, `products.sql`) that contains the data you want to import. This SQL file must include `INSERT` statements with real data, similar to the following:
+1. Provide an SQL file (for example, `products.sql`) that contains the data you want to import. This SQL file must include `INSERT` statements with data, similar to the following:
 
     ```sql
     INSERT INTO products (product_id, product_name, price) VALUES
@@ -107,7 +107,7 @@ Do the following to import data from a CSV file:
 
 1. Ensure the target database and table exist in TiDB (for example, the `products` table you created in Step 2).
 
-2. Provide a sample CSV file (for example, `products.csv`) that contains the data you want to import. The following is an example of a CSV file:
+2. Provide a sample CSV file (for example, `products.csv`) that contains the data you want to import. The following is an example:
 
     **products.csv:**
 

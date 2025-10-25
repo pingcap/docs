@@ -30,8 +30,8 @@ This document describes how to import CSV files from Amazon Simple Storage Servi
 2. Name the CSV files as follows:
 
     - If a CSV file contains all data of an entire table, name the file in the `${db_name}.${table_name}.csv` format, which maps to the `${db_name}.${table_name}` table when you import the data.
-    - If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.000001.csv` and `${db_name}.${table_name}.000002.csv`. The numeric suffixes can be inconsecutive but must be in ascending order. You also need to add extra zeros before the number to ensure all the suffixes are in the same length.
-    - TiDB Cloud Premium supports importing compressed files in the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`. If you want to import compressed CSV files, name the files in the `${db_name}.${table_name}.${suffix}.csv.${compress}` format, in which `${suffix}` is optional and can be any integer such as '000001'. For example, if you want to import the `trips.000001.csv.gz` file to the `bikeshare.trips` table, you need to rename the file as `bikeshare.trips.000001.csv.gz`.
+    - If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.000001.csv` and `${db_name}.${table_name}.000002.csv`. The numeric suffixes can be non-consecutive but must be in ascending order. You also need to add extra zeros before the number to ensure that all suffixes have the same length.
+    - TiDB Cloud Premium supports importing compressed files in the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`. If you want to import compressed CSV files, name the files in the `${db_name}.${table_name}.${suffix}.csv.${compress}` format, where `${suffix}` is optional and can be any integer such as '000001'. For example, if you want to import the `trips.000001.csv.gz` file to the `bikeshare.trips` table, you need to rename the file as `bikeshare.trips.000001.csv.gz`.
 
     > **Note:**
     >
@@ -53,7 +53,7 @@ Because CSV files do not contain schema information, before importing data from 
 
         Each database schema file must be in the `${db_name}-schema-create.sql` format and contain a `CREATE DATABASE` DDL statement. With this file, TiDB Cloud Premium will create the `${db_name}` database to store your data when you import the data.
 
-        For example, if you create a `mydb-scehma-create.sql` file that contains the following statement, TiDB Cloud Premium will create the `mydb` database when you import the data.
+        For example, if you create a `mydb-schema-create.sql` file that contains the following statement, TiDB Cloud Premium will create the `mydb` database when you import the data.
 
         ```sql
         CREATE DATABASE mydb;
@@ -63,7 +63,7 @@ Because CSV files do not contain schema information, before importing data from 
 
         If you do not include the table schema files in the Amazon S3 or Alibaba Cloud Object Storage Service directory where the CSV files are located, TiDB Cloud Premium will not create the corresponding tables for you when you import the data.
 
-        Each table schema file must be in the `${db_name}.${table_name}-schema.sql` format and contain a `CREATE TABLE` DDL statement. With this file, TiDB Cloud Premium will create the `${db_table}` table in the `${db_name}` database when you import the data.
+        Each table schema file must be in the `${db_name}.${table_name}-schema.sql` format and contain a `CREATE TABLE` DDL statement. With this file, TiDB Cloud Premium will create the `${table_name}` table in the `${db_name}` database when you import the data.
 
         For example, if you create a `mydb.mytable-schema.sql` file that contains the following statement, TiDB Cloud Premium will create the `mytable` table in the `mydb` database when you import the data.
 
@@ -114,7 +114,7 @@ To import the CSV files to TiDB Cloud Premium, take the following steps:
         - When importing one file, enter the source file URI in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `s3://sampledata/ingest/TableName.01.csv`.
         - When importing multiple files, enter the source folder URI in the following format `s3://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
     - **Credential**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
-        - **AWS Role ARN**: enter the AWS Role ARN value. If you need to create a new role, click **Click here to create new one with AWS CloudFormation** and follow the guided steps to launch the provided template, acknowledge the IAM warning, create the stack, and copy the generated ARN back into TiDB Cloud Premium.
+        - **AWS Role ARN**: enter the AWS Role ARN value. If you need to create a new role, click **Click here to create a new one with AWS CloudFormation** and follow the guided steps to launch the provided template, acknowledge the IAM warning, create the stack, and copy the generated ARN back into TiDB Cloud Premium.
         - **AWS Access Key**: enter the AWS access key ID and AWS secret access key.
     - **Test Bucket Access**: click this button after the credentials are in place to confirm that TiDB Cloud Premium can reach the bucket.
     - **Target Connection**: supply the TiDB username and password that will run the import. Optionally click **Test Connection** to validate the credentials.

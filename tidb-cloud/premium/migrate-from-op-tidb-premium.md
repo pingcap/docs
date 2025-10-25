@@ -45,7 +45,7 @@ You need to prepare the following tools:
 
 Before you deploy Dumpling, note the following:
 
-- It is recommended to deploy Dumpling on a new EC2 instance in the same VPC as the TiDB cluster in TiDB Cloud Premium.
+- It is recommended to deploy Dumpling on a new EC2 instance in the same VPC as your target TiDB Cloud Premium cluster.
 - The recommended EC2 instance type is **c6g.4xlarge** (16 vCPU and 32 GiB memory). You can choose other EC2 instance types based on your needs. The Amazon Machine Image (AMI) can be Amazon Linux, Ubuntu, or Red Hat.
 
 You can deploy Dumpling by using TiUP or using the installation package.
@@ -69,7 +69,7 @@ To deploy Dumpling using the installation package:
 
 1. Download the [toolkit package](https://docs.pingcap.com/tidb/stable/download-ecosystem-tools).
 
-2. Extract it to the target machine. You can get Dumpling using TiUP by running `tiup install dumpling`. Afterwards, you can use `tiup dumpling ...` to run Dumpling. For more information, see [Dumpling introduction](https://docs.pingcap.com/tidb/stable/dumpling-overview#dumpling-introduction).
+2. Extract it to the target machine. You can get Dumpling using TiUP by running `tiup install dumpling`. Then, you can use `tiup dumpling ...` to run Dumpling. For more information, see [Dumpling introduction](https://docs.pingcap.com/tidb/stable/dumpling-overview#dumpling-introduction).
 
 #### Configure privileges for Dumpling
 
@@ -184,14 +184,14 @@ Do the following to export data from the upstream TiDB cluster to Amazon S3 usin
     -P 4000 \
     -h 127.0.0.1 \
     -r 20000 \
-    --filetype {sql|csv}  \
+    --filetype sql  \
     -F 256MiB  \
     -t 8 \
     -o "${S3 URI}" \
     --s3.region "${s3.region}"
     ```
 
-    The `-t` option specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and also increases the database's memory consumption. Therefore, do not set a too large number for this parameter.
+    The `-t` option specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and also increases the database's memory consumption. Therefore, do not set this parameter to a very large number.
 
     For more information, see [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-to-sql-files).
 
@@ -209,7 +209,7 @@ After you export data from the TiDB Self-Managed cluster to Amazon S3, you need 
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to your TiDB Cloud Premium cluster, click **Data → Import**, and choose **Import data from Cloud Storage** > **Amazon S3**. Make a note of the **Account ID** and **External ID** displayed in the wizard—these values are embedded in the CloudFormation template.
 
-2. In the **Source Connection** dialog, select **AWS Role ARN**, then click **Click here to create new one with AWS CloudFormation** and follow the on-screen guidance. If your organization cannot launch CloudFormation stacks, see [Manually create the IAM role](#manually-create-the-iam-role-optional).
+2. In the **Source Connection** dialog, select **AWS Role ARN**, then click **Click here to create a new one with AWS CloudFormation** and follow the on-screen guidance. If your organization cannot launch CloudFormation stacks, see [Manually create the IAM role](#manually-create-the-iam-role-optional).
 
     - Open the pre-filled CloudFormation template in the AWS console.
     - Provide a role name, review the permissions, and acknowledge the IAM warning.
@@ -268,7 +268,7 @@ If your organization cannot deploy CloudFormation stacks, create the access poli
 
 3. Copy the resulting Role ARN and enter it in the TiDB Cloud Premium import wizard.
 
-6. Import data to TiDB Cloud Premium by following [Import data from Amazon S3 into TiDB Cloud Premium](/tidb-cloud/premium/import-from-s3-premium.md).
+4. Import data to TiDB Cloud Premium by following [Import data from Amazon S3 into TiDB Cloud Premium](/tidb-cloud/premium/import-from-s3-premium.md).
 
 ## Replicate incremental data
 
@@ -322,7 +322,7 @@ To replicate incremental data, do the following:
     SET GLOBAL tidb_gc_enable = TRUE;
     ```
 
-    The following is an example output, in which `1` indicates that GC is disabled.
+    The following is an example output, in which `1` indicates that GC is enabled.
 
     ```sql
     SELECT @@global.tidb_gc_enable;
@@ -373,7 +373,7 @@ To replicate incremental data, do the following:
     SELECT DISTINCT(CONCAT('CREATE GLOBAL BINDING FOR ', original_sql,' USING ', bind_sql,';')) FROM mysql.bind_info WHERE status='enabled';
     ```
 
-    If you do not get any output, query bindings might not be used in the upstream cluster. In this case, you can skip this step.
+    If you do not get any output, it means that no query bindings are used in the upstream cluster. In this case, you can skip this step.
 
     After you get the query bindings, run them in the downstream cluster to restore the query bindings.
 
