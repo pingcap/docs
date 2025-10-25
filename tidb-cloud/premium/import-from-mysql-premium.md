@@ -15,7 +15,7 @@ This document describes how to import data into TiDB Cloud Premium using the [My
 
 > **Tip:**
 >
-> Logical imports are best suited for relatively small SQL or CSV files. For faster, parallel imports from cloud storage or to process multiple files from [Dumpling](/dumpling-overview.md) exports, see [Import CSV files into TiDB Cloud Premium](/tidb-cloud/premium/import-csv-files-premium.md).
+> Logical imports are best suited for relatively small SQL or CSV files. For faster, parallel imports from cloud storage or to process multiple files from [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) exports, see [Import CSV files into TiDB Cloud Premium](/tidb-cloud/premium/import-csv-files-premium.md).
 
 ## Prerequisites
 
