@@ -114,12 +114,14 @@ To import the CSV files to TiDB Cloud Premium, take the following steps:
         - When importing one file, enter the source file URI in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `s3://sampledata/ingest/TableName.01.csv`.
         - When importing multiple files, enter the source folder URI in the following format `s3://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
     - **Credential**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
-        - **AWS Role ARN**: enter the AWS Role ARN value.
+        - **AWS Role ARN**: enter the AWS Role ARN value. If you need to create a new role, click **Click here to create new one with AWS CloudFormation** and follow the guided steps to launch the provided template, acknowledge the IAM warning, create the stack, and copy the generated ARN back into TiDB Cloud Premium.
         - **AWS Access Key**: enter the AWS access key ID and AWS secret access key.
+    - **Test Bucket Access**: click this button after the credentials are in place to confirm that TiDB Cloud Premium can reach the bucket.
+    - **Target Connection**: supply the TiDB username and password that will run the import. Optionally click **Test Connection** to validate the credentials.
 
 4. Click **Next**.
 
-5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
+5. In the **Source Files Mapping** section, TiDB Cloud Premium scans the bucket and proposes mappings between the source files and destination tables.
 
     When a directory is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
@@ -129,8 +131,6 @@ To import the CSV files to TiDB Cloud Premium, take the following steps:
 
     - To let TiDB Cloud Premium automatically map all source files that follow the [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **CSV** as the data format.
 
-    - To manually configure the mapping rules to associate your source CSV files with the target database and table, unselect this option, and then fill in the following fields:
-
         - **Source**: enter the file name pattern in the `[file_name].csv` format. For example: `TableName.01.csv`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
 
             - `my-data?.csv`: matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
@@ -138,9 +138,15 @@ To import the CSV files to TiDB Cloud Premium, take the following steps:
 
         - **Target Database** and **Target Table**: select the target database and table to import the data to.
 
-6. Click **Next**. TiDB Cloud Premium scans the source files accordingly.
+    - **Advanced options**: expand the panel to view the `Ignore compatibility checks (advanced)` toggle. Leave it disabled unless you intentionally want to bypass schema compatibility validation.
 
-7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+    > **Note:**
+    >
+    > Manual mapping is coming soon. The UI shows the related controls in a disabled state today, but the workflow below remains accurate for the upcoming release:
+
+6. TiDB Cloud Premium automatically scans the source path. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+
+7. When the import progress shows **Completed**, check the imported tables.
 
 8. When the import progress shows **Completed**, check the imported tables.
 
@@ -167,10 +173,12 @@ To import the CSV files to TiDB Cloud Premium, take the following steps:
         - When importing one file, enter the source file URI in the following format `oss://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `oss://sampledata/ingest/TableName.01.csv`.
         - When importing multiple files, enter the source folder URI in the following format `oss://[bucket_name]/[data_source_folder]/`. For example, `oss://sampledata/ingest/`.
     - **Credential**: you can use an AccessKey pair to access your bucket. For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
+    - **Test Bucket Access**: click this button after the credentials are in place to confirm that TiDB Cloud Premium can reach the bucket.
+    - **Target Connection**: supply the TiDB username and password that will run the import. Optionally click **Test Connection** to validate the credentials.
 
 4. Click **Next**.
 
-5. In the **Destination Mapping** section, specify how source files are mapped to target tables.
+5. In the **Source Files Mapping** section, TiDB Cloud Premium scans the bucket and proposes mappings between the source files and destination tables.
 
     When a directory is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
@@ -180,8 +188,6 @@ To import the CSV files to TiDB Cloud Premium, take the following steps:
 
     - To let TiDB Cloud Premium automatically map all source files that follow the [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to their corresponding tables, keep this option selected and select **CSV** as the data format.
 
-    - To manually configure the mapping rules to associate your source CSV files with the target database and table, unselect this option, and then fill in the following fields:
-
         - **Source**: enter the file name pattern in the `[file_name].csv` format. For example: `TableName.01.csv`. You can also use wildcards to match multiple files. Only `*` and `?` wildcards are supported.
 
             - `my-data?.csv`: matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
@@ -189,11 +195,15 @@ To import the CSV files to TiDB Cloud Premium, take the following steps:
 
         - **Target Database** and **Target Table**: select the target database and table to import the data to.
 
-6. Click **Next**. TiDB Cloud Premium scans the source files accordingly.
+    - **Advanced options**: expand the panel to view the `Ignore compatibility checks (advanced)` toggle. Leave it disabled unless you intentionally want to bypass schema compatibility validation.
 
-7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+    > **Note:**
+    >
+    > Manual mapping is coming soon. The UI shows the related controls in a disabled state today, but the workflow below remains accurate for the upcoming release:
 
-8. When the import progress shows **Completed**, check the imported tables.
+6. TiDB Cloud Premium automatically scans the source path. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+
+7. When the import progress shows **Completed**, check the imported tables.
 
 </div>
 
