@@ -20,7 +20,7 @@ To configure an IP access list for your TiDB Cloud Premium cluster, take the fol
     > You can use the combo box in the upper-left corner to switch between organizations.
 
 2. In the left navigation pane, click **Settings** > **Networking**.
-3. On the **Networking** page, click **Enable** on the **Public Endpoint** to enable connections to the public endpoint of this cluster. Then click **Edit IP Address**.
+3. On the **Networking** page, click **Enable** for **Public Endpoint** to enable the instance accessible through a public endpoint, and then click **Add IP Address**.
 4. In the displayed dialog, choose one of the following options:
 
     - **Allow access from anywhere**: allows all IP addresses to access TiDB Cloud. This option exposes your cluster to the internet completely and is highly risky.
