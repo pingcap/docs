@@ -1,20 +1,20 @@
 ---
-title: Delete a TiDB Cluster
+title: Delete a TiDB Cloud Premium instance
 summary: Learn how to delete a TiDB cluster.
 ---
 
-# Delete a TiDB Cluster
+# Delete a TiDB Cloud Premium instance
 
-This document describes how to delete a TiDB cluster on TiDB Cloud.
+This document describes how to delete a TiDB Cloud Premium instance.
 
-You can delete a cluster at any time by performing the following steps:
+You can delete a instance at any time by performing the following steps:
 
 1. Navigate to the [**TiDBs**](https://tidbcloud.com/tidbs) page of your project.
-2. In the row of your target cluster to be deleted, click **...**.
+2. In the row of your target instance to be deleted, click **...**.
 
     > **Tip:**
     >
-    > Alternatively, you can also click the name of the target cluster to go to its overview page, and then click **...** in the upper-right corner.
+    > Alternatively, you can also click the name of the target instance to go to its overview page, and then click **...** in the upper-right corner.
 
 3. Click **Delete** in the drop-down menu.
 4. In the cluster deleting window, confirm the deletion:
