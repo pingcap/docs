@@ -25,7 +25,7 @@ You can delete a instance at any time by performing the following steps:
 
 5. Click **I understand, delete it**.
 
-    Once a backed up TiDB Cloud Dedicated cluster is deleted, the existing backup files of the cluster are moved to the recycle bin.
+    Once you delete a backed up TiDB Cloud Premium instance, the existing backup files of the instance are moved to the recycle bin.
 
     - Automatic backups will expire and be automatically deleted once the retention period ends. The default retention period is 7 days if you don't modify it.
     - Manual backups will be kept in the Recycle Bin until manually deleted.
