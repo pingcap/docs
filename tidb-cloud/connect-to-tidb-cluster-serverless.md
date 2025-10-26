@@ -54,7 +54,16 @@ In the preceding connection methods, you can choose your desired one based on yo
 
 ## Network
 
-There are two network connection types for {{{ .starter }}}, {{{ .essential }}} and {{{ .premium }}}:
+<CustomContent plan="starter,essential">
+
+There are two network connection types for {{{ .starter }}} and {{{ .essential }}}:
+
+</CustomContent>
+<CustomContent plan="premium">
+
+There are two network connection types for {{{ .premium }}}:
+
+</CustomContent>
 
 - [Private endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) (recommended)
 
