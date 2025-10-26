@@ -73,11 +73,16 @@ There are two network connection types for {{{ .premium }}}:
 
   The standard connection exposes a public endpoint, so you can connect to your TiDB cluster via a SQL client from your laptop.
 
-  To ensure the security of data transmission from your application to the TiDB cluster, TLS connections must be enabled on the public endpoint.
+<CustomContent plan="starter,essential">
 
-    - [TLS Connections](/tidb-cloud/secure-connections-to-serverless-clusters.md) to TiDB Cloud Starter or Essential
+To ensure the security of data transmission, you need to [establish a TLS connection](/tidb-cloud/secure-connections-to-serverless-clusters.md) from your client to your cluster.
 
-    - [TLS Connections](/tidb-cloud/tidb-cloud-tls-connect-to-premium.md) to TiDB Cloud Premium
+</CustomContent>
+<CustomContent plan="premium">
+
+To ensure the security of data transmission, you need to [establish a TLS connection](/tidb-cloud/tidb-cloud-tls-connect-to-premium.md) from your client to your cluster.
+
+</CustomContent>
 
 
 The following table shows the network you can use in different connection methods:
