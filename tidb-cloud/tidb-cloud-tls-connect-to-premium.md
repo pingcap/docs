@@ -65,7 +65,7 @@ Parameter descriptions:
 mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clusters.staging.tidb-cloud.com -P 4000 -D test
 ```
 
-Parameter descriptions：
+Parameter descriptions:
 
 - Use `--ssl-ca=<CA_path>` to specify your local path of the downloaded TiDB cluster `ca.pem`.
 - With `--ssl-verify-server-cert` to validate TiDB Cloud Premium clusters.
