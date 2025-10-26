@@ -22,7 +22,15 @@ This document describes how to connect to your {{{ .premium }}} cluster.
 
 ## Connection methods
 
-After your {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium }}} cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
+<CustomContent plan="starter,essential">
+
+After your {{{ .starter }}} or  {{{ .essential }}} cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
+
+</CustomContent>
+<CustomContent plan="premium">
+
+After your {{{ .premium }}} cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
+</CustomContent>
 
 - Direct connections
 
