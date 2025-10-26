@@ -49,7 +49,7 @@ MySQL CLI client attempts to establish a TLS connection by default. When you con
 mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-version="TLSv1.2" -u root -h tidb.eqlfbdgthh8.clusters.staging.tidb-cloud.com -P 4000 -D test -p
 ```
 
-Parameter description：
+Parameter descriptions:
 
 - With `--ssl-mode=VERIFY_IDENTITY`, MySQL CLI client forces to enable TLS and validate TiDB Cloud Premium clusters.
 - Use `--ssl-ca=<CA_path>` to specify your local path of the downloaded TiDB cluster `ca.pem`.
