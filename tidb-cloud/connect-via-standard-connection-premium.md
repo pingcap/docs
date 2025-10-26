@@ -5,7 +5,7 @@ summary: Learn how to connect to your TiDB Cloud cluster via public connection.
 
 # Connect to TiDB Cloud Premium via Public Connection
 
-This document describes how to connect to your TiDB Cloud Premium cluster via public connection. The public connection exposes a public endpoint with traffic filters, so you can connect to your TiDB Cloud Premium cluster via a SQL client from your laptop.
+This document describes how to connect to your TiDB Cloud Premium instance via public connection. The public connection exposes a public endpoint with traffic filters, so you can connect to your TiDB Cloud Premium instance via a SQL client from your laptop.
 
 > **Tip:**
 >
