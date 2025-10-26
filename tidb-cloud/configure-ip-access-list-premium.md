@@ -1,11 +1,11 @@
 ---
 title: Configure an IP Access List
-summary: Learn how to configure IP addresses that are allowed to access your TiDB Cloud Premium cluster.
+summary: Learn how to configure IP addresses that are allowed to access your TiDB Cloud Premium instance.
 ---
 
 # Configure an IP Access List
 
-For each TiDB Cloud Premium cluster in TiDB Cloud, you can configure an IP access list to filter internet traffic trying to access the cluster, which works similarly to a firewall access control list. After the configuration, only the clients and applications whose IP addresses are in the IP access list can connect to your TiDB Cloud Premium cluster.
+For each TiDB Cloud Premium instance in TiDB Cloud, you can configure an IP access list to filter internet traffic trying to access the instance, which works similarly to a firewall access control list. After the configuration, only the clients and applications whose IP addresses are in the IP access list can connect to your TiDB Cloud Premium instance.
 
 > **Note:**
 >
