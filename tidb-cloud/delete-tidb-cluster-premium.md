@@ -21,7 +21,7 @@ You can delete a instance at any time by performing the following steps:
 
     Enter `<organization name>/<cluster name>` to ensure the cluster is deleted correctly.
 
-    If you want to restore the cluster sometime in the future, make sure that you have a backup of the cluster. Otherwise, you cannot restore it anymore. For more information about how to back up TiDB Cloud Dedicated clusters, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore-premium.md).
+    If you want to restore the cluster some time in the future, make sure that you have a backup of the cluster. Otherwise, you cannot restore it. For more information about how to back up TiDB Cloud Premium instances, see [Back Up and Restore TiDB Cloud Premium Data](/tidb-cloud/backup-and-restore-premium.md).
 
 5. Click **I understand, delete it**.
 
