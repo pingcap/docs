@@ -142,7 +142,7 @@ with connection:
         print(m[0])
 ```
 
-Parameter descriptions：
+Parameter descriptions:
 
 - Set `ssl_mode="VERIFY_IDENTITY"` to enable TLS and validate TiDB Cloud Premium clusters.
 - Use `ssl={"ca": "<CA_path>"}` to specify your local path of the downloaded TiDB cluster `ca.pem`.
