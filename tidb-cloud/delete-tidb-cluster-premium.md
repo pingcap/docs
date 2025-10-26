@@ -34,4 +34,4 @@ You can delete a instance at any time by performing the following steps:
     >
     > Please be aware that backups will continue to incur charges until deleted.
 
-    If you want to restore a TiDB Cloud Premium cluster from recycle bin, see [Restore a deleted cluster](/tidb-cloud/backup-and-restore-premium.md#restore-a-deleted-cluster).
+    If you want to restore a TiDB Cloud Premium instance from the recycle bin, see [Restore a deleted instance](/tidb-cloud/backup-and-restore-premium.md#restore-a-deleted-instance).
