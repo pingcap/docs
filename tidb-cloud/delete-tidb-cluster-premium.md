@@ -23,10 +23,6 @@ You can delete a instance at any time by performing the following steps:
 
     If you want to restore the cluster sometime in the future, make sure that you have a backup of the cluster. Otherwise, you cannot restore it anymore. For more information about how to back up TiDB Cloud Dedicated clusters, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore-premium.md).
 
-    > **Note:**
-    >
-    > [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) and [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) clusters do not support restoring data after the deletion. If you want to delete a {{{ .starter }}} or {{{ .essential }}} cluster and restore its data in the future, see [Export Data from {{{ .starter }}} or Essential](/tidb-cloud/serverless-export.md) to export your data as a backup.
-
 5. Click **I understand, delete it**.
 
     Once a backed up TiDB Cloud Dedicated cluster is deleted, the existing backup files of the cluster are moved to the recycle bin.
