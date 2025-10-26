@@ -214,7 +214,7 @@ func main() {
 }
 ```
 
-Parameter descriptions：
+Parameter descriptions:
 
 - Register `tls.Config` in the TLS connection configuration to enable TLS and validate TiDB Cloud Premium clusters.
 - Set `MinVersion: tls.VersionTLS12` to restrict the versions of TLS protocol.
