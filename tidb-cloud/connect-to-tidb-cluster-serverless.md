@@ -5,7 +5,16 @@ summary: Learn how to connect to your TiDB Cloud cluster via different methods.
 
 # Connect to Your TiDB Cloud Cluster
 
-This document describes how to connect to your {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium }}} cluster.
+<CustomContent plan="starter,essential">
+
+This document describes how to connect to your {{{ .starter }}} or {{{ .essential }}} cluster.
+
+</CustomContent>
+<CustomContent plan="premium">
+
+This document describes how to connect to your {{{ .premium }}} cluster.
+
+</CustomContent>
 
 > **Tip:**
 >
