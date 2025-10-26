@@ -26,5 +26,5 @@ To configure an IP access list for your TiDB Cloud Premium cluster, take the fol
     - **Allow access from anywhere**: allows all IP addresses to access TiDB Cloud. This option exposes your instance to the internet completely and is highly risky.
     - **Use IP addresses** (recommended): you can add a list of IPs and CIDR addresses that are allowed to access TiDB Cloud via a SQL client.
 
-5. If you choose **Use IP addresses**, add IP addresses or CIDR ranges with an optional description. For each TiDB Cloud Premium cluster, you can add up to 100 IP addresses.
+5. If you choose **Use IP addresses**, add IP addresses or CIDR ranges with an optional description. For each TiDB Cloud Premium instance, you can add up to 100 IP addresses.
 6. Click **Confirm** to save your changes.
