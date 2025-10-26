@@ -16,11 +16,11 @@ This document describes how to connect to your TiDB Cloud Premium cluster via pu
 
 For public connections, TiDB Cloud Premium only allows client connections from addresses in the IP access list. If you have not configured the IP access list, follow the steps in [Configure an IP Access List](/tidb-cloud/configure-ip-access-list-premium.md) to configure it before your first connection.
 
-## Connect to the cluster
+## Connect to the instance
 
-To connect to a TiDB Cloud Premium cluster via public connection, take the following steps:
+To connect to a TiDB Cloud Premium instance via public connection, take the following steps:
 
-1. Open the overview page of the target cluster.
+1. Open the overview page of the target instance.
 
     1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**TiDBs**](https://tidbcloud.com/tidbs) page of your project.
 
