@@ -42,4 +42,4 @@ To connect to a TiDB Cloud Premium cluster via public connection, take the follo
 
 ## What's next
 
-After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](/basic-sql-operations.md).
+After you have successfully connected to your TiDB instance, you can [explore SQL statements with TiDB](/basic-sql-operations.md).
