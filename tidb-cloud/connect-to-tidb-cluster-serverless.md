@@ -1,6 +1,6 @@
 ---
-title: Connect to Your TiDB Cluster
-summary: Learn how to connect to your {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium }}} cluster via different methods.
+title: Connect to Your TiDB Cloud Cluster
+summary: Learn how to connect to your TiDB Cloud cluster via different methods.
 ---
 
 # Connect to Your TiDB Cluster
