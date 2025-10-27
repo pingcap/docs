@@ -27,7 +27,7 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 ## Restrictions
 
-- Only the `Organization Owner`  roles can create private endpoint connections.
+- Only users with the `Organization Owner` role can create private endpoint connections.
 - The private endpoint and the TiDB instance to be connected must be located in the same region.
 ## Prerequisites
 
