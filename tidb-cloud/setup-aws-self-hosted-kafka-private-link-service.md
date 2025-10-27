@@ -765,9 +765,7 @@ Do the following to set up the load balancer:
 
 ## Step 3. Connect from TiDB Cloud
 
-<CustomContent plan="dedicated">
-
-1. Return to the [TiDB Cloud console](https://tidbcloud.com) to create a changefeed for the cluster to connect to the Kafka cluster by **Private Link**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
+1. Return to the [TiDB Cloud console](https://tidbcloud.com) to create a changefeed for the <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> to connect to the Kafka cluster by **Private Link**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
 
 2. When you proceed to **Configure the changefeed target > Connectivity Method > Private Link**, fill in the following fields with corresponding values and other fields as needed.
 
@@ -779,25 +777,6 @@ Do the following to set up the load balancer:
 3. Proceed with the steps in [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
 
 Now you have successfully finished the task.
-
-</CustomContent>
-
-<CustomContent plan="premium">
-
-1. Return to the [TiDB Cloud console](https://tidbcloud.com) to create a changefeed for the instance to connect to the Kafka cluster by **Private Link**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
-
-2. When you proceed to **Configure the changefeed target > Connectivity Method > Private Link**, fill in the following fields with corresponding values and other fields as needed.
-
-    - **Kafka Type**: `3 AZs`. Ensure that your Kafka cluster is deployed in the same three AZs.
-    - **Kafka Advertised Listener Pattern**: `abc`. It is the same as the unique random string you use to generate **Kafka Advertised Listener Pattern** in [Prerequisites](#prerequisites).
-    - **Endpoint Service Name**: the Kafka service name.
-    - **Bootstrap Ports**: `9092`. A single port is sufficient because you configure a dedicated bootstrap target group behind it.
-
-3. Proceed with the steps in [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
-
-Now you have successfully finished the task.
-
-</CustomContent>
 
 ## FAQ
 
