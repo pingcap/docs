@@ -143,7 +143,7 @@ To enable private DNS using your AWS CLI, copy the following `aws ec2 modify-vpc
 aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-dns-enabled
 ```
 
-Alternatively, you can find the command on the **Networking** page of your instance. Locate the private endpoint and click **...*** > **Enable DNS** in the **Action** column.
+Alternatively, you can find the command on the **Networking** page of your instance. Locate the private endpoint and click **...** > **Enable DNS** in the **Action** column.
 
 </div>
 <div label="Use AWS Console">
