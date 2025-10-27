@@ -40,14 +40,16 @@ To create a changefeed, refer to the tutorials:
 
 ## Scale a changefeed
 
-You can change the TiCDC Changefeed Capacity Units (CCUs) of a changefeed by scaling up or down the changfeed.
+You can change the TiCDC Changefeed Capacity Units (CCUs) of a changefeed by scaling up or down the changefeed.
+
 
 1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB instance.
 2. Locate the corresponding changefeed you want to scale, and click **...** > **Scale Up/Down** in the **Action** column.
 3. Select a new specification.
 4. Click **Submit**.
 
-It takes about 10 minutes to complete the scaling process (during which the changfeed works normally) and a few seconds to switch to the new specification (during which the changefeed will be paused and resumed automatically).
+It takes about 10 minutes to complete the scaling process (during which the changefeed works normally) and a few seconds to switch to the new specification (during which the changefeed will be paused and resumed automatically).
+
 
 ## Pause or resume a changefeed
 
