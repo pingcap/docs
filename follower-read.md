@@ -8,7 +8,17 @@ aliases: ['/docs/dev/follower-read/','/docs/dev/reference/performance/follower-r
 
 In TiDB, to ensure high availability and data security, TiKV stores multiple replicas for each Region, one of which is the leader and the others are followers. By default, all read and write requests are processed by the leader. The Follower Read feature enables TiDB to read data from follower replicas of a Region while maintaining strong consistency, thereby reducing the read workload on the leader and improving the overall read throughput of the cluster.
 
-When performing Follower Read, TiDB selects an appropriate replica based on the topology information. Specifically, TiDB uses the `zone` label to identify local replicas: if the `zone` label of a TiDB node is the same as that of the target TiKV node, TiDB considers the replica as a local replica. For more information, see [Schedule replicas by topology labels](/schedule-replicas-by-topology-labels.md).
+<CustomContent platform="tidb">
+
+When performing Follower Read, TiDB selects an appropriate replica based on the topology information. Specifically, TiDB uses the `zone` label to identify local replicas: if the `zone` label of a TiDB node is the same as that of the target TiKV node, TiDB considers the replica as a local replica. For more information, see [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+When performing Follower Read, TiDB selects an appropriate replica based on the topology information. Specifically, TiDB uses the `zone` label to identify local replicas: if the `zone` label of a TiDB node is the same as that of the target TiKV node, TiDB considers the replica as a local replica. For more information, see [Schedule Replicas by Topology Labels](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels).
+
+</CustomContent>
 
 By enabling followers to handle read requests, Follower Read helps to achieve the following goals:
 
@@ -87,7 +97,21 @@ If you want to use a more precise read replica selection policy, refer to the fu
 
 ## Basic monitoring
 
+> **Note**
+>
+> This section is only applicable to TiDB Self-Managed.
+
+<CustomContent platform="tidb">
+
 You can check the [**TiDB** > **KV Request** > **Read Req Traffic** panel (New in v8.5.4 and v9.0.0)](/grafana-tidb-dashboard.md#kv-request) to determine whether to enable Follower Read and observe the traffic reduction effect after enabling it.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+You can check the [**TiDB** > **KV Request** > **Read Req Traffic** panel (New in v8.5.4 and v9.0.0)](https://docs.pingcap.com/tidb/stable/grafana-tidb-dashboard#kv-request) to determine whether to enable Follower Read and observe the traffic reduction effect after enabling it.
+
+</CustomContent>
 
 ## Implementation mechanism
 
