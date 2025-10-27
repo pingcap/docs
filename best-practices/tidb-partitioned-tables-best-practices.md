@@ -23,11 +23,14 @@ This document examines partitioned tables in TiDB from multiple angles, includin
 
 ## Improve query efficiency
 
+This section describes how to improve query efficiency by the following methods:
+
+- Partition pruning
+- Query performance on secondary indexes
+
 ### Partition pruning
 
 **Partition pruning** is an optimization technique that allows TiDB to reduce the amount of data scanned when executing queries against partitioned tables. Instead of scanning all partitions, TiDB analyzes the query's filter conditions and determines which partitions might contain relevant data, scanning only those partitions. This significantly improves query performance by reducing I/O and computation overhead.
-
-#### Applicable scenarios
 
 Partition pruning is most beneficial in scenarios where query predicates match the partitioning strategy. Common use cases include:
 
@@ -39,7 +42,7 @@ For more use cases, see [Partition Pruning](https://docs.pingcap.com/tidb/stable
 
 ### Query performance on secondary indexes: non-partitioned tables vs. local indexes vs. global indexes
 
-In TiDB, local indexes are the default for partitioned tables. Each partition has its own set of indexes. A global index, on the other hand, covers the whole table in one index. This means it keeps track of all rows across all partitions. global indexes can be faster for queries across multiple partitions because local indexes needs to do one lookup in each partition separately, while global index only needs one lookup for the whole table.
+In TiDB, partitioned tables use local indexes by default. Each partition has its own set of indexes. A global index, on the other hand, covers the whole table in one index. This means it keeps track of all rows across all partitions. global indexes can be faster for queries across multiple partitions because local indexes needs to do one lookup in each partition separately, while global index only needs one lookup for the whole table.
 
 #### Types of tables to be tested
 
@@ -166,7 +169,9 @@ You can use `ALTER TABLE` to add a global index to an existing partitioned table
 ALTER TABLE <table_name>
 ADD UNIQUE INDEX <index_name> (col1, col2) GLOBAL;
 ```
-**Note:** 
+
+> **Note:** 
+>
 > In TiDB v8.5.x and earlier versions, global indexes can only be created on unique columns. Starting from v9.0.0 (currently in beta), global indexes on non-unique columns are supported. This limitation will be removed in the next LTS version.
 
 - The `GLOBAL` keyword must be explicitly specified.
@@ -289,7 +294,7 @@ FIRST PARTITION LESS THAN ('2025-02-19 18:00:00')
 LAST PARTITION LESS THAN ('2025-02-19 20:00:00');
 ```
 
-You are required to run DDL statements like `ALTER TABLE PARTITION ...` to change the `FIRST PARTITION` and `LAST PARTITION` periodically. These two DDL statements can drop the old partitions and create new ones.
+You need to run DDL statements such as `ALTER TABLE PARTITION ...` to change the `FIRST PARTITION` and `LAST PARTITION` periodically. These two DDL statements can drop the old partitions and create new ones.
 
 ```sql
 ALTER TABLE ad_cache FIRST PARTITION LESS THAN ("${nextTimestamp}");
@@ -404,9 +409,7 @@ ALTER TABLE server_info ADD UNIQUE INDEX(serial_no, id) GLOBAL;
 
 ## Partition management challenges
 
-### How to avoid Hotspots caused by new range partitions
-
-#### Overview
+### How to avoid hotspots caused by new range partitions
 
 New range partitions in a partitioned table can easily lead to hotspot issues in TiDB. This section outlines common scenarios and mitigation strategies to avoid read and write hotspots caused by range partitions.
 
@@ -437,7 +440,7 @@ However, if the initial write traffic to this new partition is **very high**, th
 
 This imbalance can cause that TiKV node to trigger **flow control**, leading to a sharp drop in QPS, a spike in write latency, and increased CPU usage on the affected node, which in turn might impact the overall read and write performance of the cluster.
 
-### Summary Table
+### Summary
 
 | Approach | Read Hotspot Risk | Write Hotspot Risk | Operational Complexity | Query Performance | Data Cleanup |
 |---|---|---|---|---|---|
@@ -642,7 +645,7 @@ show table employees2 PARTITION (p4) regions;
 
 - Best suited for use cases that require stable performance and do not benefit from partition-based data management.
 
-## Converte between partitioned and non-partitioned tables
+## Convert between partitioned and non-partitioned tables
 
 When working with large tables (for example in this example 120 million rows), transforming between partitioned and non-partitioned schemas is sometimes required for performance tuning or schema design changes. TiDB supports several main approaches for such transformations:
 
