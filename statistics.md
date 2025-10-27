@@ -760,6 +760,7 @@ Used to control the concurrency of table or partition analysis — for example, 
 2. Used to control the concurrency for special indexes (such as indexes on generated virtual columns), for example, how many special indexes can collect statistics simultaneously.
 
 The default value is `2`.
+
 #### `tidb_analyze_partition_concurrency`
 
 Used to control the concurrency for saving analyze results (writing TopN and histograms to system tables). The default value is `2`. The default value is `1` for v7.4.0 and earlier versions.
@@ -770,6 +771,7 @@ Used to control the concurrency for saving analyze results (writing TopN and his
 2. Used to control the concurrency of scanning regions for special indexes (indexes generated from virtual columns).
 
 The default value is `4`.
+
 ## See also
 
 <CustomContent platform="tidb">
