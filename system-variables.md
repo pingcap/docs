@@ -1132,7 +1132,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Note:**
 >
-> Before v7.6.0, it controlled by the variable `tidb_distsql_scan_concurrency`.
+> Before v7.6.0, it was controlled by the variable `tidb_distsql_scan_concurrency`.
 > So please consider change the value of `tidb_distsql_scan_concurrency` if you want to adjust the concurrency of scanning TiKV regions in versions earlier than v7.6.0.
 
 - Scope: SESSION | GLOBAL
