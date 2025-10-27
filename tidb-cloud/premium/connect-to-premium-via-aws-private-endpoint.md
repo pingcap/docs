@@ -1,11 +1,11 @@
 ---
-title: Connect to a TiDB Cloud Premium instance via AWS PrivateLink
-summary: Learn how to connect to your TiDB Cloud Premium instance via private endpoint with AWS.
+title: Connect to a {{{ .premium }}} instance via AWS PrivateLink
+summary: Learn how to connect to your {{{ .premium }}} instance via private endpoint with AWS.
 ---
 
-# Connect to a TiDB Cloud Premium instance via AWS PrivateLink
+# Connect to a {{{ .premium }}} instance via AWS PrivateLink
 
-This document describes how to connect to your TiDB Cloud Premium instance via [AWS PrivateLink](https://aws.amazon.com/privatelink).
+This document describes how to connect to your {{{ .premium }}} instance via [AWS PrivateLink](https://aws.amazon.com/privatelink).
 
 > **Tip:**
 >
@@ -35,7 +35,7 @@ Make sure that DNS hostnames and DNS resolution are both enabled in your AWS VPC
 
 ## Set up a private endpoint connection and connect to your instance
 
-To connect to your TiDB Cloud Premium instance via a private endpoint, follow these steps:
+To connect to your {{{ .premium }}} instance via a private endpoint, follow these steps:
 
 1. [Select a TiDB instance](#step-1-select-a-tidb-instance)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
@@ -59,7 +59,7 @@ If you have multiple instances, you need to repeat these steps for each instance
 
 > **Note:**
 >
-> For each TiDB Cloud Premium instance, the corresponding endpoint service is automatically created 3 to 4 minutes after the instance creation.
+> For each {{{ .premium }}} instance, the corresponding endpoint service is automatically created 3 to 4 minutes after the instance creation.
 
 If you see the `TiDB Private Link Service is ready` message, the corresponding endpoint service is ready. You can provide the following information to create the endpoint.
 
