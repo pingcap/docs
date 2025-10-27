@@ -8,9 +8,11 @@ aliases: ['/tidbcloud/tidb-cloud-billing-tcu']
 
 <CustomContent plan="dedicated">
 
-## RCU cost for TiDB Cloud Dedicate
+## RCU cost for TiDB Cloud Dedicated
 
-TiDB Cloud Dedicate measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Replication Capacity Units (RCUs). When you [create a changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed) for a cluster, you can select an appropriate specification. The higher the RCU, the better the replication performance. You will be charged for these TiCDC changefeed RCUs.
+
+TiDB Cloud Dedicated measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Replication Capacity Units (RCUs). When you [create a changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed) for a cluster, you can select an appropriate specification. The higher the RCU, the better the replication performance. You will be charged for these TiCDC changefeed RCUs.
+
 
 ### Number of TiCDC RCUs
 
@@ -46,7 +48,8 @@ To learn about the supported regions and the price of TiDB Cloud for each TiCDC 
 <CustomContent plan="premium">
 ## CCU cost for TiDB Cloud Premium
 
-TiDB Cloud Premium measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview-premium.md) in TiCDC Changefeed Capacity Units (CCUs). When you [create a changefeed](/tidb-cloud/changefeed-overview-premium.md#create-a-changefeed) for a instance, you can select an appropriate specification. The higher the CCU, the better the replication performance. You will be charged for these TiCDC CCUs.
+TiDB Cloud Premium measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview-premium.md) in TiCDC Changefeed Capacity Units (CCUs). When you [create a changefeed](/tidb-cloud/changefeed-overview-premium.md#create-a-changefeed) for an instance, you can select an appropriate specification. The higher the CCU, the better the replication performance. You will be charged for these TiCDC CCUs.
+
 
 ### Number of TiCDC CCUs
 
