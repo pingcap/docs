@@ -127,7 +127,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 
 > **Tip:**
 >
-> You can view and manage private endpoint connections on your target TiDB instance, and then click **Settings** > **Networking** in the left navigation pane.
+> You can view and manage private endpoint connections on the **Networking** page of your target TiDB instance. To access this page, click **Settings** > **Networking** in the left navigation pane.
 
 ### Step 4. Enable private DNS
 
