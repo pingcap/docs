@@ -47,7 +47,7 @@ If you have multiple instances, you need to repeat these steps for each instance
 
 ### Step 1. Select a TiDB instance
 
-1. On the [**Instances**](https://tidbcloud.com/tidbs?orgId=1372813089208281461&uiMode=new-offerings-preview) page of your TiDB Cloud web console, click the name of your target TiDB instance to go to its overview page.
+1. On the [**TiDB Instances**](https://tidbcloud.com/tidbs?orgId=1372813089208281461&uiMode=new-offerings-preview) page of your TiDB Cloud web console, click the name of your target TiDB instance to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. In the **Connection Type** drop-down list, select **Private Endpoint**, and then click **Create Private Endpoint Connection**.
 
