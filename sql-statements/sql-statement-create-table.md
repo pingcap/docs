@@ -272,7 +272,12 @@ mysql> DESC t1;
 
 * All of the data types except spatial types are supported.
 * TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax for compatibility with MySQL, but ignores them.
-* TiDB supports parsing the `FULLTEXT` syntax but does not support using the `FULLTEXT` indexes.
+* TiDB Self-Managed and TiDB Cloud Dedicated support parsing the `FULLTEXT` syntax but do not support using the `FULLTEXT` indexes.
+
+    >**Note:**
+    >
+    > Currently, only {{{ .starter }} and {{{ .essential }}} clusters in certain AWS regions support [`FULLTEXT` syntax and indexes](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql).
+
 * Setting a `PRIMARY KEY` or `UNIQUE INDEX` as a [global index](/partitioned-table.md#global-indexes) with the `GLOBAL` index option is a TiDB extension for [partitioned tables](/partitioned-table.md) and is not compatible with MySQL.
 
 <CustomContent platform="tidb">
