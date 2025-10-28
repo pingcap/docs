@@ -152,11 +152,13 @@ To invite a member to an organization, take the following steps:
     > - If you want to invite multiple members at one time, you can enter multiple email addresses.
     > - The invited user does not belong to any instances by default. To invite a user to a instance, see [Invite an instance member](#invite-an-instance-member).
 
-5. Click **Invite**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
+5. If you only need to assign the user an organization role and do not need to assign any project or instance roles, disable the **Add access for projects and instances** option.
 
-6. After receiving this email, the user needs to click the link in the email to verify the identity, and a new page shows.
+6. Click **Invite**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
 
-7. If the invited email address has not been signed up for a TiDB Cloud account, the user is directed to the sign-up page to create an account.
+7. After receiving this email, the user needs to click the link in the email to verify the identity, and a new page shows.
+
+8. If the invited email address has not been signed up for a TiDB Cloud account, the user is directed to the sign-up page to create an account.
 
 > **Note:**
 >
@@ -210,9 +212,7 @@ To invite a member to a instance, take the following steps:
 
 4. Enter the email address of the user to be invited, and then select an organization role for the user. 
 
-5. Make sure the switch "Add access for projects and instances" on. Click **Add access** and then select the resources to assign roles
-
-6. Select an instance role for the user
+5. Make sure the **Add access for projects and instances** option is enabled, click **Add access** in the **Instance access** section, and then select an instance role for the user.
 
 6. Click **Add access**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
 
@@ -234,8 +234,7 @@ To modify the instance role of a member, take the following steps:
 
 2. In the left navigation pane, click **Organization Settings** > **Users**.
 
-3. On the **Users** page, click **...** > **Edit Permission** of the target member.
-
+3. On the **Users** page, click **...** > **Edit Role** of the target member.
 
 ## Manage user profiles
 
