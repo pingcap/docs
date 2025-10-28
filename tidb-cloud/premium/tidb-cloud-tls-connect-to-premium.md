@@ -5,23 +5,23 @@ summary: Introduce TLS connections in TiDB Cloud premium.
 
 # TLS Connections to TiDB Cloud Premium
 
-On TiDB Cloud, establishing TLS connections is one of the basic security practices for connecting to TiDB Cloud Premium clusters. You can configure multiple TLS connections from your client, application, and development tools to your TiDB Cloud Premium cluster to protect data transmission security. For security reasons, TiDB Cloud Premium only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1.
+On TiDB Cloud, establishing TLS connections is one of the basic security practices for connecting to TiDB Cloud Premium instances. You can configure multiple TLS connections from your client, application, and development tools to your TiDB Cloud Premium instance to protect data transmission security. For security reasons, TiDB Cloud Premium only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1.
 
-To ensure data security, the CA certificate for your TiDB Cloud Premium cluster is hosted on [AWS Private Certificate Authority](https://aws.amazon.com/private-ca/). The private key of the CA certificate is stored in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
+To ensure data security, the CA certificate for your TiDB Cloud Premium instance is hosted on [AWS Private Certificate Authority](https://aws.amazon.com/private-ca/). The private key of the CA certificate is stored in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
 
 ## Prerequisites
 
-- Log in to TiDB Cloud via [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md) or [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md), and then [Create a TiDB Cloud Premium cluster](/tidb-cloud/create-tidb-cluster-premium.md).
+- Log in to TiDB Cloud via [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md) or [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md), and then [Create a TiDB Cloud Premium instance](/tidb-cloud/create-tidb-instance-premium.md).
 
-- Set a password to access your cluster in secure settings.
+- Set a password to access your instance in secure settings.
 
-    To do so, you can navigate to the [**TiDBs**](https://tidbcloud.com/tidbs) page, click **...** in the row of your TiDB Cloud Premium cluster, and then select **Change Root Password**. In password settings, you can click **Auto-generate Password** to automatically generate a root password with a length of 16 characters, including numbers, uppercase and lowercase characters, and special characters.
+    To do so, you can navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, click **...** in the row of your TiDB Cloud Premium instance, and then select **Change Root Password**. In password settings, you can click **Auto-generate Password** to automatically generate a root password with a length of 16 characters, including numbers, uppercase and lowercase characters, and special characters.
 
-## Secure connection to a TiDB Cloud Premium cluster
+## Secure connection to a TiDB Cloud Premium instance
 
-In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of different connection methods and connect to your TiDB Cloud Premium cluster as follows:
+In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of different connection methods and connect to your TiDB Cloud Premium instance as follows:
 
-1. Navigate to the [**TiDBs**](https://tidbcloud.com/tidbs) page of your project, and then click the name of your TiDB Cloud Premium cluster to go to its overview page.
+1. Navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, and then click the name of your TiDB Cloud Premium instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A dialog is displayed.
 
@@ -29,21 +29,21 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
 
     If you have not configured the IP access list, click **Configure IP Access List** to configure it before your first connection. For more information, see [Configure an IP access list](/tidb-cloud/configure-ip-access-list-premium.md).
 
-4. Click **CA cert** to download CA cert for TLS connection to TiDB clusters. The CA cert supports TLS 1.2 version by default.
+4. Click **CA cert** to download CA cert for TLS connection to TiDB instances. The CA cert supports TLS 1.2 version by default.
 
     > **Note:**
     >
     > - You can store the downloaded CA cert in the default storage path of your operating system, or specify another storage path. You need to replace the CA cert path in the code example with your own CA cert path in the subsequent steps.
     > - TiDB Cloud Premium does not force clients to use TLS connections, and user-defined configuration of the [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610) variable is currently not supported on TiDB Cloud Premium.
 
-5. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
+5. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your instance.
 
 The following examples show the connection strings in MySQL, MyCLI, JDBC, Python, Go, and Node.js:
 
 <SimpleTab>
 <div label="MySQL CLI">
 
-MySQL CLI client attempts to establish a TLS connection by default. When you connect to TiDB Cloud Premium clusters, you need to set `ssl-mode` and `ssl-ca`.
+MySQL CLI client attempts to establish a TLS connection by default. When you connect to TiDB Cloud Premium instances, you need to set `ssl-mode` and `ssl-ca`.
 
 ```shell
 mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-version="TLSv1.2" -u root -h tidb.eqlfbdgthh8.clusters.staging.tidb-cloud.com -P 4000 -D test -p
@@ -51,15 +51,15 @@ mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-vers
 
 Parameter descriptions:
 
-- With `--ssl-mode=VERIFY_IDENTITY`, MySQL CLI client forces to enable TLS and validate TiDB Cloud Premium clusters.
-- Use `--ssl-ca=<CA_path>` to specify your local path of the downloaded TiDB cluster `ca.pem`.
+- With `--ssl-mode=VERIFY_IDENTITY`, MySQL CLI client forces to enable TLS and validate TiDB Cloud Premium instances.
+- Use `--ssl-ca=<CA_path>` to specify your local path of the downloaded TiDB instance `ca.pem`.
 - Use `--tls-version=TLSv1.2` to restrict the versions of the TLS protocol. If you want to use TLS 1.3, you can set the version to `TLSv1.3`.
 
 </div>
 
 <div label="MyCLI">
 
-[MyCLI](https://www.mycli.net/) automatically enables TLS when using TLS related parameters. When you connect to TiDB Cloud Premium clusters, you need to set `ssl-ca` and `ssl-verify-server-cert`.
+[MyCLI](https://www.mycli.net/) automatically enables TLS when using TLS related parameters. When you connect to TiDB Cloud Premium instances, you need to set `ssl-ca` and `ssl-verify-server-cert`.
 
 ```shell
 mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clusters.staging.tidb-cloud.com -P 4000 -D test
@@ -67,8 +67,8 @@ mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clust
 
 Parameter descriptions:
 
-- Use `--ssl-ca=<CA_path>` to specify your local path of the downloaded TiDB cluster `ca.pem`.
-- With `--ssl-verify-server-cert` to validate TiDB Cloud Premium clusters.
+- Use `--ssl-ca=<CA_path>` to specify your local path of the downloaded TiDB instance `ca.pem`.
+- With `--ssl-verify-server-cert` to validate TiDB Cloud Premium instances.
 
 </div>
 
@@ -76,7 +76,7 @@ Parameter descriptions:
 
 [MySQL Connector/J](https://dev.mysql.com/doc/connector-j/en/)'s TLS connection configurations are used here as an example.
 
-After downloading the TiDB cluster CA certificate, if you want to import it into your operating system, you can use the `keytool -importcert -alias TiDBCACert -file ca.pem -keystore <your_custom_truststore_path> -storepass <your_truststore_password>` command.
+After downloading the TiDB instance CA certificate, if you want to import it into your operating system, you can use the `keytool -importcert -alias TiDBCACert -file ca.pem -keystore <your_custom_truststore_path> -storepass <your_truststore_password>` command.
 
 ```shell
 /* Be sure to replace the parameters in the following connection string. */
@@ -113,7 +113,7 @@ class Main {
 
 Parameter description：
 
-- Set `sslMode=VERIFY_IDENTITY` to enable TLS and validate TiDB Cloud Premium clusters.
+- Set `sslMode=VERIFY_IDENTITY` to enable TLS and validate TiDB Cloud Premium instances.
 - Set `enabledTLSProtocols=TLSv1.2` to restrict the versions of the TLS protocol. If you want to use TLS 1.3, you can set the version to `TLSv1.3`.
 - Set `trustCertificateKeyStoreUrl` to your custom truststore path.
 - Set `trustCertificateKeyStorePassword` to your truststore password.
@@ -144,8 +144,8 @@ with connection:
 
 Parameter descriptions:
 
-- Set `ssl_mode="VERIFY_IDENTITY"` to enable TLS and validate TiDB Cloud Premium clusters.
-- Use `ssl={"ca": "<CA_path>"}` to specify your local path of the downloaded TiDB cluster `ca.pem`.
+- Set `ssl_mode="VERIFY_IDENTITY"` to enable TLS and validate TiDB Cloud Premium instances.
+- Use `ssl={"ca": "<CA_path>"}` to specify your local path of the downloaded TiDB instance `ca.pem`.
 
 </div>
 
@@ -216,7 +216,7 @@ func main() {
 
 Parameter descriptions:
 
-- Register `tls.Config` in the TLS connection configuration to enable TLS and validate TiDB Cloud Premium clusters.
+- Register `tls.Config` in the TLS connection configuration to enable TLS and validate TiDB Cloud Premium instances.
 - Set `MinVersion: tls.VersionTLS12` to restrict the versions of TLS protocol.
 - Set `ServerName: "<host>"` to verify TiDB Cloud Premium's hostname.
 - If you do not want to register a new TLS configuration, you can just set `tls=true` in the connection string.
@@ -276,18 +276,18 @@ connection.connect(function(err) {
 Parameter descriptions:
 
 - Set `ssl: {minVersion: 'TLSv1.2'}` to restrict the versions of the TLS protocol. If you want to use TLS 1.3, you can set the version to `TLSv1.3`.
-- Set `ssl: {ca: fs.readFileSync('<CA_path>')}` to read your local CA path of the downloaded TiDB cluster `ca.pem`.
+- Set `ssl: {ca: fs.readFileSync('<CA_path>')}` to read your local CA path of the downloaded TiDB instance `ca.pem`.
 
 </div>
 </SimpleTab>
 
 ## Manage root certificates for TiDB Cloud Premium
 
-TiDB Cloud Premium uses certificates from [AWS Private Certificate Authority](https://aws.amazon.com/private-ca/) as a Certificate Authority (CA) for TLS connections between clients and TiDB Cloud Premium clusters. Usually, the private key of the CA certificate is stored securely in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
+TiDB Cloud Premium uses certificates from [AWS Private Certificate Authority](https://aws.amazon.com/private-ca/) as a Certificate Authority (CA) for TLS connections between clients and TiDB Cloud Premium instances. Usually, the private key of the CA certificate is stored securely in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
 
 ## FAQs
 
-### Which TLS versions are supported to connect to my TiDB Cloud Premium cluster?
+### Which TLS versions are supported to connect to my TiDB Cloud Premium instance?
 
 For security reasons, TiDB Cloud Premium only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions. See IETF [Deprecating TLS 1.0 and TLS 1.1](https://datatracker.ietf.org/doc/rfc8996/) for details.
 
