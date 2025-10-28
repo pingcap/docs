@@ -9,26 +9,25 @@ TiDB Cloud charges according to the resources that you consume.
 
 ## Pricing
 
-### Pricing for TiDB Cloud Dedicated
+**Pricing for TiDB Cloud Dedicated**
 
 See [TiDB Cloud Dedicated Pricing Details](https://www.pingcap.com/tidb-dedicated-pricing-details/).
 
-### Pricing for {{{ .starter }}} (formerly Serverless) {#pricing-for-starter}
+**Pricing for {{{ .starter }}} (formerly Serverless)** {#pricing-for-starter}
 
 See [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
 
-### Pricing for {{{ .essential }}} {#pricing-for-essential}
+**Pricing for {{{ .essential }}}** {#pricing-for-essential}
 
 For {{{ .essential }}}, you are charged based on the number of provisioned Request Capacity Units (RCUs), **not** on the actual usage by your application. See [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
 
 <CustomContent plan="premium">
 
-### Pricing for Premium
+**Pricing for {{{ .premium }}}** {#pricing-for-premium}
 
-For TiDB Cloud Premium, you are billed based on the number of provisioned Request Capacity Units (RCUs) and the storage you actually use, rather than the underlying backend nodes or provisioned disk size. As Premium is currently in private preview, you can [contact our sales](https://www.pingcap.com/contact-us/) for pricing details.
+For {{{ .premium }}}, you are billed based on the number of provisioned Request Capacity Units (RCUs) and the storage you actually use, rather than the underlying backend nodes or provisioned disk size. As {{{ .premium }}} is currently in private preview, you can [contact our sales](https://www.pingcap.com/contact-us/) for pricing details.
 
 </CustomContent>
-
 
 ## Invoices
 
