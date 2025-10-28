@@ -65,7 +65,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     + TiDB Data Migration (DM) <!--tw@hfxsd: 1 note-->
 
-        - 修复获取上游 `GTID_MODE` 时大小写不兼容的问题 [#12167](https://github.com/pingcap/tiflow/issues/12167) @[OliverS929](https://github.com/OliverS929)
+        - Support case-insensitive compatibility when retrieving the upstream GTID_MODE [#12167](https://github.com/pingcap/tiflow/issues/12167) @[OliverS929](https://github.com/OliverS929)
 
 ## Bug fixes
 
@@ -86,20 +86,20 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - 修复当 CPU 和 memory 比例为 1:2 时阻塞 global sort 的问题 [#60951](https://github.com/pingcap/tidb/issues/60951) @[wjhuang2016](https://github.com/wjhuang2016)
     - 修复超过 16 个 DXF 任务上限时无法 cancel pending 任务的问题 [#63896](https://github.com/pingcap/tidb/issues/63896) @[D3Hunter](https://github.com/D3Hunter)
     - 修复cancel DXF任务后，其他任务无法退出的问题 [#63927](https://github.com/pingcap/tidb/issues/63927) @[D3Hunter](https://github.com/D3Hunter) <!--tw@hfxsd: the following 14 notes-->
-    - 修复 apply 并发设置后，query 带 index join 导致无法生成 plan 的问题 [#59863](https://github.com/pingcap/tidb/issues/59863) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复查询使用 ATAN2 函数可能导致的结果错误问题 [#60093](https://github.com/pingcap/tidb/issues/60093) @[guo-shaoge](https://github.com/guo-shaoge)
-    - 修复了 select 1 from duml 不可使用 instance 级别 plan cache 的问题 [#63075](https://github.com/pingcap/tidb/issues/63075) @[time-and-fate](https://github.com/time-and-fate)
-    - 修复了 join order 变更顺序后可能导致的无法规划问题 [#61715](https://github.com/pingcap/tidb/issues/61715) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复了 set_var hint 使用 binding 后有可能无法恢复回原始 variable 设置的问题 [#59822](https://github.com/pingcap/tidb/issues/59822) @[wddevries](https://github.com/wddevries)
-    - 修复了 ONLY_FULL_GROUP_BY 在取值为负时可能会检查错误的问题 [#62617](https://github.com/pingcap/tidb/issues/62617) @[AilinKid](https://github.com/AilinKid)
-    - 修复了 ONLY_FULL_GROUP_BY 检查大小写不敏感问题 [#62672](https://github.com/pingcap/tidb/issues/62672) @[AilinKid](https://github.com/AilinKid)
-    - 修复 DP join order 算法可能产生的错误 plan 问题 [#63353](https://github.com/pingcap/tidb/issues/63353) @[winoros](https://github.com/winoros)
-    - 修复了 outer join 改写为 inner join 可能产生的错误 [#61327](https://github.com/pingcap/tidb/issues/61327) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复查询执行可能导致内部 panic 的问题 [#58600](https://github.com/pingcap/tidb/issues/58600) @[Defined2014](https://github.com/Defined2014)
-    - 修复全局索引在某些 ALTER PARTITION 状态下获取错误数据的问题 [#64084](https://github.com/pingcap/tidb/pull/64084) @[mjonss](https://github.com/mjonss)
-    - 修复全局索引在某些情况下返回错误结果的问题 [#61083](https://github.com/pingcap/tidb/issues/61083) @[Defined2014](https://github.com/Defined2014)
-    - 修复 character_set_results 在遇到错误字符时截断而不是替换的问题 [#61085](https://github.com/pingcap/tidb/issues/61085) @[xhebox](https://github.com/xhebox)
-    - 修复 ADD COLUMN 与 UPDATE 并发执行时的问题 [#60047](https://github.com/pingcap/tidb/issues/60047) @[L-maple](https://github.com/L-maple)
+    - Fix the issue that enabling the `Apply` operator concurrency (`tidb_enable_parallel_apply = on`) causes plan generation failure due to a missing clone implementation [#59863](https://github.com/pingcap/tidb/issues/59863) @[hawkingrei](https://github.com/hawkingrei)    
+    - Fix the issue that using the `ATAN2` function might produce incorrect results [#60093](https://github.com/pingcap/tidb/issues/60093) @[guo-shaoge](https://github.com/guo-shaoge)
+    - Fix the issue that `select 1 from duml` cannot use the instance-level plan cache [#63075](https://github.com/pingcap/tidb/issues/63075) @[time-and-fate](https://github.com/time-and-fate)
+    - Fix the issue that changing the join order sequence might cause the planner to fail [#61715](https://github.com/pingcap/tidb/issues/61715) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that using `set_var` hint with bindings prevents restoring the original variable settings [#59822](https://github.com/pingcap/tidb/issues/59822) @[wddevries](https://github.com/wddevries)
+    - Fix the issue that setting `ONLY_FULL_GROUP_BY` to a negative value causes validation failure [#62617](https://github.com/pingcap/tidb/issues/62617) @[AilinKid](https://github.com/AilinKid)
+    - Fix the issue that the `ONLY_FULL_GROUP_BY` check is case-insensitive [#62672](https://github.com/pingcap/tidb/issues/62672) @[AilinKid](https://github.com/AilinKid)
+    - Fix the issue that the DP join order algorithm might generate an incorrect plan [#63353](https://github.com/pingcap/tidb/issues/63353) @[winoros](https://github.com/winoros)
+    - Fix the issue that rewriting an outer join to an inner join might produce incorrect results [#61327](https://github.com/pingcap/tidb/issues/61327) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that query execution might trigger an internal panic [#58600](https://github.com/pingcap/tidb/issues/58600) @[Defined2014](https://github.com/Defined2014)
+    - Fix the issue that the global index might read incorrect data during certain `ALTER PARTITION` states [#64084](https://github.com/pingcap/tidb/pull/64084) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that the global index might return incorrect results in some cases [#61083](https://github.com/pingcap/tidb/issues/61083) @[Defined2014](https://github.com/Defined2014)
+    - Fix the issue that `character_set_results` truncates incorrect characters instead of replacing them [#61085](https://github.com/pingcap/tidb/issues/61085) @[xhebox](https://github.com/xhebox)
+    - Fix the issue that running `ADD COLUMN` and `UPDATE` statements concurrently might cause errors [#60047](https://github.com/pingcap/tidb/issues/60047) @[L-maple](https://github.com/L-maple)
 
 + PD <!--tw@qiancai: 8 notes-->
 
@@ -114,11 +114,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + TiFlash <!--tw@hfxsd: 5 notes-->
 
-    - 修复当查询的列存储大量 `NULL` 值时，可能导致查询失败的问题 [#10340](https://github.com/pingcap/tiflash/issues/10340) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - 修复 TiFlash 消耗超过预期的 RU 的问题 [#10380](https://github.com/pingcap/tiflash/issues/10380) @[JinheLin](https://github.com/JinheLin)
-    - 修复存算分离架构下，在存在慢查询时 TiFlash 容易发生 OOM 的问题 [#10278](https://github.com/pingcap/tiflash/issues/10278) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 修复存算分离架构下，TiFlash 遇到与 S3 网络分区时可能无限重试的问题 [#10424](https://github.com/pingcap/tiflash/issues/10424) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 修复了当参数为 `decimal` 类型时，`floor` 和 `ceil` 函数结果可能不正确的问题 [#10365](https://github.com/pingcap/tidb/issues/10365) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan) 
+    - Fix the issue that queries might fail when the queried column contains a large number of NULL values [#10340](https://github.com/pingcap/tiflash/issues/10340) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - Fix the issue that TiFlash generates inaccurate statistics for RU consumption [#10380](https://github.com/pingcap/tiflash/issues/10380) @[JinheLin](https://github.com/JinheLin)
+    - Fix the issue that TiFlash might encounter OOM when slow queries occur under the disaggregated storage and compute architecture [#10278](https://github.com/pingcap/tiflash/issues/10278) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that TiFlash might retry infinitely when it encounters an S3 network partition under the disaggregated storage and compute architecture [#10424](https://github.com/pingcap/tiflash/issues/10424) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that the `FLOOR()` and `CEIL()` functions might return incorrect results when their parameters are of the `DECIMAL` type [#10365](https://github.com/pingcap/tiflash/issues/10365) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan) 
 
 + Tools
 
