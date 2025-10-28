@@ -11,8 +11,7 @@ This document describes how to back up and restore your data on {{{ .premium }}}
 Backup files can originate from the following sources:
 
 - Active {{{ .premium }}} instances
-- {{{ .dedicated }}} clusters
-- The Recycle Bin for backups from deleted {{{ .dedicated }}} clusters or Premium instances
+- The Recycle Bin for backups from deleted Premium instances
 
 > **Tip:**
 >
@@ -103,10 +102,6 @@ TiDB Cloud supports restoring data to a new instance.
 
 ### Restore to a new instance
 
-> **Note:**
->
-> User credentials and permissions from the source instance will **not** be restored to the new instance. You must recreate any users and permissions manually in the new instance.
-
 To restore your data to a new instance, take the following steps:
 
 1. Navigate to the [**Backup**](#view-the-backup-page) page of your instance.
@@ -144,7 +139,7 @@ To restore your data to a new instance, take the following steps:
 
 6. Click **Restore** to start the restore process.
 
-Once the restore process begins, the instance status changes to **Restoring**. The instance will remain unavailable until the restore is complete and the status changes to **Available**.
+Once the restore process begins, the instance status will first change to **Creating**. After the creation is complete, it will transition to **Restoring**. The instance remains unavailable until the restore finishes and the status becomes **Available**.
 
 ### Restore from Recycle Bin
 
