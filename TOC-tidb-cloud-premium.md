@@ -225,7 +225,7 @@
   - [To Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
   - Reference
     - [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
-    - [Set Up Private Endpoint for Changefeeds](/tidb-cloud/set-up-sink-private-endpoint-premium.md)
+    - [Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)
 - Security
   - [Security Overview](/tidb-cloud/security-overview.md)
   - Identity Access Control
@@ -248,7 +248,7 @@
   - [Credits](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
   - [Billing from Cloud Provider Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)
-  - [Billing for Changefeed](/tidb-cloud/tidb-cloud-billing-ticdc-ccu.md)
+  - [Billing for Changefeed](/tidb-cloud/premium/tidb-cloud-billing-ticdc-ccu.md)
   - [Manage Budgets](/tidb-cloud/tidb-cloud-budget.md)
 - Integrations
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
