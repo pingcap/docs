@@ -1,33 +1,32 @@
 ---
 title: Changefeed Billing
 summary: Learn about billing for changefeeds in TiDB Cloud.
-aliases: ['/tidbcloud/tidb-cloud-billing-tcu']
 ---
 
-# Changefeed Billing for TiDB Cloud Dedicated
+# Changefeed Billing for TiDB Cloud Premium
 
-TiDB Cloud Dedicated measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Replication Capacity Units (RCUs). When you [create a changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed) for a cluster, you can select an appropriate specification. The higher the RCU, the better the replication performance. You will be charged for these TiCDC changefeed RCUs.
+TiDB Cloud Premium measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview-premium.md) in TiCDC Changefeed Capacity Units (CCUs). When you [create a changefeed](/tidb-cloud/changefeed-overview-premium.md#create-a-changefeed) for an instance, you can select an appropriate specification. The higher the CCU, the better the replication performance. You will be charged for these TiCDC CCUs.
 
-## Number of TiCDC RCUs
+## Number of TiCDC CCUs
 
 The following table lists the specifications and corresponding replication performances for changefeeds:
 
 | Specification | Maximum replication performance |
 |---------------|---------------------------------|
-| 2 RCUs        | 5,000 rows/s                    |
-| 4 RCUs        | 10,000 rows/s                   |
-| 8 RCUs        | 20,000 rows/s                   |
-| 16 RCUs       | 40,000 rows/s                   |
-| 24 RCUs       | 60,000 rows/s                   |
-| 32 RCUs       | 80,000 rows/s                   |
-| 40 RCUs       | 100,000 rows/s                  |
-| 64 RCUs       | 160,000 rows/s                  |
-| 96 RCUs       | 240,000 rows/s                  |
-| 128 RCUs      | 320,000 rows/s                  |
-| 192 RCUs      | 480,000 rows/s                  |
-| 256 RCUs      | 640,000 rows/s                  |
-| 320 RCUs      | 800,000 rows/s                  |
-| 384 RCUs      | 960,000 rows/s                  |
+| 2 CCUs        | 5,000 rows/s                    |
+| 4 CCUs        | 10,000 rows/s                   |
+| 8 CCUs        | 20,000 rows/s                   |
+| 16 CCUs       | 40,000 rows/s                   |
+| 24 CCUs       | 60,000 rows/s                   |
+| 32 CCUs       | 80,000 rows/s                   |
+| 40 CCUs       | 100,000 rows/s                  |
+| 64 CCUs       | 160,000 rows/s                  |
+| 96 CCUs       | 240,000 rows/s                  |
+| 128 CCUs      | 320,000 rows/s                  |
+| 192 CCUs      | 480,000 rows/s                  |
+| 256 CCUs      | 640,000 rows/s                  |
+| 320 CCUs      | 800,000 rows/s                  |
+| 384 CCUs      | 960,000 rows/s                  |
 
 > **Note:**
 >
@@ -35,7 +34,7 @@ The following table lists the specifications and corresponding replication perfo
 
 ## Price
 
-To learn about the supported regions and the price of TiDB Cloud for each TiCDC RCU, see [Changefeed Cost](https://www.pingcap.com/tidb-dedicated-pricing-details/#changefeed-cost).
+As Premium is currently in private preview, you can [contact our sales](https://www.pingcap.com/contact-us/) for pricing details.
 
 ## Private Data Link cost
 
