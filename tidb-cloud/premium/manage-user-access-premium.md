@@ -5,7 +5,7 @@ summary: Learn how to manage identity access in {{{ .premium }}}.
 
 # Identity Access Management for {{{ .premium }}}
 
-This document describes how to manage access to organizations, instances, roles and user profiles in {{{ .premium }}}.
+This document describes how to manage access to organizations, instances, roles, and user profiles in {{{ .premium }}}.
 
 Before accessing TiDB Cloud, [create a TiDB Cloud account](https://tidbcloud.com/free-trial). You can either sign up with email and password so that you can [manage your password using TiDB Cloud](/tidb-cloud/tidb-cloud-password-authentication.md), or choose your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
 
@@ -94,7 +94,7 @@ At the instance level, TiDB Cloud defines two roles.
 | Manage instance settings | ✅ | ❌ |
 | Manage [database audit logging](/tidb-cloud/tidb-cloud-auditing.md) of the instance. | ✅ | ❌ |
 | Manage instance operations, such as instance creation, modification, and deletion. | ✅ | ❌ |
-| Manage instance data such as data import, data backup and restore, and data migration. | ✅ | ❌ |
+| Manage instance data, such as data import, data backup and restore, and data migration. | ✅ | ❌ |
 | Manage [changefeeds](/tidb-cloud/changefeed-overview.md). | ✅ | ❌ |
 | Review and reset instance passwords. | ✅ | ❌ |
 | View instance overview, backup records, metrics, events, and [changefeeds](/tidb-cloud/changefeed-overview.md) in the instance. | ✅ | ✅ |
@@ -112,7 +112,7 @@ To view and switch between organizations, take the following steps:
     > - If you are currently on the page of a specific instance, after clicking the combo box in the upper-left corner, you also need to click ← in the combo box to return to the organization list.
     > - If you are a member of multiple organizations, you can click the target organization name in the combo box to switch your account between organizations.
 
-2. To view the detailed information of your organization such as the organization ID and time zone, click the organization name, and then click **Organization Settings** > **General** in the left navigation pane.
+2. To view the detailed information of your organization, such as the organization ID and time zone, click the organization name, and then click **Organization Settings** > **General** in the left navigation pane.
 
 ### Set the time zone for your organization
 
@@ -158,7 +158,7 @@ To invite a member to an organization, take the following steps:
 
 7. After receiving this email, the user needs to click the link in the email to verify the identity, and a new page shows.
 
-8. If the invited email address has not been signed up for a TiDB Cloud account, the user is directed to the sign-up page to create an account.
+8. If the invited email address has not signed up for a TiDB Cloud account, the user is directed to the sign-up page to create an account.
 
 > **Note:**
 >
@@ -202,7 +202,7 @@ If you are in the `Organization Owner` role, you can invite members to your inst
 >
 > When a user not in your organization joins your instance, the user automatically joins your organization as well.
 
-To invite a member to a instance, take the following steps:
+To invite a member to an instance, take the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 
