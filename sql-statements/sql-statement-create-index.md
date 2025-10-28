@@ -388,7 +388,7 @@ The system variables associated with the `CREATE INDEX` statement are `tidb_ddl_
 
     >**Note:**
     >
-    > Currently, only {{{ .starter }} and {{{ .essential }}} clusters in certain AWS regions support [`FULLTEXT` syntax and indexes](/tidb-cloud/vector-search-full-text-search-sql.md).
+    > Currently, only {{{ .starter }} and {{{ .essential }}} clusters in certain AWS regions support [`FULLTEXT` syntax and indexes](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql).
 
 * TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax for compatibility with MySQL, but ignores them.
 * Descending indexes are not supported (similar to MySQL 5.7).
