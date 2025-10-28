@@ -15,8 +15,8 @@ This document describes how to import CSV files from Amazon Simple Storage Servi
 
 > **Tip:**
 >
-> - For TiDB Cloud Serverless or Essential, see [Import CSV files from cloud storage into TiDB Cloud](/tidb-cloud/import-csv-files-serverless.md).
-> - For TiDB Cloud Dedicated, see [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md).
+> - For {{{ .starter }}} or Essential, see [Import CSV Files from Cloud Storage into {{{ .starter }}} or Essential](/tidb-cloud/import-csv-files-serverless.md).
+> - For {{{ .dedicated }}}, see [Import CSV Files from Cloud Storage into {{{ .dedicated }}}](/tidb-cloud/import-csv-files.md).
 
 ## Limitations
 

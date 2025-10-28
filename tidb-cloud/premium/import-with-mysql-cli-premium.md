@@ -1,46 +1,48 @@
 ---
-title: Import data into TiDB Cloud Premium via MySQL Command-Line Client
-summary: Learn how to import small CSV or SQL files into TiDB Cloud Premium instances using the MySQL Command-Line Client (`mysql`).
+title: Import Data into {{{ .premium }}} using the MySQL Command-Line Client
+summary: Learn how to import small CSV or SQL files into {{{ .premium }}} instances using the MySQL Command-Line Client (`mysql`).
 ---
 
+# Import Data into {{{ .premium }}} using the MySQL Command-Line Client
+
+This document describes how to import data into {{{ .premium }}} using the [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) (`mysql`). The following sections provide step-by-step instructions for importing data from SQL or CSV files. This process performs a logical import, where the MySQL Command-Line Client replays SQL statements from your local machine against TiDB Cloud.
+
 > **Warning:**
-> 
-> TiDB Cloud Premium is currently available in **Private Preview** in select AWS regions.  
-> 
-> If Premium is not yet enabled for your organization, or if you need access in another cloud provider or region, click **Support** in the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/), or submit a request through the [Contact Us form](https://www.pingcap.com/contact-us) on our website.
-
-# Import data into TiDB Cloud Premium using the MySQL Command-Line Client
-
-This document describes how to import data into TiDB Cloud Premium using the [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) (`mysql`). The following sections provide step-by-step instructions for importing data from SQL or CSV files. These steps use a logical import, meaning the MySQL Command-Line Client replays SQL statements against TiDB Cloud from your local machine.
+>
+> {{{ .premium }}} is currently available in **private preview** in select AWS regions.
+>
+> If Premium is not yet enabled for your organization, or if you need access in another cloud provider or region, click **Support** in the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/), or submit a request through the [Contact Us](https://www.pingcap.com/contact-us) form on the website.
 
 > **Tip:**
 >
-> Logical imports are best suited for relatively small SQL or CSV files. For faster, parallel imports from cloud storage or to process multiple files from [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) exports, see [Import CSV files into TiDB Cloud Premium](/tidb-cloud/premium/import-csv-files-premium.md).
+> - Logical imports are best suited for relatively small SQL or CSV files. For faster, parallel imports from cloud storage or to process multiple files from [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) exports, see [Import CSV Files from Cloud Storage into {{{ .premium }}}](/tidb-cloud/premium/import-csv-files-premium.md).
+> - For {{{ .starter }}} or Essential, see [Import Data into {{{ .starter }}} or Essential via MySQL CLI](/tidb-cloud/import-with-mysql-cli-serverless.md).
+> - For {{{ .dedicated }}}, see [Import Data into {{{ .dedicated }}} via MySQL CLI](/tidb-cloud/import-with-mysql-cli.md).
 
 ## Prerequisites
 
-Before you can import data to a TiDB Cloud Premium instance via the MySQL Command-Line Client, you need the following prerequisites:
+Before you can import data to a {{{ .premium }}} instance via the MySQL Command-Line Client, you need the following prerequisites:
 
-- You have access to your TiDB Cloud Premium instance.
+- You have access to your {{{ .premium }}} instance.
 - Install the MySQL Command-Line Client (`mysql`) on your local computer.
 
-## Step 1. Connect to your TiDB Cloud Premium instance
+## Step 1. Connect to your {{{ .premium }}} instance
 
-Connect to your TiDB instance via the MySQL Command-Line Client. If this is your first time, you will need to configure the network connection and generate the TiDB SQL `root` user password following the steps below.
+Connect to your TiDB instance using the MySQL Command-Line Client. If this is your first time, perform the following steps to configure the network connection and generate the TiDB SQL `root` user password:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and, if applicable, click **Switch to Private Preview** in the lower-left corner to enter the Premium workspace. Then navigate to the [**TiDB Instances**](https://tidbcloud.com/project/instances) page and click the name of your target instance to go to its overview page.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**TiDB Instances**](https://tidbcloud.com/project/instances) page. Then, click the name of your target instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3. Ensure that the configurations in the connection dialog match your operating environment.
 
     - **Connection Type** is set to `Public`.
     - **Connect With** is set to `MySQL CLI`.
     - **Operating System** matches your environment.
 
     > **Note:**
-    > 
-    > Premium clusters ship with the public endpoint disabled by default. If you do not see the `Public` option, enable the public endpoint from the instance details page (in the **Network** tab), or ask an organization admin to enable it before proceeding.
+    >
+    > {{{ .premium }}} instances have the public endpoint disabled by default. If you do not see the `Public` option, enable the public endpoint on the instance details page (under the **Network** tab), or ask an organization admin to enable it before proceeding.
 
 4. Click **Generate Password** to create a random password. If you have already configured a password, reuse that credential or rotate it before proceeding.
 
@@ -61,9 +63,9 @@ CREATE TABLE products (
 );
 ```
 
-Run the schema file against your TiDB Cloud Premium instance so the database and table exist before you load data in the next step.
+Run the schema file against your {{{ .premium }}} instance so the database and table exist before you load data in the next step.
 
-## Step 3. Import data from a SQL or CSV file
+## Step 3. Import data from an SQL or CSV file
 
 Use the MySQL Command-Line Client to load data into the schema you created in Step 2. Replace the placeholders with your own file paths, credentials, and dataset as needed, then follow the workflow that matches your source format.
 
@@ -96,9 +98,11 @@ Do the following to import data from an SQL file:
 >
 > The sample schema creates a `test` database and the commands use `-D test`. Change both the schema file and the `-D` parameter if you plan to import into a different database.
 
-> **Important:**
-> 
-> The SQL user you authenticate with must have the required privileges (for example, `CREATE` and `INSERT`) to define tables and load data into the target database.
+<Important>
+
+The SQL user you authenticate with must have the required privileges (for example, `CREATE` and `INSERT`) to define tables and load data into the target database.
+
+</Important>
 
 </div>
 <div label="From a CSV file">
@@ -142,7 +146,7 @@ Do the following to import data from a CSV file:
 
 ## Step 4. Validate the imported data
 
-After the import completes, run basic queries to confirm that the expected rows are present and the data looks correct.
+After the import is complete, run basic queries to verify that the expected rows are present and the data is correct.
 
 Use the MySQL Command-Line Client to connect to the same database and run validation queries, such as counting rows and inspecting sample records:
 
