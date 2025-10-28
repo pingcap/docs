@@ -36,7 +36,7 @@ To create a changefeed, refer to the tutorials:
 - [Sink to TiDB Cloud](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
 - [Sink to cloud storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
 
-## Query Changefeed RCUs
+## Query changefeed capacity
 
 <CustomContent plan="dedicated">
 
