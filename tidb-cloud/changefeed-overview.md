@@ -54,6 +54,7 @@ For TiDB Cloud Premium, you can query the TiCDC Changefeed Capacity Units (CCUs)
 1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB instance.
 2. Locate the corresponding changefeed you want to query, and click **...** > **View** in the **Action** column.
 3. You can see the current TiCDC Changefeed Capacity Units (CCUs) in the **Specification** area of the page.
+
 </CustomContent>
 
 ## Scale a changefeed

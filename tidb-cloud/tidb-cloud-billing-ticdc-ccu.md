@@ -1,6 +1,6 @@
 ---
-title: Changefeed Billing
-summary: Learn about billing for changefeeds in TiDB Cloud.
+title: Changefeed Billing for TiDB Cloud Premium
+summary: Learn about billing for changefeeds in TiDB Cloud Premium.
 ---
 
 # Changefeed Billing for TiDB Cloud Premium
