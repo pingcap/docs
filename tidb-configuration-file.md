@@ -208,7 +208,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 - Specifies the number of seconds that TiDB waits when you shut down the server, which allows the clients to disconnect.
 - Default value: `0`
-- When TiDB is waiting for shutdown (in the grace period), the HTTP status will indicate a failure, which allows the load balancers to reroute traffic. During shutdown it will also respond with an error to the `COM_PING` command.
+- When TiDB is waiting for shutdown (in the grace period), the HTTP status will indicate a failure, which allows the load balancers to reroute traffic. It also responds with an error to the `COM_PING` command.
 
 > **Note:**
 >
