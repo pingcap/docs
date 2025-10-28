@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Starter and TiDB Cloud Essential**
 
-    To improve connection stability and prevent unexpected disconnections during TiDB server restarts or maintenance, it is recommended to set the maximum lifetime of your database connections to less than 30 minutes.
+    To improve connection stability and prevent unexpected disconnections during TiDB server restarts or maintenance, it is recommended that you set the maximum lifetime of your database connections to less than 30 minutes.
 
     For more information, see [Configure the lifetime of connections](/develop/dev-guide-connection-parameters.md#configure-the-lifetime-of-connections).
 
