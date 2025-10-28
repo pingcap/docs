@@ -35,7 +35,6 @@ If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/sign
 
 </CustomContent>
 
-
 ## Steps
 
 If you are in the `Organization Owner` role, you can create a TiDB Cloud Premium instance as follows:
@@ -49,7 +48,6 @@ If you are in the `Organization Owner` role, you can create a TiDB Cloud Premium
 
 2. On the **TiDB Instances** page, click **Create Instance**.
 3. Enter a name for your TiDB Cloud Premium instance.
-
 4. Choose a cloud provider and a region where you want to host your instance.
 5. Specify both a minimum and maximum number of Request Capacity Units (RCUs) for your instance
 
