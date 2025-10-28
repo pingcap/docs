@@ -43,25 +43,25 @@ Most connection pool libraries provide a parameter to control the maximum lifeti
 <SimpleTab>
 <div label="HikariCP">
 
-- **maxLifetime**: The maximum lifetime of a connection in the pool.
+- **`maxLifetime`**: The maximum lifetime of a connection in the pool.
 
 </div>
 
 <div label="tomcat-jdbc">
 
-- **maxAge**: The maximum lifetime of a connection in the pool.
+- **`maxAge`**: The maximum lifetime of a connection in the pool.
 
 </div>
 
 <div label="c3p0">
 
-- **maxConnectionAge**: The maximum lifetime of a connection in the pool.
+- **`maxConnectionAge`**: The maximum lifetime of a connection in the pool.
 
 </div>
 
 <div label="dbcp">
 
-- **maxConnLifetimeMillis**: The maximum lifetime of a connection in the pool.
+- **`maxConnLifetimeMillis`**: The maximum lifetime of a connection in the pool.
 
 </div>
 </SimpleTab>
