@@ -5,16 +5,7 @@ summary: Learn how to connect to your TiDB Cloud cluster via different methods.
 
 # Connect to Your TiDB Cloud Cluster
 
-<CustomContent plan="starter,essential">
-
 This document describes how to connect to your {{{ .starter }}} or {{{ .essential }}} cluster.
-
-</CustomContent>
-<CustomContent plan="premium">
-
-This document describes how to connect to your {{{ .premium }}} cluster.
-
-</CustomContent>
 
 > **Tip:**
 >
@@ -22,15 +13,7 @@ This document describes how to connect to your {{{ .premium }}} cluster.
 
 ## Connection methods
 
-<CustomContent plan="starter,essential">
-
 After your {{{ .starter }}} or  {{{ .essential }}} cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
-
-</CustomContent>
-<CustomContent plan="premium">
-
-After your {{{ .premium }}} cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
-</CustomContent>
 
 - Direct connections
 
@@ -54,16 +37,7 @@ In the preceding connection methods, you can choose your desired one based on yo
 
 ## Network
 
-<CustomContent plan="starter,essential">
-
 There are two network connection types for {{{ .starter }}} and {{{ .essential }}}:
-
-</CustomContent>
-<CustomContent plan="premium">
-
-There are two network connection types for {{{ .premium }}}:
-
-</CustomContent>
 
 - [Private endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) (recommended)
 
@@ -73,17 +47,7 @@ There are two network connection types for {{{ .premium }}}:
 
   The standard connection exposes a public endpoint, so you can connect to your TiDB cluster via a SQL client from your laptop.
 
-<CustomContent plan="starter,essential">
-
 To ensure the security of data transmission, you need to [establish a TLS connection](/tidb-cloud/secure-connections-to-serverless-clusters.md) from your client to your cluster.
-
-</CustomContent>
-<CustomContent plan="premium">
-
-To ensure the security of data transmission, you need to [establish a TLS connection](/tidb-cloud/tidb-cloud-tls-connect-to-premium.md) from your client to your cluster.
-
-</CustomContent>
-
 
 The following table shows the network you can use in different connection methods:
 
