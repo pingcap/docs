@@ -17,7 +17,7 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 
 To access the changefeed feature, take the following steps:
 
-1. <CustomContent plan="dedicated">In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.</CustomContent><CustomContent plan="premium">In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page.</CustomContent>
+1. In the [TiDB Cloud console](https://tidbcloud.com), <CustomContent plan="dedicated">navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.</CustomContent><CustomContent plan="premium">navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page.</CustomContent>
 
     > **Tip:**
     >
