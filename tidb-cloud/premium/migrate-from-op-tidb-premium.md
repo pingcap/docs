@@ -1,15 +1,15 @@
 ---
-title: Migrate from TiDB Self-Managed to TiDB Cloud Premium
-summary: Learn how to migrate data from TiDB Self-Managed to TiDB Cloud Premium.
+title: Migrate from TiDB Self-Managed to {{{ .premium }}}
+summary: Learn how to migrate data from TiDB Self-Managed to {{{ .premium }}}.
 ---
 
-# Migrate from TiDB Self-Managed to TiDB Cloud Premium
+# Migrate from TiDB Self-Managed to {{{ .premium }}}
 
-This document describes how to migrate data from your TiDB Self-Managed clusters to TiDB Cloud Premium (on AWS) through Dumpling and TiCDC.
+This document describes how to migrate data from your TiDB Self-Managed clusters to {{{ .premium }}} (on AWS) through Dumpling and TiCDC.
 
 > **Warning:**
 >
-> TiDB Cloud Premium is currently available in **Private Preview** in select AWS regions.  
+> {{{ .premium }}} is currently available in **Private Preview** in select AWS regions.
 >
 > If Premium is not yet enabled for your organization, or if you need access in another cloud provider or region, click **Support** in the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/), or submit a request through the [Contact Us](https://www.pingcap.com/contact-us) form on the website.
 
@@ -18,19 +18,19 @@ The overall procedure is as follows:
 1. Build the environment and prepare the tools.
 2. Migrate full data. The process is as follows:
    1. Export data from TiDB Self-Managed to Amazon S3 using Dumpling.
-   2. Import data from Amazon S3 to TiDB Cloud Premium.
+   2. Import data from Amazon S3 to {{{ .premium }}}.
 3. Replicate incremental data by using TiCDC.
 4. Verify the migrated data.
 
 ## Prerequisites
 
-It is recommended that you put the S3 bucket and the TiDB Cloud Premium cluster in the same region. Cross-region migration might incur additional cost for data conversion.
+It is recommended that you put the S3 bucket and the {{{ .premium }}} cluster in the same region. Cross-region migration might incur additional cost for data conversion.
 
 Before migration, you need to prepare the following:
 
 - An [AWS account](https://docs.aws.amazon.com/AmazonS3/latest/userguide/setting-up-s3.html#sign-up-for-aws-gsg) with administrator access
 - An [AWS S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html)
-- [A TiDB Cloud account](/tidb-cloud/tidb-cloud-quickstart.md) with at least the [`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles) access to your target TiDB Cloud Premium cluster hosted on AWS
+- [A TiDB Cloud account](/tidb-cloud/tidb-cloud-quickstart.md) with at least the [`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles) access to your target {{{ .premium }}} cluster hosted on AWS
 
 ## Prepare tools
 
@@ -45,7 +45,7 @@ You need to prepare the following tools:
 
 Before you deploy Dumpling, note the following:
 
-- It is recommended to deploy Dumpling on a new EC2 instance in the same VPC as your target TiDB Cloud Premium cluster.
+- It is recommended to deploy Dumpling on a new EC2 instance in the same VPC as your target {{{ .premium }}} cluster.
 - The recommended EC2 instance type is **c6g.4xlarge** (16 vCPU and 32 GiB memory). You can choose other EC2 instance types based on your needs. The Amazon Machine Image (AMI) can be Amazon Linux, Ubuntu, or Red Hat.
 
 You can deploy Dumpling by using TiUP or using the installation package.
@@ -83,7 +83,7 @@ You need the following privileges to export data from the upstream database:
 
 ### Deploy TiCDC
 
-You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to replicate incremental data from the upstream TiDB cluster to TiDB Cloud Premium.
+You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to replicate incremental data from the upstream TiDB cluster to {{{ .premium }}}.
 
 1. Confirm whether the current TiDB version supports TiCDC. TiDB v4.0.8.rc.1 and later versions support TiCDC. You can check the TiDB version by executing `select tidb_version();` in the TiDB cluster. If you need to upgrade it, see [Upgrade TiDB Using TiUP](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup).
 
@@ -108,10 +108,10 @@ You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to re
 
 ## Migrate full data
 
-To migrate data from the TiDB Self-Managed cluster to TiDB Cloud Premium, perform a full data migration as follows:
+To migrate data from the TiDB Self-Managed cluster to {{{ .premium }}}, perform a full data migration as follows:
 
 1. Migrate data from the TiDB Self-Managed cluster to Amazon S3.
-2. Migrate data from Amazon S3 to TiDB Cloud Premium.
+2. Migrate data from Amazon S3 to {{{ .premium }}}.
 
 ### Migrate data from the TiDB Self-Managed cluster to Amazon S3
 
@@ -203,11 +203,11 @@ Do the following to export data from the upstream TiDB cluster to Amazon S3 usin
     - `{schema}.{table}.{0001}.{sql|csv}`: data files
     - `*-schema-view.sql`, `*-schema-trigger.sql`, `*-schema-post.sql`: other exported SQL files
 
-### Migrate data from Amazon S3 to TiDB Cloud Premium
+### Migrate data from Amazon S3 to {{{ .premium }}}
 
-After you export data from the TiDB Self-Managed cluster to Amazon S3, you need to migrate the data to TiDB Cloud Premium.
+After you export data from the TiDB Self-Managed cluster to Amazon S3, you need to migrate the data to {{{ .premium }}}.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to your TiDB Cloud Premium cluster, click **Data → Import**, and choose **Import data from Cloud Storage** > **Amazon S3**. Make a note of the **Account ID** and **External ID** displayed in the wizard—these values are embedded in the CloudFormation template.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to your {{{ .premium }}} cluster, click **Data → Import**, and choose **Import data from Cloud Storage** > **Amazon S3**. Make a note of the **Account ID** and **External ID** displayed in the wizard—these values are embedded in the CloudFormation template.
 
 2. In the **Source Connection** dialog, select **AWS Role ARN**, then click **Click here to create a new one with AWS CloudFormation** and follow the on-screen guidance. If your organization cannot launch CloudFormation stacks, see [Manually create the IAM role](#manually-create-the-iam-role-optional).
 
@@ -215,7 +215,7 @@ After you export data from the TiDB Self-Managed cluster to Amazon S3, you need 
     - Provide a role name, review the permissions, and acknowledge the IAM warning.
     - Create the stack and wait for the status to change to **CREATE_COMPLETE**.
     - On the **Outputs** tab, copy the newly generated Role ARN.
-    - Return to TiDB Cloud Premium, paste the Role ARN, and click **Confirm**. The wizard stores the ARN for subsequent import jobs.
+    - Return to {{{ .premium }}}, paste the Role ARN, and click **Confirm**. The wizard stores the ARN for subsequent import jobs.
 
 3. Continue with the remaining steps in the import wizard, using the saved Role ARN when prompted.
 
@@ -264,11 +264,11 @@ If your organization cannot deploy CloudFormation stacks, create the access poli
     }
     ```
 
-2. Create an IAM role that trusts TiDB Cloud Premium by supplying the **Account ID** and **External ID** noted in Step 1. Attach the policy from the previous step to this role.
+2. Create an IAM role that trusts {{{ .premium }}} by supplying the **Account ID** and **External ID** noted in Step 1. Attach the policy from the previous step to this role.
 
-3. Copy the resulting Role ARN and enter it in the TiDB Cloud Premium import wizard.
+3. Copy the resulting Role ARN and enter it in the {{{ .premium }}} import wizard.
 
-4. Import data to TiDB Cloud Premium by following [Import data from Amazon S3 into TiDB Cloud Premium](/tidb-cloud/premium/import-from-s3-premium.md).
+4. Import data to {{{ .premium }}} by following [Import data from Amazon S3 into {{{ .premium }}}](/tidb-cloud/premium/import-from-s3-premium.md).
 
 ## Replicate incremental data
 
@@ -278,16 +278,16 @@ To replicate incremental data, do the following:
 
     ![Start Time in Metadata](/media/tidb-cloud/start_ts_in_metadata.png)
 
-2. Grant TiCDC to connect to TiDB Cloud Premium.
+2. Grant TiCDC to connect to {{{ .premium }}}.
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB Cloud Premium cluster to go to its overview page.
+    1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} cluster to go to its overview page.
     2. In the left navigation pane, click **Settings** > **Networking**.
     3. On the **Networking** page, click **Add IP Address**.
-    4. In the displayed dialog, select **Use IP addresses**, click **+**, fill in the public IP address of the TiCDC component in the **IP Address** field, and then click **Confirm**. Now TiCDC can access TiDB Cloud Premium. For more information, see [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
+    4. In the displayed dialog, select **Use IP addresses**, click **+**, fill in the public IP address of the TiCDC component in the **IP Address** field, and then click **Confirm**. Now TiCDC can access {{{ .premium }}}. For more information, see [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
 
-3. Get the connection information of the downstream TiDB Cloud Premium cluster.
+3. Get the connection information of the downstream {{{ .premium }}} cluster.
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB Cloud Premium cluster to go to its overview page.
+    1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} cluster to go to its overview page.
     2. Click **Connect** in the upper-right corner.
     3. In the connection dialog, select **Public** from the **Connection Type** drop-down list and select **General** from the **Connect With** drop-down list.
     4. From the connection information, you can get the host IP address and port of the cluster. For more information, see [Connect via public connection](/tidb-cloud/connect-via-standard-connection.md).
@@ -345,9 +345,9 @@ To replicate incremental data, do the following:
 
         ![Update Filter](/media/tidb-cloud/normal_status_in_replication_task.png)
 
-    - Verify the replication. Write a new record to the upstream cluster, and then check whether the record is replicated to the downstream TiDB Cloud Premium cluster.
+    - Verify the replication. Write a new record to the upstream cluster, and then check whether the record is replicated to the downstream {{{ .premium }}} cluster.
 
-7. Set the same timezone for the upstream and downstream clusters. By default, TiDB Cloud Premium sets the timezone to UTC. If the timezone is different between the upstream and downstream clusters, you need to set the same timezone for both clusters.
+7. Set the same timezone for the upstream and downstream clusters. By default, {{{ .premium }}} sets the timezone to UTC. If the timezone is different between the upstream and downstream clusters, you need to set the same timezone for both clusters.
 
     1. In the upstream cluster, run the following command to check the timezone:
 
