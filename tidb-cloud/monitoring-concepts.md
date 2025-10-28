@@ -39,6 +39,6 @@ TiDB Cloud lets you integrate any of the following third-party metrics services 
 
 - [Datadog integration](/tidb-cloud/monitor-datadog-integration.md)
 
-- [Prometheus and Grafana integration (Beta)](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
+- [Prometheus and Grafana integration](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
 
 - [New Relic integration](/tidb-cloud/monitor-new-relic-integration.md)
