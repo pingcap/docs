@@ -225,7 +225,7 @@
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
     - [Standard SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md)
     - [Organization SSO Authentication](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
-    - [Identity Access Management](/tidb-cloud/manage-user-access.md)
+    - [Identity Access Management](/tidb-cloud/premium/manage-user-access-premium.md)
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - Network Access Control
     - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
