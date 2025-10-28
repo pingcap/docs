@@ -23,11 +23,11 @@ To view the metrics on the **Metrics** page, take the following steps:
     
 To view the metrics on the **Metrics** page, take the following steps:
 
-1. On the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, click the name of your target cluster to go to its overview page.
+1. On the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, click the name of your target instance to go to its overview page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations and TiDB Instances.
+    > You can use the combo box in the upper-left corner to switch between organizations and TiDB instances.
 
 2. In the left navigation pane, click **Monitoring** > **Metrics**.
 
@@ -39,7 +39,7 @@ For TiDB Cloud clusters, the metrics data is kept for 7 days.
 
 <CustomContent plan="premium">
     
-For TiDB Cloud Instances, the metrics data is kept for 7 days.
+For TiDB Cloud instances, the metrics data is kept for 7 days.
 
 </CustomContent>
 
@@ -141,13 +141,13 @@ The following table illustrates the database-level main metrics under the **Data
     
 ## Metrics for TiDB Cloud Premium Instances
 
-The following sections illustrate the metrics on the **Metrics** page for TiDB Cloud Premium Instances.
+The following sections illustrate the metrics on the **Metrics** page for TiDB Cloud Premium instances.
 
 ### Overview
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| Request Units per Second | Total RU per second | The "request unit" is a unit of measurement used to track the resource consumption of a query or transaction. In addition to queries that you run, Request Units can be consumed by background activities, so when the QPS is 0, the Request Units per second may not be zero. |
+| Request Units per Second | Total RU per second | The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction. In addition to queries that you run, request units can be consumed by background activities, so when the QPS is 0, the request units per second may not be zero. |
 | Used Storage Size | {type} | The size of the row store and the size of the column store. |
 | Query Per Second | All, {SQL type} | The number of SQL statements executed per second in all TiDB instances, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
 | Query Duration | avg, avg-{SQL type}, 99, 99-{SQL type} | The duration from receiving a request from the client to TiDB until TiDB executes the request and returns the result to the client. |
@@ -164,7 +164,7 @@ The following sections illustrate the metrics on the **Metrics** page for TiDB C
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| QPS Per DB | All, {database} | The number of SQL statements executed per second on every Database, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
+| QPS Per DB | All, {database} | The number of SQL statements executed per second on every database, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
 | Query Duration Per DB | avg, avg-{database}, 99, 99-{database} | The duration from receiving a request from the client to a database until the database executes the request and returns the result to the client. |
 | Failed Query Per DB | All, {database} | The statistics of error types according to the SQL statement execution errors per second on every database. |
 
