@@ -265,7 +265,7 @@
     - [Overview](/vector-search/vector-search-integration-overview.md)
     - AI Frameworks
       - [LlamaIndex](/vector-search/vector-search-integrate-with-llamaindex.md)
-      - [Langchain](/vector-search/vector-search-integrate-with-langchain.md)
+      - [LangChain](/vector-search/vector-search-integrate-with-langchain.md)
     - AI Services
       - [Amazon Bedrock](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md)
     - Embedding Models/Services
@@ -309,6 +309,7 @@
     - [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
     - [Set Up Self-Hosted Kafka Private Link Service in Azure](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)
     - [Set Up Self-Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)
+    - [Set Up Private Endpoint for Changefeeds](/tidb-cloud/set-up-sink-private-endpoint.md)
 - Disaster Recovery
   - [Recovery Group Overview](/tidb-cloud/recovery-group-overview.md)
   - [Get Started](/tidb-cloud/recovery-group-get-started.md)

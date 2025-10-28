@@ -77,6 +77,7 @@ export const CLOUD_TOC_LIST = [
   "TOC-tidb-cloud.md",
   "TOC-tidb-cloud-essential.md",
   "TOC-tidb-cloud-starter.md",
+  "TOC-tidb-cloud-premium.md",
 ];
 
 export const getAllCloudMdList = (tocFiles = CLOUD_TOC_LIST) => {

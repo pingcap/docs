@@ -38,7 +38,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v7.5.4](https://docs.pingcap.com/tidb/v7.5/release-7.5.4) to [v8.1.1](https://docs.pingcap.com/tidb/stable/release-8.1.1).
 
-- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) reduces costs for large data writes by up to 80% for the following scenarios:
+- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) reduces costs for large data writes by up to 80% for the following scenarios:
 
     - When you perform write operations larger than 16 MiB in [autocommit mode](/transaction-overview.md#autocommit).
     - When you perform write operations larger than 16 MiB in [optimistic transaction model](/optimistic-transaction.md).
@@ -110,8 +110,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     TiDB Cloud CLI provides the following new features:
 
-    - Support SQL user management for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters via [`ticloud serverless sql-user`](/tidb-cloud/ticloud-serverless-sql-user-create.md).
-    - Allow disabling the public endpoint for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters in [`ticloud serverless create`](/tidb-cloud/ticloud-cluster-create.md) and [`ticloud serverless update`](/tidb-cloud/ticloud-serverless-update.md).
+    - Support SQL user management for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) clusters via [`ticloud serverless sql-user`](/tidb-cloud/ticloud-serverless-sql-user-create.md).
+    - Allow disabling the public endpoint for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) clusters in [`ticloud serverless create`](/tidb-cloud/ticloud-cluster-create.md) and [`ticloud serverless update`](/tidb-cloud/ticloud-serverless-update.md).
     - Add the [`ticloud auth whoami`](/tidb-cloud/ticloud-auth-whoami.md) command to get information about the current user when using OAuth authentication.
     - Support `--sql`, `--where`, and `--filter` flags in [`ticloud serverless export create`](/tidb-cloud/ticloud-serverless-export-create.md) to choose source tables flexibly.
     - Support exporting data to CSV and Parquet files.
@@ -158,7 +158,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
   
   For more information, see [Connect to TiDB Cloud Dedicated](/tidb-cloud/connect-to-tidb-cluster.md).
 
-- Enhance the data import experience for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters:
+- Enhance the data import experience for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters:
 
     - Refine the layout of the **Import** page with a clearer layout.
     - Unify the import steps for TiDB Cloud Serverless and TiDB Cloud Dedicated clusters.
@@ -240,7 +240,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) supports vector search (beta).
+- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) supports vector search (beta).
 
     The vector search (beta) feature provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video. This feature enables developers to easily build scalable applications with generative artificial intelligence (AI) capabilities using familiar MySQL skills. Key features include:
 
@@ -251,7 +251,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   For more information, see [Vector search (beta) overview](/vector-search/vector-search-overview.md).
 
-- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) now offers weekly email reports for organization owners.
+- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) now offers weekly email reports for organization owners.
 
     These reports provide insights into the performance and activity of your clusters. By receiving automatic weekly updates, you can stay informed about your clusters and make data-driven decisions to optimize your clusters.
 
@@ -294,13 +294,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [Get started with recovery groups](/tidb-cloud/recovery-group-get-started.md).
 
-- Introduce billing and metering (beta) for the [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) columnar storage [TiFlash](/tiflash/tiflash-overview.md).
+- Introduce billing and metering (beta) for the [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) columnar storage [TiFlash](/tiflash/tiflash-overview.md).
 
     Until June 30, 2024, columnar storage in TiDB Cloud Serverless clusters remains free with a 100% discount. After this date, each TiDB Cloud Serverless cluster will include a free quota of 5 GiB for columnar storage. Usage beyond the free quota will be charged.
 
     For more information, see [TiDB Cloud Serverless pricing details](https://www.pingcap.com/tidb-serverless-pricing-details/#storage).
 
-- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) supports [Time to live (TTL)](/time-to-live.md).
+- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) supports [Time to live (TTL)](/time-to-live.md).
 
 ## May 28, 2024
 
@@ -368,7 +368,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Introduce two service plans for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters: **Free** and **Scalable**.
+- Introduce two service plans for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) clusters: **Free** and **Scalable**.
 
     To meet different user requirements, TiDB Cloud Serverless offers the free and scalable service plans. Whether you are just getting started or scaling to meet the increasing application demands, these plans provide the flexibility and capabilities you need.
 
@@ -404,7 +404,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Upgrade the TiDB version of [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.6.0](https://docs.pingcap.com/tidb/v6.6/release-6.6.0) to [v7.1.3](https://docs.pingcap.com/tidb/v7.1/release-7.1.3).
+- Upgrade the TiDB version of [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) clusters from [v6.6.0](https://docs.pingcap.com/tidb/v6.6/release-6.6.0) to [v7.1.3](https://docs.pingcap.com/tidb/v7.1/release-7.1.3).
 
 ## February 20, 2024
 
