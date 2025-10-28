@@ -1,11 +1,11 @@
 ---
-title: Delete a TiDB Cloud Premium instance
-summary: Learn how to delete a TiDB Cloud Premium instance.
+title: Delete a {{{ .premium }}} instance
+summary: Learn how to delete a {{{ .premium }}} instance.
 ---
 
-# Delete a TiDB Cloud Premium instance
+# Delete a {{{ .premium }}} instance
 
-This document describes how to delete a TiDB Cloud Premium instance.
+This document describes how to delete a {{{ .premium }}} instance.
 
 You can delete a instance at any time by performing the following steps:
 
@@ -21,11 +21,11 @@ You can delete a instance at any time by performing the following steps:
 
     Enter `<organization name>/<instance name>` to ensure the instance is deleted correctly.
 
-    If you want to restore the instance some time in the future, make sure that you have a backup of the instance. Otherwise, you cannot restore it. For more information about how to back up TiDB Cloud Premium instances, see [Back Up and Restore TiDB Cloud Premium Data](/tidb-cloud/backup-and-restore-premium.md).
+    If you want to restore the instance some time in the future, make sure that you have a backup of the instance. Otherwise, you cannot restore it. For more information about how to back up {{{ .premium }}} instances, see [Back Up and Restore {{{ .premium }}} Data](/tidb-cloud/backup-and-restore-premium.md).
 
 5. Click **I understand, delete it**.
 
-    Once you delete a backed up TiDB Cloud Premium instance, the existing backup files of the instance are moved to the recycle bin.
+    Once you delete a backed up {{{ .premium }}} instance, the existing backup files of the instance are moved to the recycle bin.
 
     - Automatic backups will expire and be automatically deleted once the retention period ends. The default retention period is 7 days if you don't modify it.
     - Manual backups will be kept in the Recycle Bin until manually deleted.
@@ -34,4 +34,4 @@ You can delete a instance at any time by performing the following steps:
     >
     > Please be aware that backups will continue to incur charges until deleted.
 
-    If you want to restore a TiDB Cloud Premium instance from the recycle bin, see [Restore a deleted instance](/tidb-cloud/backup-and-restore-premium.md#restore-a-deleted-instance).
+    If you want to restore a {{{ .premium }}} instance from the recycle bin, see [Restore a deleted instance](/tidb-cloud/backup-and-restore-premium.md#restore-a-deleted-instance).

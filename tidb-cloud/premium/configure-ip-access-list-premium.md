@@ -1,17 +1,17 @@
 ---
-title: Configure an IP Access List for TiDB Cloud Premium
-summary: Learn how to configure IP addresses that are allowed to access your TiDB Cloud Premium instance.
+title: Configure an IP Access List for {{{ .premium }}}
+summary: Learn how to configure IP addresses that are allowed to access your {{{ .premium }}} instance.
 ---
 
-# Configure an IP Access List for TiDB Cloud Premium
+# Configure an IP Access List for {{{ .premium }}}
 
-For each TiDB Cloud Premium instance in TiDB Cloud, you can configure an IP access list to filter internet traffic trying to access the instance, which works similarly to a firewall access control list. After the configuration, only the clients and applications whose IP addresses are in the IP access list can connect to your TiDB Cloud Premium instance.
+For each {{{ .premium }}} instance in TiDB Cloud, you can configure an IP access list to filter internet traffic trying to access the instance, which works similarly to a firewall access control list. After the configuration, only the clients and applications whose IP addresses are in the IP access list can connect to your {{{ .premium }}} instance.
 
 > **Note:**
 >
-> This document applies to **TiDB Cloud Premium**. For instructions on configuring an IP access list for **{{{ .starter }}}** or **{{{ .essential }}}**, see [Configure {{{ .starter }}} or Essential Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md).
+> This document applies to **{{{ .premium }}}**. For instructions on configuring an IP access list for **{{{ .starter }}}** or **{{{ .essential }}}**, see [Configure {{{ .starter }}} or Essential Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md).
 
-To configure an IP access list for your TiDB Cloud Premium instance, take the following steps:
+To configure an IP access list for your {{{ .premium }}} instance, take the following steps:
 
 1. Navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, and then click the name of your target instance to go to its overview page.
 
@@ -26,5 +26,5 @@ To configure an IP access list for your TiDB Cloud Premium instance, take the fo
     - **Allow access from anywhere**: allows all IP addresses to access TiDB Cloud. This option exposes your instance to the internet completely and is highly risky.
     - **Use IP addresses** (recommended): you can add a list of IPs and CIDR addresses that are allowed to access TiDB Cloud via a SQL client.
 
-5. If you choose **Use IP addresses**, add IP addresses or CIDR ranges with an optional description. For each TiDB Cloud Premium instance, you can add up to 100 IP addresses.
+5. If you choose **Use IP addresses**, add IP addresses or CIDR ranges with an optional description. For each {{{ .premium }}} instance, you can add up to 100 IP addresses.
 6. Click **Confirm** to save your changes.

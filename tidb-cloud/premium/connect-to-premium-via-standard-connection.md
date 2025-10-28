@@ -1,11 +1,11 @@
 ---
-title: Connect to TiDB Cloud Premium via Public Connection
-summary: Learn how to connect to your TiDB Cloud Premium via public connection.
+title: Connect to {{{ .premium }}} via Public Connection
+summary: Learn how to connect to your {{{ .premium }}} via public connection.
 ---
 
-# Connect to TiDB Cloud Premium via Public Connection
+# Connect to {{{ .premium }}} via Public Connection
 
-This document describes how to connect to your TiDB Cloud Premium instance via public connection. The public connection exposes a public endpoint with traffic filters, so you can connect to your TiDB Cloud Premium instance via a SQL client from your laptop.
+This document describes how to connect to your {{{ .premium }}} instance via public connection. The public connection exposes a public endpoint with traffic filters, so you can connect to your {{{ .premium }}} instance via a SQL client from your laptop.
 
 > **Tip:**
 >
@@ -14,11 +14,11 @@ This document describes how to connect to your TiDB Cloud Premium instance via p
 
 ## Prerequisite: Configure IP access list
 
-For public connections, TiDB Cloud Premium only allows client connections from addresses in the IP access list. If you have not configured the IP access list, follow the steps in [Configure an IP Access List](/tidb-cloud/configure-ip-access-list-premium.md) to configure it before your first connection.
+For public connections, {{{ .premium }}} only allows client connections from addresses in the IP access list. If you have not configured the IP access list, follow the steps in [Configure an IP Access List](/tidb-cloud/configure-ip-access-list-premium.md) to configure it before your first connection.
 
 ## Connect to the instance
 
-To connect to a TiDB Cloud Premium instance via public connection, take the following steps:
+To connect to a {{{ .premium }}} instance via public connection, take the following steps:
 
 1. Open the overview page of the target instance.
 
