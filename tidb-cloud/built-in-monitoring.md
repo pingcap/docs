@@ -151,7 +151,7 @@ The following sections illustrate the metrics on the **Metrics** page for TiDB C
 | Used Storage Size | {type} | The size of the row store and the size of the column store. |
 | Query Per Second | All, {SQL type} | The number of SQL statements executed per second in all TiDB instances, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
 | Query Duration | avg, avg-{SQL type}, 99, 99-{SQL type} | The duration from receiving a request from the client to TiDB until TiDB executes the request and returns the result to the client. |
-| Database Time by SQL Types | All, {SQL type} | Total database time per second, database time consumed by SQL statements per second, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
+| Database Time by SQL Types | All, {SQL type} | All: total database time per second. <br/> {SQL type}: database time consumed by SQL statements per second, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
 | Failed Queries | All | The statistics of error types (such as syntax errors and primary key conflicts) according to the SQL statement execution errors per minute. |
 | Command Per Second | {type} | The number of commands processed by all TiDB instances per second based on command types. |
 | Queries Using Plan Cache OPS | hit, miss | hit: the number of queries using plan cache per second in all TiDB instances. <br/> miss: the number of queries missing plan cache per second in all TiDB instances. |
