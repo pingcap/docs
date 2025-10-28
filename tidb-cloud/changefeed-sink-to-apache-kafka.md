@@ -140,7 +140,7 @@ Currently, the VPC Peering feature for TiDB Cloud Premium instances is only avai
 To allow TiDB Cloud changefeeds to stream data to Apache Kafka and create Kafka topics automatically, ensure that the following permissions are added in Kafka:
 
 - The `Create` and `Write` permissions are added for the topic resource type in Kafka.
-- The `DescribeConfigs` permission is added for the <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> resource type in Kafka.
+- The `DescribeConfigs` permission is added for the cluster resource type in Kafka.
 
 For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources](https://docs.confluent.io/platform/current/kafka/authorization.html#resources) and [Adding ACLs](https://docs.confluent.io/platform/current/kafka/authorization.html#adding-acls) in Confluent documentation for more information.
 
