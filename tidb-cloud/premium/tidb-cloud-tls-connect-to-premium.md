@@ -111,7 +111,7 @@ class Main {
 }
 ```
 
-Parameter description：
+Parameter descriptions:
 
 - Set `sslMode=VERIFY_IDENTITY` to enable TLS and validate {{{ .premium }}} instances.
 - Set `enabledTLSProtocols=TLSv1.2` to restrict the versions of the TLS protocol. If you want to use TLS 1.3, you can set the version to `TLSv1.3`.
