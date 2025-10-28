@@ -17,7 +17,7 @@ You can delete a instance at any time by performing the following steps:
     > Alternatively, you can also click the name of the target instance to go to its overview page, and then click **...** in the upper-right corner.
 
 3. Click **Delete** in the drop-down menu.
-4. In the cluster deleting window, confirm the deletion:
+4. In the deletion confirmation window, confirm the deletion:
 
     Enter `<organization name>/<cluster name>` to ensure the cluster is deleted correctly.
 
