@@ -3,15 +3,15 @@ title: Identity Access Management
 summary: Learn how to manage identity access in TiDB Cloud.
 ---
 
-# Identity Access Management
+# Identity Access Management for TiDB Cloud Premium
 
-This document describes how to manage access to organizations, instances, roles and user profiles in TiDB Cloud.
+This document describes how to manage access to organizations, instances, roles and user profiles in TiDB Cloud Premium.
 
 Before accessing TiDB Cloud, [create a TiDB Cloud account](https://tidbcloud.com/free-trial). You can either sign up with email and password so that you can [manage your password using TiDB Cloud](/tidb-cloud/tidb-cloud-password-authentication.md), or choose your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
 
 ## Organizations and instances
 
-TiDB Cloud provides a hierarchical structure based on organizations and instances to facilitate the management of TiDB Cloud users and TiDB instances. If you are an organization owner, you can create multiple TiDB instance in your organization.
+TiDB Cloud Premium provides a hierarchical structure based on organizations and instances to facilitate the management of TiDB Cloud users and TiDB instances. If you are an organization owner, you can create multiple TiDB instances in your organization.
 
 For example:
 
@@ -147,7 +147,8 @@ To invite a member to an organization, take the following steps:
 4. Enter the email address of the user to be invited, and then select an organization role for the user.
 
     > **Tip:**
-    > - The default role at organization level is `Organization Viewer`.
+    >
+    > - The default role at the organization level is `Organization Viewer`.
     > - If you want to invite multiple members at one time, you can enter multiple email addresses.
     > - The invited user does not belong to any instances by default. To invite a user to a instance, see [Invite an instance member](#invite-an-instance-member).
 
@@ -189,7 +190,7 @@ To remove a member from an organization, take the following steps:
 
 2. In the left navigation pane, click **Organization Settings** > **Users**.
 
-3. On the **Users** page, click **...** > **Delete** in the row of the target member,
+3. On the **Users** page, click **...** > **Delete** in the row of the target member.
 
 ## Manage instance access
 
