@@ -18,6 +18,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [Configure the lifetime of connections](/develop/dev-guide-connection-parameters.md#configure-the-lifetime-of-connections).
 
+**API changes**
+
 - **TiDB Cloud Dedicated**
 
     Introduce the following [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) API endpoints for managing third-party monitoring integrations:
