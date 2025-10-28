@@ -49,7 +49,7 @@ For TiDB Cloud Dedicated, you can query the TiCDC Replication Capacity Units (RC
 </CustomContent>
 <CustomContent plan="premium">
 
-For TiDB Cloud Premium, you can query the TiCDC Changefeed Capacity Units (CCUs) of a changefeed.
+For {{{ .premium }}}, you can query the TiCDC Changefeed Capacity Units (CCUs) of a changefeed.
 
 1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB instance.
 2. Locate the corresponding changefeed you want to query, and click **...** > **View** in the **Action** column.

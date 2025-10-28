@@ -129,7 +129,7 @@ It is **NOT** recommended to use Public IP in a production environment.
 
 <div label="VPC Peering">
 
-Currently, the VPC Peering feature for TiDB Cloud Premium instances is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for VPC Peering for TiDB Cloud Premium instance" in the **Description** field and click **Submit**.
+Currently, the VPC Peering feature for {{{ .premium }}} instances is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for VPC Peering for {{{ .premium }}} instance" in the **Description** field and click **Submit**.
 
 </div>
 </SimpleTab>

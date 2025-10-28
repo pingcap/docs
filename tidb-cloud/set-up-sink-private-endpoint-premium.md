@@ -5,7 +5,7 @@ summary: Learn how to set up a private endpoint for changefeeds.
 
 # Set Up Private Endpoint for Changefeeds
 
-This document describes how to create a private endpoint for changefeeds in your TiDB Cloud Premium instances, enabling you to securely stream data to self-hosted Kafka or MySQL through private connectivity.
+This document describes how to create a private endpoint for changefeeds in your {{{ .premium }}} instances, enabling you to securely stream data to self-hosted Kafka or MySQL through private connectivity.
 
 ## Prerequisites
 
