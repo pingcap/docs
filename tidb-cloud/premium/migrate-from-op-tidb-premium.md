@@ -3,15 +3,15 @@ title: Migrate from TiDB Self-Managed to TiDB Cloud Premium
 summary: Learn how to migrate data from TiDB Self-Managed to TiDB Cloud Premium.
 ---
 
+# Migrate from TiDB Self-Managed to TiDB Cloud Premium
+
+This document describes how to migrate data from your TiDB Self-Managed clusters to TiDB Cloud Premium (on AWS) through Dumpling and TiCDC.
+
 > **Warning:**
 >
 > TiDB Cloud Premium is currently available in **Private Preview** in select AWS regions.  
 >
-> If Premium is not yet enabled for your organization, or if you need access in another cloud provider or region, click **Support** in the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/), or submit a request through the [Contact Us form](https://www.pingcap.com/contact-us) on our website.
-
-# Migrate from TiDB Self-Managed to TiDB Cloud Premium
-
-This document describes how to migrate data from your TiDB Self-Managed clusters to TiDB Cloud Premium (AWS) through Dumpling and TiCDC.
+> If Premium is not yet enabled for your organization, or if you need access in another cloud provider or region, click **Support** in the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/), or submit a request through the [Contact Us](https://www.pingcap.com/contact-us) form on the website.
 
 The overall procedure is as follows:
 
