@@ -1,5 +1,5 @@
 ---
-title: Changefeed Billing
+title: Changefeed Billing for TiDB Cloud Dedicated
 summary: Learn about billing for changefeeds in TiDB Cloud.
 aliases: ['/tidbcloud/tidb-cloud-billing-tcu']
 ---
