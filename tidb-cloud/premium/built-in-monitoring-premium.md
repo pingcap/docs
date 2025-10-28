@@ -1,5 +1,5 @@
 ---
-title: {{{ .premium }}} Built-in Metrics
+title: "{{{ .premium }}} Built-in Metrics"
 summary: Learn how to view {{{ .premium }}} built-in metrics and understand the meanings of these metrics.
 ---
 
