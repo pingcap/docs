@@ -97,7 +97,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 * TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax for compatibility with MySQL, but ignores them.
 * `SPATIAL` indexes are not supported.
-* TiDB Self-Managed and TiDB Cloud Dedicated supports parsing the `FULLTEXT` syntax but does not support using the `FULLTEXT` indexes.
+* TiDB Self-Managed and TiDB Cloud Dedicated support parsing the `FULLTEXT` syntax but do not support using the `FULLTEXT` indexes.
 
     >**Note:**
     >
