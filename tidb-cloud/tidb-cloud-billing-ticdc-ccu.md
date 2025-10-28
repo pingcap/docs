@@ -5,9 +5,13 @@ summary: Learn about billing for changefeeds in TiDB Cloud.
 
 # Changefeed Billing for TiDB Cloud Premium
 
-TiDB Cloud Premium measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview-premium.md) in TiCDC Changefeed Capacity Units (CCUs). When you [create a changefeed](/tidb-cloud/changefeed-overview-premium.md#create-a-changefeed) for an instance, you can select an appropriate specification. The higher the CCU, the better the replication performance. You will be charged for these TiCDC CCUs.
+This document describes the billing details for changefeeds in TiDB Cloud Premium.
 
-## Number of TiCDC CCUs
+## CCU cost
+
+TiDB Cloud Premium measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Changefeed Capacity Units (CCUs). When you [create a changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed) for an instance, you can select an appropriate specification. The higher the CCU, the better the replication performance. You will be charged for these TiCDC CCUs.
+
+### Number of TiCDC CCUs
 
 The following table lists the specifications and corresponding replication performances for changefeeds:
 
@@ -32,9 +36,9 @@ The following table lists the specifications and corresponding replication perfo
 >
 > The preceding performance data is for reference only and might vary in different scenarios. It is strongly recommended that you conduct a real workload test before using the changefeed feature in a production environment. For further assistance, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
 
-## Price
+### Price
 
-As Premium is currently in private preview, you can [contact our sales](https://www.pingcap.com/contact-us/) for pricing details.
+Currently, TiDB Cloud Premium is in private preview. You can [contact our sales](https://www.pingcap.com/contact-us/) for pricing details.
 
 ## Private Data Link cost
 
