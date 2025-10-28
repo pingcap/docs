@@ -1,17 +1,17 @@
 ---
-title: Identity Access Management
-summary: Learn how to manage identity access in TiDB Cloud.
+title: Identity Access Management for {{{ .premium }}}
+summary: Learn how to manage identity access in {{{ .premium }}}.
 ---
 
-# Identity Access Management for TiDB Cloud Premium
+# Identity Access Management for {{{ .premium }}}
 
-This document describes how to manage access to organizations, instances, roles and user profiles in TiDB Cloud Premium.
+This document describes how to manage access to organizations, instances, roles and user profiles in {{{ .premium }}}.
 
 Before accessing TiDB Cloud, [create a TiDB Cloud account](https://tidbcloud.com/free-trial). You can either sign up with email and password so that you can [manage your password using TiDB Cloud](/tidb-cloud/tidb-cloud-password-authentication.md), or choose your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
 
 ## Organizations and instances
 
-TiDB Cloud Premium provides a hierarchical structure based on organizations and instances to facilitate the management of TiDB Cloud users and TiDB instances. If you are an organization owner, you can create multiple TiDB instances in your organization.
+{{{ .premium }}} provides a hierarchical structure based on organizations and instances to facilitate the management of TiDB Cloud users and TiDB instances. If you are an organization owner, you can create multiple TiDB instances in your organization.
 
 For example:
 
