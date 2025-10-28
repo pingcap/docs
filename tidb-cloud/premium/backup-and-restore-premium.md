@@ -20,7 +20,7 @@ Backup files can originate from the following sources:
 
 ## View the Backup page
 
-1. On the [**TiDB Instances**](https://tidbcloud.com/project/clusters) page, click the name of your target instance to go to its overview page.
+1. On the [**TiDB Instances**](https://tidbcloud.com/tidbs?orgId=1372813089208281461&uiMode=new-offerings-preview) page, click the name of your target instance to go to its overview page.
 
     > **Tip:**
     >
