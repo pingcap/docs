@@ -42,10 +42,6 @@ To create a changefeed, refer to the tutorials:
 
 For TiDB Cloud Dedicated, you can query the TiCDC Replication Capacity Units (RCUs) of a changefeed.
 
-<CustomContent plan="dedicated">
-
-For TiDB Cloud Dedicated, you can query the TiCDC Replication Capacity Units (RCUs) of a changefeed.
-
 1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
 2. Locate the corresponding changefeed you want to query, and click **...** > **View** in the **Action** column.
 3. You can see the current TiCDC Replication Capacity Units (RCUs) in the **Specification** area of the page.
