@@ -152,13 +152,11 @@ To invite a member to an organization, take the following steps:
     > - If you want to invite multiple members at one time, you can enter multiple email addresses.
     > - The invited user does not belong to any instances by default. To invite a user to a instance, see [Invite an instance member](#invite-an-instance-member).
 
-5. If you only need assign the user an orgnization role, and not assign any instance roles or project roles, turn off the switch of **Add access for projects and instance**.
+5. Click **Invite**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
 
-6. Click **Invite**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
+6. After receiving this email, the user needs to click the link in the email to verify the identity, and a new page shows.
 
-7. After receiving this email, the user needs to click the link in the email to verify the identity, and a new page shows.
-
-8. If the invited email address has not been signed up for a TiDB Cloud account, the user is directed to the sign-up page to create an account.
+7. If the invited email address has not been signed up for a TiDB Cloud account, the user is directed to the sign-up page to create an account.
 
 > **Note:**
 >
@@ -174,7 +172,7 @@ To modify the organization role of a member, take the following steps:
 
 2. In the left navigation pane, click **Organization Settings** > **Users**.
 
-3. On the **Users** page, click **...** > **Edit Permission** of the target member.
+3. On the **Users** page, click **...** > **Edit Role** in the row of the target member.
 
 ### Remove an organization member
 
