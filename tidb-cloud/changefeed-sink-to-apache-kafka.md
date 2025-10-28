@@ -133,7 +133,7 @@ Currently, the VPC Peering feature for TiDB Cloud Premium instances is only avai
 
 </div>
 </SimpleTab>
-
+</CustomContent>
 
 ### Kafka ACL authorization
 
