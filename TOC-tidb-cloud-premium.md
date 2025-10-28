@@ -210,6 +210,7 @@
   - Import Data into TiDB Cloud
     - [Import Sample Data (SQL Files) from Cloud Storage](/tidb-cloud/import-sample-data-serverless.md)
     - [Import CSV Files from Cloud Storage](/tidb-cloud/premium/import-csv-files-premium.md)
+    - [Import CSV Files from Amazon S3](/tidb-cloud/premium/import-from-s3-premium.md)
     - [Import Parquet Files from Cloud Storage](/tidb-cloud/import-parquet-files-serverless.md)
     - [Import Snapshot Files from Cloud Storage](/tidb-cloud/import-snapshot-files-serverless.md)
     - [Import Data Using MySQL CLI](/tidb-cloud/premium/import-with-mysql-cli-premium.md)
