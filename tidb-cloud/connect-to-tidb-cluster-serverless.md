@@ -1,9 +1,9 @@
 ---
-title: Connect to Your TiDB Cloud Cluster
-summary: Learn how to connect to your TiDB Cloud cluster via different methods.
+title: Connect to Your {{{ .starter }}} or Essential Cluster
+summary: Learn how to connect to your {{{ .starter }}} or {{{ .essential }}} cluster via different methods.
 ---
 
-# Connect to Your TiDB Cloud Cluster
+# Connect to Your {{{ .starter }}} or Essential Cluster
 
 This document describes how to connect to your {{{ .starter }}} or {{{ .essential }}} cluster.
 
@@ -13,7 +13,7 @@ This document describes how to connect to your {{{ .starter }}} or {{{ .essentia
 
 ## Connection methods
 
-After your {{{ .starter }}} or  {{{ .essential }}} cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
+After your {{{ .starter }}} or {{{ .essential }}} cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
 
 - Direct connections
 
@@ -47,7 +47,7 @@ There are two network connection types for {{{ .starter }}} and {{{ .essential }
 
   The standard connection exposes a public endpoint, so you can connect to your TiDB cluster via a SQL client from your laptop.
 
-To ensure the security of data transmission, you need to [establish a TLS connection](/tidb-cloud/secure-connections-to-serverless-clusters.md) from your client to your cluster.
+  {{{ .starter }}} and {{{ .essential }}} require [TLS connections](/tidb-cloud/secure-connections-to-serverless-clusters.md), which ensures the security of data transmission from your applications to TiDB clusters.
 
 The following table shows the network you can use in different connection methods:
 
