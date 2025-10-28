@@ -5,11 +5,11 @@ summary: Learn how to migrate data from TiDB Self-Managed to {{{ .premium }}}.
 
 # Migrate from TiDB Self-Managed to {{{ .premium }}}
 
-This document describes how to migrate data from your TiDB Self-Managed clusters to {{{ .premium }}} (on AWS) through Dumpling and TiCDC.
+This document describes how to migrate data from your TiDB Self-Managed clusters to {{{ .premium }}} (on AWS) instances using Dumpling and TiCDC.
 
 > **Warning:**
 >
-> {{{ .premium }}} is currently available in **Private Preview** in select AWS regions.
+> {{{ .premium }}} is currently available in **private preview** in select AWS regions.
 >
 > If Premium is not yet enabled for your organization, or if you need access in another cloud provider or region, click **Support** in the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/), or submit a request through the [Contact Us](https://www.pingcap.com/contact-us) form on the website.
 
@@ -19,18 +19,18 @@ The overall procedure is as follows:
 2. Migrate full data. The process is as follows:
    1. Export data from TiDB Self-Managed to Amazon S3 using Dumpling.
    2. Import data from Amazon S3 to {{{ .premium }}}.
-3. Replicate incremental data by using TiCDC.
+3. Replicate incremental data using TiCDC.
 4. Verify the migrated data.
 
 ## Prerequisites
 
-It is recommended that you put the S3 bucket and the {{{ .premium }}} cluster in the same region. Cross-region migration might incur additional cost for data conversion.
+It is recommended that you put the S3 bucket and the {{{ .premium }}} instance in the same region. Cross-region migration might incur additional cost for data conversion.
 
 Before migration, you need to prepare the following:
 
 - An [AWS account](https://docs.aws.amazon.com/AmazonS3/latest/userguide/setting-up-s3.html#sign-up-for-aws-gsg) with administrator access
 - An [AWS S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html)
-- [A TiDB Cloud account](/tidb-cloud/tidb-cloud-quickstart.md) with at least the [`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles) access to your target {{{ .premium }}} cluster hosted on AWS
+- [A TiDB Cloud account](/tidb-cloud/tidb-cloud-quickstart.md) with at least the [`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles) access to your target {{{ .premium }}} instance hosted on AWS
 
 ## Prepare tools
 
@@ -45,7 +45,7 @@ You need to prepare the following tools:
 
 Before you deploy Dumpling, note the following:
 
-- It is recommended to deploy Dumpling on a new EC2 instance in the same VPC as your target {{{ .premium }}} cluster.
+- It is recommended to deploy Dumpling on a new EC2 instance in the same VPC as your target TiDB instance.
 - The recommended EC2 instance type is **c6g.4xlarge** (16 vCPU and 32 GiB memory). You can choose other EC2 instance types based on your needs. The Amazon Machine Image (AMI) can be Amazon Linux, Ubuntu, or Red Hat.
 
 You can deploy Dumpling by using TiUP or using the installation package.
@@ -207,17 +207,22 @@ Do the following to export data from the upstream TiDB cluster to Amazon S3 usin
 
 After you export data from the TiDB Self-Managed cluster to Amazon S3, you need to migrate the data to {{{ .premium }}}.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to your {{{ .premium }}} cluster, click **Data → Import**, and choose **Import data from Cloud Storage** > **Amazon S3**. Make a note of the **Account ID** and **External ID** displayed in the wizard—these values are embedded in the CloudFormation template.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), get the Account ID and External ID of your target TiDB instance.
 
-2. In the **Source Connection** dialog, select **AWS Role ARN**, then click **Click here to create a new one with AWS CloudFormation** and follow the on-screen guidance. If your organization cannot launch CloudFormation stacks, see [Manually create the IAM role](#manually-create-the-iam-role-optional).
+    1. Navigate to the **TiDB Instances** page, and click the name of your target instance.
+    2. In the left navigation pane, click **Data** > **Import**.
+    3. Choose **Import data from Cloud Storage** > **Amazon S3**.
+    4. Note down the **Account ID** and **External ID** displayed in the wizard. These values are embedded in the CloudFormation template.
 
-    - Open the pre-filled CloudFormation template in the AWS console.
-    - Provide a role name, review the permissions, and acknowledge the IAM warning.
-    - Create the stack and wait for the status to change to **CREATE_COMPLETE**.
-    - On the **Outputs** tab, copy the newly generated Role ARN.
-    - Return to {{{ .premium }}}, paste the Role ARN, and click **Confirm**. The wizard stores the ARN for subsequent import jobs.
+2. In the **Source Connection** dialog, select **AWS Role ARN**, then click **Click here to create a new one with AWS CloudFormation**, and follow the on-screen guidance. If your organization cannot launch CloudFormation stacks, see [Manually create the IAM role](#manually-create-the-iam-role-optional).
 
-3. Continue with the remaining steps in the import wizard, using the saved Role ARN when prompted.
+    1. Open the pre-filled CloudFormation template in the AWS console.
+    2. Provide a role name, review the permissions, and acknowledge the IAM warning.
+    3. Create the stack and wait for the status to change to **CREATE_COMPLETE**.
+    4. On the **Outputs** tab, copy the newly generated Role ARN.
+    5. Return to {{{ .premium }}}, paste the Role ARN, and click **Confirm**. The wizard stores the ARN for subsequent import jobs.
+
+3. Continue with the remaining steps in the import wizard, and use the saved Role ARN when prompted.
 
 #### Manually create the IAM role (optional)
 
@@ -231,7 +236,7 @@ If your organization cannot deploy CloudFormation stacks, create the access poli
     - `s3:GetBucketLocation`
     - `kms:Decrypt` (only when SSE-KMS encryption is enabled)
 
-    The JSON template below shows the required structure. Replace the placeholders with your bucket path, bucket ARN, and (if needed) KMS key ARN.
+    The following JSON template shows the required structure. Replace the placeholders with your bucket path, bucket ARN, and KMS key ARN (if needed).
 
     ```json
     {
@@ -264,7 +269,7 @@ If your organization cannot deploy CloudFormation stacks, create the access poli
     }
     ```
 
-2. Create an IAM role that trusts {{{ .premium }}} by supplying the **Account ID** and **External ID** noted in Step 1. Attach the policy from the previous step to this role.
+2. Create an IAM role that trusts {{{ .premium }}} by providing the **Account ID** and **External ID** you have noted down earlier. Then, attach the policy created in the previous step to this role.
 
 3. Copy the resulting Role ARN and enter it in the {{{ .premium }}} import wizard.
 
@@ -280,17 +285,17 @@ To replicate incremental data, do the following:
 
 2. Grant TiCDC to connect to {{{ .premium }}}.
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} cluster to go to its overview page.
+    1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB instance to go to its overview page.
     2. In the left navigation pane, click **Settings** > **Networking**.
     3. On the **Networking** page, click **Add IP Address**.
     4. In the displayed dialog, select **Use IP addresses**, click **+**, fill in the public IP address of the TiCDC component in the **IP Address** field, and then click **Confirm**. Now TiCDC can access {{{ .premium }}}. For more information, see [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
 
-3. Get the connection information of the downstream {{{ .premium }}} cluster.
+3. Get the connection information of the downstream {{{ .premium }}} instance.
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} cluster to go to its overview page.
+    1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB instance to go to its overview page.
     2. Click **Connect** in the upper-right corner.
     3. In the connection dialog, select **Public** from the **Connection Type** drop-down list and select **General** from the **Connect With** drop-down list.
-    4. From the connection information, you can get the host IP address and port of the cluster. For more information, see [Connect via public connection](/tidb-cloud/connect-via-standard-connection.md).
+    4. From the connection information, you can get the host IP address and port of the instance. For more information, see [Connect via public connection](/tidb-cloud/connect-via-standard-connection.md).
 
 4. Create and run the incremental replication task. In the upstream cluster, run the following:
 
@@ -345,9 +350,9 @@ To replicate incremental data, do the following:
 
         ![Update Filter](/media/tidb-cloud/normal_status_in_replication_task.png)
 
-    - Verify the replication. Write a new record to the upstream cluster, and then check whether the record is replicated to the downstream {{{ .premium }}} cluster.
+    - Verify the replication. Write a new record to the upstream cluster, and then check whether the record is replicated to the downstream {{{ .premium }}} instance.
 
-7. Set the same timezone for the upstream and downstream clusters. By default, {{{ .premium }}} sets the timezone to UTC. If the timezone is different between the upstream and downstream clusters, you need to set the same timezone for both clusters.
+7. Set the same timezone for the upstream cluster and downstream instance. By default, {{{ .premium }}} sets the timezone to UTC. If the timezone is different between the upstream cluster and downstream instance, you need to set the same timezone for both.
 
     1. In the upstream cluster, run the following command to check the timezone:
 
@@ -355,7 +360,7 @@ To replicate incremental data, do the following:
         SELECT @@global.time_zone;
         ```
 
-    2. In the downstream cluster, run the following command to set the timezone:
+    2. In the downstream instance, run the following command to set the timezone:
 
         ```sql
         SET GLOBAL time_zone = '+08:00';
@@ -367,7 +372,7 @@ To replicate incremental data, do the following:
         SELECT @@global.time_zone;
         ```
 
-8. Back up the [query bindings](/sql-plan-management.md) in the upstream cluster and restore them in the downstream cluster. You can use the following query to back up the query bindings:
+8. Back up the [query bindings](/sql-plan-management.md) in the upstream cluster and restore them in the downstream instance. You can use the following query to back up the query bindings:
 
     ```sql
     SELECT DISTINCT(CONCAT('CREATE GLOBAL BINDING FOR ', original_sql,' USING ', bind_sql,';')) FROM mysql.bind_info WHERE status='enabled';
@@ -375,9 +380,9 @@ To replicate incremental data, do the following:
 
     If you do not get any output, it means that no query bindings are used in the upstream cluster. In this case, you can skip this step.
 
-    After you get the query bindings, run them in the downstream cluster to restore the query bindings.
+    After you get the query bindings, run them in the downstream instance to restore the query bindings.
 
-9. Back up the user and privilege information in the upstream cluster and restore them in the downstream cluster. You can use the following script to back up the user and privilege information. Note that you need to replace the placeholders with the actual values.
+9. Back up the user and privilege information in the upstream cluster and restore them in the downstream instance. You can use the following script to back up the user and privilege information. Note that you need to replace the placeholders with the actual values.
 
     ```shell
     #!/bin/bash
@@ -387,7 +392,7 @@ To replicate incremental data, do the following:
     export MYSQL_USER=root
     export MYSQL_PWD={root_password}
     export MYSQL="mysql -u${MYSQL_USER} --default-character-set=utf8mb4"
-    
+
     function backup_user_priv(){
         ret=0
         sql="SELECT CONCAT(user,':',host,':',authentication_string) FROM mysql.user WHERE user NOT IN ('root')"
@@ -402,8 +407,8 @@ To replicate incremental data, do the following:
         done
         return $ret
     }
-    
+
     backup_user_priv
     ```
-    
-    After you get the user and privilege information, run the generated SQL statements in the downstream cluster to restore the user and privilege information.
+
+    After you get the user and privilege information, run the generated SQL statements in the downstream TiDB instance to restore the user and privilege information.
