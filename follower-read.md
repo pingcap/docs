@@ -15,7 +15,7 @@ When performing Follower Read, TiDB selects an appropriate replica based on the 
 
 <CustomContent platform="tidb-cloud">
 
-When performing Follower Read, TiDB selects an appropriate replica based on the topology information. Specifically, TiDB uses the `zone` label to identify local replicas: if the `zone` label of a TiDB node is the same as that of the target TiKV node, TiDB considers the replica as a local replica. For more information, see [Schedule Replicas by Topology Labels](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels).
+When performing Follower Read, TiDB selects an appropriate replica based on the topology information. Specifically, TiDB uses the `zone` label to identify local replicas: if the `zone` label of a TiDB node is the same as that of the target TiKV node, TiDB considers the replica as a local replica. The `zone` label is set automatically in TiDB Cloud.
 
 </CustomContent>
 
