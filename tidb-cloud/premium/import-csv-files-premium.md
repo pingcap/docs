@@ -102,7 +102,7 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > You can use the combo box in the upper-left corner to switch between organizations and instances.
 
     2. Click the name of your target TiDB instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
@@ -156,7 +156,7 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > You can use the combo box in the upper-left corner to switch between organizations and instances.
 
     2. Click the name of your target TiDB instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
