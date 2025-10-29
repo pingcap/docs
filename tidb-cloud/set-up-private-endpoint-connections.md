@@ -28,7 +28,7 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 ## Restrictions
 
-- Only users with the `Organization Owner` or `Project Owner` roles can create private endpoints.
+- Only users with the `Organization Owner` or `Project Owner` role can create private endpoints.
 - The private endpoint and the TiDB cluster you want to connect to must be located in the same region.
 
 In most scenarios, you are recommended to use private endpoint connection over VPC peering. However, in the following scenarios, you should use VPC peering instead of private endpoint connection:
