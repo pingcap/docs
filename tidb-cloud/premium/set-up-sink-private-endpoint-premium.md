@@ -19,7 +19,7 @@ Only users with any of the following roles in your organization can create priva
 - `Organization Owner`
 - `Instance Administrator` for the corresponding instance
 
-For more information about roles in TiDB Cloud, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
+For more information about roles in TiDB Cloud, see [User roles](/tidb-cloud/premium/manage-user-access-premium.md#user-roles).
 
 ### Network
 
