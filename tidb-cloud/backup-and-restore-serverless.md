@@ -1,10 +1,10 @@
 ---
-title: Back Up and Restore Data on {{{ .starter }}} or Essential
+title: Back Up and Restore {{{ .starter }}} or Essential Data
 summary: Learn how to back up and restore your {{{ .starter }}} or {{{ .essential }}} clusters.
 aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# Back Up and Restore Data on {{{ .starter }}} or Essential
+# Back Up and Restore {{{ .starter }}} or Essential Data
 
 This document describes how to back up and restore your data on {{{ .starter }}} or {{{ .essential }}} clusters.
 
@@ -73,7 +73,7 @@ TiDB Cloud supports snapshot restore and point-in-time restore for your cluster.
 - **Point-in-Time Restore (beta)**: restores your cluster to a specific time.
 
     - {{{ .starter }}} clusters: not supported.
-    - {{{ .essential }}} clusters: restores to any time within the backup retention, but not before the cluster creation time or after the current time minus one minute.
+    - {{{ .essential }}} clusters: restores to any time within the backup retention, but not earlier than the cluster creation time or later than one minute before the current time.
 
 ### Restore destination
 
