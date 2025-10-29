@@ -9,7 +9,7 @@ TiDB Cloudリカバリグループを使用すると、 TiDB Cloud Dedicated ク
 
 ## アーキテクチャ {#architecture}
 
-リカバリグループは、2つのTiDB Cloud Dedicatedクラスタ間でまとめてフェイルオーバー可能な、複製されたデータベースのセットで構成されます。各リカバリグループにはプライマリクラスタが割り当てられ、このプライマリクラスタ上のデータベースはグループに関連付けられ、セカンダリクラスタに複製されます。
+リカバリグループは、2つのTiDB Cloud Dedicatedクラスタ間でまとめてフェイルオーバーできる、複製されたデータベースのセットで構成されます。各リカバリグループにはプライマリクラスタが割り当てられ、このプライマリクラスタ上のデータベースはグループに関連付けられ、セカンダリクラスタに複製されます。
 
 ![Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-overview.png)
 
@@ -33,5 +33,5 @@ TiDB Cloudリカバリグループを使用すると、 TiDB Cloud Dedicated ク
 
 ## 次は何？ {#what-s-next}
 
--   回復グループの使用を開始するには、 [データベース復旧グループの作成](/tidb-cloud/recovery-group-get-started.md)参照してください。
+-   リカバリ グループの使用を開始するには、 [データベース復旧グループの作成](/tidb-cloud/recovery-group-get-started.md)参照してください。
 -   回復グループの使用方法については、 [データベースのフェイルオーバーと再保護](/tidb-cloud/recovery-group-failover.md)参照してください。

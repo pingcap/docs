@@ -14,7 +14,7 @@ aliases: ['/tidbcloud/serverless-driver-config']
 
 従来のTCPベースのMySQLドライバは、長寿命で永続的なTCP接続を前提としており、サーバーレス関数の短寿命な性質と矛盾するため、サーバーレス関数には適していません。さらに、包括的なTCPサポートと完全なNode.js互換性が欠如している可能性のある[Vercelエッジ関数](https://vercel.com/docs/functions/edge-functions)や[Cloudflareワーカー](https://workers.cloudflare.com/)などのエッジ環境では、これらのドライバが全く動作しない可能性があります。
 
-JavaScript版の[TiDB Cloudサーバーレス ドライバー (ベータ版)](https://github.com/tidbcloud/serverless-js)使用すると、サーバーレス環境で一般的にサポートされているHTTP経由でTiDB Cloud StarterまたはTiDB Cloud Essentialクラスターに接続できます。これにより、エッジ環境からTiDB Cloud StarterまたはTiDB Cloud Essentialクラスターに接続し、従来のTCPベースのMySQLドライバーと同様の開発エクスペリエンスを維持しながら、TCPによる接続オーバーヘッドを削減することが可能になります。
+JavaScript版の[TiDB Cloudサーバーレス ドライバー (ベータ版)](https://github.com/tidbcloud/serverless-js)すると、サーバーレス環境で一般的にサポートされているHTTP経由でTiDB Cloud StarterまたはTiDB Cloud Essentialクラスターに接続できます。これにより、エッジ環境からTiDB TiDB Cloud StarterまたはTiDB Cloud Essentialクラスターに接続し、従来のTCPベースのMySQLドライバーと同様の開発エクスペリエンスを維持しながら、TCPによる接続オーバーヘッドを削減することが可能になります。
 
 > **注記：**
 >
@@ -172,9 +172,9 @@ TiDB Cloudサーバーレス ドライバーは、接続レベルと SQL レベ�
 
 > **注記：**
 >
-> ユーザー名、パスワード、またはデータベース名に特殊文字が含まれている場合、URLで渡す際にこれらの文字[パーセンテージエンコード](https://en.wikipedia.org/wiki/Percent-encoding)エンコードする必要があります。例えば、パスワードが`password1@//?`場合、URLでは`password1%40%2F%2F%3F`にエンコードする必要があります。
+> ユーザー名、パスワード、またはデータベース名に特殊文字が含まれている場合、URLで渡す際にこれらの文字を[パーセンテージエンコード](https://en.wikipedia.org/wiki/Percent-encoding)にエンコードする必要があります。例えば、パスワードが`password1@//?`場合、URLでは`password1%40%2F%2F%3F`にエンコードする必要があります。
 
-`url`設定されている場合、 `host` 、 `username` 、 `password` 、 `database`個別に設定する必要はありません。以下のコードは同等です。
+`url`設定されている場合、 `host` 、 `username` 、 `password` 、 `database`を個別に設定する必要はありません。以下のコードは同等です。
 
 ```ts
 const config = {
@@ -260,8 +260,8 @@ conn.execute(`select ...`, [], {
 >
 > TiDB Cloudサーバーレス ドライバーの構成の変更:
 >
-> -   v0.0.7: SQL レベル オプション`isolation`追加します。
-> -   v0.0.10: 接続レベル構成`decoders`と SQL レベル オプション`decoders`追加します。
+> -   v0.0.7: SQL レベル オプション`isolation`を追加します。
+> -   v0.0.10: 接続レベル構成`decoders`と SQL レベル オプション`decoders`を追加します。
 
 ## 特徴 {#features}
 
@@ -334,7 +334,7 @@ TiDB Cloudサーバーレス ドライバーは、次の ORM と統合されて�
 サーバーレス ドライバー自体は無料ですが、ドライバーを使用してデータにアクセスすると、 [リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit)とstorage使用量が発生します。
 
 -   TiDB Cloud Starter クラスターの場合、価格は[TiDB Cloud Starterの価格](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)モデルに従います。
--   TiDB Cloud Essential クラスターの場合、価格は[TiDB Cloud Essential の価格](/tidb-cloud/tidb-cloud-billing.md#pricing-for-essential)モデルに従います。
+-   TiDB Cloud Essential クラスターの場合、価格は[TiDB Cloud Essential の価格](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)モデルに従います。
 
 ## 制限事項 {#limitations}
 
@@ -344,6 +344,6 @@ TiDB Cloudサーバーレス ドライバーは、次の ORM と統合されて�
 -   一度に実行できるSQL文は1つだけです。1つのクエリで複数のSQL文を実行することはまだサポートされていません。
 -   [プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)との接続はまだサポートされていません。
 
-## 次は何か {#what-s-next}
+## 次は何？ {#what-s-next}
 
 -   [ローカル Node.js プロジェクトでTiDB Cloudサーバーレス ドライバーを使用する](/tidb-cloud/serverless-driver-node-example.md)方法を学習します。

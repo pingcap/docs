@@ -9,10 +9,10 @@ summary: MySQL CLI 経由でTiDB Cloud Starter またはTiDB Cloud Essential に
 
 ## 前提条件 {#prerequisites}
 
-MySQL CLI 経由でTiDB Cloud Starter またはTiDB Cloud Essential にデータをインポートするには、次の前提条件を満たす必要があります。
+MySQL CLI 経由でTiDB Cloud Starter またはTiDB Cloud Essential にデータをインポートするには、次の前提条件が必要です。
 
--   TiDB Cloud Starter またはTiDB Cloud Essential クラスターにアクセスできます。まだお持ちでない場合は、 [TiDB Cloudクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)の手順に従って作成してください。
--   ローカルコンピュータに MySQL CLI をインストールします。
+-   TiDB Cloud Starter またはTiDB Cloud Essential クラスターにアクセスできます。まだアクセスしていない場合は、 [TiDB Cloudクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)の手順に従って作成してください。
+-   ローカル コンピュータに MySQL CLI をインストールします。
 
 ## ステップ1. TiDB Cloud StarterまたはTiDB Cloud Essentialクラスターに接続する {#step-1-connect-to-your-tidb-cloud-starter-or-tidb-cloud-essential-cluster}
 
@@ -24,11 +24,11 @@ TiDB クラスターに接続します。
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **接続タイプ**は`Public`に設定されています。
+    -   **接続タイプは**`Public`に設定されています。
     -   **Connect With が**`MySQL CLI`に設定されています。
     -   **オペレーティング システムは**環境に適合します。
 
-4.  ランダムなパスワードを作成するには、 **「パスワードの生成」を**クリックします。
+4.  ランダムなパスワードを作成するには、 **「パスワードの生成」**をクリックします。
 
     > **ヒント：**
     >
@@ -53,7 +53,7 @@ INSERT INTO products (product_id, product_name, price) VALUES
     (3, 'Tablet', 299.99);
 ```
 
-## ステップ3. SQLまたはCSVファイルからデータをインポートする {#step-3-import-data-from-a-sql-or-csv-file}
+## ステップ3. SQLまたはCSVファイルからデータをインポートする {#step-3-import-data-from-an-sql-or-csv-file}
 
 SQLファイルまたはCSVファイルからデータをインポートできます。以下のセクションでは、各ファイル形式からデータをインポートする手順を段階的に説明します。
 
@@ -62,7 +62,7 @@ SQLファイルまたはCSVファイルからデータをインポートでき�
 
 SQL ファイルからデータをインポートするには、次の手順を実行します。
 
-1.  インポートするデータを含む実際のSQLファイル（例： `product_data.sql` ）を用意してください。このSQLファイルには、実際のデータを含む`INSERT`ステートメントが含まれている必要があります。
+1.  インポートするデータを含む実際のSQLファイル（例： `product_data.sql` ）をご提供ください。このSQLファイルには、実際のデータを含む`INSERT`ステートメントが含まれている必要があります。
 
 2.  SQL ファイルからデータをインポートするには、次のコマンドを使用します。
 

@@ -23,9 +23,9 @@ summary: TiDB データベースの ADD INDEX の使用法の概要。
 
 > **警告：**
 >
-> -   クラスター内で DDL ステートメントが実行されているときは、TiDB クラスターをアップグレード**しないでください**(通常は、 `ADD INDEX`や列タイプの変更などの時間のかかる DDL ステートメントの場合)。
+> -   クラスター内で DDL ステートメントが実行されているときは、TiDB クラスターをアップグレードし**ないでください**(通常は、 `ADD INDEX`や列タイプの変更などの時間のかかる DDL ステートメントの場合)。
 > -   アップグレード前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスターで実行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスターに DDL ジョブがある場合は、クラスターをアップグレードする前に、DDL の実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルしてください。
-> -   また、クラスタのアップグレード中は、DDL文を実行**しないでください**。実行した場合、未定義の動作が発生する可能性があります。
+> -   また、クラスタのアップグレード中は、DDL文を実行し**ないでください**。そうしないと、未定義の動作が発生する可能性があります。
 >
 > TiDBをv7.1.0からそれ以降のバージョンにアップグレードする場合、上記の制限は無視できます。詳細については、 [TiDBスムーズアップグレードの制限](/smooth-upgrade-tidb.md)参照してください。
 
@@ -94,19 +94,28 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
--   TiDB `RTREE` `BTREE` `HASH`インデックス タイプを受け入れますが、それらを無視します。
+-   TiDB は`RTREE` `BTREE` `HASH`インデックス タイプを受け入れますが、それらを無視します。
+
 -   `SPATIAL`インデックスはサポートされていません。
--   TiDB は`FULLTEXT`構文の解析をサポートしますが、 `FULLTEXT`インデックスの使用はサポートしません。
+
+-   TiDB Self-Managed およびTiDB Cloud Dedicated は、 `FULLTEXT`構文の解析をサポートしますが、 `FULLTEXT`インデックスの使用はサポートしません。
+
+    > **注記：**
+    >
+    > 現在、特定の AWS リージョンの {{{ .starter }} および {{{ .essential }}} クラスターのみが[`FULLTEXT`構文とインデックス](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)サポートしています。
+
 -   降順インデックスはサポートされていません ( MySQL 5.7と同様)。
--   `CLUSTERED`型の主キーをテーブルに追加することはサポートされていません。3 型`CLUSTERED`主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
--   `GLOBAL`インデックス オプションを使用して`PRIMARY KEY`または`UNIQUE INDEX` [グローバルインデックス](/partitioned-table.md#global-indexes)として設定することは、 [パーティションテーブル](/partitioned-table.md)の TiDB 拡張であり、MySQL と互換性がありません。
+
+-   `CLUSTERED`型の主キーをテーブルに追加することはサポートされていません。3 型の主キーの詳細については、 `CLUSTERED` [クラスター化インデックス](/clustered-indexes.md)参照してください。
+
+-   `GLOBAL`インデックス オプションを使用して`PRIMARY KEY`または`UNIQUE INDEX` [グローバルインデックス](/partitioned-table.md#global-indexes)として設定することは、 [パーティションテーブル](/partitioned-table.md)の TiDB 拡張であり、MySQL とは互換性がありません。
 
 ## 参照 {#see-also}
 
 -   [インデックスの選択](/choose-index.md)
 -   [インデックス問題の解決方法](/wrong-index-solution.md)
 -   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
--   [インデックスの削除](/sql-statements/sql-statement-drop-index.md)
+-   [インデックスを削除](/sql-statements/sql-statement-drop-index.md)
 -   [インデックス名の変更](/sql-statements/sql-statement-rename-index.md)
 -   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)
 -   [列を追加](/sql-statements/sql-statement-add-column.md)

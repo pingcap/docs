@@ -5,13 +5,13 @@ summary: MySQL CLI 経由でTiDB Cloud Dedicated にデータをインポート�
 
 # MySQL CLI 経由でTiDB Cloud Dedicated にデータをインポートする {#import-data-into-tidb-cloud-dedicated-via-mysql-cli}
 
-このドキュメントでは、 [MySQL コマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)を介してTiDB Cloud Dedicatedにデータをインポートする方法について説明します。SQLファイルまたはCSVファイルからデータをインポートできます。以下のセクションでは、各ファイルタイプからデータをインポートする手順を段階的に説明します。
+このドキュメントでは、 [MySQL コマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)を介してTiDB Cloud Dedicatedにデータをインポートする方法について説明します。SQLファイルまたはCSVファイルからデータをインポートできます。以下のセクションでは、各ファイルタイプからデータをインポートするための手順を段階的に説明します。
 
 ## 前提条件 {#prerequisites}
 
-MySQL CLI 経由でTiDB Cloud Dedicated にデータをインポートする前に、次の前提条件を満たす必要があります。
+MySQL CLI 経由でTiDB Cloud Dedicated にデータをインポートするには、次の前提条件が必要です。
 
--   TiDB Cloud Dedicated クラスターへのアクセス権をお持ちです。お持ちでない場合は、 [TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)手順に従ってクラスターを作成してください。
+-   TiDB Cloud Dedicated クラスターへのアクセス権をお持ちです。まだお持ちでない場合は、 [TiDB Cloud専用クラスターを作成する](/tidb-cloud/create-tidb-cluster.md)の手順に従って作成してください。
 -   ローカル コンピュータに MySQL CLI をインストールします。
 
 ## ステップ1. TiDB Cloud Dedicatedクラスタに接続する {#step-1-connect-to-your-tidb-cloud-dedicated-cluster}
@@ -20,15 +20,15 @@ TiDB クラスターに接続します。
 
 1.  [**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2.  左側のナビゲーション ペインで、 **[設定]** &gt; **[ネットワーク] を**クリックします。
+2.  左側のナビゲーション ペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
 
-3.  **[ネットワーク]**ページで、 **[IP アクセス リスト]**領域の**[IP アドレスの追加] を**クリックします。
+3.  **[ネットワーク]**ページで、 **[IP アクセス リスト]**領域の**[IP アドレスの追加]**をクリックします。
 
 4.  ダイアログで、 **[どこからでもアクセスを許可する]**を選択し、 **[確認]**をクリックします。
 
-5.  右上隅の**[接続]**をクリックすると、接続情報のダイアログが開きます。
+5.  右上隅の**[接続]**をクリックして、接続情報のダイアログを開きます。
 
-    接続文字列を取得する方法の詳細については、 [パブリック接続経由でTiDB Cloud Dedicated に接続](/tidb-cloud/connect-via-standard-connection.md)参照してください。
+    接続文字列を取得する方法の詳細については、 [パブリック接続経由​​でTiDB Cloud Dedicated に接続](/tidb-cloud/connect-via-standard-connection.md)参照してください。
 
 ## ステップ2. テーブルを定義し、サンプルデータを挿入する {#step-2-define-the-table-and-insert-sample-data}
 
@@ -49,7 +49,7 @@ INSERT INTO products (product_id, product_name, price) VALUES
     (3, 'Tablet', 299.99);
 ```
 
-## ステップ3. SQLまたはCSVファイルからデータをインポートする {#step-3-import-data-from-a-sql-or-csv-file}
+## ステップ3. SQLまたはCSVファイルからデータをインポートする {#step-3-import-data-from-an-sql-or-csv-file}
 
 SQLファイルまたはCSVファイルからデータをインポートできます。以下のセクションでは、各ファイル形式からデータをインポートする手順を段階的に説明します。
 
@@ -58,7 +58,7 @@ SQLファイルまたはCSVファイルからデータをインポートでき�
 
 SQL ファイルからデータをインポートするには、次の手順を実行します。
 
-1.  インポートするデータを含む実際のSQLファイル（例： `product_data.sql` ）を用意してください。このSQLファイルには、実際のデータを含む`INSERT`ステートメントが含まれている必要があります。
+1.  インポートするデータを含む実際のSQLファイル（例： `product_data.sql` ）をご提供ください。このSQLファイルには、実際のデータを含む`INSERT`ステートメントが含まれている必要があります。
 
 2.  SQL ファイルからデータをインポートするには、次のコマンドを使用します。
 

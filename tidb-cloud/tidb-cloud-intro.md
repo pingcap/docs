@@ -22,7 +22,7 @@ TiDB Cloudの詳細については、次のビデオをご覧ください。
 
 <iframe width="600" height="450" src="https://www.youtube.com/embed/skCV9BEmjbo?enablejsapi=1" title="Why TiDB Cloud?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-TiDB Cloudを使用すると、次の主な機能を利用できます。
+TiDB Cloud を使用すると、次の主な機能を利用できます。
 
 -   **高速かつカスタマイズされたスケーリング**
 
@@ -52,13 +52,13 @@ TiDB Cloudを使用すると、次の主な機能を利用できます。
 
     <CustomContent language="en,zh">
 
-    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB TiDB Cloud は現在、AWS、Azure、Google Cloud、Alibaba Cloud で利用可能です。
+    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB TiDB Cloudは現在、AWS、Azure、Google Cloud、Alibaba Cloud で利用可能です。
 
     </CustomContent>
 
     <CustomContent language="ja">
 
-    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB TiDB Cloud は現在、AWS、Azure、Google Cloud で利用可能です。
+    クラウドベンダーに縛られることなく、柔軟性を維持できます。TiDB TiDB Cloudは現在、AWS、Azure、Google Cloud で利用可能です。
 
     </CustomContent>
 
@@ -101,6 +101,16 @@ TiDB Cloud は次の展開オプションを提供します。
     現在、 TiDB Cloud Essential は AWS でパブリックプレビュー中です。
 
     </CustomContent>
+
+<CustomContent plan="premium">
+
+-   TiDB Cloudプレミアム
+
+    TiDB Cloud Premiumは、無制限のリアルタイム拡張性を必要とするミッションクリティカルなビジネス向けに設計されています。ワークロードに応じた自動スケーリングと包括的なエンタープライズ機能を提供します。
+
+    現在、 TiDB Cloud Premium は AWS および Alibaba Cloud でプライベート プレビュー中です。
+
+</CustomContent>
 
 -   TiDB Cloud専用
 

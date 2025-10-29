@@ -2,7 +2,7 @@
 title: TiDB Cloud Documentation
 hide_sidebar: true
 hide_commit: true
-summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供する、フルマネージドのデータベース・アズ・ア・サービス（DBaaS）です。学習、試用、開発、保守、移行、監視、チューニング、セキュリティ保護、課金、統合、参照のためのガイド、サンプル、リファレンスを提供しています。
+summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提供する、フルマネージドのデータベース・アズ・ア・サービス（DBaaS）です。学習、試用、開発、保守、移行、監視、チューニング、セキュリティ保護、課金、統合、参照のためのガイド、サンプル、リファレンスを提供しています。
 ---
 
 <LearningPathContainer platform="tidb-cloud" title="TiDB Cloud" subTitle="TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. Find the guide, samples, and references you need to use TiDB Cloud.">
@@ -19,7 +19,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 <LearningPath label="Try" icon="cloud5">
 
-[TiDB Cloudを試してみる](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart/?plan=starter)
+[TiDB Cloud を試してみる](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart/?plan=starter)
 
 [TiDB + AIを試す](https://docs.pingcap.com/tidbcloud/vector-search-get-started-using-python/?plan=starter)
 
@@ -107,7 +107,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 <LearningPath label="Billing" icon="cloud2">
 
-[価格](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#pricing-for-starter/?plan=starter)
+[価格](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)
 
 [請求書](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#invoices/?plan=starter)
 

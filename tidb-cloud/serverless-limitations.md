@@ -8,7 +8,7 @@ aliases: ['/tidbcloud/serverless-tier-limitations']
 
 <!-- markdownlint-disable MD026 -->
 
-TiDB Cloud StarterおよびEssentialは、TiDBがサポートするほぼすべてのワークロードで動作しますが、TiDB Self-ManagedまたはTiDB Cloud Dedicatedクラスタと比較して機能に若干の違いがあります。このドキュメントでは、TiDB Cloud StarterおよびTiDB Cloud Essentialの制限事項について説明します。
+TiDB Cloud StarterおよびEssentialは、TiDBがサポートするほぼすべてのワークロードで動作しますが、TiDB Self-ManagedまたはTiDB Cloud Dedicatedクラスタと比較して機能に若干の違いがあります。このドキュメントでは、 TiDB Cloud StarterおよびTiDB Cloud Essentialの制限事項について説明します。
 
 TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを継続的に埋めています。ギャップを埋める機能や性能が必要な場合は、機能リクエストに[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)または[お問い合わせ](https://www.pingcap.com/contact-us/?from=en)使用してください。
 
@@ -21,11 +21,12 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 ### 繋がり {#connection}
 
 -   [パブリックエンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)と[プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)のみ使用できます。5 [VPC ピアリング](/tidb-cloud/set-up-vpc-peering-connections.md) TiDB Cloud StarterまたはTiDB Cloud Essentialクラスターに接続するためには使用できません。
--   プライベートエンドポイントのサポート[ファイアウォールルール](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md) 。
+-   プライベートエンドポイントの[ファイアウォールルール](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)サポート。
+-   データベースクライアント接続は、30分以上開いたままになっていると、予期せず終了する可能性があります。これは、TiDBサーバーのシャットダウン、再起動、またはメンテナンス時に発生する可能性があり、アプリケーションの中断につながる可能性があります。この問題を回避するには、最大接続有効期間を設定してください。最初は5分から始め、テールレイテンシーに影響がある場合は徐々に増やすことを推奨します。詳細については、 [接続プールの推奨設定](/develop/dev-guide-connection-parameters.md#connection-pools-and-connection-parameters)参照してください。
 
 > **注記：**
 >
-> [AWS Global Acceleratorの制限](https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works.html#about-idle-timeout)ため、AWS のパブリックエンドポイント接続のアイドルタイムアウトは 340 秒です。同じ理由から、TCP キープアライブパケットを使用して接続を維持することはできません。
+> [AWS Global Acceleratorの制限](https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works.html#about-idle-timeout)のため、AWS のパブリックエンドポイント接続のアイドルタイムアウトは 340 秒です。同じ理由から、TCP キープアライブパケットを使用して接続を維持することはできません。
 
 ### 暗号化 {#encryption}
 
@@ -48,12 +49,12 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 ### ストリームデータ {#stream-data}
 
--   [チェンジフィード](/tidb-cloud/changefeed-overview.md)は現在、 TiDB Cloud Starter およびTiDB Cloud Essential ではサポートされていません。
--   [データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)は現在、 TiDB Cloud Starter およびTiDB Cloud Essential ではサポートされていません。
+-   [チェンジフィード](/tidb-cloud/changefeed-overview.md)現在、 TiDB Cloud Starter およびTiDB Cloud Essential ではサポートされていません。
+-   [データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)現在、 TiDB Cloud Starter およびTiDB Cloud Essential ではサポートされていません。
 
 ### 存続時間（TTL） {#time-to-live-ttl}
 
--   TiDB Cloud StarterとTiDB Cloud Essentialでは、テーブルの属性[`TTL_JOB_INTERVAL`](/time-to-live.md#ttl-job) `15m`に固定されており、変更できません。つまり、 TiDB Cloud StarterとTiDB Cloud Essentialは、期限切れのデータをクリーンアップするために15分ごとにバックグラウンドジョブをスケジュールします。
+-   TiDB Cloud StarterとTiDB Cloud Essentialでは、テーブルの属性[`TTL_JOB_INTERVAL`](/time-to-live.md#ttl-job)は`15m`に固定されており、変更できません。つまり、 TiDB Cloud StarterとTiDB Cloud Essentialは、期限切れのデータをクリーンアップするために15分ごとにバックグラウンドジョブをスケジュールします。
 
 ### その他 {#others}
 

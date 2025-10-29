@@ -8,13 +8,35 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2025年10月28日 {#october-28-2025}
+
+**一般的な変更**
+
+-   **TiDB Cloud Starter とTiDB Cloud Essential**
+
+    接続の安定性を向上させ、TiDBサーバーの再起動またはメンテナンス中に予期しない切断を防ぐには、データベース接続の最大有効期間を 30 分未満に設定することをお勧めします。
+
+    詳細については[接続の有効期間を設定する](/develop/dev-guide-connection-parameters.md#configure-the-lifetime-of-connections)参照してください。
+
+**APIの変更**
+
+-   **TiDB Cloud専用**
+
+    サードパーティの監視統合を管理するための次の[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) API エンドポイントを導入します。
+
+    -   統合の一覧
+    -   統合を作成する
+    -   統合を削除する
+
+    詳細については[TiDB Cloud専用API](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated/)参照してください。
+
 ## 2025年10月21日 {#october-21-2025}
 
 **一般的な変更**
 
 -   **TiDB Cloud専用**
 
-    -   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 、 [チェンジフィード](/tidb-cloud/changefeed-overview.md)プライベート エンドポイント機能が強化され、構成が簡素化され、セキュリティが向上し、データ シンクの柔軟性が向上します。
+    -   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) [チェンジフィード](/tidb-cloud/changefeed-overview.md)のプライベート エンドポイント機能が強化され、構成が簡素化され、セキュリティが向上し、データ シンクの柔軟性が向上します。
 
         -   **簡素化された構成**: プライベート エンドポイントの作成が変更フィードの作成から独立し、同じプロジェクト内の複数の変更フィードが単一のプライベート エンドポイントを共有できるようになり、冗長な構成が削減されます。
         -   **MySQL のプライベート リンク シンク**: MySQL にデータをシンクするためのより安全な方法を提供し、プライベート リンク経由で別のTiDB Cloud Dedicated クラスターにデータを直接シンクすることもサポートするようになりました。
@@ -24,7 +46,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     -   現在、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して[Prometheus 統合（プレビュー）](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)使用可能です。
 
-        TiDB Cloudは、Prometheusとの連携をクラスターレベルで管理できるようになり、よりきめ細かな制御と設定が可能になります。この機能により、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのメトリクスをシームレスにPrometheusに送信できるようになり、統合プラットフォームで高度なアラート機能を実現できます。
+        TiDB Cloudは、 Prometheusとの連携をクラスターレベルで管理するようになり、よりきめ細かな制御と設定が可能になります。この機能により、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのメトリクスをシームレスにPrometheusに送信できるようになり、統合プラットフォームで高度なアラート機能を実現できます。
 
         詳細については[TiDB Cloud をPrometheus および Grafana と統合する](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)参照してください。
 
@@ -38,7 +60,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
         現在、データベース監査ログをサポートしているのは[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)と[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)のみです。データベース監査ログを使用している既存のTiDB Cloud Starter クラスターには影響しません。
 
-    -   [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)インプレースリストア機能が削除され、バックアップを同じクラスタに直接リストアできなくなります。この変更により、アクティブな本番本番データの誤った上書きや潜在的なデータ損失を防ぐことができます。
+    -   [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)インプレースリストア機能が削除され、バックアップを同じクラスタに直接リストアできなくなります。この変更により、アクティブな本番データの誤った上書きや潜在的なデータ損失を防ぐことができます。
 
         データを復元するには、 [バックアップを新しいクラスターに復元する](/tidb-cloud/backup-and-restore-serverless.md#perform-the-restore) . 復元されたデータを検証した後、アプリケーションを新しいクラスターに切り替えます。既存のクラスターに復元されたデータはそのまま残り、新たな復元を実行しない限り、何もする必要はありません。
 
@@ -51,7 +73,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   **TiDB Cloudエッセンシャル**
 
-    -   [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)はAWSでパブリックプレビュー中です<customcontent language="en,zh">アリババクラウド</customcontent>。
+    -   [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential) AWSでパブリックプレビュー中です<customcontent language="en,zh">アリババクラウド</customcontent>。
 
         ワークロードが増加し、リアルタイムの拡張性を必要とするアプリケーションに対して、 TiDB Cloud Essential はビジネスの成長に対応できる柔軟性とパフォーマンスを提供します。
 
@@ -89,7 +111,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     -   Datadog と New Relic の統合が[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して一般提供 (GA) されました。
 
-        TiDB Cloudは、DatadogとNew Relicの連携をクラスターレベルで管理できるようになり、よりきめ細かな制御と設定が可能になります。この機能により、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのメトリクスをDatadogまたはNew Relicにシームレスに送信できるようになり、統合プラットフォームで高度なアラート機能を実現できます。
+        TiDB Cloudは、 DatadogとNew Relicの連携をクラスターレベルで管理できるようになり、よりきめ細かな制御と設定が可能になります。この機能により、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのメトリクスをDatadogまたはNew Relicにシームレスに送信できるようになり、統合プラットフォームで高度なアラート機能を実現できます。
 
         統合手順については、 [TiDB CloudとDatadogの統合](/tidb-cloud/monitor-datadog-integration.md)と[TiDB CloudとNew Relicの統合](/tidb-cloud/monitor-new-relic-integration.md)参照してください。
 
@@ -103,13 +125,13 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     -   `UPDATE`イベントを[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)変更フィードに分割するユーザー制御をサポートします。
 
-        TiDB Cloud Dedicated クラスターでは、 `UPDATE`イベントを生イベントとして保持するか、 `DELETE`と`INSERT`イベントに分割するかを設定できます。この機能により、高度なレプリケーションシナリオにおいて柔軟性が向上します。
+        TiDB Cloud Dedicated クラスターでは、 `UPDATE`イベントを生イベントとして保持するか、 `DELETE`イベントと`INSERT`イベントに分割するかを設定できます。この機能により、高度なレプリケーションシナリオにおいて柔軟性が向上します。
 
-        この機能は、Apache KafkaやAmazon S3などの非SQL出力先でのみサポートされます。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md) [アパッチパルサーに沈む](/tidb-cloud/changefeed-sink-to-apache-pulsar.md)参照して[クラウドストレージに保存](/tidb-cloud/changefeed-sink-to-cloud-storage.md) 。
+        この機能は[クラウドストレージに保存](/tidb-cloud/changefeed-sink-to-cloud-storage.md) [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md) [アパッチパルサーに沈む](/tidb-cloud/changefeed-sink-to-apache-pulsar.md)てください。
 
         分割動作の詳細については、 [MySQL以外のシンクの主キーまたは一意キーの`UPDATE`イベントを分割する](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)参照してください。
 
-    -   Google Cloud でホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに新しいノード サイズ`32 vCPU, 64 GiB`指定します。
+    -   Google Cloud でホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに新しいノード サイズ`32 vCPU, 64 GiB`を指定します。
 
         この新しいノード サイズは、TiDB ノードで使用できます。
 
@@ -325,13 +347,13 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **一般的な変更**
 
--   Google Cloud でホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに新しいノード サイズ`32 vCPU, 128 GiB`指定します。
+-   Google Cloud でホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに新しいノード サイズ`32 vCPU, 128 GiB`を指定します。
 
     この新しいサイズは、TiDB、TiKV、およびTiFlashノードで使用できます。
 
 -   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)の TiKV スケーリング プロセスを改善して、クラスターの安定性を強化します。
 
-    TiKV ノードの[vCPUとRAMのサイズを変更する](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)追加すると、 TiDB Cloud は、クラスターの内部サービスに新しい構成をサポートするために追加の容量が必要かどうかを自動的に確認します。
+    TiKV ノードの[vCPUとRAMのサイズを変更する](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)を追加すると、 TiDB Cloud は、クラスターの内部サービスに新しい構成をサポートするために追加の容量が必要かどうかを自動的に確認します。
 
     -   拡張が必要な​​場合は、 TiDB Cloud は続行する前に確認を求めます。
     -   スケーリング後の現在の内部サービス容量がすでに必要なサイズよりも大きい場合、 TiDB Cloud は、クラスターの安定性に影響を与える可能性のある不要な変更を回避するために、内部サービスの既存の構成を保持します。
@@ -354,7 +376,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   新しい[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン8.1.2](https://docs.pingcap.com/tidb/stable/release-8.1.2/)から[バージョン8.5.2](https://docs.pingcap.com/tidb/stable/release-8.5.2/)にアップグレードします。
 
-    v8.1.2 と比較して、v8.5.2 には、 [v8.2.0-DMR](https://docs.pingcap.com/tidb/stable/release-8.2.0/) 、 [v8.3.0-DMR](https://docs.pingcap.com/tidb/stable/release-8.3.0/) 、 [v8.4.0-DMR](https://docs.pingcap.com/tidb/stable/release-8.4.0/) 、 [バージョン8.5.0](https://docs.pingcap.com/tidb/stable/release-8.5.0/) 、 [バージョン8.5.1](https://docs.pingcap.com/tidb/stable/release-8.5.1/) 、および[バージョン8.5.2](https://docs.pingcap.com/tidb/stable/release-8.5.2/)でリリースされた新機能、改善、およびバグ修正が含まれています。
+    v8.1.2 と比較して、v8.5.2 には[v8.2.0-DMR](https://docs.pingcap.com/tidb/stable/release-8.2.0/) 、 [v8.3.0-DMR](https://docs.pingcap.com/tidb/stable/release-8.3.0/) 、 [v8.4.0-DMR](https://docs.pingcap.com/tidb/stable/release-8.4.0/) 、 [バージョン8.5.0](https://docs.pingcap.com/tidb/stable/release-8.5.0/) 、 [バージョン8.5.1](https://docs.pingcap.com/tidb/stable/release-8.5.1/) 、および[バージョン8.5.2](https://docs.pingcap.com/tidb/stable/release-8.5.2/)でリリースされた新機能、改善、およびバグ修正が含まれています。
 
 -   バックアップ アクティビティのコンソール監査ログを強化するために、 `BackupCompleted`イベントの監査をサポートします。
 
@@ -362,7 +384,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     詳細については[コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)参照してください。
 
--   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)変更フィード内の列値のフィルタリングをサポートします。
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)の変更フィード内の列値のフィルタリングをサポートします。
 
     式を使用して変更フィード内の特定の列値をフィルタリングし、ソースで無関係なデータを除外できるようになりました。この機能により、DMLイベントのきめ細かなフィルタリングが可能になり、リソース消費を削減し、パフォーマンスを向上させることができます。
 
@@ -374,7 +396,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)データベース監査ログ（ベータ版）がリクエストに応じて利用可能になりました。この機能を使用すると、ユーザーアクセスの詳細（実行されたSQL文など）の履歴をログに記録できます。
 
-    この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートをリクエスト」**をクリックします。次に、「説明」フィールドに「 TiDB Cloud Serverless データベース監査ログの申請」と入力し、 **「送信」を**クリックします。
+    この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートをリクエスト**」をクリックします。次に、「説明」フィールドに「 TiDB Cloud Serverless データベース監査ログの申請」と入力し、 **「送信」**をクリックします。
 
 -   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)ユーザー制御のログ編集をサポートします。
 
@@ -440,7 +462,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **コンソールの変更**
 
--   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのTiFlashノードのサイズを構成する際のインタラクティブ エクスペリエンスを強化します。
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)のクラスターのTiFlashノードのサイズを構成する際のインタラクティブ エクスペリエンスを強化します。
 
     TiDB Cloud Dedicated クラスターを作成するときに、トグル スイッチを使用してTiFlash構成を制御できるようになりました。これにより、構成エクスペリエンスがより直感的でシームレスになります。
 
@@ -535,7 +557,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
         -   すべてのノード グループを単一のクラスター内で管理し、運用オーバーヘッドを削減します。
         -   需要に応じてグループを個別にスケールします。
 
-    メリットの詳細については[技術ブログ](https://www.pingcap.com/blog/tidb-cloud-node-groups-scaling-workloads-predictable-performance/)ご覧ください。開始するには[TiDBノードグループの管理](/tidb-cloud/tidb-node-group-management.md)ご覧ください。
+    メリットの詳細については[技術ブログ](https://www.pingcap.com/blog/tidb-cloud-node-groups-scaling-workloads-predictable-performance/)ご覧ください。開始するには[TiDBノードグループの管理](/tidb-cloud/tidb-node-group-management.md)をご覧ください。
 
 -   AWS でホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスター内の TiKV ノードに[標準storage](/tidb-cloud/size-your-cluster.md#standard-storage)タイプを導入します。
 
@@ -549,7 +571,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     **可用性：**
 
-    標準storageタイプは、2025年4月1日以降に作成され、AWSでホストされ、サポート対象バージョン（バージョン7.5.5、8.1.2、または8.5.0以上）の新規クラスター[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)個に自動的に適用されます。既存のクラスターは引き続き以前の[基本的なstorage](/tidb-cloud/size-your-cluster.md#basic-storage)タイプを使用しているため、移行は不要です。
+    標準storageタイプは、2025年4月1日以降に作成され、AWSでホストされ、サポート対象バージョン（バージョン7.5.5、8.1.2、または8.5.0以上）の新規クラスター[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)に自動的に適用されます。既存のクラスターは引き続き以前の[基本的なstorage](/tidb-cloud/size-your-cluster.md#basic-storage)タイプを使用しているため、移行は不要です。
 
     スタンダードstorageの料金はベーシックstorageの料金とは異なります。詳しくは[価格](https://www.pingcap.com/tidb-dedicated-pricing-details/)ご覧ください。
 
@@ -573,11 +595,11 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   AWS にデプロイされた[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのTiDB Cloudにデータベース監査ログ ファイルを保存することをサポートします。
 
-    これらの監査ログファイルは、TiDB Cloudから直接ダウンロードできます。この機能はリクエストに応じてのみ利用可能であることにご注意ください。
+    これらの監査ログファイルは、 TiDB Cloudから直接ダウンロードできます。この機能はリクエストに応じてのみ利用可能であることにご注意ください。
 
     詳細については[データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)参照してください。
 
--   多要素認証（MFA）の管理を改善することで、 TiDB Cloudアカウントのセキュリティを強化します。この機能は、 TiDB Cloudのパスワードベースのログインに適用されます。
+-   多要素認証（MFA）の管理を改善することで、 TiDB Cloudアカウントのセキュリティを強化します。この機能は、TiDB Cloudのパスワードベースのログインに適用されます。
 
     詳細については[パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)参照してください。
 
@@ -636,7 +658,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     -   AWS の Apache Kafka の場合は、 [AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)手順に従ってネットワーク接続を構成します。
 
-    -   Google Cloud の Apache Kafka の場合は、 [Google Cloud でセルフホスト型 Kafka プライベート サービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)手順に従ってネットワーク接続を構成します。
+    -   Google Cloud の Apache Kafka の場合は、 [Google Cloud でセルフホスト型 Kafka プライベート サービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)の手順に従ってネットワーク接続を構成します。
 
     この機能を使用すると、追加の[プライベートデータリンクのコスト](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost)が発生することに注意してください。
 
@@ -682,7 +704,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   データエクスポートサービスの強化:
 
-    -   [TiDB Cloudコンソール](https://tidbcloud.com/)を介して[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)から Google Cloud Storage および Azure Blob Storage へのデータのエクスポートをサポートします。
+    -   [TiDB Cloudコンソール](https://tidbcloud.com/)介して[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)から Google Cloud Storage および Azure Blob Storage へのデータのエクスポートをサポートします。
 
     -   [TiDB Cloudコンソール](https://tidbcloud.com/)を介して Parquet ファイルでデータのエクスポートをサポートします。
 

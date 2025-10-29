@@ -10,7 +10,7 @@
     -   [TiDB Cloudの紹介](/tidb-cloud/tidb-cloud-intro.md)
     -   [MySQLの互換性](/mysql-compatibility.md)
 -   TiDB Cloudを使い始める
-    -   [TiDB Cloudを試してみる](/tidb-cloud/tidb-cloud-quickstart.md)
+    -   [TiDB Cloud を試してみる](/tidb-cloud/tidb-cloud-quickstart.md)
     -   [TiDB + AIを試す](/vector-search/vector-search-get-started-using-python.md)
     -   [HTAPを試してみる](/tidb-cloud/tidb-cloud-htap-quickstart.md)
     -   [TiDB Cloud CLI を試す](/tidb-cloud/get-started-with-cli.md)
@@ -59,7 +59,7 @@
         -   [SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md)
         -   [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md)
         -   [ジャンゴ](/develop/dev-guide-sample-application-python-django.md)
-    -   ノード.js
+    -   Node.js
         -   [ノード-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
         -   [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
         -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
@@ -129,15 +129,16 @@
 
 ## ガイド {#guides}
 
--   クラスタの管理
+-   インスタンスの管理
     -   [クラスタプランを選択](/tidb-cloud/select-cluster-tier.md)
-    -   TiDB Cloudクラスターの管理
-        -   [TiDB Cloudクラスタを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
+    -   TiDB Cloudインスタンスの管理
+        -   [TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)
         -   TiDB Cloudクラスタに接続する
             -   [接続の概要](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
             -   [パブリックエンドポイント経由で接続](/tidb-cloud/connect-via-standard-connection-serverless.md)
+            -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
             -   [プライベートエンドポイント経由でAlibaba Cloudに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
-        -   [TiDB Cloudデータのバックアップと復元](/tidb-cloud/backup-and-restore-serverless.md)
+        -   [TiDB Cloudデータのバックアップと復元](/tidb-cloud/premium/backup-and-restore-premium.md)
     -   TiFlashでHTAPクラスタを使用する
         -   [TiFlashの概要](/tiflash/tiflash-overview.md)
         -   [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)
@@ -205,15 +206,16 @@
 -   データの移行またはインポート
     -   [概要](/tidb-cloud/tidb-cloud-migration-overview.md)
     -   TiDB Cloudへのデータ移行
-        -   [TiDBセルフマネージドからTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)
+        -   [TiDBセルフマネージドからTiDB Cloudプレミアムへの移行](/tidb-cloud/premium/migrate-from-op-tidb-premium.md)
         -   [大規模データセットの MySQL シャードの移行とマージ](/tidb-cloud/migrate-sql-shards.md)
         -   [AWS DMS を使用して Amazon RDS for Oracle から移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
     -   TiDB Cloudへのデータのインポート
         -   [Cloud Storage からサンプルデータ (SQL ファイル) をインポートする](/tidb-cloud/import-sample-data-serverless.md)
-        -   [クラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)
+        -   [クラウドストレージからCSVファイルをインポートする](/tidb-cloud/premium/import-csv-files-premium.md)
+        -   [Amazon S3からCSVファイルをインポートする](/tidb-cloud/premium/import-from-s3-premium.md)
         -   [クラウドストレージからParquetファイルをインポートする](/tidb-cloud/import-parquet-files-serverless.md)
         -   [クラウドストレージからスナップショットファイルをインポートする](/tidb-cloud/import-snapshot-files-serverless.md)
-        -   [MySQL CLI によるインポート](/tidb-cloud/import-with-mysql-cli-serverless.md)
+        -   [MySQL CLI を使用してデータをインポートする](/tidb-cloud/premium/import-with-mysql-cli-premium.md)
     -   参照
         -   [TiDB Cloudの外部ストレージアクセスを構成する](/tidb-cloud/serverless-external-storage.md)
         -   [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)
@@ -466,8 +468,8 @@
     -   履歴データを読む
         -   ステイル読み取りを使用する（推奨）
             -   [ステイル読み取りの使用シナリオ](/stale-read.md)
-            -   [`As OF TIMESTAMP`を使用してステイル読み取りを実行する](/as-of-timestamp.md)
-            -   [`tidb_read_staleness`を使用してステイル読み取りを実行する](/tidb-read-staleness.md)
+            -   [`As OF TIMESTAMP`使用してステイル読み取りを実行する](/as-of-timestamp.md)
+            -   [`tidb_read_staleness`使用してステイル読み取りを実行する](/tidb-read-staleness.md)
             -   [`tidb_external_ts`を使用してステイル読み取り](/tidb-external-ts.md)
         -   [`tidb_snapshot`システム変数を使用する](/read-historical-data.md)
     -   システムテーブル
@@ -535,7 +537,7 @@
     -   認証
         -   [ログイン](/tidb-cloud/ticloud-auth-login.md)
         -   [ログアウト](/tidb-cloud/ticloud-auth-logout.md)
-        -   [だれだ](/tidb-cloud/ticloud-auth-whoami.md)
+        -   [誰だ](/tidb-cloud/ticloud-auth-whoami.md)
     -   サーバーレス
         -   [容量](/tidb-cloud/ticloud-serverless-capacity.md)
         -   [作成する](/tidb-cloud/ticloud-cluster-create.md)
@@ -594,7 +596,7 @@
         -   [スケジュール](/tidb-scheduling.md)
         -   [TSO](/tso.md)
     -   ストレージエンジン
-        -   TiKV
+        -   ティクブ
             -   [TiKVの概要](/tikv-overview.md)
             -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
         -   TiFlash
@@ -627,7 +629,7 @@
             -   [Lark経由でサポートチケットとやり取りする](/tidb-cloud/connected-lark-ticket-interaction.md)
     -   [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)
 -   よくある質問
-    -   [TiDB Cloudに関するよくある質問](/tidb-cloud/tidb-cloud-faq.md)
+    -   [TiDB Cloudよくある質問](/tidb-cloud/tidb-cloud-faq.md)
 
 ## リリース {#releases}
 

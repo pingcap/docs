@@ -5,7 +5,7 @@ summary: TiDB データベースの CREATE TABLE の使用法の概要。
 
 # テーブルの作成 {#create-table}
 
-この文は、現在選択されているデータベースに新しいテーブルを作成します。MySQLの`CREATE TABLE`文と同様に動作します。
+この文は、現在選択されているデータベースに新しいテーブルを作成します。MySQLの`CREATE TABLE`文と同様の動作をします。
 
 ## 概要 {#synopsis}
 
@@ -158,7 +158,7 @@ NextValueForSequence ::=
 |   "NEXTVAL" '(' TableName ')'
 ```
 
-`ROW_FORMAT`の*table_options*がサポートさ`MAX_ROWS` `KEY_BLOCK_SIZE` `ENGINE` `DELAY_KEY_WRITE` 。その他の`CONNECTION` （ `AVG_ROW_LENGTH`など`CHECKSUM` `COMPRESSION`解析されますが無視`STATS_PERSISTENT`れます`MIN_ROWS`
+以下`CHECKSUM` *table_options*がサポートされ`DELAY_KEY_WRITE`い`MAX_ROWS` 。その他`KEY_BLOCK_SIZE`オプション（ `AVG_ROW_LENGTH`など`COMPRESSION` `ROW_FORMAT`解析`STATS_PERSISTENT`れますが`MIN_ROWS`さ`CONNECTION` `ENGINE` 。
 
 | オプション                                        | 説明                                                                            | 例                                   |
 | -------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------- |
@@ -231,7 +231,7 @@ SELECT * FROM t1;
     +------+
     1 row in set (0.00 sec)
 
-テーブルが存在する場合は削除し、存在しない場合は条件付きでテーブルを作成します。
+テーブルが存在する場合はそれを削除し、存在しない場合は条件付きでテーブルを作成します。
 
 ```sql
 DROP TABLE IF EXISTS t1;
@@ -264,14 +264,21 @@ mysql> DESC t1;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
--   空間型を除くすべてのデータ型がサポートされています。
+-   空間タイプを除くすべてのデータ型がサポートされています。
+
 -   TiDB `RTREE` `BTREE` `HASH`インデックス タイプを受け入れますが、それらを無視します。
--   TiDB は`FULLTEXT`構文の解析をサポートしますが、 `FULLTEXT`インデックスの使用はサポートしません。
--   `GLOBAL`インデックス オプションを使用して`PRIMARY KEY`または`UNIQUE INDEX` [グローバルインデックス](/partitioned-table.md#global-indexes)として設定することは、 [パーティションテーブル](/partitioned-table.md)の TiDB 拡張であり、MySQL と互換性がありません。
+
+-   TiDB Self-Managed およびTiDB Cloud Dedicated は、 `FULLTEXT`構文の解析をサポートしますが、 `FULLTEXT`インデックスの使用はサポートしません。
+
+    > **注記：**
+    >
+    > 現在、特定の AWS リージョンの {{{ .starter }} および {{{ .essential }}} クラスターのみが[`FULLTEXT`構文とインデックス](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)サポートしています。
+
+-   `GLOBAL`インデックス オプションを使用して`PRIMARY KEY`または`UNIQUE INDEX` [グローバルインデックス](/partitioned-table.md#global-indexes)として設定することは、 [パーティションテーブル](/partitioned-table.md)の TiDB 拡張であり、MySQL とは互換性がありません。
 
 <CustomContent platform="tidb">
 
--   互換性のため、 `index_col_name`属性は長さオプションをサポートしており、デフォルトで最大3072バイトの長さ制限があります。長さ制限は`max-index-length`設定オプションで変更できます。詳細については[TiDB構成ファイル](/tidb-configuration-file.md#max-index-length)参照してください。
+-   互換性のため、 `index_col_name`属性はデフォルトで最大3072バイトの長さ制限を持つ長さオプションをサポートしています。長さ制限は`max-index-length`設定オプションで変更できます。詳細については[TiDB構成ファイル](/tidb-configuration-file.md#max-index-length)参照してください。
 
 </CustomContent>
 
@@ -281,7 +288,7 @@ mysql> DESC t1;
 
 </CustomContent>
 
--   `index_col_name`のうち`[ASC | DESC]`は現在解析されていますが無視されます (MySQL 5.7互換の動作)。
+-   `index_col_name`のうち`[ASC | DESC]`現在解析されていますが無視されます (MySQL 5.7互換の動作)。
 -   `COMMENT`属性は`WITH PARSER`オプションをサポートしていません。
 -   TiDBは、デフォルトで1つのテーブルあたり1017列、最大4096列をサポートします。InnoDBにおける対応する列数制限は1017列、MySQLにおけるハードリミットは4096列です。詳細については、 [TiDB の制限](/tidb-limitations.md)参照してください。
 -   TiDBは`HASH` 、 `RANGE` 、 `LIST` 、および`KEY` [パーティションタイプ](/partitioned-table.md#partitioning-types)をサポートします。サポートされていないパーティションタイプの場合、TiDBは`Warning: Unsupported partition type %s, treat as normal table`返します。ここで、 `%s`サポートされていない特定のパーティションタイプです。

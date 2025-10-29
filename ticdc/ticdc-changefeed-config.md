@@ -21,7 +21,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 -   `--changefeed-id` : レプリケーションタスクのID。形式は正規表現`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`に一致する必要があります。このIDが指定されていない場合、TiCDCは自動的にUUID（バージョン4形式）をIDとして生成します。
 
--   `--sink-uri` : レプリケーションタスクのダウンストリームアドレス`--sink-uri`以下の形式で設定してください。現在、このスキームは`mysql` 、 `tidb` 、 `kafka`サポートしています。
+-   `--sink-uri` : レプリケーションタスクのダウンストリームアドレス`--sink-uri`以下の形式で設定してください。現在、このスキームは`mysql` 、 `tidb` 、 `kafka`をサポートしています。
 
         [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
 
@@ -31,7 +31,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 -   `--target-ts` : チェンジフィードの終了TSOを指定します。このTSOまで、TiCDCクラスターはデータのプルを停止します。デフォルト値は空で、TiCDCはデータのプルを自動的に停止しません。
 
--   `--config` : 変更フィードの構成ファイルを指定します。
+-   `--config` : changefeed の構成ファイルを指定します。
 
 ## Changefeed 設定パラメータ {#changefeed-configuration-parameters}
 
@@ -50,13 +50,13 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 ### <code>force-replicate</code> {#code-force-replicate-code}
 
--   強制的に[有効なインデックスのないテーブルを複製する](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index)かどうかを指定します。
+-   強制的に[有効なインデックスのないテーブルを複製する](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index)するかどうかを指定します。
 -   デフォルト値: `false`
 
-### <code>enable-sync-point</code><span class="version-mark">バージョン6.3.0の新機能</span> {#code-enable-sync-point-code-span-class-version-mark-new-in-v6-3-0-span}
+### <code>enable-sync-point</code><span class="version-mark">バージョン 6.3.0 の新機能</span> {#code-enable-sync-point-code-span-class-version-mark-new-in-v6-3-0-span}
 
 -   バージョン 6.3.0 以降でサポートされ、デフォルトでは無効になっている Syncpoint 機能を有効にするかどうかを指定します。
--   v6.4.0 以降では、権限`SYSTEM_VARIABLES_ADMIN`または`SUPER`持つ changefeed のみが TiCDC Syncpoint 機能を使用できます。
+-   v6.4.0 以降では、 `SYSTEM_VARIABLES_ADMIN`または`SUPER`権限を持つ changefeed のみが TiCDC Syncpoint 機能を使用できます。
 -   この構成項目は、ダウンストリームが TiDB の場合にのみ有効になります。
 -   デフォルト値: `false`
 
@@ -64,7 +64,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 -   Syncpoint が上流スナップショットと下流スナップショットを調整する間隔を指定します。
 -   この構成項目は、ダウンストリームが TiDB の場合にのみ有効になります。
--   形式は`"h m s"`です。たとえば`"1h30m30s"` 。
+-   形式は`"h m s"`です。たとえば、 `"1h30m30s"` 。
 -   デフォルト値: `"10m"`
 -   最小値: `"30s"`
 
@@ -72,7 +72,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 -   下流テーブルにおける同期ポイントによるデータの保持期間を指定します。この期間を超過すると、データはクリーンアップされます。
 -   この構成項目は、ダウンストリームが TiDB の場合にのみ有効になります。
--   形式は`"h m s"`です。たとえば`"24h30m30s"` 。
+-   形式は`"h m s"`です。たとえば、 `"24h30m30s"` 。
 -   デフォルト値: `"24h"`
 
 ### <code>sql-mode</code> <span class="version-mark">v6.5.6、v7.1.3、v7.5.0 の新機能</span> {#code-sql-mode-code-span-class-version-mark-new-in-v6-5-6-v7-1-3-and-v7-5-0-span}
@@ -83,14 +83,14 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 ### <code>bdr-mode</code> {#code-bdr-mode-code}
 
 -   TiCDCを使用してBDR（双方向レプリケーション）クラスターをセットアップするには、このパラメータを`true`に変更し、TiDBクラスターをBDRモードに設定します。詳細については、 [双方向レプリケーション](/ticdc/ticdc-bidirectional-replication.md#bidirectional-replication)参照してください。
--   デフォルト値: `false` 、双方向レプリケーション (BDR) モードが有効になっていないことを示します。
+-   デフォルト値: `false` 、双方向レプリケーション (BDR) モードが有効になっていないことを示します
 
 ### <code>changefeed-error-stuck-duration</code> {#code-changefeed-error-stuck-duration-code}
 
--   内部エラーまたは例外が発生したときに、変更フィードが自動的に再試行される期間を指定します。
+-   内部エラーまたは例外が発生したときに、変更フィードが自動的に再試行できる期間を指定します。
 -   変更フィードで内部エラーまたは例外が発生し、このパラメータで設定された期間よりも長く継続すると、変更フィードは失敗状態になります。
--   変更フィードが失敗した状態の場合、回復するには変更フィードを手動で再起動する必要があります。
--   形式は`"h m s"`です。たとえば`"1h30m30s"` 。
+-   変更フィードが失敗した状態の場合、回復のために変更フィードを手動で再起動する必要があります。
+-   形式は`"h m s"`です。たとえば、 `"1h30m30s"` 。
 -   デフォルト値: `"30m"`
 
 ### マウンター {#mounter}
@@ -114,13 +114,13 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 <!-- Example: `['*.*', '!test.*']` -->
 
-#### フィルター.イベントフィルター {#filter-event-filters}
+#### filter.イベントフィルター {#filter-event-filters}
 
 詳細については[イベントフィルタールール](/ticdc/ticdc-filter.md#event-filter-rules)参照してください。
 
 ##### <code>matcher</code> {#code-matcher-code}
 
--   `matcher`は許可リストです。2 `matcher = ["test.worker"]` 、このルールが`test`データベース内の`worker`テーブルにのみ適用されることを意味します。
+-   `matcher`許可リストです。2 `matcher = ["test.worker"]`このルールが`test`データベース内の`worker`テーブルにのみ適用されることを意味します。
 
 ##### <code>ignore-event</code> {#code-ignore-event-code}
 
@@ -133,11 +133,11 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 ##### <code>ignore-delete-value-expr</code> {#code-ignore-delete-value-expr-code}
 
--   `ignore-delete-value-expr = "name = 'john'"`条件`name = 'john'`を含む`DELETE` DML を無視します。
+-   `ignore-delete-value-expr = "name = 'john'"`条件`name = 'john'`含む`DELETE` DML を無視します。
 
 ##### <code>ignore-insert-value-expr</code> {#code-ignore-insert-value-expr-code}
 
--   `ignore-insert-value-expr = "id >= 100"`条件`id >= 100`を含む`INSERT` DMLを無視します
+-   `ignore-insert-value-expr = "id >= 100"`条件`id >= 100`含む`INSERT` DMLを無視します
 
 ##### <code>ignore-update-old-value-expr</code> {#code-ignore-update-old-value-expr-code}
 
@@ -145,22 +145,22 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 ##### <code>ignore-update-new-value-expr</code> {#code-ignore-update-new-value-expr-code}
 
--   `ignore-update-new-value-expr = "gender = 'male'"` 、新しい値に`gender = 'male'`が含まれる`UPDATE` DMLを無視します。
+-   `ignore-update-new-value-expr = "gender = 'male'"`新しい値に`gender = 'male'`含まれる`UPDATE` DMLを無視します。
 
 ### スケジューラ {#scheduler}
 
 #### <code>enable-table-across-nodes</code> {#code-enable-table-across-nodes-code}
 
--   リージョンごとにレプリケーション用にテーブルを複数の TiCDC ノードに割り当てます。
+-   リージョンごとにレプリケーションを行うために、テーブルを複数の TiCDC ノードに割り当てます。
 
--   この構成項目は Kafka 変更フィードにのみ適用され、MySQL 変更フィードではサポートされません。
+-   この構成項目は Kafka 変更フィードにのみ影響し、MySQL 変更フィードではサポートされません。
 
--   `enable-table-across-nodes`が有効な場合、次の 2 つの割り当てモードがあります。
+-   `enable-table-across-nodes`が有効な場合、割り当てモードは 2 つあります。
 
-    1.  リージョン数に基づいてテーブルを割り当てます。これにより、各TiCDCノードはほぼ同じ数のリージョンを処理します。テーブルのリージョン数が[`region-threshold`](#region-threshold)を超える場合、テーブルはレプリケーションのために複数のノードに割り当てられます。デフォルト値は`region-threshold`ですが、現在は`100000`です。
-    2.  書き込みトラフィックに基づいてテーブルを割り当て、各TiCDCノードがほぼ同じ数の変更行を処理するようにします。この割り当ては、テーブル内の1分あたりの変更行数が[`write-key-threshold`](#write-key-threshold)を超えた場合にのみ有効になります。
+    1.  リージョン数に基づいてテーブルを割り当てます。これにより、各TiCDCノードはほぼ同数のリージョンを処理します。テーブルのリージョン数が[`region-threshold`](#region-threshold)を超える場合、テーブルはレプリケーションのために複数のノードに割り当てられます。デフォルト値は`region-threshold`ですが、現在は`100000`です。
+    2.  書き込みトラフィックに基づいてテーブルを割り当て、各TiCDCノードがほぼ同数の変更行を処理できるようにします。この割り当ては、テーブル内の1分あたりの変更行数が[`write-key-threshold`](#write-key-threshold)を超えた場合にのみ有効になります。
 
-    2つのモードのうち1つだけを設定する必要があります。1と`write-key-threshold` `region-threshold`が設定されている場合、TiCDCはトラフィック割り当てモード（つまり`write-key-threshold`を優先します。
+    2つのモードのうち1つだけを設定する必要があります。1と`region-threshold` `write-key-threshold`両方が設定されている場合、TiCDCはトラフィック割り当てモード（つまり`write-key-threshold`を優先します。
 
 -   デフォルトの値は`false`です。この機能を有効にするには`true`に設定してください。
 
@@ -182,9 +182,9 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 -   MQ タイプのシンクの場合、ディスパッチャーを使用してイベント ディスパッチャーを構成できます。
 -   v6.1.0 以降、TiDB はパーティションとトピックの 2 種類のイベント ディスパッチャーをサポートしています。
--   マッチャーのマッチング構文は、フィルター ルール構文と同じです。
+-   マッチャーの一致構文は、フィルター ルール構文と同じです。
 -   この構成項目は、ダウンストリームが MQ の場合にのみ有効になります。
--   下流のMQがPulsarの場合、 `partition`のルーティングルール`index-value` `ts`いずれにも指定されていない場合、各Pulsarメッセージはキーとして設定した文字列を使用してルーティングされます。例えば、あるマッチャーのルーティングルール`table`文字列`code`に指定すると、そのマッチャー`default`一致するすべてのPulsarメッセージは`code`をキーとしてルーティングされます。
+-   下流のMQがPulsarの場合、 `partition`のルーティングルール`index-value` `ts` `default`いずれにも指定されていない場合、各Pulsarメッセージはキーとして設定した文字列を使用してルーティングされます。例えば、あるマッチャーのルーティングルールを文字列`code`に`table`すると、そのマッチャーに一致するすべてのPulsarメッセージは`code`をキーとしてルーティングされます。
 
 #### <code>column-selectors</code> <span class="version-mark">v7.5.0 の新機能</span> {#code-column-selectors-code-span-class-version-mark-new-in-v7-5-0-span}
 
@@ -200,7 +200,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 <!-- Example: `"canal-json"` -->
 
-#### <code>delete-only-output-handle-key-columns</code> <span class="version-mark">v7.2.0 の新機能</span> {#code-delete-only-output-handle-key-columns-code-span-class-version-mark-new-in-v7-2-0-span}
+#### <code>delete-only-output-handle-key-columns</code><span class="version-mark">バージョン7.2.0の新機能</span> {#code-delete-only-output-handle-key-columns-code-span-class-version-mark-new-in-v7-2-0-span}
 
 -   DELETEイベントの出力を指定します。このパラメータは、canal-jsonおよびopen-protocolプロトコルでのみ有効です。
 -   このパラメータは`force-replicate`と互換性がありません。このパラメータと`force-replicate`両方が`true`に設定されている場合、TiCDC は変更フィードの作成時にエラーを報告します。
@@ -250,15 +250,15 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 -   ファイルディレクトリで使用する日付区切り文字の種類を指定します。詳細については、 [データ変更記録](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records)参照してください。
 -   この構成項目は、ダウンストリームがstorageサービスの場合にのみ有効になります。
--   デフォルト値: `day` 、ファイルを日ごとに分けることを意味します
--   `day` `month` `year` : `none`
+-   デフォルト値: `day` 、これはファイルを日ごとに分けることを意味します
+-   `month` `year` `day` : `none`
 
 #### <code>enable-partition-separator</code> {#code-enable-partition-separator-code}
 
 -   パーティションを区切り文字列として使用するかどうかを制御します。
 -   この構成項目は、ダウンストリームがstorageサービスの場合にのみ有効になります。
 -   デフォルト値: `true` 、テーブル内のパーティションが別々のディレクトリに保存されることを意味します
--   この設定は将来のバージョンでは非推奨となり、強制的に`true`に設定されます。下流のパーティションテーブルでのデータ損失を防ぐため、この設定はデフォルト値のままにしておくことをお勧めします。詳細については[問題番号 #11979](https://github.com/pingcap/tiflow/issues/11979)参照してください。使用例については[データ変更記録](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records)参照してください。
+-   この設定は将来のバージョンでは非推奨となり、強制的に`true`に設定されます。下流のパーティションテーブルでのデータ損失を防ぐため、この設定はデフォルト値のままにしておくことをお勧めします。詳細については[問題 #11979](https://github.com/pingcap/tiflow/issues/11979)参照してください。使用例については[データ変更記録](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records)参照してください。
 
 #### <code>debezium-disable-schema</code> {#code-debezium-disable-schema-code}
 
@@ -294,21 +294,21 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 -   バイナリデータのエンコード方法を指定します。
 -   デフォルト値: `base64`
--   値`hex`オプション: `base64`
+-   `hex`オプション: `base64`
 
 ##### <code>output-handle-key</code> {#code-output-handle-key-code}
 
--   ハンドルキー情報を出力するかどうかを制御します。この設定パラメータは内部実装専用であるため、設定することは推奨されません。
+-   ハンドルキー情報を出力するかどうかを制御します。この設定パラメータは内部実装のみに使用されるため、設定することは推奨されません。
 -   デフォルト値: `false`
 
 ##### <code>output-old-value</code> {#code-output-old-value-code}
 
 -   行データが変更される前に値を出力するかどうかを制御します。デフォルト値は false です。
 -   有効にすると ( `true`に設定)、 `UPDATE`イベントは 2 行のデータを出力します。最初の行は変更前のデータを出力する`DELETE`イベントで、2 番目の行は変更されたデータを出力する`INSERT`イベントです。
--   有効にすると、データ変更のある列の前に列`"is-update"`が追加されます。この追加された列は、現在の行のデータ変更が`UPDATE`イベントによるものか、それとも元の`INSERT`または`DELETE`イベントによるものかを識別するために使用されます。現在の行のデータ変更が`UPDATE`イベントによるものかを判断するために、列`"is-update"`の値は`true`になります。それ以外の場合は、列`false`になります。
+-   有効にすると、データ変更のある列の前に列`"is-update"`が追加されます。この追加された列は、現在の行のデータ変更が`UPDATE`番目のイベントによるものか、それとも元の`INSERT`または`DELETE`番目のイベントによるものかを識別するために使用されます。現在の行のデータ変更が`UPDATE`番目のイベントによるものかを判断するために、列`"is-update"`の値は`true`になります。それ以外の場合は、列`false`になります。
 -   デフォルト値: `false`
 
-TiCDCはv8.0.0以降、Simpleメッセージエンコーディングプロトコルをサポートしています。以下は、Simpleプロトコルの設定パラメータです。プロトコルの詳細については、 [TiCDCシンプルプロトコル](/ticdc/ticdc-simple-protocol.md)参照してください。
+TiCDCはv8.0.0以降、シンプルメッセージエンコーディングプロトコルをサポートしています。シンプルプロトコルの設定パラメータは以下のとおりです。プロトコルの詳細については、 [TiCDCシンプルプロトコル](/ticdc/ticdc-simple-protocol.md)参照してください。
 
 次の構成パラメータは、ブートストラップ メッセージの送信動作を制御します。
 
@@ -327,7 +327,7 @@ TiCDCはv8.0.0以降、Simpleメッセージエンコーディングプロトコ
 #### <code>send-bootstrap-to-all-partition</code> {#code-send-bootstrap-to-all-partition-code}
 
 -   すべてのパーティションにブートストラップ メッセージを送信するかどうかを制御します。
--   `false`に設定すると、ブートストラップ メッセージが対応するテーブル トピックの最初のパーティションにのみ送信されます。
+-   `false`に設定すると、ブートストラップ メッセージは対応するテーブル トピックの最初のパーティションにのみ送信されます。
 -   デフォルト値: `true` 、これは、対応するテーブルトピックのすべてのパーティションにブートストラップメッセージが送信されることを意味します。
 
 #### sink.kafka-config.codec-config {#sink-kafka-config-codec-config}
@@ -354,13 +354,13 @@ TiCDCはv8.0.0以降、Simpleメッセージエンコーディングプロトコ
 
 ### 一貫性のある {#consistent}
 
-REDOログを使用する場合の変更フィードのレプリケーション一貫性設定を指定します。詳細については、 [災害シナリオにおける最終的に一貫性のあるレプリケーション](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)参照してください。
+REDOログを使用する場合の変更フィードのレプリケーション整合性設定を指定します。詳細については、 [災害シナリオにおける結果整合性のあるレプリケーション](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)参照してください。
 
 注意: 一貫性関連の構成項目は、ダウンストリームがデータベースであり、REDO ログ機能が有効になっている場合にのみ有効になります。
 
 #### <code>level</code> {#code-level-code}
 
--   データ一貫性レベル。1 `"none"` 、REDO ログが無効であることを意味します。
+-   データ整合性レベル`"none"`は、REDO ログが無効であることを意味します。
 -   デフォルト値: `"none"`
 -   値`"eventual"`オプション: `"none"`
 
@@ -399,7 +399,7 @@ REDOログを使用する場合の変更フィードのレプリケーション�
 #### <code>compression</code> <span class="version-mark">v6.5.6、v7.1.3、v7.5.1、v7.6.0 の新機能</span> {#code-compression-code-span-class-version-mark-new-in-v6-5-6-v7-1-3-v7-5-1-and-v7-6-0-span}
 
 -   REDO ログ ファイルを圧縮する動作。
--   デフォルト値: `""` 、圧縮なしを意味します
+-   デフォルト値: `""` （圧縮なし）
 -   値`"lz4"`オプション: `""`
 
 #### <code>flush-concurrency</code> <span class="version-mark">v6.5.6、v7.1.3、v7.5.1、v7.6.0 の新機能</span> {#code-flush-concurrency-code-span-class-version-mark-new-in-v6-5-6-v7-1-3-v7-5-1-and-v7-6-0-span}
@@ -412,7 +412,7 @@ REDOログを使用する場合の変更フィードのレプリケーション�
 #### <code>integrity-check-level</code> {#code-integrity-check-level-code}
 
 -   単一行データのチェックサム検証を有効にするかどうかを制御します。
--   デフォルト値: `"none"` 、機能を無効にすることを意味します
+-   デフォルト値: `"none"` 、これは機能を無効にすることを意味します
 -   値`"correctness"`オプション: `"none"`
 
 #### <code>corruption-handle-level</code> {#code-corruption-handle-level-code}
@@ -585,7 +585,7 @@ token="xxxx"
 
 #### <code>worker-count</code> {#code-worker-count-code}
 
--   下流のクラウドstorageにデータ変更を保存するための同時実行性。
+-   ダウンストリームのクラウドstorageにデータ変更を保存するための同時実行。
 -   デフォルト値: `16`
 
 #### <code>flush-interval</code> {#code-flush-interval-code}
@@ -595,14 +595,14 @@ token="xxxx"
 
 #### <code>file-size</code> {#code-file-size-code}
 
--   データ変更ファイルは、ファイル内のバイト数が`file-size`超えるとクラウドstorageに保存されます。
+-   データ変更ファイルは、このファイル内のバイト数が`file-size`を超えるとクラウドstorageに保存されます。
 -   デフォルト値: `67108864` 、つまり 64 MiB
 
 #### <code>file-expiration-days</code> {#code-file-expiration-days-code}
 
--   ファイルを保持する期間`date-separator` `day`に設定されている場合にのみ有効になります。
+-   ファイルを保持する期間`date-separator`が`day`に設定されている場合にのみ有効になります。
 -   デフォルト値: `0` 、ファイルのクリーンアップが無効であることを意味します
--   `file-expiration-days = 1`と`file-cleanup-cron-spec = "0 0 0 * * *"`仮定すると、TiCDCは24時間を超えて保存されたファイルに対して、毎日00:00:00にクリーンアップを実行します。例えば、2023年12月2日の00:00:00に、TiCDCは2023年12月1日より前に生成されたファイルをクリーンアップしますが、2023年12月1日に生成されたファイルは影響を受けません。
+-   `file-expiration-days = 1`と`file-cleanup-cron-spec = "0 0 0 * * *"`仮定すると、TiCDCは24時間を超えて保存されたファイルに対して毎日00:00:00にクリーンアップを実行します。例えば、2023年12月2日の00:00:00に、TiCDCは2023年12月1日より前に生成されたファイルをクリーンアップしますが、2023年12月1日に生成されたファイルは影響を受けません。
 
 #### <code>file-cleanup-cron-spec</code> {#code-file-cleanup-cron-spec-code}
 
