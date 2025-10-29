@@ -46,7 +46,7 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
 
 ### Which TLS versions are supported to connect to my {{{ .premium }}} instance?
 
-For security reasons, {{{ .premium }}} only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions. See IETF [Deprecating TLS 1.0 and TLS 1.1](https://datatracker.ietf.org/doc/rfc8996/) for details.
+For security reasons, {{{ .premium }}} only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1. See IETF [Deprecating TLS 1.0 and TLS 1.1](https://datatracker.ietf.org/doc/rfc8996/) for details.
 
 ### Is two-way TLS authentication between my client and {{{ .premium }}} supported?
 
