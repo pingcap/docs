@@ -81,11 +81,11 @@ At the organization level, TiDB Cloud defines the following roles, in which `Org
 
 ### TiDB instance roles
 
-At the TiDB instance level, TiDB Cloud defines two roles: `Instance Administrator` and `Instance Viewer`.
+At the TiDB instance level, TiDB Cloud defines two roles: `Instance Admin` and `Instance Viewer`.
 
 > **Note:**
 >
-> - The `Organization Owner` automatically inherits all `Instance Administrator` permissions for every instance in the organization.
+> - The `Organization Owner` automatically inherits all `Instance Admin` permissions for every instance in the organization.
 > - Each TiDB instance role inherits all the permissions of the `Organization Viewer` role by default.
 > - If a member in your organization does not have any TiDB instance roles, the member cannot access any TiDB instances in your organization.
 
@@ -134,7 +134,7 @@ If you are in the `Organization Owner` role, you can invite users to your organi
 
 > **Note:**
 >
-> You can also [invite a user to access or manage a TiDB instance](#invite-a-user-to-access-or-manage-a-tidb-instance) directly according to your need, which also makes the user your organization member.
+> You can also [invite a user to access or manage a TiDB instance](#invite-a-user-to-access-or-manage-a-tidb-instance) directly as needed, which also makes the user your organization member.
 
 To invite a user to an organization, take the following steps:
 
@@ -149,7 +149,7 @@ To invite a user to an organization, take the following steps:
     > **Tip:**
     >
     > - The default role at the organization level is `Organization Viewer`.
-    > - If you want to invite multiple members at one time, you can enter multiple email addresses.
+    > - If you want to invite multiple users at one time, you can enter multiple email addresses.
     > - The invited user does not have access to any TiDB instances by default. To grant TiDB instance permissions to the user, see [Invite a user to access or manage a TiDB instance](#invite-a-user-to-access-or-manage-a-tidb-instance).
 
 5. If you only need to assign the user an organization role and do not need to assign any project or TiDB instance roles, disable the **Add access for projects and instances** option.
@@ -158,7 +158,7 @@ To invite a user to an organization, take the following steps:
 
 7. After receiving this email, the user needs to click the link in the email to verify the identity, and a new page shows.
 
-8. If the invited email address has not signed up for a TiDB Cloud account, the user is directed to the sign-up page to create an account.
+8. If the invited email address has not been used to sign up for a TiDB Cloud account, the user is directed to the sign-up page to create an account.
 
 > **Note:**
 >
