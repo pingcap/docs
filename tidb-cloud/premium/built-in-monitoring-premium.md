@@ -31,7 +31,7 @@ The following sections illustrate the metrics on the **Metrics** page for {{{ .p
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| Request Units per Second | Total RU per second | The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction. In addition to queries that you run, request units can be consumed by background activities, so when the QPS is 0, the request units per second may not be zero. |
+| Request Units per Second | Total RU per second | The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction. In addition to queries that you run, request units can be consumed by background activities, so when the QPS is 0, the request units per second might  not be zero. |
 | Used Storage Size | {type} | The size of the row store and the size of the column store. |
 | Query Per Second | All, {SQL type} | The number of SQL statements executed per second in all TiDB instances, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
 | Query Duration | avg, avg-{SQL type}, 99, 99-{SQL type} | The duration from receiving a request from the client to TiDB until TiDB executes the request and returns the result to the client. |
