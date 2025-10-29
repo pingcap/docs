@@ -156,4 +156,4 @@ To restore a deleted instance from the Recycle Bin, take the following steps:
 
 ## Limitations
 
-- Manual backups are not supported for Premium instances.
+Manual backups are not supported for Premium instances.
