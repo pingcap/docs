@@ -31,9 +31,9 @@ There are two network connection types for {{{ .premium }}}:
 
 - [Public endpoint](/tidb-cloud/premium/connect-to-premium-via-standard-connection.md)
 
-  The standard connection exposes a public endpoint, so you can connect to your TiDB cluster via a SQL client from your laptop.
+  The standard connection exposes a public endpoint, so you can connect to your TiDB instance via a SQL client from your laptop.
 
-To ensure the security of data transmission, you need to [establish a TLS connection](/tidb-cloud/tidb-cloud-tls-connect-to-premium.md) from your client to your cluster.
+To ensure the security of data transmission, you need to [establish a TLS connection](/tidb-cloud/tidb-cloud-tls-connect-to-premium.md) from your client to your instance.
 
 The following table shows the network you can use:
 
@@ -43,4 +43,4 @@ The following table shows the network you can use:
 
 ## What's next
 
-After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](/basic-sql-operations.md).
+After you have successfully connected to your TiDB instance, you can [explore SQL statements with TiDB](/basic-sql-operations.md).
