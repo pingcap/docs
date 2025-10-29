@@ -20,25 +20,24 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 - New system variable: [`tidb_stats_update_during_ddl`](/system-variables.md#tidb_stats_update_during_ddl)
 
+- Add the `tidb_opt_enable_no_decorrelate_in_select` system variable to control whether to decorrelate subqueries in the `SELECT` list [#51116](https://github.com/pingcap/tidb/issues/51116) @[terry1purcell](https://github.com/terry1purcell) <!--tw@Oreoxmt -->
+
+- Add the `tidb_opt_enable_semi_join_rewrite` system variable to control whether to rewrite `EXISTS` subqueries [#44850](https://github.com/pingcap/tidb/issues/44850) @[terry1purcell](https://github.com/terry1purcell) <!--tw@Oreoxmt -->
+
 ## Improvements
 
 + TiDB <!--tw@Oreoxmt: 11 notes-->
 
     - (dup): release-9.0.0.md(beta.1) > # SQL 功能 * 支持对分区表的非唯一列创建全局索引 [#58650](https://github.com/pingcap/tidb/issues/58650) @[Defined2014](https://github.com/Defined2014) @[mjonss](https://github.com/mjonss)
     - (dup): release-9.0.0.md(beta.1) > 改进提升> TiDB - 支持由 `IN` 子查询而来的 Semi Join 使用 `semi_join_rewrite` 的 Hint [#58829](https://github.com/pingcap/tidb/issues/58829) @[qw4990](https://github.com/qw4990)
-    - 微调了参数 tidb_opt_ordering_index_selectivity_ratio 生效时的估算策略 [#62817](https://github.com/pingcap/tidb/issues/62817) @[terry1purcell](https://github.com/terry1purcell)
-    - 新增配置项 tidb_opt_enable_semi_join_rewrite 去控制 exists 子查询是否需要被改写 [#44850](https://github.com/pingcap/tidb/issues/44850) @[terry1purcell](https://github.com/terry1purcell)
-    - 微调了优化器选择逻辑，在某些情况下新索引更容易被选中 [#57948](https://github.com/pingcap/tidb/issues/57948) @[terry1purcell](https://github.com/terry1purcell)
-    - 优化了 NDV 较小的列的查询估算逻辑 [#61792](https://github.com/pingcap/tidb/issues/61792) @[terry1purcell](https://github.com/terry1purcell)
-    - 微调了 limit offset 出现在 Index Join 查询中的估算策略 [#45077](https://github.com/pingcap/tidb/issues/45077) @[qw4990](https://github.com/qw4990)
-    - 新增 session variable “tidb_opt_enable_no_decorrelate_in_select” 去控制 select list 中的子查询是否需要被解关联  [#51116](https://github.com/pingcap/tidb/issues/51116) @[terry1purcell](https://github.com/terry1purcell)
-    - 优化了 Merge join 计算 cost 可能存在遗漏 filter 的情况  [#62917](https://github.com/pingcap/tidb/issues/62917) @[qw4990](https://github.com/qw4990)
-    - 优化了在统计信息收集不及时情况下，越界估算的策略 [#58068](https://github.com/pingcap/tidb/issues/58068) @[terry1purcell](https://github.com/terry1purcell)
-    - 在执行时间概览中添加 Backoff 时间以便调试 [#61441](https://github.com/pingcap/tidb/issues/61441) @[dbsid](https://github.com/dbsid)
-    - 在审计日志插件中添加语句 ID 信息 [#63525](https://github.com/pingcap/tidb/issues/63525) @[YangKeao](https://github.com/YangKeao)
-    - 为审计日志插件添加缓冲日志支持：[#63650](https://github.com/pingcap/tidb/issues/63650) @[bb7133](https://github.com/bb7133)
-        - instance.plugin_audit_log_flush_interval：刷新缓冲审计日志的时间间隔
-        - instance.plugin_audit_log_buffer_size：插件审计日志的缓冲区大小（字节），默认值为 0（不使用缓冲） 
+    - Optimize the estimation strategy when the `tidb_opt_ordering_index_selectivity_ratio` system variable takes effect [#62817](https://github.com/pingcap/tidb/issues/62817) @[terry1purcell](https://github.com/terry1purcell)
+    - Adjust the optimizer selection logic to make newly created indexes more likely to be chosen in certain scenarios [#57948](https://github.com/pingcap/tidb/issues/57948) @[terry1purcell](https://github.com/terry1purcell)
+    - Optimize the query estimation logic for columns with a small NDV (number of distinct values) [#61792](https://github.com/pingcap/tidb/issues/61792) @[terry1purcell](https://github.com/terry1purcell)
+    - Optimize the estimation strategy for Index Join queries that include `LIMIT OFFSET` [#45077](https://github.com/pingcap/tidb/issues/45077) @[qw4990](https://github.com/qw4990)
+    - Optimize the scenario where Merge Join might miss filter conditions when calculating costs [#62917](https://github.com/pingcap/tidb/issues/62917) @[qw4990](https://github.com/qw4990)
+    - Optimize the out-of-range estimation strategy when statistics are not collected in time [#58068](https://github.com/pingcap/tidb/issues/58068) @[terry1purcell](https://github.com/terry1purcell)
+    - Add the backoff time metric to the execution time overview to facilitate debugging [#61441](https://github.com/pingcap/tidb/issues/61441) @[dbsid](https://github.com/dbsid)
+    - Add statement ID information to the audit log plugin [#63525](https://github.com/pingcap/tidb/issues/63525) @[YangKeao](https://github.com/YangKeao)
 
 + TiKV <!--tw@lilin90: 6 notes-->
 
