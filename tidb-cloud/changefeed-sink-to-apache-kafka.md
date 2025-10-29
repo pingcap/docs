@@ -116,7 +116,7 @@ Private Connect leverages **Private Link** or **Private Service Connect** techno
 
 TiDB Cloud currently supports Private Connect only for self-hosted Kafka. It does not support direct integration with MSK, Confluent Kafka, or other Kafka SaaS services. To connect to these Kafka SaaS services via Private Connect, you can deploy a [kafka-proxy](https://github.com/grepplabs/kafka-proxy) as an intermediary, effectively exposing the Kafka service as self-hosted Kafka.
 
-If your Apache Kafka service is hosted on AWS, follow [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md) to configure the network connection and obtain the **Bootstrap Ports** information, and then follow [Set Up Private Endpoint for Changefeeds](/tidb-cloud/set-up-sink-private-endpoint-premium.md) to create a private endpoint.
+If your Apache Kafka service is hosted on AWS, follow [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md) to configure the network connection and obtain the **Bootstrap Ports** information, and then follow [Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) to create a private endpoint.
 
 </div>
 <div label="Public IP">

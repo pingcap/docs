@@ -17,8 +17,7 @@ This document describes how to create a private endpoint for changefeeds in your
 Only users with any of the following roles in your organization can create private endpoints for changefeeds:
 
 - `Organization Owner`
-- `Instance Admin` for the corresponding instance
-
+- `Instance Administrator` for the corresponding instance
 
 For more information about roles in TiDB Cloud, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
 

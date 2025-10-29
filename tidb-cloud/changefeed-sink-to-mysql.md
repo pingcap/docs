@@ -90,7 +90,7 @@ Make sure that your TiDB Cloud instance can connect to the MySQL service.
 
 Private endpoints leverage **Private Link** or **Private Service Connect** technologies from cloud providers, enabling resources in your VPC to connect to services in other VPCs through private IP addresses, as if those services were hosted directly within your VPC.
 
-You can connect your TiDB Cloud instance to your MySQL service securely through a private endpoint. If the private endpoint is not available for your MySQL service, follow [Set Up Private Endpoint for Changefeeds](/tidb-cloud/set-up-sink-private-endpoint-premium.md) to create one.
+You can connect your TiDB Cloud instance to your MySQL service securely through a private endpoint. If the private endpoint is not available for your MySQL service, follow [Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) to create one.
 
 </CustomContent>
 
