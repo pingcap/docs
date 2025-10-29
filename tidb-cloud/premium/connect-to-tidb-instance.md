@@ -33,7 +33,7 @@ There are two network connection types for {{{ .premium }}}:
 
   The standard connection exposes a public endpoint, so you can connect to your TiDB instance via a SQL client from your laptop.
 
-To ensure the security of data transmission, you need to [establish a TLS connection](/tidb-cloud/tidb-cloud-tls-connect-to-premium.md) from your client to your instance.
+To ensure the security of data transmission, you need to [establish a TLS connection](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md) from your client to your instance.
 
 The following table shows the network you can use:
 

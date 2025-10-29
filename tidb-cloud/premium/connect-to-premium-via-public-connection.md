@@ -14,7 +14,7 @@ This document describes how to connect to your {{{ .premium }}} instance via pub
 
 ## Prerequisite: Configure IP access list
 
-For public connections, {{{ .premium }}} only allows client connections from addresses in the IP access list. If you have not configured the IP access list, follow the steps in [Configure an IP Access List](/tidb-cloud/configure-ip-access-list-premium.md) to configure it before your first connection.
+For public connections, {{{ .premium }}} only allows client connections from addresses in the IP access list. If you have not configured the IP access list, follow the steps in [Configure an IP Access List](/tidb-cloud/premium/configure-ip-access-list-premium.md) to configure it before your first connection.
 
 ## Connect to the instance
 
@@ -34,7 +34,7 @@ To connect to a {{{ .premium }}} instance via public connection, take the follow
 
 3. In the connection dialog, select **Public** from the **Connection Type** drop-down list.
 
-    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](/tidb-cloud/configure-ip-access-list-premium.md) to configure it before your first connection.
+    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](/tidb-cloud/premium/configure-ip-access-list-premium.md) to configure it before your first connection.
 
 4. Click **CA cert** to download CA cert for TLS connection to TiDB instances. The CA cert supports TLS 1.2 version by default.
 
