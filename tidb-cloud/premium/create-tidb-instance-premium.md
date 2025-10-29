@@ -45,7 +45,6 @@ If you have the `Organization Owner` role, you can create a {{{ .premium }}} ins
     >
     > If **Switch to Private Preview** is not visible in the lower-left corner of your TiDB Cloud console, it means that your organization has not been invited to the private preview of {{{ .premium }}}. In this case, you can click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support** to apply for {{{ .premium }}}.
 
-
 2. On the **TiDB Instances** page, click **Create Instance**.
 3. Enter a name for your {{{ .premium }}} instance.
 4. Choose a cloud provider and a region where you want to host your instance.
