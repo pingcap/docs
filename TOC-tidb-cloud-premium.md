@@ -227,7 +227,7 @@
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
     - [Standard SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md)
     - [Organization SSO Authentication](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
-    - [Identity Access Management](/tidb-cloud/manage-user-access.md)
+    - [Identity Access Management](/tidb-cloud/premium/manage-user-access-premium.md)
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - Network Access Control
     - [Configure an IP Access List](/tidb-cloud/premium/configure-ip-access-list-premium.md)
