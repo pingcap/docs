@@ -78,7 +78,6 @@ At the organization level, TiDB Cloud defines the following roles, in which `Org
 >
 > - The `Organization Console Audit Manager` role manages audit logging in the TiDB Cloud console only, not database audit logging.
 
-
 ### TiDB instance roles
 
 At the TiDB instance level, TiDB Cloud defines two roles: `Instance Admin` and `Instance Viewer`.
