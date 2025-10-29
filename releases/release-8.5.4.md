@@ -52,9 +52,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + PD <!--tw@Oreoxmt: 3 notes-->
 
-    - degrade some unecessary error log [#9370](https://github.com/tikv/pd/issues/9370) @[bufferflies](https://github.com/bufferflies)
-    - upgrade the golang and dependent version[#9788](https://github.com/tikv/pd/issues/9788) @[JmPotato](https://github.com/JmPotato)
-    - support to distribute table feature, make scatter easier #[8986](https://github.com/tikv/pd/issues/8986)  @[bufferflies](https://github.com/bufferflies)
+    - Reduce unnecessary error logs [#9370](https://github.com/tikv/pd/issues/9370) @[bufferflies](https://github.com/bufferflies)
+    - Upgrade the Golang version to 1.23.12 and update related dependencies [#9788](https://github.com/tikv/pd/issues/9788) @[JmPotato](https://github.com/JmPotato)
+    - Support scattering Regions at the table level to achieve balanced distribution across `scatter-role` and `engine` dimensions [#8986](https://github.com/tikv/pd/issues/8986) @[bufferflies](https://github.com/bufferflies)
 
 + TiFlash <!--tw@qiancai: 4 notes-->
 
@@ -136,10 +136,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     + TiCDC <!--tw@Oreoxmt: 7 notes-->
 
-        - Fix the issue that configuring the column dispatcher with virtual columns might cause a panic. [#12241](https://github.com/pingcap/tiflow/issues/12241) @[wk989898](https://github.com/wk989898)
-        - Fix the issue that closing ddl puller might cause a panic. [#12244](https://github.com/pingcap/tiflow/issues/12244) @[wk989898](https://github.com/wk989898)
-        - Support discarding unsupported DDL by setting `ignore-txn-start-ts` in filter. [#12286](https://github.com/pingcap/tiflow/issues/12286) @[asddongmen](https://github.com/asddongmen)
-        - Fix the issue that using Azure Downstream might cause stuck. [#12277] (https://github.com/pingcap/tiflow/issues/12277) @[zurakutsia](https://github.com/zurakutsia)
-        - Fix the issue that `drop foreign key` is not replicated to downstream [#12328](https://github.com/pingcap/tiflow/issues/12328) @[3AceShowHand](https://github.com/3AceShowHand)
-        - Fix the panic issue when subscribe the region and meet rollback and prewrite entry [#19048](https://github.com/tikv/tikv/issues/19048) @[3AceShowHand](https://github.com/3AceShowHand)
-        - Fix a TiKV assertion panic [#18498](https://github.com/tikv/tikv/issues/18498) @[tharanga](https://github.com/tharanga)
+        - Fix a panic that could occur when configuring a Column-type partition dispatcher that includes virtual columns [#12241](https://github.com/pingcap/tiflow/issues/12241) @[wk989898](https://github.com/wk989898)
+        - Fix a panic that could occur when closing the DDL puller [#12244](https://github.com/pingcap/tiflow/issues/12244) @[wk989898](https://github.com/wk989898)
+        - Support filtering unsupported DDL types through the `ignore-txn-start-ts` parameter in the `filter` configuration [#12286](https://github.com/pingcap/tiflow/issues/12286) @[asddongmen](https://github.com/asddongmen)
+        - Fix the issue that Changefeed tasks might get stuck when using Azure Blob Storage as the downstream [#12277](https://github.com/pingcap/tiflow/issues/12277) @[zurakutsia](https://github.com/zurakutsia)
+        - Fix the issue that `DROP FOREIGN KEY` DDL is not replicated to the downstream [#12328](https://github.com/pingcap/tiflow/issues/12328) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue that TiCDC might panic when encountering rollback and prewrite entries during Region subscription [#19048](https://github.com/tikv/tikv/issues/19048) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue that assertion errors in TiKV might cause TiCDC to panic [#18498](https://github.com/tikv/tikv/issues/18498) @[tharanga](https://github.com/tharanga)
