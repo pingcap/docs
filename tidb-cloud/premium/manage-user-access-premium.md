@@ -7,7 +7,7 @@ summary: Learn how to manage identity access in {{{ .premium }}}.
 
 This document describes how to manage access to organizations, TiDB instances, roles, and user profiles in {{{ .premium }}}.
 
-Before accessing TiDB Cloud, [create a TiDB Cloud account](https://tidbcloud.com/free-trial). You can either sign up with email and password so that you can [manage your password using TiDB Cloud](/tidb-cloud/tidb-cloud-password-authentication.md), or choose your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
+Before you can use TiDB Cloud, [sign up for an account](https://tidbcloud.com/free-trial). You can either sign up with email and password to [manage your password in TiDB Cloud](/tidb-cloud/tidb-cloud-password-authentication.md), or choose your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
 
 ## Organizations and TiDB instances
 
