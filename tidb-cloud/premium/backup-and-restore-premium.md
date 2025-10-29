@@ -139,7 +139,7 @@ To restore your data to a new instance, take the following steps:
 
 6. Click **Restore** to start the restore process.
 
-Once the restore process begins, the instance status will first change to **Creating**. After the creation is complete, it will transition to **Restoring**. The instance remains unavailable until the restore finishes and the status becomes **Available**.
+    When the restore process starts, the instance status first changes to **Creating**. After the creation is complete, it changes to **Restoring**. The instance remains unavailable until the restore finishes and the status changes to **Available**.
 
 ### Restore from Recycle Bin
 
