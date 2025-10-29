@@ -29,7 +29,7 @@ There are two network connection types for {{{ .premium }}}:
 
     Private endpoint connection provides a private endpoint to allow SQL clients in your VPC to securely access services over AWS PrivateLink, which provides highly secure and one-way access to database services with simplified network management.
 
-- [Public endpoint](/tidb-cloud/premium/connect-to-premium-via-standard-connection.md)
+- [Public endpoint](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)
 
     The standard connection exposes a public endpoint, so you can connect to your TiDB instance via a SQL client from your laptop.
 
