@@ -151,7 +151,7 @@
     - [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md)
   - Monitor and Alert
     - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
-    - [Built-in Metrics](/tidb-cloud/built-in-monitoring.md)
+    - [Built-in Metrics](/tidb-cloud/premium/built-in-monitoring-premium.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [Analyze Performance](/tidb-cloud/tune-performance.md)
