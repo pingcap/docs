@@ -134,7 +134,7 @@
     - [Create a TiDB Cloud Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
     - Connect to Your TiDB Cloud Cluster
       - [Connection Overview](/tidb-cloud/premium/connect-to-tidb-instance.md)
-      - [Connect via Public Endpoint](/tidb-cloud/premium/connect-to-premium-via-standard-connection.md)
+      - [Connect via Public Endpoint](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)
       - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
     - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/backup-and-restore-serverless.md)
   - Use an HTAP Cluster with TiFlash

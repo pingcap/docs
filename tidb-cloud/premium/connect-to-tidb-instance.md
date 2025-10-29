@@ -1,9 +1,9 @@
 ---
-title: Connect to Your TiDB Cloud Instance
-summary: Learn how to connect to your TiDB Cloud instance via different methods.
+title: Connect to Your {{{ .premium }}} Instance
+summary: Learn how to connect to your {{{ .premium }}} instance via different methods.
 ---
 
-# Connect to Your TiDB Cloud Instance
+# Connect to Your {{{ .premium }}} Instance
 
 This document describes how to connect to your {{{ .premium }}} instance.
 
