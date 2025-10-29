@@ -5,13 +5,13 @@ summary: Learn how to manage identity access in {{{ .premium }}}.
 
 # Identity Access Management for {{{ .premium }}}
 
-This document describes how to manage access to organizations, TiDB instances, roles, and user profiles in {{{ .premium }}}.
+This document describes how to manage user access, roles, and permissions across organizations and TiDB instances in {{{ .premium }}}.
 
 Before accessing TiDB Cloud, [create a TiDB Cloud account](https://tidbcloud.com/free-trial). You can either sign up with email and password so that you can [manage your password using TiDB Cloud](/tidb-cloud/tidb-cloud-password-authentication.md), or choose your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
 
 ## Organizations and TiDB instances
 
-{{{ .premium }}} provides a hierarchical structure based on organizations and TiDB instances to facilitate the management of TiDB Cloud users and TiDB instances. If you are an organization owner, you can create multiple TiDB instances in your organization.
+{{{ .premium }}} uses a hierarchical structure of organizations and instances to help you manage users and TiDB instances efficiently. As an `Organization Owner`, you can create and manage multiple instances within your organization.
 
 For example:
 
@@ -23,70 +23,70 @@ For example:
     ...
 ```
 
-Under this structure:
+In this structure:
 
-- To access an organization, a user must be a member of that organization.
-- To access a TiDB instance, a user must at least have the read access to the TiDB instance in that organization.
+- Users can access an organization only if they are members of it.
+- To access a TiDB instance, users need at least read permissions for that instance in the organization.
 
 For more information about user roles and permissions, see [User Roles](#user-roles).
 
 ### Organizations
 
-An organization can contain multiple TiDB instances.
+An organization can include multiple TiDB instances.
 
-TiDB Cloud calculates billing at the organization level and provides the billing details for each TiDB instance.
+TiDB Cloud calculates billing at the organization level, with the billing details available for each instance.
 
-If you are an `Organization Owner`, you have the highest permission in your organization.
+If you are an `Organization Owner`, you have full administrative privileges in your organization.
 
 For example, you can do the following:
 
-- Create different TiDB instances for different purposes.
-- Assign different users with different organization roles and instance roles.
-- Configure organization settings. For example, configure the time zone for your organization.
+- Create TiDB instances for different purposes.
+- Assign organization-level and instance-level roles to different users.
+- Configure organization-wide settings such as time zone.
 
 ### TiDB instances
 
-If you are an `Instance Admin`, you can manage TiDB instance settings.
+If you are an `Instance Admin`, you can manage settings and operations for a specific instance.
 
 For example, you can do the following:
 
-- Delete the TiDB instance according to your business needs.
-- Configure TiDB instance settings.
+- Delete a TiDB instance when it is no longer needed.
+- Modify instance configurations as needed.
 
 ## User roles
 
-TiDB Cloud defines different user roles to manage different permissions of TiDB Cloud users in organizations, TiDB instances, or both.
+TiDB Cloud defines different user roles to control permissions at both the organization and TiDB instance levels.
 
-You can grant roles to a user at the organization level or at the TiDB instance level. Make sure to carefully plan the hierarchy of your organizations and TiDB instances for security considerations.
+You can grant roles to users at the organization level or at the TiDB instance level. It is recommended to plan your hierarchy carefully to ensure least‑privilege access and maintain security.
 
 ### Organization roles
 
-At the organization level, TiDB Cloud defines five roles, in which `Organization Owner` can invite members and grant organization roles to members.
+At the organization level, TiDB Cloud defines the following roles, in which `Organization Owner` can invite members and grant organization roles to members.
 
 | Permission  | `Organization Owner` | `Organization Billing Manager` | `Organization Billing Viewer` | `Organization Console Audit Manager` | `Organization Viewer` |
 |---|---|---|---|---|---|
 | Manage organization settings, such as TiDB instances, API keys, and time zones. | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Invite users to or remove users from an organization, and edit organization roles of users. | ✅ | ❌ | ❌ | ❌ | ❌ |
-| All the permissions of `Instance Admin` for all TiDB instances in the organization. | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Edit payment information for the organization. | ✅ | ✅ | ❌ | ❌ | ❌ |
-| View bills and use [cost explorer](/tidb-cloud/tidb-cloud-billing.md#cost-explorer). | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Manage TiDB Cloud [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md) for the organization. | ✅ | ❌ | ❌ | ✅ | ❌ |
-| View all users in the organization. | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Add or remove organization members, and edit organization roles. | ✅ | ❌ | ❌ | ❌ | ❌ |
+| `Instance Admin` permissions for all TiDB instances in the organization. | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Manage payment information for the organization. | ✅ | ✅ | ❌ | ❌ | ❌ |
+| View billing and use [Cost Explorer](/tidb-cloud/tidb-cloud-billing.md#cost-explorer). | ✅ | ✅ | ✅ | ❌ | ❌ |
+| Manage [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md) for the organization. | ✅ | ❌ | ❌ | ✅ | ❌ |
+| View all organization members. | ✅ | ❌ | ❌ | ❌ | ❌ |
 | View organization name and time zone. | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 > **Note:**
 >
-> - The `Organization Console Audit Manager` role (renamed from `Organization Console Audit Admin`) is used to manage audit logging in the TiDB Cloud console, instead of database audit logging.
-> - The `Organization Billing Manager` role is renamed from `Organization Billing Admin`, and the `Organization Viewer` role is renamed from `Organization Member`.
+> - The `Organization Console Audit Manager` role manages audit logging in the TiDB Cloud console only, not database audit logging.
+
 
 ### TiDB instance roles
 
-At the TiDB instance level, TiDB Cloud defines two roles.
+At the TiDB instance level, TiDB Cloud defines two roles: `Instance Administrator` and `Instance Viewer`.
 
 > **Note:**
 >
-> - `Organization Owner` has all the permissions of <code>Instance Admin</code> for all TiDB instances.
-> - Each TiDB instance role has all the permissions of <code>Organization Viewer</code> by default.
+> - The `Organization Owner` automatically inherits all `Instance Administrator` permissions for every instance in the organization.
+> - Each TiDB instance role inherits all the permissions of the `Organization Viewer` role by default.
 > - If a member in your organization does not have any TiDB instance roles, the member cannot access any TiDB instances in your organization.
 
 | Permission  | `Instance Admin` | `Instance Viewer` |
@@ -96,7 +96,7 @@ At the TiDB instance level, TiDB Cloud defines two roles.
 | Manage TiDB instance operations, such as TiDB instance creation, modification, and deletion. | ✅ | ❌ |
 | Manage TiDB instance data, such as data import, data backup and restore, and data migration. | ✅ | ❌ |
 | Manage [changefeeds](/tidb-cloud/changefeed-overview.md). | ✅ | ❌ |
-| Review and reset TiDB instance passwords. | ✅ | ❌ |
+| Review and reset the root password for the TiDB instance. | ✅ | ❌ |
 | View the overview, backup records, metrics, events, and [changefeeds](/tidb-cloud/changefeed-overview.md) of the TiDB instance. | ✅ | ✅ |
 
 ## Manage organization access
