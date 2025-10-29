@@ -8,6 +8,28 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## October 28, 2025
+
+**General changes**
+
+- **TiDB Cloud Starter and TiDB Cloud Essential**
+
+    To improve connection stability and prevent unexpected disconnections during TiDB server restarts or maintenance, it is recommended that you set the maximum lifetime of your database connections to less than 30 minutes.
+
+    For more information, see [Configure the lifetime of connections](/develop/dev-guide-connection-parameters.md#configure-the-lifetime-of-connections).
+
+**API changes**
+
+- **TiDB Cloud Dedicated**
+
+    Introduce the following [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) API endpoints for managing third-party monitoring integrations:
+
+    - List integrations
+    - Create an integration
+    - Delete an integration
+
+  For more information, see [TiDB Cloud Dedicated API](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated/).
+
 ## October 21, 2025
 
 **General changes**

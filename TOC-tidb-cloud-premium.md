@@ -128,15 +128,16 @@
 
 ## GUIDES
 
-- Manage Cluster
+- Manage Instances
   - [Select Your Cluster Plan](/tidb-cloud/select-cluster-tier.md)
-  - Manage TiDB Cloud Clusters
-    - [Create a TiDB Cloud Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+  - Manage TiDB Cloud Instances
+    - [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)
     - Connect to Your TiDB Cloud Cluster
-      - [Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
-      - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
+      - [Connection Overview](/tidb-cloud/premium/connect-to-tidb-instance.md)
+      - [Connect via Public Endpoint](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)
+      - [Connect via Private Endpoint with AWS](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
       - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
-    - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/backup-and-restore-serverless.md)
+    - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/premium/backup-and-restore-premium.md)
   - Use an HTAP Cluster with TiFlash
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
     - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
@@ -200,19 +201,20 @@
     - [TiKV Follower Read](/follower-read.md)
     - [Coprocessor Cache](/coprocessor-cache.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
-  - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
+  - [Delete a TiDB Instance](/tidb-cloud/premium/delete-tidb-instance.md)
 - Migrate or Import Data
   - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)
   - Migrate Data into TiDB Cloud
-    - [Migrate from TiDB Self-Managed to TiDB Cloud](/tidb-cloud/migrate-from-op-tidb.md)
+    - [Migrate from TiDB Self-Managed to TiDB Cloud Premium](/tidb-cloud/premium/migrate-from-op-tidb-premium.md)
     - [Migrate and Merge MySQL Shards of Large Datasets](/tidb-cloud/migrate-sql-shards.md)
     - [Migrate from Amazon RDS for Oracle Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
   - Import Data into TiDB Cloud
     - [Import Sample Data (SQL Files) from Cloud Storage](/tidb-cloud/import-sample-data-serverless.md)
-    - [Import CSV Files from Cloud Storage](/tidb-cloud/import-csv-files-serverless.md)
+    - [Import CSV Files from Cloud Storage](/tidb-cloud/premium/import-csv-files-premium.md)
+    - [Import CSV Files from Amazon S3](/tidb-cloud/premium/import-from-s3-premium.md)
     - [Import Parquet Files from Cloud Storage](/tidb-cloud/import-parquet-files-serverless.md)
     - [Import Snapshot Files from Cloud Storage](/tidb-cloud/import-snapshot-files-serverless.md)
-    - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli-serverless.md)
+    - [Import Data Using MySQL CLI](/tidb-cloud/premium/import-with-mysql-cli-premium.md)
   - Reference
     - [Configure External Storage Access for TiDB Cloud](/tidb-cloud/serverless-external-storage.md)
     - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
@@ -232,12 +234,12 @@
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
     - [Standard SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md)
     - [Organization SSO Authentication](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
-    - [Identity Access Management](/tidb-cloud/manage-user-access.md)
+    - [Identity Access Management](/tidb-cloud/premium/manage-user-access-premium.md)
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - Network Access Control
+    - [Configure an IP Access List](/tidb-cloud/premium/configure-ip-access-list-premium.md)
     - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
     - [Configure Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
-    - [TLS Connections to TiDB Cloud](/tidb-cloud/secure-connections-to-serverless-clusters.md)
   - Audit Management
     - [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md)
 - Billing
