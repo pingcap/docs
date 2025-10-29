@@ -49,7 +49,7 @@ If you have the `Organization Owner` role, you can create a {{{ .premium }}} ins
 2. On the **TiDB Instances** page, click **Create Instance**.
 3. Enter a name for your {{{ .premium }}} instance.
 4. Choose a cloud provider and a region where you want to host your instance.
-5. Specify both a minimum and maximum number of Request Capacity Units (RCUs) for your instance
+5. Specify the minimum and maximum number of Request Capacity Units (RCUs) for your instance
 
     RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your instance within this range based on demand.
 
