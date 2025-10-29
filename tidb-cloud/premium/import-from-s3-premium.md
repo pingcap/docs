@@ -58,8 +58,8 @@ The wizard includes a helper link labeled **Click here to create a new one with 
     - Set **Storage Provider** to **Amazon S3**.
     - Enter the **Source Files URI** for a single file (`s3://bucket/path/file.csv`) or for a folder    (`s3://bucket/path/`).
     - Choose **AWS Role ARN** or **AWS Access Key** and provide the credentials.
-    - Click **Test Bucket Access** to validate connectivity.
-        <!--Todo-- Known preview issue: the button returns to the idle state without a success toast.-->
+    - Click **Test Bucket Access** to validate connectivity.  <!--Todo-- Known preview issue: the button returns to the idle state without a success toast.-->
+
 4. Click **Next** and provide the TiDB SQL username and password for the import job. Optionally, test the connection.
 5. Review the automatically generated source-to-target mapping. Disable automatic mapping if you need to define custom patterns and destination tables.
 6. Click **Next** to run the pre-check. Resolve any warnings about missing files or incompatible schemas.
