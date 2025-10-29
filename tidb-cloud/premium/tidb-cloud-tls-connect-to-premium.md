@@ -11,7 +11,7 @@ To ensure data security, the CA certificate for your {{{ .premium }}} instance i
 
 ## Prerequisites
 
-- Log in to TiDB Cloud via [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md) or [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md), and then [Create a {{{ .premium }}} instance](/tidb-cloud/create-tidb-instance-premium.md).
+- Log in to TiDB Cloud via [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md) or [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md), and then [Create a {{{ .premium }}} instance](/tidb-cloud/premium/create-tidb-instance-premium.md).
 
 - Set a password to access your instance in secure settings.
 

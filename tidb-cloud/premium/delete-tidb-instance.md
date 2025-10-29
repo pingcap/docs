@@ -21,7 +21,7 @@ You can delete an instance at any time by performing the following steps:
 
     Enter `<organization name>/<instance name>` to ensure the instance is deleted correctly.
 
-    If you want to restore the instance some time in the future, make sure that you have a backup of the instance. Otherwise, you cannot restore it. For more information about how to back up {{{ .premium }}} instances, see [Back Up and Restore {{{ .premium }}} Data](/tidb-cloud/backup-and-restore-premium.md).
+    If you want to restore the instance some time in the future, make sure that you have a backup of the instance. Otherwise, you cannot restore it. For more information about how to back up {{{ .premium }}} instances, see [Back Up and Restore {{{ .premium }}} Data](/tidb-cloud/premium/backup-and-restore-premium.md).
 
 5. Click **I understand, delete it**.
 
@@ -34,4 +34,4 @@ You can delete an instance at any time by performing the following steps:
     >
     > Please be aware that backups will continue to incur charges until deleted.
 
-    If you want to restore a {{{ .premium }}} instance from the recycle bin, see [Restore a deleted instance](/tidb-cloud/backup-and-restore-premium.md#restore-a-deleted-instance).
+    If you want to restore a {{{ .premium }}} instance from the recycle bin, see [Restore from Recycle Bin](/tidb-cloud/premium/backup-and-restore-premium.md#restore-from-recycle-bin).
