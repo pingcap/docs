@@ -5,15 +5,15 @@ summary: 了解如何使用 TiDB Index Advisor 优化查询性能。
 
 # Index Advisor
 
-在 v8.5.0 版本中，TiDB 引入了 Index Advisor 功能，帮助你通过推荐索引来优化工作负载并提升查询性能。通过新的 SQL 语句 `RECOMMEND INDEX`，你可以为单条查询或整个工作负载生成索引推荐。为了避免物理创建索引进行评估时的高资源消耗，TiDB 支持 [假设索引](#hypothetical-indexes)，即不会实际落地的逻辑索引。
+在 v8.5.0 版本中，TiDB 引入了 Index Advisor 功能，帮助你通过推荐索引来优化工作负载并提升查询性能。你可以使用新的 SQL 语句 `RECOMMEND INDEX`，为单条查询或整个工作负载生成索引推荐。为了避免物理创建索引进行评估时的高资源消耗，TiDB 支持 [假设索引](#hypothetical-indexes)，即不会实际落地的逻辑索引。
 
-> **注意：**
+> **Note:**
 >
-> 目前，该功能不支持在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群上使用。
+> 目前，该功能不支持在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群上使用。
 
-Index Advisor 会分析查询，识别如 `WHERE`、`GROUP BY` 和 `ORDER BY` 等子句中的可建索引列。随后，它会生成索引候选项，并通过假设索引评估其性能收益。TiDB 使用遗传搜索算法，从单列索引开始，迭代探索多列索引，利用 “What-If” 分析根据优化器执行计划成本评估潜在索引。只有当推荐索引能降低整体查询成本时，Index Advisor 才会推荐这些索引。
+Index Advisor 会分析查询，识别如 `WHERE`、`GROUP BY` 和 `ORDER BY` 等子句中的可建索引列。随后，它会生成索引候选项，并通过假设索引评估其性能收益。TiDB 使用遗传搜索算法，从单列索引开始，迭代探索多列索引，利用 “What-If” 分析根据优化器执行计划的成本评估潜在索引。当索引能降低整体查询成本时，Advisor 会推荐这些索引。
 
-除了 [推荐新索引](#recommend-indexes-using-the-recommend-index-statement) 外，Index Advisor 还会建议 [移除未使用的索引](#remove-unused-indexes)，以确保高效的索引管理。
+除了 [推荐新索引](#recommend-indexes-using-the-recommend-index-statement) 外，Index Advisor 还会建议 [移除不活跃索引](#remove-unused-indexes)，以确保高效的索引管理。
 
 ## 使用 `RECOMMEND INDEX` 语句推荐索引
 
@@ -43,7 +43,7 @@ create_index_statement: CREATE INDEX idx_a_b ON t(a,b);
 
 Index Advisor 会分别评估 `a` 和 `b` 的单列索引，并最终将它们合并为一个多列索引以获得最佳性能。
 
-以下 `EXPLAIN` 结果对比了无索引和使用推荐的双列假设索引时的查询执行情况。Index Advisor 会在内部评估两种情况，并选择成本最低的方案。同时，Index Advisor 也会考虑 `a` 和 `b` 的单列假设索引，但这些索引的性能不如组合的双列索引。为简洁起见，省略了执行计划的详细内容。
+以下 `EXPLAIN` 结果对比了无索引和使用推荐的双列假设索引时的查询执行情况。Index Advisor 会在内部评估两种情况，并选择成本最低的方案。同时，Advisor 也会考虑 `a` 和 `b` 的单列假设索引，但这些索引的性能不如组合的双列索引。为简洁起见，省略了执行计划的详细内容。
 
 ```sql
 EXPLAIN FORMAT='VERBOSE' SELECT a, b FROM t WHERE a=1 AND b=1;
@@ -88,9 +88,9 @@ RECOMMEND INDEX RUN;
 +----------+-------+------------+---------------+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------+
 ```
 
-在此场景下，Index Advisor 针对整个工作负载（而非单条查询）识别最优索引。工作负载中的查询来源于 TiDB 系统表 `INFORMATION_SCHEMA.STATEMENTS_SUMMARY`。
+在此场景下，Index Advisor 会为整个工作负载（而非单条查询）识别最优索引。工作负载中的查询来源于 TiDB 系统表 `INFORMATION_SCHEMA.STATEMENTS_SUMMARY`。
 
-该表可能包含数万到数十万条查询，这可能会影响 Index Advisor 的性能。为解决此问题，Index Advisor 会优先分析执行频率最高的查询，因为这些查询对整体工作负载性能影响更大。默认情况下，Index Advisor 会选择前 1,000 条查询。你可以通过 [`max_num_query`](#recommend-index-options) 参数调整该值。
+该表可能包含数万到数十万条查询，这可能会影响 Index Advisor 的性能。为了解决这个问题，Index Advisor 会优先分析执行频率最高的查询，因为这些查询对整体工作负载性能影响更大。默认情况下，Index Advisor 会选择前 1,000 条查询。你可以通过 [`max_num_query`](#recommend-index-options) 参数调整该值。
 
 `RECOMMEND INDEX` 语句的结果会存储在 `mysql.index_advisor_results` 表中。你可以查询该表以查看推荐的索引。以下示例展示了前述两次 `RECOMMEND INDEX` 语句执行后的系统表内容：
 
@@ -117,7 +117,7 @@ RECOMMEND INDEX SHOW OPTION;
 可用的选项包括：
 
 - `timeout`：指定执行 `RECOMMEND INDEX` 命令的最大允许时间。
-- `max_num_index`：指定 `RECOMMEND INDEX` 结果中包含的最大索引数量。
+- `max_num_index`：指定 `RECOMMEND INDEX` 结果中最多包含的索引数量。
 - `max_index_columns`：指定结果中多列索引允许的最大列数。
 - `max_num_query`：指定从语句摘要工作负载中选取的最大查询数量。
 
@@ -153,15 +153,15 @@ Query OK, 1 row affected (0.00 sec)
 
 ## 移除未使用的索引
 
-在 v8.0.0 或更高版本中，你可以通过 [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) 和 [`INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) 识别工作负载中的未活跃索引。移除这些索引可以节省存储空间并减少开销。对于生产环境，强烈建议先将目标索引设置为不可见，并观察一个完整业务周期的影响后再彻底删除。
+在 v8.0.0 及更高版本中，你可以通过 [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) 和 [`INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) 识别工作负载中的不活跃索引。移除这些索引可以节省存储空间并减少开销。对于生产环境，强烈建议先将目标索引设置为不可见，并观察一个完整业务周期的影响后再彻底删除。
 
 ### 使用 `sys.schema_unused_indexes`
 
-[`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) 视图用于识别自所有 TiDB 实例上次启动以来未被使用过的索引。该视图基于包含 schema、表和列信息的系统表，提供每个索引的完整规格，包括 schema、表和索引名。你可以查询该视图，决定哪些索引需要设置为不可见或删除。
+[`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) 视图用于识别自所有 TiDB 实例上次启动以来未被使用过的索引。该视图基于包含 schema、表和列信息的系统表，提供每个索引的完整规范，包括 schema、表和索引名。你可以查询该视图，决定哪些索引需要设置为不可见或删除。
 
-> **警告：**
+> **Warning:**
 >
-> 由于 `sys.schema_unused_indexes` 视图展示的是自所有 TiDB 实例上次启动以来未被使用的索引，请确保 TiDB 实例已运行足够长时间。否则，如果某些工作负载尚未运行，视图可能会显示误报。可使用以下 SQL 查询所有 TiDB 实例的运行时长。
+> 由于 `sys.schema_unused_indexes` 视图展示的是自所有 TiDB 实例上次启动以来未被使用的索引，请确保 TiDB 实例已运行足够长时间。否则，如果某些工作负载尚未运行，视图可能会显示误报。你可以使用以下 SQL 查询所有 TiDB 实例的运行时长。
 >
 > ```sql
 > SELECT START_TIME,UPTIME FROM INFORMATION_SCHEMA.CLUSTER_INFO WHERE TYPE='tidb';
@@ -169,7 +169,7 @@ Query OK, 1 row affected (0.00 sec)
 
 ### 使用 `INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`
 
-[`INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) 表提供了选择性分桶、最后访问时间和访问行数等指标。以下示例展示了如何基于该表查询未使用或低效索引：
+[`INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) 表提供了选择性分桶、最后访问时间和访问行数等指标。以下示例展示了如何基于该表查询未使用或低效的索引：
 
 ```sql
 -- Find indexes that have not been accessed in the last 30 days.
@@ -186,15 +186,15 @@ FROM information_schema.cluster_tidb_index_usage
 WHERE last_access_time IS NOT NULL AND percentage_access_0 + percentage_access_0_1 + percentage_access_1_10 + percentage_access_10_20 + percentage_access_20_50 = 0;
 ```
 
-> **注意：**
+> **Note:**
 >
 > `INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE` 中的数据可能会有最多五分钟的延迟，并且每当 TiDB 节点重启时，使用数据会被重置。此外，只有表拥有有效统计信息时，才会记录索引使用情况。
 
 ## 假设索引
 
-假设索引（Hypo Indexes）是通过 SQL 注释（类似于 [查询提示](/optimizer-hints.md)）而非 `CREATE INDEX` 语句创建的。这种方式可以让你在不实际落地索引的情况下轻量级地进行索引实验。
+假设索引（Hypothetical Indexes，Hypo Indexes）是通过 SQL 注释（类似于 [查询提示](/optimizer-hints.md)）而非 `CREATE INDEX` 语句创建的。这种方式可以让你在无需物理落地索引的情况下，轻量级地进行索引实验。
 
-例如，`/*+ HYPO_INDEX(t, idx_ab, a, b) */` 注释会指示查询优化器为表 `t` 的 `a`、`b` 列创建名为 `idx_ab` 的假设索引。优化器会生成该索引的元数据，但不会实际创建物理索引。如果适用，优化器会在查询优化过程中考虑该假设索引，而不会产生索引创建的相关开销。
+例如，`/*+ HYPO_INDEX(t, idx_ab, a, b) */` 注释会指示查询优化器为表 `t` 的 `a`、`b` 列创建名为 `idx_ab` 的假设索引。优化器会生成该索引的元数据，但不会实际创建物理索引。如果适用，优化器会在查询优化阶段考虑该假设索引，而不会产生索引创建的相关开销。
 
 `RECOMMEND INDEX` Advisor 会利用假设索引进行 “What-If” 分析，评估不同索引的潜在收益。你也可以直接使用假设索引，在正式创建索引前进行设计实验。
 
@@ -222,6 +222,6 @@ EXPLAIN FORMAT='verbose' SELECT /*+ HYPO_INDEX(t, idx_ab, a, b) */ a, b FROM t W
 +------------------------+---------+---------+-----------+-----------------------------+-------------------------------------------------+
 ```
 
-在该示例中，`HYPO_INDEX` 注释指定了一个假设索引。使用该索引后，估算成本从 `392133.42` 降低到 `2.20`，实现了由全表扫描（`TableFullScan`）到索引范围扫描（`IndexRangeScan`）的优化。
+在本例中，`HYPO_INDEX` 注释指定了一个假设索引。使用该索引后，估算成本从 `392133.42` 降低到 `2.20`，因为优化器可以使用索引范围扫描（`IndexRangeScan`）而不是全表扫描（`TableFullScan`）。
 
 基于你工作负载中的查询，TiDB 可以自动生成可能带来收益的索引候选项。它会利用假设索引评估这些索引的潜在收益，并推荐最有效的索引。

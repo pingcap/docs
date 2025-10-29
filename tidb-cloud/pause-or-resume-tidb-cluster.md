@@ -1,11 +1,11 @@
 ---
-title: 暂停或恢复 TiDB Cloud Dedicated 集群
-summary: 了解如何暂停或恢复 TiDB Cloud Dedicated 集群。
+title: 暂停或恢复 TiDB Cloud 专属集群
+summary: 了解如何暂停或恢复 TiDB Cloud 专属集群。
 ---
 
-# 暂停或恢复 TiDB Cloud Dedicated 集群
+# 暂停或恢复 TiDB Cloud 专属集群
 
-你可以在 TiDB Cloud 中轻松暂停和恢复并非始终运行的 TiDB Cloud Dedicated 集群。
+你可以在 TiDB Cloud 中轻松暂停和恢复并非始终运行的 TiDB Cloud 专属集群。
 
 暂停操作不会影响存储在集群中的数据，只是停止监控信息的收集和计算资源的消耗。暂停后，你可以随时恢复集群。
 
@@ -13,21 +13,21 @@ summary: 了解如何暂停或恢复 TiDB Cloud Dedicated 集群。
 
 > **注意：**
 >
-> 你无法暂停 [TiDB Cloud Serverless 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)。
+> 你无法暂停 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 或 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 集群。
 
 ## 限制
 
 - 只有当集群处于 **Available** 状态时，你才能暂停集群。如果集群处于 **Modifying** 等其他状态，你必须等待当前操作完成后才能暂停集群。
 - 当有数据导入任务正在进行时，无法暂停集群。你可以等待导入任务完成或取消导入任务。
-- 当有备份任务正在进行时，无法暂停集群。你可以等待当前备份任务完成或[删除正在运行的备份任务](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job)。
-- 如果集群存在任何 [changefeeds](/tidb-cloud/changefeed-overview.md)，则无法暂停集群。你需要[删除现有的 changefeed](/tidb-cloud/changefeed-overview.md#delete-a-changefeed) 后才能暂停集群。
+- 当有备份任务正在进行时，无法暂停集群。你可以等待当前备份任务完成，或[删除正在运行的备份任务](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job)。
+- 如果集群存在任何 [changefeeds](/tidb-cloud/changefeed-overview.md)，则无法暂停。你需要[删除现有的 changefeed](/tidb-cloud/changefeed-overview.md#delete-a-changefeed) 后才能暂停集群。
 
 ## 暂停 TiDB 集群
 
 暂停时长和行为取决于你的组织创建日期：
 
-- 2024 年 11 月 12 日之后创建的组织，采用标准暂停行为，最长暂停时长为 7 天。
-- 2024 年 11 月 12 日及之前创建的组织，采用兼容暂停行为，允许更长的暂停时长。这些组织将逐步过渡到标准的 7 天限制。
+- 2024 年 11 月 12 日之后创建的组织，遵循标准暂停行为，最长暂停时长为 7 天。
+- 2024 年 11 月 12 日及之前创建的组织，遵循兼容暂停行为，允许更长的暂停时长。这些组织将逐步过渡到标准的 7 天限制。
 
 <SimpleTab>
 <div label="Standard pause behavior">
@@ -35,7 +35,7 @@ summary: 了解如何暂停或恢复 TiDB Cloud Dedicated 集群。
 当集群被暂停时，请注意以下事项：
 
 - TiDB Cloud 停止收集该集群的监控信息。
-- 你无法从集群中读取或写入数据。
+- 你无法对集群进行读写操作。
 - 你无法导入或备份数据。
 - 仅收取以下费用：
 
@@ -51,12 +51,12 @@ summary: 了解如何暂停或恢复 TiDB Cloud Dedicated 集群。
 
 > **注意：**
 >
-> 如果你的组织是在 2024 年 11 月 12 日之前创建的，集群仍采用兼容暂停行为。TiDB Cloud 会在过渡到新的标准暂停行为前通知你。
+> 如果你的组织是在 2024 年 11 月 12 日之前创建的，集群仍然遵循兼容暂停行为。TiDB Cloud 会在过渡到新的标准暂停行为前通知你。
 
 当集群被暂停时，请注意以下事项：
 
 - TiDB Cloud 停止收集该集群的监控信息。
-- 你无法从集群中读取或写入数据。
+- 你无法对集群进行读写操作。
 - 你无法导入或备份数据。
 - TiDB Cloud 不会自动恢复已暂停的集群。
 - 仅收取以下费用：
@@ -69,14 +69,14 @@ summary: 了解如何暂停或恢复 TiDB Cloud Dedicated 集群。
 </div>
 </SimpleTab>
 
-暂停集群的步骤如下：
+暂停集群的操作步骤如下：
 
 1. 在 TiDB Cloud 控制台，进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 2. 在你想要暂停的集群所在行，点击 **...**。
 
     > **提示：**
     >
-    > 你也可以在 **Clusters** 页面点击你想要暂停的集群名称，然后在右上角点击 **...**。
+    > 你也可以在 **Clusters** 页面点击你想要暂停的集群名称，然后点击右上角的 **...**。
 
 3. 在下拉菜单中点击 **Pause**。
 
@@ -92,18 +92,18 @@ summary: 了解如何暂停或恢复 TiDB Cloud Dedicated 集群。
 
 暂停的集群恢复后，请注意以下事项：
 
-- TiDB Cloud 恢复收集该集群的监控信息，你可以从集群中读取或写入数据。
+- TiDB Cloud 恢复收集该集群的监控信息，你可以对集群进行读写操作。
 - TiDB Cloud 恢复收取计算和存储费用。
 - TiDB Cloud 恢复该集群的[自动备份](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)。
 
-恢复已暂停集群的步骤如下：
+恢复已暂停集群的操作步骤如下：
 
 1. 在 TiDB Cloud 控制台，进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 2. 在你想要恢复的集群所在行，点击 **Resume**。此时会弹出 **Resume your cluster** 对话框。
 
     > **注意：**
     >
-    > 处于 **Pausing** 状态的集群无法恢复。
+    > 你无法恢复处于 **Pausing** 状态的集群。
 
 3. 在对话框中点击 **Resume** 以确认你的选择。集群状态会变为 **Resuming**。
 

@@ -5,7 +5,7 @@ summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修
 
 # 使用 `tidbcloud_serverless_cluster` 资源
 
-本文档介绍如何使用 `tidbcloud_serverless_cluster` 资源管理 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 集群。
+本文档介绍了如何使用 `tidbcloud_serverless_cluster` 资源管理 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 集群。
 
 你还将学习如何通过 `tidbcloud_projects` 数据源获取所需的信息。
 
@@ -56,13 +56,13 @@ summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修
 
         - 若要使用项目数据源，将数据源类型设置为 `tidbcloud_projects`。
         - 数据源名称可以根据需要自定义，例如 `"example_project"`。
-        - 对于 `tidbcloud_projects` 数据源，可以使用 `page` 和 `page_size` 属性来限制你想要查看的最大项目数。
+        - 对于 `tidbcloud_projects` 数据源，可以使用 `page` 和 `page_size` 属性来限制你想要查看的最大项目数量。
 
-    - 使用 `output` 块定义要在输出中显示的数据源信息，并将信息暴露给其他 Terraform 配置使用。
+    - 使用 `output` 块定义要在输出中显示的数据源信息，并将这些信息暴露给其他 Terraform 配置使用。
 
-        `output` 块的作用类似于编程语言中的返回值。更多详情可参考 [Terraform 官方文档](https://www.terraform.io/language/values/outputs)。
+        `output` 块的作用类似于编程语言中的返回值。更多细节可参考 [Terraform 官方文档](https://www.terraform.io/language/values/outputs)。
 
-    若要获取所有资源和数据源的可用配置，请参见 [Terraform provider 配置文档](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)。
+    若要获取所有资源和数据源的可用配置，请参阅 [Terraform provider 配置文档](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)。
 
 2. 运行 `terraform apply` 命令以应用配置。你需要在确认提示时输入 `yes` 以继续。
 
@@ -161,7 +161,7 @@ summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修
     - 资源名称可以根据需要自定义，例如 `example`。
     - 资源详情可根据项目 ID 及 [`tidbcloud_serverless_cluster` 规范](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster) 进行配置。
 
-3. 运行 `terraform apply` 命令。应用资源时，不建议使用 `terraform apply --auto-approve`。
+3. 运行 `terraform apply` 命令。应用资源时不建议使用 `terraform apply --auto-approve`。
 
     ```shell
     $ terraform apply
@@ -211,7 +211,7 @@ summary: 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修
 
     - 你可以检查配置与当前状态之间的差异。
     - 你还可以看到本次 `apply` 的结果。它将新增一个资源，不会有资源被更改或销毁。
-    - `known after apply` 表示在 `apply` 之后你将获得对应的值。
+    - `known after apply` 表示你将在 `apply` 后获得对应的值。
 
 4. 如果你的计划没有问题，输入 `yes` 继续：
 
@@ -423,7 +423,7 @@ resource "tidbcloud_serverless_cluster" "example" {
 
 1. 为新的 `tidbcloud_serverless_cluster` 资源添加 import 块。
 
-    在你的 `.tf` 文件中添加如下 import 块，将 `example` 替换为你期望的资源名称，将 `${id}` 替换为集群 ID：
+    在你的 `.tf` 文件中添加如下 import 块，将 `example` 替换为你想要的资源名称，将 `${id}` 替换为集群 ID：
 
     ```
     import {
@@ -440,7 +440,7 @@ resource "tidbcloud_serverless_cluster" "example" {
       terraform plan -generate-config-out=generated.tf
       ```
 
-    上述命令中不要指定已存在的 `.tf` 文件名，否则 Terraform 会报错。
+    上述命令中不要指定已存在的 `.tf` 文件名，否则 Terraform 会返回错误。
 
 3. 审查并应用生成的配置。
 

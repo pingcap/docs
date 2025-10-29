@@ -1,17 +1,17 @@
 ---
 title: ALTER PLACEMENT POLICY
-summary: TiDB 中 ALTER PLACEMENT POLICY 的用法。
+summary: ALTER PLACEMENT POLICY 在 TiDB 中的用法。
 ---
 
 # ALTER PLACEMENT POLICY
 
-`ALTER PLACEMENT POLICY` 用于修改之前已创建的现有放置策略。所有使用该放置策略的表和分区都会自动更新。
+`ALTER PLACEMENT POLICY` 用于修改之前已创建的现有放置策略。所有使用该放置策略的表和分区会自动更新。
 
 > **Note:**
 >
-> 该功能在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
-`ALTER PLACEMENT POLICY` 会用新的定义 _替换_ 之前的策略，而不是将新旧策略 _合并_。在以下示例中，执行 `ALTER PLACEMENT POLICY` 后，`FOLLOWERS=4` 会被丢弃：
+`ALTER PLACEMENT POLICY` 会用新的定义 _替换_ 之前的策略，而不是将旧策略与新策略 _合并_。在以下示例中，执行 `ALTER PLACEMENT POLICY` 后，`FOLLOWERS=4` 会丢失：
 
 ```sql
 CREATE PLACEMENT POLICY p1 FOLLOWERS=4;

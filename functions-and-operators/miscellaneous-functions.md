@@ -5,7 +5,7 @@ summary: 了解 TiDB 中的杂项函数。
 
 # 杂项函数
 
-TiDB 支持 MySQL 8.0 中大多数的 [杂项函数](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html)。
+TiDB 支持 MySQL 8.0 中大多数[杂项函数](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html)。
 
 ## 支持的函数
 
@@ -25,10 +25,10 @@ TiDB 支持 MySQL 8.0 中大多数的 [杂项函数](https://dev.mysql.com/doc/r
 | [`IS_IPV6()`](#is_ipv6)                  | 判断参数是否为 IPv6 地址               |
 | [`IS_UUID()`](#is_uuid)                  | 判断参数是否为 UUID                       |
 | [`NAME_CONST()`](#name_const)            | 可用于重命名列名               |
-| [`SLEEP()`](#sleep)                      | 休眠指定秒数。注意，对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群，`SLEEP()` 函数有最大 300 秒的休眠时间限制。       |
+| [`SLEEP()`](#sleep)                      | 休眠指定秒数。注意，对于 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群，`SLEEP()` 函数有最大 300 秒的休眠时间限制。       |
 | [`UUID()`](#uuid)                        | 返回一个全局唯一标识符（UUID）       |
 | [`UUID_TO_BIN()`](#uuid_to_bin)          | 将 UUID 从文本格式转换为二进制格式    |
-| [`VALUES()`](#values)                    | 定义在 INSERT 期间要使用的值    |
+| [`VALUES()`](#values)                    | 定义在 INSERT 时要使用的值    |
 
 ### ANY_VALUE()
 
@@ -145,7 +145,7 @@ TABLE t1;
 
 ### INET_ATON()
 
-`INET_ATON()` 函数将点分十进制表示的 IPv4 地址转换为可以高效存储的数值。
+`INET_ATON()` 函数将点分十进制表示的 IPv4 地址转换为可高效存储的数值版本。
 
 ```sql
 SELECT INET_ATON('127.0.0.1');

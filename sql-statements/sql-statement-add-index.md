@@ -1,5 +1,5 @@
 ---
-title: ADD INDEX | TiDB SQL 语句参考
+title: ADD INDEX | TiDB SQL Statement Reference
 summary: TiDB 数据库中 ADD INDEX 的用法概述。
 ---
 
@@ -15,7 +15,7 @@ summary: TiDB 数据库中 ADD INDEX 的用法概述。
 
 > **Note:**
 >
-> 对于 [TiDB Cloud Dedicated 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)（4 vCPU），建议手动关闭 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)，以防止在创建索引时资源受限影响集群稳定性。关闭该设置后，索引将通过事务方式创建，从而降低对集群的整体影响。
+> 对于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群（4 vCPU），建议手动关闭 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)，以防止资源受限在创建索引时影响集群稳定性。关闭该设置后，索引将通过事务方式创建，从而降低对集群的整体影响。
 
 </CustomContent>
 
@@ -23,9 +23,9 @@ summary: TiDB 数据库中 ADD INDEX 的用法概述。
 
 > **Warning:**
 >
-> - 在集群中执行 DDL 语句时（通常是耗时较长的 DDL 语句，如 `ADD INDEX` 和列类型变更），**DO NOT** 升级 TiDB 集群。
-> - 升级前，建议使用 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) 命令检查 TiDB 集群中是否有正在进行的 DDL 任务。如果存在 DDL 任务，升级集群前应等待 DDL 执行完成，或使用 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) 命令取消 DDL 任务后再进行升级。
-> - 此外，在集群升级过程中，**DO NOT** 执行任何 DDL 语句。否则，可能会出现未定义的行为。
+> - **DO NOT** 在集群执行 DDL 语句时升级 TiDB 集群（通常是耗时较长的 DDL 语句，如 `ADD INDEX` 和列类型变更）。
+> - 升级前，建议使用 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) 命令检查 TiDB 集群是否有正在执行的 DDL 任务。如果集群存在 DDL 任务，想要升级集群时，请等待 DDL 执行完成，或使用 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) 命令取消 DDL 任务后再进行升级。
+> - 此外，在集群升级过程中，**DO NOT** 执行任何 DDL 语句。否则，可能会出现未定义行为的问题。
 >
 > 当你将 TiDB 从 v7.1.0 升级到更高版本时，可以忽略上述限制。详情参见 [TiDB 平滑升级的限制](/smooth-upgrade-tidb.md)。
 
@@ -94,12 +94,17 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 ## MySQL 兼容性
 
-* TiDB 在语法上兼容 MySQL，支持 `HASH`、`BTREE` 和 `RTREE` 等索引类型，但会忽略这些类型。
+* TiDB 在语法上兼容 MySQL，支持 `HASH`、`BTREE` 和 `RTREE` 等索引类型，但实际会忽略这些类型。
 * 不支持 `SPATIAL` 索引。
-* TiDB 支持解析 `FULLTEXT` 语法，但不支持使用 `FULLTEXT` 索引。
+* TiDB 自建版和 TiDB Cloud Dedicated 支持解析 `FULLTEXT` 语法，但不支持使用 `FULLTEXT` 索引。
+
+    >**Note:**
+    >
+    > 目前，只有部分 AWS 区域的 {{{ .starter }}} 和 {{{ .essential }}} 集群支持 [`FULLTEXT` 语法和索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)。
+
 * 不支持降序索引（与 MySQL 5.7 类似）。
 * 不支持为表添加 `CLUSTERED` 类型的主键。关于 `CLUSTERED` 类型主键的更多信息，参见 [聚簇索引](/clustered-indexes.md)。
-* 通过 `GLOBAL` 索引选项将 `PRIMARY KEY` 或 `UNIQUE INDEX` 设置为 [全局索引](/partitioned-table.md#global-indexes) 是 TiDB 针对 [分区表](/partitioned-table.md) 的扩展功能，不兼容 MySQL。
+* 将 `PRIMARY KEY` 或 `UNIQUE INDEX` 作为 [全局索引](/partitioned-table.md#global-indexes) 并通过 `GLOBAL` 索引选项设置，是 TiDB 针对 [分区表](/partitioned-table.md) 的扩展功能，不兼容 MySQL。
 
 ## 另请参阅
 

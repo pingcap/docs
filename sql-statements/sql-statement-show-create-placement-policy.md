@@ -5,11 +5,11 @@ summary: SHOW CREATE PLACEMENT POLICY 在 TiDB 中的用法。
 
 # SHOW CREATE PLACEMENT POLICY
 
-`SHOW CREATE PLACEMENT POLICY` 用于显示一个放置策略（placement policy）的定义。你可以使用它查看当前放置策略的定义，并在另一个 TiDB 集群中重新创建该策略。
+`SHOW CREATE PLACEMENT POLICY` 用于显示一个放置策略（placement policy）的定义。你可以用它查看当前放置策略的定义，并在另一个 TiDB 集群中重新创建该策略。
 
 > **Note:**
 >
-> 此功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
 ## 语法
 

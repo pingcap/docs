@@ -5,7 +5,7 @@ summary: 了解如何将数据从 TiDB 自建集群迁移到 TiDB Cloud。
 
 # 从 TiDB 自建集群迁移到 TiDB Cloud
 
-本文档介绍如何通过 Dumpling 和 TiCDC，将数据从 TiDB 自建集群迁移到 TiDB Cloud（AWS）。
+本文档介绍如何通过 Dumpling 和 TiCDC，将数据从 TiDB 自建集群迁移到 TiDB Cloud（基于 AWS）。
 
 整体流程如下：
 
@@ -24,7 +24,7 @@ summary: 了解如何将数据从 TiDB 自建集群迁移到 TiDB Cloud。
 
 - 一个具有管理员权限的 [AWS 账号](https://docs.aws.amazon.com/AmazonS3/latest/userguide/setting-up-s3.html#sign-up-for-aws-gsg)
 - 一个 [AWS S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html)
-- [一个 TiDB Cloud 账号](/tidb-cloud/tidb-cloud-quickstart.md)，并对目标 AWS 上托管的 TiDB Cloud 集群至少拥有 [`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles) 权限
+- 一个 [TiDB Cloud 账号](/tidb-cloud/tidb-cloud-quickstart.md)，并对目标 TiDB Cloud 集群（托管于 AWS）至少拥有 [`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles) 权限
 
 ## 准备工具
 
@@ -111,11 +111,11 @@ tiup update --self && tiup update dumpling
 
 你需要使用 Dumpling 将数据从 TiDB 自建集群迁移到 Amazon S3。
 
-如果你的 TiDB 集群在本地 IDC，或者 Dumpling 服务器与 Amazon S3 之间网络不通，可以先将文件导出到本地存储，再上传到 Amazon S3。
+如果你的 TiDB 集群在本地 IDC，或 Dumpling 服务器与 Amazon S3 之间网络不通，可以先将文件导出到本地存储，再上传到 Amazon S3。
 
 #### 步骤 1. 临时关闭上游 TiDB 自建集群的 GC 机制
 
-为确保增量迁移期间新写入的数据不会丢失，在开始迁移前，需要关闭上游集群的垃圾回收（GC）机制，防止系统清理历史数据。
+为确保增量迁移期间新写入的数据不会丢失，在开始迁移前需要关闭上游集群的垃圾回收（GC）机制，防止系统清理历史数据。
 
 运行以下命令，验证设置是否成功。
 
@@ -143,7 +143,7 @@ SELECT @@global.tidb_gc_enable;
 
 2. 在右上角导航栏选择你的用户名，然后点击 **My Security Credentials**。
 
-3. 点击 **Create access key** 创建访问密钥。然后选择 **Download .csv file**，将访问密钥 ID 和密钥保存为 CSV 文件到本地。请妥善保存该文件，关闭对话框后将无法再次获取密钥。下载 CSV 文件后，点击 **Close**。创建访问密钥后，密钥对默认处于激活状态，可以立即使用。
+3. 点击 **Create access key** 创建访问密钥。然后选择 **Download .csv file**，将访问密钥 ID 和密钥保存为 CSV 文件。请妥善保存该文件，关闭对话框后将无法再次获取密钥。下载 CSV 文件后，点击 **Close**。创建访问密钥后，密钥对默认处于激活状态，可以立即使用。
 
     ![Create access key](/media/tidb-cloud/op-to-cloud-create-access-key01.png)
 
@@ -160,13 +160,13 @@ SELECT @@global.tidb_gc_enable;
     export AWS_SECRET_ACCESS_KEY=${SecretKey}
     ```
 
-2. 从 AWS 控制台获取 S3 bucket 的 URI 和 region 信息。详见 [创建 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)。
+2. 从 AWS 控制台获取 S3 bucket 的 URI 和区域信息。详见 [创建 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)。
 
     下图展示了如何获取 S3 bucket URI 信息：
 
     ![Get the S3 URI](/media/tidb-cloud/op-to-cloud-copy-s3-uri.png)
 
-    下图展示了如何获取 region 信息：
+    下图展示了如何获取区域信息：
 
     ![Get the region information](/media/tidb-cloud/op-to-cloud-copy-region-info.png)
 
@@ -185,7 +185,7 @@ SELECT @@global.tidb_gc_enable;
     --s3.region "${s3.region}"
     ```
 
-    `-t` 参数指定导出线程数。增加线程数可以提升 Dumpling 的并发和导出速度，但也会增加数据库的内存消耗，因此不建议设置过大。
+    `-t` 参数指定导出线程数。增加线程数可以提升 Dumpling 并发和导出速度，但也会增加数据库内存消耗，因此不建议设置过大。
 
     更多信息参见 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-to-sql-files)。
 
@@ -201,7 +201,7 @@ SELECT @@global.tidb_gc_enable;
 
 将数据从 TiDB 自建集群导出到 Amazon S3 后，需要将数据迁移到 TiDB Cloud。
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)，根据以下文档获取目标集群的 Account ID 和 External ID：
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/) 中，根据以下文档获取目标集群的 Account ID 和 External ID：
 
    - 对于 TiDB Cloud Dedicated 集群，参见 [通过 Role ARN 配置 Amazon S3 访问权限](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access-using-a-role-arn)。
    - 对于 TiDB Cloud Starter 或 TiDB Cloud Essential 集群，参见 [通过 Role ARN 配置 Amazon S3 访问权限](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access-using-a-role-arn)。
@@ -213,11 +213,11 @@ SELECT @@global.tidb_gc_enable;
     - s3:ListBucket
     - s3:GetBucketLocation
 
-    如果 S3 bucket 启用了服务端加密 SSE-KMS，还需添加 KMS 权限。
+    如果 S3 bucket 使用了服务端加密 SSE-KMS，还需添加 KMS 权限：
 
     - kms:Decrypt
 
-3. 配置访问策略。前往 [AWS Console > IAM > Access Management > Policies](https://console.aws.amazon.com/iamv2/home#/policies)，切换到你的区域，检查是否已存在 TiDB Cloud 的访问策略。如果不存在，按照 [在 JSON 选项卡上创建策略](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html) 创建策略。
+3. 配置访问策略。进入 [AWS Console > IAM > Access Management > Policies](https://console.aws.amazon.com/iamv2/home#/policies)，切换到你的区域，检查是否已存在 TiDB Cloud 的访问策略。如果不存在，按照 [在 JSON 选项卡上创建策略](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html) 创建策略。
 
     以下为 json 策略模板示例。
 
@@ -266,7 +266,7 @@ SELECT @@global.tidb_gc_enable;
 
 4. 配置角色。参见 [创建 IAM 角色（控制台）](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html)。在 Account ID 字段填写你在第 1 步记录的 TiDB Cloud Account ID 和 TiDB Cloud External ID。
 
-5. 获取 Role-ARN。前往 [AWS Console > IAM > Access Management > Roles](https://console.aws.amazon.com/iamv2/home#/roles)，切换到你的区域，点击你创建的角色，记录 ARN。导入数据到 TiDB Cloud 时会用到。
+5. 获取 Role-ARN。进入 [AWS Console > IAM > Access Management > Roles](https://console.aws.amazon.com/iamv2/home#/roles)，切换到你的区域，点击你创建的角色，记录 ARN。导入数据到 TiDB Cloud 时会用到。
 
 6. 导入数据到 TiDB Cloud。
 
@@ -283,17 +283,17 @@ SELECT @@global.tidb_gc_enable;
 
 2. 授权 TiCDC 连接 TiDB Cloud。
 
-    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/project/clusters)进入 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称进入概览页。
+    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/project/clusters)中，进入 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称进入概览页。
     2. 在左侧导航栏点击 **Settings** > **Networking**。
     3. 在 **Networking** 页面点击 **Add IP Address**。
-    4. 在弹窗中选择 **Use IP addresses**，点击 **+**，在 **IP Address** 字段填写 TiCDC 组件的公网 IP 地址，然后点击 **Confirm**。此时 TiCDC 可以访问 TiDB Cloud。更多信息参见 [配置 IP 访问列表](/tidb-cloud/configure-ip-access-list.md)。
+    4. 在弹窗中选择 **Use IP addresses**，点击 **+**，在 **IP Address** 字段填写 TiCDC 组件的公网 IP 地址，然后点击 **Confirm**。此时 TiCDC 可访问 TiDB Cloud。更多信息参见 [配置 IP 访问列表](/tidb-cloud/configure-ip-access-list.md)。
 
 3. 获取下游 TiDB Cloud 集群的连接信息。
 
-    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/project/clusters)进入 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称进入概览页。
+    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/project/clusters)中，进入 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称进入概览页。
     2. 点击右上角 **Connect**。
     3. 在连接对话框中，**Connection Type** 下拉选择 **Public**，**Connect With** 下拉选择 **General**。
-    4. 从连接信息中获取集群的 host IP 地址和端口。更多信息参见 [通过公网连接](/tidb-cloud/connect-via-standard-connection.md)。
+    4. 从连接信息中获取集群的 host IP 地址和端口。更多信息参见 [通过标准连接方式连接](/tidb-cloud/connect-via-standard-connection.md)。
 
 4. 创建并运行增量同步任务。在上游集群运行如下命令：
 
@@ -306,13 +306,13 @@ SELECT @@global.tidb_gc_enable;
     ```
 
     - `--pd`：上游集群的 PD 地址，格式为 `[upstream_pd_ip]:[pd_port]`
-    - `--sink-uri`：同步任务的下游地址。`--sink-uri` 的格式如下。目前支持 `mysql`、`tidb`、`kafka`、`s3` 和 `local`。
+    - `--sink-uri`：同步任务的下游地址。`--sink-uri` 格式如下。目前支持 `mysql`、`tidb`、`kafka`、`s3` 和 `local`。
 
         ```shell
         [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
         ```
 
-    - `--changefeed-id`：同步任务的 ID，格式需符合 ^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$ 正则表达式。如果未指定，TiCDC 会自动生成一个 UUID（version 4 格式）作为 ID。
+    - `--changefeed-id`：同步任务的 ID，格式需符合 ^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$ 正则表达式。如果未指定，TiCDC 会自动生成一个 UUID（v4 格式）作为 ID。
     - `--start-ts`：指定 changefeed 的起始 TSO，TiCDC 集群将从该 TSO 开始拉取数据。默认值为当前时间。
 
     更多信息参见 [TiCDC Changefeed 的 CLI 及配置参数](https://docs.pingcap.com/tidb/dev/ticdc-changefeed-config)。
@@ -348,9 +348,9 @@ SELECT @@global.tidb_gc_enable;
 
         ![Update Filter](/media/tidb-cloud/normal_status_in_replication_task.png)
 
-    - 校验同步效果。向上游集群写入新记录，然后检查该记录是否同步到下游 TiDB Cloud 集群。
+    - 校验同步效果。向上游集群写入新记录，检查下游 TiDB Cloud 集群是否同步该记录。
 
-7. 设置上下游集群相同的时区。TiDB Cloud 默认时区为 UTC。如果上下游集群时区不同，需要将两端时区设置为一致。
+7. 设置上下游集群时区一致。TiDB Cloud 默认时区为 UTC。如果上下游集群时区不同，需要将两端时区设置为一致。
 
     1. 在上游集群运行以下命令检查时区：
 
@@ -370,17 +370,17 @@ SELECT @@global.tidb_gc_enable;
         SELECT @@global.time_zone;
         ```
 
-8. 备份上游集群的 [查询绑定](/sql-plan-management.md) 并在下游集群恢复。你可以使用以下 SQL 备份查询绑定：
+8. 备份上游集群的 [查询绑定](/sql-plan-management.md)，并在下游集群恢复。你可以使用以下 SQL 备份查询绑定：
 
     ```sql
     SELECT DISTINCT(CONCAT('CREATE GLOBAL BINDING FOR ', original_sql,' USING ', bind_sql,';')) FROM mysql.bind_info WHERE status='enabled';
     ```
 
-    如果没有输出，说明上游集群未使用查询绑定，可以跳过此步骤。
+    如果没有输出，说明上游集群未使用查询绑定，可跳过此步骤。
 
-    获取到查询绑定后，在下游集群执行这些 SQL 以恢复查询绑定。
+    获取查询绑定后，在下游集群执行这些 SQL 以恢复查询绑定。
 
-9. 备份上游集群的用户和权限信息，并在下游集群恢复。你可以使用以下脚本备份用户和权限信息，注意将占位符替换为实际值。
+9. 备份上游集群的用户和权限信息，并在下游集群恢复。你可以使用以下脚本备份用户和权限信息。请将占位符替换为实际值。
 
     ```shell
     #!/bin/bash
@@ -409,4 +409,4 @@ SELECT @@global.tidb_gc_enable;
     backup_user_priv
     ```
     
-    获取到用户和权限信息后，在下游集群执行生成的 SQL 语句以恢复用户和权限信息。
+    获取用户和权限信息后，在下游集群执行生成的 SQL 语句以恢复用户和权限信息。

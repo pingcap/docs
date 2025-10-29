@@ -1,10 +1,10 @@
 ---
-title: 在 TiDB Cloud Starter 或 Essential 上备份和恢复数据
-summary: 了解如何在 TiDB Cloud Starter 或 TiDB Cloud Essential 集群上备份和恢复你的数据。
+title: 备份和恢复 TiDB Cloud Starter 或 Essential 数据
+summary: 了解如何备份和恢复你的 TiDB Cloud Starter 或 TiDB Cloud Essential 集群。
 aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# 在 TiDB Cloud Starter 或 Essential 上备份和恢复数据
+# 备份和恢复 TiDB Cloud Starter 或 Essential 数据
 
 本文档介绍如何在 TiDB Cloud Starter 或 TiDB Cloud Essential 集群上备份和恢复你的数据。
 
@@ -28,22 +28,25 @@ TiDB Cloud 会自动备份你的集群数据，使你能够从备份快照中恢
 
 ### 了解备份设置
 
-TiDB Cloud Starter 集群和 TiDB Cloud Essential 集群的自动备份设置有所不同，如下表所示：
+TiDB Cloud Starter 集群和 TiDB Cloud Essential 集群的自动备份设置有所不同，具体如下表所示：
 
-| Backup setting   | TiDB Cloud Starter (免费) | TiDB Cloud Starter (设置消费上限 > 0) | TiDB Cloud Essential |
+| Backup setting   | TiDB Cloud Starter (free) | TiDB Cloud Starter (with spending limit > 0) | TiDB Cloud Essential |
 |------------------|----------------------------|----------------------------|----------------------------|
-| Backup Cycle     | 每日                       | 每日                       | 每日                       |
-| Backup Retention | 1 天                       | 30 天                      | 30 天                      |
-| Backup Time      | 固定时间                   | 可配置                     | 可配置                     |
+| Backup Cycle     | Daily                      | Daily                      | Daily                      |
+| Backup Retention | 1 day                      | Up to 30 days              | Up to 30 days              |
+| Backup Time      | Fixed time                 | Configurable               | Configurable               |
 
 - **Backup Cycle** 表示备份的频率。
 
 - **Backup Retention** 表示备份的保留时长。过期的备份无法恢复。
 
+    - 对于免费版 TiDB Cloud Starter 集群，备份保留时长为 1 天。
+    - 对于 TiDB Cloud Starter（设置了消费上限 > 0）或 TiDB Cloud Essential 集群，你可以将备份保留时长配置为 1 到 30 天之间的任意值。默认保留时长为 14 天。
+
 - **Backup Time** 表示备份开始调度的时间。请注意，最终的备份时间可能会滞后于配置的备份时间。
 
-    - 对于免费版 TiDB Cloud Starter 集群，备份时间是随机固定的时间。
-    - 对于 TiDB Cloud Starter（设置消费上限 > 0）或 TiDB Cloud Essential 集群，你可以将备份时间配置为每半小时一次。默认值为随机固定时间。
+    - 对于免费版 TiDB Cloud Starter 集群，备份时间为随机固定时间。
+    - 对于 TiDB Cloud Starter（设置了消费上限 > 0）或 TiDB Cloud Essential 集群，你可以将备份时间配置为每半小时一次。默认值为随机固定时间。
 
 ### 配置备份设置
 
@@ -51,9 +54,9 @@ TiDB Cloud Starter 集群和 TiDB Cloud Essential 集群的自动备份设置有
 
 1. 进入集群的 [**Backup**](#view-the-backup-page) 页面。
 
-2. 点击 **Backup Setting**。此操作会打开 **Backup Setting** 窗口，你可以根据需求配置自动备份设置。
+2. 点击 **Backup Setting**。这将打开 **Backup Setting** 窗口，你可以根据需求配置自动备份设置。
 
-3. 在 **Backup Time** 中，为每日集群备份安排开始时间。
+3. 在 **Backup Time** 中，为每日集群备份安排一个开始时间。
 
 4. 点击 **Confirm**。
 
@@ -70,7 +73,7 @@ TiDB Cloud 支持快照恢复和时间点恢复两种方式。
 - **Point-in-Time Restore (beta)**：将你的集群恢复到指定的时间点。
 
     - TiDB Cloud Starter 集群：不支持。
-    - TiDB Cloud Essential 集群：可恢复到最近 30 天内的任意时间点，但不能早于集群创建时间，也不能晚于当前时间减去 1 分钟。
+    - TiDB Cloud Essential 集群：可以恢复到备份保留期内的任意时间，但不能早于集群创建时间，也不能晚于当前时间前 1 分钟。
 
 ### 恢复目标
 

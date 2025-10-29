@@ -5,21 +5,21 @@ summary: 了解 TiDB Cloud 中的 Data Service 及其应用场景。
 
 # TiDB Cloud Data Service (Beta) 概述
 
-TiDB Cloud [Data Service (beta)](https://tidbcloud.com/project/data-service) 是一款全托管的低代码后端即服务（Backend-as-a-Service）解决方案，简化了后端应用开发，帮助开发者快速构建高可扩展性、安全、数据驱动的应用。
+TiDB Cloud [Data Service (beta)](https://tidbcloud.com/project/data-service) 是一款全托管的低代码后端即服务（BaaS）解决方案，简化了后端应用开发，帮助开发者快速构建高可扩展性、安全、数据驱动的应用。
 
-Data Service 允许你通过自定义 API 端点，以 HTTPS 请求的方式访问 TiDB Cloud 数据。该功能采用无服务器架构，自动处理计算资源和弹性扩缩容，因此你只需专注于端点中的查询逻辑，无需担心基础设施或运维成本。
+Data Service 允许你通过自定义 API 端点，以 HTTPS 请求的方式访问 TiDB Cloud 数据。该功能采用无服务器架构，自动处理计算资源和弹性扩展，因此你只需专注于端点中的查询逻辑，无需担心基础设施或运维成本。
 
-> **Note:**
+> **注意：**
 >
-> Data Service 仅适用于托管在 AWS 上的 TiDB Cloud Starter（原 Serverless）。如需在 TiDB Cloud Dedicated 集群中使用 Data Service，请联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。
+> Data Service 仅适用于托管在 AWS 上的 TiDB Cloud Starter。如需在 TiDB Cloud Dedicated 集群中使用 Data Service，请联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。
 
-Data Service 中的端点是你可以自定义以执行 SQL 语句的 Web API。你可以为 SQL 语句指定参数，例如 `WHERE` 子句中使用的值。当客户端调用端点并在请求 URL 中提供参数值时，端点会使用提供的参数执行相应的 SQL 语句，并将结果作为 HTTP 响应的一部分返回。
+Data Service 中的端点是你可以自定义以执行 SQL 语句的 Web API。你可以为 SQL 语句指定参数，例如 `WHERE` 子句中使用的值。当客户端调用端点并在请求 URL 中提供参数值时，端点会使用所提供的参数执行相应的 SQL 语句，并将结果作为 HTTP 响应的一部分返回。
 
 为了更高效地管理端点，你可以使用 Data App。Data Service 中的 Data App 是一组端点的集合，你可以用它来访问特定应用的数据。通过创建 Data App，你可以对端点进行分组，并通过 API key 配置授权设置以限制对端点的访问。这样可以确保只有授权用户才能访问和操作你的数据，从而提升应用的安全性。
 
-> **Tip:**
+> **提示：**
 >
-> TiDB Cloud 为 TiDB 集群提供了 Chat2Query API。启用后，TiDB Cloud 会自动创建一个名为 **Chat2Query** 的系统 Data App 以及一个 Chat2Data 端点。你可以调用该端点，通过提供指令让 AI 生成并执行 SQL 语句。
+> TiDB Cloud 为 TiDB 集群提供了 Chat2Query API。启用后，TiDB Cloud 会自动创建一个名为 **Chat2Query** 的系统 Data App 以及一个 Chat2Data 端点在 Data Service 中。你可以调用该端点，通过提供指令让 AI 生成并执行 SQL 语句。
 >
 > 详细信息请参见 [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md)。
 

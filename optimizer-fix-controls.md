@@ -8,7 +8,7 @@ summary: 了解优化器修复控制功能，以及如何使用 `tidb_opt_fix_co
 随着产品的迭代演进，TiDB 优化器的行为也在不断变化，从而生成更合理的执行计划。但在某些特定场景下，新的行为可能会导致意外的结果。例如：
 
 - 某些行为的效果依赖于特定场景，对大多数场景带来提升的变更，可能会对其他场景造成回退。
-- 有时，行为细节的变化与其后果之间的关系非常复杂，对某一行为的改进可能会导致整体回退。
+- 有时，行为细节的变更与其后果之间的关系非常复杂，对某一行为的改进可能导致整体回退。
 
 因此，TiDB 提供了优化器修复控制功能，允许你通过为一组修复项设置值，对 TiDB 优化器的行为进行细粒度控制。本文档介绍了优化器修复控制功能及其使用方法，并列出了 TiDB 当前支持的所有优化器修复控制项。
 
@@ -18,7 +18,7 @@ summary: 了解优化器修复控制功能，以及如何使用 `tidb_opt_fix_co
 
 每个修复项都是用于调整 TiDB 优化器某一特定行为的控制项。它以一个数字表示，该数字对应一个包含行为变更技术细节的 GitHub Issue。例如，对于修复项 `44262`，你可以在 [Issue 44262](https://github.com/pingcap/tidb/issues/44262) 中查看其控制内容。
 
-[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710) 系统变量可以同时接受多个修复项，使用逗号（`,`）分隔。格式为 `"<#issue1>:<value1>,<#issue2>:<value2>,...,<#issueN>:<valueN>"`，其中 `<#issueN>` 为修复项编号。例如：
+[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710) 系统变量可以同时接受多个修复项，使用英文逗号（`,`）分隔。格式为 `"<#issue1>:<value1>,<#issue2>:<value2>,...,<#issueN>:<valueN>"`，其中 `<#issueN>` 为修复项编号。例如：
 
 ```sql
 SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
@@ -68,7 +68,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 - 默认值：`1000`
 - 可选值：`[0, 2147483647]`
-- 该变量用于设置优化器启发式选择访问路径的阈值。如果某个访问路径（如 `Index_A`）的估算行数远小于其他访问路径（默认 `1000` 倍），优化器会跳过成本比较，直接选择 `Index_A`。
+- 该变量用于设置优化器启发式选择访问路径的阈值。如果某个访问路径（如 `Index_A`）的预估行数远小于其他访问路径（默认相差 `1000` 倍），优化器会跳过成本比较，直接选择 `Index_A`。
 - `0` 表示关闭该启发式策略。
 
 ### [`45798`](https://github.com/pingcap/tidb/issues/45798) <span class="version-mark">v7.5.0 新增</span>
@@ -87,7 +87,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 - 默认值：`ON`
 - 可选值：`ON`、`OFF`
-- 由于难以准确估算查询计划中每一步的合格行数，优化器可能会低估 `estRows` 的值。该变量用于控制是否限制 `estRows` 的最小值。
+- 由于在查询计划中难以准确估算每一步的合格行数，优化器可能会对 `estRows` 估算出较小的值。该变量用于控制是否限制 `estRows` 的最小值。
 - `ON`：将 `estRows` 的最小值限制为 1，这是 v8.4.0 引入的新行为，并与 Oracle、Db2 等其他数据库保持一致。
 - `OFF`：不限制最小行数估算，行为与 v8.4.0 之前版本一致，此时 `estRows` 可能为 0。
 
@@ -105,21 +105,21 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 - 默认值：`OFF`
 - 可选值：`ON`、`OFF`
-- 如 [Explain Statements Using Index Merge](/explain-index-merge.md#examples) 的 **Note** 所述，如果优化器能够为查询计划选择单一索引扫描方式（非全表扫描），则不会自动使用索引合并。
-- 你可以通过启用该修复控制项移除此限制。移除该限制后，优化器可以在更多查询中自动选择索引合并，但也可能导致优化器忽略最优的执行计划。因此，建议在实际用例上充分测试，确保不会引发性能回退后再移除该限制。
+- 如 [Explain Statements Using Index Merge](/explain-index-merge.md#examples) **Note** 所述，如果优化器能够为查询计划选择单一索引扫描方式（非全表扫描），则不会自动使用索引合并。
+- 你可以通过开启该修复控制项移除此限制。移除该限制后，优化器可以在更多查询中自动选择索引合并，但也可能导致优化器忽略最优的执行计划。因此，建议在实际使用场景中充分测试后再移除此限制，以确保不会引发性能回退。
 
 ### [`54337`](https://github.com/pingcap/tidb/issues/54337) <span class="version-mark">v8.3.0 新增</span>
 
 - 默认值：`OFF`
 - 可选值：`ON`、`OFF`
-- 目前，TiDB 优化器在推导每个合取项均为区间列表的复杂合取条件的索引范围时存在一定限制。通过应用通用区间交集可以解决该问题。
-- 你可以通过启用该修复控制项移除此限制，使优化器能够处理复杂的区间交集。但对于合取项数量较多（超过 10 个）的条件，优化时间可能会略有增加。
+- 目前，TiDB 优化器在推导每个合取条件均为范围列表的复杂合取条件的索引范围时存在一定限制。通过应用通用范围交集可以解决该问题。
+- 你可以通过开启该修复控制项移除此限制，使优化器能够处理复杂的范围交集。但对于合取条件数量较多（超过 10 个）的情况，优化时间可能会略有增加。
 
 ### [`56318`](https://github.com/pingcap/tidb/issues/56318)
 
 > **Note:**
 >
-> 仅适用于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)。
+> 仅适用于 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)。
 
 - 默认值：`ON`
 - 可选值：`ON`、`OFF`

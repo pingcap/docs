@@ -7,15 +7,15 @@ summary: SHOW PLACEMENT FOR 在 TiDB 中的用法。
 
 `SHOW PLACEMENT FOR` 总结了所有的放置选项，并以规范形式展示指定表、数据库模式或分区的放置信息。
 
-> **注意：**
+> **Note:**
 >
-> 该功能在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
-该语句返回的结果集中，`Scheduling_State` 字段表示 Placement Driver（PD）在调度放置时的当前进度：
+该语句返回的结果集中，`Scheduling_State` 字段表示 Placement Driver（PD）在调度放置规则时的当前进度：
 
-* `PENDING`：PD 尚未开始调度放置。这可能表示放置规则在语义上是正确的，但当前集群无法满足。例如，若 `FOLLOWERS=4`，但只有 3 个 TiKV 节点可作为 follower。
-* `INPROGRESS`：PD 正在调度放置。
-* `SCHEDULED`：PD 已成功完成放置调度。
+* `PENDING`：PD 尚未开始调度放置规则。这可能表示放置规则在语义上是正确的，但当前集群无法满足。例如，若 `FOLLOWERS=4`，但只有 3 个 TiKV 节点可作为 follower。
+* `INPROGRESS`：PD 正在调度放置规则。
+* `SCHEDULED`：PD 已成功调度放置规则。
 
 ## 语法
 

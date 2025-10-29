@@ -9,7 +9,7 @@ summary: SHOW PLACEMENT LABELS 在 TiDB 中的用法。
 
 > **Note:**
 >
-> 该功能在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 此功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
 ## 语法
 
@@ -38,7 +38,7 @@ SHOW PLACEMENT LABELS;
 
 该语句是 TiDB 对 MySQL 语法的扩展。
 
-## 参见
+## 另请参阅
 
 * [Placement Rules in SQL](/placement-rules-in-sql.md)
 * [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)

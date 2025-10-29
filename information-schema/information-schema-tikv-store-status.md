@@ -9,7 +9,7 @@ summary: 了解 `TIKV_STORE_STATUS` INFORMATION_SCHEMA 表。
 
 > **Note:**
 >
-> 该表在 [Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该表在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -54,7 +54,7 @@ DESC TIKV_STORE_STATUS;
 * `LABEL`：为 Store 设置的标签。
 * `VERSION`：Store 的版本号。
 * `CAPACITY`：Store 的存储容量。
-* `AVAILABLE`：Store 剩余的存储空间。
+* `AVAILABLE`：Store 的剩余存储空间。
 * `LEADER_COUNT`：Store 上的 leader 数量。
 * `LEADER_WEIGHT`：Store 的 leader 权重。
 * `LEADER_SCORE`：Store 的 leader 分数。

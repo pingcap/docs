@@ -13,43 +13,43 @@ aliases: ['/tidbcloud/glossary']
 
 ACID 指的是事务的四个关键特性：原子性（atomicity）、一致性（consistency）、隔离性（isolation）和持久性（durability）。每个特性如下所述。
 
-- **Atomicity** 表示一个操作的所有更改要么全部执行，要么全部不执行。TiDB 通过保证存储主键的 [TiDB Region](#region) 的原子性来实现事务的原子性。
+- **Atomicity**（原子性）意味着一个操作的所有更改要么全部执行，要么全部不执行。TiDB 通过保证存储主键的 [TiDB Region](#region) 的原子性来实现事务的原子性。
 
-- **Consistency** 表示事务总是将数据库从一个一致的状态转变为另一个一致的状态。在 TiDB 中，数据在写入内存前会确保一致性。
+- **Consistency**（一致性）意味着事务总是将数据库从一个一致的状态转变为另一个一致的状态。在 TiDB 中，数据在写入内存前会确保一致性。
 
-- **Isolation** 表示正在进行的事务对其他事务是不可见的，直到其完成。这允许并发事务在不牺牲一致性的情况下读写数据。TiDB 目前支持 `REPEATABLE READ` 隔离级别。
+- **Isolation**（隔离性）意味着正在进行的事务对其他事务是不可见的，直到其完成。这允许并发事务在不牺牲一致性的情况下读写数据。TiDB 目前支持 `REPEATABLE READ` 隔离级别。
 
-- **Durability** 表示一旦事务提交，即使系统发生故障也会保持已提交状态。TiKV 通过持久化存储来保证持久性。
+- **Durability**（持久性）意味着一旦事务提交，即使发生系统故障也会保持提交状态。TiKV 使用持久化存储来保证持久性。
 
 ## C
 
 ### Chat2Query
 
-Chat2Query 是集成在 SQL Editor 中的 AI 驱动功能，能够帮助用户通过自然语言指令生成、调试或重写 SQL 查询。更多信息，参见 [使用 AI 辅助 SQL Editor 探索数据](/tidb-cloud/explore-data-with-chat2query.md)。
+Chat2Query 是集成在 SQL 编辑器中的 AI 驱动功能，能够帮助用户通过自然语言指令生成、调试或重写 SQL 查询。更多信息，参见 [使用 AI 辅助 SQL 编辑器探索数据](/tidb-cloud/explore-data-with-chat2query.md)。
 
-此外，TiDB Cloud 为托管在 AWS 上的 TiDB Cloud Starter 集群提供 Chat2Query API。启用后，TiDB Cloud 会自动创建一个名为 **Chat2Query** 的系统 Data App，并在 Data Service 中创建一个 Chat2Data endpoint。你可以调用该 endpoint，通过指令让 AI 生成并执行 SQL 语句。更多信息，参见 [开始使用 Chat2Query API](/tidb-cloud/use-chat2query-api.md)。
+此外，TiDB Cloud 为托管在 AWS 上的 TiDB Cloud Starter 集群提供了 Chat2Query API。启用后，TiDB Cloud 会自动创建一个名为 **Chat2Query** 的系统 Data App 以及一个 Data Service 中的 Chat2Data endpoint。你可以调用该 endpoint，通过指令让 AI 生成并执行 SQL 语句。更多信息，参见 [开始使用 Chat2Query API](/tidb-cloud/use-chat2query-api.md)。
 
 ### Credit
 
-TiDB Cloud 为概念验证（PoC）用户提供一定数量的 credit。一个 credit 等同于一美元。你可以在 credit 过期前使用它们支付 TiDB 集群费用。
+TiDB Cloud 为概念验证（PoC）用户提供一定数量的 Credit。一个 Credit 等同于一美元。你可以在 Credit 过期前使用它们支付 TiDB 集群费用。
 
 ## D
 
 ### Data App
 
-[Data Service (beta)](#data-service) 中的 Data App 是一组 endpoint 的集合，你可以用它来访问特定应用的数据。你可以通过 API key 配置授权设置，限制对 Data App 中 endpoint 的访问。
+[Data Service (beta)](#data-service) 中的 Data App 是一组 endpoint 的集合，你可以用它来访问特定应用的数据。你可以通过 API key 配置授权设置，以限制对 Data App 中 endpoint 的访问。
 
 更多信息，参见 [管理 Data App](/tidb-cloud/data-service-manage-data-app.md)。
 
 ### Data Service
 
-Data Service (beta) 允许你通过自定义 API [endpoint](#endpoint) 以 HTTPS 请求方式访问 TiDB Cloud 数据。该功能采用无服务器架构，自动处理计算资源和弹性扩缩容，因此你可以专注于 endpoint 的查询逻辑，无需担心基础设施或运维成本。
+Data Service (beta) 允许你通过自定义 API [endpoint](#endpoint) 以 HTTPS 请求方式访问 TiDB Cloud 数据。该功能采用无服务器架构来处理计算资源和弹性扩缩容，因此你可以专注于 endpoint 的查询逻辑，无需担心基础设施或运维成本。
 
 更多信息，参见 [Data Service 概览](/tidb-cloud/data-service-overview.md)。
 
 ### Direct Customer
 
-Direct customer 指直接从 PingCAP 购买 TiDB Cloud 并直接支付账单的最终客户。与 [MSP customer](#msp-customer) 区分。
+Direct Customer（直客）指的是直接从 PingCAP 购买 TiDB Cloud 并直接支付账单的最终客户。这与 [MSP 客户](#msp-customer) 区分开。
 
 ## E
 
@@ -63,7 +63,7 @@ Data Service 中的 endpoint 是你可以自定义以执行 SQL 语句的 Web AP
 
 ### Full-text search
 
-与关注语义相似度的 [Vector Search](/vector-search/vector-search-overview.md) 不同，全文检索允许你根据精确关键字检索文档。在 RAG（Retrieval-Augmented Generation）场景下，你可以将全文检索与向量检索结合使用，以提升检索质量。
+与关注语义相似度的 [向量检索](/vector-search/vector-search-overview.md) 不同，全文检索允许你根据精确关键词检索文档。在 RAG（Retrieval-Augmented Generation，检索增强生成）场景中，你可以将全文检索与向量检索结合使用，以提升检索质量。
 
 更多信息，参见 [使用 SQL 进行全文检索](/tidb-cloud/vector-search-full-text-search-sql.md) 和 [使用 Python 进行全文检索](/tidb-cloud/vector-search-full-text-search-python.md)。
 
@@ -75,15 +75,15 @@ Data Service 中的 endpoint 是你可以自定义以执行 SQL 语句的 Web AP
 
 ### MPP
 
-自 v5.0 起，TiDB 通过 TiFlash 节点引入了大规模并行处理（Massively Parallel Processing, MPP）架构，将大型 Join 查询的执行负载分摊到多个 TiFlash 节点。当启用 MPP 模式时，TiDB 会根据成本判断是否使用 MPP 框架进行计算。在 MPP 模式下，Join 键在计算过程中通过 Exchange 操作重新分布，将计算压力分散到每个 TiFlash 节点，从而加速计算。更多信息，参见 [使用 TiFlash MPP 模式](/tiflash/use-tiflash-mpp-mode.md)。
+自 v5.0 起，TiDB 通过 TiFlash 节点引入了大规模并行处理（Massively Parallel Processing，MPP）架构，将大型 Join 查询的执行负载分摊到多个 TiFlash 节点。当启用 MPP 模式时，TiDB 会根据成本判断是否使用 MPP 框架进行计算。在 MPP 模式下，Join 键会在计算过程中通过 Exchange 操作重新分布，将计算压力分散到每个 TiFlash 节点，从而加速计算。更多信息，参见 [使用 TiFlash MPP 模式](/tiflash/use-tiflash-mpp-mode.md)。
 
 ### MSP Customer
 
-MSP customer（托管服务提供商客户）指通过 MSP 渠道购买 TiDB Cloud 并通过 MSP 支付账单的最终客户。与 [direct customer](#direct-customer) 区分。
+MSP 客户（Managed Service Provider Customer）指的是通过 MSP 渠道购买 TiDB Cloud 并通过 MSP 支付账单的最终客户。这与 [直客](#direct-customer) 区分开。
 
 ### Managed Service Provider (MSP)
 
-托管服务提供商（MSP）是指转售 TiDB Cloud 并提供增值服务（包括但不限于 TiDB Cloud 组织管理、计费服务和技术支持）的合作伙伴。
+MSP（Managed Service Provider，托管服务提供商）是指转售 TiDB Cloud 并提供增值服务的合作伙伴，包括但不限于 TiDB Cloud 组织管理、计费服务和技术支持。
 
 ## N
 
@@ -95,7 +95,7 @@ MSP customer（托管服务提供商客户）指通过 MSP 渠道购买 TiDB Clo
 
 ### organization
 
-你创建用于管理 TiDB Cloud 账户的实体，包括一个管理账户和任意数量的成员账户。
+你创建的用于管理 TiDB Cloud 账户的实体，包括一个管理账户和任意数量的成员账户。
 
 ### organization members
 
@@ -113,19 +113,19 @@ MSP customer（托管服务提供商客户）指通过 MSP 渠道购买 TiDB Clo
 
 ### project members
 
-项目成员是被邀请加入组织的一个或多个项目的用户。项目成员可以管理集群、网络访问、备份等资源。
+项目成员是被邀请加入组织中一个或多个项目的用户。项目成员可以管理集群、网络访问、备份等资源。
 
 ## R
 
 ### Recycle Bin
 
-用于存放已删除集群且有有效备份的数据的地方。一旦已备份的 TiDB Cloud 专属集群被删除，该集群现有的备份文件会被移动到回收站。对于自动备份产生的备份文件，回收站会保留指定时间。你可以在 **Backup Setting** 中配置备份保留时间，默认是 7 天。对于手动备份产生的备份文件，则没有过期时间。为避免数据丢失，请及时将数据恢复到新集群。注意，如果集群 **没有备份**，则删除的集群不会显示在此处。
+用于存放已删除且有有效备份的集群数据的地方。一旦已备份的 TiDB Cloud 专属集群被删除，该集群现有的备份文件会被移动到回收站。对于自动备份产生的备份文件，回收站会保留指定时间。你可以在 **Backup Setting** 中配置备份保留时间，默认是 7 天。对于手动备份产生的备份文件，则没有过期时间。为避免数据丢失，请及时将数据恢复到新集群。注意，如果集群 **没有备份**，则删除的集群不会在此处显示。
 
 ### region
 
 - TiDB Cloud region
 
-    部署 TiDB Cloud 集群的地理区域。一个 TiDB Cloud region 至少包含 3 个可用区，集群会跨这些可用区部署。
+    TiDB Cloud 集群部署的地理区域。一个 TiDB Cloud region 至少包含 3 个可用区，集群会跨这些可用区部署。
 
 - TiDB Region
 
@@ -133,25 +133,25 @@ MSP customer（托管服务提供商客户）指通过 MSP 渠道购买 TiDB Clo
 
 ### replica
 
-可以位于同一区域或不同区域的独立数据库，包含相同的数据。replica 通常用于灾备或提升性能。
+可以位于同一区域或不同区域的独立数据库，包含相同的数据。副本通常用于灾备或提升性能。
 
-### Replication Capacity Unit
+### Replication Capacity Unit (RCU)
 
-变更数据流（changefeed）的复制按计算资源计费，即 TiCDC 复制能力单元。
+TiDB Cloud 以 TiCDC 复制容量单位（Replication Capacity Unit，RCU）来衡量 [changefeed](/tidb-cloud/changefeed-overview.md) 的容量。为集群创建 changefeed 时，你可以选择合适的规格。RCU 越高，复制性能越好。你需要为这些 TiCDC changefeed 的 RCU 付费。更多信息，参见 [Changefeed Cost](https://www.pingcap.com/tidb-dedicated-pricing-details/#changefeed-cost)。
 
-### Request Capacity Unit
+### Request Capacity Unit (RCU)
 
-Request Capacity Unit（RCU）是用于表示为 TiDB Cloud Essential 集群预置的计算能力的计量单位。一个 RCU 提供固定数量的计算资源，可每秒处理一定数量的 RU。你预置的 RCU 数量决定了集群的基线性能和吞吐能力。更多信息，参见 [TiDB Cloud Essential 计费详情](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)。
+Request Capacity Unit（RCU，请求容量单位）是用于表示为 TiDB Cloud Essential 集群预留的计算能力的度量单位。一个 RCU 提供固定数量的计算资源，可每秒处理一定数量的 RU。你预留的 RCU 数量决定了集群的基线性能和吞吐能力。更多信息，参见 [TiDB Cloud Essential 价格详情](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)。
 
 ### Request Unit
 
-Request Unit（RU）是用于表示单个数据库请求消耗的资源量的计量单位。一个请求消耗的 RU 数量取决于多种因素，如操作类型或检索/修改的数据量。更多信息，参见 [TiDB Cloud Starter 计费详情](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)。
+Request Unit（RU，请求单位）是用于表示单个数据库请求消耗的资源量的度量单位。一个请求消耗的 RU 数量取决于多种因素，如操作类型或检索/修改的数据量。更多信息，参见 [TiDB Cloud Starter 价格详情](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)。
 
 ## S
 
 ### Spending limit
 
-[Spending limit](/tidb-cloud/manage-serverless-spend-limit.md) 指你愿意在某个工作负载上每月花费的最大金额。它是一种成本控制机制，使你可以为 TiDB Cloud Starter 集群设置预算。如果 spending limit 设置为 0，集群将保持免费。如果 spending limit 大于 0，则需要添加信用卡。
+[Spending limit](/tidb-cloud/manage-serverless-spend-limit.md) 指的是你愿意在某个工作负载上每月花费的最大金额。它是一种成本控制机制，使你可以为 TiDB Cloud Starter 集群设置预算。如果 spending limit 设置为 0，集群将保持免费。如果 spending limit 大于 0，则需要添加信用卡。
 
 ## T
 
@@ -179,11 +179,11 @@ Request Unit（RU）是用于表示单个数据库请求消耗的资源量的计
 
 ### Vector search
 
-[Vector search](/vector-search/vector-search-overview.md) 是一种以数据语义为核心、提供相关性结果的检索方式。与依赖精确关键字匹配和词频的传统全文检索不同，向量检索会将多种数据类型（如文本、图片或音频）转换为高维向量，并基于这些向量之间的相似度进行查询。这种检索方式能够捕捉数据的语义和上下文信息，更准确地理解用户意图。即使检索词与数据库内容不完全匹配，向量检索也能通过分析数据语义，返回符合用户意图的结果。
+[向量检索](/vector-search/vector-search-overview.md) 是一种以数据语义为核心、提供相关性结果的检索方式。与依赖精确关键词匹配和词频的传统全文检索不同，向量检索会将多种数据类型（如文本、图片或音频）转换为高维向量，并基于这些向量之间的相似度进行查询。这种检索方式能够捕捉数据的语义和上下文信息，更准确地理解用户意图。即使检索词与数据库内容不完全匹配，向量检索也能通过分析数据语义，返回符合用户意图的结果。
 
 ### Virtual Private Cloud
 
-为你的资源提供托管网络服务的逻辑隔离虚拟网络分区。
+逻辑隔离的虚拟网络分区，为你的资源提供托管的网络服务。
 
 ### VPC
 

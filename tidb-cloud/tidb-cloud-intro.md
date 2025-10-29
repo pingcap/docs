@@ -6,9 +6,9 @@ category: intro
 
 # 什么是 TiDB Cloud
 
-[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 是一款全托管的数据库即服务（DBaaS），将 [TiDB](https://docs.pingcap.com/tidb/stable/overview) —— 一个开源的 HTAP（混合事务与分析处理）数据库 —— 带到你的云端。TiDB Cloud 提供了一种简单的方式来部署和管理数据库，让你专注于应用开发，而无需关注数据库的复杂性。<CustomContent language="en,zh">你可以在 Amazon Web Services (AWS)、Google Cloud、Microsoft Azure 和阿里云上创建 TiDB Cloud 集群，快速构建关键业务应用。</CustomContent><CustomContent language="ja">You can create TiDB Cloud clusters to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.</CustomContent>
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 是一款全托管的数据库即服务（DBaaS），将 [TiDB](https://docs.pingcap.com/tidb/stable/overview) —— 一个开源的 HTAP（混合事务与分析处理）数据库 —— 带到你的云端。TiDB Cloud 提供了一种简单的方式来部署和管理数据库，让你专注于应用程序开发，而无需关注数据库的复杂性。<CustomContent language="en,zh">你可以在 Amazon Web Services (AWS)、Google Cloud、Microsoft Azure 和阿里云上创建 TiDB Cloud 集群，快速构建关键业务应用。</CustomContent><CustomContent language="ja">You can create TiDB Cloud clusters to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.</CustomContent>
 
-![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
+![TiDB Cloud 概览](/media/tidb-cloud/tidb-cloud-overview.png)
 
 ## 为什么选择 TiDB Cloud
 
@@ -26,7 +26,7 @@ TiDB Cloud 让你几乎无需培训即可轻松处理如基础设施管理和集
 
 - **Fast and Customized Scaling**
 
-    弹性且透明地扩展到数百个节点以应对关键业务负载，同时保持 ACID 事务。无需进行分片操作。你还可以根据业务需求分别扩展计算节点和存储节点。
+    弹性且透明地扩展到数百个节点以应对关键负载，同时保持 ACID 事务。无需进行分片操作。你还可以根据业务需求分别扩展计算和存储节点。
 
 - **MySQL Compatibility**
 
@@ -34,7 +34,7 @@ TiDB Cloud 让你几乎无需培训即可轻松处理如基础设施管理和集
 
 - **High Availability and Reliability**
 
-    天生高可用的架构设计。数据在多个可用区间进行复制，支持每日备份和自动故障转移，无论遇到硬件故障、网络分区还是数据中心丢失，都能保障业务连续性。
+    天生高可用的架构设计。数据在多个可用区间进行复制，支持每日备份和自动故障转移，无论硬件故障、网络分区还是数据中心丢失，都能保障业务连续性。
 
 - **Real-Time Analytics**
 
@@ -74,7 +74,7 @@ TiDB Cloud 让你几乎无需培训即可轻松处理如基础设施管理和集
 
 TiDB Cloud 提供以下部署选项：
 
-- TiDB Cloud Serverless（现已更名为 Starter）
+- TiDB Cloud Starter
 
     TiDB Cloud Starter 是一款全托管的多租户 TiDB 服务。它提供即时、自动扩缩容的 MySQL 兼容数据库，并在超出免费额度后按用量计费。
 
@@ -86,11 +86,11 @@ TiDB Cloud 提供以下部署选项：
 
 - TiDB Cloud Essential
 
-    针对业务负载持续增长、需要实时扩展的应用，TiDB Cloud Essential 提供了灵活性和性能，助力你的业务持续发展。
+    针对业务负载持续增长、需要实时扩展的应用，TiDB Cloud Essential 提供灵活性和性能，助力你的业务持续发展。
 
     <CustomContent language="en,zh">
 
-    目前，TiDB Cloud Essential 在 AWS 和阿里云上处于公测阶段。
+    目前，TiDB Cloud Essential 在 AWS 和阿里云上公测。
 
     关于 TiDB Cloud Starter 与 TiDB Cloud Essential 在阿里云上的功能对比，详见 [TiDB on Alibaba Cloud](https://www.pingcap.com/partners/alibaba-cloud/)。
 
@@ -102,24 +102,34 @@ TiDB Cloud 提供以下部署选项：
 
     </CustomContent>
 
+<CustomContent plan="premium">
+
+- TiDB Cloud Premium
+
+    TiDB Cloud Premium 专为对实时无限扩展有极高要求的关键业务设计，具备负载感知的自动扩缩容和全面的企业级能力。
+
+    目前，TiDB Cloud Premium 在 AWS 和阿里云上处于私测阶段。
+
+</CustomContent>
+
 - TiDB Cloud Dedicated
 
-    TiDB Cloud Dedicated 专为关键业务场景设计，支持跨多个可用区的高可用、横向扩展以及完整的 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) 能力。
+    TiDB Cloud Dedicated 面向关键业务，提供跨多个可用区的高可用性、横向扩展能力以及完整的 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) 能力。
 
     目前，TiDB Cloud Dedicated 已在 AWS 和 Google Cloud 上正式发布，并在 Azure 上公测。更多信息请参见 [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated)。
 
 ## 架构
 
-![TiDB Cloud architecture](/media/tidb-cloud/tidb-cloud-architecture.png)
+![TiDB Cloud 架构](/media/tidb-cloud/tidb-cloud-architecture.png)
 
 - TiDB VPC（虚拟私有云）
 
     对于每个 TiDB Cloud 集群，所有 TiDB 节点及辅助节点（包括 TiDB Operator 节点和日志节点）都部署在同一个 VPC 中。
 
-- TiDB Cloud Central Services
+- TiDB Cloud 中央服务
 
     中央服务（包括计费、告警、元数据存储、Dashboard UI 等）独立部署。你可以通过互联网访问 Dashboard UI 来操作 TiDB 集群。
 
 - 你的 VPC
 
-    你可以通过私有终端节点连接或 VPC 对等连接接入 TiDB 集群。详细信息请参见 [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md) 或 [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md)。
+    你可以通过私有端点连接或 VPC 对等连接接入 TiDB 集群。详细信息请参见 [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md) 或 [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md)。

@@ -9,7 +9,7 @@ summary: 了解如何在 TiDB 中使用 SHOW TABLE REGIONS。
 
 > **Note:**
 >
-> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
 ## 语法
 
@@ -31,16 +31,16 @@ TableName ::=
 执行 `SHOW TABLE REGIONS` 会返回以下列：
 
 * `REGION_ID`：Region 的 ID。
-* `START_KEY`：Region 的起始 key。
-* `END_KEY`：Region 的结束 key。
+* `START_KEY`：Region 的起始键。
+* `END_KEY`：Region 的结束键。
 * `LEADER_ID`：Region 的 Leader ID。
-* `LEADER_STORE_ID`：Region Leader 所在的 store（TiKV）ID。
+* `LEADER_STORE_ID`：Region Leader 所在的存储节点（TiKV）的 ID。
 * `PEERS`：所有 Region 副本的 ID。
-* `SCATTERING`：Region 是否正在调度。`1` 表示为 true。
-* `WRITTEN_BYTES`：在一个心跳周期内写入该 Region 的数据量估算，单位为字节。
-* `READ_BYTES`：在一个心跳周期内从该 Region 读取的数据量估算，单位为字节。
+* `SCATTERING`：Region 是否正在调度。`1` 表示是。
+* `WRITTEN_BYTES`：在一个心跳周期内写入该 Region 的数据量估算值，单位为字节。
+* `READ_BYTES`：在一个心跳周期内从该 Region 读取的数据量估算值，单位为字节。
 * `APPROXIMATE_SIZE(MB)`：Region 内数据的估算量，单位为 MB。
-* `APPROXIMATE_KEYS`：Region 内 key 的估算数量。
+* `APPROXIMATE_KEYS`：Region 内 Key 的估算数量。
 
 <CustomContent platform="tidb">
 
@@ -54,7 +54,7 @@ TableName ::=
 
 </CustomContent>
 
-* `SCHEDULING_STATE`：拥有 placement policy 的 Region 的调度状态。
+* `SCHEDULING_STATE`：具有 placement policy 的 Region 的调度状态。
 
 > **Note:**
 >
@@ -153,11 +153,11 @@ mysql> SHOW TABLE t REGIONS;
 在上述示例中：
 
 * 表 t 对应 6 个 Region。其中 `102`、`106`、`110`、`114`、`3` 存储行数据，`98` 存储索引数据。
-* Region `102` 的 `START_KEY` 和 `END_KEY` 中，`t_43` 表示表前缀和表 ID，`_r` 表示表 t 的记录数据前缀，`_i` 表示索引数据前缀。
-* Region `102` 的 `START_KEY` 和 `END_KEY` 表示记录数据范围为 `[-inf, 20000)`。同理，可以计算出 Region (`106`、`110`、`114`、`3`) 的数据存储范围。
-* Region `98` 存储索引数据。表 t 的索引数据起始 key 为 `t_43_i`，该范围属于 Region `98`。
+* Region `102` 的 `START_KEY` 和 `END_KEY` 中，`t_43` 表示表前缀和表 ID，`_r` 是表 t 记录数据的前缀，`_i` 是索引数据的前缀。
+* Region `102` 的 `START_KEY` 和 `END_KEY` 表示存储主键范围为 `[-inf, 20000)` 的记录数据。类似地，可以计算出 Region (`106`、`110`、`114`、`3`) 的数据存储范围。
+* Region `98` 存储索引数据。表 t 的索引数据起始键为 `t_43_i`，该范围的数据存储在 Region `98` 中。
 
-如需查看 store 1 上对应表 t 的 Region，可使用 `WHERE` 子句：
+要查看 store 1 上对应表 t 的 Region，可使用 `WHERE` 子句：
 
 ```sql
 test> SHOW TABLE t REGIONS WHERE leader_store_id =1;
@@ -168,7 +168,7 @@ test> SHOW TABLE t REGIONS WHERE leader_store_id =1;
 +-----------+-----------+---------+-----------+-----------------+--------------+------------+---------------+------------+----------------------+------------------+------------------------+------------------+
 ```
 
-使用 `SPLIT TABLE REGION` 可将索引数据拆分为多个 Region。如下例，将表 t 的索引数据 `name` 在 `[a,z]` 范围内拆分为 2 个 Region。
+使用 `SPLIT TABLE REGION` 可将索引数据拆分为多个 Region。如下例所示，将表 t 的索引数据 `name` 在 `[a,z]` 范围内拆分为 2 个 Region。
 
 ```sql
 test> SPLIT TABLE t INDEX name BETWEEN ("a") AND ("z") REGIONS 2;

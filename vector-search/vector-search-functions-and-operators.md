@@ -11,7 +11,7 @@ summary: 了解可用于向量数据类型的函数与运算符。
 
 > **Warning:**
 >
-> 此功能为实验性功能。不建议在生产环境中使用。该功能可能会在未提前通知的情况下发生变更。如果你发现了 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
+> 此功能为实验性功能。不建议在生产环境中使用。该功能可能会在没有提前通知的情况下发生变更。如果你发现了 bug，可以在 GitHub 上提交一个 [issue](https://github.com/pingcap/tidb/issues)。
 
 </CustomContent>
 
@@ -19,13 +19,13 @@ summary: 了解可用于向量数据类型的函数与运算符。
 
 > **Note:**
 >
-> 此功能处于 Beta 阶段，可能会在未提前通知的情况下发生变更。如果你发现了 bug，可以在 GitHub 上提交 [issue](https://github.com/pingcap/tidb/issues)。
+> 此功能处于 beta 阶段，可能会在没有提前通知的情况下发生变更。如果你发现了 bug，可以在 GitHub 上提交一个 [issue](https://github.com/pingcap/tidb/issues)。
 
 </CustomContent>
 
 > **Note:**
 >
-> 向量数据类型及这些向量函数可用于 TiDB 自建版、[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)、[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 和 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)。对于 TiDB 自建版和 TiDB Cloud Dedicated，TiDB 版本需为 v8.4.0 或更高（推荐 v8.5.0 或更高）。
+> 向量数据类型及这些向量函数可用于 TiDB 自建版、[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)、[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 和 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)。对于 TiDB 自建版和 TiDB Cloud Dedicated，TiDB 版本需为 v8.4.0 或更高（推荐 v8.5.0 或更高）。
 
 ## 向量函数
 
@@ -45,7 +45,7 @@ summary: 了解可用于向量数据类型的函数与运算符。
 | 函数名                        | 描述                                         |
 | ----------------------------- | -------------------------------------------- |
 | [`VEC_DIMS`](#vec_dims)           | 返回向量的维度                              |
-| [`VEC_L2_NORM`](#vec_l2_norm)     | 计算向量的 L2 范数（欧氏范数）               |
+| [`VEC_L2_NORM`](#vec_l2_norm)     | 计算向量的 L2 范数（欧氏范数）              |
 | [`VEC_FROM_TEXT`](#vec_from_text) | 将字符串转换为向量                          |
 | [`VEC_AS_TEXT`](#vec_as_text)     | 将向量转换为字符串                          |
 
@@ -57,8 +57,8 @@ summary: 了解可用于向量数据类型的函数与运算符。
 
 | 名称                                                                                   | 描述                              |
 | :------------------------------------------------------------------------------------- | :------------------------------- |
-| [`+`](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_plus)  | 向量按元素加法运算符              |
-| [`-`](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_minus) | 向量按元素减法运算符              |
+| [`+`](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_plus)  | 向量按元素加法运算符             |
+| [`-`](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_minus) | 向量按元素减法运算符             |
 
 关于向量算术的更多信息，参见 [向量数据类型 | 算术运算](/vector-search/vector-search-data-types.md#arithmetic)。
 
@@ -66,10 +66,10 @@ summary: 了解可用于向量数据类型的函数与运算符。
 
 | 名称                              | 描述                                      |
 | :----------------------- | :---------------------------------------- |
-| [`COUNT()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_count)                  | 返回结果行数的计数                      |
-| [`COUNT(DISTINCT)`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_count-distinct) | 返回不同值的计数                        |
-| [`MAX()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_max)                      | 返回最大值                              |
-| [`MIN()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_min)                      | 返回最小值                              |
+| [`COUNT()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_count)                  | 返回结果行数                             |
+| [`COUNT(DISTINCT)`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_count-distinct) | 返回不同值的数量                         |
+| [`MAX()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_max)                      | 返回最大值                               |
+| [`MIN()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_min)                      | 返回最小值                               |
 
 **比较函数与运算符：**
 
@@ -92,7 +92,7 @@ summary: 了解可用于向量数据类型的函数与运算符。
 | [`!=`, `<>`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-equal)                  | 不等于运算符                                  |
 | [`NOT IN()`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-in)                     | 检查值是否不在某个集合中                      |
 
-关于向量如何进行比较的更多信息，参见 [向量数据类型 | 比较](/vector-search/vector-search-data-types.md#comparison)。
+关于向量比较的更多信息，参见 [向量数据类型 | 比较](/vector-search/vector-search-data-types.md#comparison)。
 
 **流程控制函数：**
 
@@ -152,7 +152,7 @@ $DISTANCE(p,q)=1.0 - {\frac {\sum \limits _{i=1}^{n}{p_{i}q_{i}}}{{\sqrt {\sum \
 
 两个向量必须具有相同的维度，否则会返回错误。
 
-对于来自 OpenAI 的嵌入，建议[使用此函数](https://help.openai.com/en/articles/6824809-embeddings-faq)。
+对于来自 OpenAI 的嵌入向量，[推荐](https://help.openai.com/en/articles/6824809-embeddings-faq)使用此函数。
 
 示例：
 
@@ -284,7 +284,7 @@ SELECT VEC_L2_NORM('[3, 4]');
 VEC_FROM_TEXT(string)
 ```
 
-将字符串转换为向量。在许多场景下，此转换会被隐式执行，例如向 `VECTOR` 数据类型的列插入数据时。然而，在某些表达式中（如向量的算术运算），如果不支持隐式转换，则需要显式调用此函数。
+将字符串转换为向量。在许多情况下，此转换是隐式完成的，例如在向 `VECTOR` 数据类型的列中插入数据时。然而，在某些表达式中（如向量的算术运算），如果不支持隐式转换，则需要显式调用此函数。
 
 示例：
 

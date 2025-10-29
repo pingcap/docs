@@ -1,15 +1,15 @@
 ---
 title: ALTER RANGE
-summary: TiDB 中 ALTER RANGE 的用法概述。
+summary: TiDB 中 ALTER RANGE 用法概述。
 ---
 
 # ALTER RANGE
 
-目前，`ALTER RANGE` 语句只能用于修改 TiDB 中特定放置策略（placement policy）的范围。
+目前，`ALTER RANGE` 语句只能用于修改 TiDB 中特定放置策略的范围。
 
-> **注意：**
+> **Note:**
 >
-> 此功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 此功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
 ## 语法
 

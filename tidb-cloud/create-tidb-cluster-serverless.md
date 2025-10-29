@@ -7,7 +7,7 @@ summary: 了解如何创建 TiDB Cloud Starter 或 TiDB Cloud Essential 集群�
 
 本文档介绍如何在 [TiDB Cloud 控制台](https://tidbcloud.com/) 中创建 TiDB Cloud Starter 或 TiDB Cloud Essential 集群。
 
-> **提示：**
+> **Tip:**
 >
 > 如果你想了解如何创建 TiDB Cloud Dedicated 集群，请参见 [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)。
 
@@ -56,7 +56,7 @@ summary: 了解如何创建 TiDB Cloud Starter 或 TiDB Cloud Essential 集群�
 
         - 你可以设置集群的消费上限。如果消费上限设置为 0，集群将保持免费。如果消费上限大于 0，则需要在创建集群前添加信用卡。
 
-        - 默认情况下，每个组织最多可以创建五个[免费 Starter 集群](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)。如需创建更多 Starter 集群，必须添加信用卡并指定消费上限。
+        - 默认情况下，每个组织最多可以创建五个[免费 Starter 集群](/tidb-cloud/select-cluster-tier.md#starter)。如需创建更多 Starter 集群，必须添加信用卡并指定消费上限。
 
     - **Essential** 方案：
 
@@ -72,6 +72,6 @@ summary: 了解如何创建 TiDB Cloud Starter 或 TiDB Cloud Essential 集群�
 
 集群创建完成后，请按照 [Connect to TiDB Cloud via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) 的指引为你的集群创建密码。
 
-> **注意：**
+> **Note:**
 >
 > 如果你未设置密码，将无法连接到集群。

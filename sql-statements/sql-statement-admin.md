@@ -5,7 +5,7 @@ summary: TiDB 数据库中 ADMIN 的用法概述。
 
 # ADMIN
 
-该语句是 TiDB 的扩展语法，用于查看 TiDB 的状态以及检查 TiDB 中表的数据。本文档介绍以下与 `ADMIN` 相关的语句：
+该语句是 TiDB 的扩展语法，用于查看 TiDB 的状态以及检查 TiDB 中表的数据。本文档介绍了以下与 `ADMIN` 相关的语句：
 
 - [`ADMIN RELOAD`](#admin-reload-语句)
 - [`ADMIN PLUGINS`](#admin-plugins-相关语句)
@@ -23,7 +23,7 @@ summary: TiDB 数据库中 ADMIN 的用法概述。
 | [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)             | 取消当前正在运行的 DDL 任务。 |
 | [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)               | 暂停当前正在运行的 DDL 任务。 |
 | [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)             | 恢复已暂停的 DDL 任务。       |
-| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)          | 计算表的所有行和索引的 CRC64。 |
+| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)          | 计算表的所有行及索引的 CRC64。 |
 | [<code>ADMIN CHECK [TABLE\|INDEX]</code>](/sql-statements/sql-statement-admin-check-table-index.md) | 检查表或索引的一致性。         |
 | [<code>ADMIN SHOW DDL [JOBS\|QUERIES]</code>](/sql-statements/sql-statement-admin-show-ddl.md)      | 显示当前正在运行或最近完成的 DDL 任务的详细信息。 |
 
@@ -34,7 +34,7 @@ summary: TiDB 数据库中 ADMIN 的用法概述。
 | 语句                                                                                     | 描述                       |
 |------------------------------------------------------------------------------------------|----------------------------|
 | [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)             | 取消当前正在运行的 DDL 任务。 |
-| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)          | 计算表的所有行和索引的 CRC64。 |
+| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)          | 计算表的所有行及索引的 CRC64。 |
 | [<code>ADMIN CHECK [TABLE\|INDEX]</code>](/sql-statements/sql-statement-admin-check-table-index.md) | 检查表或索引的一致性。         |
 | [<code>ADMIN SHOW DDL [JOBS\|QUERIES]</code>](/sql-statements/sql-statement-admin-show-ddl.md)      | 显示当前正在运行或最近完成的 DDL 任务的详细信息。 |
 
@@ -58,7 +58,7 @@ ADMIN RELOAD opt_rule_blacklist;
 
 > **Note:**
 >
-> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该功能不适用于 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群。
 
 ```sql
 ADMIN PLUGINS ENABLE plugin_name [, plugin_name] ...;
@@ -78,25 +78,25 @@ ADMIN PLUGINS DISABLE plugin_name [, plugin_name] ...;
 ADMIN FLUSH BINDINGS;
 ```
 
-上述语句用于持久化 SQL 执行计划绑定信息。
+上述语句用于持久化 SQL Plan 绑定信息。
 
 ```sql
 ADMIN CAPTURE BINDINGS;
 ```
 
-上述语句可以从出现多次的 `SELECT` 语句中生成 SQL 执行计划绑定。
+上述语句可以从出现多次的 `SELECT` 语句中生成 SQL Plan 绑定。
 
 ```sql
 ADMIN EVOLVE BINDINGS;
 ```
 
-开启自动绑定功能后，每隔 `bind-info-leave`（默认值为 `3s`）会触发一次 SQL 执行计划绑定信息的进化。上述语句用于主动触发该进化过程。
+开启自动绑定功能后，每隔 `bind-info-leave`（默认值为 `3s`）会触发一次 SQL Plan 绑定信息的进化。上述语句用于主动触发该进化过程。
 
 ```sql
 ADMIN RELOAD BINDINGS;
 ```
 
-上述语句用于重新加载 SQL 执行计划绑定信息。
+上述语句用于重新加载 SQL Plan 绑定信息。
 
 ## `ADMIN REPAIR` 语句
 
@@ -104,7 +104,7 @@ ADMIN RELOAD BINDINGS;
 
 > **Note:**
 >
-> 该 TiDB 语句不适用于 TiDB Cloud。
+> 此 TiDB 语句不适用于 TiDB Cloud。
 
 </CustomContent>
 
@@ -116,7 +116,7 @@ ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT;
 
 <CustomContent platform="tidb">
 
-这里的“不可信”是指你需要手动确保原表的元数据可以被 `CREATE TABLE STATEMENT` 操作覆盖。要使用该 `REPAIR` 语句，需要开启 [`repair-mode`](/tidb-configuration-file.md#repair-mode) 配置项，并确保待修复的表已列在 [`repair-table-list`](/tidb-configuration-file.md#repair-table-list) 中。
+这里的“不可信”指的是你需要手动确保原表的元数据可以被 `CREATE TABLE STATEMENT` 操作覆盖。要使用该 `REPAIR` 语句，需要开启 [`repair-mode`](/tidb-configuration-file.md#repair-mode) 配置项，并确保待修复的表已列在 [`repair-table-list`](/tidb-configuration-file.md#repair-table-list) 中。
 
 </CustomContent>
 
@@ -132,7 +132,7 @@ ADMIN SHOW t NEXT_ROW_ID;
 
 > **Note:**
 >
-> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该功能不适用于 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群。
 
 ```sql
 ADMIN SHOW SLOW RECENT N;
@@ -281,7 +281,7 @@ ADMIN SHOW DDL JOBS 5 WHERE state != 'synced' AND db_name = 'test';
 * `JOB_TYPE`：DDL 操作的类型。
 * `SCHEMA_STATE`：当前的 schema 状态。如果 `JOB_TYPE` 为 `add index`，则为索引的状态；如果为 `add column`，则为列的状态；如果为 `create table`，则为表的状态。常见状态包括：
     * `none`：表示不存在。当 `drop` 或 `create` 操作失败并回滚时，通常会变为 `none` 状态。
-    * `delete only`、`write only`、`delete reorganization`、`write reorganization`：这四种状态为中间态。由于中间态转换非常快，常规操作中一般不可见。只有在 `add index` 操作中可能看到 `write reorganization`，表示正在添加索引数据。
+    * `delete only`、`write only`、`delete reorganization`、`write reorganization`：这四种状态为中间态。在常规操作中这些状态通常不可见，因为中间态的转换非常快。只有在 `add index` 操作中可能看到 `write reorganization`，表示正在添加索引数据。
     * `public`：表示存在且可用。当 `create table`、`add index/column` 等操作完成后，通常会变为 `public` 状态，表示新建的表/列/索引可以正常读写。
 * `SCHEMA_ID`：执行 DDL 操作的数据库 ID。
 * `TABLE_ID`：执行 DDL 操作的表 ID。
@@ -289,7 +289,7 @@ ADMIN SHOW DDL JOBS 5 WHERE state != 'synced' AND db_name = 'test';
 * `START_TIME`：DDL 操作的开始时间。
 * `END_TIME`：DDL 操作的结束时间。
 * `STATE`：DDL 操作的状态。常见状态包括：
-    * `none`：表示操作任务已进入 DDL 任务队列但尚未执行，正在等待前序任务完成。也可能在执行 drop 操作后变为 `none`，但很快会更新为 `synced`，表示所有 TiDB 实例已同步到该状态。
+    * `none`：表示操作任务已进入 DDL 任务队列但尚未执行，可能是因为正在等待前面的任务完成。另一种情况是执行 drop 操作后变为 `none`，但很快会更新为 `synced`，表示所有 TiDB 实例已同步到该状态。
     * `running`：表示操作正在执行中。
     * `synced`：表示操作已成功执行，且所有 TiDB 实例已同步到该状态。
     * `rollback done`：表示操作失败且已完成回滚。

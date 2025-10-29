@@ -1,15 +1,15 @@
 ---
-title: CREATE INDEX | TiDB SQL Statement Reference
-summary: CREATE INDEX 在 TiDB 数据库中的用法概述。
+title: CREATE INDEX | TiDB SQL 语句参考
+summary: TiDB 数据库中 CREATE INDEX 的用法概述。
 ---
 
 # CREATE INDEX
 
-该语句用于为已存在的表添加一个新索引。它是 [`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-alter-table.md) 的另一种语法形式，并为兼容 MySQL 而提供。
+该语句用于为已存在的表添加新索引。它是 [`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-alter-table.md) 的另一种语法形式，并为兼容 MySQL 而提供。
 
 <CustomContent platform="tidb-cloud">
 
-> **注意：**
+> **Note:**
 >
 > 对于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群（4 vCPU），建议手动关闭 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)，以防止在创建索引期间资源限制影响集群稳定性。关闭该设置后，索引将通过事务方式创建，从而降低对集群的整体影响。
 
@@ -136,7 +136,7 @@ CREATE TABLE t1 (
 );
 ```
 
-> **注意：**
+> **Note:**
 >
 > 表达式索引中的表达式必须用 `(` 和 `)` 包裹，否则会报语法错误。
 
@@ -179,7 +179,7 @@ DROP INDEX idx1 ON t1;
 - [`UPPER()`](/functions-and-operators/string-functions.md#upper)
 - [`VITESS_HASH()`](/functions-and-operators/tidb-functions.md)
 
-对于未包含在上述列表中的函数，这些函数尚未经过充分测试，不建议在生产环境中使用，可视为实验性特性。其他表达式如运算符、`CAST`、`CASE WHEN` 也属于实验性特性，不建议在生产环境中使用。
+对于未包含在上述列表中的函数，这些函数尚未经过充分测试，不建议在生产环境中使用，可视为实验性特性。其他表达式如运算符、`CAST`、`CASE WHEN` 等也属于实验性特性，不建议在生产环境中使用。
 
 <CustomContent platform="tidb">
 
@@ -191,7 +191,7 @@ allow-expression-index = true
 
 </CustomContent>
 
-> **注意：**
+> **Note:**
 >
 > 表达式索引不能创建在主键上。
 >
@@ -205,13 +205,13 @@ allow-expression-index = true
 > - ROW 函数，如 `CREATE TABLE t (j JSON, INDEX k (((j,j))));`。
 > - [聚合函数](/functions-and-operators/aggregate-group-by-functions.md)。
 >
-> 表达式索引会隐式占用一个名称（例如 `_V$_{index_name}_{index_offset}`）。如果你尝试用已存在的列名创建新的表达式索引，会报错。同样，如果你添加了与之同名的新列，也会报错。
+> 表达式索引会隐式占用一个名称（例如 `_V$_{index_name}_{index_offset}`）。如果你尝试创建与已有列同名的表达式索引，会报错。同样，如果你添加了与之同名的新列，也会报错。
 >
-> 请确保表达式索引中函数参数的数量正确。
+> 请确保表达式索引中函数的参数数量正确。
 >
-> 当索引表达式包含字符串相关函数时，受返回类型和长度影响，可能导致表达式索引创建失败。此时可以使用 `CAST()` 显式指定返回类型和长度。例如，若要基于 `REPEAT(a, 3)` 表达式创建索引，需要将表达式修改为 `CAST(REPEAT(a, 3) AS CHAR(20))`。
+> 当索引表达式包含字符串相关函数时，受返回类型和长度影响，可能导致表达式索引创建失败。此时，你可以使用 `CAST()` 函数显式指定返回类型和长度。例如，若要基于 `REPEAT(a, 3)` 表达式创建索引，需要将表达式修改为 `CAST(REPEAT(a, 3) AS CHAR(20))`。
 
-当查询语句中的表达式与表达式索引中的表达式匹配时，优化器可以选择使用表达式索引。在某些情况下，优化器可能不会选择表达式索引，这取决于统计信息。此时，你可以通过优化器 Hint 强制优化器选择表达式索引。
+当查询语句中的表达式与表达式索引中的表达式匹配时，优化器可以选择表达式索引进行查询。在某些情况下，优化器可能不会选择表达式索引，这取决于统计信息。此时，你可以通过优化器提示强制优化器选择表达式索引。
 
 在以下示例中，假设你在表达式 `LOWER(col1)` 上创建了表达式索引 `idx`：
 
@@ -247,7 +247,7 @@ SELECT MIN(col1) FROM t GROUP BY LOWER(col1);
 
 要查看表达式索引对应的表达式，可以执行 [`SHOW INDEX`](/sql-statements/sql-statement-show-indexes.md)，或查看系统表 [`information_schema.tidb_indexes`](/information-schema/information-schema-tidb-indexes.md) 以及表 [`information_schema.STATISTICS`](/information-schema/information-schema-statistics.md)。输出结果中的 `Expression` 列表示对应的表达式。对于非表达式索引，该列显示为 `NULL`。
 
-维护表达式索引的成本高于维护其他索引，因为每次插入或更新行时都需要计算表达式的值。表达式的值已存储在索引中，因此当优化器选择表达式索引时，无需重新计算该值。
+维护表达式索引的成本高于维护其他索引，因为每次插入或更新行时都需要计算表达式的值。表达式的值已存储在索引中，因此当优化器选择表达式索引时，无需再次计算该值。
 
 因此，当查询性能优先于插入和更新性能时，可以考虑对表达式建立索引。
 
@@ -334,7 +334,7 @@ mysql> CREATE TABLE customers (
 ERROR 1235 (42000): This version of TiDB doesn't yet support 'more than one multi-valued key part per index'.
 ```
 
-写入的数据必须与多值索引定义的类型完全一致，否则写入会失败：
+写入的数据必须与多值索引定义的类型完全一致，否则数据写入会失败：
 
 ```sql
 -- zipcode 字段中的所有元素必须为 UNSIGNED 类型。
@@ -363,7 +363,7 @@ Query OK, 1 row affected (0.00 sec)
 - 与普通索引相比，DML 操作会修改更多的多值索引记录，因此多值索引对性能的影响大于普通索引。
 - 由于多值索引属于特殊类型的表达式索引，因此多值索引具有与表达式索引相同的限制。
 - 如果表使用了多值索引，则无法通过 BR、TiCDC 或 TiDB Lightning 将该表备份、同步或导入到 v6.6.0 之前的 TiDB 集群。
-- 对于包含复杂条件的查询，TiDB 可能无法选择多值索引。关于多值索引支持的条件模式，参见 [使用多值索引](/choose-index.md#use-multi-valued-indexes)。
+- 对于包含复杂条件的查询，TiDB 可能无法选择多值索引。关于多值索引支持的条件模式，请参见 [使用多值索引](/choose-index.md#use-multi-valued-indexes)。
 
 ## 不可见索引
 
@@ -374,23 +374,28 @@ CREATE TABLE t1 (c1 INT, c2 INT, UNIQUE(c2));
 CREATE UNIQUE INDEX c1 ON t1 (c1) INVISIBLE;
 ```
 
-从 TiDB v8.0.0 开始，你可以通过修改系统变量 [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800) 让优化器选择不可见索引。
+自 TiDB v8.0.0 起，你可以通过修改系统变量 [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800) 让优化器选择不可见索引。
 
 详情参见 [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)。
 
 ## 相关系统变量
 
-与 `CREATE INDEX` 语句相关的系统变量有 `tidb_ddl_enable_fast_reorg`、`tidb_ddl_reorg_worker_cnt`、`tidb_ddl_reorg_batch_size`、`tidb_enable_auto_increment_in_generated` 和 `tidb_ddl_reorg_priority`。详见 [系统变量](/system-variables.md#tidb_ddl_reorg_worker_cnt)。
+与 `CREATE INDEX` 语句相关的系统变量有 `tidb_ddl_enable_fast_reorg`、`tidb_ddl_reorg_worker_cnt`、`tidb_ddl_reorg_batch_size`、`tidb_enable_auto_increment_in_generated` 和 `tidb_ddl_reorg_priority`。详情请参见 [系统变量](/system-variables.md#tidb_ddl_reorg_worker_cnt)。
 
 ## MySQL 兼容性
 
-* TiDB 支持解析 `FULLTEXT` 语法，但不支持使用 `FULLTEXT`、`HASH` 和 `SPATIAL` 索引。
+* TiDB 自托管版和 TiDB Cloud Dedicated 支持解析 `FULLTEXT` 语法，但不支持使用 `FULLTEXT`、`HASH` 和 `SPATIAL` 索引。
+
+    >**Note:**
+    >
+    > 目前，只有部分 AWS 区域的 {{{ .starter }} 和 {{{ .essential }}} 集群支持 [`FULLTEXT` 语法和索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)。
+
 * TiDB 为兼容 MySQL，语法上接受 `HASH`、`BTREE` 和 `RTREE` 等索引类型，但会忽略它们。
 * 不支持降序索引（与 MySQL 5.7 类似）。
 * 不支持为表添加 `CLUSTERED` 类型的主键。关于 `CLUSTERED` 类型主键的更多信息，参见 [聚簇索引](/clustered-indexes.md)。
-* 表达式索引与视图不兼容。使用视图执行查询时，无法同时使用表达式索引。
-* 表达式索引与绑定存在兼容性问题。当表达式索引的表达式中包含常量时，为对应查询创建的绑定会扩展其作用范围。例如，假设表达式索引中的表达式为 `a+1`，对应的查询条件为 `a+1 > 2`，此时创建的绑定为 `a+? > ?`，这意味着条件如 `a+2 > 2` 的查询也会被强制使用表达式索引，可能导致执行计划不佳。此外，这也会影响 SQL Plan Management (SPM) 中的基线捕获和基线演进。
-* 使用多值索引写入的数据必须与定义的数据类型完全一致，否则写入会失败。详情参见 [创建多值索引](/sql-statements/sql-statement-create-index.md#create-multi-valued-indexes)。
+* 表达式索引与视图不兼容。通过视图执行查询时，无法同时使用表达式索引。
+* 表达式索引与绑定存在兼容性问题。当表达式索引的表达式中包含常量时，为对应查询创建的绑定会扩展其适用范围。例如，假设表达式索引的表达式为 `a+1`，对应的查询条件为 `a+1 > 2`，此时创建的绑定为 `a+? > ?`，这意味着条件如 `a+2 > 2` 的查询也会被强制使用表达式索引，可能导致执行计划不佳。此外，这也会影响 SQL Plan Management (SPM) 中的基线捕获和基线演进。
+* 使用多值索引写入的数据必须与定义的数据类型完全一致，否则数据写入会失败。详情参见 [创建多值索引](/sql-statements/sql-statement-create-index.md#create-multi-valued-indexes)。
 * 将 `UNIQUE KEY` 作为 [全局索引](/partitioned-table.md#global-indexes) 并使用 `GLOBAL` 索引选项是 TiDB 针对 [分区表](/partitioned-table.md) 的扩展，不兼容 MySQL。
 
 ## 另请参阅
