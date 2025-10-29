@@ -56,11 +56,10 @@ If you have the `Organization Owner` role, you can create a {{{ .premium }}} ins
 
     The instance creation process begins. If this is your first instance in the selected region, provisioning typically takes about 30 minutes. If the selected region already has existing instances, the process is faster and usually completes within about 1 minute.
 
-<!--## What's next
+## What's next
 
 After your instance is created, follow the instructions in [Connect to TiDB Cloud via Public Endpoint](/tidb-cloud/connect-via-standard-connection-premium.md) to create a password for your instance.
 
 > **Note:**
 >
 > If you do not set a password, you cannot connect to the instance.
--->
