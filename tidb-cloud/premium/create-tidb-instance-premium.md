@@ -58,7 +58,7 @@ If you have the `Organization Owner` role, you can create a {{{ .premium }}} ins
 
 ## What's next
 
-After your instance is created, follow the instructions in [Connect to TiDB Cloud via Public Endpoint](/tidb-cloud/connect-via-standard-connection-premium.md) to create a password for your instance.
+After your instance is created, follow the instructions in [Connect to TiDB Cloud via Public Endpoint](/tidb-cloud/premium/connect-to-premium-via-public-connection.md) to create a password for your instance.
 
 > **Note:**
 >
