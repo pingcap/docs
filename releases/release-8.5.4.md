@@ -41,10 +41,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + TiKV <!--tw@lilin90: 6 notes-->
 
-    - 将部分 BR 模块的可自动恢复的错误的日志级别从ERROR 调整为 WARN [#18493](https://github.com/tikv/tikv/issues/18493) @[YuJuncen](https://github.com/YuJuncen)
-    - 将 Raft 模块检查 GC 的流程拆分为两个阶段，提升 Region 冗余 MVCC 版本 GC 的效率。[#18695](https://github.com/tikv/tikv/issues/18695) @[v01dstar](https://github.com/v01dstar)
-    - 基于 GC safe point 和 Rocksdb 的统计信息计算 MVCC 的冗余读，提升 compaction 的效率和准确性。[#18697](https://github.com/tikv/tikv/issues/18697) @[v01dstar](https://github.com/v01dstar)
-    - 将部分 TiKV 的错误日志从 ERROR 级别调整为 WARN 级别，避免产生过多不必要的告警。[#18745](https://github.com/tikv/tikv/issues/18745) @[exit-code-1](https://github.com/exit-code-1)
+    - Change the log level of certain automatically recoverable errors in the BR module from `ERROR` to `WARN` to reduce unnecessary alerts [#18493](https://github.com/tikv/tikv/issues/18493) @[YuJuncen](https://github.com/YuJuncen)
+    - Change the log level of certain TiKV error messages from `ERROR` to `WARN` to reduce unnecessary alerts [#18745](https://github.com/tikv/tikv/issues/18745) @[exit-code-1](https://github.com/exit-code-1)
+    - Split the GC check process in the Raft module into two phases to improve the efficiency of redundant MVCC version GC in Regions [#18695](https://github.com/tikv/tikv/issues/18695) @[v01dstar](https://github.com/v01dstar)
+    - Calculate redundant MVCC reads based on GC safe points and RocksDB statistics to improve the efficiency and accuracy of compaction [#18697](https://github.com/tikv/tikv/issues/18697) @[v01dstar](https://github.com/v01dstar)
     - Change the GC handling logic for Region MVCC to be executed by GC worker threads to make the GC processing workflow consistent [#18727](https://github.com/tikv/tikv/issues/18727) @[v01dstar](https://github.com/v01dstar)
     - Optimize the calculation of the default gRPC thread pool size by making it dynamically based on total CPU cores instead of a fixed value, preventing performance bottlenecks caused by insufficient gRPC threads [#18613](https://github.com/tikv/tikv/issues/18613) @[LykxSassinator](https://github.com/LykxSassinator)
     - (dup): release-7.5.7.md > 改进提升> TiKV - 优化在存在大量 SST 文件的环境中 async snapshot 和 write 的尾延迟 [#18743](https://github.com/tikv/tikv/issues/18743) @[Connor1996](https://github.com/Connor1996)
