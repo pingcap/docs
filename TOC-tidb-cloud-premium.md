@@ -128,10 +128,10 @@
 
 ## GUIDES
 
-- Manage Cluster
+- Manage Instances
   - [Select Your Cluster Plan](/tidb-cloud/select-cluster-tier.md)
-  - Manage TiDB Cloud Clusters
-    - [Create a TiDB Cloud Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+  - Manage TiDB Cloud Instances
+    - [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)
     - Connect to Your TiDB Cloud Cluster
       - [Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
       - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
