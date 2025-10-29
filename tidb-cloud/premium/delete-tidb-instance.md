@@ -27,7 +27,7 @@ You can delete an instance at any time by performing the following steps:
 
     Once you delete a backed up {{{ .premium }}} instance, the existing backup files of the instance are moved to the recycle bin.
 
-    - Automatic backups will expire and be automatically deleted once the retention period ends. The default retention period is 7 days if you don't modify it.
+    Automatic backups will expire and be automatically deleted once the retention period ends. The default retention period is 7 days if you don't modify it.
 
     > **Note:**
     >
