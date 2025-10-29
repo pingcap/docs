@@ -26,14 +26,14 @@ heading_patthern = re.compile(r"(^#+|\n#+)\s")
 # match copyable snippet code
 copyable_snippet_pattern = re.compile(r"{{< copyable .* >}}")
 custom_content_tidb = re.compile(
-    r"""<CustomContent +platform=["']tidb["'] *>(.|\n)*?</CustomContent>\n"""
+    r"""<CustomContent +platform=["']tidb["'] *>(.|\n)*?</CustomContent>"""
 )
 custom_content_tidb_cloud = re.compile(
-    r"""<CustomContent +platform=["']tidb-cloud["'] *>(.|\n)*?</CustomContent>\n"""
+    r"""<CustomContent +platform=["']tidb-cloud["'] *>(.|\n)*?</CustomContent>"""
 )
 # Match CustomContent with plan attribute, capturing the plan value and content
 custom_content_with_plan = re.compile(
-    r"""<CustomContent[^>]+plan=["']([^"']+)["'][^>]*>(.|\n)*?</CustomContent>\n"""
+    r"""<CustomContent[^>]+plan=["']([^"']+)["'][^>]*>(.|\n)*?</CustomContent>"""
 )
 
 sysArgvList = sys.argv
