@@ -1,9 +1,9 @@
 ---
-title: Create a {{{ .premium }}} instance
-summary: Learn how to create a {{{ .premium }}} instance. 
+title: Create a {{{ .premium }}} Instance
+summary: Learn how to create a {{{ .premium }}} instance.
 ---
 
-# Create a {{{ .premium }}} instance
+# Create a {{{ .premium }}} Instance
 
 This document describes how to create a {{{ .premium }}} instance in the [TiDB Cloud console](https://tidbcloud.com/).
 
