@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: 234f9a0f7f16ec892a2c3bb09dfaeab81e9d527d-->
+# 目录 <!--Corresponding EN commit: d15f5014bb82e98db9f7954068275656fcc719db-->
 
 ## 快速开始
 
@@ -240,7 +240,7 @@
     - [集成概览](/vector-search/vector-search-integration-overview.md)
     - AI 框架
       - [LlamaIndex](/vector-search/vector-search-integrate-with-llamaindex.md)
-      - [Langchain](/vector-search/vector-search-integrate-with-langchain.md)
+      - [LangChain](/vector-search/vector-search-integrate-with-langchain.md)
     - AI 服务
       - [Amazon Bedrock](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md)
     - 嵌入模型/服务

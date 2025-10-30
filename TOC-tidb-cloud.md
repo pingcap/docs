@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: 4a4d9a913bb5e56520c60a01f28dae7f637e5f23-->
+# 目录 <!--Corresponding EN commit: 4c1d67fb01a9e5d02dbae9b8c21d1db796362cc9-->
 
 ## 快速开始
 
@@ -265,7 +265,7 @@
     - [集成概览](/vector-search/vector-search-integration-overview.md)
     - AI 框架
       - [LlamaIndex](/vector-search/vector-search-integrate-with-llamaindex.md)
-      - [Langchain](/vector-search/vector-search-integrate-with-langchain.md)
+      - [LangChain](/vector-search/vector-search-integrate-with-langchain.md)
     - AI 服务
       - [Amazon Bedrock](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md)
     - 嵌入模型/服务
@@ -309,6 +309,7 @@
     - [在 AWS 中设置自托管 Kafka Private Link 服务](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
     - [在 Azure 中设置自托管 Kafka Private Link 服务](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)
     - [在 Google Cloud 中设置自托管 Kafka Private Service Connect](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)
+    - [为 Changefeed 设置 Private Endpoint](/tidb-cloud/set-up-sink-private-endpoint.md)
 - 灾难恢复
   - [恢复组概述](/tidb-cloud/recovery-group-overview.md)
   - [快速上手](/tidb-cloud/recovery-group-get-started.md)
