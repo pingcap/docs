@@ -14,7 +14,7 @@ summary: TiDB 中 IMPORT INTO 的用法概述。
 
 > **Note:**
 >
-> 相较于 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)，`IMPORT INTO` 可以直接在 TiDB 节点上执行，支持自动化分布式任务调度和 [TiDB Global Sort](/tidb-global-sort.md)，在部署、资源利用率、任务配置便捷性、调用与集成易用性、高可用性和可扩展性等方面有显著提升。建议你在合适的场景下优先考虑使用 `IMPORT INTO` 替代 TiDB Lightning。
+> 与 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 相比，`IMPORT INTO` 可以直接在 TiDB 节点上执行，支持自动化分布式任务调度和 [TiDB 全局排序](/tidb-global-sort.md)，在部署、资源利用率、任务配置便捷性、调用和集成的易用性、高可用性和可扩展性等方面有显著提升。建议你在合适的场景下优先考虑使用 `IMPORT INTO` 替代 TiDB Lightning。
 
 </CustomContent>
 
@@ -31,24 +31,24 @@ summary: TiDB 中 IMPORT INTO 的用法概述。
 - 一次导入任务仅支持向一个目标表导入数据。
 - TiDB 集群升级期间不支持 `IMPORT INTO`。
 - 确保待导入数据中不包含任何主键或非空唯一索引冲突的记录，否则会导致导入任务失败。
-- 已知问题：如果 TiDB 节点配置文件中的 PD 地址与当前集群的 PD 拓扑不一致，`IMPORT INTO` 任务可能会失败。该不一致可能出现在 PD 曾经缩容但 TiDB 配置文件未及时更新，或配置文件更新后 TiDB 节点未重启等场景。
+- 已知问题：如果 TiDB 节点配置文件中的 PD 地址与当前集群的 PD 拓扑不一致，`IMPORT INTO` 任务可能会失败。例如，PD 曾经缩容但 TiDB 配置文件未及时更新，或配置文件更新后 TiDB 节点未重启。
 
 ### `IMPORT INTO ... FROM FILE` 限制
 
-- 对于自建 TiDB，每个 `IMPORT INTO` 任务支持导入不超过 10 TiB 的数据。如果启用 [Global Sort](/tidb-global-sort.md) 功能，每个 `IMPORT INTO` 任务支持导入不超过 40 TiB 的数据。
-- 对于 [TiDB Cloud 专业版](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)，如果待导入数据超过 500 GiB，建议使用至少 16 核的 TiDB 节点并启用 [Global Sort](/tidb-global-sort.md) 功能，此时每个 `IMPORT INTO` 任务支持导入不超过 40 TiB 的数据。如果待导入数据不超过 500 GiB，或 TiDB 节点核数小于 16，则不建议启用 [Global Sort](/tidb-global-sort.md) 功能。
-- 执行 `IMPORT INTO ... FROM FILE` 时会阻塞当前连接，直到导入完成。若需异步执行该语句，可添加 `DETACHED` 选项。
+- 对于自建 TiDB，每个 `IMPORT INTO` 任务支持导入 10 TiB 以内的数据。如果启用 [全局排序](/tidb-global-sort.md) 功能，每个任务支持导入 40 TiB 以内的数据。
+- 对于 [TiDB Cloud 专属集群](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)，如果待导入数据超过 500 GiB，建议使用至少 16 核的 TiDB 节点并启用 [全局排序](/tidb-global-sort.md) 功能，此时每个任务支持导入 40 TiB 以内的数据。如果数据量在 500 GiB 以内或 TiDB 节点核数小于 16，则不建议启用 [全局排序](/tidb-global-sort.md)。
+- 执行 `IMPORT INTO ... FROM FILE` 时会阻塞当前连接，直到导入完成。若需异步执行，可添加 `DETACHED` 选项。
 - 每个集群最多可同时运行 16 个 `IMPORT INTO` 任务（参见 [TiDB 分布式执行框架（DXF）使用限制](/tidb-distributed-execution-framework.md#limitation)）。当集群资源不足或任务数已达上限时，新提交的导入任务会排队等待执行。
-- 使用 [Global Sort](/tidb-global-sort.md) 功能导入数据时，`THREAD` 选项的值必须至少为 `8`。
-- 使用 [Global Sort](/tidb-global-sort.md) 功能导入数据时，单行编码后的数据大小不得超过 32 MiB。
-- 在未启用 [TiDB 分布式执行框架（DXF）](/tidb-distributed-execution-framework.md) 时创建的所有 `IMPORT INTO` 任务，均直接在提交任务的节点上运行，即使后续启用了 DXF，这些任务也不会被调度到其他 TiDB 节点执行。启用 DXF 后，只有新创建的、从 S3 或 GCS 导入数据的 `IMPORT INTO` 任务才会自动调度或故障转移到其他 TiDB 节点执行。
+- 使用 [全局排序](/tidb-global-sort.md) 功能导入数据时，`THREAD` 选项的值必须至少为 `8`。
+- 使用 [全局排序](/tidb-global-sort.md) 功能导入数据时，单行编码后的数据大小不得超过 32 MiB。
+- 在未启用 [TiDB 分布式执行框架（DXF）](/tidb-distributed-execution-framework.md) 时创建的所有 `IMPORT INTO` 任务，均直接在提交任务的节点上运行，即使后续启用了 DXF，这些任务也不会被调度到其他 TiDB 节点。启用 DXF 后，只有新创建的、从 S3 或 GCS 导入数据的 `IMPORT INTO` 任务才会自动调度或故障转移到其他 TiDB 节点执行。
 
 ### `IMPORT INTO ... FROM SELECT` 限制
 
 - `IMPORT INTO ... FROM SELECT` 只能在当前用户连接的 TiDB 节点上执行，并且会阻塞当前连接直到导入完成。
 - `IMPORT INTO ... FROM SELECT` 仅支持两种 [导入选项](#withoptions)：`THREAD` 和 `DISABLE_PRECHECK`。
 - `IMPORT INTO ... FROM SELECT` 不支持 `SHOW IMPORT JOB(s)`、`CANCEL IMPORT JOB <job-id>` 等任务管理语句。
-- TiDB 的 [临时目录](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) 需要有足够空间存储 `SELECT` 语句的完整查询结果（当前不支持配置 `DISK_QUOTA` 选项）。
+- TiDB 的 [临时目录](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) 需要有足够空间存储 `SELECT` 语句的完整查询结果（目前不支持配置 `DISK_QUOTA` 选项）。
 - 不支持使用 [`tidb_snapshot`](/read-historical-data.md) 导入历史数据。
 - 由于 `SELECT` 子句语法复杂，`IMPORT INTO` 中的 `WITH` 参数可能与其冲突并导致解析错误，如 `GROUP BY ... [WITH ROLLUP]`。建议对于复杂的 `SELECT` 语句，先创建视图，再通过 `IMPORT INTO ... FROM SELECT * FROM view_name` 导入。或者，可以用括号明确 `SELECT` 子句的范围，如 `IMPORT INTO ... FROM (SELECT ...) WITH ...`。
 
@@ -58,11 +58,11 @@ summary: TiDB 中 IMPORT INTO 的用法概述。
 
 - 目标表已在 TiDB 中创建且为空表。
 - 目标集群有足够空间存储待导入数据。
-- 对于自建 TiDB，当前会话连接的 TiDB 节点的 [临时目录](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) 至少有 90 GiB 可用空间。如果已启用 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) 且导入数据来源为 S3 或 GCS，还需确保集群中每个 TiDB 节点的临时目录有足够磁盘空间。
+- 对于自建 TiDB，当前会话连接的 TiDB 节点的 [临时目录](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) 至少有 90 GiB 可用空间。如果启用了 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) 且导入数据来自 S3 或 GCS，还需确保集群中每个 TiDB 节点的临时目录有足够磁盘空间。
 
 ## 所需权限
 
-执行 `IMPORT INTO` 需要对目标表拥有 `SELECT`、`UPDATE`、`INSERT`、`DELETE` 和 `ALTER` 权限。若需导入 TiDB 本地存储中的文件，还需拥有 `FILE` 权限。
+执行 `IMPORT INTO` 需要对目标表拥有 `SELECT`、`UPDATE`、`INSERT`、`DELETE` 和 `ALTER` 权限。若需导入 TiDB 本地存储的文件，还需拥有 `FILE` 权限。
 
 ## 语法
 
@@ -101,13 +101,13 @@ OptionItem ::=
 用于指定数据文件中每个字段与目标表列的对应关系。你也可以用它将字段映射到变量，以跳过某些字段的导入，或在 `SetClause` 中使用。
 
 - 如果未指定该参数，则数据文件每行的字段数必须与目标表的列数一致，字段将按顺序导入到对应列。
-- 如果指定了该参数，则指定的列或变量数必须与数据文件每行的字段数一致。
+- 如果指定了该参数，则指定的列或变量数量必须与数据文件每行的字段数一致。
 
 ### SetClause
 
-用于指定目标列的值如何计算。在 `SET` 表达式的右侧，可以引用 `ColumnNameOrUserVarList` 中指定的变量。
+用于指定目标列值的计算方式。在 `SET` 表达式右侧，可以引用 `ColumnNameOrUserVarList` 中指定的变量。
 
-在 `SET` 表达式的左侧，只能引用未包含在 `ColumnNameOrUserVarList` 中的列名。如果目标列名已在 `ColumnNameOrUserVarList` 中出现，则该 `SET` 表达式无效。
+在 `SET` 表达式左侧，只能引用未包含在 `ColumnNameOrUserVarList` 中的列名。如果目标列名已在 `ColumnNameOrUserVarList` 中出现，则该 `SET` 表达式无效。
 
 ### fileLocation
 
@@ -115,7 +115,7 @@ OptionItem ::=
 
 - Amazon S3 或 GCS URI 路径：URI 配置详情参见 [外部存储服务的 URI 格式](/external-storage-uri.md)。
 
-- TiDB 本地文件路径：必须为绝对路径，且文件扩展名为 `.csv`、`.sql` 或 `.parquet`。确保该路径对应的文件存储在当前用户连接的 TiDB 节点上，且该用户拥有 `FILE` 权限。
+- TiDB 本地文件路径：必须为绝对路径，文件扩展名需为 `.csv`、`.sql` 或 `.parquet`。确保该路径对应的文件存储在当前用户连接的 TiDB 节点上，且用户拥有 `FILE` 权限。
 
 > **Note:**
 >
@@ -125,7 +125,7 @@ OptionItem ::=
 
 - 导入单个文件：`s3://<bucket-name>/path/to/data/foo.csv`
 - 导入指定路径下所有文件：`s3://<bucket-name>/path/to/data/*`
-- 导入指定路径下所有 `.csv` 后缀的文件：`s3://<bucket-name>/path/to/data/*.csv`
+- 导入指定路径下所有 `.csv` 后缀文件：`s3://<bucket-name>/path/to/data/*.csv`
 - 导入指定路径下所有以 `foo` 为前缀的文件：`s3://<bucket-name>/path/to/data/foo*`
 - 导入指定路径下所有以 `foo` 为前缀且以 `.csv` 结尾的文件：`s3://<bucket-name>/path/to/data/foo*.csv`
 - 导入指定路径下的 `1.csv` 和 `2.csv`：`s3://<bucket-name>/path/to/data/[12].csv`
@@ -142,37 +142,37 @@ OptionItem ::=
 
 | 选项名 | 支持的数据源和格式 | 说明 |
 |:---|:---|:---|
-| `CHARACTER_SET='<string>'` | CSV | 指定数据文件的字符集。默认字符集为 `utf8mb4`。支持的字符集包括 `binary`、`utf8`、`utf8mb4`、`gb18030`、`gbk`、`latin1` 和 `ascii`。 |
+| `CHARACTER_SET='<string>'` | CSV | 指定数据文件的字符集。默认字符集为 `utf8mb4`。支持的字符集包括 `binary`、`utf8`、`utf8mb4`、`gb18030`、`gbk`、`latin1` 和 `ascii`。|
 | `FIELDS_TERMINATED_BY='<string>'` | CSV | 指定字段分隔符。默认分隔符为 `,`。|
 | `FIELDS_ENCLOSED_BY='<char>'` | CSV | 指定字段定界符。默认定界符为 `"`。|
 | `FIELDS_ESCAPED_BY='<char>'` | CSV | 指定字段的转义字符。默认转义字符为 `\`。|
 | `FIELDS_DEFINED_NULL_BY='<string>'` | CSV | 指定字段中表示 `NULL` 的值。默认值为 `\N`。|
 | `LINES_TERMINATED_BY='<string>'` | CSV | 指定行终止符。默认情况下，`IMPORT INTO` 会自动识别 `\n`、`\r` 或 `\r\n` 作为行终止符。如果行终止符为这三者之一，无需显式指定该选项。|
 | `SKIP_ROWS=<number>` | CSV | 指定跳过的行数。默认值为 `0`。可用于跳过 CSV 文件的表头。如果使用通配符指定导入源文件，该选项会应用于 `fileLocation` 匹配到的所有源文件。|
-| `SPLIT_FILE` | CSV | 将单个 CSV 文件拆分为多个约 256 MiB 的小块并并行处理，以提升导入效率。该参数仅对**非压缩**的 CSV 文件生效，且使用限制与 TiDB Lightning 的 [`strict-format`](https://docs.pingcap.com/tidb/stable/tidb-lightning-data-source#strict-format) 相同。注意，使用该选项时需显式指定 `LINES_TERMINATED_BY`。|
+| `SPLIT_FILE` | CSV | 将单个 CSV 文件拆分为多个约 256 MiB 的小块并并行处理，以提升导入效率。该参数仅对**非压缩**的 CSV 文件生效，使用限制与 TiDB Lightning [`strict-format`](https://docs.pingcap.com/tidb/stable/tidb-lightning-data-source#strict-format) 相同。注意需显式指定 `LINES_TERMINATED_BY`。|
 | `DISK_QUOTA='<string>'` | 所有文件格式 | 指定数据排序过程中可用的磁盘空间阈值。默认值为 TiDB [临时目录](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) 磁盘空间的 80%。若无法获取总磁盘大小，默认值为 50 GiB。显式指定 `DISK_QUOTA` 时，确保该值不超过 TiDB 临时目录磁盘空间的 80%。|
-| `DISABLE_TIKV_IMPORT_MODE` | 所有文件格式 | 指定导入过程中是否禁用 TiKV 切换为导入模式。默认不禁用 TiKV 切换为导入模式。如果集群中有读写操作进行中，可启用该选项以避免导入过程的影响。|
-| `THREAD=<number>` | 所有文件格式及 `SELECT` 查询结果 | 指定导入并发度。对于 `IMPORT INTO ... FROM FILE`，`THREAD` 默认值为 TiDB 节点 CPU 核数的 50%，最小值为 `1`，最大值为 CPU 核数。对于 `IMPORT INTO ... FROM SELECT`，`THREAD` 默认值为 `2`，最小值为 `1`，最大值为 TiDB 节点 CPU 核数的两倍。若向新集群导入数据，建议适当提高并发度以提升导入性能。若目标集群已在生产环境中使用，建议根据业务需求调整并发度。|
-| `MAX_WRITE_SPEED='<string>'` | 所有文件格式 | 控制写入到 TiKV 节点的速度。默认无限速。例如，可指定为 `1MiB`，限制写入速度为 1 MiB/s。|
+| `DISABLE_TIKV_IMPORT_MODE` | 所有文件格式 | 指定是否在导入过程中禁用 TiKV 切换为导入模式。默认不禁用 TiKV 切换为导入模式。如果集群中有读写操作进行，可启用该选项以避免导入过程的影响。|
+| `THREAD=<number>` | 所有文件格式及 `SELECT` 查询结果 | 指定导入并发度。对于 `IMPORT INTO ... FROM FILE`，`THREAD` 默认值为 TiDB 节点 CPU 核数的 50%，最小值为 `1`，最大值为 CPU 核数。对于 `IMPORT INTO ... FROM SELECT`，默认值为 `2`，最小值为 `1`，最大值为 TiDB 节点 CPU 核数的两倍。若向新集群导入数据，建议适当提高并发度以提升导入性能。若目标集群已在生产环境使用，建议根据业务需求调整并发度。|
+| `MAX_WRITE_SPEED='<string>'` | 所有文件格式 | 控制写入 TiKV 节点的速度。默认无限速。例如，可指定为 `1MiB`，限制写入速度为 1 MiB/s。|
 | `CHECKSUM_TABLE='<string>'` | 所有文件格式 | 配置导入完成后是否对目标表进行校验以验证导入完整性。支持的值包括 `"required"`（默认）、`"optional"` 和 `"off"`。`"required"` 表示导入后进行校验，校验失败则返回错误并退出导入；`"optional"` 表示导入后进行校验，若出错则返回警告并忽略错误；`"off"` 表示导入后不进行校验。|
 | `DETACHED` | 所有文件格式 | 控制是否异步执行 `IMPORT INTO`。启用该选项后，执行 `IMPORT INTO` 会立即返回导入任务信息（如 `Job_ID`），任务在后台异步执行。|
-| `CLOUD_STORAGE_URI` | 所有文件格式 | 指定 [Global Sort](/tidb-global-sort.md) 编码 KV 数据的目标存储地址。未指定 `CLOUD_STORAGE_URI` 时，`IMPORT INTO` 会根据系统变量 [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740) 的值判断是否启用 Global Sort。如果该系统变量指定了目标存储地址，则使用该地址进行 Global Sort。若 `CLOUD_STORAGE_URI` 显式指定非空值，则使用该值作为目标存储地址。若 `CLOUD_STORAGE_URI` 显式指定为空值，则强制本地排序。目前目标存储地址仅支持 S3。URI 配置详情参见 [Amazon S3 URI 格式](/external-storage-uri.md#amazon-s3-uri-format)。使用该功能时，所有 TiDB 节点必须具备目标 S3 bucket 的读写权限，包括至少以下权限：`s3:ListBucket`、`s3:GetObject`、`s3:DeleteObject`、`s3:PutObject`、`s3:AbortMultipartUpload`。|
+| `CLOUD_STORAGE_URI` | 所有文件格式 | 指定 [全局排序](/tidb-global-sort.md) 编码 KV 数据的目标存储地址。未指定时，`IMPORT INTO` 会根据系统变量 [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740) 的值判断是否启用全局排序。如果该系统变量指定了目标存储地址，则使用该地址进行全局排序。若 `CLOUD_STORAGE_URI` 显式指定非空值，则使用该值作为目标存储地址。若 `CLOUD_STORAGE_URI` 显式指定为空，则强制本地排序。目前目标存储地址仅支持 S3。URI 配置详情参见 [Amazon S3 URI 格式](/external-storage-uri.md#amazon-s3-uri-format)。使用该功能时，所有 TiDB 节点需具备目标 S3 bucket 的读写权限，包括至少以下权限：`s3:ListBucket`、`s3:GetObject`、`s3:DeleteObject`、`s3:PutObject`、`s3:AbortMultipartUpload`。|
 | `DISABLE_PRECHECK` | 所有文件格式及 `SELECT` 查询结果 | 设置该选项可禁用非关键项的预检查，如检查是否存在 CDC 或 PITR 任务。|
 
 ## `IMPORT INTO ... FROM FILE` 用法
 
-对于自建 TiDB，`IMPORT INTO ... FROM FILE` 支持从 Amazon S3、GCS 及 TiDB 本地存储导入数据文件。对于 [TiDB Cloud 专业版](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)，`IMPORT INTO ... FROM FILE` 支持从 Amazon S3 和 GCS 导入数据文件。对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)，`IMPORT INTO ... FROM FILE` 支持从 Amazon S3 和阿里云 OSS 导入数据文件。
+对于自建 TiDB，`IMPORT INTO ... FROM FILE` 支持从 Amazon S3、GCS 及 TiDB 本地存储的文件导入数据。对于 [TiDB Cloud 专属集群](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)，支持从 Amazon S3 和 GCS 导入。对于 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)，支持从 Amazon S3 和阿里云 OSS 导入。
 
 - 对于存储在 Amazon S3 或 GCS 的数据文件，`IMPORT INTO ... FROM FILE` 支持在 [TiDB 分布式执行框架（DXF）](/tidb-distributed-execution-framework.md) 下运行。
 
     - 启用 DXF（[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) 为 `ON`）时，`IMPORT INTO` 会将数据导入任务拆分为多个子任务，并分发到不同 TiDB 节点并行执行，以提升导入效率。
     - 未启用 DXF 时，`IMPORT INTO ... FROM FILE` 仅支持在当前用户连接的 TiDB 节点上运行。
 
-- 对于存储在 TiDB 本地的数据文件，`IMPORT INTO ... FROM FILE` 仅支持在当前用户连接的 TiDB 节点上运行。因此，数据文件需放置在当前用户连接的 TiDB 节点上。如果你通过代理或负载均衡访问 TiDB，则无法导入存储在 TiDB 本地的数据文件。
+- 对于 TiDB 本地存储的数据文件，`IMPORT INTO ... FROM FILE` 仅支持在当前用户连接的 TiDB 节点上运行。因此，数据文件需放置在当前用户连接的 TiDB 节点上。如果你通过代理或负载均衡访问 TiDB，则无法导入 TiDB 本地存储的文件。
 
 ### 压缩文件
 
-`IMPORT INTO ... FROM FILE` 支持导入压缩的 `CSV` 和 `SQL` 文件。可根据文件扩展名自动判断文件是否压缩及压缩格式：
+`IMPORT INTO ... FROM FILE` 支持导入压缩的 `CSV` 和 `SQL` 文件。可根据文件扩展名自动识别文件是否压缩及压缩格式：
 
 | 扩展名 | 压缩格式 |
 |:---|:---|
@@ -182,26 +182,26 @@ OptionItem ::=
 
 > **Note:**
 >
-> - Snappy 压缩文件必须为 [官方 Snappy 格式](https://github.com/google/snappy)。不支持其他变种的 Snappy 压缩格式。
-> - 由于 TiDB Lightning 无法对单个大型压缩文件并发解压，压缩文件的大小会影响导入速度。建议单个源文件解压后不超过 256 MiB。
+> - Snappy 压缩文件必须为 [官方 Snappy 格式](https://github.com/google/snappy)，不支持其他变体。
+> - 由于 TiDB Lightning 无法并发解压单个大型压缩文件，压缩文件的大小会影响导入速度。建议单个源文件解压后不超过 256 MiB。
 
-### Global Sort
+### 全局排序
 
 > **Note:**
 >
-> Global Sort 不支持在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群上使用。
+> [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群不支持全局排序。
 
-`IMPORT INTO ... FROM FILE` 会将源数据文件的导入任务拆分为多个子任务，每个子任务独立编码、排序后导入数据。如果这些子任务编码后的 KV 范围有较大重叠（关于 TiDB 如何将数据编码为 KV，参见 [TiDB 计算](/tidb-computing.md)），则 TiKV 在导入过程中需要持续进行 compaction，导致导入性能和稳定性下降。
+`IMPORT INTO ... FROM FILE` 会将源数据文件的导入任务拆分为多个子任务，每个子任务独立编码和排序后导入数据。如果这些子任务编码后的 KV 范围有较大重叠（关于 TiDB 如何将数据编码为 KV，参见 [TiDB 计算](/tidb-computing.md)），则 TiKV 在导入过程中需要持续进行 compaction，导致导入性能和稳定性下降。
 
 以下场景可能导致 KV 范围重叠较大：
 
-- 若分配给各子任务的数据文件行的主键范围有重叠，则各子任务编码生成的数据 KV 也会重叠。
-    - `IMPORT INTO` 按数据文件的遍历顺序拆分子任务，通常按文件名字典序排序。
+- 若分配给各子任务的数据文件行存在主键范围重叠，则各子任务编码生成的数据 KV 也会重叠。
+    - `IMPORT INTO` 按数据文件遍历顺序拆分子任务，通常按文件名字典序排序。
 - 若目标表有大量索引，或索引列值在数据文件中分布较散，则各子任务编码生成的索引 KV 也会重叠。
 
-启用 [TiDB 分布式执行框架（DXF）](/tidb-distributed-execution-framework.md) 后，你可以通过在 `IMPORT INTO` 语句中指定 `CLOUD_STORAGE_URI` 选项，或通过系统变量 [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740) 指定编码 KV 数据的目标存储地址来启用 [Global Sort](/tidb-global-sort.md)。目前 Global Sort 仅支持使用 Amazon S3 作为存储地址。启用 Global Sort 后，`IMPORT INTO` 会将编码后的 KV 数据写入云存储，在云存储中进行全局排序，然后并行将全局有序的索引和表数据导入 TiKV，从而避免 KV 重叠带来的问题，提升导入的稳定性和性能。
+启用 [TiDB 分布式执行框架（DXF）](/tidb-distributed-execution-framework.md) 后，你可以通过在 `IMPORT INTO` 语句中指定 `CLOUD_STORAGE_URI` 选项，或通过系统变量 [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740) 指定编码 KV 数据的目标存储地址来启用 [全局排序](/tidb-global-sort.md)。目前全局排序仅支持使用 Amazon S3 作为存储地址。启用全局排序后，`IMPORT INTO` 会将编码后的 KV 数据写入云存储，在云存储中进行全局排序，然后并行将全局有序的索引和表数据导入 TiKV，从而避免 KV 重叠带来的问题，提升导入的稳定性和性能。
 
-Global Sort 会消耗大量内存资源。建议在数据导入前，配置 [`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640) 和 [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) 变量，避免频繁触发 golang GC 影响导入效率。
+全局排序会消耗大量内存资源。建议在数据导入前配置 [`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640) 和 [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) 变量，避免频繁触发 golang GC 影响导入效率。
 
 ```sql
 SET GLOBAL tidb_server_memory_limit_gc_trigger=1;
@@ -210,14 +210,14 @@ SET GLOBAL tidb_server_memory_limit='75%';
 
 > **Note:**
 >
-> - 如果源数据文件的 KV 范围重叠较低，启用 Global Sort 可能会降低导入性能。因为启用 Global Sort 后，TiDB 需要等待所有子任务本地排序完成，才能进行全局排序及后续导入操作。
-> - 使用 Global Sort 的导入任务完成后，云存储中用于 Global Sort 的文件会在后台线程中异步清理。
+> - 如果源数据文件的 KV 范围重叠较低，启用全局排序可能会降低导入性能。因为启用全局排序后，TiDB 需等待所有子任务本地排序完成后，才能进行全局排序及后续导入操作。
+> - 使用全局排序的导入任务完成后，云存储中用于全局排序的文件会在后台线程中异步清理。
 
 ### 输出
 
-当 `IMPORT INTO ... FROM FILE` 导入完成或启用 `DETACHED` 模式时，TiDB 会在输出中返回当前任务信息，示例如下。各字段说明参见 [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)。
+当 `IMPORT INTO ... FROM FILE` 完成导入或启用 `DETACHED` 模式时，TiDB 会在输出中返回当前任务信息，示例如下。各字段说明参见 [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)。
 
-`IMPORT INTO ... FROM FILE` 导入完成时，输出示例如下：
+`IMPORT INTO ... FROM FILE` 完成导入时，输出示例：
 
 ```sql
 IMPORT INTO t FROM '/path/to/small.csv';
@@ -241,7 +241,7 @@ IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
 
 ### 查看和管理导入任务
 
-对于启用 `DETACHED` 模式的导入任务，你可以使用 [`SHOW IMPORT`](/sql-statements/sql-statement-show-import-job.md) 查看其当前进度。
+对于启用 `DETACHED` 模式的导入任务，你可以使用 [`SHOW IMPORT`](/sql-statements/sql-statement-show-import-job.md) 查看当前任务进度。
 
 导入任务启动后，可以通过 [`CANCEL IMPORT JOB <job-id>`](/sql-statements/sql-statement-cancel-import-job.md) 取消任务。
 
@@ -269,7 +269,7 @@ id,name,age
 2,Jack,44
 ```
 
-假设目标表结构为 `CREATE TABLE t(id int primary key, name varchar(100))`。若需跳过 `age` 字段的导入，可执行如下 SQL 语句：
+假设目标表结构为 `CREATE TABLE t(id int primary key, name varchar(100))`。若需跳过 `age` 字段的导入，可执行如下 SQL：
 
 ```sql
 IMPORT INTO t(id, name, @1) FROM '/path/to/file.csv' WITH skip_rows=1;
@@ -277,13 +277,13 @@ IMPORT INTO t(id, name, @1) FROM '/path/to/file.csv' WITH skip_rows=1;
 
 #### 使用通配符导入多个数据文件
 
-假设 `/path/to/` 目录下有 `file-01.csv`、`file-02.csv` 和 `file-03.csv` 三个文件。若需将这三个文件导入目标表 `t`，可执行如下 SQL 语句：
+假设 `/path/to/` 目录下有 `file-01.csv`、`file-02.csv` 和 `file-03.csv` 三个文件。要将这三个文件导入目标表 `t`，可执行如下 SQL：
 
 ```sql
 IMPORT INTO t FROM '/path/to/file-*.csv';
 ```
 
-若只需将 `file-01.csv` 和 `file-03.csv` 导入目标表，可执行如下 SQL 语句：
+若只需导入 `file-01.csv` 和 `file-03.csv`，可执行如下 SQL：
 
 ```sql
 IMPORT INTO t FROM '/path/to/file-0[13].csv';
@@ -315,7 +315,7 @@ id,name,val
 2,book,440
 ```
 
-假设目标表结构为 `CREATE TABLE t(id int primary key, name varchar(100), val int)`。若需在导入时将 `val` 列的值乘以 100，可执行如下 SQL 语句：
+假设目标表结构为 `CREATE TABLE t(id int primary key, name varchar(100), val int)`。若需在导入时将 `val` 列的值乘以 100，可执行如下 SQL：
 
 ```sql
 IMPORT INTO t(id, name, @1) SET val=@1*100 FROM '/path/to/file.csv' WITH skip_rows=1;
@@ -329,7 +329,7 @@ IMPORT INTO t FROM '/path/to/file.sql' FORMAT 'sql';
 
 #### 限制写入 TiKV 的速度
 
-若需将写入 TiKV 节点的速度限制为 10 MiB/s，可执行如下 SQL 语句：
+若需将写入 TiKV 节点的速度限制为 10 MiB/s，可执行如下 SQL：
 
 ```sql
 IMPORT INTO t FROM 's3://bucket/path/to/file.parquet?access-key=XXX&secret-access-key=XXX' FORMAT 'parquet' WITH MAX_WRITE_SPEED='10MiB';
@@ -337,11 +337,11 @@ IMPORT INTO t FROM 's3://bucket/path/to/file.parquet?access-key=XXX&secret-acces
 
 ## `IMPORT INTO ... FROM SELECT` 用法
 
-`IMPORT INTO ... FROM SELECT` 允许你将 `SELECT` 语句的查询结果导入到 TiDB 的空表中。你也可以用它导入通过 [`AS OF TIMESTAMP`](/as-of-timestamp.md) 查询的历史数据。
+`IMPORT INTO ... FROM SELECT` 允许你将 `SELECT` 语句的查询结果导入 TiDB 的空表。你也可以用它导入通过 [`AS OF TIMESTAMP`](/as-of-timestamp.md) 查询的历史数据。
 
 ### 导入 `SELECT` 查询结果
 
-若需将 `UNION` 结果导入目标表 `t`，并指定导入并发度为 `8`，禁用非关键项预检查，可执行如下 SQL 语句：
+要将 `UNION` 结果导入目标表 `t`，并指定导入并发度为 `8`，禁用非关键项预检查，可执行如下 SQL：
 
 ```sql
 IMPORT INTO t FROM SELECT * FROM src UNION SELECT * FROM src2 WITH THREAD = 8, DISABLE_PRECHECK;
@@ -349,7 +349,7 @@ IMPORT INTO t FROM SELECT * FROM src UNION SELECT * FROM src2 WITH THREAD = 8, D
 
 ### 导入指定时间点的历史数据
 
-若需将指定时间点的历史数据导入目标表 `t`，可执行如下 SQL 语句：
+要将指定时间点的历史数据导入目标表 `t`，可执行如下 SQL：
 
 ```sql
 IMPORT INTO t FROM SELECT * FROM src AS OF TIMESTAMP '2024-02-27 11:38:00';

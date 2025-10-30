@@ -19,9 +19,9 @@ SQL 编辑器推荐的使用场景如下：
 
 ## 限制
 
-- AI 生成的 SQL 查询可能并非 100% 准确，你可能需要对其进行完善。
+- AI 生成的 SQL 查询可能并非 100% 准确，你可能需要对其进行优化。
 - SQL 编辑器仅支持部署在 AWS 上、版本为 v6.5.0 及以上的 TiDB 集群。
-- SQL 编辑器默认对 [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 集群开放。若要在 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群上使用 SQL 编辑器和 Chat2Query，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。
+- SQL 编辑器仅适用于部署在 AWS 上的 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 集群。如需在 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群上使用 SQL 编辑器和 Chat2Query，请联系 [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md)。
 
 ## 访问 SQL 编辑器
 
@@ -37,23 +37,23 @@ SQL 编辑器推荐的使用场景如下：
     >
     > 在以下情况下，**SQL Editor** 入口会显示为灰色且不可点击。
     >
-    > - 你的 TiDB Cloud Dedicated 集群版本低于 v6.5.0。若要使用 SQL 编辑器，你需要联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md) 升级你的集群。
+    > - 你的 TiDB Cloud Dedicated 集群版本低于 v6.5.0。如需使用 SQL 编辑器，你需要联系 [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md) 升级你的集群。
     > - 你的 TiDB Cloud Dedicated 集群刚刚创建，SQL 编辑器的运行环境仍在准备中。此时请等待几分钟，Chat2Query 即可使用。
     > - 你的 TiDB Cloud Dedicated 集群已被 [暂停](/tidb-cloud/pause-or-resume-tidb-cluster.md)。
 
 ## 启用或禁用 AI 生成 SQL 查询
 
-PingCAP 将用户数据的隐私和安全放在首位。SQL 编辑器中 Chat2Query 的 AI 能力仅需访问数据库 schema 以生成 SQL 查询，不会访问你的数据本身。更多信息请参见 [Chat2Query 隐私常见问题](https://www.pingcap.com/privacy-policy/privacy-chat2query)。
+PingCAP 将用户数据的隐私和安全放在首位。SQL 编辑器中 Chat2Query 的 AI 能力仅需访问数据库的 schema 信息来生成 SQL 查询，不会访问你的数据本身。更多信息请参见 [Chat2Query 隐私常见问题](https://www.pingcap.com/privacy-policy/privacy-chat2query)。
 
 首次访问 Chat2Query 时，你会看到一个对话框，询问是否允许 PingCAP 和 Amazon Bedrock 使用你的代码片段进行服务研究和改进。
 
-- 若要启用 AI 生成 SQL 查询，勾选复选框并点击 **Save and Get Started**。
+- 若要启用 AI 生成 SQL 查询，请勾选复选框并点击 **Save and Get Started**。
 - 若要禁用 AI 生成 SQL 查询，直接关闭该对话框即可。
 
-首次访问后，你仍可按如下方式更改 AI 设置：
+首次访问后，你仍然可以按如下方式更改 AI 设置：
 
-- 启用 AI：在 Chat2Query 右上角点击 **Enable AI power for data exploration**。
-- 禁用 AI：在 [TiDB Cloud 控制台](https://tidbcloud.com/)左下角点击 <MDSvgIcon name="icon-top-account-settings" />，点击 **Account Settings**，切换到 **AI & Privacy** 标签页，然后关闭 **AI-powered Data Exploration** 选项。
+- 若要启用 AI，在 Chat2Query 右上角点击 **Enable AI power for data exploration**。
+- 若要禁用 AI，在 [TiDB Cloud 控制台](https://tidbcloud.com/) 左下角点击 <MDSvgIcon name="icon-top-account-settings" />，点击 **Account Settings**，切换到 **AI & Privacy** 标签页，然后关闭 **AI-powered Data Exploration** 选项。
 
 ## 编写并运行 SQL 查询
 
@@ -70,7 +70,7 @@ PingCAP 将用户数据的隐私和安全放在首位。SQL 编辑器中 Chat2Qu
 
         对于 Chat2Query 生成的 SQL 查询，点击 **Accept** 接受该查询并继续编辑。如果查询不符合你的需求，点击 **Discard** 拒绝该查询。你也可以点击 **Regenerate** 让 Chat2Query 重新生成查询。
 
-    - 如果未启用 AI，则手动编写 SQL 查询。
+    - 如果未启用 AI，则需手动编写 SQL 查询。
 
     </div>
 
@@ -82,7 +82,7 @@ PingCAP 将用户数据的隐私和安全放在首位。SQL 编辑器中 Chat2Qu
 
         对于 Chat2Query 生成的 SQL 查询，点击 **Accept** 接受该查询并继续编辑。如果查询不符合你的需求，点击 **Discard** 拒绝该查询。你也可以点击 **Regenerate** 让 Chat2Query 重新生成查询。
 
-    - 如果未启用 AI，则手动编写 SQL 查询。
+    - 如果未启用 AI，则需手动编写 SQL 查询。
 
     </div>
     </SimpleTab>
@@ -96,9 +96,9 @@ PingCAP 将用户数据的隐私和安全放在首位。SQL 编辑器中 Chat2Qu
 
     - 如果编辑器中只有一个查询，按 **⌘ + Enter** 或点击 <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**Run** 即可运行。
 
-    - 如果编辑器中有多个查询，想要顺序运行其中一个或多个，选中目标查询的行，然后按 **⌘ + Enter** 或点击 **Run**。
+    - 如果编辑器中有多个查询，选中目标查询的行，然后按 **⌘ + Enter** 或点击 **Run**，即可依次运行所选查询。
 
-    - 若要顺序运行编辑器中的所有查询，按 **⇧ + ⌘ + Enter**，或选中所有查询的行后点击 **Run**。
+    - 若要依次运行编辑器中的所有查询，按 **⇧ + ⌘ + Enter**，或选中所有查询的行后点击 **Run**。
 
     </div>
 
@@ -108,9 +108,9 @@ PingCAP 将用户数据的隐私和安全放在首位。SQL 编辑器中 Chat2Qu
 
     - 如果编辑器中只有一个查询，按 **Ctrl + Enter** 或点击 <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**Run** 即可运行。
 
-    - 如果编辑器中有多个查询，想要顺序运行其中一个或多个，选中目标查询的行，然后按 **Ctrl + Enter** 或点击 **Run**。
+    - 如果编辑器中有多个查询，选中目标查询的行，然后按 **Ctrl + Enter** 或点击 **Run**，即可依次运行所选查询。
 
-    - 若要顺序运行编辑器中的所有查询，按 **Shift + Ctrl + Enter**，或选中所有查询的行后点击 **Run**。
+    - 若要依次运行编辑器中的所有查询，按 **Shift + Ctrl + Enter**，或选中所有查询的行后点击 **Run**。
 
     </div>
     </SimpleTab>
@@ -127,22 +127,22 @@ PingCAP 将用户数据的隐私和安全放在首位。SQL 编辑器中 Chat2Qu
 
 1. 用光标选中你想要重写的 SQL 查询行。
 
-2. 按照你的操作系统，使用快捷键调用 Chat2Query 进行重写：
+2. 使用对应操作系统的快捷键调用 Chat2Query 进行重写：
 
-    - macOS 上为 <kbd>⌘</kbd> + <kbd>I</kbd>
-    - Windows 或 Linux 上为 <kbd>Control</kbd> + <kbd>I</kbd>
+    - macOS：<kbd>⌘</kbd> + <kbd>I</kbd>
+    - Windows 或 Linux：<kbd>Control</kbd> + <kbd>I</kbd>
 
     输入你的指令后按 **Enter**，让 AI 进行重写。
 
-3. 调用 Chat2Query 后，你会看到建议的重写内容以及以下选项：
+3. 调用 Chat2Query 后，你会看到建议的重写内容，并有以下选项：
 
-    - **Accept**：点击此项接受建议的重写并继续编辑。
-    - **Discard**：如果建议的重写不符合你的预期，点击此项拒绝。
-    - **Regenerate**：根据你的反馈或补充指令，点击此项让 Chat2Query 重新生成重写内容。
+    - **Accept**：点击此按钮接受建议的重写并继续编辑。
+    - **Discard**：如果建议的重写不符合你的预期，点击此按钮拒绝。
+    - **Regenerate**：根据你的反馈或补充指令，点击此按钮让 Chat2Query 重新生成重写内容。
 
 > **注意：**
 > 
-> Chat2Query 使用 AI 算法提供优化和修正建议。建议你在最终确定查询前，仔细审核这些建议。
+> Chat2Query 使用 AI 算法提供优化和修正建议。建议你在最终确定查询前，仔细审查这些建议。
 
 ## 管理 SQL 文件
 
@@ -150,7 +150,7 @@ PingCAP 将用户数据的隐私和安全放在首位。SQL 编辑器中 Chat2Qu
 
 - 新增 SQL 文件：点击 **SQL Files** 标签页上的 **+**。
 - 重命名 SQL 文件：将光标移到文件名上，点击文件名旁的 **...**，然后选择 **Rename**。
-- 删除 SQL 文件：将光标移到文件名上，点击文件名旁的 **...**，然后选择 **Delete**。注意，当 **SQL Files** 标签页上只有一个 SQL 文件时，无法删除该文件。
+- 删除 SQL 文件：将光标移到文件名上，点击文件名旁的 **...**，然后选择 **Delete**。注意，当 **SQL Files** 标签页上只剩一个 SQL 文件时，无法删除该文件。
 
 ## 通过 API 访问 Chat2Query
 
@@ -161,18 +161,18 @@ PingCAP 将用户数据的隐私和安全放在首位。SQL 编辑器中 Chat2Qu
 1. 点击右上角的 **...**，然后点击 **Access Chat2Query via API**。
 2. 在弹出的对话框中，执行以下操作之一：
 
-    - 创建新的 Chat2Query Data App，点击 **New Chat2Query Data App**。
-    - 访问已有的 Chat2Query Data App，点击目标 Data App 的名称。
+    - 若要创建新的 Chat2Query Data App，点击 **New Chat2Query Data App**。
+    - 若要访问已有的 Chat2Query Data App，点击目标 Data App 的名称。
 
 更多信息请参见 [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md)。
 
-## 从 SQL 文件生成接口
+## 从 SQL 文件生成 endpoint
 
-对于 TiDB 集群，TiDB Cloud 提供了 [Data Service (beta)](/tidb-cloud/data-service-overview.md) 功能，使你可以通过自定义 API endpoint 以 HTTPS 请求访问 TiDB Cloud 数据。在 SQL 编辑器中，你可以通过以下步骤从 SQL 文件生成 Data Service (beta) 的接口：
+对于 TiDB 集群，TiDB Cloud 提供了 [Data Service (beta)](/tidb-cloud/data-service-overview.md) 功能，使你可以通过自定义 API endpoint 以 HTTPS 请求方式访问 TiDB Cloud 数据。在 SQL 编辑器中，你可以通过以下步骤从 SQL 文件生成 Data Service (beta) 的 endpoint：
 
 1. 将光标移到文件名上，点击文件名旁的 **...**，然后选择 **Generate endpoint**。
-2. 在 **Generate endpoint** 对话框中，选择你要为其生成接口的 Data App，并输入接口名称。
-3. 点击 **Generate**。接口生成后会显示其详情页。
+2. 在 **Generate endpoint** 对话框中，选择你要为其生成 endpoint 的 Data App，并输入 endpoint 名称。
+3. 点击 **Generate**。endpoint 生成后会显示其详情页面。
 
 更多信息请参见 [Manage an endpoint](/tidb-cloud/data-service-manage-endpoint.md)。
 

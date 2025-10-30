@@ -1,37 +1,37 @@
 ---
-title: 恢复组概述（Beta）
-summary: 了解如何使用 TiDB Cloud 恢复组保护数据库免受灾难影响。
+title: Recovery Group Overview (Beta)
+summary: 了解如何通过 TiDB Cloud recovery group 保护你的数据库免受灾难影响。
 ---
 
-# 恢复组概述（Beta）
+# Recovery Group Overview (Beta)
 
-TiDB Cloud 恢复组允许你在 TiDB Cloud Dedicated 集群之间复制数据库，以防止区域性灾难。你可以编排数据库从一个集群到另一个集群的故障转移。在故障转移到备用集群后，如果原主集群恢复可用，你可以重新建立反向复制以重新保护你的数据库。
+TiDB Cloud recovery group 允许你在 TiDB Cloud Dedicated 集群之间复制数据库，以防范区域性灾难。你可以编排数据库从一个集群到另一个集群的故障切换。在故障切换到辅助集群后，如果原主集群重新可用，你可以反向重新建立复制，以重新保护你的数据库。
 
 ## 架构
 
-恢复组由一组可以在两个 TiDB Cloud Dedicated 集群之间进行故障转移的复制数据库组成。每个恢复组都分配有一个主集群，该主集群上的数据库与该组关联，然后复制到备用集群。
+一个 recovery group 由一组可以在两个 TiDB Cloud Dedicated 集群之间一起进行故障切换的复制数据库组成。每个 recovery group 都分配有一个主集群，主集群上的数据库会与该组关联，并被复制到辅助集群。
 
-![恢复组](/media/tidb-cloud/recovery-group/recovery-group-overview.png)
+![Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-overview.png)
 
-- 恢复组：在两个集群之间复制的一组数据库
-- 主集群：应用程序主动写入数据库的集群
-- 备用集群：存放数据库副本的集群
+- Recovery Group：在两个集群之间进行复制的一组数据库
+- Primary Cluster：应用主动写入数据库的集群
+- Secondary Cluster：数据库副本所在的集群
 
-> **注意**
+> **Note**
 >
-> 恢复组功能不会显式强制将客户端连接到副本数据库设置为只读。确保连接到副本数据库的应用程序只执行只读查询是应用程序的责任。
+> Recovery Group 功能不会强制客户端连接到副本数据库时为只读。确保连接到副本数据库的应用只执行只读查询是应用自身的责任。
 
-## 主要特性和限制
+## 主要特性与限制
 
-- 目前，只有在 AWS 上托管的 TiDB Cloud Dedicated 集群支持恢复组。
-- 恢复组在两个集群之间建立。
-- 恢复组不支持数据库的双向复制。
+- 目前，仅托管在 AWS 上的 TiDB Cloud Dedicated 集群支持 recovery group。
+- recovery group 是在两个集群之间建立的。
+- recovery group 不支持数据库的双向复制。
 
-> **警告**
+> **Warning**
 >
 > 此功能处于 beta 阶段，不建议在生产环境中使用。
 
-## 下一步
+## 后续操作
 
-- 要开始使用恢复组，请参见[创建数据库恢复组](/tidb-cloud/recovery-group-get-started.md)。
-- 要了解如何使用恢复组，请参见[数据库故障转移和重新保护](/tidb-cloud/recovery-group-failover.md)。
+- 若要开始使用 recovery group，请参见 [Create Database Recovery Group](/tidb-cloud/recovery-group-get-started.md)。
+- 若要了解如何使用 recovery group，请参见 [Failover and Reprotect Databases](/tidb-cloud/recovery-group-failover.md)。

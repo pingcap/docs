@@ -5,11 +5,11 @@ summary: 了解 `TIKV_REGION_STATUS` information_schema 表。
 
 # TIKV_REGION_STATUS
 
-`TIKV_REGION_STATUS` 表通过 PD 的 API 展示 TiKV Region 的一些基本信息，例如 Region ID、起始和结束键值、读写流量等。
+`TIKV_REGION_STATUS` 表通过 PD 的 API 展示 TiKV Region 的一些基本信息，例如 Region ID、起始和结束键值，以及读写流量。
 
 > **Note:**
 >
-> 该表在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该表在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -60,12 +60,12 @@ DESC TIKV_REGION_STATUS;
 * `IS_PARTITION`：Region 所属的表是否为分区表。
 * `PARTITION_ID`：如果 Region 所属的表为分区表，则该列显示 Region 所属分区的 ID。
 * `PARTITION_NAME`：如果 Region 所属的表为分区表，则该列显示 Region 所属分区的名称。
-* `EPOCH_CONF_VER`：Region 配置的版本号。当有 peer 增加或移除时，版本号会增加。
+* `EPOCH_CONF_VER`：Region 配置的版本号。当添加或移除副本时，版本号会增加。
 * `EPOCH_VERSION`：Region 当前的版本号。当 Region 被分裂或合并时，版本号会增加。
 * `WRITTEN_BYTES`：写入到 Region 的数据量（字节数）。
 * `READ_BYTES`：从 Region 读取的数据量（字节数）。
 * `APPROXIMATE_SIZE`：Region 的近似数据大小（MB）。
-* `APPROXIMATE_KEYS`：Region 中的近似键数量。
+* `APPROXIMATE_KEYS`：Region 的近似键数量。
 * `REPLICATIONSTATUS_STATE`：Region 当前的副本状态。状态可能为 `UNKNOWN`、`SIMPLE_MAJORITY` 或 `INTEGRITY_OVER_LABEL`。
 * `REPLICATIONSTATUS_STATEID`：与 `REPLICATIONSTATUS_STATE` 对应的标识符。
 

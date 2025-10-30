@@ -17,11 +17,11 @@ summary: 学习如何将 TiDB 向量检索与 Amazon Bedrock 集成，构建基�
 
 > **Note**
 >
-> 向量检索功能适用于 TiDB 自建版、[TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)。对于 TiDB 自建版和 TiDB Cloud Dedicated，TiDB 版本需为 v8.4.0 或更高（推荐 v8.5.0 或更高）。
+> 向量检索功能适用于 TiDB 自建版、[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)、[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-essential) 和 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)。对于 TiDB 自建版和 TiDB Cloud Dedicated，TiDB 版本需为 v8.4.0 或更高（推荐 v8.5.0 或更高）。
 
 > **Tip**
 >
-> 你可以在 Notebook 格式中查看完整的 [示例代码](https://github.com/aws-samples/aws-generativeai-partner-samples/blob/main/tidb/samples/tidb-bedrock-boto3-rag.ipynb)。
+> 你可以在 Notebook 格式下查看完整的 [示例代码](https://github.com/aws-samples/aws-generativeai-partner-samples/blob/main/tidb/samples/tidb-bedrock-boto3-rag.ipynb)。
 
 ## 前置条件
 
@@ -37,24 +37,24 @@ summary: 学习如何将 TiDB 向量检索与 Amazon Bedrock 集成，构建基�
     aws configure set region <your-region>
     ```
 
-- 一个 TiDB Cloud Serverless 集群
+- 一个 TiDB Cloud Starter 集群
 
-    如果你还没有 TiDB Cloud 集群，请参考[创建 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md) 创建属于你自己的集群。
+    如果你还没有 TiDB Cloud 集群，请参考[创建 TiDB Cloud Starter 集群](/tidb-cloud/create-tidb-cluster-serverless.md) 创建属于你自己的 TiDB Cloud 集群。
 
 - 一个具有 [Amazon Bedrock 所需权限](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html) 的 AWS 账号，并且能够访问以下模型：
 
     - **Amazon Titan Embeddings**（`amazon.titan-embed-text-v2:0`），用于生成文本向量
     - **Meta Llama 3**（`us.meta.llama3-2-3b-instruct-v1:0`），用于文本生成
 
-  如果你没有访问权限，请按照 [申请访问 Amazon Bedrock 基础模型](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html#getting-started-model-access) 的说明进行操作。
+  如果你尚未获得访问权限，请按照 [申请访问 Amazon Bedrock 基础模型](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html#getting-started-model-access) 的说明操作。
 
 ## 开始使用
 
-本节将为你提供将 TiDB 向量检索与 Amazon Bedrock 集成，构建基于 RAG 的问答机器人的分步指导。
+本节将为你提供将 TiDB 向量检索与 Amazon Bedrock 集成，构建基于 RAG 的问答机器人的分步指南。
 
 ### 步骤 1. 设置环境变量
 
-从 [TiDB Cloud 控制台](https://tidbcloud.com/) 获取 TiDB 连接信息，并在你的开发环境中设置环境变量，具体如下：
+从 [TiDB Cloud 控制台](https://tidbcloud.com/) 获取 TiDB 连接信息，并在你的开发环境中设置环境变量，操作如下：
 
 1. 进入 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称，进入集群概览页。
 
@@ -75,9 +75,9 @@ summary: 学习如何将 TiDB 向量检索与 Amazon Bedrock 集成，构建基�
 
     > **Tip:**
     >
-    > 如果你之前已经创建过密码，可以继续使用原密码，或点击 **Reset Password** 生成新密码。
+    > 如果你之前已创建过密码，可以继续使用原密码，或点击 **Reset Password** 生成新密码。
 
-5. 在终端中运行以下命令设置环境变量。你需要将命令中的占位符替换为连接对话框中获取的实际参数。
+5. 在终端中运行以下命令设置环境变量。你需要将命令中的占位符替换为连接对话框中获取的对应参数。
 
     ```shell
     export TIDB_HOST=<your-tidb-host>
@@ -89,7 +89,7 @@ summary: 学习如何将 TiDB 向量检索与 Amazon Bedrock 集成，构建基�
 
 ### 步骤 2. 配置 Python 虚拟环境
 
-1. 新建一个名为 `demo.py` 的 Python 文件：
+1. 创建一个名为 `demo.py` 的 Python 文件：
 
     ```shell
     touch demo.py
@@ -99,7 +99,7 @@ summary: 学习如何将 TiDB 向量检索与 Amazon Bedrock 集成，构建基�
 
     ```shell
     python3 -m venv env
-    source env/bin/activate  # Windows 下使用 env\Scripts\activate
+    source env/bin/activate  # 在 Windows 上使用 env\Scripts\activate
     ```
 
 3. 安装所需依赖：
@@ -110,7 +110,7 @@ summary: 学习如何将 TiDB 向量检索与 Amazon Bedrock 集成，构建基�
 
 ### 步骤 3. 导入所需库
 
-在 `demo.py` 文件开头添加以下代码，导入所需的库：
+在 `demo.py` 文件开头添加以下代码以导入所需库：
 
 ```python
 import os
@@ -123,7 +123,7 @@ from tidb_vector.sqlalchemy import VectorType
 
 ### 步骤 4. 配置数据库连接
 
-在 `demo.py` 中添加以下代码，配置数据库连接：
+在 `demo.py` 中添加以下代码以配置数据库连接：
 
 ```python
 # ---- Configuration Setup ----
@@ -144,16 +144,16 @@ engine = create_engine(get_db_url(), pool_recycle=300)
 Base = declarative_base()
 ```
 
-### 步骤 5. 使用 Bedrock runtime client 调用 Amazon Titan Text Embeddings V2 模型
+### 步骤 5. 通过 Bedrock runtime client 调用 Amazon Titan Text Embeddings V2 模型
 
-Amazon Bedrock runtime client 提供了 `invoke_model` API，支持以下参数：
+Amazon Bedrock runtime client 提供了 `invoke_model` API，接受以下参数：
 
 - `modelId`：Amazon Bedrock 可用基础模型的模型 ID
 - `accept`：输入请求的类型
 - `contentType`：输入内容的类型
 - `body`：包含 prompt 和配置的 JSON 字符串负载
 
-在 `demo.py` 中添加以下代码，调用 `invoke_model` API，使用 Amazon Titan Text Embeddings 生成文本向量，并从 Meta Llama 3 获取响应：
+在 `demo.py` 中添加以下代码，通过 `invoke_model` API 使用 Amazon Titan Text Embeddings 生成文本向量，并通过 Meta Llama 3 获取响应：
 
 ```python
 # Bedrock Runtime Client Setup
@@ -227,7 +227,7 @@ def generate_result(query: str, info_str: str):
 
 ### 步骤 6. 创建向量表
 
-在 `demo.py` 中添加以下代码，创建用于存储文本及其向量的表：
+在 `demo.py` 中添加以下代码，创建用于存储文本及其向量的向量表：
 
 ```python
 # ---- TiDB Setup and Vector Index Creation ----
@@ -242,14 +242,14 @@ class Entity(Base):
 Base.metadata.create_all(engine)
 ```
 
-### 步骤 7. 将向量数据保存到 TiDB Cloud Serverless
+### 步骤 7. 将向量数据保存到 TiDB Cloud Starter
 
-在 `demo.py` 中添加以下代码，将向量数据保存到你的 TiDB Cloud Serverless 集群：
+在 `demo.py` 中添加以下代码，将向量数据保存到你的 TiDB Cloud Starter 集群：
 
 ```python
 # ---- Saving Vectors to TiDB ----
 def save_entities_with_embedding(session, contents):
-    """Save multiple entities with their embeddings to the TiDB Serverless database."""
+    """Save multiple entities with their embeddings to the TiDB database."""
     for content in contents:
         entity = Entity(content=content, content_vec=embedding(content))
         session.add(entity)

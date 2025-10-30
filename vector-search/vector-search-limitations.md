@@ -25,7 +25,7 @@ summary: 了解 TiDB 向量检索的限制。
 
 > **Note:**
 >
-> 向量检索功能适用于 TiDB 自建版、[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)、[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 和 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)。对于 TiDB 自建版和 TiDB Cloud Dedicated，TiDB 版本需为 v8.4.0 及以上（推荐 v8.5.0 及以上）。
+> 向量检索功能适用于 TiDB 自建版、[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)、[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 和 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)。对于 TiDB 自建版和 TiDB Cloud Dedicated，TiDB 版本需为 v8.4.0 或更高（推荐使用 v8.5.0 或更高版本）。
 
 ## 向量数据类型的限制
 
@@ -47,7 +47,7 @@ summary: 了解 TiDB 向量检索的限制。
 
 - 请确保你使用的是 v8.4.0 或更高版本的 BR 进行数据备份和恢复。不支持将包含向量数据类型的表恢复到 v8.4.0 之前的 TiDB 集群。
 - TiDB Data Migration (DM) 不支持将 MySQL 向量数据类型迁移或同步到 TiDB。
-- 当 TiCDC 将向量数据同步到不支持向量数据类型的下游时，会将向量数据类型转换为其他类型。更多信息请参见 [与向量数据类型的兼容性](/ticdc/ticdc-compatibility.md#compatibility-with-vector-data-types)。
+- 当 TiCDC 将向量数据同步到不支持向量数据类型的下游时，会将向量数据类型转换为其他类型。更多信息，参见 [与向量数据类型的兼容性](/ticdc/ticdc-compatibility.md#compatibility-with-vector-data-types)。
 
 </CustomContent>
 

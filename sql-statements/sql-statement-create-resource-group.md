@@ -9,7 +9,7 @@ summary: 了解在 TiDB 中如何使用 CREATE RESOURCE GROUP。
 
 > **Note:**
 >
-> 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
 ## 语法
 
@@ -73,22 +73,22 @@ ResourceGroupRunawayActionOption ::=
 | "SWITCH_GROUP" '(' ResourceGroupName ')'
 ```
 
-资源组名称参数（`ResourceGroupName`）在全局范围内必须唯一。
+资源组名称参数（`ResourceGroupName`）必须在全局范围内唯一。
 
 TiDB 支持以下 `DirectResourceGroupOption`，其中 [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) 是 TiDB 中对 CPU、IO 及其他系统资源的统一抽象单位。
 
-| 选项           | 描述                                         | 示例                                                                                      |
-|----------------|----------------------------------------------|-------------------------------------------------------------------------------------------|
-| `RU_PER_SEC`   | 每秒回填的 RU 速率                           | `RU_PER_SEC = 500` 表示该资源组每秒回填 500 个 RU                                         |
-| `PRIORITY`     | 在 TiKV 上待处理任务的绝对优先级             | `PRIORITY = HIGH` 表示优先级为高。如果未指定，默认值为 `MEDIUM`。                         |
-| `BURSTABLE`    | 如果设置了 `BURSTABLE` 属性，TiDB 允许对应资源组在超出配额时使用可用的系统资源。 |
-| `QUERY_LIMIT`  | 当查询执行满足该条件时，查询会被识别为异常查询并执行相应操作。 | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')` 表示当查询执行时间超过 60 秒时，该查询会被识别为异常查询并被终止。所有 SQL 文本相同的 SQL 语句将在接下来的 10 分钟内被立即终止。`QUERY_LIMIT=()` 或 `QUERY_LIMIT=NULL` 表示未启用异常查询控制。详见 [异常查询](/tidb-resource-control-runaway-queries.md)。 |
+| 选项         | 描述                                   | 示例                    |
+|--------------|----------------------------------------|-------------------------|
+| `RU_PER_SEC` | 每秒回填 RU 的速率                     | `RU_PER_SEC = 500` 表示该资源组每秒回填 500 个 RU    |
+| `PRIORITY`   | 在 TiKV 上处理任务的绝对优先级          | `PRIORITY = HIGH` 表示优先级为高。如果未指定，默认值为 `MEDIUM`。 |
+| `BURSTABLE`  | 如果设置了 `BURSTABLE` 属性，TiDB 允许对应的资源组在超出配额时使用可用的系统资源。 |
+| `QUERY_LIMIT`| 当查询执行满足该条件时，查询会被识别为异常查询并执行相应操作。 | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')` 表示当查询执行时间超过 60 秒时，该查询会被识别为异常查询并被终止。所有 SQL 文本相同的 SQL 语句将在接下来的 10 分钟内被立即终止。`QUERY_LIMIT=()` 或 `QUERY_LIMIT=NULL` 表示未启用异常查询控制。详见 [异常查询](/tidb-resource-control-runaway-queries.md)。 |
 
 > **Note:**
 >
 > - 只有当全局变量 [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) 设置为 `ON` 时，才能执行 `CREATE RESOURCE GROUP` 语句。
 > TiDB 在集群初始化时会自动创建一个 `default` 资源组。对于该资源组，`RU_PER_SEC` 的默认值为 `UNLIMITED`（等同于 `INT` 类型的最大值，即 `2147483647`），并且处于 `BURSTABLE` 模式。所有未绑定到任何资源组的请求会自动绑定到该 `default` 资源组。当你为其他资源组创建新配置时，建议根据需要修改 `default` 资源组的配置。
-> - 目前，仅 `default` 资源组支持修改 `BACKGROUND` 配置。
+> - 当前仅支持在 `default` 资源组上修改 `BACKGROUND` 配置。
 
 ## 示例
 

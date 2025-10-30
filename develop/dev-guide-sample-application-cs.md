@@ -1,11 +1,11 @@
 ---
 title: 使用 C# 连接 TiDB
-summary: 学习如何使用 C# 连接 TiDB。本教程提供了与 TiDB 交互的 C# 代码示例。
+summary: 学习如何使用 C# 连接 TiDB。本教程提供了与 TiDB 交互的 C# 代码示例片段。
 ---
 
 # 使用 C\# 连接 TiDB
 
-C#（发音为 “C-Sharp”）是 .NET 家族中的一种编程语言，由 Microsoft 开发。其他 .NET 语言还包括 VB.NET 和 F#。在本教程中，你将使用 C# 结合 MySQL Connector/NET，通过 MySQL 协议将 C# 应用程序连接到 TiDB。这是可行的，因为 TiDB 与 [MySQL 高度兼容](/mysql-compatibility.md)。
+C#（发音为 “C-Sharp”）是 .NET 家族中的一种编程语言，由 Microsoft 开发。其他 .NET 语言还包括 VB.NET 和 F#。在本教程中，你将使用 C# 结合 MySQL Connector/NET，通过 MySQL 协议将 C# 应用程序连接到 TiDB。这是可行的，因为 TiDB 高度 [兼容 MySQL](/mysql-compatibility.md)。
 
 虽然 .NET 通常在 Windows 上使用，但它同样适用于 macOS 和 Linux。在所有平台上，命令和代码基本相同，仅在提示符和文件路径上有细微差别。
 
@@ -13,7 +13,7 @@ C#（发音为 “C-Sharp”）是 .NET 家族中的一种编程语言，由 Mic
 
 - 下载 [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download)。
 - 本教程使用 `dotnet` 命令行工具。你也可以使用 Visual Studio Code IDE 来编写 C# 代码。
-- 要完成本教程，你需要有一个 TiDB 实例的访问权限。你可以使用 TiDB Cloud 上的 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-serverless) 或 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-dedicated) 集群，或者使用 `tiup playground` 启动的 TiDB 自建集群。
+- 要完成本教程，你需要有一个 TiDB 实例的访问权限。你可以使用 TiDB Cloud 上的 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 或 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-dedicated) 集群，或者使用自建的 TiDB 集群，例如通过 `tiup playground` 启动的集群。
 
 ## 步骤 1. 创建控制台项目
 
@@ -30,7 +30,7 @@ Restore succeeded.
 
 ## 步骤 2. 添加 MySql.Data 包
 
-.NET 的包管理器叫做 NuGet。MySQL Connector/NET 的 NuGet 包名称为 [MySql.Data](https://www.nuget.org/packages/MySql.Data)，它为 .NET 应用程序提供了 MySQL 协议的支持。如果你没有指定版本，NuGet 会安装最新的稳定版本（例如 9.3.0 版本）。
+.NET 的包管理器称为 NuGet。MySQL Connector/NET 的 NuGet 包名称为 [MySql.Data](https://www.nuget.org/packages/MySql.Data)，它为 .NET 应用程序提供了对 MySQL 协议的支持。如果你未指定版本，NuGet 会安装最新的稳定版本（例如 9.3.0 版本）。
 
 ```
 $ cd tidb_cs
@@ -97,9 +97,9 @@ public class Tutorial1
 }
 ```
 
-这段代码会连接到指定 IP 和端口的 TiDB 实例。如果你使用 TiDB Cloud，请将连接字符串参数（如 hostname、port、user 和 password）替换为 [TiDB Cloud 控制台](https://tidbcloud.com/) 中提供的详细信息。
+这段代码会连接到指定 IP 和端口的 TiDB 实例。如果你使用 TiDB Cloud，请将连接字符串参数（如主机名、端口、用户和密码）替换为 [TiDB Cloud 控制台](https://tidbcloud.com/) 中提供的详细信息。
 
-该代码会连接数据库，打印其版本信息，然后通过执行 [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version) SQL 查询获取更详细的版本信息，并最终输出该结果。
+该代码会连接到数据库，打印其版本信息，然后通过执行 SQL 查询 [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version) 获取更详细的版本信息，并最终输出该结果。
 
 ## 步骤 4. 运行程序
 
@@ -107,10 +107,10 @@ public class Tutorial1
 $ dotnet run
 Connecting to TiDB...
 
-Connected to: 8.0.11-TiDB-v{{{ .tidb-version }}}
+Connected to: 8.0.11-TiDB-v8.5.3
 
 Version details:
-Release Version: v{{{ .tidb-version }}}
+Release Version: v8.5.3
 Edition: Community
 Git Commit Hash: f43a13324440f92209e2a9f04c0bbe9cf763978d
 Git Branch: HEAD

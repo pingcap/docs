@@ -24,7 +24,7 @@ summary: 了解如何将你的 TiDB Cloud 集群连接到 Netlify 项目。
 
 你需要在 TiDB Cloud 中拥有一个账号和一个集群。如果还没有，请参考以下内容创建：
 
-- [创建 TiDB Cloud Serverless 集群](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [创建 TiDB Cloud Starter 或 TiDB Cloud Essential 集群](/tidb-cloud/create-tidb-cluster-serverless.md)
 - [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)
 
 一个 TiDB Cloud 集群可以连接到多个 Netlify 站点。
@@ -33,17 +33,17 @@ summary: 了解如何将你的 TiDB Cloud 集群连接到 Netlify 项目。
 
 对于 TiDB Cloud Dedicated 集群，请确保集群的流量过滤器允许所有 IP 地址（设置为 `0.0.0.0/0`）进行连接。这是因为 Netlify 部署使用动态 IP 地址。
 
-TiDB Cloud Serverless 集群默认允许所有 IP 地址连接，因此无需配置任何流量过滤器。
+TiDB Cloud Starter 和 TiDB Cloud Essential 集群默认允许所有 IP 地址连接，因此无需配置任何流量过滤器。
 
 ## 步骤 1. 获取示例项目和连接字符串
 
-为了帮助你快速上手，TiDB Cloud 提供了一个基于 TypeScript、Next.js、React 和 Prisma Client 的全栈示例应用。它是一个简单的博客站点，你可以在其中发布和删除自己的博客。所有内容都通过 Prisma 存储在 TiDB Cloud 中。
+为了帮助你快速开始，TiDB Cloud 提供了一个使用 TypeScript、Next.js、React 和 Prisma Client 的全栈示例应用。它是一个简单的博客站点，你可以在其中发布和删除自己的博客。所有内容都通过 Prisma 存储在 TiDB Cloud 中。
 
-### Fork 示例项目并克隆到你的空间
+### Fork 示例项目并克隆到你自己的空间
 
-1. 将 [Fullstack Example with Next.js and Prisma](https://github.com/tidbcloud/nextjs-prisma-example) 仓库 fork 到你自己的 GitHub 仓库。
+1. Fork [Fullstack Example with Next.js and Prisma](https://github.com/tidbcloud/nextjs-prisma-example) 仓库到你自己的 GitHub 仓库。
 
-2. 将 fork 后的仓库克隆到你的本地空间：
+2. 将 fork 后的仓库克隆到你自己的空间：
 
     ```shell
     git clone https://github.com/${your_username}/nextjs-prisma-example.git
@@ -52,14 +52,14 @@ TiDB Cloud Serverless 集群默认允许所有 IP 地址连接，因此无需配
 
 ### 获取 TiDB Cloud 连接字符串
 
-对于 TiDB Cloud Serverless 集群，你可以通过 [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) 或 [TiDB Cloud 控制台](https://tidbcloud.com/) 获取连接字符串。
+对于 TiDB Cloud Starter 或 TiDB Cloud Essential 集群，你可以通过 [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) 或 [TiDB Cloud 控制台](https://tidbcloud.com/) 获取连接字符串。
 
 对于 TiDB Cloud Dedicated 集群，你只能通过 TiDB Cloud 控制台获取连接字符串。
 
 <SimpleTab>
 <div label="TiDB Cloud CLI">
 
-> **提示：**
+> **Tip:**
 >
 > 如果你还没有安装 Cloud CLI，请参考 [TiDB Cloud CLI 快速入门](/tidb-cloud/get-started-with-cli.md) 进行快速安装，然后再执行以下步骤。
 
@@ -69,7 +69,7 @@ TiDB Cloud Serverless 集群默认允许所有 IP 地址连接，因此无需配
     ticloud cluster connect-info
     ```
 
-2. 按提示选择你的集群、客户端和操作系统。注意，本教程使用的客户端为 `Prisma`。
+2. 按提示选择你的集群、客户端和操作系统。注意，本教程使用的客户端是 `Prisma`。
 
     ```
     Choose the cluster
@@ -80,7 +80,7 @@ TiDB Cloud Serverless 集群默认允许所有 IP 地址连接，因此无需配
     > [x] macOS/Alpine (Detected)
     ```
 
-    输出如下，你可以在 `url` 字段中找到 Prisma 的连接字符串。
+    输出如下，你可以在 `url` 的值中找到 Prisma 的连接字符串。
 
     ```shell
     datasource db {
@@ -89,35 +89,35 @@ TiDB Cloud Serverless 集群默认允许所有 IP 地址连接，因此无需配
     }
     ```
 
-    > **注意：**
+    > **Note:**
     >
     > 在后续使用连接字符串时，请注意以下事项：
     >
     > - 将连接字符串中的参数替换为实际值。
-    > - 本文档中的示例应用需要一个新数据库，因此你需要将 `<Database>` 替换为一个唯一的新名称。
+    > - 本文档中的示例应用需要一个新数据库，因此你需要将 `<Database>` 替换为唯一的新名称。
 
 </div>
 <div label="TiDB Cloud console">
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/) 中，进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称进入其概览页，然后点击右上角的 **Connect**。在弹出的对话框中，你可以从连接字符串中获取以下连接参数：
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/) 中，进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称进入其概览页面，然后点击右上角的 **Connect**。在弹出的对话框中，你可以从连接字符串中获取以下连接参数。
 
     - `${host}`
     - `${port}`
     - `${user}`
     - `${password}`
 
-2. 将连接参数填入以下连接字符串：
+2. 将连接参数填写到以下连接字符串中：
 
     ```shell
     mysql://<User>:<Password>@<Host>:<Port>/<Database>?sslaccept=strict
     ```
 
-    > **注意：**
+    > **Note:**
     >
     > 在后续使用连接字符串时，请注意以下事项：
     >
     > - 将连接字符串中的参数替换为实际值。
-    > - 本文档中的示例应用需要一个新数据库，因此你需要将 `<Database>` 替换为一个唯一的新名称。
+    > - 本文档中的示例应用需要一个新数据库，因此你需要将 `<Database>` 替换为唯一的新名称。
 
 </div>
 </SimpleTab>
@@ -177,10 +177,10 @@ TiDB Cloud Serverless 集群默认允许所有 IP 地址连接，因此无需配
     netlify open   Open the Netlify admin URL of your site
     ```
 
-3. 设置环境变量。为了让你的本地空间和 Netlify 空间都能连接到 TiDB Cloud 集群，你需要将 `DATABASE_URL` 设置为在 [步骤 1](#step-1-get-the-example-project-and-the-connection-string) 获取到的连接字符串。
+3. 设置环境变量。为了让你自己的空间和 Netlify 空间都能连接到 TiDB Cloud 集群，你需要将 `DATABASE_URL` 设置为在 [步骤 1](#step-1-get-the-example-project-and-the-connection-string) 获取到的连接字符串。
 
     ```shell
-    # 为你的本地空间设置环境变量
+    # 为你自己的空间设置环境变量
     export DATABASE_URL='mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict'
 
     # 为 Netlify 空间设置环境变量
@@ -190,7 +190,7 @@ TiDB Cloud Serverless 集群默认允许所有 IP 地址连接，因此无需配
     检查你的环境变量。
 
     ```shell
-    # 检查本地空间的环境变量
+    # 检查你自己空间的环境变量
     env | grep DATABASE_URL
 
     # 检查 Netlify 空间的环境变量
@@ -199,16 +199,16 @@ TiDB Cloud Serverless 集群默认允许所有 IP 地址连接，因此无需配
 
 4. 在本地构建应用并将 schema 迁移到你的 TiDB Cloud 集群。
 
-    > **提示：**
+    > **Tips:**
     >
-    > 如果你想跳过本地部署，直接将应用部署到 Netlify，请直接跳到第 6 步。
+    > 如果你想跳过本地部署，直接将应用部署到 Netlify，可以直接跳到第 6 步。
 
     ```shell
     npm install .
     npm run netlify-build
     ```
 
-5. 在本地运行应用。你可以启动本地开发服务器预览你的站点。
+5. 在本地运行应用。你可以启动本地开发服务器预览你的网站。
 
     ```shell
     netlify dev
@@ -216,19 +216,19 @@ TiDB Cloud Serverless 集群默认允许所有 IP 地址连接，因此无需配
 
     然后在浏览器中访问 `http://localhost:3000/`，体验其界面。
 
-6. 将应用部署到 Netlify。当你对本地预览满意后，可以使用以下命令将站点部署到 Netlify。`--trigger` 表示不上传本地文件进行部署。如果你有本地更改，请确保已提交到你的 GitHub 仓库。
+6. 将应用部署到 Netlify。当你对本地预览满意后，可以使用以下命令将你的网站部署到 Netlify。`--trigger` 表示不上传本地文件进行部署。如果你有本地更改，请确保已经提交到你的 GitHub 仓库。
 
     ```shell
     netlify deploy --prod --trigger
     ```
 
-    前往你的 Netlify 控制台查看部署状态。部署完成后，应用的站点将拥有 Netlify 提供的公网 IP 地址，所有人都可以访问。
+    前往你的 Netlify 控制台检查部署状态。部署完成后，应用站点将拥有 Netlify 提供的公网 IP 地址，所有人都可以访问。
 
 ## 使用 edge function
 
-上文提到的示例应用运行在 Netlify 的无服务器函数上。本节将介绍如何将 [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md) 与 edge function 一起使用。edge function 是 Netlify 提供的一项功能，允许你在 Netlify CDN 的边缘运行无服务器函数。
+上文提到的示例应用运行在 Netlify 的无服务器函数上。本节将介绍如何将 [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md) 与 edge function 一起使用。edge function 是 Netlify 提供的一个特性，允许你在 Netlify CDN 的边缘运行无服务器函数。
 
-要使用 edge function，请按以下步骤操作：
+要使用 edge function，请按照以下步骤操作：
 
 1. 在项目根目录下创建名为 `netlify/edge-functions` 的目录。
 
@@ -236,13 +236,13 @@ TiDB Cloud Serverless 集群默认允许所有 IP 地址连接，因此无需配
 
     ```typescript
     import { connect } from 'https://esm.sh/@tidbcloud/serverless'
-    
+
     export default async () => {
       const conn = connect({url: Netlify.env.get('DATABASE_URL')})
       const result = await conn.execute('show databases')
       return new Response(JSON.stringify(result));
     }
-   
+
     export const config = { path: "/api/hello" };
     ```
 
@@ -258,4 +258,4 @@ TiDB Cloud Serverless 集群默认允许所有 IP 地址连接，因此无需配
     netlify deploy --prod --trigger
     ```
 
-然后你可以前往 Netlify 控制台查看部署状态。部署完成后，你可以通过 `https://<netlify-host>/api/hello` URL 访问 edge function。
+然后你可以前往 Netlify 控制台检查部署状态。部署完成后，你可以通过 `https://<netlify-host>/api/hello` 这个 URL 访问 edge function。

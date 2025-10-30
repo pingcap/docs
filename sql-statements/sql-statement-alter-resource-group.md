@@ -9,7 +9,7 @@ summary: 了解在 TiDB 中 ALTER RESOURCE GROUP 的用法。
 
 > **Note:**
 >
-> 此功能在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
 ## 语法
 
@@ -78,15 +78,15 @@ DirectBackgroundOption ::=
 |   "UTILIZATION_LIMIT" EqOpt LengthNum
 ```
 
-TiDB 支持以下 `DirectResourceGroupOption`，其中 [请求单元（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) 是 TiDB 中对 CPU、IO 及其他系统资源的统一抽象单位。
+TiDB 支持以下 `DirectResourceGroupOption`，其中 [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) 是 TiDB 中对 CPU、IO 及其他系统资源的统一抽象单位。
 
-| 选项           | 描述                                                         | 示例                                                                                                   |
-|----------------|--------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| `RU_PER_SEC`   | 每秒回填的 RU 速率                                           | `RU_PER_SEC = 500` 表示该资源组每秒回填 500 个 RU                                                      |
-| `PRIORITY`     | 在 TiKV 上待处理任务的绝对优先级                             | `PRIORITY = HIGH` 表示优先级为高。如果未指定，默认值为 `MEDIUM`。                                       |
-| `BURSTABLE`    | 如果设置了 `BURSTABLE` 属性，TiDB 允许对应资源组在超出配额时使用可用的系统资源。 |
-| `QUERY_LIMIT`  | 当查询执行满足该条件时，查询会被识别为异常查询并执行相应操作。 | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')` 表示当查询执行时间超过 60 秒时，该查询会被识别为异常查询并被终止。所有 SQL 文本相同的 SQL 语句将在接下来的 10 分钟内被立即终止。`QUERY_LIMIT=()` 或 `QUERY_LIMIT=NULL` 表示未启用异常查询控制。详见 [异常查询](/tidb-resource-control-runaway-queries.md)。 |
-| `BACKGROUND`   | 配置后台任务。更多详情参见 [管理后台任务](/tidb-resource-control-background-tasks.md)。 | `BACKGROUND=(TASK_TYPES="br,stats", UTILIZATION_LIMIT=30)` 表示备份恢复和统计信息收集相关任务被调度为后台任务，且后台任务最多可消耗 TiKV 资源的 30%。 |
+| 选项         | 描述                                   | 示例                |
+|---------------|-------------------------------------|------------------------|
+| `RU_PER_SEC` | 每秒回填的 RU 速率                   | `RU_PER_SEC = 500` 表示该资源组每秒回填 500 个 RU |
+| `PRIORITY`    | 在 TiKV 上待处理任务的绝对优先级      | `PRIORITY = HIGH` 表示优先级为高。如果未指定，默认值为 `MEDIUM`。 |
+| `BURSTABLE`   | 如果设置了 `BURSTABLE` 属性，TiDB 允许对应资源组在超出配额时使用可用的系统资源。 |
+| `QUERY_LIMIT` | 当查询执行满足该条件时，查询会被识别为异常查询并执行相应操作。 | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')` 表示当查询执行时间超过 60 秒时被识别为异常查询，并被终止。所有 SQL 文本相同的 SQL 语句将在接下来的 10 分钟内被立即终止。`QUERY_LIMIT=()` 或 `QUERY_LIMIT=NULL` 表示未启用异常查询控制。详见 [异常查询](/tidb-resource-control-runaway-queries.md)。 |
+| `BACKGROUND`  | 配置后台任务。更多详情参见 [管理后台任务](/tidb-resource-control-background-tasks.md)。 | `BACKGROUND=(TASK_TYPES="br,stats", UTILIZATION_LIMIT=30)` 表示备份恢复和统计信息收集相关任务被调度为后台任务，且后台任务最多可消耗 TiKV 资源的 30%。 |
 
 > **Note:**
 >
@@ -184,4 +184,4 @@ MySQL 也支持 [ALTER RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/a
 
 * [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
 * [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
-* [请求单元（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)
+* [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)

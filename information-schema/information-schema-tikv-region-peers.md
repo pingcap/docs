@@ -9,7 +9,7 @@ summary: 了解 `TIKV_REGION_PEERS` INFORMATION_SCHEMA 表。
 
 > **Note:**
 >
-> 该表在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该表在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -33,7 +33,7 @@ DESC TIKV_REGION_PEERS;
 7 rows in set (0.01 sec)
 ```
 
-例如，你可以使用以下 SQL 语句查询 `WRITTEN_BYTES` 最大的前 3 个 Region 的具体 TiKV 地址：
+例如，你可以使用以下 SQL 语句，查询 `WRITTEN_BYTES` 最大的前 3 个 Region 的具体 TiKV 地址：
 
 ```sql
 SELECT
@@ -61,4 +61,4 @@ WHERE
     * PENDING：暂时不可用。
     * DOWN：已下线并已转换。该副本不再提供服务。
     * NORMAL：正常运行。
-* DOWN_SECONDS：下线持续时间，单位为秒。
+* DOWN_SECONDS：下线持续的时间，单位为秒。

@@ -9,7 +9,7 @@ summary: 了解用于验证 JSON 文档的 JSON 函数。
 
 > **Note:**
 >
-> 目前，该功能在 [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群上不可用。
+> 目前，该功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
 ## [JSON_SCHEMA_VALID()](https://dev.mysql.com/doc/refman/8.0/en/json-validation-functions.html#function_json-schema-valid)
 
@@ -21,7 +21,7 @@ summary: 了解用于验证 JSON 文档的 JSON 函数。
 
 支持的校验关键字如下：
 
-| 校验关键字 | 适用类型 | 描述 |
+| 校验关键字              | 适用类型         | 描述 |
 |---|---|---|
 | `type`                 | 任意 | 检查类型（如 `array` 和 `string`） |
 | `enum`                 | 任意 | 检查值是否在指定的值数组中 |
@@ -35,22 +35,22 @@ summary: 了解用于验证 JSON 文档的 JSON 函数。
 | `exclusiveMinimum`     | `number`/`integer` | 检查值是否大于最小值（不包含） |
 | `maxlength`            | `string` | 检查值的长度是否不超过指定值 |
 | `minLength`            | `string` | 检查值的长度是否至少为指定值 |
-| `format`               | `string` | 检查字符串是否匹配指定的格式 |
-| `pattern`              | `string` | 检查字符串是否匹配指定的正则表达式 |
+| `format`               | `string` | 检查字符串是否匹配命名格式 |
+| `pattern`              | `string` | 检查字符串是否匹配正则表达式 |
 | `items`                | `array` | 应用于数组元素的 schema |
-| `prefixItems`          | `array` | 应用于数组中按位置元素的 schema |
+| `prefixItems`          | `array` | 应用于数组位置元素的 schema |
 | `maxItems`             | `array` | 检查数组元素数量是否不超过指定值 |
 | `minItems`             | `array` | 检查数组元素数量是否至少为指定值 |
-| `uniqueItems`          | `array` | 检查数组中的元素是否唯一，`true`/`false`|
+| `uniqueItems`          | `array` | 检查数组元素是否唯一，`true`/`false`|
 | `contains`             | `array` | 为数组中包含的元素设置 schema |
 | `maxContains`          | `array` | 与 `contains` 一起使用，检查某元素最多出现的次数 |
 | `minContains`          | `array` | 与 `contains` 一起使用，检查某元素最少出现的次数 |
 | `properties`           | `object` | 应用于对象属性的 schema |
-| `patternProperties`    | `object` | 根据属性名的模式匹配应用 schema |
+| `patternProperties`    | `object` | 基于属性名模式匹配应用 schema |
 | `additionalProperties` | `object` | 是否允许额外属性，`true`/`false` |
 | `minProperties`        | `object` | 检查对象最少拥有的属性数量 |
 | `maxProperties`        | `object` | 检查对象最多拥有的属性数量 |
-| `required`             | `object` | 检查对象中是否存在指定的属性名 |
+| `required`             | `object` | 检查对象中是否存在指定属性名 |
 
 示例：
 
@@ -70,7 +70,7 @@ summary: 了解用于验证 JSON 文档的 JSON 函数。
 }
 ```
 
-使用 [用户自定义变量](/user-defined-variables.md) 来保存该 JSON 文档。
+使用 [用户自定义变量](/user-defined-variables.md) 保存该 JSON 文档。
 
 ```sql
 SET @j := '{"fruits": ["orange", "apple", "pear"], "vegetables": ["carrot", "pepper", "kale"]}';
@@ -166,7 +166,7 @@ SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array"}}}',@j);
 1 row in set (0.01 sec)
 ```
 
-如上输出确认了 `fruits` 是一个数组。
+上述输出确认了 `fruits` 是一个数组。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "string"}}}',@j);
@@ -181,7 +181,7 @@ SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "string"}}}',@j);
 1 row in set (0.00 sec)
 ```
 
-如上输出显示 `fruits` **不是** 字符串。
+上述输出表明 `fruits` **不是** 字符串。
 
 现在验证数组中的元素数量。
 
@@ -198,7 +198,7 @@ SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array", "minItems"
 1 row in set (0.00 sec)
 ```
 
-如上输出显示 `fruits` 是一个包含至少 3 个元素的数组。
+上述输出表明 `fruits` 是一个包含至少 3 个元素的数组。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array", "minItems": 4}}}',@j);
@@ -213,9 +213,9 @@ SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array", "minItems"
 1 row in set (0.00 sec)
 ```
 
-如上输出显示 `fruits` **不是** 一个包含至少 4 个元素的数组。因为它不满足最小元素数量的要求。
+上述输出表明 `fruits` **不是** 一个包含至少 4 个元素的数组。因为它不满足最小元素数量的要求。
 
-对于整数值，你可以检查其是否在某个范围内。
+对于整数值，可以检查其是否在某个范围内。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"type": "integer", "minimum": 40, "maximum": 45}', '42');
@@ -240,7 +240,7 @@ SELECT JSON_SCHEMA_VALID('{"type": "integer", "minimum": 40, "maximum": 45}', '1
 1 row in set (0.00 sec)
 ```
 
-对于字符串，你可以验证其是否匹配某个模式。
+对于字符串，可以验证其是否匹配某个模式。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"type": "string", "pattern": "^Ti"}', '"TiDB"');
@@ -380,7 +380,7 @@ SELECT JSON_SCHEMA_VALID('{"anyOf": [{"type": "string"},{"type": "integer"}]}', 
 
 ## MySQL 兼容性
 
-- 如果 `JSON_SCHEMA_VALID()` 中用于校验的 schema 是无效的（如 `{"type": "sting"}`），MySQL 可能会接受，但 TiDB 会返回错误。注意 `"sting"` 拼写错误，应该为 `"string"`。
+- 如果 `JSON_SCHEMA_VALID()` 中用于校验的 schema 无效（如 `{"type": "sting"}`），MySQL 可能会接受，但 TiDB 会返回错误。注意 `"sting"` 拼写错误，正确应为 `"string"`。
 - MySQL 使用的是较早的 JSON Schema 标准草案版本。
 
 ## 另请参阅

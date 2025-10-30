@@ -9,7 +9,7 @@ summary: 了解 `CLUSTER_INFO` 集群拓扑信息表。
 
 > **Note:**
 >
-> 该表在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该表在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
 
 ```sql
@@ -39,7 +39,7 @@ desc cluster_info;
 * `INSTANCE`：实例地址，格式为 `IP:PORT` 的字符串。
 * `STATUS_ADDRESS`：HTTP API 的服务地址。tikv-ctl、pd-ctl 或 tidb-ctl 中的一些命令可能会使用该 API 及其地址。你也可以通过该地址获取更多集群信息。详细信息请参考 [TiDB HTTP API 文档](https://github.com/pingcap/tidb/blob/release-8.5/docs/tidb_http_api.md)。
 * `VERSION`：对应实例的语义化版本号。为了兼容 MySQL 版本号，TiDB 版本以 `${mysql-version}-${tidb-version}` 的格式展示。
-* `GIT_HASH`：编译实例版本时的 Git Commit Hash，用于标识两个实例是否为绝对一致的版本。
+* `GIT_HASH`：编译该实例版本时的 Git Commit Hash，用于标识两个实例是否为绝对一致的版本。
 * `START_TIME`：对应实例的启动时间。
 * `UPTIME`：对应实例的运行时长。
 * `SERVER_ID`：对应实例的 server ID。

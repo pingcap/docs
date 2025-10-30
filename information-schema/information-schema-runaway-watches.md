@@ -9,7 +9,7 @@ summary: 了解 `RUNAWAY_WATCHES` INFORMATION_SCHEMA 表。
 
 > **Note:**
 >
-> 该表在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该表在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -140,7 +140,7 @@ RESOURCE_GROUP_NAME: default
 - `ID`：监控项的 ID。
 - `RESOURCE_GROUP_NAME`：资源组名称。
 - `START_TIME`：开始时间。
-- `END_TIME`：结束时间。`UNLIMITED` 表示该监控项有效期为无限。
+- `END_TIME`：结束时间。`UNLIMITED` 表示该监控项有效期无限。
 - `WATCH`：快速识别的匹配类型。取值如下：
     - `Plan` 表示匹配 Plan Digest，此时 `WATCH_TEXT` 列显示 Plan Digest。
     - `Similar` 表示匹配 SQL Digest，此时 `WATCH_TEXT` 列显示 SQL Digest。

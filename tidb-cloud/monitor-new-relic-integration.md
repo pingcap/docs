@@ -5,34 +5,34 @@ summary: 了解如何通过 New Relic 集成监控你的 TiDB 集群。
 
 # 集成 TiDB Cloud 与 New Relic
 
-TiDB Cloud 支持与 New Relic 集成。你可以配置 TiDB Cloud，将你的 TiDB 集群的指标发送到 [New Relic](https://newrelic.com/)。之后，你可以直接在 New Relic 的仪表盘中查看这些指标。
+TiDB Cloud 支持与 New Relic 集成。你可以配置 TiDB Cloud，将 TiDB 集群的指标发送到 [New Relic](https://newrelic.com/)。之后，你可以直接在 New Relic 仪表盘中查看这些指标。
 
 ## New Relic 集成版本
 
 自 2023 年 4 月 11 日起，TiDB Cloud 支持项目级 New Relic 集成（Beta）。自 2025 年 7 月 31 日起，TiDB Cloud 推出集群级 New Relic 集成（预览版）。自 2025 年 9 月 30 日起，集群级 New Relic 集成将正式发布（GA）。
 
 - **集群级 New Relic 集成**：如果在 2025 年 7 月 31 日前，你的组织内没有未删除的旧版项目级 Datadog 或 New Relic 集成，TiDB Cloud 将为你的组织提供集群级 New Relic 集成，以体验最新的增强功能。
-- **旧版项目级 New Relic 集成（Beta）**：如果在 2025 年 7 月 31 日前，你的组织内至少有一个未删除的旧版项目级 Datadog 或 New Relic 集成，TiDB Cloud 会在项目级保留现有和新建的集成，以避免影响当前的仪表盘。请注意，旧版项目级 New Relic 集成将于 2025 年 10 月 31 日弃用。如果你的组织仍在使用这些旧版集成，请按照 [迁移 Datadog 和 New Relic 集成](/tidb-cloud/migrate-metrics-integrations.md) 的指引，迁移到新的集群级集成，以最大程度减少对指标相关服务的影响。
+- **旧版项目级 New Relic 集成（Beta）**：如果在 2025 年 7 月 31 日前，你的组织内至少有一个未删除的旧版项目级 Datadog 或 New Relic 集成，TiDB Cloud 会在项目级保留现有和新建的集成，以避免影响当前的仪表盘。请注意，旧版项目级 New Relic 集成将于 2025 年 10 月 31 日弃用。如果你的组织仍在使用这些旧版集成，请按照 [迁移 Datadog 和 New Relic 集成](/tidb-cloud/migrate-metrics-integrations.md) 迁移到新的集群级集成，以最大程度减少对指标相关服务的影响。
 
 ## 前提条件
 
-- 若要将 TiDB Cloud 与 New Relic 集成，你必须拥有一个 [New Relic](https://newrelic.com/) 账号，并[创建一个 `Ingest - License` 类型的 New Relic API key](https://one.newrelic.com/admin-portal/api-keys/home?)。
+- 要将 TiDB Cloud 与 New Relic 集成，你必须拥有一个 [New Relic](https://newrelic.com/) 账号，并[创建一个 `Ingest - License` 类型的 New Relic API 密钥](https://one.newrelic.com/admin-portal/api-keys/home?)。
 
     如果你还没有 New Relic 账号，请在 [这里](https://newrelic.com/signup) 注册。
 
-- 若要为 TiDB Cloud 设置第三方指标集成，你必须在 TiDB Cloud 中拥有 `Organization Owner` 或 `Project Owner` 权限。若要通过提供的链接查看集成页面或访问已配置的仪表盘，你至少需要 `Project Viewer` 角色，以访问 TiDB Cloud 项目下的目标集群。
+- 要为 TiDB Cloud 设置第三方指标集成，你必须在 TiDB Cloud 中拥有 **Organization Owner** 或 **Project Owner** 权限。要通过提供的链接查看集成页面或访问已配置的仪表盘，你至少需要 **Project Viewer** 角色，以访问项目下的目标集群。
 
 ## 限制
 
-- 你无法在 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 或 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 集群中使用 New Relic 集成。
+- New Relic 集成目前仅适用于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
 
-- 当集群状态为 **CREATING**、**RESTORING**、**PAUSED** 或 **RESUMING** 时，New Relic 集成不可用。
+- 当集群状态为 **CREATING**、**RESTORING**、**PAUSED** 或 **RESUMING** 时，不支持 New Relic 集成。
 
-- 当带有 New Relic 集成的集群被删除时，其关联的集成服务也会被移除。
+- 当删除已集成 New Relic 的集群时，其关联的集成服务也会被移除。
 
 ## 操作步骤
 
-### 步骤 1. 使用你的 New Relic API Key 集成
+### 步骤 1. 使用你的 New Relic API 密钥进行集成
 
 根据你的 [New Relic 集成版本](#new-relic-集成版本)，访问集成页面的步骤有所不同。
 
@@ -42,7 +42,7 @@ TiDB Cloud 支持与 New Relic 集成。你可以配置 TiDB Cloud，将你的 T
 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，进入你项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，然后点击目标集群名称，进入其概览页面。
 2. 在左侧导航栏，点击 **Settings** > **Integrations**。
 3. 在 **Integrations** 页面，点击 **Integration to New Relic**。
-4. 输入你的 New Relic API key，并选择 New Relic 的站点。
+4. 输入你的 New Relic API 密钥，并选择 New Relic 的站点。
 5. 点击 **Test Integration**。
 
     - 如果测试成功，会显示 **Confirm** 按钮。
@@ -56,7 +56,7 @@ TiDB Cloud 支持与 New Relic 集成。你可以配置 TiDB Cloud，将你的 T
 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，使用左上角的下拉框切换到目标项目。
 2. 在左侧导航栏，点击 **Project Settings** > **Integrations**。
 3. 在 **Integrations** 页面，点击 **Integration to New Relic (BETA)**。
-4. 输入你的 New Relic API key，并选择 New Relic 的站点。
+4. 输入你的 New Relic API 密钥，并选择 New Relic 的站点。
 5. 点击 **Test Integration**。
 
     - 如果测试成功，会显示 **Confirm** 按钮。
@@ -102,7 +102,7 @@ TiDB Cloud 支持与 New Relic 集成。你可以配置 TiDB Cloud，将你的 T
 
         > **注意**：
         >
-        > 为避免集成出错，请确保你的账号 ID 已添加到 JSON 文件中所有的 `"accountIds"` 字段。
+        > 为避免集成报错，请确保你的账号 ID 已添加到 JSON 文件中所有 `"accountIds"` 字段。
 
 2. 登录 [New Relic](https://one.newrelic.com/)，点击左侧导航栏的 **Dashboards**，然后点击右上角的 **Import dashboard**。
 3. 在弹出的对话框中，将准备好的 JSON 文件内容全部粘贴到文本区域，然后点击 **Import dashboard**。
@@ -121,7 +121,7 @@ TiDB Cloud 支持与 New Relic 集成。你可以配置 TiDB Cloud，将你的 T
 
 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，进入 **Integrations** 页面。
 
-2. 在 **New Relic** 区域点击 **Dashboard** 链接，查看你的 TiDB 集群的预置仪表盘。
+2. 在 **New Relic** 区域点击 **Dashboard** 链接，查看 TiDB 集群的预置仪表盘。
 
 3. 根据你的 [New Relic 集成版本](#new-relic-集成版本)，执行以下操作之一：
 
@@ -134,10 +134,10 @@ New Relic 会跟踪你的 TiDB 集群的以下指标。
 
 | 指标名称  | 指标类型 | 标签 | 描述                                   |
 | :------------| :---------- | :------| :----------------------------------------------------- |
-| tidb_cloud.db_database_time| gauge | sql_type: Select\|Insert\|...<br/><br/>cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…<br/><br/>component: `tidb` | 每秒在 TiDB 中运行的所有 SQL 语句消耗的总时间，包括所有进程的 CPU 时间和非空闲等待时间。 |
-| tidb_cloud.db_query_per_second| gauge | type: Select\|Insert\|...<br/><br/>cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…<br/><br/>component: `tidb` | 所有 TiDB 实例每秒执行的 SQL 语句数量，按 `SELECT`、`INSERT`、`UPDATE` 等语句类型统计。 |
+| tidb_cloud.db_database_time| gauge | sql_type: Select\|Insert\|...<br/><br/>cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…<br/><br/>component: `tidb` | 每秒 TiDB 中所有 SQL 语句运行消耗的总时间，包括所有进程的 CPU 时间和非空闲等待时间。 |
+| tidb_cloud.db_query_per_second| gauge | type: Select\|Insert\|...<br/><br/>cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…<br/><br/>component: `tidb` | 所有 TiDB 实例每秒执行的 SQL 语句数量，按 `SELECT`、`INSERT`、`UPDATE` 等类型统计。 |
 | tidb_cloud.db_average_query_duration| gauge | sql_type: Select\|Insert\|...<br/><br/>cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…<br/><br/>component: `tidb` | 客户端网络请求发送到 TiDB 与 TiDB 执行后返回给客户端之间的耗时。 |
-| tidb_cloud.db_failed_queries| gauge | type: executor:xxxx\|parser:xxxx\|...<br/><br/>cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…<br/><br/>component: `tidb` | 每秒每个 TiDB 实例发生的 SQL 执行错误，按错误类型（如语法错误、主键冲突等）统计。 |
+| tidb_cloud.db_failed_queries| gauge | type: executor:xxxx\|parser:xxxx\|...<br/><br/>cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…<br/><br/>component: `tidb` | 每秒每个 TiDB 实例 SQL 执行错误的类型统计（如语法错误、主键冲突等）。 |
 | tidb_cloud.db_total_connection| gauge | cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…<br/><br/>component: `tidb` | 当前 TiDB 服务器的连接数。 |
 | tidb_cloud.db_active_connections| gauge | cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…<br/><br/>component: `tidb` | 活跃连接数。 |
 | tidb_cloud.db_disconnections| gauge | result: ok\|error\|undetermined<br/><br/>cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…<br/><br/>component: `tidb` | 断开连接的客户端数量。 |
@@ -151,7 +151,7 @@ New Relic 会跟踪你的 TiDB 集群的以下指标。
 | tidb_cloud.node_memory_used_bytes | gauge | cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…<br/><br/>component: tidb\|tikv\|tiflash | TiDB/TiKV/TiFlash 节点已用内存（字节）。 |
 | tidb_cloud.node_memory_capacity_bytes | gauge | cluster_name: `<cluster name>`<br/><br/>instance: tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…<br/><br/>component: tidb\|tikv\|tiflash | TiDB/TiKV/TiFlash 节点的内存容量（字节）。 |
 
-对于集群级 New Relic 集成，还支持以下额外指标：
+对于集群级 New Relic 集成，还支持以下附加指标：
 
 | 指标名称  | 指标类型 | 标签 | 描述                                   |
 | :------------| :---------- | :------| :----------------------------------------------------- |

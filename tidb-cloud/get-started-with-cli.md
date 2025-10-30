@@ -80,14 +80,14 @@ TiDB Cloud 提供了一个命令行界面（CLI）[`ticloud`](https://github.com
 
     如果需要在 GitHub Actions 中设置 `ticloud`，请使用 [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli)。
 
-如果你还没有安装 MySQL 命令行客户端，可以参考 [MySQL Installer for Windows](https://dev.mysql.com/doc/refman/8.0/en/mysql-installer.html) 中的安装说明。在 Windows 上启动 `ticloud connect` 时，你需要将包含 `mysql.exe` 的目录添加到 PATH 环境变量中。
+如果你还没有安装 MySQL 命令行客户端，可以参考 [MySQL Installer for Windows](https://dev.mysql.com/doc/refman/8.0/en/mysql-installer.html) 中的安装说明。要在 Windows 上启动 `ticloud connect`，你需要将包含 `mysql.exe` 的目录添加到 PATH 环境变量中。
 
 </div>
 </SimpleTab>
 
 ## 快速入门
 
-[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) 是体验 TiDB Cloud 的最佳方式。本节将介绍如何使用 TiDB Cloud CLI 创建一个 TiDB Cloud Serverless 集群。
+[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 是开始使用 TiDB Cloud 的最佳方式。本节将介绍如何使用 TiDB Cloud CLI 创建一个 TiDB Cloud Starter 集群。
 
 ### 创建用户配置文件或登录 TiDB Cloud
 
@@ -115,9 +115,9 @@ TiDB Cloud 提供了一个命令行界面（CLI）[`ticloud`](https://github.com
 >
 > 在上述两种方式中，TiDB Cloud API key 的优先级高于 OAuth token。如果两者都存在，将优先使用 API key。
 
-### 创建 TiDB Cloud Serverless 集群
+### 创建 TiDB Cloud Starter 集群
 
-要创建 TiDB Cloud Serverless 集群，输入以下命令，并根据 CLI 提示填写所需信息：
+要创建 TiDB Cloud Starter 集群，输入以下命令，并根据 CLI 提示填写所需信息：
 
 ```shell
 ticloud serverless create
@@ -131,7 +131,7 @@ ticloud serverless create
 ticloud --help
 ```
 
-验证你当前使用的是否为最新版本：
+验证你使用的是最新版本：
 
 ```shell
 ticloud version

@@ -101,7 +101,7 @@ INSERT INTO products (product_id, product_name, price) VALUES
     IGNORE 1 LINES (product_id, product_name, price);"
     ```
 
-    请确保将路径、表名（本例中为 `products`）、`<your_username>`、`<your_host>`、`<your_password>`、`<your_csv_path>`、`<your_ca_path>` 以及其他占位符替换为你的实际信息，并根据需要将示例 CSV 数据替换为你的真实数据集。
+    请确保将路径、表名（本例为 `products`）、`<your_username>`、`<your_host>`、`<your_password>`、`<your_csv_path>`、`<your_ca_path>` 以及其他占位符替换为你的实际信息，并根据需要将示例 CSV 数据替换为你的真实数据集。
 
 > **Note:**
 >

@@ -1,48 +1,48 @@
 ---
-title: 使用 MySQL CLI 导入数据到 TiDB Cloud Dedicated
-summary: 了解如何使用 MySQL CLI 导入数据到 TiDB Cloud Dedicated。
+title: 通过 MySQL CLI 向 TiDB Cloud Dedicated 导入数据
+summary: 了解如何通过 MySQL CLI 向 TiDB Cloud Dedicated 导入数据。
 ---
 
-# 使用 MySQL CLI 导入数据到 TiDB Cloud Dedicated
+# 通过 MySQL CLI 向 TiDB Cloud Dedicated 导入数据
 
-本文档介绍如何使用 [MySQL 命令行客户端](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)将数据导入到 TiDB Cloud Dedicated。你可以从 SQL 文件或 CSV 文件导入数据。以下部分提供了从每种类型文件导入数据的分步说明。
+本文档介绍了如何通过 [MySQL 命令行客户端](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) 向 TiDB Cloud Dedicated 导入数据。你可以从 SQL 文件或 CSV 文件导入数据。以下章节将分别提供从每种文件类型导入数据的分步说明。
 
-## 前提条件
+## 前置条件
 
-在使用 MySQL CLI 向 TiDB Cloud Dedicated 导入数据之前，你需要满足以下前提条件：
+在你通过 MySQL CLI 向 TiDB Cloud Dedicated 导入数据之前，需要满足以下前置条件：
 
-- 你可以访问你的 TiDB Cloud Dedicated 集群。如果没有，请按照[创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)中的说明创建一个。
-- 在本地计算机上安装 MySQL CLI。
+- 你可以访问你的 TiDB Cloud Dedicated 集群。如果没有，请按照 [创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md) 的说明创建一个。
+- 在你的本地计算机上安装 MySQL CLI。
 
 ## 步骤 1. 连接到你的 TiDB Cloud Dedicated 集群
 
 连接到你的 TiDB 集群。
 
-1. 导航到[**集群**](https://tidbcloud.com/project/clusters)页面，然后点击目标集群的名称进入其概览页面。
+1. 进入 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，然后点击目标集群的名称，进入其概览页面。
 
-2. 在左侧导航栏中，点击**设置** > **网络**。
+2. 在左侧导航栏，点击 **Settings** > **Networking**。
 
-3. 在**网络**页面的 **IP 访问列表**区域，点击**添加 IP 地址**。
+3. 在 **Networking** 页面，点击 **IP Access List** 区域的 **Add IP Address**。
 
-4. 在对话框中，选择**允许从任何地方访问**，然后点击**确认**。
+4. 在弹窗中，选择 **Allow access from anywhere**，然后点击 **Confirm**。
 
-5. 在右上角，点击**连接**打开连接信息对话框。
+5. 在右上角，点击 **Connect**，打开连接信息的弹窗。
 
-    有关如何获取连接字符串的更多详细信息，请参见[通过公共连接连接到 TiDB Cloud Dedicated](/tidb-cloud/connect-via-standard-connection.md)。
+    有关如何获取连接字符串的更多信息，请参见 [通过公共连接连接到 TiDB Cloud Dedicated](/tidb-cloud/connect-via-standard-connection.md)。
 
-## 步骤 2. 定义表并插入示例数据
+## 步骤 2. 定义表结构并插入示例数据
 
-在导入数据之前，你需要准备表结构并向其中插入实际的示例数据。以下是一个可用于创建表和插入示例数据的 SQL 文件（`product_data.sql`）示例：
+在导入数据之前，你需要准备表结构，并向其中插入真实的示例数据。以下是一个 SQL 文件（`product_data.sql`）的示例，你可以用它来创建表并插入示例数据：
 
 ```sql
--- 在你的 TiDB 数据库中创建表
+-- Create a table in your TiDB database
 CREATE TABLE products (
     product_id INT PRIMARY KEY,
     product_name VARCHAR(255),
     price DECIMAL(10, 2)
 );
 
--- 向表中插入示例数据
+-- Insert sample data into the table
 INSERT INTO products (product_id, product_name, price) VALUES
     (1, 'Laptop', 999.99),
     (2, 'Smartphone', 499.99),
@@ -51,14 +51,14 @@ INSERT INTO products (product_id, product_name, price) VALUES
 
 ## 步骤 3. 从 SQL 或 CSV 文件导入数据
 
-你可以从 SQL 文件或 CSV 文件导入数据。以下部分提供了从每种类型文件导入数据的分步说明。
+你可以从 SQL 文件或 CSV 文件导入数据。以下章节将分别提供从每种文件类型导入数据的分步说明。
 
 <SimpleTab>
-<div label="从 SQL 文件导入">
+<div label="From an SQL file">
 
 按照以下步骤从 SQL 文件导入数据：
 
-1. 提供一个包含要导入数据的实际 SQL 文件（例如，`product_data.sql`）。此 SQL 文件必须包含带有实际数据的 `INSERT` 语句。
+1. 提供一个真实的 SQL 文件（例如 `product_data.sql`），其中包含你要导入的数据。该 SQL 文件必须包含带有真实数据的 `INSERT` 语句。
 
 2. 使用以下命令从 SQL 文件导入数据：
 
@@ -66,18 +66,18 @@ INSERT INTO products (product_id, product_name, price) VALUES
     mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p<your_password> < product_data.sql
     ```
 
-> **注意：**
+> **Note:**
 >
-> 这里使用的默认数据库名称是 `test`，你可以手动创建自己的数据库或在 SQL 文件中使用 `CREATE DATABASE` 命令。
+> 这里默认使用的数据库名称为 `test`，你可以手动创建自己的数据库，或者在 SQL 文件中使用 `CREATE DATABASE` 命令。
 
 </div>
-<div label="从 CSV 文件导入">
+<div label="From a CSV file">
 
 按照以下步骤从 CSV 文件导入数据：
 
-1. 在 TiDB 中创建与你的数据导入需求相匹配的数据库和架构。
+1. 在 TiDB 中创建数据库和表结构，以满足你的数据导入需求。
 
-2. 提供一个包含要导入数据的示例 CSV 文件（例如，`product_data.csv`）。以下是 CSV 文件的示例：
+2. 提供一个示例 CSV 文件（例如 `product_data.csv`），其中包含你要导入的数据。以下是一个 CSV 文件的示例：
 
     **product_data.csv:**
 
@@ -97,11 +97,11 @@ INSERT INTO products (product_id, product_name, price) VALUES
     IGNORE 1 LINES (product_id, product_name, price);"
     ```
 
-4. 确保将路径、表名（本例中为 `products`）、`<your_username>`、`<your_host>`、`<your_password>`、`<your_csv_path>`、`<your_ca_path>` 和其他占位符替换为你的实际信息，并根据需要将示例 CSV 数据替换为你的实际数据集。
+4. 请确保将路径、表名（本例为 `products`）、`<your_username>`、`<your_host>`、`<your_password>`、`<your_csv_path>`、`<your_ca_path>` 以及其他占位符替换为你的实际信息，并根据需要将示例 CSV 数据替换为你的真实数据集。
 
-> **注意：**
+> **Note:**
 >
-> 有关 `LOAD DATA LOCAL INFILE` 的更多语法详情，请参见 [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)。
+> 有关 `LOAD DATA LOCAL INFILE` 的更多语法细节，请参见 [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)。
 
 </div>
 </SimpleTab>
