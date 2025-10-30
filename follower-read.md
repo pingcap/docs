@@ -6,7 +6,7 @@ aliases: ['/docs/dev/follower-read/','/docs/dev/reference/performance/follower-r
 
 # Follower Read
 
-In TiDB, to ensure high availability and data security, TiKV stores multiple replicas for each Region, one of which is the leader and the others are followers. By default, all read and write requests are processed by the leader. The Follower Read feature enables TiDB to read data from follower replicas of a Region while maintaining strong consistency, thereby reducing the read workload on the leader and improving the overall read throughput of the cluster.
+In TiDB, to ensure high availability and data safety, TiKV stores multiple replicas for each Region, one of which is the leader and the others are followers. By default, all read and write requests are processed by the leader. The Follower Read feature enables TiDB to read data from follower replicas of a Region while maintaining strong consistency, thereby reducing the read workload on the leader and improving the overall read throughput of the cluster.
 
 <CustomContent platform="tidb">
 
@@ -20,9 +20,9 @@ When performing Follower Read, TiDB selects an appropriate replica based on the 
 
 </CustomContent>
 
-By enabling followers to handle read requests, Follower Read helps to achieve the following goals:
+By enabling followers to handle read requests, Follower Read achieves the following goals:
 
-- Distribute read hotspots and reduce leader workload.
+- Distribute read hotspots and reduce the leader workload.
 - Prioritize local replica reads in multi-AZ or multi-datacenter deployments to minimize cross-AZ traffic.
 
 ## Usage scenarios
@@ -30,12 +30,12 @@ By enabling followers to handle read requests, Follower Read helps to achieve th
 Follower Read is suitable for the following scenarios:
 
 - Applications with heavy read requests or significant read hotspots.
-- Multi-AZ deployments where prioritizing to read from local replicas helps reduce cross-AZ bandwidth usage.
-- Read-write separation architectures that expect further improvement in overall read performance.
+- Multi-AZ deployments where you want to prioritize reading from local replicas to reduce cross-AZ bandwidth usage.
+- Read-write separation architectures that you want to further improve overall read performance.
 
 > **Note:**
 >
-> To ensure strong consistency of the read results, Follower Read needs to communicate with the leader to confirm the latest commit progress (by executing the Raft `ReadIndex` operation) before reading, which introduces an additional network interaction. Therefore, Follower Read is most effective when there are a large number of read requests or read-write isolation is required. However, for low-latency single queries, the performance improvement might not be significant.
+> To ensure strong consistency of the read results, Follower Read communicates with the leader before reading to confirm the latest commit progress (by executing the Raft `ReadIndex` operation). This introduces an additional network interaction. Therefore, Follower Read is most effective where a large number of read requests exist or read-write isolation is required. However, for low-latency single queries, the performance improvement might not be significant.
 
 ## Usage
 
@@ -127,7 +127,7 @@ When the follower node processes a read request, it first uses `ReadIndex` of th
 
 ### Follower replica selection strategy
 
-The Follower Read feature does not affect TiDB's Snapshot Isolation transaction isolation level. TiDB selects a replica for the first read attempt based on the configuration of `tidb_replica_read`. From the second retry onward, TiDB prioritizes ensuring successful reads. Therefore, when the selected follower node becomes inaccessible or has other errors, TiDB switches to the leader for service.
+The Follower Read feature does not affect TiDB's Snapshot Isolation transaction isolation level. TiDB selects a replica based on the `tidb_replica_read` configuration for the first read attempt. From the second retry onward, TiDB prioritizes ensuring successful reads. Therefore, when the selected follower node becomes inaccessible or has other errors, TiDB switches to the leader for service.
 
 #### `leader`
 
@@ -147,4 +147,4 @@ The Follower Read feature does not affect TiDB's Snapshot Isolation transaction 
 
 To ensure strong data consistency, Follower Read performs a `ReadIndex` operation regardless of how much data is read, which inevitably consumes additional TiKV CPU resources. Therefore, in small-query scenarios (such as point queries), the performance loss of Follower Read is relatively more obvious. Moreover, because the traffic reduced by local reads for small queries is limited, Follower Read is more recommended for large queries or batch reading scenarios.
 
-When `tidb_replica_read` is set to `closest-adaptive`, TiDB does not perform Follower Read for small queries. As a result, the extra TiKV CPU overhead compared with that of the `leader` policy is generally within +10% in various workloads.
+When `tidb_replica_read` is set to `closest-adaptive`, TiDB does not perform Follower Read for small queries. As a result, under various workloads, the additional CPU overhead on TiKV is typically no more than 10% compared with the `leader` policy.
