@@ -55,9 +55,9 @@ This variable defines the expected data read mode. Starting from v8.5.4 and v9.0
 
 In scenarios where you need to reduce cross-AZ traffic by reading from local replicas, the following configurations are recommended:
 
-- The default value `leader` provides the best performance.
-- `closest-adaptive` minimizes cross-AZ traffic with minimal performance impact.
-- `closest-replicas` minimizes cross-AZ traffic as much as possible.
+- `leader`: the default value, providing the best performance.
+- `closest-adaptive`: minimizes cross-AZ traffic while keeping performance loss to a minimum.
+- `closest-replicas`: maximizes cross-AZ traffic savings but might cause some performance degradation.
 
 If you are using other configurations, refer to the following table to modify them to the recommended configurations:
 
