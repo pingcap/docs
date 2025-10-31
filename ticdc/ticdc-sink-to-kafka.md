@@ -111,6 +111,7 @@ The following are descriptions of sink URI parameters and values that can be con
 * It is recommended that you create your own Kafka Topic. At a minimum, you need to set the maximum amount of data of each message that the Topic can send to the Kafka broker, and the number of downstream Kafka partitions. When you create a changefeed, these two settings correspond to `max-message-bytes` and `partition-num`, respectively.
 * If you create a changefeed with a Topic that does not yet exist, TiCDC will try to create the Topic using the `partition-num` and `replication-factor` parameters. It is recommended that you specify these parameters explicitly.
 * In most cases, it is recommended to use the `canal-json` protocol.
+* If the upstream data changes in TiCDC are infrequent, such as there might be no data changes for more than 10 minutes, it is recommended to increase the Kafka connection idle timeout in the Kafka broker configuration file. For more information, see [Why do TiCDC replication tasks to Kafka often fail with `broken pipe` errors](/ticdc/ticdc-faq.md#why-do-ticdc-replication-tasks-to-kafka-often-fail-with-broken-pipe-errors).
 
 > **Note:**
 >

@@ -168,6 +168,11 @@ Fields related to Resource Control:
 * `Request_unit_write`: the total write RUs consumed by the statement.
 * `Time_queued_by_rc`: the total time that the statement waits for available resources.
 
+Fields related to storage engines:
+
+- `Storage_from_kv`: introduced in v9.0.0, indicates whether this statement read data from TiKV.
+- `Storage_from_mpp`: introduced in v9.0.0, indicates whether this statement read data from TiFlash.
+
 ## Related system variables
 
 * [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold): Sets the threshold for the slow log. The SQL statement whose execution time exceeds this threshold is recorded in the slow log. The default value is 300 (ms).
