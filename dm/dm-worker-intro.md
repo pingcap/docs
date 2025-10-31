@@ -6,16 +6,20 @@ aliases: ['/docs/tidb-data-migration/dev/dm-worker-intro/']
 
 # DM-worker Introduction
 
-DM-worker is a tool used to migrate data from MySQL/MariaDB to TiDB.
+DM-worker is a component of TiDB Data Migration (DM) that executes tasks to dump and replicate data from MySQL/MariaDB to TiDB.
 
-It has the following features:
+## Key Concepts
 
-- Acts as a secondary database of any MySQL or MariaDB instance
-- Reads the binlog events from MySQL/MariaDB and persists them to the local storage
-- A single DM-worker supports migrating the data of one MySQL/MariaDB instance to multiple TiDB instances
-- Multiple DM-workers support migrating the data of multiple MySQL/MariaDB instances to one TiDB instance
+- A DM-worker can perform a full export of data from the MySQL source and then transition to reading the MySQL binlog for continuous, incremental replication.
+- The DM-worker is the execution engine for tasks and subtasks received from the DM-master. It dumps data from one MySQL source instance, acts as a replication client reading the binlog events, performs data transformation and filtering, stores data in a local relay log, applies data to the downstream target TiDB, and reports the status back to the DM-master.
+- If a worker instance goes offline, DM-master can automatically reschedule its tasks to another available worker to resume the data replication. Note that this does not apply during a full export/import phase.
+- A single DM-worker process connects to **one** upstream source database at a time. To migrate from multiple sources, such as when merging sharded tables, you must run multiple DM-worker processes.
 
-## DM-worker processing unit
+> **Note:**
+>
+> A DM-worker is a MySQL binlog client, not a standby database replica server. It reads and replays data from a MySQL source to a TiDB target. To replicate data from a source TiDB cluster, use [TiCDC](/ticdc/ticdc-overview.md).
+
+## DM-worker processing units
 
 A DM-worker task contains multiple logic units, including relay log, the dump processing unit, the load processing unit, and binlog replication.
 
@@ -43,7 +47,11 @@ This section describes the upstream and downstream database users' privileges re
 
 ### Upstream database user privileges
 
-The upstream database (MySQL/MariaDB) user must have the following privileges:
+The required privileges for the upstream database user depend on the database flavor (MySQL/MariaDB) and version.
+
+#### MySQL and MariaDB version before 10.5
+
+For MySQL and MariaDB versions before 10.5, the user must have the following privileges:
 
 | Privilege | Scope |
 |:----|:----|
@@ -52,12 +60,44 @@ The upstream database (MySQL/MariaDB) user must have the following privileges:
 | `REPLICATION SLAVE` | Global |
 | `REPLICATION CLIENT` | Global |
 
-If you need to migrate the data from `db1` to TiDB, execute the following `GRANT` statement:
+To grant these privileges, execute the following statement:
 
 ```sql
-GRANT RELOAD,REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'your_user'@'your_wildcard_of_host';
+GRANT RELOAD, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'your_user'@'your_wildcard_of_host';
+GRANT SELECT ON `db1`.* TO 'your_user'@'your_wildcard_of_host';
+```
+
+#### MariaDB version 10.5 or higher
+
+Starting from [MariaDB 10.5](https://mariadb.com/docs/release-notes/community-server/old-releases/mariadb-10-5-series/what-is-mariadb-105), the `REPLICATION CLIENT` privilege was renamed and split into more granular privileges. The user must have the following privileges:
+
+| Privilege | Scope | Description |
+|:---|:---|:---|
+| `SELECT` | Tables | Required for full data export. |
+| `RELOAD` | Global | Required for `FLUSH TABLES WITH READ LOCK`. |
+| `BINLOG MONITOR` | Global | Renamed from `REPLICATION CLIENT`; allows monitoring the binlog. |
+| `REPLICATION SLAVE` | Global | Allows reading binlog events. |
+| `REPLICATION SLAVE ADMIN` | Global | Allows managing replication status (for example, `SHOW SLAVE STATUS`). |
+| `REPLICATION MASTER ADMIN`| Global | Allows monitoring the master (for example, `SHOW SLAVE HOSTS`). |
+
+To grant these privileges, execute the following statement:
+
+```sql
+GRANT RELOAD, BINLOG MONITOR, REPLICATION SLAVE, REPLICATION SLAVE ADMIN, REPLICATION MASTER ADMIN ON *.* TO 'your_user'@'your_wildcard_of_host';
 GRANT SELECT ON db1.* TO 'your_user'@'your_wildcard_of_host';
 ```
+
+> **Note:**
+>
+> Due to changes in MariaDB 10.5+, DM's automated pre-check (`check-task`) might fail with privilege errors because the checks were designed for MySQL's privilege system.
+>
+> If the pre-check fails even with the correct privileges granted, you can use the following workaround in your task configuration file to bypass the check:
+>
+> ```yaml
+> ignore-checking-items: ["all"]
+> ```
+>
+> This option bypasses all pre-checks, so it is crucial to verify that all prerequisites are met before skipping.
 
 If you also need to migrate the data from other databases into TiDB, make sure the same privileges are granted to the user of the respective databases.
 
@@ -85,13 +125,11 @@ GRANT ALL ON dm_meta.* TO 'your_user'@'your_wildcard_of_host';
 
 ### Minimal privilege required by each processing unit
 
+The following table lists the minimal privileges required by each processing unit for **MySQL and MariaDB < 10.5**. For MariaDB 10.5 and later, refer to the privilege table in the preceding section.
+
 | Processing unit | Minimal upstream (MySQL/MariaDB) privilege | Minimal downstream (TiDB) privilege | Minimal system privilege |
 |:----|:--------------------|:------------|:----|
-| Relay log | `REPLICATION SLAVE` (reads the binlog)<br/>`REPLICATION CLIENT` (`show master status`, `show slave status`) | NULL | Read/Write local files |
-| Dump | `SELECT`<br/>`RELOAD` (flushes tables with Read lock and unlocks tables）| NULL | Write local files |
+| Relay log | `REPLICATION SLAVE` (reads the binlog)<br/>`REPLICATION CLIENT` (`SHOW MASTER STATUS`, `SHOW SLAVE STATUS`) | NULL | Read/Write local files |
+| Dump | `SELECT`<br/>`RELOAD` (`FLUSH TABLES WITH READ LOCK`) | NULL | Write local files |
 | Load | NULL | `SELECT` (Query the checkpoint history)<br/>`CREATE` (creates a database/table)<br/>`DELETE` (deletes checkpoint)<br/>`INSERT` (Inserts the Dump data) | Read/Write local files |
-| Binlog replication | `REPLICATION SLAVE` (reads the binlog)<br/>`REPLICATION CLIENT` (`show master status`, `show slave status`) | `SELECT` (shows the index and column)<br/>`INSERT` (DML)<br/>`UPDATE` (DML)<br/>`DELETE` (DML)<br/>`CREATE` (creates a database/table)<br/>`DROP` (drops databases/tables)<br/>`ALTER` (alters a table)<br/>`INDEX` (creates/drops an index)| Read/Write local files |
-
-> **Note:**
->
-> These privileges are not immutable and they change as the request changes.
+| Binlog replication | `REPLICATION SLAVE` (reads the binlog)<br/>`REPLICATION CLIENT` (`SHOW MASTER STATUS`, `SHOW SLAVE STATUS`) | `SELECT` (shows the index and column)<br/>`INSERT` (DML)<br/>`UPDATE` (DML)<br/>`DELETE` (DML)<br/>`CREATE` (creates a database/table)<br/>`DROP` (drops databases/tables)<br/>`ALTER` (alters a table)<br/>`INDEX` (creates/drops an index)| Read/Write local files |
