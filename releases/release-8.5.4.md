@@ -110,7 +110,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Fix the bucket split still work even if the bucket doesn't report #[9726](https://github.com/tikv/pd/issues/9726) @[bufferflies](https://github.com/bufferflies)
     - Fix the wrong token allocation of the resource manager #[9455](https://github.com/tikv/pd/issues/9455)  @[JmPotato](https://github.com/JmPotato)
     - Fix the placement rule revert after pd leader changed #[9602](https://github.com/tikv/pd/issues/9602) @[okJiang](https://github.com/okJiang)
-    - 修复 backoff 初始化错误问题 #[9013](https://github.com/tikv/pd/issues/9013)  @[rleungx](https://github.com/rleungx)
     - Fix the ttl configuration not work #[9343](https://github.com/tikv/pd/issues/9343) @[lhy1024](https://github.com/lhy1024)
 
 + TiFlash <!--tw@hfxsd: 5 notes-->
