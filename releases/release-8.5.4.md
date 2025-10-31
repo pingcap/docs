@@ -57,10 +57,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + TiFlash <!--tw@qiancai: 4 notes-->
 
-    - 跳过不必要读取的数据，优化 TableScan 的读取性能 [#9875](https://github.com/pingcap/tiflash/issues/9875) @[gengliqi](https://github.com/gengliqi)
-    - 优化 TiFlash 在宽且稀疏的表上 TableScan 的性能 [#10361](https://github.com/pingcap/tiflash/issues/10361) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 优化当集群存在大量表时，添加向量索引时的 TiFlash CPU 开销 [#10357](https://github.com/pingcap/tiflash/issues/10357) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - 减少不必要的处理 raft commands 时的日志 [#10467](https://github.com/pingcap/tiflash/issues/10467) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Skip unnecessary data reads to improve `TableScan` performance [#9875](https://github.com/pingcap/tiflash/issues/9875) @[gengliqi](https://github.com/gengliqi)
+    - Optimize `TableScan` performance on wide tables with many columns and sparse data (that is, lots of `NULL` or empty values) in TiFlash [#10361](https://github.com/pingcap/tiflash/issues/10361) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Reduce TiFlash CPU overhead caused by adding vector indexes in clusters with many tables [#10357](https://github.com/pingcap/tiflash/issues/10357) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - Minimize unnecessary log output when processing useless Raft commands to reduce log volume [#10467](https://github.com/pingcap/tiflash/issues/10467) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Improve `TableScan` performance on small partitioned tables in TiFlash [#10487](https://github.com/pingcap/tiflash/issues/10487) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 + Tools
 
@@ -104,13 +105,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + PD <!--tw@qiancai: 8 notes-->
 
-    - Fix PD Client initial strategy not work well [#9013](https://github.com/tikv/pd/issues/9013) @[rleungx](https://github.com/rleungx)
-    - Fix the wrong APIS of the `/config` 和 `/members`  [#9797](https://github.com/tikv/pd/issues/9797) @[lhy1024](https://github.com/lhy1024) 
-    - Fix the handler way of the tso error #[9188](https://github.com/tikv/pd/issues/9188) @[Tema](https://github.com/Tema)
-    - Fix the bucket split still work even if the bucket doesn't report #[9726](https://github.com/tikv/pd/issues/9726) @[bufferflies](https://github.com/bufferflies)
-    - Fix the wrong token allocation of the resource manager #[9455](https://github.com/tikv/pd/issues/9455)  @[JmPotato](https://github.com/JmPotato)
-    - Fix the placement rule revert after pd leader changed #[9602](https://github.com/tikv/pd/issues/9602) @[okJiang](https://github.com/okJiang)
-    - Fix the ttl configuration not work #[9343](https://github.com/tikv/pd/issues/9343) @[lhy1024](https://github.com/lhy1024)
+    - Fix the issue that the PD Client retry strategy is not initialized correctly [#9013](https://github.com/tikv/pd/issues/9013) @[rleungx](https://github.com/rleungx)
+    - Fix the issue that the TSO HTTP API `/config` and `/members` return incorrect output [#9797](https://github.com/tikv/pd/issues/9797) @[lhy1024](https://github.com/lhy1024)
+    - Fix the incorrect error handling logic of TSO Follower Proxy [#9188](https://github.com/tikv/pd/issues/9188) @[Tema](https://github.com/Tema)
+    - Fix the issue that splitting buckets still works even after the bucket does not report [#9726](https://github.com/tikv/pd/issues/9726) @[bufferflies](https://github.com/bufferflies)
+    - Fix the issue that the Resource Manager incorrectly allocates tokens, causing queries to be stuck [#9455](https://github.com/tikv/pd/issues/9455) @[JmPotato](https://github.com/JmPotato)
+    - Fix the issue that Placement Rules do not take effect after PD leader switches [#9602](https://github.com/tikv/pd/issues/9602) @[okJiang](https://github.com/okJiang)
+    - Fix the issue that TTL configuration does not take effect [#9343](https://github.com/tikv/pd/issues/9343) @[lhy1024](https://github.com/lhy1024)
 
 + TiFlash <!--tw@hfxsd: 5 notes-->
 
@@ -124,13 +125,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     + Backup & Restore (BR) <!--tw@qiancai: 7 notes-->
 
-        - Fix the issue where Zstd compression did not take effect in log backup, resulting in uncompressed output. [#18836](https://github.com/tikv/tikv/issues/18836) @[3pointer](https://github.com/3pointer)
-        - Fixed a bug that may cause flush operation slow in azure blob storage. [#18410](https://github.com/tikv/tikv/issues/18410) @[YuJuncen](https://github.com/YuJuncen)
-        - Fixed a bug that may cause `log truncate` panic when failed to delete file. [#63358](https://github.com/pingcap/tidb/issues/63358) @[YuJuncen](https://github.com/YuJuncen)
-        - Fixed a bug that may cause `stats_meta` be zero when checksumming disabled. [#60978](https://github.com/pingcap/tidb/issues/60978) @[Leavrth](https://github.com/Leavrth)
-        - Reduced chance of BR restore failure from S3-compatible storage when the S3 server limits bandwidth through traffic shaping. [#18846](https://github.com/tikv/tikv/issues/18846) @[kennytm](https://github.com/kennytm)
-        - Fix the issue that the log backup observer loses observation of a region. [#18243](https://github.com/tikv/tikv/issues/18243) @[Leavrth](https://github.com/Leavrth)
-        - Fixed a a bug that may cause `restore point` fail when there are some special sized table schemas.   [#63663](https://github.com/pingcap/tidb/issues/63663) @[RidRisR](https://github.com/RidRisR)
+        - Fix the issue that zstd compression in log backup does not take effect, causing the output to remain uncompressed [#18836](https://github.com/tikv/tikv/issues/18836) @[3pointer](https://github.com/3pointer)
+        - Fix the issue that flushing might slow down when backing up data to Azure Blob Storage [#18410](https://github.com/tikv/tikv/issues/18410) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that `log truncate` might occur when file deletion fails [#63358](https://github.com/pingcap/tidb/issues/63358) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that setting `--checksum` to `false` during backup might result in an empty `stats_meta` table [#60978](https://github.com/pingcap/tidb/issues/60978) @[Leavrth](https://github.com/Leavrth)
+        - Reduce the possibility of BR failing to restore data from S3-compatible storage services when the bandwidth limits on these services are enabled [#18846](https://github.com/tikv/tikv/issues/18846) @[kennytm](https://github.com/kennytm)
+        - Fix the issue that `log backup observer` might lose the observation on a Region, resulting in incomplete backup data [#18243](https://github.com/tikv/tikv/issues/18243) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that causes `restore point` creation to fail when backed-up tables includes certain special schemas [#63663](https://github.com/pingcap/tidb/issues/63663) @[RidRisR](https://github.com/RidRisR)
 
     + TiCDC <!--tw@Oreoxmt: 7 notes-->
 
