@@ -11,13 +11,13 @@ Currently, the `SHOW STATS_META` statement outputs the following columns:
 
 | Column name | Description            |
 | -------- | ------------- |
-| db_name  |  Database name    |
-| table_name | Table name |
-| partition_name| Partition name |
-| update_time | Last updated time |
-| modify_count | The number of rows modified |
-| row_count | The total row count |
-| last_analyze_time | The last time the table is analyzed |
+| Db_name  |  Database name    |
+| Table_name | Table name |
+| Partition_name| Partition name |
+| Update_time | Last updated time |
+| Modify_count | The number of rows modified |
+| Row_count | The total row count |
+| Last_analyze_time | The last time the table is analyzed |
 
 > **Note:**
 >
