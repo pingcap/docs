@@ -17,7 +17,7 @@ Currently, the `SHOW STATS_META` statement outputs 6 columns:
 | update_time | Last updated time |
 | modify_count | The number of rows modified |
 | row_count | The total row count |
-| Last_analyze_time | The last time when the table was analyzed |
+| last_analyze_time | The last time the table is analyzed |
 
 > **Note:**
 >
