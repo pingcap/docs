@@ -132,7 +132,7 @@
   - [Select Your Cluster Plan](/tidb-cloud/select-cluster-tier.md)
   - Manage TiDB Cloud Instances
     - [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)
-    - Connect to Your TiDB Cloud Cluster
+    - Connect to Your TiDB Cloud Instances
       - [Connection Overview](/tidb-cloud/premium/connect-to-tidb-instance.md)
       - [Connect via Public Endpoint](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)
       - [Connect via Private Endpoint with AWS](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
