@@ -74,7 +74,7 @@ With TiDB Cloud, you can get the following key features:
 
 TiDB Cloud provides the following deployment options:
 
-- TiDB Cloud Serverless (renamed to Starter)
+- TiDB Cloud Starter
 
     {{{ .starter }}} is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free quota and consumption based billing once free limits are exceeded.
 
@@ -101,6 +101,16 @@ TiDB Cloud provides the following deployment options:
     Currently, {{{ .essential }}} is in public preview on AWS.
 
     </CustomContent>
+
+<CustomContent plan="premium">
+
+- {{{ .premium }}}
+
+    {{{ .premium }}} is designed for mission-critical businesses that demand unlimited real-time scalability. It delivers workload-aware auto-scaling and comprehensive enterprise capabilities.
+
+    Currently, {{{ .premium }}} is in private preview on AWS and Alibaba Cloud. 
+
+</CustomContent>
 
 - TiDB Cloud Dedicated
 

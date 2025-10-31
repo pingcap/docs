@@ -14,7 +14,7 @@ aliases: ['/tidbcloud/serverless-driver-config']
 
 Traditional TCP-based MySQL drivers are not suitable for serverless functions due to their expectation of long-lived, persistent TCP connections, which contradict the short-lived nature of serverless functions. Moreover, in edge environments such as [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/), where comprehensive TCP support and full Node.js compatibility may be lacking, these drivers may not work at all.
 
-[TiDB Cloud serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript lets you to connect to your {{{ .starter }}} or {{{ .essential }}} cluster over HTTP, which is generally supported by serverless environments. With it, it is now possible to connect to {{{ .starter }}} or {{{ .essential }}} clusters from edge environments and reduce connection overhead with TCP while keeping the similar development experience of traditional TCP-based MySQL drivers. 
+[TiDB Cloud serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript lets you to connect to your {{{ .starter }}} or {{{ .essential }}} cluster over HTTP, which is generally supported by serverless environments. With it, it is now possible to connect to {{{ .starter }}} or {{{ .essential }}} clusters from edge environments and reduce connection overhead with TCP while keeping the similar development experience of traditional TCP-based MySQL drivers.
 
 > **Note:**
 >
@@ -334,7 +334,7 @@ TiDB Cloud serverless driver has been integrated with the following ORMs:
 The serverless driver itself is free, but accessing data with the driver generates [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) and storage usage.
 
 - For {{{ .starter }}} clusters, the pricing follows the [{{{ .starter }}} pricing](https://www.pingcap.com/tidb-cloud-starter-pricing-details/) model.
-- For {{{ .essential }}} clusters, the pricing follows the [{{{ .essential }}} pricing](/tidb-cloud/tidb-cloud-billing.md#pricing-for-essential) model.
+- For {{{ .essential }}} clusters, the pricing follows the [{{{ .essential }}} pricing](https://www.pingcap.com/tidb-cloud-essential-pricing-details/) model.
 
 ## Limitations
 

@@ -23,7 +23,9 @@ The document provides an example of connecting to a Kafka Private Link service d
 
 ## Prerequisites
 
-1. Ensure that you have the following authorization to set up a Kafka Private Link service in your own AWS account. 
+<CustomContent plan="dedicated">
+
+1. Ensure that you have the following authorization to set up a Kafka Private Link service in your own AWS account.
 
     - Manage EC2 nodes
     - Manage VPC
@@ -47,6 +49,31 @@ The document provides an example of connecting to a Kafka Private Link service d
     6. Enter a unique **Kafka Advertised Listener Pattern** for your Kafka Private Link service.
         1. Input a unique random string. It can only include numbers or lowercase letters. You will use it to generate **Kafka Advertised Listener Pattern** later.
         2. Click **Check usage and generate** to check if the random string is unique and generate **Kafka Advertised Listener Pattern** that will be used to assemble the EXTERNAL advertised listener for Kafka brokers. 
+
+</CustomContent>
+<CustomContent plan="premium">
+
+1. Ensure that you have the following authorization to set up a Kafka Private Link service in your own AWS account.
+
+    - Manage EC2 nodes
+    - Manage VPC
+    - Manage subnets
+    - Manage security groups
+    - Manage load balancer
+    - Manage endpoint services
+    - Connect to EC2 nodes to configure Kafka nodes
+
+2. [Create a {{{ .premium }}} instance](/tidb-cloud/premium/create-tidb-instance-premium.md) if you do not have one.
+
+3. Get the Kafka deployment information from your {{{ .premium }}} instance.
+
+    1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the instance overview page of the TiDB instance, and then click **Data** > **Changefeed** in the left navigation pane.
+    2. On the overview page, find the region of the TiDB instance. Ensure that your Kafka cluster will be deployed to the same region.
+    3. To create a changefeed, refer to the tutorials:
+
+        - [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+
+</CustomContent>
 
 Note down all the deployment information. You need to use it to configure your Kafka Private Link service later.
 
@@ -523,7 +550,16 @@ LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properti
 
 ### Reconfigure a running Kafka cluster
 
+<CustomContent plan="dedicated">
+
 Ensure that your Kafka cluster is deployed in the same region and AZs as the TiDB cluster. If any brokers are in different AZs, move them to the correct ones.
+
+</CustomContent>
+<CustomContent plan="premium">
+
+Ensure that your Kafka cluster is deployed in the same region and AZs as the TiDB instance. If any brokers are in different AZs, move them to the correct ones.
+
+</CustomContent>
 
 #### 1. Configure the EXTERNAL listener for brokers
 
@@ -729,7 +765,7 @@ Do the following to set up the load balancer:
 
 ## Step 3. Connect from TiDB Cloud
 
-1. Return to the [TiDB Cloud console](https://tidbcloud.com) to create a changefeed for the cluster to connect to the Kafka cluster by **Private Link**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
+1. Return to the [TiDB Cloud console](https://tidbcloud.com) to create a changefeed for the <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> to connect to the Kafka cluster by **Private Link**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
 
 2. When you proceed to **Configure the changefeed target > Connectivity Method > Private Link**, fill in the following fields with corresponding values and other fields as needed.
 

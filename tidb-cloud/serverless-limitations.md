@@ -22,6 +22,7 @@ We are constantly filling in the feature gaps between {{{ .starter }}}/Essential
 
 - Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to {{{ .starter }}} or {{{ .essential }}} clusters.
 - No [Firewall Rules](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md) support for Private Endpoint.
+- Your database client connections might be terminated unexpectedly if they remain open for more than 30 minutes. This can occur when a TiDB server shuts down, restarts, or undergoes maintenance, potentially causing application disruptions. To avoid this issue, configure a maximum connection lifetime. It is recommended to start with 5 minutes and increase it gradually if it affects tail latency. For more information, see [Recommended settings for connection pools](/develop/dev-guide-connection-parameters.md#connection-pools-and-connection-parameters).
 
 > **Note:**
 >
@@ -62,7 +63,7 @@ We are constantly filling in the feature gaps between {{{ .starter }}}/Essential
 
 ## Usage quota
 
-For each organization in TiDB Cloud, you can create a maximum of five [free {{{ .starter }}} clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) by default. To create more {{{ .starter }}} clusters, you need to add a credit card and [set a monthly spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for the usage.
+For each organization in TiDB Cloud, you can create a maximum of five [free {{{ .starter }}} clusters](/tidb-cloud/select-cluster-tier.md#starter) by default. To create more {{{ .starter }}} clusters, you need to add a credit card and [set a monthly spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for the usage.
 
 For the first five {{{ .starter }}} clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
 
