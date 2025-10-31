@@ -8,7 +8,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-show-stats-meta/']
 
 You can use `SHOW STATS_META` to view how many rows are in a table and how many rows are changed in that table. When using this statement, you can filter the needed information by the `ShowLikeOrWhere` clause.
 
-Currently, the `SHOW STATS_META` statement outputs 6 columns:
+Currently, the `SHOW STATS_META` statement outputs the following columns:
 
 | Column name | Description            |
 | -------- | ------------- |
