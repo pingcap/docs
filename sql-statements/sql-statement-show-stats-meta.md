@@ -8,16 +8,17 @@ aliases: ['/docs/dev/sql-statements/sql-statement-show-stats-meta/']
 
 You can use `SHOW STATS_META` to view how many rows are in a table and how many rows are changed in that table. When using this statement, you can filter the needed information by the `ShowLikeOrWhere` clause.
 
-Currently, the `SHOW STATS_META` statement outputs 6 columns:
+Currently, the `SHOW STATS_META` statement outputs the following columns:
 
 | Column name | Description            |
 | -------- | ------------- |
-| db_name  |  Database name    |
-| table_name | Table name |
-| partition_name| Partition name |
-| update_time | Last updated time |
-| modify_count | The number of rows modified |
-| row_count | The total row count |
+| Db_name  |  Database name    |
+| Table_name | Table name |
+| Partition_name| Partition name |
+| Update_time | Last updated time |
+| Modify_count | The number of rows modified |
+| Row_count | The total row count |
+| Last_analyze_time | The last time the table is analyzed |
 
 > **Note:**
 >
