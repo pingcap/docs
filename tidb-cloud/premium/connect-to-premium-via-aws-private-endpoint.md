@@ -1,9 +1,9 @@
 ---
-title: Connect to a {{{ .premium }}} Instance via AWS PrivateLink
+title: Connect to {{{ .premium }}} via AWS PrivateLink
 summary: Learn how to connect to your {{{ .premium }}} instance via private endpoint with AWS.
 ---
 
-# Connect to a {{{ .premium }}} Instance via AWS PrivateLink
+# Connect to {{{ .premium }}} via AWS PrivateLink
 
 This document describes how to connect to your {{{ .premium }}} instance via [AWS PrivateLink](https://aws.amazon.com/privatelink).
 
