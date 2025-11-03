@@ -46,7 +46,7 @@ For example, you can do the following:
 
 ### TiDB instances
 
-If you are an `Instance Manager`, you can manage settings and operations for a specific instance.
+If you are an `Instance Manager`, you can manage settings and operations for a specific TiDB instance.
 
 For example, you can do the following:
 
