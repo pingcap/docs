@@ -24,9 +24,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 - Add the [`tidb_enable_binding_usage`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_enable_binding_usage-new-in-v854) system variable to control whether to collect the usage statistics of SQL plan bindings [#63407](https://github.com/pingcap/tidb/issues/63407) @[hawkingrei](https://github.com/hawkingrei) <!--tw@qiancai -->
 
-- Add the `tidb_opt_enable_no_decorrelate_in_select` system variable to control whether to decorrelate subqueries in the `SELECT` list [#51116](https://github.com/pingcap/tidb/issues/51116) @[terry1purcell](https://github.com/terry1purcell) <!--tw@Oreoxmt -->
+- Add the [`tidb_opt_enable_no_decorrelate_in_select`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_enable_no_decorrelate_in_select-new-in-v854) system variable to control whether to decorrelate subqueries in the `SELECT` list [#51116](https://github.com/pingcap/tidb/issues/51116) @[terry1purcell](https://github.com/terry1purcell) <!--tw@Oreoxmt -->
 
-- Add the `tidb_opt_enable_semi_join_rewrite` system variable to control whether to rewrite `EXISTS` subqueries [#44850](https://github.com/pingcap/tidb/issues/44850) @[terry1purcell](https://github.com/terry1purcell) <!--tw@Oreoxmt -->
+- Add the [`tidb_opt_enable_semi_join_rewrite`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_enable_semi_join_rewrite-new-in-v854) system variable to control whether to rewrite `EXISTS` subqueries [#44850](https://github.com/pingcap/tidb/issues/44850) @[terry1purcell](https://github.com/terry1purcell) <!--tw@Oreoxmt -->
 - Add the TiFlash configuration item [`graceful_wait_shutdown_timeout`](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854) to control the maximum wait time when shutting down a TiFlash server [#10266](https://github.com/pingcap/tiflash/issues/10266) @[gengliqi](https://github.com/gengliqi) <!--tw@qiancai -->
 ## Improvements
 
