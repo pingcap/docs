@@ -62,7 +62,7 @@ After creating the interface endpoint, navigate to the **EndPoints** page and se
 
 1. Return to the **Create Alibaba Cloud Private Endpoint Connection** dialog in the TiDB Cloud console.
 
-2. Paste the previously copied *Endpoint Resource ID* and *Domain Name* into the corresponding fields.
+2. Paste the *Endpoint Resource ID* and *Domain Name* that you copied earlier into the corresponding fields.
 
 3. Click **Create Private Endpoint Connection** to accept the connection from your private endpoint.
 
