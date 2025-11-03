@@ -1,5 +1,5 @@
 ---
-title: Connect to Premium via Alibaba Cloud Private Endpoint
+title: Connect to {{{ .premium }}} via Alibaba Cloud Private Endpoint
 summary: Learn how to connect to your TiDB Cloud Premium instance via Alibaba Cloud private endpoint.
 ---
 
