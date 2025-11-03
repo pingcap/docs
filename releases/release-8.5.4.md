@@ -32,7 +32,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + TiDB <!--tw@Oreoxmt: 11 notes-->
 
-    - (dup): release-9.0.0.md(beta.1) > # SQL 功能 * 支持对分区表的非唯一列创建全局索引 [#58650](https://github.com/pingcap/tidb/issues/58650) @[Defined2014](https://github.com/Defined2014) @[mjonss](https://github.com/mjonss)
+    - (dup): release-9.0.0.md(beta.1) > # SQL 功能 - 支持对分区表的非唯一列创建[全局索引](/partitioned-table.md#全局索引)，以提升全局索引的易用性 [#58650](https://github.com/pingcap/tidb/issues/58650) @[Defined2014](https://github.com/Defined2014) @[mjonss](https://github.com/mjonss)
     - (dup): release-9.0.0.md(beta.1) > 改进提升> TiDB - 支持由 `IN` 子查询而来的 Semi Join 使用 `semi_join_rewrite` 的 Hint [#58829](https://github.com/pingcap/tidb/issues/58829) @[qw4990](https://github.com/qw4990)
     - Optimize the estimation strategy when the `tidb_opt_ordering_index_selectivity_ratio` system variable takes effect [#62817](https://github.com/pingcap/tidb/issues/62817) @[terry1purcell](https://github.com/terry1purcell)
     - Adjust the optimizer selection logic to make newly created indexes more likely to be chosen in certain scenarios [#57948](https://github.com/pingcap/tidb/issues/57948) @[terry1purcell](https://github.com/terry1purcell)
