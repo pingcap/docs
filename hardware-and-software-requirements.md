@@ -51,7 +51,7 @@ This document describes the software and hardware requirements for deploying and
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>openEuler 22.03 LTS SP1/SP3</td>
+    <td>openEuler 24.03 LTS (SP4 or later)</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
