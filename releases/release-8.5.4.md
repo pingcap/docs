@@ -20,6 +20,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 - New system variable: [`tidb_stats_update_during_ddl`](/system-variables.md#tidb_stats_update_during_ddl)
 
+- Add the [`tidb_enable_binding_usage`](/system-variables.md#tidb_enable_binding_usage-new-in-v854-and-v900) system variable to control whether to collect the usage statistics of SQL plan bindings [#63407](https://github.com/pingcap/tidb/issues/63407) @[hawkingrei](https://github.com/hawkingrei) <!--tw@qiancai -->
+
 - Add the `tidb_opt_enable_no_decorrelate_in_select` system variable to control whether to decorrelate subqueries in the `SELECT` list [#51116](https://github.com/pingcap/tidb/issues/51116) @[terry1purcell](https://github.com/terry1purcell) <!--tw@Oreoxmt -->
 
 - Add the `tidb_opt_enable_semi_join_rewrite` system variable to control whether to rewrite `EXISTS` subqueries [#44850](https://github.com/pingcap/tidb/issues/44850) @[terry1purcell](https://github.com/terry1purcell) <!--tw@Oreoxmt -->
