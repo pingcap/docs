@@ -55,7 +55,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 + PD <!--tw@Oreoxmt: 3 notes-->
 
     - Reduce unnecessary error logs [#9370](https://github.com/tikv/pd/issues/9370) @[bufferflies](https://github.com/bufferflies)
-    - Upgrade the Golang version to 1.23.12 and update related dependencies [#9788](https://github.com/tikv/pd/issues/9788) @[JmPotato](https://github.com/JmPotato)
+    - Upgrade the Golang version from 1.23.0 to 1.23.12 and update related dependencies [#9788](https://github.com/tikv/pd/issues/9788) @[JmPotato](https://github.com/JmPotato)
     - Support scattering Regions at the table level to achieve balanced distribution across `scatter-role` and `engine` dimensions [#8986](https://github.com/tikv/pd/issues/8986) @[bufferflies](https://github.com/bufferflies)
 
 + TiFlash <!--tw@qiancai: 4 notes-->
