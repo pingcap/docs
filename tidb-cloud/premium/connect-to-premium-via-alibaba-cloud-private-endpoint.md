@@ -38,7 +38,7 @@ To use the Alibaba Cloud Management Console to create a VPC interface endpoint, 
 
 1. Sign in to the [Alibaba Cloud Management Console](https://account.alibabacloud.com/login/login.htm).
 2. Navigate to **VPC** > **Endpoints**.
-3. Click the **Interface Endpoints** tab, then click **Create Endpoint**.
+3. Click the **Interface Endpoints** tab, and then click **Create Endpoint**.
 4. Fill in the endpoint details:
     - **Region**: select the same region as your TiDB Cloud instance.
     - **Endpoint Name**: enter a name for the endpoint.
