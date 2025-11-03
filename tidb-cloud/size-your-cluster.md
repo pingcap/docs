@@ -106,7 +106,7 @@ The supported vCPU and RAM sizes include the following:
 > - 4 vCPU TiKV can only be used with 4 vCPU TiDB.
 > - TiFlash is unavailable.
 >
-> The **4 vCPU, 16 GiB** size of TiKV is designed for learning, testing, or trial purposes. It suits pre-production or small, non-critical workloads but is not ideal for full-scale production due to performance constraints. For production needs with lower costs and an SLA guarantee, the TiDB Cloud Essential Plan is recommended.
+> The **4 vCPU, 16 GiB** size of TiKV is designed for learning, testing, or trial purposes. It is suitable for pre-production or small, non-critical workloads, but is not ideal for full-scale production due to performance constraints. If you need lower costs and an SLA guarantee for production, consider using the TiDB Cloud Essential plan.
 
 ### TiKV node count
 
