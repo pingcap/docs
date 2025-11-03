@@ -708,7 +708,7 @@ Configuration items related to Raftstore.
 ### `raft-log-gc-count-limit`
 
 + The hard limit on the allowable number of residual Raft logs
-+ Default value: the log number that can be accommodated in the 3/4 Region size (calculated as 1MiB for each log)
++ Default value: the number of logs that can fit into three-fourths of the Region size, calculated assuming each log is 1 KiB
 + Minimum value: `0`
 
 ### `raft-log-gc-size-limit`
