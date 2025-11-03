@@ -9,7 +9,7 @@ This document describes how to connect to your {{{ .premium }}} instance via a p
 
 > **Tip:**
 >
-> To learn how to connect to a TiDB Premium instance via AWS PrivateLink, see [Connect to {{{ .premium }}} via AWS PrivateLink](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md).
+> To learn how to connect to a {{{ .premium }}} instance via AWS PrivateLink, see [Connect to {{{ .premium }}} via AWS PrivateLink](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md).
 
 ## Restrictions
 
