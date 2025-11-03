@@ -480,12 +480,12 @@ SHOW binding_cache status;
 
 ### Binding usage
 
-Binding Usage helps you collect usage statistics of SQL bindings, which can assist you in identifying and managing unused bindings. You can use these statistics to optimize your binding management strategy, such as removing bindings that are no longer needed or adjusting existing bindings to improve query performance.
+The binding usage feature collects usage statistics of SQL plan bindings. You can use these statistics to identify unused bindings and optimize your binding management strategy, such as removing bindings that are no longer needed or adjusting existing bindings to improve query performance.
 
-You can use the `tidb_enable_binding_usage` system variable to control whether to enable the usage statistics collection for SQL plan bindings. When this variable is set to `ON`, every six hours, the usage of bindinfo will be written into TiKV.
+You can use the `tidb_enable_binding_usage` system variable to control the collection of binding usage statistics. When it is set to `ON`, TiDB writes the binding usage statistics to the `mysql.bind_info` table every six hours.
 
 ```sql
-select sql_digest,last_used_date from  mysql.bind_info limit 1; 
+SELECT sql_digest, last_used_date FROM mysql.bind_info LIMIT 1;
 
 +------------------------------------------------------------------+----------------+
 | sql_digest                                                       | last_used_date |
