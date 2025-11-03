@@ -111,7 +111,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Fix the issue that splitting buckets still works even after bucket reporting is disabled [#9726](https://github.com/tikv/pd/issues/9726) @[bufferflies](https://github.com/bufferflies)
     - Fix the issue that the Resource Manager incorrectly allocates tokens, causing queries to be stuck [#9455](https://github.com/tikv/pd/issues/9455) @[JmPotato](https://github.com/JmPotato)
     - Fix the issue that Placement Rules do not take effect after PD leader switches [#9602](https://github.com/tikv/pd/issues/9602) @[okJiang](https://github.com/okJiang)
-    - Fix the issue that TTL configuration does not take effect [#9343](https://github.com/tikv/pd/issues/9343) @[lhy1024](https://github.com/lhy1024)
+    - Fix the issue that PD might fail to parse large numeric values in scientific notation, which consequently causes some TTL-related configurations to not take effect [#9343](https://github.com/tikv/pd/issues/9343) @[lhy1024](https://github.com/lhy1024)
 
 + TiFlash <!--tw@hfxsd: 5 notes-->
 
