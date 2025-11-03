@@ -18,12 +18,7 @@ This document describes how to connect to your {{{ .premium }}} instance via a p
 
 ## Set up a private endpoint with Alibaba Cloud
 
-To connect to your Premium instance via a private endpoint, follow these steps:
-
-1. [Choose a TiDB instance](#step-1-choose-a-tidb-instance)
-2. [Create a private endpoint on Alibaba Cloud](#step-2-create-a-private-endpoint-on-alibaba-cloud)
-3. [Connect to your TiDB instance using the private endpoint](#step-3-connect-to-your-tidb-instance-using-the-private-endpoint)
-4. [Accept the endpoint and create the endpoint connection](#step-4-accept-the-endpoint-and-create-the-endpoint-connection)
+To connect to your Premium instance via a private endpoint, perform the following steps.
 
 ### Step 1. Choose a TiDB instance
 
