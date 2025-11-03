@@ -752,12 +752,12 @@ The relationships of the relevant system variables are shown below:
 
 #### `tidb_build_stats_concurrency`
 
-Used to control the concurrency of table or partition analysis — for example, how many partition or table tasks can be processed simultaneously. The default value is `2`. The default value is `4` for v7.4.0 and earlier versions.
+Used to control the concurrency of table or partition analysis — for example, the number of partitions or table tasks that can be processed simultaneously. The default value is `2`. The default value is `4` for v7.4.0 and earlier versions.
 
 #### `tidb_build_sampling_stats_concurrency`
 
 1. Used to control the concurrency level for merging samples collected from different regions.  
-2. Used to control the concurrency for special indexes (such as indexes on generated virtual columns), for example, how many special indexes can collect statistics simultaneously.
+2. Used to control the concurrency for special indexes (such as indexes on generated virtual columns), for example, the number of special indexes that can collect statistics simultaneously.
 
 The default value is `2`.
 
