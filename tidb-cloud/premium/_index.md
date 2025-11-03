@@ -41,13 +41,13 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 <LearningPath label="Maintain" icon="cloud7">
 
-[Create a Cluster](https://docs-preview.pingcap.com/tidbcloud/create-tidb-cluster-serverless/?plan=premium)
+[Create a TiDB Instance](https://docs-preview.pingcap.com/tidbcloud/create-tidb-instance-premium/?plan=premium)
 
-[Connect to a Cluster](https://docs-preview.pingcap.com/tidbcloud/connect-to-tidb-cluster-serverless/?plan=premium)
+[Connect to a TiDB Instance](https://docs-preview.pingcap.com/tidbcloud/connect-to-tidb-instance/?plan=premium)
 
 [Use an HTAP Cluster](https://docs-preview.pingcap.com/tidbcloud/tiflash-overview/?plan=premium)
 
-[Back Up and Restore Data](https://docs-preview.pingcap.com/tidbcloud/backup-and-restore-serverless/?plan=premium)
+[Back Up and Restore Data](https://docs-preview.pingcap.com/tidbcloud/backup-and-restore-premium/?plan=premium)
 
 [Use API (Beta)](https://docs-preview.pingcap.com/tidbcloud/api-overview/?plan=premium)
 
@@ -61,11 +61,11 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Import Sample Data](https://docs-preview.pingcap.com/tidbcloud/import-sample-data-serverless/?plan=premium)
 
-[Import CSV Files](https://docs-preview.pingcap.com/tidbcloud/import-csv-files-serverless/?plan=premium)
+[Import CSV Files](https://docs-preview.pingcap.com/tidbcloud/import-csv-files-premium/?plan=premium)
 
 [Import Parquet Files](https://docs-preview.pingcap.com/tidbcloud/import-parquet-files-serverless/?plan=premium)
 
-[With MySQL CLI](https://docs-preview.pingcap.com/tidbcloud/import-with-mysql-cli-serverless/?plan=premium)
+[With MySQL CLI](https://docs-preview.pingcap.com/tidbcloud/import-with-mysql-cli-premium/?plan=premium)
 
 </LearningPath>
 
@@ -73,7 +73,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Status and Metrics](https://docs-preview.pingcap.com/tidbcloud/monitor-tidb-cluster/?plan=premium)
 
-[Built-in Monitoring](https://docs-preview.pingcap.com/tidbcloud/built-in-monitoring/?plan=premium)
+[Built-in Monitoring](https://docs-preview.pingcap.com/tidbcloud/built-in-monitoring-premium/?plan=premium)
 
 </LearningPath>
 
@@ -93,25 +93,23 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Password Authentication](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-password-authentication/?plan=premium)
 
-[User Roles](https://docs-preview.pingcap.com/tidbcloud/manage-user-access#user-roles/?plan=premium)
+[User Roles](https://docs-preview.pingcap.com/tidbcloud/manage-user-access-premium/?plan=premium/#user-roles)
 
-[Manage User Profiles](https://docs-preview.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles/?plan=premium)
+[Manage User Profiles](https://docs-preview.pingcap.com/tidbcloud/manage-user-access-premium/?plan=premium/#manage-user-profiles)
 
-[Manage Organization Access](https://docs-preview.pingcap.com/tidbcloud/manage-user-access#manage-organization-access/?plan=premium)
+[Manage Organization Access](https://docs-preview.pingcap.com/tidbcloud/manage-user-access-premium/?plan=premium/#manage-organization-access)
 
-[Manage Project Access](https://docs-preview.pingcap.com/tidbcloud/manage-user-access#manage-project-access/?plan=premium)
-
-[Configure Firewall Rules for Public Endpoints](https://docs-preview.pingcap.com/tidbcloud/configure-serverless-firewall-rules-for-public-endpoints/?plan=premium)
+[Configure an IP Access List](https://docs-preview.pingcap.com/tidbcloud/configure-ip-access-list-premium/?plan=premium)
 
 </LearningPath>
 
 <LearningPath label="Billing" icon="cloud2">
 
-[Pricing](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-billing#pricing-for-premium/?plan=premium)
+[Pricing](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-billing/?plan=premium/#pricing-for-premium)
 
-[Invoices](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-billing#invoices/?plan=premium)
+[Invoices](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-billing/?plan=premium/#invoices)
 
-[Credits](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-billing#credits/?plan=premium)
+[Credits](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-billing/?plan=premium/#credits)
 
 </LearningPath>
 
