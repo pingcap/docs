@@ -27,7 +27,7 @@ To connect to your Premium instance via a private endpoint, follow these steps:
 
 ### Step 1. Choose a TiDB instance
 
-1. On the [**Instance**](https://{{{.console-url}}}/instances) page, click the name of your target TiDB Cloud instance to go to its overview page.
+1. On the [**TiDB Instances**](https://{{{.console-url}}}/instances) page, click the name of your target TiDB instance to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. In the **Connection Type** drop-down list, select **Private Endpoint**.
 4. Take a note of **Service Name**, **Availability Zone ID**, and **Region ID**.
