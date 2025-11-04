@@ -165,7 +165,7 @@ After you have accepted the private endpoint connection, you are redirected back
 
 1. Wait for the private endpoint connection status to change from **System Checking** to **Active** (approximately 5 minutes).
 2. In the **Connect With** drop-down list, select your preferred connection method. The corresponding connection string is displayed at the bottom of the dialog.
-3. Connect to your instance with the connection string.
+3. Connect to your instance using the connection string.
 
 > **Tip:**
 >
