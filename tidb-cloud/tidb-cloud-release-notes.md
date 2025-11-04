@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Dedicated**
 
-    - When you connect to a TiDB Cloud Dedicated cluster hosted on Google Cloud via VPC peering, you can now configure an IP range size between `/16` and `/18` directly in the TiDB Cloud console. You no longer need to contact TiDB Cloud support for this configuration.
+    - When you connect to a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster hosted on Google Cloud via VPC peering, you can now configure an IP range size between `/16` and `/18` directly in the [TiDB Cloud console](https://tidbcloud.com/). You no longer need to contact TiDB Cloud support for this configuration.
 
         For more information, see [Connect to TiDB Cloud Dedicated via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md).
 
