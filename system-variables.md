@@ -4111,7 +4111,7 @@ mysql> desc select count(distinct a) from test.t;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether to apply the hint [`NO_DECORRELATE`](/optimizer-hints.md#no_decorrelate) at the session/global level for all queries with a subquery in the select list.
+- This variable controls whether the optimizer applies the [`NO_DECORRELATE()`](/optimizer-hints.md#no_decorrelate) hint at the session or global level for all queries that contain a subquery in the `SELECT` list.
 
 ### tidb_opt_enable_semi_join_rewrite <span class="version-mark">New in v8.5.4</span>
 
