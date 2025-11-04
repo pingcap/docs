@@ -27,7 +27,7 @@ This document describes the software and hardware requirements for deploying and
 </thead>
 <tbody>
   <tr>
-    <td>Red Hat Enterprise Linux 8.4 or a later 8.x version</td>
+    <td>Red Hat Enterprise Linux 8.6 or a later 8.x version</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
@@ -51,15 +51,15 @@ This document describes the software and hardware requirements for deploying and
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>openEuler 22.03 LTS SP1/SP3</td>
+    <td>openEuler 24.03 LTS (SP4 or later)</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>macOS 13 (Ventura) or later</td>
+    <td>macOS 14 (Sonoma) or later</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>Oracle Enterprise Linux 8 or a later</td>
+    <td>Oracle Enterprise Linux 8 or later</td>
     <td>x86_64</td>
   </tr>
   <tr>
@@ -67,15 +67,15 @@ This document describes the software and hardware requirements for deploying and
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>CentOS 9 Stream</td>
+    <td>CentOS Stream 9</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>Debian 11 (Bullseye) or later</td>
+    <td>Debian 12 (Bookworm) or later</td>
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>Fedora 40 or later</td>
+    <td>Fedora 42 or later</td>
     <td>x86_64</td>
   </tr>
   <tr>
@@ -83,7 +83,7 @@ This document describes the software and hardware requirements for deploying and
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>SUSE Linux Enterprise Server 15.6</td>
+    <td>SUSE Linux Enterprise Server 15.6 or later</td>
     <td>x86_64</td>
   </tr>
 </tbody>
@@ -91,16 +91,12 @@ This document describes the software and hardware requirements for deploying and
 
 > **Warning:**
 >
-> - According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 7 ends on June 30, 2024. TiDB ends the support for CentOS 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version. Upgrading a TiDB cluster on CentOS 7 to v8.4.0 or later will cause the cluster to become unavailable. Before upgrading TiDB, make sure to check your operating system version.
-> - According to [Red Hat Enterprise Linux Life Cycle](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates), the maintenance support for Red Hat Enterprise Linux 7 ends on June 30, 2024. TiDB ends the support for Red Hat Enterprise Linux 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version. Upgrading a TiDB cluster on Red Hat Enterprise Linux 7 to v8.4.0 or later will cause the cluster to become unavailable. Before upgrading TiDB, make sure to check your operating system version.
-> - If you are using the 32-bit version of an operating system listed in the preceding table, TiDB **is not guaranteed** to be compilable, buildable or deployable on the 32-bit operating system and the corresponding CPU architecture, or TiDB does not actively adapt to the 32-bit operating system.
+> - TiDB requires a 64-bit CPU architecture.
 > - Other operating system versions not mentioned above might work but are not officially supported.
 
 > **Note:**
 >
 > - For Oracle Enterprise Linux, TiDB supports the Red Hat Compatible Kernel (RHCK) and does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
-> - While the upstream support for CentOS Linux 8 ends on December 31, 2021, CentOS Stream 8 continues to be supported by the CentOS organization.
-> - Support for Ubuntu 16.04 will be removed in future versions of TiDB. Upgrading to Ubuntu 18.04 or later is strongly recommended.
 > - Starting from v8.4.0, TiDB requires glibc 2.28. If your glibc version does not meet this requirement, it is recommended to use an operating system listed in the preceding table or upgrade the operating system to a version that supports glibc 2.28.
 
 ### Libraries required for compiling and running TiDB
