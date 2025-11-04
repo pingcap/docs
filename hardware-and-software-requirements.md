@@ -67,7 +67,7 @@ This document describes the software and hardware requirements for deploying and
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>CentOS 9 Stream</td>
+    <td>CentOS Stream 9</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
