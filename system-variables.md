@@ -4081,7 +4081,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 
 > **Warning:**
 >
-> Starting from v9.0.0, this variable is deprecated and its value is fixed to `0s`. This means TiDB no longer waits before sending queries to newly started TiFlash nodes, as the delay is no longer necessary to prevent query failures.
+> Starting from v9.0.0, this variable is deprecated and its value is fixed to `0s`. This means TiDB no longer needs to wait before sending queries to newly started TiFlash nodes, as delays are no longer necessary to prevent query failures.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
