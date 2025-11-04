@@ -4104,7 +4104,7 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `OFF`
 - This variable controls whether to enable the [Cross-database binding](/sql-plan-management.md#cross-database-binding) feature.
 
-### tidb_opt_enable_no_decorrelate_in_select <span class="version-mark">New in v8.5.4</span>
+### tidb_opt_enable_no_decorrelate_in_select <span class="version-mark">New in v8.5.4 and v9.0.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
