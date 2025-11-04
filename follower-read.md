@@ -102,13 +102,13 @@ If you want to use a more precise read replica selection policy, refer to the fu
 
 <CustomContent platform="tidb">
 
-You can check the [**TiDB** > **KV Request** > **Read Req Traffic** panel (New in v8.5.4 and v9.0.0)](/grafana-tidb-dashboard.md#kv-request) to determine whether to enable Follower Read and observe the traffic reduction effect after enabling it.
+You can check the [**TiDB** > **KV Request** > **Read Req Traffic** panel (New in v8.5.4)](/grafana-tidb-dashboard.md#kv-request) to determine whether to enable Follower Read and observe the traffic reduction effect after enabling it.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-You can check the [**TiDB** > **KV Request** > **Read Req Traffic** panel (New in v8.5.4 and v9.0.0)](https://docs.pingcap.com/tidb/stable/grafana-tidb-dashboard#kv-request) to determine whether to enable Follower Read and observe the traffic reduction effect after enabling it.
+You can check the [**TiDB** > **KV Request** > **Read Req Traffic** panel (New in v8.5.4)](https://docs.pingcap.com/tidb/stable/grafana-tidb-dashboard#kv-request) to determine whether to enable Follower Read and observe the traffic reduction effect after enabling it.
 
 </CustomContent>
 
