@@ -14,7 +14,7 @@ This document describes how to connect to your {{{ .premium }}} instance via a p
 ## Restrictions
 
 - Currently, TiDB Premium supports private endpoint connections when the endpoint service is hosted on AWS or Alibaba Cloud. If the service is hosted on another cloud provider, the private endpoint is not applicable.
-- Private endpoint connection across regions is not supported.
+- Cross-region private endpoint connections are not supported.
 
 ## Set up a private endpoint with Alibaba Cloud
 
