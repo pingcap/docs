@@ -4113,7 +4113,7 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `OFF`
 - This variable controls whether the optimizer applies the [`NO_DECORRELATE()`](/optimizer-hints.md#no_decorrelate) hint at the session or global level for all queries that contain a subquery in the `SELECT` list.
 
-### tidb_opt_enable_semi_join_rewrite <span class="version-mark">New in v8.5.4</span>
+### tidb_opt_enable_semi_join_rewrite <span class="version-mark">New in v8.5.4 and v9.0.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
