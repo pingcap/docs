@@ -282,6 +282,17 @@ Unless you need to write complex SQL statements, it is recommended to use [ORM](
 - Reduce [boilerplate code](https://en.wikipedia.org/wiki/Boilerplate_code) for managing connections and transactions.
 - Manipulate data with data objects instead of a number of SQL statements.
 
+### MySQL compatibility
+
+When you insert data into a `DECIMAL` column, if the number of decimal places exceeds the defined scale, MySQL performs a `TRUNCATE` operation and inserts the data successfully, regardless of how many extra decimal places there are.
+
+In TiDB v8.5.3 and earlier versions:
+
+- If the number of decimal places exceeds the column's defined scale but does not exceed 72, TiDB also performs a `TRUNCATE` operation and inserts the data successfully.
+- However, if the number of decimal places exceeds 72, the write operation fails and returns an error.
+
+Starting from TiDB v8.5.4, TiDB's behavior aligns with that of MySQL: regardless of the number of excess decimal places, it performs a `TRUNCATE` operation and inserts the data successfully.
+
 ## Next steps
 
 - Learn more usage of MySQL Connector/J from [the documentation of MySQL Connector/J](https://dev.mysql.com/doc/connector-j/en/).
