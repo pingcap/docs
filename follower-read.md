@@ -50,7 +50,7 @@ Scope: SESSION | GLOBAL
 
 Default: leader
 
-This variable defines the expected data read mode. Starting from v8.5.4 and v9.0.0, this variable only takes effect on read-only SQL statements.
+This variable defines the expected data read mode. Starting from v8.5.4, this variable only takes effect on read-only SQL statements.
 
 In scenarios where you need to reduce cross-AZ traffic by reading from local replicas, the following configurations are recommended:
 
