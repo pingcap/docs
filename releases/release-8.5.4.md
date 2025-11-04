@@ -135,11 +135,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     + Backup & Restore (BR) <!--tw@qiancai: 7 notes-->
 
         - Fix the issue that zstd compression in log backup does not take effect, causing the output to remain uncompressed [#18836](https://github.com/tikv/tikv/issues/18836) @[3pointer](https://github.com/3pointer)
-        - Fix the issue that flushing might slow down when backing up data to Azure Blob Storage [#18410](https://github.com/tikv/tikv/issues/18410) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that the flush operation occasionally becomes slow when backing up data to Azure Blob Storage [#18410](https://github.com/tikv/tikv/issues/18410) @[YuJuncen](https://github.com/YuJuncen)
         - Fix the issue that `log truncate` might occur when file deletion fails [#63358](https://github.com/pingcap/tidb/issues/63358) @[YuJuncen](https://github.com/YuJuncen)
-        - Fix the issue that setting `--checksum` to `false` during backup might result in an empty `stats_meta` table [#60978](https://github.com/pingcap/tidb/issues/60978) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that setting `--checksum` to `false` during backup might cause the `count` column in the `mysql.stats_meta` table to become `0` after restore [#60978](https://github.com/pingcap/tidb/issues/60978) @[Leavrth](https://github.com/Leavrth)
         - Reduce the possibility of BR failing to restore data from S3-compatible storage services when the bandwidth limits on these services are enabled [#18846](https://github.com/tikv/tikv/issues/18846) @[kennytm](https://github.com/kennytm)
-        - Fix the issue that `log backup observer` might lose the observation on a Region, resulting in incomplete backup data [#18243](https://github.com/tikv/tikv/issues/18243) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that `log backup observer` might lose the observation on a Region, causing the log backup progress to fail to advance [#18243](https://github.com/tikv/tikv/issues/18243) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that causes `restore point` creation to fail when backed-up tables include certain special schemas [#63663](https://github.com/pingcap/tidb/issues/63663) @[RidRisR](https://github.com/RidRisR)
 
     + TiCDC <!--tw@Oreoxmt: 7 notes-->
