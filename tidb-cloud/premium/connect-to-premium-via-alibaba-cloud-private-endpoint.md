@@ -1,6 +1,6 @@
 ---
 title: Connect to {{{ .premium }}} via Alibaba Cloud Private Endpoint
-summary: Learn how to connect to your {{{ .premium }}} instance via Alibaba Cloud private endpoint.
+summary: Learn how to connect to your {{{ .premium }}} instance via a private endpoint on Alibaba Cloud.
 ---
 
 # Connect to {{{ .premium }}} via Alibaba Cloud Private Endpoint
@@ -39,9 +39,9 @@ To use the Alibaba Cloud Management Console to create a VPC interface endpoint, 
     - **Endpoint Name**: enter a name for the endpoint.
     - **Endpoint Type**: choose **Interface Endpoint**.
     - **Endpoint Service**: select **Other Endpoint Services**.
-5. Paste the **Endpoint Service Name** you copied from TiDB Cloud.
+5. In the **Endpoint Service Name** field, paste the service name you copied from TiDB Cloud.
 6. Click **Verify**. A green check mark indicates that the service is valid.
-7. Choose the **VPC**, **Security Group**, and **Zone** to associated with the endpoint.
+7. Choose the **VPC**, **Security Group**, and **Zone** to associate with the endpoint.
 8. Click **OK** to create the endpoint.
 9. Wait until the endpoint status is **Active** and the connection status is **Connected**.
 
@@ -69,7 +69,7 @@ After you have accepted the endpoint connection, you are redirected back to the 
 
 2. In the **Connect With** drop-down list, select your preferred connection method. The corresponding connection string is displayed at the bottom of the dialog.
 
-3. Connect to your instance with the connection string.
+3. Connect to your instance using the connection string.
 
 ## Private endpoint status reference
 
@@ -80,7 +80,7 @@ The possible statuses of a private endpoint are explained as follows:
 - **Pending**: waiting for processing.
 - **Active**: the private endpoint is ready for use.
 - **Deleting**: the private endpoint is being deleted.
-- **Failed**: the private endpoint creation fails. You can delete the Endpoint connection and create a new one.
+- **Failed**: the private endpoint creation fails. You can delete the private endpoint and create a new one.
 
 The possible statuses of a private endpoint service are explained as follows:
 
