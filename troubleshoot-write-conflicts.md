@@ -81,7 +81,7 @@ You can use `tableID` to find the name of the related table:
 curl http://{TiDBIP}:10080/db-table/{TableID}
 ```
 
-You can use `IndexID` and the table name to find the name of the related index:
+You can use `indexID` and the table name to find the name of the related index:
 
 {{< copyable "sql" >}}
 
