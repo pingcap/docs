@@ -14,7 +14,7 @@ This tutorial walks you through the steps to connect to your {{{ .starter }}} or
 ## Restrictions
 
 - Currently, {{{ .starter }}} and {{{ .essential }}} support private endpoint connections when the endpoint service is hosted on AWS or Alibaba Cloud. If the service is hosted on another cloud provider, the private endpoint is not applicable.
-- Private endpoint connection across regions is not supported.
+- Cross-region private endpoint connections is not supported.
 
 ## Set up a private endpoint with Alibaba Cloud
 
@@ -44,7 +44,7 @@ To use the Alibaba Cloud Management Console to create a VPC interface endpoint, 
     - **Endpoint Type**: select **Interface Endpoint**.
     - **Endpoint Service**: select **Other Endpoint Services**.
 
-5. Paste the **Endpoint Service Name** you copied from TiDB Cloud.
+5. In the **Endpoint Service Name** field, paste the service name you copied from TiDB Cloud.
 6. Click **Verify**. A green check will appear if the service is valid.
 7. Choose the **VPC**, **Security Group**, and **Zone** to use for the endpoint.
 8. Click **OK** to create the endpoint.
