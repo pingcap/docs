@@ -22,7 +22,7 @@ TiDB assigns a TableID to each table, an IndexID to each index, and a RowID to e
 Each row of data is encoded as a key-value pair according to the following rule:
 
 ```
-Key: tablePrefix{tableID}_recordPrefixSep{rowID}
+Key: tablePrefix{TableID}_recordPrefixSep{RowID}
 Value: [col1, col2, col3, col4]
 ```
 
@@ -31,17 +31,17 @@ The `tablePrefix` and `recordPrefixSep` of the key are specific string constants
 For Index data, the key-value pair is encoded according to the following rule:
 
 ```
-Key: tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue
+Key: tablePrefix{TableID}_indexPrefixSep{IndexID}_indexedColumnsValue
 Value: rowID
 ```
 
 Index data has two types: the unique index and the non-unique index.
 
 - For unique indexes, you can follow the coding rules above.
-- For non-unique indexes, a unique key cannot be constructed through this encoding, because the `tablePrefix{tableID}_indexPrefixSep{indexID}` of the same index is the same and the `ColumnsValue` of multiple rows might be the same. The encoding rule for non-unique indexes is as follows:
+- For non-unique indexes, a unique key cannot be constructed through this encoding, because the `tablePrefix{TableID}_indexPrefixSep{IndexID}` of the same index is the same and the `ColumnsValue` of multiple rows might be the same. The encoding rule for non-unique indexes is as follows:
 
     ```
-    Key: tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue_rowID
+    Key: tablePrefix{TableID}_indexPrefixSep{IndexID}_indexedColumnsValue_rowID
     Value: null
     ```
 

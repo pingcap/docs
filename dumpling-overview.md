@@ -77,6 +77,7 @@ Dumpling has the following advantages:
 - RELOAD: Required when the level of `consistency` is `flush`. When the upstream is an RDS database or a managed service, you can ignore this privilege.
 - LOCK TABLES: Required when the level of `consistency` is `lock`. This privilege must be granted for all the databases and tables to be exported.
 - REPLICATION CLIENT: Required when exporting metadata to record data snapshot. This privilege is optional and you can ignore it if you do not need to export metadata.
+- SHOW VIEW: Required to collect view metadata for export.
 
 ### Export to SQL files
 
