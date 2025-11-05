@@ -54,11 +54,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 + TiKV <!--tw@lilin90: 6 notes-->
 
     - Change the log level of certain automatically recoverable errors in the BR module from `ERROR` to `WARN` to reduce unnecessary alerts [#18493](https://github.com/tikv/tikv/issues/18493) @[YuJuncen](https://github.com/YuJuncen)
-    - Change the log level of certain TiKV error messages from `ERROR` to `WARN` to reduce unnecessary alerts [#18745](https://github.com/tikv/tikv/issues/18745) @[exit-code-1](https://github.com/exit-code-1)
-    - Split the GC check process in the Raft module into two phases to improve the efficiency of redundant MVCC version GC in Regions [#18695](https://github.com/tikv/tikv/issues/18695) @[v01dstar](https://github.com/v01dstar)
-    - Calculate redundant MVCC reads based on GC safe points and RocksDB statistics to improve the efficiency and accuracy of compaction [#18697](https://github.com/tikv/tikv/issues/18697) @[v01dstar](https://github.com/v01dstar)
-    - Change the GC handling logic for Region MVCC to be executed by GC worker threads to make the GC processing workflow consistent [#18727](https://github.com/tikv/tikv/issues/18727) @[v01dstar](https://github.com/v01dstar)
-    - Optimize the calculation of the default gRPC thread pool size by making it dynamically based on total CPU cores instead of a fixed value, preventing performance bottlenecks caused by insufficient gRPC threads [#18613](https://github.com/tikv/tikv/issues/18613) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Change the log level of certain TiKV errors from `ERROR` to `WARN` to reduce unnecessary alerts [#18745](https://github.com/tikv/tikv/issues/18745) @[exit-code-1](https://github.com/exit-code-1)
+    - Split the GC check process in the Raft module into two phases to improve the efficiency of garbage collection for redundant MVCC versions in Regions [#18695](https://github.com/tikv/tikv/issues/18695) @[v01dstar](https://github.com/v01dstar)
+    - Calculate MVCC redundancy based on GC safe points and RocksDB statistics to improve the efficiency and accuracy of compaction [#18697](https://github.com/tikv/tikv/issues/18697) @[v01dstar](https://github.com/v01dstar)
+    - Change the GC handling logic for Region MVCC to be executed by GC worker threads, unifying the overall GC processing logic [#18727](https://github.com/tikv/tikv/issues/18727) @[v01dstar](https://github.com/v01dstar)
+    - Optimize the calculation method of the default gRPC thread pool size by making it dynamically calculated based on total CPU quota instead of a fixed value, avoiding performance bottlenecks caused by insufficient gRPC threads [#18613](https://github.com/tikv/tikv/issues/18613) @[LykxSassinator](https://github.com/LykxSassinator)
     - (dup): release-7.5.7.md > Improvements> TiKV - Optimize the tail latency of async snapshot and write operations in environments with a large number of SST files [#18743](https://github.com/tikv/tikv/issues/18743) @[Connor1996](https://github.com/Connor1996)
 
 + PD <!--tw@Oreoxmt: 3 notes-->
@@ -79,7 +79,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     + TiDB Data Migration (DM) <!--tw@hfxsd: 1 note-->
 
-        - Support case-insensitive compatibility when retrieving the upstream GTID_MODE [#12167](https://github.com/pingcap/tiflow/issues/12167) @[OliverS929](https://github.com/OliverS929)
+        - Support case-insensitive matching when retrieving the upstream `GTID_MODE` [#12167](https://github.com/pingcap/tiflow/issues/12167) @[OliverS929](https://github.com/OliverS929)
 
 ## Bug fixes
 
@@ -128,10 +128,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + TiFlash <!--tw@hfxsd: 5 notes-->
 
-    - Fix the issue that queries might fail when the queried column contains a large number of NULL values [#10340](https://github.com/pingcap/tiflash/issues/10340) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - Fix the issue that queries might fail when queried columns contain a large number of `NULL` values [#10340](https://github.com/pingcap/tiflash/issues/10340) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - Fix the issue that TiFlash generates inaccurate statistics for RU consumption [#10380](https://github.com/pingcap/tiflash/issues/10380) @[JinheLin](https://github.com/JinheLin)
-    - Fix the issue that TiFlash might encounter OOM when slow queries occur under the disaggregated storage and compute architecture [#10278](https://github.com/pingcap/tiflash/issues/10278) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - Fix the issue that TiFlash might retry infinitely when it encounters an S3 network partition under the disaggregated storage and compute architecture [#10424](https://github.com/pingcap/tiflash/issues/10424) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that TiFlash might encounter OOM when slow queries exist under the disaggregated storage and compute architecture [#10278](https://github.com/pingcap/tiflash/issues/10278) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that TiFlash might retry indefinitely when a network partition occurrs between TiFlash and S3 under the disaggregated storage and compute architecture [#10424](https://github.com/pingcap/tiflash/issues/10424) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Fix the issue that the `FLOOR()` and `CEIL()` functions might return incorrect results when their parameters are of the `DECIMAL` type [#10365](https://github.com/pingcap/tiflash/issues/10365) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan) 
 
 + Tools
