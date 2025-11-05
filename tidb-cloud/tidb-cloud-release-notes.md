@@ -8,6 +8,20 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## November 4, 2025
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - When you connect to a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster hosted on Google Cloud via VPC peering, you can now configure an IP range size between `/16` and `/18` directly in the [TiDB Cloud console](https://tidbcloud.com/). You no longer need to contact TiDB Cloud support for this configuration.
+
+        For more information, see [Connect to TiDB Cloud Dedicated via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md).
+
+    - TiDB Cloud Dedicated now provides clearer guidance and messaging for the 4 vCPU node size. Use this node size only for testing, learning, and exploring TiDB Cloud features in non-production environments.
+
+        For more information, see [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md).
+
 ## October 28, 2025
 
 **General changes**
