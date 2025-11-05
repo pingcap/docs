@@ -101,7 +101,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
     >**Note:**
     >
-    > Currently, only {{{ .starter }} and {{{ .essential }}} clusters in certain AWS regions support [`FULLTEXT` syntax and indexes](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql).
+    > Currently, only {{{ .starter }}} and {{{ .essential }}} clusters in certain AWS regions support [`FULLTEXT` syntax and indexes](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql).
 
 * Descending indexes are not supported (similar to MySQL 5.7).
 * Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
