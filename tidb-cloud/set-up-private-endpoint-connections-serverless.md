@@ -13,9 +13,9 @@ summary: 了解如何通过私有终端节点连接到你的 TiDB Cloud 集群�
 > - 如果你想了解如何通过 Azure 私有终端节点连接 TiDB Cloud Dedicated 集群，请参见 [Connect to a TiDB Cloud Dedicated Cluster via Azure Private Link](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)。
 > - 如果你想了解如何通过 Google Cloud 私有终端节点连接 TiDB Cloud Dedicated 集群，请参见 [Connect to a TiDB Cloud Dedicated Cluster via Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)。
 
-TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc) 实现对托管在 AWS VPC 中的 TiDB Cloud 服务的高度安全、单向访问，就像服务部署在你自己的 VPC 中一样。你的 VPC 中会暴露一个私有终端节点，你可以通过该终端节点并具备相应权限后连接到 TiDB Cloud 服务。
+TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc) 实现对托管在 AWS VPC 中的 TiDB Cloud 服务的高度安全、单向访问，就像该服务部署在你自己的 VPC 中一样。你的 VPC 中会暴露一个私有终端节点，你可以通过该终端节点并具备相应权限后连接到 TiDB Cloud 服务。
 
-借助 AWS PrivateLink，终端节点连接是安全且私有的，不会将你的数据暴露在公网上。此外，终端节点连接支持 CIDR 重叠，便于网络管理。
+借助 AWS PrivateLink，终端节点连接安全且私密，不会将你的数据暴露在公网。此外，终端节点连接支持 CIDR 重叠，便于网络管理。
 
 私有终端节点的架构如下所示：
 
@@ -33,7 +33,7 @@ TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink/?pr
 
 ## 前提条件
 
-请确保在 AWS VPC 设置中已启用 DNS 主机名和 DNS 解析。在 [AWS 管理控制台](https://console.aws.amazon.com/) 创建 VPC 时，这些选项默认是关闭的。
+请确保在 AWS VPC 设置中已启用 DNS 主机名和 DNS 解析。在 [AWS 管理控制台](https://console.aws.amazon.com/) 中创建 VPC 时，这些选项默认是关闭的。
 
 ## 使用 AWS 设置私有终端节点
 
@@ -71,8 +71,8 @@ TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink/?pr
 3. 选择 **Endpoint services that use NLBs and GWLBs**。
 4. 输入你在 [step 1](#step-1-choose-a-tidb-cluster) 中获取的 service name。
 5. 点击 **Verify service**。
-6. 在下拉列表中选择你的 VPC。展开 **Additional settings** 并勾选 **Enable DNS name** 复选框。
-7. 在 **Subnets** 区域，选择 TiDB 集群所在的可用区，并选择 Subnet ID。
+6. 在下拉列表中选择你的 VPC。展开 **Additional settings**，勾选 **Enable DNS name** 复选框。
+7. 在 **Subnets** 区域，选择你的 TiDB 集群所在的可用区，并选择 Subnet ID。
 8. 在 **Security groups** 区域，正确选择你的安全组。
 
     > **Note:**
@@ -109,12 +109,12 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 1. 在 [**Clusters**](https://tidbcloud.com/project/clusters) 页面，点击目标集群名称，进入其概览页面。
 2. 点击右上角的 **Connect**。会弹出连接对话框。
 3. 在 **Connection Type** 下拉列表中，选择 **Private Endpoint**。
-4. 在 **Connect With** 下拉列表中，选择你偏好的连接方式。对话框底部会显示相应的连接字符串。
+4. 在 **Connect With** 下拉列表中，选择你偏好的连接方式。对话框底部会显示对应的连接字符串。
 5. 使用该连接字符串连接到你的集群。
 
 > **Tip:**
 >
-> 如果你无法连接到集群，可能是因为 AWS 中 VPC 终端节点的安全组设置不正确。解决方法请参见 [此 FAQ](#troubleshooting)。
+> 如果你无法连接到集群，可能是 AWS 中 VPC 终端节点的安全组设置不正确。解决方法请参见 [此 FAQ](#troubleshooting)。
 >
 > 如果在创建 VPC 终端节点时遇到错误 `private-dns-enabled cannot be set because there is already a conflicting DNS domain for gatewayXX-privatelink.XX.prod.aws.tidbcloud.com in the VPC vpc-XXXXX`，说明已经创建过私有终端节点，无需重复创建。
 
@@ -122,6 +122,6 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 
 ### 启用私有 DNS 后，无法通过私有终端节点连接 TiDB 集群，为什么？
 
-你可能需要在 AWS 管理控制台中为 VPC 终端节点正确设置安全组。进入 **VPC** > **Endpoints**，右键你的 VPC 终端节点，选择合适的 **Manage security groups**。在你的 VPC 内选择允许 EC2 实例通过 4000 端口或自定义端口入站访问的安全组。
+你可能需要在 AWS 管理控制台中正确设置 VPC 终端节点的安全组。进入 **VPC** > **Endpoints**，右键你的 VPC 终端节点，选择合适的 **Manage security groups**。在你的 VPC 内选择允许 EC2 实例通过 4000 端口或自定义端口入站访问的安全组。
 
 ![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)

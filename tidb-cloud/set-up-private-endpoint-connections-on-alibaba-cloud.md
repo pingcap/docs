@@ -5,18 +5,18 @@ summary: 了解如何通过阿里云私有终端节点连接到你的 TiDB Cloud
 
 # 通过阿里云私有终端节点连接 TiDB Cloud Starter 或 Essential
 
-本教程将指导你如何通过阿里云的私有终端节点连接到你的 TiDB Cloud Starter 或 Essential 集群。通过私有终端节点连接，可以在不经过公网的情况下，实现你的服务与 TiDB Cloud 集群之间的安全、私密通信。
+本教程将指导你通过阿里云的私有终端节点连接到你的 TiDB Cloud Starter 或 Essential 集群。通过私有终端节点连接，可以在不经过公网的情况下，实现你的服务与 TiDB Cloud 集群之间的安全、私密通信。
 
 > **Tip:**
 >
-> 如果你想了解如何通过 AWS PrivateLink 连接 TiDB Cloud Starter 或 Essential 集群，请参阅 [Connect to TiDB Cloud via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)。
+> 如果你想了解如何通过 AWS PrivateLink 连接到 TiDB Cloud Starter 或 Essential 集群，请参见 [Connect to TiDB Cloud via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)。
 
 ## 限制
 
 - 目前，TiDB Cloud Starter 和 TiDB Cloud Essential 支持在终端节点服务托管于 AWS 或阿里云时使用私有终端节点连接。如果服务托管在其他云服务商，私有终端节点不可用。
 - 不支持跨地域的私有终端节点连接。
 
-## 使用阿里云设置私有终端节点
+## 在阿里云上设置私有终端节点
 
 要通过私有终端节点连接到你的 TiDB Cloud Starter 或 TiDB Cloud Essential 集群，请按照以下步骤操作：
 
@@ -44,8 +44,8 @@ summary: 了解如何通过阿里云私有终端节点连接到你的 TiDB Cloud
     - **Endpoint Type**：选择 **Interface Endpoint**。
     - **Endpoint Service**：选择 **Other Endpoint Services**。
 
-5. 粘贴你从 TiDB Cloud 复制的 **Endpoint Service Name**。
-6. 点击 **Verify**。如果服务有效，会出现绿色对勾。
+5. 在 **Endpoint Service Name** 字段中，粘贴你从 TiDB Cloud 复制的服务名称。
+6. 点击 **Verify**。如果服务有效，会出现绿色勾选。
 7. 选择要用于该终端节点的 **VPC**、**Security Group** 和 **Zone**。
 8. 点击 **OK** 创建终端节点。
 9. 等待终端节点状态变为 **Active**，连接状态变为 **Connected**。
