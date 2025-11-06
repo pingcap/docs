@@ -33,8 +33,8 @@ EXPLAIN SELECT * FROM t WHERE a > 4;
 | id                      | estRows   | task      | access object | operator info                  |
 +-------------------------+-----------+-----------+---------------+--------------------------------+
 | TableReader_8           | 131072.00 | root      |               | data:Selection_7               |
-| └─Selection_7           | 131072.00 | cop[tikv] |               | gt(test.x.a, 4)                |
-|   └─TableFullScan_6     | 393216.00 | cop[tikv] | table:x       | keep order:false, stats:pseudo |
+| └─Selection_7           | 131072.00 | cop[tikv] |               | gt(test.t.a, 4)                |
+|   └─TableFullScan_6     | 393216.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo |
 +-------------------------+-----------+-----------+---------------+--------------------------------+
 3 rows in set (0.002 sec)
 ```
