@@ -19,12 +19,15 @@ UserSpecList ::=
 UserSpec ::=
     Username AuthOption
 
+<<<<<<< HEAD
 RequireClauseOpt ::=
     ( 'REQUIRE' 'NONE' | 'REQUIRE' 'SSL' | 'REQUIRE' 'X509' | 'REQUIRE' RequireList )?  
     
 RequireList ::=
     ( "ISSUER" stringLit | "SUBJECT" stringLit | "CIPHER" stringLit | "SAN" stringLit | "TOKEN_ISSUER" stringLit )*
 
+=======
+>>>>>>> 1b5366d40f (Fix duplicate items in CREATE USER and ALTER USER (#21939))
 Username ::=
     StringName ('@' StringName | singleAtIdentifier)? | 'CURRENT_USER' OptionalBraces
 
