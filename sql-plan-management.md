@@ -480,7 +480,7 @@ SHOW binding_cache status;
 
 ### Binding usage statistics
 
-Starting from v8.5.4 and v9.0.0, TiDB introduces the [`tidb_enable_binding_usage`](/system-variables.md#tidb_enable_binding_usage-new-in-v854-and-v900) system variable to control whether to collect the usage statistics of SQL plan bindings. 
+Starting from v8.5.5 and v9.0.0, TiDB introduces the [`tidb_enable_binding_usage`](/system-variables.md#tidb_enable_binding_usage-new-in-v854-and-v900) system variable to control whether to collect the usage statistics of SQL plan bindings. 
 
 When this variable is set to `ON`, TiDB writes the binding usage statistics to the `mysql.bind_info` table every six hours. You can use these statistics to identify unused bindings and optimize your binding management strategy, such as removing bindings that are no longer needed or adjusting existing bindings to improve query performance.
 
