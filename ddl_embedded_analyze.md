@@ -25,7 +25,7 @@ INSERT INTO t SELECT * FROM t; -- * N times
 
 ALTER TABLE t ADD INDEX idx_a (a);
 
-EXPLAIN SELECT * FROM x WHERE a > 4;
+EXPLAIN SELECT * FROM t WHERE a > 4;
 ```
 
 ```
