@@ -1088,7 +1088,7 @@
   - [URI Formats of External Storage Services](/external-storage-uri.md)
   - [TiDB Workload Repository](/workload-repository.md)
   - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/online-workloads-and-add-index-operations.md)
-  - [Analyze Embedded in DDL](/ddl_embedded_analyze.md)
+  - [`ANALYZE` Embedded in DDL Statements](/ddl_embedded_analyze.md)
  FAQs
   - [FAQ Summary](/faq/faq-overview.md)
   - [TiDB FAQs](/faq/tidb-faq.md)
