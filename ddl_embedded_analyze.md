@@ -1,16 +1,16 @@
 ---
-title: Analyze Embedded in DDL
-summary: This document describes the Analyze feature embedded in DDL for newly created or reorganized indexes, which ensures that statistics for new indexes are updated promptly.
+title: `ANALYZE` Embedded in DDL
+summary: This document describes the `ANALYZE` feature embedded in DDL statements for newly created or reorganized indexes, which ensures that statistics for new indexes are updated promptly.
 ---
 
-# Analyze Embedded in DDL <span class="version-mark">Introduced in v8.5.4 and v9.0.0</span>
+# `ANALYZE` Embedded in DDL Statements<span class="version-mark">Introduced in v8.5.4 and v9.0.0</span>
 
-This document describes the Analyze feature embedded in the following two types of DDL:
+This document describes the `ANALYZE` feature embedded in the following two types of DDL statements:
 
-- DDL that creates new indexes: [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
-- DDLs that reorganize existing indexes: [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md) and [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
+- DDL statements that create new indexes: [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
+- DDL statements that reorganize existing indexes: [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md) and [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
 
-When this feature is enabled, TiDB automatically runs an Analyze (statistics collection) operation before the new or reorganized index becomes visible to users. This prevents inaccurate optimizer estimates and potential plan changes caused by temporarily unavailable statistics after index creation or reorganization.
+When this feature is enabled, TiDB automatically runs an `ANALYZE` (statistics collection) operation before the new or reorganized index becomes visible to users. This prevents inaccurate optimizer estimates and potential plan changes caused by temporarily unavailable statistics after index creation or reorganization.
 
 ## Use scenarios
 
@@ -41,13 +41,13 @@ EXPLAIN SELECT * FROM x WHERE a > 4;
 
 In the preceding plan, because the newly created index has no statistics yet, TiDB can only rely on heuristic rules for path estimation. Unless the index access path requires no table lookup and has a significantly lower cost, the optimizer tends to choose the more stable existing path. In the preceding example, it chooses a full table scan. However, from the data distribution perspective, `x.a > 4` actually returns 0 rows. If the new index `idx_a` were used, the query could quickly locate relevant rows and avoid the full table scan. In this example, because statistics are not promptly collected after the DDL creates the index, the generated plan is not optimal, but the optimizer continues to use the original plan so query performance does not sharply regress. However, according to [Issue #57948](https://github.com/pingcap/tidb/issues/57948), in some cases heuristics might cause an unreasonable comparison between old and new indexes, pruning the index that the original plan relies on and ultimately falling back to a full table scan.
 
-Starting from v8.5.0, TiDB has improved heuristic comparisons between indexes and behaviors when statistics are missing. Still, in some complex scenarios, embedding Analyze in DDL is the best way to prevent plan changes. You can control whether to run embedded Analyze during index creation or reorganization with the system variable [`tidb_stats_update_during_ddl`](/system-variables.md#tidb_stats_update_during_ddl-new-in-v854-and-v900). The default value is `OFF`.
+Starting from v8.5.0, TiDB has improved heuristic comparisons between indexes and behaviors when statistics are missing. Still, in some complex scenarios, embedding `ANALYZE` in DDL is the best way to prevent plan changes. You can control whether to run embedded `ANALYZE` during index creation or reorganization with the system variable [`tidb_stats_update_during_ddl`](/system-variables.md#tidb_stats_update_during_ddl-new-in-v854-and-v900). The default value is `OFF`.
 
 ## `ADD INDEX` DDL
 
-When `tidb_stats_update_during_ddl` is `ON`, executing [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) automatically runs an embedded Analyze after the Reorg phase finishes. This Analyze collects statistics for the newly created index before the index becomes visible to users, and then `ADD INDEX` proceeds with its remaining phases.
+When `tidb_stats_update_during_ddl` is `ON`, executing [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) automatically runs an embedded `ANALYZE` operation after the Reorg phase finishes. This `ANALYZE` operation collects statistics for the newly created index before the index becomes visible to users, and then `ADD INDEX` proceeds with its remaining phases.
 
-Considering that Analyze can take time, TiDB sets a timeout threshold based on the execution time of the first Reorg. If Analyze times out, `ADD INDEX` will stop waiting synchronously for Analyze to finish and will continue the subsequent process so that the index becomes visible earlier to users. This means the index statistics will be updated after Analyze completes asynchronously.
+Considering that `ANALYZE` can take time, TiDB sets a timeout threshold based on the execution time of the first Reorg. If `ANALYZE` times out, `ADD INDEX` will stop waiting synchronously for `ANALYZE` to finish and will continue the subsequent process so that the index becomes visible earlier to users. This means the index statistics will be updated after `ANALYZE` completes asynchronously.
 
 Example:
 
@@ -107,14 +107,14 @@ ADMIN SHOW DDL JOBS 1;
 1 rows in set (0.001 sec)
 ```
 
-In the `ADD INDEX` example, when `tidb_stats_update_during_ddl` is `ON`, you can see that in the subsequent `EXPLAIN`, the index `idx` has its statistics automatically collected and loaded into memory (you can verify it by running `SHOW STATS_HISTOGRAMS`). Therefore, the optimizer can immediately use those statistics for a range scan. If index creation or reorganization and Analyze take long, you can check the DDL job status by executing `ADMIN SHOW DDL JOBS`. If the `COMMENTS` column contains `analyzing`, it means that the DDL job is collecting statistics.
+In the `ADD INDEX` example, when `tidb_stats_update_during_ddl` is `ON`, you can see that in the subsequent `EXPLAIN`, the index `idx` has its statistics automatically collected and loaded into memory (you can verify it by running `SHOW STATS_HISTOGRAMS`). Therefore, the optimizer can immediately use those statistics for a range scan. If index creation or reorganization and `ANALYZE` take a long time, you can check the DDL job status by executing `ADMIN SHOW DDL JOBS`. If the `COMMENTS` column contains `analyzing`, it means that the DDL job is collecting statistics.
 
 ## DDL for reorganizing existing indexes
 
-When `tidb_stats_update_during_ddl` is `ON`, executing [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md) or [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) that reorganizes an index will also run an embedded Analyze after the Reorg phase completes. The mechanism is the same as for `ADD INDEX`:
+When `tidb_stats_update_during_ddl` is `ON`, executing [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md) or [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) that reorganizes an index will also run an embedded `ANALYZE` operation after the Reorg phase completes. The mechanism is the same as for `ADD INDEX`:
 
 - Start collecting statistics before the index becomes visible.
-- If Analyze times out, [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md) and [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) will not synchronously wait for Analyze to finish and will continue so the index becomes visible earlier to users. This means that the index statistics will be updated when Analyze finishes asynchronously.
+- If `ANALYZE` times out, [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md) and [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) will not synchronously wait for `ANALYZE` to finish and will continue so the index becomes visible earlier to users. This means that the index statistics will be updated when `ANALYZE` finishes asynchronously.
 
 ```sql
 CREATE TABLE s (a VARCHAR(10), INDEX idx (a));
@@ -172,4 +172,4 @@ ADMIN SHOW DDL JOBS 1;
 1 rows in set (0.001 sec)
 ```
 
-From the `MODIFY COLUMN` example, when `tidb_stats_update_during_ddl` is `ON`, you can see that in the following `EXPLAIN` the index `idx` has its statistics automatically collected and loaded into memory (you can verify it by executing `SHOW STATS_HISTOGRAMS`), so the optimizer can immediately use those statistics for a range scan. If index creation or reorganization and Analyze take long, check the DDL job status by executing `ADMIN SHOW DDL JOBS`. If the `COMMENTS` column contains `analyzing`, it indicates that the DDL job is collecting statistics.
+From the `MODIFY COLUMN` example, when `tidb_stats_update_during_ddl` is `ON`, you can see that in the following `EXPLAIN` the index `idx` has its statistics automatically collected and loaded into memory (you can verify it by executing `SHOW STATS_HISTOGRAMS`), so the optimizer can immediately use those statistics for a range scan. If index creation or reorganization and `ANALYZE` take a long time, check the DDL job status by executing `ADMIN SHOW DDL JOBS`. If the `COMMENTS` column contains `analyzing`, it indicates that the DDL job is collecting statistics.
