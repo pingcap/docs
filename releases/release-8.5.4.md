@@ -81,13 +81,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
         - Support case-insensitive matching when retrieving the upstream `GTID_MODE` [#12167](https://github.com/pingcap/tiflow/issues/12167) @[OliverS929](https://github.com/OliverS929)
     + TiCDC
 
-        Introduce a [new TiCDC architecture option](/ticdc/ticdc-architecture.md) [#442](https://github.com/pingcap/ticdc/issues/442) @[CharlesCheung96](https://github.com/CharlesCheung96) <!--tw@qiancai-->
+        - Introduce a [new TiCDC architecture option](/ticdc/ticdc-architecture.md) [#442](https://github.com/pingcap/ticdc/issues/442) @[CharlesCheung96](https://github.com/CharlesCheung96) <!--tw@qiancai-->
 
-        This new architecture redesigns TiCDC core components and optimizes its data processing workflows, while maintaining compatibility with the configuration, usage, and APIs of the [classic TiCDC architecture](/ticdc/ticdc-classic-architecture), except for some [initial limitations](/ticdc/ticdc-architecture.md#limitations). When configured to use this new architecture, TiCDC achieves near-linear scalability and can replicate millions of tables with lower resource consumption. It also reduces changefeed latency and delivers more stable performance in scenarios with high write workloads, frequent DDL operations, and cluster scaling.
+            This new architecture redesigns TiCDC core components and optimizes its data processing workflows, while maintaining compatibility with the configuration, usage, and APIs of the [classic TiCDC architecture](/ticdc/ticdc-classic-architecture), except for some [initial limitations](/ticdc/ticdc-architecture.md#limitations). 
+        
+            When configured to use this new architecture, TiCDC achieves near-linear scalability and can replicate millions of tables with lower resource consumption. It also reduces changefeed latency and delivers more stable performance in scenarios with high write workloads, frequent DDL operations, and cluster scaling.
 
-        To opt-in to use the new architecture, set the TiCDC configuration item [`newarch`](/ticdc/ticdc-server-config.md#newarch-new-in-v854-release1) to `true`.
+            To opt-in to use the new architecture, set the TiCDC configuration item [`newarch`](/ticdc/ticdc-server-config.md#newarch-new-in-v854-release1) to `true`.
 
-         For more information, see [documentation](/ticdc/ticdc-architecture.md).
+            For more information, see [documentation](/ticdc/ticdc-architecture.md).
 ## Bug fixes
 
 + TiDB <!--tw@lilin90: the following 14 notes-->
