@@ -1610,7 +1610,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter), [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) and [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -1620,6 +1620,12 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Range: `[107374182400, 1125899906842624]` ([100 GiB, 1 PiB])
 - Unit: Bytes
 - This variable only takes effect when [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) is enabled. It sets the usage limit of local storage during backfilling when creating an index.
+
+<CustomContent plan="premium">
+> **Note:**
+>
+> For [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium), this variable is automatically tuned to an appropriate value and cannot be modified by users. If you need to change it, please contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+</CustomContent>
 
 ### tidb_ddl_enable_fast_reorg <span class="version-mark">New in v6.3.0</span>
 
@@ -1773,11 +1779,17 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - When Global Sort is disabled, only one TiDB node writes to TiKV at a time. In this case, the maximum write bandwidth per TiKV node is `100MiB`.
 - When Global Sort is enabled, all 4 TiDB nodes can write to TiKV simultaneously. In this case, the maximum write bandwidth per TiKV node is `4 * 100MiB = 400MiB`.
 
+<CustomContent plan="premium">
+> **Note:**
+>
+> For [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium), this parameter is automatically tuned to an appropriate value and cannot be modified by users. If you need to change it, please contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+</CustomContent>
+
 ### tidb_ddl_reorg_worker_cnt
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential). For [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium), modifying this parameter has no effect on index creation.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -1789,6 +1801,12 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - This variable is used to set the concurrency of the DDL operation in the `re-organize` phase.
 - Starting from v8.3.0, this parameter is supported at the SESSION level. Modifying the parameter at the GLOBAL level will not impact currently running DDL statements. It will only apply to DDLs submitted in new sessions.
 - Starting from v8.5.0, you can modify this parameter for a running DDL job by executing `ADMIN ALTER DDL JOBS <job_id> THREAD = <new_thread_count>;`. Note that this operation is not supported for `ADD INDEX` DDL when [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) is enabled. For details, see [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md).
+
+<CustomContent plan="premium">
+> **Note:**
+>
+> For [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium), modifying this variable has no effect on index creation. If you need to change it, please contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+</CustomContent>
 
 ### `tidb_enable_fast_create_table` <span class="version-mark">New in v8.0.0</span>
 
