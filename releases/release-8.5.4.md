@@ -79,6 +79,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     + TiDB Data Migration (DM) <!--tw@hfxsd: 1 note-->
 
         - Support case-insensitive matching when retrieving the upstream `GTID_MODE` [#12167](https://github.com/pingcap/tiflow/issues/12167) @[OliverS929](https://github.com/OliverS929)
+
     + TiCDC
 
         - Introduce a [new TiCDC architecture option](/ticdc/ticdc-architecture.md) [#442](https://github.com/pingcap/ticdc/issues/442) @[CharlesCheung96](https://github.com/CharlesCheung96) <!--tw@qiancai-->
