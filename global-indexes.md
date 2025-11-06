@@ -9,7 +9,6 @@ Before the introduction of global indexes, TiDB created a local index for each p
 
 To address these issues, TiDB introduces the global indexes feature in [v8.3.0](/releases/release-8.3.0.md). A global index covers the data of the entire table with a single index, allowing primary keys and unique keys to maintain global uniqueness without including all partition keys. Moreover, global indexes can access index data across multiple partitions in a single operation instead of looking up the local index for each partition, significantly improving query performance for non-partitioned keys. <!--Starting from v9.0.0, non-unique indexes can also be created as global indexes.-->
 
-
 ## Advantages
 
 Global indexes significantly improve query performance, enhance indexing flexibility, and reduce the cost of data migration and  modifying applications.
@@ -28,7 +27,7 @@ Global indexes remove the restriction that unique keys in partitioned tables mus
 
 Global indexes significantly simplify adjustments for data migration and modifying application. Without global indexes, you might need to modify partitioning schemes or rewrite queries to work around indexing limitations. With global indexes, such changes are unnecessary, reducing both development and maintenance overhead.
 
-For example, when migrating a table from an Oracle database to TiDB, because Oracle supports global indexes, some tables might contain unique indexes that do not include partitioning columns. Before TiDB introduced global indexes, you had to modify the table schema to comply with TiDB’s partitioning rules. Now, TiDB supports global indexes, you can simply define those indexes as global during migration, keeping schema behavior consistent with Oracle and greatly reducing migration costs.
+For example, when migrating a table from an Oracle database to TiDB, because Oracle supports global indexes, some tables might contain unique indexes that do not include partitioning columns. Before TiDB introduced global indexes, you had to modify the table schema to comply with TiDB's partitioning rules. Now, TiDB supports global indexes, you can simply define those indexes as global during migration, keeping schema behavior consistent with Oracle and greatly reducing migration costs.
 
 #### Limitations of global indexes
 
@@ -99,7 +98,7 @@ PARTITION BY RANGE (UNIX_TIMESTAMP(`ts`))
  ...)
 ```
 
-This approach optimizes point queries based on `id` while improving the performance of range queries, and also ensures that the table’s partition columns are effectively utilized in timestamp-based queries.
+This approach optimizes point queries based on `id` while improving the performance of range queries, and also ensures that the table's partition columns are effectively utilized in timestamp-based queries.
 
 ## Usage
 
@@ -210,7 +209,7 @@ CREATE TABLE `sbtest` (
 ) partition by hash(id) partitions 5;
 ```
 
-Take the preceding table structure as an example: `idx` is a local index, and `global_idx` is a global index. The data of `idx` is distributed across 5 different ranges, such as `PartitionID1_i_xxx`, `PartitionID2_i_xxx`, and so on. Whereas the data of `global_idx` is concentrated in a single range (T`ableID_i_xxx`).
+Take the preceding table structure as an example: `idx` is a local index, and `global_idx` is a global index. The data of `idx` is distributed across 5 different ranges, such as `PartitionID1_i_xxx` and `PartitionID2_i_xxx`. Whereas the data of `global_idx` is concentrated in a single range (T`ableID_i_xxx`).
 
 When executing a query related to `k`, such as `SELECT * FROM sbtest WHERE k > 1`, using the local index idx results in 5 separate ranges being constructed, while using the global index `global_idx` only constructs a single range. Each range corresponds to one or more RPC requests in TiDB. Therefore, using a global index can reduce the number of RPC requests by several times, improving index query performance.
 
