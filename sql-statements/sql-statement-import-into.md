@@ -163,7 +163,7 @@ The supported options are described as follows:
 
 > **Note:**
 >
-> For [TiDB Cloud Premium],the following four options — `DISK_QUOTA`, `THREAD`, `MAX_WRITE_SPEED`, and `CLOUD_STORAGE_URI` —are automatically tuned to an appropriate value and cannot be modified by users. If you need to change it, please contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+> For {{{ .premium }}}, the following four options — `DISK_QUOTA`, `THREAD`, `MAX_WRITE_SPEED`, and `CLOUD_STORAGE_URI` — are automatically tuned to appropriate values and cannot be modified by users. If you need to adjust these settings, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 

@@ -30,12 +30,12 @@ The following are the supported parameters for different DDL jobs and their corr
     - `MAX_WRITE_SPEED`: the maximum bandwidth limit for importing index records into each TiKV. The initial value is set by [`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850).
 
   Currently, the preceding parameters only work for `ADD INDEX` jobs that are submitted and running after [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) is disabled.
-  
+
 <CustomContent plan="premium">
 
 > **Note:**
 >
-> For [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium), both `THREAD` and `MAX_WRITE_SPEED` are automatically tuned to an appropriate value and cannot be modified by users. If you need to change it, please contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+> For {{{ .premium }}}, both `THREAD` and `MAX_WRITE_SPEED` are automatically tuned to appropriate values and cannot be modified by users. If you need to adjust these settings, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
