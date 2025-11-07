@@ -1,6 +1,6 @@
 ---
 title: Global Indexes
-summary: Introduce the use cases, advantages, usage, working principles, and limitations of TiDB global indexes.
+summary: Learn the use cases, advantages, usage, working principles, and limitations of TiDB global indexes.
 ---
 
 # Global Indexes
@@ -54,7 +54,7 @@ The following diagram shows the differences between global indexes and local ind
 
 **Scenarios for global indexes**:
 
-- **Infrequent data archiving**: For example, in the healthcare industry, some business data must be retained for up to 30 years. Data is often partitioned monthly, creating as many as 360 partitions at once, with very few `DROP` or `TRUNCATE` operations. In such scenarios, global indexes are more suitable, providing cross-partition consistency and improved query performance.
+- **Infrequent data archiving**: For example, in the healthcare industry, some business data must be retained for up to 30 years. Data is often partitioned monthly, creating 360 partitions at once, with very few `DROP` or `TRUNCATE` operations. In such scenarios, global indexes are more suitable, providing cross-partition consistency and improved query performance.
 - **Queries that require cross-partition data**: When queries need to access data across multiple partitions, global indexes can avoid full scans across all partitions and enhance query efficiency.
 
 **Scenarios for local indexes**:
