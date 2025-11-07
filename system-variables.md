@@ -1589,7 +1589,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Unit: Bytes
 - This variable only takes effect when [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) is enabled. It sets the usage limit of local storage during backfilling when creating an index.
 
-<CustomContent plan="premium">
+<CustomContent platform="tidb-cloud" plan="premium">
 
 > **Note:**
 >
