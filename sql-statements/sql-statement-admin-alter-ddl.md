@@ -31,7 +31,7 @@ The following are the supported parameters for different DDL jobs and their corr
 
   Currently, the preceding parameters only work for `ADD INDEX` jobs that are submitted and running after [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) is disabled.
 
-<CustomContent plan="premium">
+<CustomContent platform="tidb-cloud" plan="premium">
 
 > **Note:**
 >
