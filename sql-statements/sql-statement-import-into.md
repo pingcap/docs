@@ -160,9 +160,11 @@ The supported options are described as follows:
 | `DISABLE_PRECHECK` | All file formats and query results of `SELECT` | Setting this option disables pre-checks of non-critical items, such as checking whether there are CDC or PITR tasks.  |
 
 <CustomContent plan="premium">
+
 > **Note:**
 >
 > For [TiDB Cloud Premium],the following four options — `DISK_QUOTA`, `THREAD`, `MAX_WRITE_SPEED`, and `CLOUD_STORAGE_URI` —are automatically tuned to an appropriate value and cannot be modified by users. If you need to change it, please contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+
 </CustomContent>
 
 ## `IMPORT INTO ... FROM FILE` usage
