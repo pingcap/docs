@@ -1576,9 +1576,21 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_ddl_disk_quota <span class="version-mark">New in v6.3.0</span>
 
+<CustomContent platform="tidb-cloud" plan="starter,essential">
+
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter), [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) and [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+
+</CustomContent>
+<CustomContent platform="tidb-cloud" plan="premium">
+
+> **Note:**
+>
+> - This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter), [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), and [{{{ .premium }}}](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-intro/#deployment-options).
+> - For {{{ .premium }}}, this variable is automatically tuned to an appropriate value and cannot be modified by users. If you need to adjust the setting, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+</CustomContent>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -1588,14 +1600,6 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Range: `[107374182400, 1125899906842624]` ([100 GiB, 1 PiB])
 - Unit: Bytes
 - This variable only takes effect when [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) is enabled. It sets the usage limit of local storage during backfilling when creating an index.
-
-<CustomContent platform="tidb-cloud" plan="premium">
-
-> **Note:**
->
-> For [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium), this variable is automatically tuned to an appropriate value and cannot be modified by users. If you need to change it, please contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
-
-</CustomContent>
 
 ### tidb_ddl_enable_fast_reorg <span class="version-mark">New in v6.3.0</span>
 
@@ -1745,7 +1749,7 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 
 > **Note:**
 >
-> For [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium), this parameter is automatically tuned to an appropriate value and cannot be modified by users. If you need to change it, please contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+> For {{{ .premium }}}, this parameter is automatically tuned to an appropriate value and cannot be modified by users. If you need to adjust it, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
@@ -1770,7 +1774,7 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 
 > **Note:**
 >
-> For [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium), modifying this variable has no effect on index creation. If you need to change it, please contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+> For {{{ .premium }}}, modifying this variable has no effect on index creation. If you need to adjust it, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
