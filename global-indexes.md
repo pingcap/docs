@@ -41,10 +41,10 @@ For example, when migrating a table from an Oracle database to TiDB, because Ora
 ## Feature evolution
 
 - **Before v7.6.0**: TiDB only supports local indexes on partitioned tables. This means that unique keys on partitioned tables have to include all columns in the partition expression. Queries that do not use the partition key have to scan all partitions, resulting in degraded query performance.
-- **[v7.6.0](/releases/release-7.6.0.md)**: Introduces the [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new--in-v760) system variable to enable global indexes. However, at that time the feature is still under development and is not recommended for production use.
-- **[v8.3.0](/releases/release-8.3.0.md)**: Global indexes are released as an experimental feature. You can explicitly create a global index using the `GLOBAL` keyword when defining an index.
-- **[v8.4.0](/releases/release-8.4.0.md): The global indexes feature becomes generally available (GA). You can create global indexes directly using the `GLOBAL` keyword without setting the `tidb_enable_global_index` system variable. From this version onward, the system variable is deprecated and fixed to `ON`, meaning global indexes are enabled by default.
-- **[v8.5.0](/releases/release-8.5.0.md)**: Global indexes support including all columns from the partition expression.<!-- - **v9.0.0**: Global indexes support non-unique indexes. In partitioned tables, any index except clustered indexes can be created as a global index. -->
+- **[v7.6.0](https://docs.pingcap.com/tidb/stable/release-7.6.0)**: Introduces the [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new--in-v760) system variable to enable global indexes. However, at that time the feature is still under development and is not recommended for production use.
+- **[v8.3.0](https://docs.pingcap.com/tidb/stable/release-8.3.0)**: Global indexes are released as an experimental feature. You can explicitly create a global index using the `GLOBAL` keyword when defining an index.
+- **[v8.4.0](https://docs.pingcap.com/tidb/stable/release-8.4.0)**: The global indexes feature becomes generally available (GA). You can create global indexes directly using the `GLOBAL` keyword without setting the `tidb_enable_global_index` system variable. From this version onward, the system variable is deprecated and fixed to `ON`, meaning global indexes are enabled by default.
+- **[v8.5.0](https://docs.pingcap.com/tidb/stable/release-8.5.0)**: Global indexes support including all columns from the partition expression.<!-- - **v9.0.0**: Global indexes support non-unique indexes. In partitioned tables, any index except clustered indexes can be created as a global index. -->
 
 ## Global indexes vs. local indexes
 
