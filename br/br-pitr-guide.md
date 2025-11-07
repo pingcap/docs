@@ -117,7 +117,7 @@ Restore KV Files <--------------------------------------------------------------
 *** ["restore log success summary"] [total-take=xxx.xx] [restore-from={TS}] [restore-to={TS}] [total-kv-count=xxx] [total-size=xxx]
 ```
 
-During restore, the restored table's table mode is set to `restore`, which prevents you from performing any read or write operations. After data restore completes, the table mode is automatically reset to `normal`, and you can read and write the table normally. This improves task stability and data consistency.
+During data restore, the table mode of the target table is automatically set to `restore`. Tables in `restore` mode do not allow any read or write operations. After data restore is complete, the table mode automatically switches back to `normal`, and you can read and write the table normally. This mechanism ensures task stability and data consistency throughout the restore process.
 
 ## Clean up outdated data
 

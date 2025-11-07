@@ -103,7 +103,7 @@ Restore Pipeline <--------------------------------------------------------------
 *** ["Full Restore success summary"] [total-ranges=20] [ranges-succeed=20] [ranges-failed=0] [merge-ranges=7.546971ms] [split-region=343.594072ms] [restore-files=1.57662s] [default-CF-files=6] [write-CF-files=14] [split-keys=9] [total-take=4.344617542s] [total-kv=5] [total-kv-size=327B] [average-speed=75.27B/s] [restore-data-size(after-compressed)=4.813kB] [Size=4813] [BackupTS=435844901803917314]
 ```
 
-During restore, the restored table's table mode is set to `restore`, which prevents you from performing any read or write operations. After data restore completes, the table mode is automatically reset to `normal`, and you can read and write the table normally. This improves task stability and data consistency.
+During data restore, the table mode of the target table is automatically set to `restore`. Tables in `restore` mode do not allow any read or write operations. After data restore is complete, the table mode automatically switches back to `normal`, and you can read and write the table normally. This mechanism ensures task stability and data consistency throughout the restore process.
 
 ### Restore a database or a table
 
