@@ -26,7 +26,7 @@ Global indexes remove the restriction that unique keys in partitioned tables mus
 ### Reduced cost for data migration and modifying applications
 
 Global indexes significantly simplify adjustments for data migration and modifying application. Without global indexes, you might need to modify partitioning schemes or rewrite queries to work around indexing limitations. With global indexes, such changes are unnecessary, reducing both development and maintenance overhead.
-Global indexes significantly simplify adjustments for data migration and modifying applications. Without global indexes, you might need to modify partitioning schemes or rewrite queries to work around indexing limitations. With global indexes, such changes are unnecessary, reducing both development and maintenance overhead.
+
 For example, when migrating a table from an Oracle database to TiDB, because Oracle supports global indexes, some tables might contain unique indexes that do not include partitioning columns. Before TiDB introduced global indexes, you had to modify the table schema to comply with TiDB's partitioning rules. Now, TiDB supports global indexes, you can simply define those indexes as global during migration, keeping schema behavior consistent with Oracle and greatly reducing migration costs.
 
 ## Limitations of global indexes
