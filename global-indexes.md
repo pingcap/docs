@@ -7,7 +7,7 @@ summary: Introduce the use cases, advantages, usage, working principles, and lim
 
 Before the introduction of global indexes, TiDB created a local index for each partition, leading to [a limitation](/partitioned-table.md#partitioning-keys-primary-keys-and-unique-keys) that primary keys and unique keys had to include the partition key to ensure data uniqueness. Additionally, when querying data across multiple partitions, TiDB needed to scan the data of each partition to return results.
 
-To address these issues, TiDB introduces the global indexes feature in [v8.3.0](/releases/release-8.3.0.md). A global index covers the data of the entire table with a single index, allowing primary keys and unique keys to maintain global uniqueness without including all partition keys. Moreover, global indexes can access index data across multiple partitions in a single operation instead of looking up the local index for each partition, significantly improving query performance for non-partitioning keys. <!--Starting from v9.0.0, non-unique indexes can also be created as global indexes.-->
+To address these issues, TiDB introduces the global indexes feature in [v8.3.0](https://docs.pingcap.com/tidb/stable/release-8.3.0). A global index covers the data of the entire table with a single index, allowing primary keys and unique keys to maintain global uniqueness without including all partition keys. Moreover, global indexes can access index data across multiple partitions in a single operation instead of looking up the local index for each partition, significantly improving query performance for non-partitioning keys. <!--Starting from v9.0.0, non-unique indexes can also be created as global indexes.-->
 
 ## Advantages
 
