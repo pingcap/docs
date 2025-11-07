@@ -12,12 +12,12 @@ To address these issues, TiDB introduces the global indexes feature in [v8.3.0](
 ## Advantages
 
 Global indexes significantly improve query performance, enhance indexing flexibility, and reduce the cost of data migration and  modifying applications.
-Global indexes significantly improve query performance, enhance indexing flexibility, and reduce the cost of data migration and modifying applications.
+
 ### Improved query performance
 
 Global indexes greatly enhance the efficiency of queries involving non-partitioning columns. When a query involves a non-partitioning column, a global index can quickly locate the relevant data, avoiding full table scans across all partitions. This dramatically reduces the number of Coprocessor (cop) tasks, which is especially beneficial in scenarios with a large number of partitions.
 
-In benchmark tests using sysbench `select_random_points`, performance improves by up to 53 times when the table has 100 partitions.
+In benchmark tests using sysbench `select_random_points`, performance improves by up to 53 times when the table contains 100 partitions.
 
 ### Enhanced indexing flexibility
 
