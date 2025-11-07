@@ -7,15 +7,15 @@ summary: Introduce the use cases, advantages, usage, working principles, and lim
 
 Before the introduction of global indexes, TiDB created a local index for each partition, leading to [a limitation](/partitioned-table.md#partitioning-keys-primary-keys-and-unique-keys) that primary keys and unique keys had to include the partition key to ensure data uniqueness. Additionally, when querying data across multiple partitions, TiDB needed to scan the data of each partition to return results.
 
-To address these issues, TiDB introduces the global indexes feature in [v8.3.0](/releases/release-8.3.0.md). A global index covers the data of the entire table with a single index, allowing primary keys and unique keys to maintain global uniqueness without including all partition keys. Moreover, global indexes can access index data across multiple partitions in a single operation instead of looking up the local index for each partition, significantly improving query performance for non-partitioned keys. <!--Starting from v9.0.0, non-unique indexes can also be created as global indexes.-->
+To address these issues, TiDB introduces the global indexes feature in [v8.3.0](/releases/release-8.3.0.md). A global index covers the data of the entire table with a single index, allowing primary keys and unique keys to maintain global uniqueness without including all partition keys. Moreover, global indexes can access index data across multiple partitions in a single operation instead of looking up the local index for each partition, significantly improving query performance for non-partitioning keys. <!--Starting from v9.0.0, non-unique indexes can also be created as global indexes.-->
 
 ## Advantages
 
 Global indexes significantly improve query performance, enhance indexing flexibility, and reduce the cost of data migration and  modifying applications.
-
+Global indexes significantly improve query performance, enhance indexing flexibility, and reduce the cost of data migration and modifying applications.
 ### Improved query performance
 
-Global indexes greatly enhance the efficiency of queries involving non-partition columns. When a query involves a non-partition column, a global index can quickly locate the relevant data, avoiding full table scans across all partitions. This dramatically reduces the number of Coprocessor (cop) tasks, which is especially beneficial in scenarios with a large number of partitions.
+Global indexes greatly enhance the efficiency of queries involving non-partitioning columns. When a query involves a non-partitioning column, a global index can quickly locate the relevant data, avoiding full table scans across all partitions. This dramatically reduces the number of Coprocessor (cop) tasks, which is especially beneficial in scenarios with a large number of partitions.
 
 In benchmark tests using sysbench `select_random_points`, performance improves by up to 53 times when the table has 100 partitions.
 
@@ -26,10 +26,10 @@ Global indexes remove the restriction that unique keys in partitioned tables mus
 ### Reduced cost for data migration and modifying applications
 
 Global indexes significantly simplify adjustments for data migration and modifying application. Without global indexes, you might need to modify partitioning schemes or rewrite queries to work around indexing limitations. With global indexes, such changes are unnecessary, reducing both development and maintenance overhead.
-
+Global indexes significantly simplify adjustments for data migration and modifying applications. Without global indexes, you might need to modify partitioning schemes or rewrite queries to work around indexing limitations. With global indexes, such changes are unnecessary, reducing both development and maintenance overhead.
 For example, when migrating a table from an Oracle database to TiDB, because Oracle supports global indexes, some tables might contain unique indexes that do not include partitioning columns. Before TiDB introduced global indexes, you had to modify the table schema to comply with TiDB's partitioning rules. Now, TiDB supports global indexes, you can simply define those indexes as global during migration, keeping schema behavior consistent with Oracle and greatly reducing migration costs.
 
-#### Limitations of global indexes
+## Limitations of global indexes
 
 - If the `GLOBAL` keyword is not explicitly specified in the index definition, TiDB creates a local index by default.
 - The `GLOBAL` and `LOCAL` keywords only apply to partitioned tables and do not affect non-partitioned tables. In other words, there is no difference between a global index and a local index in non-partitioned tables.
@@ -64,7 +64,7 @@ The following diagram shows the differences between global indexes and local ind
 
 ## Global indexes vs. clustered indexes
 
-Due to the underlying principles of clustered indexes and global indexes, a single index cannot serve as both a clustered index and a global index. However, these two types of indexes provide different performance optimizations for different query scenarios. When you need to leverage the benefits of both, you can add the partition columns to the clustered index while also creating a global index that does not include the partition columns.
+Due to the underlying principles of clustered indexes and global indexes, a single index cannot serve as both a clustered index and a global index. However, these two types of indexes provide different performance optimizations for different query scenarios. When you need to leverage the benefits of both, you can add the partitioning columns to the clustered index while also creating a global index that does not include the partitioning columns.
 
 Suppose you have the following table structure:
 
@@ -80,7 +80,7 @@ PARTITION BY RANGE (UNIX_TIMESTAMP(`ts`))
  ...)
 ```
 
-In the preceding `t` table, the values in the `id` column are unique. To optimize both point queries and range queries, you can define a clustered index in the table creation statement as `PRIMARY KEY(id, ts)` and a global index without the partition column as `UNIQUE KEY id(id)`. This way, point queries based on `id` will use the global index `id` and choose a `PointGet` execution plan, while range queries will use the clustered index. The clustered index requires one less table lookup compared to the global index, improving query efficiency.
+In the preceding `t` table, the values in the `id` column are unique. To optimize both point queries and range queries, you can define a clustered index in the table creation statement as `PRIMARY KEY(id, ts)` and a global index without the partitioning column as `UNIQUE KEY id(id)`. This way, point queries based on `id` will use the global index `id` and choose a `PointGet` execution plan, while range queries will use the clustered index. The clustered index requires one less table lookup compared to the global index, improving query efficiency.
 
 The modified table structure is as follows:
 
@@ -98,7 +98,7 @@ PARTITION BY RANGE (UNIX_TIMESTAMP(`ts`))
  ...)
 ```
 
-This approach optimizes point queries based on `id` while improving the performance of range queries, and also ensures that the table's partition columns are effectively utilized in timestamp-based queries.
+This approach optimizes point queries based on `id` while improving the performance of range queries, and also ensures that the table's partitioning columns are effectively utilized in timestamp-based queries.
 
 ## Usage
 
@@ -209,9 +209,9 @@ CREATE TABLE `sbtest` (
 ) partition by hash(id) partitions 5;
 ```
 
-Take the preceding table structure as an example: `idx` is a local index, and `global_idx` is a global index. The data of `idx` is distributed across 5 different ranges, such as `PartitionID1_i_xxx` and `PartitionID2_i_xxx`. Whereas the data of `global_idx` is concentrated in a single range (T`ableID_i_xxx`).
+Take the preceding table structure as an example: `idx` is a local index, and `global_idx` is a global index. The data of `idx` is distributed across 5 different ranges, such as `PartitionID1_i_xxx` and `PartitionID2_i_xxx`. Whereas the data of `global_idx` is concentrated in a single range (`TableID_i_xxx`).
 
-When executing a query related to `k`, such as `SELECT * FROM sbtest WHERE k > 1`, using the local index idx results in 5 separate ranges being constructed, while using the global index `global_idx` only constructs a single range. Each range corresponds to one or more RPC requests in TiDB. Therefore, using a global index can reduce the number of RPC requests by several times, improving index query performance.
+When executing a query related to `k`, such as `SELECT * FROM sbtest WHERE k > 1`, using the local index `idx` results in 5 separate ranges being constructed, while using the global index `global_idx` only constructs a single range. Each range corresponds to one or more RPC requests in TiDB. Therefore, using a global index can reduce the number of RPC requests by several times, improving index query performance.
 
 The following diagram illustrates the difference in RPC requests and data flow when executing `SELECT * FROM sbtest WHERE k > 1` using `idx` versus `global_idx`:
 
@@ -297,7 +297,7 @@ The workload SQL is as follows:
 
 ```sql
 SELECT id, k, c, pad
-FROM sbtest1
+FROM sbtest
 WHERE k IN (xx, xx, xx)
 ```
 
@@ -307,7 +307,7 @@ Range Partition (100 partitions):
 | --------------------------------------------------------------------- | ------------- | -------------- | -------------- | ---------- |
 | Clustered non-partitioned table                                       | 225           | 19,999         | 30,293         | 7.92       |
 | Clustered table range partitioned by PK                               | 68            | 480            | 511            | 114.87     |
-| Clustered table range partitioned by PK, with Global Index on `k`,`c` | 207           | 17,798         | 27,707         | 11.73      |
+| Clustered table range partitioned by PK, with Global Index on `k`, `c` | 207           | 17,798         | 27,707         | 11.73      |
 
 Hash Partition (100 partitions):
 
@@ -315,6 +315,6 @@ Hash Partition (100 partitions):
 | -------------------------------------------------------------------- | ------------- | -------------- | -------------- | ---------- |
 | Clustered non-partitioned table                                      | 166           | 20,361         | 28,922         | 7.86       |
 | Clustered table hash partitioned by PK                               | 60            | 244            | 283            | 119.73     |
-| Clustered table hash partitioned by PK, with Global Index on `k`,`c` | 156           | 18,233         | 15,581         | 10.77      |
+| Clustered table hash partitioned by PK, with Global Index on `k`, `c` | 156           | 18,233         | 15,581         | 10.77      |
 
 From the preceding tests, it is evident that in high-concurrency environments, global indexes can significantly improve the query performance of partitioned tables, with performance gains of up to 50 times. Additionally, global indexes substantially reduce resource (RU) consumption. As the number of partitions increases, the performance benefits of global indexes become even more obvious.
