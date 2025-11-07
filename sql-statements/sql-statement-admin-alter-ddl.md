@@ -32,10 +32,12 @@ The following are the supported parameters for different DDL jobs and their corr
   Currently, the preceding parameters only work for `ADD INDEX` jobs that are submitted and running after [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) is disabled.
   
 <CustomContent plan="premium">
+
 > **Note:**
 >
 > For [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium), both `THREAD` and `MAX_WRITE_SPEED` are automatically tuned to an appropriate value and cannot be modified by users. If you need to change it, please contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
-</CustomContent>  
+
+</CustomContent>
 
 - `MODIFY COLUMN`:
     - `THREAD`: the concurrency of the DDL job. The initial value is set by `tidb_ddl_reorg_worker_cnt`.
