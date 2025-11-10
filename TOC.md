@@ -1083,7 +1083,7 @@
   - [URI Formats of External Storage Services](/external-storage-uri.md)
   - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/online-workloads-and-add-index-operations.md)
   - [`ANALYZE` Embedded in DDL Statements](/ddl_embedded_analyze.md)
- FAQs
+- FAQs
   - [FAQ Summary](/faq/faq-overview.md)
   - [TiDB FAQs](/faq/tidb-faq.md)
   - [SQL FAQs](/faq/sql-faq.md)
