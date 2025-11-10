@@ -164,9 +164,9 @@ export const astNode2mdStr = (astNode) => {
 
 export const removeCustomContent = (type, content = "") => {
   const TIDB_CUSTOM_CONTENT_REGEX =
-    /<CustomContent[^>]*platform=["']tidb["'][^>]*>(.|\n)*?<\/CustomContent>\n/g;
+    /<CustomContent[^>]*platform=["']tidb["'][^>]*>(.|\n)*?<\/CustomContent>/g;
   const TIDB_CLOUD_CONTENT_REGEX =
-    /<CustomContent[^>]*platform=["']tidb-cloud["'][^>]*>(.|\n)*?<\/CustomContent>\n/g;
+    /<CustomContent[^>]*platform=["']tidb-cloud["'][^>]*>(.|\n)*?<\/CustomContent>/g;
   if (type === "tidb") {
     return content.replaceAll(TIDB_CLOUD_CONTENT_REGEX, "");
   }
