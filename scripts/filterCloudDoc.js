@@ -1,3 +1,5 @@
+import * as fs from "fs";
+
 import {
   getAllCloudMdList,
   copySingleFileSync,
@@ -24,11 +26,41 @@ const extractFilefromList = (
   });
 };
 
+const tocCopyTargets = [
+  { src: "TOC-tidb-cloud.md", dest: "./tmp/TOC.md" },
+  {
+    src: "TOC-tidb-cloud-starter.md",
+    dest: "./tmp/TOC-tidb-cloud-starter.md",
+  },
+  {
+    src: "TOC-tidb-cloud-essential.md",
+    dest: "./tmp/TOC-tidb-cloud-essential.md",
+  },
+  {
+    src: "TOC-tidb-cloud-premium.md",
+    dest: "./tmp/TOC-tidb-cloud-premium.md",
+  },
+];
+const tocFiles = tocCopyTargets.map(({ src }) => src);
+
 const main = () => {
+<<<<<<< HEAD
   const allFilePaths = getAllCloudMdList();
 
   extractFilefromList(allFilePaths, "./", "./tmp");
   copySingleFileSync("TOC-tidb-cloud.md", "./tmp/TOC.md");
+=======
+  const existingTocFiles = tocFiles.filter((file) => fs.existsSync(file));
+  const filteredLinkList = getAllMdList(existingTocFiles);
+
+  extractFilefromList(filteredLinkList, ".", "./tmp");
+
+  tocCopyTargets.forEach(({ src, dest }) => {
+    if (fs.existsSync(src)) {
+      copySingleFileSync(src, dest);
+    }
+  });
+>>>>>>> 2adf999c1d (refactor: enhance TOC file handling and regex patterns in scripts (#22033))
   copyDirectoryWithCustomContentSync(
     "./tidb-cloud/",
     "./tmp/tidb-cloud/",
