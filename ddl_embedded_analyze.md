@@ -3,7 +3,7 @@ title: "`ANALYZE` Embedded in DDL Statements"
 summary: This document describes the `ANALYZE` feature embedded in DDL statements for newly created or reorganized indexes, which ensures that statistics for new indexes are updated promptly.
 ---
 
-# `ANALYZE` Embedded in DDL Statements<span class="version-mark">Introduced in v8.5.4 and v9.0.0</span>
+# `ANALYZE` Embedded in DDL Statements <span class="version-mark">Introduced in v8.5.4 and v9.0.0</span>
 
 This document describes the `ANALYZE` feature embedded in the following two types of DDL statements:
 
