@@ -60,24 +60,15 @@ const filterLink = (srcList = []) => {
 
 export const getAllMdList = (tocFiles) => {
   const tocFileList = Array.isArray(tocFiles) ? tocFiles : [tocFiles];
-  const seen = new Set();
-  const result = [];
 
-  tocFileList.forEach((tocFile) => {
+  const allLinks = tocFileList.flatMap((tocFile) => {
     const tocFileContent = fs.readFileSync(tocFile);
     const mdAst = generateMdAstFromFile(tocFileContent);
     const linkList = extractLinkNodeFromAst(mdAst);
-    const filteredLinkList = filterLink(linkList);
-
-    filteredLinkList.forEach((link) => {
-      if (!seen.has(link)) {
-        seen.add(link);
-        result.push(link);
-      }
-    });
+    return filterLink(linkList);
   });
 
-  return result;
+  return [...new Set(allLinks)];
 };
 
 const checkDestDir = (destPath) => {
