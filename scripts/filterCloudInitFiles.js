@@ -1,20 +1,14 @@
 import * as fs from "fs";
 import path from "path";
+import { getAllCloudMdList } from "./utils.js";
 
-// Read the TOC file
-const tocContent = fs.readFileSync("TOC-tidb-cloud.md", "utf8");
+const allFilePaths = getAllCloudMdList();
 
-// Regular expression to match markdown links
-const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
-
-// Set to store unique file paths
+// Set to store filtered file paths
 const filePaths = new Set();
 
-// Extract all file paths from markdown links
-let match;
-while ((match = linkRegex.exec(tocContent)) !== null) {
-  const filePath = match[2];
-
+// Filter the file paths
+for (const filePath of allFilePaths) {
   // Skip external links (starting with http/https)
   if (filePath.startsWith("http")) {
     continue;
@@ -24,9 +18,6 @@ while ((match = linkRegex.exec(tocContent)) !== null) {
   if (filePath.startsWith("#")) {
     continue;
   }
-
-  // Remove leading slash if present
-  const cleanPath = filePath.startsWith("/") ? filePath.slice(1) : filePath;
 
   // Skip files in tidb-cloud folder
   if (cleanPath.startsWith("tidb-cloud/")) {
