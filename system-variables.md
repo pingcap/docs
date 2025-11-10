@@ -1750,17 +1750,29 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 
 > **Note:**
 >
-> For {{{ .premium }}}, this parameter is automatically tuned to an appropriate value and cannot be modified by users. If you need to adjust it, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+> For {{{ .premium }}}, this parameter is automatically tuned to an appropriate value and cannot be modified by users. If you need to adjust the setting, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
 ### tidb_ddl_reorg_worker_cnt
 
-<CustomContent platform="tidb-cloud" plan="premium">
+<CustomContent platform="tidb-cloud">
+
+<CustomContent plan="starter,essential">
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential). For [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium), modifying this parameter has no effect on index creation.
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to {{{ .premium }}}.
+
+</CustomContent>
 
 </CustomContent>
 
@@ -1774,14 +1786,6 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - This variable is used to set the concurrency of the DDL operation in the `re-organize` phase.
 - Starting from v8.3.0, this parameter is supported at the SESSION level. Modifying the parameter at the GLOBAL level will not impact currently running DDL statements. It will only apply to DDLs submitted in new sessions.
 - Starting from v8.5.0, you can modify this parameter for a running DDL job by executing `ADMIN ALTER DDL JOBS <job_id> THREAD = <new_thread_count>;`. Note that this operation is not supported for `ADD INDEX` DDL when [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) is enabled. For details, see [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md).
-
-<CustomContent platform="tidb-cloud" plan="premium">
-
-> **Note:**
->
-> For {{{ .premium }}}, modifying this variable has no effect on index creation. If you need to adjust it, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
-
-</CustomContent>
 
 ### `tidb_enable_fast_create_table` <span class="version-mark">New in v8.0.0</span>
 
