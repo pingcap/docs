@@ -1,5 +1,5 @@
 ---
-title: `ANALYZE` Embedded in DDL Statements
+title: "`ANALYZE` Embedded in DDL Statements"
 summary: This document describes the `ANALYZE` feature embedded in DDL statements for newly created or reorganized indexes, which ensures that statistics for new indexes are updated promptly.
 ---
 
