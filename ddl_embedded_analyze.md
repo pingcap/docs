@@ -12,7 +12,7 @@ This document describes the `ANALYZE` feature embedded in the following two type
 
 When this feature is enabled, TiDB automatically runs an `ANALYZE` (statistics collection) operation before the new or reorganized index becomes visible to users. This prevents inaccurate optimizer estimates and potential plan changes caused by temporarily unavailable statistics after index creation or reorganization.
 
-## Use scenarios
+## Usage scenarios
 
 In scenarios where DDL operations alternately add or modify indexes, existing stable queries might suffer from estimation bias because the new index lacks statistics, causing the optimizer to choose suboptimal plans. For more information, see [Issue #57948](https://github.com/pingcap/tidb/issues/57948).
 
@@ -47,9 +47,9 @@ Starting from v8.5.0, TiDB has improved heuristic comparisons between indexes an
 
 When `tidb_stats_update_during_ddl` is `ON`, executing [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) automatically runs an embedded `ANALYZE` operation after the Reorg phase finishes. This `ANALYZE` operation collects statistics for the newly created index before the index becomes visible to users, and then `ADD INDEX` proceeds with its remaining phases.
 
-Considering that `ANALYZE` can take time, TiDB sets a timeout threshold based on the execution time of the first Reorg. If `ANALYZE` times out, `ADD INDEX` will stop waiting synchronously for `ANALYZE` to finish and will continue the subsequent process so that the index becomes visible earlier to users. This means the index statistics will be updated after `ANALYZE` completes asynchronously.
+Considering that `ANALYZE` can take time, TiDB sets a timeout threshold based on the execution time of the first Reorg. If `ANALYZE` times out, `ADD INDEX` stops waiting synchronously for `ANALYZE` to finish and continues the subsequent process, making the index visible earlier to users. This means the index statistics will be updated after `ANALYZE` completes asynchronously.
 
-Example:
+For example:
 
 ```sql
 CREATE TABLE t (a INT, b INT, c INT);
@@ -107,14 +107,16 @@ ADMIN SHOW DDL JOBS 1;
 1 rows in set (0.001 sec)
 ```
 
-In the `ADD INDEX` example, when `tidb_stats_update_during_ddl` is `ON`, you can see that in the subsequent `EXPLAIN`, the index `idx` has its statistics automatically collected and loaded into memory (you can verify it by running `SHOW STATS_HISTOGRAMS`). Therefore, the optimizer can immediately use those statistics for a range scan. If index creation or reorganization and `ANALYZE` take a long time, you can check the DDL job status by executing `ADMIN SHOW DDL JOBS`. If the `COMMENTS` column contains `analyzing`, it means that the DDL job is collecting statistics.
+From the `ADD INDEX` example, when `tidb_stats_update_during_ddl` is `ON`, you can see that after the execution of the `ADD INDEX` DDL statement, the subsequent `EXPLAIN` output shows that statistics for the index `idx` have been automatically collected and loaded into memory (you can verify it by executing `SHOW STATS_HISTOGRAMS`). As a result, the optimizer can immediately use these statistics for range scans. If index creation or reorganization and `ANALYZE` take a long time, you can check the DDL job status by executing `ADMIN SHOW DDL JOBS`. When the `COMMENTS` column in the output contains `analyzing`, it means that the DDL job is collecting statistics.
 
 ## DDL for reorganizing existing indexes
 
 When `tidb_stats_update_during_ddl` is `ON`, executing [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md) or [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) that reorganizes an index will also run an embedded `ANALYZE` operation after the Reorg phase completes. The mechanism is the same as for `ADD INDEX`:
 
 - Start collecting statistics before the index becomes visible.
-- If `ANALYZE` times out, [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md) and [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) will not synchronously wait for `ANALYZE` to finish and will continue so the index becomes visible earlier to users. This means that the index statistics will be updated when `ANALYZE` finishes asynchronously.
+- If `ANALYZE` times out, [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md) and [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) stops waiting synchronously for `ANALYZE` to finish and continues the subsequent process, making the index visible earlier to users. This means that the index statistics will be updated when `ANALYZE` finishes asynchronously.
+
+For example:
 
 ```sql
 CREATE TABLE s (a VARCHAR(10), INDEX idx (a));
@@ -172,4 +174,4 @@ ADMIN SHOW DDL JOBS 1;
 1 rows in set (0.001 sec)
 ```
 
-From the `MODIFY COLUMN` example, when `tidb_stats_update_during_ddl` is `ON`, you can see that in the following `EXPLAIN` the index `idx` has its statistics automatically collected and loaded into memory (you can verify it by executing `SHOW STATS_HISTOGRAMS`), so the optimizer can immediately use those statistics for a range scan. If index creation or reorganization and `ANALYZE` take a long time, check the DDL job status by executing `ADMIN SHOW DDL JOBS`. If the `COMMENTS` column contains `analyzing`, it indicates that the DDL job is collecting statistics.
+From the `MODIFY COLUMN` example, when `tidb_stats_update_during_ddl` is `ON`, you can see that after the execution of the `MODIFY COLUMN` DDL statement, the subsequent `EXPLAIN` output shows that statistics for the index `idx` have been automatically collected and loaded into memory (you can verify it by executing `SHOW STATS_HISTOGRAMS`). As a result, the optimizer can immediately use these statistics for range scans. If index creation or reorganization and `ANALYZE` take a long time, you can check the DDL job status by executing `ADMIN SHOW DDL JOBS`. When the `COMMENTS` column in the output contains `analyzing`, it means that the DDL job is collecting statistics.
