@@ -552,7 +552,7 @@ tiup br restore point --pd="${PD_IP}:2379" \
 >     - Table A (table id = 1): the table name always matches the `--filter` regular expression at and before the `restored-ts` time point. In this case, PITR restores the table.
 >     - Table B (table id = 2): the table name does not match the `--filter` regular expression at some point before `restored-ts`, but matches at the `restored-ts` time point. In this case, PITR restores the table.
 >     - Table C (table id = 3): the table name matches the `--filter` regular expression at some point before `restored-ts`, but does **not** match at the `restored-ts` time point. In this case, PITR does **not** restore the table.
-> - You can use the database and table filtering feature to restore part of the data online. During the online restore process, do **not** create databases or tables with the same names as the restored objects, otherwise the restore task fails due to conflicts. To avoid data inconsistency, the tables created by PITR during this restore process are not readable or writable. After the restore task is complete, these tables are updated in the TiDB Domain memory cache and allowed to be read and written normally.
+> - You can use the database and table filtering feature to restore part of the data online. During the online restore process, do **not** create databases or tables with the same names as the restored objects, otherwise the restore task fails due to conflicts. To avoid data inconsistency, the tables created by PITR during this restore process are not readable or writable until the restore task is complete.
 
 ### Concurrent restore operations
 
