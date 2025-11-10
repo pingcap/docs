@@ -102,20 +102,61 @@ In addition, the new TiCDC architecture currently does not support splitting lar
 
 ## Upgrade guide
 
-The TiCDC new architecture can only be deployed in TiDB clusters of v7.5.0 or later versions. Before deployment, make sure your TiDB cluster meets this version requirement.
+The new architecture TiCDC can only be deployed in TiDB clusters of v7.5.0 or later versions. Before deployment, make sure your TiDB cluster meets this version requirement.
 
-You can deploy the TiCDC new architecture using TiUP or TiDB Operator.
+You can deploy the new architecture TiCDC using TiUP or TiDB Operator.
+
+### Deploy a new TiDB cluster with new architecture TiCDC nodes
 
 <SimpleTab>
 <div label="TiUP">
 
-To deploy the TiCDC new architecture using TiUP, take the following steps:
+When deploying a new TiDB cluster of v8.5.4 or later using TiUP, you can also deploy TiCDC nodes with the new architecture enabled at the same time. To do so, you only need to add the TiCDC-related section and set `newarch: true` in the configuration file that TiUP uses to start the TiDB cluster. The following is an example:
+
+```yaml
+cdc_servers:
+  - host: 10.0.1.20
+    config:
+      newarch: true
+  - host: 10.0.1.21
+    config:
+      newarch: true
+```
+
+For more TiCDC deployment information, see [Deploy a new TiDB cluster that includes TiCDC using TiUP](/ticdc/deploy-ticdc.md#deploy-a-new-tidb-cluster-that-includes-ticdc-using-tiup).
+
+</div>
+<div label="TiDB Operator">
+
+When deploying a new TiDB cluster of v8.5.4 or later using TiDB Operator, you can also deploy TiCDC nodes with the new architecture enabled at the same time. To do so, you only need to add the TiCDC-related section and set `newarch = true` in the cluster configuration file. The following is an example:
+
+```yaml
+spec:
+    ticdc:
+    baseImage: pingcap/ticdc
+    version: v8.5.4
+    replicas: 3
+    config:
+        newarch = true
+```
+
+For more TiCDC deployment information, see [Fresh TiCDC deployment](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-ticdc/#fresh-ticdc-deployment).
+
+</div>
+</SimpleTab>
+
+### Deploy new architecture TiCDC nodes in an existing TiDB cluster
+
+<SimpleTab>
+<div label="TiUP">
+
+To deploy the new architecture TiCDC using TiUP, take the following steps:
 
 1. If your TiDB cluster does not have TiCDC nodes yet, refer to [Scale out a TiCDC cluster](/scale-tidb-using-tiup.md#scale-out-a-ticdc-cluster) to add new TiCDC nodes in the cluster. Otherwise, skip this step.
 
-2. Download the TiCDC binary package for the new architecture.
+2. If your TiDB cluster version is earlier than v8.5.4, you need to manually download the binary package of new architecture TiCDC, and then patch the downloaded file to your TiDB cluster. Otherwise, skip this step.
 
-    The download link follows this format: `https://tiup-mirrors.pingcap.com/cdc-${version}-${os}-${arch}.tar.gz`, where `${version}` is the TiCDC version, `${os}` is your operating system, and `${arch}` is the platform the component runs on (`amd64` or `arm64`).
+    The download link follows this format: `https://tiup-mirrors.pingcap.com/cdc-${version}-${os}-${arch}.tar.gz`, where `${version}` is the TiCDC version（see [new architecture TiCDC releases](https://github.com/pingcap/ticdc/releases) for available versions）, `${os}` is your operating system, and `${arch}` is the platform the component runs on (`amd64` or `arm64`).
 
     For example, to download the binary package of TiCDC v8.5.4-release.1 for Linux (x86-64), run the following command:
 
@@ -158,9 +199,9 @@ To deploy the TiCDC new architecture using TiUP, take the following steps:
 </div>
 <div label="TiDB Operator">
 
-To deploy the TiCDC new architecture using TiDB Operator, take the following steps:
+To deploy new architecture TiCDC nodes in an existing TiDB cluster using TiDB Operator, take the following steps:
 
-- If your TiDB cluster does not include a TiCDC component, refer to [Add TiCDC to an existing TiDB cluster](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-ticdc/#add-ticdc-to-an-existing-tidb-cluster) to add new TiCDC nodes. When doing so, specify the TiCDC image version as the new architecture version in the cluster configuration file.
+- If your TiDB cluster does not include a TiCDC component, refer to [Add TiCDC to an existing TiDB cluster](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-ticdc/#add-ticdc-to-an-existing-tidb-cluster) to add new TiCDC nodes. When doing so, specify the TiCDC image version as the new architecture version in the cluster configuration file. For available versions, see [new architecture TiCDC releases](https://github.com/pingcap/ticdc/releases).
 
     For example:
 
@@ -219,68 +260,6 @@ To deploy the TiCDC new architecture using TiDB Operator, take the following ste
 </div>
 </SimpleTab>
 
-### Deploy a New TiDB Cluster with TiCDC New Architecture Enabled
-
-<SimpleTab>
-<div label="TiUP">
-
-When deploying a new TiDB cluster of v8.5.4 or later using TiUP, you can deploy and enable the new architecture of the TiCDC component simultaneously. You need to add the TiCDC component-related section to the TiUP configuration file when starting the TiDB cluster and set `newarch: true` to enable the new architecture. The following is an example:
-
-```yaml
-cdc_servers:
-  - host: 10.0.1.20
-    config:
-      newarch: true
-  - host: 10.0.1.21
-    config:
-      newarch: true
-```
-
-For more TiCDC deployment information, refer to [Deploy a New TiDB Cluster with TiCDC Using TiUP](/ticdc/deploy-ticdc.md#deploy-a-new-tidb-cluster-with-ticdc-using-tiup).
-
-</div>
-<div label="TiDB Operator">
-
-When deploying a new TiDB cluster of v8.5.4 or later using TiDB Operator, you can deploy and enable the new architecture of the TiCDC component simultaneously. You need to add the TiCDC component-related section to the cluster configuration file and set `newarch: true` to enable the new architecture. The following is an example:
-
-```yaml
-spec:
-    ticdc:
-    baseImage: pingcap/ticdc
-    version: v8.5.4
-    replicas: 3
-    config:
-        newarch = true
-```
-
-For more TiCDC deployment information, refer to [Deploy a New TiDB Cluster with TiCDC](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-ticdc/#deploy-a-new-tidb-cluster-with-ticdc).
-
-</div>
-</SimpleTab>
-
-### Deploy TiCDC with New Architecture in an Existing TiDB Cluster
-
-<SimpleTab>
-<div label="TiUP">
-
-The following are the steps to deploy TiCDC with the new architecture in an existing TiDB cluster using TiUP:
-
-1.  If your TiDB cluster does not have TiCDC nodes, refer to [Scale Out TiCDC Nodes](/scale-tidb-using-tiup.md#scale-out-ticdc-nodes) to scale out new TiCDC nodes in the cluster; otherwise, skip this step.
-
-2.  If your TiDB cluster is an earlier version than v8.5.4, you need to manually download the TiCDC new architecture offline package in the following way and dynamically replace the downloaded TiCDC binary file to your TiDB cluster; otherwise, skip this step.
-
-    The offline package download link format is `https://tiup-mirrors.pingcap.com/cdc-${version}-${os}-${arch}.tar.gz`. Among them, `${version}` is the TiCDC version number (for version number information, refer to [TiCDC New Architecture Version Release List](https://github.com/pingcap/ticdc/releases)), `${os}` is your operating system, and `${arch}` is the platform on which the component runs (`amd64` or `arm64`).
-
-    For example, you can use the following command to download the offline package of TiCDC v8.5.4-release.1 for the Linux system x86-64 architecture:
-
-    ```shell
-    wget https://tiup-mirrors.pingcap.com/cdc-v8.5.4-release.1-linux-amd64.tar.gz
-    ```
-
-3.  If there are already Changefeeds in the cluster, refer to [Stop a replication task](/ticdc/ticdc-manage-changefeed.md#stop-a-replication-task) to pause all Changefeed synchronization tasks. For example:
-
-    ```shell
-
 ## Use the new architecture
 
 After deploying the TiCDC nodes with the new architecture, you can continue using the same commands as in the classic architecture. There is no need to learn new commands or modify the commands used in the classic architecture.
@@ -301,7 +280,7 @@ For more command usage methods and details, see [Manage Changefeeds](/ticdc/ticd
 
 ## Monitoring
 
-The monitoring dashboard for the TiCDC new architecture is **TiCDC-New-Arch**. For TiDB clusters of v8.5.4 and later versions, this monitoring dashboard has been integrated into Grafana during cluster deployment or upgrade and does not require manual operation. If your cluster version is earlier than v8.5.4, you need to manually import the [TiCDC monitoring metrics file](https://github.com/pingcap/ticdc/blob/master/metrics/grafana/ticdc_new_arch.json) to enable monitoring.
+The monitoring dashboard for the TiCDC new architecture is **TiCDC-New-Arch**. For TiDB clusters of v8.5.4 and later versions, this monitoring dashboard is integrated into Grafana during cluster deployment or upgrade, so no manual operation is required. If your cluster version is earlier than v8.5.4, you need to manually import the [TiCDC monitoring metrics file](https://github.com/pingcap/ticdc/blob/master/metrics/grafana/ticdc_new_arch.json) to enable monitoring.
 
 For importing steps and detailed descriptions of each monitoring metric, see [Metrics for TiCDC in the new architecture](/ticdc/monitor-ticdc.md#metrics-for-ticdc-in-the-new-architecture).
 
