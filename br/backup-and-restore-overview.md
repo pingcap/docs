@@ -26,7 +26,7 @@ This section describes the prerequisites for using TiDB backup and restore, incl
 - PITR does not support restoring the data of user tables or privilege tables from system tables.
 - BR does not support running multiple backup tasks on a cluster **at the same time**.
 - It is not recommended to back up tables that are being restored, because the backed-up data might be problematic.
-- When a PITR is running, you cannot run a log backup task or use TiCDC to replicate data to a downstream cluster.
+- When restoring a cluster using PITR, you cannot run a log backup task or use TiCDC to replicate data to a downstream cluster.
 
 ### Some tips
 
@@ -117,7 +117,7 @@ Backup and restore might go wrong when some TiDB features are enabled or disable
 | New collation  | [#352](https://github.com/pingcap/br/issues/352)       | Make sure that the value of the `new_collation_enabled` variable in the `mysql.tidb` table during restore is consistent with that during backup. Otherwise, inconsistent data index might occur and checksum might fail to pass. For more information, see [FAQ - Why does BR report `new_collations_enabled_on_first_bootstrap` mismatch?](/faq/backup-and-restore-faq.md#why-is-new_collation_enabled-mismatch-reported-during-restore). |
 | Global temporary tables | | Make sure that you are using v5.3.0 or a later version of BR to back up and restore data. Otherwise, an error occurs in the definition of the backed global temporary tables. |
 | TiDB Lightning Physical Import| | If the upstream database uses the physical import mode of TiDB Lightning, data cannot be backed up in log backup. It is recommended to perform a full backup after the data import. For more information, see [When the upstream database imports data using TiDB Lightning in the physical import mode, the log backup feature becomes unavailable. Why?](/faq/backup-and-restore-faq.md#when-the-upstream-database-imports-data-using-tidb-lightning-in-the-physical-import-mode-the-log-backup-feature-becomes-unavailable-why).|
-| TiCDC | | BR v8.2.0 and later: if the target cluster to be restored has a changefeed and the changefeed [CheckpointTS](/ticdc/ticdc-architecture.md#checkpointts) is earlier than the BackupTS, BR does not perform the restoration. BR versions before v8.2.0: if the target cluster to be restored has any active TiCDC changefeeds, BR does not perform the restoration. |
+| TiCDC | | BR v8.2.0 and later: if the target cluster to be restored has a changefeed and the changefeed [CheckpointTS](/ticdc/ticdc-classic-architecture.md#checkpointts) is earlier than the BackupTS, BR does not perform the restoration. BR versions before v8.2.0: if the target cluster to be restored has any active TiCDC changefeeds, BR does not perform the restoration. |
 | Vector search | | Make sure that you are using v8.4.0 or a later version of BR to back up and restore data. Restoring tables with [vector data types](/vector-search/vector-search-data-types.md) to TiDB clusters earlier than v8.4.0 is not supported. |
 
 ### Version compatibility
@@ -150,23 +150,26 @@ This section introduces the BR compatibility information for all [Long-Term Supp
 The following table lists the compatibility matrix for full backups. Note that all information in the table applies to newly created clusters. For clusters upgraded from a version earlier than v7.2.0 to v7.2.0 or later, their behavior is consistent with that of backups from v7.1.0.
 
 | Backup version | Compatible restore versions | Incompatible restore versions |
-|:--|:--|:--|
-| v6.5.0 | 7.1.0 | v7.5.0 and later |
-| v7.1.0 | - | v7.5.0 and later |
-| v7.5.0 | v7.5.0 and later | - |
-| v8.1.0 | v8.1.0 and later | - |
+|:---------|:----------------|:------------------|
+| v6.5.0    | v7.1.0           | v7.5.0 and later  |
+| v7.1.0    | -                | v7.5.0 and later  |
+| v7.5.0    | v7.5.0 and later | -                 |
+| v8.1.0    | v8.1.0 and later | -                 |
+| v8.5.0    | v8.5.0 and later | -                 |
 
 The following table lists the compatibility matrix for log backups. Note that all information in the table applies to newly created clusters. For clusters upgraded from a version earlier than v7.2.0 to v7.2.0 or later, their behavior is consistent with that of backups from v7.1.0.
 
 | Backup version | Compatible restore versions | Incompatible restore versions |
-|:--|:--|:--|
-| v6.5.0 | 7.1.0 | v7.5.0 and later |
-| v7.1.0 | - | v7.5.0 and later |
-| v7.5.0 | v7.5.0 and later | - |
-| v8.1.0 | v8.1.0 and later | - |
+|:---------|:----------------|:------------------|
+| v6.5.0    | v7.1.0           | v7.5.0 and later  |
+| v7.1.0    | -                | v7.5.0 and later  |
+| v7.5.0    | v7.5.0 and later | -                 |
+| v8.1.0    | v8.1.0 and later | -                 |
+| v8.5.0    | v8.5.0 and later | -                 |
+
 > **Note:**
 >
-> - When only user data is backed up (full backup or log backup), all versions are compatible with each other.
+> - When only data of non-system tables is backed up (full backup or log backup), all versions are compatible with each other.
 > - In scenarios where restoring the `mysql` system table is incompatible, you can resolve the problem by setting `--with-sys-table=false` to skip restoring all system tables, or use a more fine-grained filter to just skip incompatible system tables, for example: `--filter '*.*' --filter "__TiDB_BR_Temporary_*.*" --filter '!mysql.*' --filter 'mysql.bind_info' --filter 'mysql.user' --filter 'mysql.global_priv' --filter 'mysql.global_grants' --filter 'mysql.default_roles' --filter 'mysql.role_edges' --filter '!sys.*' --filter '!INFORMATION_SCHEMA.*' --filter '!PERFORMANCE_SCHEMA.*' --filter '!METRICS_SCHEMA.*' --filter '!INSPECTION_SCHEMA.*'`.
 > - `-` means that there are no compatibility restrictions for the corresponding scenario.
 

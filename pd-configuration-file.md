@@ -78,7 +78,7 @@ This document only describes parameters that are not included in command-line pa
 ### `lease`
 
 + The timeout of the PD Leader Key lease. After the timeout, the system re-elects a Leader.
-+ Default value: `3`
++ Default value: Starting from v8.5.2, the default value is `5`. Before v8.5.2, the default value is `3`. 
 + Unit: second
 
 ### `quota-backend-bytes`
@@ -96,6 +96,22 @@ This document only describes parameters that are not included in command-line pa
 
 + The time interval for automatic compaction of the meta-information database when `auto-compaction-retention` is `periodic`. When the compaction mode is set to `revision`, this parameter indicates the version number for the automatic compaction.
 + Default value: 1h
+
+### `tick-interval`
+
++ Equivalent to the `heartbeat-interval` configuration item of etcd. It controls the Raft heartbeat interval between embedded etcd instances in different PD nodes. A smaller value accelerates failure detection but increases network load.
++ Default value: `500ms`
+
+### `election-interval`
+
++ Equivalent to the `election-timeout` configuration item of etcd. It controls the election timeout for embedded etcd instances in PD nodes. If an etcd instance does not receive a valid heartbeat from other etcd instances within this period, it initiates a Raft election.
++ Default value: `3000ms`
++ This value must be at least five times the [`tick-interval`](#tick-interval). For example, if `tick-interval` is `500ms`, `election-interval` must be greater than or equal to `2500ms`.
+
+### `enable-prevote`
+
++ Equivalent to the `pre-vote` configuration item of etcd. It controls whether the embedded etcd in the PD node enables Raft pre-vote. When enabled, etcd performs an additional election phase to check whether enough votes can be obtained to win the election, minimizing service disruption.
++ Default value: `true`
 
 ### `force-new-cluster`
 
@@ -296,6 +312,12 @@ Configuration items related to scheduling
 + Controls the time interval between the `split` and `merge` operations on the same Region. That means a newly split Region will not be merged for a while.
 + Default value: `1h`
 
+### `max-movable-hot-peer-size` <span class="version-mark">New in v6.1.0</span>
+
++ Controls the maximum Region size that can be scheduled for hot Region scheduling.
++ Default value: `512`
++ Unit: MiB
+
 ### `max-snapshot-count`
 
 + Controls the maximum number of snapshots that a single store receives or sends at the same time. PD schedulers depend on this configuration to prevent the resources used for normal traffic from being preempted.
@@ -413,6 +435,16 @@ Configuration items related to scheduling
 + Specifies how many days the hot Region information is retained.
 + Default value: `7`
 
+### `enable-heartbeat-breakdown-metrics` <span class="version-mark">New in v8.0.0</span>
+
++ Controls whether to enable breakdown metrics for Region heartbeats. These metrics measure the time consumed in each stage of Region heartbeat processing, facilitating analysis through monitoring.
++ Default value: `true`
+
+### `enable-heartbeat-concurrent-runner` <span class="version-mark">New in v8.0.0</span>
+
++ Controls whether to enable asynchronous concurrent processing for Region heartbeats. When enabled, an independent executor handles Region heartbeat requests asynchronously and concurrently, which can improve heartbeat processing throughput and reduce latency.
++ Default value: `true`
+
 ## `replication`
 
 Configuration items related to replicas
@@ -466,6 +498,12 @@ Configuration items related to labels, which only support the `reject-leader` ty
 ## `dashboard`
 
 Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.md) built in PD.
+
+### `disable-custom-prom-addr`
+
++ Whether to disable configuring a custom Prometheus data source address in [TiDB Dashboard](/dashboard/dashboard-intro.md).
++ Default value: `false`
++ When it is set to `true`, if you configure a custom Prometheus data source address in TiDB Dashboard, TiDB Dashboard reports an error.
 
 ### `tidb-cacert-path`
 

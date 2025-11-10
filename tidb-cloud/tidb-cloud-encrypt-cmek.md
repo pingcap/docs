@@ -11,13 +11,15 @@ Once CMEK is enabled for a project, all clusters created within that project enc
 
 > **Note:**
 >
-> Currently, this feature is only available upon request. If you need to try out this feature, contact [support](/tidb-cloud/tidb-cloud-support.md).
+> - CMEK is similar to Bring Your Own Key (BYOK). With BYOK, you typically generate the key locally and upload it. However, TiDB Cloud only supports keys generated within [AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html).
+> - Currently, this feature is only available upon request. If you need to try out this feature, contact [support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Restrictions
 
 - Currently, TiDB Cloud only supports using AWS KMS to provide CMEK.
 - To use CMEK, you need to enable CMEK when creating a project and complete CMEK-related configurations before creating a cluster. You cannot enable CMEK for existing projects.
-- Currently, in CMEK-enabled projects, you can only create [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS. TiDB Cloud Dedicated clusters hosted on Google Cloud and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters are not supported.
+- Currently, in CMEK-enabled projects, you can only create [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS. TiDB Cloud Dedicated clusters hosted on other cloud providers and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters are not supported.
+- Currently, in CMEK-enabled projects, [dual region backup](/tidb-cloud/backup-and-restore-concepts.md#dual-region-backup) is not supported.
 - Currently, for a specific project, you can only enable CMEK for one AWS region. Once you have configured it, you cannot create clusters in other regions within the same project.
 
 ## Enable CMEK
@@ -33,9 +35,9 @@ If you are in the `Organization Owner` role of your organization, you can create
 
 To create a CMEK-enabled project, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
-2. Click **Organization Settings**, and then click the **Projects** tab in the left navigation pane. The **Projects** tab is displayed.
-3. Click **Create New Project** to open the project creation dialog.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Projects**.
+3. On the **Projects** page, click **Create New Project** in the upper-right corner.
 4. Fill in a project name.
 5. Choose to enable the CMEK capability of the project.
 6. Click **Confirm** to complete the project creation.
@@ -63,9 +65,9 @@ You can complete the CMEK configuration of the project using either the TiDB Clo
 
 To complete the CMEK configuration of the project, take the following steps:
 
-1. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-2. Click **Encryption Access** to enter the encryption management page of the project.
-3. Click **Create Encryption Key** to enter the key creation page.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Project Settings** > **Encryption Access**.
+3. On the **Encryption Access** page, click **Create Encryption Key** to enter the key creation page.
 4. The key provider only supports AWS KMS. You can choose the region where the encryption key can be used.
 5. Copy and save the JSON file as `ROLE-TRUST-POLICY.JSON`. This file describes the trust relationship.
 6. Add this trust relationship to the key policy of AWS KMS. For more information, refer to [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html).

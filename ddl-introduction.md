@@ -1,9 +1,9 @@
 ---
-title: Execution Principles and Best Practices of DDL Statements
+title: Best Practices for DDL Execution in TiDB
 summary: Learn about how DDL statements are implemented in TiDB, the online change process, and best practices.
 ---
 
-# Execution Principles and Best Practices of DDL Statements
+# Best Practices for DDL Execution in TiDB
 
 This document provides an overview of the execution principles and best practices related to DDL statements in TiDB. The principles include the DDL Owner module and the online DDL change process.
 

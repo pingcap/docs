@@ -138,10 +138,6 @@ The following TiKV configuration items can be modified dynamically:
 | `raftstore.max-apply-unpersisted-log-limit` | The maximum number of committed but not persisted Raft logs that can be applied |
 | `raftstore.split-region-check-tick-interval` | The time interval at which to check whether the Region split is needed |
 | `raftstore.region-split-check-diff` | The maximum value by which the Region data is allowed to exceed before Region split |
-| `raftstore.region-compact-check-interval` | The time interval at which to check whether it is necessary to manually trigger RocksDB compaction |
-| `raftstore.region-compact-check-step` | The number of Regions checked at one time for each round of manual compaction |
-| `raftstore.region-compact-min-tombstones` | The number of tombstones required to trigger RocksDB compaction |
-| `raftstore.region-compact-tombstones-percent` | The proportion of tombstone required to trigger RocksDB compaction |
 | `raftstore.pd-heartbeat-tick-interval` | The time interval at which a Region's heartbeat to PD is triggered |
 | `raftstore.pd-store-heartbeat-tick-interval` | The time interval at which a store's heartbeat to PD is triggered |
 | `raftstore.snap-mgr-gc-tick-interval` | The time interval at which the recycle of expired snapshot files is triggered |
@@ -186,8 +182,8 @@ The following TiKV configuration items can be modified dynamically:
 | `quota.foreground-write-bandwidth` | The soft limit on the bandwidth with which foreground transactions write data |
 | `quota.foreground-read-bandwidth` | The soft limit on the bandwidth with which foreground transactions and the Coprocessor read data |
 | `quota.background-cpu-time` | The soft limit on the CPU resources used by TiKV background to process read and write requests |
-| `quota.background-write-bandwidth` | The soft limit on the bandwidth with which background transactions write data (not effective yet) |
-| `quota.background-read-bandwidth` | The soft limit on the bandwidth with which background transactions and the Coprocessor read data (not effective yet) |
+| `quota.background-write-bandwidth` | The soft limit on the bandwidth with which background transactions write data |
+| `quota.background-read-bandwidth` | The soft limit on the bandwidth with which background transactions and the Coprocessor read data |
 | `quota.enable-auto-tune` | Whether to enable the auto-tuning of quota. If this configuration item is enabled, TiKV dynamically adjusts the quota for the background requests based on the load of TiKV instances.  |
 | `quota.max-delay-duration` | The maximum time that a single read or write request is forced to wait before it is processed in the foreground |
 | `gc.ratio-threshold` | The threshold at which Region GC is skipped (the number of GC versions/the number of keys) |
@@ -195,6 +191,12 @@ The following TiKV configuration items can be modified dynamically:
 | `gc.max-write-bytes-per-sec` | The maximum bytes that can be written into RocksDB per second |
 | `gc.enable-compaction-filter` | Whether to enable compaction filter |
 | `gc.compaction-filter-skip-version-check` | Whether to skip the cluster version check of compaction filter (not released) |
+| `gc.auto-compaction.check-interval` | The interval at which TiKV checks whether to trigger automatic (RocksDB) compaction |
+| `gc.auto-compaction.tombstone-num-threshold` | The number of RocksDB tombstones required to trigger TiKV automatic (RocksDB) compaction |
+| `gc.auto-compaction.tombstone-percent-threshold` | The percentage of RocksDB tombstones required to trigger TiKV automatic (RocksDB) compaction |
+| `gc.auto-compaction.redundant-rows-threshold` | The number of redundant MVCC rows required to trigger TiKV automatic (RocksDB) compaction |
+| `gc.auto-compaction.redundant-rows-percent-threshold` | The percentage of redundant MVCC rows required to trigger TiKV automatic (RocksDB) compaction |
+| `gc.auto-compaction.bottommost-level-force` | Whether to force compaction on the bottommost level files in RocksDB |
 | `{db-name}.max-total-wal-size` | The maximum size of total WAL |
 | `{db-name}.max-background-jobs` | The number of background threads in RocksDB |
 | `{db-name}.max-background-flushes` | The maximum number of flush threads in RocksDB |
@@ -283,11 +285,11 @@ The following PD configuration items can be modified dynamically:
 | `schedule.max-merge-region-size` | Controls the size limit of `Region Merge` (in MiB) |
 | `schedule.max-merge-region-keys` | Specifies the maximum numbers of the `Region Merge` keys |
 | `schedule.patrol-region-interval` | Determines the frequency at which the checker inspects the health state of a Region |
-| `scheduler.patrol-region-worker-count` | Controls the number of concurrent operators created by the checker when inspecting the health state of a Region |
 | `schedule.split-merge-interval` | Determines the time interval of performing split and merge operations on the same Region |
 | `schedule.max-snapshot-count` | Determines the maximum number of snapshots that a single store can send or receive at the same time |
 | `schedule.max-pending-peer-count` | Determines the maximum number of pending peers in a single store |
 | `schedule.max-store-down-time` | The downtime after which PD judges that the disconnected store cannot be recovered |
+| `schedule.max-store-preparing-time` | Controls the maximum waiting time for the store to go online |
 | `schedule.leader-schedule-policy` | Determines the policy of Leader scheduling |
 | `schedule.leader-schedule-limit` | The number of Leader scheduling tasks performed at the same time |
 | `schedule.region-schedule-limit` | The number of Region scheduling tasks performed at the same time |
@@ -305,16 +307,42 @@ The following PD configuration items can be modified dynamically:
 | `schedule.enable-location-replacement` | Determines whether to enable isolation level check |
 | `schedule.enable-cross-table-merge` | Determines whether to enable cross-table merge |
 | `schedule.enable-one-way-merge` | Enables one-way merge, which only allows merging with the next adjacent Region |
+| `schedule.region-score-formula-version` | Controls the version of the Region score formula |
+| `schedule.scheduler-max-waiting-operator` | Controls the number of waiting operators in each scheduler |
+| `schedule.enable-debug-metrics` | Enables the metrics for debugging |
+| `schedule.enable-heartbeat-concurrent-runner` | Enables asynchronous concurrent processing for Region heartbeats |
+| `schedule.enable-heartbeat-breakdown-metrics` | Enables breakdown metrics for Region heartbeats to measure the time consumed in each stage of Region heartbeat processing |
+| `schedule.enable-joint-consensus` | Controls whether to use Joint Consensus for replica scheduling |
+| `schedule.hot-regions-write-interval` | The time interval at which PD stores hot Region information |
+| `schedule.hot-regions-reserved-days` | Specifies how many days the hot Region information is retained |
+| `schedule.max-movable-hot-peer-size` | Controls the maximum Region size that can be scheduled for hot Region scheduling. |
+| `schedule.store-limit-version` | Controls the version of [store limit](/configure-store-limit.md) |
+| `schedule.patrol-region-worker-count` | Controls the number of concurrent operators created by the checker when inspecting the health state of a Region |
 | `replication.max-replicas` | Sets the maximum number of replicas |
 | `replication.location-labels` | The topology information of a TiKV cluster |
 | `replication.enable-placement-rules` | Enables Placement Rules |
 | `replication.strictly-match-label` | Enables the label check |
+| `replication.isolation-level` | The minimum topological isolation level of a TiKV cluster |
 | `pd-server.use-region-storage` | Enables independent Region storage |
 | `pd-server.max-gap-reset-ts` | Sets the maximum interval of resetting timestamp (BR) |
 | `pd-server.key-type` | Sets the cluster key type |
 | `pd-server.metric-storage` | Sets the storage address of the cluster metrics |
 | `pd-server.dashboard-address` | Sets the dashboard address |
+| `pd-server.flow-round-by-digit` | Specifies the number of lowest digits to round for the Region flow information |
+| `pd-server.min-resolved-ts-persistence-interval` | Determines the interval at which the minimum resolved timestamp is persistent to the PD |
+| `pd-server.server-memory-limit` | The memory limit ratio for a PD instance |
+| `pd-server.server-memory-limit-gc-trigger` | The threshold ratio at which PD tries to trigger GC |
+| `pd-server.enable-gogc-tuner` | Controls whether to enable the GOGC Tuner |
+| `pd-server.gc-tuner-threshold` | The maximum memory threshold ratio for tuning GOGC |
 | `replication-mode.replication-mode` | Sets the backup mode |
+| `replication-mode.dr-auto-sync.label-key` | Distinguishes different AZs and needs to match Placement Rules |
+| `replication-mode.dr-auto-sync.primary` | The primary AZ |
+| `replication-mode.dr-auto-sync.dr` | The disaster recovery (DR) AZ |
+| `replication-mode.dr-auto-sync.primary-replicas` | The number of Voter replicas in the primary AZ |
+| `replication-mode.dr-auto-sync.dr-replicas` | The number of Voter replicas in the disaster recovery (DR) AZ |
+| `replication-mode.dr-auto-sync.wait-store-timeout` | The waiting time for switching to asynchronous replication mode when network isolation or failure occurs |
+| `replication-mode.dr-auto-sync.wait-recover-timeout` | The waiting time for switching back to the `sync-recover` status after the network recovers |
+| `replication-mode.dr-auto-sync.pause-region-split` | Controls whether to pause Region split operations in the `async_wait` and `async` statuses |
 
 For detailed parameter description, refer to [PD Configuration File](/pd-configuration-file.md).
 

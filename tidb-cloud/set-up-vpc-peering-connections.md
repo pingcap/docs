@@ -7,7 +7,7 @@ summary: Learn how to connect to TiDB Cloud Dedicated via VPC peering.
 
 > **Note:**
 >
-> VPC peering connection is only available for TiDB Cloud Dedicated clusters. You cannot connect to [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) using VPC peering.
+> VPC peering connection is only available for TiDB Cloud Dedicated clusters hosted on AWS and Google Cloud. You cannot use VPC peering to connect to [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on Azure and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
 To connect your application to TiDB Cloud via VPC peering, you need to set up [VPC peering](/tidb-cloud/tidb-cloud-glossary.md#vpc-peering) with TiDB Cloud. This document walks you through setting up VPC peering connections [on AWS](#set-up-vpc-peering-on-aws) and [on Google Cloud](#set-up-vpc-peering-on-google-cloud) and connecting to TiDB Cloud via a VPC peering.
 
@@ -27,9 +27,9 @@ Before adding VPC Peering requests to a region, you must set a CIDR for that reg
 
 You can set the CIDR when creating the first TiDB Cloud Dedicated cluster. If you want to set the CIDR before creating the cluster, perform the following operations:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, click the **Project CIDR** tab, and then select **AWS** or **Google Cloud** according to your cloud provider.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Project Settings** > **Network Access**.
+3. On the **Network Access** page, click the **Project CIDR** tab, and then select **AWS** or **Google Cloud** according to your cloud provider.
 4. In the upper-right corner, click **Create CIDR**. Specify the region and CIDR value in the **Create AWS CIDR** or **Create Google Cloud CIDR** dialog, and then click **Confirm**.
 
     ![Project-CIDR4](/media/tidb-cloud/Project-CIDR4.png)
@@ -41,7 +41,7 @@ You can set the CIDR when creating the first TiDB Cloud Dedicated cluster. If yo
     >     - 10.250.0.0 - 10.251.255.255
     >     - 172.16.0.0 - 172.31.255.255
     >     - 192.168.0.0 - 192.168.255.255
-    > - For Google Cloud Region, it is recommended to configure an IP range size between `/19` and `/20`. If you want to configure an IP range size between `/16` and `/18`, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). Supported network addresses include:
+    > - For Google Cloud Region, it is recommended to configure an IP range size between `/19` and `/20`. Supported network addresses include:
     >     - 10.250.0.0 - 10.251.255.255
     >     - 172.16.0.0 - 172.17.255.255
     >     - 172.30.0.0 - 172.31.255.255
@@ -64,9 +64,9 @@ You can add VPC peering requests on either the project-level **Network Access** 
 <SimpleTab>
 <div label="VPC peering setting on the project-level Network Access page">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, and click the **VPC Peering** > **AWS** tab.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Project Settings** > **Network Access**.
+3. On the **Network Access** page, click the **VPC Peering**tab, and then click the **AWS** sub-tab.
 
     The **VPC Peering** configuration is displayed by default.
 
@@ -90,17 +90,17 @@ You can add VPC peering requests on either the project-level **Network Access** 
 
 1. Open the overview page of the target cluster.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
         > **Tip:**
         >
-        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
     2. Click the name of your target cluster to go to its overview page.
 
-2. In the left navigation pane, click **Networking**, and then click **Create VPC Peering**.
+2. In the left navigation pane, click **Settings** > **Networking**.
 
-3. Fill in the required information of your existing AWS VPC:
+3. On the **Networking** page, click **Create VPC Peering**, and then fill in the required information of your existing AWS VPC:
 
     - Your VPC Region
     - AWS Account ID
@@ -254,9 +254,9 @@ You can add VPC peering requests on either the project-level **Network Access** 
 <SimpleTab>
 <div label="VPC peering setting on the project-level Network Access page">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, and click the **VPC Peering** > **Google Cloud** tab.
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Project Settings** > **Network Access**.
+3. On the **Network Access** page, click the **VPC Peering** tab, and then click the **Google Cloud** sub-tab.
 
     The **VPC Peering** configuration is displayed by default.
 
@@ -279,17 +279,17 @@ You can add VPC peering requests on either the project-level **Network Access** 
 
 1. Open the overview page of the target cluster.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
         > **Tip:**
         >
-        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
 
     2. Click the name of your target cluster to go to its overview page.
 
-2. In the left navigation pane, click **Networking**, and then click **Create VPC Peering**.
+2. In the left navigation pane, click **Settings** > **Networking**.
 
-3. Fill in the required information of your existing Google Cloud VPC:
+3. On the **Networking** page, click **Create VPC Peering**, and then fill in the required information of your existing Google Cloud VPC:
 
     > **Tip:**
     >
@@ -322,7 +322,7 @@ Now you have successfully set up the VPC peering connection. Next, [connect to t
 
 ## Connect to the TiDB cluster
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target cluster to go to its overview page.
+1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner, and select **VPC Peering** from the **Connection Type** drop-down list.
 

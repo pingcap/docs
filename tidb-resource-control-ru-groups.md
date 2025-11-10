@@ -8,7 +8,7 @@ aliases: ['/tidb/dev/tidb-resource-control/']
 
 > **Note:**
 >
-> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 As a cluster administrator, you can use the resource control feature to create resource groups, set quotas for resource groups, and bind users to those groups.
 
@@ -102,7 +102,7 @@ Request Unit (RU) is a unified abstraction unit in TiDB for system resources, wh
 > **Note:**
 >
 > - Each write operation is eventually replicated to all replicas (by default, TiKV has 3 replicas). Each replication operation is considered a different write operation.
-> - The preceding table lists only the resources involved in RU calculation for TiDB Self-Managed clusters, excluding the network and storage consumption. For TiDB Cloud Serverless RUs, see [TiDB Cloud Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/).
+> - The preceding table lists only the resources involved in RU calculation for TiDB Self-Managed clusters, excluding the network and storage consumption. For {{{ .starter }}} RUs, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
 > - Currently, TiFlash resource control only considers SQL CPU, which is the CPU time consumed by the execution of pipeline tasks for queries, and read request payload.
 
 ## Parameters for resource control
@@ -185,7 +185,7 @@ You can delete a resource group by using [`DROP RESOURCE GROUP`](/sql-statements
 
 The following is an example of how to create a resource group.
 
-1. Create a resource group `rg1`. The resource limit is 500 RUs per second and allows applications in this resource group to overrun resources.
+1. Create a resource group `rg1`. The resource limit is 500 RUs per second and allows applications in this resource group to overrun resources. If no value is specified for `BURSTABLE`, the `MODERATED` mode is enabled by default.
 
     ```sql
     CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 BURSTABLE;
@@ -201,6 +201,12 @@ The following is an example of how to create a resource group.
 
     ```sql
     CREATE RESOURCE GROUP IF NOT EXISTS rg3 RU_PER_SEC = 100 PRIORITY = HIGH;
+    ```
+
+4. Create a `rg4` resource group with a quota of 500 RUs per second, and allow applications in this group to use additional resources beyond the quota without limitation by setting the `BURSTABLE` mode to `UNLIMITED`.
+
+    ```sql 
+    CREATE RESOURCE GROUP IF NOT EXISTS rg4 RU_PER_SEC = 500 BURSTABLE=UNLIMITED; 
     ```
 
 ### Bind resource groups
@@ -232,7 +238,7 @@ If there are too many requests that result in insufficient resources for the res
 > **Note:**
 >
 > - When you bind a user to a resource group by using `CREATE USER` or `ALTER USER`, it will not take effect for the user's existing sessions, but only for the user's new sessions.
-> - TiDB automatically creates a `default` resource group during cluster initialization. For this resource group, the default value of `RU_PER_SEC` is `UNLIMITED` (equivalent to the maximum value of the `INT` type, that is, `2147483647`) and it is in `BURSTABLE` mode. Statements that are not bound to a resource group are automatically bound to this resource group. This resource group does not support deletion, but you can modify the configuration of its RU.
+> - TiDB automatically creates a `default` resource group during cluster initialization. For this resource group, the default value of `RU_PER_SEC` is `UNLIMITED` (equivalent to the maximum value of the `INT` type, that is, `2147483647`) and its `BURSTABLE` is `UNLIMITED` mode. All requests that are not bound to any resource group are automatically bound to this `default` resource group. You cannot delete the `default` resource group, but can modify its RU configuration.
 
 To unbind users from a resource group, you can simply bind them to the `default` group again as follows:
 

@@ -1,9 +1,13 @@
 ---
-title: Use Cluster Resource
+title: Use Cluster Resource (Deprecated)
 summary: Learn how to use the cluster resource to create and modify a TiDB Cloud cluster.
 ---
 
-# Use Cluster Resource
+# Use Cluster Resource (Deprecated)
+
+> **Warning:**
+>
+> Starting from [TiDB Cloud Terraform Provider](https://registry.terraform.io/providers/tidbcloud/tidbcloud) v0.4.0, the `tidbcloud_cluster` resource is deprecated. It is recommended to use the `tidbcloud_dedicated_cluster` or `tidbcloud_serverless_cluster` resource instead. For more information, see [Use TiDB Cloud Dedicated Cluster Resource](/tidb-cloud/terraform-use-dedicated-cluster-resource.md) or [Use TiDB Cloud Serverless Cluster Resource](/tidb-cloud/terraform-use-serverless-cluster-resource.md).
 
 You can learn how to manage a TiDB Cloud cluster with the `tidbcloud_cluster` resource in this document.
 

@@ -7,6 +7,10 @@ summary: Learn how to optimize query performance with TiDB Index Advisor.
 
 In v8.5.0, TiDB introduces the Index Advisor feature, which helps optimize your workload by recommending indexes that improve query performance. Using the new SQL statement, `RECOMMEND INDEX`, you can generate index recommendations for a single query or an entire workload. To avoid the resource-intensive process of physically creating indexes for evaluation, TiDB supports [hypothetical indexes](#hypothetical-indexes), which are logical indexes that are not materialized.
 
+> **Note:**
+>
+> Currently, this feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
+
 The Index Advisor analyzes queries to identify indexable columns from clauses such as `WHERE`, `GROUP BY`, and `ORDER BY`. Then, it generates index candidates and estimates their performance benefits using hypothetical indexes. TiDB uses a genetic search algorithm to select the optimal set of indexes starting with single-column indexes and iteratively exploring multi-column indexes, leveraging a "What-If" analysis to evaluate potential indexes based on their impact on optimizer plan costs. The advisor recommends indexes when they reduce the overall cost compared to executing queries without them.
 
 In addition to [recommending new indexes](#recommend-indexes-using-the-recommend-index-statement), the Index Advisor also suggests [removing inactive indexes](#remove-unused-indexes) to ensure efficient index management.

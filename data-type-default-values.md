@@ -70,7 +70,7 @@ CREATE TABLE t3 (
 );
 ```
 
-For more information on how to use UUID, see [UUID best practices](/best-practices/uuid.md).
+For more information on how to use UUID, see [Best Practices for Using UUIDs as Primary Keys](/best-practices/uuid.md).
 
 An example for using `JSON`:
 

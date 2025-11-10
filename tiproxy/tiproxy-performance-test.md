@@ -9,7 +9,7 @@ This report tests the performance of TiProxy in the OLTP scenario of Sysbench an
 
 The results are as follows:
 
-- The QPS upper limit of TiProxy is affected by the type of workload. Under the basic workloads of Sysbench and the same CPU usage, the QPS of TiProxy is about 25% lower than that of HAProxy.
+- The QPS upper limit of TiProxy is affected by the type of workload. When client concurrency is the same and the TiProxy CPU usage is below 80%, the QPS is less than 5% lower than that of HAProxy. In such cases, you can often increase the client concurrency to improve QPS. Under the same QPS, TiProxy's CPU usage is about 25% higher than HAProxy's. Therefore, you need to reserve more CPU resources.
 - The number of TiDB server instances that TiProxy can hold varies according to the type of workload. Under the basic workloads of Sysbench, a TiProxy can hold 5 to 12 TiDB server instances of the same model.
 - The row number of the query result set has a significant impact on the QPS of TiProxy, and the impact is the same as that of HAProxy.
 - The performance of TiProxy increases almost linearly with the number of vCPUs. Therefore, increasing the number of vCPUs can effectively improve the QPS upper limit.

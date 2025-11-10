@@ -85,7 +85,7 @@ The following sections describe how to create, edit, delete, and expire API keys
 
 To create an API key for a Data App, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the **Authentication** area, click **Create API Key**.
 4. In the **Create API Key** dialog box, do the following:
@@ -120,7 +120,7 @@ To create an API key for a Data App, perform the following steps:
 
 To edit the description or rate limit of an API key, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the **Authentication** area, locate the **Action** column, and then click **...** > **Edit** in the API key row that you want to change.
 4. Update the description, role, rate limit, or expiration time of the API key.
@@ -134,7 +134,7 @@ To edit the description or rate limit of an API key, perform the following steps
 
 To delete an API key for a Data App, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the **API Key** area, locate the **Action** column, and then click **...** > **Delete** in the API key row that you want to delete.
 4. In the displayed dialog box, confirm the deletion.
@@ -147,7 +147,7 @@ To delete an API key for a Data App, perform the following steps:
 
 To expire an API key for a Data App, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the **Authentication** area, locate the **Action** column, and then click **...** > **Expire Now** in the API key row that you want to expire.
 4. In the displayed dialog box, confirm the expiration.
@@ -156,7 +156,7 @@ To expire an API key for a Data App, perform the following steps:
 
 To expire all API keys for a Data App, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the **Authentication** area, click **Expire All**.
 4. In the displayed dialog box, confirm the expiration.

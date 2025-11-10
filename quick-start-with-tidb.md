@@ -101,6 +101,8 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         tiup playground v8.5.0 --db 2 --pd 3 --kv 3
         ```
 
+        It is recommended to run this command on a machine with at least 10 GiB of memory and 4 CPU cores. Insufficient resources might cause the system to crash.  
+
         To view all available versions, run `tiup list tidb`.
 
 4. Start a new session to access the TiDB cluster endpoints:
@@ -492,7 +494,7 @@ If you are ready to deploy a TiDB cluster for the production environment, here a
 If you are an application developer and want to quickly build an application using TiDB, here are the next steps:
 
 - [Developer Guide Overview](/develop/dev-guide-overview.md)
-- [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
+- [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
 - [Example Applications](/develop/dev-guide-sample-application-java-jdbc.md)
 
 If you are looking for an analytics solution with TiFlash, here are the next steps:
