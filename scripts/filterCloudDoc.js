@@ -1,3 +1,5 @@
+import * as fs from "fs";
+
 import {
   getAllMdList,
   copySingleFileSync,
@@ -42,11 +44,16 @@ const tocCopyTargets = [
 const tocFiles = tocCopyTargets.map(({ src }) => src);
 
 const main = () => {
-  const filteredLinkList = getAllMdList(tocFiles);
+  const existingTocFiles = tocFiles.filter((file) => fs.existsSync(file));
+  const filteredLinkList = getAllMdList(existingTocFiles);
 
   extractFilefromList(filteredLinkList, ".", "./tmp");
 
-  tocCopyTargets.forEach(({ src, dest }) => copySingleFileSync(src, dest));
+  tocCopyTargets.forEach(({ src, dest }) => {
+    if (fs.existsSync(src)) {
+      copySingleFileSync(src, dest);
+    }
+  });
   copyDirectoryWithCustomContentSync(
     "./tidb-cloud/",
     "./tmp/tidb-cloud/",
