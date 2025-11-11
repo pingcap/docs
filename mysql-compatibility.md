@@ -52,7 +52,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
     > Currently, only {{{ .starter }}} and {{{ .essential }}} clusters in certain AWS regions support [`FULLTEXT` syntax and indexes](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql). TiDB Self-Managed and TiDB Cloud Dedicated support parsing the `FULLTEXT` syntax but do not support using the `FULLTEXT` indexes.
 
 + `SPATIAL` (also known as `GIS`/`GEOMETRY`) functions, data types and indexes [#6347](https://github.com/pingcap/tidb/issues/6347)
-+ Character sets other than `ascii`, `latin1`, `binary`, `utf8`, `utf8mb4`, and `gbk`.
++ Character sets other than `ascii`, `latin1`, `binary`, `utf8`, `utf8mb4`, `gbk`, and `gb18030`.
 + Optimizer trace
 + XML Functions
 + X-Protocol [#1109](https://github.com/pingcap/tidb/issues/1109)
@@ -209,6 +209,8 @@ For more information, see [Compatibility between TiDB local temporary tables and
 * To learn about the character sets and collations supported by TiDB, see [Character Set and Collation Overview](/character-set-and-collation.md).
 
 * For information on the MySQL compatibility of the GBK character set, refer to [GBK compatibility](/character-set-gbk.md#mysql-compatibility) .
+
+* For information on the MySQL compatibility of the GB18030 character set, refer to [GB18030 compatibility](/character-set-gb18030.md#mysql-compatibility).
 
 * TiDB inherits the character set used in the table as the national character set.
 
