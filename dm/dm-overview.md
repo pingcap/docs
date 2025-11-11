@@ -61,7 +61,7 @@ Before using the DM tool, note the following restrictions:
 
 + GBK and GB18030 character sets compatibility
 
-    - DM does not support migrating `charset=GBK` tables to TiDB clusters earlier than v5.4.0. Currently, DM does not support migrating tables with `charset=GB18030` to TiDB.
+    - Before v5.4.0, DM does not support migrating `charset=GBK` tables to TiDB clusters. Before v9.0.0, DM does not support migrating tables with `charset=GB18030` to TiDB clusters.
 
 + Binlog compatibility
 
