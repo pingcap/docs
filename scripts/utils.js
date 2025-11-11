@@ -58,21 +58,6 @@ const filterLink = (srcList = []) => {
   return result;
 };
 
-<<<<<<< HEAD
-export const getAllMdList = (tocFile) => {
-  if (!fs.existsSync(tocFile)) {
-    console.log(`TOC file not found: ${tocFile}`);
-    return [];
-  }
-
-  const tocFileContent = fs.readFileSync(tocFile);
-  const mdAst = generateMdAstFromFile(tocFileContent);
-  const linkList = extractLinkNodeFromAst(mdAst);
-  const filteredLinkList = filterLink(linkList).map((link) =>
-    link.replace(/^\.?\//, "")
-  );
-  return filteredLinkList;
-=======
 export const getAllMdList = (tocFiles) => {
   const tocFileList = Array.isArray(tocFiles) ? tocFiles : [tocFiles];
 
@@ -84,7 +69,6 @@ export const getAllMdList = (tocFiles) => {
   });
 
   return [...new Set(allLinks)];
->>>>>>> 2adf999c1d (refactor: enhance TOC file handling and regex patterns in scripts (#22033))
 };
 
 export const CLOUD_TOC_LIST = [
