@@ -1,7 +1,7 @@
 import * as fs from "fs";
 
 import {
-  getAllCloudMdList,
+  getAllMdList,
   copySingleFileSync,
   copyFileWithCustomContentSync,
   copyDirectoryWithCustomContentSync,
