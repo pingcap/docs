@@ -88,12 +88,12 @@ SHOW COLLATION WHERE CHARSET = 'gb18030';
 
 - TiDB does not support using collations with the `_gb18030` suffix, for example:
 
-  ```sql
-  CREATE TABLE t(a CHAR(10) CHARSET BINARY);
-  Query OK, 0 rows affected (0.00 sec)
-  INSERT INTO t VALUES (_gb18030'啊');
-  ERROR 1115 (42000): Unsupported character introducer: 'gb18030'
-  ```
+    ```sql
+    CREATE TABLE t(a CHAR(10) CHARSET BINARY);
+    Query OK, 0 rows affected (0.00 sec)
+    INSERT INTO t VALUES (_gb18030'啊');
+    ERROR 1115 (42000): Unsupported character introducer: 'gb18030'
+    ```
 
 * For binary characters in `ENUM` and `SET` types, TiDB currently treats them as using the `utf8mb4` character set.
 
