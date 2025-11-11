@@ -14,9 +14,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Dedicated**
 
-    - When you restore a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster from a backup, you can now select the node storage type, such as [Standard storage](/tidb-cloud/size-your-cluster.md#standard-storage), instead of using the default storage type.
+    - When you restore a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster from a backup to a new cluster, you can now select a node storage type for the new cluster, such as [Standard storage](/tidb-cloud/size-your-cluster.md#standard-storage), instead of using the default storage type.
 
-        This feature enables you to restore the original configuration exactly or choose a different storage type that better meets your needs.
+        This feature enables you to either restore the original configuration exactly or choose a different storage type that better meets your needs.
 
         For more information, see [Restore data to a new cluster](/tidb-cloud/backup-and-restore.md#restore-data-to-a-new-cluster).
 
