@@ -1,6 +1,6 @@
 ---
 title: Character Set and Collation
-summary: TiDB supports the following character sets: ascii, binary, gbk, gb18030, latin1, utf8, and utf8mb4. The supported collations include: ascii_bin, binary, gbk_bin, gbk_chinese_ci, gb18030_bin, gb18030_chinese_ci, latin1_bin, utf8_bin, utf8_general_ci, utf8_unicode_ci, utf8mb4_0900_ai_ci, utf8mb4_0900_bin, utf8mb4_bin, utf8mb4_general_ci, and utf8mb4_unicode_ci. TiDB strongly recommends using the utf8mb4 character set because it supports a wider range of characters. In TiDB, the default collation is affected by the client’s connection collation setting. If the client uses utf8mb4_0900_ai_ci as the connection collation, TiDB follows the client configuration. TiDB also supports a new collation framework that provides semantic-level support for different collations.
+summary: Learn character sets and collations supported by TiDB.
 aliases: ['/docs/dev/character-set-and-collation/','/docs/dev/reference/sql/characterset-and-collation/','/docs/dev/reference/sql/character-set/']
 ---
 
