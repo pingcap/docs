@@ -34,11 +34,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 - Add a TiFlash configuration item [`graceful_wait_shutdown_timeout`](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854), which controls the maximum wait time when shutting down a TiFlash server. The default value is `600` seconds. During this period, TiFlash continues running unfinished MPP tasks but does not accept new ones. If all running MPP tasks finish before this timeout, TiFlash shuts down immediately; otherwise, it is forcibly shut down after the wait time expires. [#10266](https://github.com/pingcap/tiflash/issues/10266) @[gengliqi](https://github.com/gengliqi) <!--tw@qiancai -->
 
+### MySQL compatibility
+
+Starting from v8.5.4, TiDB aligns its behavior with MySQL when inserting data into a `DECIMAL` column: if the number of decimal places exceeds the column's defined scale, TiDB automatically truncates the extra digits and inserts the truncated data successfully, regardless of how many extra decimal places there are. In earlier TiDB versions, if the number of decimal places in the inserted `DECIMAL` value exceeded 72, the insertion fails and returns an error. For more information, see [Connect to TiDB using JDBC](/develop/dev-guide-sample-application-java-jdbc.md#mysql-compatibility).
+
 ## Improvements
 
 + TiDB <!--tw@Oreoxmt: 11 notes-->
 
     - Support redistributing data of a specific table (experimental). Now you can use the [`SHOW TABLE DISTRIBUTION`](/sql-statements/sql-statement-show-distribution-jobs.md) statement to check how the data of a specific table is distributed across all TiKV nodes. If the data distribution is unbalanced, you can use the [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md) statement to redistribute the table's data to improve load balancing. [#63260](https://github.com/pingcap/tidb/issues/63260) @[bufferflies](https://github.com/bufferflies) <!--tw@qiancai-->
+    - Support [`ANALYZE` embedded in DDL statements](/ddl_embedded_analyze.md), which prevents inaccurate optimizer estimates and potential plan changes caused by temporarily unavailable statistics after index creation or reorganization [#57948](https://github.com/pingcap/tidb/issues/57948) @[terry1purcell](https://github.com/terry1purcell) @[AilinKid](https://github.com/AilinKid) <!--tw@hfxsd -->
     - (dup): release-9.0.0.md(beta.1) > # SQL - Support creating [global indexes](/partitioned-table.md#global-indexes) on non-unique columns of partitioned tables, enhancing the usability of global indexes [#58650](https://github.com/pingcap/tidb/issues/58650) @[Defined2014](https://github.com/Defined2014) @[mjonss](https://github.com/mjonss)
     - (dup): release-9.0.0.md(beta.1) > Improvements> TiDB - Support applying the `semi_join_rewrite` hint to Semi Joins in `IN` subqueries [#58829](https://github.com/pingcap/tidb/issues/58829) @[qw4990](https://github.com/qw4990)
     - Optimize the estimation strategy when the `tidb_opt_ordering_index_selectivity_ratio` system variable takes effect [#62817](https://github.com/pingcap/tidb/issues/62817) @[terry1purcell](https://github.com/terry1purcell)
