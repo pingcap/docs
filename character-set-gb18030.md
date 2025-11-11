@@ -1,6 +1,6 @@
 ---
 title: GB18030
-summary: This document provides details about the TiDB support of the GB18030 character set.
+summary: This document provides details about the TiDB support for the GB18030 character set.
 ---
 
 # GB18030
@@ -86,7 +86,7 @@ SHOW COLLATION WHERE CHARSET = 'gb18030';
 
 - Currently, TiDB does not support changing other character sets to gb18030 or converting from `gb18030` to another character set using the `ALTER TABLE` statement.
 
-- TiDB does not support using collations with the `_gb18030` suffix, for example:
+- TiDB does not support using the `_gb18030` character set introducer, for example:
 
     ```sql
     CREATE TABLE t(a CHAR(10) CHARSET BINARY);
@@ -95,7 +95,7 @@ SHOW COLLATION WHERE CHARSET = 'gb18030';
     ERROR 1115 (42000): Unsupported character introducer: 'gb18030'
     ```
 
-* For binary characters in `ENUM` and `SET` types, TiDB currently treats them as using the `utf8mb4` character set.
+- For binary characters in `ENUM` and `SET` types, TiDB currently treats them as using the `utf8mb4` character set.
 
 ## Component compatibility
 
