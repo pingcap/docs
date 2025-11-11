@@ -1584,7 +1584,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent platform="tidb-cloud" plan="premium">
 
 > **Note:**
 >
@@ -1618,11 +1618,11 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Starting from v7.1.0, the index acceleration operation supports checkpoints. Even if the TiDB owner node is restarted or changed due to failures, TiDB can still recover progress from checkpoints that are automatically updated on a regular basis.
 - To verify whether a completed `ADD INDEX` operation is accelerated, you can execute the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs) statement to see whether `ingest` is displayed in the `JOB_TYPE` column.
 
-<CustomContent plan="premium">
+<CustomContent platform="tidb-cloud" plan="premium">
 
 > **Note:**
 >
-> For {{{ .premium }}}, the variable is read-only. If you need to modify it, please contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+> For {{{ .premium }}}, the variable is read-only. If you need to modify it, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
@@ -1656,11 +1656,11 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Starting from TiDB v8.1.0, this variable is enabled by default. If you want to upgrade a cluster with the DXF enabled to v8.1.0 or later, disable the DXF (by setting `tidb_enable_dist_task` to `OFF`) before the upgrade, which avoids `ADD INDEX` operations during the upgrade causing data index inconsistency. After the upgrade, you can manually enable the DXF.
 - This variable is renamed from `tidb_ddl_distribute_reorg`.
 
-<CustomContent plan="premium">
+<CustomContent platform="tidb-cloud" plan="premium">
 
 > **Note:**
 >
-> For {{{ .premium }}}, the variable is read-only. If you need to modify it, please contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+> For {{{ .premium }}}, the variable is read-only. If you need to modify it, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
@@ -1761,11 +1761,11 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - When Global Sort is disabled, only one TiDB node writes to TiKV at a time. In this case, the maximum write bandwidth per TiKV node is `100MiB`.
 - When Global Sort is enabled, all 4 TiDB nodes can write to TiKV simultaneously. In this case, the maximum write bandwidth per TiKV node is `4 * 100MiB = 400MiB`.
 
-<CustomContent plan="premium">
+<CustomContent platform="tidb-cloud" plan="premium">
 
 > **Note:**
 >
-> For {{{ .premium }}}, this variable is automatically tuned to an appropriate value and cannot be modified by users. If you need to adjust the setting, please contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+> For {{{ .premium }}}, this variable is automatically tuned to an appropriate value and cannot be modified by users. If you need to adjust the setting, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
@@ -1785,7 +1785,7 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 
 > **Note:**
 >
-> Modifying this TiDB variable only takes effect on Modify Column DDL jobs and does not affect Add Index DDL jobs in {{{ .premium }}}
+> For {{{ .premium }}}, modifying this TiDB variable takes effect only on `MODIFY COLUMN` DDL jobs and does not affect `ADD INDEX` DDL jobs.
 
 </CustomContent>
 
@@ -2387,11 +2387,11 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Default value: `ON`
 - This variable is used to set whether to enable the [Metadata lock](/metadata-lock.md) feature. Note that when setting this variable, you need to make sure that there are no running DDL statements in the cluster. Otherwise, the data might be incorrect or inconsistent.
 
-<CustomContent plan="premium">
+<CustomContent platform="tidb-cloud" plan="premium">
 
 > **Note:**
 >
-> For {{{ .premium }}}, the variable is read-only. If you need to modify it, please contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+> For {{{ .premium }}}, the variable is read-only. If you need to modify it, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
