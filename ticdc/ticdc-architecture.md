@@ -104,7 +104,7 @@ In addition, the new TiCDC architecture currently does not support splitting lar
 
 ## Upgrade guide
 
-The TiCDC new architecture can only be deployed in TiDB clusters of v7.5.0 or later versions. Before deployment, make sure your TiDB cluster meets this requirement.
+TiCDC in the new architecture can only be deployed in TiDB clusters of v7.5.0 or later versions. Before deployment, make sure your TiDB cluster meets this requirement.
 
 You can deploy TiCDC nodes in the new architecture using TiUP or TiDB Operator.
 
