@@ -132,12 +132,12 @@ When deploying a new TiDB cluster of v8.5.4 or later using TiDB Operator, you ca
 
 ```yaml
 spec:
-    ticdc:
+  ticdc:
     baseImage: pingcap/ticdc
     version: v8.5.4
     replicas: 3
     config:
-        newarch = true
+      newarch = true
 ```
 
 For more TiCDC deployment information, see [Fresh TiCDC deployment](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-ticdc/#fresh-ticdc-deployment).
