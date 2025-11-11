@@ -60,13 +60,13 @@ To enable Global Sort, follow these steps:
     SET GLOBAL tidb_cloud_storage_uri = 's3://my-bucket/test-data?role-arn=arn:aws:iam::888888888888:role/my-role'
     ```
 
-</CustomContent>
+    <CustomContent plan="premium">
 
- <CustomContent plan="premium">
+    > **Note:**
+    >
+    > For {{{ .premium }}}, this parameter is automatically configured and does not require manual adjustment. If you need to modify it, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-> **Note:**
->
-> For {{{ .premium }}}, this parameter is automatically configured and does not require manual adjustment. If you need to modify it, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+    </CustomContent>
 
 </CustomContent>
 
