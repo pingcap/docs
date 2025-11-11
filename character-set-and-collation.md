@@ -38,7 +38,7 @@ SELECT 'A' = 'a';
 SET NAMES utf8mb4 COLLATE utf8mb4_general_ci;
 ```
 
-```sql
+```
 Query OK, 0 rows affected (0.00 sec)
 ```
 
@@ -46,7 +46,7 @@ Query OK, 0 rows affected (0.00 sec)
 SELECT 'A' = 'a';
 ```
 
-```sql
+```
 +-----------+
 | 'A' = 'a' |
 +-----------+
@@ -98,7 +98,7 @@ Currently, TiDB supports the following character sets:
 SHOW CHARACTER SET;
 ```
 
-```sql
+```
 +---------+-------------------------------------+--------------------+--------+
 | Charset | Description                         | Default collation  | Maxlen |
 +---------+-------------------------------------+--------------------+--------+
@@ -119,7 +119,7 @@ TiDB supports the following collations:
 SHOW COLLATION;
 ```
 
-```sql
+```
 +--------------------+---------+-----+---------+----------+---------+---------------+
 | Collation          | Charset | Id  | Default | Compiled | Sortlen | Pad_attribute |
 +--------------------+---------+-----+---------+----------+---------+---------------+
@@ -161,7 +161,7 @@ You can use the following statement to view the collations (under the [new frame
 SHOW COLLATION WHERE Charset = 'utf8mb4';
 ```
 
-```sql
+```
 +--------------------+---------+-----+---------+----------+---------+---------------+
 | Collation          | Charset | Id  | Default | Compiled | Sortlen | Pad_attribute |
 +--------------------+---------+-----+---------+----------+---------+---------------+
@@ -285,7 +285,7 @@ Database changed
 SELECT @@character_set_database, @@collation_database;
 ```
 
-```sql
+```
 +--------------------------|----------------------+
 | @@character_set_database | @@collation_database |
 +--------------------------|----------------------+
@@ -298,7 +298,7 @@ SELECT @@character_set_database, @@collation_database;
 CREATE SCHEMA test2 CHARACTER SET latin1 COLLATE latin1_bin;
 ```
 
-```sql
+```
 Query OK, 0 rows affected (0.09 sec)
 ```
 
@@ -314,7 +314,7 @@ Database changed
 SELECT @@character_set_database, @@collation_database;
 ```
 
-```sql
+```
 +--------------------------|----------------------+
 | @@character_set_database | @@collation_database |
 +--------------------------|----------------------+
@@ -350,7 +350,7 @@ For example:
 CREATE TABLE t1(a int) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ```
 
-```sql
+```
 Query OK, 0 rows affected (0.08 sec)
 ```
 
@@ -382,7 +382,7 @@ Each string corresponds to a character set and a collation. When you use a strin
 
 Example:
 
-```sql
+```
 SELECT 'string';
 SELECT _utf8mb4'string';
 SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
@@ -521,7 +521,7 @@ For a TiDB cluster that is already initialized, you can check whether the new co
 SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME='new_collation_enabled';
 ```
 
-```sql
+```
 +----------------+
 | VARIABLE_VALUE |
 +----------------+
@@ -546,7 +546,7 @@ When one of `utf8_general_ci`, `utf8mb4_general_ci`, `utf8_unicode_ci`, `utf8mb4
 CREATE TABLE t(a varchar(20) charset utf8mb4 collate utf8mb4_general_ci PRIMARY KEY);
 ```
 
-```sql
+```
 Query OK, 0 rows affected (0.00 sec)
 ```
 
@@ -554,7 +554,7 @@ Query OK, 0 rows affected (0.00 sec)
 INSERT INTO t VALUES ('A');
 ```
 
-```sql
+```
 Query OK, 1 row affected (0.00 sec)
 ```
 
@@ -562,7 +562,7 @@ Query OK, 1 row affected (0.00 sec)
 INSERT INTO t VALUES ('a');
 ```
 
-```sql
+```
 ERROR 1062 (23000): Duplicate entry 'a' for key 't.PRIMARY' -- TiDB is compatible with the case-insensitive collation of MySQL.
 ```
 
@@ -570,7 +570,7 @@ ERROR 1062 (23000): Duplicate entry 'a' for key 't.PRIMARY' -- TiDB is compatibl
 INSERT INTO t VALUES ('a ');
 ```
 
-```sql
+```
 ERROR 1062 (23000): Duplicate entry 'a ' for key 't.PRIMARY' -- TiDB modifies the `PADDING` behavior to be compatible with MySQL.
 ```
 
@@ -607,7 +607,7 @@ TiDB supports using the `COLLATE` clause to specify the collation of an expressi
 SELECT 'a' = _utf8mb4 'A' collate utf8mb4_general_ci;
 ```
 
-```sql
+```
 +-----------------------------------------------+
 | 'a' = _utf8mb4 'A' collate utf8mb4_general_ci |
 +-----------------------------------------------+
