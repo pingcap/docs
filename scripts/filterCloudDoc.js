@@ -44,12 +44,6 @@ const tocCopyTargets = [
 const tocFiles = tocCopyTargets.map(({ src }) => src);
 
 const main = () => {
-<<<<<<< HEAD
-  const allFilePaths = getAllCloudMdList();
-
-  extractFilefromList(allFilePaths, "./", "./tmp");
-  copySingleFileSync("TOC-tidb-cloud.md", "./tmp/TOC.md");
-=======
   const existingTocFiles = tocFiles.filter((file) => fs.existsSync(file));
   const filteredLinkList = getAllMdList(existingTocFiles);
 
@@ -60,7 +54,6 @@ const main = () => {
       copySingleFileSync(src, dest);
     }
   });
->>>>>>> 2adf999c1d (refactor: enhance TOC file handling and regex patterns in scripts (#22033))
   copyDirectoryWithCustomContentSync(
     "./tidb-cloud/",
     "./tmp/tidb-cloud/",
