@@ -256,7 +256,7 @@ To specify auditing filter rules for a cluster, take the following steps:
 
     You can add one audit rule at a time. Each rule specifies a user expression, database expression, table expression, and access type. You can add multiple audit rules to meet your auditing requirements.
 
-2.In the **Log Filter Rules** section, click **>** to expand and view the list of audit rules you have added.
+2. In the **Log Filter Rules** section, click **>** to expand and view the list of audit rules you have added.
 
 > **Note:**
 >
