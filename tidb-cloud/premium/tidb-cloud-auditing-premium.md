@@ -85,7 +85,7 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
 In the TiDB Cloud console, go back to the **Database Audit Log Storage Configuration** dialog box where you got the TiDB Cloud account ID and the External ID values, and then take the following steps:
 
 1. In the **Bucket URI** field, enter the URI of your S3 bucket where the audit log files are to be written.
-2. In the **Bucket Region** drop-down list, select the AWS region where the bucket locates.
+2. In the **Bucket Region** drop-down list, select the AWS region where the bucket is located.
 3. In the **Role ARN** field, fill in the Role ARN value that you copied in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
 4. Click **Test Connection and Next** to verify whether TiDB Cloud can access and write to the bucket.
 
