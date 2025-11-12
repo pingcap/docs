@@ -8,6 +8,18 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## November 11, 2025
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - When you restore a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster from a backup to a new cluster, you can now select a node storage type for the new cluster, such as [Standard storage](/tidb-cloud/size-your-cluster.md#standard-storage), instead of using the default storage type.
+
+        This feature enables you to either restore the original configuration exactly or choose a different storage type that better meets your needs.
+
+        For more information, see [Restore data to a new cluster](/tidb-cloud/backup-and-restore.md#restore-data-to-a-new-cluster).
+
 ## November 4, 2025
 
 **General changes**
