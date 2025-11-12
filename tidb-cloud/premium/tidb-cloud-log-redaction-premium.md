@@ -1,17 +1,17 @@
 ---
 title: User-Controlled Log Redaction
-summary: Learn how to enable or disable user-controlled log redaction for TiDB Cloud {{{ .premium }}} instances to manage sensitive data visibility in execution logs.
+summary: Learn how to enable or disable user-controlled log redaction for {{{ .premium }}} instances to manage sensitive data visibility in execution logs.
 ---
 
 # User-Controlled Log Redaction
 
-User-controlled log redaction lets you manage the visibility of sensitive data in your TiDB Cloud {{{ .premium }}} instance logs. By toggling this redaction feature, you can protect your information, balance operational needs with security, and control what appears in your instance logs.
+User-controlled log redaction lets you manage the visibility of sensitive data in your {{{ .premium }}} instance logs. By toggling this redaction feature, you can protect your information, balance operational needs with security, and control what appears in your instance logs.
 
 Log redaction is enabled by default, ensuring that sensitive information in running logs and execution plans is concealed. If you need more detailed log information for instance maintenance or SQL tuning, you can disable this feature at any time.
 
 > **Note:**
 >
-> The log redaction feature is supported for TiDB Dedicated clusters and TiDB Cloud {{{ .premium }}} instances.
+> The log redaction feature is supported for TiDB Cloud Dedicated clusters and {{{ .premium }}} instances.
 
 ## Prerequisites
 
