@@ -319,7 +319,7 @@ Checksum is a method used by the BR tool to verify the integrity of backup and r
 1. **File-level checksum**: Verifies the backup files themselves to ensure integrity during storage and transmission. This checksum is always enabled and cannot be disabled.
 2. **Table-level checksum**: Verifies the integrity of table data content and confirms the business logic consistency of the data. This checksum is disabled by default but can be enabled through parameters.
 
-Balancing performance and security considerations, BR handles table-level checksums as follows:
+The following sections describe how BR handles table-level checksums, balancing performance and data safety considerations.
 
 ### Backup checksum
 
