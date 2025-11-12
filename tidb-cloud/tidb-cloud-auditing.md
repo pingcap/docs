@@ -99,7 +99,7 @@ In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dial
 3. In the **Role ARN** field, fill in the Role ARN value that you copied in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
 4. Click **Test Connection** to verify whether TiDB Cloud can access and write to the bucket.
 
-    If it is successful, **The connection is successfully** is displayed. Otherwise, check your access configuration.
+    If it is successful, **The connection is successful** is displayed. Otherwise, check your access configuration.
 
 5. Click **Enable** to enable audit logging for the cluster.
 
@@ -163,7 +163,7 @@ In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dial
 2. In the **Bucket Region** field, select the GCS region where the bucket locates.
 3. Click **Test Connection** to verify whether TiDB Cloud can access and write to the bucket.
 
-    If it is successful, **The connection is successfully** is displayed. Otherwise, check your access configuration.
+    If it is successful, **The connection is successful** is displayed. Otherwise, check your access configuration.
 
 4. Click **Enable** to enable audit logging for the cluster.
 
