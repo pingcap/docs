@@ -15,7 +15,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### System variables
 
-- Change the default value of the [`tidb_mpp_store_fail_ttl`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_mpp_store_fail_ttl) system variable from `60s` to `0s`. This means TiDB no longer needs to wait before sending queries to newly started TiFlash nodes, as delays are no longer necessary to prevent query failures. [#61826](https://github.com/pingcap/tidb/issues/61826) @[gengliqi](https://github.com/gengliqi)
+- Change the default value of the [`tidb_mpp_store_fail_ttl`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_mpp_store_fail_ttl) system variable from `60s` to `0s`. This means TiDB no longer needs to wait before sending queries to newly started TiFlash nodes, as delays are no longer necessary to prevent query failures. [#61826](https://github.com/pingcap/tidb/issues/61826) @[gengliqi](https://github.com/gengliqi) <!--tw@qiancai -->
 
 - Starting from v8.5.4, the [`tidb_replica_read`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_replica_read-new-in-v40) system variable only takes effect on read-only SQL statements. This change improves data read safety and reduces overlaps with other features. [#62856](https://github.com/pingcap/tidb/issues/62856) @[you06](https://github.com/you06) <!--tw@qiancai -->
 
