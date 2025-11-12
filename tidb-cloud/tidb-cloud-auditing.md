@@ -5,15 +5,15 @@ summary: Learn about how to audit a cluster in TiDB Cloud.
 
 # TiDB Cloud Dedicated Database Audit Logging
 
-TiDB Cloud provides you with a database audit logging feature to record a history of user access details (such as any SQL statements executed) in logs.
+TiDB Cloud provides an audit logging feature that records user access activities, such as any executed SQL statements.
 
 > **Note:**
 >
 > Currently, the database audit logging feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for database audit logging" in the **Description** field and click **Submit**.
 
-To assess the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to conduct a periodic analysis of the database audit logs.
+To evaluate the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to periodically analyze database audit logs.
 
-The audit logging feature is disabled by default. To audit a cluster, you need to enable the audit logging first, and then specify the auditing filter rules.
+The audit logging feature is **disabled by default**. To audit a cluster, you must first enable the audit logging, and then specify the auditing filter rules.
 
 > **Note:**
 >
@@ -38,7 +38,7 @@ To enable audit logging for AWS, take the following steps:
 
 #### Step 1. Create an Amazon S3 bucket
 
-Specify an Amazon S3 bucket in your corporate-owned AWS account as a destination to which TiDB Cloud writes the audit logs.
+Specify an Amazon S3 bucket in your organization-owned AWS account as a destination to which TiDB Cloud writes the audit logs.
 
 > **Note:**
 >
@@ -116,7 +116,7 @@ To enable audit logging for Google Cloud, take the following steps:
 
 #### Step 1. Create a GCS bucket
 
-Specify a Google Cloud Storage (GCS) bucket in your corporate-owned Google Cloud account as a destination to which TiDB Cloud writes audit logs.
+Specify a Google Cloud Storage (GCS) bucket in your organization-owned Google Cloud account as a destination to which TiDB Cloud writes audit logs.
 
 For more information, see [Creating storage buckets](https://cloud.google.com/storage/docs/creating-buckets) in the Google Cloud Storage documentation.
 
