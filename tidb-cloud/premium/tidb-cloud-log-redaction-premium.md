@@ -11,11 +11,11 @@ Log redaction is enabled by default, ensuring that sensitive information in runn
 
 > **Note:**
 >
-> The log redaction feature is supported for TiDB Dedicated clusters and  TiDB Cloud {{{ .premium }}} instances.
+> The log redaction feature is supported for TiDB Dedicated clusters and TiDB Cloud {{{ .premium }}} instances.
 
 ## Prerequisites
 
-* You must be in the **Organization Owner**  role of your organization in TiDB Cloud.
+* You must be in the **Organization Owner** role of your organization in TiDB Cloud.
 
 ## Disable log redaction
 
