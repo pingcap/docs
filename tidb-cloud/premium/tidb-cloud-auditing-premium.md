@@ -17,7 +17,7 @@ The audit logging feature is **disabled by default**. To audit an instance, you 
 
 ## Prerequisites
 
-- You are using a {{{ .premium }}} instance. Audit logging is not available for {{{ .starter }}} or {{{ .essential }}} clusters.
+- You are using a {{{ .premium }}} instance.
 - You must have the `Organization Owner` role in your organization. Otherwise, you cannot see the database audit-related options in the TiDB Cloud console.
 
 ## Enable audit logging
