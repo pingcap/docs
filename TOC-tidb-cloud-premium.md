@@ -241,7 +241,7 @@
     - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
     - [Configure Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
   - Audit Management
-    - [TiDB Cloud Database Audit Logging](/tidb-cloud/premium/tidb-cloud-auditing-premium.md)
+    - [Database Audit Logging](/tidb-cloud/premium/tidb-cloud-auditing-premium.md)
     - [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md)
 - Billing
   - [Invoices](/tidb-cloud/tidb-cloud-billing.md#invoices)
