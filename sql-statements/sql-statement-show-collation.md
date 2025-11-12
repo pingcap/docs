@@ -25,8 +25,6 @@ ShowLikeOrWhere ::=
 
 ## Examples
 
-<CustomContent platform="tidb">
-
 If the new framework for collations is enabled, in addition to the binary collations, the following collations are also supported:
 
 - Seven case- and accent-insensitive collations, ending `with _ci`
@@ -79,8 +77,6 @@ SHOW COLLATION;
 +-------------+---------+-----+---------+----------+---------+---------------+
 7 rows in set (0.00 sec)
 ```
-
-</CustomContent>
 
 To filter on the character set, you can add a `WHERE` clause.
 
