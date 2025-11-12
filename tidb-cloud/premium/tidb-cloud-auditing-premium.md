@@ -1,6 +1,6 @@
 ---
 title: "{{{ .premium }}} Database Audit Logging"
-summary: Learn how to audit a instance in {{{ .premium }}}.
+summary: Learn how to audit an instance in {{{ .premium }}}.
 ---
 
 # {{{ .premium }}} Database Audit Logging
@@ -36,7 +36,7 @@ Specify an Amazon S3 bucket in your organization-owned AWS account as the destin
 >
 > Do not enable object lock on the AWS S3 bucket. Enabling object lock will prevent TiDB Cloud from pushing audit log files to S3.
 
-For more information, see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) in the AWS User Guide.
+For more information, see [creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) in the AWS User Guide.
 
 #### Step 2. Configure Amazon S3 access
 
@@ -193,7 +193,7 @@ In the TiDB Cloud console, go back to the **Database Audit Log Storage Configura
 
 After enabling audit logging, you must specify auditing filter rules to control which user access events to capture and write to audit logs. If no filter rules are specified, TiDB Cloud does not log anything.
 
-To specify auditing filter rules for a instance, take the following steps:
+To specify auditing filter rules for an instance, take the following steps:
 
 1. On the **DB Audit Logging** page, click **Add Filter Rule** in the **Log Filter Rules** section to add an audit filter rule.
 
@@ -216,11 +216,11 @@ For example, `13796619446086334065/tidb-0/tidb-audit-2022-04-21T18-16-29.529.log
 
 ## Disable audit logging
 
-If you no longer want to audit a instance, go to the page of the instance, click **Settings** > **Audit Settings**, and then toggle the audit setting in the upper-right corner to **Disable**.
+If you no longer want to audit an instance, go to the page of the instance, click **Settings** > **Audit Settings**, and then toggle the audit setting in the upper-right corner to **Disable**.
 
 > **Note:**
 >
-> Each time the size of the log file reaches 10 MiB, the log file will be pushed to the cloud storage bucket. Therefore, after audit logging is disabled, the log file whose size is smaller than 10 MiB will not be automatically pushed to the cloud storage bucket. To get the log file in this situation, contact [PingCAP support](/tidb-cloud/tidb-cloud-support.md).
+> Each time the size of the log file reaches 10 MiB, the log file will be pushed to the cloud storage bucket. Therefore, after audit logging is disabled, the log file whose size is smaller than 10 MiB will not be automatically pushed to the cloud storage bucket. To get the log file in this situation, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Audit log fields
 
