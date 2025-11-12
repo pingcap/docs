@@ -49,7 +49,7 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
 
     3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
 
-    4. In the **Enable Database Audit Logging** dialog, locate the **AWS IAM Policy Settings** section, and record **TiDB Cloud Account ID** and **TiDB Cloud External ID** for later use.
+    4. In the **Database Audit Log Storage Configuration** dialog, locate the **AWS IAM Policy Settings** section, and record **TiDB Cloud Account ID** and **TiDB Cloud External ID** for later use.
 
 2. In the AWS Management Console, go to **IAM** > **Access Management** > **Policies**, and then check whether there is a storage bucket policy with the `s3:PutObject` write-only permission.
 
@@ -83,12 +83,12 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
 
 #### Step 3. Enable audit logging
 
-In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dialog box where you got the TiDB Cloud account ID and the External ID values, and then take the following steps:
+In the TiDB Cloud console, go back to the **Database Audit Log Storage Configuration** dialog box where you got the TiDB Cloud account ID and the External ID values, and then take the following steps:
 
 1. In the **Bucket URI** field, enter the URI of your S3 bucket where the audit log files are to be written.
 2. In the **Bucket Region** drop-down list, select the AWS region where the bucket locates.
 3. In the **Role ARN** field, fill in the Role ARN value that you copied in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
-4. Click **Test Connection** to verify whether TiDB Cloud can access and write to the bucket.
+4. Click **Test Connection and Next** to verify whether TiDB Cloud can access and write to the bucket.
 
     If it is successful, **The connection is successfully** is displayed. Otherwise, check your access configuration.
 
@@ -101,134 +101,103 @@ In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dial
 > - After enabling audit logging, if you make any new changes to the bucket URI, location, or ARN, you must click **Test Connection** again to verify that TiDB Cloud can connect to the bucket. Then, click **Enable** to apply the changes.
 > - To remove TiDB Cloud's access to your Amazon S3, simply delete the trust policy granted to this instance in the AWS Management Console.
 
-### Enable audit logging for Alibaba Cloud
+### Enable audit logging for TiDB cloud on Alibaba Cloud
 
-To enable audit logging for Alibaba Cloud, take the following steps:
+To enable database audit logging for TiDB cloud on Alibaba Cloud, follow the steps below:
 
-#### Step 1. Create a GCS bucket
+#### Step 1. Create an OSS bucket
 
-Specify a Google Cloud Storage (GCS) bucket in your corporate-owned Google Cloud account as a destination to which TiDB Cloud writes audit logs.
+Create an OSS bucket in your organization-owned Alibaba Cloud account as the destination to which TiDB Cloud will write audit logs.
 
-For more information, see [Creating storage buckets](https://cloud.google.com/storage/docs/creating-buckets) in the Google Cloud Storage documentation.
+For more information, see [Creating storage buckets](https://help.aliyun.com/zh/oss/user-guide/create-a-bucket-4) in the Alibaba Cloud Storage documentation.
 
-#### Step 2. Configure GCS access
+#### Step 2. Configure OSS access
 
-1. Get the Google Cloud Service Account ID of the TiDB instance that you want to enable audit logging.
+1. Get the Alibaba Cloud Service Account ID of the TiDB instance that you want to enable audit logging.
 
-    1. In the TiDB Cloud console, navigate to the [**instances**](https://tidbcloud.com/instances) page of your project.
-
-    2. Click the name of your target instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
+    1. In the TiDB Cloud console, navigate to the [**instances**](https://tidbcloud.com/instances) page of your instance.
+    2. Click your target instance to open its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
     3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
-    4. In the **Enable Database Audit Logging** dialog, locate the **Google Cloud Server Account ID** section, and record **Service Account ID** for later use.
+    4. In the **Database Audit Log Storage Configuration** dialog, locate the **Alibaba Cloud RAM Policy Settings** section, and record **TiDB Cloud Account ID** and **TiDB Cloud External ID** for later use.
 
-2. In the Google Cloud console, go to **IAM & Admin** > **Roles**, and then check whether a role with the following write-only permissions of the storage container exists.
+2. In the Alibaba Cloud console, go to **RAM** > **Permissions** > **Policies**.
 
-    - storage.objects.create
-    - storage.objects.delete
+    Check if a policy already exists with the `oss:PutObject` write-only permission for your audit log bucket:
 
-    If yes, record the matched role for the TiDB instance for later use. If not, go to **IAM & Admin** > **Roles** > **CREATE ROLE** to define a role for the TiDB instance.
+    - If yes, record the policy name for later use.
 
-3. Go to **Cloud Storage** > **Browser**, select the GCS bucket you want TiDB Cloud to access, and then click **SHOW INFO PANEL**.
+    - If not, click **Create Policy**, and define the policy  using the following policy template.
 
-    The panel is displayed.
+        ```json
+        {
+        "Version": "1",
+        "Statement": [
+            {
+            "Effect": "Allow",
+            "Action": [
+                "oss:PutObject"
+            ],
+            "Resource": "acs:oss:*:*:<Your-Bucket-Name>/*"
+            }
+        ]
+        }
+        ```
 
-4. In the panel, click **ADD PRINCIPAL**.
+    Replace `<Your-Bucket-Name>` with the name of your OSS bucket where TiDB Cloud will write audit logs.
+    
+    For example, if your bucket name is `auditlog-bucket`, use: `"Resource": "acs:oss:*:*:auditlog-bucket/*"`
 
-    The dialog box for adding principals is displayed.
+3. Go to **RAM** > **Identities** > **Roles** in the Alibaba Cloud Console.
 
-5. In the dialog box, take the following steps:
+    Check if a role already exists whose **trusted entity** matches the TiDB Cloud Account ID and External ID you recorded earlier.
 
-    1. In the **New Principals** field, paste the Google Cloud Service Account ID of the TiDB instance.
-    2. In the **Role** drop-down list, choose the role of the target TiDB instance.
-    3. Click **SAVE**.
+    - If yes, record the role name for later use.
 
-#### Step 3. Enable audit logging
+    - If not, click **Create Role**.
 
-In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dialog box where you got the TiDB Cloud account ID, and then take the following steps:
+    **When creating the role:**
 
-1. In the **Bucket URI** field, enter your full GCS bucket name.
-2. In the **Bucket Region** field, select the GCS region where the bucket locates.
-3. Click **Test Connection** to verify whether TiDB Cloud can access and write to the bucket.
+    1. In the role creation page, click **Switch to Policy Editor**.
+    2. Under **Principal**, choose **Cloud Account** and enter the **TiDB Cloud Account Id** in the field.
+    3. Under **Action**, select **sts:AssumeRole** from drop down list.
+    4. Click **Add conditon**,  then:
+        - Set **Key** to ``sts:ExternalId``
+        - Set **Operator** to ``StringEquals``
+        - Set **Value** to the **TiDB Cloud External ID**.
+    5. Click **OK** to open the **Create Role** Dialog.
+    6. Enter the role name in the  **Role Name** field, then Click **OK** to create the role.. 
 
-    If it is successful, **The connection is successfully** is displayed. Otherwise, check your access configuration.
+4. After the role is created, go to the **Permissions** tab and click **Grant Permission**.
+    In the dialog, do the following:
+    - For **Resource Scope**, select **Account**.
+    - In the **Policy** field,  select the OSS write policy created in the previous step
+    - Click **Grant Permissions**.
 
-4. Click **Enable** to enable audit logging for the instance.
+5. Copy the **Role ARN** (for example: `acs:ram::<Your-Account-ID>:role/tidb-cloud-audit-role`) for later use.
 
-    TiDB Cloud is ready to write audit logs for the specified instance to your GCS bucket.
+
+#### Step 3. Enable Audit logging in TiDB cloud
+
+In the TiDB Cloud console, go back to the **Database Audit Log Storage Configuration** dialog box where you got the TiDB Cloud account ID, and then take the following steps:
+
+1. In the **Bucket URI** field, enter the URI of your OSS bucket, e.g.: ``oss://tidb-cloud-audit-log``.
+2. In the **Bucket Region** field, select the Alibaba Cloud region where the bucket locates (recommended to match your TiDB instance region).
+3. In the **Role ARN** field, paste the Role ARN value copied in Step 2.
+
+Click **Test Connection** to verify that TiDB Cloud can access and write to the OSS bucket.
+
+    - If successful, you will see **The connection is successfully**. 
+    - If not,  check the OSS bucket permissions, RAM role configuration and policy.
+
+Finally, Click **Enable** to activate audit logging for the instance.
+
+    TiDB Cloud is ready to write audit logs for the specified instance to your OSS bucket.
 
 > **Note:**
 >
 > - After enabling audit logging, if you make any new changes to the bucket URI or location, you must click **Test Connection** again to verify that TiDB Cloud can connect to the bucket. Then, click **Enable** to apply the changes.
-> - To remove TiDB Cloud's access to your GCS bucket, delete the trust policy granted to this instance in the Google Cloud console.
+> - To remove TiDB Cloud's access to your OSS bucket, delete the trust policy granted to this instance in the Alibaba Cloud console.
 
-### Enable audit logging for Azure
-
-To enable audit logging for Azure, take the following steps:
-
-#### Step 1. Create an Azure storage account
-
-Create an Azure storage account in your organization's Azure subscription as the destination to which TiDB Cloud writes the database audit logs.
-
-For more information, see [Create an Azure storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal) in Azure documentation.
-
-#### Step 2. Configure Azure Blob Storage access
-
-1. In the [Azure portal](https://portal.azure.com/), create a container used for storing database audit logs.
-
-    1. In the left navigation pane of the Azure portal, click **Storage Accounts**, and then click the storage account for storing database audit logs.
-
-        > **Tip:**
-        >
-        > If the left navigation pane is hidden, click the menu button in the upper-left corner to toggle its visibility.
-
-    2. In the navigation pane for the selected storage account, click **Data storage > Containers**, and then click **+ Container** to open the **New container** pane.
-
-    3. In the **New container** pane, enter a name for your new container, set the anonymous access level (the recommended level is **Private**, which means no anonymous access), and then click **Create**. The new container will be created and displayed in the container list in a few seconds.
-
-2. Get the URL of the target container.
-
-    1. In the container list, select the target container, click **...** for the container, and then select **Container properties**.
-    2. On the displayed properties page, copy the **URL** value for later use, and then return to the container list.
-
-3. Generate a SAS token for the target container.
-
-    1. In the container list, select the target container, click **...** for the container, and then select **Generate SAS**.
-    2. In the displayed **Generate SAS** pane, select **Account key** for **Signing method**.
-    3. In the **Permissions** drop-down list, select **Read**, **Write**, and **Create** to allow writing audit log files.
-    4. In the **Start** and **Expiry** fields, specify a validity period for the SAS token.
-
-        > **Note:**
-        >
-        > - The audit feature needs to continuously write audit logs to the storage account, so the SAS token must have a sufficiently long validity period. However, longer validity increases the risk of token leakage. For security, it is recommended to replace your SAS token every six to twelve months.
-        > - The generated SAS token cannot be revoked, so you need to set its validity period carefully.
-        > - Make sure to re-generate and update the SAS token before it expires to ensure continuous availability of audit logs.
-
-    5. For **Allowed protocols**, select **HTTPS only** to ensure secure access.
-    6. Click **Generate SAS token and URL**, and then copy the displayed **Blob SAS token** for later use.
-
-#### Step 3. Enable audit logging
-
-1. In the TiDB Cloud console, navigate to the [**instances**](https://tidbcloud.com/instances) page of your instance.
-
-2. Click the name of your target instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
-
-3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
-4. In the **Enable Database Audit Logging** dialog, provide the blob URL and SAS token that you obtained from [Step 2. Configure Azure Blob access](#step-2-configure-azure-blob-storage-access):
-
-    - In the **Blob URL** field, enter the URL of the container where audit logs will be stored.
-    - In the **SAS Token** field, enter the SAS token for accessing the container.
-
-5. Click **Test Connection** to verify whether TiDB Cloud can access and write to the container.
-
-    If it is successful, **The connection is successfully** is displayed. Otherwise, check your access configuration.
-
-6. Click **Enable** to enable audit logging for the instance.
-
-    TiDB Cloud is ready to write audit logs for the specified instance to your Azure blob container.
-
-> **Note:**
->
-> After enabling audit logging, if you make new changes to the **Blob URL** or **SAS Token** fields, you must click **Test Connection** again to verify that TiDB Cloud can connect to the container. Then, click **Enable** to apply the changes.
 
 ## Specify auditing filter rules
 
