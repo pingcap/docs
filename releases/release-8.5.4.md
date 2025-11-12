@@ -95,6 +95,7 @@ Starting from v8.5.4, TiDB aligns its behavior with MySQL when inserting data in
             To opt-in to use the new architecture, set the TiCDC configuration item [`newarch`](/ticdc/ticdc-server-config.md#newarch-new-in-v854-release1) to `true`.
 
             For more information, see [documentation](/ticdc/ticdc-architecture.md).
+
 ## Bug fixes
 
 + TiDB <!--tw@lilin90: the following 14 notes-->
