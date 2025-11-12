@@ -1,32 +1,41 @@
 ---
-title: Changefeed 计费
+title: TiDB Cloud 专属版 Changefeed 计费
 summary: 了解 TiDB Cloud 中 changefeed 的计费方式。
 aliases: ['/tidbcloud/tidb-cloud-billing-tcu']
 ---
 
-# Changefeed 计费
+# TiDB Cloud 专属版 Changefeed 计费
+
+本文档介绍了 TiDB Cloud 专属版中 changefeed 的计费详情。
 
 ## RCU 成本
 
-TiDB Cloud 以 TiCDC 复制能力单位（Replication Capacity Units，RCUs）来衡量 [changefeed](/tidb-cloud/changefeed-overview.md) 的容量。当你为集群 [创建 changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed) 时，可以选择合适的规格。RCU 越高，复制性能越好。你需要为这些 TiCDC changefeed 的 RCU 支付费用。
+TiDB Cloud 专属版通过 TiCDC 复制能力单位（RCU，Replication Capacity Units）来衡量 [changefeed](/tidb-cloud/changefeed-overview.md) 的容量。当你为集群 [创建 changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed) 时，可以选择合适的规格。RCU 越高，复制性能越好。你需要为这些 TiCDC changefeed RCU 支付费用。
 
 ### TiCDC RCU 数量
 
 下表列出了 changefeed 的规格及其对应的最大复制性能：
 
-| 规格         | 最大复制性能         |
-|--------------|---------------------|
-| 2 RCUs       | 5,000 行/秒         |
-| 4 RCUs       | 10,000 行/秒        |
-| 8 RCUs       | 20,000 行/秒        |
-| 16 RCUs      | 40,000 行/秒        |
-| 24 RCUs      | 60,000 行/秒        |
-| 32 RCUs      | 80,000 行/秒        |
-| 40 RCUs      | 100,000 行/秒       |
+| 规格         | 最大复制性能           |
+|--------------|-----------------------|
+| 2 RCUs       | 5,000 行/秒           |
+| 4 RCUs       | 10,000 行/秒          |
+| 8 RCUs       | 20,000 行/秒          |
+| 16 RCUs      | 40,000 行/秒          |
+| 24 RCUs      | 60,000 行/秒          |
+| 32 RCUs      | 80,000 行/秒          |
+| 40 RCUs      | 100,000 行/秒         |
+| 64 RCUs      | 160,000 行/秒         |
+| 96 RCUs      | 240,000 行/秒         |
+| 128 RCUs     | 320,000 行/秒         |
+| 192 RCUs     | 480,000 行/秒         |
+| 256 RCUs     | 640,000 行/秒         |
+| 320 RCUs     | 800,000 行/秒         |
+| 384 RCUs     | 960,000 行/秒         |
 
 > **Note:**
 >
-> 上述性能数据仅供参考，实际场景中可能会有所不同。强烈建议你在生产环境中使用 changefeed 功能前，先进行真实负载测试。如需进一步协助，请联系 [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md)。
+> 上述性能数据仅供参考，实际场景下可能有所不同。强烈建议你在生产环境中使用 changefeed 功能前，先进行真实负载测试。如需进一步协助，请联系 [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md)。
 
 ### 价格
 
