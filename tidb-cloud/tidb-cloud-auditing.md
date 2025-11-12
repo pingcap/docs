@@ -23,8 +23,10 @@ The audit logging feature is disabled by default. To audit a cluster, you need t
 
 - You are using a TiDB Cloud Dedicated cluster.
 
-  > **Note:**
-  > Audit logging is not available for {{{ .starter }}} clusters. For {{{ .essential }}} clusters, see [Database Audit Logging (Beta) for {{{ .essential }}}]('/tidb-cloud/essential-database-audit-logging.md').
+    > **Note:**
+    >
+    > Audit logging is not available for {{{ .starter }}} clusters. For {{{ .essential }}} clusters, see [Database Audit Logging (Beta) for {{{ .essential }}}](/tidb-cloud/essential-database-audit-logging.md).
+
 - You are in the `Organization Owner` or `Project Owner` role of your organization. Otherwise, you cannot see the database audit-related options in the TiDB Cloud console. For more information, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
 
 ## Enable audit logging
