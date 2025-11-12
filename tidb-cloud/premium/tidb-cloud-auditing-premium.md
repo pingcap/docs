@@ -1,24 +1,24 @@
 ---
-title: TiDB Cloud Premium Database Audit Logging
-summary: Learn about how to audit a instance in TiDB Cloud.
+title: "{{{ .premium }}} Database Audit Logging"
+summary: Learn how to audit a instance in {{{ .premium }}}.
 ---
 
-# TiDB Cloud Premium Database Audit Logging
+# {{{ .premium }}} Database Audit Logging
 
-TiDB Cloud provides you with a database audit logging feature to record a history of user access details (such as any SQL statements executed) in logs.
+TiDB Cloud provides an audit logging feature that records user access activities, such as any executed SQL statements.
 
-To assess the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to conduct a periodic analysis of the database audit logs.
+To evaluate the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to periodically analyze database audit logs.
 
-The audit logging feature is disabled by default. To audit a instance, you need to enable the audit logging first, and then specify the auditing filter rules.
+The audit logging feature is **disabled by default**. To audit an instance, you must first enable audit logging, and then configure auditing filter rules.
 
 > **Note:**
 >
-> Because audit logging consumes instance resources, be prudent about whether to audit a instance.
+> Because audit logging consumes instance resources, be prudent about whether to audit an instance.
 
 ## Prerequisites
 
-- You are using a TiDB Cloud Premium instance. Audit logging is not available for {{{ .starter }}} or {{{ .essential }}} clusters.
-- You are in the `Organization Owner` role of your organization. Otherwise, you cannot see the database audit-related options in the TiDB Cloud console. 
+- You are using a {{{ .premium }}} instance. Audit logging is not available for {{{ .starter }}} or {{{ .essential }}} clusters.
+- You must have the `Organization Owner` role in your organization. Otherwise, you cannot see the database audit-related options in the TiDB Cloud console. 
 
 ## Enable audit logging
 
