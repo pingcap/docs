@@ -27,7 +27,7 @@ ShowLikeOrWhere ::=
 
 If the new framework for collations is enabled, in addition to the binary collations, the following collations are also supported:
 
-- Seven case- and accent-insensitive collations, ending `with _ci`
+- Seven case- and accent-insensitive collations, ending with `_ci`
 - `utf8mb4_0900_bin`
 
 ```sql
