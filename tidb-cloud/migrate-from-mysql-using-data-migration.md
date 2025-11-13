@@ -183,6 +183,14 @@ Regardless of the connection method, it is strongly recommended to use TLS/SSL f
 
 When using public endpoints, you can verify network connectivity and access both now and later during the DM job creation process. TiDB Cloud will provide specific egress IP addresses and prompt instructions at that time.
 
+> **Note**:
+>
+> The egress IP range needed for firewall configuration will only be displayed during the Data Migration task creation process. You cannot obtain this IP beforehand. Ensure you have:
+>
+> - Necessary permissions to modify firewall rules
+> - Access to your cloud provider console during the migration task setup
+> - Ability to pause the task creation while you configure the firewall
+
 1. Identify and record the source MySQL instance's endpoint hostname (FQDN) or public IP address.
 2. Ensure you have the required permissions to modify the firewall or security group rules for your database. Refer to your cloud provider's documentation for guidance as follows:
 
