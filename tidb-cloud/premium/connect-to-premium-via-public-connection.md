@@ -36,7 +36,7 @@ To connect to a {{{ .premium }}} instance via public connection, take the follow
 
     If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](/tidb-cloud/premium/configure-ip-access-list-premium.md) to configure it before your first connection.
 
-4. Click **CA cert** to download CA cert for TLS connection to TiDB instances. The CA cert supports TLS 1.2 version by default.
+4. Click **CA cert** to download CA cert for TLS connection to TiDB instances. The CA cert supports TLS 1.2 by default.
 
 5. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your instance.
 

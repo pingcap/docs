@@ -5,9 +5,9 @@ summary: Introduce TLS connections in {{{ .premium }}}.
 
 # TLS Connections to {{{ .premium }}}
 
-On TiDB Cloud, establishing TLS connections is one of the basic security practices for connecting to {{{ .premium }}} instances. You can configure multiple TLS connections from your client, application, and development tools to your {{{ .premium }}} instance to protect data transmission security. For security reasons, {{{ .premium }}} only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1.
+On TiDB Cloud, establishing TLS connections is one of the basic security practices for connecting to {{{ .premium }}} instances. You can configure multiple TLS connections from your client, application, and development tools to your {{{ .premium }}} instance to protect data transmission security. For security reasons, {{{ .premium }}} only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 or TLS 1.1.
 
-To ensure data security, the CA certificate for your {{{ .premium }}} instance is hosted on [AWS Private Certificate Authority](https://aws.amazon.com/private-ca/). The private key of the CA certificate is stored in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
+To ensure data security, the Certificate Authority (CA) certificate for your {{{ .premium }}} instance is hosted on [AWS Private Certificate Authority](https://aws.amazon.com/private-ca/). The private key of the CA certificate is stored in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
 
 ## Prerequisites
 
@@ -29,7 +29,7 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
 
     If you have not configured the IP access list, click **Configure IP Access List** to configure it before your first connection. For more information, see [Configure an IP access list](/tidb-cloud/premium/configure-ip-access-list-premium.md).
 
-4. Click **CA cert** to download CA cert for TLS connection to TiDB instances. The CA cert supports TLS 1.2 version by default.
+4. Click **CA cert** to download CA cert for TLS connection to TiDB instances. The CA cert supports TLS 1.2 by default.
 
     > **Note:**
     >
@@ -40,13 +40,13 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
 
 ## Manage root certificates for {{{ .premium }}}
 
-{{{ .premium }}} uses certificates from [AWS Private Certificate Authority](https://aws.amazon.com/private-ca/) as a Certificate Authority (CA) for TLS connections between clients and {{{ .premium }}} instances. Usually, the private key of the CA certificate is stored securely in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
+{{{ .premium }}} uses certificates from [AWS Private Certificate Authority](https://aws.amazon.com/private-ca/) as a CA for TLS connections between clients and {{{ .premium }}} instances. Usually, the private key of the CA certificate is stored securely in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
 
 ## FAQs
 
 ### Which TLS versions are supported to connect to my {{{ .premium }}} instance?
 
-For security reasons, {{{ .premium }}} only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1. See IETF [Deprecating TLS 1.0 and TLS 1.1](https://datatracker.ietf.org/doc/rfc8996/) for details.
+For security reasons, {{{ .premium }}} only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 or TLS 1.1. See IETF [Deprecating TLS 1.0 and TLS 1.1](https://datatracker.ietf.org/doc/rfc8996/) for details.
 
 ### Is two-way TLS authentication between my client and {{{ .premium }}} supported?
 
