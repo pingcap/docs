@@ -69,7 +69,7 @@ To disable log redaction, do the following:
 
 3. In the left navigation pane, click **Settings** > **Security**.
 4. In the **Execution Log Redaction** section, you can see that the redaction feature is **Enabled** by default.
-5. Click **Disable**. A warning appears, explaining the risks of disabling log redaction. 
+5. Click **Disable**. A warning appears, explaining the risks of disabling log redaction.
 6. Confirm the disabling.
 
 After disabling log redaction, note the following:
