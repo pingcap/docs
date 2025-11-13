@@ -221,9 +221,9 @@ To specify auditing filter rules for an instance, take the following steps:
 
 By default, TiDB Cloud stores database audit log files in your storage service, so you need to read the audit log information from your storage service.
 
-TiDB Cloud audit logs are readable text files with the instance ID, Pod ID, and log creation date incorporated into the fully qualified filenames.
+TiDB Cloud audit logs are readable text files with the instance ID, internal ID, and log creation date incorporated into the fully qualified filenames.
 
-For example, `13796619446086334065/tidb-0/tidb-audit-2022-04-21T18-16-29.529.log`. In this example, `13796619446086334065` indicates the instance ID and `tidb-0` indicates the Pod ID.
+For example, `13796619446086334065/tidb-5m5z34/tidb-audit-2022-04-21T18-16-29.529.log`. In this example, `13796619446086334065` indicates the instance ID and `tidb-5m5z34` indicates the internal ID.
 
 ## Disable audit logging
 
