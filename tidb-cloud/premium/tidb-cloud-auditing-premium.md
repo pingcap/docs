@@ -177,7 +177,7 @@ For more information, see [Create a bucket](https://www.alibabacloud.com/help/en
 
 5. Copy the **Role ARN** (for example: `acs:ram::<Your-Account-ID>:role/tidb-cloud-audit-role`) for later use.
 
-#### Step 3. Enable Audit logging
+#### Step 3. Enable audit logging
 
 In the TiDB Cloud console, go back to the **Database Audit Log Storage Configuration** dialog where you got the TiDB Cloud account ID, and then take the following steps:
 
