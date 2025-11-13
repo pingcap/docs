@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/serverless-audit-logging']
 
 # Database Audit Logging (Beta) for {{{ .essential }}}
 
-{{{ .essential }}} provides an audit logging feature that records user access activities, such as any executed SQL statements.
+{{{ .essential }}} provides an audit logging feature that records user access activities of your database, such as executed SQL statements.
 
 > **Note:**
 >
@@ -14,7 +14,7 @@ aliases: ['/tidbcloud/serverless-audit-logging']
 
 To evaluate the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to periodically analyze database audit logs.
 
-The audit logging feature is **disabled by default**. To audit a cluster, you need to enable audit logging for it.
+The audit logging feature is **disabled by default**. To audit a TiDB cluster, you need to enable audit logging for it.
 
 ## Audit logging configurations
 
