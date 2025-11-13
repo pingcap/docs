@@ -9,7 +9,7 @@ TiDB Cloud provides an audit logging feature that records user access activities
 
 To evaluate the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to periodically analyze database audit logs.
 
-The audit logging feature is **disabled by default**. To audit an instance, you must first enable audit logging, and then configure auditing filter rules.
+The audit logging feature is **disabled by default**. To audit a TiDB instance, you must first enable audit logging, and then configure auditing filter rules.
 
 > **Note:**
 >
@@ -89,7 +89,7 @@ For more information, see [creating a bucket](https://docs.aws.amazon.com/Amazon
 
 #### Step 3. Enable audit logging
 
-In the TiDB Cloud console, go back to the **Database Audit Log Storage Configuration** dialog box where you got the TiDB Cloud account ID and the External ID values, and then take the following steps:
+In the TiDB Cloud console, go back to the **Database Audit Log Storage Configuration** dialog where you got the TiDB Cloud account ID and the External ID values, and then take the following steps:
 
 1. In the **Bucket URI** field, enter the URI of your S3 bucket where the audit log files are to be written.
 2. In the **Bucket Region** drop-down list, select the AWS region where the bucket is located.
@@ -149,7 +149,7 @@ For more information, see [Creating storage buckets](https://help.aliyun.com/zh/
 
     Replace `<Your-Bucket-Name>` with the name of your OSS bucket where TiDB Cloud will write audit logs. For example, if your bucket name is `auditlog-bucket`, use: `"Resource": "acs:oss:*:*:auditlog-bucket/*"`.
 
-3. In the Alibaba Cloud Console, go to **RAM** > **Identities** > **Roles**, and then check whether a role already exists whose **trusted entity** matches the TiDB Cloud Account ID and External ID you recorded earlier.
+3. In the Alibaba Cloud console, go to **RAM** > **Identities** > **Roles**, and then check whether a role already exists whose **trusted entity** matches the TiDB Cloud Account ID and External ID you recorded earlier.
 
     - If yes, record the role name for later use.
 
@@ -163,28 +163,28 @@ For more information, see [Creating storage buckets](https://help.aliyun.com/zh/
             - Set **Operator** to ``StringEquals``.
             - Set **Value** to the **TiDB Cloud External ID**.
         5. Click **OK** to open the **Create Role** dialog.
-        6. Enter the role name in the **Role Name** field, and lick **OK** to create the role.
+        6. Enter the role name in the **Role Name** field, and click **OK** to create the role.
 
 4. After the role is created, go to the **Permissions** tab and click **Grant Permission**.
 
     In the dialog, configure the following settings:
 
     - For **Resource Scope**, select **Account**.
-    - In the **Policy** field,  select the OSS write policy created earlier.
+    - In the **Policy** field, select the OSS write policy created earlier.
     - Click **Grant Permissions**.
 
 5. Copy the **Role ARN** (for example: `acs:ram::<Your-Account-ID>:role/tidb-cloud-audit-role`) for later use.
 
 #### Step 3. Enable Audit logging
 
-In the TiDB Cloud console, go back to the **Database Audit Log Storage Configuration** dialog box where you got the TiDB Cloud account ID, and then take the following steps:
+In the TiDB Cloud console, go back to the **Database Audit Log Storage Configuration** dialog where you got the TiDB Cloud account ID, and then take the following steps:
 
 1. In the **Bucket URI** field, enter the URI of your OSS bucket. For example, ``oss://tidb-cloud-audit-log``.
-2. In the **Bucket Region** field, select the Alibaba Cloud region where the bucket locates (recommended to match your TiDB instance region).
+2. In the **Bucket Region** field, select the Alibaba Cloud region where the bucket is located (recommended to match your TiDB instance region).
 3. In the **Role ARN** field, paste the Role ARN value copied in [Step 2. Configure the OSS access](#step-2-configure-oss-access).
 4. Click **Test Connection** to verify whether TiDB Cloud can access and write to the OSS bucket.
 
-    - If successful, **The connection is successful** is displayed.
+    - If it is successful, **The connection is successful** is displayed.
     - If not, check the OSS bucket permissions, RAM role configuration, and policy.
 
 5. Click **Enable** to activate audit logging for the instance.
@@ -227,7 +227,7 @@ If you no longer want to audit an instance, go to the page of the instance, clic
 
 > **Note:**
 >
-> Each time the size of the log file reaches 10 MiB, the log file will be pushed to the cloud storage bucket. Therefore, after audit logging is disabled, the log file whose size is smaller than 10 MiB will not be automatically pushed to the cloud storage bucket. To get the log file in this situation, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> Each time the size of the log file reaches 10 MiB, the log file is pushed to the cloud storage bucket. Therefore, after audit logging is disabled, the log file whose size is smaller than 10 MiB will not be automatically pushed to the cloud storage bucket. To get the log file in this situation, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Audit log fields
 
