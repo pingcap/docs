@@ -114,7 +114,7 @@ It specifies where your data files are located and which files to import. You ca
 
 - Cloud storage (Amazon S3 or GCS): provide the full object storage URI, formatted as described in [URI Formats of External Storage Services](/external-storage-uri.md).
 
-- TiDB local file path: the path must be absolute. Ensure that the specified path and files exist on the TiDB node to which your session is connected, and verify that you have the required `FILE` privilege.
+- TiDB local file path: the path must be absolute, and the file extension must be `.csv`, `.sql`, or `.parquet`. Ensure that the specified path and files exist on the TiDB node to which your session is connected, and verify that you have the required `FILE` privilege.
 
 > **Note:**
 >
