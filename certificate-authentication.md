@@ -442,7 +442,7 @@ Also replace the old CA certificate with the combined certificate so that the cl
 
 3. Configure the TiDB server to use the new server key and certificate.
 
-    Place the files in the location that was specified before in the [Configure TiDB to use server certificate](#configure-tidb-to-use-server-certificate) section.
+    Place the files in the location that is specified before in the [Configure TiDB to use server certificate](#configure-tidb-to-use-server-certificate) section.
 
     ```sql
     ALTER INSTANCE RELOAD TLS;
