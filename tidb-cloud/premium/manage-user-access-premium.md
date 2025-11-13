@@ -46,7 +46,7 @@ For example, you can do the following:
 
 ### TiDB instances
 
-If you are an `Instance Administrator`, you can manage settings and operations for a specific instance.
+If you are an `Instance Manager`, you can manage settings and operations for a specific TiDB instance.
 
 For example, you can do the following:
 
@@ -67,7 +67,7 @@ At the organization level, TiDB Cloud defines the following roles, in which `Org
 |---|---|---|---|---|---|
 | Manage organization settings, such as TiDB instances, API keys, and time zones. | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Add or remove organization members, and edit organization roles. | ✅ | ❌ | ❌ | ❌ | ❌ |
-| `Instance Administrator` permissions for all TiDB instances in the organization. | ✅ | ❌ | ❌ | ❌ | ❌ |
+| `Instance Manager` permissions for all TiDB instances in the organization. | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Manage payment information for the organization. | ✅ | ✅ | ❌ | ❌ | ❌ |
 | View billing and use [Cost Explorer](/tidb-cloud/tidb-cloud-billing.md#cost-explorer). | ✅ | ✅ | ✅ | ❌ | ❌ |
 | Manage [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md) for the organization. | ✅ | ❌ | ❌ | ✅ | ❌ |
@@ -80,15 +80,15 @@ At the organization level, TiDB Cloud defines the following roles, in which `Org
 
 ### TiDB instance roles
 
-At the TiDB instance level, TiDB Cloud defines two roles: `Instance Administrator` and `Instance Viewer`.
+At the TiDB instance level, TiDB Cloud defines two roles: `Instance Manager` and `Instance Viewer`.
 
 > **Note:**
 >
-> - The `Organization Owner` automatically inherits all `Instance Administrator` permissions for every instance in the organization.
+> - The `Organization Owner` automatically inherits all `Instance Manager` permissions for every instance in the organization.
 > - Each TiDB instance role inherits all the permissions of the `Organization Viewer` role by default.
 > - If a member in your organization does not have any TiDB instance roles, the member cannot access any TiDB instances in your organization.
 
-| Permission  | `Instance Administrator` | `Instance Viewer` |
+| Permission  | `Instance Manager` | `Instance Viewer` |
 |---|---|---|
 | Manage TiDB instance settings | ✅ | ❌ |
 | Manage [database audit logging](/tidb-cloud/tidb-cloud-auditing.md) of the TiDB instance. | ✅ | ❌ |

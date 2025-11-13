@@ -39,6 +39,8 @@ The supported vCPU and RAM sizes include the following:
 > - The node count of TiDB can only be set to 1 or 2, and the node count of TiKV is fixed to 3.
 > - 4 vCPU TiDB can only be used with 4 vCPU TiKV.
 > - TiFlash is unavailable.
+>
+> The **4 vCPU, 16 GiB** size of TiDB is designed for learning, testing, and trial purposes. It is suitable for pre-production environments or small, non-critical workloads. However, it is **NOT** recommended for full-scale production due to performance limitations. If you need lower costs and an SLA guarantee for production, consider using the [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) cluster plan.
 
 ### TiDB node count
 
@@ -103,6 +105,8 @@ The supported vCPU and RAM sizes include the following:
 > - The node count of TiDB can only be set to 1 or 2, and the node count of TiKV is fixed to 3.
 > - 4 vCPU TiKV can only be used with 4 vCPU TiDB.
 > - TiFlash is unavailable.
+>
+> The **4 vCPU, 16 GiB** size of TiKV is designed for learning, testing, and trial purposes. It is suitable for pre-production environments or small, non-critical workloads. However, it is **NOT** recommended for full-scale production due to performance limitations. If you need lower costs and an SLA guarantee for production, consider using the [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) cluster plan.
 
 ### TiKV node count
 
