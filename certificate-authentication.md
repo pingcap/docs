@@ -440,7 +440,7 @@ Also replace the old CA certificate with the combined certificate so that the cl
     sudo openssl x509 -req -in server-req.new.pem -days 365000 -CA ca-cert.pem -CAkey ca-key.pem -set_serial 01 -out server-cert.new.pem
     ```
 
-3. Configure the TiDB server to use the new server key and certificate. Place the files in the location that is specified before in the [Configure TiDB to use server certificate](#configure-tidb-to-use-server-certificate) section.
+3. Configure the TiDB server to use the new server key and certificate. Place the files in the same directory specified in the [Configure TiDB to use server certificate](#configure-tidb-to-use-server-certificate) section.
 
     ```sql
     ALTER INSTANCE RELOAD TLS;
