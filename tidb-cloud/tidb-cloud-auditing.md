@@ -5,7 +5,7 @@ summary: Learn about how to audit a cluster in TiDB Cloud.
 
 # TiDB Cloud Dedicated Database Audit Logging
 
-TiDB Cloud provides an audit logging feature that records user access activities, such as any executed SQL statements.
+TiDB Cloud provides an audit logging feature that records user access activities of your database, such as executed SQL statements.
 
 > **Note:**
 >

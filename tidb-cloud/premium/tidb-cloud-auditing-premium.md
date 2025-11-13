@@ -5,7 +5,7 @@ summary: Learn how to audit an instance in {{{ .premium }}}.
 
 # {{{ .premium }}} Database Audit Logging
 
-TiDB Cloud provides an audit logging feature that records user access activities, such as any executed SQL statements.
+TiDB Cloud provides an audit logging feature that records user access activities of your database, such as executed SQL statements.
 
 To evaluate the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to periodically analyze database audit logs.
 
@@ -115,7 +115,7 @@ To enable database audit logging for TiDB cloud on Alibaba Cloud, take the follo
 
 Create an Object Storage Service (OSS) bucket in your organization-owned Alibaba Cloud account as the destination to which TiDB Cloud writes audit logs.
 
-For more information, see [Creating storage buckets](https://help.aliyun.com/zh/oss/user-guide/create-a-bucket-4) in the Alibaba Cloud Storage documentation.
+For more information, see [Creating storage buckets](https://www.alibabacloud.com/help/en/oss/user-guide/create-a-bucket-4) in the Alibaba Cloud Storage documentation.
 
 #### Step 2. Configure OSS access
 
@@ -126,7 +126,7 @@ For more information, see [Creating storage buckets](https://help.aliyun.com/zh/
     3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
     4. In the **Database Audit Log Storage Configuration** dialog, locate the **Alibaba Cloud RAM Policy Settings** section, and record **TiDB Cloud Account ID** and **TiDB Cloud External ID** for later use.
 
-2. In the Alibaba Cloud console, go to **RAM** > **Permissions** > **Policies**, and then check whether a policy already exists with the `oss:PutObject` write-only permission for your audit log bucket.
+2. In the Alibaba Cloud console, go to **RAM** > **Permissions** > **Policies**, and then check whether a policy already exists with the `oss:PutObject` write-only permission for your audit log OSS bucket.
 
     - If yes, record the policy name for later use.
 
