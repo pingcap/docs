@@ -43,7 +43,7 @@ Specify an Amazon S3 bucket in your organization-owned AWS account as the destin
 >
 > Do not enable object lock on the AWS S3 bucket. Enabling object lock will prevent TiDB Cloud from pushing audit log files to S3.
 
-For more information, see [creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) in the AWS User Guide.
+For more information, see [Creating a general purpose bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) in the AWS User Guide.
 
 #### Step 2. Configure Amazon S3 access
 
@@ -117,7 +117,7 @@ To enable database audit logging for TiDB cloud on Alibaba Cloud, take the follo
 
 Create an Object Storage Service (OSS) bucket in your organization-owned Alibaba Cloud account as the destination to which TiDB Cloud writes audit logs.
 
-For more information, see [Creating storage buckets](https://www.alibabacloud.com/help/en/oss/user-guide/create-a-bucket-4) in the Alibaba Cloud Storage documentation.
+For more information, see [Create a bucket](https://www.alibabacloud.com/help/en/oss/user-guide/create-a-bucket-4) in the Alibaba Cloud Storage documentation.
 
 #### Step 2. Configure OSS access
 
