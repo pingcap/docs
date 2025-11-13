@@ -5,15 +5,15 @@ summary: Learn about how to audit a cluster in TiDB Cloud.
 
 # TiDB Cloud Dedicated Database Audit Logging
 
-TiDB Cloud provides you with a database audit logging feature to record a history of user access details (such as any SQL statements executed) in logs.
+TiDB Cloud provides an audit logging feature that records user access activities of your database, such as executed SQL statements.
 
 > **Note:**
 >
 > Currently, the database audit logging feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for database audit logging" in the **Description** field and click **Submit**.
 
-To assess the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to conduct a periodic analysis of the database audit logs.
+To evaluate the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to periodically analyze database audit logs.
 
-The audit logging feature is disabled by default. To audit a cluster, you need to enable the audit logging first, and then specify the auditing filter rules.
+The audit logging feature is **disabled by default**. To audit a cluster, you must first enable the audit logging, and then specify the auditing filter rules.
 
 > **Note:**
 >
@@ -44,7 +44,7 @@ To enable audit logging for AWS, take the following steps:
 
 #### Step 1. Create an Amazon S3 bucket
 
-Specify an Amazon S3 bucket in your corporate-owned AWS account as a destination to which TiDB Cloud writes the audit logs.
+Specify an Amazon S3 bucket in your organization-owned AWS account as a destination to which TiDB Cloud writes the audit logs.
 
 > **Note:**
 >
@@ -105,7 +105,7 @@ In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dial
 3. In the **Role ARN** field, fill in the Role ARN value that you copied in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
 4. Click **Test Connection** to verify whether TiDB Cloud can access and write to the bucket.
 
-    If it is successful, **The connection is successfully** is displayed. Otherwise, check your access configuration.
+    If it is successful, **The connection is successful** is displayed. Otherwise, check your access configuration.
 
 5. Click **Enable** to enable audit logging for the cluster.
 
@@ -122,7 +122,7 @@ To enable audit logging for Google Cloud, take the following steps:
 
 #### Step 1. Create a GCS bucket
 
-Specify a Google Cloud Storage (GCS) bucket in your corporate-owned Google Cloud account as a destination to which TiDB Cloud writes audit logs.
+Specify a Google Cloud Storage (GCS) bucket in your organization-owned Google Cloud account as a destination to which TiDB Cloud writes audit logs.
 
 For more information, see [Creating storage buckets](https://cloud.google.com/storage/docs/creating-buckets) in the Google Cloud Storage documentation.
 
@@ -169,7 +169,7 @@ In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dial
 2. In the **Bucket Region** field, select the GCS region where the bucket locates.
 3. Click **Test Connection** to verify whether TiDB Cloud can access and write to the bucket.
 
-    If it is successful, **The connection is successfully** is displayed. Otherwise, check your access configuration.
+    If it is successful, **The connection is successful** is displayed. Otherwise, check your access configuration.
 
 4. Click **Enable** to enable audit logging for the cluster.
 
@@ -262,7 +262,7 @@ To specify auditing filter rules for a cluster, take the following steps:
 
     You can add one audit rule at a time. Each rule specifies a user expression, database expression, table expression, and access type. You can add multiple audit rules to meet your auditing requirements.
 
-2.In the **Log Filter Rules** section, click **>** to expand and view the list of audit rules you have added.
+2. In the **Log Filter Rules** section, click **>** to expand and view the list of audit rules you have added.
 
 > **Note:**
 >
@@ -277,9 +277,9 @@ By default, TiDB Cloud stores database audit log files in your storage service, 
 >
 > If you have requested and chosen to store audit log files in TiDB Cloud, you can download them from the **Audit Log Access** section on the **Database Audit Logging** page.
 
-TiDB Cloud audit logs are readable text files with the cluster ID, Pod ID, and log creation date incorporated into the fully qualified filenames.
+TiDB Cloud audit logs are readable text files with the cluster ID, node ID, and log creation date incorporated into the fully qualified filenames.
 
-For example, `13796619446086334065/tidb-0/tidb-audit-2022-04-21T18-16-29.529.log`. In this example, `13796619446086334065` indicates the cluster ID and `tidb-0` indicates the Pod ID.
+For example, `13796619446086334065/tidb-0/tidb-audit-2022-04-21T18-16-29.529.log`. In this example, `13796619446086334065` indicates the cluster ID and `tidb-0` indicates the node ID.
 
 ## Disable audit logging
 

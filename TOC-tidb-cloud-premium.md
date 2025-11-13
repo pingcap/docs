@@ -245,6 +245,7 @@
   - Data Access Control
     - [User-Controlled Log Redaction](/tidb-cloud/tidb-cloud-log-redaction.md)
   - Audit Management
+    - [Database Audit Logging](/tidb-cloud/premium/tidb-cloud-auditing-premium.md)
     - [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md)
 - Billing
   - [Invoices](/tidb-cloud/tidb-cloud-billing.md#invoices)
