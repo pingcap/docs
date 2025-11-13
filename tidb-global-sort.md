@@ -64,7 +64,7 @@ To enable Global Sort, follow these steps:
 
     > **Note:**
     >
-    > For {{{ .premium }}}, this parameter is automatically configured and does not require manual adjustment. If you need to modify it, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+    > For {{{ .premium }}}, this parameter is automatically configured and does not require manual adjustment. If you need to modify the setting, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
     </CustomContent>
 
