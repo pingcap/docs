@@ -107,6 +107,8 @@ In the TiDB Cloud console, go back to the **Database Audit Log Storage Configura
 > - After enabling audit logging, if you make any new changes to the bucket URI, location, or ARN, you must click **Test Connection** again to verify that TiDB Cloud can connect to the bucket. Then, click **Enable** to apply the changes.
 > - To remove TiDB Cloud's access to your Amazon S3, simply delete the trust policy granted to this instance in the AWS Management Console.
 
+<CustomContent language="en,zh">
+
 ### Enable audit logging for TiDB on Alibaba Cloud
 
 To enable database audit logging for TiDB cloud on Alibaba Cloud, take the following steps:
@@ -195,6 +197,8 @@ In the TiDB Cloud console, go back to the **Database Audit Log Storage Configura
 >
 > - After enabling audit logging, if you make any new changes to the bucket URI or location, you must click **Test Connection** again to verify that TiDB Cloud can connect to the bucket. Then, click **Enable** to apply the changes.
 > - To remove TiDB Cloud's access to your OSS bucket, delete the trust policy granted to this instance in the Alibaba Cloud console.
+
+</CustomContent>
 
 ## Specify auditing filter rules
 
