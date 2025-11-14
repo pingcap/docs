@@ -129,7 +129,7 @@ In the `fileLocation` parameter, you can specify a single file, or use the `*` a
 - Import all files with the `foo` prefix and the `.csv` suffix in a specified path: `s3://<bucket-name>/path/to/data/foo*.csv`
 - Import `1.csv` and `2.csv` in a specified path: `s3://<bucket-name>/path/to/data/[12].csv`. This is useful for importing a specific, non-sequential set of files.
 - Import `1.csv`, `2.csv`, and `3.csv` using a range: `s3://<bucket-name>/path/to/data/[1-3].csv`
-- Import files with a single character name, except `1.csv` or `2.csv` using `^` for negation: `s3://<bucket-name>/path/to/data/[^12].csv`
+- Import files with a single character name, using `^` for negation. For example, excluding `1.csv` or `2.csv`: `s3://<bucket-name>/path/to/data/[^12].csv`
 
 > **Note:**
 >
