@@ -180,7 +180,7 @@ ADD UNIQUE INDEX <index_name> (col1, col2) GLOBAL;
     - Available starting from v9.0.0-beta.1
     - Expected to be included in the next LTS release
 
-You can define inline when creating a table to create a global index. 
+You can also create a global index inline when you create a table. 
 
 ```sql
 CREATE TABLE t (
