@@ -42,7 +42,7 @@ For more use cases, see [Partition Pruning](https://docs.pingcap.com/tidb/stable
 
 ### Query performance on secondary indexes: non-partitioned tables vs. local indexes vs. global indexes
 
-In TiDB, partitioned tables use local indexes by default. Each partition has its own set of indexes. A global index, on the other hand, covers the whole table in one index. This means it keeps track of all rows across all partitions. global indexes can be faster for queries across multiple partitions because local indexes needs to do one lookup in each partition separately, while global index only needs one lookup for the whole table.
+In TiDB, partitioned tables use local indexes by default. Each partition has its own set of indexes. A global index, on the other hand, covers the whole table in one index. This means it keeps track of all rows across all partitions. Global indexes can be faster for queries that span multiple partitions because a query using local indexes must perform a lookup in each relevant partition, while a query using a global index only needs to perform a single lookup for the entire table.
 
 #### Types of tables to be tested
 
@@ -121,7 +121,7 @@ Metrics collected:
 |---|---|---|---|---|---|
 | Non-partitioned table | 12.6 ms | 72 | 79 | 151 | Provides the best performance with the fewest Cop tasks, which is ideal for most OLTP use cases. |
 | Partitioned table with local indexes | 108 ms | 600 | 375 | 975 | When the partition key is not used in the query condition, local index queries scan all partitions. |
-| Partitioned table with global indexes | 14.8 ms | 69 | 383 | 452 | It improves index scan efficiency, but table lookups can still take long time if many rows match. |
+| Partitioned table with global indexes | 14.8 ms | 69 | 383 | 452 | It improves index scan efficiency, but table lookups can still take a long time if many rows match. |
 
 #### Execution plan examples
 
@@ -202,7 +202,7 @@ PARTITION BY RANGE (id) (
 
 The performance overhead of partitioned tables in TiDB depends significantly on the number of partitions and the type of index used.
 
-- The more partitions you have, the more severe the potential performance degrades.
+- The more partitions you have, the more severe the potential performance degradation.
 - With a smaller number of partitions, the impact might not be as noticeable, but it is still workload-dependent.
 - For local indexes, if a query does not include effective partition pruning conditions, the number of partitions directly correlates with the number of [Remote Procedure Calls (RPCs)](https://docs.pingcap.com/tidb/stable/glossary/#remote-procedure-call-rpc) triggered. This means more partitions will likely result in more RPCs, leading to higher latency.
 - For global indexes, the number of RPCs and the degree of performance regression depend on both the number of partitions involved and how many rows need to be retrieved (that is, the number of rows requiring table lookups). Note that for very large tables where data is already distributed across many Regions, accessing data through a global index may have similar performance to a non-partitioned table, as both scenarios require multiple cross-Region RPCs.
@@ -210,13 +210,13 @@ The performance overhead of partitioned tables in TiDB depends significantly on 
 #### Recommendations
 
 - Avoid partitioned tables unless necessary. For most OLTP workloads, a well-indexed non-partitioned table performs better and is easier to manage.
-- If you know all queries will make use of good partitioning pruning (matching only a few partitions) then local indexes are good
-- If you know critical queries does not have good partitioning pruning (matching many partitions) then Global index is to recommend.
+- If you know all queries will make use of good partition pruning (matching only a few partitions), then local indexes are a good choice.
+- If you know critical queries do not have good partition pruning (matching many partitions), then a global index is recommended.
 - Use local indexes only if your main concern is DDL efficiency (such as fast `DROP PARTITION`) and the performance side effect from the partition table is acceptable.
 
 ## Facilitate bulk data deletion
 
-In TiDB, you can clear up historical data either by TTL (Time-to-Live) or manual partition drop. While both methods serve the same purpose, they differ significantly in performance. The testcases in this section show that dropping partitions is generally faster and less resource-intensive, making it a better choice for large datasets and frequent purging needs.
+In TiDB, you can clear up historical data either by TTL (Time-to-Live) or manual partition drop. While both methods serve the same purpose, they differ significantly in performance. The test cases in this section show that dropping partitions is generally faster and less resource-intensive, making it a better choice for large datasets and frequent purging needs.
 
 ### Differences between TTL and partition drop
 
@@ -236,7 +236,7 @@ To compare the performance of TTL and partition drop, the test case in this sect
 **TTL performance:**
 
 - On a write-heavy table, TTL runs every 10 minutes.
-- With 50 threads, each TTL job takes 8 to 10 minutes, deleted 7 to 11 million rows.
+- With 50 threads, each TTL job takes 8 to 10 minutes, deleting 7 to 11 million rows.
 - With 100 threads, it handles up to 20 million rows, but the execution time increases to 15 to 30 minutes, with greater variance.
 - TTL jobs impact system performance under high workloads due to extra scanning and deletion activity, reducing overall QPS.
 
@@ -261,7 +261,7 @@ CREATE TABLE `ad_cache` (
   `cache_data` mediumblob DEFAULT NULL,
   `data_version` int(11) DEFAULT NULL,
   `is_deleted` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`session`, `ad_id`, `create_time`, `suffix`)
+  PRIMARY KEY (`session_id`, `external_id`, `create_time`, `id_suffix`)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 TTL=`expire_time` + INTERVAL 0 DAY TTL_ENABLE='ON'
@@ -455,7 +455,7 @@ This imbalance can cause that TiKV node to trigger **flow control**, leading to 
 
 **Pros:**
 
-- When a new partition is created in a **NONCLUSTERED Partitioned Table** configured with `SHARD_ROW_ID_BITS` and [PRE_SPLIT_REGIONS](/sql-statements//sql-statement-split-region.md#pre_split_regions), the regions can be **automatically pre-split**, significantly reducing manual intervention.
+- When a new partition is created in a **NONCLUSTERED Partitioned Table** configured with `SHARD_ROW_ID_BITS` and [PRE_SPLIT_REGIONS](/sql-statements/sql-statement-split-region.md#pre_split_regions), the regions can be **automatically pre-split**, significantly reducing manual intervention.
 - Lower operational overhead.
 
 **Cons:**
@@ -481,7 +481,7 @@ CREATE TABLE employees (
   store_id INT,
   PRIMARY KEY (`id`,`hired`) NONCLUSTERED,
   KEY `idx_employees_on_store_id` (`store_id`)
-)SHARD_ROW_ID_BITS = 2 PRE_SPLIT_REGIONS=2
+) SHARD_ROW_ID_BITS = 2 PRE_SPLIT_REGIONS=2
 PARTITION BY RANGE ( YEAR(hired) ) (
   PARTITION p0 VALUES LESS THAN (1991),
   PARTITION p1 VALUES LESS THAN (1996),
@@ -542,7 +542,7 @@ SHOW TABLE employees PARTITION (p4) regions;
 
 SPLIT PARTITION TABLE employees INDEX `PRIMARY` BETWEEN (1, "2006-01-01") AND (100000, "2011-01-01") REGIONS <number_of_regions>;
 
-SPLIT PARTITION TABLE employees PARTITION (p4) INDEX `idx_employees2_on_store_id` BETWEEN (1) AND (1000) REGIONS <number_of_regions>;
+SPLIT PARTITION TABLE employees PARTITION (p4) INDEX `idx_employees_on_store_id` BETWEEN (1) AND (1000) REGIONS <number_of_regions>;
 
 SHOW TABLE employees PARTITION (p4) regions;
 ```
@@ -648,7 +648,7 @@ show table employees2 PARTITION (p4) regions;
 
 ## Convert between partitioned and non-partitioned tables
 
-When working with large tables (for example in this example 120 million rows), transforming between partitioned and non-partitioned schemas is sometimes required for performance tuning or schema design changes. TiDB supports several main approaches for such transformations:
+When working with large tables (for example, a table with 120 million rows), transforming between partitioned and non-partitioned schemas is sometimes required for performance tuning or schema design changes. TiDB supports several main approaches for such transformations:
 
 1. Batch DML: `INSERT INTO ... SELECT ...`
 2. Pipeline DML: `INSERT INTO ... SELECT ...`
@@ -683,7 +683,7 @@ PARTITION `fa_2024365` VALUES LESS THAN (2025365));
 ### Table schema: `fa_new`
 
 ```sql
-CREATE TABLE `fa` (
+CREATE TABLE `fa_new` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `account_id` bigint(20) NOT NULL,
   `sid` bigint(20) DEFAULT NULL,
