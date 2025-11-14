@@ -218,7 +218,7 @@ The performance overhead of partitioned tables in TiDB depends significantly on 
 
 In TiDB, you can clear up historical data either by TTL (Time-to-Live) or manual partition drop. While both methods serve the same purpose, they differ significantly in performance. The testcases in this section show that dropping partitions is generally faster and less resource-intensive, making it a better choice for large datasets and frequent purging needs.
 
-#### Differences between TTL and partition drop
+### Differences between TTL and partition drop
 
 - **TTL**: automatically removes data based on its age, but might be slower due to the need to scan and clean data over time.
 - **Partition Drop**: deletes an entire partition at once, making it much faster, especially when dealing with large datasets.
