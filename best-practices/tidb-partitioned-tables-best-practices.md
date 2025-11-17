@@ -172,7 +172,7 @@ ADD UNIQUE INDEX <index_name> (col1, col2) GLOBAL;
 
 > **Note:** 
 >
-> In TiDB v8.5.x and earlier versions, global indexes can only be created on unique columns. Starting from v8.5.4 and v9.0.0 (currently in beta), global indexes on non-unique columns are supported. This limitation will be removed in the next LTS version.
+> In TiDB v8.5.3 and earlier versions, global indexes can only be created on unique columns. Starting from v8.5.4 and v9.0.0 (currently in beta), global indexes on non-unique columns are supported. This limitation will be removed in the next LTS version.
 
 - The `GLOBAL` keyword must be explicitly specified.
 - For non-unique global indexes, use `ADD INDEX` instead of `ADD UNIQUE INDEX`.
