@@ -7,7 +7,7 @@ summary: Learn about JSON functions that create JSON values.
 
 This document describes JSON functions that create JSON values.
 
-## JSON_ARRAY()
+## `JSON_ARRAY()`
 
 The `JSON_ARRAY([val[, val] ...])` function evaluates a (possibly empty) list of values and returns a JSON array containing those values.
 
@@ -24,7 +24,7 @@ SELECT JSON_ARRAY(1,2,3,4,5), JSON_ARRAY("foo", "bar");
 1 row in set (0.00 sec)
 ```
 
-## JSON_OBJECT()
+## `JSON_OBJECT()`
 
 The `JSON_OBJECT([key, val[, key, val] ...])` function evaluates a (possibly empty) list of key-value pairs and returns a JSON object containing those pairs.
 
@@ -41,7 +41,7 @@ SELECT JSON_OBJECT("database", "TiDB", "distributed", TRUE);
 1 row in set (0.00 sec)
 ```
 
-## JSON_QUOTE()
+## `JSON_QUOTE()`
 
 The `JSON_QUOTE(str)` function returns a string as a JSON value with quotes.
 
