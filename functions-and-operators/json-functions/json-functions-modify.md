@@ -5,7 +5,7 @@ summary: Learn about JSON functions that modify JSON values.
 
 # JSON Functions That Modify JSON Values
 
-This document describes JSON functions that modify JSON values.
+TiDB supports all the [JSON functions that modify JSON values](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html) available in MySQL 8.0.
 
 ## `JSON_APPEND()`
 

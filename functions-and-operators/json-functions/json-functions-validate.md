@@ -5,7 +5,7 @@ summary: Learn about JSON functions that validate JSON documents.
 
 # JSON Functions That Validate JSON Documents
 
-This document describes JSON functions that validate JSON documents.
+TiDB supports most of the [JSON schema validation functions](https://dev.mysql.com/doc/refman/8.0/en/json-validation-functions.html) available in MySQL 8.0.
 
 > **Note:**
 >

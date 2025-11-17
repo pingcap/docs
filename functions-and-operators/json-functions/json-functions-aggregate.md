@@ -7,6 +7,8 @@ summary: Learn about JSON functions that aggregate JSON values.
 
 The functions listed on this page are part of the [aggregate functions](/functions-and-operators/aggregate-group-by-functions.md) that TiDB supports, but are specific to working with JSON.
 
+TiDB supports the [two aggregate JSON functions](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html) available in MySQL 8.0.
+
 ## `JSON_ARRAYAGG()`
 
 The `JSON_ARRAYAGG(key)` function aggregates values of keys into a JSON array according to the given `key`. `key` is typically an expression or a column name.
