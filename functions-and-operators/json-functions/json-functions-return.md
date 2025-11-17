@@ -5,7 +5,7 @@ summary: Learn about JSON functions that return JSON values.
 
 # JSON Functions That Return JSON Values
 
-This document describes JSON functions that return JSON values.
+TiDB supports all the [JSON functions that return JSON value attributes](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html) available in MySQL 8.0.
 
 ## `JSON_DEPTH()`
 

@@ -5,7 +5,7 @@ summary: Learn about JSON functions that search JSON values.
 
 # JSON Functions That Search JSON Values
 
-This document describes JSON functions that search JSON values.
+TiDB supports most of the [JSON functions that search JSON values](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html) available in MySQL 8.0.`
 
 ## `JSON_CONTAINS()`
 

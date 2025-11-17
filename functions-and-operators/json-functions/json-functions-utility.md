@@ -5,7 +5,7 @@ summary: Learn about JSON utility functions.
 
 # JSON Utility Functions
 
-This document describes JSON utility functions.
+TiDB supports all the [JSON utility functions](https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html) available in MySQL 8.0.
 
 ## `JSON_PRETTY()`
 

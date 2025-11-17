@@ -5,7 +5,7 @@ summary: Learn about JSON functions that create JSON values.
 
 # JSON Functions That Create JSON Values
 
-This document describes JSON functions that create JSON values.
+TiDB supports all the [JSON functions that create JSON values](https://dev.mysql.com/doc/refman/8.0/en/json-creation-functions.html) available in MySQL 8.0.
 
 ## `JSON_ARRAY()`
 
