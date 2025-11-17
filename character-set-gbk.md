@@ -1,9 +1,9 @@
 ---
-title: GBK
+title: The GBK Character Set
 summary: This document provides details about the TiDB support of the GBK character set.
 ---
 
-# GBK
+# The GBK Character Set
 
 Starting from v5.4.0, TiDB supports the GBK character set. This document provides the TiDB support and compatibility information of the GBK character set.
 
