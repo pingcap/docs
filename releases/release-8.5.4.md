@@ -1,6 +1,6 @@
 ---
 title: TiDB 8.5.4 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 8.5.4.
+summary: Learn about the features, compatibility changes, improvements, and bug fixes in TiDB 8.5.4.
 ---
 
 # TiDB 8.5.4 Release Notes
