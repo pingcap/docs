@@ -27,10 +27,14 @@ heading_patthern = re.compile(r"(^#+|\n#+)\s")
 # match copyable snippet code
 copyable_snippet_pattern = re.compile(r"{{< copyable .* >}}")
 custom_content_tidb = re.compile(
-    r"""<CustomContent +platform=["']tidb["'] *>(.|\n)*?</CustomContent>\n"""
+    r"""<CustomContent[^>]*platform=["']tidb["'][^>]*>(.|\n)*?</CustomContent>"""
 )
 custom_content_tidb_cloud = re.compile(
-    r"""<CustomContent +platform=["']tidb-cloud["'] *>(.|\n)*?</CustomContent>\n"""
+    r"""<CustomContent[^>]*platform=["']tidb-cloud["'][^>]*>(.|\n)*?</CustomContent>"""
+)
+# Match CustomContent with plan attribute, capturing the plan value and content
+custom_content_with_plan = re.compile(
+    r"""<CustomContent[^>]+plan=["']([^"']+)["'][^>]*>(.|\n)*?</CustomContent>"""
 )
 
 sysArgvList = sys.argv
@@ -245,6 +249,18 @@ for type_, level, name in followups:
                     # print("removing custom content: tidb")
                     # Tidb Specified content should not render in tidb-cloud pdf
                     chapter = custom_content_tidb.sub(lambda x: "", chapter)
+
+                # Filter CustomContent by plan attribute, only keep content with "dedicated" in plan
+                def filter_by_plan(match):
+                    plan_value = match.group(1)  # Extract plan attribute value
+                    # Split by comma and check if "dedicated" is in the list
+                    plans = [p.strip() for p in plan_value.split(',')]
+                    if 'dedicated' in plans:
+                        return match.group(0)  # Keep the content
+                    else:
+                        return ""  # Remove the content
+
+                chapter = custom_content_with_plan.sub(filter_by_plan, chapter)
 
                 # fix heading level
                 diff_level = level - heading_patthern.findall(chapter)[0].count("#")
