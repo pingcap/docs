@@ -57,7 +57,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     To use the new architecture, set the TiCDC configuration item [`newarch`](https://docs.pingcap.com/tidb/v8.5/ticdc-server-config#newarch-new-in-v854-release1) to `true`.
 
-    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/ticdc/ticdc-architecture).
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/ticdc-architecture).
 
 ## Compatibility changes
 
