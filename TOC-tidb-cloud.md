@@ -644,6 +644,7 @@
   - Character Set and Collation
     - [Overview](/character-set-and-collation.md)
     - [GBK](/character-set-gbk.md)
+    - [GB18030](/character-set-gb18030.md)
   - Read Historical Data
     - Use Stale Read (Recommended)
       - [Usage Scenarios of Stale Read](/stale-read.md)
