@@ -174,7 +174,7 @@ SHOW COLLATION WHERE Charset = 'utf8mb4';
 5 rows in set (0.001 sec)
 ```
 
-For details about the GBK character set, see [GBK](/character-set-gbk.md). For details about the GB18030 character set, see [GB18030](/character-set-gb18030.md).
+For details about the GBK character set, see [The GBK Character Set](/character-set-gbk.md). For details about the GB18030 character set, see [The GB18030 Character Set](/character-set-gb18030.md).
 
 ## `utf8` and `utf8mb4` in TiDB
 

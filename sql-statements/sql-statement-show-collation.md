@@ -25,7 +25,7 @@ ShowLikeOrWhere ::=
 
 ## Examples
 
-If [the new collation framework](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) is enabled, in addition to the binary collations, the following collations are also supported:
+If [the new collation framework](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) is enabled, in addition to the binary collations, TiDB also supports the following collations:
 
 - Seven case- and accent-insensitive collations, ending with `_ci`
 - `utf8mb4_0900_bin`
@@ -57,7 +57,7 @@ SHOW COLLATION;
 15 rows in set (0.000 sec)
 ```
 
-If the new framework for collations is disabled, only binary collations are listed.
+If [the new collation framework](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) is disabled, TiDB supports only binary collations.
 
 ```sql
 SHOW COLLATION;

@@ -55,9 +55,9 @@ By default, TiDB Cloud enables the [new framework for collations](/character-set
 
 </CustomContent>
 
-Additionally, because TiDB converts GBK to `utf8mb4` and then uses a binary collation, the `gbk_bin` collation in TiDB is not the same as the `gbk_bin` collation in MySQL.
+Additionally, the `gbk_bin` supported by TiDB differs from MySQL's `gbk_bin` collation. TiDB converts GBK to `utf8mb4` and then performs binary sorting.
 
-After [the new framework for collations](/character-set-and-collation.md#new-framework-for-collations) is enabled, if you check the collations corresponding to the GBK character set, you can see that the default collation for GBK in TiDB has been switched to `gbk_chinese_ci`.
+After [the new framework for collations](/character-set-and-collation.md#new-framework-for-collations) is enabled, if you check the collations for the GBK character set, you can see that TiDB's default collation for GBK is switched to `gbk_chinese_ci`.
 
 Starting from TiDB v6.0.0, the new framework for collations is enabled by default, which sets `gbk_chinese_ci` as the default collation for the GBK character set in TiDB, consistent with MySQL.
 

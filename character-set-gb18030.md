@@ -1,6 +1,6 @@
 ---
 title: The GB18030 Character Set
-summary: This document provides details about the TiDB support for the GB18030 character set.
+summary: Learn the details of TiDB's support for the GB18030 character set.
 ---
 
 # The GB18030 Character Set
@@ -45,9 +45,9 @@ In MySQL, the default collation for the GB18030 character set is `gb18030_chines
 - By default, `new_collations_enabled_on_first_bootstrap` is set to `true`, which means enabling the [new collation framework](/character-set-and-collation.md#new-framework-for-collations). In this case, the default collation for GB18030 is `gb18030_chinese_ci`.
 - If `new_collations_enabled_on_first_bootstrap` is set to `false`, the new framework for collations is disabled, and the default collation for GB18030 is `gb18030_bin`.
 
-Additionally, the `gb18030_bin` supported by TiDB differs from MySQL's `gb18030_bin`. TiDB converts GB18030 to `utf8mb4` and then performs binary sorting.
+Additionally, the `gb18030_bin` supported by TiDB differs from MySQL's `gb18030_bin` collation. TiDB converts GB18030 to `utf8mb4` and then performs binary sorting.
 
-After enabling the new framework for collations, checking the collations for the GB18030 character set shows that TiDB's default collation for GB18030 is switched to `gb18030_chinese_ci`.
+After enabling the new framework for collations, if you check the collations for the GB18030 character set, you can see that TiDB's default collation for GB18030 is switched to `gb18030_chinese_ci`:
 
 ```sql
 SHOW CHARACTER SET WHERE CHARSET = 'gb18030';
@@ -78,15 +78,15 @@ SHOW COLLATION WHERE CHARSET = 'gb18030';
 
 ### Character compatibility
 
-- TiDB supports GB18030-2022 characters, while MySQL supports GB18030-2005 characters. As a result, the encoding and decoding of some characters differ.
+- TiDB supports GB18030-2022 characters, while MySQL supports GB18030-2005 characters. As a result, the encoding and decoding results for certain characters differ between the two systems.
 
-- For invalid GB18030 characters, such as `0xFE39FE39`, MySQL allows writing them to the database in hexadecimal form and stores them as `?`. In TiDB, reading or writing invalid GB18030 characters in strict mode will return an error, while in non-strict mode, it will generate a warning.
+- For invalid GB18030 characters, such as `0xFE39FE39`, MySQL allows writing them to the database in hexadecimal form and stores them as `?`. In TiDB, reading or writing invalid GB18030 characters in strict mode returns an error; in non-strict mode, TiDB allows reading or writing invalid GB18030 characters but returns a warning.
 
 ### Others
 
-- Currently, TiDB does not support changing other character sets to gb18030 or converting from `gb18030` to another character set using the `ALTER TABLE` statement.
+- Currently, TiDB does not support using the `ALTER TABLE` statement to convert other character sets to `gb18030`, or to convert from `gb18030` to another character set.
 
-- TiDB does not support using the `_gb18030` character set introducer, for example:
+- TiDB does not support using the `_gb18030` character set introducer. For example:
 
     ```sql
     CREATE TABLE t(a CHAR(10) CHARSET BINARY);
