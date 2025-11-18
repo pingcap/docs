@@ -89,7 +89,7 @@ Starting from v8.5.4, TiDB aligns its behavior with MySQL when inserting data in
 ## Improvements
 
 + TiDB <!--tw@Oreoxmt: 11 notes-->
-
+    - Optimize the performance of `MODIFY COLUMN` and `CHANGE COLUMN`, reducing the execution time of certain lossy DDL operations (such as changing `BIGINT` to `INT` or changing `CHAR(128)` to `VARCHAR(64)`) from hours to minutes or even milliseconds, achieving overall performance improvements ranging from several times to tens of thousands of times [#63366](https://github.com/pingcap/tidb/issues/63366) @[wjhuang2016](https://github.com/wjhuang2016) @[tangenta](https://github.com/tangenta) @[fzzf678](https://github.com/fzzf678)
     - (dup): release-9.0.0.md(beta.1) > Improvements> TiDB - Support applying the `semi_join_rewrite` hint to Semi Joins in `IN` subqueries [#58829](https://github.com/pingcap/tidb/issues/58829) @[qw4990](https://github.com/qw4990)
     - Optimize the estimation strategy when the `tidb_opt_ordering_index_selectivity_ratio` system variable takes effect [#62817](https://github.com/pingcap/tidb/issues/62817) @[terry1purcell](https://github.com/terry1purcell)
     - Adjust the optimizer selection logic to make newly created indexes more likely to be chosen in certain scenarios [#57948](https://github.com/pingcap/tidb/issues/57948) @[terry1purcell](https://github.com/terry1purcell)
