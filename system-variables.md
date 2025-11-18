@@ -1947,9 +1947,9 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_auto_analyze_priority_queue <span class="version-mark">New in v8.0.0</span>
 
- > **Warning:**
- >
- > Starting from v9.0.0, this variable is deprecated. TiDB always enables the priority queue for automatically collecting statistics.
+> **Warning:**
+>
+> Starting from v9.0.0, this variable is deprecated. TiDB always enables the priority queue for automatically collecting statistics.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
