@@ -210,7 +210,7 @@ For more information, see [Compatibility between TiDB local temporary tables and
 
 * For information on the MySQL compatibility of the GBK character set, refer to [GBK compatibility](/character-set-gbk.md#mysql-compatibility) .
 
-<!-- * For information on the MySQL compatibility of the GB18030 character set, refer to [GB18030 compatibility](/character-set-gb18030.md#mysql-compatibility). -->
+* For information on the MySQL compatibility of the GB18030 character set, refer to [GB18030 compatibility](/character-set-gb18030.md#mysql-compatibility).
 
 * TiDB inherits the character set used in the table as the national character set.
 

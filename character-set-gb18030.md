@@ -3,7 +3,7 @@ title: The GB18030 Character Set
 summary: Learn the details of TiDB's support for the GB18030 character set.
 ---
 
-# The GB18030 Character Set
+# The GB18030 Character Set <span class="version-mark">New in v9.0.0</span>
 
 Starting from v9.0.0, TiDB supports the GB18030-2022 character set. This document describes TiDB's support for and compatibility with the GB18030 character set.
 
