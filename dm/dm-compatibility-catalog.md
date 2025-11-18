@@ -20,6 +20,9 @@ DM supports migrating data from different sources to TiDB clusters. Based on the
 | MySQL 5.6 | GA | |
 | MySQL 5.7 | GA | |
 | MySQL 8.0 | GA | Does not support binlog transaction compression [Transaction_payload_event](https://dev.mysql.com/doc/refman/8.0/en/binary-log-transaction-compression.html). |
+| MySQL 8.1 ~ 8.3 | Not tested | |
+| MySQL 8.4 | Incompatible | For more information, see [DM Issue #11020](https://github.com/pingcap/tiflow/issues/11020). |
+| MySQL 9.x | Not tested | |
 | MariaDB < 10.1.2 | Incompatible | Incompatible with binlog of the time type. |
 | MariaDB 10.1.2 ~ 10.5.10 | Experimental | |
 | MariaDB > 10.5.10 | Not tested | Expected to work in most cases after bypassing the [precheck](/dm/dm-precheck.md). See [MariaDB notes](#mariadb-notes). |

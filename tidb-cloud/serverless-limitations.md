@@ -16,7 +16,7 @@ We are constantly filling in the feature gaps between {{{ .starter }}}/Essential
 
 ### Audit logs
 
-- [Database audit logging](/tidb-cloud/tidb-cloud-auditing.md) is currently unavailable.
+- [Database audit logging](/tidb-cloud/essential-database-audit-logging.md) is currently unavailable for {{{ .starter }}} clusters.
 
 ### Connection
 
