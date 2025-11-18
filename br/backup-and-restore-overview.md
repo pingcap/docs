@@ -112,7 +112,8 @@ Backup and restore might go wrong when some TiDB features are enabled or disable
 
 | Feature | Issue | Solution |
 |  ----  | ----  | ----- |
-|GBK charset|| BR of versions earlier than v5.4.0 does not support restoring `charset=GBK` tables. No version of BR supports recovering `charset=GBK` tables to TiDB clusters earlier than v5.4.0. |
+|GBK charset|| Before v5.4.0, BR does not support restoring tables with `charset=GBK`. In addition, no version of BR supports restoring tables with `charset=GBK` to TiDB clusters earlier than v5.4.0. |
+|GB18030 charset|| Before v9.0.0, BR does not support restoring tables with `charset=GB18030`. In addition, no version of BR supports restoring tables with `charset=GB18030` to TiDB clusters earlier than v9.0.0.|
 | Clustered index | [#565](https://github.com/pingcap/br/issues/565) | Make sure that the value of the `tidb_enable_clustered_index` global variable during restore is consistent with that during backup. Otherwise, data inconsistency might occur, such as `default not found` error and inconsistent data index. |
 | New collation  | [#352](https://github.com/pingcap/br/issues/352)       | Make sure that the value of the `new_collation_enabled` variable in the `mysql.tidb` table during restore is consistent with that during backup. Otherwise, inconsistent data index might occur and checksum might fail to pass. For more information, see [FAQ - Why does BR report `new_collations_enabled_on_first_bootstrap` mismatch?](/faq/backup-and-restore-faq.md#why-is-new_collation_enabled-mismatch-reported-during-restore). |
 | Global temporary tables | | Make sure that you are using v5.3.0 or a later version of BR to back up and restore data. Otherwise, an error occurs in the definition of the backed global temporary tables. |
