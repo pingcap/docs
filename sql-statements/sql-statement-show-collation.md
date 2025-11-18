@@ -25,7 +25,7 @@ ShowLikeOrWhere ::=
 
 ## Examples
 
-If [the new collation framework](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) is enabled, in addition to the binary collations, TiDB also supports the following collations:
+When the [new collation framework](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#new_collations_enabled_on_first_bootstrap) is enabled, in addition to the binary collations, TiDB also supports the following collations:
 
 - Seven case- and accent-insensitive collations, ending with `_ci`
 - `utf8mb4_0900_bin`
