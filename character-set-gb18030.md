@@ -40,7 +40,7 @@ This section describes the compatibility of the GB18030 character set in TiDB wi
 
 ### Collation compatibility
 
-In MySQL, the default collation for the GB18030 character set is `gb18030_chinese_ci`. In TiDB, the default collation for GB18030 depends on the configuration parameter [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap):
+In MySQL, the default collation for the GB18030 character set is `gb18030_chinese_ci`. In TiDB, the default collation for GB18030 depends on the configuration parameter [`new_collations_enabled_on_first_bootstrap`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#new_collations_enabled_on_first_bootstrap):
 
 - By default, `new_collations_enabled_on_first_bootstrap` is set to `true`, which means enabling the [new collation framework](/character-set-and-collation.md#new-framework-for-collations). In this case, the default collation for GB18030 is `gb18030_chinese_ci`.
 - If `new_collations_enabled_on_first_bootstrap` is set to `false`, the new framework for collations is disabled, and the default collation for GB18030 is `gb18030_bin`.
