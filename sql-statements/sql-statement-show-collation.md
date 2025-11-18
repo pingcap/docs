@@ -57,7 +57,7 @@ SHOW COLLATION;
 15 rows in set (0.000 sec)
 ```
 
-If [the new collation framework](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) is disabled, TiDB supports only binary collations.
+If [the new collation framework](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#new_collations_enabled_on_first_bootstrap) is disabled, TiDB supports only binary collations.
 
 ```sql
 SHOW COLLATION;
