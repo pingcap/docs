@@ -42,12 +42,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 * Support gracefully shutting down TiFlash [#10266](https://github.com/pingcap/tiflash/issues/10266) @[gengliqi](https://github.com/gengliqi) <!--tw@qiancai -->
 
-    When shutting down a TiFlash server, TiFlash now lets currently running MPP tasks continue within a configurable timeout duration, while rejecting new MPP task requests. The default timeout duration is 600 seconds, and you can adjust it using the [`graceful_wait_shutdown_timeout`](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854) configuration item.
+    When shutting down a TiFlash server, TiFlash now lets currently running MPP tasks continue for a configurable timeout duration, while rejecting new MPP task requests. The default timeout duration is 600 seconds, and you can adjust it using the [`graceful_wait_shutdown_timeout`](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854) configuration item.
 
     - If all running MPP tasks finish before the timeout duration expires, TiFlash shuts down immediately.
     - If there are still unfinished MPP tasks when the timeout duration expires, TiFlash shuts down forcibly.
 
-    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854).
+  For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854).
 
 * Introduce a new TiCDC architecture option for improved performance, scalability, and stability [#442](https://github.com/pingcap/ticdc/issues/442) @[CharlesCheung96](https://github.com/CharlesCheung96) <!--tw@qiancai -->
 
