@@ -11,13 +11,61 @@ TiDB version: 8.5.4
 
 Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup)
 
+## New features
+
+* Support redistributing data of a specific table (experimental) [#63260](https://github.com/pingcap/tidb/issues/63260) @[bufferflies](https://github.com/bufferflies) <!--tw@qiancai -->
+
+    PD automatically schedules data to distribute it as evenly as possible across all TiKV nodes in a cluster. However, this automatic scheduling is based on the overall cluster. In some cases, even if the cluster-wide data distribution is balanced, the data of a specific table might still be unevenly distributed across TiKV nodes.
+
+    Starting from v8.5.4, you can use the [`SHOW TABLE DISTRIBUTION`](https://docs.pingcap.com/tidb/v8.5/sql-statement-show-distribution-jobs) statement to check how the data of a specific table is distributed across all TiKV nodes. If the data distribution is unbalanced, you can use the [`DISTRIBUTE TABLE`](https://docs.pingcap.com/tidb/v8.5/sql-statement-distribute-table) statement to redistribute the table's data (experimental) to improve load balancing.
+
+    Note that redistributing the data of a specific table is a one-time task with a timeout limit. If the distribution task is not completed before the timeout, it will automatically exit.
+
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/sql-statement-distribute-table).
+
+* Support `ANALYZE` embedded in DDL statements [#57948](https://github.com/pingcap/tidb/issues/57948) @[terry1purcell](https://github.com/terry1purcell) @[AilinKid](https://github.com/AilinKid) <!--tw@hfxsd -->
+
+    This feature applies to the following types of DDL statements:
+
+    - DDL statements that create new indexes: [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
+    - DDL statements that reorganize existing indexes: [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md) and [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
+
+    When this feature is enabled, TiDB automatically runs an `ANALYZE` (statistics collection) operation before the new or reorganized index becomes visible to users. This prevents inaccurate optimizer estimates and potential plan changes caused by temporarily unavailable statistics after index creation or reorganization.
+
+     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/ddl_embedded_analyze).
+
+* Support creating global indexes on non-unique columns of partitioned tables [#58650](https://github.com/pingcap/tidb/issues/58650) @[Defined2014](https://github.com/Defined2014) @[mjonss](https://github.com/mjonss) <!--tw@qiancai -->
+
+    Starting from v8.3.0, you can create global indexes on unique columns of partitioned tables in TiDB to improve query performance. However, creating global indexes on non-unique columns was not supported. Starting from v8.5.4, TiDB removes this restriction, enabling you to create global indexes on non-unique columns of partitioned tables, which enhances the usability of global indexes.
+
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/partitioned-table#global-indexes).
+
+* Support gracefully shutting down TiFlash [#10266](https://github.com/pingcap/tiflash/issues/10266) @[gengliqi](https://github.com/gengliqi) <!--tw@qiancai -->
+
+    When shutting down a TiFlash server, TiFlash now lets currently running MPP tasks continue within a configurable timeout duration, while rejecting new MPP task requests. The default timeout duration is 600 seconds, and you can adjust it using the [`graceful_wait_shutdown_timeout`](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854) configuration item.
+
+    - If all running MPP tasks finish before the timeout duration expires, TiFlash shuts down immediately.
+    - If there are still unfinished MPP tasks when the timeout duration expires, TiFlash shuts down forcibly.
+
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854).
+
+* Introduce a new TiCDC architecture option for improved performance, scalability, and stability [#442](https://github.com/pingcap/ticdc/issues/442) @[CharlesCheung96](https://github.com/CharlesCheung96) <!--tw@qiancai -->
+
+    This new architecture redesigns TiCDC core components and optimizes its data processing workflows, while maintaining compatibility with the configuration, usage, and APIs of the [classic TiCDC architecture](/ticdc/ticdc-classic-architecture).
+
+    When configured to use this new architecture, TiCDC achieves near-linear scalability and can replicate millions of tables with lower resource consumption. It also reduces changefeed latency and delivers more stable performance in scenarios with high write workloads, frequent DDL operations, and cluster scaling. Note that the new architecture currently has some [initial limitations](https://docs.pingcap.com/tidb/v8.5/ticdc-architecture#limitations).
+
+    To use the new architecture, set the TiCDC configuration item [`newarch`](https://docs.pingcap.com/tidb/v8.5/ticdc-server-config#newarch-new-in-v854-release1) to `true`.
+
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/ticdc/ticdc-architecture).
+
 ## Compatibility changes
 
 ### System variables
 
-- Change the default value of the [`tidb_mpp_store_fail_ttl`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_mpp_store_fail_ttl) system variable from `60s` to `0s`. This means TiDB no longer needs to wait before sending queries to newly started TiFlash nodes, as delays are no longer necessary to prevent query failures. [#61826](https://github.com/pingcap/tidb/issues/61826) @[gengliqi](https://github.com/gengliqi) <!--tw@qiancai-->
+- Change the default value of the [`tidb_mpp_store_fail_ttl`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_mpp_store_fail_ttl) system variable from `60s` to `0s`. This means TiDB no longer needs to wait before sending queries to newly started TiFlash nodes, as delays are no longer necessary to prevent query failures. [#61826](https://github.com/pingcap/tidb/issues/61826) @[gengliqi](https://github.com/gengliqi) <!--tw@qiancai -->
 
-- Starting from v8.5.4, the [`tidb_replica_read`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_replica_read-new-in-v40) system variable only takes effect on read-only SQL statements. This change improves data read safety and reduces overlaps with other features. [#62856](https://github.com/pingcap/tidb/issues/62856) @[you06](https://github.com/you06) <!--tw@qiancai-->
+- Starting from v8.5.4, the [`tidb_replica_read`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_replica_read-new-in-v40) system variable only takes effect on read-only SQL statements. This change improves data read safety and reduces overlaps with other features. [#62856](https://github.com/pingcap/tidb/issues/62856) @[you06](https://github.com/you06) <!--tw@qiancai -->
 
 - Add the following system variables:
 
@@ -32,19 +80,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Deprecated configuration items: [`region-compact-check-interval`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#region-compact-check-interval), [`region-compact-check-step`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#region-compact-check-step), [`region-compact-min-tombstones`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#region-compact-min-tombstones), [`region-compact-tombstones-percent`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#region-compact-tombstones-percent), [`region-compact-min-redundant-rows`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#region-compact-min-redundant-rows-new-in-v710), and [`region-compact-redundant-rows-percent`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#region-compact-redundant-rows-percent-new-in-v710).
     - New configuration items: [`gc.auto-compaction.check-interval`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#check-interval-new-in-v757-and-v854), [`gc.auto-compaction.tombstone-num-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#tombstone-num-threshold-new-in-v757-and-v854), [`gc.auto-compaction.tombstone-percent-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#tombstone-percent-threshold-new-in-v757-and-v854), [`gc.auto-compaction.redundant-rows-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#redundant-rows-threshold-new-in-v757-and-v854), [`gc.auto-compaction.redundant-rows-percent-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#redundant-rows-percent-threshold-new-in-v757-and-v854), and [`gc.auto-compaction.bottommost-level-force`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#bottommost-level-force-new-in-v757-and-v854).
 
-- Add a TiFlash configuration item [`graceful_wait_shutdown_timeout`](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854), which controls the maximum wait time when shutting down a TiFlash server. The default value is `600` seconds. During this period, TiFlash continues running unfinished MPP tasks but does not accept new ones. If all running MPP tasks finish before this timeout, TiFlash shuts down immediately; otherwise, it is forcibly shut down after the wait time expires. [#10266](https://github.com/pingcap/tiflash/issues/10266) @[gengliqi](https://github.com/gengliqi) <!--tw@qiancai-->
+- Add a TiFlash configuration item [`graceful_wait_shutdown_timeout`](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854), which controls the maximum wait time when shutting down a TiFlash server. The default value is `600` seconds. During this period, TiFlash continues running unfinished MPP tasks but does not accept new ones. If all running MPP tasks finish before this timeout, TiFlash shuts down immediately; otherwise, it is forcibly shut down after the wait time expires. [#10266](https://github.com/pingcap/tiflash/issues/10266) @[gengliqi](https://github.com/gengliqi) <!--tw@qiancai -->
 
 ### MySQL compatibility
 
-Starting from v8.5.4, TiDB aligns its behavior with MySQL when inserting data into a `DECIMAL` column: if the number of decimal places exceeds the column's defined scale, TiDB automatically truncates the extra digits and inserts the truncated data successfully, regardless of how many extra decimal places there are. In earlier TiDB versions, if the number of decimal places in the inserted `DECIMAL` value exceeded 72, the insertion fails and returns an error. For more information, see [Connect to TiDB using JDBC](/develop/dev-guide-sample-application-java-jdbc.md#mysql-compatibility).
+Starting from v8.5.4, TiDB aligns its behavior with MySQL when inserting data into a `DECIMAL` column: if the number of decimal places exceeds the column's defined scale, TiDB automatically truncates the extra digits and inserts the truncated data successfully, regardless of how many extra decimal places there are. In earlier TiDB versions, if the number of decimal places in the inserted `DECIMAL` value exceeded 72, the insertion fails and returns an error. For more information, see [Connect to TiDB using JDBC](https://docs.pingcap.com/tidb/v8.5/dev-guide-sample-application-java-jdbc#mysql-compatibility).
 
 ## Improvements
 
 + TiDB <!--tw@Oreoxmt: 11 notes-->
 
-    - Support redistributing data of a specific table (experimental). Now you can use the [`SHOW TABLE DISTRIBUTION`](/sql-statements/sql-statement-show-distribution-jobs.md) statement to check how the data of a specific table is distributed across all TiKV nodes. If the data distribution is unbalanced, you can use the [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md) statement to redistribute the table's data to improve load balancing. [#63260](https://github.com/pingcap/tidb/issues/63260) @[bufferflies](https://github.com/bufferflies) <!--tw@qiancai-->
-    - Support [`ANALYZE` embedded in DDL statements](/ddl_embedded_analyze.md), which prevents inaccurate optimizer estimates and potential plan changes caused by temporarily unavailable statistics after index creation or reorganization [#57948](https://github.com/pingcap/tidb/issues/57948) @[terry1purcell](https://github.com/terry1purcell) @[AilinKid](https://github.com/AilinKid) <!--tw@hfxsd -->
-    - (dup): release-9.0.0.md(beta.1) > # SQL - Support creating [global indexes](/partitioned-table.md#global-indexes) on non-unique columns of partitioned tables, enhancing the usability of global indexes [#58650](https://github.com/pingcap/tidb/issues/58650) @[Defined2014](https://github.com/Defined2014) @[mjonss](https://github.com/mjonss) <!--tw@qiancai-->
     - (dup): release-9.0.0.md(beta.1) > Improvements> TiDB - Support applying the `semi_join_rewrite` hint to Semi Joins in `IN` subqueries [#58829](https://github.com/pingcap/tidb/issues/58829) @[qw4990](https://github.com/qw4990)
     - Optimize the estimation strategy when the `tidb_opt_ordering_index_selectivity_ratio` system variable takes effect [#62817](https://github.com/pingcap/tidb/issues/62817) @[terry1purcell](https://github.com/terry1purcell)
     - Adjust the optimizer selection logic to make newly created indexes more likely to be chosen in certain scenarios [#57948](https://github.com/pingcap/tidb/issues/57948) @[terry1purcell](https://github.com/terry1purcell)
@@ -83,18 +128,6 @@ Starting from v8.5.4, TiDB aligns its behavior with MySQL when inserting data in
     + TiDB Data Migration (DM) <!--tw@hfxsd: 1 note-->
 
         - Support case-insensitive matching when retrieving the upstream `GTID_MODE` [#12167](https://github.com/pingcap/tiflow/issues/12167) @[OliverS929](https://github.com/OliverS929)
-
-    + TiCDC
-
-        - Introduce a [new TiCDC architecture option](/ticdc/ticdc-architecture.md) for improved performance, scalability, and stability [#442](https://github.com/pingcap/ticdc/issues/442) @[CharlesCheung96](https://github.com/CharlesCheung96) <!--tw@qiancai-->
-
-            This new architecture redesigns TiCDC core components and optimizes its data processing workflows, while maintaining compatibility with the configuration, usage, and APIs of the [classic TiCDC architecture](/ticdc/ticdc-classic-architecture). 
-        
-            When configured to use this new architecture, TiCDC achieves near-linear scalability and can replicate millions of tables with lower resource consumption. It also reduces changefeed latency and delivers more stable performance in scenarios with high write workloads, frequent DDL operations, and cluster scaling. Note that the new architecture currently has some [initial limitations](/ticdc/ticdc-architecture.md#limitations).
-
-            To use the new architecture, set the TiCDC configuration item [`newarch`](/ticdc/ticdc-server-config.md#newarch-new-in-v854-release1) to `true`.
-
-            For more information, see [documentation](/ticdc/ticdc-architecture.md).
 
 ## Bug fixes
 
