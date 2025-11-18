@@ -185,11 +185,11 @@ When using public endpoints, you can verify network connectivity and access both
 
 > **Note**:
 >
-> The egress IP range for your firewall is provided only during the Data Migration task creation process, and you cannot obtain this IP range beforehand. To prepare, ensure you have:
+> The egress IP range for your firewall is available only during Data Migration task creation. You cannot obtain this IP range in advance. Before you begin, ensure that you:
 >
-> - Permissions to modify firewall rules.
-> - Access to your cloud provider's console during the setup process.
-> - The ability to pause the task creation workflow to configure your firewall.
+> - Have permissions to modify firewall rules.
+> - Can access to your cloud provider's console during the setup process.
+> - Can pause the task creation workflow to configure your firewall.
 
 1. Identify and record the source MySQL instance's endpoint hostname (FQDN) or public IP address.
 2. Ensure you have the required permissions to modify the firewall or security group rules for your database. Refer to your cloud provider's documentation for guidance as follows:
