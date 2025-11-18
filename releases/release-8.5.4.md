@@ -92,7 +92,7 @@ Starting from v8.5.4, TiDB aligns its behavior with MySQL when inserting data in
         
             When configured to use this new architecture, TiCDC achieves near-linear scalability and can replicate millions of tables with lower resource consumption. It also reduces changefeed latency and delivers more stable performance in scenarios with high write workloads, frequent DDL operations, and cluster scaling. Note that the new architecture currently has some [initial limitations](/ticdc/ticdc-architecture.md#limitations).
 
-            To opt-in to use the new architecture, set the TiCDC configuration item [`newarch`](/ticdc/ticdc-server-config.md#newarch-new-in-v854-release1) to `true`.
+            To use the new architecture, set the TiCDC configuration item [`newarch`](/ticdc/ticdc-server-config.md#newarch-new-in-v854-release1) to `true`.
 
             For more information, see [documentation](/ticdc/ticdc-architecture.md).
 
