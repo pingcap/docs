@@ -11,7 +11,7 @@ TiDB version: 8.5.4
 
 Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup)
 
-## New features
+## Features
 
 * Support redistributing data of a specific table (experimental) [#63260](https://github.com/pingcap/tidb/issues/63260) @[bufferflies](https://github.com/bufferflies) <!--tw@qiancai -->
 
