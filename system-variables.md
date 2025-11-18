@@ -1644,7 +1644,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 </CustomContent>
 
-### tidb_stats_update_during_ddl <span class="version-mark">New in v8.5.4 and v9.0.0</span>
+### tidb_stats_update_during_ddl <span class="version-mark">New in v8.5.4</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
