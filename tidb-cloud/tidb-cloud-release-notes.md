@@ -8,6 +8,18 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## November 18, 2025
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Enhance the changefeed summary to include complete configuration details.
+
+        Previously, you had to pause a changefeed to check its configuration and then resume it. The **Changefeed** page now displays the complete configuration directly in the summary view. This update keeps the edit and view modes consistent and introduces a redesigned layout for better readability. With this update, you can review the current configuration more efficiently.
+
+        For more information, see [Changefeed Overview](/tidb-cloud/changefeed-overview.md).
+
 ## November 11, 2025
 
 **General changes**
