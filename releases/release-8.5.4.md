@@ -90,7 +90,18 @@ Starting from v8.5.4, TiDB aligns its behavior with MySQL when inserting data in
 
 + TiDB
 
-    - Optimize the performance of `MODIFY COLUMN` and `CHANGE COLUMN`, reducing the execution time of certain lossy DDL operations (such as changing `BIGINT` to `INT` or changing `CHAR(128)` to `VARCHAR(64)`) from hours to minutes or even milliseconds, achieving overall performance improvements ranging from several times to tens of thousands of times [#63366](https://github.com/pingcap/tidb/issues/63366) @[wjhuang2016](https://github.com/wjhuang2016) @[tangenta](https://github.com/tangenta) @[fzzf678](https://github.com/fzzf678)
+    - Introduce significant performance improvements for certain lossy DDL operations (such as, `BIGINT` → `INT` or `CHAR(120)` → `VARCHAR(60)`), reducing execution time from hours to minutes, seconds, or even milliseconds, delivering performance gains ranging from tens to hundreds of thousands of times [#63366](https://github.com/pingcap/tidb/issues/63366) @[wjhuang2016](https://github.com/wjhuang2016) @[tangenta](https://github.com/tangenta) @[fzzf678](https://github.com/fzzf678)
+
+       Optimization strategies: TiDB pre-checks for potential data truncation risks during type conversion in strict SQL mode; if no risk is detected, TiDB updates only the metadata and avoids index rebuilding whenever possible; if index rebuilding is required, TiDB uses a more efficient ingest process to significantly improve index rebuild performance.
+
+        Performance improvement examples (based on a 100 GiB table benchmark):
+
+        - Non-indexed column: `BIGINT` → `INT` execution time reduced from 2 hours 34 minutes to 1 minute 5 seconds, achieving a 142× speedup
+        - Indexed column: `BIGINT` → `INT` execution time reduced from 6 hours 25 minutes to 0.05 seconds, achieving a 460,000× speedup
+        - Indexed column: `CHAR(120)` → `VARCHAR(60)` execution time reduced from 7 hours 16 minutes to 12 minutes 56 seconds, achieving a 34× speedup
+
+    Note that the preceding results are based on the precondition that no data truncation occurs during the DDL execution.
+
     - Support applying the `semi_join_rewrite` hint to Semi Joins in `IN` subqueries [#58829](https://github.com/pingcap/tidb/issues/58829) @[qw4990](https://github.com/qw4990)
     - Optimize the estimation strategy when the `tidb_opt_ordering_index_selectivity_ratio` system variable takes effect [#62817](https://github.com/pingcap/tidb/issues/62817) @[terry1purcell](https://github.com/terry1purcell)
     - Adjust the optimizer selection logic to make newly created indexes more likely to be chosen in certain scenarios [#57948](https://github.com/pingcap/tidb/issues/57948) @[terry1purcell](https://github.com/terry1purcell)
