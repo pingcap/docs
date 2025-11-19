@@ -26,7 +26,7 @@ TiDB supports most of the [encryption and compression functions](https://dev.mys
 | [`UNCOMPRESSED_LENGTH()`](#uncompressed_length)               | Return the length of a string before compression  |
 | [`VALIDATE_PASSWORD_STRENGTH()`](#validate_password_strength) | Validate the password strength                    |
 
-### [`AES_DECRYPT()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_aes-decrypt)
+### `AES_DECRYPT()`
 
 The `AES_DECRYPT(data, key [,iv])` function decrypts `data` that was previously encrypted using the [`AES_ENCRYPT()`](#aes_encrypt) function with the same `key`.
 
@@ -47,7 +47,7 @@ SELECT AES_DECRYPT(0x28409970815CD536428876175F1A4923, 'secret');
 1 row in set (0.00 sec)
 ```
 
-### [`AES_ENCRYPT()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_aes-encrypt)
+### `AES_ENCRYPT()`
 
 The `AES_ENCRYPT(data, key [,iv])` function encrypts `data` with `key` using the [Advanced Encryption Standard (AES)](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) algorithm.
 
@@ -68,7 +68,7 @@ SELECT AES_ENCRYPT(0x616263,'secret');
 1 row in set (0.00 sec)
 ```
 
-### [`COMPRESS()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_compress)
+### `COMPRESS()`
 
 The `COMPRESS(expr)` function returns a compressed version of the input data `expr`.
 
@@ -122,7 +122,7 @@ SELECT LENGTH(a),LENGTH(COMPRESS(a)) FROM x;
 1 row in set (0.00 sec)
 ```
 
-### [`MD5()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_md5)
+### `MD5()`
 
 The `MD5(expr)` function calculates a 128-bit [MD5](https://en.wikipedia.org/wiki/MD5) hash for the given argument `expr`.
 
@@ -139,7 +139,7 @@ SELECT MD5('abc');
 1 row in set (0.00 sec)
 ```
 
-### [`PASSWORD()`](https://dev.mysql.com/doc/refman/5.7/en/encryption-functions.html#function_password)
+### `PASSWORD()`
 
 > **Warning:**
 >
@@ -162,7 +162,7 @@ SELECT PASSWORD('secret');
 Warning (Code 1681): PASSWORD is deprecated and will be removed in a future release.
 ```
 
-### [`RANDOM_BYTES()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_random-bytes)
+### `RANDOM_BYTES()`
 
 The `RANDOM_BYTES(n)` function returns `n` random bytes.
 
@@ -179,11 +179,11 @@ SELECT RANDOM_BYTES(3);
 1 row in set (0.00 sec)
 ```
 
-### [`SHA()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_sha1)
+### `SHA()`
 
 The `SHA()` function is an alias for [`SHA1`](#sha1).
 
-### [`SHA1()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_sha1)
+### `SHA1()`
 
 The `SHA1(expr)` function calculates a 160-bit [SHA-1](https://en.wikipedia.org/wiki/SHA-1) hash for the given argument `expr`.
 
@@ -200,7 +200,7 @@ SELECT SHA1('abc');
 1 row in set (0.00 sec)
 ```
 
-### [`SHA2()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_sha2)
+### `SHA2()`
 
 The `SHA2(str, n)` function calculates a hash using an algorithm from the [SHA-2](https://en.wikipedia.org/wiki/SHA-2) family. The `n` argument is used to select the algorithm. `SHA2()` returns `NULL` if any of the arguments are `NULL` or if the algorithm selected by `n` is unknown or unsupported.
 
@@ -248,7 +248,7 @@ SELECT SM3('abc');
 1 row in set (0.00 sec)
 ```
 
-### [`UNCOMPRESS()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_uncompress)
+### `UNCOMPRESS()`
 
 The `UNCOMPRESS(data)` function decompresses the data that was compressed with the [`COMPRESS()`](#compress) function.
 
@@ -265,7 +265,7 @@ SELECT UNCOMPRESS(0x03000000789C72747206040000FFFF018D00C7);
 1 row in set (0.00 sec)
 ```
 
-### [`UNCOMPRESSED_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_uncompressed-length)
+### `UNCOMPRESSED_LENGTH()`
 
 The `UNCOMPRESSED_LENGTH(data)` function returns the first 4 bytes of the compressed data, which store the length that the compressed string had before being compressed with the [`COMPRESS()`](#compress) function.
 
@@ -282,7 +282,7 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
 1 row in set (0.00 sec)
 ```
 
-### [`VALIDATE_PASSWORD_STRENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_validate-password-strength)
+### `VALIDATE_PASSWORD_STRENGTH()`
 
 <CustomContent platform="tidb">
 
