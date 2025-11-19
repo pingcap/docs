@@ -60,23 +60,17 @@ ClusterOption ::=
 
 - Refresh statistics for a single table on the connected TiDB node:
 
-  {{< copyable "sql" >}}
-
   ```sql
   REFRESH STATS orders;
   ```
 
 - Refresh all tables in `sales` with lightweight initialization:
 
-  {{< copyable "sql" >}}
-
   ```sql
   REFRESH STATS sales.* LITE;
   ```
 
 - Force every TiDB node to load full statistics for the entire cluster:
-
-  {{< copyable "sql" >}}
 
   ```sql
   REFRESH STATS *.* FULL CLUSTER;
