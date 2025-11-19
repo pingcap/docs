@@ -192,7 +192,9 @@
     - [Integrate with Confluent and Snowflake](/ticdc/integrate-confluent-using-ticdc.md)
     - [Integrate with Apache Kafka and Apache Flink](/replicate-data-to-kafka.md)
   - Reference
-    - [TiCDC Architecture](/ticdc/ticdc-architecture.md)
+    - TiCDC Architecture
+      - [TiCDC New Architecture](/ticdc/ticdc-architecture.md)
+      - [TiCDC Classic Architecture](/ticdc/ticdc-classic-architecture.md)
     - [TiCDC Data Replication Capabilities](/ticdc/ticdc-data-replication-capabilities.md)
     - [TiCDC Server Configurations](/ticdc/ticdc-server-config.md)
     - [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md)
@@ -1003,6 +1005,7 @@
     - Character Set and Collation
       - [Overview](/character-set-and-collation.md)
       - [GBK](/character-set-gbk.md)
+      - [GB18030](/character-set-gb18030.md)
     - [Placement Rules in SQL](/placement-rules-in-sql.md)
     - System Tables
       - `mysql` Schema
@@ -1087,6 +1090,7 @@
   - [URI Formats of External Storage Services](/external-storage-uri.md)
   - [TiDB Workload Repository](/workload-repository.md)
   - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/online-workloads-and-add-index-operations.md)
+  - [`ANALYZE` Embedded in DDL Statements](/ddl_embedded_analyze.md)
 - FAQs
   - [FAQ Summary](/faq/faq-overview.md)
   - [TiDB FAQs](/faq/tidb-faq.md)
