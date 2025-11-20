@@ -438,13 +438,13 @@ This imbalance can cause that TiKV node to trigger **flow control**, leading to 
 
 ### Summary
 
-The following show the summary information for non-clustered and clusted partition tbales.<!--更新表格 -->
+The following show the summary information for non-clustered and clusted partition tables.
 
-| Type | Read Hotspot Risk | Write Hotspot Risk | Operational Complexity | Query Performance | Data Cleanup |
-|---|---|---|---|---|---|
-| Non-clustered partitioned table | Low (with merge_option=deny) | Low (auto pre-split) | Low | Moderate (extra lookups) | Fast (DROP PARTITION) |
-| Clustered partitioned table | Medium (manual intervention) | Medium (manual split) | High | High (direct access) | Fast (DROP PARTITION) |
-| Clustered non-partitioned table | None | Medium (single table) | Low | High | Slow (DELETE/TTL) |
+| Table Type                      | Region Pre-splitting | Read performance     | Write scalability | Data cleanup via partition |
+|---|---|---|---|---|
+| Non-clustered partitioned table | Automatic            | Lower (more lookups) | High              | Supported          | 
+| Clustered partitioned table     | Manual               | High (fewer lookups) | High (if managed) | Supported          | 
+| Clustered non-partitioned table | N/A                  | High                 | Stable            | Not supported      |
 
 ### Solutions for non-clustered partitioned tables
 
