@@ -13,7 +13,7 @@ summary: 了解如何在 TiDB Cloud 中启用或禁用用户可控的日志脱�
 
 > **注意：**
 >
-> 日志脱敏功能仅支持 TiDB Cloud 专属版集群。
+> 日志脱敏功能仅支持 TiDB Cloud Dedicated 集群。
 
 </CustomContent>
 
@@ -21,7 +21,7 @@ summary: 了解如何在 TiDB Cloud 中启用或禁用用户可控的日志脱�
 
 > **注意：**
 >
-> 日志脱敏功能支持 TiDB Cloud 专属版集群和 TiDB Cloud 高级版实例。
+> 日志脱敏功能支持 TiDB Cloud Dedicated 集群和 TiDB Cloud Premium 实例。
 
 </CustomContent>
 
