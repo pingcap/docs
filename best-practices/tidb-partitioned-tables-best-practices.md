@@ -9,11 +9,11 @@ This guide introduces how to use partitioned tables in TiDB to improve performan
 
 Partitioned tables in TiDB offer a versatile approach to managing large datasets, improving query efficiency, facilitating bulk data deletion, and alleviating write hotspot issues. By dividing data into logical segments, TiDB can leverage partition pruning to skip irrelevant data during query execution, reducing resource consumption and accelerating performance—particularly in Online Analytical Processing (OLAP) workloads with massive datasets.
 
-A common use case is range partitioning combined with local indexes, which enables efficient historical data cleanup through operations such as [`ALTER TABLE ... DROP PARTITION`](/sql-statements/sql-statement-alter-table.md). This method not only removes obsolete data almost instantly but also retains high query efficiency when filtering by the partition key. However, after migrating from non-partitioned to partitioned tables, queries that cannot benefit from partition pruning, such as those lacking partition key filters, might experience degraded performance. In such cases, you can use [**global indexes**](/partitioned-table.md#global-indexes) to mitigate the performance impact by providing a unified index structure across all partitions.
+A common use case is range partitioning combined with local indexes, which enables efficient historical data cleanup through operations such as [`ALTER TABLE ... DROP PARTITION`](/sql-statements/sql-statement-alter-table.md). This method not only removes obsolete data almost instantly but also retains high query efficiency when filtering by the partition key. However, after migrating from non-partitioned to partitioned tables, queries that cannot benefit from partition pruning, such as those lacking partition key filters, might experience degraded performance. In such cases, you can use [global indexes](/partitioned-table.md#global-indexes) to mitigate the performance impact by providing a unified index structure across all partitions.
 
-Another frequent scenario is using **hash or key partitioning** to address write hotspot issues, especially in workloads relying on [`AUTO_INCREMENT` style IDs](/auto-increment.md) where sequential inserts can overload specific TiKV regions. Distributing writes across partitions helps balance load, but similar to range partitioning, queries without partition-pruning conditions might suffer performance drawbacks again, a situation where global indexes can help.
+Another frequent scenario is using hash or key partitioning to address write hotspot issues, especially in workloads relying on [`AUTO_INCREMENT` style IDs](/auto-increment.md) where sequential inserts can overload specific TiKV regions. Distributing writes across partitions helps balance load, but similar to range partitioning, queries without partition-pruning conditions might suffer performance drawbacks again, a situation where global indexes can help.
 
-While partitioning offers clear benefits, it also presents **common challenges**, such as **hotspots caused by newly created range partitions**. To address this, TiDB provides techniques for automatic or manual region pre-splitting, ensuring balanced data distribution and avoiding bottlenecks.
+While partitioning offers clear benefits, it also presents common challenges, such as hotspots caused by newly created range partitions. To address this, TiDB provides techniques for automatic or manual region pre-splitting, ensuring balanced data distribution and avoiding bottlenecks.
 
 This document examines partitioned tables in TiDB from multiple angles, including query optimization, data cleanup, write scalability, and index management. Through detailed scenarios and best practices, it provides practical guidance on optimizing partitioned table design and performance tuning in TiDB.  
 
@@ -332,7 +332,7 @@ ALTER TABLE A DROP PARTITION A_2024363;
 
 When a partitioned table contains global indexes, executing certain DDL operations such as `DROP PARTITION`, `TRUNCATE PARTITION`, and `REORGANIZE PARTITION` requires updating the global index entries to reflect the changes. This update must be performed immediately to ensure consistency, which can significantly increase the execution time of these DDL operations.
 
-If you need to drop partitions frequently and minimize the performance impact on the system, it is recommended to use **local indexes** for faster and more efficient operations.
+If you need to drop partitions frequently and minimize the performance impact on the system, it is recommended to use local indexes for faster and more efficient operations.
 
 ## Mitigate hotspot issues
 
@@ -352,7 +352,7 @@ Partitioned tables can help mitigate this problem. By applying hash or key parti
 
 ### How it works
 
-TiDB stores table data and indexes in **Regions**, each covering a continuous range of row keys.
+TiDB stores table data and indexes in Regions, each covering a continuous range of row keys.
 
 When the primary key is [`AUTO_INCREMENT`](/auto-increment.md) and the secondary indexes on datetime columns are monotonically increasing:
 
@@ -369,7 +369,7 @@ When the primary key is [`AUTO_INCREMENT`](/auto-increment.md) and the secondary
 
 ### Use cases
 
-If a table with an [`AUTO_INCREMENT`](/auto-increment.md) primary key experiences heavy bulk inserts and suffers from write hotspot issues, applying **hash** or **key** partitioning on the primary key can help distribute the write workload more evenly.
+If a table with an [`AUTO_INCREMENT`](/auto-increment.md) primary key experiences heavy bulk inserts and suffers from write hotspot issues, applying hash or key partitioning on the primary key can help distribute the write workload more evenly.
 
 ```sql
 CREATE TABLE server_info (
@@ -387,7 +387,7 @@ PARTITION BY KEY (id) PARTITIONS 16;
 
 ### Pros
 
-- **Balanced write workload** — Hotspots are spread across multiple partitions, and therefore multiple **Regions**, reducing contention and improving insert performance.
+- **Balanced write workload** — Hotspots are spread across multiple partitions, and therefore multiple Regions, reducing contention and improving insert performance.
 - **Query optimization via partition pruning** — If queries already filter by the partition key, TiDB can prune unused partitions, scanning less data and improving query speed.
 
 ### Cons
@@ -400,7 +400,7 @@ There are some risks when using partition tables.
     SELECT * FROM server_info WHERE `serial_no` = ?;
     ```
 
-- Add a **global index** on the filtering columns used by these queries to reduce scanning overhead. While creating a global index can significantly slow down `DROP PARTITION` operations, hash and key partitioned tables do not support `DROP PARTITION`. In practice, such partitions are rarely truncated, making global indexes a feasible solution in these scenarios. For example:
+- Add a global index on the filtering columns used by these queries to reduce scanning overhead. While creating a global index can significantly slow down `DROP PARTITION` operations, hash and key partitioned tables do not support `DROP PARTITION`. In practice, such partitions are rarely truncated, making global indexes a feasible solution in these scenarios. For example:
 
     ```sql
     ALTER TABLE server_info ADD UNIQUE INDEX(serial_no, id) GLOBAL;
@@ -412,15 +412,15 @@ New range partitions in a partitioned table can easily lead to hotspot issues in
 
 ### Read hotspots
 
-When using **range-partitioned tables**, if queries do **not** filter data using the partition key, new empty partitions can easily become read hotspots.
+When using range-partitioned tables, if queries do not filter data using the partition key, new empty partitions can easily become read hotspots.
 
 **Root cause:**
 
-By default, TiDB creates an empty region for each partition when the table is created. If no data is written for a while, multiple empty partitions' regions might be merged into a **single region**.
+By default, TiDB creates an empty region for each partition when the table is created. If no data is written for a while, multiple empty partitions' regions might be merged into a single region.
 
 **impact:**
 
-When a query does not filter by partition key, TiDB will scan all partitions (as seen in the execution plan `partition:all`). As a result, the single region holding multiple empty partitions will be scanned repeatedly, leading to a **read hotspot**.
+When a query does not filter by partition key, TiDB will scan all partitions (as seen in the execution plan `partition:all`). As a result, the single region holding multiple empty partitions will be scanned repeatedly, leading to a read hotspot.
 
 ### Write hotspots
 
@@ -434,7 +434,7 @@ However, if the initial write traffic to this new partition is very high, the Ti
 
 **Impact:**
 
-This imbalance can cause that TiKV node to trigger **flow control**, leading to a sharp drop in QPS, a spike in write latency, and increased CPU usage on the affected node, which in turn might impact the overall read and write performance of the cluster.
+This imbalance can cause that TiKV node to trigger flow control, leading to a sharp drop in QPS, a spike in write latency, and increased CPU usage on the affected node, which in turn might impact the overall read and write performance of the cluster.
 
 ### Summary
 
@@ -450,12 +450,12 @@ The following show the summary information for non-clustered and clusted partiti
 
 #### Pros
 
-- When a new partition is created in a non-clustered partitioned table configured with `SHARD_ROW_ID_BITS` and [PRE_SPLIT_REGIONS](/sql-statements/sql-statement-split-region.md#pre_split_regions), the regions can be **automatically pre-split**, significantly reducing manual intervention.
+- When a new partition is created in a non-clustered partitioned table configured with `SHARD_ROW_ID_BITS` and [PRE_SPLIT_REGIONS](/sql-statements/sql-statement-split-region.md#pre_split_regions), the regions can be automatically pre-split, significantly reducing manual intervention.
 - Lower operational overhead.
 
 #### Cons
 
-Queries using **Point Get** or **Table Range Scan** will require **more table lookups**, which can degrade read performance for such query types.
+Queries using **Point Get** or **Table Range Scan** will require more table lookups, which can degrade read performance for such query types.
 
 #### Recommendation
 
@@ -552,7 +552,7 @@ SHOW TABLE employees PARTITION (p4) regions;
 
 #### Pros
 
-Queries using **Point Get** or **Table Range Scan** do **not** need additional lookups, resulting in better **read performance**.
+Queries using **Point Get** or **Table Range Scan** do not need additional lookups, resulting in better read performance.
 
 #### Cons
 
@@ -575,7 +575,7 @@ To address hotspot issues caused by new range partitions, you can perform the st
 
 #### Cons
 
-Cannot use `DROP PARTITION` to clean up large volumes of old data to improve deletion efficiency.
+You cannot use `DROP PARTITION` to clean up large volumes of old data to improve deletion efficiency.
 
 #### Recommendation
 
@@ -694,9 +694,9 @@ Query OK, 0 rows affected, 1 warning (2 hours 31 min 57.05 sec)
 The following table show the time taken by each method.
 
 | Method | Time Taken |
-|---|---|
-| Method 1: Batch DML INSERT INTO ... SELECT | 1 h 52 m 47 s |
-| Method 2: Pipeline DML: INSERT INTO ... SELECT ... | 58 m 42 s |
-| Method 3: IMPORT INTO ... FROM SELECT ... | 16 m 59 s |
-| Method 4: Online DDL (From partition table to non-partitioned table) | 2 h 50 m |
-| Method 4: Online DDL (From non-partition table to partitioned table) | 2 h 31 m |
+|--------|------------|
+| Method 1: Batch DML: `INSERT INTO ... SELECT`                          | 1 h 52 m 47 s |
+| Method 2: Pipeline DML: `INSERT INTO ... SELECT ...`                   | 58 m 42 s     |
+| Method 3: `IMPORT INTO ... FROM SELECT ...`                            | 16 m 59 s     |
+| Method 4: Online DDL (From partition table to non-partitioned table)   | 2 h 50 m      |
+| Method 4: Online DDL (From non-partition table to partitioned table)   | 2 h 31 m      |
