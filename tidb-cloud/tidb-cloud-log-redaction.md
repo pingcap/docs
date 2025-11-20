@@ -1,74 +1,120 @@
 ---
-title: User-Controlled Log Redaction
-summary: Learn how to enable or disable user-controlled log redaction for TiDB Cloud Dedicated clusters to manage sensitive data visibility in execution logs.
+title: 用户可控的日志脱敏
+summary: 了解如何在 TiDB Cloud 中启用或禁用用户可控的日志脱敏功能，以管理执行日志中敏感数据的可见性。
 ---
 
-# User-Controlled Log Redaction
+# 用户可控的日志脱敏
 
-User-controlled log redaction lets you manage the visibility of sensitive data in your [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster logs. By toggling this redaction feature, you can protect your information, balance operational needs with security, and control what appears in your cluster logs.
+用户可控的日志脱敏功能允许你管理 <CustomContent plan="dedicated">[TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)集群</CustomContent><CustomContent plan="premium">TiDB Cloud 高级版实例</CustomContent>日志中敏感数据的可见性。通过切换该脱敏功能，你可以保护你的信息，在运维需求与安全之间取得平衡，并控制在 <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>日志中显示的内容。
 
-Log redaction is enabled by default, ensuring that sensitive information in running logs and execution plans is concealed. If you need more detailed log information for cluster maintenance or SQL tuning, you can disable this feature at any time.
+日志脱敏功能默认启用，确保运行日志和执行计划中的敏感信息被隐藏。如果你需要获取更详细的日志信息以便 <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>维护或 SQL 调优，可以随时禁用该功能。
 
-> **Note:**
+<CustomContent plan="dedicated">
+
+> **注意：**
 >
-> The log redaction feature is only supported for TiDB Cloud Dedicated clusters.
+> 日志脱敏功能仅支持 TiDB Cloud Dedicated 集群。
 
-## Prerequisites
+</CustomContent>
 
-* You must be in the **Organization Owner** or **Project Owner** role of your organization in TiDB Cloud.
-* Log redaction cannot be enabled or disabled when the cluster is in the `paused` state.
+<CustomContent plan="premium">
 
-## Disable log redaction
-
-> **Warning:**
+> **注意：**
 >
-> Disabling log redaction might expose sensitive information and increase the risk of data leakage. Ensure that you understand and acknowledge this risk before proceeding. Remember to re-enable it as soon as you complete your diagnostic or maintenance task.
+> 日志脱敏功能支持 TiDB Cloud Dedicated 集群和 TiDB Cloud Premium 实例。
 
-To disable log redaction, do the following:
+</CustomContent>
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
-2. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+## 前置条件
 
-    > **Tip:**
+<CustomContent plan="dedicated">
+
+* 你必须是 TiDB Cloud 中组织的 **Organization Owner** 或 **Project Owner** 角色。
+* 当集群处于 `paused` 状态时，无法启用或禁用日志脱敏功能。
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+* 你必须是 TiDB Cloud 中组织的 **Organization Owner** 角色。
+
+</CustomContent>
+
+## 禁用日志脱敏
+
+> **警告：**
+>
+> 禁用日志脱敏可能会暴露敏感信息，增加数据泄露的风险。在操作前请确保你已理解并知晓相关风险。请在完成诊断或维护任务后，及时重新启用该功能。
+
+要禁用日志脱敏，请按以下步骤操作：
+
+1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)。
+2. 进入 <CustomContent plan="dedicated">[**Clusters**](https://tidbcloud.com/project/clusters)</CustomContent><CustomContent plan="premium">[**TiDB Instances**](https://tidbcloud.com/tidbs)</CustomContent> 页面，然后点击目标 <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>的名称，进入其概览页面。
+
+    <CustomContent plan="dedicated">
+
+    > **提示：**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
 
-3. In the left navigation pane, click **Settings** > **Security**.
-4. In the **Execution Log Redaction** section, you can see that the redaction feature is **Enabled** by default.
-5. Click **Disable**. A warning appears, explaining the risks of disabling log redaction. 
-6. Confirm the disabling.
+    </CustomContent>
 
-After disabling log redaction, note the following:
+    <CustomContent plan="premium">
 
-* The change only applies to new database connections.
-* Existing connections are unaffected. You need to reconnect them for the changes to take effect.
-* Logs for new sessions will no longer be redacted.
+    > **提示：**
+    >
+    > 你可以使用左上角的下拉框在组织和实例之间切换。
 
-## Check the updated logs
+    </CustomContent>
 
-To check the updated logs after log redaction is disabled, do the following:
+3. 在左侧导航栏，点击 **Settings** > **Security**。
+4. 在 **Execution Log Redaction** 部分，你可以看到脱敏功能默认是 **Enabled**。
+5. 点击 **Disable**。此时会弹出警告，说明禁用日志脱敏的风险。
+6. 确认禁用操作。
 
-1. Simulate a performance issue caused by a slow query. For example, execute the following SQL statement:
+禁用日志脱敏后，请注意以下事项：
+
+* 该更改仅对新的数据库连接生效。
+* 已有的连接不受影响。你需要重新连接，变更才会生效。
+* 新会话的日志将不再被脱敏。
+
+## 检查更新后的日志
+
+禁用日志脱敏后，如需检查更新后的日志，请按以下步骤操作：
+
+1. 模拟一个由慢查询引起的性能问题。例如，执行以下 SQL 语句：
 
     ```sql
     SELECT *, SLEEP(2) FROM users WHERE email LIKE "%useremail%";
     ```
 
-2. Wait a few minutes for the slow query log to update.
-3. Review the log to confirm that the sensitive data is not redacted.
+2. 等待几分钟，直到慢查询日志更新。
+3. 检查日志，确认敏感数据未被脱敏。
 
-## Enable log redaction
+## 启用日志脱敏
 
-To maintain data security, **enable log redaction** as soon as you complete your diagnostic or maintenance task as follows.
+为保障数据安全，在完成诊断或维护任务后，请**及时启用日志脱敏**，操作如下。
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
-2. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)。
+2. 进入 <CustomContent plan="dedicated">[**Clusters**](https://tidbcloud.com/project/clusters)</CustomContent><CustomContent plan="premium">[**TiDB Instances**](https://tidbcloud.com/tidbs)</CustomContent> 页面，然后点击目标 <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>的名称，进入其概览页面。
 
-    > **Tip:**
+    <CustomContent plan="dedicated">
+
+    > **提示：**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
 
-3. In the left navigation pane, click **Settings** > **Security**.
-4. In the **Execution Log Redaction** section, you can see that the redaction feature is **Disabled**.
-5. Click **Enable** to enable it.
-6. Reconnect to the database for the change to take effect on new sessions.
+    </CustomContent>
+
+    <CustomContent plan="premium">
+
+    > **提示：**
+    >
+    > 你可以使用左上角的下拉框在组织和实例之间切换。
+
+    </CustomContent>
+
+3. 在左侧导航栏，点击 **Settings** > **Security**。
+4. 在 **Execution Log Redaction** 部分，你可以看到脱敏功能当前为 **Disabled**。
+5. 点击 **Enable** 以启用该功能。
+6. 重新连接数据库，新会话才会生效。

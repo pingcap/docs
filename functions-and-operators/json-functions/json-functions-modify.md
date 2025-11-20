@@ -1,25 +1,25 @@
 ---
 title: JSON Functions That Modify JSON Values
-summary: 了解修改 JSON 值的 JSON 函数。
+summary: 了解用于修改 JSON 值的 JSON 函数。
 ---
 
-# JSON Functions That Modify JSON Values
+# 用于修改 JSON 值的 JSON 函数
 
-本文档描述了修改 JSON 值的 JSON 函数。
+TiDB 支持 MySQL 8.0 中所有 [用于修改 JSON 值的 JSON 函数](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html)。
 
-## [JSON_APPEND()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-append)
+## `JSON_APPEND()`
 
-是 [`JSON_ARRAY_APPEND()`](#json_array_append) 的别名。
+[`JSON_ARRAY_APPEND()`](#json_array_append) 的别名。
 
-## [JSON_ARRAY_APPEND()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-append)
+## `JSON_ARRAY_APPEND()`
 
-`JSON_ARRAY_APPEND(json_array, path, value [,path, value] ...)` 函数在指定 `path` 位置的 JSON 文档中的数组末尾追加值，并返回结果。
+`JSON_ARRAY_APPEND(json_array, path, value [,path, value] ...)` 函数会将值追加到 JSON 文档中指定 `path` 路径下的数组末尾，并返回结果。
 
-此函数的参数成对出现，每对为一个 `path` 和一个 `value`。
+该函数的参数以成对的方式传递，每对参数为一个 `path` 和一个 `value`。
 
 示例：
 
-以下示例在 JSON 文档的根数组中添加一个项目。
+以下示例向作为 JSON 文档根节点的数组中添加一个元素。
 
 ```sql
 SELECT JSON_ARRAY_APPEND('["Car", "Boat", "Train"]', '$', "Airplane") AS "Transport options";
@@ -34,7 +34,7 @@ SELECT JSON_ARRAY_APPEND('["Car", "Boat", "Train"]', '$', "Airplane") AS "Transp
 1 row in set (0.00 sec)
 ```
 
-以下示例在指定路径的数组中添加一个项目。
+以下示例向指定路径下的数组中添加一个元素。
 
 ```sql
 SELECT JSON_ARRAY_APPEND('{"transport_options": ["Car", "Boat", "Train"]}', '$.transport_options', "Airplane") AS "Transport options";
@@ -49,11 +49,11 @@ SELECT JSON_ARRAY_APPEND('{"transport_options": ["Car", "Boat", "Train"]}', '$.t
 1 row in set (0.00 sec)
 ```
 
-## [JSON_ARRAY_INSERT()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-insert)
+## `JSON_ARRAY_INSERT()`
 
-`JSON_ARRAY_INSERT(json_array, path, value [,path, value] ...)` 函数在 `json_array` 中的指定位置插入 `value`，并返回结果。
+`JSON_ARRAY_INSERT(json_array, path, value [,path, value] ...)` 函数会在 `json_array` 的指定 `path` 位置插入一个 `value`，并返回结果。
 
-此函数的参数成对出现，每对为一个 `path` 和一个 `value`。
+该函数的参数以成对的方式传递，每对参数为一个 `path` 和一个 `value`。
 
 示例：
 
@@ -87,11 +87,11 @@ SELECT JSON_ARRAY_INSERT('["Car", "Boat", "Train"]', '$[1]', "Airplane") AS "Tra
 1 row in set (0.00 sec)
 ```
 
-## [JSON_INSERT()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-insert)
+## `JSON_INSERT()`
 
-`JSON_INSERT(json_doc, path, value [,path, value] ...)` 函数在 JSON 文档中插入一个或多个值，并返回结果。
+`JSON_INSERT(json_doc, path, value [,path, value] ...)` 函数会向 JSON 文档中插入一个或多个值，并返回结果。
 
-此函数的参数成对出现，每对为一个 `path` 和一个 `value`。
+该函数的参数以成对的方式传递，每对参数为一个 `path` 和一个 `value`。
 
 ```sql
 SELECT JSON_INSERT(
@@ -110,7 +110,7 @@ SELECT JSON_INSERT(
 1 row in set (0.00 sec)
 ```
 
-注意，此函数不会覆盖已存在属性的值。例如，以下语句似乎会覆盖 `"a"` 属性，但实际上并不会。
+注意，该函数不会覆盖已存在属性的值。例如，以下语句看似会覆盖 `"a"` 属性，但实际上并不会。
 
 ```sql
 SELECT JSON_INSERT('{"a": 61, "b": 62}', '$.a', 41, '$.c', 63);
@@ -125,13 +125,13 @@ SELECT JSON_INSERT('{"a": 61, "b": 62}', '$.a', 41, '$.c', 63);
 1 row in set (0.00 sec)
 ```
 
-## [JSON_MERGE_PATCH()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge-patch)
+## `JSON_MERGE_PATCH()`
 
-`JSON_MERGE_PATCH(json_doc, json_doc [,json_doc] ...)` 函数将两个或多个 JSON 文档合并成一个 JSON 文档，不保留重复键的值。对于带有重复键的 `json_doc` 参数，合并结果中只保留后面指定的 `json_doc` 的值。
+`JSON_MERGE_PATCH(json_doc, json_doc [,json_doc] ...)` 函数会将两个或多个 JSON 文档合并为一个 JSON 文档，对于重复的键不会保留其所有值。对于有重复键的 `json_doc` 参数，只有最后一个指定的 `json_doc` 参数中的值会在合并结果中保留。
 
 示例：
 
-以下示例中，`a` 的值被第二个参数覆盖，`c` 被添加为新属性。
+在以下示例中，你可以看到 `a` 的值被第二个参数覆盖，`c` 作为新属性被添加到合并结果中。
 
 ```sql
 SELECT JSON_MERGE_PATCH(
@@ -150,13 +150,13 @@ SELECT JSON_MERGE_PATCH(
 1 row in set (0.00 sec)
 ```
 
-## [JSON_MERGE_PRESERVE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge-preserve)
+## `JSON_MERGE_PRESERVE()`
 
-`JSON_MERGE_PRESERVE(json_doc, json_doc [,json_doc] ...)` 函数合并两个或多个 JSON 文档，同时保留每个键的所有值，并返回合并后的结果。
+`JSON_MERGE_PRESERVE(json_doc, json_doc [,json_doc] ...)` 函数会合并两个或多个 JSON 文档，并保留每个键对应的所有值，返回合并结果。
 
 示例：
 
-以下示例中，第二个参数的值被追加到 `a`，`c` 被添加为新属性。
+在以下示例中，你可以看到第二个参数的值被追加到 `a`，`c` 作为新属性被添加。
 
 ```sql
 SELECT JSON_MERGE_PRESERVE('{"a": 1, "b": 2}','{"a": 100}', '{"c": 300}');
@@ -171,21 +171,21 @@ SELECT JSON_MERGE_PRESERVE('{"a": 1, "b": 2}','{"a": 100}', '{"c": 300}');
 1 row in set (0.00 sec)
 ```
 
-## [JSON_MERGE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge)
+## `JSON_MERGE()`
 
 > **Warning:**
 >
-> 这个函数已被弃用。
+> 此函数已废弃。
 
-是 [`JSON_MERGE_PRESERVE()`](#json_merge_preserve) 的弃用别名。
+[`JSON_MERGE_PRESERVE()`](#json_merge_preserve) 的已废弃别名。
 
-## [JSON_REMOVE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-remove)
+## `JSON_REMOVE()`
 
-`JSON_REMOVE(json_doc, path [,path] ...)` 函数删除 JSON 文档中指定 `path` 的数据，并返回结果。
+`JSON_REMOVE(json_doc, path [,path] ...)` 函数会从 JSON 文档中移除指定 `path` 路径的数据，并返回结果。
 
 示例：
 
-此示例删除 JSON 文档中的 `b` 属性。
+此示例从 JSON 文档中移除了 `b` 属性。
 
 ```sql
 SELECT JSON_REMOVE('{"a": 61, "b": 62, "c": 63}','$.b');
@@ -200,7 +200,7 @@ SELECT JSON_REMOVE('{"a": 61, "b": 62, "c": 63}','$.b');
 1 row in set (0.00 sec)
 ```
 
-此示例删除 JSON 文档中的 `b` 和 `c` 属性。
+此示例从 JSON 文档中移除了 `b` 和 `c` 属性。
 
 ```sql
 SELECT JSON_REMOVE('{"a": 61, "b": 62, "c": 63}','$.b','$.c');
@@ -215,15 +215,15 @@ SELECT JSON_REMOVE('{"a": 61, "b": 62, "c": 63}','$.b','$.c');
 1 row in set (0.00 sec)
 ```
 
-## [JSON_REPLACE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-replace)
+## `JSON_REPLACE()`
 
-`JSON_REPLACE(json_doc, path, value [, path, value] ...)` 函数替换 JSON 文档中指定路径的值，并返回结果。如果指定路径不存在，则不会添加对应的值。
+`JSON_REPLACE(json_doc, path, value [, path, value] ...)` 函数会替换 JSON 文档中指定路径的值，并返回结果。如果指定的路径不存在，则不会将该路径对应的值添加到结果中。
 
-此函数的参数成对出现，每对为一个 `path` 和一个 `value`。
+该函数的参数以成对的方式传递，每对参数为一个 `path` 和一个 `value`。
 
 示例：
 
-以下示例将 `$.b` 的值由 `62` 改为 `42`。
+在以下示例中，你将 `$.b` 的值从 `62` 修改为 `42`。
 
 ```sql
 SELECT JSON_REPLACE('{"a": 41, "b": 62}','$.b',42);
@@ -238,7 +238,7 @@ SELECT JSON_REPLACE('{"a": 41, "b": 62}','$.b',42);
 1 row in set (0.00 sec)
 ```
 
-以下示例尝试将 `$.b` 的值由 `62` 改为 `42`，同时还试图将 `$.c` 的值替换为 `43`，但由于 `{"a": 41, "b": 62}` 中不存在 `$.c` 路径，后者不会生效。
+在以下示例中，你将 `$.b` 的值从 `62` 修改为 `42`。同时，该语句尝试将 `$.c` 的值替换为 `43`，但由于 `{"a": 41, "b": 62}` 中不存在 `$.c` 路径，因此不会生效。
 
 ```sql
 SELECT JSON_REPLACE('{"a": 41, "b": 62}','$.b',42,'$.c',43);
@@ -253,15 +253,15 @@ SELECT JSON_REPLACE('{"a": 41, "b": 62}','$.b',42,'$.c',43);
 1 row in set (0.00 sec)
 ```
 
-## [JSON_SET()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-set)
+## `JSON_SET()`
 
-`JSON_SET(json_doc, path, value [,path, value] ...)` 函数在 JSON 文档中插入或更新数据，并返回结果。
+`JSON_SET(json_doc, path, value [,path, value] ...)` 函数会在 JSON 文档中插入或更新数据，并返回结果。
 
-此函数的参数成对出现，每对为一个 `path` 和一个 `value`。
+该函数的参数以成对的方式传递，每对参数为一个 `path` 和一个 `value`。
 
 示例：
 
-以下示例将 `$.version` 从 `1.1` 更新为 `1.2`。
+在以下示例中，你可以将 `$.version` 从 `1.1` 更新为 `1.2`。
 
 ```sql
 SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2);
@@ -276,7 +276,7 @@ SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2);
 1 row in set (0.00 sec)
 ```
 
-以下示例在更新 `$.version` 的同时，还可以新增 `$.branch`，即之前不存在的路径，设置为 `main`。
+在以下示例中，你可以将 `$.version` 从 `1.1` 更新为 `1.2`，并将之前不存在的 `$.branch` 更新为 `main`。
 
 ```sql
 SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2,'$.branch', "main");
@@ -291,13 +291,13 @@ SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2,'$.branch'
 1 row in set (0.00 sec)
 ```
 
-## [JSON_UNQUOTE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-unquote)
+## `JSON_UNQUOTE()`
 
-`JSON_UNQUOTE(json)` 函数对 JSON 值取消引号，返回字符串。这与 [`JSON_QUOTE()`](#json_quote) 函数相反。
+`JSON_UNQUOTE(json)` 函数会对 JSON 值进行去引号处理，并以字符串形式返回结果。该函数与 [`JSON_QUOTE()`](/functions-and-operators/json-functions/json-functions-create.md#json_quote) 功能相反。
 
 示例：
 
-在示例中，`"foo"` 被取消引号变为 `foo`。
+在该示例中，`"foo"` 被去引号为 `foo`。
 
 ```sql
 SELECT JSON_UNQUOTE('"foo"');
@@ -312,7 +312,7 @@ SELECT JSON_UNQUOTE('"foo"');
 1 row in set (0.00 sec)
 ```
 
-此函数常与 [`JSON_EXTRACT()`](#json_extract) 一起使用。以下示例中，第一行提取带引号的 JSON 值，第二行结合两个函数取消引号。注意，除了 `JSON_UNQUOTE(JSON_EXTRACT(...))`，你也可以使用 [`->>`](/functions-and-operators/json-functions/json-functions-search.md#--1) 操作符。
+该函数通常与 [`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract) 一起使用。如下例所示，你可以在第一个示例中提取带引号的 JSON 值，然后在第二个示例中结合两个函数对值进行去引号。注意，你也可以使用 [`->>`](/functions-and-operators/json-functions/json-functions-search.md#--1) 运算符来代替 `JSON_UNQUOTE(JSON_EXTRACT(...))`。
 
 ```sql
 SELECT JSON_EXTRACT('{"database": "TiDB"}', '$.database');
@@ -340,7 +340,7 @@ SELECT JSON_UNQUOTE(JSON_EXTRACT('{"database": "TiDB"}', '$.database'));
 1 row in set (0.00 sec)
 ```
 
-## See also
+## 参见
 
-- [JSON Functions Overview](/functions-and-operators/json-functions.md)
-- [JSON Data Type](/data-type-json.md)
+- [JSON 函数总览](/functions-and-operators/json-functions.md)
+- [JSON 数据类型](/data-type-json.md)

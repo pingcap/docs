@@ -1,13 +1,13 @@
 ---
 title: GBK
-summary: 本文档提供关于 TiDB 对 GBK 字符集支持的详细信息。
+summary: 本文档介绍了 TiDB 对 GBK 字符集的支持详情。
 ---
 
 # GBK
 
-从 v5.4.0 版本开始，TiDB 支持 GBK 字符集。本文档提供了 TiDB 对 GBK 字符集的支持和兼容性信息。
+从 v5.4.0 开始，TiDB 支持 GBK 字符集。本文档提供了 TiDB 对 GBK 字符集的支持和兼容性信息。
 
-从 v6.0.0 版本开始，TiDB 默认启用 [新字符集排序框架](/character-set-and-collation.md#new-framework-for-collations)。TiDB 中 GBK 字符集的默认排序规则为 `gbk_chinese_ci`，与 MySQL 保持一致。
+从 v6.0.0 开始，TiDB 默认启用 [新的排序规则框架](/character-set-and-collation.md#new-framework-for-collations)。TiDB GBK 字符集的默认排序规则为 `gbk_chinese_ci`，与 MySQL 保持一致。
 
 ```sql
 SHOW CHARACTER SET WHERE CHARSET = 'gbk';
@@ -38,47 +38,47 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
 
 ## MySQL 兼容性
 
-本节提供 MySQL 与 TiDB 之间的兼容性信息。
+本节介绍 MySQL 与 TiDB 之间的兼容性信息。
 
 ### 排序规则
 
 <CustomContent platform="tidb">
 
-MySQL 中 GBK 字符集的默认排序规则为 `gbk_chinese_ci`。TiDB 中 GBK 字符集的默认排序规则取决于配置项 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) 的值：
+MySQL 中 GBK 字符集的默认排序规则为 `gbk_chinese_ci`。TiDB 中 GBK 字符集的默认排序规则取决于 TiDB 配置项 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) 的值：
 
-- 默认情况下，配置项 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) 设置为 `true`，意味着启用 [新字符集排序框架](/character-set-and-collation.md#new-framework-for-collations)，GBK 字符集的默认排序规则为 `gbk_chinese_ci`。
-- 当配置项 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) 设置为 `false` 时，禁用 [新字符集排序框架](/character-set-and-collation.md#new-framework-for-collations)，GBK 字符集的默认排序规则为 `gbk_bin`。
+- 默认情况下，TiDB 配置项 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) 设置为 `true`，即启用了 [新的排序规则框架](/character-set-and-collation.md#new-framework-for-collations)，GBK 字符集的默认排序规则为 `gbk_chinese_ci`。
+- 当 TiDB 配置项 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) 设置为 `false` 时，[新的排序规则框架](/character-set-and-collation.md#new-framework-for-collations) 被禁用，GBK 字符集的默认排序规则为 `gbk_bin`。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-默认情况下，TiDB Cloud 启用 [新字符集排序框架](/character-set-and-collation.md#new-framework-for-collations)，GBK 字符集的默认排序规则为 `gbk_chinese_ci`。
+TiDB Cloud 默认启用 [新的排序规则框架](/character-set-and-collation.md#new-framework-for-collations)，GBK 字符集的默认排序规则为 `gbk_chinese_ci`。
 
 </CustomContent>
 
-此外，由于 TiDB 会将 GBK 转换为 `utf8mb4` 后再使用二进制排序规则，因此 TiDB 中的 `gbk_bin` 排序规则与 MySQL 中的 `gbk_bin` 不完全相同。
+此外，由于 TiDB 会将 GBK 转换为 `utf8mb4` 并使用二进制排序规则，因此 TiDB 中的 `gbk_bin` 排序规则与 MySQL 中的 `gbk_bin` 排序规则并不相同。
 
 ### 非法字符兼容性
 
-* 如果系统变量 [`character_set_client`](/system-variables.md#character_set_client) 和 [`character_set_connection`](/system-variables.md#character_set_connection) 没有同时设置为 `gbk`，TiDB 处理非法字符的方式与 MySQL 相同。
+* 如果系统变量 [`character_set_client`](/system-variables.md#character_set_client) 和 [`character_set_connection`](/system-variables.md#character_set_connection) 没有同时设置为 `gbk`，TiDB 处理非法字符的方式与 MySQL 一致。
 * 如果 `character_set_client` 和 `character_set_connection` 都设置为 `gbk`，TiDB 处理非法字符的方式与 MySQL 不同。
 
     - MySQL 在读写操作中对非法 GBK 字符集的处理方式不同。
-    - TiDB 在读写操作中对非法 GBK 字符集的处理方式相同。在 SQL 严格模式下，TiDB 在读取或写入非法 GBK 字符时会报错；在非严格模式下，TiDB 会用 `?` 替换非法 GBK 字符。
+    - TiDB 在读写操作中对非法 GBK 字符集的处理方式相同。在 SQL 严格模式下，TiDB 在读或写非法 GBK 字符时都会报错；在非严格模式下，TiDB 在读或写非法 GBK 字符时都会用 `?` 替换非法字符。
 
-例如，执行 `SET NAMES gbk` 后，如果在 MySQL 和 TiDB 中分别使用 `CREATE TABLE gbk_table(a VARCHAR(32) CHARACTER SET gbk)` 创建表，然后执行下表中的 SQL 语句，可以看到详细差异。
+例如，在执行 `SET NAMES gbk` 后，分别在 MySQL 和 TiDB 中使用 `CREATE TABLE gbk_table(a VARCHAR(32) CHARACTER SET gbk)` 创建表，然后执行下表中的 SQL 语句，可以看到详细的差异。
 
-| 数据库 |    如果配置的 SQL 模式包含 `STRICT_ALL_TABLES` 或 `STRICT_TRANS_TABLES` | 如果配置的 SQL 模式既不包含 `STRICT_ALL_TABLES` 也不包含 `STRICT_TRANS_TABLES` |
-|-------|--------------------------------------------------------------|--------------------------------------------------------------|
-| MySQL | `SELECT HEX('一a');` <br /> `e4b88061`<br /><br />`INSERT INTO gbk_table values('一a');`<br /> `Incorrect Error` | `SELECT HEX('一a');` <br /> `e4b88061`<br /><br />`INSERT INTO gbk_table VALUES('一a');`<br />`SELECT HEX(a) FROM gbk_table;`<br /> `e4b8` |
+| 数据库    |    如果配置的 SQL 模式包含 `STRICT_ALL_TABLES` 或 `STRICT_TRANS_TABLES`                                               | 如果配置的 SQL 模式不包含 `STRICT_ALL_TABLES` 和 `STRICT_TRANS_TABLES`                                                                     |
+|-------|-------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| MySQL | `SELECT HEX('一a');` <br /> `e4b88061`<br /><br />`INSERT INTO gbk_table values('一a');`<br /> `Incorrect Error`       | `SELECT HEX('一a');` <br /> `e4b88061`<br /><br />`INSERT INTO gbk_table VALUES('一a');`<br />`SELECT HEX(a) FROM gbk_table;`<br /> `e4b8` |
 | TiDB  | `SELECT HEX('一a');` <br /> `Incorrect Error`<br /><br />`INSERT INTO gbk_table VALUES('一a');`<br /> `Incorrect Error` | `SELECT HEX('一a');` <br /> `e4b83f`<br /><br />`INSERT INTO gbk_table VALUES('一a');`<br />`SELECT HEX(a) FROM gbk_table;`<br /> `e4b83f`  |
 
-在上述表中，`SELECT HEX('a');` 在 `utf8mb4` 字节集中的结果为 `e4b88061`。
+在上表中，`SELECT HEX('a');` 在 `utf8mb4` 字节集下的结果为 `e4b88061`。
 
 ### 其他 MySQL 兼容性
 
-- 目前，TiDB 不支持使用 `ALTER TABLE` 语句将其他字符集类型转换为 `gbk`，或将 `gbk` 转换为其他字符集。
+- 当前，TiDB 不支持使用 `ALTER TABLE` 语句将其他字符集类型转换为 `gbk`，或将 `gbk` 转换为其他字符集类型。
 
 * TiDB 不支持使用 `_gbk`。例如：
 
@@ -92,21 +92,21 @@ MySQL 中 GBK 字符集的默认排序规则为 `gbk_chinese_ci`。TiDB 中 GBK 
   ERROR 1115 (42000): Unsupported character introducer: 'gbk'
   ```
 
-- 目前，对于 `ENUM` 和 `SET` 类型的二进制字符，TiDB 将其视为 `utf8mb4` 字符集。
+- 当前，对于 `ENUM` 和 `SET` 类型的二进制字符，TiDB 按照 `utf8mb4` 字符集进行处理。
 
 ## 组件兼容性
 
-- 目前，TiFlash 不支持 GBK 字符集。
+- 当前，TiFlash 不支持 GBK 字符集。
 
-- TiDB 数据迁移工具（DM）不支持将 `charset=GBK` 的表迁移到早于 v5.4.0 的 TiDB 集群。
+- TiDB Data Migration (DM) 不支持将 `charset=GBK` 的表迁移到 v5.4.0 之前的 TiDB 集群。
 
-- TiDB Lightning 不支持导入 `charset=GBK` 的表到早于 v5.4.0 的 TiDB 集群。
+- TiDB Lightning 不支持将 `charset=GBK` 的表导入到 v5.4.0 之前的 TiDB 集群。
 
-- 早于 v6.1.0 版本的 TiCDC 不支持复制 `charset=GBK` 的表。没有任何版本的 TiCDC 支持将 `charset=GBK` 的表复制到早于 v6.1.0 的 TiDB 集群。
+- v6.1.0 之前的 TiCDC 版本不支持同步 `charset=GBK` 的表。任何版本的 TiCDC 都不支持将 `charset=GBK` 的表同步到 v6.1.0 之前的 TiDB 集群。
 
-- 早于 v5.4.0 版本的 Backup & Restore（BR）不支持恢复 `charset=GBK` 的表。没有任何版本的 BR 支持将 `charset=GBK` 的表恢复到早于 v5.4.0 的 TiDB 集群。
+- v5.4.0 之前的 Backup & Restore (BR) 版本不支持恢复 `charset=GBK` 的表。任何版本的 BR 都不支持将 `charset=GBK` 的表恢复到 v5.4.0 之前的 TiDB 集群。
 
-## 相关链接
+## 参考文档
 
 * [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
-* [Character Set and Collation](/character-set-and-collation.md)
+* [字符集与排序规则](/character-set-and-collation.md)

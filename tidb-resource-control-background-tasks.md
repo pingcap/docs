@@ -13,11 +13,11 @@ summary: 介绍如何通过资源控制管理后台任务。
 
 > **Note:**
 >
-> 该功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群中不可用。
+> 该功能不适用于 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 集群。
 
-后台任务（如数据备份和自动统计信息收集）优先级较低，但会消耗大量资源。这些任务通常会定期或不定期触发。在执行过程中，它们会占用大量资源，从而影响在线高优先级任务的性能。
+后台任务（如数据备份和自动统计信息收集）优先级较低，但会消耗大量资源。这些任务通常会定期或不定期触发。在执行过程中会占用大量资源，从而影响在线高优先级任务的性能。
 
-自 v7.4.0 起，[TiDB 资源控制](/tidb-resource-control-ru-groups.md) 功能支持后台任务管理。当任务被标记为后台任务时，TiKV 会动态限制此类任务使用的资源，以避免影响其他前台任务的性能。TiKV 实时监控所有前台任务消耗的 CPU 和 IO 资源，并根据实例的总资源限制计算后台任务可用的资源阈值。所有后台任务在执行时都受该阈值限制。
+从 v7.4.0 开始，[TiDB 资源控制](/tidb-resource-control-ru-groups.md) 功能支持管理后台任务。当任务被标记为后台任务时，TiKV 会动态限制此类任务使用的资源，以避免影响其他前台任务的性能。TiKV 实时监控所有前台任务消耗的 CPU 和 IO 资源，并根据实例的总资源限制计算后台任务可用的资源阈值。所有后台任务在执行时都受该阈值限制。
 
 ## `BACKGROUND` 参数
 
@@ -28,7 +28,7 @@ TiDB 支持以下类型的后台任务：
 
 <CustomContent platform="tidb">
 
-- `lightning`：使用 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 执行导入任务。支持 TiDB Lightning 的物理和逻辑导入模式。
+- `lightning`：使用 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 或 [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) 执行导入任务。支持 TiDB Lightning 物理和逻辑导入模式。
 - `br`：使用 [BR](/br/backup-and-restore-overview.md) 执行备份和恢复任务。不支持 PITR。
 - `ddl`：控制 Reorg DDL 批量数据回写阶段的资源使用。
 - `stats`：由 TiDB 手动执行或自动触发的 [收集统计信息](/statistics.md#collect-statistics) 任务。
@@ -46,7 +46,7 @@ TiDB 支持以下类型的后台任务：
 
 </CustomContent>
 
-默认情况下，被标记为后台任务的任务类型为 `""`，即关闭后台任务管理。要启用后台任务管理，你需要手动修改 `default` 资源组的后台任务类型。当后台任务被识别并匹配后，资源控制会自动生效。这意味着当系统资源不足时，后台任务会自动降为最低优先级，以保障前台任务的执行。
+默认情况下，被标记为后台任务的任务类型为 `""`，后台任务管理功能处于关闭状态。要启用后台任务管理，你需要手动修改 `default` 资源组的后台任务类型。当后台任务被识别并匹配后，会自动进行资源控制。这意味着当系统资源不足时，后台任务会自动降为最低优先级，以保障前台任务的执行。
 
 > **Note:**
 >
@@ -66,7 +66,7 @@ TiDB 支持以下类型的后台任务：
     ALTER RESOURCE GROUP `default` BACKGROUND=NULL;
     ```
 
-3. 修改 `default` 资源组，将后台任务类型设置为空。此时，该资源组的所有任务都不会被视为后台任务。
+3. 修改 `default` 资源组，将后台任务类型设置为空。此时该资源组的所有任务都不会被视为后台任务。
 
     ```sql
     ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES="");

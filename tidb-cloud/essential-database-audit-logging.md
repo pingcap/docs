@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/serverless-audit-logging']
 
 # TiDB Cloud Essential 的数据库审计日志（Beta）
 
-TiDB Cloud Essential 为你提供数据库审计日志功能，用于在日志中记录用户访问的详细历史（如执行的 SQL 语句等）。
+TiDB Cloud Essential 提供了数据库审计日志功能，用于记录数据库的用户访问活动，例如执行的 SQL 语句。
 
 > **Note:**
 >
@@ -14,13 +14,13 @@ TiDB Cloud Essential 为你提供数据库审计日志功能，用于在日志�
 
 为了评估组织的用户访问策略和其他信息安全措施的有效性，定期分析数据库审计日志是一项安全最佳实践。
 
-审计日志功能默认处于关闭状态。要对集群进行审计，你需要为其启用审计日志。
+审计日志功能**默认处于关闭状态**。如需对 TiDB 集群进行审计，需为其启用审计日志。
 
 ## 审计日志配置
 
 ### 数据脱敏
 
-默认情况下，TiDB Cloud Essential 会对审计日志中的敏感数据进行脱敏。以下 SQL 语句为例：
+默认情况下，TiDB Cloud Essential 会对审计日志中的敏感数据进行脱敏处理。以下 SQL 语句为例：
 
 ```sql
 INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES (1, 'Alice', '123456');
@@ -78,7 +78,7 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 如需将审计日志存储在 Azure Blob Storage，你需要提供以下信息：
 
 - URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` 或 `https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
-- 访问凭证：具有 `Container` 和 `Object` 资源 `Read` 和 `Write` 权限的 [共享访问签名（SAS）令牌](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)。
+- 访问凭证：具有 `Container` 和 `Object` 资源 `Read` 和 `Write` 权限的 [SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)。
 
 更多信息，参见 [配置 Azure Blob Storage 访问](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)。
 
@@ -87,13 +87,13 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 如需将审计日志存储在阿里云 OSS，你需要提供以下信息：
 
 - URI: `oss://<bucket-name>/<folder-path>/`
-- 访问凭证：具有 `oss:PutObject` 和 `oss:GetBucketInfo` 权限的 [AccessKey 对](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)，以允许将数据导出到 OSS bucket。
+- 访问凭证：具有 `oss:PutObject` 和 `oss:GetBucketInfo` 权限的 [AccessKey pair](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)，以允许将数据导出到 OSS bucket。
 
 更多信息，参见 [配置阿里云对象存储 OSS 访问](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access)。
 
 ## 审计日志过滤规则
 
-如需过滤审计日志，你需要创建过滤规则以指定哪些事件需要记录。
+如需过滤审计日志，你需要创建过滤规则以指定需要记录哪些事件。
 
 过滤规则包含以下字段：
 
@@ -124,8 +124,8 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 | `SELECT`        | 记录所有 `SELECT` 语句的操作                                                   | `QUERY`       |
 | `QUERY_DDL`     | 记录所有 DDL 语句的操作                                                        | `QUERY`       |
 | `AUDIT`         | 记录所有与 TiDB 数据库审计设置相关的操作，包括设置系统变量和调用系统函数 | -                   |
-| `AUDIT_FUNC_CALL` | 记录所有与 TiDB Cloud 数据库审计相关的系统函数调用        | `AUDIT`       |
-| `AUDIT_SET_SYS_VAR` | 记录所有系统变量设置操作        | `AUDIT`       |
+| `AUDIT_FUNC_CALL` | 记录所有与 TiDB Cloud 数据库审计相关的系统函数调用操作        | `AUDIT`       |
+| `AUDIT_SET_SYS_VAR` | 记录所有设置系统变量的操作        | `AUDIT`       |
 
 > **Note:**
 >
@@ -164,13 +164,13 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 
 <div label="CLI">
 
-以 Amazon S3 存储为例。如需启用审计日志并将日志存储在 Amazon S3，运行以下命令：
+以 Amazon S3 存储为例。如需启用审计日志并将日志存储在 Amazon S3，执行以下命令：
 
 ```shell
 ticloud serverless audit-log config update -c <cluster-id> --enabled --cloud-storage S3 --s3.uri <s3-url> --s3.access-key-id <s3-access-key-id> --s3.secret-access-key <s3-secret-access-key> --rotation-size-mib <size-in-mb> --rotation-interval-minutes <interval-in-minutes> --unredacted=<true|false>
 ```
 
-`--rotation-size-mib`、`--rotation-interval-minutes` 和 `--unredacted` 参数为可选项。如果未指定，则使用默认值。
+`--rotation-size-mib`、`--rotation-interval-minutes` 和 `--unredacted` 参数为可选项。如果未指定，将使用默认值。
  
 </div>
 </SimpleTab>
@@ -198,7 +198,7 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled --cloud-sto
 
 <div label="CLI">
 
-如需通过 TiDB Cloud CLI 更新审计日志设置，运行以下命令：
+如需通过 TiDB Cloud CLI 更新审计日志设置，执行以下命令：
 
 ```shell
 ticloud serverless audit-log config update -c <cluster-id> --rotation-size-mib <size-in-mb> --rotation-interval-minutes <interval-in-minutes> --unredacted=<true|false>
@@ -230,7 +230,7 @@ ticloud serverless audit-log config update -c <cluster-id> --rotation-size-mib <
 
 <div label="CLI">
 
-如需通过 TiDB Cloud CLI 禁用审计日志，运行以下命令：
+如需通过 TiDB Cloud CLI 禁用审计日志，执行以下命令：
 
 ```shell
 ticloud serverless audit-log config update -c <cluster-id> --disabled=true
@@ -266,7 +266,7 @@ ticloud serverless audit-log config update -c <cluster-id> --disabled=true
 
 <div label="CLI">
 
-如需通过 TiDB Cloud CLI 创建过滤规则，运行以下命令：
+如需通过 TiDB Cloud CLI 创建过滤规则，执行以下命令：
 
 ```shell
 ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-name <rule-name> --rule '{"users":["%@%"],"filters":[{}]}'
@@ -296,7 +296,7 @@ ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-n
 
 <div label="CLI">
 
-如需通过 TiDB Cloud CLI 编辑过滤规则，运行以下命令：
+如需通过 TiDB Cloud CLI 编辑过滤规则，执行以下命令：
 
 ```shell
 ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-rule-id <rule-id> --rule '{"users":["%@%"],"filters":[{"classes":["QUERY"],"tables":["test.t"]}]}'
@@ -324,7 +324,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 
 <div label="CLI">
 
-如需通过 TiDB Cloud CLI 禁用过滤规则，运行以下命令：
+如需通过 TiDB Cloud CLI 禁用过滤规则，执行以下命令：
 
 ```shell
 ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-rule-id <rule-id> --enabled=false
@@ -348,7 +348,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 
 3. 在 **DB Audit Logging** 页面，找到你要删除的过滤规则并点击 **...**。
 
-4. 点击 **Delete**，然后点击 **I understand. Delete it** 以确认。
+4. 点击 **Delete**，然后点击 **I understand. Delete it** 以确认删除。
 
 </div>
 
@@ -363,12 +363,12 @@ ticloud serverless audit-log filter delete --cluster-id <cluster-id> --filter-ru
 
 ## 通过 TiDB Cloud 存储访问审计日志
 
-当你将审计日志存储在 TiDB Cloud 时，TiDB Cloud Essential 会将其保存为名为 `YYYY-MM-DD-<index>.log` 的可读文本文件。你可以通过 TiDB Cloud 控制台或 TiDB Cloud CLI 查看和下载这些文件。
+当你将审计日志存储在 TiDB Cloud 时，TiDB Cloud Essential 会将其保存为可读的文本文件，命名为 `YYYY-MM-DD-<index>.log`。你可以通过 TiDB Cloud 控制台或 TiDB Cloud CLI 查看和下载这些文件。
 
 > **Note:**
 >
 > - TiDB Cloud Essential 不保证审计日志的存储顺序。名为 `YYYY-MM-DD-<index>.log` 的日志文件可能包含更早日期的日志条目。
-> - 如需检索某一天的所有日志（例如 2025 年 1 月 1 日），请设置 `--start-date 2025-01-01` 和 `--end-date 2025-01-02`。在某些情况下，你可能需要下载所有日志文件并根据 `TIME` 字段进行排序。
+> - 如需获取某一天（如 2025 年 1 月 1 日）的所有日志，请设置 `--start-date 2025-01-01` 和 `--end-date 2025-01-02`。在某些情况下，你可能需要下载所有日志文件并根据 `TIME` 字段进行排序。
 
 <SimpleTab>
 <div label="Console">
@@ -389,7 +389,7 @@ ticloud serverless audit-log filter delete --cluster-id <cluster-id> --filter-ru
 
 <div label="CLI">
 
-如需通过 TiDB Cloud CLI 下载审计日志，运行以下命令：
+如需通过 TiDB Cloud CLI 下载审计日志，执行以下命令：
 
 ```shell
 ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <output-path> --start-date <start-date> --end-date <end-date>
@@ -407,7 +407,7 @@ ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <o
 
 ### 通用信息
 
-所有类型的审计日志都包含以下信息：
+所有类型的审计日志均包含以下信息：
 
 | 字段         | 描述                                                                                   |
 |---------------|---------------------------------------------------------------------------------------|
