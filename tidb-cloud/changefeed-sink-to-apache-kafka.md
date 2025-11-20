@@ -114,6 +114,8 @@ It is **NOT** recommended to use Public IP in a production environment.
 
 Private Connect leverages **Private Link** or **Private Service Connect** technologies from cloud providers to enable resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly within your VPC.
 
+To create a private endpoint for changefeeds in your cluster, follow [Set Up Private Endpoint for Changefeeds](/tidbcloud/set-up-sink-private-endpoint/).
+
 TiDB Cloud currently supports Private Connect only for self-hosted Kafka. It does not support direct integration with MSK, Confluent Kafka, or other Kafka SaaS services. To connect to these Kafka SaaS services via Private Connect, you can deploy a [kafka-proxy](https://github.com/grepplabs/kafka-proxy) as an intermediary, effectively exposing the Kafka service as self-hosted Kafka.
 
 If your Apache Kafka service is hosted on AWS, follow [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md) to configure the network connection and obtain the **Bootstrap Ports** information, and then follow [Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) to create a private endpoint.
@@ -182,11 +184,27 @@ The steps vary depending on the connectivity method you select.
 6. Select a **Compression** type for the data in this changefeed.
 7. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
 8. Click **Next** to test the network connection. If the test succeeds, you will be directed to the next page.
-9. TiDB Cloud creates the endpoint for **Private Link**, which might take several minutes.
-10. Once the endpoint is created, log in to your cloud provider console and accept the connection request.
-11. Return to the [TiDB Cloud console](https://tidbcloud.com) to confirm that you have accepted the connection request. TiDB Cloud will test the connection and proceed to the next page if the test succeeds.
 
 </div>
+
+<CustomContent plan="premium">
+<div label="Private Link (Alibab Cloud)">
+
+1. In **Connectivity Method**, select **Private Link**.
+2. In **Private Endpoint**, select the private endpoint that you created in the [Network](#network) section. Make sure the AZs of the private endpoint match the AZs of the Kafka deployment.
+3. Fill in the **Bootstrap Ports** that you obtained from the [Network](#network) section. It is recommended that you set at least one port for one AZ. You can use commas `,` to separate multiple ports.
+4. Select an **Authentication** option according to your Kafka authentication configuration.
+
+    - If your Kafka does not require authentication, keep the default option **Disable**.
+    - If your Kafka requires authentication, select the corresponding authentication type, and then fill in the **user name** and **password** of your Kafka account for authentication.
+5. Select your **Kafka Version**. If you do not know which one to use, use **Kafka v2**.
+6. Select a **Compression** type for the data in this changefeed.
+7. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
+8. Click **Next** to test the network connection. If the test succeeds, you will be directed to the next page.
+
+</div>
+
+</CustomContent>
 
 <CustomContent plan="dedicated">
 <div label="Private Service Connect (Google Cloud)">

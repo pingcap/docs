@@ -42,6 +42,24 @@ If the Private Endpoint Service is not available for your downstream service, fo
 
 </div>
 
+<CustomContent plan="premium">
+
+<div label="Alibaba Cloud">
+
+If your changefeed downstream service is hosted on Alibaba Cloud, collect the following information:
+
+- The name of the Private Endpoint Service for your downstream service
+- The availability zones (AZs) where your downstream service is deployed
+
+It is necessary to whitelist TiDB Cloud's Alibaba Cloud account ID for your endpoint service to grant the TiDB Cloud VPC access.
+
+If the Private Endpoint Service is not available for your downstream service, follow [Step 2. Expose the Kafka cluster as Private Link Service](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service) to set up the load balancer and the Private Link Service.
+
+</div>
+
+</CustomContent>
+
+<CustomContent plan="dedicated">
 <div label="Google Cloud">
 
 If your changefeed downstream service is hosted on Google Cloud, collect the Service Attachment information of your downstream service.
@@ -57,6 +75,10 @@ If your changefeed downstream service is hosted on Azure, collect the alias of t
 If the Private Endpoint Service is not available for your downstream service, follow [Step 2. Expose the Kafka cluster as Private Link Service](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service) to set up the load balancer and the Private Link Service.
 
 </div>
+
+</CustomContent>
+
+
 </SimpleTab>
 
 ## Step 1. Open the Networking page for your cluster
@@ -93,6 +115,30 @@ The configuration steps vary depending on the cloud provider where your cluster 
 
 </div>
 
+<CustomContent plan="premium">
+
+<div label="Alibaba Cloud">
+
+
+1. On the **Networking** page, click **Create Private Endpoint** in the **Alibaba Cloud Private Endpoint for Changefeed** section.
+2. In the **Create Private Endpoint for Changefeed** dialog, enter a name for the private endpoint.
+3. Follow the reminder to  whitelist TiDB Cloud's Alibaba Cloud account ID for your endpoint service to grant the TiDB Cloud VPC access , see [Manage account IDs in the whitelist of an endpoint service](https://www.alibabacloud.com/help/en/privatelink/user-guide/add-and-manage-service-whitelists).
+4. Enter the **Endpoint Service Name** that you collected in the [Network](#network) section.
+6. If this private endpoint is created for Apache Kafka, enable the **Advertised Listener for Kafka** option.
+7. Configure the advertised listener for Kafka using either the **TiDB Managed** domain or the **Custom** domain.
+
+    - To use the **TiDB Managed** domain for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate**. TiDB will generate broker addresses with subdomains for each availability zone.
+    - To use your own **Custom** domain for advertised listeners, switch the domain type to **Custom**, enter the root domain in the **Custom Domain** field, click **Check**, and then specify the broker subdomains for each availability zone.
+
+8. Click **Create** to validate the configurations and create the private endpoint.
+
+</div>
+
+</CustomContent>
+
+
+<CustomContent plan="dedicated">
+
 <div label="Google Cloud">
 
 1. On the **Networking** page, click **Create Private Endpoint** in the **Google Cloud Private Endpoint for Changefeed** section.
@@ -124,4 +170,6 @@ The configuration steps vary depending on the cloud provider where your cluster 
 7. Click **Create** to validate the configurations and create the private endpoint.
 
 </div>
+
+</CustomContent>
 </SimpleTab>
