@@ -12,9 +12,9 @@ aliases: ['/tidbcloud/serverless-driver-config']
 
 ## 为什么要使用 TiDB Cloud Serverless Driver (Beta)
 
-传统的基于 TCP 的 MySQL 驱动程序并不适合 serverless 函数，因为它们期望建立长时间、持久的 TCP 连接，这与 serverless 函数的短生命周期特性相矛盾。此外，在 [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) 和 [Cloudflare Workers](https://workers.cloudflare.com/) 等边缘环境中，可能缺乏对完整 TCP 支持和完整 Node.js 兼容性，这些驱动程序可能根本无法工作。
+传统的基于 TCP 的 MySQL 驱动程序并不适用于 serverless 函数，因为它们期望建立长时间、持久的 TCP 连接，这与 serverless 函数的短生命周期特性相矛盾。此外，在 [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) 和 [Cloudflare Workers](https://workers.cloudflare.com/) 等边缘环境中，可能缺乏对完整 TCP 的支持和完整的 Node.js 兼容性，这些驱动程序可能根本无法工作。
 
-[TiDB Cloud serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript 允许你通过 HTTP 连接到 TiDB Cloud Starter 或 TiDB Cloud Essential 集群，而 HTTP 通常被 serverless 环境所支持。借助该驱动，现在可以从边缘环境连接到 TiDB Cloud Starter 或 TiDB Cloud Essential 集群，并在保持传统基于 TCP 的 MySQL 驱动开发体验的同时，减少 TCP 连接开销。
+[TiDB Cloud serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) 针对 JavaScript，可以让你通过 HTTP 连接到 TiDB Cloud Starter 或 TiDB Cloud Essential 集群，而 HTTP 通常被 serverless 环境所支持。借助该驱动，现在可以从边缘环境连接到 TiDB Cloud Starter 或 TiDB Cloud Essential 集群，并减少 TCP 带来的连接开销，同时保持与传统基于 TCP 的 MySQL 驱动类似的开发体验。
 
 > **Note:**
 >
@@ -34,7 +34,7 @@ npm install @tidbcloud/serverless
 
 ### 查询
 
-要从 TiDB Cloud Starter 或 TiDB Cloud Essential 集群查询数据，你需要先创建一个连接。然后可以使用该连接执行原生 SQL 查询。例如：
+要从 TiDB Cloud Starter 或 TiDB Cloud Essential 集群查询数据，你需要先创建连接，然后可以使用该连接执行原生 SQL 查询。例如：
 
 ```ts
 import { connect } from '@tidbcloud/serverless'
@@ -162,11 +162,11 @@ const result = await conn.execute('show tables')
 | `password`   | string   | N/A           | 集群的密码。                                                                                                                                                                                                                                                                                                                                                 |
 | `host`       | string   | N/A           | 集群的主机名。                                                                                                                                                                                                                                                                                                                                               |
 | `database`   | string   | `test`        | 集群的数据库。                                                                                                                                                                                                                                                                                                                                               |
-| `url`        | string   | N/A           | 数据库的 URL，格式为 `mysql://[username]:[password]@[host]/[database]`，其中 `database` 可以省略（如果你打算连接到默认数据库）。                                                                                                                                                                                                                              |
+| `url`        | string   | N/A           | 数据库的 URL，格式为 `mysql://[username]:[password]@[host]/[database]`，其中 `database` 可以省略，如果你打算连接到默认数据库。                                                                                                                                                                                         |
 | `fetch`      | function | global fetch  | 自定义 fetch 函数。例如，你可以在 node.js 中使用 `undici` 的 fetch。                                                                                                                                                                                                                                                  |
-| `arrayMode`  | bool     | `false`       | 是否以数组而非对象的形式返回结果。为了获得更好的性能，可以设置为 `true`。                                                                                                                                                                                                                                             |
+| `arrayMode`  | bool     | `false`       | 是否以数组而不是对象的形式返回结果。为了获得更好的性能，可以设置为 `true`。                                                                                                                                                                                                                                           |
 | `fullResult` | bool     | `false`       | 是否返回完整的结果对象而不仅仅是行数据。为了获得更详细的结果，可以设置为 `true`。                                                                                                                                                                                                                                     |
-| `decoders`   | object   | `{}`          | 一组键值对，允许你为不同的列类型自定义解码过程。在每个键值对中，你可以指定列类型作为 key，并指定相应的函数作为 value。该函数以 TiDB Cloud serverless driver 返回的原始字符串值为参数，并返回解码后的值。                                                                                                             |
+| `decoders`   | object   | `{}`          | 一组键值对，允许你自定义不同列类型的解码过程。在每个键值对中，你可以指定列类型作为 key，并指定相应的函数作为 value。该函数以 TiDB Cloud serverless driver 返回的原始字符串值为参数，并返回解码后的值。                                                                                                               |
 
 **Database URL**
 
@@ -174,7 +174,7 @@ const result = await conn.execute('show tables')
 >
 > 如果你的用户名、密码或数据库名包含特殊字符，在通过 URL 传递时必须对这些字符进行 [百分号编码](https://en.wikipedia.org/wiki/Percent-encoding)。例如，密码 `password1@//?` 需要在 URL 中编码为 `password1%40%2F%2F%3F`。
 
-当配置了 `url` 后，无需单独配置 `host`、`username`、`password` 和 `database`。以下代码是等价的：
+当配置了 `url` 后，无需单独配置 `host`、`username`、`password` 和 `database`。以下两段代码是等价的：
 
 ```ts
 const config = {
@@ -207,10 +207,10 @@ const conn = connect(config)
 
 | Option       | Type   | Default value     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 |--------------|--------|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `arrayMode`  | bool   | `false`           | 是否以数组而非对象的形式返回结果。为了获得更好的性能，可以设置为 `true`。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `fullResult` | bool   | `false`           | 是否返回完整的结果对象而不仅仅是行数据。为了获得更详细的结果，可以设置为 `true`。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `isolation`  | string | `REPEATABLE READ` | 事务隔离级别，可以设置为 `READ COMMITTED` 或 `REPEATABLE READ`。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `decoders`   | object | `{}`              | 一组键值对，允许你为不同的列类型自定义解码过程。在每个键值对中，你可以指定列类型作为 key，并指定相应的函数作为 value。该函数以 TiDB Cloud serverless driver 返回的原始字符串值为参数，并返回解码后的值。如果你在连接级别和 SQL 级别都配置了 `decoders`，则连接级别中不同 key 的键值对会合并到 SQL 级别生效；如果同一个 key（即列类型）在两级都指定，则以 SQL 级别为准。 |
+| `arrayMode`  | bool   | `false`           | 是否以数组而不是对象的形式返回结果。为了获得更好的性能，可以设置为 `true`。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `fullResult` | bool   | `false`           | 是否返回完整的结果对象而不仅仅是行数据。为了获得更详细的结果，可以设置为 `true`。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `isolation`  | string | `REPEATABLE READ` | 事务隔离级别，可以设置为 `READ COMMITTED` 或 `REPEATABLE READ`。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `decoders`   | object | `{}`              | 一组键值对，允许你自定义不同列类型的解码过程。在每个键值对中，你可以指定列类型作为 key，并指定相应的函数作为 value。该函数以 TiDB Cloud serverless driver 返回的原始字符串值为参数，并返回解码后的值。如果你在连接级别和 SQL 级别都配置了 `decoders`，则连接级别中不同 key 的键值对会合并到 SQL 级别生效。如果同一个 key（即列类型）在两个级别都指定了，则以 SQL 级别的 value 为准。 |
 
 **arrayMode 和 fullResult**
 
@@ -248,7 +248,7 @@ const conn = connect({
   }
 })
 
-// 你也可以在 SQL 级别配置 decoder 选项，以覆盖连接级别相同 key 的解码器。
+// 你也可以在 SQL 级别配置 decoder 选项，以覆盖连接级别中相同 key 的 decoders。
 conn.execute(`select ...`, [], {
   decoders: {
     // ...
@@ -267,7 +267,7 @@ conn.execute(`select ...`, [], {
 
 ### 支持的 SQL 语句
 
-支持 DDL 以及以下 SQL 语句：`SELECT`、`SHOW`、`EXPLAIN`、`USE`、`INSERT`、`UPDATE`、`DELETE`、`BEGIN`、`COMMIT`、`ROLLBACK` 和 `SET`。
+支持 DDL，支持以下 SQL 语句：`SELECT`、`SHOW`、`EXPLAIN`、`USE`、`INSERT`、`UPDATE`、`DELETE`、`BEGIN`、`COMMIT`、`ROLLBACK` 和 `SET`。
 
 ### 数据类型映射
 
@@ -341,7 +341,7 @@ serverless driver 本身是免费的，但使用该驱动访问数据会产生 [
 目前，使用 serverless driver 有以下限制：
 
 - 单次查询最多可获取 10,000 行数据。
-- 一次只能执行一条 SQL 语句，不支持在一个查询中执行多条 SQL 语句。
+- 每次只能执行一条 SQL 语句，不支持在一个查询中执行多条 SQL 语句。
 - 暂不支持通过 [私有终端节点](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) 连接。
 
 ## 后续步骤

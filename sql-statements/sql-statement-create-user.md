@@ -1,13 +1,13 @@
 ---
 title: CREATE USER | TiDB SQL 语句参考
-summary: 关于在 TiDB 数据库中使用 CREATE USER 的概述。
+summary: CREATE USER 在 TiDB 数据库中的用法概述。
 ---
 
 # CREATE USER
 
-此语句用于创建一个新用户，并指定密码。在 MySQL 权限系统中，用户是用户名和连接来源主机的组合。因此，可以创建一个 `'newuser2'@'192.168.1.1'` 用户，该用户只能从 IP 地址 `192.168.1.1` 连接。也可以让两个用户具有相同的用户名部分，但登录来源不同，从而拥有不同的权限。
+该语句用于创建一个新用户，并为其指定密码。在 MySQL 权限系统中，用户是由用户名和其连接来源主机的组合。因此，可以创建一个只能从 IP 地址 `192.168.1.1` 连接的用户 `'newuser2'@'192.168.1.1'`。同样，也可以让两个用户拥有相同的用户名部分，但由于他们从不同主机登录，因此拥有不同的权限。
 
-## 概要
+## 语法
 
 ```ebnf+diagram
 CreateUserStmt ::=
@@ -18,12 +18,6 @@ IfNotExists ::=
 
 UserSpecList ::=
     UserSpec ( ',' UserSpec )*
-
-RequireClauseOpt ::=
-    ( 'REQUIRE' 'NONE' | 'REQUIRE' 'SSL' | 'REQUIRE' 'X509' | 'REQUIRE' RequireList )?
-
-RequireList ::=
-    ( "ISSUER" stringLit | "SUBJECT" stringLit | "CIPHER" stringLit | "SAN" stringLit | "TOKEN_ISSUER" stringLit )*
 
 UserSpec ::=
     Username AuthOption
@@ -76,14 +70,14 @@ CREATE USER 'newuser3'@'%' IDENTIFIED BY 'newuserpassword' REQUIRE SSL;
 Query OK, 1 row affected (0.02 sec)
 ```
 
-创建一个在登录时必须使用 X.509 证书的用户。
+创建一个登录时必须使用 X.509 证书的用户。
 
 ```sql
 CREATE USER 'newuser4'@'%' IDENTIFIED BY 'newuserpassword' REQUIRE ISSUER '/C=US/ST=California/L=San Francisco/O=PingCAP';
 Query OK, 1 row affected (0.02 sec)
 ```
 
-创建一个在创建时被锁定的用户。
+创建一个在创建时即被锁定的用户。
 
 ```sql
 CREATE USER 'newuser5'@'%' ACCOUNT LOCK;
@@ -93,7 +87,7 @@ CREATE USER 'newuser5'@'%' ACCOUNT LOCK;
 Query OK, 1 row affected (0.02 sec)
 ```
 
-创建带有备注的用户。
+创建一个带有注释的用户。
 
 ```sql
 CREATE USER 'newuser6'@'%' COMMENT 'This user is created only for test';
@@ -109,7 +103,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-创建带有 `email` 属性的用户。
+创建一个带有 `email` 属性的用户。
 
 ```sql
 CREATE USER 'newuser7'@'%' ATTRIBUTE '{"email": "user@pingcap.com"}';
@@ -125,7 +119,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-创建一个不允许重用最后 5 个密码的用户：
+创建一个不允许重用最近 5 个密码的用户：
 
 ```sql
 CREATE USER 'newuser8'@'%' PASSWORD HISTORY 5;
@@ -145,7 +139,7 @@ CREATE USER 'newuser9'@'%' PASSWORD EXPIRE;
 Query OK, 1 row affected (0.02 sec)
 ```
 
-创建使用资源组 `rg1` 的用户。
+创建一个使用资源组 `rg1` 的用户。
 
 ```sql
 CREATE USER 'newuser7'@'%' RESOURCE GROUP rg1;
@@ -163,24 +157,24 @@ SELECT USER, HOST, USER_ATTRIBUTES FROM MYSQL.USER WHERE USER='newuser7';
 
 ## MySQL 兼容性
 
-以下 `CREATE USER` 选项尚未被 TiDB 支持，虽然会被解析但会被忽略：
+以下 `CREATE USER` 选项目前尚未被 TiDB 支持，会被解析但会被忽略：
 
 * `PASSWORD REQUIRE CURRENT DEFAULT`
 * `WITH MAX_QUERIES_PER_HOUR`
 * `WITH MAX_UPDATES_PER_HOUR`
 * `WITH MAX_USER_CONNECTIONS`
 
-以下 `CREATE USER` 选项 TiDB 也不支持，且不会被解析器接受：
+以下 `CREATE USER` 选项同样不被 TiDB 支持，且解析器不会接受：
 
 * `DEFAULT ROLE`
 * `PASSWORD REQUIRE CURRENT OPTIONAL`
 
-## 相关链接
+## 另请参阅
 
 <CustomContent platform="tidb">
 
-* [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
-* [Privilege Management](/privilege-management.md)
+* [与 MySQL 的安全性兼容性](/security-compatibility-with-mysql.md)
+* [权限管理](/privilege-management.md)
 
 </CustomContent>
 
