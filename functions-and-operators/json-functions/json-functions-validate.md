@@ -5,13 +5,13 @@ summary: JSON ドキュメントを検証する JSON関数について学習し�
 
 # JSONドキュメントを検証するJSON関数 {#json-functions-that-validate-json-documents}
 
-このドキュメントでは、JSON ドキュメントを検証する JSON関数について説明します。
+TiDB は、MySQL 8.0 で利用可能な[JSONスキーマ検証関数](https://dev.mysql.com/doc/refman/8.0/en/json-validation-functions.html)のほとんどをサポートしています。
 
 > **注記：**
 >
 > 現在、この機能はクラスター[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では利用できません。
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-validation-functions.html#function_json-schema-valid">JSON_SCHEMA_VALID()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-validation-functions-html-function-json-schema-valid-json-schema-valid-a}
+## <code>JSON_SCHEMA_VALID()</code> {#code-json-schema-valid-code}
 
 `JSON_SCHEMA_VALID(schema, json_doc)`関数は、データの整合性と一貫性を確保するために、スキーマに対して JSON ドキュメントを検証します。
 
@@ -70,7 +70,7 @@ summary: JSON ドキュメントを検証する JSON関数について学習し�
 }
 ```
 
-JSON ドキュメントを保持するには[ユーザー定義変数](/user-defined-variables.md)使用します。
+JSON ドキュメントを保持するには[ユーザー定義変数](/user-defined-variables.md)を使用します。
 
 ```sql
 SET @j := '{"fruits": ["orange", "apple", "pear"], "vegetables": ["carrot", "pepper", "kale"]}';
@@ -126,7 +126,7 @@ SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables"]}',@j);
     +---------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-上記の出力では、属性`fruits`と`vegetables`存在の検証が成功したことがわかります。
+上記の出力では、属性`fruits`と`vegetables`の存在の検証が成功したことがわかります。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables","grains"]}',@j);
@@ -141,7 +141,7 @@ SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables","grains"]}',@j);
 
 上記の出力では、 `grains`が存在しないため、 `fruits` 、 `vegetables` 、 `grains`属性の存在の検証が失敗していることがわかります。
 
-ここで、 `fruits`配列であることを検証します。
+ここで、 `fruits`が配列であることを検証します。
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "array"}}}',@j);
@@ -167,7 +167,7 @@ SELECT JSON_SCHEMA_VALID('{"properties": {"fruits": {"type": "string"}}}',@j);
     +------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-上記の出力は、 `fruits`文字列**ではない**ことを示しています。
+上記の出力は、 `fruits`文字列で**はない**ことを示しています。
 
 次に、配列内の項目の数を確認します。
 

@@ -14,7 +14,7 @@ aliases: ['/tidbcloud/serverless-driver-config']
 
 従来のTCPベースのMySQLドライバは、長寿命で永続的なTCP接続を前提としており、サーバーレス関数の短寿命な性質と矛盾するため、サーバーレス関数には適していません。さらに、包括的なTCPサポートと完全なNode.js互換性が欠如している可能性のある[Vercelエッジ関数](https://vercel.com/docs/functions/edge-functions)や[Cloudflareワーカー](https://workers.cloudflare.com/)などのエッジ環境では、これらのドライバが全く動作しない可能性があります。
 
-JavaScript版の[TiDB Cloudサーバーレス ドライバー (ベータ版)](https://github.com/tidbcloud/serverless-js)すると、サーバーレス環境で一般的にサポートされているHTTP経由でTiDB Cloud StarterまたはTiDB Cloud Essentialクラスターに接続できます。これにより、エッジ環境からTiDB TiDB Cloud StarterまたはTiDB Cloud Essentialクラスターに接続し、従来のTCPベースのMySQLドライバーと同様の開発エクスペリエンスを維持しながら、TCPによる接続オーバーヘッドを削減することが可能になります。
+JavaScript版の[TiDB Cloudサーバーレス ドライバー (ベータ版)](https://github.com/tidbcloud/serverless-js)使用すると、サーバーレス環境で一般的にサポートされているHTTP経由でTiDB Cloud StarterまたはTiDB Cloud Essentialクラスターに接続できます。これにより、エッジ環境からTiDB Cloud StarterまたはTiDB Cloud Essentialクラスターに接続し、従来のTCPベースのMySQLドライバーと同様の開発エクスペリエンスを維持しながら、TCPによる接続オーバーヘッドを削減できるようになります。
 
 > **注記：**
 >
@@ -65,7 +65,7 @@ try {
 
 ## エッジの例 {#edge-examples}
 
-エッジ環境でサーバーレスドライバーを使用する例をいくつかご紹介します。より詳細な例については、こちら[ライブデモ](https://github.com/tidbcloud/car-sales-insight)もご覧ください。
+エッジ環境でサーバーレスドライバーを使用する例をいくつかご紹介します。より詳細な例については、こちら[ライブデモ](https://github.com/tidbcloud/car-sales-insight)ご覧ください。
 
 <SimpleTab>
 
@@ -172,9 +172,9 @@ TiDB Cloudサーバーレス ドライバーは、接続レベルと SQL レベ�
 
 > **注記：**
 >
-> ユーザー名、パスワード、またはデータベース名に特殊文字が含まれている場合、URLで渡す際にこれらの文字を[パーセンテージエンコード](https://en.wikipedia.org/wiki/Percent-encoding)にエンコードする必要があります。例えば、パスワードが`password1@//?`場合、URLでは`password1%40%2F%2F%3F`にエンコードする必要があります。
+> ユーザー名、パスワード、またはデータベース名に特殊文字が含まれている場合、URLで渡す際にこれらの文字を[パーセンテージエンコード](https://en.wikipedia.org/wiki/Percent-encoding)文字にエンコードする必要があります。例えば、パスワードが`password1@//?`場合、URLでは`password1%40%2F%2F%3F`にエンコードする必要があります。
 
-`url`設定されている場合、 `host` 、 `username` 、 `password` 、 `database`を個別に設定する必要はありません。以下のコードは同等です。
+`url`設定されている場合、 `host` 、 `username` 、 `password` 、 `database`個別に設定する必要はありません。以下のコードは同等です。
 
 ```ts
 const config = {

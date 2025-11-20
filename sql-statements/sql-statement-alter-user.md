@@ -5,7 +5,7 @@ summary: TiDB データベースの ALTER USER の使用法の概要。
 
 # ユーザーの変更 {#alter-user}
 
-この文は、TiDB権限システム内の既存のユーザーを変更します。MySQL権限システムでは、ユーザーはユーザー名と接続元ホストの組み合わせです。したがって、IPアドレス`192.168.1.1`からのみ接続できるユーザー`'newuser2'@'192.168.1.1'`作成することが可能です。また、2人のユーザーが同じユーザー領域を持ち、異なるホストからログインするため、異なる権限を持つことも可能になります。
+この文は、TiDB権限システム内の既存のユーザーを変更します。MySQL権限システムでは、ユーザーはユーザー名と接続元のホストの組み合わせです。したがって、IPアドレス`192.168.1.1`からのみ接続できるユーザー`'newuser2'@'192.168.1.1'`を作成することが可能です。また、2人のユーザーに同じユーザー領域を持たせ、異なるホストからログインするユーザーに異なる権限を付与することも可能です。
 
 ## 概要 {#synopsis}
 
@@ -18,12 +18,6 @@ UserSpecList ::=
 
 UserSpec ::=
     Username AuthOption
-
-RequireClauseOpt ::=
-    ( 'REQUIRE' 'NONE' | 'REQUIRE' 'SSL' | 'REQUIRE' 'X509' | 'REQUIRE' RequireList )?
-
-RequireList ::=
-    ( "ISSUER" stringLit | "SUBJECT" stringLit | "CIPHER" stringLit | "SAN" stringLit | "TOKEN_ISSUER" stringLit )*
 
 Username ::=
     StringName ('@' StringName | singleAtIdentifier)? | 'CURRENT_USER' OptionalBraces
@@ -130,7 +124,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-`ALTER USER ... PASSWORD EXPIRE NEVER`実行して、 `newuser`の自動パスワード有効期限ポリシーを無期限に変更します。
+`ALTER USER ... PASSWORD EXPIRE NEVER`を実行して、 `newuser`自動パスワード有効期限ポリシーを無期限に変更します。
 
 ```sql
 ALTER USER 'newuser' PASSWORD EXPIRE NEVER;
@@ -138,7 +132,7 @@ ALTER USER 'newuser' PASSWORD EXPIRE NEVER;
 
     Query OK, 0 rows affected (0.02 sec)
 
-`ALTER USER ... PASSWORD REUSE INTERVAL ... DAY`使用して、 `newuser`のパスワード再利用ポリシーを変更し、過去 90 日以内に使用されたパスワードの再利用を禁止します。
+`ALTER USER ... PASSWORD REUSE INTERVAL ... DAY`を使用して、 `newuser`パスワード再利用ポリシーを変更し、過去 90 日以内に使用されたパスワードの再利用を禁止します。
 
 ```sql
 ALTER USER 'newuser' PASSWORD REUSE INTERVAL 90 DAY;
@@ -148,7 +142,7 @@ ALTER USER 'newuser' PASSWORD REUSE INTERVAL 90 DAY;
 
 ### ユーザーにバインドされているリソース グループを変更する {#modify-the-resource-group-bound-to-the-user}
 
-`ALTER USER ... RESOURCE GROUP`使用して、ユーザー`newuser` ～ `rg1`のリソース グループを変更します。
+`ALTER USER ... RESOURCE GROUP`を使用して、ユーザー`newuser` ～ `rg1`のリソース グループを変更します。
 
 ```sql
 ALTER USER 'newuser' RESOURCE GROUP rg1;
@@ -192,6 +186,6 @@ SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user W
 
 </CustomContent>
 
--   [ユーザーの作成](/sql-statements/sql-statement-create-user.md)
+-   [ユーザーを作成](/sql-statements/sql-statement-create-user.md)
 -   [ユーザーを削除](/sql-statements/sql-statement-drop-user.md)
--   [表示 ユーザーの作成](/sql-statements/sql-statement-show-create-user.md)
+-   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)

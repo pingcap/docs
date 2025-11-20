@@ -11,7 +11,7 @@ TiDBは、ユーザーがTiDBにログインするための証明書ベースの
 
 -   セキュリティキーと証明書を作成する
 -   TiDBとクライアントの証明書を構成する
--   ユーザーがログインするときに検証されるユーザー証明書情報を構成する
+-   ユーザーがログインするときに検証するユーザー証明書情報を設定します
 -   証明書の更新と置き換え
 
 ドキュメントの残りの部分では、これらの操作を実行する方法について詳しく説明します。
@@ -51,7 +51,7 @@ TiDBは、ユーザーがTiDBにログインするための証明書ベースの
     sudo openssl req -new -x509 -nodes -days 365000 -key ca-key.pem -out ca-cert.pem
     ```
 
-3.  詳細な証明書情報を入力します。例:
+3.  詳細な証明書情報を入力します。例：
 
     ```bash
     Country Name (2 letter code) [AU]:US
@@ -65,7 +65,7 @@ TiDBは、ユーザーがTiDBにログインするための証明書ベースの
 
     > **注記：**
     >
-    > 上記の証明書の詳細において、 `:`以降のテキストは入力された情報です。
+    > 上記の証明書詳細において、 `:`以降のテキストは入力された情報です。
 
 ### サーバーキーと証明書を生成する {#generate-server-key-and-certificate}
 
@@ -75,7 +75,7 @@ TiDBは、ユーザーがTiDBにログインするための証明書ベースの
     sudo openssl req -newkey rsa:2048 -days 365000 -nodes -keyout server-key.pem -out server-req.pem
     ```
 
-2.  詳細な証明書情報を入力します。例:
+2.  詳細な証明書情報を入力します。例：
 
     ```bash
     Country Name (2 letter code) [AU]:US
@@ -124,7 +124,7 @@ TiDBは、ユーザーがTiDBにログインするための証明書ベースの
 
 ### クライアントキーと証明書を生成する {#generate-client-key-and-certificate}
 
-サーバーの鍵と証明書を生成したら、クライアントの鍵と証明書を生成する必要があります。多くの場合、ユーザーごとに異なる鍵と証明書を生成する必要があります。
+サーバーの鍵と証明書を生成したら、クライアント用の鍵と証明書を生成する必要があります。多くの場合、ユーザーごとに異なる鍵と証明書を生成する必要があります。
 
 1.  次のコマンドを実行してクライアント キーを生成します。
 
@@ -132,7 +132,7 @@ TiDBは、ユーザーがTiDBにログインするための証明書ベースの
     sudo openssl req -newkey rsa:2048 -days 365000 -nodes -keyout client-key.pem -out client-req.pem
     ```
 
-2.  詳細な証明書情報を入力します。例:
+2.  詳細な証明書情報を入力します。例：
 
     ```bash
     Country Name (2 letter code) [AU]:US
@@ -177,7 +177,7 @@ TiDBは、ユーザーがTiDBにログインするための証明書ベースの
 
     > **注記：**
     >
-    > 上記出力のセクション`subject`の情報は、セクション`require`のセクション[ログイン検証用の証明書設定](#configure-the-user-certificate-information-for-login-verification)に使用されます。
+    > 上記出力のセクション`subject`の情報は、セクション`REQUIRE`のセクション[ログイン検証用の証明書設定](#configure-the-user-certificate-information-for-login-verification)に使用されます。
 
 ### 証明書を確認する {#verify-certificate}
 
@@ -198,12 +198,14 @@ openssl verify -CAfile ca-cert.pem server-cert.pem client-cert.pem
 
 ### サーバー証明書を使用するように TiDB を構成する {#configure-tidb-to-use-server-certificate}
 
-TiDB設定ファイルの`[security]`セクションを変更します。この手順では`path/to/ca-cert.pem` CA証明書、サーバー鍵、サーバー証明書`path/to/server-key.pem`保存されるディレクトリを指定します。3、5、7 `path/to/server-cert.pem`任意のディレクトリに置き換えることができます。
+TiDB設定ファイルの`[security]`セクションを変更します。この手順では`path/to/server-key.pem` CA証明書、サーバー鍵、サーバー証明書`path/to/ca-cert.pem`保存されるディレクトリを指定します。3、5、7 `path/to/server-cert.pem`任意のディレクトリに置き換えることができます。
 
-    [security]
-    ssl-cert ="path/to/server-cert.pem"
-    ssl-key ="path/to/server-key.pem"
-    ssl-ca="path/to/ca-cert.pem"
+```toml
+[security]
+ssl-cert = "path/to/server-cert.pem"
+ssl-key = "path/to/server-key.pem"
+ssl-ca = "path/to/ca-cert.pem"
+```
 
 TiDBを起動し、ログを確認します。ログに以下の情報が表示されていれば、設定は成功です。
 
@@ -213,25 +215,25 @@ TiDBを起動し、ログを確認します。ログに以下の情報が表示�
 
 クライアントがログインにクライアント キーと証明書を使用するようにクライアントを構成します。
 
-MySQL クライアントを例にとると、 `ssl-cert` 、 `ssl-key` 、 `ssl-ca`指定して、新しく作成したクライアント証明書、クライアント キー、および CA を使用できます。
+MySQL クライアントを例にとると、 `ssl-cert` 、 `ssl-key` 、 `ssl-ca`を指定して、新しく作成されたクライアント証明書、クライアント キー、および CA を使用できます。
 
 ```bash
-mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key /path/to/client-key.new.pem --ssl-ca /path/to/ca-cert.pem
+mysql -u test -h 0.0.0.0 -P 4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key /path/to/client-key.new.pem --ssl-ca /path/to/ca-cert.pem
 ```
 
 > **注記：**
 >
-> `/path/to/client-cert.new.pem` 、 `/path/to/client-key.new.pem` 、 `/path/to/ca-cert.pem` 、CA証明書、クライアント鍵、クライアント証明書のディレクトリです。これらは任意のディレクトリに置き換えることができます。
+> `/path/to/client-cert.new.pem` 、 `/path/to/client-key.new.pem` 、 `/path/to/ca-cert.pem`は、CA証明書、クライアント鍵、クライアント証明書のディレクトリです。これらは任意のディレクトリに置き換えることができます。
 
 ## ログイン検証用のユーザー証明書情報を構成する {#configure-the-user-certificate-information-for-login-verification}
 
-まず、クライアントを使用してTiDBに接続し、ログイン認証を設定します。その後、認証するユーザー証明書情報を取得して設定します。
+まず、クライアントを使用してTiDBに接続し、ログイン認証を設定します。次に、認証するユーザー証明書情報を取得して設定します。
 
 ### ユーザー証明書情報を取得する {#get-user-certificate-information}
 
-ユーザー証明書情報は、X.509 証明書属性を確認するために使用される`REQUIRE SUBJECT` 、 `REQUIRE ISSUER` 、 `REQUIRE SAN` 、および`REQUIRE CIPHER`で指定できます。
+ユーザー証明書情報は、X.509 証明書属性の確認に使用される`REQUIRE SUBJECT` 、 `REQUIRE ISSUER` 、 `REQUIRE SAN` 、および`REQUIRE CIPHER`で指定できます。
 
--   `REQUIRE SUBJECT` : ログイン時のクライアント証明書のサブジェクト情報を指定します。このオプションを指定すると、 `require ssl`またはx509を設定する必要はありません。指定する情報は、 [クライアントキーと証明書を生成する](#generate-client-key-and-certificate)で入力したサブジェクト情報と一致します。
+-   `REQUIRE SUBJECT` : ログイン時のクライアント証明書のサブジェクト情報を指定します。このオプションを指定した場合、 `REQUIRE SSL`または`REQUIRE X509`を設定する必要はありません。指定する情報は、 [クライアントキーと証明書を生成する](#generate-client-key-and-certificate)で入力したサブジェクト情報と一致します。
 
     このオプションを取得するには、次のコマンドを実行します。
 
@@ -239,7 +241,7 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
     openssl x509 -noout -subject -in client-cert.pem | sed 's/.\{8\}//'  | sed 's/, /\//g' | sed 's/ = /=/g' | sed 's/^/\//'
     ```
 
--   `require issuer` : ユーザー証明書を発行するCA証明書の`subject`情報を指定します。指定する情報は、 [CAキーと証明書を生成する](#generate-ca-key-and-certificate)で入力した`subject`情報と一致します。
+-   `REQUIRE ISSUER` : ユーザー証明書を発行するCA証明書の`subject`情報を指定します。指定する情報は、 [CAキーと証明書を生成する](#generate-ca-key-and-certificate)で入力した`subject`情報と一致します。
 
     このオプションを取得するには、次のコマンドを実行します。
 
@@ -247,7 +249,7 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
     openssl x509 -noout -subject -in ca-cert.pem | sed 's/.\{8\}//'  | sed 's/, /\//g' | sed 's/ = /=/g' | sed 's/^/\//'
     ```
 
--   `require san` : ユーザー証明書を発行するCA証明書の`Subject Alternative Name`情報を指定します。指定する情報は、クライアント証明書の生成に使用された[`openssl.cnf`設定ファイルの`alt_names`](https://docs.pingcap.com/tidb/stable/generate-self-signed-certificates)の情報と一致します。
+-   `REQUIRE SAN` : ユーザー証明書を発行するCA証明書の`Subject Alternative Name`情報を指定します。指定する情報は、クライアント証明書の生成に使用された[`openssl.cnf`設定ファイルの`alt_names`](https://docs.pingcap.com/tidb/stable/generate-self-signed-certificates)の情報と一致します。
 
     -   生成された証明書の`REQUIRE SAN`項目の情報を取得するには、次のコマンドを実行します。
 
@@ -277,7 +279,7 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
 
 ### ユーザー証明書情報を構成する {#configure-user-certificate-information}
 
-ユーザー証明書情報（ `REQUIRE SUBJECT` ）を取得したら、ユーザー`REQUIRE ISSUER`作成、権限`REQUIRE SAN`付与、またはユーザーの変更時にこれらの情報`REQUIRE CIPHER`検証されるように設定します。以下の文の`<replaceable>`対応する情報に置き換えてください。
+ユーザー証明書情報（ `REQUIRE SUBJECT` `REQUIRE CIPHER`を取得したら、ユーザーの作成、権限の付与、またはユーザーの変更時にこれらの情報`REQUIRE SAN`検証されるように設定します。以下の文の`<replaceable>` `REQUIRE ISSUER`する情報に置き換えてください。
 
 スペースまたは`and`区切り文字として使用して、1 つのオプションまたは複数のオプションを設定できます。
 
@@ -295,12 +297,12 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
 
 上記の設定後、ログイン時に以下の項目が検証されます。
 
--   SSL が使用され、クライアント証明書を発行する CA はサーバーで構成された CA と一致します。
+-   SSL が使用され、クライアント証明書を発行する CA はサーバーで構成された CA と一致しています。
 -   クライアント証明書の`issuer`情報が`REQUIRE ISSUER`で指定された情報と一致します。
--   クライアント証明書の`subject`情報が`REQUIRE CIPHER`で指定された情報と一致します。
+-   接続に使用される暗号は、 `REQUIRE CIPHER`で指定された暗号と一致します。
 -   クライアント証明書の`Subject Alternative Name`情報が`REQUIRE SAN`で指定された情報と一致します。
 
-上記のすべての項目が検証された場合にのみ、TiDBにログインできます。そうでない場合は、エラー`ERROR 1045 (28000): Access denied`が返されます。以下のコマンドを使用して、TLSバージョン、暗号アルゴリズム、および現在の接続でログインに証明書が使用されているかどうかを確認できます。
+上記のすべての項目が検証された場合にのみ、TiDBにログインできます。検証されていない場合は、エラー`ERROR 1045 (28000): Access denied`が返されます。以下のコマンドを使用して、TLSバージョン、暗号アルゴリズム、および現在の接続でログインに証明書が使用されているかどうかを確認できます。
 
 MySQL クライアントに接続し、次のステートメントを実行します。
 
@@ -346,7 +348,7 @@ CA証明書は、クライアントとサーバー間の相互検証の基盤と
 
 ### CAキーと証明書を更新する {#update-ca-key-and-certificate}
 
-1.  古い CA キーと証明書をバックアップします ( `ca-key.pem`が盗まれたと仮定します)。
+1.  古い CA キーと証明書をバックアップします ( `ca-key.pem`が盗まれたと仮定)。
 
     ```bash
     mv ca-key.pem ca-key.old.pem && \
@@ -367,7 +369,7 @@ CA証明書は、クライアントとサーバー間の相互検証の基盤と
 
     > **注記：**
     >
-    > 新しいCA証明書を生成することは、クライアントとサーバーの鍵と証明書を置き換え、オンラインユーザーに影響を与えないようにするためです。したがって、上記のコマンドに追加される情報は、 `require issuer`情報と一致している必要があります。
+    > 新しいCA証明書を生成することは、クライアントとサーバーの鍵と証明書を置き換え、オンラインユーザーに影響を与えないようにするためです。したがって、上記のコマンドに追加される情報は、 `REQUIRE ISSUER`情報と一致している必要があります。
 
 4.  結合された CA 証明書を生成します。
 
@@ -394,7 +396,7 @@ CA証明書は、クライアントとサーバー間の相互検証の基盤と
 
     > **注記：**
     >
-    > 上記のコマンドは、クライアントの鍵と証明書を置き換え、オンラインユーザーに影響を与えないようにするためのものです。そのため、上記のコマンドに追加される情報は、 `require subject`情報と一致している必要があります。
+    > 上記のコマンドは、クライアントの鍵と証明書を置き換え、オンラインユーザーに影響を与えないようにするためのものです。そのため、上記のコマンドに追加される情報は、 `REQUIRE SUBJECT`情報と一致している必要があります。
 
 2.  結合された証明書と新しい CA キーを使用して、新しいクライアント証明書を生成します。
 
@@ -402,10 +404,10 @@ CA証明書は、クライアントとサーバー間の相互検証の基盤と
     sudo openssl x509 -req -in client-req.new.pem -days 365000 -CA ca-cert.pem -CAkey ca-key.pem -set_serial 01 -out client-cert.new.pem
     ```
 
-3.  クライアント (MySQL など) が新しいクライアント キーと証明書を使用して TiDB に接続できるようにします。
+3.  新しいクライアント キーと証明書を使用して、クライアント (MySQL など) を TiDB に接続します。
 
     ```bash
-    mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key /path/to/client-key.new.pem --ssl-ca /path/to/ca-cert.pem
+    mysql -u test -h 0.0.0.0 -P 4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key /path/to/client-key.new.pem --ssl-ca /path/to/ca-cert.pem
     ```
 
     > **注記：**
@@ -427,7 +429,11 @@ CA証明書は、クライアントとサーバー間の相互検証の基盤と
     sudo openssl x509 -req -in server-req.new.pem -days 365000 -CA ca-cert.pem -CAkey ca-key.pem -set_serial 01 -out server-cert.new.pem
     ```
 
-3.  新しいサーバーキーと証明書を使用するようにTiDBサーバーを設定します。詳細は[TiDBサーバーを構成する](#configure-tidb-and-the-client-to-use-certificates)参照してください。
+3.  新しいサーバーキーと証明書を使用するようにTiDBサーバーを設定します。ファイルを[サーバー証明書を使用するように TiDB を構成する](#configure-tidb-to-use-server-certificate)セクションで指定したディレクトリに配置します。
+
+    ```sql
+    ALTER INSTANCE RELOAD TLS;
+    ```
 
 ## 証明書のポリシーベースのアクセス制御 {#policy-based-access-control-for-certificates}
 

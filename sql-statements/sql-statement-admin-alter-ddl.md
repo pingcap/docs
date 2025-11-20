@@ -18,7 +18,7 @@ ADMIN ALTER DDL JOBS 101 THREAD = 8;
 -   `101` : DDLジョブのIDを示します。IDは[`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)実行することで取得できます。
 -   `THREAD` : DDLジョブの同時実行性を示します。初期値はシステム変数[`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)を使用して設定できます。
 
-`ADMIN ALTER DDL JOBS`文でサポートされているDDLジョブタイプには、 `ADD INDEX` 、 `MODIFY COLUMN` 、 `REORGANIZE PARTITION`あります。その他のDDLジョブタイプの場合、 `ADMIN ALTER DDL JOBS`実行すると`unsupported DDL operation`エラーが返されます。
+`ADMIN ALTER DDL JOBS`文でサポートされているDDLジョブタイプには、 `ADD INDEX` 、 `MODIFY COLUMN` 、 `REORGANIZE PARTITION`があります。その他のDDLジョブタイプの場合、 `ADMIN ALTER DDL JOBS`実行すると`unsupported DDL operation`エラーが返されます。
 
 現在、 `ADMIN ALTER DDL JOBS`実行して変更できるのは単一の DDL ジョブのパラメータのみです。複数の DDL ジョブ ID のパラメータを同時に変更することはサポートされていません。
 
@@ -31,6 +31,14 @@ ADMIN ALTER DDL JOBS 101 THREAD = 8;
     -   `MAX_WRITE_SPEED` : 各TiKVにインデックスレコードをインポートするための最大帯域幅制限。初期値は[`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850)に設定されます。
 
     現在、上記のパラメータは、送信されて[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が無効になった後に実行される`ADD INDEX`ジョブに対してのみ機能します。
+
+<CustomContent platform="tidb-cloud" plan="premium">
+
+> **注記：**
+>
+> TiDB Cloud Premiumでは、 `THREAD`と`MAX_WRITE_SPEED`は適切な値に自動的に調整され、ユーザーが変更することはできません。これらの設定を調整する必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+
+</CustomContent>
 
 -   `MODIFY COLUMN` :
     -   `THREAD` : DDLジョブの同時実行数。初期値は`tidb_ddl_reorg_worker_cnt`に設定されます。

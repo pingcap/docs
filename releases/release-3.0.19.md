@@ -7,23 +7,23 @@ summary: TiDB 3.0.19は2020年9月25日にリリースされました。互換�
 
 発売日：2020年9月25日
 
-TiDB バージョン: 3.0.19
+TiDBバージョン: 3.0.19
 
 ## 互換性の変更 {#compatibility-changes}
 
 -   PD
 
     -   インポートパスを`pingcap/pd`から`tikv/pd` [＃2779](https://github.com/pingcap/pd/pull/2779)に変更します
-    -   著作権情報を`PingCAP, Inc`から`TiKV Project Authors` [＃2777](https://github.com/pingcap/pd/pull/2777)変更します
+    -   著作権情報を`PingCAP, Inc`から`TiKV Project Authors` [＃2777](https://github.com/pingcap/pd/pull/2777)に変更します
 
 ## 改善点 {#improvements}
 
--   TiDB
+-   ティドブ
 
     -   障害回復によるQPSパフォーマンスへの影響を軽減する[＃19764](https://github.com/pingcap/tidb/pull/19764)
     -   `union`演算子[＃19885](https://github.com/pingcap/tidb/pull/19885)の同時実行の調整をサポート
 
--   TiKV
+-   ティクブ
 
     -   `sync-log` ～ `true`を調整不可の値[＃8636](https://github.com/tikv/tikv/pull/8636)として設定する
 
@@ -33,16 +33,16 @@ TiDB バージョン: 3.0.19
 
 ## バグ修正 {#bug-fixes}
 
--   TiDB
+-   ティドブ
 
     -   `slow-log`ファイルが存在しない場合に発生するクエリエラーを修正[＃20050](https://github.com/pingcap/tidb/pull/20050)
-    -   `SHOW STATS_META`と`SHOW STATS_BUCKET`権限チェックを追加する[＃19759](https://github.com/pingcap/tidb/pull/19759)
+    -   `SHOW STATS_META`と`SHOW STATS_BUCKET`の権限チェックを追加する[＃19759](https://github.com/pingcap/tidb/pull/19759)
     -   小数型を整数型に変更することを禁止する[＃19681](https://github.com/pingcap/tidb/pull/19681)
-    -   `ENUM` `SET`列[＃20045](https://github.com/pingcap/tidb/pull/20045)を変更する際に制約がチェックされない問題を修正
-    -   panic後にtidb-serverがテーブルロックを解放しないバグを修正[#20021](https://github.com/pingcap/tidb/pull/20021)
+    -   `ENUM`型列[＃20045](https://github.com/pingcap/tidb/pull/20045) `SET`変更する際に制約がチェックされない問題を修正
+    -   panic後にtidb-serverがテーブルロックを解放しないバグを修正[＃20021](https://github.com/pingcap/tidb/pull/20021)
     -   `WHERE`節[＃19901](https://github.com/pingcap/tidb/pull/19901)で`OR`演算子が正しく処理されないバグを修正
 
--   TiKV
+-   ティクブ
 
     -   理由フレーズが欠落している応答を解析するときに TiKV がパニックを起こすバグを修正[＃8540](https://github.com/tikv/tikv/pull/8540)
 
@@ -50,4 +50,4 @@ TiDB バージョン: 3.0.19
 
     -   TiDB Lightning
 
-        -   厳密モード[＃378](https://github.com/pingcap/tidb-lightning/pull/378)でCSVに不正なUTF文字が検出された場合、 TiDB Lightningプロセスが時間内に終了しない問題を修正しました。
+        -   厳密モード[＃378](https://github.com/pingcap/tidb-lightning/pull/378)でCSVに無効なUTF文字が検出された場合、 TiDB Lightningプロセスが時間内に終了しない問題を修正しました。

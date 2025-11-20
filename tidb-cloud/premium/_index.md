@@ -2,7 +2,7 @@
 title: TiDB Cloud Documentation
 hide_sidebar: true
 hide_commit: true
-summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提供する、フルマネージドのデータベース・アズ・ア・サービス（DBaaS）です。学習、試用、開発、保守、移行、監視、チューニング、セキュリティ保護、課金、統合、参照のためのガイド、サンプル、リファレンスを提供しています。
+summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供する、フルマネージドのデータベース・アズ・ア・サービス（DBaaS）です。学習、試用、開発、保守、移行、監視、チューニング、セキュリティ保護、課金、統合、参照のためのガイド、サンプル、リファレンスを提供しています。
 ---
 
 <LearningPathContainer platform="tidb-cloud" title="TiDB Cloud" subTitle="TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. Find the guide, samples, and references you need to use TiDB Cloud.">
@@ -19,7 +19,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 <LearningPath label="Try" icon="cloud5">
 
-[TiDB Cloud を試してみる](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-quickstart/?plan=premium)
+[TiDB Cloudを試してみる](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-quickstart/?plan=premium)
 
 [TiDB + AIを試す](https://docs-preview.pingcap.com/tidbcloud/vector-search-get-started-using-python/?plan=premium)
 
@@ -41,13 +41,13 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 <LearningPath label="Maintain" icon="cloud7">
 
-[クラスタを作成する](https://docs-preview.pingcap.com/tidbcloud/create-tidb-cluster-serverless/?plan=premium)
+[TiDBインスタンスを作成する](https://docs-preview.pingcap.com/tidbcloud/create-tidb-instance-premium/?plan=premium)
 
-[クラスタに接続する](https://docs-preview.pingcap.com/tidbcloud/connect-to-tidb-cluster-serverless/?plan=premium)
+[TiDBインスタンスに接続する](https://docs-preview.pingcap.com/tidbcloud/connect-to-tidb-instance/?plan=premium)
 
 [HTAPクラスタを使用する](https://docs-preview.pingcap.com/tidbcloud/tiflash-overview/?plan=premium)
 
-[データのバックアップと復元](https://docs-preview.pingcap.com/tidbcloud/backup-and-restore-serverless/?plan=premium)
+[データのバックアップと復元](https://docs-preview.pingcap.com/tidbcloud/backup-and-restore-premium/?plan=premium)
 
 [API を使用する（ベータ版）](https://docs-preview.pingcap.com/tidbcloud/api-overview/?plan=premium)
 
@@ -61,11 +61,11 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 [サンプルデータのインポート](https://docs-preview.pingcap.com/tidbcloud/import-sample-data-serverless/?plan=premium)
 
-[CSVファイルのインポート](https://docs-preview.pingcap.com/tidbcloud/import-csv-files-serverless/?plan=premium)
+[CSVファイルのインポート](https://docs-preview.pingcap.com/tidbcloud/import-csv-files-premium/?plan=premium)
 
 [Parquetファイルのインポート](https://docs-preview.pingcap.com/tidbcloud/import-parquet-files-serverless/?plan=premium)
 
-[MySQL CLIを使用する場合](https://docs-preview.pingcap.com/tidbcloud/import-with-mysql-cli-serverless/?plan=premium)
+[MySQL CLIを使用する場合](https://docs-preview.pingcap.com/tidbcloud/import-with-mysql-cli-premium/?plan=premium)
 
 </LearningPath>
 
@@ -73,7 +73,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 [ステータスとメトリクス](https://docs-preview.pingcap.com/tidbcloud/monitor-tidb-cluster/?plan=premium)
 
-[組み込み監視](https://docs-preview.pingcap.com/tidbcloud/built-in-monitoring/?plan=premium)
+[組み込み監視](https://docs-preview.pingcap.com/tidbcloud/built-in-monitoring-premium/?plan=premium)
 
 </LearningPath>
 
@@ -93,25 +93,23 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 [パスワード認証](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-password-authentication/?plan=premium)
 
-[ユーザーロール](https://docs-preview.pingcap.com/tidbcloud/manage-user-access#user-roles/?plan=premium)
+[ユーザーロール](https://docs-preview.pingcap.com/tidbcloud/manage-user-access-premium/?plan=premium/#user-roles)
 
-[ユーザープロファイルの管理](https://docs-preview.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles/?plan=premium)
+[ユーザープロファイルの管理](https://docs-preview.pingcap.com/tidbcloud/manage-user-access-premium/?plan=premium/#manage-user-profiles)
 
-[組織アクセスの管理](https://docs-preview.pingcap.com/tidbcloud/manage-user-access#manage-organization-access/?plan=premium)
+[組織アクセスの管理](https://docs-preview.pingcap.com/tidbcloud/manage-user-access-premium/?plan=premium/#manage-organization-access)
 
-[プロジェクトアクセスの管理](https://docs-preview.pingcap.com/tidbcloud/manage-user-access#manage-project-access/?plan=premium)
-
-[パブリックエンドポイントのファイアウォールルールを構成する](https://docs-preview.pingcap.com/tidbcloud/configure-serverless-firewall-rules-for-public-endpoints/?plan=premium)
+[IPアクセスリストを設定する](https://docs-preview.pingcap.com/tidbcloud/configure-ip-access-list-premium/?plan=premium)
 
 </LearningPath>
 
 <LearningPath label="Billing" icon="cloud2">
 
-[価格](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-billing#pricing-for-premium/?plan=premium)
+[価格](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-billing/?plan=premium/#pricing-for-premium)
 
-[請求書](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-billing#invoices/?plan=premium)
+[請求書](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-billing/?plan=premium/#invoices)
 
-[クレジット](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-billing#credits/?plan=premium)
+[クレジット](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-billing/?plan=premium/#credits)
 
 </LearningPath>
 

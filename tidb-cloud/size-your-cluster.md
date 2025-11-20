@@ -5,7 +5,7 @@ summary: TiDB Cloudクラスターのサイズを決定する方法を学びま�
 
 # TiDBのサイズを決定する {#determine-your-tidb-size}
 
-このドキュメントでは、 TiDB Cloud Dedicated クラスターのサイズを決定する方法について説明します。
+このドキュメントでは、TiDB Cloud Dedicated クラスターのサイズを決定する方法について説明します。
 
 > **注記：**
 >
@@ -39,6 +39,8 @@ TiDB のノード数、vCPU、RAM を構成できます。
 > -   TiDB のノード数は 1 または 2 にのみ設定でき、TiKV のノード数は 3 に固定されています。
 > -   4 vCPU TiDB は 4 vCPU TiKV でのみ使用できます。
 > -   TiFlashは利用できません。
+>
+> **4 vCPU、16 GiB**の TiDB は、学習、テスト、およびトライアル用途向けに設計されています。プレプロダクション環境や、小規模でクリティカルでないワークロードに適しています。ただし、パフォーマンスの制限があるため、本格的な本番環境への本番は推奨され**ません**。本番でのコスト削減と SLA 保証が必要な場合は、 [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスタープランのご利用をご検討ください。
 
 ### TiDBノード数 {#tidb-node-count}
 
@@ -61,7 +63,7 @@ TiDB ノードの指定されたレイテンシーでは、TiDB のパフォー�
 | 混合   | 15,500           | 7,750            | 5,200            |
 | 書く   | 18,000           | 9,000            | 6,000            |
 
-TiDBノード数が8未満の場合、パフォーマンス偏差係数はほぼ0%であるため、16 vCPU、32 GiBのTiDBノードのTiDBパフォーマンスは、8 vCPU、16 GiBのTiDBノードの約2倍になります。TiDBノード数が8を超える場合は、必要なノード数が少なくなり、パフォーマンス偏差係数が小さくなるため、16 vCPU、32 GiBのTiDBノードを選択することをお勧めします。
+TiDBノード数が8未満の場合、パフォーマンス偏差係数はほぼ0%であるため、16 vCPU、32 GiB TiDBノードのTiDBパフォーマンスは、8 vCPU、16 GiB TiDBノードの約2倍になります。TiDBノード数が8を超える場合は、必要なノード数が少なくなり、パフォーマンス偏差係数が小さくなるため、16 vCPU、32 GiB TiDBノードを選択することをお勧めします。
 
 クラスターのサイズを計画する際には、次の式を使用して、ワークロードの種類、全体的な予想パフォーマンス (QPS)、およびワークロードの種類に対応する単一の TiDB ノードのパフォーマンスに応じて、TiDB ノードの数を見積もることができます。
 
@@ -103,12 +105,14 @@ TiKV のノード数、vCPU と RAM、storageを構成できます。
 > -   TiDB のノード数は 1 または 2 にのみ設定でき、TiKV のノード数は 3 に固定されています。
 > -   4 vCPU TiKV は 4 vCPU TiDB でのみ使用できます。
 > -   TiFlashは利用できません。
+>
+> **4 vCPU、16 GiB**の TiKV は、学習、テスト、およびトライアル用途向けに設計されています。プレプロダクション環境や、小規模でクリティカルでないワークロードに適しています。ただし、パフォーマンスの制限があるため、本格的な本番環境への本番は推奨され**ません**。本番でのコスト削減と SLA 保証が必要な場合は、 [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスタープランのご利用をご検討ください。
 
 ### TiKVノード数 {#tikv-node-count}
 
 TiKV ノードの数は**少なくとも 1 セット (3 つの異なる利用可能ゾーン内の 3 つのノード) で**ある必要があります。
 
-TiDB Cloudは、選択したリージョン内のすべてのアベイラビリティゾーン（少なくとも3つ）にTiKVノードを均等にデプロイすることで、耐久性と高可用性を実現します。典型的な3レプリカ構成では、データはすべてのアベイラビリティゾーンのTiKVノードに均等に分散され、各TiKVノードのディスクに永続化されます。
+TiDB Cloudは、耐久性と高可用性を実現するために、選択したリージョン内のすべてのアベイラビリティゾーン（少なくとも3つ）にTiKVノードを均等にデプロイします。典型的な3レプリカ構成では、データはすべてのアベイラビリティゾーンのTiKVノードに均等に分散され、各TiKVノードのディスクに永続化されます。
 
 > **注記：**
 >
@@ -116,9 +120,9 @@ TiDB Cloudは、選択したリージョン内のすべてのアベイラビリ�
 
 TiKVは主にデータstorageに使用されますが、TiKVノードのパフォーマンスはワークロードによって異なります。そのため、TiKVノードの数を計画する際には、 [**データ量**](#estimate-tikv-node-count-according-to-data-volume)と[期待されるパフォーマンス](#estimate-tikv-node-count-according-to-expected-performance)両方に基づいて見積もり、そのうち大きい方の見積もりを推奨ノード数とする必要があります。
 
-#### データ量に応じてTiKVノード数を見積もる {#estimate-tikv-node-count-according-to-data-volume}
+#### データ量に応じて TiKV ノード数を推定する {#estimate-tikv-node-count-according-to-data-volume}
 
-次のように、データ量に応じて TiKV ノードの推奨数を計算できます。
+次のようにして、データ量に応じて推奨される TiKV ノードの数を計算できます。
 
 `node count = ceil(size of your data * TiKV compression ratio * the number of replicas ÷ TiKV storage usage ratio ÷ one TiKV capacity ÷ 3) * 3`
 
@@ -132,7 +136,7 @@ MySQLダンプファイルのサイズが20TBで、TiKVの圧縮率が40%だと�
 
 #### 予想されるパフォーマンスに応じて TiKV ノード数を見積もる {#estimate-tikv-node-count-according-to-expected-performance}
 
-TiDBのパフォーマンスと同様に、TiKVのパフォーマンスはTiKVノード数に比例して直線的に増加します。ただし、TiKVノード数が8を超えると、パフォーマンスの向上は直線的な比例関係からわずかに減少します。ノード数が8増えるごとに、パフォーマンスの偏差係数は約5%になります。
+TiDBのパフォーマンスと同様に、TiKVのパフォーマンスはTiKVノード数に比例して増加します。ただし、TiKVノード数が8を超えると、パフォーマンスの向上は線形比例からわずかに減少します。ノード数が8増えるごとに、パフォーマンスの偏差係数は約5%になります。
 
 例えば：
 
@@ -151,19 +155,19 @@ TiKV ノードの指定されたレイテンシーでは、TiKV のパフォー�
 
 TiKVノード数が8未満の場合、パフォーマンス偏差係数はほぼ0%であるため、16 vCPU、64 GiBのTiKVノードのパフォーマンスは、8 vCPU、32 GiBのTiKVノードの約2倍になります。TiKVノード数が8を超える場合は、必要なノード数が少なくなり、パフォーマンス偏差係数が小さくなるため、16 vCPU、64 GiBのTiKVノードを選択することをお勧めします。
 
-クラスターのサイズを計画するときは、次の式を使用して、ワークロードの種類、全体的な予想パフォーマンス (QPS)、およびワークロードの種類に対応する単一の TiKV ノードのパフォーマンスに応じて、TiKV ノードの数を見積もることができます。
+クラスターのサイズを計画する際には、次の式を使用して、ワークロードの種類、全体的な予想パフォーマンス (QPS)、およびワークロードの種類に対応する単一の TiKV ノードのパフォーマンスに応じて、TiKV ノードの数を見積もることができます。
 
 `node count = ceil(overall expected performance ÷ performance per node * (1 - performance deviation coefficient))`
 
 式では、まず`node count = ceil(overall expected performance ÷ performance per node)`計算して大まかなノード数を取得し、対応するパフォーマンス偏差係数を使用してノード数の最終結果を取得する必要があります。
 
-例えば、混合ワークロードにおける全体的な期待パフォーマンスが 110,000 QPS、P95レイテンシーが約 100 ミリ秒で、8 vCPU、32 GiB TiKV ノードを使用したいとします。この場合、前述の表から 8 vCPU、32 GiB TiKV ノードの推定 TiKV パフォーマンス（ `17,800` ）を取得し、TiKV ノードの大まかな数を以下のように計算します。
+例えば、混合ワークロードにおける全体的な期待パフォーマンスが110,000 QPS、P95レイテンシーが約100ミリ秒で、8 vCPU、32 GiB TiKVノードを使用したいとします。この場合、前述の表から8 vCPU、32 GiB TiKVノードの推定TiKVパフォーマンス（ `17,800` ）を取得し、TiKVノードの大まかな数を以下のように計算します。
 
 `node count = ceil(110,000 / 17,800 ) = 7`
 
 7 は 8 未満なので、7 ノードのパフォーマンス偏差係数は 0 です。推定 TiKV パフォーマンスは`7 * 17,800 * (1 - 0) = 124,600`であり、期待される 110,000 QPS のパフォーマンスを満たすことができます。
 
-したがって、期待されるパフォーマンスに応じて、7 つの TiKV ノード (8 vCPU、32 GiB) が推奨されます。
+したがって、予想されるパフォーマンスに応じて、7 つの TiKV ノード (8 vCPU、32 GiB) が推奨されます。
 
 次に、データ量に応じて計算された TiKV ノード数と、予想されるパフォーマンスに応じて計算された数を比較し、大きい方を TiKV ノードの推奨数とします。
 
@@ -182,9 +186,9 @@ TiKVノード数が8未満の場合、パフォーマンス偏差係数はほぼ
 >
 > クラスターの作成後に TiKV ノードのstorageサイズを減らすことはできません。
 
-### TiKVノードのstorageタイプ {#tikv-node-storage-types}
+### TiKVノードstorageタイプ {#tikv-node-storage-types}
 
-TiDB Cloud は、 AWS でホストされる[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して次の TiKVstorageタイプを提供します。
+TiDB Cloud は、AWS でホストされる[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して次の TiKVstorageタイプを提供します。
 
 -   [基本的なstorage](#basic-storage)
 -   [標準storage](#standard-storage)
@@ -207,7 +211,7 @@ TiDB Cloud は、 AWS でホストされる[TiDB Cloud専用](/tidb-cloud/select
 
 #### パフォーマンスとプラスstorage {#performance-and-plus-storage}
 
-パフォーマンスストレージとプラスstorageは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、これらの2つのstorageタイプは、AWSにデプロイされたクラスターに対してのみリクエストに応じて利用可能です。パフォーマンスストレージまたはプラスstorageをリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポート**をリクエスト」をクリックします。次に、 **「説明」**フィールドに「TiKVstorageタイプを申請」と入力し、 **「送信」を**クリックします。
+パフォーマンスストレージとプラスstorageは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、これらの2つのstorageタイプは、AWSにデプロイされたクラスターに対してのみ、リクエストに応じて利用可能です。パフォーマンスストレージまたはプラスstorageをリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートを**リクエスト」をクリックします。次に、「**説明」**フィールドに「TiKVstorageタイプを申請」と入力し、 **「送信」を**クリックします。
 
 ## サイズTiFlash {#size-tiflash}
 
@@ -215,7 +219,7 @@ TiFlashはTiKVからのデータをリアルタイムで同期し、すぐにリ
 
 TiFlashのノード数、vCPU と RAM、storageを構成できます。
 
-### TiFlash vCPUとRAM {#tiflash-vcpu-and-ram}
+### TiFlash vCPU と RAM {#tiflash-vcpu-and-ram}
 
 サポートされている vCPU と RAM のサイズは次のとおりです。
 
@@ -234,7 +238,7 @@ TiFlashノードの最小数は、特定のテーブルのTiFlashレプリカ数
 
 TiFlashノードの最小数: `min((compressed size of table A * replicas for table A + compressed size of table B * replicas for table B) / size of each TiFlash capacity, max(replicas for table A, replicas for table B))`
 
-たとえば、AWS 上の各TiFlashノードのノードstorageを 1024 GiB に設定し、テーブル A にレプリカを 2 つ (圧縮サイズは 800 GiB)、テーブル B にレプリカを 1 つ (圧縮サイズは 100 GiB) 設定した場合、必要なTiFlashノードの数は次のようになります。
+たとえば、AWS 上の各TiFlashノードのノードstorageを1024 GiB に設定し、テーブル A にレプリカを 2 つ (圧縮サイズは 800 GiB)、テーブル B にレプリカを 1 つ (圧縮サイズは 100 GiB) 設定した場合、必要なTiFlashノードの数は次のようになります。
 
 TiFlashノードの最小数: `min((800 GiB * 2 + 100 GiB * 1) / 1024 GiB, max(2, 1)) ≈ 2`
 
@@ -252,17 +256,17 @@ TiFlashノードの最小数: `min((800 GiB * 2 + 100 GiB * 1) / 1024 GiB, max(2
 >
 > クラスターの作成後にTiFlashノードのstorageを減らすことはできません。
 
-### TiFlashノードのstorageタイプ {#tiflash-node-storage-types}
+### TiFlashノードstorageタイプ {#tiflash-node-storage-types}
 
-TiDB Cloud は、 AWS でホストされる[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して次のTiFlashstorageタイプを提供します。
+TiDB Cloud は、AWS でホストされる[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して次のTiFlashstorageタイプを提供します。
 
 -   [基本的なstorage](#basic-storage-1)
 -   [プラスstorage](#plus-storage)
 
 #### 基本的なstorage {#basic-storage}
 
-ベーシックstorageは、パフォーマンスとコスト効率のバランスが取れており、ほとんどのワークロードに最適です。
+ベーシックstorageは、パフォーマンスとコスト効率のバランスが取れているため、ほとんどのワークロードに最適です。
 
 #### プラスstorage {#plus-storage}
 
-Plusstorageは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、このstorageタイプはAWSにデプロイされたクラスターに対してのみ、リクエストに応じて利用可能です。リクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートをリクエスト」**をクリックしてください。次に、「**説明」**欄に「 TiFlashstorageタイプを申請」と入力し、 **「送信」を**クリックしてください。
+Plusstorageは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、このstorageタイプは、AWSにデプロイされたクラスターに対してのみ、リクエストに応じてご利用いただけます。リクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートをリクエスト」**をクリックしてください。次に、「**説明」**欄に「 TiFlashstorageタイプを申請」と入力し、 **「送信」を**クリックしてください。

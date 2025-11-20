@@ -5,13 +5,13 @@ summary: JSON 値を変更する JSON関数について学習します。
 
 # JSON値を変更するJSON関数 {#json-functions-that-modify-json-values}
 
-このドキュメントでは、JSON 値を変更する JSON関数について説明します。
+TiDB は、MySQL 8.0 で利用可能な[JSON値を変更するJSON関数](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html)すべてをサポートします。
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-append">JSON_APPEND()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-append-json-append-a}
+## <code>JSON_APPEND()</code> {#code-json-append-code}
 
 [`JSON_ARRAY_APPEND()`](#json_array_append)の別名。
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-append">JSON_ARRAY_APPEND()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-array-append-json-array-append-a}
+## <code>JSON_ARRAY_APPEND()</code> {#code-json-array-append-code}
 
 `JSON_ARRAY_APPEND(json_array, path, value [,path, value] ...)`関数は、JSON ドキュメント内の指定された配列の末尾に指定された`path`に値を追加し、結果を返します。
 
@@ -45,7 +45,7 @@ SELECT JSON_ARRAY_APPEND('{"transport_options": ["Car", "Boat", "Train"]}', '$.t
     +-------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-insert">JSON_ARRAY_INSERT()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-array-insert-json-array-insert-a}
+## <code>JSON_ARRAY_INSERT()</code> {#code-json-array-insert-code}
 
 `JSON_ARRAY_INSERT(json_array, path, value [,path, value] ...)`関数は、 `path`の`json_array`の指定された位置に`value`挿入し、結果を返します。
 
@@ -79,7 +79,7 @@ SELECT JSON_ARRAY_INSERT('["Car", "Boat", "Train"]', '$[1]', "Airplane") AS "Tra
     +--------------------------------------+
     1 row in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-insert">JSON_INSERT()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-insert-json-insert-a}
+## <code>JSON_INSERT()</code> {#code-json-insert-code}
 
 `JSON_INSERT(json_doc, path, value [,path, value] ...)`関数は、JSON ドキュメントに 1 つ以上の値を挿入し、結果を返します。
 
@@ -113,9 +113,9 @@ SELECT JSON_INSERT('{"a": 61, "b": 62}', '$.a', 41, '$.c', 63);
     +---------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge-patch">JSON_MERGE_PATCH()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-merge-patch-json-merge-patch-a}
+## <code>JSON_MERGE_PATCH()</code> {#code-json-merge-patch-code}
 
-`JSON_MERGE_PATCH(json_doc, json_doc [,json_doc] ...)`関数は、重複するキーの値を保持せずに、2つ以上のJSONドキュメントを1つのJSONドキュメントにマージします。重複するキーを持つ`json_doc`引数の場合、マージされた結果には、後で指定された`json_doc`引数の値のみが保持されます。
+`JSON_MERGE_PATCH(json_doc, json_doc [,json_doc] ...)`関数は、重複するキーの値を保持せずに、2つ以上のJSONドキュメントを1つのJSONドキュメントにマージします。重複するキーを持つ`json_doc`引数の場合、マージされた結果には、後に指定された`json_doc`引数の値のみが保持されます。
 
 例:
 
@@ -136,7 +136,7 @@ SELECT JSON_MERGE_PATCH(
     +-----------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge-preserve">JSON_MERGE_PRESERVE()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-merge-preserve-json-merge-preserve-a}
+## <code>JSON_MERGE_PRESERVE()</code> {#code-json-merge-preserve-code}
 
 `JSON_MERGE_PRESERVE(json_doc, json_doc [,json_doc] ...)`関数は、各キーに関連付けられたすべての値を保持しながら 2 つ以上の JSON ドキュメントをマージし、マージされた結果を返します。
 
@@ -155,7 +155,7 @@ SELECT JSON_MERGE_PRESERVE('{"a": 1, "b": 2}','{"a": 100}', '{"c": 300}');
     +--------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge">JSON_MERGE()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-merge-json-merge-a}
+## <code>JSON_MERGE()</code> {#code-json-merge-code}
 
 > **警告：**
 >
@@ -163,7 +163,7 @@ SELECT JSON_MERGE_PRESERVE('{"a": 1, "b": 2}','{"a": 100}', '{"c": 300}');
 
 [`JSON_MERGE_PRESERVE()`](#json_merge_preserve)の非推奨のエイリアス。
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-remove">JSON_REMOVE()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-remove-json-remove-a}
+## <code>JSON_REMOVE()</code> {#code-json-remove-code}
 
 `JSON_REMOVE(json_doc, path [,path] ...)`関数は、JSON ドキュメントから指定された`path`のデータを削除し、結果を返します。
 
@@ -195,7 +195,7 @@ SELECT JSON_REMOVE('{"a": 61, "b": 62, "c": 63}','$.b','$.c');
     +--------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-replace">JSON_REPLACE()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-replace-json-replace-a}
+## <code>JSON_REPLACE()</code> {#code-json-replace-code}
 
 `JSON_REPLACE(json_doc, path, value [, path, value] ...)`関数は、JSON ドキュメント内の指定されたパス内の値を置き換え、結果を返します。指定されたパスが存在しない場合、そのパスに対応する値は結果に追加されません。
 
@@ -216,7 +216,7 @@ SELECT JSON_REPLACE('{"a": 41, "b": 62}','$.b',42);
     +---------------------------------------------+
     1 row in set (0.00 sec)
 
-次の例では、 `$.b`の値を`62`から`42`に変更できます。さらに、この文は`$.c`の値を`43`に置き換えようとしますが、 `$.c`パスが`{"a": 41, "b": 62}`に存在しないため、これは機能しません。
+次の例では、 `$.b`値を`62`から`42`に変更できます。さらに、この文は`$.c`の値を`43`に置き換えようとしますが、 `$.c`パスが`{"a": 41, "b": 62}`に存在しないため、これは機能しません。
 
 ```sql
 SELECT JSON_REPLACE('{"a": 41, "b": 62}','$.b',42,'$.c',43);
@@ -229,7 +229,7 @@ SELECT JSON_REPLACE('{"a": 41, "b": 62}','$.b',42,'$.c',43);
     +------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-set">JSON_SET()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-set-json-set-a}
+## <code>JSON_SET()</code> {#code-json-set-code}
 
 `JSON_SET(json_doc, path, value [,path, value] ...)`関数は、JSON ドキュメントにデータを挿入または更新し、結果を返します。
 
@@ -237,7 +237,7 @@ SELECT JSON_REPLACE('{"a": 41, "b": 62}','$.b',42,'$.c',43);
 
 例:
 
-次の例では、 `$.version` `1.1`から`1.2`に更新できます。
+次の例では、 `$.version`を`1.1`から`1.2`に更新できます。
 
 ```sql
 SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2);
@@ -250,7 +250,7 @@ SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2);
     +-----------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-次の例では、 `$.version` `1.1`から`1.2`に更新できます。また、以前は存在しなかった`$.branch` `main`に更新できます。
+次の例では、 `$.version`を`1.1`から`1.2`に更新できます。また、以前は存在しなかった`$.branch`を`main`に更新できます。
 
 ```sql
 SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2,'$.branch', "main");
@@ -263,13 +263,13 @@ SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2,'$.branch'
     +------------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-unquote">JSON_UNQUOTE()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-modification-functions-html-function-json-unquote-json-unquote-a}
+## <code>JSON_UNQUOTE()</code> {#code-json-unquote-code}
 
 `JSON_UNQUOTE(json)`関数はJSON値の引用符を解除し、結果を文字列として返します。これは[`JSON_QUOTE()`](/functions-and-operators/json-functions/json-functions-create.md#json_quote)関数の逆の動作です。
 
 例:
 
-この例では、 `"foo"`引用符で囲まれずに`foo`になります。
+この例では、 `"foo"`は引用符で囲まれず`foo`になります。
 
 ```sql
 SELECT JSON_UNQUOTE('"foo"');
@@ -282,7 +282,7 @@ SELECT JSON_UNQUOTE('"foo"');
     +-----------------------+
     1 row in set (0.00 sec)
 
-この関数は[`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract)と一緒に使用されることが多いです。以下の例では、最初の例では引用符付きのJSON値を抽出し、2番目の例では2つの関数を組み合わせて引用符を外します。3 `JSON_UNQUOTE(JSON_EXTRACT(...))`代わりに[`->>`](/functions-and-operators/json-functions/json-functions-search.md#--1)演算子を使用できることに注意してください。
+この関数は[`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract)と一緒に使用されることが多いです。以下の例では、最初の例では引用符付きのJSON値を抽出し、2番目の例では2つの関数を組み合わせて引用符を解除しています。3 `JSON_UNQUOTE(JSON_EXTRACT(...))`代わりに[`->>`](/functions-and-operators/json-functions/json-functions-search.md#--1)演算子を使用できることに注意してください。
 
 ```sql
 SELECT JSON_EXTRACT('{"database": "TiDB"}', '$.database');

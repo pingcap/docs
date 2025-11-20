@@ -7,7 +7,9 @@ summary: JSON 値を集約する JSON関数について学習します。
 
 このページにリストされている関数は、TiDB がサポートする[集計関数](/functions-and-operators/aggregate-group-by-functions.md)の一部ですが、JSON の操作に特化しています。
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_json-arrayagg">JSON_ARRAYAGG()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-aggregate-functions-html-function-json-arrayagg-json-arrayagg-a}
+TiDB は MySQL 8.0 で利用可能な[2つの集計JSON関数](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html)サポートします。
+
+## <code>JSON_ARRAYAGG()</code> {#code-json-arrayagg-code}
 
 `JSON_ARRAYAGG(key)`関数は、指定された`key`に従ってキーの値を JSON 配列に集約します。5 `key`通常、式または列名です。
 
@@ -26,9 +28,9 @@ SELECT JSON_ARRAYAGG(v) FROM (SELECT 1 'v' UNION SELECT 2);
     +------------------+
     1 row in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_json-objectagg">JSON_OBJECTAGG()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-aggregate-functions-html-function-json-objectagg-json-objectagg-a}
+## <code>JSON_OBJECTAGG()</code> {#code-json-objectagg-code}
 
-`JSON_OBJECTAGG(key,value)`関数は、指定された`key`と`value`に従って、キーとキーの値をJSONオブジェクトに集約します。7 と`value` `key` 、式または列名です。
+`JSON_OBJECTAGG(key,value)`関数は、指定された`key`と`value`に従って、キーとキーの値をJSONオブジェクトに集約します。 `key`と`value`は通常、式または列名です。
 
 例：
 
@@ -96,7 +98,7 @@ TABLE plant_attributes;
     +----+----------+------------+--------+
     7 rows in set (0.00 sec)
 
-このデータには`JSON_OBJECTAGG()`関数を使用できます。ここでは、グループごとに複数のキーと値のペアがJSONオブジェクトに集約されていることがわかります。
+このデータには`JSON_OBJECTAGG()`関数を使用できます。ここでは、グループごとに複数のキー/値のペアがJSONオブジェクトに集約されていることがわかります。
 
 ```sql
 SELECT

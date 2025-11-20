@@ -5,9 +5,9 @@ summary: JSON 値を作成する JSON関数について学習します。
 
 # JSON値を作成するJSON関数 {#json-functions-that-create-json-values}
 
-このドキュメントでは、JSON 値を作成する JSON関数について説明します。
+TiDB は、MySQL 8.0 で利用可能な[JSON値を作成するJSON関数](https://dev.mysql.com/doc/refman/8.0/en/json-creation-functions.html)すべてをサポートします。
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-creation-functions.html#function_json-array">JSON_ARRAY()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-creation-functions-html-function-json-array-json-array-a}
+## <code>JSON_ARRAY()</code> {#code-json-array-code}
 
 `JSON_ARRAY([val[, val] ...])`関数は、(空の可能性のある)値のリストを評価し、それらの値を含む JSON 配列を返します。
 
@@ -22,7 +22,7 @@ SELECT JSON_ARRAY(1,2,3,4,5), JSON_ARRAY("foo", "bar");
     +-----------------------+--------------------------+
     1 row in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-creation-functions.html#function_json-object">JSON_OBJECT()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-creation-functions-html-function-json-object-json-object-a}
+## <code>JSON_OBJECT()</code> {#code-json-object-code}
 
 `JSON_OBJECT([key, val[, key, val] ...])`関数は、キーと値のペアの (空の場合もある) リストを評価し、それらのペアを含む JSON オブジェクトを返します。
 
@@ -37,7 +37,7 @@ SELECT JSON_OBJECT("database", "TiDB", "distributed", TRUE);
     +------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-creation-functions.html#function_json-quote">JSON_QUOTE()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-creation-functions-html-function-json-quote-json-quote-a}
+## <code>JSON_QUOTE()</code> {#code-json-quote-code}
 
 `JSON_QUOTE(str)`関数は、引用符付きの JSON 値として文字列を返します。
 

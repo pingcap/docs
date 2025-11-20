@@ -5,9 +5,9 @@ summary: JSON 値を返す JSON関数について学習します。
 
 # JSON値を返すJSON関数 {#json-functions-that-return-json-values}
 
-このドキュメントでは、JSON 値を返す JSON関数について説明します。
+TiDB は、MySQL 8.0 で利用可能な[JSON値属性を返すJSON関数](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html)すべてをサポートします。
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-depth">JSON_DEPTH()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-attribute-functions-html-function-json-depth-json-depth-a}
+## <code>JSON_DEPTH()</code> {#code-json-depth-code}
 
 `JSON_DEPTH(json_doc)`関数は、JSON ドキュメントの最大深度を返します。
 
@@ -15,7 +15,7 @@ summary: JSON 値を返す JSON関数について学習します。
 
 次の例では、レベルが 3 つあるため、 `JSON_DEPTH()` `3`返します。
 
--   ルート ( `$` )
+-   ルート（ `$` ）
 -   天気 ( `$.weather` )
 -   気象潮流 ( `$.weather.sunny` )
 
@@ -30,9 +30,9 @@ SELECT JSON_DEPTH('{"weather": {"current": "sunny"}}');
     +-------------------------------------------------+
     1 row in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-length">JSON_長さ()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-attribute-functions-html-function-json-length-json-length-a}
+## <code>JSON_LENGTH()</code> {#code-json-length-code}
 
-`JSON_LENGTH(json_doc [,path])`の関数はJSONドキュメントの長さを返します。3 `path`の引数が指定された場合は、パス内の値の長さを返します。
+`JSON_LENGTH(json_doc [,path])`番目の関数はJSONドキュメントの長さを返します。3 `path`引数が指定された場合は、パス内の値の長さを返します。
 
 例:
 
@@ -62,9 +62,9 @@ SELECT JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$.
     +------------------------------------------------------------------------------------+
     1 row in set (0.01 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-type">JSON_TYPE()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-attribute-functions-html-function-json-type-json-type-a}
+## <code>JSON_TYPE()</code> {#code-json-type-code}
 
-`JSON_TYPE(json_val)`関数は[JSON値の型](/data-type-json.md#json-value-types)示す文字列を返します。
+`JSON_TYPE(json_val)`関数は[JSON値の型](/data-type-json.md#json-value-types)を示す文字列を返します。
 
 例：
 
@@ -120,7 +120,7 @@ SELECT JSON_TYPE('"2025-06-14"'),JSON_TYPE(CAST(CAST('2025-06-14' AS date) AS js
     +---------------------------+-----------------------------------------------------+
     1 row in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-valid">JSON_VALID()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-attribute-functions-html-function-json-valid-json-valid-a}
+## <code>JSON_VALID()</code> {#code-json-valid-code}
 
 `JSON_VALID(str)`関数は、引数が有効なJSONかどうかを確認します。これは、列を`JSON`型に変換する前にチェックするのに役立ちます。
 

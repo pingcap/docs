@@ -5,7 +5,7 @@ summary: このドキュメントでは、TiDB でサポートされているウ
 
 # ウィンドウ関数 {#window-functions}
 
-TiDBにおけるウィンドウ関数の使用方法はMySQL 8.0と同様です。詳細については[MySQL ウィンドウ関数](https://dev.mysql.com/doc/refman/8.0/en/window-functions.html)参照してください。
+TiDBにおけるウィンドウ関数の使用方法は、MySQL 8.0と同様です。詳細については[MySQL ウィンドウ関数](https://dev.mysql.com/doc/refman/8.0/en/window-functions.html)参照してください。
 
 TiDB では、次のシステム変数を使用してウィンドウ関数を制御できます。
 
@@ -15,14 +15,14 @@ TiDB では、次のシステム変数を使用してウィンドウ関数を制
 
 ウィンドウ関数[ここに記載](/tiflash/tiflash-supported-pushdown-calculations.md) TiFlashにプッシュダウンできます。
 
-TiDBは、 `GROUP_CONCAT()`と`APPROX_PERCENTILE()`除く[`GROUP BY`集計関数](/functions-and-operators/aggregate-group-by-functions.md)つすべてをウィンドウ関数として使用できます。さらに、TiDBは以下のウィンドウ関数もサポートしています。
+TiDBは、 `GROUP_CONCAT()`と`APPROX_PERCENTILE()`を除く[`GROUP BY`集計関数](/functions-and-operators/aggregate-group-by-functions.md)すべてをウィンドウ関数として使用できます。さらに、TiDBは以下のウィンドウ関数もサポートしています。
 
 | 関数名                               | 機能の説明                                                                    |
 | :-------------------------------- | :----------------------------------------------------------------------- |
 | [`CUME_DIST()`](#cume_dist)       | 値のグループ内の値の累積分布を返します。                                                     |
 | [`DENSE_RANK()`](#dense_rank)     | パーティション内の現在の行のランクを返します。ランクにはギャップはありません。                                  |
 | [`FIRST_VALUE()`](#first_value)   | 現在のウィンドウの最初の行の式の値を返します。                                                  |
-| [`LAG()`](#lag)                   | パーティション内の現在の行の N 行前にある行の式の値を返します。                                        |
+| [`LAG()`](#lag)                   | パーティション内の現在の行の N 行前の行から式の値を返します。                                         |
 | [`LAST_VALUE()`](#last_value)     | 現在のウィンドウの最後の行の式の値を返します。                                                  |
 | [`LEAD()`](#lead)                 | パーティション内の現在の行から N 行後の行の式の値を返します。                                         |
 | [`NTH_VALUE()`](#nth_value)       | 現在のウィンドウの N 行目から式の値を返します。                                                |
@@ -31,9 +31,9 @@ TiDBは、 `GROUP_CONCAT()`と`APPROX_PERCENTILE()`除く[`GROUP BY`集計関数
 | [`RANK()`](#rank)                 | パーティション内の現在の行の順位を返します。順位にはギャップがある場合があります。                                |
 | [`ROW_NUMBER()`](#row_number)     | パーティション内の現在の行番号を返します。                                                    |
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_cume-dist"><code>CUME_DIST()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-window-function-descriptions-html-function-cume-dist-code-cume-dist-code-a}
+## <code>CUME_DIST()</code> {#code-cume-dist-code}
 
-`CUME_DIST()` 、値のグループ内における値の累積分布を計算します。値のグループをソートするには、 `ORDER BY`節と`CUME_DIST()`を使用する必要があります。そうしないと、この関数は期待される値を返しません。
+`CUME_DIST()`値のグループ内における値の累積分布を計算します。値のグループをソートするには、 `ORDER BY`節と`CUME_DIST()`を使用する必要があります。そうしないと、この関数は期待される値を返しません。
 
 ```sql
 WITH RECURSIVE cte(n) AS (
@@ -63,9 +63,9 @@ FROM
     +------+------------------------------+
     4 rows in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_dense-rank"><code>DENSE_RANK()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-window-function-descriptions-html-function-dense-rank-code-dense-rank-code-a}
+## <code>DENSE_RANK()</code> {#code-dense-rank-code}
 
-`DENSE_RANK()`関数は現在行の順位を返します。3 [`RANK()`](#rank)と似ていますが、同順位（同じ値と順序条件を持つ行）の場合に順位の差が残りません。
+`DENSE_RANK()`関数は現在行の順位を返します。3 [`RANK()`](#rank)と似ていますが、同順位（同じ値と順序条件を共有する行）の場合に空白を残しません。
 
 ```sql
 SELECT
@@ -97,9 +97,9 @@ FROM (
     +----+--------------------------------+
     6 rows in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_first-value"><code>FIRST_VALUE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-window-function-descriptions-html-function-first-value-code-first-value-code-a}
+## <code>FIRST_VALUE()</code> {#code-first-value-code}
 
-`FIRST_VALUE(expr)`はウィンドウ内の最初の値を返します。
+`FIRST_VALUE(expr)`ウィンドウ内の最初の値を返します。
 
 次の例では、 2 つの異なるウィンドウ定義を使用しています。
 
@@ -134,11 +134,11 @@ ORDER BY
     +------+-------------------------------------------------------+------------------------------------------------------+
     4 rows in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_lag"><code>LAG()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-window-function-descriptions-html-function-lag-code-lag-code-a}
+## <code>LAG()</code> {#code-lag-code}
 
-`LAG(expr [, num [, default]])`関数は、現在行の`num`行前にある行の値`expr`返します。そのような行が存在しない場合は、 `default`返されます。デフォルトでは、 `num`は`1`は`default` `NULL`扱われます。
+`LAG(expr [, num [, default]])`関数は、現在行の`num`行前にある行の値`expr`を返します。そのような行が存在しない場合は、 `default`が返されます。デフォルトでは、 `num`は`1`は`default` `NULL`扱われます。
 
-次の例では、 `num`が指定されていないため、 `LAG(n)`前の行の`n`の値を返します。7が`n`の場合、前の行は存在せず、 `default`指定されていないため、 `LAG(1)` `NULL`返します。
+次の例では、 `num`指定されていないため、 `LAG(n)`前の行の`n`の値を返します。7が`n`の場合、前の行は存在せず、 `default`指定されていないため、 `LAG(1)`は`NULL`返します。
 
 ```sql
 WITH RECURSIVE cte(n) AS (
@@ -174,7 +174,7 @@ FROM
     +------+----------------+
     10 rows in set (0.01 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_last-value"><code>LAST_VALUE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-window-function-descriptions-html-function-last-value-code-last-value-code-a}
+## <code>LAST_VALUE()</code> {#code-last-value-code}
 
 `LAST_VALUE()`関数はウィンドウ内の最後の値を返します。
 
@@ -215,11 +215,11 @@ ORDER BY
     +------+----------------------------------------+
     10 rows in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_lead"><code>LEAD()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-window-function-descriptions-html-function-lead-code-lead-code-a}
+## <code>LEAD()</code> {#code-lead-code}
 
-`LEAD(expr [, num [,default]])`関数は`default`現在行から`num`行後の行の値`expr`返します。そのような行が存在しない場合は、 `default`が返されます。デフォルトでは、 `num`は`1`は`NULL`扱われます。
+`LEAD(expr [, num [,default]])`関数は、現在の行から`num`行後の行の値`expr`返します。そのような行が存在しない場合は、 `default`が返されます。デフォルトでは、 `num`指定されていない場合は`1`が、 `default`指定されていない場合は`NULL`が返されます。
 
-次の例では、 `num`が指定されていないため、 `LEAD(n)`現在行の次の行の値`n`を返します`n`が10の場合、次の行は存在せず、 `default`指定されていないため、 `LEAD(10)` `NULL`返します。
+次の例では、 `num`指定されていないため、 `LEAD(n)`現在行の次の行の`n`の値を返します`n`が10の場合、次の行は存在せず、 `default`指定されていないため、 `LEAD(10)` `NULL`返します。
 
 ```sql
 WITH RECURSIVE cte(n) AS (
@@ -256,7 +256,7 @@ FROM
     +------+-----------------+
     10 rows in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_nth-value"><code>NTH_VALUE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-window-function-descriptions-html-function-nth-value-code-nth-value-code-a}
+## <code>NTH_VALUE()</code> {#code-nth-value-code}
 
 `NTH_VALUE(expr, n)`関数はウィンドウの`n`番目の値を返します。
 
@@ -302,7 +302,7 @@ ORDER BY
     +------+-------+--------+-------+------+
     10 rows in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_ntile"><code>NTILE()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-window-function-descriptions-html-function-ntile-code-ntile-code-a}
+## <code>NTILE()</code> {#code-ntile-code}
 
 `NTILE(n)`関数はウィンドウを`n`グループに分割し、各行のグループ番号を返します。
 
@@ -345,7 +345,7 @@ FROM
 
 ```
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_percent-rank"><code>PERCENT_RANK()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-window-function-descriptions-html-function-percent-rank-code-percent-rank-code-a}
+## <code>PERCENT_RANK()</code> {#code-percent-rank-code}
 
 `PERCENT_RANK()`関数は、現在の行の値よりも小さい値を持つ行の割合を示す 0 から 1 までの数値を返します。
 
@@ -380,7 +380,7 @@ FROM (
     +----+----------------------------------+---------------------------------------+
     6 rows in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_rank"><code>RANK()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-window-function-descriptions-html-function-rank-code-rank-code-a}
+## <code>RANK()</code> {#code-rank-code}
 
 `RANK()`関数は[`DENSE_RANK()`](#dense_rank)に似ていますが、同点（同じ値と順序条件を持つ行）の場合は空白を残します。つまり、絶対的な順位付けを提供します。例えば、順位が 7 の場合、それより低い順位の行が 6 行あることを意味します。
 
@@ -415,9 +415,9 @@ FROM (
     +----+--------------------------+--------------------------------+
     6 rows in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_row-number"><code>ROW_NUMBER()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-window-function-descriptions-html-function-row-number-code-row-number-code-a}
+## <code>ROW_NUMBER()</code> {#code-row-number-code}
 
-`ROW_NUMBER()`は結果セット内の現在の行の行番号を返します。
+`ROW_NUMBER()`結果セット内の現在の行の行番号を返します。
 
 ```sql
 WITH RECURSIVE cte(n) AS (

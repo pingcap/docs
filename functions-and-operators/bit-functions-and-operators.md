@@ -19,7 +19,7 @@ TiDB は、MySQL 8.0 で利用可能な[ビット関数と演算子](https://dev
 | [`&#x3C;&#x3C;`](#-left-shift) | 左シフト              |
 | [`>>`](#-right-shift)          | 右シフト              |
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#function_bit-count"><code>BIT_COUNT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-bit-functions-html-function-bit-count-code-bit-count-code-a}
+## <code>BIT_COUNT()</code> {#code-bit-count-code}
 
 `BIT_COUNT(expr)`関数は、 `expr`のうち 1 に設定されているビットの数を返します。
 
@@ -36,9 +36,9 @@ SELECT BIT_COUNT(b'00101001');
 
 > **注記：**
 >
-> 引数`expr`が2進数の場合、 `b'00101001'`のように、数値の前に明示的に`b`指定する必要があります。そうでない場合、この関数はそれを文字列として扱い、異なる結果を返します。例えば、 `BIT_COUNT('00101001')`文字列`'00101001'` 10進数の`101001`に変換し、その2進数形式である`1`ビットの数を`11000100001010001`カウントするため、 `7`返します。
+> 引数`expr`が2進数の場合、 `b'00101001'`のように数値の前に明示的に`b`指定する必要があります。そうでない場合、この関数はそれを文字列として扱い、異なる結果を返します。例えば、 `BIT_COUNT('00101001')`文字列`'00101001'` 10進数の`101001`に変換し、その2進数形式における`1`ビットの数を`11000100001010001`カウントするため、 `7`返します。
 
-次の例は前の例と似ていますが、引数としてビットリテラルではなく16進リテラルを使用しています。1関数は`CONV()` `0x29` 16進数（基数16）から2進数（基数2）に変換し、2進数では`00101001`であることを示します。
+次の例は前の例と似ていますが、引数としてビットリテラルではなく16進リテラルを使用しています`CONV()`関数は`0x29` 16進数（基数16）から2進数（基数2）に変換し、2進数では`00101001`あることを示します。
 
 ```sql
 SELECT BIT_COUNT(0x29), CONV(0x29,16,2);
@@ -64,7 +64,7 @@ SELECT BIT_COUNT(INET_ATON('255.255.255.0'));
     +---------------------------------------+
     1 row in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-and"><code>&amp;</code> (ビットAND)</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-bit-functions-html-operator-bitwise-and-code-x26-code-bitwise-and-a}
+## <code>&amp;</code> (ビットAND) {#code-x26-code-bitwise-and}
 
 `&`演算子はビットごとのAND演算を実行します。2つの数値の対応するビットを比較します。対応するビットが両方とも1の場合、結果の対応するビットは1になります。それ以外の場合は0になります。
 
@@ -88,9 +88,9 @@ SELECT CONV(b'1010' & b'1000',10,2);
     +------------------------------+
     1 row in set (0.00 sec)
 
-`&`演算子を`INET_NTOA()`および`INET_ATON()`関数と組み合わせて使用すると、IPアドレスとネットワークマスクのビット単位のAND演算を実行し、ネットワークアドレスを取得できます。これは、複数のIPアドレスが同じネットワークに属しているかどうかを判断するのに役立ちます。
+`&`演算子を`INET_NTOA()`および`INET_ATON()`関数と組み合わせて使用​​すると、IP アドレスとネットワークマスクのビット単位の AND 演算を実行し、ネットワークアドレスを取得できます。これは、複数の IP アドレスが同じネットワークに属しているかどうかを判断するのに役立ちます。
 
-次の 2 つの例では、IP アドレス`192.168.1.1`と`192.168.1.2` 、 `255.255.255.0`でマスクされているときに同じネットワーク`192.168.1.0/24`内にあります。
+次の 2 つの例では、 IP アドレス`192.168.1.1`と`192.168.1.2`は、 `255.255.255.0`でマスクされているときに同じネットワーク`192.168.1.0/24`内にあります。
 
 ```sql
 SELECT INET_NTOA(INET_ATON('192.168.1.1') & INET_ATON('255.255.255.0'));
@@ -114,9 +114,9 @@ SELECT INET_NTOA(INET_ATON('192.168.1.2') & INET_ATON('255.255.255.0'));
     +------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-invert"><code>~</code> (ビット反転)</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-bit-functions-html-operator-bitwise-invert-code-code-bitwise-inversion-a}
+## <code>~</code> (ビット反転) {#code-code-bitwise-inversion}
 
-`~`演算子は、与えられた値に対してビット反転（またはビット否定）演算を実行します。与えられた値の各ビットを反転します。つまり、0のビットは1に、1のビットは0になります。
+`~`演算子は、与えられた値に対してビット反転（またはビット否定）演算を実行します。与えられた値の各ビットを反転します。つまり、0のビットは1になり、1のビットは0になります。
 
 演算前に値は 64 ビットに拡張されます。
 
@@ -150,7 +150,7 @@ SELECT CONV(~ b'1111111111111111111111111111111111111111111111110000111100001111
     +----------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-or"><code>|</code> (ビット論理和)</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-bit-functions-html-operator-bitwise-or-code-code-bitwise-or-a}
+## <code>|</code> (ビット論理和) {#code-code-bitwise-or}
 
 `|`演算子はビットごとのOR演算を実行します。2つの数値の対応するビットを比較します。対応するビットの少なくとも1つが1の場合、結果の対応するビットも1になります。
 
@@ -174,7 +174,7 @@ SELECT CONV(b'1010' | b'1100',10,2);
     +------------------------------+
     1 row in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_bitwise-xor"><code>^</code> (ビット単位のXOR)</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-bit-functions-html-operator-bitwise-xor-code-code-bitwise-xor-a}
+## <code>^</code> (ビット単位のXOR) {#code-code-bitwise-xor}
 
 `^`演算子はビット単位のXOR（排他的論理和）演算を実行します。2つの数値の対応するビットを比較します。対応するビットが異なる場合、結果の対応するビットは1になります。
 
@@ -200,11 +200,11 @@ SELECT CONV(b'1010' ^ b'1100',10,2);
 
 先頭のゼロが削除されているため、結果は`0110`ではなく`110`と表示されることに注意してください。
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_left-shift"><code>&lt;&lt;</code> （左シフト）</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-bit-functions-html-operator-left-shift-code-x3c-x3c-code-left-shift-a}
+## <code>&lt;&lt;</code> （左シフト） {#code-x3c-x3c-code-left-shift}
 
 `<<`演算子は左シフト演算を実行し、数値のビットを指定された位置数だけ左にシフトし、右側の空いたビットをゼロで埋めます。
 
-たとえば、次の文では、 `1<<n`使用してバイナリ値`1` `n`位置左にシフトします。
+たとえば、次のステートメントでは、 `1<<n`使用して、バイナリ値`1` `n`位置左にシフトします。
 
 ```sql
 WITH RECURSIVE cte(n) AS (
@@ -232,11 +232,11 @@ SELECT n,1<<n,LPAD(CONV(1<<n,10,2),11,0) FROM cte;
     +------+------+----------------------------+
     11 rows in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/bit-functions.html#operator_right-shift"><code>&gt;&gt;</code> (右シフト)</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-bit-functions-html-operator-right-shift-code-code-right-shift-a}
+## <code>&gt;&gt;</code> (右シフト) {#code-code-right-shift}
 
 `>>`演算子は右シフト演算を実行し、数値のビットを指定された位置数だけ右にシフトし、左側の空いたビットをゼロで埋めます。
 
-たとえば、次の文では`1024>>n`使用して、値`1024` (2 進数では`10000000000` ) を`n`位置右にシフトします。
+たとえば、次の文では、 `1024>>n`使用して、値`1024` (2 進数では`10000000000` ) を`n`位置右にシフトします。
 
 ```sql
 WITH RECURSIVE cte(n) AS (

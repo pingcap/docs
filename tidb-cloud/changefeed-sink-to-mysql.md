@@ -7,14 +7,25 @@ summary: このドキュメントでは、Sink to MySQL チェンジフィード
 
 このドキュメントでは**、Sink to MySQL**変更フィードを使用してTiDB Cloudから MySQL にデータをストリーミングする方法について説明します。
 
+<CustomContent plan="dedicated">
+
 > **注記：**
 >
 > -   changefeed 機能を使用するには、 TiDB Cloud Dedicated クラスターのバージョンが v6.1.3 以降であることを確認してください。
 > -   クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、changefeed 機能は使用できません。
 
+</CustomContent>
+<CustomContent plan="premium">
+
+> **注記：**
+>
+> クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、changefeed 機能は使用できません。
+
+</CustomContent>
+
 ## 制限 {#restrictions}
 
--   TiDB Cloudクラスターごとに、最大 100 個の変更フィードを作成できます。
+-   各TiDB Cloud<customcontent plan="dedicated">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>最大 100 個の変更フィードを作成できます。
 -   TiDB Cloud は、変更フィードを確立するために TiCDC を使用するため、同じ[TiCDCとしての制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)持ちます。
 -   レプリケートするテーブルに主キーまたは NULL 以外の一意のインデックスがない場合、レプリケーション中に一意の制約がないと、再試行シナリオによっては下流に重複したデータが挿入される可能性があります。
 
@@ -27,6 +38,8 @@ summary: このドキュメントでは、Sink to MySQL チェンジフィード
 -   既存のデータをロードせず、増分データのみをMySQLに複製する場合は、MySQLに対応するターゲットテーブルを作成します。
 
 ### ネットワーク {#network}
+
+<CustomContent plan="dedicated">
 
 TiDB Cloudクラスターが MySQL サービスに接続できることを確認します。
 
@@ -43,12 +56,12 @@ MySQL サービスがパブリックインターネットアクセスのない A
 
 3.  MySQL URL にホスト名が含まれている場合は、 TiDB Cloud がMySQL サービスの DNS ホスト名を解決できるようにする必要があります。
 
-    1.  [VPC ピアリング接続の DNS 解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
+    1.  [VPC ピアリング接続の DNS 解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)手順に従います。
     2.  **Accepter DNS 解決**オプションを有効にします。
 
 MySQL サービスがパブリック インターネット アクセスのない Google Cloud VPC 内にある場合は、次の手順に従います。
 
-1.  MySQLサービスがGoogle Cloud SQLの場合、Google Cloud SQLインスタンスに関連付けられたVPCでMySQLエンドポイントを公開する必要があります。Googleが開発した[**Cloud SQL 認証プロキシ**](https://cloud.google.com/sql/docs/mysql/sql-proxy)使用する必要がある場合があります。
+1.  MySQLサービスがGoogle Cloud SQLの場合、Google Cloud SQLインスタンスに関連付けられたVPCでMySQLエンドポイントを公開する必要があります。Googleが開発した[**Cloud SQL 認証プロキシ**](https://cloud.google.com/sql/docs/mysql/sql-proxy)を使用する必要がある場合があります。
 2.  MySQL サービスの VPC と TiDB クラスター間の[VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md) 。
 3.  MySQL が配置されている VPC の受信ファイアウォール ルールを変更します。
 
@@ -66,16 +79,41 @@ TiDB Cloudクラスターは、プライベートエンドポイントを介し�
 
 </SimpleTab>
 
+</CustomContent>
+
+<CustomContent plan="premium">
+
+TiDB Cloudインスタンスが MySQL サービスに接続できることを確認します。
+
+> **注記：**
+>
+> 現在、 TiDB Cloud PremiumインスタンスのVPCピアリング機能は、リクエストに応じてのみご利用いただけます。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートをリクエスト」**をクリックしてください。次に、「**説明」**欄に「 TiDB Cloud PremiumインスタンスのVPCピアリングを申請」と入力し、 **「送信」を**クリックしてください。
+
+プライベート エンドポイントは、クラウド プロバイダーの**Private Link**または**Private Service Connect**テクノロジーを活用し、VPC 内のリソースが、あたかもそれらのサービスが VPC 内で直接ホストされているかのように、プライベート IP アドレスを介して他の VPC 内のサービスに接続できるようにします。
+
+TiDB Cloudインスタンスは、プライベートエンドポイントを介してMySQLサービスに安全に接続できます。MySQLサービスでプライベートエンドポイントが利用できない場合は、手順[Changefeeds のプライベート エンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)に従って作成してください。
+
+</CustomContent>
+
 ### 既存のデータを読み込む（オプション） {#load-existing-data-optional}
 
-**Sink to MySQL**コネクタは、特定のタイムスタンプ以降の増分データをTiDBクラスタからMySQLにシンクすることのみ可能です。TiDBクラスタに既にデータがある場合は、 **Sink to MySQLを**有効にする前に、TiDBクラスタの既存データをエクスポートしてMySQLにロードすることができます。
+<CustomContent plan="dedicated">
+
+**Sink to MySQL**コネクタは、特定のタイムスタンプ以降の増分データをTiDBクラスタからMySQLにシンクすることのみ可能です。TiDBクラスタに既にデータがある場合は、 **Sink to MySQL**を有効にする前に、TiDBクラスタの既存データをエクスポートしてMySQLにロードすることができます。
+
+</CustomContent>
+<CustomContent plan="premium">
+
+**Sink to MySQL**コネクタは、特定のタイムスタンプ以降の増分データをTiDBインスタンスからMySQLにシンクすることのみ可能です。TiDBインスタンスに既にデータがある場合は、 **Sink to MySQL**を有効にする前に、TiDBインスタンスの既存データをエクスポートしてMySQLにロードすることができます。
+
+</CustomContent>
 
 既存のデータをロードするには:
 
 1.  その間、履歴データが TiDB によってガベージ コレクションされないように、 [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)次の 2 つの操作の合計時間よりも長く延長します。
 
     -   既存のデータをエクスポートおよびインポートする時間
-    -   **Sink to MySQLを**作成する時間
+    -   **Sink to MySQL**を作成する時間
 
     例えば：
 
@@ -83,11 +121,11 @@ TiDB Cloudクラスターは、プライベートエンドポイントを介し�
     SET GLOBAL tidb_gc_life_time = '720h';
     ```
 
-2.  [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)使用して TiDB クラスターからデータをエクスポートし、 [マイダンパー/マイローダー](https://centminmod.com/mydumper.html)などのコミュニティ ツールを使用してデータを MySQL サービスにロードします。
+2.  [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用してTiDBからデータをエクスポートします<customcontent plan="dedicated">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>次に、 [マイダンパー/マイローダー](https://centminmod.com/mydumper.html)などのコミュニティ ツールを使用して、MySQL サービスにデータをロードします。
 
 3.  [Dumplingのエクスポートファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)から、メタデータ ファイルから MySQL シンクの開始位置を取得します。
 
-    以下はメタデータファイルの例の一部です。1/ `SHOW MASTER STATUS` `Pos`既存データのTSOであり、MySQLシンクの開始位置でもあります。
+    以下はメタデータファイルの例の一部です。1/ `Pos` `SHOW MASTER STATUS`既存データのTSOであり、MySQLシンクの開始位置でもあります。
 
         Started dump at: 2020-11-10 10:40:19
         SHOW MASTER STATUS:
@@ -103,7 +141,7 @@ TiDB Cloudクラスターは、プライベートエンドポイントを介し�
 
 前提条件を完了したら、データを MySQL にシンクできます。
 
-1.  ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[Changefeed] を**クリックします。
+1.  ターゲットTiDBの概要ページに移動します<customcontent plan="dedicated">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>をクリックし、左側のナビゲーション ウィンドウで**[データ]** &gt; **[Changefeed]**をクリックします。
 
 2.  **「Changefeed の作成」**をクリックし、**宛先**として**MySQL**を選択します。
 
@@ -131,21 +169,21 @@ TiDB Cloudクラスターは、プライベートエンドポイントを介し�
     -   **一致するテーブル**: この列では、イベントフィルターを適用するテーブルを設定できます。ルールの構文は、前述の**「テーブルフィルター」**領域で使用した構文と同じです。変更フィードごとに最大10個のイベントフィルタールールを追加できます。
     -   **イベント フィルター**: 次のイベント フィルターを使用して、変更フィードから特定のイベントを除外できます。
         -   **イベントを無視**: 指定されたイベント タイプを除外します。
-        -   **SQLを無視**: 指定した式に一致するDDLイベントを除外します。例えば、 `^drop`指定すると`DROP`で始まる文が除外され、 `add column`指定すると`ADD COLUMN`含む文が除外されます。
+        -   **SQLを無視**: 指定した式に一致するDDLイベントを除外します。例えば、 `^drop`指定すると`DROP`で始まる文が除外され、 `add column`指定すると`ADD COLUMN`を含む文が除外されます。
         -   **挿入値式を無視**: 特定の条件を満たす`INSERT`文を除外します。例えば、 `id >= 100`指定すると、 `id`が100以上の`INSERT`文が除外されます。
         -   **新しい値の更新式を無視**: 新しい値が指定条件に一致する`UPDATE`文を除外します。例えば、 `gender = 'male'`指定すると、 `gender`が`male`になる更新は除外されます。
         -   **更新前の値を無視**: 指定した条件に一致する古い値を持つステートメントを`UPDATE`除外します。例えば、 `age < 18`指定すると、古い値`age`が18未満となる更新は除外されます。
-        -   **削除値式を無視**: 指定された条件を満たす`DELETE`文を除外します。例えば、 `name = 'john'`指定すると、 `name`が`'john'`なる`DELETE`文が除外されます。
+        -   **削除値式を無視**: 指定された条件を満たす`DELETE`文を除外します。例えば、 `name = 'john'`指定すると、 `name`が`'john'`となる`DELETE`文が除外されます。
 
 8.  **「レプリケーションの開始位置」**で、MySQL シンクの開始位置を設定します。
 
-    -   Dumpling[既存のデータをロードしました](#load-existing-data-optional)使用している場合は、 **[特定の TSO からレプリケーションを開始]**を選択し、 Dumplingからエクスポートされたメタデータ ファイルから取得した TSO を入力します。
-    -   アップストリーム TiDB クラスターにデータがない場合は、 **「今すぐレプリケーションを開始する」**を選択します。
+    -   [既存のデータをロードしました](#load-existing-data-optional)を使用している場合は、 **[特定の TSO からレプリケーションを開始]**を選択し、 Dumplingからエクスポートされたメタデータ ファイルから取得した TSO を入力します。
+    -   上流TiDBにデータがない場合<customcontent plan="dedicated">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>で、 **[今すぐレプリケーションを開始する]**を選択します。
     -   それ以外の場合は、 **[特定の時刻からレプリケーションを開始する]**を選択して開始時刻をカスタマイズできます。
 
 9.  **次へ**をクリックして、変更フィード仕様を構成します。
 
-    -   **「Changefeed 仕様」**領域で、Changefeed で使用されるレプリケーション容量単位 (RCU) の数を指定します。
+    -   **チェンジフィード仕様**エリアで、<customcontent plan="dedicated">レプリケーション容量単位 (RCU)</customcontent><customcontent plan="premium">チェンジフィード容量単位（CCU）</customcontent>チェンジフィードによって使用されます。
     -   **「Changefeed 名」**領域で、Changefeed の名前を指定します。
 
 10. **「次へ」**をクリックして、変更フィード構成を確認します。

@@ -1,23 +1,37 @@
 ---
 title: Sink to Apache Kafka
-summary: このドキュメントでは、 TiDB Cloudから Apache Kafka へデータをストリーミングするための変更フィードの作成方法について説明します。Apache Kafka 用の変更フィードの設定手順、制約事項、前提条件について説明します。設定手順には、ネットワーク接続の設定、Kafka ACL 認証のための権限の追加、変更フィード仕様の設定が含まれます。
+summary: このドキュメントでは、TiDB Cloudから Apache Kafka へデータをストリーミングするための変更フィードの作成方法について説明します。Apache Kafka 用の変更フィードの設定手順、制約事項、前提条件について説明します。設定手順には、ネットワーク接続の設定、Kafka ACL 認証のための権限の追加、変更フィード仕様の設定が含まれます。
 ---
 
 # Apache Kafka にシンクする {#sink-to-apache-kafka}
 
 このドキュメントでは、TiDB Cloudから Apache Kafka にデータをストリーミングするための変更フィードを作成する方法について説明します。
 
+<CustomContent plan="dedicated">
+
 > **注記：**
 >
 > -   changefeed 機能を使用するには、 TiDB Cloud Dedicated クラスターのバージョンが v6.1.3 以降であることを確認してください。
 > -   クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、changefeed 機能は使用できません。
 
+</CustomContent>
+<CustomContent plan="premium">
+
+> **注記：**
+>
+> クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、changefeed 機能は使用できません。
+
+</CustomContent>
+
 ## 制限 {#restrictions}
 
--   TiDB Cloudクラスターごとに、最大 100 個の変更フィードを作成できます。
--   現在、 TiDB Cloud は、 Kafka ブローカーに接続するための自己署名 TLS 証明書のアップロードをサポートしていません。
+-   各TiDB Cloud<customcontent plan="dedicated">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>最大 100 個の変更フィードを作成できます。
+-   現在、 TiDB Cloud は、Kafka ブローカーに接続するための自己署名 TLS 証明書のアップロードをサポートしていません。
 -   TiDB Cloud は、変更フィードを確立するために TiCDC を使用するため、同じ[TiCDCとしての制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)持ちます。
 -   レプリケートするテーブルに主キーまたは NULL 以外の一意のインデックスがない場合、レプリケーション中に一意の制約がないと、再試行シナリオによっては下流に重複したデータが挿入される可能性があります。
+
+<CustomContent plan="dedicated">
+
 -   ネットワーク接続方法として Private Link または Private Service Connect を選択する場合は、TiDB クラスターのバージョンが次の要件を満たしていることを確認してください。
 
     -   v6.5.xの場合: バージョンv6.5.9以降
@@ -30,6 +44,8 @@ summary: このドキュメントでは、 TiDB Cloudから Apache Kafka へデ�
     -   指定されたインデックス名を持つ Kafka パーティションに主キーまたはインデックス値による変更ログを配布する場合は、TiDB クラスターのバージョンが v7.5.0 以降であることを確認してください。
     -   列値ごとに変更ログを Kafka パーティションに配布する場合は、TiDB クラスターのバージョンが v7.5.0 以降であることを確認してください。
 
+</CustomContent>
+
 ## 前提条件 {#prerequisites}
 
 Apache Kafka にデータをストリーミングするための変更フィードを作成する前に、次の前提条件を完了する必要があります。
@@ -39,11 +55,13 @@ Apache Kafka にデータをストリーミングするための変更フィー�
 
 ### ネットワーク {#network}
 
-TiDB クラスターが Apache Kafka サービスに接続できることを確認してください。以下のいずれかの接続方法を選択できます。
+TiDBが<customcontent plan="dedicated">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>Apache Kafka サービスに接続できます。以下の接続方法のいずれかを選択できます。
 
--   Private Connect: VPC CIDR の競合を回避し、セキュリティ コンプライアンスを満たすのに最適ですが、追加の[プライベートデータリンクコスト](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost)が発生します。
+-   Private Connect: VPC CIDR の競合を回避し、セキュリティ コンプライアンスを満たすのに最適ですが、追加の[プライベートデータリンクコスト](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost)発生します。
 -   VPC ピアリング: コスト効率の高いオプションとして適していますが、潜在的な VPC CIDR の競合とセキュリティ上の考慮事項を管理する必要があります。
 -   パブリック IP: 簡単なセットアップに適しています。
+
+<CustomContent plan="dedicated">
 
 <SimpleTab>
 <div label="Private Connect">
@@ -69,7 +87,7 @@ Apache Kafka サービスがインターネットにアクセスできない AWS
 
 3.  Apache Kafka URL にホスト名が含まれている場合は、 TiDB Cloud がApache Kafka ブローカーの DNS ホスト名を解決できるようにする必要があります。
 
-    1.  [VPC ピアリング接続の DNS 解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-dns.html)の手順に従います。
+    1.  [VPC ピアリング接続の DNS 解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-dns.html)手順に従います。
     2.  **Accepter DNS 解決**オプションを有効にします。
 
 Apache Kafka サービスがインターネットにアクセスできない Google Cloud VPC にある場合は、次の手順を行います。
@@ -88,6 +106,35 @@ Apache Kafka サービスにパブリック IP アクセスを提供する場合
 
 </div>
 </SimpleTab>
+</CustomContent>
+
+<CustomContent plan="premium">
+
+<SimpleTab>
+<div label="Private Connect">
+
+Private Connect は、クラウド プロバイダーの**Private Link**または**Private Service Connect**テクノロジーを活用して、VPC 内のリソースが、それらのサービスが VPC 内で直接ホストされているかのように、プライベート IP アドレスを使用して他の VPC 内のサービスに接続できるようにします。
+
+TiDB Cloudは現在、セルフホスト型KafkaのPrivate Connectのみをサポートしています。MSK、Confluent Kafka、その他のKafka SaaSサービスとの直接統合はサポートしていません。これらのKafka SaaSサービスにPrivate Connect経由で接続するには、 [kafkaプロキシ](https://github.com/grepplabs/kafka-proxy)を仲介としてデプロイし、Kafkaサービスをセルフホスト型Kafkaとして公開します。
+
+Apache Kafka サービスが AWS でホストされている場合は、 [AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)に従ってネットワーク接続を構成し、**ブートストラップ ポート**情報を取得してから、 [Changefeeds のプライベート エンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)に従ってプライベート エンドポイントを作成します。
+
+</div>
+<div label="Public IP">
+
+Apache Kafka サービスにパブリック IP アクセスを提供する場合は、すべての Kafka ブローカーにパブリック IP アドレスを割り当てます。
+
+本番環境でパブリック IP を使用することはお勧めし**ません**。
+
+</div>
+
+<div label="VPC Peering">
+
+現在、 TiDB Cloud PremiumインスタンスのVPCピアリング機能は、リクエストに応じてのみご利用いただけます。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートをリクエスト」**をクリックしてください。次に、「**説明」**欄に「 TiDB Cloud PremiumインスタンスのVPCピアリングを申請」と入力し、 **「送信」を**クリックしてください。
+
+</div>
+</SimpleTab>
+</CustomContent>
 
 ### Kafka ACL 認証 {#kafka-acl-authorization}
 
@@ -101,8 +148,8 @@ TiDB Cloud変更フィードが Apache Kafka にデータをストリーミン�
 ## ステップ1. Apache KafkaのChangefeedページを開く {#step-1-open-the-changefeed-page-for-apache-kafka}
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
-2.  ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[Changefeed] を**クリックします。
-3.  **「Changefeed の作成」**をクリックし、**宛先**として**Kafka**を選択します。
+2.  ターゲットTiDBの概要ページに移動します<customcontent plan="dedicated">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>をクリックし、左側のナビゲーション ウィンドウで**[データ]** &gt; **[Changefeed]**をクリックします。
+3.  **「Changefeed の作成」**をクリックし、**宛先**として**Kafka を**選択します。
 
 ## ステップ2. changefeedターゲットを構成する {#step-2-configure-the-changefeed-target}
 
@@ -145,6 +192,8 @@ TiDB Cloud変更フィードが Apache Kafka にデータをストリーミン�
 11. [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、接続リクエストを承認したことを確認してください。TiDB TiDB Cloudは接続をテストし、テストが成功すると次のページに進みます。
 
 </div>
+
+<CustomContent plan="dedicated">
 <div label="Private Service Connect (Google Cloud)">
 
 1.  **[接続方法]**で、 **[プライベート サービス接続]**を選択します。
@@ -163,6 +212,9 @@ TiDB Cloud変更フィードが Apache Kafka にデータをストリーミン�
 11. [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、接続リクエストを承認したことを確認してください。TiDB TiDB Cloudは接続をテストし、テストが成功すると次のページに進みます。
 
 </div>
+</CustomContent>
+
+<CustomContent plan="dedicated">
 <div label="Private Link (Azure)">
 
 1.  **[接続方法]**で**[プライベート リンク]**を選択します。
@@ -181,6 +233,7 @@ TiDB Cloud変更フィードが Apache Kafka にデータをストリーミン�
 11. [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、接続リクエストを承認したことを確認してください。TiDB TiDB Cloudは接続をテストし、テストが成功すると次のページに進みます。
 
 </div>
+</CustomContent>
 </SimpleTab>
 
 ## ステップ3. チェンジフィードを設定する {#step-3-set-the-changefeed}
@@ -197,13 +250,13 @@ TiDB Cloud変更フィードが Apache Kafka にデータをストリーミン�
     -   **一致するテーブル**: この列では、イベントフィルターを適用するテーブルを設定できます。ルールの構文は、前述の**「テーブルフィルター」**領域で使用した構文と同じです。変更フィードごとに最大10個のイベントフィルタールールを追加できます。
     -   **イベント フィルター**: 次のイベント フィルターを使用して、変更フィードから特定のイベントを除外できます。
         -   **イベントを無視**: 指定されたイベント タイプを除外します。
-        -   **SQLを無視**: 指定した式に一致するDDLイベントを除外します。例えば、 `^drop`指定すると`DROP`で始まる文が除外され、 `add column`指定すると`ADD COLUMN`含む文が除外されます。
+        -   **SQLを無視**: 指定した式に一致するDDLイベントを除外します。例えば、 `^drop`指定すると`DROP`で始まる文が除外され、 `add column`指定すると`ADD COLUMN`を含む文が除外されます。
         -   **挿入値式を無視**: 特定の条件を満たす`INSERT`文を除外します。例えば、 `id >= 100`指定すると、 `id`が100以上の`INSERT`文が除外されます。
         -   **新しい値の更新式を無視**: 新しい値が指定条件に一致する`UPDATE`文を除外します。例えば、 `gender = 'male'`指定すると、 `gender`が`male`になる更新は除外されます。
         -   **更新前の値を無視**: 指定した条件に一致する古い値を持つステートメントを`UPDATE`除外します。例えば、 `age < 18`指定すると、古い値`age`が18未満となる更新は除外されます。
-        -   **削除値式を無視**: 指定された条件を満たす`DELETE`文を除外します。例えば、 `name = 'john'`指定すると、 `name`が`'john'`なる`DELETE`文が除外されます。
+        -   **削除値式を無視**: 指定された条件を満たす`DELETE`文を除外します。例えば、 `name = 'john'`指定すると、 `name`が`'john'`となる`DELETE`文が除外されます。
 
-3.  **カラムセレクター**をカスタマイズして、イベントから列を選択し、それらの列に関連するデータの変更のみをダウンストリームに送信します。
+3.  **カラムセレクターを**カスタマイズして、イベントから列を選択し、それらの列に関連するデータの変更のみをダウンストリームに送信します。
 
     -   **一致するテーブル**: 列セレクターを適用するテーブルを指定します。どのルールにも一致しないテーブルの場合は、すべての列が送信されます。
     -   **カラムセレクター**: 一致したテーブルのどの列をダウンストリームに送信するかを指定します。
@@ -221,20 +274,20 @@ TiDB Cloud変更フィードが Apache Kafka にデータをストリーミン�
 
     TiDB 拡張フィールドの詳細については、 [Avro データ形式の TiDB 拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields)および[Canal-JSON データ形式の TiDB 拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field)参照してください。
 
-6.  データ形式として**Avro**を選択した場合、ページにAvro固有の設定が表示されます。これらの設定は以下のように入力できます。
+6.  データ形式として**Avroを**選択した場合、ページにAvro固有の設定が表示されます。これらの設定は以下のように入力できます。
 
     -   **Decimal**および**Unsigned BigInt**構成では、 TiDB Cloud がKafka メッセージの decimal および unsigned bigint データ型を処理する方法を指定します。
-    -   **「スキーマレジストリ」**領域で、スキーマレジストリエンドポイントを入力します。HTTP**認証を**有効にすると、ユーザー名とパスワードのフィールドが表示され、TiDBクラスターのエンドポイントとパスワードが自動的に入力されます。
+    -   **スキーマレジストリ**領域で、スキーマレジストリエンドポイントを入力します。HTTP**認証**を有効にすると、ユーザー名とパスワードのフィールドが表示され、TiDBで指定した情報が自動的に入力されます。<customcontent plan="dedicated">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>エンドポイントとパスワード。
 
 7.  **「トピック配布」**領域で配布モードを選択し、モードに応じてトピック名の設定を入力します。
 
-    データ形式として**Avro**を選択した場合は、 **「配布モード」**ドロップダウン リストで「**変更ログをテーブルごとに Kafka トピックに配布」**モードのみを選択できます。
+    データ形式として**Avro を**選択した場合は、 **「配布モード」**ドロップダウン リストで「**変更ログをテーブルごとに Kafka トピックに配布」**モードのみを選択できます。
 
     配布モードは、変更フィードが Kafka トピックをテーブル別、データベース別、またはすべての変更ログに対して 1 つのトピックを作成する方法を制御します。
 
     -   **テーブルごとに変更ログを Kafka Topics に配布する**
 
-        変更フィードで各テーブル専用のKafkaトピックを作成したい場合は、このモードを選択してください。すると、テーブルのすべてのKafkaメッセージが専用のKafkaトピックに送信されます。トピックのプレフィックス、データベース名とテーブル名の間の区切り文字、およびサフィックスを設定することで、テーブルのトピック名をカスタマイズできます。例えば、区切り文字を`_`に設定すると、トピック名は`<Prefix><DatabaseName>_<TableName><Suffix>`形式になります。
+        変更フィードで各テーブル専用のKafkaトピックを作成したい場合は、このモードを選択してください。すると、テーブルのすべてのKafkaメッセージが専用のKafkaトピックに送信されます。トピックのプレフィックス、データベース名とテーブル名の間の区切り文字、およびサフィックスを設定することで、テーブルのトピック名をカスタマイズできます。例えば、区切り文字を`_`に設定すると、トピック名は`<Prefix><DatabaseName>_<TableName><Suffix>`という形式になります。
 
         スキーマ作成イベントなどの行イベント以外の変更ログについては、 **「デフォルトのトピック名」**フィールドにトピック名を指定できます。変更フィードは、このような変更ログを収集するために、それに応じたトピックを作成します。
 
@@ -248,7 +301,7 @@ TiDB Cloud変更フィードが Apache Kafka にデータをストリーミン�
 
         チェンジフィードですべての変更ログに対して1つのKafkaトピックを作成したい場合は、このモードを選択してください。そうすると、チェンジフィード内のすべてのKafkaメッセージが1つのKafkaトピックに送信されます。トピック名は**「トピック名」**フィールドで定義できます。
 
-8.  **パーティションディストリビューション**領域では、Kafka メッセージを送信するパーティションを指定できます。**すべてのテーブルに単一のパーティションディスパッチャ**を定義することも、**テーブルごとに異なるパーティションディスパッチャを**定義することもできます。TiDB TiDB Cloud、以下の 4 種類のディスパッチャが提供されています。
+8.  **パーティションディストリビューション**領域では、Kafka メッセージを送信するパーティションを指定できます。**すべてのテーブルに単一のパーティションディスパッチャを**定義することも、**テーブルごとに異なるパーティションディスパッチャを**定義することもできます。TiDB TiDB Cloud、以下の 4 種類のディスパッチャが提供されています。
 
     -   **主キーまたはインデックス値によって変更ログを Kafka パーティションに分散する**
 
@@ -277,7 +330,7 @@ TiDB Cloud変更フィードが Apache Kafka にデータをストリーミン�
 
 ## ステップ4. チェンジフィード仕様を構成する {#step-4-configure-your-changefeed-specification}
 
-1.  **「Changefeed 仕様」**領域で、Changefeed で使用されるレプリケーション容量単位 (RCU) の数を指定します。
+1.  **チェンジフィード仕様**エリアで、<customcontent plan="dedicated">レプリケーション容量単位 (RCU)</customcontent><customcontent plan="premium">チェンジフィード容量単位（CCU）</customcontent>チェンジフィードによって使用されます。
 2.  **「Changefeed 名」**領域で、Changefeed の名前を指定します。
 3.  **「次へ」**をクリックして設定した構成を確認し、次のページに進みます。
 
@@ -285,4 +338,4 @@ TiDB Cloud変更フィードが Apache Kafka にデータをストリーミン�
 
 このページでは、設定したすべての changefeed 構成を確認できます。
 
-エラーが見つかった場合は、戻って修正できます。エラーがない場合は、下部のチェックボックスをクリックして「**作成」**をクリックし、変更フィードを作成します。
+エラーが見つかった場合は、戻って修正できます。エラーがない場合は、下部のチェックボックスをクリックして**「作成」を**クリックし、変更フィードを作成します。

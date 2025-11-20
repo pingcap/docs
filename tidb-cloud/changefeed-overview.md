@@ -9,7 +9,7 @@ TiDB Cloud changefeed は、 TiDB Cloudから他のデータサービスへの�
 
 > **注記：**
 >
-> -   現在、 TiDB Cloud、クラスターごとに最大 100 個の変更フィードのみが許可されます。
+> -   現在、 TiDB Cloud、1アカウントあたり最大100件の変更フィードしか許可されていません。<customcontent plan="dedicated">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>。
 > -   現在、 TiDB Cloud、変更フィードごとに最大 100 個のテーブル フィルター ルールのみが許可されます。
 > -   クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、changefeed 機能は使用できません。
 
@@ -17,13 +17,13 @@ TiDB Cloud changefeed は、 TiDB Cloudから他のデータサービスへの�
 
 changefeed 機能にアクセスするには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)では、<customcontent plan="dedicated">プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。</customcontent><customcontent plan="premium"> [**TiDBインスタンス**](https://tidbcloud.com/tidbs)ページに移動します。</customcontent>
 
     > **ヒント：**
     >
     > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「Changefeed」**をクリックします。Changefeedページが表示されます。
+2.  ターゲットの名前をクリックします<customcontent plan="dedicated">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「Changefeed」**をクリックします。Changefeedページが表示されます。
 
 **Changefeed**ページでは、変更フィードを作成したり、既存の変更フィードの一覧を表示したり、既存の変更フィードを操作したり (変更フィードのスケーリング、一時停止、再開、編集、削除など) できます。
 
@@ -34,15 +34,32 @@ changefeed 機能にアクセスするには、次の手順を実行します。
 -   [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
 -   [MySQLに沈む](/tidb-cloud/changefeed-sink-to-mysql.md)
 -   [TiDB Cloudにシンク](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
--   [クラウドストレージにstorage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
+-   [クラウドstorageに保存](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
 
-## クエリ変更フィード RCU {#query-changefeed-rcus}
+## クエリ変更フィード容量 {#query-changefeed-capacity}
+
+<CustomContent plan="dedicated">
+
+TiDB Cloud Dedicated では、変更フィードの TiCDC レプリケーション容量単位 (RCU) を照会できます。
 
 1.  ターゲット TiDB クラスターの[**チェンジフィード**](#view-the-changefeed-page)ページに移動します。
-2.  クエリを実行する対応する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; [**ビュー]**をクリックします。
+2.  クエリを実行する対応する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[ビュー]**をクリックします。
 3.  現在の TiCDC レプリケーション容量単位 (RCU) は、ページの**仕様**領域で確認できます。
 
+</CustomContent>
+<CustomContent plan="premium">
+
+TiDB Cloud Premium では、変更フィードのTiCDC Changefeedフィード容量単位 (CCU) を照会できます。
+
+1.  ターゲット TiDB インスタンスの[**チェンジフィード**](#view-the-changefeed-page)ページに移動します。
+2.  クエリを実行する対応する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[ビュー]**をクリックします。
+3.  現在のTiCDC Changefeed容量単位 (CCU) は、ページの**仕様**領域で確認できます。
+
+</CustomContent>
+
 ## チェンジフィードをスケールする {#scale-a-changefeed}
+
+<CustomContent plan="dedicated">
 
 変更フィードをスケールアップまたはスケールダウンすることで、変更フィードの TiCDC レプリケーション容量単位 (RCU) を変更できます。
 
@@ -51,8 +68,15 @@ changefeed 機能にアクセスするには、次の手順を実行します。
 > -   クラスターの変更フィードをスケーリングするには、このクラスターのすべての変更フィードが 2023 年 3 月 28 日以降に作成されていることを確認してください。
 > -   クラスターに 2023 年 3 月 28 日より前に作成された変更フィードがある場合、このクラスターの既存の変更フィードも新しく作成された変更フィードもスケールアップまたはスケールダウンをサポートしません。
 
-1.  ターゲット TiDB クラスターの[**チェンジフィード**](#view-the-changefeed-page)ページに移動します。
-2.  スケールする対応する変更フィードを見つけて、 **[アクション]**列で**[...]** &gt; **[スケール アップ/ダウン] を**クリックします。
+</CustomContent>
+<CustomContent plan="premium">
+
+変更フィードをスケールアップまたはスケールダウンすることで、変更フィードのTiCDC Changefeed容量単位 (CCU) を変更できます。
+
+</CustomContent>
+
+1.  対象のTiDBの[**チェンジフィード**](#view-the-changefeed-page)ページ目に移動します<customcontent plan="dedicated">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>。
+2.  スケールする対応する変更フィードを見つけて、 **[アクション]**列で**[...]** &gt; **[スケール アップ/ダウン]**をクリックします。
 3.  新しい仕様を選択します。
 4.  **［送信］**をクリックします。
 
@@ -60,7 +84,7 @@ changefeed 機能にアクセスするには、次の手順を実行します。
 
 ## チェンジフィードを一時停止または再開する {#pause-or-resume-a-changefeed}
 
-1.  ターゲット TiDB クラスターの[**チェンジフィード**](#view-the-changefeed-page)ページに移動します。
+1.  対象のTiDBの[**チェンジフィード**](#view-the-changefeed-page)ページ目に移動します<customcontent plan="dedicated">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>。
 2.  一時停止または再開する対応する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[一時停止/再開]**をクリックします。
 
 ## 変更フィードを編集する {#edit-a-changefeed}
@@ -69,9 +93,9 @@ changefeed 機能にアクセスするには、次の手順を実行します。
 >
 > TiDB Cloud現在、一時停止状態の変更フィードのみ編集できます。
 
-1.  ターゲット TiDB クラスターの[**チェンジフィード**](#view-the-changefeed-page)ページに移動します。
+1.  対象のTiDBの[**チェンジフィード**](#view-the-changefeed-page)ページ目に移動します<customcontent plan="dedicated">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>。
 
-2.  一時停止する変更フィードを見つけて、 **[アクション**] 列の**[...]** &gt; **[一時停止] を**クリックします。
+2.  一時停止する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[一時停止]**をクリックします。
 
 3.  changefeed のステータスが`Paused`に変更されたら、 **[...]** &gt; **[編集]**をクリックして、対応する changefeed を編集します。
 
@@ -82,12 +106,12 @@ changefeed 機能にアクセスするには、次の手順を実行します。
     -   TiDB Cloudシンク: **TiDB Cloud接続**、**テーブル フィルター**、および**イベント フィルター**。
     -   クラウドstorageシンク:**ストレージ エンドポイント**、**テーブル フィルター**、**イベント フィルター**。
 
-4.  設定を編集した後、 **[...** ] &gt; **[再開]**をクリックして、対応する変更フィードを再開します。
+4.  設定を編集した後、 **[...]** &gt; **[再開]**をクリックして、対応する変更フィードを再開します。
 
 ## 変更フィードを削除する {#delete-a-changefeed}
 
-1.  ターゲット TiDB クラスターの[**チェンジフィード**](#view-the-changefeed-page)ページに移動します。
-2.  削除する対応する変更フィードを見つけて、 **[アクション]**列で**[...]** &gt; **[削除] を**クリックします。
+1.  対象のTiDBの[**チェンジフィード**](#view-the-changefeed-page)ページ目に移動します<customcontent plan="dedicated">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>。
+2.  削除する対応する変更フィードを見つけて、 **[アクション]**列で**[...]** &gt; **[削除]**をクリックします。
 
 ## チェンジフィード課金 {#changefeed-billing}
 

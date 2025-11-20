@@ -8,7 +8,7 @@ aliases: ['/tidbcloud/serverless-tier-limitations']
 
 <!-- markdownlint-disable MD026 -->
 
-TiDB Cloud StarterおよびEssentialは、TiDBがサポートするほぼすべてのワークロードで動作しますが、TiDB Self-ManagedまたはTiDB Cloud Dedicatedクラスタと比較して機能に若干の違いがあります。このドキュメントでは、 TiDB Cloud StarterおよびTiDB Cloud Essentialの制限事項について説明します。
+TiDB Cloud StarterおよびEssentialは、TiDBがサポートするほぼすべてのワークロードで動作しますが、TiDB Self-ManagedまたはTiDB Cloud Dedicatedクラスタと比較して機能に若干の違いがあります。このドキュメントでは、TiDB Cloud StarterおよびTiDB Cloud Essentialの制限事項について説明します。
 
 TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを継続的に埋めています。ギャップを埋める機能や性能が必要な場合は、機能リクエストに[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)または[お問い合わせ](https://www.pingcap.com/contact-us/?from=en)使用してください。
 
@@ -16,7 +16,7 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 ### 監査ログ {#audit-logs}
 
--   [データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)は現在利用できません。
+-   [データベース監査ログ](/tidb-cloud/essential-database-audit-logging.md)は現在、 TiDB Cloud Starter クラスターでは使用できません。
 
 ### 繋がり {#connection}
 
@@ -26,7 +26,7 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 > **注記：**
 >
-> [AWS Global Acceleratorの制限](https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works.html#about-idle-timeout)のため、AWS のパブリックエンドポイント接続のアイドルタイムアウトは 340 秒です。同じ理由から、TCP キープアライブパケットを使用して接続を維持することはできません。
+> [AWS Global Acceleratorの制限](https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works.html#about-idle-timeout)ため、AWS のパブリックエンドポイント接続のアイドルタイムアウトは 340 秒です。同じ理由から、TCP キープアライブパケットを使用して接続を維持することはできません。
 
 ### 暗号化 {#encryption}
 
@@ -49,8 +49,8 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 ### ストリームデータ {#stream-data}
 
--   [チェンジフィード](/tidb-cloud/changefeed-overview.md)現在、 TiDB Cloud Starter およびTiDB Cloud Essential ではサポートされていません。
--   [データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)現在、 TiDB Cloud Starter およびTiDB Cloud Essential ではサポートされていません。
+-   [チェンジフィード](/tidb-cloud/changefeed-overview.md)は現在、 TiDB Cloud Starter およびTiDB Cloud Essential ではサポートされていません。
+-   [データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)は現在、 TiDB Cloud Starter およびTiDB Cloud Essential ではサポートされていません。
 
 ### 存続時間（TTL） {#time-to-live-ttl}
 

@@ -3,9 +3,9 @@ title: CREATE USER | TiDB SQL Statement Reference
 summary: TiDB データベースの CREATE USER の使用法の概要。
 ---
 
-# ユーザーの作成 {#create-user}
+# ユーザーを作成 {#create-user}
 
-この文は、パスワードを指定して新しいユーザーを作成します。MySQLの権限システムでは、ユーザーはユーザー名と接続元のホストの組み合わせです。したがって、IPアドレス`192.168.1.1`からのみ接続できるユーザー`'newuser2'@'192.168.1.1'`作成することが可能です。また、2人のユーザーが同じユーザー領域を持ち、異なるホストからログインするため、異なる権限を持つことも可能になります。
+この文は、パスワードを指定して新しいユーザーを作成します。MySQLの権限システムでは、ユーザーはユーザー名と接続元のホストの組み合わせです。したがって、IPアドレス`192.168.1.1`からのみ接続できるユーザー`'newuser2'@'192.168.1.1'`を作成することが可能です。また、2人のユーザーに同じユーザー領域を持たせ、異なるホストからログインするユーザーに異なる権限を付与することも可能です。
 
 ## 概要 {#synopsis}
 
@@ -18,12 +18,6 @@ IfNotExists ::=
 
 UserSpecList ::=
     UserSpec ( ',' UserSpec )*
-
-RequireClauseOpt ::=
-    ( 'REQUIRE' 'NONE' | 'REQUIRE' 'SSL' | 'REQUIRE' 'X509' | 'REQUIRE' RequireList )?
-
-RequireList ::=
-    ( "ISSUER" stringLit | "SUBJECT" stringLit | "CIPHER" stringLit | "SAN" stringLit | "TOKEN_ISSUER" stringLit )*
 
 UserSpec ::=
     Username AuthOption
@@ -162,7 +156,7 @@ SELECT USER, HOST, USER_ATTRIBUTES FROM MYSQL.USER WHERE USER='newuser7';
 -   `WITH MAX_UPDATES_PER_HOUR`
 -   `WITH MAX_USER_CONNECTIONS`
 
-次の`CREATE USER`オプションも TiDB ではサポートされておらず、パーサーでは受け入れられ*ません*。
+次の`CREATE USER`オプションも TiDB ではサポートされておらず、パーサーでは受け入れ*られません*。
 
 -   `DEFAULT ROLE`
 -   `PASSWORD REQUIRE CURRENT OPTIONAL`
@@ -177,5 +171,5 @@ SELECT USER, HOST, USER_ATTRIBUTES FROM MYSQL.USER WHERE USER='newuser7';
 </CustomContent>
 
 -   [ユーザーを削除](/sql-statements/sql-statement-drop-user.md)
--   [表示 ユーザーの作成](/sql-statements/sql-statement-show-create-user.md)
+-   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)
 -   [ユーザーの変更](/sql-statements/sql-statement-alter-user.md)

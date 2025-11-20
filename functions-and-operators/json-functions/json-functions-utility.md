@@ -5,11 +5,11 @@ summary: JSON ユーティリティ関数について学習します。
 
 # JSONユーティリティ関数 {#json-utility-functions}
 
-このドキュメントでは、JSON ユーティリティ関数について説明します。
+TiDB は、MySQL 8.0 で利用可能な[JSONユーティリティ関数](https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html)すべてをサポートします。
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-pretty">JSON_PRETTY()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-utility-functions-html-function-json-pretty-json-pretty-a}
+## <code>JSON_PRETTY()</code> {#code-json-pretty-code}
 
-`JSON_PRETTY(json_doc)`関数は JSON ドキュメントのフォーマットをきれいにします。
+`JSON_PRETTY(json_doc)`関数は JSON ドキュメントのフォーマットを整えます。
 
 ```sql
 SELECT JSON_PRETTY('{"person":{"name":{"first":"John","last":"Doe"},"age":23}}')\G
@@ -27,7 +27,7 @@ SELECT JSON_PRETTY('{"person":{"name":{"first":"John","last":"Doe"},"age":23}}')
     }
     1 row in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-storage-free">JSON_STORAGE_FREE()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-utility-functions-html-function-json-storage-free-json-storage-free-a}
+## <code>JSON_STORAGE_FREE()</code> {#code-json-storage-free-code}
 
 `JSON_STORAGE_FREE(json_doc)`関数は、JSON 値がその場で更新された後にバイナリ表現で解放されるstorage容量を返します。
 
@@ -46,7 +46,7 @@ SELECT JSON_STORAGE_FREE('{}');
     +-------------------------+
     1 row in set (0.00 sec)
 
-## <a href="https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-storage-size">JSON_ストレージサイズ()</a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-json-utility-functions-html-function-json-storage-size-json-storage-size-a}
+## <code>JSON_STORAGE_SIZE()</code> {#code-json-storage-size-code}
 
 `JSON_STORAGE_SIZE(json_doc)`関数は、JSON 値を格納するために必要なバイト数の概算値を返します。このサイズは TiKV 圧縮を考慮していないため、この関数の出力は MySQL と厳密には互換性がありません。
 

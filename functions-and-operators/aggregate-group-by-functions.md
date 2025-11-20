@@ -34,9 +34,9 @@ summary: TiDB でサポートされている集計関数について学習しま
 
 -   `APPROX_PERCENTILE(expr, constant_integer_expr)`
 
-    この関数は`expr`のパーセンタイルを返します。引数`constant_integer_expr`は、 `[1,100]`の範囲の定数整数であるパーセンタイル値を示します。パーセンタイル P <sub>k</sub> （ `k`パーセンタイルを表します）は、データセット内に P <sub>k</sub>以下の値が少なくとも`k%`あることを示します。
+    この関数は`expr`のパーセンタイルを返します。引数`constant_integer_expr`は、 5 から`[1,100]`の範囲の定数整数であるパーセンタイル値を示します。パーセンタイル P <sub>k</sub> （ `k`はパーセンタイルを表します）は、データセット内に P <sub>k</sub>以下の値が少なくとも`k%`あることを示します。
 
-    この関数は、 `expr`の戻り値の型として[数値型](/data-type-numeric.md)と[日付と時刻の種類](/data-type-date-and-time.md)のみをサポートします。その他の戻り値の型については、 `APPROX_PERCENTILE` `NULL`のみを返します。
+    この関数は、 `expr`の戻り値の型として[数値型](/data-type-numeric.md)と[日付と時刻の種類](/data-type-date-and-time.md)をサポートします。その他の戻り値の型については、 `APPROX_PERCENTILE` `NULL`を返します。
 
     次の例は、 `INT`列の 50 パーセンタイルを計算する方法を示しています。
 
@@ -61,7 +61,7 @@ summary: TiDB でサポートされている集計関数について学習しま
 
 -   `APPROX_COUNT_DISTINCT(expr, [expr...])`
 
-    この関数は、 `COUNT(DISTINCT)`と同様に異なる値の数を数えますが、近似値を返します。3 `BJKST`アルゴリズムを使用することで、べき乗分布を持つ大規模なデータセットを処理する際のメモリ消費量を大幅に削減します。さらに、カーディナリティの低いデータの場合、この関数はCPU使用率を効率的に維持しながら高い精度を実現します。
+    この関数は、異なる値の数を数える点では`COUNT(DISTINCT)`に似ていますが、近似値を返します。3 `BJKST`アルゴリズムを使用することで、べき乗分布を持つ大規模なデータセットを処理する際のメモリ消費量を大幅に削減します。さらに、低カーディナリティデータの場合、この関数はCPU使用率を効率的に維持しながら高い精度を実現します。
 
     次の例は、この関数の使用方法を示しています。
 
@@ -83,7 +83,7 @@ summary: TiDB でサポートされている集計関数について学習しま
         +-----------------------------+
         2 rows in set (0.00 sec)
 
-`GROUP_CONCAT()` 、および`APPROX_COUNT_DISTINCT` `APPROX_PERCENTILE()`を除き、前述のすべての関数は[ウィンドウ関数](/functions-and-operators/window-functions.md)として機能します。
+`GROUP_CONCAT()` 、 `APPROX_PERCENTILE()` 、 `APPROX_COUNT_DISTINCT`関数を除き、前述の関数はすべて[ウィンドウ関数](/functions-and-operators/window-functions.md)として機能します。
 
 ## GROUP BY修飾子 {#group-by-modifiers}
 
@@ -91,7 +91,7 @@ TiDB v7.4.0以降、 `GROUP BY`句は`WITH ROLLUP`修飾子をサポートしま
 
 ## SQLモードのサポート {#sql-mode-support}
 
-TiDBはSQLモード`ONLY_FULL_GROUP_BY`をサポートしており、有効にすると、曖昧な非集計列を含むクエリを拒否します。例えば、次のクエリは`ONLY_FULL_GROUP_BY`が有効になっている場合、 `SELECT`のリストにある非集計列「b」が`GROUP BY`ステートメントに出現しないため、不正となります。
+TiDBはSQLモード`ONLY_FULL_GROUP_BY`をサポートしており、有効にすると、曖昧な非集計列を含むクエリを拒否します。例えば、次のクエリは`ONLY_FULL_GROUP_BY`が有効になっていると無効になります。5 `SELECT`のリストにある非集計列「b」が`GROUP BY`ステートメントに含まれていないためです。
 
 ```sql
 drop table if exists t;
@@ -115,11 +115,11 @@ mysql> select a, b, sum(c) from t group by a;
 ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'b' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
 ```
 
-現在、TiDB ではデフォルトで[`ONLY_FULL_GROUP_BY`](/mysql-compatibility.md#default-differences)モードが有効になっています。
+TiDB は現在、デフォルトで[`ONLY_FULL_GROUP_BY`](/mysql-compatibility.md#default-differences)モードを有効にしています。
 
 ### MySQLとの違い {#differences-from-mysql}
 
-`ONLY_FULL_GROUP_BY`の現在の実装は、 MySQL 5.7のものよりも厳密ではありません。例えば、結果が「c」で順序付けられることを期待して、次のクエリを実行するとします。
+`ONLY_FULL_GROUP_BY`の現在の実装は、 MySQL 5.7の実装よりも厳密ではありません。例えば、結果が「c」で順序付けられることを期待して、次のクエリを実行するとします。
 
 ```sql
 drop table if exists t;
@@ -128,7 +128,7 @@ insert into t values(1, 2, 1), (1, 2, 2), (1, 3, 1), (1, 3, 2);
 select distinct a, b from t order by c;
 ```
 
-結果を順序付けるには、まず重複を排除する必要があります。しかし、そのためにはどの行を残すべきでしょうか？ この選択は「c」の保持値に影響し、さらに順序付けにも影響を与え、結果的に順序付けを恣意的なものにしてしまいます。
+結果を順序付けるには、まず重複を排除する必要があります。しかし、そのためにはどの行を保持すべきでしょうか？ この選択は「c」の保持値に影響し、さらに順序付けにも影響を与え、結果的に順序付けを恣意的なものにしてしまいます。
 
 MySQL では、 `DISTINCT`と`ORDER BY`含むクエリは、 `ORDER BY`式のいずれかが以下の条件の少なくとも 1 つを満たしていない場合、無効として拒否されます。
 
@@ -137,7 +137,7 @@ MySQL では、 `DISTINCT`と`ORDER BY`含むクエリは、 `ORDER BY`式のい
 
 しかし、TiDB では上記のクエリは有効です。詳細については、 [＃4254](https://github.com/pingcap/tidb/issues/4254)参照してください。
 
-標準SQLに対するTiDBのもう一つの拡張機能は、 `HAVING`の句で`SELECT`のリスト内の別名式を参照することを許可します。例えば、次のクエリはテーブル「orders」に一度だけ出現する「name」の値を返します。
+標準SQLに対するTiDBのもう一つの拡張機能は、 `HAVING`句で`SELECT`番目のリスト内のエイリアス式を参照することを許可します。例えば、次のクエリはテーブル「orders」に一度だけ出現する「name」の値を返します。
 
 ```sql
 select name, count(name) from orders
@@ -153,7 +153,7 @@ group by name
 having c = 1;
 ```
 
-標準 SQL では、 `GROUP BY`句で列式のみが許可されるため、次のような文は無効です。「FLOOR(value/100)」は列以外の式であるためです。
+標準 SQL では、 `GROUP BY`句で列式のみが許可されるため、次のようなステートメントは、「FLOOR(value/100)」が非列式であるため無効です。
 
 ```sql
 select id, floor(value/100)
@@ -163,7 +163,7 @@ group by id, floor(value/100);
 
 TiDB は標準 SQL を拡張して`GROUP BY`句で非列式を許可し、前述のステートメントを有効と見なします。
 
-標準SQLでは、 `GROUP BY`節でのエイリアスの使用は許可されていません。TiDBは標準SQLを拡張してエイリアスの使用を許可しているため、クエリを次のように記述することもできます。
+標準SQLでは、 `GROUP BY`節でのエイリアスの使用は許可されていません。TiDBは標準SQLを拡張してエイリアスの使用を許可しているため、クエリの別の記述方法は次のようになります。
 
 ```sql
 select id, floor(value/100) as val

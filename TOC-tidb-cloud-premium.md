@@ -10,7 +10,7 @@
     -   [TiDB Cloudの紹介](/tidb-cloud/tidb-cloud-intro.md)
     -   [MySQLの互換性](/mysql-compatibility.md)
 -   TiDB Cloudを使い始める
-    -   [TiDB Cloud を試してみる](/tidb-cloud/tidb-cloud-quickstart.md)
+    -   [TiDB Cloudを試してみる](/tidb-cloud/tidb-cloud-quickstart.md)
     -   [TiDB + AIを試す](/vector-search/vector-search-get-started-using-python.md)
     -   [HTAPを試してみる](/tidb-cloud/tidb-cloud-htap-quickstart.md)
     -   [TiDB Cloud CLI を試す](/tidb-cloud/get-started-with-cli.md)
@@ -133,11 +133,11 @@
     -   [クラスタプランを選択](/tidb-cloud/select-cluster-tier.md)
     -   TiDB Cloudインスタンスの管理
         -   [TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)
-        -   TiDB Cloudクラスタに接続する
-            -   [接続の概要](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
-            -   [パブリックエンドポイント経由で接続](/tidb-cloud/connect-via-standard-connection-serverless.md)
+        -   TiDB Cloudインスタンスに接続する
+            -   [接続の概要](/tidb-cloud/premium/connect-to-tidb-instance.md)
+            -   [パブリックエンドポイント経由で接続](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)
             -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
-            -   [プライベートエンドポイント経由でAlibaba Cloudに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+            -   [プライベートエンドポイント経由でAlibaba Cloudに接続する](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
         -   [TiDB Cloudデータのバックアップと復元](/tidb-cloud/premium/backup-and-restore-premium.md)
     -   TiFlashでHTAPクラスタを使用する
         -   [TiFlashの概要](/tiflash/tiflash-overview.md)
@@ -152,7 +152,7 @@
         -   [パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)
     -   監視と警告
         -   [概要](/tidb-cloud/monitor-tidb-cluster.md)
-        -   [組み込みメトリック](/tidb-cloud/built-in-monitoring.md)
+        -   [組み込みメトリック](/tidb-cloud/premium/built-in-monitoring-premium.md)
     -   パフォーマンスの調整
         -   [概要](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
         -   [パフォーマンスを分析する](/tidb-cloud/tune-performance.md)
@@ -202,7 +202,7 @@
         -   [TiKV Follower Readの調整](/follower-read.md)
         -   [コプロセッサーキャッシュ](/coprocessor-cache.md)
         -   [TiFlash のパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md)
-    -   [TiDBクラスタを削除する](/tidb-cloud/delete-tidb-cluster.md)
+    -   [TiDBインスタンスを削除する](/tidb-cloud/premium/delete-tidb-instance.md)
 -   データの移行またはインポート
     -   [概要](/tidb-cloud/tidb-cloud-migration-overview.md)
     -   TiDB Cloudへのデータ移行
@@ -222,19 +222,31 @@
         -   [データのインポートのためのCSV構成](/tidb-cloud/csv-config-for-import-data.md)
         -   [Amazon S3 からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
         -   [AWS DMS をTiDB Cloudクラスターに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
+-   ストリームデータ
+    -   [チェンジフィードの概要](/tidb-cloud/changefeed-overview.md)
+    -   [MySQLシンクへ](/tidb-cloud/changefeed-sink-to-mysql.md)
+    -   [カフカシンクへ](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+    -   参照
+        -   [AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
+        -   [Changefeeds のプライベート エンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)
 -   Security
     -   [Securityの概要](/tidb-cloud/security-overview.md)
     -   アイデンティティアクセス制御
         -   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)
         -   [標準SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)
         -   [組織のSSO認証](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
-        -   [アイデンティティアクセス管理](/tidb-cloud/manage-user-access.md)
+        -   [アイデンティティアクセス管理](/tidb-cloud/premium/manage-user-access-premium.md)
         -   [OAuth 2.0](/tidb-cloud/oauth2.md)
     -   ネットワークアクセス制御
-        -   [プライベートエンドポイント経由でAlibaba Cloudに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+        -   [IPアクセスリストを構成する](/tidb-cloud/premium/configure-ip-access-list-premium.md)
+        -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
+        -   [Alibaba Cloud のプライベートエンドポイント経由で接続する](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
         -   [パブリックエンドポイントのファイアウォールルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
-        -   [TiDB CloudへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)
+        -   [TiDB CloudへのTLS接続](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md)
+    -   データアクセス制御
+        -   [ユーザー制御のログ編集](/tidb-cloud/tidb-cloud-log-redaction.md)
     -   監査管理
+        -   [データベース監査ログ](/tidb-cloud/premium/tidb-cloud-auditing-premium.md)
         -   [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)
 -   請求する
     -   [請求書](/tidb-cloud/tidb-cloud-billing.md#invoices)
@@ -244,6 +256,7 @@
     -   [クレジット](/tidb-cloud/tidb-cloud-billing.md#credits)
     -   [支払い方法の設定](/tidb-cloud/tidb-cloud-billing.md#payment-method)
     -   [クラウドプロバイダーマーケットプレイスからの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)
+    -   [Changefeedの請求](/tidb-cloud/premium/tidb-cloud-billing-ticdc-ccu.md)
     -   [予算を管理する](/tidb-cloud/tidb-cloud-budget.md)
 -   統合
     -   [エアバイト](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
@@ -468,8 +481,8 @@
     -   履歴データを読む
         -   ステイル読み取りを使用する（推奨）
             -   [ステイル読み取りの使用シナリオ](/stale-read.md)
-            -   [`As OF TIMESTAMP`使用してステイル読み取りを実行する](/as-of-timestamp.md)
-            -   [`tidb_read_staleness`使用してステイル読み取りを実行する](/tidb-read-staleness.md)
+            -   [`As OF TIMESTAMP`を使用してステイル読み取りを実行する](/as-of-timestamp.md)
+            -   [`tidb_read_staleness`を使用してステイル読み取りを実行する](/tidb-read-staleness.md)
             -   [`tidb_external_ts`を使用してステイル読み取り](/tidb-external-ts.md)
         -   [`tidb_snapshot`システム変数を使用する](/read-historical-data.md)
     -   システムテーブル
@@ -596,7 +609,7 @@
         -   [スケジュール](/tidb-scheduling.md)
         -   [TSO](/tso.md)
     -   ストレージエンジン
-        -   ティクブ
+        -   TiKV
             -   [TiKVの概要](/tikv-overview.md)
             -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
         -   TiFlash

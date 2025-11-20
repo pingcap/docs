@@ -5,7 +5,7 @@ summary: 暗号化と圧縮の関数について学びます。
 
 # 暗号化と圧縮機能 {#encryption-and-compression-functions}
 
-TiDB は、MySQL 8.0 で利用可能な[暗号化および圧縮関数](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html)ほとんどをサポートしています。
+TiDB は、MySQL 8.0 で利用可能な[暗号化および圧縮関数](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html)のほとんどをサポートしています。
 
 ## サポートされている関数 {#supported-functions}
 
@@ -25,7 +25,7 @@ TiDB は、MySQL 8.0 で利用可能な[暗号化および圧縮関数](https://
 | [`UNCOMPRESSED_LENGTH()`](#uncompressed_length)               | 圧縮前の文字列の長さを返す           |
 | [`VALIDATE_PASSWORD_STRENGTH()`](#validate_password_strength) | パスワードの強度を検証する           |
 
-### <a href="https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_aes-decrypt"><code>AES_DECRYPT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-encryption-functions-html-function-aes-decrypt-code-aes-decrypt-code-a}
+### <code>AES_DECRYPT()</code> {#code-aes-decrypt-code}
 
 `AES_DECRYPT(data, key [,iv])`関数は、同じ`key`を使用して[`AES_ENCRYPT()`](#aes_encrypt)関数を使用して以前に暗号化された`data`復号化します。
 
@@ -44,7 +44,7 @@ SELECT AES_DECRYPT(0x28409970815CD536428876175F1A4923, 'secret');
     +----------------------------------------------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-### <a href="https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_aes-encrypt"><code>AES_ENCRYPT()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-encryption-functions-html-function-aes-encrypt-code-aes-encrypt-code-a}
+### <code>AES_ENCRYPT()</code> {#code-aes-encrypt-code}
 
 `AES_ENCRYPT(data, key [,iv])`関数は、 [高度暗号化規格（AES）](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)アルゴリズムを使用して`data` `key`で暗号化します。
 
@@ -63,11 +63,11 @@ SELECT AES_ENCRYPT(0x616263,'secret');
     +----------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-### <a href="https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_compress"><code>COMPRESS()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-encryption-functions-html-function-compress-code-compress-code-a}
+### <code>COMPRESS()</code> {#code-compress-code}
 
 `COMPRESS(expr)`関数は入力データ`expr`の圧縮バージョンを返します。
 
--   引数が`NULL`場合、関数は`NULL`返します。
+-   引数が`NULL`の場合、関数は`NULL`返します。
 -   引数が空の文字列の場合、関数は長さ 0 の値を返します。
 
 長さがゼロ以外の引数の場合、関数は次の構造を持つバイナリ文字列を返します。
@@ -99,7 +99,7 @@ print(int.from_bytes(data[:4], byteorder='little'))  # 3
 print(zlib.decompress(data[4:]))  # b'ABC'
 ```
 
-短い文字列の場合、 `COMPRESS()`入力よりも多くのバイト数を返す可能性があります。次の例では、 `a`文字の文字列が 19 バイトに圧縮されることを示しています。
+短い文字列の場合、 `COMPRESS()`入力よりも多くのバイト数を返す可能性があります。次の例では、 `a`文字の文字列が19バイトに圧縮されることを示しています。
 
 ```sql
 WITH x AS (SELECT REPEAT('a',100) 'a')
@@ -113,9 +113,9 @@ SELECT LENGTH(a),LENGTH(COMPRESS(a)) FROM x;
     +-----------+---------------------+
     1 row in set (0.00 sec)
 
-### <a href="https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_md5"><code>MD5()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-encryption-functions-html-function-md5-code-md5-code-a}
+### <code>MD5()</code> {#code-md5-code}
 
-`MD5(expr)`関数は、指定された引数`expr`に対して 128 ビット[MD5](https://en.wikipedia.org/wiki/MD5)ハッシュを計算します。
+`MD5(expr)`関数は、指定された引数`expr`に対して 128 ビットの[MD5](https://en.wikipedia.org/wiki/MD5)ハッシュを計算します。
 
 ```sql
 SELECT MD5('abc');
@@ -128,7 +128,7 @@ SELECT MD5('abc');
     +----------------------------------+
     1 row in set (0.00 sec)
 
-### <a href="https://dev.mysql.com/doc/refman/5.7/en/encryption-functions.html#function_password"><code>PASSWORD()</code></a> {#a-href-https-dev-mysql-com-doc-refman-5-7-en-encryption-functions-html-function-password-code-password-code-a}
+### <code>PASSWORD()</code> {#code-password-code}
 
 > **警告：**
 >
@@ -149,7 +149,7 @@ SELECT PASSWORD('secret');
 
     Warning (Code 1681): PASSWORD is deprecated and will be removed in a future release.
 
-### <a href="https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_random-bytes"><code>RANDOM_BYTES()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-encryption-functions-html-function-random-bytes-code-random-bytes-code-a}
+### <code>RANDOM_BYTES()</code> {#code-random-bytes-code}
 
 `RANDOM_BYTES(n)`関数は`n`ランダム バイトを返します。
 
@@ -164,11 +164,11 @@ SELECT RANDOM_BYTES(3);
     +----------------------------------+
     1 row in set (0.00 sec)
 
-### <a href="https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_sha1"><code>SHA()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-encryption-functions-html-function-sha1-code-sha-code-a}
+### <code>SHA()</code> {#code-sha-code}
 
 `SHA()`関数は[`SHA1`](#sha1)エイリアスです。
 
-### <a href="https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_sha1"><code>SHA1()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-encryption-functions-html-function-sha1-code-sha1-code-a}
+### <code>SHA1()</code> {#code-sha1-code}
 
 `SHA1(expr)`関数は、指定された引数`expr`に対して 160 ビット[SHA-1](https://en.wikipedia.org/wiki/SHA-1)ハッシュを計算します。
 
@@ -183,11 +183,11 @@ SELECT SHA1('abc');
     +------------------------------------------+
     1 row in set (0.00 sec)
 
-### <a href="https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_sha2"><code>SHA2()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-encryption-functions-html-function-sha2-code-sha2-code-a}
+### <code>SHA2()</code> {#code-sha2-code}
 
-`SHA2(str, n)`関数は、 [SHA-2](https://en.wikipedia.org/wiki/SHA-2)ファミリーのアルゴリズムを使用してハッシュを計算します。5 引数`n`アルゴリズムを選択するために使用されます。7 `SHA2()` 、引数のいずれかが`NULL`の場合、または`n`で選択されたアルゴリズムが不明またはサポートされていない場合、 `NULL`返します。
+`SHA2(str, n)`関数は`n` [SHA-2](https://en.wikipedia.org/wiki/SHA-2)ファミリーのアルゴリズムを使用してハッシュを計算します。5 引数はアルゴリズムを選択するために使用されます。7 `SHA2()` 、引数のいずれかが`NULL`の場合、または`n`で選択されたアルゴリズムが不明またはサポートされていない場合、 `NULL`返します。
 
-サポートされているアルゴリズムを次に示します。
+サポートされているアルゴリズムは次のとおりです。
 
 | n   | アルゴリズム  |
 | --- | ------- |
@@ -214,7 +214,7 @@ SELECT SHA2('abc',224);
 >
 > `SM3()`関数は TiDB 拡張機能であり、MySQL では実装されていません。
 
-`SM3(str)`関数は、指定された引数`str`に対して 256 ビット[シャンミ 3 (SM3)](https://en.wikipedia.org/wiki/SM3_(hash_function))ハッシュを計算します。
+`SM3(str)`関数は、指定された引数`str`に対して 256 ビットの[シャンミ 3 (SM3)](https://en.wikipedia.org/wiki/SM3_(hash_function))ハッシュを計算します。
 
 ```sql
 SELECT SM3('abc');
@@ -227,7 +227,7 @@ SELECT SM3('abc');
     +------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-### <a href="https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_uncompress"><code>UNCOMPRESS()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-encryption-functions-html-function-uncompress-code-uncompress-code-a}
+### <code>UNCOMPRESS()</code> {#code-uncompress-code}
 
 `UNCOMPRESS(data)`関数は[`COMPRESS()`](#compress)関数で圧縮されたデータを解凍します。
 
@@ -242,7 +242,7 @@ SELECT UNCOMPRESS(0x03000000789C72747206040000FFFF018D00C7);
     +------------------------------------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-### <a href="https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_uncompressed-length"><code>UNCOMPRESSED_LENGTH()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-encryption-functions-html-function-uncompressed-length-code-uncompressed-length-code-a}
+### <code>UNCOMPRESSED_LENGTH()</code> {#code-uncompressed-length-code}
 
 `UNCOMPRESSED_LENGTH(data)`関数は、圧縮データの最初の 4 バイトを返します。これには、 [`COMPRESS()`](#compress)関数で圧縮される前の圧縮文字列の長さが格納されます。
 
@@ -257,11 +257,11 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
     +---------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-### <a href="https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_validate-password-strength"><code>VALIDATE_PASSWORD_STRENGTH()</code></a> {#a-href-https-dev-mysql-com-doc-refman-8-0-en-encryption-functions-html-function-validate-password-strength-code-validate-password-strength-code-a}
+### <code>VALIDATE_PASSWORD_STRENGTH()</code> {#code-validate-password-strength-code}
 
 <CustomContent platform="tidb">
 
-`VALIDATE_PASSWORD_STRENGTH(str)`関数は[パスワード管理](/password-management.md)の一部として使用されます。パスワードの強度を計算し、0から100までの値を返します。
+`VALIDATE_PASSWORD_STRENGTH(str)`関数は[パスワード管理](/password-management.md)の一部として使用されます。パスワードの強度を計算し、0 から 100 までの値を返します。
 
 </CustomContent>
 
@@ -314,7 +314,7 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
         +--------------------------------+
         1 row in set (0.00 sec)
 
--   短い文字列`abcdef`のパスワードの強度をチェックすると、 `25`返されます。
+-   短い文字列`abcdef`のパスワード強度をチェックすると、 `25`が返されます。
 
     ```sql
     SELECT VALIDATE_PASSWORD_STRENGTH('abcdef');
