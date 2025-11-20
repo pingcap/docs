@@ -60,9 +60,9 @@ jobs:
           ref: "${{ matrix.value }}"
           path: "docs"
       - uses: actions/setup-node@v4
-        name: Setup node 18
+        name: Setup node
         with:
-          node-version: 18
+          node-version: 20
 
       - run: |
           sudo apt install tree -y
