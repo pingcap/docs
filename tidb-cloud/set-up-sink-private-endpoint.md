@@ -122,13 +122,13 @@ The configuration steps vary depending on the cloud provider where your cluster 
 2. In the **Create Private Endpoint for Changefeed** dialog, enter a name for the private endpoint.
 3. Follow the reminder to  whitelist TiDB Cloud's Alibaba Cloud account ID for your endpoint service to grant the TiDB Cloud VPC access , see [Manage account IDs in the whitelist of an endpoint service](https://www.alibabacloud.com/help/en/privatelink/user-guide/add-and-manage-service-whitelists).
 4. Enter the **Endpoint Service Name** that you collected in the [Network](#network) section.
-6. If this private endpoint is created for Apache Kafka, enable the **Advertised Listener for Kafka** option.
-7. Configure the advertised listener for Kafka using either the **TiDB Managed** domain or the **Custom** domain.
+5. If this private endpoint is created for Apache Kafka, enable the **Advertised Listener for Kafka** option.
+6. Configure the advertised listener for Kafka using either the **TiDB Managed** domain or the **Custom** domain.
 
     - To use the **TiDB Managed** domain for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate**. TiDB will generate broker addresses with subdomains for each availability zone.
     - To use your own **Custom** domain for advertised listeners, switch the domain type to **Custom**, enter the root domain in the **Custom Domain** field, click **Check**, and then specify the broker subdomains for each availability zone.
 
-8. Click **Create** to validate the configurations and create the private endpoint.
+7. Click **Create** to validate the configurations and create the private endpoint.
 
 </div>
 
