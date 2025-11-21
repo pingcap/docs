@@ -7,9 +7,9 @@ summary: Learn about the `TIFLASH_INDEXES` table in `INFORMATION_SCHEMA`.
 
 > **Warning:**
 >
-> This table is currently an experimental feature and is not recommended for use in production environments. The fields of this table are not yet stable and may change in future versions of TiDB. If you find a bug, please submit an [issue](https://github.com/pingcap/tidb/issues) on GitHub for feedback.
+> Currently, this table is experimental. It is not recommended that you use it in production environments. The fields of this table are not yet stable and might change in future TiDB versions. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
-The `TIFLASH_INDEXES` table provides statistical information about index building on TiFlash replicas.
+The `TIFLASH_INDEXES` table provides statistics about index building on TiFlash replicas.
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -39,19 +39,19 @@ The output is as follows:
 +-------------------------+---------------+------+------+---------+-------+
 ```
 
-The meaning of each column in the `TIFLASH_INDEXES` table is as follows:
+Fields in the `TIFLASH_INDEXES` table are described as follows:
 
-- `TIDB_DATABASE`: The name of the database to which the table belongs.
-- `TIDB_TABLE`: The name of the table.
-- `TABLE_ID`: The internal ID of the table, which is unique within a TiDB cluster.
-- `COLUMN_NAME`: The name of the column on which the index is located.
-- `INDEX_NAME`: The name of the index.
-- `COLUMN_ID`: The ID of the column on which the index is located.
-- `INDEX_ID`: The ID of the index.
-- `INDEX_KIND`: The type of index.
-- `ROWS_STABLE_INDEXED`: The number of rows in the Stable layer of the TiFlash replica that have completed index construction.
-- `ROWS_STABLE_NOT_INDEXED`: The number of rows in the Stable layer of the TiFlash replica that have not yet been indexed.
-- `ROWS_DELTA_INDEXED`: The number of rows in the Delta layer of the TiFlash replica that have completed index construction.
-- `ROWS_DELTA_NOT_INDEXED`: The number of rows in the Delta layer of the TiFlash replica that have not yet been indexed.
-- `ERROR_MESSAGE`: Information about unrecoverable errors that occurred during index construction.
-- `TIFLASH_INSTANCE`: The TiFlash instance address that executes the index building task.
+- `TIDB_DATABASE`: the name of the database to which the table belongs.
+- `TIDB_TABLE`: the name of the table.
+- `TABLE_ID`: the internal ID of the table, which is unique within a TiDB cluster.
+- `COLUMN_NAME`: the name of the column on which the index is located.
+- `INDEX_NAME`: the name of the index.
+- `COLUMN_ID`: the ID of the column on which the index is built.
+- `INDEX_ID`: the ID of the index.
+- `INDEX_KIND`: the type of index.
+- `ROWS_STABLE_INDEXED`: the number of rows in the TiFlash replica for which the Stable layer has completed index building.
+- `ROWS_STABLE_NOT_INDEXED`: the number of rows in the TiFlash replica for which the Stable layer has not yet completed index building.
+- `ROWS_DELTA_INDEXED`: the number of rows in the TiFlash replica for which the Delta layer has completed index building.
+- `ROWS_DELTA_NOT_INDEXED`: the number of rows in the TiFlash replica for which the Delta layer has not yet completed index building.
+- `ERROR_MESSAGE`: details about any unrecoverable errors encountered during index building.
+- `TIFLASH_INSTANCE`: the address of the TiFlash instance that performs the index building task.
