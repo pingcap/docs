@@ -9,7 +9,7 @@ summary: Learn the `TIFLASH_SEGMENTS` information_schema table.
 >
 > Do not use this table in production environments, as the fields of the table are unstable, and subject to change in new releases of TiDB, without prior notice.
 
-The `TIFLASH_SEGMENTS` table provides statistical information about Segments in data tables in TiFlash.
+The `TIFLASH_SEGMENTS` table provides statistical information about segments in data tables in TiFlash.
 
 ```sql
 USE information_schema;
