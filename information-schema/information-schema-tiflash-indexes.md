@@ -44,7 +44,7 @@ Fields in the `TIFLASH_INDEXES` table are described as follows:
 - `TIDB_DATABASE`: the name of the database to which the table belongs.
 - `TIDB_TABLE`: the name of the table.
 - `TABLE_ID`: the internal ID of the table, which is unique within a TiDB cluster.
-- `COLUMN_NAME`: the name of the column on which the index is located.
+- `COLUMN_NAME`: the name of the column on which the index is built.
 - `INDEX_NAME`: the name of the index.
 - `COLUMN_ID`: the ID of the column on which the index is built.
 - `INDEX_ID`: the ID of the index.
