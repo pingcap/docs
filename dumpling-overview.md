@@ -238,10 +238,18 @@ export AWS_ACCESS_KEY_ID=${AccessKey}
 export AWS_SECRET_ACCESS_KEY=${SecretKey}
 ```
 
-Dumpling also supports reading credential files from `~/.aws/credentials`. For more information about URI parameter descriptions, see [URI Formats of External Storage Services](/external-storage-uri.md).
+Dumpling also supports reading credential files from `~/.aws/credentials` and authenticating with AWS profiles. For more information about URI parameter descriptions, see [URI Formats of External Storage Services](/external-storage-uri.md).
+
+To use the default credentials from `~/.aws/credentials`:
 
 ```shell
 tiup dumpling -u root -P 4000 -h 127.0.0.1 -r 200000 -o "s3://${Bucket}/${Folder}"
+```
+
+To use a specific AWS profile:
+
+```shell
+tiup dumpling -u root -P 4000 -h 127.0.0.1 -r 200000 -o "s3://${Bucket}/${Folder}" --s3.profile=my.profile
 ```
 
 ### Filter the exported data
