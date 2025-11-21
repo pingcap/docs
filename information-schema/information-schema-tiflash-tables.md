@@ -73,7 +73,6 @@ DESC tiflash_tables;
 | BACKGROUND_TASKS_LENGTH                   | bigint       | YES  |      | NULL    |       |
 | TIFLASH_INSTANCE                          | varchar(64)  | YES  |      | NULL    |       |
 +-------------------------------------------+--------------+------+------+---------+-------+
-54 rows in set (0.00 sec)
 ```
 
 Fields in the `TIFLASH_TABLES` table are described as follows:
@@ -130,4 +129,3 @@ Fields in the `TIFLASH_TABLES` table are described as follows:
 - `STORAGE_META_OLDEST_SNAPSHOT_TRACING_ID`: The tracing ID of the earliest snapshot in the meta information.
 - `BACKGROUND_TASKS_LENGTH`: The length of the task queue in the background.
 - `TIFLASH_INSTANCE`: The address of the TiFlash instance.
-
