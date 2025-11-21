@@ -403,7 +403,7 @@ sudo systemctl enable ntpd.service
 
 For TiDB in the production environment, it is recommended to optimize the operating system configuration in the following ways:
 
-1. Refer to [Memory—transparent huge page (THP)](/tune-operating-system.md#memory-transparent-huge-page-thp) and disable THP. The memory access pattern of databases is usually sparse. When higher-order memory becomes heavily fragmented, the system experiences increased latency when allocating THPs.
+1. Refer to [Memory—transparent huge page (THP)](/tune-operating-system.md#memorytransparent-huge-page-thp) and disable THP. The memory access pattern of databases is usually sparse. When higher-order memory becomes heavily fragmented, the system experiences increased latency when allocating THPs.
 2. Refer to [I/O scheduler](/tune-operating-system.md#io-scheduler) and set the I/O Scheduler of the storage media.
 
     - For the high-speed SSD storage, the kernel's default I/O scheduling operations might cause performance loss. It is recommended to set the I/O Scheduler to first-in-first-out (FIFO), such as `noop` or `none`. This configuration allows the kernel to pass I/O requests directly to hardware without scheduling, thus improving performance.
