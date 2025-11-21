@@ -62,7 +62,7 @@ To store audit logs in Amazon S3, you need to provide the following information:
     - An [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) with the `s3:PutObject` permission.
     - A [role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) with the `s3:PutObject` permission. Only clusters hosted on AWS support using a role ARN.
 
-For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+For more information, see [Configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access).
 
 ### Google Cloud Storage
 
@@ -71,7 +71,7 @@ To store audit logs in Google Cloud Storage, you need to provide the following i
 - URI: `gs://<bucket-name>/<folder-path>/`
 - Access credential: a [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) with the `storage.objects.create` and `storage.objects.delete` permissions.
 
-For more information, see [Configure GCS access](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
+For more information, see [Configure GCS access](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access).
 
 ### Azure Blob Storage
 
@@ -80,7 +80,7 @@ To store audit logs in Azure Blob Storage, you need to provide the following inf
 - URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` or `https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
 - Access credential: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) with `Read` and `Write` permissions on the `Container` and `Object` resources.
 
-For more information, see [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+For more information, see [Configure Azure Blob Storage access](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access).
 
 ### Alibaba Cloud OSS
 
@@ -89,7 +89,7 @@ To store audit logs in Alibaba Cloud OSS, you need to provide the following info
 - URI: `oss://<bucket-name>/<folder-path>/`
 - Access credential: an [AccessKey pair](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair) with the `oss:PutObject` and `oss:GetBucketInfo` permissions to allow data export to the OSS bucket.
 
-For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
+For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access).
 
 ## Audit logging filter rules
 
