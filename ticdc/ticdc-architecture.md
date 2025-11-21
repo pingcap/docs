@@ -156,7 +156,7 @@ To deploy TiCDC nodes in the new architecture using TiUP, take the following ste
 
 1. If your TiDB cluster does not have TiCDC nodes yet, refer to [Scale out a TiCDC cluster](/scale-tidb-using-tiup.md#scale-out-a-ticdc-cluster) to add new TiCDC nodes in the cluster. Otherwise, skip this step.
 
-2. If your TiDB cluster version is earlier than v8.5.4, you need to manually download the TiCDC binary package of new architecture, and then patch the downloaded file to your TiDB cluster. Otherwise, skip this step.
+2. If your TiDB cluster version is earlier than v8.5.4, you need to manually download the TiCDC binary package of the new architecture, and then patch the downloaded file to your TiDB cluster. Otherwise, skip this step.
 
     The download link follows this format: `https://tiup-mirrors.pingcap.com/cdc-${version}-${os}-${arch}.tar.gz`, where `${version}` is the TiCDC version (see [TiCDC releases for the new architecture](https://github.com/pingcap/ticdc/releases) for available versions), `${os}` is your operating system, and `${arch}` is the platform the component runs on (`amd64` or `arm64`).
 
