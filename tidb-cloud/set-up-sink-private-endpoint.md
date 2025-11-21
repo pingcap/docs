@@ -118,7 +118,6 @@ The configuration steps vary depending on the cloud provider where your cluster 
 
 <div label="Alibaba Cloud">
 
-
 1. On the **Networking** page, click **Create Private Endpoint** in the **Alibaba Cloud Private Endpoint for Changefeed** section.
 2. In the **Create Private Endpoint for Changefeed** dialog, enter a name for the private endpoint.
 3. Follow the reminder to  whitelist TiDB Cloud's Alibaba Cloud account ID for your endpoint service to grant the TiDB Cloud VPC access , see [Manage account IDs in the whitelist of an endpoint service](https://www.alibabacloud.com/help/en/privatelink/user-guide/add-and-manage-service-whitelists).
