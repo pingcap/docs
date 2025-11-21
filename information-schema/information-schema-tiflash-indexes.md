@@ -50,8 +50,8 @@ Fields in the `TIFLASH_INDEXES` table are described as follows:
 - `INDEX_ID`: the ID of the index.
 - `INDEX_KIND`: the type of index.
 - `ROWS_STABLE_INDEXED`: the number of rows in the TiFlash replica for which the Stable layer has completed index building.
-- `ROWS_STABLE_NOT_INDEXED`: the number of rows in the TiFlash replica for which the Stable layer has not yet completed index building.
+- `ROWS_STABLE_NOT_INDEXED`: the number of rows in the TiFlash replica for which the Stable layer has not completed index building.
 - `ROWS_DELTA_INDEXED`: the number of rows in the TiFlash replica for which the Delta layer has completed index building.
-- `ROWS_DELTA_NOT_INDEXED`: the number of rows in the TiFlash replica for which the Delta layer has not yet completed index building.
+- `ROWS_DELTA_NOT_INDEXED`: the number of rows in the TiFlash replica for which the Delta layer has not completed index building.
 - `ERROR_MESSAGE`: details about any unrecoverable errors encountered during index building.
 - `TIFLASH_INSTANCE`: the address of the TiFlash instance that performs the index building task.
