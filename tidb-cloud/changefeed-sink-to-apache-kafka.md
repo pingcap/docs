@@ -188,7 +188,7 @@ The steps vary depending on the connectivity method you select.
 </div>
 
 <CustomContent plan="premium">
-<div label="Private Link (Alibab Cloud)">
+<div label="Private Link (Alibaba Cloud)">
 
 1. In **Connectivity Method**, select **Private Link**.
 2. In **Private Endpoint**, select the private endpoint that you created in the [Network](#network) section. Make sure the AZs of the private endpoint match the AZs of the Kafka deployment.
