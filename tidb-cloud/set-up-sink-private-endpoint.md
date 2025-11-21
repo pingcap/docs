@@ -51,7 +51,7 @@ If your changefeed downstream service is hosted on Alibaba Cloud, collect the fo
 - The name of the Private Endpoint Service for your downstream service
 - The availability zones (AZs) where your downstream service is deployed
 
-It is necessary to whitelist TiDB Cloud's Alibaba Cloud account ID for your endpoint service to grant the TiDB Cloud VPC access.
+To grant TiDB Cloud VPC access, you must add the TiDB Cloud's Alibaba Cloud account ID to your endpoint service allowlist.
 
 If the Private Endpoint Service is not available for your downstream service, follow [Step 2. Expose the Kafka cluster as Private Link Service](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service) to set up the load balancer and the Private Link Service.
 
@@ -120,7 +120,7 @@ The configuration steps vary depending on the cloud provider where your cluster 
 
 1. On the **Networking** page, click **Create Private Endpoint** in the **Alibaba Cloud Private Endpoint for Changefeed** section.
 2. In the **Create Private Endpoint for Changefeed** dialog, enter a name for the private endpoint.
-3. Follow the reminder to  whitelist TiDB Cloud's Alibaba Cloud account ID for your endpoint service to grant the TiDB Cloud VPC access , see [Manage account IDs in the whitelist of an endpoint service](https://www.alibabacloud.com/help/en/privatelink/user-guide/add-and-manage-service-whitelists).
+3. Follow the reminder to add TiDB Cloud's Alibaba Cloud account ID to your endpoint service allowlist to grant TiDB Cloud VPC access. For more information, see [Manage account IDs in the whitelist of an endpoint service](https://www.alibabacloud.com/help/en/privatelink/user-guide/add-and-manage-service-whitelists).
 4. Enter the **Endpoint Service Name** that you collected in the [Network](#network) section.
 5. If this private endpoint is created for Apache Kafka, enable the **Advertised Listener for Kafka** option.
 6. Configure the advertised listener for Kafka using either the **TiDB Managed** domain or the **Custom** domain.
