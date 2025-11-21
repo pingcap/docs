@@ -78,7 +78,6 @@ If the Private Endpoint Service is not available for your downstream service, fo
 
 </CustomContent>
 
-
 </SimpleTab>
 
 ## Step 1. Open the Networking page for your cluster
