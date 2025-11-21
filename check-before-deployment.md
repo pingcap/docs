@@ -413,7 +413,7 @@ For TiDB in the production environment, it is recommended to optimize the operat
 
 - Choose the `performance` mode for [the cpufrequ module](/tune-operating-system.md#cpufrequency-scaling) that controls the CPU frequency dynamically. The performance is maximized when the CPU frequency is fixed at its highest supported operating frequency without dynamic adjustment.
 
-The check and configuration steps are as follows:
+The steps to check and configure these parameters are as follows:
 
 1. Execute the following command to see whether THP is enabled or disabled:
 
