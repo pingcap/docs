@@ -87,4 +87,3 @@ Fields in the `TIFLASH_SEGMENTS` table are described as follows:
 - `STABLE_DMFILES_SIZE_ON_DISK`: The disk space occupied by the DMFile in the Stable layer (in bytes).
 - `STABLE_DMFILES_PACKS`: The number of Packs in the DMFile in the Stable layer.
 - `TIFLASH_INSTANCE`: The address of the TiFlash instance.
-
