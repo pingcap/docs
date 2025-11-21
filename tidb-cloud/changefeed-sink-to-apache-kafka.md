@@ -114,7 +114,7 @@ It is **NOT** recommended to use Public IP in a production environment.
 
 Private Connect leverages **Private Link** or **Private Service Connect** technologies from cloud providers to enable resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly within your VPC.
 
-To create a private endpoint for changefeeds in your cluster, follow [Set Up Private Endpoint for Changefeeds](/tidbcloud/set-up-sink-private-endpoint/).
+To create a private endpoint for changefeeds in your cluster, follow [Set Up Private Endpoint for Changefeeds](/tidb-cloud/set-up-sink-private-endpoint.md).
 
 TiDB Cloud currently supports Private Connect only for self-hosted Kafka. It does not support direct integration with MSK, Confluent Kafka, or other Kafka SaaS services. To connect to these Kafka SaaS services via Private Connect, you can deploy a [kafka-proxy](https://github.com/grepplabs/kafka-proxy) as an intermediary, effectively exposing the Kafka service as self-hosted Kafka.
 
