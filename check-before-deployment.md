@@ -403,15 +403,15 @@ sudo systemctl enable ntpd.service
 
 For TiDB in the production environment, it is recommended to optimize the operating system configuration in the following ways:
 
-1. Refer to [Memory—transparent huge page (THP)](/tune-operating-system.md#memorytransparent-huge-page-thp) and disable THP. The memory access pattern of databases is usually sparse. When higher-order memory becomes heavily fragmented, the system experiences increased latency when allocating THPs.
-2. Refer to [I/O scheduler](/tune-operating-system.md#io-scheduler) and set the I/O Scheduler of the storage media.
+- Refer to [Memory—transparent huge page (THP)](/tune-operating-system.md#memorytransparent-huge-page-thp) to disable THP. The memory access pattern of databases is usually sparse. When higher-order memory becomes heavily fragmented, the system experiences increased latency when allocating THPs.
+- Refer to [I/O scheduler](/tune-operating-system.md#io-scheduler) to set the I/O Scheduler of the storage media.
 
     - For the high-speed SSD storage, the kernel's default I/O scheduling operations might cause performance loss. It is recommended to set the I/O Scheduler to first-in-first-out (FIFO), such as `noop` or `none`. This configuration allows the kernel to pass I/O requests directly to hardware without scheduling, thus improving performance.
     - For NVMe storage, the default I/O Scheduler is `none`, so no adjustment is needed.
 
-3. Refer to [CPU—frequency scaling](/tune-operating-system.md#cpufrequency-scaling) to choose the `performance` mode for the cpufrequ module which controls the CPU frequency. The performance is maximized when the CPU frequency is fixed at its highest supported operating frequency without dynamic adjustment.
+- Refer to [CPU—frequency scaling](/tune-operating-system.md#cpufrequency-scaling) to choose the `performance` mode for the cpufrequ module which controls the CPU frequency. The performance is maximized when the CPU frequency is fixed at its highest supported operating frequency without dynamic adjustment.
 
-Take the following steps to check the current operating system configuration and configure optimal parameters:
+The check and configuration steps are as follows:
 
 1. Execute the following command to see whether THP is enabled or disabled:
 
