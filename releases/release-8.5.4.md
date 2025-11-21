@@ -102,7 +102,7 @@ Starting from v8.5.4, TiDB aligns its behavior with MySQL when inserting data in
         | Indexed column | `BIGINT` → `INT` | 6 hours 25 minutes | 0.05 seconds | 460,000× faster |
         | Indexed column | `CHAR(120)` → `VARCHAR(60)` | 7 hours 16 minutes | 12 minutes 56 seconds | 34× faster  |
 
-        Note that the preceding results are based on the condition that that no data truncation occurs during the DDL execution.
+        Note that the preceding results are based on the condition that no data truncation occurs during the DDL execution.
 
     - Support applying the `semi_join_rewrite` hint to Semi Joins in `IN` subqueries [#58829](https://github.com/pingcap/tidb/issues/58829) @[qw4990](https://github.com/qw4990)
     - Optimize the estimation strategy when the `tidb_opt_ordering_index_selectivity_ratio` system variable takes effect [#62817](https://github.com/pingcap/tidb/issues/62817) @[terry1purcell](https://github.com/terry1purcell)
