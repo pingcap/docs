@@ -134,7 +134,6 @@ The configuration steps vary depending on the cloud provider where your cluster 
 
 </CustomContent>
 
-
 <CustomContent plan="dedicated">
 
 <div label="Google Cloud">
