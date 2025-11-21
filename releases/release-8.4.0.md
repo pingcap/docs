@@ -134,7 +134,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
     In v8.4.0, this feature becomes generally available (GA). You can use the keyword `GLOBAL` to create a global index, instead of setting the system variable [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) to enable the global index feature. Starting from v8.4.0, this system variable is deprecated and is always `ON`.
 
-    For more information, see [documentation](/partitioned-table.md#global-indexes).
+    For more information, see [documentation](/global-indexes.md).
 
 * Improve query performance for cached tables in some scenarios [#43249](https://github.com/pingcap/tidb/issues/43249) @[tiancaiamao](https://github.com/tiancaiamao)
 
@@ -282,7 +282,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 |--------|------------------------------|------|
 | `log_bin` | Deleted | In v8.4.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) is removed. This variable indicates whether TiDB Binlog is used, and is deleted starting from v8.4.0. |
 | `sql_log_bin` | Deleted | In v8.4.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) is removed. This variable indicates whether to write changes to TiDB Binlog or not, and is deleted starting from v8.4.0. |
-| [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) | Deprecated | In v8.4.0, this variable is deprecated. Its value will be fixed to the default value `ON`, that is, [global index](/partitioned-table.md#global-indexes) is enabled by default. You only need to add the keyword `GLOBAL` to the corresponding column when executing `CREATE TABLE` or `ALTER TABLE` to create a global index. |
+| [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) | Deprecated | In v8.4.0, this variable is deprecated. Its value will be fixed to the default value `ON`, that is, [global index](/global-indexes.md) is enabled by default. You only need to add the keyword `GLOBAL` to the corresponding column when executing `CREATE TABLE` or `ALTER TABLE` to create a global index. |
 | [`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50) | Deprecated | In v8.4.0, this variable is deprecated. Its value will be fixed to the default value `ON`, that is, [list partitioning](/partitioned-table.md#list-partitioning) is enabled by default. |
 | [`tidb_enable_table_partition`](/system-variables.md#tidb_enable_table_partition) | Deprecated | In v8.4.0, this variable is deprecated. Its value will be fixed to the default value `ON`, that is, [table partitioning](/partitioned-table.md) is enabled by default. |
 | [`tidb_analyze_partition_concurrency`](/system-variables.md#tidb_analyze_partition_concurrency) | Modified | Changes the value range from `[1, 18446744073709551615]` to `[1, 128]`. |

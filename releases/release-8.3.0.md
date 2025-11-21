@@ -119,7 +119,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
     Starting with v8.3.0, the global index feature is released as an experimental feature. You can explicitly create a global index for a partitioned table with the keyword `Global` to remove the restriction that the unique key must use every column in the table's partitioning expression, to meet flexible business needs. Global indexes also enhance the performance of queries that do not include partition keys.
 
-    For more information, see [documentation](/partitioned-table.md#global-indexes).
+    For more information, see [documentation](/global-indexes.md).
 
 ### Reliability
 

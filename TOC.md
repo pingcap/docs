@@ -984,6 +984,7 @@
       - [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)      
       - [Comparisons between Functions and Syntax of Oracle and TiDB](/oracle-functions-to-tidb.md)
     - [Clustered Indexes](/clustered-indexes.md)
+    - [Global Indexes](/global-indexes.md)
     - [Vector Index](/vector-search/vector-search-index.md)
     - [Constraints](/constraints.md)
     - [Generated Columns](/generated-columns.md)

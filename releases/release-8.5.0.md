@@ -51,7 +51,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     <td>Instance-level plan cache allows all sessions within the same TiDB instance to share the plan cache. Compared with session-level plan cache, this feature reduces SQL compilation time by caching more execution plans in memory, decreasing overall SQL execution time. It improves OLTP performance and throughput while providing better control over memory usage and enhancing database stability.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v8.5/partitioned-table#global-indexes">Global indexes for partitioned tables</a> (GA in v8.4.0)</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.5/global-indexes">Global indexes for partitioned tables</a> (GA in v8.4.0)</td>
     <td>Global indexes can effectively improve the efficiency of retrieving non-partitioned columns, and remove the restriction that a unique key must contain the partition key. This feature extends the usage scenarios of TiDB partitioned tables, improves the performance of partitioned tables, and reduces resource consumption in certain query scenarios.</td>
   </tr>
   <tr>
