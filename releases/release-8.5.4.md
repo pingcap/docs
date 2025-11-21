@@ -96,11 +96,11 @@ Starting from v8.5.4, TiDB aligns its behavior with MySQL when inserting data in
 
         Performance improvement examples (based on a 100 GiB table benchmark):
 
-        | Scenario | Operation type | Before optimization | After optimization | Performance improvement |
+        | Scenario | Operation  | Before optimization | After optimization | Improvement |
         |----------|----------------|------------------|-----------------|------------------------|
-        | Non-indexed column | `BIGINT` → `INT` | 2 hours 34 minutes | 1 minute 5 seconds | 142× |
-        | Indexed column | `BIGINT` → `INT` | 6 hours 25 minutes | 0.05 seconds | 460,000× |
-        | Indexed column | `CHAR(120)` → `VARCHAR(60)` | 7 hours 16 minutes | 12 minutes 56 seconds | 34× |
+        | Non-indexed column | `BIGINT` → `INT` | 2 hours 34 minutes | 1 minute 5 seconds | 142× faster |
+        | Indexed column | `BIGINT` → `INT` | 6 hours 25 minutes | 0.05 seconds | 460,000× faster |
+        | Indexed column | `CHAR(120)` → `VARCHAR(60)` | 7 hours 16 minutes | 12 minutes 56 seconds | 34× faster  |
 
         Note that the preceding results are based on the condition that that no data truncation occurs during the DDL execution.
 
