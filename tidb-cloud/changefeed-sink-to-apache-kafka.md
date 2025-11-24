@@ -203,7 +203,6 @@ The steps vary depending on the connectivity method you select.
 8. Click **Next** to test the network connection. If the test succeeds, you will be directed to the next page.
 
 </div>
-
 </CustomContent>
 
 <CustomContent plan="dedicated">
