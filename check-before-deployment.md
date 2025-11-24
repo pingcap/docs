@@ -404,7 +404,7 @@ sudo systemctl enable ntpd.service
 
 For TiDB in the production environment, it is recommended to optimize the operating system configuration in the following ways:
 
-- Disable [Memory—transparent huge page (THP)](/tune-operating-system.md#memorytransparent-huge-page-thp). Database memory access is usually sparse. When higher-order memory becomes heavily fragmented, THP allocation can cause high memory allocation latency. Therefore, it is recommended to disable THP to avoid performance fluctuations.
+- Disable [transparent huge pages (THP)](/tune-operating-system.md#memorytransparent-huge-page-thp). Database memory access is usually sparse. When higher-order memory becomes heavily fragmented, THP allocation can cause high memory allocation latency. Therefore, it is recommended to disable THP to avoid performance fluctuations.
 
 - Set the [I/O scheduler](/tune-operating-system.md#io-scheduler) of the storage media.
 
