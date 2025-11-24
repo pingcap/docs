@@ -411,7 +411,7 @@ For TiDB in the production environment, it is recommended to optimize the operat
     - For the high-speed SSD storage, the kernel's default I/O scheduling operations might cause performance loss. It is recommended to set the I/O Scheduler to first-in-first-out (FIFO), such as `noop` or `none`. This configuration allows the kernel to pass I/O requests directly to hardware without scheduling, thus improving performance.
     - For NVMe storage, the default I/O Scheduler is `none`, so no adjustment is needed.
 
-- Choose the `performance` mode for [the cpufrequ module](/tune-operating-system.md#cpufrequency-scaling) that controls the CPU frequency dynamically. The performance is maximized when the CPU frequency is fixed at its highest supported operating frequency without dynamic adjustment.
+- Choose the `performance` mode for [the cpufreq module](/tune-operating-system.md#cpufrequency-scaling) that controls the CPU frequency dynamically. The performance is maximized when the CPU frequency is fixed at its highest supported operating frequency without dynamic adjustment.
 
 The steps to check and configure these parameters are as follows:
 
