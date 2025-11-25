@@ -36,6 +36,7 @@ DM supports migrating data from different sources to TiDB clusters. Based on the
 
 - For MariaDB **10.5.11 and later**, the DM **precheck fails** due to privilege name changes (for example, `BINLOG MONITOR`, `REPLICATION SLAVE ADMIN`, `REPLICATION MASTER ADMIN`). The error appears as `[code=26005] fail to check synchronization configuration` in the replication privilege, dump privilege, and dump connection number checkers.
 - You can **bypass the precheck** by adding `ignore-checking-items: ["all"]` in the DM task. See [DM precheck](/dm/dm-precheck.md) for details.
+- For MariaDB 11.4 and later you must set the [`binlog_legacy_event_pos`](https://mariadb.com/docs/server/ha-and-performance/standard-replication/replication-and-binary-log-system-variables#binlog_legacy_event_pos) variable to `OFF`.
 
 ## Target databases
 
