@@ -13,9 +13,9 @@ A common use case is range partitioning combined with local indexes, which enabl
 
 Another scenario is using hash or key partitioning to address write hotspot issues, especially in workloads relying on [`AUTO_INCREMENT` style IDs](/auto-increment.md) where sequential inserts can overload specific TiKV regions. Distributing writes across partitions helps balance workload, but similar to range partitioning, queries without partition-pruning conditions might suffer performance drawbacks again, a situation where global indexes can help.
 
-While partitioning offers clear benefits, it also presents common challenges, such as hotspots caused by newly created range partitions. To address this, TiDB provides techniques for automatic or manual region pre-splitting, ensuring balanced data distribution and avoiding bottlenecks.
+While partitioning offers clear benefits, it also presents common challenges, such as hotspots caused by newly created range partitions. To address this issue, TiDB provides solutions for automatic or manual region pre-splitting, ensuring balanced data distribution and avoiding bottlenecks.
 
-This document examines partitioned tables in TiDB from multiple angles, including query optimization, data cleanup, write scalability, and index management. Through detailed scenarios and best practices, it provides practical guidance on optimizing partitioned table design and performance tuning in TiDB.  
+This document examines partitioned tables in TiDB from multiple perspectives, including query optimization, data cleanup, write scalability, and index management. Through detailed scenarios and best practices, it provides practical guidance on optimizing partitioned table design and performance tuning in TiDB.  
 
 > **Note:** 
 >
@@ -30,13 +30,13 @@ This section describes how to improve query efficiency by the following methods:
 
 ### Partition pruning
 
-Partition pruning is an optimization technique that allows TiDB to reduce the amount of data scanned when executing queries against partitioned tables. Instead of scanning all partitions, TiDB analyzes the query's filter conditions and determines which partitions might contain relevant data, scanning only those partitions. This significantly improves query performance by reducing I/O and computation overhead.
+Partition pruning is an optimization technique that allows TiDB to reduce the amount of data scanned when executing queries against partitioned tables. Instead of scanning all partitions, TiDB analyzes filter conditions of the query and determines which partitions might contain relevant data, and scans only those partitions. This significantly improves query performance by reducing I/O and computation overhead.
 
 Partition pruning is most beneficial in scenarios where query predicates match the partitioning strategy. Common use cases include:
 
-- Time-series data queries: When data is partitioned by time ranges (for example, daily, monthly), queries restricted to a specific time period can quickly skip unrelated partitions.
-- Multi-tenant or category-based datasets: Partitioning by tenant ID or category enables queries to focus on a small subset of partitions.
-- Hybrid Transactional and Analytical Processing (HTAP): Especially for range partitioning, TiDB can leverage partition pruning in analytical workloads on TiFlash to skip irrelevant partitions and scan only the necessary subset, preventing full table scans on large datasets.
+- Time-series data queries: when data is partitioned by time ranges (for example, daily, monthly), queries restricted to a specific time period can quickly skip unrelated partitions.
+- Multi-tenant or category-based datasets: partitioning by tenant ID or category enables queries to focus on a small subset of partitions.
+- Hybrid Transactional and Analytical Processing (HTAP): especially for range partitioning, TiDB can leverage partition pruning in analytical workloads on TiFlash to skip irrelevant partitions and scan only the necessary subset, preventing full table scans on large datasets.
 
 For more use cases, see [Partition Pruning](https://docs.pingcap.com/tidb/stable/partition-pruning/).
 
@@ -54,7 +54,7 @@ The query performance of the following types of tables are evaluated:
 
 #### Test setup
 
-- The partitioned table had 365 partitions, defined by the range partitioning on a date column.
+- The partitioned table has 365 partitions, defined by the range partitioning on a date column.
 - Each matching key returns multiple rows, simulating a high-volume OLTP-style query pattern.
 - The impact of different partition counts is also evaluated to understand how partition granularity influences latency and index performance.
 
@@ -105,6 +105,8 @@ WHERE `fa`.`sid` IN (
 
 #### Test results
 
+The following table shows the test results.
+
 | Configuration | Average Query Time | Cop task for index range scan | Cop task for table lookup | Total Cop tasks | Key Takeaways |
 |---|---|---|---|---|---|
 | Non-partitioned table | 12.6 ms | 72 | 79 | 151 | Provides the best performance with the fewest Cop tasks, which is ideal for most OLTP use cases. |
@@ -116,7 +118,7 @@ Data comes from a table with 365 range partitions (for example, by date).
 - The **Average Query Time** is obtained from the `statement_summary` view.
 - The query uses a secondary index and returns 400 rows.
 
-Metrics collected:
+The following metrics are collected:
 
 - **Average Query Time**: from `statement_summary`
 - **Cop Tasks** (Index Scan + Table Lookup): from the execution plan
@@ -199,15 +201,15 @@ PARTITION BY RANGE (id) (
 The performance overhead of partitioned tables in TiDB depends significantly on the number of partitions and the type of index used.
 
 - The more partitions you have, the more severe the potential performance degradation.
-- With a smaller number of partitions, the impact might not be as noticeable, but it is still workload-dependent.
+- With a smaller number of partitions, the impact might not be noticeable, but it is still workload-dependent.
 - For local indexes, if a query does not include effective partition pruning conditions, the number of partitions directly correlates with the number of [Remote Procedure Calls (RPCs)](https://docs.pingcap.com/tidb/stable/glossary/#remote-procedure-call-rpc) triggered. This means more partitions will likely result in more RPCs, leading to higher latency.
-- For global indexes, the number of RPCs and the degree of performance regression depend on both the number of partitions involved and how many rows need to be retrieved (that is, the number of rows requiring table lookups). Note that for very large tables where data is already distributed across many Regions, accessing data through a global index may have similar performance to a non-partitioned table, as both scenarios require multiple cross-Region RPCs.
+- For global indexes, the number of RPCs and the degree of performance regression depend on both the number of partitions involved and how many rows need to be retrieved (that is, the number of rows requiring table lookups). Note that for very large tables where data is already distributed across many Regions, accessing data through a global index might have similar performance to a non-partitioned table, as both scenarios require multiple cross-Region RPCs.
 
 #### Recommendations
 
-- Avoid partitioned tables unless necessary. For most OLTP workloads, a well-indexed non-partitioned table performs better and is easier to manage.
-- If you know all queries will make use of good partition pruning (matching only a few partitions), then local indexes are a good choice.
-- If you know critical queries do not have good partition pruning (matching many partitions), then a global index is recommended.
+- Do not use partitioned tables unless necessary. For most OLTP workloads, a well-indexed non-partitioned table performs better and is easier to manage.
+- If you are sure that all queries will make use of good partition pruning (matching only a few partitions), then local indexes are a good choice.
+- If you are sure that critical queries do not have good partition pruning (matching many partitions), then a global index is recommended.
 - Use local indexes only if your main concern is DDL efficiency (such as fast `DROP PARTITION`) and the performance side effect from the partition table is acceptable.
 
 ## Facilitate bulk data deletion
