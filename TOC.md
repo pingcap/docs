@@ -154,7 +154,7 @@
     -   [インポートのベストプラクティス](/tidb-lightning/data-import-best-practices.md)
     -   移行シナリオ
         -   [Auroraからの移行](/migrate-aurora-to-tidb.md)
-        -   [MySQLから小規模データセットを移行する](/migrate-small-mysql-to-tidb.md)
+        -   [MySQLから小規模なデータセットを移行する](/migrate-small-mysql-to-tidb.md)
         -   [MySQLから大規模なデータセットを移行する](/migrate-large-mysql-to-tidb.md)
         -   [小規模データセットの MySQL シャードの移行とマージ](/migrate-small-mysql-shards-to-tidb.md)
         -   [大規模データセットの MySQL シャードの移行とマージ](/migrate-large-mysql-shards-to-tidb.md)
@@ -198,7 +198,7 @@
             -   [TiCDC クラシックアーキテクチャ](/ticdc/ticdc-classic-architecture.md)
         -   [TiCDC データレプリケーション機能](/ticdc/ticdc-data-replication-capabilities.md)
         -   [TiCDC サーバー構成](/ticdc/ticdc-server-config.md)
-        -   [TiCDC Changefeedフィード構成](/ticdc/ticdc-changefeed-config.md)
+        -   [TiCDC Changefeed構成](/ticdc/ticdc-changefeed-config.md)
         -   [TiCDC クライアント認証](/ticdc/ticdc-client-authentication.md)
         -   [単一行データのデータ整合性検証](/ticdc/ticdc-integrity-check.md)
         -   [上流および下流 TiDB クラスタのデータ整合性検証](/ticdc/ticdc-upstream-downstream-check.md)
@@ -259,7 +259,7 @@
                 -   [バッチテーブル作成](/br/br-batch-create-table.md)
                 -   [チェックポイントバックアップ](/br/br-checkpoint-backup.md)
                 -   [チェックポイントの復元](/br/br-checkpoint-restore.md)
-            -   [DumplingとTiDB Lightning を使用してデータをバックアップおよび復元する](/backup-and-restore-using-dumpling-lightning.md)
+            -   [DumplingとTiDB Lightningを使用してデータをバックアップおよび復元する](/backup-and-restore-using-dumpling-lightning.md)
             -   [RawKVのバックアップと復元](/br/rawkv-backup-and-restore.md)
             -   [増分バックアップと復元](/br/br-incremental-guide.md)
     -   クラスタ災害復旧（DR）
@@ -554,12 +554,12 @@
         -   [アーキテクチャ](/dm/dm-arch.md)
         -   [クイックスタート](/dm/quick-start-with-dm.md)
         -   [ベストプラクティス](/dm/dm-best-practices.md)
-        -   DMクラスターをデプロイ
+        -   DMクラスタをデプロイ
             -   [ハードウェアおよびソフトウェアの要件](/dm/dm-hardware-and-software-requirements.md)
             -   [TiUPを使用する（推奨）](/dm/deploy-a-dm-cluster-using-tiup.md)
             -   [TiUPをオフラインで使用する](/dm/deploy-a-dm-cluster-using-tiup-offline.md)
             -   [バイナリを使用する](/dm/deploy-a-dm-cluster-using-binary.md)
-            -   [Kubernetesを使用する](https://docs.pingcap.com/tidb-in-kubernetes/dev/deploy-tidb-dm)
+            -   [Kubernetesを使用する](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/deploy-tidb-dm)
         -   チュートリアル
             -   [データソースを作成する](/dm/quick-start-create-source.md)
             -   [データソースの管理](/dm/dm-manage-source.md)
@@ -569,7 +569,7 @@
             -   [ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)
             -   [Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)
             -   [SQL 式を使用して DML をフィルタリングする](/dm/feature-expression-filter.md)
-            -   [オンラインDDLツールのサポート](/dm/dm-online-ddl-tool-support.md)
+            -   [オンライン DDL ツールのサポート](/dm/dm-online-ddl-tool-support.md)
             -   [暗号化と復号化のための秘密鍵をカスタマイズする](/dm/dm-customized-secret-key.md)
             -   データ移行タスクの管理
                 -   [タスクを事前チェックする](/dm/dm-precheck.md)
@@ -644,7 +644,7 @@
             -   [リリースノート](/dm/dm-release-notes.md)
     -   TiDB Lightning
         -   [概要](/tidb-lightning/tidb-lightning-overview.md)
-        -   [`IMPORT INTO`とTiDB Lightning の比較](/tidb-lightning/import-into-vs-tidb-lightning.md)
+        -   [`IMPORT INTO`とTiDB Lightning](/tidb-lightning/import-into-vs-tidb-lightning.md)
         -   [TiDB Lightningと`IMPORT INTO`と TiCDC およびログバックアップとの互換性](/tidb-lightning/tidb-lightning-compatibility-and-scenarios.md)
         -   [始める](/get-started-with-tidb-lightning.md)
         -   [TiDB Lightningをデプロイ](/tidb-lightning/deploy-tidb-lightning.md)
@@ -1053,6 +1053,7 @@
                 -   [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)
                 -   [`TIDB_SERVERS_INFO`](/information-schema/information-schema-tidb-servers-info.md)
                 -   [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
+                -   [`TIFLASH_INDEXES`](/information-schema/information-schema-tiflash-indexes.md)
                 -   [`TIFLASH_REPLICA`](/information-schema/information-schema-tiflash-replica.md)
                 -   [`TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md)
                 -   [`TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)

@@ -59,7 +59,7 @@ TiDBが<customcontent plan="dedicated">クラスタ</customcontent><customconten
 
 -   Private Connect: VPC CIDR の競合を回避し、セキュリティ コンプライアンスを満たすのに最適ですが、追加の[プライベートデータリンクコスト](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost)発生します。
 -   VPC ピアリング: コスト効率の高いオプションとして適していますが、潜在的な VPC CIDR の競合とセキュリティ上の考慮事項を管理する必要があります。
--   パブリック IP: 簡単なセットアップに適しています。
+-   パブリック IP: 素早いセットアップに適しています。
 
 <CustomContent plan="dedicated">
 
@@ -114,6 +114,8 @@ Apache Kafka サービスにパブリック IP アクセスを提供する場合
 <div label="Private Connect">
 
 Private Connect は、クラウド プロバイダーの**Private Link**または**Private Service Connect**テクノロジーを活用して、VPC 内のリソースが、それらのサービスが VPC 内で直接ホストされているかのように、プライベート IP アドレスを使用して他の VPC 内のサービスに接続できるようにします。
+
+TiDB Cloud Premium インスタンスで changefeeds のプライベート エンドポイントを作成するには、 [Changefeeds のプライベート エンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)従います。
 
 TiDB Cloudは現在、セルフホスト型KafkaのPrivate Connectのみをサポートしています。MSK、Confluent Kafka、その他のKafka SaaSサービスとの直接統合はサポートしていません。これらのKafka SaaSサービスにPrivate Connect経由で接続するには、 [kafkaプロキシ](https://github.com/grepplabs/kafka-proxy)を仲介としてデプロイし、Kafkaサービスをセルフホスト型Kafkaとして公開します。
 
@@ -187,11 +189,26 @@ TiDB Cloud変更フィードが Apache Kafka にデータをストリーミン�
 6.  この変更フィード内のデータの**圧縮**タイプを選択します。
 7.  Kafka で TLS 暗号化が有効になっていて、Kafka 接続に TLS 暗号化を使用する場合は、 **TLS 暗号化**オプションを有効にします。
 8.  **「次へ」**をクリックしてネットワーク接続をテストします。テストが成功すると、次のページに進みます。
-9.  TiDB Cloud は**Private Link**のエンドポイントを作成します。これには数分かかる場合があります。
-10. エンドポイントが作成されたら、クラウド プロバイダー コンソールにログインし、接続要求を承認します。
-11. [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、接続リクエストを承認したことを確認してください。TiDB TiDB Cloudは接続をテストし、テストが成功すると次のページに進みます。
 
 </div>
+
+<CustomContent plan="premium">
+<div label="Private Link (Alibaba Cloud)">
+
+1.  **[接続方法]**で**[プライベート リンク]**を選択します。
+2.  **「プライベートエンドポイント」**で、セクション[ネットワーク](#network)で作成したプライベートエンドポイントを選択します。プライベートエンドポイントのAZがKafkaデプロイメントのAZと一致していることを確認してください。
+3.  セクション[ネットワーク](#network)で取得した**ブートストラップポート**を入力してください。1つのAZにつき少なくとも1つのポートを設定することをお勧めします。複数のポートを指定する場合は、カンマ`,`で区切ることができます。
+4.  Kafka 認証構成に応じて**認証**オプションを選択します。
+
+    -   Kafka で認証が不要な場合は、デフォルトのオプション**[Disable] の**ままにしておきます。
+    -   Kafka に認証が必要な場合は、対応する認証タイプを選択し、認証用の Kafka アカウントの**ユーザー名**と**パスワード**を入力します。
+5.  **Kafka のバージョン**を選択してください。どのバージョンを使用すればよいか分からない場合は、 **Kafka v2**を使用してください。
+6.  この変更フィード内のデータの**圧縮**タイプを選択します。
+7.  Kafka で TLS 暗号化が有効になっていて、Kafka 接続に TLS 暗号化を使用する場合は、 **TLS 暗号化**オプションを有効にします。
+8.  **「次へ」**をクリックしてネットワーク接続をテストします。テストが成功すると、次のページに進みます。
+
+</div>
+</CustomContent>
 
 <CustomContent plan="dedicated">
 <div label="Private Service Connect (Google Cloud)">

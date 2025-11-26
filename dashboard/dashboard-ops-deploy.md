@@ -9,7 +9,7 @@ TiDBダッシュボードUIは、v4.0以降のバージョンのPDコンポー�
 
 > **注記：**
 >
-> TiDB v6.5.0以降およびTiDB Operator v1.4.0以降では、TiDB DashboardをKubernetes上の独立したPodとしてデプロイできます。詳細については、 [TiDB ダッシュボードをTiDB Operatorで独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently)参照してください。
+> TiDB v6.5.0以降およびTiDB Operator v1.4.0以降では、TiDB DashboardをKubernetes上の独立したPodとしてデプロイできます。詳細については、 [TiDB ダッシュボードをTiDB Operatorで独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/get-started#deploy-tidb-dashboard-independently)参照してください。
 
 標準の TiDB クラスターをデプロイする方法については、次のドキュメントを参照してください。
 
@@ -43,7 +43,7 @@ TiUPを使用してデプロイされた実行中のクラスターの場合、 
 tiup cluster display CLUSTER_NAME --dashboard
 ```
 
-出力例は次のとおりです。
+サンプル出力は次のとおりです。
 
 ```bash
 http://192.168.0.123:2379/dashboard/
@@ -73,7 +73,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u http://127.0.0.1:2379 config set dashboard-add
 上記のコマンドでは、
 
 -   `127.0.0.1:2379`任意の PD インスタンスの IP とポートに置き換えます。
--   `9.9.9.9:2379` 、TiDB ダッシュボード サービスを実行する新しい PD インスタンスの IP とポートに置き換えます。
+-   `9.9.9.9:2379` TiDB ダッシュボード サービスを実行する新しい PD インスタンスの IP とポートに置き換えます。
 
 変更が有効になっているかどうかを確認するには、 `tiup cluster display`コマンドを使用します ( `CLUSTER_NAME`クラスター名に置き換えます)。
 
@@ -87,13 +87,13 @@ tiup cluster display CLUSTER_NAME --dashboard
 
 ## TiDBダッシュボードを無効にする {#disable-tidb-dashboard}
 
-TiUPを使用してデプロイされた実行中のクラスターの場合は、 `tiup ctl:v<CLUSTER_VERSION> pd`コマンドを使用して、すべての PD インスタンス上の TiDB ダッシュボードを無効にします ( `127.0.0.1:2379`任意の PD インスタンスの IP とポートに置き換えます)。
+TiUPを使用してデプロイされた実行中のクラスターの場合は、 `tiup ctl:v<CLUSTER_VERSION> pd`コマンドを使用して、すべての PD インスタンスで TiDB ダッシュボードを無効にします ( `127.0.0.1:2379`任意の PD インスタンスの IP とポートに置き換えます)。
 
 ```bash
 tiup ctl:v<CLUSTER_VERSION> pd -u http://127.0.0.1:2379 config set dashboard-address none
 ```
 
-TiDB ダッシュボードを無効にすると、どの PD インスタンスが TiDB ダッシュボード サービスを提供しているかのチェックが失敗します。
+TiDB ダッシュボードを無効にすると、どの PD インスタンスが TiDB ダッシュボード サービスを提供しているかの確認が失敗します。
 
     Error: TiDB Dashboard is disabled
 
@@ -121,7 +121,7 @@ TiDBダッシュボードを提供するPDインスタンスを手動で指定�
 >
 > 新しく有効になった TiDB ダッシュボード インスタンスが、TiDB ダッシュボードを提供していた以前のインスタンスと異なる場合、Key Visualize 履歴や検索履歴など、以前の TiDB ダッシュボード インスタンスに保存されたローカル データは失われます。
 
-## 次は何？ {#what-s-next}
+## 次は何か {#what-s-next}
 
 -   TiDB ダッシュボード UI にアクセスしてログインする方法については、 [TiDBダッシュボードにアクセスする](/dashboard/dashboard-access.md)参照してください。
 

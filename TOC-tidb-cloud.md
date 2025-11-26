@@ -325,7 +325,7 @@
         -   [アイデンティティアクセス管理](/tidb-cloud/manage-user-access.md)
         -   [OAuth 2.0](/tidb-cloud/oauth2.md)
     -   ネットワークアクセス制御
-        -   [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)
+        -   [IPアクセスリストを構成する](/tidb-cloud/configure-ip-access-list.md)
         -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md)
         -   [Azure のプライベート エンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
         -   [プライベートエンドポイント経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
@@ -660,6 +660,7 @@
             -   [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)
             -   [`TIDB_SERVERS_INFO`](/information-schema/information-schema-tidb-servers-info.md)
             -   [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
+            -   [`TIFLASH_INDEXES`](/information-schema/information-schema-tiflash-indexes.md)
             -   [`TIFLASH_REPLICA`](/information-schema/information-schema-tiflash-replica.md)
             -   [`TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md)
             -   [`TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)
@@ -757,7 +758,7 @@
             -   [Lark経由でサポートチケットとやり取りする](/tidb-cloud/connected-lark-ticket-interaction.md)
     -   [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)
 -   よくある質問
-    -   [TiDB Cloudに関するよくある質問](/tidb-cloud/tidb-cloud-faq.md)
+    -   [TiDB Cloudよくある質問](/tidb-cloud/tidb-cloud-faq.md)
 
 ## リリース {#releases}
 

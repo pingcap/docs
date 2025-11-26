@@ -13,7 +13,7 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 > **ヒント：**
 >
-> 構成項目の値を調整する必要がある場合は、 [設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
+> PD 初期化後に設定項目の値を調整する必要がある場合は、 [設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)と[PD Controlユーザー ガイド](/pd-control.md)を参照してください。
 
 ### <code>name</code> {#code-name-code}
 
@@ -36,14 +36,14 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 -   クライアントがPDにアクセスするためのアドバタイズURLのリスト
 -   デフォルト値: `"${client-urls}"`
--   Docker または NAT ネットワーク環境などの状況では、クライアントが PD によってリッスンされるデフォルトのクライアント URL を通じて PD にアクセスできない場合は、アドバタイズ クライアント URL を手動で設定する必要があります。
--   例えば、Dockerの内部IPアドレスは`172.17.0.1` 、ホストのIPアドレスは`192.168.100.113` 、ポートマッピングは`-p 2380:2380`に設定されています。この場合、 `advertise-client-urls`を`"http://192.168.100.113:2380"`に設定できます。クライアントは`"http://192.168.100.113:2380"`を通じてこのサービスを見つけられます。
+-   Docker または NAT ネットワーク環境などの状況では、クライアントが PD がリッスンするデフォルトのクライアント URL を通じて PD にアクセスできない場合は、アドバタイズ クライアント URL を手動で設定する必要があります。
+-   例えば、Dockerの内部IPアドレスは`172.17.0.1` 、ホストのIPアドレスは`192.168.100.113` 、ポートマッピングは`-p 2380:2380`に設定されています。この場合、 `advertise-client-urls`を`"http://192.168.100.113:2380"`に設定できます。クライアントは`"http://192.168.100.113:2380"`を通じてこのサービスを見つけます。
 
 ### <code>peer-urls</code> {#code-peer-urls-code}
 
 -   PDノードがリッスンするピアURLのリスト
 -   デフォルト値: `"http://127.0.0.1:2380"`
--   クラスターをデプロイする際は、現在のホストのIPアドレスを`peer-urls` （例： `"http://192.168.100.113:2380"`に指定する必要があります。クラスターがDocker上で実行される場合は、DockerのIPアドレスを`"http://0.0.0.0:2380"`に指定してください。
+-   クラスターをデプロイする際は、現在のホストのIPアドレスを`peer-urls` （例： `"http://192.168.100.113:2380"` ）に指定する必要があります。クラスターがDocker上で実行される場合は、DockerのIPアドレスを`"http://0.0.0.0:2380"`に指定してください。
 
 ### <code>advertise-peer-urls</code> {#code-advertise-peer-urls-code}
 
@@ -70,17 +70,17 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 -   ブートストラップフェーズ中に異なるクラスターを識別する
 -   デフォルト値: `"pd-cluster"`
--   同じ構成のノードを持つ複数のクラスターが連続してデプロイされる場合は、異なるクラスター ノードを分離するために異なるトークンを指定する必要があります。
+-   同じ構成のノードを持つ複数のクラスターが連続してデプロイされる場合、異なるクラスター ノードを分離するために異なるトークンを指定する必要があります。
 
 ### <code>lease</code> {#code-lease-code}
 
 -   PDLeaderキーリースのタイムアウト。タイムアウト後、システムはLeaderを再選出します。
 -   デフォルト値: v8.5.2 以降では、デフォルト値は`5`です。v8.5.2 より前では、デフォルト値は`3`です。
--   単位：秒
+-   単位: 秒
 
 ### <code>quota-backend-bytes</code> {#code-quota-backend-bytes-code}
 
--   メタ情報データベースのstorageサイズ（デフォルトでは8GiB）
+-   メタ情報データベースのstorageサイズはデフォルトで8GiBです
 -   デフォルト値: `8589934592`
 
 ### <code>auto-compaction-mod</code> {#code-auto-compaction-mod-code}
@@ -91,7 +91,7 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 ### <code>auto-compaction-retention</code> {#code-auto-compaction-retention-code}
 
--   `auto-compaction-retention`が`periodic`場合、メタ情報データベースの自動圧縮間隔。圧縮モードが`revision`に設定されている場合、このパラメータは自動圧縮のバージョン番号を示します。
+-   `auto-compaction-retention`が`periodic`の場合、メタ情報データベースの自動圧縮の間隔。圧縮モードが`revision`に設定されている場合、このパラメータは自動圧縮のバージョン番号を示します。
 -   デフォルト値: 1時間
 
 ### <code>tick-interval</code> {#code-tick-interval-code}
@@ -101,25 +101,25 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 ### <code>election-interval</code> {#code-election-interval-code}
 
--   etcdの`election-timeout`設定項目に相当します。PDノードに組み込まれたetcdインスタンスの選出タイムアウトを制御します。etcdインスタンスがこの期間内に他のetcdインスタンスから有効なハートビートを受信しない場合、 Raft選出を開始します。
+-   etcdの`election-timeout`の設定項目に相当します。PDノードに組み込まれたetcdインスタンスの選出タイムアウトを制御します。etcdインスタンスがこの期間内に他のetcdインスタンスから有効なハートビートを受信しない場合、 Raft選出を開始します。
 -   デフォルト値: `3000ms`
--   この値は[`tick-interval`](#tick-interval) 5倍以上でなければなりません。例えば、 `tick-interval`が`500ms`場合、 `election-interval` `2500ms`以上でなければなりません。
+-   この値は[`tick-interval`](#tick-interval)の5倍以上でなければなりません。例えば、 `tick-interval`が`500ms`場合、 `election-interval` `2500ms`以上でなければなりません。
 
 ### <code>enable-prevote</code> {#code-enable-prevote-code}
 
--   etcdの`pre-vote`設定項目に相当します。PDノードに組み込まれたetcdがRaft事前投票を有効にするかどうかを制御します。有効にすると、etcdは追加の選挙フェーズを実行し、選挙に勝つのに十分な票数を得られるかどうかを確認します。これにより、サービスの中断を最小限に抑えることができます。
+-   etcdの`pre-vote`の設定項目に相当します。PDノードに組み込まれたetcdがRaft事前投票を有効にするかどうかを制御します。有効にすると、etcdは追加の選挙フェーズを実行し、選挙に勝つのに十分な票数を得られるかどうかを確認します。これにより、サービスの中断を最小限に抑えることができます。
 -   デフォルト値: `true`
 
 ### <code>force-new-cluster</code> {#code-force-new-cluster-code}
 
--   PDを強制的に新しいクラスタとして起動し、 Raftメンバーの数を`1`に変更するかどうかを決定します。
+-   PDを強制的に新しいクラスターとして起動し、 Raftメンバーの数を`1`に変更するかどうかを決定します。
 -   デフォルト値: `false`
 
 ### <code>tso-update-physical-interval</code> {#code-tso-update-physical-interval-code}
 
 -   PD が TSO の物理時間を更新する間隔。
 -   TSO物理時間のデフォルトの更新間隔では、PDは最大262144個のTSOを提供します。より多くのTSOを取得するには、この設定項目の値を減らしてください。最小値は`1ms`です。
--   この設定項目を減らすと、PDのCPU使用率が増加する可能性があります。テストによると、間隔が`50ms`の場合と比較して、間隔が`1ms`の場合、PDのCPU [CPU使用率](https://man7.org/linux/man-pages/man1/top.1.html)で約10%増加します。
+-   この設定項目を減らすと、PDのCPU使用率が増加する可能性があります。テストによると、間隔が`50ms`の場合と比較して、間隔が`1ms`場合、PDの[CPU使用率](https://man7.org/linux/man-pages/man1/top.1.html)約10%増加します。
 -   デフォルト値: `50ms`
 -   最小値: `1ms`
 
@@ -133,7 +133,7 @@ pd-server関連のコンフィグレーション項目
 >
 > この設定は実験的機能です。本番環境での使用は推奨されません。
 
--   PDインスタンスのメモリ制限比率。値`0`メモリ制限がないことを意味します。
+-   PDインスタンスのメモリ制限比率。値`0`はメモリ制限がないことを意味します。
 -   デフォルト値: `0`
 -   最小値: `0`
 -   最大値: `0.99`
@@ -144,7 +144,7 @@ pd-server関連のコンフィグレーション項目
 >
 > この設定は実験的機能です。本番環境での使用は推奨されません。
 
--   PDがGCをトリガーしようとする閾値比率。PDのメモリ使用量が`server-memory-limit` × `server-memory-limit-gc-trigger`の値に達すると、PDはGolang GCをトリガーします。1分間にトリガーされるGCは1回のみです。
+-   PDがGCをトリガーしようとする閾値比率。PDのメモリ使用量が`server-memory-limit` × `server-memory-limit-gc-trigger`の値に達すると、PDはGolang GCをトリガーします。1分間にGCがトリガーされるのは1回のみです。
 -   デフォルト値: `0.7`
 -   最小値: `0.5`
 -   最大値: `0.99`
@@ -172,22 +172,22 @@ pd-server関連のコンフィグレーション項目
 ### <code>flow-round-by-digit</code> <span class="version-mark">TiDB 5.1 の新機能</span> {#code-flow-round-by-digit-code-span-class-version-mark-new-in-tidb-5-1-span}
 
 -   デフォルト値: 3
--   PDはフロー番号の最下位桁を丸めることで、リージョンフロー情報の変更に伴う統計情報の更新を削減します。この設定項目は、リージョンフロー情報の最小桁数を指定します。例えば、フロー`100512`デフォルト値が`3`であるため、 `101000`に丸められます。この設定により、 `trace-region-flow`置き換えられます。
+-   PDはフロー番号の最下位桁を丸めることで、リージョンフロー情報の変更に伴う統計情報の更新を削減します。この設定項目は、リージョンフロー情報の最小桁数を指定します。例えば、フロー`100512`はデフォルト値が`3`であるため、 `101000`に丸められます。この設定は`trace-region-flow`置き換えます。
 
 > **注記：**
 >
-> クラスターをTiDB 4.0バージョンから現在のバージョンにアップグレードした場合、アップグレード後の`flow-round-by-digit`の動作とアップグレード前の`trace-region-flow`の動作はデフォルトで一致します。つまり、アップグレード前の`trace-region-flow`の値がfalseの場合、アップグレード後の`flow-round-by-digit`の値は127になります。アップグレード前の`trace-region-flow`の値が`true`の場合、アップグレード後の`flow-round-by-digit`の値は`3`なります。
+> クラスターをTiDB 4.0バージョンから現在のバージョンにアップグレードした場合、アップグレード後の`flow-round-by-digit`の動作とアップグレード前の`trace-region-flow`の動作はデフォルトで一致します。つまり、アップグレード前の`trace-region-flow`の値がfalseの場合、アップグレード後の`flow-round-by-digit`の値は127になります。アップグレード前の`trace-region-flow`の値が`true`の場合、アップグレード後の`flow-round-by-digit`の値は`3`になります。
 
-### <code>min-resolved-ts-persistence-interval</code><span class="version-mark">バージョン6.0.0の新機能</span> {#code-min-resolved-ts-persistence-interval-code-span-class-version-mark-new-in-v6-0-0-span}
+### <code>min-resolved-ts-persistence-interval</code> <span class="version-mark">6.0.0の新機能</span> {#code-min-resolved-ts-persistence-interval-code-span-class-version-mark-new-in-v6-0-0-span}
 
--   PDに最小解決タイムスタンプが保持される間隔を決定します。この値が`0`に設定されている場合、保持は無効になります。
+-   PDに最小解決タイムスタンプが保持される間隔を決定します。この値が`0`に設定されている場合、保持は無効です。
 -   デフォルト値: v6.3.0 より前のバージョンでは、デフォルト値は`"0s"`です。v6.3.0 以降では、デフォルト値は`"1s"` （最小の正の値）です。
 -   最小値: `0`
--   単位：秒
+-   単位: 秒
 
 > **注記：**
 >
-> v6.0.0～v6.2.0からアップグレードされたクラスターの場合、デフォルト値の`min-resolved-ts-persistence-interval`アップグレード後も変更されず、 `"0s"`ままとなります。この機能を有効にするには、この設定項目の値を手動で変更する必要があります。
+> v6.0.0～v6.2.0からアップグレードされたクラスターの場合、デフォルト値の`min-resolved-ts-persistence-interval`はアップグレード後も変更されず、 `"0s"`ままとなります。この機能を有効にするには、この設定項目の値を手動で変更する必要があります。
 
 ## 安全 {#security}
 
@@ -211,7 +211,7 @@ pd-server関連のコンフィグレーション項目
 ### <code>redact-info-log</code><span class="version-mark">バージョン5.0の新機能</span> {#code-redact-info-log-code-span-class-version-mark-new-in-v5-0-span}
 
 -   PDログでログ編集を有効にするかどうかを制御します
--   `true` `"marker"` : `false`
+-   オプション`true` `"marker"` `false`
 -   デフォルト値: `false`
 -   使用方法の詳細については、 [PD側でのログ編集](/log-redaction.md#log-redaction-in-pd-side)参照してください。
 
@@ -222,7 +222,7 @@ pd-server関連のコンフィグレーション項目
 ### <code>level</code> {#code-level-code}
 
 -   出力ログのレベルを指定します
--   `"warn"` `"fatal"` `"error"` `"debug"` `"info"`
+-   `"fatal"` `"error"` `"warn"` `"debug"` `"info"`
 -   デフォルト値: `"info"`
 
 ### <code>format</code> {#code-format-code}
@@ -281,7 +281,7 @@ pd-server関連のコンフィグレーション項目
 
 ### <code>max-merge-region-size</code> {#code-max-merge-region-size-code}
 
--   サイズ制限を`Region Merge`に制御します。リージョンサイズが指定された値より大きい場合、PD はリージョンを隣接する領域と結合しません。
+-   `Region Merge`のサイズ制限を制御します。リージョンのサイズが指定された値より大きい場合、PD はリージョンを隣接する領域と結合しません。
 -   デフォルト値: `54` 。v8.4.0より前のバージョンでは、デフォルト値は`20`です。v8.4.0以降では、デフォルト値は`54`です。
 -   単位: MiB
 
@@ -311,7 +311,7 @@ pd-server関連のコンフィグレーション項目
 
 ### <code>max-movable-hot-peer-size</code> <span class="version-mark">v6.1.0 の新機能</span> {#code-max-movable-hot-peer-size-code-span-class-version-mark-new-in-v6-1-0-span}
 
--   ホットリージョンスケジューリングにスケジュールできる最大リージョンサイズを制御します。
+-   ホットリージョンスケジュールにスケジュールできる最大リージョンサイズを制御します。
 -   デフォルト値: `512`
 -   単位: MiB
 
@@ -330,9 +330,9 @@ pd-server関連のコンフィグレーション項目
 -   PDが切断されたストアを復旧不可能と判断するまでのダウンタイム。指定された時間内にストアからのハートビートを受信できない場合、PDは他のノードにレプリカを追加します。
 -   デフォルト値: `30m`
 
-### <code>max-store-preparing-time</code><span class="version-mark">バージョン6.1.0の新機能</span> {#code-max-store-preparing-time-code-span-class-version-mark-new-in-v6-1-0-span}
+### <code>max-store-preparing-time</code> <span class="version-mark">v6.1.0 の新機能</span> {#code-max-store-preparing-time-code-span-class-version-mark-new-in-v6-1-0-span}
 
--   ストアがオンラインになるまでの最大待機時間を制御します。ストアがオンライン段階にある間、PDはストアのオンライン進行状況を照会できます。指定された時間を超えると、PDはストアがオンラインになったとみなし、再度ストアのオンライン進行状況を照会できなくなります。ただし、これによってリージョンが新しいオンラインストアに移行できなくなるわけではありません。ほとんどの場合、このパラメータを調整する必要はありません。
+-   ストアがオンラインになるまでの最大待機時間を制御します。ストアがオンライン状態の間、PDはストアのオンライン進行状況を照会できます。指定された時間を超えると、PDはストアがオンライン状態になったとみなし、再度ストアのオンライン進行状況を照会できなくなります。ただし、これによってリージョンが新しいオンラインストアに移行するのが妨げられることはありません。ほとんどの場合、このパラメータを調整する必要はありません。
 -   デフォルト値: `48h`
 
 ### <code>leader-schedule-limit</code> {#code-leader-schedule-limit-code}
@@ -345,19 +345,19 @@ pd-server関連のコンフィグレーション項目
 -   同時に実行されるリージョンスケジュールタスクの数
 -   デフォルト値: `2048`
 
-### <code>enable-diagnostic</code><span class="version-mark">バージョン6.3.0の新機能</span> {#code-enable-diagnostic-code-span-class-version-mark-new-in-v6-3-0-span}
+### <code>enable-diagnostic</code> <span class="version-mark">6.3.0の新機能</span> {#code-enable-diagnostic-code-span-class-version-mark-new-in-v6-3-0-span}
 
--   診断機能を有効にするかどうかを制御します。有効にすると、PDは診断を支援するためにスケジューリング中の状態を記録します。有効にすると、スケジューリング速度に若干影響し、ストア数が多い場合にメモリ消費量が増加する可能性があります。
+-   診断機能を有効にするかどうかを制御します。有効にすると、PDは診断を支援するためにスケジューリング中の状態を記録します。有効にすると、スケジューリング速度に若干影響し、ストア数が多い場合にメモリ消費量が増える可能性があります。
 -   デフォルト値: バージョン7.1.0以降、デフォルト値は`false`から`true`に変更されます。クラスターをバージョン7.1.0より前のバージョンからバージョン7.1.0以降にアップグレードした場合、デフォルト値は変更されません。
 
 ### <code>hot-region-schedule-limit</code> {#code-hot-region-schedule-limit-code}
 
--   同時に実行されているホットなリージョンスケジューリングタスクを制御します。リージョンスケジューリングとは独立しています。
+-   同時に実行されているホットなリージョンスケジューリングタスクを制御します。これはリージョンスケジューリングとは独立しています。
 -   デフォルト値: `4`
 
 ### <code>hot-region-cache-hits-threshold</code> {#code-hot-region-cache-hits-threshold-code}
 
--   ホットリージョンを識別するために必要な分数を設定するために使用されるしきい値。PD は、リージョンがこの分数を超えてホットスポット状態になった後にのみ、ホットスポット スケジューリングに参加できます。
+-   ホットリージョンを識別するために必要な分数を設定するために使用されるしきい値。PD は、リージョンがこの分数を超えてホットスポット状態になった場合にのみ、ホットスポット スケジューリングに参加できます。
 -   デフォルト値: `3`
 
 ### <code>replica-schedule-limit</code> {#code-replica-schedule-limit-code}
@@ -397,7 +397,7 @@ pd-server関連のコンフィグレーション項目
 
 ### <code>region-score-formula-version</code> <span class="version-mark">v5.0 の新機能</span> {#code-region-score-formula-version-code-span-class-version-mark-new-in-v5-0-span}
 
--   リージョンスコアの計算式のバージョンを制御します
+-   リージョンスコア計算式のバージョンを制御します
 -   デフォルト値: `v2`
 -   オプション値: `v1`および`v2`と比較して、v2 の変更はよりスムーズになり、スペースの再利用によって発生するスケジュールのジッターが改善されています。
 
@@ -410,10 +410,10 @@ pd-server関連のコンフィグレーション項目
 -   店舗制限の計算式のバージョンを制御します
 -   デフォルト値: `v1`
 -   値のオプション:
-    -   `v1` : v1 モードでは、 `store limit`手動で変更して、単一の TiKV のスケジュール速度を制限できます。
+    -   `v1` : v1 モードでは、 `store limit`を手動で変更して、単一の TiKV のスケジュール速度を制限できます。
     -   `v2` : v2モードでは、PDがTiKVスナップショットの機能に基づいて動的に調整するため、 `store limit`値を手動で設定する必要はありません。詳細については、 [店舗制限の原則 v2](/configure-store-limit.md#principles-of-store-limit-v2)を参照してください。
 
-### <code>enable-joint-consensus</code> <span class="version-mark">v5.0 の新機能</span> {#code-enable-joint-consensus-code-span-class-version-mark-new-in-v5-0-span}
+### <code>enable-joint-consensus</code> <span class="version-mark">5.0の新機能</span> {#code-enable-joint-consensus-code-span-class-version-mark-new-in-v5-0-span}
 
 -   レプリカのスケジュール設定にジョイントコンセンサスを使用するかどうかを制御します。この設定が無効になっている場合、PDは一度に1つのレプリカをスケジュールします。
 -   デフォルト値: `true`
@@ -437,7 +437,7 @@ pd-server関連のコンフィグレーション項目
 -   リージョンハートビートの内訳メトリクスを有効にするかどうかを制御します。これらのメトリクスは、リージョンハートビート処理の各段階で消費された時間を測定し、監視による分析を容易にします。
 -   デフォルト値: `true`
 
-### <code>enable-heartbeat-concurrent-runner</code><span class="version-mark">バージョン8.0.0の新機能</span> {#code-enable-heartbeat-concurrent-runner-code-span-class-version-mark-new-in-v8-0-0-span}
+### <code>enable-heartbeat-concurrent-runner</code><span class="version-mark">バージョン 8.0.0 の新機能</span> {#code-enable-heartbeat-concurrent-runner-code-span-class-version-mark-new-in-v8-0-0-span}
 
 -   リージョンハートビートの非同期同時処理を有効にするかどうかを制御します。有効にすると、独立したエグゼキューターがリージョンハートビートリクエストを非同期かつ同時に処理するため、ハートビート処理のスループットが向上し、レイテンシーが短縮されます。
 -   デフォルト値: `true`
@@ -448,7 +448,7 @@ pd-server関連のコンフィグレーション項目
 
 ### <code>max-replicas</code> {#code-max-replicas-code}
 
--   レプリカ数、つまりリーダーとフォロワーの数の合計です。デフォルト値の`3` 、リーダー1台とフォロワー2台を意味します。この設定が動的に変更された場合、PDはバックグラウンドでリージョンをスケジュールし、レプリカ数がこの設定と一致するようにします。
+-   レプリカの数、つまりリーダーとフォロワーの数の合計です。デフォルト値の`3` 、リーダーが1つ、フォロワーが2つであることを意味します。この設定が動的に変更されると、PDはバックグラウンドでリージョンをスケジュールし、レプリカの数がこの設定と一致するようにします。
 -   デフォルト値: `3`
 
 ### <code>location-labels</code> {#code-location-labels-code}
@@ -465,18 +465,18 @@ pd-server関連のコンフィグレーション項目
 
 ### <code>strictly-match-label</code> {#code-strictly-match-label-code}
 
--   TiKV ラベルが PD `location-labels`一致するかどうかを厳密にチェックできるようにします。
+-   TiKV ラベルが PD `location-labels`と一致するかどうかを厳密にチェックできるようにします。
 -   デフォルト値: `false`
 
 ### <code>enable-placement-rules</code> {#code-enable-placement-rules-code}
 
--   `placement-rules`有効にします。
+-   `placement-rules`を有効にします。
 -   デフォルト値: `true`
 -   [配置ルール](/configure-placement-rules.md)参照。
 
 ## <code>label-property</code> （非推奨） {#code-label-property-code-deprecated}
 
-`reject-leader`種類のみをサポートする、ラベルに関連するコンフィグレーション項目。
+ラベルに関連するコンフィグレーション項目`reject-leader`型のみをサポートします。
 
 > **注記：**
 >
@@ -514,22 +514,22 @@ pd-server関連のコンフィグレーション項目
 
 ### <code>tidb-key-path</code> {#code-tidb-key-path-code}
 
--   SSL 秘密鍵ファイルのパス。TLS を使用して TiDB の SQL サービスに接続するときに、このパスを設定できます。
+-   SSL秘密鍵ファイルのパス。TLSを使用してTiDBのSQLサービスに接続するときに、このパスを設定できます。
 -   デフォルト値: `""`
 
 ### <code>public-path-prefix</code> {#code-public-path-prefix-code}
 
 -   TiDB ダッシュボードがリバース プロキシの背後でアクセスされる場合、この項目はすべての Web リソースのパブリック URL パス プレフィックスを設定します。
 -   デフォルト値: `/dashboard`
--   リバースプロキシを経由せずにTiDBダッシュボードにアクセスする場合は、この設定項目を変更し**ないで**ください。変更すると、アクセスの問題が発生する可能性があります。詳細は[リバースプロキシの背後でTiDBダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)ご覧ください。
+-   リバースプロキシを経由せずにTiDBダッシュボードにアクセスする場合は、この設定項目を変更**しないで**ください。変更すると、アクセスの問題が発生する可能性があります。詳細は[リバースプロキシの背後で TiDB ダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)参照してください。
 
 ### <code>enable-telemetry</code> {#code-enable-telemetry-code}
 
 > **警告：**
 >
-> v8.1.0以降、TiDBダッシュボードのテレメトリ機能は削除され、この設定項目は機能しなくなりました。これは以前のバージョンとの互換性のためだけに保持されています。
+> v8.1.0以降、TiDBダッシュボードのテレメトリ機能は削除され、この設定項目は機能しなくなりました。これは以前のバージョンとの互換性のためだけに残されています。
 
--   v8.1.0 より前では、この構成項目は TiDB ダッシュボードでテレメトリ収集を有効にするかどうかを制御します。
+-   v8.1.0 より前では、この構成項目は、TiDB ダッシュボードでテレメトリ収集を有効にするかどうかを制御します。
 -   デフォルト値: `false`
 
 ## <code>replication-mode</code> {#code-replication-mode-code}
@@ -542,7 +542,7 @@ pd-server関連のコンフィグレーション項目
 
 ### <code>degraded-mode-wait-duration</code> {#code-degraded-mode-wait-duration-code}
 
--   縮退モードをトリガーするまでの待機時間。縮退モードとは、ローカルトークンバケット（LTB）とグローバルトークンバケット（GTB）が失われた場合、LTBはデフォルトのリソースグループ構成にフォールバックし、GTB認証トークンがなくなることを意味します。これにより、ネットワークの分離や異常が発生した場合でも、サービスが影響を受けないことが保証されます。
+-   縮退モードをトリガーするまでの待機時間。縮退モードとは、ローカルトークンバケット（LTB）とグローバルトークンバケット（GTB）が失われた場合、LTBがデフォルトのリソースグループ構成にフォールバックし、GTB認証トークンがなくなることを意味します。これにより、ネットワークの分離や異常が発生した場合でも、サービスが影響を受けないことが保証されます。
 -   デフォルト値: 0秒
 -   デフォルトでは、劣化モードは無効になっています。
 
@@ -564,7 +564,7 @@ pd-server関連のコンフィグレーション項目
 
 -   読み取りフローからRUへの変換の基礎係数
 -   デフォルト値: 1/(64 * 1024)
--   1 RU = 64 KiB 読み取りバイト
+-   1 RU = 64 KiB の読み取りバイト
 
 #### <code>write-cost-per-byte</code> {#code-write-cost-per-byte-code}
 

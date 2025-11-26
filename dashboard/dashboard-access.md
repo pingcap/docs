@@ -1,6 +1,6 @@
 ---
 title: Access TiDB Dashboard
-summary: TiDBダッシュボードにアクセスするには、ブラウザで指定されたURLにアクセスしてください。複数のPDインスタンスがある場合は、アドレスを任意のPDインスタンスのアドレスとポートに置き換えてください。Chrome、Firefox、またはEdgeブラウザ（最新バージョン）をご利用ください。TiDBルートアカウントまたはユーザー定義のSQLユーザーでサインインしてください。セッションは24時間有効です。言語は英語と中国語で切り替えられます。ログアウトするには、ユーザー名をクリックし、「ログアウト」ボタンをクリックしてください。
+summary: TiDBダッシュボードにアクセスするには、ブラウザで指定されたURLにアクセスしてください。複数のPDインスタンスの場合は、アドレスを任意のPDインスタンスのアドレスとポートに置き換えてください。Chrome、Firefox、またはEdgeブラウザ（最新バージョン）をご利用ください。TiDBルートアカウントまたはユーザー定義のSQLユーザーでサインインしてください。セッションは24時間有効です。言語は英語と中国語で切り替えられます。ログアウトするには、ユーザー名をクリックし、「ログアウト」ボタンをクリックしてください。
 ---
 
 # TiDBダッシュボードにアクセスする {#access-tidb-dashboard}
@@ -9,7 +9,7 @@ TiDBダッシュボードにアクセスするには、ブラウザから[http:/
 
 > **注記：**
 >
-> TiDB v6.5.0以降およびTiDB Operator v1.4.0以降では、Kubernetes上にTiDB Dashboardを独立したPodとしてデプロイできます。TiDB TiDB Operatorを使用すると、このPodのIPアドレスにアクセスしてTiDB Dashboardを起動できます。詳細は[TiDB ダッシュボードをTiDB Operatorで独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently)ご覧ください。
+> TiDB v6.5.0以降およびTiDB Operator v1.4.0以降では、Kubernetes上にTiDB Dashboardを独立したPodとしてデプロイできます。TiDB TiDB Operatorを使用すると、このPodのIPアドレスにアクセスしてTiDB Dashboardを起動できます。詳細は[TiDB ダッシュボードをTiDB Operatorで独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/get-started#deploy-tidb-dashboard-independently)参照してください。
 
 ## 複数のPDインスタンスがデプロイされている場合にTiDBダッシュボードにアクセスする {#access-tidb-dashboard-when-multiple-pd-instances-are-deployed}
 
@@ -17,7 +17,7 @@ TiDBダッシュボードにアクセスするには、ブラウザから[http:/
 
 > **注記：**
 >
-> ファイアウォールまたはリバースプロキシが設定されており、すべてのPDインスタンスに直接アクセスできない場合、TiDBダッシュボードにアクセスできない可能性があります。これは通常、ファイアウォールまたはリバースプロキシが正しく設定されていないことが原因です。複数のPDインスタンスがデプロイされている場合にファイアウォールまたはリバースプロキシを正しく設定する方法については、 [リバースプロキシの背後でTiDBダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)と[セキュリティTiDBダッシュボード](/dashboard/dashboard-ops-security.md)ご覧ください。
+> ファイアウォールまたはリバースプロキシが設定されており、すべてのPDインスタンスに直接アクセスできない場合、TiDBダッシュボードにアクセスできない可能性があります。これは通常、ファイアウォールまたはリバースプロキシが正しく設定されていないことが原因です。複数のPDインスタンスがデプロイされている場合にファイアウォールまたはリバースプロキシを正しく設定する方法については、 [リバースプロキシの背後でTiDBダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)と[セキュリティTiDBダッシュボード](/dashboard/dashboard-ops-security.md)参照してください。
 
 ## ブラウザの互換性 {#browser-compatibility}
 
@@ -37,7 +37,7 @@ TiDB ダッシュボードにアクセスすると、ユーザー ログイン �
 
 -   TiDB `root`アカウントを使用して TiDB ダッシュボードにサインインできます。
 -   TiDBダッシュボードには、シングルサインオン（SSO）経由でサインインすることもできます。詳細については、 [TiDBダッシュボードのSSOを構成する](/dashboard/dashboard-session-sso.md)ご覧ください。
--   [ユーザー定義SQLユーザー](/dashboard/dashboard-user.md)作成した場合は、このアカウントと対応するパスワードを使用してサインインできます。
+-   [ユーザー定義のSQLユーザー](/dashboard/dashboard-user.md)を作成した場合は、このアカウントと対応するパスワードを使用してサインインできます。
 
 次のいずれかの状況が存在する場合、ログインが失敗する可能性があります。
 
@@ -55,7 +55,7 @@ TiDB ダッシュボードでは次の言語がサポートされています。
 -   英語
 -   中国語（簡体字）
 
-**SQL ユーザー サインイン**ページで、**言語の**切り替えドロップダウン リストをクリックしてインターフェイス言語を切り替えることができます。
+**SQL ユーザー サインイン**ページで、**言語の切り替え**ドロップダウン リストをクリックしてインターフェイス言語を切り替えることができます。
 
 ![Switch language](/media/dashboard/dashboard-access-switch-language.png)
 

@@ -46,6 +46,10 @@ changefeed ダウンストリーム サービスが Alibaba Cloud でホスト�
 -   ダウンストリーム サービスのプライベート エンドポイント サービスの名前
 -   ダウンストリーム サービスがデプロイされているアベイラビリティ ゾーン (AZ)
 
+TiDB Cloud VPC アクセスを許可するには、TiDB Cloud の Alibaba Cloud アカウント ID をエンドポイント サービスの許可リストに追加する必要があります。
+
+ダウンストリーム サービスでプライベート エンドポイント サービスが利用できない場合は、手順[ステップ 2. Kafka クラスターをプライベート リンク サービスとして公開する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)に従ってロード バランサーとプライベート リンク サービスを設定します。
+
 </div>
 </CustomContent>
 
@@ -99,7 +103,7 @@ changefeed ダウンストリーム サービスが Alibaba Cloud でホスト�
 
 2.  **「Changefeed のプライベート エンドポイントの作成」**ダイアログで、プライベート エンドポイントの名前を入力します。
 
-3.  リマインダーに従って、エンドポイント サービスの TiDB Cloud の Alibaba Cloud アカウント ID をホワイトリストに登録し、 TiDB Cloud VPC アクセスを許可します。
+3.  リマインダーに従って、TiDB Cloud の Alibaba Cloud アカウント ID をエンドポイントサービスの許可リストに追加し、 TiDB Cloud VPC へのアクセスを許可してください。詳細については、 [エンドポイントサービスの許可リスト内のアカウントIDの管理](https://www.alibabacloud.com/help/en/privatelink/user-guide/add-and-manage-service-whitelists)ご覧ください。
 
 4.  セクション[ネットワーク](#network)で収集した**エンドポイント サービス名**を入力します。
 

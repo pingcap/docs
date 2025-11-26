@@ -27,11 +27,11 @@ TiDBはMySQLプロトコルと高い互換性がありますが、一部の機�
 
 サポートレベル:**フル**
 
-Java JDBCドライバをダウンロードして設定するには、 [MySQLドキュメント](https://dev.mysql.com/doc/connector-j/en/)手順に従ってください。TiDB v6.3.0以降では、MySQL Connector/Jの最新GAバージョンを使用することをお勧めします。
+[MySQLドキュメント](https://dev.mysql.com/doc/connector-j/en/)に従ってJava JDBCドライバをダウンロードして設定してください。TiDB v6.3.0以降では、MySQL Connector/Jの最新GAバージョンを使用することをお勧めします。
 
 > **警告：**
 >
-> MySQL Connector/J 8.0 の 8.0.31 より前のバージョンには[バグ](https://bugs.mysql.com/bug.php?id=106252)問題があり（詳細は[MySQL JDBC のバグ](/develop/dev-guide-third-party-tools-compatibility.md#mysql-jdbc-bugs)参照）、TiDB バージョン 6.3.0 より前のバージョンを使用するとスレッドがハングする可能性があります。この問題を回避するには、MySQL Connector/J 8.0.31 以前のバージョンを使用し**ない**でください。
+> MySQL Connector/J 8.0 の 8.0.31 より前のバージョンには[バグ](https://bugs.mysql.com/bug.php?id=106252)という問題があり（詳細は[MySQL JDBC のバグ](/develop/dev-guide-third-party-tools-compatibility.md#mysql-jdbc-bugs)参照）、TiDB バージョン 6.3.0 より前のバージョンを使用するとスレッドがハングする可能性があります。この問題を回避するには、MySQL Connector/J 8.0.31 以前のバージョンを使用し**ない**でください。
 
 完全なアプリケーションを構築する方法の例については、 [TiDBとJDBCを使用してシンプルなCRUDアプリを構築する](/develop/dev-guide-sample-application-java-jdbc.md)参照してください。
 
@@ -40,7 +40,7 @@ Java JDBCドライバをダウンロードして設定するには、 [MySQLド�
 
 サポートレベル:**フル**
 
-TiDB-JDBC [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j) 、MySQL 8.0.29をベースにカスタマイズされたJavaドライバです。MySQL公式バージョン8.0.29をベースにコンパイルされたTiDB-JDBCは、元のJDBCにおける準備モードにおける複数パラメータおよび複数フィールドのEOFのバグを修正し、TiCDCスナップショットの自動メンテナンスやSM3認証プラグインなどの機能を追加しています。
+TiDB-JDBC [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j)は、MySQL 8.0.29をベースにカスタマイズされたJavaドライバです。MySQL公式バージョン8.0.29をベースにコンパイルされたTiDB-JDBCは、元のJDBCにおける準備モードにおける複数パラメータおよび複数フィールドのEOFのバグを修正し、TiCDCスナップショットの自動メンテナンスやSM3認証プラグインなどの機能を追加しています。
 
 SM3 に基づく認証は、TiDB の TiDB-JDBC でのみサポートされます。
 
@@ -50,7 +50,7 @@ Maven を使用している場合は、 `pom.xml`ファイルの`<dependencies><
 <dependency>
   <groupId>io.github.lastincisor</groupId>
   <artifactId>mysql-connector-java</artifactId>
-  <version>8.0.29-tidb-1.0.0</version>
+  <version>8.0.29-tidb-1.0.2</version>
 </dependency>
 ```
 
@@ -60,7 +60,7 @@ SM3 認証を有効にする必要がある場合は、 `pom.xml`ファイルの
 <dependency>
   <groupId>io.github.lastincisor</groupId>
   <artifactId>mysql-connector-java</artifactId>
-  <version>8.0.29-tidb-1.0.0</version>
+  <version>8.0.29-tidb-1.0.2</version>
 </dependency>
 <dependency>
     <groupId>org.bouncycastle</groupId>
@@ -77,7 +77,7 @@ SM3 認証を有効にする必要がある場合は、 `pom.xml`ファイルの
 Gradle を使用する場合は、次の内容を`dependencies`に追加します。
 
 ```gradle
-implementation group: 'io.github.lastincisor', name: 'mysql-connector-java', version: '8.0.29-tidb-1.0.0'
+implementation group: 'io.github.lastincisor', name: 'mysql-connector-java', version: '8.0.29-tidb-1.0.2'
 implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.67'
 implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67'
 ```
@@ -92,13 +92,13 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 
 > **注記：**
 >
-> -   現在、Hibernate は[ネストされたトランザクションをサポートしていない](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres)実行します。
+> -   現在、Hibernate は[ネストされたトランザクションをサポートしていません](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres)実行します。
 >
 > -   TiDBはv6.2.0以降、 [セーブポイント](/sql-statements/sql-statement-savepoint.md)サポートしています。5 `@Transactional` `Propagation.NESTED`トランザクション伝播オプションを使用するには、つまり`@Transactional(propagation = Propagation.NESTED)`設定するには、TiDBがv6.2.0以降であることを確認してください。
 
 サポートレベル:**フル**
 
-アプリケーション内の異なる依存関係間の複雑な関係を手動で管理する手間を省くため、 [グラドル](https://gradle.org/install)または[メイヴン](https://maven.apache.org/install.html)使用することで、間接的な依存関係も含め、アプリケーションのすべての依存関係を取得できます。なお、TiDB 方言は Hibernate `6.0.0.Beta2`以降でのみサポートされています。
+アプリケーションの異なる依存関係間の複雑な関係を手動で管理する手間を省くため、 [グラドル](https://gradle.org/install)または[メイヴン](https://maven.apache.org/install.html)を使用して、間接的な依存関係も含め、アプリケーションのすべての依存関係を取得できます。なお、TiDB 方言は Hibernate `6.0.0.Beta2`以降でのみサポートされています。
 
 Maven を使用している場合は、 `<dependencies></dependencies>`に以下を追加します。
 
@@ -175,21 +175,21 @@ MyBatis を使用して TiDB アプリケーションを構築する例につい
 
 サポートレベル:**フル**
 
-tidb-loadbalance は、アプリケーション側の負荷分散コンポーネント[tidb-ロードバランス](https://github.com/pingcap/tidb-loadbalance) 。tidb-loadbalance を使用すると、TiDBサーバーのノード情報を自動的に管理し、tidb-loadbalance ポリシーに基づいてクライアント側の JDBC 接続を分散できます。クライアントアプリケーションと TiDBサーバー間の直接 JDBC 接続を使用すると、負荷分散コンポーネントを使用するよりも高いパフォーマンスが得られます。
+[tidb-ロードバランス](https://github.com/pingcap/tidb-loadbalance)はアプリケーション側の負荷分散コンポーネントです。tidb-loadbalanceを使用すると、TiDBサーバーのノード情報を自動的に維持し、tidb-loadbalanceポリシーに基づいてクライアント側のJDBC接続を分散できます。クライアントアプリケーションとTiDBサーバー間の直接JDBC接続を使用すると、負荷分散コンポーネントを使用する場合よりもパフォーマンスが向上します。
 
-現在、tidb-loadbalance はラウンドロビン、ランダム、重み付けのポリシーをサポートしています。
+現在、tidb-loadbalance は、ラウンドロビン、ランダム、重み付けのポリシーをサポートしています。
 
 > **注記：**
 >
 > tidb-loadbalance は[mysql-コネクタ-j](https://github.com/pingcap/mysql-connector-j)で使用する必要があります。
 
-Maven を使用している場合は、 `pom.xml`ファイルの`<dependencies></dependencies>`要素本体に次のコンテンツを追加します。
+Maven を使用している場合は、 `pom.xml`ファイルの`<dependencies></dependencies>`の要素本体に次のコンテンツを追加します。
 
 ```xml
 <dependency>
   <groupId>io.github.lastincisor</groupId>
   <artifactId>mysql-connector-java</artifactId>
-  <version>8.0.29-tidb-1.0.0</version>
+  <version>8.0.29-tidb-1.0.2</version>
 </dependency>
 <dependency>
   <groupId>io.github.lastincisor</groupId>
@@ -201,7 +201,7 @@ Maven を使用している場合は、 `pom.xml`ファイルの`<dependencies><
 Gradle を使用している場合は、次の内容を`dependencies`に追加します。
 
 ```gradle
-implementation group: 'io.github.lastincisor', name: 'mysql-connector-java', version: '8.0.29-tidb-1.0.0'
+implementation group: 'io.github.lastincisor', name: 'mysql-connector-java', version: '8.0.29-tidb-1.0.2'
 implementation group: 'io.github.lastincisor', name: 'tidb-loadbalance', version: '0.0.5'
 ```
 
@@ -254,7 +254,7 @@ PyMySQL を使用して TiDB アプリケーションを構築する例につい
 
 サポートレベル:**互換**
 
-[mysqlclient ドキュメント](https://pypi.org/project/mysqlclient/)に従ってドライバをダウンロードし、設定してください。mysqlclient 2.1.1以降のバージョンの使用をお勧めします。
+[mysqlclient ドキュメント](https://pypi.org/project/mysqlclient/)に従ってドライバをダウンロードし、設定してください。mysqlclient 2.1.1以降のバージョンを使用することをお勧めします。
 
 mysqlclient を使用して TiDB アプリケーションを構築する例については、 [mysqlclientでTiDBに接続する](/develop/dev-guide-sample-application-python-mysqlclient.md)参照してください。
 
@@ -277,7 +277,7 @@ MySQL Connector/Python を使用して TiDB アプリケーションを構築す
 
 サポートレベル:**フル**
 
-[ジャンゴ](https://docs.djangoproject.com/)は人気のPythonウェブフレームワークです。TiDBとDjangoの互換性問題を解決するため、PingCAPはTiDB方言`django-tidb`提供しています。インストールするには、 [`django-tidb`ドキュメント](https://github.com/pingcap/django-tidb#installation-guide)参照してください。
+[ジャンゴ](https://docs.djangoproject.com/)は人気のPythonウェブフレームワークです。TiDBとDjangoの互換性問題を解決するため、PingCAPはTiDB方言`django-tidb`を提供しています。インストールするには、 [`django-tidb`ドキュメント](https://github.com/pingcap/django-tidb#installation-guide)を参照してください。
 
 Django を使用して TiDB アプリケーションを構築する例については、 [DjangoでTiDBに接続する](/develop/dev-guide-sample-application-python-django.md)参照してください。
 
@@ -286,7 +286,7 @@ Django を使用して TiDB アプリケーションを構築する例につい�
 
 サポートレベル:**フル**
 
-[SQLアルケミー](https://www.sqlalchemy.org/) Pythonで人気のORMフレームワークです。アプリケーション内のすべての依存関係を取得するには、 `pip install SQLAlchemy==1.4.44`コマンドを使用します。SQLAlchemy 1.4.44以降のバージョンの使用をお勧めします。
+[SQLアルケミー](https://www.sqlalchemy.org/)はPythonで人気のORMフレームワークです。アプリケーション内のすべての依存関係を取得するには、 `pip install SQLAlchemy==1.4.44`コマンドを使用します。SQLAlchemy 1.4.44以降のバージョンの使用をお勧めします。
 
 SQLAlchemy を使用して TiDB アプリケーションを構築する例については、 [SQLAlchemy で TiDB に接続する](/develop/dev-guide-sample-application-python-sqlalchemy.md)参照してください。
 
