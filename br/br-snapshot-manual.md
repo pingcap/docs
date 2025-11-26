@@ -21,6 +21,7 @@ This document describes the commands of TiDB snapshot backup and restore accordi
     - [Restore multiple tables with table filter](#restore-multiple-tables-with-table-filter)
     - [Restore execution plan bindings from the `mysql` schema](#restore-execution-plan-bindings-from-the-mysql-schema)
 - [Restore encrypted snapshots](#restore-encrypted-snapshots)
+- [Checksum](#checksum)
 
 For more information about snapshot backup and restore, refer to:
 
@@ -46,8 +47,7 @@ In the preceding command:
 
 > **Note:**
 >
-> - Starting from v8.5.0, the BR tool disables the table-level checksum calculation during full backups by default (`--checksum=false`) to improve backup performance.
-> - The BR tool already supports self-adapting to GC. It automatically registers `backupTS` (the latest PD timestamp by default) to PD's `safePoint` to ensure that TiDB's GC Safe Point does not move forward during the backup, thus avoiding manually setting GC configurations.
+> The BR tool already supports self-adapting to GC. It automatically registers `backupTS` (the latest PD timestamp by default) to PD's `safePoint` to ensure that TiDB's GC Safe Point does not move forward during the backup, thus avoiding manually setting GC configurations.
 
 During backup, a progress bar is displayed in the terminal, as shown below. When the progress bar advances to 100%, the backup is complete.
 
@@ -186,7 +186,7 @@ In the preceding command:
 - `--ratelimit`: The maximum speed **per TiKV** performing restore tasks. The unit is in MiB/s.
 - `--log-file`: The target file where the `br` log is written.
 
-During restore, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restore task is completed. Then `br` will verify the restored data to ensure data security.
+During restore, a progress bar is displayed in the terminal as shown in the following example. When the progress bar advances to 100%, the restore task is completed. After the restore is complete, if table-level [checksum](#checksum) is enabled, the BR tool performs data verification on the table to ensure logical integrity of the data. Note that file-level checksums are always performed to ensure the basic integrity of the restored files.
 
 ```shell
 Split&Scatter Region <--------------------------------------------------------------------> 100.00%
@@ -310,4 +310,47 @@ tiup br restore full\
     --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
     --crypter.method aes128-ctr \
     --crypter.key 0123456789abcdef0123456789abcdef
+```
+
+## Checksum
+
+Checksum is a method used by the BR tool to verify the integrity of backup and restore data. BR supports two levels of checksums:
+
+1. **File-level checksum**: verifies the backup files themselves to ensure integrity during storage and transmission. This level of checksum is always enabled and cannot be disabled.
+2. **Table-level checksum**: verifies the integrity of table data and ensures the business logic consistency of the data. This level of checksum is disabled by default, and you can enable it using a parameter.
+
+The following sections describe how BR handles table-level checksums, balancing performance and data safety considerations.
+
+### Backup checksum
+
+Starting from v8.5.0, when performing full backups, the BR tool does not perform table-level checksum verification (`--checksum=false`) by default to improve backup performance. If you need to perform table-level checksums during backup, you can explicitly specify `--checksum=true`. File-level checksums are always performed to ensure the integrity of backup files.
+
+Performing table-level checksums can verify data integrity during backup but increases backup time. In most cases, it is safe to use the default setting (that is, table-level checksum is disabled) to improve backup speed.
+
+### Restore checksum
+
+Starting from v9.0.0, the BR tool does not perform table-level checksum verification (`--checksum=false`) by default during restore operations to improve restore performance. If you need to perform table-level checksum verification, you can explicitly specify `--checksum=true`. File-level checksum verification is always performed to ensure the basic integrity of restored data.
+
+After the restore is complete, data verification is usually performed to ensure data integrity. If the table-level checksum is disabled, the comprehensive verification of table data is skipped, which accelerates the restore process. For scenarios that require strict data integrity, you can enable the table-level checksum.
+
+### Checksum configuration examples
+
+Enable table-level checksums during backup:
+
+```shell
+tiup br backup full \
+    --pd "${PD_IP}:2379" \
+    --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
+    --checksum=true \
+    --log-file backupfull.log
+```
+
+Enable table-level checksums during restore:
+
+```shell
+tiup br restore full \
+    --pd "${PD_IP}:2379" \
+    --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
+    --checksum=true \
+    --log-file restorefull.log
 ```

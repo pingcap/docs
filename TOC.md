@@ -559,7 +559,7 @@
       - [Use TiUP (Recommended)](/dm/deploy-a-dm-cluster-using-tiup.md)
       - [Use TiUP Offline](/dm/deploy-a-dm-cluster-using-tiup-offline.md)
       - [Use Binary](/dm/deploy-a-dm-cluster-using-binary.md)
-      - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/dev/deploy-tidb-dm)
+      - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/deploy-tidb-dm)
     - Tutorials
       - [Create a Data Source](/dm/quick-start-create-source.md)
       - [Manage Data Sources](/dm/dm-manage-source.md)
@@ -1062,6 +1062,7 @@
         - [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)
         - [`TIDB_SERVERS_INFO`](/information-schema/information-schema-tidb-servers-info.md)
         - [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
+        - [`TIFLASH_INDEXES`](/information-schema/information-schema-tiflash-indexes.md)
         - [`TIFLASH_REPLICA`](/information-schema/information-schema-tiflash-replica.md)
         - [`TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md)
         - [`TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)

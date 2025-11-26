@@ -50,4 +50,4 @@ TiDB version: 3.0.19
 
     + TiDB Lightning
 
-        - Fix the issue that the TiDB Lightning process does not exit in time when encountering illegal UTF characters in CSV in the strict mode [#378](https://github.com/pingcap/tidb-lightning/pull/378)
+        - Fix the issue that the TiDB Lightning process does not exit in time when encountering invalid UTF characters in CSV in the strict mode [#378](https://github.com/pingcap/tidb-lightning/pull/378)

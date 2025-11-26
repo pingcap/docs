@@ -5,9 +5,9 @@ summary: Learn about JSON functions that return JSON values.
 
 # JSON Functions That Return JSON Values
 
-This document describes JSON functions that return JSON values.
+TiDB supports all the [JSON functions that return JSON value attributes](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html) available in MySQL 8.0.
 
-## [JSON_DEPTH()](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-depth)
+## `JSON_DEPTH()`
 
 The `JSON_DEPTH(json_doc)` function returns the maximum depth of a JSON document.
 
@@ -32,7 +32,7 @@ SELECT JSON_DEPTH('{"weather": {"current": "sunny"}}');
 1 row in set (0.00 sec)
 ```
 
-## [JSON_LENGTH()](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-length)
+## `JSON_LENGTH()`
 
 The `JSON_LENGTH(json_doc [,path])` function returns the length of a JSON document. If a `path` argument is given, it returns the length of the value within the path.
 
@@ -68,7 +68,7 @@ SELECT JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$.
 1 row in set (0.01 sec)
 ```
 
-## [JSON_TYPE()](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-type)
+## `JSON_TYPE()`
 
 The `JSON_TYPE(json_val)` function returns a string indicating [the type of a JSON value](/data-type-json.md#json-value-types).
 
@@ -132,7 +132,7 @@ SELECT JSON_TYPE('"2025-06-14"'),JSON_TYPE(CAST(CAST('2025-06-14' AS date) AS js
 1 row in set (0.00 sec)
 ```
 
-## [JSON_VALID()](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html#function_json-valid)
+## `JSON_VALID()`
 
 The `JSON_VALID(str)` function checks if the argument is valid JSON. This can be useful for checking a column before converting it to the `JSON` type.
 
