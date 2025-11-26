@@ -134,7 +134,7 @@ Compared with TiDB [6.4.0-DMR](/releases/release-6.4.0.md), TiDB 6.5.0 introduce
     - The user can still access TiDB Dashboard for diagnosis even if the PD node is unavailable.
     - Accessing TiDB Dashboard on the internet does not involve the privileged interfaces of PD. Therefore, the security risk of the cluster is reduced.
 
-  For more information, see [documentation](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently).
+  For more information, see [documentation](https://docs.pingcap.com/tidb-in-kubernetes/v1.5/get-started#deploy-tidb-dashboard-independently).
 
 * Performance Overview dashboard adds TiFlash and CDC (Change Data Capture) panels [#39230](https://github.com/pingcap/tidb/issues/39230) @[dbsid](https://github.com/dbsid)
 
