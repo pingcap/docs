@@ -15,7 +15,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 * Support redistributing data of a specific table (experimental) [#63260](https://github.com/pingcap/tidb/issues/63260) @[bufferflies](https://github.com/bufferflies)
 
-    PD automatically schedules data to distribute it as evenly as possible across all TiKV nodes in a cluster. However, this automatic scheduling is based on the overall cluster. In some cases, even if the cluster-wide data distribution is balanced, the data of a specific table might still be unevenly distributed across TiKV nodes.
+    PD automatically schedules data to be distributed as evenly as possible across all TiKV nodes in a cluster. However, this automatic scheduling focuses on the cluster as a whole. In some cases, even if the cluster-wide data distribution is balanced, the data of a specific table might still be unevenly distributed across TiKV nodes.
 
     Starting from v8.5.4, you can use the [`SHOW TABLE DISTRIBUTION`](https://docs.pingcap.com/tidb/v8.5/sql-statement-show-table-distribution/) statement to check how the data of a specific table is distributed across all TiKV nodes. If the data distribution is unbalanced, you can use the [`DISTRIBUTE TABLE`](https://docs.pingcap.com/tidb/v8.5/sql-statement-distribute-table) statement to redistribute the table's data (experimental) to improve load balancing.
 
