@@ -83,7 +83,7 @@ To clear your browser cache, take the following steps:
 
 ### A `required component NgMonitoring is not started` error is shown
 
-NgMonitoring is an advanced monitoring component built in TiDB clusters of v5.4.0 and later versions. It supports such features as **Continuous Profiling** and **Top SQL**. In a TiDB cluster deployed using TiUP, NgMonitoring is deployed automatically. In a TiDB cluster deployed using TiDB Operator, you need to deploy NgMonitoring manually by referring to [Enable Continuous Profiling](https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard/#enable-continuous-profiling).
+NgMonitoring is an advanced monitoring component built in TiDB clusters of v5.4.0 and later versions. It supports such features as **Continuous Profiling** and **Top SQL**. In a TiDB cluster deployed using TiUP, NgMonitoring is deployed automatically. In a TiDB cluster deployed using TiDB Operator, you need to deploy NgMonitoring manually by referring to [Enable Continuous Profiling](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/access-dashboard/#enable-continuous-profiling).
 
 If the **Continuous Profiling** page shows `required component NgMonitoring is not started`, address the problem based on the deployment method of the TiDB cluster.
 
@@ -145,4 +145,4 @@ After performing the preceding steps, enable Continuous Profiling on TiDB Dashbo
 
 #### Clusters deployed using TiDB Operator
 
-Deploy NgMonitoring by referring to [Enable Continuous Profiling](https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard/#enable-continuous-profiling).
+Deploy NgMonitoring by referring to [Enable Continuous Profiling](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/access-dashboard/#enable-continuous-profiling).
