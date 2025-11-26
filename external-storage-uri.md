@@ -130,18 +130,3 @@ gcs://external/test.csv?credentials-file=${credentials-file-path}
 ```shell
 azure://external/testfolder?account-name=${account-name}&account-key=${account-key}
 ```
-
-
-请确保：
-1. 保持原有的Markdown格式（标题、列表、代码块、链接等）
-2. 使用专业、准确的中文术语
-3. 保持文档的逻辑结构和可读性
-4. 代码示例和文件名保持英文不变
-5. 链接地址保持不变
-6. 不要翻译 **包裹的加粗的文字**
-7. 你 翻译成 “你”，而不是 “您”
-8. 不要额外新增翻译内容，保证只翻译输入的内容
-9. 代码块内的内容不需要翻译
-10. 中文和英文之间需要加空格，中文和阿拉伯数字之间需要加空格
-11. 如果你在文中发现以下 key，不需要翻译，只要将匹配的 key 替换为对应的 value 就行:
-{}
