@@ -148,7 +148,7 @@ To detect live migration events initiated by Google Cloud and mitigate the perfo
 - TiKV: Evicts leaders on the affected TiKV store during maintenance.
 - PD: Resigns a leader if the current PD instance is the PD leader.
 
-It is important to note that this watching script is specifically designed for TiDB clusters deployed using [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/tidb-operator-overview), which offers enhanced management functionalities for TiDB in Kubernetes environments.
+It is important to note that this watching script is specifically designed for TiDB clusters deployed using [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/tidb-operator-overview), which offers enhanced management functionalities for TiDB in Kubernetes environments.
 
 By utilizing the watching script and taking necessary actions during maintenance events, TiDB clusters can better handle live migration events on Google Cloud and ensure smoother operations with minimal impact on query processing and response times.
 
