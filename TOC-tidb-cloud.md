@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: 4c1d67fb01a9e5d02dbae9b8c21d1db796362cc9-->
+# 目录 <!--Corresponding EN commit: 2b4f8e24a783e0e2ac492ad9a50df800b400db7b-->
 
 ## 快速开始
 
@@ -659,6 +659,7 @@
       - [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)
       - [`TIDB_SERVERS_INFO`](/information-schema/information-schema-tidb-servers-info.md)
       - [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
+      - [`TIFLASH_INDEXES`](/information-schema/information-schema-tiflash-indexes.md)
       - [`TIFLASH_REPLICA`](/information-schema/information-schema-tiflash-replica.md)
       - [`TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md)
       - [`TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)
