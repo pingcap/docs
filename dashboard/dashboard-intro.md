@@ -9,7 +9,7 @@ TiDB Dashboard is a Web UI for monitoring, diagnosing, and managing the TiDB clu
 
 > **Note:**
 >
-> TiDB v6.5.0 (and later) and TiDB Operator v1.4.0 (and later) support deploying TiDB Dashboard as an independent Pod on Kubernetes. For details, see [Deploy TiDB Dashboard independently in TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently).
+> TiDB v6.5.0 (and later) and TiDB Operator v1.4.0 (and later) support deploying TiDB Dashboard as an independent Pod on Kubernetes. For details, see [Deploy TiDB Dashboard independently in TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.5/get-started#deploy-tidb-dashboard-independently).
 
 ![TiDB Dashboard interface](/media/dashboard/dashboard-intro.gif)
 
