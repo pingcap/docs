@@ -145,4 +145,4 @@ After performing the preceding steps, enable Continuous Profiling on TiDB Dashbo
 
 #### Clusters deployed using TiDB Operator
 
-Deploy NgMonitoring by referring to [Enable Continuous Profiling](https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard/#enable-continuous-profiling).
+Deploy NgMonitoring by referring to [Enable Continuous Profiling](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/access-dashboard/#enable-continuous-profiling).

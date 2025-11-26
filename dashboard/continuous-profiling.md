@@ -48,7 +48,7 @@ To enable Continuous Profiling on clusters deployed using TiUP, perform the foll
 
 ### Clusters deployed using TiDB Operator
 
-See [Enable continuous profiling](https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard#enable-continuous-profiling).
+See [Enable continuous profiling](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/access-dashboard#enable-continuous-profiling).
 
 ## Access the page
 
