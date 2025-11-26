@@ -1,6 +1,6 @@
 ---
 title: Configure External Storage Access
-summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access.
+summary: Learn how to configure cross-account access to an external storage such as Amazon Simple Storage Service (Amazon S3).
 aliases: ['/tidbcloud/serverless-external-storage']
 ---
 
