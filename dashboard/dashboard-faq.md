@@ -142,44 +142,6 @@ Step 2. Add the ng_port configuration item on the control machine by using TiUP.
     ```
 
 After performing the preceding steps, enable Continuous Profiling on TiDB Dashboard. If NgMonitoring still fails to be started, contact PingCAP technical support for help.
-If the error message is still prompted after performing steps above, [get support](/support.md) from PingCAP or the community.
-
-</details>
-
-<details>
-  <summary>Clusters Deployed using TiDB Operator</summary>
-
-Deploy the NgMonitoring component by following instructions in the [Enable Continuous Profiling](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/access-dashboard/#enable-continuous-profiling) section in TiDB Operator documentation.
-
-</details>
-
-<details>
-  <summary>Clusters Started using TiUP Playground</summary>
-
-When starting the cluster, TiUP Playground (>= v1.8.0) automatically starts the NgMonitoring component. To update TiUP Playground to the latest version, run the following command:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-tiup update --self
-tiup update playground
-```
-
-</details>
-
-### An `unknown field` error is shown on the **Slow Queries** page
-
-If the `unknown field` error appears on the **Slow Queries** page after the cluster upgrade, the error is related to a compatibility issue caused by the difference between TiDB Dashboard server fields (which might be updated) and user preferences fields (which are in the browser cache). This issue has been fixed. If your cluster is earlier than v5.0.3 or v4.0.14, perform the following steps to clear your browser cache:
-
-1. Open TiDB Dashboard page.
-
-2. Open Developer Tools. Different browsers have different ways of opening Developer Tools. After clicking the **Menu Bar**:
-
-    - Firefox: **Menu** > **Web Developer** > **Toggle Tools**, or **Tools** > **Web Developer** > **Toggle Tools**.
-    - Chrome: **More tools** > **Developer tools**.
-    - Safari: **Develop** > **Show Web Inspector**. If you can't see the **Develop** menu, go to **Safari** > **Preferences** > **Advanced**, and check the **Show Develop** menu in menu bar checkbox.
-
-    In the following example, Chrome is used.
 
 #### Clusters deployed using TiDB Operator
 
