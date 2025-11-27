@@ -90,20 +90,6 @@ Starting from v8.5.4, TiDB aligns its behavior with MySQL when inserting data in
 
 + TiDB
 
-    - Introduce significant performance improvements for certain lossy DDL operations (such as, `BIGINT` → `INT` or `CHAR(120)` → `VARCHAR(60)`), reducing execution time from hours to minutes, seconds, or even milliseconds, delivering performance gains ranging from tens to hundreds of thousands of times [#63366](https://github.com/pingcap/tidb/issues/63366) @[wjhuang2016](https://github.com/wjhuang2016) @[tangenta](https://github.com/tangenta) @[fzzf678](https://github.com/fzzf678)
-
-        Optimization strategies: in strict SQL mode, TiDB pre-checks for potential data truncation risks during type conversion; if no risk is detected, TiDB updates only the metadata and avoids index rebuilding whenever possible; if index rebuilding is required, TiDB uses a more efficient ingest process to significantly improve index rebuild performance.
-
-        Performance improvement examples (based on a 100 GiB table benchmark):
-
-        | Scenario | Operation  | Before optimization | After optimization | Improvement |
-        |----------|----------------|------------------|-----------------|------------------------|
-        | Non-indexed column | `BIGINT` → `INT` | 2 hours 34 minutes | 1 minute 5 seconds | 142× faster |
-        | Indexed column | `BIGINT` → `INT` | 6 hours 25 minutes | 0.05 seconds | 460,000× faster |
-        | Indexed column | `CHAR(120)` → `VARCHAR(60)` | 7 hours 16 minutes | 12 minutes 56 seconds | 34× faster  |
-
-        Note that the preceding results are based on the condition that no data truncation occurs during the DDL execution.
-
     - Support applying the `semi_join_rewrite` hint to Semi Joins in `IN` subqueries [#58829](https://github.com/pingcap/tidb/issues/58829) @[qw4990](https://github.com/qw4990)
     - Optimize the estimation strategy when the `tidb_opt_ordering_index_selectivity_ratio` system variable takes effect [#62817](https://github.com/pingcap/tidb/issues/62817) @[terry1purcell](https://github.com/terry1purcell)
     - Adjust the optimizer selection logic to make newly created indexes more likely to be chosen in certain scenarios [#57948](https://github.com/pingcap/tidb/issues/57948) @[terry1purcell](https://github.com/terry1purcell)
