@@ -50,7 +50,7 @@ If you are using Maven, add the following content to the `<dependencies></depend
 <dependency>
   <groupId>io.github.lastincisor</groupId>
   <artifactId>mysql-connector-java</artifactId>
-  <version>8.0.29-tidb-1.0.0</version>
+  <version>8.0.29-tidb-1.0.2</version>
 </dependency>
 ```
 
@@ -60,7 +60,7 @@ If you need to enable SM3 authentication, add the following content to the `<dep
 <dependency>
   <groupId>io.github.lastincisor</groupId>
   <artifactId>mysql-connector-java</artifactId>
-  <version>8.0.29-tidb-1.0.0</version>
+  <version>8.0.29-tidb-1.0.2</version>
 </dependency>
 <dependency>
     <groupId>org.bouncycastle</groupId>
@@ -77,7 +77,7 @@ If you need to enable SM3 authentication, add the following content to the `<dep
 If you use Gradle, add the following content to `dependencies`:
 
 ```gradle
-implementation group: 'io.github.lastincisor', name: 'mysql-connector-java', version: '8.0.29-tidb-1.0.0'
+implementation group: 'io.github.lastincisor', name: 'mysql-connector-java', version: '8.0.29-tidb-1.0.2'
 implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.67'
 implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67'
 ```
@@ -189,7 +189,7 @@ If you are using Maven, add the following content to the element body of `<depen
 <dependency>
   <groupId>io.github.lastincisor</groupId>
   <artifactId>mysql-connector-java</artifactId>
-  <version>8.0.29-tidb-1.0.0</version>
+  <version>8.0.29-tidb-1.0.2</version>
 </dependency>
 <dependency>
   <groupId>io.github.lastincisor</groupId>
@@ -201,7 +201,7 @@ If you are using Maven, add the following content to the element body of `<depen
 If you are using Gradle, add the following content to `dependencies`:
 
 ```gradle
-implementation group: 'io.github.lastincisor', name: 'mysql-connector-java', version: '8.0.29-tidb-1.0.0'
+implementation group: 'io.github.lastincisor', name: 'mysql-connector-java', version: '8.0.29-tidb-1.0.2'
 implementation group: 'io.github.lastincisor', name: 'tidb-loadbalance', version: '0.0.5'
 ```
 
