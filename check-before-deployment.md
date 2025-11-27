@@ -403,15 +403,16 @@ sudo systemctl enable ntpd.service
 
 For TiDB in the production environment, it is recommended to optimize the operating system configuration in the following ways:
 
-1. Disable THP (Transparent Huge Pages). The memory access pattern of databases tends to be sparse rather than consecutive. If the high-level memory fragmentation is serious, higher latency will occur when THP pages are allocated.
-2. Set the I/O Scheduler of the storage media.
+- Disable [transparent huge pages (THP)](/tune-operating-system.md#memorytransparent-huge-page-thp). Database memory access is usually sparse. When higher-order memory becomes heavily fragmented, THP allocation can cause high memory allocation latency. Therefore, it is recommended to disable THP to avoid performance fluctuations.
+
+- Set the [I/O scheduler](/tune-operating-system.md#io-scheduler) of the storage media.
 
     - For the high-speed SSD storage, the kernel's default I/O scheduling operations might cause performance loss. It is recommended to set the I/O Scheduler to first-in-first-out (FIFO), such as `noop` or `none`. This configuration allows the kernel to pass I/O requests directly to hardware without scheduling, thus improving performance.
     - For NVMe storage, the default I/O Scheduler is `none`, so no adjustment is needed.
 
-3. Choose the `performance` mode for the cpufrequ module which controls the CPU frequency. The performance is maximized when the CPU frequency is fixed at its highest supported operating frequency without dynamic adjustment.
+- Choose the `performance` mode for [the cpufreq module](/tune-operating-system.md#cpufrequency-scaling) that controls the CPU frequency dynamically. The performance is maximized when the CPU frequency is fixed at its highest supported operating frequency without dynamic adjustment.
 
-Take the following steps to check the current operating system configuration and configure optimal parameters:
+The steps to check and configure these parameters are as follows:
 
 1. Execute the following command to see whether THP is enabled or disabled:
 

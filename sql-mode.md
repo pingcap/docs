@@ -36,8 +36,8 @@ In this statement, `modes` is a set of modes separated by commas (','). You can 
 | `NO_TABLE_OPTIONS` | When you use the `SHOW CREATE TABLE` statement, MySQL-specific syntaxes such as `ENGINE` are not exported. Consider this option when migrating across DB types using mysqldump. (syntax support only)|
 | `NO_AUTO_VALUE_ON_ZERO` | If this mode is enabled, when the value passed in the [`AUTO_INCREMENT`](/auto-increment.md) column is `0` or a specific value, the system directly writes this value to this column. When `NULL` is passed, the system automatically generates the next serial number. (full support)|
 | `NO_BACKSLASH_ESCAPES` | If this mode is enabled, the `\` backslash symbol only stands for itself. (full support)|
-| `STRICT_TRANS_TABLES` | Enables the strict mode for the transaction storage engine and rolls back the entire statement after an illegal value is inserted. (full support) |
-| `STRICT_ALL_TABLES` | For transactional tables, rolls back the entire transaction statement after an illegal value is inserted. (full support) |
+| `STRICT_TRANS_TABLES` | Enables the strict mode for the transaction storage engine and rolls back the entire statement after an invalid value is inserted. (full support) |
+| `STRICT_ALL_TABLES` | For transactional tables, rolls back the entire transaction statement after an invalid value is inserted. (full support) |
 | `NO_ZERO_IN_DATE` | Strict mode, where dates with a month or day part of `0` are not accepted. If you use the `IGNORE` option, TiDB inserts '0000-00-00' for a similar date. In non-strict mode, this date is accepted but a warning is returned. (full support)
 | `NO_ZERO_DATE` | Does not use '0000-00-00' as a legal date in strict mode. You can still insert a zero date with the `IGNORE` option. In non-strict mode, this date is accepted but a warning is returned. (full support)|
 | `ALLOW_INVALID_DATES` | In this mode, the system does not check the validity of all dates. It only checks the month value ranging from `1` to `12` and the date value ranging from `1` to `31`. The mode only applies to `DATE` and `DATATIME` columns. All `TIMESTAMP` columns need a full validity check. (full support) |

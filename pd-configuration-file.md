@@ -13,7 +13,7 @@ This document only describes parameters that are not included in command-line pa
 
 > **Tip:**
 >
-> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+> After PD initialization, if you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration) and [PD Control User Guide](/pd-control.md).
 
 ### `name`
 

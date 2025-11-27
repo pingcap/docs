@@ -727,7 +727,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 > **Note:**
 >
-> Before v6.4.0, the `max_execution_time` system variable takes effect on all types of statements. Starting from v6.4.0, this variable only controls the maximum execution time of read-only statements. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in exact milliseconds as you specify.
+> Before v6.4.0, the `max_execution_time` system variable takes effect on all types of statements. Starting from v6.4.0, this variable only controls the maximum execution time of `SELECT` statements. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in exact milliseconds as you specify.
 
 <CustomContent platform="tidb">
 
@@ -1643,6 +1643,14 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 > Currently, this feature is not fully compatible with [altering multiple columns or indexes in a single `ALTER TABLE` statement](/sql-statements/sql-statement-alter-table.md). When adding a unique index with the index acceleration, you need to avoid altering other columns or indexes in the same statement.
 
 </CustomContent>
+
+### tidb_stats_update_during_ddl <span class="version-mark">New in v8.5.4</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Default value: `OFF`
+- This variable controls whether to enable DDL-embedded `ANALYZE`. When enabled, DDL statements that create new indexes ([`ADD INDEX`](/sql-statements/sql-statement-add-index.md)) or reorganize existing indexes ([`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md) and [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)) automatically collect statistics before the index becomes visible. For more information, see [`ANALYZE` Embedded in DDL Statements](/ddl_embedded_analyze.md).
 
 ### tidb_enable_dist_task <span class="version-mark">New in v7.1.0</span>
 
@@ -4113,8 +4121,8 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Duration
-- Default value: `60s`
-- The newly started TiFlash node does not provide services. To prevent queries from failing, TiDB limits the tidb-server sending queries to the newly started TiFlash node. This variable indicates the time range in which the newly started TiFlash node is not sent requests.
+- Default value: `0s`. In v8.5.3 and earlier versions, the default value is `60s`.
+- The newly started TiFlash node does not provide services. To prevent queries from failing, TiDB limits the tidb-server from sending queries to the newly started TiFlash node. This variable indicates the time range in which the newly started TiFlash node is not sent requests.
 
 ### tidb_multi_statement_mode <span class="version-mark">New in v4.0.11</span>
 
@@ -4356,6 +4364,24 @@ mysql> desc select count(distinct a) from test.t;
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to enable the [Cross-database binding](/sql-plan-management.md#cross-database-binding) feature.
+
+### tidb_opt_enable_no_decorrelate_in_select <span class="version-mark">New in v8.5.4</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether the optimizer applies the [`NO_DECORRELATE()`](/optimizer-hints.md#no_decorrelate) hint for all queries that contain a subquery in the `SELECT` list.
+
+### tidb_opt_enable_semi_join_rewrite <span class="version-mark">New in v8.5.4</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether the optimizer applies the [`SEMI_JOIN_REWRITE()`](/optimizer-hints.md#semi_join_rewrite) hint for all queries that contain subqueries.
 
 ### tidb_opt_fix_control <span class="version-mark">New in v6.5.3 and v7.1.0</span>
 
@@ -5435,7 +5461,7 @@ SHOW WARNINGS;
 - Type: Enumeration
 - Default value: `leader`
 - Possible values: `leader`, `follower`, `leader-and-follower`, `prefer-leader`, `closest-replicas`, `closest-adaptive`, and `learner`. The `learner` value is introduced in v6.6.0.
-- This variable is used to control where TiDB reads data.
+- This variable is used to control where TiDB reads data. Starting from v8.5.4, this variable only takes effect on read-only SQL statements.
 - For more details about usage and implementation, see [Follower read](/follower-read.md).
 
 ### tidb_restricted_read_only <span class="version-mark">New in v5.2.0</span>
@@ -5733,7 +5759,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **Note:**
 >
-> If the character check is skipped, TiDB might fail to detect illegal UTF-8 characters written by the application, cause decoding errors when `ANALYZE` is executed, and introduce other unknown encoding issues. If your application cannot guarantee the validity of the written string, it is not recommended to skip the character check.
+> If the character check is skipped, TiDB might fail to detect invalid UTF-8 characters written by the application, cause decoding errors when `ANALYZE` is executed, and introduce other unknown encoding issues. If your application cannot guarantee the validity of the written string, it is not recommended to skip the character check.
 
 ### tidb_slow_log_threshold
 
