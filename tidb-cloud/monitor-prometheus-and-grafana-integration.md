@@ -11,15 +11,11 @@ This document describes how to configure your Prometheus service to read key met
 
 ## Prometheus integration version
 
-TiDB Cloud has supported the project-level Prometheus integration (Beta) since March 15, 2022. Starting from October 21, 2025, TiDB Cloud introduces the cluster-level Prometheus integration (Preview).
+TiDB Cloud has supported the project-level Prometheus integration (Beta) since March 15, 2022. Starting from October 21, 2025, TiDB Cloud introduces the cluster-level Prometheus integration (Preview). Starting from December 2, 2025, the cluster-level Prometheus integration becomes generally available (GA).
 
-- **Cluster-level Prometheus integration (Preview)**: if no legacy project-level Prometheus integration remains undeleted within your organization by October 21, 2025, TiDB Cloud provides the cluster-level Prometheus integration (Preview) for your organization to experience the latest enhancements.
+- **Cluster-level Prometheus integration**: if no legacy project-level Prometheus integration remains undeleted within your organization by October 21, 2025, TiDB Cloud provides the cluster-level Prometheus integration for your organization to experience the latest enhancements.
 
-    > **Note**
-    >
-    > Currently, cluster-level Prometheus integrations (Preview) are available only for TiDB Cloud Dedicated clusters hosted on AWS and Google Cloud.
-
-- **Legacy project-level Prometheus integration (Beta)**: if at least one legacy project-level Prometheus integration remains undeleted within your organization by October 21, 2025, TiDB Cloud retains both existing and new integrations at the project level for your organization to avoid affecting current dashboards.
+- **Legacy project-level Prometheus integration (Beta)**: if at least one legacy project-level Prometheus integration remains undeleted within your organization by October 21, 2025, TiDB Cloud retains both existing and new integrations at the project level for your organization to avoid affecting current dashboards. Note that the legacy project-level Prometheus integrations will be deprecated on January 6, 2026. If your organization is still using these legacy integrations, follow Migrate Prometheus Integrations to migrate to the new cluster-level integrations and minimize disruptions to your metrics-related services.
 
 ## Prerequisites
 
@@ -41,11 +37,11 @@ Before configuring your Prometheus service to read metrics of TiDB Cloud, you ne
 Depending on your [Prometheus integration version](#prometheus-integration-version), the steps to get the `scrape_config` file for Prometheus and access the integration page are different.
 
 <SimpleTab>
-<div label="Cluster-level Prometheus integration (Preview)">
+<div label="Cluster-level Prometheus integration">
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Integrations**.
-3. On the **Integrations** page, click **Integration to Prometheus (Preview)**.
+3. On the **Integrations** page, click **Integration to Prometheus**.
 4. Click **Add File** to generate and show the `scrape_config` file for the current cluster.
 5. Make a copy of the `scrape_config` file content for later use.
 
@@ -81,7 +77,7 @@ After your Prometheus service is reading metrics from TiDB Cloud, you can use Gr
 
 1. Depending on your [Prometheus integration version](#prometheus-integration-version), the link to download the Grafana dashboard JSON of TiDB Cloud for Prometheus is different.
 
-    - For cluster-level Prometheus integration (Preview), download the Grafana dashboard JSON file [here](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker.json).
+    - For cluster-level Prometheus integration, download the Grafana dashboard JSON file [here](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker.json).
     - For legacy project-level Prometheus integration (Beta), download the Grafana dashboard JSON file [here](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-grafana-dashboard-UI.json).
 
 2. [Import this JSON to your own Grafana GUI](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard) to visualize the metrics.
