@@ -427,4 +427,4 @@ The export speed depends on your [cluster plan](/tidb-cloud/select-cluster-tier.
 
 ## Pricing
 
-The export service is free during the beta period. You only need to pay for the [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) generated during the export process of successful or canceled tasks. For failed export tasks, you will not be charged.
+The export service is free during the beta period. You only need to pay for the [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) generated during the export process of successful or canceled tasks. For failed export tasks, you will not be charged.
