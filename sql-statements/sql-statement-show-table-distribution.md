@@ -3,7 +3,7 @@ title: SHOW TABLE DISTRIBUTION
 summary: An overview of the usage of SHOW TABLE DISTRIBUTION for the TiDB database.
 ---
 
-# SHOW TABLE DISTRIBUTION <span class="version-mark">New in v9.0.0</span>
+# SHOW TABLE DISTRIBUTION <span class="version-mark">New in v8.5.4 and v9.0.0</span>
 
 The `SHOW TABLE DISTRIBUTION` statement shows the Region distribution information for a specified table.
 
@@ -27,7 +27,7 @@ TableName ::=
 
 ## Examples
 
-Show the Region distribution of the table `t1`:
+Show the Region distribution of the table `t`:
 
 ```sql
 CREATE TABLE `t` (
@@ -37,8 +37,8 @@ CREATE TABLE `t` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin 
 PARTITION BY RANGE (`a`)
 (PARTITION `p1` VALUES LESS THAN (10000),
- PARTITION `p2` VALUES LESS THAN (MAXVALUE)) |
-SHOW TABLE t1 DISTRIBUTIONS;
+ PARTITION `p2` VALUES LESS THAN (MAXVALUE));
+SHOW TABLE t DISTRIBUTIONS;
 ```
 
 ```
