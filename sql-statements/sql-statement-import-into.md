@@ -30,7 +30,7 @@ The `IMPORT INTO` statement lets you import data to TiDB via the [Physical Impor
 - For TiDB Self-Managed, the TiDB [temporary directory](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) is expected to have at least 90 GiB of available space. It is recommended to allocate storage space that is equal to or greater than the volume of data to be imported.
 - One import job supports importing data into one target table only.
 - `IMPORT INTO` is not supported during TiDB cluster upgrades.
-- Ensure that the data to be imported does not contain any records with primary key or non-null unique index conflicts. Otherwise, the conflicts can result in import task failures.
+- When not using [Global Sort](/tidb-global-sort.md) or using version <= v8.5.4, ensure that the data to be imported does not contain any records with primary key or non-null unique index conflicts. Otherwise, the conflicts can result in import task failures. Since version v8.5.5, when using [Global Sort](/tidb-global-sort.md), `IMPORT INTO` can automatically handle primary key or unique index conflicts by removing all conflicting rows.
 - Known issue: the `IMPORT INTO` task might fail if the PD address in the TiDB node configuration file is inconsistent with the current PD topology of the cluster. This inconsistency can arise in situations such as that PD was scaled in previously, but the TiDB configuration file was not updated accordingly or the TiDB node was not restarted after the configuration file update.
 
 ### `IMPORT INTO ... FROM FILE` restrictions
@@ -227,6 +227,42 @@ SET GLOBAL tidb_server_memory_limit='75%';
 > - If the KV range overlap in a source data file is low, enabling Global Sort might decrease import performance. This is because when Global Sort is enabled, TiDB needs to wait for the completion of local sorting in all sub-jobs before proceeding with the Global Sort operations and subsequent import.
 > - After an import job using Global Sort completes, the files stored in the cloud storage for Global Sort are cleaned up asynchronously in a background thread.
 
+#### Conflict resolution
+
+Since version v8.5.5, when using [Global Sort](/tidb-global-sort.md), `IMPORT INTO` can automatically handle primary key or unique index conflicts by removing all conflicting rows.
+
+Such as when importing into a table `create table t(id int primary key, v int);`, with below data file `conflicts.csv`:
+```csv
+id,v
+1,2
+1,3
+2,2
+3,3
+3,3
+4,4
+```
+
+After import, the table `t` only contains the non-conflicting rows:
+```sql
+mysql> import into t from 's3://mybucket/conflicts.csv' with thread=8, skip_rows=1;
++--------+-----------------------------+--------------+----------+-------+----------+------------------+---------------+--------------------+----------------------------+----------------------------+----------------------------+------------+
+| Job_ID | Data_Source                 | Target_Table | Table_ID | Phase | Status   | Source_File_Size | Imported_Rows | Result_Message     | Create_Time                | Start_Time                 | End_Time                   | Created_By |
++--------+-----------------------------+--------------+----------+-------+----------+------------------+---------------+--------------------+----------------------------+----------------------------+----------------------------+------------+
+|  30001 | s3://mybucket/conflicts.csv | `test`.`t`   |      114 |       | finished | 24B              |             2 | 4 conflicted rows. | 2025-11-28 17:21:40.591023 | 2025-11-28 17:21:41.109977 | 2025-11-28 17:21:44.112506 | root@%     |
++--------+-----------------------------+--------------+----------+-------+----------+------------------+---------------+--------------------+----------------------------+----------------------------+----------------------------+------------+
+
+mysql> select * from t;
++----+------+
+| id | v    |
++----+------+
+|  2 |    2 |
+|  4 |    4 |
++----+------+
+2 rows in set (0.01 sec)
+```
+
+The conflicted rows details will be stored in the cloud storage URI, see more info in `Conflicted rows info when using Global Sort` section.
+
 ### Output
 
 When `IMPORT INTO ... FROM FILE` completes the import or when the `DETACHED` mode is enabled, TiDB returns the current job information in the output, as shown in the following examples. For the description of each field, see [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md).
@@ -251,6 +287,32 @@ IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
 +--------+--------------------+--------------+----------+-------+---------+------------------+---------------+----------------+----------------------------+------------+----------+------------+
 |  60001 | /path/to/small.csv | `test`.`t`   |      361 |       | pending | 16B              |          NULL |                | 2023-06-08 15:59:37.047703 | NULL       | NULL     | root@%     |
 +--------+--------------------+--------------+----------+-------+---------+------------------+---------------+----------------+----------------------------+------------+----------+------------+
+```
+
+#### Conflicted rows info when using Global Sort
+
+When using [Global Sort](/tidb-global-sort.md) and there are conflicted rows for the import job, the number of conflicted rows will be displayed in the `Result_Message` column of [`SHOW IMPORT`](/sql-statements/sql-statement-show-import-job.md), like this:
+
+```sql
+mysql> import into t from 's3://mybucket/conflicts.csv' with thread=8;
++--------+-----------------------------+--------------+----------+-------+----------+------------------+---------------+--------------------+----------------------------+----------------------------+----------------------------+------------+
+| Job_ID | Data_Source                 | Target_Table | Table_ID | Phase | Status   | Source_File_Size | Imported_Rows | Result_Message     | Create_Time                | Start_Time                 | End_Time                   | Created_By |
++--------+-----------------------------+--------------+----------+-------+----------+------------------+---------------+--------------------+----------------------------+----------------------------+----------------------------+------------+
+|  30001 | s3://mybucket/conflicts.csv | `test`.`t`   |      114 |       | finished | 24B              |             2 | 4 conflicted rows. | 2025-11-28 17:21:40.591023 | 2025-11-28 17:21:41.109977 | 2025-11-28 17:21:44.112506 | root@%     |
++--------+-----------------------------+--------------+----------+-------+----------+------------------+---------------+--------------------+----------------------------+----------------------------+----------------------------+------------+
+```
+
+And the conflicted rows details can be viewed under the `conflicted-rows/<DXF task ID>` folder of the cloud storage URI, such as:
+
+```
+s3://mybucket/sorted-dir/conflicted-rows/1/1-28f0e03a-27c3-4283-a523-418859bb7a2c/data-1.txt
+s3://mybucket/sorted-dir/conflicted-rows/1/1-298a387a-065c-4ea9-bc31-949e89ca186f/data-1.txt
+s3://mybucket/sorted-dir/conflicted-rows/1/1-2e306ff5-40eb-4045-9992-2ccc04ab7bef/data-1.txt
+s3://mybucket/sorted-dir/conflicted-rows/1/1-382d8886-f6e9-4c5e-891c-69d54694a175/data-1.txt
+s3://mybucket/sorted-dir/conflicted-rows/1/1-3fd1b7e7-70d4-4734-a12f-ec4f70c3a9af/data-1.txt
+s3://mybucket/sorted-dir/conflicted-rows/1/1-46320371-436f-46fa-a8ab-b0f2e2eecf75/data-1.txt
+s3://mybucket/sorted-dir/conflicted-rows/1/1-631f1c02-4a25-4c8f-9e8d-6ae61a801f5c/data-1.txt
+s3://mybucket/sorted-dir/conflicted-rows/1/1-68f84255-4965-4d9e-9add-934ba07b5ef1/data-1.txt
 ```
 
 ### View and manage import jobs
