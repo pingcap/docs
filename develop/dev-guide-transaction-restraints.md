@@ -714,7 +714,7 @@ Note that for both the size restrictions and row restrictions, you should also c
 
 ## Auto-committed `SELECT FOR UPDATE` statements do NOT wait for locks
 
-Currently locks are not added to auto-committed `SELECT FOR UPDATE` statements. The effect is shown in the following figure:
+Currently, locks are not added to auto-committed `SELECT FOR UPDATE` statements. The following screenshot shows the effect in two separate sessions:
 
 ![The situation in TiDB](/media/develop/autocommit_selectforupdate_nowaitlock.png)
 
