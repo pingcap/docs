@@ -229,7 +229,7 @@ SET GLOBAL tidb_server_memory_limit='75%';
 
 #### Conflict resolution
 
-Since version v8.5.5, when using [Global Sort](/tidb-global-sort.md), `IMPORT INTO` can automatically handle primary key or unique index conflicts by removing all conflicting rows.
+Starting from v8.5.5, when you use [Global Sort](/tidb-global-sort.md), `IMPORT INTO` automatically resolves primary key or unique index conflicts by removing all conflicting rows.
 
 Such as when importing into a table `create table t(id int primary key, v int);`, with below data file `conflicts.csv`:
 ```csv
