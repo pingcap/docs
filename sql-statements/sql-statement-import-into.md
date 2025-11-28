@@ -261,7 +261,7 @@ mysql> select * from t;
 2 rows in set (0.01 sec)
 ```
 
-The conflicted rows details will be stored in the cloud storage URI, see more info in `Conflicted rows info when using Global Sort` section.
+Details of the conflicted rows are stored in the cloud storage URI. For more information, see the `Conflicted rows info when using Global Sort` section.
 
 ### Output
 
