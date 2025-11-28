@@ -294,7 +294,7 @@ IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
 When using [Global Sort](/tidb-global-sort.md) and there are conflicted rows for the import job, the number of conflicted rows will be displayed in the `Result_Message` column of [`SHOW IMPORT`](/sql-statements/sql-statement-show-import-job.md), like this:
 
 ```sql
-mysql> import into t from 's3://mybucket/conflicts.csv' with thread=8;
+mysql> import into t from 's3://mybucket/conflicts.csv' with thread=8, skip_rows=1;
 +--------+-----------------------------+--------------+----------+-------+----------+------------------+---------------+--------------------+----------------------------+----------------------------+----------------------------+------------+
 | Job_ID | Data_Source                 | Target_Table | Table_ID | Phase | Status   | Source_File_Size | Imported_Rows | Result_Message     | Create_Time                | Start_Time                 | End_Time                   | Created_By |
 +--------+-----------------------------+--------------+----------+-------+----------+------------------+---------------+--------------------+----------------------------+----------------------------+----------------------------+------------+
