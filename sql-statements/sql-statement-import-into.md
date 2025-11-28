@@ -291,7 +291,7 @@ IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
 
 #### Conflicted rows info when using Global Sort
 
-When using [Global Sort](/tidb-global-sort.md) and there are conflicted rows for the import job, the number of conflicted rows will be displayed in the `Result_Message` column of [`SHOW IMPORT`](/sql-statements/sql-statement-show-import-job.md), like this:
+When you use [Global Sort](/tidb-global-sort.md) and an import job has conflicted rows, the number of conflicted rows is displayed in the `Result_Message` column of [`SHOW IMPORT`](/sql-statements/sql-statement-show-import-job.md), as shown in the following example:
 
 ```sql
 mysql> import into t from 's3://mybucket/conflicts.csv' with thread=8, skip_rows=1;
