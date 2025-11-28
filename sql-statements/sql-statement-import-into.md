@@ -302,7 +302,7 @@ mysql> import into t from 's3://mybucket/conflicts.csv' with thread=8, skip_rows
 +--------+-----------------------------+--------------+----------+-------+----------+------------------+---------------+--------------------+----------------------------+----------------------------+----------------------------+------------+
 ```
 
-And the conflicted rows details can be viewed under the `conflicted-rows/<DXF task ID>` folder of the cloud storage URI, such as:
+You can view the details of the conflicted rows in the `conflicted-rows/<DXF task ID>` folder of the cloud storage URI. For example:
 
 ```
 s3://mybucket/sorted-dir/conflicted-rows/1/1-28f0e03a-27c3-4283-a523-418859bb7a2c/data-1.txt
