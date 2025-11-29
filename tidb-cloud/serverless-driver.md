@@ -343,7 +343,7 @@ Currently, using serverless driver has the following limitations:
 - Up to 10,000 rows can be fetched in a single query.
 - You can execute only a single SQL statement at a time. Multiple SQL statements in one query are not supported yet.
 - Connection with [private endpoints](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) is not supported yet.
-- The server blocks arbitrary browser origins via CORS to protect credentials. As a result, usage is limited to the backend.
+- The server blocks requests from arbitrary browser origins via CORS to protect your credentials. As a result, you can only use the serverless driver from backend services.
 
 ## What's next
 
