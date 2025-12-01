@@ -9,13 +9,19 @@ TiDB Cloud provides a [Prometheus](https://prometheus.io/) API endpoint. If you 
 
 This document describes how to configure your Prometheus service to read key metrics from the TiDB Cloud endpoint and how to view the metrics using [Grafana](https://grafana.com/).
 
-## Prometheus integration version
+## Prometheus integration versions
 
-TiDB Cloud has supported the project-level Prometheus integration (Beta) since March 15, 2022. Starting from October 21, 2025, TiDB Cloud introduces the cluster-level Prometheus integration (Preview). Starting from December 2, 2025, the cluster-level Prometheus integration becomes generally available (GA).
+- Starting from March 15, 2022, TiDB Cloud has supported the project-level Prometheus integration (Beta).
+- Starting from October 21, 2025, TiDB Cloud introduces the cluster-level Prometheus integration (Preview). 
+- Starting from December 2, 2025, the cluster-level Prometheus integration becomes generally available (GA).
 
 - **Cluster-level Prometheus integration**: if no legacy project-level Prometheus integration remains undeleted within your organization by October 21, 2025, TiDB Cloud provides the cluster-level Prometheus integration for your organization to experience the latest enhancements.
 
-- **Legacy project-level Prometheus integration (Beta)**: if at least one legacy project-level Prometheus integration remains undeleted within your organization by October 21, 2025, TiDB Cloud retains both existing and new integrations at the project level for your organization to avoid affecting current dashboards. Note that the legacy project-level Prometheus integrations will be deprecated on January 6, 2026. If your organization is still using these legacy integrations, follow [Migrate Prometheus Integrations](./migrate-prometheus-integrations.md) to migrate to the new cluster-level integrations and minimize disruptions to your metrics-related services.
+- **Legacy project-level Prometheus integration (Beta)**: if at least one legacy project-level Prometheus integration remains undeleted within your organization by October 21, 2025, TiDB Cloud retains both existing and new integrations at the project level for your organization to avoid affecting current dashboards. 
+
+    > **Note**
+    >
+    > The legacy project-level Prometheus integrations will be deprecated on January 6, 2026. If your organization is still using these legacy integrations, follow [Migrate Prometheus Integrations](/tidb-cloud/migrate-prometheus-metrics-integrations.md) to migrate to the new cluster-level integrations and minimize disruptions to your metrics-related services.
 
 ## Prerequisites
 
