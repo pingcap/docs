@@ -40,12 +40,13 @@ The output is as follows:
 +--------------------+----------------------+-------------------------------------+--------+
 | ascii              | ascii_bin            | US ASCII                            |      1 |
 | binary             | binary               | binary                              |      1 |
+| gb18030            | gb18030_chinese_ci   | China National Standard GB18030     |      4 |
 | gbk                | gbk_chinese_ci       | Chinese Internal Code Specification |      2 |
 | latin1             | latin1_bin           | Latin1                              |      1 |
 | utf8               | utf8_bin             | UTF-8 Unicode                       |      3 |
 | utf8mb4            | utf8mb4_bin          | UTF-8 Unicode                       |      4 |
 +--------------------+----------------------+-------------------------------------+--------+
-6 rows in set (0.00 sec)
+7 rows in set (0.00 sec)
 ```
 
 The description of columns in the `CHARACTER_SETS` table is as follows:

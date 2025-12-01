@@ -147,9 +147,12 @@ Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` statement. The bene
 | [`TIDB_HOT_REGIONS_HISTORY`](/information-schema/information-schema-tidb-hot-regions-history.md) | Provides history statistics about which Regions are hot. |
 | [`TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)                | Provides index information about TiDB tables. |
 | [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)        | Provides the information of the index usage statistics on the TiDB node. ｜
-| [`TIDB_SERVERS_INFO`](/information-schema/information-schema-tidb-servers-info.md)      | Provides a list of TiDB servers (namely, tidb-server component) |
+| [`TIDB_SERVERS_INFO`](/information-schema/information-schema-tidb-servers-info.md)      | Provides a list of TiDB servers (namely, tidb-server component). |
 | [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) | Provides the information of the transactions that are being executed on the TiDB node. |
+| [`TIFLASH_INDEXES`](/information-schema/information-schema-tiflash-indexes.md)          | Provides statistics about index building on TiFlash replicas. |
 | [`TIFLASH_REPLICA`](/information-schema/information-schema-tiflash-replica.md)          | Provides details about TiFlash replicas. |
+| [`TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md)        | Provides statistics about segments in data tables in TiFlash.           |
+| [`TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)            | Provides statistics about data tables in TiFlash. |
 | [`TIKV_REGION_PEERS`](/information-schema/information-schema-tikv-region-peers.md)      | Provides details about where regions are stored. |
 | [`TIKV_REGION_STATUS`](/information-schema/information-schema-tikv-region-status.md)    | Provides statistics about regions. |
 | [`TIKV_STORE_STATUS`](/information-schema/information-schema-tikv-store-status.md)      | Provides basic information about TiKV servers. |
@@ -201,7 +204,10 @@ Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` statement. The bene
 | [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)        | Provides the information of the index usage statistics on the TiDB node. ｜
 | [`TIDB_SERVERS_INFO`](/information-schema/information-schema-tidb-servers-info.md)      | Provides a list of TiDB servers (namely, tidb-server component) |
 | [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) | Provides the information of the transactions that are being executed on the TiDB node. |
+| [`TIFLASH_INDEXES`](/information-schema/information-schema-tiflash-indexes.md)          | Provides statistics about index building on TiFlash replicas. |
 | [`TIFLASH_REPLICA`](/information-schema/information-schema-tiflash-replica.md)          | Provides details about TiFlash replicas. |
+| [`TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md)        | Provides statistics about segments in data tables in TiFlash.           |
+| [`TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)            | Provides statistics about data tables in TiFlash. |
 | [`TIKV_REGION_PEERS`](/information-schema/information-schema-tikv-region-peers.md)      | Provides details about where regions are stored. |
 | [`TIKV_REGION_STATUS`](/information-schema/information-schema-tikv-region-status.md)    | Provides statistics about regions. |
 | [`TIKV_STORE_STATUS`](/information-schema/information-schema-tikv-store-status.md)      | Provides basic information about TiKV servers. |

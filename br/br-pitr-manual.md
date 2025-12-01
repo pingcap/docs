@@ -409,7 +409,8 @@ Expected output:
 
 > **Note:**
 >
-> If you specify `--full-backup-storage` as the incremental backup address for `restore point`, for restores of this backup and any previous incremental backups, you need to set the parameter `--allow-pitr-from-incremental` to `true` to make the incremental backups compatible with the subsequent log backups.
+> - If you specify `--full-backup-storage` as the incremental backup address for `restore point`, for restores of this backup and any previous incremental backups, you need to set the parameter `--allow-pitr-from-incremental` to `true` to make the incremental backups compatible with the subsequent log backups.
+> - For information about checksum configuration, see [Checksum](/br/br-snapshot-manual.md#checksum).
 
 You can run the `tiup br restore point` command to perform a PITR on a new cluster or just restore the log backup data.
 
@@ -548,6 +549,11 @@ tiup br restore point --pd="${PD_IP}:2379" \
 > - The filter options apply during the restore phase for both snapshot and log backups.
 > - You can specify multiple `--filter` options to include or exclude different patterns.
 > - PITR filtering does not support system tables yet. If you need to restore specific system tables, use the `br restore full` command with filters instead. Note that this command restores only the snapshot backup data (not log backup data).
+> - The regular expression in the restore task matches the table name at the `restored-ts` time point, with the following three possible cases:
+>     - Table A (table id = 1): the table name always matches the `--filter` regular expression at and before the `restored-ts` time point. In this case, PITR restores the table.
+>     - Table B (table id = 2): the table name does not match the `--filter` regular expression at some point before `restored-ts`, but matches at the `restored-ts` time point. In this case, PITR restores the table.
+>     - Table C (table id = 3): the table name matches the `--filter` regular expression at some point before `restored-ts`, but does **not** match at the `restored-ts` time point. In this case, PITR does **not** restore the table.
+> - You can use the database and table filtering feature to restore part of the data online. During the online restore process, do **not** create databases or tables with the same names as the restored objects, otherwise the restore task fails due to conflicts. To avoid data inconsistency, the tables created by PITR during this restore process are not readable or writable until the restore task is complete.
 
 ### Concurrent restore operations
 
@@ -575,7 +581,8 @@ tiup br restore point --pd="${PD_IP}:2379" \
 
 > **Note:**
 >
-> Each concurrent restore operation must target a different database or a non-overlapping set of tables. Attempting to restore overlapping datasets concurrently will result in an error.
+> - Each concurrent restore operation must target a different database or a non-overlapping set of tables. Attempting to restore overlapping datasets concurrently will result in an error.
+> - Multiple restore tasks consume a lot of system resources. It is recommended to run concurrent restore tasks only when CPU and I/O resources are sufficient.
 
 ### Compatibility between ongoing log backup and snapshot restore
 

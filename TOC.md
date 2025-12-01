@@ -559,7 +559,7 @@
       - [Use TiUP (Recommended)](/dm/deploy-a-dm-cluster-using-tiup.md)
       - [Use TiUP Offline](/dm/deploy-a-dm-cluster-using-tiup-offline.md)
       - [Use Binary](/dm/deploy-a-dm-cluster-using-binary.md)
-      - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/dev/deploy-tidb-dm)
+      - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/deploy-tidb-dm)
     - Tutorials
       - [Create a Data Source](/dm/quick-start-create-source.md)
       - [Manage Data Sources](/dm/dm-manage-source.md)
@@ -1005,6 +1005,7 @@
     - Character Set and Collation
       - [Overview](/character-set-and-collation.md)
       - [GBK](/character-set-gbk.md)
+      - [GB18030](/character-set-gb18030.md)
     - [Placement Rules in SQL](/placement-rules-in-sql.md)
     - System Tables
       - `mysql` Schema
@@ -1062,6 +1063,7 @@
         - [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)
         - [`TIDB_SERVERS_INFO`](/information-schema/information-schema-tidb-servers-info.md)
         - [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
+        - [`TIFLASH_INDEXES`](/information-schema/information-schema-tiflash-indexes.md)
         - [`TIFLASH_REPLICA`](/information-schema/information-schema-tiflash-replica.md)
         - [`TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md)
         - [`TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)
@@ -1089,6 +1091,7 @@
   - [URI Formats of External Storage Services](/external-storage-uri.md)
   - [TiDB Workload Repository](/workload-repository.md)
   - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/online-workloads-and-add-index-operations.md)
+  - [`ANALYZE` Embedded in DDL Statements](/ddl_embedded_analyze.md)
 - FAQs
   - [FAQ Summary](/faq/faq-overview.md)
   - [TiDB FAQs](/faq/tidb-faq.md)
@@ -1108,6 +1111,7 @@
   - [Release Support Policy](https://www.pingcap.com/tidb-release-support-policy/)
   - [TiDB Installation Packages](/binary-package.md)
   - v8.5
+    - [8.5.4](/releases/release-8.5.4.md)
     - [8.5.3](/releases/release-8.5.3.md)
     - [8.5.2](/releases/release-8.5.2.md)
     - [8.5.1](/releases/release-8.5.1.md)

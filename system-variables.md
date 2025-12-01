@@ -442,9 +442,10 @@ mysql> SELECT * FROM t1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `mysql_native_password`
-- Possible values: `mysql_native_password`, `caching_sha2_password`, `tidb_sm3_password`, `tidb_auth_token`, `authentication_ldap_sasl`, and `authentication_ldap_simple`.
-- This variable sets the authentication method that the server advertises when the server-client connection is being established.
-- To authenticate using the `tidb_sm3_password` method, you can connect to TiDB using [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3).
+- Possible values: `mysql_native_password`, `caching_sha2_password`, `tidb_sm3_password`, `authentication_ldap_sasl`, and `authentication_ldap_simple`.
+- This variable sets the default authentication method and affects the following behavior:
+    - When you create users using [`CREATE USER`](/sql-statements/sql-statement-create-user.md), if the authentication method is not explicitly specified in the statement, the authentication method specified by this variable is used to create the user.
+    - This variable determines the authentication method advertised by the server when establishing a server-client connection.
 
 <CustomContent platform="tidb">
 
@@ -741,7 +742,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 > **Note:**
 >
-> Before v6.4.0, the `max_execution_time` system variable takes effect on all types of statements. Starting from v6.4.0, this variable only controls the maximum execution time of read-only statements. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in exact milliseconds as you specify.
+> Before v6.4.0, the `max_execution_time` system variable takes effect on all types of statements. Starting from v6.4.0, this variable only controls the maximum execution time of `SELECT` statements. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in exact milliseconds as you specify.
 
 <CustomContent platform="tidb">
 
@@ -1607,9 +1608,21 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_ddl_disk_quota <span class="version-mark">New in v6.3.0</span>
 
+<CustomContent platform="tidb-cloud" plan="starter,essential">
+
 > **Note:**
 >
 > This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud" plan="premium">
+
+> **Note:**
+>
+> This variable is read-only for [{{{ .premium }}}](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-intro/#deployment-options).
+
+</CustomContent>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -1637,6 +1650,14 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Starting from v7.1.0, the index acceleration operation supports checkpoints. Even if the TiDB owner node is restarted or changed due to failures, TiDB can still recover progress from checkpoints that are automatically updated on a regular basis.
 - To verify whether a completed `ADD INDEX` operation is accelerated, you can execute the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs) statement to see whether `ingest` is displayed in the `JOB_TYPE` column.
 
+<CustomContent platform="tidb-cloud" plan="premium">
+
+> **Note:**
+>
+> For {{{ .premium }}}, this variable is read-only. If you need to modify it, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+</CustomContent>
+
 <CustomContent platform="tidb">
 
 > **Note:**
@@ -1655,6 +1676,14 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 </CustomContent>
 
+### tidb_stats_update_during_ddl <span class="version-mark">New in v8.5.4 and v9.0.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Default value: `OFF`
+- This variable controls whether to enable DDL-embedded `ANALYZE`. When enabled, DDL statements that create new indexes ([`ADD INDEX`](/sql-statements/sql-statement-add-index.md)) or reorganize existing indexes ([`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md) and [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)) automatically collect statistics before the index becomes visible. For more information, see [`ANALYZE` Embedded in DDL Statements](/ddl_embedded_analyze.md).
+
 ### tidb_enable_dist_task <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
@@ -1666,6 +1695,14 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Starting from TiDB v7.2.0, the DXF supports distributedly executing the [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statement for import jobs.
 - Starting from TiDB v8.1.0, this variable is enabled by default. If you want to upgrade a cluster with the DXF enabled to v8.1.0 or later, disable the DXF (by setting `tidb_enable_dist_task` to `OFF`) before the upgrade, which avoids `ADD INDEX` operations during the upgrade causing data index inconsistency. After the upgrade, you can manually enable the DXF.
 - This variable is renamed from `tidb_ddl_distribute_reorg`.
+
+<CustomContent platform="tidb-cloud" plan="premium">
+
+> **Note:**
+>
+> For {{{ .premium }}}, this variable is read-only. If you need to modify it, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+</CustomContent>
 
 ### tidb_cloud_storage_uri <span class="version-mark">New in v7.4.0</span>
 
@@ -1764,11 +1801,35 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - When Global Sort is disabled, only one TiDB node writes to TiKV at a time. In this case, the maximum write bandwidth per TiKV node is `100MiB`.
 - When Global Sort is enabled, all 4 TiDB nodes can write to TiKV simultaneously. In this case, the maximum write bandwidth per TiKV node is `4 * 100MiB = 400MiB`.
 
+<CustomContent platform="tidb-cloud" plan="premium">
+
+> **Note:**
+>
+> For {{{ .premium }}}, this variable is automatically tuned to an appropriate value and cannot be modified by users. If you need to adjust the setting, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+</CustomContent>
+
 ### tidb_ddl_reorg_worker_cnt
+
+<CustomContent platform="tidb-cloud">
+
+<CustomContent plan="starter,essential">
 
 > **Note:**
 >
 > This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+> **Note:**
+>
+> For {{{ .premium }}}, modifying this TiDB variable takes effect only on `MODIFY COLUMN` DDL jobs and does not affect `ADD INDEX` DDL jobs.
+
+</CustomContent>
+
+</CustomContent>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -2365,6 +2426,14 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to set whether to enable the [Metadata lock](/metadata-lock.md) feature. Note that when setting this variable, you need to make sure that there are no running DDL statements in the cluster. Otherwise, the data might be incorrect or inconsistent.
+
+<CustomContent platform="tidb-cloud" plan="premium">
+
+> **Note:**
+>
+> For {{{ .premium }}}, this variable is read-only. If you need to modify it, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+</CustomContent>
 
 ### tidb_enable_mutation_checker <span class="version-mark">New in v6.0.0</span>
 
@@ -4091,12 +4160,16 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 
 ### tidb_mpp_store_fail_ttl
 
+> **Warning:**
+>
+> Starting from v9.0.0, this variable is deprecated and its value is fixed to `0s`. This means TiDB no longer needs to wait before sending queries to newly started TiFlash nodes, as delays are no longer necessary to prevent query failures.
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Duration
-- Default value: `60s`
-- The newly started TiFlash node does not provide services. To prevent queries from failing, TiDB limits the tidb-server sending queries to the newly started TiFlash node. This variable indicates the time range in which the newly started TiFlash node is not sent requests.
+- Default value: `0s`. In v8.5.3 and earlier versions, the default value is `60s`.
+- The newly started TiFlash node does not provide services. To prevent queries from failing, TiDB limits the tidb-server from sending queries to the newly started TiFlash node. This variable indicates the time range in which the newly started TiFlash node is not sent requests.
 
 ### tidb_multi_statement_mode <span class="version-mark">New in v4.0.11</span>
 
@@ -4338,6 +4411,24 @@ mysql> desc select count(distinct a) from test.t;
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to enable the [Cross-database binding](/sql-plan-management.md#cross-database-binding) feature.
+
+### tidb_opt_enable_no_decorrelate_in_select <span class="version-mark">New in v8.5.4 and v9.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether the optimizer applies the [`NO_DECORRELATE()`](/optimizer-hints.md#no_decorrelate) hint for all queries that contain a subquery in the `SELECT` list.
+
+### tidb_opt_enable_semi_join_rewrite <span class="version-mark">New in v8.5.4 and v9.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether the optimizer applies the [`SEMI_JOIN_REWRITE()`](/optimizer-hints.md#semi_join_rewrite) hint for all queries that contain subqueries.
 
 ### tidb_opt_fix_control <span class="version-mark">New in v6.5.3 and v7.1.0</span>
 
@@ -5731,7 +5822,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **Note:**
 >
-> If the character check is skipped, TiDB might fail to detect illegal UTF-8 characters written by the application, cause decoding errors when `ANALYZE` is executed, and introduce other unknown encoding issues. If your application cannot guarantee the validity of the written string, it is not recommended to skip the character check.
+> If the character check is skipped, TiDB might fail to detect invalid UTF-8 characters written by the application, cause decoding errors when `ANALYZE` is executed, and introduce other unknown encoding issues. If your application cannot guarantee the validity of the written string, it is not recommended to skip the character check.
 
 ### tidb_slow_log_threshold
 
@@ -6275,6 +6366,15 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 >
 > - `PARALLEL` and `PARALLEL-FAST` modes are incompatible with [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530) and [`tidb_enable_tso_follower_proxy`](#tidb_enable_tso_follower_proxy-new-in-v530). If either [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530) is set to a non-zero value or [`tidb_enable_tso_follower_proxy`](#tidb_enable_tso_follower_proxy-new-in-v530) is enabled, configuring `tidb_tso_client_rpc_mode` does not take effect, and TiDB always works in `DEFAULT` mode.
 > - `PARALLEL` and `PARALLEL-FAST` modes are designed to reduce the average time for retrieving TS in TiDB. In situations with significant latency fluctuations, such as long-tail latency or latency spikes, these two modes might not provide any remarkable performance improvements.
+
+### tidb_cb_pd_metadata_error_rate_threshold_ratio <span class="version-mark">New in v9.0.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Default value: `0`
+- Range: `[0, 1]`
+- This variable controls when TiDB triggers the circuit breaker. Setting a value of `0` (default) disables the circuit breaker. Setting a value between `0.01` and `1` enables it, causing the circuit breaker to trigger when the error rate of specific requests sent to PD reaches or exceeds the threshold.
 
 ### tidb_ttl_delete_rate_limit <span class="version-mark">New in v6.5.0</span>
 
