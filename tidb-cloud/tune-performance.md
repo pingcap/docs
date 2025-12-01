@@ -14,7 +14,7 @@ TiDB Cloud provides [Slow Query](#slow-query), [Statement Analysis](#statement-a
 
 <CustomContent plan="premium">
 
-TiDB Cloud provides [Slow Query](#slow-query) and [SQL Statement](#statement-analysis) to analyze performance.
+TiDB Cloud provides [Slow Query](#slow-query) and [SQL Statement](#sql-statement) to analyze performance.
 
 </CustomContent>
 
