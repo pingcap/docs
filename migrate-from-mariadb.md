@@ -184,7 +184,9 @@ WHERE
 
 ### Character set and collation
 
-TiDB does not support the `latin1_swedish_ci` collation that is often used in MariaDB.
+TiDB does not support the `latin1_swedish_ci` collation that is often used in MariaDB. 
+
+TiDB also doesn't support `utf8mb4_uca1400_ai_ci` which is now the default in MariaDB. It is recommended to replace `utf8mb4_uca1400_ai_ci` with `utf8mb4_0900_ai_ci`. The difference is the version of [the UCA standard](http://www.unicode.org/reports/tr10/): 9.0.0 versus 14.0.0.
 
 To see what collations TiDB supports, execute this statement on TiDB:
 
