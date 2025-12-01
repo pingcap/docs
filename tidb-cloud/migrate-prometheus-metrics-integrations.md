@@ -1,11 +1,11 @@
 ---
 title: Migrate Prometheus Integrations
-summary: Learn how to migrate from the legacy project-level metrics integration to the new cluster-level Prometheus integrations.
+summary: Learn how to migrate from the legacy project-level Prometheus integration to the new cluster-level Prometheus integrations.
 ---
 
 # Migrate Prometheus Integrations
 
-TiDB Cloud now manages Prometheus integrations at the cluster level, offering more granular control and configuration. The legacy project-level Prometheus integrations (Beta) will be deprecated on January 6, 2026. If your organization is still using these legacy integrations, follow this guide to migrate them to the new cluster-level Prometheus integrations to minimize disruptions to your metrics-related services.
+TiDB Cloud now manages [Prometheus integrations](/tidb-cloud/monitor-prometheus-and-grafana-integration.md) at the cluster level, offering more granular control and configuration. The legacy project-level Prometheus integrations (Beta) will be deprecated on January 6, 2026. If your organization is still using these legacy integrations, follow this guide to migrate them to the new cluster-level Prometheus integrations to minimize disruptions to your metrics-related services.
 
 ## Prerequisites
 
@@ -37,7 +37,7 @@ Repeat the following steps for each [TiDB Cloud Dedicated](/tidb-cloud/select-cl
 
 ## Impact of deleting the project-level Prometheus integration (Beta)
 
-Deleting the project-level Prometheus integration (Beta) immediately stops all clusters in the project from exposing metrics to the Prometheus endpoint. This results in a temporary loss of downstream data and interrupts integration-related services (such as monitoring and alerts) until you configure the new cluster-level Prometheus integrations.
+Deleting the project-level Prometheus integration (Beta) immediately stops all clusters in the project from exposing metrics to the Prometheus endpoint. This results in a temporary loss of downstream data and interrupts integration-related services (such as monitoring and alerts) until you configure new cluster-level Prometheus integrations.
 
 ## Contact support
 
