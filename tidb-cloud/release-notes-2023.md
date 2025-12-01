@@ -37,7 +37,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) supports monitoring SQL statement RU costs.
 
-    TiDB Cloud Serverless now provides detailed insights into each SQL statement's [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit). You can view both the **Total RU** and **Mean RU** costs per SQL statement. This feature helps you identify and analyze RU costs, offering opportunities for potential cost savings in your operations.
+    TiDB Cloud Serverless now provides detailed insights into each SQL statement's [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru). You can view both the **Total RU** and **Mean RU** costs per SQL statement. This feature helps you identify and analyze RU costs, offering opportunities for potential cost savings in your operations.
 
     To check your SQL statement RU details, navigate to the **Diagnosis** page of [your TiDB Cloud Serverless cluster](https://tidbcloud.com/project/clusters) and then click the **SQL Statement** tab.
 
@@ -578,7 +578,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 - For the first five [Serverless Tier](/tidb-cloud/select-cluster-tier.md#starter) clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
 
     - Row storage: 5 GiB
-    - [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
+    - [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru): 50 million RUs per month
 
   Until May 31, 2023, Serverless Tier clusters are still free, with a 100% discount off. After that, usage beyond the free quota will be charged.
 
