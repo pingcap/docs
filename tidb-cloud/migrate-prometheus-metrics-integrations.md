@@ -35,9 +35,9 @@ Repeat the following steps for each [TiDB Cloud Dedicated](/tidb-cloud/select-cl
 
 3. On the **Integrations** page, create a new Prometheus integration. For more information, see [Integrate TiDB Cloud with Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md).
 
-## Impact of deleting the project-level Prometheus integration (beta)
+## Impact of deleting the project-level Prometheus integration (Beta)
 
-Deleting the project-level Prometheus integration (beta) immediately stops all clusters in the project from exposing metrics to the Prometheus endpoint. This results in a temporary loss of downstream data and interrupts integration-related services (such as monitoring and alerts) until you configure the new cluster-level Prometheus integrations.
+Deleting the project-level Prometheus integration (Beta) immediately stops all clusters in the project from exposing metrics to the Prometheus endpoint. This results in a temporary loss of downstream data and interrupts integration-related services (such as monitoring and alerts) until you configure the new cluster-level Prometheus integrations.
 
 ## Contact support
 
