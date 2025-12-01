@@ -21,7 +21,7 @@ Do the following to migrate the Prometheus integration.
 
 2. In the left navigation panel, click **Project Settings** > **Integrations**.
 
-3. On the **Integrations** > **Integration to Prometheus(Beta)** module, select **Scrape_config Files** and click **Delete**.
+3. On the **Integrations** > **Integration to Prometheus (BETA)** module, select **Scrape_config Files** and click **Delete**.
 
 4. In the displayed dialog, type `Delete` to confirm the removal of the legacy integration.
 
