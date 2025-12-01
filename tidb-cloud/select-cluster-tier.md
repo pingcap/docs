@@ -28,6 +28,7 @@ The free cluster plan is ideal for those who are getting started with TiDB Cloud
 
 - **No cost**: This plan is completely free, with no credit card required to get started.
 - **Storage**: Provides an initial 5 GiB of row-based storage and 5 GiB of columnar storage.
+<<<<<<< HEAD
 - **Request Units**: Includes 50 million [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) for database operations.
 - **Easy upgrade**: Offers a smooth transition to the [scalable cluster plan](#scalable-cluster-plan) as your needs grow.
 
@@ -38,6 +39,9 @@ For applications experiencing growing workloads and needing scalability in real 
 - **Enhanced capabilities**: Includes all capabilities of the free cluster plan, along with the capacity to handle larger and more complex workloads, as well as advanced security features.
 - **Automatic scaling**: Automatically adjusts storage and computing resources to efficiently meet changing workload demands.
 - **Predictable pricing**: Although this plan requires a credit card, you are only charged for the resources you use, ensuring cost-effective scalability.
+=======
+- **Request Units**: Includes 50 million [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) for database operations.
+>>>>>>> 604ed60c95 (tidb-cloud: add the "TiDB X" term to glossary (#22095))
 
 ### Usage quota
 

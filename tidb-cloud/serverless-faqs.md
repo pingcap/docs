@@ -26,7 +26,14 @@ For each organization in TiDB Cloud, you can create a maximum of five [free clus
 
 ### Are all TiDB Cloud features fully supported on TiDB Cloud Serverless?
 
+<<<<<<< HEAD
 Some of TiDB Cloud features are partially supported or not supported on TiDB Cloud Serverless. For more information, see [TiDB Cloud Serverless Limitations and Quotas](/tidb-cloud/serverless-limitations.md).
+=======
+- A fully managed database with both row-based and columnar storage, ideal for hybrid OLTP and OLAP workloads.
+- Automatic and request-driven scaling, no capacity planning or manual tuning required.
+- Built-in vector search and full-text search to power GenAI retrieval, chatbots, and other AI applications.
+- Always-free monthly quota for up to five clusters per organization (5 GiB row data + 5 GiB columnar data + 50 million [RUs](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) per cluster).
+>>>>>>> 604ed60c95 (tidb-cloud: add the "TiDB X" term to glossary (#22095))
 
 ### When will TiDB Cloud Serverless be available on cloud platforms other than AWS, such as Google Cloud or Azure?
 
@@ -69,7 +76,11 @@ For more information about how to set up TiFlash replicas, see [Create TiFlash r
 
 ### What are Request Units?
 
+<<<<<<< HEAD
 TiDB Cloud Serverless adopts a pay-as-you-go model, meaning that you only pay for the storage space and cluster usage. In this model, all cluster activities such as SQL queries, bulk operations, and background jobs are quantified in [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit). RU is an abstract measurement for the size and intricacy of requests initiated on your cluster. For more information, see [TiDB Cloud Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/).
+=======
+{{{ .starter }}} adopts a pay-as-you-go model, meaning that you only pay for the storage space and cluster usage. In this model, all cluster activities such as SQL queries, bulk operations, and background jobs are quantified in [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru). RU is an abstract measurement for the size and intricacy of requests initiated on your cluster. For more information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
+>>>>>>> 604ed60c95 (tidb-cloud: add the "TiDB X" term to glossary (#22095))
 
 ### Is there any free plan available for TiDB Cloud Serverless?
 
@@ -77,7 +88,7 @@ For the first five TiDB Cloud Serverless clusters in your organization, TiDB Clo
 
 - Row-based storage: 5 GiB
 - Columnar storage: 5 GiB
-- [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
+- [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru): 50 million RUs per month
 
 If you are using a scalable cluster, usage beyond the free quota will be charged. For a free cluster, once the free quota is reached, the read and write operations on this cluster will be throttled until you upgrade to a scalable cluster or the usage is reset upon the start of a new month.
 

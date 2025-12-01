@@ -21,7 +21,37 @@ By default, clusters utilizing the Zonal High Availability option have all compo
 
 For applications that require maximum infrastructure isolation and redundancy, the Regional High Availability option distributes nodes across multiple availability zones.
 
+<<<<<<< HEAD
 ![TiDB Cloud Serverless regional high availability](/media/tidb-cloud/serverless-regional-high-avaliability-aws.png)
+=======
+</CustomContent>
+
+## {{{ .starter }}}
+
+{{{ .starter }}} is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database.
+
+The Starter cluster plan is ideal for those who are getting started with TiDB Cloud. It provides developers and small teams with the following features:
+
+- **No cost**: This plan is completely free, with no credit card required to get started.
+- **Storage**: Provides an initial 5 GiB of row-based storage and 5 GiB of columnar storage.
+- **Request Units**: Includes 50 million [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) for database operations.
+
+## {{{ .essential }}}
+
+For applications experiencing growing workloads and needing scalability in real time, the Essential cluster plan provides the flexibility and performance to keep pace with your business growth with the following features:
+
+- **Enhanced capabilities**: includes all capabilities of the Starter plan, along with the capacity to handle larger and more complex workloads, as well as advanced security features.
+- **Automatic scaling**: automatically adjusts storage and computing resources to efficiently meet changing workload demands.
+- **High availability**: built-in fault tolerance and redundancy ensure your applications remain available and resilient, even during infrastructure failures.
+- **Predictable pricing**: billed based on storage and Request Capacity Units (RCUs) of the compute resources, offering transparent, usage-based pricing that scales with your needs, so you only pay for what you use without surprises.
+
+{{{ .essential }}} offers two types of high availability to address varying operational requirements.
+
+- By default, clusters utilizing the Zonal High Availability option have all components located within the same availability zone, which results in lower network latency.
+- For applications that require maximum infrastructure isolation and redundancy, the Regional High Availability option distributes nodes across multiple availability zones.
+
+For more information, see [High Availability in {{{ .starter }}} and Essential](/tidb-cloud/serverless-high-availability.md).
+>>>>>>> 604ed60c95 (tidb-cloud: add the "TiDB X" term to glossary (#22095))
 
 ## TiDB Cloud Dedicated
 

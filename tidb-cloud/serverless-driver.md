@@ -327,7 +327,14 @@ TiDB Cloud serverless driver has been integrated with the following ORMs:
 
 ## Pricing
 
+<<<<<<< HEAD
 The serverless driver itself is free, but accessing data with the driver generates [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) and storage usage. The pricing follows the [TiDB Cloud Serverless pricing](https://www.pingcap.com/tidb-serverless-pricing-details/) model.
+=======
+The serverless driver itself is free, but accessing data with the driver generates [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) and storage usage.
+
+- For {{{ .starter }}} clusters, the pricing follows the [{{{ .starter }}} pricing](https://www.pingcap.com/tidb-cloud-starter-pricing-details/) model.
+- For {{{ .essential }}} clusters, the pricing follows the [{{{ .essential }}} pricing](https://www.pingcap.com/tidb-cloud-essential-pricing-details/) model.
+>>>>>>> 604ed60c95 (tidb-cloud: add the "TiDB X" term to glossary (#22095))
 
 ## Limitations
 
