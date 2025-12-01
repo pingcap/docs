@@ -6,7 +6,11 @@ aliases: ['/tidbcloud/index-insight']
 
 # Analyze and Tune Performance for Premium instances
 
-TiDB Cloud provides [Slow Query](#slow-query), [SQL Statement](#statement-analysis) to analyze performance.
+<CustomContent plan="premium">
+
+TiDB Cloud provides [Slow Query](#slow-query) and [SQL Statement](#statement-analysis) to analyze performance.
+
+</CustomContent>
 
 - Slow Query lets you search and view all slow queries in your Premium Instance, and explore the bottlenecks of each slow query by viewing its execution plan, SQL execution information, and other details.
 
