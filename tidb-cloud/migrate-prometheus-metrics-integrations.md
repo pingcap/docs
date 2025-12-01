@@ -12,6 +12,7 @@ TiDB Cloud now manages Prometheus integrations at the cluster level, offering mo
 - To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Project Owner` access in TiDB Cloud.
 
 ## Migration steps
+
 Do the following to migrate the Prometheus integration.
 
 ### Step 1. Delete the legacy project-level Prometheus integrations (Beta)
