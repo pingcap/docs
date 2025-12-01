@@ -78,9 +78,9 @@ To view slow queries in a TiDB <CustomContent plan="starter,essential,dedicated"
 
 <CustomContent plan="premium">
 
-1. Navigate and click the **Slow Query** page of a TiDB instance.
+1. Navigate to the overview page of the TiDB instance, and then click **Monitoring** > **Slow Query** in the left navigation pane.
 
-2. Click any slow query in the list to display its detailed execution information.
+2. Select a slow query from the list to view its detailed execution information.
 
 3. (Optional) You can filter slow queries based on the target time range and SQL keywords. You can also limit the number of slow queries to be displayed.
 
@@ -116,9 +116,9 @@ To use the statement analysis, perform the following steps:
 
 To use the **SQL Statement** page, perform the following steps:
 
-1. Navigate and click the **SQL Statement** page of a TiDB instance.
+1. Navigate to the overview page of the TiDB instance, and then click **Monitoring** > **SQL Statement** in the left navigation pane.
 
-2. Click any SQL statement in the list to display its detailed execution information.
+2. Click a SQL statement in the list to display its detailed execution information.
 
 3. Select the time period to be analyzed in the time interval box. Then you can get the execution statistics of SQL statements of all databases in this period.
 
