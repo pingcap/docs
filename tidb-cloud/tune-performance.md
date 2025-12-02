@@ -144,7 +144,7 @@ To view the key analytics, perform the following steps:
 
 2. Click the **Key Visualizer** tab.
 
-On the **Key Visualizer** page, a large heat map shows changes on access traffic over time. The average values along each axis of the heat map are shown below and on the right side. The left side is the table name, index name and other information.
+On the **Key Visualizer** page, a large heat map shows how access traffic changes over time. The average values along each axis of the heat map are shown below and on the right side. The left side displays the table name, index name, and other related information.
 
 For more information, see [Key Visualizer](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer).
 
