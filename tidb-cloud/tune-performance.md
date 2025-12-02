@@ -118,9 +118,9 @@ To use the **SQL Statement** page, perform the following steps:
 
 1. Navigate to the overview page of the TiDB instance, and then click **Monitoring** > **SQL Statement** in the left navigation pane.
 
-2. Click a SQL statement in the list to display its detailed execution information.
+2. Click a SQL statement in the list to view its detailed execution information.
 
-3. Select the time period to be analyzed in the time interval box. Then you can get the execution statistics of SQL statements of all databases in this period.
+3. In the time interval box, select the time period to be analyzed. Then you can get the execution statistics for SQL statements across all databases in this period.
 
 4. (Optional) If you only care about certain databases, you can select the corresponding schema(s) in the next box to filter the results.
 
