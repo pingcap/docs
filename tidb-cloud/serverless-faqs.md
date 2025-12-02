@@ -29,7 +29,7 @@ To make the purpose of this entry tier clearer, we’ve renamed it to Starter, t
 - A fully managed database with both row-based and columnar storage, ideal for hybrid OLTP and OLAP workloads.
 - Automatic and request-driven scaling, no capacity planning or manual tuning required.
 - Built-in vector search and full-text search to power GenAI retrieval, chatbots, and other AI applications.
-- Always-free monthly quota for up to five clusters per organization (5 GiB row data + 5 GiB columnar data + 50 million [RUs](/tidb-cloud/tidb-cloud-glossary.md#request-unit) per cluster).
+- Always-free monthly quota for up to five clusters per organization (5 GiB row data + 5 GiB columnar data + 50 million [RUs](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) per cluster).
 
 ### How do I get started with {{{ .starter }}}?
 
@@ -88,7 +88,7 @@ When you connect via a Public Endpoint, your connection passes through various n
 
 ### What are Request Units?
 
-{{{ .starter }}} adopts a pay-as-you-go model, meaning that you only pay for the storage space and cluster usage. In this model, all cluster activities such as SQL queries, bulk operations, and background jobs are quantified in [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit). RU is an abstract measurement for the size and intricacy of requests initiated on your cluster. For more information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
+{{{ .starter }}} adopts a pay-as-you-go model, meaning that you only pay for the storage space and cluster usage. In this model, all cluster activities such as SQL queries, bulk operations, and background jobs are quantified in [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru). RU is an abstract measurement for the size and intricacy of requests initiated on your cluster. For more information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
 
 ### Is there any free plan available for {{{ .starter }}}?
 
@@ -96,7 +96,7 @@ For the first five {{{ .starter }}} clusters in your organization, TiDB Cloud pr
 
 - Row-based storage: 5 GiB
 - Columnar storage: 5 GiB
-- [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
+- [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru): 50 million RUs per month
 
 If the monthly spending limit is set for a {{{ .starter }}} cluster, usage beyond the free quota will be charged. For a free cluster, once the free quota is reached, the read and write operations on this cluster will be throttled until you set a monthly spending limit or the usage is reset upon the start of a new month.
 

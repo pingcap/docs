@@ -8,6 +8,14 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## November 27, 2025
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v8.5.3](https://docs.pingcap.com/tidb/v8.5/release-8.5.3/) to [v8.5.4](https://docs.pingcap.com/tidb/v8.5/release-8.5.4/).
+
 ## November 18, 2025
 
 **General changes**
@@ -744,4 +752,4 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - Support exporting data in Parquet files through the [TiDB Cloud console](https://tidbcloud.com/).
 
-  For more information, see [Export Data from TiDB Cloud Serverless](/tidb-cloud/serverless-export.md) and [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md).
+  For more information, see [Export Data from TiDB Cloud Serverless](/tidb-cloud/serverless-export.md) and [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/configure-external-storage-access.md).

@@ -1,17 +1,28 @@
 ---
-title: Configure External Storage Access for {{{ .starter }}} or Essential
-summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access.
+title: Configure External Storage Access
+summary: Learn how to configure cross-account access to an external storage such as Amazon Simple Storage Service (Amazon S3).
+aliases: ['/tidbcloud/serverless-external-storage']
 ---
 
-# Configure External Storage Access for {{{ .starter }}} or Essential
+# Configure External Storage Access
+
+<CustomContent plan="starter,essential">
 
 If you want to import data from or export data to an external storage in a TiDB Cloud cluster, you need to configure cross-account access. This document describes how to configure access to an external storage for {{{ .starter }}} and {{{ .essential }}} clusters.
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+If you want to import data from or export data to an external storage in a TiDB Cloud instance, you need to configure cross-account access. This document describes how to configure access to an external storage for {{{ .premium }}} instances.
+
+</CustomContent>
 
 If you need to configure these external storages for a TiDB Cloud Dedicated cluster, see [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/dedicated-external-storage.md).
 
 ## Configure Amazon S3 access
 
-To allow a TiDB Cloud cluster to access the source data in your Amazon S3 bucket, configure the bucket access for the cluster using either of the following methods:
+To allow a TiDB Cloud <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> to access the source data in your Amazon S3 bucket, configure the bucket access for the <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> using either of the following methods:
 
 - [Use a Role ARN](#configure-amazon-s3-access-using-a-role-arn): use a Role ARN to access your Amazon S3 bucket.
 - [Use an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key): use the access key of an IAM user to access your Amazon S3 bucket.
@@ -22,13 +33,13 @@ It is recommended that you use [AWS CloudFormation](https://docs.aws.amazon.com/
 
 > **Note:**
 >
-> Role ARN access to Amazon S3 is only supported for clusters with AWS as the cloud provider. If you use a different cloud provider, use an AWS access key instead. For more information, see [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key).
+> Role ARN access to Amazon S3 is only supported for <CustomContent plan="starter,essential">clusters</CustomContent><CustomContent plan="premium">instances</CustomContent> with AWS as the cloud provider. If you use a different cloud provider, use an AWS access key instead. For more information, see [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key).
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and <CustomContent plan="starter,essential">navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.</CustomContent><CustomContent plan="premium">navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page.</CustomContent>
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Open the **Add New ARN** dialog.
 
@@ -40,7 +51,7 @@ It is recommended that you use [AWS CloudFormation](https://docs.aws.amazon.com/
 
     - If you want to export data to Amazon S3, open the **Add New ARN** dialog as follows:
 
-        1. Click **Export data to...**  > **Amazon S3**. If your cluster has neither imported nor exported any data before, click **Click here to export data to...** > **Amazon S3** at the bottom of the page.
+        1. Click **Export data to...**  > **Amazon S3**. If your <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> has neither imported nor exported any data before, click **Click here to export data to...** > **Amazon S3** at the bottom of the page.
         2. Fill in the **Folder URI** field.
         3. Choose **AWS Role ARN** and click **Click here to create new one with AWS CloudFormation**.
 
@@ -56,7 +67,7 @@ It is recommended that you use [AWS CloudFormation](https://docs.aws.amazon.com/
 
     5. After the CloudFormation stack is executed, you can click the **Outputs** tab and find the Role ARN value in the **Value** column.
 
-        ![img.png](/media/tidb-cloud/serverless-external-storage/serverless-role-arn.png)
+        ![Role ARN](/media/tidb-cloud/serverless-external-storage/serverless-role-arn.png)
 
 If you have any trouble creating a role ARN with AWS CloudFormation, you can take the following steps to create one manually:
 
@@ -79,10 +90,10 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
 
     4. On the **Create policy** page, click the **JSON** tab.
 
-    5. Configure the policy in the policy text field according to your needs. The following is an example that you can use to export data from and import data into a TiDB Cloud cluster.
+    5. Configure the policy in the policy text field according to your needs. The following is an example that you can use to export data from and import data into a TiDB Cloud <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>.
 
-        - Exporting data from a TiDB Cloud cluster needs the **s3:PutObject** and **s3:ListBucket** permissions.
-        - Importing data into a TiDB Cloud cluster needs the **s3:GetObject**, **s3:GetObjectVersion**, and **s3:ListBucket** permissions.
+        - Exporting data from a TiDB Cloud <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> needs the **s3:PutObject** and **s3:ListBucket** permissions.
+        - Importing data into a TiDB Cloud <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> needs the **s3:GetObject**, **s3:GetObjectVersion**, and **s3:ListBucket** permissions.
 
         ```json
         {
@@ -150,7 +161,7 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
 
         - In **Trusted entity type**, select **AWS account**.
         - In **An AWS account**, select **Another AWS account**, and then paste the TiDB Cloud account ID to the **Account ID** field.
-        - In **Options**, click **Require external ID (Best practice when a third party will assume this role)**, and then paste the TiDB Cloud External ID to the **External ID** field. If the role is created without a Require external ID, once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can use the same Role ARN to access your Amazon S3 bucket. If the role is created with the account ID and external ID, only the corresponding TiDB cluster can access the bucket.
+        - In **Options**, click **Require external ID (Best practice when a third party will assume this role)**, and then paste the TiDB Cloud External ID to the **External ID** field.<CustomContent plan="starter,essential"> If the role is created without a Require external ID, once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can use the same Role ARN to access your Amazon S3 bucket. If the role is created with the account ID and external ID, only the corresponding TiDB cluster can access the bucket.</CustomContent>
 
     3. Click **Next** to open the policy list, choose the policy you just created, and then click **Next**.
 
@@ -177,6 +188,8 @@ Take the following steps to configure an access key:
 > **Note:**
 >
 > TiDB Cloud does not store your access keys. It is recommended that you [delete the access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) after the import or export is complete.
+
+<CustomContent plan="starter,essential">
 
 ## Configure GCS access
 
@@ -206,11 +219,15 @@ Take the following steps to configure a service account key:
 
 3. Choose the default `JSON` key type, and then click **CREATE** to download the Google Cloud credentials file. The file contains the service account key that you need to use when configuring the GCS access for the TiDB Cloud cluster.
 
+</CustomContent>
+
+<CustomContent plan="starter,essential">
+
 ## Configure Azure Blob Storage access
 
 To allow TiDB Cloud to access your Azure Blob container, you need to create a service SAS token for the container.
 
-You can create a SAS token either using an [Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview) (recommended) or manual configuration. 
+You can create a SAS token either using an [Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview) (recommended) or manual configuration.
 
 To create a SAS token using an Azure ARM template, take the following steps:
 
@@ -221,15 +238,15 @@ To create a SAS token using an Azure ARM template, take the following steps:
     2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Open the **Generate New SAS Token via ARM Template Deployment** dialog.
-        
+
     1. Click **Export data to...**  > **Azure Blob Storage**. If your cluster has neither imported nor exported any data before, click **Click here to export data to...** > **Azure Blob Storage** at the bottom of the page.
-   
-    2. Scroll down to the **Azure Blob Storage Settings** area, and then click **Click here to create a new one with Azure ARM template** under the SAS Token field. 
-   
+
+    2. Scroll down to the **Azure Blob Storage Settings** area, and then click **Click here to create a new one with Azure ARM template** under the SAS Token field.
+
 3. Create a SAS token with the Azure ARM template.
 
     1. In the **Generate New SAS Token via ARM Template Deployment** dialog, click **Click to open the Azure Portal with the pre-configured ARM template**.
-   
+
     2. After logging in to Azure, you will be redirected to the Azure **Custom deployment** page.
 
     3. Fill in the **Resource group** and **Storage Account Name** in the **Custom deployment** page. You can get all the information from the storage account overview page where the container is located.
@@ -237,7 +254,7 @@ To create a SAS token using an Azure ARM template, take the following steps:
         ![azure-storage-account-overview](/media/tidb-cloud/serverless-external-storage/azure-storage-account-overview.png)
 
     4. Click **Review + create** or **Next** to review the deployment. Click **Create** to start the deployment.
-   
+
     5. After it completes, you will be redirected to the deployment overview page. Navigate to the **Outputs** section to get the SAS token.
 
 If you have any trouble creating a SAS token with the Azure ARM template, take the following steps to create one manually:
@@ -246,7 +263,7 @@ If you have any trouble creating a SAS token with the Azure ARM template, take t
 <summary>Click here to see details</summary>
 
 1. On the [Azure Storage account](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts) page, click your storage account to which the container belongs.
-   
+
 2. On your **Storage account** page, click the **Security+network**, and then click **Shared access signature**.
 
    ![sas-position](/media/tidb-cloud/serverless-external-storage/azure-sas-position.png)
@@ -269,6 +286,8 @@ If you have any trouble creating a SAS token with the Azure ARM template, take t
 
 </details>
 
+</CustomContent>
+
 ## Configure Alibaba Cloud Object Storage Service (OSS) access
 
 To allow TiDB Cloud to access your Alibaba Cloud OSS bucket, you need to create an AccessKey pair for the bucket.
@@ -276,19 +295,19 @@ To allow TiDB Cloud to access your Alibaba Cloud OSS bucket, you need to create 
 Take the following steps to configure an AccessKey pair:
 
 1. Create a RAM user and get the AccessKey pair. For more information, see [Create a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-ram-user).
-    
+
     In the **Access Mode** section, select **Using permanent AccessKey to access**.
 
 2. Create a custom policy with the required permissions. For more information, see [Create custom policies](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy).
-    
+
     - In the **Effect** section, select **Allow**.
     - In the **Service** section, select **Object Storage Service**.
     - In the **Action** section, select the permissions as needed.
-   
-        To import data into a TiDB Cloud cluster, grant **oss:GetObject**, **oss:GetBucketInfo**, and **oss:ListObjects** permissions.
 
-        To export data from a TiDB Cloud cluster, grant **oss:PutObject**, **oss:GetBucketInfo**, and **oss:ListBuckets** permissions.
-        
+        To import data into a TiDB Cloud <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>, grant **oss:GetObject**, **oss:GetBucketInfo**, and **oss:ListObjects** permissions.
+
+        To export data from a TiDB Cloud <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>, grant **oss:PutObject**, **oss:GetBucketInfo**, and **oss:ListBuckets** permissions.
+
     - In the **Resource** section, select the bucket and the objects in the bucket.
 
 3. Attach the custom policies to the RAM user. For more information, see [Grant permissions to a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/grant-permissions-to-the-ram-user).

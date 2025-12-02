@@ -216,7 +216,7 @@
     - [Import Snapshot Files from Cloud Storage](/tidb-cloud/import-snapshot-files-serverless.md)
     - [Import Data Using MySQL CLI](/tidb-cloud/premium/import-with-mysql-cli-premium.md)
   - Reference
-    - [Configure External Storage Access for TiDB Cloud](/tidb-cloud/serverless-external-storage.md)
+    - [Configure External Storage Access for TiDB Cloud](/tidb-cloud/configure-external-storage-access.md)
     - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
     - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
@@ -627,7 +627,6 @@
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Notifications](/tidb-cloud/notifications.md)
-  - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
 - Support Plan
   - [Connected Care Overview](/tidb-cloud/connected-care-overview.md)
   - [Connected Care Details](/tidb-cloud/connected-care-detail.md)
@@ -642,6 +641,7 @@
   - [Get Support](/tidb-cloud/tidb-cloud-support.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
+- [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
 
 ## RELEASES
 
