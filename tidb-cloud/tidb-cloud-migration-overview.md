@@ -55,7 +55,7 @@ If you have data files in SQL, CSV, Parquet, or Aurora Snapshot formats, you can
 
 ### Configure cloud storage access
 
-If your source data is stored in Amazon S3, Google Cloud Storage (GCS) buckets, Azure Blob Storage containers, or Alibaba Cloud OSS buckets, before importing or migrating the data to TiDB Cloud, you need to configure access to the storage. For more information, see [Configure External Storage Access for {{{ .starter }}} or Essential](/tidb-cloud/serverless-external-storage.md) and [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/dedicated-external-storage.md).
+If your source data is stored in Amazon S3, Google Cloud Storage (GCS) buckets, Azure Blob Storage containers, or Alibaba Cloud OSS buckets, before importing or migrating the data to TiDB Cloud, you need to configure access to the storage. For more information, see [Configure External Storage Access for {{{ .starter }}} or Essential](/tidb-cloud/configure-external-storage-access.md) and [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/dedicated-external-storage.md).
 
 ### Naming conventions for data import
 
