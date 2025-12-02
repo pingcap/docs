@@ -38,7 +38,7 @@ TiDB Cloud has supported the project-level Prometheus integration (Beta) since M
 
 Before configuring your Prometheus service to read metrics of TiDB Cloud, you need to generate a `scrape_config` YAML file in TiDB Cloud first. The `scrape_config` file contains a unique bearer token that allows the Prometheus service to monitor your target clusters.
 
-Depending on your [Prometheus integration version](#prometheus-integration-version), the steps to get the `scrape_config` file for Prometheus and access the integration page are different.
+Depending on your [Prometheus integration version](#prometheus-integration-versions), the steps to get the `scrape_config` file for Prometheus and access the integration page are different.
 
 <SimpleTab>
 <div label="Cluster-level Prometheus integration">
@@ -79,7 +79,7 @@ Depending on your [Prometheus integration version](#prometheus-integration-versi
 
 After your Prometheus service is reading metrics from TiDB Cloud, you can use Grafana GUI dashboards to visualize the metrics as follows:
 
-1. Depending on your [Prometheus integration version](#prometheus-integration-version), the link to download the Grafana dashboard JSON of TiDB Cloud for Prometheus is different.
+1. Depending on your [Prometheus integration version](#prometheus-integration-versions), the link to download the Grafana dashboard JSON of TiDB Cloud for Prometheus is different.
 
     - For cluster-level Prometheus integration, download the Grafana dashboard JSON file [here](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker.json).
     - For legacy project-level Prometheus integration (Beta), download the Grafana dashboard JSON file [here](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-grafana-dashboard-UI.json).
