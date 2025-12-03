@@ -8,6 +8,20 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## December 2, 2025
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - The Prometheus integration is now generally available (GA) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+
+        TiDB Cloud now manages Prometheus integrations at the cluster level, offering more granular control and configuration. This feature enables you to seamlessly ship the metrics of your [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster to Prometheus, allowing for advanced alerting in a unified platform.
+
+        For integration steps, see [Integrate TiDB Cloud with Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md).
+
+        To migrate existing Prometheus integrations to the cluster level, see [Migrate Prometheus Integrations](/tidb-cloud/migrate-prometheus-metrics-integrations.md).
+
 ## November 27, 2025
 
 **General changes**
