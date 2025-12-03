@@ -62,7 +62,7 @@ TiDB Cloud Essential は、次のいずれかの条件が満たされると、�
     -   `s3:PutObject`許可を持つ[アクセスキー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) 。
     -   権限`s3:PutObject`を持つ[役割ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html)でホストされているクラスターのみがロールARNの使用をサポートします。
 
-詳細については[Amazon S3 アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)参照してください。
+詳細については[Amazon S3 アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)参照してください。
 
 ### Googleクラウドストレージ {#google-cloud-storage}
 
@@ -71,7 +71,7 @@ TiDB Cloud Essential は、次のいずれかの条件が満たされると、�
 -   URI: `gs://<bucket-name>/<folder-path>/`
 -   アクセス資格情報: `storage.objects.create`および`storage.objects.delete`権限を持つ[サービスアカウントキー](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) 。
 
-詳細については[GCS アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-gcs-access)参照してください。
+詳細については[GCS アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)参照してください。
 
 ### Azure BLOB ストレージ {#azure-blob-storage}
 
@@ -80,7 +80,7 @@ TiDB Cloud Essential は、次のいずれかの条件が満たされると、�
 -   URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`または`https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
 -   アクセス資格情報: `Container`および`Object`リソースに対する`Read`および`Write`権限を持つ[共有アクセス署名（SAS）トークン](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) 。
 
-詳細については[Azure Blob Storage アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)参照してください。
+詳細については[Azure Blob Storage アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)参照してください。
 
 ### アリババクラウドOSS {#alibaba-cloud-oss}
 
@@ -89,7 +89,7 @@ Alibaba Cloud OSS に監査ログを保存するには、次の情報を提供�
 -   URI: `oss://<bucket-name>/<folder-path>/`
 -   アクセス資格情報: OSS バケットへのデータのエクスポートを許可する`oss:PutObject`および`oss:GetBucketInfo`権限を持つ[アクセスキーペア](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair) 。
 
-詳細については[Alibaba Cloud Object Storage Service (OSS) アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access)参照してください。
+詳細については[Alibaba Cloud Object Storage Service (OSS) アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)参照してください。
 
 ## 監査ログフィルタルール {#audit-logging-filter-rules}
 
@@ -245,7 +245,7 @@ ticloud serverless audit-log config update -c <cluster-id> --disabled=true
 
 ### フィルタールールを作成する {#create-a-filter-rule}
 
-フィルタールールを作成するには、監査ログに記録するユーザーとイベントを定義します。ユーザー、イベントクラス、テーブル、ステータスコードを指定して、ニーズに合わせてログをカスタマイズできます。
+フィルタールールを作成するには、監査ログに記録するユーザーとイベントを定義します。ユーザー、イベントクラス、テーブル、ステータスコードを指定して、ニーズに合わせてログ出力をカスタマイズできます。
 
 <SimpleTab>
 <div label="Console">
@@ -363,7 +363,7 @@ ticloud serverless audit-log filter delete --cluster-id <cluster-id> --filter-ru
 
 ## TiDB Cloudストレージによるアクセス監査ログ {#access-audit-logging-with-tidb-cloud-storage}
 
-TiDB Cloudに監査ログを保存すると、 TiDB Cloud Essential はそれらを`YYYY-MM-DD-<index>.log`という名前の読み取り可能なテキストファイルとして保存します。これらのファイルは、TiDB CloudコンソールまたはTiDB Cloud CLI を使用して表示およびダウンロードできます。
+監査ログをTiDB Cloudに保存すると、 TiDB Cloud Essentialはそれらを`YYYY-MM-DD-<index>.log`という名前の読み取り可能なテキストファイルとして保存します。これらのファイルは、TiDB CloudコンソールまたはTiDB Cloud CLIを使用して表示およびダウンロードできます。
 
 > **注記：**
 >

@@ -3,27 +3,23 @@ title: OpenAI Embeddings
 summary: TiDB Cloudで OpenAI 埋め込みモデルを使用する方法を学びます。
 ---
 
-# OpenAI埋め込み {#openai-embeddings}
+# OpenAI 埋め込み {#openai-embeddings}
 
-このドキュメントでは、TiDB Cloudの[自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)で OpenAI 埋め込みモデルを使用して、テキスト クエリからセマンティック検索を実行する方法について説明します。
+このドキュメントでは、 TiDB Cloudの[自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)で OpenAI 埋め込みモデルを使用して、テキスト クエリからセマンティック検索を実行する方法について説明します。
 
 > **注記：**
 >
-> 現在、 [自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)次の AWS リージョンのTiDB Cloud Starter クラスターでのみ利用可能です。
->
-> -   `Frankfurt (eu-central-1)`
-> -   `Oregon (us-west-2)`
-> -   `N. Virginia (us-east-1)`
+> [自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)は、AWS でホストされているTiDB Cloud Starter クラスターでのみ使用できます。
 
 ## 利用可能なモデル {#available-models}
 
-ご自身のOpenAI APIキー（BYOK）をお持ちの場合は、 `openai/`プレフィックスですべてのOpenAIモデルをご利用いただけます。例：
+ご自身のOpenAI APIキー（BYOK）をお持ちいただく場合、すべてのOpenAIモデルは`openai/`プレフィックスでご利用いただけます。例：
 
 **テキスト埋め込み 3 小**
 
 -   名前: `openai/text-embedding-3-small`
 -   寸法: 512-1536 (デフォルト: 1536)
--   距離メトリック: コサイン、L2
+-   距離計量：コサイン、L2
 -   価格: OpenAIによる請求
 -   TiDB Cloudがホスト: ❌
 -   鍵をご持参ください: ✅
@@ -32,7 +28,7 @@ summary: TiDB Cloudで OpenAI 埋め込みモデルを使用する方法を学�
 
 -   名前: `openai/text-embedding-3-large`
 -   寸法: 256-3072 (デフォルト: 3072)
--   距離メトリック: コサイン、L2
+-   距離計量：コサイン、L2
 -   価格: OpenAIによる請求
 -   TiDB Cloudがホスト: ❌
 -   鍵をご持参ください: ✅
@@ -89,9 +85,9 @@ LIMIT 2;
 
 ## オプション {#options}
 
-[OpenAIの埋め込みオプション](https://platform.openai.com/docs/api-reference/embeddings/create)すべて、 `EMBED_TEXT()`関数の`additional_json_options`パラメータを介してサポートされます。
+[OpenAI埋め込みオプション](https://platform.openai.com/docs/api-reference/embeddings/create)すべて、 `EMBED_TEXT()`関数の`additional_json_options`パラメータを介してサポートされます。
 
-**例: text-embedding-3-large に代替寸法を使用する**
+**例: text-embedding-3-large に代替ディメンションを使用する**
 
 ```sql
 CREATE TABLE sample (

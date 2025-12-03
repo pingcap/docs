@@ -26,7 +26,7 @@ TiDB Cloud Starterは、フルマネージドのマルチテナント型TiDBサ�
 
 -   **無料**: このプランは完全に無料で、開始するのにクレジットカードは必要ありません。
 -   **ストレージ**: 初期 5 GiB の行ベースのstorageと 5 GiB の列ベースのstorageを提供します。
--   **リクエスト単位**: データベース操作用に 5000 万[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit)が含まれます。
+-   **リクエスト単位**: データベース操作用に 5000 万[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)が含まれます。
 
 ### 使用量制限 {#usage-quota}
 
@@ -40,7 +40,7 @@ TiDB Cloudでは、組織ごとにデフォルトで最大5つのTiDB Cloud Star
 
 リクエストユニット（RU）は、データベースへの単一のリクエストで消費されるリソースの量を表す測定単位です。リクエストで消費されるRUの量は、操作の種類や取得または変更されるデータの量など、さまざまな要因によって異なります。
 
-クラスターが使用量クォータに達すると、新しい月の開始時に使用[割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)がリセットされるまで、新規接続の試行は直ちに拒否されます。クォータに達する前に確立された既存の接続はアクティブのままですが、スロットリングが発生します。例えば、クラスターの行ベースstorageが空きクラスターで5GiBを超えると、クラスターは自動的に新規接続の試行を制限します。
+クラスターが使用量クォータに達すると、新しい月の開始時に使用量がリセットされるまで[割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)新規接続の試行は直ちに拒否されます。クォータに達する前に確立された既存の接続はアクティブのままですが、スロットリングが発生します。例えば、クラスターの行ベースstorageが空きクラスターで5GiBを超えると、クラスターは自動的に新規接続の試行を制限します。
 
 さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク送信など) の RU 消費量、価格の詳細、スロットル情報の詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)参照してください。
 
@@ -85,7 +85,7 @@ TiDB Cloud Starter またはTiDB Cloud Essential クラスターごとに、 TiD
 
 ## TiDB Cloud専用 {#tidb-cloud-dedicated}
 
-TiDB Cloud Dedicated は、クロスゾーンの高可用性、水平スケーリング、 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番環境向けです。
+TiDB Cloud Dedicated は、クロスゾーンの高可用性、水平スケーリング、 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番向けです。
 
 TiDB Cloud Dedicated クラスターでは、ビジネスニーズに合わせて TiDB、TiKV、 TiFlashのクラスターサイズを簡単にカスタマイズできます。各 TiKV ノードとTiFlashノードでは、ノード上のデータが[高可用性](/tidb-cloud/high-availability-with-multi-az.md)間、異なるアベイラビリティゾーンに複製され、分散されます。
 

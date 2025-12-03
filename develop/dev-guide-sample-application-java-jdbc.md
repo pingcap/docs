@@ -18,7 +18,7 @@ TiDB は MySQL 互換のデータベースであり、JDBC (Java Database Connec
 > **注記：**
 >
 > -   このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Dedicated、および TiDB Self-Managed で機能します。
-> -   TiDB v7.4以降、JDBC URLで`connectionCollation`が設定されておらず、 `characterEncoding`設定されていないか`UTF-8`に設定されている場合、JDBC接続で使用される照合順序はJDBCドライバーのバージョンによって異なります。詳細については、 [JDBC接続で使用される照合順序](/faq/sql-faq.md#collation-used-in-jdbc-connections)参照してください。
+> -   TiDB v7.4以降、JDBC URLで`connectionCollation`設定されておらず、 `characterEncoding`設定されていないか`UTF-8`に設定されている場合、JDBC接続で使用される照合順序はJDBCドライバーのバージョンによって異なります。詳細については、 [JDBC接続で使用される照合順序](/faq/sql-faq.md#collation-used-in-jdbc-connections)参照してください。
 
 </CustomContent>
 
@@ -27,7 +27,7 @@ TiDB は MySQL 互換のデータベースであり、JDBC (Java Database Connec
 > **注記：**
 >
 > -   このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Dedicated、および TiDB Self-Managed で機能します。
-> -   TiDB v7.4以降、JDBC URLで`connectionCollation`が設定されておらず、 `characterEncoding`設定されていないか`UTF-8`に設定されている場合、JDBC接続で使用される照合順序はJDBCドライバーのバージョンによって異なります。詳細については、 [JDBC接続で使用される照合順序](https://docs.pingcap.com/tidb/stable/sql-faq#collation-used-in-jdbc-connections)参照してください。
+> -   TiDB v7.4以降、JDBC URLで`connectionCollation`設定されておらず、 `characterEncoding`設定されていないか`UTF-8`に設定されている場合、JDBC接続で使用される照合順序はJDBCドライバーのバージョンによって異なります。詳細については、 [JDBC接続で使用される照合順序](https://docs.pingcap.com/tidb/stable/sql-faq#collation-used-in-jdbc-connections)参照してください。
 
 </CustomContent>
 
@@ -67,7 +67,7 @@ TiDB は MySQL 互換のデータベースであり、JDBC (Java Database Connec
 
 ### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
-サンプル コード リポジトリのクローンを作成するには、ターミナル ウィンドウで次のコマンドを実行します。
+ターミナル ウィンドウで次のコマンドを実行して、サンプル コード リポジトリのクローンを作成します。
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-java-jdbc-quickstart.git
@@ -182,7 +182,7 @@ cd tidb-java-jdbc-quickstart
     export USE_SSL='false'
     ```
 
-    プレースホルダー`{}`接続パラメータに置き換え、 `USE_SSL`を`false`に設定してください。TiDBをローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空です。
+    プレースホルダー`{}`を接続パラメータに置き換え、 `USE_SSL`を`false`に設定してください。TiDBをローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空です。
 
 3.  `env.sh`ファイルを保存します。
 
@@ -197,7 +197,7 @@ cd tidb-java-jdbc-quickstart
     make
     ```
 
-2.  [期待出力.txt](https://github.com/tidb-samples/tidb-java-jdbc-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
+2.  [期待出力.txt](https://github.com/tidb-samples/tidb-java-jdbc-quickstart/blob/main/Expected-Output.txt)をチェックして、出力が一致するかどうかを確認します。
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
@@ -308,16 +308,27 @@ Javaドライバーはデータベースへの低レベルのアクセスを提�
 -   データベース トランザクションを手動で管理します。
 -   データ行をデータ オブジェクトに手動でマップします。
 
-複雑なSQL文を書く必要がない限り、開発には[休止状態](/develop/dev-guide-sample-application-java-hibernate.md) 、 [マイバティス](/develop/dev-guide-sample-application-java-mybatis.md) 、 [スプリングデータ JPA](/develop/dev-guide-sample-application-java-spring-boot.md)などのフレームワークを[ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping)使用することをお勧めします。これにより、次のようなメリットが得られます。
+複雑なSQL文を書く必要がない限り、開発には[休止状態](/develop/dev-guide-sample-application-java-hibernate.md) 、 [マイバティス](/develop/dev-guide-sample-application-java-mybatis.md) 、 [スプリングデータ JPA](/develop/dev-guide-sample-application-java-spring-boot.md)などのフレームワークを[ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping)使用することをお勧めします。これにより、以下のことが可能になります。
 
 -   接続とトランザクションを管理するために[定型コード](https://en.wikipedia.org/wiki/Boilerplate_code)減らします。
 -   多数の SQL ステートメントの代わりにデータ オブジェクトを使用してデータを操作します。
+
+### MySQLの互換性 {#mysql-compatibility}
+
+MySQL では、 `DECIMAL`列にデータを挿入するときに、小数点以下の桁数が列の定義済みスケールを超えると、小数点以下の桁数がいくつあっても、MySQL は自動的に余分な桁を切り捨て、切り捨てられたデータを正常に挿入します。
+
+TiDB v8.5.3 以前のバージョンの場合:
+
+-   小数点以下の桁数が定義されたスケールを超えているが 72 を超えていない場合、TiDB は余分な桁を自動的に切り捨て、切り捨てられたデータを正常に挿入します。
+-   ただし、小数点以下の桁数が 72 を超えると、挿入は失敗し、エラーが返されます。
+
+TiDB v8.5.4 以降、TiDB は MySQL と動作を合わせます。つまり、余分な小数点以下の桁数がいくつあっても、余分な桁を自動的に切り捨て、切り捨てられたデータを正常に挿入します。
 
 ## 次のステップ {#next-steps}
 
 -   MySQL Connector/J の使用方法を[MySQL Connector/J のドキュメント](https://dev.mysql.com/doc/connector-j/en/)から詳しく学びます。
 -   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
--   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
 -   Java開発者向けコースを通じて学習します: [JavaからTiDBを操作する](https://eng.edu.pingcap.com/catalog/info/id:212) .
 
 ## ヘルプが必要ですか? {#need-help}

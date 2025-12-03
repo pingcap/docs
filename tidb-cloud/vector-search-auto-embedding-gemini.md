@@ -5,15 +5,11 @@ summary: TiDB Cloudで Google Gemini 埋め込みモデルを使用する方法�
 
 # ジェミニ埋め込み {#gemini-embeddings}
 
-このドキュメントでは、TiDB Cloudの[自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)で Gemini 埋め込みモデルを使用して、テキスト クエリからセマンティック検索を実行する方法について説明します。
+このドキュメントでは、 TiDB Cloudの[自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)で Gemini 埋め込みモデルを使用して、テキスト クエリからセマンティック検索を実行する方法について説明します。
 
 > **注記：**
 >
-> 現在、 [自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)次の AWS リージョンのTiDB Cloud Starter クラスターでのみ利用可能です。
->
-> -   `Frankfurt (eu-central-1)`
-> -   `Oregon (us-west-2)`
-> -   `N. Virginia (us-east-1)`
+> [自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)は、AWS でホストされているTiDB Cloud Starter クラスターでのみ使用できます。
 
 ## 利用可能なモデル {#available-models}
 
@@ -23,7 +19,7 @@ summary: TiDB Cloudで Google Gemini 埋め込みモデルを使用する方法�
 
 -   名前: `gemini/gemini-embedding-001`
 -   寸法: 128～3072 (デフォルト: 3072)
--   距離メトリック: コサイン、L2
+-   距離計量：コサイン、L2
 -   最大入力テキストトークン数: 2,048
 -   価格: Google が請求
 -   TiDB Cloudがホスト: ❌

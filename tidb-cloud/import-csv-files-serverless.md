@@ -17,7 +17,7 @@ summary: Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object S
 
 ## ステップ1.CSVファイルを準備する {#step-1-prepare-the-csv-files}
 
-1.  CSV ファイルが 256 MiB より大きい場合は、サイズがそれぞれ約 256 MiB の小さなファイルに分割することを検討してください。
+1.  CSV ファイルが 256 MiB より大きい場合は、サイズがそれぞれ 256 MiB 程度の小さなファイルに分割することを検討してください。
 
     TiDB Cloudは非常に大きなCSVファイルのインポートをサポートしていますが、256MiB程度の複数の入力ファイルで最適なパフォーマンスを発揮します。これは、 TiDB Cloudが複数のファイルを並列処理できるため、インポート速度が大幅に向上するからです。
 
@@ -27,13 +27,13 @@ summary: Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object S
 
     -   1つのテーブルのデータが複数のCSVファイルに分割されている場合は、これらのCSVファイルに数値サフィックスを追加してください。例： `${db_name}.${table_name}.000001.csv`と`${db_name}.${table_name}.000002.csv`数値サフィックスは連続していなくても構いませんが、昇順である必要があります。また、すべてのサフィックスの長さを揃えるため、数値の前にゼロを追加する必要があります。
 
-    -   TiDB Cloudは、以下の形式の圧縮ファイルのインポートをサポートしています： `.gzip` `.snappy` `.gz` `.zst`れたCSVファイルをインポートする場合は、ファイル名を`.zstd` `${db_name}.${table_name}.${suffix}.csv.${compress}`形式にしてください。13 `${suffix}`オプションで、「000001」などの任意の整数にすることができます。例えば、 `trips.000001.csv.gz`ファイルを`bikeshare.trips`テーブルにインポートする場合は、ファイル名を`bikeshare.trips.000001.csv.gz`に変更する必要があります。
+    -   TiDB Cloudは`.gz`以下の形式の圧縮ファイルのインポートをサポートしています： `.gzip` `.snappy`圧縮`.zstd`れたCSVファイルをインポートする場合は、ファイル名`.zst` `${db_name}.${table_name}.${suffix}.csv.${compress}`形式にしてください。13 `${suffix}`オプションで、「000001」などの任意の整数にすることができます。例えば、 `trips.000001.csv.gz`ファイルを`bikeshare.trips`テーブルにインポートする場合は、ファイル名を`bikeshare.trips.000001.csv.gz`に変更する必要があります。
 
     > **注記：**
     >
     > -   パフォーマンスを向上させるには、各圧縮ファイルのサイズを 100 MiB に制限することをお勧めします。
     > -   Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。その他の Snappy 圧縮形式はサポートされていません。
-    > -   非圧縮ファイルの場合、前述のルールに従って CSV ファイル名を更新できないケース (たとえば、CSV ファイル リンクが他のプログラムでも使用されている場合) は、ファイル名を変更せずに、 [ステップ4](#step-4-import-csv-files)の**マッピング設定を**使用してソース データを単一のターゲット テーブルにインポートできます。
+    > -   非圧縮ファイルの場合、前述のルールに従って CSV ファイル名を更新できないケース (たとえば、CSV ファイル リンクが他のプログラムでも使用されている場合) は、ファイル名を変更せずに、 [ステップ4](#step-4-import-csv-files)の**マッピング設定**を使用してソース データを単一のターゲット テーブルにインポートできます。
 
 ## ステップ2. ターゲットテーブルスキーマを作成する {#step-2-create-the-target-table-schemas}
 
@@ -45,7 +45,7 @@ CSV ファイルにはスキーマ情報が含まれていないため、CSV フ
 
     1.  ソース データのデータベース スキーマ ファイルを作成します。
 
-        CSVファイルが[ステップ1](#step-1-prepare-the-csv-files)の命名規則に従っている場合、データベーススキーマファイルはデータのインポートに必須ではありません。そうでない場合は、データベーススキーマファイルは必須です。
+        CSVファイルが[ステップ1](#step-1-prepare-the-csv-files)命名規則に従っている場合、データベーススキーマファイルはデータのインポートに必須ではありません。そうでない場合は、データベーススキーマファイルは必須です。
 
         各データベーススキーマファイルは`${db_name}-schema-create.sql`形式で、 `CREATE DATABASE` DDLステートメントを含んでいる必要があります。このファイルを使用して、 TiDB Cloudはデータをインポートする際に、データを格納するための`${db_name}`データベースを作成します。
 
@@ -57,7 +57,7 @@ CSV ファイルにはスキーマ情報が含まれていないため、CSV フ
 
     2.  ソース データのテーブル スキーマ ファイルを作成します。
 
-        CSV ファイルが保存されている Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service ディレクトリにテーブル スキーマ ファイルを含めない場合、 TiDB Cloud はデータをインポートするときに対応するテーブルを作成しません。
+        CSV ファイルが配置されている Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service ディレクトリにテーブル スキーマ ファイルを含めない場合、 TiDB Cloud はデータをインポートしたときに対応するテーブルを作成しません。
 
         各テーブルスキーマファイルは`${db_name}.${table_name}-schema.sql`形式で、 `CREATE TABLE` DDLステートメントを含む必要があります。このファイルを使用することで、 TiDB Cloudはデータをインポートする際に`${db_name}`データベースに`${db_table}`テーブルを作成します。
 
@@ -78,15 +78,15 @@ CSV ファイルにはスキーマ情報が含まれていないため、CSV フ
 
 TiDB Cloud がAmazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service バケット内の CSV ファイルにアクセスできるようにするには、次のいずれかを実行します。
 
--   CSV ファイルが Amazon S3 にある場合は、クラスターごとに[Amazon S3 アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access) 。
+-   CSV ファイルが Amazon S3 にある場合は、クラスターごとに[Amazon S3 アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access) 。
 
     バケットへのアクセスには、AWS アクセスキーまたはロール ARN のいずれかを使用できます。完了したら、アクセスキー（アクセスキー ID とシークレットアクセスキーを含む）またはロール ARN の値をメモしておいてください。これらは[ステップ4](#step-4-import-csv-files)で必要になります。
 
--   CSV ファイルが GCS にある場合は、クラスタごとに[GCS アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-gcs-access) 。
+-   CSV ファイルが GCS にある場合は、クラスタごとに[GCS アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access) 。
 
--   CSV ファイルが Azure Blob Storage にある場合は、クラスターごとに[Azure Blob Storage アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access) 。
+-   CSV ファイルが Azure Blob Storage にある場合は、クラスターごとに[Azure Blob Storage アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access) 。
 
--   CSV ファイルが Alibaba Cloud Object Storage Service (OSS) にある場合は、クラスターごとに[Alibaba Cloud Object Storage Service (OSS) アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access) 。
+-   CSV ファイルが Alibaba Cloud Object Storage Service (OSS) にある場合は、クラスターごとに[Alibaba Cloud Object Storage Service (OSS) アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access) 。
 
 ## ステップ4.CSVファイルをインポートする {#step-4-import-csv-files}
 
@@ -103,7 +103,7 @@ CSV ファイルをTiDB Cloud Starter またはTiDB Cloud Essential にインポ
         >
         > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート] を**クリックします。
 
 2.  **「Cloud Storage からデータをインポート」**をクリックします。
 
@@ -113,7 +113,7 @@ CSV ファイルをTiDB Cloud Starter またはTiDB Cloud Essential にインポ
     -   **ソースファイルURI** :
         -   1つのファイルをインポートする場合は、ソースファイルのURIを次の形式で入力します`s3://[bucket_name]/[data_source_folder]/[file_name].csv` 。たとえば、 `s3://sampledata/ingest/TableName.01.csv` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを次の形式で入力します`s3://[bucket_name]/[data_source_folder]/` 。例： `s3://sampledata/ingest/` 。
-    -   **認証情報**: バケットにアクセスするには、AWS ロール ARN または AWS アクセスキーのいずれかを使用できます。詳細については、 [Amazon S3 アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)参照してください。
+    -   **認証情報**: バケットにアクセスするには、AWS ロール ARN または AWS アクセスキーのいずれかを使用できます。詳細については、 [Amazon S3 アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)参照してください。
         -   **AWS ロール ARN** : AWS ロール ARN 値を入力します。
         -   **AWS アクセスキー**: AWS アクセスキー ID と AWS シークレットアクセスキーを入力します。
 
@@ -127,7 +127,7 @@ CSV ファイルをTiDB Cloud Starter またはTiDB Cloud Essential にインポ
     >
     > **ソースファイルURI**に単一のファイルが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションは表示されず、 TiDB Cloudは**ソース**フィールドにファイル名を自動的に入力します。この場合、データのインポート対象となるデータベースとテーブルを選択するだけで済みます。
 
-    -   TiDB Cloud が[ファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に続くすべてのソース ファイルを対応するテーブルに自動的にマップするようにするには、このオプションを選択したまま、データ形式として**CSV を**選択します。
+    -   TiDB Cloud が[ファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に続くすべてのソース ファイルを対応するテーブルに自動的にマップするようにするには、このオプションを選択したまま、データ形式として**CSV**を選択します。
 
     -   ソース CSV ファイルをターゲット データベースおよびテーブルに関連付けるためのマッピング ルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
 
@@ -156,17 +156,17 @@ CSV ファイルをTiDB Cloud Starter またはTiDB Cloud Essential にインポ
         >
         > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート] を**クリックします。
 
 2.  **「Cloud Storage からデータをインポート」**をクリックします。
 
 3.  **「クラウド ストレージからのデータのインポート」**ページで、次の情報を入力します。
 
-    -   **ストレージ プロバイダー**: **Google Cloud Storage**を選択します。
+    -   **ストレージ プロバイダー**: **Google Cloud Storage を**選択します。
     -   **ソースファイルURI** :
         -   1つのファイルをインポートする場合は、ソースファイルのURIを次の形式で入力します`[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].csv` 。たとえば、 `[gcs|gs]://sampledata/ingest/TableName.01.csv` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを次の形式で入力します`[gcs|gs]://[bucket_name]/[data_source_folder]/` 。例： `[gcs|gs]://sampledata/ingest/` 。
-    -   **認証情報**: GCS IAMロールのサービスアカウントキーを使用してバケットにアクセスできます。詳細については、 [GCS アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-gcs-access)ご覧ください。
+    -   **認証情報**: GCS IAMロールのサービスアカウントキーを使用してバケットにアクセスできます。詳細については、 [GCS アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)ご覧ください。
 
 4.  **「次へ」**をクリックします。
 
@@ -178,7 +178,7 @@ CSV ファイルをTiDB Cloud Starter またはTiDB Cloud Essential にインポ
     >
     > **ソースファイルURI**に単一のファイルが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションは表示されず、 TiDB Cloudは**ソース**フィールドにファイル名を自動的に入力します。この場合、データのインポート対象となるデータベースとテーブルを選択するだけで済みます。
 
-    -   TiDB Cloud が[ファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に続くすべてのソース ファイルを対応するテーブルに自動的にマップするようにするには、このオプションを選択したまま、データ形式として**CSV を**選択します。
+    -   TiDB Cloud が[ファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に続くすべてのソース ファイルを対応するテーブルに自動的にマップするようにするには、このオプションを選択したまま、データ形式として**CSV**を選択します。
 
     -   ソース CSV ファイルをターゲット データベースおよびテーブルに関連付けるためのマッピング ルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
 
@@ -207,17 +207,17 @@ CSV ファイルをTiDB Cloud Starter またはTiDB Cloud Essential にインポ
         >
         > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート] を**クリックします。
 
 2.  **「Cloud Storage からデータをインポート」**をクリックします。
 
 3.  **「クラウド ストレージからのデータのインポート」**ページで、次の情報を入力します。
 
-    -   **ストレージ プロバイダー**: **Azure Blob Storage**を選択します。
+    -   **ストレージ プロバイダー**: **Azure Blob Storage を**選択します。
     -   **ソースファイルURI** :
         -   1つのファイルをインポートする場合は、ソースファイルのURIを次の形式で入力します`[azure|https]://[bucket_name]/[data_source_folder]/[file_name].csv` 。たとえば、 `[azure|https]://sampledata/ingest/TableName.01.csv` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを次の形式で入力します`[azure|https]://[bucket_name]/[data_source_folder]/` 。例： `[azure|https]://sampledata/ingest/` 。
-    -   **認証情報**: Shared Access Signature (SAS) トークンを使用してバケットにアクセスできます。詳細については、 [Azure Blob Storage アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)ご覧ください。
+    -   **認証情報**: Shared Access Signature (SAS) トークンを使用してバケットにアクセスできます。詳細については、 [Azure Blob Storage アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)ご覧ください。
 
 4.  **「次へ」**をクリックします。
 
@@ -229,7 +229,7 @@ CSV ファイルをTiDB Cloud Starter またはTiDB Cloud Essential にインポ
     >
     > **ソースファイルURI**に単一のファイルが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションは表示されず、 TiDB Cloudは**ソース**フィールドにファイル名を自動的に入力します。この場合、データのインポート対象となるデータベースとテーブルを選択するだけで済みます。
 
-    -   TiDB Cloud が[ファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に続くすべてのソース ファイルを対応するテーブルに自動的にマップするようにするには、このオプションを選択したまま、データ形式として**CSV を**選択します。
+    -   TiDB Cloud が[ファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に続くすべてのソース ファイルを対応するテーブルに自動的にマップするようにするには、このオプションを選択したまま、データ形式として**CSV**を選択します。
 
     -   ソース CSV ファイルをターゲット データベースおよびテーブルに関連付けるためのマッピング ルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
 
@@ -258,7 +258,7 @@ CSV ファイルをTiDB Cloud Starter またはTiDB Cloud Essential にインポ
         >
         > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート] を**クリックします。
 
 2.  **「Cloud Storage からデータをインポート」**をクリックします。
 
@@ -268,7 +268,7 @@ CSV ファイルをTiDB Cloud Starter またはTiDB Cloud Essential にインポ
     -   **ソースファイルURI** :
         -   1つのファイルをインポートする場合は、ソースファイルのURIを次の形式で入力します`oss://[bucket_name]/[data_source_folder]/[file_name].csv` 。たとえば、 `oss://sampledata/ingest/TableName.01.csv` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを次の形式で入力します`oss://[bucket_name]/[data_source_folder]/` 。例： `oss://sampledata/ingest/` 。
-    -   **認証情報**: AccessKeyペアを使用してバケットにアクセスできます。詳細については、 [Alibaba Cloud Object Storage Service (OSS) アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access)ご覧ください。
+    -   **認証情報**: AccessKeyペアを使用してバケットにアクセスできます。詳細については、 [Alibaba Cloud Object Storage Service (OSS) アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)ご覧ください。
 
 4.  **「次へ」**をクリックします。
 
@@ -280,7 +280,7 @@ CSV ファイルをTiDB Cloud Starter またはTiDB Cloud Essential にインポ
     >
     > **ソースファイルURI**に単一のファイルが指定されている場合、 **「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する」**オプションは表示されず、 TiDB Cloudは**ソース**フィールドにファイル名を自動的に入力します。この場合、データのインポート対象となるデータベースとテーブルを選択するだけで済みます。
 
-    -   TiDB Cloud が[ファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に続くすべてのソース ファイルを対応するテーブルに自動的にマップするようにするには、このオプションを選択したまま、データ形式として**CSV を**選択します。
+    -   TiDB Cloud が[ファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に続くすべてのソース ファイルを対応するテーブルに自動的にマップするようにするには、このオプションを選択したまま、データ形式として**CSV**を選択します。
 
     -   ソース CSV ファイルをターゲット データベースおよびテーブルに関連付けるためのマッピング ルールを手動で構成するには、このオプションの選択を解除し、次のフィールドに入力します。
 
@@ -320,4 +320,4 @@ CSV ファイルをTiDB Cloud Starter またはTiDB Cloud Essential にインポ
 
 ### インポートされたテーブルに行が 0 行あります {#zero-rows-in-the-imported-tables}
 
-インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。行数が0の場合、入力したバケットURIに一致するデータファイルが存在しないことを意味します。この場合、正しいソースファイルを指定するか、 [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って既存のファイルの名前を変更するか、**詳細設定を**使用して変更を加えることで問題を解決してください。その後、該当するテーブルを再度インポートしてください。
+インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。行数が0の場合、入力したバケットURIに一致するデータファイルが存在しないことを意味します。この場合、正しいソースファイルを指定するか、 [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って既存のファイルの名前を変更するか、**詳細設定**を使用して変更を加えることで問題を解決してください。その後、該当するテーブルを再度インポートしてください。

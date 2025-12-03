@@ -13,13 +13,13 @@ aliases: ['/tidbcloud/glossary']
 
 ACIDとは、トランザクションの4つの主要な特性、すなわち原子性、一貫性、独立性、そして永続性を指します。これらの特性については、以下でそれぞれ説明します。
 
--   **原子性**とは、操作のすべての変更が実行されるか、まったく実行されないかのいずれかを意味します。TiDBは、トランザクションの原子性を実現するために、主キーを格納する[TiDBリージョン](#region)キーの原子性を保証します。
+-   **原子性**とは、操作のすべての変更が実行されるか、まったく実行されないかのいずれかを意味します。TiDBは、トランザクションの原子性を実現するために、主キーを格納する[TiDBリージョン](#region)のキーの原子性を保証します。
 
 -   **一貫性と**は、トランザクションが常にデータベースをある一貫性のある状態から別の一貫性のある状態へと移行させることを意味します。TiDBでは、データをメモリに書き込む前にデータの一貫性が確保されます。
 
--   **分離と**は、処理中のトランザクションが完了するまで他のトランザクションから参照できないことを意味します。これにより、同時実行中のトランザクションは一貫性を損なうことなくデータの読み書きを行うことができます。TiDBは現在、分離レベル`REPEATABLE READ`サポートしています。
+-   **分離と**は、処理中のトランザクションが完了するまで他のトランザクションから参照できないことを意味します。これにより、同時実行中のトランザクションは一貫性を損なうことなくデータの読み書きを行うことができます。TiDBは現在、分離レベル`REPEATABLE READ`をサポートしています。
 
--   **耐久性と**は、トランザクションが一度コミットされると、システム障害が発生してもコミットされた状態が維持されることを意味します。TiKVは永続storageを使用して耐久性を確保します。
+-   **耐久性**とは、トランザクションが一度コミットされると、システム障害が発生してもコミットされた状態が維持されることを意味します。TiKVは永続storageを使用して耐久性を確保します。
 
 ## C {#c}
 
@@ -63,9 +63,9 @@ Data Service のエンドポイントは、SQL 文を実行するためにカス
 
 ### 全文検索 {#full-text-search}
 
-意味的類似性に重点を置く[ベクトル検索](/vector-search/vector-search-overview.md)とは異なり、全文検索では正確なキーワードで文書を検索できます。検索拡張生成（RAG）シナリオでは、全文検索とベクトル検索を併用することで、検索品質を向上させることができます。
+意味的類似性に重点を置く[ベクトル検索](/vector-search/vector-search-overview.md)は異なり、全文検索では正確なキーワードで文書を検索できます。検索拡張生成（RAG）シナリオでは、全文検索とベクトル検索を併用することで、検索品質を向上させることができます。
 
-詳細については、 [SQLによる全文検索](/tidb-cloud/vector-search-full-text-search-sql.md)および[Pythonによる全文検索](/tidb-cloud/vector-search-full-text-search-python.md)参照してください。
+詳細については、 [SQLによる全文検索](/tidb-cloud/vector-search-full-text-search-sql.md)および[Pythonによる全文検索](/tidb-cloud/vector-search-full-text-search-python.md)を参照してください。
 
 ## M {#m}
 
@@ -79,7 +79,7 @@ TiDB v5.0以降、 TiFlashノードを介した大規模並列処理（MPP）ア
 
 ### MSP顧客 {#msp-customer}
 
-マネージドサービスプロバイダー（MSP）顧客とは、TiDB Cloudを購入し、MSPチャネルを通じて請求書を支払うエンドカスタマーです。これは[直接顧客](#direct-customer)とは区別されます。
+マネージドサービスプロバイダー（MSP）顧客とは、 TiDB Cloudを購入し、MSPチャネルを通じて請求書を支払うエンドカスタマーです。これは[直接顧客](#direct-customer)とは区別されます。
 
 ### マネージドサービスプロバイダー（MSP） {#managed-service-provider-msp}
 
@@ -143,7 +143,7 @@ TiDB Cloudは、 [チェンジフィード](/tidb-cloud/changefeed-overview.md)�
 
 リクエスト容量ユニット（RCU）は、 TiDB Cloud Essential クラスターにプロビジョニングされたコンピューティング容量を表す測定単位です。1 RCU は、1 秒あたり一定数の RU を処理できる固定量のコンピューティングリソースを提供します。プロビジョニングする RCU の数によって、クラスターのベースラインパフォーマンスとスループット容量が決まります。詳細については、 [TiDB Cloud Essential の価格詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)ご覧ください。
 
-### リクエストユニット {#request-unit}
+### リクエストユニット（RU） {#request-unit-ru}
 
 リクエストユニット（RU）は、データベースへの単一のリクエストで消費されるリソースの量を表す測定単位です。リクエストで消費されるRUの量は、操作の種類や取得または変更されるデータの量など、さまざまな要因によって異なります。詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)参照してください。
 
@@ -151,21 +151,27 @@ TiDB Cloudは、 [チェンジフィード](/tidb-cloud/changefeed-overview.md)�
 
 ### 支出限度額 {#spending-limit}
 
-[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md) 、特定のワークロードに対して1ヶ月あたりに支出可能な最大金額を表します。これは、 TiDB Cloud Starterクラスターの予算を設定できるコスト管理メカニズムです。支出限度額が0に設定されている場合、クラスターは無料のままです。支出限度額が0より大きい場合は、クレジットカードを追加する必要があります。
+[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md) 、特定のワークロードに対して1ヶ月あたりに支出可能な最大金額を表します。これは、TiDB Cloud Starterクラスターの予算を設定できるコスト管理メカニズムです。支出限度額が0に設定されている場合、クラスターは無料のままです。支出限度額が0より大きい場合は、クレジットカードを追加する必要があります。
 
 ## T {#t}
 
 ### TiDB クラスター {#tidb-cluster}
 
-機能的な作業データベースを形成する[ティドブ](https://docs.pingcap.com/tidb/stable/tidb-computing) 、 [TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage) 、 [配置Driver](https://docs.pingcap.com/tidb/stable/tidb-scheduling) (PD)、および[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)ノードの集合。
+機能的な作業データベースを形成する[ティドブ](https://docs.pingcap.com/tidb/stable/tidb-computing) 、 [TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage) 、 [配置Driver](https://docs.pingcap.com/tidb/stable/tidb-scheduling) (PD)、および[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)のノードの集合。
 
 ### TiDBノード {#tidb-node}
 
 トランザクションストアまたは分析ストアから返されたクエリからデータを集約するコンピューティングノード。TiDBノードの数を増やすと、クラスターが処理できる同時クエリの数が増加します。
 
+### TiDB X {#tidb-x}
+
+クラウドネイティブなオブジェクトstorageをTiDBのバックボーンとする、新しい分散SQLアーキテクチャ。TiDB Xは、コンピューティングとstorageを分離することで、ワークロードパターン、ビジネスサイクル、データ特性にリアルタイムで適応し、TiDBをインテリジェントに拡張することを可能にします。
+
+TiDB Xアーキテクチャは現在、<customcontent plan="starter,essential,dedicated"> TiDB Cloud StarterとEssential</customcontent><customcontent plan="premium"> TiDB Cloud Starter、Essential、および Premium</customcontent>詳細については、 [TiDB X のご紹介: AI 時代の分散 SQL の新たな基盤](https://www.pingcap.com/blog/introducing-tidb-x-a-new-foundation-distributed-sql-ai-era/)および[PingCAP、SCaiLE Summit 2025でTiDB Xと新しいAI機能を発表](https://www.pingcap.com/press-release/pingcap-launches-tidb-x-new-ai-capabilities/)を参照してください。
+
 ### TiFlashノード {#tiflash-node}
 
-TiKV からデータをリアルタイムで複製し、リアルタイムの分析storageロードをサポートする分析ストレージ ノード。
+TiKV からデータをリアルタイムで複製し、リアルタイムの分析ワークロードをサポートする分析storageノード。
 
 ### TiKVノード {#tikv-node}
 
@@ -179,7 +185,7 @@ SQLクライアント経由でTiDB Cloudクラスターへのアクセスが許�
 
 ### ベクトル検索 {#vector-search}
 
-[ベクトル検索](/vector-search/vector-search-overview.md) 、データの意味を優先して関連性の高い結果を提供する検索手法です。キーワードの完全一致や単語の出現頻度に依存する従来の全文検索とは異なり、ベクター検索は、テキスト、画像、音声など様々なデータタイプを高次元ベクトルに変換し、それらのベクトル間の類似性に基づいてクエリを実行します。この検索手法は、データの意味と文脈情報を捉えることで、ユーザーの検索意図をより正確に理解します。検索語がデータベース内のコンテンツと完全に一致しない場合でも、ベクター検索はデータのセマンティクスを分析することで、ユーザーの検索意図に沿った結果を提供できます。
+[ベクトル検索](/vector-search/vector-search-overview.md)は、データの意味を優先して関連性の高い結果を提供する検索手法です。キーワードの完全一致や単語の出現頻度に依存する従来の全文検索とは異なり、ベクター検索は、テキスト、画像、音声など様々なデータタイプを高次元ベクトルに変換し、それらのベクトル間の類似性に基づいてクエリを実行します。この検索手法は、データの意味と文脈情報を捉えることで、ユーザーの検索意図をより正確に理解します。検索語がデータベース内のコンテンツと完全に一致しない場合でも、ベクター検索はデータのセマンティクスを分析することで、ユーザーの検索意図に沿った結果を提供できます。
 
 ### 仮想プライベートクラウド {#virtual-private-cloud}
 

@@ -1,25 +1,21 @@
 ---
 title: Auto Embedding Overview
-summary: 自動埋め込みを使用して、ベクターではなくプレーンテキストでセマンティック検索を実行する方法を学習します。
+summary: 自動埋め込みを使用して、ベクトルではなくプレーンテキストでセマンティック検索を実行する方法を学習します。
 ---
 
 # 自動埋め込みの概要 {#auto-embedding-overview}
 
-自動埋め込み機能を使用すると、独自のベクターを用意することなく、プレーンテキストで直接ベクター検索を実行できます。この機能を使用すると、テキストデータを直接挿入し、テキストクエリを使用してセマンティック検索を実行できます。TiDBはバックグラウンドでテキストを自動的にベクターに変換します。
+自動埋め込み機能を使用すると、独自のベクターを用意することなく、プレーンテキストで直接ベクター検索を実行できます。この機能により、テキストデータを直接挿入し、テキストクエリを用いたセマンティック検索を実行できます。TiDBはバックグラウンドでテキストを自動的にベクターに変換します。
 
 自動埋め込みを使用する場合の基本的なワークフローは次のとおりです。
 
-1.  `EMBED_TEXT()`使用して、テキスト列と生成されたベクター列を持つ**テーブルを定義します**。
+1.  `EMBED_TEXT()`を使用して、テキスト列と生成されたベクター列を持つ**テーブルを定義します**。
 2.  **テキスト データを挿入します**。ベクトルは自動的に生成され、同時に保存されます。
-3.  **テキストを使用したクエリ**- 意味的に類似したコンテンツを見つけるには`VEC_EMBED_COSINE_DISTANCE()`または`VEC_EMBED_L2_DISTANCE()`使用します。
+3.  **テキストを使用したクエリ**- 意味的に類似したコンテンツを見つけるには`VEC_EMBED_COSINE_DISTANCE()`または`VEC_EMBED_L2_DISTANCE()`を使用します。
 
-## 可用性 {#availability}
-
-現在、自動埋め込みは次の AWS リージョンのTiDB Cloud Starter クラスターでのみ利用できます。
-
--   `Frankfurt (eu-central-1)`
--   `Oregon (us-west-2)`
--   `N. Virginia (us-east-1)`
+> **注記：**
+>
+> 自動埋め込みは、AWS でホストされているTiDB Cloud Starter クラスターでのみ利用できます。
 
 ## クイックスタートの例 {#quick-start-example}
 
@@ -104,9 +100,8 @@ LIMIT 3;
 
 > **注記：**
 >
-> -   ベクトルインデックスを定義するときは、 `VEC_COSINE_DISTANCE()`または`VEC_L2_DISTANCE()`使用します。
->
-> -   クエリを実行するときは、 `VEC_EMBED_COSINE_DISTANCE()`または`VEC_EMBED_L2_DISTANCE()`使用します。
+> -   ベクトルインデックスを定義するときは、 `VEC_COSINE_DISTANCE()`または`VEC_L2_DISTANCE()`を使用します。
+> -   クエリを実行するときは、 `VEC_EMBED_COSINE_DISTANCE()`または`VEC_EMBED_L2_DISTANCE()`を使用します。
 
 ## 利用可能なテキスト埋め込みモデル {#available-text-embedding-models}
 
@@ -117,19 +112,19 @@ TiDB Cloudは様々な埋め込みモデルをサポートしています。ニ�
 | アマゾンタイタン | [Amazon Titan 埋め込み](/tidb-cloud/vector-search-auto-embedding-amazon-titan.md) | ✅                           |                   |
 | コヒア      | [コヒーレ埋め込み](/tidb-cloud/vector-search-auto-embedding-cohere.md)                | ✅                           | ✅                 |
 | ジナ・アイ    | [Jina AI 埋め込み](/tidb-cloud/vector-search-auto-embedding-jina-ai.md)           |                             | ✅                 |
-| オープンAI   | [OpenAI埋め込み](/tidb-cloud/vector-search-auto-embedding-openai.md)              |                             | ✅                 |
+| オープンAI   | [OpenAI 埋め込み](/tidb-cloud/vector-search-auto-embedding-openai.md)             |                             | ✅                 |
 | ジェミニ     | [ジェミニ埋め込み](/tidb-cloud/vector-search-auto-embedding-gemini.md)                |                             | ✅                 |
 
 TiDB Cloudがサポートする次の推論サービスを通じて、オープンソースの埋め込みモデルを使用することもできます。
 
-| 埋め込みモデル    | ドキュメント                                                                      | TiDB Cloud <sup>1</sup>がホスト | BYOK <sup>2</sup> | サポートされているモデルの例                   |
-| ---------- | --------------------------------------------------------------------------- | --------------------------- | ----------------- | -------------------------------- |
-| ハグフェイス推論   | [HuggingFaceの埋め込み](/tidb-cloud/vector-search-auto-embedding-huggingface.md) |                             | ✅                 | `bge-m3` `multilingual-e5-large` |
-| NVIDIA NIM | [NVIDIA NIM 埋め込み](/tidb-cloud/vector-search-auto-embedding-nvidia-nim.md)   |                             | ✅                 | `bge-m3` `nv-embed-v1`           |
+| 埋め込みモデル    | ドキュメント                                                                    | TiDB Cloud <sup>1</sup>がホスト | BYOK <sup>2</sup> | サポートされているモデルの例                   |
+| ---------- | ------------------------------------------------------------------------- | --------------------------- | ----------------- | -------------------------------- |
+| ハグフェイス推論   | [ハギングフェイス埋め込み](/tidb-cloud/vector-search-auto-embedding-huggingface.md)   |                             | ✅                 | `bge-m3` `multilingual-e5-large` |
+| NVIDIA NIM | [NVIDIA NIM 埋め込み](/tidb-cloud/vector-search-auto-embedding-nvidia-nim.md) |                             | ✅                 | `bge-m3` `nv-embed-v1`           |
 
 <sup>1</sup>ホストモデルはTiDB Cloudによってホストされており、APIキーは必要ありません。現在、これらのホストモデルは無料でご利用いただけますが、すべてのユーザーが利用できるよう、一定の使用制限が適用される場合があります。
 
-<sup>2</sup> BYOK（Bring Your Own Key）モデルでは、対応する埋め込みプロバイダーからご自身のAPIキーをご提供いただく必要があります。TiDB TiDB CloudはBYOKモデルの使用料を請求しません。これらのモデルの使用に伴うコストの管理と監視はお客様の責任となります。
+<sup>2</sup> BYOK（Bring Your Own Key）モデルでは、対応する埋め込みプロバイダーからご自身のAPIキーをご提供いただく必要があります。TiDB TiDB CloudはBYOKモデルの使用に対して料金を請求しません。これらのモデルの使用に関連するコストの管理と監視はお客様の責任となります。
 
 ## 自動埋め込みの仕組み {#how-auto-embedding-works}
 
@@ -157,7 +152,7 @@ EMBED_TEXT("model_name", text_content[, additional_json_options])
 VEC_EMBED_COSINE_DISTANCE(vector_column, "query_text")
 ```
 
-この関数を`ORDER BY`節で使用すると、コサイン距離に基づいて結果をランク付けできます。3 [`VEC_COSINE_DISTANCE()`](/vector-search/vector-search-functions-and-operators.md#vec_cosine_distance)同じ計算方法を用いますが、クエリテキストの埋め込みを自動生成します。
+この関数を`ORDER BY`節で使用すると、コサイン距離に基づいて結果をランク付けできます。3 [`VEC_COSINE_DISTANCE()`](/vector-search/vector-search-functions-and-operators.md#vec_cosine_distance)同じ計算式を用いますが、クエリテキストの埋め込みを自動生成します。
 
 ### <code>VEC_EMBED_L2_DISTANCE()</code> {#code-vec-embed-l2-distance-code}
 
@@ -167,7 +162,7 @@ VEC_EMBED_COSINE_DISTANCE(vector_column, "query_text")
 VEC_EMBED_L2_DISTANCE(vector_column, "query_text")
 ```
 
-この関数を`ORDER BY`節で使用すると、L2距離に基づいて結果をランク付けできます。3 [`VEC_L2_DISTANCE()`](/vector-search/vector-search-functions-and-operators.md#vec_l2_distance)と同じ計算方法を用いますが、クエリテキストの埋め込みを自動生成します。
+この関数を`ORDER BY`節で使用すると、L2距離に基づいて結果をランク付けできます。3 [`VEC_L2_DISTANCE()`](/vector-search/vector-search-functions-and-operators.md#vec_l2_distance)同じ計算式を用いますが、クエリテキストの埋め込みは自動的に生成されます。
 
 ## Pythonで自動埋め込みを使用する {#use-auto-embedding-in-python}
 

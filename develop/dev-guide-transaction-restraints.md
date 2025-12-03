@@ -5,33 +5,33 @@ summary: TiDB のトランザクション制約について学習します。
 
 # トランザクション制限 {#transaction-restraints}
 
-このドキュメントでは、TiDB におけるトランザクションの制約について簡単に説明します。
+このドキュメントでは、TiDB におけるトランザクション制約について簡単に説明します。
 
 ## 分離レベル {#isolation-levels}
 
-TiDB でサポートされている分離レベルは**RC (Read Committed)**と**SI** **(Snapshot Isolation)**です。SI は基本的に**RR (Repeatable Read)**分離レベルに相当します。
+TiDB でサポートされている分離レベルは**RC (Read Committed)**と**SI (Snapshot Isolation)**です。SI**は**基本的に**RR (Repeatable Read)**分離レベルと同等です。
 
 ![isolation level](/media/develop/transaction_isolation_level.png)
 
 ## スナップショット分離によりファントムリードを回避できる {#snapshot-isolation-can-avoid-phantom-reads}
 
-TiDB の分離レベル`SI`では**ファントム リード**は回避できますが、ANSI/ISO SQL 標準の分離レベル`RR`では回避できません。
+TiDB の分離レベル`SI`では**ファントム リードは**回避できますが、ANSI/ISO SQL 標準の`RR`では回避できません。
 
-次の 2 つの例は**、ファントム リードが**何であるかを示しています。
+次の 2 つの例は**、ファントム リードが**どのようなものであるかを示しています。
 
 -   例1：**トランザクションAは**まずクエリに従って`n`行を取得します。その後、**トランザクションBは**これらの`n`行以外の`m`行を変更するか、**トランザクションA**のクエリに一致する`m`行を追加します。**トランザクションAが**再度クエリを実行すると、条件に一致する行が`n+m`行あることがわかります。これはファントムリードに似ているため、**ファントムリード**と呼ばれます。
 
--   例2：**管理者Aが**データベース内のすべての生徒の成績を特定スコアからABCDEスコアに変更しましたが、**管理者Bは**同時に特定のスコアを持つレコードを挿入しました。**管理者A**が変更を終えると、まだ変更されていないレコード（**管理者B**が挿入したレコード）が残っていることに気づきます。これが**ファントムリード**です。
+-   例2：**管理者Aは**データベース内のすべての生徒の成績を特定スコアからABCDEスコアに変更しましたが、**管理者Bは**同時に特定のスコアを持つレコードを挿入しました。**管理者Aが**変更を終えると、まだ変更されていないレコード（**管理者B**が挿入したレコード）が残っていることに気づきます。これが**ファントムリード**です。
 
 ## SIは書き込みスキューを回避できない {#si-cannot-avoid-write-skew}
 
-TiDBのSI分離レベルでは**、書き込みスキュー**例外を回避できません。3構文`SELECT FOR UPDATE`使用することで、**書き込みスキュー**例外を回避できます。
+TiDBのSI分離レベルでは`SELECT FOR UPDATE`**書き込みスキュー**例外を回避できません。3構文を使用することで、**書き込みスキュー**例外を回避できます。
 
 **書き込みスキュー**例外は、2つの同時トランザクションが異なるものの関連するレコードを読み取り、各トランザクションが読み取ったデータを更新し、最終的にトランザクションをコミットしたときに発生します。これらの関連レコード間に、複数のトランザクションによる同時変更が不可能な制約がある場合、最終結果はその制約に違反することになります。
 
 例えば、病院の医師シフト管理プログラムを作成するとします。病院では通常、複数の医師が同時にオンコール対応することが求められますが、最低要件として、少なくとも1人の医師がオンコール対応していることが挙げられます。医師は、例えば体調が優れない場合など、そのシフト中に少なくとも1人の医師がオンコール対応していれば、シフトを中断することができます。
 
-今、医師`Alice`と`Bob`オンコール中です。二人とも体調が悪く、病気休暇を取ることにしました。そして、偶然にも同時にボタンをクリックしてしまいました。このプロセスを次のプログラムでシミュレートしてみましょう。
+医師`Alice`と医師`Bob`がオンコールで待機している状況があります。二人とも体調が悪く、病気休暇を取ることにしました。そして、偶然にも同時にボタンをクリックしてしまいました。このプロセスを次のプログラムでシミュレートしてみましょう。
 
 <SimpleTab groupId="language">
 
@@ -160,7 +160,7 @@ public class EffectWriteSkew {
 
 <div label="Golang" value="golang">
 
-TiDB トランザクションを適応させるには、次のコードに従って[ユーティリティ](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)記述します。
+TiDB トランザクションを適応させるには、次のコードに従って[ユーティリティ](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を記述します。
 
 ```go
 package main
@@ -685,7 +685,7 @@ mysql> SELECT * FROM doctors;
 >
 > TiDBはv6.2.0以降、 [`savepoint`](/sql-statements/sql-statement-savepoint.md)機能をサポートします。v6.2.0より前のバージョンのTiDBクラスタでは、 `PROPAGATION_NESTED`動作はサポートされません。v6.2.0以降のバージョンへのアップグレードをお勧めします。TiDBのアップグレードが不可能で、アプリケーションが`PROPAGATION_NESTED`伝播動作を使用する**Java Spring**フレームワークをベースにしている場合は、アプリケーション側でネストされたトランザクションのロジックを削除する必要があります。
 
-**Spring**がサポートする`PROPAGATION_NESTED`伝播動作は、ネストされたトランザクション（現在のトランザクションとは独立して開始される子トランザクション）をトリガーします。ネストされたトランザクションの開始時に`savepoint`記録されます。ネストされたトランザクションが失敗した場合、トランザクションは`savepoint`番目の状態にロールバックされます。ネストされたトランザクションは外側のトランザクションの一部であり、外側のトランザクションと同時にコミットされます。
+**Spring**がサポートする`PROPAGATION_NESTED`伝播動作は、ネストされたトランザクション（現在のトランザクションとは独立して開始される子トランザクション）をトリガーします。ネストされたトランザクションの開始時に`savepoint`が記録されます。ネストされたトランザクションが失敗した場合、トランザクションは`savepoint`状態にロールバックされます。ネストされたトランザクションは外側のトランザクションの一部であり、外側のトランザクションと同時にコミットされます。
 
 次の例は、 `savepoint`メカニズムを示しています。
 
@@ -707,23 +707,23 @@ mysql> SELECT * FROM T2;
 
 ## 大規模取引制限 {#large-transaction-restrictions}
 
-基本原則は、トランザクションのサイズを制限することです。TiDBはKVレベルでは、単一トランザクションのサイズに制限を設けています。SQLレベルでは、1行のデータに1つのKVエントリがマッピングされ、インデックスを追加するごとに1つのKVエントリが追加されます。SQLレベルでの制限は以下のとおりです。
+基本原則は、トランザクションのサイズを制限することです。TiDBはKVレベルでは、単一トランザクションのサイズに制限を設けています。SQLレベルでは、1行のデータに1つのKVエントリがマッピングされ、インデックスを追加するごとに1つのKVエントリが追加されます。SQLレベルでの制限は次のとおりです。
 
 -   単一行レコードの最大サイズは 120 MiB です。
 
-    -   TiDB v4.0.10以降のv4.0.xバージョン、およびTiDB v5.0.0以降のバージョンでは、tidb-serverの設定パラメータ[`performance.txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500)使用して調整できます。v4.0.10より前のバージョンでは、値は`6 MB`です。
+    -   TiDB v4.0.10以降のv4.0.xバージョン、およびTiDB v5.0.0以降のバージョンでは、tidb-serverの設定パラメータ[`performance.txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500)を使用して調整できます。v4.0.10より前のバージョンでは、値は`6 MB`です。
     -   v7.6.0 以降では、 [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760)システム変数を使用して、この構成項目の値を動的に変更できます。
 
 -   サポートされる単一トランザクションの最大サイズは 1 TiB です。
 
-    -   TiDB v4.0 以降のバージョンでは、 [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)に設定できます。それより前のバージョンでは、値は`100 MB`です。
+    -   TiDB v4.0 以降のバージョンでは、 [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)で設定できます。それより前のバージョンでは、値は`100 MB`です。
     -   TiDB v6.5.0以降のバージョンでは、この構成は推奨されません。詳細については、 [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) )を参照してください。
 
-サイズ制限と行制限の両方において、トランザクション実行中のエンコードと追加キーのオーバーヘッドも考慮する必要があります。最適なパフォーマンスを得るには、100～500行ごとに1つのトランザクションを書き込むことをお勧めします。
+サイズ制限と行制限の両方において、トランザクション実行中のエンコードと追加キーのオーバーヘッドも考慮する必要があります。最適なパフォーマンスを実現するには、100～500行ごとに1つのトランザクションを書き込むことをお勧めします。
 
 ## 自動コミットされた<code>SELECT FOR UPDATE</code>文はロックを待機しません。 {#auto-committed-code-select-for-update-code-statements-do-not-wait-for-locks}
 
-現在、自動コミットされた`SELECT FOR UPDATE`文にはロックは追加されません。その影響は次の図に示されています。
+現在、自動コミットされた`SELECT FOR UPDATE`ステートメントにはロックは追加されません。次のスクリーンショットは、2つの別々のセッションにおける効果を示しています。
 
 ![The situation in TiDB](/media/develop/autocommit_selectforupdate_nowaitlock.png)
 

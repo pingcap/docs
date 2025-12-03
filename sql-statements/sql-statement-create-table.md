@@ -158,7 +158,7 @@ NextValueForSequence ::=
 |   "NEXTVAL" '(' TableName ')'
 ```
 
-以下`CHECKSUM` *table_options*がサポートされ`DELAY_KEY_WRITE`い`MAX_ROWS` 。その他`KEY_BLOCK_SIZE`オプション（ `AVG_ROW_LENGTH`など`COMPRESSION` `ROW_FORMAT`解析`STATS_PERSISTENT`れますが`MIN_ROWS`さ`CONNECTION` `ENGINE` 。
+以下の*table_options* `ENGINE`サポートされています`KEY_BLOCK_SIZE`その他のオプション`CONNECTION` `AVG_ROW_LENGTH` `DELAY_KEY_WRITE` `CHECKSUM` `COMPRESSION` `MIN_ROWS`されますが`MAX_ROWS` `STATS_PERSISTENT`れ`ROW_FORMAT` 。
 
 | オプション                                        | 説明                                                                            | 例                                   |
 | -------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------- |
@@ -266,15 +266,15 @@ mysql> DESC t1;
 
 -   空間タイプを除くすべてのデータ型がサポートされています。
 
--   TiDB `RTREE` `BTREE` `HASH`インデックス タイプを受け入れますが、それらを無視します。
+-   TiDB は、MySQL との互換性のために`BTREE` `HASH` `RTREE`インデックス タイプを受け入れますが、それらを無視します。
 
 -   TiDB Self-Managed およびTiDB Cloud Dedicated は、 `FULLTEXT`構文の解析をサポートしますが、 `FULLTEXT`インデックスの使用はサポートしません。
 
     > **注記：**
     >
-    > 現在、特定の AWS リージョンの {{{ .starter }} および {{{ .essential }}} クラスターのみが[`FULLTEXT`構文とインデックス](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)サポートしています。
+    > 現在、特定の AWS リージョンのTiDB Cloud Starter クラスターとTiDB Cloud Essential クラスターのみが[`FULLTEXT`構文とインデックス](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)サポートしています。
 
--   `GLOBAL`インデックス オプションを使用して`PRIMARY KEY`または`UNIQUE INDEX` [グローバルインデックス](/partitioned-table.md#global-indexes)として設定することは、 [パーティションテーブル](/partitioned-table.md)の TiDB 拡張であり、MySQL とは互換性がありません。
+-   `GLOBAL`インデックス オプションを使用して`PRIMARY KEY`または`UNIQUE INDEX`を[グローバルインデックス](/partitioned-table.md#global-indexes)として設定することは、 [パーティションテーブル](/partitioned-table.md)の TiDB 拡張であり、MySQL とは互換性がありません。
 
 <CustomContent platform="tidb">
 
@@ -288,7 +288,7 @@ mysql> DESC t1;
 
 </CustomContent>
 
--   `index_col_name`のうち`[ASC | DESC]`現在解析されていますが無視されます (MySQL 5.7互換の動作)。
+-   `index_col_name`のうち`[ASC | DESC]`は現在解析されていますが無視されます (MySQL 5.7互換の動作)。
 -   `COMMENT`属性は`WITH PARSER`オプションをサポートしていません。
 -   TiDBは、デフォルトで1つのテーブルあたり1017列、最大4096列をサポートします。InnoDBにおける対応する列数制限は1017列、MySQLにおけるハードリミットは4096列です。詳細については、 [TiDB の制限](/tidb-limitations.md)参照してください。
 -   TiDBは`HASH` 、 `RANGE` 、 `LIST` 、および`KEY` [パーティションタイプ](/partitioned-table.md#partitioning-types)をサポートします。サポートされていないパーティションタイプの場合、TiDBは`Warning: Unsupported partition type %s, treat as normal table`返します。ここで、 `%s`サポートされていない特定のパーティションタイプです。

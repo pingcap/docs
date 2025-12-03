@@ -214,7 +214,7 @@ SQL レベルでは、次のオプションを構成できます。
 
 **arrayMode と fullResult**
 
-完全な結果オブジェクトを配列として返すには、 `arrayMode`と`fullResult`オプションを次のように構成します。
+完全な結果オブジェクトを配列として返すには、オプション`arrayMode`と`fullResult`次のように構成します。
 
 ```ts
 const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://[username]:[password]@[host]/[database]'})
@@ -331,7 +331,7 @@ TiDB Cloudサーバーレス ドライバーは、次の ORM と統合されて�
 
 ## 価格 {#pricing}
 
-サーバーレス ドライバー自体は無料ですが、ドライバーを使用してデータにアクセスすると、 [リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit)とstorage使用量が発生します。
+サーバーレス ドライバー自体は無料ですが、ドライバーを使用してデータにアクセスすると、 [リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)とstorage使用量が発生します。
 
 -   TiDB Cloud Starter クラスターの場合、価格は[TiDB Cloud Starterの価格](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)モデルに従います。
 -   TiDB Cloud Essential クラスターの場合、価格は[TiDB Cloud Essential の価格](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)モデルに従います。

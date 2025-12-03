@@ -8,6 +8,20 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2025年12月2日 {#december-2-2025}
+
+**一般的な変更**
+
+-   **TiDB Cloud専用**
+
+    -   Prometheus 統合は現在、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して一般提供 (GA) されています。
+
+        TiDB Cloudは、Prometheusとの連携をクラスターレベルで管理するようになり、よりきめ細かな制御と設定が可能になります。この機能により、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのメトリクスをシームレスにPrometheusに送信できるようになり、統合プラットフォームで高度なアラート機能を実現できます。
+
+        統合手順については、 [TiDB Cloud をPrometheus および Grafana と統合する](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)参照してください。
+
+        既存の Prometheus 統合をクラスター レベルに移行するには、 [Prometheus統合の移行](/tidb-cloud/migrate-prometheus-metrics-integrations.md)参照してください。
+
 ## 2025年11月18日 {#november-18-2025}
 
 **一般的な変更**
@@ -38,7 +52,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   **TiDB Cloud専用**
 
-    -   VPCピアリングを介してGoogle Cloudでホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに接続する場合、 [TiDB Cloudコンソール](https://tidbcloud.com/)で`/16` ～ `/18` IP範囲サイズを直接設定できるようになりました。この設定についてTiDB Cloudサポートに連絡する必要はなくなりました。
+    -   VPCピアリング経由でGoogle Cloudでホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに接続する場合、 [TiDB Cloudコンソール](https://tidbcloud.com/)で`/16` ～ `/18` IP範囲サイズを直接設定できるようになりました。この設定についてTiDB Cloudサポートに連絡する必要はなくなりました。
 
         詳細については[VPC ピアリング経由でTiDB Cloud Dedicated に接続する](/tidb-cloud/set-up-vpc-peering-connections.md)参照してください。
 
@@ -62,7 +76,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     サードパーティの監視統合を管理するための次の[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) API エンドポイントを導入します。
 
-    -   統合の一覧
+    -   統合をリストする
     -   統合を作成する
     -   統合を削除する
 
@@ -746,4 +760,4 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     -   [TiDB Cloudコンソール](https://tidbcloud.com/)を介して Parquet ファイルでデータのエクスポートをサポートします。
 
-    詳細については、 [TiDB Cloud Serverlessからデータをエクスポート](/tidb-cloud/serverless-export.md)および[TiDB Cloud Serverless の外部ストレージアクセスを構成する](/tidb-cloud/serverless-external-storage.md)を参照してください。
+    詳細については、 [TiDB Cloud Serverlessからデータをエクスポート](/tidb-cloud/serverless-export.md)および[TiDB Cloud Serverless の外部ストレージアクセスを構成する](/tidb-cloud/configure-external-storage-access.md)を参照してください。

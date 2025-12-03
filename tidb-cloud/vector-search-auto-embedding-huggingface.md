@@ -3,29 +3,25 @@ title: HuggingFace Embeddings
 summary: TiDB Cloudで HuggingFace 埋め込みモデルを使用する方法を学びます。
 ---
 
-# HuggingFaceの埋め込み {#huggingface-embeddings}
+# ハギングフェイス埋め込み {#huggingface-embeddings}
 
 このドキュメントでは、TiDB Cloudの[自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)で HuggingFace 埋め込みモデルを使用して、テキスト クエリからセマンティック検索を実行する方法について説明します。
 
 > **注記：**
 >
-> 現在、 [自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)次の AWS リージョンのTiDB Cloud Starter クラスターでのみ利用可能です。
->
-> -   `Frankfurt (eu-central-1)`
-> -   `Oregon (us-west-2)`
-> -   `N. Virginia (us-east-1)`
+> [自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)は、AWS でホストされているTiDB Cloud Starter クラスターでのみ使用できます。
 
 ## 利用可能なモデル {#available-models}
 
 独自の[HuggingFace推論API](https://huggingface.co/docs/inference-providers/index)キー (BYOK) をお持ちの場合は、HuggingFace モデルを`huggingface/`プレフィックスで使用できます。
 
-以下のセクションでは、便宜上、いくつかの一般的なモデルを例として取り上げ、それらを自動埋め込みでどのように使用するかを説明します。利用可能なモデルの完全なリストについては、 [ハギングフェイスモデル](https://huggingface.co/models?library=sentence-transformers&#x26;inference_provider=hf-inference&#x26;sort=trending)参照してください。すべてのモデルがHuggingFace推論APIで提供されておらず、常に動作するわけではないことにご注意ください。
+以下のセクションでは、便宜上、いくつかの一般的なモデルを例として取り上げ、それらを自動埋め込みでどのように使用するかを説明します。利用可能なモデルの完全なリストについては、 [ハギングフェイスモデル](https://huggingface.co/models?library=sentence-transformers&#x26;inference_provider=hf-inference&#x26;sort=trending)参照してください。すべてのモデルがHuggingFace推論APIで提供されているわけではなく、常に動作するわけでもないことに注意してください。
 
 ## 多言語-e5-ラージ {#multilingual-e5-large}
 
 -   名前: `huggingface/intfloat/multilingual-e5-large`
 -   寸法: 1024
--   距離メトリック: コサイン、L2
+-   距離計量：コサイン、L2
 -   価格: HuggingFaceによる請求
 -   TiDB Cloudがホスト: ❌
 -   鍵をご持参ください: ✅
@@ -69,7 +65,7 @@ LIMIT 2;
 
 -   名前: `huggingface/BAAI/bge-m3`
 -   寸法: 1024
--   距離メトリック: コサイン、L2
+-   距離計量：コサイン、L2
 -   価格: HuggingFaceによる請求
 -   TiDB Cloudがホスト: ❌
 -   鍵をご持参ください: ✅
@@ -111,7 +107,7 @@ LIMIT 2;
 
 -   名前: `huggingface/sentence-transformers/all-MiniLM-L6-v2`
 -   寸法: 384
--   距離メトリック: コサイン、L2
+-   距離計量：コサイン、L2
 -   価格: HuggingFaceによる請求
 -   TiDB Cloudがホスト: ❌
 -   鍵をご持参ください: ✅
@@ -151,11 +147,11 @@ ORDER BY
 LIMIT 2;
 ```
 
-## オールMPネットベースv2 {#all-mpnet-base-v2}
+## all-mpnet-base-v2 {#all-mpnet-base-v2}
 
 -   名前: `huggingface/sentence-transformers/all-mpnet-base-v2`
 -   寸法: 768
--   距離メトリック: コサイン、L2
+-   距離計量：コサイン、L2
 -   価格: HuggingFaceによる請求
 -   TiDB Cloudがホスト: ❌
 -   鍵をご持参ください: ✅
@@ -201,7 +197,7 @@ LIMIT 2;
 
 -   名前: `huggingface/Qwen/Qwen3-Embedding-0.6B`
 -   寸法: 1024
--   距離メトリック: コサイン、L2
+-   距離計量：コサイン、L2
 -   最大入力テキストトークン数: 512
 -   価格: HuggingFaceによる請求
 -   TiDB Cloudがホスト: ❌

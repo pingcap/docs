@@ -38,7 +38,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   新しい[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン7.5.4](https://docs.pingcap.com/tidb/v7.5/release-7.5.4)から[バージョン8.1.1](https://docs.pingcap.com/tidb/stable/release-8.1.1)にアップグレードします。
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter) 、次のシナリオで大容量データの書き込みコストを最大 80% 削減します。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)次のシナリオで大容量データの書き込みコストを最大 80% 削減します。
 
     -   [自動コミットモード](/transaction-overview.md#autocommit)で 16 MiB を超える書き込み操作を実行する場合。
     -   [楽観的取引モデル](/optimistic-transaction.md)で 16 MiB を超える書き込み操作を実行する場合。
@@ -56,9 +56,9 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
     -   **ブランチのリセット**: ブランチをリセットして、親の最新の状態と同期することができます。
 
-    -   **GitHubとの連携強化**：GitHub App [TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching)では、プルリクエスト同期時の動作を制御するパラメータ[`branch.mode`](/tidb-cloud/branch-github-integration.md#branchmode)導入されました。デフォルトモード`reset`では、アプリはプルリクエストの最新の変更に合わせてブランチをリセットします。
+    -   **GitHubとの連携強化**：GitHub App [TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching)では、プルリクエスト同期時の動作を制御するパラメータ[`branch.mode`](/tidb-cloud/branch-github-integration.md#branchmode)が導入されました。デフォルトモード`reset`では、アプリはプルリクエストの最新の変更に合わせてブランチをリセットします。
 
-    詳細については、 [TiDB Cloudサーバーレスブランチの管理](/tidb-cloud/branch-manage.md)および[TiDB Cloud Serverless Branching（ベータ版）をGitHubと統合する](/tidb-cloud/branch-github-integration.md)参照してください。
+    詳細については、 [TiDB Cloudサーバーレスブランチの管理](/tidb-cloud/branch-manage.md)および[TiDB Cloud Serverless Branching（ベータ版）をGitHubと統合する](/tidb-cloud/branch-github-integration.md)を参照してください。
 
 ## 2024年11月12日 {#november-12-2024}
 
@@ -66,7 +66,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの一時停止期間制限を追加します。
 
-    TiDB Cloud Dedicated では、最大一時停止期間が 7 日間に制限されました。7 日以内にクラスターを手動で再開しない場合、 TiDB Cloudが自動的に再開します。
+    TiDB Cloud Dedicated では、最大一時停止期間が 7 日間に制限されました。7 日以内にクラスターを手動で再開しない場合、 TiDB Cloud が自動的に再開します。
 
     この変更は**、2024 年 11 月 12 日以降に作成された組織**にのみ適用されます。この日付以前に作成された組織は、事前に通知して、新しい一時停止動作に段階的に移行します。
 
@@ -128,7 +128,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
     -   `--s3.bucket-uri`フラグは[`ticloud serverless export create`](/tidb-cloud/ticloud-serverless-export-create.md)では`--s3.uri`に置き換えられます。
     -   [`ticloud serverless export create`](/tidb-cloud/ticloud-serverless-export-create.md)では`--database`と`--table`フラグが削除されました。代わりに`--sql` 、 `--where` 、 `--filter`フラグを使用できます。
-    -   [`ticloud serverless update`](/tidb-cloud/ticloud-serverless-update.md)注釈フィールドを更新できなくなりました。
+    -   [`ticloud serverless update`](/tidb-cloud/ticloud-serverless-update.md)では注釈フィールドを更新できなくなりました。
 
 ## 2024年9月10日 {#september-10-2024}
 
@@ -144,17 +144,17 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **コンソールの変更**
 
--   [TiDB Cloudコンソール](https://tidbcloud.com/)使用してTiDB Cloud Serverless クラスターからデータをエクスポートすることをサポートします。
+-   [TiDB Cloudコンソール](https://tidbcloud.com/)を使用してTiDB Cloud Serverless クラスターからデータをエクスポートすることをサポートします。
 
     これまで、 TiDB Cloud は[TiDB CloudCLI](/tidb-cloud/cli-reference.md)を使用したデータのエクスポートのみをサポートしていました。今後は、 [TiDB Cloudコンソール](https://tidbcloud.com/)を使用して、 TiDB Cloud Serverless クラスターからローカルファイルや Amazon S3 にデータを簡単にエクスポートできます。
 
-    詳細については、 [TiDB Cloud Serverlessからデータをエクスポート](/tidb-cloud/serverless-export.md)および[TiDB Cloud Serverless の外部ストレージアクセスを構成する](/tidb-cloud/serverless-external-storage.md)参照してください。
+    詳細については、 [TiDB Cloud Serverlessからデータをエクスポート](/tidb-cloud/serverless-export.md)および[TiDB Cloud Serverless の外部ストレージアクセスを構成する](/tidb-cloud/configure-external-storage-access.md)を参照してください。
 
 -   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの接続エクスペリエンスを強化します。
 
     -   **接続**ダイアログ インターフェースを改訂し、 TiDB Cloud Dedicated ユーザーに、より合理化され効率的な接続エクスペリエンスを提供します。
     -   クラスターのネットワーク構成を簡素化するために、新しいクラスター レベルの**ネットワーク**ページを導入しました。
-    -   **「Security設定」**ページを新しい**「パスワード設定」**ページに置き換え、IP アクセス リスト設定を新しい**「ネットワーク」**ページに移動します。
+    -   **「Security設定**」ページを新しい**「パスワード設定」**ページに置き換え、IP アクセス リスト設定を新しい**「ネットワーク」**ページに移動します。
 
     詳細については[TiDB Cloud専用に接続](/tidb-cloud/connect-to-tidb-cluster.md)参照してください。
 
@@ -172,7 +172,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   **プライベート エンドポイント接続の作成**ページのレイアウトを調整し、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで新しいプライベート エンドポイント接続を作成する際のユーザー エクスペリエンスを向上させました。
 
-    詳細については、 [AWS のプライベートエンドポイント経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)および[Google Cloud Private Service Connect 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)参照してください。
+    詳細については、 [AWS のプライベートエンドポイント経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)および[Google Cloud Private Service Connect 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
 
 ## 2024年8月6日 {#august-6-2024}
 
@@ -190,19 +190,19 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)のクラスター サイズ構成エクスペリエンスを強化します。
 
-    TiDB Cloud Dedicated クラスターの[**クラスタの作成**](/tidb-cloud/create-tidb-cluster.md)目と[**クラスタの変更**](/tidb-cloud/scale-tidb-cluster.md)ページ目の**「クラスタサイズ」**セクションのレイアウトを改良しました。さらに、 **「クラスタサイズ」**セクションにノードサイズの推奨ドキュメントへのリンクが追加され、適切なクラスターサイズの選択に役立ちます。
+    TiDB Cloud Dedicated クラスターの[**クラスタの作成**](/tidb-cloud/create-tidb-cluster.md)目と[**クラスタの変更**](/tidb-cloud/scale-tidb-cluster.md)ページ目の**「クラスタサイズ」**セクションのレイアウトを改良しました。さらに、「**クラスタサイズ」**セクションにノードサイズの推奨ドキュメントへのリンクが追加され、適切なクラスターサイズの選択に役立ちます。
 
 ## 2024年7月23日 {#july-23-2024}
 
 **一般的な変更**
 
--   [データサービス（ベータ版）](https://tidbcloud.com/project/data-service) 、ベクター検索エンドポイントの自動生成をサポートします。
+-   [データサービス（ベータ版）](https://tidbcloud.com/project/data-service)ベクター検索エンドポイントの自動生成をサポートします。
 
-    テーブルに[ベクトルデータ型](/vector-search/vector-search-data-types.md)が含まれている場合は、選択した距離関数に基づいてベクトル距離を計算するベクトル検索エンドポイントを自動的に生成できます。
+    テーブルに[ベクトルデータ型](/vector-search/vector-search-data-types.md)含まれている場合は、選択した距離関数に基づいてベクトル距離を計算するベクトル検索エンドポイントを自動的に生成できます。
 
     この機能により、 [ディファイ](https://docs.dify.ai/guides/tools)や[GPT](https://openai.com/blog/introducing-gpts)などの AI プラットフォームとのシームレスな統合が可能になり、高度な自然言語処理と AI 機能によってアプリケーションが強化され、より複雑なタスクやインテリジェントなソリューションが実現します。
 
-    詳細については、 [エンドポイントを自動的に生成する](/tidb-cloud/data-service-manage-endpoint.md#generate-an-endpoint-automatically)および[データアプリをサードパーティツールと統合する](/tidb-cloud/data-service-integrations.md)参照してください。
+    詳細については、 [エンドポイントを自動的に生成する](/tidb-cloud/data-service-manage-endpoint.md#generate-an-endpoint-automatically)および[データアプリをサードパーティツールと統合する](/tidb-cloud/data-service-integrations.md)を参照してください。
 
 -   予算機能を導入すると、計画された経費に対する実際のTiDB Cloudコストを追跡し、予期しないコストを防ぐことができます。
 
@@ -216,7 +216,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [システムステータス](https://status.tidbcloud.com/)ページを拡張して、 TiDB Cloudシステムの健全性とパフォーマンスに関するより詳細な情報を提供します。
 
-    アクセスするには、 [https://status.tidbcloud.com/](https://status.tidbcloud.com/)直接アクセスするか、右下隅の**[?]**をクリックして**[システム ステータス]**を選択し、 [TiDB Cloudコンソール](https://tidbcloud.com)を経由して移動します。
+    アクセスするには、 [https://status.tidbcloud.com/](https://status.tidbcloud.com/)直接アクセスするか、右下隅の [ **?]**をクリックして**[システム ステータス]**を選択し、 [TiDB Cloudコンソール](https://tidbcloud.com)を経由して移動します。
 
 **コンソールの変更**
 
@@ -228,7 +228,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [データサービス（ベータ版）](https://tidbcloud.com/project/data-service) 、データ アプリに直接追加できる定義済みのシステム エンドポイントを含むエンドポイント ライブラリが提供されており、エンドポイント開発の労力が軽減されます。
 
-    現在、ライブラリにはエンドポイント`/system/query`のみが含まれています。これにより、定義済みの`sql`のパラメータにSQL文を渡すだけで、任意のSQL文を実行できます。このエンドポイントにより、SQLクエリの即時実行が容易になり、柔軟性と効率性が向上します。
+    現在、ライブラリにはエンドポイント`/system/query`のみが含まれています。これにより、定義済みの`sql`番目のパラメータにSQL文を渡すだけで、任意のSQL文を実行できます。このエンドポイントにより、SQLクエリの即時実行が容易になり、柔軟性と効率性が向上します。
 
     詳細については[定義済みのシステムエンドポイントを追加する](/tidb-cloud/data-service-manage-endpoint.md#add-a-predefined-system-endpoint)参照してください。
 
@@ -246,8 +246,8 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
     -   [ベクトルデータ型](/vector-search/vector-search-data-types.md) 、 [ベクトルインデックス](/vector-search/vector-search-index.md) 、および[ベクトル関数と演算子](/vector-search/vector-search-functions-and-operators.md) 。
     -   [ランチェーン](/vector-search/vector-search-integrate-with-langchain.md) 、 [ラマインデックス](/vector-search/vector-search-integrate-with-llamaindex.md) 、 [ジナAI](/vector-search/vector-search-integrate-with-jinaai-embedding.md)とのエコシステム統合。
-    -   Python のプログラミング言語サポート: [SQLアルケミー](/vector-search/vector-search-integrate-with-sqlalchemy.md) 、および[Django ORM](/vector-search/vector-search-integrate-with-django-orm.md) [ピーウィー](/vector-search/vector-search-integrate-with-peewee.md)
-    -   サンプルアプリケーションとチュートリアル: [パイソン](/vector-search/vector-search-get-started-using-python.md)または[SQL](/vector-search/vector-search-get-started-using-sql.md)使用してドキュメントのセマンティック検索を実行します。
+    -   Python のプログラミング言語サポート: [SQLアルケミー](/vector-search/vector-search-integrate-with-sqlalchemy.md) [ピーウィー](/vector-search/vector-search-integrate-with-peewee.md)および[Django ORM](/vector-search/vector-search-integrate-with-django-orm.md) 。
+    -   サンプルアプリケーションとチュートリアル: [パイソン](/vector-search/vector-search-get-started-using-python.md)または[SQL](/vector-search/vector-search-get-started-using-sql.md)を使用してドキュメントのセマンティック検索を実行します。
 
     詳細については[ベクトル検索（ベータ版）の概要](/vector-search/vector-search-overview.md)参照してください。
 
@@ -255,7 +255,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
     これらのレポートは、クラスターのパフォーマンスとアクティビティに関する洞察を提供します。毎週自動的に更新されるため、クラスターに関する最新情報を常に把握し、データに基づいた意思決定を行ってクラスターを最適化できます。
 
--   Chat2Query API v3 エンドポイントをリリースし、Chat2Query API v1 エンドポイント`/v1/chat2data`廃止します。
+-   Chat2Query API v3 エンドポイントをリリースし、Chat2Query API v1 エンドポイント`/v1/chat2data`を廃止します。
 
     Chat2Query API v3 エンドポイントを使用すると、セッションを使用してマルチラウンドの Chat2Query を開始できます。
 
@@ -276,9 +276,9 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの 16 vCPU TiFlashと 32 vCPU TiFlashの最大ノードstorageを 2048 GiB から 4096 GiB に増加しました。
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの 16 vCPU TiFlashと 32 vCPU TiFlashの最大ノードstorageを2048 GiB から 4096 GiB に増加しました。
 
-    この機能強化により、 TiDB Cloud Dedicated クラスターの分析データstorage容量が増加し、ワークロードのスケーリング効率が向上し、増大するデータ要件に対応できるようになります。
+    この機能強化により、TiDB Cloud Dedicated クラスターの分析データstorage容量が増加し、ワークロードのスケーリング効率が向上し、増大するデータ要件に対応できるようになります。
 
     詳細については[TiFlashノードstorage](/tidb-cloud/size-your-cluster.md#tiflash-node-storage)参照してください。
 
@@ -290,11 +290,11 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   AWS にデプロイされた[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの災害復旧用のリカバリ グループ機能 (ベータ版) を導入します。
 
-    この機能により、 TiDB Cloud Dedicated クラスタ間でデータベースを複製し、地域災害発生時の迅速な復旧を実現できます。1 ロール`Project Owner`場合は、新しいリカバリグループを作成し、データベースをそのグループに割り当てることで、この機能を有効化できます。リカバリグループを使用してデータベースを複製することで、災害対策を強化し、より厳格な可用性SLAを満たし、より厳格な復旧ポイント目標 (RPO) と復旧時間目標 (RTO) を達成できます。
+    この機能により、 TiDB Cloud Dedicated クラスタ間でデータベースを複製し、地域災害発生時の迅速な復旧を実現できます。1 `Project Owner`の場合は、新しいリカバリグループを作成し、データベースをそのグループに割り当てることで、この機能を有効化できます。リカバリグループを使用してデータベースを複製することで、災害対策を強化し、より厳格な可用性SLAを満たし、より厳格な復旧ポイント目標 (RPO) と復旧時間目標 (RTO) を達成できます。
 
     詳細については[回復グループを始める](/tidb-cloud/recovery-group-get-started.md)参照してください。
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)列storage[TiFlash](/tiflash/tiflash-overview.md)課金と計測 (ベータ版) を導入します。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)列storage[TiFlash](/tiflash/tiflash-overview.md)の課金と計測 (ベータ版) を導入します。
 
     2024年6月30日まで、 TiDB Cloud Serverlessクラスターの列指向storageは100%割引で無料のままです。この日以降、各TiDB Cloud Serverlessクラスターには、列指向storage用に5GiBの無料割り当てが含まれます。無料割り当てを超えた使用量については、課金が発生します。
 
@@ -322,7 +322,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
     -   **データ API キー**: 安全なエンドポイント アクセスに使用されます。
     -   **OpenAPI 仕様**: データ サービスは、各データ アプリの OpenAPI 仕様 3.0 の生成をサポートしており、これにより標準化された形式でエンドポイントと対話できるようになります。
 
-    これらのTiDB Cloud Data Service API エンドポイントは、 TiDB Cloudの最新の API バージョンである TiDB TiDB Cloud API v1beta1 でリリースされています。
+    これらのTiDB Cloud Data Service API エンドポイントは、 TiDB Cloudの最新の API バージョンであるTiDB Cloud API v1beta1 でリリースされています。
 
     詳細については[APIドキュメント（v1beta1）](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)参照してください。
 
@@ -330,7 +330,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   Google Cloud でホストされる[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタのうち[TiDBノードサイズ](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram)提供する: `8 vCPU, 16 GiB`
+-   Google Cloud でホストされる[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタのうち[TiDBノードサイズ](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram)を提供する: `8 vCPU, 16 GiB`
 
 ## 2024年5月14日 {#may-14-2024}
 
@@ -356,7 +356,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
     -   [ローカルstorageからTiDB Cloud Serverless クラスターにデータをインポートする](/tidb-cloud/ticloud-import-start.md)
     -   [OAuth による認証](/tidb-cloud/ticloud-auth-login.md)
 
-    TiDB Cloud CLIをアップグレードする前に、この新しいCLIは以前のバージョンと互換性がないことにご注意ください。例えば、CLIコマンドの`ticloud cluster` `ticloud serverless`に更新されました。詳細については、 [TiDB Cloud CLI リファレンス](/tidb-cloud/cli-reference.md)ご覧ください。
+    TiDB Cloud CLIをアップグレードする前に、この新しいCLIは以前のバージョンと互換性がないことにご注意ください。例えば、CLIコマンドの`ticloud cluster`は`ticloud serverless`に更新されました。詳細については、 [TiDB Cloud CLI リファレンス](/tidb-cloud/cli-reference.md)ご覧ください。
 
 ## 2024年4月9日 {#april-9-2024}
 
@@ -396,7 +396,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
     **制限**ラベルは、クラスター内の各コンポーネントのCPU、メモリ、storageなどのリソースの最大使用量を示します。この機能強化により、クラスターのリソース使用率の監視プロセスが簡素化されます。
 
-    これらのメトリック制限にアクセスするには、クラスターの**[監視]**ページに移動し、[**メトリック]**タブの**[サーバー]**カテゴリを確認します。
+    これらのメトリック制限にアクセスするには、クラスターの**[監視]**ページに移動し、 **[メトリック]**タブの**[サーバー]**カテゴリを確認します。
 
     詳細については[TiDB Cloud Dedicated クラスタのメトリクス](/tidb-cloud/built-in-monitoring.md#server)参照してください。
 
@@ -413,7 +413,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 -   Google Cloud 上でさらに多くのTiDB Cloudノードの作成をサポートします。
 
     -   Google Cloud の[リージョンCIDRサイズの設定](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) of `/19`では、プロジェクトの任意のリージョン内に最大 124 個のTiDB Cloudノードを作成できるようになりました。
-    -   プロジェクトの任意のリージョンに 124 を超えるノードを作成する場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)連絡して、 `/16`から`/18`までの IP 範囲のサイズをカスタマイズするためのサポートを受けることができます。
+    -   プロジェクトの任意のリージョンに 124 を超えるノードを作成する場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)連絡して、 `/16`から`/18`の IP 範囲のサイズをカスタマイズするためのサポートを受けることができます。
 
 ## 2024年1月23日 {#january-23-2024}
 
@@ -447,7 +447,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [データサービス（ベータ版）](https://tidbcloud.com/project/data-service) 、データ アプリ内のエンドポイントにアクセスするためのカスタム ドメインの構成がサポートされています。
 
-    TiDB Cloud Data Service は、デフォルトで各データアプリのエンドポイントにアクセスするためのドメイン`<region>.data.tidbcloud.com`提供します。パーソナライズと柔軟性を高めるため、デフォルトドメインの代わりにデータアプリにカスタムドメインを設定できるようになりました。この機能により、データベースサービスにブランド化された URL を使用でき、セキュリティが強化されます。
+    TiDB Cloud Data Service は、デフォルトで各データアプリのエンドポイントにアクセスするためのドメイン`<region>.data.tidbcloud.com`を提供します。パーソナライズと柔軟性を高めるため、デフォルトドメインの代わりにデータアプリにカスタムドメインを設定できるようになりました。この機能により、データベースサービスにブランド化された URL を使用でき、セキュリティが強化されます。
 
     詳細については[データサービスにおけるカスタムドメイン](/tidb-cloud/data-service-custom-domain.md)参照してください。
 
@@ -463,7 +463,7 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   新しい[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン7.1.1](https://docs.pingcap.com/tidb/v7.1/release-7.1.1)から[バージョン7.5.0](https://docs.pingcap.com/tidb/v7.5/release-7.5.0)にアップグレードします。
 
--   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)のデュアルリージョン バックアップ機能が一般提供 (GA) になりました。
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)デュアルリージョン バックアップ機能が一般提供 (GA) になりました。
 
     この機能を使用すると、AWS または Google Cloud 内の地理的リージョン間でバックアップを複製できます。これにより、データ保護と災害復旧機能がさらにレイヤーされます。
 

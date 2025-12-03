@@ -5,15 +5,11 @@ summary: TiDB Cloudで Jina AI 埋め込みモデルを使用する方法を学�
 
 # Jina AI 埋め込み {#jina-ai-embeddings}
 
-このドキュメントでは、 TiDB Cloudの[自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)使用した Jina AI 埋め込みモデルを使用して、テキスト クエリからセマンティック検索を実行する方法について説明します。
+このドキュメントでは、TiDB Cloudの[自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)を使用した Jina AI 埋め込みモデルを使用して、テキスト クエリからセマンティック検索を実行する方法について説明します。
 
 > **注記：**
 >
-> 現在、 [自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)次の AWS リージョンのTiDB Cloud Starter クラスターでのみ利用可能です。
->
-> -   `Frankfurt (eu-central-1)`
-> -   `Oregon (us-west-2)`
-> -   `N. Virginia (us-east-1)`
+> [自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)は、AWS でホストされているTiDB Cloud Starter クラスターでのみ使用できます。
 
 ## 利用可能なモデル {#available-models}
 
@@ -23,7 +19,7 @@ summary: TiDB Cloudで Jina AI 埋め込みモデルを使用する方法を学�
 
 -   名前: `jina_ai/jina-embeddings-v4`
 -   寸法: 2048
--   距離メトリック: コサイン、L2
+-   距離計量：コサイン、L2
 -   最大入力テキストトークン数: 32,768
 -   価格：Jina AIによる請求
 -   TiDB Cloudがホスト: ❌
@@ -33,7 +29,7 @@ summary: TiDB Cloudで Jina AI 埋め込みモデルを使用する方法を学�
 
 -   名前: `jina_ai/jina-embeddings-v3`
 -   寸法: 1024
--   距離メトリック: コサイン、L2
+-   距離計量：コサイン、L2
 -   最大入力テキストトークン数: 8,192
 -   価格：Jina AIによる請求
 -   TiDB Cloudがホスト: ❌

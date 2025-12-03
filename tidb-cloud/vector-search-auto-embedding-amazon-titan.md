@@ -9,28 +9,24 @@ summary: TiDB Cloudで Amazon Titan 埋め込みモデルを使用する方法�
 
 > **注記：**
 >
-> 現在、 [自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)次の AWS リージョンのTiDB Cloud Starter クラスターでのみ利用可能です。
->
-> -   `Frankfurt (eu-central-1)`
-> -   `Oregon (us-west-2)`
-> -   `N. Virginia (us-east-1)`
+> [自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)は、AWS でホストされているTiDB Cloud Starter クラスターでのみ使用できます。
 
 ## 利用可能なモデル {#available-models}
 
-TiDB Cloud は以下の[Amazon Titan 埋め込みモデル](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html)をネイティブに提供します。API キーは必要ありません。
+TiDB Cloud は以下の[Amazon Titan 埋め込みモデル](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html)ネイティブに提供します。APIキーは必要ありません。
 
 **Amazon Titan テキスト埋め込み V2 モデル**
 
 -   名前: `tidbcloud_free/amazon/titan-embed-text-v2`
 -   寸法: 1024 (デフォルト)、512、256
--   距離メトリック: コサイン、L2
+-   距離計量：コサイン、L2
 -   言語: 英語 (プレビューでは 100 以上の言語に対応)
 -   一般的な使用例: RAG、ドキュメント検索、再ランク付け、分類
 -   最大入力テキストトークン数: 8,192
 -   最大入力テキスト文字数: 50,000
 -   価格: 無料
 -   TiDB Cloudがホスト: ✅
--   自分の鍵を持参: ❌
+-   鍵をご持参ください: ❌
 
 このモデルの詳細については、 [Amazon Bedrock ドキュメント](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html)参照してください。
 
@@ -82,7 +78,7 @@ LIMIT 2;
 `EMBED_TEXT()`関数の`additional_json_options`パラメータを介して次のオプションを指定できます。
 
 -   `normalize` (オプション): 出力埋め込みを正規化するかどうか。デフォルトは`true`です。
--   `dimensions` （オプション）：出力埋め込みの次元数。サポートされる値： `1024` （デフォルト）、 `512` 、 `256` 。
+-   `dimensions` （オプション）: 出力埋め込みの次元数。サポートされる値: `1024` （デフォルト）、 `512` 、 `256` 。
 
 **例: 代替ディメンションを使用する**
 

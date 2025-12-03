@@ -5,7 +5,9 @@ summary: TiCDC の新しいアーキテクチャの機能、アーキテクチ�
 
 # TiCDC の新しいアーキテクチャ {#ticdc-new-architecture}
 
-TiCDC は、 [TiCDC v8.5.4-リリース.1](https://github.com/pingcap/ticdc/releases/tag/v8.5.4-release.1)から、リアルタイムデータレプリケーションのパフォーマンス、スケーラビリティ、安定性を向上させながら、リソースコストを削減する新しいアーキテクチャを導入します。この新しいアーキテクチャは、TiCDC のコアコンポーネントを再設計し、データ処理ワークフローを最適化することで、以下の利点をもたらします。
+[TiCDC v8.5.4-リリース.1](https://github.com/pingcap/ticdc/releases/tag/v8.5.4-release.1)から、TiCDC は、リソース コストを削減しながら、リアルタイム データ レプリケーションのパフォーマンス、スケーラビリティ、および安定性を向上させる新しいアーキテクチャを導入します。
+
+この新しいアーキテクチャは、TiCDCのコアコンポーネントを再設計し、データ処理ワークフローを最適化しながら、 [古典的なTiCDCアーキテクチャ](/ticdc/ticdc-classic-architecture.md)の構成、使用方法、APIとの互換性を維持しています。これにより、以下の利点が得られます。
 
 -   **単一ノードのパフォーマンスの向上**: 単一ノードで最大 500,000 個のテーブルを複製でき、ワイド テーブル シナリオでは単一ノードで最大 190 MiB/秒のレプリケーション スループットを実現します。
 -   **拡張性の向上**：クラスタレプリケーション機能はほぼ直線的に拡張可能です。単一のクラスタで100ノード以上に拡張でき、10,000以上の変更フィードをサポートし、単一の変更フィード内で数百万のテーブルをレプリケートできます。
@@ -25,7 +27,7 @@ TiCDCの新しいアーキテクチャは、アーキテクチャをステート
 
 ## 古典的なアーキテクチャと新しいアーキテクチャの比較 {#comparison-between-the-classic-and-new-architectures}
 
-新しいアーキテクチャは、パフォーマンスのボトルネック、不十分な安定性、スケーラビリティの限界など、システムの継続的なスケーリング時に発生する一般的な問題に対処するように設計されています[古典アーキテクチャ](/ticdc/ticdc-classic-architecture.md)と比較して、新しいアーキテクチャは以下の主要な側面において大幅な最適化を実現しています。
+新しいアーキテクチャは、パフォーマンスのボトルネック、不十分な安定性、スケーラビリティの限界など、システムの継続的なスケーリング時に[古典アーキテクチャ](/ticdc/ticdc-classic-architecture.md)する一般的な問題に対処するように設計されています。1と比較して、新しいアーキテクチャは以下の主要な側面において大幅な最適化を実現しています。
 
 | 特徴                | TiCDC クラシックアーキテクチャ                                    | TiCDCの新しいアーキテクチャ                                                                                                |
 | ----------------- | ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
@@ -53,9 +55,9 @@ TiCDCの新しいアーキテクチャは、アーキテクチャをステート
 
 ## 新機能 {#new-features}
 
-新しいアーキテクチャは、 MySQLシンクの**テーブルレベルのタスク分割**をサポートします。この機能を有効にするには、changefeed設定で`scheduler.enable-table-across-nodes = true`設定します。
+新しいアーキテクチャは、 MySQLシンクの**テーブルレベルのタスク分割を**サポートします。この機能を有効にするには、changefeed設定で`scheduler.enable-table-across-nodes = true`設定します。
 
-この機能を有効にすると、TiCDCは、以下のいずれかの条件を満たすテーブルを**、主キーが1つだけ、またはNULL以外の一意キー**を持つテーブルに自動的に分割し、複数のノードに分散して並列レプリケーションを実行します。これにより、レプリケーションの効率とリソース利用率が向上します。
+この機能を有効にすると、TiCDCは、以下のいずれかの条件を満たすテーブルを**、主キーが1つだけ、またはNULL以外の一意キーを**持つテーブルに自動的に分割し、複数のノードに分散して並列レプリケーションを実行します。これにより、レプリケーションの効率とリソース利用率が向上します。
 
 -   テーブルのリージョン数が設定されたしきい値 (デフォルトでは`100000`ですが、 `scheduler.region-threshold`で調整可能) を超えています。
 -   テーブル書き込みトラフィックが設定されたしきい値を超えています (デフォルトでは無効、 `scheduler.write-key-threshold`で設定可能)。
@@ -64,7 +66,7 @@ TiCDCの新しいアーキテクチャは、アーキテクチャをステート
 
 ### DDL 進捗追跡テーブル {#ddl-progress-tracking-table}
 
-TiCDCの従来のアーキテクチャでは、DDLレプリケーション操作は厳密にシリアル化されているため、レプリケーションの進行状況は変更フィードの`CheckpointTs`使用してのみ追跡できます。しかし、新しいアーキテクチャでは、TiCDCは可能な限り異なるテーブルのDDL変更を並列にレプリケートすることで、DDLレプリケーションの効率を向上させます。下流のMySQL互換データベースの各テーブルのDDLレプリケーションの進行状況を正確に記録するために、TiCDCの新しいアーキテクチャは下流データベースに`tidb_cdc.ddl_ts_v1`名前のテーブルを作成し、変更フィードのDDLレプリケーションの進行状況情報を具体的に保存します。
+TiCDCの従来のアーキテクチャでは、DDLレプリケーション操作は厳密にシリアル化されているため、レプリケーションの進行状況は変更フィードの`CheckpointTs`を使用してのみ追跡できます。しかし、新しいアーキテクチャでは、TiCDCは可能な限り異なるテーブルのDDL変更を並列にレプリケートすることで、DDLレプリケーションの効率を向上させます。下流のMySQL互換データベースの各テーブルのDDLレプリケーションの進行状況を正確に記録するために、TiCDCの新しいアーキテクチャは下流データベースに`tidb_cdc.ddl_ts_v1`という名前のテーブルを作成し、変更フィードのDDLレプリケーションの進行状況情報を具体的に保存します。
 
 ### DDLレプリケーション動作の変更 {#changes-in-ddl-replication-behavior}
 
@@ -86,12 +88,12 @@ TiCDCの従来のアーキテクチャでは、DDLレプリケーション操作
         rules = ['test.t*']
         ```
 
-        -   クラシックアーキテクチャの場合： `RENAME TABLE test.t1 TO ignore.t1`のような単一テーブルの名前変更では、古いテーブル名`test.t1`ルールに一致するため、レプリケートされます。5 `RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;`ような複数テーブルの名前変更では、新しいテーブル名`ignore.t1`がルールに一致しないため、レプリケートされません。
-        -   新しい TiCDCアーキテクチャでは、 `RENAME TABLE test.t1 TO ignore.t1`と`RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;`両方の古いテーブル名がルールに一致するため、両方の DDL ステートメントが複製されます。
+        -   クラシックアーキテクチャの場合： `RENAME TABLE test.t1 TO ignore.t1`のような単一テーブルの名前変更では、古いテーブル名`test.t1`ルールに一致するため、レプリケートされます。5 `RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;`ような複数テーブルの名前変更では、新しいテーブル名`ignore.t1`ルールに一致しないため、レプリケートされません。
+        -   新しい TiCDCアーキテクチャでは、 `RENAME TABLE test.t1 TO ignore.t1`と`RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;`の両方の古いテーブル名がルールに一致するため、両方の DDL ステートメントが複製されます。
 
 ## 制限事項 {#limitations}
 
-新しいTiCDCアーキテクチャには、従来のアーキテクチャのすべての機能が組み込まれています。ただし、一部の機能はまだ完全にテストされていません。システムの安定性を確保するため、以下の機能はコア本番環境での使用は推奨され**ません**。
+新しいTiCDCアーキテクチャには、従来のアーキテクチャのすべての機能が組み込まれています。ただし、一部の機能はまだ完全にテストされていません。システムの安定性を確保するため、以下の機能は本番本番環境での使用は推奨さ**れません**。
 
 -   [同期ポイント](/ticdc/ticdc-upstream-downstream-check.md)
 -   [再実行ログ](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)
@@ -102,20 +104,61 @@ TiCDCの従来のアーキテクチャでは、DDLレプリケーション操作
 
 ## アップグレードガイド {#upgrade-guide}
 
-TiCDCの新しいアーキテクチャは、TiDBクラスタのバージョン7.5.0以降にのみ導入できます。導入前に、TiDBクラスタがこのバージョン要件を満たしていることを確認してください。
+新しいアーキテクチャの TiCDC は、TiDB クラスター v7.5.0 以降にのみ導入できます。導入前に、TiDB クラスターがこの要件を満たしていることを確認してください。
 
-TiUPまたはTiDB Operatorを使用して、TiCDC の新しいアーキテクチャをデプロイできます。
+TiUPまたはTiDB Operator を使用して、新しいアーキテクチャに TiCDC ノードをデプロイできます。
+
+### 新しいアーキテクチャで TiCDC ノードを使用して新しい TiDB クラスターをデプロイ {#deploy-a-new-tidb-cluster-with-ticdc-nodes-in-the-new-architecture}
 
 <SimpleTab>
 <div label="TiUP">
 
-TiUPを使用して TiCDC の新しいアーキテクチャを展開するには、次の手順を実行します。
+TiUPを使用して v8.5.4 以降の新しい TiDB クラスターをデプロイする際に、同時に新しいアーキテクチャの TiCDC ノードもデプロイできます。これを行うには、 TiUP がTiDB クラスターの起動に使用する設定ファイルに TiCDC 関連のセクションを追加し、 `newarch: true`設定するだけです。以下は例です。
+
+```yaml
+cdc_servers:
+  - host: 10.0.1.20
+    config:
+      newarch: true
+  - host: 10.0.1.21
+    config:
+      newarch: true
+```
+
+TiCDC の展開の詳細については、 [TiUPを使用して TiCDC を含む新しい TiDB クラスターをデプロイ。](/ticdc/deploy-ticdc.md#deploy-a-new-tidb-cluster-that-includes-ticdc-using-tiup)参照してください。
+
+</div>
+<div label="TiDB Operator">
+
+TiDB Operator を使用して v8.5.4 以降の新しい TiDB クラスターをデプロイする際に、同時に新しいアーキテクチャの TiCDC ノードもデプロイできます。そのためには、クラスター設定ファイルに TiCDC 関連のセクションを追加し、 `newarch = true`設定するだけです。以下は例です。
+
+```yaml
+spec:
+  ticdc:
+    baseImage: pingcap/ticdc
+    version: v8.5.4
+    replicas: 3
+    config:
+      newarch = true
+```
+
+TiCDC の展開の詳細については、 [新しい TiCDC の展開](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-ticdc/#fresh-ticdc-deployment)参照してください。
+
+</div>
+</SimpleTab>
+
+### 既存の TiDB クラスタに新しいアーキテクチャの TiCDC ノードをデプロイ {#deploy-ticdc-nodes-in-the-new-architecture-in-an-existing-tidb-cluster}
+
+<SimpleTab>
+<div label="TiUP">
+
+TiUPを使用して新しいアーキテクチャに TiCDC ノードを展開するには、次の手順を実行します。
 
 1.  TiDBクラスターにまだTiCDCノードが存在しない場合は、 [TiCDC クラスターをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-ticdc-cluster)を参照してクラスターに新しいTiCDCノードを追加してください。そうでない場合は、この手順をスキップしてください。
 
-2.  新しいアーキテクチャ用の TiCDC バイナリ パッケージをダウンロードします。
+2.  TiDBクラスタのバージョンがv8.5.4より前の場合は、新しいアーキテクチャのTiCDCバイナリパッケージを手動でダウンロードし、ダウンロードしたファイルをTiDBクラスタにパッチ適用する必要があります。それ以外の場合は、この手順をスキップしてください。
 
-    ダウンロード リンクの形式は`https://tiup-mirrors.pingcap.com/cdc-${version}-${os}-${arch}.tar.gz` 、 `${version}`は TiCDC のバージョン、 `${os}`はオペレーティング システム、 `${arch}`コンポーネントが実行されるプラットフォーム ( `amd64`または`arm64` ) です。
+    ダウンロード リンクの形式は`https://tiup-mirrors.pingcap.com/cdc-${version}-${os}-${arch}.tar.gz`です`${version}`は TiCDC のバージョン (使用可能なバージョンについては[新しいアーキテクチャ向けのTiCDCリリース](https://github.com/pingcap/ticdc/releases)参照)、 `${os}`はオペレーティング システム、 `${arch}`はコンポーネントが実行されるプラットフォーム ( `amd64`または`arm64` ) です。
 
     たとえば、Linux (x86-64) 用の TiCDC v8.5.4-release.1 のバイナリ パッケージをダウンロードするには、次のコマンドを実行します。
 
@@ -158,9 +201,9 @@ TiUPを使用して TiCDC の新しいアーキテクチャを展開するには
 </div>
 <div label="TiDB Operator">
 
-TiDB Operatorを使用して TiCDC の新しいアーキテクチャをデプロイするには、次の手順を実行します。
+TiDB Operatorを使用して既存の TiDB クラスターに新しいアーキテクチャの TiCDC ノードをデプロイするには、次の手順を実行します。
 
--   TiDBクラスタにTiCDCコンポーネントが含まれていない場合は、 [既存の TiDB クラスターに TiCDC を追加する](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-ticdc/#add-ticdc-to-an-existing-tidb-cluster)を参照して新しいTiCDCノードを追加してください。その際、クラスタ構成ファイルで新しいアーキテクチャバージョンとしてTiCDCイメージバージョンを指定してください。
+-   TiDBクラスタにTiCDCコンポーネントが含まれていない場合は、 [既存の TiDB クラスターに TiCDC を追加する](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-ticdc/#add-ticdc-to-an-existing-tidb-cluster)参照して新しいTiCDCノードを追加してください。その際、クラスタ構成ファイルで新しいアーキテクチャバージョンとしてTiCDCイメージバージョンを指定してください。使用可能なバージョンについては、 [新しいアーキテクチャ向けのTiCDCリリース](https://github.com/pingcap/ticdc/releases)参照してください。
 
     例えば：
 
@@ -205,7 +248,7 @@ TiDB Operatorを使用して TiCDC の新しいアーキテクチャをデプロ
         kubectl apply -f ${cluster_name} -n ${namespace}
         ```
 
-    3.  すべてのレプリケーション タスクを再開します。
+    3.  変更フィードのすべてのレプリケーション タスクを再開します。
 
         ```shell
         kubectl exec -it ${pod_name} -n ${namespace} -- sh
@@ -223,7 +266,7 @@ TiDB Operatorを使用して TiCDC の新しいアーキテクチャをデプロ
 
 新しいアーキテクチャでTiCDCノードをデプロイした後も、クラシックアーキテクチャと同じコマンドを引き続き使用できます。新しいコマンドを学習したり、クラシックアーキテクチャで使用されていたコマンドを変更したりする必要はありません。
 
-たとえば、新しいアーキテクチャのTiCDC ノードにレプリケーション タスクを作成するには、次のコマンドを実行します。
+たとえば、新しいアーキテクチャで新しい TiCDC ノードのレプリケーション タスクを作成するには、次のコマンドを実行します。
 
 ```shell
 cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task"
@@ -239,6 +282,6 @@ cdc cli changefeed query -s --server=http://127.0.0.1:8300 --changefeed-id=simpl
 
 ## 監視 {#monitoring}
 
-現在、TiCDCの新アーキテクチャの監視ダッシュボード**「TiCDC-New-Arch」**はTiUPで管理されていません。このダッシュボードをGrafanaで表示するには、 [TiCDC 監視メトリックファイル](https://github.com/pingcap/ticdc/blob/master/metrics/grafana/ticdc_new_arch.json)手動でインポートする必要があります。
+新しいアーキテクチャにおけるTiCDCの監視ダッシュボードは**TiCDC-New-Arch**です。v8.5.4以降のバージョンのTiDBクラスターでは、この監視ダッシュボードはクラスターのデプロイまたはアップグレード時にGrafanaに統合されるため、手動操作は不要です。v8.5.4より前のバージョンのクラスターをご利用の場合は、監視を有効にするために[TiCDC 監視メトリックファイル](https://github.com/pingcap/ticdc/blob/master/metrics/grafana/ticdc_new_arch.json)手動でインポートする必要があります。
 
-各監視メトリックの詳細な説明については、 [新しいアーキテクチャにおける TiCDC のメトリクス](/ticdc/monitor-ticdc.md#metrics-for-ticdc-in-the-new-architecture)参照してください。
+インポート手順と各監視メトリックの詳細な説明については、 [新しいアーキテクチャにおける TiCDC のメトリクス](/ticdc/monitor-ticdc.md#metrics-for-ticdc-in-the-new-architecture)参照してください。

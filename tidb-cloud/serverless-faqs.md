@@ -8,7 +8,7 @@ aliases: ['/tidbcloud/serverless-tier-faqs']
 
 <!-- markdownlint-disable MD026 -->
 
-このドキュメントには、 TiDB Cloud Starter に関してよく寄せられる質問が記載されています。
+このドキュメントには、TiDB Cloud Starter に関してよく寄せられる質問が記載されています。
 
 ## 一般的なよくある質問 {#general-faqs}
 
@@ -29,7 +29,7 @@ Starter に名前が変更される前、 TiDB Cloudの Serverless 層は何千�
 -   行ベースと列ベースの両方のstorageを備えた完全に管理されたデータベースで、ハイブリッド OLTP および OLAP ワークロードに最適です。
 -   自動かつリクエスト主導型のスケーリング。容量計画や手動の調整は必要ありません。
 -   ベクター検索とフルテキスト検索が組み込まれており、GenAI 検索、チャットボット、その他の AI アプリケーションを強化します。
--   組織ごとに最大 5 つのクラスターまで、月間クォータが常時無料です (5 GiB の行データ + 5 GiB の列データ + クラスターあたり 5,000 万[RU](/tidb-cloud/tidb-cloud-glossary.md#request-unit) )。
+-   組織ごとに最大 5 つのクラスターまで、月間クォータが常時無料です (5 GiB の行データ + 5 GiB の列データ + クラスターあたり 5,000 万[RU](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) )。
 
 ### TiDB Cloud Starter を使い始めるにはどうすればよいですか? {#how-do-i-get-started-with-tidb-cloud-starter}
 
@@ -37,7 +37,7 @@ Starter に名前が変更される前、 TiDB Cloudの Serverless 層は何千�
 
 ### TiDB Cloudで作成できるTiDB Cloud Starter クラスターの数はいくつですか? {#how-many-tidb-cloud-starter-clusters-can-i-create-in-tidb-cloud}
 
-TiDB Cloudでは、組織ごとにデフォルトで最大5つの[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)クラスターを作成できます。TiDB TiDB Cloud Starterクラスターをさらに作成するには、クレジットカードを追加し、使用量を[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)設定する必要があります。
+TiDB Cloudでは、組織ごとにデフォルトで最大5つの[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)クラスターを作成できます。TiDB TiDB Cloud Starter クラスターをさらに作成するには、クレジットカードを追加し、使用量を[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)に設定する必要があります。
 
 ### TiDB Cloud Starter ではすべてのTiDB Cloud機能が完全にサポートされていますか? {#are-all-tidb-cloud-features-fully-supported-on-tidb-cloud-starter}
 
@@ -88,7 +88,7 @@ TiFlashレプリカの設定方法の詳細については、 [TiFlashレプリ�
 
 ### リクエストユニットとは何ですか? {#what-are-request-units}
 
-TiDB Cloud Starterは従量課金モデルを採用しており、storage容量とクラスターの使用量に対してのみ料金が発生します。このモデルでは、SQLクエリ、一括操作、バックグラウンドジョブなど、すべてのクラスターアクティビティが[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit)で定量化されます。RUは、クラスターで開始されたリクエストのサイズと複雑さを表す抽象的な指標です。詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)ご覧ください。
+TiDB Cloud Starterは従量課金モデルを採用しており、storage容量とクラスターの使用量に対してのみ料金が発生します。このモデルでは、SQLクエリ、一括操作、バックグラウンドジョブなど、すべてのクラスターアクティビティが[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)で定量化されます。RUは、クラスターで開始されたリクエストのサイズと複雑さを表す抽象的な指標です。詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)ご覧ください。
 
 ### TiDB Cloud Starter には無料プランはありますか? {#is-there-any-free-plan-available-for-tidb-cloud-starter}
 
@@ -96,7 +96,7 @@ TiDB Cloud Starterは従量課金モデルを採用しており、storage容量�
 
 -   行ベースのstorage: 5 GiB
 -   列指向storage: 5 GiB
--   [リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 月間5000万RU
+-   [リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) : 月間5000万RU
 
 TiDB Cloud Starter クラスターに月間使用制限が設定されている場合、無料割り当て量を超えた使用量には課金されます。無料クラスターの場合、無料割り当て量に達すると、月間使用制限を設定するか、新しい月の開始時に使用量がリセットされるまで、このクラスターの読み取りおよび書き込み操作は制限されます。
 
@@ -108,7 +108,7 @@ TiDB Cloud Starter クラスターに月間使用制限が設定されている�
 
 ### ワークロードに必要な RU の数を見積もって、月間予算を計画するにはどうすればよいですか? {#how-can-i-estimate-the-number-of-rus-required-by-my-workloads-and-plan-my-monthly-budget}
 
-個々のSQL文のRU消費量を取得するには、SQL文[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption)使用できます。ただし、 `EXPLAIN ANALYZE`で返されるRU使用量には、出力RUは含まれていないことに注意してください。出力使用量はゲートウェイで個別に測定され、TiDBサーバーには認識されないためです。
+個々のSQL文のRU消費量を取得するには、SQL文[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption)を使用できます。ただし、 `EXPLAIN ANALYZE`で返されるRU使用量には、出力RUは含まれていないことに注意してください。出力使用量はゲートウェイで個別に測定され、TiDBサーバーには認識されないためです。
 
 クラスターで使用されているRUとstorageを確認するには、クラスターの概要ページの**「今月の使用量」**ペインをご覧ください。このペインに表示される過去のリソース使用量データとリアルタイムのリソース使用量を参考に、クラスターのリソース消費量を追跡し、適切な使用制限を見積もることができます。無料割り当てで要件を満たせない場合は、追加リソースの使用制限を編集できます。詳細については、 [TiDB Cloud Starter の使用割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)ご覧ください。
 
@@ -122,7 +122,7 @@ storageは、 TiDB Cloud Starter クラスターに保存されるデータ量�
 
 ### テーブルまたはデータベースをすぐに削除した後でも、storage使用量のサイズが変更されないのはなぜですか? {#why-does-the-storage-usage-size-remain-unchanged-after-dropping-a-table-or-database-immediately}
 
-これは[`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) TiDBが削除されたテーブルとデータベースを一定期間保持するためです。この保持期間により、これらのテーブルに依存するトランザクションは中断することなく実行を継続できます。さらに、この保持期間によって[`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)機能が実現可能となり、誤って削除されたテーブルやデータベースを回復できるようになります。
+これは、TiDBが削除されたテーブルとデータベースを一定期間保持するためです。この保持期間により[`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)これらのテーブルに依存するトランザクションは中断することなく実行を継続できます。さらに、この保持期間によって[`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)機能が実現可能となり、誤って削除されたテーブルやデータベースを回復できるようになります。
 
 ### アクティブにクエリを実行していないのに RU が消費されるのはなぜですか? {#why-are-there-ru-consumptions-when-i-m-not-actively-running-any-queries}
 

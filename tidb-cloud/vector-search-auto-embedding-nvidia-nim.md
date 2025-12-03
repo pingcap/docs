@@ -9,11 +9,7 @@ summary: TiDB Cloudで NVIDIA NIM 埋め込みモデルを使用する方法を�
 
 > **注記：**
 >
-> 現在、 [自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)次の AWS リージョンのTiDB Cloud Starter クラスターでのみ利用可能です。
->
-> -   `Frankfurt (eu-central-1)`
-> -   `Oregon (us-west-2)`
-> -   `N. Virginia (us-east-1)`
+> [自動埋め込み](/tidb-cloud/vector-search-auto-embedding-overview.md)は、AWS でホストされているTiDB Cloud Starter クラスターでのみ使用できます。
 
 ## 利用可能なモデル {#available-models}
 
@@ -25,7 +21,7 @@ NVIDIA NIM でホストされている埋め込みモデルは、独自の[NVIDI
 
 -   名前: `nvidia_nim/baai/bge-m3`
 -   寸法: 1024
--   距離メトリック: コサイン、L2
+-   距離計量：コサイン、L2
 -   最大入力テキストトークン数: 8,192
 -   価格: NVIDIA が請求
 -   TiDB Cloudがホスト: ❌

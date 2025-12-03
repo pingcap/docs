@@ -1,6 +1,6 @@
 ---
 title: TiDB Release Timeline
-summary: TiDB のリリース タイムラインについて説明します。
+summary: TiDB リリースのタイムラインについて説明します。
 ---
 
 # TiDB リリース タイムライン {#tidb-release-timeline}
@@ -9,10 +9,11 @@ summary: TiDB のリリース タイムラインについて説明します。
 
 このドキュメントでは、リリースされたすべての TiDB バージョンを時系列順にリストします。
 
-TiDB の長期サポート (LTS) バージョンのサポート タイムラインについては、 [TiDB リリース サポート ポリシー](https://pingcap.com/tidb-release-support-policy/)参照してください。
+TiDB の長期サポート (LTS) バージョンのサポート タイムラインについては、 [TiDB リリース サポート ポリシー](https://pingcap.com/tidb-release-support-policy/)を参照してください。
 
 | バージョン                                            | リリース日       |
 | :----------------------------------------------- | :---------- |
+| [8.5.4](/releases/release-8.5.4.md)              | 2025年11月27日 |
 | [7.5.7](/releases/release-7.5.7.md)              | 2025年9月4日   |
 | [8.5.3](/releases/release-8.5.3.md)              | 2025年8月14日  |
 | [8.5.2](/releases/release-8.5.2.md)              | 2025年6月12日  |
@@ -196,7 +197,7 @@ TiDB の長期サポート (LTS) バージョンのサポート タイムライ�
 | [2.0.0-rc.4](/releases/release-2.0-rc.4.md)      | 2018年3月30日  |
 | [2.0.0-rc.3](/releases/release-2.0-rc.3.md)      | 2018年3月23日  |
 | [2.0.0-rc.1](/releases/release-2.0-rc.1.md)      | 2018年3月9日   |
-| [1.1.0ベータ版](/releases/release-1.1-beta.md)       | 2018年2月24日  |
+| [1.1.0-ベータ](/releases/release-1.1-beta.md)       | 2018年2月24日  |
 | [1.0.8](/releases/release-1.0.8.md)              | 2018年2月11日  |
 | [1.0.7](/releases/release-1.0.7.md)              | 2018年1月22日  |
 | [1.1.0-アルファ](/releases/release-1.1-alpha.md)     | 2018年1月19日  |

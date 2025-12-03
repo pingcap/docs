@@ -5,13 +5,13 @@ summary: TiDB データベースの CREATE INDEX の使用法の概要。
 
 # インデックスの作成 {#create-index}
 
-この文は既存のテーブルに新しいインデックスを追加します。これは[`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-alter-table.md)の代替構文であり、MySQLとの互換性のために用意されています。
+この文は既存のテーブルに新しいインデックスを追加します。これは[`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-alter-table.md)代替構文であり、MySQLとの互換性のために用意されています。
 
 <CustomContent platform="tidb-cloud">
 
 > **注記：**
 >
-> 4つのvCPUを搭載したクラスタ[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)の場合、インデックス作成時にリソース制限がクラスタの安定性に影響を与えないように、 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)手動で無効にすることをお勧めします。この設定を無効にすると、トランザクションを使用してインデックスを作成できるようになり、クラスタ全体への影響が軽減されます。
+> 4つのvCPUを搭載した[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの場合、インデックス作成時にリソース制限がクラスターの安定性に影響を与えないように、 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)手動で無効にすることをお勧めします。この設定を無効にすると、トランザクションを使用してインデックスを作成できるようになり、クラスター全体への影響が軽減されます。
 
 </CustomContent>
 
@@ -179,7 +179,7 @@ DROP INDEX idx1 ON t1;
 -   [`UPPER()`](/functions-and-operators/string-functions.md#upper)
 -   [`VITESS_HASH()`](/functions-and-operators/tidb-functions.md)
 
-上記のリストに含まれていない関数は、十分にテストされていないため、本番環境での関数は推奨されません。これは実験的とみなされます。演算子、 `CAST`などの他の式も実験的`CASE WHEN`みなされ、本番環境での本番は推奨されません。
+上記のリストに含まれていない関数は、十分にテストされていないため、本番環境での関数は推奨されません。これは実験的とみなされます。演算子、 `CAST` `CASE WHEN`の他の式も実験的とみなされ、本番環境での本番は推奨されません。
 
 <CustomContent platform="tidb">
 
@@ -202,7 +202,7 @@ allow-expression-index = true
 > -   サブクエリ。
 > -   [`AUTO_INCREMENT`](/auto-increment.md)列。この制限は、システム変数[`tidb_enable_auto_increment_in_generated`](/system-variables.md#tidb_enable_auto_increment_in_generated)の値を`true`に設定することで解除できます。
 > -   [ウィンドウ関数](/functions-and-operators/window-functions.md) 。
-> -   ROW関数(例: `CREATE TABLE t (j JSON, INDEX k (((j,j))));` 。
+> -   ROW関数(例: `CREATE TABLE t (j JSON, INDEX k (((j,j))));` )。
 > -   [集計関数](/functions-and-operators/aggregate-group-by-functions.md) 。
 >
 > 式インデックスは暗黙的に名前（例： `_V$_{index_name}_{index_offset}` ）を取得します。列に既に設定されている名前で新しい式インデックスを作成しようとすると、エラーが発生します。また、同じ名前の新しい列を追加した場合もエラーが発生します。
@@ -213,7 +213,7 @@ allow-expression-index = true
 
 クエリ文内の式が式インデックス内の式と一致する場合、オプティマイザはクエリに対して式インデックスを選択できます。ただし、統計情報によっては、オプティマイザが式インデックスを選択しない場合があります。このような場合は、オプティマイザヒントを使用して、オプティマイザに式インデックスを選択させることができます。
 
-次の例では、式`LOWER(col1)`に式インデックス`idx`作成するとします。
+次の例では、式`LOWER(col1)`に式インデックス`idx`を作成するとします。
 
 クエリ文の結果が同じ式である場合、式インデックスが適用されます。次の文を例に挙げます。
 
@@ -245,13 +245,13 @@ SELECT MAX(LOWER(col1)) FROM t;
 SELECT MIN(col1) FROM t GROUP BY LOWER(col1);
 ```
 
-式インデックスに対応する式を確認するには、 [`SHOW INDEX`](/sql-statements/sql-statement-show-indexes.md)を実行するか、システムテーブル[`information_schema.tidb_indexes`](/information-schema/information-schema-tidb-indexes.md)とテーブル[`information_schema.STATISTICS`](/information-schema/information-schema-statistics.md)を確認してください。出力の`Expression`列が対応する式を示します。式以外のインデックスの場合、この列には`NULL`表示されます。
+式インデックスに対応する式を確認するには、 [`SHOW INDEX`](/sql-statements/sql-statement-show-indexes.md)実行するか、システムテーブル[`information_schema.tidb_indexes`](/information-schema/information-schema-tidb-indexes.md)とテーブル[`information_schema.STATISTICS`](/information-schema/information-schema-statistics.md)を確認してください。出力の`Expression`列が対応する式を示します。式以外のインデックスの場合、この列には`NULL`表示されます。
 
 式インデックスの維持コストは、行が挿入または更新されるたびに式の値を計算する必要があるため、他のインデックスの維持コストよりも高くなります。式の値は既にインデックスに格納されているため、オプティマイザが式インデックスを選択する際に再計算する必要はありません。
 
 したがって、クエリのパフォーマンスが挿入および更新のパフォーマンスを上回る場合は、式のインデックス作成を検討できます。
 
-式インデックスはMySQLと同じ構文と制限事項を持ちます。式インデックスは、生成された非表示の仮想列にインデックスを作成することで実装されるため、サポートされる式はすべて[仮想生成列の制限](/generated-columns.md#limitations)継承します。
+式インデックスはMySQLと同じ構文と制限事項を持ちます。式インデックスは、生成された非表示の仮想列にインデックスを作成することで実装されるため、サポートされる式はすべて[仮想生成列の制限](/generated-columns.md#limitations)を継承します。
 
 ## 多値インデックス {#multi-valued-indexes}
 
@@ -362,7 +362,7 @@ Query OK, 1 row affected (0.00 sec)
 -   複数値インデックスによって使用される追加のstorageスペース = 行あたりの配列要素の平均数 * 通常のセカンダリ インデックスによって使用されるスペース。
 -   通常のインデックスと比較すると、DML 操作では複数値インデックスのインデックス レコードがより多く変更されるため、複数値インデックスは通常のインデックスよりもパフォーマンスに大きな影響を与えます。
 -   複数値インデックスは特殊なタイプの式インデックスであるため、複数値インデックスには式インデックスと同じ制限があります。
--   テーブルで複数値インデックスが使用されている場合、 BR、TiCDC、またはTiDB Lightning を使用して、v6.6.0 より前の TiDB クラスターにテーブルをバックアップ、複製、またはインポートすることはできません。
+-   テーブルで複数値インデックスが使用されている場合、 BR、TiCDC、またはTiDB Lightningを使用して、v6.6.0 より前の TiDB クラスターにテーブルをバックアップ、複製、またはインポートすることはできません。
 -   複雑な条件を持つクエリの場合、TiDBは複数値インデックスを選択できない可能性があります。複数値インデックスでサポートされる条件パターンについては、 [複数値インデックスを使用する](/choose-index.md#use-multi-valued-indexes)を参照してください。
 
 ## 目に見えないインデックス {#invisible-index}
@@ -388,17 +388,17 @@ TiDB v8.0.0 以降では、システム変数[`tidb_opt_use_invisible_indexes`](
 
     > **注記：**
     >
-    > 現在、特定の AWS リージョンの {{{ .starter }} および {{{ .essential }}} クラスターのみが[`FULLTEXT`構文とインデックス](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)サポートしています。
+    > 現在、特定の AWS リージョンのTiDB Cloud Starter クラスターとTiDB Cloud Essential クラスターのみが[`FULLTEXT`構文とインデックス](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)サポートしています。
 
--   TiDB `RTREE` `BTREE` `HASH`インデックス タイプを受け入れますが、それらを無視します。
+-   TiDB は、MySQL との互換性のために`BTREE` `HASH` `RTREE`インデックス タイプを受け入れますが、それらを無視します。
 
 -   降順インデックスはサポートされていません ( MySQL 5.7と同様)。
 
--   `CLUSTERED`型の主キーをテーブルに追加することはサポートされていません。3 型の主キーの詳細については、 `CLUSTERED` [クラスター化インデックス](/clustered-indexes.md)参照してください。
+-   `CLUSTERED`型の主キーをテーブルに追加することはサポートされていません。3 `CLUSTERED`の主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
 -   式インデックスはビューと互換性がありません。ビューを使用してクエリを実行する場合、式インデックスを同時に使用することはできません。
 
--   式インデックスはバインディングとの互換性に問題があります。式インデックスの式に定数が含まれる場合、対応するクエリに対して作成されるバインディングのスコープが拡張されます。例えば、式インデックス内の式が`a+1`で、対応するクエリ条件が`a+1 > 2`あるとします。この場合、作成されるバインディングは`a+? > ?`です。つまり、 `a+2 > 2`などの条件を持つクエリでも式インデックスの使用が強制され、実行プランの品質が低下します。さらに、これはSQLプラン管理（SPM）におけるベースラインのキャプチャとベースラインの進化にも影響を及ぼします。
+-   式インデックスはバインディングとの互換性に問題があります。式インデックスの式に定数が含まれる場合、対応するクエリに対して作成されるバインディングのスコープが拡張されます。例えば、式インデックス内の式が`a+1`で、対応するクエリ条件が`a+1 > 2`であるとします。この場合、作成されるバインディングは`a+? > ?`です。つまり、 `a+2 > 2`などの条件を持つクエリでも式インデックスの使用が強制され、実行プランの品質が低下します。さらに、これはSQLプラン管理（SPM）におけるベースラインのキャプチャとベースラインの進化にも影響を及ぼします。
 
 -   多値インデックスで書き込まれるデータは、定義されたデータ型と完全に一致する必要があります。一致しない場合、データの書き込みは失敗します。詳細については、 [複数値インデックスを作成する](/sql-statements/sql-statement-create-index.md#create-multi-valued-indexes)参照してください。
 

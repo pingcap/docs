@@ -21,7 +21,7 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 ### 繋がり {#connection}
 
 -   [パブリックエンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)と[プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)のみ使用できます。5 [VPC ピアリング](/tidb-cloud/set-up-vpc-peering-connections.md) TiDB Cloud StarterまたはTiDB Cloud Essentialクラスターに接続するためには使用できません。
--   プライベートエンドポイントの[ファイアウォールルール](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)サポート。
+-   プライベートエンドポイントのサポート[ファイアウォールルール](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md) 。
 -   データベースクライアント接続は、30分以上開いたままになっていると、予期せず終了する可能性があります。これは、TiDBサーバーのシャットダウン、再起動、またはメンテナンス時に発生する可能性があり、アプリケーションの中断につながる可能性があります。この問題を回避するには、最大接続有効期間を設定してください。最初は5分から始め、テールレイテンシーに影響がある場合は徐々に増やすことを推奨します。詳細については、 [接続プールの推奨設定](/develop/dev-guide-connection-parameters.md#connection-pools-and-connection-parameters)参照してください。
 
 > **注記：**
@@ -69,7 +69,7 @@ TiDB Cloudでは、組織ごとに最大5つのクラスター（デフォルト
 
 -   行ベースのstorage: 5 GiB
 -   列指向storage: 5 GiB
--   [リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 月間5000万RU
+-   [リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) : 月間5000万RU
 
 リクエストユニット（RU）は、クエリまたはトランザクションのリソース消費量を追跡するために使用される測定単位です。これは、データベース内の特定のリクエストを処理するために必要な計算リソースを見積もることができる指標です。リクエストユニットは、 TiDB Cloud Starterサービスの課金単位でもあります。
 

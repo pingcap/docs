@@ -34,13 +34,13 @@ summary: Amazon S3 または Alibaba Cloud Object Storage Service (OSS) からTi
 
     -   1つのテーブルのデータが複数のCSVファイルに分割されている場合は、これらのCSVファイルに数値サフィックスを追加します。例： `${db_name}.${table_name}.000001.csv`と`${db_name}.${table_name}.000002.csv`数値サフィックスは連続していなくても構いませんが、昇順である必要があります。また、すべてのサフィックスの長さが同じになるように、数値の前にゼロを追加する必要があります。
 
-    -   TiDB Cloud Premiumは、以下の形式の圧縮ファイルのインポートをサポートしています： `.gzip` 。圧縮`.zst`れたCSVファイルをインポートする場合は、ファイル名`.gz` `.zstd` `${db_name}.${table_name}.${suffix}.csv.${compress}`形式にしてください。13 `${suffix}`オプションで、 `.snappy` 000001」などの任意の整数にすることができます。例えば、 `trips.000001.csv.gz`ファイルを`bikeshare.trips`テーブルにインポートする場合は、ファイル名を`bikeshare.trips.000001.csv.gz`に変更する必要があります。
+    -   TiDB Cloud Premiumは`.gz`以下の形式の圧縮ファイルのインポートをサポートしています： `.gzip` `.snappy`圧縮`.zstd`れたCSVファイルをインポートする場合は、ファイル名`.zst` `${db_name}.${table_name}.${suffix}.csv.${compress}`形式にしてください。13 `${suffix}`オプションで、「000001」などの任意の整数にすることができます。例えば、 `trips.000001.csv.gz`ファイルを`bikeshare.trips`テーブルにインポートする場合は、ファイル名を`bikeshare.trips.000001.csv.gz`に変更する必要があります。
 
     > **注記：**
     >
     > -   パフォーマンスを向上させるには、各圧縮ファイルのサイズを 100 MiB に制限することをお勧めします。
     > -   Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。その他の Snappy 圧縮形式はサポートされていません。
-    > -   非圧縮ファイルの場合、前述のルールに従って CSV ファイル名を更新できないケース (たとえば、CSV ファイル リンクが他のプログラムでも使用されている場合) は、ファイル名を変更せずに、 [ステップ4](#step-4-import-csv-files)の**マッピング設定を**使用してソース データを単一のターゲット テーブルにインポートできます。
+    > -   非圧縮ファイルの場合、前述のルールに従って CSV ファイル名を更新できないケース (たとえば、CSV ファイル リンクが他のプログラムでも使用されている場合) は、ファイル名を変更せずに、 [ステップ4](#step-4-import-csv-files)の**マッピング設定**を使用してソース データを単一のターゲット テーブルにインポートできます。
 
 ## ステップ2. ターゲットテーブルスキーマを作成する {#step-2-create-the-target-table-schemas}
 
@@ -52,7 +52,7 @@ CSV ファイルにはスキーマ情報が含まれていないため、CSV フ
 
     1.  ソース データのデータベース スキーマ ファイルを作成します。
 
-        CSVファイルが[ステップ1](#step-1-prepare-the-csv-files)の命名規則に従っている場合、データベーススキーマファイルはデータのインポートに必須ではありません。そうでない場合は、データベーススキーマファイルは必須です。
+        CSVファイルが[ステップ1](#step-1-prepare-the-csv-files)命名規則に従っている場合、データベーススキーマファイルはデータのインポートに必須ではありません。そうでない場合は、データベーススキーマファイルは必須です。
 
         各データベーススキーマファイルは`${db_name}-schema-create.sql`形式で、 `CREATE DATABASE` DDLステートメントを含んでいる必要があります。このファイルを使用して、 TiDB Cloud Premiumはデータをインポートする際に、データを格納するための`${db_name}`データベースを作成します。
 
@@ -85,11 +85,11 @@ CSV ファイルにはスキーマ情報が含まれていないため、CSV フ
 
 TiDB Cloud Premium が Amazon S3 または Alibaba Cloud Object Storage Service (OSS) 内の CSV ファイルにアクセスできるようにするには、次のいずれかを実行します。
 
--   CSV ファイルが Amazon S3 にある場合は、TiDB インスタンス用に[Amazon S3 アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access) 。
+-   CSV ファイルが Amazon S3 にある場合は、TiDB インスタンス用に[Amazon S3 アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access) 。
 
     バケットへのアクセスには、AWS アクセスキーまたはロール ARN のいずれかを使用できます。完了したら、アクセスキー（アクセスキー ID とシークレットアクセスキーを含む）またはロール ARN の値をメモしておいてください。これらは[ステップ4](#step-4-import-csv-files)で必要になります。
 
--   CSV ファイルが Alibaba Cloud Object Storage Service (OSS) にある場合は、TiDB インスタンスごとに[Alibaba Cloud Object Storage Service (OSS) アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access) 。
+-   CSV ファイルが Alibaba Cloud Object Storage Service (OSS) にある場合は、TiDB インスタンスごとに[Alibaba Cloud Object Storage Service (OSS) アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access) 。
 
 ## ステップ4.CSVファイルをインポートする {#step-4-import-csv-files}
 
@@ -116,11 +116,11 @@ CSV ファイルをTiDB Cloud Premium にインポートするには、次の手
     -   **ソースファイルURI** :
         -   1つのファイルをインポートする場合は、ソースファイルのURIを次の形式で入力します`s3://[bucket_name]/[data_source_folder]/[file_name].csv` 。たとえば、 `s3://sampledata/ingest/TableName.01.csv` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを次の形式で入力します`s3://[bucket_name]/[data_source_folder]/` 。例： `s3://sampledata/ingest/` 。
-    -   **認証情報**: バケットにアクセスするには、AWS ロール ARN または AWS アクセスキーのいずれかを使用できます。詳細については、 [Amazon S3 アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)参照してください。
-        -   **AWS ロール ARN** : AWS ロール ARN 値を入力します。新しいロールを作成する必要がある場合は、 **「AWS CloudFormation で新しいロールを作成するには、こちらをクリックしてください」**をクリックし、ガイドに従って提供されたテンプレートを起動し、 IAM の警告を確認してスタックを作成し、生成された ARN をTiDB Cloud Premium にコピーします。
+    -   **認証情報**: バケットにアクセスするには、AWS ロール ARN または AWS アクセスキーのいずれかを使用できます。詳細については、 [Amazon S3 アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)参照してください。
+        -   **AWS ロール ARN** : AWS ロール ARN 値を入力します。新しいロールを作成する必要がある場合は、 **「AWS CloudFormation で新しいロールを作成するには、こちらをクリックしてください」を**クリックし、ガイドに従って提供されたテンプレートを起動し、 IAM の警告を確認してスタックを作成し、生成された ARN をTiDB Cloud Premium にコピーします。
         -   **AWS アクセスキー**: AWS アクセスキー ID と AWS シークレットアクセスキーを入力します。
     -   **バケット アクセスのテスト**: 資格情報が設定された後、このボタンをクリックして、 TiDB Cloud Premium がバケットにアクセスできることを確認します。
-    -   **ターゲット接続**: インポートを実行するTiDBのユーザー名とパスワードを入力します。必要に応じて、 **「接続テスト」**をクリックして資格情報を検証します。
+    -   **ターゲット接続**: インポートを実行するTiDBのユーザー名とパスワードを入力します。必要に応じて、 **「接続テスト」を**クリックして資格情報を検証します。
 
 4.  **「次へ」**をクリックします。
 
@@ -142,10 +142,10 @@ CSV ファイルをTiDB Cloud Premium にインポートするには、次の手
     >
     > 手動マッピングは近日中に利用可能になります。切り替えボタンが利用可能になったら、自動マッピングオプションをオフにして、手動でマッピングを設定してください。
     >
-    > -   **ソース**: `TableName.01.csv`のようなファイル名パターンを入力します。ワイルドカード`*`と`?`がサポートされています (例: `my-data*.csv` )。
+    > -   **ソース**: `TableName.01.csv`のようなファイル名パターンを入力します。ワイルドカード`*`と`?`サポートされています (例: `my-data*.csv` )。
     > -   **ターゲット データベース**と**ターゲット テーブル**: 一致したファイルの宛先オブジェクトを選択します。
 
-6.  TiDB Cloud Premiumはソースパスを自動的にスキャンします。スキャン結果を確認し、見つかったデータファイルと対応するターゲットテーブルを確認して、 **「インポートを開始」**をクリックします。
+6.  TiDB Cloud Premiumはソースパスを自動的にスキャンします。スキャン結果を確認し、見つかったデータファイルと対応するターゲットテーブルを確認して、 **「インポートを開始」を**クリックします。
 
 7.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認します。
 
@@ -171,9 +171,9 @@ CSV ファイルをTiDB Cloud Premium にインポートするには、次の手
     -   **ソースファイルURI** :
         -   1つのファイルをインポートする場合は、ソースファイルのURIを次の形式で入力します`oss://[bucket_name]/[data_source_folder]/[file_name].csv` 。たとえば、 `oss://sampledata/ingest/TableName.01.csv` 。
         -   複数のファイルをインポートする場合は、ソースフォルダのURIを次の形式で入力します`oss://[bucket_name]/[data_source_folder]/` 。例： `oss://sampledata/ingest/` 。
-    -   **認証情報**: AccessKeyペアを使用してバケットにアクセスできます。詳細については、 [Alibaba Cloud Object Storage Service (OSS) アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access)ご覧ください。
+    -   **認証情報**: AccessKeyペアを使用してバケットにアクセスできます。詳細については、 [Alibaba Cloud Object Storage Service (OSS) アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)ご覧ください。
     -   **バケット アクセスのテスト**: 資格情報が設定された後、このボタンをクリックして、 TiDB Cloud Premium がバケットにアクセスできることを確認します。
-    -   **ターゲット接続**: インポートを実行するTiDBのユーザー名とパスワードを入力します。必要に応じて、 **「接続テスト」**をクリックして資格情報を検証します。
+    -   **ターゲット接続**: インポートを実行するTiDBのユーザー名とパスワードを入力します。必要に応じて、 **「接続テスト」を**クリックして資格情報を検証します。
 
 4.  **「次へ」**をクリックします。
 
@@ -195,10 +195,10 @@ CSV ファイルをTiDB Cloud Premium にインポートするには、次の手
     >
     > 手動マッピングは近日中に利用可能になります。切り替えボタンが利用可能になったら、自動マッピングオプションをオフにして、手動でマッピングを設定してください。
     >
-    > -   **ソース**: `TableName.01.csv`のようなファイル名パターンを入力します。ワイルドカード`*`と`?`がサポートされています (例: `my-data*.csv` )。
+    > -   **ソース**: `TableName.01.csv`のようなファイル名パターンを入力します。ワイルドカード`*`と`?`サポートされています (例: `my-data*.csv` )。
     > -   **ターゲット データベース**と**ターゲット テーブル**: 一致したファイルの宛先オブジェクトを選択します。
 
-6.  TiDB Cloud Premiumはソースパスを自動的にスキャンします。スキャン結果を確認し、見つかったデータファイルと対応するターゲットテーブルを確認して、 **「インポートを開始」**をクリックします。
+6.  TiDB Cloud Premiumはソースパスを自動的にスキャンします。スキャン結果を確認し、見つかったデータファイルと対応するターゲットテーブルを確認して、 **「インポートを開始」を**クリックします。
 
 7.  インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認します。
 
@@ -225,4 +225,4 @@ CSV ファイルをTiDB Cloud Premium にインポートするには、次の手
 
 ### インポートされたテーブルに行が 0 行あります {#zero-rows-in-the-imported-tables}
 
-インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。行数が0の場合、入力したバケットURIに一致するデータファイルが存在しないことを意味します。この場合、正しいソースファイルを指定するか、 [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って既存のファイルの名前を変更するか、**詳細設定を**使用して変更を加えることで問題を解決してください。その後、該当するテーブルを再度インポートしてください。
+インポートの進行状況が**「完了」**と表示されたら、インポートされたテーブルを確認してください。行数が0の場合、入力したバケットURIに一致するデータファイルが存在しないことを意味します。この場合、正しいソースファイルを指定するか、 [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従って既存のファイルの名前を変更するか、**詳細設定**を使用して変更を加えることで問題を解決してください。その後、該当するテーブルを再度インポートしてください。

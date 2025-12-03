@@ -230,7 +230,7 @@
         -   [クラウドストレージからスナップショットファイルをインポートする](/tidb-cloud/import-snapshot-files-serverless.md)
         -   [MySQL CLI によるインポート](/tidb-cloud/import-with-mysql-cli-serverless.md)
     -   参照
-        -   [TiDB Cloudの外部ストレージアクセスを構成する](/tidb-cloud/serverless-external-storage.md)
+        -   [TiDB Cloudの外部ストレージアクセスを構成する](/tidb-cloud/configure-external-storage-access.md)
         -   [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)
         -   [データのインポートのためのCSV構成](/tidb-cloud/csv-config-for-import-data.md)
         -   [Amazon S3 からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
@@ -610,7 +610,7 @@
     -   認証
         -   [ログイン](/tidb-cloud/ticloud-auth-login.md)
         -   [ログアウト](/tidb-cloud/ticloud-auth-logout.md)
-        -   [だれだ](/tidb-cloud/ticloud-auth-whoami.md)
+        -   [誰だ](/tidb-cloud/ticloud-auth-whoami.md)
     -   サーバーレス
         -   [容量](/tidb-cloud/ticloud-serverless-capacity.md)
         -   [作成する](/tidb-cloud/ticloud-cluster-create.md)
@@ -689,7 +689,6 @@
     -   [DDL実行の原則とベストプラクティス](/ddl-introduction.md)
     -   [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)
     -   [通知](/tidb-cloud/notifications.md)
-    -   [用語集](/tidb-cloud/tidb-cloud-glossary.md)
 -   サポートプラン
     -   [コネクテッドケアの概要](/tidb-cloud/connected-care-overview.md)
     -   [コネクテッドケアの詳細](/tidb-cloud/connected-care-detail.md)
@@ -703,8 +702,9 @@
             -   [Lark経由でサポートチケットとやり取りする](/tidb-cloud/connected-lark-ticket-interaction.md)
     -   [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)
 -   よくある質問
-    -   [TiDB Cloudに関するよくある質問](/tidb-cloud/tidb-cloud-faq.md)
+    -   [TiDB Cloudよくある質問](/tidb-cloud/tidb-cloud-faq.md)
     -   [TiDB Cloud Starterに関するよくある質問](/tidb-cloud/serverless-faqs.md)
+-   [用語集](/tidb-cloud/tidb-cloud-glossary.md)
 
 ## リリース {#releases}
 

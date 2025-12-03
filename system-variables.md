@@ -1430,7 +1430,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   タイプ: ブール値
 -   デフォルト値: `ON`
 -   この変数は、 `utf8`文字セットに[基本多言語面（BMP）](https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane)セットの値のみを格納するように強制するために使用されます。BMP以外の文字を格納するには、 `utf8mb4`文字セットを使用することをお勧めします。
--   `utf8`チェックが緩やかだった以前のバージョンのTiDBからクラスターをアップグレードする場合は、このオプションを無効にする必要がある場合があります。詳細については、 [アップグレード後のよくある質問](https://docs.pingcap.com/tidb/stable/upgrade-faq)参照してください。
+-   `utf8`チェックが緩やかだった以前のバージョンのTiDBからクラスタをアップグレードする場合は、このオプションを無効にする必要がある場合があります。詳細については、 [アップグレード後のよくある質問](https://docs.pingcap.com/tidb/stable/upgrade-faq)参照してください。
 
 ### tidb_checksum_table_concurrency {#tidb-checksum-table-concurrency}
 
@@ -1645,6 +1645,14 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 > 現在、この機能は[1つの`ALTER TABLE`文で複数の列またはインデックスを変更する](/sql-statements/sql-statement-alter-table.md)と完全に互換性がありません。インデックスアクセラレーションを使用して一意のインデックスを追加する場合、同じステートメント内で他の列やインデックスを変更しないようにする必要があります。
 
 </CustomContent>
+
+### tidb_stats_update_during_ddl <span class="version-mark">v8.5.4 の新機能</span> {#tidb-stats-update-during-ddl-span-class-version-mark-new-in-v8-5-4-span}
+
+-   範囲: グローバル
+-   クラスターに持続: はい
+-   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
+-   デフォルト値: `OFF`
+-   この変数は、DDL埋め込み`ANALYZE`有効にするかどうかを制御します。有効にすると、新しいインデックスを作成するDDL文（ [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) ）または既存のインデックスを再編成するDDL文（ [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)および[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) ）は、インデックスが可視になる前に自動的に統計情報を収集します。詳細については、 [DDL文に埋め込まれた`ANALYZE`](/ddl_embedded_analyze.md)参照してください。
 
 ### tidb_enable_dist_task <span class="version-mark">v7.1.0 の新機能</span> {#tidb-enable-dist-task-span-class-version-mark-new-in-v7-1-0-span}
 
@@ -1875,7 +1883,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   OLAP シナリオの場合、最大値はすべての TiKV ノードの CPU コアの数を超えてはなりません。
 -   テーブルに多数のパーティションがある場合は、TiKV がメモリ不足 (OOM) になるのを避けるために、変数値を適切に減らすことができます (スキャンするデータのサイズとスキャンの頻度によって決まります)。
 -   `LIMIT`句のみを含む単純なクエリの場合、 `LIMIT`値が 100000 未満であれば、TiKV にプッシュダウンされたスキャン操作では、この変数の値が`1`として扱われ、実行効率が向上します。
--   `SELECT MAX/MIN(col) FROM ...`クエリの場合、 `col`列のインデックスが`MAX(col)`または`MIN(col)`関数で必要な順序と同じ順序でソートされている場合、TiDB はクエリを`SELECT col FROM ... LIMIT 1`に書き換えて処理し、この変数の値も`1`として処理されます。例えば`SELECT MIN(col) FROM ...`の場合、 `col`列に昇順のインデックスがある場合、TiDB はクエリを`SELECT col FROM ... LIMIT 1`に書き換えてインデックスの最初の行を直接読み取ることで、 `MIN(col)`値を素早く取得できます。
+-   `SELECT MAX/MIN(col) FROM ...`クエリでは、 `col`列のインデックスが`MAX(col)`または`MIN(col)`関数で必要な順序と同じ順序でソートされている場合、TiDB はクエリを`SELECT col FROM ... LIMIT 1`に書き換えて処理し、この変数の値も`1`として処理されます。例えば`SELECT MIN(col) FROM ...`の場合、 `col`列に昇順のインデックスがある場合、TiDB はクエリを`SELECT col FROM ... LIMIT 1`に書き換えてインデックスの最初の行を直接読み取ることで、 `MIN(col)`値を素早く取得できます。
 -   [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)テーブルに対するクエリの場合、この変数はスロー ログ ファイルの解析の同時実行性を制御します。
 
 ### tidb_dml_batch_size {#tidb-dml-batch-size}
@@ -2436,7 +2444,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   タイプ: 列挙
 -   デフォルト値: `OFF`
 -   `ON` `WARN`値: `OFF`
--   デフォルトでは、TiDBは、まだ実装されていない機能の構文を使用しようとするとエラーを返します。変数値が`ON`に設定されている場合、TiDBはそのような利用できない機能を無視します。これは、SQLコードを変更できない場合に役立ちます。
+-   デフォルトでは、TiDBは、まだ実装されていない機能の構文を使用しようとするとエラーを返します。変数値が`ON`に設定されている場合、TiDBはそのような利用できない機能のケースを黙って無視します。これは、SQLコードを変更できない場合に役立ちます。
 -   `noop`関数を有効にすると、次の動作が制御されます。
     -   `LOCK IN SHARE MODE`構文
     -   `SQL_CALC_FOUND_ROWS`構文
@@ -3749,7 +3757,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   単位: 秒
 -   この変数は、自動タスク`ANALYZE`の最大実行時間を指定するために使用されます。自動タスク`ANALYZE`の実行時間が指定時間を超えると、タスクは終了します。この変数の値が`0`の場合、自動タスク`ANALYZE`の最大実行時間に制限はありません。
 
-### tidb_max_bytes_before_tiflash_external_group_by <span class="version-mark">v7.0.0 の新機能</span> {#tidb-max-bytes-before-tiflash-external-group-by-span-class-version-mark-new-in-v7-0-0-span}
+### tidb_max_bytes_before_tiflash_external_group_by<span class="version-mark">バージョン7.0.0の新機能</span> {#tidb-max-bytes-before-tiflash-external-group-by-span-class-version-mark-new-in-v7-0-0-span}
 
 -   スコープ: セッション | グローバル
 -   クラスターに持続: はい
@@ -4115,8 +4123,8 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 期間
--   デフォルト値: `60s`
--   新しく起動したTiFlashノードはサービスを提供していません。クエリの失敗を防ぐため、TiDBはtidb-serverからのクエリ送信を新しく起動したTiFlashノードに制限しています。この変数は、新しく起動したTiFlashノードにリクエストが送信されない時間範囲を示します。
+-   デフォルト値: `0s` 。v8.5.3 以前のバージョンでは、デフォルト値は`60s`です。
+-   新しく起動したTiFlashノードはサービスを提供していません。クエリの失敗を防ぐため、TiDBはtidbサーバーから新しく起動したTiFlashノードへのクエリ送信を制限します。この変数は、新しく起動したTiFlashノードにリクエストが送信されない時間範囲を示します。
 
 ### tidb_multi_statement_mode <span class="version-mark">v4.0.11 の新機能</span> {#tidb-multi-statement-mode-span-class-version-mark-new-in-v4-0-11-span}
 
@@ -4358,6 +4366,24 @@ mysql> desc select count(distinct a) from test.t;
 -   タイプ: ブール値
 -   デフォルト値: `OFF`
 -   この変数は、 [データベース間のバインディング](/sql-plan-management.md#cross-database-binding)機能を有効にするかどうかを制御します。
+
+### tidb_opt_enable_no_decorrelate_in_select <span class="version-mark">v8.5.4 の新機能</span> {#tidb-opt-enable-no-decorrelate-in-select-span-class-version-mark-new-in-v8-5-4-span}
+
+-   スコープ: セッション | グローバル
+-   クラスターに持続: はい
+-   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、オプティマイザが`SELECT`リスト内のサブクエリを含むすべてのクエリに[`NO_DECORRELATE()`](/optimizer-hints.md#no_decorrelate)ヒントを適用するかどうかを制御します。
+
+### tidb_opt_enable_semi_join_rewrite <span class="version-mark">v8.5.4 の新機能</span> {#tidb-opt-enable-semi-join-rewrite-span-class-version-mark-new-in-v8-5-4-span}
+
+-   スコープ: セッション | グローバル
+-   クラスターに持続: はい
+-   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、オプティマイザがサブクエリを含むすべてのクエリに[`SEMI_JOIN_REWRITE()`](/optimizer-hints.md#semi_join_rewrite)ヒントを適用するかどうかを制御します。
 
 ### tidb_opt_fix_control <span class="version-mark">v6.5.3 および v7.1.0 の新機能</span> {#tidb-opt-fix-control-span-class-version-mark-new-in-v6-5-3-and-v7-1-0-span}
 
@@ -4763,7 +4789,7 @@ EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: はい
 -   タイプ: ブール値
 -   デフォルト値: `ON` 。v8.3.0 より前では、デフォルト値は`OFF`です。
--   オプティマイザが`Projection`演算子をTiKVコプロセッサにプッシュダウンすることを許可するかどうかを指定します。有効にすると、オプティマイザは以下の3種類の`Projection`番目の演算子をTiKVにプッシュダウンする可能性があります。
+-   オプティマイザが`Projection`の演算子をTiKVコプロセッサにプッシュダウンすることを許可するかどうかを指定します。有効にすると、オプティマイザは以下の3種類の`Projection`番目の演算子をTiKVにプッシュダウンする可能性があります。
     -   演算子の最上位の式はすべて[JSONクエリ関数](/functions-and-operators/json-functions/json-functions-search.md)または[JSON値属性関数](/functions-and-operators/json-functions/json-functions-return.md)です。例: `SELECT JSON_EXTRACT(data, '$.name') FROM users;` 。
     -   演算子の最上位レベルの式には、JSONクエリ関数またはJSON値属性関数と、直接列読み取りが混在しています。例: `SELECT JSON_DEPTH(data), name FROM users;` 。
     -   演算子の最上位の式はすべて直接列読み取りであり、出力列の数は入力列の数よりも少なくなります。例: `SELECT name FROM users;` 。
@@ -5223,7 +5249,7 @@ SHOW WARNINGS;
 >
 > -   特定のビジネス シナリオによっては、このオプションを有効にすると、ロックの競合が頻繁に発生するトランザクションで、ある程度のスループットの低下 (平均レイテンシーの増加) が発生する可能性があります。
 > -   このオプションは、単一のキーをロックする必要があるステートメントにのみ適用されます。複数の行を同時にロックする必要があるステートメントには、このオプションは適用されません。
-> -   この機能は、 [`tidb_pessimistic_txn_aggressive_locking`](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660)変数によって v6.6.0 で導入されましたが、デフォルトでは無効になっています。
+> -   この機能は、デフォルトでは無効になっている[`tidb_pessimistic_txn_aggressive_locking`](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660)変数によって v6.6.0 で導入されました。
 
 ### tidb_placement_mode<span class="version-mark">バージョン6.0.0の新機能</span> {#tidb-placement-mode-span-class-version-mark-new-in-v6-0-0-span}
 
@@ -5447,7 +5473,7 @@ SHOW WARNINGS;
 -   タイプ: 列挙
 -   デフォルト値: `leader`
 -   可能な値: `leader` 、 `follower` 、 `leader-and-follower` 、 `prefer-leader` 、 `closest-replicas` 、 `closest-adaptive` 、 `learner` 。 `learner`はバージョン6.6.0で導入されました。
--   この変数は、TiDB がデータを読み取る場所を制御するために使用されます。
+-   この変数は、TiDBがデータを読み取る場所を制御するために使用されます。v8.5.4以降、この変数は読み取り専用SQL文にのみ適用されます。
 -   使用方法と実装の詳細については、 [Followerが読んだ](/follower-read.md)参照してください。
 
 ### tidb_restricted_read_only <span class="version-mark">v5.2.0 の新機能</span> {#tidb-restricted-read-only-span-class-version-mark-new-in-v5-2-0-span}
@@ -5638,7 +5664,7 @@ SHOW WARNINGS;
 -   タイプ: 文字列
 -   デフォルト値: &quot;&quot;
 -   オプション値：最大64文字の文字列。有効な文字は、数字`0-9` 、文字`a-zA-Z` 、アンダースコア`_` 、ハイフン`-`です。
--   この変数はインスタンスレベルのシステム変数です。これを使用して、 [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)配下の各 TiDB ノードのサービススコープを制御できます。DXF は、この変数の値に基づいて、分散タスクの実行をスケジュールできる TiDB ノードを決定します。具体的なルールについては、 [タスクのスケジュール](/tidb-distributed-execution-framework.md#task-scheduling)参照してください。
+-   この変数はインスタンスレベルのシステム変数です。これを使用して、 [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)配下の各 TiDB ノードのサービススコープを制御できます。DXF は、この変数の値に基づいて、どの TiDB ノードに分散タスクの実行をスケジュールするかを決定します。具体的なルールについては、 [タスクのスケジュール](/tidb-distributed-execution-framework.md#task-scheduling)参照してください。
 
 ### tidb_session_alias <span class="version-mark">v7.4.0 の新機能</span> {#tidb-session-alias-span-class-version-mark-new-in-v7-4-0-span}
 
@@ -5646,7 +5672,7 @@ SHOW WARNINGS;
 -   クラスターに持続: いいえ
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: はい
 -   デフォルト値: &quot;&quot;
--   この変数を使用すると、現在のセッションに関連するログの`session_alias`列目の値をカスタマイズできます。この値は、トラブルシューティング時にセッションを識別するのに役立ちます。この設定は、ステートメント実行に関係する複数のノード（TiKVを含む）のログに影響します。この変数の最大長は64文字に制限されており、それを超える文字は自動的に切り捨てられます。値の末尾のスペースも自動的に削除されます。
+-   この変数を使用すると、現在のセッションに関連するログの`session_alias`列目の値をカスタマイズできます。この値は、トラブルシューティング時にセッションを識別するのに役立ちます。この設定は、ステートメント実行に関係する複数のノード（TiKVを含む）のログに影響します。この変数の最大長は64文字に制限されており、超過した文字は自動的に切り捨てられます。値の末尾のスペースも自動的に削除されます。
 
 ### tidb_session_plan_cache_size <span class="version-mark">v7.1.0 の新機能</span> {#tidb-session-plan-cache-size-span-class-version-mark-new-in-v7-1-0-span}
 
@@ -6289,7 +6315,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
     -   TiDB と PD 間のネットワークレイテンシーは、PD が TSO を割り当てるのにかかる時間よりも大幅に長くなります (つまり、ネットワークレイテンシーが TSO RPC 期間の大部分を占めます)。
         -   TSO RPC 要求の期間を取得するには、Grafana TiDB ダッシュボードの PD クライアント セクションにある**PD TSO RPC 期間**パネルを確認します。
         -   PD TSO 割り当ての期間を取得するには、Grafana PD ダッシュボードの TiDB セクションにある**PDサーバーTSO ハンドル期間**パネルを確認します。
-    -   TiDB と PD 間の TSO RPC 要求の増加 ( `PARALLEL`の場合は 2 回、 `PARALLEL-FAST`の場合は 4 回) によって生じる追加のネットワーク トラフィックは許容されます。
+    -   TiDB と PD 間の TSO RPC 要求の増加 ( `PARALLEL`の場合は 2 回、 `PARALLEL-FAST`の場合は 4 回) によって発生する追加のネットワーク トラフィックは許容されます。
 
 > **注記：**
 >
@@ -6454,7 +6480,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 <CustomContent platform="tidb-cloud">
 
--   この変数は、TiDBがTiKVに送信するトランザクションコミット要求のバッチサイズを制御するために使用されます。アプリケーションワークロード内のトランザクションのほとんどに大量の書き込み操作が含まれる場合、この変数の値を大きくすることでバッチ処理のパフォーマンスを向上させることができます。ただし、この変数の値が大きすぎて、TiKVの単一ログの最大サイズ（デフォルトでは8MiB）を超えると、コミットが失敗する可能性があります。
+-   この変数は、TiDBがTiKVに送信するトランザクションコミット要求のバッチサイズを制御するために使用されます。アプリケーションワークロード内のトランザクションの大部分に大量の書き込み操作が含まれる場合、この変数の値を大きくすることでバッチ処理のパフォーマンスを向上させることができます。ただし、この変数の値が大きすぎて、TiKVの単一ログの最大サイズ（デフォルトでは8MiB）を超えると、コミットが失敗する可能性があります。
 
 </CustomContent>
 
@@ -6827,7 +6853,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   範囲: なし
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `8.0.11-TiDB-` (tidb バージョン)
--   この変数はMySQLのバージョンとTiDBのバージョンを返します。例：&#39;8.0.11-TiDB-v8.5.3&#39;。
+-   この変数はMySQLのバージョンとTiDBのバージョンを返します。例：&#39;8.0.11-TiDB-v8.5.4&#39;。
 
 ### バージョンコメント {#version-comment}
 

@@ -24,15 +24,15 @@ summary: MariaDB から TiDB にデータを移行する方法を学びます。
 選択した戦略に基づいて、次のものを準備します。
 
 -   **ダンプと復元の**戦略の場合:
-    -   [Dumpling](/dumpling-overview.md)と[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)インストールします。
+    -   [Dumpling](/dumpling-overview.md)と[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)をインストールします。
     -   Dumpling がデータをエクスポートするには、MariaDBサーバーに[必要な権限](/dumpling-overview.md#required-privileges)あることを確認してください。
--   **データ複製**戦略については、 [データ移行（DM）](/dm/dm-overview.md)設定します。
+-   **データ複製**戦略については、 [データ移行（DM）](/dm/dm-overview.md)を設定します。
 
 ## 互換性を確認する {#check-compatibility}
 
 TiDBは[MySQLと互換性あり](/mysql-compatibility.md)あり、MySQLとMariaDBには多くの共通機能があります。ただし、MariaDB固有の機能の中にはTiDBと互換性がないものもあるため、移行前に注意が必要です。
 
-このセクションの項目を確認するだけでなく、MariaDB ドキュメントの[互換性と相違点](https://mariadb.com/docs/release-notes/community-server/about/compatibility-and-differences)も確認することをお勧めします。
+このセクションの項目を確認するだけでなく、MariaDB ドキュメントの[互換性と相違点](https://mariadb.com/docs/release-notes/community-server/about/compatibility-and-differences)確認することをお勧めします。
 
 ### 認証 {#authentication}
 
@@ -119,7 +119,7 @@ WHERE
 
 ### ストレージエンジン {#storage-engines}
 
-MariaDBは、 `InnoDB`といったローカルデータ用のstorageエンジンを提供しています。 `Aria` `MyISAM`データ形式はTiDBでは直接サポートされていませんが、これらの移行は問題なく行えます。ただし、 `CONNECT`storageエンジンや`Spider`など、一部のエンジンはデータをサーバーの外部に配置します。このようなテーブルをTiDBに移行することは可能ですが、TiDBはTiDBクラスターの外部にデータを保存する機能を提供していません。
+MariaDBは`Aria` `InnoDB`といったローカルデータ用のstorageエンジンを提供しています。これら`MyISAM`データ形式はTiDBでは直接サポートされていませんが、これらの移行は問題なく行えます。ただし、 `CONNECT`storageエンジンや`Spider`など、一部のエンジンはデータをサーバーの外部に配置します。このようなテーブルをTiDBに移行することは可能ですが、TiDBはTiDBクラスターの外部にデータを保存する機能を提供していません。
 
 使用しているstorageエンジンを確認するには、次のステートメントを実行します。
 
@@ -185,6 +185,8 @@ WHERE
 ### 文字セットと照合順序 {#character-set-and-collation}
 
 TiDB は、MariaDB でよく使用される`latin1_swedish_ci`照合順序をサポートしていません。
+
+TiDBは、MariaDB 11.6以降のバージョンのデフォルト照合順序順序である`utf8mb4_uca1400_ai_ci`サポートしていません。代わりに`utf8mb4_0900_ai_ci`使用してください。これらの2つの照合順序は、 [Unicode照合アルゴリズム（UCA）](http://www.unicode.org/reports/tr10/)のバージョンが異なります。7 `utf8mb4_0900_ai_ci` UCA 9.0.0を使用し、 `utf8mb4_uca1400_ai_ci` UCA 14.0.0を使用します。
 
 TiDB がサポートする照合順序を確認するには、TiDB で次のステートメントを実行します。
 
@@ -290,7 +292,7 @@ DMを使用するには、 [TiUPクラスター](/dm/deploy-a-dm-cluster-using-t
 
 ### ステップ1.準備 {#step-1-prepare}
 
-MariaDBでbinlogsが有効になっていること、および`binlog_format` `ROW`に設定されていることを確認してください。5と`binlog_annotate_row_events=OFF` `log_bin_compress=OFF`設定することも推奨されます。
+MariaDBでbinlogsが有効になっていること、および`binlog_format`が`ROW`に設定されていることを確認してください。5と`binlog_annotate_row_events=OFF` `log_bin_compress=OFF`設定することも推奨されます。
 
 また、権限`SUPER` 、または権限`BINLOG MONITOR`と権限`REPLICATION MASTER ADMIN`を持つアカウントも必要です。このアカウントには、移行するスキーマに対する読み取り権限も必要です。
 
@@ -324,7 +326,7 @@ TiDB に切り替えるには、次の手順を実行する必要があります
 2.  レプリケーションの遅延を監視します。0 秒になるはずです。
 3.  アプリケーションの構成を TiDB に接続するように変更し、再度起動します。
 
-レプリケーションの遅延を確認するには、 [`query-status &#x3C;taskname>`](/dm/dm-query-status.md#detailed-query-result)から`dmctl`実行し、 `subTaskStatus`で`"synced: true"`を確認します。
+レプリケーションの遅延を確認するには、 [`query-status &#x3C;taskname>`](/dm/dm-query-status.md#detailed-query-result)から`dmctl`を実行し、 `subTaskStatus`で`"synced: true"`を確認します。
 
 ### ステップ6. クリーンアップ {#step-6-clean-up}
 

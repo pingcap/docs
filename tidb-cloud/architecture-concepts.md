@@ -25,7 +25,7 @@ TiDB Cloudすると、データベースの拡張、複雑な管理タスクの�
 
 -   AWS の場合、 TiDB Cloudは、自動スケーリングとコスト効率に優れたワークロード向けの**TiDB Cloud Starter** 、プロビジョニングされた容量を備えた本番環境対応のワークロード向けの**TiDB Cloud Essential** 、専用リソースと高度な機能を備えたエンタープライズ グレードのアプリケーション向けの**TiDB Cloud Dedicated を提供します**。
 -   Google Cloud および Azure 向けに、 TiDB Cloud は専用リソースと高度な機能を備えたエンタープライズ グレードのアプリケーション向けに**TiDB Cloud Dedicated を**提供します。
--   Alibaba Cloud の場合、 TiDB Cloud は、自動スケーリングとコスト効率に優れたワークロード向けの**TiDB Cloud Starter**と、プロビジョニングされた容量を備えた本番環境対応のワークロード向けの**TiDB Cloud Essential を**提供します。
+-   Alibaba Cloud の場合、 TiDB Cloud は、自動スケーリングとコスト効率に優れたワークロード向け**の TiDB Cloud Starter**と、プロビジョニングされた容量を備えた本番環境対応のワークロード向け**の TiDB Cloud Essential**を提供します。
 
 </CustomContent>
 
@@ -44,7 +44,7 @@ TiDB Cloud Starterは、フルマネージドのマルチテナントTiDBサー�
 
 -   **無料**: このプランは完全に無料で、開始するのにクレジットカードは必要ありません。
 -   **ストレージ**: 初期 5 GiB の行ベースのstorageと 5 GiB の列ベースのstorageを提供します。
--   **リクエスト単位**: データベース操作用に 5000 万[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit)が含まれます。
+-   **リクエスト単位**: データベース操作用に 5000 万[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)が含まれます。
 
 ## TiDB Cloudエッセンシャル {#tidb-cloud-essential}
 
@@ -52,7 +52,7 @@ TiDB Cloud Starterは、フルマネージドのマルチテナントTiDBサー�
 
 -   **拡張機能**: スターター プランのすべての機能に加えて、より大規模で複雑なワークロードを処理する能力と高度なセキュリティ機能が含まれます。
 -   **自動スケーリング**: 変化するワークロードの需要に効率的に対応するために、storageとコンピューティング リソースを自動的に調整します。
--   **高可用性**: フォールト トレランスと冗長性が組み込まれているため、インフラストラクチャに障害が発生した場合でも、アプリケーションの可用性と回復力が維持されます。
+-   **高可用性**: フォールト トレランスと冗長性が組み込まれているため、インフラストラクチャに障害が発生した場合でも、アプリケーションの可用性と回復力を維持できます。
 -   **予測可能な価格設定**: コンピューティング リソースのstorageとリクエスト容量単位 (RCU) に基づいて課金され、ニーズに合わせて拡張できる透明性の高い使用量ベースの価格設定が提供されるため、予期せぬ出費なく、使用した分だけを支払うことになります。
 
 TiDB Cloud Essential は、さまざまな運用要件に対応するために 2 種類の高可用性を提供します。
@@ -72,7 +72,7 @@ VPC、VM、マネージドKubernetesサービス、クラウドstorageなどの�
 
 ## TiDB Cloudコンソール {#tidb-cloud-console}
 
-[TiDB Cloudコンソール](https://tidbcloud.com/) 、 TiDB Cloudクラスタ用のWebベースの管理インターフェースです。クラスタの管理、データのインポートまたは移行、パフォーマンスメトリックの監視、バックアップの設定、セキュリティ制御の設定、他のクラウドサービスとの統合など、すべて単一の使いやすいプラットフォームから実行できるツールを提供します。
+[TiDB Cloudコンソール](https://tidbcloud.com/)は、 TiDB Cloudクラスタ用のWebベースの管理インターフェースです。クラスタの管理、データのインポートまたは移行、パフォーマンスメトリックの監視、バックアップの設定、セキュリティ制御の設定、他のクラウドサービスとの統合など、すべて単一の使いやすいプラットフォームから実行できるツールを提供します。
 
 ## TiDB CloudCLI (ベータ版) {#tidb-cloud-cli-beta}
 
@@ -99,7 +99,7 @@ TiDB Cloudでは、各クラスターは TiDB、TiKV、およびTiFlashノード
 
 ### TiDBノード {#tidb-node}
 
-[TiDBノード](/tidb-computing.md) 、MySQL互換エンドポイントを使用してアプリケーションに接続するステートレスSQLレイヤーです。SQLクエリの解析、最適化、分散実行プランの作成などのタスクを処理します。
+[TiDBノード](/tidb-computing.md)は、MySQL互換エンドポイントを使用してアプリケーションに接続するステートレスSQLレイヤーです。SQLクエリの解析、最適化、分散実行プランの作成などのタスクを処理します。
 
 複数のTiDBノードを展開することで、水平方向にスケーリングし、より高いワークロードを管理できます。これらのノードは、TiProxyやHAProxyなどのロードバランサーと連携して、シームレスなインターフェースを提供します。TiDBノード自体はデータを保存せず、行ベースstorageの場合はTiKVノード、列ベースstorageの場合はTiFlashノードにデータ要求を転送します。
 
@@ -130,7 +130,7 @@ TiDB Cloudでは、各クラスターは TiDB、TiKV、およびTiFlashノード
 
 ### TiFlashノード {#tiflash-node}
 
-[TiFlashノード](/tiflash/tiflash-overview.md) 、TiDBアーキテクチャにおける特殊なタイプのstorageノードです。通常のTiKVノードとは異なり、 TiFlashは列指向storageモデルによる分析アクセラレーションを目的として設計されています。
+[TiFlashノード](/tiflash/tiflash-overview.md)は、TiDBアーキテクチャにおける特殊なタイプのstorageノードです。通常のTiKVノードとは異なり、 TiFlashは列指向storageモデルによる分析アクセラレーションを目的として設計されています。
 
 **主な機能:**
 
