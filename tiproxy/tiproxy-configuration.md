@@ -221,6 +221,10 @@ When you need to isolate computing layer resources, you can configure multiple v
 
 ### security
 
+> **Note:**
+>
+> TiProxy re-reads certificate files once per hour. Changes to certificate files on disk may take up to one hour before they are applied.
+
 There are four TLS objects in the `[security]` section with different names. They share the same configuration format and fields, but they are interpreted differently depending on their names.
 
 ```toml
