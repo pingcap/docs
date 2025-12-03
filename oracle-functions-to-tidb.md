@@ -17,7 +17,7 @@ The following table shows the comparisons between some Oracle and TiDB functions
 
 | Function | Oracle syntax | TiDB syntax | Note |
 |---|---|---|---|
-| Cast a value as a certain type | <ul><li>`TO_NUMBER(key)`</li><li>`TO_CHAR(key)`</li></ul> | <ul><li>`CONVERT(key,dataType)`</li></ul> | TiDB supports casting a value as one of the following types: `BINARY`, `CHAR`, `DATE`, `DATETIME`, `TIME`, `SIGNED INTEGER`, `UNSIGNED INTEGER` and `DECIMAL`. |
+| Cast a value as a certain type | <ul><li>`TO_NUMBER(key)`</li><li>`TO_CHAR(key)`</li></ul> | `CONVERT(key,dataType)` | TiDB supports casting a value as one of the following types: `BINARY`, `CHAR`, `DATE`, `DATETIME`, `TIME`, `SIGNED INTEGER`, `UNSIGNED INTEGER` and `DECIMAL`. |
 | Convert a date to a string | <ul><li>`TO_CHAR(SYSDATE,'yyyy-MM-dd hh24:mi:ss')`</li> <li>`TO_CHAR(SYSDATE,'yyyy-MM-dd')`</li></ul> | <ul><li>`DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s')`</li><li>`DATE_FORMAT(NOW(),'%Y-%m-%d')`</li></ul> | The format string of TiDB is case-sensitive. |
 | Convert a string to a date | <ul><li>`TO_DATE('2021-05-28 17:31:37','yyyy-MM-dd hh24:mi:ss')`</li><li>`TO_DATE('2021-05-28','yyyy-MM-dd hh24:mi:ss')`</li></ul> | <ul><li>`STR_TO_DATE('2021-05-28 17:31:37','%Y-%m-%d %H:%i:%s')`</li><li>`STR_TO_DATE('2021-05-28','%Y-%m-%d%T')` </li></ul> | The format string of TiDB is case-sensitive. |
 | Get the current system time in second precision | `SYSDATE` | `NOW()` | |
