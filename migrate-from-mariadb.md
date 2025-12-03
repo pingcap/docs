@@ -186,6 +186,8 @@ WHERE
 
 TiDB does not support the `latin1_swedish_ci` collation that is often used in MariaDB.
 
+TiDB does not support `utf8mb4_uca1400_ai_ci`, the default collation in MariaDB 11.6 and later versions. Use `utf8mb4_0900_ai_ci` instead. These two collations differ in their versions of the [Unicode Collation Algorithm (UCA)](http://www.unicode.org/reports/tr10/): `utf8mb4_0900_ai_ci` uses UCA 9.0.0, while `utf8mb4_uca1400_ai_ci` uses UCA 14.0.0.
+
 To see what collations TiDB supports, execute this statement on TiDB:
 
 ```sql
