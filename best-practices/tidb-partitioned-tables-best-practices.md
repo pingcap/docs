@@ -642,7 +642,6 @@ INSERT INTO fa_new SELECT * FROM fa;
 
 ### Method 2: `IMPORT INTO ... FROM SELECT`
 
-
 ```sql
 IMPORT INTO fa_new FROM SELECT * FROM fa WITH thread = 32, disable_precheck;
 ```
