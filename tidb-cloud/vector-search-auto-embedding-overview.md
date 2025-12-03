@@ -15,7 +15,7 @@ To use Auto Embedding, the basic workflow is as follows:
 
 > **Note:**
 >
-> Auto Embedding is only available on {{{ .starter }}} clusters in AWS regions.
+> Auto Embedding is only available on {{{ .starter }}} clusters hosted on AWS.
 
 ## Quick start example
 

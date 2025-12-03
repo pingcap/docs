@@ -9,7 +9,7 @@ This document describes how to use Gemini embedding models with [Auto Embedding]
 
 > **Note:**
 >
-> [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} clusters in AWS regions.
+> [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} clusters hosted on AWS.
 
 ## Available models
 
