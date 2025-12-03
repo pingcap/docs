@@ -247,7 +247,7 @@ id,v
 IMPORT INTO t FROM 's3://mybucket/conflicts.csv' WITH THREAD=8, SKIP_ROWS=1;
 ```
 
-After the import, the table `t` contains only the non-conflicting rows:
+After the import, the table `t` contains only the non-conflicting rows.
 
 ```sql
 SHOW IMPORT JOBS;
