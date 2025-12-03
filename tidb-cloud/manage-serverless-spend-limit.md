@@ -19,9 +19,9 @@ summary: 了解如何管理 TiDB Cloud Starter 集群的消费限额。
 
 - 行存储：5 GiB
 - 列存储：5 GiB
-- [请求单位（RUs）](/tidb-cloud/tidb-cloud-glossary.md#request-unit)：每月 5000 万 RU
+- [请求单位（RUs）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)：每月 5000 万 RUs
 
-一旦某个集群达到其使用配额，将会立即拒绝任何新的连接尝试，直到你 [提升配额](#update-spending-limit) 或者在新月开始时用量被重置。已在达到配额前建立的连接会保持活跃，但会受到限流。例如，当免费集群的行存储超过 5 GiB 时，该集群会自动限制任何新的连接尝试。
+一旦某个集群达到其使用配额，将会立即拒绝任何新的连接尝试，直到你 [提升配额](#update-spending-limit) 或新月开始时用量被重置。已建立的连接在达到配额前会保持活跃，但会受到限流。例如，当免费集群的行存储超过 5 GiB 时，该集群会自动限制任何新的连接尝试。
 
 如需了解不同资源（包括读、写、SQL CPU 和网络出口）的 RU 消耗、定价详情以及限流信息，请参见 [TiDB Cloud Starter Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)。
 

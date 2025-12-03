@@ -20,17 +20,17 @@ TiDB Cloud Starter 和 Essential 支持几乎所有 TiDB 支持的工作负载�
 
 ### 连接
 
-- 仅支持 [公网连接](/tidb-cloud/connect-via-standard-connection-serverless.md) 和 [私有端点](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)。你无法使用 [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) 连接到 TiDB Cloud Starter 或 TiDB Cloud Essential 集群。
-- 私有端点不支持 [防火墙规则](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)。
-- 如果你的数据库客户端连接保持打开超过 30 分钟，可能会被意外断开。这种情况可能发生在 TiDB 服务器关闭、重启或维护期间，可能会导致应用程序中断。为避免此问题，请配置最大连接存活时间。建议从 5 分钟开始，如果影响尾延迟可逐步增加。更多信息请参见 [连接池推荐设置](/develop/dev-guide-connection-parameters.md#connection-pools-and-connection-parameters)。
+- 仅支持 [公网连接](/tidb-cloud/connect-via-standard-connection-serverless.md) 和 [私网连接](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)。你无法使用 [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) 连接到 TiDB Cloud Starter 或 TiDB Cloud Essential 集群。
+- 私网连接不支持 [防火墙规则](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)。
+- 如果你的数据库客户端连接保持打开超过 30 分钟，可能会被意外断开。这种情况可能发生在 TiDB 服务器关闭、重启或维护期间，可能会导致应用中断。为避免此问题，请配置最大连接存活时间。建议从 5 分钟开始设置，如果影响尾延迟可逐步增加。更多信息请参见 [连接池推荐设置](/develop/dev-guide-connection-parameters.md#connection-pools-and-connection-parameters)。
 
-> **Note:**
+> **注意：**
 >
 > 由于 [AWS Global Accelerator 的限制](https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works.html#about-idle-timeout)，在 AWS 上公网连接的空闲超时时间为 340 秒。出于同样原因，你无法使用 TCP keep-alive 包保持连接。
 
 ### 加密
 
-- 你在 TiDB Cloud Starter 或 TiDB Cloud Essential 集群中持久化的数据，使用由管理你集群的云服务商提供的加密工具进行加密。对于 TiDB Cloud Starter（消费限额 > 0）和 TiDB Cloud Essential 集群，在集群创建过程中可选第二层加密，为默认静态加密之外提供额外的安全保障。
+- 你在 TiDB Cloud Starter 或 TiDB Cloud Essential 集群中持久化的数据，使用管理你集群的云服务商提供的加密工具进行加密。对于 TiDB Cloud Starter（消费限额 > 0）和 TiDB Cloud Essential 集群，在集群创建过程中可选第二层加密，为默认静态加密之外提供额外的安全保障。
 - 目前不支持使用 [客户自管加密密钥（CMEK）](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)。
 
 ### 维护窗口
@@ -45,7 +45,7 @@ TiDB Cloud Starter 和 Essential 支持几乎所有 TiDB 支持的工作负载�
 
 ### 自助升级
 
-- TiDB Cloud Starter 和 TiDB Cloud Essential 是 TiDB 的全托管部署。TiDB Cloud Starter 和 TiDB Cloud Essential 的主版本和小版本升级由 TiDB Cloud 统一管理，用户无法自行发起升级。
+- TiDB Cloud Starter 和 TiDB Cloud Essential 是完全托管的 TiDB 部署。其主版本和小版本升级由 TiDB Cloud 统一管理，用户无法自行发起升级。
 
 ### 流式数据
 
@@ -69,14 +69,14 @@ TiDB Cloud Starter 和 Essential 支持几乎所有 TiDB 支持的工作负载�
 
 - 行存储：5 GiB
 - 列存储：5 GiB
-- [请求单位（RUs）](/tidb-cloud/tidb-cloud-glossary.md#request-unit)：每月 5000 万 RUs
+- [请求单位（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)：每月 5000 万 RU
 
-请求单位（RU）是用于衡量查询或事务资源消耗的单位。它是一种指标，可以帮助你估算处理特定请求在数据库中所需的计算资源。请求单位也是 TiDB Cloud Starter 服务的计费单位。
+请求单位（RU）是用于衡量查询或事务资源消耗的单位。它是一种指标，可以帮助你估算处理特定请求所需的计算资源。请求单位也是 TiDB Cloud Starter 服务的计费单位。
 
-一旦集群达到其使用配额，将立即拒绝所有新的连接尝试，直到你 [提升配额](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) 或新月开始时用量重置。已建立的连接在达到配额前会保持活跃，但会受到限流。
+一旦集群达到其使用配额，将立即拒绝所有新的连接尝试，直到你 [提升配额](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) 或新月开始时用量重置。已建立的连接在达到配额前会保持活跃，但会受到限流影响。
 
 如需了解不同资源（包括读、写、SQL CPU 和网络出口）的 RU 消耗、定价详情及限流信息，请参见 [TiDB Cloud Starter 价格详情](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)。
 
 如果你希望为 TiDB Cloud Starter 集群设置额外配额，可以在集群创建页面设置每月消费限额。更多信息请参见 [创建 TiDB Cloud Starter 集群](/tidb-cloud/create-tidb-cluster-serverless.md)。
 
-创建 TiDB Cloud Starter 集群后，你仍然可以在集群概览页面查看和编辑消费限额。更多信息请参见 [管理 TiDB Cloud Starter 集群的消费限额](/tidb-cloud/manage-serverless-spend-limit.md)。
+创建 TiDB Cloud Starter 集群后，你仍可在集群概览页面查看和编辑消费限额。更多信息请参见 [管理 TiDB Cloud Starter 集群的消费限额](/tidb-cloud/manage-serverless-spend-limit.md)。

@@ -9,15 +9,11 @@ summary: 了解如何在 TiDB Cloud 中使用 OpenAI 嵌入模型。
 
 > **Note:**
 >
-> 目前，[Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) 仅在以下 AWS 区域的 TiDB Cloud Starter 集群中可用：
->
-> - `Frankfurt (eu-central-1)`
-> - `Oregon (us-west-2)`
-> - `N. Virginia (us-east-1)`
+> [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) 仅适用于托管在 AWS 上的 TiDB Cloud Starter 集群。
 
 ## 可用模型
 
-如果你自带 OpenAI API 密钥（BYOK），所有 OpenAI 模型均可通过 `openai/` 前缀使用。例如：
+如果你自带 OpenAI API 密钥（BYOK），则所有 OpenAI 模型均可通过 `openai/` 前缀使用。例如：
 
 **text-embedding-3-small**
 
@@ -37,7 +33,7 @@ summary: 了解如何在 TiDB Cloud 中使用 OpenAI 嵌入模型。
 - TiDB Cloud 托管：❌
 - 支持自带密钥：✅
 
-完整可用模型列表请参见 [OpenAI Documentation](https://platform.openai.com/docs/guides/embeddings)。
+完整的可用模型列表，请参见 [OpenAI Documentation](https://platform.openai.com/docs/guides/embeddings)。
 
 ## SQL 使用示例
 
@@ -93,7 +89,7 @@ LIMIT 2;
 
 所有 [OpenAI embedding options](https://platform.openai.com/docs/api-reference/embeddings/create) 均可通过 `EMBED_TEXT()` 函数的 `additional_json_options` 参数进行设置。
 
-**示例：为 text-embedding-3-large 使用不同的维度**
+**示例：为 text-embedding-3-large 使用自定义维度**
 
 ```sql
 CREATE TABLE sample (

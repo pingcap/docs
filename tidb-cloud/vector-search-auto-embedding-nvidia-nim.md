@@ -9,11 +9,7 @@ summary: 了解如何在 TiDB Cloud 中使用 NVIDIA NIM 嵌入模型。
 
 > **Note:**
 >
-> 目前，[Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) 仅在以下 AWS 区域的 TiDB Cloud Starter 集群中可用：
->
-> - `Frankfurt (eu-central-1)`
-> - `Oregon (us-west-2)`
-> - `N. Virginia (us-east-1)`
+> [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) 仅适用于托管在 AWS 上的 TiDB Cloud Starter 集群。
 
 ## 可用模型
 
