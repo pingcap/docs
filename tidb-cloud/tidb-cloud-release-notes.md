@@ -22,14 +22,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         To migrate existing Prometheus integrations to the cluster level, see [Migrate Prometheus Integrations](/tidb-cloud/migrate-prometheus-metrics-integrations.md).
 
-## November 27, 2025
-
-**General changes**
-
-- **TiDB Cloud Dedicated**
-
-    - Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v8.5.3](https://docs.pingcap.com/tidb/v8.5/release-8.5.3/) to [v8.5.4](https://docs.pingcap.com/tidb/v8.5/release-8.5.4/).
-
 ## November 18, 2025
 
 **General changes**
