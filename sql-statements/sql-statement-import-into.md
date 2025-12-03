@@ -243,10 +243,14 @@ id,v
 4,4
 ```
 
+```sql
+IMPORT INTO t FROM 's3://mybucket/conflicts.csv' WITH THREAD=8, SKIP_ROWS=1;
+```
+
 After the import, the table `t` contains only the non-conflicting rows:
 
 ```sql
-IMPORT INTO t FROM 's3://mybucket/conflicts.csv' WITH THREAD=8, SKIP_ROWS=1;
+SHOW IMPORT JOBS;
 ```
 
 ```
@@ -302,6 +306,7 @@ When you use [Global Sort](/tidb-global-sort.md) and an import job has conflicte
 
 ```sql
 IMPORT INTO t FROM 's3://mybucket/conflicts.csv' WITH THREAD=8, SKIP_ROWS=1;
+SHOW IMPORT JOBS;
 ```
 
 ```
