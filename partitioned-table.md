@@ -1197,7 +1197,7 @@ ALTER TABLE member_level PARTITION BY RANGE(level)
  PARTITION pMax VALUES LESS THAN (MAXVALUE));
 ```
 
-When partitioning a non-partitioned table or repartitioning an already partitioned table, you can update the indexes to be global or local as needed:
+When partitioning a non-partitioned table or repartitioning an already partitioned table, you can update the indexes to be [global indexes](/global-indexes.md) or local indexes as needed:
 
 ```sql
 CREATE TABLE t1 (
@@ -1491,7 +1491,7 @@ This section discusses the relationship of partitioning keys with primary keys a
 
 > **Note:**
 >
-> You can ignore this rule when using [global indexes](#global-indexes).
+> You can ignore this rule when using [global indexes](/global-indexes.md).
 
 For example, the following table creation statements are invalid:
 
@@ -1702,103 +1702,7 @@ ERROR 8264 (HY000): Global Index is needed for index 'a', since the unique index
 
 ### Global indexes
 
-Before the introduction of global indexes, TiDB created a local index for each partition, leading to [a limitation](#partitioning-keys-primary-keys-and-unique-keys) that primary keys and unique keys had to include the partition key to ensure data uniqueness. Additionally, when querying data across multiple partitions, TiDB needed to scan the data of each partition to return results.
-
-To address these issues, TiDB introduces the global indexes feature in v8.3.0. A global index covers the data of the entire table with a single index, allowing primary keys and unique keys to maintain global uniqueness without including all partition keys. Moreover, global indexes can access index data across multiple partitions in a single operation instead of looking up the local index for each partition, significantly improving query performance for non-partitioned keys. Starting from v8.5.4 and v9.0.0, non-unique indexes can also be created as global indexes.
-
-To create a global index, you can add the `GLOBAL` keyword in the index definition.
-
-> **Note:**
->
-> Global indexes affect partition management. `DROP`, `TRUNCATE`, and `REORGANIZE PARTITION` operations also trigger updates to table-level global indexes, meaning that these DDL operations will only return results after the global indexes of the corresponding tables are fully updated.
-
-```sql
-CREATE TABLE t1 (
-    col1 INT NOT NULL,
-    col2 DATE NOT NULL,
-    col3 INT NOT NULL,
-    col4 INT NOT NULL,
-    UNIQUE KEY uidx12(col1, col2) GLOBAL,
-    UNIQUE KEY uidx3(col3),
-    KEY idx1(col1) GLOBAL
-)
-PARTITION BY HASH(col3)
-PARTITIONS 4;
-```
-
-In the preceding example, the unique index `uidx12` and non-unique index `idx1` are global indexes, while `uidx3` is a regular unique index.
-
-Note that a **clustered index** cannot be a global index, as shown in the following example:
-
-```sql
-CREATE TABLE t2 (
-    col1 INT NOT NULL,
-    col2 DATE NOT NULL,
-    PRIMARY KEY (col2) CLUSTERED GLOBAL
-) PARTITION BY HASH(col1) PARTITIONS 5;
-```
-
-```
-ERROR 1503 (HY000): A CLUSTERED INDEX must include all columns in the table's partitioning function
-```
-
-The reason is that if the clustered index is a global index, the table will no longer be partitioned. This is because the key of the clustered index is also the record key at the partition level, but the global index is at the table level, which causes a conflict. If you need to set the primary key as a global index, you must explicitly define it as a non-clustered index, for example, `PRIMARY KEY(col1, col2) NONCLUSTERED GLOBAL`.
-
-You can identify a global index by the `GLOBAL` index option in the [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md) output.
-
-```sql
-SHOW CREATE TABLE t1\G
-```
-
-```
-       Table: t1
-Create Table: CREATE TABLE `t1` (
-  `col1` int NOT NULL,
-  `col2` date NOT NULL,
-  `col3` int NOT NULL,
-  `col4` int NOT NULL,
-  UNIQUE KEY `uidx12` (`col1`,`col2`) /*T![global_index] GLOBAL */,
-  UNIQUE KEY `uidx3` (`col3`),
-  KEY `idx1` (`col1`) /*T![global_index] GLOBAL */
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
-PARTITION BY HASH (`col3`) PARTITIONS 4
-1 row in set (0.00 sec)
-```
-
-Alternatively, you can query the [`INFORMATION_SCHEMA.TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md) table and check the `IS_GLOBAL` column in the output.
-
-```sql
-SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEXES WHERE table_name='t1';
-```
-
-```
-+--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
-| TABLE_SCHEMA | TABLE_NAME | NON_UNIQUE | KEY_NAME | SEQ_IN_INDEX | COLUMN_NAME | SUB_PART | INDEX_COMMENT | Expression | INDEX_ID | IS_VISIBLE | CLUSTERED | IS_GLOBAL |
-+--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
-| test         | t1         |          0 | uidx12   |            1 | col1        |     NULL |               | NULL       |        1 | YES        | NO        |         1 |
-| test         | t1         |          0 | uidx12   |            2 | col2        |     NULL |               | NULL       |        1 | YES        | NO        |         1 |
-| test         | t1         |          0 | uidx3    |            1 | col3        |     NULL |               | NULL       |        2 | YES        | NO        |         0 |
-| test         | t1         |          1 | idx1     |            1 | col1        |     NULL |               | NULL       |        3 | YES        | NO        |         1 |
-+--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
-3 rows in set (0.00 sec)
-```
-
-When partitioning a non-partitioned table or repartitioning an already partitioned table, you can update the indexes to be global indexes or local indexes as needed.
-
-For example, the following SQL statement repartitions table `t1` based on the `col1` column, updates the global indexes `uidx12` and `idx1` to local indexes, and updates the local index `uidx3` to a global index. Because `uidx3` is a unique index on the `col3` column, it must be a global index to ensure the uniqueness of `col3` across all partitions. `uidx12` and `idx1` are indexes on the `col1` column, which means they can be either global or local indexes. 
-
-```sql
-ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCAL, uidx3 GLOBAL, idx1 LOCAL);
-```
-
-#### Limitations of global indexes
-
-- If the `GLOBAL` keyword is not explicitly specified in the index definition, TiDB creates a local index by default.
-- The `GLOBAL` and `LOCAL` keywords only apply to partitioned tables and do not affect non-partitioned tables. In other words, there is no difference between a global index and a local index in non-partitioned tables.
-- DDL operations such as `DROP PARTITION`, `TRUNCATE PARTITION`, and `REORGANIZE PARTITION` also trigger updates to global indexes. These DDL operations need to wait for the global index updates to complete before returning results, which increases the execution time accordingly. This is particularly evident in data archiving scenarios, such as `DROP PARTITION` and `TRUNCATE PARTITION`. Without global indexes, these operations can typically complete immediately. However, with global indexes, the execution time increases as the number of indexes that need to be updated grows.
-- Tables with global indexes do not support the `EXCHANGE PARTITION` operation.
-- By default, the primary key of a partitioned table is a clustered index and must include the partition key. If you require the primary key to exclude the partition key, you can explicitly specify the primary key as a non-clustered global index when creating the table, for example, `PRIMARY KEY(col1, col2) NONCLUSTERED GLOBAL`.
-- If a global index is added to an expression column, or a global index is also a prefix index (for example `UNIQUE KEY idx_id_prefix (id(10)) GLOBAL`), you need to collect statistics manually for this global index.
+For detailed information about global indexes, see [Global Indexes](/global-indexes.md).
 
 ### Partitioning limitations relating to functions
 
