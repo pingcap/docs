@@ -223,7 +223,7 @@ When you need to isolate computing layer resources, you can configure multiple v
 
 > **Note:**
 >
-> TiProxy reloads certificate files once per hour. Therefore, any changes you make to the certificate files on disk can take up to one hour to take effect.
+> TiProxy reloads certificates from disk once an hour. Therefore, any changes that you make to certificate files on disk can take up to one hour to take effect.
 
 There are four TLS objects in the `[security]` section with different names. They share the same configuration format and fields, but they are interpreted differently depending on their names.
 
