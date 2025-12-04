@@ -435,8 +435,11 @@
 | TiDB Cloud Dedicated | TiDB Cloud Dedicated |  |
 | TiDB Cloud Essential | TiDB Cloud Essential |  |
 | TiDB Cloud on Kubernetes | TiDB Cloud on Kubernetes |  |
+| TiDB Cloud Premium | TiDB Cloud Premium |  |
 | TiDB Cloud Serverless | TiDB Cloud Serverless |  |
 | TiDB Cloud Starter | TiDB Cloud Starter |  |
+| TiDB Operator | TiDB Operator |  |
+| TiDB Self-Managed | TiDB Self-Managed |  |
 | TiKV | TiKV |  |
 | time out | 超时 |  |
 | time series database | 时序数据库 |  |
