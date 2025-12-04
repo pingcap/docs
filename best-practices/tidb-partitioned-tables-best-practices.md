@@ -348,7 +348,7 @@ Partitioned tables can help mitigate this problem. By applying hash or key parti
 
 > **Note:** 
 >
-> This section uses partitioned tables as an example for mitigating read and write hotspots. TiDB also provides other features such as [`AUTO_INCREMENT`](/auto-increment.md) and `SHARD_ROW_ID_BITS` for hotspot mitigation. When using partitioned tables in certain scenarios, you might need to set `merge_option=deny` to maintain partition boundaries. For more details, see [issue #58128](https://github.com/pingcap/tidb/issues/58128).
+> This section uses partitioned tables as an example for mitigating read and write hotspots. TiDB also provides other features such as [`AUTO_INCREMENT`](/auto-increment.md) and [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) for hotspot mitigation. When using partitioned tables in certain scenarios, you might need to set `merge_option=deny` to maintain partition boundaries. For more details, see [issue #58128](https://github.com/pingcap/tidb/issues/58128).
 
 ### How it works
 
@@ -448,7 +448,7 @@ The following table shows the summary information for non-clustered and clustere
 
 #### Pros
 
-- When a new partition is created in a non-clustered partitioned table configured with `SHARD_ROW_ID_BITS` and [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions), the regions can be automatically pre-split, significantly reducing manual intervention.
+- When a new partition is created in a non-clustered partitioned table configured with [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) and [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions), the regions can be automatically pre-split, significantly reducing manual intervention.
 - Lower operational overhead.
 
 #### Cons
@@ -465,7 +465,7 @@ To address hotspot issues caused by new range partitions, you can perform the fo
 
 ##### Step 1. Use `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS`
 
-Create a partitioned table with `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` to pre-split table regions. The value of `PRE_SPLIT_REGIONS` must be less than or equal to that of `SHARD_ROW_ID_BITS`. The number of pre-split Regions for each partition is `2^(PRE_SPLIT_REGIONS)`.
+Create a partitioned table with [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) and [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) to pre-split table regions. The value of `PRE_SPLIT_REGIONS` must be less than or equal to that of `SHARD_ROW_ID_BITS`. The number of pre-split Regions for each partition is `2^(PRE_SPLIT_REGIONS)`.
 
 ```sql
 CREATE TABLE employees (
