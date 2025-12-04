@@ -9,7 +9,7 @@ This guide introduces how to use partitioned tables in TiDB to improve performan
 
 Partitioned tables in TiDB offer a versatile approach to managing large datasets, improving query efficiency, facilitating bulk data deletion, and alleviating write hotspot issues. By dividing data into logical segments, TiDB can leverage partition pruning to skip irrelevant data during query execution, reducing resource consumption and accelerating performance, particularly in Online Analytical Processing (OLAP) workloads with massive datasets.
 
-A common use case is range partitioning combined with local indexes, which enables efficient historical data cleanup through operations such as [`ALTER TABLE ... DROP PARTITION`](/sql-statements/sql-statement-alter-table.md). This method not only removes obsolete data almost instantly but also retains high query efficiency when filtering by the partition key. However, after migrating from non-partitioned tables to partitioned tables, queries that cannot benefit from partition pruning, such as those lacking partition key filters, might experience degraded performance. In such cases, you can use [global indexes](/partitioned-table.md#global-indexes) to mitigate the performance impact by providing a unified index structure across all partitions.
+A common use case is range partitioning combined with local indexes, which enables efficient historical data cleanup through operations such as [`ALTER TABLE ... DROP PARTITION`](/sql-statements/sql-statement-alter-table.md). This method removes obsolete data almost instantly and preserves high query efficiency when filtering by the partition key. However, after migrating from non-partitioned tables to partitioned tables, queries that cannot benefit from partition pruning, such as those lacking partition key filters, might experience degraded performance. In such cases, you can use [global indexes](/partitioned-table.md#global-indexes) to mitigate the performance impact by providing a unified index structure across all partitions.
 
 Another scenario is using hash or key partitioning to address write hotspot issues, especially in workloads relying on [`AUTO_INCREMENT` style IDs](/auto-increment.md) where sequential inserts can overload specific TiKV regions. Distributing writes across partitions helps balance workload, but similar to range partitioning, queries without partition-pruning conditions might suffer performance drawbacks again, a situation where global indexes can help.
 
@@ -38,7 +38,7 @@ Partition pruning is most beneficial in scenarios where query predicates match t
 - Multi-tenant or category-based datasets: partitioning by tenant ID or category enables queries to focus on a small subset of partitions.
 - Hybrid Transactional and Analytical Processing (HTAP): especially for range partitioning, TiDB can leverage partition pruning in analytical workloads on TiFlash to skip irrelevant partitions and scan only the necessary subset, preventing full table scans on large datasets.
 
-For more use cases, see [Partition Pruning](https://docs.pingcap.com/tidb/stable/partition-pruning/).
+For more use cases, see [Partition Pruning](/partition-pruning.md).
 
 ### Query performance on secondary indexes: non-partitioned tables vs. local indexes vs. global indexes
 
@@ -135,7 +135,7 @@ The following is an execution plan example for a non-partitioned table:
 | TableRowIDScan_6(Probe)   | 398.73  | 166072.78 | 400     | cop[tikv] | table:fa                             | time:7.01ms, loops:2, cop_task:{num:79, max:4.98ms, min:0s, avg:514.9µs, p95:3.75ms, max_proc_keys:10, p95_proc_keys:5, tot_proc:15ms, tot_wait:21.4ms, copr_cache_hit_ratio:0.00, build_task_duration:341.2µs, max_distsql_concurrency:1, max_extra_concurrency:7, store_batch_num:62}, rpc_info:{Cop:{num_rpc:17, total_time:40.5ms}}, tikv_task:{proc max:0s, min:0s, avg:0s, p80:0s, p95:0s, iters:79, tasks:79}, scan_detail:{total_process_keys:400, total_process_keys_size:489856, total_keys:800, get_snapshot_time:20.8ms, rocksdb:{key_skipped_count:400, block:{cache_hit_count:1600}}}, time_detail:{total_process_time:15ms, total_wait_time:21.4ms, tikv_wall_time:10.9ms} | keep order:false | N/A | N/A |
 ```
 
-The following is an execution plan example for a partition tables with a global index:
+The following is an execution plan example for a partitioned tables with a global index:
 
 ```
 | id                     | estRows | estCost   | actRows | task      | access object                                   | execution info | operator info | memory   | disk |
@@ -305,7 +305,7 @@ For workloads with large or time-based data cleanup, it is recommended to use pa
 
 TTL is still useful for finer-grained or background cleanup, but might not be optimal under high write pressure or when deleting large volumes of data quickly.
 
-### Partition drop efficiency: local index vs. global index
+### Partition drop efficiency: local indexes vs. global indexes
 
 A partitioned table with a global index requires synchronous updates to the global index, which can significantly increase the execution time for DDL operations, such as `DROP PARTITION`, `TRUNCATE PARTITION`, and `REORGANIZE PARTITION`.
 
@@ -390,7 +390,7 @@ PARTITION BY KEY (id) PARTITIONS 16;
 
 ### Cons
 
-There are some risks when using partition tables.
+There are some risks when using partitioned tables.
 
 - When converting a non-partitioned table to a partitioned table, TiDB creates separate Regions for each partition. This might significantly increase the total Region count. Queries that do not filter by the partition key cannot take advantage of partition pruning, forcing TiDB to scan all partitions or do index lookups in all partitions. This increases the number of coprocessor (cop) tasks and can slow down queries. For example, `serial_no` is not the partition key, which will cause the query performance regression:
 
@@ -436,7 +436,7 @@ This imbalance can cause the TiKV node to trigger flow control, leading to a sha
 
 ### Summary
 
-The following table shows the summary information for non-clustered and clustered partition tables.
+The following table shows the summary information for non-clustered and clustered partitioned tables.
 
 | Table type                      | Region pre-splitting | Read performance     | Write scalability | Data cleanup via partition |
 |---|---|---|---|---|
@@ -448,7 +448,7 @@ The following table shows the summary information for non-clustered and clustere
 
 #### Pros
 
-- When a new partition is created in a non-clustered partitioned table configured with `SHARD_ROW_ID_BITS` and [PRE_SPLIT_REGIONS](/sql-statements/sql-statement-split-region.md#pre_split_regions), the regions can be automatically pre-split, significantly reducing manual intervention.
+- When a new partition is created in a non-clustered partitioned table configured with `SHARD_ROW_ID_BITS` and [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions), the regions can be automatically pre-split, significantly reducing manual intervention.
 - Lower operational overhead.
 
 #### Cons
