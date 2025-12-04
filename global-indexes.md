@@ -198,7 +198,7 @@ This section explains the working mechanism of global indexes, including their d
 
 ### Design principles
 
-In TiDB partitioned tables, the key prefix of a local index is the partition ID, while the key prefix of a global index is the table ID. This design ensures that the data of a global index is stored continuously on TiKV, reducing the number of RPC requests when querying the index.
+In TiDB partitioned tables, the key prefix for a local index is the Partition ID, while the prefix for a global index is the Table ID. This design ensures that global index data is distributed contiguously on TiKV, thereby reducing the number of RPC requests required for index lookups.
 
 ```sql
 CREATE TABLE `sbtest` (
@@ -210,11 +210,11 @@ CREATE TABLE `sbtest` (
 ) partition by hash(id) partitions 5;
 ```
 
-Take the preceding table structure as an example: `idx` is a local index, and `global_idx` is a global index. The data of `idx` is distributed across 5 different ranges, such as `PartitionID1_i_xxx` and `PartitionID2_i_xxx`. Whereas the data of `global_idx` is concentrated in a single range (`TableID_i_xxx`).
+Take the preceding table schema as an example: `idx` is a local index, and `global_idx` is a global index. The data for `idx` is distributed across 5 different ranges, such as `PartitionID1_i_xxx` and `PartitionID2_i_xxx`, whereas the data for `global_idx` is concentrated in a single range (`TableID_i_xxx`).
 
-When executing a query related to `k`, such as `SELECT * FROM sbtest WHERE k > 1`, using the local index `idx` results in 5 separate ranges being constructed, while using the global index `global_idx` only constructs a single range. Each range corresponds to one or more RPC requests in TiDB. Therefore, using a global index can reduce the number of RPC requests by several times, improving index query performance.
+When executing a query related to `k`, such as `SELECT * FROM sbtest WHERE k > 1`, the local index `idx` generates 5 separate ranges, while the global index `global_idx` generates only a single range. Because each range in TiDB corresponds to one or more RPC requests, using a global index can reduce the number of RPC requests by several times, improving index query performance.
 
-The following diagram illustrates the difference in RPC requests and data flow when executing `SELECT * FROM sbtest WHERE k > 1` using `idx` versus `global_idx`:
+The following diagram illustrates the difference in RPC requests and data flow when executing the `SELECT * FROM sbtest WHERE k > 1` statement using the two different indexes: `idx` versus `global_idx`.
 
 ![Mechanism of Global Indexes](/media/global-index-mechanism.png)
 
@@ -246,7 +246,7 @@ Value:
  - TailLen_IndexVersion
 ```
 
-For global indexes, the encoding of index entries is different. To ensure compatibility with the current index key encoding, the new index encoding layout is as follows:
+For global indexes, the encoding of index entries is different. To ensure that the key layout of global indexes remains compatible with the current index key encoding, the new index encoding layout is defined as follows:
 
 ```
 Unique key
@@ -278,7 +278,7 @@ This encoding scheme places the `TableID` at the beginning of the global index k
 
 The following tests are based on the `select_random_points` scenario in sysbench, primarily used to compare query performance under different partitioning strategies and indexing methods.
 
-The table structure used in the tests is as follows:
+The table schema used in the tests is as follows:
 
 ```sql
 CREATE TABLE `sbtest` (
@@ -318,4 +318,4 @@ Hash Partition (100 partitions):
 | Clustered table hash partitioned by PK                               | 60            | 244            | 283            | 119.73     |
 | Clustered table hash partitioned by PK, with Global Index on `k`, `c` | 156           | 18,233         | 15,581         | 10.77      |
 
-From the preceding tests, it is evident that in high-concurrency environments, global indexes can significantly improve the query performance of partitioned tables, with performance gains of up to 50 times. Additionally, global indexes substantially reduce resource (RU) consumption. As the number of partitions increases, the performance benefits of global indexes become even more obvious.
+The preceding tests demonstrate that in high-concurrency environments, global indexes can significantly improve the query performance of partitioned tables, yielding performance gains of up to 50 times. Furthermore, global indexes substantially reduce Request Unit (RU) consumption. The performance benefits become even more obvious as the number of partitions increases.
