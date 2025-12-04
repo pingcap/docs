@@ -1702,7 +1702,7 @@ ERROR 8264 (HY000): Global Index is needed for index 'a', since the unique index
 
 ### Global indexes
 
-For more information about global indexes, see [Global Indexes](/global-indexes.md).
+For detailed information about global indexes, see [Global Indexes](/global-indexes.md).
 
 ### Partitioning limitations relating to functions
 

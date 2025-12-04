@@ -2254,7 +2254,7 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to support creating [global indexes](/global-indexes.md) for partitioned tables. When this variable is enabled, TiDB allows you to create unique indexes that **do not include all the columns used in the partition expressions** by specifying `GLOBAL` in the index definition.
-- This variable is deprecated since v8.4.0. Its value will be fixed to the default value `ON`, that is, [global indexes](/global-indexes.md) is enabled by default.
+- This variable is deprecated since v8.4.0. Its value is fixed to the default value `ON`, that is, [global indexes](/global-indexes.md) is enabled by default.
 
 ### tidb_enable_lazy_cursor_fetch <span class="version-mark">New in v8.3.0</span>
 
