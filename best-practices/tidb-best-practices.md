@@ -80,7 +80,7 @@ Similarly, if all data is read from a focused small range (for example, the cont
 
 ### Secondary index
 
-TiDB supports the complete secondary indexes, which are also global indexes. Many queries can be optimized by index. Thus, it is important for applications to make good use of secondary indexes.
+TiDB supports the complete secondary indexes, which are also [global indexes](/global-indexes.md). Many queries can be optimized by index. Thus, it is important for applications to make good use of secondary indexes.
 
 Lots of MySQL experience is also applicable to TiDB. It is noted that TiDB has its unique features. The following are a few notes when using secondary indexes in TiDB.
 

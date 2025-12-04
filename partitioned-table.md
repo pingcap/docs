@@ -1196,7 +1196,7 @@ ALTER TABLE member_level PARTITION BY RANGE(level)
  PARTITION pMax VALUES LESS THAN (MAXVALUE));
 ```
 
-When partitioning a non-partitioned table or repartitioning an already partitioned table, you can update the indexes to be global or local as needed:
+When partitioning a non-partitioned table or repartitioning an already partitioned table, you can update the indexes to be [global indexes](/global-indexes.md) or local indexes as needed:
 
 ```sql
 CREATE TABLE t1 (
@@ -1490,7 +1490,7 @@ This section discusses the relationship of partitioning keys with primary keys a
 
 > **Note:**
 >
-> You can ignore this rule when using [global indexes](#global-indexes).
+> You can ignore this rule when using [global indexes](/global-indexes.md).
 
 For example, the following table creation statements are invalid:
 
@@ -1701,6 +1701,7 @@ ERROR 8264 (HY000): Global Index is needed for index 'a', since the unique index
 
 ### Global indexes
 
+<<<<<<< HEAD
 Before the introduction of global indexes, TiDB created a local index for each partition, leading to [a limitation](#partitioning-keys-primary-keys-and-unique-keys) that primary keys and unique keys had to include the partition key to ensure data uniqueness. Additionally, when querying data across multiple partitions, TiDB needed to scan the data of each partition to return results.
 
 To address these issues, TiDB introduces the global indexes feature in v8.3.0. A global index covers the data of the entire table with a single index, allowing primary keys and unique keys to maintain global uniqueness without including all partition keys. Moreover, global indexes can access index data across multiple partitions in a single operation instead of looking up the local index for each partition, significantly improving query performance for non-partitioned keys. Starting from v8.5.4, non-unique indexes can also be created as global indexes.
@@ -1798,6 +1799,9 @@ ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCA
 - Tables with global indexes do not support the `EXCHANGE PARTITION` operation.
 - By default, the primary key of a partitioned table is a clustered index and must include the partition key. If you require the primary key to exclude the partition key, you can explicitly specify the primary key as a non-clustered global index when creating the table, for example, `PRIMARY KEY(col1, col2) NONCLUSTERED GLOBAL`.
 - If a global index is added to an expression column, or a global index is also a prefix index (for example `UNIQUE KEY idx_id_prefix (id(10)) GLOBAL`), you need to collect statistics manually for this global index.
+=======
+For detailed information about global indexes, see [Global Indexes](/global-indexes.md).
+>>>>>>> dbc7bfe815 (sql: make global indexes a new doc and add more contents (#22017))
 
 ### Partitioning limitations relating to functions
 
