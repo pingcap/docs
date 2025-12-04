@@ -9,9 +9,10 @@ This article mainly introduces subquery related optimizations.
 
 Subqueries usually appear in the following situations:
 
+- `... </=/!=/>/ ALL (SELECT ... FROM ...)`
 - `NOT IN (SELECT ... FROM ...)`
-- `NOT EXISTS (SELECT ... FROM ...)`
 - `IN (SELECT ... FROM ..)`
+- `NOT EXISTS (SELECT ... FROM ...)`
 - `EXISTS (SELECT ... FROM ...)`
 - `... >/>=/</<=/=/!= (SELECT ... FROM ...)`
 
