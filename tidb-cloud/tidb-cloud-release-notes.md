@@ -12,11 +12,11 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **通用变更**
 
-- **TiDB Cloud 专属版**
+- **TiDB Cloud Dedicated**
 
-    - Prometheus 集成现已在 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群中正式发布（GA）。
+    - Prometheus 集成现已在 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群中正式发布（GA）。
 
-        TiDB Cloud 现在在集群级别管理 Prometheus 集成，提供更细粒度的控制和配置。该功能使你能够无缝地将 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的监控指标发送到 Prometheus，从而在统一平台上实现高级告警。
+        TiDB Cloud 现在在集群级别管理 Prometheus 集成，提供更细粒度的控制和配置。该功能使你能够无缝地将 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的监控指标发送到 Prometheus，从而在统一平台上实现高级告警。
 
         集成步骤详见 [将 TiDB Cloud 集成到 Prometheus 和 Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)。
 
@@ -26,7 +26,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **通用变更**
 
-- **TiDB Cloud 专属版**
+- **TiDB Cloud Dedicated**
 
     - 增强 changefeed 摘要，包含完整的配置信息。
 
@@ -38,9 +38,9 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **通用变更**
 
-- **TiDB Cloud 专属版**
+- **TiDB Cloud Dedicated**
 
-    - 当你从备份恢复 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群到新集群时，现在可以为新集群选择节点存储类型（如 [标准存储](/tidb-cloud/size-your-cluster.md#standard-storage)），而不再局限于默认存储类型。
+    - 当你从备份恢复 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群到新集群时，现在可以为新集群选择节点存储类型（如 [标准存储](/tidb-cloud/size-your-cluster.md#standard-storage)），而不再局限于默认存储类型。
 
         该功能使你可以精确还原原始配置，或选择更适合需求的存储类型。
 
@@ -50,13 +50,13 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **通用变更**
 
-- **TiDB Cloud 专属版**
+- **TiDB Cloud Dedicated**
 
-    - 当你通过 VPC Peering 连接托管在 Google Cloud 上的 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群时，现在可以直接在 [TiDB Cloud 控制台](https://tidbcloud.com/) 配置 `/16` 到 `/18` 之间的 IP 段大小，无需再联系 TiDB Cloud 支持。
+    - 当你通过 VPC Peering 连接托管在 Google Cloud 上的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群时，现在可以直接在 [TiDB Cloud 控制台](https://tidbcloud.com/) 配置 `/16` 到 `/18` 之间的 IP 段大小，无需再联系 TiDB Cloud 支持。
 
-        详情参见 [通过 VPC Peering 连接 TiDB Cloud 专属版](/tidb-cloud/set-up-vpc-peering-connections.md)。
+        详情参见 [通过 VPC Peering 连接 TiDB Cloud Dedicated](/tidb-cloud/set-up-vpc-peering-connections.md)。
 
-    - TiDB Cloud 专属版现在为 4 vCPU 节点规格提供更清晰的指引和提示。该节点规格仅适用于测试、学习和探索 TiDB Cloud 功能的非生产环境。
+    - TiDB Cloud Dedicated现在为 4 vCPU 节点规格提供更清晰的指引和提示。该节点规格仅适用于测试、学习和探索 TiDB Cloud 功能的非生产环境。
 
         详情参见 [确定 TiDB 规格](/tidb-cloud/size-your-cluster.md)。
 
@@ -72,33 +72,33 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **API 变更**
 
-- **TiDB Cloud 专属版**
+- **TiDB Cloud Dedicated**
 
-    新增以下 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) API 端点，用于管理第三方监控集成：
+    新增以下 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) API 端点，用于管理第三方监控集成：
 
     - 列出集成
     - 创建集成
     - 删除集成
 
-  详情参见 [TiDB Cloud 专属版 API](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated/)。
+  详情参见 [TiDB Cloud Dedicated API](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated/)。
 
 ## 2025 年 10 月 21 日
 
 **通用变更**
 
-- **TiDB Cloud 专属版**
+- **TiDB Cloud Dedicated**
 
-    - [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 增强了 [Changefeed](/tidb-cloud/changefeed-overview.md) 的私有端点功能，简化配置、提升安全性，并为数据下游提供更大灵活性。
+    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 增强了 [Changefeed](/tidb-cloud/changefeed-overview.md) 的私有端点功能，简化配置、提升安全性，并为数据下游提供更大灵活性。
 
         - **简化配置**：私有端点的创建现已与 changefeed 创建解耦，同一项目下的多个 changefeed 可共享一个私有端点，减少冗余配置。
-        - **MySQL 私有链路下游**：为数据下沉到 MySQL 提供更安全的方式，并支持通过私有链路直接下沉到另一个 TiDB Cloud 专属版集群。
+        - **MySQL 私有链路下游**：为数据下沉到 MySQL 提供更安全的方式，并支持通过私有链路直接下沉到另一个 TiDB Cloud Dedicated 集群。
         - **自定义域名支持**：使用自建 Kafka 服务时，可为数据下游配置自定义域名，提升安全性，并使监听器更新更灵活，无需重启服务器。
 
       详情参见 [为 Changefeed 设置私有端点](/tidb-cloud/set-up-sink-private-endpoint.md)。
 
-    - [Prometheus 集成（预览）](/tidb-cloud/monitor-prometheus-and-grafana-integration.md) 现已适用于 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
+    - [Prometheus 集成（预览）](/tidb-cloud/monitor-prometheus-and-grafana-integration.md) 现已适用于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
 
-        TiDB Cloud 现在在集群级别管理 Prometheus 集成，提供更细粒度的控制和配置。该功能使你能够无缝地将 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的监控指标发送到 Prometheus，从而在统一平台上实现高级告警。
+        TiDB Cloud 现在在集群级别管理 Prometheus 集成，提供更细粒度的控制和配置。该功能使你能够无缝地将 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的监控指标发送到 Prometheus，从而在统一平台上实现高级告警。
 
         详情参见 [将 TiDB Cloud 集成到 Prometheus 和 Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)。
 
@@ -110,7 +110,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 不再支持数据库审计日志。
 
-        目前，仅 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 和 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 支持数据库审计日志。现有已启用数据库审计日志的 TiDB Cloud Starter 集群不受影响。
+        目前，仅 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 和 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 支持数据库审计日志。现有已启用数据库审计日志的 TiDB Cloud Starter 集群不受影响。
 
     - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 移除了原地恢复功能，即不再支持将备份直接恢复到同一集群。此更改有助于防止误覆盖生产数据和潜在数据丢失。
 
@@ -159,11 +159,11 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **通用变更**
 
-- **TiDB Cloud 专属版**
+- **TiDB Cloud Dedicated**
 
-    - Datadog 和 New Relic 集成现已在 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群中正式发布（GA）。
+    - Datadog 和 New Relic 集成现已在 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群中正式发布（GA）。
   
-        TiDB Cloud 现在在集群级别管理 Datadog 和 New Relic 集成，提供更细粒度的控制和配置。该功能使你能够无缝地将 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的监控指标发送到 Datadog 或 New Relic，从而在统一平台上实现高级告警。
+        TiDB Cloud 现在在集群级别管理 Datadog 和 New Relic 集成，提供更细粒度的控制和配置。该功能使你能够无缝地将 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的监控指标发送到 Datadog 或 New Relic，从而在统一平台上实现高级告警。
   
         集成步骤详见 [将 TiDB Cloud 集成到 Datadog](/tidb-cloud/monitor-datadog-integration.md) 和 [将 TiDB Cloud 集成到 New Relic](/tidb-cloud/monitor-new-relic-integration.md)。
   
@@ -173,17 +173,17 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **通用变更**
 
-- **TiDB Cloud 专属版**
+- **TiDB Cloud Dedicated**
 
-    - 支持在 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) changefeed 中由用户控制 `UPDATE` 事件的拆分。
+    - 支持在 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) changefeed 中由用户控制 `UPDATE` 事件的拆分。
   
-        在 TiDB Cloud 专属版集群中，你可以配置是否将 `UPDATE` 事件保留为原始事件，或拆分为单独的 `DELETE` 和 `INSERT` 事件。该功能为高级同步场景提供更大灵活性。
+        在 TiDB Cloud Dedicated 集群中，你可以配置是否将 `UPDATE` 事件保留为原始事件，或拆分为单独的 `DELETE` 和 `INSERT` 事件。该功能为高级同步场景提供更大灵活性。
   
         该功能仅支持非 SQL 下游，如 Apache Kafka 和 Amazon S3。详情参见 [下沉到 Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)、[下沉到 Apache Pulsar](/tidb-cloud/changefeed-sink-to-apache-pulsar.md) 和 [下沉到云存储](/tidb-cloud/changefeed-sink-to-cloud-storage.md)。
 
         关于拆分行为的更多信息，参见 [为非 MySQL 下游拆分主键或唯一键 `UPDATE` 事件](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)。
 
-    - 为托管在 Google Cloud 上的 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群提供新的节点规格：`32 vCPU, 64 GiB`。
+    - 为托管在 Google Cloud 上的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群提供新的节点规格：`32 vCPU, 64 GiB`。
   
         该节点规格适用于 TiDB 节点。
 
@@ -191,9 +191,9 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **通用变更**
 
-- **TiDB Cloud 专属版**
+- **TiDB Cloud Dedicated**
 
-    - Azure 上托管的 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群现已支持使用客户自管加密密钥（CMEK）进行静态加密。
+    - Azure 上托管的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群现已支持使用客户自管加密密钥（CMEK）进行静态加密。
   
         该功能允许你使用自主管理的加密密钥保护静态数据。CMEK 主要优势如下：
   
@@ -205,7 +205,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
   
         1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 创建启用 CMEK 的项目。
         2. 完成该项目的 CMEK 配置。
-        3. 在与 CMEK 配置相同的区域创建 Azure 上的 TiDB Cloud 专属版集群。
+        3. 在与 CMEK 配置相同的区域创建 Azure 上的 TiDB Cloud Dedicated 集群。
   
       详情参见 [在 Azure 上使用客户自管加密密钥进行静态加密](/tidb-cloud/tidb-cloud-encrypt-cmek-azure.md)。
 
@@ -238,17 +238,17 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 集群新增支持 3 个阿里云区域：`Jakarta (ap-southeast-5)`、`Mexico (na-south-1)` 和 `Tokyo (ap-northeast-1)`。
 
-- **TiDB Cloud 专属版**
+- **TiDB Cloud Dedicated**
 
-    - 新建 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的默认 TiDB 版本由 [v8.5.2](https://docs.pingcap.com/tidb/v8.5/release-8.5.2/) 升级为 [v8.5.3](https://docs.pingcap.com/tidb/v8.5/release-8.5.3/)。
+    - 新建 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的默认 TiDB 版本由 [v8.5.2](https://docs.pingcap.com/tidb/v8.5/release-8.5.2/) 升级为 [v8.5.3](https://docs.pingcap.com/tidb/v8.5/release-8.5.3/)。
 
 </CustomContent>
 
 <CustomContent language="ja">
 
-- **TiDB Cloud 专属版**
+- **TiDB Cloud Dedicated**
 
-    - 新建 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的默认 TiDB 版本由 [v8.5.2](https://docs.pingcap.com/tidb/v8.5/release-8.5.2/) 升级为 [v8.5.3](https://docs.pingcap.com/tidb/v8.5/release-8.5.3/)。
+    - 新建 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的默认 TiDB 版本由 [v8.5.2](https://docs.pingcap.com/tidb/v8.5/release-8.5.2/) 升级为 [v8.5.3](https://docs.pingcap.com/tidb/v8.5/release-8.5.3/)。
 
 </CustomContent>
 
@@ -266,17 +266,17 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
       详情参见 [Auto Embedding](https://docs.pingcap.com/tidbcloud/vector-search-auto-embedding-overview/?plan=starter)。
 
-- **TiDB Cloud 专属版**
+- **TiDB Cloud Dedicated**
 
-    - [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 不再支持 Index Insight（beta）功能。
+    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 不再支持 Index Insight（beta）功能。
 
         建议改用 [Index Advisor](/index-advisor.md)，该功能适用于 TiDB v8.5.0 及以上版本。Index Advisor 引入了 `RECOMMEND INDEX` SQL 语句，帮助你通过推荐索引优化查询性能。
 
-    - 你现在可以在启用每周备份的 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群上手动关闭时间点恢复（Point-in-time Restore）功能。
+    - 你现在可以在启用每周备份的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群上手动关闭时间点恢复（Point-in-time Restore）功能。
 
         此优化有助于降低不需要高 RPO 保护的集群的成本。
 
-        详情参见 [备份与恢复 TiDB Cloud 专属版数据](/tidb-cloud/backup-and-restore.md)。
+        详情参见 [备份与恢复 TiDB Cloud Dedicated数据](/tidb-cloud/backup-and-restore.md)。
 
 ## 2025 年 8 月 12 日
 
@@ -309,13 +309,13 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     如果你在公测期间试用 Essential on 阿里云，可通过 Web 控制台反馈，也欢迎加入 [Slack](https://tidbcommunity.slack.com/archives/CH7TTLL7P) 或 [Discord](https://discord.gg/ukhXbn69Nx) 社区交流。
 
-- **TiDB Cloud 专属版**
+- **TiDB Cloud Dedicated**
 
-    - Google Cloud 上的 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 现已通过优化 NAT 子网分配策略，支持每区域超过 8 个 Google Private Service Connect（PSC）连接。
+    - Google Cloud 上的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 现已通过优化 NAT 子网分配策略，支持每区域超过 8 个 Google Private Service Connect（PSC）连接。
 
-        详情参见 [通过 Google Cloud Private Service Connect 连接 TiDB Cloud 专属版集群](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md#restrictions)。
+        详情参见 [通过 Google Cloud Private Service Connect 连接 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md#restrictions)。
 
-    - 优化 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 监控指标：
+    - 优化 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 监控指标：
 
         - 在 [**Advanced**](/tidb-cloud/built-in-monitoring.md#advanced) 类别下，新增 **Affected Rows**、**Leader Count** 和 **Region Count** 指标，提升诊断能力。
         - 在 [**Server**](/tidb-cloud/built-in-monitoring.md#server) 类别下，优化 **TiKV IO Bps** 指标，提升准确性和一致性。
@@ -334,13 +334,13 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     自 2025 年 8 月 12 日（PDT）起，你的现有 Serverless 集群将在 [TiDB Cloud 控制台](https://tidbcloud.com) 中显示为 Starter。你的连接字符串、端点和数据均保持不变，无需修改代码或安排停机。
 
-- **TiDB Cloud 专属版**
+- **TiDB Cloud Dedicated**
 
-    - Google Cloud 上的 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 现已通过优化 NAT 子网分配策略，支持每区域超过 8 个 Google Private Service Connect（PSC）连接。
+    - Google Cloud 上的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 现已通过优化 NAT 子网分配策略，支持每区域超过 8 个 Google Private Service Connect（PSC）连接。
 
-        详情参见 [通过 Google Cloud Private Service Connect 连接 TiDB Cloud 专属版集群](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md#restrictions)。
+        详情参见 [通过 Google Cloud Private Service Connect 连接 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md#restrictions)。
 
-    - 优化 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 监控指标：
+    - 优化 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 监控指标：
 
         - 在 [**Advanced**](/tidb-cloud/built-in-monitoring.md#advanced) 类别下，新增 **Affected Rows**、**Leader Count** 和 **Region Count** 指标，提升诊断能力。
         - 在 [**Server**](/tidb-cloud/built-in-monitoring.md#server) 类别下，优化 **TiKV IO Bps** 指标，提升准确性和一致性。
@@ -351,14 +351,14 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **API 变更**
 
-- 推出 TiDB Cloud 专属版 API（v1beta1），可自动高效地管理以下资源：
+- 推出 TiDB Cloud Dedicated API（v1beta1），可自动高效地管理以下资源：
 
-    - **Cluster**：更灵活地管理 TiDB Cloud 专属版集群。
-    - **Region**：展示可部署 TiDB Cloud 专属版集群的所有云区域。
+    - **Cluster**：更灵活地管理 TiDB Cloud Dedicated 集群。
+    - **Region**：展示可部署 TiDB Cloud Dedicated 集群的所有云区域。
     - **Private endpoint connection**：为集群设置安全私有连接。
     - **Import**：管理集群的数据导入任务。
 
-  详情参见 [TiDB Cloud 专属版 API](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated/)。
+  详情参见 [TiDB Cloud Dedicated API](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated/)。
 
 - 推出 TiDB Cloud Starter 和 Essential API（v1beta1），可自动高效地管理以下资源：
 
@@ -399,11 +399,11 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **通用变更**
 
-- 为托管在 Google Cloud 上的 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群提供新的节点规格：`32 vCPU, 128 GiB`。
+- 为托管在 Google Cloud 上的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群提供新的节点规格：`32 vCPU, 128 GiB`。
 
     该规格适用于 TiDB、TiKV 和 TiFlash 节点。
 
-- 优化 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的 TiKV 扩缩容流程，提升集群稳定性。
+- 优化 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的 TiKV 扩缩容流程，提升集群稳定性。
 
     当你 [更改 TiKV 节点的 vCPU 和内存规格](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram) 时，TiDB Cloud 会自动检查集群内部服务是否需要扩容以支持新配置。
 
@@ -426,7 +426,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **通用变更**
 
-- 新建 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的默认 TiDB 版本由 [v8.1.2](https://docs.pingcap.com/tidb/stable/release-8.1.2/) 升级为 [v8.5.2](https://docs.pingcap.com/tidb/stable/release-8.5.2/)。
+- 新建 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的默认 TiDB 版本由 [v8.1.2](https://docs.pingcap.com/tidb/stable/release-8.1.2/) 升级为 [v8.5.2](https://docs.pingcap.com/tidb/stable/release-8.5.2/)。
 
     与 v8.1.2 相比，v8.5.2 包含 [v8.2.0-DMR](https://docs.pingcap.com/tidb/stable/release-8.2.0/)、[v8.3.0-DMR](https://docs.pingcap.com/tidb/stable/release-8.3.0/)、[v8.4.0-DMR](https://docs.pingcap.com/tidb/stable/release-8.4.0/)、[v8.5.0](https://docs.pingcap.com/tidb/stable/release-8.5.0/)、[v8.5.1](https://docs.pingcap.com/tidb/stable/release-8.5.1/) 和 [v8.5.2](https://docs.pingcap.com/tidb/stable/release-8.5.2/) 的新特性、改进和修复。
 
@@ -436,7 +436,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     详情参见 [控制台审计日志](/tidb-cloud/tidb-cloud-console-auditing.md)。
 
-- 支持在 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) changefeed 中按列值过滤。
+- 支持在 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) changefeed 中按列值过滤。
 
     你现在可以在 changefeed 中使用表达式过滤特定列值，从源头排除无关数据。该功能实现 DML 事件的细粒度过滤，有助于降低资源消耗并提升性能。
 
@@ -450,13 +450,13 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     如需申请该功能，请点击 [TiDB Cloud 控制台](https://tidbcloud.com) 右下角的 **?**，选择 **Request Support**，在 Description 字段填写 “Apply for TiDB Cloud Serverless database audit logging”，然后点击 **Submit**。
 
-- [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 支持用户自主管理日志脱敏。
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 支持用户自主管理日志脱敏。
 
-    你现在可以为 TiDB Cloud 专属版集群启用或禁用日志脱敏，自主管理集群日志的脱敏状态。
+    你现在可以为 TiDB Cloud Dedicated 集群启用或禁用日志脱敏，自主管理集群日志的脱敏状态。
 
     详情参见 [用户自主管理日志脱敏](/tidb-cloud/tidb-cloud-log-redaction.md)。
 
-- AWS 上托管的 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群现已正式支持（GA）使用客户自管加密密钥（CMEK）进行静态加密。
+- AWS 上托管的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群现已正式支持（GA）使用客户自管加密密钥（CMEK）进行静态加密。
 
     该功能允许你通过 Key Management Service（KMS）管理的对称加密密钥保护静态数据。
 
@@ -466,7 +466,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **通用变更**
 
-- [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群中，16 vCPU 和 32 vCPU 的 TiKV 节点最大存储容量由 **6144 GiB** 调整为 **4096 GiB**。
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群中，16 vCPU 和 32 vCPU 的 TiKV 节点最大存储容量由 **6144 GiB** 调整为 **4096 GiB**。
 
     详情参见 [TiKV 节点存储规格](/tidb-cloud/size-your-cluster.md#tikv-node-storage-size)。
 
@@ -486,43 +486,43 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **通用变更**
 
-- [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 现已在 Microsoft Azure 公测。
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 现已在 Microsoft Azure 公测。
   
-    随着本次发布，TiDB Cloud 现已支持三大主流公有云平台 —— AWS、Google Cloud 和 Azure，助你根据业务需求和云战略灵活部署 TiDB Cloud 专属版集群。
+    随着本次发布，TiDB Cloud 现已支持三大主流公有云平台 —— AWS、Google Cloud 和 Azure，助你根据业务需求和云战略灵活部署 TiDB Cloud Dedicated 集群。
   
     - AWS 和 Google Cloud 上的所有核心功能在 Azure 上均已支持。
     - Azure 目前支持 East US 2、日本东部和东南亚 3 个区域，后续将支持更多区域。
-    - Azure 上的 TiDB Cloud 专属版集群需 TiDB 版本 v7.5.3 或更高。
+    - Azure 上的 TiDB Cloud Dedicated 集群需 TiDB 版本 v7.5.3 或更高。
   
   快速入门文档：
   
-    - [在 Azure 上创建 TiDB Cloud 专属版集群](/tidb-cloud/create-tidb-cluster.md)
-    - [通过 Azure 私有端点连接 TiDB Cloud 专属版集群](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md) 
-    - [导入数据到 Azure 上的 TiDB Cloud 专属版集群](/tidb-cloud/import-csv-files.md)
+    - [在 Azure 上创建 TiDB Cloud Dedicated 集群](/tidb-cloud/create-tidb-cluster.md)
+    - [通过 Azure 私有端点连接 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md) 
+    - [导入数据到 Azure 上的 TiDB Cloud Dedicated 集群](/tidb-cloud/import-csv-files.md)
 
-- Prometheus 集成提供更多指标，增强 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的监控能力。
+- Prometheus 集成提供更多指标，增强 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的监控能力。
   
-    你现在可以将 `tidbcloud_disk_read_latency`、`tidbcloud_kv_request_duration` 等更多指标集成到 Prometheus，追踪 TiDB Cloud 专属版的更多性能维度。
+    你现在可以将 `tidbcloud_disk_read_latency`、`tidbcloud_kv_request_duration` 等更多指标集成到 Prometheus，追踪 TiDB Cloud Dedicated的更多性能维度。
   
     关于可用指标及启用方法，详见 [将 TiDB Cloud 集成到 Prometheus 和 Grafana（Beta）](/tidb-cloud/monitor-prometheus-and-grafana-integration.md#metrics-available-to-prometheus)。
 
 - TiKV [标准](/tidb-cloud/size-your-cluster.md#standard-storage) 和 [性能](/tidb-cloud/size-your-cluster.md#performance-and-plus-storage) 存储定价正式发布。
 
-    优惠期自 **2025 年 6 月 5 日 00:00 UTC** 起结束，届时价格恢复为标准价。TiDB Cloud 专属版价格详情参见 [TiDB Cloud 专属版定价详情](https://www.pingcap.com/tidb-dedicated-pricing-details/#node-cost)。
+    优惠期自 **2025 年 6 月 5 日 00:00 UTC** 起结束，届时价格恢复为标准价。TiDB Cloud Dedicated价格详情参见 [TiDB Cloud Dedicated定价详情](https://www.pingcap.com/tidb-dedicated-pricing-details/#node-cost)。
 
 **控制台变更**
 
-- 优化 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群 TiFlash 节点规格配置交互体验。
+- 优化 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群 TiFlash 节点规格配置交互体验。
 
-    你现在可以在创建 TiDB Cloud 专属版集群时通过开关按钮控制 TiFlash 配置，使配置过程更直观流畅。
+    你现在可以在创建 TiDB Cloud Dedicated 集群时通过开关按钮控制 TiFlash 配置，使配置过程更直观流畅。
 
 ## 2025 年 5 月 27 日
 
 **通用变更**
 
-- [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的 changefeed 现已支持将数据流式同步到 [Apache Pulsar](https://pulsar.apache.org)。
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的 changefeed 现已支持将数据流式同步到 [Apache Pulsar](https://pulsar.apache.org)。
 
-    该功能使你可以将 TiDB Cloud 专属版集群与更多下游系统集成，满足更多数据集成需求。使用该功能需确保集群版本为 v7.5.1 或更高。
+    该功能使你可以将 TiDB Cloud Dedicated 集群与更多下游系统集成，满足更多数据集成需求。使用该功能需确保集群版本为 v7.5.1 或更高。
 
     详情参见 [下沉到 Apache Pulsar](/tidb-cloud/changefeed-sink-to-apache-pulsar.md)。
 
@@ -541,12 +541,12 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
   快速入门请参见 [使用 SQL 进行全文检索](/tidb-cloud/vector-search-full-text-search-sql.md) 或 [使用 Python 进行全文检索](/tidb-cloud/vector-search-full-text-search-python.md)。
 
-- [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群 TiFlash 节点最大存储容量提升：
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群 TiFlash 节点最大存储容量提升：
 
     - 8 vCPU TiFlash：由 2048 GiB 提升至 4096 GiB
     - 32 vCPU TiFlash：由 4096 GiB 提升至 8192 GiB
 
-  此增强提升了 TiDB Cloud 专属版集群的分析型数据存储能力，提高了工作负载扩展效率，满足不断增长的数据需求。
+  此增强提升了 TiDB Cloud Dedicated 集群的分析型数据存储能力，提高了工作负载扩展效率，满足不断增长的数据需求。
 
     详情参见 [TiFlash 节点存储规格](/tidb-cloud/size-your-cluster.md#tiflash-node-storage)。
 
@@ -558,9 +558,9 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **控制台变更**
 
-- 优化 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群 **Backup Setting** 页面布局，提升备份配置体验。
+- 优化 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群 **Backup Setting** 页面布局，提升备份配置体验。
 
-    详情参见 [备份与恢复 TiDB Cloud 专属版数据](/tidb-cloud/backup-and-restore.md)。
+    详情参见 [备份与恢复 TiDB Cloud Dedicated数据](/tidb-cloud/backup-and-restore.md)。
 
 ## 2025 年 4 月 22 日
 
@@ -591,7 +591,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **通用变更**
 
-- [TiDB 节点组](/tidb-cloud/tidb-node-group-overview.md) 功能现已在 AWS 和 Google Cloud 上托管的 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群正式发布（GA）。
+- [TiDB 节点组](/tidb-cloud/tidb-node-group-overview.md) 功能现已在 AWS 和 Google Cloud 上托管的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群正式发布（GA）。
 
     该功能支持在单一集群内实现**细粒度计算资源隔离**，助你在多租户或多工作负载场景下优化性能和资源分配。
 
@@ -609,7 +609,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
   详细优势参见 [技术博客](https://www.pingcap.com/blog/tidb-cloud-node-groups-scaling-workloads-predictable-performance/)。快速入门请参见 [管理 TiDB 节点组](/tidb-cloud/tidb-node-group-management.md)。
 
-- 在 AWS 上托管的 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群引入 [标准存储](/tidb-cloud/size-your-cluster.md#standard-storage) 类型的 TiKV 节点。
+- 在 AWS 上托管的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群引入 [标准存储](/tidb-cloud/size-your-cluster.md#standard-storage) 类型的 TiKV 节点。
 
     标准存储类型适用于大多数工作负载，在性能与成本之间实现平衡。
 
@@ -621,7 +621,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     **可用性：**
 
-    2025 年 4 月 1 日及以后在 AWS 上新建的 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群（版本 >= 7.5.5、8.1.2 或 8.5.0）将自动采用标准存储类型。现有集群仍使用原 [基础存储](/tidb-cloud/size-your-cluster.md#basic-storage) 类型，无需迁移。
+    2025 年 4 月 1 日及以后在 AWS 上新建的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群（版本 >= 7.5.5、8.1.2 或 8.5.0）将自动采用标准存储类型。现有集群仍使用原 [基础存储](/tidb-cloud/size-your-cluster.md#basic-storage) 类型，无需迁移。
 
     标准存储与基础存储价格不同。详情参见 [定价](https://www.pingcap.com/tidb-dedicated-pricing-details/)。
 
@@ -639,11 +639,11 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **通用变更**
 
-- 支持为 Google Cloud 上部署的 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群创建 TiDB 节点组，提升资源管理灵活性。
+- 支持为 Google Cloud 上部署的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群创建 TiDB 节点组，提升资源管理灵活性。
 
     详情参见 [TiDB 节点组概览](/tidb-cloud/tidb-node-group-overview.md)。
 
-- 支持将数据库审计日志文件存储在 TiDB Cloud，用于 AWS 上部署的 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
+- 支持将数据库审计日志文件存储在 TiDB Cloud，用于 AWS 上部署的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
 
     你可以直接从 TiDB Cloud 下载这些审计日志文件。该功能仅支持按需申请。
 
@@ -688,7 +688,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **通用变更**
 
-- [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群新增支持 AWS 区域：`Jakarta (ap-southeast-3)`。
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群新增支持 AWS 区域：`Jakarta (ap-southeast-3)`。
 
 - 推出 Notification 功能，使你可通过 [TiDB Cloud 控制台](https://tidbcloud.com/) 实时获知 TiDB Cloud 更新和告警。
 
@@ -698,11 +698,11 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **通用变更**
 
-- 支持为 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群创建 TiDB 节点组，提升资源管理灵活性。
+- 支持为 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群创建 TiDB 节点组，提升资源管理灵活性。
 
     详情参见 [TiDB 节点组概览](/tidb-cloud/tidb-node-group-overview.md)。
 
-- 支持通过 Private Connect（beta）将 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群连接到 AWS 和 Google Cloud 上的通用 Kafka。
+- 支持通过 Private Connect（beta）将 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群连接到 AWS 和 Google Cloud 上的通用 Kafka。
 
     Private Connect 利用云服务商的 Private Link 或 Private Service Connect 技术，使 TiDB Cloud VPC 内的 changefeed 可通过私有 IP 连接到客户 VPC 内的 Kafka，就像这些 Kafka 直接托管在 TiDB Cloud VPC 内一样。该功能有助于避免 VPC CIDR 冲突，满足安全合规要求。
 
@@ -748,7 +748,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
   
     详情参见 [TiDB Cloud Serverless 的高可用性](/tidb-cloud/serverless-high-availability.md)。
 
-- 新建 [TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的默认 TiDB 版本由 [v8.1.1](https://docs.pingcap.com/tidb/v8.1/release-8.1.1) 升级为 [v8.1.2](https://docs.pingcap.com/tidb/v8.1/release-8.1.2)。
+- 新建 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的默认 TiDB 版本由 [v8.1.1](https://docs.pingcap.com/tidb/v8.1/release-8.1.1) 升级为 [v8.1.2](https://docs.pingcap.com/tidb/v8.1/release-8.1.2)。
 
 **控制台变更**
 
