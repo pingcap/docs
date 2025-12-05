@@ -12,21 +12,23 @@ aparser.add_argument(
 aparser.add_argument(
     "--parser_url",
     default="https://github.com/pingcap/tidb/raw/refs/heads/master/pkg/parser/parser.y",
-    help="Url to parser.y",
+    help="URL to parser.y",
 )
 aparser.add_argument("--download_from_url", action="store_true")
 args = aparser.parse_args()
 
 if args.download_from_url:
-    r = requests.get(args.parser_url)
-    if r.status_code != 200:
-        sys.exit(f"failed to download parser file, got HTTP {r.status_code}")
-    lines = r.text.splitlines()
+    try:
+        r = requests.get(args.parser_url, timeout=30)
+        r.raise_for_status()
+        lines = r.text.splitlines()
+    except requests.RequestException as e:
+        sys.exit(f"Failed to download parser file: {e}")
 else:
     parser = Path(args.parser_file)
     if not parser.exists():
         sys.exit(f"{parser} doesn't exist")
-    lines = parser.read_text().split("\n")
+    lines = parser.read_text(encoding="utf-8").splitlines()
 
 kwdocs = Path("keywords.md")
 if not kwdocs.exists():
