@@ -1,19 +1,15 @@
 ---
-title: Gemini 向量嵌入
-summary: 了解如何在 TiDB Cloud 中使用 Google Gemini 向量嵌入模型。
+title: Gemini Embeddings
+summary: 了解如何在 TiDB Cloud 中使用 Google Gemini 嵌入模型。
 ---
 
-# Gemini 向量嵌入
+# Gemini Embeddings
 
-本文档介绍如何在 TiDB Cloud 中结合 [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) 使用 Gemini 向量嵌入模型，从文本查询中执行语义搜索。
+本文档介绍如何在 TiDB Cloud 中结合 [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) 使用 Gemini 嵌入模型，从文本查询中执行语义搜索。
 
 > **Note:**
 >
-> 目前，[Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) 仅在以下 AWS 区域的 TiDB Cloud Starter 集群中可用：
->
-> - `Frankfurt (eu-central-1)`
-> - `Oregon (us-west-2)`
-> - `N. Virginia (us-east-1)`
+> [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) 仅在托管于 AWS 的 TiDB Cloud Starter 集群上可用。
 
 ## 可用模型
 
@@ -24,7 +20,7 @@ summary: 了解如何在 TiDB Cloud 中使用 Google Gemini 向量嵌入模型�
 - 名称：`gemini/gemini-embedding-001`
 - 维度：128–3072（默认：3072）
 - 距离度量：Cosine，L2
-- 最大输入文本 token 数：2,048
+- 最大输入文本 tokens 数：2,048
 - 价格：由 Google 收费
 - 由 TiDB Cloud 托管：❌
 - 支持自带密钥：✅

@@ -13,21 +13,17 @@ Auto Embedding 功能允许你直接使用纯文本进行向量搜索，无需�
 2. **插入文本数据** —— 向量会自动生成并同时存储。
 3. **使用文本进行查询** —— 使用 `VEC_EMBED_COSINE_DISTANCE()` 或 `VEC_EMBED_L2_DISTANCE()` 查找语义相似的内容。
 
-## 可用性
-
-目前，Auto Embedding 仅在以下 AWS 区域的 TiDB Cloud Starter 集群中可用：
-
-- `Frankfurt (eu-central-1)`
-- `Oregon (us-west-2)`
-- `N. Virginia (us-east-1)`
-
-## 快速开始示例
-
-> **Tip:**
+> **注意：**
 >
-> 有关 Python 的用法，请参见 [PyTiDB Documentation](https://pingcap.github.io/ai/guides/auto-embedding/)。
+> Auto Embedding 仅在托管于 AWS 的 TiDB Cloud Starter 集群上可用。
 
-以下示例展示了如何使用 Auto Embedding 结合余弦距离进行语义搜索。本示例无需 API key。
+## 快速入门示例
+
+> **提示：**
+>
+> 有关 Python 的用法，请参见 [PyTiDB 文档](https://pingcap.github.io/ai/guides/auto-embedding/)。
+
+以下示例展示了如何使用 Auto Embedding 结合余弦距离进行语义搜索。此示例无需 API key。
 
 ```sql
 -- Create a table with auto-embedding
@@ -70,7 +66,7 @@ LIMIT 3;
 +----+--------------------------------------------------------------+
 ```
 
-上述示例使用的是 Amazon Titan 模型。关于其他模型，请参见 [可用的文本嵌入模型](#available-text-embedding-models)。
+上述示例使用了 Amazon Titan 模型。关于其他模型，请参见 [可用的文本嵌入模型](#available-text-embedding-models)。
 
 ## Auto Embedding + 向量索引
 
@@ -104,34 +100,33 @@ ORDER BY VEC_EMBED_COSINE_DISTANCE(
 LIMIT 3;
 ```
 
-> **Note:**
+> **注意：**
 >
 > - 定义向量索引时，使用 `VEC_COSINE_DISTANCE()` 或 `VEC_L2_DISTANCE()`。
->
 > - 查询时，使用 `VEC_EMBED_COSINE_DISTANCE()` 或 `VEC_EMBED_L2_DISTANCE()`。
 
 ## 可用的文本嵌入模型
 
 TiDB Cloud 支持多种嵌入模型。请选择最适合你需求的模型：
 
-| 嵌入模型         | 文档                                                                                 | TiDB Cloud 托管 <sup>1</sup> | BYOK <sup>2</sup> |
-| --------------- | ----------------------------------------------------------------------------------- | ---------------------------- | ----------------- |
-| Amazon Titan    | [Amazon Titan Embeddings](/tidb-cloud/vector-search-auto-embedding-amazon-titan.md) | ✅                           |                   |
-| Cohere          | [Cohere Embeddings](/tidb-cloud/vector-search-auto-embedding-cohere.md)             | ✅                           | ✅                |
-| Jina AI         | [Jina AI Embeddings](/tidb-cloud/vector-search-auto-embedding-jina-ai.md)           |                              | ✅                |
-| OpenAI          | [OpenAI Embeddings](/tidb-cloud/vector-search-auto-embedding-openai.md)             |                              | ✅                |
-| Gemini          | [Gemini Embeddings](/tidb-cloud/vector-search-auto-embedding-gemini.md)             |                              | ✅                |
+| 嵌入模型      | 文档                                                                                  | TiDB Cloud 托管 <sup>1</sup> | BYOK <sup>2</sup> |
+| ------------- | ------------------------------------------------------------------------------------- | ---------------------------- | ----------------- |
+| Amazon Titan  | [Amazon Titan Embeddings](/tidb-cloud/vector-search-auto-embedding-amazon-titan.md)   | ✅                           |                   |
+| Cohere        | [Cohere Embeddings](/tidb-cloud/vector-search-auto-embedding-cohere.md)               | ✅                           | ✅                |
+| Jina AI       | [Jina AI Embeddings](/tidb-cloud/vector-search-auto-embedding-jina-ai.md)             |                              | ✅                |
+| OpenAI        | [OpenAI Embeddings](/tidb-cloud/vector-search-auto-embedding-openai.md)               |                              | ✅                |
+| Gemini        | [Gemini Embeddings](/tidb-cloud/vector-search-auto-embedding-gemini.md)               |                              | ✅                |
 
 你还可以通过 TiDB Cloud 支持的以下推理服务，使用开源嵌入模型：
 
-| 嵌入模型               | 文档                                                                             | TiDB Cloud 托管 <sup>1</sup> | BYOK <sup>2</sup> | 示例支持模型                  |
-| --------------------- | -------------------------------------------------------------------------------- | ---------------------------- | ----------------- | ----------------------------- |
-| HuggingFace Inference | [HuggingFace Embeddings](/tidb-cloud/vector-search-auto-embedding-huggingface.md) |                              | ✅                | `bge-m3`, `multilingual-e5-large` |
-| NVIDIA NIM            | [NVIDIA NIM Embeddings](/tidb-cloud/vector-search-auto-embedding-nvidia-nim.md)   |                              | ✅                | `bge-m3`, `nv-embed-v1`           |
+| 嵌入模型             | 文档                                                                                  | TiDB Cloud 托管 <sup>1</sup> | BYOK <sup>2</sup> | 示例支持的模型                  |
+| -------------------- | ------------------------------------------------------------------------------------- | ---------------------------- | ----------------- | ------------------------------- |
+| HuggingFace Inference| [HuggingFace Embeddings](/tidb-cloud/vector-search-auto-embedding-huggingface.md)     |                              | ✅                | `bge-m3`, `multilingual-e5-large`|
+| NVIDIA NIM           | [NVIDIA NIM Embeddings](/tidb-cloud/vector-search-auto-embedding-nvidia-nim.md)       |                              | ✅                | `bge-m3`, `nv-embed-v1`          |
 
 &#8203;<sup>1</sup> 托管模型由 TiDB Cloud 托管，无需任何 API key。目前这些托管模型可免费使用，但可能会施加一定的使用限制，以保证所有用户的可用性。
 
-&#8203;<sup>2</sup> BYOK（Bring Your Own Key）模型需要你从相应的嵌入服务商处提供自己的 API key。TiDB Cloud 不会对 BYOK 模型的使用收费。你需要自行管理和监控这些模型的使用成本。
+&#8203;<sup>2</sup> BYOK（Bring Your Own Key）模型需要你从相应的嵌入服务商处提供自己的 API key。TiDB Cloud 不会对 BYOK 模型的使用收费。你需要自行管理和监控使用这些模型所产生的费用。
 
 ## Auto Embedding 的工作原理
 
@@ -159,7 +154,7 @@ EMBED_TEXT("model_name", text_content[, additional_json_options])
 VEC_EMBED_COSINE_DISTANCE(vector_column, "query_text")
 ```
 
-在 `ORDER BY` 子句中使用该函数，可按余弦距离对结果排序。其计算方式与 [`VEC_COSINE_DISTANCE()`](/vector-search/vector-search-functions-and-operators.md#vec_cosine_distance) 相同，但会自动为查询文本生成嵌入。
+在 `ORDER BY` 子句中使用该函数，可按余弦距离对结果进行排序。其计算方式与 [`VEC_COSINE_DISTANCE()`](/vector-search/vector-search-functions-and-operators.md#vec_cosine_distance) 相同，但会自动为查询文本生成嵌入。
 
 ### `VEC_EMBED_L2_DISTANCE()`
 
@@ -169,11 +164,11 @@ VEC_EMBED_COSINE_DISTANCE(vector_column, "query_text")
 VEC_EMBED_L2_DISTANCE(vector_column, "query_text")
 ```
 
-在 `ORDER BY` 子句中使用该函数，可按 L2 距离对结果排序。其计算方式与 [`VEC_L2_DISTANCE()`](/vector-search/vector-search-functions-and-operators.md#vec_l2_distance) 相同，但会自动为查询文本生成嵌入。
+在 `ORDER BY` 子句中使用该函数，可按 L2 距离对结果进行排序。其计算方式与 [`VEC_L2_DISTANCE()`](/vector-search/vector-search-functions-and-operators.md#vec_l2_distance) 相同，但会自动为查询文本生成嵌入。
 
 ## 在 Python 中使用 Auto Embedding
 
-参见 [PyTiDB Documentation](https://pingcap.github.io/ai/guides/auto-embedding/)。
+参见 [PyTiDB 文档](https://pingcap.github.io/ai/guides/auto-embedding/)。
 
 ## 参见
 

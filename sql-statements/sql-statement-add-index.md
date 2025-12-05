@@ -1,5 +1,5 @@
 ---
-title: ADD INDEX | TiDB SQL Statement Reference
+title: ADD INDEX | TiDB SQL 语句参考
 summary: TiDB 数据库中 ADD INDEX 的用法概述。
 ---
 
@@ -9,13 +9,13 @@ summary: TiDB 数据库中 ADD INDEX 的用法概述。
 
 > **Tip:**
 >
-> 可以使用 [TiDB 分布式执行框架（DXF）](/tidb-distributed-execution-framework.md) 来加速该语句的执行。
+> 可以使用 [TiDB 分布式执行框架 (DXF)](/tidb-distributed-execution-framework.md) 来加速该语句的执行。
 
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
 >
-> 对于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群（4 vCPU），建议手动关闭 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)，以防止资源受限在创建索引时影响集群稳定性。关闭该设置后，索引将通过事务方式创建，从而降低对集群的整体影响。
+> 对于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群（4 vCPU），建议手动关闭 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)，以防止在创建索引时资源受限影响集群稳定性。关闭该设置后，索引将通过事务方式创建，从而降低对集群的整体影响。
 
 </CustomContent>
 
@@ -94,17 +94,17 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 ## MySQL 兼容性
 
-* TiDB 在语法上兼容 MySQL，支持 `HASH`、`BTREE` 和 `RTREE` 等索引类型，但实际会忽略这些类型。
+* TiDB 在语法上兼容 MySQL，支持 `HASH`、`BTREE` 和 `RTREE` 等索引类型，但会忽略这些类型。
 * 不支持 `SPATIAL` 索引。
 * TiDB 自建版和 TiDB Cloud Dedicated 支持解析 `FULLTEXT` 语法，但不支持使用 `FULLTEXT` 索引。
 
     >**Note:**
     >
-    > 目前，只有部分 AWS 区域的 {{{ .starter }}} 和 {{{ .essential }}} 集群支持 [`FULLTEXT` 语法和索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)。
+    > 目前，只有部分 AWS 区域的 TiDB Cloud Starter 和 TiDB Cloud Essential 集群支持 [`FULLTEXT` 语法和索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)。
 
 * 不支持降序索引（与 MySQL 5.7 类似）。
 * 不支持为表添加 `CLUSTERED` 类型的主键。关于 `CLUSTERED` 类型主键的更多信息，参见 [聚簇索引](/clustered-indexes.md)。
-* 将 `PRIMARY KEY` 或 `UNIQUE INDEX` 作为 [全局索引](/partitioned-table.md#global-indexes) 并通过 `GLOBAL` 索引选项设置，是 TiDB 针对 [分区表](/partitioned-table.md) 的扩展功能，不兼容 MySQL。
+* 将 `PRIMARY KEY` 或 `UNIQUE INDEX` 通过 `GLOBAL` 索引选项设置为 [全局索引](/partitioned-table.md#global-indexes) 是 TiDB 针对 [分区表](/partitioned-table.md) 的扩展，不兼容 MySQL。
 
 ## 另请参阅
 
@@ -117,4 +117,4 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 * [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 * [EXPLAIN](/sql-statements/sql-statement-explain.md)
-* [TiDB 分布式执行框架（DXF）](/tidb-distributed-execution-framework.md)
+* [TiDB 分布式执行框架 (DXF)](/tidb-distributed-execution-framework.md)

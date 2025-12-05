@@ -1,16 +1,16 @@
 ---
-title: TiDB Cloud 专属版 Changefeed 计费
+title: TiDB Cloud Dedicated Changefeed 计费
 summary: 了解 TiDB Cloud 中 changefeed 的计费方式。
 aliases: ['/tidbcloud/tidb-cloud-billing-tcu']
 ---
 
-# TiDB Cloud 专属版 Changefeed 计费
+# TiDB Cloud Dedicated Changefeed 计费
 
-本文档介绍了 TiDB Cloud 专属版中 changefeed 的计费详情。
+本文档介绍了 TiDB Cloud Dedicated 中 changefeed 的计费详情。
 
 ## RCU 成本
 
-TiDB Cloud 专属版通过 TiCDC 复制能力单位（RCU，Replication Capacity Units）来衡量 [changefeed](/tidb-cloud/changefeed-overview.md) 的容量。当你为集群 [创建 changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed) 时，可以选择合适的规格。RCU 越高，复制性能越好。你需要为这些 TiCDC changefeed RCU 支付费用。
+TiDB Cloud Dedicated 通过 TiCDC 复制能力单位（RCU，Replication Capacity Units）来衡量 [changefeed](/tidb-cloud/changefeed-overview.md) 的容量。当你为集群 [创建 changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed) 时，可以选择合适的规格。RCU 越高，复制性能越好。你需要为这些 TiCDC changefeed RCU 支付费用。
 
 ### TiCDC RCU 数量
 
