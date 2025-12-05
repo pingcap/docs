@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: d15f5014bb82e98db9f7954068275656fcc719db-->
+# 目录 <!--Corresponding EN commit: f88d6a9bcf7228f8f8483ee4f36a700d33878804-->
 
 ## 快速开始
 
@@ -226,7 +226,7 @@
     - [从云存储导入快照文件](/tidb-cloud/import-snapshot-files-serverless.md)
     - [使用 MySQL CLI 导入](/tidb-cloud/import-with-mysql-cli-serverless.md)
   - 参考
-    - [为 TiDB Cloud 配置外部存储访问](/tidb-cloud/serverless-external-storage.md)
+    - [为 TiDB Cloud 配置外部存储访问](/tidb-cloud/configure-external-storage-access.md)
     - [数据导入的命名约定](/tidb-cloud/naming-conventions-for-data-import.md)
     - [导入数据的 CSV 配置](/tidb-cloud/csv-config-for-import-data.md)
     - [排查从 Amazon S3 导入数据期间的访问被拒绝错误](/tidb-cloud/troubleshoot-import-access-denied-error.md)
@@ -486,6 +486,7 @@
     - [下推到 TiKV 的表达式列表](/functions-and-operators/expressions-pushed-down.md)
     - [TiDB 特有的函数](/functions-and-operators/tidb-functions.md)
   - [聚簇索引](/clustered-indexes.md)
+  - [全局索引](/global-indexes.md)
   - [约束](/constraints.md)
   - [生成列](/generated-columns.md)
   - [SQL 模式](/sql-mode.md)
@@ -667,7 +668,6 @@
   - [DDL 最佳实践](/ddl-introduction.md)
   - [数据索引不一致报错](/troubleshoot-data-inconsistency-errors.md)
   - [通知](/tidb-cloud/notifications.md)
-  - [术语表](/tidb-cloud/tidb-cloud-glossary.md)
 - 支持计划
   - [Connected Care 概述](/tidb-cloud/connected-care-overview.md)
   - [Connected Care 详情](/tidb-cloud/connected-care-detail.md)
@@ -682,6 +682,7 @@
   - [获取支持](/tidb-cloud/tidb-cloud-support.md)
 - 常见问题
   - [TiDB Cloud 常见问题](/tidb-cloud/tidb-cloud-faq.md)
+- [术语表](/tidb-cloud/tidb-cloud-glossary.md)
 
 ## 发布
 
