@@ -5,17 +5,17 @@ summary: Learn best practices for using TiDB partitioned tables to improve perfo
 
 # Best Practices for Using TiDB Partitioned Tables
 
-This guide introduces how to use partitioned tables in TiDB to improve performance, simplify data management, and handle large-scale datasets efficiently.
+This guide describes how to use partitioned tables in TiDB to improve performance, simplify data management, and handle large-scale datasets efficiently.
 
-Partitioned tables in TiDB offer a versatile approach to managing large datasets, improving query efficiency, facilitating bulk data deletion, and alleviating write hotspot issues. By dividing data into logical segments, TiDB can leverage partition pruning to skip irrelevant data during query execution, reducing resource consumption and accelerating performance, particularly in Online Analytical Processing (OLAP) workloads with massive datasets.
+Partitioned tables in TiDB provide a versatile approach to managing large datasets, improving query efficiency, facilitating bulk data deletion, and alleviating write hotspot issues. By dividing data into logical segments, TiDB can leverage partition pruning to skip irrelevant data during query execution. This reduces resource consumption and improves performance, particularly in Online Analytical Processing (OLAP) workloads with large datasets.
 
-A common use case is range partitioning combined with local indexes, which enables efficient historical data cleanup through operations such as [`ALTER TABLE ... DROP PARTITION`](/sql-statements/sql-statement-alter-table.md). This method removes obsolete data almost instantly and preserves high query efficiency when filtering by the partition key. However, after migrating from non-partitioned tables to partitioned tables, queries that cannot benefit from partition pruning, such as those lacking partition key filters, might experience degraded performance. In such cases, you can use [global indexes](/partitioned-table.md#global-indexes) to mitigate the performance impact by providing a unified index structure across all partitions.
+A common use case is combining [Range partitioning](/partitioned-table.md#range-partitioning) with local indexes to efficiently clean up historical data through operations such as [`ALTER TABLE ... DROP PARTITION`](/sql-statements/sql-statement-alter-table.md). This method removes obsolete data almost instantly and preserves high query efficiency when filtering by the partition key. However, after migrating from non-partitioned tables to partitioned tables, queries that cannot benefit from partition pruning, such as those lacking partition key filters, might experience degraded performance. In such cases, you can use [global indexes](/partitioned-table.md#global-indexes) to mitigate the performance impact by providing a unified index structure across all partitions.
 
-Another scenario is using hash or key partitioning to address write hotspot issues, especially in workloads relying on [`AUTO_INCREMENT` style IDs](/auto-increment.md) where sequential inserts can overload specific TiKV regions. Distributing writes across partitions helps balance workload, but similar to range partitioning, queries without partition-pruning conditions might suffer performance drawbacks again, a situation where global indexes can help.
+Another scenario is using Hash or Key partitioning to address write hotspot issues, especially in workloads that use [`AUTO_INCREMENT`](/auto-increment.md) IDs where sequential inserts can overload specific TiKV Regions. Distributing writes across partitions helps balance workload, but similar to Range partitioning, queries without partition-pruning conditions might suffer performance drawbacks again, a situation where global indexes can help.
 
-While partitioning offers clear benefits, it also presents common challenges, such as hotspots caused by newly created range partitions. To address this issue, TiDB provides solutions for automatic or manual region pre-splitting, ensuring balanced data distribution and avoiding bottlenecks.
+Although partitioning provides clear benefits, it also introduces challenges. For example, newly created Range partitions can create temporary hotspots. To address this issue, TiDB supports automatic or manual Region pre-splitting to balance data distribution and avoid bottlenecks.
 
-This document examines partitioned tables in TiDB from multiple perspectives, including query optimization, data cleanup, write scalability, and index management. Through detailed scenarios and best practices, it provides practical guidance on optimizing partitioned table design and performance tuning in TiDB.  
+This document examines partitioned tables in TiDB from several perspectives, including query optimization, data cleanup, write scalability, and index management. It also provides practical guidance on how to optimize partitioned table design and tune performance in TiDB through detailed scenarios and best practices.
 
 > **Note:** 
 >
@@ -383,12 +383,12 @@ CREATE TABLE server_info (
 PARTITION BY KEY (id) PARTITIONS 16;
 ```
 
-### Pros
+### Advantages
 
 - Balanced write workload: hotspots are spread across multiple partitions, and therefore multiple Regions, reducing contention and improving insert performance.
 - Query optimization via partition pruning: if queries already filter by the partition key, TiDB can prune unused partitions, scanning less data and improving query speed.
 
-### Cons
+### Disadvantages
 
 There are some risks when using partitioned tables.
 
@@ -446,12 +446,12 @@ The following table shows the summary information for non-clustered and clustere
 
 ### Solutions for non-clustered partitioned tables
 
-#### Pros
+#### Advantages
 
 - When a new partition is created in a non-clustered partitioned table configured with [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) and [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions), the regions can be automatically pre-split, significantly reducing manual intervention.
 - Lower operational overhead.
 
-#### Cons
+#### Disadvantages
 
 Queries using **Point Get** or **Table Range Scan** require more table lookups, which can degrade read performance for such query types.
 
@@ -548,11 +548,11 @@ SHOW TABLE employees PARTITION (p4) regions;
 
 ### Solutions for clustered partitioned tables
 
-#### Pros
+#### Advantages
 
 Queries using **Point Get** or **Table Range Scan** do not need additional lookups, resulting in better read performance.
 
-#### Cons
+#### Disadvantages
 
 Manual region splitting is required when creating new partitions, increasing operational complexity.
 
@@ -566,12 +566,12 @@ To address hotspot issues caused by new range partitions, you can perform the st
 
 ### Solutions for clustered non-partitioned tables
 
-#### Pros
+#### Advantages
 
 - No hotspot risks from new range partitions.
 - Provides good read performance for point and range queries.
 
-#### Cons
+#### Disadvantages
 
 You cannot use `DROP PARTITION` to clean up large volumes of old data to improve deletion efficiency.
 
