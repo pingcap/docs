@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: 2b4f8e24a783e0e2ac492ad9a50df800b400db7b-->
+# 目录 <!--Corresponding EN commit: b5743ac222ce25c5dbf99835ab3ad06b577896e6-->
 
 ## 快速开始
 
@@ -164,6 +164,7 @@
     - 第三方指标集成
       - [概览](/tidb-cloud/third-party-monitoring-integrations.md)
       - [迁移 Datadog 和 New Relic 集成](/tidb-cloud/migrate-metrics-integrations.md)
+      - [迁移 Prometheus 集成](/tidb-cloud/migrate-prometheus-metrics-integrations.md)
     - [Connected：Clinic 服务](/tidb-cloud/tidb-cloud-clinic.md)
   - 性能调优
     - [概览](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
@@ -429,6 +430,7 @@
     - [`BACKUP`](/sql-statements/sql-statement-backup.md)
     - [`BATCH`](/sql-statements/sql-statement-batch.md)
     - [`BEGIN`](/sql-statements/sql-statement-begin.md)
+    - [`CANCEL DISTRIBUTION JOB`](/sql-statements/sql-statement-cancel-distribution-job.md)
     - [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
     - [`COMMIT`](/sql-statements/sql-statement-commit.md)
     - [`CREATE [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)
@@ -446,6 +448,7 @@
     - [`DELETE`](/sql-statements/sql-statement-delete.md)
     - [`DESC`](/sql-statements/sql-statement-desc.md)
     - [`DESCRIBE`](/sql-statements/sql-statement-describe.md)
+    - [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md)
     - [`DO`](/sql-statements/sql-statement-do.md)
     - [`DROP [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-drop-binding.md)
     - [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md)
@@ -509,6 +512,7 @@
     - [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)
     - [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)
     - [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)
+    - [`SHOW DISTRIBUTION JOBS`](/sql-statements/sql-statement-show-distribution-jobs.md)
     - [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)
     - [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md)
     - [`SHOW FIELDS FROM`](/sql-statements/sql-statement-show-fields-from.md)
@@ -531,6 +535,7 @@
     - [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)
     - [`SHOW STATS_TOPN`](/sql-statements/sql-statement-show-stats-topn.md)
     - [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)
+    - [`SHOW TABLE DISTRIBUTION`](/sql-statements/sql-statement-show-table-distribution.md)
     - [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md)
     - [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)
     - [`SHOW TABLE STATUS`](/sql-statements/sql-statement-show-table-status.md)
@@ -587,6 +592,7 @@
     - [集合运算](/functions-and-operators/set-operators.md)
     - [下推到 TiKV 的表达式列表](/functions-and-operators/expressions-pushed-down.md)
   - [聚簇索引](/clustered-indexes.md)
+  - [全局索引](/global-indexes.md)
   - [约束](/constraints.md)
   - [生成列](/generated-columns.md)
   - [SQL 模式](/sql-mode.md)
@@ -736,10 +742,10 @@
   - [表库过滤](/table-filter.md)
   - [外部存储服务的 URI 格式](/external-storage-uri.md)
   - [DDL 最佳实践](/ddl-introduction.md)
+  - [内嵌于 DDL 的 Analyze](/ddl_embedded_analyze.md)
   - [数据批量处理](/batch-processing.md)
   - [数据索引不一致报错](/troubleshoot-data-inconsistency-errors.md)
   - [通知](/tidb-cloud/notifications.md)
-  - [术语表](/tidb-cloud/tidb-cloud-glossary.md)
 - 支持计划
   - [Connected Care 概述](/tidb-cloud/connected-care-overview.md)
   - [Connected Care 详情](/tidb-cloud/connected-care-detail.md)
@@ -758,6 +764,7 @@
   - [获取支持](/tidb-cloud/tidb-cloud-support.md)
 - 常见问题
   - [TiDB Cloud 常见问题](/tidb-cloud/tidb-cloud-faq.md)
+- [术语表](/tidb-cloud/tidb-cloud-glossary.md)
 
 ## 发布
 
