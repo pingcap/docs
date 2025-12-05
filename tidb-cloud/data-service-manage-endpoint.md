@@ -44,7 +44,7 @@ Data Service（测试版）中的端点是一个可以自定义执行 SQL 语句
 
         对于你选择的每个操作，TiDB Cloud Data Service 将生成一个相应的端点。如果你选择批量操作（如 `POST（批量创建）`），生成的端点允许你在单个请求中操作多行数据。
 
-        如果你选择的表包含[向量数据类型](/tidb-cloud/vector-search-data-types.md)，你可以启用**向量搜索操作**选项并选择向量距离函数，以生成一个向量搜索端点，该端点会根据你选择的距离函数自动计算向量距离。支持的[向量距离函数](/tidb-cloud/vector-search-functions-and-operators.md)包括：
+        如果你选择的表包含[向量数据类型](/vector-search/vector-search-data-types.md)，你可以启用**向量搜索操作**选项并选择向量距离函数，以生成一个向量搜索端点，该端点会根据你选择的距离函数自动计算向量距离。支持的[向量距离函数](/vector-search/vector-search-functions-and-operators.md)包括：
 
         - `VEC_L2_DISTANCE`（默认）：计算两个向量之间的 L2 距离（欧几里得距离）。
         - `VEC_COSINE_DISTANCE`：计算两个向量之间的余弦距离。
@@ -518,7 +518,7 @@ Data Service（测试版）中的端点是一个可以自定义执行 SQL 语句
 
         对于你选择的每个操作，TiDB Cloud Data Service 将生成一个相应的端点。如果你选择批量操作（如 `POST（批量创建）`），生成的端点允许你在单个请求中操作多行数据。
 
-        如果你选择的表包含[向量数据类型](/tidb-cloud/vector-search-data-types.md)，你可以启用**向量搜索操作**选项并选择向量距离函数，以生成一个向量搜索端点，该端点会根据你选择的距离函数自动计算向量距离。支持的[向量距离函数](/tidb-cloud/vector-search-functions-and-operators.md)包括：
+        如果你选择的表包含[向量数据类型](/vector-search/vector-search-data-types.md)，你可以启用**向量搜索操作**选项并选择向量距离函数，以生成一个向量搜索端点，该端点会根据你选择的距离函数自动计算向量距离。支持的[向量距离函数](/vector-search/vector-search-functions-and-operators.md)包括：
 
         - `VEC_L2_DISTANCE`（默认）：计算两个向量之间的 L2 距离（欧几里得距离）。
         - `VEC_COSINE_DISTANCE`：计算两个向量之间的余弦距离。

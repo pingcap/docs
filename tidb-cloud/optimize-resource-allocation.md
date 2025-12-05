@@ -7,13 +7,13 @@ summary: 了解如何优化 TiDB Cloud Dedicated 集群的资源分配。
 
 作为一个混合事务和分析处理（HTAP）数据库，[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群可以支持多个业务应用，每个应用都有不同的服务质量（QoS）要求。在某些情况下，你可能需要为高优先级应用分配更多资源以维持可接受的延迟水平。
 
-TiDB Cloud Dedicated 提供资源优化功能，包括[资源控制](/tidb-resource-control.md)和 [TiDB 节点组](/tidb-cloud/tidb-node-group-overview.md)功能。这些功能帮助你在多业务场景中高效分配资源。
+TiDB Cloud Dedicated 提供资源优化功能，包括[资源控制](/tidb-resource-control-ru-groups.md)和 [TiDB 节点组](/tidb-cloud/tidb-node-group-overview.md)功能。这些功能帮助你在多业务场景中高效分配资源。
 
 ## 使用资源控制
 
-[资源控制](/tidb-resource-control.md)允许你将 TiDB Cloud Dedicated 集群的存储节点（TiKV 或 TiFlash）划分为多个逻辑组。在混合工作负载的系统中，你可以将工作负载分配到不同的资源组，以确保资源隔离并满足 QoS 要求。
+[资源控制](/tidb-resource-control-ru-groups.md)允许你将 TiDB Cloud Dedicated 集群的存储节点（TiKV 或 TiFlash）划分为多个逻辑组。在混合工作负载的系统中，你可以将工作负载分配到不同的资源组，以确保资源隔离并满足 QoS 要求。
 
-如果集群出现意外的 SQL 性能问题，你可以使用 [SQL 绑定](/sql-statements/sql-statement-create-binding.md)或[管理失控查询](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)，配合资源组来临时限制特定 SQL 语句的资源消耗。
+如果集群出现意外的 SQL 性能问题，你可以使用 [SQL 绑定](/sql-statements/sql-statement-create-binding.md)或[管理资源消耗超出预期的查询](/tidb-resource-control-runaway-queries.md)，配合资源组来临时限制特定 SQL 语句的资源消耗。
 
 通过有效使用资源控制，你可以减少集群数量，简化运维，并降低管理成本。
 

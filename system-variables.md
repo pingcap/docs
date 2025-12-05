@@ -2560,7 +2560,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - 适用于 hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)：否
 - 默认值：`ON`
 - 类型：布尔型
-- 此变量是 [资源控制功能](/tidb-resource-control.md) 的开关。当此变量设置为 `ON` 时，TiDB 集群可以基于资源组隔离应用程序资源。
+- 此变量是 [资源控制功能](/tidb-resource-control-ru-groups.md) 的开关。当此变量设置为 `ON` 时，TiDB 集群可以基于资源组隔离应用程序资源。
 
 ### tidb_enable_reuse_chunk <span class="version-mark">v6.4.0 新增</span>
 
@@ -2927,7 +2927,7 @@ MPP 是 TiFlash 引擎提供的分布式计算框架，支持节点间的数据�
 
 > **注意：**
 >
-> 从 v6.6.0 版本开始，TiDB 支持 [资源控制](/tidb-resource-control.md)。你可以使用此功能在不同的资源组中以不同的优先级执行 SQL 语句。通过为这些资源组配置适当的配额和优先级，你可以更好地控制具有不同优先级的 SQL 语句的调度。启用资源控制后，语句优先级将不再生效。建议你使用 [资源控制](/tidb-resource-control.md) 来管理不同 SQL 语句的资源使用情况。
+> TiDB 从 v6.6.0 版本开始支持[使用资源管控 (Resource Control) 实现资源组限制和流控](/tidb-resource-control-ru-groups.md)功能。该功能可以将不同优先级的语句放在不同的资源组中执行，并为这些资源组分配不同的配额和优先级，可以达到更好的资源管控效果。在开启资源管控功能后，语句的调度主要受资源组的控制，`PRIORITY` 将不再生效。建议在支持资源管控的版本优先使用资源管控功能。
 
 ### tidb_gc_concurrency <span class="version-mark">v5.0 新增</span>
 
@@ -3391,7 +3391,7 @@ MPP 是 TiFlash 引擎提供的分布式计算框架，支持节点间的数据�
     - `start_ts`: 事务的开始时间戳。
     - `for_update_ts`: 先前执行的 DML 语句的 `for_update_ts`。这是一个 TiDB 内部术语，用于测试。通常，你可以忽略此信息。
     - `error`: 错误信息（如果有）。
-    - `ru_consumption`: 执行语句消耗的 [RU](/tidb-resource-control.md#what-is-request-unit-ru)。
+    - `ru_consumption`: 执行语句消耗的 [RU](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)。
 
 ### tidb_last_txn_info <span class="version-mark">v4.0.9 新增</span>
 
@@ -5025,7 +5025,7 @@ SHOW WARNINGS;
 - 类型：String
 - 默认值：`""`
 - 可选值：`"ddl"`, `"stats"`, `"br"`, `"lightning"`, `"background"`
-- 此变量用于显式指定当前会话的任务类型，该类型由 [资源控制](/tidb-resource-control.md) 识别和控制。例如：`SET @@tidb_request_source_type = "background"`。
+- 此变量用于显式指定当前会话的任务类型，该类型由 [资源控制](/tidb-resource-control-ru-groups.md) 识别和控制。例如：`SET @@tidb_request_source_type = "background"`。
 
 ### tidb_retry_limit
 
