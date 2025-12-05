@@ -5,7 +5,7 @@ summary: 了解如何在 TiDB Cloud 中启用或禁用用户可控的日志脱�
 
 # 用户可控的日志脱敏
 
-用户可控的日志脱敏功能允许你管理 <CustomContent plan="dedicated">[TiDB Cloud 专属版](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)集群</CustomContent><CustomContent plan="premium">TiDB Cloud 高级版实例</CustomContent>日志中敏感数据的可见性。通过切换该脱敏功能，你可以保护你的信息，在运维需求与安全之间取得平衡，并控制在 <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>日志中显示的内容。
+用户可控的日志脱敏功能允许你管理 <CustomContent plan="dedicated">[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群</CustomContent><CustomContent plan="premium">TiDB Cloud 高级版实例</CustomContent>日志中敏感数据的可见性。通过切换该脱敏功能，你可以保护你的信息，在运维需求与安全之间取得平衡，并控制在 <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>日志中显示的内容。
 
 日志脱敏功能默认启用，确保运行日志和执行计划中的敏感信息被隐藏。如果你需要获取更详细的日志信息以便 <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>维护或 SQL 调优，可以随时禁用该功能。
 

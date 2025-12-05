@@ -9,15 +9,11 @@ summary: 了解如何在 TiDB Cloud 中使用 Jina AI 嵌入模型。
 
 > **Note:**
 >
-> 目前，[Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) 仅在以下 AWS 区域的 TiDB Cloud Starter 集群中可用：
->
-> - `Frankfurt (eu-central-1)`
-> - `Oregon (us-west-2)`
-> - `N. Virginia (us-east-1)`
+> [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) 仅在托管于 AWS 的 TiDB Cloud Starter 集群上可用。
 
 ## 可用模型
 
-如果你自带 Jina AI API key（BYOK），所有 Jina AI 模型均可通过 `jina_ai/` 前缀使用。例如：
+如果你自带 Jina AI API 密钥（BYOK），则所有 Jina AI 模型均可通过 `jina_ai/` 前缀使用。例如：
 
 **jina-embeddings-v4**
 
@@ -27,7 +23,7 @@ summary: 了解如何在 TiDB Cloud 中使用 Jina AI 嵌入模型。
 - 最大输入文本 tokens：32,768
 - 价格：由 Jina AI 收费
 - 由 TiDB Cloud 托管：❌
-- 自带密钥：✅
+- 支持自带密钥：✅
 
 **jina-embeddings-v3**
 
@@ -37,7 +33,7 @@ summary: 了解如何在 TiDB Cloud 中使用 Jina AI 嵌入模型。
 - 最大输入文本 tokens：8,192
 - 价格：由 Jina AI 收费
 - 由 TiDB Cloud 托管：❌
-- 自带密钥：✅
+- 支持自带密钥：✅
 
 完整可用模型列表请参见 [Jina AI Documentation](https://jina.ai/embeddings/)。
 
@@ -93,9 +89,9 @@ LIMIT 2;
 
 ## 选项
 
-所有 [Jina AI options](https://jina.ai/embeddings/) 均可通过 `EMBED_TEXT()` 函数的 `additional_json_options` 参数进行支持。
+所有 [Jina AI options](https://jina.ai/embeddings/) 均可通过 `EMBED_TEXT()` 函数的 `additional_json_options` 参数进行设置。
 
-**示例：为更好的性能指定 "downstream task"**
+**示例：为更优性能指定 “下游任务”**
 
 ```sql
 CREATE TABLE sample (

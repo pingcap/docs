@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/export-data-from-tidb-cloud']
 
 # 迁移与导入概览
 
-你可以将数据从多种数据源迁移到 TiDB Cloud。本文档将对数据迁移场景进行概述。
+你可以将数据从多种数据源迁移到 TiDB Cloud。本文档将概述数据迁移的相关场景。
 
 ## 从 MySQL 兼容数据库迁移数据
 
@@ -14,7 +14,7 @@ aliases: ['/tidbcloud/export-data-from-tidb-cloud']
 
 - 使用 Data Migration 迁移 MySQL 兼容数据库
 
-    TiDB 对 MySQL 具有高度兼容性。你可以在 TiDB Cloud 控制台中使用 Data Migration，将任何 MySQL 兼容数据库的数据平滑迁移到 TiDB Cloud。更多信息，参见 [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)。
+    TiDB 与 MySQL 高度兼容。你可以在 TiDB Cloud 控制台中使用 Data Migration，将数据从任意 MySQL 兼容数据库平滑迁移到 TiDB Cloud。更多信息，参见 [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)。
 
 - 使用 AWS DMS 进行迁移
 
@@ -29,7 +29,7 @@ aliases: ['/tidbcloud/export-data-from-tidb-cloud']
 
 - 从 TiDB 自建集群迁移
 
-    你可以通过 Dumpling 和 TiCDC，将自建 TiDB 集群的数据迁移到 TiDB Cloud（AWS）。更多信息，参见 [Migrate from TiDB Self-Managed to TiDB Cloud](/tidb-cloud/migrate-from-op-tidb.md)。
+    你可以通过 Dumpling 和 TiCDC，将数据从自建的 TiDB 集群迁移到 TiDB Cloud（AWS）。更多信息，参见 [Migrate from TiDB Self-Managed to TiDB Cloud](/tidb-cloud/migrate-from-op-tidb.md)。
 
 ## 从文件导入数据到 TiDB Cloud
 
@@ -41,21 +41,21 @@ aliases: ['/tidbcloud/export-data-from-tidb-cloud']
 
 - 导入示例数据（SQL 文件）到 TiDB Cloud
 
-    你可以将示例数据（SQL 文件）导入到 TiDB Cloud，以便快速熟悉 TiDB Cloud 的界面和导入流程。更多信息，参见 [Import Sample Data to TiDB Cloud Serverless](/tidb-cloud/import-sample-data-serverless.md) 和 [Import Sample Data to TiDB Cloud Dedicated](/tidb-cloud/import-sample-data.md)。
+    你可以将示例数据（SQL 文件）导入到 TiDB Cloud，以便快速熟悉 TiDB Cloud 的界面和导入流程。更多信息，参见 [Import Sample Data to TiDB Cloud Starter or Essential](/tidb-cloud/import-sample-data-serverless.md) 和 [Import Sample Data to TiDB Cloud Dedicated](/tidb-cloud/import-sample-data.md)。
 
-- 从 Amazon S3、Google Cloud Storage（GCS）或 Azure Blob Storage 导入 CSV 文件到 TiDB Cloud
+- 从 Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage 或阿里云 OSS 导入 CSV 文件到 TiDB Cloud
 
-    你可以从 Amazon S3、Google Cloud Storage（GCS）或 Azure Blob Storage 导入 CSV 文件到 TiDB Cloud。更多信息，参见 [Import CSV Files from Cloud Storage into TiDB Cloud Serverless](/tidb-cloud/import-csv-files-serverless.md) 和 [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md)。
+    你可以将 CSV 文件从 Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage 或阿里云 OSS 导入到 TiDB Cloud。更多信息，参见 [Import CSV Files from Cloud Storage into TiDB Cloud Starter or Essential](/tidb-cloud/import-csv-files-serverless.md) 和 [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md)。
 
-- 从 Amazon S3、Google Cloud Storage（GCS）或 Azure Blob Storage 导入 Apache Parquet 文件到 TiDB Cloud
+- 从 Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage 或阿里云 OSS 导入 Apache Parquet 文件到 TiDB Cloud
 
-    你可以从 Amazon S3、Google Cloud Storage（GCS）或 Azure Blob Storage 导入 Parquet 文件到 TiDB Cloud。更多信息，参见 [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Serverless](/tidb-cloud/import-parquet-files-serverless.md) 和 [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-parquet-files.md)。
+    你可以将 Parquet 文件从 Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage 或阿里云 OSS 导入到 TiDB Cloud。更多信息，参见 [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Starter or Essential](/tidb-cloud/import-parquet-files-serverless.md) 和 [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-parquet-files.md)。
 
 ## 参考
 
 ### 配置云存储访问
 
-如果你的源数据存储在 Amazon S3、Google Cloud Storage（GCS）桶或 Azure Blob Storage 容器中，在将数据导入或迁移到 TiDB Cloud 之前，需要先配置存储访问。更多信息，参见 [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md) 和 [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/dedicated-external-storage.md)。
+如果你的源数据存储在 Amazon S3、Google Cloud Storage（GCS）桶、Azure Blob Storage 容器或阿里云 OSS 桶中，在将数据导入或迁移到 TiDB Cloud 之前，需要先配置存储访问。更多信息，参见 [Configure External Storage Access for TiDB Cloud Starter or Essential](/tidb-cloud/configure-external-storage-access.md) 和 [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/dedicated-external-storage.md)。
 
 ### 数据导入命名规范
 

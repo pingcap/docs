@@ -9,27 +9,23 @@ summary: 了解如何在 TiDB Cloud 中使用 HuggingFace 嵌入模型。
 
 > **Note:**
 >
-> 目前，[Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) 仅在以下 AWS 区域的 TiDB Cloud Starter 集群中可用：
->
-> - `Frankfurt (eu-central-1)`
-> - `Oregon (us-west-2)`
-> - `N. Virginia (us-east-1)`
+> [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) 仅在托管于 AWS 的 TiDB Cloud Starter 集群上可用。
 
 ## 可用模型
 
-如果你自带 [HuggingFace Inference API](https://huggingface.co/docs/inference-providers/index) 密钥（BYOK），则可以使用带有 `huggingface/` 前缀的 HuggingFace 模型。
+如果你自带 [HuggingFace Inference API](https://huggingface.co/docs/inference-providers/index) 密钥（BYOK），则可以通过 `huggingface/` 前缀使用 HuggingFace 模型。
 
 为方便起见，以下章节以几个流行模型为例，展示如何结合 Auto Embedding 使用它们。完整可用模型列表请参见 [HuggingFace Models](https://huggingface.co/models?library=sentence-transformers&inference_provider=hf-inference&sort=trending)。请注意，并非所有模型都由 HuggingFace Inference API 提供，或始终可用。
 
 ## multilingual-e5-large
 
-- 名称：`huggingface/intfloat/multilingual-e5-large`
-- 维度：1024
-- 距离度量：Cosine，L2
-- 价格：由 HuggingFace 收费
-- TiDB Cloud 托管：❌
-- 支持自带密钥：✅
-- 项目主页：<https://huggingface.co/intfloat/multilingual-e5-large>
+- 名称: `huggingface/intfloat/multilingual-e5-large`
+- 维度: 1024
+- 距离度量: Cosine, L2
+- 价格: 由 HuggingFace 收费
+- TiDB Cloud 托管: ❌
+- 支持自带密钥: ✅
+- 项目主页: <https://huggingface.co/intfloat/multilingual-e5-large>
 
 示例：
 
@@ -67,13 +63,13 @@ LIMIT 2;
 
 ## bge-m3
 
-- 名称：`huggingface/BAAI/bge-m3`
-- 维度：1024
-- 距离度量：Cosine，L2
-- 价格：由 HuggingFace 收费
-- TiDB Cloud 托管：❌
-- 支持自带密钥：✅
-- 项目主页：<https://huggingface.co/BAAI/bge-m3>
+- 名称: `huggingface/BAAI/bge-m3`
+- 维度: 1024
+- 距离度量: Cosine, L2
+- 价格: 由 HuggingFace 收费
+- TiDB Cloud 托管: ❌
+- 支持自带密钥: ✅
+- 项目主页: <https://huggingface.co/BAAI/bge-m3>
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_HUGGINGFACE_API_KEY = 'your-huggingface-api-key-here';
@@ -109,13 +105,13 @@ LIMIT 2;
 
 ## all-MiniLM-L6-v2
 
-- 名称：`huggingface/sentence-transformers/all-MiniLM-L6-v2`
-- 维度：384
-- 距离度量：Cosine，L2
-- 价格：由 HuggingFace 收费
-- TiDB Cloud 托管：❌
-- 支持自带密钥：✅
-- 项目主页：<https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2>
+- 名称: `huggingface/sentence-transformers/all-MiniLM-L6-v2`
+- 维度: 384
+- 距离度量: Cosine, L2
+- 价格: 由 HuggingFace 收费
+- TiDB Cloud 托管: ❌
+- 支持自带密钥: ✅
+- 项目主页: <https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2>
 
 示例：
 
@@ -153,13 +149,13 @@ LIMIT 2;
 
 ## all-mpnet-base-v2
 
-- 名称：`huggingface/sentence-transformers/all-mpnet-base-v2`
-- 维度：768
-- 距离度量：Cosine，L2
-- 价格：由 HuggingFace 收费
-- TiDB Cloud 托管：❌
-- 支持自带密钥：✅
-- 项目主页：<https://huggingface.co/sentence-transformers/all-mpnet-base-v2>
+- 名称: `huggingface/sentence-transformers/all-mpnet-base-v2`
+- 维度: 768
+- 距离度量: Cosine, L2
+- 价格: 由 HuggingFace 收费
+- TiDB Cloud 托管: ❌
+- 支持自带密钥: ✅
+- 项目主页: <https://huggingface.co/sentence-transformers/all-mpnet-base-v2>
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_HUGGINGFACE_API_KEY = 'your-huggingface-api-key-here';
@@ -197,16 +193,16 @@ LIMIT 2;
 
 > **Note:**
 >
-> HuggingFace Inference API 对该模型的支持可能不稳定。
+> HuggingFace Inference API 对该模型可能不稳定。
 
-- 名称：`huggingface/Qwen/Qwen3-Embedding-0.6B`
-- 维度：1024
-- 距离度量：Cosine，L2
-- 最大输入文本 tokens：512
-- 价格：由 HuggingFace 收费
-- TiDB Cloud 托管：❌
-- 支持自带密钥：✅
-- 项目主页：<https://huggingface.co/Qwen/Qwen3-Embedding-0.6B>
+- 名称: `huggingface/Qwen/Qwen3-Embedding-0.6B`
+- 维度: 1024
+- 距离度量: Cosine, L2
+- 最大输入文本 tokens 数: 512
+- 价格: 由 HuggingFace 收费
+- TiDB Cloud 托管: ❌
+- 支持自带密钥: ✅
+- 项目主页: <https://huggingface.co/Qwen/Qwen3-Embedding-0.6B>
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_HUGGINGFACE_API_KEY = 'your-huggingface-api-key-here';

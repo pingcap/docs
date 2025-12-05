@@ -9,17 +9,13 @@ summary: 了解如何在 TiDB Cloud 中使用 Amazon Titan 嵌入模型。
 
 > **Note:**
 >
-> 目前，[Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) 仅在以下 AWS 区域的 TiDB Cloud Starter 集群中可用：
->
-> - `Frankfurt (eu-central-1)`
-> - `Oregon (us-west-2)`
-> - `N. Virginia (us-east-1)`
+> [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) 仅适用于托管在 AWS 上的 TiDB Cloud Starter 集群。
 
 ## 可用模型
 
 TiDB Cloud 原生提供以下 [Amazon Titan 嵌入模型](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html)。无需 API 密钥。
 
-**Amazon Titan Text Embedding V2 model**
+**Amazon Titan Text Embedding V2 模型**
 
 - 名称：`tidbcloud_free/amazon/titan-embed-text-v2`
 - 维度：1024（默认）、512、256
@@ -83,8 +79,8 @@ LIMIT 2;
 
 你可以通过 `EMBED_TEXT()` 函数的 `additional_json_options` 参数指定以下选项：
 
-- `normalize`（可选）：是否对输出的 embedding 进行归一化。默认为 `true`。
-- `dimensions`（可选）：输出 embedding 的维度。支持的取值：`1024`（默认）、`512`、`256`。
+- `normalize`（可选）：是否对输出嵌入向量进行归一化。默认为 `true`。
+- `dimensions`（可选）：输出嵌入向量的维度。支持的取值：`1024`（默认）、`512`、`256`。
 
 **示例：使用其他维度**
 

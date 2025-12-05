@@ -11,7 +11,7 @@ TiDB Cloud 支持你将数据从 TiDB Cloud Starter 或 Essential 集群导出�
 
 - 便捷性：导出服务提供了简单易用的方式从集群导出数据，无需额外的工具或资源。
 - 隔离性：导出服务使用独立的计算资源，确保与在线服务资源的隔离。
-- 一致性：导出服务保证导出数据的一致性且不会加锁，不会影响你的在线服务。
+- 一致性：导出服务保证导出数据的一致性且不会加锁，不影响你的在线服务。
 
 > **注意：**
 >
@@ -35,7 +35,7 @@ TiDB Cloud 支持你将数据从 TiDB Cloud Starter 或 Essential 集群导出�
 
 ### 本地文件
 
-要将数据从 TiDB Cloud 集群导出到本地文件，你需要 [使用 TiDB Cloud 控制台导出数据](#export-data-to-a-local-file) 或 [使用 TiDB Cloud CLI 导出数据](/tidb-cloud/ticloud-serverless-export-create.md)，然后通过 TiDB Cloud CLI 下载导出的数据。
+要将数据从 TiDB Cloud 集群导出到本地文件，你需要 [使用 TiDB Cloud 控制台导出数据](#export-data-to-a-local-file) 或 [使用 TiDB Cloud CLI](/tidb-cloud/ticloud-serverless-export-create.md) 导出数据，然后通过 TiDB Cloud CLI 下载导出的数据。
 
 导出到本地文件有以下限制：
 
@@ -50,9 +50,9 @@ TiDB Cloud 支持你将数据从 TiDB Cloud Starter 或 Essential 集群导出�
 - URI：`s3://<bucket-name>/<folder-path>/`
 - 以下访问凭证之一：
     - [访问密钥](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)：确保该访问密钥拥有 `s3:PutObject` 和 `s3:ListBucket` 权限。
-    - [角色 ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html)：确保该角色 ARN（Amazon Resource Name）拥有 `s3:PutObject` 和 `s3:ListBucket` 权限。注意，只有托管在 AWS 上的集群支持角色 ARN。
+    - [角色 ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html)：确保该角色 ARN（Amazon Resource Name）拥有 `s3:PutObject` 和 `s3:ListBucket` 权限。注意，仅托管在 AWS 上的集群支持角色 ARN。
 
-更多信息，参见 [配置 Amazon S3 访问](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)。
+更多信息，参见 [配置 Amazon S3 访问](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)。
 
 ### Google Cloud Storage
 
@@ -61,7 +61,7 @@ TiDB Cloud 支持你将数据从 TiDB Cloud Starter 或 Essential 集群导出�
 - URI：`gs://<bucket-name>/<folder-path>/`
 - 访问凭证：你的 bucket 的 **base64 编码** [服务账号密钥](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)。确保该服务账号密钥拥有 `storage.objects.create` 权限。
 
-更多信息，参见 [配置 GCS 访问](/tidb-cloud/serverless-external-storage.md#configure-gcs-access)。
+更多信息，参见 [配置 GCS 访问](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)。
 
 ### Azure Blob Storage
 
@@ -70,7 +70,7 @@ TiDB Cloud 支持你将数据从 TiDB Cloud Starter 或 Essential 集群导出�
 - URI：`azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` 或 `https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
 - 访问凭证：你的 Azure Blob Storage 容器的 [共享访问签名（SAS）令牌](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)。确保该 SAS 令牌对 `Container` 和 `Object` 资源拥有 `Read` 和 `Write` 权限。
 
-更多信息，参见 [配置 Azure Blob Storage 访问](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)。
+更多信息，参见 [配置 Azure Blob Storage 访问](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)。
 
 ### 阿里云 OSS
 
@@ -79,7 +79,7 @@ TiDB Cloud 支持你将数据从 TiDB Cloud Starter 或 Essential 集群导出�
 - URI：`oss://<bucket-name>/<folder-path>/`
 - 访问凭证：你的阿里云账号的 [AccessKey 对](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)。确保该 AccessKey 对拥有 `oss:PutObject`、`oss:ListBuckets` 和 `oss:GetBucketInfo` 权限，以允许数据导出到 OSS bucket。
 
-更多信息，参见 [配置阿里云对象存储 OSS 访问](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access)。
+更多信息，参见 [配置阿里云对象存储 OSS 访问](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)。
 
 ## 导出选项
 
@@ -100,12 +100,12 @@ TiDB Cloud 支持你将数据从 TiDB Cloud Starter 或 Essential 集群导出�
     - `null-value`：指定导出数据中表示 NULL 值的字符串。默认值为 `\N`。
 - `Parquet`：以 Parquet 格式导出数据。
 
-导出的 schema 和数据文件遵循以下命名规范：
+导出的 schema 和数据遵循以下命名规范：
 
-| 项目            | 未压缩文件名                                        | 压缩后文件名                                                                                                          |
-|-----------------|----------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| 数据库 schema   | {database}-schema-create.sql                       | {database}-schema-create.sql.{compression-type}                                                                      |
-| 表 schema      | {database}.{table}-schema.sql                       | {database}.{table}-schema.sql.{compression-type}                                                                     |
+| 项目            | 未压缩文件名                                        | 压缩文件名                                                                                                          |
+|-----------------|-----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| 数据库 schema   | {database}-schema-create.sql                        | {database}-schema-create.sql.{compression-type}                                                                     |
+| 表 schema      | {database}.{table}-schema.sql                        | {database}.{table}-schema.sql.{compression-type}                                                                    |
 | 数据            | {database}.{table}.{0001}.{csv&#124;parquet&#124;sql} | {database}.{table}.{0001}.{csv&#124;sql}.{compression-type}<br/>{database}.{table}.{0001}.{compression-type}.parquet |
 
 ### 数据压缩
@@ -115,58 +115,58 @@ TiDB Cloud 支持你将数据从 TiDB Cloud Starter 或 Essential 集群导出�
 - `gzip`（默认）：使用 `gzip` 压缩导出数据。
 - `snappy`：使用 `snappy` 压缩导出数据。
 - `zstd`：使用 `zstd` 压缩导出数据。
-- `none`：不对导出数据进行压缩。
+- `none`：不压缩导出数据。
 
 你可以使用以下算法压缩导出的 Parquet 数据：
 
 - `zstd`（默认）：使用 `zstd` 压缩 Parquet 文件。
 - `gzip`：使用 `gzip` 压缩 Parquet 文件。
 - `snappy`：使用 `snappy` 压缩 Parquet 文件。
-- `none`：不对 Parquet 文件进行压缩。
+- `none`：不压缩 Parquet 文件。
 
 ### 数据类型转换
 
 当导出数据为 Parquet 格式时，TiDB 与 Parquet 之间的数据类型转换如下：
 
 | TiDB 数据类型 | Parquet 基础类型 | Parquet 逻辑类型                         |
-|----------------------------|-------------------------|------------------------------------------|
-| VARCHAR                    | BYTE_ARRAY              | String(UTF8)                             |
-| TIME                       | BYTE_ARRAY              | String(UTF8)                             |
-| TINYTEXT                   | BYTE_ARRAY              | String(UTF8)                             |
-| MEDIUMTEXT                 | BYTE_ARRAY              | String(UTF8)                             |
-| TEXT                       | BYTE_ARRAY              | String(UTF8)                             |
-| LONGTEXT                   | BYTE_ARRAY              | String(UTF8)                             |
-| SET                        | BYTE_ARRAY              | String(UTF8)                             |
-| JSON                       | BYTE_ARRAY              | String(UTF8)                             |
-| DATE                       | BYTE_ARRAY              | String(UTF8)                             |
-| CHAR                       | BYTE_ARRAY              | String(UTF8)                             |
-| VECTOR                     | BYTE_ARRAY              | String(UTF8)                             |
-| DECIMAL(1<=p<=9)           | INT32                   | DECIMAL(p,s)                             |
-| DECIMAL(10<=p<=18)         | INT64                   | DECIMAL(p,s)                             |
-| DECIMAL(p>=19)             | BYTE_ARRAY              | String(UTF8)                             |
-| ENUM                       | BYTE_ARRAY              | String(UTF8)                             |
+|----------------------------|-------------------------|----------------------------------------------|
+| VARCHAR                    | BYTE_ARRAY              | String(UTF8)                                 |
+| TIME                       | BYTE_ARRAY              | String(UTF8)                                 |
+| TINYTEXT                   | BYTE_ARRAY              | String(UTF8)                                 |
+| MEDIUMTEXT                 | BYTE_ARRAY              | String(UTF8)                                 |
+| TEXT                       | BYTE_ARRAY              | String(UTF8)                                 |
+| LONGTEXT                   | BYTE_ARRAY              | String(UTF8)                                 |
+| SET                        | BYTE_ARRAY              | String(UTF8)                                 |
+| JSON                       | BYTE_ARRAY              | String(UTF8)                                 |
+| DATE                       | BYTE_ARRAY              | String(UTF8)                                 |
+| CHAR                       | BYTE_ARRAY              | String(UTF8)                                 |
+| VECTOR                     | BYTE_ARRAY              | String(UTF8)                                 |
+| DECIMAL(1<=p<=9)           | INT32                   | DECIMAL(p,s)                                 |
+| DECIMAL(10<=p<=18)         | INT64                   | DECIMAL(p,s)                                 |
+| DECIMAL(p>=19)             | BYTE_ARRAY              | String(UTF8)                                 |
+| ENUM                       | BYTE_ARRAY              | String(UTF8)                                 |
 | TIMESTAMP                  | INT64                   | TIMESTAMP(unit=MICROS,isAdjustedToUTC=false) |
 | DATETIME                   | INT64                   | TIMESTAMP(unit=MICROS,isAdjustedToUTC=false) |
-| YEAR                       | INT32                   | /                                        |
-| TINYINT                    | INT32                   | /                                        |
-| UNSIGNED TINYINT           | INT32                   | /                                        |
-| SMALLINT                   | INT32                   | /                                        |
-| UNSIGNED SMALLINT          | INT32                   | /                                        |
-| MEDIUMINT                  | INT32                   | /                                        |
-| UNSIGNED MEDIUMINT         | INT32                   | /                                        |
-| INT                        | INT32                   | /                                        |
-| UNSIGNED INT               | FIXED_LEN_BYTE_ARRAY(9) | DECIMAL(20,0)                            |
-| BIGINT                     | FIXED_LEN_BYTE_ARRAY(9) | DECIMAL(20,0)                            |
-| UNSIGNED BIGINT            | BYTE_ARRAY              | String(UTF8)                             |
-| FLOAT                      | FLOAT                   | /                                        |
-| DOUBLE                     | DOUBLE                  | /                                        |
-| BLOB                       | BYTE_ARRAY              | /                                        |
-| TINYBLOB                   | BYTE_ARRAY              | /                                        |
-| MEDIUMBLOB                 | BYTE_ARRAY              | /                                        |
-| LONGBLOB                   | BYTE_ARRAY              | /                                        |
-| BINARY                     | BYTE_ARRAY              | /                                        |
-| VARBINARY                  | BYTE_ARRAY              | /                                        |
-| BIT                        | BYTE_ARRAY              | /                                        |
+| YEAR                       | INT32                   | /                                            |
+| TINYINT                    | INT32                   | /                                            |
+| UNSIGNED TINYINT           | INT32                   | /                                            |
+| SMALLINT                   | INT32                   | /                                            |
+| UNSIGNED SMALLINT          | INT32                   | /                                            |
+| MEDIUMINT                  | INT32                   | /                                            |
+| UNSIGNED MEDIUMINT         | INT32                   | /                                            |
+| INT                        | INT32                   | /                                            |
+| UNSIGNED INT               | FIXED_LEN_BYTE_ARRAY(9) | DECIMAL(20,0)                                |
+| BIGINT                     | FIXED_LEN_BYTE_ARRAY(9) | DECIMAL(20,0)                                |
+| UNSIGNED BIGINT            | BYTE_ARRAY              | String(UTF8)                                 |
+| FLOAT                      | FLOAT                   | /                                            |
+| DOUBLE                     | DOUBLE                  | /                                            |
+| BLOB                       | BYTE_ARRAY              | /                                            |
+| TINYBLOB                   | BYTE_ARRAY              | /                                            |
+| MEDIUMBLOB                 | BYTE_ARRAY              | /                                            |
+| LONGBLOB                   | BYTE_ARRAY              | /                                            |
+| BINARY                     | BYTE_ARRAY              | /                                            |
+| VARBINARY                  | BYTE_ARRAY              | /                                            |
+| BIT                        | BYTE_ARRAY              | /                                            |
 
 ## 示例
 
@@ -181,9 +181,9 @@ TiDB Cloud 支持你将数据从 TiDB Cloud Starter 或 Essential 集群导出�
    >
    > 你可以使用左上角的下拉框切换组织、项目和集群。
 
-2. 点击目标集群名称进入概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+2. 点击目标集群名称进入集群概览页，然后在左侧导航栏点击 **Data** > **Import**。
 
-3. 在 **Import** 页面，点击右上角的 **Export Data to**，选择 **Local File**。填写以下参数：
+3. 在 **Import** 页面，点击右上角的 **Export Data to**，从下拉列表中选择 **Local File**。填写以下参数：
 
     - **Task Name**：输入导出任务名称。默认值为 `SNAPSHOT_{snapshot_time}`。
     - **Exported Data**：选择你要导出的数据库和数据表。
@@ -192,7 +192,7 @@ TiDB Cloud 支持你将数据从 TiDB Cloud Starter 或 Essential 集群导出�
 
    > **提示：**
    >
-   > 如果你的集群之前未导入或导出过数据，需要在页面底部点击 **Click here to export data to...** 进行导出。
+   > 如果你的集群之前未进行过数据导入或导出操作，需要在页面底部点击 **Click here to export data to...** 进行导出。
 
 4. 点击 **Export**。
 
@@ -232,9 +232,9 @@ TiDB Cloud 支持你将数据从 TiDB Cloud Starter 或 Essential 集群导出�
    >
    > 你可以使用左上角的下拉框切换组织、项目和集群。
 
-2. 点击目标集群名称进入概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+2. 点击目标集群名称进入集群概览页，然后在左侧导航栏点击 **Data** > **Import**。
 
-3. 在 **Import** 页面，点击右上角的 **Export Data to**，选择 **Amazon S3**。填写以下参数：
+3. 在 **Import** 页面，点击右上角的 **Export Data to**，从下拉列表中选择 **Amazon S3**。填写以下参数：
 
     - **Task Name**：输入导出任务名称。默认值为 `SNAPSHOT_{snapshot_time}`。
     - **Exported Data**：选择你要导出的数据库和数据表。
@@ -242,8 +242,8 @@ TiDB Cloud 支持你将数据从 TiDB Cloud Starter 或 Essential 集群导出�
     - **Compression**：选择 **Gzip**、**Snappy**、**Zstd** 或 **None**。
     - **Folder URI**：输入 Amazon S3 的 URI，格式为 `s3://<bucket-name>/<folder-path>/`。
     - **Bucket Access**：选择以下访问凭证之一并填写凭证信息：
-        - **AWS Role ARN**：输入有权限访问 bucket 的角色 ARN。推荐使用 AWS CloudFormation 创建角色 ARN。更多信息参见 [配置 Amazon S3 访问](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)。
-        - **AWS Access Key**：输入有权限访问 bucket 的 Access Key ID 和 Access Key Secret。
+        - **AWS Role ARN**：输入有权限访问 bucket 的角色 ARN。推荐使用 AWS CloudFormation 创建角色 ARN。更多信息，参见 [配置 Amazon S3 访问](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)。
+        - **AWS Access Key**：输入有权限访问 bucket 的 access key ID 和 access key secret。
 
 4. 点击 **Export**。
 
@@ -258,8 +258,8 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 ```
 
 - `s3.uri`：Amazon S3 的 URI，格式为 `s3://<bucket-name>/<folder-path>/`。
-- `s3.access-key-id`：有权限访问 bucket 的用户的 Access Key ID。
-- `s3.secret-access-key`：有权限访问 bucket 的用户的 Access Key Secret。
+- `s3.access-key-id`：有权限访问 bucket 的用户的 access key ID。
+- `s3.secret-access-key`：有权限访问 bucket 的用户的 access key secret。
 - `s3.role-arn`：有权限访问 bucket 的角色 ARN。
 
 </div>
@@ -276,9 +276,9 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
    >
    > 你可以使用左上角的下拉框切换组织、项目和集群。
 
-2. 点击目标集群名称进入概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+2. 点击目标集群名称进入集群概览页，然后在左侧导航栏点击 **Data** > **Import**。
 
-3. 在 **Import** 页面，点击右上角的 **Export Data to**，选择 **Google Cloud Storage**。填写以下参数：
+3. 在 **Import** 页面，点击右上角的 **Export Data to**，从下拉列表中选择 **Google Cloud Storage**。填写以下参数：
 
     - **Task Name**：输入导出任务名称。默认值为 `SNAPSHOT_{snapshot_time}`。
     - **Exported Data**：选择你要导出的数据库和数据表。
@@ -314,16 +314,16 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
    >
    > 你可以使用左上角的下拉框切换组织、项目和集群。
 
-2. 点击目标集群名称进入概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+2. 点击目标集群名称进入集群概览页，然后在左侧导航栏点击 **Data** > **Import**。
 
-3. 在 **Import** 页面，点击右上角的 **Export Data to**，选择 **Azure Blob Storage**。填写以下参数：
+3. 在 **Import** 页面，点击右上角的 **Export Data to**，从下拉列表中选择 **Azure Blob Storage**。填写以下参数：
 
     - **Task Name**：输入导出任务名称。默认值为 `SNAPSHOT_{snapshot_time}`。
     - **Exported Data**：选择你要导出的数据库和数据表。
     - **Data Format**：选择 **SQL**、**CSV** 或 **Parquet**。
     - **Compression**：选择 **Gzip**、**Snappy**、**Zstd** 或 **None**。
     - **Folder URI**：输入 Azure Blob Storage 的 URI，格式为 `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`。
-    - **SAS Token**：输入有权限访问容器的 SAS 令牌。推荐使用 [Azure ARM 模板](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/) 创建 SAS 令牌。更多信息参见 [配置 Azure Blob Storage 访问](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)。
+    - **SAS Token**：输入有权限访问容器的 SAS token。推荐使用 [Azure ARM 模板](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/) 创建 SAS token。更多信息，参见 [配置 Azure Blob Storage 访问](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)。
 
 4. 点击 **Export**。
 
@@ -336,7 +336,7 @@ ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azbl
 ```
 
 - `azblob.uri`：Azure Blob Storage 的 URI，格式为 `(azure|https)://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`。
-- `azblob.sas-token`：Azure Blob Storage 的账户 SAS 令牌。
+- `azblob.sas-token`：Azure Blob Storage 的账户 SAS token。
 
 </div>
 </SimpleTab>
@@ -352,9 +352,9 @@ ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azbl
    >
    > 你可以使用左上角的下拉框切换组织、项目和集群。
 
-2. 点击目标集群名称进入概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+2. 点击目标集群名称进入集群概览页，然后在左侧导航栏点击 **Data** > **Import**。
 
-3. 在 **Import** 页面，点击右上角的 **Export Data to**，选择 **Alibaba Cloud OSS**。
+3. 在 **Import** 页面，点击右上角的 **Export Data to**，从下拉列表中选择 **Alibaba Cloud OSS**。 
 
 4. 填写以下参数：
 
@@ -395,7 +395,7 @@ ticloud serverless export create -c <cluster-id> --target-type OSS --oss.uri <ur
    >
    > 你可以使用左上角的下拉框切换组织、项目和集群。
 
-2. 点击目标集群名称进入概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+2. 点击目标集群名称进入集群概览页，然后在左侧导航栏点击 **Data** > **Import**。
 
 3. 在 **Import** 页面，点击 **Export** 查看导出任务列表。
 
@@ -427,4 +427,4 @@ ticloud serverless export cancel -c <cluster-id> -e <export-id>
 
 ## 计费
 
-导出服务在测试期间免费。你只需为成功或已取消任务的导出过程产生的 [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) 支付费用。对于失败的导出任务，不会收取费用。
+导出服务在公测期间免费。你只需为导出过程中（无论任务成功还是取消）产生的 [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) 支付费用。对于失败的导出任务，不会收取费用。

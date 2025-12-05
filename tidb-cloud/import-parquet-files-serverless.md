@@ -5,19 +5,19 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
 
 # 从云存储导入 Apache Parquet 文件到 TiDB Cloud Starter 或 Essential
 
-你可以将未压缩或 Snappy 压缩的 [Apache Parquet](https://parquet.apache.org/) 格式数据文件导入到 TiDB Cloud Starter 或 TiDB Cloud Essential。本文档介绍如何将 Parquet 文件从 Amazon Simple Storage Service（Amazon S3）、Google Cloud Storage（GCS）、Azure Blob Storage 或阿里云对象存储服务（OSS）导入到 TiDB Cloud Starter 或 TiDB Cloud Essential。
+你可以将未压缩和 Snappy 压缩的 [Apache Parquet](https://parquet.apache.org/) 格式数据文件导入到 TiDB Cloud Starter 或 TiDB Cloud Essential。本文档介绍如何将 Parquet 文件从 Amazon Simple Storage Service（Amazon S3）、Google Cloud Storage（GCS）、Azure Blob Storage 或阿里云对象存储服务（OSS）导入到 TiDB Cloud Starter 或 TiDB Cloud Essential。
 
 > **Note:**
 >
 > - 关于 TiDB Cloud Dedicated，请参见 [Import Parquet Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-parquet-files.md)。
-> - TiDB Cloud 仅支持将 Parquet 文件导入到空表中。如果需要将数据导入到已存在数据的表中，可以按照本文档将数据导入到一个临时空表，然后使用 `INSERT SELECT` 语句将数据复制到目标表。
+> - TiDB Cloud 仅支持将 Parquet 文件导入到空表中。如果需要将数据导入到已存在数据的表中，可以按照本文档将数据导入到一个临时空表中，然后使用 `INSERT SELECT` 语句将数据复制到目标表。
 > - Snappy 压缩文件必须采用 [官方 Snappy 格式](https://github.com/google/snappy)。不支持其他变体的 Snappy 压缩格式。
 
 ## 第 1 步：准备 Parquet 文件
 
 > **Note:**
 >
-> 当前，TiDB Cloud 不支持导入包含以下任意数据类型的 Parquet 文件。如果待导入的 Parquet 文件包含这些数据类型，你需要先使用 [支持的数据类型](#supported-data-types)（例如 `STRING`）重新生成 Parquet 文件。或者，你也可以使用如 AWS Glue 等服务轻松转换数据类型。
+> 目前，TiDB Cloud 不支持导入包含以下任意数据类型的 Parquet 文件。如果待导入的 Parquet 文件包含这些数据类型，你需要先使用 [支持的数据类型](#supported-data-types)（例如 `STRING`）重新生成 Parquet 文件。或者，你也可以使用如 AWS Glue 这样的服务轻松转换数据类型。
 >
 > - `LIST`
 > - `NEST STRUCT`
@@ -25,18 +25,18 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
 > - `ARRAY`
 > - `MAP`
 
-1. 如果单个 Parquet 文件大于 256 MB，建议将其拆分为多个小文件，每个文件大小约为 256 MB。
+1. 如果 Parquet 文件大于 256 MB，建议将其拆分为多个小文件，每个文件大小约为 256 MB。
 
     TiDB Cloud 支持导入非常大的 Parquet 文件，但在多个约 256 MB 的输入文件时性能最佳。这是因为 TiDB Cloud 可以并行处理多个文件，从而大幅提升导入速度。
 
 2. 按如下方式命名 Parquet 文件：
 
     - 如果一个 Parquet 文件包含整个表的所有数据，文件名应采用 `${db_name}.${table_name}.parquet` 格式，导入时会映射到 `${db_name}.${table_name}` 表。
-    - 如果一个表的数据被拆分到多个 Parquet 文件中，应在这些 Parquet 文件名后添加数字后缀。例如，`${db_name}.${table_name}.000001.parquet` 和 `${db_name}.${table_name}.000002.parquet`。数字后缀可以不连续，但必须递增，并且需要在数字前补零以保证所有后缀长度一致。
+    - 如果一个表的数据被拆分到多个 Parquet 文件中，应在这些 Parquet 文件名后添加数字后缀。例如，`${db_name}.${table_name}.000001.parquet` 和 `${db_name}.${table_name}.000002.parquet`。数字后缀可以不连续，但必须递增。同时需要在数字前补零，确保所有后缀长度一致。
 
     > **Note:**
     >
-    > 如果在某些情况下无法按照上述规则修改 Parquet 文件名（例如，这些 Parquet 文件链接也被其他程序使用），你可以保持文件名不变，并在 [第 4 步](#step-4-import-parquet-files) 的 **Mapping Settings** 中将源数据导入到单一目标表。
+    > 如果在某些情况下无法按照上述规则修改 Parquet 文件名（例如，Parquet 文件链接也被其他程序使用），可以保持文件名不变，并在 [第 4 步](#step-4-import-parquet-files) 的 **Mapping Settings** 中将源数据导入到单一目标表。
 
 ## 第 2 步：创建目标表结构
 
@@ -58,11 +58,11 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
         CREATE DATABASE mydb;
         ```
 
-    2. 为源数据创建数据表结构文件。
+    2. 为源数据创建表结构文件。
 
-        如果你没有在 Parquet 文件所在的 Amazon S3、GCS、Azure Blob Storage 或阿里云对象存储服务目录下包含表结构文件，TiDB Cloud 在导入数据时不会为你创建相应的数据表。
+        如果你没有在存放 Parquet 文件的 Amazon S3、GCS、Azure Blob Storage 或阿里云对象存储服务目录下包含表结构文件，TiDB Cloud 在导入数据时不会为你创建相应的数据表。
 
-        每个表结构文件必须采用 `${db_name}.${table_name}-schema.sql` 格式，并包含一个 `CREATE TABLE` DDL 语句。通过该文件，TiDB Cloud 会在导入数据时在 `${db_name}` 数据库中创建 `${db_table}` 表。
+        每个表结构文件必须采用 `${db_name}.${table_name}-schema.sql` 格式，并包含一个 `CREATE TABLE` DDL 语句。通过该文件，TiDB Cloud 会在 `${db_name}` 数据库中创建 `${db_table}` 表。
 
         例如，如果你创建了一个包含如下语句的 `mydb.mytable-schema.sql` 文件，TiDB Cloud 会在 `mydb` 数据库中创建 `mytable` 表。
 
@@ -81,15 +81,15 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
 
 为了让 TiDB Cloud 能够访问 Amazon S3、GCS、Azure Blob Storage 或阿里云对象存储服务桶中的 Parquet 文件，请执行以下操作之一：
 
-- 如果你的 Parquet 文件位于 Amazon S3，请为集群 [配置 Amazon S3 访问权限](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)。
+- 如果你的 Parquet 文件位于 Amazon S3，请为集群 [配置 Amazon S3 访问权限](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)。
 
-    你可以使用 AWS 访问密钥或 Role ARN 访问你的桶。完成后，请记录访问密钥（包括访问密钥 ID 和密钥访问密钥）或 Role ARN 值，在 [第 4 步](#step-4-import-parquet-files) 中会用到。
+    你可以使用 AWS 访问密钥或 Role ARN 访问你的桶。完成后，请记录访问密钥（包括访问密钥 ID 和密钥）或 Role ARN 值，在 [第 4 步](#step-4-import-parquet-files) 中会用到。
 
-- 如果你的 Parquet 文件位于 GCS，请为集群 [配置 GCS 访问权限](/tidb-cloud/serverless-external-storage.md#configure-gcs-access)。
+- 如果你的 Parquet 文件位于 GCS，请为集群 [配置 GCS 访问权限](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)。
 
-- 如果你的 Parquet 文件位于 Azure Blob Storage，请为集群 [配置 Azure Blob Storage 访问权限](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)。
+- 如果你的 Parquet 文件位于 Azure Blob Storage，请为集群 [配置 Azure Blob Storage 访问权限](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)。
 
-- 如果你的 Parquet 文件位于阿里云对象存储服务（OSS），请为集群 [配置阿里云对象存储服务（OSS）访问权限](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access)。
+- 如果你的 Parquet 文件位于阿里云对象存储服务（OSS），请为集群 [配置阿里云对象存储服务（OSS）访问权限](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)。
 
 ## 第 4 步：导入 Parquet 文件
 
@@ -106,7 +106,7 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
         >
         > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
 
-    2. 点击目标集群名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+    2. 点击目标集群名称进入概览页面，然后在左侧导航栏点击 **Data** > **Import**。
 
 2. 点击 **Import data from Cloud Storage**。
 
@@ -114,25 +114,25 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
 
     - **Storage Provider**：选择 **Amazon S3**。
     - **Source Files URI**：
-        - 导入单个文件时，输入源文件 URI，格式为 `s3://[bucket_name]/[data_source_folder]/[file_name].parquet`。例如，`s3://sampledata/ingest/TableName.01.parquet`。
-        - 导入多个文件时，输入源文件夹 URI，格式为 `s3://[bucket_name]/[data_source_folder]/`。例如，`s3://sampledata/ingest/`。
-    - **Credential**：你可以使用 AWS Role ARN 或 AWS 访问密钥访问你的桶。更多信息请参见 [Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)。
+        - 导入单个文件时，输入源文件 URI，格式为 `s3://[bucket_name]/[data_source_folder]/[file_name].parquet`。例如：`s3://sampledata/ingest/TableName.01.parquet`。
+        - 导入多个文件时，输入源文件夹 URI，格式为 `s3://[bucket_name]/[data_source_folder]/`。例如：`s3://sampledata/ingest/`。
+    - **Credential**：你可以使用 AWS Role ARN 或 AWS 访问密钥访问你的桶。更多信息请参见 [Configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)。
         - **AWS Role ARN**：输入 AWS Role ARN 值。
-        - **AWS Access Key**：输入 AWS 访问密钥 ID 和 AWS 密钥访问密钥。
+        - **AWS Access Key**：输入 AWS 访问密钥 ID 和 AWS 密钥。
 
 4. 点击 **Next**。
 
 5. 在 **Destination Mapping** 部分，指定源文件与目标表的映射方式。
 
-    当 **Source Files URI** 指定为目录时，默认勾选 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项。
+    当 **Source Files URI** 指定为目录时，**Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项默认被选中。
 
     > **Note:**
     >
     > 当 **Source Files URI** 指定为单个文件时，不显示 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项，TiDB Cloud 会自动将 **Source** 字段填充为文件名。此时你只需选择目标数据库和表进行数据导入。
 
-    - 若希望 TiDB Cloud 自动将所有遵循 [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) 的源文件映射到对应表，请保持该选项勾选，并选择 **Parquet** 作为数据格式。
+    - 若希望 TiDB Cloud 自动将所有遵循 [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) 的源文件映射到对应表，请保持该选项选中，并选择 **Parquet** 作为数据格式。
 
-    - 若需手动配置映射规则，将你的源 Parquet 文件与目标数据库和表关联，请取消勾选该选项，然后填写以下字段：
+    - 若需手动配置映射规则，将源 Parquet 文件与目标数据库和表关联，请取消选中该选项，然后填写以下字段：
 
         - **Source**：输入 `[file_name].parquet` 格式的文件名模式。例如：`TableName.01.parquet`。你也可以使用通配符匹配多个文件，仅支持 `*` 和 `?` 通配符。
 
@@ -143,7 +143,7 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
 
 6. 点击 **Next**。TiDB Cloud 会相应地扫描源文件。
 
-7. 查看扫描结果，检查找到的数据文件及其对应的目标表，然后点击 **Start Import**。
+7. 审查扫描结果，检查找到的数据文件及其对应的目标表，然后点击 **Start Import**。
 
 8. 当导入进度显示 **Completed** 时，检查已导入的表。
 
@@ -159,7 +159,7 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
         >
         > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
 
-    2. 点击目标集群名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+    2. 点击目标集群名称进入概览页面，然后在左侧导航栏点击 **Data** > **Import**。
 
 2. 点击 **Import data from Cloud Storage**。
 
@@ -167,23 +167,23 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
 
     - **Storage Provider**：选择 **Google Cloud Storage**。
     - **Source Files URI**：
-        - 导入单个文件时，输入源文件 URI，格式为 `[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].parquet`。例如，`[gcs|gs]://sampledata/ingest/TableName.01.parquet`。
-        - 导入多个文件时，输入源文件夹 URI，格式为 `[gcs|gs]://[bucket_name]/[data_source_folder]/`。例如，`[gcs|gs]://sampledata/ingest/`。
-    - **Credential**：你可以使用 GCS IAM Role Service Account key 访问你的桶。更多信息请参见 [Configure GCS access](/tidb-cloud/serverless-external-storage.md#configure-gcs-access)。
+        - 导入单个文件时，输入源文件 URI，格式为 `[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].parquet`。例如：`[gcs|gs]://sampledata/ingest/TableName.01.parquet`。
+        - 导入多个文件时，输入源文件夹 URI，格式为 `[gcs|gs]://[bucket_name]/[data_source_folder]/`。例如：`[gcs|gs]://sampledata/ingest/`。
+    - **Credential**：你可以使用 GCS IAM Role Service Account key 访问你的桶。更多信息请参见 [Configure GCS access](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)。
 
 4. 点击 **Next**。
 
 5. 在 **Destination Mapping** 部分，指定源文件与目标表的映射方式。
 
-    当 **Source Files URI** 指定为目录时，默认勾选 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项。
+    当 **Source Files URI** 指定为目录时，**Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项默认被选中。
 
     > **Note:**
     >
     > 当 **Source Files URI** 指定为单个文件时，不显示 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项，TiDB Cloud 会自动将 **Source** 字段填充为文件名。此时你只需选择目标数据库和表进行数据导入。
 
-    - 若希望 TiDB Cloud 自动将所有遵循 [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) 的源文件映射到对应表，请保持该选项勾选，并选择 **Parquet** 作为数据格式。
+    - 若希望 TiDB Cloud 自动将所有遵循 [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) 的源文件映射到对应表，请保持该选项选中，并选择 **Parquet** 作为数据格式。
 
-    - 若需手动配置映射规则，将你的源 Parquet 文件与目标数据库和表关联，请取消勾选该选项，然后填写以下字段：
+    - 若需手动配置映射规则，将源 Parquet 文件与目标数据库和表关联，请取消选中该选项，然后填写以下字段：
 
         - **Source**：输入 `[file_name].parquet` 格式的文件名模式。例如：`TableName.01.parquet`。你也可以使用通配符匹配多个文件，仅支持 `*` 和 `?` 通配符。
 
@@ -194,7 +194,7 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
 
 6. 点击 **Next**。TiDB Cloud 会相应地扫描源文件。
 
-7. 查看扫描结果，检查找到的数据文件及其对应的目标表，然后点击 **Start Import**。
+7. 审查扫描结果，检查找到的数据文件及其对应的目标表，然后点击 **Start Import**。
 
 8. 当导入进度显示 **Completed** 时，检查已导入的表。
 
@@ -210,7 +210,7 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
         >
         > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
 
-    2. 点击目标集群名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+    2. 点击目标集群名称进入概览页面，然后在左侧导航栏点击 **Data** > **Import**。
 
 2. 点击 **Import data from Cloud Storage**。
 
@@ -218,23 +218,23 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
 
     - **Storage Provider**：选择 **Azure Blob Storage**。
     - **Source Files URI**：
-        - 导入单个文件时，输入源文件 URI，格式为 `[azure|https]://[bucket_name]/[data_source_folder]/[file_name].parquet`。例如，`[azure|https]://sampledata/ingest/TableName.01.parquet`。
-        - 导入多个文件时，输入源文件夹 URI，格式为 `[azure|https]://[bucket_name]/[data_source_folder]/`。例如，`[azure|https]://sampledata/ingest/`。
-    - **Credential**：你可以使用共享访问签名（SAS）令牌访问你的桶。更多信息请参见 [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)。
+        - 导入单个文件时，输入源文件 URI，格式为 `[azure|https]://[bucket_name]/[data_source_folder]/[file_name].parquet`。例如：`[azure|https]://sampledata/ingest/TableName.01.parquet`。
+        - 导入多个文件时，输入源文件夹 URI，格式为 `[azure|https]://[bucket_name]/[data_source_folder]/`。例如：`[azure|https]://sampledata/ingest/`。
+    - **Credential**：你可以使用共享访问签名（SAS）令牌访问你的桶。更多信息请参见 [Configure Azure Blob Storage access](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)。
 
 4. 点击 **Next**。
 
 5. 在 **Destination Mapping** 部分，指定源文件与目标表的映射方式。
 
-    当 **Source Files URI** 指定为目录时，默认勾选 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项。
+    当 **Source Files URI** 指定为目录时，**Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项默认被选中。
 
     > **Note:**
     >
     > 当 **Source Files URI** 指定为单个文件时，不显示 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项，TiDB Cloud 会自动将 **Source** 字段填充为文件名。此时你只需选择目标数据库和表进行数据导入。
 
-    - 若希望 TiDB Cloud 自动将所有遵循 [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) 的源文件映射到对应表，请保持该选项勾选，并选择 **Parquet** 作为数据格式。
+    - 若希望 TiDB Cloud 自动将所有遵循 [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) 的源文件映射到对应表，请保持该选项选中，并选择 **Parquet** 作为数据格式。
 
-    - 若需手动配置映射规则，将你的源 Parquet 文件与目标数据库和表关联，请取消勾选该选项，然后填写以下字段：
+    - 若需手动配置映射规则，将源 Parquet 文件与目标数据库和表关联，请取消选中该选项，然后填写以下字段：
 
         - **Source**：输入 `[file_name].parquet` 格式的文件名模式。例如：`TableName.01.parquet`。你也可以使用通配符匹配多个文件，仅支持 `*` 和 `?` 通配符。
 
@@ -245,7 +245,7 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
 
 6. 点击 **Next**。TiDB Cloud 会相应地扫描源文件。
 
-7. 查看扫描结果，检查找到的数据文件及其对应的目标表，然后点击 **Start Import**。
+7. 审查扫描结果，检查找到的数据文件及其对应的目标表，然后点击 **Start Import**。
 
 8. 当导入进度显示 **Completed** 时，检查已导入的表。
 
@@ -261,7 +261,7 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
         >
         > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
 
-    2. 点击目标集群名称进入其概览页面，然后在左侧导航栏点击 **Data** > **Import**。
+    2. 点击目标集群名称进入概览页面，然后在左侧导航栏点击 **Data** > **Import**。
 
 2. 点击 **Import data from Cloud Storage**。
 
@@ -269,23 +269,23 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
 
     - **Storage Provider**：选择 **Alibaba Cloud OSS**。
     - **Source Files URI**：
-        - 导入单个文件时，输入源文件 URI，格式为 `oss://[bucket_name]/[data_source_folder]/[file_name].parquet`。例如，`oss://sampledata/ingest/TableName.01.parquet`。
-        - 导入多个文件时，输入源文件夹 URI，格式为 `oss://[bucket_name]/[data_source_folder]/`。例如，`oss://sampledata/ingest/`。
-    - **Credential**：你可以使用 AccessKey 对访问你的桶。更多信息请参见 [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access)。
+        - 导入单个文件时，输入源文件 URI，格式为 `oss://[bucket_name]/[data_source_folder]/[file_name].parquet`。例如：`oss://sampledata/ingest/TableName.01.parquet`。
+        - 导入多个文件时，输入源文件夹 URI，格式为 `oss://[bucket_name]/[data_source_folder]/`。例如：`oss://sampledata/ingest/`。
+    - **Credential**：你可以使用 AccessKey 对访问你的桶。更多信息请参见 [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)。
 
 4. 点击 **Next**。
 
 5. 在 **Destination Mapping** 部分，指定源文件与目标表的映射方式。
 
-    当 **Source Files URI** 指定为目录时，默认勾选 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项。
+    当 **Source Files URI** 指定为目录时，**Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项默认被选中。
 
     > **Note:**
     >
     > 当 **Source Files URI** 指定为单个文件时，不显示 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项，TiDB Cloud 会自动将 **Source** 字段填充为文件名。此时你只需选择目标数据库和表进行数据导入。
 
-    - 若希望 TiDB Cloud 自动将所有遵循 [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) 的源文件映射到对应表，请保持该选项勾选，并选择 **Parquet** 作为数据格式。
+    - 若希望 TiDB Cloud 自动将所有遵循 [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) 的源文件映射到对应表，请保持该选项选中，并选择 **Parquet** 作为数据格式。
 
-    - 若需手动配置映射规则，将你的源 Parquet 文件与目标数据库和表关联，请取消勾选该选项，然后填写以下字段：
+    - 若需手动配置映射规则，将源 Parquet 文件与目标数据库和表关联，请取消选中该选项，然后填写以下字段：
 
         - **Source**：输入 `[file_name].parquet` 格式的文件名模式。例如：`TableName.01.parquet`。你也可以使用通配符匹配多个文件，仅支持 `*` 和 `?` 通配符。
 
@@ -296,7 +296,7 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
 
 6. 点击 **Next**。TiDB Cloud 会相应地扫描源文件。
 
-7. 查看扫描结果，检查找到的数据文件及其对应的目标表，然后点击 **Start Import**。
+7. 审查扫描结果，检查找到的数据文件及其对应的目标表，然后点击 **Start Import**。
 
 8. 当导入进度显示 **Completed** 时，检查已导入的表。
 
@@ -304,12 +304,12 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
 
 </SimpleTab>
 
-当你运行导入任务时，如果检测到任何不支持或无效的类型转换，TiDB Cloud 会自动终止导入任务并报告导入错误。
+当你运行导入任务时，如果检测到任何不支持或无效的类型转换，TiDB Cloud 会自动终止导入作业并报告导入错误。
 
 如果你遇到导入错误，请按以下步骤操作：
 
-1. 删除部分已导入的表。
-2. 检查表结构文件，如有错误请修正表结构文件。
+1. 删除部分导入的表。
+2. 检查表结构文件，如有错误请修正。
 3. 检查 Parquet 文件中的数据类型。
 
     如果 Parquet 文件包含任何不支持的数据类型（如 `NEST STRUCT`、`ARRAY` 或 `MAP`），你需要使用 [支持的数据类型](#supported-data-types)（如 `STRING`）重新生成 Parquet 文件。
@@ -341,10 +341,10 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob S
 
 ### 解决数据导入过程中的警告
 
-点击 **Start Import** 后，如果看到类似 `can't find the corresponding source files` 的警告信息，请通过提供正确的源文件、根据 [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md) 重命名现有文件，或使用 **Advanced Settings** 进行修改来解决。
+点击 **Start Import** 后，如果看到类似 `can't find the corresponding source files` 的警告信息，请通过提供正确的源文件、根据 [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md) 重命名现有文件，或使用 **Advanced Settings** 进行调整来解决。
 
-解决这些问题后，你需要重新导入数据。
+解决这些问题后，需要重新导入数据。
 
 ### 导入表中行数为零
 
-当导入进度显示 **Completed** 后，检查已导入的表。如果行数为零，说明没有数据文件匹配你输入的 Bucket URI。此时，请通过提供正确的源文件、根据 [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md) 重命名现有文件，或使用 **Advanced Settings** 进行修改来解决。之后，重新导入这些表。
+当导入进度显示 **Completed** 后，检查已导入的表。如果行数为零，说明没有数据文件匹配你输入的 Bucket URI。此时，请通过提供正确的源文件、根据 [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md) 重命名现有文件，或使用 **Advanced Settings** 进行调整来解决。之后，重新导入这些表。

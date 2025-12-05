@@ -31,15 +31,15 @@ summary: 了解如何将 CSV 文件从 Amazon S3、GCS、Azure Blob Storage 或�
     >
     > - 为获得更好的性能，建议每个压缩文件大小不超过 100 MiB。
     > - Snappy 压缩文件必须为 [官方 Snappy 格式](https://github.com/google/snappy)。不支持其他 Snappy 压缩变体。
-    > - 对于未压缩的文件，如果你在某些情况下无法按照上述规则修改 CSV 文件名（例如，CSV 文件链接也被其他程序使用），可以保持文件名不变，并在 [第 4 步](#step-4-import-csv-files) 的 **Mapping Settings** 中将源数据导入到单一目标表。
+    > - 对于未压缩的文件，如果你在某些情况下无法按照上述规则修改 CSV 文件名（例如这些 CSV 文件链接也被其他程序使用），可以保持文件名不变，并在 [第 4 步](#step-4-import-csv-files) 的 **Mapping Settings** 中将源数据导入到单一目标表。
 
 ## 第 2 步：创建目标表结构
 
 由于 CSV 文件不包含表结构信息，在将 CSV 文件数据导入 TiDB Cloud 之前，你需要通过以下任一方式创建表结构：
 
-- 方法 1：在 TiDB Cloud 中为你的源数据创建目标数据库和数据表。
+- 方法一：在 TiDB Cloud 中为你的源数据创建目标数据库和数据表。
 
-- 方法 2：在存放 CSV 文件的 Amazon S3、GCS、Azure Blob Storage 或阿里云对象存储服务目录下，为你的源数据创建目标表结构文件，具体如下：
+- 方法二：在存放 CSV 文件的 Amazon S3、GCS、Azure Blob Storage 或阿里云对象存储服务目录下，为你的源数据创建目标表结构文件：
 
     1. 为你的源数据创建数据库结构文件。
 
@@ -53,7 +53,7 @@ summary: 了解如何将 CSV 文件从 Amazon S3、GCS、Azure Blob Storage 或�
         CREATE DATABASE mydb;
         ```
 
-    2. 为你的源数据创建数据表结构文件。
+    2. 为你的源数据创建表结构文件。
 
         如果你没有在存放 CSV 文件的 Amazon S3、GCS、Azure Blob Storage 或阿里云对象存储服务目录下包含表结构文件，TiDB Cloud 在导入数据时不会为你创建相应的数据表。
 
@@ -74,28 +74,28 @@ summary: 了解如何将 CSV 文件从 Amazon S3、GCS、Azure Blob Storage 或�
 
 ## 第 3 步：配置跨账号访问
 
-为了让 TiDB Cloud 能够访问 Amazon S3、GCS、Azure Blob Storage 或阿里云对象存储服务桶中的 CSV 文件，请按以下方式操作：
+为了让 TiDB Cloud 能访问 Amazon S3、GCS、Azure Blob Storage 或阿里云对象存储服务桶中的 CSV 文件，请按以下方式操作：
 
-- 如果你的 CSV 文件位于 Amazon S3，请为你的集群 [配置 Amazon S3 访问权限](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)。
+- 如果你的 CSV 文件位于 Amazon S3，请为集群 [配置 Amazon S3 访问权限](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)。
 
     你可以使用 AWS 访问密钥或 Role ARN 访问你的桶。配置完成后，请记录访问密钥（包括访问密钥 ID 和密钥）或 Role ARN 值，后续在 [第 4 步](#step-4-import-csv-files) 中会用到。
 
-- 如果你的 CSV 文件位于 GCS，请为你的集群 [配置 GCS 访问权限](/tidb-cloud/serverless-external-storage.md#configure-gcs-access)。
+- 如果你的 CSV 文件位于 GCS，请为集群 [配置 GCS 访问权限](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)。
 
-- 如果你的 CSV 文件位于 Azure Blob Storage，请为你的集群 [配置 Azure Blob Storage 访问权限](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)。
+- 如果你的 CSV 文件位于 Azure Blob Storage，请为集群 [配置 Azure Blob Storage 访问权限](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)。
 
-- 如果你的 CSV 文件位于阿里云对象存储服务（OSS），请为你的集群 [配置阿里云对象存储服务（OSS）访问权限](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access)。
+- 如果你的 CSV 文件位于阿里云对象存储服务（OSS），请为集群 [配置阿里云对象存储服务（OSS）访问权限](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)。
 
 ## 第 4 步：导入 CSV 文件
 
-要将 CSV 文件导入到 TiDB Cloud Starter 或 TiDB Cloud Essential，请按以下步骤操作：
+要将 CSV 文件导入到 TiDB Cloud Starter 或 TiDB Cloud Essential，请按照以下步骤操作：
 
 <SimpleTab>
 <div label="Amazon S3">
 
 1. 打开目标集群的 **Import** 页面。
 
-    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入你的项目 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 
         > **Tip:**
         >
@@ -111,7 +111,7 @@ summary: 了解如何将 CSV 文件从 Amazon S3、GCS、Azure Blob Storage 或�
     - **Source Files URI**：
         - 导入单个文件时，输入源文件 URI，格式为 `s3://[bucket_name]/[data_source_folder]/[file_name].csv`。例如：`s3://sampledata/ingest/TableName.01.csv`。
         - 导入多个文件时，输入源文件夹 URI，格式为 `s3://[bucket_name]/[data_source_folder]/`。例如：`s3://sampledata/ingest/`。
-    - **Credential**：你可以使用 AWS Role ARN 或 AWS 访问密钥访问你的桶。详情请参见 [配置 Amazon S3 访问权限](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)。
+    - **Credential**：你可以使用 AWS Role ARN 或 AWS 访问密钥访问你的桶。详情请参见 [配置 Amazon S3 访问权限](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)。
         - **AWS Role ARN**：输入 AWS Role ARN 值。
         - **AWS Access Key**：输入 AWS 访问密钥 ID 和 AWS 密钥。
 
@@ -119,15 +119,15 @@ summary: 了解如何将 CSV 文件从 Amazon S3、GCS、Azure Blob Storage 或�
 
 5. 在 **Destination Mapping** 部分，指定源文件与目标表的映射方式。
 
-    当 **Source Files URI** 指定为目录时，默认勾选 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项。
+    当 **Source Files URI** 指定为目录时，**Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项默认被选中。
 
     > **Note:**
     >
     > 当 **Source Files URI** 指定为单个文件时，不显示 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项，TiDB Cloud 会自动将 **Source** 字段填充为文件名。此时你只需选择目标数据库和表即可。
 
-    - 若希望 TiDB Cloud 自动将所有遵循 [文件命名规范](/tidb-cloud/naming-conventions-for-data-import.md) 的源文件映射到对应表，请保持该选项勾选，并选择 **CSV** 作为数据格式。
+    - 若希望 TiDB Cloud 自动将所有遵循 [文件命名规范](/tidb-cloud/naming-conventions-for-data-import.md) 的源文件映射到对应表，请保持该选项选中，并选择 **CSV** 作为数据格式。
 
-    - 若需手动配置映射规则，将你的源 CSV 文件与目标数据库和表关联，请取消勾选该选项，并填写以下字段：
+    - 若需手动配置映射规则，将你的源 CSV 文件与目标数据库和表关联，请取消选中该选项，然后填写以下字段：
 
         - **Source**：输入文件名模式，格式为 `[file_name].csv`。例如：`TableName.01.csv`。你也可以使用通配符匹配多个文件，仅支持 `*` 和 `?` 通配符。
 
@@ -148,7 +148,7 @@ summary: 了解如何将 CSV 文件从 Amazon S3、GCS、Azure Blob Storage 或�
 
 1. 打开目标集群的 **Import** 页面。
 
-    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入你的项目 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 
         > **Tip:**
         >
@@ -164,21 +164,21 @@ summary: 了解如何将 CSV 文件从 Amazon S3、GCS、Azure Blob Storage 或�
     - **Source Files URI**：
         - 导入单个文件时，输入源文件 URI，格式为 `[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].csv`。例如：`[gcs|gs]://sampledata/ingest/TableName.01.csv`。
         - 导入多个文件时，输入源文件夹 URI，格式为 `[gcs|gs]://[bucket_name]/[data_source_folder]/`。例如：`[gcs|gs]://sampledata/ingest/`。
-    - **Credential**：你可以使用 GCS IAM Role Service Account key 访问你的桶。详情请参见 [配置 GCS 访问权限](/tidb-cloud/serverless-external-storage.md#configure-gcs-access)。
+    - **Credential**：你可以使用 GCS IAM Role Service Account key 访问你的桶。详情请参见 [配置 GCS 访问权限](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)。
 
 4. 点击 **Next**。
 
 5. 在 **Destination Mapping** 部分，指定源文件与目标表的映射方式。
 
-    当 **Source Files URI** 指定为目录时，默认勾选 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项。
+    当 **Source Files URI** 指定为目录时，**Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项默认被选中。
 
     > **Note:**
     >
     > 当 **Source Files URI** 指定为单个文件时，不显示 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项，TiDB Cloud 会自动将 **Source** 字段填充为文件名。此时你只需选择目标数据库和表即可。
 
-    - 若希望 TiDB Cloud 自动将所有遵循 [文件命名规范](/tidb-cloud/naming-conventions-for-data-import.md) 的源文件映射到对应表，请保持该选项勾选，并选择 **CSV** 作为数据格式。
+    - 若希望 TiDB Cloud 自动将所有遵循 [文件命名规范](/tidb-cloud/naming-conventions-for-data-import.md) 的源文件映射到对应表，请保持该选项选中，并选择 **CSV** 作为数据格式。
 
-    - 若需手动配置映射规则，将你的源 CSV 文件与目标数据库和表关联，请取消勾选该选项，并填写以下字段：
+    - 若需手动配置映射规则，将你的源 CSV 文件与目标数据库和表关联，请取消选中该选项，然后填写以下字段：
 
         - **Source**：输入文件名模式，格式为 `[file_name].csv`。例如：`TableName.01.csv`。你也可以使用通配符匹配多个文件，仅支持 `*` 和 `?` 通配符。
 
@@ -199,7 +199,7 @@ summary: 了解如何将 CSV 文件从 Amazon S3、GCS、Azure Blob Storage 或�
 
 1. 打开目标集群的 **Import** 页面。
 
-    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入你的项目 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 
         > **Tip:**
         >
@@ -215,21 +215,21 @@ summary: 了解如何将 CSV 文件从 Amazon S3、GCS、Azure Blob Storage 或�
     - **Source Files URI**：
         - 导入单个文件时，输入源文件 URI，格式为 `[azure|https]://[bucket_name]/[data_source_folder]/[file_name].csv`。例如：`[azure|https]://sampledata/ingest/TableName.01.csv`。
         - 导入多个文件时，输入源文件夹 URI，格式为 `[azure|https]://[bucket_name]/[data_source_folder]/`。例如：`[azure|https]://sampledata/ingest/`。
-    - **Credential**：你可以使用共享访问签名（SAS）令牌访问你的桶。详情请参见 [配置 Azure Blob Storage 访问权限](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)。
+    - **Credential**：你可以使用共享访问签名（SAS）令牌访问你的桶。详情请参见 [配置 Azure Blob Storage 访问权限](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)。
 
 4. 点击 **Next**。
 
 5. 在 **Destination Mapping** 部分，指定源文件与目标表的映射方式。
 
-    当 **Source Files URI** 指定为目录时，默认勾选 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项。
+    当 **Source Files URI** 指定为目录时，**Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项默认被选中。
 
     > **Note:**
     >
     > 当 **Source Files URI** 指定为单个文件时，不显示 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项，TiDB Cloud 会自动将 **Source** 字段填充为文件名。此时你只需选择目标数据库和表即可。
 
-    - 若希望 TiDB Cloud 自动将所有遵循 [文件命名规范](/tidb-cloud/naming-conventions-for-data-import.md) 的源文件映射到对应表，请保持该选项勾选，并选择 **CSV** 作为数据格式。
+    - 若希望 TiDB Cloud 自动将所有遵循 [文件命名规范](/tidb-cloud/naming-conventions-for-data-import.md) 的源文件映射到对应表，请保持该选项选中，并选择 **CSV** 作为数据格式。
 
-    - 若需手动配置映射规则，将你的源 CSV 文件与目标数据库和表关联，请取消勾选该选项，并填写以下字段：
+    - 若需手动配置映射规则，将你的源 CSV 文件与目标数据库和表关联，请取消选中该选项，然后填写以下字段：
 
         - **Source**：输入文件名模式，格式为 `[file_name].csv`。例如：`TableName.01.csv`。你也可以使用通配符匹配多个文件，仅支持 `*` 和 `?` 通配符。
 
@@ -250,7 +250,7 @@ summary: 了解如何将 CSV 文件从 Amazon S3、GCS、Azure Blob Storage 或�
 
 1. 打开目标集群的 **Import** 页面。
 
-    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入你的项目 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
+    1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 
         > **Tip:**
         >
@@ -266,21 +266,21 @@ summary: 了解如何将 CSV 文件从 Amazon S3、GCS、Azure Blob Storage 或�
     - **Source Files URI**：
         - 导入单个文件时，输入源文件 URI，格式为 `oss://[bucket_name]/[data_source_folder]/[file_name].csv`。例如：`oss://sampledata/ingest/TableName.01.csv`。
         - 导入多个文件时，输入源文件夹 URI，格式为 `oss://[bucket_name]/[data_source_folder]/`。例如：`oss://sampledata/ingest/`。
-    - **Credential**：你可以使用 AccessKey 对访问你的桶。详情请参见 [配置阿里云对象存储服务（OSS）访问权限](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access)。
+    - **Credential**：你可以使用 AccessKey 对访问你的桶。详情请参见 [配置阿里云对象存储服务（OSS）访问权限](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)。
 
 4. 点击 **Next**。
 
 5. 在 **Destination Mapping** 部分，指定源文件与目标表的映射方式。
 
-    当 **Source Files URI** 指定为目录时，默认勾选 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项。
+    当 **Source Files URI** 指定为目录时，**Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项默认被选中。
 
     > **Note:**
     >
     > 当 **Source Files URI** 指定为单个文件时，不显示 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** 选项，TiDB Cloud 会自动将 **Source** 字段填充为文件名。此时你只需选择目标数据库和表即可。
 
-    - 若希望 TiDB Cloud 自动将所有遵循 [文件命名规范](/tidb-cloud/naming-conventions-for-data-import.md) 的源文件映射到对应表，请保持该选项勾选，并选择 **CSV** 作为数据格式。
+    - 若希望 TiDB Cloud 自动将所有遵循 [文件命名规范](/tidb-cloud/naming-conventions-for-data-import.md) 的源文件映射到对应表，请保持该选项选中，并选择 **CSV** 作为数据格式。
 
-    - 若需手动配置映射规则，将你的源 CSV 文件与目标数据库和表关联，请取消勾选该选项，并填写以下字段：
+    - 若需手动配置映射规则，将你的源 CSV 文件与目标数据库和表关联，请取消选中该选项，然后填写以下字段：
 
         - **Source**：输入文件名模式，格式为 `[file_name].csv`。例如：`TableName.01.csv`。你也可以使用通配符匹配多个文件，仅支持 `*` 和 `?` 通配符。
 

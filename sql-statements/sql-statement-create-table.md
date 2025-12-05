@@ -5,7 +5,7 @@ summary: TiDB 数据库中 CREATE TABLE 的用法概述。
 
 # CREATE TABLE
 
-该语句会在当前选定的数据库中创建一个新表。其行为与 MySQL 中的 `CREATE TABLE` 语句类似。
+该语句会在当前选中的数据库中创建一个新表。其行为与 MySQL 中的 `CREATE TABLE` 语句类似。
 
 ## 语法
 
@@ -158,7 +158,7 @@ NextValueForSequence ::=
 |   "NEXTVAL" '(' TableName ')'
 ```
 
-下表为支持的 *table_options*。其他选项如 `AVG_ROW_LENGTH`、`CHECKSUM`、`COMPRESSION`、`CONNECTION`、`DELAY_KEY_WRITE`、`ENGINE`、`KEY_BLOCK_SIZE`、`MAX_ROWS`、`MIN_ROWS`、`ROW_FORMAT` 和 `STATS_PERSISTENT` 仅解析但会被忽略。
+下列 *table_options* 受支持。其他选项如 `AVG_ROW_LENGTH`、`CHECKSUM`、`COMPRESSION`、`CONNECTION`、`DELAY_KEY_WRITE`、`ENGINE`、`KEY_BLOCK_SIZE`、`MAX_ROWS`、`MIN_ROWS`、`ROW_FORMAT` 和 `STATS_PERSISTENT` 仅解析但会被忽略。
 
 | 选项 | 描述 | 示例 |
 | ---------- | ---------- | ------- |
@@ -172,7 +172,7 @@ NextValueForSequence ::=
 
 <CustomContent platform="tidb">
 
-> **Note:**
+> **注意：**
 >
 > `split-table` 配置项默认开启。开启后，每个新建表都会创建一个独立的 Region。详情参见 [TiDB 配置文件](/tidb-configuration-file.md)。
 
@@ -180,7 +180,7 @@ NextValueForSequence ::=
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注意：**
 >
 > TiDB 会为每个新建表创建一个独立的 Region。
 
@@ -266,19 +266,19 @@ mysql> DESC t1;
 
 ## MySQL 兼容性
 
-* 支持除空间类型外的所有数据类型。
+* 支持除空间类型以外的所有数据类型。
 * TiDB 为了兼容 MySQL，语法上接受如 `HASH`、`BTREE` 和 `RTREE` 等索引类型，但会忽略这些类型。
 * TiDB 自建版和 TiDB Cloud 专属集群支持解析 `FULLTEXT` 语法，但不支持使用 `FULLTEXT` 索引。
 
-    >**Note:**
+    >**注意：**
     >
-    > 目前，只有部分 AWS 区域的 {{{ .starter }} 和 {{{ .essential }}} 集群支持 [`FULLTEXT` 语法和索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)。
+    > 目前，只有部分 AWS 区域的 TiDB Cloud Starter 和 TiDB Cloud Essential 集群支持 [`FULLTEXT` 语法和索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)。
 
-* 在 [分区表](/partitioned-table.md) 中，将 `PRIMARY KEY` 或 `UNIQUE INDEX` 设置为 [全局索引](/partitioned-table.md#global-indexes)（使用 `GLOBAL` 索引选项）是 TiDB 的扩展功能，不兼容 MySQL。
+* 在分区表中，将 `PRIMARY KEY` 或 `UNIQUE INDEX` 设置为 [全局索引](/partitioned-table.md#global-indexes)（使用 `GLOBAL` 索引选项）是 TiDB 的扩展功能，并不兼容 MySQL。
 
 <CustomContent platform="tidb">
 
-* 为了兼容性，`index_col_name` 属性支持长度选项，默认最大长度限制为 3072 字节。该长度限制可通过 `max-index-length` 配置项进行调整。详情参见 [TiDB 配置文件](/tidb-configuration-file.md#max-index-length)。
+* 为了兼容性，`index_col_name` 属性支持长度选项，默认最大长度限制为 3072 字节。该长度限制可通过 `max-index-length` 配置项修改。详情参见 [TiDB 配置文件](/tidb-configuration-file.md#max-index-length)。
 
 </CustomContent>
 
@@ -291,7 +291,7 @@ mysql> DESC t1;
 * `index_col_name` 中的 `[ASC | DESC]` 目前会被解析但被忽略（与 MySQL 5.7 行为兼容）。
 * `COMMENT` 属性不支持 `WITH PARSER` 选项。
 * TiDB 默认支持单表 1017 列，最多支持 4096 列。InnoDB 中的对应限制为 1017 列，MySQL 的硬性上限为 4096 列。详情参见 [TiDB 限制](/tidb-limitations.md)。
-* TiDB 支持 `HASH`、`RANGE`、`LIST` 和 `KEY` [分区类型](/partitioned-table.md#partitioning-types)。对于不支持的分区类型，TiDB 会返回 `Warning: Unsupported partition type %s, treat as normal table`，其中 `%s` 为具体的不支持分区类型。
+* TiDB 支持 `HASH`、`RANGE`、`LIST` 和 `KEY` [分区类型](/partitioned-table.md#partitioning-types)。对于不支持的分区类型，TiDB 会返回 `Warning: Unsupported partition type %s, treat as normal table`，其中 `%s` 为具体不支持的分区类型。
 
 ## 另请参阅
 
