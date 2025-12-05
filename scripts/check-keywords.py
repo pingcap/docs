@@ -1,11 +1,32 @@
 #!/bin/python3
+import argparse
+import requests
 import re
 import sys
 from pathlib import Path
 
-parser = Path("../tidb/pkg/parser/parser.y")
-if not parser.exists():
-    sys.exit(f"{parser} doesn't exist")
+aparser = argparse.ArgumentParser()
+aparser.add_argument(
+    "--parser_file", default="../tidb/pkg/parser/parser.y", help="Path to parser.y"
+)
+aparser.add_argument(
+    "--parser_url",
+    default="https://github.com/pingcap/tidb/raw/refs/heads/master/pkg/parser/parser.y",
+    help="Url to parser.y",
+)
+aparser.add_argument("--download_from_url", action="store_true")
+args = aparser.parse_args()
+
+if args.download_from_url:
+    r = requests.get(args.parser_url)
+    if r.status_code != 200:
+        sys.exit(f"failed to download parser file, got HTTP {r.status_code}")
+    lines = r.text.splitlines()
+else:
+    parser = Path(args.parser_file)
+    if not parser.exists():
+        sys.exit(f"{parser} doesn't exist")
+    lines = parser.read_text().split("\n")
 
 kwdocs = Path("keywords.md")
 if not kwdocs.exists():
@@ -15,7 +36,7 @@ keywords = kwdocs.read_text()
 
 errors = 0
 section = "Unknown"
-for line in parser.read_text().split("\n"):
+for line in lines:
     if line == "":
         section = "NotKeywordToken"
 

@@ -1,0 +1,15 @@
+name: Keywords
+
+on:
+  pull_request:
+  push:
+    branches:
+      - 'master'
+      - 'release**'
+
+jobs:
+  check-keywords:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: ./scripts/check-keywords.py --download_from_url
