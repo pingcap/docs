@@ -519,7 +519,7 @@
     - [下推到 TiKV 的表达式列表](/functions-and-operators/expressions-pushed-down.md)
     - [TiDB 特有的函数](/functions-and-operators/tidb-functions.md)
   - [聚簇索引](/clustered-indexes.md)
-  - [Global Indexes](/global-indexes.md)
+  - [全局索引](/global-indexes.md)
   - [约束](/constraints.md)
   - [生成列](/generated-columns.md)
   - [SQL 模式](/sql-mode.md)

@@ -742,7 +742,7 @@
   - [表库过滤](/table-filter.md)
   - [外部存储服务的 URI 格式](/external-storage-uri.md)
   - [DDL 最佳实践](/ddl-introduction.md)
-  - [`ANALYZE` 嵌入在 DDL 语句中](/ddl_embedded_analyze.md)
+  - [内嵌于 DDL 的 Analyze](/ddl_embedded_analyze.md)
   - [数据批量处理](/batch-processing.md)
   - [数据索引不一致报错](/troubleshoot-data-inconsistency-errors.md)
   - [通知](/tidb-cloud/notifications.md)
