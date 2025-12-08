@@ -198,7 +198,8 @@ This document only describes the parameters that are not included in command-lin
 + Minimum value: `"1s"`
 
 ### `graceful-shutdown-timeout`
-+ The timeout duration for graceful shutdown. If the timeout is reached and the leader transfer has not completed, the transfer will be skipped and the node will proceed directly to the shutdown process. A value of 0s disables graceful shutdown.
+
++ Specifies the timeout for graceful shutdown. If the timeout is reached before the leader transfer completes, TiKV skips the transfer and proceeds directly to the shutdown process. To disable graceful shutdown, set the value to `0s`.
 + Default value: `"20s"`
 + Minimum value: `"0s"`
 
