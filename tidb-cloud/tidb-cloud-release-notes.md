@@ -19,10 +19,10 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
         - The complete list of integrations in the TiDB Cloud documentation is now visible to all TiDB Cloud Starter and Essential users. The following list outlines these integrations, grouped by use case:
             - AWS Lambda, Cloudflare Workers, Gitpod, Netlify, Terraform, WordPress
             - Airbyte, Amazon AppFlow, dbt Labs, Looker Studio, n8n, Zapier
-            - DBeaver, JetBrians DataGrip, MySQL WorkBench, Navicat, ProxySQL, Visual Studio Code
+            - DBeaver, JetBrains DataGrip, MySQL Workbench, Navicat, ProxySQL, Visual Studio Code
             - JDBC, Hibernate, MyBatis, Spring Boot
             - Go-MySQL-Driver, GORM
-            - Django, mysqlclient, MySQL Connector/Python, peewee, PyMySQL, SQL Alchemy
+            - Django, mysqlclient, MySQL Connector/Python, peewee, PyMySQL, SQLAlchemy
             - mysql.js, Next.js, node-mysql2, Prisma, Sequelize, TypeORM
             - mysql2, Rails
         - Move the [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md) and [AWS Bedrock](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md) integration entries to the cluster level to improve discoverability.
