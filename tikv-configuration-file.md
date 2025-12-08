@@ -197,6 +197,11 @@ This document only describes the parameters that are not included in command-lin
 + Default value: `"3s"`
 + Minimum value: `"1s"`
 
+### `graceful-shutdown-timeout`
++ The timeout duration for graceful shutdown. If the timeout is reached and the leader transfer has not completed, the transfer will be skipped and the node will proceed directly to the shutdown process. A value of 0s disables graceful shutdown.
++ Default value: `"20s"`
++ Minimum value: `"0s"`
+
 ### `concurrent-send-snap-limit`
 
 + The maximum number of snapshots sent at the same time
