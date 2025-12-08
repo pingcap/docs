@@ -42,7 +42,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
   
         For more information, see [TiDB Cloud IAM API](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam/).
 
-
 ## December 2, 2025
 
 **General changes**
