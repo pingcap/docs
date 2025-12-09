@@ -245,7 +245,7 @@ The following are findings about the `DROP PARTITION` performance:
 
 #### Use TTL and `DROP PARTITION` in TiDB
 
-In this test case, the table structures have been anonymized. For more information about the usage of TTL, see [Periodically Delete Data Using TTL (Time to Live)](/time-to-live.md) .
+In this test case, the table structures have been anonymized. For more information about the usage of TTL, see [Periodically Delete Data Using TTL (Time to Live)](/time-to-live.md).
 
 The following is the TTL schema.
 
