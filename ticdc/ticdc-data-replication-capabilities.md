@@ -62,4 +62,3 @@ TiCDC supports the following types of upstream data changes:
     > When replicating partitioned tables, TiCDC treats each partition as a separate table. Therefore, the partition count is included when TiCDC calculates the total number of tables to be replicated.
 
     If the number of tables to be replicated exceeds the preceding recommended values, it is recommended to use the [TiCDC new architecture](/ticdc/ticdc-architecture.md). The new architecture supports replicating more than one million tables per changefeed, making it suitable for large-scale replication scenarios.
-
