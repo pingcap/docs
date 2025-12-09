@@ -49,9 +49,9 @@ TiCDC supports the following types of upstream data changes:
 
     For example: When a changefeed is configured to filter out all DDL events, if the upstream executes a `DROP COLUMN` operation but continues to write `INSERT` statements involving that column, TiCDC will fail to replicate these DML changes to the downstream because of table schema mismatches.
 
-- For the TiCDC [classic architecture](/ticdc/ticdc-classic-architecture.md), when the number of tables replicated by a single TiCDC cluster exceeds the following recommended values, TiCDC may not work stably:
+- For the TiCDC [classic architecture](/ticdc/ticdc-classic-architecture.md), when the number of tables replicated by a single TiCDC cluster exceeds the following recommended values, TiCDC might not work stably:
 
-    | TiCDC Cluster Version | Recommended Number of Tables to Replicate |
+    | TiCDC version | Recommended number of tables to be replicated |
     |---|---|
     | v5.4.0 - v6.5.x | 2000 |
     | v6.5.x - v7.1.x | 4000 |
@@ -59,7 +59,7 @@ TiCDC supports the following types of upstream data changes:
 
     > **Note:**
     >
-    > If replicating partitioned tables, TiCDC treats each partition as an independent table. Therefore, the partition count is included when calculating the total number of tables being replicated.
+    > When replicating partitioned tables, TiCDC treats each partition as a separate table. Therefore, the partition count is included when TiCDC calculates the total number of tables to be replicated.
 
-    If the number of tables to replicate exceeds the above recommendations, it is recommended to use the [TiCDC new architecture](/ticdc/ticdc-architecture.md). The new architecture supports replicating over a million tables per changefeed, making it suitable for large-scale replication scenarios.
+    If the number of tables to be replicated exceeds the preceding recommended values, it is recommended to use the [TiCDC new architecture](/ticdc/ticdc-architecture.md). The new architecture supports replicating more than one million tables per changefeed, making it suitable for large-scale replication scenarios.
 
