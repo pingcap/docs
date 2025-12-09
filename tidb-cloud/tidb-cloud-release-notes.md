@@ -12,6 +12,12 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
+- **TiDB Cloud Dedicated**
+
+    - Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v8.5.3](https://docs.pingcap.com/tidb/v8.5/release-8.5.3/) to [v8.5.4](https://docs.pingcap.com/tidb/v8.5/release-8.5.4/).
+
+**Console changes**
+
 - **TiDB Cloud Starter and TiDB Cloud Essential**
 
     - Add a unified **Integrations** page at the cluster level for [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) and [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) clusters.
@@ -27,10 +33,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
             - **Ruby**: mysql2, Rails
         - Move the [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md) and [AWS Bedrock](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md) integration entries to the cluster level to improve discoverability.
         - Add **Suggest Integration** for requesting new integrations.
-
-- **TiDB Cloud Dedicated**
-
-    - Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v8.5.3](https://docs.pingcap.com/tidb/v8.5/release-8.5.3/) to [v8.5.4](https://docs.pingcap.com/tidb/v8.5/release-8.5.4/).
 
 **API changes**
 
