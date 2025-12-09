@@ -264,7 +264,9 @@ After configuring TLS for communication between TiDB components, you can use the
 
 ## Reload certificates
 
-- If your TiDB cluster is deployed in a local data center, to reload the certificates and keys, TiDB, PD, TiKV, TiFlash, TiCDC, TiProxy, and all kinds of clients reread the current certificates and key files each time a new connection is created, without restarting the TiDB cluster.
+- If your TiDB cluster is deployed in a local data center, to reload the certificates and keys, TiDB, PD, TiKV, TiFlash, TiCDC, and all kinds of clients reread the current certificates and key files each time a new connection is created, without restarting the TiDB cluster.
+
+- TiProxy reloads certificates from disk once an hour.
 
 - If your TiDB cluster is deployed on your own managed cloud, make sure that the issuance of TLS certificates is integrated with the certificate management service of the cloud provider. The TLS certificates of the TiDB, PD, TiKV, TiFlash, TiCDC, and TiProxy components can be automatically rotated without restarting the TiDB cluster.
 
