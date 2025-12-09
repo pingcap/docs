@@ -8,6 +8,40 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## December 9, 2025
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v8.5.3](https://docs.pingcap.com/tidb/v8.5/release-8.5.3/) to [v8.5.4](https://docs.pingcap.com/tidb/v8.5/release-8.5.4/).
+
+**Console changes**
+
+- **TiDB Cloud Starter and TiDB Cloud Essential**
+
+    - Add a unified **Integrations** page at the cluster level for [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) and [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) clusters.
+        
+        - Consolidate all third-party integrations on the **Integrations** page for your cluster. The following list outlines these integrations, grouped by use case:
+            - **Deploy**: AWS Lambda, Cloudflare Workers, Gitpod, Netlify, Terraform, WordPress
+            - **Data**: Airbyte, Amazon AppFlow, dbt Labs, Looker Studio, n8n, Zapier
+            - **GUIs**: DBeaver, JetBrains DataGrip, MySQL Workbench, Navicat, ProxySQL, Visual Studio Code
+            - **Java**: JDBC, Hibernate, MyBatis, Spring Boot
+            - **Go**: Go-MySQL-Driver, GORM
+            - **Python**: Django, mysqlclient, MySQL Connector/Python, peewee, PyMySQL, SQLAlchemy
+            - **Node.js**: mysql.js, Next.js, node-mysql2, Prisma, Sequelize, TypeORM
+            - **Ruby**: mysql2, Rails
+        - Move the [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md) and [AWS Bedrock](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md) integration entries to the cluster level to improve discoverability.
+        - Add **Suggest Integration** for requesting new integrations.
+
+**API changes**
+
+- TiDB Cloud IAM API (v1beta1) supports listing console audit logs.
+
+    The [List audit logs](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam/#tag/Audit-Log/paths/~1auditLogs/get) endpoint provides programmatic access to console audit logs. You can use this endpoint to automatically retrieve audit logs and schedule regular backups to meet security and compliance requirements.
+
+    For more information, see [TiDB Cloud IAM API](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam/).
+
 ## December 2, 2025
 
 **General changes**
