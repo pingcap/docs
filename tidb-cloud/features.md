@@ -36,25 +36,25 @@ This document lists the feature support status for different TiDB Cloud plans, i
   </tr>
   <tr>
     <td>Data Migration (using the TiDB Cloud console)</td>
-    <td style="text-align:center;">❌<br></td>
-    <td style="text-align:center;">✅ <br/>(Private preview)</td>
-    <td style="text-align:center;">✅<br></td>
-  </tr>
-  <tr>
-    <td rowspan="2">Data export<br></td>
-    <td>Export (using the TiDB Cloud console)<br></td>
-    <td style="text-align:center;">✅ <br/>(Public preview)</td>
-    <td style="text-align:center;">✅ <br/>(Public preview)</td>
-    <td style="text-align:center;">❌</td>
-  </tr>
-  <tr>
-    <td>Changefeed<br></td>
     <td style="text-align:center;">❌</td>
     <td style="text-align:center;">✅ <br/>(Private preview)</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="4">Backup &amp; restore<br></td>
+    <td rowspan="2">Data export</td>
+    <td>Export (using the TiDB Cloud console)</td>
+    <td style="text-align:center;">✅ <br/>(Public preview)</td>
+    <td style="text-align:center;">✅ <br/>(Public preview)</td>
+    <td style="text-align:center;">❌</td>
+  </tr>
+  <tr>
+    <td>Changefeed</td>
+    <td style="text-align:center;">❌</td>
+    <td style="text-align:center;">✅ <br/>(Private preview)</td>
+    <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Backup &amp; restore</td>
     <td>Automatic backup</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -86,7 +86,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="2">Observability<br></td>
+    <td rowspan="2">Observability</td>
     <td>Alerting</td>
     <td style="text-align:center;">❌</td>
     <td style="text-align:center;">❌</td>
@@ -99,7 +99,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="2">High availability<br></td>
+    <td rowspan="2">High availability</td>
     <td>Failover (cross-AZ)</td>
     <td style="text-align:center;">❌</td>
     <td style="text-align:center;">✅</td>
@@ -125,7 +125,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="7">Security<br></td>
+    <td rowspan="7">Security</td>
     <td>Private endpoint</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -168,7 +168,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="3">AI &amp; Development<br></td>
+    <td rowspan="3">AI &amp; Development</td>
     <td>Vector search</td>
     <td style="text-align:center;">✅ <br/>(Public preview)</td>
     <td style="text-align:center;">✅ <br/>(Public preview)</td>
@@ -187,7 +187,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">❌</td>
   </tr>
   <tr>
-    <td rowspan="4">Cloud and regions<br></td>
+    <td rowspan="4">Cloud and regions</td>
     <td>AWS</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
