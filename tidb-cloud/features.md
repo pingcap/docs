@@ -5,7 +5,7 @@ summary: Learn about feature support status for different TiDB Cloud plans.
 
 # Features
 
-This document lists the feature support status for different TiDB Cloud plans, including {{{ .starter }}}, {{{ .essential }}}, and {{{ .dedicated }}}.
+This document lists the feature support status for different TiDB Cloud plans, including {{{ .starter }}}, Essential, and Dedicated.
 
 > **Tip:**
 >
@@ -35,7 +35,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>Data Migration (using the TiDB Cloud console)</td>
+    <td>Data migration (using the TiDB Cloud console)</td>
     <td style="text-align:center;">❌</td>
     <td style="text-align:center;">✅ <br/>(Private preview)</td>
     <td style="text-align:center;">✅</td>
