@@ -569,7 +569,7 @@
             -   [ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)
             -   [Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)
             -   [SQL 式を使用して DML をフィルタリングする](/dm/feature-expression-filter.md)
-            -   [オンラインDDLツールのサポート](/dm/dm-online-ddl-tool-support.md)
+            -   [オンライン DDL ツールのサポート](/dm/dm-online-ddl-tool-support.md)
             -   [暗号化と復号化のための秘密鍵をカスタマイズする](/dm/dm-customized-secret-key.md)
             -   データ移行タスクの管理
                 -   [タスクを事前チェックする](/dm/dm-precheck.md)
@@ -980,6 +980,7 @@
             -   [プッシュダウンの式のリスト](/functions-and-operators/expressions-pushed-down.md)
             -   [Oracle と TiDB の機能と構文の比較](/oracle-functions-to-tidb.md)
         -   [クラスター化インデックス](/clustered-indexes.md)
+        -   [グローバルインデックス](/global-indexes.md)
         -   [ベクトルインデックス](/vector-search/vector-search-index.md)
         -   [制約](/constraints.md)
         -   [生成された列](/generated-columns.md)

@@ -8,6 +8,40 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2025年12月9日 {#december-9-2025}
+
+**一般的な変更**
+
+-   **TiDB Cloud専用**
+
+    -   新しい[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン8.5.3](https://docs.pingcap.com/tidb/v8.5/release-8.5.3/)から[バージョン8.5.4](https://docs.pingcap.com/tidb/v8.5/release-8.5.4/)にアップグレードします。
+
+**コンソールの変更**
+
+-   **TiDB Cloud Starter とTiDB Cloud Essential**
+
+    -   [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスターのクラスター レベルで**統合された統合**ページを追加します。
+
+        -   クラスターの**「統合」**ページで、すべてのサードパーティ統合を統合します。以下のリストは、ユースケース別にまとめたこれらの統合の概要です。
+            -   **デプロイ**: AWS Lambda、Cloudflare Workers、Gitpod、Netlify、Terraform、WordPress
+            -   **データ**: Airbyte、Amazon AppFlow、dbt Labs、Looker Studio、n8n、Zapier
+            -   **GUI** : DBeaver、JetBrains DataGrip、MySQL Workbench、Navicat、ProxySQL、Visual Studio Code
+            -   **Java** : JDBC、Hibernate、MyBatis、Spring Boot
+            -   **Go** : Go-MySQL-Driver、GORM
+            -   **Python** : Django、mysqlclient、MySQL Connector/Python、peewee、PyMySQL、SQLAlchemy
+            -   **Node.js** : mysql.js、Next.js、node-mysql2、Prisma、Sequelize、TypeORM
+            -   **Ruby** : mysql2、Rails
+        -   検出可能性を向上させるために、統合エントリ[ヴェルセル](/tidb-cloud/integrate-tidbcloud-with-vercel.md)と[AWS ベッドロック](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md)クラスター レベルに移動します。
+        -   新しい統合をリクエストするための**「統合の提案」**を追加します。
+
+**APIの変更**
+
+-   TiDB Cloud IAM API (v1beta1) は、コンソール監査ログの一覧表示をサポートしています。
+
+    [監査ログの一覧表示](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam/#tag/Audit-Log/paths/~1auditLogs/get)エンドポイントは、コンソール監査ログへのプログラムによるアクセスを提供します。このエンドポイントを使用することで、監査ログを自動的に取得し、セキュリティとコンプライアンスの要件を満たすために定期的なバックアップをスケジュールできます。
+
+    詳細については[TiDB CloudIAM API](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam/)参照してください。
+
 ## 2025年12月2日 {#december-2-2025}
 
 **一般的な変更**
@@ -52,7 +86,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   **TiDB Cloud専用**
 
-    -   VPCピアリング経由でGoogle Cloudでホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに接続する場合、 [TiDB Cloudコンソール](https://tidbcloud.com/)で`/16` ～ `/18` IP範囲サイズを直接設定できるようになりました。この設定についてTiDB Cloudサポートに連絡する必要はなくなりました。
+    -   Google Cloud でホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに VPC ピアリング経由で接続する場合、 [TiDB Cloudコンソール](https://tidbcloud.com/)で`/16` ～ `/18` IP 範囲サイズを直接設定できるようになりました。この設定についてTiDB Cloudサポートに連絡する必要がなくなりました。
 
         詳細については[VPC ピアリング経由でTiDB Cloud Dedicated に接続する](/tidb-cloud/set-up-vpc-peering-connections.md)参照してください。
 
@@ -76,7 +110,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     サードパーティの監視統合を管理するための次の[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) API エンドポイントを導入します。
 
-    -   統合をリストする
+    -   統合の一覧
     -   統合を作成する
     -   統合を削除する
 

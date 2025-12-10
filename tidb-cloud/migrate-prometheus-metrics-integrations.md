@@ -5,7 +5,7 @@ summary: 従来のプロジェクト レベルの Prometheus 統合から新し�
 
 # Prometheus統合の移行 {#migrate-prometheus-integrations}
 
-TiDB Cloud は現在、 [Prometheusの統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)クラスタレベルで管理し、よりきめ細かな制御と構成を提供しています。従来のプロジェクトレベルの Prometheus 統合（ベータ版）は、2026年1月6日に廃止されます。組織でこれらの従来の統合をまだ使用している場合は、このガイドに従って新しいクラスタレベルの Prometheus 統合に移行し、メトリクス関連サービスへの影響を最小限に抑えてください。
+TiDB Cloud は現在、 [Prometheusの統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)クラスタレベルで管理し、よりきめ細かな制御と構成を提供しています。従来のプロジェクトレベルの Prometheus 統合（ベータ版）は、2026年1月9日に廃止されます。組織でこれらの従来の統合をまだ使用している場合は、このガイドに従って新しいクラスタレベルの Prometheus 統合に移行し、メトリクス関連サービスへの影響を最小限に抑えてください。
 
 ## 前提条件 {#prerequisites}
 

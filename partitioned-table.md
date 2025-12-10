@@ -9,7 +9,7 @@ summary: TiDB でパーティショニングを使用する方法を学習しま
 
 ## パーティションの種類 {#partitioning-types}
 
-このセクションでは、TiDBにおけるパーティショニングの種類について説明します。現在、TiDBは[範囲分割](#range-partitioning) 、 [範囲列パーティション](#range-columns-partitioning) 、 [List パーティショニング](#list-partitioning) 、 [List COLUMNS パーティショニング](#list-columns-partitioning) 、 [ハッシュパーティショニング](#hash-partitioning) 、および[キーパーティショニング](#key-partitioning)をサポートしています。
+このセクションでは、TiDBにおけるパーティションの種類について説明します。現在、TiDBは[範囲分割](#range-partitioning) 、 [範囲列パーティション](#range-columns-partitioning) 、 [List パーティショニング](#list-partitioning) 、 [List COLUMNS パーティショニング](#list-columns-partitioning) 、 [ハッシュパーティショニング](#hash-partitioning) 、および[キーパーティショニング](#key-partitioning)をサポートしています。
 
 -   範囲パーティション、範囲列パーティション、List パーティショニング、およびList COLUMNS パーティショニングは、アプリケーションでの大量の削除によって発生するパフォーマンスの問題を解決するために使用され、パーティションの迅速な削除をサポートします。
 -   ハッシュ・パーティショニングとキー・パーティショニングは、書き込み回数が多いシナリオでデータを分散するために使用されます。ハッシュ・パーティショニングと比較して、キー・パーティショニングは複数列のデータの分散と非整数列によるパーティショニングをサポートします。
@@ -1102,7 +1102,7 @@ ALTER TABLE member_level PARTITION BY RANGE(level)
  PARTITION pMax VALUES LESS THAN (MAXVALUE));
 ```
 
-パーティション化パーティションテーブルをパーティション化する場合、またはすでにパーティションテーブルを再パーティション化する場合は、必要に応じてインデックスをグローバルまたはローカルに更新できます。
+パーティション化パーティションテーブルをパーティション化する場合、またはすでにパーティションテーブルを再パーティション化する場合は、必要に応じてインデックスを[グローバルインデックス](/global-indexes.md)またはローカル インデックスに更新できます。
 
 ```sql
 CREATE TABLE t1 (
@@ -1342,7 +1342,7 @@ SELECT store_id, COUNT(department_id) AS c
 
 パーティションの選択は、レンジパーティションとハッシュパーティションを含むすべてのタイプのテーブルパーティションでサポートされています。ハッシュパーティションの場合、パーティション名が指定されていない場合は、 `p0` 、 `p1` 、 `p2` 、...、または`pN-1`自動的にパーティション名として使用されます。
 
-`SELECT` in `INSERT ... SELECT`でもパーティション選択を使用できます。
+`SELECT` in `INSERT ... SELECT`ではパーティション選択も使用できます。
 
 ## パーティションに関する制限と制約 {#restrictions-and-limitations-on-partitions}
 
@@ -1360,7 +1360,7 @@ SELECT store_id, COUNT(department_id) AS c
 
 > **注記：**
 >
-> [グローバルインデックス](#global-indexes)使用する場合、このルールは無視できます。
+> [グローバルインデックス](/global-indexes.md)使用する場合、このルールは無視できます。
 
 たとえば、次のテーブル作成ステートメントは無効です。
 
@@ -1549,97 +1549,7 @@ ERROR 8264 (HY000): Global Index is needed for index 'a', since the unique index
 
 ### グローバルインデックス {#global-indexes}
 
-グローバルインデックスが導入される前は、TiDBは各パーティションにローカルインデックスを作成していたため、データの一意性を確保するために、主キーと一意キー[制限](#partitioning-keys-primary-keys-and-unique-keys)パーティションキーを含める必要がありました。さらに、複数のパーティションにまたがるデータクエリを実行する場合、TiDBは結果を返すために各パーティションのデータをスキャンする必要がありました。
-
-これらの問題に対処するため、TiDBはv8.3.0でグローバルインデックス機能を導入しました。グローバルインデックスは、単一のインデックスでテーブル全体のデータをカバーするため、すべてのパーティションキーを包含することなく、主キーと一意キーのグローバルな一意性を維持できます。さらに、グローバルインデックスは、各パーティションのローカルインデックスを参照する代わりに、単一の操作で複数のパーティションにまたがるインデックスデータにアクセスできるため、パーティション化されていないキーのクエリパフォーマンスが大幅に向上します。v8.5.4以降では、一意でないインデックスもグローバルインデックスとして作成できます。
-
-グローバル インデックスを作成するには、インデックス定義に`GLOBAL`キーワードを追加します。
-
-> **注記：**
->
-> グローバル インデックスはパーティション管理に影響します。 `DROP` 、 `TRUNCATE` 、および`REORGANIZE PARTITION`操作は、テーブル レベルのグローバル インデックスの更新もトリガーします。つまり、これらの DDL 操作は、対応するテーブルのグローバル インデックスが完全に更新された後にのみ結果を返します。
-
-```sql
-CREATE TABLE t1 (
-    col1 INT NOT NULL,
-    col2 DATE NOT NULL,
-    col3 INT NOT NULL,
-    col4 INT NOT NULL,
-    UNIQUE KEY uidx12(col1, col2) GLOBAL,
-    UNIQUE KEY uidx3(col3),
-    KEY idx1(col1) GLOBAL
-)
-PARTITION BY HASH(col3)
-PARTITIONS 4;
-```
-
-前の例では、一意のインデックス`uidx12`と一意でないインデックス`idx1`はグローバル インデックスですが、 `uidx3`通常の一意のインデックスです。
-
-次の例に示すように、**クラスター化インデックスは**グローバル インデックスにはできないことに注意してください。
-
-```sql
-CREATE TABLE t2 (
-    col1 INT NOT NULL,
-    col2 DATE NOT NULL,
-    PRIMARY KEY (col2) CLUSTERED GLOBAL
-) PARTITION BY HASH(col1) PARTITIONS 5;
-```
-
-    ERROR 1503 (HY000): A CLUSTERED INDEX must include all columns in the table's partitioning function
-
-理由は、クラスター化インデックスがグローバルインデックスの場合、テーブルはパーティション分割されなくなるためです。これは、クラスター化インデックスのキーがパーティションレベルのレコードキーでもあるのに対し、グローバルインデックスはテーブルレベルのキーであるため、競合が発生するためです。主キーをグローバルインデックスとして設定する必要がある場合は、明示的に非クラスター化インデックス（例： `PRIMARY KEY(col1, col2) NONCLUSTERED GLOBAL` ）として定義する必要があります。
-
-[`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)出力の`GLOBAL`インデックス オプションによってグローバル インデックスを識別できます。
-
-```sql
-SHOW CREATE TABLE t1\G
-```
-
-           Table: t1
-    Create Table: CREATE TABLE `t1` (
-      `col1` int NOT NULL,
-      `col2` date NOT NULL,
-      `col3` int NOT NULL,
-      `col4` int NOT NULL,
-      UNIQUE KEY `uidx12` (`col1`,`col2`) /*T![global_index] GLOBAL */,
-      UNIQUE KEY `uidx3` (`col3`),
-      KEY `idx1` (`col1`) /*T![global_index] GLOBAL */
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
-    PARTITION BY HASH (`col3`) PARTITIONS 4
-    1 row in set (0.00 sec)
-
-あるいは、テーブル[`INFORMATION_SCHEMA.TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)をクエリし、出力の列`IS_GLOBAL`を確認することもできます。
-
-```sql
-SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEXES WHERE table_name='t1';
-```
-
-    +--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
-    | TABLE_SCHEMA | TABLE_NAME | NON_UNIQUE | KEY_NAME | SEQ_IN_INDEX | COLUMN_NAME | SUB_PART | INDEX_COMMENT | Expression | INDEX_ID | IS_VISIBLE | CLUSTERED | IS_GLOBAL |
-    +--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
-    | test         | t1         |          0 | uidx12   |            1 | col1        |     NULL |               | NULL       |        1 | YES        | NO        |         1 |
-    | test         | t1         |          0 | uidx12   |            2 | col2        |     NULL |               | NULL       |        1 | YES        | NO        |         1 |
-    | test         | t1         |          0 | uidx3    |            1 | col3        |     NULL |               | NULL       |        2 | YES        | NO        |         0 |
-    | test         | t1         |          1 | idx1     |            1 | col1        |     NULL |               | NULL       |        3 | YES        | NO        |         1 |
-    +--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
-    3 rows in set (0.00 sec)
-
-パーティション化パーティションテーブルをパーティション化する場合、またはすでにパーティションテーブルを再パーティション化する場合は、必要に応じてインデックスをグローバル インデックスまたはローカル インデックスに更新できます。
-
-例えば、次のSQL文は、列`col1`に基づいてテーブル`t1`を再パーティション化し、グローバルインデックス`uidx12`と`idx1`ローカルインデックスに更新し、ローカルインデックス`uidx3`グローバルインデックスに更新します。列`uidx3`は列`col3`の一意インデックスであるため、すべてのパーティションで列`col3`の一意性を保証するには、グローバルインデックスにする必要があります。列`uidx12`と`idx1`列`col1`インデックスであるため、グローバルインデックスとローカルインデックスのどちらでも構いません。
-
-```sql
-ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCAL, uidx3 GLOBAL, idx1 LOCAL);
-```
-
-#### グローバルインデックスの制限 {#limitations-of-global-indexes}
-
--   インデックス定義で`GLOBAL`キーワードが明示的に指定されていない場合、TiDB はデフォルトでローカル インデックスを作成します。
--   キーワード`GLOBAL`と`LOCAL`はパーティションテーブルにのみ適用され、非パーティションテーブルには影響しません。つまり、非パーティションテーブルでは、グローバルインデックスとローカルインデックスに違いはありません。
--   `DROP PARTITION` `REORGANIZE PARTITION`の DDL 操作も、グローバルインデックスの更新をトリガーします。これらの DDL 操作は`TRUNCATE PARTITION`結果を返す前にグローバルインデックスの更新が完了するのを待つ必要があるため、実行時間が長くなります。これは、 `DROP PARTITION`や`TRUNCATE PARTITION`などのデータアーカイブのシナリオで特に顕著です。グローバルインデックスがない場合、これらの操作は通常すぐに完了します。しかし、グローバルインデックスがある場合、更新が必要なインデックスの数が増えるにつれて実行時間が長くなります。
--   グローバル インデックスを持つテーブルは`EXCHANGE PARTITION`操作をサポートしません。
--   デフォルトでは、パーティションテーブルの主キーはクラスター化インデックスであり、パーティションキーを含める必要があります。主キーからパーティションキーを除外する必要がある場合は、テーブル作成時に主キーを非クラスター化グローバルインデックスとして明示的に指定できます（例： `PRIMARY KEY(col1, col2) NONCLUSTERED GLOBAL` ）。
--   式列にグローバル インデックスが追加された場合、またはグローバル インデックスがプレフィックス インデックスでもある場合 (たとえば`UNIQUE KEY idx_id_prefix (id(10)) GLOBAL` )、このグローバル インデックスの統計を手動で収集する必要があります。
+グローバルインデックスの詳細については、 [グローバルインデックス](/global-indexes.md)参照してください。
 
 ### 関数に関するパーティションの制限 {#partitioning-limitations-relating-to-functions}
 
@@ -1681,7 +1591,7 @@ ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCA
 create table t (id int, val int) partition by hash(id) partitions 4;
 ```
 
-通常の`LOAD DATA`操作がサポートされています:
+通常の`LOAD DATA`操作がサポートされています。
 
 ```sql
 load local data infile "xxx" into t ...

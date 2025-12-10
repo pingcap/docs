@@ -150,7 +150,7 @@
         -   [FastScanを使用する](/tiflash/use-fastscan.md)
         -   [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
         -   [TiFlashクエリ結果のマテリアライゼーション](/tiflash/tiflash-results-materialization.md)
-        -   [TiFlash遅延マテリアライゼーション](/tiflash/tiflash-late-materialization.md)
+        -   [TiFlash遅延実体化](/tiflash/tiflash-late-materialization.md)
         -   [互換性](/tiflash/tiflash-compatibility.md)
         -   [パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)
     -   監視と警告
@@ -351,7 +351,7 @@
     -   [クラウドプロバイダーマーケットプレイスからの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)
     -   [Changefeedの請求](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
     -   [データ移行の請求](/tidb-cloud/tidb-cloud-billing-dm.md)
-    -   [リカバリグループの請求](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
+    -   [回復グループの請求](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
     -   [予算を管理する](/tidb-cloud/tidb-cloud-budget.md)
 -   統合
     -   [エアバイト](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
@@ -593,6 +593,7 @@
         -   [集合演算](/functions-and-operators/set-operators.md)
         -   [プッシュダウンの式のリスト](/functions-and-operators/expressions-pushed-down.md)
     -   [クラスター化インデックス](/clustered-indexes.md)
+    -   [グローバルインデックス](/global-indexes.md)
     -   [制約](/constraints.md)
     -   [生成された列](/generated-columns.md)
     -   [SQLモード](/sql-mode.md)

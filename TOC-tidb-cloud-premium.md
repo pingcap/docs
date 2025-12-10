@@ -460,6 +460,7 @@
         -   [プッシュダウンの式のリスト](/functions-and-operators/expressions-pushed-down.md)
         -   [TiDB固有の機能](/functions-and-operators/tidb-functions.md)
     -   [クラスター化インデックス](/clustered-indexes.md)
+    -   [グローバルインデックス](/global-indexes.md)
     -   [制約](/constraints.md)
     -   [生成された列](/generated-columns.md)
     -   [SQLモード](/sql-mode.md)
@@ -550,7 +551,7 @@
     -   認証
         -   [ログイン](/tidb-cloud/ticloud-auth-login.md)
         -   [ログアウト](/tidb-cloud/ticloud-auth-logout.md)
-        -   [誰だ](/tidb-cloud/ticloud-auth-whoami.md)
+        -   [だれだ](/tidb-cloud/ticloud-auth-whoami.md)
     -   サーバーレス
         -   [容量](/tidb-cloud/ticloud-serverless-capacity.md)
         -   [作成する](/tidb-cloud/ticloud-cluster-create.md)
@@ -609,7 +610,7 @@
         -   [スケジュール](/tidb-scheduling.md)
         -   [TSO](/tso.md)
     -   ストレージエンジン
-        -   ティクブ
+        -   TiKV
             -   [TiKVの概要](/tikv-overview.md)
             -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
         -   TiFlash
