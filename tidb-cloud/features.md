@@ -212,3 +212,6 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
 </tbody></table>
+
+- ✅: The feature is already available.
+- ❌: The feature is currently not available.
