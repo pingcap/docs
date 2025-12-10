@@ -5,11 +5,11 @@ summary: Learn about feature support status for different TiDB Cloud plans.
 
 # Features
 
-This document lists the feature support status for different TiDB Cloud plans, including TiDB Cloud Starter, TiDB Cloud Essential, and TiDB Cloud Dedicated.
+This document lists the feature support status for different TiDB Cloud plans, including {{{ .starter }}}, {{{ .essential }}}, and {{{ .dedicated }}}.
 
 > **Tip:**
 >
-> [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#starter) is the best way to get started with TiDB Cloud. Additionally, you can try out TiDB Cloud features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
+> [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) is the best way to get started with TiDB Cloud. Additionally, you can try out TiDB Cloud features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
 
 <table><thead>
   <tr>
