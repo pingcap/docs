@@ -21,7 +21,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
   </tr></thead>
 <tbody>
   <tr>
-    <td>Basic </td>
+    <td>Basic</td>
     <td>TiFlash</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
