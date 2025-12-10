@@ -320,6 +320,20 @@ Configuration items related to the single thread pool serving read requests. Thi
 + Controls whether to automatically adjust the thread pool size. When it is enabled, the read performance of TiKV is optimized by automatically adjusting the UnifyReadPool thread pool size based on the current CPU usage. The possible range of the thread pool is `[max-thread-count, MAX(4, CPU)]`. The maximum value is the same as the one of [`max-thread-count`](#max-thread-count).
 + Default value: `false`
 
+### `cpu-threshold` <span class="version-mark">New in v8.5.5</span>
+
++ Specifies the CPU utilization threshold for the unified read pool.
+
+  - If this parameter is set to `0` (the default), this constraint is disabled, and thread pool scaling is determined solely by the busy thread scaling algorithm.
+  - If this parameter is set to a value greater than `0`, CPU threshold checks are imposed on top of thread scaling:
+      - A scale-down is forced when CPU usage exceeds the threshold plus a 10% leeway.
+      - A scale-up is prevented if it would cause CPU usage to exceed the threshold minus a 10% leeway.
+
+  For example, setting this parameter to `0.8` ensures that the unified read pool does not consume more than 80% of the available CPU resources.
++ This feature is active only when [`readpool.unified.auto-adjust-pool-size`](#auto-adjust-pool-size-new-in-v630) is set to `true`.
++ Default value: `0.0`
++ Value range: `[0.0, 1.0]`
+
 ## readpool.storage
 
 Configuration items related to storage thread pool.
