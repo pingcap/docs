@@ -5,7 +5,7 @@ summary: Learn about feature support status for different TiDB Cloud plans.
 
 # Features
 
-This document lists the feature support status for different TiDB Cloud plans, including {{{ .starter }}}, {{{ .essential }}}, and {{{ .dedicated }}}.
+This document lists the feature support status for different TiDB Cloud plans, including {{{ .starter }}}, Essential, and Dedicated.
 
 > **Tip:**
 >
