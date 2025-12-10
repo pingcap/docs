@@ -25,24 +25,26 @@ This document examines partitioned tables in TiDB from several perspectives, inc
 
 This section describes how to improve query efficiency by the following methods:
 
-- Partition pruning
-- Query performance on secondary indexes
+- [Partition pruning](#partition-pruning)
+- [Query performance on secondary indexes](#query-performance-on-secondary-indexes-non-partitioned-tables-vs-local-indexes-vs-global-indexes)
 
 ### Partition pruning
 
-Partition pruning is an optimization technique that allows TiDB to reduce the amount of data scanned when executing queries against partitioned tables. Instead of scanning all partitions, TiDB analyzes filter conditions of the query and determines which partitions might contain relevant data, and scans only those partitions. This significantly improves query performance by reducing I/O and computation overhead.
+Partition pruning is an optimization technique that reduces the amount of data TiDB scans when querying partitioned tables. Instead of scanning all partitions, TiDB evaluates the query filter conditions to identify the partitions that might contain matching data and scans only those partitions. This approach reduces I/O and computation overhead, which significantly improves query performance.
 
-Partition pruning is most beneficial in scenarios where query predicates match the partitioning strategy. Common use cases include:
+Partition pruning is most effective when query predicates align with the partitioning strategy. Typical use cases include the following:
 
-- Time-series data queries: when data is partitioned by time ranges (for example, daily, monthly), queries restricted to a specific time period can quickly skip unrelated partitions.
+- Time-series data queries: when data is partitioned by time ranges (for example, daily or monthly), queries limited to a specific time window can quickly skip unrelated partitions.
 - Multi-tenant or category-based datasets: partitioning by tenant ID or category enables queries to focus on a small subset of partitions.
-- Hybrid Transactional and Analytical Processing (HTAP): especially for range partitioning, TiDB can leverage partition pruning in analytical workloads on TiFlash to skip irrelevant partitions and scan only the necessary subset, preventing full table scans on large datasets.
+- Hybrid Transactional and Analytical Processing (HTAP): especially for Range partitioning, TiDB can apply partition pruning to analytical workloads on TiFlash. This optimization skips irrelevant partitions and avoids full table scans on large datasets.
 
 For more use cases, see [Partition Pruning](/partition-pruning.md).
 
 ### Query performance on secondary indexes: non-partitioned tables vs. local indexes vs. global indexes
 
-In TiDB, partitioned tables use local indexes by default. Each partition has its own set of indexes. A global index, on the other hand, covers the whole table in one index. This means it keeps track of all rows across all partitions. Global indexes can be faster for queries that span multiple partitions because a query using local indexes must perform a lookup in each relevant partition, while a query using a global index only needs to perform a single lookup for the entire table.
+In TiDB, partitioned tables use local indexes by default, where each partition maintains its own set of indexes. In contrast, a global index covers the entire table in one index and tracks rows across all partitions.
+
+For queries that access data from multiple partitions, global indexes generally provide better performance. This is because a query using local indexes requires separate index lookups in each relevant partition, while a query using a global index performs a single lookup across the entire table.
 
 #### Types of tables to be tested
 
