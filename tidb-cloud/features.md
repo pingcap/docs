@@ -24,7 +24,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
   </tr></thead>
 <tbody>
   <tr>
-    <td rowspan="2">Basic</td>
+    <td rowspan="2" style="background-color: transparent;">Basic</td>
     <td>TiKV</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -37,7 +37,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="2">Data import</td>
+    <td rowspan="2" style="background-color: transparent;">Data import</td>
     <td>Import (using <code>IMPORT INTO</code> or the TiDB Cloud console)</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -50,7 +50,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="2">Data export</td>
+    <td rowspan="2" style="background-color: transparent;">Data export</td>
     <td>Export</td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
@@ -63,7 +63,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="4">Backup &amp; restore</td>
+    <td rowspan="4" style="background-color: transparent;">Backup &amp; restore</td>
     <td>Automatic backup</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -88,14 +88,14 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>Storage</td>
+    <td style="background-color: transparent;">Storage</td>
     <td>Dual disk</td>
     <td style="text-align:center;">❌</td>
     <td style="text-align:center;">❌</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="2">Observability</td>
+    <td rowspan="2" style="background-color: transparent;">Observability</td>
     <td>Alerting</td>
     <td style="text-align:center;">❌</td>
     <td style="text-align:center;">❌</td>
@@ -108,7 +108,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="2">High availability</td>
+    <td rowspan="2" style="background-color: transparent;">High availability</td>
     <td>Failover (cross-AZ)</td>
     <td style="text-align:center;">❌</td>
     <td style="text-align:center;">✅</td>
@@ -121,7 +121,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="2">Resource allocation</td>
+    <td rowspan="2" style="background-color: transparent;">Resource allocation</td>
     <td>Node group</td>
     <td style="text-align:center;">❌</td>
     <td style="text-align:center;">❌</td>
@@ -134,7 +134,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="7">Security</td>
+    <td rowspan="7" style="background-color: transparent;">Security</td>
     <td>Private endpoint</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -177,7 +177,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="3">AI &amp; Development</td>
+    <td rowspan="3" style="background-color: transparent;">AI &amp; Development</td>
     <td>Vector search</td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
@@ -196,7 +196,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">❌</td>
   </tr>
   <tr>
-    <td rowspan="4">Cloud and regions</td>
+    <td rowspan="4" style="background-color: transparent;">Cloud and regions</td>
     <td>AWS</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
