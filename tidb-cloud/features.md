@@ -37,14 +37,14 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>OpenAPI</td>
-    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Beta)</span></td>
-    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Beta)</span></td>
-    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Beta)</span></td>
+    <td>API</td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
   </tr>
   <tr>
     <td rowspan="3" style="background-color: white;">Cluster management</td>
-    <td>Pause & Resume</td>
+    <td>Pause & resume</td>
     <td style="text-align:center;">❌</td>
     <td style="text-align:center;">❌</td>
     <td style="text-align:center;">✅</td>
@@ -121,7 +121,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
   </tr>
   <tr>
     <td rowspan="7" style="background-color: white;">Observability</td>
-    <td>In-app metrics</td>
+    <td>Built-in metrics</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
