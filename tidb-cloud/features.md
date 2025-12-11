@@ -23,12 +23,13 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <th style="text-align:center;">Dedicated</th>
   </tr></thead>
 <tbody>
-  </tr>
+  <tr>
     <td rowspan="2">Basic</td>
     <td>TiKV</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
+  </tr>
   <tr>
     <td>TiFlash</td>
     <td style="text-align:center;">✅</td>
