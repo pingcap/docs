@@ -23,8 +23,13 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <th style="text-align:center;">Dedicated</th>
   </tr></thead>
 <tbody>
+  </tr>
+    <td rowspan="2">Basic</td>
+    <td>TiKV</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
   <tr>
-    <td>Basic</td>
     <td>TiFlash</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -38,14 +43,14 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>Data migration (using the TiDB Cloud console)</td>
+    <td>Data migration</td>
     <td style="text-align:center;">❌</td>
     <td style="text-align:center;">✅ <br/>(Private preview)</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td rowspan="2">Data export</td>
-    <td>Export (using the TiDB Cloud console)</td>
+    <td>Export</td>
     <td style="text-align:center;">✅ <br/>(Public preview)</td>
     <td style="text-align:center;">✅ <br/>(Public preview)</td>
     <td style="text-align:center;">❌</td>
@@ -53,7 +58,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
   <tr>
     <td>Changefeed</td>
     <td style="text-align:center;">❌</td>
-    <td style="text-align:center;">✅ <br/>(Private preview)</td>
+    <td style="text-align:center;">✅ <br/>(Private preview in CLI)</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
@@ -153,7 +158,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>Customer-Managed Encryption Key (CMEK)</td>
+    <td>CMEK</td>
     <td style="text-align:center;">❌</td>
     <td style="text-align:center;">❌</td>
     <td style="text-align:center;">✅</td>
