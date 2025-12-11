@@ -24,7 +24,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
   </tr></thead>
 <tbody>
   <tr>
-    <td rowspan="3" style="background-color: white;">Basic</td>
+    <td rowspan="3" style="background-color: white;">Basics</td>
     <td>TiKV</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
