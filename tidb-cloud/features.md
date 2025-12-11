@@ -45,20 +45,20 @@ This document lists the feature support status for different TiDB Cloud plans, i
   <tr>
     <td>Data migration</td>
     <td style="text-align:center;">❌</td>
-    <td style="text-align:center;">✅ <br/>(Private preview)</td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Private preview)</span></td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td rowspan="2">Data export</td>
     <td>Export</td>
-    <td style="text-align:center;">✅ <br/>(Public preview)</td>
-    <td style="text-align:center;">✅ <br/>(Public preview)</td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">❌</td>
   </tr>
   <tr>
     <td>Changefeed</td>
     <td style="text-align:center;">❌</td>
-    <td style="text-align:center;">✅ <br/>(Private preview in CLI)</td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Private preview in CLI)</span></td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
@@ -148,7 +148,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
   <tr>
     <td>Database audit logging</td>
     <td style="text-align:center;">❌</td>
-    <td style="text-align:center;">✅ <br/>(Private preview)</td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Private preview)</span></td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
@@ -178,9 +178,9 @@ This document lists the feature support status for different TiDB Cloud plans, i
   <tr>
     <td rowspan="3">AI &amp; Development</td>
     <td>Vector search</td>
-    <td style="text-align:center;">✅ <br/>(Public preview)</td>
-    <td style="text-align:center;">✅ <br/>(Public preview)</td>
-    <td style="text-align:center;">✅ <br/>(Public preview)</td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
   </tr>
   <tr>
     <td>Data branch</td>
