@@ -24,7 +24,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
   </tr></thead>
 <tbody>
   <tr>
-    <td rowspan="2" style="background-color: white;">Basic</td>
+    <td rowspan="3" style="background-color: white;">Basic</td>
     <td>TiKV</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -34,6 +34,31 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td>TiFlash</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
+    <td>OpenAPI</td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Beta)</span></td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Beta)</span></td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Beta)</span></td>
+  </tr>
+  <tr>
+    <td rowspan="3" style="background-color: white;">Cluster management</td>
+    <td>Pause & Resume</td>
+    <td style="text-align:center;">❌</td>
+    <td style="text-align:center;">❌</td>
+    <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
+    <td>Maintenance window</td>
+    <td style="text-align:center;">❌</td>
+    <td style="text-align:center;">❌</td>
+    <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
+    <td>Recycle bin</td>
+    <td style="text-align:center;">❌</td>
+    <td style="text-align:center;">❌</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
@@ -89,16 +114,46 @@ This document lists the feature support status for different TiDB Cloud plans, i
   </tr>
   <tr>
     <td style="background-color: white;">Storage</td>
-    <td>Dual disk</td>
+    <td>Standard storage</td>
     <td style="text-align:center;">❌</td>
     <td style="text-align:center;">❌</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="2" style="background-color: white;">Observability</td>
+    <td rowspan="7" style="background-color: white;">Observability</td>
+    <td>In-app metrics</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
     <td>Alerting</td>
     <td style="text-align:center;">❌</td>
     <td style="text-align:center;">❌</td>
+    <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
+    <td>SQL Statement</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
+    <td>Slow Query</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
+    <td>Top SQL</td>
+    <td style="text-align:center;">❌</td>
+    <td style="text-align:center;">❌</td>
+    <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
+    <td>Events</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
