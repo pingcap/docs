@@ -197,6 +197,12 @@ This document only describes the parameters that are not included in command-lin
 + Default value: `"3s"`
 + Minimum value: `"1s"`
 
+### `graceful-shutdown-timeout`
+
++ Specifies the timeout for graceful shutdown. If the timeout is reached before the leader transfer completes, TiKV skips the transfer and proceeds directly to the shutdown process. To disable graceful shutdown, set the value to `0s`.
++ Default value: `"20s"`
++ Minimum value: `"0s"`
+
 ### `concurrent-send-snap-limit`
 
 + The maximum number of snapshots sent at the same time
