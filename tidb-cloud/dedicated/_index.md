@@ -66,7 +66,7 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 [从 MySQL 迁移](https://docs.pingcap.com/zh/tidbcloud/migrate-data-into-tidb)
 
-[从 Amazon Aurora MySQL 迁移](https://docs.pingcap.com/zh/tidbcloud/migrate-from-aurora-bulk-import)
+[从 Amazon RDS for Oracle 迁移](https://docs.pingcap.com/zh/tidbcloud/migrate-from-oracle-using-aws-dms)
 
 [从 TiDB Self-Managed 迁移](https://docs.pingcap.com/zh/tidbcloud/migrate-from-op-tidb)
 
