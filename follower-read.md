@@ -31,7 +31,6 @@ Default: leader
 
 This variable is used to set the expected data read mode.
 
-<<<<<<< HEAD
 - When the value of `tidb_replica_read` is set to `leader` or an empty string, TiDB maintains its default behavior and sends all read operations to the leader replica to perform.
 - When the value of `tidb_replica_read` is set to `follower`, TiDB selects a follower replica of the Region to perform all read operations.
 - When the value of `tidb_replica_read` is set to `leader-and-follower`, TiDB can select any replicas to perform read operations. In this mode, read requests are load balanced between the leader, follower and learner.
