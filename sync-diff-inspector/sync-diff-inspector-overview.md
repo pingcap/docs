@@ -58,7 +58,7 @@ For TiDB versions before v9.0.0:
     * **FLOAT/DOUBLE**: Floating-point types are implemented differently in TiDB and MySQL. `FLOAT` and `DOUBLE` respectively take 6 and 15 significant digits for calculating checksum. If you do not want to use this feature, set `ignore-columns` to skip checking these columns.
     * **JSON**: Supported for comparison. Be aware that collation and character set differences for JSON string values between upstream and downstream can lead to false positives.
     * **BLOB/VARBINARY**: Supported as binary data and compared byte-for-byte.
-    * **BIT**: Supported for MySQL→TiDB comparisons (validated with BIT(1/8/16/64)). If your schema uses unusual BIT encodings or application-level transformations, consider a small targeted validation.
+    * **BIT**: Supported for MySQL to TiDB comparisons. Validated for widths 1, 8, 16, and 64. If your schema uses non-standard widths or application-level transformations, perform a targeted validation test.
 
 * Support checking tables that do not contain the primary key or the unique index. However, if data is inconsistent, the generated SQL statements might not be able to repair the data correctly.
 
