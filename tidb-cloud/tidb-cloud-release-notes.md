@@ -8,6 +8,18 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## December 16, 2025
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Support duplicating changefeeds.
+  
+        You can now duplicate an existing changefeed while retaining its key configurations and routing information. This feature enables you to quickly recreate a failed changefeed or create a new changefeed with similar settings, reducing setup time and operational effort.
+  
+        For more information, see [Duplicate a changefeed](/tidb-cloud/changefeed-overview.md#duplicate-a-changefeed).
+
 ## December 9, 2025
 
 **General changes**
