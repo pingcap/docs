@@ -59,7 +59,7 @@ Slow query basics:
 * `Compile_time`: The duration of the query optimization.
 * `Optimize_time`: The time consumed for optimizing the execution plan.
 * `Wait_TS`: The waiting time of the statement to get transaction timestamps.
-* `Query`: A SQL statement. `Query` is not printed in the slow log, but the corresponding field is called `Query` after the slow log is mapped to the memory table.
+* `Query`: A SQL statement. `Query` is not printed in the slow query log, but the corresponding field is called `Query` after the slow query log is mapped to the memory table.
 * `Digest`: The fingerprint of the SQL statement.
 * `Txn_start_ts`: The start timestamp and the unique ID of a transaction. You can use this value to search for the transaction-related logs.
 * `Is_internal`: Whether a SQL statement is TiDB internal. `true` indicates that a SQL statement is executed internally in TiDB and `false` indicates that a SQL statement is executed by the user.
@@ -173,11 +173,46 @@ Fields related to storage engines:
 - `Storage_from_kv`: introduced in v9.0.0, indicates whether this statement read data from TiKV.
 - `Storage_from_mpp`: introduced in v9.0.0, indicates whether this statement read data from TiFlash.
 
+## Related hint
+
+You can force a statement to be recorded in the slow query log by using the `WRITE_SLOW_LOG` hint.
+
+- This hint is not subject to any threshold or trigger rules, that is, the statement is written to the slow query log regardless of whether it exceeds the slow query log threshold.
+- Currently only forcing the slow query log to be written is supported. Forcing it off (`WRITE_SLOW_LOG(FALSE)`) is not supported.
+
+Usage example:
+
+```sql
+SELECT /*+ WRITE_SLOW_LOG */ count(*) FROM t t1, t t2 WHERE t1.a = t2.b;
+```
+
 ## Related system variables
 
-* [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold): Sets the threshold for the slow log. The SQL statement whose execution time exceeds this threshold is recorded in the slow log. The default value is 300 (ms).
-* [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len): Sets the maximum length of the SQL statement recorded in the slow log. The default value is 4096 (byte).
-* [tidb_redact_log](/system-variables.md#tidb_redact_log): Determines whether to desensitize user data using `?` in the SQL statement recorded in the slow log. The default value is `0`, which means to disable the feature.
+* [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold): sets the threshold for the slow query log. The SQL statement whose execution time exceeds this threshold is recorded in the slow query log. The default value is 300 ms.
+* [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-new-in-v900): defines trigger rules for the slow query log. It supports combining multi-dimensional metrics to provide more flexible and fine-grained logging. Introduced in v9.0.0, it gradually replaces the single-threshold approach (`tidb_slow_log_threshold`).
+    * If `tidb_slow_log_rules` is not set:
+        * Slow query logging still relies on `tidb_slow_log_threshold`. The `query_time` threshold is taken from that variable for backward compatibility.
+    * If `tidb_slow_log_rules` is set:
+        * Configured rules take precedence and `tidb_slow_log_threshold` is ignored.
+        * If you want `query_time` to be part of the trigger, include it explicitly in the rules.
+        * Rule matching logic (multiple rules use OR):
+            * SESSION-scoped rules are matched first; if a SESSION rule matches, the slow query is logged.
+            * GLOBAL-scoped rules are considered only when no SESSION rule matches:
+                * If a GLOBAL rule specifies `ConnID` and it matches the current session `ConnID`, that rule takes effect.
+                * If a GLOBAL rule does not specify `ConnID` (a global rule), that rule takes effect.
+      * The show-variable behavior is the same as for regular system variables.
+
+    > **Tip:**
+    >
+    > - `tidb_slow_log_rules` replaces the single-threshold method to enable more flexible and fine-grained slow query control using multi-dimensional rule combinations.
+    > - In a well-provisioned test environment (1 TiDB: 16C/48G, and 3 TiKV: 16C/48G), multiple rounds of sysbench tests show that when multi-dimensional rules generate millions of slow query log entries within half an hour, the performance impact is small. However, when log volume reaches tens of millions, TPS and latency degrade noticeably. On high-workload systems or when CPU/memory are near capacity, configure `tidb_slow_log_rules` conservatively to avoid log floods. It is recommended to use `tidb_slow_log_max_per_sec` to throttle slow query log printing and reduce impact on production workloads.
+
+* [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v900): sets the maximum number of slow query logs printed per second. This variable is introduced in v9.0.0. The default value is `0`.
+    * `0` means there is no limit on the number of slow query logs printed per second.
+    * A value greater than `0` caps the number of slow query logs printed per second. Excessive logs are discarded and not written to the slow query log file.
+    * It is recommended to set this variable when `tidb_slow_log_rules` is enabled to avoid excessive log printing.
+* [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len): Sets the maximum length of the SQL statement recorded in the slow query log. The default value is 4096 (byte).
+* [tidb_redact_log](/system-variables.md#tidb_redact_log): Determines whether to desensitize user data using `?` in the SQL statement recorded in the slow query log. The default value is `0`, which means to disable the feature.
 * [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info): Determines whether to record the physical execution information of each operator in the execution plan. The default value is `1`. This feature impacts the performance by approximately 3%. After enabling this feature, you can view the `Plan` information as follows:
 
     ```sql
@@ -195,8 +230,6 @@ Fields related to storage engines:
 
 If you are conducting a performance test, you can disable the feature of automatically collecting the execution information of operators:
 
-{{< copyable "sql" >}}
-
 ```sql
 set @@tidb_enable_collect_execution_info=0;
 ```
@@ -205,17 +238,17 @@ The returned result of the `Plan` field has roughly the same format with that of
 
 For more information, see [TiDB specific variables and syntax](/system-variables.md).
 
-## Memory mapping in slow log
+## Memory mapping in slow query log
 
-You can query the content of the slow query log by querying the `INFORMATION_SCHEMA.SLOW_QUERY` table. Each column name in the table corresponds to one field name in the slow log. For table structure, see the introduction to the `SLOW_QUERY` table in [Information Schema](/information-schema/information-schema-slow-query.md).
+You can query the content of the slow query log by querying the `INFORMATION_SCHEMA.SLOW_QUERY` table. Each column name in the table corresponds to one field name in the slow query log. For table structure, see the introduction to the `SLOW_QUERY` table in [Information Schema](/information-schema/information-schema-slow-query.md).
 
 > **Note:**
 >
 > Every time you query the `SLOW_QUERY` table, TiDB reads and parses the current slow query log.
 
-For TiDB 4.0, `SLOW_QUERY` supports querying the slow log of any period of time, including the rotated slow log file. You need to specify the `TIME` range to locate the slow log files that need to be parsed. If you don't specify the `TIME` range, TiDB only parses the current slow log file. For example:
+For TiDB 4.0, `SLOW_QUERY` supports querying the slow query log of any period of time, including the rotated slow query log file. You need to specify the `TIME` range to locate the slow query log files that need to be parsed. If you don't specify the `TIME` range, TiDB only parses the current slow query log file. For example:
 
-* If you don't specify the time range, TiDB only parses the slow query data that TiDB is writing to the slow log file:
+* If you don't specify the time range, TiDB only parses the slow query data that TiDB is writing to the slow query log file:
 
     {{< copyable "sql" >}}
 
@@ -234,7 +267,7 @@ For TiDB 4.0, `SLOW_QUERY` supports querying the slow log of any period of time,
     +----------+----------------------------+----------------------------+
     ```
 
-* If you specify the time range, for example, from `2020-03-10 00:00:00` to `2020-03-11 00:00:00`, TiDB first locates the slow log files of the specified time range, and then parses the slow query information:
+* If you specify the time range, for example, from `2020-03-10 00:00:00` to `2020-03-11 00:00:00`, TiDB first locates the slow query log files of the specified time range, and then parses the slow query information:
 
     {{< copyable "sql" >}}
 
@@ -257,7 +290,7 @@ For TiDB 4.0, `SLOW_QUERY` supports querying the slow log of any period of time,
 
 > **Note:**
 >
-> If the slow log files of the specified time range are removed, or there is no slow query, the query returns NULL.
+> If the slow query log files of the specified time range are removed, or there is no slow query, the query returns NULL.
 
 TiDB 4.0 adds the [`CLUSTER_SLOW_QUERY`](/information-schema/information-schema-slow-query.md#cluster_slow_query-table) system table to query the slow query information of all TiDB nodes. The table schema of the `CLUSTER_SLOW_QUERY` table differs from that of the `SLOW_QUERY` table in that an `INSTANCE` column is added to `CLUSTER_SLOW_QUERY`. The `INSTANCE` column represents the TiDB node address of the row information on the slow query. You can use `CLUSTER_SLOW_QUERY` the way you do with [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md).
 
@@ -521,7 +554,7 @@ min(prev_stmt)     |
 digest             | 24bd6d8a9b238086c9b8c3d240ad4ef32f79ce94cf5a468c0b8fe1eb5f8d03df
 ```
 
-### Parse other TiDB slow log files
+### Parse other TiDB slow query log files
 
 TiDB uses the session variable `tidb_slow_query_file` to control the files to be read and parsed when querying `INFORMATION_SCHEMA.SLOW_QUERY`. You can query the content of other slow query log files by modifying the value of the session variable.
 
