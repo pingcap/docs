@@ -209,7 +209,7 @@ SELECT /*+ WRITE_SLOW_LOG */ count(*) FROM t t1, t t2 WHERE t1.a = t2.b;
 
 * [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v900): sets the maximum number of slow query logs printed per second. This variable is introduced in v9.0.0. The default value is `0`.
     * `0` means there is no limit on the number of slow query logs printed per second.
-    * A value greater than `0` caps the number of slow query logs printed per second. Excessive logs are discarded and not written to the slow query log file.
+    * A value greater than `0` caps the number of slow query logs printed per second. Excess logs are discarded and not written to the slow query log file.
     * It is recommended to set this variable when `tidb_slow_log_rules` is enabled to avoid excessive log printing.
 * [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len): Sets the maximum length of the SQL statement recorded in the slow query log. The default value is 4096 (byte).
 * [tidb_redact_log](/system-variables.md#tidb_redact_log): Determines whether to desensitize user data using `?` in the SQL statement recorded in the slow query log. The default value is `0`, which means to disable the feature.
