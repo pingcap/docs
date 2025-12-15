@@ -66,8 +66,8 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) | Y | Y | Y | Y | N | N | N |
 | [Foreign key](/foreign-key.md) | Y | E | E | E | N | N | N |
 | [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) | Y | Y | Y | Y | N | N | N |
-| [Global index](/partitioned-table.md#global-indexes) | Y |  N | N  | N | N | N | N |
-| [Vector index](/vector-search/vector-search-index.md) | E | N | N | N | N | N | N |
+| [Global indexes](/global-indexes.md) | Y |  N | N  | N | N | N | N |
+| [Vector indexes](/vector-search/vector-search-index.md) | E | N | N | N | N | N | N |
 
 ## SQL statements
 
@@ -174,7 +174,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) | Y | Y | Y | Y | E | N | N |
 | [Convert a partitioned table to a non-partitioned table](/partitioned-table.md#convert-a-partitioned-table-to-a-non-partitioned-table) | Y | Y | Y | N | N | N | N |
 | [Partition an existing table](/partitioned-table.md#partition-an-existing-table) | Y | Y | Y | N | N | N | N |
-| [Global index](/partitioned-table.md#global-indexes) | Y | N | N | N | N | N | N |
+| [Global indexes](/global-indexes.md) | Y | N | N | N | N | N | N |
 
 ## Statistics
 
