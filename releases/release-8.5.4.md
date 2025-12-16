@@ -38,7 +38,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     Starting from v8.3.0, you can create global indexes on unique columns of partitioned tables in TiDB to improve query performance. However, creating global indexes on non-unique columns was not supported. Starting from v8.5.4, TiDB removes this restriction, enabling you to create global indexes on non-unique columns of partitioned tables, which enhances the usability of global indexes.
 
-    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/partitioned-table#global-indexes).
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/global-indexes/).
 
 * Support gracefully shutting down TiFlash [#10266](https://github.com/pingcap/tiflash/issues/10266) @[gengliqi](https://github.com/gengliqi)
 
