@@ -710,7 +710,7 @@ Do the following to set up the load balancer:
 
 ### 1. Create the AWS Endpoint Service Private Link connection
 
-You can also refer to [Create an AWS Endpoint Service Private Link Connection](/tidbcloud/serverless-private-link-connection-to-self-hosted-kakfa-in-aws#create-an-aws-endpoint-service-private-link-connection) for more details.
+You can also refer to [Create an AWS Endpoint Service Private Link Connection](/tidbcloud/serverless-private-link-connection#create-an-aws-endpoint-service-private-link-connection) for more details.
 
 <SimpleTab>
 <div label="Console">
@@ -746,7 +746,7 @@ ticloud s plc create -c <cluster-id> --display-name <display-name> --type AWS_EN
 
 ### Attach Domains to the Private Link Connection
 
-You can also refer to [Attach Domains to a Private Link Connection](/tidbcloud/serverless-private-link-connection-to-self-hosted-kakfa-in-aws#attach-domains-to-a-private-link-connection) for more details.
+You can also refer to [Attach Domains to a Private Link Connection](/tidbcloud/serverless-private-link-connection#attach-domains-to-a-private-link-connection) for more details.
 
 <SimpleTab>
 <div label="Console">
