@@ -5,7 +5,7 @@ summary: Learn how to connect to TiDB using Hibernate. This tutorial gives Java 
 
 # Connect to TiDB with Hibernate
 
-TiDB is a MySQL-compatible database, and [Hibernate](https://hibernate.org/orm/) is a popular open-source Java ORM. Because TiDB is highly compatible with MySQL, you can use `org.hibernate.dialect.MySQLDialect` as the Hibernate dialect. This is the recommended approach for long-term compatibility. Alternatively, a TiDB-specific dialect (`org.hibernate.community.dialect.TiDBDialect`) is available in [Hibernate community dialects](https://github.com/hibernate/hibernate-orm/tree/main/hibernate-community-dialects), though it is not maintained by PingCAP. If you encounter any compatibility issues, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+TiDB is a MySQL-compatible database, and [Hibernate](https://hibernate.org/orm/) is a popular open-source Java ORM. Because TiDB is highly compatible with MySQL, PingCAP recommends using `org.hibernate.dialect.MySQLDialect` as the Hibernate dialect for long-term compatibility. Alternatively, a TiDB-specific dialect (`org.hibernate.community.dialect.TiDBDialect`) is available in [Hibernate community dialects](https://github.com/hibernate/hibernate-orm/tree/main/hibernate-community-dialects), but it is not maintained by PingCAP. If you use `MySQLDialect` and encounter any compatibility issues, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 In this tutorial, you can learn how to use TiDB and Hibernate to accomplish the following tasks:
 
