@@ -1,4 +1,4 @@
-# Set Up Private Link Connection Connect to AWS Confleunt
+# Set Up Private Link Connection Connect to AWS Confleunt Cloud
 
 > **Note**
 >
