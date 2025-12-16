@@ -8,6 +8,28 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## December 16, 2025
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Support duplicating changefeeds.
+  
+        You can now duplicate an existing changefeed while retaining its key configurations and routing information. This feature enables you to quickly recreate a failed changefeed or create a new changefeed with similar settings, reducing setup time and operational effort.
+  
+        For more information, see [Duplicate a changefeed](/tidb-cloud/changefeed-overview.md#duplicate-a-changefeed).
+
+**Console changes**
+
+- **TiDB Cloud Starter**
+
+    - Support seamless AI integration with the Model Context Protocol (MCP) for [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) clusters.
+
+        TiDB Cloud Starter now supports MCP, providing a unified and secure way to connect your TiDB Cloud Starter cluster to popular AI tools including Cursor, Claude Code, VS Code, and WindSurf. You can set up your connection once and begin querying your data with AI tools in minutes.
+
+        To access this feature, click **Use with AI Tools** in the upper-right corner of your [cluster](https://tidbcloud.com/project/clusters) overview page.
+
 ## December 9, 2025
 
 **General changes**
