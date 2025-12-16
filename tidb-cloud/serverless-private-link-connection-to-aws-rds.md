@@ -74,7 +74,7 @@ Set up the endpoint service in the same region of your RDS:
     - **Require acceptance for endpoint**: Recommended to check `Acceptance required`
     - **Supported IP address types**: `Ipv4`
 
-2.  Go to the detail page of the endpoint service and note down the **Service name**. You need to provide it to TiDB Cloud, for example `com.amazonaws.vpce.<region>.vpce-svc-xxx`.
+2. Go to the detail page of the endpoint service and note down the **Service name**. You need to provide it to TiDB Cloud, for example `com.amazonaws.vpce.<region>.vpce-svc-xxx`.
 
 3. On the detail page of the endpoint service, click the **Allow principals** tab, and allow the TiDB Cloud account ID. You can get the account ID in [Prerequisites](#prerequisites), for example, `arn:aws:iam::<account_id>:root`.
 

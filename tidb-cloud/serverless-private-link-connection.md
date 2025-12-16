@@ -78,6 +78,7 @@ ticloud s plc create -c <cluster-id> --display-name <display-name> --type AWS_EN
 ```
 
 Please make sure the AWS endpoint service:
+
 1. Allows the acceptance of TiDB Cloud account.
 2. Has overlapping available zones of TiDB Cloud cluster.
 
@@ -129,6 +130,7 @@ ticloud s plc create -c <cluster-id> --display-name <display-name> --type ALICLO
 ```
 
 Please make sure the Alibaba Cloud endpoint service:
+
 1. In the same region of the TiDB Cloud cluster.
 2. Allows the acceptance of TiDB Cloud account.
 3. Has overlapping available zones of TiDB Cloud cluster.
@@ -243,8 +245,8 @@ First, get the Private Link Connection details to find the attach-domain-id:
 
 ```shell
 ticloud s plc get -c <cluster-id> --private-link-connection-id <plc-id>
-
 ```
+
 Then, detach the domain by the attach-domain-id:
 
 ```shell

@@ -36,7 +36,7 @@ The following table shows an example of the deployment information.
 | Region    | Oregon (`us-west-2`)    |  N/A |
 | Principal of TiDB Cloud AWS Account | `arn:aws:iam::<account_id>:root`     |    N/A  |
 | AZ IDs                              | <ul><li>`usw2-az1` </li><li>`usw2-az2` </li><li> `usw2-az3`</li></ul>  | Align AZ IDs to AZ names in your AWS account.<br/>Example: <ul><li> `usw2-az1` => `us-west-2a` </li><li> `usw2-az2` => `us-west-2c` </li><li>`usw2-az3` => `us-west-2b`</li></ul>  |
-| Kafka Advertised Listener Pattern   | <ul><li> `usw2-az1` => &lt;broker_id&gt;.usw2-az1.<unique_name>.aws.tidbcloud.com:&lt;port&gt; </li><li> `usw2-az2` => &lt;broker_id&gt;.usw2-az2.<unique_name>.aws.tidbcloud.com:&lt;port&gt; </li><li> `usw2-az3` => &lt;broker_id&gt;.usw2-az3.<unique_name>.aws.tidbcloud.com:&lt;port&gt; </li></ul>    | Map AZ names to AZ-specified patterns. Make sure that you configure the right pattern to the broker in a specific AZ later. <ul><li> `us-west-2a` => &lt;broker_id&gt;.usw2-az1.<unique_name>.aws.tidbcloud.com:&lt;port&gt; </li><li> `us-west-2c` => &lt;broker_id&gt;.usw2-az2.<unique_name>.aws.tidbcloud.com:&lt;port&gt; </li><li> `us-west-2b` => &lt;broker_id&gt;.usw2-az3.<unique_name>.aws.tidbcloud.com:&lt;port&gt; </li></ul> The actual value of unique name will be generated in step 4, before that just use <unique_name> as a placeholder |
+| Kafka Advertised Listener Pattern   | <ul><li> `usw2-az1` => &lt;broker_id&gt;.usw2-az1.unique_name.aws.tidbcloud.com:&lt;port&gt; </li><li> `usw2-az2` => &lt;broker_id&gt;.usw2-az2.unique_name.aws.tidbcloud.com:&lt;port&gt; </li><li> `usw2-az3` => &lt;broker_id&gt;.usw2-az3.unique_name.aws.tidbcloud.com:&lt;port&gt; </li></ul>    | Map AZ names to AZ-specified patterns. Make sure that you configure the right pattern to the broker in a specific AZ later. <ul><li> `us-west-2a` => &lt;broker_id&gt;.usw2-az1.unique_name.aws.tidbcloud.com:&lt;port&gt; </li><li> `us-west-2c` => &lt;broker_id&gt;.usw2-az2.unique_name.aws.tidbcloud.com:&lt;port&gt; </li><li> `us-west-2b` => &lt;broker_id&gt;.usw2-az3.unique_name.aws.tidbcloud.com:&lt;port&gt; </li></ul> The actual value of unique name will be generated in step 4, before that just use unique_name as a placeholder |
 
 ## Step 1. Set up a Kafka cluster
 
@@ -275,15 +275,15 @@ Use SSH to log in to every broker node. Create a configuration file `~/config/se
 # broker-node1 ~/config/server.properties
 # 1. Replace {broker-node1-ip}, {broker-node2-ip}, {broker-node3-ip} with the actual IP addresses.
 # 2. Configure EXTERNAL in "advertised.listeners" based on the "Kafka Advertised Listener Pattern" in the "Prerequisites" section.
-# 2.1 The pattern for AZ(ID: usw2-az1) is "<broker_id>.usw2-az1.<unique_name>.aws.tidbcloud.com:<port>".
-# 2.2 So the EXTERNAL can be "b1.usw2-az1.<unique_name>.aws.tidbcloud.com:9093". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9093) in the port range of the EXTERNAL advertised listener.
+# 2.1 The pattern for AZ(ID: usw2-az1) is "<broker_id>.usw2-az1.unique_name.aws.tidbcloud.com:<port>".
+# 2.2 So the EXTERNAL can be "b1.usw2-az1.unique_name.aws.tidbcloud.com:9093". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9093) in the port range of the EXTERNAL advertised listener.
 # 2.3 If there are more broker role nodes in the same AZ, you can configure them in the same way.
 process.roles=broker,controller
 node.id=1
 controller.quorum.voters=1@{broker-node1-ip}:29092,2@{broker-node2-ip}:29092,3@{broker-node3-ip}:29092
 listeners=INTERNAL://0.0.0.0:9092,CONTROLLER://0.0.0.0:29092,EXTERNAL://0.0.0.0:39092
 inter.broker.listener.name=INTERNAL
-advertised.listeners=INTERNAL://{broker-node1-ip}:9092,EXTERNAL://b1.usw2-az1.<unique_name>.aws.tidbcloud.com:9093
+advertised.listeners=INTERNAL://{broker-node1-ip}:9092,EXTERNAL://b1.usw2-az1.unique_name.aws.tidbcloud.com:9093
 controller.listener.names=CONTROLLER
 listener.security.protocol.map=INTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
 log.dirs=./data
@@ -295,15 +295,15 @@ log.dirs=./data
 # broker-node2 ~/config/server.properties
 # 1. Replace {broker-node1-ip}, {broker-node2-ip}, {broker-node3-ip} with the actual IP addresses.
 # 2. Configure EXTERNAL in "advertised.listeners" based on the "Kafka Advertised Listener Pattern" in the "Prerequisites" section.
-# 2.1 The pattern for AZ(ID: usw2-az2) is "<broker_id>.usw2-az2.<unique_name>.aws.tidbcloud.com:<port>".
-# 2.2 So the EXTERNAL can be "b2.usw2-az2.<unique_name>.aws.tidbcloud.com:9094". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9094) in the port range of the EXTERNAL advertised listener.
+# 2.1 The pattern for AZ(ID: usw2-az2) is "<broker_id>.usw2-az2.unique_name.aws.tidbcloud.com:<port>".
+# 2.2 So the EXTERNAL can be "b2.usw2-az2.unique_name.aws.tidbcloud.com:9094". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9094) in the port range of the EXTERNAL advertised listener.
 # 2.3 If there are more broker role nodes in the same AZ, you can configure them in the same way.
 process.roles=broker,controller
 node.id=2
 controller.quorum.voters=1@{broker-node1-ip}:29092,2@{broker-node2-ip}:29092,3@{broker-node3-ip}:29092
 listeners=INTERNAL://0.0.0.0:9092,CONTROLLER://0.0.0.0:29092,EXTERNAL://0.0.0.0:39092
 inter.broker.listener.name=INTERNAL
-advertised.listeners=INTERNAL://{broker-node2-ip}:9092,EXTERNAL://b2.usw2-az2.<unique_name>.aws.tidbcloud.com:9094
+advertised.listeners=INTERNAL://{broker-node2-ip}:9092,EXTERNAL://b2.usw2-az2.unique_name.aws.tidbcloud.com:9094
 controller.listener.names=CONTROLLER
 listener.security.protocol.map=INTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
 log.dirs=./data
@@ -315,15 +315,15 @@ log.dirs=./data
 # broker-node3 ~/config/server.properties
 # 1. Replace {broker-node1-ip}, {broker-node2-ip}, {broker-node3-ip} with the actual IP addresses.
 # 2. Configure EXTERNAL in "advertised.listeners" based on the "Kafka Advertised Listener Pattern" in the "Prerequisites" section.
-# 2.1 The pattern for AZ(ID: usw2-az3) is "<broker_id>.usw2-az3.<unique_name>.aws.tidbcloud.com:<port>".
-# 2.2 So the EXTERNAL can be "b3.usw2-az3.<unique_name>.aws.tidbcloud.com:9095". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9095) in the port range of the EXTERNAL advertised listener.
+# 2.1 The pattern for AZ(ID: usw2-az3) is "<broker_id>.usw2-az3.unique_name.aws.tidbcloud.com:<port>".
+# 2.2 So the EXTERNAL can be "b3.usw2-az3.unique_name.aws.tidbcloud.com:9095". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9095) in the port range of the EXTERNAL advertised listener.
 # 2.3 If there are more broker role nodes in the same AZ, you can configure them in the same way.
 process.roles=broker,controller
 node.id=3
 controller.quorum.voters=1@{broker-node1-ip}:29092,2@{broker-node2-ip}:29092,3@{broker-node3-ip}:29092
 listeners=INTERNAL://0.0.0.0:9092,CONTROLLER://0.0.0.0:29092,EXTERNAL://0.0.0.0:39092
 inter.broker.listener.name=INTERNAL
-advertised.listeners=INTERNAL://{broker-node3-ip}:9092,EXTERNAL://b3.usw2-az3.<unique_name>.aws.tidbcloud.com:9095
+advertised.listeners=INTERNAL://{broker-node3-ip}:9092,EXTERNAL://b3.usw2-az3.unique_name.aws.tidbcloud.com:9095
 controller.listener.names=CONTROLLER
 listener.security.protocol.map=INTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
 log.dirs=./data
@@ -392,9 +392,9 @@ LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properti
     # Expected output for the last 3 lines (the actual order might be different)
     # The difference in the output from "bootstrap from INTERNAL listener" is that exceptions or errors might occur because advertised listeners cannot be resolved in Kafka VPC.
     # We will make them resolvable in TiDB Cloud side and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Link. 
-    b1.usw2-az1.<unique_name>.aws.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
-    b2.usw2-az2.<unique_name>.aws.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
-    b3.usw2-az3.<unique_name>.aws.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
+    b1.usw2-az1.unique_name.aws.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
+    b2.usw2-az2.unique_name.aws.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
+    b3.usw2-az3.unique_name.aws.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     ```
 
 2. Create a producer script `produce.sh` in the bastion node.
@@ -527,9 +527,9 @@ The following configuration applies to a Kafka KRaft cluster. The ZK mode config
     listeners=INTERNAL:...,EXTERNAL://0.0.0.0:39092
 
     # Add EXTERNAL advertised listeners based on the "Kafka Advertised Listener Pattern" in "Prerequisites" section
-    # 1. The pattern for AZ(ID: usw2-az1) is "<broker_id>.usw2-az1.<unique_name>.aws.tidbcloud.com:<port>"
-    # 2. So the EXTERNAL can be "b1.usw2-az1.<unique_name>.aws.tidbcloud.com:9093", replace <broker_id> with "b" prefix plus "node.id" properties, replace <port> with a unique port(9093) in EXTERNAL advertised listener ports range 
-    advertised.listeners=...,EXTERNAL://b1.usw2-az1.<unique_name>.aws.tidbcloud.com:9093
+    # 1. The pattern for AZ(ID: usw2-az1) is "<broker_id>.usw2-az1.unique_name.aws.tidbcloud.com:<port>"
+    # 2. So the EXTERNAL can be "b1.usw2-az1.unique_name.aws.tidbcloud.com:9093", replace <broker_id> with "b" prefix plus "node.id" properties, replace <port> with a unique port(9093) in EXTERNAL advertised listener ports range 
+    advertised.listeners=...,EXTERNAL://b1.usw2-az1.unique_name.aws.tidbcloud.com:9093
 
     # Configure EXTERNAL map
     listener.security.protocol.map=...,EXTERNAL:PLAINTEXT
@@ -542,9 +542,9 @@ The following configuration applies to a Kafka KRaft cluster. The ZK mode config
     listeners=INTERNAL:...,EXTERNAL://0.0.0.0:39092
 
     # Add EXTERNAL advertised listeners based on the "Kafka Advertised Listener Pattern" in "Prerequisites" section
-    # 1. The pattern for AZ(ID: usw2-az2) is "<broker_id>.usw2-az2.<unique_name>.aws.tidbcloud.com:<port>"
-    # 2. So the EXTERNAL can be "b2.usw2-az2.<unique_name>.aws.tidbcloud.com:9094". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port(9094) in EXTERNAL advertised listener ports range.
-    advertised.listeners=...,EXTERNAL://b2.usw2-az2.<unique_name>.aws.tidbcloud.com:9094
+    # 1. The pattern for AZ(ID: usw2-az2) is "<broker_id>.usw2-az2.unique_name.aws.tidbcloud.com:<port>"
+    # 2. So the EXTERNAL can be "b2.usw2-az2.unique_name.aws.tidbcloud.com:9094". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port(9094) in EXTERNAL advertised listener ports range.
+    advertised.listeners=...,EXTERNAL://b2.usw2-az2.unique_name.aws.tidbcloud.com:9094
 
     # Configure EXTERNAL map
     listener.security.protocol.map=...,EXTERNAL:PLAINTEXT
@@ -557,9 +557,9 @@ The following configuration applies to a Kafka KRaft cluster. The ZK mode config
     listeners=INTERNAL:...,EXTERNAL://0.0.0.0:39092
 
     # Add EXTERNAL advertised listeners based on the "Kafka Advertised Listener Pattern" in "Prerequisites" section
-    # 1. The pattern for AZ(ID: usw2-az3) is "<broker_id>.usw2-az3.<unique_name>.aws.tidbcloud.com:<port>"
-    # 2. So the EXTERNAL can be "b2.usw2-az3.<unique_name>.aws.tidbcloud.com:9095". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port(9095) in EXTERNAL advertised listener ports range.
-    advertised.listeners=...,EXTERNAL://b3.usw2-az3.<unique_name>.aws.tidbcloud.com:9095
+    # 1. The pattern for AZ(ID: usw2-az3) is "<broker_id>.usw2-az3.unique_name.aws.tidbcloud.com:<port>"
+    # 2. So the EXTERNAL can be "b2.usw2-az3.unique_name.aws.tidbcloud.com:9095". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port(9095) in EXTERNAL advertised listener ports range.
+    advertised.listeners=...,EXTERNAL://b3.usw2-az3.unique_name.aws.tidbcloud.com:9095
 
     # Configure EXTERNAL map
     listener.security.protocol.map=...,EXTERNAL:PLAINTEXT
@@ -590,9 +590,9 @@ export JAVA_HOME=/home/ec2-user/jdk-22.0.2
 # Expected output for the last 3 lines (the actual order might be different)
 # There will be some exceptions or errors because advertised listeners cannot be resolved in your Kafka network. 
 # We will make them resolvable in TiDB Cloud side and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Link. 
-b1.usw2-az1.<unique_name>.aws.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
-b2.usw2-az2.<unique_name>.aws.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
-b3.usw2-az3.<unique_name>.aws.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
+b1.usw2-az1.unique_name.aws.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
+b2.usw2-az2.unique_name.aws.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
+b3.usw2-az3.unique_name.aws.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 ```
 
 ## Step 2. Expose the Kafka cluster as Private Link Service
@@ -683,9 +683,9 @@ Do the following to set up the load balancer:
     ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {lb_dns_name}:9092
 
     # Expected output for the last 3 lines (the actual order might be different)
-    b1.usw2-az1.<unique_name>.aws.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
-    b2.usw2-az2.<unique_name>.aws.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
-    b3.usw2-az3.<unique_name>.aws.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
+    b1.usw2-az1.unique_name.aws.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
+    b2.usw2-az2.unique_name.aws.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
+    b3.usw2-az3.unique_name.aws.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 
     # You can also try bootstrap in other ports 9093/9094/9095. It will succeed probabilistically because NLB in AWS resolves LB DNS to the IP address of any availability zone and disables cross-zone load balancing by default. 
     # If you enable cross-zone load balancing in LB, it will succeed. However, it is unnecessary and might cause additional cross-AZ traffic.
@@ -786,5 +786,5 @@ ticloud s plc attach-domains -c <cluster-id> --private-link-connection-id <plc-i
 
 ## Step 4. Replace the Unique Name placeholder in Kafka configuration
 
-1. Go back to your Kafka broker nodes, and replace the `<unique_name>` placeholder of each broker with the actual unique name you get from the previous step.
+1. Go back to your Kafka broker nodes, and replace the `unique_name` placeholder of each broker with the actual unique name you get from the previous step.
 2. After you reconfigure all the brokers, restart your Kafka brokers one by one.
