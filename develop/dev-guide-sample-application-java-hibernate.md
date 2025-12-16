@@ -5,7 +5,7 @@ summary: Learn how to connect to TiDB using Hibernate. This tutorial gives Java 
 
 # Connect to TiDB with Hibernate
 
-TiDB is a MySQL-compatible database, and [Hibernate](https://hibernate.org/orm/) is a popular open-source Java ORM. Starting from version `6.0.0.Beta2`, Hibernate supports TiDB dialect, which fits TiDB features well.
+TiDB is a MySQL-compatible database, and [Hibernate](https://hibernate.org/orm/) is a popular open-source Java ORM. Because TiDB is highly compatible with MySQL, you can use `org.hibernate.dialect.MySQLDialect` as the Hibernate dialect. This is the recommended approach for long-term compatibility. Alternatively, a TiDB-specific dialect (`org.hibernate.community.dialect.TiDBDialect`) is available in [Hibernate community dialects](https://github.com/hibernate/hibernate-orm/tree/main/hibernate-community-dialects), though it is not maintained by PingCAP. If you encounter any compatibility issues, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 In this tutorial, you can learn how to use TiDB and Hibernate to accomplish the following tasks:
 
@@ -198,7 +198,7 @@ Edit the Hibernate configuration file `hibernate.cfg.xml`:
 
         <!-- Database connection settings -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.TiDBDialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.url">${tidb_jdbc_url}</property>
         <property name="hibernate.connection.username">${tidb_user}</property>
         <property name="hibernate.connection.password">${tidb_password}</property>
