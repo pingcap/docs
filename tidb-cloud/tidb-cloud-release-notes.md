@@ -24,7 +24,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Starter**
 
-    - Support seamless AI integration with Model Context Protocol (MCP) for [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) clusters.
+    - Support seamless AI integration with the Model Context Protocol (MCP) for [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) clusters.
 
         TiDB Cloud Starter now supports MCP, providing a unified and secure way to connect your TiDB Cloud Starter cluster to popular AI tools including Cursor, Claude Code, VS Code, and WindSurf. You can set up your connection once and begin querying your data with AI tools in minutes.
 
