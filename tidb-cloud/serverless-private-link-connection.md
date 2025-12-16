@@ -4,7 +4,7 @@
 
 Dataflow services such as Changefeed and Data Migration (DM) in TiDB Cloud require connections to customers' RDS instances or Kafka clusters. While public network connections are technically feasible, Private Link provides a far more efficient and secure networking alternative.
 
-The Private Link Connection enables private, direct connectivity between {{{ .essential }}} and customers' target resources (e.g., RDS, Kafka) via Private Link. This feature is specifically designed for integration with TiDB Cloud's changefeed, DM and other services that connect from TiDB Cloud to customers' resources, ensuring data transmission remains within private networks.
+The Private Link Connection enables private, direct connectivity between {{{ .essential }}} and customers' target resources (for example RDS, Kafka) via Private Link. This feature is specifically designed for integration with TiDB Cloud's changefeed, DM and other services that connect from TiDB Cloud to customers' resources, ensuring data transmission remains within private networks.
 
 ## Private Link Connection Types
 

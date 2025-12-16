@@ -55,7 +55,7 @@ Set up the load balancer in the same region of your RDS:
     Find the load balancer you created, and click the **Create Listerner**:
     
     - **Listener Protocol**: TCP
-    - **Listener Port**: Database port (e.g., 3306 for MySQL).
+    - **Listener Port**: Database port (for example 3306 for MySQL).
     - **Server Group**: Choose the server group you created in the previous step.
   
 ### 2. Set up the Endpoint Service

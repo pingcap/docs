@@ -40,7 +40,7 @@ Set up the load balancer in the same region of your RDS:
 1. Go to [Target groups](https://console.aws.amazon.com/ec2/home#CreateTargetGroup) to create a target group.
 
      - **Target type**: `IP addresses`
-     - **Protocol and Port**: Set protocol to TCP and port to your database port (e.g., 3306 for MySQL).
+     - **Protocol and Port**: Set protocol to TCP and port to your database port (for example 3306 for MySQL).
      - **IP address type**: `IPv4`
      - **VPC**: The VPC where your RDS is located
      - **Register targets**: Register the IP addresses of your RDS instance. You can ping the RDS endpoint to get the IP address.
@@ -57,7 +57,7 @@ Set up the load balancer in the same region of your RDS:
         - Inbound rule allows MySQL/Aurora: Type - `MySQL/Aurora`; Source - `Anywhere-IPv4`.
         - Outbound rule allows all TCP: Type - `All TCP`; Destination - `Anywhere-IPv4`
     - **Listeners and routing**:
-        - Protocol and Port: Set protocol to TCP and port to your database port (e.g., 3306 for MySQL).
+        - Protocol and Port: Set protocol to TCP and port to your database port (for example 3306 for MySQL).
         - Target group: Select the target group you created in the previous step.
   
    For detailed instructions, refer to [this guide](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html).
