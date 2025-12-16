@@ -229,7 +229,7 @@ SET GLOBAL tidb_server_memory_limit='75%';
 
 #### Conflict resolution
 
-Starting from v8.5.5, when you use [Global Sort](/tidb-global-sort.md), `IMPORT INTO` automatically resolves primary key or unique index conflicts by removing all conflicting rows.
+Starting from v8.5.5, when you use [Global Sort](/tidb-global-sort.md) for an import job and primary key or unique index conflicts occur, `IMPORT INTO` automatically resolves the conflicts by removing all conflicting rows.
 
 For example, when Global Sort is enabled and you import data into a table created with `CREATE TABLE t(id INT PRIMARY KEY, v INT);` from the following data file `conflicts.csv`:
 
@@ -302,7 +302,7 @@ IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
 
 #### Conflicted rows information when using Global Sort
 
-When you use [Global Sort](/tidb-global-sort.md) and an import job has conflicted rows, the number of conflicted rows is displayed in the `Result_Message` column of [`SHOW IMPORT`](/sql-statements/sql-statement-show-import-job.md), as shown in the following example:
+Starting from v8.5.5, when you use [Global Sort](/tidb-global-sort.md) for an import job and primary key or unique index conflicts occur, you can check the number of conflicted rows in the `Result_Message` column of [`SHOW IMPORT`](/sql-statements/sql-statement-show-import-job.md), as shown in the following example:
 
 ```sql
 IMPORT INTO t FROM 's3://mybucket/conflicts.csv' WITH THREAD=8, SKIP_ROWS=1;
