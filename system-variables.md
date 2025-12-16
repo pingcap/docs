@@ -5832,15 +5832,17 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Default value: `0`
 - Type: Integer
 - Range: `[0, 1000000]`
-- This variable is used to control the maximum number of slow query logs printed per TiDB node per second. The default value is `0`. When you set it to `0`, there is no limit. When you set it to a value greater than `0`, the number of slow query logs printed per node per second is limited to that value. Any excess slow query logs are discarded and are not written to the slow query log file. 
-- This variable is often used together with [`tidb_slow_log_rules`](#tidb_slow_log_rules-from-v900) to prevent excessive slow query logging under high workload.
+- This variable controls the maximum number of slow query logs printed per TiDB node per second.
+    - A value of `0` (the default) means there is no limit.
+    - A value greater than `0` limits the number of slow query logs printed per node per second to that value. Any excess slow query logs are discarded and are not written to the slow query log file.
+- This variable is often used with [`tidb_slow_log_rules`](#tidb_slow_log_rules-new-in-v900) to prevent excessive slow query logging under high workload.
 
 ### tidb_slow_log_rules <span class="version-mark">New in v9.0.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value:""
+- Default value: ""
 - Type: String
 - This variable is used to define trigger rules for slow query logs. It supports composite conditions based on multiple metrics, enabling more flexible and fine-grained control over slow query logging.
 

@@ -177,8 +177,8 @@ Fields related to storage engines:
 
 You can force a statement to be recorded in the slow query log by using the `WRITE_SLOW_LOG` hint.
 
-- This hint is not subject to any threshold or trigger rules, that is, the statement is written to the slow query log regardless of whether it exceeds the slow query log threshold.
-- Currently only forcing the slow query log to be written is supported. Forcing it off (`WRITE_SLOW_LOG(FALSE)`) is not supported.
+- This hint bypasses any thresholds or trigger rules, which means the statement is always written to the slow query log.
+- Currently, you can only force a statement to be written to the slow query log. Disabling this behavior with `WRITE_SLOW_LOG(FALSE)` is not supported.
 
 Usage example:
 
@@ -200,7 +200,7 @@ SELECT /*+ WRITE_SLOW_LOG */ count(*) FROM t t1, t t2 WHERE t1.a = t2.b;
             * GLOBAL-scoped rules are considered only when no SESSION rule matches:
                 * If a GLOBAL rule specifies `ConnID` and it matches the current session `ConnID`, that rule takes effect.
                 * If a GLOBAL rule does not specify `ConnID` (a global rule), that rule takes effect.
-      * The show-variable behavior is the same as for regular system variables.
+      * The behavior of `SHOW VARIABLES`, `SELECT @@GLOBAL.tidb_slow_log_rules`, and `SELECT @@SESSION.tidb_slow_log_rules` for this variable is the same as for other system variables.
 
     > **Tip:**
     >
@@ -208,7 +208,7 @@ SELECT /*+ WRITE_SLOW_LOG */ count(*) FROM t t1, t t2 WHERE t1.a = t2.b;
     > - In a well-provisioned test environment (1 TiDB: 16C/48G, and 3 TiKV: 16C/48G), multiple rounds of sysbench tests show that when multi-dimensional rules generate millions of slow query log entries within half an hour, the performance impact is small. However, when log volume reaches tens of millions, TPS and latency degrade noticeably. On high-workload systems or when CPU/memory are near capacity, configure `tidb_slow_log_rules` conservatively to avoid log floods. It is recommended to use `tidb_slow_log_max_per_sec` to throttle slow query log printing and reduce impact on production workloads.
 
 * [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v900): sets the maximum number of slow query logs printed per second. This variable is introduced in v9.0.0. The default value is `0`.
-    * `0` means there is no limit on the number of slow query logs printed per second.
+    * A value of `0` means there is no limit on the number of slow query logs printed per second.
     * A value greater than `0` caps the number of slow query logs printed per second. Excess logs are discarded and not written to the slow query log file.
     * It is recommended to set this variable when `tidb_slow_log_rules` is enabled to avoid excessive log printing.
 * [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len): Sets the maximum length of the SQL statement recorded in the slow query log. The default value is 4096 (byte).
