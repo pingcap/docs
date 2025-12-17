@@ -1,10 +1,10 @@
-# Set up a Private Link Connection to AWS Confleunt
+# Set up a Private Link Connection to AWS Confluent
 
 > **Note**
 >
 > Only Confluent Dedicated clusters are supported.
 
-This document describes how to connect to an AWS Confluent Dedicated Cluster using an AWS Endpoint Service private link connection.
+This document describes how to connect to an AWS Confluent Dedicated cluster using an AWS Endpoint Service private link connection.
 
 ## Prerequisites
    
@@ -27,7 +27,8 @@ The Confluent Cloud network must meet the following requirements:
 
 On the `Network overview` page, obtain the `DNS subdomain` of the Confluent Cloud network. You need to extract the unique name from it.
 For example, if the `DNS subdomain` is `use1-az1.domnprzqrog.us-east-1.aws.confluent.cloud`, then the unique name is `domnprzqrog.us-east-1`.
-Please save the unique name for later use.
+
+Save the unique name for later use.
 
 > **Note**
 >
@@ -35,7 +36,7 @@ Please save the unique name for later use.
 
 ## Step 2. Add a PrivateLink Access to the network
 
-Please add a PrivateLink Access to the network you identified or set up in Step 1. Refer to [Add a PrivateLink Access in Confluent Cloud](https://docs.confluent.io/cloud/current/networking/private-links/aws-privatelink.html#add-a-privatelink-access-in-ccloud).
+Add a PrivateLink Access to the network you identified or set up in Step 1. Refer to [Add a PrivateLink Access in Confluent Cloud](https://docs.confluent.io/cloud/current/networking/private-links/aws-privatelink.html#add-a-privatelink-access-in-ccloud).
 
 During the process, you need to:
 
