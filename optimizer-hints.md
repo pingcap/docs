@@ -502,15 +502,15 @@ When the `INDEX_LOOKUP_PUSHDOWN` hint is enabled, the outermost Build operator t
 
 The `INDEX_LOOKUP_PUSHDOWN` hint has the following limitations:
 
-* Cached tables and temporary tables are not supported.
-* Queries using [global indexes](/global-indexes.md) are not supported.
-* Queries using [multi-valued indexes](/choose-index.md#use-multi-valued-indexes) are not supported.
-* Isolation levels other than `REPEATABLE-READ` are not supported.
+- Cached tables and temporary tables are not supported.
+- Queries using [global indexes](/global-indexes.md) are not supported.
+- Queries using [multi-valued indexes](/choose-index.md#use-multi-valued-indexes) are not supported.
+- Isolation levels other than `REPEATABLE-READ` are not supported.
 - [Follower Read](/follower-read.md) is not supported.
 - [Stale Read](/stale-read.md) and [reading historical data using `tidb_snapshot`](/read-historical-data.md) are not supported.
-* The pushed-down `LocalIndexLookUp` operator does not support keep order. If the execution plan includes an `ORDER BY` clause on index columns, the query falls back to regular `IndexLookUp`.
-* The pushed-down `LocalIndexLookUp` operator does not support sending Coprocessor requests in pagination mode.
-* The pushed-down `LocalIndexLookUp` operator does not support [Coprocessor Cache](/coprocessor-cache.md).
+- The pushed-down `LocalIndexLookUp` operator does not support keep order. If the execution plan includes an `ORDER BY` clause on index columns, the query falls back to regular `IndexLookUp`.
+- The pushed-down `LocalIndexLookUp` operator does not support sending Coprocessor requests in pagination mode.
+- The pushed-down `LocalIndexLookUp` operator does not support [Coprocessor Cache](/coprocessor-cache.md).
 
 ### NO_INDEX_LOOKUP_PUSHDOWN(t1_name) <span class="version-mark">New in v8.5.5 and v9.0.0</span>
 
