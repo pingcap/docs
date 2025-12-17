@@ -12,7 +12,7 @@ This document describes how to connect to an AWS RDS instance using an AWS Endpo
     - Manage load balancer
     - Manage endpoint services
 
-3. Get the {{.essential}} account ID and available zones, save the information for later use.
+3. Ensure your {{{ .essential }}} in aws provider and get the {{{ .essential }}} account ID and available zones, save the information for later use.
 
     1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
     2. On the **Private Link Connection For Dataflow**, Click **Create Private Link Connection**.
@@ -24,8 +24,8 @@ Identify an AWS RDS instance to use, or [set up a new one](https://docs.aws.amaz
 
 The RDS must meet the following requirements:
 
-- The RDS must be in the same AWS region as your {{.essential}}.
-- The subnet group of your RDS must have overlapping availability zones as your {{.essential}}.
+- The RDS must be in the same AWS region as your {{{ .essential }}}.
+- The subnet group of your RDS must have overlapping availability zones as your {{{ .essential }}}.
 - Make sure your RDS instance set proper security group and is accessible within the VPC.
 
 > **Note**
@@ -53,7 +53,7 @@ Set up the load balancer in the same region of your RDS:
     - **Schema**: `Internal`
     - **Load balancer IP address type**: `IPv4`
     - **VPC**: The VPC where your RDS is located
-    - **Availability Zones**: Must have overlapping availability zones with your {{.essential}}
+    - **Availability Zones**: Must have overlapping availability zones with your {{{ .essential }}}
     - **Security groups**: Create a new security group with the following rules.
         - Inbound rule allows MySQL/Aurora: Type - `MySQL/Aurora`; Source - `Anywhere-IPv4`.
         - Outbound rule allows all TCP: Type - `All TCP`; Destination - `Anywhere-IPv4`

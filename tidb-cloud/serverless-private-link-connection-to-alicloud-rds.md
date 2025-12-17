@@ -11,11 +11,11 @@ This document describes how to connect to an Alibaba Cloud RDS instance using an
     - Manage load balancer
     - Manage endpoint services
 
-3. Ensure your {{.essential}} in alibaba cloud provider and get its account ID and available zones, save the information for later use.
+3. Ensure your {{{ .essential }}} in alibaba cloud provider and get its account ID and available zones, save the information for later use.
 
     1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
     2. On the **Private Link Connection For Dataflow**, click **Create Private Link Connection**.
-    3. You can find the AWS account ID and available zones information.
+    3. You can find the Alibaba Cloud account ID and available zones information.
 
 ## Step 1. Set up an RDS instance
 
@@ -23,8 +23,8 @@ Identify an Alibaba Cloud ApsaraDB RDS you want to use, or [set up a new RDS](ht
 
 The RDS must meet the following requirements:
 
-- The Alibaba Cloud region for your RDS instance must be the same as the region for your {{.essential}}.
-- The subnet group of your RDS must have overlapping availability zones as your {{.essential}}.
+- The Alibaba Cloud region for your RDS instance must be the same as the region for your {{{ .essential }}}.
+- The subnet group of your RDS must have overlapping availability zones as your {{{ .essential }}}.
 - Make sure your RDS instance set proper IP whitelist and is accessible within the VPC.
 
 > **Note**
@@ -49,7 +49,7 @@ Set up the load balancer in the same region of your RDS:
 
     - **Network Type**: `Internal-facing`
     - **VPC**: The VPC where your RDS is located
-    - **Zone**: Must have overlapping availability zones with your {{.essential}}
+    - **Zone**: Must have overlapping availability zones with your {{{ .essential }}}
     - **IP Version**: `IPv4`
 
     Find the load balancer you created, and then click **Create Listerner**:

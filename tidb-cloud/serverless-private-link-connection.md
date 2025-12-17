@@ -12,25 +12,25 @@ The Private Link Connection enables private, direct connectivity between {{{ .es
 
 This type of private link connection enables TiDB Cloud clusters on **AWS** to connect to your [AWS endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html) powered by AWS PrivateLink.
 
-The Private Link Connection can access various AWS services by attach them to the endpoint service, including RDS instances and Kafka services, over a private network.
+The Private Link Connection can access various AWS services by associating them to the endpoint service, such as RDS instances and Kafka services.
 
 ### AliCloud Endpoint Service
 
-This type of private link connection enables TiDB Cloud clusters on **Alibaba Cloud** to connect to your [Alibaba Cloud endpoint service](https://www.alibabacloud.com/help/en/privatelink/share-your-service/) powered by Alibaba Cloud PrivateLink.
+This type of private link connection enables TiDB Cloud clusters on **Alibaba Cloud** to connect to your [Alibaba Cloud endpoint service](https://www.alibabacloud.com/help/en/privatelink/share-your-service/#51976edba8no7) powered by Alibaba Cloud PrivateLink.
 
-The Private Link Connection can access various Alibaba Cloud services by attaching them to the endpoint service, including RDS instances and Kafka services, over a private network.
+The Private Link Connection can access various Alibaba Cloud services by associating them to the endpoint service, such as RDS instances and Kafka services.
 
 ## Attach Domains
 
 You can attach domains to a private link connection. 
 
-When a domain is attached to the Private Link Connection, all traffic to this domain will be routed to this private link connection. It is useful when your service provides custom domains to clients at runtime, such as Kafka advertised listeners.
+When a domain is attached to the private link connection, all traffic to this domain will be routed to this private link connection. It is useful when your service provides custom domains to clients at runtime, such as Kafka advertised listeners.
 
 Different Private Link Connection types support attaching different domains:
 
 | Private Link Connection Type | Supported Domain Type              |
 |-----------------------------|-------------------------------------------|
-| AWS Endpoint Service        | TiDB Cloud managed (`aws.tidbcloud.com`), Confluent Dedicated (`aws.confluent.cloud`)  |
+| AWS Endpoint Service        | <ul><li>TiDB Cloud managed (`aws.tidbcloud.com`)</li><li>Confluent Dedicated (`aws.confluent.cloud`)</li></ul>  |
 | AliCloud Endpoint Service   | TiDB Cloud managed (`alicloud.tidbcloud.com`) |
 
 If your domain is not included, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to request the support.
@@ -61,11 +61,13 @@ You can manage Private Link Connections in the Console or via CLI.
     - **Endpoint Service Name**: Enter your AWS endpoint service name (for example, `com.amazonaws.vpce.<region>.vpce-svc-xxxx`).
 
     > **Note:**
-    > **Note:**
+    >
     > Please make sure the AWS endpoint service:
-    > 1. Is in the same region as the TiDB Cloud cluster.
+    > 
+    > 1. In the same region as your TiDB Cloud cluster.
     > 2. Allows connections from the TiDB Cloud account.
-    > 3. Has availability zones that overlap with the TiDB Cloud cluster.
+    > 3. Has availability zones that overlap with your TiDB Cloud cluster.
+    > 
     > You can get the account ID and available zones information at the bottom of the dialog.
 
 5. Click the **Create Connection** button.
@@ -80,8 +82,9 @@ ticloud serverless private-link-connection create -c <cluster-id> --display-name
 
 Please make sure the AWS endpoint service:
 
-1. Allows the acceptance of TiDB Cloud account.
-2. Has overlapping available zones of TiDB Cloud cluster.
+1. In the same region of your TiDB Cloud cluster.
+2. Allows the acceptance of TiDB Cloud account.
+3. Has overlapping available zones of your TiDB Cloud cluster.
 
 You can get the account ID and available zones information by the following command:
 
@@ -110,16 +113,18 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 4. Enter the required information in the **Create Private Link Connection** dialog:
 
     - **Private Link Connection Name**: Enter a name for the Private Link Connection.
-    - **Connection Type**: Choose **AliCloud Endpoint Service**, if you can not find this option, please ensure that your cluster is created in Alibaba Cloud provider.
+    - **Connection Type**: Choose **AliCloud Endpoint Service**. If you can not find this option, please ensure that your cluster is created in Alibaba Cloud provider.
     - **Endpoint Service Name**: Enter your Alibaba Cloud endpoint service name (for example, `com.aliyuncs.privatelink.<region>.xxxxx`).
 
     > **Note:**
+    > 
     > Please make sure the Alibaba Cloud endpoint service:
-    > 1. Is in the same region as the TiDB Cloud cluster.
+    > 
+    > 1. In the same region as your TiDB Cloud cluster.
     > 2. Allows connections from the TiDB Cloud account.
-    > 3. Has availability zones that overlap with the TiDB Cloud cluster.
+    > 3. Has availability zones that overlap with your TiDB Cloud cluster.
+    > 
     > You can get the account ID and available zones information at the bottom of the dialog.
-    > You can get the account ID and available zones information in the button of the dialog.
 
 5. Click the **Create Connection** button.
 
@@ -133,9 +138,9 @@ ticloud serverless private-link-connection create -c <cluster-id> --display-name
 
 Please make sure the Alibaba Cloud endpoint service:
 
-1. In the same region of the TiDB Cloud cluster.
+1. In the same region of your TiDB Cloud cluster.
 2. Allows the acceptance of TiDB Cloud account.
-3. Has overlapping available zones of TiDB Cloud cluster.
+3. Has overlapping available zones of your TiDB Cloud cluster.
 
 You can get the account ID and available zones information by the following command:
 
@@ -222,7 +227,7 @@ ticloud serverless private-link-connection attach-domains -c <cluster-id> --priv
 </div>
 </SimpleTab>
 
-## Detach Domains from a Private Link Connection
+### Detach Domains from a Private Link Connection
 
 <SimpleTab>
 <div label="Console">

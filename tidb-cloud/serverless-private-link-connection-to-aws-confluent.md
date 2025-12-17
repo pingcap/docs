@@ -10,7 +10,7 @@ This document describes how to connect to an AWS Confluent Dedicated Cluster usi
    
 1. You have a Confluent Cloud account.
 
-2. Get the {{.essential}} account ID and available zones, save the information for later use.
+2. Ensure your {{{ .essential }}} in aws provider and get the {{{ .essential }}} account ID and available zones, save the information for later use.
 
     1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
     2. On the **Private Link Connection For Dataflow**, click **Create Private Link Connection**.
@@ -22,8 +22,8 @@ Identify a Confluent Cloud network you want to use, or [set up a new Confluent C
 
 The Confluent Cloud network must meet the following requirements:
 
-- The network must be in the same AWS region as your {{.essential}}.
-- The network must have overlapping availability zones as your {{.essential}}, recommended to have same availability zones.
+- The network must be in the same AWS region as your {{{ .essential }}}.
+- The network must have overlapping availability zones as your {{{ .essential }}}, recommended to have same availability zones.
 
 On the `Network overview` page, obtain the `DNS subdomain` of the Confluent Cloud network. You need to extract the unique name from it.
 For example, if the `DNS subdomain` is `use1-az1.domnprzqrog.us-east-1.aws.confluent.cloud`, then the unique name is `domnprzqrog.us-east-1`.
@@ -31,7 +31,7 @@ Please save the unique name for later use.
 
 > **Note**
 >
-> The Confluent Cloud Dedicated cluster you want TiDB Cloud to connect to must be under this network.
+> The Confluent Cloud Dedicated cluster you want TiDB Cloud to connect to must under this network.
 
 ## Step 2. Add a PrivateLink Access to the network
 
@@ -80,7 +80,7 @@ ticloud serverless private-link-connection create -c <cluster-id> --display-name
 </div>
 </SimpleTab>
 
-### Attach domains to the private link connection
+### 2. Attach domains to the private link connection
 
 You will need the unique name you obtained in Step 1.
 
