@@ -74,7 +74,7 @@ You can also refer to [Create an AWS Endpoint Service Private Link Connection](/
 <div label="CLI">
 
 ```shell
-ticloud s plc create -c <cluster-id> --display-name <display-name> --type AWS_ENDPOINT_SERVICE --aws.endpoint-service-name <endpoint-service-name>
+ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type AWS_ENDPOINT_SERVICE --aws.endpoint-service-name <endpoint-service-name>
 ```
 
 </div>
@@ -108,7 +108,7 @@ You can also refer to [Attach Domains to a Private Link Connection](/tidbcloud/s
 <div label="CLI">
 
 ```shell
-ticloud s plc attach-domains -c <cluster-id> --private-link-connection-id <plc-id> --type CONFLUENT --unique-name <unique-name>
+ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type CONFLUENT --unique-name <unique-name>
 ```
 
 </div>

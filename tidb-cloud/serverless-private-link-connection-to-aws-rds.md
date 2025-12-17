@@ -75,7 +75,7 @@ Set up the endpoint service in the same region of your RDS:
     - **Require acceptance for endpoint**: Recommended to check `Acceptance required`
     - **Supported IP address types**: `Ipv4`
 
-2.  Go to the details page of the endpoint service and copy the **Service name**. You need to provide it to TiDB Cloud, for example `com.amazonaws.vpce.<region>.vpce-svc-xxx`.
+2. Go to the details page of the endpoint service and copy the **Service name**. You need to provide it to TiDB Cloud, for example `com.amazonaws.vpce.<region>.vpce-svc-xxx`.
 
 3. On the details page of the endpoint service, click the **Allow principals** tab, and add the TiDB Cloud account ID to the allowlist. You can get the account ID in [Prerequisites](#prerequisites), for example, `arn:aws:iam::<account_id>:root`.
 
@@ -109,7 +109,7 @@ You can also refer to [Create an AWS Endpoint Service Private Link Connection](/
 <div label="CLI">
 
 ```shell
-ticloud s plc create -c <cluster-id> --display-name <display-name> --type AWS_ENDPOINT_SERVICE --aws.endpoint-service-name <endpoint-service-name>
+ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type AWS_ENDPOINT_SERVICE --aws.endpoint-service-name <endpoint-service-name>
 ```
 
 </div>

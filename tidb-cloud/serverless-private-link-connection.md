@@ -75,7 +75,7 @@ You can manage Private Link Connections in the Console or via CLI.
 <div label="CLI">
 
 ```shell
-ticloud s plc create -c <cluster-id> --display-name <display-name> --type AWS_ENDPOINT_SERVICE --aws.endpoint-service-name <endpoint-service-name>
+ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type AWS_ENDPOINT_SERVICE --aws.endpoint-service-name <endpoint-service-name>
 ```
 
 Please make sure the AWS endpoint service:
@@ -86,7 +86,7 @@ Please make sure the AWS endpoint service:
 You can get the account ID and available zones information by the following command:
 
 ```shell
-ticloud s plc zones --cluster-id <cluster-id>
+ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 ```
 
 </div>
@@ -128,7 +128,7 @@ ticloud s plc zones --cluster-id <cluster-id>
 <div label="CLI">
 
 ```shell
-ticloud s plc create -c <cluster-id> --display-name <display-name> --type ALICLOUD_ENDPOINT_SERVICE --alicloud.endpoint-service-name <endpoint-service-name>
+ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type ALICLOUD_ENDPOINT_SERVICE --alicloud.endpoint-service-name <endpoint-service-name>
 ```
 
 Please make sure the Alibaba Cloud endpoint service:
@@ -140,7 +140,7 @@ Please make sure the Alibaba Cloud endpoint service:
 You can get the account ID and available zones information by the following command:
 
 ```shell
-ticloud s plc zones --cluster-id <cluster-id>
+ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 ```
 
 </div>
@@ -168,7 +168,7 @@ ticloud s plc zones --cluster-id <cluster-id>
 <div label="CLI">
 
 ```shell
-ticloud s plc delete -c <cluster-id> --private-link-connection-id <private-link-connection-id>
+ticloud serverless private-link-connection delete -c <cluster-id> --private-link-connection-id <private-link-connection-id>
 ```
 
 </div>
@@ -204,19 +204,19 @@ To attach a TiDB Cloud managed domain:
 First use dry run to preview the domains to be attached, it will output a unique-name for the next step
 
 ```shell
-ticloud s plc attach-domains -c <cluster-id> --private-link-connection-id <plc-id> --type TIDBCLOUD_MANAGED --dry-run
+ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --dry-run
 ```
 
 Then Attach the domains with the unique-name from previous step
 
 ```shell
-ticloud s plc attach-domains -c <cluster-id> --private-link-connection-id <plc-id> --type TIDBCLOUD_MANAGED --unique-name <unique-name>
+ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --unique-name <unique-name>
 ```
 
 To attach a Confluent Cloud domain:
 
 ```shell
-ticloud s plc attach-domains -c <cluster-id> --private-link-connection-id <plc-id> --type CONFLUENT --unique-name <unique-name>
+ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type CONFLUENT --unique-name <unique-name>
 ```
 
 </div>
@@ -246,13 +246,13 @@ ticloud s plc attach-domains -c <cluster-id> --private-link-connection-id <plc-i
 First, get the Private Link Connection details to find the attach-domain-id:
 
 ```shell
-ticloud s plc get -c <cluster-id> --private-link-connection-id <plc-id>
+ticloud serverless private-link-connection get -c <cluster-id> --private-link-connection-id <private-link-connection-id>
 ```
 
 Then, detach the domain by the attach-domain-id:
-ticloud s plc detach-domains -c <cluster-id> --private-link-connection-id <plc-id> --attach-domain-id <attach-domain-id>
+
 ```shell
-ticloud s plc detach-domains -c <cluster-id> --private-link-connection-id <plc-id> --attach-domain-id <attach-domian-id>
+ticloud serverless private-link-connection detach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --attach-domain-id <attach-domian-id>
 ```
 
 </div>

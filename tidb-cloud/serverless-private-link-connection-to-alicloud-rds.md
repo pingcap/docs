@@ -102,7 +102,7 @@ You can also refer to [Create an AliCloud Endpoint Service Private Link Connecti
 <div label="CLI">
 
 ```shell
-ticloud s plc create -c <cluster-id> --display-name <display-name> --type ALICLOUD_ENDPOINT_SERVICE --alicloud.endpoint-service-name <endpoint-service-name>
+ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type ALICLOUD_ENDPOINT_SERVICE --alicloud.endpoint-service-name <endpoint-service-name>
 ```
 
 </div>

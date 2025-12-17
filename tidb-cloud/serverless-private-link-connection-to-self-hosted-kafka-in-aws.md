@@ -738,7 +738,7 @@ You can also refer to [Create an AWS Endpoint Service Private Link Connection](/
 <div label="CLI">
 
 ```shell
-ticloud s plc create -c <cluster-id> --display-name <display-name> --type AWS_ENDPOINT_SERVICE --aws.endpoint-service-name <endpoint-service-name>
+ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type AWS_ENDPOINT_SERVICE --aws.endpoint-service-name <endpoint-service-name>
 ```
 
 </div>
@@ -772,13 +772,13 @@ You can also refer to [Attach Domains to a Private Link Connection](/tidbcloud/s
 First, use a dry run to preview the domains to be attached. This will output a `unique-name` for the next step. Copy it for later use.
 
 ```shell
-ticloud s plc attach-domains -c <cluster-id> --private-link-connection-id <plc-id> --type TIDBCLOUD_MANAGED --dry-run
+ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --dry-run
 ```
 
 Then, attach the domains with the `unique-name` from the previous step.
 
 ```shell
-ticloud s plc attach-domains -c <cluster-id> --private-link-connection-id <plc-id> --type TIDBCLOUD_MANAGED --unique-name <unique-name>
+ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --unique-name <unique-name>
 ```
 
 </div>
