@@ -258,6 +258,30 @@ try (Session session = sessionFactory.openSession()) {
 
 For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
+## Compatibility notes for MySQLDialect
+
+When using `MySQLDialect` with TiDB, be aware of the following behaviors:
+
+### SERIALIZABLE isolation level
+
+Applications that set `SERIALIZABLE` transaction isolation will encounter the following error:
+
+```
+The isolation level 'SERIALIZABLE' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error
+```
+
+To avoid this error, set the TiDB system variable on the server side:
+
+```sql
+SET GLOBAL tidb_skip_isolation_level_check=1;
+```
+
+This allows TiDB to accept `SERIALIZABLE` requests without error. TiDB will use `REPEATABLE-READ` internally, which is its strongest isolation level. See [`tidb_skip_isolation_level_check`](/system-variables.md#tidb_skip_isolation_level_check) for details.
+
+> **Note:**
+>
+> The community-maintained `TiDBDialect` handles this automatically by skipping features that require `SERIALIZABLE` isolation.
+
 ## Next steps
 
 - Learn more usage of Hibernate from [the documentation of Hibernate](https://hibernate.org/orm/documentation).
