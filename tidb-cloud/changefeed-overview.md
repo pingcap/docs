@@ -108,6 +108,13 @@ TiDB Cloud Premium では、変更フィードのTiCDC Changefeedフィード容
 
 4.  設定を編集した後、 **[...]** &gt; **[再開]**をクリックして、対応する変更フィードを再開します。
 
+## チェンジフィードを複製する {#duplicate-a-changefeed}
+
+1.  対象のTiDBの[**チェンジフィード**](#view-the-changefeed-page)ページ目に移動します<customcontent plan="dedicated">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>。
+2.  複製したい変更フィードを見つけます。 **「アクション」**列で、 **「...」** &gt; **「複製」を**クリックします。
+3.  TiDB Cloud は、新しい変更フィード設定に元の設定を自動的に入力します。必要に応じて設定を確認し、変更できます。
+4.  設定を確認したら、 **[送信]**をクリックして新しい変更フィードを作成し、開始します。
+
 ## 変更フィードを削除する {#delete-a-changefeed}
 
 1.  対象のTiDBの[**チェンジフィード**](#view-the-changefeed-page)ページ目に移動します<customcontent plan="dedicated">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>。

@@ -38,9 +38,9 @@ TiDB バージョン: 8.5.4
 
     バージョン8.3.0以降、TiDBではパーティションテーブルの一意の列にグローバルインデックスを作成してクエリパフォーマンスを向上できます。ただし、一意でない列へのグローバルインデックスの作成はサポートされていませんでした。バージョン8.5.4以降、TiDBはこの制限を撤廃し、パーティションテーブルの一意でない列にもグローバルインデックスを作成できるようになりました。これにより、グローバルインデックスの使い勝手が向上します。
 
-    詳細については[ドキュメント](https://docs.pingcap.com/tidb/v8.5/partitioned-table#global-indexes)参照してください。
+    詳細については[ドキュメント](https://docs.pingcap.com/tidb/v8.5/global-indexes/)参照してください。
 
--   TiFlash [＃10266](https://github.com/pingcap/tiflash/issues/10266) @ [ゲンリチ](https://github.com/gengliqi)の正常なシャットダウンをサポート
+-   TiFlash [＃10266](https://github.com/pingcap/tiflash/issues/10266) @ [ゲンリキ](https://github.com/gengliqi)の正常なシャットダウンをサポート
 
     TiFlashサーバーをシャットダウンする際、 TiFlash は現在実行中の MPP タスクを、設定可能なタイムアウト時間の間継続させ、新しい MPP タスク要求を拒否するようになりました。デフォルトのタイムアウト時間は 600 秒ですが、設定項目[`flash.graceful_wait_shutdown_timeout`](https://docs.pingcap.com/tidb/v8.5/tiflash-configuration#graceful_wait_shutdown_timeout-new-in-v854)で調整できます。
 
@@ -63,7 +63,7 @@ TiDB バージョン: 8.5.4
 
 ### システム変数 {#system-variables}
 
--   システム変数[`tidb_mpp_store_fail_ttl`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_mpp_store_fail_ttl)のデフォルト値を`60s`から`0s`に変更します。これにより、クエリの失敗を防ぐための遅延が不要になり、TiDB は新しく起動したTiFlashノードにクエリを送信する前に待機する必要がなくなります[＃61826](https://github.com/pingcap/tidb/issues/61826) @ [ゲンリチ](https://github.com/gengliqi)
+-   システム変数[`tidb_mpp_store_fail_ttl`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_mpp_store_fail_ttl)のデフォルト値を`60s`から`0s`に変更します。これにより、クエリの失敗を防ぐための遅延が不要になり、TiDB は新しく起動したTiFlashノードにクエリを送信する前に待機する必要がなくなります[＃61826](https://github.com/pingcap/tidb/issues/61826) @ [ゲンリキ](https://github.com/gengliqi)
 
 -   バージョン8.5.4以降、 [`tidb_replica_read`](https://docs.pingcap.com/tidb/v8.5/system-variables/#tidb_replica_read-new-in-v40)システム変数は読み取り専用SQL文にのみ適用されます。この変更により、データ読み取りの安全性が向上し、他の機能との重複が軽減されます[＃62856](https://github.com/pingcap/tidb/issues/62856) @ [あなた06](https://github.com/you06)
 
@@ -99,7 +99,7 @@ v8.5.4以降、TiDBは`DECIMAL`桁の列にデータを挿入する際の動作�
     -   デバッグを容易にするために、Grafanaの**パフォーマンス概要**&gt; **SQL実行時間概要**パネルに`backoff`メトリックを追加します[＃61441](https://github.com/pingcap/tidb/issues/61441) @ [dbsid](https://github.com/dbsid)
     -   監査ログプラグイン[＃63525](https://github.com/pingcap/tidb/issues/63525) @ [ヤンケオ](https://github.com/YangKeao)にステートメント ID 情報を追加します
 
--   TiKV
+-   ティクブ
 
     -   BRモジュール内の特定の自動回復可能なエラーのログレベルを`ERROR`から`WARN`に変更して、不要なアラート[＃18493](https://github.com/tikv/tikv/issues/18493) @ [ユジュンセン](https://github.com/YuJuncen)を削減します。
     -   不要なアラートを減らすために、特定の TiKV エラーのログレベルを`ERROR`から`WARN`に変更します[＃18745](https://github.com/tikv/tikv/issues/18745) @ [終了コード1](https://github.com/exit-code-1)

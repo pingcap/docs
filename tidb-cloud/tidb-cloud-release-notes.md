@@ -8,6 +8,28 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2025年12月16日 {#december-16-2025}
+
+**一般的な変更**
+
+-   **TiDB Cloud専用**
+
+    -   変更フィードの複製をサポートします。
+
+        既存の変更フィードを複製する際に、主要な設定とルーティング情報を保持できるようになりました。この機能により、失敗した変更フィードを迅速に再作成したり、同様の設定で新しい変更フィードを作成したりできるため、セットアップ時間と運用上の労力を削減できます。
+
+        詳細については[チェンジフィードを複製する](/tidb-cloud/changefeed-overview.md#duplicate-a-changefeed)参照してください。
+
+**コンソールの変更**
+
+-   **TiDB Cloudスターター**
+
+    -   [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)クラスターのモデル コンテキスト プロトコル (MCP) とのシームレスな AI 統合をサポートします。
+
+        TiDB Cloud Starter は MCP をサポートし、 TiDB Cloud Starter クラスターを Cursor、Claude Code、VS Code、WindSurf などの一般的な AI ツールに統合的かつ安全に接続できるようになりました。一度接続を設定すれば、数分で AI ツールによるデータクエリを開始できます。
+
+        この機能にアクセスするには、 [クラスタ](https://tidbcloud.com/project/clusters)概要ページの右上隅にある**[AI ツールで使用]**をクリックします。
+
 ## 2025年12月9日 {#december-9-2025}
 
 **一般的な変更**
@@ -86,7 +108,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   **TiDB Cloud専用**
 
-    -   Google Cloud でホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに VPC ピアリング経由で接続する場合、 [TiDB Cloudコンソール](https://tidbcloud.com/)で`/16` ～ `/18` IP 範囲サイズを直接設定できるようになりました。この設定についてTiDB Cloudサポートに連絡する必要がなくなりました。
+    -   VPCピアリングを介してGoogle Cloudでホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに接続する場合、 [TiDB Cloudコンソール](https://tidbcloud.com/)で`/16` ～ `/18` IP範囲サイズを直接設定できるようになりました。この設定についてTiDB Cloudサポートに連絡する必要はなくなりました。
 
         詳細については[VPC ピアリング経由でTiDB Cloud Dedicated に接続する](/tidb-cloud/set-up-vpc-peering-connections.md)参照してください。
 
@@ -544,7 +566,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   TiKV [標準](/tidb-cloud/size-your-cluster.md#standard-storage)および[パフォーマンス](/tidb-cloud/size-your-cluster.md#performance-and-plus-storage)storageの価格が正式に発表されました。
 
-    割引期間は**2025年6月5日 UTC 00:00**に終了します。その後、価格は通常価格に戻ります。TiDB TiDB Cloud Dedicated の価格については、 [TiDB Cloud専用料金の詳細](https://www.pingcap.com/tidb-dedicated-pricing-details/#node-cost)ご覧ください。
+    割引期間は**2025年6月5日 UTC 00:00**に終了します。その後、価格は通常価格に戻ります。TiDB TiDB Cloud Dedicated の価格については、 [TiDB Cloud専用プランの料金詳細](https://www.pingcap.com/tidb-dedicated-pricing-details/#node-cost)ご覧ください。
 
 **コンソールの変更**
 
@@ -556,7 +578,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **一般的な変更**
 
--   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの変更フィードを使用して[アパッチパルサー](https://pulsar.apache.org)へのデータのストリーミングをサポートします。
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの変更フィードを使用して[アパッチパルサー](https://pulsar.apache.org)へのストリーミング データをサポートします。
 
     この機能により、 TiDB Cloud Dedicated クラスタをより幅広い下流システムと統合できるようになり、追加のデータ統合要件にも対応できます。この機能を使用するには、 TiDB Cloud Dedicated クラスタのバージョンが v7.5.1 以降であることを確認してください。
 
