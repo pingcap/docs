@@ -26,6 +26,7 @@ The RDS must meet the following requirements:
 
 - The RDS must be in the same AWS region as your {{.essential}}.
 - The subnet group of your RDS must have overlapping availability zones as your {{.essential}}.
+- Make sure your RDS instance set proper security group and is accessible within the VPC.
 
 > **Note**
 >

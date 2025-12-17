@@ -258,9 +258,9 @@ ticloud s plc detach-domains -c <cluster-id> --private-link-connection-id <plc-i
 </div>
 </SimpleTab>
 
+## See Also
+
 - [Set up a private link connection to AWS RDS](/tidbcloud/serverless-private-link-connection-to-aws-rds.md)
 - [Set up a private link connection to Alibaba Cloud RDS](/tidbcloud/serverless-private-link-connection-to-alicloud-rds.md)
 - [Set up a private link connection to AWS Confluent](/tidbcloud/serverless-private-link-connection-to-aws-confluent.md)
-- [Set up a private link connection to a self-hosted Kafka cluster in AWS](/tidbcloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
-- [Create an AWS Endpoint Service Private Link Connection to AWS Confluent](/tidbcloud/serverless-private-link-connection-to-aws-confluent.md)
-- [Create an AWS Endpoint Service Private Link Connection to Self-Hosted Kafka in AWS](/tidbcloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
+- [Set up a private link connection to self-hosted Kafka cluster in AWS](/tidbcloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)

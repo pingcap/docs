@@ -25,7 +25,7 @@ The RDS must meet the following requirements:
 
 - The Alibaba Cloud region for your RDS instance must be the same as the region for your {{.essential}}.
 - The subnet group of your RDS must have overlapping availability zones as your {{.essential}}.
-- Make sure your RDS instance is accessible within the VPC.
+- Make sure your RDS instance set proper IP whitelist and is accessible within the VPC.
 
 > **Note**
 >
