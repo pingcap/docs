@@ -10,28 +10,28 @@ The Private Link Connection enables private, direct connectivity between {{{ .es
 
 ### AWS Endpoint Service
 
-This type of Private Link Connection enables TiDB Cloud clusters in **AWS provider** connect to your [AWS endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html) powered by AWS PrivateLink.
+This type of private link connection enables TiDB Cloud clusters on **AWS** to connect to your [AWS endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html) powered by AWS PrivateLink.
 
 The Private Link Connection can access various AWS services by attach them to the endpoint service, including RDS instances and Kafka services, over a private network.
 
 ### AliCloud Endpoint Service
 
-This type of Private Link Connection enables TiDB Cloud clusters in **Alibaba Cloud provider** connect to your [Alibaba Cloud endpoint service](https://www.alibabacloud.com/help/en/privatelink/share-your-service/) powered by Alibaba Cloud PrivateLink.
+This type of private link connection enables TiDB Cloud clusters on **Alibaba Cloud** to connect to your [Alibaba Cloud endpoint service](https://www.alibabacloud.com/help/en/privatelink/share-your-service/) powered by Alibaba Cloud PrivateLink.
 
-The Private Link Connection can access various Alibaba Cloud services by attach them to the endpoint service, including RDS instances and Kafka services, over a private network.
+The Private Link Connection can access various Alibaba Cloud services by attaching them to the endpoint service, including RDS instances and Kafka services, over a private network.
 
 ## Attach Domains
 
-The Private Link Connection supports attaching domains action. 
+You can attach domains to a private link connection. 
 
-When a domain is attached to the Private Link Connection, all traffic to this domain will be routed to this private link connection. It is useful when your service will provide custom domains to client during running, such as Kafka advertised listeners.
+When a domain is attached to the Private Link Connection, all traffic to this domain will be routed to this private link connection. It is useful when your service provides custom domains to clients at runtime, such as Kafka advertised listeners.
 
 Different Private Link Connection types support attaching different domains:
 
 | Private Link Connection Type | Supported Domain Type              |
 |-----------------------------|-------------------------------------------|
-| AWS Endpoint Service        | TiDB Cloud managed(aws.tidbcloud.com), Confluent Dedicated(aws.confluent.cloud)  |
-| AliCloud Endpoint Service   | TiDB Cloud managed(alicloud.tidbcloud.com) |
+| AWS Endpoint Service        | TiDB Cloud managed (`aws.tidbcloud.com`), Confluent Dedicated (`aws.confluent.cloud`)  |
+| AliCloud Endpoint Service   | TiDB Cloud managed (`alicloud.tidbcloud.com`) |
 
 If your domain is not included, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to request the support.
 
@@ -61,11 +61,12 @@ You can manage Private Link Connections in the Console or via CLI.
     - **Endpoint Service Name**: Enter your AWS endpoint service name (for example, `com.amazonaws.vpce.<region>.vpce-svc-xxxx`).
 
     > **Note:**
+    > **Note:**
     > Please make sure the AWS endpoint service:
-    > 1. In the same region of the TiDB Cloud cluster.
-    > 2. Allows the acceptance of TiDB Cloud account.
-    > 3. Has overlapping available zones of TiDB Cloud cluster.
-    > You can get the account ID and available zones information in the button of the dialog.
+    > 1. Is in the same region as the TiDB Cloud cluster.
+    > 2. Allows connections from the TiDB Cloud account.
+    > 3. Has availability zones that overlap with the TiDB Cloud cluster.
+    > You can get the account ID and available zones information at the bottom of the dialog.
 
 5. Click the **Create Connection** button.
 
@@ -114,9 +115,10 @@ ticloud s plc zones --cluster-id <cluster-id>
 
     > **Note:**
     > Please make sure the Alibaba Cloud endpoint service:
-    > 1. In the same region of the TiDB Cloud cluster.
-    > 2. Allows the acceptance of TiDB Cloud account.
-    > 3. Has overlapping available zones of TiDB Cloud cluster.
+    > 1. Is in the same region as the TiDB Cloud cluster.
+    > 2. Allows connections from the TiDB Cloud account.
+    > 3. Has availability zones that overlap with the TiDB Cloud cluster.
+    > You can get the account ID and available zones information at the bottom of the dialog.
     > You can get the account ID and available zones information in the button of the dialog.
 
 5. Click the **Create Connection** button.
@@ -248,7 +250,7 @@ ticloud s plc get -c <cluster-id> --private-link-connection-id <plc-id>
 ```
 
 Then, detach the domain by the attach-domain-id:
-
+ticloud s plc detach-domains -c <cluster-id> --private-link-connection-id <plc-id> --attach-domain-id <attach-domain-id>
 ```shell
 ticloud s plc detach-domains -c <cluster-id> --private-link-connection-id <plc-id> --attach-domain-id <attach-domian-id>
 ```
@@ -256,9 +258,9 @@ ticloud s plc detach-domains -c <cluster-id> --private-link-connection-id <plc-i
 </div>
 </SimpleTab>
 
-## See Also
-
-- [Create an AWS Endpoint Service Private Link Connection to AWS RDS](/tidbcloud/serverless-private-link-connection-to-aws-rds.md)
-- [Create an AliCloud Endpoint Service Private Link Connection to Alibaba Cloud RDS](/tidbcloud/serverless-private-link-connection-to-alicloud-rds.md)
+- [Set up a private link connection to AWS RDS](/tidbcloud/serverless-private-link-connection-to-aws-rds.md)
+- [Set up a private link connection to Alibaba Cloud RDS](/tidbcloud/serverless-private-link-connection-to-alicloud-rds.md)
+- [Set up a private link connection to AWS Confluent](/tidbcloud/serverless-private-link-connection-to-aws-confluent.md)
+- [Set up a private link connection to a self-hosted Kafka cluster in AWS](/tidbcloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
 - [Create an AWS Endpoint Service Private Link Connection to AWS Confluent](/tidbcloud/serverless-private-link-connection-to-aws-confluent.md)
 - [Create an AWS Endpoint Service Private Link Connection to Self-Hosted Kafka in AWS](/tidbcloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)

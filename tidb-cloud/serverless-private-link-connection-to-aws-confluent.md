@@ -4,19 +4,19 @@
 >
 > Only Confluent Dedicated clusters are supported.
 
-The document describes how to connect to an AWS Confluent Dedicated Cluster, using AWS Endpoint Service private link connection.
+This document describes how to connect to an AWS Confluent Dedicated Cluster using an AWS Endpoint Service private link connection.
 
 ## Prerequisites
    
-1. You have a confluent cloud account
+1. You have a Confluent Cloud account.
 
 2. Get the {{.essential}} account ID and available zones, save the information for later use.
 
     1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
-    2. On the **Private Link Connection For Dataflow**, Click **Create Private Link Connection**.
+    2. On the **Private Link Connection For Dataflow**, click **Create Private Link Connection**.
     3. You can find the AWS account ID and available zones information.
 
-## Step 1. Set up Confluent Cloud network
+## Step 1. Set up a Confluent Cloud network
 
 Identify a Confluent Cloud network you want to use, or [set up a new Confluent Cloud network](https://docs.confluent.io/cloud/current/networking/ccloud-network/aws.html#create-ccloud-network-aws).
 
@@ -25,7 +25,7 @@ The Confluent Cloud network must meet the following requirements:
 - The network must be in the same AWS region as your {{.essential}}.
 - The network must have overlapping availability zones as your {{.essential}}, recommended to have same availability zones.
 
-Please obtain the `DNS subdomain` of the Confluent Cloud network on `Network overview` page, you need to extract the unique name from it.
+On the `Network overview` page, obtain the `DNS subdomain` of the Confluent Cloud network. You need to extract the unique name from it.
 For example, if the `DNS subdomain` is `use1-az1.domnprzqrog.us-east-1.aws.confluent.cloud`, then the unique name is `domnprzqrog.us-east-1`.
 Please save the unique name for later use.
 
@@ -64,7 +64,7 @@ You can also refer to [Create an AWS Endpoint Service Private Link Connection](/
 4. Enter the required information in the **Create Private Link Connection** dialog:
 
     - **Private Link Connection Name**: Enter a name for the Private Link Connection.
-    - **Connection Type**: Choose **AWS Endpoint Service**, if you can not find this option, please ensure that your cluster is created in AWS provider.
+    - **Connection Type**: Choose **AWS Endpoint Service**. If you cannot find this option, please ensure that your cluster is created on AWS.
     - **Endpoint Service Name**: Enter the endpoint service name you obtained in Step 2.
 
 5. Click the **Create Connection** button.
@@ -80,7 +80,7 @@ ticloud s plc create -c <cluster-id> --display-name <display-name> --type AWS_EN
 </div>
 </SimpleTab>
 
-### Attach Domains to the Private Link Connection
+### Attach domains to the private link connection
 
 You will need the unique name you obtained in Step 1.
 

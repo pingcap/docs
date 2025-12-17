@@ -1,6 +1,6 @@
 # Set up a Private Link Connection to Alibaba Cloud RDS
 
-The document describes how to connect to an Alibaba Cloud RDS, using AliCloud Endpoint Service private link connection.
+This document describes how to connect to an Alibaba Cloud RDS instance using an Alibaba Cloud Endpoint Service private link connection.
 
 ## Prerequisites
 
@@ -14,10 +14,10 @@ The document describes how to connect to an Alibaba Cloud RDS, using AliCloud En
 3. Ensure your {{.essential}} in alibaba cloud provider and get its account ID and available zones, save the information for later use.
 
     1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
-    2. On the **Private Link Connection For Dataflow**, Click **Create Private Link Connection**.
+    2. On the **Private Link Connection For Dataflow**, click **Create Private Link Connection**.
     3. You can find the AWS account ID and available zones information.
 
-## Step 1. Set up RDS instance
+## Step 1. Set up an RDS instance
 
 Identify an Alibaba Cloud ApsaraDB RDS you want to use, or [set up a new RDS](https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/step-1-create-an-apsaradb-rds-for-mysql-instance-and-configure-databases).
 
@@ -29,9 +29,9 @@ The RDS must meet the following requirements:
 
 > **Note**
 >
-> Does not support cross region RDS instance connection.
+> Cross-region RDS instance connection is not supported.
 
-## Step 2. Expose the RDS as Endpoint Service
+## Step 2. Expose the RDS instance as an endpoint service
 
 ### 1. Set up the load balancer
 
@@ -58,7 +58,7 @@ Set up the load balancer in the same region of your RDS:
     - **Listener Port**: Database port (for example 3306 for MySQL).
     - **Server Group**: Choose the server group you created in the previous step.
   
-### 2. Set up the Endpoint Service
+### 2. Set up an endpoint service
 
 Set up the endpoint service in the same region of your RDS:
 
@@ -68,11 +68,11 @@ Set up the endpoint service in the same region of your RDS:
     - **Select Service Resource**: Select all zones that NLB is in and choose the NLB you created in the previous step.
     - **Automatically Accept Endpoint Connections**: Recommended to choose `No`
 
-2. Go to the detail page of the endpoint service and note down the **Endpoint Service Name**. You need to provide it to TiDB Cloud, for example `com.aliyuncs.privatelink.<region>.xxxxx`.
+2. Go to the details page of the endpoint service and copy the **Endpoint Service Name**. You will need to provide it to TiDB Cloud. For example, `com.aliyuncs.privatelink.<region>.xxxxx`.
 
 3. On the detail page of the endpoint service, click the **Service Whitelist** tab, click **Add to Whitelist** and input the TiDB Cloud account ID. You can get the account ID in [Prerequisites](#prerequisites).
 
-## Step 3. Create a Private Link Connection in TiDB Cloud
+## Step 3. Create a private link connection in TiDB Cloud
 
 You can also refer to [Create an AliCloud Endpoint Service Private Link Connection](/tidbcloud/serverless-private-link-connection#create-an-alicloud-endpoint-service-private-link-connection) for more details.
 
@@ -92,7 +92,7 @@ You can also refer to [Create an AliCloud Endpoint Service Private Link Connecti
 4. Enter the required information in the **Create Private Link Connection** dialog:
 
     - **Private Link Connection Name**: Enter a name for the Private Link Connection.
-    - **Connection Type**: Choose **AliCloud Endpoint Service**, if you can not find this option, please ensure that your cluster is created in AWS provider.
+    - **Connection Type**: Choose **AliCloud Endpoint Service**. If you cannot find this option, please ensure that your cluster is created on AWS.
     - **Endpoint Service Name**: Enter the endpoint service name you obtained in Step 2.
 
 5. Click the **Create Connection** button.

@@ -1,6 +1,6 @@
 # Set up a Private Link Connection to AWS RDS
 
-The document describes how to connect to an AWS RDS, using AWS Endpoint Service private link connection.
+This document describes how to connect to an AWS RDS instance using an AWS Endpoint Service private link connection.
 
 ## Prerequisites
 
@@ -20,7 +20,7 @@ The document describes how to connect to an AWS RDS, using AWS Endpoint Service 
 
 ## Step 1. Set up RDS instance
 
-Identify a AWS RDS you want to use, or [set up a new RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html).
+Identify an AWS RDS instance to use, or [set up a new one](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html).
 
 The RDS must meet the following requirements:
 
@@ -29,9 +29,9 @@ The RDS must meet the following requirements:
 
 > **Note**
 >
-> To connect to a cross region RDS instance, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> To connect to a cross-region RDS instance, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-## Step 2. Expose the RDS as Endpoint Service
+## Step 2. Expose the RDS instance as an endpoint service
 
 ### 1. Set up the load balancer
 
@@ -74,9 +74,9 @@ Set up the endpoint service in the same region of your RDS:
     - **Require acceptance for endpoint**: Recommended to check `Acceptance required`
     - **Supported IP address types**: `Ipv4`
 
-2. Go to the detail page of the endpoint service and note down the **Service name**. You need to provide it to TiDB Cloud, for example `com.amazonaws.vpce.<region>.vpce-svc-xxx`.
+2.  Go to the details page of the endpoint service and copy the **Service name**. You need to provide it to TiDB Cloud, for example `com.amazonaws.vpce.<region>.vpce-svc-xxx`.
 
-3. On the detail page of the endpoint service, click the **Allow principals** tab, and allow the TiDB Cloud account ID. You can get the account ID in [Prerequisites](#prerequisites), for example, `arn:aws:iam::<account_id>:root`.
+3. On the details page of the endpoint service, click the **Allow principals** tab, and add the TiDB Cloud account ID to the allowlist. You can get the account ID in [Prerequisites](#prerequisites), for example, `arn:aws:iam::<account_id>:root`.
 
 ## Step 3. Create a Private Link Connection in TiDB Cloud
 
@@ -98,7 +98,7 @@ You can also refer to [Create an AWS Endpoint Service Private Link Connection](/
 4. Enter the required information in the **Create Private Link Connection** dialog:
 
     - **Private Link Connection Name**: Enter a name for the Private Link Connection.
-    - **Connection Type**: Choose **AWS Endpoint Service**, if you can not find this option, please ensure that your cluster is created in AWS provider.
+    - **Connection Type**: Choose **AWS Endpoint Service**. If you cannot find this option, please ensure that your cluster is created on AWS.
     - **Endpoint Service Name**: Enter the endpoint service name you obtained in Step 2.
 
 5. Click the **Create Connection** button.
