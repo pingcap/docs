@@ -1,4 +1,4 @@
-# Set Up Private Link Connection Connect to AWS RDS
+# Set up a Private Link Connection to AWS RDS
 
 The document describes how to connect to an AWS RDS, using AWS Endpoint Service private link connection.
 

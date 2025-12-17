@@ -1,4 +1,4 @@
-# Set Up Private Link Connection Connect to Alibaba Cloud RDS
+# Set up a Private Link Connection to Alibaba Cloud RDS
 
 The document describes how to connect to an Alibaba Cloud RDS, using AliCloud Endpoint Service private link connection.
 
@@ -8,11 +8,10 @@ The document describes how to connect to an Alibaba Cloud RDS, using AliCloud En
 
 2. Ensure that you have the following authorization to set up a load balancer and endpoint service in your own Alibaba Cloud account.
 
-    - Manage security groups
     - Manage load balancer
     - Manage endpoint services
 
-3. Get the {{.essential}} account ID and available zones, save the information for later use.
+3. Ensure your {{.essential}} in alibaba cloud provider and get its account ID and available zones, save the information for later use.
 
     1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
     2. On the **Private Link Connection For Dataflow**, Click **Create Private Link Connection**.
@@ -24,8 +23,9 @@ Identify an Alibaba Cloud ApsaraDB RDS you want to use, or [set up a new RDS](ht
 
 The RDS must meet the following requirements:
 
-- The RDS must be in the same AWS region as your {{.essential}}.
+- The Alibaba Cloud region for your RDS instance must be the same as the region for your {{.essential}}.
 - The subnet group of your RDS must have overlapping availability zones as your {{.essential}}.
+- Make sure your RDS instance is accessible within the VPC.
 
 > **Note**
 >
@@ -52,7 +52,7 @@ Set up the load balancer in the same region of your RDS:
     - **Zone**: Must have overlapping availability zones with your {{.essential}}
     - **IP Version**: `IPv4`
 
-    Find the load balancer you created, and click the **Create Listerner**:
+    Find the load balancer you created, and then click **Create Listerner**:
     
     - **Listener Protocol**: TCP
     - **Listener Port**: Database port (for example 3306 for MySQL).

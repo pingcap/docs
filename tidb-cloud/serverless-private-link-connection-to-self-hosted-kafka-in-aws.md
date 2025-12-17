@@ -1,4 +1,4 @@
-# Set Up Private Link Connection Connect to Self-Hosted Kafka in AWS
+# Set up a Private Link Connection to Self-Hosted Kafka in AWS
 
 The document describes how to connect to a self-hosted Kafka cluster in AWS, using AWS Endpoint Service private link connection.
 
@@ -569,7 +569,7 @@ The following configuration applies to a Kafka KRaft cluster. The ZK mode config
 
 #### 2. Test EXTERNAL listener settings in your internal network
 
-You can download the Kafka and OpenJDK in you Kafka client node.
+You can download the Kafka and OpenJDK on you Kafka client node.
 
 ```shell
 # Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.

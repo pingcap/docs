@@ -1,4 +1,4 @@
-# Set Up Private Link Connection Connect to AWS Confleunt Cloud
+# Set up a Private Link Connection to AWS Confleunt Cloud
 
 > **Note**
 >
@@ -46,7 +46,7 @@ During the process, you need to:
 
 ### 1. Create the AWS Endpoint Service Private Link connection
 
-You can also refer to [Create an AWS Endpoint Service Private Link Connection](/tidbcloud/serverless-private-link-connections#create-an-aws-endpoint-service-private-link-connection) for more details.
+You can also refer to [Create an AWS Endpoint Service Private Link Connection](/tidbcloud/serverless-private-link-connection#create-an-aws-endpoint-service-private-link-connection) for more details.
 
 <SimpleTab>
 <div label="Console">
