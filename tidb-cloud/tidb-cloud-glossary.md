@@ -147,7 +147,7 @@ A Request Capacity Unit (RCU) is a unit of measure used to represent the provisi
 
 For {{{ .starter }}}, a Request Unit (RU) is a **billing and usage metric** that represents the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified. For more information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
 
-For TiDB Cloud Dedicated and TiDB Self-Managed, a Request Unit (RU) is a **resource abstraction unit** that represents system resource consumption, which currently includes CPU, IOPS, and IO bandwidth metrics. It is used by the resource control feature to limit, isolate, and manage resources consumed by database requests, rather than for billing purposes. For more information, see [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md).
+For TiDB Cloud Dedicated and TiDB Self-Managed, a Request Unit (RU) is a **resource abstraction unit** that represents system resource consumption, which currently includes CPU, IOPS, and IO bandwidth metrics. It is used by the resource control feature to limit, isolate, and manage resources consumed by database requests, not for billing purposes. For more information, see [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md).
 
 ## S
 
