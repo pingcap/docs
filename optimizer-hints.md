@@ -475,6 +475,60 @@ EXPLAIN SELECT /*+ NO_ORDER_INDEX(t, a) */ a FROM t ORDER BY a LIMIT 10;
 
 The same as the example of `ORDER_INDEX` hint, the optimizer generates two types of plans for this query: `Limit + IndexScan(keep order: true)` and `TopN + IndexScan(keep order: false)`. When the `NO_ORDER_INDEX` hint is used, the optimizer will choose the latter plan to read the index out of order.
 
+### INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...]) <span class="version-mark">New in v8.5.5 and v9.0.0</span>
+
+The `INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...])` hint instructs the optimizer to access the specified table using only the specified indexes and to push the `IndexLookUp` operator down to TiKV for execution.
+
+The following example shows the execution plan generated with this hint:
+
+```sql
+CREATE TABLE t1(a INT, b INT, key(a));
+EXPLAIN SELECT /*+ INDEX_LOOKUP_PUSHDOWN(t1, a) */ a, b FROM t1;
+```
+
+```sql
++-----------------------------+----------+-----------+----------------------+--------------------------------+
+| id                          | estRows  | task      | access object        | operator info                  |
++-----------------------------+----------+-----------+----------------------+--------------------------------+
+| IndexLookUp_7               | 10000.00 | root      |                      |                                |
+| ├─LocalIndexLookUp(Build)   | 10000.00 | cop[tikv] |                      | index handle offsets:[1]       |
+| │ ├─IndexFullScan_5(Build)  | 10000.00 | cop[tikv] | table:t1, index:a(a) | keep order:false, stats:pseudo |
+| │ └─TableRowIDScan_8(Probe) | 10000.00 | cop[tikv] | table:t1             | keep order:false, stats:pseudo |
+| └─TableRowIDScan_6(Probe)   | 0.00     | cop[tikv] | table:t1             | keep order:false, stats:pseudo |
++-----------------------------+----------+-----------+----------------------+--------------------------------+
+```
+
+When the `INDEX_LOOKUP_PUSHDOWN` hint is enabled, the outermost Build operator that originally runs on the TiDB side in the execution plan is replaced with `LocalIndexLookUp`, which is then pushed down to TiKV for execution. While scanning the index, TiKV attempts to read row data by performing local table lookups. Because the index and row data might be distributed across different Regions, the pushdown request might not cover all target rows. Therefore, TiDB retains the `TableRowIDScan` operator to fetch any rows that are not matched on the TiKV side.
+
+The `INDEX_LOOKUP_PUSHDOWN` hint has the following limitations:
+
+* Cached tables and temporary tables are not supported.
+* Queries using [global indexes](/global-indexes.md) are not supported.
+* Queries using [multi-valued indexes](/choose-index.md#use-multi-valued-indexes) are not supported.
+* Isolation levels other than `REPEATABLE-READ` are not supported.
+- [Follower Read](/follower-read.md) is not supported.
+- [Stale Read](/stale-read.md) and [reading historical data using `tidb_snapshot`](/read-historical-data.md) are not supported.
+* The pushed-down `LocalIndexLookUp` operator does not support keep order. If the execution plan includes an `ORDER BY` clause on index columns, the query falls back to regular `IndexLookUp`.
+* The pushed-down `LocalIndexLookUp` operator does not support sending Coprocessor requests in pagination mode.
+* The pushed-down `LocalIndexLookUp` operator does not support [Coprocessor Cache](/coprocessor-cache.md).
+
+### NO_INDEX_LOOKUP_PUSHDOWN(t1_name) <span class="version-mark">New in v8.5.5 and v9.0.0</span>
+
+The `NO_INDEX_LOOKUP_PUSHDOWN(t1_name)` hint explicitly disables `IndexLookUp` pushdown for the specified table. This hint is typically used together with the system variable [`tidb_index_lookup_pushdown_policy`](/system-variables.md#tidb_index_lookup_pushdown_policy-new-in-v855-and-v900). When the variable is set to `force` or `affinity-force`, you can use this hint to prevent pushdown for specific tables.
+
+The following example sets the `tidb_index_lookup_pushdown_policy` variable to `force`, which automatically pushes down all `IndexLookUp` operators in the current session. If the `NO_INDEX_LOOKUP_PUSHDOWN` hint is specified in a query, the corresponding table is not pushed down:
+
+```sql
+SET @@tidb_index_lookup_pushdown_policy = 'force';
+
+-- The IndexLookUp operator is not pushed down.
+SELECT /*+ NO_INDEX_LOOKUP_PUSHDOWN(t) */ * FROM t WHERE a > 1;
+```
+
+> **Note:**
+>
+> `NO_INDEX_LOOKUP_PUSHDOWN` has higher priority than [`INDEX_LOOKUP_PUSHDOWN`](#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855-and-v900). When both hints are present, `NO_INDEX_LOOKUP_PUSHDOWN` takes effect.
+
 ### AGG_TO_COP()
 
 The `AGG_TO_COP()` hint tells the optimizer to push down the aggregate operation in the specified query block to the coprocessor. If the optimizer does not push down some aggregate function that is suitable for pushdown, then it is recommended to use this hint. For example:
