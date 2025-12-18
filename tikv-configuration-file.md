@@ -329,7 +329,6 @@ Configuration items related to the single thread pool serving read requests. Thi
         + **Forced scale-down**: when the CPU usage of the unified read pool exceeds the configured value plus a 10% buffer, TiKV forcibly reduces the size of the pool.
         + **Scale-up prevention**: when expanding the unified read pool would cause CPU usage to exceed the configured threshold minus a 10% buffer, TiKV prevents the unified read pool from further expanding.
 
-  For example, setting this parameter to `0.8` ensures that the unified read pool does not consume more than 80% of the available CPU resources.
 + This feature takes effect only when [`readpool.unified.auto-adjust-pool-size`](#auto-adjust-pool-size-new-in-v630) is set to `true`.
 + Default value: `0.0`
 + Value range: `[0.0, 1.0]`
