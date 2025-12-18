@@ -329,7 +329,7 @@ Configuration items related to the single thread pool serving read requests. Thi
 
 ### `cpu-threshold` <span class="version-mark">New in v8.5.5 and v9.0.0</span>
 
-+ Specifies the CPU utilization threshold for the unified read pool.
++ Specifies the CPU utilization threshold for the unified read pool.  For example, when this value is set to `0.8`, the thread pool can use up to 80% of the CPU.
 
   - If this parameter is set to `0` (the default), this constraint is disabled, and thread pool scaling is determined solely by the busy thread scaling algorithm.
   - If this parameter is set to a value greater than `0`, CPU threshold checks are imposed on top of thread scaling:
