@@ -63,7 +63,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     To protect the PD leader from overloading due to retry storms or similar feedback loops, a circuit breaker pattern is introduced to limit incoming traffic (when a threshold of errors is reached) to enable the system to stabilize. The `tidb_cb_pd_metadata_error_rate_threshold_ratio` system variable is used to control the application of the circuit breaker.
 
-    For more information, see [Documentation](/system-variables.md#tidb_cb_pd_metadata_error_rate_threshold_ratio-new-in-v900).
+    For more information, see [Documentation](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_cb_pd_metadata_error_rate_threshold_ratio-new-in-v855).
 
 * Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
 
@@ -85,7 +85,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     Starting from v8.5.5, log backups can continue to run when performing a snapshot restore (when prerequisite conditions are met). This enables ongoing log backups to proceed without having to stop them during the restore procedure. The newly restored data will also be recorded in the ongoing log backup.
 
-    For more information, see [documentation](/br/br-pitr-manual.md#compatibility-between-ongoing-log-backup-and-snapshot-restore).
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/br-pitr-manual#compatibility-between-ongoing-log-backup-and-snapshot-restore).
 
 * Table level restores from Log Backups [#57613](https://github.com/pingcap/tidb/issues/57613) @[Tristan1900](https://github.com/Tristan1900)
 
