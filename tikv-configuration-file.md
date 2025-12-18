@@ -324,10 +324,10 @@ Configuration items related to the single thread pool serving read requests. Thi
 
 + Specifies the CPU utilization threshold for the unified read pool.  For example, when this value is set to `0.8`, the thread pool can use up to 80% of the CPU.
 
-  - If this parameter is set to `0` (the default), this constraint is disabled, and thread pool scaling is determined solely by the busy thread scaling algorithm.
-  - If this parameter is set to a value greater than `0`, CPU threshold checks are imposed on top of thread scaling:
-      - A scale-down is forced when CPU usage exceeds the threshold plus a 10% leeway.
-      - A scale-up is prevented if it would cause CPU usage to exceed the threshold minus a 10% leeway.
+    + By default (when it is `0.0`), there is no limit on the CPU usage of UnifyReadPool. The size of the thread pool is determined solely by the busy thread scaling algorithm, which adjusts the size dynamically based on the number of threads handling current tasks.
+    + If it is set to a value greater than `0.0`, TiKV introduces the following CPU usage threshold constraints on top of the existing busy-thread scaling algorithm to control CPU resource usage more strictly:
+        + **Forced scale-down**: when the CPU usage of the unified read pool exceeds the configured value plus a 10% buffer, TiKV forcibly reduces the size of the pool.
+        + **Scale-up prevention**: when expanding the unified read pool would cause CPU usage to exceed the configured threshold minus a 10% buffer, TiKV prevents the unified read pool from further expanding.
 
   For example, setting this parameter to `0.8` ensures that the unified read pool does not consume more than 80% of the available CPU resources.
 + This feature takes effect only when [`readpool.unified.auto-adjust-pool-size`](#auto-adjust-pool-size-new-in-v630) is set to `true`.
