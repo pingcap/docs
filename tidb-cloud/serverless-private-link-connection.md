@@ -95,7 +95,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 </div>
 </SimpleTab>
 
-### Create an AliCloud Endpoint Service Private Link Connection
+### Create an Alibaba Cloud Endpoint Service Private Link Connection
 
 <SimpleTab>
 <div label="Console">
@@ -113,7 +113,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 4. Enter the required information in the **Create Private Link Connection** dialog:
 
     - **Private Link Connection Name**: Enter a name for the Private Link Connection.
-    - **Connection Type**: Choose **AliCloud Endpoint Service**. If you can not find this option, please ensure that your cluster is created in Alibaba Cloud provider.
+    - **Connection Type**: Choose **Alibaba Cloud Endpoint Service**. If you can not find this option, ensure that your cluster is created in Alibaba Cloud.
     - **Endpoint Service Name**: Enter your Alibaba Cloud endpoint service name (for example, `com.aliyuncs.privatelink.<region>.xxxxx`).
 
     > **Note:**
@@ -126,7 +126,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
     > 
     > You can get the account ID and available zones information at the bottom of the dialog.
 
-5. Click the **Create Connection** button.
+5. Click **Create Connection**.
 
 </div>
 
