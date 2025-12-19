@@ -1,9 +1,9 @@
 ---
-title: Set up a Private Link Connection to Alibaba Cloud ApsaraDB RDS for MySQL
+title: Connect to Alibaba Cloud ApsaraDB RDS for MySQL via a Private Link Connection
 summary: Learn how to connect to an Alibaba Cloud ApsaraDB RDS for MySQL instance using an Alibaba Cloud Endpoint Service private link connection.
 ---
 
-# Set up a Private Link Connection to Alibaba Cloud ApsaraDB RDS for MySQL
+# Connect to Alibaba Cloud ApsaraDB RDS for MySQL via a Private Link Connection 
 
 This document describes how to connect to an Alibaba Cloud ApsaraDB RDS for MySQL instance using an Alibaba Cloud Endpoint Service private link connection.
 
@@ -58,7 +58,7 @@ Set up the load balancer in the same region of your ApsaraDB RDS for MySQL as fo
 2. Go to [NLB](https://slb.console.alibabacloud.com/nlb) to create a network load balancer.
 
     - **Network Type**: select `Internal-facing`
-    - **VPC**: enter the VPC where your ApsaraDB RDS for MySQL is located
+    - **VPC**: select the VPC where your ApsaraDB RDS for MySQL is located
     - **Zone**: it must overlap with your {{{ .essential }}}
     - **IP Version**: select `IPv4`
 
