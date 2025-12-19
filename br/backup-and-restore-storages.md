@@ -203,6 +203,57 @@ You can configure the account used to access GCS by specifying the access key. I
         --storage "azure://external/backup-20220915?account-name=${account-name}"
         ```
 
+- Method 4: Use Azure Managed Identity
+
+    If your TiDB cluster and BR run on Azure Virtual Machines or Azure Kubernetes Service (AKS), and you have assigned a managed identity to the nodes, you can use this method.
+
+    Before using this method, ensure that you have granted the managed identity access permissions to the target storage account (for example, the **Storage Blob Data Contributor** role) in the Azure Portal.
+
+    - **System-assigned managed identity**:
+
+        You do not need to configure any environment variables. Simply run the backup command. Ensure that the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` are **not** set in the runtime environment; otherwise, the SDK might attempt to use other authentication methods.
+
+    - **User-assigned managed identity**:
+
+        You need to configure the `$AZURE_CLIENT_ID` environment variable in the running environment of the BR tool and TiKV. The value should be the **Client ID** of the user-assigned managed identity.
+
+        1. **Configure TiKV (when started using TiUP)**:
+
+            Suppose that the TiKV port on the node is `24000` (the systemd service name is `tikv-24000`):
+
+            ```shell
+            systemctl edit tikv-24000
+            ```
+
+            Edit the configuration to add the environment variable (only the Client ID is required):
+
+            ```ini
+            [Service]
+            Environment="AZURE_CLIENT_ID=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+            ```
+
+            Reload the configuration and restart TiKV:
+
+            ```shell
+            systemctl daemon-reload
+            systemctl restart tikv-24000
+            ```
+
+        2. **Configure the BR command-line tool**:
+
+            Ensure that the environment variable exists in the current shell:
+
+            ```shell
+            export AZURE_CLIENT_ID="aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+            ```
+
+    - Use BR to back up data to Azure Blob Storage:
+
+        ```shell
+        tiup br backup full -u "${PD_IP}:2379" \
+        --storage "azure://external/backup-20220915?account-name=${account-name}"
+        ```
+
 </div>
 </SimpleTab>
 
