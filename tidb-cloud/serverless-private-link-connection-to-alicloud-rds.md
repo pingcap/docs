@@ -84,8 +84,6 @@ Set up the endpoint service in the same region of your ApsaraDB RDS for MySQL:
 
 ## Step 3. Create a private link connection in TiDB Cloud
 
-For more information, see [Create an AliCloud Endpoint Service Private Link Connection](/tidb-cloud/serverless-private-link-connection.md#create-an-alicloud-endpoint-service-private-link-connection).
-
 You can create a private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
 
 <SimpleTab>
@@ -121,3 +119,5 @@ ticloud serverless private-link-connection create -c <cluster-id> --display-name
 
 </div>
 </SimpleTab>
+
+For more information, see [Create an AliCloud Endpoint Service Private Link Connection](/tidb-cloud/serverless-private-link-connection.md#create-an-alicloud-endpoint-service-private-link-connection).

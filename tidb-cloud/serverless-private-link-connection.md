@@ -1,4 +1,9 @@
-# Private Link Connection for Dataflow(Beta)
+---
+title: Private Link Connection for Dataflow (Beta)
+summary: Learn how to set up Private Link Connection for Dataflow.
+---
+
+# Private Link Connection for Dataflow (Beta)
 
 ## Overview
 
