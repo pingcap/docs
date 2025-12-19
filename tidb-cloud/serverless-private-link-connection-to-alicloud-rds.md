@@ -24,7 +24,7 @@ To view the the Alibaba Cloud account ID and available zones, do the following:
 2. On the **Private Link Connection For Dataflow**, click **Create Private Link Connection**.
 3. You can find the Alibaba Cloud account ID and available zones.
 
-## Step 1. Set up an RDS instance
+## Step 1. Set up an ApsaraDB RDS for MySQL instance
 
 Identify an Alibaba Cloud ApsaraDB RDS for MySQL you want to use, or [set up a new RDS](https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/step-1-create-an-apsaradb-rds-for-mysql-instance-and-configure-databases).
 
