@@ -9,14 +9,14 @@ This document describes how to connect to an Alibaba Cloud ApsaraDB RDS for MySQ
 
 ## Prerequisites
 
-1. Ensure that you have an ApsaraDB RDS for MySQL instance or have the permissions to create one.
+- Ensure that you have an ApsaraDB RDS for MySQL instance or have the permissions to create one.
 
-2. Ensure that you have the following authorization to set up a load balancer and endpoint service in your own Alibaba Cloud account.
+- Ensure that you have the following authorization to set up a load balancer and endpoint service in your own Alibaba Cloud account.
 
     - Manage load balancer
     - Manage endpoint services
 
-3. Ensure that your {{{ .essential }}} in Alibaba Cloud and get its account ID and available zones. Save the information for later use. 
+- Ensure that your {{{ .essential }}} in Alibaba Cloud and get its account ID and available zones. Save the information for later use. 
 
 To view the the Alibaba Cloud account ID and available zones, do the following:
 
@@ -28,15 +28,15 @@ To view the the Alibaba Cloud account ID and available zones, do the following:
 
 Identify an Alibaba Cloud ApsaraDB RDS for MySQL you want to use, or [set up a new RDS](https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/step-1-create-an-apsaradb-rds-for-mysql-instance-and-configure-databases).
 
-The ApsaraDB RDS for MySQL must meet the following requirements:
+To ensure successful connectivity, your ApsaraDB RDS for MySQL instance must meet the following requirements:
 
-- The Alibaba Cloud region for your ApsaraDB RDS for MySQL instance must be the same as the region for your {{{ .essential }}}.
-- The subnet group of your ApsaraDB RDS for MySQL must have overlapping availability zones as your {{{ .essential }}}.
-- Make sure your ApsaraDB RDS for MySQL instance set proper IP whitelist and is accessible within the VPC.
+- Region match: the instance must reside in the same Alibaba Cloud region as your {{{ .essential }}}.
+- AZ (Availability Zone) availability: the subnet group must include availability zones that overlap with those of your {{{ .essential }}}.
+- Network accessibility: the instance must be accessible within the VPC, with an appropriately configured IP allowlist.
 
 > **Note**
 >
-> Cross-region ApsaraDB RDS for MySQL instance connection is not supported.
+> Cross-region connections for ApsaraDB RDS for MySQL are not supported.
 
 ## Step 2. Expose the ApsaraDB RDS for MySQL instance as an endpoint service
 
