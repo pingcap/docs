@@ -9,14 +9,17 @@ This document describes how to connect to an Alibaba Cloud ApsaraDB RDS for MySQ
 
 ## Prerequisites
 
-- Ensure that you have an ApsaraDB RDS for MySQL instance or have the permissions to create one.
+- ApsaraDB RDS for MySQL: ensure you have an existing ApsaraDB RDS for MySQL instance or the permissions required to create one.
 
-- Ensure that you have the following authorization to set up a load balancer and endpoint service in your own Alibaba Cloud account.
+- Alibaba Cloud permissions: verify that your account has the following authorizations to manage networking components:
 
     - Manage load balancer
     - Manage endpoint services
 
-- Ensure that your {{{ .essential }}} in Alibaba Cloud and get its account ID and available zones. Save the information for later use. 
+- {{{ .essential }}} information: confirm that your {{{ .essential }}} is active in Alibaba Cloud. Retrieve and save the following details for later use:
+
+    - Account ID
+    - Availability Zones (AZ)
 
 To view the the Alibaba Cloud account ID and available zones, do the following:
 
@@ -56,7 +59,7 @@ Set up the load balancer in the same region of your ApsaraDB RDS for MySQL as fo
 
     - **Network Type**: select `Internal-facing`
     - **VPC**: enter the VPC where your ApsaraDB RDS for MySQL is located
-    - **Zone**: it must have overlapping availability zones with your {{{ .essential }}}
+    - **Zone**: it must overlap with your {{{ .essential }}}
     - **IP Version**: select `IPv4`
 
     Find the load balancer you created, and then click **Create Listener**:
@@ -73,9 +76,9 @@ Set up the endpoint service in the same region of your ApsaraDB RDS for MySQL:
 
     - **Service Resource Type**: select `NLB`
     - **Select Service Resource**: select all zones that NLB is in, and choose the NLB that you created in the previous step
-    - **Automatically Accept Endpoint Connections**: it is recommended to choose `No
+    - **Automatically Accept Endpoint Connections**: it is recommended to choose `No`
 
-2. Go to the details page of the endpoint service, and copy the **Endpoint Service Name**. You need to use it for TiDB Cloud later. For example, `com.aliyuncs.privatelink.<region>.xxxxx`.
+2. Go to the details page of the endpoint service, and copy the **Endpoint Service Name**, for example, `com.aliyuncs.privatelink.<region>.xxxxx`. You need to use it for TiDB Cloud later. 
 
 3. On the detail page of the endpoint service, click the **Service Whitelist** tab, click **Add to Whitelist**, and then enter the TiDB Cloud account ID. For more information about how to get the account ID, see [Prerequisites](#prerequisites).
 
