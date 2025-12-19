@@ -145,7 +145,10 @@ A Request Capacity Unit (RCU) is a unit of measure used to represent the provisi
 
 ### Request Unit (RU)
 
-For {{{ .starter }}} and Essential, a Request Unit (RU) is a **billing and usage metric** that represents the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified. For more information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/) and [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
+For {{{ .starter }}} and Essential, a Request Unit (RU) is a **usage metric** that represents the amount of resources consumed by a single request to the database. The number of RUs consumed by a request depends on factors such as the operation type, the size of data accessed, and system resource usage. However, the billing models for {{{ .starter }}} and Essential are different:
+
+- {{{ .starter }}} is billed based on the total number of RUs consumed. For more information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
+- {{{ .essential }}} is billed based on the number of provisioned [Request Capacity Units (RCUs)](#request-capacity-unit-rcu), which define the sustained RU-per-second capacity of the cluster. RCUs determine the billing and capacity limits, while RUs track the actual consumption against that provisioned capacity. For more information, see [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
 
 For TiDB Cloud Dedicated and TiDB Self-Managed, a Request Unit (RU) is a **resource abstraction unit** that represents system resource consumption, which currently includes CPU, IOPS, and IO bandwidth metrics. It is used by the resource control feature to limit, isolate, and manage resources consumed by database requests, not for billing purposes. For more information, see [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md).
 

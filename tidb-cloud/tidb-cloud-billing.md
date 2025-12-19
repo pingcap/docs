@@ -19,7 +19,7 @@ See [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starte
 
 ### Pricing for {{{ .essential }}} {#pricing-for-essential}
 
-For {{{ .essential }}}, you are charged based on the number of provisioned Request Capacity Units (RCUs), **not** on the actual usage by your application. See [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
+See [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
 
 <CustomContent plan="premium">
 
