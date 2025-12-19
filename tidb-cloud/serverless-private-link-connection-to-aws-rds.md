@@ -25,7 +25,7 @@ Identify an AWS RDS instance to use, or [set up a new one](https://docs.aws.amaz
 The RDS must meet the following requirements:
 
 - The RDS must be in the same AWS region as your {{{ .essential }}}.
-- The subnet group of your RDS must have overlapping availability zones as your {{{ .essential }}}.
+- The [subnet group](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Subnets) of your RDS must have overlapping availability zones as your {{{ .essential }}}.
 - Make sure your RDS instance set proper security group and is accessible within the VPC.
 
 > **Note**
