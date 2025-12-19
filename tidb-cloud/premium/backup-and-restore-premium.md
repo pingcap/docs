@@ -200,9 +200,9 @@ Before you begin, ensure the following:
     - If the information is incorrect, click **Previous** at the bottom of the page to return to the storage configuration.
     - If the information is correct, follow the same steps as [Restore to a new instance](#restore-to-a-new-instance) to configure and create your new instance.
 
-Note
-    - You can only restore backups to an instance within the same cloud provider environment.
-    - If the region of the new instance differs from the region of the storage bucket, additional **cross-region data transfer fees** may apply.
+> **Note:**
+>
+> If the region of the new instance differs from the region of the storage bucket, additional **cross-region data transfer fees** may apply.
 
 
 ## Limitations
