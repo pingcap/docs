@@ -221,6 +221,18 @@ TiDB Cloud safeguards static data with advanced encryption capabilities, ensurin
 
 - For TiDB Cloud Dedicated clusters without CMEK, TiDB Cloud uses escrow keys; {{{ .starter }}} and {{{ .essential }}} clusters rely exclusively on escrow keys.
 
+**Dual-layer Encryption**
+
+- Dual-layer encryption is where two or more independent layers of encryption are enabled to protect against compromises of any one layer of encryption. Using two layers of encryption mitigates threats that come with encrypting data.
+
+- All persisted data is encrypted-at-rest using the tool of the cloud provider that your cluster is running in.
+
+- With dual-layer encryption enabled, data is automatically encrypted at rest using CMEK or escrow keys.
+
+- Dual-layer encryption is disabled by default for {{{ .starter }}} clusters and enabled by default for {{{ .essential }}} clusters.
+
+- Dual-layer encryption is mandatory for TiDB Cloud Dedicated clusters.
+
 **Best practices:**
 
 - Regularly rotate CMEK keys to enhance security and meet compliance standards.
