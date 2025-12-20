@@ -223,7 +223,7 @@ TiDB Cloud safeguards static data with advanced encryption capabilities, ensurin
 
 **Dual-layer encryption**
 
-- Dual-layer encryption is where two or more independent layers of encryption are enabled to protect against compromises of any one layer of encryption. Using two layers of encryption mitigates threats that come with encrypting data.
+- Dual-layer encryption protects data with two or more independent layers of encryption. This method provides enhanced security by protecting against the compromise of any single encryption layer.
 
 - All persisted data is encrypted-at-rest using the tool of the cloud provider that your cluster is running in.
 
