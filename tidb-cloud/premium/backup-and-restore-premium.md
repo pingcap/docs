@@ -191,19 +191,25 @@ Before you begin, ensure the following:
 
 To restore backups from a cloud storage, do the following:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com), and then navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page. In the upper-right corner, click **...** , and then click **Restore from Cloud storage**.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com), and then navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page. In the upper-right corner, click **...** , and then click **Restore from Cloud Storage**.
 
-2. On the **Select Backup Storage Location** page, provide the following information, and then click **Verify Backup and Next**:
+2. On the **Select Backup Storage Location** page, provide the following information:
 
     - **Cloud Provider**: select the provider where your backup file is located
     - **Backup Files URI**: enter the URI of the top-level folder that contains your backup files
-    - **Authentication**: enter your access key and secret key
+    - **Access Key ID**: enter your access key ID
+    - **Access Key Secret**: enter your access key secret
 
-3. If the verification is successful, the **Restore to a New Instance** page appears. Review the backup metadata information displayed at the top of the page:
+3. Click **Verify Backup and Next**. 
 
-    - If the information is correct, follow the same steps as [Restore to a new instance](#restore-to-a-new-instance) to configure and create your new instance.
-    - If the information is not correct, click **Previous** at the bottom of the page to return to the storage configuration, and then enter the correct information.
+4. If the verification is successful, the **Restore to a New Instance** page appears. Review the backup metadata information displayed at the top of the page. Follow the same steps as [create a new TiDB instance](/tidb-cloud/premium/create-tidb-instance-premium.md) to restore the backup to a new instance.
+
+    If the information is not correct, click **Previous** at the bottom of the page to return to the storage configuration, and then enter the correct information.
+
+5. Click **Restore** to restore the backup.
 
 ## Limitations
 
 Currently, manual backups are not supported for {{{ .premium }}} instances.
+
+5. Configure your new TiDB instance for restoration. The steps are the same as [creating a new TiDB instance](/tidb-cloud/premium/create-tidb-instance-premium.md).
