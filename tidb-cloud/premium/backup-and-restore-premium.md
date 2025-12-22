@@ -211,5 +211,3 @@ To restore backups from a cloud storage, do the following:
 ## Limitations
 
 Currently, manual backups are not supported for {{{ .premium }}} instances.
-
-5. Configure your new TiDB instance for restoration. The steps are the same as [creating a new TiDB instance](/tidb-cloud/premium/create-tidb-instance-premium.md).
