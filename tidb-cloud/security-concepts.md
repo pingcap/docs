@@ -225,9 +225,9 @@ TiDB Cloud safeguards static data with advanced encryption capabilities, ensurin
 
 - Dual-layer encryption protects data with two or more independent layers of encryption. This method provides enhanced security by protecting against the compromise of any single encryption layer.
 
-- All persisted data is encrypted-at-rest using the tool of the cloud provider that your cluster is running in.
+- The cloud provider where your cluster is running encrypts all persisted data at rest using its native tools.
 
-- With dual-layer encryption enabled, data is automatically encrypted at rest using CMEK or escrow keys.
+- With dual-layer encryption enabled, TiDB Cloud adds a second layer of security by automatically encrypting data at rest using either CMEK or escrow keys.
 
 - Dual-layer encryption is disabled by default for {{{ .starter }}} clusters and enabled by default for {{{ .essential }}} clusters.
 
