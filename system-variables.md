@@ -586,7 +586,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `50`
-- Range: `[1, 3600]`
+- Range: `[1, 1073741824]`
 - Unit: Seconds
 - The lock wait timeout for pessimistic transactions (default).
 
