@@ -282,6 +282,18 @@ This allows TiDB to accept `SERIALIZABLE` requests without error. TiDB will use 
 >
 > The community-maintained `TiDBDialect` handles this automatically by skipping features that require `SERIALIZABLE` isolation.
 
+### CHECK constraints
+
+Hibernate's [`@Check`](https://docs.hibernate.org/orm/6.5/javadocs/org/hibernate/annotations/Check.html) annotation generates DDL `CHECK` constraints. [MySQL 8.0.16+](https://dev.mysql.com/doc/refman/8.0/en/create-table-check-constraints.html) enforces these constraints by default, but TiDB does not enforce them unless explicitly enabled.
+
+To enable `CHECK` constraint enforcement in TiDB:
+
+```sql
+SET GLOBAL tidb_enable_check_constraint=ON;
+```
+
+Without this setting, TiDB accepts the `CHECK` constraint syntax but does not enforce it, which might lead to unexpected data integrity issues. See [`CHECK` constraints](/constraints.md#check) for details.
+
 ## Next steps
 
 - Learn more usage of Hibernate from [the documentation of Hibernate](https://hibernate.org/orm/documentation).
