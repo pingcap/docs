@@ -201,7 +201,6 @@ CREATE TABLE t (
   col1 VARCHAR(50),
   col2 VARCHAR(50),
   -- other columns...
-  
   UNIQUE GLOBAL INDEX idx_col1_col2 (col1, col2)
 )
 PARTITION BY RANGE (id) (
