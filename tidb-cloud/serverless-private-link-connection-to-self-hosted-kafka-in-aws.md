@@ -793,3 +793,5 @@ ticloud serverless private-link-connection attach-domains -c <cluster-id> --priv
 
 1. Go back to your Kafka broker nodes, replace the `unique_name` placeholder in `advertised.listeners` configuration of each broker with the actual unique name you get from the previous step.
 2. After you reconfigure all the brokers, restart your Kafka brokers one by one.
+
+Now, you can use this private link connection and 9092 as bootstrap port to connect to your Kafka cluster from TiDB Cloud.

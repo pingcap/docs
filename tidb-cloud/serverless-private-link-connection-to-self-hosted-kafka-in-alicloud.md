@@ -26,10 +26,9 @@ For example, the port mapping is as follows:
    
 1. Ensure that you have a Kafka cluster or have the following permissions to set up one.
 
-    - Manage EC2 nodes
-    - Manage VPC
-    - Manage subnets
-    - Connect to EC2 nodes to configure Kafka nodes
+    - Manage ECS nodes
+    - Manage VPC and vSwitch
+    - Connect to ECS nodes to configure Kafka nodes
 
 2. Ensure that you have the following authorization to set up a load balancer and endpoint service in your own AWS account.
 
@@ -64,7 +63,7 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
 The Kafka VPC requires the following:
 
 - Three private vSwitches for brokers, one for each AZ. 
-- One public vSwitches in any AZ with a bastion node that can connect to the internet and three private subnets, which makes it easy to set up the Kafka cluster. In a production environment, you might have your own bastion node that can connect to the Kafka VPC.
+- One public vSwitches in any AZ with a bastion node that can connect to the internet and three private vSwitches, which makes it easy to set up the Kafka cluster. In a production environment, you might have your own bastion node that can connect to the Kafka VPC.
 
 Take the following steps to create the Kafka VPC.
 
@@ -87,24 +86,6 @@ Take the following steps to create the Kafka VPC.
 
 3. On the VPC detail page, take note of the VPC ID, for example, `vpc-t4nfx2vcqazc862e9fg06`.
 
-<!-- **1.2. Create the internet NAT gateway in the Kafka VPC**
-
-1. Click **NAT gateway** then click **Internet NAT gateway**.
-2. Click **Create Internet NAT gateway** to create an internet NAT gateway in the Kafka VPC you created in the previous step.
-
-   - **Instance Name**: `bastion`
-   - **Network and Zone**: `Kafka VPC` and `bastion` vSwitch
-   - **Network Type**: `Internet NAT gateway`
-   - **EIP**: Purchase a new EIP
-
-3. Click **Buy Now** to create the EIP and internet NAT gateway. -->
-<!-- 4. Go to the internet NAT gateway detail page, and then click the **SNAT** tab. Click **Create SNAT Entry** to add a SNAT entry.
-
-   - **SNAT Entry**: choose `Specify vSwitch`
-   - **Select vSwitch**: choose `bastion` vSwitch
-   - **Select EIP**: choose the EIP you created in the previous step
-   - Click **OK**. -->
-
 #### 2. Set up Kafka brokers
 
 **2.1. Create a bastion node**
@@ -120,7 +101,7 @@ Go to the [ECS Listing page](https://ecs.console.alibabacloud.com/home#/). Creat
 
 **2.2. Create broker nodes**
 
-Go to the [EC2 Listing page](https://ecs.console.alibabacloud.com/home#/). Create three broker nodes in broker subnets, one for each AZ.
+Go to the [EC2 Listing page](https://ecs.console.alibabacloud.com/home#/). Create three broker nodes in, one for each AZ.
 
 - Broker 1 in vSwitch `broker-ap-southeast-1a`
 
@@ -755,3 +736,5 @@ For more information, see [Attach Domains to a Private Link Connection](/tidbclo
 
 1. Go back to your Kafka broker nodes, replace the `unique_name` placeholder in `advertised.listeners` configuration of each broker with the actual unique name you get from the previous step.
 2. After you reconfigure all the brokers, restart your Kafka brokers one by one.
+
+Now, you can use this private link connection and 9092 as bootstrap port to connect to your Kafka cluster from TiDB Cloud.
