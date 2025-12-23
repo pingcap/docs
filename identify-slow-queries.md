@@ -175,7 +175,7 @@ Fields related to storage engines:
 
 ## Related hint
 
-You can force a statement to be recorded in the slow query log by using the `WRITE_SLOW_LOG` hint.
+Starting from v9.0.0, you can use the `WRITE_SLOW_LOG` hint to force TiDB to output the execution information of a specific SQL statement to the slow query log, regardless of whether its execution time exceeds the threshold. This is useful for capturing detailed metadata during SQL execution, such as execution plans and resource consumption. For example, when you troubleshoot intermittent performance issues, some SQL statements might slow down only under specific conditions, such as sudden data spikes or index failures, while performing quickly at other times, making them difficult to capture using the default threshold. By pre-emptively adding this hint to business SQL queries, you ensure that the system captures a complete record of detailed information the moment the issue recurs.
 
 - This hint bypasses any thresholds or trigger rules, which means the statement is always written to the slow query log.
 - Currently, you can only force a statement to be written to the slow query log. Disabling this behavior with `WRITE_SLOW_LOG(FALSE)` is not supported.
