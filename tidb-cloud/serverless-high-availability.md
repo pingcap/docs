@@ -1,6 +1,6 @@
 ---
 title: High Availability in TiDB Cloud
-summary: Learn about the high availability architecture of <CustomContent plan="starter,essential">{{{ .starter }}} and {{{ .essential }}}</CustomContent></CustomContent><CustomContent plan="premium">{{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}}</CustomContent>. Discover Zonal and Regional High Availability options, automated backups, failover processes, and how TiDB ensures data durability and business continuity.
+summary: Learn about the high availability architecture of TiDB Cloud. Discover Zonal and Regional High Availability options, automated backups, failover processes, and how TiDB ensures data durability and business continuity.
 ---
 
 # High Availability in TiDB Cloud
