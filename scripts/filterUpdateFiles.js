@@ -159,6 +159,11 @@ const filterFilesByTOC = () => {
   let deletedCount = 0;
   let keptCount = 0;
 
+  // Normalize TOC file paths by removing leading slashes
+  const normalizedTocFiles = new Set(
+    Array.from(tocFiles).map((file) => file.replace(/^\/+/, ""))
+  );
+
   for (const filePath of tmpFiles) {
     // get the relative path to the tmp directory
     const relativePath = path.relative(tmpDir, filePath);
@@ -166,7 +171,7 @@ const filterFilesByTOC = () => {
     // only check markdown files, non-markdown files are kept
     if (relativePath.endsWith(".md")) {
       // check if the markdown file is in the toc
-      if (tocFiles.has(relativePath)) {
+      if (normalizedTocFiles.has(relativePath)) {
         console.log(`Keeping markdown file in TOC: ${relativePath}`);
         keptCount++;
       } else {
