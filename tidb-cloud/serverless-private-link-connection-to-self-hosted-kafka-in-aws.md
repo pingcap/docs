@@ -1,4 +1,9 @@
-# Set up a Private Link Connection to Self-Hosted Kafka in AWS
+---
+title: Connect to AWS Self-Hosted Kafka via Private Link Connection
+summary: Learn how to connect to an AWS Self-Hosted Kafka using an AWS Endpoint Service private link connection.
+---
+
+# Connect to AWS Self-Hosted Kafka via Private Link Connection
 
 The document describes how to connect to a self-hosted Kafka cluster in AWS, using AWS Endpoint Service private link connection.
 
