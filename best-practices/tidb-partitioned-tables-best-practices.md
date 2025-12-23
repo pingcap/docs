@@ -40,25 +40,27 @@ Partition pruning is most effective when query predicates align with the partiti
 
 For more use cases, see [Partition Pruning](/partition-pruning.md).
 
-### Query performance on secondary indexes: non-partitioned tables vs. local indexes vs. global indexes
+### Query performance on secondary indexes: Non-partitioned tables vs. local indexes vs. global indexes
 
 In TiDB, partitioned tables use local indexes by default, where each partition maintains its own set of indexes. In contrast, a global index covers the entire table in one index and tracks rows across all partitions.
 
 For queries that access data from multiple partitions, global indexes generally provide better performance. This is because a query using local indexes requires separate index lookups in each relevant partition, while a query using a global index performs a single lookup across the entire table.
 
-#### Types of tables to be tested
+#### Tested table types
 
-The query performance of the following types of tables are evaluated:
+This test compares query performance across the following table configurations:
 
-- Non-partitioned tables
-- Partitioned tables with global indexes
-- Partitioned tables with local indexes
+- Non-partitioned table
+- Partitioned table with local indexes
+- Partitioned table with global indexes
 
 #### Test setup
 
-- The partitioned table has 365 partitions, defined by the range partitioning on a date column.
-- Each matching key returns multiple rows, simulating a high-volume OLTP-style query pattern.
-- The impact of different partition counts is also evaluated to understand how partition granularity influences latency and index performance.
+The test uses the following configuration:
+
+- The partitioned table contains 365 Range partitions, defined on a `date` column.
+- The workload simulates a high-volume OLTP query pattern, where each index key matches multiple rows.
+- The test also evaluates different partition counts to measure how partition granularity affects query latency and index efficiency.
 
 #### Schema
 
@@ -76,18 +78,18 @@ CREATE TABLE `fa` (
   KEY `index_fa_on_account_id` (`account_id`),
   KEY `index_fa_on_user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
-PARTITION BY RANGE (`date`)
-(PARTITION `fa_2024001` VALUES LESS THAN (2025001),
-PARTITION `fa_2024002` VALUES LESS THAN (2025002),
-PARTITION `fa_2024003` VALUES LESS THAN (2025003),
-...
-...
-PARTITION `fa_2024365` VALUES LESS THAN (2025365));
+PARTITION BY RANGE (`date`)(
+  PARTITION `fa_2024001` VALUES LESS THAN (2025001),
+  PARTITION `fa_2024002` VALUES LESS THAN (2025002),
+  PARTITION `fa_2024003` VALUES LESS THAN (2025003),
+  ...
+  PARTITION `fa_2024365` VALUES LESS THAN (2025365)
+);
 ```
 
 #### SQL
 
-The following SQL statement is used in the example.
+The following SQL statement filters on the secondary index (`sid`) without including the partition key (`date`):
 
 ```sql
 SELECT `fa`.*
@@ -101,33 +103,38 @@ WHERE `fa`.`sid` IN (
 );
 ```
 
-- Query filters on secondary index, but does not include the partition key.
-- Causes local indexes key lookup for each partition due to lack of pruning.
-- Table lookup tasks are significantly higher for partitioned tables.
+This query pattern is representative because it:
+
+- Filters on a secondary index without the partition key.
+- Triggers a local index lookup for each partition due to lack of pruning.
+- Generates significantly more table lookup tasks for partitioned tables.
 
 #### Test results
 
-The following table shows the test results.
+The following table shows results for a query returning 400 rows from a table with 365 Range partitions.
 
-| Configuration | Average Query Time | Cop task for index range scan | Cop task for table lookup | Total Cop tasks | Key Takeaways |
-|---|---|---|---|---|---|
-| Non-partitioned table | 12.6 ms | 72 | 79 | 151 | Provides the best performance with the fewest Cop tasks, which is ideal for most OLTP use cases. |
-| Partitioned table with local indexes | 108 ms | 600 | 375 | 975 | When the partition key is not used in the query condition, local index queries scan all partitions. |
-| Partitioned table with global indexes | 14.8 ms | 69 | 383 | 452 | It improves index scan efficiency, but table lookups can still take a long time if many rows match. |
+| Configuration | Average query time | Cop tasks (index scan) | Cop tasks (table lookup) | Total Cop tasks |
+|---|---|---|---|---|
+| Non-partitioned table | 12.6 ms | 72 | 79 | 151 |
+| Partitioned table with local indexes | 108 ms | 600 | 375 | 975 |
+| Partitioned table with global indexes | 14.8 ms | 69 | 383 | 452 |
 
-Data comes from a table with 365 range partitions (for example, by date).
+- **Non-partitioned table**: provides the best performance with the fewest tasks. Suitable for most OLTP workloads.
+- **Partitioned table with global indexes**: improve index scan efficiency, but table lookups remain expensive when many rows match.
+- **Partitioned table with local indexes**: when the query condition does not include the partition key, local index queries scan all partitions.
 
-- The **Average Query Time** is obtained from the `statement_summary` view.
-- The query uses a secondary index and returns 400 rows.
 
-The following metrics are collected:
-
-- **Average Query Time**: from `statement_summary`
-- **Cop Tasks** (Index Scan + Table Lookup): from the execution plan
+> **Note:**
+>
+> - **Average query time** is sourced from the `statement_summary` view.
+> - **Cop tasks** metrics are derived from the execution plan.
 
 #### Execution plan examples
 
-The following is an execution plan example for a non-partitioned table: 
+The following examples show the execution plans for each configuration.
+
+<details>
+<summary><b>Non-partitioned table</b></summary>
 
 ```
 | id                        | estRows | estCost   | actRows | task      | access object                        | execution info | operator info | memory   | disk |
@@ -137,7 +144,10 @@ The following is an execution plan example for a non-partitioned table:
 | TableRowIDScan_6(Probe)   | 398.73  | 166072.78 | 400     | cop[tikv] | table:fa                             | time:7.01ms, loops:2, cop_task:{num:79, max:4.98ms, min:0s, avg:514.9µs, p95:3.75ms, max_proc_keys:10, p95_proc_keys:5, tot_proc:15ms, tot_wait:21.4ms, copr_cache_hit_ratio:0.00, build_task_duration:341.2µs, max_distsql_concurrency:1, max_extra_concurrency:7, store_batch_num:62}, rpc_info:{Cop:{num_rpc:17, total_time:40.5ms}}, tikv_task:{proc max:0s, min:0s, avg:0s, p80:0s, p95:0s, iters:79, tasks:79}, scan_detail:{total_process_keys:400, total_process_keys_size:489856, total_keys:800, get_snapshot_time:20.8ms, rocksdb:{key_skipped_count:400, block:{cache_hit_count:1600}}}, time_detail:{total_process_time:15ms, total_wait_time:21.4ms, tikv_wall_time:10.9ms} | keep order:false | N/A | N/A |
 ```
 
-The following is an execution plan example for a partitioned tables with a global index:
+</details>
+
+<details>
+<summary><b>Partitioned table with global indexes</b></summary>
 
 ```
 | id                     | estRows | estCost   | actRows | task      | access object                                   | execution info | operator info | memory   | disk |
@@ -147,7 +157,10 @@ The following is an execution plan example for a partitioned tables with a globa
 | TableRowIDScan_6(Probe)| 398.73  | 165221.64 | 400     | cop[tikv] | table:fa                                        | time:7.47ms, loops:2, cop_task:{num:383, max:4.07ms, min:0s, avg:488.5µs, p95:2.59ms, max_proc_keys:2, p95_proc_keys:1, tot_proc:203.3ms, tot_wait:429.5ms, copr_cache_hit_ratio:0.00, build_task_duration:1.3ms, max_distsql_concurrency:1, max_extra_concurrency:31, store_batch_num:305}, rpc_info:{Cop:{num_rpc:78, total_time:186.3ms}}, tikv_task:{proc max:3ms, min:0s, avg:517µs, p80:1ms, p95:1ms, iters:383, tasks:383}, scan_detail:{total_process_keys:400, total_process_keys_size:489856, total_keys:800, get_snapshot_time:2.99ms, rocksdb:{key_skipped_count:400, block:{cache_hit_count:1601, read_count:799, read_byte:10.1 MB, read_time:131.6ms}}}, time_detail:{total_process_time:203.3ms, total_suspend_time:6.31ms, total_wait_time:429.5ms, total_kv_read_wall_time:198ms, tikv_wall_time:163ms} | keep order:false, stats:partial[...] | N/A | N/A |
 ```
 
-The following is an execution plan example for a partition table with a local index:
+</details>
+
+<details>
+<summary><b>Partitioned table with local indexes</b></summary>
 
 ```
 | id                     | estRows | estCost   | actRows | task      | access object                        | execution info | operator info | memory  | disk  |
@@ -157,30 +170,30 @@ The following is an execution plan example for a partition table with a local in
 | TableRowIDScan_6(Probe)| 398.73  | 165221.49 | 400     | cop[tikv] | table:fa                             | time:514ms, loops:434, cop_task:{num:375, max:31.6ms, min:0s, avg:1.33ms, p95:1.67ms, max_proc_keys:2, p95_proc_keys:2, tot_proc:220.7ms, tot_wait:242.2ms, copr_cache_hit_ratio:0.00, build_task_duration:27.8ms, max_distsql_concurrency:1, max_extra_concurrency:1, store_batch_num:69}, rpc_info:{Cop:{num_rpc:306, total_time:495.5ms}}, tikv_task:{proc max:6ms, min:0s, avg:597.3µs, p80:1ms, p95:1ms, iters:375, tasks:375}, scan_detail:{total_process_keys:400, total_process_keys_size:489856, total_keys:800, get_snapshot_time:158.3ms, rocksdb:{key_skipped_count:400, block:{cache_hit_count:3197, read_count:803, read_byte:10.2 MB, read_time:113.5ms}}}, time_detail:{total_process_time:220.7ms, total_suspend_time:5.39ms, total_wait_time:242.2ms, total_kv_read_wall_time:224ms, tikv_wall_time:430.5ms}} | keep order:false, stats:partial[...] | N/A | N/A |
 ```
 
-The following sections describe similar detailed execution plans for partitioned tables with global and local indexes.
+</details>
 
-#### Create a global index on a partitioned table in TiDB
+#### Create a global index on a partitioned table
 
-There are two options for you to create a global index on a partitioned table in TiDB.
+You can create a global index on a partitioned table using one of the following methods.
 
-> **Note:** 
+> **Note:**
 >
-> - In TiDB v8.5.3 and earlier versions, global indexes can only be created on unique columns. Starting from v8.5.4, global indexes on non-unique columns are supported. This limitation will be removed in the next LTS version.
+> - In TiDB v8.5.3 and earlier versions, you can only create global indexes on unique columns. Starting from v8.5.4, TiDB supports global indexes on non-unique columns. This limitation will be removed in a future LTS version.
 > - For non-unique global indexes, use `ADD INDEX` instead of `ADD UNIQUE INDEX`.
-> - The `GLOBAL` keyword must be explicitly specified.
+> - You must explicitly specify the `GLOBAL` keyword.
 
-##### Option 1: add via `ALTER TABLE`
+##### Option 1: Use `ALTER TABLE`
 
-You can use `ALTER TABLE` to add a global index to an existing partitioned table.
+To add a global index to an existing partitioned table, use `ALTER TABLE`:
 
 ```sql
 ALTER TABLE <table_name>
 ADD UNIQUE INDEX <index_name> (col1, col2) GLOBAL;
 ```
 
-##### Option 2: define inline when creating the table
+##### Option 2: Define the index at table creation
 
-You can also create a global index inline when you create a table. 
+To create a global index when creating a table, define the global index inline in the `CREATE TABLE` statement:
 
 ```sql
 CREATE TABLE t (
