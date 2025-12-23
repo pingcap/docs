@@ -21,7 +21,7 @@ REPO_OWNER = "pingcap"
 REPO_NAME = "docs"
 EN_BRANCH = "release-8.5"
 ZH_BRANCH = "i18n-zh-release-8.5"
-TOC_FILE_NAMES = ["TOC-tidb-cloud-starter.md", "TOC-tidb-cloud-essential.md", "TOC-tidb-cloud.md"]
+TOC_FILE_NAMES = ["TOC-tidb-cloud-starter.md", "TOC-tidb-cloud-essential.md", "TOC-tidb-cloud.md", "TOC-tidb-cloud-premium.md"]
 TOC_HEADER_LINE_COUNT = 3  # The Starting line to create bilingual terms
 TEMP_TOC_FILENAME = "en_cloud_toc.md" # The filename of the temporary English TOC content
 
