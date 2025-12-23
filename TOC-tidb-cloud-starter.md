@@ -1,14 +1,15 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: f88d6a9bcf7228f8f8483ee4f36a700d33878804-->
+# 目录 <!--Corresponding EN commit: 825533dcf69284ff0fbca20c7c5ed9aad1983389-->
 
 ## 快速开始
 
 - 为什么选择 TiDB Cloud
-  - [TiDB Cloud 介绍](/tidb-cloud/tidb-cloud-intro.md)
+  - [Introduction](/tidb-cloud/tidb-cloud-intro.md)
+  - [Features](/tidb-cloud/features.md)
   - [与 MySQL 的兼容性](/mysql-compatibility.md)
-- TiDB Cloud 快速上手
+- 快速上手
   - [试用 TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [试用 TiDB + AI](/vector-search/vector-search-get-started-using-python.md)
   - [试用 HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
