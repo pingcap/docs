@@ -41,7 +41,7 @@ TiDB Cloudを許可するには<customcontent plan="starter,essential">クラス
 
     2.  ターゲットの名前をクリックします<customcontent plan="starter,essential">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
-2.  **新しい ARN の追加**ダイアログを開きます。
+2.  **「新しい ARN の追加」**ダイアログを開きます。
 
     -   Amazon S3 からデータをインポートする場合は、次のようにして**[新しい ARN の追加]**ダイアログを開きます。
 
@@ -241,7 +241,7 @@ Azure ARM テンプレートを使用して SAS トークンを作成するに�
 
 2.  **ARM テンプレートの展開による新しい SAS トークンの生成**ダイアログを開きます。
 
-    1.  **「データのエクスポート先...」** &gt; **「Azure Blob Storage」**をクリックします。クラスターでこれまでデータのインポートもエクスポートもしたことがない場合は、ページの下部にある**「データのエクスポート先...」** &gt; **「Azure Blob Storage」**をクリックします。
+    1.  **「データのエクスポート先...」** &gt; **「Azure Blob Storage」**をクリックします。クラスターでこれまでにデータのインポートもエクスポートもしたことがない場合は、ページの下部にある「**データのエクスポート先...」** &gt; **「Azure Blob Storage」**をクリックします。
 
     2.  **Azure Blob Storage 設定**領域まで下にスクロールし、SAS トークン フィールドの下に**ある Azure ARM テンプレートを使用して新規作成するには、ここをクリックします**。をクリックします。
 
@@ -312,7 +312,7 @@ AccessKey ペアを構成するには、次の手順を実行します。
 
         TiDB Cloudにデータをインポートするには<customcontent plan="starter,essential">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>、 **oss:GetObject** 、 **oss:GetBucketInfo** 、および**oss:ListObjects**権限を付与します。
 
-        TiDB Cloudからデータをエクスポートするには<customcontent plan="starter,essential">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>、 **oss:PutObject** 、 **oss:GetBucketInfo** 、および**oss:ListBuckets**権限を付与します。
+        TiDB Cloudからデータをエクスポートするには<customcontent plan="starter,essential">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>、 `oss:PutObject`および`oss:GetBucketInfo`権限を付与します。
 
     -   **リソース**セクションで、バケットとバケット内のオブジェクトを選択します。
 

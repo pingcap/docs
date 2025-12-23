@@ -77,7 +77,7 @@ Azure Blob Storage にデータをエクスポートするには、次の情報�
 Alibaba Cloud OSS にデータをエクスポートするには、次の情報を提供する必要があります。
 
 -   URI: `oss://<bucket-name>/<folder-path>/`
--   アクセス認証情報: Alibaba Cloud アカウントの[アクセスキーペア](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)バケットへのデータエクスポートを許可するために`oss:GetBucketInfo` AccessKey ペアに`oss:PutObject` `oss:ListBuckets`権限があることを確認してください。
+-   アクセス資格情報：Alibaba Cloudアカウントの[アクセスキーペア](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)ペアに`oss:PutObject`と`oss:GetBucketInfo`権限があることを確認してください。
 
 詳細については[Alibaba Cloud Object Storage Service (OSS) アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)参照してください。
 

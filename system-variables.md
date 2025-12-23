@@ -1104,7 +1104,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 整数
 -   デフォルト値: `4`
--   範囲: `[0, 4294967295]` 。v8.2.0より前のバージョンでは、最小値は`1`です。5 `0`設定すると、クラスターのサイズに基づいて同時実行性が適応的に調整されます。
+-   範囲: `[0, 4294967295]` 。v8.2.0より前のバージョンでは、最小値は`1`です`0`に設定すると、クラスターのサイズに基づいて同時実行性が適応的に調整されます。
 -   この変数は、 `ANALYZE`操作を実行するときに`scan`操作の同時実行性を設定するために使用されます。
 
 ### tidb_analyze_partition_concurrency {#tidb-analyze-partition-concurrency}
@@ -1127,7 +1127,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   TiDB が統計を収集する方法を制御します。
     -   TiDB Self-Managed の場合、この変数のデフォルト値は、v5.3.0 以降、 `1`から`2`に変更されます。
     -   TiDB Cloudの場合、この変数のデフォルト値は、v6.5.0 以降、 `1`から`2`に変更されます。
-    -   クラスターが以前のバージョンからアップグレードされた場合、アップグレード後もデフォルト値`tidb_analyze_version`は変更されません。
+    -   クラスターを以前のバージョンからアップグレードした場合、アップグレード後もデフォルト値`tidb_analyze_version`は変更されません。
 -   この変数の詳細な説明については[統計入門](/statistics.md)参照してください。
 
 ### tidb_analyze_skip_column_types <span class="version-mark">v7.2.0 の新機能</span> {#tidb-analyze-skip-column-types-span-class-version-mark-new-in-v7-2-0-span}
@@ -1233,7 +1233,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   タイプ: フロート
 -   デフォルト値: `0.5`
 -   範囲: `(0, 1]` 。v8.0.0 以前のバージョンの範囲は`[0, 18446744073709551615]`です。
--   この変数は、TiDBがバックグラウンドスレッドでテーブル統計情報を更新するために自動分析を実行する際のしきい値を設定するために使用されます。例えば、値が[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)の場合、テーブル内の行の50%以上が変更された時点で自動分析がトリガーされます。自動分析の実行を特定の時間帯のみに制限するには、 `tidb_auto_analyze_start_time`と`tidb_auto_analyze_end_time`指定します。
+-   この変数は、TiDBがバックグラウンド[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)でテーブル統計情報を更新するために自動分析を実行する際のしきい値を設定するために使用されます。例えば、値が0.5の場合、テーブル内の行の50%以上が変更された時点で自動分析がトリガーされます。自動分析の実行を特定の時間帯のみに制限するには、 `tidb_auto_analyze_start_time`と`tidb_auto_analyze_end_time`指定します。
 
 > **注記：**
 >
@@ -1617,7 +1617,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   タイプ: ブール値
 -   デフォルト値: `ON`
 -   この変数は、インデックス作成時のバックフィル速度を向上させるために、 `ADD INDEX`と`CREATE INDEX`のアクセラレーションを有効にするかどうかを制御します。この変数値を`ON`に設定すると、大量のデータを持つテーブルでのインデックス作成のパフォーマンスが向上します。
--   バージョン7.1.0以降、インデックス高速化操作はチェックポイントをサポートします。TiDBオーナーノードが再起動されたり、障害により変更されたりした場合でも、TiDBは定期的に自動更新されるチェックポイントから進捗状況を回復できます。
+-   バージョン7.1.0以降、インデックスアクセラレーション操作はチェックポイントをサポートします。TiDBオーナーノードが再起動されたり、障害により変更されたりした場合でも、TiDBは定期的に自動更新されるチェックポイントから進捗状況を回復できます。
 -   完了した`ADD INDEX`操作が高速化されているかどうかを確認するには、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs)ステートメントを実行して、 `JOB_TYPE`列に`ingest`が表示されるかどうかを確認します。
 
 <CustomContent platform="tidb-cloud" plan="premium">
@@ -2242,7 +2242,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   可能な`ON` : `OFF`
 -   この変数は、 [カーソルフェッチ](/develop/dev-guide-connection-parameters.md#use-streamingresult-to-get-the-execution-result)機能の動作を制御します。
     -   カーソルフェッチが有効で、この変数が`OFF`に設定されている場合、TiDB はステートメント実行開始時にすべてのデータを読み取り、TiDB のメモリに保存し、クライアントが指定した`FetchSize`に基づいて、後続のクライアント読み取りのためにクライアントにデータを返します。結果セットが大きすぎる場合、TiDB は結果を一時的にハードディスクに書き込むことがあります。
-    -   カーソル フェッチが有効で、この変数が`ON`に設定されている場合、TiDB はすべてのデータを一度に TiDB ノードに読み取らず、クライアントがデータを取得するたびに TiDB ノードに増分的にデータを読み込みます。
+    -   カーソル フェッチが有効で、この変数が`ON`に設定されている場合、TiDB はすべてのデータを一度に TiDB ノードに読み取るのではなく、クライアントがデータを取得するときに増分的に TiDB ノードにデータを読み込みます。
 -   この変数によって制御される機能には、次の制限があります。
     -   明示的なトランザクション内のステートメントはサポートされません。
     -   `TableReader` `IndexReader` `Projection`のみ`IndexLookUp`含む実行プランのみ`Selection`サポートされます。
@@ -4044,7 +4044,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `5`
 -   範囲: `[1, 10000]`
--   tidb-server のメモリ使用量がメモリアラームしきい値を超えてアラームをトリガーした場合、TiDB はデフォルトで直近 5 件のアラーム発生時に生成されたステータスファイルのみを保持します。この変数でこの数を調整できます。
+-   tidb-server のメモリ使用量がメモリアラームしきい値を超えてアラームがトリガーされると、TiDB はデフォルトで直近 5 件のアラーム中に生成されたステータスファイルのみを保持します。この変数でこの数を調整できます。
 
 ### tidb_merge_join_concurrency {#tidb-merge-join-concurrency}
 
@@ -4789,7 +4789,7 @@ EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: はい
 -   タイプ: ブール値
 -   デフォルト値: `ON` 。v8.3.0 より前では、デフォルト値は`OFF`です。
--   オプティマイザが`Projection`の演算子をTiKVコプロセッサにプッシュダウンすることを許可するかどうかを指定します。有効にすると、オプティマイザは以下の3種類の`Projection`番目の演算子をTiKVにプッシュダウンする可能性があります。
+-   オプティマイザが`Projection`演算子をTiKVコプロセッサにプッシュダウンすることを許可するかどうかを指定します。有効にすると、オプティマイザは以下の3種類の`Projection`番目の演算子をTiKVにプッシュダウンする可能性があります。
     -   演算子の最上位の式はすべて[JSONクエリ関数](/functions-and-operators/json-functions/json-functions-search.md)または[JSON値属性関数](/functions-and-operators/json-functions/json-functions-return.md)です。例: `SELECT JSON_EXTRACT(data, '$.name') FROM users;` 。
     -   演算子の最上位レベルの式には、JSONクエリ関数またはJSON値属性関数と、直接列読み取りが混在しています。例: `SELECT JSON_DEPTH(data), name FROM users;` 。
     -   演算子の最上位の式はすべて直接列読み取りであり、出力列の数は入力列の数よりも少なくなります。例: `SELECT name FROM users;` 。
@@ -5264,7 +5264,7 @@ SHOW WARNINGS;
 -   デフォルト値: `STRICT`
 -   可能な`IGNORE` : `STRICT`
 -   この変数は、DDL文が[SQLで指定された配置ルール](/placement-rules-in-sql.md)を無視するかどうかを制御します。変数値が`IGNORE`の場合、すべての配置ルールオプションは無視されます。
--   これは、論理ダンプ/リストアツールで、無効な配置ルールが適用された場合でもテーブルが確実に作成できるようにするために使用することを目的としています。これは、mysqldumpがすべてのダンプファイルの先頭に`SET FOREIGN_KEY_CHECKS=0;`書き込む方法に似ています。
+-   これは、論理ダンプ/リストアツールで、無効な配置ルールが割り当てられた場合でもテーブルが確実に作成できるようにするために使用することを目的としています。これは、mysqldumpがすべてのダンプファイルの先頭に`SET FOREIGN_KEY_CHECKS=0;`書き込む方法に似ています。
 
 ### <code>tidb_plan_cache_invalidation_on_fresh_stats</code> <span class="version-mark">v7.1.0 の新機能</span> {#code-tidb-plan-cache-invalidation-on-fresh-stats-code-span-class-version-mark-new-in-v7-1-0-span}
 
@@ -5467,6 +5467,22 @@ SHOW WARNINGS;
 
 ### tidb_replica_read <span class="version-mark">v4.0 の新機能</span> {#tidb-replica-read-span-class-version-mark-new-in-v4-0-span}
 
+<CustomContent platform="tidb-cloud" plan="starter,essential">
+
+> **注記：**
+>
+> この変数は[TiDB Cloudスターター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)と[TiDB Cloudエッセンシャル](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)場合は読み取り専用です。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud" plan="premium">
+
+> **注記：**
+>
+> この変数は[TiDB Cloudプレミアム](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-intro/#deployment-options)の場合読み取り専用です。
+
+</CustomContent>
+
 -   スコープ: セッション | グローバル
 -   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: はい
@@ -5474,7 +5490,7 @@ SHOW WARNINGS;
 -   デフォルト値: `leader`
 -   可能な値: `leader` 、 `follower` 、 `leader-and-follower` 、 `prefer-leader` 、 `closest-replicas` 、 `closest-adaptive` 、 `learner` 。 `learner`はバージョン6.6.0で導入されました。
 -   この変数は、TiDBがデータを読み取る場所を制御するために使用されます。v8.5.4以降、この変数は読み取り専用SQL文にのみ適用されます。
--   使用方法と実装の詳細については、 [Followerが読んだ](/follower-read.md)参照してください。
+-   使用方法と実装の詳細については、 [Follower Read](/follower-read.md)参照してください。
 
 ### tidb_restricted_read_only <span class="version-mark">v5.2.0 の新機能</span> {#tidb-restricted-read-only-span-class-version-mark-new-in-v5-2-0-span}
 
@@ -5545,7 +5561,7 @@ SHOW WARNINGS;
 -   デフォルト値: `2`
 -   範囲: `[1, 2]`
 -   テーブルに新しく保存されるデータのフォーマットバージョンを制御します。TiDB v4.0では、新しいデータの保存にはデフォルトでバージョン[新しいstorage行形式](https://github.com/pingcap/tidb/blob/release-8.5/docs/design/2018-07-19-row-format.md)バージョン`2`が使用されます。
--   TiDB バージョン v4.0.0 より前のバージョンから v4.0.0 以降のバージョンにアップグレードする場合、フォーマット バージョンは変更されず、TiDB は引き続きバージョン`1`の古いフォーマットを使用してテーブルにデータを書き込みます。つまり、**新しく作成されたクラスターのみがデフォルトで新しいデータ フォーマットを使用すること**になります。
+-   TiDB バージョン v4.0.0 より前のバージョンから v4.0.0 以降のバージョンにアップグレードする場合、フォーマット バージョンは変更されず、TiDB は引き続きバージョン`1`の古いフォーマットを使用してテーブルにデータを書き込みます。つまり、**新しく作成されたクラスターのみがデフォルトで新しいデータ フォーマットを使用する**ことになります。
 -   この変数を変更しても、保存されている古いデータには影響しませんが、対応するバージョン形式は、この変数を変更した後に新しく書き込まれたデータにのみ適用されることに注意してください。
 
 ### tidb_runtime_filter_mode <span class="version-mark">v7.2.0 の新機能</span> {#tidb-runtime-filter-mode-span-class-version-mark-new-in-v7-2-0-span}
@@ -5672,7 +5688,7 @@ SHOW WARNINGS;
 -   クラスターに持続: いいえ
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: はい
 -   デフォルト値: &quot;&quot;
--   この変数を使用すると、現在のセッションに関連するログの`session_alias`列目の値をカスタマイズできます。この値は、トラブルシューティング時にセッションを識別するのに役立ちます。この設定は、ステートメント実行に関係する複数のノード（TiKVを含む）のログに影響します。この変数の最大長は64文字に制限されており、それを超える文字は自動的に切り捨てられます。値の末尾のスペースも自動的に削除されます。
+-   この変数を使用すると、現在のセッションに関連するログの`session_alias`列目の値をカスタマイズできます。この値は、トラブルシューティング時にセッションを識別するのに役立ちます。この設定は、ステートメント実行に関係する複数のノード（TiKVを含む）のログに影響します。この変数の最大長は64文字に制限されており、超過した文字は自動的に切り捨てられます。値の末尾のスペースも自動的に削除されます。
 
 ### tidb_session_plan_cache_size <span class="version-mark">v7.1.0 の新機能</span> {#tidb-session-plan-cache-size-span-class-version-mark-new-in-v7-1-0-span}
 

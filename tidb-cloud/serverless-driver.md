@@ -214,7 +214,7 @@ SQL レベルでは、次のオプションを構成できます。
 
 **arrayMode と fullResult**
 
-完全な結果オブジェクトを配列として返すには、オプション`arrayMode`と`fullResult`次のように構成します。
+完全な結果オブジェクトを配列として返すには、 `arrayMode`と`fullResult`オプションを次のように構成します。
 
 ```ts
 const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://[username]:[password]@[host]/[database]'})
@@ -343,6 +343,7 @@ TiDB Cloudサーバーレス ドライバーは、次の ORM と統合されて�
 -   1 回のクエリで最大 10,000 行を取得できます。
 -   一度に実行できるSQL文は1つだけです。1つのクエリで複数のSQL文を実行することはまだサポートされていません。
 -   [プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)との接続はまだサポートされていません。
+-   サーバーは、クロスオリジンリソース共有（CORS）を介して、許可されていないブラウザオリジンからのリクエストをブロックし、資格情報を保護します。そのため、サーバーレスドライバーはバックエンドサービスからのみ使用できます。
 
 ## 次は何？ {#what-s-next}
 

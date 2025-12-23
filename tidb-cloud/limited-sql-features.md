@@ -5,7 +5,7 @@ summary: TiDB Cloudの制限された SQL 機能について説明します。
 
 # TiDB Cloudの SQL 機能が制限されている {#limited-sql-features-on-tidb-cloud}
 
-TiDB Cloud は、TiDB がサポートするほぼすべてのワークロードで動作しますが、TiDB Self-Managed とTiDB Cloudには機能面で若干の違いがあります。このドキュメントでは、 TiDB Cloudにおける SQL 機能の制限について説明します。TiDB Self-Managed とTiDB Cloudの機能ギャップは、継続的に埋められています。これらの機能やギャップを埋める必要がある場合は、機能リクエストを送信[お問い合わせ](/tidb-cloud/tidb-cloud-support.md) 。
+TiDB Cloud はTiDB がサポートするほぼすべてのワークロードで動作しますが、TiDB Self-Managed とTiDB Cloudには機能面で若干の違いがあります。このドキュメントでは、TiDB Cloudにおける SQL 機能の制限事項について説明します。TiDB Self-Managed とTiDB Cloudの機能ギャップは継続的に埋められています。これらの機能やギャップを埋める必要がある場合は、機能リクエストを送信して[お問い合わせ](/tidb-cloud/tidb-cloud-support.md) 。
 
 ## 声明 {#statements}
 
@@ -177,6 +177,7 @@ TiDB Cloud は、TiDB がサポートするほぼすべてのワークロード�
 | `tidb_pprof_sql_cpu`                      | サポートされていません[^4]  | サポートされていません[^4]                          |
 | `tidb_record_plan_in_slow_log`            | サポートされていません[^4]  | サポートされていません[^4]                          |
 | `tidb_redact_log`                         | サポートされていません[^4]  | サポートされていません[^4]                          |
+| `tidb_replica_read`                       | 制限なし             | 読み取り専用[^10]                              |
 | `tidb_restricted_read_only`               | サポートされていません[^4]  | サポートされていません[^4]                          |
 | `tidb_row_format_version`                 | サポートされていません[^4]  | サポートされていません[^4]                          |
 | `tidb_scatter_region`                     | 制限なし             | 読み取り専用[^10]                              |
@@ -231,7 +232,7 @@ TiDB Cloud は、TiDB がサポートするほぼすべてのワークロード�
 
 [^7]: DrainerとPump はTiDB Cloudではサポートされていません。
 
-[^8]: プラグインはTiDB Cloud Starter またはTiDB Cloud Essential ではサポートされていません。
+[^8]: プラグインは、 TiDB Cloud Starter またはTiDB Cloud Essential ではサポートされていません。
 
 [^9]: TiDB Cloud Starter とTiDB Cloud Essential は強力なパスワード ポリシーを適用します。
 
