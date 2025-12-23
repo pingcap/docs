@@ -23,12 +23,12 @@ Starting from v9.0.0, the compact log backup feature provides offline compaction
 
 ## Limitations
 
-- Compact log backup is not a replacement for full backups. It must be used in conjunction with periodical full backups. To ensure PITR capability, the compacting process retains all MVCC versions. Failing to perform full backups for a long time can lead to excessive storage usage and might cause issues when restoring data later.
+- Compact log backup is not a replacement for full backups. It must be used in conjunction with periodic full backups. To ensure PITR capability, the compacting process retains all MVCC versions. Failing to perform full backups for a long time can lead to excessive storage usage and might cause issues when restoring data later.
 - Currently, compacting backups with local encryption enabled is not supported.
 
 ## Use compact log backup
 
-Currently, only manual compaction of log backups is supported, and the process is complex. **It is recommended to use the coming TiDB Operator solution for compacting log backups in production environments.**
+Currently, only manual compaction of log backups is supported, and the process is complex. **It is recommended to use the upcoming TiDB Operator solution for compacting log backups in production environments.**
 
 ### Manual compaction
 
