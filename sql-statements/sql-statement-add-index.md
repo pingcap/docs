@@ -5,29 +5,29 @@ summary: TiDB 数据库中 ADD INDEX 的用法概述。
 
 # ADD INDEX
 
-`ALTER TABLE.. ADD INDEX` 语句用于为已有表添加索引。该操作在 TiDB 中是在线进行的，这意味着在添加索引的过程中，表的读写操作都不会被阻塞。
+`ALTER TABLE.. ADD INDEX` 语句用于为已有表添加索引。此操作在 TiDB 中是在线的，这意味着在添加索引期间，表的读写都不会被阻塞。
 
-> **Tip:**
+> **提示：**
 >
-> 可以使用 [TiDB 分布式执行框架 (DXF)](/tidb-distributed-execution-framework.md) 来加速该语句的执行。
+> 可以使用 [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md) 来加速该语句的操作。
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注意：**
 >
-> 对于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群（4 vCPU），建议手动关闭 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)，以防止在创建索引时资源受限影响集群稳定性。关闭该设置后，索引将通过事务方式创建，从而降低对集群的整体影响。
+> 对于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 4 vCPU 的集群，建议手动关闭 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) 变量，以防止资源限制在创建索引时影响集群稳定性。关闭该设置后，索引将通过事务方式创建，从而降低对集群的整体影响。
 
 </CustomContent>
 
 <CustomContent platform="tidb">
 
-> **Warning:**
+> **警告：**
 >
-> - **DO NOT** 在集群执行 DDL 语句时升级 TiDB 集群（通常是耗时较长的 DDL 语句，如 `ADD INDEX` 和列类型变更）。
-> - 升级前，建议使用 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) 命令检查 TiDB 集群是否有正在执行的 DDL 任务。如果集群存在 DDL 任务，想要升级集群时，请等待 DDL 执行完成，或使用 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) 命令取消 DDL 任务后再进行升级。
-> - 此外，在集群升级过程中，**DO NOT** 执行任何 DDL 语句。否则，可能会出现未定义行为的问题。
+> - **切勿**在集群中有 DDL 语句正在执行时升级 TiDB 集群（通常是耗时较长的 DDL 语句，如 `ADD INDEX` 和列类型变更）。
+> - 升级前，建议使用 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) 命令检查 TiDB 集群是否有正在进行的 DDL 任务。如果集群有 DDL 任务，需等待 DDL 执行完成，或使用 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) 命令取消 DDL 任务后再升级集群。
+> - 此外，在集群升级期间，**切勿**执行任何 DDL 语句。否则，可能会出现未定义行为的问题。
 >
-> 当你将 TiDB 从 v7.1.0 升级到更高版本时，可以忽略上述限制。详情参见 [TiDB 平滑升级的限制](/smooth-upgrade-tidb.md)。
+> 当你将 TiDB 从 v7.1.0 升级到以上版本时，可以忽略上述限制。详情参见 [TiDB 平滑升级的限制](/smooth-upgrade-tidb.md)。
 
 </CustomContent>
 
@@ -94,17 +94,17 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 ## MySQL 兼容性
 
-* TiDB 在语法上兼容 MySQL，支持 `HASH`、`BTREE` 和 `RTREE` 等索引类型，但会忽略这些类型。
+* TiDB 在语法上接受 `HASH`、`BTREE` 和 `RTREE` 等索引类型以兼容 MySQL，但会忽略这些类型。
 * 不支持 `SPATIAL` 索引。
 * TiDB 自建版和 TiDB Cloud Dedicated 支持解析 `FULLTEXT` 语法，但不支持使用 `FULLTEXT` 索引。
 
-    >**Note:**
+    >**注意：**
     >
-    > 目前，只有部分 AWS 区域的 TiDB Cloud Starter 和 TiDB Cloud Essential 集群支持 [`FULLTEXT` 语法和索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)。
+    > 目前，仅部分 AWS 区域的 TiDB Cloud Starter 和 TiDB Cloud Essential 集群支持 [`FULLTEXT` 语法和索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)。
 
 * 不支持降序索引（与 MySQL 5.7 类似）。
 * 不支持为表添加 `CLUSTERED` 类型的主键。关于 `CLUSTERED` 类型主键的更多信息，参见 [聚簇索引](/clustered-indexes.md)。
-* 将 `PRIMARY KEY` 或 `UNIQUE INDEX` 通过 `GLOBAL` 索引选项设置为 [全局索引](/partitioned-table.md#global-indexes) 是 TiDB 针对 [分区表](/partitioned-table.md) 的扩展，不兼容 MySQL。
+* 将 `PRIMARY KEY` 或 `UNIQUE INDEX` 通过 `GLOBAL` 索引选项设置为 [全局索引](/global-indexes.md) 是 TiDB 针对 [分区表](/partitioned-table.md) 的扩展，且与 MySQL 不兼容。
 
 ## 另请参阅
 
@@ -117,4 +117,4 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 * [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
 * [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 * [EXPLAIN](/sql-statements/sql-statement-explain.md)
-* [TiDB 分布式执行框架 (DXF)](/tidb-distributed-execution-framework.md)
+* [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md)

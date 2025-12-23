@@ -7,7 +7,7 @@ summary: TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到�
 
 TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数据服务。目前，TiDB Cloud 支持将数据流式传输到 Apache Kafka、MySQL、TiDB Cloud 以及云存储。
 
-> **Note:**
+> **注意：**
 >
 > - 目前，TiDB Cloud 每个<CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>最多只允许创建 100 个 changefeed。
 > - 目前，TiDB Cloud 每个 changefeed 最多只允许配置 100 条表过滤规则。
@@ -19,13 +19,13 @@ TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数�
 
 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)，<CustomContent plan="dedicated">进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。</CustomContent><CustomContent plan="premium">进入 [**TiDB Instances**](https://tidbcloud.com/tidbs) 页面。</CustomContent>
 
-    > **Tip:**
+    > **提示：**
     >
     > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
 
 2. 点击目标<CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>的名称，进入其概览页面，然后在左侧导航栏点击 **Data** > **Changefeed**。此时会显示 changefeed 页面。
 
-在 **Changefeed** 页面，你可以创建 changefeed，查看已有 changefeed 列表，并对已有 changefeed 进行操作（如扩缩容、暂停、恢复、编辑和删除 changefeed）。
+在 **Changefeed** 页面，你可以创建 changefeed，查看已有 changefeed 列表，并对已有 changefeed 进行操作（如扩展、暂停、恢复、edit 和删除 changefeed）。
 
 ## 创建 changefeed
 
@@ -43,7 +43,7 @@ TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数�
 对于 TiDB Cloud Dedicated，你可以查询 changefeed 的 TiCDC Replication Capacity Units（RCU）。
 
 1. 进入目标 TiDB 集群的 [**Changefeed**](#view-the-changefeed-page) 页面。
-2. 找到你想要查询的 changefeed，在 **Action** 列点击 **...** > **View**。
+2. 找到你要查询的 changefeed，在 **Action** 列点击 **...** > **View**。
 3. 你可以在页面的 **Specification** 区域看到当前的 TiCDC Replication Capacity Units（RCU）。
 
 </CustomContent>
@@ -52,82 +52,89 @@ TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数�
 对于 TiDB Cloud Premium，你可以查询 changefeed 的 TiCDC Changefeed Capacity Units（CCU）。
 
 1. 进入目标 TiDB 实例的 [**Changefeed**](#view-the-changefeed-page) 页面。
-2. 找到你想要查询的 changefeed，在 **Action** 列点击 **...** > **View**。
+2. 找到你要查询的 changefeed，在 **Action** 列点击 **...** > **View**。
 3. 你可以在页面的 **Specification** 区域看到当前的 TiCDC Changefeed Capacity Units（CCU）。
 
 </CustomContent>
 
-## 扩缩容 changefeed
+## 扩展 changefeed
 
 <CustomContent plan="dedicated">
 
-你可以通过扩容或缩容 changefeed 来调整其 TiCDC Replication Capacity Units（RCU）。
+你可以通过扩展或缩减 changefeed 来更改其 TiCDC Replication Capacity Units（RCU）。
 
-> **Note:**
+> **注意：**
 >
-> - 若要为集群扩缩容 changefeed，请确保该集群的所有 changefeed 均创建于 2023 年 3 月 28 日之后。
-> - 如果集群中存在 2023 年 3 月 28 日之前创建的 changefeed，则该集群的所有 changefeed（包括新建的）均不支持扩缩容。
+> - 若要为集群扩展 changefeed，请确保该集群的所有 changefeed 均创建于 2023 年 3 月 28 日之后。
+> - 如果集群中存在 2023 年 3 月 28 日之前创建的 changefeed，则该集群的所有 changefeed（包括已有和新建的）均不支持扩展或缩减。
 
 </CustomContent>
 <CustomContent plan="premium">
 
-你可以通过扩容或缩容 changefeed 来调整其 TiCDC Changefeed Capacity Units（CCU）。
+你可以通过扩展或缩减 changefeed 来更改其 TiCDC Changefeed Capacity Units（CCU）。
 
 </CustomContent>
 
 1. 进入目标 TiDB <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>的 [**Changefeed**](#view-the-changefeed-page) 页面。
-2. 找到你想要扩缩容的 changefeed，在 **Action** 列点击 **...** > **Scale Up/Down**。
+2. 找到你要扩展的 changefeed，在 **Action** 列点击 **...** > **Scale Up/Down**。
 3. 选择新的规格。
 4. 点击 **Submit**。
 
-扩缩容过程大约需要 10 分钟（期间 changefeed 可正常工作），切换到新规格只需几秒（切换期间 changefeed 会自动暂停并恢复）。
+扩展过程大约需要 10 分钟（期间 changefeed 正常工作），切换到新规格大约需要几秒（切换期间 changefeed 会自动暂停并恢复）。
 
 ## 暂停或恢复 changefeed
 
 1. 进入目标 TiDB <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>的 [**Changefeed**](#view-the-changefeed-page) 页面。
-2. 找到你想要暂停或恢复的 changefeed，在 **Action** 列点击 **...** > **Pause/Resume**。
+2. 找到你要暂停或恢复的 changefeed，在 **Action** 列点击 **...** > **Pause/Resume**。
 
-## 编辑 changefeed
+## edit changefeed
 
-> **Note:**
+> **注意：**
 >
-> TiDB Cloud 目前仅支持在暂停状态下编辑 changefeed。
+> TiDB Cloud 目前仅允许对处于暂停状态的 changefeed 进行 edit。
 
 1. 进入目标 TiDB <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>的 [**Changefeed**](#view-the-changefeed-page) 页面。
-2. 找到你想要暂停的 changefeed，在 **Action** 列点击 **...** > **Pause**。
-3. 当 changefeed 状态变为 `Paused` 后，点击 **...** > **Edit** 编辑对应的 changefeed。
+2. 找到你要暂停的 changefeed，在 **Action** 列点击 **...** > **Pause**。
+3. 当 changefeed 状态变为 `Paused` 后，点击 **...** > **Edit** 以 edit 对应的 changefeed。
 
-    TiDB Cloud 会默认填充 changefeed 配置。你可以修改以下配置项：
+    TiDB Cloud 会默认 populate changefeed 配置。你可以 edit 以下配置项：
 
     - Apache Kafka sink：所有配置项。
     - MySQL sink：**MySQL Connection**、**Table Filter** 和 **Event Filter**。
     - TiDB Cloud sink：**TiDB Cloud Connection**、**Table Filter** 和 **Event Filter**。
     - 云存储 sink：**Storage Endpoint**、**Table Filter** 和 **Event Filter**。
 
-4. 编辑配置后，点击 **...** > **Resume** 恢复对应的 changefeed。
+4. edit 配置后，点击 **...** > **Resume** 以恢复对应的 changefeed。
+
+## 复制 changefeed
+
+1. 进入目标 TiDB <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>的 [**Changefeed**](#view-the-changefeed-page) 页面。
+2. 找到你要复制的 changefeed，在 **Action** 列点击 **...** > **Duplicate**。
+3. TiDB Cloud 会自动 populate 新 changefeed 的配置为原有设置。你可以根据需要 review 并 edit 配置。
+4. 确认配置后，点击 **Submit** 创建并启动新的 changefeed。
 
 ## 删除 changefeed
 
 1. 进入目标 TiDB <CustomContent plan="dedicated">集群</CustomContent><CustomContent plan="premium">实例</CustomContent>的 [**Changefeed**](#view-the-changefeed-page) 页面。
-2. 找到你想要删除的 changefeed，在 **Action** 列点击 **...** > **Delete**。
+2. 找到你要删除的 changefeed，在 **Action** 列点击 **...** > **Delete**。
 
-## Changefeed 计费
+## changefeed 计费
 
 要了解 TiDB Cloud 中 changefeed 的计费方式，请参见 [Changefeed 计费](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)。
 
-## Changefeed 状态
+## changefeed 状态
 
-复制任务的状态表示复制任务的运行状态。在运行过程中，复制任务可能因错误失败，或被手动暂停或恢复。这些操作会导致复制任务状态发生变化。
+复制任务的状态表示复制任务的运行状态。在运行过程中，复制任务可能因错误而失败，或被手动暂停或恢复。这些行为会导致复制任务状态的变化。
 
 各状态说明如下：
 
 - `CREATING`：复制任务正在创建中。
 - `RUNNING`：复制任务正常运行，checkpoint-ts 正常推进。
-- `EDITING`：复制任务正在编辑中。
+- `EDITING`：复制任务正在 edit。
 - `PAUSING`：复制任务正在暂停中。
 - `PAUSED`：复制任务已暂停。
 - `RESUMING`：复制任务正在恢复中。
 - `DELETING`：复制任务正在删除中。
 - `DELETED`：复制任务已删除。
-- `WARNING`：复制任务返回警告。由于某些可恢复错误，复制无法继续。处于该状态的 changefeed 会持续尝试恢复，直到状态变为 `RUNNING`。该状态下的 changefeed 会阻塞 [GC 操作](https://docs.pingcap.com/tidb/stable/garbage-collection-overview)。
-- `FAILED`：复制任务失败。由于某些错误，复制任务无法恢复且无法自动修复。如果在增量数据的垃圾回收（GC）之前解决了问题，你可以手动恢复失败的 changefeed。增量数据的默认生存时间（TTL）为 24 小时，即 changefeed 中断后 24 小时内 GC 机制不会删除任何数据。
+- `WARNING`：复制任务返回 warning。由于某些可恢复错误，复制无法继续。处于该状态的 changefeed 会持续尝试恢复，直到状态转为 `RUNNING`。该状态下的 changefeed 会阻塞 [GC 操作](https://docs.pingcap.com/tidb/stable/garbage-collection-overview)。
+- `FAILED`：复制任务失败。由于某些错误，复制任务无法恢复且无法自动修复。如果在增量数据的垃圾回收（GC）前解决了问题，你可以手动恢复失败的 changefeed。增量数据的默认生存时间（TTL）为 24 小时，即 changefeed 中断后 24 小时内 GC 机制不会删除任何数据。
