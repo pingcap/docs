@@ -122,8 +122,6 @@ The following table shows results for a query returning 400 rows from a table wi
 - **Non-partitioned table**: provides the best performance with the fewest tasks. Suitable for most OLTP workloads.
 - **Partitioned table with global indexes**: improve index scan efficiency, but table lookups remain expensive when many rows match.
 - **Partitioned table with local indexes**: when the query condition does not include the partition key, local index queries scan all partitions.
-
-
 > **Note:**
 >
 > - **Average query time** is sourced from the `statement_summary` view.
@@ -210,34 +208,41 @@ PARTITION BY RANGE (id) (
 );
 ```
 
-#### Summary
+#### Performance summary
 
-The performance overhead of partitioned tables in TiDB depends significantly on the number of partitions and the type of index used.
+The performance overhead of TiDB partitioned tables depends on the number of partitions and the index type.
 
-- The more partitions you have, the more severe the potential performance degradation.
-- With a smaller number of partitions, the impact might not be noticeable, but it is still workload-dependent.
-- For local indexes, if a query does not include effective partition pruning conditions, the number of partitions directly correlates with the number of [Remote Procedure Calls (RPCs)](https://docs.pingcap.com/tidb/stable/glossary/#remote-procedure-call-rpc) triggered. This means more partitions will likely result in more RPCs, leading to higher latency.
-- For global indexes, the number of RPCs and the degree of performance regression depend on both the number of partitions involved and how many rows need to be retrieved (that is, the number of rows requiring table lookups). Note that for very large tables where data is already distributed across many Regions, accessing data through a global index might have similar performance to a non-partitioned table, as both scenarios require multiple cross-Region RPCs.
+- **Partition count**: Performance degrades as the number of partitions increases. While the impact might be negligible for a small number of partitions, this varies based on the workload.
+- **Local indexes**: if a query does not include an effective partition pruning condition, the number of partitions directly determines the number of [Remote Procedure Calls (RPCs)](https://docs.pingcap.com/tidb/stable/glossary/#remote-procedure-call-rpc). This means more partitions typically lead to more RPCs and higher latency.
+- **Global indexes**: the performance depends on both the number of partitions involved and the number of rows that require table lookups. For very large tables where data is distributed across multiple Regions, accessing data through a global index provides performance similar to that of a non-partitioned table, because both scenarios involve multiple cross-Region RPCs.
 
 #### Recommendations
 
-- Do not use partitioned tables unless necessary. For most OLTP workloads, a well-indexed non-partitioned table performs better and is easier to manage.
-- If you are sure that all queries will make use of good partition pruning (matching only a few partitions), then local indexes are a good choice.
-- If you are sure that critical queries do not have good partition pruning (matching many partitions), then a global index is recommended.
-- Use local indexes only if your main concern is DDL efficiency (such as fast `DROP PARTITION`) and the performance side effect from the partition table is acceptable.
+Use the following guidelines when you design partitioned tables and indexes in TiDB:
+
+- Use partitioned tables only when necessary. For most OLTP workloads, a well-indexed, non-partitioned table provides better performance and simpler management.
+- Use local indexes when all queries include an effective partition pruning condition that matches a small number of partitions.
+- Use global indexes for critical queries that lack effective partition pruning conditions and match a large number of partitions.
+- Use local indexes only when DDL operation efficiency (such as fast `DROP PARTITION`) is a priority and any potential performance impact is acceptable.
 
 ## Facilitate bulk data deletion
 
-In TiDB, you can clear up historical data either by TTL (Time-to-Live) or manual partition drop. While both methods serve the same purpose, they differ significantly in performance. The test cases in this section show that dropping partitions is generally faster and less resource-intensive, making it a better choice for large datasets and frequent purging needs.
+In TiDB, you can remove historical data by using [TTL (Time to Live)](/time-to-live.md) or by manually dropping partitions. Although both methods delete data, their performance characteristics differ significantly. The following test results show that dropping partitions is generally faster and consumes fewer resources, making it a better option for large datasets and frequent data purging.
 
 ### Differences between TTL and `DROP PARTITION`
 
-- TTL: automatically removes data based on its age, but might be slower due to the need to scan and clean data over time.
-- `DROP PARTITION`: deletes an entire partition at once, making it much faster, especially when dealing with large datasets.
+- TTL: automatically deletes data based on its age. This method might be slower because it scans and deletes rows incrementally over time.
+- `DROP PARTITION`: deletes an entire partition in a single operation. This approach is typically much faster, especially for large datasets.
 
 #### Test case
 
-To compare the performance of TTL and `DROP PARTITION`, the test case in this section configures TTL to execute every 10 minutes and create a partitioned version of the same table, dropping one partition at the same interval for comparison. Both approaches are tested under background write workloads of 50 and 100 concurrent threads. This test case measures key metrics such as execution time, system resource utilization, and the total number of rows deleted.
+This test compares the performance of TTL and `DROP PARTITION`.
+
+- TTL configuration: runs every 10 minutes.
+- Partition configuration: drops one partition every 10 minutes.
+- Workload: background write workloads with 50 and 100 concurrent threads.
+
+The test measures execution time, system resource usage, and the total number of rows deleted.
 
 #### Findings
 
@@ -247,21 +252,21 @@ To compare the performance of TTL and `DROP PARTITION`, the test case in this se
 
 The following are findings about the TTL performance:
 
-- On a write-heavy table, TTL runs every 10 minutes.
 - With 50 threads, each TTL job takes 8 to 10 minutes, deleting 7 to 11 million rows.
-- With 100 threads, it handles up to 20 million rows, but the execution time increases to 15 to 30 minutes, with greater variance.
-- TTL jobs impact system performance under high workloads due to extra scanning and deletion activity, reducing overall QPS.
+- With 100 threads, TTL handles up to 20 million rows, but execution time increases to 15 to 30 minutes and shows higher variance.
+- Under heavy workloads, TTL jobs reduce overall QPS due to additional scanning and deletion overhead.
 
 The following are findings about the `DROP PARTITION` performance:
 
-- `ALTER TABLE ... DROP PARTITION` removes an entire data segment instantly, with minimal resource usage.
-- `ALTER TABLE ... DROP PARTITION` is a metadata-level operation, making it much faster and more predictable than TTL, especially when managing large volumes of historical data.
+- The `ALTER TABLE ... DROP PARTITION` statement removes an entire partition almost immediately.
+- The operation uses minimal resources because it occurs at the metadata level.
+- `DROP PARTITION` is faster and more predictable than TTL, especially for large historical datasets.
 
 #### Use TTL and `DROP PARTITION` in TiDB
 
-In this test case, the table structures have been anonymized. For more information about the usage of TTL, see [Periodically Delete Data Using TTL (Time to Live)](/time-to-live.md).
+The following examples use anonymized table structures. For more information about TTL, see [Periodically Delete Data Using TTL (Time to Live)](/time-to-live.md).
 
-The following is the TTL schema.
+The following example shows a TTL-enabled table schema:
 
 ```sql
 CREATE TABLE `ad_cache` (
@@ -280,7 +285,7 @@ TTL=`expire_time` + INTERVAL 0 DAY TTL_ENABLE='ON'
 TTL_JOB_INTERVAL='10m';
 ```
 
-The following is the SQL statement for dropping partitions (Range INTERVAL partitioning).
+The following example shows a partitioned table that uses Range INTERVAL partitioning:
 
 ```sql
 CREATE TABLE `ad_cache` (
@@ -306,7 +311,7 @@ FIRST PARTITION LESS THAN ('2025-02-19 18:00:00')
 LAST PARTITION LESS THAN ('2025-02-19 20:00:00');
 ```
 
-You need to run DDL statements such as `ALTER TABLE PARTITION ...` to change the `FIRST PARTITION` and `LAST PARTITION` periodically. These two DDL statements can drop the old partitions and create new ones.
+To update `FIRST PARTITION` and `LAST PARTITION` periodically, run DDL statements similar to the following. These statements drop old partitions and create new ones.
 
 ```sql
 ALTER TABLE ad_cache FIRST PARTITION LESS THAN ("${nextTimestamp}");
@@ -315,30 +320,29 @@ ALTER TABLE ad_cache LAST PARTITION LESS THAN ("${nextTimestamp}");
 
 #### Recommendations
 
-For workloads with large or time-based data cleanup, it is recommended to use partitioned tables with `DROP PARTITION`. It offers better performance, lower system impact, and simpler management. 
-
-TTL is still useful for finer-grained or background cleanup, but might not be optimal under high write pressure or when deleting large volumes of data quickly.
+- Use partitioned tables with `DROP PARTITION` for large-scale or time-based data cleanup. This approach provides better performance, lower system impact, and simpler operational behavior.
+- Use TTL for fine-grained or background data cleanup. TTL is less suitable for workloads with high write throughput or rapid deletion of large data volumes.
 
 ### Partition drop efficiency: local indexes vs. global indexes
 
-A partitioned table with a global index requires synchronous updates to the global index, which can significantly increase the execution time for DDL operations, such as `DROP PARTITION`, `TRUNCATE PARTITION`, and `REORGANIZE PARTITION`.
+For partitioned tables with global indexes, DDL operations such as `DROP PARTITION`, `TRUNCATE PARTITION`, and `REORGANIZE PARTITION` must update global index entries synchronously. These updates can significantly increase DDL execution time.
 
-In this section, the tests show that `DROP PARTITION` is much slower when using a global index compared to a local index. Take this into consideration when you design partitioned tables.
+This section shows that `DROP PARTITION` is substantially slower on tables with global indexes than on tables with local indexes. Consider this behavior when you design partitioned tables.
 
 #### Test case
 
-This test case creates a table with 365 partitions and tests the `DROP PARTITION` performance using both global indexes and local indexes. The total number of rows is 1 billion.
+This test creates a table with 365 partitions and approximately 1 billion rows. It compares `DROP PARTITION` performance when using global indexes and local indexes.
 
-| Index type   | Duration (drop partition) |
+| Index type   | Drop partition duration |
 |--------------|---------------------------|
 | Global index | 76.02 seconds             |
 | Local index  | 0.52 seconds              |
 
 #### Findings
 
-Dropping a partition on a table with a global index takes **76.02 seconds**, while the same operation with a local index takes only **0.52 seconds**. The reason is that global indexes span all partitions and require more complex updates, while local indexes can just be dropped together with the partition data.
+Dropping a partition on a table with a global index takes **76.02 seconds**, whereas the same operation on a table with a local index takes only **0.52 seconds**. This difference occurs because global indexes span all partitions and require additional index updates, while local indexes are dropped together with the partition data.
 
-You can use the following SQL statement to drop the partition:
+You can use the following SQL statement to drop a partition:
 
 ```sql
 ALTER TABLE A DROP PARTITION A_2024363;
@@ -346,9 +350,8 @@ ALTER TABLE A DROP PARTITION A_2024363;
 
 #### Recommendations
 
-When a partitioned table contains global indexes, executing certain DDL operations such as `DROP PARTITION`, `TRUNCATE PARTITION`, and `REORGANIZE PARTITION` requires updating the global index entries to reflect the changes. This update must be performed immediately to ensure consistency, which can significantly increase the execution time of these DDL operations.
-
-If you need to drop partitions frequently and minimize the performance impact on the system, it is recommended to use local indexes for faster and more efficient operations.
+- If a partitioned table uses global indexes, expect longer execution times for DDL operations such as `DROP PARTITION`, `TRUNCATE PARTITION`, and `REORGANIZE PARTITION`.
+- If you need to drop partitions frequently and minimize performance impact, use local indexes to achieve faster and more efficient partition management.
 
 ## Mitigate hotspot issues
 
