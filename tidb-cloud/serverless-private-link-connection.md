@@ -77,6 +77,8 @@ You can manage Private Link Connections in the Console or via CLI.
 
 5. Click the **Create Connection** button.
 
+6. Then go to the detail page of your endpoint service on AWS console. In the **Endpoint Connections** tab, accept the endpoint connection request from TiDB Cloud.
+
 </div>
 
 <div label="CLI">
@@ -84,6 +86,8 @@ You can manage Private Link Connections in the Console or via CLI.
 ```shell
 ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type AWS_ENDPOINT_SERVICE --aws.endpoint-service-name <endpoint-service-name>
 ```
+
+Then go to the detail page of your endpoint service on AWS console. In the **Endpoint Connections** tab, accept the endpoint connection request from TiDB Cloud.
 
 Please make sure the AWS endpoint service:
 
@@ -133,6 +137,8 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
 5. Click **Create Connection**.
 
+6. Then go to the detail page of your endpoint service on Alibaba Cloud console. In the **Endpoint Connections** tab, allow the endpoint connection request from TiDB Cloud.
+
 </div>
 
 <div label="CLI">
@@ -140,6 +146,8 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 ```shell
 ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type ALICLOUD_ENDPOINT_SERVICE --alicloud.endpoint-service-name <endpoint-service-name>
 ```
+
+Then go to the detail page of your endpoint service on Alibaba Cloud console. In the **Endpoint Connections** tab, allow the endpoint connection request from TiDB Cloud.
 
 Please make sure the Alibaba Cloud endpoint service:
 

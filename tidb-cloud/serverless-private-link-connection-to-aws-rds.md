@@ -104,6 +104,8 @@ You can also refer to [Create an AWS Endpoint Service Private Link Connection](/
 
 5. Click the **Create Connection** button.
 
+6. Then go to the detail page of your endpoint service on AWS console. In the **Endpoint Connections** tab, accept the endpoint connection request from TiDB Cloud.
+
 </div>
 
 <div label="CLI">
@@ -111,6 +113,8 @@ You can also refer to [Create an AWS Endpoint Service Private Link Connection](/
 ```shell
 ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type AWS_ENDPOINT_SERVICE --aws.endpoint-service-name <endpoint-service-name>
 ```
+
+Then go to the detail page of your endpoint service on AWS console. In the **Endpoint Connections** tab, accept the endpoint connection request from TiDB Cloud.
 
 </div>
 </SimpleTab>
