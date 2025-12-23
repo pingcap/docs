@@ -1,6 +1,6 @@
 ---
 title: Connect to Alibaba Cloud ApsaraDB RDS for MySQL via a Private Link Connection
-summary: Learn how to connect to an Alibaba Cloud ApsaraDB RDS for MySQL instance using an Alibaba Cloud Endpoint Service private link connection.
+summary: Learn how to connect to an Alibaba Cloud ApsaraDB RDS for MySQL instance using an AliCloud Endpoint Service private link connection.
 ---
 
 # Connect to Alibaba Cloud ApsaraDB RDS for MySQL via a Private Link Connection 
@@ -107,6 +107,8 @@ You can create a private link connection using the TiDB Cloud console or the TiD
 
 5. Click **Create**.
 
+6. Go back to the detail page of the endpoint service on Alibaba Cloud console. In the **Endpoint Connections** tab, allow the endpoint connection request from TiDB Cloud.
+
 </div>
 
 <div label="CLI">
@@ -116,6 +118,8 @@ To create a private link connection using the TiDB Cloud CLI, run the following 
 ```shell
 ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type ALICLOUD_ENDPOINT_SERVICE --alicloud.endpoint-service-name <endpoint-service-name>
 ```
+
+Then go back to the detail page of the endpoint service on Alibaba Cloud console. In the **Endpoint Connections** tab, allow the endpoint connection request from TiDB Cloud.
 
 </div>
 </SimpleTab>
