@@ -205,6 +205,6 @@ To restore backups from cloud storage, do the following:
 
 5. Click **Restore** to restore the backup.
 
-## Limitation
+## Limitations
 
 Currently, manual backups are not supported for {{{ .premium }}} instances.
