@@ -9,7 +9,7 @@ TiDB Cloud is designed with robust mechanisms to maintain high availability and 
 
 > **Note:**
 >
-> - This document is only applicable for <CustomContent plan="starter,essential">{{{ .starter }}} and {{{ .essential }}}</CustomContent></CustomContent><CustomContent plan="premium">{{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}}</CustomContent>.
+> - This document is only applicable for <CustomContent plan="starter,essential">{{{ .starter }}} and {{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}}</CustomContent>.
 > - For high availability in TiDB Cloud Dedicated, see [High Availability in TiDB Cloud Dedicated](/tidb-cloud/high-availability-with-multi-az.md).
 
 ## Overview
