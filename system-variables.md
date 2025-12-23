@@ -5455,9 +5455,21 @@ SHOW WARNINGS;
 
 ### tidb_replica_read <span class="version-mark">New in v4.0</span>
 
+<CustomContent platform="tidb-cloud" plan="starter,essential">
+
 > **Note:**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> This variable is not applicable to [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud" plan="premium">
+
+> **Note:**
+>
+> This variable is is not applicable to [{{{ .premium }}}](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-intro/#deployment-options).
+
+</CustomContent>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
