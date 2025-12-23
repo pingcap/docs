@@ -36,10 +36,10 @@ const tocCopyTargets = [
     src: "TOC-tidb-cloud-essential.md",
     dest: "./tmp/TOC-tidb-cloud-essential.md",
   },
-  {
-    src: "TOC-tidb-cloud-premium.md",
-    dest: "./tmp/TOC-tidb-cloud-premium.md",
-  },
+  // {
+  //   src: "TOC-tidb-cloud-premium.md",
+  //   dest: "./tmp/TOC-tidb-cloud-premium.md",
+  // },
 ];
 const tocFiles = tocCopyTargets.map(({ src }) => src);
 
