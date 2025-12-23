@@ -211,7 +211,7 @@ You can configure the account used to access GCS by specifying the access key. I
 
     - **System-assigned managed identity**:
 
-        You do not need to configure any environment variables. Simply run the backup command. Ensure that the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` are **not** set in the runtime environment; otherwise, the SDK might attempt to use other authentication methods.
+        You do not need to configure any environment variables. Simply run the backup command. Ensure that the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` are **not** set in the runtime environment of BR and TiKV; otherwise, the SDK might attempt to use other authentication methods.
 
     - **User-assigned managed identity**:
 
@@ -219,13 +219,13 @@ You can configure the account used to access GCS by specifying the access key. I
 
         1. **Configure TiKV (when started using TiUP)**:
 
-            Suppose that the TiKV port on the node is `24000` (the systemd service name is `tikv-24000`):
+            For example, if the TiKV port on the node is `24000` (the systemd service name is `tikv-24000`):
 
             ```shell
             systemctl edit tikv-24000
             ```
 
-            Edit the configuration to add the environment variable (only the Client ID is required):
+            Edit the configuration to add the `$AZURE_CLIENT_ID` environment variable:
 
             ```ini
             [Service]
