@@ -5540,13 +5540,8 @@ SHOW WARNINGS;
 - Type: Enumeration
 - Default value: `leader`
 - Possible values: `leader`, `follower`, `leader-and-follower`, `prefer-leader`, `closest-replicas`, `closest-adaptive`, and `learner`. The `learner` value is introduced in v6.6.0.
-<<<<<<< HEAD
 - This variable is used to control where TiDB reads data. Starting from v8.5.4 and v9.0.0, this variable only takes effect on read-only SQL statements.
 - For more details about usage and implementation, see [Follower read](/follower-read.md).
-=======
-- This variable is used to control where TiDB reads data. Starting from v8.5.4, this variable only takes effect on read-only SQL statements.
-- For more details about usage and implementation, see [Follower Read](/follower-read.md).
->>>>>>> 4b35531be6 (sys-var: some TiDB Cloud plans do not support `tidb_replica_read` (#22213))
 
 ### tidb_restricted_read_only <span class="version-mark">New in v5.2.0</span>
 
