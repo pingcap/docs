@@ -39,7 +39,7 @@ TiDB Cloud Dedicated lets you adjust its compute and storage resources separatel
 
 TiDB Cloud ensures high availability in all supported plans:
 
-- For <CustomContent plan="starter,essential">{{{ .starter }}} and {{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}}</CustomContent>, see [High Availability in TiDB Cloud](/tidb-cloud/serverless-high-availability.md).
+- For <CustomContent plan="starter,essential">{{{ .starter }}} and {{{ .essential }}}</CustomContent> <CustomContent plan="premium">{{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}}</CustomContent>, see [High Availability in TiDB Cloud](/tidb-cloud/serverless-high-availability.md).
 - For TiDB Cloud Dedicated, see [High Availability in TiDB Cloud Dedicated](/tidb-cloud/high-availability-with-multi-az.md).
 
 ## Monitoring
