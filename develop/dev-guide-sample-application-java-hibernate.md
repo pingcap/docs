@@ -5,7 +5,7 @@ summary: Learn how to connect to TiDB using Hibernate. This tutorial gives Java 
 
 # Connect to TiDB with Hibernate
 
-TiDB is a MySQL-compatible database, and [Hibernate](https://hibernate.org/orm/) is a popular open-source Java ORM. Because TiDB is highly compatible with MySQL, PingCAP recommends using `org.hibernate.dialect.MySQLDialect` as the Hibernate dialect for long-term compatibility. Alternatively, a TiDB-specific dialect (`org.hibernate.community.dialect.TiDBDialect`) is available in [Hibernate community dialects](https://github.com/hibernate/hibernate-orm/tree/main/hibernate-community-dialects), but it is not maintained by PingCAP. If you use `MySQLDialect` and encounter any compatibility issues, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+TiDB is a MySQL-compatible database, and [Hibernate](https://hibernate.org/orm/) is a popular open-source Java ORM. Because TiDB is highly compatible with MySQL, it is recommended that you use `org.hibernate.dialect.MySQLDialect` as the Hibernate dialect for long-term compatibility. Alternatively, a TiDB-specific dialect (`org.hibernate.community.dialect.TiDBDialect`) is available in [Hibernate community dialects](https://github.com/hibernate/hibernate-orm/tree/main/hibernate-community-dialects), but it is not maintained by PingCAP. If you use `MySQLDialect` and encounter any compatibility issues, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 In this tutorial, you can learn how to use TiDB and Hibernate to accomplish the following tasks:
 
@@ -258,11 +258,11 @@ try (Session session = sessionFactory.openSession()) {
 
 For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
-## Compatibility notes for MySQLDialect
+## Compatibility notes for `MySQLDialect`
 
 When using `MySQLDialect` with TiDB, be aware of the following behaviors:
 
-### SERIALIZABLE isolation level
+### `SERIALIZABLE` isolation level
 
 Applications that set `SERIALIZABLE` transaction isolation will encounter the following error:
 
@@ -282,7 +282,7 @@ This allows TiDB to accept `SERIALIZABLE` requests without error. TiDB will use 
 >
 > The community-maintained `TiDBDialect` handles this automatically by skipping features that require `SERIALIZABLE` isolation.
 
-### CHECK constraints
+### `CHECK` constraints
 
 Hibernate's [`@Check`](https://docs.hibernate.org/orm/6.5/javadocs/org/hibernate/annotations/Check.html) annotation generates DDL `CHECK` constraints. [MySQL 8.0.16+](https://dev.mysql.com/doc/refman/8.0/en/create-table-check-constraints.html) enforces these constraints by default, but TiDB does not enforce them unless explicitly enabled.
 
