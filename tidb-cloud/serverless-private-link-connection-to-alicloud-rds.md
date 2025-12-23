@@ -1,6 +1,6 @@
 ---
 title: Connect to Alibaba Cloud ApsaraDB RDS for MySQL via a Private Link Connection
-summary: Learn how to connect to an Alibaba Cloud ApsaraDB RDS for MySQL instance using an AliCloud Endpoint Service private link connection.
+summary: Learn how to connect to an Alibaba Cloud ApsaraDB RDS for MySQL instance using an Alibaba Cloud Endpoint Service private link connection.
 ---
 
 # Connect to Alibaba Cloud ApsaraDB RDS for MySQL via a Private Link Connection 
@@ -59,7 +59,7 @@ Set up the load balancer in the same region of your ApsaraDB RDS for MySQL as fo
 
     - **Network Type**: select `Internal-facing`
     - **VPC**: select the VPC where your ApsaraDB RDS for MySQL is located
-    - **Zone**: it must overlap with your {{{ .essential }}}
+    - **Zone**: it must overlap with your {{{ .essential }}} cluster
     - **IP Version**: select `IPv4`
 
     Find the load balancer you created, and then click **Create Listener**:
@@ -101,25 +101,27 @@ You can create a private link connection using the TiDB Cloud console or the TiD
 
 4. In the **Create Private Link Connection** dialog, enter the required information:
 
-    - **Private Link Connection Name**: enter a name for the Private Link Connection.
-    - **Connection Type**: select **Alibaba Cloud Endpoint Service**. If you cannot find this option, ensure that your cluster is created in Alibaba Cloud.
+    - **Private Link Connection Name**: enter a name for the private link connection.
+    - **Connection Type**: select **Alibaba Cloud Endpoint Service**. If you cannot find this option, ensure that your cluster is created on Alibaba Cloud.
     - **Endpoint Service Name**: enter the endpoint service name you obtained in [Set up an endpoint service](#2-set-up-an-endpoint-service).
 
 5. Click **Create**.
 
-6. Go back to the detail page of the endpoint service on Alibaba Cloud console. In the **Endpoint Connections** tab, allow the endpoint connection request from TiDB Cloud.
+6. Go back to the detail page of the endpoint service on [Alibaba Cloud console](https://account.alibabacloud.com/login/login.htm). In the **Endpoint Connections** tab, allow the endpoint connection request from TiDB Cloud.
 
 </div>
 
 <div label="CLI">
 
-To create a private link connection using the TiDB Cloud CLI, run the following command:
+To create a private link connection using the TiDB Cloud CLI:
+
+1. Run the following command:
 
 ```shell
 ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type ALICLOUD_ENDPOINT_SERVICE --alicloud.endpoint-service-name <endpoint-service-name>
 ```
 
-Then go back to the detail page of the endpoint service on Alibaba Cloud console. In the **Endpoint Connections** tab, allow the endpoint connection request from TiDB Cloud.
+2. Go back to the detail page of the endpoint service on [Alibaba Cloud console](https://account.alibabacloud.com/login/login.htm). In the **Endpoint Connections** tab, allow the endpoint connection request from TiDB Cloud.
 
 </div>
 </SimpleTab>

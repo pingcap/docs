@@ -51,9 +51,9 @@ During the process, you need to:
 - Provide the TiDB Cloud AWS account ID that you obtain in [Prerequisites](#prerequisites).
 - Save the `VPC Service Endpoint` provided by Confluent Cloud for later use, usually in the format of `com.amazonaws.vpce.<region>.vpce-svc-xxxxxxxxxxxxxxxxx`.
 
-## Step 3. Create a Private Link Connection in TiDB Cloud
+## Step 3. Create a private link connection in TiDB Cloud
 
-### 1. Create the AWS Endpoint Service Private Link connection
+### 1. Create the AWS Endpoint Service private link connection
 
 You can create a private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
 
@@ -72,7 +72,7 @@ You can create a private link connection using the TiDB Cloud console or the TiD
 
 4. Enter the required information in the **Create Private Link Connection** dialog:
 
-    - **Private Link Connection Name**: enter a name for the Private Link Connection.
+    - **Private Link Connection Name**: enter a name for the private link connection.
     - **Connection Type**: select **AWS Endpoint Service**. If you cannot find this option, ensure that your cluster is created on AWS.
     - **Endpoint Service Name**: enter the `VPC Service Endpoint` you obtained in [Step 2](#step-2-add-a-privatelink-access-to-the-network).
 
@@ -81,6 +81,8 @@ You can create a private link connection using the TiDB Cloud console or the TiD
 </div>
 
 <div label="CLI">
+
+To create a private link connection using the TiDB Cloud CLI, run the following command:
 
 ```shell
 ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type AWS_ENDPOINT_SERVICE --aws.endpoint-service-name <endpoint-service-name>
@@ -106,7 +108,7 @@ You can create a private link connection using the TiDB Cloud console or the TiD
 
 2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
 
-3. In the **Private Link Connection For Dataflow** area, choose the target Private Link Connection and then click **...**.
+3. In the **Private Link Connection For Dataflow** area, choose the target private link connection and then click **...**.
 
 4. Click **Attach Domains**.
 
