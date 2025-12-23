@@ -5459,7 +5459,7 @@ SHOW WARNINGS;
 
 > **Note:**
 >
-> This variable is not applicable to [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
 
 </CustomContent>
 
@@ -5467,7 +5467,7 @@ SHOW WARNINGS;
 
 > **Note:**
 >
-> This variable is is not applicable to [{{{ .premium }}}](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-intro/#deployment-options).
+> This variable is read-only for [{{{ .premium }}}](https://docs-preview.pingcap.com/tidbcloud/tidb-cloud-intro/#deployment-options).
 
 </CustomContent>
 
