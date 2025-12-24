@@ -189,7 +189,7 @@ Take the following steps to configure an access key:
     - **To import data** into a TiDB Cloud <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>, grant `s3:GetObject`, `s3:GetObjectVersion`, and `s3:ListBucket` permissions.
     - **To export data** from a TiDB Cloud <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>, grant `s3:PutObject` and `s3:ListBucket` permissions.
     <CustomContent plan="premium">
-    - **To restore data** to a TiDB Cloud instance, grant `s3:GetObject`,`s3:GetBucketLocation` and `s3:ListBucket` permissions.
+    - **To restore data** to a TiDB Cloud instance, grant `s3:GetObject`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions.
 
     The following is an example policy that allows TiDB Cloud to **restore** data from a specific folder in your S3 bucket. 
 
