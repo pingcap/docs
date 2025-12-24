@@ -498,8 +498,6 @@ tiup br restore point --pd="${PD_IP}:2379"
 --master-key-crypter-method aes128-ctr
 --master-key "local:///path/to/master.key"
 ```
-<<<<<<< HEAD
-=======
 
 ### Restore data using filters
 
@@ -647,4 +645,3 @@ tiup br abort restore table --pd="${PD_IP}:2379" \
 --storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
 --db database_name --table table_name
 ```
->>>>>>> 5182861b86 (br: pitr filter feature release doc (#21109))
