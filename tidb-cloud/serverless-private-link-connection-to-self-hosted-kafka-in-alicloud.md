@@ -53,7 +53,7 @@ The following table shows an example of the deployment information.
 | Region    | `ap-southeast-1`   |  N/A |
 | TiDB Cloud Alibaba Cloud Account | `<account_id>`     |    N/A  |
 | AZ IDs                              | <ul><li>`ap-southeast-1a` </li><li>`ap-southeast-1b` </li><li> `ap-southeast-1c`</li></ul>  
-| Kafka Advertised Listener Pattern   | &lt;broker_id&gt;.unique_name.alicloud.plc.tidbcloud.com:&lt;port&gt;| `unique_name` is a placeholder. The actual value of `unique_name` is created in [Step 4](#step-4-replace-the-unique-name-placeholder-in-kafka-configuration) |
+| Kafka Advertised Listener Pattern   | &lt;broker_id&gt;.unique_name.alicloud.plc.tidbcloud.com:&lt;port&gt;| `unique_name` is a placeholder. The actual value of `unique_name` will be replaced in [Step 4](#step-4-replace-the-unique-name-placeholder-in-kafka-configuration) |
 
 ## Step 1. Set up a Kafka cluster
 
