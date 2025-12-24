@@ -617,7 +617,7 @@ If a restore operation fails, you can use the `tiup br abort` command to clean u
 >
 > The `abort` command only cleans up metadata. You need to manually delete any actual restored data from the cluster.
 
-The examples of aborting restore operations using the same parameters as the original restore command are as follows:
+The following examples show how to abort restore operations using the same parameters as the original restore command:
 
 ```shell
 # Abort a PITR operation
