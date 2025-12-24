@@ -197,6 +197,11 @@ To restore backups from cloud storage, do the following:
     - **Access Key ID**: enter your access key ID.
     - **Access Key Secret**: enter your access key secret.
 
+> **Tip:**
+>
+> To create an access key for your storage bucket, see [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key) and [Configure Alibaba Cloud Object Storage Service (OSS) access](#configure-alibaba-cloud-object-storage-service-oss-access).
+
+
 3. Click **Verify Backup and Next**.
 
 4. If the verification is successful, the **Restore to a New Instance** page appears. Review the backup information displayed at the top of the page, and then follow the steps in [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md) to restore the backup to a new instance.
@@ -208,3 +213,85 @@ To restore backups from cloud storage, do the following:
 ## Limitations
 
 Currently, manual backups are not supported for {{{ .premium }}} instances.
+
+## References
+
+### Configure Amazon S3 access using an AWS access key
+
+It is recommended that you use an IAM user (instead of the AWS account root user) to create an access key.
+
+Take the following steps to configure an access key:
+
+1. **Create an IAM user and access key.**
+    - Create an IAM user. For more information, see [creating an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console).
+    - Use your AWS account ID or account alias, and your IAM user name and password to sign in to [the IAM console](https://console.aws.amazon.com/iam).
+    - Create an access key. For more information, see [creating an access key for an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
+
+2. **Grant permissions to the IAM user.**
+    Create a policy and attach it to the IAM user. Ensure the policy includes the required permissions based on your task:
+    - **To restore data** to a TiDB Cloud instance, grant `s3:GetObject`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions.
+
+    The following is an example policy that allows TiDB Cloud to **restore** data from a specific folder in your S3 bucket. 
+
+    ```json
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "AllowGetBucketLocation",
+                "Effect": "Allow",
+                "Action": "s3:GetBucketLocation",
+                "Resource": "arn:aws:s3:::<Your S3 bucket name>"
+            },
+            {
+                "Sid": "AllowListPrefix",
+                "Effect": "Allow",
+                "Action": "s3:ListBucket",
+                "Resource": "arn:aws:s3:::<Your S3 bucket name>",
+                "Condition": {
+                    "StringLike": {
+                        "s3:prefix": "<Your backup folder>/*"
+                    }
+                }
+                },
+            {
+                "Sid": "AllowReadObjectsInPrefix",
+                "Effect": "Allow",
+                "Action": "s3:GetObject",
+                "Resource": "arn:aws:s3:::<Your S3 bucket name>/<Your backup folder>/*"
+            }
+        ]
+    }
+    ```
+
+    > **Tip:**
+    >
+    > In the policy above, replace `<Your S3 bucket name>` and `<Your backup folder>` with your actual bucket name and backup directory. This configuration follows the principle of least privilege by restricting access to only the necessary backup files.
+
+> **Note:**
+>
+> TiDB Cloud does not store your access keys. It is recommended that you [delete the access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) after the import or export is complete.
+
+### Configure Alibaba Cloud Object Storage Service (OSS) access 
+
+To allow TiDB Cloud to access your Alibaba Cloud OSS bucket, you need to create an AccessKey pair for the bucket.
+
+Take the following steps to configure an AccessKey pair:
+
+1. Create a RAM user and get the AccessKey pair. For more information, see [Create a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-ram-user).
+
+    In the **Access Mode** section, select **Using permanent AccessKey to access**.
+
+2. Create a custom policy with the required permissions. For more information, see [Create custom policies](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy).
+
+    - In the **Effect** section, select **Allow**.
+    - In the **Service** section, select **Object Storage Service**.
+    - In the **Action** section, select the permissions as needed.
+        - To restore a backup to a TiDB Cloud instance, grant `oss:ListObjects` and `oss:GetObject` permissions.
+    - In the **Resource** section, select the bucket and the objects in the bucket.
+
+    > **Tip**
+    >
+    > For restore operations, you can enhance security by restricting access to only the specific folder (prefix) where your backup files are stored, rather than granting access to the entire bucket.
+
+3. Attach the custom policies to the RAM user. For more information, see [Grant permissions to a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/grant-permissions-to-the-ram-user).
