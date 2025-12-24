@@ -31,71 +31,82 @@ After your {{{ .starter }}} cluster is created on TiDB Cloud, you can use it wit
 1. Click **Add to Cursor** to open Cursor, and then click **Install** to finish the setup.
 2. Or add the configuration to `.cursor/mcp.json`, as follows:
 
-```json
-{
-  "mcpServers": {
-    "TiDB": {
-      "command": "uvx --from pytidb[mcp] tidb-mcp-server",
-      "env": {
-        "TIDB_HOST": "<YOUR_TIDB_HOST>",
-        "TIDB_PORT": "<YOUR_TIDB_PORT>",
-        "TIDB_USERNAME": "<YOUR_TIDB_USERNAME>",
-        "TIDB_PASSWORD": "<YOUR_TIDB_PASSWORD>",
-        "TIDB_DATABASE": "<YOUR_TIDB_DATABASE>"
-      }
+    ```json
+    {
+    "mcpServers": {
+        "TiDB": {
+        "command": "uvx --from pytidb[mcp] tidb-mcp-server",
+        "env": {
+            "TIDB_HOST": "<YOUR_TIDB_HOST>",
+            "TIDB_PORT": "<YOUR_TIDB_PORT>",
+            "TIDB_USERNAME": "<YOUR_TIDB_USERNAME>",
+            "TIDB_PASSWORD": "<YOUR_TIDB_PASSWORD>",
+            "TIDB_DATABASE": "<YOUR_TIDB_DATABASE>"
+        }
+        }
     }
-  }
-}
-```
+    }
+    ```
 
 ### Claude Code
 
 1. Click the first copy button to copy the command.
-2. Open the terminal and add the MCP server by running the copied command.
+2. Open the terminal and add the MCP server by running the copied command, as follows:
+
+    ```bash
+    claude mcp add --transport stdio TiDB \
+      --env TIDB_HOST='<YOUR_TIDB_HOST>' \
+      --env TIDB_PORT=<YOUR_TIDB_PORT> \
+      --env TIDB_USERNAME='<YOUR_TIDB_USERNAME>' \
+      --env TIDB_PASSWORD='<YOUR_TIDB_PASSWORD>' \
+      --env TIDB_DATABASE='<YOUR_TIDB_DATABASE>' \
+      -- uvx --from 'pytidb[mcp]' 'tidb-mcp-server'
+    ```
+
 3. Alternatively, follow [Claude Code's documentation](https://code.claude.com/docs/en/mcp#project-scope) to add the configuration to `.mcp.json` for project scope, as follows:
 
-```json
-{
-  "mcpServers": {
-    "TiDB": {
-      "type": "stdio",
-      "command": "uvx",
-      "args": ["--from", "pytidb[mcp]", "tidb-mcp-server"],
-      "env": {
-        "TIDB_HOST": "<YOUR_TIDB_HOST>",
-        "TIDB_PORT": "<YOUR_TIDB_PORT>",
-        "TIDB_USERNAME": "<YOUR_TIDB_USERNAME>",
-        "TIDB_PASSWORD": "<YOUR_TIDB_PASSWORD>",
-        "TIDB_DATABASE": "<YOUR_TIDB_DATABASE>"
-      }
+    ```json
+    {
+    "mcpServers": {
+        "TiDB": {
+        "type": "stdio",
+        "command": "uvx",
+        "args": ["--from", "pytidb[mcp]", "tidb-mcp-server"],
+        "env": {
+            "TIDB_HOST": "<YOUR_TIDB_HOST>",
+            "TIDB_PORT": "<YOUR_TIDB_PORT>",
+            "TIDB_USERNAME": "<YOUR_TIDB_USERNAME>",
+            "TIDB_PASSWORD": "<YOUR_TIDB_PASSWORD>",
+            "TIDB_DATABASE": "<YOUR_TIDB_DATABASE>"
+        }
+        }
     }
-  }
-}
-```
+    }
+    ```
 
 ### VS Code
 
 1. Click **Add to VS Code** to open VS Code, and then click **Install** to finish the setup.
 2. Or add the configuration to `.vscode/mcp.json`, as follows:
 
-```json
-{
-  "mcpServers": {
-    "TiDB": {
-      "type": "stdio",
-      "command": "uvx",
-      "args": ["--from", "pytidb[mcp]", "tidb-mcp-server"],
-      "env": {
-        "TIDB_HOST": "<YOUR_TIDB_HOST>",
-        "TIDB_PORT": "<YOUR_TIDB_PORT>",
-        "TIDB_USERNAME": "<YOUR_TIDB_USERNAME>",
-        "TIDB_PASSWORD": "<YOUR_TIDB_PASSWORD>",
-        "TIDB_DATABASE": "<YOUR_TIDB_DATABASE>"
-      }
+    ```json
+    {
+    "mcpServers": {
+        "TiDB": {
+        "type": "stdio",
+        "command": "uvx",
+        "args": ["--from", "pytidb[mcp]", "tidb-mcp-server"],
+        "env": {
+            "TIDB_HOST": "<YOUR_TIDB_HOST>",
+            "TIDB_PORT": "<YOUR_TIDB_PORT>",
+            "TIDB_USERNAME": "<YOUR_TIDB_USERNAME>",
+            "TIDB_PASSWORD": "<YOUR_TIDB_PASSWORD>",
+            "TIDB_DATABASE": "<YOUR_TIDB_DATABASE>"
+        }
+        }
     }
-  }
-}
-```
+    }
+    ```
 
 ### Windsurf
 
