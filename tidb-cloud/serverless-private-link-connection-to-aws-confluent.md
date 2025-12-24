@@ -32,15 +32,19 @@ Identify a Confluent Cloud network you want to use, or [create a new Confluent C
 
 The Confluent Cloud network must meet the following requirements:
 
+- Type: the network must be a privatelink network.
 - Region match: the instance must reside in the same AWS region as your {{{ .essential }}} cluster.
 - AZ (Availability Zone) availability: the availability zones must overlap with those of your {{{ .essential }}} cluster.
-- The Confluent Cloud Dedicated cluster must be deployed under this network.
 
 To get the unique name of the Confluent Cloud network:
 
 1. On the `Network overview` page, obtain the `DNS subdomain` of the Confluent Cloud network. 
 2. Extract the unique name from it. For example, if the `DNS subdomain` is `use1-az1.domnprzqrog.us-east-1.aws.confluent.cloud`, then the unique name is `domnprzqrog.us-east-1`.
 3. Save the unique name for later use.
+
+> **Note**
+>
+> The Confluent Cloud Dedicated cluster must be deployed under this network.
 
 ## Step 2. Add a PrivateLink Access to the network
 
