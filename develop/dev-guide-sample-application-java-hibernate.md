@@ -284,7 +284,7 @@ After this variable is enabled, TiDB accepts requests that specify `SERIALIZABLE
 
 ### `CHECK` constraints
 
-Hibernate's [`@Check`](https://docs.hibernate.org/orm/6.5/javadocs/org/hibernate/annotations/Check.html) annotation generates DDL `CHECK` constraints. [MySQL 8.0.16+](https://dev.mysql.com/doc/refman/8.0/en/create-table-check-constraints.html) enforces these constraints by default, but TiDB does not enforce them unless explicitly enabled.
+Hibernate's [`@Check`](https://docs.hibernate.org/orm/6.5/javadocs/org/hibernate/annotations/Check.html) annotation generates DDL `CHECK` constraints. [MySQL 8.0.16 and later verions](https://dev.mysql.com/doc/refman/8.0/en/create-table-check-constraints.html) enforces these constraints by default, but TiDB does not enforce them unless explicitly enabled.
 
 To enable `CHECK` constraint enforcement in TiDB, set the following system variable:
 
