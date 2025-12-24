@@ -87,7 +87,7 @@ jobs:
           export PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
           export GLOSSARY_ID=${{ secrets.GCP_GLOSSARY_ID }}
           yarn
-          node index_ja.js --input-dir ${{ github.workspace }}/docs/tmp --output-dir ${{ github.workspace }}/docs
+          node src/index_ja.js --input-dir ${{ github.workspace }}/docs/tmp --output-dir ${{ github.workspace }}/docs
 
       - name: Git commit and push
         run: |

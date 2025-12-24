@@ -61,7 +61,7 @@ jobs:
           export LANGLINK_ACCESS_SECRET=${{ secrets.LANGLINK_ACCESS_SECRET }}
           export LANGLINK_USER=${{ secrets.LANGLINK_USER }}
           yarn
-          node index.js --input-dir ${{ github.workspace }}/docs/tmp --output-dir ${{ github.workspace }}/docs
+          node src/index.js --input-dir ${{ github.workspace }}/docs/tmp --output-dir ${{ github.workspace }}/docs
 
       - name: Set build ID
         id: build_id
