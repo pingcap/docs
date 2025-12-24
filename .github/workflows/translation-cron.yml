@@ -69,23 +69,16 @@ jobs:
           sudo apt install tree -y
 
       - name: Download files by comparing commits
+        uses: pingcap/docs-toolkit/actions/file-diff-update@main
+        with:
+          branch_name: ${{ matrix.value }}
+          config_file: latest_translation_commit.json
+          working_directory: docs
+
+      - name: Show tmp directory structure
         run: |
-          export GH_TOKEN=${{github.token}}
           cd docs
-          npm i
-          node scripts/filterUpdateFiles.js
-          tree tmp
-          cd ..
-      - name: Copy new files to translator folder
-        run: |
-          cp -r docs/tmp docs-toolkit/markdown-translator/markdowns
-      - name: Copy variables.json to translator folder
-        run: |
-          cp docs/variables.json docs-toolkit/markdown-translator/markdowns/variables.json
-          if [ -f docs/tmp/variables.json ]; then
-            cp docs/tmp/variables.json docs-toolkit/markdown-translator/markdowns/variables.json
-            cp docs/tmp/variables.json docs/variables.json
-          fi
+          tree tmp || find tmp -type f | head -20
       - name: Config and translate
         run: |
           cd docs-toolkit/markdown-translator
@@ -94,11 +87,7 @@ jobs:
           export PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
           export GLOSSARY_ID=${{ secrets.GCP_GLOSSARY_ID }}
           yarn
-          node src/index_ja.js
-          cd ..
-      - name: Copy translated files to docs repo
-        run: |
-          cp -r docs-toolkit/markdown-translator/output/markdowns/* docs/
+          node src/index_ja.js --input-dir docs/tmp --output-dir docs/
 
       - name: Git commit and push
         run: |

@@ -37,40 +37,31 @@ jobs:
       - run: |
           sudo apt install tree -y
 
-      - name: Download files by comparing commits
+      - name: Download files
+        uses: pingcap/docs-toolkit/actions/file-diff-update@main
+        with:
+          branch_name: ${{ env.CN_CLOUD_BRANCH }}
+          config_file: latest_translation_commit.json
+          working_directory: docs
+          filter_by_cloud_toc: 'true'
+          files: ${{ inputs.file_names }}
+
+      - name: Show tmp directory structure
         run: |
-          export GH_TOKEN=${{github.token}}
           cd docs
-          npm i
-          if [ -n "${{ inputs.file_names }}" ]; then
-            node scripts/fetchFiles.js --files "${{ inputs.file_names }}"
-          else
-            node scripts/filterUpdateFiles.js --cloud
-          fi
-          tree tmp
-          cd ..
-      - name: Copy new files to translator folder
-        run: |
-          cp -r docs/tmp docs-toolkit/markdown-translator/markdowns
-      - name: Copy variables.json to translator folder
-        run: |
-          cp docs/variables.json docs-toolkit/markdown-translator/markdowns/variables.json
-          if [ -f docs/tmp/variables.json ]; then
-            cp docs/tmp/variables.json docs-toolkit/markdown-translator/markdowns/variables.json
-            cp docs/tmp/variables.json docs/variables.json
-          fi
+          tree tmp || find tmp -type f | head -20
       - name: Config and translate
         run: |
           cd docs-toolkit/markdown-translator
+          echo ${{secrets.GCP_KEY}} | base64 --decode >> key.json
+          export GOOGLE_APPLICATION_CREDENTIALS=key.json
+          export PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
+          export GLOSSARY_ID=${{ secrets.GCP_GLOSSARY_ID }}
           export LANGLINK_ACCESS_KEY=${{ secrets.LANGLINK_ACCESS_KEY }}
           export LANGLINK_ACCESS_SECRET=${{ secrets.LANGLINK_ACCESS_SECRET }}
           export LANGLINK_USER=${{ secrets.LANGLINK_USER }}
           yarn
-          node src/index.js
-          cd ..
-      - name: Copy translated files to docs repo
-        run: |
-          cp -r docs-toolkit/markdown-translator/output/markdowns/* docs/
+          node src/index.js --input-dir docs/tmp --output-dir docs/
 
       - name: Set build ID
         id: build_id
