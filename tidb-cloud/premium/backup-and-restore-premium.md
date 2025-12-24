@@ -63,7 +63,6 @@ Backup files can originate from the following sources:
 > - Storage costs for automatic backups are calculated based on your backup data volume and retention duration.
 > - If you need to extend the backup retention period, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
 
-
 ### Delete backup files
 
 To delete an existing backup file for your {{{ .premium }}} instance, perform the following steps:
