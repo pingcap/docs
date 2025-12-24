@@ -44,7 +44,7 @@ Backup files can originate from the following sources:
     - Retention: 7 days.
     - Restore detail: regular restoration is available for each hourly snapshot generated within the 7-day window.
 
-- **Daily backup snapshot**
+- Daily backup snapshot
     - Retention: 33 days.
     - Restore detail: restoration is available for daily snapshots (at 0:00 UTC by default) for the 33-day retention period.
 
