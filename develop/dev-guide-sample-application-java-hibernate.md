@@ -258,41 +258,41 @@ try (Session session = sessionFactory.openSession()) {
 
 For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
-## Compatibility notes for `MySQLDialect`
+## Compatibility with `MySQLDialect`
 
 When using `MySQLDialect` with TiDB, be aware of the following behaviors:
 
 ### `SERIALIZABLE` isolation level
 
-Applications that set `SERIALIZABLE` transaction isolation will encounter the following error:
+Applications that attempt to set the `SERIALIZABLE` transaction isolation level will encounter the following error in TiDB:
 
 ```
 The isolation level 'SERIALIZABLE' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error
 ```
 
-To avoid this error, set the TiDB system variable on the server side:
+To avoid this error, set the following TiDB system variable on the server side:
 
 ```sql
 SET GLOBAL tidb_skip_isolation_level_check=1;
 ```
 
-This allows TiDB to accept `SERIALIZABLE` requests without error. TiDB will use `REPEATABLE-READ` internally, which is its strongest isolation level. See [`tidb_skip_isolation_level_check`](/system-variables.md#tidb_skip_isolation_level_check) for details.
+After this variable is enabled, TiDB accepts requests that specify `SERIALIZABLE` without returning an error. Internally, TiDB still uses `REPEATABLE-READ`, which is its strongest isolation level. For more information, see [`tidb_skip_isolation_level_check`](/system-variables.md#tidb_skip_isolation_level_check).
 
 > **Note:**
 >
-> The community-maintained `TiDBDialect` handles this automatically by skipping features that require `SERIALIZABLE` isolation.
+> The community-maintained `TiDBDialect` handles this behavior automatically by skipping features that require the `SERIALIZABLE` isolation level.
 
 ### `CHECK` constraints
 
 Hibernate's [`@Check`](https://docs.hibernate.org/orm/6.5/javadocs/org/hibernate/annotations/Check.html) annotation generates DDL `CHECK` constraints. [MySQL 8.0.16+](https://dev.mysql.com/doc/refman/8.0/en/create-table-check-constraints.html) enforces these constraints by default, but TiDB does not enforce them unless explicitly enabled.
 
-To enable `CHECK` constraint enforcement in TiDB:
+To enable `CHECK` constraint enforcement in TiDB, set the following system variable:
 
 ```sql
 SET GLOBAL tidb_enable_check_constraint=ON;
 ```
 
-Without this setting, TiDB accepts the `CHECK` constraint syntax but does not enforce it, which might lead to unexpected data integrity issues. See [`CHECK` constraints](/constraints.md#check) for details.
+Without this setting, TiDB accepts the `CHECK` constraint syntax but does not enforce it, which might lead to unexpected data integrity issues. For more information, see [`CHECK` constraints](/constraints.md#check).
 
 ## Next steps
 
