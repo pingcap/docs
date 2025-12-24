@@ -17,10 +17,9 @@ After your {{{ .starter }}} cluster is created on TiDB Cloud, you can use it wit
 4. For the password:
 
     1. If you have not set a password yet, click **Generate Password** to generate a random password. The generated password will not be shown again, so save your password in a secure location.
-    2. If you have already set a password, you can:
-
-        1. Click **Reset password** in the **Prerequisites** section. This resets the password of the `root` user and might break existing connections to this cluster that use `root`.
-        2. You can enter your password in the **Enter the password for easy setup** input box.
+    2. If you have already set a password:
+        1. You can enter your password in the **Enter the password for easy setup** input box.
+        2. If you forget your password, clicking **Reset password** in the **Prerequisites** section to get a new password. Be aware that resetting the password will drop root's connection to the current cluster.
 
 5. Switch to the tab you want: **Cursor**, **Claude Code**, **VS Code**, or **Windsurf**.
 6. Follow the tool-specific setup steps in the selected tab.
