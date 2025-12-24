@@ -1,9 +1,9 @@
 ---
-title: Use {{{ .starter }}} with AI Tools
+title: Use {{{ .starter }}} with AI tools
 summary: Learn how to use your {{{ .starter }}} cluster with AI tools.
 ---
 
-# Connect to Your {{{ .starter }}}
+# Use {{{ .starter }}} with AI tools
 
 This document describes how to use your {{{ .starter }}} cluster with AI tools.
 
@@ -12,15 +12,15 @@ This document describes how to use your {{{ .starter }}} cluster with AI tools.
 After your {{{ .starter }}} cluster is created on TiDB Cloud, you can use it with AI tools via the following steps:
 
 1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click a cluster name to go to its overview page, and then click **Use with AI Tools** at the top of the page.
-2. In the dialog of **Access `your_cluster_name` with AI tools**, select the **Branch** and **Database** that you want to connect in the AI tool.
-3. Ensure that you satisfy the **Prerequisites**. If not, follow the instructions on the page to install the required dependencies.
+2. In the **Access `your_cluster_name` with AI tools** dialog, select the **Branch** and **Database** that you want to connect to in the AI tool.
+3. Ensure that you meet the **Prerequisites**. If not, follow the instructions on the page to install the required dependencies.
 4. For the password:
 
     1. If you have not set a password yet, click **Generate Password** to generate a random password. The generated password will not be shown again, so save your password in a secure location.
     2. If you have already set a password, you can:
 
         1. Click **Reset password** in the **Prerequisites** section. This resets the password of the `root` user and might break existing connections to this cluster that use `root`.
-        2. You can **Enter the password for easy setup** in the input box.
+        2. You can enter your password in the **Enter the password for easy setup** input box.
 
 5. Switch to the tab you want: **Cursor**, **Claude Code**, **VS Code**, or **Windsurf**.
 6. Follow the tool-specific setup steps in the selected tab.
@@ -30,7 +30,7 @@ After your {{{ .starter }}} cluster is created on TiDB Cloud, you can use it wit
 ### Cursor
 
 1. Click **Add to Cursor** to open Cursor, and then click **Install** to finish the setup.
-2. Or add the configuration to `.cursor/mcp.json`, like below:
+2. Or add the configuration to `.cursor/mcp.json`, as follows:
 
 ```json
 {
