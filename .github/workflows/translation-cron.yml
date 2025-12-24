@@ -81,12 +81,13 @@ jobs:
           tree tmp || find tmp -type f | head -20
       - name: Config and translate
         run: |
+          cd docs-toolkit/markdown-translator
           echo ${{secrets.GCP_KEY}} | base64 --decode >> key.json
           export GOOGLE_APPLICATION_CREDENTIALS=key.json
           export PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
           export GLOSSARY_ID=${{ secrets.GCP_GLOSSARY_ID }}
           yarn
-          node docs-toolkit/markdown-translator/src/index_ja.js --input-dir docs/tmp --output-dir docs/
+          node index_ja.js --input-dir ${{ github.workspace }}/docs/tmp --output-dir ${{ github.workspace }}/docs
 
       - name: Git commit and push
         run: |
