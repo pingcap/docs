@@ -52,7 +52,6 @@ jobs:
           tree tmp || find tmp -type f | head -20
       - name: Config and translate
         run: |
-          cd docs-toolkit/markdown-translator
           echo ${{secrets.GCP_KEY}} | base64 --decode >> key.json
           export GOOGLE_APPLICATION_CREDENTIALS=key.json
           export PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
@@ -61,7 +60,7 @@ jobs:
           export LANGLINK_ACCESS_SECRET=${{ secrets.LANGLINK_ACCESS_SECRET }}
           export LANGLINK_USER=${{ secrets.LANGLINK_USER }}
           yarn
-          node src/index.js --input-dir docs/tmp --output-dir docs/
+          node docs-toolkit/markdown-translator/index.js --input-dir docs/tmp --output-dir docs/
 
       - name: Set build ID
         id: build_id
