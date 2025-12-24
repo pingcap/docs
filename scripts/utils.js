@@ -80,21 +80,6 @@ export const getAllMdList = (tocFiles) => {
   return [...new Set(allLinks)];
 };
 
-export const CLOUD_TOC_LIST = [
-  "TOC-tidb-cloud.md",
-  "TOC-tidb-cloud-essential.md",
-  "TOC-tidb-cloud-starter.md",
-  // "TOC-tidb-cloud-premium.md",
-];
-
-export const getAllCloudMdList = (tocFiles = CLOUD_TOC_LIST) => {
-  // Get all MD files from multiple TOCs and deduplicate
-  const allFilteredLinkLists = tocFiles.map((tocFile) => getAllMdList(tocFile));
-  const flattenedList = allFilteredLinkLists.flat();
-  const allFilePaths = [...new Set(flattenedList)]; // Deduplicate
-  return allFilePaths;
-};
-
 const checkDestDir = (destPath) => {
   const dir = path.dirname(destPath);
 
