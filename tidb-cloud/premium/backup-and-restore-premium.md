@@ -30,39 +30,38 @@ Backup files can originate from the following sources:
 
 ## Automatic backups
 
-TiDB Cloud Premium offers enhanced automatic backup capabilities, combining high-frequency snapshots with log backups to ensure maximum data reliability for production environments.
+{{{ .premium }}} offers enhanced automatic backup capabilities, combining high-frequency snapshots with log backups to ensure maximum data reliability for production environments.
 
-### Automatic Backup Policy Details
-TiDB Cloud Premium instances provide a comprehensive data protection strategy through a multi-layered backup architecture:
+### Automatic backup policies
+
+{{{ .premium }}} instances provide a comprehensive data protection strategy through a multi-layered backup architecture:
 
 - **Point-in-Time Recovery (PITR)**
     - Retention: 7 days.
     - Restore Detail: Allows restoration to any specific moment within the 7-day retention period.
 
-- **Hourly Backup Snapshot**
+- **Hourly backup snapshot**
     - Retention: 7 days.
-    - Restore Detail: Regular restoration is available for each hourly snapshot generated within the 7-day window.
+    - Restore detail: regular restoration is available for each hourly snapshot generated within the 7-day window.
 
-- **Daily Backup Snapshot**
+- **Daily backup snapshot**
     - Retention: 33 days.
-    - Restore Detail: Restoration is available for daily snapshots (defaulted at 0:00 UTC) for the 33-day retention period.
+    - Restore detail: restoration is available for daily snapshots (at 0:00 UTC by default) for the 33-day retention period.
 
-### Backup Execution Rules
-- **Backup Cycle**: Premium instances support both daily and hourly automatic backups.
+### Backup execution rules
+
+- **Backup cycle**: {{{ .premium }}} instances support both daily and hourly automatic backups.
 
 - **Backup Time**:
-    - Daily Backup: Runs at a fixed time of 0:00 UTC. Backup time management/customization is currently not supported.
-    - Hourly Backup: Always runs on the hour.
+    - Daily backup: runs at a fixed time of 0:00 UTC. Backup time management or customization is currently not supported.
+    - Hourly backup: always runs on the hour.
 
-- **Retention Mechanism**: Backups that exceed their retention period (7 days or 33 days) will automatically expire and cannot be restored.
+- **Retention mechanism**: backups that exceed their retention period (7 days or 33 days) will automatically expire and cannot be restored.
 
-> **Note**:
+> **Note:**
 >
-> **Storage Fees**: Storage costs for automatic backups are calculated based on your backup data volume and retention duration.
->
-> **Extending Retention**: If you need to extend the backup retention period, contact the TiDB support team.
->
-> **Manual Backup**: Manual backup is currently not supported.
+> - Storage costs for automatic backups are calculated based on your backup data volume and retention duration.
+> - If you need to extend the backup retention period, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
 
 
 ### Delete backup files
