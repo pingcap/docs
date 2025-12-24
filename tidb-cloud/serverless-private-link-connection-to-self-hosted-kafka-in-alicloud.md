@@ -30,21 +30,21 @@ For example, the port mapping is as follows:
     - Manage VPC and vSwitch
     - Connect to ECS nodes to configure Kafka nodes
 
-- Ensure that you have the following authorization to set up a load balancer and endpoint service in your own AWS account.
+- Ensure that you have the following authorization to set up a load balancer and endpoint service in your own Alibaba Cloud account.
 
     - Manage load balancer
     - Manage endpoint services
 
-- {{{ .essential }}} information: confirm that your {{{ .essential }}} is active in AWS. Retrieve and save the following details for later use:
+- {{{ .essential }}} information: confirm that your {{{ .essential }}} is active in Alibaba Cloud provider. Retrieve and save the following details for later use:
 
     - Account ID
     - Availability Zones (AZ)
 
-To view the the AWS account ID and available zones, do the following:
+To view the the Alibaba Cloud account ID and available zones, do the following:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
 2. On the **Private Link Connection For Dataflow**, click **Create Private Link Connection**.
-3. You can find the AWS account ID and available zones information.
+3. You can find the Alibaba Cloud account ID and available zones information.
 
 The following table shows an example of the deployment information.
 
