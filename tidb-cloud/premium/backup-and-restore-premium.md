@@ -36,11 +36,11 @@ Backup files can originate from the following sources:
 
 {{{ .premium }}} instances provide a comprehensive data protection strategy through a multi-layered backup architecture:
 
-- **Point-in-Time Recovery (PITR)**
+- Point-in-Time Recovery (PITR)
     - Retention: 7 days.
-    - Restore Detail: Allows restoration to any specific moment within the 7-day retention period.
+    - Restore detail: allows restoration to any specific moment within the 7-day retention period.
 
-- **Hourly backup snapshot**
+- Hourly backup snapshot
     - Retention: 7 days.
     - Restore detail: regular restoration is available for each hourly snapshot generated within the 7-day window.
 
@@ -50,11 +50,11 @@ Backup files can originate from the following sources:
 
 ### Backup execution rules
 
-- **Backup cycle**: {{{ .premium }}} instances support both daily and hourly automatic backups.
+- Backup cycle: {{{ .premium }}} instances support both daily and hourly automatic backups.
 
-- **Backup Time**:
-    - Daily backup: runs at a fixed time of 0:00 UTC. Backup time management or customization is currently not supported.
+- Backup time:
     - Hourly backup: always runs on the hour.
+    - Daily backup: runs at a fixed time of 0:00 UTC. Currently, backup time management or customization is not supported.
 
 - **Retention mechanism**: backups that exceed their retention period (7 days or 33 days) will automatically expire and cannot be restored.
 
