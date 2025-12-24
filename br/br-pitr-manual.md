@@ -501,7 +501,7 @@ tiup br restore point --pd="${PD_IP}:2379"
 
 ### Restore data using filters
 
-Starting from TiDB v9.0.0, you can use filters during PITR to restore specific databases or tables, enabling more fine-grained control over the data to be restored.
+Starting from TiDB v8.5.5, you can use filters during PITR to restore specific databases or tables, enabling more fine-grained control over the data to be restored.
 
 The filter patterns follow the same [table filtering syntax](/table-filter.md) as other BR operations:
 
@@ -548,7 +548,7 @@ tiup br restore point --pd="${PD_IP}:2379" \
 
 ### Concurrent restore operations
 
-Starting from TiDB v9.0.0, you can run multiple PITR restore tasks concurrently. This feature allows you to restore different datasets in parallel, improving efficiency for large-scale restore scenarios.
+Starting from TiDB v8.5.5, you can run multiple PITR restore tasks concurrently. This feature allows you to restore different datasets in parallel, improving efficiency for large-scale restore scenarios.
 
 Usage example for concurrent restores:
 
@@ -576,9 +576,9 @@ tiup br restore point --pd="${PD_IP}:2379" \
 
 ### Compatibility between ongoing log backup and snapshot restore
 
-Starting from v9.0.0, when a log backup task is running, if all of the following conditions are met, you can still perform snapshot restore (`br restore [full|database|table]`) and allow the restored data to be properly recorded by the ongoing log backup (hereinafter referred to as "log backup"):
+Starting from v8.5.5, when a log backup task is running, if all of the following conditions are met, you can still perform snapshot restore (`br restore [full|database|table]`) and allow the restored data to be properly recorded by the ongoing log backup (hereinafter referred to as "log backup"):
 
-- The node performing backup and restore operations has the following necessary permissions: 
+- The node performing backup and restore operations has the following necessary permissions:
     - Read access to the external storage containing the backup source, for snapshot restore
     - Write access to the target external storage used by the log backup
 - The target external storage for the log backup is Amazon S3 (`s3://`), Google Cloud Storage (`gcs://`), or Azure Blob Storage (`azblob://`).
@@ -594,11 +594,11 @@ If any of the above conditions are not met, you can restore the data by followin
 
 > **Note:**
 >
-> When restoring a log backup that contains records of snapshot (full) restore data, you must use BR v9.0.0 or later. Otherwise, restoring the recorded full restore data might fail.
+> When restoring a log backup that contains records of snapshot (full) restore data, you must use BR v8.5.5 or later. Otherwise, restoring the recorded full restore data might fail.
 
 ### Compatibility between ongoing log backup and PITR operations
 
-Starting from TiDB v9.0.0, you can perform PITR operations while a log backup task is running by default. The system automatically handles compatibility between these operations.
+Starting from TiDB v8.5.5, you can perform PITR operations while a log backup task is running by default. The system automatically handles compatibility between these operations.
 
 #### Important limitation for PITR with ongoing log backup
 
