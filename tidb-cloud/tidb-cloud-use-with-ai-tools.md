@@ -52,7 +52,7 @@ After your {{{ .starter }}} cluster is created on TiDB Cloud, you can use it wit
 
 1. Click the first copy button to copy the command.
 2. Open the terminal and add the MCP server by running the copied command.
-3. Alternatively, follow Claude Code's documentation to add the configuration to `.mcp.json` for project scope, as follows:
+3. Alternatively, follow [Claude Code's documentation](https://code.claude.com/docs/en/mcp#project-scope) to add the configuration to `.mcp.json` for project scope, as follows:
 
 ```json
 {
@@ -99,7 +99,7 @@ After your {{{ .starter }}} cluster is created on TiDB Cloud, you can use it wit
 
 ### Windsurf
 
-Follow Windsurf's documentation to add the configuration to `mcp_config.json`, as follows:
+Follow [Windsurf's documentation](https://docs.windsurf.com/windsurf/cascade/mcp#adding-a-new-mcp-plugin) to add the configuration to `mcp_config.json`, as follows:
 
 ```json
 {
