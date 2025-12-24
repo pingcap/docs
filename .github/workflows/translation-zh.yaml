@@ -40,7 +40,6 @@ jobs:
       - name: Download files
         uses: pingcap/docs-toolkit/actions/file-diff-update@main
         with:
-          branch_name: ${{ env.CN_CLOUD_BRANCH }}
           config_file: latest_translation_commit.json
           working_directory: docs
           filter_by_cloud_toc: 'true'
