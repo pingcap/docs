@@ -21,7 +21,7 @@ This section describes best practices for storing and indexing UUIDs in TiDB.
 
 ### UUID versions
 
-[RFC 9562](https://datatracker.ietf.org/doc/html/rfc9562) defines 8 different versions of UUID's. TiDB can store any version of UUID and can create v1, v4 and v7 UUID's.
+[RFC 9562](https://datatracker.ietf.org/doc/html/rfc9562) defines 8 different versions of UUIDs. TiDB can store any version of UUID and can create v1, v4 and v7 UUIDs.
 
 UUIDv1 is created with the [`UUID()`](/functions-and-operators/miscellaneous-functions.md#uuid) function.
 
@@ -29,13 +29,13 @@ UUIDv2 is not commonly used.
 
 UUIDv3 uses a namespace with a MD5 hash.
 
-UUIDv4 is creatad with the [`UUID_V4()`](/functions-and-operators/miscellaneous-functions.md#uuid_v4) function. This function does not store a timestamp and is fully random except for the bits that store the version and variant.
+UUIDv4 is created with the [`UUID_V4()`](/functions-and-operators/miscellaneous-functions.md#uuid_v4) function. This function does not store a timestamp and is fully random except for the bits that store the version and variant.
 
 UUIDv5 uses a namespace with a SHA1 hash.
 
-UUIDv6 is modern aternative to UUIDv1 that is field compatible with UUIDv1.
+UUIDv6 is a modern alternative to UUIDv1 that is field compatible with UUIDv1.
 
-UUIDv7 is created with the [`UUID_V7()`](/functions-and-operators/miscellaneous-functions.md#uuid_v7) functions. This function is meant as a modern alternative to the version 1 UUID for applications that don't require a UUID that is field compatible.
+UUIDv7 is created with the [`UUID_V7()`](/functions-and-operators/miscellaneous-functions.md#uuid_v7) function. This function is meant as a modern alternative to UUIDv1 for applications that don't require a UUID that is field compatible with UUIDv1.
 
 UUIDv8 is a custom format UUID that only requires the version bits to be set to 0b1000 (binary representation of 8).
 
