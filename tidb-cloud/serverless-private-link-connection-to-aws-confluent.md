@@ -3,13 +3,13 @@ title: Connect to AWS Confluent via a Private Link Connection
 summary: Learn how to connect to an AWS Confluent instance using an AWS Confluent Endpoint Service private link connection.
 ---
 
-# Connect to AWS Confluent via a Private Link Connection
+# Connect to Confluent Cloud via a Private Link Connection
 
 > **Note**
 >
-> Only Confluent Dedicated clusters are supported.
+> Only Confluent Cloud Dedicated clusters on AWS are supported.
 
-This document describes how to connect to an AWS Confluent Dedicated cluster using an AWS Endpoint Service private link connection.
+This document describes how to connect to a Confluent Cloud Dedicated cluster on AWS using an AWS Endpoint Service private link connection.
 
 ## Prerequisites
    
@@ -34,7 +34,7 @@ The Confluent Cloud network must meet the following requirements:
 
 - Region match: the instance must reside in the same AWS region as your {{{ .essential }}} cluster.
 - AZ (Availability Zone) availability: the availability zones must overlap with those of your {{{ .essential }}} cluster.
-- The Confluent Cloud Dedicated cluster must be deployed within the same network that your cluster is configured to connect to.
+- The Confluent Cloud Dedicated cluster must be deployed under this network.
 
 To get the unique name of the Confluent Cloud network:
 
