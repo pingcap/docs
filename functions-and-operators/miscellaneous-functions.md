@@ -420,7 +420,7 @@ See also [Best practices for UUID](/best-practices/uuid.md).
 
 ### UUID_V7()
 
-The `UUID_V4()` function returns a universally unique identifier (UUID) version 7 as defined in [RFC 9562](https://datatracker.ietf.org/doc/html/rfc9562).
+The `UUID_V7()` function returns a universally unique identifier (UUID) version 7 as defined in [RFC 9562](https://datatracker.ietf.org/doc/html/rfc9562).
 
 ```sql
 SELECT UUID_V7();
