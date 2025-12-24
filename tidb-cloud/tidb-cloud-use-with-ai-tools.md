@@ -53,7 +53,7 @@ After your {{{ .starter }}} cluster is created on TiDB Cloud, you can use it wit
 
 1. Click the first copy button to copy the command.
 2. Open the terminal and add the MCP server by running the copied command.
-3. Alternatively, follow Claude Code's documentation to add the configuration to `.mcp.json` for project scope, like below:
+3. Alternatively, follow Claude Code's documentation to add the configuration to `.mcp.json` for project scope, as follows:
 
 ```json
 {
@@ -77,7 +77,7 @@ After your {{{ .starter }}} cluster is created on TiDB Cloud, you can use it wit
 ### VS Code
 
 1. Click **Add to VS Code** to open VS Code, and then click **Install** to finish the setup.
-2. Or add the configuration to `.vscode/mcp.json`, like below:
+2. Or add the configuration to `.vscode/mcp.json`, as follows:
 
 ```json
 {
@@ -100,7 +100,7 @@ After your {{{ .starter }}} cluster is created on TiDB Cloud, you can use it wit
 
 ### Windsurf
 
-Follow Windsurf's documentation to add the configuration to `mcp_config.json`, like below:
+Follow Windsurf's documentation to add the configuration to `mcp_config.json`, as follows:
 
 ```json
 {
