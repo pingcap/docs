@@ -1,11 +1,11 @@
 ---
 title: Connect to Alibaba Cloud Self-Hosted Kafka via Private Link Connection
-summary: Learn how to connect to an Alibaba Cloud Self-Hosted Kafka using an AliCloud Endpoint Service private link connection.
+summary: Learn how to connect to an Alibaba Cloud self-hosted Kafka using an Alibaba Cloud Endpoint Service private link connection.
 ---
 
 # Connect to Alibaba Cloud Self-Hosted Kafka via Private Link Connection
 
-The document describes how to connect to a self-hosted Kafka cluster in Alibaba Cloud, using AliCloud Endpoint Service private link connection.
+The document describes how to connect to a self-hosted Kafka cluster in Alibaba Cloud, using Alibaba Cloud Endpoint Service private link connection.
 
 The mechanism works as follows:
 
@@ -24,22 +24,27 @@ For example, the port mapping is as follows:
 
 ## Prerequisites
    
-1. Ensure that you have a Kafka cluster or have the following permissions to set up one.
+- Ensure that you have a Kafka cluster or have the following permissions to set up one.
 
     - Manage ECS nodes
     - Manage VPC and vSwitch
     - Connect to ECS nodes to configure Kafka nodes
 
-2. Ensure that you have the following authorization to set up a load balancer and endpoint service in your own AWS account.
+- Ensure that you have the following authorization to set up a load balancer and endpoint service in your own AWS account.
 
     - Manage load balancer
     - Manage endpoint services
 
-3. Ensure your {{{ .essential }}} in Alibaba Cloud provider and get the {{{ .essential }}} account ID and available zones, save the information for later use.
+- {{{ .essential }}} information: confirm that your {{{ .essential }}} is active in AWS. Retrieve and save the following details for later use:
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
-    2. On the **Private Link Connection For Dataflow**, click **Create Private Link Connection**.
-    3. You can find the AWS account ID and available zones information.
+    - Account ID
+    - Availability Zones (AZ)
+
+To view the the AWS account ID and available zones, do the following:
+
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
+2. On the **Private Link Connection For Dataflow**, click **Create Private Link Connection**.
+3. You can find the AWS account ID and available zones information.
 
 The following table shows an example of the deployment information.
 
@@ -48,7 +53,7 @@ The following table shows an example of the deployment information.
 | Region    | `ap-southeast-1`   |  N/A |
 | TiDB Cloud Alibaba Cloud Account | `<account_id>`     |    N/A  |
 | AZ IDs                              | <ul><li>`ap-southeast-1a` </li><li>`ap-southeast-1b` </li><li> `ap-southeast-1c`</li></ul>  
-| Kafka Advertised Listener Pattern   | &lt;broker_id&gt;.unique_name.alicloud.plc.tidbcloud.com:&lt;port&gt;| The actual value of unique name will be generated in step 4, before that just use unique_name as a placeholder |
+| Kafka Advertised Listener Pattern   | &lt;broker_id&gt;.unique_name.alicloud.plc.tidbcloud.com:&lt;port&gt;| `unique_name` is a placeholder. The actual value of `unique_name` is created in [Step 4](#step-4-replace-the-unique-name-placeholder-in-kafka-configuration) |
 
 ## Step 1. Set up a Kafka cluster
 
@@ -648,7 +653,7 @@ Set up the endpoint service in the same region.
 
 ## Step 3. Create a Private Link Connection in TiDB Cloud
 
-### 1. Create the AliCloud Endpoint Service Private Link connection
+### 1. Create the Alibaba Cloud Endpoint Service Private Link connection
 
 You can create a private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
 
@@ -668,7 +673,7 @@ You can create a private link connection using the TiDB Cloud console or the TiD
 4. Enter the required information in the **Create Private Link Connection** dialog:
 
     - **Private Link Connection Name**: Enter a name for the Private Link Connection.
-    - **Connection Type**: Choose **AliCloud Endpoint Service**, if you can not find this option, please ensure that your cluster is created in Alibaba Cloud provider.
+    - **Connection Type**: Choose **Alibaba Cloud Endpoint Service**, if you can not find this option, please ensure that your cluster is created in Alibaba Cloud provider.
     - **Endpoint Service Name**: Enter the endpoint service name you get from the previous step.
 
 5. Click the **Create Connection** button.
@@ -688,7 +693,7 @@ Then go back to the detail page of the endpoint service on Alibaba Cloud console
 </div>
 </SimpleTab>
 
-For more information, see [Create an AliCloud Endpoint Service Private Link Connection](/tidb-cloud/serverless-private-link-connection.md#create-an-alicloud-endpoint-service-private-link-connection).
+For more information, see [Create an Alibaba Cloud Endpoint Service Private Link Connection](/tidb-cloud/serverless-private-link-connection.md#create-an-alibaba-cloud-endpoint-service-private-link-connection).
 
 ### 2. Attach Domains to the Private Link Connection
 

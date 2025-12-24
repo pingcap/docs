@@ -19,7 +19,7 @@ This type of private link connection enables TiDB Cloud clusters on **AWS** to c
 
 The Private Link Connection can access various AWS services by associating them to the endpoint service, such as RDS instances and Kafka services.
 
-### AliCloud Endpoint Service
+### Alibaba Cloud Endpoint Service
 
 This type of private link connection enables TiDB Cloud clusters on **Alibaba Cloud** to connect to your [Alibaba Cloud endpoint service](https://www.alibabacloud.com/help/en/privatelink/share-your-service/#51976edba8no7) powered by Alibaba Cloud PrivateLink.
 

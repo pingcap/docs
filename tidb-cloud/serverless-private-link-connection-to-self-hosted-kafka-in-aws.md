@@ -16,24 +16,29 @@ The mechanism works as follows:
 
 ## Prerequisites
    
-1. Ensure that you have the following permissions to set up a Kafka cluster in your own AWS account.
+- Ensure that you have the following permissions to set up a Kafka cluster in your own AWS account.
 
     - Manage EC2 nodes
     - Manage VPC
     - Manage subnets
     - Connect to EC2 nodes to configure Kafka nodes
 
-2. Ensure that you have the following authorization to set up a load balancer and endpoint service in your own AWS account.
+- Ensure that you have the following authorization to set up a load balancer and endpoint service in your own AWS account.
 
     - Manage security groups
     - Manage load balancer
     - Manage endpoint services
 
-3. Ensure your {{{ .essential }}} in aws provider and get the {{{ .essential }}} account ID and available zones, save the information for later use.
+- {{{ .essential }}} information: confirm that your {{{ .essential }}} is active in AWS. Retrieve and save the following details for later use:
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
-    2. On the **Private Link Connection For Dataflow**, click **Create Private Link Connection**.
-    3. You can find the AWS account ID and available zones information.
+    - Account ID
+    - Availability Zones (AZ)
+
+To view the the AWS account ID and available zones, do the following:
+
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
+2. On the **Private Link Connection For Dataflow**, click **Create Private Link Connection**.
+3. You can find the AWS account ID and available zones information.
 
 The following table shows an example of the deployment information.
 
@@ -42,7 +47,7 @@ The following table shows an example of the deployment information.
 | Region    | Oregon (`us-west-2`)    |  N/A |
 | Principal of TiDB Cloud AWS Account | `arn:aws:iam::<account_id>:root`     |    N/A  |
 | AZ IDs                              | <ul><li>`usw2-az1` </li><li>`usw2-az2` </li><li> `usw2-az3`</li></ul>  | Align AZ IDs to AZ names in your AWS account.<br/>Example: <ul><li> `usw2-az1` => `us-west-2a` </li><li> `usw2-az2` => `us-west-2c` </li><li>`usw2-az3` => `us-west-2b`</li></ul>  |
-| Kafka Advertised Listener Pattern   | <ul><li> `usw2-az1` => &lt;broker_id&gt;.usw2-az1.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li><li> `usw2-az2` => &lt;broker_id&gt;.usw2-az2.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li><li> `usw2-az3` => &lt;broker_id&gt;.usw2-az3.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li></ul>    | Map AZ names to AZ-specified patterns. Make sure that you configure the right pattern to the broker in a specific AZ later. <ul><li> `us-west-2a` => &lt;broker_id&gt;.usw2-az1.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li><li> `us-west-2c` => &lt;broker_id&gt;.usw2-az2.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li><li> `us-west-2b` => &lt;broker_id&gt;.usw2-az3.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li></ul> The actual value of unique name will be generated in step 4, before that just use unique_name as a placeholder |
+| Kafka Advertised Listener Pattern   | <ul><li> `usw2-az1` => &lt;broker_id&gt;.usw2-az1.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li><li> `usw2-az2` => &lt;broker_id&gt;.usw2-az2.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li><li> `usw2-az3` => &lt;broker_id&gt;.usw2-az3.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li></ul>    | Map AZ names to AZ-specified patterns. Make sure that you configure the right pattern to the broker in a specific AZ later. <ul><li> `us-west-2a` => &lt;broker_id&gt;.usw2-az1.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li><li> `us-west-2c` => &lt;broker_id&gt;.usw2-az2.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li><li> `us-west-2b` => &lt;broker_id&gt;.usw2-az3.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li></ul> `unique_name` is a placeholder. The actual value of `unique_name` is created in [Step 4](#step-4-replace-the-unique-name-placeholder-in-kafka-configuration).  |
 
 ## Step 1. Set up a Kafka cluster
 
