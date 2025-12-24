@@ -401,7 +401,7 @@ SELECT UUID_VERSION('019b516b-8ef7-7d74-81e6-9b860112409a');
 
 ### UUID_V4()
 
-The `UUID_V4()` function returns a universally unique identifier (UUID) version 4 as defined in [RFC 9562](https://datatracker.ietf.org/doc/html/rfc9562).
+The `UUID_V4()` function returns a universally unique identifier (UUID) version 4 as defined in [RFC 9562](https://datatracker.ietf.org/doc/html/rfc9562). A UUIDv4 is based on random values and does not store a timestamp.
 
 ```sql
 SELECT UUID_V4();
@@ -530,3 +530,7 @@ TABLE t1;
 | Name | Description  |
 |:------------|:-----------------------------------------------------------------------------------------------|
 | [`UUID_SHORT()`](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html#function_uuid-short)            | Provides a UUID that is unique given certain assumptions not present in TiDB [TiDB #4620](https://github.com/pingcap/tidb/issues/4620) |
+
+## MySQL compatibility
+
+The `UUID_V4()`, `UUID_V7()`, `UUID_VERSION()` and `UUID_TIMESTAMP()` functions are TiDB specific extensions.
