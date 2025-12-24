@@ -86,7 +86,7 @@ jobs:
           export PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
           export GLOSSARY_ID=${{ secrets.GCP_GLOSSARY_ID }}
           yarn
-          node docs-toolkit/markdown-translator/index_ja.js --input-dir docs/tmp --output-dir docs/
+          node docs-toolkit/markdown-translator/src/index_ja.js --input-dir docs/tmp --output-dir docs/
 
       - name: Git commit and push
         run: |

@@ -60,7 +60,7 @@ jobs:
           export LANGLINK_ACCESS_SECRET=${{ secrets.LANGLINK_ACCESS_SECRET }}
           export LANGLINK_USER=${{ secrets.LANGLINK_USER }}
           yarn
-          node docs-toolkit/markdown-translator/index.js --input-dir docs/tmp --output-dir docs/
+          node docs-toolkit/markdown-translator/src/index.js --input-dir docs/tmp --output-dir docs/
 
       - name: Set build ID
         id: build_id
