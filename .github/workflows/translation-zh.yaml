@@ -53,6 +53,8 @@ jobs:
       - name: Config and translate
         run: |
           cd docs-toolkit/markdown-translator
+          yarn
+          cd ../..
           echo ${{secrets.GCP_KEY}} | base64 --decode >> key.json
           export GOOGLE_APPLICATION_CREDENTIALS=key.json
           export PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
@@ -60,8 +62,7 @@ jobs:
           export LANGLINK_ACCESS_KEY=${{ secrets.LANGLINK_ACCESS_KEY }}
           export LANGLINK_ACCESS_SECRET=${{ secrets.LANGLINK_ACCESS_SECRET }}
           export LANGLINK_USER=${{ secrets.LANGLINK_USER }}
-          yarn
-          node src/index.js --input-dir ${{ github.workspace }}/docs/tmp --output-dir ${{ github.workspace }}/docs
+          node docs-toolkit/markdown-translator/src/index.js --input-dir docs/tmp --output-dir docs/
 
       - name: Set build ID
         id: build_id

@@ -82,12 +82,13 @@ jobs:
       - name: Config and translate
         run: |
           cd docs-toolkit/markdown-translator
+          yarn
+          cd ../..
           echo ${{secrets.GCP_KEY}} | base64 --decode >> key.json
           export GOOGLE_APPLICATION_CREDENTIALS=key.json
           export PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
           export GLOSSARY_ID=${{ secrets.GCP_GLOSSARY_ID }}
-          yarn
-          node src/index_ja.js --input-dir ${{ github.workspace }}/docs/tmp --output-dir ${{ github.workspace }}/docs
+          node docs-toolkit/markdown-translator/src/index_ja.js --input-dir docs/tmp --output-dir docs/
 
       - name: Git commit and push
         run: |
