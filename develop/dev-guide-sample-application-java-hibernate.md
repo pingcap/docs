@@ -260,7 +260,7 @@ For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
 ## Compatibility with `MySQLDialect`
 
-When using `MySQLDialect` with TiDB, be aware of the following behaviors:
+When you use `MySQLDialect` with TiDB, be aware of the following behaviors:
 
 ### `SERIALIZABLE` isolation level
 
