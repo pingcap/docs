@@ -52,7 +52,7 @@ TiCDC supports the following types of upstream data changes:
 - For the TiCDC [classic architecture](/ticdc/ticdc-classic-architecture.md), when the number of tables replicated by a single TiCDC cluster exceeds the following recommended values, TiCDC might not work stably:
 
     | TiCDC version | Recommended number of tables to be replicated |
-    |---|---|
+    |---|:---:|
     | v5.4.0 - v6.4.x | 2000 |
     | v6.5.x - v7.4.x | 4000 |
     | v7.5.x - v8.5.x | 40000 |
