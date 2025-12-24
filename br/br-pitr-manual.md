@@ -498,12 +498,10 @@ tiup br restore point --pd="${PD_IP}:2379"
 --master-key-crypter-method aes128-ctr
 --master-key "local:///path/to/master.key"
 ```
-<<<<<<< HEAD
-=======
 
 ### Restore data using filters
 
-Starting from TiDB v9.0.0, you can use filters during PITR to restore specific databases or tables, enabling more fine-grained control over the data to be restored.
+Starting from TiDB v8.5.5, you can use filters during PITR to restore specific databases or tables, enabling more fine-grained control over the data to be restored.
 
 The filter patterns follow the same [table filtering syntax](/table-filter.md) as other BR operations:
 
@@ -555,7 +553,7 @@ tiup br restore point --pd="${PD_IP}:2379" \
 
 ### Concurrent restore operations
 
-Starting from TiDB v9.0.0, you can run multiple PITR restore tasks concurrently. This feature allows you to restore different datasets in parallel, improving efficiency for large-scale restore scenarios.
+Starting from TiDB v8.5.5, you can run multiple PITR restore tasks concurrently. This feature allows you to restore different datasets in parallel, improving efficiency for large-scale restore scenarios.
 
 Usage example for concurrent restores:
 
@@ -584,7 +582,7 @@ tiup br restore point --pd="${PD_IP}:2379" \
 
 ### Compatibility between ongoing log backup and snapshot restore
 
-Starting from v9.0.0, when a log backup task is running, if all of the following conditions are met, you can still perform snapshot restore (`br restore [full|database|table]`) and allow the restored data to be properly recorded by the ongoing log backup (hereinafter referred to as "log backup"):
+Starting from v8.5.5, when a log backup task is running, if all of the following conditions are met, you can still perform snapshot restore (`br restore [full|database|table]`) and allow the restored data to be properly recorded by the ongoing log backup (hereinafter referred to as "log backup"):
 
 - The node performing backup and restore operations has the following necessary permissions: 
     - Read access to the external storage containing the backup source, for snapshot restore
@@ -602,11 +600,11 @@ If any of the above conditions are not met, you can restore the data by followin
 
 > **Note:**
 >
-> When restoring a log backup that contains records of snapshot (full) restore data, you must use BR v9.0.0 or later. Otherwise, restoring the recorded full restore data might fail.
+> When restoring a log backup that contains records of snapshot (full) restore data, you must use BR v8.5.5 or later. Otherwise, restoring the recorded full restore data might fail.
 
 ### Compatibility between ongoing log backup and PITR operations
 
-Starting from TiDB v9.0.0, you can perform PITR operations while a log backup task is running by default. The system automatically handles compatibility between these operations.
+Starting from TiDB v8.5.5, you can perform PITR operations while a log backup task is running by default. The system automatically handles compatibility between these operations.
 
 #### Important limitation for PITR with ongoing log backup
 
@@ -653,4 +651,3 @@ tiup br abort restore table --pd="${PD_IP}:2379" \
 --storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
 --db database_name --table table_name
 ```
->>>>>>> b7ce61a3e2 (br: support pitr filter and concurrent restore (#21835))
