@@ -288,10 +288,36 @@ Take the following steps to configure an AccessKey pair:
     - In the **Service** section, select **Object Storage Service**.
     - In the **Action** section, select the permissions as needed.
         - To restore a backup to a TiDB Cloud instance, grant `oss:ListObjects` and `oss:GetObject` permissions.
-    - In the **Resource** section, select the bucket and the objects in the bucket.
 
-    > **Tip**
-    >
-    > For restore operations, you can enhance security by restricting access to only the specific folder (prefix) where your backup files are stored, rather than granting access to the entire bucket.
+        The following is a **JSON example for a Restore task**. This example restricts access to a specific bucket and backup folder:
+
+        ```json
+        {
+        "Version": "1",
+        "Statement": [
+            {
+            "Effect": "Allow",
+            "Action": "oss:ListObjects",
+            "Resource": "acs:oss:*:*:<Your bucket name>",
+            "Condition": {
+                "StringLike": {
+                "oss:Prefix": "<Your backup folder>/*"
+                }
+            }
+            },
+            {
+            "Effect": "Allow",
+            "Action": "oss:GetObject",
+            "Resource": "acs:oss:*:*:<Your bucket name>/<Your backup folder>/*"
+            }
+        ]
+        }
+        ```
+
+        > **Tip:**
+        >
+        > For **restore** operations, you can enhance security by restricting access to only the specific folder (prefix) where your backup files are stored, rather than granting access to the entire bucket.
+
+    - In the **Resource** section, select the bucket and the objects in the bucket.
 
 3. Attach the custom policies to the RAM user. For more information, see [Grant permissions to a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/grant-permissions-to-the-ram-user).
