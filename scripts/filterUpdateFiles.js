@@ -2,6 +2,7 @@ import * as fs from "fs";
 import path from "path";
 import axios from "axios";
 import { Octokit } from "octokit";
+import { CLOUD_TOC_LIST, getAllCloudMdList } from "./utils.js";
 
 const GH_TOKEN = process.env.GH_TOKEN || "";
 
@@ -92,72 +93,33 @@ const deleteFile = (targetFile) => {
   }
 };
 
-// read toc file and parse the file paths
-const parseTOCFile = (tocPath) => {
-  try {
-    if (!fs.existsSync(tocPath)) {
-      console.log(`TOC file not found: ${tocPath}`);
-      return new Set();
-    }
-
-    const content = fs.readFileSync(tocPath, "utf8");
-    const filePaths = new Set();
-
-    // use regex to match the file paths in markdown links
-    // match [text](path) format
-    const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
-    let match;
-
-    while ((match = linkRegex.exec(content)) !== null) {
-      const link = match[2];
-      // only process links ending with .md
-      if (link.endsWith(".md")) {
-        // remove ./ or / at the beginning to ensure path consistency
-        const normalizedPath = link.replace(/^\.?\//, "");
-        filePaths.add(normalizedPath);
-      }
-    }
-
-    console.log(`Found ${filePaths.size} files in TOC: ${tocPath}`);
-    if (filePaths.size > 0) {
-      console.log(
-        "Files in TOC:",
-        Array.from(filePaths).slice(0, 5).join(", "),
-        filePaths.size > 5 ? `... and ${filePaths.size - 5} more` : ""
-      );
-    }
-    return filePaths;
-  } catch (error) {
-    console.error(`Error parsing TOC file ${tocPath}:`, error);
-    return new Set();
-  }
-};
-
 // get the file list from the toc file
 const getCloudTOCFiles = () => {
-  // check ./tmp/TOC-tidb-cloud.md first
-  const tmpTocPath = "./tmp/TOC-tidb-cloud.md";
-  const localTocPath = "TOC-tidb-cloud.md";
+  const tmpTocFiles = getAllCloudMdList([
+    "./tmp/TOC-tidb-cloud.md",
+    "./tmp/TOC-tidb-cloud-starter.md",
+    "./tmp/TOC-tidb-cloud-essential.md",
+  ]);
+  const tocFiles = getAllCloudMdList(CLOUD_TOC_LIST);
 
-  let tocFiles = parseTOCFile(tmpTocPath);
+  // Convert to Set
+  const tmpTocFilesSet = new Set(tmpTocFiles);
+  const tocFilesSet = new Set(tocFiles);
 
-  // if not found in /tmp, check the current directory
-  if (tocFiles.size === 0) {
-    console.log(`No files found in ${tmpTocPath}, trying ${localTocPath}`);
-    tocFiles = parseTOCFile(localTocPath);
-  }
+  // Use tmpTocFiles if not empty, otherwise use tocFiles
+  const finalTocFiles = tmpTocFilesSet.size > 0 ? tmpTocFilesSet : tocFilesSet;
 
-  if (tocFiles.size === 0) {
+  if (finalTocFiles.size === 0) {
     console.log(
       "Warning: No TOC file found or no files in TOC. All .md files will be processed."
     );
   }
 
-  return tocFiles;
+  return finalTocFiles;
 };
 
 // filter the files in tmp directory by the toc file
-const filterFilesByTOC = (isInit = false) => {
+const filterFilesByTOC = () => {
   console.log("Filtering files in tmp directory by TOC...");
 
   // get the file list from the toc file
@@ -197,22 +159,19 @@ const filterFilesByTOC = (isInit = false) => {
   let deletedCount = 0;
   let keptCount = 0;
 
+  // Normalize TOC file paths by removing leading slashes
+  const normalizedTocFiles = new Set(
+    Array.from(tocFiles).map((file) => file.replace(/^\/+/, ""))
+  );
+
   for (const filePath of tmpFiles) {
     // get the relative path to the tmp directory
     const relativePath = path.relative(tmpDir, filePath);
 
     // only check markdown files, non-markdown files are kept
     if (relativePath.endsWith(".md")) {
-      // if isInit is true and the file is in tidb-cloud directory, delete it
-      if (isInit && relativePath.startsWith("tidb-cloud/")) {
-        console.log(`Deleting tidb-cloud file during init: ${relativePath}`);
-        deleteFile(filePath);
-        deletedCount++;
-        continue;
-      }
-
       // check if the markdown file is in the toc
-      if (tocFiles.has(relativePath)) {
+      if (normalizedTocFiles.has(relativePath)) {
         console.log(`Keeping markdown file in TOC: ${relativePath}`);
         keptCount++;
       } else {
@@ -268,7 +227,7 @@ const handleFiles = async (fileList = []) => {
   }
 };
 
-const main = async (isCloud = false, isInit = false) => {
+const main = async (isCloud = false) => {
   const { target: branchName, sha: base } = getLocalCfg();
   const targetBranchData = await ghGetBranch(branchName);
   const head = targetBranchData?.commit?.sha;
@@ -280,7 +239,7 @@ const main = async (isCloud = false, isInit = false) => {
 
   // if it is cloud mode, filter the files by the toc
   if (isCloud) {
-    filterFilesByTOC(isInit);
+    filterFilesByTOC();
   }
 
   writeLocalCfg({
@@ -291,7 +250,5 @@ const main = async (isCloud = false, isInit = false) => {
 
 const args = process.argv.slice(2);
 const isCloud = args.includes("--cloud");
-// for cloud mode, we only need update files not in the tidb-cloud directory
-const isInit = args.includes("--init");
 
-main(isCloud, isInit);
+main(isCloud);
