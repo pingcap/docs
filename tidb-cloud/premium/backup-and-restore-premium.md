@@ -30,49 +30,40 @@ Backup files can originate from the following sources:
 
 ## Automatic backups
 
-TiDB Cloud automatically backs up your instance data, letting you restore data from a backup snapshot to minimize data loss in the event of a disaster.
+TiDB Cloud Premium offers enhanced automatic backup capabilities, combining high-frequency snapshots with log backups to ensure maximum data reliability for production environments.
 
-### Learn about the backup setting
+### Automatic Backup Policy Details
+TiDB Cloud Premium instances provide a comprehensive data protection strategy through a multi-layered backup architecture:
 
-Compared with {{{ .starter }}} clusters and {{{ .essential }}} clusters, {{{ .premium }}} offers enhanced backup capabilities, including longer retention and hourly backup support.
+- **Point-in-Time Recovery (PITR)**
+    - Retention: 7 days.
+    - Restore Detail: Allows restoration to any specific moment within the 7-day retention period.
 
-| Backup setting   | {{{ .starter }}} (free) | {{{ .starter }}} (with spending limit > 0) | {{{ .essential }}} | {{{ .premium }}} |
-|------------------|--------------------------|---------------------------------------------|--------------------|------------------|
-| Backup Cycle     | Daily                    | Daily                                       | Daily              | Daily + Hourly   |
-| Backup Retention | 1 day                    | 30 days                                     | 30 days            | Up to 33 days    |
-| Backup Time      | Fixed time               | Configurable                               | Configurable       | Configurable     |
+- **Hourly Backup Snapshot**
+    - Retention: 7 days.
+    - Restore Detail: Regular restoration is available for each hourly snapshot generated within the 7-day window.
 
-- **Backup Cycle** determines how frequently backups are created.
+- **Daily Backup Snapshot**
+    - Retention: 33 days.
+    - Restore Detail: Restoration is available for daily snapshots (defaulted at 0:00 UTC) for the 33-day retention period.
 
-    - Premium instances support both **daily** and **hourly** backups.
-    - The **default** is **hourly backups**.
+### Backup Execution Rules
+- **Backup Cycle**: Premium instances support both daily and hourly automatic backups.
 
-- **Backup Retention** is the duration for which backups are retained. Expired backups cannot be restored.
+- **Backup Time**:
+    - Daily Backup: Runs at a fixed time of 0:00 UTC. Backup time management/customization is currently not supported.
+    - Hourly Backup: Always runs on the hour.
 
-    - Premium instances can retain backups for up to **33 days**.
+- **Retention Mechanism**: Backups that exceed their retention period (7 days or 33 days) will automatically expire and cannot be restored.
 
-- **Backup Time** is the scheduled start time for backups.
+> **Note**:
+>
+> **Storage Fees**: Storage costs for automatic backups are calculated based on your backup data volume and retention duration.
+>
+> **Extending Retention**: If you need to extend the backup retention period, please contact TiDB support team.
+>
+> **Manual Backup**: Manual backup is currently not supported.
 
-    - For Premium instances, **daily backups** can be configured to start at a preferred time (in 30-minute intervals), while **hourly backups** always run on the hour.
-
-### Configure the backup settings
-
-To configure backups for a {{{ .premium }}} instance, perform the following steps:
-
-1. Navigate to the [**Backup**](#view-the-backup-page) page of your TiDB instance.
-
-2. Click **Backup Setting**. This will open the **Backup Setting** window, where you can configure automatic backup options.
-
-3. In **Backup Cycle**, choose between the **Hourly Backup** and **Daily Backup** tabs:
-
-    - **Hourly Backup** (default):
-        - Runs **on the hour**.
-        - You can configure **Backup Retention** (1–33 days).
-    - **Daily Backup**:
-        - Runs at a configurable time in **30-minute intervals**.
-        - You can configure both **Backup Retention** (1–33 days) and **Backup Time**.
-
-4. Click **Save** to save your settings.
 
 ### Delete backup files
 
@@ -205,6 +196,6 @@ To restore backups from cloud storage, do the following:
 
 5. Click **Restore** to restore the backup.
 
-## Limitation
+## Limitations
 
 Currently, manual backups are not supported for {{{ .premium }}} instances.
