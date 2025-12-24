@@ -20,9 +20,9 @@ TiDB supports most of the [miscellaneous functions](https://dev.mysql.com/doc/re
 | [`INET_NTOA()`](#inet_ntoa)              | Return the IP address from a numeric value        |
 | [`INET6_ATON()`](#inet6_aton)            | Return the numeric value of an IPv6 address       |
 | [`INET6_NTOA()`](#inet6_ntoa)            | Return the IPv6 address from a numeric value      |
+| [`IS_IPV4()`](#is_ipv4)                  | Whether argument is an IPv4 address               |
 | [`IS_IPV4_COMPAT()`](#is_ipv4_compat)    | Whether argument is an IPv4-compatible address    |
 | [`IS_IPV4_MAPPED()`](#is_ipv4_mapped)    | Whether argument is an IPv4-mapped address        |
-| [`IS_IPV4()`](#is_ipv4)                  | Whether argument is an IPv4 address               |
 | [`IS_IPV6()`](#is_ipv6)                  | Whether argument is an IPv6 address               |
 | [`IS_UUID()`](#is_uuid)                  | Whether argument is an UUID                       |
 | [`NAME_CONST()`](#name_const)            | Can be used to rename a column name               |
@@ -367,9 +367,9 @@ SELECT SLEEP(1.5);
 
 ### UUID_VERSION()
 
-The `UUID_VERSION()` function returns the UUID version of the UUID as defined in [RFC 9562](https://datatracker.ietf.org/doc/html/rfc9562).
+The `UUID_VERSION()` function returns the version of a UUID argument as an integer, as defined in [RFC 9562](https://datatracker.ietf.org/doc/html/rfc9562).
 
-The following example shows a version 1 UUID.
+The following example gets the version number from a version 1 UUID.
 
 ```sql
 SELECT UUID_VERSION('7d31138f-e0ee-11f0-a2db-86f42566cd2c');
@@ -384,7 +384,7 @@ SELECT UUID_VERSION('7d31138f-e0ee-11f0-a2db-86f42566cd2c');
 1 row in set (0.001 sec)
 ```
 
-The following example shows a version 7 UUID.
+The following example gets the version number from a version 7 UUID.
 
 ```sql
 SELECT UUID_VERSION('019b516b-8ef7-7d74-81e6-9b860112409a');
@@ -439,9 +439,9 @@ See also [Best practices for UUID](/best-practices/uuid.md).
 
 ### UUID_TIMESTAMP()
 
-The `UUID_TIMESTAMP()` function extracts the timestamp that is stored in a UUID for the UUID versions that include a timestamp and returns this as a UNIX timestamp.
+The `UUID_TIMESTAMP()` function extracts the timestamp from a time-based UUID and returns it as a UNIX timestamp.
 
-Only UUIDv1, UUIDv6 and UUIDv7 do store a timestamp. For other UUID versions this function will return `NULL`.
+UUIDv1, UUIDv6, and UUIDv7 store a timestamp. For other UUID versions, this function returns `NULL`.
 
 The example below extracts the timestamp from a UUID.
 
