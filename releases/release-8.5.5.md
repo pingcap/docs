@@ -13,17 +13,49 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ## Features
 
-### Scalability
-
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
-
-    For more information, see [Documentation](link).
-
 ### Performance
 
-* Point-in-time recovery (PITR) supports recovery from compacted log backups for faster restores [#56522](https://github.com/pingcap/tidb/issues/56522) @[YuJuncen](https://github.com/YuJuncen) **tw@lilin90** <!--2001--> <!--TBD-->
+* 大幅提升特定有损 DDL 操作的执行效率，例如 `BIGINT → INT`、`CHAR(120) → VARCHAR(60)`。在未发生数据截断的前提下，执行耗时可从数小时缩短至分钟级、秒级甚至毫秒级，性能提升可达到数十倍至数十万倍。  [#63366](https://github.com/pingcap/tidb/issues/63366)  [@wjhuang2016](https://github.com/wjhuang2016), [@tangenta](https://github.com/tangenta), [@fzzf678](https://github.com/fzzf678)**tw@qiancai** <!--2292-->
+
+    优化策略包括：
+
+    - 在严格 SQL 模式下，预先检查类型转换过程中是否存在数据截断风险；
+    - 若不存在数据截断风险，则仅更新元数据，尽量避免索引重建；
+    - 如需重建索引，则采用更高效的 Ingest 流程，大幅提升索引重建性能。
+
+    性能提升示例（基于 100 GiB 表的基准测试）：
+
+    | 场景 | 操作类型 | 优化前 | 优化后 | 性能提升 |
+    |------|----------|--------|--------|----------|
+    | 无索引列 | `BIGINT → INT` | 2 小时 34 分 | 1 分 5 秒 | 142× |
+    | 有索引列 | `BIGINT → INT` | 6 小时 25 分 | 0.05 秒 | 460,000× |
+    | 有索引列 | `CHAR(120) → VARCHAR(60)` | 7 小时 16 分 | 12 分 56 秒 | 34× |
+
+    注：以上数据基于 DDL 执行过程中未发生数据截断的前提。以上优化对于有 TiFlash 副本的表，以及 sign <--> unsign 数据类型修改的场景不会生效。
+
+    更多信息，请参考[用户文档](链接)。
+
+* 优化了存在大量外键场景下的 DDL 性能，逻辑 DDL 性能最高可提升 25 倍 [#61126](https://github.com/pingcap/tidb/issues/61126) @[GMHDBJD](https://github.com/GMHDBJD) **tw@hfxsd** <!--1896-->
+
+    在 v8.5.5 版本之前，当一些用户单个集群的表数量达到 1000 万级别，且其中有几十万张表有外键的场景，创建表，给表加列这些逻辑 DDL 的性能 QPS 会降低到 4，使得一些多租户的 SaaS 场景下的运维操作变得非常低效。在 v8.5.5 对该场景做了优化。经测试，1000 万张表，其中 20 万张表有外键的场景下，创建表，加列这类逻辑 DDL 的性能 QPS 稳定保持在 100，性能有 25 倍的提升。
+
+    更多信息，请参考[用户文档](链接)。
+
+* 提示索引下推到TiKV提升查询性能 [#62575](https://github.com/pingcap/tidb/issues/62575) @[lcwangchao](https://github.com/lcwangchao) **tw@qiancai** <!--1899-->
+
+    通过hint INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...]) 提示优化器将指定索引查询下推到TiKV，减少远程调用的次数，经过测试数据对比显示性能可提升约20%左右，最优可提升到40%。本特性一般建议结合表 affinity 属性使用，即表属性 AFFINITY="table" 或者 分区表属性 AFFINITY="partition" 。
+
+    通过hint NO_INDEX_LOOKUP_PUSHDOWN(t1_name) 明确提示优化器不要将对应表的索引查询下推到TiKV执行。
+
+    更多信息，请参考[optimizer-hints.md](https://docs.pingcap.com/zh/tidb/stable/optimizer-hints/)。
+
+* 表级和分区级亲和性属性 AFFINITY [#9764](https://github.com/tikv/pd/issues/9764) @[lhy1024](https://github.com/lhy1024) **tw@qiancai** <!--2317-->
+
+    为表或者分区表新增亲和性属性，设置亲和性属性后，PD会将表或分区的Region归为相同的一个亲和性分组中，这些Region的Leader、Voter 会被优先调度到指定TiKV Store上。有AFFNITY属性的表和分区在查询时，由于索引、表数据的Region都在一个TiKV Store上，因此优化器可结合 hint INDEX_LOOKUP_PUSHDOWN 指定将对应索引查询下推，减少跨节点分散查询带来的延迟，根据测试数据对比性能可约提升20%。
+
+    更多信息，请参考[table-affinity.md](table-affinity.md)。
+
+* Point-in-time recovery (PITR) supports recovery from compacted log backups for faster restores [#56522](https://github.com/pingcap/tidb/issues/56522) @[YuJuncen](https://github.com/YuJuncen) **tw@lilin90** <!--2001-->
 
     Starting from v8.5.5, the log backup compaction feature provides offline compaction capabilities, converting unstructured log backup data into structured SST files. This results in the following improvements:
 
@@ -39,23 +71,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     For more information, see [Documentation](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema).
 
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
-
-    For more information, see [Documentation](link).
-
 ### Reliability
 
 * Improved store scheduling in presence of network jitter [#9359](https://github.com/tikv/pd/issues/9359) @[okJiang](https://github.com/okJiang) **tw@qiancai** <!--2260-->
 
     Provides a network status feedback mechanism to PD to avoid re-scheduling the leaders back to a problematic node (experiencing network jitter) after the leaders had been transferred off the node by TiKV raft mechanism. If the network continues to jitter, PD will actively evict leader from jittering node.
-
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
-
-    For more information, see [Documentation](link).
 
 ### Availability
 
@@ -65,21 +85,21 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     For more information, see [Documentation](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_cb_pd_metadata_error_rate_threshold_ratio-new-in-v855).
 
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
-
-    For more information, see [Documentation](link).
-
 ### SQL
 
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
+* 支持在线修改分布式 ADD Index 任务的并发和吞吐 [#62120](https://github.com/pingcap/tidb/pull/62120) @[joechenrh](https://github.com/joechenrh) **tw@qiancai** <!--2326-->
 
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+   在 v8.5.5 版本之前，当集群开启了分布式执行框架 [tidb_enable_dist_task](/system-variables/#tidb_enable_dist_task-从-v710-版本开始引入) ，在 ADD Index 任务执行期间，是无法修改该任务的 `THREAD`， `BATCH_SIZE`，`MAX_WRITE_SPEED`  参数。需要取消该 DDL 任务，重新设置参数后再提交，效率较低。支持该功能后，用户可以根据业务负载和对 ADD Index 的性能要求，在线灵活调整这些参数。
 
-    For more information, see [Documentation](link).
+    更多信息，请参考[ADMIN ALTER DDL JOBS](/sql-statement-admin-alter-ddl/#admin-alter-ddl-jobs)。
 
 ### DB operations
+
+* TiKV 支持优雅关闭 (graceful shutdown) [#17221](https://github.com/tikv/tikv/issues/17221) @[hujiatao0](https://github.com/hujiatao0) **tw@qiancai** <!--2297-->
+
+    在关闭 TiKV 服务器时，TiKV 会尽量将其上的 leader 副本转移到其他 TiKV 节点，然后再关闭。该等待期默认为 20 秒，可通过 [`server.graceful-shutdown-timeout`](https://docs.pingcap.com/zh/tidb/v8.5/tikv-configuration-file#graceful-shutdown-timeout-从-v855-版本开始引入) 配置项进行调整。若达到该超时时间后仍有 leader 未完成转移，TiKV 将跳过剩余 leader 的转移，直接进入关闭流程。
+
+    更多信息，请参考[用户文档](https://docs.pingcap.com/zh/tidb/v8.5/tikv-configuration-file#graceful-shutdown-timeout-从-v855-版本开始引入)。
 
 * Improve the compatibility between ongoing log backup and snapshot restore [#58685](https://github.com/pingcap/tidb/issues/58685) @[BornChanger](https://github.com/BornChanger) **tw@lilin90** <!--2000-->
 
@@ -93,12 +113,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     For more information, see [documentation](/br/br-pitr-manual.md#restore-data-using-filters).
 
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
-
-    For more information, see [Documentation](link).
-
 ### Observability
 
 * Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
@@ -109,23 +123,21 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Security
 
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
+* Enable Azure Managed Identity (MI) authentication for Backup & Restore (BR) to Azure Blob Storage. **tw@qiancai** <!--2308-->
 
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+    Starting from v8.5.5, TiDB Backup & Restore supports Azure Managed Identity (MI) for authenticating to Azure Blob Storage, eliminating the need for static SAS tokens. This enables secure, keyless, and ephemeral authentication aligned with Azure best practices.
 
-    For more information, see [Documentation](link).
+    With this feature, BR and the embedded BR worker in TiKV can acquire access tokens directly from Azure Instance Metadata Service (IMDS), reducing credential leakage risk and simplifying credential rotation for self-managed and cloud deployments on Azure.
 
-### Data migration
-
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+    This enhancement is particularly useful for enterprise customers running TiDB on Azure Kubernetes Service (AKS) or other Azure environments that require strict security controls for backup and restore workflows.
 
     For more information, see [Documentation](link).
 
 ## Compatibility changes
 
 ### Behavior changes
+
+* When using [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) with [Global Sort](/tidb-global-sort.md) enabled, primary key or unique index conflicts are now automatically resolved by removing all conflicting rows (none of the conflicting rows are preserved), instead of causing the task to fail. The number of conflicted rows appears in the `Result_Message` column of `SHOW IMPORT JOBS` output, and detailed conflict information is stored in cloud storage. For more information, see [`IMPORT INTO` conflict resolution](/sql-statements/sql-statement-import-into.md#conflict-resolution).
 
 ### MySQL compatibility
 
