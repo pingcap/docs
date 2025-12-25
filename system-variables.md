@@ -1012,7 +1012,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Unit: Bytes
 - This variable is used to control the threshold at which the TiDB server prefers to send read requests to a replica in the same availability zone as the TiDB server when [`tidb_replica_read`](#tidb_replica_read-new-in-v40) is set to `closest-adaptive`. If the estimated result is higher than or equal to this threshold, TiDB prefers to send read requests to a replica in the same availability zone. Otherwise, TiDB sends read requests to the leader replica.
 
-### tidb_advancer_check_point_lag_limit <span class="version-mark">New in v8.5.5 and v9.0.0</span>
+### tidb_advancer_check_point_lag_limit <span class="version-mark">New in v8.5.5</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
