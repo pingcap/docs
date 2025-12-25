@@ -69,7 +69,7 @@ Cross-major-version checkpoint recovery is not recommended. For clusters where `
 
 > **Note:**
 >
-> Starting from v9.0.0, BR stores checkpoint data in the downstream cluster by default. You can specify an external storage for checkpoint data using the `--checkpoint-storage` parameter.
+> Starting from v8.5.5, BR stores checkpoint data in the downstream cluster by default. You can specify an external storage for checkpoint data using the `--checkpoint-storage` parameter.
 
 Checkpoint restore operations are divided into two parts: snapshot restore and PITR restore.
 
@@ -95,7 +95,7 @@ Before entering the log restore phase during the initial restore, `br` construct
 
 > **Note:**
 >
-> Starting from v9.0.0, BR stores checkpoint data in the downstream cluster by default. You can specify an external storage for checkpoint data using the `--checkpoint-storage` parameter. For example:
+> Starting from v8.5.5, BR stores checkpoint data in the downstream cluster by default. You can specify an external storage for checkpoint data using the `--checkpoint-storage` parameter. For example:
 >
 > ```shell
 > ./br restore full -s "s3://backup-bucket/backup-prefix" --checkpoint-storage "s3://temp-bucket/checkpoints"
