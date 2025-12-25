@@ -140,7 +140,7 @@ Checkpoint restore operations are divided into two parts: snapshot restore and P
 
 ### Snapshot restore
 
-During the initial restore, `br` creates a `restore-{downstream-cluster-ID}/snapshot` path in the target cluster. The path records checkpoint data, the upstream cluster ID, and the BackupTS of the backup data.
+During the initial restore, `br` creates a `restore-{downstream-cluster-ID}/snapshot` path in the specified external storage. In this path, `br` records checkpoint data, the upstream cluster ID, and the BackupTS of the backup data.
 
 If the restore fails, you can retry it using the same command. `br` will automatically read the checkpoint information from the specified external storage path and resume from the last restore point.
 
