@@ -278,7 +278,8 @@ ticloud serverless private-link-connection detach-domains -c <cluster-id> --priv
 
 ## See Also
 
-- [Set up a private link connection to AWS RDS](/tidbcloud/serverless-private-link-connection-to-aws-rds.md)
-- [Set up a private link connection to Alibaba Cloud RDS](/tidbcloud/serverless-private-link-connection-to-alicloud-rds.md)
-- [Set up a private link connection to AWS Confluent](/tidbcloud/serverless-private-link-connection-to-aws-confluent.md)
-- [Set up a private link connection to self-hosted Kafka cluster in AWS](/tidbcloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
+- [ Connect to Amazon RDS via a Private Link Connection](/tidbcloud/serverless-private-link-connection-to-aws-rds.md)
+- [Connect to Alibaba Cloud ApsaraDB RDS for MySQL via a Private Link Connection ](/tidbcloud/serverless-private-link-connection-to-alicloud-rds.md)
+- [ Connect to Confluent Cloud via a Private Link Connection](/tidbcloud/serverless-private-link-connection-to-aws-confluent.md)
+- [Connect to AWS Self-Hosted Kafka via Private Link Connection](/tidbcloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
+- [Connect to Alibaba Cloud Self-Hosted Kafka via a Private Link Connection](/tidbcloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
