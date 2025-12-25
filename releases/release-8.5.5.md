@@ -41,13 +41,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     更多信息，请参考[用户文档](链接)。
 
-* 提示索引下推到TiKV提升查询性能 [#62575](https://github.com/pingcap/tidb/issues/62575) @[lcwangchao](https://github.com/lcwangchao) **tw@Oreoxmt** <!--1899-->
+* Support pushing index lookups down to TiKV to improve query performance [#62575](https://github.com/pingcap/tidb/issues/62575) @[lcwangchao](https://github.com/lcwangchao)
 
-    通过hint INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...]) 提示优化器将指定索引查询下推到TiKV，减少远程调用的次数，经过测试数据对比显示性能可提升约20%左右，最优可提升到40%。本特性一般建议结合表 affinity 属性使用，即表属性 AFFINITY="table" 或者 分区表属性 AFFINITY="partition" 。
+    Starting from v8.5.5, TiDB supports using optimizer hints to push the `IndexLookUp` operator down to TiKV nodes. This reduces the number of remote procedure calls (RPCs) and can improve query performance. The actual performance improvement varies depending on the specific workload and requires testing for verification.
 
-    通过hint NO_INDEX_LOOKUP_PUSHDOWN(t1_name) 明确提示优化器不要将对应表的索引查询下推到TiKV执行。
+    You can use the [`INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...])`](https://docs.pingcap.com/tidb/stable/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855) hint to explicitly instruct the optimizer to push index lookups down to TiKV for a specific table. It is recommended to combine this hint with the table's AFFINITY attribute. For example, set `AFFINITY="table"` for regular tables and `AFFINITY="partition"` for partitioned tables.
 
-    更多信息，请参考[optimizer-hints.md](https://docs.pingcap.com/zh/tidb/stable/optimizer-hints/)。
+    To disable index lookup pushdown to TiKV for a specific table, use the [`NO_INDEX_LOOKUP_PUSHDOWN(t1_name)`](https://docs.pingcap.com/tidb/stable/optimizer-hints#no_index_lookup_pushdownt1_name--new-in-v855) hint.
+
+    For more information, see [documentation](https://docs.pingcap.com/tidb/stable/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855).
 
 * 表级和分区级亲和性属性 AFFINITY [#9764](https://github.com/tikv/pd/issues/9764) @[lhy1024](https://github.com/lhy1024) **tw@qiancai** <!--2317-->
 
