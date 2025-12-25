@@ -93,6 +93,17 @@ CREATE TABLE `uuid_demo_2` (
 )
 ```
 
+### Generated UUID as default
+
+An expression default can be used to generate a UUID for a primary key. Replace `UUID()` with `UUID_V4()` or `UUID_V7()` to use a UUIDv4 or UUIDv7 instead of a UUIDv1 if needed.
+
+```sql
+CREATE TABLE `uuid_demo_3` (
+  `uuid` BINARY(16) DEFAULT (UUID_TO_BIN(UUID())),
+  PRIMARY KEY (`uuid`)
+)
+```
+
 ## MySQL compatibility
 
 UUIDs can be used in MySQL as well. The `BIN_TO_UUID()` and `UUID_TO_BIN()` functions were introduced in MySQL 8.0. The `UUID()` function is available in earlier MySQL versions as well.
