@@ -7,44 +7,12 @@ summary: This document explains how to create a changefeed to stream data from T
 
 This document describes how to create a changefeed to stream data from TiDB Cloud to Apache Kafka.
 
-<CustomContent plan="dedicated">
-
-> **Note:**
->
-> - To use the changefeed feature, make sure that your TiDB Cloud Dedicated cluster version is v6.1.3 or later.
-> - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) and [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) clusters, the changefeed feature is unavailable.
-
-</CustomContent>
-<CustomContent plan="premium">
-
-> **Note:**
->
-> For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) and [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) clusters, the changefeed feature is unavailable.
-
-</CustomContent>
-
 ## Restrictions
 
-- For each TiDB Cloud <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>, you can create up to 100 changefeeds.
+- For each TiDB Cloud cluster, you can create up to 10 changefeeds.
 - Currently, TiDB Cloud does not support uploading self-signed TLS certificates to connect to Kafka brokers.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
-
-<CustomContent plan="dedicated">
-
-- If you choose Private Link or Private Service Connect as the network connectivity method, ensure that your TiDB cluster version meets the following requirements:
-
-    - For v6.5.x: version v6.5.9 or later
-    - For v7.1.x: version v7.1.4 or later
-    - For v7.5.x: version v7.5.1 or later
-    - For v8.1.x: all versions of v8.1.x and later are supported
-- If you want to use Debezium as your data format, make sure the version of your TiDB cluster is v8.1.0 or later.
-- For the partition distribution of Kafka messages, note the following:
-
-    - If you want to distribute changelogs by primary key or index value to Kafka partition with a specified index name, make sure the version of your TiDB cluster is v7.5.0 or later.
-    - If you want to distribute changelogs by column value to Kafka partition, make sure the version of your TiDB cluster is v7.5.0 or later.
-
-</CustomContent>
 
 ## Prerequisites
 
@@ -55,7 +23,7 @@ Before creating a changefeed to stream data to Apache Kafka, you need to complet
 
 ### Network
 
-Ensure that your TiDB <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent> can connect to the Apache Kafka service. You can choose one of the following connection methods:
+Ensure that your TiDB Cloud cluster can connect to the Apache Kafka service. You can choose one of the following connection methods:
 
 - Private Connect: ideal for avoiding VPC CIDR conflicts and meeting security compliance, but incurs additional [Private Data Link Cost](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost).
 - VPC Peering: suitable as a cost-effective option, but requires managing potential VPC CIDR conflicts and security considerations.
