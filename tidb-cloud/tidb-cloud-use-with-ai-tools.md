@@ -7,7 +7,7 @@ summary: Learn how to connect your {{{ .starter }}} cluster to AI-powered develo
 
 This document describes how to connect your {{{ .starter }}} cluster to AI-powered development tools that support the Model Context Protocol (MCP), such as Cursor, Claude Code, Visual Studio Code (VS Code), and Windsurf.
 
-By configuring your TiDB cluster as an MCP server, you can enable AI assistants in your development tools to query your database schema, understand your data model, and generate context-aware code suggestions.
+By configuring your {{{ .starter }}} cluster as an MCP server, you can enable AI assistants in your development tools to query your database schema, understand your data model, and generate context-aware code suggestions.
 
 ## Before you begin
 
@@ -27,7 +27,7 @@ To complete this guide, you need the following:
 
 After you create a {{{ .starter }}} cluster in TiDB Cloud, perform the following steps to connect it to your AI tool.
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your target cluster to go to its overview page. Then, click **Use with AI Tools** at the top of the page.
+1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your target cluster to go to its overview page. Then, click **Use with AI Tools** in the upper-right corner.
 2. In the **Access `your_cluster_name` with AI tools** dialog, select the **Branch** and **Database** that you want the AI tool to access.
 3. Verify that you meet all the **Prerequisites** listed. If not, follow the on-screen instructions to install the required dependencies.
 4. Configure the password:
@@ -52,7 +52,7 @@ After you create a {{{ .starter }}} cluster in TiDB Cloud, perform the following
 
 To configure Cursor as an MCP client for TiDB, you can use one of the following methods:
 
-- **Method 1**: in the TiDB Cloud console, click **Add to Cursor** to launch Cursor, and then click **Install**.
+- **Method 1**: in the **Access `your_cluster_name` with AI tools** dialog of the [TiDB Cloud console](https://tidbcloud.com), click **Add to Cursor** to launch Cursor, and then click **Install**.
 - **Method 2**: manually add the following configuration to your `.cursor/mcp.json` file:
 
     ```json
@@ -76,7 +76,7 @@ To configure Cursor as an MCP client for TiDB, you can use one of the following 
 
 To configure Claude Code as an MCP client for TiDB, you can use one of the following methods:
 
-- **Method 1**: copy the setup command from the TiDB Cloud console and run it in your terminal:
+- **Method 1**: copy the setup command from the **Access `your_cluster_name` with AI tools** dialog of the [TiDB Cloud console](https://tidbcloud.com/), and then run it in your terminal:
 
     ```bash
     claude mcp add --transport stdio TiDB \
@@ -113,7 +113,7 @@ To configure Claude Code as an MCP client for TiDB, you can use one of the follo
 
 To configure VS Code as an MCP client for TiDB, you can use one of the following methods:
 
-- **Method 1**: click **Add to VS Code** to launch VS Code, and then click **Install**.
+- **Method 1**: in the **Access `your_cluster_name` with AI tools** dialog of the [TiDB Cloud console](https://tidbcloud.com/), click **Add to VS Code** to launch VS Code, and then click **Install**.
 - **Method 2**: add the following configuration to your `.vscode/mcp.json` file:
 
     ```json
