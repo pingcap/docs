@@ -201,7 +201,6 @@ To restore backups from cloud storage, do the following:
 >
 > To create an access key for your storage bucket, see [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key) and [Configure Alibaba Cloud Object Storage Service (OSS) access](#configure-alibaba-cloud-object-storage-service-oss-access).
 
-
 3. Click **Verify Backup and Next**.
 
 4. If the verification is successful, the **Restore to a New Instance** page appears. Review the backup information displayed at the top of the page, and then follow the steps in [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md) to restore the backup to a new instance.
@@ -231,7 +230,7 @@ Take the following steps to configure an access key:
     Create a policy and attach it to the IAM user. Ensure the policy includes the required permissions based on your task:
     - **To restore data** to a TiDB Cloud instance, grant `s3:GetObject`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions.
 
-    The following is an example policy that allows TiDB Cloud to **restore** data from a specific folder in your S3 bucket. 
+    The following is an example policy that allows TiDB Cloud to **restore** data from a specific folder in your S3 bucket.
 
     ```json
     {
@@ -253,7 +252,7 @@ Take the following steps to configure an access key:
                         "s3:prefix": "<Your backup folder>/*"
                     }
                 }
-                },
+                }
             {
                 "Sid": "AllowReadObjectsInPrefix",
                 "Effect": "Allow",
@@ -272,7 +271,7 @@ Take the following steps to configure an access key:
 >
 > TiDB Cloud does not store your access keys. It is recommended that you [delete the access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) after the import or export is complete.
 
-### Configure Alibaba Cloud Object Storage Service (OSS) access 
+### Configure Alibaba Cloud Object Storage Service (OSS) access
 
 To allow TiDB Cloud to access your Alibaba Cloud OSS bucket, you need to create an AccessKey pair for the bucket.
 
