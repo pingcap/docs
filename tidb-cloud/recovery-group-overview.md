@@ -25,7 +25,7 @@ A recovery group consists of a set of replicated databases that can be failed ov
 
 - Currently, only TiDB Cloud Dedicated clusters hosted on AWS support recovery groups.
 - Recovery groups are established between two clusters.
-- Bi-directional replication of a database is not supported with recovery groups.
+- Bidirectional replication of a database is not supported with recovery groups.
 
 > **Warning**
 >

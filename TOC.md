@@ -192,7 +192,9 @@
     - [Integrate with Confluent and Snowflake](/ticdc/integrate-confluent-using-ticdc.md)
     - [Integrate with Apache Kafka and Apache Flink](/replicate-data-to-kafka.md)
   - Reference
-    - [TiCDC Architecture](/ticdc/ticdc-architecture.md)
+    - TiCDC Architecture
+      - [TiCDC New Architecture](/ticdc/ticdc-architecture.md)
+      - [TiCDC Classic Architecture](/ticdc/ticdc-classic-architecture.md)
     - [TiCDC Data Replication Capabilities](/ticdc/ticdc-data-replication-capabilities.md)
     - [TiCDC Server Configurations](/ticdc/ticdc-server-config.md)
     - [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md)
@@ -436,6 +438,7 @@
   - [Use TiDB](/best-practices/tidb-best-practices.md)
   - [Manage DDL](/ddl-introduction.md)
   - [Optimize Multi-Column Indexes](/best-practices/multi-column-index-best-practices.md)
+  - [Manage Indexes and Identify Unused Indexes](/best-practices/index-management-best-practices.md)
   - [Handle Millions of Tables in SaaS Multi-Tenant Scenarios](/best-practices/saas-best-practices.md)
   - [Use UUIDs as Primary Keys](/best-practices/uuid.md)
   - [Develop Java Applications](/best-practices/java-app-best-practices.md)
@@ -556,7 +559,7 @@
       - [Use TiUP (Recommended)](/dm/deploy-a-dm-cluster-using-tiup.md)
       - [Use TiUP Offline](/dm/deploy-a-dm-cluster-using-tiup-offline.md)
       - [Use Binary](/dm/deploy-a-dm-cluster-using-binary.md)
-      - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/dev/deploy-tidb-dm)
+      - [Use Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/deploy-tidb-dm)
     - Tutorials
       - [Create a Data Source](/dm/quick-start-create-source.md)
       - [Manage Data Sources](/dm/dm-manage-source.md)
@@ -811,6 +814,7 @@
       - [`BATCH`](/sql-statements/sql-statement-batch.md)
       - [`BEGIN`](/sql-statements/sql-statement-begin.md)
       - [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)
+      - [`CANCEL DISTRIBUTION JOB`](/sql-statements/sql-statement-cancel-distribution-job.md)
       - [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
       - [`CANCEL TRAFFIC JOBS`](/sql-statements/sql-statement-cancel-traffic-jobs.md)
       - [`COMMIT`](/sql-statements/sql-statement-commit.md)
@@ -829,6 +833,7 @@
       - [`DELETE`](/sql-statements/sql-statement-delete.md)
       - [`DESC`](/sql-statements/sql-statement-desc.md)
       - [`DESCRIBE`](/sql-statements/sql-statement-describe.md)
+      - [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md)
       - [`DO`](/sql-statements/sql-statement-do.md)
       - [`DROP BINDING`](/sql-statements/sql-statement-drop-binding.md)
       - [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md)
@@ -893,6 +898,7 @@
       - [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)
       - [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)
       - [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)
+      - [`SHOW DISTRIBUTION JOBS`](/sql-statements/sql-statement-show-distribution-jobs.md)
       - [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)
       - [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md)
       - [`SHOW FIELDS FROM`](/sql-statements/sql-statement-show-fields-from.md)
@@ -915,6 +921,7 @@
       - [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)
       - [`SHOW STATS_TOPN`](/sql-statements/sql-statement-show-stats-topn.md)
       - [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)
+      - [`SHOW TABLE DISTRIBUTION`](/sql-statements/sql-statement-show-table-distribution.md)
       - [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md)
       - [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)
       - [`SHOW TABLE STATUS`](/sql-statements/sql-statement-show-table-status.md)
@@ -977,6 +984,7 @@
       - [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)      
       - [Comparisons between Functions and Syntax of Oracle and TiDB](/oracle-functions-to-tidb.md)
     - [Clustered Indexes](/clustered-indexes.md)
+    - [Global Indexes](/global-indexes.md)
     - [Vector Index](/vector-search/vector-search-index.md)
     - [Constraints](/constraints.md)
     - [Generated Columns](/generated-columns.md)
@@ -997,6 +1005,7 @@
     - Character Set and Collation
       - [Overview](/character-set-and-collation.md)
       - [GBK](/character-set-gbk.md)
+      - [GB18030](/character-set-gb18030.md)
     - [Placement Rules in SQL](/placement-rules-in-sql.md)
     - System Tables
       - `mysql` Schema
@@ -1054,6 +1063,7 @@
         - [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)
         - [`TIDB_SERVERS_INFO`](/information-schema/information-schema-tidb-servers-info.md)
         - [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
+        - [`TIFLASH_INDEXES`](/information-schema/information-schema-tiflash-indexes.md)
         - [`TIFLASH_REPLICA`](/information-schema/information-schema-tiflash-replica.md)
         - [`TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md)
         - [`TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)
@@ -1080,6 +1090,8 @@
   - [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
   - [TiDB Workload Repository](/workload-repository.md)
+  - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/online-workloads-and-add-index-operations.md)
+  - [`ANALYZE` Embedded in DDL Statements](/ddl_embedded_analyze.md)
 - FAQs
   - [FAQ Summary](/faq/faq-overview.md)
   - [TiDB FAQs](/faq/tidb-faq.md)
@@ -1099,6 +1111,7 @@
   - [Release Support Policy](https://www.pingcap.com/tidb-release-support-policy/)
   - [TiDB Installation Packages](/binary-package.md)
   - v8.5
+    - [8.5.4](/releases/release-8.5.4.md)
     - [8.5.3](/releases/release-8.5.3.md)
     - [8.5.2](/releases/release-8.5.2.md)
     - [8.5.1](/releases/release-8.5.1.md)
@@ -1118,6 +1131,7 @@
   - v7.6
     - [7.6.0-DMR](/releases/release-7.6.0.md)
   - v7.5
+    - [7.5.7](/releases/release-7.5.7.md)
     - [7.5.6](/releases/release-7.5.6.md)
     - [7.5.5](/releases/release-7.5.5.md)
     - [7.5.4](/releases/release-7.5.4.md)

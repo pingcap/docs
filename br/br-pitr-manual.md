@@ -409,7 +409,8 @@ Expected output:
 
 > **Note:**
 >
-> If you specify `--full-backup-storage` as the incremental backup address for `restore point`, for restores of this backup and any previous incremental backups, you need to set the parameter `--allow-pitr-from-incremental` to `true` to make the incremental backups compatible with the subsequent log backups.
+> - If you specify `--full-backup-storage` as the incremental backup address for `restore point`, for restores of this backup and any previous incremental backups, you need to set the parameter `--allow-pitr-from-incremental` to `true` to make the incremental backups compatible with the subsequent log backups.
+> - For information about checksum configuration, see [Checksum](/br/br-snapshot-manual.md#checksum).
 
 You can run the `tiup br restore point` command to perform a PITR on a new cluster or just restore the log backup data.
 
@@ -425,6 +426,9 @@ Usage:
 Flags:
   --full-backup-storage string specify the backup full storage. fill it if want restore full backup before restore log.
   -h, --help                   help for point
+  --pitr-batch-count uint32    specify the batch count to restore log. (default 8)
+  --pitr-batch-size uint32     specify the batch size to restore log. (default 16777216)
+  --pitr-concurrency uint32    specify the concurrency to restore log. (default 16)
   --restored-ts string         the point of restore, used for log restore. support TSO or datetime, e.g. '400036290571534337' or '2018-05-11 01:42:23+0800'
   --start-ts string            the start timestamp which log restore from. support TSO or datetime, e.g. '400036290571534337' or '2018-05-11 01:42:23+0800'
 
@@ -440,6 +444,9 @@ Global Flags:
 The example output only shows the common parameters. These parameters are described as follows:
 
 - `--full-backup-storage`: the storage address for the snapshot (full) backup. To use PITR, specify this parameter and choose the latest snapshot backup before the restore timestamp. To restore only log backup data, you can omit this parameter. Note that when initializing the recovery cluster for the first time, you must specify a snapshot backup. Currently, BR supports Amazon S3, GCS, and Azure Blob Storage as the storage for log backup. For details, see [URI Formats of External Storage Services](/external-storage-uri.md).
+- `--pitr-batch-count`: the maximum number of files in a single batch when restoring log data. Once this threshold is reached, the current batch ends immediately and the next batch starts.
+- `--pitr-batch-size`: the maximum data size (in bytes) in a single batch when restoring log data. Once this threshold is reached, the current batch ends immediately and the next batch starts.
+- `--pitr-concurrency`: the number of concurrent tasks during log restore. Each concurrent task restores one batch of log data at a time.
 - `--restored-ts`: the timestamp that you want to restore data to. If this parameter is not specified, BR restores data to the latest timestamp available in the log backup, that is, the checkpoint of the backup data.
 - `--start-ts`: the start timestamp that you want to restore log backup data from. If you only need to restore log backup data, you must specify this parameter.
 - `--pd`: the PD address of the restore cluster.
@@ -542,6 +549,11 @@ tiup br restore point --pd="${PD_IP}:2379" \
 > - The filter options apply during the restore phase for both snapshot and log backups.
 > - You can specify multiple `--filter` options to include or exclude different patterns.
 > - PITR filtering does not support system tables yet. If you need to restore specific system tables, use the `br restore full` command with filters instead. Note that this command restores only the snapshot backup data (not log backup data).
+> - The regular expression in the restore task matches the table name at the `restored-ts` time point, with the following three possible cases:
+>     - Table A (table id = 1): the table name always matches the `--filter` regular expression at and before the `restored-ts` time point. In this case, PITR restores the table.
+>     - Table B (table id = 2): the table name does not match the `--filter` regular expression at some point before `restored-ts`, but matches at the `restored-ts` time point. In this case, PITR restores the table.
+>     - Table C (table id = 3): the table name matches the `--filter` regular expression at some point before `restored-ts`, but does **not** match at the `restored-ts` time point. In this case, PITR does **not** restore the table.
+> - You can use the database and table filtering feature to restore part of the data online. During the online restore process, do **not** create databases or tables with the same names as the restored objects, otherwise the restore task fails due to conflicts. To avoid data inconsistency, the tables created by PITR during this restore process are not readable or writable until the restore task is complete.
 
 ### Concurrent restore operations
 
@@ -569,7 +581,8 @@ tiup br restore point --pd="${PD_IP}:2379" \
 
 > **Note:**
 >
-> Each concurrent restore operation must target a different database or a non-overlapping set of tables. Attempting to restore overlapping datasets concurrently will result in an error.
+> - Each concurrent restore operation must target a different database or a non-overlapping set of tables. Attempting to restore overlapping datasets concurrently will result in an error.
+> - Multiple restore tasks consume a lot of system resources. It is recommended to run concurrent restore tasks only when CPU and I/O resources are sufficient.
 
 ### Compatibility between ongoing log backup and snapshot restore
 

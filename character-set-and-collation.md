@@ -1,6 +1,6 @@
 ---
 title: Character Set and Collation
-summary: Learn about the supported character sets and collations in TiDB.
+summary: Learn character sets and collations supported by TiDB.
 aliases: ['/docs/dev/character-set-and-collation/','/docs/dev/reference/sql/characterset-and-collation/','/docs/dev/reference/sql/character-set/']
 ---
 
@@ -38,7 +38,7 @@ SELECT 'A' = 'a';
 SET NAMES utf8mb4 COLLATE utf8mb4_general_ci;
 ```
 
-```sql
+```
 Query OK, 0 rows affected (0.00 sec)
 ```
 
@@ -46,7 +46,7 @@ Query OK, 0 rows affected (0.00 sec)
 SELECT 'A' = 'a';
 ```
 
-```sql
+```
 +-----------+
 | 'A' = 'a' |
 +-----------+
@@ -98,18 +98,19 @@ Currently, TiDB supports the following character sets:
 SHOW CHARACTER SET;
 ```
 
-```sql
-+---------+-------------------------------------+-------------------+--------+
-| Charset | Description                         | Default collation | Maxlen |
-+---------+-------------------------------------+-------------------+--------+
-| ascii   | US ASCII                            | ascii_bin         |      1 |
-| binary  | binary                              | binary            |      1 |
-| gbk     | Chinese Internal Code Specification | gbk_chinese_ci    |      2 |
-| latin1  | Latin1                              | latin1_bin        |      1 |
-| utf8    | UTF-8 Unicode                       | utf8_bin          |      3 |
-| utf8mb4 | UTF-8 Unicode                       | utf8mb4_bin       |      4 |
-+---------+-------------------------------------+-------------------+--------+
-6 rows in set (0.00 sec)
+```
++---------+-------------------------------------+--------------------+--------+
+| Charset | Description                         | Default collation  | Maxlen |
++---------+-------------------------------------+--------------------+--------+
+| ascii   | US ASCII                            | ascii_bin          |      1 |
+| binary  | binary                              | binary             |      1 |
+| gb18030 | China National Standard GB18030     | gb18030_chinese_ci |      4 |
+| gbk     | Chinese Internal Code Specification | gbk_chinese_ci     |      2 |
+| latin1  | Latin1                              | latin1_bin         |      1 |
+| utf8    | UTF-8 Unicode                       | utf8_bin           |      3 |
+| utf8mb4 | UTF-8 Unicode                       | utf8mb4_bin        |      4 |
++---------+-------------------------------------+--------------------+--------+
+7 rows in set (0.000 sec)
 ```
 
 TiDB supports the following collations:
@@ -118,12 +119,14 @@ TiDB supports the following collations:
 SHOW COLLATION;
 ```
 
-```sql
+```
 +--------------------+---------+-----+---------+----------+---------+---------------+
 | Collation          | Charset | Id  | Default | Compiled | Sortlen | Pad_attribute |
 +--------------------+---------+-----+---------+----------+---------+---------------+
 | ascii_bin          | ascii   |  65 | Yes     | Yes      |       1 | PAD SPACE     |
 | binary             | binary  |  63 | Yes     | Yes      |       1 | NO PAD        |
+| gb18030_bin        | gb18030 | 249 |         | Yes      |       1 | PAD SPACE     |
+| gb18030_chinese_ci | gb18030 | 248 | Yes     | Yes      |       1 | PAD SPACE     |
 | gbk_bin            | gbk     |  87 |         | Yes      |       1 | PAD SPACE     |
 | gbk_chinese_ci     | gbk     |  28 | Yes     | Yes      |       1 | PAD SPACE     |
 | latin1_bin         | latin1  |  47 | Yes     | Yes      |       1 | PAD SPACE     |
@@ -136,7 +139,7 @@ SHOW COLLATION;
 | utf8mb4_general_ci | utf8mb4 |  45 |         | Yes      |       1 | PAD SPACE     |
 | utf8mb4_unicode_ci | utf8mb4 | 224 |         | Yes      |       8 | PAD SPACE     |
 +--------------------+---------+-----+---------+----------+---------+---------------+
-13 rows in set (0.00 sec)
+15 rows in set (0.000 sec)
 ```
 
 > **Warning:**
@@ -158,7 +161,7 @@ You can use the following statement to view the collations (under the [new frame
 SHOW COLLATION WHERE Charset = 'utf8mb4';
 ```
 
-```sql
+```
 +--------------------+---------+-----+---------+----------+---------+---------------+
 | Collation          | Charset | Id  | Default | Compiled | Sortlen | Pad_attribute |
 +--------------------+---------+-----+---------+----------+---------+---------------+
@@ -171,7 +174,7 @@ SHOW COLLATION WHERE Charset = 'utf8mb4';
 5 rows in set (0.001 sec)
 ```
 
-For details about the TiDB support of the GBK character set, see [GBK](/character-set-gbk.md).
+For details about the GBK character set, see [The GBK Character Set](/character-set-gbk.md). For details about the GB18030 character set, see [The GB18030 Character Set](/character-set-gb18030.md).
 
 ## `utf8` and `utf8mb4` in TiDB
 
@@ -282,7 +285,7 @@ Database changed
 SELECT @@character_set_database, @@collation_database;
 ```
 
-```sql
+```
 +--------------------------|----------------------+
 | @@character_set_database | @@collation_database |
 +--------------------------|----------------------+
@@ -295,7 +298,7 @@ SELECT @@character_set_database, @@collation_database;
 CREATE SCHEMA test2 CHARACTER SET latin1 COLLATE latin1_bin;
 ```
 
-```sql
+```
 Query OK, 0 rows affected (0.09 sec)
 ```
 
@@ -311,7 +314,7 @@ Database changed
 SELECT @@character_set_database, @@collation_database;
 ```
 
-```sql
+```
 +--------------------------|----------------------+
 | @@character_set_database | @@collation_database |
 +--------------------------|----------------------+
@@ -347,7 +350,7 @@ For example:
 CREATE TABLE t1(a int) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ```
 
-```sql
+```
 Query OK, 0 rows affected (0.08 sec)
 ```
 
@@ -379,7 +382,7 @@ Each string corresponds to a character set and a collation. When you use a strin
 
 Example:
 
-```sql
+```
 SELECT 'string';
 SELECT _utf8mb4'string';
 SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
@@ -518,7 +521,7 @@ For a TiDB cluster that is already initialized, you can check whether the new co
 SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME='new_collation_enabled';
 ```
 
-```sql
+```
 +----------------+
 | VARIABLE_VALUE |
 +----------------+
@@ -535,15 +538,15 @@ This new framework supports semantically parsing collations. TiDB enables the ne
 
 </CustomContent>
 
-Under the new framework, TiDB supports the `utf8_general_ci`, `utf8mb4_general_ci`, `utf8_unicode_ci`, `utf8mb4_unicode_ci`, `utf8mb4_0900_bin`, `utf8mb4_0900_ai_ci`, `gbk_chinese_ci`, and `gbk_bin` collations, which is compatible with MySQL.
+Under the new framework, TiDB supports the `utf8_general_ci`, `utf8mb4_general_ci`, `utf8_unicode_ci`, `utf8mb4_unicode_ci`, `utf8mb4_0900_bin`, `utf8mb4_0900_ai_ci`, `gbk_chinese_ci`, `gbk_bin`, `gb18030_chinese_ci` and `gb18030_bin` collations, which is compatible with MySQL.
 
-When one of `utf8_general_ci`, `utf8mb4_general_ci`, `utf8_unicode_ci`, `utf8mb4_unicode_ci`, `utf8mb4_0900_ai_ci` and `gbk_chinese_ci` is used, the string comparison is case-insensitive and accent-insensitive. At the same time, TiDB also corrects the collation's `PADDING` behavior:
+When one of `utf8_general_ci`, `utf8mb4_general_ci`, `utf8_unicode_ci`, `utf8mb4_unicode_ci`, `utf8mb4_0900_ai_ci`, `gbk_chinese_ci` and `gb18030_chinese_ci` is used, the string comparison is case-insensitive and accent-insensitive. At the same time, TiDB also corrects the collation's `PADDING` behavior:
 
 ```sql
 CREATE TABLE t(a varchar(20) charset utf8mb4 collate utf8mb4_general_ci PRIMARY KEY);
 ```
 
-```sql
+```
 Query OK, 0 rows affected (0.00 sec)
 ```
 
@@ -551,7 +554,7 @@ Query OK, 0 rows affected (0.00 sec)
 INSERT INTO t VALUES ('A');
 ```
 
-```sql
+```
 Query OK, 1 row affected (0.00 sec)
 ```
 
@@ -559,7 +562,7 @@ Query OK, 1 row affected (0.00 sec)
 INSERT INTO t VALUES ('a');
 ```
 
-```sql
+```
 ERROR 1062 (23000): Duplicate entry 'a' for key 't.PRIMARY' -- TiDB is compatible with the case-insensitive collation of MySQL.
 ```
 
@@ -567,7 +570,7 @@ ERROR 1062 (23000): Duplicate entry 'a' for key 't.PRIMARY' -- TiDB is compatibl
 INSERT INTO t VALUES ('a ');
 ```
 
-```sql
+```
 ERROR 1062 (23000): Duplicate entry 'a ' for key 't.PRIMARY' -- TiDB modifies the `PADDING` behavior to be compatible with MySQL.
 ```
 
@@ -604,7 +607,7 @@ TiDB supports using the `COLLATE` clause to specify the collation of an expressi
 SELECT 'a' = _utf8mb4 'A' collate utf8mb4_general_ci;
 ```
 
-```sql
+```
 +-----------------------------------------------+
 | 'a' = _utf8mb4 'A' collate utf8mb4_general_ci |
 +-----------------------------------------------+

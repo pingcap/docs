@@ -1,182 +1,287 @@
 ---
-title: Architecture and Principles of TiCDC
-summary: Learn the architecture and working principles of TiCDC.
+title: TiCDC New Architecture
+summary: Introduces the features, architectural design, deployment guide, and notes of the TiCDC new architecture.
 ---
 
-# Architecture and Principles of TiCDC
+# TiCDC New Architecture
 
-## TiCDC architecture
+Starting from [TiCDC v8.5.4-release.1](https://github.com/pingcap/ticdc/releases/tag/v8.5.4-release.1), TiCDC introduces a new architecture that improves the performance, scalability, and stability of real-time data replication while reducing resource costs. 
 
-Consisting of multiple TiCDC nodes, a TiCDC cluster uses a distributed and stateless architecture. The design of TiCDC and its components is as follows:
+This new architecture redesigns TiCDC core components and optimizes its data processing workflows, while maintaining compatibility with the configuration, usage, and APIs of the [classic TiCDC architecture](/ticdc/ticdc-classic-architecture.md). It offers the following advantages:
 
-![TiCDC architecture](/media/ticdc/ticdc-architecture-1.jpg)
+- **Higher single-node performance**: a single node can replicate up to 500,000 tables, achieving replication throughput of up to 190 MiB/s on a single node in wide table scenarios.
+- **Enhanced scalability**: cluster replication capability scales almost linearly. A single cluster can expand to over 100 nodes, support more than 10,000 changefeeds, and replicate millions of tables within a single changefeed.
+- **Improved stability**: changefeed latency is reduced and performance is more stable in scenarios with high traffic, frequent DDL operations, and cluster scaling events. Resource isolation and priority scheduling reduce interference between multiple changefeed tasks.
+- **Lower resource costs**: with improved resource utilization and reduced redundancy, CPU and memory resource usage can decrease by up to 50% in typical scenarios.
 
-## TiCDC components
+## Architectural design
 
-In the preceding diagram, a TiCDC cluster consists of multiple nodes running TiCDC instances. Each TiCDC instance carries a Capture process. One of the Capture processes is elected as the owner Capture, which is responsible for scheduling workload, replicating DDL statements, and performing management tasks.
+![TiCDC New Architecture](/media/ticdc/ticdc-new-arch-1.png)
 
-Each Capture process contains one or multiple Processor threads for replicating data from tables in the upstream TiDB. Because table is the minimum unit of data replication in TiCDC, a Processor is composed of multiple table pipelines.
+The TiCDC new architecture consists of two core components: Log Service and Downstream Adapter.
 
-Each pipeline contains the following components: Puller, Sorter, Mounter, and Sink.
+- Log Service: as the core data service layer, Log Service fetches information such as row changes and DDL events from the upstream TiDB cluster, and then temporarily stores the change data on local disks. It also responds to data requests from the Downstream Adapter, periodically merging and sorting DML and DDL data and pushing the sorted data to the Downstream Adapter.
+- Downstream Adapter: as the downstream data replication adaptation layer, Downstream Adapter handles user-initiated changefeed operations. It schedules and generates related replication tasks, fetches data from the Log Service, and replicates the fetched data to downstream systems.
 
-![TiCDC architecture](/media/ticdc/ticdc-architecture-2.jpg)
+By separating the architecture into stateful and stateless components, the TiCDC new architecture significantly improves system scalability, reliability, and flexibility. Log Service, as the stateful component, focuses on data acquisition, sorting, and storage. Decoupling it from changefeed processing logic enables data sharing across multiple changefeeds, effectively improving resource utilization and reducing system overhead. Downstream Adapter, as the stateless component, uses a lightweight scheduling mechanism that allows quick migration of replication tasks between instances. It can dynamically adjust the splitting and merging of replication tasks based on workload changes, ensuring low-latency replication in various scenarios.
 
-These components work in serial with each other to complete the replication process, including pulling data, sorting data, loading data, and replicating data from the upstream to the downstream. The components are described as follows:
+## Comparison between the classic and new architectures
 
-- Puller: pulls DDL and row changes from TiKV nodes.
-- Sorter: sorts the changes received from TiKV nodes in ascending order of timestamps.
-- Mounter: converts the changes into a format that TiCDC sink can process based on the schema information.
-- Sink: replicates the changes to the downstream system.
+The new architecture is designed to address common issues during continuous system scaling, such as performance bottlenecks, insufficient stability, and limited scalability. Compared with the [classic architecture](/ticdc/ticdc-classic-architecture.md), the new architecture achieves significant optimizations in the following key dimensions:
 
-To realize high availability, each TiCDC cluster runs multiple TiCDC nodes. These nodes regularly report their status to the etcd cluster in PD, and elect one of the nodes as the owner of the TiCDC cluster. The owner node schedules data based on the status stored in etcd and writes the scheduling results to etcd. The Processor completes tasks according to the status in etcd. If the node running the Processor fails, the cluster schedules tables to other nodes. If the owner node fails, the Capture processes in other nodes will elect a new owner. See the following figure:
+| Feature | TiCDC classic architecture | TiCDC new architecture |
+| ------------------------ | ---------------------------------------- | ---------------------------------------- |
+| **Processing logic driver** | Timer-driven | Event-driven |
+| **Task triggering mechanism** | Timer-triggered main loop that checks tasks every 50 ms, with limited processing performance | Event-driven, triggered by events such as DML changes, DDL changes, and changefeed operations. Events in the queue are processed as quickly as possible without waiting for the fixed 50 ms interval, reducing additional latency |
+| **Task scheduling method** | Each changefeed runs a main loop that polls for tasks | Events are queued and processed concurrently by multiple threads |
+| **Task processing efficiency** | Each task goes through multiple cycles, creating performance bottlenecks | Events are processed immediately without waiting for fixed intervals, reducing latency |
+| **Resource consumption** | Frequent checks on inactive tables waste CPU resources | Consumer threads only process queued events, avoiding the consumption of checking inactive tasks |
+| **Complexity** | O(n), performance degrades as the number of tables increases | O(1), not affected by the number of tables, improving efficiency |
+| **CPU utilization** | Each changefeed can only use one logical CPU | Each changefeed can fully utilize the parallel processing capabilities of multi-core CPUs |
+| **Scalability** | Poor scalability (limited by the number of CPUs) | Strong scalability through multi-threaded processing and event queues |
+| **Changefeed interference** | The owner node might cause interference between changefeeds | Event-driven mode avoids interference between changefeeds |
 
-![TiCDC architecture](/media/ticdc/ticdc-architecture-3.PNG)
+![Comparison between the TiCDC classic and new architectures](/media/ticdc/ticdc-new-arch-2.png)
 
-## Changefeeds and tasks
+## Choose between the classic and new architectures
 
-Changefeed and Task in TiCDC are two logical concepts. The specific description is as follows:
+If your workload meets any of the following conditions, it is recommended to switch from the [classic TiCDC architecture](/ticdc/ticdc-classic-architecture.md) to the new architecture for better performance and stability:
 
-- Changefeed: Represents a replication task. It carries the information about the tables to be replicated and the downstream.
-- Task: After TiCDC receives a replication task, it splits this task into several subtasks. Such a subtask is called Task. These Tasks are assigned to the Capture processes of the TiCDC nodes for processing.
+- Bottlenecks in incremental scan performance: incremental scan tasks take an excessively long time to complete, leading to continuously increasing replication latency.
+- Ultra-high traffic scenarios: the total changefeed traffic exceeds 700 MiB/s.
+- Single tables with high-throughput writes in MySQL sink: the target table has **only one primary key or non-null unique key**.
+- Large-scale table replication: the number of tables to be replicated exceeds 100,000.
+- Frequent DDL operations causing latency: frequent execution of DDL statements significantly increases replication latency.
 
-For example:
+## New features
 
+The new architecture supports **table-level task splitting** for MySQL sinks. You can enable this feature by setting `scheduler.enable-table-across-nodes = true` in the changefeed configuration.
+
+When this feature is enabled, TiCDC automatically splits and distributes tables with **only one primary key or non-null unique key** across multiple nodes for parallel replication if those tables meet any of the following conditions. This improves replication efficiency and resource utilization:
+
+- The table Region count exceeds the configured threshold (`100000` by default, adjustable via `scheduler.region-threshold`).
+- The table write traffic exceeds the configured threshold (disabled by default, configurable via `scheduler.write-key-threshold`).
+
+## Compatibility
+
+### DDL progress tracking table
+
+In the TiCDC classic architecture, DDL replication operations are strictly serial, thus the replication progress can be tracked only using the changefeed's `CheckpointTs`. In the new architecture, however, TiCDC replicates DDL changes for different tables in parallel whenever possible to improve DDL replication efficiency. To accurately record the DDL replication progress of each table in a downstream MySQL-compatible database, the TiCDC new architecture creates a table named `tidb_cdc.ddl_ts_v1` in the downstream database, specifically storing the DDL replication progress information of the changefeed.
+
+### Changes in DDL replication behavior
+
+- The classic TiCDC architecture does not support DDLs that swap table names (for example, `RENAME TABLE a TO c, b TO a, c TO b;`). The new architecture supports such DDLs.
+
+- The new architecture unifies and simplifies the filtering rules for `RENAME` DDLs.
+
+    - In the classic architecture, the filtering logic is as follows:
+
+        - Single-table renaming: a DDL statement is replicated only if the old table name matches the filter rule.
+        - Multi-table renaming: a DDL statement is replicated only if both old and new table names match the filter rules.
+
+    - In the new architecture, for both single-table and multi-table renaming, a DDL statement is replicated as long as old table names in the statement match the filter rules.
+
+        Take the following filter rule as an example:
+
+        ```toml
+        [filter]
+        rules = ['test.t*']
+        ```
+
+        - In the classic architecture: for single-table renaming, such as `RENAME TABLE test.t1 TO ignore.t1`, the old table name `test.t1` matches the rule, so it will be replicated. For a multi-table renaming, such as `RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;`, because the new table name `ignore.t1` does not match the rule, it will not be replicated.
+        - In the new TiCDC architecture: because the old table names in both `RENAME TABLE test.t1 TO ignore.t1` and `RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;` match the rules, both DDL statements will be replicated.
+
+## Limitations
+
+The new TiCDC architecture incorporates all functionalities of the classic architecture. However, some features have not yet been fully tested. To ensure system stability, it is **NOT** recommended to use the following features in core production environments:
+
+- [Syncpoint](/ticdc/ticdc-upstream-downstream-check.md)
+- [Redo Log](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)
+- [Pulsar Sink](/ticdc/ticdc-sink-to-pulsar.md)
+- [Storage Sink](/ticdc/ticdc-sink-to-cloud-storage.md)
+
+In addition, the new TiCDC architecture currently does not support splitting large transactions into multiple batches for downstream replication. As a result, there is still a risk of OOM when processing extremely large transactions. Make sure to evaluate and mitigate this risk appropriately before using the new architecture.
+
+## Upgrade guide
+
+TiCDC in the new architecture can only be deployed in TiDB clusters of v7.5.0 or later versions. Before deployment, make sure your TiDB cluster meets this requirement.
+
+You can deploy TiCDC nodes in the new architecture using TiUP or TiDB Operator.
+
+### Deploy a new TiDB cluster with TiCDC nodes in the new architecture
+
+<SimpleTab>
+<div label="TiUP">
+
+When deploying a new TiDB cluster of v8.5.4 or later using TiUP, you can also deploy TiCDC nodes in the new architecture at the same time. To do so, you only need to add the TiCDC-related section and set `newarch: true` in the configuration file that TiUP uses to start the TiDB cluster. The following is an example:
+
+```yaml
+cdc_servers:
+  - host: 10.0.1.20
+    config:
+      newarch: true
+  - host: 10.0.1.21
+    config:
+      newarch: true
 ```
-cdc cli changefeed create --server="http://127.0.0.1:8300" --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1"
-cat changefeed.toml
-......
-[sink]
-dispatchers = [
-    {matcher = ['test1.tab1', 'test2.tab2'], topic = "{schema}_{table}"},
-    {matcher = ['test3.tab3', 'test4.tab4'], topic = "{schema}_{table}"},
-]
+
+For more TiCDC deployment information, see [Deploy a new TiDB cluster that includes TiCDC using TiUP](/ticdc/deploy-ticdc.md#deploy-a-new-tidb-cluster-that-includes-ticdc-using-tiup).
+
+</div>
+<div label="TiDB Operator">
+
+When deploying a new TiDB cluster of v8.5.4 or later using TiDB Operator, you can also deploy TiCDC nodes in the new architecture at the same time. To do so, you only need to add the TiCDC-related section and set `newarch = true` in the cluster configuration file. The following is an example:
+
+```yaml
+spec:
+  ticdc:
+    baseImage: pingcap/ticdc
+    version: v8.5.4
+    replicas: 3
+    config:
+      newarch = true
 ```
 
-For a detailed description of the parameters in the preceding `cdc cli changefeed create` command, see [TiCDC Changefeed Configuration Parameters](/ticdc/ticdc-changefeed-config.md).
+For more TiCDC deployment information, see [Fresh TiCDC deployment](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-ticdc/#fresh-ticdc-deployment).
 
-The preceding `cdc cli changefeed create` command creates a changefeed task that replicates `test1.tab1`, `test1.tab2`, `test3.tab3`, and `test4.tab4` to the Kafka cluster. The processing flow after TiCDC receives this command is as follows:
+</div>
+</SimpleTab>
 
-1. TiCDC sends this task to the owner Capture process.
-2. The owner Capture process saves information about this changefeed task in etcd in PD.
-3. The owner Capture process splits the changefeed task into several Tasks and notifies other Capture processes of the Tasks to be completed.
-4. The Capture processes start pulling data from TiKV nodes, process the data, and complete replication.
+### Deploy TiCDC nodes in the new architecture in an existing TiDB cluster
 
-The following is the TiCDC architecture diagram with Changefeed and Task included:
+<SimpleTab>
+<div label="TiUP">
 
-![TiCDC architecture](/media/ticdc/ticdc-architecture-6.jpg)
+To deploy TiCDC nodes in the new architecture using TiUP, take the following steps:
 
-In the preceding diagram, a changefeed is created to replicate four tables to downstream. This changefeed is split into three Tasks, which are sent to the three Capture processes respectively in the TiCDC cluster. After TiCDC processes the data, the data is replicated to the downstream system.
+1. If your TiDB cluster does not have TiCDC nodes yet, refer to [Scale out a TiCDC cluster](/scale-tidb-using-tiup.md#scale-out-a-ticdc-cluster) to add new TiCDC nodes in the cluster. Otherwise, skip this step.
 
-TiCDC supports replicating data to MySQL, TiDB, and Kafka databases. The preceding diagram only illustrates the process of data transfer at the changefeed level. The following sections describe in detail how TiCDC processes data, using Task1 that replicates table `table1` as an example.
+2. If your TiDB cluster version is earlier than v8.5.4, you need to manually download the TiCDC binary package of the new architecture, and then patch the downloaded file to your TiDB cluster. Otherwise, skip this step.
 
-![TiCDC architecture](/media/ticdc/ticdc-architecture-5.jpg)
+    The download link follows this format: `https://tiup-mirrors.pingcap.com/cdc-${version}-${os}-${arch}.tar.gz`, where `${version}` is the TiCDC version (see [TiCDC releases for the new architecture](https://github.com/pingcap/ticdc/releases) for available versions), `${os}` is your operating system, and `${arch}` is the platform the component runs on (`amd64` or `arm64`).
 
-1. Push data: When a data change occurs, TiKV pushes data to the Puller module.
-2. Scan incremental data: The Puller module pulls data from TiKV when it finds the data changes received not continuous.
-3. Sort data: The Sorter module sorts the data received from TiKV based on the timestamps and sends the sorted data to the Mounter module.
-4. Mount data: After receiving the data changes, the Mounter module loads the data in a format that TiCDC sink can understand.
-5. Replicate data: The Sink module replicates the data changes to the downstream.
+    For example, to download the binary package of TiCDC v8.5.4-release.1 for Linux (x86-64), run the following command:
 
-The upstream of TiCDC is the distributed relational database TiDB that supports transactions. When TiCDC replicates data, it should ensure the consistency of data and that of transactions when replicating multiple tables, which is a great challenge. The following sections introduce the key technologies and concepts used by TiCDC to address this challenge.
-
-## Key concepts of TiCDC
-
-For the downstream relational databases, TiCDC ensures the consistency of transactions in a single table and eventual transaction consistency in multiple tables. In addition, TiCDC ensures that any data change that has occurred in the upstream TiDB cluster can be replicated to the downstream at least once.
-
-### Architecture-related concepts
-
-- Capture: The process that runs the TiCDC node. Multiple Capture processes constitute a TiCDC cluster. Each Capture process is responsible for replicating data changes in TiKV, including receiving and actively pulling data changes, and replicating the data to the downstream.
-- Capture Owner: The owner Capture among multiple Capture processes. Only one owner role exists in a TiCDC cluster at a time. The Capture Owner is responsible for scheduling data within the cluster.
-- Processor: The logical thread inside Capture. Each Processor is responsible for processing the data of one or more tables in the same replication stream. A Capture node can run multiple Processors.
-- Changefeed: A task that replicates data from an upstream TiDB cluster to a downstream system. A changefeed contains multiple Tasks, and each Task is processed by a Capture node.
-
-### Timestamp-related concepts
-
-TiCDC introduces a series of timestamps (TS) to indicate the status of data replication. These timestamps are used to ensure that data is replicated to the downstream at least once and that the consistency of data is guaranteed.
-
-#### ResolvedTS
-
-This timestamp exists in both TiKV and TiCDC.
-
-- ResolvedTS in TiKV: Represents the start time of the earliest transaction in a Region leader, that is, `ResolvedTS` = max(`ResolvedTS`, min(`StartTS`)). Because a TiDB cluster contains multiple TiKV nodes, the minimum ResolvedTS of the Region leader on all TiKV nodes is called the global ResolvedTS. The TiDB cluster ensures that all transactions before the global ResolvedTS are committed. Alternatively, you can assume that there are no uncommitted transactions before this timestamp.
-
-- ResolvedTS in TiCDC:
-
-    - table ResolvedTS: Each table has a table-level ResolvedTS, which indicates all data changes in the table that are smaller than the Resolved TS have been received. To make it simple, this timestamp is the same as the minimum value of the ResolvedTS of all Regions corresponding to this table on the TiKV node.
-    - global ResolvedTS: The minimum ResolvedTS of all Processors on all TiCDC nodes. Because each TiCDC node has one or more Processors, each Processor corresponds to multiple table pipelines.
-
-    For TiCDC, the ResolvedTS sent by TiKV is a special event in the format of `<resolvedTS: timestamp>`. In general, the ResolvedTS satisfies the following constraints:
-
+    ```shell
+    wget https://tiup-mirrors.pingcap.com/cdc-v8.5.4-release.1-linux-amd64.tar.gz
     ```
-    table ResolvedTS >= global ResolvedTS
+
+3. If your TiDB cluster has running changefeeds, refer to [Pause a replication task](/ticdc/ticdc-manage-changefeed.md#pause-a-replication-task) to pause all replication tasks of the changefeeds.
+
+    ```shell
+    # The default server port of TiCDC is 8300.
+    cdc cli changefeed pause --server=http://<ticdc-host>:8300 --changefeed-id <changefeed-name>
     ```
 
-#### CheckpointTS
+4. Patch the downloaded TiCDC binary file to your TiDB cluster using the [`tiup cluster patch`](/tiup/tiup-component-cluster-patch.md) command:
 
-This timestamp exists only in TiCDC. It means that the data changes that occur before this timestamp have been replicated to the downstream system.
+    ```shell
+    tiup cluster patch <cluster-name> ./cdc-v8.5.4-release.1-linux-amd64.tar.gz -R cdc
+    ```
 
-- table CheckpointTS: Because TiCDC replicates data in tables, the table checkpointTS indicates all data changes that occur before CheckpointTS have been replicated at the table level.
-- processor CheckpointTS: Indicates the minimum table CheckpointTS on a Processor.
-- global CheckpointTS: Indicates the minimum CheckpointTS among all Processors.
+5. Update the TiCDC configuration using the [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md) command to enable the new architecture:
 
-Generally, a checkpointTS satisfies the following constraint:
+    ```shell
+    tiup cluster edit-config <cluster-name>
+    ```
 
+    ```yaml
+    server_configs:
+      cdc:
+        newarch: true
+    ```
+
+6. Refer to [Resume replication task](/ticdc/ticdc-manage-changefeed.md#resume-a-replication-task) to resume all replication tasks:
+
+    ```shell
+    # The default server port of TiCDC is 8300.
+    cdc cli changefeed resume --server=http://<ticdc-host>:8300 --changefeed-id <changefeed-name>
+    ```
+
+</div>
+<div label="TiDB Operator">
+
+To deploy TiCDC nodes in the new architecture in an existing TiDB cluster using TiDB Operator, take the following steps:
+
+- If your TiDB cluster does not include a TiCDC component, refer to [Add TiCDC to an existing TiDB cluster](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-ticdc/#add-ticdc-to-an-existing-tidb-cluster) to add new TiCDC nodes. When doing so, specify the TiCDC image version as the new architecture version in the cluster configuration file. For available versions, see [TiCDC releases for the new architecture](https://github.com/pingcap/ticdc/releases).
+
+    For example:
+
+    ```yaml
+    spec:
+      ticdc:
+        baseImage: pingcap/ticdc
+        version: v8.5.4-release.1
+        replicas: 3
+        config:
+          newarch = true
+    ```
+
+- If your TiDB cluster already includes a TiCDC component, take the following steps:
+
+    1. If your TiDB cluster has running changefeeds, pause all replication tasks of the changefeeds:
+
+        ```shell
+        kubectl exec -it ${pod_name} -n ${namespace} -- sh
+        ```
+
+        ```shell
+        # The default server port of TiCDC deployed via TiDB Operator is 8301.
+        /cdc cli changefeed pause --server=http://127.0.0.1:8301 --changefeed-id <changefeed-name>
+        ```
+
+    2. Update the TiCDC image version in the cluster configuration file to the new architecture version:
+
+        ```shell
+        kubectl edit tc ${cluster_name} -n ${namespace}
+        ```
+
+        ```yaml
+        spec:
+          ticdc:
+            baseImage: pingcap/ticdc
+            version: v8.5.4-release.1
+            replicas: 3
+        ```
+
+        ```shell
+        kubectl apply -f ${cluster_name} -n ${namespace}
+        ```
+
+    3. Resume all replication tasks of the changefeeds:
+
+        ```shell
+        kubectl exec -it ${pod_name} -n ${namespace} -- sh
+        ```
+
+        ```shell
+        # The default server port of TiCDC deployed via TiDB Operator is 8301.
+        /cdc cli changefeed resume --server=http://127.0.0.1:8301 --changefeed-id <changefeed-name>
+        ```
+
+</div>
+</SimpleTab>
+
+## Use the new architecture
+
+After deploying the TiCDC nodes with the new architecture, you can continue using the same commands as in the classic architecture. There is no need to learn new commands or modify the commands used in the classic architecture.
+
+For example, to create a replication task for a new TiCDC node in the new architecture, run the following command:
+
+```shell
+cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task"
 ```
-table CheckpointTS >= global CheckpointTS
+
+To query details about a specific replication task, run the following command:
+
+```shell
+cdc cli changefeed query -s --server=http://127.0.0.1:8300 --changefeed-id=simple-replication-task
 ```
 
-Because TiCDC only replicates data smaller than the global ResolvedTS to the downstream, the complete constraint is as follows:
+For more command usage methods and details, see [Manage Changefeeds](/ticdc/ticdc-manage-changefeed.md).
 
-```
-table ResolvedTS >= global ResolvedTS >= table CheckpointTS >= global CheckpointTS
-```
+## Monitoring
 
-After data changes and transactions are committed, the ResolvedTS on the TiKV node will continue to advance, and the Puller module on the TiCDC node keeps receiving data pushed by TiKV. The Puller module also decides whether to scan incremental data based on the data changes it has received, which ensures that all data changes are sent to the TiCDC node.
+The monitoring dashboard for TiCDC in the new architecture is **TiCDC-New-Arch**. For TiDB clusters of v8.5.4 and later versions, this monitoring dashboard is integrated into Grafana during cluster deployment or upgrade, so no manual operation is required. If your cluster version is earlier than v8.5.4, you need to manually import the [TiCDC monitoring metrics file](https://github.com/pingcap/ticdc/blob/master/metrics/grafana/ticdc_new_arch.json) to enable monitoring.
 
-The Sorter module sorts data received by the Puller module in ascending order according to the timestamp. This process ensures data consistency at the table level. Next, the Mounter module assembles the data changes from the upstream into a format that the Sink module can consume, and sends it to the Sink module. The Sink module replicates the data changes between the CheckpointTS and the ResolvedTS to the downstream in the order of the timestamp, and advances the checkpointTS after the downstream receives the data changes.
-
-The preceding sections only cover data changes of DML statements and do not include DDL statements. The following sections introduce the timestamp related to DDL statements.
-
-#### Barrier TS
-
-Barrier TS is generated when there are DDL change events or a Syncpoint is used.
-
-- DDL change events: Barrier TS ensures that all changes before the DDL statement are replicated to the downstream. After this DDL statement is executed and replicated, TiCDC starts replicating other data changes. Because DDL statements are processed by the Capture Owner, the Barrier TS corresponding to a DDL statement is only generated by the owner node.
-- Syncpoint: When you enable the Syncpoint feature of TiCDC, a Barrier TS is generated by TiCDC according to the `sync-point-interval` you specified. When all table changes before this Barrier TS are replicated, TiCDC inserts the current global CheckpointTS as the primary TS to the table recording tsMap in downstream. Then TiCDC continues data replication.
-
-After a Barrier TS is generated, TiCDC ensures that only data changes that occur before this Barrier TS are replicated to downstream. Before these data changes are replicated to downstream, the replication task does not proceed. The owner TiCDC checks whether all target data has been replicated by continuously comparing the global CheckpointTS and the Barrier TS. If the global CheckpointTS equals to the Barrier TS, TiCDC continues replication after performing a designated operation (such as executing a DDL statement or recording the global CheckpointTS downstream). Otherwise, TiCDC waits for all data changes that occur before the Barrier TS to be replicated to the downstream.
-
-## Major processes
-
-This section describes the major processes of TiCDC to help you better understand its working principles.
-
-Note that the following processes occur only within TiCDC and are transparent to users. Therefore, you do not need to care about which TiCDC node you are starting.
-
-### Start TiCDC
-
-- For a TiCDC node that is not an owner, it works as follows:
-
-    1. Starts the Capture process.
-    2. Starts the Processor.
-    3. Receives the Task scheduling command executed by the Owner.
-    4. Starts or stops tablePipeline according to the scheduling command.
-
-- For an owner TiCDC node, it works as follows:
-
-    1. Starts the Capture process.
-    2. The node is elected as the Owner and the corresponding thread is started.
-    3. Reads the changefeed information.
-    4. Starts the changefeed management process.
-    5. Reads the schema information in TiKV according to the changefeed configuration and the latest CheckpointTS to determine the tables to be replicated.
-    6. Reads the list of tables currently replicated by each Processor and distributes the tables to be added.
-    7. Updates the replication progress.
-
-### Stop TiCDC
-
-Usually, you stop a TiCDC node when you need to upgrade it or perform some planned maintenance operations. The process of stopping a TiCDC node is as follows:
-
-1. The node receives the command to stop itself.
-2. The node sets its service status to unavailable.
-3. The node stops receiving new replication tasks.
-4. The node notifies the Owner node to transfer its data replication tasks to other nodes.
-5. The node stops after the replication tasks are transferred to other nodes.
+For importing steps and detailed descriptions of each monitoring metric, see [Metrics for TiCDC in the new architecture](/ticdc/monitor-ticdc.md#metrics-for-ticdc-in-the-new-architecture).
