@@ -30,25 +30,65 @@ On the **Changefeed** page, you can create a changefeed, view a list of existing
 
 To create a changefeed, refer to the tutorials:
 
-- [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
-- [Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md)
+- [Sink to Apache Kafka](/tidb-cloud/essential-changefeed-sink-to-apache-kafka.md)
+- [Sink to MySQL](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
 
 ## View a changefeed
+
+<SimpleTab>
+<div label="Console">
 
 1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
 2. Locate the corresponding changefeed you want to view, and click **...** > **View** in the **Action** column.
 3. You can see the details of a changefeed, including its configuration, status, and metrics.
 
+</div>
+
+<div label="CLI">
+
+```
+ticloud serverless changefeed get -c <cluster-id> --changefeed-id <changefeed-id>
+```
+
+</div>
+</SimpleTab>
+
 ## Pause or resume a changefeed
+
+<SimpleTab>
+<div label="Console">
 
 1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB ckuster.
 2. Locate the corresponding changefeed you want to pause or resume, and click **...** > **Pause/Resume** in the **Action** column.
+
+</div>
+
+<div label="CLI">
+
+To pause a changefeed:
+
+```
+ticloud serverless changefeed pause -c <cluster-id> --changefeed-id <changefeed-id>
+```
+
+To resume a changefeed:
+
+```
+ticloud serverless changefeed resume -c <cluster-id> --changefeed-id <changefeed-id>
+```
+
+</div>
+</SimpleTab>
+
 
 ## Edit a changefeed
 
 > **Note:**
 >
 > TiDB Cloud currently only allows editing changefeeds in the paused status.
+
+<SimpleTab>
+<div label="Console">
 
 1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
 2. Locate the changefeed you want to pause, and click **...** > **Pause** in the **Action** column.
@@ -61,6 +101,25 @@ To create a changefeed, refer to the tutorials:
 
 4. After editing the configuration, click **...** > **Resume** to resume the corresponding changefeed.
 
+</div>
+
+<div label="CLI">
+
+Edit a changefeed with Apache Kafka sink:
+
+```
+ticloud serverless changefeed edit -c <cluster-id> --changefeed-id <changefeed-id> --name <new-displayName> --kafka <full-specified-kafka> --filter <full-specified-filter>
+```
+
+Edit a changefeed with MySQL sink:
+
+```
+ticloud serverless changefeed edit -c <cluster-id> --changefeed-id <changefeed-id> --name <new-displayName> --mysql <full-specified-mysql> --filter <full-specified-filter>
+```
+
+</div>
+</SimpleTab>
+
 ## Duplicate a changefeed
 
 1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
@@ -70,8 +129,22 @@ To create a changefeed, refer to the tutorials:
 
 ## Delete a changefeed
 
+<SimpleTab>
+<div label="Console">
+
 1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
 2. Locate the corresponding changefeed you want to delete, and click **...** > **Delete** in the **Action** column.
+
+</div>
+
+<div label="CLI">
+
+```
+ticloud serverless changefeed delete -c <cluster-id> --changefeed-id <changefeed-id>
+```
+
+</div>
+</SimpleTab>
 
 ## Changefeed billing
 
