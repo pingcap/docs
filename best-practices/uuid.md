@@ -104,6 +104,15 @@ CREATE TABLE `uuid_demo_3` (
 )
 ```
 
+### Converting from binary to text using a generated column
+
+```sql
+CREATE TABLE `uuid_demo_4` (
+  `uuid` BINARY(16) PRIMARY KEY,
+  `uuid_text` CHAR(36) AS (BIN_TO_UUID(uuid))
+);
+```
+
 ## MySQL compatibility
 
 UUIDs can be used in MySQL as well. The `BIN_TO_UUID()` and `UUID_TO_BIN()` functions were introduced in MySQL 8.0. The `UUID()` function is available in earlier MySQL versions as well.
