@@ -1,57 +1,82 @@
 ---
-title: Use {{{ .starter }}} with AI tools
-summary: Learn how to use your {{{ .starter }}} cluster with AI tools.
+title: Use {{{ .starter }}} with AI Tools
+summary: Learn how to connect your {{{ .starter }}} cluster to AI-powered development tools that support the Model Context Protocol (MCP), such as Cursor, Claude Code, VS Code, and Windsurf.
 ---
 
-# Use {{{ .starter }}} with AI tools
+# Use {{{ .starter }}} with AI Tools
 
-This document describes how to use your {{{ .starter }}} cluster with AI tools.
+This document describes how to connect your {{{ .starter }}} cluster to AI-powered development tools that support the Model Context Protocol (MCP), such as Cursor, Claude Code, Visual Studio Code (VS Code), and Windsurf.
 
-## Steps
+By configuring your TiDB cluster as an MCP server, you can enable AI assistants in your development tools to query your database schema, understand your data model, and generate context-aware code suggestions.
 
-After your {{{ .starter }}} cluster is created on TiDB Cloud, you can use it with AI tools via the following steps:
+## Before you begin
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click a cluster name to go to its overview page, and then click **Use with AI Tools** at the top of the page.
-2. In the **Access `your_cluster_name` with AI tools** dialog, select the **Branch** and **Database** that you want to connect to in the AI tool.
-3. Ensure that you meet the **Prerequisites**. If not, follow the instructions on the page to install the required dependencies.
-4. For the password:
+To complete this guide, you need the following:
 
-    1. If you have not set a password yet, click **Generate Password** to generate a random password. The generated password will not be shown again, so save your password in a secure location.
-    2. If you have already set a password:
-        1. You can enter your password in the **Enter the password for easy setup** input box.
-        2. If you forget your password, clicking **Reset password** in the **Prerequisites** section to get a new password. Be aware that resetting the password will drop root's connection to the current cluster.
+- A {{{ .starter }}} cluster. If you don't have any, you can [create a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Python 3.11 or higher](https://www.python.org/downloads/) installed.
+- [uv](https://docs.astral.sh/uv/getting-started/installation/) installed.
+- An AI development tool that supports MCP, such as:
 
-5. Switch to the tab you want: **Cursor**, **Claude Code**, **VS Code**, or **Windsurf**.
-6. Follow the tool-specific setup steps in the selected tab.
+    - [Cursor](https://cursor.com)
+    - [Claude Code](https://claude.com/product/claude-code)
+    - [Visual Studio Code](https://code.visualstudio.com)
+    - [Windsurf](https://windsurf.com)
+
+## Connect to AI tools
+
+After you create a {{{ .starter }}} cluster in TiDB Cloud, perform the following steps to connect it to your AI tool.
+
+1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your target cluster to go to its overview page. Then, click **Use with AI Tools** at the top of the page.
+2. In the **Access `your_cluster_name` with AI tools** dialog, select the **Branch** and **Database** that you want the AI tool to access.
+3. Verify that you meet all the **Prerequisites** listed. If not, follow the on-screen instructions to install the required dependencies.
+4. Configure the password:
+
+    - If you have not set a password yet, click **Generate Password** to generate a random password.
+
+        The generated password will not show again, so save your password in a secure location.
+
+    - If you have already set a password, enter your password in the **Enter the password for easy setup** field.
+    - If you forget the password, click **Reset password** in the **Prerequisites** section to generate a new one.
+
+        Note that resetting your password disconnects all existing root user sessions.
+
+5. Select the tab for your AI tool: **Cursor**, **Claude Code**, **VS Code**, or **Windsurf**.
+6. Complete the setup steps for the selected tool.
+
+    For more information, see [Tool-specific setup](#tool-specific-setup).
 
 ## Tool-specific setup
 
 ### Cursor
 
-1. Click **Add to Cursor** to open Cursor, and then click **Install** to finish the setup.
-2. Or add the configuration to `.cursor/mcp.json`, as follows:
+To configure Cursor as an MCP client for TiDB, you can use one of the following methods:
+
+- **Method 1**: in the TiDB Cloud console, click **Add to Cursor** to launch Cursor, and then click **Install**.
+- **Method 2**: manually add the following configuration to your `.cursor/mcp.json` file:
 
     ```json
     {
-    "mcpServers": {
+      "mcpServers": {
         "TiDB": {
-        "command": "uvx --from pytidb[mcp] tidb-mcp-server",
-        "env": {
+          "command": "uvx --from pytidb[mcp] tidb-mcp-server",
+          "env": {
             "TIDB_HOST": "<YOUR_TIDB_HOST>",
             "TIDB_PORT": "<YOUR_TIDB_PORT>",
             "TIDB_USERNAME": "<YOUR_TIDB_USERNAME>",
             "TIDB_PASSWORD": "<YOUR_TIDB_PASSWORD>",
             "TIDB_DATABASE": "<YOUR_TIDB_DATABASE>"
+          }
         }
-        }
-    }
+      }
     }
     ```
 
 ### Claude Code
 
-1. Click the first copy button to copy the command.
-2. Open the terminal and add the MCP server by running the copied command, as follows:
+To configure Claude Code as an MCP client for TiDB, you can use one of the following methods:
+
+- **Method 1**: copy the setup command from the TiDB Cloud console and run it in your terminal:
 
     ```bash
     claude mcp add --transport stdio TiDB \
@@ -63,54 +88,56 @@ After your {{{ .starter }}} cluster is created on TiDB Cloud, you can use it wit
       -- uvx --from 'pytidb[mcp]' 'tidb-mcp-server'
     ```
 
-3. Alternatively, follow [Claude Code's documentation](https://code.claude.com/docs/en/mcp#project-scope) to add the configuration to `.mcp.json` for project scope, as follows:
+- **Method 2**: add the following configuration to your project-level `.mcp.json` file. For more information, see the [Claude Code documentation](https://code.claude.com/docs/en/mcp#project-scope).
 
     ```json
     {
-    "mcpServers": {
+      "mcpServers": {
         "TiDB": {
-        "type": "stdio",
-        "command": "uvx",
-        "args": ["--from", "pytidb[mcp]", "tidb-mcp-server"],
-        "env": {
+          "type": "stdio",
+          "command": "uvx",
+          "args": ["--from", "pytidb[mcp]", "tidb-mcp-server"],
+          "env": {
             "TIDB_HOST": "<YOUR_TIDB_HOST>",
             "TIDB_PORT": "<YOUR_TIDB_PORT>",
             "TIDB_USERNAME": "<YOUR_TIDB_USERNAME>",
             "TIDB_PASSWORD": "<YOUR_TIDB_PASSWORD>",
             "TIDB_DATABASE": "<YOUR_TIDB_DATABASE>"
+          }
         }
-        }
-    }
+      }
     }
     ```
 
 ### VS Code
 
-1. Click **Add to VS Code** to open VS Code, and then click **Install** to finish the setup.
-2. Or add the configuration to `.vscode/mcp.json`, as follows:
+To configure VS Code as an MCP client for TiDB, you can use one of the following methods:
+
+- **Method 1**: click **Add to VS Code** to launch VS Code, and then click **Install**.
+- **Method 2**: add the following configuration to your `.vscode/mcp.json` file:
 
     ```json
     {
-    "mcpServers": {
+      "mcpServers": {
         "TiDB": {
-        "type": "stdio",
-        "command": "uvx",
-        "args": ["--from", "pytidb[mcp]", "tidb-mcp-server"],
-        "env": {
+          "type": "stdio",
+          "command": "uvx",
+          "args": ["--from", "pytidb[mcp]", "tidb-mcp-server"],
+          "env": {
             "TIDB_HOST": "<YOUR_TIDB_HOST>",
             "TIDB_PORT": "<YOUR_TIDB_PORT>",
             "TIDB_USERNAME": "<YOUR_TIDB_USERNAME>",
             "TIDB_PASSWORD": "<YOUR_TIDB_PASSWORD>",
             "TIDB_DATABASE": "<YOUR_TIDB_DATABASE>"
+          }
         }
-        }
-    }
+      }
     }
     ```
 
 ### Windsurf
 
-Follow [Windsurf's documentation](https://docs.windsurf.com/windsurf/cascade/mcp#adding-a-new-mcp-plugin) to add the configuration to `mcp_config.json`, as follows:
+To add the TiDB MCP plugin to Windsurf, update your `mcp_config.json` file as follows. For more information, see the [Windsurf documentation](https://docs.windsurf.com/windsurf/cascade/mcp#adding-a-new-mcp-plugin).
 
 ```json
 {
@@ -132,4 +159,5 @@ Follow [Windsurf's documentation](https://docs.windsurf.com/windsurf/cascade/mcp
 
 ## See also
 
-- [Try Out TiDB + Vector](/vector-search/vector-search-get-started-using-python.md)
+- [Try Out TiDB + Vector Search](/vector-search/vector-search-get-started-using-python.md)
+- [Developer Guide Overview](/develop/dev-guide-overview.md)
