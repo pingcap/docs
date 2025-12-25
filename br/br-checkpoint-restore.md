@@ -89,13 +89,13 @@ Note that before entering the log restore phase during the initial restore, `br`
 
 > **Note:**
 >
-> To ensure compatibility with clusters of earlier versions, starting from v9.0.0, if the system table `mysql.tidb_pitr_id_map` does not exist in the restore cluster, the `pitr_id_map` data will be written to the log backup directory. The file name is `pitr_id_maps/pitr_id_map.cluster_id:{downstream-cluster-ID}.restored_ts:{restored-ts}`.
+> To ensure compatibility with clusters of earlier versions, starting from v8.5.5, if the system table `mysql.tidb_pitr_id_map` does not exist in the restore cluster, the `pitr_id_map` data will be written to the log backup directory. The file name is `pitr_id_maps/pitr_id_map.cluster_id:{downstream-cluster-ID}.restored_ts:{restored-ts}`.
 
 ## Implementation details: store checkpoint data in the external storage
 
 > **Note:**
 >
-> Starting from v9.0.0, BR stores checkpoint data in the downstream cluster by default. You can specify an external storage for checkpoint data using the `--checkpoint-storage` parameter. For example:
+> Starting from v8.5.5, BR stores checkpoint data in the downstream cluster by default. You can specify an external storage for checkpoint data using the `--checkpoint-storage` parameter. For example:
 >
 > ```shell
 > ./br restore full -s "s3://backup-bucket/backup-prefix" --checkpoint-storage "s3://temp-bucket/checkpoints"
@@ -155,4 +155,4 @@ Note that before entering the log restore phase during the initial restore, `br`
 
 > **Note:**
 >
-> To ensure compatibility with clusters of earlier versions, starting from v9.0.0, if the system table `mysql.tidb_pitr_id_map` does not exist in the restore cluster and the `--checkpoint-storage` parameter is not specified, the `pitr_id_map` data will be written to the log backup directory. The file name is `pitr_id_maps/pitr_id_map.cluster_id:{downstream-cluster-ID}.restored_ts:{restored-ts}`.
+> To ensure compatibility with clusters of earlier versions, starting from v8.5.5, if the system table `mysql.tidb_pitr_id_map` does not exist in the restore cluster and the `--checkpoint-storage` parameter is not specified, the `pitr_id_map` data will be written to the log backup directory. The file name is `pitr_id_maps/pitr_id_map.cluster_id:{downstream-cluster-ID}.restored_ts:{restored-ts}`.
