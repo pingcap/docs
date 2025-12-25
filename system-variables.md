@@ -1051,7 +1051,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Type: Duration
 - Default value: `48h0m0s`
 - Range: `[1s, 8760h0m0s]`
-- This variable is used to control the maximum allowed checkpoint lag for a log backup task. If a task's checkpoint lag exceeds this limit, TiDB Advancer pauses the task.
+- This variable controls the maximum allowed checkpoint lag for a log backup task. If a task's checkpoint lag exceeds this limit, TiDB Advancer pauses the task.
 
 ### tidb_allow_tiflash_cop <span class="version-mark">New in v7.3.0</span>
 
