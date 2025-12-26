@@ -5,13 +5,17 @@ summary: Learn how to set up private link connections for Dataflow.
 
 # Private Link Connections for Dataflow (Beta)
 
-## Overview
-
 Dataflow services in TiDB Cloud, such as Changefeed and Data Migration (DM), require reliable connectivity to external resources such as RDS instances and Kafka clusters. While public endpoints are supported, private link connections provide a superior alternative by providing higher efficiency, lower latency, and enhanced security.
 
-By facilitating direct, private connectivity between {{{ .essential }}} and your target resources, private link ensures that data traffic never traverses the public internet. This architecture is purpose-built for high-performance integrations, significantly reducing the network attack surface while maintaining consistent data throughput for critical replication tasks.
+Private link connections enable direct connectivity between {{{ .essential }}} and your target resources. This ensures that data traveling from TiDB Cloud to your databases on other cloud platforms remains entirely within private network boundaries, significantly reducing the network attack surface and ensuring consistent throughput for critical dataflows.
+
+> **Note:**
+>
+> The Private Link Connections for Dataflow feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 ## Private link connection types
+
+Private link connections for dataflow come in several types depending on the cloud provider and service you need to reach. Each type enables secure, private network access between your TiDB Cloud cluster and external resources (for example, RDS or Kafka) in the same cloud environment.
 
 ### AWS Endpoint Service
 
@@ -31,20 +35,34 @@ You can attach domains to a private link connection.
 
 When a domain is attached to the private link connection, all traffic to this domain will be routed to this private link connection. It is useful when your service provides custom domains to clients at runtime, such as Kafka advertised listeners.
 
-Different private link connection types support attaching different domains:
+Different private link connection types support attaching different domains. The following table shows supported domain types for each private link connection type.
 
-| Private link connection type | Supported domain type              |
-|-----------------------------|-------------------------------------------|
-| AWS Endpoint Service        | <ul><li>TiDB Cloud managed (`aws.tidbcloud.com`)</li><li>Confluent Dedicated (`aws.confluent.cloud`)</li></ul>  |
-| AliCloud Endpoint Service   | TiDB Cloud managed (`alicloud.tidbcloud.com`) |
+| Private link connection type   | Supported domain type                     |
+|--------------------------------|-------------------------------------------|
+| AWS Endpoint Service           | <ul><li>TiDB Cloud managed (`aws.tidbcloud.com`)</li><li>Confluent Dedicated (`aws.confluent.cloud`)</li></ul>  |
+| Alibaba Cloud Endpoint Service | TiDB Cloud managed (`alicloud.tidbcloud.com`) |
 
-If your domain is not included, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to request the support.
+If your domain is not included in this table, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to request the support.
 
 ## Manage private link connections
 
-You can create a private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
+This section describes how to manage private link connections.
 
 ### Create an AWS Endpoint Service private link connection
+
+You can create an AWS Endpoint Service private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
+
+Ensure the AWS endpoint service:
+
+- Resides in the same region as your TiDB Cloud cluster.
+- Allows connections from the TiDB Cloud account.
+- Has availability zones that overlap with your TiDB Cloud cluster.
+
+You can get the account ID and available zones information at the bottom of the **Create Private Link Connection** dialog, or by running the following command.
+
+```shell
+ticloud serverless private-link-connection zones --cluster-id <cluster-id>
+```
 
 <SimpleTab>
 <div label="Console">
@@ -65,16 +83,6 @@ You can create a private link connection using the TiDB Cloud console or the TiD
     - **Connection Type**: Choose **AWS Endpoint Service**, if you can not find this option, please ensure that your cluster is created in AWS provider.
     - **Endpoint Service Name**: Enter your AWS endpoint service name (for example, `com.amazonaws.vpce.<region>.vpce-svc-xxxx`).
 
-    > **Note:**
-    >
-    > Please make sure the AWS endpoint service:
-    > 
-    > 1. In the same region as your TiDB Cloud cluster.
-    > 2. Allows connections from the TiDB Cloud account.
-    > 3. Has availability zones that overlap with your TiDB Cloud cluster.
-    > 
-    > You can get the account ID and available zones information at the bottom of the dialog.
-
 5. Click the **Create Connection** button.
 
 6. Then go to the detail page of your endpoint service on AWS console. In the **Endpoint Connections** tab, accept the endpoint connection request from TiDB Cloud.
@@ -89,25 +97,29 @@ ticloud serverless private-link-connection create -c <cluster-id> --display-name
 
 Then go to the detail page of your endpoint service on AWS console. In the **Endpoint Connections** tab, accept the endpoint connection request from TiDB Cloud.
 
-Please make sure the AWS endpoint service:
-
-1. In the same region of your TiDB Cloud cluster.
-2. Allows the acceptance of TiDB Cloud account.
-3. Has overlapping available zones of your TiDB Cloud cluster.
-
-You can get the account ID and available zones information by the following command:
-
-```shell
-ticloud serverless private-link-connection zones --cluster-id <cluster-id>
-```
-
 </div>
 </SimpleTab>
 
 ### Create an Alibaba Cloud Endpoint Service private link connection
 
+You can create an Alibaba Cloud Endpoint Service private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
+
+Ensure that the Alibaba Cloud endpoint service:
+
+- Resides in the same region of your TiDB Cloud cluster.
+- Allows the acceptance of TiDB Cloud account.
+- Has overlapping available zones with your TiDB Cloud cluster.
+
+You can get the account ID and available zones information at the bottom of the **Create Private Link Connection** dialog, or by running the following command:
+
+```shell
+ticloud serverless private-link-connection zones --cluster-id <cluster-id>
+```
+
 <SimpleTab>
 <div label="Console">
+
+To create an Alibaba Cloud Endpoint Service private link connection using the TiDB Cloud console:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
@@ -125,49 +137,33 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
     - **Connection Type**: Choose **Alibaba Cloud Endpoint Service**. If you can not find this option, ensure that your cluster is created in Alibaba Cloud.
     - **Endpoint Service Name**: Enter your Alibaba Cloud endpoint service name (for example, `com.aliyuncs.privatelink.<region>.xxxxx`).
 
-    > **Note:**
-    > 
-    > Please make sure the Alibaba Cloud endpoint service:
-    > 
-    > 1. In the same region as your TiDB Cloud cluster.
-    > 2. Allows connections from the TiDB Cloud account.
-    > 3. Has availability zones that overlap with your TiDB Cloud cluster.
-    > 
-    > You can get the account ID and available zones information at the bottom of the dialog.
-
 5. Click **Create Connection**.
 
-6. Then go to the detail page of your endpoint service on Alibaba Cloud console. In the **Endpoint Connections** tab, allow the endpoint connection request from TiDB Cloud.
+6. Then go to the detail page of your endpoint service on [Alibaba Cloud console](https://console.alibabacloud.com). In the **Endpoint Connections** tab, allow the endpoint connection request from TiDB Cloud.
 
 </div>
 
 <div label="CLI">
 
+You can create an Alibaba Cloud Endpoint Service private link connection using the TiDB Cloud CLI, run the following command:
+
 ```shell
 ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type ALICLOUD_ENDPOINT_SERVICE --alicloud.endpoint-service-name <endpoint-service-name>
 ```
 
-Then go to the detail page of your endpoint service on Alibaba Cloud console. In the **Endpoint Connections** tab, allow the endpoint connection request from TiDB Cloud.
-
-Please make sure the Alibaba Cloud endpoint service:
-
-1. In the same region of your TiDB Cloud cluster.
-2. Allows the acceptance of TiDB Cloud account.
-3. Has overlapping available zones of your TiDB Cloud cluster.
-
-You can get the account ID and available zones information by the following command:
-
-```shell
-ticloud serverless private-link-connection zones --cluster-id <cluster-id>
-```
+Then go to the detail page of your endpoint service on [Alibaba Cloud console](https://console.alibabacloud.com). In the **Endpoint Connections** tab, allow the endpoint connection request from TiDB Cloud.
 
 </div>
 </SimpleTab>
 
 ### Delete a private link connection
 
+You can delete private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
+
 <SimpleTab>
 <div label="Console">
+
+To delete the private link connection using the TiDB Cloud console, do the following:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
@@ -185,6 +181,8 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
 <div label="CLI">
 
+To delete the private link connection using the TiDB Cloud CLI, run the following command:
+
 ```shell
 ticloud serverless private-link-connection delete -c <cluster-id> --private-link-connection-id <private-link-connection-id>
 ```
@@ -194,8 +192,12 @@ ticloud serverless private-link-connection delete -c <cluster-id> --private-link
 
 ### Attach domains to a private link connection
 
+You can Attach domains to a private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
+
 <SimpleTab>
 <div label="Console">
+
+To attach domains to a private link connection using the TiDB Cloud, do the following:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
@@ -210,8 +212,9 @@ ticloud serverless private-link-connection delete -c <cluster-id> --private-link
 4. Click **Attach Domains**.
 
 5. In the **Attach Domains** dialog choose the domain type:
-    - **TiDB Cloud Managed**: The domains will be auto generated by TiDB Cloud, just click **Attach Domains** to confirm.
-    - **Confluent Cloud**: Enter the Confluent Unique Name provided by Confluent Cloud Dedicated cluster to generate the domains, and then click **Attach Domains** to confirm.
+
+    - **TiDB Cloud Managed**: the domains will be auto generated by TiDB Cloud, just click **Attach Domains** to confirm.
+    - **Confluent Cloud**: enter the Confluent Unique Name provided by Confluent Cloud Dedicated cluster to generate the domains, and then click **Attach Domains** to confirm.
 
 </div>
 
@@ -219,17 +222,17 @@ ticloud serverless private-link-connection delete -c <cluster-id> --private-link
 
 To attach a TiDB Cloud managed domain:
 
-First use dry run to preview the domains to be attached, it will output a unique-name for the next step
+1. Use dry run to preview the domains to be attached, it will output a unique-name for the next step
 
-```shell
-ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --dry-run
-```
+    ```shell
+    ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --dry-run
+    ```
 
-Then Attach the domains with the unique-name from previous step
+2. Attach the domains with the unique-name from previous step
 
-```shell
-ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --unique-name <unique-name>
-```
+    ```shell
+    ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --unique-name <unique-name>
+    ```
 
 To attach a Confluent Cloud domain:
 
@@ -242,8 +245,12 @@ ticloud serverless private-link-connection attach-domains -c <cluster-id> --priv
 
 ### Detach Domains from a private link connection
 
+You can detach domains to a private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
+
 <SimpleTab>
 <div label="Console">
+
+ To detach domains to a private link connection using the TiDB Cloud console, do the following:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
 
@@ -261,25 +268,30 @@ ticloud serverless private-link-connection attach-domains -c <cluster-id> --priv
 
 <div label="CLI">
 
-First, get the private link connection details to find the attach-domain-id:
+To detach domains to a private link connection using the TiDB Cloud CLI:
 
-```shell
-ticloud serverless private-link-connection get -c <cluster-id> --private-link-connection-id <private-link-connection-id>
-```
+1. Get the private link connection details to find the attach-domain-id:
 
-Then, detach the domain by the attach-domain-id:
+    ```shell
+    ticloud serverless private-link-connection get -c <cluster-id> --private-link-connection-id <private-link-connection-id>
+    ```
 
-```shell
-ticloud serverless private-link-connection detach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --attach-domain-id <attach-domain-id>
-```
+2. Detach the domain by the attach-domain-id:
+
+    ```shell
+     ticloud serverless private-link-connection detach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --attach-domain-id <attach-domain-id>
+    ```
 
 </div>
 </SimpleTab>
 
 ## See Also
 
+- [Connect to Confluent Cloud via a Private Link Connection](/tidbcloud/serverless-private-link-connection-to-aws-confluent.md)
+
+<!--
 - [Connect to Amazon RDS via a Private Link Connection](/tidbcloud/serverless-private-link-connection-to-aws-rds.md)
 - [Connect to Alibaba Cloud ApsaraDB RDS for MySQL via a Private Link Connection ](/tidbcloud/serverless-private-link-connection-to-alicloud-rds.md)
-- [Connect to Confluent Cloud via a Private Link Connection](/tidbcloud/serverless-private-link-connection-to-aws-confluent.md)
 - [Connect to AWS Self-Hosted Kafka via Private Link Connection](/tidbcloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
 - [Connect to Alibaba Cloud Self-Hosted Kafka via a Private Link Connection](/tidbcloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
+-->

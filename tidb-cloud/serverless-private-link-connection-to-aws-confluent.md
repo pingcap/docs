@@ -7,7 +7,8 @@ summary: Learn how to connect to an AWS Confluent instance using an AWS Confluen
 
 > **Note**
 >
-> Only Confluent Cloud Dedicated clusters on AWS are supported.
+> - Only Confluent Cloud Dedicated clusters on AWS are supported.
+> - The Private Link Connections for Dataflow feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 This document describes how to connect to a Confluent Cloud Dedicated cluster on AWS using an AWS Endpoint Service private link connection.
 

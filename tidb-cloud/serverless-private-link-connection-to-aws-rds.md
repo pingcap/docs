@@ -7,6 +7,10 @@ summary: Learn how to connect to an Amazon RDS instance using an AWS Endpoint Se
 
 This document describes how to connect to an Amazon RDS instance using an AWS Endpoint Service private link connection.
 
+> **Note:**
+>
+> The Private Link Connections for Dataflow feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
 ## Prerequisites
 
 - AWS RDS: ensure you have an existing AWS RDS instance or the permissions required to create one.

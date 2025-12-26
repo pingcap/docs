@@ -7,6 +7,10 @@ summary: Learn how to connect to an Alibaba Cloud ApsaraDB RDS for MySQL instanc
 
 This document describes how to connect to an Alibaba Cloud ApsaraDB RDS for MySQL instance using an Alibaba Cloud Endpoint Service private link connection.
 
+> **Note:**
+>
+> The Private Link Connections for Dataflow feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
 ## Prerequisites
 
 - ApsaraDB RDS for MySQL: ensure you have an existing ApsaraDB RDS for MySQL instance or the permissions required to create one.
