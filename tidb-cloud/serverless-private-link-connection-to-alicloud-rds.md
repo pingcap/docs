@@ -121,11 +121,11 @@ To create a private link connection using the TiDB Cloud CLI:
 
 1. Run the following command:
 
-```shell
-ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type ALICLOUD_ENDPOINT_SERVICE --alicloud.endpoint-service-name <endpoint-service-name>
-```
+    ```shell
+    ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type ALICLOUD_ENDPOINT_SERVICE --alicloud.endpoint-service-name <endpoint-service-name>
+    ```
 
-2. Go back to the detail page of the endpoint service on [Alibaba Cloud console](https://account.alibabacloud.com/login/login.htm). In the **Endpoint Connections** tab, allow the endpoint connection request from TiDB Cloud.
+2. Go back to the detail page of the endpoint service on [Alibaba Cloud console](https://account.alibabacloud.com). In the **Endpoint Connections** tab, allow the endpoint connection request from TiDB Cloud.
 
 </div>
 </SimpleTab>
