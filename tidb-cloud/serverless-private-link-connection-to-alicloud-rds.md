@@ -111,7 +111,7 @@ You can create a private link connection using the TiDB Cloud console or the TiD
 
 5. Click **Create**.
 
-6. Go back to the detail page of the endpoint service on [Alibaba Cloud console](https://account.alibabacloud.com/login/login.htm). In the **Endpoint Connections** tab, allow the endpoint connection request from TiDB Cloud.
+6. Go back to the detail page of the endpoint service on [Alibaba Cloud console](https://account.alibabacloud.com). In the **Endpoint Connections** tab, allow the endpoint connection request from TiDB Cloud.
 
 </div>
 
