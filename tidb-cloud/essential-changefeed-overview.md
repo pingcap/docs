@@ -30,7 +30,7 @@ On the **Changefeed** page, you can create a changefeed, view a list of existing
 
 To create a changefeed, refer to the tutorials:
 
-- [Sink to Apache Kafka](/tidb-cloud/essential-changefeed-sink-to-apache-kafka.md)
+- [Sink to Apache Kafka](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
 - [Sink to MySQL](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
 
 ## View a changefeed
@@ -79,7 +79,6 @@ ticloud serverless changefeed resume -c <cluster-id> --changefeed-id <changefeed
 
 </div>
 </SimpleTab>
-
 
 ## Edit a changefeed
 
