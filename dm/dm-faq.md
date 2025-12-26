@@ -242,7 +242,7 @@ This is a known bug of TiUP, which is fixed in TiUP v1.3.2. The following are tw
     2. Scale in and then scale out Grafana nodes in the cluster to restart the Grafana service.
 - Solution two:
     1. Back up the `deploy/grafana-$port/bin/public` folder.
-    2. Download the [TiUP DM offline package](https://download.pingcap.org/tidb-dm-v2.0.1-linux-amd64.tar.gz) and unpack it.
+    2. Download the [TiUP DM offline package](https://download.pingcap.com/tidb-dm-v2.0.1-linux-amd64.tar.gz) and unpack it.
     3. Unpack the `grafana-v4.0.3-**.tar.gz` in the offline package.
     4. Replace the folder `deploy/grafana-$port/bin/public` with the `public` folder in `grafana-v4.0.3-**.tar.gz`.
     5. Execute `tiup dm restart $cluster_name -R grafana` to restart the Grafana service.

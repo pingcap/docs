@@ -26,9 +26,9 @@ Assume that the TiDB cluster topology is as follows:
 
 ```bash
 # Downloads the package.
-wget https://download.pingcap.org/prometheus-2.27.1.linux-amd64.tar.gz
-wget https://download.pingcap.org/node_exporter-v1.3.1-linux-amd64.tar.gz
-wget https://download.pingcap.org/grafana-7.5.11.linux-amd64.tar.gz
+wget https://download.pingcap.com/prometheus-2.27.1.linux-amd64.tar.gz
+wget https://download.pingcap.com/node_exporter-v1.3.1-linux-amd64.tar.gz
+wget https://download.pingcap.com/grafana-7.5.11.linux-amd64.tar.gz
 ```
 
 {{< copyable "shell-regular" >}}
