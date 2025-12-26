@@ -270,7 +270,7 @@ ticloud serverless private-link-connection get -c <cluster-id> --private-link-co
 Then, detach the domain by the attach-domain-id:
 
 ```shell
-ticloud serverless private-link-connection detach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --attach-domain-id <attach-domian-id>
+ticloud serverless private-link-connection detach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --attach-domain-id <attach-domain-id>
 ```
 
 </div>
