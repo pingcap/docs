@@ -82,16 +82,16 @@ Perform the following steps in this section to deploy a TiDB cluster offline usi
 **Method 1**: Download the offline binary packages (TiUP offline package included) of the target TiDB version using the following links. You need to download both the server and toolkit packages. Note that your downloading means you agree to the [Privacy Policy](https://www.pingcap.com/privacy-policy/).
 
 ```
-https://download.pingcap.org/tidb-community-server-{version}-linux-{arch}.tar.gz
+https://download.pingcap.com/tidb-community-server-{version}-linux-{arch}.tar.gz
 ```
 
 ```
-https://download.pingcap.org/tidb-community-toolkit-{version}-linux-{arch}.tar.gz
+https://download.pingcap.com/tidb-community-toolkit-{version}-linux-{arch}.tar.gz
 ```
 
 > **Tip:**
 >
-> `{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v8.5.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-toolkit-v8.5.0-linux-amd64.tar.gz`.
+> `{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v8.5.0` in the `amd64` architecture is `https://download.pingcap.com/tidb-community-toolkit-v8.5.0-linux-amd64.tar.gz`.
 
 **Method 2**: Manually pack an offline component package using `tiup mirror clone`. The detailed steps are as follows:
 
