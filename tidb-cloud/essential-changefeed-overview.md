@@ -58,7 +58,7 @@ ticloud serverless changefeed get -c <cluster-id> --changefeed-id <changefeed-id
 <SimpleTab>
 <div label="Console">
 
-1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB ckuster.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
 2. Locate the corresponding changefeed you want to pause or resume, and click **...** > **Pause/Resume** in the **Action** column.
 
 </div>
@@ -85,7 +85,7 @@ ticloud serverless changefeed resume -c <cluster-id> --changefeed-id <changefeed
 
 > **Note:**
 >
-> TiDB Cloud currently only allows editing changefeeds in the paused status.
+> TiDB Cloud currently only allows editing changefeeds that are in the `Paused` state.
 
 <SimpleTab>
 <div label="Console">

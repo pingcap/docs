@@ -34,7 +34,7 @@ If your MySQL service can be accessed over the public network, you can choose to
 
 <div label="Private Link Connection">
 
-Private link connection leverage **Private Link** technologies from cloud providers, enabling resources in your VPC to connect to services in other VPCs through private IP addresses, as if those services were hosted directly within your VPC.
+Private link connections leverage **Private Link** technologies from cloud providers, enabling resources in your VPC to connect to services in other VPCs through private IP addresses, as if those services were hosted directly within your VPC.
 
 You can connect your TiDB Cloud cluster to your MySQL service securely through a private link connection. If the private link connection is not available for your MySQL service, follow [Connect to Amazon RDS via a Private Link Connection](/tidbcloud/serverless-private-link-connection-to-aws-rds.md) or [Connect to Alibaba Cloud ApsaraDB RDS for MySQL via a Private Link Connection](/tidbcloud/serverless-private-link-connection-to-alicloud-rds.md) to create one.
 
@@ -48,7 +48,7 @@ The **Sink to MySQL** connector can only sink incremental data from your TiDB Cl
 
 To load the existing data:
 
-1. Extend the [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50) to be longer than the total time of the following two operations, so that historical data during the time is not garbage collected by TiDB.
+1. Extend the [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50) to be longer than the total time of the following two operations, so that historical data during this period is not garbage collected by TiDB.
 
     - The time to export and import the existing data
     - The time to create **Sink to MySQL**
@@ -82,7 +82,7 @@ After completing the prerequisites, you can sink your data to MySQL.
     - If you choose **Public**, fill in your MySQL endpoint.
     - If you choose **Private Link**, select the private link connection that you created in the [Network](#network) section, and then fill in the MySQL port for your MySQL service.
 
-4. In **Authentication**, fill in the MySQL user name, password and TLS Encryption of your MySQL service. TiDB Cloud does not support self-signed certificates for MySQL TLS connections currently.
+4. In **Authentication**, fill in the MySQL user name and password, and configure TLS encryption for your MySQL service. Currently, TiDB Cloud does not support self-signed certificates for MySQL TLS connections.
 
 5. Click **Next** to test whether TiDB can connect to MySQL successfully:
 
@@ -92,7 +92,7 @@ After completing the prerequisites, you can sink your data to MySQL.
 6. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](https://docs.pingcap.com/tidb/stable/table-filter/#syntax).
 
     - **Replication Scope**: you can choose to only replicate tables with valid keys or replicate all selected tables.
-    - **Filter Rules**: you can set filter rules in this column. By default, there is a rule `*.*`, which stands for replicating all tables. When you add a new rule and click `apply`, TiDB Cloud queries all the tables in TiDB and displays only the tables that match the rules under the `Filter results`.
+    - **Filter Rules**: you can set filter rules in this column. By default, there is a rule `*.*`, which stands for replicating all tables. When you add a new rule and click **Apply**, TiDB Cloud queries all the tables in TiDB and displays only the tables that match the rules under **Filter results**.
     - **Case Sensitive**: you can set whether the matching of database and table names in filter rules is case-sensitive. By default, matching is case-insensitive.
     - **Filter results with valid keys**: this column displays the tables that have valid keys, including primary keys or unique indexes.
     - **Filter results without valid keys**: this column shows tables that lack primary keys or unique keys. These tables present a challenge during replication because the absence of a unique identifier can result in inconsistent data when the downstream handles duplicate events. To ensure data consistency, it is recommended to add unique keys or primary keys to these tables before initiating the replication. Alternatively, you can add filter rules to exclude these tables. For example, you can exclude the table `test.tbl1` by using the rule `"!test.tbl1"`.
@@ -100,20 +100,20 @@ After completing the prerequisites, you can sink your data to MySQL.
 7. Customize **Event Filter** to filter the events that you want to replicate.
 
     - **Tables matching**: you can set which tables the event filter will be applied to in this column. The rule syntax is the same as that used for the preceding **Table Filter** area.
-    - **Event Filter**: you can choose the events you want to ingnore.
+    - **Event Filter**: you can choose the events you want to ignore.
 
 8. In **Start Replication Position**, configure the starting position for your MySQL sink.
 
-    - If you have [loaded the existing data](#load-existing-data-optional) using Export, select **From Time** and fill in the snapshot time that you get from Export. Pay attention the time zone.
+    - If you have [loaded the existing data](#load-existing-data-optional) using Export, select **From Time** and fill in the snapshot time that you get from Export. Pay attention to the time zone.
     - If you do not have any data in the upstream TiDB cluster, select **Start replication from now on**.
 
 9. Click **Next** to configure your changefeed specification.
 
     - In the **Changefeed Name** area, specify a name for the changefeed.
 
-10. If you confirm that all configurations are correct,  click **Submit**. If you want to modify some configurations, click **Previous** to go back to the previous configuration page.
+10. If you confirm that all configurations are correct, click **Submit**. If you want to modify some configurations, click **Previous** to go back to the previous configuration page.
 
-11. The sink starts soon, and you can see the status of the sink changes from **Creating** to **Running**.
+11. The sink starts soon, and you can see the sink status change from **Creating** to **Running**.
 
     Click the changefeed name, and you can see more details about the changefeed, such as the checkpoint, replication latency, and other metrics.
 

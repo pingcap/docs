@@ -33,7 +33,7 @@ Ensure that your TiDB Cloud cluster can connect to the Apache Kafka service. You
 
 Private Link Connection leverages **Private Link** technologies from cloud providers to enable resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly within your VPC.
 
-TiDB Cloud currently supports Private Link Connection only for self-hosted Kafka and Confluent Cloud dedicated cluster. It does not support direct integration with MSK, or other Kafka SaaS services.
+TiDB Cloud currently supports Private Link Connection only for self-hosted Kafka and Confluent Cloud Dedicated Cluster. It does not support direct integration with MSK, or other Kafka SaaS services.
 
 See the following instructions to set up a Private Link connection according to your Kafka deployment and cloud provider:
 
@@ -45,9 +45,9 @@ See the following instructions to set up a Private Link connection according to 
 
 <div label="Public Network">
 
-If you want to provide Public access to your Apache Kafka service, assign Public IP addresses or domain names to all your Kafka brokers. 
+If you want to provide public access to your Apache Kafka service, assign public IP addresses or domain names to all your Kafka brokers. 
 
-It is **NOT** recommended to use Public access in a production environment. 
+It is not recommended to use public access in a production environment. 
 
 </div>
 </SimpleTab>
@@ -59,7 +59,7 @@ To allow TiDB Cloud changefeeds to stream data to Apache Kafka and create Kafka 
 - The `Create` and `Write` permissions are added for the topic resource type in Kafka.
 - The `DescribeConfigs` permission is added for the cluster resource type in Kafka.
 
-For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources](https://docs.confluent.io/platform/current/kafka/authorization.html#resources) and [Adding ACLs](https://docs.confluent.io/platform/current/kafka/authorization.html#adding-acls) in Confluent documentation for more information.
+For example, if your Kafka cluster is in Confluent Cloud, refer to [Resources](https://docs.confluent.io/platform/current/kafka/authorization.html#resources) and [Adding ACLs](https://docs.confluent.io/platform/current/kafka/authorization.html#adding-acls) in the Confluent documentation for more information.
 
 ## Step 1. Open the Changefeed page for Apache Kafka
 
@@ -74,7 +74,7 @@ The steps vary depending on the connectivity method you select.
 <SimpleTab>
 <div label="Public">
 
-1. In **Connectivity Method**, select **Public**, fill in your Kafka brokers endpoints. You can use commas `,` to separate multiple endpoints.
+1. In **Connectivity Method**, select **Public**, and fill in your Kafka broker endpoints. You can use commas `,` to separate multiple endpoints.
 2. Select an **Authentication** option according to your Kafka authentication configuration.
 
     - If your Kafka does not require authentication, keep the default option **Disable**.
@@ -109,7 +109,7 @@ The steps vary depending on the connectivity method you select.
 1. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](https://docs.pingcap.com/tidb/stable/table-filter/#syntax).
 
     - **Replication Scope**: you can choose to only replicate tables with valid keys or replicate all selected tables.
-    - **Filter Rules**: you can set filter rules in this column. By default, there is a rule `*.*`, which stands for replicating all tables. When you add a new rule and click `apply`, TiDB Cloud queries all the tables in TiDB and displays only the tables that match the rules under the `Filter results`.
+    - **Filter Rules**: you can set filter rules in this column. By default, there is a rule `*.*`, which stands for replicating all tables. When you add a new rule and click **Apply**, TiDB Cloud queries all the tables in TiDB and displays only the tables that match the rules under **Filter results**.
     - **Case Sensitive**: you can set whether the matching of database and table names in filter rules is case-sensitive. By default, matching is case-insensitive.
     - **Filter results with valid keys**: this column displays the tables that have valid keys, including primary keys or unique indexes.
     - **Filter results without valid keys**: this column shows tables that lack primary keys or unique keys. These tables present a challenge during replication because the absence of a unique identifier can result in inconsistent data when the downstream handles duplicate events. To ensure data consistency, it is recommended to add unique keys or primary keys to these tables before initiating the replication. Alternatively, you can add filter rules to exclude these tables. For example, you can exclude the table `test.tbl1` by using the rule `"!test.tbl1"`.
@@ -117,7 +117,7 @@ The steps vary depending on the connectivity method you select.
 2. Customize **Event Filter** to filter the events that you want to replicate.
 
     - **Tables matching**: you can set which tables the event filter will be applied to in this column. The rule syntax is the same as that used for the preceding **Table Filter** area.
-    - **Event Filter**: you can choose the events you want to ingnore.
+    - **Event Filter**: you can choose the events you want to ignore.
 
 3. Customize **Column Selector** to select columns from events and send only the data changes related to those columns to the downstream.
 
@@ -130,7 +130,7 @@ The steps vary depending on the connectivity method you select.
 
     - Avro is a compact, fast, and binary data format with rich data structures, which is widely used in various flow systems. For more information, see [Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol).
     - Canal-JSON is a plain JSON text format, which is easy to parse. For more information, see [Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json).
-    - Open Protocol is a row-level data change notification protocol that provides data sources for monitoring, caching, full-text indexing, analysis engines, and primary-secondary replication between different databases. For more information, see [Open Protocol data format](https://docs.pingcap.com/tidb/stable/ticdc-open-protocol). 
+    - Open Protocol is a row-level data change notification protocol that provides data sources for monitoring, caching, full-text indexing, analysis engines, and primary-secondary replication between different databases. For more information, see [Open Protocol data format](https://docs.pingcap.com/tidb/stable/ticdc-open-protocol).
     - Debezium is a tool for capturing database changes. It converts each captured database change into a message called an "event" and sends these events to Kafka. For more information, see [Debezium data format](https://docs.pingcap.com/tidb/stable/ticdc-debezium).
 
 5. Enable the **TiDB Extension** option if you want to add TiDB-extension fields to the Kafka message body.
@@ -180,7 +180,7 @@ The steps vary depending on the connectivity method you select.
 
     - **Distribute changelogs by column value to Kafka partition**
 
-        If you want the changefeed to send Kafka messages of a table to different partitions, choose this distribution method. The specified column values of a row changelog will determine which partition the changelog is sent to. This distribution method ensures orderliness in each partition and guarantees that the changelog with the same column values is send to the same partition.
+        If you want the changefeed to send Kafka messages of a table to different partitions, choose this distribution method. The specified column values of a row changelog will determine which partition the changelog is sent to. This distribution method ensures orderliness in each partition and guarantees that the changelog with the same column values is sent to the same partition.
 
 9. In the **Topic Configuration** area, configure the following numbers. The changefeed will automatically create the Kafka topics according to the numbers.
 

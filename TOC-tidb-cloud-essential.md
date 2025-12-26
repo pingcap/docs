@@ -234,8 +234,8 @@
     - [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Stream Data
   - [Changefeed Overview](/tidb-cloud/essential-changefeed-overview.md)
-  - [To MySQL Sink](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
-  - [To Kafka Sink](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
+  - [Sink to MySQL](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
+  - [Sink to Apache Kafka](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
 - Vector Search ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/vector-search/vector-search-overview.md)
   - Get Started
