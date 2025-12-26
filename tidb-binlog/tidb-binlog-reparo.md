@@ -7,7 +7,7 @@ summary: Learn to use Reparo.
 
 Reparo is a TiDB Binlog tool, used to recover the incremental data. To back up the incremental data, you can use Drainer of TiDB Binlog to output the binlog data in the protobuf format to files. To restore the incremental data, you can use Reparo to parse the binlog data in the files and apply the binlog in TiDB/MySQL.
 
-Download Reparo via [tidb-binlog-cluster-latest-linux-amd64.tar.gz](https://download.pingcap.org/tidb-binlog-cluster-latest-linux-amd64.tar.gz)
+Download Reparo via [tidb-binlog-cluster-latest-linux-amd64.tar.gz](https://download.pingcap.com/tidb-binlog-cluster-latest-linux-amd64.tar.gz)
 
 ## Reparo usage
 
