@@ -30,14 +30,17 @@ Backup files can originate from the following sources:
 
 ## Automatic backups
 
-{{{ .premium }}} offers enhanced automatic backup capabilities, combining high-frequency snapshots with log backups to maximize data reliability for production environments.
+{{{ .premium }}} provides enhanced automatic backup capabilities for production environments. It combines high-frequency snapshots with log backups to ensure data reliability.
 
 ### Automatic backup policies
 
-{{{ .premium }}} instances provide a comprehensive data protection strategy through a multi-layered backup architecture:
+{{{ .premium }}} instances use a multi-layer backup architecture to protect your data, as described in the following table:
 
-- Point-in-Time Recovery (PITR)
-    - Retention period: 7 days.
+| Backup type | Retention period | Restore granularity |
+| --- | --- | --- |
+| **Point-in-time recovery (PITR)** | 7 days | Restore to any specific point in time within the 7-day window. |
+| **Hourly snapshot** | 7 days | Restore from any hourly snapshot generated within the last 7 days. |
+| **Daily snapshot** | 33 days | Restore from any daily snapshot generated within the last 33 days. By default, daily snapshots are captured at 00:00 UTC. |
     - Restore granularity: supports restoration to any specific moment within the 7-day retention window.
 
 - Hourly backup snapshot
@@ -50,19 +53,19 @@ Backup files can originate from the following sources:
 
 ### Backup execution rules
 
-- Backup cycle: {{{ .premium }}} instances support both daily and hourly automatic backups.
+- **Backup cycle**: {{{ .premium }}} instances perform both hourly and daily automatic backups.
 
-- Backup schedule:
-    - Hourly backup: always runs at the start of every hour (on the hour).
-    - Daily backup: executed daily at 0:00 UTC.
-    - Currently, backup time management or customization is not supported.
+- **Backup schedule**:
+    - Hourly backups run at the start of every hour.
+    - Daily backups run at 00:00 UTC each day.
+    - Currently, you cannot customize or manage backup schedules.
 
-- **Retention mechanism**: backups that exceed their retention period (7 days or 33 days) automatically expire and cannot be restored.
+- **Retention behavior**: backups expire automatically when they exceed their retention period (7 days or 33 days) and cannot be restored.
 
 > **Note:**
 >
-> - Storage costs for automatic backups are calculated based on your backup data volume and retention duration.
-> - To extend a backup retention period beyond the default limits, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+> - Automatic backup storage costs depend on the backup data volume and the retention period.
+> - To extend the backup retention period beyond the default limits, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
 
 ### Delete backup files
 
