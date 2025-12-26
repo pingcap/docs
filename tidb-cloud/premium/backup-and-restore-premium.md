@@ -41,21 +41,13 @@ Backup files can originate from the following sources:
 | **Point-in-time recovery (PITR)** | 7 days | Restore to any specific point in time within the 7-day window. |
 | **Hourly snapshot** | 7 days | Restore from any hourly snapshot generated within the last 7 days. |
 | **Daily snapshot** | 33 days | Restore from any daily snapshot generated within the last 33 days. By default, daily snapshots are captured at 00:00 UTC. |
-    - Restore granularity: supports restoration to any specific moment within the 7-day retention window.
-
-- Hourly backup snapshot
-    - Retention period: 7 days.
-    - Restore granularity: supports restoration to any specific hourly snapshot generated within the 7-day retention window
-
-- Daily backup snapshot
-    - Retention period: 33 days.
-    - Restore granularity: supports restoration to any daily snapshot (captured at 0:00 UTC by default) within the 33-day retention window.
 
 ### Backup execution rules
 
 - **Backup cycle**: {{{ .premium }}} instances perform both hourly and daily automatic backups.
 
 - **Backup schedule**:
+
     - Hourly backups run at the start of every hour.
     - Daily backups run at 00:00 UTC each day.
     - Currently, you cannot customize or manage backup schedules.
