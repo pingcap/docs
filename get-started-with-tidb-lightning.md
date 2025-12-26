@@ -49,7 +49,7 @@ Before the data import, you need to deploy a TiDB cluster. In this tutorial, TiD
 
 Download the TiDB Lightning installation package from the following link:
 
-- **v5.4.0**: [tidb-toolkit-v5.4.0-linux-amd64.tar.gz](https://download.pingcap.org/tidb-toolkit-v5.4.0-linux-amd64.tar.gz)
+- **v5.4.0**: [tidb-toolkit-v5.4.0-linux-amd64.tar.gz](https://download.pingcap.com/tidb-toolkit-v5.4.0-linux-amd64.tar.gz)
 
 > **Note:**
 >

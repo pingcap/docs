@@ -28,8 +28,8 @@ The following are its usage scenarios:
 {{< copyable "shell-regular" >}}
 
 ```bash
-wget https://download.pingcap.org/tidb-{version}-linux-amd64.tar.gz &&
-wget https://download.pingcap.org/tidb-{version}-linux-amd64.sha256
+wget https://download.pingcap.com/tidb-{version}-linux-amd64.tar.gz &&
+wget https://download.pingcap.com/tidb-{version}-linux-amd64.sha256
 ```
 
 To check the file integrity, execute the following command. If the result is OK, the file is correct.
