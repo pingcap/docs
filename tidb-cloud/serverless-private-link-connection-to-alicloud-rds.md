@@ -39,7 +39,7 @@ To ensure successful connectivity, your ApsaraDB RDS for MySQL instance must mee
 
 - Region match: the instance must reside in the same Alibaba Cloud region as your {{{ .essential }}} cluster.
 - AZ (Availability Zone) availability: the availability zones must overlap with those of your {{{ .essential }}} cluster.
-- Network accessibility: the instance must be accessible within the VPC, with an appropriately configured IP allowlist.
+- Network accessibility: the instance must be configured with proper IP whitelist and be accessible within the VPC.
 
 > **Note**
 >
