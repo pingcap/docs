@@ -159,7 +159,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
-|  |  |  |
+| `tidb_advancer_check_point_lag_limit`       | Newly added  | Controls the maximum allowed checkpoint lag for a log backup task. If a task's checkpoint lag exceeds this limit, TiDB Advancer pauses the task. |
+| `tidb_cb_pd_metadata_error_rate_threshold_ratio`    | Newly added  | Controls when TiDB triggers the circuit breaker. Setting a value of `0` (default) disables the circuit breaker. Setting a value between `0.01` and `1` enables it, causing the circuit breaker to trigger when the error rate of specific requests sent to PD reaches or exceeds the threshold. |
 |  |  |  |
 |  |  |  |
 
