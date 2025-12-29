@@ -9,37 +9,29 @@ TiDB X represents a fundamental architectural shift in the TiDB evolution, trans
 
 TiDB classic architecture decouples storage from compute entirely, TiDB X introduces a novel "Separation of Compute and Compute" design that isolates online transactional workloads from heavy maintenance tasks. The result is a system that offers elastic scalability, predictable performance, and optimized Total Cost of Ownership (TCO).
 
-This document details the architecture of TiDB X, including its storage, computing, and scheduling mechanisms.
+This document details the challenges of TiDB classic, the architecture and key innovations of TiDB X.
 
 # Challenges of TiDB Classic
 
 The motivation of TiDB X is documented in the blog [The Making of TiDB X: Origins, Architecture, and What’s to Come](https://www.pingcap.com/blog/tidbx-origins-architecture/)
 
-TiDB Classic has faced several critical challenges in large-scale production environments, primarily stemming from its "Share-nothing" architecture.
+TiDB Classic has faced several challenges in large-scale production environments, primarily stemming from its "Share-nothing" architecture.
 
 ## Scalability Limitations
 
-Slow Scale Operations: In TiDB Classic, scaling out (adding nodes) or scaling in (removing nodes) requires physically copying massive amounts of data (SST files) between nodes. This process is time-consuming and can take hours to complete for large datasets.
+In TiDB Classic, scaling out (adding nodes) or scaling in (removing nodes) requires physically copying massive amounts of data (SST files) between nodes. This process is time-consuming for large datasets and can impact online traffic due to the heavy CPU and I/O required to move data.
 
-Global Mutex Bottlenecks: The underlying storage engine (RocksDB) in TiDB Classic uses a single LSM-tree protected by a global mutex. This creates a scalability ceiling where the system struggles to handle extremely large datasets (e.g., 3TB+ data per node or 100k+ SST files), preventing it from utilizing the full capacity of the hardware.
-
-Impact on Traffic: Scale-in and scale-out operations are not fast enough and often impact online traffic due to the heavy I/O required to move data.
+The underlying storage engine (RocksDB) in TiDB Classic uses a single LSM-tree protected by a global mutex. This creates a scalability ceiling where the system struggles to handle large datasets (e.g., 3TB+ data per tikv node or 100k+ SST files), preventing it from utilizing the full capacity of the hardware.
 
 ## Stability and Performance Challenges
 
-Compaction Overhead: Heavy write traffic triggers massive local compaction jobs to merge SST files. In the Classic architecture, these compaction jobs run on the same TiKV nodes serving online traffic, consuming significant CPU and I/O resources.
+Heavy write traffic triggers massive local compaction jobs to merge SST files. In the Classic architecture, these compaction jobs run on the same TiKV nodes serving online traffic, consuming significant CPU and I/O resources and can impact the online traffic.
 
-Resource Contention: There is no physical isolation between logical regions and physical SST files. Operations like adding an index or moving a region (balancing) create overhead that competes directly with user queries, leading to performance jitter.
-
-Flow Control Issues: Under heavy write pressure, the system often triggers flow control mechanisms to protect the storage engine, which results in latency spikes and unpredictable performance for the application.
+There is no physical isolation between logical regions and physical SST files. Operations like adding an index or moving a region (balancing) create compaction overhead that competes directly with user queries, leading to performance jitter. Under heavy write pressure, if the background compaction can not keep up with the forground write traffic, the system can trigger flow control mechanisms to protect the storage engine, which results in write throughput throttle and latency spikes for the application.
 
 ## Lack of Cost Effectiveness
 
-Over-Provisioning: To keep the production system stable and ensure good performance during peak traffic, customers are forced to over-provision hardware resources.
-
-Static Resource Allocation: Resources must be planned for the "high water mark" of both online traffic and heavy background tasks. Users cannot easily scale resources down during quiet periods, leading to wasted compute capacity and higher TCO.
-
-Coupled Costs: Because data size on single tikv nodes is limited, users often have to add more expensive compute nodes just to get more storage capacity, even if they don't need the extra CPU power.
+To keep the production system stable and ensure good performance during peak traffic, customers are forced to over-provision hardware resources.  Resources must be planned for the "high water mark" of both online traffic and heavy background tasks. Besides, data size on single tikv nodes is limited, users often have to add more expensive compute nodes just to get more storage capacity, even if they don't need the extra CPU power.
 
 ## Heavy Background Job Interference
 
