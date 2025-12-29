@@ -227,13 +227,13 @@ Take the following steps to configure an access key:
 
     1. Create an IAM user. For more information, see [Create an IAM user in your AWS account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console).
     2. Use your AWS account ID or account alias, and your IAM user name and password to sign in to [the IAM console](https://console.aws.amazon.com/iam).
-    3. Create an access key. For more information, see [creating an access key for an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
+    3. Create an access key. For more information, see [Manage access keys for IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
 
 2. Grant permissions to the IAM user.
 
     Create a policy and attach it to the IAM user. Ensure that the policy includes the required permissions based on your task. To restore data to a {{{ .premium }}} instance, grant `s3:GetObject`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions.
 
-    The following is an example policy that allows TiDB Cloud to **restore** data from a specific folder in your Amazon S3 bucket.
+    The following is an example policy that allows TiDB Cloud to restore data from a specific folder in your Amazon S3 bucket.
 
     ```json
     {
