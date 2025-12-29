@@ -54,7 +54,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
 3. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
 
-4. Enter the required information in the **Create Private Link Connection** dialog:
+4. In the **Create Private Link Connection** dialog, enter the required information:
 
     - **Private Link Connection Name**: enter a name for the private link connection.
     - **Connection Type**: select **AWS Endpoint Service**. If this option is not displayed, ensure that your cluster is created on AWS.
@@ -68,11 +68,15 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
 <div label="CLI">
 
-```shell
-ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type AWS_ENDPOINT_SERVICE --aws.endpoint-service-name <endpoint-service-name>
-```
+To create a private link connection using the TiDB Cloud CLI:
 
-Then go to the detail page of your endpoint service on the [AWS console](https://console.aws.amazon.com). In the **Endpoint Connections** tab, accept the endpoint connection request from TiDB Cloud.
+1. Run the following command:
+
+    ```shell
+    ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type AWS_ENDPOINT_SERVICE --aws.endpoint-service-name <endpoint-service-name>
+    ```
+
+2. Go to the detail page of your endpoint service on the [AWS console](https://console.aws.amazon.com). In the **Endpoint Connections** tab, accept the endpoint connection request from TiDB Cloud.
 
 </div>
 </SimpleTab>

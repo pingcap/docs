@@ -109,7 +109,7 @@ You can create a private link connection using the TiDB Cloud console or the TiD
 
 3. In the **Private Link Connection For Dataflow**, click **Create Private Link Connection**.
 
-4. Enter the required information in the **Create Private Link Connection** dialog:
+4. In the **Create Private Link Connection** dialog, enter the required information:
 
     - **Private Link Connection Name**: enter a name for the private link connection.
     - **Connection Type**: select **AWS Endpoint Service**. If this option is not displayed, ensure that your cluster is created on AWS.
