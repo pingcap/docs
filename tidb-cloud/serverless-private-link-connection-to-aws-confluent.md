@@ -117,7 +117,7 @@ You can attach domains to a private link connection using the TiDB Cloud console
 
 4. Click **Attach Domains**.
 
-5. In the **Attach Domains** dialog, choose the **Confluent Cloud** domain type, enter the Confluent unique name to generate the domains, and then click **Attach Domains** to confirm.
+5. In the **Attach Domains** dialog, choose the **Confluent Cloud** domain type, enter the Confluent unique name you obtainded in the [step 1](#step-1-set-up-a-confluent-cloud-network) to generate the domains, and then click **Attach Domains** to confirm.
 
 </div>
 

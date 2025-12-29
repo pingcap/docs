@@ -60,7 +60,7 @@ To attach domains to a private link connection using the TiDB Cloud console, do 
 5. In the **Attach Domains** dialog, choose the domain type:
 
     - **TiDB Cloud Managed**: the domains will be generated automatically by TiDB Cloud. Click **Attach Domains** to confirm.
-    - **Confluent Cloud**: enter the unique name provided by the Confluent Cloud Dedicated cluster to generate the domains, and then click **Attach Domains** to confirm.
+    - **Confluent Cloud**: enter the unique name provided by the Confluent Cloud Dedicated cluster to generate the domains, and then click **Attach Domains** to confirm. Refer to [Connect to Confluent Cloud via a Private Link Connection](/tidbcloud/serverless-private-link-connection-to-aws-confluent.md#step-1-set-up-a-confluent-cloud-network) for more information about how to get the unique name.
 
 </div>
 
