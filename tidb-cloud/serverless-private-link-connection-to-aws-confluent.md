@@ -38,7 +38,7 @@ The Confluent Cloud network must meet the following requirements:
 
 To get the unique name of the Confluent Cloud network:
 
-1. Go to the **Environments** where your Confluent Cloud network is located on the [Confluent Cloud console](https://confluent.cloud/environments).
+1. Go to the **Environments** where your Confluent Cloud network is located on the [Confluent Cloud Console](https://confluent.cloud/environments).
 2. Click **Network management** and choose **For dedicated clusters** to find the network you created.
 3. Go to the **Network overview** page to obtain the DNS subdomain of the Confluent Cloud network. 
 4. Extract the unique nae from the DNS subdomain. For example, if the DNS subdomain is `use1-az1.domnprzqrog.us-east-1.aws.confluent.cloud`, then the unique name is `domnprzqrog.us-east-1`.
