@@ -7,7 +7,7 @@ summary: Learn how to set up private link connections for Dataflow.
 
 Dataflow services in TiDB Cloud, such as Changefeed and Data Migration (DM), require reliable connectivity to external resources such as RDS instances and Kafka clusters. While public endpoints are supported, private link connections provide a superior alternative by providing higher efficiency, lower latency, and enhanced security.
 
-Private link connections enable direct connectivity between {{{ .essential }}} and your target resources. This ensures that data traveling from TiDB Cloud to your databases on other cloud platforms remains entirely within private network boundaries, significantly reducing the network attack surface and ensuring consistent throughput for critical dataflows.
+Private link connections enable direct connectivity between {{{ .essential }}} and your target resources. This ensures that data traveling from TiDB Cloud to your databases on other cloud platforms remains entirely within private network boundaries, significantly reducing the network attack surface and ensuring consistent throughput for critical dataflow.
 
 > **Note:**
 >
@@ -29,11 +29,9 @@ This type of private link connection enables TiDB Cloud clusters on **Alibaba Cl
 
 The private link connection can access various Alibaba Cloud services by associating them to the endpoint service, such as RDS instances and Kafka services.
 
-## Attach Domains
+## Attach domains to a private link connection
 
-You can attach domains to a private link connection. 
-
-When a domain is attached to the private link connection, all traffic to this domain will be routed to this private link connection. It is useful when your service provides custom domains to clients at runtime, such as Kafka advertised listeners.
+You can attach domains to a private link connection. When a domain is attached to the private link connection, all traffic to this domain will be routed to this private link connection. It is useful when your service provides custom domains to clients at runtime, such as Kafka advertised listeners.
 
 Different private link connection types support attaching different domains. The following table shows supported domain types for each private link connection type.
 
@@ -44,11 +42,100 @@ Different private link connection types support attaching different domains. The
 
 If your domain is not included in this table, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to request the support.
 
-## Manage private link connections
+You can attach domains to a private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
 
-This section describes how to manage private link connections.
+<SimpleTab>
+<div label="Console">
 
-### Create an AWS Endpoint Service private link connection
+To attach domains to a private link connection using the TiDB Cloud, do the following:
+
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+
+    > **Tip:**
+    >
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+
+2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
+
+3. In the **Private Link Connection For Dataflow** area, choose the target private link connection, and then click **...**.
+
+4. Click **Attach Domains**.
+
+5. In the **Attach Domains** dialog, choose the domain type:
+
+    - **TiDB Cloud Managed**: the domains will be generated automatically by TiDB Cloud. Click **Attach Domains** to confirm.
+    - **Confluent Cloud**: enter the Confluent unique name provided by the Confluent Cloud Dedicated cluster to generate the domains, and then click **Attach Domains** to confirm.
+
+</div>
+
+<div label="CLI">
+
+To attach a TiDB Cloud managed domain using TiDB Cloud CLI, do the following:
+
+1. Use dry run to preview the domains to be attached. It outputs a unique name for the next step.
+
+    ```shell
+    ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --dry-run
+    ```
+
+2. Attach the domains with the unique name from the previous step.
+
+    ```shell
+    ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --unique-name <unique-name>
+    ```
+
+To attach a Confluent Cloud domain:
+
+```shell
+ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type CONFLUENT --unique-name <unique-name>
+```
+
+</div>
+</SimpleTab>
+
+## Detach domains from a private link connection
+
+You can detach domains to a private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
+
+<SimpleTab>
+<div label="Console">
+
+ To detach domains from a private link connection using the TiDB Cloud console, do the following:
+
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+
+    > **Tip:**
+    >
+    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+
+2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
+
+3. In the **Private Link Connection For Dataflow** area, choose the target private link connection, and then click **...**.
+
+4. Click **Detach Domains**, and then confirm the detachment.
+
+</div>
+
+<div label="CLI">
+
+To detach domains from a private link connection using the TiDB Cloud CLI, do the following:
+
+1. Get the private link connection details to find the `attach-domain-id`:
+
+    ```shell
+    ticloud serverless private-link-connection get -c <cluster-id> --private-link-connection-id <private-link-connection-id>
+    ```
+
+2. Detach the domain by the `attach-domain-id`:
+
+    ```shell
+     ticloud serverless private-link-connection detach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --attach-domain-id <attach-domain-id>
+    ```
+
+</div>
+</SimpleTab>
+
+## Create an AWS Endpoint Service private link connection
 
 You can create an AWS Endpoint Service private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
 
@@ -100,7 +187,7 @@ Then go to the detail page of your endpoint service on AWS console. In the **End
 </div>
 </SimpleTab>
 
-### Create an Alibaba Cloud Endpoint Service private link connection
+## Create an Alibaba Cloud Endpoint Service private link connection
 
 You can create an Alibaba Cloud Endpoint Service private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
 
@@ -156,7 +243,7 @@ To create a private link connection using the TiDB Cloud CLI:
 </div>
 </SimpleTab>
 
-### Delete a private link connection
+## Delete a private link connection
 
 You can delete private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
 
@@ -184,101 +271,6 @@ To delete the private link connection using the TiDB Cloud console, do the follo
 ```shell
 ticloud serverless private-link-connection delete -c <cluster-id> --private-link-connection-id <private-link-connection-id>
 ```
-
-</div>
-</SimpleTab>
-
-### Attach domains to a private link connection
-
-You can attach domains to a private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
-
-<SimpleTab>
-<div label="Console">
-
-To attach domains to a private link connection using the TiDB Cloud, do the following:
-
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
-
-    > **Tip:**
-    >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
-
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
-
-3. In the **Private Link Connection For Dataflow** area, choose the target private link connection, and then click **...**.
-
-4. Click **Attach Domains**.
-
-5. In the **Attach Domains** dialog, choose the domain type:
-
-    - **TiDB Cloud Managed**: the domains will be generated automatically by TiDB Cloud. Click **Attach Domains** to confirm.
-    - **Confluent Cloud**: enter the Confluent unique name provided by the Confluent Cloud Dedicated cluster to generate the domains, and then click **Attach Domains** to confirm.
-
-</div>
-
-<div label="CLI">
-
-To attach a TiDB Cloud managed domain using TiDB Cloud CLI, do the following:
-
-1. Use dry run to preview the domains to be attached. It outputs a unique name for the next step.
-
-    ```shell
-    ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --dry-run
-    ```
-
-2. Attach the domains with the unique name from the previous step.
-
-    ```shell
-    ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --unique-name <unique-name>
-    ```
-
-To attach a Confluent Cloud domain:
-
-```shell
-ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type CONFLUENT --unique-name <unique-name>
-```
-
-</div>
-</SimpleTab>
-
-### Detach domains from a private link connection
-
-You can detach domains to a private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
-
-<SimpleTab>
-<div label="Console">
-
- To detach domains from a private link connection using the TiDB Cloud console, do the following:
-
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
-
-    > **Tip:**
-    >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
-
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
-
-3. In the **Private Link Connection For Dataflow** area, choose the target private link connection, and then click **...**.
-
-4. Click **Detach Domains**, and then confirm the detachment.
-
-</div>
-
-<div label="CLI">
-
-To detach domains from a private link connection using the TiDB Cloud CLI, do the following:
-
-1. Get the private link connection details to find the `attach-domain-id`:
-
-    ```shell
-    ticloud serverless private-link-connection get -c <cluster-id> --private-link-connection-id <private-link-connection-id>
-    ```
-
-2. Detach the domain by the `attach-domain-id`:
-
-    ```shell
-     ticloud serverless private-link-connection detach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --attach-domain-id <attach-domain-id>
-    ```
 
 </div>
 </SimpleTab>
