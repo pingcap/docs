@@ -100,7 +100,7 @@ You can also refer to [Create an AWS Endpoint Service Private Link Connection](/
 
 ### 2. Attach domains to the private link connection
 
-You can create a private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
+You can attach domains to a private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
 
 <SimpleTab>
 <div label="Console">

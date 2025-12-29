@@ -1,17 +1,13 @@
 ---
-title: Private Link Connections for Dataflow (Beta)
+title: Private Link Connections for Dataflow
 summary: Learn how to set up private link connections for Dataflow.
 ---
 
-# Private Link Connections for Dataflow (Beta)
+# Private Link Connections for Dataflow
 
 Dataflow services in TiDB Cloud, such as Changefeed and Data Migration (DM), require reliable connectivity to external resources such as RDS instances and Kafka clusters. While public endpoints are supported, private link connections provide a superior alternative by providing higher efficiency, lower latency, and enhanced security.
 
 Private link connections enable direct connectivity between {{{ .essential }}} and your target resources. This ensures that data traveling from TiDB Cloud to your databases on other cloud platforms remains entirely within private network boundaries, significantly reducing the network attack surface and ensuring consistent throughput for critical dataflow.
-
-> **Note:**
->
-> The Private Link Connections for Dataflow feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 ## Private link connection types
 

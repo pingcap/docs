@@ -73,7 +73,7 @@ Set up the load balancer in the same region of your RDS:
             Type: `MySQL/Aurora`
             Source: `Anywhere-IPv4`
         - An outbound rule that allows all TCP: 
-            Type: `All TCP` 
+            Type: `MySQL/Aurora`
             Destination: `Anywhere-IPv4`
     - **Listeners and routing**:
         - Protocol and Port: set the protocol to TCP and port to your database port, for example `3306` for MySQL
