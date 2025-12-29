@@ -38,9 +38,11 @@ The Confluent Cloud network must meet the following requirements:
 
 To get the unique name of the Confluent Cloud network:
 
-1. On the **Network overview** page, obtain the DNS subdomain of the Confluent Cloud network. 
-2. Extract the unique name from the DNS subdomain. For example, if the DNS subdomain is `use1-az1.domnprzqrog.us-east-1.aws.confluent.cloud`, then the unique name is `domnprzqrog.us-east-1`.
-3. Save the unique name for later use.
+1. Go to the **Environments** where your Confluent Cloud network is located on the [Confluent Cloud console](https://confluent.cloud/environments).
+2. Click **Network management** and choose **For dedicated clusters** to find the network you created.
+3. Go to the **Network overview** page to obtain the DNS subdomain of the Confluent Cloud network. 
+4. Extract the unique nae from the DNS subdomain. For example, if the DNS subdomain is `use1-az1.domnprzqrog.us-east-1.aws.confluent.cloud`, then the unique name is `domnprzqrog.us-east-1`.
+5. Save the unique name for later use.
 
 > **Note**
 >
@@ -55,7 +57,13 @@ During the process, you need to:
 - Provide the TiDB Cloud AWS account ID that you obtain in [Prerequisites](#prerequisites).
 - Save the `VPC Service Endpoint` provided by Confluent Cloud for later use, usually in the `com.amazonaws.vpce.<region>.vpce-svc-xxxxxxxxxxxxxxxxx` format.
 
-## Step 3. Create a private link connection in TiDB Cloud
+## Step 3. Create a Confluent Cloud dedicated cluster under the network
+
+Please create a Confluent Cloud Dedicated cluster under the network you set up in [Step 1](#step-1-set-up-a-confluent-cloud-network). For more information, see [Create a dedicated cluster in Confluent Cloud](https://docs.confluent.io/cloud/current/clusters/create-cluster.html#create-ak-clusters).
+
+When creating the cluster, use existing Confluent Cloud network you set up in [Step 1](#step-1-set-up-a-confluent-cloud-network).
+
+## Step 4. Create a private link connection in TiDB Cloud
 
 To create a private link connection in TiDB Cloud, do the following:
 
