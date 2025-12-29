@@ -83,6 +83,8 @@ Full Restore <------------------------------------------------------------------
 *** ["Full Restore success summary"] *** [total-take=4.344617542s] [total-kv=5] [total-kv-size=327B] [average-speed=75.27B/s] [restore-data-size(after-compressed)=4.813kB] [Size=4813] [BackupTS=435844901803917314]
 ```
 
+During data restore, the table mode of the target table is automatically set to `restore`. Tables in `restore` mode do not allow any read or write operations. After data restore is complete, the table mode automatically switches back to `normal`, and you can read and write the table normally. This mechanism ensures task stability and data consistency throughout the restore process.
+
 ### Restore a database or a table
 
 BR supports restoring partial data of a specified database or table from backup data. This feature allows you to filter out unwanted data and back up only a specific database or table.
