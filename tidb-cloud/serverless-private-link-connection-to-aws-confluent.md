@@ -59,9 +59,9 @@ During the process, you need to:
 
 ## Step 3. Create a Confluent Cloud dedicated cluster under the network
 
-Please create a Confluent Cloud Dedicated cluster under the network you set up in [Step 1](#step-1-set-up-a-confluent-cloud-network). For more information, see [Create a dedicated cluster in Confluent Cloud](https://docs.confluent.io/cloud/current/clusters/create-cluster.html#create-ak-clusters).
+Create a Confluent Cloud Dedicated cluster under the network you set up in [Step 1](#step-1-set-up-a-confluent-cloud-network). For more information, see [Create a dedicated cluster in Confluent Cloud](https://docs.confluent.io/cloud/current/clusters/create-cluster.html#create-ak-clusters).
 
-When creating the cluster, use existing Confluent Cloud network you set up in [Step 1](#step-1-set-up-a-confluent-cloud-network).
+When creating the cluster, use the existing Confluent Cloud network you set up in [Step 1](#step-1-set-up-a-confluent-cloud-network).
 
 ## Step 4. Create a private link connection in TiDB Cloud
 
