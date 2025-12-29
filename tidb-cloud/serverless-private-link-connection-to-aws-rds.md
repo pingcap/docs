@@ -41,6 +41,7 @@ The Amazon RDS instance must meet the following requirements:
 - Region match: the instance must reside in the same AWS region as your {{{ .essential }}} cluster.
 - The [subnet group](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Subnets) of your Amazon RDS instance must have overlapping availability zones as your {{{ .essential }}} cluster.
 - Set your Amazon RDS instance with a proper security group, and it is accessible within the VPC. For example, you can create a security group with the following rules:
+
     - An inbound rule that allows MySQL/Aurora: 
         Type: `MySQL/Aurora`
         Source: `Anywhere-IPv4`
@@ -75,6 +76,7 @@ Set up the load balancer in the same region of your RDS:
     - **VPC**: the VPC where your RDS is located
     - **Availability Zones**: it must overlap with your {{{ .essential }}} cluster
     - **Security groups**: create a new security group with the following rules:
+  
         - An inbound rule that allows MySQL/Aurora: 
             Type: `MySQL/Aurora`
             Source: `Anywhere-IPv4`
@@ -82,6 +84,7 @@ Set up the load balancer in the same region of your RDS:
             Type: `MySQL/Aurora`
             Destination: `Anywhere-IPv4`
     - **Listeners and routing**:
+  
         - Protocol and Port: set the protocol to TCP and port to your database port, for example `3306` for MySQL
         - Target group: select the target group you that create in the previous step
   
