@@ -70,7 +70,7 @@ To create a private link connection in TiDB Cloud, do the following:
 
     > **Note:**
     >
-    > For Confluent Cloud Dedicated clusters on AWS, you do not need to go to the detail page of your endpoint service on the AWS console to manually accept the endpoint connection request from TiDB Cloud.
+    > For Confluent Cloud Dedicated clusters on AWS, you do not need to go to the detail page of your endpoint service on the AWS console to manually accept the endpoint connection request from TiDB Cloud. Confluent Cloud processes it automatically.
 
 2. Attach the Confluent Cloud service domains to the private link connection so that dataflow services in TiDB Cloud can access the Confluent cluster.
 
