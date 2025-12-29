@@ -36,17 +36,14 @@ The Confluent Cloud network must meet the following requirements:
 - Region match: the network must reside in the same AWS region as your {{{ .essential }}} cluster.
 - AZ (Availability Zone) availability: the availability zones of the network must overlap with those of your {{{ .essential }}} cluster.
 
-To get the unique name of the Confluent Cloud network:
+To get the unique name of the Confluent Cloud network, take the following steps:
 
-1. Go to the **Environments** where your Confluent Cloud network is located on the [Confluent Cloud Console](https://confluent.cloud/environments).
+1. In the [Confluent Cloud Console](https://confluent.cloud/), navigate to the [**Environments**](https://confluent.cloud/environments) page, and then click the environment where your Confluent Cloud network is located.
 2. Click **Network management** and choose **For dedicated clusters** to find the network you created.
 3. Go to the **Network overview** page to obtain the DNS subdomain of the Confluent Cloud network. 
-4. Extract the unique nae from the DNS subdomain. For example, if the DNS subdomain is `use1-az1.domnprzqrog.us-east-1.aws.confluent.cloud`, then the unique name is `domnprzqrog.us-east-1`.
+4. Extract the unique name of your Confluent Cloud network from the DNS subdomain. For example, if the DNS subdomain is `use1-az1.domnprzqrog.us-east-1.aws.confluent.cloud`, then the unique name is `domnprzqrog.us-east-1`.
 5. Save the unique name for later use.
 
-> **Note**
->
-> The Confluent Cloud Dedicated cluster must be deployed in this network.
 
 ## Step 2. Add a PrivateLink Access to the network
 
@@ -67,18 +64,14 @@ When creating the cluster, use the existing Confluent Cloud network you set up i
 
 To create a private link connection in TiDB Cloud, do the following:
 
-### 1. Create the AWS Endpoint Service private link connection
+1. Create a private link connection in TiDB Cloud using the `VPC Service Endpoint` from Confluent Cloud.
 
-Create a private link connection in TiDB Cloud using the `VPC Service Endpoint` from Confluent Cloud.
+    For more information, see [Create an AWS Endpoint Service private link connection](/tidb-cloud/serverless-private-link-connection.md#create-an-aws-endpoint-service-private-link-connection).
 
-For more information, see [Create an AWS Endpoint Service private link connection](/tidb-cloud/serverless-private-link-connection.md#create-an-aws-endpoint-service-private-link-connection).
+    > **Note:**
+    >
+    > For Confluent Cloud Dedicated clusters on AWS, you do not need to go to the detail page of your endpoint service on the AWS console to manually accept the endpoint connection request from TiDB Cloud.
 
-> **Note:**
->
-> For Confluent Cloud Dedicated clusters on AWS, you do not need to go to the detail page of your endpoint service on the AWS console to manually accept the endpoint connection request from TiDB Cloud.
+2. Attach the Confluent Cloud service domains to the private link connection so that dataflow services in TiDB Cloud can access the Confluent cluster.
 
-### 2. Attach domains to the private link connection
-
-Attach the Confluent Cloud service domains to the private link connection so that dataflow services in TiDB Cloud can access the Confluent cluster.
-
-For more information, see [Attach domains to a private link connection](/tidb-cloud/serverless-private-link-connection.md#attach-domains-to-a-private-link-connection).
+    For more information, see [Attach domains to a private link connection](/tidb-cloud/serverless-private-link-connection.md#attach-domains-to-a-private-link-connection).
