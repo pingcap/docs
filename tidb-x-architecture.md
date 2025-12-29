@@ -15,7 +15,15 @@ This document details the challenges of TiDB classic, the architecture and key i
 
 The motivation of TiDB X is documented in the blog [The Making of TiDB X: Origins, Architecture, and What’s to Come](https://www.pingcap.com/blog/tidbx-origins-architecture/)
 
-TiDB Classic has faced several challenges in large-scale production environments, primarily stemming from its "Share-nothing" architecture.
+TiDB Classic has been widely adopted, the advantages of TiDB Classic includes:
+
+- Nearly unlimited scalability— automatically scales read/write performance with business workload, reaching millions of QPS and supports 1+ PiB per cluster.
+- Fully supports HTAP. Heavy aggregation/join pushed down to TiFlash, providing predictable performance.
+- Fully online DDL. Non-blocking for reads and writes, 8.2X faster than Aurora, minimal impact on QPS and latency.
+- Seamless cluster upgrades and scale up/down. Service remains online during matenance tasks.
+- Open-source, supports AWS, GCP, Azure; no vendor lock-in.
+
+TiDB Classic has faced several challenges in large-scale production environments, it's not easy to resolve these issues on TiDB Classic architecture.
 
 ## Scalability Limitations
 
@@ -33,18 +41,9 @@ There is no physical isolation between logical regions and physical SST files. O
 
 To keep the production system stable and ensure good performance during peak traffic, customers are forced to over-provision hardware resources.  Resources must be planned for the "high water mark" of both online traffic and heavy background tasks. Besides, data size on single tikv nodes is limited, users often have to add more expensive compute nodes just to get more storage capacity, even if they don't need the extra CPU power.
 
-## Heavy Background Job Interference
-
-Resource Conflict: Heavy background jobs—such as scale operations, backup, compaction, analyze, and data import (Load Data)—run on the same nodes as foreground OLTP traffic.
-
-Performance Degradation: These tasks are resource-intensive and often interfere with online traffic, causing latency increases or throughput drops.
-
-Maintenance Windows: Due to this interference, administrators often have to schedule maintenance operations (like index creation or backups) during off-peak hours to avoid impacting the business, reducing operational agility.
-
-
 # TiDB X Architecture
 
-This architecture represents a modern, cloud-native Share-Everything design that decouples storage from compute and further separates foreground transaction processing from background maintenance tasks.
+This architecture represents a modern, cloud-native Share-Everything design that further separates foreground transaction processing from heavy tasks.
 
 ![TiDB X Architecture](/media/tidb-x/tidb-x-architecture.png)
 
