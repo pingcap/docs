@@ -32,7 +32,7 @@ You can create an AWS Endpoint Service private link connection using the TiDB Cl
 Ensure that the AWS endpoint service:
 
 - Resides in the same region as your TiDB Cloud cluster.
-- Allows connections from the TiDB Cloud account.
+- Add TiDB Cloud account ID to the `Allows principals` list.
 - Has availability zones that overlap with your TiDB Cloud cluster.
 
 You can get the account ID and available zones information at the bottom of the **Create Private Link Connection** dialog, or by running the following command:
@@ -88,7 +88,7 @@ You can create an Alibaba Cloud Endpoint Service private link connection using t
 Ensure that the Alibaba Cloud endpoint service:
 
 - Resides in the same region as your TiDB Cloud cluster.
-- Allows connections from the TiDB Cloud account.
+- Add TiDB Cloud account ID to the `Service Whitelist`.
 - Has availability zones that overlap with your TiDB Cloud cluster.
 
 You can get the account ID and available zones information at the bottom of the **Create Private Link Connection** dialog, or by running the following command:
