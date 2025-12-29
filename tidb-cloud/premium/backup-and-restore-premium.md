@@ -315,7 +315,7 @@ Take the following steps to configure an AccessKey pair:
 
         > **Tip:**
         >
-        > For **restore** operations, you can enhance security by restricting access to only the specific folder (prefix) where your backup files are stored, rather than granting access to the entire bucket.
+        > For restore operations, you can enhance security by restricting access to only the specific folder (prefix) where your backup files are stored, rather than granting access to the entire bucket.
 
     - In the **Resource** section, select the bucket and the objects in the bucket.
 
