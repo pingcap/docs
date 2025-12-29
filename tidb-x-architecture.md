@@ -11,35 +11,45 @@ TiDB classic architecture decouples storage from compute entirely, TiDB X introd
 
 This document details the challenges of TiDB classic, the architecture and key innovations of TiDB X.
 
-# Challenges of TiDB Classic
+# The Successes and Challenges of TiDB Classic
 
-The motivation of TiDB X is documented in the blog [The Making of TiDB X: Origins, Architecture, and What’s to Come](https://www.pingcap.com/blog/tidbx-origins-architecture/)
+## Why TiDB Classic Changed the Game
 
-TiDB Classic has been widely adopted, the advantages of TiDB Classic includes:
+TiDB Classic’s "Share-nothing" architecture was a revolutionary step forward, freeing organizations from the rigid constraints of traditional monolithic databases. By decoupling compute from storage and utilizing the Raft consensus algorithm, it delivered a level of resilience and scale that defined the modern NewSQL era.
 
-- Nearly unlimited scalability— automatically scales read/write performance with business workload, reaching millions of QPS and supports 1+ PiB per cluster.
-- Fully supports HTAP. Heavy aggregation/join pushed down to TiFlash, providing predictable performance.
-- Fully online DDL. Non-blocking for reads and writes, 8.2X faster than Aurora, minimal impact on QPS and latency.
-- Seamless cluster upgrades and scale up/down. Service remains online during matenance tasks.
-- Open-source, supports AWS, GCP, Azure; no vendor lock-in.
+Its success was built on several foundational strengths:
 
-TiDB Classic has faced several challenges in large-scale production environments, it's not easy to resolve these issues on TiDB Classic architecture.
+- Massive Horizontal Scalability: TiDB Classic proved that you didn't have to choose between scale and SQL. It allowed businesses to scale both read and write performance linearly with their workload, easily reaching millions of QPS and supporting massive clusters exceeding 1+ PiB of data.
+- True HTAP Capabilities: It unified transactional and analytical processing. By pushing down heavy aggregation and join operations to TiFlash (the columnar engine), it provided predictable, real-time analytics on fresh transactional data without complex ETL pipelines.
+- Non-Blocking Operations: Its implementation of Fully Online DDL meant that schema changes were non-blocking for reads and writes, allowing businesses to evolve their data models with minimal impact on latency or uptime.
+- Always-Online Availability: The architecture supported seamless cluster upgrades and scaling operations (up/down), ensuring critical services remained online during maintenance.
+- Freedom from Lock-in: As an open-source solution supporting AWS, GCP, and Azure, it offered true cloud neutrality, preventing vendor lock-in.
 
-## Scalability Limitations
+## The Architectural Ceiling: Challenges Hard to Overcome
+
+Despite these massive achievements, the "Share-nothing" architecture of TiDB Classic, where storage and compute are tightly coupled on local nodes—eventually hit physical limitations in extreme large-scale environments. As data volumes exploded and cloud-native expectations evolved, inherent structural challenges emerged that were difficult to resolve without a fundamental redesign.
+
+### Scalability Limitations
 
 In TiDB Classic, scaling out (adding nodes) or scaling in (removing nodes) requires physically copying massive amounts of data (SST files) between nodes. This process is time-consuming for large datasets and can impact online traffic due to the heavy CPU and I/O required to move data.
 
 The underlying storage engine (RocksDB) in TiDB Classic uses a single LSM-tree protected by a global mutex. This creates a scalability ceiling where the system struggles to handle large datasets (e.g., 3TB+ data per tikv node or 100k+ SST files), preventing it from utilizing the full capacity of the hardware.
 
-## Stability and Performance Challenges
+### Stability and Performance Challenges
 
 Heavy write traffic triggers massive local compaction jobs to merge SST files. In the Classic architecture, these compaction jobs run on the same TiKV nodes serving online traffic, consuming significant CPU and I/O resources and can impact the online traffic.
 
 There is no physical isolation between logical regions and physical SST files. Operations like adding an index or moving a region (balancing) create compaction overhead that competes directly with user queries, leading to performance jitter. Under heavy write pressure, if the background compaction can not keep up with the forground write traffic, the system can trigger flow control mechanisms to protect the storage engine, which results in write throughput throttle and latency spikes for the application.
 
-## Lack of Cost Effectiveness
+### Lack of Cost Effectiveness
 
 To keep the production system stable and ensure good performance during peak traffic, customers are forced to over-provision hardware resources.  Resources must be planned for the "high water mark" of both online traffic and heavy background tasks. Besides, data size on single tikv nodes is limited, users often have to add more expensive compute nodes just to get more storage capacity, even if they don't need the extra CPU power.
+
+## The Motivation of TiDB X
+
+These challenges were constraints of the physical binding of data to compute. To break through these ceilings—to achieve 10x faster scaling, zero-interference background tasks, and true pay-as-you-go elasticity. We need to move from "Share-nothing" architecute to TiDB X.
+
+The motivation of TiDB X is documented in the blog [The Making of TiDB X: Origins, Architecture, and What’s to Come](https://www.pingcap.com/blog/tidbx-origins-architecture/)
 
 # TiDB X Architecture
 
