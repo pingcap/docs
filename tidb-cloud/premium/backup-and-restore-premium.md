@@ -288,7 +288,6 @@ Take the following steps to configure an AccessKey pair:
     - In the **Service** section, select **Object Storage Service**.
     - In the **Action** section, select the required permissions. To restore a backup to a TiDB Cloud instance, grant the `oss:ListObjects` and `oss:GetObject` permissions.
 
-
         > **Tip:**
         >
         > To enhance security for restore operations, you can  restrict access to the specific folder (`oss:Prefix`) where your backup files are stored rather than granting access to the entire bucket.
