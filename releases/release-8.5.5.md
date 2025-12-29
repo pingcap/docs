@@ -117,11 +117,23 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Observability
 
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
+* Add storage engine identifiers to statement summary tables and slow query logs [#61736](https://github.com/pingcap/tidb/issues/61736) @[henrybw](https://github.com/henrybw) **tw@Oreoxmt**<!--2034 -->
 
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+    When both TiKV and TiFlash are deployed in a cluster, users often need to filter SQL statements by storage engine during database diagnostics and performance optimization. For example, if TiFlash is under high load, users might need to identify SQL statements running on TiFlash to locate potential causes. To meet this need, starting from v9.0.0, TiDB adds storage engine identifier fields to statement summary tables and slow query logs.
 
-    For more information, see [Documentation](link).
+    New fields in [statement summary tables](/statement-summary-tables.md):
+
+    * `STORAGE_KV`: `1` indicates that the SQL statement accesses TiKV.
+    * `STORAGE_MPP`: `1` indicates that the SQL statement accesses TiFlash.
+
+    New fields in [slow query logs](/identify-slow-queries.md):
+
+    * `Storage_from_kv`: `true` indicates that the SQL statement accesses TiKV.
+    * `Storage_from_mpp`: `true` indicates that the SQL statement accesses TiFlash.
+
+    This feature simplifies workflows in certain diagnostics and performance optimization scenarios and improves issue identification efficiency.
+
+    For more information, see [Statement Summary Tables](/statement-summary-tables.md) and [Identify Slow Queries](/identify-slow-queries.md).
 
 ### Security
 
