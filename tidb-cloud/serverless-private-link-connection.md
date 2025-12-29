@@ -72,7 +72,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type AWS_ENDPOINT_SERVICE --aws.endpoint-service-name <endpoint-service-name>
 ```
 
-Then go to the detail page of your endpoint service on the AWS console. In the **Endpoint Connections** tab, accept the endpoint connection request from TiDB Cloud.
+Then go to the detail page of your endpoint service on the [AWS console](https://console.aws.amazon.com). In the **Endpoint Connections** tab, accept the endpoint connection request from TiDB Cloud.
 
 </div>
 </SimpleTab>

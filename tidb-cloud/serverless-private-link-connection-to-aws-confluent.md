@@ -10,7 +10,6 @@ This document describes how to connect to a Confluent Cloud Dedicated cluster on
 > **Note**
 >
 > - Only Confluent Cloud Dedicated clusters on AWS are supported.
-> - The Private Link Connections for Dataflow feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 ## Prerequisites
    
@@ -29,11 +28,11 @@ To view the the AWS account ID and available zones, do the following:
 
 ## Step 1. Set up a Confluent Cloud network
 
-Identify a Confluent Cloud network you want to use, or [create a new Confluent Cloud network on AWS](https://docs.confluent.io/cloud/current/networking/ccloud-network/aws.html#create-ccloud-network-aws).
+Identify a Confluent Cloud network that you want to use, or [create a new Confluent Cloud network on AWS](https://docs.confluent.io/cloud/current/networking/ccloud-network/aws.html#create-ccloud-network-aws).
 
 The Confluent Cloud network must meet the following requirements:
 
-- Type: the network must be a privatelink network.
+- Type: the network must be a **PrivateLink** network.
 - Region match: the instance must reside in the same AWS region as your {{{ .essential }}} cluster.
 - AZ (Availability Zone) availability: the availability zones must overlap with those of your {{{ .essential }}} cluster.
 
@@ -49,7 +48,7 @@ To get the unique name of the Confluent Cloud network:
 
 ## Step 2. Add a PrivateLink Access to the network
 
-Add a PrivateLink Access to the network you identified or set up in Step 1. For more information, see [Add a PrivateLink Access in Confluent Cloud](https://docs.confluent.io/cloud/current/networking/private-links/aws-privatelink.html#add-a-privatelink-access-in-ccloud).
+Add a PrivateLink Access to the network you identified or set up in [Step 1](#step-1-set-up-a-confluent-cloud-network). For more information, see [Add a PrivateLink Access in Confluent Cloud](https://docs.confluent.io/cloud/current/networking/private-links/aws-privatelink.html#add-a-privatelink-access-in-ccloud).
 
 During the process, you need to:
 
@@ -62,72 +61,12 @@ To create a private link connection in TiDB Cloud, do the following:
 
 ### 1. Create the AWS Endpoint Service private link connection
 
-You can create a private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
+For more information, see [Create an AWS Endpoint Service private link connection](/tidb-cloud/serverless-private-link-connection.md#create-an-aws-endpoint-service-private-link-connection).
 
-<SimpleTab>
-<div label="Console">
-
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
-
-    > **Tip:**
-    >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
-
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
-
-3. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
-
-4. Enter the required information in the **Create Private Link Connection** dialog:
-
-    - **Private Link Connection Name**: enter a name for the private link connection.
-    - **Connection Type**: select **AWS Endpoint Service**. If this option is not displayed, ensure that your cluster is created on AWS.
-    - **Endpoint Service Name**: enter the `VPC Service Endpoint` you obtained in [Step 2](#step-2-add-a-privatelink-access-to-the-network).
-
-5. Click **Create**.
-
-</div>
-
-<div label="CLI">
-
-```shell
-ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type AWS_ENDPOINT_SERVICE --aws.endpoint-service-name <endpoint-service-name>
-```
-
-</div>
-</SimpleTab>
-
-You can also refer to [Create an AWS Endpoint Service Private Link Connection](/tidb-cloud/serverless-private-link-connection.md#create-an-aws-endpoint-service-private-link-connection) for more details.
+> **Note:**
+>
+> For Confluent Cloud Dedicated clusters on AWS, you do not need to go to the detail page of your endpoint service on the AWS console to accept the endpoint connection request from TiDB Cloud.
 
 ### 2. Attach domains to the private link connection
 
-You can attach domains to a private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
-
-<SimpleTab>
-<div label="Console">
-
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
-
-    > **Tip:**
-    >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
-
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
-
-3. In the **Private Link Connection For Dataflow** area, choose the target private link connection and then click **...**.
-
-4. Click **Attach Domains**.
-
-5. In the **Attach Domains** dialog, choose the **Confluent Cloud** domain type, enter the Confluent unique name you obtainded in the [step 1](#step-1-set-up-a-confluent-cloud-network) to generate the domains, and then click **Attach Domains** to confirm.
-
-</div>
-
-<div label="CLI">
-
-```shell
-ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type CONFLUENT --unique-name <unique-name>
-```
-
-</div>
-</SimpleTab>
-
-For more information, see [Attach Domains to a Private Link Connection](/tidb-cloud/serverless-private-link-connection.md#attach-domains-to-a-private-link-connection).
+For more information, see [Attach domains to a private link connection](/tidb-cloud/serverless-private-link-connection.md#attach-domains-to-a-private-link-connection).
