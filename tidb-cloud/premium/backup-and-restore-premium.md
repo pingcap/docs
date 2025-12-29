@@ -192,7 +192,7 @@ To restore backups from cloud storage, do the following:
 2. On the **Select Backup Storage Location** page, provide the following information:
 
     - **Cloud Provider**: select the cloud provider where your backup files are stored.
-    - **Region**: if your cloud provider is Alibaba Cloud OSS, select a Region.
+    - **Region**: if your cloud provider is Alibaba Cloud OSS, select a region.
     - **Backup Files URI**: enter the URI of the top-level folder that contains your backup files.
     - **Access Key ID**: enter your access key ID.
     - **Access Key Secret**: enter your access key secret.
