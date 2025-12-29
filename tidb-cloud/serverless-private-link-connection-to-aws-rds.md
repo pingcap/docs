@@ -116,7 +116,7 @@ You can create a private link connection using the TiDB Cloud console or the TiD
 4. Enter the required information in the **Create Private Link Connection** dialog:
 
     - **Private Link Connection Name**: enter a name for the private link connection.
-    - **Connection Type**: select **AWS Endpoint Service**. If you cannot find this option, ensure that your cluster is created on AWS.
+    - **Connection Type**: select **AWS Endpoint Service**. If this option is not displayed, ensure that your cluster is created on AWS.
     - **Endpoint Service Name**: enter the endpoint service name you obtained in [Step 2](#2-set-up-the-aws-endpoint-service).
 
 5. Click **Create**.

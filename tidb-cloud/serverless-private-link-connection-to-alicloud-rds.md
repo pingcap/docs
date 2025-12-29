@@ -106,7 +106,7 @@ You can create a private link connection using the TiDB Cloud console or the TiD
 4. In the **Create Private Link Connection** dialog, enter the required information:
 
     - **Private Link Connection Name**: enter a name for the private link connection.
-    - **Connection Type**: select **Alibaba Cloud Endpoint Service**. If you cannot find this option, ensure that your cluster is created on Alibaba Cloud.
+    - **Connection Type**: select **Alibaba Cloud Endpoint Service**. If this option is not displayed, ensure that your cluster is created on Alibaba Cloud.
     - **Endpoint Service Name**: enter the endpoint service name you obtained in [Set up an endpoint service](#2-set-up-an-endpoint-service).
 
 5. Click **Create**.
