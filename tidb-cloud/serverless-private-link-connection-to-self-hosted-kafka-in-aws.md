@@ -5,40 +5,40 @@ summary: Learn how to connect to an AWS Self-Hosted Kafka using an AWS Endpoint 
 
 # Connect to AWS Self-Hosted Kafka via Private Link Connection
 
-The document describes how to connect to a self-hosted Kafka cluster in AWS, using AWS Endpoint Service private link connection.
+This document describes how to connect a {{{ .essential }}} cluster to a self-hosted Kafka cluster in AWS using AWS Endpoint Service [private link connection](/tidb-cloud/serverless-private-link-connection.md).
 
 The mechanism works as follows:
 
-1. The private link connection connects to your endpoint service with bootstrap port, it returns broker addresses with different ports. 
-2. The private link connection connects to your endpoint service with broker addresses and ports.
-3. Endpoint service forwards requests to your load balancers.
-4. Load balancers forward requests to different Kafka brokers based on the port mapping.
+1. The private link connection connects to your AWS Endpoint Service using the bootstrap broker address, which returns the addresses and ports of all Kafka brokers.
+2. TiDB Cloud uses the returned broker addresses and ports to establish connections through the private link connection.
+3. The AWS Endpoint Service forwards requests to your load balancers.
+4. Load balancers route requests to the corresponding Kafka brokers based on port mapping.
 
 ## Prerequisites
    
-- Ensure that you have the following permissions to set up a Kafka cluster in your own AWS account.
+- Ensure that you have the following permissions to set up a Kafka cluster in your AWS account:
 
-    - Manage EC2 nodes
-    - Manage VPC
+    - Manage EC2 instances
+    - Manage VPCs
     - Manage subnets
-    - Connect to EC2 nodes to configure Kafka nodes
+    - Connect to EC2 instances to configure Kafka nodes
 
-- Ensure that you have the following authorization to set up a load balancer and endpoint service in your own AWS account.
+- Ensure that you have the following permissions to set up a load balancer and endpoint service in your AWS account:
 
     - Manage security groups
     - Manage load balancer
     - Manage endpoint services
 
-- {{{ .essential }}} information: confirm that your {{{ .essential }}} is active in AWS. Retrieve and save the following details for later use:
+- Ensure that your {{{ .essential }}} is active in AWS. Retrieve and save the following details for later use:
 
     - Account ID
-    - Availability Zones (AZ)
+    - Availability Zones (AZs)
 
-To view the the AWS account ID and available zones, do the following:
+To view the AWS account ID and available zones, do the following:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
-2. On the **Private Link Connection For Dataflow**, click **Create Private Link Connection**.
-3. You can find the AWS account ID and available zones information.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of your TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
+2. In the **Private Link Connection For Dataflow** section, click **Create Private Link Connection**.
+3. In the displayed dialog, you can find the AWS account ID and available zones.
 
 The following table shows an example of the deployment information.
 
