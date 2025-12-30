@@ -1,5 +1,5 @@
 ---
-title: Connect to AWS Confluent via a Private Link Connection
+title: Connect to Confluent Cloud on AWS via a Private Link Connection
 summary: Learn how to connect to an AWS Confluent instance using an AWS Endpoint Service private link connection.
 ---
 
@@ -40,7 +40,7 @@ To get the unique name of the Confluent Cloud network, take the following steps:
 
 1. In the [Confluent Cloud Console](https://confluent.cloud/), navigate to the [**Environments**](https://confluent.cloud/environments) page, and then click the environment where your Confluent Cloud network is located.
 2. Click **Network management** and choose **For dedicated clusters** to find the network you created.
-3. Go to the **Network overview** page to obtain the DNS subdomain of the Confluent Cloud network. 
+3. Go to the **Network overview** page to obtain the DNS subdomain of the Confluent Cloud network.
 4. Extract the unique name of your Confluent Cloud network from the DNS subdomain. For example, if the DNS subdomain is `use1-az1.domnprzqrog.us-east-1.aws.confluent.cloud`, then the unique name is `domnprzqrog.us-east-1`.
 5. Save the unique name for later use.
 
