@@ -29,11 +29,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
    - Support changefeeds (Beta).
 
-        The changefeed feature is now available in beta in both the TiDB Cloud console and TiDB Cloud CLI for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential). It enables you to stream data from TiDB Cloud to other data services, currently supporting Apache Kafka and MySQL as destinations.
+        The changefeed feature is now available in beta in both the [TiDB Cloud console](https://tidbcloud.com) and [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential). It enables you to stream data from TiDB Cloud to other data services, currently supporting Apache Kafka and MySQL as destinations.
 
     - Support configuring private link connections for downstream resources.
 
-        Private link connections are now available on both the TiDB Cloud console and TiDB Cloud CLI. This feature enables you to establish private and direct connectivity between TiDB Cloud and your downstream resources (such as MySQL and Apache Kafka). It is tailored for integration with Changefeed and other dataflow services that initiate connections from TiDB Cloud to your infrastructure.
+        Private link connections are now available in both the [TiDB Cloud console](https://tidbcloud.com) and [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential). This feature enables you to establish private and direct connectivity between TiDB Cloud and your downstream resources (such as MySQL and Apache Kafka). It is tailored for integration with changefeeds and other dataflow services that initiate connections from TiDB Cloud to your infrastructure.
 
         For more information, see [Private Link Connections for Dataflow](/tidb-cloud/serverless-private-link-connection.md).
 
