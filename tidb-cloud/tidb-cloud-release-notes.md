@@ -14,9 +14,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Dedicated**
 
-    - Support TiProxy (Public Preview).
+    - Support TiProxy (Beta).
 
-        TiProxy, the official proxy component of PingCAP, is now available in public preview for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters. It provides enhanced connection management and load balancing to improve database reliability and performance.
+        TiProxy, the official proxy component of PingCAP, is now available in beta for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters. It provides enhanced connection management and load balancing to improve database reliability and performance.
   
         Highlights:
 
