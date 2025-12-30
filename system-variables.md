@@ -3559,9 +3559,9 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Enumeration
 - Default value: `hint-only`
 - Value options: `hint-only`, `affinity-force`, `force`
-- This variable controls whether and how TiDB pushes the `IndexLookUp` operator down to TiKV. The value options are as follows:
+- This variable controls whether and when TiDB pushes the `IndexLookUp` operator down to TiKV. The value options are as follows:
     - `hint-only` (default): TiDB pushes the `IndexLookUp` operator down to TiKV only when the [`INDEX_LOOKUP_PUSHDOWN`](/optimizer-hints.md#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855-and-v900) hint is explicitly specified in the SQL statement.
-    - `affinity-force`: TiDB automatically enables pushdown only for tables configured with the `AFFINITY` option.
+    - `affinity-force`: TiDB automatically enables pushdown only for tables that are configured with the `AFFINITY` option.
     - `force`: TiDB enables `IndexLookUp` pushdown for all tables.
 
 ### tidb_index_merge_intersection_concurrency <span class="version-mark">New in v6.5.0</span>

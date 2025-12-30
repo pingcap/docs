@@ -477,7 +477,7 @@ The same as the example of `ORDER_INDEX` hint, the optimizer generates two types
 
 ### INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...]) <span class="version-mark">New in v8.5.5 and v9.0.0</span>
 
-The `INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...])` hint instructs the optimizer to use only the specified indexes to access the specified table and push the `IndexLookUp` operator down to TiKV for execution.
+The `INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...])` hint instructs the optimizer to access the specified table using only the specified indexes and push down the `IndexLookUp` operator to TiKV for execution.
 
 The following example shows the execution plan generated when using this hint:
 
@@ -498,7 +498,7 @@ EXPLAIN SELECT /*+ INDEX_LOOKUP_PUSHDOWN(t1, a) */ a, b FROM t1;
 +-----------------------------+----------+-----------+----------------------+--------------------------------+
 ```
 
-When you enable the `INDEX_LOOKUP_PUSHDOWN` hint, the outermost Build operator on the TiDB side in the original execution plan is replaced with `LocalIndexLookUp` and pushed down to TiKV for execution. While scanning the index, TiKV attempts to read the corresponding row data locally. Because the index and row data might be distributed across different Regions, requests pushed down to TiKV might not cover all target rows. As a result, the execution plan still retains the `TableRowIDScan` operator on the TiDB side to fetch rows that are not hit on the TiKV side.
+When you use the `INDEX_LOOKUP_PUSHDOWN` hint, the outermost Build operator on the TiDB side in the original execution plan is replaced with `LocalIndexLookUp` and pushed down to TiKV for execution. While scanning the index, TiKV attempts to perform a table lookup locally to read the corresponding row data. Because the index and row data might be distributed across different Regions, requests pushed down to TiKV might not cover all target rows. As a result, the execution plan still retains the `TableRowIDScan` operator on the TiDB side to fetch rows that are not hit on the TiKV side.
 
 The `INDEX_LOOKUP_PUSHDOWN` hint currently has the following limitations:
 
@@ -516,7 +516,7 @@ The `INDEX_LOOKUP_PUSHDOWN` hint currently has the following limitations:
 
 The `NO_INDEX_LOOKUP_PUSHDOWN(t1_name)` hint explicitly disables the `IndexLookUp` pushdown for a specified table. This hint is typically used with the [`tidb_index_lookup_pushdown_policy`](/system-variables.md#tidb_index_lookup_pushdown_policy-new-in-v855-and-v900) system variable. When the value of this variable is `force` or `affinity-force`, you can use this hint to prevent `IndexLookUp` pushdown for specific tables.
 
-The following example sets the `tidb_index_lookup_pushdown_policy` variable to `force`, which automatically pushes down all `IndexLookUp` operators in the current session. If you specify the `NO_INDEX_LOOKUP_PUSHDOWN` hint in a query, `IndexLookUp` is not pushed down for the corresponding table:
+The following example sets the `tidb_index_lookup_pushdown_policy` variable to `force`, which automatically enables pushdown for all `IndexLookUp` operators in the current session. If you specify the `NO_INDEX_LOOKUP_PUSHDOWN` hint in a query, `IndexLookUp` is not pushed down for the corresponding table:
 
 ```sql
 SET @@tidb_index_lookup_pushdown_policy = 'force';
