@@ -27,7 +27,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Essential**
 
-   - Support changefeeds (Beta).
+    - Support changefeeds (Beta).
 
         The changefeed feature is now available in beta in both the [TiDB Cloud console](https://tidbcloud.com) and [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential). It enables you to stream data from TiDB Cloud to other data services, currently supporting Apache Kafka and MySQL as destinations.
 
