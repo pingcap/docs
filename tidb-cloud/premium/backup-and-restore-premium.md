@@ -30,49 +30,34 @@ Backup files can originate from the following sources:
 
 ## Automatic backups
 
-TiDB Cloud automatically backs up your instance data, letting you restore data from a backup snapshot to minimize data loss in the event of a disaster.
+{{{ .premium }}} provides enhanced automatic backup capabilities for production environments. It combines high-frequency snapshots with log backups to ensure data reliability.
 
-### Learn about the backup setting
+### Automatic backup policies
 
-Compared with {{{ .starter }}} clusters and {{{ .essential }}} clusters, {{{ .premium }}} offers enhanced backup capabilities, including longer retention and hourly backup support.
+{{{ .premium }}} instances use a multi-layer backup architecture to protect your data, as described in the following table:
 
-| Backup setting   | {{{ .starter }}} (free) | {{{ .starter }}} (with spending limit > 0) | {{{ .essential }}} | {{{ .premium }}} |
-|------------------|--------------------------|---------------------------------------------|--------------------|------------------|
-| Backup Cycle     | Daily                    | Daily                                       | Daily              | Daily + Hourly   |
-| Backup Retention | 1 day                    | 30 days                                     | 30 days            | Up to 33 days    |
-| Backup Time      | Fixed time               | Configurable                               | Configurable       | Configurable     |
+| Backup type | Retention period | Restore granularity |
+| --- | --- | --- |
+| **Point-in-time recovery (PITR)** | 7 days | Restore to any specific point in time within the 7-day window. |
+| **Hourly snapshot** | 7 days | Restore from any hourly snapshot generated within the last 7 days. |
+| **Daily snapshot** | 33 days | Restore from any daily snapshot generated within the last 33 days. By default, daily snapshots are captured at 00:00 UTC. |
 
-- **Backup Cycle** determines how frequently backups are created.
+### Backup execution rules
 
-    - Premium instances support both **daily** and **hourly** backups.
-    - The **default** is **hourly backups**.
+- **Backup cycle**: {{{ .premium }}} instances perform both hourly and daily automatic backups.
 
-- **Backup Retention** is the duration for which backups are retained. Expired backups cannot be restored.
+- **Backup schedule**:
 
-    - Premium instances can retain backups for up to **33 days**.
+    - Hourly backups run at the start of every hour.
+    - Daily backups run at 00:00 UTC each day.
+    - Currently, you cannot customize or manage backup schedules.
 
-- **Backup Time** is the scheduled start time for backups.
+- **Retention behavior**: backups expire automatically when they exceed their retention period (7 days or 33 days) and cannot be restored.
 
-    - For Premium instances, **daily backups** can be configured to start at a preferred time (in 30-minute intervals), while **hourly backups** always run on the hour.
-
-### Configure the backup settings
-
-To configure backups for a {{{ .premium }}} instance, perform the following steps:
-
-1. Navigate to the [**Backup**](#view-the-backup-page) page of your TiDB instance.
-
-2. Click **Backup Setting**. This will open the **Backup Setting** window, where you can configure automatic backup options.
-
-3. In **Backup Cycle**, choose between the **Hourly Backup** and **Daily Backup** tabs:
-
-    - **Hourly Backup** (default):
-        - Runs **on the hour**.
-        - You can configure **Backup Retention** (1–33 days).
-    - **Daily Backup**:
-        - Runs at a configurable time in **30-minute intervals**.
-        - You can configure both **Backup Retention** (1–33 days) and **Backup Time**.
-
-4. Click **Save** to save your settings.
+> **Note:**
+>
+> - Automatic backup storage costs depend on the backup data volume and the retention period.
+> - To extend the backup retention period beyond the default limits, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
 
 ### Delete backup files
 
