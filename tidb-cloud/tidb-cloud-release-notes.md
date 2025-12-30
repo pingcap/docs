@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Dedicated**
 
-    - Support TiProxy (Public Preview)
+    - Support TiProxy (Public Preview).
 
         TiProxy, the official proxy component of PingCAP, is now available in public preview for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters. It provides enhanced connection management and load balancing to improve database reliability and performance.
   
@@ -27,7 +27,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Essential**
 
-   - Support changefeeds.
+   - Support changefeeds (Public Beta).
 
         The changefeed feature is now available as a public beta in both the TiDB Cloud console and TiDB Cloud CLI for TiDB Cloud Essential. It enables you to stream data from TiDB Cloud to other data services, currently supporting Apache Kafka and MySQL as destinations.
 
