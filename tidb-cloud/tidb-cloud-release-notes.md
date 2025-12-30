@@ -23,7 +23,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
         - Maintains persistent client connections during scaling operations and rolling upgrades.
         - Evenly distributes traffic across TiDB nodes for better resource utilization.
   
-        For more information, see [Overview of TiProxy](/tidb-cloud/tiproxy-overview-for-cloud.md).
+      For more information, see [Overview of TiProxy](/tidb-cloud/tiproxy-overview-for-cloud.md).
 
 - **TiDB Cloud Essential**
 
