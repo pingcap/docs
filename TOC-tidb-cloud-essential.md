@@ -275,7 +275,7 @@
     - [TLS Connections to TiDB Cloud](/tidb-cloud/secure-connections-to-serverless-clusters.md)
   - Private Link Connection
     - [Private Link Connection Overview](/tidb-cloud/serverless-private-link-connection.md)
-    - [Connect to AWS Confluent Cloud](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
+    - [Connect to Confluent Cloud on AWS](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
   - Audit Management
     - [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md)
     - [Database Audit Logging](/tidb-cloud/essential-database-audit-logging.md)

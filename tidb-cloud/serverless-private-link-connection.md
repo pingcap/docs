@@ -32,7 +32,7 @@ You can create an AWS Endpoint Service private link connection using the TiDB Cl
 Ensure that the AWS endpoint service:
 
 - Resides in the same region as your TiDB Cloud cluster.
-- Add the TiDB Cloud account ID to the `Allows principals` list.
+- Add the TiDB Cloud account ID to the **Allowed principals** list.
 - Has availability zones that overlap with your TiDB Cloud cluster.
 
 You can get the account ID and available zones information at the bottom of the **Create Private Link Connection** dialog, or by running the following command:
@@ -58,7 +58,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
     - **Private Link Connection Name**: enter a name for the private link connection.
     - **Connection Type**: select **AWS Endpoint Service**. If this option is not displayed, ensure that your cluster is created on AWS.
-    - **Endpoint Service Name**: enter your AWS endpoint service name, for example, `com.amazonaws.vpce.<region>.vpce-svc-xxxx`.
+    - **Endpoint Service Name**: enter your AWS endpoint service name, for example, `com.amazonaws.vpce.<region>.vpce-svc-xxxxxxxxxxxxxxxxx`.
 
 5. Click **Create**.
 
@@ -114,7 +114,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
     - **Private Link Connection Name**: enter a name for the private link connection.
     - **Connection Type**: select **Alibaba Cloud Endpoint Service**. If this option is not displayed, ensure that your cluster is created on Alibaba Cloud.
-    - **Endpoint Service Name**: enter the Alibaba Cloud endpoint service name, for example, `com.aliyuncs.privatelink.<region>.xxxxx`.
+    - **Endpoint Service Name**: enter the Alibaba Cloud endpoint service name, for example, `com.aliyuncs.privatelink.<region>.epsrv-xxxxxxxxxxxxxxxxx`.
 
 5. Click **Create**.
 
@@ -180,7 +180,7 @@ To attach domains to a private link connection using the TiDB Cloud console, do 
 
 To attach a TiDB Cloud managed domain using the TiDB Cloud CLI, do the following:
 
-1. Use dry run to preview the domains to be attached. It outputs a unique name for the next step.
+1. Use `dry run` to preview the domains to be attached. It outputs a unique name for the next step.
 
     ```shell
     ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --dry-run

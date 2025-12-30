@@ -3,7 +3,7 @@ title: Connect to Confluent Cloud on AWS via a Private Link Connection
 summary: Learn how to connect to an AWS Confluent instance using an AWS Endpoint Service private link connection.
 ---
 
-# Connect to Confluent Cloud via a Private Link Connection
+# Connect to Confluent Cloud on AWS via a Private Link Connection
 
 This document describes how to connect a {{{ .essential }}} cluster to a [Confluent Cloud Dedicated cluster](https://docs.confluent.io/cloud/current/clusters/cluster-types.html) on AWS using an [AWS Endpoint Service private link connection](/tidb-cloud/serverless-private-link-connection.md).
 
