@@ -9,7 +9,7 @@ This document describes how to enable, disable, view, and modify TiProxy.
 
 > **Note:**
 >
-> TiProxy is in public preview and is currently available only for TiDB Cloud Dedicated clusters deployed on AWS. 
+> TiProxy is in beta and is currently available only for TiDB Cloud Dedicated clusters deployed on AWS. 
 
 ## Enable TiProxy
 
