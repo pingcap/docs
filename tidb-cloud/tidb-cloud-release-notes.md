@@ -8,6 +8,35 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## December 30, 2025
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Support TiProxy (Public Preview)
+
+        TiProxy, the official proxy component of PingCAP, is now available in public preview for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters. It provides enhanced connection management and load balancing to improve database reliability and performance.
+  
+        Highlights:
+
+        - Seamless connection management: maintains persistent client connections during scaling operations and rolling upgrades.
+        - Optimized load balancing: evenly distributes traffic across TiDB nodes for better resource utilization.
+  
+        For more information, see [Overview of TiProxy](/tidb-cloud/tiproxy-overview-for-cloud.md).
+
+- **TiDB Cloud Essential**
+
+   - Support changefeeds.
+
+        The changefeed feature is now available as a public beta in both the TiDB Cloud console and TiDB Cloud CLI for TiDB Cloud Essential. It enables you to stream data from TiDB Cloud to other data services, currently supporting Apache Kafka and MySQL as destinations.
+
+    - Support configuring private link connections for downstream resources.
+
+        Private link connections are now available on both the TiDB Cloud console and TiDB Cloud CLI. It enables private and direct connectivity between TiDB Cloud and your downstream resources (such as MySQL and Apache Kafka). Tailored for integration with Changefeed and other dataflow services that initiate connections from TiDB Cloud to your infrastructure.
+
+        For more information, see [Private Link Connections for Dataflow](/tidb-cloud/serverless-private-link-connection.md).
+
 ## December 16, 2025
 
 **General changes**
