@@ -21,11 +21,11 @@ This document describes how to connect to an Alibaba Cloud ApsaraDB RDS for MySQ
     - Account ID
     - Availability Zones (AZ)
 
-To view the the Alibaba Cloud account ID and available zones, do the following:
+To view the the Alibaba Cloud account ID and availability zones, do the following:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
 2. On the **Private Link Connection For Dataflow**, click **Create Private Link Connection**.
-3. You can find the Alibaba Cloud account ID and available zones.
+3. You can find the Alibaba Cloud account ID and availability zones.
 
 ## Step 1. Set up an ApsaraDB RDS for MySQL instance
 
