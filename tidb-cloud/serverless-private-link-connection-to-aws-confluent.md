@@ -44,7 +44,6 @@ To get the unique name of the Confluent Cloud network, take the following steps:
 4. Extract the unique name of your Confluent Cloud network from the DNS subdomain. For example, if the DNS subdomain is `use1-az1.domnprzqrog.us-east-1.aws.confluent.cloud`, then the unique name is `domnprzqrog.us-east-1`.
 5. Save the unique name for later use.
 
-
 ## Step 2. Add a PrivateLink Access to the network
 
 Add a PrivateLink Access to the network you identified or set up in [Step 1](#step-1-set-up-a-confluent-cloud-network). For more information, see [Add a PrivateLink Access in Confluent Cloud](https://docs.confluent.io/cloud/current/networking/private-links/aws-privatelink.html#add-a-privatelink-access-in-ccloud).
