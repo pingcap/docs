@@ -1,6 +1,6 @@
 ---
 title: Connect to Confluent Cloud on AWS via a Private Link Connection
-summary: Learn how to connect to an AWS Confluent instance using an AWS Endpoint Service private link connection.
+summary: Learn how to connect to a Confluent Cloud Dedicated cluster on AWS using an AWS Endpoint Service private link connection.
 ---
 
 # Connect to Confluent Cloud on AWS via a Private Link Connection
@@ -20,11 +20,11 @@ This document describes how to connect a {{{ .essential }}} cluster to a [Conflu
     - AWS Account ID
     - Availability Zones (AZ)
 
-To view the AWS account ID and available zones, do the following:
+To view the AWS account ID and availability zones, do the following:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
 2. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
-3. In the displayed dialog, you can find the AWS account ID and available zones.
+3. In the displayed dialog, you can find the AWS account ID and availability zones.
 
 ## Step 1. Set up a Confluent Cloud network
 
@@ -54,11 +54,9 @@ During the process, you need to:
 - Provide the TiDB Cloud AWS account ID that you obtain in [Prerequisites](#prerequisites).
 - Save the `VPC Service Endpoint` provided by Confluent Cloud for later use, usually in the `com.amazonaws.vpce.<region>.vpce-svc-xxxxxxxxxxxxxxxxx` format.
 
-## Step 3. Create a Confluent Cloud dedicated cluster under the network
+## Step 3. Create a Confluent Cloud Dedicated cluster under the network
 
-Create a Confluent Cloud Dedicated cluster under the network you set up in [Step 1](#step-1-set-up-a-confluent-cloud-network). For more information, see [Create a dedicated cluster in Confluent Cloud](https://docs.confluent.io/cloud/current/clusters/create-cluster.html#create-ak-clusters).
-
-When creating the cluster, use the existing Confluent Cloud network you set up in [Step 1](#step-1-set-up-a-confluent-cloud-network).
+Create a Confluent Cloud Dedicated cluster under the existing network you set up in [Step 1](#step-1-set-up-a-confluent-cloud-network). For more information, see [Create a dedicated cluster in Confluent Cloud](https://docs.confluent.io/cloud/current/clusters/create-cluster.html#create-ak-clusters).
 
 ## Step 4. Create a private link connection in TiDB Cloud
 

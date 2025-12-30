@@ -35,7 +35,7 @@ Ensure that the AWS endpoint service:
 - Add the TiDB Cloud account ID to the **Allowed principals** list.
 - Has availability zones that overlap with your TiDB Cloud cluster.
 
-You can get the account ID and available zones information at the bottom of the **Create Private Link Connection** dialog, or by running the following command:
+You can get the account ID and availability zones information at the bottom of the **Create Private Link Connection** dialog, or by running the following command:
 
 ```shell
 ticloud serverless private-link-connection zones --cluster-id <cluster-id>
@@ -267,6 +267,8 @@ To delete a private link connection using the TiDB Cloud console, do the followi
 </div>
 
 <div label="CLI">
+
+To delete a private link connection, run the following command:
 
 ```shell
 ticloud serverless private-link-connection delete -c <cluster-id> --private-link-connection-id <private-link-connection-id>
