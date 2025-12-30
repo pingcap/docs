@@ -11,7 +11,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
 >
 > [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) is the best way to get started with TiDB Cloud. Additionally, you can try out TiDB Cloud features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
 
-- ✅: The feature is generally available unless otherwise noted as Private Preview or Beta (Beta indicates Public Preview).
+- ✅: The feature is generally available unless otherwise noted as Private Preview or Public Preview.
 - ❌: The feature is currently not available.
 
 <table><thead>
@@ -38,9 +38,9 @@ This document lists the feature support status for different TiDB Cloud plans, i
   </tr>
   <tr>
     <td>API</td>
-    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Beta)</span></td>
-    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Beta)</span></td>
-    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Beta)</span></td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public Preview)</span></td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public Preview)</span></td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public Preview)</span></td>
   </tr>
   <tr>
     <td rowspan="3" style="background-color: white;">Cluster management</td>
@@ -77,14 +77,14 @@ This document lists the feature support status for different TiDB Cloud plans, i
   <tr>
     <td rowspan="2" style="background-color: white;">Data export</td>
     <td>Export</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Beta)</span></td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Beta)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public Preview)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public Preview)</span></td>
     <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
     <td>Changefeed</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Beta)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public Preview)</span></td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
@@ -234,9 +234,9 @@ This document lists the feature support status for different TiDB Cloud plans, i
   <tr>
     <td rowspan="3" style="background-color: white;">AI &amp; Development</td>
     <td>Vector search</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Beta)</span></td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Beta)</span></td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Beta)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public Preview)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public Preview)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public Preview)</span></td>
   </tr>
   <tr>
     <td>Data branch</td>
