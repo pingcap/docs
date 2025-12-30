@@ -277,9 +277,9 @@
     - [Private Link Connection Overview](/tidb-cloud/serverless-private-link-connection.md)
     - [Connect to AWS RDS](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md)
     - [Connect to Alibaba Cloud RDS](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md)
-    - [Connect to Confluent Cloud in AWS](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
-    - [Connect to Self-Hosted Kafka in Alibaba Cloud](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
-    - [Connect to Self-Hosted Kafka in AWS](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
+    - [Connect to Confluent Cloud on AWS](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
+    - [Connect to Self-Hosted Kafka on Alibaba Cloud](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
+    - [Connect to Self-Hosted Kafka on AWS](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
   - Audit Management
     - [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md)
     - [Database Audit Logging](/tidb-cloud/essential-database-audit-logging.md)

@@ -17,7 +17,7 @@ This document describes how to connect to an Amazon RDS instance using an AWS En
     - Manage load balancer
     - Manage endpoint services
 
-- {{{ .essential }}} information: confirm that your {{{ .essential }}} is active in AWS. Retrieve and save the following details for later use:
+- {{{ .essential }}} information: confirm that your {{{ .essential }}} is active on AWS. Retrieve and save the following details for later use:
 
     - Account ID
     - Availability Zones (AZ)
@@ -112,7 +112,7 @@ You can create a private link connection using the TiDB Cloud console or the TiD
 4. In the **Create Private Link Connection** dialog, enter the required information:
 
     - **Private Link Connection Name**: enter a name for the private link connection.
-    - **Connection Type**: select **AWS Endpoint Service**. If this option is not displayed, ensure that your cluster is created in AWS.
+    - **Connection Type**: select **AWS Endpoint Service**. If this option is not displayed, ensure that your cluster is created on AWS.
     - **Endpoint Service Name**: enter the endpoint service name you obtained in [Step 2](#2-set-up-the-aws-endpoint-service).
 
 5. Click **Create**.
