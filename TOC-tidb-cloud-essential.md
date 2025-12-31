@@ -275,7 +275,7 @@
     - [TLS Connections to TiDB Cloud](/tidb-cloud/secure-connections-to-serverless-clusters.md)
   - Private Link Connection
     - [Private Link Connection Overview](/tidb-cloud/serverless-private-link-connection.md)
-    - [Connect to AWS RDS](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md)
+    - [Connect to Amazon RDS](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md)
     - [Connect to Alibaba Cloud RDS](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md)
     - [Connect to Confluent Cloud on AWS](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
     - [Connect to Self-Hosted Kafka on Alibaba Cloud](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
