@@ -29,7 +29,7 @@ To view the the Alibaba Cloud account ID and availability zones, do the followin
 
 ## Step 1. Set up an ApsaraDB RDS for MySQL instance
 
-Identify an Alibaba Cloud ApsaraDB RDS for MySQL that you want to use, or [set up a new RDS](https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/step-1-create-an-apsaradb-rds-for-mysql-instance-and-configure-databases).
+Identify an Alibaba Cloud ApsaraDB RDS for MySQL that you want to use, or [create a new RDS](https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/step-1-create-an-apsaradb-rds-for-mysql-instance-and-configure-databases).
 
 Your ApsaraDB RDS for MySQL instance must meet the following requirements:
 
