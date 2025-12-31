@@ -9,7 +9,7 @@ This document describes how to connect a {{{ .essential }}} cluster to an [Amazo
 
 ## Prerequisites
 
-- You have an existing AWS RDS instance or the permissions required to create one.
+- You have an existing Amazon RDS instance or the permissions required to create one.
 
 - Your account has the following permissions to manage networking components:
 
