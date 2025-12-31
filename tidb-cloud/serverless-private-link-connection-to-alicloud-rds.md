@@ -64,7 +64,7 @@ Set up the load balancer in the same region of your ApsaraDB RDS for MySQL as fo
     - **Zone**: it must overlap with your {{{ .essential }}} cluster
     - **IP Version**: select `IPv4`
 
-    Find the load balancer you created, and then click **Create Listener**:
+3. Find the load balancer you created, and then click **Create Listener**:
     
     - **Listener Protocol**: select `TCP`
     - **Listener Port**: enter the database port, for example, `3306` for MySQL

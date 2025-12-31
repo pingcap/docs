@@ -87,7 +87,7 @@ Set up the load balancer in the same region of your RDS:
         - **Protocol and Port**: set the protocol to TCP and port to your database port, for example `3306` for MySQL
         - **Target group**: select the target group you that create in the previous step
   
-   For detailed instructions, see [Create a Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html).
+   For more information, see [Create a Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html).
 
 ### Step 2.2. Set up the AWS Endpoint Service
 
