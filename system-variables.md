@@ -3533,6 +3533,19 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable is used to set the concurrency of the `index lookup join` algorithm.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
+### tidb_index_lookup_pushdown_policy <span class="version-mark">New in v8.5.5 and v9.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Enumeration
+- Default value: `hint-only`
+- Value options: `hint-only`, `affinity-force`, `force`
+- This variable controls whether and when TiDB pushes the `IndexLookUp` operator down to TiKV. The value options are as follows:
+    - `hint-only` (default): TiDB pushes the `IndexLookUp` operator down to TiKV only when the [`INDEX_LOOKUP_PUSHDOWN`](/optimizer-hints.md#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855-and-v900) hint is explicitly specified in the SQL statement.
+    - `affinity-force`: TiDB automatically enables pushdown only for tables that are configured with the `AFFINITY` option.
+    - `force`: TiDB enables `IndexLookUp` pushdown for all tables.
+
 ### tidb_index_merge_intersection_concurrency <span class="version-mark">New in v6.5.0</span>
 
 - Scope: SESSION | GLOBAL
