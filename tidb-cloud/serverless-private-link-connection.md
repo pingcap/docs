@@ -32,7 +32,7 @@ You can create an AWS Endpoint Service private link connection using the TiDB Cl
 Ensure that the AWS endpoint service:
 
 - Resides in the same region as your TiDB Cloud cluster.
-- Add the TiDB Cloud account ID to the **Allowed principals** list.
+- Add the TiDB Cloud account ID to the **Allow principals** list.
 - Has availability zones that overlap with your TiDB Cloud cluster.
 
 You can get the account ID and availability zones information at the bottom of the **Create Private Link Connection** dialog, or by running the following command:
@@ -280,10 +280,7 @@ ticloud serverless private-link-connection delete -c <cluster-id> --private-link
 ## See also
 
 - [Connect to Confluent Cloud via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
-
-<!--
 - [Connect to Amazon RDS via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md)
 - [Connect to Alibaba Cloud ApsaraDB RDS for MySQL via a Private Link Connection ](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md)
 - [Connect to AWS Self-Hosted Kafka via Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
 - [Connect to Alibaba Cloud Self-Hosted Kafka via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
--->
