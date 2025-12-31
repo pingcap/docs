@@ -306,7 +306,7 @@ Take the following steps to configure an AccessKey pair:
 
         To import data into a TiDB Cloud <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>, grant **oss:GetObject**, **oss:GetBucketInfo**, and **oss:ListObjects** permissions.
 
-        To export data from a TiDB Cloud <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>, grant **oss:PutObject**, **oss:GetBucketInfo**, and **oss:ListBuckets** permissions.
+        To export data from a TiDB Cloud <CustomContent plan="starter,essential">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>, grant `oss:PutObject` and `oss:GetBucketInfo` permissions.
 
     - In the **Resource** section, select the bucket and the objects in the bucket.
 
