@@ -61,9 +61,9 @@ To set up the load balancer in the same region of your RDS, take the following s
 1. Go to [Target groups](https://console.aws.amazon.com/ec2/home#CreateTargetGroup) to create a target group. Provide the following information:
 
     - **Target type**: select `IP addresses`
-    - **Protocol and Port**: set protocol to TCP and port to your database port, for example `3306` for MySQL.
+    - **Protocol and Port**: set the protocol to `TCP` and the port to your database port, for example `3306` for MySQL.
     - **IP address type**: select `IPv4`
-    - **VPC**: the VPC where your RDS is located
+    - **VPC**: select the VPC where your RDS is located
     - **Register targets**: register the IP addresses of your Amazon RDS instance. You can ping the RDS endpoint to get the IP address.
  
   For more information, see [Create a target group for your Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-target-group.html).
@@ -72,7 +72,7 @@ To set up the load balancer in the same region of your RDS, take the following s
 
     - **Schema**: select `Internal`
     - **Load balancer IP address type**: select `IPv4`
-    - **VPC**: the VPC where your RDS is located
+    - **VPC**: select the VPC where your RDS is located
     - **Availability Zones**: it must overlap with your {{{ .essential }}} cluster
     - **Security groups**: create a new security group with the following rules:
         - An inbound rule that allows MySQL/Aurora: 
@@ -84,8 +84,8 @@ To set up the load balancer in the same region of your RDS, take the following s
             - Destination: `Anywhere-IPv4`
 
     - **Listeners and routing**:  
-        - **Protocol and Port**: set the protocol to TCP and port to your database port, for example `3306` for MySQL
-        - **Target group**: select the target group you that create in the previous step
+        - **Protocol and Port**: set the protocol to `TCP` and the port to your database port, for example `3306` for MySQL
+        - **Target group**: select the target group that you create in the previous step
 
   For more information, see [Create a Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html).
 
@@ -93,22 +93,22 @@ To set up the load balancer in the same region of your RDS, take the following s
 
 To set up the endpoint service in the same region of your RDS, take the following steps:
 
-1. Go to [Endpoint service](https://console.aws.amazon.com/vpcconsole/home#EndpointServices) to create an endpoint service. Provide the following information:
+1. Go to [Endpoint services](https://console.aws.amazon.com/vpcconsole/home#EndpointServices) to create an endpoint service. Provide the following information:
 
     - **Load balancer type**: select `Network`
-    - **Load balancers**: enter the load balancer you create in the previous step
-    - **Supported Regions**: leave it empty if you do not have cross-region requirements.
+    - **Available load balancers**: enter the load balancer you create in the previous step
+    - **Supported Regions**: leave it empty if you do not have cross-region requirements
     - **Require acceptance for endpoint**: it is recommended to select `Acceptance required`
-    - **Supported IP address types**: select `Ipv4`
+    - **Supported IP address types**: select `IPv4`
 
 2. Go to the details page of the endpoint service, and then copy the endpoint service name, in the format of `com.amazonaws.vpce.<region>.vpce-svc-xxxxxxxxxxxxxxxxx`. You need to provide it to TiDB Cloud.
 
-3. On the details page of the endpoint service, click the **Allowed principals** tab, and then add the TiDB Cloud account ID to the allowlist, for example, `arn:aws:iam::<account_id>:root`. 
+3. On the details page of the endpoint service, click the **Allow principals** tab, and then add the TiDB Cloud account ID to the allowlist, for example, `arn:aws:iam::<account_id>:root`. 
 
-    You can get the account ID in [Prerequisites](#prerequisites).
+    You can get the AWS account ID in [Prerequisites](#prerequisites).
 
 ## Step 3. Create an AWS Endpoint Service private link connection in TiDB Cloud
 
 You can create a private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
 
-For more information, see [Create an AWS Endpoint Service Private Link Connection](/tidb-cloud/serverless-private-link-connection.md#create-an-aws-endpoint-service-private-link-connection).
+For more information, see [Create an AWS Endpoint Service private link connection](/tidb-cloud/serverless-private-link-connection.md#create-an-aws-endpoint-service-private-link-connection).
