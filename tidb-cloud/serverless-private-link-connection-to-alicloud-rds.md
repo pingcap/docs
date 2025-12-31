@@ -76,7 +76,7 @@ Set up the load balancer in the same region of your ApsaraDB RDS for MySQL as fo
 
 To set up the endpoint service in the same region of your ApsaraDB RDS for MySQL, take the following steps:
 
-1. Go to [Endpoint service](https://vpc.console.alibabacloud.com/endpointservice) to create an endpoint service. Provide the following information:
+1. Go to [Endpoint Service](https://vpc.console.alibabacloud.com/endpointservice) to create an endpoint service. Provide the following information:
 
     - **Service Resource Type**: select `NLB`
     - **Select Service Resource**: select all zones that NLB is in, and choose the NLB that you created in the previous step
