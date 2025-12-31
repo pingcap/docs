@@ -8,6 +8,35 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2025年12月30日 {#december-30-2025}
+
+**一般的な変更**
+
+-   **TiDB Cloud専用**
+
+    -   TiProxy (ベータ版) をサポートします。
+
+        PingCAPの公式プロキシコンポーネントであるTiProxyが、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタでベータ版として利用可能になりました。強化された接続管理と負荷分散機能により、データベースの信頼性とパフォーマンスが向上します。
+
+        ハイライト:
+
+        -   スケーリング操作およびローリング アップグレード中に永続的なクライアント接続を維持します。
+        -   リソース利用率を向上させるために、TiDB ノード全体にトラフィックを均等に分散します。
+
+        詳細については[TiProxyの概要](/tidb-cloud/tiproxy-overview-for-cloud.md)参照してください。
+
+-   **TiDB Cloudエッセンシャル**
+
+    -   changefeeds (ベータ版) をサポートします。
+
+        changefeed 機能は現在、バージョン[TiDB Cloudコンソール](https://tidbcloud.com)と[TiDB CloudCLI](/tidb-cloud/cli-reference.md) for [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)の両方でベータ版としてご利用いただけます。この機能により、TiDB Cloudから他のデータサービスへのデータストリーミングが可能になり、現在 Apache Kafka と MySQL が送信先としてサポートされています。
+
+    -   ダウンストリーム リソースのプライベート リンク接続の構成をサポートします。
+
+        プライベートリンク接続は、 [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)の[TiDB Cloudコンソール](https://tidbcloud.com)と[TiDB CloudCLI](/tidb-cloud/cli-reference.md)両方で利用できるようになりました。この機能により、TiDB Cloudと下流リソース（MySQL、Apache Kafka など）間のプライベートかつ直接的な接続を確立できます。これは、 TiDB Cloudからお客様のインフラストラクチャへの接続を開始する変更フィードやその他のデータフローサービスとの統合向けにカスタマイズされています。
+
+        詳細については[Dataflow のプライベート リンク接続](/tidb-cloud/serverless-private-link-connection.md)参照してください。
+
 ## 2025年12月16日 {#december-16-2025}
 
 **一般的な変更**
@@ -72,7 +101,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     -   Prometheus 統合は現在、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して一般提供 (GA) されています。
 
-        TiDB Cloudは、Prometheusとの連携をクラスターレベルで管理するようになり、よりきめ細かな制御と設定が可能になります。この機能により、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのメトリクスをシームレスにPrometheusに送信できるようになり、統合プラットフォームで高度なアラート機能を実現できます。
+        TiDB Cloudは、Prometheusとの連携をクラスターレベルで管理できるようになり、よりきめ細かな制御と設定が可能になります。この機能により、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのメトリクスをシームレスにPrometheusに送信できるようになり、統合プラットフォームで高度なアラート機能を実現できます。
 
         統合手順については、 [TiDB Cloud をPrometheus および Grafana と統合する](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)参照してください。
 
@@ -154,7 +183,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     -   現在、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して[Prometheus 統合（プレビュー）](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)が使用可能です。
 
-        TiDB Cloudは、Prometheusとの連携をクラスターレベルで管理するようになり、よりきめ細かな制御と設定が可能になります。この機能により、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのメトリクスをシームレスにPrometheusに送信できるようになり、統合プラットフォームで高度なアラート機能を実現できます。
+        TiDB Cloudは、Prometheusとの連携をクラスターレベルで管理できるようになり、よりきめ細かな制御と設定が可能になります。この機能により、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのメトリクスをシームレスにPrometheusに送信できるようになり、統合プラットフォームで高度なアラート機能を実現できます。
 
         詳細については[TiDB Cloud をPrometheus および Grafana と統合する](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)参照してください。
 
@@ -170,7 +199,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     -   [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)インプレースリストア機能が削除され、バックアップを同じクラスタに直接リストアできなくなります。この変更により、アクティブな本番本番データの誤った上書きや潜在的なデータ損失を防ぐことができます。
 
-        データを復元するには、 [バックアップを新しいクラスターに復元する](/tidb-cloud/backup-and-restore-serverless.md#perform-the-restore) . 復元されたデータを検証した後、アプリケーションを新しいクラスターに切り替えます。既存のクラスターに復元されたデータはそのまま残り、新たな復元を実行しない限り、何もする必要はありません。
+        データを復元するには、 [バックアップを新しいクラスターに復元する](/tidb-cloud/backup-and-restore-serverless.md#perform-the-restore) . 復元されたデータを検証した後、アプリケーションを新しいクラスターに切り替えます。既存のクラスターに復元されたデータはそのまま残り、新たな復元を実行しない限り、特別な操作は必要ありません。
 
         より安全で制御性と柔軟性に優れた復元および移行ワークフローを実現するには、 [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)使用を検討してください。
 
@@ -566,7 +595,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   TiKV [標準](/tidb-cloud/size-your-cluster.md#standard-storage)および[パフォーマンス](/tidb-cloud/size-your-cluster.md#performance-and-plus-storage)storageの価格が正式に発表されました。
 
-    割引期間は**2025年6月5日 UTC 00:00**に終了します。その後、価格は通常価格に戻ります。TiDB TiDB Cloud Dedicated の価格については、 [TiDB Cloud専用プランの料金詳細](https://www.pingcap.com/tidb-dedicated-pricing-details/#node-cost)ご覧ください。
+    割引期間は**2025年6月5日 UTC 00:00**に終了します。その後、価格は通常価格に戻ります。TiDB TiDB Cloud Dedicated の価格については、 [TiDB Cloud専用料金の詳細](https://www.pingcap.com/tidb-dedicated-pricing-details/#node-cost)ご覧ください。
 
 **コンソールの変更**
 
@@ -578,7 +607,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **一般的な変更**
 
--   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの変更フィードを使用して[アパッチパルサー](https://pulsar.apache.org)へのストリーミング データをサポートします。
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの変更フィードを使用して[アパッチパルサー](https://pulsar.apache.org)へのデータのストリーミングをサポートします。
 
     この機能により、 TiDB Cloud Dedicated クラスタをより幅広い下流システムと統合できるようになり、追加のデータ統合要件にも対応できます。この機能を使用するには、 TiDB Cloud Dedicated クラスタのバージョンが v7.5.1 以降であることを確認してください。
 

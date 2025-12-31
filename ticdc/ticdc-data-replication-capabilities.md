@@ -1,6 +1,6 @@
 ---
 title: TiCDC Data Replication Capabilities
-summary: TiCDC のデータ複製機能について学習します。
+summary: TiCDC のデータ複製機能について学びます。
 ---
 
 # TiCDC データレプリケーション機能 {#ticdc-data-replication-capabilities}
@@ -9,9 +9,9 @@ summary: TiCDC のデータ複製機能について学習します。
 
 ## TiCDCの仕組み {#how-ticdc-works}
 
--   TiCDCはTiKV変更ログ（Raftログ）をリッスンし、行レベルのデータ変更（ `INSERT` `DELETE`操作） `UPDATE`下流と互換性のあるSQL文に変換します。TiCDCは上流データベースで実行された元のSQL文に依存しません。詳細については、 [TiCDCがデータ変更を処理する方法](/ticdc/ticdc-overview.md#implementation-of-processing-data-changes)参照してください。
+-   TiCDCはTiKV変更ログ（Raftログ）をリッスンし、行レベルのデータ変更（ `INSERT` `DELETE`操作）を下流と互換性のあるSQL文に変換します。TiCDCは上流データベースで実行された元のSQL文に依存しません。詳細については[TiCDCがデータ変更を処理する方法](/ticdc/ticdc-overview.md#implementation-of-processing-data-changes) `UPDATE`してください。
 
--   TiCDCは、上流データベースで実行された元のSQL文`UPDATE`一つ一つ復元するのではなく、SQLセマンティクスに相当する論理演算（ `INSERT`など）を生成します。詳細については[TiCDCがデータ変更を処理する方法](/ticdc/ticdc-overview.md#implementation-of-processing-data-changes) `DELETE`してください。
+-   TiCDCは`UPDATE` `INSERT` `DELETE`を生成します。詳細については[TiCDCがデータ変更を処理する方法](/ticdc/ticdc-overview.md#implementation-of-processing-data-changes)参照してください。
 
 -   TiCDCはトランザクションの最終的な一貫性を保証します。1 [再実行ログ](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)有効にすると、TiCDCは災害復旧シナリオにおいて最終的な一貫性を保証できます。3 [同期ポイント](/ticdc/ticdc-upstream-downstream-check.md#enable-syncpoint)有効にすると、TiCDCは一貫性のあるスナップショット読み取りとデータ整合性の検証をサポートします。
 
@@ -33,8 +33,8 @@ TiCDC は、次の種類のアップストリーム データの変更をサポ�
 -   **サポート対象:**
 
     -   DDL および DML ステートメント (システム テーブルを除く)。
-    -   インデックス操作 ( `ADD INDEX` 、 `CREATE INDEX` ): ダウンストリームが TiDB、TiCDC [`ADD INDEX`および`CREATE INDEX` DDL操作を非同期に実行します。](/ticdc/ticdc-ddl.md#asynchronous-execution-of-add-index-and-create-index-ddls)の場合、変更フィードレプリケーションのレイテンシーへの影響を軽減します。
-    -   外部キー制約DDL文（ `ADD FOREIGN KEY` ）：TiCDCは上流のシステム変数設定を複製し**ません**。下流の外部キー制約チェックを有効にするには、下流で[`foreign_key_checks`](/system-variables.md#foreign_key_checks)手動で設定する必要があります。また、下流にデータを書き込む際に、TiCDCはセッションレベルの設定`SET SESSION foreign_key_checks = OFF;`自動的に有効にします。したがって、下流でグローバル外部キーチェックが有効になっている場合でも、TiCDCによって書き込まれたデータは外部キー制約の検証をトリガーしません。
+    -   インデックス操作（ `ADD INDEX` `CREATE INDEX` ：ダウンストリームがTiDB、TiCDC [`ADD INDEX`および`CREATE INDEX` DDL操作を非同期的に実行します。](/ticdc/ticdc-ddl.md#asynchronous-execution-of-add-index-and-create-index-ddls)の場合、変更フィードレプリケーションのレイテンシーへの影響を軽減します。
+    -   外部キー制約DDL文（ `ADD FOREIGN KEY` ）：TiCDCは上流のシステム変数設定を複製し**ません**。下流の外部キー制約チェックを有効にするには、下流で[`foreign_key_checks`](/system-variables.md#foreign_key_checks)手動で設定する必要があります。また、下流にデータを書き込む際に、TiCDCはセッションレベルの設定`SET SESSION foreign_key_checks = OFF;`を自動的に有効にします。したがって、下流でグローバル外部キーチェックが有効になっている場合でも、TiCDCによって書き込まれたデータは外部キー制約の検証をトリガーしません。
 
 -   **サポートされていません**:
 
@@ -45,6 +45,21 @@ TiCDC は、次の種類のアップストリーム データの変更をサポ�
 ## 制限事項 {#limitations}
 
 -   TiCDCは特定のシナリオをサポートしていません。詳細については[サポートされていないシナリオ](/ticdc/ticdc-overview.md#unsupported-scenarios)参照してください。
+
 -   TiCDCは上流データの変更の整合性のみを検証します。変更が上流または下流の制約に準拠しているかどうかは検証しません。データが下流の制約に違反している場合、TiCDCは下流への書き込み時にエラーを返します。
 
-    たとえば、変更フィードがすべての DDL イベントをフィルターするように構成されている場合、アップストリームが`DROP COLUMN`操作を実行しても、その列に関連する`INSERT`ステートメントの書き込みを継続すると、テーブル スキーマの不一致により、TiCDC はこれらの DML 変更をダウンストリームに複製できません。
+    たとえば、変更フィードがすべての DDL イベントをフィルターするように設定されている場合、アップストリームが`DROP COLUMN`操作を実行しても、その列に関連する`INSERT`ステートメントの書き込みを継続すると、テーブル スキーマの不一致により、TiCDC はこれらの DML 変更をダウンストリームに複製できません。
+
+-   TiCDC [古典アーキテクチャ](/ticdc/ticdc-classic-architecture.md)の場合、単一の TiCDC クラスターによって複製されるテーブルの数が次の推奨値を超えると、TiCDC が安定して動作しない可能性があります。
+
+    | TiCDCバージョン      | 複製するテーブルの推奨数 |
+    | --------------- | :----------: |
+    | v5.4.0 - v6.4.x |     2000     |
+    | v6.5.x - v7.4.x |     4000     |
+    | v7.5.x - v8.5.x |     40000    |
+
+    > **注記：**
+    >
+    > パーティション化されたテーブルを複製する場合、TiCDC は各パーティションを個別のテーブルとして扱います。そのため、複製するテーブルの総数を計算する際には、パーティション数も考慮されます。
+
+    複製するテーブルの数が前述の推奨値を超える場合は、 [TiCDCの新しいアーキテクチャ](/ticdc/ticdc-architecture.md)を使用することをお勧めします。新しいアーキテクチャでは、変更フィードごとに 100 万を超えるテーブルの複製がサポートされているため、大規模なレプリケーション シナリオに適しています。

@@ -30,49 +30,34 @@ aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 
 ## 自動バックアップ {#automatic-backups}
 
-TiDB Cloud はインスタンス データを自動的にバックアップし、バックアップ スナップショットからデータを復元して、災害発生時のデータ損失を最小限に抑えます。
+TiDB Cloud Premiumは、本番環境向けに強化された自動バックアップ機能を提供します。高頻度のスナップショットとログバックアップを組み合わせることで、データの信頼性を確保します。
 
-### バックアップ設定について学ぶ {#learn-about-the-backup-setting}
+### 自動バックアップポリシー {#automatic-backup-policies}
 
-TiDB Cloud Starter クラスターやTiDB Cloud Essential クラスターと比較して、 TiDB Cloud Premium は、より長い保存期間や 1 時間ごとのバックアップ サポートなど、強化されたバックアップ機能を提供します。
+TiDB Cloud Premium インスタンスは、次の表に示すように、多層バックアップアーキテクチャを使用してデータを保護します。
 
-| バックアップ設定   | TiDB Cloud Starter（無料） | TiDB Cloud Starter（支出限度額 &gt; 0） | TiDB Cloudエッセンシャル | TiDB Cloudプレミアム |
-| ---------- | ---------------------- | -------------------------------- | ----------------- | --------------- |
-| バックアップサイクル | 毎日                     | 毎日                               | 毎日                | 毎日 + 時間ごと       |
-| バックアップの保持  | 1日                     | 30日間                             | 30日間              | 最大33日間          |
-| バックアップ時間   | 固定時間                   | 設定可能                             | 設定可能              | 設定可能            |
+| バックアップの種類               | 保存期間 | 粒度を復元する                                                             |
+| ----------------------- | ---- | ------------------------------------------------------------------- |
+| **ポイントインタイムリカバリ（PITR）** | 7日間  | 7 日間の期間内の任意の特定の時点に復元します。                                            |
+| **1時間ごとのスナップショット**      | 7日間  | 過去 7 日以内に生成された任意の 1 時間ごとのスナップショットから復元します。                           |
+| **毎日のスナップショット**         | 33日間 | 過去33日以内に生成された日次スナップショットから復元します。デフォルトでは、日次スナップショットはUTCの00:00に取得されます。 |
 
--   **バックアップ サイクルは、**バックアップが作成される頻度を決定します。
+### バックアップ実行ルール {#backup-execution-rules}
 
-    -   プレミアム インスタンスは、**毎日の**バックアップと**毎時間の**バックアップの両方をサポートします。
-    -   **デフォルト**は**1 時間ごとのバックアップ**です。
+-   **バックアップ サイクル**: TiDB Cloud Premium インスタンスは、1 時間ごとと毎日の自動バックアップを実行します。
 
--   **バックアップ保持期間**は、バックアップが保持される期間です。期限切れのバックアップは復元できません。
+-   **バックアップスケジュール**:
 
-    -   プレミアムインスタンスは、最大**33 日間**バックアップを保持できます。
+    -   毎時バックアップは毎時開始時に実行されます。
+    -   毎日のバックアップは毎日 00:00 UTC に実行されます。
+    -   現在、バックアップ スケジュールをカスタマイズまたは管理することはできません。
 
--   **バックアップ時間**は、バックアップのスケジュールされた開始時間です。
+-   **保持動作**: バックアップは保持期間 (7 日間または 33 日間) を超えると自動的に期限切れとなり、復元できなくなります。
 
-    -   プレミアム インスタンスの場合、**毎日のバックアップは**希望の時刻 (30 分間隔) に開始するように設定できますが、**時間ごとのバックアップは**常に毎時実行されます。
-
-### バックアップ設定を構成する {#configure-the-backup-settings}
-
-TiDB Cloud Premium インスタンスのバックアップを構成するには、次の手順を実行します。
-
-1.  TiDB インスタンスの[**バックアップ**](#view-the-backup-page)ページに移動します。
-
-2.  **「バックアップ設定」**をクリックします。 **「バックアップ設定」**ウィンドウが開き、自動バックアップオプションを設定できます。
-
-3.  **バックアップ サイクル**で、**時間別バックアップ タブ**と**日次バックアップ**タブのいずれかを選択します。
-
-    -   **1時間ごとのバックアップ**（デフォルト）:
-        -   **毎時**運行します。
-        -   **バックアップの保持期間**(1～33 日) を設定できます。
-    -   **毎日のバックアップ**:
-        -   **30 分間隔**で設定可能な時間に実行されます。
-        -   **バックアップの保持期間**(1～33 日) と**バックアップ時間の**両方を設定できます。
-
-4.  設定を保存するには、 **「保存」**をクリックします。
+> **注記：**
+>
+> -   自動バックアップstorageのコストは、バックアップ データの量と保持期間によって異なります。
+> -   バックアップ保持期間をデフォルトの制限を超えて延長するには、 [TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)お問い合わせください。
 
 ### バックアップファイルを削除する {#delete-backup-files}
 
@@ -154,11 +139,11 @@ TiDB Cloud は、新しいインスタンスへのデータの復元をサポー
 
 3.  **「復元」**ページで、 [新しいインスタンスに復元する](#restore-to-a-new-instance)と同じ手順に従って、バックアップを新しいインスタンスに復元します。
 
-### 別のプランタイプからクラシックバックアップを復元する {#restore-classic-backups-from-a-different-plan-type}
+### 別のプランタイプからバックアップを復元する {#restore-backups-from-a-different-plan-type}
 
-現在、AWS でホストされているTiDB Cloud Dedicated クラスターから新しいTiDB Cloud Premium インスタンスにのみ、クラシック バックアップを復元できます。
+現在、AWS でホストされているTiDB Cloud Dedicated クラスターからのバックアップを新しいTiDB Cloud Premium インスタンスに復元することのみが可能です。
 
-TiDB Cloud Dedicated クラスターによって生成されたクラシック バックアップを復元するには、次の手順に従います。
+TiDB Cloud Dedicated クラスターによって生成されたバックアップを復元するには、次の手順に従います。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインし、 [**TiDBインスタンス**](https://tidbcloud.com/tidbs)ページに移動します。右上の「 **...」**をクリックし、 **「別のプランから復元」**をクリックします。
 
@@ -171,6 +156,160 @@ TiDB Cloud Dedicated クラスターによって生成されたクラシック �
 
 3.  **「復元」**ページで、 [新しいインスタンスに復元する](#restore-to-a-new-instance)と同じ手順に従って、バックアップを新しいインスタンスに復元します。
 
+### クラウドstorageからバックアップを復元する {#restore-backups-from-cloud-storage}
+
+TiDB Cloud Premiumは、クラウドstorage（Amazon S3やAlibaba Cloud Object Storage Service（OSS）など）から新しいインスタンスへのバックアップの復元をサポートしています。この機能は、 TiDB Cloud DedicatedクラスターまたはTiDB Self-Managedクラスターから生成されたバックアップと互換性があります。
+
+> **注記：**
+>
+> -   現在、復元がサポートされているのは、 **Amazon S3**と**Alibaba Cloud OSS**にあるバックアップのみです。
+> -   バックアップは、storageバケットと同じクラウド プロバイダーによってホストされている新しいインスタンスにのみ復元できます。
+> -   インスタンスとstorageバケットが異なるリージョンにある場合は、追加のリージョン間データ転送料金が適用される場合があります。
+
+#### 手順 {#steps}
+
+始める前に、バックアップ ファイルにアクセスするための十分な権限を持つアクセス キーとシークレット キーがあることを確認してください。
+
+クラウドstorageからバックアップを復元するには、次の手順を実行します。
+
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインし、 [**TiDBインスタンス**](https://tidbcloud.com/tidbs)ページに移動します。右上隅の「 **...」**をクリックし、 **「クラウドストレージから復元」を**クリックします。
+
+2.  **[バックアップ保存場所の選択]**ページで、次の情報を入力します。
+
+    -   **クラウド プロバイダー**: バックアップ ファイルが保存されるクラウド プロバイダーを選択します。
+
+    -   **リージョン**: クラウド プロバイダーが Alibaba Cloud OSS の場合は、リージョンを選択します。
+
+    -   **バックアップ ファイル URI** : バックアップ ファイルが含まれている最上位フォルダーの URI を入力します。
+
+    -   **アクセス キー ID** : アクセス キー ID を入力します。
+
+    -   **アクセス キー シークレット**: アクセス キー シークレットを入力します。
+
+    > **ヒント：**
+    >
+    > storageバケットのアクセス キーを作成するには、 [AWS アクセスキーを使用して Amazon S3 アクセスを構成する](#configure-amazon-s3-access-using-an-aws-access-key)と[Alibaba Cloud OSSアクセスを構成する](#configure-alibaba-cloud-oss-access)参照してください。
+
+3.  **[バックアップの検証] と [次へ]**をクリックします。
+
+4.  検証が成功すると、 **「新しいインスタンスへの復元」**ページが表示されます。ページ上部に表示されるバックアップ情報を確認し、 [TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)の手順に従ってバックアップを新しいインスタンスに復元します。
+
+    バックアップ情報が正しくない場合は、 **「前へ」**をクリックして前のページに戻り、正しい情報を入力してください。
+
+5.  バックアップを復元するには、 **「復元」**をクリックします。
+
 ## 制限事項 {#limitations}
 
 現在、 TiDB Cloud Premium インスタンスでは手動バックアップはサポートされていません。
+
+## 参考文献 {#references}
+
+このセクションでは、Amazon S3 および Alibaba Cloud OSS へのアクセスを構成する方法について説明します。
+
+### AWS アクセスキーを使用して Amazon S3 アクセスを構成する {#configure-amazon-s3-access-using-an-aws-access-key}
+
+アクセスキーを作成するには、AWS アカウントのルートユーザーではなく、 IAMユーザーを使用することをお勧めします。
+
+アクセス キーを構成するには、次の手順を実行します。
+
+1.  IAMユーザーとアクセスキーを作成します。
+
+    1.  IAMユーザーを作成します。詳細については、 [AWSアカウントにIAMユーザーを作成する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console)参照してください。
+    2.  AWS アカウント ID またはアカウントエイリアス、 IAMユーザー名とパスワードを使用して[IAMコンソール](https://console.aws.amazon.com/iam)にサインインします。
+    3.  アクセスキーを作成します。詳細については、 [IAMユーザーのアクセスキーを管理する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)参照してください。
+
+2.  IAMユーザーに権限を付与します。
+
+    タスクに必要な権限のみを付与したポリシーを作成し、 IAMユーザーにアタッチします。TiDB TiDB Cloud Premiumインスタンスにデータを復元するには、 `s3:GetObject` 、 `s3:GetBucketLocation` 、 `s3:ListBucket`権限を付与します。
+
+    以下は、 TiDB Cloud がAmazon S3 バケット内の特定のフォルダーからデータを復元できるようにするポリシーの例です。
+
+    ```json
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "AllowGetBucketLocation",
+                "Effect": "Allow",
+                "Action": "s3:GetBucketLocation",
+                "Resource": "arn:aws:s3:::<Your S3 bucket name>"
+            },
+            {
+                "Sid": "AllowListPrefix",
+                "Effect": "Allow",
+                "Action": "s3:ListBucket",
+                "Resource": "arn:aws:s3:::<Your S3 bucket name>",
+                "Condition": {
+                    "StringLike": {
+                        "s3:prefix": "<Your backup folder>/*"
+                    }
+                }
+            },
+            {
+                "Sid": "AllowReadObjectsInPrefix",
+                "Effect": "Allow",
+                "Action": "s3:GetObject",
+                "Resource": "arn:aws:s3:::<Your S3 bucket name>/<Your backup folder>/*"
+            }
+        ]
+    }
+    ```
+
+    上記のポリシーの`<Your S3 bucket name>`と`<Your backup folder>`実際のバケット名とバックアップディレクトリに置き換えてください。この設定は、必要なバックアップファイルへのアクセスのみを制限することで、最小権限の原則に従っています。
+
+> **注記：**
+>
+> TiDB Cloudはアクセスキーを保存しません。セキュリティを維持するため、インポートまたはエクスポートタスクの完了後に[アクセスキーを削除する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)実行してください。
+
+### Alibaba Cloud OSSアクセスを構成する {#configure-alibaba-cloud-oss-access}
+
+TiDB Cloudに Alibaba Cloud OSS バケットへのアクセスを許可するには、バケットの AccessKey ペアを作成する必要があります。
+
+AccessKey ペアを構成するには、次の手順を実行します。
+
+1.  RAMユーザーを作成し、AccessKeyペアを取得します。詳細については、 [RAMユーザーを作成する](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-ram-user)参照してください。
+
+    **[アクセス モード]**セクションで、 **[永続的な AccessKey を使用してアクセスする]**を選択します。
+
+2.  必要な権限を持つカスタムポリシーを作成します。詳細については、 [カスタムポリシーを作成する](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy)参照してください。
+
+    -   **[効果]**セクションで、 **[許可]**を選択します。
+
+    -   **[サービス]**セクションで、 **[オブジェクト ストレージ サービス]**を選択します。
+
+    -   **「アクション」**セクションで、必要な権限を選択します。TiDB TiDB Cloudインスタンスにバックアップを復元するには、 `oss:ListObjects`と`oss:GetObject`権限を付与します。
+
+        > **ヒント：**
+        >
+        > 復元操作のセキュリティを強化するために、バケット全体へのアクセスを許可するのではなく、バックアップファイルが保存されている特定のフォルダ ( `oss:Prefix` ) へのアクセスを制限することができます。
+
+        次のJSON例は、復元タスクのポリシーを示しています。このポリシーは、特定のバケットとバックアップフォルダへのアクセスを制限します。
+
+        ```json
+        {
+        "Version": "1",
+        "Statement": [
+            {
+            "Effect": "Allow",
+            "Action": "oss:ListObjects",
+            "Resource": "acs:oss:*:*:<Your bucket name>",
+            "Condition": {
+                "StringLike": {
+                "oss:Prefix": "<Your backup folder>/*"
+                }
+            }
+            },
+            {
+            "Effect": "Allow",
+            "Action": "oss:GetObject",
+            "Resource": "acs:oss:*:*:<Your bucket name>/<Your backup folder>/*"
+            }
+        ]
+        }
+        ```
+
+    -   **リソース**セクションで、バケットとバケット内の特定のオブジェクトを選択します。
+
+3.  カスタム ポリシーを RAM ユーザーに添付します。
+
+    詳細については[RAMユーザーに権限を付与する](https://www.alibabacloud.com/help/en/ram/user-guide/grant-permissions-to-the-ram-user)参照してください。

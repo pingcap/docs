@@ -9,7 +9,7 @@ summary: TiDB Cloudの主要な概念について学習します。
 
 ## アーキテクチャ {#architecture}
 
-TiDB Cloud は、コンピューティングとstorageを分離し、弾力的なスケーリングと高可用性を実現するクラウドネイティブの分散アーキテクチャ上に構築されています[TiDB Cloudアーキテクチャの詳細](/tidb-cloud/architecture-concepts.md) 。
+TiDB Cloudは、コンピューティングとstorageを分離し、弾力的なスケーリングと高可用性を実現するクラウドネイティブの分散アーキテクチャ上に構築されています[TiDB Cloudアーキテクチャの詳細](/tidb-cloud/architecture-concepts.md) 。
 
 ## データベーススキーマ {#database-schema}
 
@@ -17,7 +17,7 @@ TiDB Cloud を使用すると、データベース、テーブル、列、イン
 
 ## 取引 {#transactions}
 
-TiDB は完全な分散トランザクションを提供し、モデル[取引について詳しくはこちら](/tidb-cloud/transaction-concepts.md) [Google パーコレーター](https://research.google.com/pubs/pub36726.html)基づいたいくつかの最適化が施されています。
+TiDB は完全な分散トランザクションを提供し、モデルには[Google パーコレーター](https://research.google.com/pubs/pub36726.html) . [取引について詳しく見る](/tidb-cloud/transaction-concepts.md)に基づいたいくつかの最適化が施されています。
 
 ## SQL {#sql}
 
@@ -37,10 +37,10 @@ TiDB Cloud Dedicated を使用すると、データ量やワークロードの�
 
 ## 高可用性 {#high-availability}
 
-TiDB Cloud は、 TiDB Cloud Starter、 TiDB Cloud Essential、およびTiDB Cloud Dedicated クラスターで高可用性を保証します。
+TiDB Cloud は、サポートされているすべてのプランで高可用性を保証します。
 
--   [TiDB Cloud StarterとEssentialの高可用性](/tidb-cloud/serverless-high-availability.md)
--   [TiDB Cloud専用における高可用性](/tidb-cloud/high-availability-with-multi-az.md)
+-   のために<customcontent plan="starter,essential">TiDB Cloud Starter とTiDB Cloud Essential</customcontent><customcontent plan="premium"> TiDB Cloud Starter、 TiDB Cloud Essential、およびTiDB Cloud Premium</customcontent> [TiDB Cloudの高可用性](/tidb-cloud/serverless-high-availability.md)参照。
+-   TiDB Cloud Dedicated については、 [TiDB Cloud専用における高可用性](/tidb-cloud/high-availability-with-multi-az.md)参照してください。
 
 ## 監視 {#monitoring}
 

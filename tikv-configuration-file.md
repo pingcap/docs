@@ -239,7 +239,7 @@ TiKV設定ファイルは、コマンドラインパラメータよりも多く�
 
 -   TiKV がスナップショットを処理するときに取り込み方式を採用するかどうかの最小しきい値を指定します。
 
-    -   スナップショットのサイズがこのしきい値を超えると、TiKVはスナップショットからSSTファイルをRocksDBにインポートするインジェスト方式を採用します。この方式は、大きなファイルの場合、より高速です。
+    -   スナップショットのサイズがこのしきい値を超えると、TiKVはスナップショットからSSTファイルをRocksDBにインポートする取り込み方式を採用します。この方式は、大きなファイルの場合、より高速です。
     -   スナップショットのサイズがこのしきい値を超えない場合、TiKVは直接書き込み方式を採用し、各データをRocksDBに個別に書き込みます。この方式は、小さなファイルの場合により効率的です。
 
 -   デフォルト値: `"2MiB"`
@@ -271,7 +271,7 @@ TiKV設定ファイルは、コマンドラインパラメータよりも多く�
 
 ### <code>raft-client-queue-size</code> {#code-raft-client-queue-size-code}
 
--   TiKVにおけるRaftメッセージのキューサイズを指定します。時間内に送信されないメッセージが多すぎるとバッファがいっぱいになったり、メッセージが破棄されたりする場合は、システムの安定性を向上させるために、より大きな値を指定できます。
+-   TiKVにおけるRaftメッセージのキューサイズを指定します。時間内に送信されないメッセージが多すぎてバッファがいっぱいになったり、メッセージが破棄されたりする場合は、システムの安定性を向上させるために、より大きな値を指定できます。
 -   デフォルト値: `16384`
 
 ### <code>simplify-metrics</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-simplify-metrics-code-span-class-version-mark-new-in-v6-2-0-span}
@@ -602,7 +602,7 @@ I/O レート リミッターに関連するコンフィグレーション項目
 -   ネットワーク分離の可能性がある場合に、TiKV の PD クライアントがフォロワー経由でリーダーにリクエストを転送するかどうかを制御します。
 -   デフォルト値: `false`
 -   環境に分離されたネットワークが存在する可能性がある場合は、このパラメータを有効にすると、サービスが利用できない期間を短縮できます。
--   分離、ネットワーク中断、またはダウンタイムが発生したかどうかを正確に判断できない場合、このメカニズムを使用すると誤判断のリスクがあり、可用性とパフォーマンスの低下につながります。ネットワーク障害が発生していない場合は、このパラメータを有効にすることは推奨されません。
+-   分離、ネットワークの中断、またはダウンタイムが発生したかどうかを正確に判断できない場合、このメカニズムを使用すると誤判断のリスクがあり、可用性とパフォーマンスの低下につながります。ネットワーク障害が発生していない場合は、このパラメータを有効にすることは推奨されません。
 
 ### <code>endpoints</code> {#code-endpoints-code}
 
@@ -1258,7 +1258,7 @@ RocksDBに関連するコンフィグレーション項目
 ### <code>max-manifest-file-size</code> {#code-max-manifest-file-size-code}
 
 -   RocksDBマニフェストファイルの最大サイズ
--   デフォルト値: `"128MiB"`
+-   デフォルト値: `"256MiB"` 。v8.5.3 およびそれ以前の v8.5.x バージョンの場合、デフォルト値は`"128MiB"`です。
 -   最小値: `0`
 -   単位: B|KiB|MiB|GiB
 
@@ -1491,7 +1491,7 @@ Titan に関連するコンフィグレーション項目。
 
 ## rocksdb.defaultcf | rocksdb.writecf | rocksdb.lockcf | rocksdb.raftcf {#rocksdb-defaultcf-rocksdb-writecf-rocksdb-lockcf-rocksdb-raftcf}
 
-`rocksdb.defaultcf` `rocksdb.lockcf`関連するコンフィグレーション`rocksdb.writecf` 。
+`rocksdb.defaultcf` `rocksdb.writecf`関連`rocksdb.lockcf`コンフィグレーション項目。
 
 ### <code>block-size</code> {#code-block-size-code}
 
@@ -1619,7 +1619,7 @@ Titan に関連するコンフィグレーション項目。
 -   `lockcf`のデフォルト値: `"128MiB"`
 -   最小値: `0`
 -   単位: KiB|MiB|GiB
--   不要な圧縮を減らすために、 `max-bytes-for-level-base`の値はL0のデータ量とほぼ同じに設定することをお勧めします。たとえば、圧縮方法が「no:no:lz4:lz4:lz4:lz4:lz4」の場合、L0とL1は圧縮されておらず、L0の圧縮のトリガー条件はSSTファイルの数が4（デフォルト値）に達することであるため、 `max-bytes-for-level-base`の値は`write-buffer-size * 4`にする必要があります。L0とL1の両方で圧縮が採用されている場合、memtableから圧縮されたSSTファイルのサイズを把握するには、RocksDBログを分析する必要があります。たとえば、ファイルサイズが32MiBの場合、 `max-bytes-for-level-base`の値を128MiB（ `32 MiB * 4` ）に設定することをお勧めします。
+-   不要な圧縮を減らすため、 `max-bytes-for-level-base`の値はL0のデータ量とほぼ同じに設定することをお勧めします。たとえば、圧縮方法が「no:no:lz4:lz4:lz4:lz4:lz4」の場合、L0とL1は圧縮されておらず、L0の圧縮のトリガー条件はSSTファイルの数が4（デフォルト値）に達することであるため、 `max-bytes-for-level-base`の値は`write-buffer-size * 4`にする必要があります。L0とL1の両方で圧縮が採用されている場合、memtableから圧縮されたSSTファイルのサイズを把握するには、RocksDBログを分析する必要があります。たとえば、ファイルサイズが32MiBの場合、 `max-bytes-for-level-base`の値を128MiB（ `32 MiB * 4` ）に設定することをお勧めします。
 
 ### <code>target-file-size-base</code> {#code-target-file-size-base-code}
 
@@ -1843,7 +1843,7 @@ Titan に関連するコンフィグレーション項目。
 
 ### <code>merge-small-file-threshold</code> {#code-merge-small-file-threshold-code}
 
--   BLOBファイルのサイズがこの値より小さい場合でも、そのBLOBファイルはGCの対象として選択される可能性があります。この場合、 `discardable-ratio`は無視されます。
+-   BLOBファイルのサイズがこの値より小さい場合でも、そのBLOBファイルはGCの対象として選択される可能性があります。この場合、 `discardable-ratio`無視されます。
 -   デフォルト値: `"8MiB"`
 -   最小値: `0`
 -   単位: KiB|MiB|GiB
@@ -2140,7 +2140,7 @@ Raft Engineに関連するコンフィグレーション項目。
 
 ### <code>compression-level</code> <span class="version-mark">v7.4.0 の新機能</span> {#code-compression-level-code-span-class-version-mark-new-in-v7-4-0-span}
 
--   Raftログファイルを書き込む際にRaft Engineが使用するLZ4アルゴリズムの圧縮効率を設定します。値が低いほど圧縮速度は速くなりますが、圧縮率は低くなります。
+-   Raft EngineがRaftログファイルを書き込む際に使用するLZ4アルゴリズムの圧縮効率を設定します。値が低いほど圧縮速度は速くなりますが、圧縮率は低くなります。
 -   範囲: `[1, 16]`
 -   デフォルト値: `1`
 
@@ -2610,7 +2610,7 @@ TiKVstorageレイヤーのリソース制御に関するコンフィグレーシ
 ### <code>enabled</code> <span class="version-mark">v6.6.0 の新機能</span> {#code-enabled-code-span-class-version-mark-new-in-v6-6-0-span}
 
 -   対応するリソースグループのいずれか[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)に基づいて、ユーザーのフォアグラウンド読み取り/書き込み要求のスケジュールを有効にするかどうかを制御します。TiDBリソースグループとリソース制御の詳細については、 [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)参照してください。
--   この設定項目を有効にすると、TiDB で[`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660)有効になっている場合にのみ機能します。この設定項目を有効にすると、TiKV は優先度キューを使用して、フォアグラウンドユーザーからのキューに入れられた読み取り/書き込み要求をスケジュールします。要求のスケジュール優先度は、その要求を受信するリソースグループが既に消費しているリソース量に反比例し、対応するリソースグループのクォータに正比例します。
+-   この設定項目を有効にすると、TiDBで[`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660)有効になっている場合にのみ機能します。この設定項目を有効にすると、TiKVは優先度キューを使用して、フォアグラウンドユーザーからのキューに入れられた読み取り/書き込み要求をスケジュールします。要求のスケジュール優先度は、その要求を受信するリソースグループが既に消費しているリソース量に反比例し、対応するリソースグループのクォータに正比例します。
 -   デフォルト値: `true` 。リソース グループの RU に基づくスケジュールが有効であることを意味します。
 
 ### <code>priority-ctl-strategy</code> <span class="version-mark">v8.4.0 の新機能</span> {#code-priority-ctl-strategy-code-span-class-version-mark-new-in-v8-4-0-span}

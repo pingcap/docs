@@ -60,7 +60,7 @@ TiDB Cloud Essential は、さまざまな運用要件に対応するために 2
 -   デフォルトでは、ゾーン高可用性オプションを利用するクラスターでは、すべてのコンポーネントが同じ可用性ゾーン内に配置されるため、ネットワークレイテンシーが短縮されます。
 -   最大限のインフラストラクチャ分離と冗長性を必要とするアプリケーションの場合、リージョン高可用性オプションにより、複数の可用性ゾーンにノードが分散されます。
 
-詳細については[TiDB Cloud StarterとEssentialの高可用性](/tidb-cloud/serverless-high-availability.md)参照してください。
+詳細については[TiDB Cloudの高可用性](/tidb-cloud/serverless-high-availability.md)参照してください。
 
 ## TiDB Cloud専用 {#tidb-cloud-dedicated}
 

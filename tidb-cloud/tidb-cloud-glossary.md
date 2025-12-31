@@ -145,7 +145,12 @@ TiDB Cloudは、 [チェンジフィード](/tidb-cloud/changefeed-overview.md)�
 
 ### リクエストユニット（RU） {#request-unit-ru}
 
-リクエストユニット（RU）は、データベースへの単一のリクエストで消費されるリソースの量を表す測定単位です。リクエストで消費されるRUの量は、操作の種類や取得または変更されるデータの量など、さまざまな要因によって異なります。詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)参照してください。
+TiDB Cloud StarterとEssentialでは、リクエストユニット（RU）は、データベースへの1回のリクエストで消費されるリソース量を表す測定単位です。リクエストで消費されるRUの量は、操作の種類や取得または変更されるデータの量など、さまざまな要因によって異なります。ただし、 TiDB Cloud StarterとEssentialの課金モデルは異なります。
+
+-   TiDB Cloud Starterは、消費されたRUの合計数に基づいて課金されます。詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)ご覧ください。
+-   TiDB Cloud Essentialは、プロビジョニングされた[リクエスト容量単位（RCU）](#request-capacity-unit-rcu) RCUの数に基づいて課金されます。1 RCUは、1秒あたり一定数のRUを処理できる固定量のコンピューティングリソースを提供します。詳細については、 [TiDB Cloud Essential の価格詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)ご覧ください。
+
+TiDB Cloud DedicatedおよびTiDB Self-Managedにおいて、リクエストユニット（RU）はシステムリソースの消費量を表すリソース抽象化単位であり、現在CPU、IOPS、IO帯域幅のメトリクスが含まれます。リクエストユニットは、**課金目的ではなく**、リソース制御機能によってデータベースリクエストで消費されるリソースを制限、分離、管理するために使用されます。詳細については、 [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)ご覧ください。
 
 ## S {#s}
 

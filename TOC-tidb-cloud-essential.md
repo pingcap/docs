@@ -60,7 +60,7 @@
         -   [SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md)
         -   [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md)
         -   [ジャンゴ](/develop/dev-guide-sample-application-python-django.md)
-    -   Node.js
+    -   ノード.js
         -   [ノード-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
         -   [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
         -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
@@ -274,6 +274,9 @@
         -   [プライベートエンドポイント経由でAlibaba Cloudに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
         -   [パブリックエンドポイントのファイアウォールルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
         -   [TiDB CloudへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)
+    -   プライベートリンク接続
+        -   [プライベートリンク接続の概要](/tidb-cloud/serverless-private-link-connection.md)
+        -   [AWS 上の Confluent Cloud に接続する](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
     -   監査管理
         -   [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)
         -   [データベース監査ログ](/tidb-cloud/essential-database-audit-logging.md)
@@ -650,7 +653,7 @@
         -   [スケジュール](/tidb-scheduling.md)
         -   [TSO](/tso.md)
     -   ストレージエンジン
-        -   TiKV
+        -   ティクブ
             -   [TiKVの概要](/tikv-overview.md)
             -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
         -   TiFlash

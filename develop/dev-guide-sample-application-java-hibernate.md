@@ -1,11 +1,11 @@
 ---
 title: Connect to TiDB with Hibernate
-summary: Hibernateを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、Hibernateを使ってTiDBを操作するJavaサンプルコードスニペットを紹介します。
+summary: Hibernateを使用してTiDBに接続する方法を学びます。このチュートリアルでは、Hibernateを使用してTiDBを操作するJavaサンプルコードスニペットを紹介します。
 ---
 
 # Hibernate で TiDB に接続する {#connect-to-tidb-with-hibernate}
 
-TiDBはMySQL互換のデータベースであり、 [休止状態](https://hibernate.org/orm/)人気のオープンソースJava ORMです。Hibernateはバージョン`6.0.0.Beta2`以降、TiDBの機能に適したTiDB方言をサポートしています。
+TiDBはMySQL互換データベースであり、 [休止状態](https://hibernate.org/orm/)人気のあるオープンソースのJava ORMです。TiDBはMySQLとの互換性が高いため、長期的な互換性を確保するため、Hibernate方言として`org.hibernate.dialect.MySQLDialect`使用することをお勧めします。また、 [Hibernateコミュニティの方言](https://github.com/hibernate/hibernate-orm/tree/main/hibernate-community-dialects)ではTiDB固有の方言（ `org.hibernate.community.dialect.TiDBDialect` ）が利用可能ですが、PingCAPではメンテナンスされていません。9 `MySQLDialect`ご使用で互換性の問題が発生した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告してください。
 
 このチュートリアルでは、TiDB と Hibernate を使用して次のタスクを実行する方法を学習します。
 
@@ -49,7 +49,7 @@ TiDBはMySQL互換のデータベースであり、 [休止状態](https://hiber
 
 ### ステップ1: サンプルアプリのリポジトリをクローンする {#step-1-clone-the-sample-app-repository}
 
-サンプル コード リポジトリのクローンを作成するには、ターミナル ウィンドウで次のコマンドを実行します。
+ターミナル ウィンドウで次のコマンドを実行して、サンプル コード リポジトリのクローンを作成します。
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-java-hibernate-quickstart.git
@@ -164,7 +164,7 @@ cd tidb-java-hibernate-quickstart
     export USE_SSL='false'
     ```
 
-    プレースホルダー`{}`接続パラメータに置き換え、 `USE_SSL`を`false`に設定してください。TiDBをローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空です。
+    プレースホルダー`{}`を接続パラメータに置き換え、 `USE_SSL`を`false`に設定してください。TiDBをローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空です。
 
 3.  `env.sh`ファイルを保存します。
 
@@ -179,7 +179,7 @@ cd tidb-java-hibernate-quickstart
     make
     ```
 
-2.  [期待出力.txt](https://github.com/tidb-samples/tidb-java-hibernate-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
+2.  [期待出力.txt](https://github.com/tidb-samples/tidb-java-hibernate-quickstart/blob/main/Expected-Output.txt)をチェックして、出力が一致するかどうかを確認します。
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
@@ -201,7 +201,7 @@ Hibernate 構成ファイル`hibernate.cfg.xml`を編集します。
 
         <!-- Database connection settings -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.TiDBDialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.url">${tidb_jdbc_url}</property>
         <property name="hibernate.connection.username">${tidb_user}</property>
         <property name="hibernate.connection.password">${tidb_password}</property>
@@ -217,7 +217,7 @@ Hibernate 構成ファイル`hibernate.cfg.xml`を編集します。
 </hibernate-configuration>
 ```
 
-`${tidb_jdbc_url}` `${tidb_user}` TiDBクラスタの実際の値に置き換えてください。次に、次`${tidb_password}`関数を定義します。
+`${tidb_jdbc_url}` `${tidb_user}` TiDBクラスタの実際の値に置き換えてください。次に、次の関数を定義します`${tidb_password}`
 
 ```java
 public SessionFactory getSessionFactory() {
@@ -228,7 +228,7 @@ public SessionFactory getSessionFactory() {
 }
 ```
 
-この関数を使用する場合、 `${your_entity_class}`独自のデータエンティティクラスに置き換える必要があります。複数のエンティティクラスがある場合は、それぞれに`.addAnnotatedClass(${your_entity_class})`ステートメントを追加する必要があります。上記の関数は、Hibernate を設定する方法の1つにすぎません。設定で問題が発生した場合、または Hibernate について詳しく知りたい場合は、 [Hibernateの公式ドキュメント](https://hibernate.org/orm/documentation)を参照してください。
+この関数を使用する場合、 `${your_entity_class}`独自のデータエンティティクラスに置き換える必要があります。複数のエンティティクラスを使用する場合は、それぞれに`.addAnnotatedClass(${your_entity_class})`ステートメントを追加する必要があります。上記の関数は、Hibernate を設定する方法の1つにすぎません。設定で問題が発生した場合、または Hibernate について詳しく知りたい場合は、 [Hibernateの公式ドキュメント](https://hibernate.org/orm/documentation)を参照してください。
 
 ### データの挿入または更新 {#insert-or-update-data}
 
@@ -261,11 +261,45 @@ try (Session session = sessionFactory.openSession()) {
 
 詳細については[データを削除する](/develop/dev-guide-delete-data.md)を参照してください。
 
+## <code>MySQLDialect</code>との互換性 {#compatibility-with-code-mysqldialect-code}
+
+TiDB で`MySQLDialect`使用する場合は、次の動作に注意してください。
+
+### <code>SERIALIZABLE</code>分離レベル {#code-serializable-code-isolation-level}
+
+トランザクション分離レベル`SERIALIZABLE`を設定しようとするアプリケーションでは、TiDB で次のエラーが発生します。
+
+    The isolation level 'SERIALIZABLE' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error
+
+このエラーを回避するには、サーバー側で次の TiDB システム変数を設定します。
+
+```sql
+SET GLOBAL tidb_skip_isolation_level_check=1;
+```
+
+この変数を有効にすると、TiDBは`SERIALIZABLE`指定したリクエストをエラーなしで受け入れます。内部的には、TiDBは最も強力な分離レベルである`REPEATABLE-READ`使用します。詳細については、 [`tidb_skip_isolation_level_check`](/system-variables.md#tidb_skip_isolation_level_check)参照してください。
+
+> **注記：**
+>
+> コミュニティによって管理されている`TiDBDialect`分離レベル`SERIALIZABLE`を必要とする機能をスキップすることで、この動作を自動的に処理します。
+
+### <code>CHECK</code>制約 {#code-check-code-constraints}
+
+Hibernate の[`@Check`](https://docs.hibernate.org/orm/6.5/javadocs/org/hibernate/annotations/Check.html)アノテーションは、DDL `CHECK`制約を生成します。5 [MySQL 8.0.16以降のバージョン](https://dev.mysql.com/doc/refman/8.0/en/create-table-check-constraints.html)これらの制約をデフォルトで強制しますが、TiDB は明示的に有効にしない限りそれらを強制しません。
+
+TiDB で`CHECK`制約の強制を有効にするには、次のシステム変数を設定します。
+
+```sql
+SET GLOBAL tidb_enable_check_constraint=ON;
+```
+
+この設定がない場合、TiDBは`CHECK`制約構文を受け入れますが、それを強制しません。その結果、予期しないデータ整合性の問題が発生する可能性があります。詳細については、 [`CHECK`制約](/constraints.md#check)参照してください。
+
 ## 次のステップ {#next-steps}
 
 -   [Hibernateのドキュメント](https://hibernate.org/orm/documentation)から Hibernate の使い方を詳しく学びます。
 -   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
--   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
 -   Java開発者向けコースを通じて学習します: [JavaからTiDBを操作する](https://eng.edu.pingcap.com/catalog/info/id:212) .
 
 ## ヘルプが必要ですか? {#need-help}

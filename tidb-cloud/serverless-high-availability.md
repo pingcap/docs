@@ -1,11 +1,16 @@
 ---
-title: High Availability in TiDB Cloud Starter and Essential
-summary: TiDB Cloud StarterおよびEssentialの高可用性アーキテクチャについて解説します。ゾーンおよびリージョンの高可用性オプション、自動バックアップ、フェイルオーバープロセス、そしてTiDBがデータの耐久性とビジネス継続性をどのように確保するかについて解説します。
+title: High Availability in TiDB Cloud
+summary: TiDB Cloudの高可用性アーキテクチャについて学びましょう。ゾーンおよびリージョンの高可用性オプション、自動バックアップ、フェイルオーバープロセス、そして TiDB がデータの耐久性とビジネス継続性をどのように確保するかについてご紹介します。
 ---
 
-# TiDB Cloud StarterとEssentialの高可用性 {#high-availability-in-tidb-cloud-starter-and-essential}
+# TiDB Cloudの高可用性 {#high-availability-in-tidb-cloud}
 
 TiDB Cloudは、高可用性とデータ耐久性をデフォルトで維持するための堅牢なメカニズムを備えており、単一障害点を回避し、障害発生時でも継続的なサービスを保証します。実績のあるTiDBオープンソース製品をベースとしたフルマネージドサービスとして、TiDBのコアとなる高可用性（HA）機能を継承し、クラウドネイティブな機能を追加することで強化されています。
+
+> **注記：**
+>
+> -   この文書は、<customcontent plan="starter,essential"> TiDB Cloud Starter とTiDB Cloud Essential</customcontent><customcontent plan="premium"> TiDB Cloud Starter、 TiDB Cloud Essential、およびTiDB Cloud Premium</customcontent> 。
+> -   TiDB Cloud Dedicated の高可用性については、 [TiDB Cloud専用における高可用性](/tidb-cloud/high-availability-with-multi-az.md)参照してください。
 
 ## 概要 {#overview}
 
@@ -13,10 +18,24 @@ TiDBは、 Raftコンセンサスアルゴリズムを用いて、高い可用�
 
 TiDB Cloud は、さまざまな運用要件を満たすために、ゾーン高可用性とリージョン高可用性によってこれらの機能を拡張します。
 
+<CustomContent plan="starter,essential">
+
 > **注記：**
 >
 > -   TiDB Cloud Starter クラスターの場合、ゾーン高可用性のみが有効になっており、構成できません。
 > -   AWS 東京 (ap-northeast-1) リージョンまたは Alibaba Cloud の任意のリージョンでホストされているTiDB Cloud Essential クラスターでは、リージョン高可用性がデフォルトで有効になっています。クラスター作成時に必要に応じてゾーン高可用性に変更できます。他のリージョンでホストされているTiDB Cloud Essential クラスターでは、ゾーン高可用性のみが有効になっており、設定変更はできません。
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+> **注記：**
+>
+> -   TiDB Cloud Starter クラスターの場合、ゾーン高可用性のみが有効になっており、構成できません。
+> -   TiDB Cloud Premium クラスターの場合、リージョン高可用性のみが有効になっており、構成できません。
+> -   AWS 東京 (ap-northeast-1) リージョンまたは Alibaba Cloud の任意のリージョンでホストされているTiDB Cloud Essential クラスターでは、リージョン高可用性がデフォルトで有効になっています。クラスター作成時に必要に応じてゾーン高可用性に変更できます。他のリージョンでホストされているTiDB Cloud Essential クラスターでは、ゾーン高可用性のみが有効になっており、設定変更はできません。
+
+</CustomContent>
 
 -   **ゾーン高可用性**：このオプションでは、すべてのノードを単一のアベイラビリティゾーンに配置することで、ネットワークレイテンシーを削減します。ゾーン間のアプリケーションレベルの冗長性を必要とせずに高可用性を確保できるため、単一ゾーン内での低レイテンシーを優先するアプリケーションに適しています。詳細については、 [ゾーン高可用性アーキテクチャ](#zonal-high-availability-architecture)参照してください。
 
@@ -24,7 +43,7 @@ TiDB Cloud は、さまざまな運用要件を満たすために、ゾーン高
 
 ## ゾーン高可用性アーキテクチャ {#zonal-high-availability-architecture}
 
-デフォルトのゾーン高可用性でクラスターを作成すると、ゲートウェイ、TiDB、TiKV、 TiFlashのコンピューティング/書き込みノードを含むすべてのコンポーネントが同じアベイラビリティゾーンで実行されます。これらのコンポーネントをデータプレーンに配置することで、仮想マシンプールによるインフラストラクチャの冗長性が確保され、コロケーションによるフェイルオーバー時間とネットワークレイテンシーが最小限に抑えられます。
+デフォルトのゾーン高可用性でクラスターを作成すると、ゲートウェイ、TiDB、TiKV、 TiFlash のコンピューティング/書き込みノードを含むすべてのコンポーネントが同じアベイラビリティゾーンで実行されます。これらのコンポーネントをデータプレーンに配置することで、仮想マシンプールによるインフラストラクチャの冗長性が確保され、コロケーションによるフェイルオーバー時間とネットワークレイテンシーが最小限に抑えられます。
 
 <CustomContent language="en,zh">
 
