@@ -39,12 +39,12 @@ The Amazon RDS instance must meet the following requirements:
 - Set your Amazon RDS instance with a proper security group, and it is accessible within the VPC. For example, you can create a security group with the following rules:
 
     - An inbound rule that allows MySQL/Aurora: 
-        Type: `MySQL/Aurora`
-        Source: `Anywhere-IPv4`
+        - Type: `MySQL/Aurora`
+        - Source: `Anywhere-IPv4`
     
     - An outbound rule that allows MySQL/Aurora: 
-        Type: `MySQL/Aurora`
-        Destination: `Anywhere-IPv4`
+        - Type: `MySQL/Aurora`
+        - Destination: `Anywhere-IPv4`
 
 > **Note**
 >
@@ -76,12 +76,12 @@ To set up the load balancer in the same region of your RDS, take the following s
     - **Availability Zones**: it must overlap with your {{{ .essential }}} cluster
     - **Security groups**: create a new security group with the following rules:
         - An inbound rule that allows MySQL/Aurora: 
-            Type: `MySQL/Aurora`
-            Source: `Anywhere-IPv4`
+            - Type: `MySQL/Aurora`
+            - Source: `Anywhere-IPv4`
 
         - An outbound rule that allows MySQL/Aurora:        
-            Type: `MySQL/Aurora`
-            Destination: `Anywhere-IPv4`
+            - Type: `MySQL/Aurora`
+            - Destination: `Anywhere-IPv4`
 
     - **Listeners and routing**:  
         - **Protocol and Port**: set the protocol to TCP and port to your database port, for example `3306` for MySQL
