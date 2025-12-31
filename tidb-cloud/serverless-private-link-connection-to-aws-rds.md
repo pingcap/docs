@@ -66,7 +66,7 @@ To set up the load balancer in the same region of your RDS, take the following s
     - **VPC**: the VPC where your RDS is located
     - **Register targets**: register the IP addresses of your Amazon RDS instance. You can ping the RDS endpoint to get the IP address.
  
-    For more information, see [Create a target group for your Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-target-group.html).
+  For more information, see [Create a target group for your Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-target-group.html).
 
 2. Go to [Load balancers](https://console.aws.amazon.com/ec2/home#LoadBalancers) to create a network load balancer. Provide the following information:
 
@@ -86,8 +86,8 @@ To set up the load balancer in the same region of your RDS, take the following s
     - **Listeners and routing**:  
         - **Protocol and Port**: set the protocol to TCP and port to your database port, for example `3306` for MySQL
         - **Target group**: select the target group you that create in the previous step
-  
-   For more information, see [Create a Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html).
+
+  For more information, see [Create a Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html).
 
 ### Step 2.2. Set up the AWS Endpoint Service
 
