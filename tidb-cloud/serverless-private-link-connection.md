@@ -280,10 +280,7 @@ ticloud serverless private-link-connection delete -c <cluster-id> --private-link
 ## See also
 
 - [Connect to Confluent Cloud via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
-
-<!--
 - [Connect to Amazon RDS via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md)
 - [Connect to Alibaba Cloud ApsaraDB RDS for MySQL via a Private Link Connection ](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md)
 - [Connect to AWS Self-Hosted Kafka via Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
 - [Connect to Alibaba Cloud Self-Hosted Kafka via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
--->
