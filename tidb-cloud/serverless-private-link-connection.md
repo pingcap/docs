@@ -32,7 +32,7 @@ You can create an AWS Endpoint Service private link connection using the TiDB Cl
 Ensure that the AWS endpoint service:
 
 - Resides in the same region as your TiDB Cloud cluster.
-- Add the TiDB Cloud account ID to the **Allowed principals** list.
+- Add the TiDB Cloud account ID to the **Allow principals** list.
 - Has availability zones that overlap with your TiDB Cloud cluster.
 
 You can get the account ID and availability zones information at the bottom of the **Create Private Link Connection** dialog, or by running the following command:
