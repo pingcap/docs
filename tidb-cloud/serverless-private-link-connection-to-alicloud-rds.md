@@ -43,6 +43,8 @@ Your ApsaraDB RDS for MySQL instance must meet the following requirements:
 
 ## Step 2. Expose the ApsaraDB RDS for MySQL instance as an endpoint service
 
+You need to set up the load balancer and the endpoint service in the Alibaba Cloud console.
+
 ### Step 2.1. Set up the load balancer
 
 Set up the load balancer in the same region of your ApsaraDB RDS for MySQL as follows:
