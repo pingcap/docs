@@ -39,7 +39,7 @@ There is no physical isolation between logical regions and physical SST files. O
 
 ## The Motivation of TiDB X
 
-These challenges were constraints of the physical binding of data to compute. To break through these ceilings—to achieve 10x faster scaling, zero-interference background tasks, and true pay-as-you-go elasticity. We need to move from "Shared-Nothing" architecute to TiDB X.
+These challenges were constraints of the physical binding of data to compute. To break through these ceilings—to achieve 10x faster scaling, zero-interference background tasks, and true pay-as-you-go elasticity. We need to move from "Shared-Nothing" architecture to TiDB X.
 
 The motivation of TiDB X is documented in the blog [The Making of TiDB X: Origins, Architecture, and What’s to Come](https://www.pingcap.com/blog/tidbx-origins-architecture/)
 
@@ -48,7 +48,7 @@ The motivation of TiDB X is documented in the blog [The Making of TiDB X: Origin
 TiDB X is a cloud-native evolution that unlocks the full potential of classic TiDB’s original distributed design. TiDB X inherits the advantages of classic TiDB:
 
 - The SQL layer (tidb-server) was already stateless. It handled query parsing, optimization, and execution but never stored persistent data.
-- TiProxy(or load balancers) is designed to maintain persistent client connections and route SQL traffic seamlessly. TiProxy originally supported online upgrades, now became a natural gateway service.
+- TiProxy (or load balancers) is designed to maintain persistent client connections and route SQL traffic seamlessly. TiProxy originally supported online upgrades, now became a natural gateway service.
 - TiKV’s dynamic range-based sharding already existed, called Regions (256MB by default). TiKV splits data into millions of regions. The system automatically managed the movement and balancing of these Regions across nodes.
 
 TiDB X evolves the proven stateless SQL and dynamic sharding foundation of classic TiDB by replacing the local "Shared-Nothing" storage with a cloud-native "Shared-Storage" object storage backbone, enabling a novel "Separation of Compute and Compute" that offloads heavy tasks to elastic pools for instant scalability and predictable performance.
