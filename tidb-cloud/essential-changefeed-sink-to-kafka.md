@@ -25,8 +25,8 @@ Before creating a changefeed to stream data to Apache Kafka, you need to complet
 
 Ensure that your {{{ .essential }}} cluster can connect to the Apache Kafka service. You can choose one of the following connection methods:
 
-- Public Access: suitable for a quick setup.
 - Private Link Connection: meeting security compliance and ensuring network quality.
+- Public Network: suitable for a quick setup.
 
 <SimpleTab>
 <div label="Private Link Connection">
@@ -37,9 +37,9 @@ Private Link Connection leverages **Private Link** technologies from cloud provi
 
 See the following instructions to set up a Private Link connection according to your Kafka deployment and cloud provider:
 
-- [Connect to Confluent Cloud via a Private Link Connection](/tidbcloud/serverless-private-link-connection-to-aws-confluent.md)
-- [Connect to AWS Self-Hosted Kafka via Private Link Connection](/tidbcloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
-- [Connect to Alibaba Cloud Self-Hosted Kafka via a Private Link Connection](/tidbcloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
+- [Connect to Confluent Cloud on AWS via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
+- [Connect to AWS Self-Hosted Kafka via Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
+- [Connect to Alibaba Cloud Self-Hosted Kafka via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
 
 </div>
 
@@ -65,7 +65,7 @@ For example, if your Kafka cluster is in Confluent Cloud, refer to [Resources](h
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Navigate to the overview page of the target TiDB Cloud cluster, and then click **Data** > **Changefeed** in the left navigation pane.
-3. Click **Create Changefeed**, and select **Kafka** as **Destination**.
+3. Click **Create Changefeed**, and then select **Kafka** as **Destination**.
 
 ## Step 2. Configure the changefeed target
 
@@ -95,6 +95,7 @@ The steps vary depending on the connectivity method you select.
 
     - If your Kafka does not require authentication, keep the default option **Disable**.
     - If your Kafka requires authentication, select the corresponding authentication type, and then fill in the **user name** and **password** of your Kafka account for authentication.
+
 5. Select your **Kafka Version**. If you do not know which one to use, use **Kafka v2**.
 6. Select a **Compression** type for the data in this changefeed.
 7. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.

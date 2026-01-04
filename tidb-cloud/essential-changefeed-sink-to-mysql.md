@@ -9,7 +9,7 @@ This document describes how to stream data from {{{ .essential }}} to MySQL usin
 
 ## Restrictions
 
-- For each{{{ .essential }}} cluster, you can create up to 10 changefeeds.
+- For each {{{ .essential }}} cluster, you can create up to 10 changefeeds.
 - Because {{{ .essential }}} uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
 
@@ -23,20 +23,23 @@ Before creating a changefeed, you need to complete the following prerequisites:
 
 ### Network
 
-Make sure that your {{{ .essential }}} cluster can connect to the MySQL service.
+Make sure that your {{{ .essential }}} cluster can connect to the MySQL service. You can choose one of the following connection methods:
+
+- Private Link Connection: meeting security compliance and ensuring network quality.
+- Public Network: suitable for a quick setup.
 
 <SimpleTab>
-<div label="Public Network">
-
-If your MySQL service can be accessed over the public network, you can choose to connect to MySQL through a public IP or domain name.
-
-</div>
-
 <div label="Private Link Connection">
 
 Private link connections leverage **Private Link** technologies from cloud providers, enabling resources in your VPC to connect to services in other VPCs through private IP addresses, as if those services were hosted directly within your VPC.
 
-You can connect your {{{ .essential }}} cluster to your MySQL service securely through a private link connection. If the private link connection is not available for your MySQL service, follow [Connect to Amazon RDS via a Private Link Connection](/tidbcloud/serverless-private-link-connection-to-aws-rds.md) or [Connect to Alibaba Cloud ApsaraDB RDS for MySQL via a Private Link Connection](/tidbcloud/serverless-private-link-connection-to-alicloud-rds.md) to create one.
+You can connect your {{{ .essential }}} cluster to your MySQL service securely through a private link connection. If the private link connection is not available for your MySQL service, follow [Connect to Amazon RDS via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md) or [Connect to Alibaba Cloud ApsaraDB RDS for MySQL via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md) to create one.
+
+</div>
+
+<div label="Public Network">
+
+If your MySQL service can be accessed over the public network, you can choose to connect to MySQL through a public IP or domain name.
 
 </div>
 
@@ -54,8 +57,6 @@ To load the existing data:
     - The time to create **Sink to MySQL**
 
     For example:
-
-    {{< copyable "sql" >}}
 
     ```sql
     SET GLOBAL tidb_gc_life_time = '72h';
@@ -119,8 +120,6 @@ After completing the prerequisites, you can sink your data to MySQL.
 
 12. If you have [loaded the existing data](#load-existing-data-optional) using Export, you need to restore the GC time to its original value (the default value is `10m`) after the sink is created:
 
-{{< copyable "sql" >}}
-
-```sql
-SET GLOBAL tidb_gc_life_time = '10m';
-```
+    ```sql
+    SET GLOBAL tidb_gc_life_time = '10m';
+    ```
