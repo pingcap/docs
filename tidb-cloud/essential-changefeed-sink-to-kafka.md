@@ -1,17 +1,21 @@
 ---
 title: Sink to Apache Kafka
-summary: This document explains how to create a changefeed to stream data from TiDB Cloud to Apache Kafka. It includes restrictions, prerequisites, and steps to configure the changefeed for Apache Kafka. The process involves setting up network connections, adding permissions for Kafka ACL authorization, and configuring the changefeed specification.
+summary: This document explains how to create a changefeed to stream data from {{{ .essential }}} to Apache Kafka. It includes restrictions, prerequisites, and steps to configure the changefeed for Apache Kafka. The process involves setting up network connections, adding permissions for Kafka ACL authorization, and configuring the changefeed specification.
 ---
 
 # Sink to Apache Kafka
 
-This document describes how to create a changefeed to stream data from TiDB Cloud to Apache Kafka.
+This document describes how to create a changefeed to stream data from {{{ .essential }}} to Apache Kafka.
+
+> **Note:**
+>
+> - The sink to Apache Kafka feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 ## Restrictions
 
-- For each TiDB Cloud cluster, you can create up to 10 changefeeds.
-- Currently, TiDB Cloud does not support uploading self-signed TLS certificates to connect to Kafka brokers.
-- Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
+- For each {{{ .essential }}} cluster, you can create up to 10 changefeeds.
+- Currently, {{{ .essential }}} does not support uploading self-signed TLS certificates to connect to Kafka brokers.
+- Because {{{ .essential }}} uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
 
 ## Prerequisites
@@ -23,7 +27,7 @@ Before creating a changefeed to stream data to Apache Kafka, you need to complet
 
 ### Network
 
-Ensure that your TiDB Cloud cluster can connect to the Apache Kafka service. You can choose one of the following connection methods:
+Ensure that your {{{ .essential }}} cluster can connect to the Apache Kafka service. You can choose one of the following connection methods:
 
 - Public Access: suitable for a quick setup.
 - Private Link Connection: meeting security compliance and ensuring network quality.
@@ -33,7 +37,7 @@ Ensure that your TiDB Cloud cluster can connect to the Apache Kafka service. You
 
 Private Link Connection leverages **Private Link** technologies from cloud providers to enable resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly within your VPC.
 
-TiDB Cloud currently supports Private Link Connection only for self-hosted Kafka and Confluent Cloud Dedicated Cluster. It does not support direct integration with MSK, or other Kafka SaaS services.
+{{{ .essential }}} currently supports Private Link Connection only for self-hosted Kafka and Confluent Cloud Dedicated Cluster. It does not support direct integration with MSK, or other Kafka SaaS services.
 
 See the following instructions to set up a Private Link connection according to your Kafka deployment and cloud provider:
 
@@ -54,7 +58,7 @@ It is not recommended to use public access in a production environment.
 
 ### Kafka ACL authorization
 
-To allow TiDB Cloud changefeeds to stream data to Apache Kafka and create Kafka topics automatically, ensure that the following permissions are added in Kafka:
+To allow {{{ .essential }}} changefeeds to stream data to Apache Kafka and create Kafka topics automatically, ensure that the following permissions are added in Kafka:
 
 - The `Create` and `Write` permissions are added for the topic resource type in Kafka.
 - The `DescribeConfigs` permission is added for the cluster resource type in Kafka.
