@@ -9,6 +9,7 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 
 > **Note:**
 >
+> - The changefeed feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 > - Currently, TiDB Cloud only allows up to 10 changefeeds per {{{ .essential }}} cluster.
 > - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) clusters, the changefeed feature is unavailable.
 
@@ -35,6 +36,8 @@ To create a changefeed, refer to the tutorials:
 
 ## View a changefeed
 
+You can view a changefeed using the TiDB Cloud console or the TiDB Cloud CLI.
+
 <SimpleTab>
 <div label="Console">
 
@@ -55,11 +58,13 @@ ticloud serverless changefeed get -c <cluster-id> --changefeed-id <changefeed-id
 
 ## Pause or resume a changefeed
 
+You can pause or resume a changefeed using the TiDB Cloud console or the TiDB Cloud CLI.
+
 <SimpleTab>
 <div label="Console">
 
 1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
-2. Locate the corresponding changefeed you want to pause or resume, and click **...** > **Pause/Resume** in the **Action** column.
+2. Locate the corresponding changefeed you want to pause or resume. In the **Action** column, click **...** > **Pause/Resume**.
 
 </div>
 
@@ -86,11 +91,13 @@ ticloud serverless changefeed resume -c <cluster-id> --changefeed-id <changefeed
 >
 > TiDB Cloud currently only allows editing changefeeds that are in the `Paused` state.
 
+You can edit a changefeed using the TiDB Cloud console or the TiDB Cloud CLI.
+
 <SimpleTab>
 <div label="Console">
 
 1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
-2. Locate the changefeed you want to pause, and click **...** > **Pause** in the **Action** column.
+2. Locate the changefeed you want to pause. In the **Action** column, click **...** > **Pause**.
 3. When the changefeed status changes to `Paused`, click **...** > **Edit** to edit the corresponding changefeed.
 
     TiDB Cloud populates the changefeed configuration by default. You can modify the following configurations:
@@ -128,6 +135,8 @@ ticloud serverless changefeed edit -c <cluster-id> --changefeed-id <changefeed-i
 
 ## Delete a changefeed
 
+You can delete a changefeed using the TiDB Cloud console or the TiDB Cloud CLI.
+
 <SimpleTab>
 <div label="Console">
 
@@ -147,7 +156,7 @@ ticloud serverless changefeed delete -c <cluster-id> --changefeed-id <changefeed
 
 ## Changefeed billing
 
-Free of charge during the beta period.
+Currently changefeed is free of charge during the beta phase.
 
 ## Changefeed states
 
