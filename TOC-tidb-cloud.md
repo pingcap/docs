@@ -802,6 +802,8 @@
     - [Computing](/tidb-computing.md)
     - [Scheduling](/tidb-scheduling.md)
     - [TSO](/tso.md)
+  - TiDB X Cluster Architecture
+    - [Overview](/tidb-x-architecture.md)
   - Storage Engines
     - TiKV
         - [TiKV Overview](/tikv-overview.md)
