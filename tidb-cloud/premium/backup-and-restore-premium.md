@@ -30,49 +30,34 @@ Backup files can originate from the following sources:
 
 ## Automatic backups
 
-TiDB Cloud automatically backs up your instance data, letting you restore data from a backup snapshot to minimize data loss in the event of a disaster.
+{{{ .premium }}} provides enhanced automatic backup capabilities for production environments. It combines high-frequency snapshots with log backups to ensure data reliability.
 
-### Learn about the backup setting
+### Automatic backup policies
 
-Compared with {{{ .starter }}} clusters and {{{ .essential }}} clusters, {{{ .premium }}} offers enhanced backup capabilities, including longer retention and hourly backup support.
+{{{ .premium }}} instances use a multi-layer backup architecture to protect your data, as described in the following table:
 
-| Backup setting   | {{{ .starter }}} (free) | {{{ .starter }}} (with spending limit > 0) | {{{ .essential }}} | {{{ .premium }}} |
-|------------------|--------------------------|---------------------------------------------|--------------------|------------------|
-| Backup Cycle     | Daily                    | Daily                                       | Daily              | Daily + Hourly   |
-| Backup Retention | 1 day                    | 30 days                                     | 30 days            | Up to 33 days    |
-| Backup Time      | Fixed time               | Configurable                               | Configurable       | Configurable     |
+| Backup type | Retention period | Restore granularity |
+| --- | --- | --- |
+| **Point-in-time recovery (PITR)** | 7 days | Restore to any specific point in time within the 7-day window. |
+| **Hourly snapshot** | 7 days | Restore from any hourly snapshot generated within the last 7 days. |
+| **Daily snapshot** | 33 days | Restore from any daily snapshot generated within the last 33 days. By default, daily snapshots are captured at 00:00 UTC. |
 
-- **Backup Cycle** determines how frequently backups are created.
+### Backup execution rules
 
-    - Premium instances support both **daily** and **hourly** backups.
-    - The **default** is **hourly backups**.
+- **Backup cycle**: {{{ .premium }}} instances perform both hourly and daily automatic backups.
 
-- **Backup Retention** is the duration for which backups are retained. Expired backups cannot be restored.
+- **Backup schedule**:
 
-    - Premium instances can retain backups for up to **33 days**.
+    - Hourly backups run at the start of every hour.
+    - Daily backups run at 00:00 UTC each day.
+    - Currently, you cannot customize or manage backup schedules.
 
-- **Backup Time** is the scheduled start time for backups.
+- **Retention behavior**: backups expire automatically when they exceed their retention period (7 days or 33 days) and cannot be restored.
 
-    - For Premium instances, **daily backups** can be configured to start at a preferred time (in 30-minute intervals), while **hourly backups** always run on the hour.
-
-### Configure the backup settings
-
-To configure backups for a {{{ .premium }}} instance, perform the following steps:
-
-1. Navigate to the [**Backup**](#view-the-backup-page) page of your TiDB instance.
-
-2. Click **Backup Setting**. This will open the **Backup Setting** window, where you can configure automatic backup options.
-
-3. In **Backup Cycle**, choose between the **Hourly Backup** and **Daily Backup** tabs:
-
-    - **Hourly Backup** (default):
-        - Runs **on the hour**.
-        - You can configure **Backup Retention** (1–33 days).
-    - **Daily Backup**:
-        - Runs at a configurable time in **30-minute intervals**.
-        - You can configure both **Backup Retention** (1–33 days) and **Backup Time**.
-
-4. Click **Save** to save your settings.
+> **Note:**
+>
+> - Automatic backup storage costs depend on the backup data volume and the retention period.
+> - To extend the backup retention period beyond the default limits, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
 
 ### Delete backup files
 
@@ -192,10 +177,14 @@ To restore backups from cloud storage, do the following:
 2. On the **Select Backup Storage Location** page, provide the following information:
 
     - **Cloud Provider**: select the cloud provider where your backup files are stored.
-    - **Region**: if your cloud provider is Alibaba Cloud OSS, select a Region.
+    - **Region**: if your cloud provider is Alibaba Cloud OSS, select a region.
     - **Backup Files URI**: enter the URI of the top-level folder that contains your backup files.
     - **Access Key ID**: enter your access key ID.
     - **Access Key Secret**: enter your access key secret.
+
+    > **Tip:**
+    >
+    > To create an access key for your storage bucket, see [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key) and [Configure Alibaba Cloud OSS access](#configure-alibaba-cloud-oss-access).
 
 3. Click **Verify Backup and Next**.
 
@@ -208,3 +197,113 @@ To restore backups from cloud storage, do the following:
 ## Limitations
 
 Currently, manual backups are not supported for {{{ .premium }}} instances.
+
+## References
+
+This section describes how to configure access for Amazon S3 and Alibaba Cloud OSS.
+
+### Configure Amazon S3 access using an AWS access key
+
+It is recommended that you use an IAM user, rather than the AWS account root user, to create an access key.
+
+Take the following steps to configure an access key:
+
+1. Create an IAM user and access key.
+
+    1. Create an IAM user. For more information, see [Create an IAM user in your AWS account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console).
+    2. Sign in to the [IAM console](https://console.aws.amazon.com/iam) using your AWS account ID or account alias, and your IAM user name and password.
+    3. Create an access key. For more information, see [Manage access keys for IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
+
+2. Grant permissions to the IAM user.
+
+    Create a policy with only the permissions required for your task and attach it to the IAM user. To restore data to a {{{ .premium }}} instance, grant the `s3:GetObject`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions.
+
+    The following is an example policy that allows TiDB Cloud to restore data from a specific folder in your Amazon S3 bucket.
+
+    ```json
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "AllowGetBucketLocation",
+                "Effect": "Allow",
+                "Action": "s3:GetBucketLocation",
+                "Resource": "arn:aws:s3:::<Your S3 bucket name>"
+            },
+            {
+                "Sid": "AllowListPrefix",
+                "Effect": "Allow",
+                "Action": "s3:ListBucket",
+                "Resource": "arn:aws:s3:::<Your S3 bucket name>",
+                "Condition": {
+                    "StringLike": {
+                        "s3:prefix": "<Your backup folder>/*"
+                    }
+                }
+            },
+            {
+                "Sid": "AllowReadObjectsInPrefix",
+                "Effect": "Allow",
+                "Action": "s3:GetObject",
+                "Resource": "arn:aws:s3:::<Your S3 bucket name>/<Your backup folder>/*"
+            }
+        ]
+    }
+    ```
+
+    In the preceding policy, replace `<Your S3 bucket name>` and `<Your backup folder>` with your actual bucket name and backup directory. This configuration follows the principle of least privilege by limiting access to only the necessary backup files.
+
+> **Note:**
+>
+> TiDB Cloud does not store your access keys. To maintain security, [delete the access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) after the import or export task is complete.
+
+### Configure Alibaba Cloud OSS access
+
+To grant TiDB Cloud access to your Alibaba Cloud OSS bucket, you need to create an AccessKey pair for the bucket.
+
+Take the following steps to configure an AccessKey pair:
+
+1. Create a RAM user and obtain the AccessKey pair. For more information, see [Create a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-ram-user).
+
+    In the **Access Mode** section, select **Using permanent AccessKey to access**.
+
+2. Create a custom policy with the required permissions. For more information, see [Create custom policies](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy).
+
+    - In the **Effect** section, select **Allow**.
+    - In the **Service** section, select **Object Storage Service**.
+    - In the **Action** section, select the required permissions. To restore a backup to a TiDB Cloud instance, grant the `oss:ListObjects` and `oss:GetObject` permissions.
+
+        > **Tip:**
+        >
+        > To enhance security for restore operations, you can  restrict access to the specific folder (`oss:Prefix`) where your backup files are stored rather than granting access to the entire bucket.
+
+        The following JSON example shows a policy for a restore task. This policy restricts access to a specific bucket and backup folder.
+
+        ```json
+        {
+        "Version": "1",
+        "Statement": [
+            {
+            "Effect": "Allow",
+            "Action": "oss:ListObjects",
+            "Resource": "acs:oss:*:*:<Your bucket name>",
+            "Condition": {
+                "StringLike": {
+                "oss:Prefix": "<Your backup folder>/*"
+                }
+            }
+            },
+            {
+            "Effect": "Allow",
+            "Action": "oss:GetObject",
+            "Resource": "acs:oss:*:*:<Your bucket name>/<Your backup folder>/*"
+            }
+        ]
+        }
+        ```
+
+    - In the **Resource** section, select the bucket and the specific objects in the bucket.
+
+3. Attach the custom policies to the RAM user.
+
+    For more information, see [Grant permissions to a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/grant-permissions-to-the-ram-user).

@@ -11,7 +11,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
 >
 > [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) is the best way to get started with TiDB Cloud. Additionally, you can try out TiDB Cloud features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
 
-- ✅: The feature is generally available unless otherwise noted as preview.
+- ✅: The feature is generally available unless otherwise noted as "Private preview" or "Public preview".
 - ❌: The feature is currently not available.
 
 <table><thead>
@@ -84,7 +84,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
   <tr>
     <td>Changefeed</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Private preview in CLI)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
