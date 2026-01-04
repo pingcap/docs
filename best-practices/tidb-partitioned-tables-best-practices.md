@@ -122,6 +122,7 @@ The following table shows results for a query returning 400 rows from a table wi
 - **Non-partitioned table**: provides the best performance with the fewest tasks. Suitable for most OLTP workloads.
 - **Partitioned table with global indexes**: improve index scan efficiency, but table lookups remain expensive when many rows match.
 - **Partitioned table with local indexes**: when the query condition does not include the partition key, local index queries scan all partitions.
+
 > **Note:**
 >
 > - **Average query time** is sourced from the `statement_summary` view.
