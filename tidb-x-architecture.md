@@ -95,7 +95,9 @@ Because data resides in shared object storage, adding or removing nodes no longe
 
 ## Elastic TCO (Pay-As-You-Go)
 
-classic TiDB required over-provisioning hardware to handle peak traffic and background tasks (like compaction overhead) simultaneously. TiDB X enables auto-scaling, allowing users to pay only for the resources they use (Pay-As-You-Go). Background resources for heavy jobs spin up on demand and spin down when finished, eliminating wasted cost.
+Classic TiDB required over-provisioning hardware to handle peak traffic and background tasks (like compaction overhead) simultaneously. TiDB X enables auto-scaling, allowing users to pay only for the resources they use (Pay-As-You-Go). Background resources for heavy jobs spin up on demand and spin down when finished, eliminating wasted cost.
+
+A Request Capacity Unit (RCU) is a unit of measure used to represent the provisioned compute capacity for your TiDB X cluster. One RCU provides a fixed amount of compute resources that can process a certain number of SQL requests. The number of RCUs you provision determines your cluster’s baseline performance and throughput capacity. In TiDB X, cost is based on the actual consumption of RCU. You can maintain full financial control by setting an upper limit on these units, preventing unexpected costs while still enjoying the benefits of elasticity.
 
 ## From LSM-tree to LSM forest
 
