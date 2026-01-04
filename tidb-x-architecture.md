@@ -89,10 +89,6 @@ TiDB X moves away from the classic "Shared-Nothing" architecture (where data is 
 The introduction of object storage does not impact the performance of foreground read and write operations. For read operations, only heavy read requests are offloaded to the remote elastic coprocessor workers. For write operations, the interaction with object storage is asynchronous and does not impact write performance. The Raft log is persisted on local disk first, and then the Raft WAL (Write-Ahead Log) chunks are uploaded to object storage in the background. When the data in a MemTable is full and flushed to local disk, the region leader uploads the SST file to object storage. After the remote compaction is done on elastic compaction workers, the `TiKV` nodes are notified to load the compacted SST files from object storage.
 
 
-## Elastic Scalability (5x-10x Faster)
-
-Because data resides in shared object storage, adding or removing nodes no longer requires massive data migration between machines. Scale-in and scale-out operations are 5 to 10 times faster than classic TiDB and have zero impact on live traffic.
-
 ## Elastic TCO (Pay-As-You-Go)
 
 Classic TiDB required over-provisioning hardware to handle peak traffic and background tasks (like compaction overhead) simultaneously. TiDB X enables auto-scaling, allowing users to pay only for the resources they use (Pay-As-You-Go). Background resources for heavy jobs spin up on demand and spin down when finished, eliminating wasted cost.
@@ -101,8 +97,12 @@ A Request Capacity Unit (RCU) is a unit of measure used to represent the provisi
 
 ## From LSM-tree to LSM forest
 
-In the classic architecture, every TiKV node runs a single, massive RocksDB instance. This means all data from thousands of different "Regions" (logical data shards) is mixed together into one giant "single LSM-tree" structure. Because data is mixed, operations like moving a Region, scaling in/out, or importing data require rewriting massive amounts of existing data (compaction) to separate or merge it. This consumes huge CPU and I/O resources and impacts online traffic. The single LSM-tree is protected by a global mutex. As data size grows (3TB+) or file count increases (100k+ SST files), contention on this global lock will impact both the read and write operations.
+In the classic architecture, every TiKV node runs a single, massive RocksDB instance. This means all data from thousands of different regions is mixed together into one giant "single LSM-tree" structure. Because data is mixed, operations like moving a Region, scaling in/out, or importing data can require rewriting massive amounts of existing data (compaction) to separate or merge it. This can consume huge CPU and I/O resources and impact online traffic. The single LSM-tree is protected by a global mutex. As data size grows, at scale (typically 3TB+ data or 100k+ SST files), increased contention on this global lock impacts both read and write operations.
 
 While TiDB X retains the logical region concept from classic TiDB, it fundamentally redesigns the storage engine by shifting from a single LSM tree to an LSM Forest. Instead of one giant tree for all data, TiDB X assigns each region its own separate, independent LSM Tree. The most critical benefit of this physical isolation is the elimination of compaction overhead during cluster operations (scale-in, scale-out, region movement, load data). Operations on one Region (like a heavy write or a split) are isolated to its specific tree. There is no global mutex lock contention.
 
 ![Classic TiDB vs TiDB X](/media/tidb-x/tidb-classic-vs-tidb-x-2.png)
+
+## Rapid Elastic Scalability (5x-10x Faster)
+
+In TiDB X, data resides in shared object storage with fully isolated LSM-trees for each Region. The system eliminates the need for physical data migration or compaction when adding or removing TiKV nodes. The result is a 5x–10x improvement in scaling speed compared to classic TiDB, maintaining stable latency for online traffic.
