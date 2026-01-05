@@ -22,7 +22,6 @@ This section describes the prerequisites for using TiDB backup and restore, incl
 ### Restrictions
 
 - PITR only supports restoring data to **an empty cluster**.
-- PITR only supports cluster-level restore and does not support database-level or table-level restore.
 - PITR does not support restoring the data of user tables or privilege tables from system tables.
 - BR does not support running multiple backup tasks on a cluster **at the same time**.
 - It is not recommended to back up tables that are being restored, because the backed-up data might be problematic.
