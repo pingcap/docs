@@ -205,7 +205,7 @@ To export a specific backup to Cloud Storage, perform the following steps:
 </div>
 
 <div label="Google Cloud Storage">
-To export a specific backup to Google Cloud Storage (GCS), perform the following steps:
+To export a specific backup to Google Cloud Storage, perform the following steps:
 
 1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
