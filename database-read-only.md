@@ -139,7 +139,7 @@ Database-level read-only only applies at the TiDB SQL layer. Paths that bypass t
 
 **TiCDC**: Currently, TiCDC does not support replicating this DDL.
 
-**DM**: Replicating this DDL is currently not supported.
+**DM**: Currently, DM does not support replicating this DDL.
 
 **Dumpling**: Exporting a read-only database is supported and requires no extra configuration.
 
