@@ -44,7 +44,7 @@ If the database is already in the requested state, the statement succeeds and re
 
 ### Using INFORMATION_SCHEMA.SCHEMATA_EXTENSIONS
 
-The `OPTIONS` column of `INFORMATION_SCHEMA.SCHEMATA_EXTENSIONS` shows extended schema properties. If it is `READ ONLY=1`, the database is read-only; if it is empty, the database is read-write.
+The `OPTIONS` column of `INFORMATION_SCHEMA.SCHEMATA_EXTENSIONS` shows extended schema properties. If this column's value is `READ ONLY=1`, the database is read-only; if the column is empty, the database is read-write.
 
 ```sql
 SELECT CATALOG_NAME, SCHEMA_NAME, OPTIONS FROM INFORMATION_SCHEMA.SCHEMATA_EXTENSIONS;
