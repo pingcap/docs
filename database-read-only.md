@@ -145,7 +145,7 @@ Database-level read-only only applies at the TiDB SQL layer. Paths that bypass t
 
 **TiDB Lightning**: Physical import into a read-only database can succeed, while logical import fails.
 
-**BR**: Restoring into a read-only database is allowed.
+**BR**: BR allows restoring into a read-only database.
 
 ## MySQL compatibility
 
