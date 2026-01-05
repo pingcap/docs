@@ -230,7 +230,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - 减少无效的 sync load 加载失败警告日志 [#63880](https://github.com/pingcap/tidb/issues/63880) @[0xPoe](https://github.com/0xPoe)
     - 修复手动 kill 正在执行事务的 connection 可能导致 tidb 发生 panic 异常退出的问题 [#63956](https://github.com/pingcap/tidb/issues/63956) @[wshwsh12](https://github.com/wshwsh12)
     - 修复缓存表在走 TiFlash 副本读取时可能出现的 goroutine 和内存泄漏问题 [#63329](https://github.com/pingcap/tidb/issues/63329) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - fix the problem that foreign key is not updated after modify column [#issue](https://github.com/pingcap/tidb/issues/59705) @[fzzf678](https://github.com/fzzf678) <!--tw@hfxsd: the following 15 notes-->
+    - fix the problem that foreign key is not updated after modify column [#issue](https://github.com/pingcap/tidb/issues/59705) @[fzzf678](https://github.com/fzzf678) <!--tw@hfxsd: the following 16 notes-->
     - fix error decoding `RENAME TABLE` job arg from older version TiDB [#issue](https://github.com/pingcap/tidb/issues/64413) @[joechenrh](https://github.com/joechenrh)
     - fix missing rebase auto increment not executed if BR restore failed [#issue](https://github.com/pingcap/tidb/issues/64761) @[joechenrh](https://github.com/joechenrh)
     - fix OOM issue when querying `information_schema` tables [#issue](https://github.com/pingcap/tidb/issues/58985) @[tangenta](https://github.com/tangenta)
@@ -246,6 +246,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - fix ligtning doesnt' report error for schema files without trailing semicolon [#issue](https://github.com/pingcap/tidb/issues/63414) @[GMHDBJD](https://github.com/GMHDBJD)
     - fix the dead loop when reading files during IMPORT INTO global sort [#issue](https://github.com/pingcap/tidb/issues/61177) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - fix the panic when processing generated columns for IMPORT INTO [#issue](https://github.com/pingcap/tidb/issues/64657) @[D3Hunter](https://github.com/D3Hunter)
+    - 修复在一个语句中有多个 `AS OF TIMESTAMP` 表达式时可能误报错的问题 [#issue](https://github.com/pingcap/tidb/issues/65090) @[you06](https://github.com/you06)
     - (dup): release-9.0.0.md > Bug fixes> TiDB - Fix the potential OOM issue when querying `information_schema.tables` by improving memory usage monitoring when quering system tables [#58985](https://github.com/pingcap/tidb/issues/58985) @[tangenta](https://github.com/tangenta)
 
 + TiKV <!--tw@Oreoxmt: 7 notes-->
