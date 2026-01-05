@@ -120,7 +120,7 @@ When a database is read-only, restricted statements typically fail with:
 - **Locking reads**: `SELECT ... FOR UPDATE` and related variants (`NOWAIT/WAIT`, `FOR UPDATE OF ...`, `TABLE ... FOR UPDATE`, etc.)
 - **FOR SHARE**: When `tidb_enable_shared_lock_promotion=1`, `SELECT ... FOR SHARE` is also rejected (because it may be promoted to `FOR UPDATE` semantics).
 - **Data import**: `LOAD DATA`, `IMPORT INTO`
-- **Binding**: Create binding on statements that modify data are rejected.
+- **Binding**: Creating bindings for statements that modify data is rejected.
 - **PREPARE**: TiDB performs the read-only check during `PREPARE`. Statements that are not executable in a read-only database fail at `PREPARE` time, which may differ from MySQL.
 - **EXECUTE**: Executing a prepared statement that modifies data in a read-only database fails.
 - **EXPLAIN / EXPLAIN ANALYZE**: Planning also triggers the read-only check. Therefore, `EXPLAIN` / `EXPLAIN ANALYZE` can fail for statements that are not executable in read-only.
