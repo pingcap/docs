@@ -137,7 +137,7 @@ When a database is read-only, restricted statements typically fail with:
 
 Database-level read-only only applies at the TiDB SQL layer. Paths that bypass the SQL layer are not restricted.
 
-**TiCDC**: Replicating this DDL is currently not supported.
+**TiCDC**: Currently, TiCDC does not support replicating this DDL.
 
 **DM**: Replicating this DDL is currently not supported.
 
