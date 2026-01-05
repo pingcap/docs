@@ -213,7 +213,7 @@ To export a specific backup to Google Cloud Storage, perform the following steps
 
 3. In the **Export Backup to Google Cloud Storage** dialog, note the **Google Cloud Service Account ID**, which is required for a later step.
 
-4. In Google Cloud Console, create a custom IAM role or make sure that an existing role has the following permissions:
+4. In Google Cloud console, create a custom IAM role or make sure that an existing role has the following permissions:
     
     - `storage.buckets.get`
     - `storage.objects.list`
