@@ -141,7 +141,7 @@ Database-level read-only only applies at the TiDB SQL layer. Paths that bypass t
 
 **DM**: Currently, DM does not support replicating this DDL.
 
-**Dumpling**: Exporting a read-only database is supported and requires no extra configuration.
+**Dumpling**: Dumpling supports exporting a read-only database and requires no extra configuration.
 
 **TiDB Lightning**: Physical import into a read-only database can succeed, while logical import fails.
 
