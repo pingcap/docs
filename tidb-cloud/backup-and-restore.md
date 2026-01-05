@@ -192,7 +192,7 @@ To export a specific backup to Cloud Storage, perform the following steps:
 4. Click **Generate Command** to see the command for configuring permissions.
 
     - **With AWS CLI**:
-        Execute the generated command on AWS to grant TiDB Cloud access to your AWS sources.
+        Execute the generated command on AWS to grant TiDB Cloud access to your AWS S3 bucket.
 
     - **With AWS Console**:
         1. Navigate to the Amazon S3 console.
