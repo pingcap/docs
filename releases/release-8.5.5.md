@@ -63,15 +63,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     Starting from v8.5.5, the log backup compaction feature provides offline compaction capabilities, converting unstructured log backup data into structured SST files. This results in the following improvements:
 
-    - **Improved recovery performance** - SST files can be more quickly imported into the cluster.
-    - **Reduced storage space consumption** - redundant data is removed during compaction.
-    - **Reduced impact on applications** - RPOs can be amintained with less frequent full snapshot-based backups.
+    - **Improved recovery performance**: SST files can be more quickly imported into the cluster.
+    - **Reduced storage space consumption**: redundant data is removed during compaction.
+    - **Reduced impact on applications**: RPOs (Recovery Point Objective) can be maintained with less frequent full snapshot-based backups.
 
   For more information, see [documentation](/br/br-compact-log-backup.md).
 
-* Accelerated recovery of system tables from backups [#58757](https://github.com/pingcap/tidb/issues/58757) @[Leavrth](https://github.com/Leavrth) **tw@lilin90** <!--2109-->
+* Accelerate recovery of system tables from backups [#58757](https://github.com/pingcap/tidb/issues/58757) @[Leavrth](https://github.com/Leavrth) **tw@lilin90** <!--2109-->
 
-    When restoring system tables from a backup, BR now introduces a new `--fast-load-sys-tables` parameter to use physical restoration instead of logical restoration. This option completely overwrites/replaces the existing tables, instead of restoring into them, for faster restoration for large scale deployments.
+    Starting from v8.5.5, for restoring system tables from a backup, BR introduces a new `--fast-load-sys-tables` parameter to use physical restore instead of logical restore. With this parameter enabled, BR fully replaces or overwrites the existing system tables rather than restoring data into them, significantly improving restore performance in large-scale deployments.
 
     For more information, see [Documentation](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema).
 
