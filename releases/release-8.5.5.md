@@ -17,23 +17,23 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 * Introduce significant performance improvements for certain lossy DDL operations (such as `BIGINT → INT` and `CHAR(120) → VARCHAR(60)`): when no data truncation occurs, the execution time of these operations can be reduced from hours to minutes, seconds, or even milliseconds, delivering performance gains ranging from tens to hundreds of thousands of times [#63366](https://github.com/pingcap/tidb/issues/63366) [@wjhuang2016](https://github.com/wjhuang2016), [@tangenta](https://github.com/tangenta), [@fzzf678](https://github.com/fzzf678) **tw@qiancai** <!--2292-->
 
-  The optimization strategies are as follows:
+    The optimization strategies are as follows:
 
-  - In strict SQL mode, TiDB pre-checks for potential data truncation risks during type conversion.
-  - If no data truncation risk is detected, TiDB updates only the metadata and avoids index rebuilding whenever possible.
-  - If index rebuilding is required, TiDB uses a more efficient ingest process to significantly improve index rebuild performance.
+    - In strict SQL mode, TiDB pre-checks for potential data truncation risks during type conversion.
+    - If no data truncation risk is detected, TiDB updates only the metadata and avoids index rebuilding whenever possible.
+    - If index rebuilding is required, TiDB uses a more efficient ingest process to significantly improve index rebuild performance.
 
-  The following table shows example performance improvements based on benchmark tests on a table with 114 GiB of data and 600 million rows. The test cluster consists of 3 TiDB nodes, 6 TiKV nodes, and 1 PD node. All nodes are configured with 16 CPU cores and 32 GiB of memory.
+    The following table shows example performance improvements based on benchmark tests on a table with 114 GiB of data and 600 million rows. The test cluster consists of 3 TiDB nodes, 6 TiKV nodes, and 1 PD node. All nodes are configured with 16 CPU cores and 32 GiB of memory.
 
-  | Scenario | Operation type | Before optimization | After optimization | Performance improvement |
-  |----------|----------------|---------------------|--------------------|--------------------------|
-  | Non-indexed column | `BIGINT → INT` | 2 hours 34 minutes | 1 minute 5 seconds | 142× faster |
-  | Indexed column | `BIGINT → INT` | 6 hours 25 minutes | 0.05 seconds | 460,000× faster |
-  | Indexed column | `CHAR(120) → VARCHAR(60)` | 7 hours 16 minutes | 12 minutes 56 seconds | 34× faster |
+    | Scenario | Operation type | Before optimization | After optimization | Performance improvement |
+    |----------|----------------|---------------------|--------------------|--------------------------|
+     | Non-indexed column | `BIGINT → INT` | 2 hours 34 minutes | 1 minute 5 seconds | 142× faster |
+    | Indexed column | `BIGINT → INT` | 6 hours 25 minutes | 0.05 seconds | 460,000× faster |
+     | Indexed column | `CHAR(120) → VARCHAR(60)` | 7 hours 16 minutes | 12 minutes 56 seconds | 34× faster |
 
-  Note that the preceding test results are based on the condition that no data truncation occurs during the DDL execution. The optimizations do not apply to tables with TiFlash replicas or to schema changes involving conversions between signed and unsigned integer types (signed ↔ unsigned).
+    Note that the preceding test results are based on the condition that no data truncation occurs during the DDL execution. The optimizations do not apply to tables with TiFlash replicas or to schema changes involving conversions between signed and unsigned integer types (signed ↔ unsigned).
 
-  For more information, see [documentation](/sql-statements/sql-statement-modify-column.md).
+    For more information, see [documentation](/sql-statements/sql-statement-modify-column.md).
 
 * Improve DDL performance in scenarios with a large number of foreign keys, with up to a 25x increase in logical DDL performance [#61126](https://github.com/pingcap/tidb/issues/61126) @[GMHDBJD](https://github.com/GMHDBJD) **tw@hfxsd** <!--1896-->
 
@@ -103,11 +103,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### DB operations
 
-* TiKV 支持优雅关闭 (graceful shutdown) [#17221](https://github.com/tikv/tikv/issues/17221) @[hujiatao0](https://github.com/hujiatao0) **tw@qiancai** <!--2297-->
+* Support gracefully shutting down TiKV [#17221](https://github.com/tikv/tikv/issues/17221) @[hujiatao0](https://github.com/hujiatao0) **tw@qiancai** <!--2297-->
 
-    在关闭 TiKV 服务器时，TiKV 会尽量将其上的 leader 副本转移到其他 TiKV 节点，然后再关闭。该等待期默认为 20 秒，可通过 [`server.graceful-shutdown-timeout`](https://docs.pingcap.com/zh/tidb/v8.5/tikv-configuration-file#graceful-shutdown-timeout-从-v855-版本开始引入) 配置项进行调整。若达到该超时时间后仍有 leader 未完成转移，TiKV 将跳过剩余 leader 的转移，直接进入关闭流程。
+    When shutting down a TiKV server, TiKV attempts to transfer the Leader replicas on the node to other TiKV nodes within a configurable timeout duration before the shutdown. The default timeout duration is 20 seconds, and you can adjust it using the [`server.graceful-shutdown-timeout`](https://docs.pingcap.com/zh/tidb/v8.5/tikv-configuration-file#graceful-shutdown-timeout-new-in-v855) configuration item. If the timeout is reached and some Leaders have not been successfully transferred, TiKV skips the remaining Leader transfers and proceeds with the shutdown.
 
-    更多信息，请参考[用户文档](https://docs.pingcap.com/zh/tidb/v8.5/tikv-configuration-file#graceful-shutdown-timeout-从-v855-版本开始引入)。
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#graceful-shutdown-timeout-new-in-v855).
 
 * Improve the compatibility between ongoing log backup and snapshot restore [#58685](https://github.com/pingcap/tidb/issues/58685) @[BornChanger](https://github.com/BornChanger) **tw@lilin90** <!--2000-->
 
