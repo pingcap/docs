@@ -15,25 +15,25 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Performance
 
-* 大幅提升特定有损 DDL 操作的执行效率，例如 `BIGINT → INT`、`CHAR(120) → VARCHAR(60)`。在未发生数据截断的前提下，执行耗时可从数小时缩短至分钟级、秒级甚至毫秒级，性能提升可达到数十倍至数十万倍。  [#63366](https://github.com/pingcap/tidb/issues/63366)  [@wjhuang2016](https://github.com/wjhuang2016), [@tangenta](https://github.com/tangenta), [@fzzf678](https://github.com/fzzf678)**tw@qiancai** <!--2292-->
+* Introduce significant performance improvements for certain lossy DDL operations (such as `BIGINT → INT` and `CHAR(120) → VARCHAR(60)`): when no data truncation occurs, the execution time of these operations can be reduced from hours to minutes, seconds, or even milliseconds, delivering performance gains ranging from tens to hundreds of thousands of times [#63366](https://github.com/pingcap/tidb/issues/63366) [@wjhuang2016](https://github.com/wjhuang2016), [@tangenta](https://github.com/tangenta), [@fzzf678](https://github.com/fzzf678) **tw@qiancai** <!--2292-->
 
-    优化策略包括：
+  The optimization strategies are as follows:
 
-    - 在严格 SQL 模式下，预先检查类型转换过程中是否存在数据截断风险；
-    - 若不存在数据截断风险，则仅更新元数据，尽量避免索引重建；
-    - 如需重建索引，则采用更高效的 Ingest 流程，大幅提升索引重建性能。
+  - In strict SQL mode, TiDB pre-checks for potential data truncation risks during type conversion.
+  - If no data truncation risk is detected, TiDB updates only the metadata and avoids index rebuilding whenever possible
+  - If index rebuilding is required, TiDB uses a more efficient ingest process to significantly improve index rebuild performance.
 
-    性能提升示例（基于 100 GiB 表的基准测试）：
+  The following table shows example performance improvements based on benchmark tests on a table with 114 GiB of data and 600 million rows. The test cluster consists of 3 TiDB nodes, 6 TiKV nodes, and 1 PD node. All nodes are configured with 16 CPU cores and 32 GiB of memory.
 
-    | 场景 | 操作类型 | 优化前 | 优化后 | 性能提升 |
-    |------|----------|--------|--------|----------|
-    | 无索引列 | `BIGINT → INT` | 2 小时 34 分 | 1 分 5 秒 | 142× |
-    | 有索引列 | `BIGINT → INT` | 6 小时 25 分 | 0.05 秒 | 460,000× |
-    | 有索引列 | `CHAR(120) → VARCHAR(60)` | 7 小时 16 分 | 12 分 56 秒 | 34× |
+  | Scenario | Operation type | Before optimization | After optimization | Performance improvement |
+  |----------|----------------|---------------------|--------------------|--------------------------|
+  | Non-indexed column | `BIGINT → INT` | 2 hours 34 minutes | 1 minute 5 seconds | 142× faster |
+  | Indexed column | `BIGINT → INT` | 6 hours 25 minutes | 0.05 seconds | 460,000× faster |
+  | Indexed column | `CHAR(120) → VARCHAR(60)` | 7 hours 16 minutes | 12 minutes 56 seconds | 34× faster |
 
-    注：以上数据基于 DDL 执行过程中未发生数据截断的前提。以上优化对于有 TiFlash 副本的表，以及符号类型转换场景（如 `Signed` ↔ `Unsigned`）场景不会生效。
+  Note that the preceding test results are based on the condition that no data truncation occurs during the DDL execution. The optimizations do not apply to tables with TiFlash replicas or to schema changes involving conversions between signed and unsigned integer types (signed ↔ unsigned).
 
-    更多信息，请参考[用户文档](链接)。
+  For more information, see [documentation](/sql-statements/sql-statement-modify-column.md).
 
 * Improve DDL performance in scenarios with a large number of foreign keys, with up to a 25x increase in logical DDL performance [#61126](https://github.com/pingcap/tidb/issues/61126) @[GMHDBJD](https://github.com/GMHDBJD) **tw@hfxsd** <!--1896-->
 
