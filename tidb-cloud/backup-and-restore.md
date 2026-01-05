@@ -211,7 +211,7 @@ To export a specific backup to Google Cloud Storage (GCS), perform the following
 
 2. Locate the backup you want to export, and click **...** > **Export** in the **Action** column.
 
-3. In the **Export Backup to Google Cloud Storage** dialog, note the **Google Cloud Service Account ID** we will use later.
+3. In the **Export Backup to Google Cloud Storage** dialog, note the **Google Cloud Service Account ID**, which is required for a later step.
 
 4. In Google Cloud Console, ensure a role exists with the following permissions:
     
