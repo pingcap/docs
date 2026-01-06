@@ -29,8 +29,6 @@ This optimization applies to the following type change scenarios:
 >
 > When converting from `VARCHAR` to `CHAR`, all original data must not contain trailing spaces. If data that does not meet this condition exists, TiDB will still perform Reorg-Data to ensure that the converted data complies with the `CHAR` type's padding rules.
 
-## 语法图
-```
 ## Synopsis
 
 ```ebnf+diagram
