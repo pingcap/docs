@@ -6,29 +6,29 @@ aliases: ['/docs/dev/sql-statements/sql-statement-modify-column/','/docs/dev/ref
 
 # MODIFY COLUMN
 
-The `ALTER TABLE ... MODIFY COLUMN` statement modifies a column on an existing table. The modification can include changing the data type and attributes. To rename at the same time, use the [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) statement instead.
+The `ALTER TABLE ... MODIFY COLUMN` statement modifies a column on an existing table. The modification can include changing the data type and attributes. To rename the column at the same time, use the [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) statement instead.
 
-Since v5.1.0, TiDB supports column type changes that require Reorg-Data. When performing such changes, TiDB rebuilds all existing data in the table. The specific process includes reading original table data, converting the data according to the new column type, and then rewriting the converted data into the table. Since it needs to process all table data, Reorg-Data operations usually take a long time, and their execution time is directly proportional to the amount of data in the table.
+Starting from v5.1.0, TiDB supports column type changes that require Reorg-Data. When performing such changes, TiDB rebuilds all existing data in the table by reading the original data, converting it to the new column type, and then writing the converted data back to the table. Because all table data must be processed, Reorg-Data operations typically take a long time, and the execution time is proportional to the amount of data in the table.
 
 The following are some common examples of column type changes that require Reorg-Data:
 
 - Changing `VARCHAR` to `BIGINT`
 - Modifying the `DECIMAL` precision
-- Compressing the length of `VARCHAR(10)` to `VARCHAR(5)`
+- Reducing the length of `VARCHAR(10)` to `VARCHAR(5)`
 
-Starting from v8.5.5 and v9.0.0, TiDB has optimized some column type changes that originally required Reorg-Data. When the following conditions are met, TiDB will no longer rebuild table data but only rebuild affected indexes, thereby improving execution efficiency:
+Starting from v8.5.5 and v9.0.0, TiDB optimizes some column type changes that previously required Reorg-Data. When the following conditions are met, TiDB no longer rebuilds the table data; instead, it rebuilds only the affected indexes, thereby improving execution efficiency:
 
-- The current session's [SQL mode](/sql-mode.md) is strict mode (`sql_mode` includes `STRICT_TRANS_TABLES` or `STRICT_ALL_TABLES`).
+- The current session uses a strict [SQL mode](/sql-mode.md) (`sql_mode` includes `STRICT_TRANS_TABLES` or `STRICT_ALL_TABLES`).
 - There is no risk of data truncation during type conversion.
 
 This optimization applies to the following type change scenarios:
 
-- Changes between integer types (for example, from `BIGINT` to `INT`).
-- Changes between string types (for example, from `VARCHAR(200)` to `VARCHAR(100)`).
+- Conversions between integer types, such as from `BIGINT` to `INT`
+- Conversions between string types, such as from `VARCHAR(200)` to `VARCHAR(100)`
 
 > **Note:**
 >
-> When converting from `VARCHAR` to `CHAR`, all original data must not contain trailing spaces. If data that does not meet this condition exists, TiDB will still perform Reorg-Data to ensure that the converted data complies with the `CHAR` type's padding rules.
+> When converting from `VARCHAR` to `CHAR`, the original data must not contain trailing spaces. If the original data contains trailing spaces, TiDB still performs Reorg-Data to ensure that the converted data complies with the padding rules of the `CHAR` type.
 
 ## Synopsis
 
@@ -75,7 +75,7 @@ DefaultValueExpr ::=
 
 ## Examples
 
-### Meta-Only Change
+### Meta-only change
 
 {{< copyable "sql" >}}
 
@@ -125,7 +125,7 @@ Create Table: CREATE TABLE `t1` (
 1 row in set (0.00 sec)
 ```
 
-### Reorg-Data Change
+### Reorg-Data change
 
 {{< copyable "sql" >}}
 
