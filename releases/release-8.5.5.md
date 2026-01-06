@@ -111,13 +111,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 * Improve the compatibility between ongoing log backup and snapshot restore [#58685](https://github.com/pingcap/tidb/issues/58685) @[BornChanger](https://github.com/BornChanger) **tw@lilin90** <!--2000-->
 
-    Starting from v8.5.5, log backups can continue to run when performing a snapshot restore (when prerequisite conditions are met). This enables ongoing log backups to proceed without having to stop them during the restore procedure. The newly restored data will also be recorded in the ongoing log backup.
+    Starting from v8.5.5, when a log backup task is running, you can still perform a snapshot restore as long as prerequisite conditions are met. This enables ongoing log backups to proceed without having to stop them during the restore process, and the restored data is properly recorded by the ongoing log backup.
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/br-pitr-manual#compatibility-between-ongoing-log-backup-and-snapshot-restore).
 
-* Table level restores from Log Backups [#57613](https://github.com/pingcap/tidb/issues/57613) @[Tristan1900](https://github.com/Tristan1900) **tw@lilin90** <!--2005-->
+* Support table-level restores from log backups [#57613](https://github.com/pingcap/tidb/issues/57613) @[Tristan1900](https://github.com/Tristan1900) **tw@lilin90** <!--2005-->
 
-    Starting from v8.5.5, individual table level point in time recoveries can now be performed from log backups using filters. Being able to restore individual tables, instead of the full cluster, to a specific point in time enables much more flexible, and less impactful, recovery options.
+    Starting from v8.5.5, you can perform point-in-time recovery (PITR) for individual tables from log backups by using filters. Restoring specific tables, rather than the entire cluster, to a target point in time provides more flexible and less disruptive recovery options.
 
     For more information, see [documentation](/br/br-pitr-manual.md#restore-data-using-filters).
 
