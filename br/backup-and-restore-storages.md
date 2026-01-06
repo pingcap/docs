@@ -203,6 +203,63 @@ You can configure the account used to access GCS by specifying the access key. I
         --storage "azure://external/backup-20220915?account-name=${account-name}"
         ```
 
+- Method 4: Use Azure Managed Identity
+
+    Starting from v8.5.5 and v9.0.0, if your TiDB cluster and BR command-line tool are running in an Azure Virtual Machine (VM) or Azure Kubernetes Service (AKS) environment and managed identities have been assigned to the nodes, you can use managed identities for authentication.
+
+    Before using this method, ensure that you have granted the corresponding managed identity access permissions (e.g., `Storage Blob Data Contributor`) to the target storage account in the [Azure Portal](https://azure.microsoft.com/).
+
+    - **System-assigned Managed Identity**:
+
+        When using a system-assigned managed identity, you do not need to configure any Azure-related environment variables; simply run the BR backup command.
+
+        > **Note:**
+        >
+        > Ensure that the `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, or `AZURE_CLIENT_SECRET` environment variables do **not** exist in the running environment. Otherwise, the Azure SDK might prioritize other authentication methods, preventing the managed identity from taking effect.
+
+    - **User-assigned Managed Identity**:
+
+        When using a user-assigned managed identity, you need to configure the `AZURE_CLIENT_ID` environment variable in the TiKV or BR command-line tool's operating environment, with its value being the Client ID of the managed identity.
+
+        - Configure Client ID for TiKV when started with TiUP:
+
+            The following steps use TiKV port `24000` and systemd service name `tikv-24000` as an example:
+
+            1. Execute the following command to enter the service configuration editing interface:
+
+                ```shell
+                systemctl edit tikv-24000
+                ```
+
+            2. Configure environment variables, only `Client ID` needs to be set:
+
+                ```ini
+                [Service]
+                Environment="AZURE_CLIENT_ID=<your-client-id>"
+                ```
+
+            3. Reload systemd configuration and restart TiKV:
+
+                ```shell
+                systemctl daemon-reload
+                systemctl restart tikv-24000
+                ```
+
+        - Configure Client ID for the BR command-line tool:
+
+            Before running the BR command, set the `AZURE_CLIENT_ID` environment variable:
+
+            ```shell
+            export AZURE_CLIENT_ID="<your-client-id>"
+            ```
+
+    After configuring the `AZURE_CLIENT_ID` environment variable, you can use the following BR command-line tool to back up data to Azure Blob Storage:
+
+    ```shell
+    tiup br backup full -u "${PD_IP}:2379" \
+    --storage "azure://external/backup-20220915?account-name=${account-name}"
+    ```
+
 </div>
 </SimpleTab>
 
