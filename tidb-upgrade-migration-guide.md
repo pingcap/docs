@@ -222,7 +222,7 @@ Additionally, you can scale out the new cluster to handle expected workloads and
     - After setting the old cluster to read-only mode, retrieve the current `up-tso`:
 
         ```sql
-        SELECT tidb_current_ts();
+        BEGIN; SELECT TIDB_CURRENT_TSO(); ROLLBACK;
         ```
 
     - Monitor the Changefeed `checkpointTs` to confirm it has surpassed `up-tso`, indicating that TiCDC has completed data replication.
@@ -268,7 +268,7 @@ Additionally, you can scale out the new cluster to handle expected workloads and
     2. Record the current TSO of the new cluster:
 
         ```sql
-        SELECT tidb_current_ts();
+        BEGIN; SELECT TIDB_CURRENT_TSO(); ROLLBACK;
         ```
 
     3. Configure the reverse replication link and ensure the Changefeed task is running properly:
