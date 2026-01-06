@@ -225,7 +225,7 @@ This document only describes the parameters that are not included in command-lin
 ### `end-point-memory-quota` <span class="version-mark">New in v8.2.0</span>
 
 * The maximum amount of memory that TiKV Coprocessor requests can use. If this limit is exceeded, subsequent Coprocessor requests are rejected with the error "server is busy."
-* Default value: 45% of the total system memory. If 45% of the total system memory exceeds 500 MiB, the default value is 500 MiB.
+* Default value: the larger value between 12.5% of the total system memory and 500 MiB.
 
 ### `snap-io-max-bytes-per-sec`
 
