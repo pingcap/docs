@@ -110,14 +110,14 @@ When a database is read-only, restricted statements typically fail with:
   - `DROP DATABASE`
   - `ALTER DATABASE` (except changing `READ ONLY` itself)
   - `CREATE TABLE` (including `TEMPORARY` / `GLOBAL TEMPORARY`)
-  - `ALTER TABLE` (changes to columns, indexes, partitions, foreign keys, `AUTO_INCREMENT`, etc.)
+  - `ALTER TABLE` (such as changes to columns, indexes, partitions, foreign keys, `AUTO_INCREMENT`)
   - `RENAME TABLE`
   - `TRUNCATE TABLE`
   - `DROP TABLE` / `DROP VIEW`
   - `CREATE INDEX` / `DROP INDEX`
   - `CREATE VIEW` / `CREATE OR REPLACE VIEW`
 - **DML**: `INSERT`, `REPLACE`, `UPDATE`, `DELETE`
-- **Locking reads**: `SELECT ... FOR UPDATE` and related variants (`NOWAIT/WAIT`, `FOR UPDATE OF ...`, `TABLE ... FOR UPDATE`, etc.)
+- **Locking reads**: `SELECT ... FOR UPDATE` and related variants (such as `NOWAIT/WAIT`, `FOR UPDATE OF ...`, `TABLE ... FOR UPDATE`)
 - **FOR SHARE**: When `tidb_enable_shared_lock_promotion=1`, `SELECT ... FOR SHARE` is also rejected (because it may be promoted to `FOR UPDATE` semantics).
 - **Data import**: `LOAD DATA`, `IMPORT INTO`
 - **Binding**: Creating bindings for statements that modify data is rejected.
