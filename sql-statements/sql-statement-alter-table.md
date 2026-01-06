@@ -182,6 +182,8 @@ The following major restrictions apply to `ALTER TABLE` in TiDB:
 
 - Changes of some data types (for example, some TIME, Bit, Set, Enum, and JSON types) are not supported due to the compatibility issues of the `CAST` function's behavior between TiDB and MySQL.
 
+- `AFFINITY` option is a TiDB extension syntax. After enabling `AFFINITY`, changing the table's partition scheme (e.g., adding, deleting, reorganizing, or swapping partitions) is not supported. You need to remove `AFFINITY` first.
+
 - Spatial data types are not supported.
 
 - `ALTER TABLE t CACHE | NOCACHE` is a TiDB extension to MySQL syntax. For details, see [Cached Tables](/cached-tables.md).
