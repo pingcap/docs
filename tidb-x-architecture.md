@@ -68,7 +68,11 @@ The architecture diagram highlights a sophisticated separation of duties, ensuri
 
 # Key innovations of TiDB X
 
-The following figure shows the key architectural differences between classic TiDB and TiDB X.
+The following figure shows side-by-side comparison of classic TiDB and TiDB X architectures, highlighting the shift from Shared-Nothing to Shared-Storage design and the introduction of Compute Workload separation.
+
+In Classic TiDB, the Raft-engine manages the Multi-Raft log, while RocksDB handles physical data storage on local disks. TiDB X replaces these components with the new RF Engine (Raft Engine) and a redesigned KV Engine (an LSM-tree engine replacing RocksDB). Both new engines are specifically optimized for high performance and seamless integration with object storage.
+
+The dotted lines in the diagram represent background read and write operations to object storage. In TiDB X, these interactions between the RF/KV Engines and object storage are decoupled from foreground processes, ensuring that online traffic latency is not affected.
 
 ![Classic TiDB vs TiDB X](/media/tidb-x/tidb-classic-vs-tidb-x-1.png)
 
