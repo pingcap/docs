@@ -184,7 +184,7 @@ CREATE TABLE `t1` (
 >    ERROR 1406 (22001): Data Too Long, field len 4, data len 5
 >    ```
 >
-> - Due to the compatibility with the Async Commit feature, when [metadata lock](/metadata-lock.md) is disabled, the DDL statement waits for a period of time (about 2.5s) before starting to process into Reorg-Data.
+> - Due to the compatibility with the Async Commit feature, when [Metadata lock](/metadata-lock.md) is disabled, the DDL statement waits for a period of time (about 2.5s) before starting to process into Reorg-Data.
 >
 >    ```
 >    Query OK, 0 rows affected (2.52 sec)
