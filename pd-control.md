@@ -940,7 +940,7 @@ Usage:
 >> scheduler config evict-leader-scheduler                 // Display the stores in which the scheduler is located since v4.0.0
 >> scheduler config evict-leader-scheduler add-store 2     // Add leader eviction scheduling for store 2
 >> scheduler config evict-leader-scheduler delete-store 2  // Remove leader eviction scheduling for store 2
->> scheduler add evict-slow-store-scheduler                // Automatically detect disk or network slow stores and evict all Region leaders on that store when conditions are met
+>> scheduler add evict-slow-store-scheduler                // Automatically detect slow-disk or slow-network nodes and evict all Region leaders on that node when certain conditions are met
 >> scheduler remove grant-leader-scheduler-1               // Remove the corresponding scheduler, and `-1` corresponds to the store ID
 >> scheduler pause balance-region-scheduler 10             // Pause the balance-region scheduler for 10 seconds
 >> scheduler pause all 10                                  // Pause all schedulers for 10 seconds
@@ -966,31 +966,31 @@ The state of the scheduler can be one of the following:
 
 ### `scheduler config evict-slow-store-scheduler`
 
-The `evict-slow-store-scheduler` is used to limit PD from scheduling Leaders to abnormal TiKV nodes and actively evict Leaders when necessary, thereby reducing the impact of slow nodes on the cluster when TiKV nodes experience disk I/O or network jitters.
+The `evict-slow-store-scheduler` limits PD from scheduling Leaders to abnormal TiKV nodes and actively evicts Leaders when necessary, thereby reducing the impact of slow nodes on the cluster when TiKV nodes experience disk I/O or network jitter.
 
-#### Disk Slow Stores
+#### Slow-disk nodes
 
-Since v6.2.0, TiKV reports the `SlowScore` in store heartbeats to PD. This score is calculated based on disk I/O conditions. The score ranges from 1 to 100, where a higher value indicates a greater possibility of disk performance anomalies on that node.
+Starting from v6.2.0, TiKV reports a `SlowScore` in store heartbeats to PD, calculated based on disk I/O conditions. The score ranges from 1 to 100, where a higher value indicates a higher possibility of disk performance anomalies on that node.
 
-For disk slow stores, TiKV-side detection and PD-side scheduling based on `evict-slow-store-scheduler` are enabled by default and require no additional configuration.
+For slow-disk nodes, the detection on TiKV and the scheduling via `evict-slow-store-scheduler` on PD are enabled by default, which means no additional configuration is required.
 
-#### Network Slow Stores
+#### Slow-network nodes
 
-Since v8.5.5 and v9.0.0, TiKV supports reporting `NetworkSlowScore` in store heartbeats. This score is calculated based on network probe results and is used to identify slow nodes caused by network jitters. The score ranges from 1 to 100, where a higher value indicates a greater possibility of network anomalies.
+Starting from v8.5.5 and v9.0.0, TiKV supports reporting a `NetworkSlowScore` in store heartbeats to PD. It is calculated based on network detection results and helps identify slow nodes experiencing network jitter. The score ranges from 1 to 100, where a higher value indicates a higher possibility of network anomalies.
 
-For compatibility and resource consumption considerations, network slow store detection and scheduling are disabled by default. To enable them, you need to complete the following configurations simultaneously:
+For compatibility and resource consumption considerations, the detection and scheduling of slow-network nodes are disabled by default. To enable them, configure both of the following:
 
-1. Enable the scheduler to handle network slow stores on the PD side:
+1. Enable the PD scheduler to handle slow-network nodes:
 
     ```bash
     scheduler config evict-slow-store-scheduler set enable-network-slow-store true
     ```
 
-2. On the TiKV side, set the [`raftstore.inspect-network-interval`](/tikv-configuration-file.md#inspect-network-interval) configuration item to a value greater than `0` to enable network probing.
+2. On TiKV, set the [`raftstore.inspect-network-interval`](/tikv-configuration-file.md#inspect-network-interval) configuration item to a value greater than `0` to enable network detection.
 
-#### Recovery Time Control
+#### Recovery time control
 
-You can control the time a slow node needs to remain stable before being considered recovered by using the `recovery-duration` parameter.
+You can specify how long a slow node must remain stable before it is considered recovered by using the `recovery-duration` parameter.
 
 Example:
 
