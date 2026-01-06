@@ -103,9 +103,7 @@ To set up the endpoint service in the same region as your RDS, take the followin
 
 2. Go to the details page of the endpoint service, and then copy the endpoint service name, in the format of `com.amazonaws.vpce.<region>.vpce-svc-xxxxxxxxxxxxxxxxx`. You need to provide it to TiDB Cloud.
 
-3. On the details page of the endpoint service, click the **Allow principals** tab, and then add the TiDB Cloud account ID to the allowlist, for example, `arn:aws:iam::<account_id>:root`. 
-
-    You can get the AWS account ID in [Prerequisites](#prerequisites).
+3. On the details page of the endpoint service, click the **Allow principals** tab, and then add the AWS account ID that you obtained in [Prerequisites](#prerequisites) to the allowlist, for example, `arn:aws:iam::<account_id>:root`. 
 
 ## Step 3. Create an AWS Endpoint Service private link connection in TiDB Cloud
 

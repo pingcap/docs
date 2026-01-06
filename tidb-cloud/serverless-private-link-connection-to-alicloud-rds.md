@@ -84,9 +84,7 @@ To set up the endpoint service in the same region as your ApsaraDB RDS for MySQL
 
 2. Go to the details page of the endpoint service, and copy the **Endpoint Service Name**, for example, `com.aliyuncs.privatelink.<region>.xxxxx`. You need to use it for TiDB Cloud later. 
 
-3. On the details page of the endpoint service, click the **Service Whitelist** tab, click **Add to Whitelist**, and then enter the TiDB Cloud account ID. 
-
-    For more information about how to get the account ID, see [Prerequisites](#prerequisites).
+3. On the details page of the endpoint service, click the **Service Whitelist** tab, click **Add to Whitelist**, and then enter the Alibaba Cloud account ID that you obtained in [Prerequisites](#prerequisites)
 
 ## Step 3. Create a private link connection in TiDB Cloud
 

@@ -715,7 +715,7 @@ Do the following to set up the load balancer:
 
 2. Note down the **Service name**. You need to provide it to TiDB Cloud, for example `com.amazonaws.vpce.us-west-2.vpce-svc-0f49e37e1f022cd45`.
 
-3. On the detail page of the kafka-pl-service, click the **Allow principals** tab, and allow the AWS account of TiDB Cloud to create the endpoint. You can get the AWS account of TiDB Cloud in [Prerequisites](#prerequisites), for example, `arn:aws:iam::<account_id>:root`.
+3. On the detail page of the kafka-pl-service, click the **Allow principals** tab, and then add the AWS account ID that you obtained in [Prerequisites](#prerequisites) to the allowlist, for example, `arn:aws:iam::<account_id>:root`. 
 
 ## Step 3. Create a Private Link Connection in TiDB Cloud
 
