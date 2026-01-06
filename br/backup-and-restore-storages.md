@@ -207,11 +207,16 @@ You can configure the account used to access GCS by specifying the access key. I
 
     Starting from v8.5.5 and v9.0.0, if your TiDB cluster and BR are running in an Azure Virtual Machine (VM) or Azure Kubernetes Service (AKS) environment and Azure managed identities have been assigned to the nodes, you can use Azure managed identities for authentication.
 
-    Before using this method, ensure that you have granted the corresponding managed identity access permissions (such as `Storage Blob Data Contributor`) to the target storage account in the [Azure Portal](https://azure.microsoft.com/).
+    Before using this method, ensure that you have granted the permissions (such as `Storage Blob Data Contributor`) for the managed identity to access the target storage account in the [Azure Portal](https://azure.microsoft.com/).
 
     - **System-assigned managed identity**:
 
         When using a system-assigned managed identity, there is no need to configure any Azure-related environment variables. You can simply run the BR backup command.
+
+        ```shell
+        tiup br backup full -u "${PD_IP}:2379" \
+        --storage "azure://external/backup-20220915?account-name=${account-name}"
+        ```
 
         > **Note:**
         >
@@ -219,9 +224,9 @@ You can configure the account used to access GCS by specifying the access key. I
 
     - **User-assigned managed identity**:
 
-        When using a user-assigned managed identity, you need to configure the `AZURE_CLIENT_ID` environment variable in the running environment of TiKV or BR, and set its value to the client ID of the managed identity.
+        When using a user-assigned managed identity, you need to configure the `AZURE_CLIENT_ID` environment variable in the running environment of TiKV and BR, set its value to the client ID of the managed identity, and then run the BR backup command. The detailed steps are as follows:
 
-        - Configure the client ID for TiKV when starting with TiUP:
+        1. Configure the client ID for TiKV when starting with TiUP:
 
             The following steps use the TiKV port `24000` and the systemd service name `tikv-24000` as an example:
 
@@ -245,20 +250,18 @@ You can configure the account used to access GCS by specifying the access key. I
                 systemctl restart tikv-24000
                 ```
 
-        - Configure the client ID for BR:
-
-            Before running the BR backup command, set the `AZURE_CLIENT_ID` environment variable:
+        2. Configure the `AZURE_CLIENT_ID` environment variable for BR:
 
             ```shell
             export AZURE_CLIENT_ID="<your-client-id>"
             ```
 
-    After configuring the `AZURE_CLIENT_ID` environment variable, you can back up data to Azure Blob Storage using the following BR command:
+        3. Back up data to Azure Blob Storage using the following BR command:
 
-    ```shell
-    tiup br backup full -u "${PD_IP}:2379" \
-    --storage "azure://external/backup-20220915?account-name=${account-name}"
-    ```
+            ```shell
+            tiup br backup full -u "${PD_IP}:2379" \
+            --storage "azure://external/backup-20220915?account-name=${account-name}"
+            ```
 
 </div>
 </SimpleTab>
