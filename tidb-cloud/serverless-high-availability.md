@@ -1,11 +1,16 @@
 ---
-title: High Availability in {{{ .starter }}} and Essential
-summary: Learn about the high availability architecture of {{{ .starter }}} and Essential. Discover Zonal and Regional High Availability options, automated backups, failover processes, and how TiDB ensures data durability and business continuity.
+title: High Availability in TiDB Cloud
+summary: Learn about the high availability architecture of TiDB Cloud. Discover Zonal and Regional High Availability options, automated backups, failover processes, and how TiDB ensures data durability and business continuity.
 ---
 
-# High Availability in {{{ .starter }}} and Essential
+# High Availability in TiDB Cloud
 
 TiDB Cloud is designed with robust mechanisms to maintain high availability and data durability by default, preventing single points of failure and ensuring continuous service even in the face of disruptions. As a fully managed service based on the battle-tested TiDB Open Source product, it inherits TiDB's core high availability (HA) features and augments them with additional cloud-native capabilities.
+
+> **Note:**
+>
+> - This document is only applicable for <CustomContent plan="starter,essential">{{{ .starter }}} and {{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .starter }}}, {{{ .essential }}}, and {{{ .premium }}}</CustomContent>.
+> - For high availability in TiDB Cloud Dedicated, see [High Availability in TiDB Cloud Dedicated](/tidb-cloud/high-availability-with-multi-az.md).
 
 ## Overview
 
@@ -13,10 +18,24 @@ TiDB ensures high availability and data durability using the Raft consensus algo
 
 TiDB Cloud extends these capabilities with zonal high availability and regional high availability to meet different operational requirements.
 
+<CustomContent plan="starter,essential">
+
 > **Note:**
 >
 > - For {{{ .starter }}} clusters, only zonal high availability is enabled, and it is not configurable.
 > - For {{{ .essential }}} clusters hosted in the AWS Tokyo (ap-northeast-1) region or any Alibaba Cloud region, regional high availability is enabled by default. You can change it to zonal high availability as needed during cluster creation. For {{{ .essential }}} clusters hosted in other regions, only zonal high availability is enabled, and it is not configurable.
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+> **Note:**
+>
+> - For {{{ .starter }}} clusters, only zonal high availability is enabled, and it is not configurable.
+> - For {{{ .premium }}} clusters, only regional high availability is enabled, and it is not configurable.
+> - For {{{ .essential }}} clusters hosted in the AWS Tokyo (ap-northeast-1) region or any Alibaba Cloud region, regional high availability is enabled by default. You can change it to zonal high availability as needed during cluster creation. For {{{ .essential }}} clusters hosted in other regions, only zonal high availability is enabled, and it is not configurable.
+
+</CustomContent>
 
 - **Zonal high availability**: This option places all nodes within a single availability zone, reducing network latency. It ensures high availability without requiring application-level redundancy across zones, making it suitable for applications that prioritize low latency within a single zone. For more information, see [Zonal high availability architecture](#zonal-high-availability-architecture).
 

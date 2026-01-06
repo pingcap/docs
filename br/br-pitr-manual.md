@@ -589,7 +589,7 @@ Starting from v8.5.5, when a log backup task is running, if all of the following
     - Write access to the target external storage used by the log backup
 - The target external storage for the log backup is Amazon S3 (`s3://`), Google Cloud Storage (`gcs://`), or Azure Blob Storage (`azblob://`).
 - The data to be restored uses the same type of external storage as the target storage for the log backup.
-- Neither the data to be restored nor the log backup has enabled local encryption. For details, see [log backup encryption](#encrypt-the-log-backup-data) and [snapshot backup encryption](/br/br-snapshot-manual.md#encrypt-the-backup-data).
+- Neither the data to be restored nor the log backup has local encryption enabled. For details, see [log backup encryption](#encrypt-the-log-backup-data) and [snapshot backup encryption](/br/br-snapshot-manual.md#encrypt-the-backup-data).
 
 If any of the above conditions are not met, you can restore the data by following these steps:
 
@@ -623,7 +623,7 @@ If a restore operation fails, you can use the `tiup br abort` command to clean u
 >
 > The `abort` command only cleans up metadata. You need to manually delete any actual restored data from the cluster.
 
-The examples of aborting restore operations using the same parameters as the original restore command are as follows:
+The following examples show how to abort restore operations using the same parameters as the original restore command:
 
 ```shell
 # Abort a PITR operation
