@@ -117,6 +117,7 @@ TableOption ::=
 |   'UNION' EqOpt '(' TableNameListOpt ')'
 |   'ENCRYPTION' EqOpt EncryptionOpt
 |    'TTL' EqOpt TimeColumnName '+' 'INTERVAL' Expression TimeUnit (TTLEnable EqOpt ( 'ON' | 'OFF' ))? (TTLJobInterval EqOpt stringLit)?
+|   'AFFINITY' EqOpt StringName
 |   PlacementPolicyOption
 
 OnCommitOpt ::=
@@ -168,23 +169,14 @@ The following *table_options* are supported. Other options such as `AVG_ROW_LENG
 |`AUTO_ID_CACHE`| To set the auto ID cache size in a TiDB instance. By default, TiDB automatically changes this size according to allocation speed of auto ID |`AUTO_ID_CACHE` = 200 |
 |`AUTO_RANDOM_BASE`| To set the initial incremental part value of auto_random. This option can be considered as a part of the internal interface. Users can ignore this parameter |`AUTO_RANDOM_BASE` = 0|
 | `CHARACTER SET` | To specify the [character set](/character-set-and-collation.md) for the table | `CHARACTER SET` =  'utf8mb4' |
+| `COLLATE` | To specify the character set collation for the table | `COLLATE` = 'utf8mb4_bin' |
 | `COMMENT` | The comment information | `COMMENT` = 'comment info' |
-
-<CustomContent platform="tidb">
-
-> **Note:**
->
-> The `split-table` configuration option is enabled by default. When it is enabled, a separate Region is created for each newly created table. For details, see [TiDB configuration file](/tidb-configuration-file.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
+| `AFFINITY` | Enables affinity scheduling for a table or partition. For non-partitioned tables, it can be set to `'table'`; for partitioned tables, it can be set to `'partition'`. Setting it to `'none'` or leaving it empty disables affinity scheduling. | `AFFINITY` = 'table' |
 
 > **Note:**
 >
-> TiDB creates a separate Region for each newly created table.
-
-</CustomContent>
+> - The `split-table` configuration option is enabled by default. When it is enabled, a separate Region is created for each newly created table. For details, see [TiDB configuration file](/tidb-configuration-file.md).
+> - When using `AFFINITY`, changing the partitioning scheme of a table (such as adding, deleting, reorganizing, or swapping partitions) is not supported, nor is setting this option on temporary tables or views.
 
 ## Examples
 
