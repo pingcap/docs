@@ -1012,6 +1012,16 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Unit: Bytes
 - This variable is used to control the threshold at which the TiDB server prefers to send read requests to a replica in the same availability zone as the TiDB server when [`tidb_replica_read`](#tidb_replica_read-new-in-v40) is set to `closest-adaptive`. If the estimated result is higher than or equal to this threshold, TiDB prefers to send read requests to a replica in the same availability zone. Otherwise, TiDB sends read requests to the leader replica.
 
+### tidb_advancer_check_point_lag_limit <span class="version-mark">New in v8.5.5</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Duration
+- Default value: `48h0m0s`
+- Range: `[1s, 8760h0m0s]`
+- This variable controls the maximum allowed checkpoint lag for a log backup task. If a task's checkpoint lag exceeds this limit, TiDB Advancer pauses the task.
+
 ### tidb_allow_tiflash_cop <span class="version-mark">New in v7.3.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -6319,6 +6329,15 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 >
 > - `PARALLEL` and `PARALLEL-FAST` modes are incompatible with [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530) and [`tidb_enable_tso_follower_proxy`](#tidb_enable_tso_follower_proxy-new-in-v530). If either [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530) is set to a non-zero value or [`tidb_enable_tso_follower_proxy`](#tidb_enable_tso_follower_proxy-new-in-v530) is enabled, configuring `tidb_tso_client_rpc_mode` does not take effect, and TiDB always works in `DEFAULT` mode.
 > - `PARALLEL` and `PARALLEL-FAST` modes are designed to reduce the average time for retrieving TS in TiDB. In situations with significant latency fluctuations, such as long-tail latency or latency spikes, these two modes might not provide any remarkable performance improvements.
+
+### tidb_cb_pd_metadata_error_rate_threshold_ratio <span class="version-mark">New in v8.5.5</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Default value: `0`
+- Range: `[0, 1]`
+- This variable controls when TiDB triggers the circuit breaker. Setting a value of `0` (default) disables the circuit breaker. Setting a value between `0.01` and `1` enables it, causing the circuit breaker to trigger when the error rate of specific requests sent to PD reaches or exceeds the threshold.
 
 ### tidb_ttl_delete_rate_limit <span class="version-mark">New in v6.5.0</span>
 
