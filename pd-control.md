@@ -940,7 +940,7 @@ Usage:
 >> scheduler config evict-leader-scheduler                 // Display the stores in which the scheduler is located since v4.0.0
 >> scheduler config evict-leader-scheduler add-store 2     // Add leader eviction scheduling for store 2
 >> scheduler config evict-leader-scheduler delete-store 2  // Remove leader eviction scheduling for store 2
->> scheduler add evict-slow-store-scheduler                // When there is one and only one slow store, evict all Region leaders of that store
+>> scheduler add evict-slow-store-scheduler                // Automatically detect disk or network slow stores and evict all Region leaders on that store when conditions are met
 >> scheduler remove grant-leader-scheduler-1               // Remove the corresponding scheduler, and `-1` corresponds to the store ID
 >> scheduler pause balance-region-scheduler 10             // Pause the balance-region scheduler for 10 seconds
 >> scheduler pause all 10                                  // Pause all schedulers for 10 seconds
@@ -963,6 +963,44 @@ The state of the scheduler can be one of the following:
 - `scheduling`: the scheduler is generating scheduling operators.
 - `pending`: the scheduler cannot generate scheduling operators. For a scheduler in the `pending` state, brief diagnostic information is returned. The brief information describes the state of stores and explains why these stores cannot be selected for scheduling.
 - `normal`: there is no need to generate scheduling operators.
+
+### `scheduler config evict-slow-store-scheduler`
+
+The `evict-slow-store-scheduler` is used to limit PD from scheduling Leaders to abnormal TiKV nodes and actively evict Leaders when necessary, thereby reducing the impact of slow nodes on the cluster when TiKV nodes experience disk I/O or network jitters.
+
+#### Disk Slow Stores
+
+Since v6.2.0, TiKV reports the `SlowScore` in store heartbeats to PD. This score is calculated based on disk I/O conditions. The score ranges from 1 to 100, where a higher value indicates a greater possibility of disk performance anomalies on that node.
+
+For disk slow stores, TiKV-side detection and PD-side scheduling based on `evict-slow-store-scheduler` are enabled by default and require no additional configuration.
+
+#### Network Slow Stores
+
+Since v8.5.5 and v9.0.0, TiKV supports reporting `NetworkSlowScore` in store heartbeats. This score is calculated based on network probe results and is used to identify slow nodes caused by network jitters. The score ranges from 1 to 100, where a higher value indicates a greater possibility of network anomalies.
+
+For compatibility and resource consumption considerations, network slow store detection and scheduling are disabled by default. To enable them, you need to complete the following configurations simultaneously:
+
+1. Enable the scheduler to handle network slow stores on the PD side:
+
+    ```bash
+    scheduler config evict-slow-store-scheduler set enable-network-slow-store true
+    ```
+
+2. On the TiKV side, set the [`raftstore.inspect-network-interval`](/tikv-configuration-file.md#inspect-network-interval) configuration item to a value greater than `0` to enable network probing.
+
+#### Recovery Time Control
+
+You can control the time a slow node needs to remain stable before being considered recovered by using the `recovery-duration` parameter.
+
+Example:
+
+```bash
+>> scheduler config evict-slow-store-scheduler
+{
+  "recovery-duration": "1800"  // 30 minutes
+}
+>> scheduler config evict-slow-store-scheduler set recovery-duration 600
+```
 
 ### `scheduler config balance-leader-scheduler`
 
