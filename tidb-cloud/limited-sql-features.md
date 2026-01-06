@@ -177,6 +177,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `tidb_pprof_sql_cpu` | Not supported [^4] | Not supported [^4] |
 | `tidb_record_plan_in_slow_log` | Not supported [^4] | Not supported [^4] |
 | `tidb_redact_log` | Not supported [^4] | Not supported [^4] |
+| `tidb_replica_read` | No limitation | Read-only [^10] |
 | `tidb_restricted_read_only` | Not supported [^4] | Not supported [^4] |
 | `tidb_row_format_version` | Not supported [^4] | Not supported [^4] |
 | `tidb_scatter_region` | No limitation | Read-only [^10] |

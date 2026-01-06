@@ -62,10 +62,19 @@ export const getAllMdList = (tocFiles) => {
   const tocFileList = Array.isArray(tocFiles) ? tocFiles : [tocFiles];
 
   const allLinks = tocFileList.flatMap((tocFile) => {
-    const tocFileContent = fs.readFileSync(tocFile);
-    const mdAst = generateMdAstFromFile(tocFileContent);
-    const linkList = extractLinkNodeFromAst(mdAst);
-    return filterLink(linkList);
+    if (!fs.existsSync(tocFile)) {
+      console.log(`TOC file not found: ${tocFile}`);
+      return [];
+    }
+    try {
+      const tocFileContent = fs.readFileSync(tocFile);
+      const mdAst = generateMdAstFromFile(tocFileContent);
+      const linkList = extractLinkNodeFromAst(mdAst);
+      return filterLink(linkList);
+    } catch (error) {
+      console.error(`Error reading TOC file ${tocFile}:`, error);
+      return [];
+    }
   });
 
   return [...new Set(allLinks)];
