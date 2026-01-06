@@ -8,6 +8,35 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## December 30, 2025
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Support TiProxy (Beta).
+
+        TiProxy, the official proxy component of PingCAP, is now available in beta for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters. It provides enhanced connection management and load balancing to improve database reliability and performance.
+  
+        Highlights:
+
+        - Maintains persistent client connections during scaling operations and rolling upgrades.
+        - Evenly distributes traffic across TiDB nodes for better resource utilization.
+  
+      For more information, see [Overview of TiProxy](/tidb-cloud/tiproxy-overview-for-cloud.md).
+
+- **TiDB Cloud Essential**
+
+    - Support changefeeds (Beta).
+
+        The changefeed feature is now available in beta in both the [TiDB Cloud console](https://tidbcloud.com) and [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential). It enables you to stream data from TiDB Cloud to other data services, currently supporting Apache Kafka and MySQL as destinations.
+
+    - Support configuring private link connections for downstream resources.
+
+        Private link connections are now available in both the [TiDB Cloud console](https://tidbcloud.com) and [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential). This feature enables you to establish private and direct connectivity between TiDB Cloud and your downstream resources (such as MySQL and Apache Kafka). It is tailored for integration with changefeeds and other dataflow services that initiate connections from TiDB Cloud to your infrastructure.
+
+        For more information, see [Private Link Connections for Dataflow](/tidb-cloud/serverless-private-link-connection.md).
+
 ## December 16, 2025
 
 **General changes**
