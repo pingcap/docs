@@ -218,7 +218,7 @@ You can configure the account used to access GCS by specifying the access key. I
 
     - **User-assigned Managed Identity**:
 
-        When using a user-assigned managed identity, you need to configure the `AZURE_CLIENT_ID` environment variable in the TiKV or BR command-line tool's operating environment, with its value being the Client ID of the managed identity.
+        When using a user-assigned managed identity, you need to configure the `AZURE_CLIENT_ID` environment variable in the TiKV or BR command-line tool's operating environment and set its value to the Client ID of the managed identity.
 
         - Configure Client ID for TiKV when started with TiUP:
 
@@ -230,7 +230,7 @@ You can configure the account used to access GCS by specifying the access key. I
                 systemctl edit tikv-24000
                 ```
 
-            2. Configure environment variables, only `Client ID` needs to be set:
+            2. Configure the `AZURE_CLIENT_ID` environment variable:
 
                 ```ini
                 [Service]
