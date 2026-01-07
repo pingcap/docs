@@ -105,7 +105,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 * Support gracefully shutting down TiKV [#17221](https://github.com/tikv/tikv/issues/17221) @[hujiatao0](https://github.com/hujiatao0) **tw@qiancai** <!--2297-->
 
-    When shutting down a TiKV server, TiKV attempts to transfer the Leader replicas on the node to other TiKV nodes within a configurable timeout duration before the shutdown. The default timeout duration is 20 seconds, and you can adjust it using the [`server.graceful-shutdown-timeout`](https://docs.pingcap.com/zh/tidb/v8.5/tikv-configuration-file#graceful-shutdown-timeout-new-in-v855) configuration item. If the timeout is reached and some Leaders have not been successfully transferred, TiKV skips the remaining Leader transfers and proceeds with the shutdown.
+    When shutting down a TiKV server, TiKV attempts to transfer the Leader replicas on the node to other TiKV nodes within a configurable timeout duration before the shutdown. The default timeout duration is 20 seconds, and you can adjust it using the [`server.graceful-shutdown-timeout`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#graceful-shutdown-timeout-new-in-v855) configuration item. If the timeout is reached and some Leaders have not been successfully transferred, TiKV skips the remaining Leader transfers and proceeds with the shutdown.
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#graceful-shutdown-timeout-new-in-v855).
 
@@ -174,9 +174,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 | Configuration file or component | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
-|  |  |  |  |
-|  |  |  |  |
-|  |  |  |  |
+| PD | [`schedule.max-affinity-merge-region-size`](https://docs.pingcap.com/tidb/v8.5/pd-configuration-file#max-affinity-merge-region-size-new-in-v855) | Newly added | Controls the threshold for automatically merging adjacent small Regions within the same [affinity group](https://docs.pingcap.com/tidb/v8.5/table-affinity). The default value is `256`, in MiB. |
+| PD  | [`schedule.affinity-schedule-limit`](https://docs.pingcap.com/tidb/v8.5/pd-configuration-file#affinity-schedule-limit-new-in-v855) | Newly added | Controls the number of [affinity](https://docs.pingcap.com/tidb/v8.5/table-affinity) scheduling tasks that can be performed concurrently. The default value is `0`, which means that affinity scheduling is disabled by default. |
+| TiKV | [`performance.enable-async-batch-get`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#enable-async-batch-get-new-in-v855)  | Newly added | Controls whether TiDB uses asynchronous mode to execute the Batch Get operator. The default value is `true`. |
+| TiKV | [`server.graceful-shutdown-timeout`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#graceful-shutdown-timeout-new-in-v855) | Newly added | Controls the timeout duration for graceful shutdown of TiKV. The default value is `20s`. |
+| TiKV | [`server.inspect-network-interval`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#inspect-network-interval-new-in-v855) | Newly added | Controls the interval at which the TiKV HealthChecker actively performs network detection to PD and other TiKV nodes. The default value is `100ms`. |
+| BR | [`--checkpoint-storage`](/br/br-checkpoint-restore.md#implementation-details-store-checkpoint-data-in-the-downstream-cluster) | Newly added | Specifies an external storage for checkpoint data. |
+| BR | [`--fast-load-sys-tables`](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema) | Newly added | Supports physical restore of system tables on a new cluster. This parameter is enabled by default. |
+| BR | [`--filter`](/br/br-pitr-manual.md#restore-data-using-filters) | Newly added | Specifies patterns to include or exclude specific databases or tables for restore. |
 
 ### System tables
 
