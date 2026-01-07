@@ -150,9 +150,9 @@ This document only describes the parameters that are not included in command-lin
 ### `grpc-concurrency`
 
 + The number of gRPC worker threads. When you modify the size of the gRPC thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
-+ Default value: From v8.5.4 and v9.0.0, adjusted to `grpc-raft-conn-num * 3 + 2`. The default value of `grpc-raft-conn-num` can be referenced from [`grpc-raft-conn-num`](#grpc-raft-conn-num). In v8.5.3 and earlier versions, the default value is 5.
-+
-+    + For example, when the number of CPU cores is 8, the default value of `grpc-raft-conn-num` is 1, and accordingly, the default value of `grpc-concurrency` is `1 * 3 + 2 = 5`.
++ Default value: `grpc-raft-conn-num * 3 + 2` (starting from v8.5.4 and v9.0.0), which is calculated based on the value of [`grpc-raft-conn-num`](#grpc-raft-conn-num). In v8.5.3 and earlier versions, the default value is `5`.
+
+    + For example, when the number of CPU cores is 8, the default value of `grpc-raft-conn-num` is 1. Accordingly, the default value of `grpc-concurrency` is `1 * 3 + 2 = 5`.
 +
 + Minimum value: `1`
 
@@ -171,7 +171,7 @@ This document only describes the parameters that are not included in command-lin
 ### `grpc-raft-conn-num`
 
 + The maximum number of connections between TiKV nodes for Raft communication
-+ Default value: From v8.5.4 and v9.0.0, adjusted to `MAX(1, MIN(4, CPU cores / 8))`. Here, `MIN(4, CPU cores / 8)` indicates that when the number of CPU cores is greater than or equal to 32, the default maximum number of connections is 4. In v8.5.3 and earlier versions, the default value is 1.
++ Default value: `MAX(1, MIN(4, CPU cores / 8))` (starting from v8.5.4 and v9.0.0), where `MIN(4, CPU cores / 8)` indicates that when the number of CPU cores is greater than or equal to 32, the default maximum number of connections is 4. In v8.5.3 and earlier versions, the default value is 1.
 + Minimum value: `1`
 
 ### `max-grpc-send-msg-len`
