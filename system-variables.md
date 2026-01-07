@@ -1120,7 +1120,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 > - This variable only works when [`tidb_analyze_version`](#tidb_analyze_version-new-in-v510) is set to `2`.
 > - If you upgrade your TiDB cluster from a version earlier than v8.3.0 to v8.3.0 or later, this variable is set to `ALL` by default to keep the original behavior.
 > - For a newly deployed TiDB cluster from v8.3.0 to v8.5.4, this variable is set to `PREDICATE` by default.
-> - For a newly deployed TiDB cluster from v8.5.5 onwards, this variable is set to `ALL` by default.
+> - For a newly deployed TiDB cluster from v8.5.5 and v9.0.0 onwards, this variable is set to `ALL` by default.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
