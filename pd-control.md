@@ -940,7 +940,7 @@ Usage:
 >> scheduler config evict-leader-scheduler                 // Display the stores in which the scheduler is located since v4.0.0
 >> scheduler config evict-leader-scheduler add-store 2     // Add leader eviction scheduling for store 2
 >> scheduler config evict-leader-scheduler delete-store 2  // Remove leader eviction scheduling for store 2
->> scheduler add evict-slow-store-scheduler                // Automatically detect slow-disk or slow-network nodes and evict all Region leaders on that node when certain conditions are met
+>> scheduler add evict-slow-store-scheduler                // Automatically detect slow-disk or slow-network nodes and evict all Region leaders from those nodes when certain conditions are met
 >> scheduler remove grant-leader-scheduler-1               // Remove the corresponding scheduler, and `-1` corresponds to the store ID
 >> scheduler pause balance-region-scheduler 10             // Pause the balance-region scheduler for 10 seconds
 >> scheduler pause all 10                                  // Pause all schedulers for 10 seconds
