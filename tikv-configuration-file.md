@@ -154,7 +154,6 @@ This document only describes the parameters that are not included in command-lin
 + Default value: `grpc-raft-conn-num * 3 + 2` (starting from v8.5.4 and v9.0.0), which is calculated based on the value of [`grpc-raft-conn-num`](#grpc-raft-conn-num). In v8.5.3 and earlier versions, the default value is `5`.
 
     + For example, when the number of CPU cores is 8, the default value of `grpc-raft-conn-num` is 1. Accordingly, the default value of `grpc-concurrency` is `1 * 3 + 2 = 5`.
-+
 + Minimum value: `1`
 
 ### `grpc-concurrent-stream`
