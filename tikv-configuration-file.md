@@ -175,7 +175,7 @@ This document only describes the parameters that are not included in command-lin
 + Default value: 
 
     + Starting from v8.5.4 and v9.0.0, the default value is adjusted to `MAX(1, MIN(4, CPU cores / 8))`, where `MIN(4, CPU cores / 8)` indicates that when the number of CPU cores is greater than or equal to 32, the default maximum number of connections is 4. 
-    + In v8.5.3 and earlier versions, the default value is 1.
+    + In v8.5.3 and earlier versions, the default value is `1`.
 
 + Minimum value: `1`
 
