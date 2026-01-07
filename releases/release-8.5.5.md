@@ -45,11 +45,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     Starting from v8.5.5, TiDB supports using optimizer hints to push the `IndexLookUp` operator down to TiKV nodes. This reduces the number of remote procedure calls (RPCs) and can improve query performance. The actual performance improvement varies depending on the specific workload and requires testing for verification.
 
-    You can use the [`INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...])`](https://docs.pingcap.com/tidb/stable/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855) hint to explicitly instruct the optimizer to push index lookups down to TiKV for a specific table. It is recommended to combine this hint with the table's AFFINITY attribute. For example, set `AFFINITY="table"` for regular tables and `AFFINITY="partition"` for partitioned tables.
+    You can use the [`INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...])`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855) hint to explicitly instruct the optimizer to push index lookups down to TiKV for a specific table. It is recommended to combine this hint with the table's AFFINITY attribute. For example, set `AFFINITY="table"` for regular tables and `AFFINITY="partition"` for partitioned tables.
 
-    To disable index lookup pushdown to TiKV for a specific table, use the [`NO_INDEX_LOOKUP_PUSHDOWN(t1_name)`](https://docs.pingcap.com/tidb/stable/optimizer-hints#no_index_lookup_pushdownt1_name--new-in-v855) hint.
+    To disable index lookup pushdown to TiKV for a specific table, use the [`NO_INDEX_LOOKUP_PUSHDOWN(t1_name)`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#no_index_lookup_pushdownt1_name--new-in-v855) hint.
 
-    For more information, see [documentation](https://docs.pingcap.com/tidb/stable/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855).
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855).
 
 * Support table-level data affinity to improve query performance (experimental) [#9764](https://github.com/tikv/pd/issues/9764) @[lhy1024](https://github.com/lhy1024) **tw@qiancai** <!--2317-->
 
@@ -165,10 +165,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
-| `tidb_advancer_check_point_lag_limit`       | Newly added  | Controls the maximum allowed checkpoint lag for a log backup task. If a task's checkpoint lag exceeds this limit, TiDB Advancer pauses the task. |
-| `tidb_cb_pd_metadata_error_rate_threshold_ratio`    | Newly added  | Controls when TiDB triggers the circuit breaker. Setting a value of `0` (default) disables the circuit breaker. Setting a value between `0.01` and `1` enables it, causing the circuit breaker to trigger when the error rate of specific requests sent to PD reaches or exceeds the threshold. |
-| `tidb_index_lookup_pushdown_policy` | Newly added | Controls whether and when TiDB pushes the `IndexLookUp` operator down to TiKV. |
-|  |  |  |
+| [`tidb_advancer_check_point_lag_limit`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_advancer_check_point_lag_limit-new-in-v855) | Newly added | Controls the maximum allowed checkpoint lag for a log backup task. The default value is `48h0m0s`. If a task's checkpoint lag exceeds this limit, TiDB Advancer pauses the task. |
+| [`tidb_cb_pd_metadata_error_rate_threshold_ratio`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_cb_pd_metadata_error_rate_threshold_ratio-new-in-v855)    | Newly added  | Controls when TiDB triggers the circuit breaker. The default value is `0`, which means the circuit breaker is disabled. Setting a value between `0.01` and `1` enables it, causing the circuit breaker to trigger when the error rate of specific requests sent to PD reaches or exceeds the threshold. |
+| [`tidb_index_lookup_pushdown_policy`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_index_lookup_pushdown_policy-new-in-v855) | Newly added | Controls whether and when TiDB pushes the `IndexLookUp` operator down to TiKV. The default value is `hint-only`, which means TiDB pushes the `IndexLookUp` operator down to TiKV only when the [`INDEX_LOOKUP_PUSHDOWN`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855) hint is explicitly specified in the SQL statement. |
 
 ### Configuration parameters
 
