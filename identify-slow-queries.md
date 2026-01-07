@@ -189,7 +189,30 @@ SELECT /*+ WRITE_SLOW_LOG */ count(*) FROM t t1, t t2 WHERE t1.a = t2.b;
 ## Related system variables
 
 * [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold): sets the threshold for the slow query log. The SQL statement whose execution time exceeds this threshold is recorded in the slow query log. The default value is 300 ms.
-* [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-new-in-v900): defines trigger rules for the slow query log. It supports combining multi-dimensional metrics to provide more flexible and fine-grained logging. Introduced in v9.0.0, it gradually replaces the single-threshold approach (`tidb_slow_log_threshold`).
+* [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-new-in-v900): defines trigger rules for the slow query log. It supports combining multi-dimensional metrics to provide more flexible and fine-grained logging. Introduced in v9.0.0, it gradually replaces the single-threshold approach (`tidb_slow_log_threshold`). This variable supports using the following fields as filter conditions when slow query logs are output. For more information, see [Fields description](#fields-description).
+    - Supported filter fields:
+            * Basic slow query information:
+                * `Query_time`, `Parse_time`, `Compile_time`, `Optimize_time`, `Wait_TS`, `Rewrite_time`
+                * `Digest`, `Plan_digest`, `Is_internal`, `Succ`
+                * `Exec_retry_count`, `Backoff_time`, `Write_sql_response_total`
+            * Transaction-related fields:
+                * `Prewrite_time`, `Commit_time`, `Write_keys`, `Write_size`, `Prewrite_region`
+            * User-related fields for SQL execution:
+                * `Conn_ID`, `DB`, `Session_alias`
+            * TiKV Coprocessor Task-related fields:
+                * `Process_time`, `Total_keys`, `Process_keys`, `Num_cop_tasks`
+            * Memory usage related fields:
+                * `Mem_max`
+            * Disk usage related fields:
+                * `Disk_max`
+            * Resource control related fields:
+                * `Resource_group`
+            * Network transmission related fields:
+                * `KV_total`, `PD_total`
+                * `Unpacked_bytes_sent_tikv_total`, `Unpacked_bytes_received_tikv_total`
+                * `Unpacked_bytes_sent_tikv_cross_zone`, `Unpacked_bytes_received_tikv_cross_zone`
+                * `Unpacked_bytes_sent_tiflash_total`, `Unpacked_bytes_received_tiflash_total`
+                * `Unpacked_bytes_sent_tiflash_cross_zone`, `Unpacked_bytes_received_tiflash_cross_zone`
     * If `tidb_slow_log_rules` is not set:
         * Slow query logging still relies on `tidb_slow_log_threshold`. The `query_time` threshold is taken from that variable for backward compatibility.
     * If `tidb_slow_log_rules` is set:
@@ -201,6 +224,30 @@ SELECT /*+ WRITE_SLOW_LOG */ count(*) FROM t t1, t t2 WHERE t1.a = t2.b;
                 * If a GLOBAL rule specifies `ConnID` and it matches the current session `ConnID`, that rule takes effect.
                 * If a GLOBAL rule does not specify `ConnID` (a global rule), that rule takes effect.
       * The behavior of `SHOW VARIABLES`, `SELECT @@GLOBAL.tidb_slow_log_rules`, and `SELECT @@SESSION.tidb_slow_log_rules` for this variable is the same as for other system variables.
+    * Examples:
+        * Standard format (SESSION scope):
+
+          ```sql
+          SET SESSION tidb_slow_log_rules = 'Query_time: 500, Is_internal: false';
+          ```
+
+        * Incorrect format (SESSION scope does not support `ConnID`):
+
+          ```sql
+          SET SESSION tidb_slow_log_rules = 'ConnID: 12, Query_time: 500, Is_internal: false';
+          ```
+
+        * Global rules (applies to all connections):
+
+          ```sql
+          SET GLOBAL tidb_slow_log_rules = 'Query_time: 500, Is_internal: false';
+          ```
+
+        * Global rules for specific connections (applies to connections with `ConnID: 11` and `ConnID: 12`, respectively):
+
+          ```sql
+          SET GLOBAL tidb_slow_log_rules = 'ConnID: 11, Query_time: 500, Is_internal: false; ConnID: 12, Query_time: 600, Process_time: 300, DB: db1';
+          ```
 
     > **Tip:**
     >
@@ -212,7 +259,7 @@ SELECT /*+ WRITE_SLOW_LOG */ count(*) FROM t t1, t t2 WHERE t1.a = t2.b;
     * A value greater than `0` caps the number of slow query logs printed per second. Excess logs are discarded and not written to the slow query log file.
     * It is recommended to set this variable when `tidb_slow_log_rules` is enabled to avoid excessive log printing.
 * [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len): Sets the maximum length of the SQL statement recorded in the slow query log. The default value is 4096 (byte).
-* [tidb_redact_log](/system-variables.md#tidb_redact_log): Determines whether to desensitize user data using `?` in the SQL statement recorded in the slow query log. The default value is `0`, which means to disable the feature.
+* [`tidb_redact_log`](/system-variables.md#tidb_redact_log): Determines whether to desensitize user data using `?` in the SQL statement recorded in the slow query log. The default value is `0`, which means to disable the feature.
 * [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info): Determines whether to record the physical execution information of each operator in the execution plan. The default value is `1`. This feature impacts the performance by approximately 3%. After enabling this feature, you can view the `Plan` information as follows:
 
     ```sql
@@ -501,9 +548,9 @@ Output example:
 +---------------+----------+
 ```
 
-### Query slow logs occurring only in abnormal time period
+### Query slow query logs occurring only in abnormal time period
 
-If you find problems such as decreased QPS or increased latency for the time period from `2020-03-10 13:24:00` to `2020-03-10 13:27:00`, the reason might be that a large query crops up. Run the following SQL statement to query slow logs that occur only in abnormal time period. The time range from `2020-03-10 13:20:00` to `2020-03-10 13:23:00` refers to the normal time period.
+If you find problems such as decreased QPS or increased latency for the time period from `2020-03-10 13:24:00` to `2020-03-10 13:27:00`, the reason might be that a large query crops up. Run the following SQL statement to query slow query logs that occur only in abnormal time period. The time range from `2020-03-10 13:20:00` to `2020-03-10 13:23:00` refers to the normal time period.
 
 {{< copyable "sql" >}}
 
@@ -564,9 +611,9 @@ TiDB uses the session variable `tidb_slow_query_file` to control the files to be
 set tidb_slow_query_file = "/path-to-log/tidb-slow.log"
 ```
 
-### Parse TiDB slow logs with `pt-query-digest`
+### Parse TiDB slow query logs with `pt-query-digest`
 
-Use `pt-query-digest` to parse TiDB slow logs.
+Use `pt-query-digest` to parse TiDB slow query logs.
 
 > **Note:**
 >
