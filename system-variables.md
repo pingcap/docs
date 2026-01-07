@@ -5826,7 +5826,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### tidb_slow_log_max_per_sec <span class="version-mark">New in v9.0.0</span>
 
-- Scope: SESSION | GLOBAL
+- Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `0`
