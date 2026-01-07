@@ -83,7 +83,7 @@ TiKV設定ファイルは、コマンドラインパラメータよりも多く�
 -   ログファイル。この設定項目が設定されていない場合、ログはデフォルトで「stderr」に出力されます。この設定項目が設定されている場合、ログは対応するファイルに出力されます。
 -   デフォルト値: `""`
 
-### <code>max-size</code> <span class="version-mark">5.4.0の新機能</span> {#code-max-size-code-span-class-version-mark-new-in-v5-4-0-span}
+### <code>max-size</code><span class="version-mark">バージョン5.4.0の新機能</span> {#code-max-size-code-span-class-version-mark-new-in-v5-4-0-span}
 
 -   ログファイルの最大サイズ。ファイルサイズがこの設定項目で設定された値より大きい場合、システムは自動的に1つのファイルを複数のファイルに分割します。
 -   デフォルト値: `300`
@@ -226,7 +226,7 @@ TiKV設定ファイルは、コマンドラインパラメータよりも多く�
 ### <code>end-point-memory-quota</code> <span class="version-mark">v8.2.0 の新機能</span> {#code-end-point-memory-quota-code-span-class-version-mark-new-in-v8-2-0-span}
 
 -   TiKVコプロセッサー要求が使用できるメモリの最大量。この制限を超えると、後続のコプロセッサー要求は「サーバーがビジーです」というエラーで拒否されます。
--   デフォルト値: システムメモリ全体の 45%。システムメモリ全体の 45% が 500 MiB を超える場合、デフォルト値は 500 MiB になります。
+-   デフォルト値: システムメモリ全体の 12.5% と 500 MiB のいずれか大きい方の値。
 
 ### <code>snap-io-max-bytes-per-sec</code> {#code-snap-io-max-bytes-per-sec-code}
 
@@ -239,7 +239,7 @@ TiKV設定ファイルは、コマンドラインパラメータよりも多く�
 
 -   TiKV がスナップショットを処理するときに取り込み方式を採用するかどうかの最小しきい値を指定します。
 
-    -   スナップショットのサイズがこのしきい値を超えると、TiKVはスナップショットからSSTファイルをRocksDBにインポートする取り込み方式を採用します。この方式は、大きなファイルの場合、より高速です。
+    -   スナップショットのサイズがこのしきい値を超えると、TiKVはスナップショットからSSTファイルをRocksDBにインポートするインジェスト方式を採用します。この方式は、大きなファイルの場合、より高速です。
     -   スナップショットのサイズがこのしきい値を超えない場合、TiKVは直接書き込み方式を採用し、各データをRocksDBに個別に書き込みます。この方式は、小さなファイルの場合により効率的です。
 
 -   デフォルト値: `"2MiB"`
@@ -271,7 +271,7 @@ TiKV設定ファイルは、コマンドラインパラメータよりも多く�
 
 ### <code>raft-client-queue-size</code> {#code-raft-client-queue-size-code}
 
--   TiKVにおけるRaftメッセージのキューサイズを指定します。時間内に送信されないメッセージが多すぎてバッファがいっぱいになったり、メッセージが破棄されたりする場合は、システムの安定性を向上させるために、より大きな値を指定できます。
+-   TiKVにおけるRaftメッセージのキューサイズを指定します。時間内に送信されないメッセージが多すぎるとバッファがいっぱいになったり、メッセージが破棄されたりする場合は、システムの安定性を向上させるために、より大きな値を指定できます。
 -   デフォルト値: `16384`
 
 ### <code>simplify-metrics</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-simplify-metrics-code-span-class-version-mark-new-in-v6-2-0-span}
@@ -279,14 +279,14 @@ TiKV設定ファイルは、コマンドラインパラメータよりも多く�
 -   返される監視メトリックを簡素化するかどうかを指定します。値を`true`に設定すると、TiKV は一部のメトリックを除外することで、各リクエストに対して返されるデータの量を削減します。
 -   デフォルト値: `false`
 
-### <code>forward-max-connections-per-address</code> <span class="version-mark">v5.0.0 の新機能</span> {#code-forward-max-connections-per-address-code-span-class-version-mark-new-in-v5-0-0-span}
+### <code>forward-max-connections-per-address</code><span class="version-mark">バージョン 5.0.0 の新機能</span> {#code-forward-max-connections-per-address-code-span-class-version-mark-new-in-v5-0-0-span}
 
 -   サービスとサーバーへのリクエスト転送用の接続プールのサイズを設定します。値が小さすぎると、リクエストのレイテンシーと負荷分散に影響します。
 -   デフォルト値: `4`
 
 ## 読み取りプール.統合 {#readpool-unified}
 
-読み取りリクエストを処理する単一スレッドプールに関連するコンフィグレーション項目。このスレッドプールは、バージョン4.0以降、従来のstorageスレッドプールとコプロセッサスレッドプールに代わるものです。
+読み取りリクエストを処理する単一スレッドプールに関するコンフィグレーション項目。このスレッドプールは、バージョン4.0以降、従来のstorageスレッドプールとコプロセッサスレッドプールに代わるものです。
 
 ### <code>min-thread-count</code> {#code-min-thread-count-code}
 
@@ -518,7 +518,7 @@ storageに関するコンフィグレーション項目。
         -   API V2を使用する場合は、同時に`storage.enable-ttl = true`設定する必要があります。API V2はTTL機能をサポートしているため、 [`enable-ttl`](#enable-ttl)明示的にオンにする必要があります。そうしないと、 `storage.enable-ttl`デフォルトで`false`になるため、競合が発生します。
         -   API V2 を有効にすると、古いデータを再利用するために少なくとも 1 つの tidb-server インスタンスをデプロイする必要があります。この tidb-server インスタンスは、読み取りと書き込みのサービスを同時に提供できます。高可用性を確保するため、複数の tidb-server インスタンスをデプロイできます。
         -   API V2にはクライアントのサポートが必要です。詳細については、API V2のクライアントの対応するマニュアルを参照してください。
-        -   v6.2.0以降、RawKVの変更データキャプチャ（CDC）がサポートされました[生のKV CDC](https://tikv.org/docs/latest/concepts/explore-tikv-features/cdc/cdc)を参照してください。
+        -   v6.2.0以降、RawKVの変更データキャプチャ（CDC）がサポートされました[RawKV CDC](https://tikv.org/docs/latest/concepts/explore-tikv-features/cdc/cdc)を参照してください。
 -   デフォルト値: `1`
 
 > **警告：**
@@ -602,7 +602,7 @@ I/O レート リミッターに関連するコンフィグレーション項目
 -   ネットワーク分離の可能性がある場合に、TiKV の PD クライアントがフォロワー経由でリーダーにリクエストを転送するかどうかを制御します。
 -   デフォルト値: `false`
 -   環境に分離されたネットワークが存在する可能性がある場合は、このパラメータを有効にすると、サービスが利用できない期間を短縮できます。
--   分離、ネットワークの中断、またはダウンタイムが発生したかどうかを正確に判断できない場合、このメカニズムを使用すると誤判断のリスクがあり、可用性とパフォーマンスの低下につながります。ネットワーク障害が発生していない場合は、このパラメータを有効にすることは推奨されません。
+-   分離、ネットワーク中断、またはダウンタイムが発生したかどうかを正確に判断できない場合、このメカニズムを使用すると誤判断のリスクがあり、可用性とパフォーマンスの低下につながります。ネットワーク障害が発生していない場合は、このパラメータを有効にすることは推奨されません。
 
 ### <code>endpoints</code> {#code-endpoints-code}
 
@@ -797,7 +797,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 > **警告：**
 >
-> v7.5.7 以降、この構成項目は非推奨となり、 [`gc.auto-compaction.check-interval`](#check-interval-new-in-v757)に置き換えられました。
+> v7.5.7 および v8.5.4 以降では、この構成項目は非推奨となり、 [`gc.auto-compaction.check-interval`](#check-interval-new-in-v757-and-v854)に置き換えられました。
 
 -   RocksDB 圧縮を手動でトリガーする必要があるかどうかを確認する時間間隔。1 `0` 、この機能が無効であることを意味します。
 -   デフォルト値: `"5m"`
@@ -807,7 +807,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 > **警告：**
 >
-> v7.5.7 以降、この構成項目は非推奨になりました。
+> v7.5.7 および v8.5.4 以降では、この構成項目は非推奨です。
 
 -   手動圧縮の各ラウンドで一度にチェックされる領域の数
 -   デフォルト値:
@@ -820,7 +820,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 > **警告：**
 >
-> v7.5.7 以降、この構成項目は非推奨となり、 [`gc.auto-compaction.tombstone-num-threshold`](#tombstone-num-threshold-new-in-v757)に置き換えられました。
+> v7.5.7 および v8.5.4 以降では、この構成項目は非推奨となり、 [`gc.auto-compaction.tombstone-num-threshold`](#tombstone-num-threshold-new-in-v757-and-v854)に置き換えられました。
 
 -   RocksDBの圧縮をトリガーするために必要な墓石の数
 -   デフォルト値: `10000`
@@ -830,7 +830,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 > **警告：**
 >
-> v7.5.7 以降、この構成項目は非推奨となり、 [`gc.auto-compaction.tombstone-percent-threshold`](#tombstone-percent-threshold-new-in-v757)に置き換えられました。
+> v7.5.7 および v8.5.4 以降では、この構成項目は非推奨となり、 [`gc.auto-compaction.tombstone-percent-threshold`](#tombstone-percent-threshold-new-in-v757-and-v854)に置き換えられました。
 
 -   RocksDBの圧縮をトリガーするために必要な墓石の割合
 -   デフォルト値: `30`
@@ -841,7 +841,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 > **警告：**
 >
-> v7.5.7 以降、この構成項目は非推奨となり、 [`gc.auto-compaction.redundant-rows-threshold`](#redundant-rows-threshold-new-in-v757)に置き換えられました。
+> v7.5.7 および v8.5.4 以降では、この構成項目は非推奨となり、 [`gc.auto-compaction.redundant-rows-threshold`](#redundant-rows-threshold-new-in-v757-and-v854)に置き換えられました。
 
 -   RocksDB 圧縮をトリガーするために必要な冗長 MVCC 行の数。
 -   デフォルト値: `50000`
@@ -851,7 +851,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 > **警告：**
 >
-> v7.5.7 以降、この構成項目は非推奨となり、 [`gc.auto-compaction.redundant-rows-percent-threshold`](#redundant-rows-percent-threshold-new-in-v757)に置き換えられました。
+> v7.5.7 および v8.5.4 以降では、この構成項目は非推奨となり、 [`gc.auto-compaction.redundant-rows-percent-threshold`](#redundant-rows-percent-threshold-new-in-v757-and-v854)に置き換えられました。
 
 -   RocksDB 圧縮をトリガーするために必要な冗長 MVCC 行の割合。
 -   デフォルト値: `20`
@@ -1491,7 +1491,7 @@ Titan に関連するコンフィグレーション項目。
 
 ## rocksdb.defaultcf | rocksdb.writecf | rocksdb.lockcf | rocksdb.raftcf {#rocksdb-defaultcf-rocksdb-writecf-rocksdb-lockcf-rocksdb-raftcf}
 
-`rocksdb.defaultcf` `rocksdb.writecf`関連`rocksdb.lockcf`コンフィグレーション項目。
+`rocksdb.defaultcf` `rocksdb.lockcf`関連するコンフィグレーション`rocksdb.writecf` 。
 
 ### <code>block-size</code> {#code-block-size-code}
 
@@ -1619,7 +1619,7 @@ Titan に関連するコンフィグレーション項目。
 -   `lockcf`のデフォルト値: `"128MiB"`
 -   最小値: `0`
 -   単位: KiB|MiB|GiB
--   不要な圧縮を減らすため、 `max-bytes-for-level-base`の値はL0のデータ量とほぼ同じに設定することをお勧めします。たとえば、圧縮方法が「no:no:lz4:lz4:lz4:lz4:lz4」の場合、L0とL1は圧縮されておらず、L0の圧縮のトリガー条件はSSTファイルの数が4（デフォルト値）に達することであるため、 `max-bytes-for-level-base`の値は`write-buffer-size * 4`にする必要があります。L0とL1の両方で圧縮が採用されている場合、memtableから圧縮されたSSTファイルのサイズを把握するには、RocksDBログを分析する必要があります。たとえば、ファイルサイズが32MiBの場合、 `max-bytes-for-level-base`の値を128MiB（ `32 MiB * 4` ）に設定することをお勧めします。
+-   不要な圧縮を減らすために、 `max-bytes-for-level-base`の値はL0のデータ量とほぼ同じに設定することをお勧めします。たとえば、圧縮方法が「no:no:lz4:lz4:lz4:lz4:lz4」の場合、L0とL1は圧縮されておらず、L0の圧縮のトリガー条件はSSTファイルの数が4（デフォルト値）に達することであるため、 `max-bytes-for-level-base`の値は`write-buffer-size * 4`にする必要があります。L0とL1の両方で圧縮が採用されている場合、memtableから圧縮されたSSTファイルのサイズを把握するには、RocksDBログを分析する必要があります。たとえば、ファイルサイズが32MiBの場合、 `max-bytes-for-level-base`の値を128MiB（ `32 MiB * 4` ）に設定することをお勧めします。
 
 ### <code>target-file-size-base</code> {#code-target-file-size-base-code}
 
@@ -2135,7 +2135,7 @@ Raft Engineに関連するコンフィグレーション項目。
 >
 > この設定項目は、 [`enable-log-recycle`](#enable-log-recycle-new-in-v630) `true`に設定されている場合にのみ有効になります。
 
--   Raft Engineのログリサイクル用に空のログファイルを生成するかどうかを決定します。有効にすると、 Raft Engineは初期化中にログリサイクル用の空のログファイルを自動的にバッチで作成し、初期化直後にログリサイクルを有効にします。
+-   Raft Engineのログリサイクル用に空のログファイルを生成するかどうかを決定します。有効にすると、 Raft Engineは初期化中にログリサイクル用の空のログファイルを自動的にバッチで作成し、初期化直後からログリサイクルが有効になります。
 -   デフォルト値: `false`
 
 ### <code>compression-level</code> <span class="version-mark">v7.4.0 の新機能</span> {#code-compression-level-code-span-class-version-mark-new-in-v7-4-0-span}
@@ -2264,42 +2264,42 @@ TiDB Lightning のインポートとBR復元に関連するコンフィグレー
 
 TiKV 自動圧縮の動作を設定します。
 
-### <code>check-interval</code> <span class="version-mark">v7.5.7 の新機能</span> {#code-check-interval-code-span-class-version-mark-new-in-v7-5-7-span}
+### <code>check-interval</code> <span class="version-mark">v7.5.7 および v8.5.4 の新機能</span> {#code-check-interval-code-span-class-version-mark-new-in-v7-5-7-and-v8-5-4-span}
 
 -   TiKVが自動コンパクションをトリガーするかどうかを確認する間隔。この間隔内では、自動コンパクションの条件を満たすリージョンが優先度に基づいて処理されます。この間隔が経過すると、TiKVはリージョン情報を再スキャンし、優先度を再計算します。
 -   デフォルト値: `"300s"`
 
-### <code>tombstone-num-threshold</code> <span class="version-mark">v7.5.7 の新機能</span> {#code-tombstone-num-threshold-code-span-class-version-mark-new-in-v7-5-7-span}
+### <code>tombstone-num-threshold</code> <span class="version-mark">v7.5.7 および v8.5.4 の新機能</span> {#code-tombstone-num-threshold-code-span-class-version-mark-new-in-v7-5-7-and-v8-5-4-span}
 
--   TiKV自動圧縮をトリガーするために必要なRocksDBトゥームストーンの数。トゥームストーンの数がこのしきい値に達するか、トゥームストーンの割合が[`tombstone-percent-threshold`](#tombstone-percent-threshold-new-in-v757)に達すると、TiKVは自動圧縮をトリガーします。
+-   TiKV自動圧縮をトリガーするために必要なRocksDBトゥームストーンの数。トゥームストーンの数がこのしきい値に達するか、トゥームストーンの割合が[`tombstone-percent-threshold`](#tombstone-percent-threshold-new-in-v757-and-v854)に達すると、TiKVは自動圧縮をトリガーします。
 -   この設定項目は、 [圧縮フィルター](/garbage-collection-configuration.md)無効になっている場合にのみ有効になります。
 -   デフォルト値: `10000`
 -   最小値: `0`
 
-### <code>tombstone-percent-threshold</code> <span class="version-mark">v7.5.7 の新機能</span> {#code-tombstone-percent-threshold-code-span-class-version-mark-new-in-v7-5-7-span}
+### <code>tombstone-percent-threshold</code> <span class="version-mark">v7.5.7 および v8.5.4 の新機能</span> {#code-tombstone-percent-threshold-code-span-class-version-mark-new-in-v7-5-7-and-v8-5-4-span}
 
--   TiKV自動圧縮をトリガーするために必要なRocksDBトゥームストーンの割合。トゥームストーンの割合がこのしきい値に達するか、トゥームストーンの数が[`tombstone-num-threshold`](#tombstone-num-threshold-new-in-v757)に達すると、TiKVは自動圧縮をトリガーします。
+-   TiKV自動圧縮をトリガーするために必要なRocksDBトゥームストーンの割合。トゥームストーンの割合がこのしきい値に達するか、トゥームストーンの数が[`tombstone-num-threshold`](#tombstone-num-threshold-new-in-v757-and-v854)に達すると、TiKVは自動圧縮をトリガーします。
 -   この設定項目は、 [圧縮フィルター](/garbage-collection-configuration.md)無効になっている場合にのみ有効になります。
 -   デフォルト値: `30`
 -   最小値: `0`
 -   最大値: `100`
 
-### <code>redundant-rows-threshold</code> <span class="version-mark">v7.5.7 の新機能</span> {#code-redundant-rows-threshold-code-span-class-version-mark-new-in-v7-5-7-span}
+### <code>redundant-rows-threshold</code> <span class="version-mark">v7.5.7 および v8.5.4 の新機能</span> {#code-redundant-rows-threshold-code-span-class-version-mark-new-in-v7-5-7-and-v8-5-4-span}
 
--   TiKV自動コンパクションをトリガーするために必要な冗長MVCC行の数。冗長行には、RocksDBトゥームストーン、TiKVの古いバージョン、およびTiKVの削除トゥームストーンが含まれます。冗長MVCC行の数がこのしきい値に達するか、これらの行の割合が[`redundant-rows-percent-threshold`](#redundant-rows-percent-threshold-new-in-v757)に達すると、TiKVは自動コンパクションをトリガーします。
+-   TiKV自動コンパクションをトリガーするために必要な冗長MVCC行の数。冗長行には、RocksDBトゥームストーン、TiKVの古いバージョン、およびTiKVの削除トゥームストーンが含まれます。冗長MVCC行の数がこのしきい値に達するか、これらの行の割合が[`redundant-rows-percent-threshold`](#redundant-rows-percent-threshold-new-in-v757-and-v854)に達すると、TiKVは自動コンパクションをトリガーします。
 -   この構成項目は、 [圧縮フィルター](/garbage-collection-configuration.md)有効な場合にのみ有効になります。
 -   デフォルト値: `50000`
 -   最小値: `0`
 
-### <code>redundant-rows-percent-threshold</code> <span class="version-mark">v7.5.7 の新機能</span> {#code-redundant-rows-percent-threshold-code-span-class-version-mark-new-in-v7-5-7-span}
+### <code>redundant-rows-percent-threshold</code> <span class="version-mark">v7.5.7 および v8.5.4 の新機能</span> {#code-redundant-rows-percent-threshold-code-span-class-version-mark-new-in-v7-5-7-and-v8-5-4-span}
 
--   TiKV自動コンパクションをトリガーするために必要な冗長MVCC行の割合。冗長行には、RocksDBトゥームストーン、TiKVの古いバージョン、およびTiKVの削除トゥームストーンが含まれます。冗長MVCC行の数が[`redundant-rows-threshold`](#redundant-rows-threshold-new-in-v757)に達するか、これらの行の割合が`redundant-rows-percent-threshold`に達すると、TiKVは自動コンパクションをトリガーします。
+-   TiKV自動コンパクションをトリガーするために必要な冗長MVCC行の割合。冗長行には、RocksDBトゥームストーン、TiKVの古いバージョン、およびTiKVの削除トゥームストーンが含まれます。冗長MVCC行の数が[`redundant-rows-threshold`](#redundant-rows-threshold-new-in-v757-and-v854)に達するか、これらの行の割合が`redundant-rows-percent-threshold`に達すると、TiKVは自動コンパクションをトリガーします。
 -   この構成項目は、 [圧縮フィルター](/garbage-collection-configuration.md)有効な場合にのみ有効になります。
 -   デフォルト値: `20`
 -   最小値: `0`
 -   最大値: `100`
 
-### <code>bottommost-level-force</code> <span class="version-mark">v7.5.7 の新機能</span> {#code-bottommost-level-force-code-span-class-version-mark-new-in-v7-5-7-span}
+### <code>bottommost-level-force</code> <span class="version-mark">v7.5.7 および v8.5.4 の新機能</span> {#code-bottommost-level-force-code-span-class-version-mark-new-in-v7-5-7-and-v8-5-4-span}
 
 -   RocksDB の一番下のファイルに対して圧縮を強制するかどうかを制御します。
 -   デフォルト値: `true`
@@ -2542,7 +2542,7 @@ TiKV がデプロイされているマシンのリソースが限られている
 > **警告：**
 >
 > -   バックグラウンド クォータ リミッターは、TiDB v6.2.0 で導入された実験的機能であり、本番環境での使用は推奨され**ません**。
-> -   この機能は、TiKV がリソースが限られた環境で安定して動作することを保証するため、リソースが限られた環境にのみ適しています。リソースが豊富な環境でこの機能を有効にすると、リクエスト数がピークに達したときにパフォーマンスが低下する可能性があります。
+> -   この機能は、TiKV が安定して動作することを保証するために、リソースが限られた環境にのみ適しています。リソースが豊富な環境でこの機能を有効にすると、リクエスト量がピークに達したときにパフォーマンスが低下する可能性があります。
 
 #### <code>background-cpu-time</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-background-cpu-time-code-span-class-version-mark-new-in-v6-2-0-span}
 
@@ -2577,7 +2577,7 @@ TiKV API V2が有効な場合にタイムスタンプを取得するためのコ
 -   TiKV がこの設定項目で指定された期間に基づいて TSO キャッシュを事前割り当てすることを示します。TiKV は前回の期間に基づいて TSO の使用量を推定し、 `alloc-ahead-buffer`満たす TSO をローカルに要求してキャッシュします。
 -   この設定項目は、TiKV API V2が有効になっている場合にPD障害の許容度を高めるためによく使用されます（ `storage.api-version = 2` ）。
 -   この設定項目の値を大きくすると、TSO消費量とTiKVのメモリオーバーヘッドが増加する可能性があります。十分なTSOを確保するには、PDの[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)の設定項目を減らすことをお勧めします。
--   テストによると、 `alloc-ahead-buffer`がデフォルト値の場合、PD リーダーに障害が発生して別のノードに切り替わると、書き込み要求のレイテンシーが短期的に増加し、QPS が減少 (約 15%) します。
+-   テストによると、 `alloc-ahead-buffer`がデフォルト値の場合、PD リーダーが失敗して別のノードに切り替わると、書き込み要求のレイテンシーが短期的に増加し、QPS が減少 (約 15%) します。
 -   ビジネスへの影響を回避するには、PD で`tso-update-physical-interval = "1ms"`設定し、TiKV で次の設定項目を設定します。
     -   `causal-ts.alloc-ahead-buffer = "6s"`
     -   `causal-ts.renew-batch-max-size = 65536`
@@ -2593,7 +2593,7 @@ TiKV API V2が有効な場合にタイムスタンプを取得するためのコ
 ### <code>renew-batch-min-size</code> {#code-renew-batch-min-size-code}
 
 -   タイムスタンプ要求内の TSO の最小数。
--   TiKVは、前期間のタイムスタンプ消費量に応じて、キャッシュされるタイムスタンプの数を調整します。必要なTSOが少数の場合、TiKVは要求されるTSOの数を`renew-batch-min-size`に達するまで減らします。アプリケーションで大規模なバースト書き込みトラフィックが頻繁に発生する場合は、必要に応じてこのパラメータを大きく設定できます。このパラメータは、単一のtikvサーバーのキャッシュサイズであることに注意してください。パラメータを大きくしすぎると、クラスターに多数のtikvサーバーが含まれる場合、TSOの消費が急激に増加します。
+-   TiKVは、前期間のタイムスタンプ消費量に応じて、キャッシュされるタイムスタンプの数を調整します。必要なTSOが少数の場合、TiKVは要求されるTSOの数を`renew-batch-min-size`に達するまで減らします。アプリケーションで大規模なバースト書き込みトラフィックが頻繁に発生する場合は、このパラメータを必要に応じて大きな値に設定できます。このパラメータは、単一のtikvサーバーのキャッシュサイズであることに注意してください。パラメータを大きすぎる値に設定し、クラスターに多数のtikvサーバーが含まれている場合、TSOの消費が急激に増加します。
 -   Grafanaの**TiKV-RAW** &gt; **Causal timestamp**パネルでは、 **TSOバッチサイズ**は、アプリケーションのワークロードに応じて動的に調整された、ローカルにキャッシュされたタイムスタンプの数です。このメトリックを参照して`renew-batch-min-size`調整できます。
 -   デフォルト値: `100`
 
@@ -2610,7 +2610,7 @@ TiKVstorageレイヤーのリソース制御に関するコンフィグレーシ
 ### <code>enabled</code> <span class="version-mark">v6.6.0 の新機能</span> {#code-enabled-code-span-class-version-mark-new-in-v6-6-0-span}
 
 -   対応するリソースグループのいずれか[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)に基づいて、ユーザーのフォアグラウンド読み取り/書き込み要求のスケジュールを有効にするかどうかを制御します。TiDBリソースグループとリソース制御の詳細については、 [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)参照してください。
--   この設定項目を有効にすると、TiDBで[`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660)有効になっている場合にのみ機能します。この設定項目を有効にすると、TiKVは優先度キューを使用して、フォアグラウンドユーザーからのキューに入れられた読み取り/書き込み要求をスケジュールします。要求のスケジュール優先度は、その要求を受信するリソースグループが既に消費しているリソース量に反比例し、対応するリソースグループのクォータに正比例します。
+-   この設定項目を有効にすると、TiDB で[`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660)有効になっている場合にのみ機能します。この設定項目を有効にすると、TiKV は優先度キューを使用して、フォアグラウンドユーザーからのキューに入れられた読み取り/書き込み要求をスケジュールします。要求のスケジュール優先度は、その要求を受信するリソースグループが既に消費しているリソース量に反比例し、対応するリソースグループのクォータに正比例します。
 -   デフォルト値: `true` 。リソース グループの RU に基づくスケジュールが有効であることを意味します。
 
 ### <code>priority-ctl-strategy</code> <span class="version-mark">v8.4.0 の新機能</span> {#code-priority-ctl-strategy-code-span-class-version-mark-new-in-v8-4-0-span}
