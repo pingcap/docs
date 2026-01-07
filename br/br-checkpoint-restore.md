@@ -89,7 +89,11 @@ During the initial restore, `br` first enters the snapshot restore phase. BR rec
 
 When entering the log restore phase during the initial restore, `br` creates a `__TiDB_BR_Temporary_Log_Restore_Checkpoint` database in the target cluster. This database records checkpoint data, the upstream cluster ID, and the restore time range (`start-ts` and `restored-ts`). If restore fails during this phase, you need to specify the same `start-ts` and `restored-ts` as recorded in the checkpoint database when retrying. Otherwise, `br` will report an error and prompt that the current specified restore time range or upstream cluster ID is different from the checkpoint record. If the restore cluster has been cleaned, you can manually delete the `__TiDB_BR_Temporary_Log_Restore_Checkpoint` database and retry with a different backup.
 
-Before entering the log restore phase during the initial restore, `br` constructs a mapping of upstream and downstream cluster database and table IDs at the `restored-ts` time point. This mapping is persisted in the system table `mysql.tidb_pitr_id_map` to prevent duplicate allocation of database and table IDs. Deleting data from `mysql.tidb_pitr_id_map` might lead to inconsistent PITR restore data.
+Note that before entering the log restore phase during the initial restore, `br` constructs a mapping of upstream and downstream cluster database and table IDs at the `restored-ts` time point. This mapping is persisted in the system table `mysql.tidb_pitr_id_map` to prevent duplicate allocation of database and table IDs. **Deleting data from `mysql.tidb_pitr_id_map` arbitrarily might lead to inconsistent PITR restore data.**
+
+> **Note:**
+>
+> To ensure compatibility with clusters of earlier versions, starting from v8.5.5, if the system table `mysql.tidb_pitr_id_map` does not exist in the restore cluster, the `pitr_id_map` data will be written to the log backup directory. The file name is `pitr_id_maps/pitr_id_map.cluster_id:{downstream-cluster-ID}.restored_ts:{restored-ts}`.
 
 ## Implementation details: store checkpoint data in the external storage
 
@@ -137,7 +141,7 @@ Checkpoint restore operations are divided into two parts: snapshot restore and P
 
 ### Snapshot restore
 
-During the initial restore, `br` creates a `restore-{downstream-cluster-ID}/snapshot` path in the target cluster. The path records checkpoint data, the upstream cluster ID, and the BackupTS of the backup data.
+During the initial restore, `br` creates a `restore-{downstream-cluster-ID}/snapshot` path in the specified external storage. In this path, `br` records checkpoint data, the upstream cluster ID, and the BackupTS of the backup data.
 
 If the restore fails, you can retry it using the same command. `br` will automatically read the checkpoint information from the specified external storage path and resume from the last restore point.
 
@@ -149,6 +153,10 @@ If the restore fails and you try to restore backup data with different checkpoin
 
 During the initial restore, `br` first enters the snapshot restore phase. BR records the checkpoint data, the upstream cluster ID, BackupTS of the backup data (that is, the start time point `start-ts` of log restore) and the restored time point `restored-ts` of log restore in the `restore-{downstream-cluster-ID}/snapshot` path. If restore fails during this phase, you cannot adjust the `start-ts` and `restored-ts` of log restore when resuming checkpoint restore.
 
-When entering the log restore phase during the initial restore, `br` creates a `restore-{downstream-cluster-ID}/log` path in the target cluster. This path records checkpoint data, the upstream cluster ID, and the restore time range (`start-ts` and `restored-ts`). If restore fails during this phase, you need to specify the same `start-ts` and `restored-ts` as recorded in the checkpoint database when retrying. Otherwise, `br` will report an error and prompt that the current specified restore time range or upstream cluster ID is different from the checkpoint record. If the restore cluster has been cleaned, you can manually clean up the checkpoint data in the external storage or specify another external storage path to store checkpoint data, and retry with a different backup.
+When entering the log restore phase during the initial restore, `br` creates a `restore-{downstream-cluster-ID}/log` path in the specified external storage. This path records checkpoint data, the upstream cluster ID, and the restore time range (`start-ts` and `restored-ts`). If restore fails during this phase, you need to specify the same `start-ts` and `restored-ts` as recorded in the checkpoint database when retrying. Otherwise, `br` will report an error and prompt that the current specified restore time range or upstream cluster ID is different from the checkpoint record. If the restore cluster has been cleaned, you can manually clean up the checkpoint data in the external storage or specify another external storage path to store checkpoint data, and retry with a different backup.
 
-Before entering the log restore phase during the initial restore, `br` constructs a mapping of the database and table IDs in the upstream and downstream clusters at the `restored-ts` time point. This mapping is persisted in the system table `mysql.tidb_pitr_id_map` to prevent duplicate allocation of database and table IDs. Deleting data from `mysql.tidb_pitr_id_map` might lead to inconsistent PITR restore data.
+Note that before entering the log restore phase during the initial restore, `br` constructs a mapping of the database and table IDs in the upstream and downstream clusters at the `restored-ts` time point. This mapping is persisted in the checkpoint storage with the file name `pitr_id_maps/pitr_id_map.cluster_id:{downstream-cluster-ID}.restored_ts:{restored-ts}` to prevent duplicate allocation of database and table IDs. **Deleting files from the directory `pitr_id_maps` arbitrarily might lead to inconsistent PITR restore data.**
+
+> **Note:**
+>
+> To ensure compatibility with clusters of earlier versions, starting from v8.5.5, if the system table `mysql.tidb_pitr_id_map` does not exist in the restore cluster and the `--checkpoint-storage` parameter is not specified, the `pitr_id_map` data will be written to the log backup directory. The file name is `pitr_id_maps/pitr_id_map.cluster_id:{downstream-cluster-ID}.restored_ts:{restored-ts}`.
