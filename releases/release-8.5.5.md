@@ -205,10 +205,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + PD <!--tw@Oreoxmt: 4 notes-->
 
-    - 优化了高基数指标 [#9357](https://github.com/tikv/pd/issues/9357) @[rleungx](https://github.com/rleungx)
-    - 优化了时间戳推进和选举逻辑 [#9981](https://github.com/tikv/pd/issues/9981) @[bufferflies](https://github.com/bufferflies)
-    - 支持批量设置 TiKV 的 store limit [#9970](https://github.com/tikv/pd/issues/9970) @[bufferflies](https://github.com/bufferflies)
-    - `pd_cluster_status` 增加了 store 标签 [#9855](https://github.com/tikv/pd/issues/9855) @[SerjKol80](https://github.com/SerjKol80)
+    - Optimize metrics with high cardinality [#9357](https://github.com/tikv/pd/issues/9357) @[rleungx](https://github.com/rleungx)
+    - Optimize the logic for timestamp advancement and leader election [#9981](https://github.com/tikv/pd/issues/9981) @[bufferflies](https://github.com/bufferflies)
+    - Support batch configuration of TiKV store limits [#9970](https://github.com/tikv/pd/issues/9970) @[bufferflies](https://github.com/bufferflies)
+    - Add the `store` label to the `pd_cluster_status` metric [#9855](https://github.com/tikv/pd/issues/9855) @[SerjKol80](https://github.com/SerjKol80)
 
 + Tools
 
@@ -255,13 +255,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + TiKV <!--tw@Oreoxmt: 7 notes-->
 
-    - Fix the bug that analyze scan kv operation metric is always 0 [#19206](https://github.com/tikv/tikv/issues/19206) @[glorv](https://github.com/glorv)
-    - Fix the bug that pd heartbeat may report wrong region size/keys statistics data after leader change. [#19180](https://github.com/tikv/tikv/issues/19180) @[glorv](https://github.com/glorv)
-    - Fixes unsafe recovery getting stuck by removing tombstoned TiFlash learners from the unsafe recovery demotion list. [#18458](https://github.com/tikv/tikv/issues/18458) @[v01dstar](https://github.com/v01dstar)
-    - Fixes an issue where snapshots could be canceled indefinitely under continuous writes, blocking replica recovery. [#18872](https://github.com/tikv/tikv/issues/18872) @[exit-code-1](https://github.com/exit-code-1)
-    - Fixes compaction slowdowns caused by increased flow-control thresholds. [#18708](https://github.com/tikv/tikv/issues/18708) @[hhwyt](https://github.com/hhwyt)
-    - Fix the bug that pd heartbeat may report wrong region size/keys statistics data after leader change. [#19180](https://github.com/tikv/tikv/issues/19180) @[glorv](https://github.com/glorv)
-    - Fixes a corner case where Raft peers could enter hibernation prematurely, causing them to remain busy and block leader transfers after TiKV restart. [#19203](https://github.com/tikv/tikv/issues/19203) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Fix the issue that the `KV Cursor Operations` metric for analyze requests is always `0` [#19206](https://github.com/tikv/tikv/issues/19206) @[glorv](https://github.com/glorv)
+    - Fix the issue that PD heartbeats might report incorrect Region size or key statistics after a leader change [#19180](https://github.com/tikv/tikv/issues/19180) @[glorv](https://github.com/glorv)
+    - Fix the issue that unsafe recovery gets stuck by removing tombstone TiFlash learners from the unsafe recovery demotion list [#18458](https://github.com/tikv/tikv/issues/18458) @[v01dstar](https://github.com/v01dstar)
+    - Fix the issue that snapshots might be canceled indefinitely during continuous writes, which blocks replica recovery [#18872](https://github.com/tikv/tikv/issues/18872) @[exit-code-1](https://github.com/exit-code-1)
+    - Fix the issue that compaction slows down due to increased flow-control thresholds [#18708](https://github.com/tikv/tikv/issues/18708) @[hhwyt](https://github.com/hhwyt)
+    - Fix the issue that Raft peers might enter hibernation prematurely in a corner case, causing them to remain busy and block leader transfers after a TiKV restart [#19203](https://github.com/tikv/tikv/issues/19203) @[LykxSassinator](https://github.com/LykxSassinator)
 
 + PD <!--tw@qiancai: 7 notes-->
 
@@ -283,13 +282,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     + Backup & Restore (BR) <!--tw@Oreoxmt: 7 notes-->
 
-        - Fixed an issue that memory usage may be unacceptable when log backup enabled and many regions in cluster. [#18719](https://github.com/tikv/tikv/issues/18719) @[YuJuncen](https://github.com/YuJuncen)
-        - Fixed an issue that Azure SDK cannot found suitable key from environment. [#18206](https://github.com/tikv/tikv/issues/18206) @[YuJuncen](https://github.com/YuJuncen)
-        - Fixed an issue that foreign keys cannot be properly fixed during `restore point`. [#61642](https://github.com/pingcap/tidb/issues/61642) @[Leavrth](https://github.com/Leavrth)
-        - Fixed an issue that restore cannot be performed if system table collations are incompatible between backup and target cluster by introducing the parameter --sys-check-collation to support restore privileges tables from v6.5 to v7.5 [#64667](https://github.com/pingcap/tidb/issues/64667) @[Leavrth](https://github.com/Leavrth)
-        - Fixed an issue that caused `restore log` cannot be performed after a failed `restore point` though the latter is safe to be execued. [#64908](https://github.com/pingcap/tidb/issues/64908) @[RidRisR](https://github.com/RidRisR)
-        - Fixed an issue that Azure managed identity is unavailable.[#19006](https://github.com/tikv/tikv/issues/19006) @[RidRisR](https://github.com/RidRisR)
-        - Fixed an issue that may cause `restore point` from checkpoint panic when the log backup was mixed with a full backup. [#58685](https://github.com/pingcap/tidb/issues/58685) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that enabling log backup causes excessive memory usage when the cluster contains many Regions [#18719](https://github.com/tikv/tikv/issues/18719) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that the Azure SDK cannot find a suitable key from the environment [#18206](https://github.com/tikv/tikv/issues/18206) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that foreign keys cannot be properly restored during `restore point` [#61642](https://github.com/pingcap/tidb/issues/61642) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that restore fails if system table collations are incompatible between the backup and target cluster by adding the `--sys-check-collation` parameter to support restoring privilege tables from v6.5 to v7.5 [#64667](https://github.com/pingcap/tidb/issues/64667) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that `restore log` cannot be performed after a failed `restore point`, even when the operation is safe [#64908](https://github.com/pingcap/tidb/issues/64908) @[RidRisR](https://github.com/RidRisR)
+        - Fix the issue that Azure Managed Identity is unavailable [#19006](https://github.com/tikv/tikv/issues/19006) @[RidRisR](https://github.com/RidRisR)
+        - Fix the issue that `restore point` from a checkpoint might panic when log backup data is mixed with a full backup [#58685](https://github.com/pingcap/tidb/issues/58685) @[YuJuncen](https://github.com/YuJuncen)
 
     + TiCDC <!--tw@qiancai: 6 notes-->
 
