@@ -24,14 +24,14 @@ TiDB Toolkit contains frequently used TiDB tools, such as data export tool Dumpl
 You can download TiDB Toolkit from the following link:
 
 ```
-https://download.pingcap.org/tidb-community-toolkit-{version}-linux-amd64.tar.gz
+https://download.pingcap.com/tidb-community-toolkit-{version}-linux-amd64.tar.gz
 ```
 
-`{version}` in the link indicates the version number of TiDB. For example, the download link for `v6.1.7` is `https://download.pingcap.org/tidb-community-toolkit-v6.1.7-linux-amd64.tar.gz`.
+`{version}` in the link indicates the version number of TiDB. For example, the download link for `v6.1.7` is `https://download.pingcap.com/tidb-community-toolkit-v6.1.7-linux-amd64.tar.gz`.
 
 > **Note:**
 >
-> If you need to download the [PD Control](/pd-control.md) tool `pd-ctl`, download the TiDB installation package separately from `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz`.
+> If you need to download the [PD Control](/pd-control.md) tool `pd-ctl`, download the TiDB installation package separately from `https://download.pingcap.com/tidb-community-server-{version}-linux-amd64.tar.gz`.
 
 ## TiDB Toolkit description
 

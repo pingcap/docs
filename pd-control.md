@@ -23,11 +23,11 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 
 | Installation package                                                     | OS    | Architecture | SHA256 checksum                                                  |
 | :------------------------------------------------------------------------ | :---- | :----------- | :--------------------------------------------------------------- |
-| `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64        | `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.sha256` |
+| `https://download.pingcap.com/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64        | `https://download.pingcap.com/tidb-community-server-{version}-linux-amd64.sha256` |
 
 > **Note:**
 >
-> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v6.1.7`, the package download link is `https://download.pingcap.org/tidb-community-server-v6.1.7-linux-amd64.tar.gz`.
+> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v6.1.7`, the package download link is `https://download.pingcap.com/tidb-community-server-v6.1.7-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
