@@ -1,13 +1,13 @@
 ---
 title: SHOW AFFINITY
-summary: Overview of using SHOW AFFINITY in TiDB database.
+summary: An overview of the usage of SHOW AFFINITY for the TiDB database.
 ---
 
-# SHOW AFFINITY <span class="version-mark">Introduced in v8.5.5 and v9.0.0</span>
+# SHOW AFFINITY <span class="version-mark">New in v8.5.5 and v9.0.0</span>
 
-The `SHOW AFFINITY` statement is used to view the [affinity](/table-affinity.md) scheduling information of tables configured with the `AFFINITY` option, and the target replica distribution currently recorded by PD.
+The `SHOW AFFINITY` statement shows [affinity](/table-affinity.md) scheduling information for tables configured with the `AFFINITY` option, as well as the target replica distribution currently recorded by PD.
 
-## Grammar Diagram
+## Synopsis
 
 ```ebnf+diagram
 ShowAffinityStmt ::=
@@ -18,7 +18,7 @@ ShowAffinityStmt ::=
 
 ## Examples
 
-The following examples create two tables with affinity scheduling enabled and view their scheduling information:
+The following examples create two tables with affinity scheduling enabled and show how to view their scheduling information:
 
 ```sql
 CREATE TABLE t1 (a INT) AFFINITY = 'table';
@@ -41,21 +41,21 @@ The example output is as follows:
 
 The meaning of each column is as follows:
 
-- `Leader_store_id`, `Voter_store_ids`: The TiKV Store IDs where PD records the target Leader replica and Voter replicas for this table or partition. If the affinity group has not yet determined the target replica locations or if [`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-从-v855-和-v900-版本开始引入) is `0`, it displays as `NULL`.
-- `Status`: Indicates the current status of affinity scheduling. Possible values are:
-    - `Pending`: PD has not yet performed affinity scheduling for this table or partition (e.g., when Leader or Voter is not determined).
+- `Leader_store_id`, `Voter_store_ids`: the IDs of TiKV stores recorded by PD, indicating which stores host the target Leader and Voter replicas for the table or partitions. If the target replica locations for the affinity group are not determined, or if [`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855-and-v900) is set to `0`, the value is displayed as `NULL`.
+- `Status`: indicates the current status of affinity scheduling. Possible values are:
+    - `Pending`: PD has not started affinity scheduling for the table or partition, such as when Leaders or Voters are not yet determined.
     - `Preparing`: PD is scheduling Regions to meet affinity requirements.
-    - `Stable`: All Regions have reached the target distribution.
-- `Region_count`: The current number of Regions in this affinity group.
-- `Affinity_region_count`: The number of Regions that currently satisfy the affinity replica distribution requirements.
-    - When `Affinity_region_count` is less than `Region_count`, it indicates that some Regions have not yet completed replica scheduling based on affinity.
-    - When `Affinity_region_count` equals `Region_count`, it indicates that the Region replica migration scheduling based on affinity is complete, meaning that the distribution of all Regions meets the affinity requirements. However, this does not imply that related Region merge operations are complete.
+    - `Stable`: all Regions have reached the target distribution.
+- `Region_count`: the current number of Regions in the affinity group.
+- `Affinity_region_count`: the number of Regions that currently meet the affinity replica distribution requirements.
+    - When `Affinity_region_count` is less than `Region_count`, it indicates that some Regions have not yet completed affinity-replica scheduling.
+    - When `Affinity_region_count` equals `Region_count`, it indicates that affinity-replica scheduling is complete, meaning the distribution of all related Regions meets the affinity requirements. However, it does not indicate that related Region merge operations are completed.
 
-## MySQL Compatibility
+## MySQL compatibility
 
-This statement is an extension of MySQL syntax by TiDB.
+This statement is a TiDB extension to MySQL syntax.
 
-## See Also
+## See also
 
 - [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)
 - [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)

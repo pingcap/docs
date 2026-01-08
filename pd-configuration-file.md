@@ -294,7 +294,7 @@ Configuration items related to scheduling
 
 ### `max-affinity-merge-region-size` <span class="version-mark">Introduced in versions v8.5.5 and v9.0.0</span>
 
-+ Controls the threshold for automatically merging small adjacent Regions that belong to the same [affinity](/table-affinity.md) group. When a Region belongs to an affinity group and its size is less than this configuration value, PD will attempt to merge this Region with other small adjacent Regions within the same affinity group to reduce the number of Regions and maintain the affinity effect.
++ Controls the threshold for automatically merging small adjacent Regions that belong to the same [affinity](/table-affinity.md) group. When a Region belongs to an affinity group and its size is smaller than this threshold, PD attempts to merge this Region with other small adjacent Regions in the same affinity group to reduce the number of Regions and maintain the affinity effect.
 + Setting it to `0` disables the automatic merging of small adjacent Regions within an affinity group.
 + Default value: 256
 + Unit: MiB
@@ -381,8 +381,8 @@ Configuration items related to scheduling
 
 ### `affinity-schedule-limit` <span class="version-mark">Introduced in versions v8.5.5 and v9.0.0</span>
 
-+ Controls the number of concurrent [affinity](/table-affinity.md) scheduling tasks. Setting it to `0` disables affinity scheduling.
-+ Default value: 0
++ Controls the number of [affinity](/table-affinity.md) scheduling tasks that can be performed concurrently. Setting it to `0` disables affinity scheduling.
++ Default value: `0`
 
 ### `high-space-ratio`
 
