@@ -157,7 +157,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Behavior changes
 
-* When using [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) with [Global Sort](/tidb-global-sort.md) enabled, primary key or unique index conflicts are now automatically resolved by removing all conflicting rows (none of the conflicting rows are preserved), instead of causing the task to fail. The number of conflicted rows appears in the `Result_Message` column of `SHOW IMPORT JOBS` output, and detailed conflict information is stored in cloud storage. For more information, see [`IMPORT INTO` conflict resolution](/sql-statements/sql-statement-import-into.md#conflict-resolution).
 
 ### MySQL compatibility
 
@@ -175,7 +174,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 | -------- | -------- | -------- | -------- |
 | PD | [`schedule.max-affinity-merge-region-size`](https://docs.pingcap.com/tidb/v8.5/pd-configuration-file#max-affinity-merge-region-size-new-in-v855) | Newly added | Controls the threshold for automatically merging adjacent small Regions within the same [affinity group](https://docs.pingcap.com/tidb/v8.5/table-affinity). The default value is `256`, in MiB. |
 | PD  | [`schedule.affinity-schedule-limit`](https://docs.pingcap.com/tidb/v8.5/pd-configuration-file#affinity-schedule-limit-new-in-v855) | Newly added | Controls the number of [affinity](https://docs.pingcap.com/tidb/v8.5/table-affinity) scheduling tasks that can be performed concurrently. The default value is `0`, which means that affinity scheduling is disabled by default. |
-| TiKV | [`performance.enable-async-batch-get`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#enable-async-batch-get-new-in-v855)  | Newly added | Controls whether TiDB uses asynchronous mode to execute the Batch Get operator. The default value is `true`. |
+| TiDB | [`performance.enable-async-batch-get`](https://docs.pingcap.com/tidb/v8.5/tidb-configuration-file#enable-async-batch-get-new-in-v855)  | Newly added | Controls whether TiDB uses asynchronous mode to execute the Batch Get operator. The default value is `true`. |
 | TiKV | [`server.graceful-shutdown-timeout`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#graceful-shutdown-timeout-new-in-v855) | Newly added | Controls the timeout duration for graceful shutdown of TiKV. The default value is `20s`. |
 | TiKV | [`server.inspect-network-interval`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#inspect-network-interval-new-in-v855) | Newly added | Controls the interval at which the TiKV HealthChecker actively performs network detection to PD and other TiKV nodes. The default value is `100ms`. |
 | BR | [`--checkpoint-storage`](/br/br-checkpoint-restore.md#implementation-details-store-checkpoint-data-in-the-downstream-cluster) | Newly added | Specifies an external storage for checkpoint data. |
