@@ -1,11 +1,11 @@
 ---
 title: TiDB Cloud API v1beta1
-summary: Learn about what is TiDB Cloud API, its features, and how to use API to manage your TiDB Cloud clusters.
+summary: Learn about what TiDB Cloud API is, its features, and how to use the API to manage your TiDB Cloud clusters.
 ---
 
 # TiDB Cloud API v1beta1 Overview
 
-TiDB Cloud API v1beta1 is a RESTful API that provides you with programmatic access to manage administrative objects within TiDB Cloud. Through this API, you can automatically and efficiently manage resources such as Projects, Clusters, Backups, Restores, Imports, Billings, and resources in the [Data Service](/tidb-cloud/data-service-overview.md).
+The TiDB Cloud API v1beta1 is a RESTful API that gives you programmatic access to manage administrative objects within TiDB Cloud. Through this API, you can automatically and efficiently manage cluster-level resources (such as clusters and branches) and organization- or project-level resources (such as billing, Data Service, and IAM).
 
 Currently, you can use the following v1beta1 APIs to manage the resources in TiDB Cloud:
 

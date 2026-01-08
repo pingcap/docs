@@ -7,7 +7,7 @@ summary: Learn the API of TiDB Operator services.
 
 [TiDB Operator](/tidb-operator/tidb-operator-overview.md) is an automatic operation system for TiDB clusters on Kubernetes. It provides full life-cycle management for TiDB including deployment, upgrades, scaling, backup, fail-over, and configuration changes. With TiDB Operator, TiDB can run seamlessly in the Kubernetes clusters deployed on a public or private cloud.
 
-To manage TiDB clusters on Kubernetes, you can use the following  TiDB Operator APIs:
+To manage TiDB clusters on Kubernetes, you can use the following TiDB Operator APIs:
 
 - [Backup](https://github.com/pingcap/tidb-operator/blob/v1.6.4/docs/api-references/docs.md#backup)
 - [BackupSchedule](https://github.com/pingcap/tidb-operator/blob/v1.6.4/docs/api-references/docs.md#backupschedule)

@@ -1,6 +1,6 @@
 ---
 title: TiProxy API Overview
-summary: Learn the API of TiCDC services.
+summary: Learn about the API for TiProxy.
 ---
 
 # TiProxy API Overview

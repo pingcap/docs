@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud API Overview
-summary: Learn about what is TiDB Cloud API, its features, and how to use API to manage your TiDB Cloud clusters.
+summary: Learn about what TiDB Cloud API is, its features, and how to use the API to manage your TiDB Cloud clusters.
 ---
 
 # TiDB Cloud API Overview (Beta)
@@ -15,7 +15,7 @@ The API has the following features:
 
 - **JSON entities.** All entities are expressed in JSON.
 - **HTTPS-only.** You can only access the API via HTTPS, ensuring all the data sent over the network is encrypted with TLS.
-- **Key-based access and digest authentication.** Before you access TiDB Cloud API, you must generate an API key, refer to [API Key Management](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-key-management). All requests are authenticated through [HTTP Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication), ensuring the API key is never sent over the network.
+- **Key-based access and digest authentication.** Before you access the TiDB Cloud API, you must generate an API key. For more information, see [API Key Management](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-key-management). All requests are authenticated through [HTTP Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication), ensuring the API key is never sent over the network.
 
 The TiDB Cloud API is available in two versions:
 

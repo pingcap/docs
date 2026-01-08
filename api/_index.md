@@ -19,12 +19,12 @@ TiDB provides various APIs for querying and operating clusters, managing data re
 
 ## TiDB Self-Managed API
 
-TiDB Self-Managed provides various APIs for TiDB tools to help you to manage cluster components, monitor system status, and control data replication workflows without relying solely on command-line tools.
+TiDB Self-Managed provides various APIs for TiDB tools to help you manage cluster components, monitor system status, and control data replication workflows without relying solely on command-line tools.
 
 | API | Description |
 | --- | --- |
 | [TiProxy API](/tiproxy/tiproxy-api.md) | Access TiProxy configuration, health status, and monitoring data. |
 | [Data Migration API](/dm/dm-open-api.md) | Manage DM-master and DM-worker nodes, data sources, and data replication tasks. |
 | [Monitoring API](/tidb-monitoring-api.md) | Get TiDB server running status, table storage information, and PD cluster details. |
-| [TiCDC API](/ticdc/ticdc-open-api-v2.md) | Query TiCDC node status and manage replication tasks including create, pause, resume, and update operations. |
+| [TiCDC API](/ticdc/ticdc-open-api-v2.md) | Query TiCDC node status and manage replication tasks, including creating, pausing, resuming, and updating operations. |
 | [TiDB Operator API](https://github.com/pingcap/tidb-operator/blob/v1.6.4/docs/api-references/docs.md) | Manage TiDB clusters on Kubernetes, including deployment, upgrades, scaling, backup, and fail-over. |

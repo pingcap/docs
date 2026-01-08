@@ -7,7 +7,7 @@ summary: Learn the API of TiCDC services.
 
 [TiCDC](/ticdc/ticdc-overview.md) is a tool used to replicate incremental data from TiDB. Specifically, TiCDC pulls TiKV change logs, sorts captured data, and exports row-based incremental data to downstream databases.
 
-TiCDC provides the following two version of APIs for querying and operating the TiCDC cluster:
+TiCDC provides the following two versions of APIs for querying and operating the TiCDC cluster:
 
 - [TiCDC OpenAPI v1](/ticdc/ticdc-open-api.md)
 - [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md)
