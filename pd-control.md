@@ -23,12 +23,12 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 
 | Installation package                                                                    | OS | Architecture | SHA256 checksum                                                    |
 | :------------------------------------------------------------------------ | :------- | :---- | :--------------------------------------------------------------- |
-| `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz.sha256` |
-| `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz` (pd-ctl) | Linux | arm64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz.sha256` |
+| `https://download.pingcap.com/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64 | `https://download.pingcap.com/tidb-community-server-{version}-linux-amd64.tar.gz.sha256` |
+| `https://download.pingcap.com/tidb-community-server-{version}-linux-arm64.tar.gz` (pd-ctl) | Linux | arm64 | `https://download.pingcap.com/tidb-community-server-{version}-linux-arm64.tar.gz.sha256` |
 
 > **Note:**
 >
-> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v7.1.5` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v7.1.5-linux-amd64.tar.gz`.
+> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v7.1.5` in the `amd64` architecture is `https://download.pingcap.com/tidb-community-server-v7.1.5-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
