@@ -195,12 +195,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - 将 `tidb_analyze_column_options` 的默认值设置为 `all` [#64992](https://github.com/pingcap/tidb/issues/64992) @[0xPoe](https://github.com/0xPoe)
     - 优化 IndexHashJoin 的执行方式，在部分 JOIN 场景下采用增量处理以避免一次性加载大量数据，显著降低内存占用并提升执行性能 [#63303](https://github.com/pingcap/tidb/issues/63303) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
     - (dup): release-9.0.0.md > Improvements> TiDB - Optimize the CPU usage of internal SQL statements in the Distributed eXecution Framework (DXF) [#59344](https://github.com/pingcap/tidb/issues/59344) @[D3Hunter](https://github.com/D3Hunter)
+    - Improve the performance of the expression.Contains function [#61373](https://github.com/pingcap/tidb/issues/61373) @[hawkingrei](https://github.com/hawkingrei)
 
 + TiKV <!--tw@lilin90: 3 notes-->
 
-    - Introduces CPU-aware scaling for the unified read pool to avoid CPU starvation under hot read workloads. [#18464](https://github.com/tikv/tikv/issues/18464) @[mittalrishabh](https://github.com/mittalrishabh)
-    - Adds network latency awareness to slow score to avoid scheduling leaders on TiKV nodes with unstable network conditions. [#18797](https://github.com/tikv/tikv/issues/18797) @[okJiang](https://github.com/okJiang)
-    - Optimizes hibernate behavior by allowing leaders to enter hibernation once a majority vote is reached, without waiting for down non-voter peers. [#19070](https://github.com/tikv/tikv/issues/19070) @[jiadebin](https://github.com/jiadebin)
+    - Introduce CPU-aware scaling for the unified read pool to avoid CPU starvation under hot read workloads [#18464](https://github.com/tikv/tikv/issues/18464) @[mittalrishabh](https://github.com/mittalrishabh)
+    - Add network latency awareness to slow score to avoid scheduling leaders on TiKV nodes with unstable network conditions [#18797](https://github.com/tikv/tikv/issues/18797) @[okJiang](https://github.com/okJiang)
+    - Optimize hibernate behavior by allowing leaders to enter hibernation once a majority vote is reached, without waiting for down non-voter peers [#19070](https://github.com/tikv/tikv/issues/19070) @[jiadebin](https://github.com/jiadebin)
     - (dup): release-9.0.0.md > Improvements> TiKV - Throttle BR log restore requests when TiKV memory usage is high to prevent TiKV OOM [#18124](https://github.com/tikv/tikv/issues/18124) @[3pointer](https://github.com/3pointer)
 
 + PD <!--tw@Oreoxmt: 4 notes-->
@@ -220,20 +221,19 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + TiDB <!--tw@lilin90: the following 15 notes-->
 
-    - 修复 TiDB 初始化时无法读取最新的 tidb_mem_quota_binding_cache 变量值初始化 binding 的问题 [#65381](https://github.com/pingcap/tidb/issues/65381) @[qw4990](https://github.com/qw4990)
-    - 修复了在 `extractBestCNFItemRanges` 中错误地跳过候选项导致查询范围计算不精确的问题 [#62547](https://github.com/pingcap/tidb/issues/62547) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复了 `plan replayer` 无法加载 binding 的问题 [#64811](https://github.com/pingcap/tidb/issues/64811) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复了 `PointGet` 在有足够内存时仍不复用 chunk 导致不必要内存分配的问题 [#63920](https://github.com/pingcap/tidb/issues/63920) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复了 `LogicalProjection.DeriveStats` 分配过多内存的问题 [#63810](https://github.com/pingcap/tidb/issues/63810) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复了当查询发生 panic 时 `plan replayer` 无法 dump 的问题 [#64835](https://github.com/pingcap/tidb/issues/64835) @[hawkingrei](https://github.com/hawkingrei)
-    - 提升了 `expression.Contains` 函数的性能 [#61373](https://github.com/pingcap/tidb/issues/61373) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复当计划缓存开启时，关联子查询可能产生非预期的全表扫描的问题 [#64645](https://github.com/pingcap/tidb/issues/64645) @[winoros](https://github.com/winoros)
-    - 修复系统表会污染表健康度监控的问题 [#57176](https://github.com/pingcap/tidb/issues/57176), [#64080](https://github.com/pingcap/tidb/issues/64080) @[0xPoe](https://github.com/0xPoe)
-    - 修复 auto-anlyze 关闭之后 `mysql.tidb_ddl_notifier` 不能被清理的问题 [#64038](https://github.com/pingcap/tidb/issues/64038) @[0xPoe](https://github.com/0xPoe)
-    - 修复了在 `newLocalColumnPool` 中重复分配 column 的问题 [#63809](https://github.com/pingcap/tidb/issues/63809) @[hawkingrei](https://github.com/hawkingrei)
-    - 减少无效的 sync load 加载失败警告日志 [#63880](https://github.com/pingcap/tidb/issues/63880) @[0xPoe](https://github.com/0xPoe)
-    - 修复手动 kill 正在执行事务的 connection 可能导致 tidb 发生 panic 异常退出的问题 [#63956](https://github.com/pingcap/tidb/issues/63956) @[wshwsh12](https://github.com/wshwsh12)
-    - 修复缓存表在走 TiFlash 副本读取时可能出现的 goroutine 和内存泄漏问题 [#63329](https://github.com/pingcap/tidb/issues/63329) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - Fix the issue that TiDB fails to read the latest value of the tidb_mem_quota_binding_cache variable for initialization during the startup process [#65381](https://github.com/pingcap/tidb/issues/65381) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that candidate items are incorrectly skipped in extractBestCNFItemRanges, leading to inaccurate query range calculation [#62547](https://github.com/pingcap/tidb/issues/62547) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that `plan replayer` cannot load the binding [#64811](https://github.com/pingcap/tidb/issues/64811) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that `PointGet` fails to reuse chunks even when memory is sufficient, leading to unnecessary memory allocations [#63920](https://github.com/pingcap/tidb/issues/63920) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that `LogicalProjection.DeriveStats` consumes excessive memory during allocation [#63810](https://github.com/pingcap/tidb/issues/63810) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that TiDB fails to dump the plan replayer when a query panics [#64835](https://github.com/pingcap/tidb/issues/64835) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that correlated subqueries might trigger unexpected full table scans when the Plan Cache is enabled [#64645](https://github.com/pingcap/tidb/issues/64645) @[winoros](https://github.com/winoros)
+    - Fix the issue that system tables cause incorrect calculation of table health metrics [#57176](https://github.com/pingcap/tidb/issues/57176), [#64080](https://github.com/pingcap/tidb/issues/64080) @[0xPoe](https://github.com/0xPoe)
+    - Fix the issue that the `mysql.tidb_ddl_notifier` table cannot be cleaned up when automatic statistics updates are disabled (`tidb_enable_auto_analyze = OFF`) [#64038](https://github.com/pingcap/tidb/issues/64038) @[0xPoe](https://github.com/0xPoe)
+    - Fix the issue that columns are redundantly allocated in `newLocalColumnPool` [#63809](https://github.com/pingcap/tidb/issues/63809) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that there are redundant `syncload` failure warning logs [#63880](https://github.com/pingcap/tidb/issues/63880) @[0xPoe](https://github.com/0xPoe)
+    - Fix the issue that TiDB might panic and exit unexpectedly when a connection that runs an active transaction is manually terminated [#63956](https://github.com/pingcap/tidb/issues/63956) @[wshwsh12](https://github.com/wshwsh12)
+    - Fix the issue that goroutine and memory leaks might occur when a cached table reads from a TiFlash replica [#63329](https://github.com/pingcap/tidb/issues/63329) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - Fix the issue that foreign key is not updated after running `ALTER TABLE child CHANGE COLUMN` to modify a column [#issue](https://github.com/pingcap/tidb/issues/59705) @[fzzf678](https://github.com/fzzf678) <!--tw@hfxsd: the following 16 notes-->
     - Fix the issue that an error occurs when decoding the `RENAME TABLE` job arg from an earlier version [#64413](https://github.com/pingcap/tidb/issues/64413) @[joechenrh](https://github.com/joechenrh)
     - Fix the issue that the auto increment is not rebased if BR restore fails [#60804](https://github.com/pingcap/tidb/issues/60804) @[joechenrh](https://github.com/joechenrh)
