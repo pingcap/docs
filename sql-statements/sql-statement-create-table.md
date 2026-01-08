@@ -173,12 +173,25 @@ The following *table_options* are supported. Other options such as `AVG_ROW_LENG
 | `CHARACTER SET` | To specify the [character set](/character-set-and-collation.md) for the table | `CHARACTER SET` =  'utf8mb4' |
 | `COLLATE` | To specify the character set collation for the table | `COLLATE` = 'utf8mb4_bin' |
 | `COMMENT` | The comment information | `COMMENT` = 'comment info' |
-| `AFFINITY` | Enables affinity scheduling for a table or partition. For non-partitioned tables, it can be set to `'table'`; for partitioned tables, it can be set to `'partition'`. Setting it to `'none'` or leaving it empty disables affinity scheduling. | `AFFINITY` = 'table' |
+| `AFFINITY` | Enables affinity scheduling for a table or partition. It can be set to `'table'` for non-partitioned tables and `'partition'` for partitioned tables. Setting it to `'none'` or leaving it empty disables affinity scheduling. | `AFFINITY` = 'table' |
+
+<CustomContent platform="tidb">
 
 > **Note:**
 >
 > - The `split-table` configuration option is enabled by default. When it is enabled, a separate Region is created for each newly created table. For details, see [TiDB configuration file](/tidb-configuration-file.md).
-> - When using `AFFINITY`, changing the partitioning scheme of a table (such as adding, deleting, reorganizing, or swapping partitions) is not supported, nor is setting this option on temporary tables or views.
+> - Before using `AFFINITY`, note that modifying the partitioning scheme (such as adding, dropping, reorganizing, or swapping partitions) of a table with affinity enabled is not supported, and configuring `AFFINITY` on temporary tables or views is not supported.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> - TiDB creates a separate Region for each newly created table.
+> - Before using `AFFINITY`, note that modifying the partitioning scheme (such as adding, dropping, reorganizing, or swapping partitions) of a table with affinity enabled is not supported, and configuring `AFFINITY` on temporary tables or views is not supported.
+
+</CustomContent>
 
 ## Examples
 
