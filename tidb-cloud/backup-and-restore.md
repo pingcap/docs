@@ -190,7 +190,7 @@ To export a specific backup to cloud storage, such as and Google Cloud Storage, 
 
 2. Locate the backup you want to export, and click **...** > **Export** in the **Action** column.
 
-3. In the **Export Backup to AWS S3** dialog, enter the **Folder URI**, and then select a region for the backup bucket.
+3. In the **Export Backup to Amazon S3** dialog, enter the **Folder URI**, and then select a bucket region for the backup bucket.
 
 4. Click **Generate Command** to see the command for configuring permissions.
 
