@@ -112,7 +112,7 @@
     - [Vector Index](/vector-search/vector-search-index.md)
   - [Improve Performance](/vector-search/vector-search-improve-performance.md)
   - [Limitations](/vector-search/vector-search-limitations.md)
-- Transaction
+- Transactions
   - [Overview](/develop/dev-guide-transaction-overview.md)
   - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
   - [Transaction Restraints](/develop/dev-guide-transaction-restraints.md)
