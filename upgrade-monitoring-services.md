@@ -31,12 +31,12 @@ Download a new installation package from the [Prometheus download page](https://
 1. Download the TiDB server package and extract it. Note that your downloading means you agree to the [Privacy Policy](https://www.pingcap.com/privacy-policy/).
 
     ```
-    https://download.pingcap.org/tidb-community-server-{version}-linux-{arch}.tar.gz
+    https://download.pingcap.com/tidb-community-server-{version}-linux-{arch}.tar.gz
     ```
 
     > **Tip:**
     >
-    > `{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v6.5.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-toolkit-v6.5.0-linux-amd64.tar.gz`.
+    > `{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v6.5.0` in the `amd64` architecture is `https://download.pingcap.com/tidb-community-toolkit-v6.5.0-linux-amd64.tar.gz`.
 
 2. In the extracted files, locate `prometheus-v{version}-linux-amd64.tar.gz` and extract it.
 
@@ -80,12 +80,12 @@ In the following upgrade steps, you need to download the Grafana installation pa
 1. Download the TiDB server package and extract it. Note that your downloading means you agree to the [Privacy Policy](https://www.pingcap.com/privacy-policy/).
 
     ```
-    https://download.pingcap.org/tidb-community-server-{version}-linux-{arch}.tar.gz
+    https://download.pingcap.com/tidb-community-server-{version}-linux-{arch}.tar.gz
     ```
 
     > **Tip:**
     >
-    > `{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v6.5.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-toolkit-v6.5.0-linux-amd64.tar.gz`.
+    > `{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v6.5.0` in the `amd64` architecture is `https://download.pingcap.com/tidb-community-toolkit-v6.5.0-linux-amd64.tar.gz`.
 
 2. In the extracted files, locate `grafana-v{version}-linux-amd64.tar.gz` and extract it.
 
