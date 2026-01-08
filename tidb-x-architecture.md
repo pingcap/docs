@@ -18,7 +18,7 @@ The "Shared-Nothing" architecture of classic TiDB effectively overcame the limit
 
 Its success was built on several foundational strengths:
 
-- Massive Horizontal Scalability: Classic TiDB proved that you didn't have to choose between scale and SQL. It allowed businesses to scale both read and write performance linearly with their workload, effortlessly reaching millions of QPS while supporting massive clusters with over 1 PiB of data and tens of millions of tables..
+- Massive Horizontal Scalability: Classic TiDB proved that you didn't have to choose between scale and SQL. It allowed businesses to scale both read and write performance linearly with their workload, reaching millions of QPS while supporting massive clusters with over 1 PiB of data and tens of millions of tables.
 - True HTAP Capabilities: It unified transactional and analytical processing. By pushing down heavy aggregation and join operations to TiFlash (the columnar engine), it provided predictable, real-time analytics on fresh transactional data without complex ETL pipelines.
 - Non-Blocking Operations: Its implementation of Fully Online DDL meant that schema changes were non-blocking for reads and writes, allowing businesses to evolve their data models with minimal impact on latency or uptime.
 - Always-Online Availability: The architecture supported seamless cluster upgrades and scaling operations (up/down), ensuring critical services remained online during maintenance.
