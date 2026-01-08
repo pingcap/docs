@@ -48,8 +48,8 @@ The meaning of each column is as follows:
     - `Stable`: all Regions have reached the target distribution.
 - `Region_count`: the current number of Regions in the affinity group.
 - `Affinity_region_count`: the number of Regions that currently meet the affinity replica distribution requirements.
-    - When `Affinity_region_count` is less than `Region_count`, it indicates that some Regions have not yet completed affinity-replica scheduling.
-    - When `Affinity_region_count` equals `Region_count`, it indicates that affinity-replica scheduling is complete, meaning the distribution of all related Regions meets the affinity requirements. However, it does not indicate that related Region merge operations are completed.
+    - When `Affinity_region_count` is less than `Region_count`, it indicates that some Regions have not yet completed replica scheduling based on affinity.
+    - When `Affinity_region_count` equals `Region_count`, it indicates that replica scheduling based on affinity is complete, meaning the distribution of all related Regions meets the affinity requirements. However, it does not indicate that related Region merge operations are completed.
 
 ## MySQL compatibility
 

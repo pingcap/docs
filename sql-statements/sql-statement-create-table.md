@@ -171,7 +171,7 @@ The following *table_options* are supported. Other options such as `AVG_ROW_LENG
 | `CHARACTER SET` | To specify the [character set](/character-set-and-collation.md) for the table | `CHARACTER SET` =  'utf8mb4' |
 | `COLLATE` | To specify the character set collation for the table | `COLLATE` = 'utf8mb4_bin' |
 | `COMMENT` | The comment information | `COMMENT` = 'comment info' |
-| `AFFINITY` | Enables affinity scheduling for a table or partition. It can be set to `'table'` for non-partitioned tables and `'partition'` for partitioned tables. Setting it to `'none'` or leaving it empty disables affinity scheduling. | `AFFINITY` = 'table' |
+| `AFFINITY` | To enable affinity scheduling for a table or partition. It can be set to `'table'` for non-partitioned tables and `'partition'` for partitioned tables. Setting it to `'none'` or leaving it empty disables affinity scheduling. | `AFFINITY` = 'table' |
 
 <CustomContent platform="tidb">
 
