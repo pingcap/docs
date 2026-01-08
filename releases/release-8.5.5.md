@@ -189,10 +189,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + TiDB <!--tw@qiancai: 4 notes-->
 
-    - improve the error message for import into when there are encoding errors [#63763](https://github.com/pingcap/tidb/issues/63763) @[D3Hunter](https://github.com/D3Hunter)
-    - change the parser for parquet format to get better performance [#62906](https://github.com/pingcap/tidb/issues/) @[joechenrh](https://github.com/joechenrh)
-    - 将 `tidb_analyze_column_options` 的默认值设置为 `all` [#64992](https://github.com/pingcap/tidb/issues/64992) @[0xPoe](https://github.com/0xPoe)
-    - 优化 IndexHashJoin 的执行方式，在部分 JOIN 场景下采用增量处理以避免一次性加载大量数据，显著降低内存占用并提升执行性能 [#63303](https://github.com/pingcap/tidb/issues/63303) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
+    - Improve error messages for `IMPORT INTO` when encoding errors occur to help users identify issues more accurately [#63763](https://github.com/pingcap/tidb/issues/63763) @[D3Hunter](https://github.com/D3Hunter)
+    - Enhance the parsing mechanism for Parquet files to improve the import performance of Parquet-formatted data [#62906](https://github.com/pingcap/tidb/issues/62906) @[joechenrh](https://github.com/joechenrh)
+    - Set the default value of `tidb_analyze_column_options` to `all` to collect statistics for all columns by default [#64992](https://github.com/pingcap/tidb/issues/64992) @[0xPoe](https://github.com/0xPoe)
+    - Optimize the execution logic of the `IndexHashJoin` operator by using incremental processing in specific JOIN scenarios to avoid loading large amounts of data at once, significantly reducing memory usage and improving performance [#63303](https://github.com/pingcap/tidb/issues/63303) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
     - (dup): release-9.0.0.md > Improvements> TiDB - Optimize the CPU usage of internal SQL statements in the Distributed eXecution Framework (DXF) [#59344](https://github.com/pingcap/tidb/issues/59344) @[D3Hunter](https://github.com/D3Hunter)
     - Improve the performance of the expression.Contains function [#61373](https://github.com/pingcap/tidb/issues/61373) @[hawkingrei](https://github.com/hawkingrei)
 
@@ -263,13 +263,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + PD <!--tw@qiancai: 7 notes-->
 
-    - 修复节点在上线过程中可能无法下线的问题 [#8997](https://github.com/tikv/pd/issues/8997) @[lhy1024](https://github.com/lhy1024)
-    - 修复因大量 leader transfer 可能导致 region size 跳变的问题 [#10014](https://github.com/tikv/pd/issues/10014) @[lhy1024](https://github.com/lhy1024)
-    - 修复调度过程中可能导致 PD panic 的问题 [#9951](https://github.com/tikv/pd/issues/9951) @[bufferflies](https://github.com/bufferflies)
-    - 修复导入过程中数据不均衡的问题 [#9088](https://github.com/tikv/pd/issues/9088) @[GMHDBJD](https://github.com/GMHDBJD)
-    - 修复开启 PD follower handle 后遇到错误时，无法将请求回退到 leader 处理的问题 [#64933](https://github.com/pingcap/tidb/issues/64933) @[okJiang](https://github.com/okJiang)
-    - 修复微服务请求没有正常转发的问题 [#9825](https://github.com/tikv/pd/issues/9825) @[lhy1024](https://github.com/lhy1024) [#9825](https://github.com/tikv/pd/issues/9825) @[lhy1024](https://github.com/lhy1024)
-    - 修复微服务 TLS 配置问题 [#9367](https://github.com/tikv/pd/issues/9367) @[rleungx](https://github.com/rleungx)
+    - Fix the issue that a node might not be removable during the process of bringing it online [#8997](https://github.com/tikv/pd/issues/8997) @[lhy1024](https://github.com/lhy1024)
+    - Fix the issue that a large number of Leader transfers might cause sudden changes in Region size [#10014](https://github.com/tikv/pd/issues/10014) @[lhy1024](https://github.com/lhy1024)
+    - Fix the issue that might cause PD panic during scheduling [#9951](https://github.com/tikv/pd/issues/9951) @[bufferflies](https://github.com/bufferflies)
+    - Fix the issue that data might become imbalanced during the import process [#9088](https://github.com/tikv/pd/issues/9088) @[GMHDBJD](https://github.com/GMHDBJD)
+    - Fix the issue that, after enabling the Active PD Follower feature, requests that fail on a Follower node cannot correctly fall back to the Leader node for retry [#64933](https://github.com/pingcap/tidb/issues/64933) @[okJiang](https://github.com/okJiang)
+    - Fix the issue that some requests are not correctly forwarded in PD microservices mode [#9825](https://github.com/tikv/pd/issues/9825) @[lhy1024](https://github.com/lhy1024)
+    - Fix the issue that connections might fail due to incorrect TLS configuration loading in the `tso` and `scheduling` microservices [#9367](https://github.com/tikv/pd/issues/9367) @[rleungx](https://github.com/rleungx)
 
 + TiFlash <!--tw@hfxsd: 3 notes-->
 
