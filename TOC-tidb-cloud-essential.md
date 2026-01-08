@@ -1,14 +1,15 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: f88d6a9bcf7228f8f8483ee4f36a700d33878804-->
+# 目录 <!--Corresponding EN commit: 2008fe00aca50faaff4d07cc3014f58d281acc34-->
 
 ## 快速开始
 
 - 为什么选择 TiDB Cloud
-  - [TiDB Cloud 介绍](/tidb-cloud/tidb-cloud-intro.md)
+  - [简介](/tidb-cloud/tidb-cloud-intro.md)
+  - [功能概览](/tidb-cloud/features.md)
   - [与 MySQL 的兼容性](/mysql-compatibility.md)
-- TiDB Cloud 快速上手
+- 快速上手
   - [试用 TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [试用 TiDB + AI](/vector-search/vector-search-get-started-using-python.md)
   - [试用 HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
@@ -272,6 +273,9 @@
     - [通过 Alibaba Cloud Private Endpoint 连接](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
     - [为 Public Endpoint 配置防火墙规则](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
     - [通过 TLS 连接](/tidb-cloud/secure-connections-to-serverless-clusters.md)
+  - Private Link 连接
+    - [Private Link 连接概述](/tidb-cloud/serverless-private-link-connection.md)
+    - [连接到 AWS 上的 Confluent Cloud](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
   - 审计管理
     - [控制台审计日志](/tidb-cloud/tidb-cloud-console-auditing.md)
     - [数据库审计日志](/tidb-cloud/essential-database-audit-logging.md)
