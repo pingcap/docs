@@ -5,6 +5,10 @@ summary: Learn how to integrate TiDB Vector Search with Amazon Bedrock to build 
 
 # Integrate TiDB Vector Search with Amazon Bedrock
 
+> **Note:**
+>
+> This document is applicable to TiDB Cloud only and not applicable to TiDB Self-Managed.
+
 This tutorial demonstrates how to integrate the [vector search](/vector-search/vector-search-overview.md) feature of TiDB with [Amazon Bedrock](https://aws.amazon.com/bedrock/) to build a Retrieval-Augmented Generation (RAG) Q&A bot.
 
 <CustomContent platform="tidb-cloud">

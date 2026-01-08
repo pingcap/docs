@@ -7,19 +7,9 @@ summary: Learn how to build a {{{ .starter }}} cluster in TiDB Cloud and connect
 
 # Build a {{{ .starter }}} Cluster
 
-<CustomContent platform="tidb">
-
 This document walks you through the quickest way to get started with TiDB. You will use [TiDB Cloud](https://www.pingcap.com/tidb-cloud) to create a {{{ .starter }}} cluster, connect to it, and run a sample application on it.
 
 If you need to run TiDB on your local machine, see [Starting TiDB Locally](/quick-start-with-tidb.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-This document walks you through the quickest way to get started with TiDB Cloud. You will create a TiDB cluster, connect to it, and run a sample application on it.
-
-</CustomContent>
 
 ## Step 1. Create a {{{ .starter }}} cluster {#step-1-create-a-tidb-cloud-cluster}
 

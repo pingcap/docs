@@ -23,7 +23,7 @@ After your {{{ .starter }}} or {{{ .essential }}} cluster is created on TiDB Clo
 
   TiDB Cloud provides a Data Service feature that enables you to connect to your {{{ .starter }}} cluster hosted on AWS via an HTTPS request using a custom API endpoint. Unlike direct connections, Data Service accesses your cluster data via a RESTful API rather than raw SQL.
 
-- [Serverless Driver (beta)](/tidb-cloud/serverless-driver.md)
+- [Serverless Driver (beta)](/develop/serverless-driver.md)
 
   TiDB Cloud provides a serverless driver for JavaScript, which allows you to connect to your {{{ .starter }}} or {{{ .essential }}} cluster in edge environments with the same experience as direct connections.
 
