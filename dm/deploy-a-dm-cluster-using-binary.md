@@ -17,11 +17,11 @@ Download the official binary using the download link in the following table:
 
 | Package name | OS | Architecture | SHA256 checksum |
 |:---|:---|:---|:---|
-| `https://download.pingcap.org/dm-{version}-linux-amd64.tar.gz` | Linux | amd64 | `https://download.pingcap.org/dm-{version}-linux-amd64.sha256` |
+| `https://download.pingcap.com/dm-{version}-linux-amd64.tar.gz` | Linux | amd64 | `https://download.pingcap.com/dm-{version}-linux-amd64.sha256` |
 
 > **Note:**
 >
-> `{version}` in the above download link indicates the version number of TiDB. For example, the download link for `v1.0.1` is `https://download.pingcap.org/dm-v1.0.1-linux-amd64.tar.gz`. You can check the published DM versions in the [DM Release](https://github.com/pingcap/tiflow/releases) page.
+> `{version}` in the above download link indicates the version number of TiDB. For example, the download link for `v1.0.1` is `https://download.pingcap.com/dm-v1.0.1-linux-amd64.tar.gz`. You can check the published DM versions in the [DM Release](https://github.com/pingcap/tiflow/releases) page.
 
 The downloaded files have two subdirectories, `bin` and `conf`. The `bin` directory contains the binary files of DM-master, DM-worker, and dmctl. The `conf` directory contains the sample configuration files.
 
