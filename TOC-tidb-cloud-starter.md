@@ -7,7 +7,7 @@
 
 - 为什么选择 TiDB Cloud
   - [简介](/tidb-cloud/tidb-cloud-intro.md)
-  - [功能](/tidb-cloud/features.md)
+  - [功能概览](/tidb-cloud/features.md)
   - [与 MySQL 的兼容性](/mysql-compatibility.md)
 - 快速上手
   - [试用 TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
