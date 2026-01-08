@@ -1,9 +1,9 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-- [Overview](/develop/dev-guide-overview.md)
 - Quick Start
   - [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
+  - [TiDB Basics](/develop/dev-guide-tidb-basics.md)
   - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
 - Connect to TiDB
   - GUI Database Tools
