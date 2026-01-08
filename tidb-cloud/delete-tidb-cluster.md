@@ -7,10 +7,10 @@ summary: 了解如何删除 TiDB 集群。
 
 本文档介绍如何在 TiDB Cloud 上删除 TiDB 集群。
 
-你可以随时通过以下步骤删除集群：
+你可以随时按照以下步骤删除集群：
 
 1. 进入你的项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
-2. 在你想要删除的目标集群所在行，点击 **...**。
+2. 在目标集群所在行，点击 **...**。
 
     > **提示：**
     >
@@ -19,10 +19,10 @@ summary: 了解如何删除 TiDB 集群。
 3. 在下拉菜单中点击 **Delete**。
 4. 在集群删除窗口中，确认删除操作：
 
-    - 如果你至少有一次手动或自动备份，你可以看到备份的数量以及备份的计费策略。点击 **Continue** 并输入 `<organization name>/<project name>/<cluster name>`。
+    - 如果你至少有一个手动或自动备份，你可以看到备份数量以及备份的计费策略。点击 **Continue** 并输入 `<organization name>/<project name>/<cluster name>`。
     - 如果你没有任何备份，只需输入 `<organization name>/<project name>/<cluster name>`。
 
-    如果你希望将来恢复该集群，请确保你已经对集群进行了备份。否则，将无法再恢复。关于如何备份 TiDB Cloud Dedicated 集群的更多信息，请参见 [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md)。
+    如果你希望将来恢复该集群，请确保你已经对集群进行了备份。否则，你将无法再恢复。关于如何备份 TiDB Cloud Dedicated 集群的更多信息，请参见 [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md)。
 
     > **注意：**
     >
@@ -32,7 +32,7 @@ summary: 了解如何删除 TiDB 集群。
 
     一旦已备份的 TiDB Cloud Dedicated 集群被删除，该集群现有的备份文件会被移动到回收站。
 
-    - 自动备份将在保留期结束后过期并自动删除。如果你未修改，默认保留期为 7 天。
+    - 自动备份将在保留时间结束后过期并被自动删除，最新的一份除外。如果你未修改，默认保留时间为 7 天。除非你明确删除，最新的自动备份不会被删除。
     - 手动备份会一直保留在回收站，直到被手动删除。
 
     > **注意：**

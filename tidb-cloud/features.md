@@ -11,7 +11,7 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
 >
 > [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 是开始体验 TiDB Cloud 的最佳方式。此外，你还可以在 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start) 上试用 TiDB Cloud 的功能。
 
-- ✅：该功能已普遍可用，除非另有说明为预览版。
+- ✅：该功能已正式可用，除非另有标注为 “Private preview” 或 “Public preview”。
 - ❌：该功能当前不可用。
 
 <table><thead>
@@ -38,9 +38,9 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
   </tr>
   <tr>
     <td>API</td>
-    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">（公开预览）</span></td>
-    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">（公开预览）</span></td>
-    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">（公开预览）</span></td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
   </tr>
   <tr>
     <td rowspan="3" style="background-color: white;">集群管理</td>
@@ -71,20 +71,20 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
   <tr>
     <td>数据迁移</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（私有预览）</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Private preview)</span></td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td rowspan="2" style="background-color: white;">数据导出</td>
     <td>导出</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（公开预览）</span></td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（公开预览）</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
     <td>变更数据订阅（Changefeed）</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（CLI 私有预览）</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
@@ -121,7 +121,7 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
   </tr>
   <tr>
     <td rowspan="7" style="background-color: white;">可观测性</td>
-    <td>内置指标</td>
+    <td>内置统计/指标（信息）</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -204,7 +204,7 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
   <tr>
     <td>数据库审计日志</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（私有预览）</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Private preview)</span></td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
@@ -234,9 +234,9 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
   <tr>
     <td rowspan="3" style="background-color: white;">AI 与开发</td>
     <td>向量检索</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（公开预览）</span></td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（公开预览）</span></td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">（公开预览）</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
   </tr>
   <tr>
     <td>数据分支</td>
@@ -279,4 +279,4 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
 
 > **提示：**
 >
-> 如需申请私有预览功能，请点击 [TiDB Cloud 控制台](https://tidbcloud.com) 右下角的 **?**，然后点击 **Request Support**。接着，在 **Description** 字段中填写功能名称，并点击 **Submit**。
+> 如需申请 Private preview 功能，请点击 [TiDB Cloud 控制台](https://tidbcloud.com) 右下角的 **?**，然后点击 **Request Support**。在 **Description** 字段中填写功能名称，并点击 **Submit**。
