@@ -54,7 +54,7 @@ If you have the `Organization Owner` role, you can create a {{{ .premium }}} ins
 
     > **Note:**
     >
-    > Pay attention to the Minimum Billing RCU displayed below the input; you will be billed for this amount even if your actual usage is lower. The Max RCU must be set in increments of 100.
+    > Pay attention to the Minimum Billing RCU displayed below the input. You will be billed for this amount even if your actual usage is lower. The Max RCU must be set in increments of 100.
 
 6. Click **Create**.
 
