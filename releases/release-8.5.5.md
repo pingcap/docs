@@ -214,7 +214,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     + TiCDC <!--tw@qiancai: 1 note-->
 
-        - Add more verification for the changefeed config when creating changefeed.  [#12253](https://github.com/pingcap/tiflow/issues/12253) @[wk989898](https://github.com/wk989898)
+        - Enhance the configuration validation logic for changefeeds: when creating or updating a changefeed, if a column referenced in the Dispatcher configuration does not exist, TiCDC returns an error and rejects the operation to prevent execution failures  [#12253](https://github.com/pingcap/tiflow/issues/12253) @[wk989898](https://github.com/wk989898)
 
 ## Bug fixes
 
@@ -291,9 +291,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     + TiCDC <!--tw@qiancai: 6 notes-->
 
-        - Fix the issue that may cause DML loss while failing to close the writer of the storage sink [#12436](https://github.com/pingcap/tiflow/issues/12436) @[wk989898](https://github.com/wk989898)
-        - Fix the issue that causes the changefeed to fail when truncating partition tables [#12430](https://github.com/pingcap/tiflow/issues/12430) @[wk989898](https://github.com/wk989898)
-        - Fix the incorrect execution order of split DDLs generated from a multi-table DDL statement [#12449](https://github.com/pingcap/tiflow/issues/12449) @[wlwilliamx](https://github.com/wlwilliamx)
-        - Upgrade aws-sdk-go-v2 dependency to fix glue schema registry[#12424](https://github.com/pingcap/tiflow/issues/12424) @[wk989898](https://github.com/wk989898)
-        - Fix the issue that may cause the sink memory quota not to be released [#18169](https://github.com/tikv/tikv/issues/18169) @[asddongmen](https://github.com/asddongmen)
-        - Fix the issue that may cause the sink memory quota not to be released [#18915](https://github.com/tikv/tikv/issues/18915) @[asddongmen](https://github.com/asddongmen)
+        - Fix the issue that data might be lost during replication to object storage because Writer close errors are not correctly captured [#12436](https://github.com/pingcap/tiflow/issues/12436) @[wk989898](https://github.com/wk989898)
+        - Fix the issue that replicating a `TRUNCATE` operation on a partitioned table might cause changefeed failures [#12430](https://github.com/pingcap/tiflow/issues/12430) @[wk989898](https://github.com/wk989898)
+        - Fix the issue that downstream execution order might be incorrect when replicating multi-table `RENAME` DDL statements [#12449](https://github.com/pingcap/tiflow/issues/12449) @[wlwilliamx](https://github.com/wlwilliamx)
+        - Fix the connection errors that might occur when using Glue Schema Registry by upgrading the `aws-sdk-go-v2` dependency version [#12424](https://github.com/pingcap/tiflow/issues/12424) @[wk989898](https://github.com/wk989898)
+        - Fix the issue that changefeed tasks might get stuck because the TiKV CDC component fails to release memory quotas correctly after a restart [#18169](https://github.com/tikv/tikv/issues/18169) @[asddongmen](https://github.com/asddongmen)
+        - Fix the issue that gRPC connections might be unexpectedly closed due to being misjudged as idle when incremental scan tasks accumulate in TiKV CDC [#18915](https://github.com/tikv/tikv/issues/18915) @[asddongmen](https://github.com/asddongmen)
