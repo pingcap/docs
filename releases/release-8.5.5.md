@@ -43,9 +43,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 * Support pushing index lookups down to TiKV to improve query performance [#62575](https://github.com/pingcap/tidb/issues/62575) @[lcwangchao](https://github.com/lcwangchao)
 
-    Starting from v8.5.5, TiDB supports using optimizer hints to push the `IndexLookUp` operator down to TiKV nodes. This reduces the number of remote procedure calls (RPCs) and can improve query performance. The actual performance improvement varies depending on the specific workload and requires testing for verification.
+    Starting from v8.5.5, TiDB supports using [optimizer hints](/optimizer-hints.md) to push the `IndexLookUp` operator down to TiKV nodes. This reduces the number of remote procedure calls (RPCs) and can improve query performance. The actual performance improvement varies depending on the specific workload and requires testing for verification.
 
-    You can use the [`INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...])`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855) hint to explicitly instruct the optimizer to push index lookups down to TiKV for a specific table. It is recommended to combine this hint with the table's AFFINITY attribute. For example, set `AFFINITY="table"` for regular tables and `AFFINITY="partition"` for partitioned tables.
+    To explicitly instruct the optimizer to push index lookups down to TiKV for a specific table, you can use the [`INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...])`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855) hint. It is recommended to combine this hint with the table's AFFINITY attribute. For example, set `AFFINITY="table"` for regular tables and `AFFINITY="partition"` for partitioned tables.
 
     To disable index lookup pushdown to TiKV for a specific table, use the [`NO_INDEX_LOOKUP_PUSHDOWN(t1_name)`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#no_index_lookup_pushdownt1_name--new-in-v855) hint.
 
@@ -125,7 +125,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 * Add storage engine identifiers to statement summary tables and slow query logs [#61736](https://github.com/pingcap/tidb/issues/61736) @[henrybw](https://github.com/henrybw) **tw@Oreoxmt**<!--2034 -->
 
-    When both TiKV and TiFlash are deployed in a cluster, users often need to filter SQL statements by storage engine during database diagnostics and performance optimization. For example, if TiFlash is under high load, users might need to identify SQL statements running on TiFlash to locate potential causes. To meet this need, starting from v9.0.0, TiDB adds storage engine identifier fields to statement summary tables and slow query logs.
+    When both TiKV and TiFlash are deployed in a cluster, users often need to filter SQL statements by storage engine during database diagnostics and performance optimization. For example, if TiFlash is under high load, users might need to identify SQL statements running on TiFlash to locate potential causes. To meet this need, starting from v8.5.5, TiDB adds storage engine identifier fields to statement summary tables and slow query logs.
 
     New fields in [statement summary tables](/statement-summary-tables.md):
 
@@ -256,7 +256,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 + TiKV <!--tw@Oreoxmt: 7 notes-->
 
     - Fix the issue that the `KV Cursor Operations` metric for analyze requests is always `0` [#19206](https://github.com/tikv/tikv/issues/19206) @[glorv](https://github.com/glorv)
-    - Fix the issue that PD heartbeats might report incorrect Region size or key statistics after a leader change [#19180](https://github.com/tikv/tikv/issues/19180) @[glorv](https://github.com/glorv)
+    - Fix the issue that Region heartbeats might report incorrect Region size or key statistics to PD after a leader change [#19180](https://github.com/tikv/tikv/issues/19180) @[glorv](https://github.com/glorv)
     - Fix the issue that unsafe recovery gets stuck by removing tombstone TiFlash learners from the unsafe recovery demotion list [#18458](https://github.com/tikv/tikv/issues/18458) @[v01dstar](https://github.com/v01dstar)
     - Fix the issue that snapshots might be canceled indefinitely during continuous writes, which blocks replica recovery [#18872](https://github.com/tikv/tikv/issues/18872) @[exit-code-1](https://github.com/exit-code-1)
     - Fix the issue that compaction slows down due to increased flow-control thresholds [#18708](https://github.com/tikv/tikv/issues/18708) @[hhwyt](https://github.com/hhwyt)
@@ -287,7 +287,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
         - Fix the issue that foreign keys cannot be properly restored during `restore point` [#61642](https://github.com/pingcap/tidb/issues/61642) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that restore fails if system table collations are incompatible between the backup and target cluster by adding the `--sys-check-collation` parameter to support restoring privilege tables from v6.5 to v7.5 [#64667](https://github.com/pingcap/tidb/issues/64667) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that `restore log` cannot be performed after a failed `restore point`, even when the operation is safe [#64908](https://github.com/pingcap/tidb/issues/64908) @[RidRisR](https://github.com/RidRisR)
-        - Fix the issue that Azure Managed Identity is unavailable [#19006](https://github.com/tikv/tikv/issues/19006) @[RidRisR](https://github.com/RidRisR)
         - Fix the issue that `restore point` from a checkpoint might panic when log backup data is mixed with a full backup [#58685](https://github.com/pingcap/tidb/issues/58685) @[YuJuncen](https://github.com/YuJuncen)
 
     + TiCDC <!--tw@qiancai: 6 notes-->
