@@ -93,7 +93,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### SQL
 
-* Support dynamically modifying the concurrency and throughput of distributed `ADD INDEX` jobs [#62120](https://github.com/pingcap/tidb/pull/62120) @[joechenrh](https://github.com/joechenrh) **tw@qiancai** <!--2326-->
+* Support dynamically modifying the concurrency and throughput of distributed `ADD INDEX` jobs [#64947](https://github.com/pingcap/tidb/issues/64947) @[joechenrh](https://github.com/joechenrh) **tw@qiancai** <!--2326-->
 
    In TiDB versions earlier than v8.5.5, when the Distributed eXecution Framework (DXF) [`tidb_enable_dist_task`](/system-variables/#tidb_enable_dist_task-new-in-v710) is enabled, modifying the `THREAD`, `BATCH_SIZE`, or `MAX_WRITE_SPEED` parameters of a running `ADD INDEX` job is not supported. To change these parameters, you have to cancel the running `ADD INDEX` job, reconfigure the parameters, and then resubmit the job, which is inefficient.
 
