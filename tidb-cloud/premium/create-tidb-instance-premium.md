@@ -50,7 +50,7 @@ If you have the `Organization Owner` role, you can create a {{{ .premium }}} ins
 4. Choose a cloud provider and a region where you want to host your instance.
 5. In the Capacity section, set the Max number of Request Capacity Units (RCUs) for your instance.
     
-    RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically creates scaling rules based on the minimum and maximum capacity settings.
+    RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your instance within this range based on demand.
 
     > **Note:**
     >
