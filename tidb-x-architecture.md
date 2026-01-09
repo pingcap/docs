@@ -1,7 +1,6 @@
 ---
 title: TiDB X Architecture
 summary: Learn how TiDB X's shared-storage architecture delivers cloud-native scalability and cost optimization
-aliases: ['/docs/dev/tidb-x-architecture/','/tidb/dev/tidb-x-architecture']
 ---
 
 # TiDB X Architecture
