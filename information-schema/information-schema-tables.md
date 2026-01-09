@@ -41,8 +41,12 @@ DESC tables;
 | TABLE_COMMENT             | varchar(2048) | YES  |      | NULL     |       |
 | TIDB_TABLE_ID             | bigint(21)    | YES  |      | NULL     |       |
 | TIDB_ROW_ID_SHARDING_INFO | varchar(255)  | YES  |      | NULL     |       |
+| TIDB_PK_TYPE              | varchar(64)   | YES  |      | NULL     |       |
+| TIDB_PLACEMENT_POLICY_NAME | varchar(64)  | YES  |      | NULL     |       |
+| TIDB_TABLE_MODE           | varchar(16)   | YES  |      | NULL     |       |
+| TIDB_AFFINITY             | varchar(128)  | YES  |      | NULL     |       |
 +---------------------------+---------------+------+------+----------+-------+
-23 rows in set (0.00 sec)
+27 rows in set (0.00 sec)
 ```
 
 {{< copyable "sql" >}}
@@ -72,10 +76,14 @@ SELECT * FROM tables WHERE table_schema='mysql' AND table_name='user'\G
                CHECK_TIME: NULL
           TABLE_COLLATION: utf8mb4_bin
                  CHECKSUM: NULL
-           CREATE_OPTIONS: 
-            TABLE_COMMENT: 
+           CREATE_OPTIONS:
+            TABLE_COMMENT:
             TIDB_TABLE_ID: 5
 TIDB_ROW_ID_SHARDING_INFO: NULL
+             TIDB_PK_TYPE: CLUSTERED
+TIDB_PLACEMENT_POLICY_NAME: NULL
+           TIDB_TABLE_MODE: Normal
+             TIDB_AFFINITY: NULL
 1 row in set (0.00 sec)
 ```
 
@@ -115,7 +123,7 @@ The description of columns in the `TABLES` table is as follows:
 * `CREATE_OPTIONS`: Creates options.
 * `TABLE_COMMENT`: The comments and notes of the table.
 
-Most of the information in the table is the same as MySQL. Only two columns are newly defined by TiDB:
+Most of the information in the table is the same as MySQL. The following columns are newly defined by TiDB:
 
 * `TIDB_TABLE_ID`: to indicate the internal ID of a table. This ID is unique in a TiDB cluster.
 * `TIDB_ROW_ID_SHARDING_INFO`: to indicate the sharding type of a table. The possible values are as follows:
@@ -123,4 +131,8 @@ Most of the information in the table is the same as MySQL. Only two columns are 
     - `"NOT_SHARDED(PK_IS_HANDLE)"`: the table that defines an integer Primary Key as its row id is not sharded.
     - `"PK_AUTO_RANDOM_BITS={bit_number}"`: the table that defines an integer Primary Key as its row id is sharded because the Primary Key is assigned with `AUTO_RANDOM` attribute.
     - `"SHARD_BITS={bit_number}"`: the table is sharded using `SHARD_ROW_ID_BITS={bit_number}`.
-    - NULL: the table is a system table or view, and thus cannot be sharded.
+    - `NULL`: the table is a system table or view, and thus cannot be sharded.
+* `TIDB_PK_TYPE`: the primary key type of the table. Possible values include `CLUSTERED` (clustered primary key) and `NONCLUSTERED` (non-clustered primary key).
+* `TIDB_PLACEMENT_POLICY_NAME`: the name of the placement policy applied to the table.
+* `TIDB_TABLE_MODE`: the mode of the table, for example, `Normal`, `Import`, or `Restore`.
+* `TIDB_AFFINITY`: the affinity level of the table. It is `table` for non-partitioned tables, `partition` for partitioned tables, and `NULL` when affinity is not enabled.
