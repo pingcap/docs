@@ -56,7 +56,9 @@ If you have the `Organization Owner` role, you can create a {{{ .premium }}} ins
     >
     > Pay attention to the Minimum Billing RCU displayed below the input. You will be billed for this amount even if your actual usage is lower. The Max RCU must be set in increments of 100.
 
-6. Click **Create**.
+6. For {{{ .premium }}} instances, only regional high availability is enabled, and it is not configurable. For more information, see [High Availability](/tidb-cloud/serverless-high-availability.md).
+
+7. Click **Create**.
 
     The instance creation process begins. If this is your first instance in the selected region, provisioning typically takes about 30 minutes. If the selected region already has existing instances, the process is faster and usually completes within about 1 minute.
 
