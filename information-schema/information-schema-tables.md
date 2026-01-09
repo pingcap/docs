@@ -136,4 +136,3 @@ Most of the information in the table is the same as MySQL. The following columns
 * `TIDB_PLACEMENT_POLICY_NAME`: the name of the placement policy applied to the table.
 * `TIDB_TABLE_MODE`: the mode of the table, for example, `Normal`, `Import`, or `Restore`.
 * `TIDB_AFFINITY`: the affinity level of the table. It is `table` for non-partitioned tables, `partition` for partitioned tables, and `NULL` when affinity is not enabled.
-
