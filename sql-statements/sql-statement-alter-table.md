@@ -183,7 +183,7 @@ The following major restrictions apply to `ALTER TABLE` in TiDB:
 
 - Changes of some data types (for example, some TIME, Bit, Set, Enum, and JSON types) are not supported due to the compatibility issues of the `CAST` function's behavior between TiDB and MySQL.
 
-- `AFFINITY` option is a TiDB extension syntax. After `AFFINITY` is enabled for a table, modifying the partition scheme (such as adding, dropping, reorganizing, or swapping partitions) of that table is not supported. You need to remove `AFFINITY` first.
+- The `AFFINITY` option is a TiDB extension syntax. After `AFFINITY` is enabled for a table, you cannot modify the partition scheme of that table, such as adding, dropping, reorganizing, or swapping partitions. To modify the partition scheme, you must first remove `AFFINITY`.
 
 - Spatial data types are not supported.
 

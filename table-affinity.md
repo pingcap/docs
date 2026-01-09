@@ -11,7 +11,7 @@ summary: Learn how to configure affinity constraints for tables or partitions to
 
 Table-level data affinity is a PD mechanism for scheduling data distribution at the table level. This mechanism controls how Leader and Voter replicas for Regions of the same table or partition are distributed across a TiKV cluster.
 
-When PD affinity scheduling is enabled and the `AFFINITY` option of a table is set to `table` or `partition`, PD groups Regions belonging to the same table or partition into the same affinity group. During scheduling, PD prioritizes placing the Leader and Voter replicas of these Regions on the same subset of a few TiKV nodes. This reduces network latency caused by cross-node access during queries, thereby improving query performance.
+When you enable PD affinity scheduling and set the `AFFINITY` option of a table to `table` or `partition`, PD groups Regions belonging to the same table or partition into the same affinity group. During scheduling, PD prioritizes placing the Leader and Voter replicas of these Regions on the same subset of a few TiKV nodes. This reduces network latency caused by cross-node access during queries, thereby improving query performance.
 
 ## Limitations
 
@@ -29,7 +29,7 @@ PD affinity scheduling is disabled by default. Before setting affinity for table
 
 1. Set the PD configuration item [`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855-and-v900) to a value greater than `0` to enable affinity scheduling.
 
-   For example, the following command sets the value to `4`, allowing PD to run up to four affinity scheduling tasks concurrently:
+    For example, the following command sets the value to `4`, allowing PD to run up to four affinity scheduling tasks concurrently:
 
     ```bash
     pd-ctl config set schedule.affinity-schedule-limit 4
@@ -48,8 +48,8 @@ You can configure table or partition affinity using the `AFFINITY` option in `CR
 | Affinity level | Scope | Effect |
 |---|---|---|
 | `AFFINITY='table'` | Non-partitioned table | Enables affinity for the table. PD creates a single affinity group for all Regions of the table. |
-| `AFFINITY='partition'` | Partitioned table | Enables affinity for each partition in the table. PD creates a separate affinity group for the Regions of each partition. For example, PD creates four independent affinity groups for a table with four partitions. |
-| `AFFINITY=''` or `AFFINITY='none'` | Tables configured with `AFFINITY='table'` or `AFFINITY='partition'` | Disables affinity for the table or partitions. When you disable affinity, PD deletes the corresponding affinity group for the target table or partition, so Regions of that table or partition are no longer subject to affinity scheduling constraints. Automatic Region splitting in TiKV returns to the default behavior within a maximum of 10 minutes. |
+| `AFFINITY='partition'` | Partitioned table | Enables affinity for each partition in the table. PD creates a separate affinity group for the Regions of each partition. For example, for a table with four partitions, PD creates four independent affinity groups. |
+| `AFFINITY=''` or `AFFINITY='none'` | Tables configured with `AFFINITY='table'` or `AFFINITY='partition'` | Disables affinity for the table or partitions. When you disable affinity, PD deletes the corresponding affinity group for the target table or partition, so Regions of that table or partition are no longer subject to affinity scheduling constraints. Automatic Region splitting in TiKV reverts to the default behavior within a maximum of 10 minutes. |
 
 **Examples**
 
