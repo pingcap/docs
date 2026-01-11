@@ -64,8 +64,14 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
-    <td rowspan="6" style="background-color: white;">Cluster management</td>
-    <td>Scale with workload</td>
+    <td rowspan="7" style="background-color: white;">Cluster management</td>
+    <td>Pay as you use</td>
+    <td style="text-align:center; font-size: 14px;">✅</td>
+    <td style="text-align:center; font-size: 14px;">✅</td>
+    <td style="text-align:center;">❌</td>
+  </tr>
+  <tr>
+    <td>Auto scale with workload</td>
     <td style="text-align:center; font-size: 14px;">✅</td>
     <td style="text-align:center; font-size: 14px;">✅</td>
     <td style="text-align:center;">❌</td>
