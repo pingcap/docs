@@ -12,7 +12,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
 > [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) is the best way to get started with TiDB Cloud. Additionally, you can try out TiDB Cloud features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
 
 - ✅: The feature is generally available or public preview.
-- 🔒: The feature is private preveiw.
+- 🔒: The feature is private preview.
 - 🚧: The feature is under development.
 - ❌: The feature is currently not available.
 
@@ -51,7 +51,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
   </tr>
   <tr>
-    <td rowspan="2" style="background-color: white;">Develop friendly</td>
+    <td rowspan="2" style="background-color: white;">Developer friendly</td>
     <td>Data branch</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -77,7 +77,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">❌</td>
   </tr>
   <tr>
-    <td>Manual modify cluster</td>
+    <td>Manual cluster modification</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅</td>
@@ -107,7 +107,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="4" style="background-color: white;">Data process</td>
+    <td rowspan="4" style="background-color: white;">Data processing</td>
     <td>Data import via CSV, Parquet, and SQL files to TiDB Cloud</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -126,7 +126,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
-    <td>Changefeed allows you to replicate change data to Kafka or other MySQL-compatible databases</td>
+    <td>Change data replication to Kafka or other MySQL-compatible databases using Changefeed</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">✅</td>
@@ -176,7 +176,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>SQL Statement Statistic</td>
+    <td>SQL Statement Statistics</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -200,7 +200,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>Third-party integrations, such as Datadog, Promtheus, New Relic</td>
+    <td>Third-party integrations, such as Datadog, Prometheus, New Relic</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅</td>
@@ -276,7 +276,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>IAM, including email and pwd login, standard SSO, and organization SSO.</td>
+    <td>IAM (including email and password login, standard SSO, and organization SSO)</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
