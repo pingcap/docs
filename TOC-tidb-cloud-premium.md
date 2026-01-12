@@ -10,7 +10,7 @@
   - [MySQL Compatibility](/mysql-compatibility.md)
 - Get Started with TiDB Cloud
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
-  - [Try Out TiDB + AI](/vector-search/vector-search-get-started-using-python.md)
+  - [Try Out TiDB + AI](/develop/vector-search/vector-search-get-started-using-python.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
 - Key Concepts
@@ -29,7 +29,7 @@
 ## DEVELOP
 
 - Development Quick Start
-  - [Developer Guide Overview](/develop/dev-guide-overview.md)
+  - [Developer Guide Overview](https://docs.pingcap.com/developer/)
   - [Build a TiDB Cloud Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
   - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
 - Connect to TiDB Cloud
@@ -41,7 +41,7 @@
     - [Navicat](/develop/dev-guide-gui-navicat.md)
   - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
   - BI
-    - [Looker Studio](/tidb-cloud/dev-guide-bi-looker-studio.md)
+    - [Looker Studio](/develop/dev-guide-bi-looker-studio.md)
   - Java
     - [JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
     - [MyBatis](/develop/dev-guide-sample-application-java-mybatis.md)
@@ -70,13 +70,13 @@
     - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
   - C#
     - [C#](/develop/dev-guide-sample-application-cs.md)
-  - [WordPress](/tidb-cloud/dev-guide-wordpress.md)
+  - [WordPress](/develop/dev-guide-wordpress.md)
   - Serverless Driver ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png) <!--TBD, ToDo: Not sure if we need to update the driver name-->
-    - [TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver.md)
-    - [Node.js Example](/tidb-cloud/serverless-driver-node-example.md)
-    - [Prisma Example](/tidb-cloud/serverless-driver-prisma-example.md)
-    - [Kysely Example](/tidb-cloud/serverless-driver-kysely-example.md)
-    - [Drizzle Example](/tidb-cloud/serverless-driver-drizzle-example.md)
+    - [TiDB Cloud Serverless Driver](/develop/serverless-driver.md)
+    - [Node.js Example](/develop/serverless-driver-node-example.md)
+    - [Prisma Example](/develop/serverless-driver-prisma-example.md)
+    - [Kysely Example](/develop/serverless-driver-kysely-example.md)
+    - [Drizzle Example](/develop/serverless-driver-drizzle-example.md)
 - Development Reference
   - Design Database Schema
     - [Overview](/develop/dev-guide-schema-design-overview.md)

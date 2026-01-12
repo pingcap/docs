@@ -10,7 +10,7 @@ This document provides a high-level introduction to ProxySQL, describes how to i
 If you are interested in learning more about TiDB and ProxySQL, you can find some useful links as follows:
 
 - [TiDB Cloud](https://docs.pingcap.com/tidbcloud)
-- [TiDB Developer Guide](/develop/dev-guide-overview.md)
+- [TiDB Developer Guide](https://docs.pingcap.com/developer/)
 - [ProxySQL Documentation](https://proxysql.com/documentation/)
 
 ## What is ProxySQL?

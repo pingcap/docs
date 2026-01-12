@@ -82,7 +82,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
             - **Python**: Django, mysqlclient, MySQL Connector/Python, peewee, PyMySQL, SQLAlchemy
             - **Node.js**: mysql.js, Next.js, node-mysql2, Prisma, Sequelize, TypeORM
             - **Ruby**: mysql2, Rails
-        - Move the [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md) and [AWS Bedrock](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md) integration entries to the cluster level to improve discoverability.
+        - Move the [Vercel](https://docs.pingcap.com/developer/integrate-tidbcloud-with-vercel) and [AWS Bedrock](https://docs.pingcap.com/developer/vector-search-integrate-with-amazon-bedrock) integration entries to the cluster level to improve discoverability.
         - Add **Suggest Integration** for requesting new integrations.
 
 **API changes**
@@ -624,7 +624,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - Relevance-based ranking: results are ranked using the industry-standard BM25 algorithm for optimal relevance.
     - Native SQL compatibility: seamlessly use SQL features such as filtering, grouping, and joining with full-text search.
 
-  To get started, see [Full Text Search with SQL](/tidb-cloud/vector-search-full-text-search-sql.md) or [Full Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md).
+  To get started, see [Full Text Search with SQL](https://docs.pingcap.com/developer/vector-search-full-text-search-sql) or [Full Text Search with Python](https://docs.pingcap.com/developer/vector-search-full-text-search-python).
 
 - Increase the maximum TiFlash node storage for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster:
 

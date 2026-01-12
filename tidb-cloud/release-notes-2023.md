@@ -142,11 +142,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     The 2 vCPU option is no longer available on the **Create Cluster** page or the **Modify Cluster** page.
 
-- Release [TiDB Cloud serverless driver (beta)](/tidb-cloud/serverless-driver.md) for JavaScript.
+- Release [TiDB Cloud serverless driver (beta)](/develop/serverless-driver.md) for JavaScript.
 
     TiDB Cloud serverless driver for JavaScript allows you to connect to your [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) cluster over HTTPS. It is particularly useful in edge environments where TCP connections are limited, such as [Vercel Edge Function](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/).
 
-    For more information, see [TiDB Cloud serverless driver (beta)](/tidb-cloud/serverless-driver.md).
+    For more information, see [TiDB Cloud serverless driver (beta)](/develop/serverless-driver.md).
 
 **Console changes**
 

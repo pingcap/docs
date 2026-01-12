@@ -44,7 +44,7 @@ In TiDB Cloud Data Service, you can generate one or multiple endpoints automatic
 
         For each operation you select, TiDB Cloud Data Service will generate a corresponding endpoint. If you select a batch operation (such as `POST (Batch Create)`), the generated endpoint lets you operate on multiple rows in a single request.
 
-        If the table you selected contains [vector data types](/vector-search/vector-search-data-types.md), you can enable the **Vector Search Operations** option and select a vector distance function to generate a vector search endpoint that automatically calculates vector distances based on your selected distance function. The supported [vector distance functions](/vector-search/vector-search-functions-and-operators.md) include the following:
+        If the table you selected contains [vector data types](/develop/vector-search/vector-search-data-types.md), you can enable the **Vector Search Operations** option and select a vector distance function to generate a vector search endpoint that automatically calculates vector distances based on your selected distance function. The supported [vector distance functions](/develop/vector-search/vector-search-functions-and-operators.md) include the following:
 
         - `VEC_L2_DISTANCE` (default): calculates the L2 distance (Euclidean distance) between two vectors.
         - `VEC_COSINE_DISTANCE`: calculates the cosine distance between two vectors.
