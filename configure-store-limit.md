@@ -53,6 +53,17 @@ tiup ctl:v<CLUSTER_VERSION> pd store limit all 5 add-peer          // All stores
 tiup ctl:v<CLUSTER_VERSION> pd store limit all 5 remove-peer       // All stores can at most delete 5 peers per minute.
 ```
 
+Starting from v8.5.5 and v9.0.0, PD supports setting the limit for removing peers for all stores by storage engine type, as shown in the following examples:
+
+```bash
+tiup ctl:v<CLUSTER_VERSION> pd store limit all engine tikv 5 remove-peer    // All TiKV stores can at most delete 5 peers per minute.
+tiup ctl:v<CLUSTER_VERSION> pd store limit all engine tiflash 5 remove-peer // All TiFlash stores can at most delete 5 peers per minute.
+```
+
+### Set limit for a single store
+
+To set the speed limit for a single store, run the following commands:
+
 ### Set limit for a single store
 
 To set the speed limit for a single store, run the following commands:
