@@ -11,10 +11,10 @@ This document lists the feature support status for different TiDB Cloud plans, i
 >
 > [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) is the best way to get started with TiDB Cloud. Additionally, you can try out TiDB Cloud features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
 
-- ✅: The feature is generally available or public preview.
-- 🔒: The feature is private preview.
-- 🚧: The feature is under development.
-- ❌: The feature is currently not available.
+- ✅: The feature is **generally available** or in **public preview**.
+- 🔒: The feature is in **private preview**.
+- 🚧: The feature is **under development**.
+- ❌: The feature is **currently not available**.
 
 <table><thead>
   <tr>
@@ -27,19 +27,19 @@ This document lists the feature support status for different TiDB Cloud plans, i
 <tbody>
   <tr>
     <td rowspan="4" style="background-color: white;">Basics</td>
-    <td>Scalable Transaction Processing</td>
+    <td>Scalable transactional processing</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>Analytical Processing</td>
+    <td>Analytical processing</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>Vector storage & search</td>
+    <td>Vector storage &amp; vector search</td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
@@ -51,7 +51,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
   </tr>
   <tr>
-    <td rowspan="2" style="background-color: white;">Developer friendly</td>
+    <td rowspan="2" style="background-color: white;">Developer experience</td>
     <td>Data branch</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -71,7 +71,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">❌</td>
   </tr>
   <tr>
-    <td>Auto scale with workload</td>
+    <td>Automatic scaling based on workload</td>
     <td style="text-align:center; font-size: 14px;">✅</td>
     <td style="text-align:center; font-size: 14px;">✅</td>
     <td style="text-align:center;">❌</td>
@@ -89,7 +89,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>Pause & resume</td>
+    <td>Pause &amp; resume</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅</td>
@@ -108,7 +108,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
   </tr>
   <tr>
     <td rowspan="4" style="background-color: white;">Data processing</td>
-    <td>Data import via CSV, Parquet, and SQL files to TiDB Cloud</td>
+    <td>Data import from CSV, Parquet, and SQL files to TiDB Cloud</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -126,7 +126,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
-    <td>Change data replication to Kafka or other MySQL-compatible databases using Changefeed</td>
+    <td>Change data replication to Kafka or other MySQL-compatible databases using changefeeds</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">✅</td>
@@ -176,13 +176,13 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>SQL Statement Statistics</td>
+    <td>SQL statement analysis</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>Slow Query Log</td>
+    <td>Slow query log</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -200,21 +200,21 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>Third-party integrations, such as Datadog, Prometheus, New Relic</td>
+    <td>Third-party integrations, such as Datadog, Prometheus, and New Relic</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td rowspan="1" style="background-color: white;">High availability</td>
-    <td>Failover (cross-AZ)</td>
+    <td>Cross-AZ failover</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td rowspan="2" style="background-color: white;">Resource allocation</td>
-    <td>Node group</td>
+    <td>Node groups</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅</td>
