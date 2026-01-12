@@ -149,7 +149,7 @@ The default size of a Region is 256 MiB, and you can reduce the number of Region
 
 ### Method 7: Increase the maximum number of connections for Raft communication
 
-By default, the maximum number of connections used for Raft communication between TiKV nodes is 1. Increasing this number can help alleviate blockage issues caused by heavy communication workloads of a large number of Regions. For detailed instructions, see [`grpc-raft-conn-num`](/tikv-configuration-file.md#grpc-raft-conn-num).
+To adjust the maximum number of connections used for Raft communication between TiKV nodes, you can modify the [`server.grpc-raft-conn-num`](/tikv-configuration-file.md#grpc-raft-conn-num) configuration item. Increasing this number can help alleviate blockage issues caused by heavy communication workloads of a large number of Regions.
 
 > **Note:**
 >
