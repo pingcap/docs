@@ -116,7 +116,7 @@ On the **Create Migration Job** page, configure the source and target connection
    - **Region**: the region of the data source, which is required for cloud databases only.
    - **Connectivity method**: the connection method for the data source. You can choose public IP or Private Link according to your connection method.
    - **Hostname or IP address** (for public IP): the hostname or IP address of the data source.
-   - **Private Link Connection** (for Private Link): the private link connection that you created in the [Network](#network) section.
+   - **Private Link Connection** (for Private Link): the private link connection that you created in the [Private Link Connections](/tidb-cloud/serverless-private-link-connection.md) section.
    - **Port**: the port of the data source.
    - **Username**: the username of the data source.
    - **Password**: the password of the username.

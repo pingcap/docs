@@ -169,30 +169,7 @@ When using public endpoints, you can verify network connectivity and access both
 
 #### Private link or private endpoint
 
-If you use a provider-native private link or private endpoint, create a private endpoint for your source MySQL instance (RDS, Aurora, or Azure Database for MySQL).
-
-<details>
-<summary> Set up AWS PrivateLink and Private Endpoint for the MySQL source database </summary>
-
-AWS does not support direct PrivateLink access to RDS or Aurora. Therefore, you need to create a Network Load Balancer (NLB) and publish it as an endpoint service associated with your source MySQL instance.
-
-1. In the [Amazon EC2 console](https://console.aws.amazon.com/ec2/), create an NLB in the same subnet(s) as your RDS or Aurora writer. Configure the NLB with a TCP listener on port `3306` that forwards traffic to the database endpoint.
-
-    For detailed instructions, see [Create a Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html) in AWS documentation.
-
-2. In the [Amazon VPC console](https://console.aws.amazon.com/vpc/), click **Endpoint Services** in the left navigation pane, and then create an endpoint service. During the setup, select the NLB created in the previous step as the backing load balancer, and enable the **Require acceptance for endpoint** option. After the endpoint service is created, copy the service name (in the `com.amazonaws.vpce-svc-xxxxxxxxxxxxxxxxx` format) for later use.
-
-    For detailed instructions, see [Create an endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html) in AWS documentation.
-
-3. Optional: Test connectivity from a bastion or client inside the same VPC or VNet before starting the migration:
-
-    ```shell
-    mysql -h <private‑host> -P 3306 -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
-    ```
-
-4. Later, when configuring TiDB Cloud DM to connect via PrivateLink, you will need to return to the AWS console and approve the pending connection request from TiDB Cloud to this private endpoint.
-
-</details>
+If you use a provider-native private link or private endpoint, create a [Private Link Connection](/tidb-cloud/serverless-private-link-connection.md) for your source MySQL instance.
 
 ### Grant required privileges for migration
 
@@ -267,7 +244,7 @@ On the **Create Migration Job** page, configure the source and target connection
         - **Private Link**: available for AWS and Alibaba Cloud only (recommended for production workloads requiring private connectivity).
     - Based on the selected **Connectivity method**, do the following:
         - If **Public IP** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
-        - If **Private Link** is selected, select the private link connection that you created in the [Network](#network) section.
+        - If **Private Link** is selected, select the private link connection that you created in the [Private Link Connections](/tidb-cloud/serverless-private-link-connection.md) section.
     - **Port**: the port of the data source.
     - **User Name**: the username of the data source.
     - **Password**: the password of the username.
