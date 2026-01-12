@@ -158,7 +158,7 @@
       - [LlamaIndex](/develop/vector-search/vector-search-integrate-with-llamaindex.md)
       - [LangChain](/develop/vector-search/vector-search-integrate-with-langchain.md)
     - AI Services
-      - [Amazon Bedrock](/develop/vector-search-integrate-with-amazon-bedrock.md)
+      - [Amazon Bedrock](/develop/vector-search/vector-search-integrate-with-amazon-bedrock.md)
     - Embedding Models/Services
       - [Jina AI](/develop/vector-search/vector-search-integrate-with-jinaai-embedding.md)
     - ORM Libraries
