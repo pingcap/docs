@@ -155,10 +155,17 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ## Compatibility changes
 
+For newly created TiDB v8.5.4 clusters (excluding clusters upgraded from versions earlier than v8.5.3), you can smoothly upgrade to v8.5.5. Most changes in v8.5.5 are safe for routine upgrades, but this release also includes several behavior changes, MySQL compatibility adjustments, system variable updates, configuration parameter updates, and system table changes. Before upgrading, make sure to carefully review this section.
+
 ### Behavior changes
 
+* Starting from v8.5.5, TiDB automatically sets target tables to `restore` mode during data restore. Tables in `restore` mode prohibit any user read or write operations. Once the restore completes, TiDB automatically switches the mode back to `normal` for these tables, allowing users to read and write the tables normally. This behavior ensures task stability and data consistency during the restore process.
+* Starting from v8.5.5, when the `--load-stats` parameter is set to `false`, BR no longer writes statistics for restored tables into the `mysql.stats_meta` table. To update the relevant statistics, you can manually execute [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) after the restore.
 
 ### MySQL compatibility
+
+* Starting from v8.5.5, TiDB introduces a new `AFFINITY` property to tables to control table or partition data affinity. You can configure this property using the `CREATE TABLE` or `ALTER TABLE` statement. For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/table-affinity).
+* Starting from v8.5.5, TiDB introduces a new `SHOW AFFINITY` statement to view the affinity information of tables. This statement is a TiDB extension of MySQL syntax. For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/sql-statement-show-affinity).
 
 ### System variables
 
@@ -187,7 +194,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### System tables
 
+* The system tables [`INFORMATION_SCHEMA.TABLES`](/information-schema/information-schema-tables.md) and [`INFORMATION_SCHEMA.PARTITIONS`](/information-schema/information-schema-partitions.md) add a new column `TIDB_AFFINITY` to display the data affinity level.
+
 ### Other changes
+
+* When performing PITR recovery on earlier TiDB versions (such as v8.5.4 or v8.1.2) using BR v8.5.5, the log recovery stage might fail and return errors.
+
+    Full data backup and restore are not affected by this issue.
+
+    It is recommended that you use a BR version that matches your target TiDB cluster version. For example, when performing PITR on a TiDB v8.5.4 cluster, use BR v8.5.4.
 
 ## Improvements
 
