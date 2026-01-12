@@ -178,21 +178,21 @@ To apply a manual backup to your TiDB Cloud Dedicated cluster, perform the follo
 
 ### Export backups
 
-<div label="Amazon S3">
-
-To export a specific backup to cloud storage, such as and Google Cloud Storage, perform the following steps:
+To export a specific backup to cloud storage, such as Amazon S3 or Google Cloud Storage, follow the steps for your target storage provider.
 
 <SimpleTab>
 
 <div label="Amazon S3">
 
+To export a backup to Amazon S3, perform the following steps:
+
 1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
-2. Locate the backup you want to export, and click **...** > **Export** in the **Action** column.
+2. Locate the backup you want to export, and then click **...** > **Export** in the **Action** column.
 
-3. In the **Export Backup to Amazon S3** dialog, enter the **Folder URI**, and then select a bucket region for the backup bucket.
+3. In the **Export Backup to Amazon S3** dialog, enter the **Folder URI** field, and then select a bucket region for the backup bucket.
 
-4. Click **Generate Command** to see the command for configuring permissions.
+4. Click **Generate Command** to view the command for configuring permissions.
 
     - **With AWS CLI**:
 
@@ -201,10 +201,10 @@ To export a specific backup to cloud storage, such as and Google Cloud Storage, 
     - **With AWS Console**:
 
         1. Navigate to the [Amazon S3 console](https://console.aws.amazon.com/s3/).
-        2. Go to the bucket detail page, and then switch to the **Permissions** tab.
-        3. Scroll down to **Bucket Policy**, and then click **Edit**.
+        2. Open the target bucket details page, and then click the **Permissions** tab.
+        3. Scroll to **Bucket policy**, and then click **Edit**.
         4. Copy the policy content from the generated command, and then paste it into the policy editor.
-        5. Click **Save Changes**.
+        5. Click **Save changes**.
 
 5. Click **Export** to start the export process.
 
@@ -212,7 +212,7 @@ To export a specific backup to cloud storage, such as and Google Cloud Storage, 
 
 <div label="Google Cloud Storage">
 
-To export a specific backup to Google Cloud Storage, perform the following steps:
+To export a backup to Google Cloud Storage, perform the following steps:
 
 1. Navigate to the [**Backup**](#view-the-backup-page) page of your cluster.
 
@@ -220,18 +220,18 @@ To export a specific backup to Google Cloud Storage, perform the following steps
 
 3. In the **Export Backup to Google Cloud Storage** dialog, note down the **Google Cloud Service Account ID**, which is required for a later step.
 
-4. In the [Google Cloud console](https://console.cloud.google.com/), create a custom IAM role, or make sure that an existing role has the following permissions:
+4. In the [Google Cloud console](https://console.cloud.google.com/), create a custom IAM role with the following permissions. If you use an existing role, verify that it has these permissions.
     
     - `storage.buckets.get`
     - `storage.objects.list`
     - `storage.objects.create`
     - `storage.objects.delete`
 
-5. In **Cloud Storage** > **Buckets**, select the target bucket, and then go to **Permissions** > **Grant Access**.
+5. Go to **Cloud Storage** > **Buckets**, select the target bucket, and then click **Permissions** > **Grant Access**.
 
-6. In **New principals**, enter the **Service Account ID** that you noted down in Step 3, select the role from Step 4, and then click **Save**.
+6. In **New principals**, enter the **Service Account ID** from step 3, assign the role from step 4, and then click **Save**.
 
-7. Switch to the **Configuration** tab, copy the **gsutil URI**, and then paste it into the **Export Path** field in the **Export Backup to Google Cloud Storage** dialog. You can append a path suffix to the URI to create a subdirectory.
+7. Open the **Configuration** tab, copy the **gsutil URI**, and paste it into the **Export Path** field in the **Export Backup to Google Cloud Storage** dialog. To export to a subdirectory, append a path suffix to the URI.
 
 8. Click **Export** to start the export process.
 
