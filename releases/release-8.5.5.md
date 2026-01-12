@@ -201,8 +201,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 + TiKV <!--tw@lilin90: 3 notes-->
 
     - Introduce CPU-aware scaling for the unified read pool to avoid CPU starvation under hot read workloads [#18464](https://github.com/tikv/tikv/issues/18464) @[mittalrishabh](https://github.com/mittalrishabh)
-    - Add network latency awareness to slow score to avoid scheduling leaders on TiKV nodes with unstable network conditions [#18797](https://github.com/tikv/tikv/issues/18797) @[okJiang](https://github.com/okJiang)
-    - Optimize hibernate behavior by allowing leaders to enter hibernation once a majority vote is reached, without waiting for down non-voter peers [#19070](https://github.com/tikv/tikv/issues/19070) @[jiadebin](https://github.com/jiadebin)
+    - Add network latency awareness to slow score to avoid scheduling leaders to TiKV nodes with unstable network conditions [#18797](https://github.com/tikv/tikv/issues/18797) @[okJiang](https://github.com/okJiang)
+    - Optimize hibernate Region behavior by allowing leaders to enter the hibernation state immediately after receiving a majority of votes, without waiting for offline non-voter peers [#19070](https://github.com/tikv/tikv/issues/19070) @[jiadebin](https://github.com/jiadebin)
     - (dup): release-9.0.0.md > Improvements> TiKV - Throttle BR log restore requests when TiKV memory usage is high to prevent TiKV OOM [#18124](https://github.com/tikv/tikv/issues/18124) @[3pointer](https://github.com/3pointer)
 
 + PD <!--tw@Oreoxmt: 4 notes-->
