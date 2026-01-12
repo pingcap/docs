@@ -292,7 +292,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 * The TiDB Cloud API (beta) is now available to all users.
 
-    You can start using the API by creating an API key in the TiDB Cloud console. For more information, refer to [API documentation](/tidb-cloud/api-overview.md).
+    You can start using the API by creating an API key in the TiDB Cloud console. For more information, refer to [API documentation](https://docs.pingcap.com/api/tidb-cloud-api-overview).
 
 ## September 15, 2022
 
@@ -340,7 +340,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **API changes**
 
-* Support increasing the storage of a TiKV or TiFlash node through the [TiDB Cloud API](/tidb-cloud/api-overview.md). You can use the `storage_size_gib` field of the API endpoint to do the scaling.
+* Support increasing the storage of a TiKV or TiFlash node through the [TiDB Cloud API](/). You can use the `storage_size_gib` field of the API endpoint to do the scaling.
 
     Currently, TiDB Cloud API is still in beta and only available upon request.
 

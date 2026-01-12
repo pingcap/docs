@@ -350,7 +350,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **CLI changes**
 
-- Introduce [TiDB Cloud CLI 1.0.0-beta.1](https://github.com/tidbcloud/tidbcloud-cli), built upon the new [TiDB Cloud API](/tidb-cloud/api-overview.md). The new CLI brings the following new features:
+- Introduce [TiDB Cloud CLI 1.0.0-beta.1](https://github.com/tidbcloud/tidbcloud-cli), built upon the new [TiDB Cloud API](https://docs.pingcap.com/api/tidb-cloud-api-overview). The new CLI brings the following new features:
 
     - [Export data from TiDB Cloud Serverless clusters](/tidb-cloud/serverless-export.md)
     - [Import data from local storage into TiDB Cloud Serverless clusters](/tidb-cloud/ticloud-import-start.md)
