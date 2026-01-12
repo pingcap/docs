@@ -1,10 +1,10 @@
 # Database Read-Only
 
-Database-level read-only allows you to set a single database to read-only, so that write operations (DDL, DML, and some locking reads) against that database and its objects are rejected. This capability is useful in scenarios such as sharded migration, traffic failback drills, and tenant data export, where you want to reduce the blast radius.
+Database-level read-only allows you to set a single database to read-only, so that write operations (DDL, DML, and some locking reads) against that database and its objects are rejected. 
 
 ## Usage scenarios
 
-- **Batch migration / failback**: When a shard batch encounters issues and you need to fail traffic back, set the corresponding database to read-only to prevent new writes from continuing.
+- **Batch migration / failback**: When syncing multiple upstream shards to a downstream database, if the downstream encounters issues, you can set the corresponding database to read-only to prevent new writes before failing traffic back to the upstream.
 - **Data export**: Set a tenant database to read-only to avoid inconsistency caused by data changes during export.
 
 ## Syntax
@@ -104,7 +104,7 @@ When a database is read-only, restricted statements typically fail with:
 
 - `ERROR 3989 (HY000): Schema '<db>' is in read only mode.`
 
-### Rejected operations
+### Rejected operations when the target database is read-only
 
 - **DDL**:
   - `DROP DATABASE`
