@@ -107,6 +107,14 @@ After you pause a log backup task, to prevent the MVCC data from being garbage c
 
 To address this problem, delete the current task using `br log stop`, and then create a log backup task using `br log start`. At the same time, you can perform a full backup for subsequent PITR.
 
+### What should I do if the error message `[ddl:8204]invalid ddl job type: none` is returned when using the PITR table filter?
+
+```shell
+failed to refresh meta for database with schemaID=124, dbName=pitr_test: [ddl:8204]invalid ddl job type: none
+```
+
+This error occurs because the TiDB node acting as the DDL owner cannot recognize the Refresh Meta DDL, which is due to an outdated TiDB version in the cluster. Please upgrade the cluster to at least v8.5.5 before using the PITR table filter feature.
+
 ## Feature compatibility issues
 
 ### Why does data restored using br command-line tool cannot be replicated to the upstream cluster of TiCDC?
