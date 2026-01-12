@@ -572,18 +572,20 @@ Configuration items related to the flow control mechanism in TiKV. This mechanis
 
 + When the number of kvDB L0 files reaches this threshold, the flow control mechanism starts to work.
 
-    > **Note**: 
-    > 
-    > When certain conditions are met, `rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger` will be overridden by this configuration item. For details, refer to [`rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger).
+    > **Note:**
+    >
+    > Under certain conditions, this configuration item can override the value of `rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`. For more information, see [`rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger).
+
 + Default value: `20`
 
 ### `soft-pending-compaction-bytes-limit`
 
 + When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism starts to reject some write requests and reports the `ServerIsBusy` error.
 
-    > **Note**: 
-    > 
-    > When certain conditions are met, `rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit` will be overridden by this configuration item. For details, refer to [`rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1).
+    > **Note:**
+    >
+    > Under certain conditions, this configuration item can override the value of `rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`. For more information, see [`rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1).
+
 + Default value: `"192GiB"`
 
 ### `hard-pending-compaction-bytes-limit`
@@ -1647,8 +1649,8 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `level0-slowdown-writes-trigger`
 
 + The maximum number of files at L0 that trigger write stall.
-+ Versions v8.5.4 and earlier: When the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is `true`), this configuration item is directly overridden by [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold).
-+ Starting from v8.5.5 and v9.0.0: When the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is `true`), this configuration item is overridden by [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold) only when its value is greater than [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold), to prevent weakening RocksDB's compaction acceleration mechanism when increasing the flow control threshold.
++ In v8.5.4 and earlier versions: when the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is `true`), the value of this configuration item is directly overridden by [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold).
++ Starting from v8.5.5 and v9.0.0: when the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is `true`), the value of this configuration item is overridden by [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold) only when its value is greater than [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold). This behavior prevents weakening RocksDB’s compaction acceleration mechanism when you increase the flow control threshold.
 + Default value: `20`
 + Minimum value: `0`
 
@@ -1705,8 +1707,8 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `soft-pending-compaction-bytes-limit`
 
 + The soft limit on the pending compaction bytes.
-+ Versions v8.5.4 and earlier: When the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is `true`), this configuration item is directly overridden by [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit).
-+ Starting from v8.5.5 and v9.0.0: When the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is `true`), this configuration item is overridden by [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) only when its value is greater than [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit), to prevent weakening RocksDB's compaction acceleration mechanism when increasing the flow control threshold.
++ In v8.5.4 and earlier versions: when the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is `true`), this configuration item is directly overridden by [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit).
++ Starting from v8.5.5 and v9.0.0: when the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is `true`), this configuration item is overridden by [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) only when its value is greater than [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit). This behavior prevents weakening RocksDB’s compaction acceleration mechanism when you increase the flow control threshold.
 + Default value: `"192GiB"`
 + Unit: KiB|MiB|GiB
 
