@@ -5,7 +5,7 @@ summary: Learn how to seamlessly migrate your MySQL databases from Amazon Aurora
 
 # Migrate MySQL-Compatible Databases to TiDB Cloud Essential Using Data Migration
 
-This document guides you through migrating your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, or self-managed MySQL instances to TiDB Cloud using the Data Migration feature in the [TiDB Cloud console](https://tidbcloud.com/).
+This document guides you through migrating your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, or self-managed MySQL instances to TiDB Cloud Essential using the Data Migration feature in the [TiDB Cloud console](https://tidbcloud.com/).
 
 This feature enables you to migrate your existing MySQL data and continuously replicate ongoing changes (binlog) from your MySQL-compatible source databases directly to TiDB Cloud Essential, maintaining data consistency whether in the same region or across different regions. The streamlined process eliminates the need for separate dump and load operations, reducing downtime and simplifying your migration from MySQL to a more scalable platform.
 
@@ -29,6 +29,14 @@ You can create up to 100 migration jobs for each organization. To create more mi
 
 - When you delete a cluster in TiDB Cloud, all migration jobs in that cluster are automatically deleted and not recoverable.
 
+### Limitations of Alibaba Cloud RDS
+
+When using Alibaba Cloud RDS as a data source, every table must have an explicit primary key. For tables without one, RDS appends a hidden PK to the binlog, which leads to a schema mismatch with the source table and causes the migration to fail.
+
+### Limitations of Alibaba Cloud PolarDB-X
+
+During full data migration, PolarDB-X schemas may contain incompatible keywords that cause import to fail. This issue can be mitigated by pre-creating the target tables in the downstream database before initiating the migration process.
+
 ### Limitations of existing data migration
 
 - During existing data migration, if the target database already contains the table to be migrated and there are duplicate keys, the rows with duplicate keys will be replaced.
@@ -44,7 +52,7 @@ You can create up to 100 migration jobs for each organization. To create more mi
 - In the following scenarios, if the migration job takes longer than 24 hours, do not purge binary logs in the source database to ensure that Data Migration can get consecutive binary logs for incremental replication:
 
     - During the existing data migration.
-    - After the existing data migration is completed and when incremental data migration is started for the first time, the latency is not 0ms.
+    - After the existing data migration is completed and when incremental data migration is started for the first time, the latency is not 0 ms.
 
 ## Prerequisites
 
@@ -123,7 +131,7 @@ For detailed instructions, see [Working with DB Parameter Groups](https://docs.a
 
 ### Ensure network connectivity
 
-Before creating a migration job, you need to plan and set up proper network connectivity between your source MySQL instance, the TiDB Cloud Data Migration (DM) service, and your target TiDB Cloud cluster.
+Before creating a migration job, you need to plan and set up proper network connectivity between your source MySQL instance, the TiDB Cloud Data Migration (DM) service, and your target TiDB Cloud Essential cluster.
 
 The available connection methods are as follows:
 
@@ -211,7 +219,7 @@ GRANT SELECT, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_source
 
 #### Grant required privileges in the target TiDB Cloud cluster
 
-For testing purposes, you can use the `root` account of your TiDB Cloud cluster.
+For testing purposes, you can use the `root` account of your TiDB Cloud Essential cluster.
 
 For production workloads, it is recommended to have a dedicated user for replication in the target TiDB Cloud cluster and grant only the necessary privileges:
 
@@ -256,12 +264,10 @@ On the **Create Migration Job** page, configure the source and target connection
     - **Data source**: the data source type.
     - **Connectivity method**: select a connection method for your data source based on your security requirements and cloud provider:
         - **Public IP**: available for all cloud providers (recommended for testing and proof-of-concept migrations).
-        - **Private Link**: available for AWS and Azure only (recommended for production workloads requiring private connectivity).
+        - **Private Link**: available for AWS and Alibaba Cloud only (recommended for production workloads requiring private connectivity).
     - Based on the selected **Connectivity method**, do the following:
-        - If **Public IP** or **VPC Peering** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
-        - If **Private Link** is selected, fill in the following information:
-            - **Endpoint Service Name** (available if **Data source** is from AWS): enter the VPC endpoint service name (format: `com.amazonaws.vpce-svc-xxxxxxxxxxxxxxxxx`) that you created for your RDS or Aurora instance.
-            - **Private Endpoint Resource ID** (available if **Data source** is from Azure): enter the resource ID of your MySQL Flexible Server instance (format: `/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>`).
+        - If **Public IP** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
+        - If **Private Link** is selected, select the private link connection that you created in the [Network](#network) section.
     - **Port**: the port of the data source.
     - **User Name**: the username of the data source.
     - **Password**: the password of the username.
@@ -303,9 +309,6 @@ On the **Create Migration Job** page, configure the source and target connection
 5. Take action according to the message you see:
 
     - If you use **Public IP** as the connectivity method, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
-    - If you use **Private Link** as the connectivity method, you are prompted to accept the endpoint request:
-        - For AWS: go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), click **Endpoint services**, and accept the endpoint request from TiDB Cloud.
-        - For Azure: go to the [Azure portal](https://portal.azure.com), search for your MySQL Flexible Server by name, click **Settings** > **Networking** in the left navigation pane, locate the **Private endpoint** section on the right side, and then approve the pending connection request from TiDB Cloud.
 
 ## Step 3: Choose migration job type
 
