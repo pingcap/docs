@@ -43,7 +43,7 @@ To complete this tutorial, you need:
 
 - A {{{ .starter }}} cluster
 
-    Follow [creating a {{{ .starter }}} cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+    Follow [creating a {{{ .starter }}} cluster](https://docs.pingcap.com/tidbcloud/create-tidb-cluster-serverless) to create your own TiDB Cloud cluster if you don't have one.
 
 - An AWS account with the [required permissions for Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html) and access to the following models:
 
