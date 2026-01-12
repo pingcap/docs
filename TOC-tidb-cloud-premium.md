@@ -70,13 +70,13 @@
     - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
   - C#
     - [C#](/develop/dev-guide-sample-application-cs.md)
-  - [WordPress](/tidb-cloud/dev-guide-wordpress.md)
+  - [WordPress](/develop/dev-guide-wordpress.md)
   - Serverless Driver ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png) <!--TBD, ToDo: Not sure if we need to update the driver name-->
-    - [TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver.md)
-    - [Node.js Example](/tidb-cloud/serverless-driver-node-example.md)
-    - [Prisma Example](/tidb-cloud/serverless-driver-prisma-example.md)
-    - [Kysely Example](/tidb-cloud/serverless-driver-kysely-example.md)
-    - [Drizzle Example](/tidb-cloud/serverless-driver-drizzle-example.md)
+    - [TiDB Cloud Serverless Driver](/develop/serverless-driver.md)
+    - [Node.js Example](/develop/serverless-driver-node-example.md)
+    - [Prisma Example](/develop/serverless-driver-prisma-example.md)
+    - [Kysely Example](/develop/serverless-driver-kysely-example.md)
+    - [Drizzle Example](/develop/serverless-driver-drizzle-example.md)
 - Development Reference
   - Design Database Schema
     - [Overview](/develop/dev-guide-schema-design-overview.md)
