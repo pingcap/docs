@@ -356,36 +356,44 @@ ALTER TABLE A DROP PARTITION A_2024363;
 
 ## Mitigate hotspot issues
 
-In TiDB, hotspots can occur when incoming read or write traffic is unevenly distributed across Regions. This is common when the primary key is monotonically increasing, for example, an `AUTO_INCREMENT` primary key with `AUTO_ID_CACHE=1`, or a secondary index on the datetime column with the default value set to `CURRENT_TIMESTAMP`. Because new rows and index entries are always appended to the "rightmost" Region, over time, this can lead to:
+In TiDB, hotspots occur when read or write traffic is unevenly distributed across [Regions](/tidb-storage.md#region). Hotspots commonly occur when you use:
 
-- A single [Region](https://docs.pingcap.com/tidb/stable/tidb-storage/#region) handling most of the write workload, while other Regions remain idle.
-- Higher read or write latency and reduced throughput.
-- Limited performance gains from scaling out TiKV nodes, as the bottleneck remains concentrated on one Region.
+- A monotonically increasing primary key, such as an `AUTO_INCREMENT` primary key with `AUTO_ID_CACHE=1`.
+- A secondary index on a datetime column with a default value of `CURRENT_TIMESTAMP`.
 
-Partitioned tables can help mitigate this problem. By applying hash or key partitioning on the primary key, TiDB can spread inserts across multiple partitions (and therefore multiple Regions), reducing hotspot contention.
+TiDB appends new rows and index entries to the "rightmost" Region. Over time, this behavior can lead to the following issues:
+
+- A single Region handles most of the write workload, while other Regions remain underutilized.
+- Read and write latency increases, and overall throughput decreases.
+- Adding more TiKV nodes provides little performance improvement because the bottleneck remains on a single Region.
+
+To mitigate these issues, you can use partitioned tables. By applying Hash or Key partitioning to the primary key, TiDB distributes insert operations across multiple partitions and Regions, reducing hotspot contention on any single Region.
 
 > **Note:** 
 >
-> This section uses partitioned tables as an example for mitigating read and write hotspots. TiDB also provides other features such as [`AUTO_INCREMENT`](/auto-increment.md) and [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) for hotspot mitigation. When using partitioned tables in certain scenarios, you might need to set `merge_option=deny` to maintain partition boundaries. For more details, see [issue #58128](https://github.com/pingcap/tidb/issues/58128).
+> This section uses partitioned tables as an example for mitigating read and write hotspots. TiDB offers additional features for hotspot mitigation, such as [`AUTO_INCREMENT`](/auto-increment.md) and [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md).
+>
+> When you use partitioned tables in specific scenarios, set `merge_option=deny` to preserve partition boundaries. For more details, see [issue #58128](https://github.com/pingcap/tidb/issues/58128).
 
-### How it works
+### How partitioning works
 
-TiDB stores table data and indexes in Regions, each covering a continuous range of row keys. When the primary key is [`AUTO_INCREMENT`](/auto-increment.md) and the secondary indexes on datetime columns are monotonically increasing:
+TiDB stores table data and indexes in Regions, where each Region covers a continuous range of row keys. When a table uses an `AUTO_INCREMENT` primary key or a monotonically increasing datetime index, the distribution of the write workload depends on whether the table is partitioned.
 
-**Without partitioning:**
+**Non-partitioned tables**
 
-- New rows always have the highest key values and are inserted into the same "last Region."
-- That Region is served by one TiKV node at a time, becoming a single write bottleneck.
+In a non-partitioned table, new rows always have the largest key values and are written to the same "last" Region. This single Region, served by one TiKV node, can become a write bottleneck.
 
-**With hash or key partitioning:**
+**Hash or Key partitioned tables**
 
-- The table and the secondary indexes are split into multiple partitions using a hash or key function on the primary key or indexed columns.
-- Each partition has its own set of Regions, often distributed across different TiKV nodes.
-- Inserts are spread across multiple Regions in parallel, improving workload distribution and throughput.
+- TiDB splits the table and its indexes into multiple partitions by applying a Hash or Key function to the primary key or indexed columns.
+- Each partition has its own set of Regions, which are typically distributed across different TiKV nodes.
+- Insert operations are distributed across multiple Regions in parallel, improving workload balance and write throughput.
 
-### Use cases
+### When to use partitioning
 
-If a table with an [`AUTO_INCREMENT`](/auto-increment.md) primary key experiences heavy bulk inserts and suffers from write hotspot issues, applying hash or key partitioning on the primary key can help distribute the write workload more evenly.
+If a table with an [`AUTO_INCREMENT`](/auto-increment.md) primary key receives heavy bulk inserts and experiences write hotspots, apply Hash or Key partitioning to the primary key to distribute the write workload more evenly.
+
+The following SQL statement creates a table with 16 partitions based on the primary key:
 
 ```sql
 CREATE TABLE server_info (
@@ -402,21 +410,27 @@ PARTITION BY KEY (id) PARTITIONS 16;
 ```
 
 ### Advantages
+### Benefits
 
-- Balanced write workload: hotspots are spread across multiple partitions, and therefore multiple Regions, reducing contention and improving insert performance.
-- Query optimization via partition pruning: if queries already filter by the partition key, TiDB can prune unused partitions, scanning less data and improving query speed.
+Partitioned tables provide the following benefits:
 
-### Disadvantages
+- **Balanced write workloads**: hotspots are distributed across multiple partitions and Regions, reducing contention and improving insert performance.
+- **Improved query performance through partition pruning**: for queries that filter by the partition key, TiDB skips irrelevant partitions, reducing scanned data and improving query latency.
 
-There are some risks when using partitioned tables.
+### Limitations
 
-- When converting a non-partitioned table to a partitioned table, TiDB creates separate Regions for each partition. This might significantly increase the total Region count. Queries that do not filter by the partition key cannot take advantage of partition pruning, forcing TiDB to scan all partitions or do index lookups in all partitions. This increases the number of coprocessor (cop) tasks and can slow down queries. For example, `serial_no` is not the partition key, which will cause the query performance regression:
+Before you use partitioned tables, consider the following limitations:
+
+- Converting a non-partitioned table to a partitioned table increases the total number of Regions, as TiDB creates separate Regions for each partition.
+- Queries that do not filter by the partition key cannot use partition pruning. TiDB must scan all partitions or perform index lookups across all partitions, which increases the number of coprocessor tasks and can degrade performance.
+
+    For example, the following query does not use the partition key (`id`) and might experience performance degradation:
 
     ```sql
     SELECT * FROM server_info WHERE `serial_no` = ?;
     ```
 
-- Add a global index on the filtering columns used by these queries to reduce scanning overhead. While creating a global index can significantly slow down `DROP PARTITION` operations, hash and key partitioned tables do not support `DROP PARTITION`. In practice, such partitions are rarely truncated, making global indexes a feasible solution in these scenarios. For example:
+- To reduce scan overhead for queries that do not use the partition key, you need to create a global index. Although global indexes can slow down `DROP PARTITION` operations, Hash and Key partitioned tables do not support `DROP PARTITION`. Therefore, global indexes are a practical solution because these partitions are rarely truncated. For example:
 
     ```sql
     ALTER TABLE server_info ADD UNIQUE INDEX(serial_no, id) GLOBAL;
@@ -424,66 +438,71 @@ There are some risks when using partitioned tables.
 
 ## Partition management challenges
 
-New range partitions in a partitioned table can easily lead to hotspot issues in TiDB. This section outlines common scenarios and mitigation strategies to avoid read and write hotspots caused by new range partitions.
+New Range partitions can cause hotspot issues in TiDB. This section describes common scenarios and provides mitigation strategies.
 
 ### Read hotspots
 
-When using range-partitioned tables, if queries do not filter data using the partition key, new empty partitions can easily become read hotspots.
+In Range-partitioned tables, new empty partitions can become read hotspots if queries do not filter data by the partition key.
 
 **Root cause:**
 
-By default, TiDB creates an empty region for each partition when the table is created. If no data is written for a while, multiple empty partitions' regions might be merged into a single region.
-
-**impact:**
-
-When a query does not filter by partition key, TiDB scans all partitions (as seen in the execution plan `partition:all`). As a result, the single region holding multiple empty partitions is scanned repeatedly, leading to a read hotspot.
-
-### Write hotspots
-
-When using a time-based field as the partition key, a write hotspot might occur when switching to a new partition.
-
-**Root cause:**
-
-In TiDB, newly created partitions initially contain only one region on a single TiKV node. As writes concentrate on this single region, it must split into multiple regions before writes can be distributed across multiple TiKV nodes. This splitting process is the main cause of the temporary write hotspot. 
-
-However, if the initial write traffic to this new partition is very high, the TiKV node hosting that single initial region will be under heavy write pressure. In such cases, it might not have enough spare resources (such as I/O capacity and CPU cycles) to handle both the application writes and the scheduling of newly split regions to other TiKV nodes. This can delay region distribution, keeping most writes concentrated on the same node for longer than desired.
+By default, TiDB creates an empty Region for each partition when you create a table. If no data is written for a period, TiDB might merge Regions for multiple empty partitions into a single Region.
 
 **Impact:**
 
-This imbalance can cause the TiKV node to trigger flow control, leading to a sharp drop in QPS, a spike in write latency, and increased CPU usage on the affected node, which in turn might impact the overall read and write performance of the cluster.
+When a query does not filter by the partition key, TiDB scans all partitions, which is shown as `partition:all` in the execution plan. As a result, the single Region holding multiple empty partitions is scanned repeatedly, causing a read hotspot.
 
-### Summary
+### Write hotspots
 
-The following table shows the summary information for non-clustered and clustered partitioned tables.
+Using a time-based column as the partition key might cause write hotspots when traffic shifts to a new partition.
 
-| Table type                      | Region pre-splitting | Read performance     | Write scalability | Data cleanup via partition |
+**Root cause:**
+
+In TiDB, newly created partitions initially contain a single Region on one TiKV node. All writes are directed to this single Region until it splits and data redistributes. During this period, the TiKV node must handle both application writes and Region-splitting tasks.
+
+If the initial write traffic to the new partition is very high, the TiKV node might not have sufficient resources (such as CPU or I/O capacity) to split and scatter Regions promptly. As a result, writes remain concentrated on the same node longer than expected.
+
+**Impact:**
+
+This imbalance can trigger flow control on the TiKV node, leading to a sharp drop in QPS, increased write latency, and high CPU utilization, which can degrade overall cluster performance.
+
+### Comparison of partitioned table types
+
+The following table compares non-clustered partitioned tables, clustered partitioned tables, and clustered non-partitioned tables:
+
+| Table type                      | Region pre-splitting | Read performance     | Write scalability | Data cleanup by partition |
 |---|---|---|---|---|
-| Non-clustered partitioned table | Automatic            | Lower (more lookups) | High              | Supported          | 
-| Clustered partitioned table     | Manual               | High (fewer lookups) | High (if managed) | Supported          | 
+| Non-clustered partitioned table | Automatic            | Lower (additional lookups required) | High              | Supported          | 
+| Clustered partitioned table     | Manual               | High (fewer lookups) | High (with manual management) | Supported          | 
 | Clustered non-partitioned table | N/A                  | High                 | Stable            | Not supported      |
 
 ### Solutions for non-clustered partitioned tables
 
 #### Advantages
 
-- When a new partition is created in a non-clustered partitioned table configured with [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) and [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions), the regions can be automatically pre-split, significantly reducing manual intervention.
-- Lower operational overhead.
+- When you create a new partition in a non-clustered partitioned table configured with [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) and [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions), TiDB automatically pre-splits Regions, significantly reducing manual effort.
+- Operational overhead is low.
 
 #### Disadvantages
 
-Queries using **Point Get** or **Table Range Scan** require more table lookups, which can degrade read performance for such query types.
+Queries using **Point Get** or **Table Range Scan** require additional table lookups, which can degrade read performance.
 
 #### Suitable scenarios
 
-It is suitable for workloads where write scalability and operational ease are more critical than low-latency reads.
+Use non-clustered partitioned tables when write scalability and operational simplicity are more important than low-latency reads.
 
 #### Best practices
 
-To address hotspot issues caused by new range partitions, you can perform the following steps.
+To mitigate hotspot issues caused by new Range partitions, follow these steps.
 
 ##### Step 1. Use `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS`
 
-Create a partitioned table with [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) and [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) to pre-split table regions. The value of `PRE_SPLIT_REGIONS` must be less than or equal to that of `SHARD_ROW_ID_BITS`. The number of pre-split Regions for each partition is `2^(PRE_SPLIT_REGIONS)`.
+Create a partitioned table with [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) and [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) to pre-split Regions.
+
+**Requirements:**
+
+- The value of `PRE_SPLIT_REGIONS` must be less than or equal to `SHARD_ROW_ID_BITS`.
+- Each partition is pre-split into `2^(PRE_SPLIT_REGIONS)` Regions.
 
 ```sql
 CREATE TABLE employees (
@@ -496,7 +515,7 @@ CREATE TABLE employees (
   store_id INT,
   PRIMARY KEY (`id`,`hired`) NONCLUSTERED,
   KEY `idx_employees_on_store_id` (`store_id`)
-) SHARD_ROW_ID_BITS = 2 PRE_SPLIT_REGIONS=2
+) SHARD_ROW_ID_BITS = 2 PRE_SPLIT_REGIONS = 2
 PARTITION BY RANGE ( YEAR(hired) ) (
   PARTITION p0 VALUES LESS THAN (1991),
   PARTITION p1 VALUES LESS THAN (1996),
@@ -507,50 +526,52 @@ PARTITION BY RANGE ( YEAR(hired) ) (
 
 ##### Step 2. Add the `merge_option=deny` attribute
 
-Adding the [`merge_option=deny`](/table-attributes.md#control-the-region-merge-behavior-using-table-attributes) attribute to a table or partition can prevent the merging of empty regions. However, when a partition is dropped, the regions belonging to that partition will still be merged automatically.
+Add the [`merge_option=deny`](/table-attributes.md#control-the-region-merge-behavior-using-table-attributes) attribute at the table or partition level to prevent empty Regions from being merged. When you drop a partition, TiDB still merges Regions that belong to the dropped partition.
 
 ```sql
--- table
+-- Table level
 ALTER TABLE employees ATTRIBUTES 'merge_option=deny';
--- partition
+-- Partition level
 ALTER TABLE employees PARTITION `p3` ATTRIBUTES 'merge_option=deny';
 ```
 
-##### Step 3. Determine split boundaries based on existing business data
+##### Step 3. Determine split boundaries based on business data
 
-To avoid hotspots when a new table or partition is created, it is often beneficial to pre-split regions before heavy writes begin. To make pre-splitting effective, configure the lower and upper boundaries for region splitting based on the actual business data distribution. Avoid setting excessively wide boundaries, as this can result in real data not being effectively distributed across TiKV nodes, defeating the purpose of pre-splitting.
+To avoid hotspots when you create a table or add a partition, pre-split Regions before heavy writes begin. For effective pre-splitting, configure the lower and upper boundaries for Region splitting based on the actual business data distribution. Avoid setting excessively wide boundaries, as this can prevent data effective data distribution across TiKV nodes, defeating the purpose of pre-splitting.
 
-Identify the minimum and maximum values from existing production data so that incoming writes are more likely to target different pre-allocated regions. The following is an example query for the existing data:
+Determine the minimum and maximum values from existing production data so that incoming writes target different pre-allocated Regions. The following query provides an example for retrieving the existing data range:
 
 ```sql
 SELECT MIN(id), MAX(id) FROM employees;
 ```
 
-- If the table is new and has no historical data, estimate the minimum and maximum values based on your business logic and expected data range.
-- For composite primary keys or composite indexes, only the leftmost column needs to be considered when deciding split boundaries.
-- If the leftmost column is a string, take string length and distribution into account to ensure even data spread.
+- If the table has no historical data, estimate the minimum and maximum values based on business requirements and expected data ranges.
+- For composite primary keys or composite indexes, use only the leftmost column to define split boundaries.
+- If the leftmost column is a string, consider its length and value distribution to ensure even data distribution.
 
-##### Step 4. Pre-split and scatter regions
+##### Step 4. Pre-split and scatter Regions
 
 A common practice is to split the number of regions to match the number of TiKV nodes, or to be twice the number of TiKV nodes. This helps ensure that data is more evenly distributed across the cluster from the start.
 
-##### Step 5. Split regions for the primary key and the secondary index of all partitions if needed
+##### Step 5. Split Regions for primary and secondary indexes if needed
 
-To split regions for the primary key of all partitions in a partitioned table, use the following SQL statement:
+To split Regions for the primary key of all partitions in a partitioned table, use the following SQL statement:
 
 ```sql
 SPLIT PARTITION TABLE employees INDEX `PRIMARY` BETWEEN (1, "1970-01-01") AND (100000, "9999-12-31") REGIONS <number_of_regions>;
 ```
 
-This example splits each partition's primary key range into `<number_of_regions>` regions between the specified boundary values.
+This example splits each partition's primary key range into `<number_of_regions>` Regions within the specified boundaries.
 
-To split regions for the secondary index of all partitions in a partitioned table, use the following SQL statement:
+To split Regions for a secondary index of all partitions in a partitioned table, use the following SQL statement:
 
 ```sql
 SPLIT PARTITION TABLE employees INDEX `idx_employees_on_store_id` BETWEEN (1) AND (1000) REGIONS <number_of_regions>;
 ```
 
-##### Step 6. (Optional) When adding a new partition, you need to manually split regions for its primary key and indexes
+##### (Optional) Step 6. Manually split Regions when adding a new partition
+
+When you add a partition, you can manually split Regions for its primary key and indexes.
 
 ```sql
 ALTER TABLE employees ADD PARTITION (PARTITION p4 VALUES LESS THAN (2011));
@@ -568,46 +589,46 @@ SHOW TABLE employees PARTITION (p4) regions;
 
 #### Advantages
 
-Queries using **Point Get** or **Table Range Scan** do not need additional lookups, resulting in better read performance.
+Queries using **Point Get** or **Table Range Scan** do not require additional lookups, which improves read performance.
 
 #### Disadvantages
 
-Manual region splitting is required when creating new partitions, increasing operational complexity.
+You must manually split Regions when you create new partitions, which increases operational complexity.
 
 #### Suitable scenarios
 
-It is suitable when low-latency point queries are important and operational resources are available to manage region splitting.
+Use clustered partitioned tables when low-latency point queries are critical and you can manage manual Region splitting.
 
 #### Best practices
 
-To address hotspot issues caused by new range partitions, you can perform the steps described in [Best practices for non-clustered partitioned tables](#best-practices).
+To mitigate hotspot issues caused by new Range partitions, follow the steps in [Best practices for non-clustered partitioned tables](#best-practices).
 
 ### Solutions for clustered non-partitioned tables
 
 #### Advantages
 
-- No hotspot risks from new range partitions.
-- Provides good read performance for point and range queries.
+- No hotspot risk from new Range partitions.
+- Good read performance for point and range queries.
 
 #### Disadvantages
 
-You cannot use `DROP PARTITION` to clean up large volumes of old data to improve deletion efficiency.
+You cannot use `DROP PARTITION` to efficiently delete large volumes of historical data.
 
 #### Suitable scenarios
 
-It is suitable for scenarios that require stable performance and do not benefit from partition-based data management.
+Use clustered non-partitioned tables when you require stable performance and do not need partition-based data lifecycle management.
 
 ## Convert between partitioned and non-partitioned tables
 
-When working with large tables (for example, a table with 120 million rows), transforming between partitioned and non-partitioned schemas is sometimes required for performance tuning or schema design changes. TiDB supports several main approaches for such transformations:
+For large tables, such as those with 120 million rows, you might need to convert between partitioned and non-partitioned schemas for performance tuning or schema redesign. TiDB supports the following approaches:
 
 - [Pipelined DML](/pipelined-dml.md): `INSERT INTO ... SELECT ...`
 - [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md): `IMPORT INTO ... FROM SELECT ...`
-- [Online DDL](/dm/feature-online-ddl.md): Direct schema transformation via `ALTER TABLE`
+- [Online DDL](/dm/feature-online-ddl.md): direct schema transformation using `ALTER TABLE`
 
-This section compares the efficiency and implications of these methods in both directions of conversion, and provides best practice recommendations.
+This section compares the efficiency and implications of these methods for both conversion directions and provides best practice recommendations.
 
-### Table schema for a partitioned table: `fa`
+### Partitioned table schema: `fa`
 
 ```sql
 CREATE TABLE `fa` (
@@ -626,11 +647,10 @@ PARTITION BY RANGE (`date`)
 PARTITION `fa_2024002` VALUES LESS THAN (2025002),
 PARTITION `fa_2024003` VALUES LESS THAN (2025003),
 ...
-...
 PARTITION `fa_2024365` VALUES LESS THAN (2025365));
 ```
 
-### Table schema for a non-partitioned table: `fa_new`
+### Non-partitioned table schema: `fa_new`
 
 ```sql
 CREATE TABLE `fa_new` (
@@ -646,7 +666,7 @@ CREATE TABLE `fa_new` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 ```
 
-These examples show converting a partitioned table to a non-partitioned table, but the same methods also work for converting a non-partitioned table to a partitioned table.
+These examples demonstrate converting a partitioned table to a non-partitioned table. The same methods apply when converting a non-partitioned table to a partitioned table.
 
 ### Method 1: Pipelined DML `INSERT INTO ... SELECT`
 
@@ -671,16 +691,16 @@ Records: 120000000, ID: c1d04eec-fb49-49bb-af92-bf3d6e2d3d87
 
 ### Method 3: Online DDL
 
-The following SQL statement converts from a partition table to a non-partitioned table:
+The following SQL statement converts a partitioned table to a non-partitioned table:
 
 ```sql
 SET @@global.tidb_ddl_REORGANIZE_worker_cnt = 16;
 SET @@global.tidb_ddl_REORGANIZE_batch_size = 4096;
 ALTER TABLE fa REMOVE PARTITIONING;
--- real 170m12.024 s (≈ 2 h 50 m)
+-- Actual time: 170m 12.024s (approximately 2h 50m)
 ```
 
-The following SQL statement converts from a non-partition table to a partitioned table:
+The following SQL statement converts a non-partitioned table to a partitioned table:
 
 ```sql
 SET @@global.tidb_ddl_REORGANIZE_worker_cnt = 16;
@@ -697,11 +717,11 @@ Query OK, 0 rows affected, 1 warning (2 hours 31 min 57.05 sec)
 
 ### Findings
 
-The following table show the time taken by each method.
+The following table shows the time taken by each method for a 120-million-row table:
 
-| Method | Time Taken |
+| Method | Time taken |
 |--------|------------|
-| Method 1: Pipelined DML: `INSERT INTO ... SELECT ...`                  | 58 m 42 s     |
-| Method 2: `IMPORT INTO ... FROM SELECT ...`                            | 16 m 59 s     |
-| Method 3: Online DDL (From partition table to non-partitioned table)   | 2 h 50 m      |
-| Method 3: Online DDL (From non-partition table to partitioned table)   | 2 h 31 m      |
+| Method 1: Pipelined DML (`INSERT INTO ... SELECT ...`)                  | 58m 42s     |
+| Method 2: `IMPORT INTO ... FROM SELECT ...`                            | 16m 59s     |
+| Method 3: Online DDL (from partitioned to non-partitioned table)   | 2h 50m      |
+| Method 3: Online DDL (from non-partitioned to partitioned table)   | 2h 31m      |
