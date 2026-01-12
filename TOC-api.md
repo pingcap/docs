@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-- TiDB Cloud API
+- TiDB Cloud API ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/api/tidb-cloud-api-overview.md)
   - [v1beta1](/api/tidb-cloud-api-v1beta1.md)
   - [v1beta](/api/tidb-cloud-api-v1beta.md)

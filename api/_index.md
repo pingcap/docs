@@ -8,7 +8,7 @@ aliases: ['/tidbcloud/api-overview/']
 
 TiDB provides various APIs for querying and operating clusters, managing data replication, monitoring system status, and more. This document provides an overview of the available APIs for both TiDB Cloud and TiDB Self-Managed.
 
-## TiDB Cloud API
+## TiDB Cloud API (Beta)
 
 [TiDB Cloud API](/api/tidb-cloud-api-overview.md) is a REST interface that provides you with programmatic access to manage administrative objects within TiDB Cloud, such as projects, clusters, backups, restores, imports, billings, and Data Service resources.
 
