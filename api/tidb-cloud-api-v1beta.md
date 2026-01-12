@@ -5,7 +5,7 @@ summary: Learn about what TiDB Cloud API is, its features, and how to use the AP
 
 # TiDB Cloud API v1beta Overview
 
-[v1beta API](https://docs.pingcap.com/tidbcloud/api/v1beta) is a RESTful API that gives you programmatic access to manage administrative objects within TiDB Cloud. Through this API, you can automatically and efficiently manage resources such as projects, clusters, backups, restores, and imports.
+The [v1beta API](https://docs.pingcap.com/tidbcloud/api/v1beta) is a RESTful API that gives you programmatic access to manage administrative objects within TiDB Cloud. Through this API, you can automatically and efficiently manage resources such as projects, clusters, backups, restores, and imports.
 
 Currently, you can use the following v1beta APIs to manage the resources in TiDB Cloud:
 
