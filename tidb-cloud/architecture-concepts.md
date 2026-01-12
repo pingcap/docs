@@ -23,7 +23,7 @@ TiDB Cloud makes it easy to scale your database, handle complex management tasks
 
 <CustomContent language="en,zh">
 
-- For AWS, TiDB Cloud provides **{{{ .starter }}}** for auto-scaling, cost-efficient workloads, and **{{{ .dedicated }}}** for enterprise-grade applications with dedicated resources and advanced capabilities.
+- For AWS, TiDB Cloud provides **{{{ .starter }}}** for auto-scaling, cost-efficient workloads, **{{{ .essential }}}** for production-ready workloads with provisioned capacity, and **{{{ .dedicated }}}** for enterprise-grade applications with dedicated resources and advanced capabilities.
 - For Google Cloud and Azure, TiDB Cloud provides **{{{ .dedicated }}}** for enterprise-grade applications with dedicated resources and advanced capabilities.
 - For Alibaba Cloud, TiDB Cloud provides **{{{ .starter }}}** for auto-scaling, cost-efficient workloads and **{{{ .essential }}}** for production-ready workloads with provisioned capacity.
 
@@ -31,20 +31,20 @@ TiDB Cloud makes it easy to scale your database, handle complex management tasks
 
 <CustomContent language="ja">
 
-- For AWS, TiDB Cloud provides **{{{ .starter }}}** for auto-scaling, cost-efficient workloads, and **{{{ .dedicated }}}** for enterprise-grade applications with dedicated resources and advanced capabilities.
+- For AWS, TiDB Cloud provides **{{{ .starter }}}** for auto-scaling, cost-efficient workloads, **{{{ .essential }}}** for production-ready workloads with provisioned capacity, and **{{{ .dedicated }}}** for enterprise-grade applications with dedicated resources and advanced capabilities.
 - For Google Cloud and Azure, TiDB Cloud provides **{{{ .dedicated }}}** for enterprise-grade applications with dedicated resources and advanced capabilities.
 
 </CustomContent>
 
 ## {{{ .starter }}}
 
-{{{ .starter }}} (formerly Serverless) is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database.
+{{{ .starter }}} is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database.
 
 The Starter cluster plan is ideal for those who are getting started with TiDB Cloud. It provides developers and small teams with the following features:
 
 - **No cost**: This plan is completely free, with no credit card required to get started.
 - **Storage**: Provides an initial 5 GiB of row-based storage and 5 GiB of columnar storage.
-- **Request Units**: Includes 50 million [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) for database operations.
+- **Request Units**: Includes 50 million [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) for database operations.
 
 ## {{{ .essential }}}
 
@@ -60,7 +60,7 @@ For applications experiencing growing workloads and needing scalability in real 
 - By default, clusters utilizing the Zonal High Availability option have all components located within the same availability zone, which results in lower network latency.
 - For applications that require maximum infrastructure isolation and redundancy, the Regional High Availability option distributes nodes across multiple availability zones.
 
-For more information, see [High Availability in {{{ .starter }}} and Essential](/tidb-cloud/serverless-high-availability.md).
+For more information, see [High Availability in TiDB Cloud](/tidb-cloud/serverless-high-availability.md).
 
 ## TiDB Cloud Dedicated
 

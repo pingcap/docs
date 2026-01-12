@@ -53,7 +53,7 @@ INSERT INTO products (product_id, product_name, price) VALUES
     (3, 'Tablet', 299.99);
 ```
 
-## Step 3. Import data from a SQL or CSV file
+## Step 3. Import data from an SQL or CSV file
 
 You can import data from an SQL file or a CSV file. The following sections provide step-by-step instructions for importing data from each type.
 

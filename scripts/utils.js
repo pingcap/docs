@@ -58,25 +58,24 @@ const filterLink = (srcList = []) => {
   return result;
 };
 
-export const getAllMdList = (tocFile) => {
-  if (!fs.existsSync(tocFile)) {
-    console.log(`TOC file not found: ${tocFile}`);
-    return [];
-  }
+export const getAllMdList = (tocFiles) => {
+  const tocFileList = Array.isArray(tocFiles) ? tocFiles : [tocFiles];
 
-  const tocFileContent = fs.readFileSync(tocFile);
-  const mdAst = generateMdAstFromFile(tocFileContent);
-  const linkList = extractLinkNodeFromAst(mdAst);
-  const filteredLinkList = filterLink(linkList).map((link) =>
-    link.replace(/^\.?\//, "")
-  );
-  return filteredLinkList;
+  const allLinks = tocFileList.flatMap((tocFile) => {
+    const tocFileContent = fs.readFileSync(tocFile);
+    const mdAst = generateMdAstFromFile(tocFileContent);
+    const linkList = extractLinkNodeFromAst(mdAst);
+    return filterLink(linkList);
+  });
+
+  return [...new Set(allLinks)];
 };
 
 export const CLOUD_TOC_LIST = [
   "TOC-tidb-cloud.md",
   "TOC-tidb-cloud-essential.md",
   "TOC-tidb-cloud-starter.md",
+  "TOC-tidb-cloud-premium.md",
 ];
 
 export const getAllCloudMdList = (tocFiles = CLOUD_TOC_LIST) => {
@@ -180,9 +179,9 @@ export const astNode2mdStr = (astNode) => {
 
 export const removeCustomContent = (type, content = "") => {
   const TIDB_CUSTOM_CONTENT_REGEX =
-    /<CustomContent +platform=["']tidb["'] *>(.|\n)*?<\/CustomContent>\n/g;
+    /<CustomContent[^>]*platform=["']tidb["'][^>]*>(.|\n)*?<\/CustomContent>/g;
   const TIDB_CLOUD_CONTENT_REGEX =
-    /<CustomContent +platform=["']tidb-cloud["'] *>(.|\n)*?<\/CustomContent>\n/g;
+    /<CustomContent[^>]*platform=["']tidb-cloud["'][^>]*>(.|\n)*?<\/CustomContent>/g;
   if (type === "tidb") {
     return content.replaceAll(TIDB_CLOUD_CONTENT_REGEX, "");
   }

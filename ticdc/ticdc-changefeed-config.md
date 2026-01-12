@@ -82,7 +82,7 @@ This section introduces the configuration of a replication task.
 ### `bdr-mode`
 
 - To set up BDR (Bidirectional replication) clusters using TiCDC, modify this parameter to `true` and set the TiDB clusters to BDR mode. For more information, see [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md#bidirectional-replication).
-- Default value: `false`, indicating that bi-directional replication (BDR) mode is not enabled
+- Default value: `false`, indicating that bidirectional replication (BDR) mode is not enabled
 
 ### `changefeed-error-stuck-duration`
 

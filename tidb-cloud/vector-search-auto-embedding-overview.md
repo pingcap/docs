@@ -13,13 +13,9 @@ To use Auto Embedding, the basic workflow is as follows:
 2. **Insert text data** — vectors are automatically generated and stored concurrently.
 3. **Query using text** — use `VEC_EMBED_COSINE_DISTANCE()` or `VEC_EMBED_L2_DISTANCE()` to find semantically similar content.
 
-## Availability
-
-Currently, Auto Embedding is only available on {{{ .starter }}} clusters in the following AWS regions:
-
-- `Frankfurt (eu-central-1)`
-- `Oregon (us-west-2)`
-- `N. Virginia (us-east-1)`
+> **Note:**
+>
+> Auto Embedding is only available on {{{ .starter }}} clusters hosted on AWS.
 
 ## Quick start example
 
@@ -107,7 +103,6 @@ LIMIT 3;
 > **Note:**
 >
 > - When defining a vector index, use `VEC_COSINE_DISTANCE()` or `VEC_L2_DISTANCE()`.
->
 > - When running queries, use `VEC_EMBED_COSINE_DISTANCE()` or `VEC_EMBED_L2_DISTANCE()`.
 
 ## Available text embedding models
@@ -124,8 +119,8 @@ TiDB Cloud supports various embedding models. Choose the one that best fits your
 
 You can also use open-source embedding models through the following inference services that TiDB Cloud supports:
 
-| Embedding model       | Documentation                                                                     | Hosted by TiDB Cloud <sup>1</sup> | BYOK <sup>2</sup> | Example supported models      |
-| --------------------- | --------------------------------------------------------------------------------- | --------------------------------- | ----------------- | ----------------------------- |
+| Embedding model       | Documentation                                                                     | Hosted by TiDB Cloud <sup>1</sup> | BYOK <sup>2</sup> | Example supported models          |
+| --------------------- | --------------------------------------------------------------------------------- | --------------------------------- | ----------------- | --------------------------------- |
 | HuggingFace Inference | [HuggingFace Embeddings](/tidb-cloud/vector-search-auto-embedding-huggingface.md) |                                   | ✅                | `bge-m3`, `multilingual-e5-large` |
 | NVIDIA NIM            | [NVIDIA NIM Embeddings](/tidb-cloud/vector-search-auto-embedding-nvidia-nim.md)   |                                   | ✅                | `bge-m3`, `nv-embed-v1`           |
 

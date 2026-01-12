@@ -5,7 +5,7 @@ summary: Learn how to connect to TiDB using Hibernate. This tutorial gives Java 
 
 # Connect to TiDB with Hibernate
 
-TiDB is a MySQL-compatible database, and [Hibernate](https://hibernate.org/orm/) is a popular open-source Java ORM. Starting from version `6.0.0.Beta2`, Hibernate supports TiDB dialect, which fits TiDB features well.
+TiDB is a MySQL-compatible database, and [Hibernate](https://hibernate.org/orm/) is a popular open-source Java ORM. Because TiDB is highly compatible with MySQL, it is recommended that you use `org.hibernate.dialect.MySQLDialect` as the Hibernate dialect for long-term compatibility. Alternatively, a TiDB-specific dialect (`org.hibernate.community.dialect.TiDBDialect`) is available in [Hibernate community dialects](https://github.com/hibernate/hibernate-orm/tree/main/hibernate-community-dialects), but it is not maintained by PingCAP. If you use `MySQLDialect` and encounter any compatibility issues, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 In this tutorial, you can learn how to use TiDB and Hibernate to accomplish the following tasks:
 
@@ -198,7 +198,7 @@ Edit the Hibernate configuration file `hibernate.cfg.xml`:
 
         <!-- Database connection settings -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.TiDBDialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.url">${tidb_jdbc_url}</property>
         <property name="hibernate.connection.username">${tidb_user}</property>
         <property name="hibernate.connection.password">${tidb_password}</property>
@@ -257,6 +257,42 @@ try (Session session = sessionFactory.openSession()) {
 ```
 
 For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
+
+## Compatibility with `MySQLDialect`
+
+When you use `MySQLDialect` with TiDB, be aware of the following behaviors:
+
+### `SERIALIZABLE` isolation level
+
+Applications that attempt to set the `SERIALIZABLE` transaction isolation level will encounter the following error in TiDB:
+
+```
+The isolation level 'SERIALIZABLE' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error
+```
+
+To avoid this error, set the following TiDB system variable on the server side:
+
+```sql
+SET GLOBAL tidb_skip_isolation_level_check=1;
+```
+
+After this variable is enabled, TiDB accepts requests that specify `SERIALIZABLE` without returning an error. Internally, TiDB still uses `REPEATABLE-READ`, which is its strongest isolation level. For more information, see [`tidb_skip_isolation_level_check`](/system-variables.md#tidb_skip_isolation_level_check).
+
+> **Note:**
+>
+> The community-maintained `TiDBDialect` handles this behavior automatically by skipping features that require the `SERIALIZABLE` isolation level.
+
+### `CHECK` constraints
+
+Hibernate's [`@Check`](https://docs.hibernate.org/orm/6.5/javadocs/org/hibernate/annotations/Check.html) annotation generates DDL `CHECK` constraints. [MySQL 8.0.16 and later verions](https://dev.mysql.com/doc/refman/8.0/en/create-table-check-constraints.html) enforces these constraints by default, but TiDB does not enforce them unless explicitly enabled.
+
+To enable `CHECK` constraint enforcement in TiDB, set the following system variable:
+
+```sql
+SET GLOBAL tidb_enable_check_constraint=ON;
+```
+
+Without this setting, TiDB accepts the `CHECK` constraint syntax but does not enforce it, which might lead to unexpected data integrity issues. For more information, see [`CHECK` constraints](/constraints.md#check).
 
 ## Next steps
 

@@ -135,13 +135,22 @@ The place where the data of deleted clusters with valid backups is stored. Once 
 
 A separate database that can be located in the same or different region and contains the same data. A replica is often used for disaster recovery purposes or to improve performance.
 
-### Replication Capacity Unit
+### Replication Capacity Unit (RCU)
 
-The replication of changefeed is charged according to the computing resources, which is the TiCDC replication capacity unit.
+TiDB Cloud measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Replication Capacity Units (RCUs). When you create a changefeed for a cluster, you can select an appropriate specification. The higher the RCU, the better the replication performance. You will be charged for these TiCDC changefeed RCUs. For more information, see [Changefeed Cost](https://www.pingcap.com/tidb-dedicated-pricing-details/#changefeed-cost).
 
-### Request Unit
+### Request Capacity Unit (RCU)
 
-A Request Unit (RU) is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified. For more information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
+A Request Capacity Unit (RCU) is a unit of measure used to represent the provisioned compute capacity for your {{{ .essential }}} cluster. One RCU provides a fixed amount of compute resources that can process a certain number of RUs per second. The number of RCUs you provision determines your cluster's baseline performance and throughput capacity. For more information, see [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
+
+### Request Unit (RU)
+
+For {{{ .starter }}} and Essential, a Request Unit (RU) is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified. However, the billing models for {{{ .starter }}} and Essential are different:
+
+- {{{ .starter }}} is billed based on the total number of RUs consumed. For more information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
+- {{{ .essential }}} is billed based on the number of provisioned [Request Capacity Units (RCUs)](#request-capacity-unit-rcu). One RCU provides a fixed amount of compute resources that can process a certain number of RUs-per-second. For more information, see [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
+
+For TiDB Cloud Dedicated and TiDB Self-Managed, a Request Unit (RU) is a resource abstraction unit that represents system resource consumption, which currently includes CPU, IOPS, and IO bandwidth metrics. It is used by the resource control feature to limit, isolate, and manage resources consumed by database requests, **not for billing purposes**. For more information, see [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md).
 
 ## S
 
@@ -158,6 +167,12 @@ The collection of [TiDB](https://docs.pingcap.com/tidb/stable/tidb-computing), [
 ### TiDB node
 
 The computing node that aggregates data from queries returned from transactional or analytical stores. Increasing the number of TiDB nodes will increase the number of concurrent queries that the cluster can handle.
+
+### TiDB X
+
+A new distributed SQL architecture that makes cloud-native object storage the backbone of TiDB. By decoupling compute and storage, TiDB X enables TiDB to scale intelligently, adapting in real time to workload patterns, business cycles, and data characteristics.
+
+The TiDB X architecture is now available in <CustomContent plan="starter,essential,dedicated">{{{ .starter }}} and Essential</CustomContent><CustomContent plan="premium">{{{ .starter }}}, Essential, and Premium</CustomContent>. For more information, see [Introducing TiDB X: A New Foundation for Distributed SQL in the Era of AI](https://www.pingcap.com/blog/introducing-tidb-x-a-new-foundation-distributed-sql-ai-era/) and [PingCAP Launches TiDB X and New AI Capabilities at SCaiLE Summit 2025](https://www.pingcap.com/press-release/pingcap-launches-tidb-x-new-ai-capabilities/).
 
 ### TiFlash node
 

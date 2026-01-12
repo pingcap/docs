@@ -11,7 +11,7 @@ summary: Learn how to manage spending limit for your {{{ .starter }}} clusters.
 
 Spending limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that allows you to set a budget for your {{{ .starter }}} clusters.
 
-For each organization in TiDB Cloud, you can create a maximum of five [free {{{ .starter }}} clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) by default. To create more {{{ .starter }}} clusters, you need to add a credit card and set a monthly spending limit for the usage. But if you delete some of your previous clusters before creating more, the new cluster can still be created without a credit card.
+For each organization in TiDB Cloud, you can create a maximum of five [free {{{ .starter }}} clusters](/tidb-cloud/select-cluster-tier.md#starter) by default. To create more {{{ .starter }}} clusters, you need to add a credit card and set a monthly spending limit for the usage. But if you delete some of your previous clusters before creating more, the new cluster can still be created without a credit card.
 
 ## Usage quota
 
@@ -19,7 +19,7 @@ For the first five {{{ .starter }}} clusters in your organization, whether they 
 
 - Row-based storage: 5 GiB
 - Columnar storage: 5 GiB
-- [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
+- [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru): 50 million RUs per month
 
 Once a cluster reaches its usage quota, it immediately denies any new connection attempts until you [increase the quota](#update-spending-limit) or the usage is reset upon the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling. For example, when the row-based storage of a cluster exceeds 5 GiB for a free cluster, the cluster automatically restricts any new connection attempts.
 
