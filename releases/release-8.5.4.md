@@ -64,7 +64,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 Newly created v8.5.3 clusters can be smoothly upgraded to v8.5.4. However, v8.5.4 introduces several **default value changes and behavior adjustments** for system variables and configuration parameters. Before upgrading, pay attention to the following:
 
 - Most changes are safe for routine upgrades. However, if your cluster has undergone performance tuning, such as customized TiFlash and TiKV compaction configurations, review this section carefully.
-- Some legacy configuration items are deprecated in v8.5.4 and no longer recommended. It is recommended that you migrate them to the corresponding new configuration group provided in this section.
+- Some legacy TiKV configuration items are deprecated in v8.5.4 and no longer recommended. As a replacement, it is recommended that you use the new TiKV configuration group provided in this section.
 
 ### System variables
 
