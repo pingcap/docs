@@ -114,7 +114,7 @@ To address this problem, delete the current task using `br log stop`, and then c
 failed to refresh meta for database with schemaID=124, dbName=pitr_test: [ddl:8204]invalid ddl job type: none
 ```
 
-This error occurs because the TiDB node acting as the DDL owner cannot recognize the Refresh Meta DDL, which is due to an outdated TiDB version in the cluster. Please upgrade the cluster to at least v8.5.5 before using the PITR table filter feature.
+This error occurs because the TiDB node acting as the DDL Owner is running an outdated version that cannot recognize the Refresh Meta DDL. To resolve this issue, upgrade your cluster to v8.5.5 or later before using the PITR table filter feature.
 
 ## Feature compatibility issues
 
