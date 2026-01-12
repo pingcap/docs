@@ -210,7 +210,7 @@ For production workloads, it is recommended to have a dedicated user for replica
 | `ALTER`  | Tables | Modifies table definitions when schema changes |
 | `DROP`   | Databases, Tables | Removes objects during schema sync |
 | `INDEX`  | Tables | Creates and modifies indexes |
-| `CREATE VIEW`  | View | Create views used by migration |
+| `CREATE VIEW`  | View | Creates views used by migration |
 
 For example, you can execute the following `GRANT` statement in your target TiDB Cloud cluster to grant corresponding privileges:
 

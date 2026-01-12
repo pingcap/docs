@@ -22,7 +22,7 @@ For instructions about how to migrate existing data or both existing data and in
     00000000-0000-0000-0000-00000000000000000], endLocation:
     [position: (mysql_bin.000016, 5162), gtid-set: 0000000-0000-0000
     0000-0000000000000:0]: cannot fetch downstream table schema of
-    zm`.'table1' to initialize upstream schema 'zm'.'table1' in sschema
+    zm`.'table1' to initialize upstream schema 'zm'.'table1' in schema
     tracker Raw Cause: Error 1146: Table 'zm.table1' doesn't exist
     ```
 
@@ -132,7 +132,7 @@ To enable the GTID mode for a self-hosted MySQL instance, follow these steps:
 
 3. On the **Data Migration** page, click **Create Migration Job** in the upper-right corner. The **Create Migration Job** page is displayed.
 
-## Step 2: Configure the source and target connection
+## Step 2: Configure the source and target connections
 
 On the **Create Migration Job** page, configure the source and target connection.
 

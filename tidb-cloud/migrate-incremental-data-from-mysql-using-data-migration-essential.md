@@ -1,9 +1,9 @@
 ---
-title: Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
-summary: Learn how to migrate incremental data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, Azure Database for MySQL, or a local MySQL instance to TiDB Cloud using Data Migration.
+title: Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Essential Using Data Migration
+summary: Learn how to migrate incremental data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, Azure Database for MySQL, or a local MySQL instance to TiDB Cloud Essential using Data Migration.
 ---
 
-# Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
+# Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Essential Using Data Migration
 
 This document describes how to migrate incremental data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, or Azure Database for MySQL) or self-hosted source database to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
 
@@ -22,7 +22,7 @@ For instructions about how to migrate existing data or both existing data and in
     00000000-0000-0000-0000-00000000000000000], endLocation:
     [position: (mysql_bin.000016, 5162), gtid-set: 0000000-0000-0000
     0000-0000000000000:0]: cannot fetch downstream table schema of
-    zm`.'table1' to initialize upstream schema 'zm'.'table1' in sschema
+    zm`.'table1' to initialize upstream schema 'zm'.'table1' in schema
     tracker Raw Cause: Error 1146: Table 'zm.table1' doesn't exist
     ```
 
