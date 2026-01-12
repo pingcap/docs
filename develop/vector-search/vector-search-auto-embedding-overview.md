@@ -111,18 +111,18 @@ TiDB Cloud supports various embedding models. Choose the one that best fits your
 
 | Embedding model | Documentation                                                                       | Hosted by TiDB Cloud <sup>1</sup> | BYOK <sup>2</sup> |
 | --------------- | ----------------------------------------------------------------------------------- | --------------------------------- | ----------------- |
-| Amazon Titan    | [Amazon Titan Embeddings](/develop/vector-search-auto-embedding-amazon-titan.md) | ✅                                |                   |
-| Cohere          | [Cohere Embeddings](/develop/vector-search-auto-embedding-cohere.md)             | ✅                                | ✅                |
-| Jina AI         | [Jina AI Embeddings](/develop/vector-search-auto-embedding-jina-ai.md)           |                                   | ✅                |
-| OpenAI          | [OpenAI Embeddings](/develop/vector-search-auto-embedding-openai.md)             |                                   | ✅                |
-| Gemini          | [Gemini Embeddings](/develop/vector-search-auto-embedding-gemini.md)             |                                   | ✅                |
+| Amazon Titan    | [Amazon Titan Embeddings](/develop/vector-search/vector-search-auto-embedding-amazon-titan.md) | ✅                                |                   |
+| Cohere          | [Cohere Embeddings](/develop/vector-search/vector-search-auto-embedding-cohere.md)             | ✅                                | ✅                |
+| Jina AI         | [Jina AI Embeddings](/develop/vector-search/vector-search-auto-embedding-jina-ai.md)           |                                   | ✅                |
+| OpenAI          | [OpenAI Embeddings](/develop/vector-search/vector-search-auto-embedding-openai.md)             |                                   | ✅                |
+| Gemini          | [Gemini Embeddings](/develop/vector-search/vector-search-auto-embedding-gemini.md)             |                                   | ✅                |
 
 You can also use open-source embedding models through the following inference services that TiDB Cloud supports:
 
 | Embedding model       | Documentation                                                                     | Hosted by TiDB Cloud <sup>1</sup> | BYOK <sup>2</sup> | Example supported models          |
 | --------------------- | --------------------------------------------------------------------------------- | --------------------------------- | ----------------- | --------------------------------- |
-| HuggingFace Inference | [HuggingFace Embeddings](/develop/vector-search-auto-embedding-huggingface.md) |                                   | ✅                | `bge-m3`, `multilingual-e5-large` |
-| NVIDIA NIM            | [NVIDIA NIM Embeddings](/develop/vector-search-auto-embedding-nvidia-nim.md)   |                                   | ✅                | `bge-m3`, `nv-embed-v1`           |
+| HuggingFace Inference | [HuggingFace Embeddings](/develop/vector-search/vector-search-auto-embedding-huggingface.md) |                                   | ✅                | `bge-m3`, `multilingual-e5-large` |
+| NVIDIA NIM            | [NVIDIA NIM Embeddings](/develop/vector-search/vector-search-auto-embedding-nvidia-nim.md)   |                                   | ✅                | `bge-m3`, `nv-embed-v1`           |
 
 &#8203;<sup>1</sup> Hosted models are hosted by TiDB Cloud and do not require any API keys. Currently, these hosted models are free to use, but certain usage limits might be applied to keep them available to everyone.
 

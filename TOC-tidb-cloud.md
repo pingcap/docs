@@ -192,7 +192,7 @@
     - [Vector Index](/develop/vector-search/vector-search-index.md)
   - [Improve Performance](/develop/vector-search/vector-search-improve-performance.md)
   - [Limitations](/develop/vector-search/vector-search-limitations.md)
-  - [Changelogs](/develop/vector-search-changelogs.md)
+  - [Changelogs](/develop/vector-search/vector-search-changelogs.md)
 - Data Service ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/tidb-cloud/data-service-overview.md)
   - [Get Started](/tidb-cloud/data-service-get-started.md)

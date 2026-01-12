@@ -20,9 +20,9 @@ The full-text search feature in TiDB provides the following capabilities:
 
 > **Tip:**
 >
-> For Python usage, see [Full-Text Search with Python](/develop/vector-search-full-text-search-python.md).
+> For Python usage, see [Full-Text Search with Python](/develop/vector-search/vector-search-full-text-search-python.md).
 >
-> To use full-text search and vector search together in your AI apps, see [Hybrid Search](/develop/vector-search-hybrid-search.md).
+> To use full-text search and vector search together in your AI apps, see [Hybrid Search](/develop/vector-search/vector-search-hybrid-search.md).
 
 ## Get started
 
@@ -200,7 +200,7 @@ WHERE t.author_id IN
 
 ## See also
 
-- [Hybrid Search](/develop/vector-search-hybrid-search.md)
+- [Hybrid Search](/develop/vector-search/vector-search-hybrid-search.md)
 
 ## Feedback & help
 

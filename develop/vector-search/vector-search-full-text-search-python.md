@@ -20,9 +20,9 @@ The full-text search feature in TiDB provides the following capabilities:
 
 > **Tip:**
 >
-> For SQL usage, see [Full-Text Search with SQL](/develop/vector-search-full-text-search-sql.md).
+> For SQL usage, see [Full-Text Search with SQL](/develop/vector-search/vector-search-full-text-search-sql.md).
 >
-> To use full-text search and vector search together in your AI apps, see [Hybrid Search](/develop/vector-search-hybrid-search.md).
+> To use full-text search and vector search together in your AI apps, see [Hybrid Search](/develop/vector-search/vector-search-hybrid-search.md).
 
 ## Prerequisites
 
@@ -153,7 +153,7 @@ For a complete example, see [pytidb full-text search demo](https://github.com/pi
 
 - [pytidb Python SDK Documentation](https://github.com/pingcap/pytidb)
 
-- [Hybrid Search](/develop/vector-search-hybrid-search.md)
+- [Hybrid Search](/develop/vector-search/vector-search-hybrid-search.md)
 
 ## Feedback & Help
 

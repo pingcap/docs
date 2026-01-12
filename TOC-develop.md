@@ -81,14 +81,14 @@
     - [Get Started with SQL](/develop/vector-search/vector-search-get-started-using-sql.md)
     - [Get Started with Python](/develop/vector-search/vector-search-get-started-using-python.md)
   - Auto Embedding
-    - [Overview](/develop/vector-search-auto-embedding-overview.md)
-    - [Amazon Titan Embeddings](/develop/vector-search-auto-embedding-amazon-titan.md)
-    - [Cohere Embeddings](/develop/vector-search-auto-embedding-cohere.md)
-    - [Jina AI Embeddings](/develop/vector-search-auto-embedding-jina-ai.md)
-    - [OpenAI Embeddings](/develop/vector-search-auto-embedding-openai.md)
-    - [Gemini Embeddings](/develop/vector-search-auto-embedding-gemini.md)
-    - [HuggingFace Embeddings](/develop/vector-search-auto-embedding-huggingface.md)
-    - [NVIDIA NIM Embeddings](/develop/vector-search-auto-embedding-nvidia-nim.md)
+    - [Overview](/develop/vector-search/vector-search-auto-embedding-overview.md)
+    - [Amazon Titan Embeddings](/develop/vector-search/vector-search-auto-embedding-amazon-titan.md)
+    - [Cohere Embeddings](/develop/vector-search/vector-search-auto-embedding-cohere.md)
+    - [Jina AI Embeddings](/develop/vector-search/vector-search-auto-embedding-jina-ai.md)
+    - [OpenAI Embeddings](/develop/vector-search/vector-search-auto-embedding-openai.md)
+    - [Gemini Embeddings](/develop/vector-search/vector-search-auto-embedding-gemini.md)
+    - [HuggingFace Embeddings](/develop/vector-search/vector-search-auto-embedding-huggingface.md)
+    - [NVIDIA NIM Embeddings](/develop/vector-search/vector-search-auto-embedding-nvidia-nim.md)
   - Integrations
     - [Overview](/develop/vector-search/vector-search-integration-overview.md)
     - AI Frameworks
@@ -103,9 +103,9 @@
       - [peewee](/develop/vector-search/vector-search-integrate-with-peewee.md)
       - [Django ORM](/develop/vector-search/vector-search-integrate-with-django-orm.md)
   - Text Search
-    - [Full-Text Search with SQL](/develop/vector-search-full-text-search-sql.md)
-    - [Full-Text Search with Python](/develop/vector-search-full-text-search-python.md)
-    - [Hybrid Search](/develop/vector-search-hybrid-search.md)
+    - [Full-Text Search with SQL](/develop/vector-search/vector-search-full-text-search-sql.md)
+    - [Full-Text Search with Python](/develop/vector-search/vector-search-full-text-search-python.md)
+    - [Hybrid Search](/develop/vector-search/vector-search-hybrid-search.md)
   - Reference
     - [Vector Data Types](/develop/vector-search/vector-search-data-types.md)
     - [Vector Functions and Operators](/develop/vector-search/vector-search-functions-and-operators.md)
