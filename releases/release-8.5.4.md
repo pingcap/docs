@@ -61,13 +61,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ## Compatibility changes
 
-## Highlights
+Newly created v8.5.3 clusters can be smoothly upgraded to v8.5.4. However, this release includes **default value changes and behavior adjustments** for several system variables and configuration parameters that require attention.
+- Most changes are **safe for general upgrades**, but **clusters with customized performance tuning, TiFlash, or TiKV compaction settings should review this section carefully**.
+- Some legacy configuration items are **deprecated and no longer recommended**, and you should **migrate to the new configuration groups**.
 
-- Newly created v8.5.3 clusters can be smoothly upgraded to v8.5.4. However, this release includes **default value changes and behavior adjustments** for several system variables and configuration parameters that require attention.
-  - Most changes are **safe for general upgrades**, but **clusters with customized performance tuning, TiFlash, or TiKV compaction settings should review this section carefully**.
-  - Some legacy configuration items are **deprecated and no longer recommended**, and you should **migrate to the new configuration groups**.
-
-## System Variables
+### System variables
 
 | Variable | Type | Default Value | Description | PR | Contributor |
 |--------|------|---------------|-------------|----|-------------|
@@ -77,7 +75,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 | [`tidb_opt_enable_semi_join_rewrite`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_enable_semi_join_rewrite-new-in-v854) | New | `OFF` | Controls whether to rewrite `EXISTS` subqueries. | [#44850](https://github.com/pingcap/tidb/issues/44850) | [@terry1purcell](https://github.com/terry1purcell) |
 | [`tidb_stats_update_during_ddl`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_stats_update_during_ddl-new-in-v854) | New | `OFF` | When enabled, `ADD INDEX` collects statistics during DDL, allowing immediate optimizer usage. May increase DDL time on large tables. | [#57948](https://github.com/pingcap/tidb/issues/57948) | [@terry1purcell](https://github.com/terry1purcell), [@AilinKid](https://github.com/AilinKid) |
 
-## Configuration Parameters
+### Configuration parameters
 
 | Configuration Parameter | Type | Default Value | Description | PR | Contributor |
 |-------------------------|------|---------------|-------------|----|-------------|
