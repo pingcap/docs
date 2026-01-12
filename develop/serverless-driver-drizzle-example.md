@@ -97,7 +97,7 @@ To complete this tutorial, you need the following:
 
 1. Create a table in your {{{ .starter }}} cluster.
 
-   You can use [SQL Editor in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
+   You can use [SQL Editor in the TiDB Cloud console](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query) to execute SQL statements. Here is an example:
 
    ```sql
    CREATE TABLE `test`.`users` (
@@ -207,7 +207,7 @@ To complete this tutorial, you need the following:
 
 1. Create a table in your {{{ .starter }}} cluster.
 
-   You can use [SQL Editor in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
+   You can use [SQL Editor in the TiDB Cloud console](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
 
    ```sql
    CREATE TABLE `test`.`users` (

@@ -17,8 +17,8 @@ This tutorial takes a {{{ .starter }}} cluster as an example to show you how to 
 >
 > - In addition to {{{ .starter }}} clusters, the steps in this document also work with {{{ .essential }}} clusters.
 > - Most steps in this tutorial work with TiDB Cloud Dedicated as well. However, for TiDB Cloud Dedicated, you need to note the following:
->     - Import your dataset following [Import data from files to TiDB Cloud](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud).
->     - Get the connection information for your cluster following [Connect to TiDB Cloud Dedicated](/tidb-cloud/connect-via-standard-connection.md). When connecting to TiDB Cloud Dedicated, you need to allow access from `142.251.74.0/23`. For more information about connections from Looker Studio, see [Looker Studio documentation](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article).
+>     - Import your dataset following [Import data from files to TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview#import-data-from-files-to-tidb-cloud).
+>     - Get the connection information for your cluster following [Connect to TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection). When connecting to TiDB Cloud Dedicated, you need to allow access from `142.251.74.0/23`. For more information about connections from Looker Studio, see [Looker Studio documentation](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article).
 
 ## Prerequisites
 
@@ -133,7 +133,7 @@ Then, you can see a combo chart similar as follows:
 ## Next steps
 
 - Learn more usage of Looker Studio from [Looker Studio Help](https://support.google.com/looker-studio).
-- Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
+- Learn the best practices for TiDB application development with the chapters in the [Developer guide](https://docs.pingcap.com/developer/), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
 ## Need help?

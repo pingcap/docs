@@ -89,7 +89,7 @@ To complete this tutorial, you need the following:
 
 1. Create a table in your {{{ .starter }}} cluster and insert some data. 
 
-    You can use [SQL Editor in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
+    You can use [SQL Editor in the TiDB Cloud console](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query) to execute SQL statements. Here is an example:
 
    ```sql
    CREATE TABLE `test`.`person`  (
@@ -201,7 +201,7 @@ mysql://[username]:[password]@[host]/[database]
 
 1. Create a table in your {{{ .starter }}} cluster and insert some data.
 
-    You can use [SQL Editor in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
+    You can use [SQL Editor in the TiDB Cloud console](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query) to execute SQL statements. Here is an example:
 
    ```sql
    CREATE TABLE `test`.`person`  (
@@ -296,4 +296,4 @@ mysql://[username]:[password]@[host]/[database]
 ## What's next
 
 - Learn more about [Kysely](https://kysely.dev/docs/intro) and [@tidbcloud/kysely](https://github.com/tidbcloud/kysely)
-- Learn how to [integrate TiDB Cloud with Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
+- Learn how to [integrate TiDB Cloud with Vercel](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)

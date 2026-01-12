@@ -1,11 +1,11 @@
 ---
-title: Integrate TiDB Vector Search with SQLAlchemy
-summary: Learn how to integrate TiDB Vector Search with SQLAlchemy to store embeddings and perform semantic searches.
+title: Integrate TiDB Vector Search with peewee
+summary: Learn how to integrate TiDB Vector Search with peewee to store embeddings and perform semantic searches.
 ---
 
-# Integrate TiDB Vector Search with SQLAlchemy
+# Integrate TiDB Vector Search with peewee
 
-This tutorial walks you through how to use [SQLAlchemy](https://www.sqlalchemy.org/) to interact with [TiDB Vector Search](/vector-search/vector-search-overview.md), store embeddings, and perform vector search queries.
+This tutorial walks you through how to use [peewee](https://docs.peewee-orm.com/) to interact with the [TiDB Vector Search](/develop/vector-search/vector-search-overview.md), store embeddings, and perform vector search queries.
 
 <CustomContent platform="tidb">
 
@@ -54,11 +54,11 @@ To complete this tutorial, you need:
 
 ## Run the sample app
 
-You can quickly learn about how to integrate TiDB Vector Search with SQLAlchemy by following the steps below.
+You can quickly learn about how to integrate TiDB Vector Search with peewee by following the steps below.
 
 ### Step 1. Clone the repository
 
-Clone the `tidb-vector-python` repository to your local machine:
+Clone the [`tidb-vector-python`](https://github.com/pingcap/tidb-vector-python) repository to your local machine:
 
 ```shell
 git clone https://github.com/pingcap/tidb-vector-python.git
@@ -69,12 +69,12 @@ git clone https://github.com/pingcap/tidb-vector-python.git
 Create a virtual environment for your project:
 
 ```bash
-cd tidb-vector-python/examples/orm-sqlalchemy-quickstart
+cd tidb-vector-python/examples/orm-peewee-quickstart
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### Step 3. Install the required dependencies
+### Step 3. Install required dependencies
 
 Install the required dependencies for the demo project:
 
@@ -85,7 +85,7 @@ pip install -r requirements.txt
 Alternatively, you can install the following packages for your project:
 
 ```bash
-pip install pymysql python-dotenv sqlalchemy tidb-vector
+pip install peewee pymysql python-dotenv tidb-vector
 ```
 
 ### Step 4. Configure the environment variables
@@ -101,29 +101,41 @@ For a {{{ .starter }}} cluster, take the following steps to obtain the cluster c
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. Ensure the configurations in the connection dialog match your environment.
+3. Ensure the configurations in the connection dialog match your operating environment.
 
     - **Connection Type** is set to `Public`.
     - **Branch** is set to `main`.
-    - **Connect With** is set to `SQLAlchemy`.
+    - **Connect With** is set to `General`.
     - **Operating System** matches your environment.
 
     > **Tip:**
     >
     > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
 
-4. Click the **PyMySQL** tab and copy the connection string.
+4. Copy the connection parameters from the connection dialog.
 
     > **Tip:**
     >
     > If you have not set a password yet, click **Generate Password** to generate a random password.
 
-5. In the root directory of your Python project, create a `.env` file and paste the connection string into it.
+5. In the root directory of your Python project, create a `.env` file and paste the connection parameters to the corresponding environment variables.
+
+    - `TIDB_HOST`: The host of the TiDB cluster.
+    - `TIDB_PORT`: The port of the TiDB cluster.
+    - `TIDB_USERNAME`: The username to connect to the TiDB cluster.
+    - `TIDB_PASSWORD`: The password to connect to the TiDB cluster.
+    - `TIDB_DATABASE`: The database name to connect to.
+    - `TIDB_CA_PATH`: The path to the root certificate file.
 
     The following is an example for macOS:
 
     ```dotenv
-    TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+    TIDB_HOST=gateway01.****.prod.aws.tidbcloud.com
+    TIDB_PORT=4000
+    TIDB_USERNAME=********.root
+    TIDB_PASSWORD=********
+    TIDB_DATABASE=test
+    TIDB_CA_PATH=/etc/ssl/cert.pem
     ```
 
 </div>
@@ -132,19 +144,22 @@ For a {{{ .starter }}} cluster, take the following steps to obtain the cluster c
 For a TiDB Self-Managed cluster, create a `.env` file in the root directory of your Python project. Copy the following content into the `.env` file, and modify the environment variable values according to the connection parameters of your TiDB cluster:
 
 ```dotenv
-TIDB_DATABASE_URL="mysql+pymysql://<USER>:<PASSWORD>@<HOST>:<PORT>/<DATABASE>"
-# For example: TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
+TIDB_HOST=127.0.0.1
+TIDB_PORT=4000
+TIDB_USERNAME=root
+TIDB_PASSWORD=
+TIDB_DATABASE=test
 ```
 
-If you are running TiDB on your local machine, `<HOST>` is `127.0.0.1` by default. The initial `<PASSWORD>` is empty, so if you are starting the cluster for the first time, you can omit this field.
+If you are running TiDB on your local machine, `TIDB_HOST` is `127.0.0.1` by default. The initial `TIDB_PASSWORD` is empty, so if you are starting the cluster for the first time, you can omit this field.
 
 The following are descriptions for each parameter:
 
-- `<USER>`: The username to connect to the TiDB cluster.
-- `<PASSWORD>`: The password to connect to the TiDB cluster.
-- `<HOST>`: The host of the TiDB cluster.
-- `<PORT>`: The port of the TiDB cluster.
-- `<DATABASE>`: The name of the database you want to connect to.
+- `TIDB_HOST`: The host of the TiDB cluster.
+- `TIDB_PORT`: The port of the TiDB cluster.
+- `TIDB_USERNAME`: The username to connect to the TiDB cluster.
+- `TIDB_PASSWORD`: The password to connect to the TiDB cluster.
+- `TIDB_DATABASE`: The name of the database you want to connect to.
 
 </div>
 
@@ -153,7 +168,7 @@ The following are descriptions for each parameter:
 ### Step 5. Run the demo
 
 ```bash
-python sqlalchemy-quickstart.py
+python peewee-quickstart.py
 ```
 
 Example output:
@@ -185,38 +200,57 @@ You can refer to the following sample code snippets to develop your application.
 import os
 import dotenv
 
-from sqlalchemy import Column, Integer, create_engine, Text
-from sqlalchemy.orm import declarative_base, Session
-from tidb_vector.sqlalchemy import VectorType
+from peewee import Model, MySQLDatabase, SQL, TextField
+from tidb_vector.peewee import VectorField
 
 dotenv.load_dotenv()
 
-tidb_connection_string = os.environ['TIDB_DATABASE_URL']
-engine = create_engine(tidb_connection_string)
+# Using `pymysql` as the driver.
+connect_kwargs = {
+    'ssl_verify_cert': True,
+    'ssl_verify_identity': True,
+}
+
+# Using `mysqlclient` as the driver.
+# connect_kwargs = {
+#     'ssl_mode': 'VERIFY_IDENTITY',
+#     'ssl': {
+#         # Root certificate default path
+#         # https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters/#root-certificate-default-path
+#         'ca': os.environ.get('TIDB_CA_PATH', '/path/to/ca.pem'),
+#     },
+# }
+
+db = MySQLDatabase(
+    database=os.environ.get('TIDB_DATABASE', 'test'),
+    user=os.environ.get('TIDB_USERNAME', 'root'),
+    password=os.environ.get('TIDB_PASSWORD', ''),
+    host=os.environ.get('TIDB_HOST', 'localhost'),
+    port=int(os.environ.get('TIDB_PORT', '4000')),
+    **connect_kwargs,
+)
 ```
 
 #### Define a vector column
 
-Create a table with a column named `embedding` that stores a 3-dimensional vector.
+Create a table with a column named `peewee_demo_documents` that stores a 3-dimensional vector.
 
 ```python
-Base = declarative_base()
+class Document(Model):
+    class Meta:
+        database = db
+        table_name = 'peewee_demo_documents'
 
-class Document(Base):
-    __tablename__ = 'sqlalchemy_demo_documents'
-    id = Column(Integer, primary_key=True)
-    content = Column(Text)
-    embedding = Column(VectorType(3))
+    content = TextField()
+    embedding = VectorField(3)
 ```
 
 ### Store documents with embeddings
 
 ```python
-with Session(engine) as session:
-   session.add(Document(content="dog", embedding=[1, 2, 1]))
-   session.add(Document(content="fish", embedding=[1, 2, 4]))
-   session.add(Document(content="tree", embedding=[1, 0, 0]))
-   session.commit()
+Document.create(content='dog', embedding=[1, 2, 1])
+Document.create(content='fish', embedding=[1, 2, 4])
+Document.create(content='tree', embedding=[1, 0, 0])
 ```
 
 ### Search the nearest neighbor documents
@@ -224,26 +258,21 @@ with Session(engine) as session:
 Search for the top-3 documents that are semantically closest to the query vector `[1, 2, 3]` based on the cosine distance function.
 
 ```python
-with Session(engine) as session:
-   distance = Document.embedding.cosine_distance([1, 2, 3]).label('distance')
-   results = session.query(
-      Document, distance
-   ).order_by(distance).limit(3).all()
+distance = Document.embedding.cosine_distance([1, 2, 3]).alias('distance')
+results = Document.select(Document, distance).order_by(distance).limit(3)
 ```
 
 ### Search documents within a certain distance
 
-Search for documents whose cosine distance from the query vector `[1, 2, 3]` is less than 0.2.
+Search for the documents whose cosine distance from the query vector `[1, 2, 3]` is less than 0.2.
 
 ```python
-with Session(engine) as session:
-    distance = Document.embedding.cosine_distance([1, 2, 3]).label('distance')
-    results = session.query(
-        Document, distance
-    ).filter(distance < 0.2).order_by(distance).limit(3).all()
+distance_expression = Document.embedding.cosine_distance([1, 2, 3])
+distance = distance_expression.alias('distance')
+results = Document.select(Document, distance).where(distance_expression < 0.2).order_by(distance).limit(3)
 ```
 
 ## See also
 
-- [Vector Data Types](/vector-search/vector-search-data-types.md)
-- [Vector Search Index](/vector-search/vector-search-index.md)
+- [Vector Data Types](/develop/vector-search/vector-search-data-types.md)
+- [Vector Search Index](/develop/vector-search/vector-search-index.md)

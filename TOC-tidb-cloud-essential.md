@@ -11,7 +11,7 @@
   - [MySQL Compatibility](/mysql-compatibility.md)
 - Get Started
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
-  - [Try Out TiDB + AI](/vector-search/vector-search-get-started-using-python.md)
+  - [Try Out TiDB + AI](/develop/vector-search/vector-search-get-started-using-python.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
 - Key Concepts
@@ -133,33 +133,33 @@
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Vector Search ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-  - [Overview](/vector-search/vector-search-overview.md)
+  - [Overview](/develop/vector-search/vector-search-overview.md)
   - Get Started
-    - [Get Started with SQL](/vector-search/vector-search-get-started-using-sql.md)
-    - [Get Started with Python](/vector-search/vector-search-get-started-using-python.md)
+    - [Get Started with SQL](/develop/vector-search/vector-search-get-started-using-sql.md)
+    - [Get Started with Python](/develop/vector-search/vector-search-get-started-using-python.md)
   - Integrations
-    - [Overview](/vector-search/vector-search-integration-overview.md)
+    - [Overview](/develop/vector-search/vector-search-integration-overview.md)
     - AI Frameworks
-      - [LlamaIndex](/vector-search/vector-search-integrate-with-llamaindex.md)
-      - [LangChain](/vector-search/vector-search-integrate-with-langchain.md)
+      - [LlamaIndex](/develop/vector-search/vector-search-integrate-with-llamaindex.md)
+      - [LangChain](/develop/vector-search/vector-search-integrate-with-langchain.md)
     - AI Services
-      - [Amazon Bedrock](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md)
+      - [Amazon Bedrock](/develop/vector-search-integrate-with-amazon-bedrock.md)
     - Embedding Models/Services
-      - [Jina AI](/vector-search/vector-search-integrate-with-jinaai-embedding.md)
+      - [Jina AI](/develop/vector-search/vector-search-integrate-with-jinaai-embedding.md)
     - ORM Libraries
-      - [SQLAlchemy](/vector-search/vector-search-integrate-with-sqlalchemy.md)
-      - [peewee](/vector-search/vector-search-integrate-with-peewee.md)
-      - [Django ORM](/vector-search/vector-search-integrate-with-django-orm.md)
+      - [SQLAlchemy](/develop/vector-search/vector-search-integrate-with-sqlalchemy.md)
+      - [peewee](/develop/vector-search/vector-search-integrate-with-peewee.md)
+      - [Django ORM](/develop/vector-search/vector-search-integrate-with-django-orm.md)
   - Text Search
-    - [Full-Text Search with SQL](/tidb-cloud/vector-search-full-text-search-sql.md)
-    - [Full-Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md)
-    - [Hybrid Search](/tidb-cloud/vector-search-hybrid-search.md)
+    - [Full-Text Search with SQL](/develop/vector-search-full-text-search-sql.md)
+    - [Full-Text Search with Python](/develop/vector-search-full-text-search-python.md)
+    - [Hybrid Search](/develop/vector-search-hybrid-search.md)
   - Reference
-    - [Vector Data Types](/vector-search/vector-search-data-types.md)
-    - [Vector Functions and Operators](/vector-search/vector-search-functions-and-operators.md)
-    - [Vector Index](/vector-search/vector-search-index.md)
-  - [Improve Performance](/vector-search/vector-search-improve-performance.md)
-  - [Limitations](/vector-search/vector-search-limitations.md)
+    - [Vector Data Types](/develop/vector-search/vector-search-data-types.md)
+    - [Vector Functions and Operators](/develop/vector-search/vector-search-functions-and-operators.md)
+    - [Vector Index](/develop/vector-search/vector-search-index.md)
+  - [Improve Performance](/develop/vector-search/vector-search-improve-performance.md)
+  - [Limitations](/develop/vector-search/vector-search-limitations.md)
 - Security
   - [Security Overview](/tidb-cloud/security-overview.md)
   - Identity Access Control

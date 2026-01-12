@@ -10,7 +10,7 @@
   - [MySQL Compatibility](/mysql-compatibility.md)
 - Get Started with TiDB Cloud
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
-  - [Try Out TiDB + AI](/vector-search/vector-search-get-started-using-python.md)
+  - [Try Out TiDB + AI](/develop/vector-search/vector-search-get-started-using-python.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
 - Key Concepts
@@ -29,7 +29,7 @@
 ## DEVELOP
 
 - Development Quick Start
-  - [Developer Guide Overview](/develop/dev-guide-overview.md)
+  - [Developer Guide Overview](https://docs.pingcap.com/developer/)
   - [Build a TiDB Cloud Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
   - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
 - Connect to TiDB Cloud

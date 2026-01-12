@@ -5,7 +5,7 @@ summary: Learn how to integrate TiDB Vector Search with Django ORM to store embe
 
 # Integrate TiDB Vector Search with Django ORM
 
-This tutorial walks you through how to use [Django](https://www.djangoproject.com/) ORM to interact with the [TiDB Vector Search](/vector-search/vector-search-overview.md), store embeddings, and perform vector search queries.
+This tutorial walks you through how to use [Django](https://www.djangoproject.com/) ORM to interact with the [TiDB Vector Search](/develop/vector-search/vector-search-overview.md), store embeddings, and perform vector search queries.
 
 <CustomContent platform="tidb">
 
@@ -284,5 +284,5 @@ results = Document.objects.annotate(
 
 ## See also
 
-- [Vector Data Types](/vector-search/vector-search-data-types.md)
-- [Vector Search Index](/vector-search/vector-search-index.md)
+- [Vector Data Types](/develop/vector-search/vector-search-data-types.md)
+- [Vector Search Index](/develop/vector-search/vector-search-index.md)
