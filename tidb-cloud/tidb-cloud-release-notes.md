@@ -16,6 +16,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - Support exporting TiDB backup snapshots to Amazon S3 buckets.
   
-        TiDB Cloud Dedicated now supports exporting backup snapshots to your Amazon S3 buckets. This feature allows you to retain backups in your own cloud storage to achieve enhanced security and compliance.
+        TiDB Cloud Dedicated now supports exporting backup snapshots to your Amazon S3 buckets. This feature allows you to retain backups in your own cloud storage to enhance security and compliance.
 
         For more information, see [Export backups](/tidb-cloud/backup-and-restore.md#export-backups).
