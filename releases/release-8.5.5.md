@@ -224,13 +224,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + TiDB <!--tw@lilin90: the following 15 notes-->
 
-    - Fix the issue that TiDB fails to read the latest value of the tidb_mem_quota_binding_cache variable for initialization during the startup process [#65381](https://github.com/pingcap/tidb/issues/65381) @[qw4990](https://github.com/qw4990)
-    - Fix the issue that candidate items are incorrectly skipped in extractBestCNFItemRanges, leading to inaccurate query range calculation [#62547](https://github.com/pingcap/tidb/issues/62547) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that TiDB fails to read the latest value of the `tidb_mem_quota_binding_cache` variable to perform initialization binding during startup [#65381](https://github.com/pingcap/tidb/issues/65381) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that candidate items are incorrectly skipped in `extractBestCNFItemRanges`, leading to inaccurate query range calculation [#62547](https://github.com/pingcap/tidb/issues/62547) @[hawkingrei](https://github.com/hawkingrei)
     - Fix the issue that `plan replayer` cannot load the binding [#64811](https://github.com/pingcap/tidb/issues/64811) @[hawkingrei](https://github.com/hawkingrei)
     - Fix the issue that `PointGet` fails to reuse chunks even when memory is sufficient, leading to unnecessary memory allocations [#63920](https://github.com/pingcap/tidb/issues/63920) @[hawkingrei](https://github.com/hawkingrei)
-    - Fix the issue that `LogicalProjection.DeriveStats` consumes excessive memory during allocation [#63810](https://github.com/pingcap/tidb/issues/63810) @[hawkingrei](https://github.com/hawkingrei)
-    - Fix the issue that TiDB fails to dump the plan replayer when a query panics [#64835](https://github.com/pingcap/tidb/issues/64835) @[hawkingrei](https://github.com/hawkingrei)
-    - Fix the issue that the `SHOW CREATE TABLE` statement might display attributes in an incorrect order for TTL tables in certain cases [#64876](https://github.com/pingcap/tidb/issues/64876) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that `LogicalProjection.DeriveStats` allocates too much memory [#63810](https://github.com/pingcap/tidb/issues/63810) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that `plan replayer` fails to dump when a query panics [#64835](https://github.com/pingcap/tidb/issues/64835) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that the attribute order in the `SHOW CREATE TABLE` output for TTL tables is displayed incorrectly in specific scenarios [#64876](https://github.com/pingcap/tidb/issues/64876) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that the execution summary information for a TTL job is empty when the job times out [#61509](https://github.com/pingcap/tidb/issues/61509) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that correlated subqueries might trigger unexpected full table scans when the Plan Cache is enabled [#64645](https://github.com/pingcap/tidb/issues/64645) @[winoros](https://github.com/winoros)
     - Fix the issue that system tables cause incorrect calculation of table health metrics [#57176](https://github.com/pingcap/tidb/issues/57176), [#64080](https://github.com/pingcap/tidb/issues/64080) @[0xPoe](https://github.com/0xPoe)
