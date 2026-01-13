@@ -567,7 +567,7 @@ Configuration items related to the flow control mechanism in TiKV. This mechanis
 
     > **Note:**
     >
-    > Under certain conditions, this configuration item can override the value of `rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`. For more information, see [`rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger).
+    > Under specific conditions, this configuration item can override the value of `rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`. For more information, see [`rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger).
 
 + Default value: `20`
 
@@ -577,7 +577,7 @@ Configuration items related to the flow control mechanism in TiKV. This mechanis
 
     > **Note:**
     >
-    > Under certain conditions, this configuration item can override the value of `rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`. For more information, see [`rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1).
+    > Under specific conditions, this configuration item can override the value of `rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`. For more information, see [`rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1).
 
 + Default value: `"192GiB"`
 
