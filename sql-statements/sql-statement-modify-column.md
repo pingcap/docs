@@ -21,7 +21,7 @@ Starting from v8.5.5 and v9.0.0, TiDB optimizes some column type changes that pr
 - The table has no TiFlash replicas.
 - There is no risk of data truncation during type conversion.
 
-This optimization applies to the following type change scenarios:
+This optimization only applies to the following type change scenarios:
 
 - Conversions between integer types, such as from `BIGINT` to `INT`
 - Conversions between string types where the character set remains unchanged, such as from `VARCHAR(200)` to `VARCHAR(100)`
