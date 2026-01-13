@@ -87,7 +87,7 @@ Result:
 
 ## Azure OpenAI
 
-To use OpenAI embedding models on Azure, set global varable `TIDB_EXP_EMBED_OPENAI_API_BASE` to the URL of your Azure resource. Example:
+To use OpenAI embedding models on Azure, set the global variable `TIDB_EXP_EMBED_OPENAI_API_BASE` to the URL of your Azure resource. Example:
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_KEY = 'your-openai-api-key-here';
@@ -121,9 +121,9 @@ ORDER BY
 LIMIT 2;
 ```
 
-Note that, even if your resource URL looks like `https://<your_resource_name>.cognitiveservices.azure.com/`, you still still use `https://<your_resource_name>.openai.azure.com/openai/v1` as the API base, which provides OpenAI format compatibility.
+Note that, even if your resource URL looks like `https://<your_resource_name>.cognitiveservices.azure.com/`, you should still use `https://<your_resource_name>.openai.azure.com/openai/v1` as the API base, which provides OpenAI format compatibility.
 
-To switch from using Azure OpenAI to use OpenAI directly, set `TIDB_EXP_EMBED_OPENAI_API_BASE` to empty value:
+To switch from using Azure OpenAI to using OpenAI directly, set `TIDB_EXP_EMBED_OPENAI_API_BASE` to an empty string:
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_BASE = '';
