@@ -10,6 +10,7 @@ The `ALTER TABLE ... MODIFY COLUMN` statement modifies a column on an existing t
 Starting from v5.1.0, TiDB supports column type changes that require Reorg-Data. When performing such changes, TiDB rebuilds all existing data in the table by reading the original data, converting it to the new column type, and then writing the converted data back to the table. Because all table data must be processed, Reorg-Data operations typically take a long time, and the execution time is proportional to the amount of data in the table.
 
 The following are some common examples of column type changes that require Reorg-Data:
+
 - Changing `VARCHAR` to `BIGINT`
 - Modifying the `DECIMAL` precision
 - Reducing the length of `VARCHAR(10)` to `VARCHAR(5)`
