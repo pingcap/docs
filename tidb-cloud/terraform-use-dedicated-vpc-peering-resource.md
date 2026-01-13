@@ -152,7 +152,7 @@ For example, you can import a VPC peering that is not created by Terraform.
 
 1. Add an import block for the new `tidbcloud_dedicated_vpc_peering` resource.
 
-    Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `vpc_peering_id`. You can get the `vpc_peering_id` by running the `terraform show` or `terraform state show tidbcloud_dedicated_vpc_peering.${resource-name}` command.
+    Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `vpc_peering_id`. You can get the `vpc_peering_id` by the API <https://dedicated.tidbapi.com/v1beta1/vpcPeerings?projectId=${projectId}>.
 
     ```
     import {
