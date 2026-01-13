@@ -15,7 +15,7 @@ The following are some common examples of column type changes that require Reorg
 - Modifying the `DECIMAL` precision
 - Reducing the length of `VARCHAR(10)` to `VARCHAR(5)`
 
-Starting from v8.5.5 and v9.0.0, TiDB optimizes some column type changes that previously required Reorg-Data. When the following conditions are met, TiDB no longer rebuilds the table data; instead, it rebuilds only the affected indexes, thereby improving execution efficiency:
+Starting from v8.5.5 and v9.0.0, TiDB optimizes some column type changes that previously required Reorg-Data. When the following conditions are met, TiDB rebuilds only the affected indexes instead of the entire table, thereby improving execution efficiency:
 
 - The current session uses a strict [SQL mode](/sql-mode.md) (`sql_mode` includes `STRICT_TRANS_TABLES` or `STRICT_ALL_TABLES`).
 - There is no risk of data truncation during type conversion.
@@ -27,7 +27,7 @@ This optimization applies to the following type change scenarios:
 
 > **Note:**
 >
-> When converting from `VARCHAR` to `CHAR`, the original data must not contain trailing spaces. If the original data contains trailing spaces, TiDB still performs Reorg-Data to ensure that the converted data complies with the padding rules of the `CHAR` type.
+> When converting from `VARCHAR` to `CHAR`, the original data must not contain trailing spaces. If the original data contains trailing spaces, TiDB still performs Reorg-Data to ensure that the converted values comply with the padding rules of the `CHAR` type.
 
 ## Synopsis
 
