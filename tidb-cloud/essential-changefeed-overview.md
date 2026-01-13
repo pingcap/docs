@@ -12,6 +12,17 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 > - Currently, TiDB Cloud only allows up to 10 changefeeds per {{{ .essential }}} cluster.
 > - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) clusters, the changefeed feature is unavailable.
 
+## Supported regions
+
+The changefeed feature is currently supported in the following regions:
+
+| Cloud Provider | Supported Regions |
+| --- | --- |
+| Alibaba Cloud | ap-southeast-1<br>cn-hongkong<br>ap-southeast-5 |
+| AWS | us-east-1 |
+
+Other regions will be supported in the near future. If you require immediate support for a specific region, please contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for help.
+
 ## View the Changefeed page
 
 To access the changefeed feature, take the following steps:
