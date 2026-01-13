@@ -987,7 +987,7 @@ For compatibility and resource consumption considerations, the detection and sch
     scheduler config evict-slow-store-scheduler set enable-network-slow-store true
     ```
 
-2. On TiKV, set the [`raftstore.inspect-network-interval`](/tikv-configuration-file.md#inspect-network-interval) configuration item to a value greater than `0` to enable network detection.
+2. On TiKV, set the [`raftstore.inspect-network-interval`](/tikv-configuration-file.md#inspect-network-interval-new-in-v855-and-v900) configuration item to a value greater than `0` to enable network detection.
 
 #### Recovery time control
 
