@@ -106,6 +106,13 @@ It takes about 10 minutes to complete the scaling process (during which the chan
 
 4. After editing the configuration, click **...** > **Resume** to resume the corresponding changefeed.
 
+## Duplicate a changefeed
+
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>.
+2. Locate the changefeed that you want to duplicate. In the **Action** column, click **...** > **Duplicate**.
+3. TiDB Cloud automatically populates the new changefeed configuration with the original settings. You can review and modify the configuration as needed.
+4. After confirming the configuration, click **Submit** to create and start the new changefeed.
+
 ## Delete a changefeed
 
 1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB <CustomContent plan="dedicated">cluster</CustomContent><CustomContent plan="premium">instance</CustomContent>.

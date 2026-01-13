@@ -6,9 +6,10 @@
 ## GET STARTED
 
 - Why TiDB Cloud
-  - [TiDB Cloud Introduction](/tidb-cloud/tidb-cloud-intro.md)
+  - [Introduction](/tidb-cloud/tidb-cloud-intro.md)
+  - [Features](/tidb-cloud/features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
-- Get Started with TiDB Cloud
+- Get Started
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Try Out TiDB + AI](/vector-search/vector-search-get-started-using-python.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
@@ -230,6 +231,9 @@
     - TiDB Node Group
       - [Overview of TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md)
       - [Manage TiDB Node Groups](/tidb-cloud/tidb-node-group-management.md)
+  - Manage Connections by TiProxy
+    - [Overview of TiProxy](/tidb-cloud/tiproxy-overview-for-cloud.md)
+    - [Manage TiProxy](/tidb-cloud/tiproxy-management.md)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
 - Migrate or Import Data
@@ -311,11 +315,6 @@
     - [Set Up Self-Hosted Kafka Private Link Service in Azure](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)
     - [Set Up Self-Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)
     - [Set Up Private Endpoint for Changefeeds](/tidb-cloud/set-up-sink-private-endpoint.md)
-- Disaster Recovery
-  - [Recovery Group Overview](/tidb-cloud/recovery-group-overview.md)
-  - [Get Started](/tidb-cloud/recovery-group-get-started.md)
-  - [Failover and Reprotect Databases](/tidb-cloud/recovery-group-failover.md)
-  - [Delete a Recovery Group](/tidb-cloud/recovery-group-delete.md)
 - Security
   - [Security Overview](/tidb-cloud/security-overview.md)
   - Identity Access Control
@@ -592,6 +591,7 @@
     - [Set Operations](/functions-and-operators/set-operators.md)
     - [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)
   - [Clustered Indexes](/clustered-indexes.md)
+  - [Global Indexes](/global-indexes.md)
   - [Constraints](/constraints.md)
   - [Generated Columns](/generated-columns.md)
   - [SQL Mode](/sql-mode.md)
