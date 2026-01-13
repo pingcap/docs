@@ -303,4 +303,3 @@ Starting from v8.5.5 and v9.0.0, TiKV introduces a mechanism to detect slow-netw
 > **Note:**
 >
 > **Leader eviction** is accomplished by PD sending scheduling requests to TiKV slow nodes and then TiKV executing the received scheduling requests sequentially. Due to factors such as **slow I/O**, slow nodes might experience request accumulation, causing some Leaders to wait until the delayed requests are processed before handling **Leader eviction** requests. This results in an overall extended time for **Leader eviction**. Therefore, when you enable `evict-slow-store-scheduler`, it is recommended to enable [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530) as well to mitigate this situation.
-
