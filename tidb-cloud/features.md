@@ -66,15 +66,15 @@ This document lists the feature support status for different TiDB Cloud plans, i
   <tr>
     <td rowspan="7" style="background-color: white;">Cluster management</td>
     <td>Pay as you use</td>
-    <td style="text-align:center; font-size: 14px;">✅</td>
-    <td style="text-align:center; font-size: 14px;">✅</td>
-    <td style="text-align:center;">❌</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
     <td>Automatic scaling based on workload</td>
-    <td style="text-align:center; font-size: 14px;">✅</td>
-    <td style="text-align:center; font-size: 14px;">✅</td>
-    <td style="text-align:center;">❌</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
     <td>Manual cluster modification</td>
@@ -84,8 +84,8 @@ This document lists the feature support status for different TiDB Cloud plans, i
   </tr>
   <tr>
     <td>Password setting</td>
-    <td style="text-align:center; font-size: 14px;">✅</td>
-    <td style="text-align:center; font-size: 14px;">✅</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
@@ -158,7 +158,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
   </tr>
   <tr>
     <td>Restore</td>
-    <td style="text-align:center; font-size: 14px;">✅</td>
+    <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>
@@ -234,8 +234,8 @@ This document lists the feature support status for different TiDB Cloud plans, i
   </tr>
   <tr>
     <td>Public endpoint</td>
-    <td style="text-align:center; font-size: 14px;">✅</td>
-    <td style="text-align:center; font-size: 14px;">✅</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
