@@ -28,7 +28,7 @@ quote = '"'
 null = '\N'
 include-commit-ts = true
 output-old-value = false
-output-field-header = false # New in v8.5.5
+output-field-header = false # New in v8.5.6
 ```
 
 ## Transactional constraints
