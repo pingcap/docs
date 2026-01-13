@@ -290,10 +290,10 @@ This document only describes the parameters that are not included in command-lin
 
 ### `inspect-network-interval` <span class="version-mark">New in v8.5.5 and v9.0.0</span>
 
-+ Controls the interval at which the TiKV HealthChecker actively performs network detection to PD and other TiKV nodes. TiKV calculates a `NetworkSlowScore` based on the network detection and reports the network status of slow nodes to PD.
++ Controls the interval at which the TiKV HealthChecker actively performs network detection to PD and other TiKV nodes. TiKV calculates a `NetworkSlowScore` based on the network detection results and reports the network status of slow nodes to PD.
 + Setting this value to `0` disables the network detection. Setting it to a smaller value increases the detection frequency, which helps detect network jitter more quickly, but it also consumes more network bandwidth and CPU resources.
 + Default value: `100ms`
-+ Value range: 0 or `[10ms, +∞)`
++ Value range: `0` or `[10ms, +∞)`
 
 ## readpool.unified
 

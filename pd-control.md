@@ -940,7 +940,7 @@ Usage:
 >> scheduler config evict-leader-scheduler                 // Display the stores in which the scheduler is located since v4.0.0
 >> scheduler config evict-leader-scheduler add-store 2     // Add leader eviction scheduling for store 2
 >> scheduler config evict-leader-scheduler delete-store 2  // Remove leader eviction scheduling for store 2
->> scheduler add evict-slow-store-scheduler                // Automatically detect slow-disk or slow-network nodes and evict all Region leaders from those nodes when certain conditions are met
+>> scheduler add evict-slow-store-scheduler                // Automatically detect slow-disk or slow-network nodes and evict all Region leaders from those nodes when specific conditions are met
 >> scheduler remove grant-leader-scheduler-1               // Remove the corresponding scheduler, and `-1` corresponds to the store ID
 >> scheduler pause balance-region-scheduler 10             // Pause the balance-region scheduler for 10 seconds
 >> scheduler pause all 10                                  // Pause all schedulers for 10 seconds
@@ -970,7 +970,7 @@ The `evict-slow-store-scheduler` limits PD from scheduling Leaders to abnormal T
 
 #### Slow-disk nodes
 
-Starting from v6.2.0, TiKV reports a `SlowScore` in store heartbeats to PD, calculated based on disk I/O conditions. The score ranges from 1 to 100, where a higher value indicates a higher possibility of disk performance anomalies on that node.
+Starting from v6.2.0, TiKV reports a `SlowScore` in store heartbeats to PD. This score is calculated based on disk I/O conditions and ranges from 1 to 100. A higher value indicates a higher possibility of disk performance anomalies on that node.
 
 For slow-disk nodes, the detection on TiKV and the scheduling via `evict-slow-store-scheduler` on PD are enabled by default, which means no additional configuration is required.
 
