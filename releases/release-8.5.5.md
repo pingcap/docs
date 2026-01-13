@@ -15,7 +15,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Performance
 
-* Introduce significant performance improvements for certain lossy DDL operations (such as `BIGINT → INT` and `CHAR(120) → VARCHAR(60)`): when no data truncation occurs, the execution time of these operations can be reduced from hours to minutes, seconds, or even milliseconds, delivering performance gains ranging from tens to hundreds of thousands of times [#63366](https://github.com/pingcap/tidb/issues/63366) [@wjhuang2016](https://github.com/wjhuang2016), [@tangenta](https://github.com/tangenta), [@fzzf678](https://github.com/fzzf678) **tw@qiancai** <!--2292-->
+* Introduce significant performance improvements for certain lossy DDL operations (such as `BIGINT → INT` and `CHAR(120) → VARCHAR(60)`): when no data truncation occurs, the execution time of these operations can be reduced from hours to minutes, seconds, or even milliseconds, delivering performance gains ranging from tens to hundreds of thousands of times [#63366](https://github.com/pingcap/tidb/issues/63366) [@wjhuang2016](https://github.com/wjhuang2016), [@tangenta](https://github.com/tangenta), [@fzzf678](https://github.com/fzzf678)
 
     The optimization strategies are as follows:
 
@@ -35,7 +35,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     For more information, see [documentation](/sql-statements/sql-statement-modify-column.md).
 
-* Improve DDL performance in scenarios with a large number of foreign keys, with up to a 25x increase in logical DDL performance [#61126](https://github.com/pingcap/tidb/issues/61126) @[GMHDBJD](https://github.com/GMHDBJD) **tw@hfxsd** <!--1896-->
+* Improve DDL performance in scenarios with a large number of foreign keys, with up to a 25x increase in logical DDL performance [#61126](https://github.com/pingcap/tidb/issues/61126) @[GMHDBJD](https://github.com/GMHDBJD)
 
     Before v8.5.5, in scenarios involving ultra-large-scale tables (for example, a cluster with 10 million tables in total, including hundreds of thousands of tables with foreign keys), the performance of logical DDL operations (such as creating tables or adding columns) can drop to approximately 4 QPS. This leads to low operational efficiency in multi-tenant SaaS environments.
 
@@ -51,7 +51,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855).
 
-* Support table-level data affinity to improve query performance (experimental) [#9764](https://github.com/tikv/pd/issues/9764) @[lhy1024](https://github.com/lhy1024) **tw@qiancai** <!--2317-->
+* Support table-level data affinity to improve query performance (experimental) [#9764](https://github.com/tikv/pd/issues/9764) @[lhy1024](https://github.com/lhy1024)
 
     Starting from v8.5.5, you can set the `AFFINITY` table option to `table` or `partition` when creating or altering a table. When this option is enabled, PD groups Regions that belong to the same table or the same partition into a single affinity group. During scheduling, PD prioritizes placing the Leaders and Voter replicas of these Regions on the same subset of a few TiKV nodes. In this scenario, by using the [`INDEX_LOOKUP_PUSHDOWN`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855) hint in queries, you can explicitly instruct the optimizer to push index lookups down to TiKV, reducing the latency caused by cross-node scattered queries and improving query performance.
 
@@ -59,7 +59,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/table-affinity).
 
-* Point-in-time recovery (PITR) supports recovery from compacted log backups for faster restores [#56522](https://github.com/pingcap/tidb/issues/56522) @[YuJuncen](https://github.com/YuJuncen) **tw@lilin90** <!--2001-->
+* Point-in-time recovery (PITR) supports recovery from compacted log backups for faster restores [#56522](https://github.com/pingcap/tidb/issues/56522) @[YuJuncen](https://github.com/YuJuncen)
 
     Starting from v8.5.5, the log backup compaction feature provides offline compaction capabilities, converting unstructured log backup data into structured SST files. This results in the following improvements:
 
@@ -69,7 +69,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
   For more information, see [documentation](/br/br-compact-log-backup.md).
 
-* Accelerate recovery of system tables from backups [#58757](https://github.com/pingcap/tidb/issues/58757) @[Leavrth](https://github.com/Leavrth) **tw@lilin90** <!--2109-->
+* Accelerate recovery of system tables from backups [#58757](https://github.com/pingcap/tidb/issues/58757) @[Leavrth](https://github.com/Leavrth)
 
     Starting from v8.5.5, for restoring system tables from a backup, BR introduces a new `--fast-load-sys-tables` parameter to use physical restore instead of logical restore. With this parameter enabled, BR fully replaces or overwrites the existing system tables rather than restoring data into them, significantly improving restore performance in large-scale deployments.
 
@@ -77,7 +77,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Reliability
 
-* Improve scheduling stability in TiKV during network jitter [#9359](https://github.com/tikv/pd/issues/9359) @[okJiang](https://github.com/okJiang) **tw@qiancai** <!--2260-->
+* Improve scheduling stability in TiKV during network jitter [#9359](https://github.com/tikv/pd/issues/9359) @[okJiang](https://github.com/okJiang)
 
     Starting from v8.5.5, TiKV introduces a network slow-node detection and feedback mechanism. When this mechanism is enabled, TiKV probes network latency between nodes, calculates a network slow score, and reports the score to PD. Based on this score, PD evaluates the network status of TiKV nodes and adjusts scheduling accordingly: when a TiKV node is detected to be experiencing network jitter, PD restricts the scheduling of new Leaders to that node; if the network jitter persists, PD proactively evicts existing Leaders from the affected node to other TiKV nodes, thereby reducing the impact of network issues on the cluster.
 
@@ -85,7 +85,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Availability
 
-* Introduce the client circuit breaker pattern for PD [#8678](https://github.com/tikv/pd/issues/8678) @[Tema](https://github.com/Tema) **tw@hfxsd** <!--2051-->
+* Introduce the client circuit breaker pattern for PD [#8678](https://github.com/tikv/pd/issues/8678) @[Tema](https://github.com/Tema)
 
     To protect the PD leader from overloading during retry storms or similar feedback loops, TiDB now implements a circuit breaker pattern. When the error rate reaches a predefined threshold, the circuit breaker limits incoming traffic to allow the system to recover and stabilize. You can use the `tidb_cb_pd_metadata_error_rate_threshold_ratio` system variable to control the circuit breaker.
 
@@ -93,7 +93,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### SQL
 
-* Support dynamically modifying the concurrency and throughput of distributed `ADD INDEX` jobs [#64947](https://github.com/pingcap/tidb/issues/64947) @[joechenrh](https://github.com/joechenrh) **tw@qiancai** <!--2326-->
+* Support dynamically modifying the concurrency and throughput of distributed `ADD INDEX` jobs [#64947](https://github.com/pingcap/tidb/issues/64947) @[joechenrh](https://github.com/joechenrh)
 
    In TiDB versions earlier than v8.5.5, when the Distributed eXecution Framework (DXF) [`tidb_enable_dist_task`](/system-variables/#tidb_enable_dist_task-new-in-v710) is enabled, modifying the `THREAD`, `BATCH_SIZE`, or `MAX_WRITE_SPEED` parameters of a running `ADD INDEX` job is not supported. To change these parameters, you have to cancel the running `ADD INDEX` job, reconfigure the parameters, and then resubmit the job, which is inefficient.
 
@@ -103,19 +103,19 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### DB operations
 
-* Support gracefully shutting down TiKV [#17221](https://github.com/tikv/tikv/issues/17221) @[hujiatao0](https://github.com/hujiatao0) **tw@qiancai** <!--2297-->
+* Support gracefully shutting down TiKV [#17221](https://github.com/tikv/tikv/issues/17221) @[hujiatao0](https://github.com/hujiatao0)
 
     When shutting down a TiKV server, TiKV attempts to transfer the Leader replicas on the node to other TiKV nodes within a configurable timeout duration before the shutdown. The default timeout duration is 20 seconds, and you can adjust it using the [`server.graceful-shutdown-timeout`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#graceful-shutdown-timeout-new-in-v855) configuration item. If the timeout is reached and some Leaders have not been successfully transferred, TiKV skips the remaining Leader transfers and proceeds with the shutdown.
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#graceful-shutdown-timeout-new-in-v855).
 
-* Improve the compatibility between ongoing log backup and snapshot restore [#58685](https://github.com/pingcap/tidb/issues/58685) @[BornChanger](https://github.com/BornChanger) **tw@lilin90** <!--2000-->
+* Improve the compatibility between ongoing log backup and snapshot restore [#58685](https://github.com/pingcap/tidb/issues/58685) @[BornChanger](https://github.com/BornChanger)
 
     Starting from v8.5.5, when a log backup task is running, you can still perform a snapshot restore as long as prerequisite conditions are met. This enables ongoing log backups to proceed without having to stop them during the restore process, and the restored data is properly recorded by the ongoing log backup.
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/br-pitr-manual#compatibility-between-ongoing-log-backup-and-snapshot-restore).
 
-* Support table-level restores from log backups [#57613](https://github.com/pingcap/tidb/issues/57613) @[Tristan1900](https://github.com/Tristan1900) **tw@lilin90** <!--2005-->
+* Support table-level restores from log backups [#57613](https://github.com/pingcap/tidb/issues/57613) @[Tristan1900](https://github.com/Tristan1900)
 
     Starting from v8.5.5, you can perform point-in-time recovery (PITR) for individual tables from log backups by using filters. Restoring specific tables, rather than the entire cluster, to a target point in time provides more flexible and less disruptive recovery options.
 
@@ -123,7 +123,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Observability
 
-* Add storage engine identifiers to statement summary tables and slow query logs [#61736](https://github.com/pingcap/tidb/issues/61736) @[henrybw](https://github.com/henrybw) **tw@Oreoxmt**<!--2034 -->
+* Add storage engine identifiers to statement summary tables and slow query logs [#61736](https://github.com/pingcap/tidb/issues/61736) @[henrybw](https://github.com/henrybw)
 
     When both TiKV and TiFlash are deployed in a cluster, users often need to filter SQL statements by storage engine during database diagnostics and performance optimization. For example, if TiFlash is under high load, users might need to identify SQL statements running on TiFlash to locate potential causes. To meet this need, starting from v8.5.5, TiDB adds storage engine identifier fields to statement summary tables and slow query logs.
 
@@ -143,7 +143,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Security
 
-* Support Azure Managed Identity (MI) authentication for Backup & Restore (BR) to Azure Blob Storage [#19006](https://github.com/tikv/tikv/issues/19006) @[RidRisR](https://github.com/RidRisR) **tw@qiancai** <!--2308-->
+* Support Azure Managed Identity (MI) authentication for Backup & Restore (BR) to Azure Blob Storage [#19006](https://github.com/tikv/tikv/issues/19006) @[RidRisR](https://github.com/RidRisR)
 
     Starting from v8.5.5, BR supports Azure Managed Identity (MI) for authenticating to Azure Blob Storage, eliminating the need for static SAS tokens. This enables secure, keyless, and ephemeral authentication that follows Azure security best practices.
 
@@ -206,23 +206,23 @@ For newly created TiDB v8.5.4 clusters (excluding clusters upgraded from version
 
 ## Improvements
 
-+ TiDB <!--tw@qiancai: 4 notes-->
++ TiDB
 
     - Improve error messages for `IMPORT INTO` when encoding errors occur to help users identify issues more accurately [#63763](https://github.com/pingcap/tidb/issues/63763) @[D3Hunter](https://github.com/D3Hunter)
     - Enhance the parsing mechanism for Parquet files to improve the import performance of Parquet-formatted data [#62906](https://github.com/pingcap/tidb/issues/62906) @[joechenrh](https://github.com/joechenrh)
     - Change the default value of `tidb_analyze_column_options` to `ALL` to collect statistics for all columns by default [#64992](https://github.com/pingcap/tidb/issues/64992) @[0xPoe](https://github.com/0xPoe)
     - Optimize the execution logic of the `IndexHashJoin` operator by using incremental processing in specific JOIN scenarios to avoid loading large amounts of data at once, significantly reducing memory usage and improving performance [#63303](https://github.com/pingcap/tidb/issues/63303) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
-    - (dup): release-9.0.0.md > Improvements> TiDB - Optimize the CPU usage of internal SQL statements in the Distributed eXecution Framework (DXF) [#59344](https://github.com/pingcap/tidb/issues/59344) @[D3Hunter](https://github.com/D3Hunter)
+    - Optimize the CPU usage of internal SQL statements in the Distributed eXecution Framework (DXF) [#59344](https://github.com/pingcap/tidb/issues/59344) @[D3Hunter](https://github.com/D3Hunter)
     - Improve the performance of the `expression.Contains` function [#61373](https://github.com/pingcap/tidb/issues/61373) @[hawkingrei](https://github.com/hawkingrei)
 
-+ TiKV <!--tw@lilin90: 3 notes-->
++ TiKV
 
     - Introduce CPU-aware scaling for the unified read pool to avoid CPU starvation under hot read workloads [#18464](https://github.com/tikv/tikv/issues/18464) @[mittalrishabh](https://github.com/mittalrishabh)
     - Add network latency awareness to slow score to avoid scheduling leaders to TiKV nodes with unstable network conditions [#18797](https://github.com/tikv/tikv/issues/18797) @[okJiang](https://github.com/okJiang)
     - Optimize hibernate Region behavior by allowing leaders to enter the hibernation state immediately after receiving a majority of votes, without waiting for offline non-voter peers [#19070](https://github.com/tikv/tikv/issues/19070) @[jiadebin](https://github.com/jiadebin)
-    - (dup): release-9.0.0.md > Improvements> TiKV - Throttle BR log restore requests when TiKV memory usage is high to prevent TiKV OOM [#18124](https://github.com/tikv/tikv/issues/18124) @[3pointer](https://github.com/3pointer)
+    - Throttle BR log restore requests when TiKV memory usage is high to prevent TiKV OOM [#18124](https://github.com/tikv/tikv/issues/18124) @[3pointer](https://github.com/3pointer)
 
-+ PD <!--tw@Oreoxmt: 4 notes-->
++ PD
 
     - Optimize metrics with high cardinality [#9357](https://github.com/tikv/pd/issues/9357) @[rleungx](https://github.com/rleungx)
     - Optimize the logic for timestamp advancement and leader election [#9981](https://github.com/tikv/pd/issues/9981) @[bufferflies](https://github.com/bufferflies)
@@ -231,13 +231,13 @@ For newly created TiDB v8.5.4 clusters (excluding clusters upgraded from version
 
 + Tools
 
-    + TiCDC <!--tw@qiancai: 1 note-->
+    + TiCDC
 
         - Enhance the configuration validation logic for changefeeds: when creating or updating a changefeed, if a column referenced in the dispatcher configuration does not exist, TiCDC returns an error and rejects the operation to prevent execution failures [#12253](https://github.com/pingcap/tiflow/issues/12253) @[wk989898](https://github.com/wk989898)
 
 ## Bug fixes
 
-+ TiDB <!--tw@lilin90: the following 15 notes-->
++ TiDB
 
     - Fix the issue that TiDB fails to read the latest value of the `tidb_mem_quota_binding_cache` variable to perform initialization binding during startup [#65381](https://github.com/pingcap/tidb/issues/65381) @[qw4990](https://github.com/qw4990)
     - Fix the issue that candidate items are incorrectly skipped in `extractBestCNFItemRanges`, leading to inaccurate query range calculation [#62547](https://github.com/pingcap/tidb/issues/62547) @[hawkingrei](https://github.com/hawkingrei)
@@ -254,7 +254,7 @@ For newly created TiDB v8.5.4 clusters (excluding clusters upgraded from version
     - Fix the issue that invalid warning logs regarding `syncload` failure are generated [#63880](https://github.com/pingcap/tidb/issues/63880) @[0xPoe](https://github.com/0xPoe)
     - Fix the issue that TiDB might panic and exit abnormally when manually terminating a connection that is executing a transaction [#63956](https://github.com/pingcap/tidb/issues/63956) @[wshwsh12](https://github.com/wshwsh12)
     - Fix the issue that goroutine and memory leaks might occur when a cached table reads from a TiFlash replica [#63329](https://github.com/pingcap/tidb/issues/63329) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - Fix the issue that the foreign key is not updated after executing `ALTER TABLE child CHANGE COLUMN` to modify a column [#issue](https://github.com/pingcap/tidb/issues/59705) @[fzzf678](https://github.com/fzzf678) <!--tw@hfxsd: the following 16 notes-->
+    - Fix the issue that the foreign key is not updated after executing `ALTER TABLE child CHANGE COLUMN` to modify a column [#issue](https://github.com/pingcap/tidb/issues/59705) @[fzzf678](https://github.com/fzzf678)
     - Fix the issue that the `RENAME TABLE` job arguments could be decoded incorrectly from an earlier TiDB version [#64413](https://github.com/pingcap/tidb/issues/64413) @[joechenrh](https://github.com/joechenrh)
     - Fix the issue that the auto-increment ID fails to be rebased when BR restore fails [#60804](https://github.com/pingcap/tidb/issues/60804) @[joechenrh](https://github.com/joechenrh)
     - Fix the issue that querying `information_schema` tables leads to OOM [#58985](https://github.com/pingcap/tidb/issues/58985) @[tangenta](https://github.com/tangenta)
@@ -271,9 +271,9 @@ For newly created TiDB v8.5.4 clusters (excluding clusters upgraded from version
     - Fix the issue that executing `IMPORT INTO` with Global Sort enabled leads to an infinite loop while reading files [#61177](https://github.com/pingcap/tidb/issues/61177) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - Fix the issue that a panic occurs when handling generated columns during `IMPORT INTO` [#64657](https://github.com/pingcap/tidb/issues/64657) @[D3Hunter](https://github.com/D3Hunter)
     - Fix the issue that an error might be incorrectly reported when a single SQL statement contains multiple `AS OF TIMESTAMP` expressions [#65090](https://github.com/pingcap/tidb/issues/65090) @[you06](https://github.com/you06)
-    - (dup): release-9.0.0.md > Bug fixes> TiDB - Fix the potential OOM issue when querying `information_schema.tables` by improving memory usage monitoring when querying system tables [#58985](https://github.com/pingcap/tidb/issues/58985) @[tangenta](https://github.com/tangenta)
+    - Fix the potential OOM issue when querying `information_schema.tables` by improving memory usage monitoring when querying system tables [#58985](https://github.com/pingcap/tidb/issues/58985) @[tangenta](https://github.com/tangenta)
 
-+ TiKV <!--tw@Oreoxmt: 7 notes-->
++ TiKV
 
     - Fix the issue that the `KV Cursor Operations` metric for analyze requests is always `0` [#19206](https://github.com/tikv/tikv/issues/19206) @[glorv](https://github.com/glorv)
     - Fix the issue that Region heartbeats might report incorrect Region size or key statistics to PD after a leader change [#19180](https://github.com/tikv/tikv/issues/19180) @[glorv](https://github.com/glorv)
@@ -282,7 +282,7 @@ For newly created TiDB v8.5.4 clusters (excluding clusters upgraded from version
     - Fix the issue that compaction slows down due to increased flow-control thresholds [#18708](https://github.com/tikv/tikv/issues/18708) @[hhwyt](https://github.com/hhwyt)
     - Fix the issue that Raft peers might enter hibernation prematurely in a corner case, causing them to remain busy and block leader transfers after a TiKV restart [#19203](https://github.com/tikv/tikv/issues/19203) @[LykxSassinator](https://github.com/LykxSassinator)
 
-+ PD <!--tw@qiancai: 7 notes-->
++ PD
 
     - Fix the issue that a node might not be removable during the process of bringing it online [#8997](https://github.com/tikv/pd/issues/8997) @[lhy1024](https://github.com/lhy1024)
     - Fix the issue that a large number of Leader transfers might cause sudden changes in Region size [#10014](https://github.com/tikv/pd/issues/10014) @[lhy1024](https://github.com/lhy1024)
@@ -292,7 +292,7 @@ For newly created TiDB v8.5.4 clusters (excluding clusters upgraded from version
     - Fix the issue that some requests are not correctly forwarded in PD microservices mode [#9825](https://github.com/tikv/pd/issues/9825) @[lhy1024](https://github.com/lhy1024)
     - Fix the issue that connections might fail due to incorrect TLS configuration loading in the `tso` and `scheduling` microservices [#9367](https://github.com/tikv/pd/issues/9367) @[rleungx](https://github.com/rleungx)
 
-+ TiFlash <!--tw@hfxsd: 3 notes-->
++ TiFlash
 
     - Fix the issue that TiFlash might panic when BR is restoring data [#10606](https://github.com/pingcap/tiflash/issues/10606) @[CalvinNeo](https://github.com/CalvinNeo)
     - Fix the issue that TiFlash cannot fully utilize more than 16 CPU cores when BR is restoring data [#10605](https://github.com/pingcap/tiflash/issues/10605) @[JaySon-Huang](https://github.com/JaySon-Huang)
@@ -300,7 +300,7 @@ For newly created TiDB v8.5.4 clusters (excluding clusters upgraded from version
 
 + Tools
 
-    + Backup & Restore (BR) <!--tw@Oreoxmt: 7 notes-->
+    + Backup & Restore (BR)
 
         - Fix the issue that enabling log backup causes excessive memory usage when the cluster contains many Regions [#18719](https://github.com/tikv/tikv/issues/18719) @[YuJuncen](https://github.com/YuJuncen)
         - Fix the issue that the Azure SDK cannot find a suitable key from the environment [#18206](https://github.com/tikv/tikv/issues/18206) @[YuJuncen](https://github.com/YuJuncen)
@@ -309,7 +309,7 @@ For newly created TiDB v8.5.4 clusters (excluding clusters upgraded from version
         - Fix the issue that `restore log` cannot be performed after a failed `restore point`, even when the operation is safe [#64908](https://github.com/pingcap/tidb/issues/64908) @[RidRisR](https://github.com/RidRisR)
         - Fix the issue that `restore point` from a checkpoint might panic when log backup data is mixed with a full backup [#58685](https://github.com/pingcap/tidb/issues/58685) @[YuJuncen](https://github.com/YuJuncen)
 
-    + TiCDC <!--tw@qiancai: 6 notes-->
+    + TiCDC
 
         - Fix the issue that data might be lost during replication to object storage because Writer close errors are not correctly captured [#12436](https://github.com/pingcap/tiflow/issues/12436) @[wk989898](https://github.com/wk989898)
         - Fix the issue that replicating a `TRUNCATE` operation on a partitioned table might cause changefeed failures [#12430](https://github.com/pingcap/tiflow/issues/12430) @[wk989898](https://github.com/wk989898)
