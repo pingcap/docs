@@ -27,9 +27,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     | Scenario | Operation type | Before optimization | After optimization | Performance improvement |
     |----------|----------------|---------------------|--------------------|--------------------------|
-     | Non-indexed column | `BIGINT → INT` | 2 hours 34 minutes | 1 minute 5 seconds | 142× faster |
+    | Non-indexed column | `BIGINT → INT` | 2 hours 34 minutes | 1 minute 5 seconds | 142× faster |
     | Indexed column | `BIGINT → INT` | 6 hours 25 minutes | 0.05 seconds | 460,000× faster |
-     | Indexed column | `CHAR(120) → VARCHAR(60)` | 7 hours 16 minutes | 12 minutes 56 seconds | 34× faster |
+    | Indexed column | `CHAR(120) → VARCHAR(60)` | 7 hours 16 minutes | 12 minutes 56 seconds | 34× faster |
 
     Note that the preceding test results are based on the condition that no data truncation occurs during the DDL execution. The optimizations do not apply to tables with TiFlash replicas or to schema changes involving conversions between signed and unsigned integer types (signed ↔ unsigned).
 
