@@ -1274,15 +1274,17 @@ store weight 1 5 10
 You can set the scheduling speed of stores by using `store limit`. For more details about the principles and usage of `store limit`, see [`store limit`](/configure-store-limit.md).
 
 ```bash
->> store limit                         // Show the speed limit of adding-peer operations and the limit of removing-peer operations per minute in all stores
->> store limit add-peer                // Show the speed limit of adding-peer operations per minute in all stores
->> store limit remove-peer             // Show the limit of removing-peer operations per minute in all stores
->> store limit all 5                   // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for all stores
->> store limit 1 5                     // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for store 1
->> store limit all 5 add-peer          // Set the limit of adding-peer operations to 5 per minute for all stores
->> store limit 1 5 add-peer            // Set the limit of adding-peer operations to 5 per minute for store 1
->> store limit 1 5 remove-peer         // Set the limit of removing-peer operations to 5 per minute for store 1
->> store limit all 5 remove-peer       // Set the limit of removing-peer operations to 5 per minute for all stores
+>> store limit                                  // Show the speed limit of adding-peer operations and the limit of removing-peer operations per minute in all stores
+>> store limit add-peer                         // Show the speed limit of adding-peer operations per minute in all stores
+>> store limit remove-peer                      // Show the limit of removing-peer operations per minute in all stores
+>> store limit all 5                            // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for all stores
+>> store limit 1 5                              // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for store 1
+>> store limit all 5 add-peer                   // Set the limit of adding-peer operations to 5 per minute for all stores
+>> store limit 1 5 add-peer                     // Set the limit of adding-peer operations to 5 per minute for store 1
+>> store limit 1 5 remove-peer                  // Set the limit of removing-peer operations to 5 per minute for store 1
+>> store limit all 5 remove-peer                // Set the limit of removing-peer operations to 5 per minute for all stores
+>> store limit all engine tikv 5 remove-peer    // Starting from v8.5.5 and v9.0.0, you can set the speed limit of removing-peer operations for all TiKV stores. This example sets the speed limit of removing-peer operations for all TiKV stores to 5 per minute.
+>> store limit all engine tiflash 5 remove-peer // Starting from v8.5.5 and v9.0.0, you can set the speed limit of removing-peer operations for all TiFlash stores. This example sets the speed limit of removing-peer operations for all TiFlash stores to 5 per minute.
 ```
 
 > **Note:**
