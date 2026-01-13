@@ -16,8 +16,6 @@ If you only want to replicate ongoing binlog changes from your MySQL-compatible 
 
 ### Availability
 
-- The Data Migration feature is available only for **TiDB Cloud Dedicated** clusters.
-
 - If you don't see the [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md#step-1-go-to-the-data-migration-page) entry for your TiDB Cloud Dedicated cluster in the [TiDB Cloud console](https://tidbcloud.com/), the feature might not be available in your region. To request support for your region, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 - Amazon Aurora MySQL writer instances support both existing data and incremental data migration. Amazon Aurora MySQL reader instances only support existing data migration and do not support incremental data migration.
@@ -40,11 +38,11 @@ You can create up to 200 migration jobs for each organization. To create more mi
 
 ### Limitations of incremental data migration
 
-- During incremental data migration, if the table to be migrated already exists in the target database with duplicate keys, an error is reported and the migration is interrupted. In this situation, you need to make sure whether the MySQL source data is accurate. If yes, click the "Restart" button of the migration job, and the migration job will replace the target TiDB Cloud cluster's conflicting records with the MySQL source records.
+- During incremental data migration, if the table to be migrated already exists in the target database with duplicate keys, an error is reported and the migration is interrupted. In this situation, you need to make sure whether the MySQL source data is accurate. If yes, click the **Restart** button of the migration job, and the migration job will replace the conflicting records in the target cluster with the MySQL source records.
 
 - During incremental replication (migrating ongoing changes to your cluster), if the migration job recovers from an abrupt error, it might open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are migrated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are migrated to the target TiDB Cloud cluster to make sure that all the data during the abrupt error has been migrated smoothly to the target TiDB Cloud cluster. In this scenario, for MySQL source tables without primary keys or non-null unique indexes, some data might be duplicated in the target TiDB Cloud cluster because the data might be inserted repeatedly into the target TiDB Cloud cluster.
 
-- In the following scenarios, if the migration job takes longer than 24 hours, do not purge binary logs in the source database to ensure that Data Migration can get consecutive binary logs for incremental replication:
+- In the following scenarios, if the migration job takes longer than 24 hours, do not purge binary logs in the source database. This allows Data Migration to get consecutive binary logs for incremental replication:
 
     - During the existing data migration.
     - After the existing data migration is completed and when incremental data migration is started for the first time, the latency is not 0ms.

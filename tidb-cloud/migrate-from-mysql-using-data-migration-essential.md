@@ -45,11 +45,11 @@ During full data migration, PolarDB-X schemas may contain incompatible keywords 
 
 ### Limitations of incremental data migration
 
-- During incremental data migration, if the table to be migrated already exists in the target database with duplicate keys, an error is reported and the migration is interrupted. In this situation, you need to verify that the MySQL source data is accurate. If it is, click the "Restart" button of the migration job, and the migration job will replace the target TiDB Cloud cluster's conflicting records with the MySQL source records.
+- During incremental data migration, if the table to be migrated already exists in the target database with duplicate keys, an error is reported and the migration is interrupted. In this situation, you need to verify that the MySQL source data is accurate. If it is, click the **Restart** button of the migration job, and the migration job will replace the conflicting records in the target cluster with the MySQL source records.
 
 - During incremental replication (migrating ongoing changes to your cluster), if the migration job recovers from an abrupt error, it might open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are migrated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are migrated to the target TiDB Cloud cluster to ensure that all the data during the abrupt error has been migrated smoothly to the target TiDB Cloud cluster. In this scenario, for MySQL source tables without primary keys or non-null unique indexes, some data might be duplicated in the target TiDB Cloud cluster because the data might be inserted repeatedly into the target TiDB Cloud cluster.
 
-- In the following scenarios, if the migration job takes longer than 24 hours, do not purge binary logs in the source database to ensure that Data Migration can get consecutive binary logs for incremental replication:
+- In the following scenarios, if the migration job takes longer than 24 hours, do not purge binary logs in the source database. This allows Data Migration to get consecutive binary logs for incremental replication:
 
     - During the existing data migration.
     - After the existing data migration is completed and when incremental data migration is started for the first time, the latency is not 0 ms.
