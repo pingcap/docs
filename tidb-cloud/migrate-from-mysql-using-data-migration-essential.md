@@ -1,21 +1,21 @@
 ---
-title: Migrate MySQL-Compatible Databases to TiDB Cloud Essential Using Data Migration
-summary: Learn how to seamlessly migrate your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, or self-managed MySQL instances to TiDB Cloud Essential with minimal downtime using the Data Migration feature.
+title: Migrate MySQL-Compatible Databases to {{{ .essential }}} Using Data Migration
+summary: Learn how to seamlessly migrate your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, or self-managed MySQL instances to {{{ .essential }}} with minimal downtime using the Data Migration feature.
 ---
 
-# Migrate MySQL-Compatible Databases to TiDB Cloud Essential Using Data Migration
+# Migrate MySQL-Compatible Databases to {{{ .essential }}} Using Data Migration
 
-This document guides you through migrating your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, or self-managed MySQL instances to TiDB Cloud Essential using the Data Migration feature in the [TiDB Cloud console](https://tidbcloud.com/).
+This document guides you through migrating your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, or self-managed MySQL instances to {{{ .essential }}} using the Data Migration feature in the [TiDB Cloud console](https://tidbcloud.com/).
 
-This feature enables you to migrate your existing MySQL data and continuously replicate ongoing changes (binlog) from your MySQL-compatible source databases directly to TiDB Cloud Essential, maintaining data consistency whether in the same region or across different regions. The streamlined process eliminates the need for separate dump and load operations, reducing downtime and simplifying your migration from MySQL to a more scalable platform.
+This feature enables you to migrate your existing MySQL data and continuously replicate ongoing changes (binlog) from your MySQL-compatible source databases directly to {{{ .essential }}}, maintaining data consistency whether in the same region or across different regions. The streamlined process eliminates the need for separate dump and load operations, reducing downtime and simplifying your migration from MySQL to a more scalable platform.
 
-If you only want to replicate ongoing binlog changes from your MySQL-compatible database to TiDB Cloud Essential, see [Migrate Incremental Data from MySQL-Compatible Databases to TiDB Cloud Essential Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration-essential.md).
+If you only want to replicate ongoing binlog changes from your MySQL-compatible database to {{{ .essential }}}, see [Migrate Incremental Data from MySQL-Compatible Databases to {{{ .essential }}} Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration-essential.md).
 
 ## Limitations
 
 ### Availability
 
-- If you don't see the [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md#step-1-go-to-the-data-migration-page) entry for your TiDB Cloud Essential cluster in the [TiDB Cloud console](https://tidbcloud.com/), the feature might not be available in your region. To request support for your region, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+- If you don't see the [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md#step-1-go-to-the-data-migration-page) entry for your {{{ .essential }}} cluster in the [TiDB Cloud console](https://tidbcloud.com/), the feature might not be available in your region. To request support for your region, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 - Amazon Aurora MySQL writer instances support both existing data and incremental data migration. Amazon Aurora MySQL reader instances only support existing data migration and do not support incremental data migration.
 
@@ -25,7 +25,7 @@ You can create up to 100 migration jobs for each organization. To create more mi
 
 ### Filtered out and deleted databases
 
-- The system databases will be filtered out and not migrated to TiDB Cloud Essential even if you select all of the databases to migrate. That is, `mysql`, `information_schema`, `performance_schema`, and `sys` will not be migrated using this feature.
+- The system databases will be filtered out and not migrated to {{{ .essential }}} even if you select all of the databases to migrate. That is, `mysql`, `information_schema`, `performance_schema`, and `sys` will not be migrated using this feature.
 
 - When you delete a cluster in TiDB Cloud, all migration jobs in that cluster are automatically deleted and not recoverable.
 
@@ -41,7 +41,7 @@ During full data migration, PolarDB-X schemas may contain incompatible keywords 
 
 - During existing data migration, if the target database already contains the table to be migrated and there are duplicate keys, the rows with duplicate keys will be replaced.
 
-- Only logical mode is supported for TiDB Cloud Essential now.
+- Only logical mode is supported for {{{ .essential }}} now.
 
 ### Limitations of incremental data migration
 
@@ -131,7 +131,7 @@ For detailed instructions, see [Working with DB Parameter Groups](https://docs.a
 
 ### Ensure network connectivity
 
-Before creating a migration job, you need to plan and set up proper network connectivity between your source MySQL instance, the TiDB Cloud Data Migration (DM) service, and your target TiDB Cloud Essential cluster.
+Before creating a migration job, you need to plan and set up proper network connectivity between your source MySQL instance, the TiDB Cloud Data Migration (DM) service, and your target {{{ .essential }}} cluster.
 
 The available connection methods are as follows:
 
@@ -196,7 +196,7 @@ GRANT SELECT, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_source
 
 #### Grant required privileges in the target TiDB Cloud cluster
 
-For testing purposes, you can use the `root` account of your TiDB Cloud Essential cluster.
+For testing purposes, you can use the `root` account of your {{{ .essential }}} cluster.
 
 For production workloads, it is recommended to have a dedicated user for replication in the target TiDB Cloud cluster and grant only the necessary privileges:
 
@@ -303,7 +303,7 @@ This mode exports data from MySQL source databases as SQL statements and then ex
 
 To migrate only the incremental data of the source database to TiDB Cloud, choose **Incremental data migration**. In this case, the migration job does not migrate the existing data of the source database to TiDB Cloud, but only migrates the ongoing changes of the source database that are explicitly specified by the migration job.
 
-For detailed instructions about incremental data migration, see [Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Essential Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration-essential.md).
+For detailed instructions about incremental data migration, see [Migrate Only Incremental Data from MySQL-Compatible Databases to {{{ .essential }}} Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration-essential.md).
 
 ## Step 4: Choose the objects to be migrated
 

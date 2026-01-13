@@ -1,13 +1,13 @@
 ---
-title: Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Essential Using Data Migration
-summary: Learn how to migrate incremental data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, Azure Database for MySQL, or a local MySQL instance to TiDB Cloud Essential using Data Migration.
+title: Migrate Only Incremental Data from MySQL-Compatible Databases to {{{ .essential }}} Using Data Migration
+summary: Learn how to migrate incremental data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, Azure Database for MySQL, or a local MySQL instance to {{{ .essential }}} using Data Migration.
 ---
 
-# Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Essential Using Data Migration
+# Migrate Only Incremental Data from MySQL-Compatible Databases to {{{ .essential }}} Using Data Migration
 
 This document describes how to migrate incremental data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, or Azure Database for MySQL) or self-hosted source database to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
 
-For instructions about how to migrate existing data or both existing data and incremental data, see [Migrate MySQL-Compatible Databases to TiDB Cloud Essential Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration-essential.md).
+For instructions about how to migrate existing data or both existing data and incremental data, see [Migrate MySQL-Compatible Databases to {{{ .essential }}} Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration-essential.md).
 
 ## Limitations
 
@@ -138,7 +138,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
 ## Step 3: Choose migration job type
 
-To migrate only the incremental data of the source database to TiDB Cloud Essential, select **Incremental data migration** and do not select **Existing data migration**. In this way, the migration job only migrates ongoing changes of the source database to TiDB Cloud Essential.
+To migrate only the incremental data of the source database to {{{ .essential }}}, select **Incremental data migration** and do not select **Existing data migration**. In this way, the migration job only migrates ongoing changes of the source database to {{{ .essential }}}.
 
 In the **Start Position** area, you can specify one of the following types of start positions for incremental data migration:
 
