@@ -157,7 +157,7 @@ For example, you can import a VPC peering that is not created by Terraform.
     ```
     import {
       to = tidbcloud_dedicated_vpc_peering.example
-      id = "${id}"
+      id = "${vpc_peering_id}"
     }
     ```
 
