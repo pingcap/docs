@@ -89,7 +89,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     To protect the PD leader from overloading during retry storms or similar feedback loops, TiDB now implements a circuit breaker pattern. When the error rate reaches a predefined threshold, the circuit breaker limits incoming traffic to allow the system to recover and stabilize. You can use the `tidb_cb_pd_metadata_error_rate_threshold_ratio` system variable to control the circuit breaker.
 
-    For more information, see [Documentation](/system-variables.md#tidb_cb_pd_metadata_error_rate_threshold_ratio-new-in-v855).
+    For more information, see [Documentation](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_cb_pd_metadata_error_rate_threshold_ratio-new-in-v855).
 
 ### SQL
 
@@ -143,13 +143,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Security
 
-* Enable Azure Managed Identity (MI) authentication for Backup & Restore (BR) to Azure Blob Storage [#19006](https://github.com/tikv/tikv/issues/19006) @[RidRisR](https://github.com/RidRisR) **tw@qiancai** <!--2308-->
+* Support Azure Managed Identity (MI) authentication for Backup & Restore (BR) to Azure Blob Storage [#19006](https://github.com/tikv/tikv/issues/19006) @[RidRisR](https://github.com/RidRisR) **tw@qiancai** <!--2308-->
 
     Starting from v8.5.5, BR supports Azure Managed Identity (MI) for authenticating to Azure Blob Storage, eliminating the need for static SAS tokens. This enables secure, keyless, and ephemeral authentication that follows Azure security best practices.
 
-    With this feature, BR and the embedded BR worker in TiKV can acquire access tokens directly from Azure Instance Metadata Service (IMDS), reducing credential leakage risk and simplifying credential rotation for self-managed and cloud deployments on Azure.
+    With this feature, BR and the embedded BR worker in TiKV can acquire access tokens directly from Azure Instance Metadata Service (IMDS), reducing credential leakage risk and simplifying credential rotation management for both self-managed and cloud deployments on Azure.
 
-    This enhancement is particularly useful for enterprise customers running TiDB on Azure Kubernetes Service (AKS) or other Azure environments that require strict security controls for backup and restore operations.
+    This feature applies to TiDB clusters running on Azure Kubernetes Service (AKS) or other Azure environments, particularly in enterprise environments that require strict security controls for backup and restore operations.
 
     For more information, see [Documentation](link).
 
@@ -180,14 +180,14 @@ For newly created TiDB v8.5.4 clusters (excluding clusters upgraded from version
 
 | Configuration file or component | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
-| PD | [`schedule.max-affinity-merge-region-size`](https://docs.pingcap.com/tidb/v8.5/pd-configuration-file#max-affinity-merge-region-size-new-in-v855) | Newly added | Controls the threshold for automatically merging adjacent small Regions within the same [affinity group](https://docs.pingcap.com/tidb/v8.5/table-affinity). The default value is `256`, in MiB. |
-| PD  | [`schedule.affinity-schedule-limit`](https://docs.pingcap.com/tidb/v8.5/pd-configuration-file#affinity-schedule-limit-new-in-v855) | Newly added | Controls the number of [affinity](https://docs.pingcap.com/tidb/v8.5/table-affinity) scheduling tasks that can be performed concurrently. The default value is `0`, which means that affinity scheduling is disabled by default. |
 | TiDB | [`performance.enable-async-batch-get`](https://docs.pingcap.com/tidb/v8.5/tidb-configuration-file#enable-async-batch-get-new-in-v855)  | Newly added | Controls whether TiDB uses asynchronous mode to execute the Batch Get operator. The default value is `true`. |
-| TiKV | [`rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger) | Modified | Starting from v8.5.5, when the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is set to `true`), this configuration item is overridden by [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold) only if its value is greater than the `storage.flow-control.l0-files-threshold`. This behavior prevents weakening RocksDB’s compaction acceleration mechanism when you increase the flow control threshold. In v8.5.4 and earlier versions, when the flow control mechanism is enabled, this configuration item is directly overridden by `storage.flow-control.l0-files-threshold`. |
-| TiKV | [`rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1) | Modified | Starting from v8.5.5, when the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is set to `true`), this configuration item is overridden by [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) only if its value is greater than `storage.flow-control.soft-pending-compaction-bytes-limit`. This behavior prevents weakening RocksDB’s compaction acceleration mechanism when you increase the flow control threshold. In v8.5.4 and earlier versions, when the flow control mechanism is enabled, this configuration item is directly overridden by `storage.flow-control.soft-pending-compaction-bytes-limit`. |
+| TiKV | [<code>rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger</code>](/tikv-configuration-file.md#level0-slowdown-writes-trigger) | Modified | Starting from v8.5.5, when the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is set to `true`), this configuration item is overridden by [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold) only if its value is greater than the `storage.flow-control.l0-files-threshold`. This behavior prevents weakening RocksDB’s compaction acceleration mechanism when you increase the flow control threshold. In v8.5.4 and earlier versions, when the flow control mechanism is enabled, this configuration item is directly overridden by `storage.flow-control.l0-files-threshold`. |
+| TiKV | [<code>rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit</code>](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1) | Modified | Starting from v8.5.5, when the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is set to `true`), this configuration item is overridden by [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) only if its value is greater than `storage.flow-control.soft-pending-compaction-bytes-limit`. This behavior prevents weakening RocksDB’s compaction acceleration mechanism when you increase the flow control threshold. In v8.5.4 and earlier versions, when the flow control mechanism is enabled, this configuration item is directly overridden by `storage.flow-control.soft-pending-compaction-bytes-limit`. |
 | TiKV | [`readpool.cpu-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#cpu-threshold-new-in-v855) | Newly added | Specifies the CPU utilization threshold for the unified read pool. The default value is `0.0`, which means that there is no limit on the CPU usage of the unified read pool. The size of the thread pool is determined solely by the busy thread scaling algorithm, which adjusts the size dynamically based on the number of threads handling current tasks. |
 | TiKV | [`server.graceful-shutdown-timeout`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#graceful-shutdown-timeout-new-in-v855) | Newly added | Controls the timeout duration for graceful shutdown of TiKV. The default value is `20s`. |
 | TiKV | [`server.inspect-network-interval`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#inspect-network-interval-new-in-v855) | Newly added | Controls the interval at which the TiKV HealthChecker actively performs network detection to PD and other TiKV nodes. The default value is `100ms`. |
+| PD | [`schedule.max-affinity-merge-region-size`](https://docs.pingcap.com/tidb/v8.5/pd-configuration-file#max-affinity-merge-region-size-new-in-v855) | Newly added | Controls the threshold for automatically merging adjacent small Regions within the same [affinity group](https://docs.pingcap.com/tidb/v8.5/table-affinity). The default value is `256`, in MiB. |
+| PD | [`schedule.affinity-schedule-limit`](https://docs.pingcap.com/tidb/v8.5/pd-configuration-file#affinity-schedule-limit-new-in-v855) | Newly added | Controls the number of [affinity](https://docs.pingcap.com/tidb/v8.5/table-affinity) scheduling tasks that can be performed concurrently. The default value is `0`, which means that affinity scheduling is disabled by default. |
 | BR | [`--checkpoint-storage`](/br/br-checkpoint-restore.md#implementation-details-store-checkpoint-data-in-the-downstream-cluster) | Newly added | Specifies an external storage for checkpoint data. |
 | BR | [`--fast-load-sys-tables`](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema) | Newly added | Supports physical restore of system tables on a new cluster. This parameter is enabled by default. |
 | BR | [`--filter`](/br/br-pitr-manual.md#restore-data-using-filters) | Newly added | Specifies patterns to include or exclude specific databases or tables for restore. |
@@ -210,10 +210,10 @@ For newly created TiDB v8.5.4 clusters (excluding clusters upgraded from version
 
     - Improve error messages for `IMPORT INTO` when encoding errors occur to help users identify issues more accurately [#63763](https://github.com/pingcap/tidb/issues/63763) @[D3Hunter](https://github.com/D3Hunter)
     - Enhance the parsing mechanism for Parquet files to improve the import performance of Parquet-formatted data [#62906](https://github.com/pingcap/tidb/issues/62906) @[joechenrh](https://github.com/joechenrh)
-    - Set the default value of `tidb_analyze_column_options` to `all` to collect statistics for all columns by default [#64992](https://github.com/pingcap/tidb/issues/64992) @[0xPoe](https://github.com/0xPoe)
+    - Change the default value of `tidb_analyze_column_options` to `ALL` to collect statistics for all columns by default [#64992](https://github.com/pingcap/tidb/issues/64992) @[0xPoe](https://github.com/0xPoe)
     - Optimize the execution logic of the `IndexHashJoin` operator by using incremental processing in specific JOIN scenarios to avoid loading large amounts of data at once, significantly reducing memory usage and improving performance [#63303](https://github.com/pingcap/tidb/issues/63303) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
     - (dup): release-9.0.0.md > Improvements> TiDB - Optimize the CPU usage of internal SQL statements in the Distributed eXecution Framework (DXF) [#59344](https://github.com/pingcap/tidb/issues/59344) @[D3Hunter](https://github.com/D3Hunter)
-    - Improve the performance of the expression.Contains function [#61373](https://github.com/pingcap/tidb/issues/61373) @[hawkingrei](https://github.com/hawkingrei)
+    - Improve the performance of the `expression.Contains` function [#61373](https://github.com/pingcap/tidb/issues/61373) @[hawkingrei](https://github.com/hawkingrei)
 
 + TiKV <!--tw@lilin90: 3 notes-->
 
@@ -233,7 +233,7 @@ For newly created TiDB v8.5.4 clusters (excluding clusters upgraded from version
 
     + TiCDC <!--tw@qiancai: 1 note-->
 
-        - Enhance the configuration validation logic for changefeeds: when creating or updating a changefeed, if a column referenced in the Dispatcher configuration does not exist, TiCDC returns an error and rejects the operation to prevent execution failures  [#12253](https://github.com/pingcap/tiflow/issues/12253) @[wk989898](https://github.com/wk989898)
+        - Enhance the configuration validation logic for changefeeds: when creating or updating a changefeed, if a column referenced in the dispatcher configuration does not exist, TiCDC returns an error and rejects the operation to prevent execution failures [#12253](https://github.com/pingcap/tiflow/issues/12253) @[wk989898](https://github.com/wk989898)
 
 ## Bug fixes
 
@@ -258,7 +258,7 @@ For newly created TiDB v8.5.4 clusters (excluding clusters upgraded from version
     - Fix the issue that the `RENAME TABLE` job arguments could be decoded incorrectly from an earlier TiDB version [#64413](https://github.com/pingcap/tidb/issues/64413) @[joechenrh](https://github.com/joechenrh)
     - Fix the issue that the auto-increment ID fails to be rebased when BR restore fails [#60804](https://github.com/pingcap/tidb/issues/60804) @[joechenrh](https://github.com/joechenrh)
     - Fix the issue that querying `information_schema` tables leads to OOM [#58985](https://github.com/pingcap/tidb/issues/58985) @[tangenta](https://github.com/tangenta)
-    - Fix the isse that the TiDB node might get stuck during upgrade [#64539](https://github.com/pingcap/tidb/issues/64539) @[joechenrh](https://github.com/joechenrh)
+    - Fix the issue that the TiDB node might get stuck during upgrade [#64539](https://github.com/pingcap/tidb/issues/64539) @[joechenrh](https://github.com/joechenrh)
     - Fix the issue that admin check does not report errors when index records are missing [#63698](https://github.com/pingcap/tidb/issues/63698) @[wjhuang2016](https://github.com/wjhuang2016)
     - Fix the issue that modifying the collation via `MODIFY COLUMN` results in data index inconsistency [#61668](https://github.com/pingcap/tidb/issues/61668) @[tangenta](https://github.com/tangenta)
     - Fix the issue that the embedded `ANALYZE` feature in DDL might not be triggered when performing multiple schema changes [#65040](https://github.com/pingcap/tidb/issues/65040) @[joechenrh](https://github.com/joechenrh)
@@ -271,7 +271,7 @@ For newly created TiDB v8.5.4 clusters (excluding clusters upgraded from version
     - Fix the issue that executing `IMPORT INTO` with Global Sort enabled leads to an infinite loop while reading files [#61177](https://github.com/pingcap/tidb/issues/61177) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - Fix the issue that a panic occurs when handling generated columns during `IMPORT INTO` [#64657](https://github.com/pingcap/tidb/issues/64657) @[D3Hunter](https://github.com/D3Hunter)
     - Fix the issue that an error might be incorrectly reported when a single SQL statement contains multiple `AS OF TIMESTAMP` expressions [#65090](https://github.com/pingcap/tidb/issues/65090) @[you06](https://github.com/you06)
-    - (dup): release-9.0.0.md > Bug fixes> TiDB - Fix the potential OOM issue when querying `information_schema.tables` by improving memory usage monitoring when quering system tables [#58985](https://github.com/pingcap/tidb/issues/58985) @[tangenta](https://github.com/tangenta)
+    - (dup): release-9.0.0.md > Bug fixes> TiDB - Fix the potential OOM issue when querying `information_schema.tables` by improving memory usage monitoring when querying system tables [#58985](https://github.com/pingcap/tidb/issues/58985) @[tangenta](https://github.com/tangenta)
 
 + TiKV <!--tw@Oreoxmt: 7 notes-->
 
