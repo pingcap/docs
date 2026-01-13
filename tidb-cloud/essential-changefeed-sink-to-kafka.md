@@ -1,6 +1,6 @@
 ---
 title: Sink to Apache Kafka (Beta)
-summary: This document explains how to create a changefeed to stream data from {{{ .essential }}} to Apache Kafka. It includes restrictions, prerequisites, and steps to configure the changefeed for Apache Kafka. The process involves setting up network connections, adding permissions for Kafka ACL authorization, and configuring the changefeed specification.
+summary: This document explains how to create a changefeed to stream data from {{{ .essential }}} to Apache Kafka. It includes restrictions, prerequisites, and steps to configure the changefeed for Apache Kafka. The process involves setting up network connections, adding permissions for Kafka ACL authorization, and configuring the changefeed.
 ---
 
 # Sink to Apache Kafka (Beta)
@@ -31,9 +31,9 @@ Ensure that your {{{ .essential }}} cluster can connect to the Apache Kafka serv
 <SimpleTab>
 <div label="Private Link Connection">
 
-Private Link Connection leverages **Private Link** technologies from cloud providers to enable resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly within your VPC.
+Private link connections leverage **Private Link** technologies from cloud providers to enable resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly within your VPC.
 
-{{{ .essential }}} currently supports Private Link Connection only for self-hosted Kafka and Confluent Cloud Dedicated Cluster. It does not support direct integration with MSK, or other Kafka SaaS services.
+{{{ .essential }}} currently supports Private Link Connection only for self-hosted Kafka and Confluent Cloud Dedicated Clusters. It does not support direct integration with MSK, or other Kafka SaaS services.
 
 See the following instructions to set up a Private Link connection according to your Kafka deployment and cloud provider:
 
@@ -80,7 +80,7 @@ The steps vary depending on the connectivity method you select.
     - If your Kafka does not require authentication, keep the default option **Disable**.
     - If your Kafka requires authentication, select the corresponding authentication type, and then fill in the **user name** and **password** of your Kafka account for authentication.
 
-3. Select your **Kafka Version**. If you do not know which one to use, use **Kafka v2**.
+3. Select your **Kafka Version**. If you do not know which one to use, use **Kafka v3**.
 4. Select a **Compression** type for the data in this changefeed.
 5. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
 6. Click **Next** to test the network connection. If the test succeeds, you will be directed to the next page.
@@ -89,17 +89,17 @@ The steps vary depending on the connectivity method you select.
 <div label="Private Link">
 
 1. In **Connectivity Method**, select **Private Link**.
-2. In **Private Link Connection**, select the private link connection that you created in the [Network](#network) section. Make sure the AZs of the private link connection match the AZs of the Kafka deployment.
+2. In **Private Link Connection**, select the private link connection that you created in the [Network](#network) section. Make sure the Availability Zones of the private link connection match those of the Kafka deployment.
 3. Fill in the **Bootstrap Port** that you obtained from the [Network](#network) section.
 4. Select an **Authentication** option according to your Kafka authentication configuration.
 
     - If your Kafka does not require authentication, keep the default option **Disable**.
     - If your Kafka requires authentication, select the corresponding authentication type, and then fill in the **user name** and **password** of your Kafka account for authentication.
 
-5. Select your **Kafka Version**. If you do not know which one to use, use **Kafka v2**.
+5. Select your **Kafka Version**. If you do not know which one to use, use **Kafka v3**.
 6. Select a **Compression** type for the data in this changefeed.
 7. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
-8. Input the **TLS Server Name** if your Kafka requires TLS SNI verification. For example, Confluent Cloud Dedicated clusters.
+8. Input the **TLS Server Name** if your Kafka requires TLS SNI verification. For example, `Confluent Cloud Dedicated clusters`.
 9. Click **Next** to test the network connection. If the test succeeds, you will be directed to the next page.
 
 </div>
@@ -125,7 +125,7 @@ The steps vary depending on the connectivity method you select.
     - **Tables matching**: specify which tables the column selector applies to. For tables that do not match any rule, all columns are sent.
     - **Column Selector**: specify which columns of the matched tables will be sent to the downstream.
 
-    For more information about the matching rules, see [Column selectors](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-kafka/#column-selectors).
+  For more information about the matching rules, see [Column selectors](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-kafka/#column-selectors).
 
 4. In the **Data Format** area, select your desired format of Kafka messages.
 
@@ -192,7 +192,8 @@ The steps vary depending on the connectivity method you select.
 
 11. Click **Next**.
 
-## Step 4. Review and create your changefeed specification
+## Step 4. Review and create your changefeed
 
 1. In the **Changefeed Name** area, specify a name for the changefeed.
-2. Review all the changefeed configurations that you set. Click **Previous** to go back to the previous configuration pages if you want to modify some configurations. Click **Submit** if all configurations are correct to create the changefeed.
+2. Review all the changefeed configurations that you set. Click **Previous** to go back to the previous configuration pages if you want to modify some configurations. 
+3. If all configurations are correct, click **Submit** to create the changefeed.

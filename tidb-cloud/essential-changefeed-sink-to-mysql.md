@@ -108,7 +108,7 @@ After completing the prerequisites, you can sink your data to MySQL.
     - If you have [loaded the existing data](#load-existing-data-optional) using Export, select **From Time** and fill in the snapshot time that you get from Export. Pay attention to the time zone.
     - If you do not have any data in the upstream TiDB cluster, select **Start replication from now on**.
 
-9. Click **Next** to configure your changefeed specification.
+9. Click **Next** to configure your changefeed.
 
     - In the **Changefeed Name** area, specify a name for the changefeed.
 
