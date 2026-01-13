@@ -12,14 +12,14 @@ This document describes how to stream data from TiDB Cloud to MySQL using the **
 > **Note:**
 >
 > - To use the changefeed feature, make sure that your TiDB Cloud Dedicated cluster version is v6.1.3 or later.
-> - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) and [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) clusters, the changefeed feature is unavailable.
+> - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) clusters, the changefeed feature is unavailable.
 
 </CustomContent>
 <CustomContent plan="premium">
 
 > **Note:**
 >
-> For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) and [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) clusters, the changefeed feature is unavailable.
+> For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) clusters, the changefeed feature is unavailable.
 
 </CustomContent>
 
