@@ -210,7 +210,7 @@ You can configure the account used to access GCS by specifying the access key. I
 
     - **System-assigned managed identity**:
 
-        When using a system-assigned managed identity, there is no need to configure any Azure-related environment variables. You can simply run the BR backup command.
+        When using a system-assigned managed identity, there is no need to configure any Azure-related environment variables. You can run the BR backup command directly.
 
         ```shell
         tiup br backup full -u "${PD_IP}:2379" \
@@ -219,23 +219,23 @@ You can configure the account used to access GCS by specifying the access key. I
 
         > **Note:**
         >
-        > Ensure that the `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, or `AZURE_CLIENT_SECRET` environment variables do **not** exist in the running environment. Otherwise, the Azure SDK might prioritize other authentication methods, preventing the managed identity from taking effect.
+        > Ensure that the `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, and `AZURE_CLIENT_SECRET` environment variables are **not** set in the runtime environment. Otherwise, the Azure SDK might prioritize other authentication methods, preventing the managed identity from taking effect.
 
     - **User-assigned managed identity**:
 
-        When using a user-assigned managed identity, you need to configure the `AZURE_CLIENT_ID` environment variable in the running environment of TiKV and BR, set its value to the client ID of the managed identity, and then run the BR backup command. The detailed steps are as follows:
+        When using a user-assigned managed identity, you need to configure the `AZURE_CLIENT_ID` environment variable in the runtime environment of TiKV and BR, set its value to the client ID of the managed identity, and then run the BR backup command. The detailed steps are as follows:
 
         1. Configure the client ID for TiKV when starting with TiUP:
 
             The following steps use the TiKV port `24000` and the systemd service name `tikv-24000` as an example:
 
-            1. Open the service configuration editor by running the following command:
+            1. Open the systemd service editor by running the following command:
 
                 ```shell
                 systemctl edit tikv-24000
                 ```
 
-            2. Configure the `AZURE_CLIENT_ID` environment variable using your client ID:
+            2. Set the `AZURE_CLIENT_ID` environment variable to your managed identity client ID:
 
                 ```ini
                 [Service]
