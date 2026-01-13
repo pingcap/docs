@@ -3,7 +3,7 @@ title: SHOW AFFINITY
 summary: An overview of the usage of SHOW AFFINITY for the TiDB database.
 ---
 
-# SHOW AFFINITY <span class="version-mark">New in v8.5.5 and v9.0.0</span>
+# SHOW AFFINITY <span class="version-mark">New in v8.5.5</span>
 
 The `SHOW AFFINITY` statement shows [affinity](/table-affinity.md) scheduling information for tables configured with the `AFFINITY` option, as well as the target replica distribution currently recorded by PD.
 
@@ -41,7 +41,7 @@ The example output is as follows:
 
 The meaning of each column is as follows:
 
-- `Leader_store_id`, `Voter_store_ids`: the IDs of TiKV stores recorded by PD, indicating which stores host the target Leader and Voter replicas for the table or partitions. If the target replica locations for the affinity group are not determined, or if [`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855-and-v900) is set to `0`, the value is displayed as `NULL`.
+- `Leader_store_id`, `Voter_store_ids`: the IDs of TiKV stores recorded by PD, indicating which stores host the target Leader and Voter replicas for the table or partitions. If the target replica locations for the affinity group are not determined, or if [`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855) is set to `0`, the value is displayed as `NULL`.
 - `Status`: indicates the current status of affinity scheduling. Possible values are:
     - `Pending`: PD has not started affinity scheduling for the table or partition, such as when Leaders or Voters are not yet determined.
     - `Preparing`: PD is scheduling Regions to meet affinity requirements.

@@ -3,7 +3,7 @@ title: Table-Level Data Affinity
 summary: Learn how to configure affinity constraints for tables or partitions to control Region replica distribution and how to view the scheduling status.
 ---
 
-# Table-Level Data Affinity <span class="version-mark">New in v8.5.5 and v9.0.0</span>
+# Table-Level Data Affinity <span class="version-mark">New in v8.5.5</span>
 
 > **Warning:**
 >
@@ -27,7 +27,7 @@ Before using table-level data affinity, note the following limitations:
 
 PD affinity scheduling is disabled by default. Before setting affinity for tables or partitions, you must enable and configure this feature.
 
-1. Set the PD configuration item [`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855-and-v900) to a value greater than `0` to enable affinity scheduling.
+1. Set the PD configuration item [`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855) to a value greater than `0` to enable affinity scheduling.
 
     For example, the following command sets the value to `4`, allowing PD to run up to four affinity scheduling tasks concurrently:
 
@@ -35,7 +35,7 @@ PD affinity scheduling is disabled by default. Before setting affinity for table
     pd-ctl config set schedule.affinity-schedule-limit 4
     ```
 
-2. (Optional) Modify the PD configuration item [`schedule.max-affinity-merge-region-size`](/pd-configuration-file.md#max-affinity-merge-region-size-new-in-v855-and-v900) as needed. The default value is `256` MiB. It controls the size threshold for automatically merging adjacent small Regions within the same affinity group. Setting it to `0` disables the automatic merging of adjacent small Regions within affinity groups.
+2. (Optional) Modify the PD configuration item [`schedule.max-affinity-merge-region-size`](/pd-configuration-file.md#max-affinity-merge-region-size-new-in-v855) as needed. The default value is `256` MiB. It controls the size threshold for automatically merging adjacent small Regions within the same affinity group. Setting it to `0` disables the automatic merging of adjacent small Regions within affinity groups.
 
 ## Usage
 
@@ -95,7 +95,7 @@ You can view table or partition affinity information in the following ways:
 
 ## Notes
 
-- **Automatic splitting of Regions**: when a Region belongs to an affinity group and affinity is in effect, automatic splitting of that Region is disabled by default to avoid the creation of too many Regions that could weaken the affinity effect. Automatic splitting is triggered only when the Region size exceeds four times the value of [`schedule.max-affinity-merge-region-size`](/pd-configuration-file.md#max-affinity-merge-region-size-new-in-v855-and-v900). Note that splits triggered by components other than TiKV or PD (such as manual splits triggered by [`SPLIT TABLE`](/sql-statements/sql-statement-split-region.md)) are not subject to this restriction.
+- **Automatic splitting of Regions**: when a Region belongs to an affinity group and affinity is in effect, automatic splitting of that Region is disabled by default to avoid the creation of too many Regions that could weaken the affinity effect. Automatic splitting is triggered only when the Region size exceeds four times the value of [`schedule.max-affinity-merge-region-size`](/pd-configuration-file.md#max-affinity-merge-region-size-new-in-v855). Note that splits triggered by components other than TiKV or PD (such as manual splits triggered by [`SPLIT TABLE`](/sql-statements/sql-statement-split-region.md)) are not subject to this restriction.
 
 - **Degradation and expiration mechanism**: if the TiKV nodes hosting the target Leaders or Voters in an affinity group become unavailable (for example, due to node failure or insufficient disk space), if a Leader is evicted, or if there is a conflict with existing placement rules, PD marks the affinity group as degraded. During degradation, affinity scheduling for the corresponding table or partition is paused.
 
@@ -106,4 +106,4 @@ You can view table or partition affinity information in the following ways:
 
 - `AFFINITY` option in [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) and [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
 - [`SHOW AFFINITY`](/sql-statements/sql-statement-show-affinity.md)
-- PD configuration items: [`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855-and-v900) and [`schedule.max-affinity-merge-region-size`](/pd-configuration-file.md#max-affinity-merge-region-size-new-in-v855-and-v900)
+- PD configuration items: [`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855) and [`schedule.max-affinity-merge-region-size`](/pd-configuration-file.md#max-affinity-merge-region-size-new-in-v855)
