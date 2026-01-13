@@ -49,8 +49,8 @@ SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_KEY = 'your-openai-api-key-here';
 CREATE TABLE sample (
   `id`        INT,
   `content`   TEXT,
-  `embedding` VECTOR(1536) GENERATED ALWAYS AS (EMBED_TEXT(
-                "openai/text-embedding-3-small",
+  `embedding` VECTOR(3072) GENERATED ALWAYS AS (EMBED_TEXT(
+                "openai/text-embedding-3-large",
                 `content`
               )) STORED
 );
@@ -84,6 +84,56 @@ Result:
 |    4 | Java's syntax is used in Android apps.                         |
 +------+----------------------------------------------------------------+
 ```
+
+## Azure OpenAI
+
+To use OpenAI embedding models on Azure, set global varable `TIDB_EXP_EMBED_OPENAI_API_BASE` to the URL of your Azure resource. Example:
+
+```sql
+SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_KEY = 'your-openai-api-key-here';
+SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_BASE = 'https://your-resource-name.openai.azure.com/openai/v1';
+
+CREATE TABLE sample (
+  `id`        INT,
+  `content`   TEXT,
+  `embedding` VECTOR(3072) GENERATED ALWAYS AS (EMBED_TEXT(
+                "openai/text-embedding-3-large",
+                `content`
+              )) STORED
+);
+
+INSERT INTO sample
+    (`id`, `content`)
+VALUES
+    (1, "Java: Object-oriented language for cross-platform development."),
+    (2, "Java coffee: Bold Indonesian beans with low acidity."),
+    (3, "Java island: Densely populated, home to Jakarta."),
+    (4, "Java's syntax is used in Android apps."),
+    (5, "Dark roast Java beans enhance espresso blends.");
+
+
+SELECT `id`, `content` FROM sample
+ORDER BY
+  VEC_EMBED_COSINE_DISTANCE(
+    embedding,
+    "How to start learning Java programming?"
+  )
+LIMIT 2;
+```
+
+Note that, even if your resource URL looks like `https://<your_resource_name>.cognitiveservices.azure.com/`, you still still use `https://<your_resource_name>.openai.azure.com/openai/v1` as the API base, which provides OpenAI format compatibility.
+
+To switch from using Azure OpenAI to use OpenAI directly, set `TIDB_EXP_EMBED_OPENAI_API_BASE` to empty value:
+
+```sql
+SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_BASE = '';
+```
+
+> **Note:**
+>
+> For security reasons, currently we only allow setting API base to either Azure OpenAI URL or OpenAI URL. **Arbitrary base URL is forbidden.**
+>
+> If you want to use other OpenAI compatible embedding service, contact our support. We will evaluate and add the service provider to the allow list.
 
 ## Options
 
