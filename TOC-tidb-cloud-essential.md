@@ -580,8 +580,3 @@
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
 - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
-
-## RELEASES
-
-- Release Notes
-  - [2025](/tidb-cloud/tidb-cloud-release-notes.md)
