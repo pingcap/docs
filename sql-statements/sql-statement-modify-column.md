@@ -18,12 +18,13 @@ The following are some common examples of column type changes that require Reorg
 Starting from v8.5.5 and v9.0.0, TiDB optimizes some column type changes that previously required Reorg-Data. When the following conditions are met, TiDB rebuilds only the affected indexes instead of the entire table, thereby improving execution efficiency:
 
 - The current session uses a strict [SQL mode](/sql-mode.md) (`sql_mode` includes `STRICT_TRANS_TABLES` or `STRICT_ALL_TABLES`).
+- The table has no TiFlash replicas.
 - There is no risk of data truncation during type conversion.
 
 This optimization applies to the following type change scenarios:
 
 - Conversions between integer types, such as from `BIGINT` to `INT`
-- Conversions between string types, such as from `VARCHAR(200)` to `VARCHAR(100)`
+- Conversions between string types where the character set remains unchanged, such as from `VARCHAR(200)` to `VARCHAR(100)`
 
 > **Note:**
 >
