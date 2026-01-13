@@ -386,7 +386,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     How to try it:
 
-    - From the [TiDB Cloud console](https://tidbcloud.com/), choose Alibaba Cloud as the cloud provider  when creating a cluster to view the Essential option.
+    - From the [TiDB Cloud console](https://tidbcloud.com/), choose Alibaba Cloud as the cloud provider when creating a cluster to view the Essential option.
     - You can also access Essential via the [Alibaba Cloud Marketplace listing](https://www.alibabacloud.com/en/marketplace/tidb?_p_lc=1).
 
   Next, we plan to expand region coverage on Alibaba Cloud and add AWS support.
@@ -550,7 +550,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- For [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, the maximum storage size of TiKV nodes with 16 vCPU and 32 vCPU is changed from **6144 GiB** to **4096 GiB**. 
+- For [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, the maximum storage size of TiKV nodes with 16 vCPU and 32 vCPU is changed from **6144 GiB** to **4096 GiB**.
 
     For more information, see [TiKV node storage size](/tidb-cloud/size-your-cluster.md#tikv-node-storage-size).
 
@@ -570,7 +570,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) on Microsoft Azure is now available in public preview. 
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) on Microsoft Azure is now available in public preview.
   
     With this launch, TiDB Cloud now supports all three major public cloud platforms — AWS, Google Cloud, and Azure, which enables you to deploy TiDB Cloud Dedicated clusters wherever best fits your business needs and cloud strategy.
   
@@ -581,7 +581,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
   To quickly get started with TiDB Cloud Dedicated on Azure, see the following documentation:
   
     - [Create a TiDB Cloud Dedicated Cluster on Azure](/tidb-cloud/create-tidb-cluster.md)
-    - [Connect a TiDB Cloud Dedicated Cluster via Azure Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md) 
+    - [Connect a TiDB Cloud Dedicated Cluster via Azure Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
     - [Import Data into TiDB Cloud Dedicated Cluster on Azure](/tidb-cloud/import-csv-files.md)
 
 - The Prometheus integration provides more metrics to enhance monitoring capabilities of [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
@@ -650,7 +650,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Data export to Alibaba Cloud OSS is now supported. 
+- Data export to Alibaba Cloud OSS is now supported.
 
     [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) clusters now support exporting data to [Alibaba Cloud Object Storage Service (OSS)](https://www.alibabacloud.com/en/product/object-storage-service) using an [AccessKey pair](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair).
 
@@ -782,7 +782,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Support creating TiDB node groups for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters to enhance resource management flexibility. 
+- Support creating TiDB node groups for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters to enhance resource management flexibility.
 
     For more information, see [Overview of TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md).
 
@@ -802,7 +802,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - Support using the Debezium protocol. Debezium is a tool for capturing database changes. It converts each captured database change into a message called an event, and sends these events to Kafka. For more information, see [TiCDC Debezium Protocol](https://docs.pingcap.com/tidb/v8.1/ticdc-debezium).
 
-    - Support defining a single partition dispatcher for all tables, or different partition dispatchers for different tables. 
+    - Support defining a single partition dispatcher for all tables, or different partition dispatchers for different tables.
 
     - Introduce two new dispatcher types for the partition distribution of Kafka messages: timestamp and column value.
 
