@@ -31,11 +31,13 @@ You can create up to 100 migration jobs for each organization. To create more mi
 
 ### Limitations of Alibaba Cloud RDS
 
-When using Alibaba Cloud RDS as a data source, every table must have an explicit primary key. For tables without one, RDS appends a hidden PK to the binlog, which leads to a schema mismatch with the source table and causes the migration to fail.
+When using Alibaba Cloud RDS as a data source, every table must have an explicit primary key. For tables without one, RDS appends a hidden primary key to the binlog, which leads to a schema mismatch with the source table and causes the migration to fail.
 
 ### Limitations of Alibaba Cloud PolarDB-X
 
-During full data migration, PolarDB-X schemas may contain incompatible keywords that cause import to fail. This issue can be mitigated by pre-creating the target tables in the downstream database before initiating the migration process.
+During full data migration, PolarDB-X schemas might contain keywords that are incompatible with the downstream database, causing the import to fail. 
+
+To prevent this, create the target tables in the downstream database before starting the migration process.
 
 ### Limitations of existing data migration
 
@@ -239,15 +241,23 @@ On the **Create Migration Job** page, configure the source and target connection
 2. Fill in the source connection profile.
 
     - **Data source**: the data source type.
+ 
     - **Connectivity method**: select a connection method for your data source based on your security requirements and cloud provider:
+
         - **Public IP**: available for all cloud providers (recommended for testing and proof-of-concept migrations).
         - **Private Link**: available for AWS and Alibaba Cloud only (recommended for production workloads requiring private connectivity).
+
     - Based on the selected **Connectivity method**, do the following:
+    
         - If **Public IP** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
         - If **Private Link** is selected, select the private link connection that you created in the [Private Link Connections](/tidb-cloud/serverless-private-link-connection.md) section.
+        
     - **Port**: the port of the data source.
+    
     - **User Name**: the username of the data source.
+    
     - **Password**: the password of the username.
+    
     - **SSL/TLS**: enable SSL/TLS for end-to-end data encryption (highly recommended for all migration jobs). Upload the appropriate certificates based on your MySQL server's SSL configuration.
 
         SSL/TLS configuration options:
