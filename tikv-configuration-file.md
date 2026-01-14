@@ -83,7 +83,7 @@ TiKV設定ファイルは、コマンドラインパラメータよりも多く�
 -   ログファイル。この設定項目が設定されていない場合、ログはデフォルトで「stderr」に出力されます。この設定項目が設定されている場合、ログは対応するファイルに出力されます。
 -   デフォルト値: `""`
 
-### <code>max-size</code><span class="version-mark">バージョン5.4.0の新機能</span> {#code-max-size-code-span-class-version-mark-new-in-v5-4-0-span}
+### <code>max-size</code> <span class="version-mark">5.4.0の新機能</span> {#code-max-size-code-span-class-version-mark-new-in-v5-4-0-span}
 
 -   ログファイルの最大サイズ。ファイルサイズがこの設定項目で設定された値より大きい場合、システムは自動的に1つのファイルを複数のファイルに分割します。
 -   デフォルト値: `300`
@@ -152,7 +152,12 @@ TiKV設定ファイルは、コマンドラインパラメータよりも多く�
 ### <code>grpc-concurrency</code> {#code-grpc-concurrency-code}
 
 -   gRPCワーカースレッドの数。gRPCスレッドプールのサイズを変更する場合は、 [TiKV スレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
--   デフォルト値: `5`
+
+-   デフォルト値:
+
+    -   v8.5.4以降では、デフォルト値は[`grpc-raft-conn-num`](#grpc-raft-conn-num)の値に基づいて計算される`grpc-raft-conn-num * 3 + 2`に調整されます。例えば、CPUコア数が8の場合、デフォルト値`grpc-raft-conn-num`は 1 になります。したがって、デフォルト値`grpc-concurrency`は`1 * 3 + 2 = 5`になります。
+    -   v8.5.3 以前のバージョンでは、デフォルト値は`5`です。
+
 -   最小値: `1`
 
 ### <code>grpc-concurrent-stream</code> {#code-grpc-concurrent-stream-code}
@@ -170,7 +175,12 @@ TiKV設定ファイルは、コマンドラインパラメータよりも多く�
 ### <code>grpc-raft-conn-num</code> {#code-grpc-raft-conn-num-code}
 
 -   Raft通信におけるTiKVノード間の最大接続数
--   デフォルト値: `1`
+
+-   デフォルト値:
+
+    -   v8.5.4 以降では、デフォルト値は`MAX(1, MIN(4, CPU cores / 8))`に調整されます。3 `MIN(4, CPU cores / 8)` 、CPU コアの数が 32 以上の場合、デフォルトの最大接続数が 4 であることを示します。
+    -   v8.5.3 以前のバージョンでは、デフォルト値は`1`です。
+
 -   最小値: `1`
 
 ### <code>max-grpc-send-msg-len</code> {#code-max-grpc-send-msg-len-code}
@@ -271,7 +281,7 @@ TiKV設定ファイルは、コマンドラインパラメータよりも多く�
 
 ### <code>raft-client-queue-size</code> {#code-raft-client-queue-size-code}
 
--   TiKVにおけるRaftメッセージのキューサイズを指定します。時間内に送信されないメッセージが多すぎるとバッファがいっぱいになったり、メッセージが破棄されたりする場合は、システムの安定性を向上させるために、より大きな値を指定できます。
+-   TiKVにおけるRaftメッセージのキューサイズを指定します。時間内に送信されないメッセージが多すぎてバッファがいっぱいになったり、メッセージが破棄されたりする場合は、システムの安定性を向上させるために、より大きな値を指定できます。
 -   デフォルト値: `16384`
 
 ### <code>simplify-metrics</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-simplify-metrics-code-span-class-version-mark-new-in-v6-2-0-span}
@@ -279,14 +289,14 @@ TiKV設定ファイルは、コマンドラインパラメータよりも多く�
 -   返される監視メトリックを簡素化するかどうかを指定します。値を`true`に設定すると、TiKV は一部のメトリックを除外することで、各リクエストに対して返されるデータの量を削減します。
 -   デフォルト値: `false`
 
-### <code>forward-max-connections-per-address</code><span class="version-mark">バージョン 5.0.0 の新機能</span> {#code-forward-max-connections-per-address-code-span-class-version-mark-new-in-v5-0-0-span}
+### <code>forward-max-connections-per-address</code> <span class="version-mark">v5.0.0 の新機能</span> {#code-forward-max-connections-per-address-code-span-class-version-mark-new-in-v5-0-0-span}
 
 -   サービスとサーバーへのリクエスト転送用の接続プールのサイズを設定します。値が小さすぎると、リクエストのレイテンシーと負荷分散に影響します。
 -   デフォルト値: `4`
 
 ## 読み取りプール.統合 {#readpool-unified}
 
-読み取りリクエストを処理する単一スレッドプールに関するコンフィグレーション項目。このスレッドプールは、バージョン4.0以降、従来のstorageスレッドプールとコプロセッサスレッドプールに代わるものです。
+読み取りリクエストを処理する単一スレッドプールに関連するコンフィグレーション項目。このスレッドプールは、バージョン4.0以降、従来のstorageスレッドプールとコプロセッサスレッドプールに代わるものです。
 
 ### <code>min-thread-count</code> {#code-min-thread-count-code}
 
@@ -1619,7 +1629,7 @@ Titan に関連するコンフィグレーション項目。
 -   `lockcf`のデフォルト値: `"128MiB"`
 -   最小値: `0`
 -   単位: KiB|MiB|GiB
--   不要な圧縮を減らすために、 `max-bytes-for-level-base`の値はL0のデータ量とほぼ同じに設定することをお勧めします。たとえば、圧縮方法が「no:no:lz4:lz4:lz4:lz4:lz4」の場合、L0とL1は圧縮されておらず、L0の圧縮のトリガー条件はSSTファイルの数が4（デフォルト値）に達することであるため、 `max-bytes-for-level-base`の値は`write-buffer-size * 4`にする必要があります。L0とL1の両方で圧縮が採用されている場合、memtableから圧縮されたSSTファイルのサイズを把握するには、RocksDBログを分析する必要があります。たとえば、ファイルサイズが32MiBの場合、 `max-bytes-for-level-base`の値を128MiB（ `32 MiB * 4` ）に設定することをお勧めします。
+-   不要な圧縮を減らすため、 `max-bytes-for-level-base`の値はL0のデータ量とほぼ同じに設定することをお勧めします。たとえば、圧縮方法が「no:no:lz4:lz4:lz4:lz4:lz4」の場合、L0とL1は圧縮されておらず、L0の圧縮のトリガー条件はSSTファイルの数が4（デフォルト値）に達することであるため、 `max-bytes-for-level-base`の値は`write-buffer-size * 4`にする必要があります。L0とL1の両方で圧縮が採用されている場合、memtableから圧縮されたSSTファイルのサイズを把握するには、RocksDBログを分析する必要があります。たとえば、ファイルサイズが32MiBの場合、 `max-bytes-for-level-base`の値を128MiB（ `32 MiB * 4` ）に設定することをお勧めします。
 
 ### <code>target-file-size-base</code> {#code-target-file-size-base-code}
 
@@ -2135,7 +2145,7 @@ Raft Engineに関連するコンフィグレーション項目。
 >
 > この設定項目は、 [`enable-log-recycle`](#enable-log-recycle-new-in-v630) `true`に設定されている場合にのみ有効になります。
 
--   Raft Engineのログリサイクル用に空のログファイルを生成するかどうかを決定します。有効にすると、 Raft Engineは初期化中にログリサイクル用の空のログファイルを自動的にバッチで作成し、初期化直後からログリサイクルが有効になります。
+-   Raft Engineのログリサイクル用に空のログファイルを生成するかどうかを決定します。有効にすると、 Raft Engineは初期化中にログリサイクル用の空のログファイルを自動的にバッチで作成し、初期化直後にログリサイクルを有効にします。
 -   デフォルト値: `false`
 
 ### <code>compression-level</code> <span class="version-mark">v7.4.0 の新機能</span> {#code-compression-level-code-span-class-version-mark-new-in-v7-4-0-span}
@@ -2173,7 +2183,7 @@ Raft Engineに関連するコンフィグレーション項目。
 -   この設定項目は、ログ編集を有効または無効にします。値のオプションは`true` 、 `false` 、 `"on"` 、 `"off"` 、 `"marker"` 。 `"on"` 、 `"off"` 、 `"marker"`オプションはバージョン8.3.0で導入されました。
 -   構成項目が`false`または`"off"`に設定されている場合、ログ編集は無効になります。
 -   構成項目が`true`または`"on"`に設定されている場合、ログ内のすべてのユーザー データは`?`に置き換えられます。
--   設定項目を`"marker"`に設定すると、ログ内のすべてのユーザーデータは`‹ ›`で囲まれます。ユーザーデータに`‹`または`›`が含まれている場合、 `‹`は`‹‹`に、 `›`は`››`にエスケープされます。マークされたログに基づいて、ログを表示する際にマークされた情報を非感度化するかどうかを決定できます。
+-   設定項目を`"marker"`に設定すると、ログ内のすべてのユーザーデータは`‹ ›`で囲まれます。ユーザーデータに`‹`または`›`が含まれている場合、 `‹`は`‹‹`に、 `›` `››`にエスケープされます。マークされたログに基づいて、ログを表示する際にマークされた情報を非感度化するかどうかを決定できます。
 -   デフォルト値: `false`
 -   使用方法の詳細については、 [TiKV側でのログ編集](/log-redaction.md#log-redaction-in-tikv-side)参照してください。
 
@@ -2542,7 +2552,7 @@ TiKV がデプロイされているマシンのリソースが限られている
 > **警告：**
 >
 > -   バックグラウンド クォータ リミッターは、TiDB v6.2.0 で導入された実験的機能であり、本番環境での使用は推奨され**ません**。
-> -   この機能は、TiKV が安定して動作することを保証するために、リソースが限られた環境にのみ適しています。リソースが豊富な環境でこの機能を有効にすると、リクエスト量がピークに達したときにパフォーマンスが低下する可能性があります。
+> -   この機能は、TiKV がリソースが限られた環境で安定して動作することを保証するため、リソースが限られた環境にのみ適しています。リソースが豊富な環境でこの機能を有効にすると、リクエスト数がピークに達したときにパフォーマンスが低下する可能性があります。
 
 #### <code>background-cpu-time</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-background-cpu-time-code-span-class-version-mark-new-in-v6-2-0-span}
 
@@ -2577,7 +2587,7 @@ TiKV API V2が有効な場合にタイムスタンプを取得するためのコ
 -   TiKV がこの設定項目で指定された期間に基づいて TSO キャッシュを事前割り当てすることを示します。TiKV は前回の期間に基づいて TSO の使用量を推定し、 `alloc-ahead-buffer`満たす TSO をローカルに要求してキャッシュします。
 -   この設定項目は、TiKV API V2が有効になっている場合にPD障害の許容度を高めるためによく使用されます（ `storage.api-version = 2` ）。
 -   この設定項目の値を大きくすると、TSO消費量とTiKVのメモリオーバーヘッドが増加する可能性があります。十分なTSOを確保するには、PDの[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)の設定項目を減らすことをお勧めします。
--   テストによると、 `alloc-ahead-buffer`がデフォルト値の場合、PD リーダーが失敗して別のノードに切り替わると、書き込み要求のレイテンシーが短期的に増加し、QPS が減少 (約 15%) します。
+-   テストによると、 `alloc-ahead-buffer`がデフォルト値の場合、PD リーダーに障害が発生して別のノードに切り替わると、書き込み要求のレイテンシーが短期的に増加し、QPS が減少 (約 15%) します。
 -   ビジネスへの影響を回避するには、PD で`tso-update-physical-interval = "1ms"`設定し、TiKV で次の設定項目を設定します。
     -   `causal-ts.alloc-ahead-buffer = "6s"`
     -   `causal-ts.renew-batch-max-size = 65536`

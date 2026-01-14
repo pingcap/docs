@@ -3,11 +3,11 @@ title: Tune TiKV Thread Pool Performance
 summary: 最適なパフォーマンスを得るために TiKV スレッド プールを調整する方法を学習します。
 ---
 
-# TiKV スレッドプールのパフォーマンスを調整する {#tune-tikv-thread-pool-performance}
+# TiKV スレッド プールのパフォーマンスを調整する {#tune-tikv-thread-pool-performance}
 
 このドキュメントでは、TiKV 内部スレッド プールとそのパフォーマンスを調整する方法について説明します。
 
-## スレッドプールの導入 {#thread-pool-introduction}
+## スレッドプールの紹介 {#thread-pool-introduction}
 
 TiKVスレッドプールは、主にgRPC、Scheduler、UnifyReadPool、 Raftstore、StoreWriter、Apply、RocksDB、そしてCPUをあまり消費しないいくつかのスケジュールタスクと検出コンポーネントで構成されています。このドキュメントでは、主に読み取りおよび書き込みリクエストのパフォーマンスに影響を与える、CPUを大量に消費するスレッドプールをいくつか紹介します。
 
@@ -27,7 +27,7 @@ TiKVスレッドプールは、主にgRPC、Scheduler、UnifyReadPool、 Raftsto
 
 -   RocksDBスレッドプール：RocksDBがタスクを圧縮およびフラッシュするためのスレッドプールです。RocksDBのアーキテクチャと`Compact`操作については、 [RocksDB: フラッシュと RAM ストレージ用の永続的なキーバリューストア](https://github.com/facebook/rocksdb)を参照してください。
 
--   UnifyReadPool スレッドプール：コプロセッサースレッドプールとストレージ読み取りプールを組み合わせたものです。kv get、kv batch get、raw kv get、コプロセッサなどのすべての読み取り要求はこのスレッドプールで実行されます。
+-   UnifyReadPool スレッドプール:コプロセッサースレッドプールとストレージ読み取りプールを組み合わせたものです。kv get、kv batch get、raw kv get、コプロセッサなどのすべての読み取り要求はこのスレッドプールで実行されます。
 
 ## TiKV読み取り専用リクエスト {#tikv-read-only-requests}
 
@@ -36,15 +36,15 @@ TiKV の読み取り要求は次の種類に分類されます。
 -   ストレージ読み取りプールで実行される、特定の行または複数の行を指定する単純なクエリ。
 -   コプロセッサー読み取りプールで実行される複雑な集計計算と範囲クエリ。
 
-TiKV v5.0以降、すべての読み取りリクエストはデフォルトでクエリ用の統合スレッドプールを使用します。TiKVクラスターをTiKV v4.0からアップグレードし、アップグレード前に`use-unified-pool`構成の`readpool.storage` `false`に設定していた場合、アップグレード後もすべての読み取りリクエストは引き続き異なるスレッドプールを使用します。このシナリオでは、すべての読み取りリクエストがクエリ用の統合スレッドプールを使用するようにするには、 `readpool.storage.use-unified-pool`を`true`に設定します。
+TiKV v5.0以降、すべての読み取りリクエストはデフォルトでクエリ用の統合スレッドプールを使用します。TiKVクラスターをTiKV v4.0からアップグレードし、アップグレード前に`use-unified-pool`設定が`readpool.storage`から`false`に設定されていた場合、アップグレード後もすべての読み取りリクエストは引き続き異なるスレッドプールを使用します。このシナリオでは、すべての読み取りリクエストがクエリ用の統合スレッドプールを使用するようにするには、 `readpool.storage.use-unified-pool`を`true`に設定します。
 
 ## TiKV スレッドプールのパフォーマンスチューニング {#performance-tuning-for-tikv-thread-pools}
 
 -   gRPC スレッド プール。
 
-    gRPC スレッドプールのデフォルトサイズ（ `server.grpc-concurrency`に設定）は`5`です。このスレッドプールにはコンピューティングオーバーヘッドはほとんどなく、主にネットワーク I/O とデシリアライズリクエストを処理するため、通常はデフォルト設定を調整する必要はありません。
+    v8.5.4以降、gRPCスレッドプールのデフォルトサイズ（ `server.grpc-concurrency`で設定）が固定値の`5`から、CPUコア数に基づいて計算される適応値に変更されました。詳細な計算式については、 [`server.grpc-concurrency`](/tikv-configuration-file.md#grpc-concurrency)参照してください。このスレッドプールはコンピューティングオーバーヘッドがほとんどなく、主にネットワークI/Oとデシリアライズリクエストを処理するため、通常はデフォルト設定を調整する必要はありません。
 
-    -   TiKV がデプロイされたマシンの CPU コア数が少ない (8 個以下) 場合は、 `server.grpc-concurrency`構成項目を`2`に設定することを検討してください。
+    -   TiKV で展開されたマシンの CPU コア数が少ない (8 個以下) 場合は、 `server.grpc-concurrency`構成項目を`2`に設定することを検討してください。
     -   TiKV を導入したマシンの構成が非常に高く、TiKV が大量の読み取りおよび書き込み要求を処理し、Grafana でスレッド CPU を監視する値`gRPC poll CPU`が`server.grpc-concurrency`の 80% を超える場合は、スレッド プールの使用率を 80% 未満 (つまり、Grafana のメトリックが`80% * server.grpc-concurrency`未満) に保つために値`server.grpc-concurrency`を増やすことを検討してください。
 
 -   スケジューラ スレッド プール。
@@ -60,18 +60,18 @@ TiKV v5.0以降、すべての読み取りリクエストはデフォルトで�
 
 -   Raftstoreスレッド プール。
 
-    Raftstoreスレッドプールは、TiKV で最も複雑なスレッドプールです。このスレッドプールのデフォルトサイズ（ `raftstore.store-pool-size`で設定）は`2` 。StoreWriter スレッドプールのデフォルトサイズ（ `raftstore.store-io-pool-size`で設定）は`1`です。
+    Raftstoreスレッドプールは、TiKV で最も複雑なスレッドプールです。このスレッドプールのデフォルトサイズ（ `raftstore.store-pool-size`で設定）は`2`です。StoreWriter スレッドプールのデフォルトサイズ（ `raftstore.store-io-pool-size`で設定）は`1`です。
 
     -   StoreWriterスレッドプールのサイズが0の場合、すべての書き込みリクエストはRaftstoreスレッドによって`fsync`としてRocksDBに書き込まれます。この場合、以下の方法でパフォーマンスをチューニングすることをお勧めします。
 
-        -   Raftstoreスレッド全体のCPU使用率を60%未満に保ちます。Raftstoreスレッド数が2の場合、 **TiKV-Details** 、 **Thread CPU** 、Grafanaの**Raft store CPUを**120 %未満に保ちます。I/Oリクエストにより、 RaftstoreスレッドのCPU使用率は理論上は常に100%未満になります。
-        -   書き込みパフォーマンスを向上させるために、 Raftstoreスレッド プールのサイズを慎重に検討せずに増やさないでください。そうすると、ディスクの負担が増加し、パフォーマンスが低下する可能性があります。
+        -   Raftstoreスレッド全体の CPU 使用率を 60% 未満に保ちます。RaftstoreRaftstore数が 2 の場合、Grafana 上の**TiKV-Details** 、 **Thread CPU** 、 **Raft store CPU を**120% 未満に保ちます。I/O リクエストにより、 Raftstoreスレッドの CPU 使用率は理論上は常に 100% 未満になります。
+        -   書き込みパフォーマンスを向上させるために、 Raftstoreスレッド プールのサイズを慎重に検討せずに増やさないでください。そうすると、ディスクの負荷が増加し、パフォーマンスが低下する可能性があります。
 
     -   StoreWriterスレッドプールのサイズが0でない場合、すべての書き込みリクエストはStoreWriterスレッドによって`fsync`としてRocksDBに書き込まれます。この場合、以下の方法でパフォーマンスをチューニングすることをお勧めします。
 
         -   StoreWriterスレッドプールは、CPUリソース全体が十分である場合にのみ有効にしてください。StoreWriterスレッドプールを有効にする際は、StoreWriterスレッドとRaftstoreスレッドのCPU使用率を80%未満に抑えてください。
 
-        書き込み要求がRaftstoreスレッドで処理される場合と比較して、理論上は、書き込み要求が StoreWriter スレッドで処理される場合、書き込みレイテンシーとデータ読み取りのテールレイテンシーが大幅に削減されます。ただし、書き込み速度が高速化すると、それに応じてRaftログの数が増加します。これにより、 Raftstoreスレッド、Apply スレッド、および gRPC スレッドの CPU オーバーヘッドが増加する可能性があります。この場合、CPU リソースが不足するとチューニング効果が打ち消され、結果として書き込み速度が以前よりも遅くなる可能性があります。したがって、CPU リソースが十分でない場合は、StoreWriter スレッドを有効にすることは推奨されません。Raftstore スレッドはほとんどの I/O 要求をRaftstoreスレッドに送信するため、 Raftstoreスレッドの CPU 使用率を 80% 未満に維持する必要があります。
+        書き込み要求がRaftstoreスレッドで処理される場合と比較して、理論上は、書き込み要求が StoreWriter スレッドで処理される場合、書き込みレイテンシーとデータ読み取りのテールレイテンシーが大幅に削減されます。ただし、書き込み速度が高速化すると、それに応じてRaftログの数が増加します。これにより、 Raftstoreスレッド、Apply スレッド、および gRPC スレッドの CPU オーバーヘッドが増加する可能性があります。この場合、CPU リソースが不足するとチューニング効果が打ち消され、結果として書き込み速度が以前よりも遅くなる可能性があります。したがって、CPU リソースが十分でない場合は、StoreWriter スレッドを有効にすることは推奨されません。Raftstore スレッドはほとんどの I/O 要求をRaftstoreスレッドに送信するため、 Raftstoreスレッドの CPU 使用率を 80% 未満に抑える必要があります。
 
     -   ほとんどの場合、StoreWriter スレッドプールのサイズは 1 または 2 に設定してください。これは、StoreWriter スレッドプールのサイズがRaftログの数に影響するため、スレッドプールのサイズを大きくしすぎないようにするためです。CPU 使用率が 80% を超える場合は、スレッドプールのサイズを増やすことを検討してください。
 
@@ -83,7 +83,7 @@ TiKV v5.0以降、すべての読み取りリクエストはデフォルトで�
 
     Grafanaの`TiKV-Details.Thread CPU.Unified read pool CPU`のピーク値が800%を超えない場合は、 `readpool.unified.max-thread-count` ～ `10`に設定することをお勧めします。スレッド数が多すぎると、スレッドの切り替えが頻繁に発生し、他のスレッドプールのリソースを消費する可能性があります。
 
-    v6.3.0以降、TiKVは現在のCPU使用率に基づいてUnifyReadPoolスレッドプールサイズを自動調整する機能をサポートしています。この機能を有効にするには、 [`readpool.unified.auto-adjust-pool-size = true`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)設定します。再読み取りが行われ、最大CPU使用率が80%を超えるクラスターについては、スレッドプールサイズを自動調整することをお勧めします。
+    v6.3.0以降、TiKVは現在のCPU使用率に基づいてUnifyReadPoolスレッドプールサイズを自動調整する機能をサポートしています。この機能を有効にするには、 [`readpool.unified.auto-adjust-pool-size = true`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)を設定します。再読み取りが行われ、最大CPU使用率が80%を超えるクラスターについては、スレッドプールサイズを自動調整することをお勧めします。
 
 -   RocksDB スレッド プール。
 

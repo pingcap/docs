@@ -1,11 +1,11 @@
 ---
 title: Deploy Monitoring Services for the TiDB Cluster
-summary: TiDB クラスターの監視サービスを展開する方法を学習します。
+summary: TiDB クラスターの監視サービスをデプロイする方法を学習します。
 ---
 
 # TiDBクラスタの監視サービスをデプロイ {#deploy-monitoring-services-for-the-tidb-cluster}
 
-このドキュメントは、TiDB 監視およびアラートサービスを手動で導入したいユーザーを対象としています。TiUPを使用して TiDB クラスターをデプロイする場合、監視およびアラートサービスは自動的にデプロイされるため、手動でのデプロイは不要です。1 [TiDBダッシュボード](/dashboard/dashboard-intro.md) PDコンポーネントに組み込まれているため、別途デプロイする必要はありません。
+このドキュメントは、TiDB 監視およびアラートサービスを手動でデプロイしたいユーザーを対象としています。TiUPを使用して TiDB クラスターをデプロイする場合、監視およびアラートサービスは自動的にデプロイされるため、手動でのデプロイは不要です。1 [TiDBダッシュボード](/dashboard/dashboard-intro.md) PDコンポーネントに組み込まれているため、別途デプロイする必要はありません。
 
 ## PrometheusとGrafanaをデプロイ {#deploy-prometheus-and-grafana}
 
@@ -25,8 +25,8 @@ TiDB クラスター トポロジが次のようになっていると仮定し�
 ```bash
 # Downloads the package.
 wget https://github.com/prometheus/prometheus/releases/download/v2.49.1/prometheus-2.49.1.linux-amd64.tar.gz
-wget https://download.pingcap.org/node_exporter-v1.3.1-linux-amd64.tar.gz
-wget https://download.pingcap.org/grafana-7.5.17.linux-amd64.tar.gz
+wget https://download.pingcap.com/node_exporter-v1.3.1-linux-amd64.tar.gz
+wget https://download.pingcap.com/grafana-7.5.17.linux-amd64.tar.gz
 ```
 
 ```bash
@@ -107,8 +107,8 @@ TiDB、PD、TiKV などのコンポーネントのアラーム ルールを有�
 
 -   TiDB: [`tidb.rules.yml`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/metrics/alertmanager/tidb.rules.yml)
 -   PD: [`pd.rules.yml`](https://github.com/tikv/pd/blob/release-8.5/metrics/alertmanager/pd.rules.yml)
--   ティクヴァ: [`tikv.rules.yml`](https://github.com/tikv/tikv/blob/release-8.5/metrics/alertmanager/tikv.rules.yml)
--   TiFlash： [`tiflash.rules.yml`](https://github.com/pingcap/tiflash/blob/release-8.5/metrics/alertmanager/tiflash.rules.yml)
+-   TiKV: [`tikv.rules.yml`](https://github.com/tikv/tikv/blob/release-8.5/metrics/alertmanager/tikv.rules.yml)
+-   TiFlash: [`tiflash.rules.yml`](https://github.com/pingcap/tiflash/blob/release-8.5/metrics/alertmanager/tiflash.rules.yml)
 -   TiCDC: [`ticdc.rules.yml`](https://github.com/pingcap/tiflow/blob/release-8.5/metrics/alertmanager/ticdc.rules.yml)
 -   TiDB Lightning： [`lightning.rules.yml`](https://github.com/pingcap/tidb/blob/release-8.5/br/metrics/alertmanager/lightning.rules.yml)
 
@@ -212,7 +212,7 @@ Grafana サービスを開始します。
 
 2.  Grafana サイドバー メニューで、**コンフィグレーション**内の**データ ソース**をクリックします。
 
-3.  **[データ ソースの追加]を**クリックします。
+3.  **データ ソースの追加を**クリックします。
 
 4.  データ ソース情報を指定します。
 
@@ -231,7 +231,7 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
 
 2.  サイドバー メニューで、 **[ダッシュボード]** -&gt; **[インポート]**をクリックして、 **[ダッシュボードのインポート]**ウィンドウを開きます。
 
-3.  **「.json ファイルのアップロード」**をクリックして JSON ファイルをアップロードします ( [pingcap/tidb](https://github.com/pingcap/tidb/tree/release-8.5/pkg/metrics/grafana) 、および[tikv/pd](https://github.com/tikv/pd/tree/release-8.5/metrics/grafana) [ティックブ/ティックブ](https://github.com/tikv/tikv/tree/release-8.5/metrics/grafana) TiDB Grafana 構成ファイルをダウンロードします)。
+3.  **「.json ファイルのアップロード」を**クリックして JSON ファイルをアップロードします ( [pingcap/tidb](https://github.com/pingcap/tidb/tree/release-8.5/pkg/metrics/grafana) [ティックブ/ティックブ](https://github.com/tikv/tikv/tree/release-8.5/metrics/grafana)および[ティックブ/PD](https://github.com/tikv/pd/tree/release-8.5/metrics/grafana)から TiDB Grafana 構成ファイルをダウンロードします)。
 
     > **注記：**
     >
@@ -271,7 +271,7 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
     -   ガベージコレクション（GC）監視
     -   TiKVコマンドが実行される合計回数
     -   スケジューラがコマンドを実行する期間
-    -   Raftのproposeコマンドの実行回数
+    -   Raftの提案コマンドの総回数
     -   Raftがコマンドを実行する期間
-    -   Raftコマンドが失敗した回数の合計
+    -   Raftコマンドが失敗した合計回数
     -   Raftが準備完了状態を処理する合計回数

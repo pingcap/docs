@@ -59,7 +59,7 @@ summary: tidbcloud_dedicated_vpc_peering` リソースを使用して、 TiDB Cl
     -   必要な引数の値を取得する方法がわからない場合は、 [VPC ピアリング経由でTiDB Cloud Dedicated に接続する](/tidb-cloud/set-up-vpc-peering-connections.md)参照してください。
     -   TiDB Cloud Dedicated VPC ピアリング仕様情報を取得するには、 [tidbcloud_dedicated_vpc_peering (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_vpc_peering)参照してください。
 
-3.  `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
+3.  `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`使用は推奨されません。
 
     ```shell
     $ terraform apply
@@ -100,9 +100,9 @@ summary: tidbcloud_dedicated_vpc_peering` リソースを使用して、 TiDB Cl
 
     -   構成と状態の違いを確認できます。
     -   `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
-    -   `known after apply` `apply`後の対応する値が取得されることを示します。
+    -   `known after apply` 、 `apply`後の対応する値が取得されることを示します。
 
-4.  計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
+4.  計画の内容がすべて問題ない場合は、 `yes`と入力して続行します。
 
     ```shell
     Do you want to perform these actions?
@@ -117,7 +117,7 @@ summary: tidbcloud_dedicated_vpc_peering` リソースを使用して、 TiDB Cl
 
     クラウドプロバイダーのコンソールでVPCピアリング接続を承認するまで、リソースのステータスは`Creating`ままです。VPCピアリング接続を承認すると、ステータスは[VPC ピアリングの承認と設定](/tidb-cloud/set-up-vpc-peering-connections.md#step-2-approve-and-configure-the-vpc-peering)基準に`Active`に変わります。
 
-5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_dedicated_vpc_peering.${resource-name}`使用します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
+5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_dedicated_vpc_peering.${resource-name}`を使用します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_dedicated_vpc_peering.example
@@ -142,7 +142,7 @@ summary: tidbcloud_dedicated_vpc_peering` リソースを使用して、 TiDB Cl
     }
     ```
 
-## TiDB Cloud Dedicated VPC ピアリングをインポートする {#import-a-tidb-cloud-dedicated-vpc-peering}
+## TiDB Cloud専用 VPC ピアリングをインポートする {#import-a-tidb-cloud-dedicated-vpc-peering}
 
 Terraform によって管理されていないTiDB Cloud Dedicated VPC ピアリングの場合は、インポートすることで Terraform の管理下に置くことができます。
 
@@ -150,11 +150,11 @@ Terraform によって管理されていないTiDB Cloud Dedicated VPC ピアリ
 
 1.  新しい`tidbcloud_dedicated_vpc_peering`リソースのインポート ブロックを追加します。
 
-    次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` `cluster_id,vpc_peering_id`の形式に置き換えます。
+    次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${vpc_peering_id}`実際の VPC ピアリング ID に置き換えます。
 
         import {
           to = tidbcloud_dedicated_vpc_peering.example
-          id = "${id}"
+          id = "${vpc_peering_id}"
         }
 
 2.  新しい構成ファイルを生成します。
@@ -173,7 +173,7 @@ Terraform によって管理されていないTiDB Cloud Dedicated VPC ピアリ
 
     生成された構成ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
 
-    次に、 `terraform apply`実行してインフラストラクチャをインポートします。適用後、出力例は次のようになります。
+    次に、 `terraform apply`を実行してインフラストラクチャをインポートします。適用後、出力例は次のようになります。
 
     ```shell
     tidbcloud_dedicated_vpc_peering.example: Importing... [id=aws-1934187953894000000,example]
@@ -232,6 +232,6 @@ TiDB Cloud Dedicated VPC ピアリングを削除するには、 `tidbcloud_dedi
   Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
 ```
 
-ここで、コマンド`terraform show`実行すると、リソースがクリアされているため何も表示されません。
+ここで、コマンド`terraform show`を実行すると、リソースがクリアされているため何も表示されません。
 
     $ terraform show

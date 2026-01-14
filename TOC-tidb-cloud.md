@@ -62,7 +62,7 @@
         -   [SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md)
         -   [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md)
         -   [ジャンゴ](/develop/dev-guide-sample-application-python-django.md)
-    -   ノード.js
+    -   Node.js
         -   [ノード-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
         -   [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
         -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
@@ -316,11 +316,6 @@
         -   [Azure でセルフホスト型 Kafka プライベート リンク サービスを設定する](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)
         -   [Google Cloud でセルフホスト型 Kafka プライベート サービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)
         -   [Changefeeds のプライベート エンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)
--   災害復旧
-    -   [回復グループの概要](/tidb-cloud/recovery-group-overview.md)
-    -   [始める](/tidb-cloud/recovery-group-get-started.md)
-    -   [データベースのフェイルオーバーと再保護](/tidb-cloud/recovery-group-failover.md)
-    -   [リカバリグループを削除する](/tidb-cloud/recovery-group-delete.md)
 -   Security
     -   [Securityの概要](/tidb-cloud/security-overview.md)
     -   アイデンティティアクセス制御
@@ -330,7 +325,7 @@
         -   [アイデンティティアクセス管理](/tidb-cloud/manage-user-access.md)
         -   [OAuth 2.0](/tidb-cloud/oauth2.md)
     -   ネットワークアクセス制御
-        -   [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)
+        -   [IPアクセスリストを構成する](/tidb-cloud/configure-ip-access-list.md)
         -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md)
         -   [Azure のプライベート エンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
         -   [プライベートエンドポイント経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
@@ -709,7 +704,7 @@
         -   [スケジュール](/tidb-scheduling.md)
         -   [TSO](/tso.md)
     -   ストレージエンジン
-        -   TiKV
+        -   ティクブ
             -   [TiKVの概要](/tikv-overview.md)
             -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
         -   TiFlash

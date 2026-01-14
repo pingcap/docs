@@ -11,8 +11,8 @@ TiDB Toolkit には、データ エクスポート ツールDumpling、データ
 
 > **ヒント：**
 >
-> -   導入環境にインターネット アクセスがある場合は、 [TiUPコマンド](/tiup/tiup-component-management.md)つを使用して TiDB ツールを導入できるため、 TiDB Toolkitを別途ダウンロードする必要はありません。
-> -   Kubernetes 上で TiDB をデプロイして保守する必要がある場合は、 TiDB Toolkitをダウンロードする代わりに、 [TiDB Operatorのオフラインインストール](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator#offline-installation)の手順に従ってください。
+> -   デプロイメント環境にインターネット アクセスがある場合は、単一の[TiUPコマンド](/tiup/tiup-component-management.md)を使用して TiDB ツールをデプロイメントできるため、 TiDB Toolkitを個別にダウンロードする必要はありません。
+> -   Kubernetes 上で TiDB をデプロイして保守する必要がある場合は、 TiDB Toolkit をダウンロードする代わりに、 [TiDB Operatorのオフラインインストール](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator#offline-installation)の手順に従います。
 
 ## 環境要件 {#environment-requirements}
 
@@ -23,17 +23,17 @@ TiDB Toolkit には、データ エクスポート ツールDumpling、データ
 
 TiDB Toolkit は次のリンクからダウンロードできます。
 
-    https://download.pingcap.org/tidb-community-toolkit-{version}-linux-{arch}.tar.gz
+    https://download.pingcap.com/tidb-community-toolkit-{version}-linux-{arch}.tar.gz
 
-リンク内の`{version}`はTiDBのバージョン番号を示し、 `{arch}`システムのアーキテクチャ`amd64`または`arm64`を示します。例えば、 `amd64`アーキテクチャの`v8.5.3`のダウンロードリンクは`https://download.pingcap.org/tidb-community-toolkit-v8.5.3-linux-amd64.tar.gz`です。
+リンク内の`{version}` TiDBのバージョン番号を示し、 `{arch}`システムのアーキテクチャ（ `amd64`または`arm64`を示します。例えば、 `amd64`アーキテクチャの`v8.5.4`のダウンロードリンクは`https://download.pingcap.com/tidb-community-toolkit-v8.5.4-linux-amd64.tar.gz`です。
 
 > **注記：**
 >
-> [PD Control](/pd-control.md)ツール`pd-ctl`ダウンロードする必要がある場合は、 `https://download.pingcap.org/tidb-community-server-{version}-linux-{arch}.tar.gz`から TiDB インストール パッケージを別途ダウンロードします。
+> [PD Control](/pd-control.md)ツール`pd-ctl`をダウンロードする必要がある場合は、 `https://download.pingcap.com/tidb-community-server-{version}-linux-{arch}.tar.gz`から TiDB インストール パッケージを別途ダウンロードします。
 
 ## TiDB Toolkitの説明 {#tidb-toolkit-description}
 
-使用するツールに応じて、対応するオフライン パッケージを次のようにインストールできます。
+使用するツールに応じて、次のように対応するオフライン パッケージをインストールできます。
 
 | 道具                                                                  | オフラインパッケージ名                                                                                                                                                         |
 | :------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -48,4 +48,4 @@ TiDB Toolkit は次のリンクからダウンロードできます。
 
 > **注記：**
 >
-> `{version}`インストールするツールのバージョンによって異なります。2 `{arch}`システムのアーキテクチャによって異なり、 `amd64`または`arm64`になります。
+> `{version}`はインストールするツールのバージョンによって異なります。2 `{arch}`システムのアーキテクチャによって異なり、 `amd64`または`arm64`になります。
