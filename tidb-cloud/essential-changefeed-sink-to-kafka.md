@@ -80,7 +80,7 @@ The steps vary depending on the connectivity method you select.
     - If your Kafka does not require authentication, keep the default option **Disable**.
     - If your Kafka requires authentication, select the corresponding authentication type, and then fill in the **user name** and **password** of your Kafka account for authentication.
 
-3. Select your **Kafka Version**. If you do not know which one to use, use **Kafka v3**.
+3. Select your **Kafka Version**. Choose **Kafka v2** or **Kafka v3** according to the version of your Kafka.
 4. Select a **Compression** type for the data in this changefeed.
 5. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
 6. Click **Next** to test the network connection. If the test succeeds, you will be directed to the next page.
@@ -96,7 +96,7 @@ The steps vary depending on the connectivity method you select.
     - If your Kafka does not require authentication, keep the default option **Disable**.
     - If your Kafka requires authentication, select the corresponding authentication type, and then fill in the **user name** and **password** of your Kafka account for authentication.
 
-5. Select your **Kafka Version**. If you do not know which one to use, use **Kafka v3**.
+5. Select your **Kafka Version**. Choose **Kafka v2** or **Kafka v3** according to the version of your Kafka.
 6. Select a **Compression** type for the data in this changefeed.
 7. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
 8. Input the **TLS Server Name** if your Kafka requires TLS SNI verification. For example, `Confluent Cloud Dedicated clusters`.
