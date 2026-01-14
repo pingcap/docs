@@ -652,9 +652,9 @@ Encodes a record key and returns the result as a hexadecimal string. The functio
 
 `TIDB_ENCODE_RECORD_KEY(<db_name>, <table_name>, <handle_columns>...)`
 
-`<db_name>`: the name of the database that contains the target table.
-`<table_name>`: the name of the table that contains the target table. For a partitioned table, you can specify the partition name in `table_name`, for example, `'t(p0)'`.
-`<handle_columns>...`: the handle (row key) value for the corresponding row. The exact composition of the handle depends on the primary key type of the table, such as whether it is CLUSTERED, whether it uses a common handle, or whether it uses the hidden column `_tidb_rowid`. For more information, see the `handle_columns...` section in [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key).
+* `<db_name>`: the name of the database that contains the target table.
+* `<table_name>`: the name of the table that contains the target table. For a partitioned table, you can specify the partition name in `table_name`, for example, `'t(p0)'`.
+* `<handle_columns>...`: the handle (row key) value for the corresponding row. The exact composition of the handle depends on the primary key type of the table, such as whether it is CLUSTERED, whether it uses a common handle, or whether it uses the hidden column `_tidb_rowid`. For more information, see the `handle_columns...` section in [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key).
 
 ```sql
 CREATE TABLE t(id int PRIMARY KEY, a int, KEY `idx` (a));
