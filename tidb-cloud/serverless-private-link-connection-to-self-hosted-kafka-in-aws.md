@@ -161,7 +161,7 @@ Go to the [EC2 Listing page](https://console.aws.amazon.com/ec2/home#Instances:)
 - Broker 1 in subnet `broker-usw2-az1`
 
     - **Name**: `broker-node1`
-    - **Amazon Machine Image**: `Amazon linux`
+    - **Amazon Machine Image**: `Amazon Linux`
     - **Instance Type**: `t2.large`
     - **Key pair**: reuse `kafka-vpc-key-pair`
     - Network settings
@@ -177,7 +177,7 @@ Go to the [EC2 Listing page](https://console.aws.amazon.com/ec2/home#Instances:)
 - Broker 2 in subnet `broker-usw2-az2`
 
     - **Name**: `broker-node2`
-    - **Amazon Machine Image**: `Amazon linux`
+    - **Amazon Machine Image**: `Amazon Linux`
     - **Instance Type**: `t2.large`
     - **Key pair**: reuse `kafka-vpc-key-pair`
     - Network settings
@@ -193,7 +193,7 @@ Go to the [EC2 Listing page](https://console.aws.amazon.com/ec2/home#Instances:)
 - Broker 3 in subnet `broker-usw2-az3`
 
     - **Name**: `broker-node3`
-    - **Amazon Machine Image**: `Amazon linux`
+    - **Amazon Machine Image**: `Amazon Linux`
     - **Instance Type**: `t2.large`
     - **Key pair**: reuse `kafka-vpc-key-pair`
     - Network settings
