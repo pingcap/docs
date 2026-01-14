@@ -525,7 +525,7 @@ tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz
 Execute the following script to test if the bootstrap works as expected.
 
 ```shell
-export JAVA_HOME=/home/root/jdk-22.0.2
+export JAVA_HOME=/root/jdk-22.0.2
 
 # Bootstrap from the EXTERNAL listener
 ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {one_of_broker_ip}:39092
