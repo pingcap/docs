@@ -32,7 +32,7 @@ For example, the port mapping is as follows:
 
 - Ensure that you have the following permissions to set up a load balancer and endpoint service in your Alibaba Cloud account.
 
-    - Manage load balancer
+    - Manage load balancers
     - Manage endpoint services
 
 - Your {{{ .essential }}} is hosted on Alibaba Cloud, and it is active. Retrieve and save the following details for later use:
@@ -40,11 +40,11 @@ For example, the port mapping is as follows:
     - Alibaba Cloud account ID
     - Availability Zones (AZ)
 
-To view the the Alibaba Cloud account ID and available zones, do the following:
+To view the Alibaba Cloud account ID and availability zones, do the following:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
 2. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
-3. In the displayed dialog, you can find the Alibaba Cloud account ID and available zones.
+3. In the displayed dialog, you can find the Alibaba Cloud account ID and availability zones.
 
 The following table shows an example of the deployment information.
 
@@ -52,14 +52,14 @@ The following table shows an example of the deployment information.
 |--------|-----------------|---------------------------|
 | Region    | `ap-southeast-1`   |  N/A |
 | TiDB Cloud Alibaba Cloud account | `<account_id>`     |    N/A  |
-| AZ IDs                              | <ul><li>`ap-southeast-1a` </li><li>`ap-southeast-1b` </li><li> `ap-southeast-1c`</li></ul>  
+| AZ IDs                              | <ul><li>`ap-southeast-1a` </li><li>`ap-southeast-1b` </li><li> `ap-southeast-1c`</li></ul> |    N/A  |
 | Kafka Advertised Listener Pattern   | &lt;broker_id&gt;.unique_name.alicloud.plc.tidbcloud.com:&lt;port&gt;| `unique_name` is a placeholder and will be replaced with the actual value in [Step 4](#step-4-replace-the-unique-name-placeholder-in-kafka-configuration) |
 
 ## Step 1. Set up a Kafka cluster
 
 If you need to deploy a new cluster, follow the instructions in [Deploy a new Kafka cluster](#deploy-a-new-kafka-cluster).
 
-If you need to expose an existing cluster, follow the instructions in [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster). 
+If you need to expose an existing cluster, follow the instructions in [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster).
 
 ### Deploy a new Kafka cluster
 
@@ -67,8 +67,8 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
 
 The Kafka VPC requires the following:
 
-- Three private vSwitches for brokers, one for each AZ. 
-- One public vSwitches in any AZ with a bastion node that can connect to the internet and three private vSwitches, which makes it easy to set up the Kafka cluster. In a production environment, you might have your own bastion node that can connect to the Kafka VPC.
+- Three private vSwitches for brokers, one for each AZ.
+- One public vSwitch in any AZ with a bastion node that can connect to the internet and three private vSwitches, which makes it easy to set up the Kafka cluster. In a production environment, you might have your own bastion node that can connect to the Kafka VPC.
 
 Take the following steps to create the Kafka VPC.
 
@@ -79,15 +79,16 @@ Take the following steps to create the Kafka VPC.
 2. Click **Create VPC**. Fill in the information on the **VPC settings** page as follows.
 
     1. Enter **Name**, for example, `Kafka VPC`.
-    2. Select **Manually enter an IPv4 CIDR block**, and enter the IPv4 CIDR, for example, `10.0.0.0/16`.
-    3. Create a vSwitch and configure IPv4 CIDR for each AZ you want to deploy Kafka brokers. For example:
-   
+    2. Select the region in which you want to set up the private link connection in TiDB Cloud.
+    3. Select **Manually enter an IPv4 CIDR block**, and enter the IPv4 CIDR, for example, `10.0.0.0/16`.
+    4. Create a vSwitch and configure IPv4 CIDR for each AZ in which you want to deploy Kafka brokers. For example:
+
         - broker-ap-southeast-1a vSwitch in `ap-southeast-1a`: 10.0.0.0/18
         - broker-ap-southeast-1b vSwitch in `ap-southeast-1b`: 10.0.64.0/18
         - broker-ap-southeast-1c vSwitch in `ap-southeast-1c`: 10.0.128.0/18
         - bastion vSwitch in `ap-southeast-1a`: 10.0.192.0/18
 
-    4. Use the default values for other options. Click **Ok**.
+    5. Use the default values for other options. Click **Ok**.
 
 3. On the VPC detail page, take note of the VPC ID, for example, `vpc-t4nfx2vcqazc862e9fg06`.
 
@@ -95,18 +96,18 @@ Take the following steps to create the Kafka VPC.
 
 **2.1. Create a bastion node**
 
-Go to the [ECS Listing page](https://ecs.console.alibabacloud.com/home#/). Create the bastion node in the bastion vSwitch.
+Go to the [ECS console](https://ecs.console.alibabacloud.com/home#/). Create the bastion node in the bastion vSwitch.
 
 - **Network and Zone**: `Kafka VPC` and `bastion` vSwitch.
 - **Instance and Image**: `ecs.t5-lc1m2.small` instance type and `Alibaba Cloud Linux` image.
 - **Network and Security Groups**: check `Assign Public IPv4 Address`.
-- **Key pair**: `kafka-vpc-key-pair`. Create a new key pair named `kafka-vpc-key-pair`. Download **kafka-vpc-key-pair.pem** to your local for later configuration.
+- **Key pair**: `kafka-vpc-key-pair`. Create a new key pair named `kafka-vpc-key-pair`. Download **kafka-vpc-key-pair.pem** to your local machine for later configuration.
 - **Security Group**: create a new security group to allow SSH login from anywhere. You can narrow the rule for safety in the production environment.
 - **Instance Name**: `bastion-node`.
 
 **2.2. Create broker nodes**
 
-Go to the [EC2 Listing page](https://ecs.console.alibabacloud.com/home#/). Create three broker nodes in, one for each AZ.
+Go to the [ECS console](https://ecs.console.alibabacloud.com/home#/). Create three broker nodes in vSwitches, one for each AZ.
 
 - Broker 1 in vSwitch `broker-ap-southeast-1a`
 
@@ -151,7 +152,7 @@ Go to the [EC2 Listing page](https://ecs.console.alibabacloud.com/home#/). Creat
     ssh -i "kafka-vpc-key-pair.pem" root@{bastion_public_ip}
     ```
 
-2. Download binaries on the bastion node.
+2. Download binaries to the bastion node.
 
     ```shell
     # Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
@@ -334,7 +335,7 @@ LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properti
     ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {one_of_broker_ip}:39092
     # Expected output for the last 3 lines (the actual order might be different)
     # The difference in the output from "bootstrap from INTERNAL listener" is that exceptions or errors might occur because advertised listeners cannot be resolved in Kafka VPC.
-    # We will make them resolvable on the TiDB Cloud side and route requests to the right broker when you create a changefeed that connects to this Kafka cluster via Private Link. 
+    # We will make them resolvable on the TiDB Cloud side and route requests to the right broker when you create a changefeed that connects to this Kafka cluster via Private Link.
     b1.unique_name.alicloud.plc.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     b2.unique_name.alicloud.plc.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     b3.unique_name.alicloud.plc.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
@@ -511,7 +512,7 @@ The following configuration applies to a Kafka KRaft cluster. The ZK mode config
 
 #### 2. Test EXTERNAL listener settings in your internal network
 
-You can download the Kafka and OpenJDK on you Kafka client node.
+You can download the Kafka and OpenJDK on your Kafka client node.
 
 ```shell
 # Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
@@ -531,7 +532,7 @@ export JAVA_HOME=/home/root/jdk-22.0.2
 
 # Expected output for the last 3 lines (the actual order might be different)
 # There will be some exceptions or errors because advertised listeners cannot be resolved in your Kafka network. 
-# We will make them resolvable in TiDB Cloud side and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Link. 
+# We will make them resolvable on the TiDB Cloud side and route requests to the right broker when you create a changefeed that connects to this Kafka cluster via Private Link.
 b1.ap-southeast-1a.unique_name.alicloud.plc.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b2.ap-southeast-1b.unique_name.alicloud.plc.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b3.ap-southeast-1c.unique_name.alicloud.plc.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
@@ -651,95 +652,21 @@ Set up the endpoint service in the same region.
 
 3. On the detail page of the endpoint service, click the **Service Whitelist** tab, click **Add to Whitelist**, and then enter the Alibaba Cloud account ID that you obtained in [Prerequisites](#prerequisites).
 
-## Step 3. Create a Private Link Connection in TiDB Cloud
+## Step 3. Create a private link connection in TiDB Cloud
 
-### 1. Create the Alibaba Cloud Endpoint Service Private Link connection
+To create a private link connection in TiDB Cloud, do the following:
 
-You can create a private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
+1. Create a private link connection in TiDB Cloud using the Alibaba Cloud endpoint service name you obtained from [Step 2](#2-set-up-an-alibaba-cloud-endpoint-service) (for example, `com.aliyuncs.privatelink.<region>.xxxxx`).
 
-<SimpleTab>
-<div label="Console">
+    For more information, see [Create an Alibaba Cloud Endpoint Service private link connection](/tidb-cloud/serverless-private-link-connection.md#create-an-alibaba-cloud-endpoint-service-private-link-connection).
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+2. Attach domains to the private link connection so that dataflow services in TiDB Cloud can access the Kafka cluster.
 
-    > **Tip:**
-    >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    For more information, see [Attach domains to a private link connection](/tidb-cloud/serverless-private-link-connection.md#attach-domains-to-a-private-link-connection). Note that in the **Attach Domains** dialog, you need to choose **TiDB Cloud Managed** as the domain type, and copy the unique name of the generated domain for later use.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
-
-3. In the **Private Link Connection For Dataflow**, click **Create Private Link Connection**.
-
-4. Enter the required information in the **Create Private Link Connection** dialog:
-
-    - **Private Link Connection Name**: Enter a name for the Private Link Connection.
-    - **Connection Type**: Choose **Alibaba Cloud Endpoint Service**, if you can not find this option, please ensure that your cluster is created in Alibaba Cloud provider.
-    - **Endpoint Service Name**: Enter the endpoint service name you get from the previous step.
-
-5. Click the **Create Connection** button.
-
-6. Go back to the detail page of the endpoint service on Alibaba Cloud console. In the **Endpoint Connections** tab, allow the endpoint connection request from TiDB Cloud.
-
-</div>
-
-<div label="CLI">
-
-```shell
-ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type ALICLOUD_ENDPOINT_SERVICE --alicloud.endpoint-service-name <endpoint-service-name>
-```
-
-Then go back to the detail page of the endpoint service on Alibaba Cloud console. In the **Endpoint Connections** tab, allow the endpoint connection request from TiDB Cloud.
-
-</div>
-</SimpleTab>
-
-For more information, see [Create an Alibaba Cloud Endpoint Service Private Link Connection](/tidb-cloud/serverless-private-link-connection.md#create-an-alibaba-cloud-endpoint-service-private-link-connection).
-
-### 2. Attach Domains to the Private Link Connection
-
-You can attach domains to a private link connection using the TiDB Cloud console or the TiDB Cloud CLI.
-
-<SimpleTab>
-<div label="Console">
-
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
-
-    > **Tip:**
-    >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
-
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
-
-3. In the **Private Link Connection For Dataflow**, choose the target Private Link Connection and click **...**.
-
-4. Click **Attach Domains**.
-
-5. In the **Attach Domains** dialog, select the **TiDB Cloud Managed** domain type. The domains will be auto-generated by TiDB Cloud. Copy the unique name for later use and click **Attach Domains** to confirm. For example, if the generated domain is `*.dvs6nl5jgveztmla3pxkxgh76i.alicloud.plc.tidbcloud.com`, then the unique name is `dvs6nl5jgveztmla3pxkxgh76i`.
-
-</div>
-
-<div label="CLI">
-
-First, use a dry run to preview the domains to be attached. This will output a `unique-name` for the next step. Copy it for later use.
-
-```shell
-ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --dry-run
-```
-
-Then, attach the domains with the `unique-name` from the previous step.
-
-```shell
-ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --unique-name <unique-name>
-```
-
-</div>
-</SimpleTab>
-
-For more information, see [Attach Domains to a Private Link Connection](/tidbcloud/serverless-private-link-connection#attach-domains-to-a-private-link-connection).
-
-## Step 4. Replace the Unique Name placeholder in Kafka configuration
+## Step 4. Replace the unique name placeholder in Kafka configuration
 
 1. Go back to your Kafka broker nodes, replace the `unique_name` placeholder in `advertised.listeners` configuration of each broker with the actual unique name you get from the previous step.
 2. After you reconfigure all the brokers, restart your Kafka brokers one by one.
 
-Now, you can use this private link connection and 9092 as bootstrap port to connect to your Kafka cluster from TiDB Cloud.
+Now, you can use this private link connection and 9092 as the bootstrap port to connect to your Kafka cluster from TiDB Cloud.

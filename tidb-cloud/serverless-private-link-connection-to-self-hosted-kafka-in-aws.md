@@ -26,7 +26,7 @@ The mechanism works as follows:
 - Ensure that you have the following permissions to set up a load balancer and endpoint service in your AWS account:
 
     - Manage security groups
-    - Manage load balancer
+    - Manage load balancers
     - Manage endpoint services
 
 - Your {{{ .essential }}} is hosted on AWS, and it is active. Retrieve and save the following details for later use:
@@ -34,11 +34,11 @@ The mechanism works as follows:
     - AWS Account ID
     - Availability Zones (AZs)
 
-To view the AWS account ID and available zones, do the following:
+To view the AWS account ID and availability zones, do the following:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of your TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
 2. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
-3. In the displayed dialog, you can find the AWS account ID and available zones.
+3. In the displayed dialog, you can find the AWS account ID and availability zones.
 
 The following table shows an example of the deployment information.
 
@@ -146,7 +146,7 @@ Go to the [EC2 Listing page](https://console.aws.amazon.com/ec2/home#Instances:)
 - **Name**: `bastion-node`
 - **Amazon Machine Image**: `Amazon Linux`
 - **Instance Type**: `t2.small`
-- **Key pair**: `kafka-vpc-key-pair`. Create a new key pair named `kafka-vpc-key-pair`. Download **kafka-vpc-key-pair.pem** to your local for later configuration.
+- **Key pair**: `kafka-vpc-key-pair`. Create a new key pair named `kafka-vpc-key-pair`. Download **kafka-vpc-key-pair.pem** to your local machine for later configuration.
 - Network settings
 
     - **VPC**: `Kafka VPC`
@@ -526,7 +526,7 @@ The following configuration applies to a Kafka KRaft cluster. The ZK mode config
 
         - `<port>` differentiates brokers from Kafka Private Link Service access points. Plan a port range for EXTERNAL advertised listeners of all brokers, for example, `range from 9093`. These ports do not have to be actual ports listened to by brokers. They are ports listened to by the load balancer for Private Link Service that will forward requests to different brokers.
         - `AZ ID` in **Kafka Advertised Listener Pattern** indicates where the broker is deployed. TiDB Cloud will route requests to different endpoint DNS names based on the AZ ID.
-      
+
       It is recommended to configure different broker IDs for different brokers to make it easy for troubleshooting.
 
 2. Use SSH to log in to each broker node. Modify the configuration file of each broker with the following content:
@@ -580,7 +580,7 @@ The following configuration applies to a Kafka KRaft cluster. The ZK mode config
 
 #### 2. Test EXTERNAL listener settings in your internal network
 
-You can download the Kafka and OpenJDK on you Kafka client node.
+You can download the Kafka and OpenJDK on your Kafka client node.
 
 ```shell
 # Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
@@ -600,7 +600,7 @@ export JAVA_HOME=/home/ec2-user/jdk-22.0.2
 
 # Expected output for the last 3 lines (the actual order might be different)
 # There will be some exceptions or errors because advertised listeners cannot be resolved in your Kafka network. 
-# We will make them resolvable in TiDB Cloud side and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Link. 
+# We will make them resolvable on the TiDB Cloud side and route requests to the right broker when you create a changefeed that connects to this Kafka cluster via Private Link.
 b1.usw2-az1.unique_name.aws.plc.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b2.usw2-az2.unique_name.aws.plc.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b3.usw2-az3.unique_name.aws.plc.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
@@ -715,93 +715,23 @@ Do the following to set up the load balancer:
 
 2. Note down the **Service name**. You need to provide it to TiDB Cloud, for example `com.amazonaws.vpce.us-west-2.vpce-svc-0f49e37e1f022cd45`.
 
-3. On the detail page of the kafka-pl-service, click the **Allow principals** tab, and then add the AWS account ID that you obtained in [Prerequisites](#prerequisites) to the allowlist, for example, `arn:aws:iam::<account_id>:root`. 
+3. On the detail page of the kafka-pl-service, click the **Allow principals** tab, and then add the AWS account ID that you obtained in [Prerequisites](#prerequisites) to the allowlist, for example, `arn:aws:iam::<account_id>:root`.
 
-## Step 3. Create a Private Link Connection in TiDB Cloud
+## Step 3. Create a private link connection in TiDB Cloud
 
-### 1. Create the AWS Endpoint Service Private Link connection
+To create a private link connection in TiDB Cloud, do the following:
 
-You can also refer to [Create an AWS Endpoint Service Private Link Connection](/tidbcloud/serverless-private-link-connection#create-an-aws-endpoint-service-private-link-connection) for more details.
+1. Create a private link connection in TiDB Cloud using the AWS endpoint service name you obtained from [Step 2](#2-set-up-an-aws-endpoint-service) (for example, `com.amazonaws.vpce.<region>.vpce-svc-xxxx`).
 
-<SimpleTab>
-<div label="Console">
+    For more information, see [Create an AWS Endpoint Service private link connection](/tidb-cloud/serverless-private-link-connection.md#create-an-aws-endpoint-service-private-link-connection).
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+2. Attach domains to the private link connection so that dataflow services in TiDB Cloud can access the Kafka cluster.
 
-    > **Tip:**
-    >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    For more information, see [Attach domains to a private link connection](/tidb-cloud/serverless-private-link-connection.md#attach-domains-to-a-private-link-connection). Note that in the **Attach Domains** dialog, you need to choose **TiDB Cloud Managed** as the domain type, and copy the unique name of the generated domain for later use.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
-
-3. In the **Private Link Connection For Dataflow**, click **Create Private Link Connection**.
-
-4. Enter the required information in the **Create Private Link Connection** dialog:
-
-    - **Private Link Connection Name**: Enter a name for the Private Link Connection.
-    - **Connection Type**: Choose **AWS Endpoint Service**, if you can not find this option, please ensure that your cluster is created in AWS provider.
-    - **Endpoint Service Name**: Enter the endpoint service name (for example, `com.amazonaws.vpce.<region>.vpce-svc-xxxx`).
-
-5. Click the **Create Connection** button.
-
-6. Then go to the detail page of your endpoint service on AWS console. In the **Endpoint Connections** tab, accept the endpoint connection request from TiDB Cloud.
-
-</div>
-
-<div label="CLI">
-
-```shell
-ticloud serverless private-link-connection create -c <cluster-id> --display-name <display-name> --type AWS_ENDPOINT_SERVICE --aws.endpoint-service-name <endpoint-service-name>
-```
-
-Then go to the detail page of your endpoint service on AWS console. In the **Endpoint Connections** tab, accept the endpoint connection request from TiDB Cloud.
-
-</div>
-</SimpleTab>
-
-### 2. Attach Domains to the Private Link Connection
-
-You can also refer to [Attach Domains to a Private Link Connection](/tidbcloud/serverless-private-link-connection#attach-domains-to-a-private-link-connection) for more details.
-
-<SimpleTab>
-<div label="Console">
-
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
-
-    > **Tip:**
-    >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
-
-2. Click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
-
-3. In the **Private Link Connection For Dataflow**, choose the target Private Link Connection and click **...**.
-
-4. Click **Attach Domains**.
-
-5. In the **Attach Domains** dialog, select the **TiDB Cloud Managed** domain type. The domains will be auto-generated by TiDB Cloud. Copy the unique name for later use and click **Attach Domains** to confirm. For example, if the generated domain is `*.use1-az1.dvs6nl5jgveztmla3pxkxgh76i.aws.plc.tidbcloud.com`, then the unique name is `dvs6nl5jgveztmla3pxkxgh76i`.
-
-</div>
-
-<div label="CLI">
-
-First, use a dry run to preview the domains to be attached. This will output a `unique-name` for the next step. Copy it for later use.
-
-```shell
-ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --dry-run
-```
-
-Then, attach the domains with the `unique-name` from the previous step.
-
-```shell
-ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --unique-name <unique-name>
-```
-
-</div>
-</SimpleTab>
-
-## Step 4. Replace the Unique Name placeholder in Kafka configuration
+## Step 4. Replace the unique name placeholder in Kafka configuration
 
 1. Go back to your Kafka broker nodes, replace the `unique_name` placeholder in `advertised.listeners` configuration of each broker with the actual unique name you get from the previous step.
 2. After you reconfigure all the brokers, restart your Kafka brokers one by one.
 
-Now, you can use this private link connection and 9092 as bootstrap port to connect to your Kafka cluster from TiDB Cloud.
+Now, you can use this private link connection and 9092 as the bootstrap port to connect to your Kafka cluster from TiDB Cloud.

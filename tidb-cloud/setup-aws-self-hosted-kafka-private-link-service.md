@@ -183,13 +183,13 @@ Go to the [EC2 Listing page](https://console.aws.amazon.com/ec2/home#Instances:)
 - **Name**: `bastion-node`
 - **Amazon Machine Image**: `Amazon linux`
 - **Instance Type**: `t2.small`
-- **Key pair**: `kafka-vpc-key-pair`. Create a new key pair named `kafka-vpc-key-pair`. Download **kafka-vpc-key-pair.pem** to your local for later configuration.
+- **Key pair**: `kafka-vpc-key-pair`. Create a new key pair named `kafka-vpc-key-pair`. Download **kafka-vpc-key-pair.pem** to your local machine for later configuration.
 - Network settings
 
     - **VPC**: `Kafka VPC`
     - **Subnet**: `bastion`
     - **Auto-assign public IP**: `Enable`
-    - **Security Group**: create a new security group allow SSH login from anywhere. You can narrow the rule for safety in the production environment.
+    - **Security Group**: create a new security group to allow SSH login from anywhere. You can narrow the rule for safety in the production environment.
 
 **2.2. Create broker nodes**
 
