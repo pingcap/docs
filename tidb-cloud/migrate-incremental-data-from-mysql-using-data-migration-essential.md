@@ -132,9 +132,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
 4. Click **Validate Connection and Next** to validate the information you have entered.
 
-5. Take action according to the message you see:
-
-    - If you use Public IP, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
+5. If you use Public IP, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
 
 ## Step 3: Choose migration job type
 

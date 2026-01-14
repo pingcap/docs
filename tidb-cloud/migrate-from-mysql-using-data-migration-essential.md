@@ -70,6 +70,8 @@ Data Migration supports the following data sources and versions:
 | Amazon Aurora MySQL                              | 8.0, 5.7, 5.6      |
 | Amazon RDS MySQL                                 | 8.0, 5.7           |
 | Alibaba Cloud RDS MySQL                          | 8.0, 5.7           |
+| Azure Database for MySQL - Flexible Server                          | 8.0, 5.7           |
+| Google Cloud SQL for MySQL                                                | 8.0, 5.7, 5.6     |
 
 ### Enable binary logs in the source MySQL-compatible database for replication
 
@@ -146,7 +148,7 @@ Choose a connection method that best fits your cloud provider, network topology,
 
 #### End-to-end encryption over TLS/SSL
 
-Regardless of the connection method, it is strongly recommended to use TLS/SSL for end-to-end encryption. While private endpoints and VPC peering secure the network path, TLS/SSL secures the data itself and helps meet compliance requirements.
+Regardless of the connection method, it is strongly recommended to use TLS/SSL for end-to-end encryption. While private endpoints secure the network path, TLS/SSL secures the data itself and helps meet compliance requirements.
 
 <details>
 <summary> Download and store the cloud provider's certificates for TLS/SSL encrypted connections </summary>
@@ -161,6 +163,11 @@ When using public endpoints, you can verify network connectivity and access both
 
 1. Identify and record the source MySQL instance's endpoint hostname (FQDN) or public IP address.
 2. Ensure you have the required permissions to modify the firewall or security group rules for your database. Refer to your cloud provider's documentation for guidance.
+
+    - Amazon Aurora MySQL or Amazon RDS MySQL: [Controlling access with security groups](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Overview.RDSSecurityGroups.html).
+    - Azure Database for MySQL - Flexible Server: [Public Network Access](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-networking-public)
+    - Google Cloud SQL for MySQL: [Authorized Networks](https://cloud.google.com/sql/docs/mysql/configure-ip?__hstc=86493575.39bd75fe158e3a694e276e9709c7bc82.1766498597248.1768349165136.1768351956126.50&__hssc=86493575.1.1768351956126&__hsfp=3e9153f1372737b813f3fefb5bbb2ddf#authorized-networks).
+
 3. Optional: Verify connectivity to your source database from a machine with public internet access using the appropriate certificate for in-transit encryption:
 
     ```shell
@@ -305,9 +312,7 @@ In the **Choose migration job type** step, you can choose existing data migratio
 
 To migrate data to TiDB Cloud once and for all, choose both **Existing data migration** and **Incremental data migration**, which ensures data consistency between the source and target databases.
 
-You can only use **logical mode** to migrate **existing data** and **incremental data**.
-
-This mode exports data from MySQL source databases as SQL statements and then executes them on TiDB. In this mode, the target tables before migration can be either empty or non-empty.
+Currently you can only use **logical mode** to migrate **existing data** and **incremental data**. This mode exports data from MySQL source databases as SQL statements and then executes them on TiDB. In this mode, the target tables before migration can be either empty or non-empty.
 
 ### Migrate only incremental data
 
