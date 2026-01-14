@@ -195,8 +195,6 @@ If your credits are running out and you want to continue with the PoC, contact t
 
 You can end the PoC and remove the test environment anytime. For more information, see [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md).
 
-Any feedback to our support team is highly appreciated by filling in the [TiDB Cloud Feedback form](https://www.surveymonkey.com/r/L3VVW8R), such as the PoC process, the feature requests, and how we can improve the products.
-
 ## FAQ
 
 ### 1. How long does it take to back up and restore my data?
