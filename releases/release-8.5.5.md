@@ -257,7 +257,6 @@ For newly created TiDB v8.5.4 clusters (excluding clusters upgraded from version
     - Fix the issue that the foreign key is not updated after executing `ALTER TABLE child CHANGE COLUMN` to modify a column [#59705](https://github.com/pingcap/tidb/issues/59705) @[fzzf678](https://github.com/fzzf678)
     - Fix the issue that the `RENAME TABLE` job arguments could be decoded incorrectly from an earlier TiDB version [#64413](https://github.com/pingcap/tidb/issues/64413) @[joechenrh](https://github.com/joechenrh)
     - Fix the issue that the auto-increment ID fails to be rebased when BR restore fails [#60804](https://github.com/pingcap/tidb/issues/60804) @[joechenrh](https://github.com/joechenrh)
-    - Fix the issue that querying `information_schema` tables leads to OOM [#58985](https://github.com/pingcap/tidb/issues/58985) @[tangenta](https://github.com/tangenta)
     - Fix the issue that the TiDB node might get stuck during upgrade [#64539](https://github.com/pingcap/tidb/issues/64539) @[joechenrh](https://github.com/joechenrh)
     - Fix the issue that admin check does not report errors when index records are missing [#63698](https://github.com/pingcap/tidb/issues/63698) @[wjhuang2016](https://github.com/wjhuang2016)
     - Fix the issue that modifying the collation via `MODIFY COLUMN` results in data index inconsistency [#61668](https://github.com/pingcap/tidb/issues/61668) @[tangenta](https://github.com/tangenta)
