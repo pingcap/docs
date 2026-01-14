@@ -151,7 +151,11 @@ This document only describes the parameters that are not included in command-lin
 ### `grpc-concurrency`
 
 + The number of gRPC worker threads. When you modify the size of the gRPC thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
-+ Default value: `5`
++ Default value: 
+
+    + Starting from v8.5.4 and v9.0.0, the default value is adjusted to `grpc-raft-conn-num * 3 + 2`, which is calculated based on the value of [`grpc-raft-conn-num`](#grpc-raft-conn-num). For example, when the number of CPU cores is 8, the default value of `grpc-raft-conn-num` is 1. Accordingly, the default value of `grpc-concurrency` is `1 * 3 + 2 = 5`.
+    + In v8.5.3 and earlier versions, the default value is `5`.
+
 + Minimum value: `1`
 
 ### `grpc-concurrent-stream`
@@ -169,7 +173,11 @@ This document only describes the parameters that are not included in command-lin
 ### `grpc-raft-conn-num`
 
 + The maximum number of connections between TiKV nodes for Raft communication
-+ Default value: `1`
++ Default value: 
+
+    + Starting from v8.5.4 and v9.0.0, the default value is adjusted to `MAX(1, MIN(4, CPU cores / 8))`, where `MIN(4, CPU cores / 8)` indicates that when the number of CPU cores is greater than or equal to 32, the default maximum number of connections is 4. 
+    + In v8.5.3 and earlier versions, the default value is `1`.
+
 + Minimum value: `1`
 
 ### `max-grpc-send-msg-len`
@@ -197,6 +205,14 @@ This document only describes the parameters that are not included in command-lin
 + Disables the timeout for gRPC streams
 + Default value: `"3s"`
 + Minimum value: `"1s"`
+
+### `graceful-shutdown-timeout` <span class="version-mark">New in v8.5.5 and v9.0.0</span>
+
++ Specifies the timeout duration for TiKV graceful shutdown.
+    + When this value is greater than `0s`, TiKV attempts to transfer all leaders on this node to other TiKV nodes within the specified timeout before shutting down. If there are still leaders that have not been transferred when the timeout is reached, TiKV skips the remaining leader transfers and proceeds directly to the shutdown process.
+    + When this value is `0s`, TiKV graceful shutdown is disabled.
++ Default value: `"20s"`
++ Minimum value: `"0s"`
 
 ### `concurrent-send-snap-limit`
 
@@ -281,6 +297,13 @@ This document only describes the parameters that are not included in command-lin
 + Sets the size of the connection pool for service and forwarding requests to the server. Setting it to too small a value affects the request latency and load balancing.
 + Default value: `4`
 
+### `inspect-network-interval` <span class="version-mark">New in v8.5.5 and v9.0.0</span>
+
++ Controls the interval at which the TiKV HealthChecker actively performs network detection to PD and other TiKV nodes. TiKV calculates a `NetworkSlowScore` based on the network detection results and reports the network status of slow nodes to PD.
++ Setting this value to `0` disables the network detection. Setting it to a smaller value increases the detection frequency, which helps detect network jitter more quickly, but it also consumes more network bandwidth and CPU resources.
++ Default value: `100ms`
++ Value range: `0` or `[10ms, +∞)`
+
 ## readpool.unified
 
 Configuration items related to the single thread pool serving read requests. This thread pool supersedes the original storage thread pool and coprocessor thread pool since the 4.0 version.
@@ -319,6 +342,19 @@ Configuration items related to the single thread pool serving read requests. Thi
 
 + Controls whether to automatically adjust the thread pool size. When it is enabled, the read performance of TiKV is optimized by automatically adjusting the UnifyReadPool thread pool size based on the current CPU usage. The possible range of the thread pool is `[max-thread-count, MAX(4, CPU)]`. The maximum value is the same as the one of [`max-thread-count`](#max-thread-count).
 + Default value: `false`
+
+### `cpu-threshold` <span class="version-mark">New in v8.5.5 and v9.0.0</span>
+
++ Specifies the CPU utilization threshold for the unified read pool. For example, if you set this value to `0.8`, the thread pool can use up to 80% of the CPU.
+
+    + By default (when it is `0.0`), there is no limit on the CPU usage of the unified read pool. The size of the thread pool is determined solely by the busy thread scaling algorithm, which adjusts the size dynamically based on the number of threads handling current tasks.
+    + If it is set to a value greater than `0.0`, TiKV applies the following CPU usage threshold constraints in addition to the existing busy-thread scaling algorithm to control CPU resource usage more strictly:
+        + Forced scale-down: when the CPU usage of the unified read pool exceeds the configured value plus a 10% buffer, TiKV forcibly reduces the size of the pool.
+        + Scale-up prevention: when expanding the unified read pool would cause CPU usage to exceed the configured threshold minus a 10% buffer, TiKV prevents the unified read pool from further expanding.
+
++ This feature takes effect only when [`readpool.unified.auto-adjust-pool-size`](#auto-adjust-pool-size-new-in-v630) is set to `true`.
++ Default value: `0.0`
++ Value range: `[0.0, 1.0]`
 
 ## readpool.storage
 
@@ -563,12 +599,22 @@ Configuration items related to the flow control mechanism in TiKV. This mechanis
 
 ### `l0-files-threshold`
 
-+ When the number of kvDB L0 files reaches this threshold, the flow control mechanism starts to work. When `enable` is set to `true`, this configuration item overrides `rocksdb.(defaultcf|writecf|lockcf).level0-slowdown-writes-trigger`.
++ When the number of kvDB L0 files reaches this threshold, the flow control mechanism starts to work.
+
+    > **Note:**
+    >
+    > Under specific conditions, this configuration item can override the value of `rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`. For more information, see [`rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger).
+
 + Default value: `20`
 
 ### `soft-pending-compaction-bytes-limit`
 
-+ When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism starts to reject some write requests and reports the `ServerIsBusy` error. When `enable` is set to `true`, this configuration item overrides `rocksdb.(defaultcf|writecf|lockcf).soft-pending-compaction-bytes-limit`.
++ When the pending compaction bytes in KvDB reach this threshold, the flow control mechanism starts to reject some write requests and reports the `ServerIsBusy` error.
+
+    > **Note:**
+    >
+    > Under specific conditions, this configuration item can override the value of `rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`. For more information, see [`rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1).
+
 + Default value: `"192GiB"`
 
 ### `hard-pending-compaction-bytes-limit`
@@ -1658,7 +1704,9 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `level0-slowdown-writes-trigger`
 
-+ The maximum number of files at L0 that trigger write stall. When `storage.flow-control.enable` is set to `true`, `storage.flow-control.l0-files-threshold` overrides this configuration item.
++ The maximum number of files at L0 that trigger write stall.
++ In v8.5.4 and earlier versions: when the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is `true`), the value of this configuration item is directly overridden by [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold).
++ Starting from v8.5.5 and v9.0.0: when the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is `true`), the value of this configuration item is overridden by [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold) only when its value is greater than `storage.flow-control.l0-files-threshold`. This behavior prevents weakening RocksDB's compaction acceleration mechanism when you increase the flow control threshold.
 + Default value: `20`
 + Minimum value: `0`
 
@@ -1714,7 +1762,9 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `soft-pending-compaction-bytes-limit`
 
-+ The soft limit on the pending compaction bytes. When `storage.flow-control.enable` is set to `true`, `storage.flow-control.soft-pending-compaction-bytes-limit` overrides this configuration item.
++ The soft limit on the pending compaction bytes.
++ In v8.5.4 and earlier versions: when the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is `true`), this configuration item is directly overridden by [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit).
++ Starting from v8.5.5 and v9.0.0: when the flow control mechanism is enabled ([`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is `true`), this configuration item is overridden by [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) only when its value is greater than `storage.flow-control.soft-pending-compaction-bytes-limit`. This behavior prevents weakening RocksDB's compaction acceleration mechanism when you increase the flow control threshold.
 + Default value: `"192GiB"`
 + Unit: KiB|MiB|GiB
 
