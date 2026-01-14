@@ -5,18 +5,18 @@ summary: Learn how to connect to an Alibaba Cloud self-hosted Kafka using an Ali
 
 # Connect to Alibaba Cloud Self-Hosted Kafka via a Private Link Connection
 
-The document describes how to connect to a self-hosted Kafka cluster in Alibaba Cloud, using Alibaba Cloud Endpoint Service private link connection.
+The document describes how to connect a {{{ .essential }}} cluster to a self-hosted Kafka cluster in Alibaba Cloud, using an [Alibaba Cloud Endpoint Service private link connection](/tidb-cloud/serverless-private-link-connection.md).
 
 The mechanism works as follows:
 
-1. The private link connection connects to your endpoint service with bootstrap port, it returns broker external addresses defined in advertised.listeners.
+1. The private link connection connects to your Alibaba Cloud endpoint service using the bootstrap port, which returns broker external addresses defined in `advertised.listeners`.
 2. The private link connection connects to your endpoint service with broker external addresses.
-3. Endpoint service forwards requests to your load balancers.
-4. Load balancers forward requests to different Kafka brokers based on the port mapping.
+3. The Alibaba Cloud endpoint service forwards requests to your load balancers.
+4. Load balancers forward requests to the corresponding Kafka brokers based on port mapping.
 
 For example, the port mapping is as follows:
 
-| Broker External Address Port | Load Balancer Listener Port | Load Balancer Backend Server |
+| Broker external address port | Load balancer listener port | Load balancer backend server |
 |----------------------------|------------------------------|-------------|
 | 9093                       | 9093                        | broker-node1:39092|
 | 9094                       | 9094                        | broker-node2:39092|
@@ -30,30 +30,30 @@ For example, the port mapping is as follows:
     - Manage VPC and vSwitch
     - Connect to ECS nodes to configure Kafka nodes
 
-- Ensure that you have the following authorization to set up a load balancer and endpoint service in your own Alibaba Cloud account.
+- Ensure that you have the following permissions to set up a load balancer and endpoint service in your Alibaba Cloud account.
 
     - Manage load balancer
     - Manage endpoint services
 
-- {{{ .essential }}} information: confirm that your {{{ .essential }}} is active in Alibaba Cloud provider. Retrieve and save the following details for later use:
+- Your {{{ .essential }}} is hosted on Alibaba Cloud, and it is active. Retrieve and save the following details for later use:
 
-    - Account ID
+    - Alibaba Cloud account ID
     - Availability Zones (AZ)
 
 To view the the Alibaba Cloud account ID and available zones, do the following:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
-2. On the **Private Link Connection For Dataflow**, click **Create Private Link Connection**.
-3. You can find the Alibaba Cloud account ID and available zones information.
+2. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
+3. In the displayed dialog, you can find the Alibaba Cloud account ID and available zones.
 
 The following table shows an example of the deployment information.
 
 | Information     | Value    | Note    | 
 |--------|-----------------|---------------------------|
 | Region    | `ap-southeast-1`   |  N/A |
-| TiDB Cloud Alibaba Cloud Account | `<account_id>`     |    N/A  |
+| TiDB Cloud Alibaba Cloud account | `<account_id>`     |    N/A  |
 | AZ IDs                              | <ul><li>`ap-southeast-1a` </li><li>`ap-southeast-1b` </li><li> `ap-southeast-1c`</li></ul>  
-| Kafka Advertised Listener Pattern   | &lt;broker_id&gt;.unique_name.alicloud.plc.tidbcloud.com:&lt;port&gt;| `unique_name` is a placeholder. The actual value of `unique_name` will be replaced in [Step 4](#step-4-replace-the-unique-name-placeholder-in-kafka-configuration) |
+| Kafka Advertised Listener Pattern   | &lt;broker_id&gt;.unique_name.alicloud.plc.tidbcloud.com:&lt;port&gt;| `unique_name` is a placeholder and will be replaced with the actual value in [Step 4](#step-4-replace-the-unique-name-placeholder-in-kafka-configuration) |
 
 ## Step 1. Set up a Kafka cluster
 
@@ -80,7 +80,7 @@ Take the following steps to create the Kafka VPC.
 
     1. Enter **Name**, for example, `Kafka VPC`.
     2. Select **Manually enter an IPv4 CIDR block**, and enter the IPv4 CIDR, for example, `10.0.0.0/16`.
-    3. Create **vSwitch**: create vSwitch and configure IPv4 CIDR for each AZ you want to deploy Kafka brokers. For example:
+    3. Create a vSwitch and configure IPv4 CIDR for each AZ you want to deploy Kafka brokers. For example:
    
         - broker-ap-southeast-1a vSwitch in `ap-southeast-1a`: 10.0.0.0/18
         - broker-ap-southeast-1b vSwitch in `ap-southeast-1b`: 10.0.64.0/18
@@ -97,12 +97,12 @@ Take the following steps to create the Kafka VPC.
 
 Go to the [ECS Listing page](https://ecs.console.alibabacloud.com/home#/). Create the bastion node in the bastion vSwitch.
 
-- **Network and Zone**: `Kafka VPC` and `bastion` vSwitch
-- **Instance and Image**: `ecs.t5-lc1m2.small` instance type and `Alibaba Cloud Linux` image
-- **Network and Security Groups**: check `Assign Public IPv4 Address`
+- **Network and Zone**: `Kafka VPC` and `bastion` vSwitch.
+- **Instance and Image**: `ecs.t5-lc1m2.small` instance type and `Alibaba Cloud Linux` image.
+- **Network and Security Groups**: check `Assign Public IPv4 Address`.
 - **Key pair**: `kafka-vpc-key-pair`. Create a new key pair named `kafka-vpc-key-pair`. Download **kafka-vpc-key-pair.pem** to your local for later configuration.
-- **Security Group**: create a new security group allow SSH login from anywhere. You can narrow the rule for safety in the production environment.
-- **Instance Name**: `bastion-node`
+- **Security Group**: create a new security group to allow SSH login from anywhere. You can narrow the rule for safety in the production environment.
+- **Instance Name**: `bastion-node`.
 
 **2.2. Create broker nodes**
 
@@ -560,7 +560,7 @@ Do the following to set up the load balancer:
         - **Server Group Name**: `bootstrap-server-group`
         - **VPC**: `Kafka VPC`
         - **Backend Server Protocol**: select `TCP`
-        - **Backend servers**:  Click the created server group to add backend servers, add `broker-node1:39092`, `broker-node2:39092`, `broker-node3:39092`
+        - **Backend servers**: click the created server group and add backend servers, including `broker-node1:39092`, `broker-node2:39092`, and `broker-node3:39092`
 
     - Broker server group 1
 
@@ -568,7 +568,7 @@ Do the following to set up the load balancer:
         - **Server Group Name**: `broker-server-group-1`
         - **VPC**: `Kafka VPC`
         - **Backend Server Protocol**: select `TCP`
-        - **Backend servers**:  Click the created server group to add backend servers, add `broker-node1:39092`
+        - **Backend servers**: click the created server group and add the backend server `broker-node1:39092`
 
     - Broker server group 2
 
@@ -576,7 +576,7 @@ Do the following to set up the load balancer:
         - **Server Group Name**: `broker-server-group-2`
         - **VPC**: `Kafka VPC`
         - **Backend Server Protocol**: select `TCP`
-        - **Backend servers**:  Click the created server group to add backend servers, add `broker-node2:39092`
+        - **Backend servers**: click the created server group and add the backend server `broker-node2:39092`
 
     - Broker server group 3
 
@@ -584,7 +584,7 @@ Do the following to set up the load balancer:
         - **Server Group Name**: `broker-server-group-3`
         - **VPC**: `Kafka VPC`
         - **Backend Server Protocol**: select `TCP`
-        - **Backend servers**:  Click the created server group to add backend servers, add `broker-node3:39092`
+        - **Backend servers**: click the created server group and add the backend server `broker-node3:39092`
 
 2. Go to [NLB](https://slb.console.alibabacloud.com/nlb) to create a network load balancer.
 
@@ -637,7 +637,7 @@ Do the following to set up the load balancer:
     b3.unique_name.alicloud.plc.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     ```
 
-### 2. Set up an endpoint service
+### 2. Set up an Alibaba Cloud endpoint service
 
 Set up the endpoint service in the same region.
 
