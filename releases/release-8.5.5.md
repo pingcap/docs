@@ -155,7 +155,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ## Compatibility changes
 
-For newly created TiDB v8.5.4 clusters (excluding clusters upgraded from versions earlier than v8.5.3), you can smoothly upgrade to v8.5.5. Most changes in v8.5.5 are safe for routine upgrades, but this release also includes several behavior changes, MySQL compatibility adjustments, system variable updates, configuration parameter updates, and system table changes. Before upgrading, make sure to carefully review this section.
+For TiDB clusters newly deployed in v8.5.4 (that is, not upgraded from versions earlier than v8.5.3), you can smoothly upgrade to v8.5.5. Most changes in v8.5.5 are safe for routine upgrades, but this release also includes several behavior changes, MySQL compatibility adjustments, system variable updates, configuration parameter updates, and system table changes. Before upgrading, make sure to carefully review this section.
 
 ### Behavior changes
 
