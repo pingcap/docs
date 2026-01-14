@@ -277,7 +277,7 @@ For newly created TiDB v8.5.4 clusters (excluding clusters upgraded from version
     - Fix the issue that the `KV Cursor Operations` metric for analyze requests is always `0` [#19206](https://github.com/tikv/tikv/issues/19206) @[glorv](https://github.com/glorv)
     - Fix the issue that Region heartbeats might report incorrect Region size or key statistics to PD after a leader change [#19180](https://github.com/tikv/tikv/issues/19180) @[glorv](https://github.com/glorv)
     - Fix the issue that unsafe recovery gets stuck by removing tombstone TiFlash learners from the unsafe recovery demotion list [#18458](https://github.com/tikv/tikv/issues/18458) @[v01dstar](https://github.com/v01dstar)
-    - Fix the issue that snapshots might be canceled indefinitely during continuous writes, which blocks replica recovery [#18872](https://github.com/tikv/tikv/issues/18872) @[exit-code-1](https://github.com/exit-code-1)
+    - Fix the issue that snapshots might be repeatedly canceled during continuous writes, which blocks replica recovery [#18872](https://github.com/tikv/tikv/issues/18872) @[exit-code-1](https://github.com/exit-code-1)
     - Fix the issue that compaction slows down due to increased flow-control thresholds [#18708](https://github.com/tikv/tikv/issues/18708) @[hhwyt](https://github.com/hhwyt)
     - Fix the issue that Raft peers might enter hibernation prematurely in a corner case, causing them to remain busy and block leader transfers after a TiKV restart [#19203](https://github.com/tikv/tikv/issues/19203) @[LykxSassinator](https://github.com/LykxSassinator)
 
