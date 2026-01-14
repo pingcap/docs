@@ -1129,13 +1129,14 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 >
 > - This variable only works when [`tidb_analyze_version`](#tidb_analyze_version-new-in-v510) is set to `2`.
 > - If you upgrade your TiDB cluster from a version earlier than v8.3.0 to v8.3.0 or later, this variable is set to `ALL` by default to keep the original behavior.
-> - Starting from v8.3.0, for a newly deployed TiDB cluster, this variable is set to `PREDICATE` by default.
+> - For a newly deployed TiDB cluster from v8.3.0 to v8.5.4, this variable is set to `PREDICATE` by default.
+> - For a newly deployed TiDB cluster from v8.5.5 and v9.0.0 onwards, this variable is set to `ALL` by default.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
-- Default value: `PREDICATE`
+- Default value: `ALL`
 - Value options:`ALL`, `PREDICATE`
 - This variable controls the behavior of the `ANALYZE TABLE` statement. Setting it to `PREDICATE` means only collecting statistics for [predicate columns](/statistics.md#collect-statistics-on-some-columns); setting it to `ALL` means collecting statistics for all columns. In scenarios where OLAP queries are used, it is recommended to set it to `ALL`, otherwise collecting statistics can result in a significant drop in query performance.
 
@@ -1774,7 +1775,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
     - If `tidb_ddl_enable_fast_reorg` is set to `OFF`, `ADD INDEX` is executed as a transaction. If there are many update operations such as `UPDATE` and `REPLACE` in the target columns during the `ADD INDEX` execution, a larger batch size indicates a larger probability of transaction conflicts. In this case, it is recommended that you set the batch size to a smaller value. The minimum value is 32.
     - If the transaction conflict does not exist, or if `tidb_ddl_enable_fast_reorg` is set to `ON`, you can set the batch size to a large value. This makes data backfilling faster but also increases the write pressure on TiKV. For a proper batch size, you also need to refer to the value of `tidb_ddl_reorg_worker_cnt`. See [Interaction Test on Online Workloads and `ADD INDEX` Operations](https://docs.pingcap.com/tidb/dev/online-workloads-and-add-index-operations) for reference.
     - Starting from v8.3.0, this parameter is supported at the SESSION level. Modifying the parameter at the GLOBAL level will not impact currently running DDL statements. It will only apply to DDLs submitted in new sessions.
-    - Starting from v8.5.0, you can modify this parameter for a running DDL job by executing `ADMIN ALTER DDL JOBS <job_id> BATCH_SIZE = <new_batch_size>;`. Note that this operation is not supported for `ADD INDEX` DDL when [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) is enabled. For details, see [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md).
+    - Starting from v8.5.0, you can modify this parameter for a running DDL job by executing `ADMIN ALTER DDL JOBS <job_id> BATCH_SIZE = <new_batch_size>;`.
 
 ### tidb_ddl_reorg_priority
 
@@ -1850,7 +1851,7 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Unit: Threads
 - This variable is used to set the concurrency of the DDL operation in the `re-organize` phase.
 - Starting from v8.3.0, this parameter is supported at the SESSION level. Modifying the parameter at the GLOBAL level will not impact currently running DDL statements. It will only apply to DDLs submitted in new sessions.
-- Starting from v8.5.0, you can modify this parameter for a running DDL job by executing `ADMIN ALTER DDL JOBS <job_id> THREAD = <new_thread_count>;`. Note that this operation is not supported for `ADD INDEX` DDL when [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) is enabled. For details, see [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md).
+- Starting from v8.5.0, you can modify this parameter for a running DDL job by executing `ADMIN ALTER DDL JOBS <job_id> THREAD = <new_thread_count>;`.
 
 ### `tidb_enable_fast_create_table` <span class="version-mark">New in v8.0.0</span>
 
