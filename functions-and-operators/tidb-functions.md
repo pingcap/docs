@@ -583,7 +583,39 @@ SELECT VITESS_HASH(123);
 
 ## TIDB_ENCODE_INDEX_KEY
 
-Encodes an index key.
+Encodes an index key and returns the result as a hexadecimal string. The function syntax is as follows:
+
+`TIDB_ENCODE_INDEX_KEY(<db_name>, <table_name>, <index_name>, <index_columns>..., <handle_columns>...)`
+
+* `<db_name>`: the name of the database that contains the target index.
+* `<table_name>`: the name of the table that contains the target index. For a partitioned table, you can specify the partition name in `<table_name>`, for example, `'t(p0)'`.
+* `<index_name>`: the name of the target index.
+* `<index_columns>...`: the values of the index columns, specified in the order defined by the index. For a composite index, provide the values for each column in the defined order.
+* `<handle_columns>...`: the handle value for the corresponding row. The rules are as follows:
+
+    * If the table uses the hidden column `_tidb_rowid` as the handle (no primary key, or the primary key is `NONCLUSTERED`), use `_tidb_rowid`.
+    * If the table has a `CLUSTERED` primary key that is a single integer column, the handle is the value of that primary key column.
+    * If the table has a `CLUSTERED` primary key that is composite or non-integer (a common handle), the handle consists of all primary key columns and must be specified in primary key order.
+
+The following are examples of how to specify composite indexes and composite primary keys:
+
+```sql
+-- Composite secondary index `idx(c1, c2)`, with no primary key or a `NONCLUSTERED` primary key. The handle is `_tidb_rowid`.
+SELECT TIDB_ENCODE_INDEX_KEY(
+    '<db_name>', '<table_name>', '<index_name>', 
+    <c1>, <c2>, <_tidb_rowid>
+);
+-- Composite secondary index `idx(c1, c2)`, with a single-column integer CLUSTERED primary key id.
+SELECT TIDB_ENCODE_INDEX_KEY(
+    '<db_name>', '<table_name>', '<index_name>', 
+    <c1>, <c2>, <id>
+);
+-- Composite secondary index `idx(c1, c2)`, with a composite CLUSTERED primary key `PRIMARY KEY (p1, p2)` (common handle).
+SELECT TIDB_ENCODE_INDEX_KEY(
+    '<db_name>', '<table_name>', '<index_name>', 
+    <c1>, <c2>, <p1>, <p2>
+);
+```
 
 ```sql
 CREATE TABLE t(id int PRIMARY KEY, a int, KEY `idx` (a));
@@ -594,7 +626,7 @@ Query OK, 0 rows affected (0.00 sec)
 ```
 
 ```sql
-INSERT INTO t VALUES(1,1);
+INSERT INTO t VALUES(1,2);
 ```
 
 ```
@@ -602,12 +634,12 @@ Query OK, 1 row affected (0.00 sec)
 ```
 
 ```sql
-SELECT TIDB_ENCODE_INDEX_KEY('test', 't', 'idx', 1, 1);
+SELECT TIDB_ENCODE_INDEX_KEY('test', 't', 'idx', 2, 1);
 ```
 
 ```
 +----------------------------------------------------------------------------+
-| TIDB_ENCODE_INDEX_KEY('test', 't', 'idx', 1, 1)                            |
+| TIDB_ENCODE_INDEX_KEY('test', 't', 'idx', 2, 1)                            |
 +----------------------------------------------------------------------------+
 | 74800000000000007f5f698000000000000001038000000000000001038000000000000001 |
 +----------------------------------------------------------------------------+
@@ -616,7 +648,13 @@ SELECT TIDB_ENCODE_INDEX_KEY('test', 't', 'idx', 1, 1);
 
 ## TIDB_ENCODE_RECORD_KEY
 
-Encodes a record key.
+Encodes a record key and returns the result as a hexadecimal string. The function syntax is as follows:
+
+`TIDB_ENCODE_RECORD_KEY(<db_name>, <table_name>, <handle_columns>...)`
+
+`<db_name>`: the name of the database that contains the target table.
+`<table_name>`: the name of the table that contains the target table. For a partitioned table, you can specify the partition name in `table_name`, for example, `'t(p0)'`.
+`<handle_columns>...`: the handle (row key) value for the corresponding row. The exact composition of the handle depends on the primary key type of the table, such as whether it is CLUSTERED, whether it uses a common handle, or whether it uses the hidden column `_tidb_rowid`. For more information, see the `handle_columns...` section in [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key).
 
 ```sql
 CREATE TABLE t(id int PRIMARY KEY, a int, KEY `idx` (a));
@@ -627,7 +665,7 @@ Query OK, 0 rows affected (0.00 sec)
 ```
 
 ```sql
-INSERT INTO t VALUES(1,1);
+INSERT INTO t VALUES(1,2);
 ```
 
 ```
