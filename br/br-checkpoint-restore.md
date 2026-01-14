@@ -160,4 +160,3 @@ Note that before entering the log restore phase during the initial restore, `br`
 > **Note:**
 >
 > To ensure compatibility with clusters of earlier versions, starting from v8.5.5 and v9.0.0, if the system table `mysql.tidb_pitr_id_map` does not exist in the restore cluster and the `--checkpoint-storage` parameter is not specified, the `pitr_id_map` data will be written to the log backup directory. The file name is `pitr_id_maps/pitr_id_map.cluster_id:{downstream-cluster-ID}.restored_ts:{restored-ts}`.
-

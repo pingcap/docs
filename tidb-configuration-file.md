@@ -640,7 +640,7 @@ Configuration items related to performance.
 ### `enable-async-batch-get` <span class="version-mark">New in v8.5.5 and v9.0.0</span>
 
 + Controls whether TiDB uses asynchronous mode to execute the Batch Get operator. Using asynchronous mode can reduce goroutine overhead and provide better performance. Generally, there is no need to modify this configuration item.
-+ Default value: `true`
++ Default value: `true` for v9.0.0 and later versions. In v8.5.5, the default value is `false`.
 
 ## opentracing
 
