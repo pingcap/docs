@@ -151,7 +151,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     This feature applies to TiDB clusters running on Azure Kubernetes Service (AKS) or other Azure environments, particularly in enterprise environments that require strict security controls for backup and restore operations.
 
-    For more information, see [Documentation](link).
+    For more information, see [documentation](/br/backup-and-restore-storages.md#authentication).
 
 ## Compatibility changes
 
