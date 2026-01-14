@@ -23,7 +23,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - If no data truncation risk is detected, TiDB updates only the metadata and avoids index rebuilding whenever possible.
     - If index rebuilding is required, TiDB uses a more efficient ingest process to significantly improve index rebuild performance.
 
-    The following table shows example performance improvements based on benchmark tests on a table with 114 GiB of data and 600 million rows. The test cluster consists of 3 TiDB nodes, 6 TiKV nodes, and 1 PD node. All nodes are configured with 16 CPU cores and 32 GiB of memory.
+  The following table shows example performance improvements based on benchmark tests on a table with 114 GiB of data and 600 million rows. The test cluster consists of 3 TiDB nodes, 6 TiKV nodes, and 1 PD node. All nodes are configured with 16 CPU cores and 32 GiB of memory.
 
     | Scenario | Operation type | Before optimization | After optimization | Performance improvement |
     |----------|----------------|---------------------|--------------------|--------------------------|
