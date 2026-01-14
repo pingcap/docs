@@ -204,7 +204,7 @@ You can configure the account used to access GCS by specifying the access key. I
 
 - Method 4: Use Azure managed identities
 
-    Starting from v8.5.5 and v9.0.0, if your TiDB cluster and BR are running in an Azure Virtual Machine (VM) or Azure Kubernetes Service (AKS) environment and Azure managed identities have been assigned to the nodes, you can use Azure managed identities for authentication.
+    Starting from v8.5.5, if your TiDB cluster and BR are running in an Azure Virtual Machine (VM) or Azure Kubernetes Service (AKS) environment and Azure managed identities have been assigned to the nodes, you can use Azure managed identities for authentication.
 
     Before using this method, ensure that you have granted the permissions (such as `Storage Blob Data Contributor`) to the corresponding managed identity to access the target storage account in the [Azure Portal](https://azure.microsoft.com/).
 
