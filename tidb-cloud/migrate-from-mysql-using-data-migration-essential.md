@@ -1,6 +1,6 @@
 ---
 title: Migrate MySQL-Compatible Databases to {{{ .essential }}} Using Data Migration
-summary: Learn how to seamlessly migrate your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, or self-managed MySQL instances to {{{ .essential }}} with minimal downtime using the Data Migration feature.
+summary: Learn how to seamlessly migrate your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, Alibaba Cloud RDS, or self-managed MySQL instances to {{{ .essential }}} with minimal downtime using the Data Migration feature.
 ---
 
 # Migrate MySQL-Compatible Databases to {{{ .essential }}} Using Data Migration
@@ -66,12 +66,12 @@ Data Migration supports the following data sources and versions:
 
 | Data source                                      | Supported versions |
 |:-------------------------------------------------|:-------------------|
-| Self-managed MySQL (on-premises or public cloud) | 8.0, 5.7, 5.6      |
-| Amazon Aurora MySQL                              | 8.0, 5.7, 5.6      |
+| Self-managed MySQL (on-premises or public cloud) | 8.0, 5.7     |
+| Amazon Aurora MySQL                              | 8.0, 5.7     |
 | Amazon RDS MySQL                                 | 8.0, 5.7           |
 | Alibaba Cloud RDS MySQL                          | 8.0, 5.7           |
 | Azure Database for MySQL - Flexible Server                          | 8.0, 5.7           |
-| Google Cloud SQL for MySQL                                                | 8.0, 5.7, 5.6     |
+| Google Cloud SQL for MySQL                                                | 8.0, 5.7    |
 
 ### Enable binary logs in the source MySQL-compatible database for replication
 
@@ -133,6 +133,51 @@ For detailed instructions, see [Working with DB Parameter Groups](https://docs.a
 
 </details>
 
+<details>
+<summary> Configure Azure Database for MySQL - Flexible Server </summary>
+
+1. In the [Azure portal](https://portal.azure.com/), search for and select **Azure Database for MySQL servers**, click your instance name, and then click **Setting** > **Server parameters** in the left navigation pane.
+
+2. Search for each parameter and update its value.
+
+    Most changes take effect without a restart. If a restart is required, you will get a prompt from the portal.
+
+3. Run the `SHOW VARIABLES` statement to verify the configuration.
+
+For detailed instructions, see [Configure server parameters in Azure Database for MySQL - Flexible Server using the Azure portal](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-configure-server-parameters-portal) in the Microsoft Azure documentation.
+
+</details>
+
+<details>
+<summary> Configure Google Cloud SQL for MySQL </summary>
+
+1. In the [Google Cloud console](https://console.cloud.google.com/project/_/sql/instances), select the project that contains your instance, click your instance name, and then click **Edit**.
+2. Add or modify the required flags (`log_bin`, `binlog_format`, `binlog_row_image`, `binlog_expire_logs_seconds`).
+3. Click **Save**. If a restart is required, you will get a prompt from the console.
+4. After the restart, run the `SHOW VARIABLES` statement to confirm the changes.
+
+For detailed instructions, see [Configure database flags](https://cloud.google.com/sql/docs/mysql/flags) and [Use point-in-time recovery](https://cloud.google.com/sql/docs/mysql/backup-recovery/pitr) in Google Cloud documentation.
+
+</details>
+
+<details>
+<summary> Configure Alibaba Cloud RDS MySQL </summary>
+
+1. In the [ApsaraDB RDS console](https://rds.console.aliyun.com/), select the region of your instance, and then click the ID of your RDS for MySQL instance.
+
+2. In the left navigation pane, click **Parameters**, search for each parameter, and then set the following values:
+
+    - `binlog_row_image`: `FULL`
+
+3. In the left navigation pane, click **Backup and Restoration**, and then select **Backup Strategy** to configure the binary log retention period.
+
+    Alibaba Cloud RDS manages the binlog retention policy in the console. To ensure DM can access consecutive binlog files during migration, set the retention period to at least **3 day** (7 days recommended) based on your migration duration and RPO requirements.
+
+4. After applying the changes (and restarting if needed), connect to the instance and run the `SHOW VARIABLES` statement in this section to verify the configuration.
+
+For detailed instructions, see [Set instance parameters](https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/modify-the-parameters-of-an-apsaradb-rds-for-mysql-instance) 
+</details>
+
 ### Ensure network connectivity
 
 Before creating a migration job, you need to plan and set up proper network connectivity between your source MySQL instance, the TiDB Cloud Data Migration (DM) service, and your target {{{ .essential }}} cluster.
@@ -154,6 +199,9 @@ Regardless of the connection method, it is strongly recommended to use TLS/SSL f
 <summary> Download and store the cloud provider's certificates for TLS/SSL encrypted connections </summary>
 
 - Amazon Aurora MySQL or Amazon RDS MySQL: [Using SSL/TLS to encrypt a connection to a DB instance or cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+- Azure Database for MySQL - Flexible Server: [Connect with encrypted connections](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-connect-tls-ssl)
+- Google Cloud SQL for MySQL: [Manage SSL/TLS certificates](https://cloud.google.com/sql/docs/mysql/manage-ssl-instance)
+- Alibaba Cloud RDS MySQL: [Configure the SSL encryption feature](https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/configure-a-cloud-certificate-to-enable-ssl-encryption)
 
 </details>
 
@@ -300,9 +348,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
 4. Click **Validate Connection and Next** to validate the information you have entered.
 
-5. Take action according to the message you see:
-
-    - If you use **Public IP** as the connectivity method, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
+5. If you use Public IP, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
 
 ## Step 3: Choose migration job type
 

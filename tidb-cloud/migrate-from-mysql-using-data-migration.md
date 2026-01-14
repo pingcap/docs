@@ -62,6 +62,7 @@ Data Migration supports the following data sources and versions:
 | Amazon RDS MySQL | 8.0, 5.7 |
 | Azure Database for MySQL - Flexible Server | 8.0, 5.7 |
 | Google Cloud SQL for MySQL | 8.0, 5.7, 5.6 |
+| Alibaba Cloud RDS MySQL | 8.0, 5.7 |
 
 ### Enable binary logs in the source MySQL-compatible database for replication
 

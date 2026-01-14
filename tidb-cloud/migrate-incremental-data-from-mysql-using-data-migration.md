@@ -1,6 +1,6 @@
 ---
 title: Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
-summary: Learn how to migrate incremental data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, Azure Database for MySQL, or a local MySQL instance to TiDB Cloud using Data Migration.
+summary: Learn how to migrate incremental data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, Azure Database for MySQL, Alibaba Cloud RDS, or a local MySQL instance to TiDB Cloud using Data Migration.
 ---
 
 # Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
@@ -71,7 +71,20 @@ If the result is `ON` or `ON_PERMISSIVE`, the GTID mode is successfully enabled.
 
 ### For Azure Database for MySQL
 
-The GTID mode is enabled by default for Azure Database for MySQL (versions 5.7 and later). You can check if the GTID mode has been successfully enabled by executing the following SQL statement:
+The GTID mode is enabled by default for Azure Database for MySQL (versions 5.7 and later) and does not support disabling GTID mode.
+
+
+In addition, ensure that the `binlog_row_image` server parameter is set to `FULL`. You can check this by executing the following SQL statement:
+
+```sql
+SHOW VARIABLES LIKE 'binlog_row_image';
+```
+
+If the result is not `FULL`, you need to configure this parameter for your Azure Database for MySQL instance using the [Azure portal](https://portal.azure.com/) or [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/).
+
+### For Alibaba Cloud RDS MySQL
+
+The GTID mode is enabled by default for Alibaba Cloud RDS MySQL. You can check if the GTID mode has been successfully enabled by executing the following SQL statement:
 
 ```sql
 SHOW VARIABLES LIKE 'gtid_mode';
@@ -85,7 +98,7 @@ In addition, ensure that the `binlog_row_image` server parameter is set to `FULL
 SHOW VARIABLES LIKE 'binlog_row_image';
 ```
 
-If the result is not `FULL`, you need to configure this parameter for your Azure Database for MySQL instance using the [Azure portal](https://portal.azure.com/) or [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/).
+If the result is not `FULL`, you need to configure this parameter for your Alibaba Cloud RDS MySQL instance using the [RDS console](https://rds.console.aliyun.com/).
 
 ### For a self-hosted MySQL instance
 
