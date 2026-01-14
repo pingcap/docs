@@ -35,7 +35,7 @@ To access the changefeed feature, take the following steps:
 
 2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Changefeed** in the left navigation pane. The changefeed page is displayed.
 
-On the **Changefeed** page, you can create a changefeed, view a list of existing changefeeds, and operate the existing changefeeds (such as scaling, pausing, resuming, editing, and deleting a changefeed).
+On the **Changefeed** page, you can create a changefeed, view a list of existing changefeeds, and operate the existing changefeeds (such as pausing, resuming, editing, and deleting a changefeed).
 
 ## Create a changefeed
 
