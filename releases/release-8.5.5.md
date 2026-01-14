@@ -15,7 +15,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Performance
 
-* Introduce significant performance improvements for certain lossy DDL operations (such as `BIGINT → INT` and `CHAR(120) → VARCHAR(60)`): when no data truncation occurs, the execution time of these operations can be reduced from hours to minutes, seconds, or even milliseconds, delivering performance gains ranging from tens to hundreds of thousands of times [#63366](https://github.com/pingcap/tidb/issues/63366) @[wjhuang2016](https://github.com/wjhuang2016), @[tangenta](https://github.com/tangenta), @[fzzf678](https://github.com/fzzf678)(https://github.com/tangenta)
+* Introduce significant performance improvements for certain lossy DDL operations (such as `BIGINT → INT` and `CHAR(120) → VARCHAR(60)`): when no data truncation occurs, the execution time of these operations can be reduced from hours to minutes, seconds, or even milliseconds, delivering performance gains ranging from tens to hundreds of thousands of times [#63366](https://github.com/pingcap/tidb/issues/63366) @[wjhuang2016](https://github.com/wjhuang2016), @[tangenta](https://github.com/tangenta), @[fzzf678](https://github.com/fzzf678)
 
     The optimization strategies are as follows:
 
@@ -97,7 +97,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
    In TiDB versions earlier than v8.5.5, when the Distributed eXecution Framework (DXF) [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) is enabled, modifying the `THREAD`, `BATCH_SIZE`, or `MAX_WRITE_SPEED` parameters of a running `ADD INDEX` job is not supported. To change these parameters, you have to cancel the running `ADD INDEX` job, reconfigure the parameters, and then resubmit the job, which is inefficient.
 
-    Starting from v8.5.5, you can use the `ADMIN ALTER DDL JOBS` statement to dynamically adjust these parameters of a running distributed `ADD INDEX` job based on the current workload and performance requirements, without interrupting the job. 
+    Starting from v8.5.5, you can use the `ADMIN ALTER DDL JOBS` statement to dynamically adjust these parameters of a running distributed `ADD INDEX` job based on the current workload and performance requirements, without interrupting the job.
 
     For more information, see [documentation](/sql-statements/sql-statement-admin-alter-ddl.md).
 
