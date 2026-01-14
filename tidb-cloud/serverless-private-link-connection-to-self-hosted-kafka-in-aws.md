@@ -5,13 +5,13 @@ summary: Learn how to connect to an AWS Self-Hosted Kafka using an AWS Endpoint 
 
 # Connect to AWS Self-Hosted Kafka via Private Link Connection
 
-This document describes how to connect a {{{ .essential }}} cluster to a self-hosted Kafka cluster in AWS using AWS Endpoint Service [private link connection](/tidb-cloud/serverless-private-link-connection.md).
+This document describes how to connect a {{{ .essential }}} cluster to a self-hosted Kafka cluster in AWS using an [AWS Endpoint Service private link connection](/tidb-cloud/serverless-private-link-connection.md).
 
 The mechanism works as follows:
 
-1. The private link connection connects to your AWS Endpoint Service using the bootstrap broker address, which returns the addresses and ports of all Kafka brokers.
+1. The private link connection connects to your AWS endpoint service using the bootstrap broker address, which returns the addresses and ports of all Kafka brokers.
 2. TiDB Cloud uses the returned broker addresses and ports to establish connections through the private link connection.
-3. The AWS Endpoint Service forwards requests to your load balancers.
+3. The AWS endpoint service forwards requests to your load balancers.
 4. Load balancers route requests to the corresponding Kafka brokers based on port mapping.
 
 ## Prerequisites
@@ -29,15 +29,15 @@ The mechanism works as follows:
     - Manage load balancer
     - Manage endpoint services
 
-- Ensure that your {{{ .essential }}} is active in AWS. Retrieve and save the following details for later use:
+- Your {{{ .essential }}} is hosted on AWS, and it is active. Retrieve and save the following details for later use:
 
-    - Account ID
+    - AWS Account ID
     - Availability Zones (AZs)
 
 To view the AWS account ID and available zones, do the following:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of your TiDB cluster, and then click **Settings** > **Networking** in the left navigation pane.
-2. In the **Private Link Connection For Dataflow** section, click **Create Private Link Connection**.
+2. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
 3. In the displayed dialog, you can find the AWS account ID and available zones.
 
 The following table shows an example of the deployment information.
@@ -47,7 +47,7 @@ The following table shows an example of the deployment information.
 | Region    | Oregon (`us-west-2`)    |  N/A |
 | Principal of TiDB Cloud AWS Account | `arn:aws:iam::<account_id>:root`     |    N/A  |
 | AZ IDs                              | <ul><li>`usw2-az1` </li><li>`usw2-az2` </li><li> `usw2-az3`</li></ul>  | Align AZ IDs to AZ names in your AWS account.<br/>Example: <ul><li> `usw2-az1` => `us-west-2a` </li><li> `usw2-az2` => `us-west-2c` </li><li>`usw2-az3` => `us-west-2b`</li></ul>  |
-| Kafka Advertised Listener Pattern   | <ul><li> `usw2-az1` => &lt;broker_id&gt;.usw2-az1.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li><li> `usw2-az2` => &lt;broker_id&gt;.usw2-az2.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li><li> `usw2-az3` => &lt;broker_id&gt;.usw2-az3.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li></ul>    | Map AZ names to AZ-specified patterns. Make sure that you configure the right pattern to the broker in a specific AZ later. <ul><li> `us-west-2a` => &lt;broker_id&gt;.usw2-az1.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li><li> `us-west-2c` => &lt;broker_id&gt;.usw2-az2.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li><li> `us-west-2b` => &lt;broker_id&gt;.usw2-az3.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li></ul> `unique_name` is a placeholder. The actual value of `unique_name` will be replaced in [Step 4](#step-4-replace-the-unique-name-placeholder-in-kafka-configuration).  |
+| Kafka Advertised Listener Pattern   | <ul><li> `usw2-az1` => &lt;broker_id&gt;.usw2-az1.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li><li> `usw2-az2` => &lt;broker_id&gt;.usw2-az2.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li><li> `usw2-az3` => &lt;broker_id&gt;.usw2-az3.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li></ul>    | Map AZ names to AZ-specified patterns. Make sure that you configure the right pattern to the broker in a specific AZ later. <ul><li> `us-west-2a` => &lt;broker_id&gt;.usw2-az1.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li><li> `us-west-2c` => &lt;broker_id&gt;.usw2-az2.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li><li> `us-west-2b` => &lt;broker_id&gt;.usw2-az3.unique_name.aws.plc.tidbcloud.com:&lt;port&gt; </li></ul> `unique_name` is a placeholder and will be replaced with the actual value in [Step 4](#step-4-replace-the-unique-name-placeholder-in-kafka-configuration).  |
 
 ## Step 1. Set up a Kafka cluster
 
@@ -702,7 +702,7 @@ Do the following to set up the load balancer:
     # If you enable cross-zone load balancing in LB, it will succeed. However, it is unnecessary and might cause additional cross-AZ traffic.
     ```
 
-### 2. Set up AWS Endpoint Service
+### 2. Set up an AWS endpoint service
 
 1. Go to [Endpoint service](https://console.aws.amazon.com/vpcconsole/home#EndpointServices:). Click **Create endpoint service** to create a Private Link service for the Kafka load balancer.
 
