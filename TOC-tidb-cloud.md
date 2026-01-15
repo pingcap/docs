@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: e9f3aa347981ae5cb9573926111bdec6cccb6027-->
+# 目录 <!--Corresponding EN commit: 127d74b2e3fd9769faa8773107c33711f39aa2b6-->
 
 ## 快速开始
 
@@ -315,11 +315,6 @@
     - [在 Azure 中设置自托管 Kafka Private Link 服务](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)
     - [在 Google Cloud 中设置自托管 Kafka Private Service Connect](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)
     - [为 Changefeed 设置 Private Endpoint](/tidb-cloud/set-up-sink-private-endpoint.md)
-- 灾难恢复
-  - [恢复组概述](/tidb-cloud/recovery-group-overview.md)
-  - [快速上手](/tidb-cloud/recovery-group-get-started.md)
-  - [故障转移和重新保护数据库](/tidb-cloud/recovery-group-failover.md)
-  - [删除恢复组](/tidb-cloud/recovery-group-delete.md)
 - 安全
   - [安全概览](/tidb-cloud/security-overview.md)
   - 身份访问控制
