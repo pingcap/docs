@@ -281,6 +281,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>
+  <CustomContent language="en,zh">
   <tr>
     <td rowspan="4" style="background-color: white;">Cloud and regions</td>
     <td>AWS</td>
@@ -306,6 +307,28 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅</td>
   </tr>
+  </CustomContent>
+  <CustomContent language="ja">
+  <tr>
+    <td rowspan="3" style="background-color: white;">Cloud and regions</td>
+    <td>AWS</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
+    <td>Azure</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
+    <td>Google Cloud</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center;">✅</td>
+  </tr>
+  </CustomContent>
 </tbody></table>
 
 > **Tip:**
