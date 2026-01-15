@@ -224,7 +224,7 @@ For TiDB clusters newly deployed in v8.5.4 (that is, not upgraded from versions 
 
 + PD
 
-    - Optimize metrics with high cardinality [#9357](https://github.com/tikv/pd/issues/9357) @[rleungx](https://github.com/rleungx)
+    - Optimize metrics with high cardinality to reduce PD memory usage and relieve pressure on the monitoring system [#9357](https://github.com/tikv/pd/issues/9357) @[rleungx](https://github.com/rleungx)
     - Optimize the logic for timestamp advancement and leader election [#9981](https://github.com/tikv/pd/issues/9981) @[bufferflies](https://github.com/bufferflies)
     - Support batch configuration of TiKV store limits by storage engine (TiKV or TiFlash) [#9970](https://github.com/tikv/pd/issues/9970) @[bufferflies](https://github.com/bufferflies)
     - Add the `store` label to the `pd_cluster_status` metric [#9855](https://github.com/tikv/pd/issues/9855) @[SerjKol80](https://github.com/SerjKol80)
