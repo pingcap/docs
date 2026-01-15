@@ -121,9 +121,9 @@ ORDER BY
 LIMIT 2;
 ```
 
-Note that, even if your resource URL looks like `https://<your_resource_name>.cognitiveservices.azure.com/`, you should still use `https://<your_resource_name>.openai.azure.com/openai/v1` as the API base, which provides OpenAI format compatibility.
+Note that even if your resource URL appears as `https://<your_resource_name>.cognitiveservices.azure.com/`, you must use `https://<your_resource_name>.openai.azure.com/openai/v1` as the API base to ensure OpenAI-compatible formatting.
 
-To switch from using Azure OpenAI to using OpenAI directly, set `TIDB_EXP_EMBED_OPENAI_API_BASE` to an empty string:
+To switch from Azure OpenAI to OpenAI directly, set `TIDB_EXP_EMBED_OPENAI_API_BASE` to an empty string:
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_BASE = '';
@@ -131,9 +131,8 @@ SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_BASE = '';
 
 > **Note:**
 >
-> For security reasons, currently we only allow setting API base to either Azure OpenAI URL or OpenAI URL. **Arbitrary base URL is forbidden.**
->
-> If you want to use other OpenAI compatible embedding service, contact our support. We will evaluate and add the service provider to the allow list.
+> - For security reasons, currently the API base can only be set to an Azure OpenAI URL or the OpenAI URL. Arbitrary base URLs are not allowed.
+> - To use another OpenAI-compatible embedding service, contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md).
 
 ## Options
 
