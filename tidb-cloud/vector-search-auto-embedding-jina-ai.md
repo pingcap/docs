@@ -51,7 +51,7 @@ SET @@GLOBAL.TIDB_EXP_EMBED_JINA_AI_API_KEY = 'your-jina-ai-api-key-here';
 CREATE TABLE sample (
   `id`        INT,
   `content`   TEXT,
-  `embedding` VECTOR(1024) GENERATED ALWAYS AS (EMBED_TEXT(
+  `embedding` VECTOR(2048) GENERATED ALWAYS AS (EMBED_TEXT(
                 "jina_ai/jina-embeddings-v4",
                 `content`
               )) STORED
