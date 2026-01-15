@@ -85,13 +85,13 @@ Result:
 +------+----------------------------------------------------------------+
 ```
 
-## Azure OpenAI
+## Use Azure OpenAI
 
-To use OpenAI embedding models on Azure, set the global variable `TIDB_EXP_EMBED_OPENAI_API_BASE` to the URL of your Azure resource. Example:
+To use OpenAI embedding models on Azure, set the global variable `TIDB_EXP_EMBED_OPENAI_API_BASE` to the URL of your Azure resource. For example:
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_KEY = 'your-openai-api-key-here';
-SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_BASE = 'https://your-resource-name.openai.azure.com/openai/v1';
+SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_BASE = 'https://<your-resource-name>.openai.azure.com/openai/v1';
 
 CREATE TABLE sample (
   `id`        INT,
@@ -120,7 +120,7 @@ ORDER BY
 LIMIT 2;
 ```
 
-Note that even if your resource URL appears as `https://<your_resource_name>.cognitiveservices.azure.com/`, you must use `https://<your_resource_name>.openai.azure.com/openai/v1` as the API base to ensure OpenAI-compatible formatting.
+Note that even if your resource URL appears as `https://<your-resource-name>.cognitiveservices.azure.com/`, you must use `https://<your-resource-name>.openai.azure.com/openai/v1` as the API base to ensure OpenAI-compatible request and response formats.
 
 To switch from Azure OpenAI to OpenAI directly, set `TIDB_EXP_EMBED_OPENAI_API_BASE` to an empty string:
 
@@ -130,8 +130,8 @@ SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_BASE = '';
 
 > **Note:**
 >
-> - For security reasons, currently the API base can only be set to an Azure OpenAI URL or the OpenAI URL. Arbitrary base URLs are not allowed.
-> - To use another OpenAI-compatible embedding service, contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md).
+> - For security reasons, you can only set the API base to an Azure OpenAI URL or the OpenAI URL. Arbitrary base URLs are not allowed.
+> - To use another OpenAI-compatible embedding service, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Options
 
