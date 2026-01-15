@@ -16,10 +16,10 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 
 The changefeed feature is available in the following regions:
 
-| Cloud Provider | Supported Regions |
+| Cloud provider | Supported regions |
 | --- | --- |
-| Alibaba Cloud | `ap-southeast-1`<br>`cn-hongkong`<br>`ap-southeast-5` |
 | AWS          | `us-east-1`<br>`ap-southeast-1` |
+| Alibaba Cloud | `ap-southeast-1`<br>`cn-hongkong`<br>`ap-southeast-5` |
 
 Additional regions will be supported in the future. For immediate support in a specific region, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
