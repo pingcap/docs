@@ -292,6 +292,13 @@ Configuration items related to scheduling
 + Specifies the upper limit of the `Region Merge` key. When the Region key is greater than the specified value, the PD does not merge the Region with its adjacent Regions.
 + Default value: `540000`. Before v8.4.0, the default value is `200000`. Starting from v8.4.0, the default value is `540000`.
 
+### `max-affinity-merge-region-size` <span class="version-mark">New in v8.5.5</span>
+
++ Controls the threshold for automatically merging small adjacent Regions that belong to the same [affinity](/table-affinity.md) group. When a Region belongs to an affinity group and its size is smaller than this threshold, PD attempts to merge this Region with other small adjacent Regions in the same affinity group to reduce the number of Regions and maintain the affinity effect.
++ Setting it to `0` disables the automatic merging of small adjacent Regions within an affinity group.
++ Default value: `256`
++ Unit: MiB
+
 ### `patrol-region-interval`
 
 + Controls the running frequency at which the checker inspects the health state of a Region. The smaller this value is, the faster the checker runs. Normally, you do not need to adjust this configuration.
@@ -371,6 +378,11 @@ Configuration items related to scheduling
 
 + The number of the `Region Merge` scheduling tasks performed at the same time. Set this parameter to `0` to disable `Region Merge`.
 + Default value: `8`
+
+### `affinity-schedule-limit` <span class="version-mark">New in v8.5.5</span>
+
++ Controls the number of [affinity](/table-affinity.md) scheduling tasks that can be performed concurrently. Setting it to `0` disables affinity scheduling.
++ Default value: `0`
 
 ### `high-space-ratio`
 

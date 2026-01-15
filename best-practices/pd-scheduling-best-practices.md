@@ -296,7 +296,9 @@ If a TiKV node fails, PD defaults to setting the corresponding node to the **dow
 
 Practically, if a node failure is considered unrecoverable, you can immediately take it offline. This makes PD replenish replicas soon in another node and reduces the risk of data loss. In contrast, if a node is considered recoverable, but the recovery cannot be done in 30 minutes, you can temporarily adjust `max-store-down-time` to a larger value to avoid unnecessary replenishment of the replicas and resources waste after the timeout.
 
-In TiDB v5.2.0, TiKV introduces the mechanism of slow TiKV node detection. By sampling the requests in TiKV, this mechanism works out a score ranging from 1 to 100. A TiKV node with a score higher than or equal to 80 is marked as slow. You can add [`evict-slow-store-scheduler`](/pd-control.md#scheduler-show--add--remove--pause--resume--config--describe) to detect and schedule slow nodes. If only one TiKV is detected as slow, and the slow score reaches the limit (80 by default), the Leader in this node will be evicted (similar to the effect of `evict-leader-scheduler`).
+Starting from TiDB v5.2.0, TiKV introduces a mechanism to detect slow-disk nodes. By sampling the requests in TiKV, this mechanism works out a score ranging from 1 to 100. A TiKV node with a score higher than or equal to 80 is marked as slow. You can add [`evict-slow-store-scheduler`](/pd-control.md#scheduler-show--add--remove--pause--resume--config--describe) to schedule slow nodes. If only one TiKV node is detected as slow, and its slow score reaches the limit (80 by default), the Leaders on that node will be evicted (similar to the effect of `evict-leader-scheduler`).
+
+Starting from v8.5.5, TiKV introduces a mechanism to detect slow-network nodes. Similar to slow-disk node detection, this mechanism identifies slow nodes by probing network latency between TiKV nodes and calculating a score. You can enable this mechanism using [`enable-network-slow-store`](/pd-control.md#scheduler-config-evict-slow-store-scheduler).
 
 > **Note:**
 >
