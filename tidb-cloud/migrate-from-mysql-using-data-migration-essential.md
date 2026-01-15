@@ -169,9 +169,13 @@ For detailed instructions, see [Configure database flags](https://cloud.google.c
 
     - `binlog_row_image`: `FULL`
 
-3. In the left navigation pane, click **Backup and Restoration**, and then select **Backup Strategy** to configure the binary log retention period.
+3. In the left navigation pane, click **Backup and Restoration**, and then select **Backup Strategy**. To ensure DM can access consecutive binlog files during migration, please configure the backup strategy with the following constraints:
 
-    Alibaba Cloud RDS manages the binlog retention policy in the console. To ensure DM can access consecutive binlog files during migration, set the retention period to at least **3 day** (7 days recommended) based on your migration duration and RPO requirements.
+    - Retention Period: Set to at least 3 days (7 days recommended).
+
+    - Retained Files: Ensure the "Max number of files" is sufficient to prevent older logs from being overwritten prematurely.
+
+    - Storage Safeguard: Monitor Storage Usage closely. Note that RDS will automatically purge the earliest binlogs if the disk space usage reaches the system threshold, regardless of the retention period setting.
 
 4. After applying the changes (and restarting if needed), connect to the instance and run the `SHOW VARIABLES` statement in this section to verify the configuration.
 
