@@ -67,7 +67,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - **Reduced storage space consumption**: redundant data is removed during compaction.
     - **Reduced impact on applications**: RPOs (Recovery Point Objective) can be maintained with less frequent full snapshot-based backups.
 
-  For more information, see [documentation](/br/br-compact-log-backup.md).
+  For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/br-compact-log-backup.md).
 
 * Accelerate recovery of system tables from backups [#58757](https://github.com/pingcap/tidb/issues/58757) @[Leavrth](https://github.com/Leavrth)
 
