@@ -111,7 +111,6 @@ VALUES
     (4, "Java's syntax is used in Android apps."),
     (5, "Dark roast Java beans enhance espresso blends.");
 
-
 SELECT `id`, `content` FROM sample
 ORDER BY
   VEC_EMBED_COSINE_DISTANCE(
