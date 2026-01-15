@@ -5,7 +5,7 @@ summary: Learn about the features, compatibility changes, improvements, and bug 
 
 # TiDB 8.5.5 Release Notes
 
-Release date: xx xx, 2026
+Release date: January 15, 2026
 
 TiDB version: 8.5.5
 
