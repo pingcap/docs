@@ -27,8 +27,12 @@ TiDB supports most of the [miscellaneous functions](https://dev.mysql.com/doc/re
 | [`IS_UUID()`](#is_uuid)                  | Whether argument is an UUID                       |
 | [`NAME_CONST()`](#name_const)            | Can be used to rename a column name               |
 | [`SLEEP()`](#sleep)                      | Sleep for a number of seconds. Note that for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters, the `SLEEP()` function has a limitation wherein it can only support a maximum sleep time of 300 seconds.       |
-| [`UUID()`](#uuid)                        | Return a Universal Unique Identifier (UUID)       |
+| [`UUID()`](#uuid)                        | Return a v1 Universal Unique Identifier (UUID)    |
+| [`UUID_TIMESTAMP()`](#uuid_timestamp)    | Return the timestamp of a UUID                    |
 | [`UUID_TO_BIN()`](#uuid_to_bin)          | Convert UUID from text format to binary format    |
+| [`UUID_V4()`](#uuid_v4)                  | Return a v4 Universal Unique Identifier (UUID)    |
+| [`UUID_V7()`](#uuid_v7)                  | Return a v7 Universal Unique Identifier (UUID)    |
+| [`UUID_VERSION()`](#uuid_version)        | Return the UUID version of a UUID                 |
 | [`VALUES()`](#values)                    | Defines the values to be used during an INSERT    |
 
 ### ANY_VALUE()
@@ -361,9 +365,117 @@ SELECT SLEEP(1.5);
 1 row in set (1.50 sec)
 ```
 
+### UUID_VERSION()
+
+The `UUID_VERSION()` function returns the version of a UUID argument as an integer, as defined in [RFC 9562](https://datatracker.ietf.org/doc/html/rfc9562).
+
+The following example gets the version number from a version 1 UUID.
+
+```sql
+SELECT UUID_VERSION('7d31138f-e0ee-11f0-a2db-86f42566cd2c');
+```
+
+```
++------------------------------------------------------+
+| UUID_VERSION('7d31138f-e0ee-11f0-a2db-86f42566cd2c') |
++------------------------------------------------------+
+|                                                    1 |
++------------------------------------------------------+
+1 row in set (0.001 sec)
+```
+
+The following example gets the version number from a version 7 UUID.
+
+```sql
+SELECT UUID_VERSION('019b516b-8ef7-7d74-81e6-9b860112409a');
+```
+
+```
++------------------------------------------------------+
+| UUID_VERSION('019b516b-8ef7-7d74-81e6-9b860112409a') |
++------------------------------------------------------+
+|                                                    7 |
++------------------------------------------------------+
+1 row in set (0.001 sec)
+```
+
+### UUID_V4()
+
+The `UUID_V4()` function returns a universally unique identifier (UUID) version 4 as defined in [RFC 9562](https://datatracker.ietf.org/doc/html/rfc9562). A UUIDv4 is based on random values and does not store a timestamp.
+
+```sql
+SELECT UUID_V4();
+```
+
+```
++--------------------------------------+
+| UUID_V4()                            |
++--------------------------------------+
+| e76d4b18-7f8d-418d-8f9b-f42b4f1d803b |
++--------------------------------------+
+1 row in set (0.001 sec)
+```
+
+See also [Best practices for UUID](/best-practices/uuid.md).
+
+### UUID_V7()
+
+The `UUID_V7()` function returns a universally unique identifier (UUID) version 7 as defined in [RFC 9562](https://datatracker.ietf.org/doc/html/rfc9562).
+
+```sql
+SELECT UUID_V7();
+```
+
+```
++--------------------------------------+
+| UUID_V7()                            |
++--------------------------------------+
+| 019b5171-c5e4-743a-b192-96fbb28d1d7e |
++--------------------------------------+
+1 row in set (0.001 sec)
+```
+
+See also [Best practices for UUID](/best-practices/uuid.md).
+
+### UUID_TIMESTAMP()
+
+The `UUID_TIMESTAMP()` function extracts the timestamp from a time-based UUID and returns it as a UNIX timestamp.
+
+UUIDv1, UUIDv6, and UUIDv7 store a timestamp. For other UUID versions, this function returns `NULL`.
+
+The example below extracts the timestamp from a UUID.
+
+```sql
+SELECT UUID_TIMESTAMP('019b5171-c5e4-743a-b192-96fbb28d1d7e');
+```
+
+```
++--------------------------------------------------------+
+| UUID_TIMESTAMP('019b5171-c5e4-743a-b192-96fbb28d1d7e') |
++--------------------------------------------------------+
+|                                      1766597969.380000 |
++--------------------------------------------------------+
+1 row in set (0.001 sec)
+```
+
+The resulting UNIX timestamp can be used directly with [`FROM_UNIXTIME()`](/functions-and-operators/date-and-time-functions.md) to get a timestamp.
+
+```sql
+SELECT FROM_UNIXTIME(1766597969.380000);
+```
+
+```
++----------------------------------+
+| FROM_UNIXTIME(1766597969.380000) |
++----------------------------------+
+| 2025-12-24 18:39:29.380000       |
++----------------------------------+
+1 row in set (0.001 sec)
+```
+
 ### UUID()
 
-The `UUID()` function returns a universally unique identifier (UUID) version 1 as defined in [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122).
+The `UUID()` function returns a universally unique identifier (UUID) version 1 as defined in [RFC 9562](https://datatracker.ietf.org/doc/html/rfc9562).
 
 ```sql
 SELECT UUID();
@@ -418,3 +530,7 @@ TABLE t1;
 | Name | Description  |
 |:------------|:-----------------------------------------------------------------------------------------------|
 | [`UUID_SHORT()`](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html#function_uuid-short)            | Provides a UUID that is unique given certain assumptions not present in TiDB [TiDB #4620](https://github.com/pingcap/tidb/issues/4620) |
+
+## MySQL compatibility
+
+The `UUID_V4()`, `UUID_V7()`, `UUID_VERSION()` and `UUID_TIMESTAMP()` functions are TiDB specific extensions.
