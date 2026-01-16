@@ -9,6 +9,10 @@ This document describes how to migrate incremental data from a MySQL-compatible 
 
 For instructions about how to migrate existing data or both existing data and incremental data, see [Migrate MySQL-Compatible Databases to {{{ .essential }}} Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration-essential.md).
 
+> **Note**
+>
+> Currently, this feature is in public preview.
+ 
 ## Limitations
 
 > **Note**:
