@@ -198,6 +198,8 @@ For TiDB clusters newly deployed in v8.5.4 (that is, not upgraded from versions 
 
 ### Other changes
 
+* To improve TiDB performance, the Go compiler version for TiDB has been upgraded from go1.23.6 to go1.25.5. If you are a TiDB developer, please upgrade your Go compiler version accordingly to ensure smooth compilation.
+
 * When performing PITR recovery on earlier TiDB versions (such as v8.5.4 or v8.1.2) using BR v8.5.5, the log recovery stage might fail and return errors.
 
     Full data backup and restore are not affected by this issue.
