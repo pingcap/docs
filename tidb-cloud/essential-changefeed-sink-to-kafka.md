@@ -125,7 +125,7 @@ The steps vary depending on the connectivity method you select.
     - **Tables matching**: specify which tables the column selector applies to. For tables that do not match any rule, all columns are sent.
     - **Column Selector**: specify which columns of the matched tables will be sent to the downstream.
 
-  For more information about the matching rules, see [Column selectors](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-kafka/#column-selectors).
+    For more information about the matching rules, see [Column selectors](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-kafka/#column-selectors).
 
 4. In the **Data Format** area, select your desired format of Kafka messages.
 
