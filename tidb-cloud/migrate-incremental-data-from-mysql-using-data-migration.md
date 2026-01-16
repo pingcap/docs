@@ -73,7 +73,6 @@ If the result is `ON` or `ON_PERMISSIVE`, the GTID mode is successfully enabled.
 
 The GTID mode is enabled by default for Azure Database for MySQL (versions 5.7 and later) and does not support disabling GTID mode.
 
-
 In addition, ensure that the `binlog_row_image` server parameter is set to `FULL`. You can check this by executing the following SQL statement:
 
 ```sql
