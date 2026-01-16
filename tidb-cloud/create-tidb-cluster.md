@@ -83,7 +83,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
     > **Note:**
     >
-    > The cluster creation time can vary by region. In some regions, creation might take longer than 30 minutes. If the process takes significantly longer than expected, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+    > The cluster creation time can vary by region and might take longer than 30 minutes. If the process takes significantly longer than expected, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Step 3. Set the root password
 
