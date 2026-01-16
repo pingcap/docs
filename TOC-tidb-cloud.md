@@ -315,11 +315,6 @@
     - [Set Up Self-Hosted Kafka Private Link Service in Azure](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)
     - [Set Up Self-Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)
     - [Set Up Private Endpoint for Changefeeds](/tidb-cloud/set-up-sink-private-endpoint.md)
-- Disaster Recovery
-  - [Recovery Group Overview](/tidb-cloud/recovery-group-overview.md)
-  - [Get Started](/tidb-cloud/recovery-group-get-started.md)
-  - [Failover and Reprotect Databases](/tidb-cloud/recovery-group-failover.md)
-  - [Delete a Recovery Group](/tidb-cloud/recovery-group-delete.md)
 - Security
   - [Security Overview](/tidb-cloud/security-overview.md)
   - Identity Access Control
@@ -354,7 +349,6 @@
   - [Billing from Cloud Provider Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)
   - [Billing for Changefeed](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
   - [Billing for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md)
-  - [Billing for Recovery Groups](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
   - [Manage Budgets](/tidb-cloud/tidb-cloud-budget.md)
 - Integrations
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
@@ -773,7 +767,8 @@
 ## RELEASES
 
 - Release Notes
-  - [2025](/tidb-cloud/tidb-cloud-release-notes.md)
+  - [2026](/tidb-cloud/tidb-cloud-release-notes.md)
+  - [2025](/tidb-cloud/release-notes-2025.md)
   - [2024](/tidb-cloud/release-notes-2024.md)
   - [2023](/tidb-cloud/release-notes-2023.md)
   - [2022](/tidb-cloud/release-notes-2022.md)
