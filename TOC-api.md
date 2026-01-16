@@ -3,13 +3,13 @@
 
 # Table of Contents
 
-## TIDB CLOUD API ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+## TIDB CLOUD
 
-- [Overview](/api/tidb-cloud-api-overview.md)
-- [v1beta1](/api/tidb-cloud-api-v1beta1.md)
-- [v1beta](/api/tidb-cloud-api-v1beta.md)
+- [API Overview](/api/tidb-cloud-api-overview.md)
+- [API v1beta1](/api/tidb-cloud-api-v1beta1.md)
+- [API v1beta](/api/tidb-cloud-api-v1beta.md)
 
-## TIDB SELF-MANAGED API
+## TIDB SELF-MANAGED
 
 - [TiProxy API](/api/tiproxy-api-overview.md)
 - [Data Migration API](/api/dm-api-overview.md)
