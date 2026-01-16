@@ -33,9 +33,9 @@ Ensure that your {{{ .essential }}} cluster can connect to the Apache Kafka serv
 
 Private link connections leverage **Private Link** technologies from cloud providers to enable resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly within your VPC.
 
-{{{ .essential }}} currently supports Private Link Connection only for self-hosted Kafka and Confluent Cloud Dedicated Clusters. It does not support direct integration with MSK, or other Kafka SaaS services.
+{{{ .essential }}} currently supports Private Link connections only for self-hosted Kafka and Confluent Cloud Dedicated clusters. It does not support direct integration with MSK or other Kafka SaaS services.
 
-See the following instructions to set up a Private Link connection according to your Kafka deployment and cloud provider:
+To set up a Private Link connection based on your Kafka deployment and cloud provider, see the following guides:
 
 - [Connect to Confluent Cloud on AWS via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
 - [Connect to AWS Self-Hosted Kafka via Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
@@ -64,7 +64,7 @@ For example, if your Kafka cluster is in Confluent Cloud, refer to [Resources](h
 ## Step 1. Open the Changefeed page for Apache Kafka
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Navigate to the overview page of the target TiDB Cloud cluster, and then click **Data** > **Changefeed** in the left navigation pane.
+2. Navigate to the overview page of the target {{{ .essential }}} cluster, and then click **Data** > **Changefeed** in the left navigation pane.
 3. Click **Create Changefeed**, and then select **Kafka** as **Destination**.
 
 ## Step 2. Configure the changefeed target
@@ -80,7 +80,7 @@ The steps vary depending on the connectivity method you select.
     - If your Kafka does not require authentication, keep the default option **Disable**.
     - If your Kafka requires authentication, select the corresponding authentication type, and then fill in the **user name** and **password** of your Kafka account for authentication.
 
-3. Select your **Kafka Version**. Choose **Kafka v2** or **Kafka v3** according to the version of your Kafka.
+3. For **Kafka Version**, select **Kafka v2** or **Kafka v3** based on your Kafka version.
 4. Select a **Compression** type for the data in this changefeed.
 5. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
 6. Click **Next** to test the network connection. If the test succeeds, you will be directed to the next page.
@@ -96,10 +96,10 @@ The steps vary depending on the connectivity method you select.
     - If your Kafka does not require authentication, keep the default option **Disable**.
     - If your Kafka requires authentication, select the corresponding authentication type, and then fill in the **user name** and **password** of your Kafka account for authentication.
 
-5. Select your **Kafka Version**. Choose **Kafka v2** or **Kafka v3** according to the version of your Kafka.
+5. For **Kafka Version**, select **Kafka v2** or **Kafka v3** based on your Kafka version.
 6. Select a **Compression** type for the data in this changefeed.
 7. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
-8. Input the **TLS Server Name** if your Kafka requires TLS SNI verification. For example, `Confluent Cloud Dedicated clusters`.
+8. If your Kafka requires TLS SNI verification, enter the **TLS Server Name**. For example, `Confluent Cloud Dedicated clusters`.
 9. Click **Next** to test the network connection. If the test succeeds, you will be directed to the next page.
 
 </div>
@@ -141,7 +141,7 @@ The steps vary depending on the connectivity method you select.
 6. If you select **Avro** as your data format, you will see some Avro-specific configurations on the page. You can fill in these configurations as follows:
 
     - In the **Decimal** and **Unsigned BigInt** configurations, specify how TiDB Cloud handles the decimal and unsigned bigint data types in Kafka messages.
-    - In the **Schema Registry** area, fill in your schema registry endpoint. If you enable **HTTP Authentication**, the fields for user name and password are displayed to fill in.
+    - In the **Schema Registry** area, fill in your schema registry endpoint. If you enable **HTTP Authentication**, enter the user name and password.
 
 7. In the **Topic Distribution** area, select a distribution mode, and then fill in the topic name configurations according to the mode.
 
@@ -195,5 +195,5 @@ The steps vary depending on the connectivity method you select.
 ## Step 4. Review and create your changefeed
 
 1. In the **Changefeed Name** area, specify a name for the changefeed.
-2. Review all the changefeed configurations that you set. Click **Previous** to go back to the previous configuration pages if you want to modify some configurations. 
+2. Review all the changefeed configurations that you set. Click **Previous** to make changes if necessary.
 3. If all configurations are correct, click **Submit** to create the changefeed.

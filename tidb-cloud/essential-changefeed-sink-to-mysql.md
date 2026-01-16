@@ -62,9 +62,9 @@ To load the existing data:
     SET GLOBAL tidb_gc_life_time = '72h';
     ```
 
-2. Use [Export](/tidb-cloud/serverless-export.md) to export data from your {{{ .essential }}} cluster, then use community tools such as [mydumper/myloader](https://centminmod.com/mydumper.html) to load data to the MySQL service.
+2. Use the [Export](/tidb-cloud/serverless-export.md) feature to export data from your {{{ .essential }}} cluster, then use community tools such as [mydumper/myloader](https://centminmod.com/mydumper.html) to load the data into the MySQL service.
 
-3. Use the snapshot time of [Export](/tidb-cloud/serverless-export.md) as the start position of MySQL sink.
+3. Record the snapshot time returned by [Export](/tidb-cloud/serverless-export.md). Use this timestamp as the starting position when you configure the MySQL sink.
 
 ### Create target tables in MySQL
 
@@ -105,20 +105,22 @@ After completing the prerequisites, you can sink your data to MySQL.
 
 8. In **Start Replication Position**, configure the starting position for your MySQL sink.
 
-    - If you have [loaded the existing data](#load-existing-data-optional) using Export, select **From Time** and fill in the snapshot time that you get from Export. Pay attention to the time zone.
+    - If you have [loaded the existing data](#load-existing-data-optional) using Export, select **From Time** and fill in the snapshot time returned by Export. Ensure that the time zone is correct.
     - If you do not have any data in the upstream TiDB cluster, select **Start replication from now on**.
 
 9. Click **Next** to configure your changefeed.
 
-    - In the **Changefeed Name** area, specify a name for the changefeed.
+    In the **Changefeed Name** area, specify a name for the changefeed.
 
-10. If you confirm that all configurations are correct, click **Submit**. If you want to modify some configurations, click **Previous** to go back to the previous configuration page.
+10. Review the configuration. If all settings are correct, click **Submit**.
 
-11. The sink starts soon, and you can see the sink status change from **Creating** to **Running**.
+    If you want to modify some configurations, click **Previous** to go back to the previous configuration page.
+
+11. After creation, the sink status changes from **Creating** to **Running**.
 
     Click the changefeed name, and you can see more details about the changefeed, such as the checkpoint, replication latency, and other metrics.
 
-12. If you have [loaded the existing data](#load-existing-data-optional) using Export, you need to restore the GC time to its original value (the default value is `10m`) after the sink is created:
+12. If you have [loaded the existing data](#load-existing-data-optional) and increased the GC time, restore it to its original value (the default value is `10m`) after the sink is created:
 
     ```sql
     SET GLOBAL tidb_gc_life_time = '10m';
