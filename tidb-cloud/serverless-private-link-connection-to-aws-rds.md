@@ -66,7 +66,7 @@ To set up the load balancer in the same region as your RDS, take the following s
     - **VPC**: select the VPC where your RDS is located.
     - **Register targets**: register the IP addresses of your Amazon RDS instance. You can ping the RDS endpoint to get the IP address.
  
-  For more information, see [Create a target group for your Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-target-group.html).
+    For more information, see [Create a target group for your Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-target-group.html).
 
 2. Go to [Load balancers](https://console.aws.amazon.com/ec2/home#LoadBalancers) to create a network load balancer. Provide the following information:
 
