@@ -18,8 +18,8 @@ The changefeed feature is available in the following regions:
 
 | Cloud provider | Supported regions |
 | --- | --- |
-| AWS          | `us-east-1`<br>`ap-southeast-1` |
-| Alibaba Cloud | `ap-southeast-1`<br>`cn-hongkong`<br>`ap-southeast-5` |
+| AWS          | <ul><li>`us-east-1`</li><li>`ap-southeast-1`</li></ul> |
+| Alibaba Cloud | <ul><li>`ap-southeast-1`</li><li>`cn-hongkong`</li><li>`ap-southeast-5`</li></ul> |
 
 Additional regions will be supported in the future. For immediate support in a specific region, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
