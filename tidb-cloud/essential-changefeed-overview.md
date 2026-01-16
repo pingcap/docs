@@ -59,8 +59,10 @@ You can view a changefeed using the TiDB Cloud console or the TiDB Cloud CLI.
 
 <div label="CLI">
 
-```
-ticloud serverless changefeed get -c <cluster-id> --changefeed-id <changefeed-id>
+Run the following command:
+
+```bash
+ticloud serverless changefeed get --cluster-id <cluster-id> --changefeed-id <changefeed-id>
 ```
 
 </div>
@@ -74,16 +76,16 @@ You can pause or resume a changefeed using the TiDB Cloud console or the TiDB Cl
 <div label="Console">
 
 1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
-2. Locate the corresponding changefeed you want to pause or resume. In the **Action** column, click **...** > **Pause/Resume**.
+2. Locate the corresponding changefeed you want to pause or resume, and click **...** > **Pause/Resume** in the **Action** column.
 
 </div>
 
 <div label="CLI">
 
-To pause a changefeed:
+To pause a changefeed, run the following command:
 
-```
-ticloud serverless changefeed pause -c <cluster-id> --changefeed-id <changefeed-id>
+```bash
+ticloud serverless changefeed pause --cluster-id <cluster-id> --changefeed-id <changefeed-id>
 ```
 
 To resume a changefeed:
@@ -99,7 +101,7 @@ ticloud serverless changefeed resume -c <cluster-id> --changefeed-id <changefeed
 
 > **Note:**
 >
-> TiDB Cloud currently only allows editing changefeeds that are in the `Paused` state.
+> TiDB Cloud currently only allows editing changefeeds in the paused status.
 
 You can edit a changefeed using the TiDB Cloud console or the TiDB Cloud CLI.
 
@@ -107,12 +109,12 @@ You can edit a changefeed using the TiDB Cloud console or the TiDB Cloud CLI.
 <div label="Console">
 
 1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
-2. Locate the changefeed you want to pause. In the **Action** column, click **...** > **Pause**.
+2. Locate the changefeed you want to pause, and click **...** > **Pause** in the **Action** column.
 3. When the changefeed status changes to `Paused`, click **...** > **Edit** to edit the corresponding changefeed.
 
     TiDB Cloud populates the changefeed configuration by default. You can modify the following configurations:
 
-    - Apache Kafka sink: all configurations except **Destination**, **Connection** and **Start Position**
+    - Apache Kafka sink: all configurations except **Destination**, **Connection**, and **Start Position**
     - MySQL sink: all configurations except **Destination**, **Connection** and **Start Position**
 
 4. After editing the configuration, click **...** > **Resume** to resume the corresponding changefeed.
@@ -121,16 +123,16 @@ You can edit a changefeed using the TiDB Cloud console or the TiDB Cloud CLI.
 
 <div label="CLI">
 
-Edit a changefeed with Apache Kafka sink:
+Edit a changefeed with an Apache Kafka sink:
 
-```
-ticloud serverless changefeed edit -c <cluster-id> --changefeed-id <changefeed-id> --name <new-displayName> --kafka <full-specified-kafka> --filter <full-specified-filter>
+```bash
+ticloud serverless changefeed edit --cluster-id <cluster-id> --changefeed-id <changefeed-id> --name <new-displayName> --kafka <full-specified-kafka> --filter <full-specified-filter>
 ```
 
-Edit a changefeed with MySQL sink:
+Edit a changefeed with a MySQL sink:
 
-```
-ticloud serverless changefeed edit -c <cluster-id> --changefeed-id <changefeed-id> --name <new-displayName> --mysql <full-specified-mysql> --filter <full-specified-filter>
+```bash
+ticloud serverless changefeed edit --cluster-id <cluster-id> --changefeed-id <changefeed-id> --name <new-displayName> --mysql <full-specified-mysql> --filter <full-specified-filter>
 ```
 
 </div>
@@ -151,14 +153,16 @@ You can delete a changefeed using the TiDB Cloud console or the TiDB Cloud CLI.
 <div label="Console">
 
 1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
-2. Locate the corresponding changefeed you want to delete, and click **...** > **Delete** in the **Action** column.
+2. Locate the changefeed you want to delete, and click **...** > **Delete** in the **Action** column.
 
 </div>
 
 <div label="CLI">
 
-```
-ticloud serverless changefeed delete -c <cluster-id> --changefeed-id <changefeed-id>
+Run the following command:
+
+```bash
+ticloud serverless changefeed delete --cluster-id <cluster-id> --changefeed-id <changefeed-id>
 ```
 
 </div>
@@ -166,7 +170,7 @@ ticloud serverless changefeed delete -c <cluster-id> --changefeed-id <changefeed
 
 ## Changefeed billing
 
-Currently changefeed is free of charge during the beta phase.
+Changefeeds are free of charge during the beta phase.
 
 ## Changefeed states
 
