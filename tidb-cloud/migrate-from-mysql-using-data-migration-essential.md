@@ -11,6 +11,10 @@ This feature enables you to migrate your existing MySQL data and continuously re
 
 If you only want to replicate ongoing binlog changes from your MySQL-compatible database to {{{ .essential }}}, see [Migrate Incremental Data from MySQL-Compatible Databases to {{{ .essential }}} Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration-essential.md).
 
+> **Note**
+>
+> Currently, this feature is in public preview.
+ 
 ## Limitations
 
 ### Availability
