@@ -32,7 +32,7 @@ You can create an AWS Endpoint Service private link connection using the TiDB Cl
 Ensure that the AWS endpoint service:
 
 - Resides in the same region as your TiDB Cloud cluster.
-- Add the TiDB Cloud account ID to the **Allowed principals** list.
+- Add the TiDB Cloud account ID to the **Allow principals** list.
 - Has availability zones that overlap with your TiDB Cloud cluster.
 
 You can get the account ID and availability zones information at the bottom of the **Create Private Link Connection** dialog, or by running the following command:
@@ -171,7 +171,7 @@ To attach domains to a private link connection using the TiDB Cloud console, do 
 
 5. In the **Attach Domains** dialog, choose the domain type:
 
-    - **TiDB Cloud Managed**: the domains will be generated automatically by TiDB Cloud. Click **Attach Domains** to confirm.
+    - **TiDB Cloud Managed**: the domains will be generated automatically by TiDB Cloud. In the name of a generated domain, you can get the unique name for the domain. For example, if a generated domain is `*.use1-az1.dvs6nl5jgveztmla3pxkxgh76i.aws.plc.tidbcloud.com`, then the unique name is `dvs6nl5jgveztmla3pxkxgh76i`. Click **Attach Domains** to confirm.
     - **Confluent Cloud**: enter the unique name provided by the Confluent Cloud Dedicated cluster to generate the domains, and then click **Attach Domains** to confirm. Refer to [Connect to Confluent Cloud via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md#step-1-set-up-a-confluent-cloud-network) for more information about how to get the unique name.
 
 </div>
@@ -280,10 +280,7 @@ ticloud serverless private-link-connection delete -c <cluster-id> --private-link
 ## See also
 
 - [Connect to Confluent Cloud via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
-
-<!--
 - [Connect to Amazon RDS via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md)
-- [Connect to Alibaba Cloud ApsaraDB RDS for MySQL via a Private Link Connection ](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md)
+- [Connect to Alibaba Cloud ApsaraDB RDS for MySQL via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md)
 - [Connect to AWS Self-Hosted Kafka via Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
 - [Connect to Alibaba Cloud Self-Hosted Kafka via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
--->
