@@ -100,8 +100,8 @@ Go to the [ECS console](https://ecs.console.alibabacloud.com/home#/). Create the
 
 - **Network and Zone**: `Kafka VPC` and `bastion` vSwitch.
 - **Instance and Image**: `ecs.t5-lc1m2.small` instance type and `Alibaba Cloud Linux` image.
-- **Network and Security Groups**: check `Assign Public IPv4 Address`.
-- **Key pair**: `kafka-vpc-key-pair`. Create a new key pair named `kafka-vpc-key-pair`. Download **kafka-vpc-key-pair.pem** to your local machine for later configuration.
+- **Network and Security Groups**: select `Assign Public IPv4 Address`.
+- **Key pair**: `kafka-vpc-key-pair`. Create a new key pair named `kafka-vpc-key-pair`. Download `kafka-vpc-key-pair.pem` to your local machine for later configuration.
 - **Security Group**: create a new security group to allow SSH login from anywhere. You can narrow the rule for safety in the production environment.
 - **Instance Name**: `bastion-node`.
 

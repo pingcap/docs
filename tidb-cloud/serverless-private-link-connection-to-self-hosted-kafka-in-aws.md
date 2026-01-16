@@ -146,7 +146,7 @@ Go to the [EC2 Listing page](https://console.aws.amazon.com/ec2/home#Instances:)
 - **Name**: `bastion-node`
 - **Amazon Machine Image**: `Amazon Linux`
 - **Instance Type**: `t2.small`
-- **Key pair**: `kafka-vpc-key-pair`. Create a new key pair named `kafka-vpc-key-pair`. Download **kafka-vpc-key-pair.pem** to your local machine for later configuration.
+- **Key pair**: `kafka-vpc-key-pair`. Create a new key pair named `kafka-vpc-key-pair`. Download `kafka-vpc-key-pair.pem` to your local machine for later configuration.
 - Network settings
 
     - **VPC**: `Kafka VPC`
