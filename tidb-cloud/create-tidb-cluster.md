@@ -79,7 +79,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
 6. Click **Create**.
 
-    Your TiDB Cloud cluster will be created in approximately 20 to 30 minutes. Once the creation is complete, the TiDB Cloud console sends a notification.
+    Your TiDB Cloud cluster will be created in approximately 20 to 30 minutes. You will receive a notification from the TiDB Cloud console when the creation is complete.
 
     > **Note:**
     >
