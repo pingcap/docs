@@ -1113,6 +1113,7 @@
   - [Release Support Policy](https://www.pingcap.com/tidb-release-support-policy/)
   - [TiDB Installation Packages](/binary-package.md)
   - v8.5
+    - [8.5.5](/releases/release-8.5.5.md)
     - [8.5.4](/releases/release-8.5.4.md)
     - [8.5.3](/releases/release-8.5.3.md)
     - [8.5.2](/releases/release-8.5.2.md)
