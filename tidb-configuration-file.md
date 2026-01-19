@@ -157,7 +157,13 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Sets the maximum allowable length of the newly created index.
 - Default value: `3072`
 - Unit: byte
-- Currently, the valid value range is `[3072, 3072*4]`. MySQL and TiDB (version < v3.0.11) do not have this configuration item, but both limit the length of the newly created index. This limit in MySQL is `3072`. In TiDB (version =< 3.0.7), this limit is `3072*4`. In TiDB (3.0.7 < version < 3.0.11), this limit is `3072`. This configuration is added to be compatible with MySQL and earlier versions of TiDB.
+- Range: `[3072, 3072*4]` 
+- Compatibility:
+    - MySQL: the maximum index length is fixed at 3072 bytes.
+    - Earlier versions of TiDB:
+        - v3.0.7 and earlier: the maximum index length is fixed at 3072 × 4 bytes.
+        - v3.0.8 ~ v3.0.10: the maximum index length is fixed at 3072 bytes.
+    - v3.0.11 and later versions: introduces the `max-index-length` configuration item to ensure compatibility with different TiDB versions and with MySQL.  
 
 ### `table-column-count-limit` <span class="version-mark">New in v5.0</span>
 
@@ -610,6 +616,10 @@ Configuration items related to performance.
 
 ### `concurrently-init-stats` <span class="version-mark">New in v8.1.0 and v7.5.2</span>
 
+> **Warning:**
+>
+> Starting from v9.0.0, the `concurrently-init-stats` configuration item is deprecated and TiDB always initializes statistics concurrently during startup.
+
 + Controls whether to initialize statistics concurrently during TiDB startup. This configuration item takes effect only when [`lite-init-stats`](#lite-init-stats-new-in-v710) is set to `false`.
 + Default value: `false` for versions earlier than v8.2.0, `true` for v8.2.0 and later versions.
 
@@ -626,6 +636,11 @@ Configuration items related to performance.
 + Default value: `false` for versions earlier than v7.2.0, `true` for v7.2.0 and later versions.
 + When the value of `force-init-stats` is `true`, TiDB needs to wait until statistics initialization is finished before providing services upon startup. Note that if there are a large number of tables and partitions and the value of [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) is `false`, setting `force-init-stats` to `true` might prolong the time it takes for TiDB to start providing services.
 + When the value of `force-init-stats` is `false`, TiDB can still provide services before statistics initialization is finished, but the optimizer uses pseudo statistics to make decisions, which might result in suboptimal execution plans.
+
+### `enable-async-batch-get` <span class="version-mark">New in v8.5.5 and v9.0.0</span>
+
++ Controls whether TiDB uses asynchronous mode to execute the Batch Get operator. Using asynchronous mode can reduce goroutine overhead and provide better performance. Generally, there is no need to modify this configuration item.
++ Default value: `true` for v9.0.0 and later versions. In v8.5.5, the default value is `false`.
 
 ## opentracing
 

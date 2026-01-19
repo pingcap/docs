@@ -25,11 +25,10 @@ ShowLikeOrWhere ::=
 
 ## Examples
 
-<CustomContent platform="tidb">
+When the [new collation framework](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#new_collations_enabled_on_first_bootstrap) is enabled, in addition to the binary collations, TiDB also supports the following collations:
 
-When [the new collation framework](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) is enabled (the default), the example output is as follows:
-
-</CustomContent>
+- Seven case- and accent-insensitive collations, ending with `_ci`
+- `utf8mb4_0900_bin`
 
 ```sql
 SHOW COLLATION;
@@ -41,6 +40,8 @@ SHOW COLLATION;
 +--------------------+---------+-----+---------+----------+---------+---------------+
 | ascii_bin          | ascii   |  65 | Yes     | Yes      |       1 | PAD SPACE     |
 | binary             | binary  |  63 | Yes     | Yes      |       1 | NO PAD        |
+| gb18030_bin        | gb18030 | 249 |         | Yes      |       1 | PAD SPACE     |
+| gb18030_chinese_ci | gb18030 | 248 | Yes     | Yes      |       1 | PAD SPACE     |
 | gbk_bin            | gbk     |  87 |         | Yes      |       1 | PAD SPACE     |
 | gbk_chinese_ci     | gbk     |  28 | Yes     | Yes      |       1 | PAD SPACE     |
 | latin1_bin         | latin1  |  47 | Yes     | Yes      |       1 | PAD SPACE     |
@@ -53,32 +54,29 @@ SHOW COLLATION;
 | utf8mb4_general_ci | utf8mb4 |  45 |         | Yes      |       1 | PAD SPACE     |
 | utf8mb4_unicode_ci | utf8mb4 | 224 |         | Yes      |       8 | PAD SPACE     |
 +--------------------+---------+-----+---------+----------+---------+---------------+
-13 rows in set (0.00 sec)
+15 rows in set (0.000 sec)
 ```
 
-<CustomContent platform="tidb">
-
-When the new collation framework is disabled, only binary collations are listed.
+If [the new collation framework](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#new_collations_enabled_on_first_bootstrap) is disabled, TiDB supports only binary collations.
 
 ```sql
 SHOW COLLATION;
 ```
 
 ```
-+-------------+---------+----+---------+----------+---------+---------------+
-| Collation   | Charset | Id | Default | Compiled | Sortlen | Pad_attribute |
-+-------------+---------+----+---------+----------+---------+---------------+
-| utf8mb4_bin | utf8mb4 | 46 | Yes     | Yes      |       1 | PAD SPACE     |
-| latin1_bin  | latin1  | 47 | Yes     | Yes      |       1 | PAD SPACE     |
-| binary      | binary  | 63 | Yes     | Yes      |       1 | NO PAD        |
-| ascii_bin   | ascii   | 65 | Yes     | Yes      |       1 | PAD SPACE     |
-| utf8_bin    | utf8    | 83 | Yes     | Yes      |       1 | PAD SPACE     |
-| gbk_bin     | gbk     | 87 | Yes     | Yes      |       1 | PAD SPACE     |
-+-------------+---------+----+---------+----------+---------+---------------+
-6 rows in set (0.00 sec)
++-------------+---------+-----+---------+----------+---------+---------------+
+| Collation   | Charset | Id  | Default | Compiled | Sortlen | Pad_attribute |
++-------------+---------+-----+---------+----------+---------+---------------+
+| utf8mb4_bin | utf8mb4 |  46 | Yes     | Yes      |       1 | PAD SPACE     |
+| latin1_bin  | latin1  |  47 | Yes     | Yes      |       1 | PAD SPACE     |
+| binary      | binary  |  63 | Yes     | Yes      |       1 | NO PAD        |
+| ascii_bin   | ascii   |  65 | Yes     | Yes      |       1 | PAD SPACE     |
+| utf8_bin    | utf8    |  83 | Yes     | Yes      |       1 | PAD SPACE     |
+| gbk_bin     | gbk     |  87 | Yes     | Yes      |       1 | PAD SPACE     |
+| gb18030_bin | gb18030 | 249 | Yes     | Yes      |       1 | PAD SPACE     |
++-------------+---------+-----+---------+----------+---------+---------------+
+7 rows in set (0.00 sec)
 ```
-
-</CustomContent>
 
 To filter on the character set, you can add a `WHERE` clause.
 

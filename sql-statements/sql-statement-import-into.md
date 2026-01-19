@@ -84,7 +84,7 @@ SetItem ::=
     ColumnName '=' Expr
 
 Format ::=
-    'CSV' | 'SQL' | 'PARQUET'
+    'FORMAT' ('"CSV"' | '"SQL"' | '"PARQUET"')
 
 WithOptions ::=
     'WITH' OptionItem (',' OptionItem)*
@@ -110,11 +110,11 @@ In the left side of the `SET` expression, you can only reference a column name t
 
 ### fileLocation
 
-It specifies the storage location of the data file, which can be an Amazon S3 or GCS URI path, or a TiDB local file path.
+It specifies where your data files are located and which files to import. You can specify a single file or use wildcards to match multiple files.
 
-- Amazon S3 or GCS URI path: for URI configuration details, see [URI Formats of External Storage Services](/external-storage-uri.md).
+- Cloud storage (Amazon S3 or GCS): provide the full object storage URI, formatted as described in [URI Formats of External Storage Services](/external-storage-uri.md).
 
-- TiDB local file path: it must be an absolute path, and the file extension must be `.csv`, `.sql`, or `.parquet`. Make sure that the files corresponding to this path are stored on the TiDB node connected by the current user, and the user has the `FILE` privilege.
+- TiDB local file path: the path must be absolute, and the file extension must be `.csv`, `.sql`, or `.parquet`. Ensure that the specified path and files exist on the TiDB node to which your session is connected, and verify that you have the required `FILE` privilege.
 
 > **Note:**
 >
@@ -127,11 +127,17 @@ In the `fileLocation` parameter, you can specify a single file, or use the `*` a
 - Import all files with the `.csv` suffix in a specified path: `s3://<bucket-name>/path/to/data/*.csv`
 - Import all files with the `foo` prefix in a specified path: `s3://<bucket-name>/path/to/data/foo*`
 - Import all files with the `foo` prefix and the `.csv` suffix in a specified path: `s3://<bucket-name>/path/to/data/foo*.csv`
-- Import `1.csv` and `2.csv` in a specified path: `s3://<bucket-name>/path/to/data/[12].csv`
+- Import `1.csv` and `2.csv` in a specified path: `s3://<bucket-name>/path/to/data/[12].csv`. This is useful for importing a specific, non-sequential set of files.
+- Import `1.csv`, `2.csv`, and `3.csv` using a range: `s3://<bucket-name>/path/to/data/[1-3].csv`
+- Import files with a single character name, using `^` for negation. For example, excluding `1.csv` or `2.csv`: `s3://<bucket-name>/path/to/data/[^12].csv`.
+
+> **Note:**
+>
+> Use only one file format per import job. If a wildcard matches files with different extensions (for example, `.csv` and `.sql` in the same pattern), the pre-check fails. Import files of each format separately using their own `IMPORT INTO` statement.
 
 ### Format
 
-The `IMPORT INTO` statement supports three data file formats: `CSV`, `SQL`, and `PARQUET`. If not specified, the default format is `CSV`.
+The `IMPORT INTO` statement supports three data file formats: `CSV`, `SQL`, and `PARQUET`. If the `FORMAT` clause is omitted, TiDB automatically detects the format based on the file extension (`.csv`, `.sql`, `.parquet`). Compressed files are supported, and the compression suffix (`.gz`, `.gzip`, `.zstd`, `.zst`, `.snappy`) is ignored during format detection. If a file does not have an extension, TiDB assumes that the file format is `CSV`.
 
 ### WithOptions
 
@@ -158,9 +164,17 @@ The supported options are described as follows:
 | `CLOUD_STORAGE_URI` | All file formats | Specifies the target address where encoded KV data for [Global Sort](/tidb-global-sort.md) is stored. When `CLOUD_STORAGE_URI` is not specified, `IMPORT INTO` determines whether to use Global Sort based on the value of the system variable [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740). If this system variable specifies a target storage address, `IMPORT INTO` uses this address for Global Sort. When `CLOUD_STORAGE_URI` is specified with a non-empty value, `IMPORT INTO` uses that value as the target storage address. When `CLOUD_STORAGE_URI` is specified with an empty value, local sorting is enforced. Currently, the target storage address only supports S3. For details about the URI configuration, see [Amazon S3 URI format](/external-storage-uri.md#amazon-s3-uri-format). When this feature is used, all TiDB nodes must have read and write access for the target S3 bucket, including at least these permissions: `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, `s3:PutObject`, `s3: AbortMultipartUpload`. |
 | `DISABLE_PRECHECK` | All file formats and query results of `SELECT` | Setting this option disables pre-checks of non-critical items, such as checking whether there are CDC or PITR tasks.  |
 
+<CustomContent platform="tidb-cloud" plan="premium">
+
+> **Note:**
+>
+> For {{{ .premium }}}, the following four options — `DISK_QUOTA`, `THREAD`, `MAX_WRITE_SPEED`, and `CLOUD_STORAGE_URI` — are automatically tuned to appropriate values and cannot be modified by users. If you need to adjust these settings, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+</CustomContent>
+
 ## `IMPORT INTO ... FROM FILE` usage
 
-For TiDB Self-Managed, `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage. For [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3 and GCS. For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3 and Alibaba Cloud OSS.
+For TiDB Self-Managed, `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage. For [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3 and GCS. For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3 and Alibaba Cloud OSS.
 
 - For data files stored in Amazon S3 or GCS, `IMPORT INTO ... FROM FILE` supports running in the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md).
 
@@ -183,12 +197,13 @@ For TiDB Self-Managed, `IMPORT INTO ... FROM FILE` supports importing data from 
 >
 > - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
 > - Because TiDB Lightning cannot concurrently decompress a single large compressed file, the size of the compressed file affects the import speed. It is recommended that a source file is no greater than 256 MiB after decompression.
+> - When the `FORMAT` clause is omitted, TiDB first removes one compression suffix from the file name, then inspects the remaining extension to determine whether the file is  `CSV` or `SQL`.
 
 ### Global Sort
 
 > **Note:**
 >
-> Global Sort is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
+> Global Sort is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 `IMPORT INTO ... FROM FILE` splits the data import job of a source data file into multiple sub-jobs, each sub-job independently encoding and sorting data before importing. If the encoded KV ranges of these sub-jobs have significant overlap (to learn how TiDB encodes data to KV, see [TiDB computing](/tidb-computing.md)), TiKV needs to keep compaction during import, leading to a decrease in import performance and stability.
 

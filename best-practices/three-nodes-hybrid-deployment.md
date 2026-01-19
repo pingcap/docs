@@ -61,7 +61,7 @@ The default value of this parameter is 80% of the number of machine threads. In 
 
 #### `server.grpc-concurrency`
 
-This parameter defaults to `4`. Because in the existing deployment plan, the CPU resources are limited and the actual requests are few. You can observe the monitoring panel, lower the value of this parameter, and keep the usage rate below 80%.
+Because in the existing deployment plan, the CPU resources are limited and the actual requests are few. You can observe the monitoring panel, lower the value of [`server.grpc-concurrency`](/tikv-configuration-file.md#grpc-concurrency), and keep the usage rate below 80%.
 
 In this test, the value of this parameter is set to `2`. Observe the **gRPC poll CPU** panel and you can see that the usage rate is just around 80%.
 

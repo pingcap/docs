@@ -86,12 +86,6 @@ TiDB is highly compatible with the MySQL protocol and the common features and sy
 
 </DocHomeCard>
 
-<DocHomeCard href="/tidb/dev/tidb-roadmap" label="TiDB Self-Managed Roadmap" icon="oss-roadmap-blue">
-
-Planned features and release dates for TiDB Self-Managed.
-
-</DocHomeCard>
-
 </DocHomeCardContainer>
 
 The open-source TiDB platform is released under the Apache 2.0 license and is supported by the community. [View on GitHub](https://github.com/pingcap/tidb)

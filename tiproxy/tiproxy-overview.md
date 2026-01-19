@@ -69,7 +69,7 @@ This section describes how to deploy and change TiProxy using TiUP. You can eith
 
 For other deployment methods, refer to the following documents:
 
-- To deploy TiProxy using TiDB Operator, see the [TiDB Operator](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-tiproxy) documentation.
+- To deploy TiProxy using TiDB Operator, see the [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tiproxy) documentation.
 - To quickly deploy TiProxy locally using TiUP, see [Deploy TiProxy](/tiup/tiup-playground.md#deploy-tiproxy).
 
 ### Create a cluster with TiProxy
@@ -106,7 +106,7 @@ The following steps describe how to deploy TiProxy when creating a new cluster.
 
     ```yaml
     component_versions:
-      tiproxy: "v1.2.0"
+      tiproxy: "v1.3.2"
     server_configs:
       tiproxy:
         ha.virtual-ip: "10.0.1.10/24"
@@ -138,7 +138,7 @@ For clusters that do not have TiProxy deployed, you can enable TiProxy by scalin
 
     ```yaml
     component_versions:
-      tiproxy: "v1.2.0"
+      tiproxy: "v1.3.2"
     server_configs:
       tiproxy:
         ha.virtual-ip: "10.0.1.10/24"

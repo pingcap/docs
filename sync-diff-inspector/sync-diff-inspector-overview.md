@@ -63,6 +63,7 @@ To access table schemas and query data, sync-diff-inspector requires specific da
 
 - `SELECT`: required to compare data.
 - `RELOAD`: required to view table schemas.
+- `PROCESS`: required when both the upstream and downstream are TiDB clusters. It is used to query the `INFORMATION_SCHEMA.CLUSTER_INFO` table.
 
 > **Note**:
 > 

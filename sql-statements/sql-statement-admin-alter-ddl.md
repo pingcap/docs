@@ -7,7 +7,7 @@ summary: An overview of the usage of `ADMIN ALTER DDL JOBS` for the TiDB databas
 
 > **Note:**
 >
-> Currently, this feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
+> Currently, this feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 The `ADMIN ALTER DDL JOBS` statement allows you to modify the parameter of a single running DDL job. For example:
 
@@ -29,7 +29,13 @@ The following are the supported parameters for different DDL jobs and their corr
     - `BATCH_SIZE`: the batch size. The initial value is set by [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size).
     - `MAX_WRITE_SPEED`: the maximum bandwidth limit for importing index records into each TiKV. The initial value is set by [`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850).
 
-  Currently, the preceding parameters only work for `ADD INDEX` jobs that are submitted and running after [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) is disabled.
+<CustomContent platform="tidb-cloud" plan="premium">
+
+> **Note:**
+>
+> For {{{ .premium }}}, both `THREAD` and `MAX_WRITE_SPEED` are automatically tuned to appropriate values and cannot be modified by users. If you need to adjust these settings, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+</CustomContent>
 
 - `MODIFY COLUMN`:
     - `THREAD`: the concurrency of the DDL job. The initial value is set by `tidb_ddl_reorg_worker_cnt`.

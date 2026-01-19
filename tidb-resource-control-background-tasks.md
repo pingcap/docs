@@ -13,7 +13,7 @@ summary: Introduces how to control background tasks through Resource Control.
 
 > **Note:**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 Background tasks, such as data backup and automatic statistics collection, are low-priority but consume many resources. These tasks are usually triggered periodically or irregularly. During execution, they consume a lot of resources, thus affecting the performance of online high-priority tasks.
 
@@ -28,7 +28,7 @@ TiDB supports the following types of background tasks:
 
 <CustomContent platform="tidb">
 
-- `lightning`: perform import tasks using [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md). Both physical and logical import modes of TiDB Lightning are supported.
+- `lightning`: perform import tasks using [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) or [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md). Both TiDB Lightning physical and logical import modes are supported.
 - `br`: perform backup and restore tasks using [BR](/br/backup-and-restore-overview.md). PITR is not supported.
 - `ddl`: control the resource usage during the batch data write back phase of Reorg DDLs.
 - `stats`: the [collect statistics](/statistics.md#collect-statistics) tasks that are manually executed or automatically triggered by TiDB.
@@ -81,11 +81,11 @@ By default, the task types that are marked as background tasks are `""`, and the
     The output is as follows:
 
     ```
-    +---------+------------+----------+-----------+-------------+-------------------------------------------+
-    | NAME    | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT | BACKGROUND                                |
-    +---------+------------+----------+-----------+-------------+-------------------------------------------+
-    | default | UNLIMITED  | MEDIUM   | YES       | NULL        | TASK_TYPES='br,ddl', UTILIZATION_LIMIT=30 |
-    +---------+------------+----------+-----------+-------------+-------------------------------------------+
+    +---------+------------+----------+-----------------+-------------+-------------------------------------------+
+    | NAME    | RU_PER_SEC | PRIORITY | BURSTABLE       | QUERY_LIMIT | BACKGROUND                                |
+    +---------+------------+----------+-----------------+-------------+-------------------------------------------+
+    | default | UNLIMITED  | MEDIUM   | UNLIMITED       | NULL        | TASK_TYPES='br,ddl', UTILIZATION_LIMIT=30 |
+    +---------+------------+----------+-----------------+-------------+-------------------------------------------+
     ```
 
 5. To explicitly mark tasks in the current session as the background type, you can use `tidb_request_source_type` to explicitly specify the task type. The following is an example:
