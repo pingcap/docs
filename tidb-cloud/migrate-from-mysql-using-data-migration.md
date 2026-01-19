@@ -517,7 +517,7 @@ On the **Create Migration Job** page, configure the source and target connection
         <CustomContent plan="essential">
 
         - If **Public IP** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
-        - If **Private Link** is selected, select the private link connection that you created in the [Private Link Connections](/tidb-cloud/serverless-private-link-connection.md) section.
+        - If **Private Link** is selected, select the private link connection that you created in the [Private link or private endpoint](#private-link-or-private-endpoint) section.
 
         </CustomContent>
 
