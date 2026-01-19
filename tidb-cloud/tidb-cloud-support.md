@@ -1,9 +1,9 @@
 ---
-title: Working with Support Team
+title: Work with the Support Team
 summary: Learn how to contact the support team of TiDB Cloud.
 ---
 
-# Working with Support Team
+# Work with the Support Team
 
 TiDB Cloud offers tiered support plan offerings tailored to meet customers' needs. This document describes how to send support requests through the PingCAP Help Center portal. If you are looking for more information about our support offerings, see [Connected Care Details](/tidb-cloud/connected-care-detail.md).
 
@@ -46,7 +46,7 @@ To create a support ticket about technical issues, take the following steps:
 
     > **Note:**
     >
-    > The [TiDB Cloud Technical Support](https://tidb.support.pingcap.com/servicedesk/customer/portal/6) entry is only available for customers subscribed to **Developer**, **Enterprise**, or **Premium** [support plans](/tidb-cloud/connected-care-detail.md). For users with Basic support plan, technical questions can be asked by joining our [community](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap) ([Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap) / [Discord](https://discord.com/invite/KVRZBR2DrG)), where PingCAP engineers and community members provide guidance.
+    > The [TiDB Cloud Technical Support](https://tidb.support.pingcap.com/servicedesk/customer/portal/6) entry is only available for customers subscribed to **Developer**, **Enterprise**, or **Premium** [support plans](/tidb-cloud/connected-care-detail.md). For users with Basic support plan, you can ask technical questions by joining our [community](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap) ([Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap) or [Discord](https://discord.com/invite/KVRZBR2DrG)), where PingCAP engineers and community members provide guidance.
 
 2. Click **Submit a request**.
 

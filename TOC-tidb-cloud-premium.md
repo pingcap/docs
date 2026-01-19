@@ -639,7 +639,7 @@
     - Connected: IM Interaction for Support Tickets
       - [Interact with Support Tickets via Slack](/tidb-cloud/connected-slack-ticket-interaction.md)
       - [Interact with Support Tickets via Lark](/tidb-cloud/connected-lark-ticket-interaction.md)
-  - [Working with Support Team](/tidb-cloud/tidb-cloud-support.md)
+  - [Work with the Support Team](/tidb-cloud/tidb-cloud-support.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
 - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
