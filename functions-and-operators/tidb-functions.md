@@ -583,36 +583,40 @@ SELECT VITESS_HASH(123);
 
 ## TIDB_ENCODE_INDEX_KEY
 
-The `TIDB_ENCODE_INDEX_KEY()` function encodes the specified index key into a hexadecimal string. The function syntax is as follows:
+The `TIDB_ENCODE_INDEX_KEY()` function encodes a specified index key into a hexadecimal string. The syntax is as follows:
 
-`TIDB_ENCODE_INDEX_KEY(<db_name>, <table_name>, <index_name>, <index_columns>..., <handle_columns>...)`
+```sql
+TIDB_ENCODE_INDEX_KEY(<db_name>, <table_name>, <index_name>, <index_columns>..., <handle_columns>...)
+```
 
 Parameter descriptions:
 
 * `<db_name>`: the name of the database that contains the target index.
 * `<table_name>`: the name of the table that contains the target index. For a partitioned table, you can specify the partition name, for example, `'t(p0)'`.
 * `<index_name>`: the name of the target index.
-* `<index_columns>...`: the values of the index columns. You must specify the values in the order defined by the index. For a composite index, you must provide values for all index columns.
-* `<handle_columns>...`: the handle value corresponding to the row. The rules for determining the handle value vary depending on the primary key type of the table, as follows:
+* `<index_columns>...`: the values of the index columns. You must specify the values in the same order as defined in the index. For a composite index, you must specify values for all index columns.
+* `<handle_columns>...`: the handle values for the row. The required handle values depend on the primary key type of the table:
 
     * If the table has no primary key, or the primary key is `NONCLUSTERED`, the handle value is the value of the hidden column `_tidb_rowid`.
-    * If the table has a `CLUSTERED` primary key that is a single integer column, the handle value is the value of the primary key column.
-    * If the table has a `CLUSTERED` primary key that is composite or non-integer (a common handle), the handle value consists of the values of all primary key columns in order.
+    * If the primary key is `CLUSTERED` and is a single-column integer, the handle value is the value of the primary key column.
+    * If the primary key is `CLUSTERED` and is a composite primary key or a non-integer type (common handle), the handle value consists of the values of all primary key columns in order.
 
 The following examples show how to call this function for the composite secondary index `idx(c1, c2)` under different primary key types.
 
 ```sql
--- For tables without a primary key or with a NONCLUSTERED primary key: Use the _tidb_rowid column.
+-- For tables without a primary key or with a NONCLUSTERED primary key, use the _tidb_rowid column.
 SELECT TIDB_ENCODE_INDEX_KEY(
     '<db_name>', '<table_name>', '<index_name>', 
     <c1>, <c2>, <_tidb_rowid>
 );
--- For tables with a CLUSTERED integer primary key (column id): Use the id column.
+
+-- For tables with a CLUSTERED integer primary key (the primary key column is id), use the id column.
 SELECT TIDB_ENCODE_INDEX_KEY(
     '<db_name>', '<table_name>', '<index_name>', 
     <c1>, <c2>, <id>
 );
--- For tables with CLUSTERED composite primary keys (columns p1 and p2): Provide the values of p1 and p2 in their defined order.
+
+-- For tables with a CLUSTERED composite primary key (the primary key columns are p1, p2), provide the values of p1 and p2 in their defined order.
 SELECT TIDB_ENCODE_INDEX_KEY(
     '<db_name>', '<table_name>', '<index_name>', 
     <c1>, <c2>, <p1>, <p2>
@@ -652,13 +656,15 @@ SELECT TIDB_ENCODE_INDEX_KEY('test', 't', 'idx', 2, 1);
 
 The `TIDB_ENCODE_RECORD_KEY()` function encodes a specified row record key into a hexadecimal string. The function syntax is as follows:
 
-`TIDB_ENCODE_RECORD_KEY(<db_name>, <table_name>, <handle_columns>...)`
+```sql
+TIDB_ENCODE_RECORD_KEY(<db_name>, <table_name>, <handle_columns>...)
+```
 
 Parameter descriptions:
 
 * `<db_name>`: the name of the database that contains the target table.
-* `<table_name>`: the name of the table that contains the target table. For a partitioned table, you can specify the partition name in `<table_name>`, for example, `'t(p0)'`.
-* `<handle_columns>...`: the handle (row key) value for the corresponding row. The exact composition of the handle depends on the primary key type of the table, such as whether it is `CLUSTERED`, whether it uses a common handle, or whether it uses the hidden column `_tidb_rowid`. For more information, see the `<handle_columns...>` section in [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key).
+* `<table_name>`: the name of the target table. For a partitioned table, you can specify the partition name in `<table_name>`, for example, `'t(p0)'`.
+* `<handle_columns>...`: the handle (row key) values for the corresponding row. The exact composition of the handle depends on the primary key type of the table, such as whether the primary key is `CLUSTERED`, a common handle, or uses the hidden column `_tidb_rowid`. For more information, see the description of `<handle_columns>...` in [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key).
 
 ```sql
 CREATE TABLE t(id int PRIMARY KEY, a int, KEY `idx` (a));
