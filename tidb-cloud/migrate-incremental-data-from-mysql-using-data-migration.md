@@ -1,13 +1,27 @@
 ---
 title: Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
-summary: Learn how to migrate incremental data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, Azure Database for MySQL, Alibaba Cloud RDS, or a local MySQL instance to TiDB Cloud using Data Migration.
+summary: Learn how to migrate incremental data from MySQL-compatible databases hosted on a cloud provider, or a local MySQL instance to TiDB Cloud using Data Migration.
 ---
 
 # Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 
-This document describes how to migrate incremental data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, or Azure Database for MySQL) or self-hosted source database to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
+<CustomContent plan="dedicated">
+
+This document describes how to migrate incremental data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, Azure Database for MySQL, or Alibaba Cloud RDS) or self-hosted source database to {{{ .dedicated }}} using the Data Migration feature of the TiDB Cloud console.
+
+</CustomContent>
+<CustomContent plan="essential">
+
+This document describes how to migrate incremental data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), or Alibaba Cloud RDS) or self-hosted source database to {{{ .essential }}} using the Data Migration feature of the TiDB Cloud console.
+
+> **Note:**
+>
+> Currently, the Data Migration feature is in public preview for {{{ .essential }}}.
+
+</CustomContent>
 
 For instructions about how to migrate existing data or both existing data and incremental data, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
+
 
 ## Limitations
 
@@ -44,7 +58,7 @@ If you want to use GTID to specify the start position, make sure that the GTID i
 
 ### For Amazon RDS and Amazon Aurora MySQL
 
-For Amazon RDS and Amazon Aurora MySQL, you need to create a new modifiable parameter group (that is, not the default parameter group) and then modify the following parameters in the parameter group and restart the instance application.
+For Amazon RDS and Amazon Aurora MySQL, you need to create a new modifiable parameter group (that is, not the default parameter group), modify the following parameters in the parameter group, and then restart the instance to apply the changes.
 
 - `gtid_mode`
 - `enforce_gtid_consistency`
@@ -58,6 +72,8 @@ SHOW VARIABLES LIKE 'gtid_mode';
 If the result is `ON` or `ON_PERMISSIVE`, the GTID mode is successfully enabled.
 
 For more information, see [Parameters for GTID-based replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-replication-gtid.html#mysql-replication-gtid.parameters).
+
+<CustomContent plan="dedicated">
 
 ### For Google Cloud SQL for MySQL
 
@@ -80,6 +96,8 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 ```
 
 If the result is not `FULL`, you need to configure this parameter for your Azure Database for MySQL instance using the [Azure portal](https://portal.azure.com/) or [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/).
+
+</CustomContent>
 
 ### For Alibaba Cloud RDS MySQL
 
@@ -144,7 +162,7 @@ To enable the GTID mode for a self-hosted MySQL instance, follow these steps:
 
 3. On the **Data Migration** page, click **Create Migration Job** in the upper-right corner. The **Create Migration Job** page is displayed.
 
-## Step 2: Configure the source and target connections
+## Step 2: Configure the source and target connection
 
 On the **Create Migration Job** page, configure the source and target connection.
 
@@ -154,16 +172,28 @@ On the **Create Migration Job** page, configure the source and target connection
 
    - **Data source**: the data source type.
    - **Region**: the region of the data source, which is required for cloud databases only.
-   - **Connectivity method**: the connection method for the data source. Currently, you can choose public IP, VPC Peering, or Private Link according to your connection method.
+   - **Connectivity method**: the connection method for the data source. <CustomContent plan="dedicated">Currently, you can choose public IP, VPC Peering, or Private Link according to your connection method.</CustomContent><CustomContent plan="essential">You can choose public IP or Private Link according to your connection method.</CustomContent>
+
+   <CustomContent plan="dedicated">
+
    - **Hostname or IP address** (for public IP and VPC Peering): the hostname or IP address of the data source.
    - **Service Name** (for Private Link): the endpoint service name.
+
+   </CustomContent>
+   <CustomContent plan="essential">
+
+   - **Hostname or IP address** (for public IP): the hostname or IP address of the data source.
+   - **Private Link Connection** (for Private Link): the private link connection that you created in the [Private Link Connections](/tidb-cloud/serverless-private-link-connection.md) section.
+
+   </CustomContent>
+
    - **Port**: the port of the data source.
    - **Username**: the username of the data source.
    - **Password**: the password of the username.
    - **SSL/TLS**: if you enable SSL/TLS, you need to upload the certificates of the data source, including any of the following:
         - only the CA certificate
         - the client certificate and client key
-        - the CA certificate, client certificate and client key
+        - the CA certificate, client certificate, and client key
 
 3. Fill in the target connection profile.
 
@@ -174,8 +204,17 @@ On the **Create Migration Job** page, configure the source and target connection
 
 5. Take action according to the message you see:
 
+    <CustomContent plan="dedicated">
+
     - If you use Public IP or VPC Peering, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
     - If you use AWS Private Link, you are prompted to accept the endpoint request. Go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), and click **Endpoint services** to accept the endpoint request.
+
+    </CustomContent>
+    <CustomContent plan="essential">
+
+    If you use Public IP, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
+
+    </CustomContent>
 
 ## Step 3: Choose migration job type
 
@@ -227,7 +266,7 @@ If there is data in the target database, make sure the binlog position is correc
 
 On the **Precheck** page, you can view the precheck results. If the precheck fails, you need to operate according to **Failed** or **Warning** details, and then click **Check again** to recheck.
 
-If there are only warnings on some check items, you can evaluate the risk and consider whether to ignore the warnings. If all warnings are ignored, the migration job will automatically go on to the next step.
+If there are only warnings on some check items, you can evaluate the risk and consider whether to ignore the warnings. If all warnings are ignored, the migration job will automatically proceed to the next step.
 
 For more information about errors and solutions, see [Precheck errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#precheck-errors-and-solutions).
 
