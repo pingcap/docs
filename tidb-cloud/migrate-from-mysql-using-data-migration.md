@@ -572,7 +572,17 @@ On the **Create Migration Job** page, configure the source and target connection
 
 ## Step 3: Choose migration job type
 
-In the <CustomContent plan="dedicated">**Choose the objects to be migrated**</CustomContent><CustomContent plan="essential">**Choose migration job type**</CustomContent> step, you can choose existing data migration, incremental data migration, or both.
+<CustomContent plan="dedicated">
+
+In the **Choose migration job type** step, you can choose to migrate both existing data and incremental data, migrate only existing data, or migrate only incremental data.
+
+</CustomContent>
+
+<CustomContent plan="essential">
+
+In the **Choose migration job type** step, you can choose to migrate both existing data and incremental data, or migrate only incremental data.
+
+</CustomContent>
 
 ### Migrate existing data and incremental data
 
@@ -607,11 +617,15 @@ Currently you can only use **logical mode** to migrate **existing data** and **i
 
 </CustomContent>
 
+<CustomContent plan="dedicated">
+
 ### Migrate only existing data
 
 To migrate only existing data of the source database to TiDB Cloud, choose **Existing data migration**.
 
-You can <CustomContent plan="dedicated">use physical mode or logical mode</CustomContent><CustomContent plan="essential">only use logical mode</CustomContent> to migrate existing data. For more information, see [Migrate existing data and incremental data](#migrate-existing-data-and-incremental-data).
+You can use physical mode or logical mode to migrate existing data. For more information, see [Migrate existing data and incremental data](#migrate-existing-data-and-incremental-data).
+
+</CustomContent>
 
 ### Migrate only incremental data
 
