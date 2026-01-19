@@ -262,6 +262,10 @@
     - [Vector Index](/vector-search/vector-search-index.md)
   - [Improve Performance](/vector-search/vector-search-improve-performance.md)
   - [Limitations](/vector-search/vector-search-limitations.md)
+- Stream Data ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [Changefeed Overview](/tidb-cloud/essential-changefeed-overview.md)
+  - [Sink to MySQL](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
+  - [Sink to Apache Kafka](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
 - Security
   - [Security Overview](/tidb-cloud/security-overview.md)
   - Identity Access Control
