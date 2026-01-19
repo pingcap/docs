@@ -72,8 +72,6 @@ If the result is `ON` or `ON_PERMISSIVE`, the GTID mode is successfully enabled.
 
 For more information, see [Parameters for GTID-based replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-replication-gtid.html#mysql-replication-gtid.parameters).
 
-<CustomContent plan="dedicated">
-
 ### For Google Cloud SQL for MySQL
 
 The GTID mode is enabled for Google Cloud SQL for MySQL by default. You can check if the GTID mode has been successfully enabled by executing the following SQL statement:
@@ -96,7 +94,6 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 If the result is not `FULL`, you need to configure this parameter for your Azure Database for MySQL instance using the [Azure portal](https://portal.azure.com/) or [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/).
 
-</CustomContent>
 
 ### For Alibaba Cloud RDS MySQL
 
@@ -272,6 +269,24 @@ For more information about errors and solutions, see [Precheck errors and soluti
 For more information about precheck items, see [Migration Task Precheck](https://docs.pingcap.com/tidb/stable/dm-precheck).
 
 If all check items show **Pass**, click **Next**.
+
+<CustomContent plan="essential">
+
+## Step 6: View the migration progress
+
+After the migration job is created, you can view the migration progress on the **Migration Job Details** page. The migration progress is displayed in the **Stage and Status** area.
+
+You can pause or delete a migration job when it is running.
+
+If a migration job has failed, you can resume it after solving the problem.
+
+You can delete a migration job in any status.
+
+If you encounter any problems during the migration, see [Migration errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions).
+
+</CustomContent>
+
+<CustomContent plan="dedicated">
 
 ## Step 6: Choose a spec and start migration
 
