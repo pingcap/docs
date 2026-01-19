@@ -1,12 +1,12 @@
 ---
 title: Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
-summary: Learn how to seamlessly migrate data from MySQL-compatible databases to TiDB Cloud with minimal downtime using the Data Migration feature.
+summary: Learn how to seamlessly migrate your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, or self-managed MySQL instances to TiDB Cloud with minimal downtime using the Data Migration feature.
 aliases: ['/tidbcloud/migrate-data-into-tidb','/tidbcloud/migrate-incremental-data-from-mysql']
 ---
 
 # Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 
-This document guides you through migrating your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, or self-managed MySQL instances to TiDB Cloud using the Data Migration feature in the [TiDB Cloud console](https://tidbcloud.com/).
+This document guides you through migrating your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, or self-managed MySQL instances to <CustomContent plan="dedicated">{{{ .dedicated }}}</CustomContent><CustomContent plan="essential">{{{ .essential }}}</CustomContent>using the Data Migration feature in the [TiDB Cloud console](https://tidbcloud.com/).
 
 <CustomContent plan="essential">
 
