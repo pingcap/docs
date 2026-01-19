@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/migrate-data-into-tidb','/tidbcloud/migrate-incremental-da
 
 # Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 
-This document guides you through migrating your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, or self-managed MySQL instances to <CustomContent plan="dedicated">{{{ .dedicated }}}</CustomContent><CustomContent plan="essential">{{{ .essential }}}</CustomContent>using the Data Migration feature in the [TiDB Cloud console](https://tidbcloud.com/).
+This document guides you through migrating your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, or self-managed MySQL instances to <CustomContent plan="dedicated">{{{ .dedicated }}}</CustomContent><CustomContent plan="essential">{{{ .essential }}}</CustomContent> using the Data Migration feature in the [TiDB Cloud console](https://tidbcloud.com/).
 
 <CustomContent plan="essential">
 
@@ -230,7 +230,7 @@ For detailed instructions, see [Configure database flags](https://cloud.google.c
 
     - `binlog_row_image`: `FULL`
 
-3. In the left navigation pane, click **Backup and Restoration**, and then select **Backup Strategy**. To ensure DM can access consecutive binlog files during migration, please configure the backup strategy with the following constraints:
+3. In the left navigation pane, click **Backup and Restoration**, and then select **Backup Strategy**. To ensure DM can access consecutive binlog files during migration, configure the backup strategy with the following constraints:
 
     - Retention Period: Set to at least 3 days (7 days recommended).
 
