@@ -589,9 +589,9 @@ In the **Choose migration job type** step, you can choose to migrate both existi
 
 ### Migrate existing data and incremental data
 
-To migrate data to TiDB Cloud once and for all, choose both **Existing data migration** and **Incremental data migration**, which ensures data consistency between the source and target databases.
-
 <CustomContent plan="dedicated">
+
+To migrate data to TiDB Cloud once and for all, choose both **Existing data migration** and **Incremental data migration**, which ensures data consistency between the source and target databases.
 
 You can use **physical mode** or **logical mode** to migrate **existing data** and **incremental data**.
 
@@ -616,7 +616,9 @@ Physical mode exports the MySQL source data as fast as possible, so [different s
 </CustomContent>
 <CustomContent plan="essential">
 
-Currently you can only use **logical mode** to migrate **existing data** and **incremental data**. This mode exports data from MySQL source databases as SQL statements and then executes them on TiDB. In this mode, the target tables before migration can be either empty or non-empty.
+To migrate data to TiDB Cloud once and for all, choose both **Full + Incremental** and **Incremental data migration**, which ensures data consistency between the source and target databases.
+
+Currently you can only use **logical mode** to migrate **existing data**. This mode exports data from MySQL source databases as SQL statements and then executes them on TiDB. In this mode, the target tables before migration can be either empty or non-empty.
 
 </CustomContent>
 
