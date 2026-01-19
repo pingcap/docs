@@ -1097,13 +1097,14 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 >
 > - This variable only works when [`tidb_analyze_version`](#tidb_analyze_version-new-in-v510) is set to `2`.
 > - If you upgrade your TiDB cluster from a version earlier than v8.3.0 to v8.3.0 or later, this variable is set to `ALL` by default to keep the original behavior.
-> - Starting from v8.3.0, for a newly deployed TiDB cluster, this variable is set to `PREDICATE` by default.
+> - For a newly deployed TiDB cluster from v8.3.0 to v8.5.4, this variable is set to `PREDICATE` by default.
+> - For a newly deployed TiDB cluster from v8.5.5 onwards, this variable is set to `ALL` by default.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
-- Default value: `PREDICATE`
+- Default value: `ALL`
 - Value options:`ALL`, `PREDICATE`
 - This variable controls the behavior of the `ANALYZE TABLE` statement. Setting it to `PREDICATE` means only collecting statistics for [predicate columns](/statistics.md#collect-statistics-on-some-columns); setting it to `ALL` means collecting statistics for all columns. In scenarios where OLAP queries are used, it is recommended to set it to `ALL`, otherwise collecting statistics can result in a significant drop in query performance.
 
