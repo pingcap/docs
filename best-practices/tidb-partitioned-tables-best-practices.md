@@ -409,7 +409,6 @@ CREATE TABLE server_info (
 PARTITION BY KEY (id) PARTITIONS 16;
 ```
 
-### Advantages
 ### Benefits
 
 Partitioned tables provide the following benefits:
