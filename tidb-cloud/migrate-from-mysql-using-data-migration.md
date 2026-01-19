@@ -72,7 +72,7 @@ To prevent this, create the target tables in the downstream database before star
 </CustomContent>
 <CustomContent plan="essential">
 
-- For {{{ .essential }}}, only logical mode is supported currently.
+- For {{{ .essential }}}, only logical mode is supported for data migration currently. This mode exports data from MySQL source databases as SQL statements and then executes them on TiDB. In this mode, the target tables before migration can be either empty or non-empty.
 
 </CustomContent>
 
