@@ -25,7 +25,7 @@ Its success was built on several foundational strengths:
 - Always-Online Availability: The architecture supported seamless cluster upgrades and scaling operations (up/down), ensuring critical services remained online during maintenance.
 - Freedom from Lock-in: As an open-source solution supporting AWS, GCP, and Azure, it offered true cloud neutrality, preventing vendor lock-in.
 
-### Architectural challenges
+### Challenges of classic TiDB
 
 Despite these massive achievements, the "Shared-Nothing" architecture of classic TiDB, where storage and compute are tightly coupled on local nodes—eventually hit physical limitations in extreme large-scale environments. As data volumes exploded and cloud-native expectations evolved, inherent structural challenges emerged that were difficult to resolve without a fundamental redesign.
 
