@@ -77,7 +77,7 @@ With these new features, the Connected Care services offer you better connectivi
 
 TiDB Cloud provides multiple support channels to help you get assistance, depending on the type of issue and your support plan.
 
-- Support Tickets ([Help Center](https://docs.pingcap.com/tidbcloud/tidb-cloud-support/))
+- Support Tickets ([Help Center](/tidb-cloud/tidb-cloud-support.md))
 
     It is a ticket-based support channel for issues that require direct assistance from our global support team. [Billing and account-related tickets](/tidb-cloud/tidb-cloud-support.md#create-an-account-or-billing-support-ticket) are available to all TiDB Cloud users. [Technical support tickets](/tidb-cloud/tidb-cloud-support.md#create-a-technical-support-ticket) with guaranteed response times are available for paid support plans. Users without a paid support plan can ask technical questions through the Community channels.
 
