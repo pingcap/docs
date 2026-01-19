@@ -88,7 +88,7 @@ For lightweight OLTP workloads, since the heavy compute is separated to the elas
 
 For heavy compute tasks such as DDL operations and large-scale data imports, TiDB X can leverage auto-elastic compute resources to run these workloads at full speed with minimal impact on online traffic. When you add a new index on TiDB X, TiDB workers, coprocessor workers and tikv workers are provisioned seamlessly based on data volume. The provisioned elastic compute resources are isolated with the TiDB and TiKV servers that are serving the online traffic. This separation ensures that resource-intensive operations no longer compete with critical OLTP queries. In real-world use cases, compared to the default classic TiDB performance, adding an index is 5x faster on TiDB X with no impact on online service. This represents a significant improvement in DDL performance while maintaining online service stability.
 
-### Transition to the "shared-storage" architecture
+### Transition from shared-nothing to shared-storage
 
 TiDB X moves away from the classic "Shared-Nothing" architecture (where data is copied between TiKV nodes) to a modern "Shared-Storage" model. In this model, object storage (like S3) serves as the single source of truth for all persistent data, rather than local disks. This removes the need for physical data copying during scaling, enabling rapid elasticity.
 
@@ -100,7 +100,7 @@ Classic TiDB required over-provisioning hardware to handle peak traffic and back
 
 A Request Capacity Unit (RCU) is a unit of measure used to represent the provisioned compute capacity for your TiDB X cluster. A RCU provides a fixed amount of compute resources that can process a certain number of SQL requests. The number of RCUs you provision determines your cluster’s baseline performance and throughput capacity. In TiDB X, cost is based on the actual consumption of RCU. You can maintain full financial control by setting an upper limit on these units, preventing unexpected costs while still enjoying the benefits of elasticity.
 
-### From LSM-tree to LSM forest
+### From LSM tree to LSM forest
 
 In the classic architecture, every TiKV node runs a single, massive RocksDB instance. This means all data from thousands of different regions is mixed together into one giant "single LSM-tree" structure. Because data is mixed, operations like moving a Region, scaling in/out, or importing data can require rewriting massive amounts of existing data (compaction) to separate or merge it. This can consume huge CPU and I/O resources and impact online traffic. The single LSM-tree is protected by a global mutex. As data size grows, at scale (typically 6TB+ data or 200k+ SST files per TiKV node), increased contention on this global lock impacts both read and write operations.
 
