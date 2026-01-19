@@ -89,7 +89,6 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 If the result is not `FULL`, you need to configure this parameter for your Azure Database for MySQL instance using the [Azure portal](https://portal.azure.com/) or [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/).
 
-
 ### For Alibaba Cloud RDS MySQL
 
 The GTID mode is enabled by default for Alibaba Cloud RDS MySQL. You can check if the GTID mode has been successfully enabled by executing the following SQL statement:
@@ -300,3 +299,5 @@ If a migration job has failed, you can resume it after solving the problem.
 You can delete a migration job in any status.
 
 If you encounter any problems during the migration, see [Migration errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions).
+
+</CustomContent>
