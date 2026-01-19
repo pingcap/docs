@@ -9,9 +9,11 @@ TiDB X represents a fundamental architectural evolution from classic TiDB's Shar
 
 This document details the challenges of the classic TiDB architecture, the architecture of TiDB X, and its key innovations.
 
-## Limitations of Classic TiDB
+## Limitations of classic TiDB
 
-### Why Classic TiDB Changed the Game
+This section analyzes the architecture of classic TiDB and its limitations that motivate the development of TiDB X.
+
+### Strengths of classic TiDB
 
 The "Shared-Nothing" architecture of classic TiDB effectively overcame the limitations of traditional monolithic databases. By decoupling compute from storage and utilizing the Raft consensus algorithm, it delivered a level of resilience and scale that defined the modern NewSQL era.
 
@@ -23,7 +25,7 @@ Its success was built on several foundational strengths:
 - Always-Online Availability: The architecture supported seamless cluster upgrades and scaling operations (up/down), ensuring critical services remained online during maintenance.
 - Freedom from Lock-in: As an open-source solution supporting AWS, GCP, and Azure, it offered true cloud neutrality, preventing vendor lock-in.
 
-### The Architectural Ceiling: Challenges Hard to Overcome
+### Architectural challenges
 
 Despite these massive achievements, the "Shared-Nothing" architecture of classic TiDB, where storage and compute are tightly coupled on local nodes—eventually hit physical limitations in extreme large-scale environments. As data volumes exploded and cloud-native expectations evolved, inherent structural challenges emerged that were difficult to resolve without a fundamental redesign.
 
@@ -35,7 +37,7 @@ There is no physical isolation between logical regions and physical SST files. O
 
 - Lack of Cost Effectiveness: To keep the production system stable and ensure good performance during peak traffic, customers are forced to over-provision hardware resources.  Resources must be planned for the "high water mark" of both online traffic and heavy background tasks. Besides, data size on single TiKV nodes is limited, users often have to add more expensive compute nodes just to get more storage capacity, even if they don't need the extra CPU power.
 
-### The Motivation of TiDB X
+### The motivation of TiDB X
 
 These challenges stemmed from the physical binding of data to compute. To break through these ceilings—to achieve 10x faster scaling, zero-interference background tasks, and true pay-as-you-go elasticity—we need to move from "Shared-Nothing" architecture to TiDB X.
 
@@ -53,15 +55,15 @@ TiDB X evolves the proven stateless SQL and dynamic sharding foundation of class
 
 ![TiDB X Architecture](/media/tidb-x/tidb-x-architecture.png)
 
-### Object Storage Support
+### Object storage support
 
 As depicted in the "Object storage" layer of the diagram, TiDB X utilizes object storage (such as Amazon S3) as the single source of truth for all data. Unlike classic architectures where data resides on local disks, in TiDB X the persistent copy of all data is stored in the shared object storage layer. The "Shared Cache Layer" above it (Row Engine and Columnar Engine) acts as a high-performance cache to ensure low latency. Because the authoritative data is already in robust object storage, backing up simply relies on incremental Raft logs and metadata stored in S3. This allows backups to finish in seconds, regardless of the data volume. New TiKV nodes do not need to physically copy data from other nodes. They simply connect to the object storage and load the necessary data, making scale-out operations significantly faster.
 
-### Auto-Scaling Mechanism
+### Auto-scaling mechanism
 
 The architecture is explicitly designed for elasticity, facilitated by the load balancer and the stateless nature of the "Isolated SQL Layer". Since the compute nodes in the SQL layer are decoupled from the data residing in object storage, the system can auto-scale by adding or removing compute pods in seconds to match real-time workload demands. This technical elasticity enables a true consumption-based Pay-As-You-Go pricing model. Users no longer need to provision resources for peak load 24/7; the system automatically provisions resources during traffic spikes and scales down during quiet periods to minimize costs.
 
-### Microservice and Workload Isolation
+### Microservice and workload isolation
 
 The architecture diagram highlights a sophisticated separation of duties, ensuring that different types of work do not interfere with each other. The top "Isolated SQL Layer" consists of separate groups of compute nodes, which allows for multi-tenancy or workload isolation where different applications can have dedicated compute resources while sharing the same underlying data. Beneath this, the "Shared Services" layer breaks down heavy database tasks into independent microservices for operations like compaction, analyze, and DDL. By offloading expensive background operations—such as adding an index, or massive data imports—to the Shared Services layer, the system ensures these heavy jobs never compete for CPU or memory with the "Compute" nodes serving online user traffic. This guarantees predictable performance for critical applications and allows each component—Gateway, SQL Compute, Cache, and Background Services—to scale independently based on specific bottlenecks.
 
@@ -75,7 +77,7 @@ The dotted lines in the diagram represent background read and write operations t
 
 ![Classic TiDB vs TiDB X](/media/tidb-x/tidb-classic-vs-tidb-x-1.png)
 
-### Separation of Compute and Compute
+### Separation of compute and compute
 
 While classic TiDB already separates compute (SQL) from storage (TiKV), TiDB X introduces a secondary layer of separation within both the SQL layer and the storage layer themselves:
 
@@ -86,7 +88,7 @@ For lightweight OLTP workloads, since the heavy compute is separated to the elas
 
 For heavy compute tasks such as DDL operations and large-scale data imports, TiDB X can leverage auto-elastic compute resources to run these workloads at full speed with minimal impact on online traffic. When you add a new index on TiDB X, TiDB workers, coprocessor workers and tikv workers are provisioned seamlessly based on data volume. The provisioned elastic compute resources are isolated with the TiDB and TiKV servers that are serving the online traffic. This separation ensures that resource-intensive operations no longer compete with critical OLTP queries. In real-world use cases, compared to the default classic TiDB performance, adding an index is 5x faster on TiDB X with no impact on online service. This represents a significant improvement in DDL performance while maintaining online service stability.
 
-### Transition to "Shared-Storage" Architecture
+### Transition to the "shared-storage" architecture
 
 TiDB X moves away from the classic "Shared-Nothing" architecture (where data is copied between TiKV nodes) to a modern "Shared-Storage" model. In this model, object storage (like S3) serves as the single source of truth for all persistent data, rather than local disks. This removes the need for physical data copying during scaling, enabling rapid elasticity.
 
@@ -106,6 +108,6 @@ While TiDB X retains the logical region concept from classic TiDB, it fundamenta
 
 ![Classic TiDB vs TiDB X](/media/tidb-x/tidb-classic-vs-tidb-x-2.png)
 
-### Rapid Elastic Scalability (5x-10x Faster)
+### Rapid elastic scalability (5x-10x faster)
 
 In TiDB X, data resides in shared object storage with fully isolated LSM-trees for each Region. The system eliminates the need for physical data migration or compaction when adding or removing TiKV nodes. The result is a 5x–10x improvement in scaling speed compared to classic TiDB, maintaining stable latency for online traffic.
