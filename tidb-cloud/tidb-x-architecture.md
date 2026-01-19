@@ -29,13 +29,17 @@ Its success was built on several foundational strengths:
 
 Despite these massive achievements, the "Shared-Nothing" architecture of classic TiDB, where storage and compute are tightly coupled on local nodes—eventually hit physical limitations in extreme large-scale environments. As data volumes exploded and cloud-native expectations evolved, inherent structural challenges emerged that were difficult to resolve without a fundamental redesign.
 
-- Scalability Limitations: In classic TiDB, scaling out (adding nodes) or scaling in (removing nodes) requires physically copying massive amounts of data (SST files) between nodes. This process is time-consuming for large datasets and can impact online traffic due to the heavy CPU and I/O required to move data.
-The underlying storage engine (RocksDB) in classic TiDB uses a single LSM-tree protected by a global mutex. This creates a scalability ceiling where the system struggles to handle large datasets (e.g., 6TB+ data or 200k+ SST files per TiKV node), preventing it from utilizing the full capacity of the hardware.
+- Scalability limitations: In classic TiDB, scaling out (adding nodes) or scaling in (removing nodes) requires physically copying massive amounts of data (SST files) between nodes. This process is time-consuming for large datasets and can impact online traffic due to the heavy CPU and I/O required to move data.
 
-- Stability and Performance Challenges: Heavy write traffic triggers massive local compaction jobs to merge SST files. In the Classic architecture, these compaction jobs run on the same TiKV nodes serving online traffic, consuming significant CPU and I/O resources and can impact the online traffic.
-There is no physical isolation between logical regions and physical SST files. Operations like adding an index or moving a region (balancing) create compaction overhead that competes directly with user queries, leading to performance jitter. Under heavy write pressure, if the background compaction cannot keep up with the foreground write traffic, the system can trigger flow control mechanisms to protect the storage engine, which results in write throughput throttling and latency spikes for the application.
+    The underlying storage engine (RocksDB) in classic TiDB uses a single LSM-tree protected by a global mutex. This creates a scalability ceiling where the system struggles to handle large datasets (e.g., 6TB+ data or 200k+ SST files per TiKV node), preventing it from utilizing the full capacity of the hardware.
 
-- Lack of Cost Effectiveness: To keep the production system stable and ensure good performance during peak traffic, customers are forced to over-provision hardware resources.  Resources must be planned for the "high water mark" of both online traffic and heavy background tasks. Besides, data size on single TiKV nodes is limited, users often have to add more expensive compute nodes just to get more storage capacity, even if they don't need the extra CPU power.
+- Stability and performance challenges: Heavy write traffic triggers massive local compaction jobs to merge SST files. In the Classic architecture, these compaction jobs run on the same TiKV nodes serving online traffic, consuming significant CPU and I/O resources and can impact the online traffic.
+
+    There is no physical isolation between logical regions and physical SST files. Operations like adding an index or moving a region (balancing) create compaction overhead that competes directly with user queries, leading to performance jitter. Under heavy write pressure, if the background compaction cannot keep up with the foreground write traffic, the system can trigger flow control mechanisms to protect the storage engine, which results in write throughput throttling and latency spikes for the application.
+
+- Lack of cost effectiveness: To keep the production system stable and ensure good performance during peak traffic, customers are forced to over-provision hardware resources.
+
+    Resources must be planned for the "high water mark" of both online traffic and heavy background tasks. Besides, data size on single TiKV nodes is limited, users often have to add more expensive compute nodes just to get more storage capacity, even if they don't need the extra CPU power.
 
 ### The motivation of TiDB X
 
