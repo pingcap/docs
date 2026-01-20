@@ -18,7 +18,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         TiDB Cloud now supports client IP pass-through, enabling the Slow Query view and the `INFORMATION_SCHEMA.PROCESSLIST` table, to display the real client IP address instead of the Load Balancer (LB) IP. This feature helps accurately identify the true source of database requests for better troubleshooting and analysis. 
 
-        Currently, this feature is in public preview and is available only in the AWS region `Oregon (us-west-2)`.
+        Currently, this feature is in public preview and is available only in the AWS region `Frankfurt (eu-central-1)`.
 
         For more information, see [Analyze and Tune Performance](/tidb-cloud/tune-performance.md).
 
@@ -42,7 +42,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         TiDB Cloud now supports client IP pass-through, enabling the Slow Query view and the `INFORMATION_SCHEMA.PROCESSLIST` table, to display the real client IP address instead of the Load Balancer (LB) IP. This feature helps accurately identify the true source of database requests for better troubleshooting and analysis. 
 
-        Currently, this feature is in public preview and is available only in the AWS region `Oregon (us-west-2)`.
+        Currently, this feature is in public preview and is available only in the AWS region `Frankfurt (eu-central-1)`.
 
         For more information, see [Database Audit Logging (Beta) for {{{ .essential }}}](/tidb-cloud/essential-database-audit-logging.md).    
 
