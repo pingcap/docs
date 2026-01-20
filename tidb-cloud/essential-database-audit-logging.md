@@ -454,7 +454,7 @@ When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit lo
 
 > **Note:**
 >
-> To improve traffic visibility, `CLIENT_IP` now displays the real client IP address for connections via AWS PrivateLink, instead of the Load Balancer (LB) IP. Currently, this feature is in public preview and is available only in the AWS region `Frankfurt (eu-central-1)`.
+> To improve traffic visibility, `CLIENT_IP` now displays the real client IP address for connections via AWS PrivateLink, instead of the Load Balancer (LB) IP. Currently, this feature is in beta and is available only in the AWS region `Frankfurt (eu-central-1)`.
 
 ### Audit operation information
 
