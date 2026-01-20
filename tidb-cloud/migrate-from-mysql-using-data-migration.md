@@ -24,7 +24,7 @@ If you only want to replicate ongoing binlog changes from your MySQL-compatible 
 
 ### Availability
 
-- Currently, the Data Migration features is not available for {{{ .starter }}}.
+- Currently, the Data Migration feature is not available for {{{ .starter }}}.
 
 <CustomContent plan="dedicated">
 - If you don't see the [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md#step-1-go-to-the-data-migration-page) entry for your {{{ .dedicated }}} cluster in the [TiDB Cloud console](https://tidbcloud.com/), the feature might not be available in your region. To request support for your region, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
@@ -240,7 +240,7 @@ For detailed instructions, see [Configure database flags](https://cloud.google.c
 
 4. After applying the changes (and restarting if needed), connect to the instance and run the `SHOW VARIABLES` statement in this section to verify the configuration.
 
-For detailed instructions, see [Set instance parameters](https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/modify-the-parameters-of-an-apsaradb-rds-for-mysql-instance)
+For more information, see [Set instance parameters](https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/modify-the-parameters-of-an-apsaradb-rds-for-mysql-instance).
 
 </details>
 
@@ -297,7 +297,7 @@ When using public endpoints, you can verify network connectivity and access both
 > The egress IP range for your firewall is available only during Data Migration task creation. You cannot obtain this IP range in advance. Before you begin, ensure that you:
 >
 > - Have permissions to modify firewall rules.
-> - Can access to your cloud provider's console during the setup process.
+> - Can access your cloud provider's console during the setup process.
 > - Can pause the task creation workflow to configure your firewall.
 
 </CustomContent>
@@ -652,7 +652,7 @@ For detailed instructions about incremental data migration, see [Migrate Only In
 
 ## Step 5: Precheck
 
-On the **Precheck** page, you can view the precheck results. If the precheck fails, you need to operate according to **Failed** or **Warning** details, and then click **Check again** to recheck.
+On the **Precheck** page, you can view the precheck results. If the precheck fails, you need to resolve the issues according to the **Failed** or **Warning** details, and then click **Check again** to recheck.
 
 If there are only warnings on some check items, you can evaluate the risk and consider whether to ignore the warnings. If all warnings are ignored, the migration job will automatically proceed to the next step.
 
