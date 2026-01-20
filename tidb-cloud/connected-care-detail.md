@@ -119,10 +119,10 @@ This document provides detailed information about the [Connected Care](/tidb-clo
     <td>FAQ</td>
   </tr>
   <tr>
-    <td>Community (<a href="https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap">Slack</a> / <a href="https://discord.com/invite/KVRZBR2DrG">Discord</a>)</td>
-    <td>Community (<a href="https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap">Slack</a> / <a href="https://discord.com/invite/KVRZBR2DrG">Discord</a>)</td>
-    <td>Community (<a href="https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap">Slack</a> / <a href="https://discord.com/invite/KVRZBR2DrG">Discord</a>)</td>
-    <td>Community (<a href="https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap">Slack</a> / <a href="https://discord.com/invite/KVRZBR2DrG">Discord</a>)</td>
+    <td>Community (<a href="https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap">Slack</a> or <a href="https://discord.com/invite/KVRZBR2DrG">Discord</a>)</td>
+    <td>Community (<a href="https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap">Slack</a> or <a href="https://discord.com/invite/KVRZBR2DrG">Discord</a>)</td>
+    <td>Community (<a href="https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap">Slack</a> or <a href="https://discord.com/invite/KVRZBR2DrG">Discord</a>)</td>
+    <td>Community (<a href="https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap">Slack</a> or <a href="https://discord.com/invite/KVRZBR2DrG">Discord</a>)</td>
   </tr>
   <tr>
     <td><a href="https://tidb.ai/">TiDB.AI</a></td>
