@@ -452,6 +452,10 @@ When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit lo
 | `CLIENT_IP`       | The current IP address of the client.                                                              |
 | `CLIENT_PORT`     | The current port of the client.                                                                    |
 
+> **Tip:**
+>
+> For TiDB Cloud Essential, the connection information now displays the real client IP for traffic via PrivateLink, currently supported on AWS in the us-west-2 region.
+
 ### Audit operation information
 
 When the event class is `AUDIT` or a subclass of `AUDIT`, the audit logs contain the following information:

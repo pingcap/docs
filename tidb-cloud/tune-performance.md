@@ -88,7 +88,15 @@ To view slow queries in a TiDB <CustomContent plan="starter,essential,dedicated"
 
 The results are displayed in the form of a table, and you can sort the results by different columns.
 
-<CustomContent plan="starter,essential,dedicated">
+<CustomContent plan="essential">
+
+> **Tip:**
+>
+> For TiDB Cloud Essential, Slow Query now displays the real client IP for traffic via PrivateLink, currently supported on AWS in the us-west-2 region.
+
+</CustomContent>
+
+<CustomContent plan="essential">
 
 For more information, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-slow-query).
 
