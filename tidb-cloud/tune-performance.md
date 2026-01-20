@@ -95,6 +95,7 @@ The results are displayed in the form of a table, and you can sort the results b
 > To improve traffic visibility, {{{ .starter }}} and {{{ .essential }}} now capture and display the real client IP for connections via AWS PrivateLink. Currently, this feature is limited to the AWS region `us-west-2`.
 
 </CustomContent>
+<CustomContent plan="starter,essential,dedicated">
 
 For more information, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-slow-query).
 
