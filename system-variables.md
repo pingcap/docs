@@ -5832,10 +5832,10 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Default value: `0`
 - Type: Integer
 - Range: `[0, 1000000]`
-- This variable controls the maximum number of slow query logs printed per TiDB node per second.
-    - A value of `0` (the default) means there is no limit.
-    - A value greater than `0` limits the number of slow query logs printed per node per second to that value. Any excess slow query logs are discarded and are not written to the slow query log file.
-- This variable is often used with [`tidb_slow_log_rules`](#tidb_slow_log_rules-new-in-v900) to prevent excessive slow query logging under high workload.
+- This variable controls the maximum number of slow query log entries that can be written per TiDB node per second.
+    - A value of `0` means there is no limit on the number of slow query log entries written per second.
+    - A value greater than `0` means TiDB writes at most the specified number of slow query log entries per second. Any excess log entries are discarded and not written to the slow query log file.
+- This variable is often used with [`tidb_slow_log_rules`](#tidb_slow_log_rules-new-in-v900) to prevent excessive slow query logs from being generated under high-workload conditions.
 
 ### tidb_slow_log_rules <span class="version-mark">New in v9.0.0</span>
 
@@ -5844,11 +5844,11 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - Type: String
-- This variable is used to define trigger rules for slow query logs. It supports composite conditions based on multiple metrics, enabling more flexible and fine-grained control over slow query logging.
+- This variable defines the triggering rules for slow query logs. It supports combining multi-dimensional metrics to provide more flexible and fine-grained logging.
 
 > **Tip:**
 >
-> It is recommended that after enabling `tidb_slow_log_rules`, you also configure [`tidb_slow_log_max_per_sec`](#tidb_slow_log_max_per_sec-new-in-v900) to limit the slow query log printing rate and prevent rule-based slow query logs from being triggered too frequently.
+> After enabling `tidb_slow_log_rules`, it is recommended to also configure [`tidb_slow_log_max_per_sec`](#tidb_slow_log_max_per_sec-new-in-v900) to limit the slow query log output rate and prevent rule-based slow query logging from being triggered too frequently.
 
 ### tidb_slow_log_threshold
 
