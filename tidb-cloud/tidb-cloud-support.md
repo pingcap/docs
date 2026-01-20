@@ -5,13 +5,13 @@ summary: Learn how to contact the support team of TiDB Cloud.
 
 # TiDB Cloud Support
 
-TiDB Cloud offers tiered support plan offerings tailored to meet customers' needs. This document describes how to send support requests through the PingCAP Help Center portal. For more information about our support offerings, see [Connected Care Details](/tidb-cloud/connected-care-detail.md).
+TiDB Cloud offers tiered support plan offerings tailored to meet customers' needs. For more information about our support offerings, see [Connected Care Details](/tidb-cloud/connected-care-detail.md).
 
 ## Support channels
 
 TiDB Cloud provides multiple support channels. The available options depend on the type of issue and your support plan.
 
-- Support tickets ([Help Center](/tidb-cloud/tidb-cloud-support.md))
+- Support tickets ([Help Center](#access-pingcap-help-center))
 
     Use this ticket-based channel for issues that require direct assistance from the TiDB Cloud support team.
 
