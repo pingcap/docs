@@ -67,34 +67,37 @@ The support plans in the Connected Care services introduce a completely new set 
 
 With these new features, the Connected Care services offer you better connectivity, more personalized support, and cost-effective solutions for different customer needs.
 
-- New **Enterprise** and **Premium** plans: connect customers with modern communication tools and advanced AI capabilities through advanced monitoring service in Clinic, IM subscription for TiDB Cloud alerts, IM subscription for ticket updates, AI chat in IM, and IM interaction for support tickets.
+- New **Enterprise** and **Premium** plans: provide modern communication tools and advanced AI capabilities through advanced monitoring service in Clinic, IM subscription for TiDB Cloud alerts, IM subscription for ticket updates, AI chat in IM, and IM interaction for support tickets.
 
-- New **Developer** plan: customers benefit from access to the same community ([Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap) and [Discord](https://discord.com/invite/KVRZBR2DrG)) and [TiDB.AI](https://tidb.ai/) assistance as the **Basic** plan, while also enjoying direct connections with unlimited access to technical support.
+- New **Developer** plan: provides access to the same community channels ([Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap) and [Discord](https://discord.com/invite/KVRZBR2DrG)) and [TiDB.AI](https://tidb.ai/) assistance as the **Basic** plan, along with direct connections and unlimited access to technical support.
 
-- New **Basic** plan: customers will be guided to join the active community channels ([Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap) and [Discord](https://discord.com/invite/KVRZBR2DrG)), where they can engage with other community members and interact with [TiDB.AI](https://tidb.ai/) for technical assistance.
+- New **Basic** plan: you can join community channels ([Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap) and [Discord](https://discord.com/invite/KVRZBR2DrG)) to engage with other community members and use [TiDB.AI](https://tidb.ai/) for technical assistance.
 
 ## Support channels
 
-TiDB Cloud provides multiple support channels to help you get assistance, depending on the type of issue and your support plan.
+TiDB Cloud provides multiple support channels. The available options depend on the type of issue and your support plan.
 
-- Support Tickets ([Help Center](/tidb-cloud/tidb-cloud-support.md))
+- Support tickets ([Help Center](/tidb-cloud/tidb-cloud-support.md))
 
-    It is a ticket-based support channel for issues that require direct assistance from our global support team. [Billing and account-related tickets](/tidb-cloud/tidb-cloud-support.md#create-an-account-or-billing-support-ticket) are available to all TiDB Cloud users. [Technical support tickets](/tidb-cloud/tidb-cloud-support.md#create-a-technical-support-ticket) with guaranteed response times are available for paid support plans. Users without a paid support plan can ask technical questions through the Community channels.
+    Use this ticket-based channel for issues that require direct assistance from the TiDB Cloud support team.
 
-    For the Enterprise and Premium support plans within the paid support plans, the following enhanced capabilities are included. For more details, see [Connected Care Details](/tidb-cloud/connected-care-detail.md).
+    - [Billing and account tickets](/tidb-cloud/tidb-cloud-support.md#create-an-account-or-billing-support-ticket) are available to all TiDB Cloud users.
+    - [Technical support tickets](/tidb-cloud/tidb-cloud-support.md#create-a-technical-support-ticket) with guaranteed response times are available for paid support plans. If you do not have a paid support plan, use community channels for technical questions.
+
+    The **Enterprise** and **Premium** support plans include the following enhanced capabilities. For more information, see [Connected Care Details](/tidb-cloud/connected-care-detail.md).
  
     - Faster response times with defined SLAs
     - Real-time communication through IM-based support
     - Proactive support programs, such as [Clinic](/tidb-cloud/tidb-cloud-clinic.md)
-    - Dedicated or named support roles, for example, Technical Account Managers (TAM)
+    - Dedicated or named support roles, such as Technical Account Managers (TAMs)
 
 - Community ([Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap) and [Discord](https://discord.com/invite/KVRZBR2DrG))
 
-    Community provides an open discussion channel where you can ask questions, share experiences, and get guidance from the community and PingCAP engineers. It is suitable for general questions, usage discussions, and non-urgent technical issues.
+    Use these open discussion channels to ask questions, share experiences, and get guidance from other users and PingCAP engineers. These channels are suitable for general questions, usage discussions, and non-urgent technical issues.
 
 - [TiDB.AI](https://tidb.ai/)
 
-    TiDB.AI is an AI-powered assistant that answers common technical questions and documentation-related issues. It is suitable for quick and self-service help.
+    TiDB.AI is an AI-powered assistant that answers common technical and documentation-related questions. It is suitable for quick and self-service help.
 
 ## Transition to Connected Care
 
