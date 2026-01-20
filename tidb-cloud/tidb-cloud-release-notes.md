@@ -29,7 +29,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
         Now you can use the Data Migration feature in the [TiDB Cloud console](https://tidbcloud.com) to seamlessly migrate data from any MySQL-compatible database to your [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) clusters.
 
         - Supported source databases include various MySQL-compatible systems, such as self-hosted MySQL, Amazon RDS, Alibaba Cloud RDS, and PolarDB.
-            
         - Supported connection methods for data migration include public connection and PrivateLink to ensure both ease of use and enterprise-grade security:
 
             - **Public connection**: quickly connects to your source database over the internet using secure and encrypted channels.
@@ -53,12 +52,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     To improve the support experience across different subscription plans, make the following improvements:
 
-    - **Provide plan-aware support redirection**: **Get Support** in the **Actions** column on the cluster overview page now directs you to the most relevant resource based on your current subscription. It guides Basic plan users to the **Support Plan** panel and paid plan users to the **Support Portal**.
-    
+    - **Provide plan-aware support redirection**: **Get Support** in the **Actions** column on the cluster overview page now directs you to the most relevant resource based on your current subscription. It guides Basic plan users to the **Support Plan** panel and paid plan users to the **Support Portal**.    
     - **Refine the Help Center menu**: rename help menu items to **Support Options** and **Support Tickets** to better reflect available services. Add tooltips to clarify that technical support tickets are exclusive to paid plans.
-
     - **Provide visible community access**: clearly designate Slack and Discord as the primary technical support channels for free users in **Support Plan** options. Streamline the [Get Support](/tidb-cloud/tidb-cloud-support.md), [Connected Care Overview](/tidb-cloud/connected-care-overview.md), and [Connected Care Details](/tidb-cloud/connected-care-detail.md) documentation to provide clearer guidance on support channel policies and community access.   
-
     - **Redesign action-oriented Support Plan UI**: redesign the **Support Plan** window to prioritize your current support options over generic plan comparisons. This aims to help you focus directly on getting the help you need based on your active subscription.
 
   For more information, see [Connected Care Overview](/tidb-cloud/connected-care-overview.md).
