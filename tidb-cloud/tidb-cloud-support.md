@@ -9,7 +9,7 @@ TiDB Cloud offers tiered support plan offerings tailored to meet customers' need
 
 ## Support channels
 
-TiDB Cloud provides multiple support channels. The available options depend on the type of issue and your [support plan](/connected-care-detail.md).
+TiDB Cloud provides multiple support channels. The available options depend on the type of issue and your [support plan](/tidb-cloud/connected-care-detail.md).
 
 - Support tickets ([Help Center](#access-pingcap-help-center))
 
