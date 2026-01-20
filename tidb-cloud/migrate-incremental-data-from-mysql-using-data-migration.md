@@ -160,27 +160,27 @@ On the **Create Migration Job** page, configure the source and target connection
 
 2. Fill in the source connection profile.
 
-   - **Data source**: the data source type.
-   - **Region**: the region of the data source, which is required for cloud databases only.
-   - **Connectivity method**: the connection method for the data source. <CustomContent plan="dedicated">Currently, you can choose public IP, VPC Peering, or Private Link according to your connection method.</CustomContent><CustomContent plan="essential">You can choose public IP or Private Link according to your connection method.</CustomContent>
+    - **Data source**: the data source type.
+    - **Region**: the region of the data source, which is required for cloud databases only.
+    - **Connectivity method**: the connection method for the data source. <CustomContent plan="dedicated">Currently, you can choose public IP, VPC Peering, or Private Link according to your connection method.</CustomContent><CustomContent plan="essential">You can choose public IP or Private Link according to your connection method.</CustomContent>
 
    <CustomContent plan="dedicated">
 
-   - **Hostname or IP address** (for public IP and VPC Peering): the hostname or IP address of the data source.
-   - **Service Name** (for Private Link): the endpoint service name.
+    - **Hostname or IP address** (for public IP and VPC Peering): the hostname or IP address of the data source.
+    - **Service Name** (for Private Link): the endpoint service name.
 
-   </CustomContent>
-   <CustomContent plan="essential">
+    </CustomContent>
+    <CustomContent plan="essential">
 
-   - **Hostname or IP address** (for public IP): the hostname or IP address of the data source.
-   - **Private Link Connection** (for Private Link): the private link connection that you created in the [Private Link Connections](/tidb-cloud/serverless-private-link-connection.md) section.
+    - **Hostname or IP address** (for public IP): the hostname or IP address of the data source.
+    - **Private Link Connection** (for Private Link): the private link connection that you created in the [Private Link Connections](/tidb-cloud/serverless-private-link-connection.md) section.
 
-   </CustomContent>
+    </CustomContent>
 
-   - **Port**: the port of the data source.
-   - **Username**: the username of the data source.
-   - **Password**: the password of the username.
-   - **SSL/TLS**: if you enable SSL/TLS, you need to upload the certificates of the data source, including any of the following:
+    - **Port**: the port of the data source.
+    - **Username**: the username of the data source.
+    - **Password**: the password of the username.
+    - **SSL/TLS**: if you enable SSL/TLS, you need to upload the certificates of the data source, including any of the following:
         - only the CA certificate
         - the client certificate and client key
         - the CA certificate, client certificate, and client key

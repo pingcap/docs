@@ -27,7 +27,9 @@ If you only want to replicate ongoing binlog changes from your MySQL-compatible 
 - Currently, the Data Migration feature is not available for {{{ .starter }}}.
 
 <CustomContent plan="dedicated">
+
 - If you don't see the [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md#step-1-go-to-the-data-migration-page) entry for your {{{ .dedicated }}} cluster in the [TiDB Cloud console](https://tidbcloud.com/), the feature might not be available in your region. To request support for your region, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
 </CustomContent> 
 
 - Amazon Aurora MySQL writer instances support both existing data and incremental data migration. Amazon Aurora MySQL reader instances only support existing data migration and do not support incremental data migration.
@@ -516,7 +518,7 @@ On the **Create Migration Job** page, configure the source and target connection
         </CustomContent>
         <CustomContent plan="essential">
 
-        - If **Public IP** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
+        - If **Public** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
         - If **Private Link** is selected, select the private link connection that you created in the [Private link or private endpoint](#private-link-or-private-endpoint) section.
 
         </CustomContent>
