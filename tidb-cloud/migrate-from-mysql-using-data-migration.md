@@ -12,7 +12,7 @@ This document guides you through migrating your MySQL databases from Amazon Auro
 
 > **Note:**
 >
-> Currently, the Data Migration feature is in public preview for {{{ .essential }}}.
+> Currently, the Data Migration feature is in beta for {{{ .essential }}}.
 
 </CustomContent>
 
