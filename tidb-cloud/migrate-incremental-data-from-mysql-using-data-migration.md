@@ -164,7 +164,7 @@ On the **Create Migration Job** page, configure the source and target connection
     - **Region**: the region of the data source, which is required for cloud databases only.
     - **Connectivity method**: the connection method for the data source. <CustomContent plan="dedicated">Currently, you can choose public IP, VPC Peering, or Private Link according to your connection method.</CustomContent><CustomContent plan="essential">You can choose public IP or Private Link according to your connection method.</CustomContent>
 
-   <CustomContent plan="dedicated">
+    <CustomContent plan="dedicated">
 
     - **Hostname or IP address** (for public IP and VPC Peering): the hostname or IP address of the data source.
     - **Service Name** (for Private Link): the endpoint service name.
