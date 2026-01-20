@@ -14,15 +14,15 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Starter**
 
-    - Display real client IP addresses in the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) view and the [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md) table (public preview).
+    - Display real client IP addresses in the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) view and the [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md) table (beta).
 
         TiDB Cloud now supports client IP pass-through, enabling the Slow Query view and the `INFORMATION_SCHEMA.PROCESSLIST` table, to display the real client IP address instead of the Load Balancer (LB) IP. This feature helps accurately identify the true source of database requests for better troubleshooting and analysis. 
 
-        Currently, this feature is in public preview and is available only in the AWS region `Frankfurt (eu-central-1)`.
+        Currently, this feature is in beta and is available only in the AWS region `Frankfurt (eu-central-1)`.
 
 - **TiDB Cloud Essential**
 
-    - Support data migration.
+    - Support data migration (beta).
 
         Now you can use the Data Migration feature in the [TiDB Cloud console](https://tidbcloud.com) to seamlessly migrate data from any MySQL-compatible database to your [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) clusters.
 
@@ -36,11 +36,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
   
         For more information, see [Migrate Existing and Incremental Data Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) and [Migrate Incremental Data Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md).
 
-    - Display real client IP addresses in the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) view, [DB audit logs](/tidb-cloud/essential-database-audit-logging.md), and the [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md) table (public preview)
+    - Display real client IP addresses in the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) view, [DB audit logs](/tidb-cloud/essential-database-audit-logging.md), and the [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md) table (beta)
 
         TiDB Cloud now supports client IP pass-through, enabling the Slow Query view, DB audit logs, and the `INFORMATION_SCHEMA.PROCESSLIST` table, to display the real client IP address instead of the Load Balancer (LB) IP. This feature helps accurately identify the true source of database requests for better troubleshooting and analysis. 
 
-        Currently, this feature is in public preview and is available only in the AWS region `Frankfurt (eu-central-1)`.
+        Currently, this feature is in beta and is available only in the AWS region `Frankfurt (eu-central-1)`.
 
 **Console changes**
 
