@@ -15,6 +15,7 @@ env:
 
 jobs:
   translate:
+    if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
 
     steps:
