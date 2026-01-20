@@ -490,38 +490,43 @@ On the **Create Migration Job** page, configure the source and target connection
 2. Fill in the source connection profile.
 
     - **Data source**: the data source type.
-    - **Connectivity method**: select a connection method for your data source based on your security requirements and cloud provider:
 
-        <CustomContent plan="dedicated">
+    <CustomContent plan="dedicated">
+
+    - **Connectivity method**: select a connection method for your data source based on your security requirements and cloud provider:
 
         - **Public IP**: available for all cloud providers (recommended for testing and proof-of-concept migrations).
         - **Private Link**: available for AWS and Azure only (recommended for production workloads requiring private connectivity).
         - **VPC Peering**: available for AWS and Google Cloud only (recommended for production workloads needing low-latency, intra-region connections with non-overlapping VPC/VNet CIDRs).
 
-        </CustomContent>
-        <CustomContent plan="essential">
+    </CustomContent>
+    <CustomContent plan="essential">
+
+    - **Connectivity method**: select a connection method for your data source based on your security requirements and cloud provider:
 
         - **Public**: available for all cloud providers (recommended for testing and proof-of-concept migrations).
         - **Private Link**: available for AWS and Alibaba Cloud only (recommended for production workloads requiring private connectivity).
 
-        </CustomContent>
+    </CustomContent>
+
+    <CustomContent plan="dedicated">
 
     - Based on the selected **Connectivity method**, do the following:
-
-        <CustomContent plan="dedicated">
 
         - If **Public IP** or **VPC Peering** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
         - If **Private Link** is selected, fill in the following information:
             - **Endpoint Service Name** (available if **Data source** is from AWS): enter the VPC endpoint service name (format: `com.amazonaws.vpce-svc-xxxxxxxxxxxxxxxxx`) that you created for your RDS or Aurora instance.
             - **Private Endpoint Resource ID** (available if **Data source** is from Azure): enter the resource ID of your MySQL Flexible Server instance (format: `/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>`).
 
-        </CustomContent>
-        <CustomContent plan="essential">
+    </CustomContent>
+    <CustomContent plan="essential">
+
+    - Based on the selected **Connectivity method**, do the following:
 
         - If **Public** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
         - If **Private Link** is selected, select the private link connection that you created in the [Private link or private endpoint](#private-link-or-private-endpoint) section.
 
-        </CustomContent>
+    </CustomContent>
 
     - **Port**: the port of the data source.
     - **User Name**: the username of the data source.
