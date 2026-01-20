@@ -14,13 +14,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Starter**
 
-    - Display real client IP addresses in the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) view and the [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md) table (public preview)
+    - Display real client IP addresses in the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) view and the [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md) table (public preview).
 
         TiDB Cloud now supports client IP pass-through, enabling the Slow Query view and the `INFORMATION_SCHEMA.PROCESSLIST` table, to display the real client IP address instead of the Load Balancer (LB) IP. This feature helps accurately identify the true source of database requests for better troubleshooting and analysis. 
 
         Currently, this feature is in public preview and is available only in the AWS region `Frankfurt (eu-central-1)`.
-
-        For more information, see [Analyze and Tune Performance](/tidb-cloud/tune-performance.md).
 
 - **TiDB Cloud Essential**
 
@@ -38,24 +36,22 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
   
         For more information, see [Migrate Existing and Incremental Data Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) and [Migrate Incremental Data Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md).
 
-    - Display real client IP addresses in the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) view and the [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md) table (public preview)
+    - Display real client IP addresses in the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) view, [DB audit logs](/tidb-cloud/essential-database-audit-logging.md), and the [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md) table (public preview)
 
-        TiDB Cloud now supports client IP pass-through, enabling the Slow Query view and the `INFORMATION_SCHEMA.PROCESSLIST` table, to display the real client IP address instead of the Load Balancer (LB) IP. This feature helps accurately identify the true source of database requests for better troubleshooting and analysis. 
+        TiDB Cloud now supports client IP pass-through, enabling the Slow Query view, DB audit logs, and the `INFORMATION_SCHEMA.PROCESSLIST` table, to display the real client IP address instead of the Load Balancer (LB) IP. This feature helps accurately identify the true source of database requests for better troubleshooting and analysis. 
 
         Currently, this feature is in public preview and is available only in the AWS region `Frankfurt (eu-central-1)`.
 
-        For more information, see [Database Audit Logging (Beta) for {{{ .essential }}}](/tidb-cloud/essential-database-audit-logging.md).    
-
 **Console changes**
 
-- Make support options plan-aware to improve the support experience
+- Improve the support experience with plan-aware support options.
 
-    To improve the support experience across different subscription plans, make the following improvements:
+    The TiDB Cloud console now offers plan-aware support options to enhance the support experience across all subscription plans. These updates include:
 
-    - **Provide plan-aware support redirection**: **Get Support** in the **Actions** column on the cluster overview page now directs you to the most relevant resource based on your current subscription. It guides Basic plan users to the **Support Plan** panel and paid plan users to the **Support Portal**.    
-    - **Refine the Help Center menu**: rename help menu items to **Support Options** and **Support Tickets** to better reflect available services. Add tooltips to clarify that technical support tickets are exclusive to paid plans.
-    - **Provide visible community access**: clearly designate Slack and Discord as the primary technical support channels for free users in **Support Plan** options. Streamline the [Get Support](/tidb-cloud/tidb-cloud-support.md), [Connected Care Overview](/tidb-cloud/connected-care-overview.md), and [Connected Care Details](/tidb-cloud/connected-care-detail.md) documentation to provide clearer guidance on support channel policies and community access.   
-    - **Redesign action-oriented Support Plan UI**: redesign the **Support Plan** window to prioritize your current support options over generic plan comparisons. This aims to help you focus directly on getting the help you need based on your active subscription.
+    - **Plan-aware support redirection**: on the cluster overview page, selecting **Get Support** in the **Actions** column directs you to the most relevant resource based on your subscription plan. Users on the Basic plan are guided to the **Support Plan** panel, and users on paid plans are directed to the **Support Portal**.
+    - **Refined Help Center menu**: rename help menu items to **Support Options** and **Support Tickets** to better reflect available services. Add tooltips to clarify that technical support tickets are available only for paid plans.
+    - **Clear community support access**: within the **Support Plan** options, Slack and Discord are clearly identified as the primary technical support channels for Basic plan users. The following documentation is streamlined to clarify support channel policies and community access: [Get Support](/tidb-cloud/tidb-cloud-support.md), [Connected Care Overview](/tidb-cloud/connected-care-overview.md), and [Connected Care Details](/tidb-cloud/connected-care-detail.md).
+    - **Action-oriented Support Plan UI**: redesign the **Support Plan** window to prioritize the support options available for your current subscription, rather than generic plan comparisons. This change helps you quickly identify how to get support based on your active plan.
 
   For more information, see [Connected Care Overview](/tidb-cloud/connected-care-overview.md).
 
