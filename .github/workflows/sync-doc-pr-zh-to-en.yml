@@ -24,7 +24,6 @@ on:
 
 jobs:
   sync-docs:
-    if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
 
     steps:
