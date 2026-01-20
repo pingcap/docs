@@ -107,16 +107,16 @@ This document provides detailed information about the [Connected Care](/tidb-clo
   </tr>
   <tr>
     <td rowspan="5">Customer Resources</td>
-    <td>Documentations</td>
-    <td>Documentations</td>
-    <td>Documentations</td>
-    <td>Documentations</td>
+    <td>Documentation</td>
+    <td>Documentation</td>
+    <td>Documentation</td>
+    <td>Documentation</td>
   </tr>
   <tr>
-    <td>FAQ</td>
-    <td>FAQ</td>
-    <td>FAQ</td>
-    <td>FAQ</td>
+    <td>FAQs</td>
+    <td>FAQs</td>
+    <td>FAQs</td>
+    <td>FAQs</td>
   </tr>
   <tr>
     <td>Community (<a href="https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap">Slack</a> / <a href="https://discord.com/invite/KVRZBR2DrG">Discord</a>)</td>
