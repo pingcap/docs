@@ -702,7 +702,7 @@
     - Connected: IM Interaction for Support Tickets
       - [Interact with Support Tickets via Slack](/tidb-cloud/connected-slack-ticket-interaction.md)
       - [Interact with Support Tickets via Lark](/tidb-cloud/connected-lark-ticket-interaction.md)
-  - [Work with the Support Team](/tidb-cloud/tidb-cloud-support.md)
+  - [Get Support](/tidb-cloud/tidb-cloud-support.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
   - [{{{ .starter }}} FAQs](/tidb-cloud/serverless-faqs.md)

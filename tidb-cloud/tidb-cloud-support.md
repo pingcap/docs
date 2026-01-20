@@ -1,15 +1,37 @@
 ---
-title: Work with the Support Team
+title: TiDB Cloud Support
 summary: Learn how to contact the support team of TiDB Cloud.
 ---
 
-# Work with the Support Team
+# TiDB Cloud Support
 
-TiDB Cloud offers tiered support plans to meet your needs. This document describes how to submit support requests through the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). For more information about support plans, see [Connected Care Details](/tidb-cloud/connected-care-detail.md).
+TiDB Cloud offers tiered support plan offerings tailored to meet customers' needs. This document describes how to send support requests through the PingCAP Help Center portal. For more information about our support offerings, see [Connected Care Details](/tidb-cloud/connected-care-detail.md).
 
-> **Note:**
->
-> To request a [Proof of Concept (PoC)](/tidb-cloud/tidb-cloud-poc.md), a demo, or free trial credits, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and click **Contact Sales**.
+## Support channels
+
+TiDB Cloud provides multiple support channels. The available options depend on the type of issue and your support plan.
+
+- Support tickets ([Help Center](/tidb-cloud/tidb-cloud-support.md))
+
+    Use this ticket-based channel for issues that require direct assistance from the TiDB Cloud support team.
+
+    - [Billing and account tickets](/tidb-cloud/tidb-cloud-support.md#create-an-account-or-billing-support-ticket) are available to all TiDB Cloud users.
+    - [Technical support tickets](/tidb-cloud/tidb-cloud-support.md#create-a-technical-support-ticket) with guaranteed response times are available for paid support plans. If you do not have a paid support plan, use community channels for technical questions.
+
+    The **Enterprise** and **Premium** support plans include the following enhanced capabilities. For more information, see [Connected Care Details](/tidb-cloud/connected-care-detail.md).
+ 
+    - Faster response times with defined SLAs
+    - Real-time communication through IM-based support
+    - Proactive support programs, such as [Clinic](/tidb-cloud/tidb-cloud-clinic.md)
+    - Dedicated or named support roles, such as Technical Account Managers (TAMs)
+
+- Community ([Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap) and [Discord](https://discord.com/invite/KVRZBR2DrG))
+
+    Use these open discussion channels to ask questions, share experiences, and get guidance from other users and PingCAP engineers. These channels are suitable for general questions, usage discussions, and non-urgent technical issues.
+
+- [TiDB.AI](https://tidb.ai/)
+
+    TiDB.AI is an AI-powered assistant that answers common technical and documentation-related questions. It is suitable for quick and self-service help.
 
 ## Access PingCAP Help Center
 
