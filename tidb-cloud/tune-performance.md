@@ -92,7 +92,7 @@ The results are displayed in the form of a table, and you can sort the results b
 
 > **Note:**
 >
-> To improve traffic visibility, {{{ .starter }}} and {{{ .essential }}} now capture and displays the real client IP for connections via AWS PrivateLink. Currently, this feature is limited to the AWS region `us-west-2`.
+> To improve traffic visibility, {{{ .starter }}} and {{{ .essential }}} now capture and display the real client IP for connections via AWS PrivateLink. Currently, this feature is limited to the AWS region `us-west-2`.
 
 </CustomContent>
 
