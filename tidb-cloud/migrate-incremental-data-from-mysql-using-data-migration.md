@@ -11,7 +11,7 @@ This document describes how to migrate incremental data from a MySQL-compatible 
 
 > **Note:**
 >
-> Currently, the Data Migration feature is in public preview for {{{ .essential }}}.
+> Currently, the Data Migration feature is in beta for {{{ .essential }}}.
 
 </CustomContent>
 
