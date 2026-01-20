@@ -41,7 +41,7 @@ Despite these massive achievements, the "Shared-Nothing" architecture of classic
 
     Resources must be planned for the "high water mark" of both online traffic and heavy background tasks. Besides, data size on single TiKV nodes is limited, users often have to add more expensive compute nodes just to get more storage capacity, even if they don't need the extra CPU power.
 
-### The motivation of TiDB X
+### Motivation for TiDB X
 
 These challenges stemmed from the physical binding of data to compute. To break through these ceilings—to achieve 10x faster scaling, zero-interference background tasks, and true pay-as-you-go elasticity—we need to move from "Shared-Nothing" architecture to TiDB X.
 
