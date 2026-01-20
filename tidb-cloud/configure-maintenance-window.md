@@ -70,7 +70,7 @@ You can modify the start time to your preferred time or reschedule maintenance t
 
 5. To reschedule a specific maintenance task, click **...** > **Reschedule** in the **Action** column, and choose a new time before the deadline.
 
-    If you need to reschedule the maintenance task beyond the deadline, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md#tidb-cloud-support) for assistance.
+    If you need to reschedule the maintenance task beyond the deadline, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance.
 
 ## FAQs
 
