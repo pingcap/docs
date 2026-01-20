@@ -46,14 +46,14 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Improve the support experience with plan-aware support options.
 
-    The TiDB Cloud console now offers plan-aware support options to enhance the support experience across all subscription plans. These updates include:
+    The [TiDB Cloud console](https://tidbcloud.com/) now offers plan-aware support options to enhance the support experience across all subscription plans. These updates include:
 
     - **Plan-aware support redirection**: on the cluster overview page, selecting **Get Support** in the **Actions** column directs you to the most relevant resource based on your subscription plan. Users on the Basic plan are guided to the **Support Plan** panel, and users on paid plans are directed to the **Support Portal**.
     - **Refined Help Center menu**: rename help menu items to **Support Options** and **Support Tickets** to better reflect available services. Add tooltips to clarify that technical support tickets are available only for paid plans.
-    - **Clear community support access**: within the **Support Plan** options, Slack and Discord are clearly identified as the primary technical support channels for Basic plan users. The following documentation is streamlined to clarify support channel policies and community access: [Get Support](/tidb-cloud/tidb-cloud-support.md), [Connected Care Overview](/tidb-cloud/connected-care-overview.md), and [Connected Care Details](/tidb-cloud/connected-care-detail.md).
+    - **Clear community support access**: within the **Support Plan** options, Slack and Discord are clearly identified as the primary technical support channels for Basic plan users. The following documentation is streamlined to clarify support channel policies and community access: [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md), [Connected Care Overview](/tidb-cloud/connected-care-overview.md), and [Connected Care Details](/tidb-cloud/connected-care-detail.md).
     - **Action-oriented Support Plan UI**: redesign the **Support Plan** window to prioritize the support options available for your current subscription, rather than generic plan comparisons. This change helps you quickly identify how to get support based on your active plan.
 
-  For more information, see [Connected Care Overview](/tidb-cloud/connected-care-overview.md).
+  For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## January 15, 2026
 
