@@ -452,9 +452,9 @@ When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit lo
 | `CLIENT_IP`       | The current IP address of the client.                                                              |
 | `CLIENT_PORT`     | The current port of the client.                                                                    |
 
-> **Tip:**
+> **Note:**
 >
-> For TiDB Cloud Essential, the connection information now displays the real client IP for traffic via PrivateLink, currently supported on AWS in the us-west-2 region.
+> To improve traffic visibility, {{{ .essential }}} now captures and displays the real client IP for connections via AWS PrivateLink. Currently, this feature is limited to the AWS region `us-west-2`.
 
 ### Audit operation information
 

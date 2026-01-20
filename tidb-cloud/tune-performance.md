@@ -90,13 +90,11 @@ The results are displayed in the form of a table, and you can sort the results b
 
 <CustomContent plan="starter,essential">
 
-> **Tip:**
+> **Note:**
 >
-> For TiDB Cloud Stater & Essential, Slow Query now displays the real client IP for traffic via PrivateLink, currently supported on AWS in the us-west-2 region.
+> To improve traffic visibility, {{{ .starter }}} and {{{ .essential }}} now capture and displays the real client IP for connections via AWS PrivateLink. Currently, this feature is limited to the AWS region `us-west-2`.
 
 </CustomContent>
-
-<CustomContent plan="essential">
 
 For more information, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-slow-query).
 
