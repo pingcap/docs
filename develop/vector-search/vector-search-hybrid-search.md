@@ -153,15 +153,5 @@ For a complete example, see [pytidb hybrid search demo](https://github.com/pingc
 
 Full-text search is still in the early stages with limited accessibility. If you would like to try full-text search in a region that is not yet available, or if you have feedback or need help, feel free to reach out to us:
 
-<CustomContent platform="tidb">
-
-- [Join our Discord](https://discord.gg/zcqexutz2R)
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- [Join our Discord](https://discord.gg/zcqexutz2R)
-- [Visit our Support Portal](https://tidb.support.pingcap.com/)
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)

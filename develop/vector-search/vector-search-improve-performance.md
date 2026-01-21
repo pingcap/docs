@@ -7,21 +7,9 @@ summary: Learn best practices for improving the performance of TiDB Vector Searc
 
 TiDB Vector Search enables you to perform Approximate Nearest Neighbor (ANN) queries that search for results similar to an image, document, or other input. To improve the query performance, review the following best practices.
 
-<CustomContent platform="tidb">
-
-> **Warning:**
->
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
 
 > **Note:**
 >
