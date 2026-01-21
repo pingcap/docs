@@ -1,6 +1,7 @@
 ---
 title: Vector Data Types
 summary: Learn about the Vector data types in TiDB.
+aliases: ['/tidb/stable/vector-search-data-types/','/tidb/dev/vector-search-data-types/','/tidbcloud/vector-search-data-types/']
 ---
 
 # Vector Data Types

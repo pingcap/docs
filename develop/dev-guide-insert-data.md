@@ -1,6 +1,7 @@
 ---
 title: Insert Data
 summary: Learn about how to insert data.
+aliases: ['/tidb/stable/dev-guide-insert-data/','/tidb/dev/dev-guide-insert-data/','/tidbcloud/dev-guide-insert-data/']
 ---
 
 <!-- markdownlint-disable MD029 -->

@@ -1,6 +1,7 @@
 ---
 title: Vector Search Index
 summary: Learn how to build and use the vector search index to accelerate K-Nearest neighbors (KNN) queries in TiDB.
+aliases: ['/tidb/stable/vector-search-index/','/tidb/dev/vector-search-index/','/tidbcloud/vector-search-index/']
 ---
 
 # Vector Search Index

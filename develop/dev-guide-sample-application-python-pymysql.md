@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with PyMySQL
 summary: Learn how to connect to TiDB using PyMySQL. This tutorial gives Python sample code snippets that work with TiDB using PyMySQL.
+aliases: ['/tidb/stable/dev-guide-sample-application-python-pymysql/','/tidb/dev/dev-guide-sample-application-python-pymysql/','/tidbcloud/dev-guide-sample-application-python-pymysql/']
 ---
 
 # Connect to TiDB with PyMySQL

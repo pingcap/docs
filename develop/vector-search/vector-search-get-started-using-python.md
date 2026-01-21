@@ -1,6 +1,7 @@
 ---
 title: Get Started with TiDB + AI via Python
 summary: Learn how to quickly develop an AI application that performs semantic search using Python and TiDB Vector Search.
+aliases: ['/tidb/stable/vector-search-get-started-using-python/','/tidb/dev/vector-search-get-started-using-python/','/tidbcloud/vector-search-get-started-using-python/']
 ---
 
 # Get Started with TiDB + AI via Python

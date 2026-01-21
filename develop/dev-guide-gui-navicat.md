@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with Navicat
 summary: Learn how to connect to TiDB using Navicat.
+aliases: ['/tidb/stable/dev-guide-gui-navicat/','/tidb/dev/dev-guide-gui-navicat/','/tidbcloud/dev-guide-gui-navicat/']
 ---
 
 # Connect to TiDB with Navicat

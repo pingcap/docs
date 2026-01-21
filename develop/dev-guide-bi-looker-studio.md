@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB Cloud with Looker Studio
 summary: Learn how to connect to TiDB Cloud using Looker Studio.
+aliases: ['/tidbcloud/dev-guide-bi-looker-studio/']
 ---
 
 # Connect to TiDB Cloud with Looker Studio

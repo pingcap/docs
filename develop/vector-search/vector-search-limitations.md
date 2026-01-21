@@ -1,6 +1,7 @@
 ---
 title: Vector Search Limitations
 summary: Learn the limitations of the TiDB vector search.
+aliases: ['/tidb/stable/vector-search-limitations/','/tidb/dev/vector-search-limitations/','/tidbcloud/vector-search-limitations/']
 ---
 
 # Vector Search Limitations

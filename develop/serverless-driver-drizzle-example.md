@@ -1,6 +1,7 @@
 ---
 title: TiDB Cloud Serverless Driver Drizzle Tutorial
 summary: Learn how to use TiDB Cloud serverless driver with Drizzle.
+aliases: ['/tidbcloud/serverless-driver-drizzle-example/']
 ---
 
 # TiDB Cloud Serverless Driver Drizzle Tutorial

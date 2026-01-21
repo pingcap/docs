@@ -1,6 +1,7 @@
 ---
 title: ProxySQL Integration Guide
 summary: Learn how to integrate TiDB Cloud and TiDB (self-hosted) with ProxySQL.
+aliases: ['/tidb/stable/dev-guide-proxysql-integration/','/tidb/dev/dev-guide-proxysql-integration/','/tidbcloud/dev-guide-proxysql-integration/']
 ---
 
 # Integrate TiDB with ProxySQL

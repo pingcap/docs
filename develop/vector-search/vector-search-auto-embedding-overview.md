@@ -1,6 +1,7 @@
 ---
 title: Auto Embedding Overview
 summary: Learn how to use Auto Embedding to perform semantic searches with plain text instead of vectors.
+aliases: ['/tidbcloud/vector-search-auto-embedding-overview/']
 ---
 
 # Auto Embedding Overview

@@ -1,6 +1,7 @@
 ---
 title: Create a Database
 summary: Learn steps, rules, and examples to create a database.
+aliases: ['/tidb/stable/dev-guide-create-database/','/tidb/dev/dev-guide-create-database/','/tidbcloud/dev-guide-create-database/']
 ---
 
 # Create a Database

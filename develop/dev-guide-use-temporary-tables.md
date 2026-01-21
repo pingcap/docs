@@ -1,6 +1,7 @@
 ---
 title: Temporary Tables
 summary: Learn how to create, view, query, and delete temporary tables.
+aliases: ['/tidb/stable/dev-guide-use-temporary-tables/','/tidb/dev/dev-guide-use-temporary-tables/','/tidbcloud/dev-guide-use-temporary-tables/']
 ---
 
 # Temporary Tables

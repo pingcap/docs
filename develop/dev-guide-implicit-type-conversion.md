@@ -1,6 +1,7 @@
 ---
 title: Avoid Implicit Type Conversions
 summary: Introduces the possible consequences of implicit type conversions in TiDB and ways to avoid them.
+aliases: ['/tidb/stable/dev-guide-implicit-type-conversion/','/tidb/dev/dev-guide-implicit-type-conversion/','/tidbcloud/dev-guide-implicit-type-conversion/']
 ---
 
 # Avoid Implicit Type Conversions

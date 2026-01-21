@@ -1,6 +1,7 @@
 ---
 title: SQL Performance Tuning
 summary: Introduces TiDB's SQL performance tuning scheme and analysis approach.
+aliases: ['/tidb/stable/dev-guide-optimize-sql/','/tidb/dev/dev-guide-optimize-sql/','/tidbcloud/dev-guide-optimize-sql/']
 ---
 
 # SQL Performance Tuning

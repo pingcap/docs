@@ -1,6 +1,7 @@
 ---
 title: Timeouts in TiDB
 summary: Learn about timeouts in TiDB, and solutions for troubleshooting errors.
+aliases: ['/tidb/stable/dev-guide-timeouts-in-tidb/','/tidb/dev/dev-guide-timeouts-in-tidb/','/tidbcloud/dev-guide-timeouts-in-tidb/']
 ---
 
 # Timeouts in TiDB

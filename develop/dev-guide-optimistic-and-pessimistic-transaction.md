@@ -1,6 +1,7 @@
 ---
 title: Optimistic Transactions and Pessimistic Transactions
 summary: Learn about optimistic and pessimistic transactions in TiDB.
+aliases: ['/tidb/stable/dev-guide-optimistic-and-pessimistic-transaction/','/tidb/dev/dev-guide-optimistic-and-pessimistic-transaction/','/tidbcloud/dev-guide-optimistic-and-pessimistic-transaction/']
 ---
 
 # Optimistic Transactions and Pessimistic Transactions

@@ -1,6 +1,7 @@
 ---
 title: Unstable Result Set
 summary: Learn how to handle the error of an unstable result set.
+aliases: ['/tidb/stable/dev-guide-unstable-result-set/','/tidb/dev/dev-guide-unstable-result-set/','/tidbcloud/dev-guide-unstable-result-set/']
 ---
 
 # Unstable Result Set

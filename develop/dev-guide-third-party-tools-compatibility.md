@@ -1,6 +1,7 @@
 ---
 title: Known Incompatibility Issues with Third-Party Tools
 summary: Describes TiDB compatibility issues with third-party tools found during testing.
+aliases: ['/tidb/stable/dev-guide-third-party-tools-compatibility/','/tidb/dev/dev-guide-third-party-tools-compatibility/','/tidbcloud/dev-guide-third-party-tools-compatibility/']
 ---
 
 # Known Incompatibility Issues with Third-Party Tools

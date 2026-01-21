@@ -1,6 +1,7 @@
 ---
 title: SQL Development Specifications
 summary: Learn about the SQL development specifications for TiDB.
+aliases: ['/tidb/stable/dev-guide-sql-development-specification/','/tidb/dev/dev-guide-sql-development-specification/','/tidbcloud/dev-guide-sql-development-specification/']
 ---
 
 # SQL Development Specifications

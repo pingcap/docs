@@ -1,6 +1,7 @@
 ---
 title: Transaction overview
 summary: A brief introduction to transactions in TiDB.
+aliases: ['/tidb/stable/dev-guide-transaction-overview/','/tidb/dev/dev-guide-transaction-overview/','/tidbcloud/dev-guide-transaction-overview/']
 ---
 
 # Transaction overview

@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB
 summary: Learn how to connect to TiDB.
+aliases: ['/tidb/stable/dev-guide-connect-to-tidb/','/tidb/dev/dev-guide-connect-to-tidb/']
 ---
 
 # Connect to TiDB

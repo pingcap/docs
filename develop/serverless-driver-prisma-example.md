@@ -1,6 +1,7 @@
 ---
 title: TiDB Cloud Serverless Driver Prisma Tutorial
 summary: Learn how to use TiDB Cloud serverless driver with Prisma ORM.
+aliases: ['/tidbcloud/serverless-driver-prisma-example/']
 ---
 
 # TiDB Cloud Serverless Driver Prisma Tutorial

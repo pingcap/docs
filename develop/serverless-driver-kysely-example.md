@@ -1,6 +1,7 @@
 ---
 title: TiDB Cloud Serverless Driver Kysely Tutorial
 summary: Learn how to use TiDB Cloud serverless driver with Kysely.
+aliases: ['/tidbcloud/serverless-driver-kysely-example/']
 ---
 
 # TiDB Cloud Serverless Driver Kysely Tutorial

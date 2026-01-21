@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with JetBrains DataGrip
 summary: Learn how to connect to TiDB using JetBrains DataGrip. This tutorial also applies to the Database Tools and SQL plugin available in other JetBrains IDEs, such as IntelliJ, PhpStorm, and PyCharm.
+aliases: ['/tidb/stable/dev-guide-gui-datagrip/','/tidb/dev/dev-guide-gui-datagrip/','/tidbcloud/dev-guide-gui-datagrip/']
 ---
 
 # Connect to TiDB with JetBrains DataGrip

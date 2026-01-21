@@ -1,6 +1,7 @@
 ---
 title: Query Data from a Single Table
 summary: This document describes how to query data from a single table in a database.
+aliases: ['/tidb/stable/dev-guide-get-data-from-single-table/','/tidb/dev/dev-guide-get-data-from-single-table/','/tidbcloud/dev-guide-get-data-from-single-table/']
 ---
 
 <!-- markdownlint-disable MD029 -->

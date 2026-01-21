@@ -1,6 +1,7 @@
 ---
 title: Vector Search Changelogs
 summary: Learn about the new features, compatibility changes, improvements, and bug fixes for the TiDB vector search feature.
+aliases: ['/tidbcloud/vector-search-changelogs/']
 ---
 
 # Vector Search Changelogs

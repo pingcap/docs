@@ -1,6 +1,7 @@
 ---
 title: Integrate TiDB Vector Search with peewee
 summary: Learn how to integrate TiDB Vector Search with peewee to store embeddings and perform semantic searches.
+aliases: ['/tidb/stable/vector-search-integrate-with-peewee/','/tidb/dev/vector-search-integrate-with-peewee/','/tidbcloud/vector-search-integrate-with-peewee/']
 ---
 
 # Integrate TiDB Vector Search with peewee

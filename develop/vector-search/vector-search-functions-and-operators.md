@@ -1,6 +1,7 @@
 ---
 title: Vector Functions and Operators
 summary: Learn about functions and operators available for Vector data types.
+aliases: ['/tidb/stable/vector-search-functions-and-operators/','/tidb/dev/vector-search-functions-and-operators/','/tidbcloud/vector-search-functions-and-operators/']
 ---
 
 # Vector Functions and Operators

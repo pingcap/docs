@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with DBeaver
 summary: Learn how to connect to TiDB using DBeaver Community.
+aliases: ['/tidb/stable/dev-guide-gui-dbeaver/','/tidb/dev/dev-guide-gui-dbeaver/','/tidbcloud/dev-guide-gui-dbeaver/']
 ---
 
 # Connect to TiDB with DBeaver

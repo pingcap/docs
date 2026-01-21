@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with Prisma
 summary: Learn how to connect to TiDB using Prisma. This tutorial gives Node.js sample code snippets that work with TiDB using Prisma.
+aliases: ['/tidb/stable/dev-guide-sample-application-nodejs-prisma/','/tidb/dev/dev-guide-sample-application-nodejs-prisma/','/tidbcloud/dev-guide-sample-application-nodejs-prisma/']
 ---
 
 # Connect to TiDB with Prisma

@@ -1,6 +1,7 @@
 ---
 title: CRUD SQL in TiDB
 summary: A brief introduction to TiDB's CRUD SQL.
+aliases: ['/tidb/stable/dev-guide-tidb-crud-sql/','/tidb/dev/dev-guide-tidb-crud-sql/','/tidbcloud/dev-guide-tidb-crud-sql/']
 ---
 
 # CRUD SQL in TiDB

@@ -1,6 +1,7 @@
 ---
 title: Follower Read
 summary: Learn how to use Follower Read to optimize query performance.
+aliases: ['/tidb/stable/dev-guide-use-follower-read/','/tidb/dev/dev-guide-use-follower-read/','/tidbcloud/dev-guide-use-follower-read/']
 ---
 
 # Follower Read

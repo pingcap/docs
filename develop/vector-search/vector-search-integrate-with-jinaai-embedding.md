@@ -1,6 +1,7 @@
 ---
 title: Integrate TiDB Vector Search with Jina AI Embeddings API
 summary: Learn how to integrate TiDB Vector Search with Jina AI Embeddings API to store embeddings and perform semantic search.
+aliases: ['/tidb/stable/vector-search-integrate-with-jinaai-embedding/','/tidb/dev/vector-search-integrate-with-jinaai-embedding/','/tidbcloud/vector-search-integrate-with-jinaai-embedding/']
 ---
 
 # Integrate TiDB Vector Search with Jina AI Embeddings API

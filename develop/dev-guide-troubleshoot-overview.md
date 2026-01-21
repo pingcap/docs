@@ -1,6 +1,7 @@
 ---
 title: SQL or Transaction Issues
 summary: Learn how to troubleshoot SQL or transaction issues that might occur during application development.
+aliases: ['/tidb/stable/dev-guide-troubleshoot-overview/','/tidb/dev/dev-guide-troubleshoot-overview/','/tidbcloud/dev-guide-troubleshoot-overview/']
 ---
 
 # SQL or Transaction Issues

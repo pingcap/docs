@@ -1,6 +1,7 @@
 ---
 title: Stale Read
 summary: Learn how to use Stale Read to accelerate queries under certain conditions.
+aliases: ['/tidb/stable/dev-guide-use-stale-read/','/tidb/dev/dev-guide-use-stale-read/','/tidbcloud/dev-guide-use-stale-read/']
 ---
 
 # Stale Read
