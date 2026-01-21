@@ -1,7 +1,7 @@
 ---
 title: Developer Guide Overview
 summary: Introduce the overview of the developer guide for TiDB Cloud and TiDB Self-Managed.
-aliases: ['/tidbcloud/dev-guide-overview/','/tidb/dev/dev-guide-overview/']
+aliases: ['/tidb/stable/dev-guide-overview/','/tidb/dev/dev-guide-overview/','/tidbcloud/dev-guide-overview/']
 ---
 
 # Developer Guide Overview
