@@ -1012,6 +1012,16 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 -   単位: バイト
 -   この変数は、 [`tidb_replica_read`](#tidb_replica_read-new-in-v40) `closest-adaptive`に設定した場合に、TiDBサーバーが同じアベイラビリティゾーンにあるレプリカに読み取りリクエストを送信する際のしきい値を制御するために使用されます。推定結果がこのしきい値以上の場合、TiDB は同じアベイラビリティゾーンにあるレプリカに読み取りリクエストを送信することを優先します。それ以外の場合、TiDB はリーダーレプリカに読み取りリクエストを送信します。
 
+### tidb_advancer_check_point_lag_limit <span class="version-mark">v8.5.5 の新機能</span> {#tidb-advancer-check-point-lag-limit-span-class-version-mark-new-in-v8-5-5-span}
+
+-   範囲: グローバル
+-   クラスターに持続: はい
+-   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
+-   タイプ: 期間
+-   デフォルト値: `48h0m0s`
+-   範囲: `[1s, 8760h0m0s]`
+-   この変数は、ログバックアップタスクの最大許容チェックポイントラグを制御します。タスクのチェックポイントラグがこの制限を超えると、TiDB Advancer はタスクを一時停止します。
+
 ### tidb_allow_tiflash_cop<span class="version-mark">バージョン7.3.0の新機能</span> {#tidb-allow-tiflash-cop-span-class-version-mark-new-in-v7-3-0-span}
 
 -   スコープ: セッション | グローバル
@@ -1087,13 +1097,14 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 >
 > -   この変数は[`tidb_analyze_version`](#tidb_analyze_version-new-in-v510) `2`に設定されている場合にのみ機能します。
 > -   TiDB クラスターを v8.3.0 より前のバージョンから v8.3.0 以降にアップグレードする場合、元の動作を維持するために、この変数はデフォルトで`ALL`に設定されます。
-> -   v8.3.0 以降、新しくデプロイされた TiDB クラスターの場合、この変数はデフォルトで`PREDICATE`に設定されます。
+> -   v8.3.0 から v8.5.4 に新しくデプロイされた TiDB クラスターの場合、この変数はデフォルトで`PREDICATE`に設定されます。
+> -   v8.5.5 以降に新しくデプロイされた TiDB クラスターの場合、この変数はデフォルトで`ALL`に設定されます。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 列挙
--   デフォルト値: `PREDICATE`
+-   デフォルト値: `ALL`
 -   値`PREDICATE`オプション: `ALL`
 -   この変数は、 `ANALYZE TABLE`ステートメントの動作を制御します。 `PREDICATE`に設定すると、 [述語列](/statistics.md#collect-statistics-on-some-columns)の統計のみが収集されます。 `ALL`に設定すると、すべての列の統計が収集されます。OLAPクエリを使用するシナリオでは、 `ALL`に設定することをお勧めします。そうしないと、統計の収集によってクエリのパフォーマンスが大幅に低下する可能性があります。
 
@@ -1104,7 +1115,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 整数
 -   デフォルト値: `4`
--   範囲: `[0, 4294967295]` 。v8.2.0より前のバージョンでは、最小値は`1`です`0`に設定すると、クラスターのサイズに基づいて同時実行性が適応的に調整されます。
+-   範囲: `[0, 4294967295]` 。v8.2.0より前のバージョンでは、最小値は`1`です。5 `0`設定すると、クラスターのサイズに基づいて同時実行性が適応的に調整されます。
 -   この変数は、 `ANALYZE`操作を実行するときに`scan`操作の同時実行性を設定するために使用されます。
 
 ### tidb_analyze_partition_concurrency {#tidb-analyze-partition-concurrency}
@@ -1127,7 +1138,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   TiDB が統計を収集する方法を制御します。
     -   TiDB Self-Managed の場合、この変数のデフォルト値は、v5.3.0 以降、 `1`から`2`に変更されます。
     -   TiDB Cloudの場合、この変数のデフォルト値は、v6.5.0 以降、 `1`から`2`に変更されます。
-    -   クラスターを以前のバージョンからアップグレードした場合、アップグレード後もデフォルト値`tidb_analyze_version`は変更されません。
+    -   クラスターが以前のバージョンからアップグレードされた場合、アップグレード後もデフォルト値`tidb_analyze_version`は変更されません。
 -   この変数の詳細な説明については[統計入門](/statistics.md)参照してください。
 
 ### tidb_analyze_skip_column_types <span class="version-mark">v7.2.0 の新機能</span> {#tidb-analyze-skip-column-types-span-class-version-mark-new-in-v7-2-0-span}
@@ -1233,7 +1244,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   タイプ: フロート
 -   デフォルト値: `0.5`
 -   範囲: `(0, 1]` 。v8.0.0 以前のバージョンの範囲は`[0, 18446744073709551615]`です。
--   この変数は、TiDBがバックグラウンド[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)でテーブル統計情報を更新するために自動分析を実行する際のしきい値を設定するために使用されます。例えば、値が0.5の場合、テーブル内の行の50%以上が変更された時点で自動分析がトリガーされます。自動分析の実行を特定の時間帯のみに制限するには、 `tidb_auto_analyze_start_time`と`tidb_auto_analyze_end_time`指定します。
+-   この変数は、TiDBがバックグラウンドスレッドでテーブル統計情報を更新するために自動分析を実行する際のしきい値を設定するために使用されます。例えば、値が[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)の場合、テーブル内の行の50%以上が変更された時点で自動分析がトリガーされます。自動分析の実行を特定の時間帯のみに制限するには、 `tidb_auto_analyze_start_time`と`tidb_auto_analyze_end_time`指定します。
 
 > **注記：**
 >
@@ -1617,7 +1628,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   タイプ: ブール値
 -   デフォルト値: `ON`
 -   この変数は、インデックス作成時のバックフィル速度を向上させるために、 `ADD INDEX`と`CREATE INDEX`のアクセラレーションを有効にするかどうかを制御します。この変数値を`ON`に設定すると、大量のデータを持つテーブルでのインデックス作成のパフォーマンスが向上します。
--   バージョン7.1.0以降、インデックスアクセラレーション操作はチェックポイントをサポートします。TiDBオーナーノードが再起動されたり、障害により変更されたりした場合でも、TiDBは定期的に自動更新されるチェックポイントから進捗状況を回復できます。
+-   バージョン7.1.0以降、インデックス高速化操作はチェックポイントをサポートします。TiDBオーナーノードが再起動されたり、障害により変更されたりした場合でも、TiDBは定期的に自動更新されるチェックポイントから進捗状況を回復できます。
 -   完了した`ADD INDEX`操作が高速化されているかどうかを確認するには、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs)ステートメントを実行して、 `JOB_TYPE`列に`ingest`が表示されるかどうかを確認します。
 
 <CustomContent platform="tidb-cloud" plan="premium">
@@ -1734,7 +1745,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
     -   `tidb_ddl_enable_fast_reorg` `OFF`に設定した場合、 `ADD INDEX`トランザクションとして実行されます。11 `ADD INDEX`実行中に、対象列に`UPDATE`や`REPLACE`などの更新操作が多数発生する場合、バッチサイズが大きいほどトランザクションの競合が発生する可能性が高くなります。このような場合は、バッチサイズを小さく設定することをお勧めします。最小値は 32 です。
     -   トランザクションの競合がない場合、または`tidb_ddl_enable_fast_reorg` `ON`に設定されている場合は、バッチサイズを大きく設定できます。これによりデータのバックフィルは高速化されますが、TiKVへの書き込み負荷も増加します。適切なバッチサイズについては、 `tidb_ddl_reorg_worker_cnt`の値も参照する必要があります。参考として[オンラインワークロードと`ADD INDEX`操作のインタラクションテスト](https://docs.pingcap.com/tidb/dev/online-workloads-and-add-index-operations)参照してください。
     -   バージョン8.3.0以降、このパラメータはSESSIONレベルでサポートされます。GLOBALレベルでパラメータを変更しても、現在実行中のDDL文には影響しません。新しいセッションで送信されるDDLにのみ適用されます。
-    -   バージョン8.5.0以降では、実行中のDDLジョブに対して`ADMIN ALTER DDL JOBS <job_id> BATCH_SIZE = <new_batch_size>;`実行することでこのパラメータを変更できます。ただし、 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)有効になっている場合、 `ADD INDEX` DDLではこの操作はサポートされません。詳細は[`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)参照してください。
+    -   v8.5.0以降では、 `ADMIN ALTER DDL JOBS <job_id> BATCH_SIZE = <new_batch_size>;`実行することで実行中のDDLジョブに対してこのパラメータを変更できます。v8.5.5より前のTiDBバージョンでは、 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)有効になっている場合、 `ADD INDEX` DDLではこの操作はサポートされませんのでご注意ください。詳細については、 [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)参照してください。
 
 ### tidb_ddl_reorg_priority {#tidb-ddl-reorg-priority}
 
@@ -1810,7 +1821,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   単位: スレッド
 -   この変数は、第`re-organize`フェーズでの DDL 操作の同時実行性を設定するために使用されます。
 -   バージョン8.3.0以降、このパラメータはSESSIONレベルでサポートされます。GLOBALレベルでパラメータを変更しても、現在実行中のDDL文には影響しません。新しいセッションで送信されるDDLにのみ適用されます。
--   バージョン8.5.0以降では、実行中のDDLジョブに対して`ADMIN ALTER DDL JOBS <job_id> THREAD = <new_thread_count>;`実行することでこのパラメータを変更できます。ただし、 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)有効になっている場合、 `ADD INDEX` DDLではこの操作はサポートされません。詳細は[`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)参照してください。
+-   v8.5.0以降では、 `ADMIN ALTER DDL JOBS <job_id> THREAD = <new_thread_count>;`実行することで実行中のDDLジョブに対してこのパラメータを変更できます。v8.5.5より前のTiDBバージョンでは、 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)有効になっている場合、 `ADD INDEX` DDLではこの操作はサポートされませんのでご注意ください。詳細については、 [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)参照してください。
 
 ### <code>tidb_enable_fast_create_table</code><span class="version-mark">バージョン8.0.0の新機能</span> {#code-tidb-enable-fast-create-table-code-span-class-version-mark-new-in-v8-0-0-span}
 
@@ -1883,7 +1894,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   OLAP シナリオの場合、最大値はすべての TiKV ノードの CPU コアの数を超えてはなりません。
 -   テーブルに多数のパーティションがある場合は、TiKV がメモリ不足 (OOM) になるのを避けるために、変数値を適切に減らすことができます (スキャンするデータのサイズとスキャンの頻度によって決まります)。
 -   `LIMIT`句のみを含む単純なクエリの場合、 `LIMIT`値が 100000 未満であれば、TiKV にプッシュダウンされたスキャン操作では、この変数の値が`1`として扱われ、実行効率が向上します。
--   `SELECT MAX/MIN(col) FROM ...`クエリでは、 `col`列のインデックスが`MAX(col)`または`MIN(col)`関数で必要な順序と同じ順序でソートされている場合、TiDB はクエリを`SELECT col FROM ... LIMIT 1`に書き換えて処理し、この変数の値も`1`として処理されます。例えば`SELECT MIN(col) FROM ...`の場合、 `col`列に昇順のインデックスがある場合、TiDB はクエリを`SELECT col FROM ... LIMIT 1`に書き換えてインデックスの最初の行を直接読み取ることで、 `MIN(col)`値を素早く取得できます。
+-   `SELECT MAX/MIN(col) FROM ...`クエリの場合、 `col`列のインデックスが`MAX(col)`または`MIN(col)`関数で必要な順序と同じ順序でソートされている場合、TiDB はクエリを`SELECT col FROM ... LIMIT 1`に書き換えて処理し、この変数の値も`1`として処理されます。例えば`SELECT MIN(col) FROM ...`の場合、 `col`列に昇順のインデックスがある場合、TiDB はクエリを`SELECT col FROM ... LIMIT 1`に書き換えてインデックスの最初の行を直接読み取ることで、 `MIN(col)`値を素早く取得できます。
 -   [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)テーブルに対するクエリの場合、この変数はスロー ログ ファイルの解析の同時実行性を制御します。
 
 ### tidb_dml_batch_size {#tidb-dml-batch-size}
@@ -2097,7 +2108,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: ブール値
 -   デフォルト値: `ON` 。v8.3.0 より前では、デフォルト値は`OFF`です。
--   この変数は、TiDBによる`PREDICATE COLUMNS`収集を有効にするかどうかを制御します。収集を有効にした後に無効にすると、以前に収集された`PREDICATE COLUMNS`の情報がクリアされます。詳細は[いくつかの列の統計を収集する](/statistics.md#collect-statistics-on-some-columns)参照してください。
+-   この変数は、TiDBが`PREDICATE COLUMNS`を収集できるようにするかどうかを制御します。収集を有効にした後に無効にすると、以前に収集された`PREDICATE COLUMNS`の情報がクリアされます。詳細は[いくつかの列の統計を収集する](/statistics.md#collect-statistics-on-some-columns)参照してください。
 
 ### tidb_enable_enhanced_security {#tidb-enable-enhanced-security}
 
@@ -2242,7 +2253,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   可能な`ON` : `OFF`
 -   この変数は、 [カーソルフェッチ](/develop/dev-guide-connection-parameters.md#use-streamingresult-to-get-the-execution-result)機能の動作を制御します。
     -   カーソルフェッチが有効で、この変数が`OFF`に設定されている場合、TiDB はステートメント実行開始時にすべてのデータを読み取り、TiDB のメモリに保存し、クライアントが指定した`FetchSize`に基づいて、後続のクライアント読み取りのためにクライアントにデータを返します。結果セットが大きすぎる場合、TiDB は結果を一時的にハードディスクに書き込むことがあります。
-    -   カーソル フェッチが有効で、この変数が`ON`に設定されている場合、TiDB はすべてのデータを一度に TiDB ノードに読み取るのではなく、クライアントがデータを取得するときに増分的に TiDB ノードにデータを読み込みます。
+    -   カーソル フェッチが有効で、この変数が`ON`に設定されている場合、TiDB はすべてのデータを一度に TiDB ノードに読み取らず、クライアントがデータを取得するたびに TiDB ノードに増分的にデータを読み込みます。
 -   この変数によって制御される機能には、次の制限があります。
     -   明示的なトランザクション内のステートメントはサポートされません。
     -   `TableReader` `IndexReader` `Projection`のみ`IndexLookUp`含む実行プランのみ`Selection`サポートされます。
@@ -2444,7 +2455,7 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   タイプ: 列挙
 -   デフォルト値: `OFF`
 -   `ON` `WARN`値: `OFF`
--   デフォルトでは、TiDBは、まだ実装されていない機能の構文を使用しようとするとエラーを返します。変数値が`ON`に設定されている場合、TiDBはそのような利用できない機能を無視します。これは、SQLコードを変更できない場合に役立ちます。
+-   デフォルトでは、TiDBは、まだ実装されていない機能の構文を使用しようとするとエラーを返します。変数値が`ON`に設定されている場合、TiDBはそのような利用できない機能のケースを黙って無視します。これは、SQLコードを変更できない場合に役立ちます。
 -   `noop`関数を有効にすると、次の動作が制御されます。
     -   `LOCK IN SHARE MODE`構文
     -   `SQL_CALC_FOUND_ROWS`構文
@@ -2826,7 +2837,7 @@ Query OK, 0 rows affected (0.09 sec)
 >
 > -   v8.1.0 より前のバージョンでは、TiDB は定期的にテレメトリ データを PingCAP に報告します。
 > -   v8.1.0からv8.5.1のバージョンでは、TiDBはテレメトリ機能を削除し、変数`tidb_enable_telemetry`は無効になります。これは、以前のバージョンとの互換性のためだけに保持されています。
-> -   v8.5.3以降、TiDBはテレメトリ機能を再度導入しました。ただし、テレメトリ関連の情報はローカルにのみ記録され、ネットワーク経由でPingCAPにデータが送信されなくなりました。
+> -   v8.5.3以降、TiDBはテレメトリ機能を再度導入しました。ただし、テレメトリ関連情報はローカルにのみ記録され、ネットワーク経由でPingCAPにデータが送信されなくなりました。
 
 -   範囲: グローバル
 -   クラスターに持続: はい
@@ -3524,6 +3535,19 @@ MPPは、 TiFlashエンジンが提供する分散コンピューティングフ
 -   単位: スレッド
 -   この変数は、 `index lookup join`アルゴリズムの同時実行性を設定するために使用されます。
 -   値が`-1`の場合、代わりに値`tidb_executor_concurrency`が使用されることを意味します。
+
+### tidb_index_lookup_pushdown_policy <span class="version-mark">v8.5.5 の新機能</span> {#tidb-index-lookup-pushdown-policy-span-class-version-mark-new-in-v8-5-5-span}
+
+-   スコープ: セッション | グローバル
+-   クラスターに持続: はい
+-   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: はい
+-   タイプ: 列挙
+-   デフォルト値: `hint-only`
+-   `force` `affinity-force`オプション: `hint-only`
+-   この変数は、TiDBが`IndexLookUp`演算子をTiKVにプッシュダウンするかどうか、またプッシュダウンするタイミングを制御します。値のオプションは以下のとおりです。
+    -   `hint-only` (デフォルト): TiDB は、SQL ステートメントで[`INDEX_LOOKUP_PUSHDOWN`](/optimizer-hints.md#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855)ヒントが明示的に指定されている場合にのみ、 `IndexLookUp`演算子を TiKV にプッシュダウンします。
+    -   `affinity-force` : TiDB は、 `AFFINITY`オプションで設定されたテーブルに対してのみプッシュダウンを自動的に有効にします。
+    -   `force` : TiDB はすべてのテーブルに対して`IndexLookUp`プッシュダウンを有効にします。
 
 ### tidb_index_merge_intersection_concurrency <span class="version-mark">v6.5.0 の新機能</span> {#tidb-index-merge-intersection-concurrency-span-class-version-mark-new-in-v6-5-0-span}
 
@@ -6338,6 +6362,15 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 > -   `PARALLEL`および`PARALLEL-FAST`モードは[`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530)および[`tidb_enable_tso_follower_proxy`](#tidb_enable_tso_follower_proxy-new-in-v530)と互換性がありません。8 [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530)ゼロ以外の値に設定されている場合、または[`tidb_enable_tso_follower_proxy`](#tidb_enable_tso_follower_proxy-new-in-v530)有効になっている場合、 `tidb_tso_client_rpc_mode`設定は有効にならず、TiDB は常に`DEFAULT`モードで動作します。
 > -   `PARALLEL`および`PARALLEL-FAST`モードは、TiDB における TS 取得の平均時間を短縮するように設計されています。ロングテールレイテンシーやレイテンシースパイクなど、レイテンシーが大きく変動する状況では、これらの 2 つのモードでは目立ったパフォーマンス向上が得られない可能性があります。
 
+### tidb_cb_pd_metadata_error_rate_threshold_ratio <span class="version-mark">v8.5.5 の新機能</span> {#tidb-cb-pd-metadata-error-rate-threshold-ratio-span-class-version-mark-new-in-v8-5-5-span}
+
+-   範囲: グローバル
+-   クラスターに持続: はい
+-   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
+-   デフォルト値: `0`
+-   範囲: `[0, 1]`
+-   この変数は、TiDBがサーキットブレーカーをトリガーするタイミングを制御します。値を`0` （デフォルト）に設定すると、サーキットブレーカーは無効になります。3から`0.01` `1`値に設定すると有効になり、PDに送信された特定のリクエストのエラー率がしきい値に達するか超過すると、サーキットブレーカーがトリガーされます。
+
 ### tidb_ttl_delete_rate_limit <span class="version-mark">v6.5.0 の新機能</span> {#tidb-ttl-delete-rate-limit-span-class-version-mark-new-in-v6-5-0-span}
 
 > **注記：**
@@ -6496,7 +6529,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 <CustomContent platform="tidb-cloud">
 
--   この変数は、TiDBがTiKVに送信するトランザクションコミット要求のバッチサイズを制御するために使用されます。アプリケーションワークロード内のトランザクションの大部分に大量の書き込み操作が含まれる場合、この変数の値を大きくすることでバッチ処理のパフォーマンスを向上させることができます。ただし、この変数の値が大きすぎて、TiKVの単一ログの最大サイズ（デフォルトでは8MiB）を超えると、コミットが失敗する可能性があります。
+-   この変数は、TiDBがTiKVに送信するトランザクションコミット要求のバッチサイズを制御するために使用されます。アプリケーションワークロード内のトランザクションのほとんどに大量の書き込み操作が含まれる場合、この変数の値を大きくすることでバッチ処理のパフォーマンスを向上させることができます。ただし、この変数の値が大きすぎて、TiKVの単一ログの最大サイズ（デフォルトでは8MiB）を超えると、コミットが失敗する可能性があります。
 
 </CustomContent>
 
@@ -6869,7 +6902,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   範囲: なし
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `8.0.11-TiDB-` (tidb バージョン)
--   この変数はMySQLのバージョンとTiDBのバージョンを返します。例：&#39;8.0.11-TiDB-v8.5.4&#39;。
+-   この変数はMySQLのバージョンとTiDBのバージョンを返します。例：&#39;8.0.11-TiDB-v8.5.5&#39;。
 
 ### バージョンコメント {#version-comment}
 

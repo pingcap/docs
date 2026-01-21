@@ -13,16 +13,16 @@ summary: TiDB Cloud Dedicated クラスターを作成する方法を学習し�
 
 ## 始める前に {#before-you-begin}
 
-TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidbcloud.com/signup)クリックしてアカウントを登録してください。
+TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidbcloud.com/signup)をクリックしてアカウントを登録してください。
 
 -   TiDB Cloudを使用してパスワードを管理できるように、メールアドレスとパスワードでサインアップするか、Google、GitHub、または Microsoft アカウントでサインアップすることができます。
--   AWS Marketplaceユーザーの方は、AWS Marketplaceからサインアップすることもできます。サインアップするには、 `TiDB Cloud` in [AWS マーケットプレイス](https://aws.amazon.com/marketplace)を検索し、 「TiDB Cloud」をサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定してください。
--   Azure Marketplaceユーザーの方は、Azure Marketplaceからサインアップすることもできます。サインアップするには、 `TiDB Cloud` in [Azureマーケットプレイス](https://azuremarketplace.microsoft.com)を検索し、 「TiDB Cloud」をサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定してください。
+-   AWS Marketplaceをご利用の場合は、AWS Marketplaceからサインアップすることもできます。サインアップするには、 `TiDB Cloud` in [AWS マーケットプレイス](https://aws.amazon.com/marketplace)を検索し、 「TiDB Cloud」をサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定してください。
+-   Azure Marketplaceをご利用の場合は、Azure Marketplaceからサインアップすることもできます。サインアップするには、 `TiDB Cloud` in [Azureマーケットプレイス](https://azuremarketplace.microsoft.com)を検索し、 「TiDB Cloud」をサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定してください。
 -   Google Cloud Marketplace ユーザーの方は、Google Cloud Marketplace からサインアップすることもできます。サインアップするには、 `TiDB Cloud` in [Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)を検索し、 「TiDB Cloud」をサブスクライブして、画面の指示に従ってTiDB Cloudアカウントを設定してください。
 
-## （オプション）ステップ1. デフォルトのプロジェクトを使用するか、新しいプロジェクトを作成する {#optional-step-1-use-your-default-project-or-create-a-new-project}
+## （オプション）ステップ1. デフォルトのプロジェクトを使用するか、新しいプロジェクトを作成します {#optional-step-1-use-your-default-project-or-create-a-new-project}
 
-[TiDB Cloudコンソール](https://tidbcloud.com/)にログインすると、デフォルトの[プロジェクト](/tidb-cloud/tidb-cloud-glossary.md#project)表示されます。組織内にプロジェクトが 1 つしかない場合は、そのプロジェクト内にクラスターが作成されます。プロジェクトの詳細については、 [組織とプロジェクト](/tidb-cloud/manage-user-access.md#organizations-and-projects)ご覧ください。
+[TiDB Cloudコンソール](https://tidbcloud.com/)にログインすると、デフォルトの[プロジェクト](/tidb-cloud/tidb-cloud-glossary.md#project)が表示されます。組織内にプロジェクトが 1 つしかない場合は、そのプロジェクト内にクラスターが作成されます。プロジェクトの詳細については、 [組織とプロジェクト](/tidb-cloud/manage-user-access.md#organizations-and-projects)ご覧ください。
 
 組織の所有者の場合は、次のように、デフォルト プロジェクトの名前を変更したり、必要に応じてクラスターの新しいプロジェクトを作成したりできます。
 
@@ -32,7 +32,7 @@ TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidb
 
 3.  **「プロジェクト」**ページで、次のいずれかを実行します。
 
-    -   デフォルトのプロジェクトの名前を変更するには、[**アクション**] 列で**[...]** &gt; **[名前の変更]**をクリックします。
+    -   デフォルトのプロジェクトの名前を変更するには、[**アクション]**列で**[...]** &gt; **[名前の変更]**をクリックします。
     -   プロジェクトを作成するには、 **「新しいプロジェクトの作成」**をクリックし、プロジェクトの名前を入力して、 **「確認」**をクリックします。
 
 4.  プロジェクトのクラスター リスト ページに移動するには、 **[プロジェクト]**ページでプロジェクト名をクリックします。
@@ -64,7 +64,7 @@ TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidb
 
     3.  必要に応じて、デフォルトのクラスター名とポート番号を更新します。
 
-    4.  このリージョンにCIDRが設定されていない場合は、CIDRを設定する必要があります。 **「プロジェクトCIDR」**フィールドが表示されない場合は、このリージョンにCIDRが既に設定されていることを意味します。
+    4.  このリージョンにCIDRが設定されていない場合は、CIDRを設定する必要があります。**プロジェクトCIDR**フィールドが表示されない場合は、このリージョンにCIDRがすでに設定されていることを意味します。
 
         > **注記：**
         >
@@ -79,9 +79,13 @@ TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidb
     >
     > [AWS マーケットプレイス](https://aws.amazon.com/marketplace) 、 [Azureマーケットプレイス](https://azuremarketplace.microsoft.com) 、または[Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)を通じてTiDB Cloudにサインアップした場合、AWS アカウント、Azure アカウント、または Google Cloud アカウントを通じて直接支払うことはできますが、 TiDB Cloudコンソールで支払い方法の追加や請求書のダウンロードはできません。
 
-6.  **[作成]を**クリックします。
+6.  **[作成]**をクリックします。
 
-    TiDB Cloudクラスターは約 20 ～ 30 分で作成されます。
+    TiDB Cloudクラスターは約 20 ～ 30 分で作成されます。作成が完了すると、 TiDB Cloudコンソールから通知が届きます。
+
+    > **注記：**
+    >
+    > クラスターの作成時間はリージョンによって異なり、30分以上かかる場合があります。処理に予想よりも大幅に時間がかかる場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)ご連絡ください。
 
 ## ステップ3. ルートパスワードを設定する {#step-3-set-the-root-password}
 
@@ -91,7 +95,7 @@ TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidb
 
 2.  クラスターに接続するためのルート パスワードを設定し、 **[保存]**をクリックします。
 
-    **「パスワードを自動生成」**をクリックすると、ランダムなパスワードが生成されます。生成されたパスワードは再度表示されないため、安全な場所に保存してください。
+    **「パスワードを自動生成」をクリックすると、ランダムなパスワード**が生成されます。生成されたパスワードは再度表示されないため、安全な場所に保存してください。
 
 ## 次は何？ {#what-s-next}
 

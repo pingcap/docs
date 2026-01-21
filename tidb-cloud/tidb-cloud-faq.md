@@ -41,7 +41,7 @@ MySQL クライアントまたはドライバーでサポートされている�
 
 ### TiDB Cloudではどのバージョンの TiDB がサポートされていますか? {#what-versions-of-tidb-are-supported-on-tidb-cloud}
 
--   新しいTiDB Cloud Dedicated クラスターの場合、2025 年 9 月 2 日以降、デフォルトの TiDB バージョンは[バージョン8.5.3](https://docs.pingcap.com/tidb/v8.5/release-8.5.3)なります。
+-   新しいTiDB Cloud Dedicated クラスターの場合、2026 年 1 月 15 日以降、デフォルトの TiDB バージョンは[バージョン8.5.5](https://docs.pingcap.com/tidb/v8.5/release-8.5.5)なります。
 -   TiDB Cloud Starter およびTiDB Cloud Essential クラスターの場合、2025 年 4 月 22 日から TiDB バージョンは[バージョン7.5.2](https://docs.pingcap.com/tidb/v7.5/release-7.5.2)なります。
 
 詳細については[TiDB Cloudリリースノート](/tidb-cloud/tidb-cloud-release-notes.md)参照してください。

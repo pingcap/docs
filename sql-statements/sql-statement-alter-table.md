@@ -5,9 +5,9 @@ summary: TiDB データベースの ALTER TABLE の使用法の概要。
 
 # テーブルの変更 {#alter-table}
 
-この文は、既存のテーブルを新しいテーブル構造に適合するように変更します。文`ALTER TABLE`次の目的で使用できます。
+この文は、既存のテーブルを新しいテーブル構造に適合するように変更します。文`ALTER TABLE`は次の目的で使用できます。
 
--   [`ADD`](/sql-statements/sql-statement-add-index.md) 、または[`RENAME`](/sql-statements/sql-statement-rename-index.md) [`DROP`](/sql-statements/sql-statement-drop-index.md)
+-   [`ADD`](/sql-statements/sql-statement-add-index.md) 、 [`DROP`](/sql-statements/sql-statement-drop-index.md) 、または[`RENAME`](/sql-statements/sql-statement-rename-index.md)インデックス
 -   [`ADD`](/sql-statements/sql-statement-add-column.md) [`DROP`](/sql-statements/sql-statement-drop-column.md)または[`MODIFY`](/sql-statements/sql-statement-modify-column.md) [`CHANGE`](/sql-statements/sql-statement-change-column.md)
 -   [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)テーブルデータ
 
@@ -54,6 +54,7 @@ AlterTableSpec ::=
         | TTLEnable EqOpt ( 'ON' | 'OFF' )
         | TTLJobInterval EqOpt stringLit
     )
+|   'AFFINITY' EqOpt stringLit
 |   PlacementPolicyOption
 
 PlacementPolicyOption ::=
@@ -77,7 +78,7 @@ Query OK, 5 rows affected (0.03 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 ```
 
-次のクエリでは、列 c1 にインデックスが付けられていないため、完全なテーブルスキャンが必要です。
+次のクエリでは、列 c1 にインデックスが付いていないため、完全なテーブルスキャンが必要です。
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
@@ -94,7 +95,7 @@ EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 3 rows in set (0.00 sec)
 ```
 
-ステートメント[`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-add-index.md) 、テーブル t1 にインデックスを追加するために使用できます。3 `EXPLAIN`元のクエリでインデックス範囲スキャンが使用されるようになり、より効率的になっていることを確認します。
+ステートメント[`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-add-index.md)は、テーブル t1 にインデックスを追加するために使用できます。3 `EXPLAIN`元のクエリでインデックス範囲スキャンが使用されるようになり、より効率的になっていることを確認します。
 
 ```sql
 ALTER TABLE t1 ADD INDEX (c1);
@@ -113,7 +114,7 @@ Query OK, 0 rows affected (0.30 sec)
 2 rows in set (0.00 sec)
 ```
 
-TiDBは、DDL変更が`ALTER`のアルゴリズムを使用していることをアサートする機能をサポートしています。これは単なるアサーションであり、テーブルの変更に使用される実際のアルゴリズムを変更するものではないことに注意してください。
+TiDBは、DDL変更が`ALTER`のアルゴリズムを使用していることをアサートする機能をサポートしています。これは単なるアサーションであり、テーブルの変更に使用される実際のアルゴリズムは変更されないことに注意してください。
 
 ```sql
 ALTER TABLE t1 DROP INDEX c1, ALGORITHM=INSTANT;
@@ -133,7 +134,7 @@ ALTER TABLE t1 ADD INDEX (c1), ALGORITHM=INSTANT;
 ERROR 1846 (0A000): ALGORITHM=INSTANT is not supported. Reason: Cannot alter table by INSTANT. Try ALGORITHM=INPLACE.
 ```
 
-ただし、 `ALGORITHM=COPY`のアサーションを`INPLACE`演算に使用すると、エラーではなく警告が生成されます。これは、TiDBがこのアサーションを*「このアルゴリズム以上」*と解釈するためです。TiDBが使用するアルゴリズムはMySQLと異なる可能性があるため、この動作の違いはMySQLとの互換性を保つために役立ちます。
+ただし、 `ALGORITHM=COPY`アサーションを`INPLACE`操作に使用すると、エラーではなく警告が生成されます。これは、TiDB がアサーションを「*このアルゴリズム以上」*と解釈するためです。TiDB が使用するアルゴリズムは MySQL と異なる可能性があるため、この動作の違いは MySQL との互換性を保つために役立ちます。
 
 ```sql
 ALTER TABLE t1 ADD INDEX (c1), ALGORITHM=COPY;
@@ -158,8 +159,8 @@ TiDB の`ALTER TABLE`には次の主な制限が適用されます。
 -   `ALTER TABLE`つのステートメントで複数のスキーマ オブジェクトを変更する場合:
 
     -   同じオブジェクトを複数回変更することはサポートされていません。
-    -   TiDBは**実行前に**テーブルスキーマに従ってステートメントを検証します。例えば、 `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT AFTER c1;`実行すると、列`c1`テーブルに存在しないためエラーが返されます。
-    -   `ALTER TABLE`文の場合、TiDB での実行順序は左から右への変更が次々に実行されるため、場合によっては MySQL と互換性がありません。
+    -   TiDBは**実行前に**テーブルスキーマに従ってステートメントを検証します。例えば、 `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT AFTER c1;`を実行すると、列`c1`テーブルに存在しないためエラーが返されます。
+    -   `ALTER TABLE`ステートメントの場合、TiDB での実行順序は左から右への変更が 1 つずつ順番に実行されるため、場合によっては MySQL と互換性がありません。
 
 -   主キー列の[再編成データ](/sql-statements/sql-statement-modify-column.md#reorg-data-change)種類の変更はサポートされていません。
 
@@ -168,6 +169,8 @@ TiDB の`ALTER TABLE`には次の主な制限が適用されます。
 -   生成された列の列タイプの変更はサポートされていません。
 
 -   一部のデータ型 (たとえば、一部の TIME、Bit、Set、Enum、JSON 型) の変更は、TiDB と MySQL 間の`CAST`関数の動作の互換性の問題によりサポートされていません。
+
+-   `AFFINITY`オプションは TiDB 拡張構文です。テーブルで`AFFINITY`有効にすると、パーティションの追加、削除、再編成、スワップなど、そのテーブルのパーティションスキームを変更できなくなります。パーティションスキームを変更するには、まず`AFFINITY`削除する必要があります。
 
 -   空間データ型はサポートされていません。
 
@@ -181,7 +184,7 @@ TiDB の`ALTER TABLE`には次の主な制限が適用されます。
 -   [列を追加](/sql-statements/sql-statement-add-column.md)
 -   [ドロップカラム](/sql-statements/sql-statement-drop-column.md)
 -   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
--   [インデックスの削除](/sql-statements/sql-statement-drop-index.md)
+-   [インデックスを削除](/sql-statements/sql-statement-drop-index.md)
 -   [インデックス名の変更](/sql-statements/sql-statement-rename-index.md)
 -   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)
 -   [テーブルの作成](/sql-statements/sql-statement-create-table.md)

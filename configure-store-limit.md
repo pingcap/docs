@@ -5,7 +5,7 @@ summary: ストア制限の機能について学びます。
 
 # 店舗制限 {#store-limit}
 
-ストア制限はPDの機能です。様々なシナリオでパフォーマンスを向上させるために、スケジューリング速度をより細かく制御できるように設計されています。
+ストア制限はPDの機能です。様々なシナリオにおいてパフォーマンスを向上させるために、スケジューリング速度をより細かく制御できるように設計されています。
 
 ## 実施原則 {#implementation-principles}
 
@@ -49,6 +49,13 @@ tiup ctl:v<CLUSTER_VERSION> pd store limit remove-peer             // Shows the 
 tiup ctl:v<CLUSTER_VERSION> pd store limit all 5                   // All stores can at most add and delete 5 peers per minute.
 tiup ctl:v<CLUSTER_VERSION> pd store limit all 5 add-peer          // All stores can at most add 5 peers per minute.
 tiup ctl:v<CLUSTER_VERSION> pd store limit all 5 remove-peer       // All stores can at most delete 5 peers per minute.
+```
+
+v8.5.5 以降では、次の例に示すように、特定のstorageエンジン タイプのすべてのストアに対してピア削除操作の速度制限を設定できます。
+
+```bash
+tiup ctl:v<CLUSTER_VERSION> pd store limit all engine tikv 5 remove-peer    // All TiKV stores can at most remove 5 peers per minute.
+tiup ctl:v<CLUSTER_VERSION> pd store limit all engine tiflash 5 remove-peer // All TiFlash stores can at most remove 5 peers per minute.
 ```
 
 ### 単一店舗の制限を設定する {#set-limit-for-a-single-store}

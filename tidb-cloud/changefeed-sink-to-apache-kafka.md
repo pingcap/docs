@@ -11,15 +11,7 @@ summary: このドキュメントでは、TiDB Cloudから Apache Kafka へデ�
 
 > **注記：**
 >
-> -   changefeed 機能を使用するには、 TiDB Cloud Dedicated クラスターのバージョンが v6.1.3 以降であることを確認してください。
-> -   クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、changefeed 機能は使用できません。
-
-</CustomContent>
-<CustomContent plan="premium">
-
-> **注記：**
->
-> クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、changefeed 機能は使用できません。
+> changefeed 機能を使用するには、 TiDB Cloud Dedicated クラスターのバージョンが v6.1.3 以降であることを確認してください。
 
 </CustomContent>
 
@@ -59,7 +51,7 @@ TiDBが<customcontent plan="dedicated">クラスタ</customcontent><customconten
 
 -   Private Connect: VPC CIDR の競合を回避し、セキュリティ コンプライアンスを満たすのに最適ですが、追加の[プライベートデータリンクコスト](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost)発生します。
 -   VPC ピアリング: コスト効率の高いオプションとして適していますが、潜在的な VPC CIDR の競合とセキュリティ上の考慮事項を管理する必要があります。
--   パブリック IP: 素早いセットアップに適しています。
+-   パブリック IP: 簡単なセットアップに適しています。
 
 <CustomContent plan="dedicated">
 
@@ -347,7 +339,7 @@ TiDB Cloud変更フィードが Apache Kafka にデータをストリーミン�
 
 ## ステップ4. チェンジフィード仕様を構成する {#step-4-configure-your-changefeed-specification}
 
-1.  **チェンジフィード仕様**エリアで、<customcontent plan="dedicated">レプリケーション容量単位 (RCU)</customcontent><customcontent plan="premium">チェンジフィード容量単位（CCU）</customcontent>チェンジフィードによって使用されます。
+1.  **チェンジフィード仕様**エリアで、<customcontent plan="dedicated">レプリケーション容量単位（RCU）</customcontent><customcontent plan="premium">チェンジフィード容量単位（CCU）</customcontent>チェンジフィードによって使用されます。
 2.  **「Changefeed 名」**領域で、Changefeed の名前を指定します。
 3.  **「次へ」**をクリックして設定した構成を確認し、次のページに進みます。
 

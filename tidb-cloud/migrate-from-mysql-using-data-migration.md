@@ -6,7 +6,15 @@ aliases: ['/tidbcloud/migrate-data-into-tidb','/tidbcloud/migrate-incremental-da
 
 # データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する {#migrate-mysql-compatible-databases-to-tidb-cloud-using-data-migration}
 
-このドキュメントでは、 [TiDB Cloudコンソール](https://tidbcloud.com/)のデータ移行機能を使用して、MySQL データベースを Amazon Aurora MySQL、Amazon RDS、Azure Database for MySQL - Flexible Server、Google Cloud SQL for MySQL、またはセルフマネージド MySQL インスタンスからTiDB Cloudに移行する方法について説明します。
+このドキュメントでは、Amazon Aurora MySQL、Amazon RDS、Azure Database for MySQL - Flexible Server、Google Cloud SQL for MySQL、またはセルフマネージドMySQLインスタンスからMySQLデータベースを移行する方法について説明します。<customcontent plan="dedicated"> TiDB Cloud専用</customcontent><customcontent plan="essential">TiDB Cloudエッセンシャル</customcontent>[TiDB Cloudコンソール](https://tidbcloud.com/)のデータ移行機能を使用します。
+
+<CustomContent plan="essential">
+
+> **注記：**
+>
+> 現在、 TiDB Cloud Essential のデータ移行機能はベータ版です。
+
+</CustomContent>
 
 この機能により、既存のMySQLデータを移行し、MySQL互換のソースデータベースからTiDB Cloudに直接、進行中の変更（ binlog ）を継続的に複製することで、同一リージョン内または異なるリージョン間でデータの一貫性を維持できます。この合理化されたプロセスにより、個別のダンプおよびロード操作が不要になり、ダウンタイムが短縮され、MySQLからよりスケーラブルなプラットフォームへの移行が簡素化されます。
 
@@ -16,38 +24,82 @@ MySQL 互換データベースからTiDB Cloudに進行中のbinlog の変更の
 
 ### 可用性 {#availability}
 
--   データ移行機能は、 **TiDB Cloud Dedicated**クラスターでのみ使用できます。
+-   現在、データ移行機能はTiDB Cloud Starter では利用できません。
+
+<CustomContent plan="dedicated">
 
 -   [TiDB Cloudコンソール](https://tidbcloud.com/)にTiDB Cloud Dedicated クラスターの[データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md#step-1-go-to-the-data-migration-page)エントリが表示されない場合、この機能はお客様のリージョンではご利用いただけない可能性があります。お客様のリージョンでのサポートをご希望の場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+
+</CustomContent>
 
 -   Amazon Aurora MySQL ライターインスタンスは、既存データと増分データの両方の移行をサポートします。Amazon Aurora MySQL リーダーインスタンスは、既存データのみの移行をサポートし、増分データ移行はサポートしません。
 
 ### 移行ジョブの最大数 {#maximum-number-of-migration-jobs}
 
-組織ごとに最大200件の移行ジョブを作成できます。それ以上の移行ジョブを作成するには、 [サポートチケットを提出する](/tidb-cloud/tidb-cloud-support.md) .
+<CustomContent plan="dedicated">
+
+TiDB Cloud Dedicated クラスタでは、組織ごとに最大 200 件の移行ジョブを作成できます。それ以上の移行ジョブを作成するには、 [サポートチケットを提出する](/tidb-cloud/tidb-cloud-support.md)実行する必要があります。
+
+</CustomContent>
+<CustomContent plan="essential">
+
+TiDB Cloud Essential クラスタでは、組織ごとに最大 100 件の移行ジョブを作成できます。それ以上の移行ジョブを作成するには、 [サポートチケットを提出する](/tidb-cloud/tidb-cloud-support.md)実行する必要があります。
+
+</CustomContent>
 
 ### フィルタリングされ削除されたデータベース {#filtered-out-and-deleted-databases}
 
 -   移行対象データベースをすべて選択した場合でも、システムデータベースは除外され、 TiDB Cloudに移行されません。つまり、 `mysql` 、 `information_schema` 、 `performance_schema` 、 `sys`はこの機能では移行されません。
 
+<CustomContent plan="dedicated">
+
 -   TiDB Cloudでクラスターを削除すると、そのクラスター内のすべての移行ジョブが自動的に削除され、回復できなくなります。
+
+</CustomContent>
+
+<CustomContent plan="essential">
+
+### Alibaba Cloud RDS の制限 {#limitations-of-alibaba-cloud-rds}
+
+Alibaba Cloud RDS をデータソースとして使用する場合、すべてのテーブルに明示的な主キーが必要です。主キーのないテーブルの場合、RDS はbinlogに非表示の主キーを追加します。これにより、ソーステーブルとのスキーマの不一致が発生し、移行が失敗します。
+
+### Alibaba Cloud PolarDB-X の制限 {#limitations-of-alibaba-cloud-polardb-x}
+
+完全なデータ移行中に、PolarDB-X スキーマにダウンストリーム データベースと互換性のないキーワードが含まれる場合があり、インポートが失敗する可能性があります。
+
+これを防ぐには、移行プロセスを開始する前に、ダウンストリーム データベースにターゲット テーブルを作成します。
+
+</CustomContent>
 
 ### 既存のデータ移行の制限 {#limitations-of-existing-data-migration}
 
 -   既存のデータの移行中に、ターゲット データベースに移行対象のテーブルがすでに含まれていて、重複キーがある場合は、重複キーを持つ行が置き換えられます。
 
--   データセットのサイズが1 TiB未満の場合は、論理モード（デフォルトモード）の使用をお勧めします。データセットのサイズが1 TiBを超える場合、または既存のデータをより速く移行したい場合は、物理モードを使用できます。詳細については、 [既存データと増分データを移行する](#migrate-existing-data-and-incremental-data)ご覧ください。
+<CustomContent plan="dedicated">
+
+-   TiDB Cloud Dedicatedでは、データセットのサイズが1 TiB未満の場合は、論理モード（デフォルトモード）の使用をお勧めします。データセットのサイズが1 TiBを超える場合、または既存のデータをより迅速に移行したい場合は、物理モードを使用できます。詳細については、 [既存データと増分データを移行する](#migrate-existing-data-and-incremental-data)ご覧ください。
+
+</CustomContent>
+<CustomContent plan="essential">
+
+-   TiDB Cloud Essentialでは、現在、データ移行は論理モードのみをサポートしています。このモードでは、MySQLソースデータベースからデータをSQL文としてエクスポートし、TiDBで実行します。このモードでは、移行前のターゲットテーブルは空でも空でなくても構いません。
+
+</CustomContent>
 
 ### 増分データ移行の制限 {#limitations-of-incremental-data-migration}
 
--   増分データ移行中に、移行対象のテーブルがターゲットデータベースに重複キーで既に存在する場合、エラーが報告され、移行は中断されます。このような状況では、MySQLソースデータが正確かどうかを確認する必要があります。正しい場合は、移行ジョブの「再開」ボタンをクリックしてください。移行ジョブは、ターゲットTiDB Cloudクラスタの競合するレコードをMySQLソースレコードに置き換えます。
+-   増分データ移行中に、移行対象のテーブルがターゲットデータベースに重複キーで既に存在する場合、エラーが報告され、移行は中断されます。このような状況では、MySQLソースデータが正確であることを確認する必要があります。正確であれば、移行ジョブの**「再開」**ボタンをクリックしてください。移行ジョブは、ターゲットクラスタ内の競合するレコードをMySQLソースレコードに置き換えます。
 
--   増分レプリケーション（進行中の変更をクラスタに移行する）中に、移行ジョブが突発的なエラーから回復した場合、60秒間のセーフモードが起動することがあります。セーフモード中は、 `INSERT`文が`REPLACE`として、 `UPDATE`文が`DELETE`および`REPLACE`として移行され、その後、これらのトランザクションがターゲットTiDB Cloudクラスタに移行されます。これにより、突発的なエラー発生時のすべてのデータがターゲットTiDB Cloudクラスタにスムーズに移行されたことが確認されます。このシナリオでは、主キーや非NULLの一意のインデックスを持たないMySQLソーステーブルの場合、データがターゲットTiDB Cloudクラスタに繰り返し挿入される可能性があるため、一部のデータがターゲットTiDB Cloudクラスタで重複する可能性があります。
+-   増分データ移行（クラスタへの進行中の変更の移行）中に、移行ジョブが突発的なエラーから回復した場合、60秒間のセーフモードが開くことがあります。セーフモード中は、 `INSERT`文は`REPLACE`として、 `UPDATE`文は`DELETE`および`REPLACE`として移行され、その後、これらのトランザクションがターゲットTiDB Cloudクラスタに移行されます。これにより、突発的なエラー発生時のすべてのデータがターゲットTiDB Cloudクラスタにスムーズに移行されたことが保証されます。このシナリオでは、主キーや非NULLの一意のインデックスを持たないMySQLソーステーブルの場合、データがターゲットTiDB Cloudクラスタに繰り返し挿入される可能性があるため、一部のデータがターゲットTiDB Cloudクラスタで重複する可能性があります。
 
--   次のシナリオでは、移行ジョブに 24 時間以上かかる場合は、ソース データベースのバイナリ ログを消去せず、データ移行が増分レプリケーション用に連続したバイナリ ログを取得できるようにします。
+<CustomContent plan="dedicated">
+
+-   以下のシナリオでは、移行ジョブに24時間以上かかる場合、ソースデータベースのバイナリログをパージしないでください。これにより、Data Migrationは増分データ移行のために連続したバイナリログを取得できます。
 
     -   既存のデータの移行中。
     -   既存のデータ移行が完了し、増分データ移行が初めて開始されたとき、レイテンシーは0 ミリ秒ではありません。
+
+</CustomContent>
 
 ## 前提条件 {#prerequisites}
 
@@ -55,7 +107,9 @@ MySQL 互換データベースからTiDB Cloudに進行中のbinlog の変更の
 
 ### データソースとバージョンがサポートされていることを確認してください {#make-sure-your-data-source-and-version-are-supported}
 
-データ移行では、次のデータ ソースとバージョンがサポートされます。
+<CustomContent plan="dedicated">
+
+TiDB Cloud Dedicated の場合、データ移行機能は次のデータ ソースとバージョンをサポートします。
 
 | データソース                                 | サポートされているバージョン |
 | :------------------------------------- | :------------- |
@@ -64,6 +118,23 @@ MySQL 互換データベースからTiDB Cloudに進行中のbinlog の変更の
 | Amazon RDS MySQL                       | 8.0、5.7        |
 | Azure Database for MySQL - フレキシブル サーバー | 8.0、5.7        |
 | MySQL 用 Google Cloud SQL               | 8.0、5.7、5.6    |
+| アリババクラウド RDS MySQL                     | 8.0、5.7        |
+
+</CustomContent>
+<CustomContent plan="essential">
+
+TiDB Cloud Essential の場合、データ移行機能は次のデータ ソースとバージョンをサポートします。
+
+| データソース                                 | サポートされているバージョン |
+| :------------------------------------- | :------------- |
+| セルフマネージド MySQL (オンプレミスまたはパブリック クラウド)   | 8.0、5.7        |
+| Amazon Aurora MySQL                    | 8.0、5.7        |
+| Amazon RDS MySQL                       | 8.0、5.7        |
+| アリババクラウド RDS MySQL                     | 8.0、5.7        |
+| Azure Database for MySQL - フレキシブル サーバー | 8.0、5.7        |
+| MySQL 用 Google Cloud SQL               | 8.0、5.7        |
+
+</CustomContent>
 
 ### レプリケーション用のソースMySQL互換データベースでバイナリログを有効にする {#enable-binary-logs-in-the-source-mysql-compatible-database-for-replication}
 
@@ -88,7 +159,7 @@ SHOW VARIABLES WHERE Variable_name IN
 
 必要に応じて、必要な値に合わせてソース MySQL インスタンスの構成を変更します。
 
-<details><summary>セルフマネージドMySQLインスタンスを構成する</summary>
+<details><summary>セルフマネージド MySQL インスタンスを構成する</summary>
 
 1.  `/etc/my.cnf`を開いて以下を追加します。
 
@@ -144,11 +215,35 @@ SHOW VARIABLES WHERE Variable_name IN
 
 </details>
 
+<details><summary>Alibaba Cloud RDS MySQLの設定</summary>
+
+1.  [ApsaraDB RDS コンソール](https://rds.console.aliyun.com/)でインスタンスのリージョンを選択し、RDS for MySQL インスタンスの ID をクリックします。
+
+2.  左側のナビゲーション ペインで**[パラメーター]**をクリックし、各パラメーターを検索して、次の値を設定します。
+
+    -   `binlog_row_image` : `FULL`
+
+3.  左側のナビゲーションペインで、 **「バックアップと復元」**をクリックし、 **「バックアップ戦略」**を選択します。移行中にDMが連続したbinlogファイルにアクセスできるようにするには、以下の制約に従ってバックアップ戦略を設定します。
+
+    -   保持期間: 少なくとも 3 日間に設定します (7 日間を推奨)。
+
+    -   保持されるファイル: 古いログが早期に上書きされないように、「ファイルの最大数」が十分であることを確認します。
+
+    -   ストレージの安全対策：ストレージの使用状況を注意深く監視してください。RDS は、保存期間の設定に関係なく、ディスク容量の使用量がシステムのしきい値に達した場合、最も古いバイナリログを自動的に消去します。
+
+4.  変更を適用した後 (必要に応じて再起動した後)、インスタンスに接続し、このセクションの`SHOW VARIABLES`ステートメントを実行して構成を確認します。
+
+詳細については[インスタンスパラメータを設定する](https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/modify-the-parameters-of-an-apsaradb-rds-for-mysql-instance)参照してください。
+
+</details>
+
 ### ネットワーク接続を確保する {#ensure-network-connectivity}
 
 移行ジョブを作成する前に、ソース MySQL インスタンス、 TiDB Cloud Data Migration (DM) サービス、およびターゲットTiDB Cloudクラスター間の適切なネットワーク接続を計画して設定する必要があります。
 
-利用可能な接続方法は次のとおりです。
+<CustomContent plan="dedicated">
+
+TiDB Cloud Dedicated の場合、利用可能な接続方法は次のとおりです。
 
 | 接続方法                      | 可用性                                | おすすめ                                                   |
 | :------------------------ | :--------------------------------- | :----------------------------------------------------- |
@@ -156,23 +251,38 @@ SHOW VARIABLES WHERE Variable_name IN
 | プライベートリンクまたはプライベートエンドポイント | AWSとAzureのみ                        | パブリックインターネットにデータを公開せずに本番環境のワークロードを実行                   |
 | VPCピアリング                  | AWSとGoogle Cloudのみ                 | 低レイテンシのリージョン内接続を必要とし、重複しない VPC/VNet CIDR を持つ本番環境ワークロード |
 
+</CustomContent>
+<CustomContent plan="essential">
+
+TiDB Cloud Essential の場合、使用できる接続方法は次のとおりです。
+
+| 接続方法                      | 可用性                                | おすすめ                                 |
+| :------------------------ | :--------------------------------- | :----------------------------------- |
+| パブリックエンドポイントまたはIPアドレス     | TiDB Cloudでサポートされているすべてのクラウドプロバイダー | 迅速な概念実証の移行、テスト、またはプライベート接続が利用できない場合  |
+| プライベートリンクまたはプライベートエンドポイント | AWSとAlibaba Cloudのみ                | パブリックインターネットにデータを公開せずに本番環境のワークロードを実行 |
+
+</CustomContent>
+
 クラウド プロバイダー、ネットワーク トポロジ、セキュリティ要件に最適な接続方法を選択し、その方法のセットアップ手順に従います。
 
 #### TLS/SSL によるエンドツーエンドの暗号化 {#end-to-end-encryption-over-tls-ssl}
 
-接続方法に関わらず、エンドツーエンドの暗号化にはTLS/SSLの使用を強くお勧めします。プライベートエンドポイントとVPCピアリングはネットワークパスを保護しますが、TLS/SSLはデータ自体を保護し、コンプライアンス要件の遵守に役立ちます。
+接続方法に関わらず、エンドツーエンドの暗号化にはTLS/SSLを使用することを強くお勧めします。プライベートエンドポイントでは<customcontent plan="dedicated">VPCピアリング</customcontent>ネットワーク パスを保護し、TLS/SSL はデータ自体を保護し、コンプライアンス要件を満たすのに役立ちます。
 
 <details><summary>TLS/SSL暗号化接続用のクラウドプロバイダーの証明書をダウンロードして保存します</summary>
 
 -   Amazon Aurora MySQL または Amazon RDS MySQL: [SSL/TLS を使用して DB インスタンスまたはクラスターへの接続を暗号化する](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
 -   Azure Database for MySQL - フレキシブル サーバー: [暗号化された接続で接続する](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-connect-tls-ssl)
 -   MySQL 用 Google Cloud SQL: [SSL/TLS証明書を管理する](https://cloud.google.com/sql/docs/mysql/manage-ssl-instance)
+-   アリババクラウド RDS MySQL: [SSL暗号化機能を設定する](https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/configure-a-cloud-certificate-to-enable-ssl-encryption)
 
 </details>
 
 #### パブリックエンドポイントまたはIPアドレス {#public-endpoints-or-ip-addresses}
 
 パブリックエンドポイントを使用する場合、ネットワーク接続とアクセスを、DMジョブ作成プロセス中にも、すぐにでも確認できます。その際、 TiDB Cloud具体的な出力IPアドレスと指示が表示されます。
+
+<CustomContent plan="dedicated">
 
 > **注記**：
 >
@@ -182,13 +292,15 @@ SHOW VARIABLES WHERE Variable_name IN
 > -   セットアップ プロセス中にクラウド プロバイダーのコンソールにアクセスできます。
 > -   ファイアウォールを構成するために、タスク作成ワークフローを一時停止できます。
 
+</CustomContent>
+
 1.  ソース MySQL インスタンスのエンドポイント ホスト名 (FQDN) またはパブリック IP アドレスを識別して記録します。
 
-2.  データベースのファイアウォールまたはセキュリティグループのルールを変更するために必要な権限があることを確認してください。以下の手順については、クラウドプロバイダーのドキュメントを参照してください。
+2.  データベースのファイアウォールまたはセキュリティグループのルールを変更するために必要な権限があることを確認してください。詳細については、クラウドプロバイダーのドキュメントを参照してください。
 
     -   Amazon Aurora MySQL または Amazon RDS MySQL: [セキュリティグループによるアクセス制御](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Overview.RDSSecurityGroups.html) .
     -   Azure Database for MySQL - フレキシブル サーバー: [パブリックネットワークアクセス](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-networking-public)
-    -   MySQL 用 Google Cloud SQL: [承認されたネットワーク](https://cloud.google.com/sql/docs/mysql/configure-ip#authorized-networks) 。
+    -   MySQL 用 Google Cloud SQL: [承認されたネットワーク](https://cloud.google.com/sql/docs/mysql/configure-ip?__hstc=86493575.39bd75fe158e3a694e276e9709c7bc82.1766498597248.1768349165136.1768351956126.50&#x26;__hssc=86493575.1.1768351956126&#x26;__hsfp=3e9153f1372737b813f3fefb5bbb2ddf#authorized-networks) 。
 
 3.  オプション: 転送中の暗号化に適切な証明書を使用して、パブリック インターネットにアクセスできるマシンからソース データベースへの接続を確認します。
 
@@ -199,6 +311,8 @@ SHOW VARIABLES WHERE Variable_name IN
 4.  後ほど、データ移行ジョブのセットアップ中に、 TiDB Cloud出力 IP 範囲が提供されます。その際に、上記と同じ手順に従って、この IP 範囲をデータベースのファイアウォールまたはセキュリティグループのルールに追加する必要があります。
 
 #### プライベートリンクまたはプライベートエンドポイント {#private-link-or-private-endpoint}
+
+<CustomContent plan="dedicated">
 
 プロバイダーネイティブのプライベート リンクまたはプライベート エンドポイントを使用する場合は、ソース MySQL インスタンス (RDS、 Aurora、または Azure Database for MySQL) のプライベート エンドポイントを作成します。
 
@@ -250,6 +364,15 @@ Azure Database for MySQL - フレキシブル サーバーは、ネイティブ�
 
 </details>
 
+</CustomContent>
+<CustomContent plan="essential">
+
+プロバイダーネイティブのプライベート リンクまたはプライベート エンドポイントを使用する場合は、ソース MySQL インスタンス用に[プライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md)作成します。
+
+</CustomContent>
+
+<CustomContent plan="dedicated">
+
 #### VPCピアリング {#vpc-peering}
 
 AWS VPC ピアリングまたは Google Cloud VPC ネットワーク ピアリングを使用する場合は、次の手順を参照してネットワークを構成してください。
@@ -285,6 +408,8 @@ MySQL サービスが Google Cloud VPC 内にある場合は、次の手順を�
 
 </details>
 
+</CustomContent>
+
 ### 移行に必要な権限を付与する {#grant-required-privileges-for-migration}
 
 移行を開始する前に、ソースデータベースとターゲットデータベースの両方で必要な権限を持つ適切なデータベースユーザーを設定する必要があります。これらの権限により、TiDB Cloud DMはMySQLからデータを読み取り、変更を複製し、 TiDB Cloudクラスタに安全に書き込むことができます。移行には、既存データの完全なデータダンプと増分変更のbinlogレプリケーションの両方が含まれるため、移行ユーザーには基本的な読み取りアクセスに加えて、特定の権限が必要です。
@@ -295,12 +420,12 @@ MySQL サービスが Google Cloud VPC 内にある場合は、次の手順を�
 
 本番ワークロードの場合、ソース MySQL データベースでのデータ ダンプとレプリケーション専用のユーザーを用意し、必要な権限のみを付与することをお勧めします。
 
-| 特権                   | 範囲    | 目的                                |
-| :------------------- | :---- | :-------------------------------- |
-| `SELECT`             | テーブル  | すべてのテーブルからデータを読み取ることができます         |
-| `RELOAD`             | グローバル | フルダンプ中に一貫したスナップショットを確保            |
-| `REPLICATION SLAVE`  | グローバル | 増分レプリケーションのためのbinlogストリーミングを有効にする |
-| `REPLICATION CLIENT` | グローバル | binlogの位置とサーバーのステータスへのアクセスを提供します  |
+| 特権                   | 範囲    | 目的                               |
+| :------------------- | :---- | :------------------------------- |
+| `SELECT`             | テーブル  | すべてのテーブルからデータを読み取ることができます        |
+| `RELOAD`             | グローバル | フルダンプ中に一貫したスナップショットを確保           |
+| `REPLICATION SLAVE`  | グローバル | 増分データ移行のためのbinlogストリーミングを有効にする   |
+| `REPLICATION CLIENT` | グローバル | binlogの位置とサーバーのステータスへのアクセスを提供します |
 
 たとえば、ソース MySQL インスタンスで次の`GRANT`ステートメントを使用して、対応する権限を付与できます。
 
@@ -319,12 +444,12 @@ GRANT SELECT, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_source
 | `CREATE`      | データベース、テーブル | ターゲットにスキーマオブジェクトを作成します    |
 | `SELECT`      | テーブル        | 移行中にデータを検証する              |
 | `INSERT`      | テーブル        | 移行されたデータを書き込む             |
-| `UPDATE`      | テーブル        | 増分レプリケーション中に既存の行を変更します    |
+| `UPDATE`      | テーブル        | 増分データ移行中に既存の行を変更します       |
 | `DELETE`      | テーブル        | レプリケーションまたは更新中に行を削除します    |
 | `ALTER`       | テーブル        | スキーマが変更されたときにテーブル定義を変更します |
 | `DROP`        | データベース、テーブル | スキーマ同期中にオブジェクトを削除します      |
 | `INDEX`       | テーブル        | インデックスを作成および変更する          |
-| `CREATE VIEW` | ビュー         | 移行で使用するビューを作成する           |
+| `CREATE VIEW` | ビュー         | 移行で使用されるビューを作成します         |
 
 たとえば、ターゲットのTiDB Cloudクラスターで次の`GRANT`ステートメントを実行して、対応する権限を付与できます。
 
@@ -340,7 +465,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_t
     >
     > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[移行]**をクリックします。
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[データ移行]**をクリックします。
 
 3.  **「データ移行」**ページで、右上隅の**「移行ジョブの作成」**をクリックします。 **「移行ジョブの作成」**ページが表示されます。
 
@@ -353,15 +478,44 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_t
 2.  ソース接続プロファイルを入力します。
 
     -   **データ ソース**: データ ソースの種類。
+
+    <CustomContent plan="dedicated">
+
     -   **接続方法**: セキュリティ要件とクラウド プロバイダーに基づいて、データ ソースの接続方法を選択します。
+
         -   **パブリック IP** : すべてのクラウド プロバイダーで利用可能 (テストおよび概念実証の移行に推奨)。
         -   **プライベート リンク**: AWS および Azure でのみ使用可能 (プライベート接続を必要とする本番のワークロードに推奨)。
         -   **VPC ピアリング**: AWS と Google Cloud でのみ利用可能 (重複しない VPC/VNet CIDR を使用した低レイテンシのリージョン内接続を必要とする本番ワークロードに推奨)。
+
+    </CustomContent>
+     <CustomContent plan="essential">
+
+    -   **接続方法**: セキュリティ要件とクラウド プロバイダーに基づいて、データ ソースの接続方法を選択します。
+
+        -   **パブリック**: すべてのクラウド プロバイダーで利用可能 (テストおよび概念実証の移行に推奨)。
+        -   **プライベートリンク**: AWS および Alibaba Cloud でのみ利用可能 (プライベート接続を必要とする本番のワークロードに推奨)。
+
+    </CustomContent>
+
+    <CustomContent plan="dedicated">
+
     -   選択した**接続方法**に基づいて、次の操作を実行します。
+
         -   **パブリック IP**または**VPC ピアリングを**選択した場合は、**ホスト名または IP アドレス**フィールドにデータ ソースのホスト名または IP アドレスを入力します。
         -   **プライベートリンク**を選択した場合は、次の情報を入力します。
             -   **エンドポイント サービス名**(**データ ソースが**AWS からのものである場合に使用可能): RDS またはAuroraインスタンス用に作成した VPC エンドポイント サービス名 (形式: `com.amazonaws.vpce-svc-xxxxxxxxxxxxxxxxx` ) を入力します。
             -   **プライベート エンドポイント リソース ID** (**データ ソース**が Azure からのものである場合に使用可能): MySQL フレキシブル サーバー インスタンスのリソース ID を入力します (形式: `/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>` )。
+
+    </CustomContent>
+     <CustomContent plan="essential">
+
+    -   選択した**接続方法**に基づいて、次の操作を実行します。
+
+        -   **[パブリック]**を選択した場合は、 **[ホスト名または IP アドレス]**フィールドにデータ ソースのホスト名または IP アドレスを入力します。
+        -   **プライベート リンク**を選択した場合は、セクション[プライベートリンクまたはプライベートエンドポイント](#private-link-or-private-endpoint)で作成したプライベート リンク接続を選択します。
+
+    </CustomContent>
+
     -   **ポート**: データ ソースのポート。
     -   **ユーザー名**: データ ソースのユーザー名。
     -   **パスワード**: ユーザー名のパスワード。
@@ -402,16 +556,37 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_t
 
 5.  表示されるメッセージに従ってアクションを実行します。
 
+    <CustomContent plan="dedicated">
+
     -   接続方法として**パブリック IP**または**VPC ピアリングを**使用する場合は、データ移行サービスの IP アドレスをソース データベースとファイアウォール (存在する場合) の IP アクセス リストに追加する必要があります。
     -   接続方法として**Private Link**を使用する場合は、エンドポイント要求を受け入れるように求められます。
         -   AWS の場合: [AWS VPCコンソール](https://us-west-2.console.aws.amazon.com/vpc/home)に移動し、 **[エンドポイント サービス]**をクリックして、 TiDB Cloudからのエンドポイント要求を承認します。
         -   Azure の場合: [Azureポータル](https://portal.azure.com)に移動し、MySQL フレキシブル サーバーを名前で検索し、左側のナビゲーション ペインで**[設定]** &gt; **[ネットワーク] を**クリックし、右側の**[プライベート エンドポイント]**セクションを見つけて、 TiDB Cloudからの保留中の接続要求を承認します。
 
+    </CustomContent>
+     <CustomContent plan="essential">
+
+    パブリック IP を使用する場合は、データ移行サービスの IP アドレスをソース データベースとファイアウォール (存在する場合) の IP アクセス リストに追加する必要があります。
+
+    </CustomContent>
+
 ## ステップ3: 移行ジョブの種類を選択する {#step-3-choose-migration-job-type}
 
-**移行するオブジェクトの選択**手順では、既存のデータの移行、増分データの移行、またはその両方を選択できます。
+<CustomContent plan="dedicated">
+
+**移行ジョブの種類の選択**手順では、既存のデータと増分データの両方を移行するか、既存のデータのみを移行するか、増分データのみを移行するかを選択できます。
+
+</CustomContent>
+
+<CustomContent plan="essential">
+
+**移行ジョブの種類の選択**手順では、既存のデータと増分データの両方を移行するか、増分データのみを移行するかを選択できます。
+
+</CustomContent>
 
 ### 既存データと増分データを移行する {#migrate-existing-data-and-incremental-data}
+
+<CustomContent plan="dedicated">
 
 データをTiDB Cloudに一度に移行するには、**既存のデータ移行**と**増分データ移行の**両方を選択します。これにより、ソース データベースとターゲット データベース間のデータの一貫性が確保されます。
 
@@ -435,11 +610,24 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_t
 | 8 RCU  | 365.5 MiB/秒 | 28.9%                    |
 | 16 RCU | 424.6 MiB/秒 | 46.7%                    |
 
+</CustomContent>
+<CustomContent plan="essential">
+
+データをTiDB Cloudに一度に移行するには、**完全 + 増分**と**増分データ移行の**両方を選択します。これにより、ソース データベースとターゲット データベース間のデータの一貫性が確保されます。
+
+現在、**既存データの**移行には**論理モード**のみを使用できます。このモードでは、MySQLソースデータベースからデータをSQL文としてエクスポートし、TiDBで実行します。このモードでは、移行前のターゲットテーブルは空でも空でなくても構いません。
+
+</CustomContent>
+
+<CustomContent plan="dedicated">
+
 ### 既存のデータのみを移行する {#migrate-only-existing-data}
 
 ソース データベースの既存のデータのみをTiDB Cloudに移行するには、**既存データの移行を**選択します。
 
-既存のデータの移行には論理モードのみを使用できます。詳細については、 [既存データと増分データを移行する](#migrate-existing-data-and-incremental-data)参照してください。
+既存のデータの移行には、物理モードまたは論理モードを使用できます。詳細については、 [既存データと増分データを移行する](#migrate-existing-data-and-incremental-data)参照してください。
+
+</CustomContent>
 
 ### 増分データのみを移行する {#migrate-only-incremental-data}
 
@@ -453,13 +641,13 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_t
 
     -   **「すべて」**をクリックすると、移行ジョブはソースデータベースインスタンス全体から既存のデータをTiDB Cloudに移行し、移行完了後に進行中の変更も移行します。これは、前の手順で「**既存データの移行」**と**「増分データの移行」**のチェックボックスを選択した場合にのみ実行されることに注意してください。
     -   **「カスタマイズ」**をクリックしてデータベースを選択すると、移行ジョブは既存のデータと、選択したデータベースの進行中の変更をTiDB Cloudに移行します。これは、前の手順で「**既存データの移行」**と**「増分データの移行」**のチェックボックスを選択した場合にのみ実行されることに注意してください。
-    -   **「カスタマイズ」**をクリックし、データセット名の下にあるテーブルをいくつか選択すると、移行ジョブは既存のデータと、選択したテーブルの進行中の変更のみを移行します。同じデータベース内に後から作成されたテーブルは移行されません。
+    -   **「カスタマイズ」**をクリックし、データベース名の下のテーブルをいくつか選択すると、移行ジョブは既存のデータと、選択したテーブルの進行中の変更のみを移行します。同じデータベース内に後から作成されたテーブルは移行されません。
 
 2.  **「次へ」**をクリックします。
 
 ## ステップ5: 事前チェック {#step-5-precheck}
 
-**「事前チェック」**ページでは、事前チェックの結果を確認できます。事前チェックに失敗した場合は、 **「失敗」**または**「警告」の**詳細に従って操作し、「再チェック」をクリックして**再チェック**してください。
+**「事前チェック」**ページでは、事前チェックの結果を確認できます。事前チェックに失敗した場合は、 **「失敗」**または**「警告」の**詳細に従って問題を解決し、「**再チェック」をクリックして再チェックする**必要があります。
 
 一部のチェック項目にのみ警告がある場合は、リスクを評価し、警告を無視するかどうかを検討できます。すべての警告を無視した場合、移行ジョブは自動的に次のステップに進みます。
 
@@ -468,6 +656,24 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_t
 事前チェック項目の詳細については、 [移行タスクの事前チェック](https://docs.pingcap.com/tidb/stable/dm-precheck)参照してください。
 
 すべてのチェック項目が**合格と**表示されたら、 **「次へ」**をクリックします。
+
+<CustomContent plan="essential">
+
+## ステップ6: 移行の進行状況をビュー {#step-6-view-the-migration-progress}
+
+移行ジョブが作成されると、 **「移行ジョブの詳細」**ページで移行の進行状況を確認できます。移行の進行状況は**「ステージとステータス」**領域に表示されます。
+
+移行ジョブは実行中に一時停止または削除できます。
+
+移行ジョブが失敗した場合は、問題を解決してから再開できます。
+
+移行ジョブはどのステータスでも削除できます。
+
+移行中に問題が発生した場合は、 [移行エラーと解決策](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)参照してください。
+
+</CustomContent>
+
+<CustomContent plan="dedicated">
 
 ## ステップ6: 仕様を選択して移行を開始する {#step-6-choose-a-spec-and-start-migration}
 
@@ -489,7 +695,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_t
 
 ## 移行ジョブ仕様のスケーリング {#scale-a-migration-job-specification}
 
-TiDB Cloud は、さまざまなシナリオでのパフォーマンスとコストの要件を満たすために、移行ジョブ仕様のスケールアップまたはスケールダウンをサポートしています。
+TiDB Cloud Dedicated は、さまざまなシナリオでのパフォーマンスとコストの要件を満たすために、移行ジョブ仕様のスケールアップまたはスケールダウンをサポートします。
 
 移行仕様によってパフォーマンスは異なります。また、移行段階によってパフォーマンス要件も変化する可能性があります。例えば、既存データの移行中は、パフォーマンスを可能な限り高速化したいため、8 RCUなど、より大きな仕様の移行ジョブを選択します。既存データの移行が完了すると、増分移行ではそれほど高いパフォーマンスは必要ないため、ジョブ仕様をスケールダウン（例えば、8 RCUから2 RCUへ）してコストを削減できます。
 
@@ -509,8 +715,10 @@ TiDB Cloud は、さまざまなシナリオでのパフォーマンスとコス
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[移行]**をクリックします。
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[データ移行]**をクリックします。
 
 3.  **「データ移行」**ページで、スケールする移行ジョブを見つけます。 **「アクション」**列で、 **「...」** &gt; **「スケールアップ/ダウン」を**クリックします。
 
 4.  **「スケールアップ/ダウン」**ウィンドウで、使用する新しい仕様を選択し、 **「送信」**をクリックします。ウィンドウの下部に、その仕様の新しい価格が表示されます。
+
+</CustomContent>

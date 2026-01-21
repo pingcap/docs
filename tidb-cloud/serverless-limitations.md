@@ -21,7 +21,7 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 ### 繋がり {#connection}
 
 -   [パブリックエンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)と[プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)のみ使用できます。5 [VPC ピアリング](/tidb-cloud/set-up-vpc-peering-connections.md) TiDB Cloud StarterまたはTiDB Cloud Essentialクラスターに接続するためには使用できません。
--   プライベートエンドポイントのサポート[ファイアウォールルール](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md) 。
+-   プライベートエンドポイントの[ファイアウォールルール](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)サポート。
 -   データベースクライアント接続は、30分以上開いたままになっていると、予期せず終了する可能性があります。これは、TiDBサーバーのシャットダウン、再起動、またはメンテナンス時に発生する可能性があり、アプリケーションの中断につながる可能性があります。この問題を回避するには、最大接続有効期間を設定してください。最初は5分から始め、テールレイテンシーに影響がある場合は徐々に増やすことを推奨します。詳細については、 [接続プールの推奨設定](/develop/dev-guide-connection-parameters.md#connection-pools-and-connection-parameters)参照してください。
 
 > **注記：**
@@ -49,8 +49,8 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 ### ストリームデータ {#stream-data}
 
--   [チェンジフィード](/tidb-cloud/changefeed-overview.md)は現在、 TiDB Cloud Starter およびTiDB Cloud Essential ではサポートされていません。
--   [データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)は現在、 TiDB Cloud Starter およびTiDB Cloud Essential ではサポートされていません。
+-   現在、 TiDB Cloud Starter では[チェンジフィード](/tidb-cloud/changefeed-overview.md)はサポートされていません。
+-   現在、 TiDB Cloud Starter では[データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)はサポートされていません。
 
 ### 存続時間（TTL） {#time-to-live-ttl}
 

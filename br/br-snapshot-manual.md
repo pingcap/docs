@@ -1,13 +1,13 @@
 ---
 title: TiDB Snapshot Backup and Restore Command Manual
-summary: TiDBスナップショットのバックアップおよびリストアコマンドマニュアルでは、クラスタースナップショット、データベース、およびテーブルのバックアップとリストアを行うためのコマンドについて説明しています。また、バックアップデータの暗号化と暗号化されたスナップショットのリストアについても説明しています。BRBRはGCへの自己適応をサポートし、統計情報のバックアップとリストアのための--ignore-statsパラメータを導入しています。さらに、バックアップデータの暗号化と、指定されたデータベースまたはテーブルの部分的なデータのリストアもサポートしています。
+summary: TiDBスナップショットのバックアップと復元コマンドマニュアルでは、クラスタースナップショット、データベース、およびテーブルのバックアップと復元に使用するコマンドについて説明しています。また、バックアップデータの暗号化と暗号化されたスナップショットの復元についても説明しています。BRBRはGCへの自己適応をサポートし、統計情報のバックアップと復元に--ignore-statsパラメータを導入しています。さらに、バックアップデータの暗号化と、指定されたデータベースまたはテーブルの部分的なデータ復元もサポートしています。
 ---
 
 # TiDB スナップショットのバックアップと復元コマンドマニュアル {#tidb-snapshot-backup-and-restore-command-manual}
 
 このドキュメントでは、次のようなアプリケーション シナリオに応じて、TiDB スナップショットのバックアップと復元のコマンドについて説明します。
 
--   [クラスタースナップショットをバックアップする](#back-up-cluster-snapshots)
+-   [クラスターのスナップショットをバックアップする](#back-up-cluster-snapshots)
 -   [データベースまたはテーブルをバックアップする](#back-up-a-database-or-a-table)
     -   [データベースをバックアップする](#back-up-a-database)
     -   [テーブルをバックアップする](#back-up-a-table)
@@ -27,7 +27,7 @@ summary: TiDBスナップショットのバックアップおよびリストア�
 -   [スナップショットのバックアップと復元ガイド](/br/br-snapshot-guide.md)
 -   [バックアップと復元のユースケース](/br/backup-and-restore-use-cases.md)
 
-## クラスタースナップショットをバックアップする {#back-up-cluster-snapshots}
+## クラスターのスナップショットをバックアップする {#back-up-cluster-snapshots}
 
 `tiup br backup full`コマンドを使用して、TiDB クラスターの最新または指定したスナップショットをバックアップできます。コマンドの詳細については、 `tiup br backup full --help`コマンドを実行してください。
 
@@ -46,7 +46,7 @@ tiup br backup full \
 
 > **注記：**
 >
-> -   v8.5.0以降、 BRツールは、バックアップパフォーマンスを向上させるために、フルバックアップ中のテーブルレベルのチェックサム計算をデフォルト（ `--checksum=false` ）で無効にします。
+> -   v8.5.0 以降、 BRツールは、バックアップ パフォーマンスを向上させるために、フル バックアップ中のテーブル レベルのチェックサム計算をデフォルトで無効にします ( `--checksum=false` )。
 > -   BRツールは既にGCへの自己適応をサポートしています。バックアップ中にTiDBのGCセーフポイントが先に進まないように、PDのタイムスタンプ`backupTS` （デフォルトでは最新のPDタイムスタンプ）をPDの`safePoint`に自動的に登録することで、GC設定を手動で設定する必要がなくなります。
 
 バックアップ中は、ターミナルに以下のようにプログレスバーが表示されます。プログレスバーが100%に達すると、バックアップが完了します。
@@ -94,7 +94,7 @@ tiup br backup table \
 
 ### テーブルフィルターを使用して複数のテーブルをバックアップする {#back-up-multiple-tables-with-table-filter}
 
-より多くの条件で複数のテーブルをバックアップするには、 `tiup br backup full`コマンドを実行し、 [テーブルフィルター](/table-filter.md) `--filter`または`-f`に指定します。
+より多くの条件で複数のテーブルをバックアップするには、 `tiup br backup full`コマンドを実行し、 [テーブルフィルター](/table-filter.md)を`--filter`または`-f`に指定します。
 
 次の例では、 `db*.tbl*`フィルタルールに一致するテーブルを Amazon S3 にバックアップします。
 
@@ -127,7 +127,20 @@ tiup br restore full \
 --storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log
 ```
 
-バックアップとリストア機能は、データをバックアップする際に、JSON形式の統計情報を`backupmeta`ファイルに保存します。データをリストアする際には、JSON形式の統計情報をクラスターに読み込みます。詳細については、 [負荷統計](/sql-statements/sql-statement-load-stats.md)ご覧ください。
+> **注記：**
+>
+> v8.5.5以降、パラメータ`--load-stats`を`false`に設定すると、 BRは復元されたテーブルの統計情報をテーブル`mysql.stats_meta`に書き込まなくなります。復元が完了したら、SQL文[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)を手動で実行して関連する統計情報を更新できます。
+
+バックアップと復元機能は、データをバックアップする際に、統計情報をJSON形式で`backupmeta`ファイルに保存します。データを復元する際には、JSON形式の統計情報をクラスターに読み込みます。詳細については、 [負荷統計](/sql-statements/sql-statement-load-stats.md)参照してください。
+
+v8.5.5以降、 BRは`--fast-load-sys-tables`パラメータを導入し、デフォルトで有効になっています。3 `br`ラインツールを使用して新しいクラスターにデータを復元する場合、上流クラスターと下流クラスター間のテーブルとパーティションのIDを再利用できます（そうでない場合、 BRは自動的に統計を論理的にロードします） `--fast-load-sys-tables`有効にすると、 BRはまず統計関連のシステムテーブルを一時システムデータベース`__TiDB_BR_Temporary_mysql`に復元し、次に`RENAME TABLE`ステートメントを使用してこれらのテーブルを`mysql`データベース内の対応するテーブルとアトミックにスワップします。
+
+次に例を示します。
+
+```shell
+tiup br restore full \
+--storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log --load-stats --fast-load-sys-tables
+```
 
 ## バックアップデータを暗号化する {#encrypt-the-backup-data}
 
@@ -135,8 +148,8 @@ BRはバックアップ側でのバックアップデータの暗号化と[Amazo
 
 TiDB v5.3.0 以降では、次のパラメータを設定することでバックアップ データを暗号化できます。
 
--   `--crypter.method` : 暗号化アルゴリズム。2、4、6 `aes192-ctr` `aes128-ctr`か`aes256-ctr`なります。デフォルト値は`plaintext`で、データは暗号化されません。
--   `--crypter.key` : 16進文字列形式の暗号化キー。アルゴリズム`aes128-ctr`の場合は128ビット（16バイト）、アルゴリズム`aes192-ctr`の場合は24バイト、アルゴリズム`aes256-ctr`の場合は32バイトのキーとなります。
+-   `--crypter.method` : 暗号化アルゴリズム`aes128-ctr` `aes192-ctr`または`aes256-ctr`いずれかになります。デフォルト値は`plaintext`で、データは暗号化されません。
+-   `--crypter.key` : 16進文字列形式の暗号化キー。アルゴリズム`aes128-ctr`の場合は128ビット（16バイト）、アルゴリズム`aes192-ctr`の場合は24バイト、アルゴリズム`aes256-ctr`の場合は32バイトのキーです。
 -   `--crypter.key-file` : キーファイル。2 `crypter.key`渡さずに、キーが保存されているファイルパスをパラメータとして直接渡すこともできます。
 
 次に例を示します。
@@ -151,8 +164,8 @@ tiup br backup full\
 
 > **注記：**
 >
-> -   キーが失われた場合、バックアップ データをクラスターに復元することはできません。
-> -   暗号化機能は、 `br`および TiDB クラスター v5.3.0 以降で使用する必要があります。暗号化されたバックアップデータは、v5.3.0 より前のバージョンのクラスターでは復元できません。
+> -   キーが失われると、バックアップ データをクラスターに復元できなくなります。
+> -   暗号化機能は、 `br`および TiDB クラスタ v5.3.0 以降で使用する必要があります。暗号化されたバックアップデータは、v5.3.0 より前のクラスタでは復元できません。
 
 ## クラスタースナップショットを復元する {#restore-cluster-snapshots}
 
@@ -169,15 +182,33 @@ tiup br restore full \
 
 上記のコマンドでは、次のようになります。
 
--   `--with-sys-table` : BRは、アカウント権限データ、SQLバインディング、統計情報など、**一部のシステムテーブルのデータ**を復元します（ [統計のバックアップ](/br/br-snapshot-manual.md#back-up-statistics)参照）。ただし、統計テーブル（ `mysql.stat_*` ）とシステム変数テーブル（ `mysql.tidb`と`mysql.global_variables` ）は復元されません。詳細については、 [`mysql`スキーマ内のテーブルを復元する](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)参照してください。
+-   `--with-sys-table` : BR は、アカウント権限データ、SQL バインディング、統計情報など、**一部のシステムテーブルのデータ**を復元します（ [統計のバックアップ](/br/br-snapshot-manual.md#back-up-statistics)参照）。ただし、統計テーブル（ `mysql.stat_*` ）とシステム変数テーブル（ `mysql.tidb`および`mysql.global_variables` ）は復元されません。詳細については、 [`mysql`スキーマ内のテーブルを復元する](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)参照してください。
 -   `--ratelimit` : 復元タスクを実行する**TiKVあたりの**最大速度。単位はMiB/sです。
--   `--log-file` : `br`のログが書き込まれる対象ファイル。
+-   `--log-file` : `br`ログが書き込まれる対象ファイル。
 
-復元中は、ターミナルに以下のプログレスバーが表示されます。プログレスバーが100%に達すると、復元タスクが完了します。その後、 `br`のセキュリティを確保するため、復元されたデータの検証を行います。
+復元中は、ターミナルに以下のプログレスバーが表示されます。プログレスバーが100%に達すると、復元タスクが完了します。 `br` 、データのセキュリティを確保するため、復元されたデータの検証を行います。
 
 ```shell
-Full Restore <---------/...............................................> 17.12%.
+Split&Scatter Region <--------------------------------------------------------------------> 100.00%
+Download&Ingest SST <---------------------------------------------------------------------> 100.00%
+Restore Pipeline <-------------------------/...............................................> 17.12%
 ```
+
+TiDB v8.5.5 以降では、 BRで`--fast-load-sys-tables`を指定して、新しいクラスターで統計を物理的に復元できるようになりました。
+
+```shell
+tiup br restore full \
+    --pd "${PD_IP}:2379" \
+    --with-sys-table \
+    --fast-load-sys-tables \
+    --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
+    --ratelimit 128 \
+    --log-file restorefull.log
+```
+
+> **注記：**
+>
+> `REPLACE INTO` SQL ステートメントを使用したシステム テーブルの論理的な復元とは異なり、物理的な復元ではシステム テーブル内の既存のデータが完全に上書きされます。
 
 ## データベースまたはテーブルを復元する {#restore-a-database-or-a-table}
 
@@ -224,7 +255,7 @@ tiup br restore table \
 
 ### テーブルフィルターを使用して複数のテーブルを復元する {#restore-multiple-tables-with-table-filter}
 
-より複雑なフィルター ルールを使用して複数のテーブルを復元するには、 `tiup br restore full`コマンドを実行し、 [テーブルフィルター](/table-filter.md) `--filter`または`-f`に指定します。
+より複雑なフィルター ルールを使用して複数のテーブルを復元するには、 `tiup br restore full`コマンドを実行し、 [テーブルフィルター](/table-filter.md)を`--filter`または`-f`に指定します。
 
 次の例では、 `db*.tbl*`フィルタルールに一致するテーブルを Amazon S3 からターゲットクラスターに復元します。
 
@@ -258,7 +289,7 @@ tiup br restore full \
 SHOW GLOBAL BINDINGS;
 ```
 
-復元後の実行プランバインディングの動的読み込みは、まだ最適化中です（関連する問題は[＃46527](https://github.com/pingcap/tidb/issues/46527)と[＃46528](https://github.com/pingcap/tidb/issues/46528)です）。復元後に実行プランバインディングを手動で再読み込みする必要があります。
+復元後の実行プランバインディングの動的ロードは、まだ最適化中です（関連する問題は[＃46527](https://github.com/pingcap/tidb/issues/46527)と[＃46528](https://github.com/pingcap/tidb/issues/46528)です）。復元後、実行プランバインディングを手動で再ロードする必要があります。
 
 ```sql
 -- Ensure that the mysql.bind_info table has only one record for builtin_pseudo_sql_for_bind_lock. If there are more records, you need to manually delete them.
@@ -271,7 +302,7 @@ ADMIN RELOAD BINDINGS;
 
 ## 暗号化されたスナップショットを復元する {#restore-encrypted-snapshots}
 
-バックアップデータを暗号化した後、データを復元するには、対応する復号パラメータを渡す必要があります。復号アルゴリズムとキーが正しいことを確認してください。復号アルゴリズムまたはキーが正しくない場合、データを復元することはできません。以下に例を示します。
+バックアップデータを暗号化した後、データを復元するには、対応する復号パラメータを渡す必要があります。復号アルゴリズムとキーが正しいことを確認してください。復号アルゴリズムまたはキーが正しくない場合、データを復元することはできません。以下は例です。
 
 ```shell
 tiup br restore full\

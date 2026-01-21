@@ -325,7 +325,7 @@
         -   [アイデンティティアクセス管理](/tidb-cloud/manage-user-access.md)
         -   [OAuth 2.0](/tidb-cloud/oauth2.md)
     -   ネットワークアクセス制御
-        -   [IPアクセスリストを構成する](/tidb-cloud/configure-ip-access-list.md)
+        -   [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)
         -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md)
         -   [Azure のプライベート エンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
         -   [プライベートエンドポイント経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
@@ -350,7 +350,6 @@
     -   [クラウドプロバイダーマーケットプレイスからの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)
     -   [Changefeedの請求](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
     -   [データ移行の請求](/tidb-cloud/tidb-cloud-billing-dm.md)
-    -   [リカバリグループの請求](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
     -   [予算を管理する](/tidb-cloud/tidb-cloud-budget.md)
 -   統合
     -   [エアバイト](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
@@ -704,7 +703,7 @@
         -   [スケジュール](/tidb-scheduling.md)
         -   [TSO](/tso.md)
     -   ストレージエンジン
-        -   ティクブ
+        -   TiKV
             -   [TiKVの概要](/tikv-overview.md)
             -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
         -   TiFlash
@@ -769,7 +768,8 @@
 ## リリース {#releases}
 
 -   リリースノート
-    -   [2025](/tidb-cloud/tidb-cloud-release-notes.md)
+    -   [2026](/tidb-cloud/tidb-cloud-release-notes.md)
+    -   [2025](/tidb-cloud/release-notes-2025.md)
     -   [2024](/tidb-cloud/release-notes-2024.md)
     -   [2023](/tidb-cloud/release-notes-2023.md)
     -   [2022](/tidb-cloud/release-notes-2022.md)

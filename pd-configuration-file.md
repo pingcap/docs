@@ -176,7 +176,7 @@ pd-server関連のコンフィグレーション項目
 
 > **注記：**
 >
-> クラスターをTiDB 4.0バージョンから現在のバージョンにアップグレードした場合、アップグレード後の`flow-round-by-digit`の動作とアップグレード前の`trace-region-flow`の動作はデフォルトで一致します。つまり、アップグレード前の`trace-region-flow`の値がfalseの場合、アップグレード後の`flow-round-by-digit`の値は127になります。アップグレード前の`trace-region-flow`の値が`true`の場合、アップグレード後の`flow-round-by-digit`の値は`3`になります。
+> クラスターをTiDB 4.0バージョンから現在のバージョンにアップグレードした場合、アップグレード後の`flow-round-by-digit`の動作とアップグレード前の`trace-region-flow`の動作はデフォルトで一致します。つまり、アップグレード前の値`trace-region-flow`がfalseの場合、アップグレード後の値`flow-round-by-digit`は127になります。また、アップグレード前の値`trace-region-flow`が`true`の場合、アップグレード後の値`flow-round-by-digit`は`3`になります。
 
 ### <code>min-resolved-ts-persistence-interval</code> <span class="version-mark">6.0.0の新機能</span> {#code-min-resolved-ts-persistence-interval-code-span-class-version-mark-new-in-v6-0-0-span}
 
@@ -290,6 +290,13 @@ pd-server関連のコンフィグレーション項目
 -   `Region Merge`キーの上限を指定します。リージョンキーが指定された値より大きい場合、PDはリージョンを隣接するリージョンと結合しません。
 -   デフォルト値: `540000` 。v8.4.0より前のバージョンでは、デフォルト値は`200000`です。v8.4.0以降では、デフォルト値は`540000`です。
 
+### <code>max-affinity-merge-region-size</code> <span class="version-mark">v8.5.5 の新機能</span> {#code-max-affinity-merge-region-size-code-span-class-version-mark-new-in-v8-5-5-span}
+
+-   [親和性](/table-affinity.md)グループに属する隣接する小さなリージョンを自動的にマージするためのしきい値を制御します。リージョンがアフィニティグループに属し、そのサイズがこのしきい値より小さい場合、PD はこのリージョンを同じアフィニティグループ内の他の隣接する小さなリージョンとマージして、リージョン数を減らし、アフィニティ効果を維持しようとします。
+-   これを`0`に設定すると、アフィニティ グループ内の隣接する小さな領域の自動マージが無効になります。
+-   デフォルト値: `256`
+-   単位: MiB
+
 ### <code>patrol-region-interval</code> {#code-patrol-region-interval-code}
 
 -   チェッカーがリージョンのヘルス状態を検査する実行頻度を制御します。この値が小さいほど、チェッカーの実行速度は速くなります。通常、この設定を変更する必要はありません。
@@ -332,7 +339,7 @@ pd-server関連のコンフィグレーション項目
 
 ### <code>max-store-preparing-time</code> <span class="version-mark">v6.1.0 の新機能</span> {#code-max-store-preparing-time-code-span-class-version-mark-new-in-v6-1-0-span}
 
--   ストアがオンラインになるまでの最大待機時間を制御します。ストアがオンライン状態の間、PDはストアのオンライン進行状況を照会できます。指定された時間を超えると、PDはストアがオンライン状態になったとみなし、再度ストアのオンライン進行状況を照会できなくなります。ただし、これによってリージョンが新しいオンラインストアに移行するのが妨げられることはありません。ほとんどの場合、このパラメータを調整する必要はありません。
+-   ストアがオンラインになるまでの最大待機時間を制御します。ストアがオンライン段階にある間、PDはストアのオンライン進行状況を照会できます。指定された時間を超えると、PDはストアがオンラインになったとみなし、再度ストアのオンライン進行状況を照会できなくなります。ただし、これによってリージョンが新しいオンラインストアに移行するのが妨げられることはありません。ほとんどの場合、このパラメータを調整する必要はありません。
 -   デフォルト値: `48h`
 
 ### <code>leader-schedule-limit</code> {#code-leader-schedule-limit-code}
@@ -369,6 +376,11 @@ pd-server関連のコンフィグレーション項目
 
 -   同時に実行される`Region Merge`スケジュールタスクの数`Region Merge`を無効にするには、このパラメータを`0`に設定します。
 -   デフォルト値: `8`
+
+### <code>affinity-schedule-limit</code> <span class="version-mark">v8.5.5 の新機能</span> {#code-affinity-schedule-limit-code-span-class-version-mark-new-in-v8-5-5-span}
+
+-   同時に実行できる[親和性](/table-affinity.md)スケジュールタスクの数を制御します。3に設定すると`0`アフィニティスケジュールが無効になります。
+-   デフォルト値: `0`
 
 ### <code>high-space-ratio</code> {#code-high-space-ratio-code}
 

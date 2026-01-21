@@ -209,6 +209,14 @@ TiKV設定ファイルは、コマンドラインパラメータよりも多く�
 -   デフォルト値: `"3s"`
 -   最小値: `"1s"`
 
+### <code>graceful-shutdown-timeout</code><span class="version-mark">バージョン8.5.5の新機能</span> {#code-graceful-shutdown-timeout-code-span-class-version-mark-new-in-v8-5-5-span}
+
+-   TiKV 正常シャットダウンのタイムアウト期間を指定します。
+    -   この値が`0s`より大きい場合、TiKV はシャットダウン前に、指定されたタイムアウト内にこのノード上のすべてのリーダーを他の TiKV ノードに転送しようとします。タイムアウトに達した時点でまだ転送されていないリーダーが残っている場合、TiKV は残りのリーダーの転送をスキップし、シャットダウンプロセスに直接進みます。
+    -   この値が`0s`の場合、TiKV の正常なシャットダウンは無効になります。
+-   デフォルト値: `"20s"`
+-   最小値: `"0s"`
+
 ### <code>concurrent-send-snap-limit</code> {#code-concurrent-send-snap-limit-code}
 
 -   同時に送信されるスナップショットの最大数
@@ -281,7 +289,7 @@ TiKV設定ファイルは、コマンドラインパラメータよりも多く�
 
 ### <code>raft-client-queue-size</code> {#code-raft-client-queue-size-code}
 
--   TiKVにおけるRaftメッセージのキューサイズを指定します。時間内に送信されないメッセージが多すぎてバッファがいっぱいになったり、メッセージが破棄されたりする場合は、システムの安定性を向上させるために、より大きな値を指定できます。
+-   TiKVにおけるRaftメッセージのキューサイズを指定します。時間内に送信されないメッセージが多すぎるとバッファがいっぱいになったり、メッセージが破棄されたりする場合は、システムの安定性を向上させるために、より大きな値を指定できます。
 -   デフォルト値: `16384`
 
 ### <code>simplify-metrics</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-simplify-metrics-code-span-class-version-mark-new-in-v6-2-0-span}
@@ -293,6 +301,13 @@ TiKV設定ファイルは、コマンドラインパラメータよりも多く�
 
 -   サービスとサーバーへのリクエスト転送用の接続プールのサイズを設定します。値が小さすぎると、リクエストのレイテンシーと負荷分散に影響します。
 -   デフォルト値: `4`
+
+### <code>inspect-network-interval</code> <span class="version-mark">v8.5.5 の新機能</span> {#code-inspect-network-interval-code-span-class-version-mark-new-in-v8-5-5-span}
+
+-   TiKVヘルスチェッカーがPDおよび他のTiKVノードに対してネットワーク検出をアクティブに実行する間隔を制御します。TiKVはネットワーク検出結果に基づいて`NetworkSlowScore`を計算し、低速ノードのネットワーク状態をPDに報告します。
+-   この値を`0`に設定すると、ネットワーク検出が無効になります。値を小さくすると検出頻度が上がり、ネットワークジッターをより迅速に検出できるようになりますが、ネットワーク帯域幅とCPUリソースの消費量も増加します。
+-   デフォルト値: `100ms`
+-   値の範囲: `0`または`[10ms, +∞)`
 
 ## 読み取りプール.統合 {#readpool-unified}
 
@@ -332,6 +347,21 @@ TiKV設定ファイルは、コマンドラインパラメータよりも多く�
 
 -   スレッドプールサイズを自動調整するかどうかを制御します。有効にすると、現在のCPU使用率に基づいてUnifyReadPoolスレッドプールサイズを自動調整することで、TiKVの読み取りパフォーマンスが最適化されます。スレッドプールの指定可能な範囲は`[max-thread-count, MAX(4, CPU)]`です。最大値は[`max-thread-count`](#max-thread-count)と同じです。
 -   デフォルト値: `false`
+
+### <code>cpu-threshold</code> <span class="version-mark">v8.5.5 の新機能</span> {#code-cpu-threshold-code-span-class-version-mark-new-in-v8-5-5-span}
+
+-   統合読み取りプールのCPU使用率のしきい値を指定します。たとえば、この値を`0.8`に設定すると、スレッドプールはCPUの最大80%を使用できます。
+
+    -   デフォルト（ `0.0`の場合）では、統合読み取りプールのCPU使用量に制限はありません。スレッドプールのサイズは、ビジースレッドスケーリングアルゴリズムによってのみ決定され、現在のタスクを処理しているスレッドの数に基づいて動的にサイズが調整されます。
+    -   `0.0`より大きい値に設定すると、TiKV は既存のビジースレッド スケーリング アルゴリズムに加えて次の CPU 使用率しきい値制約を適用し、CPU リソースの使用率をより厳密に制御します。
+        -   強制スケールダウン: 統合読み取りプールの CPU 使用率が構成された値に 10% のバッファを加えた値を超えると、TiKV はプールのサイズを強制的に縮小します。
+        -   スケールアップ防止: 統合読み取りプールを拡張すると、CPU 使用率が構成されたしきい値から 10% のバッファを差し引いた値を超える場合、TiKV は統合読み取りプールのそれ以上の拡張を防止します。
+
+-   この機能は、 [`readpool.unified.auto-adjust-pool-size`](#auto-adjust-pool-size-new-in-v630) `true`に設定されている場合にのみ有効になります。
+
+-   デフォルト値: `0.0`
+
+-   値の範囲: `[0.0, 1.0]`
 
 ## 読み取りプール。storage {#readpool-storage}
 
@@ -528,7 +558,7 @@ storageに関するコンフィグレーション項目。
         -   API V2を使用する場合は、同時に`storage.enable-ttl = true`設定する必要があります。API V2はTTL機能をサポートしているため、 [`enable-ttl`](#enable-ttl)明示的にオンにする必要があります。そうしないと、 `storage.enable-ttl`デフォルトで`false`になるため、競合が発生します。
         -   API V2 を有効にすると、古いデータを再利用するために少なくとも 1 つの tidb-server インスタンスをデプロイする必要があります。この tidb-server インスタンスは、読み取りと書き込みのサービスを同時に提供できます。高可用性を確保するため、複数の tidb-server インスタンスをデプロイできます。
         -   API V2にはクライアントのサポートが必要です。詳細については、API V2のクライアントの対応するマニュアルを参照してください。
-        -   v6.2.0以降、RawKVの変更データキャプチャ（CDC）がサポートされました[RawKV CDC](https://tikv.org/docs/latest/concepts/explore-tikv-features/cdc/cdc)を参照してください。
+        -   v6.2.0以降、RawKVの変更データキャプチャ（CDC）がサポートされました[生のKV CDC](https://tikv.org/docs/latest/concepts/explore-tikv-features/cdc/cdc)を参照してください。
 -   デフォルト値: `1`
 
 > **警告：**
@@ -577,12 +607,22 @@ TiKVのフロー制御メカニズムに関するコンフィグレーション�
 
 ### <code>l0-files-threshold</code> {#code-l0-files-threshold-code}
 
--   kvDB L0ファイルの数がこのしきい値に達すると、フロー制御メカニズムが作動を開始します。1 `enable` `true`に設定すると、この設定項目は`rocksdb.(defaultcf|writecf|lockcf).level0-slowdown-writes-trigger`オーバーライドします。
+-   kvDB L0 ファイルの数がこのしきい値に達すると、フロー制御メカニズムが動作を開始します。
+
+    > **注記：**
+    >
+    > 特定の条件下では、この設定項目は`rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`の値を上書きできます。詳細については[`rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger)参照してください。
+
 -   デフォルト値: `20`
 
 ### <code>soft-pending-compaction-bytes-limit</code> {#code-soft-pending-compaction-bytes-limit-code}
 
--   KvDB内の保留中の圧縮バイトがこのしきい値に達すると、フロー制御メカニズムは一部の書き込み要求を拒否し、 `ServerIsBusy`エラーを報告します。3 `enable` `true`に設定すると、この設定項目は`rocksdb.(defaultcf|writecf|lockcf).soft-pending-compaction-bytes-limit`オーバーライドします。
+-   KvDB 内の保留中の圧縮バイトがこのしきい値に達すると、フロー制御メカニズムは一部の書き込み要求を拒否し始め、エラー`ServerIsBusy`を報告します。
+
+    > **注記：**
+    >
+    > 特定の条件下では、この設定項目は`rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`の値を上書きできます。詳細については[`rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1)参照してください。
+
 -   デフォルト値: `"192GiB"`
 
 ### <code>hard-pending-compaction-bytes-limit</code> {#code-hard-pending-compaction-bytes-limit-code}
@@ -605,7 +645,7 @@ I/O レート リミッターに関連するコンフィグレーション項目
 -   `"all-io"` `"write-only"`オプション: `"read-only"`
 -   デフォルト値: `"write-only"`
 
-## 日付 {#pd}
+## pd {#pd}
 
 ### <code>enable-forwarding</code> <span class="version-mark">v5.0.0 の新機能</span> {#code-enable-forwarding-code-span-class-version-mark-new-in-v5-0-0-span}
 
@@ -1355,7 +1395,7 @@ RocksDBに関連するコンフィグレーション項目
 
 ### <code>rate-limiter-mode</code> {#code-rate-limiter-mode-code}
 
--   RocksDBの圧縮レート制限モード
+-   RocksDBの圧縮率制限モード
 -   オプション`"write-only"` `"all-io"` `"read-only"`
 -   デフォルト値: `"write-only"`
 
@@ -1629,7 +1669,7 @@ Titan に関連するコンフィグレーション項目。
 -   `lockcf`のデフォルト値: `"128MiB"`
 -   最小値: `0`
 -   単位: KiB|MiB|GiB
--   不要な圧縮を減らすため、 `max-bytes-for-level-base`の値はL0のデータ量とほぼ同じに設定することをお勧めします。たとえば、圧縮方法が「no:no:lz4:lz4:lz4:lz4:lz4」の場合、L0とL1は圧縮されておらず、L0の圧縮のトリガー条件はSSTファイルの数が4（デフォルト値）に達することであるため、 `max-bytes-for-level-base`の値は`write-buffer-size * 4`にする必要があります。L0とL1の両方で圧縮が採用されている場合、memtableから圧縮されたSSTファイルのサイズを把握するには、RocksDBログを分析する必要があります。たとえば、ファイルサイズが32MiBの場合、 `max-bytes-for-level-base`の値を128MiB（ `32 MiB * 4` ）に設定することをお勧めします。
+-   不要な圧縮を減らすために、 `max-bytes-for-level-base`の値はL0のデータ量とほぼ同じに設定することをお勧めします。たとえば、圧縮方法が「no:no:lz4:lz4:lz4:lz4:lz4」の場合、L0とL1は圧縮されておらず、L0の圧縮のトリガー条件はSSTファイルの数が4（デフォルト値）に達することであるため、 `max-bytes-for-level-base`の値は`write-buffer-size * 4`にする必要があります。L0とL1の両方で圧縮が採用されている場合、memtableから圧縮されたSSTファイルのサイズを把握するには、RocksDBログを分析する必要があります。たとえば、ファイルサイズが32MiBの場合、 `max-bytes-for-level-base`の値を128MiB（ `32 MiB * 4` ）に設定することをお勧めします。
 
 ### <code>target-file-size-base</code> {#code-target-file-size-base-code}
 
@@ -1647,7 +1687,9 @@ Titan に関連するコンフィグレーション項目。
 
 ### <code>level0-slowdown-writes-trigger</code> {#code-level0-slowdown-writes-trigger-code}
 
--   書き込みストールをトリガーするL0ファイルの最大数。1 `storage.flow-control.enable` `true`に設定した場合、 `storage.flow-control.l0-files-threshold`この設定項目を上書きします。
+-   書き込み停止をトリガーする L0 のファイルの最大数。
+-   v8.5.4 以前のバージョン: フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true` )、この構成項目の値は[`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)によって直接上書きされます。
+-   v8.5.5以降：フロー制御メカニズムが有効（ [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true` ）の場合、この設定項目の値が`storage.flow-control.l0-files-threshold`より大きい場合にのみ、値が[`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)に上書きされます。この動作により、フロー制御しきい値を上げた際にRocksDBの圧縮加速メカニズムが弱まるのを防ぎます。
 -   デフォルト値: `20`
 -   最小値: `0`
 
@@ -1703,7 +1745,9 @@ Titan に関連するコンフィグレーション項目。
 
 ### <code>soft-pending-compaction-bytes-limit</code> {#code-soft-pending-compaction-bytes-limit-code}
 
--   保留中の圧縮バイトのソフト制限。1 `storage.flow-control.enable` `true`に設定した場合、 `storage.flow-control.soft-pending-compaction-bytes-limit`この設定項目を上書きします。
+-   保留中の圧縮バイトに対するソフト制限。
+-   v8.5.4 以前のバージョン: フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true` )、この構成項目は[`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)によって直接上書きされます。
+-   バージョン8.5.5以降：フロー制御メカニズムが有効（ [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true` ）の場合、この設定項目の値が`storage.flow-control.soft-pending-compaction-bytes-limit`より大きい場合にのみ、 [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)が優先されます。この動作により、フロー制御のしきい値を上げた際にRocksDBの圧縮加速メカニズムが弱まるのを防ぎます。
 -   デフォルト値: `"192GiB"`
 -   単位: KiB|MiB|GiB
 
@@ -2085,7 +2129,7 @@ Raft Engineに関連するコンフィグレーション項目。
 ### <code>purge-threshold</code> {#code-purge-threshold-code}
 
 -   メインログキューのしきい値サイズを指定します。この設定値を超えると、メインログキューは消去されます。
--   この設定は、Raft Engineのディスク領域の使用量を調整するために使用できます。
+-   この設定を使用して、 Raft Engineのディスク領域の使用量を調整できます。
 -   デフォルト値: `"10GiB"`
 
 ### <code>recovery-mode</code> {#code-recovery-mode-code}
@@ -2150,7 +2194,7 @@ Raft Engineに関連するコンフィグレーション項目。
 
 ### <code>compression-level</code> <span class="version-mark">v7.4.0 の新機能</span> {#code-compression-level-code-span-class-version-mark-new-in-v7-4-0-span}
 
--   Raft EngineがRaftログファイルを書き込む際に使用するLZ4アルゴリズムの圧縮効率を設定します。値が低いほど圧縮速度は速くなりますが、圧縮率は低くなります。
+-   Raftログファイルを書き込む際にRaft Engineが使用するLZ4アルゴリズムの圧縮効率を設定します。値が低いほど圧縮速度は速くなりますが、圧縮率は低くなります。
 -   範囲: `[1, 16]`
 -   デフォルト値: `1`
 
@@ -2175,7 +2219,7 @@ Raft Engineに関連するコンフィグレーション項目。
 
 ### <code>cert-allowed-cn</code> {#code-cert-allowed-cn-code}
 
--   クライアントが提示する証明書で許容されるX.509共通名のリスト。提示された共通名がリスト内のエントリのいずれかと完全に一致する場合にのみ、リクエストが許可されます。
+-   クライアントが提示する証明書内の許容可能なX.509共通名のリスト。提示された共通名がリスト内のエントリのいずれかと完全に一致する場合にのみ、リクエストが許可されます。
 -   デフォルト値: `[]` 。これは、クライアント証明書のCNチェックがデフォルトで無効になっていることを意味します。
 
 ### <code>redact-info-log</code> <span class="version-mark">v4.0.8 の新機能</span> {#code-redact-info-log-code-span-class-version-mark-new-in-v4-0-8-span}
@@ -2183,7 +2227,7 @@ Raft Engineに関連するコンフィグレーション項目。
 -   この設定項目は、ログ編集を有効または無効にします。値のオプションは`true` 、 `false` 、 `"on"` 、 `"off"` 、 `"marker"` 。 `"on"` 、 `"off"` 、 `"marker"`オプションはバージョン8.3.0で導入されました。
 -   構成項目が`false`または`"off"`に設定されている場合、ログ編集は無効になります。
 -   構成項目が`true`または`"on"`に設定されている場合、ログ内のすべてのユーザー データは`?`に置き換えられます。
--   設定項目を`"marker"`に設定すると、ログ内のすべてのユーザーデータは`‹ ›`で囲まれます。ユーザーデータに`‹`または`›`が含まれている場合、 `‹`は`‹‹`に、 `›` `››`にエスケープされます。マークされたログに基づいて、ログを表示する際にマークされた情報を非感度化するかどうかを決定できます。
+-   設定項目を`"marker"`に設定すると、ログ内のすべてのユーザーデータは`‹ ›`で囲まれます。ユーザーデータに`‹`または`›`が含まれている場合、 `‹`は`‹‹`に、 `›`は`››`にエスケープされます。マークされたログに基づいて、ログを表示する際にマークされた情報を非感度化するかどうかを決定できます。
 -   デフォルト値: `false`
 -   使用方法の詳細については、 [TiKV側でのログ編集](/log-redaction.md#log-redaction-in-tikv-side)参照してください。
 
@@ -2586,8 +2630,8 @@ TiKV API V2が有効な場合にタイムスタンプを取得するためのコ
 -   事前に割り当てられた TSO キャッシュ サイズ (期間内)。
 -   TiKV がこの設定項目で指定された期間に基づいて TSO キャッシュを事前割り当てすることを示します。TiKV は前回の期間に基づいて TSO の使用量を推定し、 `alloc-ahead-buffer`満たす TSO をローカルに要求してキャッシュします。
 -   この設定項目は、TiKV API V2が有効になっている場合にPD障害の許容度を高めるためによく使用されます（ `storage.api-version = 2` ）。
--   この設定項目の値を大きくすると、TSO消費量とTiKVのメモリオーバーヘッドが増加する可能性があります。十分なTSOを確保するには、PDの[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)の設定項目を減らすことをお勧めします。
--   テストによると、 `alloc-ahead-buffer`がデフォルト値の場合、PD リーダーに障害が発生して別のノードに切り替わると、書き込み要求のレイテンシーが短期的に増加し、QPS が減少 (約 15%) します。
+-   この設定項目の値を大きくすると、TiKVのTSO消費量とメモリオーバーヘッドが増加する可能性があります。十分なTSOを確保するには、PDの[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)の設定項目を減らすことをお勧めします。
+-   テストによると、 `alloc-ahead-buffer`がデフォルト値の場合、PD リーダーが失敗して別のノードに切り替わると、書き込み要求のレイテンシーが短期的に増加し、QPS が減少 (約 15%) します。
 -   ビジネスへの影響を回避するには、PD で`tso-update-physical-interval = "1ms"`設定し、TiKV で次の設定項目を設定します。
     -   `causal-ts.alloc-ahead-buffer = "6s"`
     -   `causal-ts.renew-batch-max-size = 65536`
@@ -2603,7 +2647,7 @@ TiKV API V2が有効な場合にタイムスタンプを取得するためのコ
 ### <code>renew-batch-min-size</code> {#code-renew-batch-min-size-code}
 
 -   タイムスタンプ要求内の TSO の最小数。
--   TiKVは、前期間のタイムスタンプ消費量に応じて、キャッシュされるタイムスタンプの数を調整します。必要なTSOが少数の場合、TiKVは要求されるTSOの数を`renew-batch-min-size`に達するまで減らします。アプリケーションで大規模なバースト書き込みトラフィックが頻繁に発生する場合は、このパラメータを必要に応じて大きな値に設定できます。このパラメータは、単一のtikvサーバーのキャッシュサイズであることに注意してください。パラメータを大きすぎる値に設定し、クラスターに多数のtikvサーバーが含まれている場合、TSOの消費が急激に増加します。
+-   TiKVは、前期間のタイムスタンプ消費量に応じて、キャッシュされるタイムスタンプの数を調整します。必要なTSOが少数の場合、TiKVは要求されるTSOの数を`renew-batch-min-size`に達するまで減らします。アプリケーションで大規模なバースト書き込みトラフィックが頻繁に発生する場合は、必要に応じてこのパラメータを大きく設定できます。このパラメータは、単一のtikvサーバーのキャッシュサイズであることに注意してください。パラメータを大きくしすぎると、クラスターに多数のtikvサーバーが含まれる場合、TSOの消費が急激に増加します。
 -   Grafanaの**TiKV-RAW** &gt; **Causal timestamp**パネルでは、 **TSOバッチサイズ**は、アプリケーションのワークロードに応じて動的に調整された、ローカルにキャッシュされたタイムスタンプの数です。このメトリックを参照して`renew-batch-min-size`調整できます。
 -   デフォルト値: `100`
 

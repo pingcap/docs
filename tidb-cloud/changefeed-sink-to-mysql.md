@@ -11,15 +11,7 @@ summary: このドキュメントでは、Sink to MySQL チェンジフィード
 
 > **注記：**
 >
-> -   changefeed 機能を使用するには、 TiDB Cloud Dedicated クラスターのバージョンが v6.1.3 以降であることを確認してください。
-> -   クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、changefeed 機能は使用できません。
-
-</CustomContent>
-<CustomContent plan="premium">
-
-> **注記：**
->
-> クラスター[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)では、changefeed 機能は使用できません。
+> changefeed 機能を使用するには、 TiDB Cloud Dedicated クラスターのバージョンが v6.1.3 以降であることを確認してください。
 
 </CustomContent>
 
@@ -183,7 +175,7 @@ TiDB Cloudインスタンスは、プライベートエンドポイントを介�
 
 9.  **次へ**をクリックして、変更フィード仕様を構成します。
 
-    -   **チェンジフィード仕様**エリアで、<customcontent plan="dedicated">レプリケーション容量単位 (RCU)</customcontent><customcontent plan="premium">チェンジフィード容量単位（CCU）</customcontent>チェンジフィードによって使用されます。
+    -   **チェンジフィード仕様**エリアで、<customcontent plan="dedicated">レプリケーション容量単位（RCU）</customcontent><customcontent plan="premium">チェンジフィード容量単位（CCU）</customcontent>チェンジフィードによって使用されます。
     -   **「Changefeed 名」**領域で、Changefeed の名前を指定します。
 
 10. **「次へ」**をクリックして、変更フィード構成を確認します。

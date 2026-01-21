@@ -1,11 +1,19 @@
 ---
 title: Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
-summary: Data Migration を使用して、Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、Google Cloud SQL for MySQL、Azure Database for MySQL、またはローカル MySQL インスタンスでホストされている MySQL 互換データベースから増分データをTiDB Cloudに移行する方法について説明します。
+summary: Data Migration を使用して、Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、Google Cloud SQL for MySQL、Azure Database for MySQL、Alibaba Cloud RDS でホストされている MySQL 互換データベース、またはローカル MySQL インスタンスからTiDB Cloudに増分データを移行する方法を学びます。
 ---
 
 # データ移行を使用して、MySQL 互換データベースからTiDB Cloudに増分データのみを移行する {#migrate-only-incremental-data-from-mysql-compatible-databases-to-tidb-cloud-using-data-migration}
 
-このドキュメントでは、TiDB Cloud コンソールのデータ移行機能を使用して、クラウドプロバイダー (Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、Google Cloud SQL for MySQL、または Azure Database for MySQL) 上の MySQL 互換データベースまたはセルフホスト型ソースデータベースからTiDB Cloud TiDB Cloudに増分データを移行する方法について説明します。
+このドキュメントでは、クラウドプロバイダー（Amazon Aurora MySQL、Amazon Relational Database Service（RDS）、Google Cloud SQL for MySQL、Azure Database for MySQL、Alibaba Cloud RDS）上のMySQL互換データベースまたはセルフホストソースデータベースから増分データを移行する方法について説明します。<customcontent plan="dedicated"> TiDB Cloud専用</customcontent><customcontent plan="essential">TiDB Cloudエッセンシャル</customcontent>TiDB Cloudコンソールのデータ移行機能を使用します。
+
+<CustomContent plan="essential">
+
+> **注記：**
+>
+> 現在、 TiDB Cloud Essential のデータ移行機能はベータ版です。
+
+</CustomContent>
 
 既存のデータ、または既存のデータと増分データの両方を移行する方法については、 [データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)参照してください。
 
@@ -22,7 +30,7 @@ summary: Data Migration を使用して、Amazon Aurora MySQL、Amazon Relationa
     00000000-0000-0000-0000-00000000000000000], endLocation:
     [position: (mysql_bin.000016, 5162), gtid-set: 0000000-0000-0000
     0000-0000000000000:0]: cannot fetch downstream table schema of
-    zm`.'table1' to initialize upstream schema 'zm'.'table1' in sschema
+    zm`.'table1' to initialize upstream schema 'zm'.'table1' in schema
     tracker Raw Cause: Error 1146: Table 'zm.table1' doesn't exist
     ```
 
@@ -32,7 +40,7 @@ summary: Data Migration を使用して、Amazon Aurora MySQL、Amazon Relationa
 
 -   ソース データベースで GTID モードが有効になっていることを確認します。
 -   ソース データベースが MySQL の場合、MySQL バージョンは 5.6 以降であり、storageエンジンは InnoDB である必要があります。
--   移行ジョブが上流のセカンダリデータベースに接続する場合、 `REPLICATE CREATE TABLE ... SELECT`のイベントは移行できません。これは、ステートメントが同じGTIDを持つ2つのトランザクション（ `CREATE TABLE`と`INSERT` ）に分割されるためです。その結果、 `INSERT`ステートメントはセカンダリデータベースによって無視されます。
+-   移行ジョブが上流のセカンダリデータベースに接続する場合、 `REPLICATE CREATE TABLE ... SELECT`イベントは移行できません。これは、ステートメントが同じGTIDを持つ2つのトランザクション（ `CREATE TABLE`と`INSERT` ）に分割されるためです。その結果、 `INSERT`ステートメントはセカンダリデータベースによって無視されます。
 
 ## 前提条件 {#prerequisites}
 
@@ -44,18 +52,18 @@ GTID を使用して開始位置を指定する場合は、ソースデータベ
 
 ### Amazon RDS および Amazon Aurora MySQL の場合 {#for-amazon-rds-and-amazon-aurora-mysql}
 
-Amazon RDS および Amazon Aurora MySQL の場合、新しい変更可能なパラメータグループ (つまり、デフォルトのパラメータグループではないもの) を作成し、パラメータグループ内の次のパラメータを変更して、インスタンスアプリケーションを再起動する必要があります。
+Amazon RDS および Amazon Aurora MySQL の場合、変更可能な新しいパラメータグループ (つまり、デフォルトのパラメータグループではない) を作成し、パラメータグループ内の次のパラメータを変更してから、インスタンスを再起動して変更を適用する必要があります。
 
 -   `gtid_mode`
 -   `enforce_gtid_consistency`
 
-次の SQL ステートメントを実行すると、GTID モードが正常に有効化されたかどうかを確認できます。
+次の SQL ステートメントを実行すると、GTID モードが正常に有効化されているかどうかを確認できます。
 
 ```sql
 SHOW VARIABLES LIKE 'gtid_mode';
 ```
 
-結果が`ON`または`ON_PERMISSIVE`場合、 GTID モードは正常に有効化されています。
+結果が`ON`または`ON_PERMISSIVE`の場合、 GTID モードは正常に有効化されています。
 
 詳細については[GTIDベースのレプリケーションのパラメータ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-replication-gtid.html#mysql-replication-gtid.parameters)参照してください。
 
@@ -67,17 +75,11 @@ Google Cloud SQL for MySQL では、GTID モードがデフォルトで有効に
 SHOW VARIABLES LIKE 'gtid_mode';
 ```
 
-結果が`ON`または`ON_PERMISSIVE`場合、 GTID モードは正常に有効化されています。
+結果が`ON`または`ON_PERMISSIVE`の場合、 GTID モードは正常に有効化されています。
 
 ### Azure Database for MySQLの場合 {#for-azure-database-for-mysql}
 
-Azure Database for MySQL（バージョン 5.7 以降）では、GTID モードがデフォルトで有効になっています。次の SQL ステートメントを実行することで、GTID モードが正常に有効になっているかどうかを確認できます。
-
-```sql
-SHOW VARIABLES LIKE 'gtid_mode';
-```
-
-結果が`ON`または`ON_PERMISSIVE`場合、 GTID モードは正常に有効化されています。
+Azure Database for MySQL (バージョン 5.7 以降) では GTID モードが既定で有効になっており、GTID モードを無効にすることはサポートされていません。
 
 さらに、 `binlog_row_image`サーバーパラメータが`FULL`に設定されていることを確認してください。これは、次のSQL文を実行することで確認できます。
 
@@ -85,13 +87,31 @@ SHOW VARIABLES LIKE 'gtid_mode';
 SHOW VARIABLES LIKE 'binlog_row_image';
 ```
 
-結果が`FULL`以外の場合は、 [Azureポータル](https://portal.azure.com/)または[Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)使用して、Azure Database for MySQL インスタンスに対してこのパラメーターを構成する必要があります。
+結果が`FULL`以外の場合は、 [Azureポータル](https://portal.azure.com/)または[Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)を使用して、Azure Database for MySQL インスタンスに対してこのパラメーターを構成する必要があります。
+
+### Alibaba Cloud RDS MySQLの場合 {#for-alibaba-cloud-rds-mysql}
+
+Alibaba Cloud RDS MySQLでは、GTIDモードがデフォルトで有効になっています。次のSQL文を実行することで、GTIDモードが正常に有効化されているかどうかを確認できます。
+
+```sql
+SHOW VARIABLES LIKE 'gtid_mode';
+```
+
+結果が`ON`または`ON_PERMISSIVE`の場合、 GTID モードは正常に有効化されています。
+
+さらに、 `binlog_row_image`サーバーパラメータが`FULL`に設定されていることを確認してください。これは、次のSQL文を実行することで確認できます。
+
+```sql
+SHOW VARIABLES LIKE 'binlog_row_image';
+```
+
+結果が`FULL`以外の場合は、 [RDSコンソール](https://rds.console.aliyun.com/)を使用して Alibaba Cloud RDS MySQL インスタンスに対してこのパラメータを設定する必要があります。
 
 ### セルフホスト型MySQLインスタンスの場合 {#for-a-self-hosted-mysql-instance}
 
 > **注記**：
 >
-> 具体的な手順とコマンドは、MySQLのバージョンと設定によって異なる場合があります。GTIDを有効化した場合の影響を理解し、本番環境以外で適切なテストと検証を行った上で、この操作を実行してください。
+> 具体的な手順とコマンドは、MySQLのバージョンと設定によって異なる場合があります。GTIDを有効化した場合の影響を理解し、この操作を実行する前に、非本番環境で適切にテストと検証を実施してください。
 
 セルフホスト MySQL インスタンスで GTID モードを有効にするには、次の手順に従います。
 
@@ -118,7 +138,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     SHOW VARIABLES LIKE 'gtid_mode';
     ```
 
-    結果が`ON`または`ON_PERMISSIVE`場合、 GTID モードは正常に有効化されています。
+    結果が`ON`または`ON_PERMISSIVE`の場合、 GTID モードは正常に有効化されています。
 
 ## ステップ1: データ移行ページに移動します {#step-1-go-to-the-data-migration-page}
 
@@ -128,9 +148,9 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     >
     > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[移行]**をクリックします。
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[データ移行]**をクリックします。
 
-3.  **「データ移行」**ページで、右上隅の**「移行ジョブの作成」を**クリックします。 **「移行ジョブの作成」**ページが表示されます。
+3.  **「データ移行」**ページで、右上隅の**「移行ジョブの作成」**をクリックします。 **「移行ジョブの作成」**ページが表示されます。
 
 ## ステップ2: ソースとターゲットの接続を構成する {#step-2-configure-the-source-and-target-connection}
 
@@ -142,9 +162,21 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
     -   **データ ソース**: データ ソースの種類。
     -   **リージョン**: データ ソースのリージョン。クラウド データベースにのみ必要です。
-    -   **接続方法**：データソースへの接続方法。現在、接続方法に応じて、パブリックIP、VPCピアリング、またはプライベートリンクを選択できます。
+    -   **接続方法**: データ ソースの接続方法。<customcontent plan="dedicated">現在、接続方法に応じて、パブリック IP、VPC ピアリング、またはプライベート リンクを選択できます。</customcontent><customcontent plan="essential">接続方法に応じて、パブリック IP またはプライベート リンクを選択できます。</customcontent>
+
+    <CustomContent plan="dedicated">
+
     -   **ホスト名または IP アドレス**(パブリック IP および VPC ピアリングの場合): データ ソースのホスト名または IP アドレス。
     -   **サービス名**(Private Link の場合): エンドポイント サービス名。
+
+    </CustomContent>
+     <CustomContent plan="essential">
+
+    -   **ホスト名または IP アドレス**(パブリック IP の場合): データ ソースのホスト名または IP アドレス。
+    -   **プライベート リンク接続**(プライベート リンク用): セクション[プライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md)で作成したプライベート リンク接続。
+
+    </CustomContent>
+
     -   **ポート**: データ ソースのポート。
     -   **ユーザー名**: データ ソースのユーザー名。
     -   **パスワード**: ユーザー名のパスワード。
@@ -162,8 +194,17 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 5.  表示されるメッセージに従ってアクションを実行します。
 
+    <CustomContent plan="dedicated">
+
     -   パブリック IP または VPC ピアリングを使用する場合は、データ移行サービスの IP アドレスをソース データベースとファイアウォール (存在する場合) の IP アクセス リストに追加する必要があります。
-    -   AWS Private Link を使用する場合は、エンドポイントリクエストを承認するように求められます。1 に移動し、 **「エンドポイントサービス」**をクリックしてエンドポイントリクエスト[AWS VPCコンソール](https://us-west-2.console.aws.amazon.com/vpc/home)承認してください。
+    -   AWS Private Link を使用する場合は、エンドポイントリクエストを承認するように求められます。1 に移動し、 **「エンドポイントサービス」** [AWS VPCコンソール](https://us-west-2.console.aws.amazon.com/vpc/home)クリックしてエンドポイントリクエストを承認してください。
+
+    </CustomContent>
+     <CustomContent plan="essential">
+
+    パブリック IP を使用する場合は、データ移行サービスの IP アドレスをソース データベースとファイアウォール (存在する場合) の IP アクセス リストに追加する必要があります。
+
+    </CustomContent>
 
 ## ステップ3: 移行ジョブの種類を選択する {#step-3-choose-migration-job-type}
 
@@ -171,13 +212,13 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 **[開始位置]**領域では、増分データ移行の開始位置として次のいずれかのタイプを指定できます。
 
--   増分移行ジョブが開始される時刻
+-   増分移行ジョブが開始される時間
 -   GTID
 -   Binlogファイル名と位置
 
 移行ジョブが開始されると、開始位置を変更することはできません。
 
-### 増分移行ジョブが開始される時刻 {#the-time-when-the-incremental-migration-job-starts}
+### 増分移行ジョブが開始される時間 {#the-time-when-the-incremental-migration-job-starts}
 
 このオプションを選択すると、移行ジョブは移行ジョブの開始後にソース データベースで生成された増分データのみを移行します。
 
@@ -203,7 +244,7 @@ GTID を有効にする方法については、 [前提条件](#prerequisites)�
 SHOW MASTER STATUS;
 ```
 
-ターゲットデータベースにデータが存在する場合は、binlogの位置が正しいことを確認してください。そうでない場合、既存データと増分データの間に競合が発生する可能性があります。競合が発生した場合、移行ジョブは失敗します。競合したレコードをソースデータベースのデータに置き換えたい場合は、移行ジョブを再開できます。
+ターゲットデータベースにデータが存在する場合は、 binlogの位置が正しいことを確認してください。そうでない場合、既存データと増分データの間に競合が発生する可能性があります。競合が発生した場合、移行ジョブは失敗します。競合したレコードをソースデータベースのデータに置き換えたい場合は、移行ジョブを再開できます。
 
 ## ステップ4: 移行するオブジェクトを選択する {#step-4-choose-the-objects-to-be-migrated}
 
@@ -213,7 +254,7 @@ SHOW MASTER STATUS;
 
 ## ステップ5: 事前チェック {#step-5-precheck}
 
-**「事前チェック」**ページでは、事前チェックの結果を確認できます。事前チェックに失敗した場合は、 **「失敗」**または**「警告」の**詳細に従って操作し、「再チェック」をクリックして**再**チェックしてください。
+**「事前チェック」**ページでは、事前チェックの結果を確認できます。事前チェックに失敗した場合は、 **「失敗」**または**「警告」の**詳細に従って操作し、「再チェック」をクリックして**再チェック**してください。
 
 一部のチェック項目にのみ警告がある場合は、リスクを評価し、警告を無視するかどうかを検討できます。すべての警告を無視した場合、移行ジョブは自動的に次のステップに進みます。
 
@@ -222,6 +263,24 @@ SHOW MASTER STATUS;
 事前チェック項目の詳細については、 [移行タスクの事前チェック](https://docs.pingcap.com/tidb/stable/dm-precheck)参照してください。
 
 すべてのチェック項目が**合格と**表示されたら、 **「次へ」**をクリックします。
+
+<CustomContent plan="essential">
+
+## ステップ6: 移行の進行状況をビュー {#step-6-view-the-migration-progress}
+
+移行ジョブが作成されると、 **「移行ジョブの詳細」**ページで移行の進行状況を確認できます。移行の進行状況は**「ステージとステータス」**領域に表示されます。
+
+移行ジョブは実行中に一時停止または削除できます。
+
+移行ジョブが失敗した場合は、問題を解決してから再開できます。
+
+移行ジョブはどのステータスでも削除できます。
+
+移行中に問題が発生した場合は、 [移行エラーと解決策](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)参照してください。
+
+</CustomContent>
+
+<CustomContent plan="dedicated">
 
 ## ステップ6: 仕様を選択して移行を開始する {#step-6-choose-a-spec-and-start-migration}
 
@@ -240,3 +299,5 @@ SHOW MASTER STATUS;
 移行ジョブはどのステータスでも削除できます。
 
 移行中に問題が発生した場合は、 [移行エラーと解決策](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)参照してください。
+
+</CustomContent>

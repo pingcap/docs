@@ -60,7 +60,7 @@
         -   [SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md)
         -   [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md)
         -   [ジャンゴ](/develop/dev-guide-sample-application-python-django.md)
-    -   ノード.js
+    -   Node.js
         -   [ノード-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
         -   [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
         -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
@@ -217,6 +217,8 @@
 -   データの移行またはインポート
     -   [概要](/tidb-cloud/tidb-cloud-migration-overview.md)
     -   TiDB Cloudへのデータ移行
+        -   [データ移行を使用して既存データと増分データを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
+        -   [データ移行を使用して増分データを移行する](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
         -   [TiDBセルフマネージドからTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)
         -   [大規模データセットの MySQL シャードの移行とマージ](/tidb-cloud/migrate-sql-shards.md)
         -   [AWS DMS を使用して Amazon RDS for Oracle から移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
@@ -261,6 +263,10 @@
         -   [ベクトルインデックス](/vector-search/vector-search-index.md)
     -   [パフォーマンスの向上](/vector-search/vector-search-improve-performance.md)
     -   [制限事項](/vector-search/vector-search-limitations.md)
+-   ストリームデータ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+    -   [チェンジフィードの概要](/tidb-cloud/essential-changefeed-overview.md)
+    -   [MySQLに沈む](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
+    -   [Apache Kafka にシンクする](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
 -   Security
     -   [Securityの概要](/tidb-cloud/security-overview.md)
     -   アイデンティティアクセス制御
@@ -276,7 +282,11 @@
         -   [TiDB CloudへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)
     -   プライベートリンク接続
         -   [プライベートリンク接続の概要](/tidb-cloud/serverless-private-link-connection.md)
+        -   [Amazon RDSに接続する](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md)
+        -   [Alibaba Cloud RDSに接続する](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md)
         -   [AWS 上の Confluent Cloud に接続する](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
+        -   [Alibaba Cloud 上のセルフホスト型 Kafka に接続する](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
+        -   [AWS 上のセルフホスト型 Kafka に接続する](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
     -   監査管理
         -   [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)
         -   [データベース監査ログ](/tidb-cloud/essential-database-audit-logging.md)
@@ -653,7 +663,7 @@
         -   [スケジュール](/tidb-scheduling.md)
         -   [TSO](/tso.md)
     -   ストレージエンジン
-        -   ティクブ
+        -   TiKV
             -   [TiKVの概要](/tikv-overview.md)
             -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
         -   TiFlash
@@ -692,4 +702,5 @@
 ## リリース {#releases}
 
 -   リリースノート
-    -   [2025](/tidb-cloud/tidb-cloud-release-notes.md)
+    -   [2026](/tidb-cloud/tidb-cloud-release-notes.md)
+    -   [2025](/tidb-cloud/release-notes-2025.md)

@@ -176,7 +176,7 @@ TiUPを使用して新しいアーキテクチャに TiCDC ノードを展開す
 4.  [`tiup cluster patch`](/tiup/tiup-component-cluster-patch.md)コマンドを使用して、ダウンロードした TiCDC バイナリ ファイルを TiDB クラスターにパッチ適用します。
 
     ```shell
-    tiup cluster patch <cluster-name> ./cdc-v8.5.4-release.1-linux-amd64.tar.gz -R cdc
+    tiup cluster patch <cluster-name> ./cdc-v8.5.4-release.1-linux-amd64.tar.gz -R cdc --overwrite
     ```
 
 5.  新しいアーキテクチャを有効にするには、 [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md)コマンドを使用して TiCDC 構成を更新します。

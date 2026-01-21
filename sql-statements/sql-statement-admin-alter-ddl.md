@@ -30,7 +30,7 @@ ADMIN ALTER DDL JOBS 101 THREAD = 8;
     -   `BATCH_SIZE` : バッチサイズ。初期値は[`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)に設定されます。
     -   `MAX_WRITE_SPEED` : 各TiKVにインデックスレコードをインポートするための最大帯域幅制限。初期値は[`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850)に設定されます。
 
-    現在、上記のパラメータは、送信されて[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が無効になった後に実行される`ADD INDEX`ジョブに対してのみ機能します。
+    v8.5.5 より前のバージョンの TiDB では、前述のパラメータは、 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が無効になった後に送信され実行されている`ADD INDEX`ジョブに対してのみ機能することに注意してください。
 
 <CustomContent platform="tidb-cloud" plan="premium">
 

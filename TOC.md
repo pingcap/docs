@@ -36,7 +36,7 @@
             -   [SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md)
             -   [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md)
             -   [ジャンゴ](/develop/dev-guide-sample-application-python-django.md)
-        -   ノード.js
+        -   Node.js
             -   [ノード-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
             -   [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
             -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
@@ -247,6 +247,7 @@
             -   [使用概要](/br/br-use-overview.md)
             -   [スナップショットのバックアップと復元ガイド](/br/br-snapshot-guide.md)
             -   [ログバックアップとPITRガイド](/br/br-pitr-guide.md)
+            -   [コンパクトログバックアップ](/br/br-compact-log-backup.md)
             -   [ユースケース](/br/backup-and-restore-use-cases.md)
             -   [バックアップストレージ](/br/backup-and-restore-storages.md)
         -   BR CLI マニュアル
@@ -440,6 +441,7 @@
     -   [複数列インデックスの最適化](/best-practices/multi-column-index-best-practices.md)
     -   [インデックスを管理し、未使用のインデックスを特定する](/best-practices/index-management-best-practices.md)
     -   [SaaS マルチテナントシナリオで数百万のテーブルを処理](/best-practices/saas-best-practices.md)
+    -   [TiDB パーティションテーブルを使用する](/best-practices/tidb-partitioned-tables-best-practices.md)
     -   [UUIDを主キーとして使用する](/best-practices/uuid.md)
     -   [Javaアプリケーションの開発](/best-practices/java-app-best-practices.md)
     -   [高同時書き込みの処理](/best-practices/high-concurrency-best-practices.md)
@@ -569,7 +571,7 @@
             -   [ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)
             -   [Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)
             -   [SQL 式を使用して DML をフィルタリングする](/dm/feature-expression-filter.md)
-            -   [オンライン DDL ツールのサポート](/dm/dm-online-ddl-tool-support.md)
+            -   [オンラインDDLツールのサポート](/dm/dm-online-ddl-tool-support.md)
             -   [暗号化と復号化のための秘密鍵をカスタマイズする](/dm/dm-customized-secret-key.md)
             -   データ移行タスクの管理
                 -   [タスクを事前チェックする](/dm/dm-precheck.md)
@@ -881,6 +883,7 @@
             -   [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
             -   [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)
             -   [`SET &#x3C;variable>`](/sql-statements/sql-statement-set-variable.md)
+            -   [`SHOW AFFINITY`](/sql-statements/sql-statement-show-affinity.md)
             -   [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)
             -   [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md)
             -   [`SHOW BINDINGS`](/sql-statements/sql-statement-show-bindings.md)
@@ -998,6 +1001,7 @@
         -   [一時テーブル](/temporary-tables.md)
         -   [キャッシュされたテーブル](/cached-tables.md)
         -   [FOREIGN KEY制約](/foreign-key.md)
+        -   [テーブルレベルのデータアフィニティ](/table-affinity.md)
         -   文字セットと照合順序
             -   [概要](/character-set-and-collation.md)
             -   [GBK](/character-set-gbk.md)
@@ -1105,6 +1109,7 @@
     -   [リリースサポートポリシー](https://www.pingcap.com/tidb-release-support-policy/)
     -   [TiDBインストールパッケージ](/binary-package.md)
     -   バージョン8.5
+        -   [8.5.5](/releases/release-8.5.5.md)
         -   [8.5.4](/releases/release-8.5.4.md)
         -   [8.5.3](/releases/release-8.5.3.md)
         -   [8.5.2](/releases/release-8.5.2.md)

@@ -117,6 +117,7 @@ TableOption ::=
 |   'UNION' EqOpt '(' TableNameListOpt ')'
 |   'ENCRYPTION' EqOpt EncryptionOpt
 |    'TTL' EqOpt TimeColumnName '+' 'INTERVAL' Expression TimeUnit (TTLEnable EqOpt ( 'ON' | 'OFF' ))? (TTLJobInterval EqOpt stringLit)?
+|   'AFFINITY' EqOpt StringName
 |   PlacementPolicyOption
 
 OnCommitOpt ::=
@@ -160,21 +161,24 @@ NextValueForSequence ::=
 
 以下の*table_options* `ENGINE`サポートされています`KEY_BLOCK_SIZE`その他のオプション`CONNECTION` `AVG_ROW_LENGTH` `DELAY_KEY_WRITE` `CHECKSUM` `COMPRESSION` `MIN_ROWS`されますが`MAX_ROWS` `STATS_PERSISTENT`れ`ROW_FORMAT` 。
 
-| オプション                                        | 説明                                                                            | 例                                   |
-| -------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------- |
-| `AUTO_INCREMENT`                             | 増分フィールドの初期値                                                                   | `AUTO_INCREMENT` = 5                |
-| [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) | 暗黙の`_tidb_rowid`シャードのビット数を設定するには                                              | `SHARD_ROW_ID_BITS` = 4             |
-| `PRE_SPLIT_REGIONS`                          | テーブルを作成するときに`2^(PRE_SPLIT_REGIONS)`リージョンを事前に分割するには                            | `PRE_SPLIT_REGIONS` = 4             |
-| `AUTO_ID_CACHE`                              | TiDBインスタンスの自動IDキャッシュサイズを設定します。デフォルトでは、TiDBは自動IDの割り当て速度に応じてこのサイズを自動的に変更します。    | `AUTO_ID_CACHE` = 200               |
-| `AUTO_RANDOM_BASE`                           | auto_randomの初期増分値を設定します。このオプションは内部インターフェースの一部とみなすことができます。ユーザーはこのパラメータを無視できます。 | `AUTO_RANDOM_BASE` = 0              |
-| `CHARACTER SET`                              | テーブルの[文字セット](/character-set-and-collation.md)指定するには                           | `CHARACTER SET` = &#39;utf8mb4&#39; |
-| `COMMENT`                                    | コメント情報                                                                        | `COMMENT` = &#39;コメント情報&#39;        |
+| オプション                                        | 説明                                                                                                                                                 | 例                                   |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| `AUTO_INCREMENT`                             | 増分フィールドの初期値                                                                                                                                        | `AUTO_INCREMENT` = 5                |
+| [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) | 暗黙の`_tidb_rowid`シャードのビット数を設定するには                                                                                                                   | `SHARD_ROW_ID_BITS` = 4             |
+| `PRE_SPLIT_REGIONS`                          | テーブルを作成するときに`2^(PRE_SPLIT_REGIONS)`リージョンを事前に分割するには                                                                                                 | `PRE_SPLIT_REGIONS` = 4             |
+| `AUTO_ID_CACHE`                              | TiDBインスタンスの自動IDキャッシュサイズを設定します。デフォルトでは、TiDBは自動IDの割り当て速度に応じてこのサイズを自動的に変更します。                                                                         | `AUTO_ID_CACHE` = 200               |
+| `AUTO_RANDOM_BASE`                           | auto_randomの初期増分値を設定します。このオプションは内部インターフェースの一部とみなすことができます。ユーザーはこのパラメータを無視できます。                                                                      | `AUTO_RANDOM_BASE` = 0              |
+| `CHARACTER SET`                              | テーブルの[文字セット](/character-set-and-collation.md)指定するには                                                                                                | `CHARACTER SET` = &#39;utf8mb4&#39; |
+| `COLLATE`                                    | テーブルの文字セット照合順序を指定するには                                                                                                                              | `COLLATE` = &#39;utf8mb4_bin&#39;   |
+| `COMMENT`                                    | コメント情報                                                                                                                                             | `COMMENT` = &#39;コメント情報&#39;        |
+| `AFFINITY`                                   | テーブルまたはパーティションのアフィニティスケジューリングを有効にします。非パーティションテーブルの場合は`'table'` 、パーティションテーブルの場合は`'partition'`に設定できます`'none'`に設定するか空白のままにすると、アフィニティスケジューリングは無効になります。 | `AFFINITY` = &#39;テーブル&#39;         |
 
 <CustomContent platform="tidb">
 
 > **注記：**
 >
-> `split-table`設定オプションはデフォルトで有効になっています。有効にすると、新しく作成されたテーブルごとに個別のリージョンが作成されます。詳細については、 [TiDB構成ファイル](/tidb-configuration-file.md)参照してください。
+> -   `split-table`設定オプションはデフォルトで有効になっています。有効にすると、新しく作成されたテーブルごとに個別のリージョンが作成されます。詳細については、 [TiDB構成ファイル](/tidb-configuration-file.md)参照してください。
+> -   `AFFINITY`使用する前に、アフィニティが有効になっているテーブルのパーティション スキームの変更 (パーティションの追加、削除、再編成、スワップなど) はサポートされておらず、一時テーブルまたはビューでの`AFFINITY`構成はサポートされていないことに注意してください。
 
 </CustomContent>
 
@@ -182,7 +186,8 @@ NextValueForSequence ::=
 
 > **注記：**
 >
-> TiDB は、新しく作成されたテーブルごとに個別のリージョンを作成します。
+> -   TiDB は、新しく作成されたテーブルごとに個別のリージョンを作成します。
+> -   `AFFINITY`使用する前に、アフィニティが有効になっているテーブルのパーティション スキームの変更 (パーティションの追加、削除、再編成、スワップなど) はサポートされておらず、一時テーブルまたはビューでの`AFFINITY`構成はサポートされていないことに注意してください。
 
 </CustomContent>
 

@@ -30,8 +30,6 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 
     この機能により、 TiDB Cloud Dedicated クラスタ間でデータベースを複製し、地域災害発生時の迅速な復旧を実現できます。プロジェクトオーナーのロールをお持ちの場合は、新しいリカバリグループを作成し、データベースをそのグループに割り当てることで、この機能を有効にできます。リカバリグループを使用してデータベースを複製することで、災害対策を強化し、より厳格な可用性SLAを満たし、より厳格な復旧ポイント目標 (RPO) と復旧時間目標 (RTO) を達成できます。
 
-    詳細については[回復グループを始める](/tidb-cloud/recovery-group-get-started.md)参照してください。
-
 ## 2024年11月26日 {#november-26-2024}
 
 **一般的な変更**
@@ -291,8 +289,6 @@ summary: 2024 年のTiDB Cloudのリリース ノートについて説明しま�
 -   AWS にデプロイされた[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの災害復旧用のリカバリ グループ機能 (ベータ版) を導入します。
 
     この機能により、 TiDB Cloud Dedicated クラスタ間でデータベースを複製し、地域災害発生時の迅速な復旧を実現できます。1 `Project Owner`の場合は、新しいリカバリグループを作成し、データベースをそのグループに割り当てることで、この機能を有効化できます。リカバリグループを使用してデータベースを複製することで、災害対策を強化し、より厳格な可用性SLAを満たし、より厳格な復旧ポイント目標 (RPO) と復旧時間目標 (RTO) を達成できます。
-
-    詳細については[回復グループを始める](/tidb-cloud/recovery-group-get-started.md)参照してください。
 
 -   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)列storage[TiFlash](/tiflash/tiflash-overview.md)の課金と計測 (ベータ版) を導入します。
 

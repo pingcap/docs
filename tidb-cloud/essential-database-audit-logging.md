@@ -452,6 +452,10 @@ ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <o
 | `CLIENT_IP`       | クライアントの現在の IP アドレス。                                  |
 | `CLIENT_PORT`     | クライアントの現在のポート。                                       |
 
+> **注記：**
+>
+> トラフィックの可視性を向上させるため、AWS PrivateLink 経由の接続において、ロードバランサー (LB) IP ではなく、実際のクライアント IP アドレスが表示されるようになり`CLIENT_IP`た。現在、この機能はベータ版であり、AWS リージョン`Frankfurt (eu-central-1)`でのみ利用可能です。
+
 ### 監査操作情報 {#audit-operation-information}
 
 イベント クラスが`AUDIT`または`AUDIT`のサブクラスの場合、監査ログには次の情報が含まれます。

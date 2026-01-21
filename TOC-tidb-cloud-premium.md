@@ -59,7 +59,7 @@
         -   [SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md)
         -   [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md)
         -   [ジャンゴ](/develop/dev-guide-sample-application-python-django.md)
-    -   ノード.js
+    -   Node.js
         -   [ノード-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
         -   [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
         -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
@@ -137,7 +137,7 @@
             -   [接続の概要](/tidb-cloud/premium/connect-to-tidb-instance.md)
             -   [パブリックエンドポイント経由で接続](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)
             -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
-            -   [プライベートエンドポイント経由でAlibaba Cloudに接続する](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
+            -   [Alibaba Cloud のプライベートエンドポイント経由で接続する](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
         -   [TiDB Cloudデータのバックアップと復元](/tidb-cloud/premium/backup-and-restore-premium.md)
     -   TiFlashでHTAPクラスタを使用する
         -   [TiFlashの概要](/tiflash/tiflash-overview.md)
@@ -610,7 +610,7 @@
         -   [スケジュール](/tidb-scheduling.md)
         -   [TSO](/tso.md)
     -   ストレージエンジン
-        -   TiKV
+        -   ティクブ
             -   [TiKVの概要](/tikv-overview.md)
             -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
         -   TiFlash
@@ -648,4 +648,5 @@
 ## リリース {#releases}
 
 -   リリースノート
-    -   [2025](/tidb-cloud/tidb-cloud-release-notes.md)
+    -   [2026](/tidb-cloud/tidb-cloud-release-notes.md)
+    -   [2025](/tidb-cloud/release-notes-2025.md)

@@ -19,7 +19,7 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
 
     TiDB、TiKV、PD それぞれにサーバー証明書を用意することをお勧めします。これらのコンポーネントが相互に認証できることを確認してください。TiDB、TiKV、PD の制御ツールは、1 つのクライアント証明書を共有することもできます。
 
-    自己署名証明書を生成するには`easy-rsa` `openssl`のツールを`cfssl`できます。
+    自己署名証明書を生成するには`easy-rsa` `openssl` `cfssl`ツールを使用できます。
 
     <CustomContent platform="tidb">
 
@@ -151,8 +151,8 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
 
 > **注記：**
 >
-> -   v8.4.0以降、PD構成項目`cert-allowed-cn`複数の値をサポートします。必要に応じて、TiDB用構成項目`cluster-verify-cn`とその他のコンポーネント用構成項目`cert-allowed-cn`に、複数の`Common Name`設定できます。TiUPはコンポーネントのステータスを照会する際に別の識別子を使用することに注意してください。例えば、クラスター名が`test`場合、 TiUPは`Common Name`として`test-client`使用します。
-> -   v8.3.0以前のバージョンでは、PD設定項目`cert-allowed-cn`は単一の値しか設定できません。そのため、すべての認証オブジェクトの`Common Name`同じ値に設定する必要があります。関連する設定例については、 [v8.3.0 ドキュメント](https://docs-archive.pingcap.com/tidb/v8.3/enable-tls-between-components/)参照してください。
+> -   v8.4.0以降、PD構成項目`cert-allowed-cn`複数の値をサポートします。必要に応じて、TiDB用構成項目`cluster-verify-cn`とその他のコンポーネント用構成項目`cert-allowed-cn`に、複数の`Common Name`設定できます。TiUPはコンポーネントのステータスを照会する際に別の識別子を使用することに注意してください。例えば、クラスター名が`test`の場合、 TiUPは`Common Name`として`test-client`使用します。
+> -   v8.3.0以前のバージョンでは、PD設定項目`cert-allowed-cn`には単一の値しか設定できません。そのため、すべての認証オブジェクトの`Common Name`同じ値に設定する必要があります。関連する設定例については、 [v8.3.0 ドキュメント](https://docs-archive.pingcap.com/tidb/v8.3/enable-tls-between-components/)参照してください。
 
 -   ティドブ
 
@@ -234,6 +234,8 @@ TiDBコンポーネント間の通信にTLSを設定したら、以下のコマ�
 ## 証明書を再読み込みする {#reload-certificates}
 
 -   TiDB クラスターがローカル データ センターに展開されている場合、証明書とキーを再ロードするために、TiDB、PD、TiKV、 TiFlash、TiCDC、およびすべての種類のクライアントは、新しい接続が作成されるたびに、TiDB クラスターを再起動せずに現在の証明書とキー ファイルを再読み取ります。
+
+-   TiProxy は 1 時間に 1 回、ディスクから証明書を再読み込みします。
 
 -   TiDB クラスタを自社マネージドクラウドにデプロイしている場合は、TLS 証明書の発行がクラウドプロバイダーの証明書管理サービスと統合されていることを確認してください。TiDB、PD、TiKV、 TiFlash、および TiCDC コンポーネントの TLS 証明書は、TiDB クラスタを再起動することなく自動的にローテーションできます。
 

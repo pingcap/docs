@@ -62,7 +62,7 @@
         -   [SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md)
         -   [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md)
         -   [ジャンゴ](/develop/dev-guide-sample-application-python-django.md)
-    -   ノード.js
+    -   Node.js
         -   [ノード-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
         -   [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
         -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
@@ -141,7 +141,7 @@
             -   [接続の概要](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
             -   [パブリックエンドポイント経由で接続](/tidb-cloud/connect-via-standard-connection-serverless.md)
             -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-            -   [プライベートエンドポイント経由でAlibaba Cloudに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+            -   [Alibaba Cloud のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
         -   支店![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
             -   [概要](/tidb-cloud/branch-overview.md)
             -   [ブランチの管理](/tidb-cloud/branch-manage.md)
@@ -613,7 +613,7 @@
     -   認証
         -   [ログイン](/tidb-cloud/ticloud-auth-login.md)
         -   [ログアウト](/tidb-cloud/ticloud-auth-logout.md)
-        -   [誰だ](/tidb-cloud/ticloud-auth-whoami.md)
+        -   [だれだ](/tidb-cloud/ticloud-auth-whoami.md)
     -   サーバーレス
         -   [容量](/tidb-cloud/ticloud-serverless-capacity.md)
         -   [作成する](/tidb-cloud/ticloud-cluster-create.md)
@@ -712,4 +712,5 @@
 ## リリース {#releases}
 
 -   リリースノート
-    -   [2025](/tidb-cloud/tidb-cloud-release-notes.md)
+    -   [2026](/tidb-cloud/tidb-cloud-release-notes.md)
+    -   [2025](/tidb-cloud/release-notes-2025.md)

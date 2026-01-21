@@ -3,7 +3,7 @@ title: TiDB Log Backup and PITR Command Manual
 summary: TiDB ログ バックアップとポイントインタイム リカバリ (PITR) で使用されるコマンドを紹介します。
 ---
 
-# TiDB ログバックアップおよび PITR コマンドマニュアル {#tidb-log-backup-and-pitr-command-manual}
+# TiDB ログバックアップと PITR コマンドマニュアル {#tidb-log-backup-and-pitr-command-manual}
 
 このドキュメントでは、TiDB ログ バックアップとポイントインタイム リカバリ (PITR) で使用されるコマンドについて説明します。
 
@@ -71,13 +71,13 @@ Global Flags:
 
 ```
 
-出力例には共通パラメータのみが表示されています。これらのパラメータの説明は以下のとおりです。
+出力例には共通パラメータのみが表示されています。これらのパラメータは以下のように記述されます。
 
 -   `--start-ts` : ログバックアップの開始タイムスタンプを指定します。このパラメータが指定されていない場合、バックアッププログラムは現在の時刻を`start-ts`として使用します。
 -   `task-name` : ログバックアップのタスク名を指定します。この名前は、バックアップタスクのクエリ、一時停止、再開にも使用されます。
--   `--ca` : TiKVおよびPDと通信するためのmTLS暗号化`--key` `--cert`指定します。
+-   `--ca` : TiKVおよびPDと通信`--key`ためのmTLS暗号化方式`--cert`指定します。
 -   `--pd` : バックアップ クラスターの PD アドレスを指定します。BRはログ バックアップ タスクを開始するために PD にアクセスする必要があります。
--   `--storage` : バックアップstorageのアドレスを指定します。現在、 BRはログバックアップのstorageとしてAmazon S3、Google Cloud Storage（GCS）、またはAzure Blob Storageをサポートしています。上記のコマンドではAmazon S3を例として使用しています。詳細は[外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
+-   `--storage` : バックアップstorageのアドレスを指定します。現在、 BRはログバックアップのstorageとしてAmazon S3、Google Cloud Storage (GCS)、またはAzure Blob Storageをサポートしています。上記のコマンドではAmazon S3を例として使用しています。詳細は[外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
 
 使用例:
 
@@ -94,8 +94,8 @@ BR を使用すると、ログ バックアップ データをバックアップ
 
 TiDB v8.4.0 以降では、ログ バックアップ コマンドで次のパラメータ ( [スナップショットバックアップの暗号化](/br/br-snapshot-manual.md#encrypt-the-backup-data)に類似) を渡すことで、ログ バックアップ データを暗号化できます。
 
--   `--log.crypter.method` : 暗号化アルゴリズム。2、4、6 `aes192-ctr` `aes128-ctr`か`aes256-ctr`なります。デフォルト値は`plaintext`で、データは暗号化されません。
--   `--log.crypter.key` : 16進文字列形式の暗号化キー。アルゴリズム`aes128-ctr`の場合は128ビット（16バイト）、アルゴリズム`aes192-ctr`の場合は24バイト、アルゴリズム`aes256-ctr`の場合は32バイトのキーとなります。
+-   `--log.crypter.method` : 暗号化アルゴリズム。2、4、6 `aes192-ctr` `aes128-ctr`かになります。デフォルト値は`aes256-ctr` `plaintext` 、データは暗号化されません。
+-   `--log.crypter.key` : 16進文字列形式の暗号化キー。アルゴリズム`aes128-ctr`の場合は128ビット（16バイト）、アルゴリズム`aes192-ctr`の場合は24バイト、アルゴリズム`aes256-ctr`の場合は32バイトのキーです。
 -   `--log.crypter.key-file` : キーファイル。2 `crypter.key`渡さずに、キーが保存されているファイルパスをパラメータとして直接渡すこともできます。
 
 次に例を示します。
@@ -109,9 +109,9 @@ tiup br log start \
     --log.crypter.key 0123456789abcdef0123456789abcdef
 ```
 
-ただし、セキュリティ要件が高いシナリオでは、固定の暗号化キーをコマンドラインで直接渡すことを望まない場合があります。セキュリティをさらに強化するには、マスターキーベースの暗号化システムを使用して暗号化キーを管理できます。このシステムは、ログバックアップファイルごとに異なるデータキーを生成し、マスターキーのローテーションをサポートします。以下のパラメータを使用して設定できます。
+ただし、セキュリティ要件が高いシナリオでは、固定の暗号化キーをコマンドラインで直接渡すことは望ましくない場合があります。セキュリティをさらに強化するには、マスターキーベースの暗号化システムを使用して暗号化キーを管理できます。このシステムは、ログバックアップファイルごとに異なるデータキーを生成し、マスターキーのローテーションをサポートします。以下のパラメータを使用して設定できます。
 
--   `--master-key-crypter-method` : マスターキーに基づく暗号化アルゴリズム`aes128-ctr` 、または`aes256-ctr` `aes192-ctr`かになります。デフォルト値は`plaintext`で、データは暗号化されません。
+-   `--master-key-crypter-method` : マスターキーに基づく暗号化アルゴリズム。2、4 `aes192-ctr`または`aes256-ctr` `aes128-ctr`かになります。デフォルト値は`plaintext`で、データは暗号化されません。
 -   `--master-key` ：マスターキーの設定。ローカルディスクに保存されたマスターキー、またはクラウドキー管理サービス（KMS）によって管理されたマスターキーを使用できます。
 
 ローカル ディスクに保存されているマスター キーを使用して暗号化します。
@@ -150,7 +150,7 @@ tiup br log start \
 > **注記：**
 >
 > -   キーが失われると、ログ バックアップ データをクラスターに復元できなくなります。
-> -   暗号化機能は、 `br`および TiDB クラスター v8.4.0 以降で使用する必要があります。暗号化されたログバックアップデータは、v8.4.0 より前のバージョンのクラスターでは復元できません。
+> -   暗号化機能は、 `br`および TiDB クラスター v8.4.0 以降で使用する必要があります。暗号化されたログバックアップデータは、v8.4.0 より前のクラスターでは復元できません。
 
 ### ログバックアップのステータスを照会する {#query-the-log-backup-status}
 
@@ -202,8 +202,8 @@ checkpoint[global]: 2022-07-25 22:52:15.518 +0800; gap=2m52s
 
 出力フィールドの説明は次のとおりです。
 
--   `status` : バックアップ タスクのステータス`NORMAL` 、または`PAUSE` `ERROR`なります。
--   `start` : バックアップタスクの開始時刻。これは、バックアップタスクの開始時に指定された`start-ts`です。
+-   `status` : バックアップ タスクのステータス。 `NORMAL` 、 `ERROR` 、または`PAUSE`になります。
+-   `start` : バックアップタスクの開始時刻。バックアップタスクの開始時に指定された`start-ts`です。
 -   `storage` : バックアップstorageアドレス。
 -   `speed` : バックアップタスクの合計 QPS。QPS は 1 秒あたりにバックアップされるログの数を意味します。
 -   `checkpoint [global]` : このチェックポイントより前のすべてのデータがバックアップstorageにバックアップされています。これは、バックアップデータの復元に使用できる最新のタイムスタンプです。
@@ -281,7 +281,7 @@ tiup br log resume --task-name=pitr --pd="${PD_IP}:2379"
 
 ### ログバックアップタスクを停止する {#stop-a-log-backup-task}
 
-ログバックアップタスクを停止するには、コマンド`tiup br log stop`実行します。このコマンドは、バックアップクラスター内のタスクメタデータをクリーンアップします。
+ログバックアップタスクを停止するには、コマンド`tiup br log stop`を実行します。このコマンドは、バックアップクラスター内のタスクメタデータをクリーンアップします。
 
 ヘルプ情報を表示するには、 `tiup br log stop --help`実行します。
 
@@ -408,7 +408,7 @@ tiup br log metadata --storage='s3://backup-101/logbackup?access-key=${access-ke
 
 > **注記：**
 >
-> `restore point`の増分バックアップ アドレスとして`--full-backup-storage`指定した場合、このバックアップと以前の増分バックアップを復元するには、増分バックアップと後続のログ バックアップとの互換性を確保するために、パラメータ`--allow-pitr-from-incremental`を`true`に設定する必要があります。
+> `restore point`の増分バックアップ アドレスとして`--full-backup-storage`指定した場合、このバックアップと以前の増分バックアップを復元するには、増分バックアップと後続のログ バックアップとの互換性を確保するために、パラメータ`--allow-pitr-from-incremental` `true`に設定する必要があります。
 
 `tiup br restore point`コマンドを実行して、新しいクラスターで PITR を実行したり、ログ バックアップ データを復元したりできます。
 
@@ -439,16 +439,16 @@ Global Flags:
  -s, --storage string         specify the url where backup storage, eg, "s3://bucket/path/prefix"
 ```
 
-出力例には共通パラメータのみが表示されています。これらのパラメータの説明は以下のとおりです。
+出力例には共通パラメータのみが表示されています。これらのパラメータは以下のように記述されます。
 
--   `--full-backup-storage` : スナップショット（フル）バックアップのstorageアドレス。PITRを使用する場合は、このパラメータを指定し、復元タイムスタンプ前の最新のスナップショットバックアップを選択します。ログバックアップデータのみを復元する場合は、このパラメータを省略できます。リカバリクラスターを初めて初期化する場合は、スナップショットバックアップを指定する必要があります。現在、 BRはログバックアップのstorageとしてAmazon S3、GCS、Azure Blob Storageをサポートしています。詳細は[外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
--   `--pitr-batch-count` : ログデータを復元する際の、1 回のバッチで処理できるファイルの最大数。このしきい値に達すると、現在のバッチは直ちに終了し、次のバッチが開始されます。
--   `--pitr-batch-size` : ログデータを復元する際の、1バッチあたりの最大データサイズ（バイト単位）。このしきい値に達すると、現在のバッチは直ちに終了し、次のバッチが開始されます。
+-   `--full-backup-storage` : スナップショット（フル）バックアップのstorageアドレス。PITRを使用する場合は、このパラメータを指定して、復元タイムスタンプ前の最新のスナップショットバックアップを選択します。ログバックアップデータのみを復元する場合は、このパラメータを省略できます。リカバリクラスターを初めて初期化する場合は、スナップショットバックアップを指定する必要があります。現在、 BRはログバックアップのstorageとしてAmazon S3、GCS、Azure Blob Storageをサポートしています。詳細は[外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
+-   `--pitr-batch-count` : ログデータを復元する際の、1バッチあたりのファイル数の上限。このしきい値に達すると、現在のバッチは直ちに終了し、次のバッチが開始されます。
+-   `--pitr-batch-size` : ログデータを復元する際の単一バッチの最大データサイズ（バイト単位）。このしきい値に達すると、現在のバッチは直ちに終了し、次のバッチが開始されます。
 -   `--pitr-concurrency` : ログ復元中の同時タスク数。各同時タスクは、一度に1バッチのログデータを復元します。
 -   `--restored-ts` : データを復元するタイムスタンプ。このパラメータが指定されていない場合、 BRはログバックアップで利用可能な最新のタイムスタンプ、つまりバックアップデータのチェックポイントにデータを復元します。
 -   `--start-ts` : ログバックアップデータを復元する開始タイムスタンプ。ログバックアップデータのみを復元する必要がある場合は、このパラメータを指定する必要があります。
 -   `--pd` : 復元クラスターの PD アドレス。
--   `--ca` : TiKVおよびPDと通信するためのmTLS暗号化`--key` `--cert`指定します。
+-   `--ca` : TiKVおよびPDと通信`--key`ためのmTLS暗号化方式`--cert`指定します。
 -   `--storage` : ログバックアップのstorageアドレス。現在、 BRはログバックアップのstorageとしてAmazon S3、GCS、またはAzure Blob Storageをサポートしています。詳細は[外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
 
 使用例:
@@ -458,7 +458,9 @@ tiup br restore point --pd="${PD_IP}:2379"
 --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
 --full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${access-key}&secret-access-key=${secret-access-key}'
 
-Full Restore <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
+Split&Scatter Region <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
+Download&Ingest SST <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
+Restore Pipeline <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
 *** ***["Full Restore success summary"] ****** [total-take=3.112928252s] [restore-data-size(after-compressed)=5.056kB] [Size=5056] [BackupTS=434693927394607136] [total-kv=4] [total-kv-size=290B] [average-speed=93.16B/s]
 Restore Meta Files <--------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
 Restore KV Files <----------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
@@ -467,13 +469,13 @@ Restore KV Files <--------------------------------------------------------------
 
 > **注記：**
 >
-> -   クラスターを初めて復元する際は、完全なスナップショットデータを指定する必要があります。そうしないと、テーブルIDルールの書き換えにより、新しく作成されたテーブルの一部のデータが不正確になる可能性があります。詳細については、GitHub の問題[＃54418](https://github.com/pingcap/tidb/issues/54418)ご覧ください。
+> -   クラスターを初めて復元する際は、完全なスナップショットデータを指定する必要があります。そうしないと、テーブルIDルールの書き換えにより、新しく作成されたテーブルの一部のデータが正しくなくなる可能性があります。詳細については、GitHub の問題[＃54418](https://github.com/pingcap/tidb/issues/54418)をご覧ください。
 > -   特定の期間のログバックアップデータを繰り返しリストアすることはできません。範囲`[t1=10, t2=20)`のログバックアップデータを繰り返しリストアすると、リストアされたデータに不整合が生じる可能性があります。
-> -   異なる期間のログデータを複数のバッチで復元する場合は、ログデータが連続した順序で復元されるようにしてください。ログバックアップデータ`[t1, t2)` 、 `[t2, t3)` 、 `[t3, t4)`連続した順序で復元すると、復元されたデータの整合性が保たれます。ただし、 `[t1, t2)`復元した後、 `[t2, t3)`スキップして`[t3, t4)`復元すると、復元されたデータの整合性が失われる可能性があります。
+> -   異なる期間のログデータを複数のバッチで復元する場合は、ログデータが連続した順序で復元されるようにしてください。ログバックアップデータ`[t1, t2)` 、 `[t2, t3)` 、 `[t3, t4)`を連続した順序で復元すると、復元されたデータは整合性を保ちます。ただし、 `[t1, t2)`復元した後、 `[t2, t3)`スキップして`[t3, t4)`を復元すると、復元されたデータは不整合になる可能性があります。
 
 ### 暗号化されたログバックアップデータを復元する {#restore-encrypted-log-backup-data}
 
-暗号化されたログバックアップデータを復元するには、復元コマンドで対応する復号パラメータを渡す必要があります。復号パラメータが暗号化に使用されたものと同じであることを確認してください。復号アルゴリズムまたはキーが正しくない場合、データを復元できません。
+暗号化されたログバックアップデータを復元するには、復元コマンドで対応する復号パラメータを渡す必要があります。復号パラメータが暗号化に使用したパラメータと一致していることを確認してください。復号アルゴリズムまたはキーが正しくない場合、データを復元できません。
 
 次に例を示します。
 
@@ -497,4 +499,157 @@ tiup br restore point --pd="${PD_IP}:2379"
 --crypter.key 0123456789abcdef0123456789abcdef
 --master-key-crypter-method aes128-ctr
 --master-key "local:///path/to/master.key"
+```
+
+### フィルターを使用してデータを復元する {#restore-data-using-filters}
+
+TiDB v8.5.5 以降では、PITR 中にフィルターを使用して特定のデータベースまたはテーブルを復元できるようになり、復元するデータをより細かく制御できるようになりました。
+
+フィルタ パターンは他のBR操作と同じ[テーブルフィルタリング構文](/table-filter.md)に従います。
+
+-   `'*.*'` : すべてのデータベースとテーブルに一致します。
+-   `'db1.*'` : データベース`db1`内のすべてのテーブルに一致します。
+-   `'db1.table1'` : データベース`db1`内の特定のテーブル`table1`と一致します。
+-   `'db*.tbl*'` : `db`で始まるデータベースと`tbl`で始まるテーブルに一致します。
+-   `'!mysql.*'` : `mysql`データベース内のすべてのテーブルを除外します。
+
+使用例:
+
+```shell
+# restore specific databases
+tiup br restore point --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--full-backup-storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--start-ts "2025-06-02 00:00:00+0800" \
+--restored-ts "2025-06-03 18:00:00+0800" \
+--filter 'db1.*' --filter 'db2.*'
+
+# restore specific tables
+tiup br restore point --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--full-backup-storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--start-ts "2025-06-02 00:00:00+0800" \
+--restored-ts "2025-06-03 18:00:00+0800" \
+--filter 'db1.users' --filter 'db1.orders'
+
+# restore using pattern matching
+tiup br restore point --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--full-backup-storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--start-ts "2025-06-02 00:00:00+0800" \
+--restored-ts "2025-06-03 18:00:00+0800" \
+--filter 'db*.tbl*'
+```
+
+> **注記：**
+>
+> -   フィルターを使用してデータを復元する前に、ターゲットクラスターにフィルターに一致するデータベースまたはテーブルが含まれていないことを確認してください。含まれていない場合、復元はエラーで失敗します。
+> -   フィルター オプションは、スナップショット バックアップとログ バックアップの両方の復元フェーズ中に適用されます。
+> -   複数の`--filter`オプションを指定して、異なるパターンを含めたり除外したりできます。
+> -   PITRフィルタリングはシステムテーブルをまだサポートしていません。特定のシステムテーブルを復元する必要がある場合は、代わりにフィルターを指定した`br restore full`コマンドを使用してください。このコマンドはスナップショットバックアップデータのみを復元し、ログバックアップデータは復元しないことに注意してください。
+> -   復元タスク内の正規表現は、 `restored-ts`番目の時点でのテーブル名と一致し、次の 3 つのケースが考えられます。
+>     -   テーブルA（テーブルID = 1）：テーブル名は、 `restored-ts`番目の時点以前において、常に`--filter`正規表現と一致します。この場合、PITRはテーブルを復元します。
+>     -   テーブルB（テーブルID = 2）：テーブル名は`restored-ts`より前の時点では`--filter`正規表現と一致しませんでしたが、 `restored-ts`番目の時点では一致しました。この場合、PITRはテーブルを復元します。
+>     -   テーブルC（テーブルID = 3）：テーブル名は、 `restored-ts`より前の時点では正規表現`--filter`と一致していましたが、 `restored-ts`時点では一致**していません**。この場合、PITRはテーブルを復元しませ**ん**。
+> -   データベースとテーブルのフィルタリング機能を使用して、データの一部をオンラインで復元できます。オンライン復元プロセス中は、復元されたオブジェクトと同じ名前のデータベースまたはテーブルを作成し**ないで**ください。そうしないと、競合が発生して復元タスクが失敗します。データの不整合を回避するため、この復元プロセス中にPITRによって作成されたテーブルは、復元タスクが完了するまで読み取りも書き込みもできません。
+
+### 同時復元操作 {#concurrent-restore-operations}
+
+TiDB v8.5.5以降では、複数のPITRリストアタスクを同時に実行できるようになりました。この機能により、異なるデータセットを並行してリストアできるため、大規模なリストアシナリオにおける効率が向上します。
+
+同時復元の使用例:
+
+```shell
+# terminal 1 - restore database db1
+tiup br restore point --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--full-backup-storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--start-ts "2025-06-02 00:00:00+0800" \
+--restored-ts "2025-06-03 18:00:00+0800" \
+--filter 'db1.*'
+
+# terminal 2 - restore database db2 (can run simultaneously)
+tiup br restore point --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--full-backup-storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--start-ts "2025-06-02 00:00:00+0800" \
+--restored-ts "2025-06-03 18:00:00+0800" \
+--filter 'db2.*'
+```
+
+> **注記：**
+>
+> -   各同時復元操作は、異なるデータベースまたは重複しないテーブルセットを対象とする必要があります。重複するデータセットを同時に復元しようとすると、エラーが発生します。
+> -   複数の復元タスクはシステムリソースを大量に消費します。CPUとI/Oリソースが十分な場合にのみ、複数の復元タスクを同時に実行することをお勧めします。
+
+### 進行中のログバックアップとスナップショット復元の互換性 {#compatibility-between-ongoing-log-backup-and-snapshot-restore}
+
+v8.5.5 以降では、ログ バックアップ タスクの実行中に、次の条件がすべて満たされている場合は、スナップショット リストア ( `br restore [full|database|table]` ) を実行し、進行中のログ バックアップ (以下、「ログ バックアップ」) によってリストアされたデータを適切に記録することができます。
+
+-   バックアップおよび復元操作を実行するノードには、次の必要な権限があります。
+    -   スナップショットの復元のための、バックアップソースを含む外部storageへの読み取りアクセス
+    -   ログバックアップで使用されるターゲット外部storageへの書き込みアクセス
+-   ログバックアップの対象となる外部storageは、Amazon S3（ `s3://` ）、Google Cloud Storage（ `gcs://` ）、またはAzure Blob Storage（ `azblob://` ）です。
+-   復元するデータは、ログ バックアップのターゲットstorageと同じ種類の外部storageを使用します。
+-   復元対象のデータとログバックアップのどちらにもローカル暗号化が有効になっていません。詳細については、 [ログバックアップの暗号化](#encrypt-the-log-backup-data)と[スナップショットバックアップの暗号化](/br/br-snapshot-manual.md#encrypt-the-backup-data)参照してください。
+
+上記の条件のいずれかが満たされていない場合は、次の手順に従ってデータを復元できます。
+
+1.  [ログバックアップタスクを停止する](#stop-a-log-backup-task) 。
+2.  データの復元を実行します。
+3.  復元が完了したら、新しいスナップショット バックアップを実行します。
+4.  [ログバックアップタスクを再開する](#restart-a-log-backup-task) 。
+
+> **注記：**
+>
+> スナップショット（完全）復元データの記録を含むログバックアップを復元する場合は、 BR v8.5.5以降を使用する必要があります。そうでない場合、記録された完全復元データの復元が失敗する可能性があります。
+
+### 進行中のログバックアップと PITR 操作間の互換性 {#compatibility-between-ongoing-log-backup-and-pitr-operations}
+
+TiDB v8.5.5以降では、ログバックアップタスクの実行中にPITR操作をデフォルトで実行できるようになりました。これらの操作間の互換性はシステムによって自動的に処理されます。
+
+#### 継続的なログバックアップを伴うPITRの重要な制限 {#important-limitation-for-pitr-with-ongoing-log-backup}
+
+ログバックアップの実行中にPITR操作を実行すると、復元されたデータは進行中のログバックアップにも記録されます。ただし、ログ復元操作の性質上、復元ウィンドウ内でデータの不整合が発生する可能性があります。システムは、整合性が保証できない時間範囲とデータ範囲の両方を示すメタデータを外部storageに書き込みます。
+
+期間`[t1, t2)`にこのような不整合が発生した場合、この期間のデータを直接復元することはできません。代わりに、以下のいずれかの方法を選択してください。
+
+-   データを`t1`まで復元します（不整合期間前のデータを取得します）。
+-   `t2`後に新しいスナップショット バックアップを実行し、それを将来の PITR 操作のベースとして使用します。
+
+### 復元操作を中止する {#abort-restore-operations}
+
+復元操作が失敗した場合、 `tiup br abort`コマンドを使用してレジストリエントリとチェックポイントデータをクリーンアップできます。このコマンドは、元の復元パラメータに基づいて、 `mysql.tidb_restore_registry`テーブルのエントリやチェックポイントデータ（ローカルデータベースに保存されているか外部storageに保存されているかに関係なく）を含む関連メタデータを自動的に検索して削除します。
+
+> **注記：**
+>
+> `abort`コマンドはメタデータのみをクリーンアップします。復元された実際のデータはクラスターから手動で削除する必要があります。
+
+次の例は、元の復元コマンドと同じパラメータを使用して復元操作を中止する方法を示しています。
+
+```shell
+# Abort a PITR operation
+tiup br abort restore point --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--full-backup-storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
+
+# Abort a PITR operation with filters
+tiup br abort restore point --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--full-backup-storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--filter 'db1.*'
+
+# Abort a full restore
+tiup br abort restore full --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
+
+# Abort a database restore
+tiup br abort restore db --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--db database_name
+
+# Abort a table restore
+tiup br abort restore table --pd="${PD_IP}:2379" \
+--storage='s3://backup-101/snapshot-20250602000000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}' \
+--db database_name --table table_name
 ```

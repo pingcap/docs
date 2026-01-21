@@ -1,90 +1,53 @@
 ---
-title: Set Up Self-Hosted Kafka Private Link Service in AWS
-summary: このドキュメントでは、AWS でセルフホスト型 Kafka 用の Private Link サービスを設定し、それをTiDB Cloudで動作させる方法について説明します。
-aliases: ['/tidbcloud/setup-self-hosted-kafka-private-link-service']
+title: Connect to AWS Self-Hosted Kafka via Private Link Connection
+summary: AWS エンドポイントサービスプライベートリンク接続を使用して AWS セルフホスト Kafka に接続する方法を学習します。
 ---
 
-# AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする {#set-up-self-hosted-kafka-private-link-service-in-aws}
+# プライベートリンク接続を介して AWS セルフホスト Kafka に接続する {#connect-to-aws-self-hosted-kafka-via-private-link-connection}
 
-このドキュメントでは、AWS でセルフホスト型 Kafka 用の Private Link サービスを設定し、それをTiDB Cloudで動作させる方法について説明します。
+このドキュメントでは、 [AWS エンドポイントサービスプライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md)を使用してTiDB Cloud Essential クラスターを AWS のセルフホスト型 Kafka クラスターに接続する方法について説明します。
 
 このメカニズムは次のように機能します。
 
-1.  TiDB Cloud VPC は、プライベート エンドポイントを介して Kafka VPC に接続します。
-2.  Kafka クライアントはすべての Kafka ブローカーと直接通信する必要があります。
-3.  各 Kafka ブローカーは、 TiDB Cloud VPC 内のエンドポイントの一意のポートにマッピングされます。
-4.  マッピングを実現するには、Kafka ブートストラップ メカニズムと AWS リソースを活用します。
-
-次の図にその仕組みを示します。
-
-![Connect to AWS Self-Hosted Kafka Private Link Service](/media/tidb-cloud/changefeed/connect-to-aws-self-hosted-kafka-privatelink-service.jpeg)
-
-このドキュメントでは、AWS の 3 つのアベイラビリティゾーン (AZ) にデプロイされた Kafka Private Link サービスへの接続例を示します。同様のポートマッピング原則に基づいて他の構成も可能ですが、このドキュメントでは Kafka Private Link サービスの基本的な設定手順について説明します。本番環境では、運用の保守性と可観測性を強化した、より耐障害性の高い Kafka Private Link サービスの使用をお勧めします。
+1.  プライベートリンク接続は、すべての Kafka ブローカーのアドレスとポートを返すブートストラップブローカーアドレスを使用して AWS エンドポイントサービスに接続します。
+2.  TiDB Cloud は、返されたブローカー アドレスとポートを使用して、プライベート リンク接続を介して接続を確立します。
+3.  AWS エンドポイントサービスは、リクエストをロードバランサーに転送します。
+4.  ロード バランサーは、ポート マッピングに基づいて、対応する Kafka ブローカーにリクエストをルーティングします。
 
 ## 前提条件 {#prerequisites}
 
-<CustomContent plan="dedicated">
+-   AWS アカウントで Kafka クラスターを設定するには、次の権限があることを確認してください。
 
-1.  独自の AWS アカウントで Kafka Private Link サービスを設定するには、次の権限があることを確認してください。
-
-    -   EC2ノードを管理する
+    -   EC2インスタンスを管理する
     -   VPCを管理する
     -   サブネットを管理する
+    -   EC2 インスタンスに接続して Kafka ノードを構成する
+
+-   AWS アカウントでロードバランサーとエンドポイントサービスを設定するには、次の権限があることを確認してください。
+
     -   セキュリティ グループを管理する
-    -   ロードバランサーの管理
+    -   ロードバランサーを管理する
     -   エンドポイントサービスの管理
-    -   EC2 ノードに接続して Kafka ノードを構成する
 
-2.  持っていない場合は[TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
+-   TiDB Cloud Essential は AWS でホストされており、アクティブです。後で使用するために、以下の詳細情報を取得して保存してください。
 
-3.  TiDB Cloud Dedicated クラスターから Kafka デプロイメント情報を取得します。
+    -   AWSアカウントID
+    -   可用性ゾーン（AZ）
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[Changefeed] を**クリックします。
-    2.  概要ページで、TiDB クラスターのリージョンを確認します。Kafka クラスターが同じリージョンにデプロイされることを確認してください。
-    3.  **「Changefeed の作成」を**クリックします。
-        1.  **宛先**で、 **Kafka**を選択します。
-        2.  **[接続方法]**で**[プライベート リンク]**を選択します。
-    4.  **続行する前に、** TiDB Cloud AWS アカウントの情報をリマインダーに書き留めておいてください。この情報は、TiDB Cloud がKafka Private Link サービスのエンドポイントを作成することを承認する際に使用されます。
-    5.  **「AZの数」**を選択します。この例では、 **「3つのAZ」**を選択します。KafkaクラスターをデプロイするAZのIDをメモしておいてください。AZ名とAZ IDの関係を知りたい場合は、 [AWS リソースのアベイラビリティゾーン ID](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)参照してください。
-    6.  Kafka プライベート リンク サービスに固有の**Kafka アドバタイズ リスナー パターン**を入力します。
-        1.  一意のランダム文字列を入力してください。数字または小文字のみ使用できます。この文字列は、後ほど**Kafkaアドバタイズリスナーパターン**を生成する際に使用します。
-        2.  **「使用状況を確認して生成」をクリックすると、**ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズ リスナーを組み立てるために使用される**Kafka アドバタイズ リスナー パターンが**生成されます。
+AWS アカウント ID とアベイラビリティーゾーンを表示するには、次の手順を実行します。
 
-</CustomContent>
-<CustomContent plan="premium">
-
-1.  独自の AWS アカウントで Kafka Private Link サービスを設定するには、次の権限があることを確認してください。
-
-    -   EC2ノードを管理する
-    -   VPCを管理する
-    -   サブネットを管理する
-    -   セキュリティ グループを管理する
-    -   ロードバランサーの管理
-    -   エンドポイントサービスの管理
-    -   EC2 ノードに接続して Kafka ノードを構成する
-
-2.  持っていない場合は[TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md) 。
-
-3.  TiDB Cloud Premium インスタンスから Kafka デプロイメント情報を取得します。
-
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB インスタンスのインスタンス概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[Changefeed]**をクリックします。
-    2.  概要ページで、TiDBインスタンスのリージョンを確認します。Kafkaクラスターが同じリージョンにデプロイされることを確認してください。
-    3.  チェンジフィードを作成するには、チュートリアルを参照してください。
-
-        -   [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
-
-</CustomContent>
-
-すべてのデプロイメント情報をメモしてください。後でKafka Private Linkサービスを設定する際に必要になります。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[設定]** &gt; **[ネットワーク]**をクリックします。
+2.  **[データフローのプライベート リンク接続]**領域で、 **[プライベート リンク接続の作成] を**クリックします。
+3.  表示されたダイアログで、AWS アカウント ID とアベイラビリティーゾーンを見つけることができます。
 
 次の表は、展開情報の例を示しています。
 
-| 情報                          | 価値                                                                                                                                                                                                                                                                                                                                                                   | 注記                                                                                                                                                                                                                                                                                                                                                                                               |
-| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| リージョン                       | オレゴン州 ( `us-west-2` )                                                                                                                                                                                                                                                                                                                                                | 該当なし                                                                                                                                                                                                                                                                                                                                                                                             |
-| TiDB Cloud AWS アカウントのプリンシパル | `arn:aws:iam::<account_id>:root`                                                                                                                                                                                                                                                                                                                                     | 該当なし                                                                                                                                                                                                                                                                                                                                                                                             |
-| AZ ID                       | <li>`usw2-az1` </li><li>`usw2-az2` </li><li> `usw2-az3`</li>                                                                                                                                                                                                                                                                                                         | AZ ID を AWS アカウントの AZ 名に合わせます。<br/>例：<ul><li> `usw2-az1` =&gt; `us-west-2a`</li><li> `usw2-az2` =&gt; `us-west-2c`</li><li> `usw2-az3` =&gt; `us-west-2b`</li></ul>                                                                                                                                                                                                                              |
-| Kafka アドバタイズドリスナーパターン       | 一意のランダム文字列: `abc`<br/> AZ 用に生成されたパターン:<ul><li> `usw2-az1` =&gt; &lt;ブローカーID&gt;.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;ポート&gt;</li><li> `usw2-az2` =&gt; &lt;ブローカーID&gt;.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;ポート&gt;</li><li> `usw2-az3` =&gt; &lt;ブローカーID&gt;.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;ポート&gt;</li></ul> | AZ 名を AZ 指定のパターンにマッピングします。後で、特定の AZ のブローカーに適切なパターンを設定してください。<ul><li> `us-west-2a` =&gt; &lt;ブローカーID&gt;.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;ポート&gt;</li><li> `us-west-2c` =&gt; &lt;ブローカーID&gt;.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;ポート&gt;</li><li> `us-west-2b` =&gt; &lt;ブローカーID&gt;.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;ポート&gt;</li></ul> |
+| 情報                          | 価値                                                                                                                                                                                                                                                                                                                                                 | 注記                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| リージョン                       | オレゴン州 ( `us-west-2` )                                                                                                                                                                                                                                                                                                                              | 該当なし                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| TiDB Cloud AWS アカウントのプリンシパル | `arn:aws:iam::<account_id>:root`                                                                                                                                                                                                                                                                                                                   | 該当なし                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| AZ ID                       | <li>`usw2-az1` </li><li>`usw2-az2` </li><li> `usw2-az3`</li>                                                                                                                                                                                                                                                                                       | AZ ID を AWS アカウントの AZ 名に合わせます。<br/>例：<ul><li> `usw2-az1` =&gt; `us-west-2a`</li><li> `usw2-az2` =&gt; `us-west-2c`</li><li> `usw2-az3` =&gt; `us-west-2b`</li></ul>                                                                                                                                                                                                                                                                                                                                  |
+| Kafka アドバタイズドリスナーパターン       | <li>`usw2-az1` =&gt; \<broker\_id> .usw2-az1.unique\_name.aws.plc.tidbcloud.com:\<port></port></broker\_id></li><li> `usw2-az2` =&gt; \<broker\_id> .usw2-az2.unique\_name.aws.plc.tidbcloud.com:\<port></port></broker\_id></li><li> `usw2-az3` =&gt; \<broker\_id> .usw2-az3.unique\_name.aws.plc.tidbcloud.com:\<port></port></broker\_id></li> | AZ 名を AZ 指定のパターンにマッピングします。後で、特定の AZ のブローカーに適切なパターンを設定してください。<ul><li> `us-west-2a` =&gt; &lt;ブローカーID&gt;.usw2-az1.unique_name.aws.plc.tidbcloud.com:&lt;ポート&gt;</li><li> `us-west-2c` =&gt; &lt;ブローカーID&gt;.usw2-az2.unique_name.aws.plc.tidbcloud.com:&lt;ポート&gt;</li><li> `us-west-2b` =&gt; &lt;ブローカーID&gt;.usw2-az3.unique_name.aws.plc.tidbcloud.com:&lt;ポート&gt;</li></ul> `unique_name`はプレースホルダーであり、 [ステップ4](#step-4-replace-the-unique-name-placeholder-in-kafka-configuration)の実際の値に置き換えられます。 |
 
 ## ステップ1. Kafkaクラスターをセットアップする {#step-1-set-up-a-kafka-cluster}
 
@@ -196,7 +159,7 @@ Kafka VPC を作成するには、次の手順を実行します。
     -   **VPC** : `Kafka VPC`
     -   **サブネット**: `bastion`
     -   **パブリックIPの自動割り当て**: `Enable`
-    -   **Securityグループ**：どこからでもSSHログインを許可する新しいセキュリティグループを作成します。本番環境の安全性を確保するために、ルールを絞り込むことができます。
+    -   **Securityグループ**：どこからでもSSHログインを許可する新しいセキュリティグループを作成します。本番環境の安全性を考慮して、ルールを絞り込むことができます。
 
 **2.2. ブローカーノードを作成する**
 
@@ -330,15 +293,15 @@ SSHを使用してすべてのブローカーノードにログインします�
 # broker-node1 ~/config/server.properties
 # 1. Replace {broker-node1-ip}, {broker-node2-ip}, {broker-node3-ip} with the actual IP addresses.
 # 2. Configure EXTERNAL in "advertised.listeners" based on the "Kafka Advertised Listener Pattern" in the "Prerequisites" section.
-# 2.1 The pattern for AZ(ID: usw2-az1) is "<broker_id>.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:<port>".
-# 2.2 So the EXTERNAL can be "b1.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:9093". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9093) in the port range of the EXTERNAL advertised listener.
+# 2.1 The pattern for AZ(ID: usw2-az1) is "<broker_id>.usw2-az1.unique_name.aws.plc.tidbcloud.com:<port>".
+# 2.2 So the EXTERNAL can be "b1.usw2-az1.unique_name.aws.plc.tidbcloud.com:9093". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9093) in the port range of the EXTERNAL advertised listener.
 # 2.3 If there are more broker role nodes in the same AZ, you can configure them in the same way.
 process.roles=broker,controller
 node.id=1
 controller.quorum.voters=1@{broker-node1-ip}:29092,2@{broker-node2-ip}:29092,3@{broker-node3-ip}:29092
 listeners=INTERNAL://0.0.0.0:9092,CONTROLLER://0.0.0.0:29092,EXTERNAL://0.0.0.0:39092
 inter.broker.listener.name=INTERNAL
-advertised.listeners=INTERNAL://{broker-node1-ip}:9092,EXTERNAL://b1.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:9093
+advertised.listeners=INTERNAL://{broker-node1-ip}:9092,EXTERNAL://b1.usw2-az1.unique_name.aws.plc.tidbcloud.com:9093
 controller.listener.names=CONTROLLER
 listener.security.protocol.map=INTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
 log.dirs=./data
@@ -350,15 +313,15 @@ log.dirs=./data
 # broker-node2 ~/config/server.properties
 # 1. Replace {broker-node1-ip}, {broker-node2-ip}, {broker-node3-ip} with the actual IP addresses.
 # 2. Configure EXTERNAL in "advertised.listeners" based on the "Kafka Advertised Listener Pattern" in the "Prerequisites" section.
-# 2.1 The pattern for AZ(ID: usw2-az2) is "<broker_id>.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:<port>".
-# 2.2 So the EXTERNAL can be "b2.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:9094". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9094) in the port range of the EXTERNAL advertised listener.
+# 2.1 The pattern for AZ(ID: usw2-az2) is "<broker_id>.usw2-az2.unique_name.aws.plc.tidbcloud.com:<port>".
+# 2.2 So the EXTERNAL can be "b2.usw2-az2.unique_name.aws.plc.tidbcloud.com:9094". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9094) in the port range of the EXTERNAL advertised listener.
 # 2.3 If there are more broker role nodes in the same AZ, you can configure them in the same way.
 process.roles=broker,controller
 node.id=2
 controller.quorum.voters=1@{broker-node1-ip}:29092,2@{broker-node2-ip}:29092,3@{broker-node3-ip}:29092
 listeners=INTERNAL://0.0.0.0:9092,CONTROLLER://0.0.0.0:29092,EXTERNAL://0.0.0.0:39092
 inter.broker.listener.name=INTERNAL
-advertised.listeners=INTERNAL://{broker-node2-ip}:9092,EXTERNAL://b2.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:9094
+advertised.listeners=INTERNAL://{broker-node2-ip}:9092,EXTERNAL://b2.usw2-az2.unique_name.aws.plc.tidbcloud.com:9094
 controller.listener.names=CONTROLLER
 listener.security.protocol.map=INTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
 log.dirs=./data
@@ -370,15 +333,15 @@ log.dirs=./data
 # broker-node3 ~/config/server.properties
 # 1. Replace {broker-node1-ip}, {broker-node2-ip}, {broker-node3-ip} with the actual IP addresses.
 # 2. Configure EXTERNAL in "advertised.listeners" based on the "Kafka Advertised Listener Pattern" in the "Prerequisites" section.
-# 2.1 The pattern for AZ(ID: usw2-az3) is "<broker_id>.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:<port>".
-# 2.2 So the EXTERNAL can be "b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9095) in the port range of the EXTERNAL advertised listener.
+# 2.1 The pattern for AZ(ID: usw2-az3) is "<broker_id>.usw2-az3.unique_name.aws.plc.tidbcloud.com:<port>".
+# 2.2 So the EXTERNAL can be "b3.usw2-az3.unique_name.aws.plc.tidbcloud.com:9095". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9095) in the port range of the EXTERNAL advertised listener.
 # 2.3 If there are more broker role nodes in the same AZ, you can configure them in the same way.
 process.roles=broker,controller
 node.id=3
 controller.quorum.voters=1@{broker-node1-ip}:29092,2@{broker-node2-ip}:29092,3@{broker-node3-ip}:29092
 listeners=INTERNAL://0.0.0.0:9092,CONTROLLER://0.0.0.0:29092,EXTERNAL://0.0.0.0:39092
 inter.broker.listener.name=INTERNAL
-advertised.listeners=INTERNAL://{broker-node3-ip}:9092,EXTERNAL://b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095
+advertised.listeners=INTERNAL://{broker-node3-ip}:9092,EXTERNAL://b3.usw2-az3.unique_name.aws.plc.tidbcloud.com:9095
 controller.listener.names=CONTROLLER
 listener.security.protocol.map=INTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
 log.dirs=./data
@@ -446,10 +409,10 @@ LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properti
     ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {one_of_broker_ip}:39092
     # Expected output for the last 3 lines (the actual order might be different)
     # The difference in the output from "bootstrap from INTERNAL listener" is that exceptions or errors might occur because advertised listeners cannot be resolved in Kafka VPC.
-    # We will make them resolvable in TiDB Cloud side and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Link. 
-    b1.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
-    b2.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
-    b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
+    # We will make them resolvable on the TiDB Cloud side and route requests to the right broker when you create a changefeed that connects to this Kafka cluster via Private Link. 
+    b1.usw2-az1.unique_name.aws.plc.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
+    b2.usw2-az2.unique_name.aws.plc.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
+    b3.usw2-az3.unique_name.aws.plc.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     ```
 
 2.  要塞ノードにプロデューサー スクリプト`produce.sh`を作成します。
@@ -557,16 +520,7 @@ LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properti
 
 ### 実行中の Kafka クラスターを再構成する {#reconfigure-a-running-kafka-cluster}
 
-<CustomContent plan="dedicated">
-
 Kafka クラスターが TiDB クラスターと同じリージョンおよび AZ にデプロイされていることを確認してください。ブローカーが異なる AZ にある場合は、正しい AZ に移動してください。
-
-</CustomContent>
-<CustomContent plan="premium">
-
-Kafka クラスターが TiDB インスタンスと同じリージョンおよび AZ にデプロイされていることを確認してください。ブローカーが異なる AZ にある場合は、正しい AZ に移動してください。
-
-</CustomContent>
 
 #### 1. ブローカーの外部リスナーを構成する {#1-configure-the-external-listener-for-brokers}
 
@@ -591,9 +545,9 @@ Kafka クラスターが TiDB インスタンスと同じリージョンおよ�
     listeners=INTERNAL:...,EXTERNAL://0.0.0.0:39092
 
     # Add EXTERNAL advertised listeners based on the "Kafka Advertised Listener Pattern" in "Prerequisites" section
-    # 1. The pattern for AZ(ID: usw2-az1) is "<broker_id>.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:<port>"
-    # 2. So the EXTERNAL can be "b1.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:9093", replace <broker_id> with "b" prefix plus "node.id" properties, replace <port> with a unique port(9093) in EXTERNAL advertised listener ports range 
-    advertised.listeners=...,EXTERNAL://b1.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:9093
+    # 1. The pattern for AZ(ID: usw2-az1) is "<broker_id>.usw2-az1.unique_name.aws.plc.tidbcloud.com:<port>"
+    # 2. So the EXTERNAL can be "b1.usw2-az1.unique_name.aws.plc.tidbcloud.com:9093", replace <broker_id> with "b" prefix plus "node.id" properties, replace <port> with a unique port(9093) in EXTERNAL advertised listener ports range 
+    advertised.listeners=...,EXTERNAL://b1.usw2-az1.unique_name.aws.plc.tidbcloud.com:9093
 
     # Configure EXTERNAL map
     listener.security.protocol.map=...,EXTERNAL:PLAINTEXT
@@ -606,9 +560,9 @@ Kafka クラスターが TiDB インスタンスと同じリージョンおよ�
     listeners=INTERNAL:...,EXTERNAL://0.0.0.0:39092
 
     # Add EXTERNAL advertised listeners based on the "Kafka Advertised Listener Pattern" in "Prerequisites" section
-    # 1. The pattern for AZ(ID: usw2-az2) is "<broker_id>.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:<port>"
-    # 2. So the EXTERNAL can be "b2.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:9094". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port(9094) in EXTERNAL advertised listener ports range.
-    advertised.listeners=...,EXTERNAL://b2.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:9094
+    # 1. The pattern for AZ(ID: usw2-az2) is "<broker_id>.usw2-az2.unique_name.aws.plc.tidbcloud.com:<port>"
+    # 2. So the EXTERNAL can be "b2.usw2-az2.unique_name.aws.plc.tidbcloud.com:9094". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port(9094) in EXTERNAL advertised listener ports range.
+    advertised.listeners=...,EXTERNAL://b2.usw2-az2.unique_name.aws.plc.tidbcloud.com:9094
 
     # Configure EXTERNAL map
     listener.security.protocol.map=...,EXTERNAL:PLAINTEXT
@@ -621,9 +575,9 @@ Kafka クラスターが TiDB インスタンスと同じリージョンおよ�
     listeners=INTERNAL:...,EXTERNAL://0.0.0.0:39092
 
     # Add EXTERNAL advertised listeners based on the "Kafka Advertised Listener Pattern" in "Prerequisites" section
-    # 1. The pattern for AZ(ID: usw2-az3) is "<broker_id>.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:<port>"
-    # 2. So the EXTERNAL can be "b2.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port(9095) in EXTERNAL advertised listener ports range.
-    advertised.listeners=...,EXTERNAL://b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095
+    # 1. The pattern for AZ(ID: usw2-az3) is "<broker_id>.usw2-az3.unique_name.aws.plc.tidbcloud.com:<port>"
+    # 2. So the EXTERNAL can be "b2.usw2-az3.unique_name.aws.plc.tidbcloud.com:9095". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port(9095) in EXTERNAL advertised listener ports range.
+    advertised.listeners=...,EXTERNAL://b3.usw2-az3.unique_name.aws.plc.tidbcloud.com:9095
 
     # Configure EXTERNAL map
     listener.security.protocol.map=...,EXTERNAL:PLAINTEXT
@@ -653,13 +607,13 @@ export JAVA_HOME=/home/ec2-user/jdk-22.0.2
 
 # Expected output for the last 3 lines (the actual order might be different)
 # There will be some exceptions or errors because advertised listeners cannot be resolved in your Kafka network. 
-# We will make them resolvable in TiDB Cloud side and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Link. 
-b1.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
-b2.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
-b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
+# We will make them resolvable on the TiDB Cloud side and route requests to the right broker when you create a changefeed that connects to this Kafka cluster via Private Link.
+b1.usw2-az1.unique_name.aws.plc.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
+b2.usw2-az2.unique_name.aws.plc.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
+b3.usw2-az3.unique_name.aws.plc.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 ```
 
-## ステップ 2. Kafka クラスターをプライベート リンク サービスとして公開する {#step-2-expose-the-kafka-cluster-as-private-link-service}
+## ステップ2. Kafkaクラスターをプライベートリンクサービスとして公開する {#step-2-expose-the-kafka-cluster-as-a-private-link-service}
 
 ### 1. ロードバランサーを設定する {#1-set-up-the-load-balancer}
 
@@ -747,15 +701,15 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
     ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {lb_dns_name}:9092
 
     # Expected output for the last 3 lines (the actual order might be different)
-    b1.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
-    b2.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
-    b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
+    b1.usw2-az1.unique_name.aws.plc.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
+    b2.usw2-az2.unique_name.aws.plc.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
+    b3.usw2-az3.unique_name.aws.plc.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 
     # You can also try bootstrap in other ports 9093/9094/9095. It will succeed probabilistically because NLB in AWS resolves LB DNS to the IP address of any availability zone and disables cross-zone load balancing by default. 
     # If you enable cross-zone load balancing in LB, it will succeed. However, it is unnecessary and might cause additional cross-AZ traffic.
     ```
 
-### 2. プライベートリンクサービスを設定する {#2-set-up-private-link-service}
+### 2. AWSエンドポイントサービスを設定する {#2-set-up-an-aws-endpoint-service}
 
 1.  [エンドポイントサービス](https://console.aws.amazon.com/vpcconsole/home#EndpointServices:)に進みます。 **「エンドポイント サービスの作成」**をクリックして、Kafka ロード バランサーのプライベート リンク サービスを作成します。
 
@@ -768,37 +722,23 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 
 2.  **サービス名**をメモしておいてください。TiDB TiDB Cloudに提供する必要があります（例`com.amazonaws.vpce.us-west-2.vpce-svc-0f49e37e1f022cd45` ）。
 
-3.  kafka-pl-service の詳細ページで、 **「プリンシパルを許可」**タブをクリックし、 TiDB Cloudの AWS アカウントにエンドポイントの作成を許可します。TiDB TiDB Cloudの AWS アカウントは[前提条件](#prerequisites) （例： `arn:aws:iam::<account_id>:root` ）で取得できます。
+3.  kafka-pl-service の詳細ページで、 **「Allow principals」**タブをクリックし、 [前提条件](#prerequisites)で取得した AWS アカウント ID (例: `arn:aws:iam::<account_id>:root`を許可リストに追加します。
 
-## ステップ3. TiDB Cloudから接続する {#step-3-connect-from-tidb-cloud}
+## ステップ3. TiDB Cloudでプライベートリンク接続を作成する {#step-3-create-a-private-link-connection-in-tidb-cloud}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)に戻って、<customcontent plan="dedicated">クラスタ</customcontent><customcontent plan="premium">実例</customcontent>**プライベートリンク**を使用してKafkaクラスターに接続します。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)参照してください。
+TiDB Cloudでプライベート リンク接続を作成するには、次の手順を実行します。
 
-2.  **「ChangeFeed ターゲットの構成」&gt;「接続方法」&gt;「プライベート リンク」**に進むときは、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
+1.  [ステップ2](#2-set-up-an-aws-endpoint-service)で取得した AWS エンドポイントサービス名 (例: `com.amazonaws.vpce.<region>.vpce-svc-xxxx` ) を使用して、 TiDB Cloudにプライベートリンク接続を作成します。
 
-    -   **Kafka タイプ**: `3 AZs`クラスターが同じ 3 つの AZ にデプロイされていることを確認します。
-    -   **Kafka アドバタイズ リスナー パターン**: `abc` 。これは、 [前提条件](#prerequisites)で**Kafka アドバタイズ リスナー パターン**を生成するために使用する一意のランダム文字列と同じです。
-    -   **エンドポイント サービス名**: Kafka サービス名。
-    -   **ブートストラップ ポート**: `9092`背後に専用のブートストラップ ターゲット グループを構成するため、1 つのポートで十分です。
+    詳細については[AWS エンドポイントサービスプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-aws-endpoint-service-private-link-connection)参照してください。
 
-3.  [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)の手順に進みます。
+2.  TiDB Cloudのデータフロー サービスが Kafka クラスターにアクセスできるように、プライベート リンク接続にドメインをアタッチします。
 
-これでタスクは正常に完了しました。
+    詳細については、 [プライベートリンク接続にドメインを添付する](/tidb-cloud/serverless-private-link-connection.md#attach-domains-to-a-private-link-connection)を参照してください。 **「ドメインのアタッチ」**ダイアログで、ドメインの種類として**「TiDB Cloud Managed」**を選択し、生成されたドメインの一意の名前を後で使用するためにコピーする必要があることに注意してください。
 
-## FAQ {#faq}
+## ステップ4. Kafka設定内の一意の名前プレースホルダーを置き換える {#step-4-replace-the-unique-name-placeholder-in-kafka-configuration}
 
-### 2 つの異なるTiDB Cloudプロジェクトから同じ Kafka Private Link サービスに接続するにはどうすればよいですか? {#how-to-connect-to-the-same-kafka-private-link-service-from-two-different-tidb-cloud-projects}
+1.  Kafka ブローカー ノードに戻り、各ブローカーの`advertised.listeners`構成内の`unique_name`プレースホルダーを、前の手順で取得した実際の一意の名前に置き換えます。
+2.  すべてのブローカーを再構成したら、Kafka ブローカーを 1 つずつ再起動します。
 
-このドキュメントに従って最初のプロジェクトからの接続をすでに正常に設定している場合は、次のようにして 2 番目のプロジェクトから同じ Kafka Private Link サービスに接続できます。
-
-1.  このドキュメントの冒頭の指示に従ってください。
-
-2.  [ステップ1. Kafkaクラスターをセットアップする](#step-1-set-up-a-kafka-cluster)に進んだら、 [実行中の Kafka クラスターを再構成する](#reconfigure-a-running-kafka-cluster)に従って**、** EXTERNAL リスナーとアドバタイズリスナーの別のグループを作成します。このグループの名前は**EXTERNAL2**とします。EXTERNAL2 のポート範囲は**EXTERNAL**と重複できないことに注意してください。
-
-3.  ブローカーを再構成した後、ブートストラップおよびブローカー ターゲット グループを含む別のターゲット グループをロード バランサーに追加します。
-
-4.  次の情報を使用してTiDB Cloud接続を構成します。
-
-    -   新しいブートストラップポート
-    -   新しい Kafka 広告リスナー グループ
-    -   同じエンドポイントサービス
+これで、このプライベート リンク接続と 9092 をブートストラップ ポートとして使用し、 TiDB Cloudから Kafka クラスターに接続できるようになります。

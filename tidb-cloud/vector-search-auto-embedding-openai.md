@@ -49,8 +49,8 @@ SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_KEY = 'your-openai-api-key-here';
 CREATE TABLE sample (
   `id`        INT,
   `content`   TEXT,
-  `embedding` VECTOR(1536) GENERATED ALWAYS AS (EMBED_TEXT(
-                "openai/text-embedding-3-small",
+  `embedding` VECTOR(3072) GENERATED ALWAYS AS (EMBED_TEXT(
+                "openai/text-embedding-3-large",
                 `content`
               )) STORED
 );
@@ -82,6 +82,54 @@ LIMIT 2;
     |    1 | Java: Object-oriented language for cross-platform development. |
     |    4 | Java's syntax is used in Android apps.                         |
     +------+----------------------------------------------------------------+
+
+## Azure OpenAI を使用する {#use-azure-openai}
+
+AzureでOpenAI埋め込みモデルを使用するには、グローバル変数`TIDB_EXP_EMBED_OPENAI_API_BASE` AzureリソースのURLに設定します。例：
+
+```sql
+SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_KEY = 'your-openai-api-key-here';
+SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_BASE = 'https://<your-resource-name>.openai.azure.com/openai/v1';
+
+CREATE TABLE sample (
+  `id`        INT,
+  `content`   TEXT,
+  `embedding` VECTOR(3072) GENERATED ALWAYS AS (EMBED_TEXT(
+                "openai/text-embedding-3-large",
+                `content`
+              )) STORED
+);
+
+INSERT INTO sample
+    (`id`, `content`)
+VALUES
+    (1, "Java: Object-oriented language for cross-platform development."),
+    (2, "Java coffee: Bold Indonesian beans with low acidity."),
+    (3, "Java island: Densely populated, home to Jakarta."),
+    (4, "Java's syntax is used in Android apps."),
+    (5, "Dark roast Java beans enhance espresso blends.");
+
+SELECT `id`, `content` FROM sample
+ORDER BY
+  VEC_EMBED_COSINE_DISTANCE(
+    embedding,
+    "How to start learning Java programming?"
+  )
+LIMIT 2;
+```
+
+リソース URL が`https://<your-resource-name>.cognitiveservices.azure.com/`と表示される場合でも、OpenAI 互換のリクエストおよびレスポンス形式を確保するには、API ベースとして`https://<your-resource-name>.openai.azure.com/openai/v1`使用する必要があることに注意してください。
+
+Azure OpenAI から OpenAI に直接切り替えるには、 `TIDB_EXP_EMBED_OPENAI_API_BASE`空の文字列に設定します。
+
+```sql
+SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_BASE = '';
+```
+
+> **注記：**
+>
+> -   セキュリティ上の理由から、API ベースは Azure OpenAI URL または OpenAI URL のみに設定できます。任意のベース URL は許可されません。
+> -   OpenAI 互換の別の埋め込みサービスを利用する場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
 ## オプション {#options}
 

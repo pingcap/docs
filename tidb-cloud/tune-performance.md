@@ -88,6 +88,13 @@ TiDBで遅いクエリを表示するには<customcontent plan="starter,essentia
 
 結果は表形式で表示され、さまざまな列で結果を並べ替えることができます。
 
+<CustomContent plan="starter,essential">
+
+> **注記：**
+>
+> トラフィックの可視性を向上させるため、 TiDB Cloud StarterとTiDB Cloud Essentialでは、AWS PrivateLink経由の接続における実際のクライアントIPアドレスを詳細な実行情報に表示するようになりました。現在、この機能はベータ版であり、AWSリージョン`Frankfurt (eu-central-1)`でのみ利用可能です。
+
+</CustomContent>
 <CustomContent plan="starter,essential,dedicated">
 
 詳細については[TiDBダッシュボードの遅いクエリ](https://docs.pingcap.com/tidb/stable/dashboard-slow-query)参照してください。

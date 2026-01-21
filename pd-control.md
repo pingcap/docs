@@ -28,7 +28,7 @@ PD Controlを使用するには、 `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd
 
 > **注記：**
 >
-> リンク内の`{version}` TiDBのバージョン番号を示します。例えば、 `amd64`アーキテクチャの`v8.5.4`のダウンロードリンクは`https://download.pingcap.com/tidb-community-server-v8.5.4-linux-amd64.tar.gz`です。
+> リンク内の`{version}` TiDBのバージョン番号を示します。例えば、 `amd64`アーキテクチャの`v8.5.5`のダウンロードリンクは`https://download.pingcap.com/tidb-community-server-v8.5.5-linux-amd64.tar.gz`です。
 
 ### ソースコードからコンパイルする {#compile-from-source-code}
 
@@ -49,7 +49,7 @@ tiup ctl:v<CLUSTER_VERSION> pd store -u http://127.0.0.1:2379
 tiup ctl:v<CLUSTER_VERSION> pd -i -u http://127.0.0.1:2379
 ```
 
-環境変数を使用します:
+環境変数を使用する:
 
 ```bash
 export PD_ADDR=http://127.0.0.1:2379
@@ -171,7 +171,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 }
 
 >> config show cluster-version                // Display the current version of the cluster, which is the current minimum version of TiKV nodes in the cluster and does not correspond to the binary version.
-"8.5.4"
+"8.5.5"
 ```
 
 -   `max-snapshot-count`単一のストアが同時に受信または送信するスナップショットの最大数を制御します。スケジューラは、通常のアプリケーションリソースの消費を回避するために、この設定によって制限されます。レプリカの追加やバランシングの速度を向上させる必要がある場合は、この値を大きくしてください。
@@ -310,7 +310,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 -   `cluster-version`はクラスターのバージョンで、一部の機能を有効化または無効化したり、互換性の問題に対処したりするために使用されます。デフォルトでは、クラスター内で正常に動作しているすべての TiKV ノードの最小バージョンです。以前のバージョンにロールバックする必要がある場合にのみ、手動で設定できます。
 
     ```bash
-    config set cluster-version 8.5.4             // Set the version of the cluster to 8.5.4
+    config set cluster-version 8.5.5             // Set the version of the cluster to 8.5.5
     ```
 
 -   `replication-mode`デュアルデータセンターシナリオにおけるリージョンのレプリケーションモードを制御します。詳細は[DR自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)参照してください。
@@ -325,7 +325,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 -   `enable-make-up-replica`はレプリカ作成機能を有効にするために使用されます。 `false`に設定すると、PDはレプリカが不足しているリージョンに対してレプリカを追加しません。
 
--   `enable-remove-extra-replica` 、余分なレプリカを削除する機能を有効にするために使用されます。2 `false`設定すると、PDは冗長レプリカを持つリージョンの余分なレプリカを削除しません。
+-   `enable-remove-extra-replica` `false`余分なレプリカを削除する機能を有効にするために使用されます。2 に設定すると、PDは冗長レプリカを持つリージョンの余分なレプリカを削除しません。
 
 -   `enable-location-replacement`は分離レベルチェックを有効にするために使用されます。 `false`に設定すると、PDはスケジュール設定によってリージョンレプリカの分離レベルを上げません。
 
@@ -941,7 +941,7 @@ pd-ctl resource-manager config controller set ltb-max-wait-duration 30m
 >> scheduler config evict-leader-scheduler                 // Display the stores in which the scheduler is located since v4.0.0
 >> scheduler config evict-leader-scheduler add-store 2     // Add leader eviction scheduling for store 2
 >> scheduler config evict-leader-scheduler delete-store 2  // Remove leader eviction scheduling for store 2
->> scheduler add evict-slow-store-scheduler                // When there is one and only one slow store, evict all Region leaders of that store
+>> scheduler add evict-slow-store-scheduler                // Automatically detect slow-disk or slow-network nodes and evict all Region leaders from those nodes when specific conditions are met
 >> scheduler remove grant-leader-scheduler-1               // Remove the corresponding scheduler, and `-1` corresponds to the store ID
 >> scheduler pause balance-region-scheduler 10             // Pause the balance-region scheduler for 10 seconds
 >> scheduler pause all 10                                  // Pause all schedulers for 10 seconds
@@ -964,6 +964,44 @@ TiDB v6.3.0以降、PDは`balance-region-scheduler`と`balance-leader-scheduler`
 -   `scheduling` : スケジューラはスケジューリング演算子を生成しています。
 -   `pending` : スケジューラはスケジューリング演算子を生成できません。状態`pending`のスケジューラには、簡単な診断情報が返されます。この簡単な情報は、ストアの状態と、これらのストアをスケジューリング対象として選択できない理由を説明します。
 -   `normal` : スケジューリング演算子を生成する必要はありません。
+
+### <code>scheduler config evict-slow-store-scheduler</code> {#code-scheduler-config-evict-slow-store-scheduler-code}
+
+`evict-slow-store-scheduler`は、PD がリーダーを異常な TiKV ノードにスケジュールすることを制限し、必要に応じてリーダーを積極的に排除することで、TiKV ノードでディスク I/O またはネットワーク ジッターが発生したときに、低速ノードがクラスターに与える影響を軽減します。
+
+#### 低速ディスクノード {#slow-disk-nodes}
+
+v6.2.0以降、TiKVはPDにストアハートビートスコア`SlowScore`を報告します。このスコアはディスクI/O状態に基づいて計算され、1から100の範囲となります。値が高いほど、そのノードでディスクパフォーマンスの異常が発生している可能性が高くなります。
+
+低速ディスクノードの場合、TiKV での検出と PD 上の`evict-slow-store-scheduler`経由のスケジュールがデフォルトで有効になっているため、追加の構成は必要ありません。
+
+#### 低速ネットワークノード {#slow-network-nodes}
+
+v8.5.5以降、TiKVはストア内の`NetworkSlowScore`ビートをPDに報告する機能をサポートします。これはネットワーク検出結果に基づいて計算され、ネットワークジッターが発生している低速ノードを特定するのに役立ちます。スコアの範囲は1～100で、値が高いほどネットワーク異常の可能性が高くなります。
+
+互換性とリソース消費を考慮し、低速ネットワークノードの検出とスケジュール設定はデフォルトで無効になっています。有効にするには、以下の両方を設定してください。
+
+1.  PD スケジューラを有効にして、低速ネットワーク ノードを処理できるようにします。
+
+    ```bash
+    scheduler config evict-slow-store-scheduler set enable-network-slow-store true
+    ```
+
+2.  TiKV では、ネットワーク検出を有効にするために、 [`raftstore.inspect-network-interval`](/tikv-configuration-file.md#inspect-network-interval-new-in-v855)構成項目を`0`より大きい値に設定します。
+
+#### 回復時間制御 {#recovery-time-control}
+
+`recovery-duration`パラメータを使用して、低速ノードが回復したとみなされるまでにどれだけの時間安定状態を維持する必要があるかを指定できます。
+
+例：
+
+```bash
+>> scheduler config evict-slow-store-scheduler
+{
+  "recovery-duration": "1800"  // 30 minutes
+}
+>> scheduler config evict-slow-store-scheduler set recovery-duration 600
+```
 
 ### <code>scheduler config balance-leader-scheduler</code> {#code-scheduler-config-balance-leader-scheduler-code}
 
@@ -1233,15 +1271,17 @@ store weight 1 5 10
 `store limit`使って店舗のスケジュール速度を設定できます。 `store limit`の原理と使用方法の詳細については、 [`store limit`](/configure-store-limit.md)参照してください。
 
 ```bash
->> store limit                         // Show the speed limit of adding-peer operations and the limit of removing-peer operations per minute in all stores
->> store limit add-peer                // Show the speed limit of adding-peer operations per minute in all stores
->> store limit remove-peer             // Show the limit of removing-peer operations per minute in all stores
->> store limit all 5                   // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for all stores
->> store limit 1 5                     // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for store 1
->> store limit all 5 add-peer          // Set the limit of adding-peer operations to 5 per minute for all stores
->> store limit 1 5 add-peer            // Set the limit of adding-peer operations to 5 per minute for store 1
->> store limit 1 5 remove-peer         // Set the limit of removing-peer operations to 5 per minute for store 1
->> store limit all 5 remove-peer       // Set the limit of removing-peer operations to 5 per minute for all stores
+>> store limit                                  // Show the speed limit of adding-peer operations and the limit of removing-peer operations per minute in all stores
+>> store limit add-peer                         // Show the speed limit of adding-peer operations per minute in all stores
+>> store limit remove-peer                      // Show the limit of removing-peer operations per minute in all stores
+>> store limit all 5                            // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for all stores
+>> store limit 1 5                              // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for store 1
+>> store limit all 5 add-peer                   // Set the limit of adding-peer operations to 5 per minute for all stores
+>> store limit 1 5 add-peer                     // Set the limit of adding-peer operations to 5 per minute for store 1
+>> store limit 1 5 remove-peer                  // Set the limit of removing-peer operations to 5 per minute for store 1
+>> store limit all 5 remove-peer                // Set the limit of removing-peer operations to 5 per minute for all stores
+>> store limit all engine tikv 5 remove-peer    // Starting from v8.5.5, you can set the speed limit of removing-peer operations for all TiKV stores. This example sets the speed limit of removing-peer operations for all TiKV stores to 5 per minute.
+>> store limit all engine tiflash 5 remove-peer // Starting from v8.5.5, you can set the speed limit of removing-peer operations for all TiFlash stores. This example sets the speed limit of removing-peer operations for all TiFlash stores to 5 per minute.
 ```
 
 > **注記：**
