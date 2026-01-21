@@ -371,9 +371,9 @@ When upstream write traffic is at peak hours, the downstream may fail to consume
 
 ## What are the compatibility limitations between TiDB Lightning Physical Import Mode and TiCDC?
 
-TiDB Lightning [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) directly generates SST files and imports them into the TiKV cluster. Because this import method does not involve the regular data writing process, it does not generate change log records. In most cases, a changefeed cannot observe this kind of data change. Only during the initialization phase of the changefeed or when Region changes (such as split/merge/leader transfer) trigger incremental scans might this kind of data change be observed. Therefore, a changefeed cannot fully capture data imported via TiDB Lightning Physical Import Mode.
+TiDB Lightning [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) directly generates SST files and imports them into the TiKV cluster. Because this import mode does not include the regular data writing process, it does not generate change logs. In most cases, a changefeed cannot detect this kind of data change. Only during the initialization phase of the changefeed or when Region changes (such as split, merge, and leader transfer) trigger incremental scans might this kind of data change be detected. Therefore, a changefeed cannot fully capture the data imported via TiDB Lightning Physical Import Mode.
 
-If the tables operated by TiDB Lightning Physical Import Mode overlap with the tables monitored by the changefeed, various unknown errors may occur due to incomplete data capture, such as a changefeed stalling or data inconsistency between upstream and downstream. If you need to use TiDB Lightning Physical Import Mode to import tables replicated by TiCDC, follow these steps:
+If the tables operated by TiDB Lightning Physical Import Mode overlap with the tables monitored by the changefeed, unknown errors might occur due to incomplete data capture, such as a changefeed stalling and data inconsistency between upstream and downstream. If you need to use TiDB Lightning Physical Import Mode to import tables replicated by TiCDC, follow these steps:
 
 1. Remove the TiCDC replication task related to these tables.
 
@@ -385,11 +385,11 @@ If the tables operated by TiDB Lightning Physical Import Mode overlap with the t
     cdc cli changefeed create -c "upstream-to-downstream-some-tables" --start-ts=431434047157698561 --sink-uri="mysql://root@127.0.0.1:4000? time-zone="
     ```
 
-If you can confirm that the tables operated by TiDB Lightning Physical Import Mode do not overlap with the tables monitored by the changefeed, you can set the `check-requirements` in the TiDB Lightning configuration file to `false` to forcibly execute the data import operation.
+If you are sure that the tables operated by TiDB Lightning Physical Import Mode do not overlap with the tables monitored by the changefeed, you can set the `[check-requirements`](/tidb-lightning/tidb-lightning-configuration.md#check-requirements) in the TiDB Lightning configuration file to `false` to forcibly execute the data import operation.
 
 ## What are the compatibility limitations between BR (Backup & Restore) and TiCDC?
 
-BR (Backup & Restore) also directly generates SST files and imports them into the TiKV cluster. A changefeed cannot fully capture data imported in this manner. For details, refer to [What are the compatibility limitations between TiDB Lightning Physical Import Mode and TiCDC?](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-tidb-lightning-physical-import-mode-and-ticdc).
+BR (Backup & Restore) also directly generates SST files and imports them into the TiKV cluster. A changefeed cannot fully capture data imported in this manner. For more information, see [What are the compatibility limitations between TiDB Lightning Physical Import Mode and TiCDC?](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-tidb-lightning-physical-import-mode-and-ticdc).
 
 Different versions of BR handle this differently:
 
