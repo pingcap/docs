@@ -5,14 +5,14 @@ summary: 了解 `PARTITIONS` INFORMATION_SCHEMA 表。
 
 # PARTITIONS
 
-`PARTITIONS` 表提供关于 [分区表](/partitioned-table.md) 的信息。
+`PARTITIONS` 表提供了关于[分区表](/partitioned-table.md)的信息。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC partitions;
 ```
 
-输出结果如下：
+输出如下：
 
 ```sql
 +-------------------------------+--------------+------+------+---------+-------+
@@ -45,8 +45,9 @@ DESC partitions;
 | TABLESPACE_NAME               | varchar(64)  | YES  |      | NULL    |       |
 | TIDB_PARTITION_ID             | bigint(21)   | YES  |      | NULL    |       |
 | TIDB_PLACEMENT_POLICY_NAME    | varchar(64)  | YES  |      | NULL    |       |
+| TIDB_AFFINITY                 | varchar(128) | YES  |      | NULL    |       |
 +-------------------------------+--------------+------+------+---------+-------+
-27 rows in set (0.00 sec)
+28 rows in set (0.00 sec)
 ```
 
 ```sql
@@ -54,7 +55,7 @@ CREATE TABLE test.t1 (id INT NOT NULL PRIMARY KEY) PARTITION BY HASH (id) PARTIT
 SELECT * FROM PARTITIONS WHERE table_schema='test' AND table_name='t1'\G
 ```
 
-输出结果如下：
+输出如下：
 
 ```sql
 *************************** 1. row ***************************
@@ -85,6 +86,7 @@ SUBPARTITION_ORDINAL_POSITION: NULL
               TABLESPACE_NAME: NULL
             TIDB_PARTITION_ID: 89
    TIDB_PLACEMENT_POLICY_NAME: NULL
+                TIDB_AFFINITY: NULL
 *************************** 2. row ***************************
                 TABLE_CATALOG: def
                  TABLE_SCHEMA: test
@@ -113,9 +115,10 @@ SUBPARTITION_ORDINAL_POSITION: NULL
               TABLESPACE_NAME: NULL
             TIDB_PARTITION_ID: 90
    TIDB_PLACEMENT_POLICY_NAME: NULL
+                TIDB_AFFINITY: NULL
 2 rows in set (0.00 sec)
 ```
 
-## 相关链接
+## 另请参阅
 
-- [Explain statements using partitions](/explain-partitions.md)
+- [使用分区的 explain 语句](/explain-partitions.md)

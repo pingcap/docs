@@ -1,15 +1,15 @@
 ---
-title: Jina AI Embeddings
-summary: 了解如何在 TiDB Cloud 中使用 Jina AI 嵌入模型。
+title: Jina AI 向量嵌入
+summary: 了解如何在 TiDB Cloud 中使用 Jina AI 向量嵌入模型。
 ---
 
-# Jina AI Embeddings
+# Jina AI 向量嵌入
 
-本文档介绍如何在 TiDB Cloud 中结合 [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) 使用 Jina AI 嵌入模型，从文本查询中执行语义搜索。
+本文档介绍如何在 TiDB Cloud 中结合 [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) 使用 Jina AI 向量嵌入模型，从文本查询中执行语义搜索。
 
-> **Note:**
+> **注意：**
 >
-> [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) 仅在托管于 AWS 的 TiDB Cloud Starter 集群上可用。
+> [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) 仅适用于托管在 AWS 上的 TiDB Cloud Starter 集群。
 
 ## 可用模型
 
@@ -20,7 +20,7 @@ summary: 了解如何在 TiDB Cloud 中使用 Jina AI 嵌入模型。
 - 名称：`jina_ai/jina-embeddings-v4`
 - 维度：2048
 - 距离度量：Cosine，L2
-- 最大输入文本 tokens：32,768
+- 最大输入文本 token 数：32,768
 - 价格：由 Jina AI 收费
 - 由 TiDB Cloud 托管：❌
 - 支持自带密钥：✅
@@ -30,7 +30,7 @@ summary: 了解如何在 TiDB Cloud 中使用 Jina AI 嵌入模型。
 - 名称：`jina_ai/jina-embeddings-v3`
 - 维度：1024
 - 距离度量：Cosine，L2
-- 最大输入文本 tokens：8,192
+- 最大输入文本 token 数：8,192
 - 价格：由 Jina AI 收费
 - 由 TiDB Cloud 托管：❌
 - 支持自带密钥：✅
@@ -39,11 +39,11 @@ summary: 了解如何在 TiDB Cloud 中使用 Jina AI 嵌入模型。
 
 ## SQL 使用示例
 
-要使用 Jina AI 模型，你必须按如下方式指定 [Jina AI API key](https://jina.ai/)：
+要使用 Jina AI 模型，你必须按如下方式指定 [Jina AI API 密钥](https://jina.ai/)：
 
-> **Note:**
+> **注意：**
 >
-> 请将 `'your-jina-ai-api-key-here'` 替换为你实际的 Jina AI API key。
+> 请将 `'your-jina-ai-api-key-here'` 替换为你实际的 Jina AI API 密钥。
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_JINA_AI_API_KEY = 'your-jina-ai-api-key-here';
@@ -51,7 +51,7 @@ SET @@GLOBAL.TIDB_EXP_EMBED_JINA_AI_API_KEY = 'your-jina-ai-api-key-here';
 CREATE TABLE sample (
   `id`        INT,
   `content`   TEXT,
-  `embedding` VECTOR(1024) GENERATED ALWAYS AS (EMBED_TEXT(
+  `embedding` VECTOR(2048) GENERATED ALWAYS AS (EMBED_TEXT(
                 "jina_ai/jina-embeddings-v4",
                 `content`
               )) STORED
@@ -89,9 +89,9 @@ LIMIT 2;
 
 ## 选项
 
-所有 [Jina AI options](https://jina.ai/embeddings/) 均可通过 `EMBED_TEXT()` 函数的 `additional_json_options` 参数进行设置。
+所有 [Jina AI 选项](https://jina.ai/embeddings/) 均可通过 `EMBED_TEXT()` 函数的 `additional_json_options` 参数进行支持。
 
-**示例：为更优性能指定 “下游任务”**
+**示例：为更优性能指定“下游任务”**
 
 ```sql
 CREATE TABLE sample (
@@ -127,7 +127,7 @@ CREATE TABLE sample (
 
 ## 参见
 
-- [Auto Embedding Overview](/tidb-cloud/vector-search-auto-embedding-overview.md)
-- [Vector Search](/vector-search/vector-search-overview.md)
-- [Vector Functions and Operators](/vector-search/vector-search-functions-and-operators.md)
-- [Hybrid Search](/tidb-cloud/vector-search-hybrid-search.md)
+- [Auto Embedding 概览](/tidb-cloud/vector-search-auto-embedding-overview.md)
+- [向量搜索](/vector-search/vector-search-overview.md)
+- [向量函数与操作符](/vector-search/vector-search-functions-and-operators.md)
+- [混合搜索](/tidb-cloud/vector-search-hybrid-search.md)

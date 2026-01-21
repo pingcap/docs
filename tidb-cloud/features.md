@@ -116,7 +116,7 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
   <tr>
     <td>从 MySQL 兼容数据库迁移数据到 TiDB Cloud</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center;">🔒</td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测)</span></td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
@@ -126,7 +126,7 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
     <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
-    <td>使用 changefeed 将变更数据同步到 Kafka 或其他 MySQL 兼容数据库</td>
+    <td>通过变更数据流（changefeed）将变更数据同步到 Kafka 或其他 MySQL 兼容数据库</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测)</span></td>
     <td style="text-align:center;">✅</td>
@@ -281,8 +281,9 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>
+  <CustomContent language="en,zh">
   <tr>
-    <td rowspan="4" style="background-color: white;">云和区域</td>
+    <td rowspan="4" style="background-color: white;">云平台与区域</td>
     <td>AWS</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -306,8 +307,30 @@ summary: 了解不同 TiDB Cloud 方案的功能支持状态。
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅</td>
   </tr>
+  </CustomContent>
+  <CustomContent language="ja">
+  <tr>
+    <td rowspan="3" style="background-color: white;">Cloud and regions</td>
+    <td>AWS</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
+    <td>Azure</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
+    <td>Google Cloud</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center;">✅</td>
+  </tr>
+  </CustomContent>
 </tbody></table>
 
 > **提示：**
 >
-> 如需申请私测功能，请点击 [TiDB Cloud 控制台](https://tidbcloud.com) 右下角的 **?**，然后点击 **Request Support**。接着，在 **Description** 字段填写功能名称，并点击 **Submit**。
+> 如需申请私测功能，请点击 [TiDB Cloud 控制台](https://tidbcloud.com) 右下角的 **?**，然后点击 **Request Support**。在 **Description** 字段填写功能名称后，点击 **Submit** 提交。
