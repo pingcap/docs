@@ -1,6 +1,7 @@
 ---
 title: Best Practices for Handling Millions of Tables in SaaS Multi-Tenant Scenarios
 summary: Learn best practices for TiDB in SaaS (Software as a Service) multi-tenant scenarios, especially for environments where the number of tables in a single cluster exceeds one million.
+aliases: ['/tidb/stable/saas-best-practices/','/tidb/dev/saas-best-practices/']
 ---
 
 # Best Practices for Handling Millions of Tables in SaaS Multi-Tenant Scenarios
