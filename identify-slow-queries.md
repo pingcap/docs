@@ -201,7 +201,7 @@ SELECT /*+ WRITE_SLOW_LOG */ count(*) FROM t t1, t t2 WHERE t1.a = t2.b;
             * `Prewrite_time`, `Commit_time`, `Write_keys`, `Write_size`, `Prewrite_region`
         * User-related fields for SQL execution:
             * `Conn_ID`, `DB`, `Session_alias`
-        * TiKV Coprocessor Task-related fields:
+        * TiKV Coprocessor task-related fields:
             * `Process_time`, `Total_keys`, `Process_keys`, `Num_cop_tasks`
         * Memory usage related fields:
             * `Mem_max`
