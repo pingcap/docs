@@ -192,29 +192,29 @@ SELECT /*+ WRITE_SLOW_LOG */ count(*) FROM t t1, t t2 WHERE t1.a = t2.b;
 
 * [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold): sets the threshold for the slow query log. The SQL statement whose execution time exceeds this threshold is recorded in the slow query log. The default value is 300 ms.
 * [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-new-in-v900): defines trigger rules for the slow query log. It supports combining multi-dimensional metrics to provide more flexible and fine-grained logging. Introduced in v9.0.0, it gradually replaces the single-threshold approach (`tidb_slow_log_threshold`). This variable supports using the following fields as filter conditions when slow query logs are output. For more information, see [Fields description](#fields-description).
-    - Supported filter fields:
-            * Basic slow query information:
-                * `Query_time`, `Parse_time`, `Compile_time`, `Optimize_time`, `Wait_TS`, `Rewrite_time`
-                * `Digest`, `Plan_digest`, `Is_internal`, `Succ`
-                * `Exec_retry_count`, `Backoff_time`, `Write_sql_response_total`
-            * Transaction-related fields:
-                * `Prewrite_time`, `Commit_time`, `Write_keys`, `Write_size`, `Prewrite_region`
-            * User-related fields for SQL execution:
-                * `Conn_ID`, `DB`, `Session_alias`
-            * TiKV Coprocessor Task-related fields:
-                * `Process_time`, `Total_keys`, `Process_keys`, `Num_cop_tasks`
-            * Memory usage related fields:
-                * `Mem_max`
-            * Disk usage related fields:
-                * `Disk_max`
-            * Resource control related fields:
-                * `Resource_group`
-            * Network transmission related fields:
-                * `KV_total`, `PD_total`
-                * `Unpacked_bytes_sent_tikv_total`, `Unpacked_bytes_received_tikv_total`
-                * `Unpacked_bytes_sent_tikv_cross_zone`, `Unpacked_bytes_received_tikv_cross_zone`
-                * `Unpacked_bytes_sent_tiflash_total`, `Unpacked_bytes_received_tiflash_total`
-                * `Unpacked_bytes_sent_tiflash_cross_zone`, `Unpacked_bytes_received_tiflash_cross_zone`
+    * Supported filter fields:
+        * Basic slow query information:
+            * `Query_time`, `Parse_time`, `Compile_time`, `Optimize_time`, `Wait_TS`, `Rewrite_time`
+            * `Digest`, `Plan_digest`, `Is_internal`, `Succ`
+            * `Exec_retry_count`, `Backoff_time`, `Write_sql_response_total`
+        * Transaction-related fields:
+            * `Prewrite_time`, `Commit_time`, `Write_keys`, `Write_size`, `Prewrite_region`
+        * User-related fields for SQL execution:
+            * `Conn_ID`, `DB`, `Session_alias`
+        * TiKV Coprocessor Task-related fields:
+            * `Process_time`, `Total_keys`, `Process_keys`, `Num_cop_tasks`
+        * Memory usage related fields:
+            * `Mem_max`
+        * Disk usage related fields:
+            * `Disk_max`
+        * Resource control related fields:
+            * `Resource_group`
+        * Network transmission related fields:
+            * `KV_total`, `PD_total`
+            * `Unpacked_bytes_sent_tikv_total`, `Unpacked_bytes_received_tikv_total`
+            * `Unpacked_bytes_sent_tikv_cross_zone`, `Unpacked_bytes_received_tikv_cross_zone`
+            * `Unpacked_bytes_sent_tiflash_total`, `Unpacked_bytes_received_tiflash_total`
+            * `Unpacked_bytes_sent_tiflash_cross_zone`, `Unpacked_bytes_received_tiflash_cross_zone`
     * If `tidb_slow_log_rules` is not set:
         * Slow query logging still relies on `tidb_slow_log_threshold`. The `query_time` threshold is taken from that variable for backward compatibility.
     * If `tidb_slow_log_rules` is set:
