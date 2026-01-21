@@ -13,6 +13,7 @@ env:
 
 jobs:
   sync-toc:
+    if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
 
     steps:

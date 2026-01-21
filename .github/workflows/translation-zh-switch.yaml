@@ -15,6 +15,7 @@ on:
 
 jobs:
   zh-translation:
+    if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
 
     steps:
