@@ -11,7 +11,7 @@ This document highlights these AI features and how they enhance the TiDB experie
 
 ## Chat2Query (Beta)
 
-Chat2Query is an AI-powered feature integrated into SQL Editor that assists users in generating, debugging, or rewriting SQL queries using natural language instructions. For more information, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
+Chat2Query is an AI-powered feature integrated into SQL Editor that assists users in generating, debugging, or rewriting SQL queries using natural language instructions. For more information, see [Explore your data with AI-assisted SQL Editor](/ai/explore-data-with-chat2query.md).
 
 In addition, TiDB Cloud provides a Chat2Query API for {{{ .starter }}} clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called Chat2Query and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 

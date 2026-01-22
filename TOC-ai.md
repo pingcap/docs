@@ -1,7 +1,15 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-- Vector Search
+# Table of Contents
+
+## AI FEATURES
+
+- Explore Data
+  - [Chat2Query in SQL Editor](/ai/explore-data-with-chat2query.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [SQL Proxy Account](/ai/sql-proxy-account.md)
+
+- Vector Search [!BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/ai/vector-search-overview.md)
   - Get Started
     - [Get Started with SQL](/ai/vector-search-get-started-using-sql.md)
