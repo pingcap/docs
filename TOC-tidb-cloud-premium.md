@@ -10,7 +10,7 @@
   - [MySQL Compatibility](/mysql-compatibility.md)
 - Get Started with TiDB Cloud
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
-  - [Try Out TiDB + AI](/develop/vector-search/vector-search-get-started-using-python.md)
+  - [Try Out TiDB + AI](/ai/vector-search-get-started-using-python.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
 - Key Concepts

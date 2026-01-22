@@ -5,7 +5,7 @@ summary: Learn how to build and use the vector search index to accelerate K-Near
 
 # Vector Search Index
 
-As described in the [Vector Search](/develop/vector-search/vector-search-overview.md) document, vector search identifies the Top K-Nearest Neighbors (KNN) to a given vector by calculating the distance between the given vector and all vectors stored in the database. While this approach provides accurate results, it can be slow when the table contains a large number of vectors because it involves a full table scan. [^1]
+As described in the [Vector Search](/ai/vector-search-overview.md) document, vector search identifies the Top K-Nearest Neighbors (KNN) to a given vector by calculating the distance between the given vector and all vectors stored in the database. While this approach provides accurate results, it can be slow when the table contains a large number of vectors because it involves a full table scan. [^1]
 
 To improve search efficiency, you can create vector search indexes in TiDB for approximate KNN (ANN) search. When using vector indexes for vector search, TiDB can greatly improve query performance with only a slight reduction in accuracy, generally maintaining a search recall rate above 90%.
 
@@ -47,7 +47,7 @@ Currently, TiDB supports the [HNSW (Hierarchical Navigable Small World)](https:/
 
 [HNSW](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) is one of the most popular vector indexing algorithms. The HNSW index provides good performance with relatively high accuracy, up to 98% in specific cases.
 
-In TiDB, you can create an HNSW index for a column with a [vector data type](/develop/vector-search/vector-search-data-types.md) in either of the following ways:
+In TiDB, you can create an HNSW index for a column with a [vector data type](/ai/vector-search-data-types.md) in either of the following ways:
 
 - When creating a table, use the following syntax to specify the vector column for the HNSW index:
 
@@ -267,7 +267,7 @@ See [`EXPLAIN`](/sql-statements/sql-statement-explain.md), [`EXPLAIN ANALYZE`](/
 
 ## See also
 
-- [Improve Vector Search Performance](/develop/vector-search/vector-search-improve-performance.md)
-- [Vector Data Types](/develop/vector-search/vector-search-data-types.md)
+- [Improve Vector Search Performance](/ai/vector-search-improve-performance.md)
+- [Vector Data Types](/ai/vector-search-data-types.md)
 
 [^1]: The explanation of KNN search is adapted from the [Approximate Nearest Neighbor Search Indexes](https://github.com/ClickHouse/ClickHouse/pull/50661/files#diff-7ebd9e71df96e74230c9a7e604fa7cb443be69ba5e23bf733fcecd4cc51b7576) document authored by [rschu1ze](https://github.com/rschu1ze) in ClickHouse documentation, licensed under the Apache License 2.0.
