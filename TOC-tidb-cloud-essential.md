@@ -216,8 +216,8 @@
 - 迁移或导入数据
   - [概览](/tidb-cloud/tidb-cloud-migration-overview.md)
   - 将数据迁移到 TiDB Cloud
-    - [使用数据迁移工具迁移现有数据和增量数据](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
-    - [使用数据迁移工具迁移增量数据](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
+    - [使用 Data Migration 迁移现有和增量数据](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
+    - [使用 Data Migration 迁移增量数据](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
     - [从本地部署的 TiDB 迁移到 TiDB Cloud](/tidb-cloud/migrate-from-op-tidb.md)
     - [迁移和合并大型数据集的 MySQL 分片](/tidb-cloud/migrate-sql-shards.md)
     - [使用 AWS DMS 从 Amazon RDS for Oracle 迁移](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
@@ -262,7 +262,7 @@
     - [向量索引](/vector-search/vector-search-index.md)
   - [优化搜索性能](/vector-search/vector-search-improve-performance.md)
   - [使用限制](/vector-search/vector-search-limitations.md)
-- 数据流 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+- 同步数据 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Changefeed 概述](/tidb-cloud/essential-changefeed-overview.md)
   - [同步到 MySQL](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
   - [同步到 Apache Kafka](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
