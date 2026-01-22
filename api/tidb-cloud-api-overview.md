@@ -19,5 +19,5 @@ The API has the following features:
 
 The TiDB Cloud API is available in two versions:
 
-- [v1beta1](/api/tidb-cloud-api-v1beta1.md)
-- [v1beta](/api/tidb-cloud-api-v1beta.md)
+- [v1beta1](/api/tidb-cloud-api-v1beta1.md): manage TiDB Cloud Starter, Essential, and Dedicated clusters, as well as billing, Data Service, and IAM resources.
+- [v1beta](/api/tidb-cloud-api-v1beta.md): manage projects, clusters, backups, imports, and restores for TiDB Cloud.
