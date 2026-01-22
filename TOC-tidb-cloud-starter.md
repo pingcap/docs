@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: 5a218e05f90abcfe6eb37ad6c8cf475cfba21329-->
+# 目录 <!--Corresponding EN commit: 29599f2498ba619b0f762e8beb13e2a9a2ec15fe-->
 
 ## 快速开始
 
@@ -711,4 +711,5 @@
 ## 发布
 
 - Release Notes
-  - [2025](/tidb-cloud/tidb-cloud-release-notes.md)
+  - [2026](/tidb-cloud/tidb-cloud-release-notes.md)
+  - [2025](/tidb-cloud/release-notes-2025.md)
