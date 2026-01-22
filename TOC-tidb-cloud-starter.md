@@ -497,7 +497,6 @@
       - [Overview](/sys-schema/sys-schema.md)
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [Metadata Lock](/metadata-lock.md)
-
   - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
 - CLI Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/tidb-cloud/cli-reference.md)
