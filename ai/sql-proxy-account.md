@@ -1,6 +1,7 @@
 ---
 title: SQL Proxy Account
 summary: Learn about the SQL proxy account in TiDB Cloud.
+aliases: ['/tidbcloud/sql-proxy-account']
 ---
 
 # SQL Proxy Account
