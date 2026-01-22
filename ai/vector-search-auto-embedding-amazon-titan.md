@@ -5,11 +5,11 @@ summary: Learn how to use Amazon Titan embedding models in TiDB Cloud.
 
 # Amazon Titan Embeddings
 
-This document describes how to use Amazon Titan embedding models with [Auto Embedding](/develop/vector-search/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches from text queries.
+This document describes how to use Amazon Titan embedding models with [Auto Embedding](/ai/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches from text queries.
 
 > **Note:**
 >
-> [Auto Embedding](/develop/vector-search/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} clusters hosted on AWS.
+> [Auto Embedding](/ai/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} clusters hosted on AWS.
 
 ## Available models
 
@@ -132,7 +132,7 @@ See [PyTiDB Documentation](https://pingcap.github.io/ai/guides/auto-embedding/).
 
 ## See also
 
-- [Auto Embedding Overview](/develop/vector-search/vector-search-auto-embedding-overview.md)
-- [Vector Search](/develop/vector-search/vector-search-overview.md)
-- [Vector Functions and Operators](/develop/vector-search/vector-search-functions-and-operators.md)
-- [Hybrid Search](/develop/vector-search/vector-search-hybrid-search.md)
+- [Auto Embedding Overview](/ai/vector-search-auto-embedding-overview.md)
+- [Vector Search](/ai/vector-search-overview.md)
+- [Vector Functions and Operators](/ai/vector-search-functions-and-operators.md)
+- [Hybrid Search](/ai/vector-search-hybrid-search.md)

@@ -724,11 +724,11 @@ Referenced in:
 - [Connect to TiDB with PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
 - [Connect to TiDB with SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
 - [Connect to TiDB with peewee](/develop/dev-guide-sample-application-python-peewee.md)
-- [Get Started with TiDB + AI via Python](/develop/vector-search/vector-search-get-started-using-python.md)
-- [Integrate TiDB Vector Search with Jina AI Embeddings API](/develop/vector-search/vector-search-integrate-with-jinaai-embedding.md)
-- [Integrate TiDB Vector Search with SQLAlchemy](/develop/vector-search/vector-search-integrate-with-sqlalchemy.md)
-- [Integrate Vector Search with LangChain](/develop/vector-search/vector-search-integrate-with-langchain.md)
-- [Integrate Vector Search with LlamaIndex](/develop/vector-search/vector-search-integrate-with-llamaindex.md)
+- [Get Started with TiDB + AI via Python](/ai/vector-search-get-started-using-python.md)
+- [Integrate TiDB Vector Search with Jina AI Embeddings API](/ai/vector-search-integrate-with-jinaai-embedding.md)
+- [Integrate TiDB Vector Search with SQLAlchemy](/ai/vector-search-integrate-with-sqlalchemy.md)
+- [Integrate Vector Search with LangChain](/ai/vector-search-integrate-with-langchain.md)
+- [Integrate Vector Search with LlamaIndex](/ai/vector-search-integrate-with-llamaindex.md)
 - [System Variables](/system-variables.md#ssl_ca)
 
 ### ssl_cert

@@ -147,7 +147,7 @@ For a complete example, see [pytidb hybrid search demo](https://github.com/pingc
 
 - [pytidb Python SDK Documentation](https://github.com/pingcap/pytidb)
 
-- [Full-Text Search with Python](/develop/vector-search/vector-search-full-text-search-python.md)
+- [Full-Text Search with Python](/ai/vector-search-full-text-search-python.md)
 
 ## Feedback & help
 
