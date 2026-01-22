@@ -1,102 +1,102 @@
 ---
-title: Connected Care 概述
-summary: 介绍新一代 TiDB Cloud 支持服务 - Connected Care。
+title: Connected Care 概览
+summary: 介绍新一代 TiDB Cloud 支持服务 —— Connected Care。
 aliases: ['/tidbcloud/connected-care-announcement']
 ---
 
-# Connected Care 概述
+# Connected Care 概览
 
-随着各种规模的客户继续在 TiDB Cloud 上扩展用例和运营，TiDB Cloud 致力于重新构想其支持服务，以适应客户不断发展的需求。为了提供更大的价值和无缝体验，TiDB Cloud 很高兴宣布在 **2025 年 2 月 17 日**推出新的支持服务 **Connected Care**。
+随着各类客户在 TiDB Cloud 上不断扩展 use case 和运营规模，TiDB Cloud 致力于重新构想其支持服务，以满足客户不断变化的需求。为了带来更高价值和无缝体验，TiDB Cloud 很高兴地宣布将于 **2025 年 2 月 17 日** 正式推出全新支持服务 —— **Connected Care**。
 
-作为此次转型的一部分，从 **2025 年 2 月 17 日**起，当前的支持计划将不再提供购买，并被归类为传统支持计划。但是，TiDB Cloud 将继续为订阅传统计划的客户提供全面支持，直至其各自的[退役日期](#迁移到-connected-care)。
+作为此次变更的一部分，现有的支持计划自 **2025 年 2 月 17 日** 起将不再对外销售，并被归类为历史支持计划（legacy support plans）。不过，TiDB Cloud 仍会为订阅历史计划的客户持续提供完整支持，直至各自的[退役日期](#transition-to-connected-care)。
 
-为确保平稳过渡并获取最新功能，TiDB Cloud 鼓励客户迁移并采用 Connected Care 服务。
+为确保平滑过渡并获得最新功能，TiDB Cloud 鼓励客户尽快迁移并采用 Connected Care 服务。
 
 ## Connected Care
 
-Connected Care 服务旨在通过现代通信工具、主动支持和先进的 AI 功能加强你与 TiDB Cloud 的连接，提供无缝和以客户为中心的体验。
+Connected Care 服务旨在通过现代 communication 工具、主动支持和先进的 AI 能力，增强你与 TiDB Cloud 的连接，带来无缝且以客户为中心的体验。
 
-在 Connected Care 服务中，有四种支持计划：**Basic**、**Developer**（对应传统的 **Standard** 计划）、**Enterprise** 和 **Premium**。
+在 Connected Care 服务中，包含四种支持计划：**Basic**、**Developer**（对应历史 **Standard** 计划）、**Enterprise** 和 **Premium**。
 
 > **注意**
 >
-> 虽然 **Basic**、**Enterprise** 和 **Premium** 支持计划使用与传统计划相同的计划名称，但它们指的是具有不同服务承诺的不同计划。
+> 虽然 **Basic**、**Enterprise** 和 **Premium** 支持计划与历史计划使用了相同的名称，但它们指代的是不同的计划，服务承诺也不同。
 
-下表概述了 Connected Care 服务中的每个支持计划。更多信息，请参见 [Connected Care 详情](/tidb-cloud/connected-care-detail.md)。
+下表概述了 Connected Care 服务中各支持计划的内容。更多信息，参见 [Connected Care 详情](/tidb-cloud/connected-care-detail.md)。
 
 | 支持计划                                                                                                                                                                                                                       | Basic                        | Developer                                    | Enterprise                                     | Premium                                   |
 |:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------|:---------------------------------------------|:-----------------------------------------------|:------------------------------------------|
-| 推荐工作负载                                                                                                                                                                                                              | 个人或入门项目 | 开发中的工作负载                  | 生产中的工作负载                     | 生产中的关键业务工作负载 |
-| 账单和账户支持                                                                                                                                                                                                        | ✔                            | ✔                                            | ✔                                              | ✔                                         |
+| 推荐 workload                                                                                                                                                                                                              | 个人或入门项目               | 开发中的 workload                            | 生产环境下的 workload                          | 生产环境下关键业务 workload               |
+| 计费与账户支持                                                                                                                                                                                                        | ✔                            | ✔                                            | ✔                                              | ✔                                         |
 | 技术支持                                                                                                                                                                                                                  | -                            | ✔                                            | ✔                                              | ✔                                         |
-| 初始响应时间                                                                                                                                                                                                              | -                            | 工作时间                               | 7x24                                           | 7x24                                      |
-| [Connected：诊所服务](/tidb-cloud/tidb-cloud-clinic.md)                                                                                                                                                                      | -                            | -                                            | ✔                                              | ✔                                         |
-| [Connected：即时通讯中的 AI 聊天](/tidb-cloud/connected-ai-chat-in-im.md)                                                                                                                                                 | -                            | -                                            | ✔                                              | ✔                                         |
-| Connected：TiDB Cloud 告警的即时通讯订阅（[Slack](/tidb-cloud/monitor-alert-slack.md)、[Zoom](/tidb-cloud/monitor-alert-zoom.md)）                                                                                          | -                            | -                                            | ✔                                              | ✔                                         |
-| Connected：工单创建和更新订阅（[Slack](/tidb-cloud/connected-slack-ticket-creation.md)、[Lark](/tidb-cloud/connected-lark-ticket-creation.md)） | -                            | -                                            | ✔                                              | ✔                                         |
-| Connected：支持工单的即时通讯交互（[Slack](/tidb-cloud/connected-slack-ticket-interaction.md)、[Lark](/tidb-cloud/connected-lark-ticket-interaction.md)）   | -                            | -                                            | -                                              | ✔                                         |
-| 技术客户经理                                                                                                                                                                                                          | -                            | -                                            | -                                              | ✔                                         |
+| 首次响应时间                                                                                                                                                                                                              | -                            | 工作时间                                     | 7x24                                           | 7x24                                      |
+| [Connected: Clinic service](/tidb-cloud/tidb-cloud-clinic.md)                                                                                                                                                                      | -                            | -                                            | ✔                                              | ✔                                         |
+| [Connected: AI chat in IM](/tidb-cloud/connected-ai-chat-in-im.md)                                                                                                                                                                 | -                            | -                                            | ✔                                              | ✔                                         |
+| Connected: IM 订阅 TiDB Cloud 报警/告警 ([Slack](/tidb-cloud/monitor-alert-slack.md), [Zoom](/tidb-cloud/monitor-alert-zoom.md))                                                                                          | -                            | -                                            | ✔                                              | ✔                                         |
+| Connected: IM 工单创建与 update 订阅 ([Slack](/tidb-cloud/connected-slack-ticket-creation.md), [Lark](/tidb-cloud/connected-lark-ticket-creation.md)) | -                            | -                                            | ✔                                              | ✔                                         |
+| Connected: IM 工单交互 ([Slack](/tidb-cloud/connected-slack-ticket-interaction.md), [Lark](/tidb-cloud/connected-lark-ticket-interaction.md))   | -                            | -                                            | -                                              | ✔                                         |
+| 技术 Account Manager                                                                                                                                                                                                          | -                            | -                                            | -                                              | ✔                                         |
 
 > **注意**
 >
-> 所有四种支持计划的客户都可以访问 [PingCAP 支持门户](https://tidb.support.pingcap.com/)进行服务请求。
+> 所有四种支持计划的客户均可通过 [PingCAP support portal](https://tidb.support.pingcap.com/) 提交服务请求。
 
-## 传统支持服务与 Connected Care 支持服务的区别
+## 历史支持服务与 Connected Care 支持服务的区别
 
-Connected Care 服务中的支持计划引入了一套全新的功能，如下所示：
+Connected Care 服务中的支持计划引入了全新的一系列功能，包括：
 
-- Connected：诊所服务
+- Connected: Clinic service
 
-    此功能提供先进的监控和诊断服务 Clinic，旨在帮助你通过详细分析和可操作的见解快速识别性能问题、优化数据库并提高整体性能。更多信息，请参见 [Connected：诊所服务](/tidb-cloud/tidb-cloud-clinic.md)。
+    该功能提供了高级监控与诊断服务 Clinic，帮助你快速定位性能问题、优化数据库，并通过详细分析和可执行建议提升整体性能。详情参见 [Connected: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)。
 
-- Connected：即时通讯中的 AI 聊天
+- Connected: AI chat in IM
 
-    此功能使你能够通过即时通讯（IM）工具与 AI 助手聊天，立即获得问题的答案。更多信息，请参见 [Connected：即时通讯中的 AI 聊天](/tidb-cloud/connected-ai-chat-in-im.md)。
+    该功能允许你通过即时消息（IM）工具与 AI 助手对话，实时获取问题解答。详情参见 [Connected: AI chat in IM](/tidb-cloud/connected-ai-chat-in-im.md)。
 
-- Connected：TiDB Cloud 告警的即时通讯订阅
+- Connected: IM 订阅 TiDB Cloud 报警/告警
 
-    此功能为你提供了一种通过即时通讯工具订阅告警通知的简便方法，让你随时了解重要更新。更多信息，请参见[通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)和[通过 Zoom 订阅](/tidb-cloud/monitor-alert-zoom.md)。
+    该功能让你可以通过 IM 工具便捷订阅报警/告警通知，及时获知关键更新。详情参见 [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md) 和 [通过 Zoom 订阅](/tidb-cloud/monitor-alert-zoom.md)。
 
-- Connected：工单创建和更新订阅
+- Connected: IM 工单创建与 update 订阅
 
-    此功能使你能够通过即时通讯工具创建支持工单并订阅工单更新。更多信息，请参见[通过 Slack 创建工单和订阅工单更新](/tidb-cloud/connected-slack-ticket-creation.md)和[通过 Lark 创建工单和订阅工单更新](/tidb-cloud/connected-lark-ticket-creation.md)。
+    该功能允许你通过 IM 工具创建支持工单，并订阅工单 update。详情参见 [通过 Slack 创建工单及订阅工单 update](/tidb-cloud/connected-slack-ticket-creation.md) 和 [通过 Lark 创建工单及订阅工单 update](/tidb-cloud/connected-lark-ticket-creation.md)。
 
-- Connected：支持工单的即时通讯交互
+- Connected: IM 工单交互
 
-    此功能使你能够通过即时通讯工具快速创建和处理支持工单，实现流畅的沟通。更多信息，请参见[通过 Slack 与支持工单交互](/tidb-cloud/connected-slack-ticket-interaction.md)和[通过 Lark 与支持工单交互](/tidb-cloud/connected-lark-ticket-interaction.md)。
+    该功能让你可以通过 IM 工具快速创建并与支持工单交互，实现高效 communication。详情参见 [通过 Slack 交互工单](/tidb-cloud/connected-slack-ticket-interaction.md) 和 [通过 Lark 交互工单](/tidb-cloud/connected-lark-ticket-interaction.md)。
 
-通过这些新功能，Connected Care 服务为不同客户需求提供更好的连接性、更个性化的支持和更具成本效益的解决方案。
+借助这些新功能，Connected Care 服务为你带来更好的连接性、更个性化的支持，以及面向不同客户需求的高性价比解决方案。
 
-- 新的 **Enterprise** 和 **Premium** 计划：通过 Clinic 中的高级监控服务、TiDB Cloud 告警的即时通讯订阅、工单更新的即时通讯订阅、即时通讯中的 AI 聊天以及支持工单的即时通讯交互，将客户与现代通信工具和先进的 AI 功能连接起来。
+- 新的 **Enterprise** 和 **Premium** 计划：通过 Clinic 高级监控服务、IM 订阅 TiDB Cloud 报警/告警、IM 工单 update 订阅、AI chat in IM 以及 IM 工单交互，提供现代 communication 工具和先进 AI 能力。
 
-- 新的 **Developer** 计划：客户除了享有与 **Basic** 计划相同的社区和 [TiDB.AI](https://tidb.ai/) 帮助外，还可以直接获得无限制的技术支持。
+- 新的 **Developer** 计划：可访问与 **Basic** 计划相同的社区 channel（[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap) 和 [Discord](https://discord.com/invite/KVRZBR2DrG)）及 [TiDB.AI](https://tidb.ai/) 协助，并可直接连接和无限制访问技术支持。
 
-- 新的 **Basic** 计划：客户将被引导加入活跃的社区渠道，在那里他们可以与其他社区成员互动，并与 [TiDB.AI](https://tidb.ai/) 进行技术交流。
+- 新的 **Basic** 计划：你可以加入社区 channel（[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap) 和 [Discord](https://discord.com/invite/KVRZBR2DrG)）与其他社区成员交流，并使用 [TiDB.AI](https://tidb.ai/) 获取技术协助。
 
 ## 迁移到 Connected Care
 
-下表列出了传统支持计划的关闭时间表：
+下表列出了历史支持计划的下线时间表：
 
-| 支持计划                        | 关闭日期 |
+| 支持计划                        | 下线日期      |
 |:----------------------------------------|:--------------|
-| 传统 **Basic** 计划                     | 2025 年 2 月 17 日  |
-| 传统 **Standard** 计划                           | 2025 年 2 月 17 日  |
-| 传统 **Enterprise** 和 **Premium** 计划 | 2026 年 1 月 15 日  |
+| 历史 **Basic** 计划                     | 2025 年 2 月 17 日  |
+| 历史 **Standard** 计划                           | 2025 年 2 月 17 日  |
+| 历史 **Enterprise** 和 **Premium** 计划 | 2026 年 1 月 15 日  |
 
-一旦传统支持计划关闭，TiDB Cloud 将不再支持它。如果你在相关关闭日期之前没有迁移到 Connected Care 中的任何支持计划，你将自动迁移到 Connected Care 中的 **Basic** 支持计划。
+一旦历史支持计划下线，TiDB Cloud 将不再为其提供支持。如果你未在相关下线日期前迁移到 Connected Care 的任一支持计划，将会被自动迁移至 Connected Care 的 **Basic** 支持计划。
 
 ## 常见问题
 
-### 如何查看或更改我当前的支持计划？
+### 如何查看或更改当前的支持计划？
 
-在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，点击左下角的**支持**。将显示**支持**页面，你当前的支持计划会用 **CURRENT** 标签突出显示。
+在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，点击左下角的 **Support**。此时会显示 **Support** 页面，你当前的支持计划会以 **CURRENT** 标签高亮显示。
 
-你可以在**支持**页面上迁移到新的支持计划，但 **Premium** 支持计划除外。要升级到 **Premium** 计划，请[联系销售](https://www.pingcap.com/contact-us)。
+你可以在 **Support** 页面切换到新的支持计划（**Premium** 支持计划除外）。如需升级到 **Premium** 计划，请[联系销售](https://www.pingcap.com/contact-us)。
 
-### 我需要为类似的服务支付更多费用吗？
+### 获得类似服务是否需要支付更多费用？
 
-虽然新的 Connected Care 服务提供了更全面和功能更丰富的支持体验，但定价仍与之前的产品保持一致。TiDB Cloud 仍然致力于提供更多价值，以更好地支持你的发展历程。
+虽然新的 Connected Care 服务提供了更全面、功能更丰富的支持体验，但定价与之前的方案基本保持一致。TiDB Cloud 始终致力于为你的成长之路带来更多价值。
 
-### 传统 **Basic** 计划关闭后，我如何获得技术支持？
+### 历史 **Basic** 计划下线后，如何获得技术支持？
 
-你仍然可以获得[账单和账户支持](/tidb-cloud/tidb-cloud-support.md#create-an-account-or-billing-support-ticket)。对于技术支持，请考虑购买 Connected Care 服务中的支持计划。建议你从包含一个月免费试用的 **Developer** 计划开始。
+你仍可获得[计费与账户支持](/tidb-cloud/tidb-cloud-support.md#create-an-account-or-billing-support-ticket)。如需技术支持，建议购买 Connected Care 服务中的支持计划。推荐从 **Developer** 计划开始，该计划包含一个月的免费试用。

@@ -1,20 +1,20 @@
 ---
-title: TiDB Cloud Essential 的数据库审计日志（Beta）
+title: TiDB Cloud Essential 数据库审计日志（Beta）
 summary: 了解如何在 TiDB Cloud 中对 TiDB Cloud Essential 集群进行审计。
 aliases: ['/tidbcloud/serverless-audit-logging']
 ---
 
-# TiDB Cloud Essential 的数据库审计日志（Beta）
+# TiDB Cloud Essential 数据库审计日志（Beta）
 
-TiDB Cloud Essential 提供了数据库审计日志功能，用于记录数据库的用户访问活动，例如执行的 SQL 语句。
+TiDB Cloud Essential 提供了审计日志功能，用于记录数据库的用户访问活动，例如执行的 SQL 语句。
 
-> **Note:**
+> **注意：**
 >
 > 目前，数据库审计日志功能仅支持按需开通。如需申请该功能，请点击 [TiDB Cloud 控制台](https://tidbcloud.com) 右下角的 **?**，然后点击 **Request Support**。在 **Description** 字段填写“Apply for TiDB Cloud Essential database audit logging”，并点击 **Submit**。
 
-为了评估组织的用户访问策略和其他信息安全措施的有效性，安全最佳实践建议定期分析数据库审计日志。
+为了评估你所在组织的用户访问策略和其他信息安全措施的有效性，定期分析数据库审计日志是一项安全最佳实践。
 
-审计日志功能**默认处于关闭状态**。如需对 TiDB 集群进行审计，需要为其启用审计日志功能。
+审计日志功能**默认关闭**。如需对 TiDB 集群进行审计，需为其启用审计日志。
 
 ## 审计日志配置
 
@@ -51,11 +51,11 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 
 ### TiDB Cloud
 
-你可以将审计日志存储在 TiDB Cloud，并下载到本地。审计日志在 365 天后过期并被删除。如需更长的保留周期，请联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。
+你可以将审计日志存储在 TiDB Cloud，并下载到本地。审计日志在 365 天后过期并被删除。如需更长的保留时间，请联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。
 
 ### Amazon S3
 
-如需将审计日志存储在 Amazon S3，需要提供以下信息：
+如需将审计日志存储在 Amazon S3，你需要提供以下信息：
 
 - URI: `s3://<bucket-name>/<folder-path>/`
 - 访问凭证：选择以下任一方式：
@@ -66,7 +66,7 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 
 ### Google Cloud Storage
 
-如需将审计日志存储在 Google Cloud Storage，需要提供以下信息：
+如需将审计日志存储在 Google Cloud Storage，你需要提供以下信息：
 
 - URI: `gs://<bucket-name>/<folder-path>/`
 - 访问凭证：具有 `storage.objects.create` 和 `storage.objects.delete` 权限的 [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)。
@@ -75,47 +75,47 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 
 ### Azure Blob Storage
 
-如需将审计日志存储在 Azure Blob Storage，需要提供以下信息：
+如需将审计日志存储在 Azure Blob Storage，你需要提供以下信息：
 
 - URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` 或 `https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
-- 访问凭证：具有 `Container` 和 `Object` 资源 `Read` 和 `Write` 权限的 [共享访问签名（SAS）令牌](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)。
+- 访问凭证：具有 `Container` 和 `Object` 资源 `Read` 和 `Write` 权限的 [SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)。
 
 更多信息，参见 [配置 Azure Blob Storage 访问](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)。
 
 ### 阿里云 OSS
 
-如需将审计日志存储在阿里云 OSS，需要提供以下信息：
+如需将审计日志存储在阿里云 OSS，你需要提供以下信息：
 
 - URI: `oss://<bucket-name>/<folder-path>/`
-- 访问凭证：具有 `oss:PutObject` 和 `oss:GetBucketInfo` 权限的 [AccessKey 对](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)，以允许将数据导出到 OSS bucket。
+- 访问凭证：具有 `oss:PutObject` 和 `oss:GetBucketInfo` 权限的 [AccessKey pair](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)，以允许将数据导出到 OSS bucket。
 
 更多信息，参见 [配置阿里云对象存储 OSS 访问](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)。
 
 ## 审计日志过滤规则
 
-如需过滤审计日志，需要创建过滤规则以指定哪些事件需要记录。
+如需过滤审计日志，你需要创建过滤规则以指定哪些事件需要记录。
 
 过滤规则包含以下字段：
 
-- `users`：用于过滤审计事件的用户名列表。可以使用通配符 `%` 匹配任意用户名。
+- `users`：用于过滤审计事件的用户名列表。你可以使用通配符 `%` 匹配任意用户名。
 - `filters`：过滤对象列表。每个过滤对象包含以下字段：
 
-    - `classes`：用于过滤审计事件的事件类型列表。例如，`["QUERY", "EXECUTE"]`。
+    - `classes`：用于过滤审计事件的事件类列表。例如，`["QUERY", "EXECUTE"]`。
     - `tables`：表过滤器列表。更多信息，参见 [Table Filter](https://docs.pingcap.com/tidb/stable/table-filter/)。
     - `statusCodes`：用于过滤审计事件的状态码列表。`1` 表示成功，`0` 表示失败。
 
-下表展示了数据库审计日志中的所有事件类型：
+下表展示了数据库审计日志中的所有事件类：
 
-| Event class   | Description                                                                                      | Parent-class   |
-|---------------|--------------------------------------------------------------------------------------------------|---------------|
-| `CONNECTION`    | 记录所有与连接相关的操作，如握手、连接、断开连接、重置连接和切换用户 | -             |
+| Event class   | 描述                                                                                      | 父类   |
+|---------------|------------------------------------------------------------------------------------------|--------|
+| `CONNECTION`    | 记录所有与连接相关的操作，如握手、连接、断开连接、重置连接和切换用户 | -      |
 | `CONNECT`       | 记录所有连接握手操作                                          | `CONNECTION`    |
-| `DISCONNECT`    | 记录所有断开连接的操作                                                      | `CONNECTION`    |
-| `CHANGE_USER`   | 记录所有切换用户的操作                                                          | `CONNECTION`    |
-| `QUERY`         | 记录所有 SQL 语句的操作，包括所有查询和数据修改的错误  | -               |
+| `DISCONNECT`    | 记录所有断开连接操作                                         | `CONNECTION`    |
+| `CHANGE_USER`   | 记录所有切换用户操作                                         | `CONNECTION`    |
+| `QUERY`         | 记录所有 SQL 语句操作，包括所有查询和数据修改的错误  | -      |
 | `TRANSACTION`   | 记录所有与事务相关的操作，如 `BEGIN`、`COMMIT` 和 `ROLLBACK`         | `QUERY`         |
 | `EXECUTE`       | 记录所有 `EXECUTE` 语句的操作                                                | `QUERY`         |
-| `QUERY_DML`     | 记录所有 DML 语句的操作，包括 `INSERT`、`REPLACE`、`UPDATE`、`DELETE` 和 `LOAD DATA`    | `QUERY`     |
+| `QUERY_DML`     | 记录所有 DML 语句操作，包括 `INSERT`、`REPLACE`、`UPDATE`、`DELETE` 和 `LOAD DATA`    | `QUERY`     |
 | `INSERT`        | 记录所有 `INSERT` 语句的操作                                                   | `QUERY_DML`   |
 | `REPLACE`       | 记录所有 `REPLACE` 语句的操作                                                  | `QUERY_DML`   |
 | `UPDATE`        | 记录所有 `UPDATE` 语句的操作                                                   | `QUERY_DML`   |
@@ -125,30 +125,30 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 | `QUERY_DDL`     | 记录所有 DDL 语句的操作                                                        | `QUERY`       |
 | `AUDIT`         | 记录所有与 TiDB 数据库审计设置相关的操作，包括设置系统变量和调用系统函数 | -                   |
 | `AUDIT_FUNC_CALL` | 记录所有与 TiDB Cloud 数据库审计相关的系统函数调用操作        | `AUDIT`       |
-| `AUDIT_SET_SYS_VAR` | 记录所有设置系统变量的操作        | `AUDIT`       |
+| `AUDIT_SET_SYS_VAR` | 记录所有系统变量设置操作        | `AUDIT`       |
 
-> **Note:**
+> **注意：**
 >
-> `AUDIT` 事件类型及其子类型始终会被记录在审计日志中，无法被过滤。
+> `AUDIT` 事件类及其子类始终会被记录在审计日志中，无法被过滤。
 
 ## 配置审计日志
 
-你可以启用、编辑和禁用审计日志功能。
+你可以启用、编辑和禁用审计日志。
 
 ### 启用审计日志
 
-你可以通过 TiDB Cloud 控制台或 TiDB Cloud CLI 为 TiDB Cloud Essential 集群启用审计日志功能。
+你可以通过 TiDB Cloud 控制台或 TiDB Cloud CLI 为 TiDB Cloud Essential 集群启用审计日志。
 
-> **Note:**
+> **注意：**
 >
-> 仅启用审计日志功能不会生成审计日志。你还需要配置过滤规则以指定需要记录的事件。更多信息，参见 [管理审计日志过滤规则](#manage-audit-logging-filter-rules)。
+> 仅启用审计日志不会生成审计日志。你还必须配置过滤规则以指定需要记录的事件。更多信息，参见 [管理审计日志过滤规则](#manage-audit-logging-filter-rules)。
 
 <SimpleTab>
 <div label="Console">
 
 1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 
-    > **Tip:**
+    > **提示：**
     >
     > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
 
@@ -156,7 +156,7 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 
 3. 在 **DB Audit Logging** 页面，点击 **Enable**。
 
-4. 选择审计日志的存储位置并填写所需信息，然后点击 **Test Connection and Next** 或 **Next**。关于可用存储位置的更多信息，参见 [审计日志存储位置](#audit-logging-locations)。
+4. 选择审计日志的存储位置并填写所需信息。然后点击 **Test Connection and Next** 或 **Next**。关于可用存储位置的更多信息，参见 [审计日志存储位置](#audit-logging-locations)。
 
 5. 在 **Database Audit Logging Settings** 对话框中，填写日志文件轮转和日志脱敏设置，然后点击 **Save**。
 
@@ -164,13 +164,13 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 
 <div label="CLI">
 
-以 Amazon S3 存储为例。如需启用审计日志并将日志存储在 Amazon S3，执行以下命令：
+以 Amazon S3 存储为例。如需启用审计日志并将日志存储在 Amazon S3，运行以下命令：
 
 ```shell
 ticloud serverless audit-log config update -c <cluster-id> --enabled --cloud-storage S3 --s3.uri <s3-url> --s3.access-key-id <s3-access-key-id> --s3.secret-access-key <s3-secret-access-key> --rotation-size-mib <size-in-mb> --rotation-interval-minutes <interval-in-minutes> --unredacted=<true|false>
 ```
 
-`--rotation-size-mib`、`--rotation-interval-minutes` 和 `--unredacted` 参数为可选项。如果未指定，则使用默认值。
+`--rotation-size-mib`、`--rotation-interval-minutes` 和 `--unredacted` 参数为可选项。如未指定，则使用默认值。
  
 </div>
 </SimpleTab>
@@ -184,7 +184,7 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled --cloud-sto
 
 1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 
-    > **Tip:**
+    > **提示：**
     >
     > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
 
@@ -198,7 +198,7 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled --cloud-sto
 
 <div label="CLI">
 
-如需通过 TiDB Cloud CLI 更新审计日志设置，执行以下命令：
+如需通过 TiDB Cloud CLI 更新审计日志设置，运行以下命令：
 
 ```shell
 ticloud serverless audit-log config update -c <cluster-id> --rotation-size-mib <size-in-mb> --rotation-interval-minutes <interval-in-minutes> --unredacted=<true|false>
@@ -209,14 +209,14 @@ ticloud serverless audit-log config update -c <cluster-id> --rotation-size-mib <
 
 ### 禁用审计日志
 
-你可以为 TiDB Cloud Essential 集群禁用审计日志功能。
+你可以为 TiDB Cloud Essential 集群禁用审计日志。
 
 <SimpleTab>
 <div label="Console">
 
 1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 
-    > **Tip:**
+    > **提示：**
     >
     > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
 
@@ -230,7 +230,7 @@ ticloud serverless audit-log config update -c <cluster-id> --rotation-size-mib <
 
 <div label="CLI">
 
-如需通过 TiDB Cloud CLI 禁用审计日志功能，执行以下命令：
+如需通过 TiDB Cloud CLI 禁用审计日志，运行以下命令：
 
 ```shell
 ticloud serverless audit-log config update -c <cluster-id> --disabled=true
@@ -245,14 +245,14 @@ ticloud serverless audit-log config update -c <cluster-id> --disabled=true
 
 ### 创建过滤规则
 
-如需创建过滤规则，请定义需要在审计日志中捕获的用户和事件。你可以根据需要指定用户、事件类型、表和状态码，实现灵活的日志记录。
+如需创建过滤规则，请定义你希望在审计日志中捕获的用户和事件。你可以根据需要指定用户、事件类、表和状态码。
 
 <SimpleTab>
 <div label="Console">
 
 1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 
-    > **Tip:**
+    > **提示：**
     >
     > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
 
@@ -266,7 +266,7 @@ ticloud serverless audit-log config update -c <cluster-id> --disabled=true
 
 <div label="CLI">
 
-如需通过 TiDB Cloud CLI 创建过滤规则，执行以下命令：
+如需通过 TiDB Cloud CLI 创建过滤规则，运行以下命令：
 
 ```shell
 ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-name <rule-name> --rule '{"users":["%@%"],"filters":[{}]}'
@@ -282,13 +282,13 @@ ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-n
 
 1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 
-    > **Tip:**
+    > **提示：**
     >
     > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
 
 2. 点击目标集群名称进入概览页面，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
 
-3. 在 **DB Audit Logging** 页面，找到需要编辑的过滤规则，点击其所在行的 **...**，然后点击 **Edit**。
+3. 在 **DB Audit Logging** 页面，找到你要编辑的过滤规则，点击其所在行的 **...**，然后点击 **Edit**。
 
 4. 在 **Edit Filter Rule** 对话框中，更新 **Filter Name** 或 **Filter Rule** 字段，然后点击 **Confirm**。
 
@@ -296,7 +296,7 @@ ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-n
 
 <div label="CLI">
 
-如需通过 TiDB Cloud CLI 编辑过滤规则，执行以下命令：
+如需通过 TiDB Cloud CLI 编辑过滤规则，运行以下命令：
 
 ```shell
 ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-rule-id <rule-id> --rule '{"users":["%@%"],"filters":[{"classes":["QUERY"],"tables":["test.t"]}]}'
@@ -312,19 +312,19 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 
 1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 
-    > **Tip:**
+    > **提示：**
     >
     > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
 
 2. 点击目标集群名称进入概览页面，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
 
-3. 在 **DB Audit Logging** 页面，找到需要禁用的过滤规则，关闭开关以禁用该过滤规则。
+3. 在 **DB Audit Logging** 页面，找到你要禁用的过滤规则，关闭开关以禁用该规则。
 
 </div>
 
 <div label="CLI">
 
-如需通过 TiDB Cloud CLI 禁用过滤规则，执行以下命令：
+如需通过 TiDB Cloud CLI 禁用过滤规则，运行以下命令：
 
 ```shell
 ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-rule-id <rule-id> --enabled=false
@@ -340,13 +340,13 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 
 1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 
-    > **Tip:**
+    > **提示：**
     >
     > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
 
 2. 点击目标集群名称进入概览页面，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
 
-3. 在 **DB Audit Logging** 页面，找到需要删除的过滤规则并点击 **...**。
+3. 在 **DB Audit Logging** 页面，找到你要删除的过滤规则并点击 **...**。
 
 4. 点击 **Delete**，然后点击 **I understand. Delete it** 以确认删除。
 
@@ -363,25 +363,25 @@ ticloud serverless audit-log filter delete --cluster-id <cluster-id> --filter-ru
 
 ## 通过 TiDB Cloud 存储访问审计日志
 
-当你将审计日志存储在 TiDB Cloud 时，TiDB Cloud Essential 会将其保存为可读的文本文件，文件名为 `YYYY-MM-DD-<index>.log`。你可以通过 TiDB Cloud 控制台或 TiDB Cloud CLI 查看和下载这些文件。
+当你将审计日志存储在 TiDB Cloud 时，TiDB Cloud Essential 会将其保存为可读的文本文件，命名为 `YYYY-MM-DD-<index>.log`。你可以通过 TiDB Cloud 控制台或 TiDB Cloud CLI 查看和下载这些文件。
 
-> **Note:**
+> **注意：**
 >
-> - TiDB Cloud Essential 不保证审计日志的存储顺序是严格有序的。名为 `YYYY-MM-DD-<index>.log` 的日志文件可能包含更早日期的日志条目。
-> - 如需获取某一天（例如 2025 年 1 月 1 日）的所有日志，请设置 `--start-date 2025-01-01` 和 `--end-date 2025-01-02`。在某些情况下，你可能需要下载所有日志文件并根据 `TIME` 字段进行排序。
+> - TiDB Cloud Essential 不保证审计日志的存储顺序。名为 `YYYY-MM-DD-<index>.log` 的日志文件可能包含更早日期的日志条目。
+> - 如需获取某一天（如 2025 年 1 月 1 日）的所有日志，请设置 `--start-date 2025-01-01` 和 `--end-date 2025-01-02`。在某些情况下，你可能需要下载所有日志文件并根据 `TIME` 字段进行排序。
 
 <SimpleTab>
 <div label="Console">
 
 1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入项目的 [**Clusters**](https://tidbcloud.com/project/clusters) 页面。
 
-    > **Tip:**
+    > **提示：**
     >
     > 你可以使用左上角的下拉框在组织、项目和集群之间切换。
 
 2. 点击目标集群名称进入概览页面，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
 
-3. 在 **DB Audit Logging** 页面，可以在 **TiDB Cloud Storage** 下查看审计日志列表。
+3. 在 **DB Audit Logging** 页面，你可以在 **TiDB Cloud Storage** 下查看审计日志列表。
 
 4. 如需下载审计日志，从列表中选择一个或多个日志，然后点击 **Download**。
 
@@ -389,14 +389,14 @@ ticloud serverless audit-log filter delete --cluster-id <cluster-id> --filter-ru
 
 <div label="CLI">
 
-如需通过 TiDB Cloud CLI 下载审计日志，执行以下命令：
+如需通过 TiDB Cloud CLI 下载审计日志，运行以下命令：
 
 ```shell
 ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <output-path> --start-date <start-date> --end-date <end-date>
 ```
 
-- `start-date`：要下载的审计日志起始日期，格式为 `YYYY-MM-DD`，例如 `2025-01-01`。
-- `end-date`：要下载的审计日志结束日期，格式为 `YYYY-MM-DD`，例如 `2025-01-01`。
+- `start-date`：要下载的审计日志起始日期，格式为 `YYYY-MM-DD`，如 `2025-01-01`。
+- `end-date`：要下载的审计日志结束日期，格式为 `YYYY-MM-DD`，如 `2025-01-01`。
  
 </div>
 </SimpleTab>
@@ -413,48 +413,52 @@ ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <o
 |---------------|---------------------------------------------------------------------------------------|
 | `ID`            | 标识操作审计记录的唯一标识符。                        |
 | `TIME`          | 审计记录的时间戳。                                                             |
-| `EVENT`         | 审计记录的事件类型。多个事件类型以逗号（`,`）分隔。     |
+| `EVENT`         | 审计记录的事件类。多个事件类型以逗号（`,`）分隔。     |
 | `USER`          | 审计记录的用户名。                                                              |
 | `ROLES`         | 操作时用户的角色。                                            |
 | `CONNECTION_ID` | 用户连接的标识符。                                                       |
 | `TABLES`        | 与该审计记录相关的访问表。                                              |
 | `STATUS_CODE`   | 审计记录的状态码。`1` 表示成功，`0` 表示失败。                |
 | `KEYSPACE_NAME` | 审计记录的 keyspace 名称。                                                        |
-| `SERVERLESS_TENANT_ID`           | 集群所属的 serverless tenant ID。                 |
-| `SERVERLESS_PROJECT_ID`          | 集群所属的 serverless project ID。                |
-| `SERVERLESS_CLUSTER_ID`          | 审计记录所属的 serverless cluster ID。           |
+| `SERVERLESS_TENANT_ID`           | 集群所属的 serverless 租户 ID。                 |
+| `SERVERLESS_PROJECT_ID`          | 集群所属的 serverless 项目 ID。                |
+| `SERVERLESS_CLUSTER_ID`          | 审计记录所属的 serverless 集群 ID。           |
 | `REASON`        | 审计记录的错误信息。仅在操作发生错误时记录。|
 
 ### SQL 语句信息
 
-当事件类型为 `QUERY` 或其子类型时，审计日志包含以下信息：
+当事件类为 `QUERY` 或其子类时，审计日志包含以下信息：
 
 | 字段          | 描述                                                                                                   |
 |----------------|-------------------------------------------------------------------------------------------------------|
 | `CURRENT_DB`     | 当前数据库名称。                                                                             |
 | `SQL_TEXT`       | 执行的 SQL 语句。如果启用了审计日志脱敏，则记录脱敏后的 SQL 语句。     |
-| `EXECUTE_PARAMS` | `EXECUTE` 语句的参数。仅当事件类型包含 `EXECUTE` 且未启用脱敏时记录。 |
-| `AFFECTED_ROWS`  | SQL 语句影响的行数。仅当事件类型包含 `QUERY_DML` 时记录。  |
+| `EXECUTE_PARAMS` | `EXECUTE` 语句的参数。仅当事件类包含 `EXECUTE` 且未启用脱敏时记录。 |
+| `AFFECTED_ROWS`  | SQL 语句影响的行数。仅当事件类包含 `QUERY_DML` 时记录。  |
 
 ### 连接信息
 
-当事件类型为 `CONNECTION` 或其子类型时，审计日志包含以下信息：
+当事件类为 `CONNECTION` 或其子类时，审计日志包含以下信息：
 
 | 字段           | 描述                                                                                   |
 |-----------------|---------------------------------------------------------------------------------------|
-| `CURRENT_DB`      | 当前数据库名称。当事件类型包含 DISCONNECT 时不记录该信息。 |
+| `CURRENT_DB`      | 当前数据库名称。当事件类包含 DISCONNECT 时不记录该信息。 |
 | `CONNECTION_TYPE` | 连接类型，包括 Socket、UnixSocket 和 SSL/TLS。                                 |
 | `PID`             | 当前连接的进程 ID。                                                          |
 | `SERVER_VERSION`  | 当前连接的 TiDB 服务器版本。                                                  |
 | `SSL_VERSION`     | 当前使用的 SSL 版本。                                                                 |
 | `HOST_IP`         | 当前连接的 TiDB 服务器 IP 地址。                                               |
 | `HOST_PORT`       | 当前连接的 TiDB 服务器端口。                                                     |
-| `CLIENT_IP`       | 客户端的 IP 地址。                                                              |
-| `CLIENT_PORT`     | 客户端的端口。                                                                    |
+| `CLIENT_IP`       | 当前客户端 IP 地址。                                                              |
+| `CLIENT_PORT`     | 当前客户端端口。                                                                    |
+
+> **注意：**
+>
+> 为提升流量可见性，`CLIENT_IP` 现已支持通过 AWS PrivateLink 连接时显示真实客户端 IP，而非负载均衡（LB）IP。该功能目前为 Beta，仅在 AWS 区域 `Frankfurt (eu-central-1)` 可用。
 
 ### 审计操作信息
 
-当事件类型为 `AUDIT` 或其子类型时，审计日志包含以下信息：
+当事件类为 `AUDIT` 或其子类时，审计日志包含以下信息：
 
 | 字段          | 描述                                                                                                   |
 |----------------|-------------------------------------------------------------------------------------------------------|
@@ -463,4 +467,4 @@ ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <o
 
 ## 审计日志限制
 
-TiDB Cloud Essential 不保证审计日志的顺序严格有序，这意味着你可能需要检查所有日志文件以查找最新事件。如需按时间顺序排序日志，可以使用审计日志中的 `TIME` 字段。
+TiDB Cloud Essential 不保证审计日志的顺序，这意味着你可能需要检查所有日志文件以查找最新事件。如需按时间顺序排序日志，可以使用审计日志中的 `TIME` 字段。

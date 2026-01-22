@@ -7,11 +7,11 @@ summary: 了解如何在 TiDB Cloud 中管理身份访问。
 
 本文档介绍如何在 TiDB Cloud 中管理对组织、项目、角色和用户资料的访问。
 
-在访问 TiDB Cloud 之前，请先[创建一个 TiDB Cloud 账户](https://tidbcloud.com/free-trial)。你可以使用邮箱和密码注册，这样可以[通过 TiDB Cloud 管理你的密码](/tidb-cloud/tidb-cloud-password-authentication.md)，也可以选择使用 Google、GitHub 或 Microsoft 账户进行单点登录（SSO）到 TiDB Cloud。
+在访问 TiDB Cloud 之前，请先[创建一个 TiDB Cloud 账户](https://tidbcloud.com/free-trial)。你可以使用邮箱和密码注册，这样可以[通过 TiDB Cloud 管理你的密码](/tidb-cloud/tidb-cloud-password-authentication.md)，也可以选择使用 Google、GitHub 或 Microsoft 账户通过单点登录（SSO）访问 TiDB Cloud。
 
 ## 组织与项目
 
-TiDB Cloud 提供了基于组织和项目的分层结构，便于管理 TiDB Cloud 用户和集群。如果你是组织所有者，可以在你的组织下创建多个项目。
+TiDB Cloud 提供了基于组织和项目的分层结构，以便于管理 TiDB Cloud 用户和集群。如果你是组织所有者，可以在你的组织下创建多个项目。
 
 例如：
 
@@ -30,8 +30,8 @@ TiDB Cloud 提供了基于组织和项目的分层结构，便于管理 TiDB Clo
 
 在该结构下：
 
-- 要访问某个组织，用户必须是该组织的成员。
-- 要访问组织中的某个项目，用户至少需要拥有该组织下该项目的只读权限。
+- 要访问一个组织，用户必须是该组织的成员。
+- 要访问组织中的某个项目，用户至少需要拥有该组织下该项目的读访问权限。
 - 要管理项目中的集群，用户必须拥有 `Project Owner` 角色。
 
 关于用户角色和权限的更多信息，请参见 [用户角色](#用户角色)。
@@ -40,13 +40,13 @@ TiDB Cloud 提供了基于组织和项目的分层结构，便于管理 TiDB Clo
 
 一个组织可以包含多个项目。
 
-TiDB Cloud 在组织层面进行计费，并为每个项目提供账单明细。
+TiDB Cloud 在组织级别进行计费，并为每个项目提供详细的账单信息。
 
 如果你是组织所有者，你在组织中拥有最高权限。
 
 例如，你可以执行以下操作：
 
-- 为不同目的创建不同的项目（如开发、测试和生产环境）。
+- 为不同目的（如开发、预发布、生产）创建不同的项目。
 - 为不同用户分配不同的组织角色和项目角色。
 - 配置组织设置。例如，为你的组织配置时区。
 
@@ -66,11 +66,11 @@ TiDB Cloud 在组织层面进行计费，并为每个项目提供账单明细。
 
 TiDB Cloud 定义了不同的用户角色，用于管理 TiDB Cloud 用户在组织、项目或两者中的不同权限。
 
-你可以在组织层面或项目层面为用户授予角色。请确保为安全考虑，合理规划你的组织和项目的层级结构。
+你可以在组织级别或项目级别为用户授予角色。请确保为安全考虑，合理规划你的组织和项目的层级结构。
 
 ### 组织角色
 
-在组织层面，TiDB Cloud 定义了四种角色，其中 `Organization Owner` 可以邀请成员并为成员分配组织角色。
+在组织级别，TiDB Cloud 定义了四种角色，其中 `Organization Owner` 可以邀请成员并为成员分配组织角色。
 
 | 权限  | `Organization Owner` | `Organization Billing Manager` | `Organization Billing Viewer` | `Organization Console Audit Manager` | `Organization Viewer` |
 |---|---|---|---|---|---|
@@ -85,16 +85,16 @@ TiDB Cloud 定义了不同的用户角色，用于管理 TiDB Cloud 用户在组
 
 > **注意：**
 >
-> - `Organization Console Audit Manager` 角色（由 `Organization Console Audit Admin` 重命名）用于管理 TiDB Cloud 控制台的审计日志，而非数据库审计日志。要管理数据库审计，请在项目层面使用 `Project Owner` 角色。
+> - `Organization Console Audit Manager` 角色（由 `Organization Console Audit Admin` 重命名）用于管理 TiDB Cloud 控制台的审计日志，而非数据库审计日志。要管理数据库审计，请在项目级别使用 `Project Owner` 角色。
 > - `Organization Billing Manager` 角色由 `Organization Billing Admin` 重命名，`Organization Viewer` 角色由 `Organization Member` 重命名。
 
 ### 项目角色
 
-在项目层面，TiDB Cloud 定义了三种角色，其中 `Project Owner` 可以邀请成员并为成员分配项目角色。
+在项目级别，TiDB Cloud 定义了三种角色，其中 `Project Owner` 可以邀请成员并为成员分配项目角色。
 
 > **注意：**
 >
-> - `Organization Owner` 拥有所有项目的 <code>Project Owner</code> 权限，因此 `Organization Owner` 也可以邀请项目成员并为成员分配项目角色。
+> - `Organization Owner` 拥有所有项目的 <code>Project Owner</code> 权限，因此 `Organization Owner` 也可以邀请项目成员并分配项目角色。
 > - 每个项目角色默认拥有 <code>Organization Viewer</code> 的所有权限。
 > - 如果你组织中的某个用户不属于任何项目，则该用户没有任何项目权限。
 
@@ -103,10 +103,9 @@ TiDB Cloud 定义了不同的用户角色，用于管理 TiDB Cloud 用户在组
 | 管理项目设置 | ✅ | ❌ | ❌ | ❌ |
 | 邀请用户加入或移除用户出项目，并编辑用户的项目角色。 | ✅ | ❌ | ❌ | ❌ |
 | 管理项目的 [数据库审计日志](/tidb-cloud/tidb-cloud-auditing.md)。 | ✅ | ❌ | ❌ | ❌ |
-| 管理项目下所有 TiDB Cloud Serverless 集群的 [消费限额](/tidb-cloud/manage-serverless-spend-limit.md)。 | ✅ | ❌ | ❌ | ❌ |
+| 管理项目下所有 TiDB Cloud Starter 集群的 [消费限额](/tidb-cloud/manage-serverless-spend-limit.md)。 | ✅ | ❌ | ❌ | ❌ |
 | 管理项目中的集群操作，如集群创建、修改和删除。 | ✅ | ❌ | ❌ | ❌ |
-| 管理项目下 TiDB Cloud Serverless 集群的分支，如分支创建、连接和删除。 | ✅ | ❌ | ❌ | ❌ |
-| 管理项目下 TiDB Cloud Dedicated 集群的 [恢复组](/tidb-cloud/recovery-group-overview.md)，如恢复组的创建和删除。 | ✅ | ❌ | ❌ | ❌ |
+| 管理项目下 TiDB Cloud Starter 和 TiDB Cloud Essential 集群的分支，如分支创建、连接和删除。 | ✅ | ❌ | ❌ | ❌ |
 | 管理集群数据，如数据导入、数据备份与恢复、数据迁移。 | ✅ | ✅ | ❌ | ❌ |
 | 管理 [Data Service](/tidb-cloud/data-service-overview.md) 的只读操作，如使用或创建端点读取数据。 | ✅ | ✅ | ✅ | ❌ |
 | 管理 [Data Service](/tidb-cloud/data-service-overview.md) 的读写操作。 | ✅ | ✅ | ❌ | ❌ |
@@ -114,7 +113,7 @@ TiDB Cloud 定义了不同的用户角色，用于管理 TiDB Cloud 用户在组
 | 使用 [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) 修改和删除集群数据。 | ✅ | ✅ | ❌ | ❌ |
 | 管理 [changefeeds](/tidb-cloud/changefeed-overview.md)。 | ✅ | ✅ | ✅ | ❌ |
 | 审核和重置集群密码。 | ✅ | ❌ | ❌ | ❌ |
-| 查看项目中的集群概览、备份记录、监控指标、事件和 [changefeeds](/tidb-cloud/changefeed-overview.md)。 | ✅ | ✅ | ✅ | ✅ |
+| 查看项目中的集群概览、备份记录、指标、事件和 [changefeeds](/tidb-cloud/changefeed-overview.md)。 | ✅ | ✅ | ✅ | ✅ |
 
 ## 管理组织访问
 
@@ -122,12 +121,12 @@ TiDB Cloud 定义了不同的用户角色，用于管理 TiDB Cloud 用户在组
 
 要查看并切换组织，请执行以下步骤：
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，点击左上角的下拉框，会显示你所属的组织和项目列表。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，点击左上角的下拉框。会显示你所属的组织和项目列表。
 
     > **提示：**
     >
-    > - 如果你当前在某个集群页面，点击左上角下拉框后，还需要在下拉框中点击 ← 返回到组织和项目列表。
-    > - 如果你属于多个组织，可以在下拉框中点击目标组织名称，在组织之间切换账户。
+    > - 如果你当前在某个集群页面，点击左上角下拉框后，还需点击下拉框中的 ← 返回到组织和项目列表。
+    > - 如果你属于多个组织，可以在下拉框中点击目标组织名称，在不同组织间切换账户。
 
 2. 若要查看组织的详细信息（如组织 ID 和时区），点击组织名称，然后在左侧导航栏点击 **Organization Settings** > **General**。
 
@@ -172,13 +171,13 @@ TiDB Cloud 定义了不同的用户角色，用于管理 TiDB Cloud 用户在组
 
 6. 点击 **Confirm**。新用户会被成功添加到用户列表，同时会向被邀请邮箱发送一封带有验证链接的邮件。
 
-7. 用户收到邮件后，需要点击邮件中的链接进行身份验证，页面会显示新的内容。
+7. 用户收到邮件后，需要点击邮件中的链接进行身份验证，随后会显示一个新页面。
 
-8. 如果被邀请邮箱尚未注册 TiDB Cloud 账户，用户会被引导至注册页面创建账户；如果邮箱已注册 TiDB Cloud 账户，用户会被引导至登录页面，登录后账户会自动加入组织。
+8. 如果被邀请邮箱尚未注册 TiDB Cloud 账户，用户会被引导至注册页面创建账户；如果邮箱已注册 TiDB Cloud 账户，用户会被引导至登录页面，登录后账户会自动加入该组织。
 
 > **注意：**
 >
-> 邮件中的验证链接 24 小时内有效。如果你要邀请的用户未收到邮件，可点击 **Resend** 重新发送。
+> 邮件中的验证链接 24 小时后过期。如果你要邀请的用户未收到邮件，可点击 **Resend** 重新发送。
 
 ### 修改组织角色
 
@@ -218,12 +217,12 @@ TiDB Cloud 定义了不同的用户角色，用于管理 TiDB Cloud 用户在组
 
 要查看并切换项目，请执行以下步骤：
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，点击左上角的下拉框，会显示你所属的组织和项目列表。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，点击左上角的下拉框。会显示你所属的组织和项目列表。
 
     > **提示：**
     >
-    > - 如果你当前在某个集群页面，点击左上角下拉框后，还需要在下拉框中点击 ← 返回到组织和项目列表。
-    > - 如果你属于多个项目，可以在下拉框中点击目标项目名称，在项目之间切换。
+    > - 如果你当前在某个集群页面，点击左上角下拉框后，还需点击下拉框中的 ← 返回到组织和项目列表。
+    > - 如果你属于多个项目，可以在下拉框中点击目标项目名称，在不同项目间切换。
 
 2. 若要查看项目的详细信息，点击项目名称，然后在左侧导航栏点击 **Project Settings**。
 
@@ -249,7 +248,7 @@ TiDB Cloud 定义了不同的用户角色，用于管理 TiDB Cloud 用户在组
 
 ### 重命名项目
 
-如果你拥有 `Organization Owner` 角色，可以重命名你组织下的任意项目。如果你拥有 `Project Owner` 角色，可以重命名你的项目。
+如果你拥有 `Organization Owner` 角色，可以重命名你组织下的任意项目。如果你拥有 `Project Owner` 角色，可以重命名你自己的项目。
 
 要重命名项目，请执行以下步骤：
 
@@ -269,7 +268,7 @@ TiDB Cloud 定义了不同的用户角色，用于管理 TiDB Cloud 用户在组
 
 > **注意：**
 >
-> 当某个不在你组织内的用户加入你的项目时，该用户也会自动加入你的组织。
+> 当一个不在你组织内的用户加入你的项目时，该用户也会自动加入你的组织。
 
 要邀请成员加入项目，请执行以下步骤：
 
@@ -289,13 +288,13 @@ TiDB Cloud 定义了不同的用户角色，用于管理 TiDB Cloud 用户在组
 
 6. 点击 **Confirm**。新用户会被成功添加到用户列表，同时会向被邀请邮箱发送一封带有验证链接的邮件。
 
-7. 用户收到邮件后，需要点击邮件中的链接进行身份验证，页面会显示新的内容。
+7. 用户收到邮件后，需要点击邮件中的链接进行身份验证，随后会显示一个新页面。
 
-8. 如果被邀请邮箱尚未注册 TiDB Cloud 账户，用户会被引导至注册页面创建账户；如果邮箱已注册 TiDB Cloud 账户，用户会被引导至登录页面，登录后账户会自动加入项目。
+8. 如果被邀请邮箱尚未注册 TiDB Cloud 账户，用户会被引导至注册页面创建账户；如果邮箱已注册 TiDB Cloud 账户，用户会被引导至登录页面，登录后账户会自动加入该项目。
 
 > **注意：**
 >
-> 邮件中的验证链接 24 小时内有效。如果你的用户未收到邮件，可点击 **Resend** 重新发送。
+> 邮件中的验证链接 24 小时后过期。如果你的用户未收到邮件，可点击 **Resend** 重新发送。
 
 ### 修改项目角色
 
@@ -327,10 +326,10 @@ TiDB Cloud 定义了不同的用户角色，用于管理 TiDB Cloud 用户在组
 
 ## 管理用户资料
 
-在 TiDB Cloud 中，你可以轻松管理你的个人资料，包括名字、姓氏和手机号。
+在 TiDB Cloud 中，你可以轻松管理你的资料，包括名字、姓氏和手机号。
 
 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，点击左下角的 <MDSvgIcon name="icon-top-account-settings" />。
 
 2. 点击 **Account Settings**。
 
-3. 在弹出的对话框中，更新个人资料信息，然后点击 **Update**。
+3. 在弹出的对话框中，更新资料信息，然后点击 **Update**。

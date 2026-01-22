@@ -117,6 +117,7 @@ TableOption ::=
 |   'UNION' EqOpt '(' TableNameListOpt ')'
 |   'ENCRYPTION' EqOpt EncryptionOpt
 |    'TTL' EqOpt TimeColumnName '+' 'INTERVAL' Expression TimeUnit (TTLEnable EqOpt ( 'ON' | 'OFF' ))? (TTLJobInterval EqOpt stringLit)?
+|   'AFFINITY' EqOpt StringName
 |   PlacementPolicyOption
 
 OnCommitOpt ::=
@@ -165,16 +166,19 @@ NextValueForSequence ::=
 | `AUTO_INCREMENT` | 自增字段的初始值 | `AUTO_INCREMENT` = 5 |
 | [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)| 设置隐式 `_tidb_rowid` 分片的 bit 数 |`SHARD_ROW_ID_BITS` = 4|
 |`PRE_SPLIT_REGIONS`| 创建表时预先切分 `2^(PRE_SPLIT_REGIONS)` 个 Region |`PRE_SPLIT_REGIONS` = 4|
-|`AUTO_ID_CACHE`| 设置 TiDB 实例中自增 ID 的 cache 大小。默认情况下，TiDB 会根据自增 ID 分配速度自动调整该大小 |`AUTO_ID_CACHE` = 200 |
+|`AUTO_ID_CACHE`| 设置 TiDB 实例中自增 ID 的 cache 大小。默认情况下，TiDB 会根据自增 ID 的分配速度自动调整该大小 |`AUTO_ID_CACHE` = 200 |
 |`AUTO_RANDOM_BASE`| 设置 auto_random 的初始递增部分的值。该选项可视为内部接口的一部分，用户可忽略此参数 |`AUTO_RANDOM_BASE` = 0|
 | `CHARACTER SET` | 指定表的 [字符集](/character-set-and-collation.md) | `CHARACTER SET` =  'utf8mb4' |
+| `COLLATE` | 指定表的字符集排序规则 | `COLLATE` = 'utf8mb4_bin' |
 | `COMMENT` | 注释信息 | `COMMENT` = 'comment info' |
+| `AFFINITY` | 为表或分区启用亲和性调度。对于非分区表可设置为 `'table'`，对于分区表可设置为 `'partition'`。设置为 `'none'` 或留空则禁用亲和性调度。 | `AFFINITY` = 'table' |
 
 <CustomContent platform="tidb">
 
 > **注意：**
 >
-> `split-table` 配置项默认开启。开启后，每个新建表会单独创建一个 Region。详情参见 [TiDB 配置文件](/tidb-configuration-file.md)。
+> - `split-table` 配置项默认开启。开启后，每个新建表会创建一个独立的 Region。详情参见 [TiDB 配置文件](/tidb-configuration-file.md)。
+> - 在使用 `AFFINITY` 前，请注意：不支持对已启用亲和性的表进行分区方案的修改（如添加、删除、重组或交换分区），也不支持在临时表或视图上配置 `AFFINITY`。
 
 </CustomContent>
 
@@ -182,7 +186,8 @@ NextValueForSequence ::=
 
 > **注意：**
 >
-> TiDB 会为每个新建表单独创建一个 Region。
+> - TiDB 会为每个新建表创建一个独立的 Region。
+> - 在使用 `AFFINITY` 前，请注意：不支持对已启用亲和性的表进行分区方案的修改（如添加、删除、重组或交换分区），也不支持在临时表或视图上配置 `AFFINITY`。
 
 </CustomContent>
 
@@ -233,7 +238,7 @@ mysql> SELECT * FROM t1;
 1 row in set (0.00 sec)
 ```
 
-如果表存在则删除，并在不存在时有条件地创建表：
+如果表存在则删除表，并在表不存在时有条件地创建表：
 
 ```sql
 DROP TABLE IF EXISTS t1;
@@ -266,13 +271,13 @@ mysql> DESC t1;
 
 ## MySQL 兼容性
 
-* 除空间类型外，所有数据类型均受支持。
-* TiDB 为了兼容 MySQL，语法上接受如 `HASH`、`BTREE` 和 `RTREE` 等索引类型，但会忽略这些类型。
+* 支持除空间类型外的所有数据类型。
+* TiDB 为了与 MySQL 兼容，语法上接受如 `HASH`、`BTREE` 和 `RTREE` 等索引类型，但会被忽略。
 * TiDB Self-Managed 和 TiDB Cloud Dedicated 支持解析 `FULLTEXT` 语法，但不支持使用 `FULLTEXT` 索引。
 
     >**注意：**
     >
-    > 目前，只有部分 AWS 区域的 TiDB Cloud Starter 和 TiDB Cloud Essential 集群支持 [`FULLTEXT` 语法和索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)。
+    > 目前，仅部分 AWS 区域的 TiDB Cloud Starter 和 TiDB Cloud Essential 集群支持 [`FULLTEXT` 语法和索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)。
 
 * 在分区表中，将 `PRIMARY KEY` 或 `UNIQUE INDEX` 设置为 [全局索引](/global-indexes.md)（通过 `GLOBAL` 索引选项）是 TiDB 的扩展功能，并不兼容 MySQL。
 
@@ -290,7 +295,7 @@ mysql> DESC t1;
 
 * `index_col_name` 中的 `[ASC | DESC]` 目前会被解析但被忽略（与 MySQL 5.7 行为兼容）。
 * `COMMENT` 属性不支持 `WITH PARSER` 选项。
-* TiDB 默认支持单表 1017 列，最多支持 4096 列。InnoDB 中对应的数量限制为 1017 列，MySQL 的硬限制为 4096 列。详情参见 [TiDB 限制](/tidb-limitations.md)。
+* TiDB 默认支持单表 1017 列，最多支持 4096 列。InnoDB 中的对应数量限制为 1017 列，MySQL 的硬限制为 4096 列。详情参见 [TiDB 限制](/tidb-limitations.md)。
 * TiDB 支持 `HASH`、`RANGE`、`LIST` 和 `KEY` [分区类型](/partitioned-table.md#partitioning-types)。对于不支持的分区类型，TiDB 会返回 `Warning: Unsupported partition type %s, treat as normal table`，其中 `%s` 为具体不支持的分区类型。
 
 ## 另请参阅
