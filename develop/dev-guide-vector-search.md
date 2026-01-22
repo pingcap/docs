@@ -9,7 +9,7 @@ summary: Introduce the vector search feature in TiDB for developers, including c
 
 ## Get started
 
-To get started with TiDB vector search, you can refer to the following tutorials:
+To get started with TiDB vector search, refer to the following tutorials:
 
 - [Get Started with SQL](/ai/vector-search-get-started-using-sql.md)
 - [Get Started with Python](/ai/vector-search-get-started-using-python.md)
