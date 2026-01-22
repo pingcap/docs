@@ -71,6 +71,8 @@ TiDB X is a cloud-native evolution of the classic TiDB distributed design. It in
 
 TiDB X evolves these foundations by replacing local "shared-nothing" storage with a cloud-native "shared-storage" object storage backbone. This shift enables a "separation of compute and compute" model, which offloads resource-intensive tasks to elastic pools to ensure instant scalability and predictable performance.
 
+The TiDB X architecture is as follows:
+
 ![TiDB X Architecture](/media/tidb-x/tidb-x-architecture.png)
 
 ### Object storage support
