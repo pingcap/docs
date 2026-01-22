@@ -1,13 +1,15 @@
 ---
 title: TiDB X Architecture
-summary: Learn how TiDB X's shared-storage architecture delivers cloud-native scalability and cost optimization
+summary: Learn how the shared-storage, cloud-native TiDB X architecture delivers elastic scalability, predictable performance, and optimized total cost of ownership.
 ---
 
 # TiDB X Architecture
 
-TiDB X represents a fundamental architectural evolution from classic TiDB's Shared-Nothing design to a cloud-native Shared-Storage architecture. By leveraging object storage as the single source of truth, TiDB X introduces "Separation of Compute and Compute" design that isolates online transactional workloads from heavy background tasks. This architecture enables elastic scalability, predictable performance, and optimized Total Cost of Ownership (TCO) for AI-era workloads.
+TiDB X is a new distributed SQL architecture that makes cloud-native object storage the backbone of TiDB. This architecture enables elastic scalability, predictable performance, and optimized total cost of ownership (TCO) for AI-era workloads.
 
-This document details the challenges of the classic TiDB architecture, the architecture of TiDB X, and its key innovations.
+TiDB X represents a fundamental evolution from [classic TiDB](/tidb-architecture.md)'s shared-nothing architecture to a cloud-native shared-storage architecture. By leveraging object storage as the shared persistent storage layer, TiDB X introduces a separation of compute workloads that isolates online transactional workloads from resource-intensive background tasks.
+
+This document introduces the TiDB X architecture, explains the motivation behind TiDB X, and describes the key innovations compared with the classic TiDB architecture.
 
 ## Limitations of classic TiDB
 
@@ -15,15 +17,15 @@ This section analyzes the architecture of classic TiDB and its limitations that 
 
 ### Strengths of classic TiDB
 
-The "Shared-Nothing" architecture of classic TiDB effectively overcame the limitations of traditional monolithic databases. By decoupling compute from storage and utilizing the Raft consensus algorithm, it delivered a level of resilience and scale that defined the modern NewSQL era.
+The shared-nothing architecture of classic TiDB addresses the limitations of traditional monolithic databases. By decoupling compute from storage and utilizing the Raft consensus algorithm, it provides the resilience and scalability required for distributed SQL workloads.
 
-Its success was built on several foundational strengths:
+The classic TiDB architecture is built on several foundational capabilities:
 
-- Massive Horizontal Scalability: Classic TiDB allowes businesses to scale both read and write performance linearly with their workload, reaching millions of QPS while supporting massive clusters with over 1 PiB of data and tens of millions of tables.
-- True HTAP Capabilities: It unified transactional and analytical processing. By pushing down heavy aggregation and join operations to TiFlash (the columnar engine), it provided predictable, real-time analytics on fresh transactional data without complex ETL pipelines.
-- Non-Blocking Operations: Its implementation of Fully Online DDL meant that schema changes were non-blocking for reads and writes, allowing businesses to evolve their data models with minimal impact on latency or uptime.
-- Always-Online Availability: The architecture supported seamless cluster upgrades and scaling operations (up/down), ensuring critical services remained online during maintenance.
-- Freedom from Lock-in: As an open-source solution supporting AWS, GCP, and Azure, it offered true cloud neutrality, preventing vendor lock-in.
+- Horizontal scalability: It supports linear scaling for both read and write performance. Clusters can scale to handle millions of queries per second (QPS) and manage over 1 PiB of data across tens of millions of tables.
+- Hybrid Transactional and Analytical Processing (HTAP): It unifies transactional and analytical workloads. By pushing down heavy aggregation and join operations to TiFlash (the columnar storage engine), it provides predictable, real-time analytics on fresh transactional data without complex ETL pipelines.
+- Non-blocking schema changes: It utilizes a fully online DDL implementation. Schema changes do not block reads or writes, allowing data models to evolve with minimal impact on application latency or availability.
+- High availability: It supports seamless cluster upgrades and scaling operations. This ensures that critical services remain accessible during maintenance or resource adjustment.
+- Multi-cloud support: It operates as an open-source solution with support for Amazon Web Services (AWS), Google Cloud, and Microsoft Azure. This provides cloud neutrality without vendor lock-in.
 
 ### Challenges of classic TiDB
 
