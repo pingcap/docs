@@ -95,7 +95,7 @@ For more information, see [Use Dumpling to Export Data](/dumpling-overview.md).
 
 ### Data Definition Language (DDL)
 
-Data Definition Language (DDL) is a part of the SQL standard that deals with creating, modifying, and dropping tables and other objects. For more information, see [DDL Introduction](/ddl-introduction.md).
+Data Definition Language (DDL) is a part of the SQL standard that deals with creating, modifying, and dropping tables and other objects. For more information, see [DDL Introduction](/best-practices/ddl-introduction.md).
 
 ### Data Migration (DM)
 
