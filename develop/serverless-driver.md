@@ -1,7 +1,7 @@
 ---
 title: TiDB Cloud Serverless Driver (Beta)
 summary: Learn how to connect to {{{ .starter }}} or {{{ .essential }}} from serverless and edge environments.
-aliases: ['/tidbcloud/serverless-driver-config','/tidbcloud/serverless-driver/']
+aliases: ['/tidbcloud/serverless-driver-config/','/tidbcloud/serverless-driver/']
 ---
 
 # TiDB Cloud Serverless Driver (Beta)
