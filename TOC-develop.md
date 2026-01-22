@@ -22,6 +22,7 @@
     - [Hibernate](/develop/dev-guide-sample-application-java-hibernate.md)
     - [Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md)
     - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
+    - [Best Practices for Developing Java Applications](/develop/java-app-best-practices.md)
   - Go
     - [Go-MySQL-Driver](/develop/dev-guide-sample-application-golang-sql-driver.md)
     - [GORM](/develop/dev-guide-sample-application-golang-gorm.md)

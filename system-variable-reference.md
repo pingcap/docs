@@ -440,7 +440,7 @@ Referenced in:
 
 Referenced in:
 
-- [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
+- [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md)
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md#interactive_timeout)
 - [TiDB Cluster Management FAQs](/faq/manage-cluster-faq.md)
@@ -527,7 +527,7 @@ Referenced in:
 
 Referenced in:
 
-- [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
+- [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md)
 - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
 - [Optimizer Hints](/optimizer-hints.md)
 - [SQL Plan Management (SPM)](/sql-plan-management.md)
@@ -1211,7 +1211,7 @@ Referenced in:
 
 - [ADMIN ALTER DDL JOBS](/sql-statements/sql-statement-admin-alter-ddl.md)
 - [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
-- [Best Practices for DDL Execution in TiDB](/ddl-introduction.md)
+- [Best Practices for DDL Execution in TiDB](/best-practices/ddl-introduction.md)
 - [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/online-workloads-and-add-index-operations.md)
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
@@ -1257,7 +1257,7 @@ Referenced in:
 
 - [ADMIN ALTER DDL JOBS](/sql-statements/sql-statement-admin-alter-ddl.md)
 - [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
-- [Best Practices for DDL Execution in TiDB](/ddl-introduction.md)
+- [Best Practices for DDL Execution in TiDB](/best-practices/ddl-introduction.md)
 - [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 - [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/online-workloads-and-add-index-operations.md)
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
@@ -1682,7 +1682,7 @@ Referenced in:
 
 Referenced in:
 
-- [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
+- [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md)
 - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
 - [System Variables](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)
 - [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
@@ -2046,7 +2046,7 @@ Referenced in:
 
 Referenced in:
 
-- [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
+- [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md)
 - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
 - [Enable Encryption for Disk Spill](/enable-disk-spill-encrypt.md)
 - [Explain Statements That Use Joins](/explain-joins.md)
@@ -4502,7 +4502,7 @@ Referenced in:
 
 Referenced in:
 
-- [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
+- [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md)
 - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md#wait_timeout)
