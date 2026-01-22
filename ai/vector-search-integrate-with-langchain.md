@@ -6,7 +6,7 @@ aliases: ['/tidb/stable/vector-search-integrate-with-langchain/','/tidb/dev/vect
 
 # Integrate Vector Search with LangChain
 
-This tutorial demonstrates how to integrate the [vector search](/develop/vector-search/vector-search-overview.md) feature of TiDB with [LangChain](https://python.langchain.com/).
+This tutorial demonstrates how to integrate the [vector search](/ai/vector-search-overview.md) feature of TiDB with [LangChain](https://python.langchain.com/).
 
 <CustomContent platform="tidb">
 
@@ -659,5 +659,5 @@ The expected output is as follows:
 
 ## See also
 
-- [Vector Data Types](/develop/vector-search/vector-search-data-types.md)
-- [Vector Search Index](/develop/vector-search/vector-search-index.md)
+- [Vector Data Types](/ai/vector-search-data-types.md)
+- [Vector Search Index](/ai/vector-search-index.md)

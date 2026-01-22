@@ -11,9 +11,9 @@ TiProxy is an optional component. You can also use a third-party proxy component
 
 You can use TiProxy APIs to perform the following operations on the TiProxy cluster:
 
-- [Get the configuration of TiProxy](/tiproxy/tiproxy-api.md#get-tiproxy-configuration)
-- [Set the configuration of TiProxy](/tiproxy/tiproxy-api.md#set-tiproxy-configuration)
-- [Get the health status of TiProxy](/tiproxy/tiproxy-api.md#get-tiproxy-health-status)
-- [Get the monitoring data of TiProxy](/tiproxy/tiproxy-api.md#get-tiproxy-monitoring-data)
+- [Get TiProxy configuration](/tiproxy/tiproxy-api.md#get-tiproxy-configuration)
+- [Set TiProxy configuration](/tiproxy/tiproxy-api.md#set-tiproxy-configuration)
+- [Get TiProxy health status](/tiproxy/tiproxy-api.md#get-tiproxy-health-status)
+- [Get TiProxy monitoring data](/tiproxy/tiproxy-api.md#get-tiproxy-monitoring-data)
 
 For more information about each API, including request parameters, response examples, and usage instructions, see [TiProxy API](/tiproxy/tiproxy-api.md).

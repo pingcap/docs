@@ -1,11 +1,13 @@
 ---
 title: Data Migration API Overview
-summary: Learn the API of Data Migration services.
+summary: Learn the API of Data Migration (DM) services.
 ---
 
 # Data Migration API Overview
 
-[TiDB Data Migration](/dm/dm-overview.md) (DM) is an integrated data migration task management platform that supports full data migration and incremental data replication from MySQL-compatible databases (such as MySQL, MariaDB, and Aurora MySQL) into TiDB. DM provides OpenAPI for querying and operating the DM cluster, which is similar to the [dmctl tool](/dm/dmctl-introduction.md).
+[TiDB Data Migration](/dm/dm-overview.md) (DM) is an integrated data migration task management platform that supports full data migration and incremental data replication from MySQL-compatible databases (such as MySQL, MariaDB, and Aurora MySQL) into TiDB.
+
+DM provides an OpenAPI for querying and operating the DM cluster, similar to the [dmctl tool](/dm/dmctl-introduction.md).
 
 You can use DM APIs to perform the following maintenance operations on the DM cluster:
 

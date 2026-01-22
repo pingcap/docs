@@ -6,7 +6,7 @@ aliases: ['/tidb/stable/vector-search-get-started-using-sql/','/tidb/dev/vector-
 
 # Get Started with Vector Search via SQL
 
-TiDB extends MySQL syntax to support [Vector Search](/develop/vector-search/vector-search-overview.md) and introduce new [Vector data types](/develop/vector-search/vector-search-data-types.md) and several [vector functions](/develop/vector-search/vector-search-functions-and-operators.md).
+TiDB extends MySQL syntax to support [Vector Search](/ai/vector-search-overview.md) and introduce new [Vector data types](/ai/vector-search-data-types.md) and several [vector functions](/ai/vector-search-functions-and-operators.md).
 
 This tutorial demonstrates how to get started with TiDB Vector Search just using SQL statements. You will learn how to use the [MySQL command-line client](https://dev.mysql.com/doc/refman/8.4/en/mysql.html) to complete the following operations:
 
@@ -99,7 +99,7 @@ mysql --comments --host 127.0.0.1 --port 4000 -u root
 
 ### Step 2. Create a vector table
 
-When creating a table, you can define a column as a [vector](/develop/vector-search/vector-search-overview.md#vector-embedding) column by specifying the `VECTOR` data type.
+When creating a table, you can define a column as a [vector](/ai/vector-search-overview.md#vector-embedding) column by specifying the `VECTOR` data type.
 
 For example, to create a table `embedded_documents` with a three-dimensional `VECTOR` column, execute the following SQL statements using your MySQL CLI:
 
@@ -122,7 +122,7 @@ Query OK, 0 rows affected (0.27 sec)
 
 ### Step 3. Insert vector embeddings to the table
 
-Insert three documents with their [vector embeddings](/develop/vector-search/vector-search-overview.md#vector-embedding) into the `embedded_documents` table:
+Insert three documents with their [vector embeddings](/ai/vector-search-overview.md#vector-embedding) into the `embedded_documents` table:
 
 ```sql
 INSERT INTO embedded_documents
@@ -143,7 +143,7 @@ Records: 3  Duplicates: 0  Warnings: 0
 >
 > This example simplifies the dimensions of the vector embeddings and uses only 3-dimensional vectors for demonstration purposes.
 >
-> In real-world applications, [embedding models](/develop/vector-search/vector-search-overview.md#embedding-model) often produce vector embeddings with hundreds or thousands of dimensions.
+> In real-world applications, [embedding models](/ai/vector-search-overview.md#embedding-model) often produce vector embeddings with hundreds or thousands of dimensions.
 
 ### Step 4. Query the vector table
 
@@ -200,5 +200,5 @@ Therefore, according to the output, the swimming animal is most likely a fish, o
 
 ## See also
 
-- [Vector Data Types](/develop/vector-search/vector-search-data-types.md)
-- [Vector Search Index](/develop/vector-search/vector-search-index.md)
+- [Vector Data Types](/ai/vector-search-data-types.md)
+- [Vector Search Index](/ai/vector-search-index.md)

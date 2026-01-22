@@ -11,7 +11,7 @@
   - [MySQL Compatibility](/mysql-compatibility.md)
 - Get Started
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
-  - [Try Out TiDB + AI](/develop/vector-search/vector-search-get-started-using-python.md)
+  - [Try Out TiDB + AI](/ai/vector-search-get-started-using-python.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
 - Key Concepts
@@ -166,33 +166,8 @@
     - [Precheck Errors, Migration Errors, and Alerts for Data Migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md)
     - [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Explore Data
-  - [Chat2Query in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-  - [SQL Proxy Account](/tidb-cloud/sql-proxy-account.md)
-- Vector Search ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-  - [Overview](/develop/vector-search/vector-search-overview.md)
-  - Get Started
-    - [Get Started with SQL](/develop/vector-search/vector-search-get-started-using-sql.md)
-    - [Get Started with Python](/develop/vector-search/vector-search-get-started-using-python.md)
-  - Integrations
-    - [Overview](/develop/vector-search/vector-search-integration-overview.md)
-    - AI Frameworks
-      - [LlamaIndex](/develop/vector-search/vector-search-integrate-with-llamaindex.md)
-      - [LangChain](/develop/vector-search/vector-search-integrate-with-langchain.md)
-    - AI Services
-      - [Amazon Bedrock](/develop/vector-search/vector-search-integrate-with-amazon-bedrock.md)
-    - Embedding Models/Services
-      - [Jina AI](/develop/vector-search/vector-search-integrate-with-jinaai-embedding.md)
-    - ORM Libraries
-      - [SQLAlchemy](/develop/vector-search/vector-search-integrate-with-sqlalchemy.md)
-      - [peewee](/develop/vector-search/vector-search-integrate-with-peewee.md)
-      - [Django ORM](/develop/vector-search/vector-search-integrate-with-django-orm.md)
-  - Reference
-    - [Vector Data Types](/develop/vector-search/vector-search-data-types.md)
-    - [Vector Functions and Operators](/develop/vector-search/vector-search-functions-and-operators.md)
-    - [Vector Index](/develop/vector-search/vector-search-index.md)
-  - [Improve Performance](/develop/vector-search/vector-search-improve-performance.md)
-  - [Limitations](/develop/vector-search/vector-search-limitations.md)
-  - [Changelogs](/develop/vector-search/vector-search-changelogs.md)
+  - [Chat2Query in SQL Editor](/ai/explore-data-with-chat2query.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [SQL Proxy Account](/ai/sql-proxy-account.md)
 - Data Service ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/tidb-cloud/data-service-overview.md)
   - [Get Started](/tidb-cloud/data-service-get-started.md)
@@ -594,7 +569,6 @@
       - [Overview](/sys-schema/sys-schema.md)
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [Metadata Lock](/metadata-lock.md)
-  - [Use UUIDs](/best-practices/uuid.md)
   - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
   - [Schema Cache](/schema-cache.md)
 - General Reference
@@ -642,7 +616,6 @@
   - [Server Status Variables](/status-variables.md)
   - [Table Filter](/table-filter.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
-  - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
   - [`ANALYZE` Embedded in DDL Statements](/ddl_embedded_analyze.md)
   - [Batch Processing](/batch-processing.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)

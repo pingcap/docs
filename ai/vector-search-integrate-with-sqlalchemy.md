@@ -6,7 +6,7 @@ aliases: ['/tidb/stable/vector-search-integrate-with-sqlalchemy/','/tidb/dev/vec
 
 # Integrate TiDB Vector Search with SQLAlchemy
 
-This tutorial walks you through how to use [SQLAlchemy](https://www.sqlalchemy.org/) to interact with [TiDB Vector Search](/develop/vector-search/vector-search-overview.md), store embeddings, and perform vector search queries.
+This tutorial walks you through how to use [SQLAlchemy](https://www.sqlalchemy.org/) to interact with [TiDB Vector Search](/ai/vector-search-overview.md), store embeddings, and perform vector search queries.
 
 <CustomContent platform="tidb">
 
@@ -246,5 +246,5 @@ with Session(engine) as session:
 
 ## See also
 
-- [Vector Data Types](/develop/vector-search/vector-search-data-types.md)
-- [Vector Search Index](/develop/vector-search/vector-search-index.md)
+- [Vector Data Types](/ai/vector-search-data-types.md)
+- [Vector Search Index](/ai/vector-search-index.md)

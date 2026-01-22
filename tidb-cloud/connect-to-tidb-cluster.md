@@ -35,7 +35,7 @@ After your TiDB Cloud Dedicated cluster is created on TiDB Cloud, you can connec
 
         If you want lower latency and more security, set up VPC peering and connect via a private endpoint using a VM instance on the corresponding cloud provider in your cloud account. For more information, see [Connect to TiDB Cloud Dedicated via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md).
 
-- [Built-in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md)
+- [Built-in SQL Editor](/ai/explore-data-with-chat2query.md)
 
     > **Note:**
     >

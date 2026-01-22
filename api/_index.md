@@ -6,9 +6,9 @@ aliases: ['/tidbcloud/api-overview/']
 
 # TiDB API Overview
 
-TiDB provides various APIs for querying and operating clusters, managing data replication, monitoring system status, and more. This document provides an overview of the available APIs for both TiDB Cloud and TiDB Self-Managed.
+TiDB provides various APIs for querying and operating clusters, managing data replication, monitoring system status, and more. This document provides an overview of the available APIs for both [TiDB Cloud](https://docs.pingcap.com/tidbcloud/) and [TiDB Self-Managed](https://docs.pingcap.com/tidb/stable/).
 
-## TiDB Cloud API (Beta)
+## TiDB Cloud API (beta)
 
 [TiDB Cloud API](/api/tidb-cloud-api-overview.md) is a REST interface that provides you with programmatic access to manage administrative objects within TiDB Cloud, such as projects, clusters, backups, restores, imports, billings, and Data Service resources.
 
@@ -27,4 +27,4 @@ TiDB Self-Managed provides various APIs for TiDB tools to help you manage cluste
 | [Data Migration API](/dm/dm-open-api.md) | Manage DM-master and DM-worker nodes, data sources, and data replication tasks. |
 | [Monitoring API](/tidb-monitoring-api.md) | Get TiDB server running status, table storage information, and PD cluster details. |
 | [TiCDC API](/ticdc/ticdc-open-api-v2.md) | Query TiCDC node status and manage replication tasks, including creating, pausing, resuming, and updating operations. |
-| [TiDB Operator API](https://github.com/pingcap/tidb-operator/blob/v1.6.4/docs/api-references/docs.md) | Manage TiDB clusters on Kubernetes, including deployment, upgrades, scaling, backup, and fail-over. |
+| [TiDB Operator API](<https://github.com/pingcap/tidb-operator/blob/{{{ .tidb-operator-version }}}/docs/api-references/docs.md>) | Manage TiDB clusters on Kubernetes, including deployment, upgrades, scaling, backup, and failover. |

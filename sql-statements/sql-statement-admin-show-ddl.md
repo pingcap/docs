@@ -247,7 +247,7 @@ This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
-* [DDL introduction](/ddl-introduction.md)
+* [DDL introduction](/best-practices/ddl-introduction.md)
 * [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
 * [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)
 * [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)
