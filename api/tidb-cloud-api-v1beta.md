@@ -1,6 +1,6 @@
 ---
-title: TiDB Cloud API v1beta
-summary: Learn about what TiDB Cloud API is, its features, and how to use the API to manage your TiDB Cloud clusters.
+title: TiDB Cloud API v1beta Overview
+summary: Learn about the v1beta API of TiDB Cloud.
 ---
 
 # TiDB Cloud API v1beta Overview
