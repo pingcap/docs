@@ -17,7 +17,7 @@ This tutorial demonstrates how to integrate the [vector search](/ai/vector-searc
 
 > **Note**
 >
-> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter), [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-essential), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 > **Tip**
 >
@@ -39,7 +39,7 @@ To complete this tutorial, you need:
 
 - A {{{ .starter }}} cluster
 
-    Follow [creating a {{{ .starter }}} cluster](https://docs.pingcap.com/tidbcloud/create-tidb-cluster-serverless) to create your own TiDB Cloud cluster if you don't have one.
+    Follow [creating a {{{ .starter }}} cluster](/tidb-cloud/select-cluster-tier.md#starter) to create your own TiDB Cloud cluster if you don't have one.
 
 - An AWS account with the [required permissions for Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html) and access to the following models:
 
