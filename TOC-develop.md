@@ -76,7 +76,7 @@
     - [Follower Read](/develop/dev-guide-use-follower-read.md)
     - [Stale Read](/develop/dev-guide-use-stale-read.md)
   - [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
-- [Vector Search](/develop/dev-guide-vector-search.md)
+- [Vector Search](/develop/dev-guide-vector-search.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
 - Transactions
   - [Overview](/develop/dev-guide-transaction-overview.md)
   - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
