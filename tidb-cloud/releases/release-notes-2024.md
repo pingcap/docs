@@ -198,7 +198,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - [Data Service (beta)](https://tidbcloud.com/project/data-service) supports automatically generating vector search endpoints.
 
-    If your table contains [vector data types](/develop/vector-search/vector-search-data-types.md), you can automatically generate a vector search endpoint that calculates vector distances based on your selected distance function.
+    If your table contains [vector data types](/ai/vector-search-data-types.md), you can automatically generate a vector search endpoint that calculates vector distances based on your selected distance function.
 
     This feature enables seamless integration with AI platforms such as [Dify](https://docs.dify.ai/guides/tools) and [GPTs](https://openai.com/blog/introducing-gpts), enhancing your applications with advanced natural language processing and AI capabilities for more complex tasks and intelligent solutions.
 
@@ -244,12 +244,12 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     The vector search (beta) feature provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video. This feature enables developers to easily build scalable applications with generative artificial intelligence (AI) capabilities using familiar MySQL skills. Key features include:
 
-    - [Vector data types](/develop/vector-search/vector-search-data-types.md), [vector index](/develop/vector-search/vector-search-index.md), and [vector functions and operators](/develop/vector-search/vector-search-functions-and-operators.md).
-    - Ecosystem integrations with [LangChain](/develop/vector-search/vector-search-integrate-with-langchain.md), [LlamaIndex](/develop/vector-search/vector-search-integrate-with-llamaindex.md), and [JinaAI](/develop/vector-search/vector-search-integrate-with-jinaai-embedding.md).
-    - Programming language support for Python: [SQLAlchemy](/develop/vector-search/vector-search-integrate-with-sqlalchemy.md), [Peewee](/develop/vector-search/vector-search-integrate-with-peewee.md), and [Django ORM](/develop/vector-search/vector-search-integrate-with-django-orm.md).
-    - Sample applications and tutorials: perform semantic searches for documents using [Python](/develop/vector-search/vector-search-get-started-using-python.md) or [SQL](/develop/vector-search/vector-search-get-started-using-sql.md).
+    - [Vector data types](/ai/vector-search-data-types.md), [vector index](/ai/vector-search-index.md), and [vector functions and operators](/ai/vector-search-functions-and-operators.md).
+    - Ecosystem integrations with [LangChain](/ai/vector-search-integrate-with-langchain.md), [LlamaIndex](/ai/vector-search-integrate-with-llamaindex.md), and [JinaAI](/ai/vector-search-integrate-with-jinaai-embedding.md).
+    - Programming language support for Python: [SQLAlchemy](/ai/vector-search-integrate-with-sqlalchemy.md), [Peewee](/ai/vector-search-integrate-with-peewee.md), and [Django ORM](/ai/vector-search-integrate-with-django-orm.md).
+    - Sample applications and tutorials: perform semantic searches for documents using [Python](/ai/vector-search-get-started-using-python.md) or [SQL](/ai/vector-search-get-started-using-sql.md).
 
-  For more information, see [Vector search (beta) overview](/develop/vector-search/vector-search-overview.md).
+  For more information, see [Vector search (beta) overview](/ai/vector-search-overview.md).
 
 - [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) now offers weekly email reports for organization owners.
 
@@ -270,7 +270,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - **SQL Editor**: the default interface for manually writing and executing SQL queries in the TiDB Cloud console.
     - **Chat2Query**: the AI-assisted text-to-query feature, which enables you to interact with your databases using natural language to generate, rewrite, and optimize SQL queries.
 
-  For more information, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
+  For more information, see [Explore your data with AI-assisted SQL Editor](/ai/explore-data-with-chat2query.md).
 
 ## June 18, 2024
 

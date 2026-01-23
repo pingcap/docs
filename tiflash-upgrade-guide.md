@@ -136,7 +136,7 @@ Starting from v7.4, to reduce the read and write amplification generated during 
 
 ## From v7.x to v8.4 or a later version
 
-Starting from v8.4, the underlying storage format of TiFlash is updated to support [vector search](/develop/vector-search/vector-search-overview.md). Therefore, after TiFlash is upgraded to v8.4 or a later version, in-place downgrading to the original version is not supported.
+Starting from v8.4, the underlying storage format of TiFlash is updated to support [vector search](/ai/vector-search-overview.md). Therefore, after TiFlash is upgraded to v8.4 or a later version, in-place downgrading to the original version is not supported.
 
 **Workaround for downgrading TiFlash in testing or other special scenarios**
 

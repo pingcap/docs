@@ -10,7 +10,7 @@
   - [MySQL Compatibility](/mysql-compatibility.md)
 - Get Started with TiDB Cloud
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
-  - [Try Out TiDB + AI](/develop/vector-search/vector-search-get-started-using-python.md)
+  - [Try Out TiDB + AI](/ai/vector-search-get-started-using-python.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
 - Key Concepts
@@ -536,7 +536,6 @@
       - [Overview](/sys-schema/sys-schema.md)
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [Metadata Lock](/metadata-lock.md)
-  - [Use UUIDs](/best-practices/uuid.md)
   - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
 - CLI Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/tidb-cloud/cli-reference.md)
@@ -618,7 +617,6 @@
   - [Server Status Variables](/status-variables.md)
   - [Table Filter](/table-filter.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
-  - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Notifications](/tidb-cloud/notifications.md)
 - Support Plan
