@@ -9,7 +9,7 @@ TiDB X is a new distributed SQL architecture that makes cloud-native object stor
 
 TiDB X represents a fundamental evolution from [classic TiDB](/tidb-architecture.md)'s shared-nothing architecture to a cloud-native shared-storage architecture. By leveraging object storage as the shared persistent storage layer, TiDB X introduces a separation of compute workloads that isolates online transactional workloads from resource-intensive background tasks.
 
-This document introduces the TiDB X architecture, explains the motivation behind TiDB X, and describes the key innovations compared with the classic TiDB architecture.
+This document introduces the TiDB X architecture, explains the motivation behind TiDB X, and describes the key innovations compared to the classic TiDB architecture.
 
 ## Limitations of classic TiDB
 
@@ -21,11 +21,11 @@ The shared-nothing architecture of classic TiDB addresses the limitations of tra
 
 The classic TiDB architecture is built on several foundational capabilities:
 
-- Horizontal scalability: It supports linear scaling for both read and write performance. Clusters can scale to handle millions of queries per second (QPS) and manage over 1 PiB of data across tens of millions of tables.
-- Hybrid Transactional and Analytical Processing (HTAP): It unifies transactional and analytical workloads. By pushing down heavy aggregation and join operations to TiFlash (the columnar storage engine), it provides predictable, real-time analytics on fresh transactional data without complex ETL pipelines.
-- Non-blocking schema changes: It utilizes a fully online DDL implementation. Schema changes do not block reads or writes, allowing data models to evolve with minimal impact on application latency or availability.
-- High availability: It supports seamless cluster upgrades and scaling operations. This ensures that critical services remain accessible during maintenance or resource adjustment.
-- Multi-cloud support: It operates as an open-source solution with support for Amazon Web Services (AWS), Google Cloud, and Microsoft Azure. This provides cloud neutrality without vendor lock-in.
+- **Horizontal scalability**: It supports linear scaling for both read and write performance. Clusters can scale to handle millions of queries per second (QPS) and manage over 1 PiB of data across tens of millions of tables.
+- **Hybrid Transactional and Analytical Processing (HTAP)**: It unifies transactional and analytical workloads. By pushing down heavy aggregation and join operations to TiFlash (the columnar storage engine), it provides predictable, real-time analytics on fresh transactional data without complex ETL pipelines.
+- **Non-blocking schema changes**: It utilizes a fully online DDL implementation. Schema changes do not block reads or writes, allowing data models to evolve with minimal impact on application latency or availability.
+- **High availability**: It supports seamless cluster upgrades and scaling operations. This ensures that critical services remain accessible during maintenance or resource adjustment.
+- **Multi-cloud support**: It operates as an open-source solution with support for Amazon Web Services (AWS), Google Cloud, and Microsoft Azure. This provides cloud neutrality without vendor lock-in.
 
 ### Challenges of classic TiDB
 
