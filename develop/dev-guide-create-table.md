@@ -229,7 +229,7 @@ CREATE TABLE `bookshop`.`users` (
 
 > **Note:**
 >
-> The steps provided in this section is **_ONLY_** for quick start and testing purposes. For more information about HTAP usage in TiDB, see [explore HTAP](/explore-htap.md).
+> The steps provided in this section are **_ONLY_** for quick start and testing purposes. For more information about HTAP usage in TiDB, see [explore HTAP](/explore-htap.md).
 
 Suppose that you want to perform OLAP analysis on the `ratings` table using the `bookshop` application, for example, to query **whether the rating of a book has a significant correlation with the time of the rating**, which is to analyze whether the user's rating of the book is objective or not. Then you need to query the `score` and `rated_at` fields of the entire `ratings` table. This operation is resource-intensive for an OLTP-only database. Or you can use some ETL or other data synchronization tools to export the data from the OLTP database to a dedicated OLAP database for analysis.
 

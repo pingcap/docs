@@ -14,11 +14,11 @@ To make your reading on the application developer guide more smoothly, we presen
 Do one of the following:
 
 - For TiDB Cloud, you can skip [Method 1: Via `tiup demo`](#method-1-via-tiup-demo) and import Bookshop table structures [via the import feature of TiDB Cloud](#method-2-via-tidb-cloud-import).
-- For TiDB Self-Managed, you can import Bookshop table structures and data either [via TiUP](#method-1-via-tiup-demo) or [via the import feature of TiDB Cloud](#method-2-via-tidb-cloud-import).
+- For TiDB Self-Managed, you can import Bookshop table structures and data either [via TiUP](#method-1-via-tiup-demo) and skip [Method 2: Via TiDB Cloud Import](#method-2-via-tidb-cloud-import).
 
 ### Method 1: Via `tiup demo`
 
-If your TiDB cluster is deployed using [TiUP](https://docs.pingcap.com/tidb/stable/tiup-reference) or you can connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application by running the following command:
+If your TiDB cluster is deployed using [TiUP](/tiup/tiup-reference.md#tiup-reference) or you can connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application by running the following command:
 
 ```shell
 tiup demo bookshop prepare

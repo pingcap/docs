@@ -140,8 +140,8 @@ The execution plan does not return the same operator every time. This is because
 
 For more information about SQL performance tuning, see the following documents:
 
-- [SQL Tuning Overview for TiDB Cloud](/tidb-cloud/tidb-cloud-sql-tuning-overview.md).
-- [SQL Tuning Overview for TiDB Self-Managed](/sql-tuning-overview.md).
+- [SQL Tuning Overview for TiDB Cloud](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
+- [SQL Tuning Overview for TiDB Self-Managed](/sql-tuning-overview.md)
 
 > **Note:**
 >
