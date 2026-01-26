@@ -12,6 +12,7 @@ env:
 
 jobs:
   dispatch-translation-zh:
+    if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
     continue-on-error: true
 
@@ -23,7 +24,7 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: token ${{ github.token }}" \
           https://api.github.com/repos/${{ github.repository }}/actions/workflows/translation-zh.yaml/dispatches \
-          -d '{"ref":"master","inputs":{"branch":"master"}}'
+          -d '{"ref":"master"}'
 
   # build a matrix of branches to translate, including LTS and Cloud
   build-matrix:
@@ -35,6 +36,7 @@ jobs:
         run: echo "matrix={\"include\":[{\"name\":\"LTS\",\"value\":\"${{ env.LTS_BRANCH }}\"},{\"name\":\"Cloud\",\"value\":\"${{ env.CLOUD_BRANCH }}\"}]}" >> $GITHUB_OUTPUT
 
   translate-ja:
+    if: github.repository == 'pingcap/docs'
     needs: build-matrix
     runs-on: ubuntu-latest
     strategy:
@@ -52,48 +54,42 @@ jobs:
       - uses: actions/checkout@v4
         name: Download translator repo
         with:
-          repository: "shczhen/markdown-translator"
-          path: "markdown-translator"
+          repository: "pingcap/docs-toolkit"
+          ref: "main"
+          path: "docs-toolkit"
       - uses: actions/checkout@v4
         name: Download docs repo and specified branch
         with:
           ref: "${{ matrix.value }}"
           path: "docs"
       - uses: actions/setup-node@v4
-        name: Setup node 18
+        name: Setup node
         with:
-          node-version: 18
+          node-version: 20
 
       - run: |
           sudo apt install tree -y
 
       - name: Download files by comparing commits
+        uses: pingcap/docs-toolkit/actions/file-diff-update@main
+        with:
+          config_file: latest_translation_commit.json
+          working_directory: docs
+
+      - name: Show tmp directory structure
         run: |
-          export GH_TOKEN=${{github.token}}
           cd docs
-          npm i
-          node scripts/filterUpdateFiles.js
-          tree tmp
-          cd ..
-      - name: Copy new files to translator folder
-        run: |
-          cp -r docs/tmp markdown-translator/markdowns
-      - name: Copy variables.json to translator folder
-        run: |
-          cp docs/tmp/variables.json docs/variables.json || true
+          tree tmp || find tmp -type f | head -20
       - name: Config and translate
         run: |
-          cd markdown-translator
+          cd docs-toolkit/markdown-translator
+          yarn
+          cd ../..
           echo ${{secrets.GCP_KEY}} | base64 --decode >> key.json
           export GOOGLE_APPLICATION_CREDENTIALS=key.json
           export PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
           export GLOSSARY_ID=${{ secrets.GCP_GLOSSARY_ID }}
-          yarn
-          node src/index.js
-          cd ..
-      - name: Copy translated files to docs repo
-        run: |
-          cp -r markdown-translator/output/markdowns/* docs/
+          node docs-toolkit/markdown-translator/src/index_ja.js --input-dir docs/tmp --output-dir docs/
 
       - name: Git commit and push
         run: |

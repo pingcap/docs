@@ -8,6 +8,7 @@ on:
       - media/**
 jobs:
   upload:
+    if: github.repository == 'pingcap/docs'
     name: Upload media files
     runs-on: ubuntu-latest
     steps:

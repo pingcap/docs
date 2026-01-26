@@ -18,7 +18,7 @@ In this tutorial, you can learn how to use TiDB and JDBC to accomplish the follo
 
 > **Note:**
 >
-> - This tutorial works with {{{ .starter }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> - This tutorial works with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
 > - Starting from TiDB v7.4, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `UTF-8` in the JDBC URL, the collation used in a JDBC connection depends on the JDBC driver version. For more information, see [Collation used in JDBC connections](/faq/sql-faq.md#collation-used-in-jdbc-connections).
 
 </CustomContent>
@@ -27,7 +27,7 @@ In this tutorial, you can learn how to use TiDB and JDBC to accomplish the follo
 
 > **Note:**
 >
-> - This tutorial works with {{{ .starter }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> - This tutorial works with {{{ .starter }}}, {{{ .essential }}}, TiDB Cloud Dedicated, and TiDB Self-Managed.
 > - Starting from TiDB v7.4, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `UTF-8` in the JDBC URL, the collation used in a JDBC connection depends on the JDBC driver version. For more information, see [Collation used in JDBC connections](https://docs.pingcap.com/tidb/stable/sql-faq#collation-used-in-jdbc-connections).
 
 </CustomContent>
@@ -53,7 +53,7 @@ To complete this tutorial, you need:
 
 > **Note:**
 >
-> For security considerations, it is recommended that you use `VERIFY_IDENTITY` to establish TLS connections to TiDB clusters when connecting over the internet. Both {{{ .starter }}} and TiDB Cloud Dedicated use Subject Alternative Name (SAN) certificates, which require MySQL Connector/J version to be greater than or equal to [8.0.22](https://dev.mysql.com/doc/relnotes/connector-j/en/news-8-0-22.html).
+> For security considerations, it is recommended that you use `VERIFY_IDENTITY` to establish TLS connections to TiDB clusters when connecting over the internet. {{{ .starter }}}, {{{ .essential }}}, and TiDB Cloud Dedicated use Subject Alternative Name (SAN) certificates, which require MySQL Connector/J version to be greater than or equal to [8.0.22](https://dev.mysql.com/doc/relnotes/connector-j/en/news-8-0-22.html).
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
@@ -80,7 +80,7 @@ cd tidb-java-jdbc-quickstart
 Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
-<div label="{{{ .starter }}}">
+<div label="{{{ .starter }}} or Essential">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 

@@ -192,7 +192,6 @@
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - Analyze Performance
       - [Use the Diagnosis Tab](/tidb-cloud/tune-performance.md)
-      - [Use Index Insight](/tidb-cloud/index-insight.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
       - [Use Statement Summary Tables](/statement-summary-tables.md)
     - SQL Tuning
       - [Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
@@ -626,6 +625,7 @@
     - [Set Operations](/functions-and-operators/set-operators.md)
     - [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)
   - [Clustered Indexes](/clustered-indexes.md)
+  - [Global Indexes](/global-indexes.md)
   - [Constraints](/constraints.md)
   - [Generated Columns](/generated-columns.md)
   - [SQL Mode](/sql-mode.md)
@@ -645,6 +645,7 @@
   - Character Set and Collation
     - [Overview](/character-set-and-collation.md)
     - [GBK](/character-set-gbk.md)
+    - [GB18030](/character-set-gb18030.md)
   - Read Historical Data
     - Use Stale Read (Recommended)
       - [Usage Scenarios of Stale Read](/stale-read.md)
@@ -698,6 +699,7 @@
       - [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)
       - [`TIDB_SERVERS_INFO`](/information-schema/information-schema-tidb-servers-info.md)
       - [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
+      - [`TIFLASH_INDEXES`](/information-schema/information-schema-tiflash-indexes.md)
       - [`TIFLASH_REPLICA`](/information-schema/information-schema-tiflash-replica.md)
       - [`TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md)
       - [`TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)
@@ -840,6 +842,7 @@
   - [Table Filter](/table-filter.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
+  - [`ANALYZE` Embedded in DDL Statements](/ddl_embedded_analyze.md)
   - [Batch Processing](/batch-processing.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Notifications](/tidb-cloud/notifications.md)

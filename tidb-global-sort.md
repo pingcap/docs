@@ -15,7 +15,7 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 
 > **Note:**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 ## Overview
 
@@ -59,6 +59,14 @@ To enable Global Sort, follow these steps:
     ```sql
     SET GLOBAL tidb_cloud_storage_uri = 's3://my-bucket/test-data?role-arn=arn:aws:iam::888888888888:role/my-role'
     ```
+
+    <CustomContent plan="premium">
+
+    > **Note:**
+    >
+    > For {{{ .premium }}}, this parameter is automatically configured and does not require manual adjustment. If you need to modify the setting, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+    </CustomContent>
 
 </CustomContent>
 

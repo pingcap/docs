@@ -15,7 +15,7 @@ This feature can fulfill the following use cases:
 
 > **Note:**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 ## Overview
 
@@ -74,13 +74,13 @@ To view all available labels in the current TiKV cluster, you can use the [`SHOW
 
 ```sql
 SHOW PLACEMENT LABELS;
-+--------+----------------+
-| Key    | Values         |
-+--------+----------------+
-| disk   | ["ssd"]        |
-| region | ["us-east-1"]  |
-| zone   | ["us-east-1a"] |
-+--------+----------------+
++--------+----------------------------+
+| Key    | Values                     |
++--------+----------------------------+
+| disk   | ["ssd"]                    |
+| region | ["us-east-1", "us-west-1"] |
+| zone   | ["us-east-1a"]             |
++--------+----------------------------+
 3 rows in set (0.00 sec)
 ```
 
@@ -312,7 +312,7 @@ PARTITION BY RANGE( YEAR(purchased) ) (
 );
 ```
 
-If no placement policy is specified for a partition in a table, the partition attempts to inherit the policy (if any) from the table. If the table has a [global index](/partitioned-table.md#global-indexes), the index will apply the same placement policy as the table. In the preceding example:
+If no placement policy is specified for a partition in a table, the partition attempts to inherit the policy (if any) from the table. If the table has a [global index](/global-indexes.md), the index will apply the same placement policy as the table. In the preceding example:
 
 - The `p0` partition will apply the `storageforhistorydata` policy.
 - The `p4` partition will apply the `storagefornewdata` policy.

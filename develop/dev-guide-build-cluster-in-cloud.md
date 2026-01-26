@@ -29,7 +29,7 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 3. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click **Create Cluster**.
 
-4. On the **Create Cluster** page, **Serverless** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
+4. On the **Create Cluster** page, **Starter** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
 
 5. Click **Create** to create a {{{ .starter }}} cluster.
 
@@ -45,7 +45,7 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 > **Note:**
 >
-> For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters, when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix).
+> For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) clusters, when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix).
 
 </CustomContent>
 
@@ -53,7 +53,7 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 > **Note:**
 >
-> For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters, when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+> For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) clusters, when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
 
 </CustomContent>
 

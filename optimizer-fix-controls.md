@@ -114,3 +114,13 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - Possible values: `ON`, `OFF`
 - Currently, the TiDB optimizer has limitations in deriving index ranges for complex conjunctive conditions where each conjunct comprises a list of ranges. This can be addressed by applying general range intersection.
 - You can remove this limitation by enabling this fix control, allowing the optimizer to handle complex range intersections. However, for conditions with a large number of conjuncts (more than 10), there is a slight risk of increased optimization time.
+
+### [`56318`](https://github.com/pingcap/tidb/issues/56318)
+
+> **Note:**
+>
+> This is only available for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter).
+
+- Default value: `ON`
+- Possible values: `ON`, `OFF`
+- This variable controls whether to avoid calculating the heavy expression used in the `ORDER BY` statement twice.
