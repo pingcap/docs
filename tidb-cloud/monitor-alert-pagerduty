@@ -17,7 +17,7 @@ The following screenshot shows two example alerts.
 
 ## Prerequisites
 
-- Subscribing to alerts via PagerDuty is only available for organizations that subscribe to the **Enterprise** or **Premium** support plan.
+- Subscribing to alerts via PagerDuty is only available for organizations that subscribe to the **Enterprise** or **Premium** [support plan](/tidb-cloud/connected-care-overview.md).
 
 - To subscribe to alert notifications, you must have the `Organization Owner` access to your organization or `Project Owner` access to the target project in TiDB Cloud.
 
