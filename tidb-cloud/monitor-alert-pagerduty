@@ -1,0 +1,65 @@
+---
+title: Subscribe via PagerDuty
+summary: Learn how to monitor your TiDB cluster by getting alert notifications via PagerDuty.
+---
+
+# Subscribe via PagerDuty
+
+TiDB Cloud provides you with an easy way to subscribe to alert notifications via PagerDuty, [Slack](/tidb-cloud/monitor-alert-slack.md), [email](/tidb-cloud/monitor-alert-email.md), [Zoom](/tidb-cloud/monitor-alert-zoom.md), and [Flashduty](/tidb-cloud/monitor-alert-flashduty.md). This document describes how to subscribe to alert notifications via PagerDuty.
+
+The following screenshot shows two example alerts.
+
+![TiDB Cloud Alerts in PagerDuty](/media/tidb-cloud/tidb-cloud-alert-subscription.png)
+
+> **Note:**
+>
+> Currently, alert subscription is only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+
+## Prerequisites
+
+- Subscribing to alerts via PagerDuty is only available for organizations that subscribe to the **Enterprise** or **Premium** support plan.
+
+- To subscribe to alert notifications, you must have the `Organization Owner` access to your organization or `Project Owner` access to the target project in TiDB Cloud.
+
+## Subscribe to alert notifications
+
+### Step 1. Generate a PagerDuty webhook URL ##这部分请思雨帮忙更新
+
+1. [Create a PagerDuty app](https://api.PagerDuty.com/apps/new), if you do not have one already. Click **Create New App**, and choose **From scratch**. Enter a name, choose a workspace to associate your app with, and then click **Create App**.
+2. Go to the settings page for your app. You can load its settings via your [app's management dashboard](https://api.PagerDuty.com/apps).
+3. Click the **Incoming Webhooks** tab, and then toggle **Activate Incoming Webhooks** to **ON**.
+4. Click **Add New Webhook to Workspace**.
+5. Select a channel that you want to receive alert notifications in, and then select **Authorize**. If you need to add the incoming webhook to a private channel, you must first be in that channel.
+
+You can see a new entry under the **Webhook URLs for Your Workspace** section in the following format: `https://hooks.PagerDuty.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`.
+
+### Step 2. Subscribe from TiDB Cloud
+
+> **Tip:**
+>
+> The alert subscription is for all alerts in the current project. If you have multiple clusters in the project, you just need to subscribe once.
+
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
+3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
+4. Select **PagerDuty** from the **Subscriber Type** drop-down list.
+5. Enter a name in the **Name** field and your PagerDuty webhook URL in the **URL** field.
+6. Click **Test Connection**.
+
+    - If the test succeeds, the **Save** button is displayed.
+    - If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and retry the connection.
+
+7. Click **Save** to complete the subscription.
+
+Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the cluster. You will be directed to the **Alert Subscriber** page.
+
+If an alert condition remains unchanged, the alert sends notifications every three hours.
+
+## Unsubscribe from alert notifications
+
+If you no longer want to receive alert notifications for clusters in your project, follow these steps:
+
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
+3. On the **Alert Subscription** page, find the subscriber that you want to delete, and then click **...** > **Unsubscribe**.
+4. Click **Unsubscribe** to confirm the unsubscription.
