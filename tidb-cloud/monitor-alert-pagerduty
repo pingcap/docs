@@ -45,7 +45,7 @@ You can see a new entry under the **Webhook URLs for Your Workspace** section in
 2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
 3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
 4. From the **Subscriber Type** drop-down list, select **PagerDuty**.
-5. Enter a name in the **Name** field and your PagerDuty webhook URL in the **URL** field.
+5. Enter a name in the **Name** field and your integration key in the **Integration Key** field.
 6. Click **Test Connection**.
 
     - If the test succeeds, the **Save** button is displayed.
