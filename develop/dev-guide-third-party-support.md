@@ -1,6 +1,7 @@
 ---
 title: Third-Party Tools Supported by TiDB
 summary: Learn about third-party tools supported by TiDB.
+aliases: ['/tidb/stable/dev-guide-third-party-support/','/tidb/dev/dev-guide-third-party-support/','/tidbcloud/dev-guide-third-party-support/']
 ---
 
 # Third-Party Tools Supported by TiDB

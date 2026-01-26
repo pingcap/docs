@@ -1,6 +1,7 @@
 ---
 title: Improve Vector Search Performance
 summary: Learn best practices for improving the performance of TiDB Vector Search.
+aliases: ['/tidb/stable/vector-search-improve-performance/','/tidb/dev/vector-search-improve-performance/','/tidbcloud/vector-search-improve-performance/']
 ---
 
 # Improve Vector Search Performance

@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with GORM
 summary: Learn how to connect to TiDB using GORM. This tutorial gives Golang sample code snippets that work with TiDB using GORM.
+aliases: ['/tidb/stable/dev-guide-sample-application-golang-gorm/','/tidb/dev/dev-guide-sample-application-golang-gorm/','/tidbcloud/dev-guide-sample-application-golang-gorm/']
 ---
 
 # Connect to TiDB with GORM

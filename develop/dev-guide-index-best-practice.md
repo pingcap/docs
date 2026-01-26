@@ -1,6 +1,7 @@
 ---
 title: Best Practices for Indexing
 summary: Learn some best practices for creating and using indexes in TiDB.
+aliases: ['/tidb/stable/dev-guide-index-best-practice/','/tidb/dev/dev-guide-index-best-practice/','/tidbcloud/dev-guide-index-best-practice/']
 ---
 
 <!-- markdownlint-disable MD029 -->

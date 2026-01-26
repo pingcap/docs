@@ -1,6 +1,7 @@
 ---
 title: Multi-table Join Queries
 summary: This document describes how to use multi-table join queries.
+aliases: ['/tidb/stable/dev-guide-join-tables/','/tidb/dev/dev-guide-join-tables/','/tidbcloud/dev-guide-join-tables/']
 ---
 
 # Multi-table Join Queries

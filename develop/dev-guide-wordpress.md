@@ -1,6 +1,7 @@
 ---
 title: Connect to {{{ .starter }}} with WordPress
 summary: Learn how to use {{{ .starter }}} to run WordPress. This tutorial gives step-by-step guidance to run WordPress + {{{ .starter }}} in a few minutes.
+aliases: ['/tidbcloud/dev-guide-wordpress/']
 ---
 
 # Connect to {{{ .starter }}} with WordPress

@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with Hibernate
 summary: Learn how to connect to TiDB using Hibernate. This tutorial gives Java sample code snippets that work with TiDB using Hibernate.
+aliases: ['/tidb/stable/dev-guide-sample-application-java-hibernate/','/tidb/dev/dev-guide-sample-application-java-hibernate/','/tidbcloud/dev-guide-sample-application-java-hibernate/']
 ---
 
 # Connect to TiDB with Hibernate

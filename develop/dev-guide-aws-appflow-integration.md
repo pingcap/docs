@@ -1,6 +1,7 @@
 ---
 title: Integrate TiDB with Amazon AppFlow
 summary: Introduce how to integrate TiDB with Amazon AppFlow step by step.
+aliases: ['/tidb/stable/dev-guide-aws-appflow-integration/','/tidb/dev/dev-guide-aws-appflow-integration/','/tidbcloud/dev-guide-aws-appflow-integration/']
 ---
 
 # Integrate TiDB with Amazon AppFlow

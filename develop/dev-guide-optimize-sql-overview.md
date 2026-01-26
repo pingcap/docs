@@ -1,6 +1,7 @@
 ---
 title: Overview of Optimizing SQL Performance
 summary: Provides an overview of SQL performance tuning for TiDB application developers.
+aliases: ['/tidb/stable/dev-guide-optimize-sql-overview/','/tidb/dev/dev-guide-optimize-sql-overview/','/tidbcloud/dev-guide-optimize-sql-overview/']
 ---
 
 # Overview of Optimizing SQL Performance

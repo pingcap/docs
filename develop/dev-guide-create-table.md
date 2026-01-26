@@ -1,6 +1,7 @@
 ---
 title: Create a Table
 summary: Learn the definitions, rules, and guidelines in table creation.
+aliases: ['/tidb/stable/dev-guide-create-table/','/tidb/dev/dev-guide-create-table/','/tidbcloud/dev-guide-create-table/']
 ---
 
 # Create a Table

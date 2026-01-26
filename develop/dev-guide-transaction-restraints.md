@@ -1,6 +1,7 @@
 ---
 title: Transaction Restraints
 summary: Learn about transaction restraints in TiDB.
+aliases: ['/tidb/stable/dev-guide-transaction-restraints/','/tidb/dev/dev-guide-transaction-restraints/','/tidbcloud/dev-guide-transaction-restraints/']
 ---
 
 # Transaction Restraints

@@ -1,6 +1,7 @@
 ---
 title: Integrate TiDB Vector Search with Django ORM
 summary: Learn how to integrate TiDB Vector Search with Django ORM to store embeddings and perform semantic search.
+aliases: ['/tidb/stable/vector-search-integrate-with-django-orm/','/tidb/dev/vector-search-integrate-with-django-orm/','/tidbcloud/vector-search-integrate-with-django-orm/']
 ---
 
 # Integrate TiDB Vector Search with Django ORM

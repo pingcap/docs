@@ -1,6 +1,7 @@
 ---
 title: Unique Serial Number Generation
 summary: Unique serial number generation solution for developers who generate their own unique IDs.
+aliases: ['/tidb/stable/dev-guide-unique-serial-number-generation/','/tidb/dev/dev-guide-unique-serial-number-generation/','/tidbcloud/dev-guide-unique-serial-number-generation/']
 ---
 
 # Unique Serial Number Generation

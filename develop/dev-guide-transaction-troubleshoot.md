@@ -1,6 +1,7 @@
 ---
 title: Handle Transaction Errors
 summary: Learn about how to handle transaction errors, such as deadlocks and application retry errors.
+aliases: ['/tidb/stable/dev-guide-transaction-troubleshoot/','/tidb/dev/dev-guide-transaction-troubleshoot/','/tidbcloud/dev-guide-transaction-troubleshoot/']
 ---
 
 # Handle Transaction Errors

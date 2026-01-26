@@ -1,6 +1,7 @@
 ---
 title: Vector Search Integration Overview
 summary: An overview of TiDB vector search integration, including supported AI frameworks, embedding models, and ORM libraries.
+aliases: ['/tidb/stable/vector-search-integration-overview/','/tidb/dev/vector-search-integration-overview/','/tidbcloud/vector-search-integration-overview/']
 ---
 
 # Vector Search Integration Overview

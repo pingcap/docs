@@ -1,6 +1,7 @@
 ---
 title: Common Table Expression
 summary: Learn the CTE feature of TiDB, which help you write SQL statements more efficiently.
+aliases: ['/tidb/stable/dev-guide-use-common-table-expression/','/tidb/dev/dev-guide-use-common-table-expression/','/tidbcloud/dev-guide-use-common-table-expression/']
 ---
 
 # Common Table Expression

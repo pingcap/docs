@@ -1,6 +1,7 @@
 ---
 title: Integrate Vector Search with LangChain
 summary: Learn how to integrate TiDB Vector Search with LangChain.
+aliases: ['/tidb/stable/vector-search-integrate-with-langchain/','/tidb/dev/vector-search-integrate-with-langchain/','/tidbcloud/vector-search-integrate-with-langchain/']
 ---
 
 # Integrate Vector Search with LangChain

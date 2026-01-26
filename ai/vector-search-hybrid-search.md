@@ -1,7 +1,7 @@
 ---
 title: Hybrid Search
 summary: Use full-text search and vector search together to improve the retrieval quality.
-aliases: ['/tidb/stable/vector-search-hybrid-search']
+aliases: ['/tidb/stable/vector-search-hybrid-search/','/tidbcloud/vector-search-hybrid-search/']
 ---
 
 # Hybrid Search

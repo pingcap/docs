@@ -1,6 +1,7 @@
 ---
 title: Vector Search Overview
 summary: Learn about Vector Search in TiDB. This feature provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video.
+aliases: ['/tidb/stable/vector-search-overview/','/tidb/dev/vector-search-overview/','/tidbcloud/vector-search-overview/']
 ---
 
 # Vector Search Overview

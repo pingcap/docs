@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with MySQL Connector/Python
 summary: Learn how to connect to TiDB using MySQL Connector/Python. This tutorial gives Python sample code snippets that work with TiDB using MySQL Connector/Python.
+aliases: ['/tidb/stable/dev-guide-sample-application-python-mysql-connector/','/tidb/dev/dev-guide-sample-application-python-mysql-connector/','/tidbcloud/dev-guide-sample-application-python-mysql-connector/']
 ---
 
 # Connect to TiDB with MySQL Connector/Python

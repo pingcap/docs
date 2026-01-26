@@ -1,6 +1,7 @@
 ---
 title: Views
 summary: Learn how to use views in TiDB.
+aliases: ['/tidb/stable/dev-guide-use-views/','/tidb/dev/dev-guide-use-views/','/tidbcloud/dev-guide-use-views/']
 ---
 
 # Views

@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with mysql2
 summary: Learn how to connect to TiDB using Ruby mysql2. This tutorial gives Ruby sample code snippets that work with TiDB using mysql2 gem.
+aliases: ['/tidb/stable/dev-guide-sample-application-ruby-mysql2/','/tidb/dev/dev-guide-sample-application-ruby-mysql2/','/tidbcloud/dev-guide-sample-application-ruby-mysql2/']
 ---
 
 # Connect to TiDB with mysql2

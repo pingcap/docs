@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with mysql.js
 summary: Learn how to connect to TiDB using mysql.js. This tutorial gives Node.js sample code snippets that work with TiDB using mysql.js.
+aliases: ['/tidb/stable/dev-guide-sample-application-nodejs-mysqljs/','/tidb/dev/dev-guide-sample-application-nodejs-mysqljs/','/tidbcloud/dev-guide-sample-application-nodejs-mysqljs/']
 ---
 
 # Connect to TiDB with mysql.js

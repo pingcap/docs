@@ -1,6 +1,7 @@
 ---
 title: Subquery
 summary: Learn how to use subquery in TiDB.
+aliases: ['/tidb/stable/dev-guide-use-subqueries/','/tidb/dev/dev-guide-use-subqueries/','/tidbcloud/dev-guide-use-subqueries/']
 ---
 
 # Subquery

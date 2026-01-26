@@ -1,6 +1,7 @@
 ---
 title: HTAP Queries
 summary: Introduce the HTAP queries in TiDB.
+aliases: ['/tidb/stable/dev-guide-hybrid-oltp-and-olap-queries/','/tidb/dev/dev-guide-hybrid-oltp-and-olap-queries/','/tidbcloud/dev-guide-hybrid-oltp-and-olap-queries/']
 ---
 
 # HTAP Queries

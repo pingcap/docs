@@ -1,6 +1,7 @@
 ---
 title: Best Practices for Optimizing Multi-Column Indexes
 summary: Learn how to use multi-column indexes effectively in TiDB and apply advanced optimization techniques.
+aliases: ['/tidb/stable/multi-column-index-best-practices/','/tidb/dev/multi-column-index-best-practices/']
 ---
 
 # Best Practices for Optimizing Multi-Column Indexes

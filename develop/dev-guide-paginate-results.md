@@ -1,6 +1,7 @@
 ---
 title: Paginate Results
 summary: Introduce paginate result feature in TiDB.
+aliases: ['/tidb/stable/dev-guide-paginate-results/','/tidb/dev/dev-guide-paginate-results/','/tidbcloud/dev-guide-paginate-results/']
 ---
 
 # Paginate Results

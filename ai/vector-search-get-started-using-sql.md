@@ -1,6 +1,7 @@
 ---
 title: Get Started with Vector Search via SQL
 summary: Learn how to quickly get started with Vector Search in TiDB using SQL statements to power your generative AI applications.
+aliases: ['/tidb/stable/vector-search-get-started-using-sql/','/tidb/dev/vector-search-get-started-using-sql/','/tidbcloud/vector-search-get-started-using-sql/']
 ---
 
 # Get Started with Vector Search via SQL

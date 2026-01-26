@@ -1,6 +1,7 @@
 ---
 title: Object Naming Convention
 summary: Learn the object naming convention in TiDB.
+aliases: ['/tidb/stable/dev-guide-object-naming-guidelines/','/tidb/dev/dev-guide-object-naming-guidelines/','/tidbcloud/dev-guide-object-naming-guidelines/']
 ---
 
 # Object Naming Convention

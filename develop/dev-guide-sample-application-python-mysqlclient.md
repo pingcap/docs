@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with mysqlclient
 summary: Learn how to connect to TiDB using mysqlclient. This tutorial gives Python sample code snippets that work with TiDB using mysqlclient.
+aliases: ['/tidb/stable/dev-guide-sample-application-python-mysqlclient/','/tidb/dev/dev-guide-sample-application-python-mysqlclient/','/tidbcloud/dev-guide-sample-application-python-mysqlclient/']
 ---
 
 # Connect to TiDB with mysqlclient

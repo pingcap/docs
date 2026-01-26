@@ -1,6 +1,7 @@
 ---
 title: TiDB Database Schema Design Overview
 summary: Learn the basics on TiDB database schema design.
+aliases: ['/tidb/stable/dev-guide-schema-design-overview/','/tidb/dev/dev-guide-schema-design-overview/','/tidbcloud/dev-guide-schema-design-overview/']
 ---
 
 # TiDB Database Schema Design Overview

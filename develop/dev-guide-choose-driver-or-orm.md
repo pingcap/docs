@@ -1,6 +1,7 @@
 ---
 title: Choose Driver or ORM
 summary: Learn how to choose a driver or ORM framework to connect to TiDB.
+aliases: ['/tidb/stable/dev-guide-choose-driver-or-orm/','/tidb/dev/dev-guide-choose-driver-or-orm/','/tidbcloud/dev-guide-choose-driver-or-orm/']
 ---
 
 # Choose Driver or ORM

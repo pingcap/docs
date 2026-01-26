@@ -1,6 +1,7 @@
 ---
 title: Best Practices for DDL Execution in TiDB
 summary: Learn about how DDL statements are implemented in TiDB, the online change process, and best practices.
+aliases: ['/tidb/stable/ddl-introduction/','/tidb/dev/ddl-introduction/','/tidbcloud/ddl-introduction/']
 ---
 
 # Best Practices for DDL Execution in TiDB

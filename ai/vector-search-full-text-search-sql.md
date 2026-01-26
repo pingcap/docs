@@ -1,7 +1,7 @@
 ---
 title: Full-Text Search with SQL
 summary: Full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
-aliases: ['/tidb/stable/vector-search-full-text-search-sql']
+aliases: ['/tidb/stable/vector-search-full-text-search-sql/','/tidbcloud/vector-search-full-text-search-sql/']
 ---
 
 # Full-Text Search with SQL

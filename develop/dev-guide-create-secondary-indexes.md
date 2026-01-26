@@ -1,6 +1,7 @@
 ---
 title: Create a Secondary Index
 summary: Learn steps, rules, and examples to create a secondary index.
+aliases: ['/tidb/stable/dev-guide-create-secondary-indexes/','/tidb/dev/dev-guide-create-secondary-indexes/','/tidbcloud/dev-guide-create-secondary-indexes/']
 ---
 
 # Create a Secondary Index

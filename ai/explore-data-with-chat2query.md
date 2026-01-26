@@ -1,6 +1,7 @@
 ---
 title: Explore Your Data with AI-Assisted SQL Editor
 summary: Learn how to use AI-assisted SQL Editor in the TiDB Cloud console, to maximize your data value.
+aliases: ['/tidbcloud/explore-data-with-chat2query']
 ---
 
 # Explore Your Data with AI-Assisted SQL Editor

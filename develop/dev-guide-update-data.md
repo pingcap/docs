@@ -1,6 +1,7 @@
 ---
 title: Update Data
 summary: Learn about how to update data and batch update data.
+aliases: ['/tidb/stable/dev-guide-update-data/','/tidb/dev/dev-guide-update-data/','/tidbcloud/dev-guide-update-data/']
 ---
 
 # Update Data

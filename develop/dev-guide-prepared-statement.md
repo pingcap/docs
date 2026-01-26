@@ -1,6 +1,7 @@
 ---
 title: Prepared Statements
 summary: Learn about how to use the TiDB prepared statements.
+aliases: ['/tidb/stable/dev-guide-prepared-statement/','/tidb/dev/dev-guide-prepared-statement/','/tidbcloud/dev-guide-prepared-statement/']
 ---
 
 # Prepared Statements
