@@ -7,10 +7,6 @@ summary: Learn how to monitor your TiDB cluster by getting alert notifications v
 
 TiDB Cloud provides you with an easy way to subscribe to alert notifications via PagerDuty, [Slack](/tidb-cloud/monitor-alert-slack.md), [email](/tidb-cloud/monitor-alert-email.md), [Zoom](/tidb-cloud/monitor-alert-zoom.md), and [Flashduty](/tidb-cloud/monitor-alert-flashduty.md). This document describes how to subscribe to alert notifications via PagerDuty.
 
-The following screenshot shows two example alerts.
-
-![TiDB Cloud Alerts in PagerDuty](/media/tidb-cloud/tidb-cloud-alert-subscription.png)
-
 > **Note:**
 >
 > Currently, alert subscription is only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
@@ -25,15 +21,10 @@ The following screenshot shows two example alerts.
 
 To get alert notifications of clusters in your project, take the following steps:
 
-### Step 1. Generate a PagerDuty webhook URL ##这部分请思雨帮忙更新
+### Step 1. Generate a PagerDuty integration key
 
-1. [Create a PagerDuty app](https://api.PagerDuty.com/apps/new), if you do not have one already. Click **Create New App**, and choose **From scratch**. Enter a name, choose a workspace to associate your app with, and then click **Create App**.
-2. Go to the settings page for your app. You can load its settings via your [app's management dashboard](https://api.PagerDuty.com/apps).
-3. Click the **Incoming Webhooks** tab, and then toggle **Activate Incoming Webhooks** to **ON**.
-4. Click **Add New Webhook to Workspace**.
-5. Select a channel that you want to receive alert notifications in, and then select **Authorize**. If you need to add the incoming webhook to a private channel, you must first be in that channel.
-
-You can see a new entry under the **Webhook URLs for Your Workspace** section in the following format: `https://hooks.PagerDuty.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`.
+1. Refer to the official [PagerDuty documentation](https://developer.pagerduty.com/docs/events-api-v2-overview#getting-started) to generate an integration key of 'Events API v2' type.
+2. Copy the integration key generated in step 1.
 
 ### Step 2. Subscribe from TiDB Cloud
 
