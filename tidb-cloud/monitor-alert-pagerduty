@@ -61,5 +61,5 @@ If you no longer want to receive alert notifications for clusters in your projec
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
-3. On the **Alert Subscription** page, locate the row of your target subscriber to be deleted, and then click **...** > **Unsubscribe**.
+3. On the **Alert Subscription** page, find the subscriber that you want to delete, and then click **...** > **Unsubscribe**.
 4. Click **Unsubscribe** to confirm the unsubscription.
