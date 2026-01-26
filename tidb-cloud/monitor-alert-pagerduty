@@ -23,6 +23,8 @@ The following screenshot shows two example alerts.
 
 ## Subscribe to alert notifications
 
+To get alert notifications of clusters in your project, take the following steps:
+
 ### Step 1. Generate a PagerDuty webhook URL ##这部分请思雨帮忙更新
 
 1. [Create a PagerDuty app](https://api.PagerDuty.com/apps/new), if you do not have one already. Click **Create New App**, and choose **From scratch**. Enter a name, choose a workspace to associate your app with, and then click **Create App**.
