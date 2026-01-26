@@ -5,7 +5,7 @@ summary: Learn how to monitor your TiDB cluster by getting alert notifications v
 
 # Subscribe via PagerDuty
 
-TiDB Cloud provides you with an easy way to subscribe to alert notifications via [Slack](/tidb-cloud/monitor-alert-slack.md), [email](/tidb-cloud/monitor-alert-email.md), [Zoom](/tidb-cloud/monitor-alert-zoom.md), [Flashduty](/tidb-cloud/monitor-alert-flashduty.md) and [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md). This document describes how to subscribe to alert notifications via PagerDuty.
+TiDB Cloud provides you with an easy way to subscribe to alert notifications via [Slack](/tidb-cloud/monitor-alert-slack.md), [email](/tidb-cloud/monitor-alert-email.md), [Zoom](/tidb-cloud/monitor-alert-zoom.md), [Flashduty](/tidb-cloud/monitor-alert-flashduty.md) and PagerDuty. This document describes how to subscribe to alert notifications via PagerDuty.
 
 The following screenshot shows two example alerts.
 
@@ -17,9 +17,9 @@ The following screenshot shows two example alerts.
 
 ## Prerequisites
 
-- The subscribing via PagerDuty feature is only available for organizations that subscribe to the **Enterprise** or **Premium** support plan.
+- Subscribing to alerts via PagerDuty is only available for organizations that subscribe to the **Enterprise** or **Premium** support plan.
 
-- To subscribe to alert notifications of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Project Owner` access to the target project in TiDB Cloud.
+- To subscribe to alert notifications, you must have the `Organization Owner` access to your organization or `Project Owner` access to the target project in TiDB Cloud.
 
 ## Subscribe to alert notifications
 
@@ -57,7 +57,7 @@ If an alert condition remains unchanged, the alert sends notifications every thr
 
 ## Unsubscribe from alert notifications
 
-If you no longer want to receive alert notifications of clusters in your project, take the following steps:
+If you no longer want to receive alert notifications for clusters in your project, follow these steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
