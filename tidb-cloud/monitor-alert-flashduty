@@ -23,15 +23,10 @@ The following screenshot shows two example alerts.
 
 ## Subscribe to alert notifications
 
-### Step 1. Generate a Flashduty webhook URL ##这部分请思雨更新步骤
+### Step 1. Generate a Flashduty webhook URL
 
-1. [Create a Flashduty app](https://api.Flashduty.com/apps/new), if you do not have one already. Click **Create New App**, and choose **From scratch**. Enter a name, choose a workspace to associate your app with, and then click **Create App**.
-2. Go to the settings page for your app. You can load its settings via your [app's management dashboard](https://api.Flashduty.com/apps).
-3. Click the **Incoming Webhooks** tab, and then toggle **Activate Incoming Webhooks** to **ON**.
-4. Click **Add New Webhook to Workspace**.
-5. Select a channel that you want to receive alert notifications in, and then select **Authorize**. If you need to add the incoming webhook to a private channel, you must first be in that channel.
-
-You can see a new entry under the **Webhook URLs for Your Workspace** section in the following format: `https://hooks.Flashduty.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`.
+1. Refer to the official Flashduty documentation under [Flashduty >> Integrations >> Alerts integration >> Prometheus Integration](https://docs.flashcat.cloud/en/flashduty/prometheus-integration-guide) to generate a webhook URL.
+2. Copy the webhook URL generated in step 1.
 
 ### Step 2. Subscribe from TiDB Cloud
 
@@ -43,7 +38,7 @@ You can see a new entry under the **Webhook URLs for Your Workspace** section in
 2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
 3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
 4. Select **Flashduty** from the **Subscriber Type** drop-down list.
-5. Enter a name in the **Name** field and your Flashduty webhook URL in the **URL** field.
+5. Enter a name in the **Name** field and your Flashduty webhook URL in the **Webhook URL** field.
 6. Click **Test Connection**.
 
     - If the test succeeds, the **Save** button is displayed.
