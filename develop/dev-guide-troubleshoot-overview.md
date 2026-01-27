@@ -30,6 +30,7 @@ If you still have performance issues, see the following documents:
 - [Identify Expensive Queries Using Top SQL](/dashboard/top-sql.md)
 
 </div>
+</SimpleTab>
 
 If you have questions about SQL operations, see [SQL FAQs](/faq/sql-faq.md).
 
