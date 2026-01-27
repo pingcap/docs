@@ -19,12 +19,12 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 ## Subscribe to alert notifications
 
-To get alert notifications of clusters in your project, take the following steps:
+To receive alert notifications of clusters in your project, take the following steps:
 
 ### Step 1. Generate a Flashduty webhook URL
 
-1. Refer to the official Flashduty documentation under [Flashduty > Integrations > Alerts integration > Prometheus Integration](https://docs.flashcat.cloud/en/flashduty/prometheus-integration-guide) to generate a webhook URL.
-2. Copy the webhook URL generated in step 1.
+1. Generate a webhook URL by following the instructions in [Flashduty Prometheus Integration](https://docs.flashcat.cloud/en/flashduty/prometheus-integration-guide).
+2. Save the generated webhook URL to use in the next step.
 
 ### Step 2. Subscribe from TiDB Cloud
 
@@ -35,7 +35,7 @@ To get alert notifications of clusters in your project, take the following steps
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
 3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
-4. From the **Subscriber Type** drop-down list, select **Flashduty**.
+4. Select **Flashduty** from the **Subscriber Type** drop-down list.
 5. Enter a name in the **Name** field and your Flashduty webhook URL in the **Webhook URL** field.
 6. Click **Test Connection**.
 
