@@ -1,15 +1,11 @@
 ---
-title: Subscribe via Slack
-summary: Learn how to monitor your TiDB cluster by getting alert notifications via Slack.
+title: Subscribe via PagerDuty
+summary: Learn how to monitor your TiDB cluster by getting alert notifications via PagerDuty.
 ---
 
-# Subscribe via Slack
+# Subscribe via PagerDuty
 
-TiDB Cloud provides you with an easy way to subscribe to alert notifications via Slack, [email](/tidb-cloud/monitor-alert-email.md), [Zoom](/tidb-cloud/monitor-alert-zoom.md), [Flashduty](/tidb-cloud/monitor-alert-flashduty.md), and [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md). This document describes how to subscribe to alert notifications via Slack.
-
-The following screenshot shows two example alerts.
-
-![TiDB Cloud Alerts in Slack](/media/tidb-cloud/tidb-cloud-alert-subscription.png)
+TiDB Cloud provides you with an easy way to subscribe to alert notifications via PagerDuty, [Slack](/tidb-cloud/monitor-alert-slack.md), [email](/tidb-cloud/monitor-alert-email.md), [Zoom](/tidb-cloud/monitor-alert-zoom.md), and [Flashduty](/tidb-cloud/monitor-alert-flashduty.md). This document describes how to subscribe to alert notifications via PagerDuty.
 
 > **Note:**
 >
@@ -17,21 +13,18 @@ The following screenshot shows two example alerts.
 
 ## Prerequisites
 
-- The subscribing via Slack feature is only available for organizations that subscribe to the **Enterprise** or **Premium** support plan.
+- The subscribing via PagerDuty feature is only available for organizations that subscribe to the **Enterprise** or **Premium** [support plan](/tidb-cloud/connected-care-overview.md).
 
 - To subscribe to alert notifications of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Project Owner` access to the target project in TiDB Cloud.
 
 ## Subscribe to alert notifications
 
-### Step 1. Generate a Slack webhook URL
+To receive alert notifications of clusters in your project, take the following steps:
 
-1. [Create a Slack app](https://api.slack.com/apps/new), if you do not have one already. Click **Create New App**, and choose **From scratch**. Enter a name, choose a workspace to associate your app with, and then click **Create App**.
-2. Go to the settings page for your app. You can load its settings via your [app's management dashboard](https://api.slack.com/apps).
-3. Click the **Incoming Webhooks** tab, and then toggle **Activate Incoming Webhooks** to **ON**.
-4. Click **Add New Webhook to Workspace**.
-5. Select a channel that you want to receive alert notifications in, and then select **Authorize**. If you need to add the incoming webhook to a private channel, you must first be in that channel.
+### Step 1. Generate a PagerDuty integration key
 
-You can see a new entry under the **Webhook URLs for Your Workspace** section in the following format: `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`.
+1. Generate an integration key of type **Events API v2** by following the instructions in the [PagerDuty Events API v2 Overview](https://developer.pagerduty.com/docs/events-api-v2-overview#getting-started).
+2. Save the generated integration key to use in the next step.
 
 ### Step 2. Subscribe from TiDB Cloud
 
@@ -42,8 +35,8 @@ You can see a new entry under the **Webhook URLs for Your Workspace** section in
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target project using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Project Settings** > **Alert Subscription**.
 3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
-4. Select **Slack** from the **Subscriber Type** drop-down list.
-5. Enter a name in the **Name** field and your Slack webhook URL in the **URL** field.
+4. Select **PagerDuty** from the **Subscriber Type** drop-down list.
+5. Enter a name in the **Name** field and your PagerDuty integration key in the **Integration Key** field.
 6. Click **Test Connection**.
 
     - If the test succeeds, the **Save** button is displayed.
