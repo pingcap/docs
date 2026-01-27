@@ -1,6 +1,6 @@
 ---
 title: TiCDC API Overview
-summary: Learn the API of TiCDC services.
+summary: Learn the API of TiCDC.
 ---
 
 # TiCDC API Overview

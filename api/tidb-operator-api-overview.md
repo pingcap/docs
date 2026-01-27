@@ -1,6 +1,6 @@
 ---
 title: TiDB Operator API Overview
-summary: Learn the API of TiDB Operator services.
+summary: Learn the API of TiDB Operator.
 ---
 
 # TiDB Operator API Overview

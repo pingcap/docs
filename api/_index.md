@@ -10,7 +10,7 @@ TiDB provides various APIs for querying and operating clusters, managing data re
 
 ## TiDB Cloud API (beta)
 
-[TiDB Cloud API](/api/tidb-cloud-api-overview.md) is a REST interface that provides you with programmatic access to manage administrative objects within TiDB Cloud, such as projects, clusters, backups, restores, imports, billings, and Data Service resources.
+[TiDB Cloud API](/api/tidb-cloud-api-overview.md) is a [REST interface](https://en.wikipedia.org/wiki/Representational_state_transfer) that provides you with programmatic access to manage administrative objects within TiDB Cloud, such as projects, clusters, backups, restores, imports, billings, and Data Service resources.
 
 | API | Description |
 | --- | --- |
@@ -19,12 +19,12 @@ TiDB provides various APIs for querying and operating clusters, managing data re
 
 ## TiDB Self-Managed API
 
-TiDB Self-Managed provides various APIs for TiDB tools to help you manage cluster components, monitor system status, and control data replication workflows without relying solely on command-line tools.
+TiDB Self-Managed provides various APIs for TiDB tools to help you manage cluster components, monitor system status, and control data replication workflows.
 
 | API | Description |
 | --- | --- |
 | [TiProxy API](/tiproxy/tiproxy-api.md) | Access TiProxy configuration, health status, and monitoring data. |
 | [Data Migration API](/dm/dm-open-api.md) | Manage DM-master and DM-worker nodes, data sources, and data replication tasks. |
-| [Monitoring API](/tidb-monitoring-api.md) | Get TiDB server running status, table storage information, and PD cluster details. |
+| [Monitoring API](/tidb-monitoring-api.md) | Get TiDB server running status, table storage information, and TiKV cluster details. |
 | [TiCDC API](/ticdc/ticdc-open-api-v2.md) | Query TiCDC node status and manage replication tasks, including creating, pausing, resuming, and updating operations. |
 | [TiDB Operator API](<https://github.com/pingcap/tidb-operator/blob/{{{ .tidb-operator-version }}}/docs/api-references/docs.md>) | Manage TiDB clusters on Kubernetes, including deployment, upgrades, scaling, backup, and failover. |
