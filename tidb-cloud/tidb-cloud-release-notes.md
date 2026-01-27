@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Dedicated**
 
-    - Support Flashduty and PagerDuty as alert subscription channels. 
+    - Support Flashduty and PagerDuty as alert subscription channels.
   
         These integrations are designed to streamline your incident management process and improve operational reliability.
   
