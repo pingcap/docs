@@ -8,6 +8,18 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## January 27, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Support Flashduty and PagerDuty as alert subscription channels.
+  
+        These integrations are designed to streamline your incident management process and improve operational reliability.
+  
+        For more information, see [Subscribe via Flashduty](/tidb-cloud/monitor-alert-flashduty.md) and [Subscribe via PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md).
+
 ## January 20, 2026
 
 **General changes**
