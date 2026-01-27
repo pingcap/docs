@@ -83,17 +83,7 @@ For more information on JDBC connections, see the [JDBC documentation](https://d
 | `{port}` | Port that the TiDB node is listening on |
 | `{database}` | Name of an existing database |
 
-<CustomContent platform="tidb">
-
-For more information about TiDB SQL users, see [TiDB User Account Management](/user-account-management.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
 For more information about TiDB SQL users, see [TiDB User Account Management](https://docs.pingcap.com/tidb/stable/user-account-management).
-
-</CustomContent>
 
 ## Hibernate
 
@@ -139,18 +129,10 @@ For more information about Hibernate connection parameters, see [Hibernate docum
 | `{port}` | Port that the TiDB node is listening on |
 | `{database}` |  Name of an existing database |
 
-<CustomContent platform="tidb">
-
-For more information about TiDB SQL users, see [TiDB User Account Management](/user-account-management.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
 For more information about TiDB SQL users, see [TiDB User Account Management](https://docs.pingcap.com/tidb/stable/user-account-management).
-
-</CustomContent>
 
 ## Need help?
 
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

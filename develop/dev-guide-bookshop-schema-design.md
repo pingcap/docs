@@ -12,31 +12,14 @@ To make your reading on the application developer guide more smoothly, we presen
 
 ## Import table structures and data
 
-<CustomContent platform="tidb">
+Do one of the following:
 
-You can import Bookshop table structures and data either [via TiUP](#method-1-via-tiup-demo) or [via the import feature of TiDB Cloud](#method-2-via-tidb-cloud-import).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-For TiDB Cloud, you can skip [Method 1: Via `tiup demo`](#method-1-via-tiup-demo) and import Bookshop table structures [via the import feature of TiDB Cloud](#method-2-via-tidb-cloud-import).
-
-</CustomContent>
+- For TiDB Cloud, you can skip [Method 1: Via `tiup demo`](#method-1-via-tiup-demo) and import Bookshop table structures [via the import feature of TiDB Cloud](#method-2-via-tidb-cloud-import).
+- For TiDB Self-Managed, you can import Bookshop table structures and data either [via TiUP](#method-1-via-tiup-demo) and skip [Method 2: Via TiDB Cloud Import](#method-2-via-tidb-cloud-import).
 
 ### Method 1: Via `tiup demo`
 
-<CustomContent platform="tidb">
-
 If your TiDB cluster is deployed using [TiUP](/tiup/tiup-reference.md#tiup-reference) or you can connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application by running the following command:
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-If your TiDB cluster is deployed using [TiUP](https://docs.pingcap.com/tidb/stable/tiup-reference) or you can connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application by running the following command:
-
-</CustomContent>
 
 ```shell
 tiup demo bookshop prepare
@@ -294,14 +277,6 @@ CREATE TABLE `bookshop`.`orders` (
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

@@ -115,11 +115,7 @@ A table can be created without a **primary key** or with a non-integer **primary
 
 When the **primary key** of a table is an [integer type](/data-type-numeric.md#integer-types) and `AUTO_INCREMENT` is used, hotspots cannot be avoided by using `SHARD_ROW_ID_BITS`. If you need to avoid hotspots and do not need a continuous and incremental primary key, you can use [`AUTO_RANDOM`](/auto-random.md) instead of `AUTO_INCREMENT` to eliminate row ID continuity.
 
-<CustomContent platform="tidb">
-
-For more information on how to handle hotspot issues, refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
-
-</CustomContent>
+For more information on how to handle hotspot issues in TiDB Self-Managed, see [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
 
 Following the [guidelines for selecting primary key](#guidelines-to-follow-when-selecting-primary-key), the following example shows how an `AUTO_RANDOM` primary key is defined in the `users` table.
 
@@ -232,43 +228,17 @@ CREATE TABLE `bookshop`.`users` (
 
 ## Use HTAP capabilities
 
-<CustomContent platform="tidb">
-
 > **Note:**
 >
-> The steps provided in this guide is **_ONLY_** for quick start in the test environment. For production environments, refer to [explore HTAP](/explore-htap.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> The steps provided in this guide is **_ONLY_** for quick start. For more instructions, refer to [Use an HTAP Cluster with TiFlash](/tiflash/tiflash-overview.md).
-
-</CustomContent>
+> The steps provided in this section are **_ONLY_** for quick start and testing purposes. For more information about HTAP usage in TiDB, see [explore HTAP](/explore-htap.md).
 
 Suppose that you want to perform OLAP analysis on the `ratings` table using the `bookshop` application, for example, to query **whether the rating of a book has a significant correlation with the time of the rating**, which is to analyze whether the user's rating of the book is objective or not. Then you need to query the `score` and `rated_at` fields of the entire `ratings` table. This operation is resource-intensive for an OLTP-only database. Or you can use some ETL or other data synchronization tools to export the data from the OLTP database to a dedicated OLAP database for analysis.
 
 In this scenario, TiDB, an **HTAP (Hybrid Transactional and Analytical Processing)** database that supports both OLTP and OLAP scenarios, is an ideal one-stop database solution.
 
+In TiDB, you can use the row-based storage engine [TiKV](/tikv-overview.md) for Online Transactional Processing (OLTP) and the columnar storage engine [TiFlash](/tiflash/tiflash-overview.md) for Online Analytical Processing (OLAP). After configuration, TiFlash can replicate data from TiKV in real time according to the Raft Learner consensus algorithm, which ensures that data is strongly consistent between TiKV and TiFlash.
+
 ### Replicate column-based data
-
-<CustomContent platform="tidb">
-
-Currently, TiDB supports two data analysis engines, **TiFlash** and **TiSpark**. For the large data scenarios (100 T), **TiFlash MPP** is recommended as the primary solution for HTAP, and **TiSpark** as a complementary solution.
-
-To learn more about TiDB HTAP capabilities, refer to the following documents: [Quick Start with TiDB HTAP](/quick-start-with-htap.md) and [Explore HTAP](/explore-htap.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-To learn more about TiDB HTAP capabilities, see [TiDB Cloud HTAP Quick Start](/tidb-cloud/tidb-cloud-htap-quickstart.md) and [Use an HTAP Cluster with TiFlash](/tiflash/tiflash-overview.md).
-
-</CustomContent>
-
-In this example, [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) has been chosen as the data analysis engine for the `bookshop` database.
 
 TiFlash does not automatically replicate data after deployment. Therefore, you need to manually specify the tables to be replicated:
 
@@ -413,14 +383,6 @@ Note that all the tables that have been created in this document do not contain 
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

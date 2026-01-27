@@ -8,25 +8,10 @@ aliases: ['/tidb/stable/vector-search-data-types/','/tidb/dev/vector-search-data
 
 A vector is a sequence of floating-point numbers, such as `[0.3, 0.5, -0.1, ...]`. TiDB offers Vector data types, specifically optimized for efficiently storing and querying vector embeddings widely used in AI applications.
 
-<CustomContent platform="tidb">
-
-> **Warning:**
->
-> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
-> This feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-> **Note:**
->
-> Vector data types are available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter), [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> - Vector data types are in beta and might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> - Vector data types are available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 The following Vector data types are currently available:
 

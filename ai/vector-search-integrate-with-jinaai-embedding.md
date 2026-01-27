@@ -8,25 +8,10 @@ aliases: ['/tidb/stable/vector-search-integrate-with-jinaai-embedding/','/tidb/d
 
 This tutorial walks you through how to use [Jina AI](https://jina.ai/) to generate embeddings for text data, and then store the embeddings in TiDB vector storage and search similar texts based on embeddings.
 
-<CustomContent platform="tidb">
-
-> **Warning:**
->
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
-> The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-> **Note:**
->
-> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter), [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> - The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)(/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 ## Prerequisites
 
@@ -36,22 +21,10 @@ To complete this tutorial, you need:
 - [Git](https://git-scm.com/downloads) installed.
 - A TiDB cluster.
 
-<CustomContent platform="tidb">
-
-**If you don't have a TiDB cluster, you can create one as follows:**
-
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
-- Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-
-</CustomContent>
-<CustomContent platform="tidb-cloud">
-
 **If you don't have a TiDB cluster, you can create one as follows:**
 
 - (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster of v8.4.0 or a later version.
-
-</CustomContent>
+- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 ## Run the sample app
 
@@ -127,7 +100,7 @@ For a {{{ .starter }}} cluster, take the following steps to obtain the cluster c
     ```
 
 </div>
-<div label="TiDB Self-Managed">
+<div label="TiDB Self-Managed" value="tidb">
 
 For a TiDB Self-Managed cluster, set the environment variables for connecting to your TiDB cluster in your terminal as follows:
 

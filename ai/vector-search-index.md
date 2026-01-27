@@ -10,25 +10,10 @@ As described in the [Vector Search](/ai/vector-search-overview.md) document, vec
 
 To improve search efficiency, you can create vector search indexes in TiDB for approximate KNN (ANN) search. When using vector indexes for vector search, TiDB can greatly improve query performance with only a slight reduction in accuracy, generally maintaining a search recall rate above 90%.
 
-<CustomContent platform="tidb">
-
-> **Warning:**
->
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
-> The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-> **Note:**
->
-> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter), [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> - The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)(/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 Currently, TiDB supports the [HNSW (Hierarchical Navigable Small World)](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) vector search index algorithm.
 
@@ -42,7 +27,7 @@ Currently, TiDB supports the [HNSW (Hierarchical Navigable Small World)](https:/
 - Directly dropping columns with vector search indexes is not supported. You can drop such a column by first dropping the vector search index on that column and then dropping the column itself.
 - Modifying the type of a column with a vector index is not supported.
 - Setting vector search indexes as [invisible](/sql-statements/sql-statement-alter-index.md) is not supported.
-- Building vector search indexes on TiFlash nodes with [encryption at rest](https://docs.pingcap.com/tidb/stable/encryption-at-rest) enabled is not supported.
+- Building vector search indexes on TiFlash nodes with [encryption at rest](/encryption-at-rest.md) enabled is not supported.
 
 ## Create the HNSW vector index
 

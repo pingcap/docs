@@ -37,17 +37,7 @@ The following are some best practices to follow when you delete data:
 
 - Always specify the `WHERE` clause in the `DELETE` statement. If the `WHERE` clause is not specified, TiDB will delete **_ALL ROWS_** in the table.
 
-<CustomContent platform="tidb">
-
 - Use [bulk-delete](#bulk-delete) when you delete a large number of rows (for example, more than ten thousand), because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- Use [bulk-delete](#bulk-delete) when you delete a large number of rows (for example, more than ten thousand), because TiDB limits the size of a single transaction to 100 MB by default.
-
-</CustomContent>
 
 - If you delete all the data in a table, do not use the `DELETE` statement. Instead, use the [`TRUNCATE`](/sql-statements/sql-statement-truncate.md) statement.
 - For performance considerations, see [Performance Considerations](#performance-considerations).
@@ -171,17 +161,7 @@ with connection:
 
 </SimpleTab>
 
-<CustomContent platform="tidb">
-
 The `rated_at` field is of the `DATETIME` type in [Date and Time Types](/data-type-date-and-time.md). You can assume that it is stored as a literal quantity in TiDB, independent of the time zone. On the other hand, the `TIMESTAMP` type stores a timestamp and thus displays a different time string in a different [time zone](/configure-time-zone.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-The `rated_at` field is of the `DATETIME` type in [Date and Time Types](/data-type-date-and-time.md). You can assume that it is stored as a literal quantity in TiDB, independent of the time zone. On the other hand, the `TIMESTAMP` type stores a timestamp and thus displays a different time string in a different time zone.
-
-</CustomContent>
 
 > **Note:**
 >
@@ -205,17 +185,7 @@ TiDB uses [statistical information](/statistics.md) to determine index selection
 
 When you need to delete multiple rows of data from a table, you can choose the [`DELETE` example](#example) and use the `WHERE` clause to filter the data that needs to be deleted.
 
-<CustomContent platform="tidb">
-
 However, if you need to delete a large number of rows (more than ten thousand), it is recommended that you delete the data in an iterative way, that is, deleting a portion of the data at each iteration until the deletion is completed. This is because TiDB limits the size of a single transaction ([`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default). You can use loops in your programs or scripts to perform such operations.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-However, if you need to delete a large number of rows (more than ten thousand), it is recommended that you delete the data in an iterative way, that is, deleting a portion of the data at each iteration until the deletion is completed. This is because TiDB limits the size of a single transaction to 100 MB by default. You can use loops in your programs or scripts to perform such operations.
-
-</CustomContent>
 
 This section provides an example of writing a script to handle an iterative delete operation that demonstrates how you should do a combination of `SELECT` and `DELETE` to complete a bulk-delete.
 
@@ -415,14 +385,6 @@ BATCH ON `rated_at` LIMIT 1000 DELETE FROM `ratings` WHERE `rated_at` >= "2022-0
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

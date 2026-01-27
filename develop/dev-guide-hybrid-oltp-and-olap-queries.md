@@ -247,32 +247,13 @@ For more information about how TiDB chooses to use TiFlash, see [Use TiDB to rea
 
 ## Read more
 
-<CustomContent platform="tidb">
-
-- [Quick Start with TiDB HTAP](/quick-start-with-htap.md)
-- [Explore HTAP](/explore-htap.md)
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- [TiDB Cloud HTAP Quick Start](/tidb-cloud/tidb-cloud-htap-quickstart.md)
-
-</CustomContent>
-
+- [HTAP Quick Start for TiDB Cloud](/tidb-cloud/tidb-cloud-htap-quickstart.md)
+- [HTAP Quick Start for TiDB Self-Managed](/quick-start-with-htap.md) and [Explore HTAP for TiDB Self-Managed](/explore-htap.md)
 - [Window Functions](/functions-and-operators/window-functions.md)
 - [Use TiFlash](/tiflash/tiflash-overview.md#use-tiflash)
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

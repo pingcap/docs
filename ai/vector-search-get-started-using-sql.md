@@ -15,25 +15,10 @@ This tutorial demonstrates how to get started with TiDB Vector Search just using
 - Store vector embeddings.
 - Perform vector search queries.
 
-<CustomContent platform="tidb">
-
-> **Warning:**
->
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
-> The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-> **Note:**
->
-> The vector search feature is available on TiDB Self-Managed, [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter), [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> - The vector search feature is in beta and might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)(/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 ## Prerequisites
 
@@ -42,22 +27,10 @@ To complete this tutorial, you need:
 - [MySQL command-line client](https://dev.mysql.com/doc/refman/8.4/en/mysql.html) (MySQL CLI) installed on your machine.
 - A TiDB cluster.
 
-<CustomContent platform="tidb">
-
-**If you don't have a TiDB cluster, you can create one as follows:**
-
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
-- Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-
-</CustomContent>
-<CustomContent platform="tidb-cloud">
-
 **If you don't have a TiDB cluster, you can create one as follows:**
 
 - (Recommended) Follow [Creating a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster of v8.4.0 or a later version.
-
-</CustomContent>
+- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 ## Get started
 
@@ -83,7 +56,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     ```
 
 </div>
-<div label="TiDB Self-Managed">
+<div label="TiDB Self-Managed" value="tidb">
 
 After your TiDB Self-Managed cluster is started, execute your cluster connection command in the terminal.
 

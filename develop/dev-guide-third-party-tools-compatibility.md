@@ -41,17 +41,10 @@ MySQL maintains a series of [server status variables starting with `Com_`](https
 
 **Way to avoid**
 
-<CustomContent platform="tidb">
+Do not use these variables. One common scenario is monitoring. TiDB is well observable and does not require querying from server status variables.
 
-Do not use these variables. One common scenario is monitoring. TiDB is well observable and does not require querying from server status variables. For custom monitoring tools, refer to [TiDB Monitoring Framework Overview](/tidb-monitoring-framework.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Do not use these variables. One common scenario is monitoring. TiDB Cloud is well observable and does not require querying from server status variables. For more information about TiDB Cloud monitoring services, refer to [Monitor a TiDB Cluster](/tidb-cloud/monitor-tidb-cluster.md).
-
-</CustomContent>
+- For more information about TiDB Cloud monitoring services, see [Monitor a TiDB Cluster](/tidb-cloud/monitor-tidb-cluster.md).
+- For more information about TiDB Self-Managed monitoring tools, see [TiDB Monitoring Framework Overview](/tidb-monitoring-framework.md).
 
 ### TiDB distinguishes between `TIMESTAMP` and `DATETIME` in error messages
 
@@ -61,17 +54,7 @@ TiDB error messages distinguish between `TIMESTAMP` and `DATETIME`, while MySQL 
 
 **Way to avoid**
 
-<CustomContent platform="tidb">
-
 Do not use the error messages for string matching. Instead, use [Error Codes](/error-codes.md) for troubleshooting.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Do not use the error messages for string matching. Instead, use [Error Codes](https://docs.pingcap.com/tidb/stable/error-codes) for troubleshooting.
-
-</CustomContent>
 
 ### TiDB does not support the `CHECK TABLE` statement
 
@@ -235,14 +218,6 @@ To allow the removal of the `AUTO_INCREMENT` attribute, set `@@tidb_allow_remove
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

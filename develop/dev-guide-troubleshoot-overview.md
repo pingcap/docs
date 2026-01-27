@@ -12,22 +12,26 @@ This document introduces problems that may occur during application development 
 
 If you want to improve SQL query performance, follow the instructions in [SQL Performance Tuning](/develop/dev-guide-optimize-sql-overview.md) to solve performance problems such as full table scans and missing indexes.
 
-<CustomContent platform="tidb">
-
 If you still have performance issues, see the following documents:
+
+<SimpleTab groupId="platform">
+
+<div label="TiDB Cloud" value="tidb-cloud">
+
+- [Slow Queries](/tidb-cloud/tune-performance.md#slow-query)
+- [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis)
+- [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
+
+</div>
+
+<div label="TiDB Self-Managed" value="tidb">
 
 - [Analyze Slow Queries](/analyze-slow-queries.md)
 - [Identify Expensive Queries Using Top SQL](/dashboard/top-sql.md)
 
+</div>
+
 If you have questions about SQL operations, see [SQL FAQs](/faq/sql-faq.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-If you have questions about SQL operations, see [SQL FAQs](https://docs.pingcap.com/tidb/stable/sql-faq).
-
-</CustomContent>
 
 ## Troubleshoot transaction issues
 
@@ -36,24 +40,11 @@ See [Handle transaction errors](/develop/dev-guide-transaction-troubleshoot.md).
 ## See also
 
 - [Unsupported features](/mysql-compatibility.md#unsupported-features)
-
-<CustomContent platform="tidb">
-
-- [Cluster Management FAQs](/faq/manage-cluster-faq.md)
-- [TiDB FAQs](/faq/tidb-faq.md)
-
-</CustomContent>
+- [FAQs for TiDB Cloud](/tidb-cloud/tidb-cloud-faq.md)
+- [FAQs for TiDB Self-Managed](/faq/faq-overview.md)
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

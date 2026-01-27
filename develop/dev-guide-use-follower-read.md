@@ -18,21 +18,14 @@ By default, TiDB only reads and writes data on the leader of the same Region. Wh
 
 ### Reduce read hotspots
 
-<CustomContent platform="tidb">
+You can visually analyze whether your application has a hotspot Region by doing one of the following:
 
-You can visually analyze whether your application has a hotspot Region on the [TiDB Dashboard Key Visualizer Page](/dashboard/dashboard-key-visualizer.md). You can check whether a read hotspot occurs by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
+- For TiDB Cloud, use [Key Visualizer in the TiDB Cloud console](/tidb-cloud/tune-performance.md#key-visualizer) to analyze the hotspot Region.
+- For TiDB Self-Managed, use [Key Visualizer in TiDB Dashboard](/dashboard/dashboard-key-visualizer.md) to analyze the hotspot Region.
 
-For more information about handling hotspot, see [TiDB Hotspot Problem Handling](/troubleshoot-hot-spot-issues.md).
+You can check whether a read hotspot occurs by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
 
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-You can visually analyze whether your application has a hotspot Region on the [TiDB Cloud Key Visualizer Page](/tidb-cloud/tune-performance.md#key-visualizer). You can check whether a read hotspot occurs by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
-
-For more information about handling hotspot, see [TiDB Hotspot Problem Handling](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues).
-
-</CustomContent>
+For more information about handling hotspot, see [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
 
 If read hotspots are unavoidable or the changing cost is very high, you can try using the Follower Read feature to better load the balance of reading requests to the follower Region.
 
@@ -147,31 +140,12 @@ public static class AuthorDAO {
 ## Read more
 
 - [Follower Read](/follower-read.md)
-
-<CustomContent platform="tidb">
-
 - [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
-- [TiDB Dashboard - Key Visualizer Page](/dashboard/dashboard-key-visualizer.md)
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- [Troubleshoot Hotspot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)
-- [TiDB Cloud Key Visualizer Page](/tidb-cloud/tune-performance.md#key-visualizer)
-
-</CustomContent>
+- [Key Visualizer in the TiDB Cloud console](/tidb-cloud/tune-performance.md#key-visualizer)
+- [Key Visualizer in TiDB Dashboard for TiDB Self-Managed](/dashboard/dashboard-key-visualizer.md)
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)
