@@ -3,7 +3,7 @@
 
 # Table of Contents
 
--  Overview
+- Overview
   - [Use TiDB](/best-practices/tidb-best-practices.md)
 - Schema Design
   - [Manage DDL](/best-practices/ddl-introduction.md)
