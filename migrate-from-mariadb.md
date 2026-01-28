@@ -256,6 +256,33 @@ ORDER BY
 
 See also [Character Set and Collation](/character-set-and-collation.md).
 
+### Index length
+
+As shown below, MariaDB automatically changes index definitions for indexes that go over the maximum key length to a prefix index. TiDB follows the MySQL behavior and doesn't automatically change this to a prefix index but returns an error instead. So scripts that create indexes should be changed so they explicitly create prefix indexes where needed.
+
+```
+MariaDB> \W
+Show warnings enabled.
+MariaDB> CREATE TABLE t1(id SERIAL, c1 VARCHAR(800));
+Query OK, 0 rows affected (0.024 sec)
+
+MariaDB> ALTER TABLE t1 ADD INDEX(c1);
+Query OK, 0 rows affected, 1 warning (0.031 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+Note (Code 1071): Specified key was too long; max key length is 3072 bytes
+MariaDB> SHOW CREATE TABLE t1\G
+*************************** 1. row ***************************
+       Table: t1
+Create Table: CREATE TABLE `t1` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `c1` varchar(800) DEFAULT NULL,
+  UNIQUE KEY `id` (`id`),
+  KEY `c1` (`c1`(768))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci
+1 row in set (0.001 sec)
+```
+
 ## Dump data with Dumpling and restore data with TiDB Lightning
 
 This method assumes that you take your application offline, migrate the data, and then re-configure your application to use the migrated data.
