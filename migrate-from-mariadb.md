@@ -283,7 +283,7 @@ Create Table: CREATE TABLE `t1` (
 1 row in set (0.001 sec)
 ```
 
-MariaDB has special handling for unique indexes that are over the maximum length as show below. TiDB doesn't provide this feature.
+MariaDB has special handling for unique indexes that are over the maximum length as shown below. TiDB does not provide this feature.
 
 ```
 MariaDB> CREATE TABLE t2 (id SERIAL PRIMARY KEY, c1 TEXT NOT NULL);
