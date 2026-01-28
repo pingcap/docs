@@ -314,24 +314,24 @@ Create Table: CREATE TABLE `t2` (
 You can emulate the behavior like this:
 
 ```
-tidb> > CREATE TABLE t1 (id int PRIMARY KEY, c1 TEXT);
+tidb> CREATE TABLE t1 (id int PRIMARY KEY, c1 TEXT);
 Query OK, 0 rows affected (0.102 sec)
 
-tidb> > ALTER TABLE t1 ADD COLUMN c1_hash BINARY(32) AS (UNHEX(SHA2(c1,256)));
+tidb> ALTER TABLE t1 ADD COLUMN c1_hash BINARY(32) AS (UNHEX(SHA2(c1,256)));
 Query OK, 0 rows affected (0.242 sec)
 
-tidb> > ALTER TABLE t1 ADD UNIQUE KEY (c1_hash);
+tidb> ALTER TABLE t1 ADD UNIQUE KEY (c1_hash);
 Query OK, 0 rows affected (0.363 sec)
 
-tidb> > INSERT INTO t1(id,c1) VALUES (1,'aaa');
+tidb> INSERT INTO t1(id,c1) VALUES (1,'aaa');
 Query OK, 1 row affected (0.015 sec)
 
-tidb> > INSERT INTO t1(id,c1) VALUES (2,'bbb');
+tidb> INSERT INTO t1(id,c1) VALUES (2,'bbb');
 Query OK, 1 row affected (0.006 sec)
 
-tidb> > INSERT INTO t1(id,c1) VALUES (3,'aaa');
+tidb> INSERT INTO t1(id,c1) VALUES (3,'aaa');
 ERROR 1062 (23000): Duplicate entry '\x984\x87m\xCF\xB0\\xB1g\xA5\xC2IS\xEB\xA5\x8CJ\xC8\x9B\x1A\xDFW' for key 't1.c1_hash'
-tidb> > 
+tidb> 
 ```
 
 ## Dump data with Dumpling and restore data with TiDB Lightning
