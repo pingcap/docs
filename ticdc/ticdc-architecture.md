@@ -62,7 +62,7 @@ When this feature is enabled, TiCDC automatically splits and distributes tables 
 - The table Region count exceeds the configured threshold (`10000` by default, adjustable via `scheduler.region-threshold`).
 - The table write traffic exceeds the configured threshold (disabled by default, configurable via `scheduler.write-key-threshold`).
 
-For MySQL Sink Changefeed, we add a restriction that only tables that meet the condition of **only one primary key or non-null unique key** can be split and distributed, to ensure the correctness of data synchronization in the table split mode.
+For MySQL Sink Changefeed, only tables that meet the condition of **only one primary key or non-null unique key** can be split and distributed, to ensure the correctness of data synchronization in the table split mode.
 
 ## Compatibility
 
