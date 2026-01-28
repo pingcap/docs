@@ -1,23 +1,23 @@
 ---
 title: Subscribe via Zoom
-summary: Zoom 経由でアラート通知を受信して TiDB クラスターを監視する方法を学びます。
+summary: Zoom 経由でアラート通知を受信して​​ TiDB クラスターを監視する方法を学習します。
 ---
 
 # Zoomで登録する {#subscribe-via-zoom}
 
-TiDB Cloud、 [ズーム](https://www.zoom.com/) [メール](/tidb-cloud/monitor-alert-email.md)方法でアラート通知を簡単に購読できます。このドキュメントでは[スラック](/tidb-cloud/monitor-alert-slack.md) Zoom経由でアラート通知を購読する方法について説明します。
+TiDB Cloud は、Zoom、 [スラック](/tidb-cloud/monitor-alert-slack.md)経由[ページャーデューティ](/tidb-cloud/monitor-alert-pagerduty.md)アラート通知を簡単に購読できる方法を提供しています。このドキュメントで[フラッシュデューティ](/tidb-cloud/monitor-alert-flashduty.md) [メール](/tidb-cloud/monitor-alert-email.md) Zoom 経由でアラート通知を購読する方法について説明します。
 
 > **注記：**
 >
-> 現在、アラートサブスクリプションは[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対してのみ利用可能です。
+> 現在、アラート サブスクリプションは[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対してのみ利用可能です。
 
 ## 前提条件 {#prerequisites}
 
--   Zoom 経由のサブスクリプション機能は、**エンタープライズ**または**プレミアム**サポート プランに加入している組織でのみご利用いただけます。
+-   Zoom 経由のサブスクライブ機能は、**エンタープライズ**または**プレミアム**サポート プランに加入している組織でのみ利用できます。
 
 -   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権またはTiDB Cloudの対象プロジェクトへの`Project Owner`アクセス権が必要です。
 
--   Zoom で Incoming Webhook チャットボットを追加して構成するには、Zoom アカウントの管理者権限が必要です。
+-   Zoom で Incoming Webhook チャットボットを追加および構成するには、Zoom アカウントの管理者権限が必要です。
 
 ## アラート通知を購読する {#subscribe-to-alert-notifications}
 
@@ -33,7 +33,7 @@ TiDB Cloud、 [ズーム](https://www.zoom.com/) [メール](/tidb-cloud/monitor
 
 2.  **チームチャット**タブをクリックします。
 
-3.  **[アプリ]**の下で、 **[受信 Webhook]**を見つけて選択するか、メッセージを受信したいチャット チャネルを上から選択します。
+3.  **[アプリ]**の下で、 **[受信 Webhook] を**見つけて選択するか、メッセージを受信したいチャット チャネルを上から選択します。
 
 4.  新しい接続を作成するには、以下のコマンドを入力します。1 `${connectionName}`希望の接続名（例： `tidbcloud-alerts` ）に置き換えてください。
 
@@ -50,13 +50,13 @@ TiDB Cloud、 [ズーム](https://www.zoom.com/) [メール](/tidb-cloud/monitor
 
 > **ヒント：**
 >
-> アラートサブスクリプションは、現在のプロジェクト内のすべてのアラートに適用されます。プロジェクト内に複数のクラスターがある場合は、一度だけサブスクリプションすれば済みます。
+> アラートのサブスクリプションは、現在のプロジェクト内のすべてのアラートに適用されます。プロジェクト内に複数のクラスターがある場合は、一度だけサブスクリプションすれば済みます。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用してターゲット プロジェクトに切り替えます。
 
 2.  左側のナビゲーション ペインで、 **[プロジェクト設定]** &gt; **[アラート サブスクリプション]**をクリックします。
 
-3.  **アラート サブスクリプション**ページで、右上隅の**[サブスクライバーの追加]**をクリックします。
+3.  **「アラート サブスクリプション」**ページで、右上隅の**「サブスクライバーの追加」**をクリックします。
 
 4.  **「サブスクライバータイプ」**ドロップダウンリストから**「Zoom」**を選択します。
 
@@ -80,4 +80,4 @@ TiDB Cloud、 [ズーム](https://www.zoom.com/) [メール](/tidb-cloud/monitor
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボ ボックスを使用してターゲット プロジェクトに切り替えます。
 2.  左側のナビゲーション ペインで、 **[プロジェクト設定]** &gt; **[アラート サブスクリプション]**をクリックします。
 3.  **[アラート サブスクリプション]**ページで、削除する対象のサブスクライバーの行を見つけて、 **[...]** &gt; **[サブスクリプション解除]**をクリックします。
-4.  登録解除を確認するには、 **「登録解除」を**クリックします。
+4.  **「登録解除」**をクリックして登録解除を確認します。

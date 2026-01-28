@@ -1,15 +1,11 @@
 ---
-title: Subscribe via Slack
-summary: Slack 経由でアラート通知を受信して​​ TiDB クラスターを監視する方法を学びます。
+title: Subscribe via PagerDuty
+summary: PagerDuty 経由でアラート通知を取得して TiDB クラスターを監視する方法を学習します。
 ---
 
-# Slackで登録する {#subscribe-via-slack}
+# PagerDuty経由で購読する {#subscribe-via-pagerduty}
 
-TiDB Cloud は、 [メール](/tidb-cloud/monitor-alert-email.md) 、 [ズーム](/tidb-cloud/monitor-alert-zoom.md)経由[ページャーデューティ](/tidb-cloud/monitor-alert-pagerduty.md)アラート通知を簡単に購読できる機能を提供しています。このドキュメントでは[フラッシュデューティ](/tidb-cloud/monitor-alert-flashduty.md) Slack 経由でアラート通知を購読する方法について説明します。
-
-次のスクリーンショットは、 2 つのアラートの例を示しています。
-
-![TiDB Cloud Alerts in Slack](/media/tidb-cloud/tidb-cloud-alert-subscription.png)
+TiDB Cloudは、 [スラック](/tidb-cloud/monitor-alert-slack.md) 、 [メール](/tidb-cloud/monitor-alert-email.md) [フラッシュデューティ](/tidb-cloud/monitor-alert-flashduty.md)介してアラート通知を簡単に購読する方法を提供します。このドキュメントでは[ズーム](/tidb-cloud/monitor-alert-zoom.md) PagerDutyを介してアラート通知を購読する方法について説明します。
 
 > **注記：**
 >
@@ -17,21 +13,18 @@ TiDB Cloud は、 [メール](/tidb-cloud/monitor-alert-email.md) 、 [ズーム
 
 ## 前提条件 {#prerequisites}
 
--   Slack 経由のサブスクリプション機能は、**エンタープライズ**または**プレミアム**サポート プランに加入している組織でのみご利用いただけます。
+-   PagerDuty 経由のサブスクライブ機能は、 **Enterprise**または**Premium** [サポートプラン](/tidb-cloud/connected-care-overview.md)にサブスクライブしている組織でのみ利用できます。
 
 -   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権またはTiDB Cloudの対象プロジェクトへの`Project Owner`アクセス権が必要です。
 
 ## アラート通知を購読する {#subscribe-to-alert-notifications}
 
-### ステップ1. Slack Webhook URLを生成する {#step-1-generate-a-slack-webhook-url}
+プロジェクト内のクラスターのアラート通知を受信するには、次の手順を実行します。
 
-1.  [Slackアプリを作成する](https://api.slack.com/apps/new) （まだ作成していない場合は）をクリックします。 **「Create New App（新規アプリ**の作成）」をクリックし、 **「From scratch（最初から****作成）」を選択します。名前を入力し、アプリを関連付けるワークスペースを選択して、「Create App（アプリの作成）」**をクリックします。
-2.  アプリの設定ページに移動します。1 [アプリの管理ダッシュボード](https://api.slack.com/apps)設定を読み込むことができます。
-3.  **[Incoming Webhooks]**タブをクリックし、 **[Activate Incoming Webhooks]**を**[ON]**に切り替えます。
-4.  **「ワークスペースに新しい Webhook を追加」**をクリックします。
-5.  アラート通知を受信するチャネルを選択し、 **「承認」**を選択します。受信Webhookをプライベートチャネルに追加する必要がある場合は、まずそのチャネルに参加する必要があります。
+### ステップ1. PagerDuty統合キーを生成する {#step-1-generate-a-pagerduty-integration-key}
 
-**「ワークスペースの Webhook URL」**セクションの下に、次の形式で新しいエントリが表示されます: `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX` 。
+1.  [PagerDuty イベント API v2 の概要](https://developer.pagerduty.com/docs/events-api-v2-overview#getting-started)の手順に従って、 **Events API v2**タイプの統合キーを生成します。
+2.  生成された統合キーを保存して、次の手順で使用します。
 
 ### ステップ2. TiDB Cloudからサブスクライブする {#step-2-subscribe-from-tidb-cloud}
 
@@ -45,9 +38,9 @@ TiDB Cloud は、 [メール](/tidb-cloud/monitor-alert-email.md) 、 [ズーム
 
 3.  **「アラート サブスクリプション」**ページで、右上隅の**「サブスクライバーの追加」**をクリックします。
 
-4.  **「サブスクライバータイプ」**ドロップダウンリストから**Slack を**選択します。
+4.  **「サブスクライバー タイプ」**ドロップダウン リストから**PagerDuty を**選択します。
 
-5.  「**名前」**フィールドに名前を入力し、 **「URL」**フィールドに Slack Webhook URL を入力します。
+5.  「**名前」**フィールドに名前を入力し、 **「統合キー」**フィールドに PagerDuty 統合キーを入力します。
 
 6.  **[接続テスト]**をクリックします。
 

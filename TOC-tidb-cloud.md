@@ -62,7 +62,7 @@
         -   [SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md)
         -   [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md)
         -   [ジャンゴ](/develop/dev-guide-sample-application-python-django.md)
-    -   Node.js
+    -   ノード.js
         -   [ノード-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
         -   [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
         -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
@@ -133,7 +133,7 @@
     -   [TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
     -   TiDB Cloud専用クラスタに接続する
         -   [接続方法の概要](/tidb-cloud/connect-to-tidb-cluster.md)
-        -   [パブリック接続経由で接続](/tidb-cloud/connect-via-standard-connection.md)
+        -   [パブリック接続経由​​で接続](/tidb-cloud/connect-via-standard-connection.md)
         -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md)
         -   [Azure のプライベート エンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
         -   [プライベートエンドポイント経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
@@ -151,7 +151,7 @@
         -   [FastScanを使用する](/tiflash/use-fastscan.md)
         -   [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
         -   [TiFlashクエリ結果のマテリアライゼーション](/tiflash/tiflash-results-materialization.md)
-        -   [TiFlash遅延実体化](/tiflash/tiflash-late-materialization.md)
+        -   [TiFlash遅延マテリアライゼーション](/tiflash/tiflash-late-materialization.md)
         -   [互換性](/tiflash/tiflash-compatibility.md)
         -   [パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)
     -   監視と警告
@@ -325,7 +325,7 @@
         -   [アイデンティティアクセス管理](/tidb-cloud/manage-user-access.md)
         -   [OAuth 2.0](/tidb-cloud/oauth2.md)
     -   ネットワークアクセス制御
-        -   [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)
+        -   [IPアクセスリストを構成する](/tidb-cloud/configure-ip-access-list.md)
         -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md)
         -   [Azure のプライベート エンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
         -   [プライベートエンドポイント経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
@@ -754,6 +754,8 @@
         -   接続済み: TiDB Cloudアラートの IM サブスクリプション
             -   [Slackで登録する](/tidb-cloud/monitor-alert-slack.md)
             -   [Zoomで登録する](/tidb-cloud/monitor-alert-zoom.md)
+            -   [Flashdutyで購読する](/tidb-cloud/monitor-alert-flashduty.md)
+            -   [PagerDuty経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)
         -   接続: IMチケットの作成とサブスクリプションの更新
             -   [Slack 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
             -   [Larkでチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
