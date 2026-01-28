@@ -1,8 +1,6 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# Table of Contents
-
 - Overview
   - [Use TiDB](/best-practices/tidb-best-practices.md)
 - Schema Design
