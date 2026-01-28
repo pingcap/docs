@@ -283,6 +283,34 @@ Create Table: CREATE TABLE `t1` (
 1 row in set (0.001 sec)
 ```
 
+MariaDB has special handling for unique indexes that are over the maximum length as show below. TiDB doesn't provide this feature.
+
+```
+mysql-11.8.5-MariaDB-ubu2404 [test]> CREATE TABLE t2 (id SERIAL PRIMARY KEY, c1 TEXT NOT NULL);
+Query OK, 0 rows affected (0.015 sec)
+
+mysql-11.8.5-MariaDB-ubu2404 [test]> ALTER TABLE t2 ADD INDEX regular_index_c1 (c1);
+Query OK, 0 rows affected, 1 warning (0.034 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+Note (Code 1071): Specified key was too long; max key length is 3072 bytes
+mysql-11.8.5-MariaDB-ubu2404 [test]> ALTER TABLE t2 ADD UNIQUE INDEX unique_index_c1 (c1);
+Query OK, 0 rows affected (0.048 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql-11.8.5-MariaDB-ubu2404 [test]> SHOW CREATE TABLE t2\G
+*************************** 1. row ***************************
+       Table: t2
+Create Table: CREATE TABLE `t2` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `c1` text NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index_c1` (`c1`) USING HASH,
+  KEY `regular_index_c1` (`c1`(768))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci
+1 row in set (0.001 sec)
+```
+
 ## Dump data with Dumpling and restore data with TiDB Lightning
 
 This method assumes that you take your application offline, migrate the data, and then re-configure your application to use the migrated data.
