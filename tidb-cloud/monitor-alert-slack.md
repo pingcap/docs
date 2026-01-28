@@ -1,65 +1,65 @@
 ---
 title: 通过 Slack 订阅
-summary: 了解如何通过 Slack 获取告警通知来监控 TiDB 集群。
+summary: 了解如何通过 Slack 获取报警通知，以便监控你的 TiDB 集群。
 ---
 
 # 通过 Slack 订阅
 
-TiDB Cloud 为你提供了一种通过 [Slack](https://slack.com/)、[电子邮件](/tidb-cloud/monitor-alert-email.md)和 [Zoom](/tidb-cloud/monitor-alert-zoom.md) 订阅告警通知的简便方法。本文档介绍如何通过 Slack 订阅告警通知。
+TiDB Cloud 为你提供了通过 Slack、[email](/tidb-cloud/monitor-alert-email.md)、[Zoom](/tidb-cloud/monitor-alert-zoom.md)、[Flashduty](/tidb-cloud/monitor-alert-flashduty.md) 和 [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md) 订阅报警通知的便捷方式。本文档介绍如何通过 Slack 订阅报警通知。
 
-以下截图显示了两个示例告警。
+下图展示了两个报警示例。
 
-![TiDB Cloud 在 Slack 中的告警](/media/tidb-cloud/tidb-cloud-alert-subscription.png)
+![TiDB Cloud Alerts in Slack](/media/tidb-cloud/tidb-cloud-alert-subscription.png)
 
 > **注意：**
 >
-> 目前，告警订阅仅适用于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
+> 目前，报警订阅仅适用于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
 
 ## 前提条件
 
-- 通过 Slack 订阅的功能仅适用于订阅了**企业版**或**高级版**支持计划的组织。
+- 通过 Slack 订阅功能仅对订阅了 **Enterprise** 或 **Premium** 支持计划的组织开放。
 
-- 要订阅 TiDB Cloud 的告警通知，你必须拥有 TiDB Cloud 中组织的 `Organization Owner` 访问权限或目标项目的 `Project Owner` 访问权限。
+- 要订阅 TiDB Cloud 的报警通知，你必须拥有组织的 `Organization Owner` 访问权限，或在 TiDB Cloud 中拥有目标项目的 `Project Owner` 访问权限。
 
-## 订阅告警通知
+## 订阅报警通知
 
 ### 步骤 1. 生成 Slack webhook URL
 
-1. 如果你还没有 Slack 应用，请[创建一个 Slack 应用](https://api.slack.com/apps/new)。点击**创建新应用**，然后选择**从头开始**。输入名称，选择要与应用关联的工作区，然后点击**创建应用**。
-2. 转到应用的设置页面。你可以通过[应用管理仪表板](https://api.slack.com/apps)加载其设置。
-3. 点击 **Incoming Webhooks** 标签，然后将 **Activate Incoming Webhooks** 切换为 **ON**。
+1. 如果你还没有 Slack 应用，[创建一个 Slack app](https://api.slack.com/apps/new)。点击 **Create New App**，选择 **From scratch**。输入名称，选择要关联的 workspace，然后点击 **Create App**。
+2. 进入你的应用设置页面。你可以通过 [app 的管理控制台](https://api.slack.com/apps) 加载其设置。
+3. 点击 **Incoming Webhooks** 标签页，然后将 **Activate Incoming Webhooks** 切换为 **ON**。
 4. 点击 **Add New Webhook to Workspace**。
-5. 选择你想要接收告警通知的频道，然后选择**授权**。如果你需要将传入的 webhook 添加到私有频道，你必须先加入该频道。
+5. 选择你希望接收报警通知的频道，然后点击 **Authorize**。如果你需要将 incoming webhook 添加到私有频道，必须先加入该频道。
 
 你可以在 **Webhook URLs for Your Workspace** 部分看到一个新条目，格式如下：`https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`。
 
-### 步骤 2. 从 TiDB Cloud 订阅
+### 步骤 2. 从 TiDB Cloud 进行订阅
 
 > **提示：**
 >
-> 告警订阅适用于当前项目中的所有告警。如果你在项目中有多个集群，只需订阅一次即可。
+> 报警订阅针对当前项目下的所有报警。如果项目中有多个集群，只需订阅一次即可。
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，使用左上角的组合框切换到目标项目。
-2. 在左侧导航栏中，点击**项目设置** > **告警订阅**。
-3. 在**告警订阅**页面，点击右上角的**添加订阅者**。
-4. 从**订阅者类型**下拉列表中选择 **Slack**。
-5. 在**名称**字段中输入名称，在 **URL** 字段中输入你的 Slack webhook URL。
-6. 点击**测试连接**。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，使用左上角的下拉框切换到目标项目。
+2. 在左侧导航栏，点击 **Project Settings** > **Alert Subscription**。
+3. 在 **Alert Subscription** 页面，点击右上角的 **Add Subscriber**。
+4. 在 **Subscriber Type** 下拉列表中选择 **Slack**。
+5. 在 **Name** 字段输入名称，在 **URL** 字段输入你的 Slack webhook URL。
+6. 点击 **Test Connection**。
 
-    - 如果测试成功，将显示**保存**按钮。
-    - 如果测试失败，将显示错误消息。按照消息提示排除问题并重试连接。
+    - 如果测试成功，会显示 **Save** 按钮。
+    - 如果测试失败，会显示错误信息。请根据提示排查问题并重试连接。
 
-7. 点击**保存**完成订阅。
+7. 点击 **Save** 完成订阅。
 
-或者，你也可以点击集群**告警**页面右上角的**订阅**。你将被引导至**告警订阅者**页面。
+另外，你也可以在集群的 **Alert** 页面右上角点击 **Subscribe**，会跳转到 **Alert Subscriber** 页面。
 
-如果告警条件保持不变，告警会每三小时发送一次通知。
+如果报警条件持续未变，报警会每三小时发送一次通知。
 
-## 取消订阅告警通知
+## 取消订阅报警通知
 
-如果你不再想接收项目中集群的告警通知，请执行以下步骤：
+如果你不再希望接收项目中集群的报警通知，请按以下步骤操作：
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，使用左上角的组合框切换到目标项目。
-2. 在左侧导航栏中，点击**项目设置** > **告警订阅**。
-3. 在**告警订阅**页面，找到要删除的目标订阅者所在行，然后点击 **...** > **取消订阅**。
-4. 点击**取消订阅**确认取消订阅。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，使用左上角的下拉框切换到目标项目。
+2. 在左侧导航栏，点击 **Project Settings** > **Alert Subscription**。
+3. 在 **Alert Subscription** 页面，找到要删除的目标订阅者所在行，然后点击 **...** > **Unsubscribe**。
+4. 点击 **Unsubscribe** 以确认取消订阅。
