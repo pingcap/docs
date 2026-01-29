@@ -5,7 +5,7 @@ summary: Learn how the shared-storage, cloud-native TiDB X architecture delivers
 
 # TiDB X Architecture
 
-TiDB X is a new distributed SQL architecture that makes cloud-native object storage the backbone of TiDB. Currently available in TiDB Cloud <CustomContent plan="starter,essential">Starter and Essential</CustomContent><CustomContent plan="premium">Starter, Essential, and Premium</CustomContent>, this architecture enables elastic scalability, predictable performance, and optimized total cost of ownership (TCO) for AI-era workloads.
+TiDB X is a new distributed SQL architecture that makes cloud-native object storage the backbone of TiDB. Currently available in TiDB Cloud <CustomContent plan="starter,essential,dedicated">Starter and Essential</CustomContent><CustomContent plan="premium">Starter, Essential, and Premium</CustomContent>, this architecture enables elastic scalability, predictable performance, and optimized total cost of ownership (TCO) for AI-era workloads.
 
 TiDB X represents a fundamental evolution from [classic TiDB](/tidb-architecture.md)'s shared-nothing architecture to a cloud-native shared-storage architecture. By leveraging object storage as the shared persistent storage layer, TiDB X introduces a separation of compute workloads that isolates online transactional workloads from resource-intensive background tasks.
 
