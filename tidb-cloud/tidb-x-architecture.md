@@ -67,7 +67,7 @@ TiDB X is a cloud-native evolution of the classic TiDB distributed design. It in
 
 - **Stateless SQL layer**: The SQL layer (TiDB server) is stateless and responsible for query parsing, optimization, and execution, without storing persistent data.
 - **Gateway and connection management**: TiProxy (or load balancers) maintains persistent client connections and routes SQL traffic seamlessly. Originally designed to support online upgrades, TiProxy now serves as a natural gateway component.
-- **Dynamic sharding with [Regions](/tidb-cloud-glossary.md#region)**: TiKV uses range-based sharding units called Regions (256 MiB by default). Data is split into millions of Regions, and the system automatically manages Region placement, movement, and load balancing across nodes.
+- **Dynamic sharding with [Regions](/tidb-cloud/tidb-cloud-glossary.md#region)**: TiKV uses range-based sharding units called Regions (256 MiB by default). Data is split into millions of Regions, and the system automatically manages Region placement, movement, and load balancing across nodes.
 
 TiDB X evolves these foundations by replacing local shared-nothing storage with a **cloud-native shared-storage object storage** backbone. This shift enables a "[separation of compute and compute](#separation-of-compute-and-compute)" model, which offloads resource-intensive tasks to elastic pools to ensure instant scalability and predictable performance.
 
