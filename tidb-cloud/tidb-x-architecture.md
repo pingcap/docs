@@ -151,11 +151,10 @@ The following table summarizes the architectural transitions from classic TiDB t
 | Feature | Classic TiDB | TiDB X | Primary benefit |
 | --- | --- | --- | --- |
 | Architecture | Shared-nothing (data stored on local disks) | Shared-storage (object storage as authoritative persistent storage) | Object storage enables cloud-native elasticity |
-| Workload isolation | Foreground and background tasks share the same resources | Separation of compute and compute (elastic compute pools for heavy tasks) | Protects OLTP workloads from performance interference |
-| Performance | OLTP and heavy jobs contend for CPU/IO | Dedicated elastic pools for heavy tasks | Lower OLTP latency while heavy jobs complete faster |
+| Stability | Foreground and background tasks share the same resources | Separation of compute and compute (elastic compute pools for heavy tasks) | Protects OLTP workloads under write-intensive or maintenance workloads |
+| Performance | OLTP and tasks jobs contend for CPU/IO | Dedicated elastic pools for heavy tasks | Lower OLTP latency while heavy tasks complete faster |
 | Scaling mechanism | Physical data migration (SST file copying between TiKV nodes) | TiKV nodes only read/write SST files via object storage | 5x-10x faster scale-out and scale-in |
 | Storage engine | Single LSM tree per TiKV node (RocksDB) | LSM forest (one independent LSM tree per Region) | Eliminates global mutex contention and reduces compaction interference |
 | DDL execution | DDL competes with user traffic for local CPU and I/O | DDL offloaded to elastic compute resources | Faster schema changes with more predictable latency |
-| Stability | Sensitive to compaction and rebalancing under heavy load | Background tasks isolated from online traffic | More stable latency under write-intensive or maintenance workloads |
 | Cost model | Requires over-provisioning for peak workloads | Elastic TCO (pay-as-you-go) | Pay only for actual resource consumption |
 | Backup | Data-volume dependent physical backup | Metadata-driven with object storage integration | Significantly faster backup operations |
