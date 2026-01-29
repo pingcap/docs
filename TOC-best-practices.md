@@ -16,7 +16,7 @@
   - [Use Read-Only Storage Nodes](/best-practices/readonly-nodes.md)
   - [Monitor TiDB Using Grafana](/best-practices/grafana-monitor-best-practices.md)
 - Performance Tuning
-  - [Tune TiKV Performance with Massive Regions](/best-practices/massive-regions-best-practices.md)
-  - [Tune PD Scheduling](/best-practices/pd-scheduling-best-practices.md)
   - [Handle Millions of Tables in SaaS Multi-Tenant Scenarios](/best-practices/saas-best-practices.md)
   - [Handle High-Concurrency Writes](/best-practices/high-concurrency-best-practices.md)
+  - [Tune TiKV Performance with Massive Regions](/best-practices/massive-regions-best-practices.md)
+  - [Tune PD Scheduling](/best-practices/pd-scheduling-best-practices.md)
