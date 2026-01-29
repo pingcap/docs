@@ -88,9 +88,9 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 
 <div label="Azure Blob">
 
-For **Azure Blob**, before filling **Azure Blob Endpoint**, you need to first configure the container and SAS token in the Azure portal. Take the following steps:
+For **Azure Blob**, you first need to configure the container and get a SAS token in the Azure portal. Take the following steps:
 
-1. In the Azure portal, create a container for storing database audit logs.
+1. In the Azure portal, create a container for storing changefeed data.
     1. In the left navigation pane, click **Storage Accounts**, and then click the storage account.
     2. In the navigation pane for the selected storage account, click **Data storage** > **Containers**, and then click **+ Container**.
     3. Enter a name for your new container, set the anonymous access level (the recommended level is **Private**), and then click **Create**.
@@ -110,7 +110,7 @@ For **Azure Blob**, before filling **Azure Blob Endpoint**, you need to first co
     >
     > - The changefeed needs to continuously write events, so ensure the SAS token has a sufficiently long validity period. It is recommended to replace it every six to twelve months for security.
     > - The generated SAS token cannot be revoked, so set its validity period carefully.
-    > - Remember to re-generate and update the SAS token before it expires to ensure continuous availability.
+    > - To ensure continuous availability, re-generate and update the SAS token before it expires.
 
     6. Click **Generate SAS and connection string**, then copy the **SAS token**.
     ![Generate a SAS token](/media/tidb-cloud/changefeed/sink-to-cloud-storage-azure-signature.png)
