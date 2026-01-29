@@ -165,7 +165,7 @@ For more information, see [Event filter rules](/ticdc/ticdc-filter.md#event-filt
 
 #### `region-threshold`
 
-- Default value: for TiCDC in the [new architecture](/ticdc/ticdc-architecture.md), the default value is `10000`; for TiCDC in the [classic architecture](/ticdc/ticdc-classic-architecture.md), the default value is `100000`.
+- Default value: for the [TiCDC new architecture](/ticdc/ticdc-architecture.md), the default value is `10000`; for the [TiCDC classic architecture](/ticdc/ticdc-classic-architecture.md), the default value is `100000`.
 
 #### `write-key-threshold`
 
