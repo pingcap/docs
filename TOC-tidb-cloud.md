@@ -695,12 +695,13 @@
     - [MSP (Deprecated)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
   - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta)
 - General Reference
-  - TiDB Cluster Architecture
+  - TiDB Classic Architecture
     - [Overview](/tidb-architecture.md)
     - [Storage](/tidb-storage.md)
     - [Computing](/tidb-computing.md)
     - [Scheduling](/tidb-scheduling.md)
     - [TSO](/tso.md)
+  - [TiDB X Architecture](/tidb-cloud/tidb-x-architecture.md)
   - Storage Engines
     - TiKV
       - [TiKV Overview](/tikv-overview.md)

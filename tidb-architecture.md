@@ -5,6 +5,12 @@ summary: The key architecture components of the TiDB platform
 
 # TiDB Architecture
 
+<CustomContent platform="tidb-cloud">
+
+TiDB provides two architectures: the classic TiDB architecture and the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md). This document introduces the classic TiDB architecture.
+
+</CustomContent>
+
 Compared with the traditional standalone databases, TiDB has the following advantages:
 
 * Has a distributed architecture with flexible and elastic scalability.
