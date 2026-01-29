@@ -151,11 +151,11 @@ For more information, see [Event filter rules](/ticdc/ticdc-filter.md#event-filt
 #### `enable-table-across-nodes`
 
 - Allocate tables to multiple TiCDC nodes for replication on a per-Region basis.
-- In the old architecture, this configuration item only takes effect on Kafka changefeeds and is not supported on MySQL changefeeds. 
-- In the new architecture, this configuration item works on all types of downstream changefeeds. For more information, see [New features](/ticdc/ticdc-architecture.md#new-features).
+- In the [TiCDC classic architecture](/ticdc/ticdc-classic-architecture.md), this configuration item only takes effect on Kafka changefeeds and is not supported on MySQL changefeeds. 
+- In the [TiCDC new architecture](/ticdc/ticdc-architecture.md), this configuration item works on all types of downstream changefeeds. For more information, see [New features](/ticdc/ticdc-architecture.md#new-features).
 - When `enable-table-across-nodes` is enabled, there are two allocation modes:
 
-    1. Allocate tables based on the number of Regions, so that each TiCDC node handles roughly the same number of Regions. If the number of Regions for a table exceeds the value of [`region-threshold`](#region-threshold), the table will be allocated to multiple nodes for replication. The default value of `region-threshold` is `10000`.
+    1. Allocate tables based on the number of Regions, so that each TiCDC node handles roughly the same number of Regions. If the number of Regions for a table exceeds the value of [`region-threshold`](#region-threshold), the table will be allocated to multiple nodes for replication. 
     2. Allocate tables based on the write traffic, so that each TiCDC node handles roughly the same number of modified rows. Only when the number of modified rows per minute in a table exceeds the value of [`write-key-threshold`](#write-key-threshold), will this allocation take effect.
 
   You only need to configure one of the two modes. If both `region-threshold` and `write-key-threshold` are configured, TiCDC prioritizes the traffic allocation mode, namely `write-key-threshold`.
@@ -165,7 +165,7 @@ For more information, see [Event filter rules](/ticdc/ticdc-filter.md#event-filt
 
 #### `region-threshold`
 
-- Default value: for TiCDC in the [new architecture](/ticdc/ticdc-architecture.md), the default value of this parameter is `10000`; for TiCDC in the [classic architecture](/ticdc/ticdc-classic-architecture.md), the default value is `100000`.
+- Default value: for TiCDC in the [new architecture](/ticdc/ticdc-architecture.md), the default value is `10000`; for TiCDC in the [classic architecture](/ticdc/ticdc-classic-architecture.md), the default value is `100000`.
 
 #### `write-key-threshold`
 
