@@ -41,7 +41,7 @@ While the shared-nothing architecture of classic TiDB provides high resilience, 
 
     - Resource contention: Heavy write traffic triggers massive local compaction jobs to merge SST files. In classic TiDB, because these compaction jobs run on the same TiKV nodes serving online traffic, they compete for the same CPU and I/O resources, which might affect the online application.
 
-    - Lack of physical isolation: There is no physical isolation between logical Regions and physical SST files. Operations like moving a region (balancing) create compaction overhead that competes directly with user queries, leading to potential performance jitter.
+    - Lack of physical isolation: There is no physical isolation between logical Regions and physical SST files. Operations like moving a Region (balancing) create compaction overhead that competes directly with user queries, leading to potential performance jitter.
 
     - Write throttling: Under heavy write pressure, if the background compaction cannot keep up with the foreground write traffic, the classic TiDB triggers flow control mechanisms to protect the storage engine. This results in write throughput throttling and latency spikes for the application.
 
@@ -83,7 +83,7 @@ Because the authoritative data is already stored in object storage, backups simp
 
 ### Auto-scaling mechanism
 
-The TiDB X architecture is designed for elastic scaling, facilitated by a load balancer and the stateless nature of the **isolated SQL layer**. The shared cache layer can scale based on CPU usage or disk volume. The system can automatically scale by adding or removing compute pods in seconds to meet real-time workload demands.
+The TiDB X architecture is designed for elastic scaling, facilitated by a load balancer and the stateless nature of the **isolated SQL layer**. The shared cache layer can scale based on CPU usage or disk capacity. The system automatically adds or removes compute pods within seconds to adapt to real-time workload demands.
 
 This technical elasticity enables a consumption-based, pay-as-you-go pricing model. Users no longer need to provision resources for peak loads. Instead, the system automatically scales out during traffic spikes and scales in during idle periods to minimize costs.
 
