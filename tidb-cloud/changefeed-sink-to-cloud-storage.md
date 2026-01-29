@@ -97,7 +97,7 @@ For **Azure Blob**, you first need to configure the container and get a SAS toke
 
 2. Get the URL of the target container.
     1. In the container list, select the target container, click **...** for the container, and then select **Container properties**.
-    2. Copy the **URL** value for later use (e.g., `https://<storage_account>.blob.core.windows.net/<container>`).
+    2. Copy the **URL** value for later use (for example `https://<storage_account>.blob.core.windows.net/<container>`).
 
 3. Generate a SAS token.
     1. In the navigation pane for the selected storage account, click **Security + networking** > **Shared access signature**.
