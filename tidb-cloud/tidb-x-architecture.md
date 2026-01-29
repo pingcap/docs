@@ -25,7 +25,7 @@ The classic TiDB architecture provides the following foundational capabilities:
 - **Hybrid Transactional and Analytical Processing (HTAP)**: It unifies transactional and analytical workloads. By pushing down heavy aggregation and join operations to TiFlash (the columnar storage engine), it provides predictable, real-time analytics on fresh transactional data without complex ETL pipelines.
 - **Non-blocking schema changes**: It utilizes a fully online DDL implementation. Schema changes do not block reads or writes, allowing data models to evolve with minimal impact on application latency or availability.
 - **High availability**: It supports seamless cluster upgrades and scaling operations. This ensures that critical services remain accessible during maintenance or resource adjustment.
-- **Multi-cloud support**: It operates as an open-source solution with support for <CustomContent language="en,zh">Amazon Web Services (AWS), Google Cloud, Microsoft Azure, and Alibaba Cloud.</CustomContent><CustomContent language="ja">Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.</CustomContent>. This provides cloud neutrality without vendor lock-in.
+- **Multi-cloud support**: It operates as an open-source solution with support for <CustomContent language="en,zh">Amazon Web Services (AWS), Google Cloud, Microsoft Azure, and Alibaba Cloud</CustomContent><CustomContent language="ja">Amazon Web Services (AWS), Google Cloud, and Microsoft Azure</CustomContent>. This provides cloud neutrality without vendor lock-in.
 
 ### Challenges of classic TiDB
 
