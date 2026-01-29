@@ -19,7 +19,7 @@ This section analyzes the architecture of classic TiDB and its limitations that 
 
 The shared-nothing architecture of classic TiDB addresses the limitations of traditional monolithic databases. By decoupling compute from storage and utilizing the Raft consensus algorithm, it provides the resilience and scalability required for distributed SQL workloads.
 
-The classic TiDB architecture is built on several foundational capabilities:
+The classic TiDB architecture provides the following foundational capabilities:
 
 - **Horizontal scalability**: It supports linear scaling for both read and write performance. Clusters can scale to handle millions of queries per second (QPS) and manage over 1 PiB of data across tens of millions of tables.
 - **Hybrid Transactional and Analytical Processing (HTAP)**: It unifies transactional and analytical workloads. By pushing down heavy aggregation and join operations to TiFlash (the columnar storage engine), it provides predictable, real-time analytics on fresh transactional data without complex ETL pipelines.
