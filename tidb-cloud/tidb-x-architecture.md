@@ -19,13 +19,13 @@ This section analyzes the architecture of classic TiDB and its limitations that 
 
 The shared-nothing architecture of classic TiDB addresses the limitations of traditional monolithic databases. By decoupling compute from storage and utilizing the Raft consensus algorithm, it provides the resilience and scalability required for distributed SQL workloads.
 
-The classic TiDB architecture is built on several foundational capabilities:
+The classic TiDB architecture provides the following foundational capabilities:
 
 - **Horizontal scalability**: It supports linear scaling for both read and write performance. Clusters can scale to handle millions of queries per second (QPS) and manage over 1 PiB of data across tens of millions of tables.
 - **Hybrid Transactional and Analytical Processing (HTAP)**: It unifies transactional and analytical workloads. By pushing down heavy aggregation and join operations to TiFlash (the columnar storage engine), it provides predictable, real-time analytics on fresh transactional data without complex ETL pipelines.
 - **Non-blocking schema changes**: It utilizes a fully online DDL implementation. Schema changes do not block reads or writes, allowing data models to evolve with minimal impact on application latency or availability.
 - **High availability**: It supports seamless cluster upgrades and scaling operations. This ensures that critical services remain accessible during maintenance or resource adjustment.
-- **Multi-cloud support**: It operates as an open-source solution with support for <CustomContent language="en,zh">Amazon Web Services (AWS), Google Cloud, Microsoft Azure, and Alibaba Cloud.</CustomContent><CustomContent language="ja">Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.</CustomContent>. This provides cloud neutrality without vendor lock-in.
+- **Multi-cloud support**: It operates as an open-source solution with support for <CustomContent language="en,zh">Amazon Web Services (AWS), Google Cloud, Microsoft Azure, and Alibaba Cloud</CustomContent><CustomContent language="ja">Amazon Web Services (AWS), Google Cloud, and Microsoft Azure</CustomContent>. This provides cloud neutrality without vendor lock-in.
 
 ### Challenges of classic TiDB
 
@@ -143,17 +143,16 @@ TiDB X redesigns the storage engine by moving from a single LSM tree to an **LSM
 
 With data stored in shared object storage and each Region managed by an isolated LSM tree, TiDB X eliminates the need for physical data migration or large-scale compaction when adding or removing TiKV nodes. As a result, scaling operations are **5× to 10× faster** than in classic TiDB, while maintaining stable latency for online workloads.
 
-
-## Comparison summary
+## Architecture comparison summary
 
 The following table summarizes the architectural transitions from classic TiDB to TiDB X and explains how TiDB X improves scalability, performance isolation, and cost efficiency.
 
-| Feature | Classic TiDB | TiDB X | Primary benefit |
+| Feature | Classic TiDB | TiDB X | Primary benefit (TiDB X) |
 | --- | --- | --- | --- |
 | Architecture | Shared-nothing (data stored on local disks) | Shared-storage (object storage as authoritative persistent storage) | Object storage enables cloud-native elasticity |
 | Stability | Foreground and background tasks share the same resources | Separation of compute and compute (elastic compute pools for heavy tasks) | Protects OLTP workloads under write-intensive or maintenance workloads |
-| Performance | OLTP and tasks jobs contend for CPU/IO | Dedicated elastic pools for heavy tasks | Lower OLTP latency while heavy tasks complete faster |
-| Scaling mechanism | Physical data migration (SST file copying between TiKV nodes) | TiKV nodes only read/write SST files via object storage | 5x-10x faster scale-out and scale-in |
+| Performance | OLTP and tasks jobs contend for CPU and I/O | Dedicated elastic pools for heavy tasks | Lower OLTP latency while heavy tasks complete faster |
+| Scaling mechanism | Physical data migration (SST file copying between TiKV nodes) | TiKV nodes only read or write SST files via object storage | 5×–10× faster scale-out and scale-in |
 | Storage engine | Single LSM tree per TiKV node (RocksDB) | LSM forest (one independent LSM tree per Region) | Eliminates global mutex contention and reduces compaction interference |
 | DDL execution | DDL competes with user traffic for local CPU and I/O | DDL offloaded to elastic compute resources | Faster schema changes with more predictable latency |
 | Cost model | Requires over-provisioning for peak workloads | Elastic TCO (pay-as-you-go) | Pay only for actual resource consumption |
