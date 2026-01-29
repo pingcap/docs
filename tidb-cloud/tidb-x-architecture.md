@@ -129,7 +129,7 @@ The move to object storage does not degrade foreground read and write performanc
 
 In classic TiDB, clusters are often over-provisioned to handle peak traffic and background tasks simultaneously. TiDB X enables **auto-scaling**, allowing users to pay only for the resources consumed (pay-as-you-go). Background resources for heavy tasks are provisioned on demand and released when no longer needed, eliminating wasted costs.
 
-TiDB X uses the [Request Capacity Unit](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu) (RCU) to measure provisioned compute capacity. One RCU provides a fixed amount of compute resources that can process a certain number of SQL requests. The number of RCUs you provision determines your cluster's baseline performance and throughput capacity. You can set an upper limit to control costs while still benefiting from elastic scaling.
+TiDB X uses the [Request Capacity Unit](https://docs.pingcap.com/tidbcloud/tidb-cloud-glossary/#request-capacity-unit-rcu) (RCU) to measure provisioned compute capacity. One RCU provides a fixed amount of compute resources that can process a certain number of SQL requests. The number of RCUs you provision determines your cluster's baseline performance and throughput capacity. You can set an upper limit to control costs while still benefiting from elastic scaling.
 
 ### From LSM tree to LSM forest
 
