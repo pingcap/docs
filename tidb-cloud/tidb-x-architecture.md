@@ -35,13 +35,13 @@ While the shared-nothing architecture of classic TiDB provides high resilience, 
 
     - Data movement overhead: In classic TiDB, scaling out (adding nodes) or scaling in (removing nodes) operations require physical movement of SST files between nodes. For large datasets, this process is time-consuming and can degrade online traffic performance due to heavy CPU and I/O consumption during data movement.
 
-    - Storage engine bottleneck: The underlying RocksDB storage engine in classic TiDB uses a single LSM-tree protected by a global mutex. This design creates a scalability ceiling where the system struggles to handle large datasets (for example, more than 6 TiB of data or over 200,000 SST files per TiKV node), preventing the system from fully utilizing the hardware capacity.
+    - Storage engine bottleneck: The underlying RocksDB storage engine in classic TiDB uses a single LSM-tree protected by a global mutex. This design creates a scalability ceiling where the system struggles to handle large datasets (for example, more than 6 TiB of data or over 300,000 SST files per TiKV node), preventing the system from fully utilizing the hardware capacity.
 
 - **Stability and performance interference**
 
     - Resource contention: Heavy write traffic triggers massive local compaction jobs to merge SST files. In classic TiDB, because these compaction jobs run on the same TiKV nodes serving online traffic, they compete for the same CPU and I/O resources, which might affect the online application.
 
-    - Lack of physical isolation: There is no physical isolation between logical Regions and physical SST files. Operations like adding an index or moving a region (balancing) create compaction overhead that competes directly with user queries, leading to potential performance jitter.
+    - Lack of physical isolation: There is no physical isolation between logical Regions and physical SST files. Operations like moving a region (balancing) create compaction overhead that competes directly with user queries, leading to potential performance jitter.
 
     - Write throttling: Under heavy write pressure, if the background compaction cannot keep up with the foreground write traffic, the classic TiDB triggers flow control mechanisms to protect the storage engine. This results in write throughput throttling and latency spikes for the application.
 
@@ -83,9 +83,9 @@ Because the authoritative data is already stored in object storage, backups simp
 
 ### Auto-scaling mechanism
 
-The TiDB X architecture is designed for elastic scaling, facilitated by a load balancer and the stateless nature of the **isolated SQL layer**. Because compute nodes in the SQL layer are decoupled from the data in object storage, the system can automatically scale by adding or removing compute pods in seconds to meet real-time workload demands.
+The TiDB X architecture is designed for elastic scaling, facilitated by a load balancer and the stateless nature of the **isolated SQL layer**. The shared cache layer can scale based on CPU usage or disk volume. The system can automatically scale by adding or removing compute pods in seconds to meet real-time workload demands.
 
-This technical elasticity enables a consumption-based, pay-as-you-go pricing model. Users no longer need to provision resources for peak loads 24/7. Instead, the system automatically scales out during traffic spikes and scales in during idle periods to minimize costs.
+This technical elasticity enables a consumption-based, pay-as-you-go pricing model. Users no longer need to provision resources for peak loads. Instead, the system automatically scales out during traffic spikes and scales in during idle periods to minimize costs.
 
 ### Microservice and workload isolation
 
@@ -121,7 +121,7 @@ TiDB X transitions from the classic **shared-nothing** architecture—where data
 
 The move to object storage does not degrade foreground read and write performance.
 
-- Read operations: Only heavy read workloads are offloaded to remote elastic coprocessor workers.
+- Read operations: Lightweight requests are served from local cache and disk. Only heavy read workloads are offloaded to remote elastic coprocessor workers.
 - Write operations: Interactions with object storage are asynchronous. The Raft log is first persisted to local disk, and the Raft WAL (write-ahead log) chunks are uploaded to object storage in the background.
 - Compaction: When the data in a MemTable is full and flushed to local disk, the Region leader uploads the SST file to object storage. After remote compaction completes on elastic compaction workers, TiKV nodes are notified to load the compacted SST files from object storage.
 
@@ -133,7 +133,7 @@ TiDB X uses the [Request Capacity Unit](/tidb-cloud/tidb-cloud-glossary.md#reque
 
 ### From LSM tree to LSM forest
 
-In classic TiDB, each TiKV node runs a single RocksDB instance that stores data for all Regions in one large LSM tree. Because data from thousands of Regions is mixed together, operations such as moving a Region, scaling out or in, and importing data can trigger extensive compaction. This can consume significant CPU and I/O resources and potentially impact online traffic. The single LSM-tree is protected by a global mutex. As data size grows, at scale (for example, more than 6 TiB of data or over 200,000 SST files per TiKV node), increased contention on the global mutex lock can impact both read and write performance.
+In classic TiDB, each TiKV node runs a single RocksDB instance that stores data for all Regions in one large LSM tree. Because data from thousands of Regions is mixed together, operations such as moving a Region, scaling out or in, can trigger extensive compaction. This can consume significant CPU and I/O resources and potentially impact online traffic. The single LSM-tree is protected by a global mutex. As data size grows, at scale (for example, more than 6 TiB of data or over 300,000 SST files per TiKV node), increased contention on the global mutex lock can impact both read and write performance.
 
 TiDB X redesigns the storage engine by moving from a single LSM tree to an **LSM forest**. While retaining the logical Region abstraction, TiDB X assigns each Region its own independent LSM tree. This physical isolation eliminates cross-Region compaction overhead during operations such as scaling, Region movement, and data loading. Operations on one Region are confined to its own tree, and there is no global mutex contention.
 
