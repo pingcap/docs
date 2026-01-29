@@ -14,7 +14,7 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 
 ## Restrictions
 
-- Renaming multiple tables in a single statement (RENAME TABLE t1 TO t3, t2 TO t4) is not supported. This operation will permanently interrupt data synchronization for the changefeed.
+- Renaming multiple tables in a single statement, such as `RENAME TABLE t1 TO t3, t2 TO t4`, is not supported. If you perform this operation, it will permanently interrupt data synchronization for the changefeed.
 - The current performance is approximately 20MiB/s. If the incremental data volume exceeds this threshold, please contact us for assistance.
 
 ## Supported regions
