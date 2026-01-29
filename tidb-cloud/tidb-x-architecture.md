@@ -143,12 +143,11 @@ TiDB X redesigns the storage engine by moving from a single LSM tree to an **LSM
 
 With data stored in shared object storage and each Region managed by an isolated LSM tree, TiDB X eliminates the need for physical data migration or large-scale compaction when adding or removing TiKV nodes. As a result, scaling operations are **5× to 10× faster** than in classic TiDB, while maintaining stable latency for online workloads.
 
-
-## Comparison summary
+## Architecture comparison summary
 
 The following table summarizes the architectural transitions from classic TiDB to TiDB X and explains how TiDB X improves scalability, performance isolation, and cost efficiency.
 
-| Feature | Classic TiDB | TiDB X | Primary benefit |
+| Feature | Classic TiDB | TiDB X | Primary benefit (TiDB X) |
 | --- | --- | --- | --- |
 | Architecture | Shared-nothing (data stored on local disks) | Shared-storage (object storage as authoritative persistent storage) | Object storage enables cloud-native elasticity |
 | Workload isolation | Foreground and background tasks share the same resources | Separation of compute and compute (elastic compute pools for heavy tasks) | Protects OLTP workloads from performance interference |
