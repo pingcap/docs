@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目录 <!--Corresponding EN commit: 29599f2498ba619b0f762e8beb13e2a9a2ec15fe-->
+# 目录 <!--Corresponding EN commit: 2711d8da1380e6ae5fdfd8f3b213fd521333f33d-->
 
 ## 快速开始
 
@@ -753,6 +753,8 @@
     - Connected：通过 IM 订阅 TiDB Cloud 告警
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)
       - [通过 Zoom 订阅](/tidb-cloud/monitor-alert-zoom.md)
+      - [通过 Flashduty 订阅](/tidb-cloud/monitor-alert-flashduty.md)
+      - [通过 PagerDuty 订阅](/tidb-cloud/monitor-alert-pagerduty.md)
     - Connected：通过 IM 创建工单并订阅更新
       - [通过 Slack 创建工单并订阅工单更新](/tidb-cloud/connected-slack-ticket-creation.md)
       - [通过 Lark 创建工单并订阅工单更新](/tidb-cloud/connected-lark-ticket-creation.md)
