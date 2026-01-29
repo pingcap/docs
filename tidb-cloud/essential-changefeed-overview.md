@@ -12,13 +12,18 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 > - Currently, TiDB Cloud only allows up to 10 changefeeds per {{{ .essential }}} cluster.
 > - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) clusters, the changefeed feature is unavailable.
 
+## Restrictions
+
+- Renaming multiple tables in a single statement (RENAME TABLE t1 TO t3, t2 TO t4) is not supported. This operation will permanently interrupt data synchronization for the changefeed.
+- The current performance is approximately 20MiB/s. If the incremental data volume exceeds this threshold, please contact our technical support team for assistance.
+
 ## Supported regions
 
 The changefeed feature is available in the following regions:
 
 | Cloud provider | Supported regions |
 | --- | --- |
-| AWS          | <ul><li>`ap-southeast-1`</li><li>`eu-central-1`</li><li>`us-east-1`</li><li>`us-west-2`</li></ul> |
+| AWS          | <ul><li>`ap-southeast-1`</li><li>`eu-central-1`</li><li>`us-east-1`</li><li>`us-west-2`</li><li>`ap-northeast-1`</li><li>`ap-east-1`</li></ul> |
 | Alibaba Cloud | <ul><li>`ap-southeast-1`</li><li>`ap-southeast-5`</li><li>`cn-hongkong`</li></ul> |
 
 Additional regions will be supported in the future. For immediate support in a specific region, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
