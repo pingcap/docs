@@ -43,7 +43,7 @@ While the shared-nothing architecture of classic TiDB provides high resilience, 
 
     - Lack of physical isolation: There is no physical isolation between logical Regions and physical SST files. Operations like moving a Region (balancing) create compaction overhead that competes directly with user queries, leading to potential performance jitter.
 
-    - Write throttling: Under heavy write pressure, if the background compaction cannot keep up with the foreground write traffic, the classic TiDB triggers flow control mechanisms to protect the storage engine. This results in write throughput throttling and latency spikes for the application.
+    - Write throttling: Under heavy write pressure, if the background compaction cannot keep up with the foreground write traffic, classic TiDB triggers flow control mechanisms to protect the storage engine. This results in write throughput throttling and latency spikes for the application.
 
 - **Resource utilization and cost**
 
@@ -99,13 +99,13 @@ The following diagram provides a side-by-side comparison of classic TiDB and TiD
 
 ![Classic TiDB vs TiDB X architecture](/media/tidb-x/tidb-classic-vs-tidb-x-1.png)
 
-- **Engine evolution**: In Classic TiDB, the Raft engine manages the multi-raft log, while RocksDB handles physical data storage on local disks. In TiDB X, these components are replaced by a **new RF engine** (Raft engine) and a **redesigned KV engine**. The KV engine is an LSM-tree storage engine that replaces RocksDB. Both new engines are specifically optimized for high performance and seamless integration with object storage.
+- **Engine evolution**: In classic TiDB, the Raft engine manages the multi-raft log, while RocksDB handles physical data storage on local disks. In TiDB X, these components are replaced by a **new RF engine** (Raft engine) and a **redesigned KV engine**. The KV engine is an LSM-tree storage engine that replaces RocksDB. Both new engines are specifically optimized for high performance and seamless integration with object storage.
 
 - **Compute workload separation**: The dotted lines in the diagram represent background read and write operations to the object storage layer. In TiDB X, these interactions between the RF/KV engines and object storage are decoupled from foreground processes, ensuring that background operations do not affect online traffic latency.
 
 ### Separation of compute and compute
 
-While classic TiDB already separates compute (the SQL layer) from storage (TiKV), TiDB X introduces an additional layer of separation within both the SQL and storage layers. This design distinguishes l**ightweight compute** for online transactional workloads from **heavy compute** for resource-intensive background tasks.
+While classic TiDB already separates compute (the SQL layer) from storage (TiKV), TiDB X introduces an additional layer of separation within both the SQL and storage layers. This design distinguishes **lightweight compute** for online transactional workloads from **heavy compute** for resource-intensive background tasks.
 
 - **Lightweight compute**: Dedicated resources for OLTP workloads, such as user queries.
 
@@ -113,11 +113,11 @@ While classic TiDB already separates compute (the SQL layer) from storage (TiKV)
 
 - **Heavy compute**: A separate elastic compute pool for background tasks, such as compaction, backups, statistics collection, data loading, and slow query processing.
 
-    For heavy compute tasks such as DDL operations and large-scale data imports, TiDB X can automatically provision elastic compute resources to run these workloads at full speed with minimal impact on online traffic. For example, when you add an index, TiDB workers, Coprocessor workers and TiKV workers are provisioned dynamically according to the data volume. These provisioned elastic compute resources are isolated from the TiDB and TiKV servers handling the online traffic, ensuring that resource-intensive operations no longer compete with critical OLTP queries. In real-world scenarios, index creation can be up to 5× faster than in classic TiDB, without impacting online services.
+    For heavy compute tasks such as DDL operations and large-scale data imports, TiDB X can automatically provision elastic compute resources to run these workloads at full speed with minimal impact on online traffic. For example, when you add an index, TiDB workers, Coprocessor workers, and TiKV workers are provisioned dynamically according to the data volume. These provisioned elastic compute resources are isolated from the TiDB and TiKV servers handling the online traffic, ensuring that resource-intensive operations no longer compete with critical OLTP queries. In real-world scenarios, index creation can be up to 5× faster than in classic TiDB, without impacting online services.
 
 ### Transition from shared-nothing to shared-storage
 
-TiDB X transitions from the classic **shared-nothing** architecture—where data musts be physically copied between TiKV nodes—to a **shared-storage** architecture. In TiDB X, object storage (such as Amazon S3), rather than local disks, serves as the single source of truth for all persistent data. This eliminates the need to copy large volumes of data during scaling operations and enabling rapid elasticity.
+TiDB X transitions from the classic **shared-nothing** architecture—where data must be physically copied between TiKV nodes—to a **shared-storage** architecture. In TiDB X, object storage (such as Amazon S3), rather than local disks, serves as the single source of truth for all persistent data. This eliminates the need to copy large volumes of data during scaling operations and enables rapid elasticity.
 
 The move to object storage does not degrade foreground read and write performance.
 
@@ -133,7 +133,7 @@ TiDB X uses the [Request Capacity Unit](/tidb-cloud/tidb-cloud-glossary.md#reque
 
 ### From LSM tree to LSM forest
 
-In classic TiDB, each TiKV node runs a single RocksDB instance that stores data for all Regions in one large LSM tree. Because data from thousands of Regions is mixed together, operations such as moving a Region, scaling out or in, can trigger extensive compaction. This can consume significant CPU and I/O resources and potentially impact online traffic. The single LSM-tree is protected by a global mutex. As data size grows, at scale (for example, more than 6 TiB of data or over 300,000 SST files per TiKV node), increased contention on the global mutex lock can impact both read and write performance.
+In classic TiDB, each TiKV node runs a single RocksDB instance that stores data for all Regions in one large LSM tree. Because data from thousands of Regions is mixed together, operations such as moving a Region, scaling out, or scaling in, can trigger extensive compaction. This can consume significant CPU and I/O resources and potentially impact online traffic. The single LSM-tree is protected by a global mutex. As data size grows, at scale (for example, more than 6 TiB of data or over 300,000 SST files per TiKV node), increased contention on the global mutex lock can impact both read and write performance.
 
 TiDB X redesigns the storage engine by moving from a single LSM tree to an **LSM forest**. While retaining the logical Region abstraction, TiDB X assigns each Region its own independent LSM tree. This physical isolation eliminates cross-Region compaction overhead during operations such as scaling, Region movement, and data loading. Operations on one Region are confined to its own tree, and there is no global mutex contention.
 
