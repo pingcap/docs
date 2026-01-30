@@ -125,45 +125,177 @@ Both the **Embed v3** and **Multilingual Embed v3** models support the following
     - `START`: discards text from the beginning until the input fits.
     - `END`: discards text from the end until the input fits.
 
-## SQL usage example (BYOK)
+## Usage example (BYOK)
 
-To use Bring Your Own Key (BYOK) Cohere models, you must specify a Cohere API key as follows:
+This example demonstrates creating a vector table, inserting documents, and performing similarity search using Bring Your Own Key (BYOK) Cohere models.
 
-> **Note**
->
-> Replace `'your-cohere-api-key-here'` with your actual Cohere API key. You can obtain an API key from the [Cohere Dashboard](https://dashboard.cohere.com/).
+### Step 1: Connect to the database
+
+<SimpleTab>
+<div label="Python">
+
+```python
+from pytidb import TiDBClient
+
+tidb_client = TiDBClient.connect(
+    host="{gateway-region}.prod.aws.tidbcloud.com",
+    port=4000,
+    username="{prefix}.root",
+    password="{password}",
+    database="{database}",
+    ensure_db=True,
+)
+```
+
+</div>
+<div label="SQL">
+
+```bash
+mysql -h {gateway-region}.prod.aws.tidbcloud.com \
+    -P 4000 \
+    -u {prefix}.root \
+    -p{password} \
+    -D {database}
+```
+
+</div>
+</SimpleTab>
+
+### Step 2: Configure the API key
+
+Create your API key from the [Cohere Dashboard](https://dashboard.cohere.com/api-keys) and bring your own key (BYOK) to use the embedding service.
+
+<SimpleTab>
+<div label="Python">
+
+Configure the API key for the Cohere embedding provider using the TiDB Client:
+
+```python
+tidb_client.configure_embedding_provider(
+    provider="cohere",
+    api_key="{your-cohere-api-key}",
+)
+```
+
+</div>
+<div label="SQL">
+
+Set the API key for the Cohere embedding provider using SQL:
 
 ```sql
-SET @@GLOBAL.TIDB_EXP_EMBED_COHERE_API_KEY = 'your-cohere-api-key-here';
+SET @@GLOBAL.TIDB_EXP_EMBED_COHERE_API_KEY = "{your-cohere-api-key}";
+```
 
-CREATE TABLE sample (
-  `id`        INT,
-  `content`   TEXT,
-  `embedding` VECTOR(1024) GENERATED ALWAYS AS (EMBED_TEXT(
-                "cohere/embed-v4.0",
-                `content`,
-                '{"input_type": "search_document", "input_type@search": "search_query"}'
-              )) STORED
+</div>
+</SimpleTab>
+
+### Step 3: Create a vector table
+
+Create a table with a vector field that uses the `cohere/embed-v4.0` model to generate 1536-dimensional vectors (default dimension):
+
+<SimpleTab>
+<div label="Python">
+
+```python
+from pytidb.schema import TableModel, Field
+from pytidb.embeddings import EmbeddingFunction
+from pytidb.datatype import TEXT
+
+class Document(TableModel):
+    __tablename__ = "sample_documents"
+    id: int = Field(primary_key=True)
+    content: str = Field(sa_type=TEXT)
+    embedding: list[float] = EmbeddingFunction(
+        model_name="cohere/embed-v4.0"
+    ).VectorField(source_field="content")
+
+table = tidb_client.create_table(schema=Document, if_exists="overwrite")
+```
+
+</div>
+<div label="SQL">
+
+```sql
+CREATE TABLE sample_documents (
+    `id`        INT PRIMARY KEY,
+    `content`   TEXT,
+    `embedding` VECTOR(1536) GENERATED ALWAYS AS (EMBED_TEXT(
+        "cohere/embed-v4.0",
+        `content`
+    )) STORED
 );
+```
 
-INSERT INTO sample
-    (`id`, `content`)
+</div>
+</SimpleTab>
+
+### Step 4: Insert data into the table
+
+<SimpleTab>
+<div label="Python">
+
+Use the `table.insert()` or `table.bulk_insert()` API to add data:
+
+```python
+documents = [
+    Document(id=1, content="Python: High-level programming language for data science and web development."),
+    Document(id=2, content="Python snake: Non-venomous constrictor found in tropical regions."),
+    Document(id=3, content="Python framework: Django and Flask are popular web frameworks."),
+    Document(id=4, content="Python libraries: NumPy and Pandas for data analysis."),
+    Document(id=5, content="Python ecosystem: Rich collection of packages and tools."),
+]
+table.bulk_insert(documents)
+```
+
+</div>
+<div label="SQL">
+
+Insert data using the `INSERT INTO` statement:
+
+```sql
+INSERT INTO sample_documents (id, content)
 VALUES
-    (1, "Java: Object-oriented language for cross-platform development."),
-    (2, "Java coffee: Bold Indonesian beans with low acidity."),
-    (3, "Java island: Densely populated, home to Jakarta."),
-    (4, "Java's syntax is used in Android apps."),
-    (5, "Dark roast Java beans enhance espresso blends.");
+    (1, "Python: High-level programming language for data science and web development."),
+    (2, "Python snake: Non-venomous constrictor found in tropical regions."),
+    (3, "Python framework: Django and Flask are popular web frameworks."),
+    (4, "Python libraries: NumPy and Pandas for data analysis."),
+    (5, "Python ecosystem: Rich collection of packages and tools.");
+```
 
+</div>
+</SimpleTab>
 
-SELECT `id`, `content` FROM sample
-ORDER BY
-  VEC_EMBED_COSINE_DISTANCE(
-    embedding,
-    "How to start learning Java programming?"
-  )
+### Step 5: Search for similar documents
+
+<SimpleTab>
+<div label="Python">
+
+Use the `table.search()` API to perform vector search:
+
+```python
+results = table.search("How to learn Python programming?") \
+    .limit(2) \
+    .to_list()
+print(results)
+```
+
+</div>
+<div label="SQL">
+
+Use the `VEC_EMBED_COSINE_DISTANCE` function to perform vector search based on cosine distance metric:
+
+```sql
+SELECT
+    `id`,
+    `content`,
+    VEC_EMBED_COSINE_DISTANCE(embedding, "How to learn Python programming?") AS _distance
+FROM sample_documents
+ORDER BY _distance ASC
 LIMIT 2;
 ```
+
+</div>
+</SimpleTab>
 
 ## Options (BYOK)
 
@@ -200,10 +332,6 @@ CREATE TABLE sample (
 ```
 
 For all available options, see [Cohere Documentation](https://docs.cohere.com/v2/reference/embed).
-
-## Python usage example
-
-See [PyTiDB Documentation](https://pingcap.github.io/ai/guides/auto-embedding/).
 
 ## See also
 

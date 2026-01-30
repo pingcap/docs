@@ -1,15 +1,15 @@
 ---
-title: Quickstart
-description: Get started with TiDB using Python SDK.
+title: Get Started with TiDB + AI via Python
+summary: Learn how to get started with vector search in TiDB using Python SDK.
 ---
 
-# Quickstart
+# Get Started with TiDB + AI via Python
 
-In this guide, you will learn how to get started with [vector search](./concepts/vector-search.md) in TiDB using Python SDK. Follow along to build your first AI application working with TiDB.
+In this guide, you will learn how to get started with [vector search](/ai/concepts/vector-search-overview.md) in TiDB using Python SDK. Follow along to build your first AI application working with TiDB.
 
 ## Prerequisites
 
-- Go [tidbcloud.com](https://tidbcloud.com/) to create a TiDB Cloud Starter cluster for free or using [tiup playground](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb/#deploy-a-local-test-cluster) to a TiDB Self-Managed cluster for local testing.
+- Go to [tidbcloud.com](https://tidbcloud.com/) to create a TiDB Cloud Starter cluster for free or using [tiup playground](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb/#deploy-a-local-test-cluster) to a TiDB Self-Managed cluster for local testing.
 
 ## Installation
 
@@ -29,90 +29,104 @@ pip install "pytidb[models]"
 
 ## Connect to database
 
-=== "TiDB Cloud Starter"
+<SimpleTab>
+<div label="TiDB Cloud Starter">
 
-    You can get these connection parameters from the [TiDB Cloud console](https://tidbcloud.com/clusters):
+You can get these connection parameters from the [TiDB Cloud console](https://tidbcloud.com/clusters):
 
-    1. Navigate to the [Clusters page](https://tidbcloud.com/clusters), and then click the name of your target cluster to go to its overview page.
-    2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
+1. Navigate to the [Clusters page](https://tidbcloud.com/clusters), and then click the name of your target cluster to go to its overview page.
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
 
-    For example, if the connection parameters are displayed as follows:
+For example, if the connection parameters are displayed as follows:
 
-    ```text
-    HOST:     gateway01.us-east-1.prod.shared.aws.tidbcloud.com
-    PORT:     4000
-    USERNAME: 4EfqPF23YKBxaQb.root
-    PASSWORD: abcd1234
-    DATABASE: test
-    CA:       /etc/ssl/cert.pem
-    ```
+```text
+HOST:     gateway01.us-east-1.prod.shared.aws.tidbcloud.com
+PORT:     4000
+USERNAME: 4EfqPF23YKBxaQb.root
+PASSWORD: abcd1234
+DATABASE: test
+CA:       /etc/ssl/cert.pem
+```
 
-    The corresponding Python code to connect to the TiDB Cloud Starter cluster would be as follows:
+The corresponding Python code to connect to the TiDB Cloud Starter cluster would be as follows:
 
-    ```python
-    from pytidb import TiDBClient
+```python
+from pytidb import TiDBClient
 
-    client = TiDBClient.connect(
-        host="gateway01.us-east-1.prod.shared.aws.tidbcloud.com",
-        port=4000,
-        username="4EfqPF23YKBxaQb.root",
-        password="abcd1234",
-        database="test",
-    )
-    ```
+client = TiDBClient.connect(
+    host="gateway01.us-east-1.prod.shared.aws.tidbcloud.com",
+    port=4000,
+    username="4EfqPF23YKBxaQb.root",
+    password="abcd1234",
+    database="test",
+)
+```
 
-    > **Note:** The preceding example is for demonstration purposes only. You need to fill in the parameters with your own values and keep them secure.
+> **Note:**
+>
+> The preceding example is for demonstration purposes only. You need to fill in the parameters with your own values and keep them secure.
 
-=== "TiDB Self-Managed"
+</div>
+<div label="TiDB Self-Managed">
 
-    Here is a basic example for connecting to a self-managed TiDB cluster:
+Here is a basic example for connecting to a self-managed TiDB cluster:
 
-    ```python
-    from pytidb import TiDBClient
+```python
+from pytidb import TiDBClient
 
-    client = TiDBClient.connect(
-        host="localhost",
-        port=4000,
-        username="root",
-        password="",
-        database="test",
-        ensure_db=True,
-    )
-    ```
+client = TiDBClient.connect(
+    host="localhost",
+    port=4000,
+    username="root",
+    password="",
+    database="test",
+    ensure_db=True,
+)
+```
 
-    > **Tip:** Please modify the connection parameters according to your actual deployment.
+> **Note:**
+>
+> Make sure to update the connection parameters according to your actual deployment.
 
-Once connected, you can use the `client` object to operate tables, query data, and more. 
+</div>
+</SimpleTab>
+
+Once connected, you can use the `client` object to operate tables, query data, and more.
 
 ## Create an embedding function
 
-When working with [embedding models](./concepts/vector-search.md#embedding-model), you can leverage the embedding function to automatically vectorize your data at both insertion and query stages. It natively supports popular embedding models like OpenAI, Jina AI, Hugging Face, Sentence Transformers, and others.
+When working with [embedding models](/ai/concepts/vector-search-overview.md#embedding-model), you can leverage the embedding function to automatically vectorize your data at both insertion and query stages. It natively supports popular embedding models like OpenAI, Jina AI, Hugging Face, Sentence Transformers, and others.
 
-=== "OpenAI"
+<SimpleTab>
+<div label="OpenAI">
 
-    Go [OpenAI platform](https://platform.openai.com/api-keys) to create your API key for embedding.
+Go to [OpenAI platform](https://platform.openai.com/api-keys) to create your API key for embedding.
 
-    ```python
-    from pytidb.embeddings import EmbeddingFunction
+```python
+from pytidb.embeddings import EmbeddingFunction
 
-    text_embed = EmbeddingFunction(
-        model_name="openai/text-embedding-3-small",
-        api_key="<your-openai-api-key>",
-    )
-    ```
+text_embed = EmbeddingFunction(
+    model_name="openai/text-embedding-3-small",
+    api_key="<your-openai-api-key>",
+)
+```
 
-=== "Jina AI"
+</div>
+<div label="Jina AI">
 
-    Go [Jina AI](https://jina.ai/embeddings/) to create your API key for embedding.
+Go to [Jina AI](https://jina.ai/embeddings/) to create your API key for embedding.
 
-    ```python
-    from pytidb.embeddings import EmbeddingFunction
+```python
+from pytidb.embeddings import EmbeddingFunction
 
-    text_embed = EmbeddingFunction(
-        model_name="jina/jina-embeddings-v3",
-        api_key="<your-jina-api-key>",
-    )
-    ```
+text_embed = EmbeddingFunction(
+    model_name="jina/jina-embeddings-v3",
+    api_key="<your-jina-api-key>",
+)
+```
+
+</div>
+</SimpleTab>
 
 ## Create a table
 
@@ -123,25 +137,23 @@ As an example, create a table named `chunks` with the following columns:
 - `text_vec` (vector): the vector embeddings of the text.
 - `user_id` (int): the ID of the user who created the chunk.
 
-=== "Python"
+```python hl_lines="6"
+from pytidb.schema import TableModel, Field, VectorField
 
-    ```python hl_lines="6"
-    from pytidb.schema import TableModel, Field, VectorField
+class Chunk(TableModel):
+    id: int | None = Field(default=None, primary_key=True)
+    text: str = Field()
+    text_vec: list[float] = text_embed.VectorField(source_field="text")
+    user_id: int = Field()
 
-    class Chunk(TableModel):
-        id: int | None = Field(default=None, primary_key=True)
-        text: str = Field()
-        text_vec: list[float] = text_embed.VectorField(source_field="text")
-        user_id: int = Field()
-
-    table = client.create_table(schema=Chunk, if_exists="overwrite")
-    ```
+table = client.create_table(schema=Chunk, if_exists="overwrite")
+```
 
 Once created, you can use the `table` object to insert data, search data, and more.
 
 ## Insert Data
 
-Now let's add some sample data to our table. 
+Now let's add some sample data to our table.
 
 ```python
 table.bulk_insert([
@@ -152,10 +164,9 @@ table.bulk_insert([
 ])
 ```
 
-
 ## Search for nearest neighbors
 
-To search for nearest neighbors of a given query, you can use the `table.search()` method, it will perform a [vector search](./guides/vector-search.md) by default.
+To search for nearest neighbors of a given query, you can use the `table.search()` method, it will perform a [vector search](ai/guides/vector-search.md) by default.
 
 ```python
 table.search(
@@ -218,4 +229,4 @@ client.drop_table("chunks")
 
 ## Next steps
 
-- Learn more details about [Vector Search](./guides/vector-search.md), [Fulltext Search](./guides/fulltext-search.md) and [Hybrid Search](./guides/hybrid-search.md) in TiDB.
+- Learn more details about [Vector Search](/ai/guides/vector-search.md), [Fulltext Search](/ai/guides/fulltext-search.md) and [Hybrid Search](/ai/guides/vector-search-hybrid-search.md) in TiDB.

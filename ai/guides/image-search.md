@@ -1,12 +1,17 @@
+---
+title: Image Search
+summary: Learn how to use image search in your application.
+---
+
 # Image search
 
 **Image search** helps you find similar images by comparing their visual content, not just text or metadata. This feature is useful for e-commerce, content moderation, digital asset management, and any scenario where you need to search for or deduplicate images based on appearance.
 
 TiDB enables image search using **vector search**. With automatic embedding, you can generate image embeddings from image URLs, PIL images, or keyword text using a multimodal embedding model. TiDB then efficiently searches for similar vectors at scale.
 
-!!! tip
-
-    For a complete example of image search, see the [Pet image search demo](../examples/image-search-with-pytidb.md).
+> **Note:**
+>
+> For a complete example of image search, see [Image Search Example](/ai/examples/image-search-with-pytidb.md).
 
 ## Basic usage
 
@@ -89,7 +94,7 @@ The client converts the PIL image object into a Base64 string before sending it 
 
 #### Option 3: Search by keyword text
 
-You can also search for similar images by providing keyword text. 
+You can also search for similar images by providing keyword text.
 
 For example, if you are working on a pet image dataset, you can search for similar images by keywords like "orange tabby cat" or "golden retriever puppy".
 
@@ -101,6 +106,6 @@ The keyword text will be converted to a vector embedding that captures the seman
 
 ## See also
 
-- [Automatic embedding guide](./auto-embedding.md)
-- [Vector search guide](../concepts/vector-search.md)
-- [Pet image search demo](../examples/image-search-with-pytidb.md)
+- [Automatic embedding guide](/ai/guides/auto-embedding.md)
+- [Vector search guide](/ai/concepts/vector-search-overview.md)
+- [Image Search Example](/ai/examples/image-search-with-pytidb.md)

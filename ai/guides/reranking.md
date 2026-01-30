@@ -1,3 +1,8 @@
+---
+title: Reranking
+summary: Learn how to use reranking in your application.
+---
+
 # Reranking
 
 Reranking is a technique used to improve the relevance and accuracy of search results by re-evaluating and reordering them using a dedicated rerank model.
@@ -9,27 +14,25 @@ The search process works in two stages:
 
 This two-stage retrieval approach significantly improves both document relevance and accuracy.
 
-## Basic Usage
+## Basic usage
 
-=== "Python"
+PyTiDB provides the `Reranker` class that allows you to use reranker models from multiple third-party providers.
 
-    PyTiDB provides the `Reranker` class that allows you to use reranker models from multiple third-party providers.
+1. Create a reranker instance
 
-    1. Create a reranker instance
+    ```python
+    from pytidb.rerankers import Reranker
 
-        ```python
-        from pytidb.rerankers import Reranker
+    reranker = Reranker(model_name="{provider}/{model_name}")
+    ```
 
-        reranker = Reranker(model_name="{provider}/{model_name}")
-        ```
+2. Apply reranker via `.rerank()` method
 
-    2. Apply reranker via `.rerank()` method
+    ```python
+    table.search("{query}").rerank(reranker, "{field_to_rerank}").limit(3)
+    ```
 
-        ```python
-        table.search("{query}").rerank(reranker, "{field_to_rerank}").limit(3)
-        ```
-
-## Supported Providers
+## Supported providers
 
 Here are some examples to use reranker models from third-party providers.
 

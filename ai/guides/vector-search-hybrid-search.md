@@ -143,6 +143,96 @@ df = (
 
 For a complete example, see [pytidb hybrid search demo](https://github.com/pingcap/pytidb/tree/main/examples/hybrid_search).
 
+## Fusion methods
+
+Fusion methods combine results from vector (semantic) and full-text (keyword) searches into a single, unified ranking. This ensures that the final results leverage both semantic relevance and keyword matching.
+
+PyTiDB supports two fusion methods:
+
+- `rrf`: Reciprocal Rank Fusion (default)
+- `weighted`: Weighted Score Fusion
+
+You can select the fusion method that best fits your use case to optimize hybrid search results.
+
+### Reciprocal Rank Fusion (RRF)
+
+Reciprocal Rank Fusion (RRF) is an algorithm that evaluates search results by leveraging the rank of documents in multiple result sets.
+
+For more details, see the [RRF paper](https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf).
+
+Enable reciprocal rank fusion by specifying the `method` parameter as `"rrf"` in the `.fusion()` method.
+
+```python
+results = (
+    table.search(
+        "AI database", search_type="hybrid"
+    )
+    .fusion(method="rrf")
+    .limit(3)
+    .to_list()
+)
+```
+
+Parameters:
+
+- `k`: A constant (default: 60) to prevent division by zero and control the impact of high-ranked documents.
+
+### Weighted Score Fusion
+
+Weighted Score Fusion combines vector search and full-text search scores using weighted sum:
+
+```python
+final_score = vs_weight * vector_score + fts_weight * fulltext_score
+```
+
+Enable weighted score fusion by specifying the `method` parameter as `"weighted"` in the `.fusion()` method.
+
+For example, to give more weight to vector search, set the `vs_weight` parameter to 0.7 and the `fts_weight` parameter to 0.3:
+
+```python
+results = (
+    table.search(
+        "AI database", search_type="hybrid"
+    )
+    .fusion(method="weighted", vs_weight=0.7, fts_weight=0.3)
+    .limit(3)
+    .to_list()
+)
+```
+
+Parameters:
+
+- `vs_weight`: The weight of the vector search score.
+- `fts_weight`: The weight of the full-text search score.
+
+## Rerank method
+
+Hybrid search also supports reranking using reranker-specific models.
+
+Use the `rerank()` method to specify a reranker that sorts search results by relevance between the query and the documents.
+
+**Example: Using JinaAI Reranker to rerank the hybrid search results**
+
+```python
+reranker = Reranker(
+    # Use the `jina-reranker-m0` model
+    model_name="jina_ai/jina-reranker-m0",
+    api_key="{your-jinaai-api-key}"
+)
+
+results = (
+    table.search(
+        "AI database", search_type="hybrid"
+    )
+    .fusion(method="rrf", k=60)
+    .rerank(reranker, "text")
+    .limit(3)
+    .to_list()
+)
+```
+
+To check other reranker models, see [Reranking](/ai/guides/reranking.md).
+
 ## See also
 
 - [pytidb Python SDK Documentation](https://github.com/pingcap/pytidb)

@@ -1,7 +1,6 @@
 ---
-title: Vector Search
-description: "Implement semantic search using vector embeddings to find similar content."
-source_repo: "https://github.com/pingcap/pytidb/tree/main/examples/vector_search"
+title: Vector Search Example
+summary: Implement semantic search using vector embeddings to find similar content.
 ---
 
 # Vector Search Example
@@ -21,7 +20,7 @@ This example demonstrates how to build a semantic search application using TiDB 
 
 ## How to run
 
-**Step 1**: Start the embedding service with Ollama
+### Step 1. Start the embedding service with Ollama
 
 Pull the embedding model:
 
@@ -38,14 +37,14 @@ curl http://localhost:11434/api/embed -d '{
 }'
 ```
 
-**Step 2**: Clone the repository to local
+### Step 2. Clone the repository to local
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git
 cd pytidb/examples/vector_search/
 ```
 
-**Step 3**: Install the required packages and set up the environment
+### Step 3. Install the required packages and set up the environment
 
 ```bash
 python -m venv .venv
@@ -53,7 +52,7 @@ source .venv/bin/activate
 pip install -r reqs.txt
 ```
 
-**Step 4**: Set up environment to connect to TiDB
+### Step 4. Set up environment to connect to TiDB
 
 Go to [TiDB Cloud console](https://tidbcloud.com/clusters) and get the connection parameters, then set up the environment variable like this:
 
@@ -67,23 +66,14 @@ TIDB_DATABASE=pytidb_vector_search
 EOF
 ```
 
-**Step 5**: Run the Streamlit app
+### Step 5. Run the Streamlit app
 
 ```bash
 streamlit run app.py
 ```
 
-**Step 6**: Open your browser and visit `http://localhost:8501`
+Open your browser and visit `http://localhost:8501`.
 
-
----
-
-## Related Resources
+## Related resources
 
 - **Source Code**: [View on GitHub](https://github.com/pingcap/pytidb/tree/main/examples/vector_search)
-- **Category**: Search
-
-- **Description**: Implement semantic search using vector embeddings to find similar content.
-
-
-[🏠 Back to Demo Gallery](../index.md){ .md-button .md-button--primary } 

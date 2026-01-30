@@ -1,9 +1,9 @@
 ---
 title: Get started with Cursor and TiDB MCP Server
-description: This guide shows you how to configure the TiDB MCP Server in the Cursor editor.
+summary: This guide shows you how to configure the TiDB MCP Server in the Cursor editor.
 ---
 
-# Get started with Cursor and TiDB MCP Server
+# Get Started with Cursor and TiDB MCP Server
 
 This guide shows you how to configure the TiDB MCP Server in the Cursor editor.
 

@@ -1,9 +1,9 @@
 ---
 title: Get started with Windsurf and TiDB MCP Server
-description: This guide shows you how to configure the TiDB MCP Server in Windsurf.
+summary: This guide shows you how to configure the TiDB MCP Server in Windsurf.
 ---
 
-# Get started with Windsurf and TiDB MCP Server
+# Get Started with Windsurf and TiDB MCP Server
 
 This guide shows you how to configure the TiDB MCP Server in Windsurf.
 
@@ -55,4 +55,4 @@ If you prefer manual setup, update your `mcp_config.json` file as follows and re
 
 ## See also
 
-- [TiDB MCP Server](./tidb-mcp-server.md)
+- [TiDB MCP Server](/ai/integrations/tidb-mcp-server.md)

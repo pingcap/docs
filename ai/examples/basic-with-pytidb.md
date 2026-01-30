@@ -1,10 +1,9 @@
 ---
-title: Basic Usage
-description: "Learn fundamental PyTiDB operations including database connection, table creation, and data manipulation."
-source_repo: "https://github.com/pingcap/pytidb/tree/main/examples/basic"
+title: Basic CRUD Operations
+summary: Learn fundamental PyTiDB operations including database connection, table creation, and data manipulation.
 ---
 
-# Basic CRUD Demo
+# Basic CRUD Operations
 
 This example demonstrates basic CRUD (Create, Read, Update, Delete) operations with PyTiDB.
 
@@ -19,14 +18,14 @@ This example demonstrates basic CRUD (Create, Read, Update, Delete) operations w
 
 ## How to run
 
-**Step 1**: Clone the repository to local
+### Step 1. Clone the repository to local
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git
 cd pytidb/examples/basic/
 ```
 
-**Step 2**: Install the required packages
+### Step 2. Install the required packages
 
 ```bash
 python -m venv .venv
@@ -34,7 +33,7 @@ source .venv/bin/activate
 pip install -r reqs.txt
 ```
 
-**Step 3**: Set up environment to connect to database
+### Step 3. Set up environment to connect to database
 
 Go to [TiDB Cloud console](https://tidbcloud.com/clusters) and get the connection parameters, then set up the environment variable like this:
 
@@ -48,7 +47,7 @@ TIDB_DATABASE=test
 EOF
 ```
 
-**Step 4**: Run the demo
+### Step 4. Run the demo
 
 ```bash
 python main.py
@@ -91,14 +90,6 @@ Table dropped
 Basic CRUD operations completed!
 ```
 
----
-
 ## Related Resources
 
 - **Source Code**: [View on GitHub](https://github.com/pingcap/pytidb/tree/main/examples/basic)
-- **Category**: Getting-Started
-
-- **Description**: Learn fundamental PyTiDB operations including database connection, table creation, and data manipulation.
-
-
-[🏠 Back to Demo Gallery](../index.md){ .md-button .md-button--primary } 

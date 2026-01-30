@@ -1,7 +1,6 @@
 ---
-title: RAG
-description: "Build a RAG application that combines document retrieval with language generation."
-source_repo: "https://github.com/pingcap/pytidb/tree/main/examples/rag"
+title: RAG Example
+summary: Build a RAG application that combines document retrieval with language generation.
 ---
 
 # RAG Example
@@ -25,7 +24,7 @@ This example demonstrates how to use PyTiDB to build a minimal RAG application.
 
 ## How to run
 
-**Step 1**: Prepare the inference API
+### Step 1. Prepare the inference API
 
 Pull the embedding and LLM model via ollama CLI:
 
@@ -51,14 +50,14 @@ curl http://localhost:11434/api/generate -d '{
 }'
 ```
 
-**Step 2**: Clone the repository to local
+### Step 2. Clone the repository to local
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git
 cd pytidb/examples/rag/;
 ```
 
-**Step 3**: Install the required packages and setup environment
+### Step 3. Install the required packages and setup environment
 
 ```bash
 python -m venv .venv
@@ -66,7 +65,7 @@ source .venv/bin/activate
 pip install -r reqs.txt
 ```
 
-**Step 4**: Set up environment to connect to database
+### Step 4. Set up environment to connect to database
 
 Go to [TiDB Cloud console](https://tidbcloud.com/clusters) and get the connection parameters, then set up the environment variable like this:
 
@@ -80,13 +79,13 @@ TIDB_DATABASE=test
 EOF
 ```
 
-**Step 5**: Run the Streamlit app
+### Step 5. Run the Streamlit app
 
 ```bash
 streamlit run main.py
 ```
 
-**Step 6**: Open the browser and visit `http://localhost:8501`
+Open the browser and visit `http://localhost:8501`
 
 ## Troubleshooting
 
@@ -94,15 +93,6 @@ streamlit run main.py
 
 Try to disable the global proxy settings.
 
-
----
-
-## Related Resources
+## Related resources
 
 - **Source Code**: [View on GitHub](https://github.com/pingcap/pytidb/tree/main/examples/rag)
-- **Category**: Ai-Apps
-
-- **Description**: Build a RAG application that combines document retrieval with language generation.
-
-
-[🏠 Back to Demo Gallery](../index.md){ .md-button .md-button--primary } 

@@ -239,7 +239,87 @@ LIMIT 2;
 
 ## Python usage example
 
-See [PyTiDB Documentation](https://pingcap.github.io/ai/guides/auto-embedding/).
+This example demonstrates creating a vector table, inserting documents, and performing similarity search using Hugging Face embedding models.
+
+### Step 1: Connect to the database
+
+```python
+from pytidb import TiDBClient
+
+tidb_client = TiDBClient.connect(
+    host="{gateway-region}.prod.aws.tidbcloud.com",
+    port=4000,
+    username="{prefix}.root",
+    password="{password}",
+    database="{database}",
+    ensure_db=True,
+)
+```
+
+### Step 2: Configure the API key
+
+If you're using a private model or need higher rate limits, you can configure your Hugging Face API token. You can create your token from the [Hugging Face Token Settings](https://huggingface.co/settings/tokens) page:
+
+Configure the API token for Hugging Face models using the TiDB Client:
+
+```python
+tidb_client.configure_embedding_provider(
+    provider="huggingface",
+    api_key="{your-huggingface-token}",
+)
+```
+
+### Step 3: Create a vector table
+
+Create a table with a vector field that uses a Hugging Face model to generate embeddings:
+
+```python
+from pytidb.schema import TableModel, Field
+from pytidb.embeddings import EmbeddingFunction
+from pytidb.datatype import TEXT
+
+class Document(TableModel):
+    __tablename__ = "sample_documents"
+    id: int = Field(primary_key=True)
+    content: str = Field(sa_type=TEXT)
+    embedding: list[float] = EmbeddingFunction(
+        model_name="huggingface/sentence-transformers/all-MiniLM-L6-v2"
+    ).VectorField(source_field="content")
+
+table = tidb_client.create_table(schema=Document, if_exists="overwrite")
+```
+
+> **Tip:**
+>
+> The vector dimensions depend on the model you choose. For example, `huggingface/sentence-transformers/all-MiniLM-L6-v2` produces 384-dimensional vectors, while `huggingface/sentence-transformers/all-mpnet-base-v2` produces 768-dimensional vectors.
+
+### Step 4: Insert data into the table
+
+Use the `table.insert()` or `table.bulk_insert()` API to add data:
+
+```python
+documents = [
+    Document(id=1, content="Machine learning algorithms can identify patterns in data."),
+    Document(id=2, content="Deep learning uses neural networks with multiple layers."),
+    Document(id=3, content="Natural language processing helps computers understand text."),
+    Document(id=4, content="Computer vision enables machines to interpret images."),
+    Document(id=5, content="Reinforcement learning learns through trial and error."),
+]
+table.bulk_insert(documents)
+```
+
+### Step 5: Search for similar documents
+
+Use the `table.search()` API to perform vector search:
+
+```python
+results = table.search("How do neural networks work?") \
+    .limit(3) \
+    .to_list()
+
+for doc in results:
+    print(f"ID: {doc.id}, Content: {doc.content}")
+```
 
 ## See also
 

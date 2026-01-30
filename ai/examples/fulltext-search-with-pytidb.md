@@ -1,10 +1,9 @@
 ---
-title: Fulltext Search
-description: "Perform traditional text search using MySQL fulltext search capabilities."
-source_repo: "https://github.com/pingcap/pytidb/tree/main/examples/fulltext_search"
+title: Fulltext Search Example
+summary: Perform traditional text search using MySQL fulltext search capabilities.
 ---
 
-# Fulltext Search Example
+# Full-Text Search Example
 
 This example demonstrates how to build a E-commerce product search application using TiDB's full-text search feature with multilingual support. Users can search for products by keywords in their preferred language.
 
@@ -20,14 +19,14 @@ This example demonstrates how to build a E-commerce product search application u
 
 ## How to run
 
-**Step 1**: Clone the repository to local
+### Step 1. Clone the repository to local
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git
 cd pytidb/examples/fulltext_search/;
 ```
 
-**Step 2**: Install the required packages and setup environment
+### Step 2. Install the required packages and setup environment
 
 ```bash
 python -m venv .venv
@@ -35,7 +34,7 @@ source .venv/bin/activate
 pip install -r reqs.txt
 ```
 
-**Step 3**: Set up environment to connect to database
+### Step 3. Set up environment to connect to database
 
 Go to the [TiDB Cloud console](https://tidbcloud.com/), create a new cluster if you don't have one, and then get the connection parameters on the connection dialog.
 
@@ -49,23 +48,14 @@ TIDB_DATABASE=pytidb_fulltext_demo
 EOF
 ```
 
-**Step 4**: Run the Streamlit app
+### Step 4. Run the Streamlit app
 
 ```bash
 streamlit run app.py
 ```
 
-**Step 5**: open the browser and visit `http://localhost:8501`
+Open the browser and visit `http://localhost:8501`.
 
-
----
-
-## Related Resources
+## Related resources
 
 - **Source Code**: [View on GitHub](https://github.com/pingcap/pytidb/tree/main/examples/fulltext_search)
-- **Category**: Search
-
-- **Description**: Perform traditional text search using MySQL fulltext search capabilities.
-
-
-[🏠 Back to Demo Gallery](../index.md){ .md-button .md-button--primary } 

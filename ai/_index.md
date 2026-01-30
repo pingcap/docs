@@ -8,14 +8,14 @@ aliases: ['/tidb/stable/ai/', '/tidb/dev/ai/', '/tidbcloud/ai/']
 
 TiDB is a distributed SQL database designed for modern AI applications, offering integrated vector search, full-text search, and hybrid search capabilities. This document provides an overview of the AI features and tools available for building AI-powered applications with TiDB.
 
-## Get Started
+## Quick Start
 
 Get up and running quickly with TiDB's AI capabilities.
 
 | Document | Description |
 | --- | --- |
-| [Overview](/ai/index.md) | Introduction to TiDB for AI applications and the PyTiDB SDK. |
-| [Quickstart](/ai/quickstart.md) | Build your first AI application with TiDB in minutes. |
+| [Get Started with Python](/ai/quickstart.md) | Build your first AI application with TiDB in minutes using Python. |
+| [Get Started with SQL](/ai/guides/vector-search-get-started-using-sql.md) | Quick start guide for vector search using SQL. |
 
 ## Concepts
 
@@ -23,8 +23,7 @@ Understand the foundational concepts behind AI-powered search in TiDB.
 
 | Document | Description |
 | --- | --- |
-| [Vector Search Overview](/ai/concepts/vector-search-overview.md) | Comprehensive overview of vector search, including concepts, how it works, and use cases. |
-| [Vector Search Fundamentals](/ai/concepts/vector-search.md) | Core concepts of vector embeddings, distance metrics, and semantic search. |
+| [Vector Search](/ai/concepts/vector-search-overview.md) | Comprehensive overview of vector search, including concepts, how it works, and use cases. |
 
 ## Guides
 
@@ -32,13 +31,11 @@ Step-by-step guides for building AI applications with TiDB using the PyTiDB SDK 
 
 | Document | Description |
 | --- | --- |
-| [Get Started with Python](/ai/guides/vector-search-get-started-using-python.md) | Quick start guide for vector search using Python. |
-| [Get Started with SQL](/ai/guides/vector-search-get-started-using-sql.md) | Quick start guide for vector search using SQL. |
 | [Connect to TiDB](/ai/guides/connect.md) | Connect to TiDB Cloud or self-managed clusters using PyTiDB. |
 | [Working with Tables](/ai/guides/tables.md) | Create, query, and manage tables with vector fields. |
 | [Vector Search](/ai/guides/vector-search.md) | Perform semantic similarity searches using PyTiDB. |
-| [Full-Text Search](/ai/guides/fulltext-search.md) | Keyword-based text search with BM25 ranking. |
-| [Hybrid Search](/ai/guides/hybrid-search.md) | Combine vector and full-text search for better results. |
+| [Full-Text Search](/ai/guides/vector-search-full-text-search-python.md) | Keyword-based text search with BM25 ranking. |
+| [Hybrid Search](/ai/guides/vector-search-hybrid-search.md) | Combine vector and full-text search for better results. |
 | [Image Search](/ai/guides/image-search.md) | Search images using multimodal embeddings. |
 | [Auto Embedding](/ai/guides/auto-embedding.md) | Automatically generate embeddings on data insertion. |
 | [Filtering](/ai/guides/filtering.md) | Filter search results with metadata conditions. |
@@ -49,7 +46,6 @@ Complete code examples and demos showcasing TiDB's AI capabilities.
 
 | Document | Description |
 | --- | --- |
-| [Examples Gallery](/ai/examples/index.md) | Interactive gallery of all available demos. |
 | [Basic CRUD Operations](/ai/examples/basic-with-pytidb.md) | Fundamental table operations with PyTiDB. |
 | [Vector Search](/ai/examples/vector-search-with-pytidb.md) | Semantic similarity search example. |
 | [RAG Application](/ai/examples/rag-with-pytidb.md) | Build a Retrieval-Augmented Generation application. |

@@ -1,20 +1,25 @@
+---
+title: Filtering
+summary: Learn how to use filtering in your application.
+---
+
 # Filtering
 
 As a relational database, TiDB supports a rich set of [SQL operators](https://docs.pingcap.com/tidbcloud/operators/) and allows flexible combinations of filtering conditions that enable you to query your data precisely.
 
 ## Overview
 
-You can not only apply filtering on scalar fields but also on JSON fields. Filtering on JSON fields is often used for [metadata filtering](./vector-search.md#metadata-filtering) in vector search.
+You can not only apply filtering on scalar fields but also on JSON fields. Filtering on JSON fields is often used for [metadata filtering](/ai/guides/vector-search.md#metadata-filtering) in vector search.
 
-=== "Python"
+> **Note:**
+>
+> For a complete example of filtering, see [Filtering Example](/ai/examples/filtering-with-pytidb.md).
 
 For PyTiDB, you can apply filtering by passing a **filters** parameter to the `table.query()`, `table.delete()`, `table.update()`, and `table.search()` methods.
 
 The **filters** parameter supports two formats: [Dictionary Filters](#dictionary-filters) and [SQL String Filters](#sql-string-filters).
 
-## Dictionary Filters
-
-=== "Python"
+## Dictionary filters
 
 PyTiDB allows you to define filter conditions using a Python dictionary with operators as the **filters** parameter.
 
@@ -29,7 +34,7 @@ The dictionary structure of **filters** is as follows:
 }
 ```
 
-- `<key>`: The key can be a column name, a JSON path expression to access a JSON field (see [Metadata filtering](./vector-search.md#metadata-filtering)), or a [logical operator](#logical-operators).
+- `<key>`: The key can be a column name, a JSON path expression to access a JSON field (see [Metadata filtering](/ai/guides/vector-search.md#metadata-filtering)), or a [logical operator](#logical-operators).
 - `<operator>`: The operator can be a [compare operator](#compare-operators) or an [inclusion operator](#inclusion-operators).
 - `<value>`: The value can be a scalar value, an array, it depends on the operator.
 
@@ -160,8 +165,6 @@ You can use the logical operators `$and` and `$or` to combine multiple filters.
 
 ## SQL String Filters
 
-=== "Python"
-
 You can also use a SQL string as the `filters` parameter. The string should be a valid SQL `WHERE` clause (without the `WHERE` keyword) using TiDB's SQL syntax.
 
 **Example: Filter records where `created_at` is greater than 2024-01-01**
@@ -184,6 +187,6 @@ results = table.query(
 
 You can combine multiple conditions using `AND`, `OR`, and parentheses, and use any [SQL operators](https://docs.pingcap.com/tidbcloud/operators/) supported by TiDB.
 
-!!! warning
-
-    When using SQL string filters with dynamic user input, always validate the input to prevent [SQL injection](https://en.wikipedia.org/wiki/SQL_injection) vulnerabilities.
+> **Warning:**
+>
+> When using SQL string filters with dynamic user input, always validate the input to prevent [SQL injection](https://en.wikipedia.org/wiki/SQL_injection) vulnerabilities.

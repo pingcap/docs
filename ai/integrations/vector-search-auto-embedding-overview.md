@@ -22,7 +22,7 @@ To use Auto Embedding, the basic workflow is as follows:
 
 > **Tip:**
 >
-> For Python usage, see [PyTiDB Documentation](https://pingcap.github.io/ai/guides/auto-embedding/).
+> For Python usage, see [Use Auto Embedding in Python](#use-auto-embedding-in-python).
 
 The following example shows how to use Auto Embedding with cosine distance to perform a semantic search. No API key is required in this example.
 
@@ -169,7 +169,35 @@ Use this function in `ORDER BY` clauses to rank results by L2 distance. It uses 
 
 ## Use Auto Embedding in Python
 
-See [PyTiDB Documentation](https://pingcap.github.io/ai/guides/auto-embedding/).
+TiDB provides a unified interface for integrating with various embedding providers and models:
+
+- **Programmatic use**: Use the `EmbeddingFunction` class from the AI SDK to create embedding functions for specific providers or models.
+- **SQL use**: Use the `EMBED_TEXT` function to generate embeddings directly from text data.
+
+Use the `EmbeddingFunction` class to work with different embedding providers and models.
+
+  ```python
+  from pytidb.embeddings import EmbeddingFunction
+
+  embed_func = EmbeddingFunction(
+      model_name="<provider_name>/<model_name>",
+  )
+  ```
+
+**Parameters:**
+
+- `model_name` *(required)*: specifies the embedding model to use, in the format `{provider_name}/{model_name}`.
+
+- `dimensions` *(optional)*: the dimensionality of output vector embeddings. If not provided and the model lacks a default dimension, a test string is embedded during initialization to determine the actual dimension automatically.
+
+- `api_key` *(optional)*: the API key for accessing the embedding service. If not explicitly set, retrieves the key from the provider's default environment variable.
+
+- `api_base` *(optional)*: the base URL of the embedding API service.
+
+- `use_server` *(optional)*: whether to use TiDB Cloud's hosted embedding service. Defaults to `True` for TiDB Cloud Starter.
+
+- `multimodal` *(optional)*: whether to use a multimodal embedding model. When enabled, `use_server` is automatically set to `False`, and the embedding service is called client-side.
+
 
 ## See also
 

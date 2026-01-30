@@ -1,25 +1,28 @@
+---
+title: Transactions
+summary: Learn how to use transactions in your application.
+---
+
 # Transaction
 
 TiDB supports ACID transactions, which ensure data consistency and reliability.
 
-## Basic Usage
+## Basic usage
 
-=== "Python"
+```python
+with client.session() as session:
+    initial_total_balance = session.query("SELECT SUM(balance) FROM players").scalar()
 
-    ```python
-    with client.session() as session:
-        initial_total_balance = session.query("SELECT SUM(balance) FROM players").scalar()
+    # Transfer 10 coins from player 1 to player 2
+    session.execute("UPDATE players SET balance = balance - 10 WHERE id = 1")
+    session.execute("UPDATE players SET balance = balance + 10 WHERE id = 2")
 
-        # Transfer 10 coins from player 1 to player 2
-        session.execute("UPDATE players SET balance = balance - 10 WHERE id = 1")
-        session.execute("UPDATE players SET balance = balance + 10 WHERE id = 2")
+    session.commit()
+    # or session.rollback()
 
-        session.commit()
-        # or session.rollback()
-
-        final_total_balance = session.query("SELECT SUM(balance) FROM players").scalar()
-        assert final_total_balance == initial_total_balance
-    ```
+    final_total_balance = session.query("SELECT SUM(balance) FROM players").scalar()
+    assert final_total_balance == initial_total_balance
+```
 
 ## See also
 

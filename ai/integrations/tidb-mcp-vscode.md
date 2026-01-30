@@ -1,9 +1,9 @@
 ---
 title: Get started with Visual Studio Code and TiDB MCP Server
-description: This guide shows you how to configure the TiDB MCP Server in Visual Studio Code.
+summary: This guide shows you how to configure the TiDB MCP Server in Visual Studio Code.
 ---
 
-# Get started with Visual Studio Code and TiDB MCP Server
+# Get Started with Visual Studio Code and TiDB MCP Server
 
 This guide shows you how to configure the TiDB MCP Server in Visual Studio Code (VS Code).
 
@@ -55,4 +55,4 @@ If you prefer manual setup, add the following configuration to your `.vscode/mcp
 
 ## See also
 
-- [TiDB MCP Server](./tidb-mcp-server.md)
+- [TiDB MCP Server](/ai/integrations/tidb-mcp-server.md)

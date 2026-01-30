@@ -1,6 +1,6 @@
 ---
 title: Get started with Claude Desktop and TiDB MCP Server
-description: This guide shows you how to configure the TiDB MCP Server in Claude Desktop.
+summary: This guide shows you how to configure the TiDB MCP Server in Claude Desktop.
 ---
 
 # Integrate TiDB MCP Server with Claude Desktop
@@ -45,5 +45,4 @@ You can follow the steps below to set up the TiDB MCP Server in Claude Desktop:
 6. Click the **Connect** button to get the connection parameters, and replace the `TIDB_HOST`, `TIDB_PORT`, `TIDB_USERNAME`, `TIDB_PASSWORD`, and `TIDB_DATABASE` values with your own.
 7. Restart Claude Desktop.
 
-
-For more details, please refer to the quickstart guide to learn [how to configure the MCP server in Claude Desktop](https://modelcontextprotocol.io/quickstart/user).
+For more details, see [how to configure the MCP server in Claude Desktop](https://modelcontextprotocol.io/quickstart/user).

@@ -1,4 +1,9 @@
-# Connect to database
+---
+title: Connect to TiDB
+summary: Learn how to connect to a TiDB database using the TiDB client.
+---
+
+# Connect to TiDB
 
 In this guide, we will introduce how to connect to a TiDB database using the TiDB client.
 
@@ -16,53 +21,58 @@ pip install pytidb
 
 Choose the steps based on your deployment type:
 
-=== "TiDB Cloud Starter"
+<SimpleTab>
+<div label="TiDB Cloud Starter">
 
-    You can create a starter cluster in the [TiDB Cloud](https://tidbcloud.com/free-trial/), and then get the connection parameters from the web console.
+You can create a starter cluster in the [TiDB Cloud](https://tidbcloud.com/free-trial/), and then get the connection parameters from the web console.
 
-    1. Navigate to the [Clusters page](https://tidbcloud.com/clusters), and then click the name of your target cluster to go to its overview page.
-    2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
-    3. Copy the connection parameters to your code or environment variables.
+1. Navigate to the [Clusters page](https://tidbcloud.com/clusters), and then click the name of your target cluster to go to its overview page.
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
+3. Copy the connection parameters to your code or environment variables.
 
-    Example code:
+Example code:
 
-    ```python title="main.py"
-    from pytidb import TiDBClient
+```python title="main.py"
+from pytidb import TiDBClient
 
-    db = TiDBClient.connect(
-        host="{gateway-region}.prod.aws.tidbcloud.com",
-        port=4000,
-        username="{prefix}.root",
-        password="{password}",
-        database="test",
-    )
-    ```
+db = TiDBClient.connect(
+    host="{gateway-region}.prod.aws.tidbcloud.com",
+    port=4000,
+    username="{prefix}.root",
+    password="{password}",
+    database="test",
+)
+```
 
-    !!! tip
+>**Note:**
 
-        For TiDB Cloud Starter, [TLS connection to the database](https://docs.pingcap.com/tidbcloud/secure-connections-to-starter-clusters/) is required when using Public Endpoint. TiDB Client will **automatically** enable TLS connection for starter clusters.
+For TiDB Cloud Starter, [TLS connection to the database](https://docs.pingcap.com/tidbcloud/secure-connections-to-starter-clusters/) is required when using Public Endpoint. TiDB Client will **automatically** enable TLS connection for starter clusters.
 
-=== "TiDB Self-Managed"
+</div>
+<div label="TiDB Self-Managed">
 
-    You can follow [Quick Start with TiDB Self-Managed](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb/#deploy-a-local-test-cluster) to deploy a TiDB cluster for testing.
+You can follow [Quick Start with TiDB Self-Managed](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb/#deploy-a-local-test-cluster) to deploy a TiDB cluster for testing.
 
-    Example code:
+Example code:
 
-    ```python title="main.py"
-    from pytidb import TiDBClient
+```python title="main.py"
+from pytidb import TiDBClient
 
-    db = TiDBClient.connect(
-        host="{tidb_server_host}",
-        port=4000,
-        username="root",
-        password="{password}",
-        database="test",
-    )
-    ```
+db = TiDBClient.connect(
+    host="{tidb_server_host}",
+    port=4000,
+    username="root",
+    password="{password}",
+    database="test",
+)
+```
 
-    !!! tip
-    
-        If you are using `tiup playground` to deploy a TiDB cluster for testing, the default host is `127.0.0.1` and the default password is empty.
+>**Note:**
+>
+> If you are using `tiup playground` to deploy a TiDB cluster for testing, the default host is `127.0.0.1` and the default password is empty.
+
+</div>
+</SimpleTab>
 
 Once connected, you can use the `db` object to operate tables, query data, and more.
 
@@ -70,45 +80,46 @@ Once connected, you can use the `db` object to operate tables, query data, and m
 
 If you prefer to use a connection string (database URL), you can follow the format based on your deployment type:
 
-=== "TiDB Cloud Starter"
+<SimpleTab>
+<div label="TiDB Cloud Starter">
 
-    You can create a starter cluster in the [TiDB Cloud](https://tidbcloud.com/free-trial/), and then get the connection parameters from the web console.
+You can create a starter cluster in the [TiDB Cloud](https://tidbcloud.com/free-trial/), and then get the connection parameters from the web console.
 
-    1. Navigate to the [Clusters page](https://tidbcloud.com/clusters), and then click the name of your target cluster to go to its overview page.
-    2. Click **Connect** in the upper-right corner. A connection dialog is displayed with the connection parameters listed.
-    3. Copy the connection parameters and construct the connection string as the format below.
+1. Navigate to the [Clusters page](https://tidbcloud.com/clusters), and then click the name of your target cluster to go to its overview page.
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed with the connection parameters listed.
+3. Copy the connection parameters and construct the connection string as the format below.
 
-    ```python title="main.py"
-    from pytidb import TiDBClient
+```python title="main.py"
+from pytidb import TiDBClient
 
-    db = TiDBClient.connect(
-        database_url="mysql+pymysql://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}?ssl_verify_cert=true&ssl_verify_identity=true",
-    )
-    ```
+db = TiDBClient.connect(
+    database_url="mysql+pymysql://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}?ssl_verify_cert=true&ssl_verify_identity=true",
+)
+```
 
-    !!! note
-    
-        For TiDB Cloud Starter, [TLS connection to the database](https://docs.pingcap.com/tidbcloud/secure-connections-to-starter-clusters/) is required when using Public Endpoint, so you need to set `ssl_verify_cert=true&ssl_verify_identity=true` in the connection string.
+>**Note:**
+>
+> For TiDB Cloud Starter, [TLS connection to the database](https://docs.pingcap.com/tidbcloud/secure-connections-to-starter-clusters/) is required when using Public Endpoint, so you need to set `ssl_verify_cert=true&ssl_verify_identity=true` in the connection string.
 
-=== "TiDB Self-Managed"
+<div label="TiDB Self-Managed">
 
-    You can follow the format below to construct the connection string:
+You can follow the format below to construct the connection string:
 
-    ```python title="main.py"
-    from pytidb import TiDBClient
+```python title="main.py"
+from pytidb import TiDBClient
 
-    db = TiDBClient.connect(
-        database_url="mysql+pymysql://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}",
-    )
-    ```
+db = TiDBClient.connect(
+    database_url="mysql+pymysql://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}",
+)
+```
 
-    !!! tip
-
-        If you are using `tiup playground` to deploy a TiDB cluster for testing, the connection string is: 
-        
-        ```
-        mysql+pymysql://root:@127.0.0.1:4000/test
-        ```
+> **Note:**
+>
+> If you are using `tiup playground` to deploy a TiDB cluster for testing, the connection string is: 
+>
+> ```
+> mysql+pymysql://root:@127.0.0.1:4000/test
+> ```
 
 ## Connect with SQLAlchemy DB engine
 
@@ -120,11 +131,11 @@ from pytidb import TiDBClient
 db = TiDBClient(db_engine=db_engine)
 ```
 
-## Next Steps
+## Next steps
 
 After connecting to your TiDB database, you can explore the following guides to learn how to work with your data:
 
-- [Working with Tables](./tables.md): Learn how to define and manage tables in TiDB.
-- [Vector Search](./vector-search.md): Perform semantic search using vector embeddings.
-- [Fulltext Search](./fulltext-search.md): Retrieve documents using keyword-based search.
-- [Hybrid Search](./hybrid-search.md): Combine vector and full-text search for more relevant results.
+- [Working with Tables](/ai/guides/tables.md): Learn how to define and manage tables in TiDB.
+- [Vector Search](/ai/guides/vector-search.md): Perform semantic search using vector embeddings.
+- [Fulltext Search](/ai/guides/fulltext-search.md): Retrieve documents using keyword-based search.
+- [Hybrid Search](/ai/guides/vector-search-hybrid-search.md): Combine vector and full-text search for more relevant results.

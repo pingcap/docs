@@ -1,9 +1,9 @@
 ---
 title: Get started with Claude Code and TiDB MCP Server
-description: This guide shows you how to configure the TiDB MCP Server in Claude Code.
+summary: This guide shows you how to configure the TiDB MCP Server in Claude Code.
 ---
 
-# Get started with Claude Code and TiDB MCP Server
+# Get Started with Claude Code and TiDB MCP Server
 
 This guide shows you how to configure the TiDB MCP Server in Claude Code.
 
@@ -71,4 +71,4 @@ Add the following configuration to your project-level `.mcp.json` file. For deta
 
 ## See also
 
-- [TiDB MCP Server](./tidb-mcp-server.md)
+- [TiDB MCP Server](/ai/integrations/tidb-mcp-server.md)

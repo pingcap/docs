@@ -1,10 +1,9 @@
 ---
-title: Hybrid Search
-description: "Combine vector search and fulltext search for more comprehensive results."
-source_repo: "https://github.com/pingcap/pytidb/tree/main/examples/hybrid_search"
+title: Hybrid Search Example
+summary: Combine vector search and fulltext search for more comprehensive results.
 ---
 
-# Hybrid Search Demo
+# Hybrid Search Example
 
 In this demo, we will show you how to use hybrid search to combine vector search and full-text search on a set of documents.
 
@@ -20,21 +19,21 @@ In this demo, we will show you how to use hybrid search to combine vector search
 * OpenAI API key (Go to [OpenAI](https://platform.openai.com/api-keys) to get the API key)
 
 > **Note**
-> 
+>
 > Currently, full-text search is only available for the following product option and region:
 >
 > - TiDB Cloud Starter: Frankfurt (eu-central-1), Singapore (ap-southeast-1)
 
 ## How to run
 
-**Step 1**: Clone the repository
+### Step 1. Clone the repository
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git
 cd pytidb/examples/hybrid_search;
 ```
 
-**Step 2**: Install the required packages and setup environment
+### Step 2. Install the required packages and setup environment
 
 ```bash
 python -m venv .venv
@@ -42,7 +41,7 @@ source .venv/bin/activate
 pip install -r reqs.txt
 ```
 
-**Step 3**: Set up environment to connect to storage
+### Step 3. Set up environment to connect to storage
 
 If you are using TiDB Cloud, you can find the connection parameters in the [TiDB Cloud console](https://tidbcloud.com/).
 
@@ -57,9 +56,9 @@ OPENAI_API_KEY=<your-openai-api-key>
 EOF
 ```
 
-**Step 4**: Run the demo
+### Step 4. Run the demo
 
-**Option 1**: Run the Streamlit app
+### Option 1. Run the Streamlit app
 
 If you want to check the demo with a web UI, you can run the following command:
 
@@ -69,7 +68,7 @@ streamlit run app.py
 
 Open the browser and visit `http://localhost:8501`
 
-**Option 2**: Run the demo script
+### Option 2. Run the demo script
 
 If you want to check the demo with a script, you can run the following command:
 
@@ -116,16 +115,6 @@ Search results:
 ]
 ```
 
-
-
----
-
-## Related Resources
+## Related resources
 
 - **Source Code**: [View on GitHub](https://github.com/pingcap/pytidb/tree/main/examples/hybrid_search)
-- **Category**: Search
-
-- **Description**: Combine vector search and fulltext search for more comprehensive results.
-
-
-[🏠 Back to Demo Gallery](../index.md){ .md-button .md-button--primary } 

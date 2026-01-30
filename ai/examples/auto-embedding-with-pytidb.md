@@ -1,10 +1,9 @@
 ---
-title: Auto Embedding
-description: "Automatically generate embeddings for your text data using built-in embedding models."
-source_repo: "https://github.com/pingcap/pytidb/tree/main/examples/auto_embedding"
+title: Auto Embedding Example
+summary: Automatically generate embeddings for your text data using built-in embedding models.
 ---
 
-# Auto Embedding Demo
+# Auto Embedding Example
 
 This example showcases how to use the auto embedding feature with PyTiDB Client.
 
@@ -20,14 +19,14 @@ This example showcases how to use the auto embedding feature with PyTiDB Client.
 
 ## How to run
 
-**Step 1**: Clone the repository
+### Step 1. Clone the repository
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git
 cd pytidb/examples/auto_embedding/
 ```
 
-**Step 2**: Install the required packages
+### Step 2. Install the required packages
 
 ```bash
 python -m venv .venv
@@ -35,7 +34,7 @@ source .venv/bin/activate
 pip install -r reqs.txt
 ```
 
-**Step 3**: Set up environment to connect to database
+### Step 3. Set up environment to connect to database
 
 Go to [TiDB Cloud console](https://tidbcloud.com/clusters) to get the connection parameters and set up the environment variable like this:
 
@@ -52,7 +51,7 @@ EMBEDDING_PROVIDER=tidbcloud_free
 EOF
 ```
 
-**Step 4**: Run the demo
+### Step 4. Run the demo
 
 ```bash
 python main.py
@@ -79,15 +78,6 @@ id: 2, text: PyTiDB is a Python library for developers to connect to TiDB., dist
 id: 3, text: LlamaIndex is a Python library for building AI-powered applications., distance: 0.5267239638442787
 ```
 
-
----
-
-## Related Resources
+## Related resources
 
 - **Source Code**: [View on GitHub](https://github.com/pingcap/pytidb/tree/main/examples/auto_embedding)
-- **Category**: Getting-Started
-
-- **Description**: Automatically generate embeddings for your text data using built-in embedding models.
-
-
-[🏠 Back to Demo Gallery](../index.md){ .md-button .md-button--primary } 
