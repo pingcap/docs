@@ -11,7 +11,7 @@ This document describes how to do these operations and provides the TiDB Cloud b
 
 > **Note:**
 >
-> Currently, the alert feature is only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+> Currently, alert subscription is available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) and [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#tidb-cloud-essetial) clusters.
 
 ## View alerts
 
@@ -58,7 +58,11 @@ The following table provides the TiDB Cloud built-in alert conditions and the co
 >
 > - While these alert conditions do not necessarily mean there is a problem, they are often early warning indicators of emerging issues. Therefore, taking the recommended action is advised.
 > - You can edit the thresholds of the alerts on the TiDB Cloud console. 
-> - Some alert rules are disabled by default. You can enable them as needed. 
+> - Some alert rules are disabled by default. You can enable them as needed.
+
+We provide distinct alert rules for each product tier, aligned with their respective feature sets.
+
+<CustomContent plan="dedicated">
 
 ### Resource usage alerts
 
@@ -94,3 +98,12 @@ The following table provides the TiDB Cloud built-in alert conditions and the co
 | The changefeed latency exceeds 600 seconds. | Check the changefeed status on the **Changefeed** page and **Changefeed Detail** page of the TiDB Cloud console, where you can find some error messages to help diagnose this issue. <br/> Possible reasons that can trigger this alert include:<ul><li>The overall traffic in the upstream has increased, causing the existing changefeed specification to be insufficient to handle it. If the traffic increase is temporary, the changefeed latency will automatically recover after the traffic returns to normal. If the traffic increase is continuous, you need to scale up the changefeed.</li><li>The downstream or network is abnormal. In this case, resolve this abnormality first.</li><li>Tables lack indexes if the downstream is RDS, which might cause low write performance and high latency. In this case, you need to add the necessary indexes to the upstream or downstream.</li></ul>If the problem cannot be fixed from your side, you can contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for further assistance. |
 | The changefeed status is `FAILED`.                 | Check the changefeed status on the **Changefeed** page and **Changefeed Detail** page of the TiDB Cloud console, where you can find some error messages to help diagnose this issue. <br/> If the problem cannot be fixed from your side, you can contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for further assistance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | The changefeed status is `WARNING`.              | Check the changefeed status on the **Changefeed** page and **Changefeed Detail** page of the TiDB Cloud console, where you can find some error messages to help diagnose this issue. <br/> If the problem cannot be fixed from your side, you can contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for further assistance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+</CustomContent>
+
+<CustomContent plan="essential">
+
+TBD.
+
+</CustomContent>
+
+
