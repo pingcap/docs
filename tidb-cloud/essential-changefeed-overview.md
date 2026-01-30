@@ -14,8 +14,8 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 
 ## Restrictions
 
-- Renaming multiple tables in a single statement, such as `RENAME TABLE t1 TO t3, t2 TO t4`, is not supported. If you perform this operation, it will permanently interrupt data synchronization for the changefeed.
-- The changefeed performance is approximately 20 MiB/s. If your incremental data volume exceeds this threshold, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance.
+- TiDB does not support renaming multiple tables in a single `RENAME TABLE` statement (for example, `RENAME TABLE t1 TO t3, t2 TO t4`). Executing this statement permanently interrupts changefeed data synchronization.
+- The changefeed throughput is approximately 20 MiB/s. If your incremental data volume exceeds this limit, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance.
 
 ## Supported regions
 
@@ -23,7 +23,7 @@ The changefeed feature is available in the following regions:
 
 | Cloud provider | Supported regions |
 | --- | --- |
-| AWS          | <ul><li>`ap-southeast-1`</li><li>`eu-central-1`</li><li>`us-east-1`</li><li>`us-west-2`</li><li>`ap-northeast-1`</li><li>`ap-east-1`</li></ul> |
+| AWS          | <ul><li>`ap-east-1`</li><li>`ap-northeast-1`</li><li>`ap-southeast-1`</li><li>`eu-central-1`</li><li>`us-east-1`</li><li>`us-west-2`</li></ul> |
 | Alibaba Cloud | <ul><li>`ap-southeast-1`</li><li>`ap-southeast-5`</li><li>`cn-hongkong`</li></ul> |
 
 Additional regions will be supported in the future. For immediate support in a specific region, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
