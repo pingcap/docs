@@ -377,7 +377,7 @@ If the tables operated by TiDB Lightning Physical Import Mode overlap with the t
 
 1. Remove the TiCDC replication task related to these tables.
 
-2. Use TiDB Lightning physical import mode to restore data separately in the upstream and downstream clusters of TiCDC.
+2. Use TiDB Lightning Physical Import Mode to restore data separately in the upstream and downstream clusters of TiCDC.
 
 3. After the restoration is complete and the data consistency of the corresponding tables in the upstream and downstream clusters has been verified, use the timestamp (TSO) after the completion of TiDB Lightning Physical Import Mode as the `start-ts` of the TiCDC replication task to create a new TiCDC replication task for incremental replication.
 
