@@ -3544,7 +3544,7 @@ Referenced in:
 - [Optimizer Hints](/optimizer-hints.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md#tidb_replica_read-new-in-v40)
-- [TiDB Best Practices on Public Cloud](/best-practices-on-public-cloud.md)
+- [TiDB Best Practices on Public Cloud](/best-practices/best-practices-on-public-cloud.md)
 - [TiDB 8.5.4 Release Notes](/releases/release-8.5.4.md)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 - [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
@@ -4098,7 +4098,7 @@ Referenced in:
 
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v530)
-- [TiDB Best Practices on Public Cloud](/best-practices-on-public-cloud.md)
+- [TiDB Best Practices on Public Cloud](/best-practices/best-practices-on-public-cloud.md)
 - [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
 
 ### tidb_tso_client_rpc_mode

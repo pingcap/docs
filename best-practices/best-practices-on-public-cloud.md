@@ -3,7 +3,7 @@ title: TiDB Best Practices on Public Cloud
 summary: Learn about the best practices for deploying TiDB on public cloud.
 ---
 
-# TiDB Best Practices on Public Cloud
+# Best Practices for Deploying TiDB on Public Cloud
 
 Public cloud infrastructure has become an increasingly popular choice for deploying and managing TiDB. However, deploying TiDB on public cloud requires careful consideration of several critical factors, including performance tuning, cost optimization, reliability, and scalability.
 

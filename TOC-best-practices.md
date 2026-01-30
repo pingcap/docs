@@ -9,6 +9,7 @@
   - [Optimize Multi-Column Indexes](/best-practices/multi-column-index-best-practices.md)
   - [Manage Indexes and Identify Unused Indexes](/best-practices/index-management-best-practices.md)
 - Deployment
+  - [Deploy TiDB on Public Cloud](/best-practices/best-practices-on-public-cloud.md)
   - [Three-Node Hybrid Deployment](/best-practices/three-nodes-hybrid-deployment.md)
   - [Local Reads in Three-Data-Center Deployments](/best-practices/three-dc-local-read.md)
 - Operations

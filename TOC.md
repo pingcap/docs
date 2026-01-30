@@ -239,7 +239,6 @@
       - [TiFlash Performance Analysis Methods](/tiflash-performance-tuning-methods.md)
       - [TiCDC Performance Analysis Methods](/ticdc-performance-tuning-methods.md)
       - [Latency Breakdown](/latency-breakdown.md)
-    - [TiDB Best Practices on Public Cloud](/best-practices-on-public-cloud.md)
   - Configuration Tuning
     - [Tune Operating System Performance](/tune-operating-system.md)
     - [Tune TiDB Memory](/configure-memory-usage.md)
