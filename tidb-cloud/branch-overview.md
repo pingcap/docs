@@ -45,8 +45,6 @@ Currently, TiDB Cloud branches are in beta and free of charge.
 
 - Branches are intended for short-term feature development and functional testing. Because branches lack auto-scaling capability, performance testing is not supported.
 
-- Data merge functionality and advanced scalability features are not supported for branches.
-
 - If your cluster has tables with TiFlash replicas, these replicas will be temporarily unavailable in the new branch after you create it, because TiFlash needs to rebuild the replica data.
 
 - When [creating a branch](/tidb-cloud/branch-manage.md#create-a-branch) from a specific point in time:
