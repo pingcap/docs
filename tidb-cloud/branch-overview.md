@@ -43,7 +43,7 @@ Currently, TiDB Cloud branches are in beta and free of charge.
 
 - For each branch of a free cluster, 10 GiB storage is allowed. For each branch of a cluster with spending limit > 0, 100 GiB storage is allowed. Once the storage is reached, the read and write operations on this branch will be throttled until you reduce the storage.
 
-- TiDB Cloud branches are optimized for feature development and test validation with short expected lifecycles. They are not designed for performance testing due to the lack of auto-scaling capability.
+- TiDB Cloud optimizes branches for feature development and test validation with short expected lifespans. They do not support performance testing because they lack auto-scaling capability.
 
 - The branch design does not include merge functionality or advanced scalability features.
 
