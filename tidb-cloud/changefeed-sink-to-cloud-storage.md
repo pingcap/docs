@@ -91,15 +91,18 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 For **Azure Blob**, you first need to configure the container and get a SAS token in the Azure portal. Take the following steps:
 
 1. In the Azure portal, create a container for storing changefeed data.
+
     1. In the left navigation pane, click **Storage Accounts**, and then click the storage account.
     2. In the navigation pane for the selected storage account, click **Data storage** > **Containers**, and then click **+ Container**.
     3. Enter a name for your new container, set the anonymous access level (the recommended level is **Private**), and then click **Create**.
 
 2. Get the URL of the target container.
+
     1. In the container list, select the target container, click **...** for the container, and then select **Container properties**.
     2. Copy the **URL** value for later use (for example `https://<storage_account>.blob.core.windows.net/<container>`).
 
 3. Generate a SAS token.
+
     1. In the navigation pane for the selected storage account, click **Security + networking** > **Shared access signature**.
     2. In **Allowed services**, select **Blob**.
     3. In **Allowed resource types**, select **Container** and **Object**.
@@ -113,9 +116,11 @@ For **Azure Blob**, you first need to configure the container and get a SAS toke
     > - To ensure continuous availability, re-generate and update the SAS token before it expires.
 
     6. Click **Generate SAS and connection string**, then copy the **SAS token**.
-    ![Generate a SAS token](/media/tidb-cloud/changefeed/sink-to-cloud-storage-azure-signature.png)
+
+        ![Generate a SAS token](/media/tidb-cloud/changefeed/sink-to-cloud-storage-azure-signature.png)
 
 4. In the TiDB Cloud console, go to the Changefeed's **Configure Destination** page, and fill in the following:
+
     - **Blob URL**: Paste the container URL. You can optionally add a prefix.
     - **SAS Token**: Paste the generated SAS token.
 
