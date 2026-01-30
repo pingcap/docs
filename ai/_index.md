@@ -1,124 +1,82 @@
 ---
 title: TiDB for AI
-summary: Build modern AI applications with TiDB's integrated vector search, full-text search, and seamless Python SDK
+summary: Build modern AI applications with TiDB's integrated vector search, full-text search, and seamless Python SDK.
 aliases: ['/tidb/stable/ai/', '/tidb/dev/ai/', '/tidbcloud/ai/']
 ---
 
 # TiDB for AI
 
-TiDB is a distributed SQL database designed for modern AI applications, offering integrated vector search, full-text search, and hybrid search capabilities.
+TiDB is a distributed SQL database designed for modern AI applications, offering integrated vector search, full-text search, and hybrid search capabilities. This document provides an overview of the AI features and tools available for building AI-powered applications with TiDB.
 
 ## Get Started
 
-- [Overview](index.md)
-- [Quickstart](quickstart.md)
+Get up and running quickly with TiDB's AI capabilities.
+
+| Document | Description |
+| --- | --- |
+| [Overview](/ai/index.md) | Introduction to TiDB for AI applications and the PyTiDB SDK. |
+| [Quickstart](/ai/quickstart.md) | Build your first AI application with TiDB in minutes. |
 
 ## Concepts
 
-- [Vector Search Overview](concepts/vector-search-overview.md)
-- [Vector Search Fundamentals](concepts/vector-search.md)
+Understand the foundational concepts behind AI-powered search in TiDB.
+
+| Document | Description |
+| --- | --- |
+| [Vector Search Overview](/ai/concepts/vector-search-overview.md) | Comprehensive overview of vector search, including concepts, how it works, and use cases. |
+| [Vector Search Fundamentals](/ai/concepts/vector-search.md) | Core concepts of vector embeddings, distance metrics, and semantic search. |
 
 ## Guides
 
-### Getting Started
+Step-by-step guides for building AI applications with TiDB using the PyTiDB SDK or SQL.
 
-- [Get Started Using Python](guides/vector-search-get-started-using-python.md)
-- [Get Started Using SQL](guides/vector-search-get-started-using-sql.md)
-
-### PyTiDB SDK
-
-- [Connect to TiDB](guides/connect.md)
-- [Working with Tables](guides/tables.md)
-- [Vector Search](guides/vector-search.md)
-- [Full-Text Search](guides/fulltext-search.md)
-- [Hybrid Search](guides/hybrid-search.md)
-- [Image Search](guides/image-search.md)
-- [Auto Embedding](guides/auto-embedding.md)
-- [Filtering](guides/filtering.md)
-- [Join Queries](guides/join-queries.md)
-- [Reranking](guides/reranking.md)
-- [Raw SQL Queries](guides/raw-queries.md)
-- [Transactions](guides/transactions.md)
-
-### SQL Guides
-
-- [Full-Text Search (Python)](guides/vector-search-full-text-search-python.md)
-- [Full-Text Search (SQL)](guides/vector-search-full-text-search-sql.md)
-- [Hybrid Search (SQL)](guides/vector-search-hybrid-search.md)
+| Document | Description |
+| --- | --- |
+| [Get Started with Python](/ai/guides/vector-search-get-started-using-python.md) | Quick start guide for vector search using Python. |
+| [Get Started with SQL](/ai/guides/vector-search-get-started-using-sql.md) | Quick start guide for vector search using SQL. |
+| [Connect to TiDB](/ai/guides/connect.md) | Connect to TiDB Cloud or self-managed clusters using PyTiDB. |
+| [Working with Tables](/ai/guides/tables.md) | Create, query, and manage tables with vector fields. |
+| [Vector Search](/ai/guides/vector-search.md) | Perform semantic similarity searches using PyTiDB. |
+| [Full-Text Search](/ai/guides/fulltext-search.md) | Keyword-based text search with BM25 ranking. |
+| [Hybrid Search](/ai/guides/hybrid-search.md) | Combine vector and full-text search for better results. |
+| [Image Search](/ai/guides/image-search.md) | Search images using multimodal embeddings. |
+| [Auto Embedding](/ai/guides/auto-embedding.md) | Automatically generate embeddings on data insertion. |
+| [Filtering](/ai/guides/filtering.md) | Filter search results with metadata conditions. |
 
 ## Examples
 
-- [Examples Gallery](examples/index.md)
-- [Basic CRUD Operations](examples/basic-with-pytidb.md)
-- [Vector Search](examples/vector-search-with-pytidb.md)
-- [Auto Embedding](examples/auto-embedding-with-pytidb.md)
-- [Full-Text Search](examples/fulltext-search-with-pytidb.md)
-- [Hybrid Search](examples/hybrid-search-with-pytidb.md)
-- [Image Search](examples/image-search-with-pytidb.md)
-- [RAG Application](examples/rag-with-pytidb.md)
-- [Conversational Memory](examples/memory-with-pytidb.md)
-- [Text-to-SQL](examples/text2sql-with-pytidb.md)
+Complete code examples and demos showcasing TiDB's AI capabilities.
+
+| Document | Description |
+| --- | --- |
+| [Examples Gallery](/ai/examples/index.md) | Interactive gallery of all available demos. |
+| [Basic CRUD Operations](/ai/examples/basic-with-pytidb.md) | Fundamental table operations with PyTiDB. |
+| [Vector Search](/ai/examples/vector-search-with-pytidb.md) | Semantic similarity search example. |
+| [RAG Application](/ai/examples/rag-with-pytidb.md) | Build a Retrieval-Augmented Generation application. |
+| [Image Search](/ai/examples/image-search-with-pytidb.md) | Multimodal image search with Jina AI embeddings. |
+| [Conversational Memory](/ai/examples/memory-with-pytidb.md) | Persistent memory for AI agents and chatbots. |
+| [Text-to-SQL](/ai/examples/text2sql-with-pytidb.md) | Convert natural language to SQL queries. |
 
 ## Integrations
 
-- [Integration Overview](integrations/vector-search-integration-overview.md)
+Integrate TiDB with popular AI frameworks, embedding providers, and development tools.
 
-### Auto Embedding (PyTiDB)
-
-- [Embedding Overview](integrations/embedding-overview.md)
-- [TiDB Cloud Hosted](integrations/embedding-tidb-cloud-hosted.md)
-- [OpenAI](integrations/embedding-openai.md)
-- [OpenAI Compatible](integrations/embedding-openai-compatible.md)
-- [Cohere](integrations/embedding-cohere.md)
-- [Jina AI](integrations/embedding-jina-ai.md)
-- [Google Gemini](integrations/embedding-gemini.md)
-- [Hugging Face](integrations/embedding-huggingface.md)
-- [NVIDIA NIM](integrations/embedding-nvidia-nim.md)
-
-### Auto Embedding (SQL)
-
-- [Auto Embedding Overview](integrations/vector-search-auto-embedding-overview.md)
-- [OpenAI](integrations/vector-search-auto-embedding-openai.md)
-- [Jina AI](integrations/vector-search-auto-embedding-jina-ai.md)
-- [Cohere](integrations/vector-search-auto-embedding-cohere.md)
-- [Google Gemini](integrations/vector-search-auto-embedding-gemini.md)
-- [Hugging Face](integrations/vector-search-auto-embedding-huggingface.md)
-- [NVIDIA NIM](integrations/vector-search-auto-embedding-nvidia-nim.md)
-- [Amazon Titan](integrations/vector-search-auto-embedding-amazon-titan.md)
-
-### AI Frameworks
-
-- [LangChain (PyTiDB)](integrations/langchain.md)
-- [LangChain (tidb-vector)](integrations/vector-search-integrate-with-langchain.md)
-- [LlamaIndex (PyTiDB)](integrations/llamaindex.md)
-- [LlamaIndex (tidb-vector)](integrations/vector-search-integrate-with-llamaindex.md)
-
-### ORM Libraries
-
-- [SQLAlchemy](integrations/vector-search-integrate-with-sqlalchemy.md)
-- [Django ORM](integrations/vector-search-integrate-with-django-orm.md)
-- [Peewee](integrations/vector-search-integrate-with-peewee.md)
-
-### Cloud Services
-
-- [Jina AI Embedding](integrations/vector-search-integrate-with-jinaai-embedding.md)
-- [Amazon Bedrock](integrations/vector-search-integrate-with-amazon-bedrock.md)
-
-### MCP Server
-
-- [MCP Server Overview](integrations/tidb-mcp-server.md)
-- [Claude Code](integrations/tidb-mcp-claude-code.md)
-- [Claude Desktop](integrations/tidb-mcp-claude-desktop.md)
-- [Cursor](integrations/tidb-mcp-cursor.md)
-- [VS Code](integrations/tidb-mcp-vscode.md)
-- [Windsurf](integrations/tidb-mcp-windsurf.md)
+| Document | Description |
+| --- | --- |
+| [Integration Overview](/ai/integrations/vector-search-integration-overview.md) | Overview of all available integrations. |
+| [Embedding Providers](/ai/integrations/embedding-overview.md) | Unified interface for OpenAI, Cohere, Jina AI, and more. |
+| [LangChain](/ai/integrations/langchain.md) | Use TiDB as a vector store with LangChain. |
+| [LlamaIndex](/ai/integrations/llamaindex.md) | Use TiDB as a vector store with LlamaIndex. |
+| [MCP Server](/ai/integrations/tidb-mcp-server.md) | Connect TiDB to Claude Code, Cursor, and other AI-powered IDEs. |
 
 ## Reference
 
-- [Vector Data Types](reference/vector-search-data-types.md)
-- [Functions and Operators](reference/vector-search-functions-and-operators.md)
-- [Vector Search Index](reference/vector-search-index.md)
-- [Performance Tuning](reference/vector-search-improve-performance.md)
-- [Limitations](reference/vector-search-limitations.md)
-- [Changelogs](reference/vector-search-changelogs.md)
+Technical reference documentation for TiDB's AI and vector search features.
 
+| Document | Description |
+| --- | --- |
+| [Vector Data Types](/ai/reference/vector-search-data-types.md) | Vector column types and usage. |
+| [Functions and Operators](/ai/reference/vector-search-functions-and-operators.md) | Distance functions and vector operations. |
+| [Vector Search Index](/ai/reference/vector-search-index.md) | Create and manage vector indexes for performance. |
+| [Performance Tuning](/ai/reference/vector-search-improve-performance.md) | Optimize vector search performance. |
+| [Limitations](/ai/reference/vector-search-limitations.md) | Current limitations and constraints. |
