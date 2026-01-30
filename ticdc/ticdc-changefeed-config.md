@@ -151,7 +151,7 @@ For more information, see [Event filter rules](/ticdc/ticdc-filter.md#event-filt
 #### `enable-table-across-nodes`
 
 - Allocate tables to multiple TiCDC nodes for replication on a per-Region basis.
-- In the [TiCDC classic architecture](/ticdc/ticdc-classic-architecture.md), this configuration item only takes effect on Kafka changefeeds and is not supported on MySQL changefeeds. 
+- In the [TiCDC classic architecture](/ticdc/ticdc-classic-architecture.md), this configuration item only takes effect on Kafka changefeeds and is not supported on MySQL changefeeds.
 - In the [TiCDC new architecture](/ticdc/ticdc-architecture.md), this configuration item works on all types of downstream changefeeds. For more information, see [New features](/ticdc/ticdc-architecture.md#new-features).
 - When `enable-table-across-nodes` is enabled, there are two allocation modes:
 
