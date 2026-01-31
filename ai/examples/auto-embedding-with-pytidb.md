@@ -46,7 +46,7 @@ TIDB_USERNAME={prefix}.root
 TIDB_PASSWORD={password}
 TIDB_DATABASE=test
 
-# Using TiDB Cloud Free embedding model by default, which is no required to set up any API key
+# Using TiDB Cloud Free embedding model by default, which does not require setting up any API key
 EMBEDDING_PROVIDER=tidbcloud_free
 EOF
 ```

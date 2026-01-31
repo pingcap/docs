@@ -38,7 +38,7 @@ Here are some examples to use reranker models from third-party providers.
 
 ### Jina AI
 
-To enable reranker provided by JinaAI, go to their [website](https://jina.ai/reranker) to create a API key.
+To use the reranker provided by Jina AI, go to their [website](https://jina.ai/reranker) to create an API key.
 
 For example:
 

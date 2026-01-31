@@ -9,7 +9,7 @@ The TiDB MCP Server is an open-source tool that enables you to interact with TiD
 
 ## Understanding MCP and TiDB MCP Server
 
-The [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) is a protocol standardizes communication between LLMs and external tools.
+The [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) is a protocol that standardizes communication between LLMs and external tools.
 
 MCP adopts a client-server architecture, allowing a host application to connect to multiple external servers:
 

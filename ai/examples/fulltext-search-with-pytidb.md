@@ -5,7 +5,7 @@ summary: Perform traditional text search using MySQL fulltext search capabilitie
 
 # Full-Text Search Example
 
-This example demonstrates how to build a E-commerce product search application using TiDB's full-text search feature with multilingual support. Users can search for products by keywords in their preferred language.
+This example demonstrates how to build an E-commerce product search application using TiDB's full-text search feature with multilingual support. Users can search for products by keywords in their preferred language.
 
 <p align="center">
   <img width="700" alt="E-commerce product search with full-text search" src="https://github.com/user-attachments/assets/c81ddad4-f996-4b1f-85c0-5cbb55bc2a3a" />
