@@ -99,8 +99,10 @@ Set the API key for the Jina AI embedding provider using SQL:
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_JINA_AI_API_KEY = "{your-jina-api-key}";
 ```
+
 </div>
 </SimpleTab>
+
 ### Step 3: Create a vector table
 
 Create a table with a vector field that uses the `jina_ai/jina-embeddings-v4` model to generate 2048-dimensional vectors:
@@ -137,8 +139,10 @@ CREATE TABLE sample_documents (
     )) STORED
 );
 ```
+
 </div>
 </SimpleTab>
+
 ### Step 4: Insert data into the table
 
 <SimpleTab>
@@ -204,6 +208,8 @@ ORDER BY _distance ASC
 LIMIT 2;
 ```
 
+Result:
+
 ```
 +------+----------------------------------------------------------------+
 | id   | content                                                        |
@@ -215,8 +221,6 @@ LIMIT 2;
 
 </div>
 </SimpleTab>
-Result:
-
 
 ## Options
 

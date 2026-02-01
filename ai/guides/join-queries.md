@@ -90,6 +90,7 @@ INSERT INTO chunks (id, text, document_id) VALUES
 
 </div>
 </SimpleTab>
+
 ### Step 2. Perform a join query
 
 <SimpleTab>

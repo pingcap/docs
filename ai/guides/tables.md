@@ -145,6 +145,7 @@ VALUES
     (2, 'GPT-4 is a large language model', '[0.4, 0.5, 0.6]', '{"category": "llm"}'),
     (3, 'LlamaIndex is a Python library for building AI-powered applications', '[0.7, 0.8, 0.9]', '{"category": "rag"}');
 ```
+
 </div>
 </SimpleTab>
 
