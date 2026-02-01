@@ -8,7 +8,7 @@ summary: Learn how to use vector search in your application.
 Vector search uses semantic similarity to help you find the most relevant records, even if your query does not explicitly include all the keywords.
 
 > **Note:**
-
+>
 > For a complete example of vector search, see [Vector Search Example](/ai/examples/vector-search-with-pytidb.md).
 
 ## Basic usage

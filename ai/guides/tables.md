@@ -10,7 +10,7 @@ TiDB uses tables to organize and store collections of related data. It provides 
 A table can contain multiple columns with different data types to store various kinds of data. Supported data types include text, numbers, vectors, binary data (`BLOB`), JSON, and more.
 
 > **Note:**
-
+>
 > For a complete working example, see the [basic example](https://github.com/pingcap/pytidb/tree/main/examples/basic) in our repository.
 
 ## Create a table
@@ -187,7 +187,7 @@ VALUES (1, 'TiDB is a distributed SQL database', '[0.1, 0.2, 0.3]', '{"category"
 The `save` method provides a convenient way to insert or update a single record. If a record with the specified primary key does not exist, it creates a new record. If the record already exists, it overwrites the entire record.
 
 > **Note:**
-
+>
 > If a record ID already exists, `table.save()` function overwrites the entire record. To change only part of a record, use `table.update()`.
 
 <SimpleTab groupId="language">

@@ -44,9 +44,9 @@ db = TiDBClient.connect(
 )
 ```
 
->**Note:**
-
-For TiDB Cloud Starter, [TLS connection to the database](https://docs.pingcap.com/tidbcloud/secure-connections-to-starter-clusters/) is required when using Public Endpoint. TiDB Client will **automatically** enable TLS connection for starter clusters.
+> **Note:**
+>
+> For TiDB Cloud Starter, [TLS connection to the database](https://docs.pingcap.com/tidbcloud/secure-connections-to-starter-clusters/) is required when using Public Endpoint. TiDB Client will **automatically** enable TLS connection for starter clusters.
 
 </div>
 <div label="TiDB Self-Managed">
@@ -67,7 +67,7 @@ db = TiDBClient.connect(
 )
 ```
 
->**Note:**
+> **Note:**
 >
 > If you are using `tiup playground` to deploy a TiDB cluster for testing, the default host is `127.0.0.1` and the default password is empty.
 
@@ -97,7 +97,7 @@ db = TiDBClient.connect(
 )
 ```
 
->**Note:**
+> **Note:**
 >
 > For TiDB Cloud Starter, [TLS connection to the database](https://docs.pingcap.com/tidbcloud/secure-connections-to-starter-clusters/) is required when using Public Endpoint, so you need to set `ssl_verify_cert=true&ssl_verify_identity=true` in the connection string.
 
@@ -115,7 +115,7 @@ db = TiDBClient.connect(
 
 > **Note:**
 >
-> If you are using `tiup playground` to deploy a TiDB cluster for testing, the connection string is: 
+> If you are using `tiup playground` to deploy a TiDB cluster for testing, the connection string is:
 >
 > ```
 > mysql+pymysql://root:@127.0.0.1:4000/test
