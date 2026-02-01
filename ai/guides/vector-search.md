@@ -17,8 +17,8 @@ This section shows you how to use vector search in your application in minimal s
 
 ### Step 1. Create a table with a vector field
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 You can use `client.create_table()` to create a table and use `VectorField` to define a vector field.
 
@@ -53,7 +53,7 @@ The `VectorField` class accepts the following parameters:
     - `DistanceMetric.L2`: L2 distance metric, suitable for capturing overall difference
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 You can use the `CREATE TABLE` statement to create a table and using `VECTOR` type to define a vector column.
 
@@ -89,8 +89,8 @@ We insert three documents:
 - `fish` with the vector embedding `[1, 2, 4]`
 - `tree` with the vector embedding `[1, 0, 0]`
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 ```python
 table.bulk_insert([
@@ -101,7 +101,7 @@ table.bulk_insert([
 ```
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 ```sql
 INSERT INTO documents (id, text, text_vec, meta)
@@ -128,8 +128,8 @@ Vector search uses vector distance metrics to measure the similarity and relevan
 
 In this example, we assume the query is `A swimming animal` and its vector embedding is `[1, 2, 3]`.
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 You can use the `table.search()` method to perform vector search, which uses `search_mode="vector"` by default.
 
@@ -148,7 +148,7 @@ table.search([1, 2, 3]).limit(3).to_list()
 The result shows that the most relevant document is `fish` with a distance of `0.00853986601633272`.
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 You can use the `ORDER BY <distance_function>(<column_name>, <query_vector>) LIMIT <n>` clause in the `SELECT` statement to get the n nearest neighbors of the query vector.
 
@@ -181,8 +181,8 @@ The result shows that the most relevant document is `fish` with a distance of `0
 
 Distance metrics are a measure of the similarity between a pair of vectors. Currently, TiDB supports the following distance metrics:
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 The `table.search()` API supports the following distance metrics:
 
@@ -207,7 +207,7 @@ results = (
 ```
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 In SQL, you can use the following built-in functions to calculate vector distances directly in your queries:
 
@@ -225,8 +225,8 @@ In SQL, you can use the following built-in functions to calculate vector distanc
 
 The `table.search()` API allows you to set a distance threshold to control the similarity of the returned results. By specifying this threshold, you can exclude less similar vectors and return only those that meet your relevance criteria.
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 Use the `.distance_threshold()` method to set a maximum distance for the search results. Only records with a distance less than the threshold are returned.
 
@@ -237,7 +237,7 @@ results = table.search([1, 2, 3]).distance_threshold(0.5).limit(10).to_list()
 ```
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 In SQL, use the `HAVING` clause with a distance function to filter results by distance:
 
@@ -258,8 +258,8 @@ LIMIT 10;
 
 The `table.search()` API also supports specifying a distance range to further refine the results.
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 Use the `.distance_range()` method to set both minimum and maximum distance values. Only records with a distance within this range are returned.
 
@@ -270,7 +270,7 @@ results = table.search([1, 2, 3]).distance_range(0.01, 0.05).limit(10).to_list()
 ```
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 To specify a distance range in SQL, use `BETWEEN` or other comparison operators in the `HAVING` clause:
 
@@ -300,8 +300,8 @@ Typically, vector search combined with metadata filtering operates in two modes:
 
 ### Post-filtering
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 Use the `.filter()` method with a filter dictionary to apply filtering to vector search.
 
@@ -328,7 +328,7 @@ results = (
 > A higher `num_candidate` value generally improves recall but may reduce query performance. Adjust this value based on your dataset and accuracy requirements.
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 Currently, vector indexes are only effective in strict ANN (Approximate Nearest Neighbor) queries, such as:
 
@@ -369,8 +369,8 @@ For supported SQL operators, see [Operators](https://docs.pingcap.com/tidbcloud/
 
 ### Pre-filtering
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 To enable pre-filtering, set the `prefilter` parameter to `True` in the `.filter()` method.
 
@@ -388,7 +388,7 @@ results = (
 For supported filter operators, see [Filtering](/ai/guides/filtering.md).
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 In SQL, use the `->>` operator or `JSON_EXTRACT` to access JSON fields in the `WHERE` clause:
 
@@ -411,8 +411,8 @@ TiDB supports defining multiple vector columns in a single table, allowing you t
 
 For example, you can store both text embeddings and image embeddings in the same table, making it convenient to manage multi-modal data.
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 You can define multiple vector fields in the schema and perform vector search on the specified vector field by using the `.vector_column()` method.
 
@@ -443,7 +443,7 @@ results = (
 ```
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 You can create multiple vector columns in a table and search them using suitable distance functions:
 

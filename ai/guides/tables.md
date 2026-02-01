@@ -26,8 +26,8 @@ In the following example, you create a table named `items` with these columns:
 - `embedding`: a vector type column with 3 dimensions
 - `meta`: a JSON type column
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 After you [connect to the database](/ai/guides/connect.md) using PyTiDB and obtain a `client` instance, you can create a table with the `create_table` method.
 
@@ -57,7 +57,7 @@ The `create_table` method accepts these parameters:
 Once the table is created, you can use the `table` object to insert, update, delete, and query data.
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 Use the `CREATE TABLE` statement to create a table.
 
@@ -81,8 +81,8 @@ You can use a `TableModel` instance to represent a record and insert it into the
 
 To insert a single record:
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 Use the `table.insert()` method to insert a single record into the table.
 
@@ -98,7 +98,7 @@ table.insert(
 ```
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 Use the `INSERT INTO` statement to insert a single record into the table.
 
@@ -112,8 +112,8 @@ VALUES (1, 'TiDB is a distributed SQL database', '[0.1, 0.2, 0.3]', '{"category"
 
 To insert multiple records:
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 Use the `table.bulk_insert()` method to insert multiple records into the table.
 
@@ -135,7 +135,7 @@ table.bulk_insert([
 ```
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 Use the `INSERT INTO` statement to insert multiple records into the table.
 
@@ -155,8 +155,8 @@ You can also use `dict` to represent records and insert them into the table. Thi
 
 To insert a single record:
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 Use the `table.insert()` method with a dictionary to insert a single record into the table.
 
@@ -170,7 +170,7 @@ table.insert({
 ```
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 Use the `INSERT INTO` statement to insert a single record into the table.
 
@@ -190,8 +190,8 @@ The `save` method provides a convenient way to insert or update a single record.
 
 > If a record ID already exists, `table.save()` function overwrites the entire record. To change only part of a record, use `table.update()`.
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 Use the `table.save()` method to save a single record to the table.
 
@@ -223,7 +223,7 @@ updated_record = table.save(
 ```
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 Use the `INSERT ... ON DUPLICATE KEY UPDATE` statement to save a record.
 
@@ -245,8 +245,8 @@ ON DUPLICATE KEY UPDATE
 
 To fetch records from a table:
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 Use the `table.query()` method to fetch the records from the table.
 
@@ -257,7 +257,7 @@ result = table.query(limit=10).to_list()
 ```
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 Use the `SELECT` statement to fetch the records from the table.
 
@@ -272,8 +272,8 @@ SELECT * FROM items LIMIT 10;
 
 To fetch records based on query conditions:
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 Pass the `filters` parameter to the `table.query()` method.
 
@@ -285,7 +285,7 @@ result = table.query(
 ```
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 Use the `WHERE` clause to filter records.
 
@@ -302,8 +302,8 @@ For a complete list of supported filter operations and examples, refer to the [f
 
 ## Update data in a table
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 Use the `table.update()` method to update records with [filters](/ai/guides/filtering.md).
 
@@ -323,7 +323,7 @@ table.update(
 ```
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 Use the `UPDATE` statement to update records with [filters](/ai/guides/filtering.md).
 
@@ -344,8 +344,8 @@ WHERE
 
 ## Delete from a table
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 Use the `table.delete()` method to delete records with [filters](/ai/guides/filtering.md).
 
@@ -360,7 +360,7 @@ table.delete(
 ```
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 Use the `DELETE` statement to delete records with [filters](/ai/guides/filtering.md).
 
@@ -375,8 +375,8 @@ DELETE FROM items WHERE id = 2;
 
 ## Truncate a table
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 To remove all data from the table but keep the table structure, use the `table.truncate()` method.
 
@@ -391,7 +391,7 @@ table.rows()
 ```
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 To remove all data from the table but keep the table structure, use the `TRUNCATE TABLE` statement.
 
@@ -410,8 +410,8 @@ SELECT COUNT(*) FROM items;
 
 ## Drop a table
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 To permanently remove a table from the database, use the `client.drop_table()` method.
 
@@ -426,7 +426,7 @@ client.table_names()
     ```
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 To permanently remove a table from the database, use the `DROP TABLE` statement.
 

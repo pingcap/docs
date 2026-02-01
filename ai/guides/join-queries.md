@@ -11,8 +11,8 @@ As a relational database, TiDB allows you to store diverse data in tables with d
 
 ### Step 1. Create tables and insert sample data
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 Assuming you have already [connected to the TiDB database](/ai/guides/connect.md) via TiDBClient:
 
@@ -56,7 +56,7 @@ client.table("chunks").bulk_insert([
 ```
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 Create a `documents` table and insert some sample data:
 
@@ -93,8 +93,8 @@ INSERT INTO chunks (id, text, document_id) VALUES
 
 ### Step 2. Perform a join query
 
-<SimpleTab>
-<div label="Python">
+<SimpleTab groupId="language">
+<div label="Python" value="python">
 
 ```python
 with Session(client.db_engine) as db_session:
@@ -109,7 +109,7 @@ with Session(client.db_engine) as db_session:
 ```
 
 </div>
-<div label="SQL">
+<div label="SQL" value="sql">
 
 Perform a join query to combine data from the `chunks` and `documents` tables:
 
