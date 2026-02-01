@@ -9,7 +9,7 @@ In this guide, we will introduce how to connect to a TiDB database using the TiD
 
 ## Install the dependencies
 
-[pytidb](https://github.com/pingcap/pytidb) is a Python client built upon [SQLAlchemy](https://sqlalchemy.org/), it provides a series of high-level APIs to help developers store and search vector embeddings without writing raw SQL.
+[pytidb](https://github.com/pingcap/pytidb) is a Python client built upon [SQLAlchemy](https://sqlalchemy.org/), and it provides a series of high-level APIs to help developers store and search vector embeddings without writing raw SQL.
 
 To install the Python client, run the following command:
 

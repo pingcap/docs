@@ -15,7 +15,7 @@ Auto embedding is a feature that allows you to automatically generate vector emb
 
 This document uses a TiDB Cloud hosted embedding model for demonstration. For a full list of supported providers, see [Auto Embedding Overview](/ai/integrations/vector-search-auto-embedding-overview.md#available-text-embedding-models).
 
-### Step 1. Define a embedding function
+### Step 1. Define an embedding function
 
 Define a embedding function to generate vector embeddings for text data.
 

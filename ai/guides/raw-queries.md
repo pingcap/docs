@@ -17,7 +17,7 @@ client.execute("INSERT INTO chunks(text, user_id) VALUES ('sample text', 5)")
 
 ### SQL injection prevention
 
-Both of the `execute` and `query` methods are support the **Parameterized SQL** feature, which help you avoid [SQL injection](https://en.wikipedia.org/wiki/SQL_injection) while building dynamic SQL statements.
+Both the `execute()` and `query()` methods support the **Parameterized SQL** feature, which helps you avoid [SQL injection](https://en.wikipedia.org/wiki/SQL_injection) while building dynamic SQL statements.
 
 ```python
 client.execute(

@@ -69,7 +69,7 @@ openai_like_embed = EmbeddingFunction(
 )
 ```
 
-**Example: Using vLLM and `nomic-embed-text` model**
+**Example: Using vLLM and `intfloat/e5-mistral-7b-instruct` model**
 
 ```python
 openai_like_embed = EmbeddingFunction(
