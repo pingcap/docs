@@ -11,8 +11,8 @@ summary: Introduce the vector search feature in TiDB for developers, including c
 
 To get started with TiDB vector search, refer to the following tutorials:
 
-- [Get Started with SQL](/ai/quickstart-via-sql.md)
-- [Get Started with Python](/ai/quickstart-via-python.md)
+- [Get Started via Python](/ai/quickstart-via-python.md)
+- [Get Started via SQL](/ai/quickstart-via-sql.md)
 
 ## Auto Embedding
 
