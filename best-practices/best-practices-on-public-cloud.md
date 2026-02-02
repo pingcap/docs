@@ -1,6 +1,7 @@
 ---
 title: TiDB Best Practices on Public Cloud
 summary: Learn about the best practices for deploying TiDB on public cloud.
+aliases: ['/tidb/stable/best-practices-on-public-cloud/','/tidb/dev/best-practices-on-public-cloud/']
 ---
 
 # Best Practices for Deploying TiDB on Public Cloud
