@@ -121,6 +121,9 @@ db = TiDBClient.connect(
 > mysql+pymysql://root:@127.0.0.1:4000/test
 > ```
 
+</div>
+</SimpleTab>
+
 ## Connect with SQLAlchemy DB engine
 
 If your application already has an existing SQLAlchemy database engine, you can reuse the engine through the `db_engine` parameter:
