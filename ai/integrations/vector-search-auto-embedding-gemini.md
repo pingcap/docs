@@ -240,6 +240,9 @@ embedding: list[float] = EmbeddingFunction(
 )) STORED
 ```
 
+</div>
+</SimpleTab>
+
 Choose the appropriate dimensions based on your performance requirements and storage constraints. Higher dimensions provide better accuracy but require more storage and computational resources.
 
 ## Options
