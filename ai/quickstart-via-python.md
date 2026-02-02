@@ -1,6 +1,7 @@
 ---
 title: Get Started with TiDB + AI via Python
 summary: Learn how to get started with vector search in TiDB using Python SDK.
+aliases: ['/tidb/stable/vector-search-get-started-using-sql/','/tidb/dev/vector-search-get-started-using-sql/','/tidbcloud/vector-search-get-started-using-sql/']
 ---
 
 # Get Started with TiDB + AI via Python
