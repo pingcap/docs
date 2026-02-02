@@ -1,11 +1,11 @@
 ---
 title: Sink to Cloud Storage
-summary: This document explains how to create a changefeed to stream data from TiDB Cloud to Amazon S3 or GCS. It includes restrictions, configuration steps for the destination, replication, and specification, as well as starting the replication process.
+summary: This document explains how to create a changefeed to stream data from TiDB Cloud to Amazon S3, Google Cloud Storage (GCS), or Azure Blob Storage. It includes restrictions, configuration steps for the destination, replication, and specification, as well as starting the replication process.
 ---
 
 # Sink to Cloud Storage
 
-This document describes how to create a changefeed to stream data from TiDB Cloud to cloud storage. Currently, Amazon S3 and GCS are supported.
+This document describes how to create a changefeed to stream data from TiDB Cloud to cloud storage. Currently, Amazon S3, Google Cloud Storage (GCS), and Azure Blob Storage are supported.
 
 > **Note:**
 >
@@ -20,7 +20,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 ## Step 1. Configure destination
 
-Navigate to the cluster overview page of the target TiDB cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed**, and select **Amazon S3** or **GCS** as the destination. The configuration process varies depend on the destination you choose.
+Navigate to the cluster overview page of the target TiDB cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed**, and select **Amazon S3**, **GCS**, or **Azure Blob** as the destination. The configuration process varies depend on the destination you choose.
 
 <SimpleTab>
 <div label="Amazon S3">
@@ -126,7 +126,7 @@ For **Azure Blob**, you first need to configure the container and get a SAS toke
 </div>
 </SimpleTab>
 
-Click **Next** to establish the connection from the TiDB Cloud Dedicated cluster to Amazon S3 or GCS. TiDB Cloud will automatically test and verify if the connection is successful.
+Click **Next** to establish the connection from the TiDB Cloud Dedicated cluster to Amazon S3, GCS, or Azure Blob Storage. TiDB Cloud will automatically test and verify if the connection is successful.
 
 - If yes, you are directed to the next step of configuration.
 - If not, a connectivity error is displayed, and you need to handle the error. After the error is resolved, click **Next** to retry the connection.
