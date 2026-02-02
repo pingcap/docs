@@ -101,6 +101,7 @@ db = TiDBClient.connect(
 >
 > For TiDB Cloud Starter, [TLS connection to the database](https://docs.pingcap.com/tidbcloud/secure-connections-to-starter-clusters/) is required when using Public Endpoint, so you need to set `ssl_verify_cert=true&ssl_verify_identity=true` in the connection string.
 
+</div>
 <div label="TiDB Self-Managed">
 
 You can follow the format below to construct the connection string:
