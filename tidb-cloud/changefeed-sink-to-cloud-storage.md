@@ -90,7 +90,7 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 
 For **Azure Blob**, you first need to configure the container and get a SAS token in the Azure portal. Take the following steps:
 
-1. In the Azure portal, create a container for storing changefeed data.
+1. In the [Azure portal](https://portal.azure.com/), create a container for storing changefeed data.
 
     1. In the left navigation pane, click **Storage Accounts**, and then click the storage account.
     2. In the navigation pane for the selected storage account, click **Data storage** > **Containers**, and then click **+ Container**.
@@ -99,7 +99,7 @@ For **Azure Blob**, you first need to configure the container and get a SAS toke
 2. Get the URL of the target container.
 
     1. In the container list, select the target container, click **...** for the container, and then select **Container properties**.
-    2. Copy the **URL** value for later use (for example `https://<storage_account>.blob.core.windows.net/<container>`).
+    2. Copy the **URL** value for later use, for example `https://<storage_account>.blob.core.windows.net/<container>`.
 
 3. Generate a SAS token.
 
@@ -109,20 +109,20 @@ For **Azure Blob**, you first need to configure the container and get a SAS toke
     4. In **Allowed permissions**, select **Read**, **Write**, **Delete**, **List**, and **Create**.
     5. Specify a sufficiently long validity period for the SAS token.
 
-    > **Note:**
-    >
-    > - The changefeed needs to continuously write events, so ensure the SAS token has a sufficiently long validity period. It is recommended to replace it every six to twelve months for security.
-    > - The generated SAS token cannot be revoked, so set its validity period carefully.
-    > - To ensure continuous availability, re-generate and update the SAS token before it expires.
+        > **Note:**
+        >
+        > - The changefeed needs to continuously write events, so ensure the SAS token has a sufficiently long validity period. It is recommended to replace it every six to twelve months for security.
+        > - The generated SAS token cannot be revoked, so set its validity period carefully.
+        > - To ensure continuous availability, re-generate and update the SAS token before it expires.
 
     6. Click **Generate SAS and connection string**, then copy the **SAS token**.
 
         ![Generate a SAS token](/media/tidb-cloud/changefeed/sink-to-cloud-storage-azure-signature.png)
 
-4. In the TiDB Cloud console, go to the Changefeed's **Configure Destination** page, and fill in the following:
+4. In the [TiDB Cloud console](https://tidbcloud.com/), go to the Changefeed's **Configure Destination** page, and fill in the following:
 
-    - **Blob URL**: Paste the container URL. You can optionally add a prefix.
-    - **SAS Token**: Paste the generated SAS token.
+    - **Blob URL**: paste the container URL. You can optionally add a prefix.
+    - **SAS Token**: paste the generated SAS token.
 
 </div>
 </SimpleTab>
