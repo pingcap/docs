@@ -85,7 +85,6 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 7. In the TiDB Cloud console, go to the Changefeed's **Configure Destination** page, and fill in the **bucket gsutil URI** field.
 
 </div>
-
 <div label="Azure Blob">
 
 For **Azure Blob**, you first need to configure the container and get a SAS token in the Azure portal. Take the following steps:
