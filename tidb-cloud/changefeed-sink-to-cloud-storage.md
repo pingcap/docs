@@ -87,7 +87,7 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 </div>
 <div label="Azure Blob Storage">
 
-For **Azure Blob Storage**, you first need to configure the container and get a SAS token in the Azure portal. Take the following steps:
+For **Azure Blob Storage**, you must configure the container and get a SAS token in the Azure portal first. Take the following steps:
 
 1. In the [Azure portal](https://portal.azure.com/), create a container to store changefeed data.
 
