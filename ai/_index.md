@@ -1,7 +1,6 @@
 ---
 title: TiDB for AI
 summary: Build modern AI applications with TiDB's integrated vector search, full-text search, and seamless Python SDK.
-aliases: ['/tidb/stable/ai/', '/tidb/dev/ai/', '/tidbcloud/ai/']
 ---
 
 # TiDB for AI
