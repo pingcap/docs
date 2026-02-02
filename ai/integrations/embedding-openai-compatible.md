@@ -9,7 +9,7 @@ This tutorial demonstrates how to use OpenAI-compatible embedding services to ge
 
 > **Note:**
 >
-> Currently, [Auto Embedding](/ai/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} clusters hosted on AWS.
+> Currently, [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} clusters hosted on AWS.
 
 ## OpenAI-like embedding services
 

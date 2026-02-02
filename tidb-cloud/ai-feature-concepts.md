@@ -23,7 +23,7 @@ Unlike traditional full-text search, which relies on exact keyword matching and 
 
 Even when the search terms do not exactly match the content in the database, vector search can still provide results that align with the user's intent by analyzing the semantics of the data. For example, a full-text search for "a swimming animal" only returns results containing these exact keywords. In contrast, vector search can return results for other swimming animals, such as fish or ducks, even if these results do not contain the exact keywords.
 
-For more information, see [Vector Search (Beta) Overview](/ai/vector-search-overview.md).
+For more information, see [Vector Search (Beta) Overview](/ai/concepts/vector-search-overview.md).
 
 ## AI integrations
 

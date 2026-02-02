@@ -8,7 +8,7 @@ aliases: ['/tidb/stable/vector-search-get-started-using-python/','/tidb/dev/vect
 
 This tutorial demonstrates how to develop a simple AI application that provides **semantic search** features. Unlike traditional keyword search, semantic search intelligently understands the meaning behind your query and returns the most relevant result. For example, if you have documents titled "dog", "fish", and "tree", and you search for "a swimming animal", the application would identify "fish" as the most relevant result.
 
-Throughout this tutorial, you will develop this AI application using [TiDB Vector Search](/ai/vector-search-overview.md), Python, [TiDB Vector SDK for Python](https://github.com/pingcap/tidb-vector-python), and AI models.
+Throughout this tutorial, you will develop this AI application using [TiDB Vector Search](/ai/concepts/vector-search-overview.md), Python, [TiDB Vector SDK for Python](https://github.com/pingcap/tidb-vector-python), and AI models.
 
 > **Note:**
 >
@@ -229,5 +229,5 @@ Therefore, according to the output, the swimming animal is most likely a fish, o
 
 ## See also
 
-- [Vector Data Types](/ai/vector-search-data-types.md)
-- [Vector Search Index](/ai/vector-search-index.md)
+- [Vector Data Types](/ai/reference/vector-search-data-types.md)
+- [Vector Search Index](/ai/reference/vector-search-index.md)

@@ -237,7 +237,7 @@ To check other reranker models, see [Reranking](/ai/guides/reranking.md).
 
 - [pytidb Python SDK Documentation](https://github.com/pingcap/pytidb)
 
-- [Full-Text Search with Python](/ai/vector-search-full-text-search-python.md)
+- [Full-Text Search with Python](/ai/guides/vector-search-full-text-search-python.md)
 
 ## Feedback & help
 

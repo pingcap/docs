@@ -15,7 +15,7 @@ This document lists the functions and operators available for Vector data types.
 
 ## Vector functions
 
-The following functions are designed specifically for [Vector data types](/ai/vector-search-data-types.md).
+The following functions are designed specifically for [Vector data types](/ai/reference/vector-search-data-types.md).
 
 **Vector distance functions:**
 
@@ -37,7 +37,7 @@ The following functions are designed specifically for [Vector data types](/ai/ve
 
 ## Extended built-in functions and operators
 
-The following built-in functions and operators are extended to support operations on [Vector data types](/ai/vector-search-data-types.md).
+The following built-in functions and operators are extended to support operations on [Vector data types](/ai/reference/vector-search-data-types.md).
 
 **Arithmetic operators:**
 
@@ -314,4 +314,4 @@ The vector functions and the extended usage of built-in functions and operators 
 
 ## See also
 
-- [Vector Data Types](/ai/vector-search-data-types.md)
+- [Vector Data Types](/ai/reference/vector-search-data-types.md)

@@ -6,7 +6,7 @@ aliases: ['/tidb/stable/vector-search-full-text-search-sql/','/tidbcloud/vector-
 
 # Full-Text Search with SQL
 
-Unlike [Vector Search](/ai/vector-search-overview.md), which focuses on semantic similarity, full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
+Unlike [Vector Search](/ai/concepts/vector-search-overview.md), which focuses on semantic similarity, full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
 
 The full-text search feature in TiDB provides the following capabilities:
 
@@ -20,9 +20,9 @@ The full-text search feature in TiDB provides the following capabilities:
 
 > **Tip:**
 >
-> For Python usage, see [Full-Text Search with Python](/ai/vector-search-full-text-search-python.md).
+> For Python usage, see [Full-Text Search with Python](/ai/guides/vector-search-full-text-search-python.md).
 >
-> To use full-text search and vector search together in your AI apps, see [Hybrid Search](/ai/vector-search-hybrid-search.md).
+> To use full-text search and vector search together in your AI apps, see [Hybrid Search](/ai/guides/vector-search-hybrid-search.md).
 
 ## Get started
 
@@ -200,7 +200,7 @@ WHERE t.author_id IN
 
 ## See also
 
-- [Hybrid Search](/ai/vector-search-hybrid-search.md)
+- [Hybrid Search](/ai/guides/vector-search-hybrid-search.md)
 
 ## Feedback & help
 

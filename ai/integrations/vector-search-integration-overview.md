@@ -19,8 +19,8 @@ TiDB provides official support for the following AI frameworks, enabling you to 
 
 | AI frameworks | Tutorial                                                                                          |
 |---------------|---------------------------------------------------------------------------------------------------|
-| Langchain     | [Integrate Vector Search with LangChain](/ai/vector-search-integrate-with-langchain.md)   |
-| LlamaIndex    | [Integrate Vector Search with LlamaIndex](/ai/vector-search-integrate-with-llamaindex.md) |
+| Langchain     | [Integrate Vector Search with LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)   |
+| LlamaIndex    | [Integrate Vector Search with LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md) |
 
 Moreover, you can also use TiDB for various purposes, such as document storage and knowledge graph storage for AI applications.
 
@@ -34,7 +34,7 @@ The following table lists some mainstream embedding service providers and the co
 
 | Embedding service providers | Tutorial                                                                                                            |
 |-----------------------------|---------------------------------------------------------------------------------------------------------------------|
-| Jina AI                     | [Integrate Vector Search with Jina AI Embeddings API](/ai/vector-search-integrate-with-jinaai-embedding.md) |
+| Jina AI                     | [Integrate Vector Search with Jina AI Embeddings API](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md) |
 
 ## Object Relational Mapping (ORM) libraries
 

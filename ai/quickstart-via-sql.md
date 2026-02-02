@@ -6,7 +6,7 @@ aliases: ['/tidb/stable/vector-search-get-started-using-sql/','/tidb/dev/vector-
 
 # Get Started with Vector Search via SQL
 
-TiDB extends MySQL syntax to support [Vector Search](/ai/vector-search-overview.md) and introduce new [Vector data types](/ai/vector-search-data-types.md) and several [vector functions](/ai/vector-search-functions-and-operators.md).
+TiDB extends MySQL syntax to support [Vector Search](/ai/concepts/vector-search-overview.md) and introduce new [Vector data types](/ai/reference/vector-search-data-types.md) and several [vector functions](/ai/reference/vector-search-functions-and-operators.md).
 
 This tutorial demonstrates how to get started with TiDB Vector Search just using SQL statements. You will learn how to use the [MySQL command-line client](https://dev.mysql.com/doc/refman/8.4/en/mysql.html) to complete the following operations:
 
@@ -173,5 +173,5 @@ Therefore, according to the output, the swimming animal is most likely a fish, o
 
 ## See also
 
-- [Vector Data Types](/ai/vector-search-data-types.md)
-- [Vector Search Index](/ai/vector-search-index.md)
+- [Vector Data Types](/ai/reference/vector-search-data-types.md)
+- [Vector Search Index](/ai/reference/vector-search-index.md)

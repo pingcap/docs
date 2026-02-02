@@ -71,7 +71,7 @@ The preceding example uses the Amazon Titan model. For other models, see [Availa
 
 ## Auto Embedding + Vector index
 
-Auto Embedding is compatible with [Vector index](/ai/vector-search-index.md) for better query performance. You can define a vector index on the generated vector column, and it will be used automatically:
+Auto Embedding is compatible with [Vector index](/ai/reference/vector-search-index.md) for better query performance. You can define a vector index on the generated vector column, and it will be used automatically:
 
 ```sql
 -- Create a table with auto-embedding and a vector index
@@ -112,17 +112,17 @@ TiDB Cloud supports various embedding models. Choose the one that best fits your
 
 | Embedding model | Documentation                                                                       | Hosted by TiDB Cloud <sup>1</sup> | BYOK <sup>2</sup> |
 | --------------- | ----------------------------------------------------------------------------------- | --------------------------------- | ----------------- |
-| Amazon Titan    | [Amazon Titan Embeddings](/ai/vector-search-auto-embedding-amazon-titan.md) | ✅                                |                   |
-| Cohere          | [Cohere Embeddings](/ai/vector-search-auto-embedding-cohere.md)             | ✅                                | ✅                |
-| Jina AI         | [Jina AI Embeddings](/ai/vector-search-auto-embedding-jina-ai.md)           |                                   | ✅                |
-| OpenAI          | [OpenAI Embeddings](/ai/vector-search-auto-embedding-openai.md)             |                                   | ✅                |
-| Gemini          | [Gemini Embeddings](/ai/vector-search-auto-embedding-gemini.md)             |                                   | ✅                |
+| Amazon Titan    | [Amazon Titan Embeddings](ai/integrations/vector-search-auto-embedding-amazon-titan.md) | ✅                                |                   |
+| Cohere          | [Cohere Embeddings](/ai/integrations/vector-search-auto-embedding-cohere.md)             | ✅                                | ✅                |
+| Jina AI         | [Jina AI Embeddings](/ai/integrations/vector-search-auto-embedding-jina-ai.md)           |                                   | ✅                |
+| OpenAI          | [OpenAI Embeddings](/ai/integrations/vector-search-auto-embedding-openai.md)             |                                   | ✅                |
+| Gemini          | [Gemini Embeddings](/ai/integrations/vector-search-auto-embedding-gemini.md)             |                                   | ✅                |
 
 You can also use open-source embedding models through the following inference services that TiDB Cloud supports:
 
 | Embedding model       | Documentation                                                                     | Hosted by TiDB Cloud <sup>1</sup> | BYOK <sup>2</sup> | Example supported models          |
 | --------------------- | --------------------------------------------------------------------------------- | --------------------------------- | ----------------- | --------------------------------- |
-| HuggingFace Inference | [HuggingFace Embeddings](/ai/vector-search-auto-embedding-huggingface.md) |                                   | ✅                | `bge-m3`, `multilingual-e5-large` |
+| HuggingFace Inference | [HuggingFace Embeddings](/ai/integrations/vector-search-auto-embedding-huggingface.md) |                                   | ✅                | `bge-m3`, `multilingual-e5-large` |
 | NVIDIA NIM            | [NVIDIA NIM Embeddings](/ai/vector-search-auto-embedding-nvidia-nim.md)   |                                   | ✅                | `bge-m3`, `nv-embed-v1`           |
 
 &#8203;<sup>1</sup> Hosted models are hosted by TiDB Cloud and do not require any API keys. Currently, these hosted models are free to use, but certain usage limits might be applied to keep them available to everyone.
@@ -201,6 +201,6 @@ Use the `EmbeddingFunction` class to work with different embedding providers and
 
 ## See also
 
-- [Vector Data Types](/ai/vector-search-data-types.md)
-- [Vector Functions and Operators](/ai/vector-search-functions-and-operators.md)
-- [Vector Search Index](/ai/vector-search-index.md)
+- [Vector Data Types](/ai/reference/vector-search-data-types.md)
+- [Vector Functions and Operators](/ai/reference/vector-search-functions-and-operators.md)
+- [Vector Search Index](/ai/reference/vector-search-index.md)

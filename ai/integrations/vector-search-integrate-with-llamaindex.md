@@ -6,7 +6,7 @@ aliases: ['/tidb/stable/vector-search-integrate-with-llamaindex/','/tidb/dev/vec
 
 # Integrate Vector Search with LlamaIndex
 
-This tutorial demonstrates how to integrate the [vector search](/ai/vector-search-overview.md) feature of TiDB with [LlamaIndex](https://www.llamaindex.ai).
+This tutorial demonstrates how to integrate the [vector search](/ai/concepts/vector-search-overview.md) feature of TiDB with [LlamaIndex](https://www.llamaindex.ai).
 
 > **Note:**
 >
@@ -312,5 +312,5 @@ Empty Response
 
 ## See also
 
-- [Vector Data Types](/ai/vector-search-data-types.md)
-- [Vector Search Index](/ai/vector-search-index.md)
+- [Vector Data Types](/ai/reference/vector-search-data-types.md)
+- [Vector Search Index](/ai/reference/vector-search-index.md)

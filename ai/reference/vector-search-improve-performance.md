@@ -15,7 +15,7 @@ TiDB Vector Search enables you to perform Approximate Nearest Neighbor (ANN) que
 
 ## Add vector search index for vector columns
 
-The [vector search index](/ai/vector-search-index.md) dramatically improves the performance of vector search queries, usually by 10x or more, with a trade-off of only a small decrease of recall rate.
+The [vector search index](/ai/reference/vector-search-index.md) dramatically improves the performance of vector search queries, usually by 10x or more, with a trade-off of only a small decrease of recall rate.
 
 ## Ensure vector indexes are fully built
 

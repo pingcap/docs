@@ -15,7 +15,7 @@ This document describes the known limitations of TiDB vector search.
 
 ## Vector data type limitations
 
-- Each [vector](/ai/vector-search-data-types.md) supports up to 16383 dimensions.
+- Each [vector](/ai/reference/vector-search-data-types.md) supports up to 16383 dimensions.
 - Vector data types cannot store `NaN`, `Infinity`, or `-Infinity` values.
 - Vector data types cannot store double-precision floating-point numbers. If you insert or store double-precision floating-point numbers in vector columns, TiDB converts them to single-precision floating-point numbers.
 - Vector columns cannot be used as primary keys or as part of a primary key.

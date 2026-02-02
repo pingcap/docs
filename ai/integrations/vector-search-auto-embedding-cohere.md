@@ -6,11 +6,11 @@ aliases: ['/tidbcloud/vector-search-auto-embedding-cohere/']
 
 # Cohere Embeddings
 
-This document describes how to use Cohere embedding models with [Auto Embedding](/ai/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches from text queries.
+This document describes how to use Cohere embedding models with [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) in TiDB Cloud to perform semantic searches from text queries.
 
 > **Note:**
 >
-> [Auto Embedding](/ai/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} clusters hosted on AWS.
+> [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} clusters hosted on AWS.
 
 ## Available models
 
@@ -335,7 +335,7 @@ For all available options, see [Cohere Documentation](https://docs.cohere.com/v2
 
 ## See also
 
-- [Auto Embedding Overview](/ai/vector-search-auto-embedding-overview.md)
-- [Vector Search](/ai/vector-search-overview.md)
-- [Vector Functions and Operators](/ai/vector-search-functions-and-operators.md)
-- [Hybrid Search](/ai/vector-search-hybrid-search.md)
+- [Auto Embedding Overview](/ai/integrations/vector-search-auto-embedding-overview.md)
+- [Vector Search](/ai/concepts/vector-search-overview.md)
+- [Vector Functions and Operators](/ai/reference/vector-search-functions-and-operators.md)
+- [Hybrid Search](/ai/guides/vector-search-hybrid-search.md)
