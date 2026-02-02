@@ -14,7 +14,7 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 
 ## Restrictions
 
-- Changefeeds do not support the DDL statements that renaming multiple tables in a single `RENAME TABLE` statement, for example, `RENAME TABLE t1 TO t3, t2 TO t4`. Executing this statement permanently interrupts changefeed data replication.
+- Changefeeds do not support DDL statements that rename multiple tables in a single `RENAME TABLE` statement, for example, `RENAME TABLE t1 TO t3, t2 TO t4`. Executing this statement permanently interrupts changefeed data replication.
 - The changefeed throughput is approximately 20 MiB/s. If your incremental data volume exceeds this limit, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance.
 
 ## Supported regions
