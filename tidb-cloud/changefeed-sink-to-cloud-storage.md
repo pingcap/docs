@@ -89,39 +89,40 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 
 For **Azure Blob Storage**, you first need to configure the container and get a SAS token in the Azure portal. Take the following steps:
 
-1. In the [Azure portal](https://portal.azure.com/), create a container for storing changefeed data.
+1. In the [Azure portal](https://portal.azure.com/), create a container to store changefeed data.
 
-    1. In the left navigation pane, click **Storage Accounts**, and then click the storage account.
-    2. In the navigation pane for the selected storage account, click **Data storage** > **Containers**, and then click **+ Container**.
+    1. In the left navigation pane, click **Storage Accounts**, and then select your storage account.
+    2. In the storage account navigation menu, select **Data storage** > **Containers**, and then click **+ Container**.
     3. Enter a name for your new container, set the anonymous access level (the recommended level is **Private**), and then click **Create**.
 
 2. Get the URL of the target container.
 
-    1. In the container list, select the target container, click **...** for the container, and then select **Container properties**.
-    2. Copy the **URL** value for later use, for example `https://<storage_account>.blob.core.windows.net/<container>`.
+    1. In the container list, select your target container.
+    2. Click **...** for the container, and then select **Container properties**.
+    3. Save the **URL** value for later use, for example `https://<storage_account>.blob.core.windows.net/<container>`.
 
 3. Generate a SAS token.
 
-    1. In the navigation pane for the selected storage account, click **Security + networking** > **Shared access signature**.
-    2. In **Allowed services**, select **Blob**.
-    3. In **Allowed resource types**, select **Container** and **Object**.
-    4. In **Allowed permissions**, select **Read**, **Write**, **Delete**, **List**, and **Create**.
-    5. Specify a sufficiently long validity period for the SAS token.
+    1. In the storage account navigation menu, select **Security + networking** > **Shared access signature**.
+    2. In the **Allowed services** section, select **Blob**.
+    3. In the **Allowed resource types** section, select **Container** and **Object**.
+    4. In the **Allowed permissions** section, select **Read**, **Write**, **Delete**, **List**, and **Create**.
+    5. Specify a validity period for the SAS token that is long enough to meet your needs.
 
         > **Note:**
         >
-        > - The changefeed needs to continuously write events, so ensure the SAS token has a sufficiently long validity period. It is recommended to replace it every six to twelve months for security.
+        > - The changefeed continuously writes events, so ensure the SAS token has a sufficiently long validity period. For security, it is recommended to replace the token every six to twelve months.
         > - The generated SAS token cannot be revoked, so set its validity period carefully.
-        > - To ensure continuous availability, re-generate and update the SAS token before it expires.
+        > - To ensure continuous availability, regenerate and update the SAS token before it expires.
 
-    6. Click **Generate SAS and connection string**, then copy the **SAS token**.
+    6. Click **Generate SAS and connection string**, and then save the **SAS token**.
 
         ![Generate a SAS token](/media/tidb-cloud/changefeed/sink-to-cloud-storage-azure-signature.png)
 
-4. In the [TiDB Cloud console](https://tidbcloud.com/), go to the Changefeed's **Configure Destination** page, and fill in the following:
+4. In the [TiDB Cloud console](https://tidbcloud.com/), go to the Changefeed's **Configure Destination** page, and fill in the following fields:
 
-    - **Blob URL**: paste the container URL. You can optionally add a prefix.
-    - **SAS Token**: paste the generated SAS token.
+    - **Blob URL**: enter the container URL obtained in step 2. You can optionally add a prefix.
+    - **SAS Token**: enter the generated SAS token obtained in step 3.
 
 </div>
 </SimpleTab>
