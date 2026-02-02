@@ -29,7 +29,7 @@ Learn best practices for designing schemas in TiDB, including managing DDL opera
 
 ## Deployment
 
-Explore recommended deployment patterns for different scenarios, such as small clusters and multi–data center setups, to ensure high availability and efficient resource usage.
+Explore recommended deployment patterns for different scenarios, such as deployment on public cloud and multi-data center setups, to ensure high availability and efficient resource usage.
 
 | Best practice topic | Description |
 | ------------------- | ----------- |
@@ -39,7 +39,7 @@ Explore recommended deployment patterns for different scenarios, such as small c
 
 ## Operations
 
-Find operational best practices for running TiDB in production, such as traffic routing, load balancing, and monitoring, to help you maintain system stability and observability.
+Find operational best practices for running TiDB in production, such as traffic routing, load balancing, and monitoring, to ensure system stability and observability.
 
 | Best practice topic | Description |
 | ------------------- | ----------- |
