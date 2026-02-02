@@ -5,8 +5,8 @@
 
 ## QUICK START
 
-- [Get Started with Python](/ai/quickstart.md)
-- [Get Started with SQL](/ai/guides/vector-search-get-started-using-sql.md)
+- [Get Started via Python](/ai/quickstart.md)
+- [Get Started via SQL](/ai/guides/vector-search-get-started-using-sql.md)
 
 ## CONCEPTS
 
@@ -19,8 +19,8 @@
 - Search Features
   - [Vector Search](/ai/guides/vector-search.md)
   - Full-Text Search
-    - [Full-Text Search (Python)](/ai/guides/vector-search-full-text-search-python.md)
-    - [Full-Text Search (SQL)](/ai/guides/vector-search-full-text-search-sql.md)
+    - [Full-Text Search via Python](/ai/guides/vector-search-full-text-search-python.md)
+    - [Full-Text Search via SQL](/ai/guides/vector-search-full-text-search-sql.md)
   - [Hybrid Search](/ai/guides/vector-search-hybrid-search.md)
   - [Image Search](/ai/guides/image-search.md)
 - Advanced Features
