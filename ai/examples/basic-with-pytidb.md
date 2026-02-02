@@ -18,7 +18,7 @@ This example demonstrates basic CRUD (Create, Read, Update, Delete) operations w
 
 ## How to run
 
-### Step 1. Clone the repository to local
+### Step 1. Clone the repository
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git

@@ -168,7 +168,7 @@ docs = text_splitter.split_documents(documents)
 
 ### Step 5. Embed and store document vectors
 
-TiDB vector store supports both cosine distance (`consine`) and Euclidean distance (`l2`) for measuring similarity between vectors. The default strategy is cosine distance.
+TiDB vector store supports both cosine distance (`cosine`) and Euclidean distance (`l2`) for measuring similarity between vectors. The default strategy is cosine distance.
 
 The following code creates a table named `embedded_documents` in TiDB, which is optimized for vector search.
 
@@ -592,7 +592,7 @@ Alternatively, you can streamline the entire process using a single SQL query:
 ```python
 search_query = f"""
     SELECT
-        VEC_Cosine_Distance(se.embedding, :query_vector) as distance,
+        VEC_COSINE_DISTANCE(se.embedding, :query_vector) as distance,
         ar.*,
         se.document as airport_review
     FROM

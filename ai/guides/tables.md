@@ -312,7 +312,7 @@ Use the `table.update()` method to update records with [filters](/ai/guides/filt
 ```python
 table.update(
     values={
-        "content": "TiDB Cloud Starter is a fully managed, auto-scaling cloud database service"
+        "content": "TiDB Cloud Starter is a fully managed, auto-scaling cloud database service",
         "embedding": [0.1, 0.2, 0.4],
         "meta": {"category": "dbass"},
     },

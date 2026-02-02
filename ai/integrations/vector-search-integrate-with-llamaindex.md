@@ -174,7 +174,7 @@ The following code creates a table named `paul_graham_test` in TiDB, which is op
 
 ```python
 tidbvec = TiDBVectorStore(
-   connection_string=tidb_connection_url,
+   connection_string=tidb_connection_string,
    table_name="paul_graham_test",
    distance_strategy="cosine",
    vector_dimension=1536,

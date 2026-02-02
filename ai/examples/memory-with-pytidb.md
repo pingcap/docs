@@ -27,7 +27,7 @@ With just a few lines of code, you can create a conversational AI that remembers
 
 ## How to run
 
-### Step 1. Clone the repository to local
+### Step 1. Clone the repository
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git

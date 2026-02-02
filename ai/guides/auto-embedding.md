@@ -17,7 +17,7 @@ This document uses a TiDB Cloud hosted embedding model for demonstration. For a 
 
 ### Step 1. Define an embedding function
 
-Define a embedding function to generate vector embeddings for text data.
+Define an embedding function to generate vector embeddings for text data.
 
 ```python
 from pytidb.embeddings import EmbeddingFunction

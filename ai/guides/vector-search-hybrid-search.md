@@ -211,7 +211,7 @@ Hybrid search also supports reranking using reranker-specific models.
 
 Use the `rerank()` method to specify a reranker that sorts search results by relevance between the query and the documents.
 
-**Example: Using JinaAI Reranker to rerank the hybrid search results**
+**Example: Using Jina AI Reranker to rerank the hybrid search results**
 
 ```python
 reranker = Reranker(

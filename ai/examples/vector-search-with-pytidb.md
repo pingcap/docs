@@ -37,7 +37,7 @@ curl http://localhost:11434/api/embed -d '{
 }'
 ```
 
-### Step 2. Clone the repository to local
+### Step 2. Clone the repository
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git

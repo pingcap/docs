@@ -26,7 +26,7 @@ With just a few lines of code, you can create an intelligent search system that 
 
 ## How to run
 
-### Step 1. Clone the repository to local
+### Step 1. Clone the repository
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git
