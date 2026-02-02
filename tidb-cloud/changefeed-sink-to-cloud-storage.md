@@ -20,7 +20,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 ## Step 1. Configure destination
 
-Navigate to the cluster overview page of the target TiDB cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed**, and select **Amazon S3**, **GCS**, or **Azure Blob** as the destination. The configuration process varies depend on the destination you choose.
+Navigate to the cluster overview page of the target TiDB cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed**, and select **Amazon S3**, **GCS**, or **Azure Blob Storage** as the destination. The configuration process varies depend on the destination you choose.
 
 <SimpleTab>
 <div label="Amazon S3">
@@ -85,9 +85,9 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 7. In the TiDB Cloud console, go to the Changefeed's **Configure Destination** page, and fill in the **bucket gsutil URI** field.
 
 </div>
-<div label="Azure Blob">
+<div label="Azure Blob Storage">
 
-For **Azure Blob**, you first need to configure the container and get a SAS token in the Azure portal. Take the following steps:
+For **Azure Blob Storage**, you first need to configure the container and get a SAS token in the Azure portal. Take the following steps:
 
 1. In the [Azure portal](https://portal.azure.com/), create a container for storing changefeed data.
 
