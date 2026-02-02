@@ -60,7 +60,7 @@ The following table provides the TiDB Cloud built-in alert conditions and the co
 > - You can edit the thresholds of the alerts on the TiDB Cloud console. 
 > - Some alert rules are disabled by default. You can enable them as needed.
 
-We provide distinct alert rules for each product tier, aligned with their respective feature sets.
+TiDB Cloud provides distinct alert rules for each cluster plan, aligned with their respective feature sets.
 
 <CustomContent plan="dedicated">
 

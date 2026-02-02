@@ -45,7 +45,7 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 ### Step 3. Subscribe from TiDB Cloud
 
-Alert notification subscriptions vary by product tier.
+Alert notification subscriptions vary by cluster plans.
 
 <CustomContent plan="dedicated">
 
@@ -93,7 +93,7 @@ If an alert condition remains unchanged, the alert sends notifications every thr
 
 ## Unsubscribe from alert notifications
 
-If you no longer want to receive alert notifications, please take the following steps. The steps vary by product tier.
+If you no longer want to receive alert notifications, please take the following steps. The steps vary by cluster plans.
 
 <CustomContent plan="dedicated">
 
