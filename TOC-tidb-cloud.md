@@ -11,7 +11,6 @@
   - [MySQL Compatibility](/mysql-compatibility.md)
 - Get Started
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
-  - [Try Out TiDB + AI](/ai/vector-search-get-started-using-python.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
 - Key Concepts
@@ -166,8 +165,8 @@
     - [Precheck Errors, Migration Errors, and Alerts for Data Migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md)
     - [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Explore Data
-  - [Chat2Query in SQL Editor](/ai/explore-data-with-chat2query.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-  - [SQL Proxy Account](/ai/sql-proxy-account.md)
+  - [Chat2Query in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [SQL Proxy Account](/tidb-cloud/sql-proxy-account.md)
 - Data Service ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/tidb-cloud/data-service-overview.md)
   - [Get Started](/tidb-cloud/data-service-get-started.md)

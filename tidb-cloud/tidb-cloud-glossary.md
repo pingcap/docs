@@ -25,7 +25,7 @@ ACID refers to the four key properties of a transaction: atomicity, consistency,
 
 ### Chat2Query
 
-Chat2Query is an AI-powered feature integrated into SQL Editor that assists users in generating, debugging, or rewriting SQL queries using natural language instructions. For more information, see [Explore your data with AI-assisted SQL Editor](/ai/explore-data-with-chat2query.md).
+Chat2Query is an AI-powered feature integrated into SQL Editor that assists users in generating, debugging, or rewriting SQL queries using natural language instructions. For more information, see [Explore your data with AI-assisted SQL Editor]((/tidb-cloud/explore-data-with-chat2query.md)).
 
 In addition, TiDB Cloud provides a Chat2Query API for {{{ .starter }}} clusters hosted on AWS. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
@@ -63,7 +63,7 @@ For more information, see [Manage an endpoint](/tidb-cloud/data-service-manage-e
 
 ### Full-text search
 
-Unlike [Vector Search](/ai/vector-search-overview.md), which focuses on semantic similarity, full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
+Unlike [Vector Search](/ai/concepts/vector-search-overview.md), which focuses on semantic similarity, full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
 
 For more information, see [Full-Text Search with SQL](https://docs.pingcap.com/developer/vector-search-full-text-search-sql) and [Full-Text Search with Python](https://docs.pingcap.com/developer/vector-search-full-text-search-python).
 
@@ -190,7 +190,7 @@ A list of IP addresses and Classless Inter-Domain Routing (CIDR) addresses that 
 
 ### Vector search
 
-[Vector search](/ai/vector-search-overview.md) is a search method that prioritizes the meaning of your data to deliver relevant results. Unlike traditional full-text search, which relies on exact keyword matching and word frequency, vector search converts various data types (such as text, images, or audio) into high-dimensional vectors and queries based on the similarity between these vectors. This search method captures the semantic meaning and contextual information of the data, leading to a more precise understanding of user intent. Even when the search terms do not exactly match the content in the database, vector search can still provide results that align with the user's intent by analyzing the semantics of the data.
+[Vector search](/ai/concepts/vector-search-overview.md) is a search method that prioritizes the meaning of your data to deliver relevant results. Unlike traditional full-text search, which relies on exact keyword matching and word frequency, vector search converts various data types (such as text, images, or audio) into high-dimensional vectors and queries based on the similarity between these vectors. This search method captures the semantic meaning and contextual information of the data, leading to a more precise understanding of user intent. Even when the search terms do not exactly match the content in the database, vector search can still provide results that align with the user's intent by analyzing the semantics of the data.
 
 ### Virtual Private Cloud
 

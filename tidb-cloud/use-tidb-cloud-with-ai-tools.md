@@ -159,5 +159,5 @@ To add the TiDB MCP plugin to Windsurf, update your `mcp_config.json` file as fo
 
 ## See also
 
-- [Try Out TiDB + Vector Search](/ai/vector-search-get-started-using-python.md)
+- [Try Out TiDB + Vector Search](/ai/quickstart-via-python.md)
 - [Developer Guide Overview](https://docs.pingcap.com/developer/)
