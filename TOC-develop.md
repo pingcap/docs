@@ -1,10 +1,16 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-- Quick Start
-  - [Build a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
-  - [TiDB Basics](/develop/dev-guide-tidb-basics.md)
-  - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
+# Table of Contents
+
+## QUICK START
+
+- [Create a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
+- [TiDB Basics](/develop/dev-guide-tidb-basics.md)
+- [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
+
+## GUIDES
+
 - Connect to TiDB
   - GUI Database Tools
     - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
@@ -77,7 +83,7 @@
     - [Stale Read](/develop/dev-guide-use-stale-read.md)
   - [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
 - [Vector Search](/develop/dev-guide-vector-search.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-- Transactions
+- Manage Transactions
   - [Overview](/develop/dev-guide-transaction-overview.md)
   - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
   - [Transaction Restraints](/develop/dev-guide-transaction-restraints.md)
@@ -94,15 +100,22 @@
   - [SQL or Transaction Issues](/develop/dev-guide-troubleshoot-overview.md)
   - [Unstable Result Set](/develop/dev-guide-unstable-result-set.md)
   - [Timeouts](/develop/dev-guide-timeouts-in-tidb.md)
-- Reference
-  - [Bookshop Example Application](/develop/dev-guide-bookshop-schema-design.md)
-  - Guidelines
-    - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
-    - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
+
+## EXAMPLES
+
+- [Bookshop Example Application](/develop/dev-guide-bookshop-schema-design.md)
+
+## INTEGRATIONS
+
+- [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
+- [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
+- [ProxySQL Integration Guide](/develop/dev-guide-proxysql-integration.md)
+- [Amazon AppFlow Integration Guide](/develop/dev-guide-aws-appflow-integration.md)
+
+## REFERENCE
+
+- Development Guidelines
+  - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
+  - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
 - Cloud Native Development Environment
   - [Gitpod](/develop/dev-guide-playground-gitpod.md)
-- Third-Party Support
-  - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
-  - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
-  - [ProxySQL Integration Guide](/develop/dev-guide-proxysql-integration.md)
-  - [Amazon AppFlow Integration Guide](/develop/dev-guide-aws-appflow-integration.md)
