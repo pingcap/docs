@@ -231,7 +231,7 @@ TiDB Cloud safeguards static data with advanced encryption capabilities, ensurin
 
 - Dual-layer encryption is disabled by default for {{{ .starter }}} clusters and enabled by default for {{{ .essential }}} clusters.
 
-- Dual-layer encryption is mandatory for TiDB Cloud Dedicated clusters.
+- Dual-layer encryption is enabled by default for all TiDB Cloud Dedicated clusters and cannot be disabled.
 
 **Best practices:**
 
