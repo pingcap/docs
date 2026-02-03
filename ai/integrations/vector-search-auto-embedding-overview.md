@@ -11,7 +11,7 @@ The Auto Embedding feature lets you perform vector searches directly with plain 
 To use Auto Embedding, the basic workflow is as follows:
 
 1. **Define a table** with a text column and a generated vector column using `EMBED_TEXT()`.
-2. **Insert text data** — vectors are automatically generated and stored concurrently.
+2. **Insert text data** — vectors are generated and stored automatically.
 3. **Query using text** — use `VEC_EMBED_COSINE_DISTANCE()` or `VEC_EMBED_L2_DISTANCE()` to find semantically similar content.
 
 > **Note:**
@@ -112,7 +112,7 @@ TiDB Cloud supports various embedding models. Choose the one that best fits your
 
 | Embedding model | Documentation                                                                       | Hosted by TiDB Cloud <sup>1</sup> | BYOK <sup>2</sup> |
 | --------------- | ----------------------------------------------------------------------------------- | --------------------------------- | ----------------- |
-| Amazon Titan    | [Amazon Titan Embeddings](ai/integrations/vector-search-auto-embedding-amazon-titan.md) | ✅                                |                   |
+| Amazon Titan    | [Amazon Titan Embeddings](/ai/integrations/vector-search-auto-embedding-amazon-titan.md) | ✅                                |                   |
 | Cohere          | [Cohere Embeddings](/ai/integrations/vector-search-auto-embedding-cohere.md)             | ✅                                | ✅                |
 | Jina AI         | [Jina AI Embeddings](/ai/integrations/vector-search-auto-embedding-jina-ai.md)           |                                   | ✅                |
 | OpenAI          | [OpenAI Embeddings](/ai/integrations/vector-search-auto-embedding-openai.md)             |                                   | ✅                |
@@ -122,8 +122,8 @@ You can also use open-source embedding models through the following inference se
 
 | Embedding model       | Documentation                                                                     | Hosted by TiDB Cloud <sup>1</sup> | BYOK <sup>2</sup> | Example supported models          |
 | --------------------- | --------------------------------------------------------------------------------- | --------------------------------- | ----------------- | --------------------------------- |
-| HuggingFace Inference | [HuggingFace Embeddings](/ai/integrations/vector-search-auto-embedding-huggingface.md) |                                   | ✅                | `bge-m3`, `multilingual-e5-large` |
-| NVIDIA NIM            | [NVIDIA NIM Embeddings](/ai/vector-search-auto-embedding-nvidia-nim.md)   |                                   | ✅                | `bge-m3`, `nv-embed-v1`           |
+| Hugging Face Inference | [HuggingFace Embeddings](/ai/integrations/vector-search-auto-embedding-huggingface.md) |                                   | ✅                | `bge-m3`, `multilingual-e5-large` |
+| NVIDIA NIM            | [NVIDIA NIM Embeddings](/ai/integrations/vector-search-auto-embedding-nvidia-nim.md)   |                                   | ✅                | `bge-m3`, `nv-embed-v1`           |
 
 &#8203;<sup>1</sup> Hosted models are hosted by TiDB Cloud and do not require any API keys. Currently, these hosted models are free to use, but certain usage limits might be applied to keep them available to everyone.
 
@@ -133,7 +133,7 @@ You can also use open-source embedding models through the following inference se
 
 Auto Embedding uses the [`EMBED_TEXT()`](#embed_text) function to convert text into vector embeddings with your chosen embedding model. The generated vectors are stored in `VECTOR` columns and can be queried with plain text using [`VEC_EMBED_COSINE_DISTANCE()`](#vec_embed_cosine_distance) or [`VEC_EMBED_L2_DISTANCE()`](#vec_embed_l2_distance).
 
-Internally, [`VEC_EMBED_COSINE_DISTANCE()`](#vec_embed_cosine_distance) and [`VEC_EMBED_L2_DISTANCE()`](#vec_embed_l2_distance) are executed as [`VEC_COSINE_DISTANCE()`](/ai/vector-search-functions-and-operators.md#vec_cosine_distance) and [`VEC_L2_DISTANCE()`](/ai/vector-search-functions-and-operators.md#vec_l2_distance), with the text query automatically converted into a vector embedding.
+Internally, [`VEC_EMBED_COSINE_DISTANCE()`](#vec_embed_cosine_distance) and [`VEC_EMBED_L2_DISTANCE()`](#vec_embed_l2_distance) are executed as [`VEC_COSINE_DISTANCE()`](/ai/reference/vector-search-functions-and-operators.md#vec_cosine_distance) and [`VEC_L2_DISTANCE()`](/ai/reference/vector-search-functions-and-operators.md#vec_l2_distance), with the text query automatically converted into a vector embedding.
 
 ## Key functions
 
@@ -155,7 +155,7 @@ Calculates cosine similarity between a stored vector in the vector column and a 
 VEC_EMBED_COSINE_DISTANCE(vector_column, "query_text")
 ```
 
-Use this function in `ORDER BY` clauses to rank results by cosine distance. It uses the same calculation as [`VEC_COSINE_DISTANCE()`](/ai/vector-search-functions-and-operators.md#vec_cosine_distance), but automatically generates the embedding for the query text.
+Use this function in `ORDER BY` clauses to rank results by cosine distance. It uses the same calculation as [`VEC_COSINE_DISTANCE()`](/ai/reference/vector-search-functions-and-operators.md#vec_cosine_distance), but automatically generates the embedding for the query text.
 
 ### `VEC_EMBED_L2_DISTANCE()`
 
@@ -165,7 +165,7 @@ Calculates L2 (Euclidean) distance between a stored vector and a text query:
 VEC_EMBED_L2_DISTANCE(vector_column, "query_text")
 ```
 
-Use this function in `ORDER BY` clauses to rank results by L2 distance. It uses the same calculation as [`VEC_L2_DISTANCE()`](/ai/vector-search-functions-and-operators.md#vec_l2_distance), but automatically generates the embedding for the query text.
+Use this function in `ORDER BY` clauses to rank results by L2 distance. It uses the same calculation as [`VEC_L2_DISTANCE()`](/ai/reference/vector-search-functions-and-operators.md#vec_l2_distance), but automatically generates the embedding for the query text.
 
 ## Use Auto Embedding in Python
 
@@ -197,7 +197,6 @@ Use the `EmbeddingFunction` class to work with different embedding providers and
 - `use_server` *(optional)*: whether to use TiDB Cloud's hosted embedding service. Defaults to `True` for TiDB Cloud Starter.
 
 - `multimodal` *(optional)*: whether to use a multimodal embedding model. When enabled, `use_server` is automatically set to `False`, and the embedding service is called client-side.
-
 
 ## See also
 

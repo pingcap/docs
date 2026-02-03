@@ -10,12 +10,12 @@ aliases: ['/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 >
 > This document is applicable to TiDB Cloud only and not applicable to TiDB Self-Managed.
 
-This tutorial demonstrates how to integrate the [vector search](/ai/concepts/vector-search-overview.md) feature of TiDB with [Amazon Bedrock](https://aws.amazon.com/bedrock/) to build a Retrieval-Augmented Generation (RAG) Q&A bot.
+This tutorial demonstrates how to integrate [TiDB Vector Search](/ai/concepts/vector-search-overview.md) with [Amazon Bedrock](https://aws.amazon.com/bedrock/) to build a Retrieval-Augmented Generation (RAG) Q&A bot.
 
 > **Note:**
 >
 > - The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)(/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 > **Tip**
 >
@@ -29,7 +29,7 @@ To complete this tutorial, you need:
 - [Pip](https://pypi.org/project/pip/) installed
 - [AWS CLI](https://aws.amazon.com/cli/) installed
 
-    Ensure your AWS CLI profile is configured to a supported [Amazon Bedrock](https://aws.amazon.com/bedrock/) region for this tutorial. You can find the list of supported regions at [Amazon Bedrock Regions](https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html). To switch to a supported region, run the following command:
+    Ensure your AWS CLI profile is configured to a supported [Amazon Bedrock](https://aws.amazon.com/bedrock/) region. You can find the list of supported regions at [Amazon Bedrock Regions](https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html). To switch to a supported region, run the following command:
 
     ```shell
     aws configure set region <your-region>
@@ -48,7 +48,7 @@ To complete this tutorial, you need:
 
 ## Get started
 
-This section provides step-by-step instructions for integrating TiDB Vector Search with Amazon Bedrock to build a RAG-based Q&A bot.
+This section provides step-by-step instructions to integrate TiDB Vector Search with Amazon Bedrock to build a RAG-based Q&A bot.
 
 ### Step 1. Set the environment variables
 

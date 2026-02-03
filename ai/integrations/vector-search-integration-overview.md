@@ -11,7 +11,7 @@ This document provides an overview of TiDB vector search integration, including 
 > **Note:**
 >
 > - The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)(/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 ## AI frameworks
 
@@ -19,16 +19,16 @@ TiDB provides official support for the following AI frameworks, enabling you to 
 
 | AI frameworks | Tutorial                                                                                          |
 |---------------|---------------------------------------------------------------------------------------------------|
-| Langchain     | [Integrate Vector Search with LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)   |
+| LangChain     | [Integrate Vector Search with LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)   |
 | LlamaIndex    | [Integrate Vector Search with LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md) |
 
-Moreover, you can also use TiDB for various purposes, such as document storage and knowledge graph storage for AI applications.
+You can also use TiDB for various tasks such as document storage and knowledge graph storage for AI applications.
 
 ## Embedding models and services
 
 TiDB Vector Search supports storing vectors of up to 16383 dimensions, which accommodates most embedding models.
 
-You can either use self-deployed open-source embedding models or third-party embedding APIs provided by third-party embedding providers to generate vectors.
+You can use either self-deployed open-source embedding models or third-party embedding APIs to generate vectors.
 
 The following table lists some mainstream embedding service providers and the corresponding integration tutorials.
 
