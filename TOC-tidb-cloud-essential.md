@@ -33,7 +33,7 @@
   - Manage TiDB Cloud Clusters
     - [Create a TiDB Cloud Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
     - Connect to Your TiDB Cloud Cluster
-      - [Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
+      - [Network Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
       - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
       - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
       - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)

@@ -21,7 +21,7 @@ Before querying data, make sure that you have completed the following steps:
 
 1. [Create a TiDB Cloud cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 2. [Import table schema and sample data of the Bookshop application](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data).
-3. [Connect to TiDB](/tidb-cloud/connect-to-tidb-cluster.md).
+3. [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md).
 
 </div>
 <div label="TiDB Self-Managed" value="tidb">
