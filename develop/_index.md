@@ -6,9 +6,15 @@ aliases: ['/tidb/stable/dev-guide-overview/','/tidb/dev/dev-guide-overview/','/t
 
 # Developer Guide Overview
 
-<IntroHero title="Learn TiDB Cloud basics" content="TiDB Cloud is the fully-managed service built on top of TiDB, which is highly compatible with the MySQL protocol and supports most MySQL syntax and features." videoTitle="TiDB Cloud in 3 minutes">
-  <IntroHeroVideo src="https://www.youtube.com/embed/skCV9BEmjbo?autoplay=1" title="TiDB Cloud in 3 minutes" />
-</IntroHero>
+[TiDB](https://github.com/pingcap/tidb) is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads.
+
+This guide helps application developers quickly learn how to connect to TiDB, design databases, write and query data, and build reliable, high-performance applications on TiDB.
+
+Whether you are new to TiDB or migrating an existing MySQL-based application, this guide provides practical, step-by-step instructions and best practices to help you get productive quickly.
+
+> **Note:**
+>
+> This guide is written for application developers, but if you are interested in the inner workings of TiDB or want to get involved in TiDB development, read the [TiDB Kernel Development Guide](https://pingcap.github.io/tidb-dev-guide/) for more information about TiDB.
 
 ## Guides by language and framework
 
