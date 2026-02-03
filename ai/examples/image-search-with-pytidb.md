@@ -7,22 +7,21 @@ summary: Build an image search application using multimodal embeddings for both 
 
 This example showcases how to build a powerful image search application by combining TiDB's vector search capabilities with multimodal embedding models.
 
-With just a few lines of code, you can create an intelligent search system that understands both text and images.
+With just a few lines of code, you can create a search system that understands both text and images.
 
-- 🔍 **Text-to-Image Search**: Find the perfect pet photos by describing what you're looking for in natural language - from "fluffy orange cat"
-- 🖼️ **Image-to-Image Search**: Upload a photo and instantly discover visually similar pets based on breed, color, pose and more
+- **Text-to-image search**: Find pet photos by describing what you want in natural language, such as "fluffy orange cat"
+- **Image-to-image search**: Upload a photo to find visually similar pets by breed, color, pose, and more
 
 <p align="center">
   <img width="700" alt="PyTiDB Image Search Demo" src="https://github.com/user-attachments/assets/7ba9733a-4d1f-4094-8edb-58731ebd08e9" />
   <p align="center"><i>Pet image search via multimodal embeddings</i></p>
 </p>
 
-
 ## Prerequisites
 
 - **Python 3.10+**
-- **A TiDB Cloud Starter cluster**: Create a free cluster here: [tidbcloud.com ↗️](https://tidbcloud.com/?utm_source=github&utm_medium=referral&utm_campaign=pytidb_readme)
-- **Jina AI API Key**: Get your free API key at [jina.ai Embeddings ↗️](https://jina.ai/embeddings/)
+- **A TiDB Cloud Starter cluster** (Go to <https://tidbcloud.com/> to create a free cluster for quick testing)
+- **Jina AI API key** (Get a free API key from [Jina AI Embeddings](https://jina.ai/embeddings/))
 
 ## How to run
 
@@ -43,7 +42,7 @@ pip install -r reqs.txt
 
 ### Step 3. Set up environment variables
 
-Go to [TiDB Cloud console](https://tidbcloud.com/clusters) and get the connection parameters, then set up the environment variable like this:
+Go to the [TiDB Cloud console](https://tidbcloud.com/clusters) to get the connection parameters, and then set environment variables as follows:
 
 ```bash
 cat > .env <<EOF
@@ -59,7 +58,7 @@ EOF
 
 ### Step 4. Download and extract the dataset
 
-In this demo, we will use the [Oxford Pets dataset](https://www.robots.ox.ac.uk/~vgg/data/pets/) to load pet images to the database for search.
+This demo uses the [Oxford Pets dataset](https://www.robots.ox.ac.uk/~vgg/data/pets/) to load pet images into the database for search.
 
 *For Linux/MacOS:*
 

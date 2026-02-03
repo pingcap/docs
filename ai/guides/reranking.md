@@ -17,8 +17,9 @@ This two-stage retrieval approach significantly improves both document relevance
 ## Basic usage
 
 PyTiDB provides the `Reranker` class that allows you to use reranker models from multiple third-party providers.
+PyTiDB provides the `Reranker` class that lets you use reranker models from multiple third-party providers.
 
-1. Create a reranker instance
+1. Create a reranker instance:
 
     ```python
     from pytidb.rerankers import Reranker
@@ -26,7 +27,7 @@ PyTiDB provides the `Reranker` class that allows you to use reranker models from
     reranker = Reranker(model_name="{provider}/{model_name}")
     ```
 
-2. Apply reranker via `.rerank()` method
+2. Apply the reranker by using the `.rerank()` method:
 
     ```python
     table.search("{query}").rerank(reranker, "{field_to_rerank}").limit(3)
@@ -38,7 +39,7 @@ Here are some examples to use reranker models from third-party providers.
 
 ### Jina AI
 
-To use the reranker provided by Jina AI, go to their [website](https://jina.ai/reranker) to create an API key.
+To use the reranker from Jina AI, go to their [website](https://jina.ai/reranker) to create an API key.
 
 For example:
 

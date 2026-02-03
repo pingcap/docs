@@ -5,9 +5,8 @@ summary: Learn how to work with tables in TiDB.
 
 # Working with Tables
 
-TiDB uses tables to organize and store collections of related data. It provides flexible schema definition capabilities, allowing you to structure your tables according to your specific requirements.
 
-A table can contain multiple columns with different data types to store various kinds of data. Supported data types include text, numbers, vectors, binary data (`BLOB`), JSON, and more.
+A table can contain multiple columns of different data types. Supported data types include text, numbers, vectors, binary data (`BLOB`), JSON, and more.
 
 > **Note:**
 >
@@ -49,7 +48,7 @@ table = client.create_table(schema=Item, if_exists="overwrite")
 The `create_table` method accepts these parameters:
 
 - `schema`: The `TableModel` class that defines your table structure.
-- `if_exists`: The creation mode of the table.
+- `if_exists`: The table creation mode.
     - `raise` (default): Creates the table if it does not exist; raises an error if it already exists.
     - `skip`: Creates the table if it does not exist; does nothing if it already exists.
     - `overwrite`: Drops the existing table and creates a new one. This is useful for **testing and development**, but not recommended for production environments.
@@ -77,7 +76,7 @@ CREATE TABLE items (
 
 ### With TableModel
 
-You can use a `TableModel` instance to represent a record and insert it into the table.
+You can use a `TableModel` instance to represent a row and insert it into the table.
 
 To insert a single record:
 
@@ -151,7 +150,7 @@ VALUES
 
 ### With Dict
 
-You can also use `dict` to represent records and insert them into the table. This approach is more flexible and doesn't require to use a `TableModel` to insert data.
+You can also use `dict` to represent rows and insert them into the table. This approach is more flexible and does not require a `TableModel` to insert data.
 
 To insert a single record:
 
@@ -184,11 +183,11 @@ VALUES (1, 'TiDB is a distributed SQL database', '[0.1, 0.2, 0.3]', '{"category"
 
 ## Save data to a table
 
-The `save` method provides a convenient way to insert or update a single record. If a record with the specified primary key does not exist, it creates a new record. If the record already exists, it overwrites the entire record.
+The `save` method provides a convenient way to insert or update a single row. If the primary key of the data does not exist, the method inserts the data as a new row. If it exists, the method overwrites the entire row.
 
 > **Note:**
 >
-> If a record ID already exists, `table.save()` function overwrites the entire record. To change only part of a record, use `table.update()`.
+> If a record ID already exists, `table.save()` overwrites the entire record. To change only part of a record, use `table.update()`.
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -248,7 +247,7 @@ To fetch records from a table:
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-Use the `table.query()` method to fetch the records from the table.
+Use the `table.query()` method to fetch records from the table.
 
 **Example: Fetch the first 10 records**
 
@@ -298,7 +297,7 @@ SELECT * FROM items WHERE meta->>'$.category' = 'database' LIMIT 10;
 </div>
 </SimpleTab>
 
-For a complete list of supported filter operations and examples, refer to the [filtering](/ai/guides/filtering.md) guide.
+For a complete list of supported filter operations and examples, refer to the [Filtering](/ai/guides/filtering.md) guide.
 
 ## Update data in a table
 
@@ -423,7 +422,7 @@ To check that the table is removed from the database:
 
 ```python
 client.table_names()
-    ```
+```
 
 </div>
 <div label="SQL" value="sql">

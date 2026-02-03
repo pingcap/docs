@@ -5,16 +5,16 @@ summary: Learn fundamental PyTiDB operations including database connection, tabl
 
 # Basic CRUD Operations
 
-This example demonstrates basic CRUD (Create, Read, Update, Delete) operations with PyTiDB.
+This example demonstrates basic CRUD (Create, Read, Update, Delete) operations using PyTiDB.
 
-* Use PyTiDB Client to connect to TiDB
-* Create a table with text, vector, and JSON columns
-* Perform basic CRUD operations on data
+1. Connect to TiDB using the PyTiDB client.
+2. Create a table with text, vector, and JSON columns.
+3. Run basic CRUD operations on the data.
 
 ## Prerequisites
 
 - **Python 3.10+**
-- **A TiDB Cloud Starter cluster**: Create a free cluster here: [tidbcloud.com ↗️](https://tidbcloud.com/?utm_source=github&utm_medium=referral&utm_campaign=pytidb_readme)
+- **A TiDB Cloud Starter cluster** (Go to <https://tidbcloud.com/> to create a free cluster for quick testing)
 
 ## How to run
 
@@ -35,7 +35,7 @@ pip install -r reqs.txt
 
 ### Step 3. Set up environment to connect to database
 
-Go to [TiDB Cloud console](https://tidbcloud.com/clusters) and get the connection parameters, then set up the environment variable like this:
+Go to the [TiDB Cloud console](https://tidbcloud.com/clusters) to get the connection parameters, and then set environment variables as follows:
 
 ```bash
 cat > .env <<EOF

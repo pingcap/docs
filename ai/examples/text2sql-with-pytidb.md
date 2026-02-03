@@ -5,13 +5,14 @@ summary: Convert natural language queries into SQL statements using AI models.
 
 # Text2SQL Example
 
-This demo showcases an AI-powered interface that converts natural language questions into SQL queries and executes them against TiDB. Built with PyTiDB, OpenAI GPT, and Streamlit, it provides a seamless way to interact with your database using plain English.
+This demo shows how to build an AI-powered interface that converts natural-language questions into SQL queries and executes them against TiDB. Built with PyTiDB, OpenAI GPT, and Streamlit, it lets you query your database using plain English.
 
 ## Prerequisites
 
 - **Python 3.10+**
-- **A TiDB Cloud Starter cluster**: Create a free cluster here: [tidbcloud.com ↗️](https://tidbcloud.com/?utm_source=github&utm_medium=referral&utm_campaign=pytidb_readme)
 - **OpenAI API Key**: Get your API key at [OpenAI Platform ↗️](https://platform.openai.com/api-keys)
+- **A TiDB Cloud Starter cluster** (Go to <https://tidbcloud.com/> to create a free cluster for quick testing)
+- **OpenAI API key** (Get an API key from [OpenAI](https://platform.openai.com/api-keys))
 
 ## How to run
 
@@ -19,7 +20,7 @@ This demo showcases an AI-powered interface that converts natural language quest
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git
-cd pytidb/examples/text2sql/;
+cd pytidb/examples/text2sql/
 ```
 
 ### Step 2. Install the required packages
@@ -36,12 +37,12 @@ pip install -r reqs.txt
 streamlit run app.py
 ```
 
-### Step 4. Start the Streamlit app
+### Step 4. Use the app
 
 Open the browser and visit `http://localhost:8501`
 
-* Input OpenAI API key in left sidebar
-* Input the TiDB Cloud connection string in left sidebar, the format is `mysql+pymysql://root@localhost:4000/test`
+* Enter your OpenAI API key in the left sidebar
+* Enter the TiDB connection string in the left sidebar, for example: `mysql+pymysql://root@localhost:4000/test`
 
 ## Related resources
 

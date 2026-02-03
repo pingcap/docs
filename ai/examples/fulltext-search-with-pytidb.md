@@ -1,11 +1,11 @@
 ---
-title: Fulltext Search Example
-summary: Perform traditional text search using MySQL fulltext search capabilities.
+title: Full-Text Search Example
+summary: Perform traditional text search using TiDB full-text search.
 ---
 
 # Full-Text Search Example
 
-This example demonstrates how to build an E-commerce product search application using TiDB's full-text search feature with multilingual support. Users can search for products by keywords in their preferred language.
+This example demonstrates how to build an e-commerce product search app using TiDB full-text search with multilingual support. Users of this app can search for products by keywords in their preferred language.
 
 <p align="center">
   <img width="700" alt="E-commerce product search with full-text search" src="https://github.com/user-attachments/assets/c81ddad4-f996-4b1f-85c0-5cbb55bc2a3a" />
@@ -15,7 +15,7 @@ This example demonstrates how to build an E-commerce product search application 
 ## Prerequisites
 
 - **Python 3.10+**
-- **A TiDB Cloud Starter cluster**: Create a free cluster here: [tidbcloud.com ↗️](https://tidbcloud.com/?utm_source=github&utm_medium=referral&utm_campaign=pytidb_readme)
+- **A TiDB Cloud Starter cluster** (Go to <https://tidbcloud.com/> to create a free cluster for quick testing)
 
 ## How to run
 
@@ -23,10 +23,10 @@ This example demonstrates how to build an E-commerce product search application 
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git
-cd pytidb/examples/fulltext_search/;
+cd pytidb/examples/fulltext_search/
 ```
 
-### Step 2. Install the required packages and setup environment
+### Step 2. Install the required packages and set up the environment
 
 ```bash
 python -m venv .venv
@@ -36,7 +36,7 @@ pip install -r reqs.txt
 
 ### Step 3. Set up environment to connect to database
 
-Go to the [TiDB Cloud console](https://tidbcloud.com/), create a new cluster if you don't have one, and then get the connection parameters on the connection dialog.
+In the [TiDB Cloud console](https://tidbcloud.com/), create a cluster if you don't have one, and then copy the connection parameters from the connection dialog.
 
 ```bash
 cat > .env <<EOF

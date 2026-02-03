@@ -7,9 +7,7 @@ summary: Build a RAG application that combines document retrieval with language 
 
 This example demonstrates how to use PyTiDB to build a minimal RAG application.
 
-* Use Ollama to deploy local embedding model and LLM model
-* Use Streamlit to build a Web UI for the RAG application
-* Use PyTiDB to build a minimal RAG application
+The application uses [Ollama](https://ollama.com/download) for local embedding generation, [Streamlit](https://streamlit.io/) for the web UI, and [PyTiDB](https://github.com/pingcap/pytidb) to build the RAG pipeline.
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/dfd85672-65ce-4a46-8dd2-9f77d826363e" alt="RAG application built with PyTiDB" width="600" />
@@ -19,14 +17,14 @@ This example demonstrates how to use PyTiDB to build a minimal RAG application.
 ## Prerequisites
 
 - **Python 3.10+**
-- **A TiDB Cloud Starter cluster**: Create a free cluster here: [tidbcloud.com ↗️](https://tidbcloud.com/?utm_source=github&utm_medium=referral&utm_campaign=pytidb_readme)
-- **Ollama**: You can install it from [Ollama ↗️](https://ollama.com/download)
+- **A TiDB Cloud Starter cluster** (Go to <https://tidbcloud.com/> to create a free cluster for quick testing)
+- **Ollama** (Install from [Ollama](https://ollama.com/download))
 
 ## How to run
 
 ### Step 1. Prepare the inference API
 
-Pull the embedding and LLM model via ollama CLI:
+Pull the embedding and LLM models with the Ollama CLI:
 
 ```bash
 ollama pull mxbai-embed-large
@@ -34,7 +32,7 @@ ollama pull gemma3:4b
 ollama run gemma3:4b
 ```
 
-Test the `/embed` and `/generate` endpoints to make sure they are running:
+Verify that the `/embed` and `/generate` endpoints are running:
 
 ```bash
 curl http://localhost:11434/api/embed -d '{
@@ -54,10 +52,10 @@ curl http://localhost:11434/api/generate -d '{
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git
-cd pytidb/examples/rag/;
+cd pytidb/examples/rag/
 ```
 
-### Step 3. Install the required packages and setup environment
+### Step 3. Install the required packages and set up the environment
 
 ```bash
 python -m venv .venv
@@ -67,7 +65,7 @@ pip install -r reqs.txt
 
 ### Step 4. Set up environment to connect to database
 
-Go to [TiDB Cloud console](https://tidbcloud.com/clusters) and get the connection parameters, then set up the environment variable like this:
+Go to the [TiDB Cloud console](https://tidbcloud.com/clusters) to get the connection parameters, and then set environment variables as follows:
 
 ```bash
 cat > .env <<EOF
@@ -91,7 +89,7 @@ Open the browser and visit `http://localhost:8501`
 
 ### `502 Bad Gateway` Error
 
-Try to disable the global proxy settings.
+Try disabling your global proxy settings.
 
 ## Related resources
 

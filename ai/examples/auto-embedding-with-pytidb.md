@@ -5,17 +5,17 @@ summary: Automatically generate embeddings for your text data using built-in emb
 
 # Auto Embedding Example
 
-This example showcases how to use the auto embedding feature with PyTiDB Client.
+This example shows how to use the [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) feature with the [pytidb](https://github.com/pingcap/pytidb) client.
 
-* Connect to TiDB with PyTiDB Client
-* Define a table with a VectorField configured for automatic embedding
-* Insert plain text data, embeddings are populated automatically in the background
-* Run vector searches with natural language queries, embedding happens transparently
+1. Connect to TiDB using the PyTiDB client.
+2. Define a table with a VectorField configured for automatic embedding.
+3. Insert plain text data: embeddings are populated automatically in the background.
+4. Run vector searches with natural-language queries: embeddings are generated transparently.
 
 ## Prerequisites
 
 - **Python 3.10+**
-- **A TiDB Cloud Starter cluster**: Create a free cluster here: [tidbcloud.com ↗️](https://tidbcloud.com/?utm_source=github&utm_medium=referral&utm_campaign=pytidb_readme)
+- **A TiDB Cloud Starter cluster** (Go to <https://tidbcloud.com/> to create a free cluster for quick testing)
 
 ## How to run
 
@@ -36,7 +36,7 @@ pip install -r reqs.txt
 
 ### Step 3. Set up environment to connect to database
 
-Go to [TiDB Cloud console](https://tidbcloud.com/clusters) to get the connection parameters and set up the environment variable like this:
+Go to the [TiDB Cloud console](https://tidbcloud.com/clusters) to get the connection parameters, and then set environment variables as follows:
 
 ```bash
 cat > .env <<EOF

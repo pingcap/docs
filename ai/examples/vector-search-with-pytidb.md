@@ -5,7 +5,9 @@ summary: Implement semantic search using vector embeddings to find similar conte
 
 # Vector Search Example
 
-This example demonstrates how to build a semantic search application using TiDB and local embedding models. It leverages vector search to find similar items based on meaning, not just keywords. The app uses Streamlit for the web UI and Ollama for local embedding generation.
+This example demonstrates a semantic search app using TiDB and local embedding models. It uses vector search to find similar items by meaning (not just keywords).
+
+The application uses [Ollama](https://ollama.com/download) for local embedding generation, [Streamlit](https://streamlit.io/) for the web UI, and [PyTiDB](https://github.com/pingcap/pytidb) to build the RAG pipeline.
 
 <p align="center">
   <img width="700" alt="Semantic search with vector embeddings" src="https://github.com/user-attachments/assets/6d7783a5-ce9c-4dcc-8b95-49d5f0ca735a" />
@@ -15,8 +17,8 @@ This example demonstrates how to build a semantic search application using TiDB 
 ## Prerequisites
 
 - **Python 3.10+**
-- **A TiDB Cloud Starter cluster**: Create a free cluster here: [tidbcloud.com ↗️](https://tidbcloud.com/?utm_source=github&utm_medium=referral&utm_campaign=pytidb_readme)
-- **Ollama**: You can install it from [Ollama ↗️](https://ollama.com/download)
+- **A TiDB Cloud Starter cluster** (Go to <https://tidbcloud.com/> to create a free cluster for quick testing)
+- **Ollama** (Install from [Ollama](https://ollama.com/download))
 
 ## How to run
 
@@ -28,7 +30,7 @@ Pull the embedding model:
 ollama pull mxbai-embed-large
 ```
 
-Test the embedding service to make sure it is running:
+Verify that the embedding service is running:
 
 ```bash
 curl http://localhost:11434/api/embed -d '{
@@ -54,7 +56,7 @@ pip install -r reqs.txt
 
 ### Step 4. Set up environment to connect to TiDB
 
-Go to [TiDB Cloud console](https://tidbcloud.com/clusters) and get the connection parameters, then set up the environment variable like this:
+Go to the [TiDB Cloud console](https://tidbcloud.com/clusters) to get the connection parameters, and then set environment variables as follows:
 
 ```bash
 cat > .env <<EOF
