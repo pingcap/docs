@@ -5,9 +5,9 @@ summary: This guide shows you how to configure the TiDB MCP Server in the Cursor
 
 # Get Started with Cursor and TiDB MCP Server
 
-This guide shows you how to configure the TiDB MCP Server in the Cursor editor.
+This guide shows how to configure the TiDB MCP Server in the Cursor editor.
 
-For one-click installation, you can click the following button:
+For one-click installation, click the following button:
 
 [![Install TiDB MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=TiDB&config=eyJjb21tYW5kIjoidXZ4IC0tZnJvbSBweXRpZGJbbWNwXSB0aWRiLW1jcC1zZXJ2ZXIiLCJlbnYiOnsiVElEQl9IT1NUIjoibG9jYWxob3N0IiwiVElEQl9QT1JUIjoiNDAwMCIsIlRJREJfVVNFUk5BTU0iOiJyb290IiwiVElEQl9QQVNTV09SRCI6IiIsIlRJREJfREFUQUJBU0UiOiJ0ZXN0In19)
 
@@ -16,8 +16,8 @@ For one-click installation, you can click the following button:
 Before you begin, ensure you have the following:
 
 - **Cursor Editor**: Download and install Cursor from [cursor.com](https://cursor.com).
-- **Python (>=3.10) and uv**: Ensure Python (version 3.10 or later) and uv are installed. Follow the [installation guide](https://docs.astral.sh/uv/getting-started/installation/) to install uv.
-- **A TiDB cluster**: For a managed option, create a TiDB Cloud Starter cluster at [tidbcloud.com](https://tidbcloud.com/free-trial).
+- **Python (>=3.10) and uv**: Ensure Python (3.10 or later) and `uv` are installed. Follow the [installation guide](https://docs.astral.sh/uv/getting-started/installation/) to install `uv`.
+- **A TiDB Cloud Starter cluster**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
 
 ## Connect to TiDB Cloud Starter (recommended)
 
@@ -59,7 +59,7 @@ For more details, see the [Model Context Protocol documentation](https://docs.cu
 
 ## Troubleshooting
 
-If you encounter any issues installing the TiDB MCP Server, check the MCP logs in the Cursor editor.
+If you encounter issues installing the TiDB MCP Server, check the MCP logs in Cursor.
 
 1. Click **View** > **Output** in the main menu at the top of the editor.
 2. Select **MCP** from the dropdown menu in the **Output** panel.

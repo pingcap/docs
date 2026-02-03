@@ -5,15 +5,15 @@ summary: This guide shows you how to configure the TiDB MCP Server in Claude Cod
 
 # Get Started with Claude Code and TiDB MCP Server
 
-This guide shows you how to configure the TiDB MCP Server in Claude Code.
+This guide shows how to configure the TiDB MCP Server in Claude Code.
 
 ## Prerequisites
 
 Before you begin, ensure you have the following:
 
 - **Claude Code**: Install it from [claude.com](https://claude.com/product/claude-code).
-- **Python (>=3.10) and uv**: Ensure Python (version 3.10 or later) and uv are installed. Follow the [installation guide](https://docs.astral.sh/uv/getting-started/installation/) to install uv.
-- **A TiDB cluster**: For a managed option, create a TiDB Cloud Starter cluster at [tidbcloud.com](https://tidbcloud.com/free-trial).
+- **Python (>=3.10) and uv**: Ensure Python (3.10 or later) and `uv` are installed. Follow the [installation guide](https://docs.astral.sh/uv/getting-started/installation/) to install `uv`.
+- **A TiDB Cloud Starter cluster**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
 
 ## Connect to TiDB Cloud Starter (recommended)
 
