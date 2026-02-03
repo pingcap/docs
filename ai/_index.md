@@ -13,8 +13,8 @@ Get up and running quickly with TiDB's AI capabilities.
 
 | Document | Description |
 | --- | --- |
-| [Get Started with Python](/ai/quickstart.md) | Build your first AI application with TiDB in minutes using Python. |
-| [Get Started with SQL](/ai/guides/vector-search-get-started-using-sql.md) | Quick start guide for vector search using SQL. |
+| [Get Started with Python](/ai/quickstart-via-python.md) | Build your first AI application with TiDB in minutes using Python. |
+| [Get Started with SQL](/ai/guides/quickstart-via-sql.md) | Quick start guide for vector search using SQL. |
 
 ## Concepts
 

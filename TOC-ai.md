@@ -5,8 +5,8 @@
 
 ## QUICK START
 
-- [Get Started via Python](/ai/quickstart.md)
-- [Get Started via SQL](/ai/guides/vector-search-get-started-using-sql.md)
+- [Get Started via Python](/ai/quickstart-via-python.md)
+- [Get Started via SQL](/ai/guides/quickstart-via-sql.md)
 
 ## CONCEPTS
 

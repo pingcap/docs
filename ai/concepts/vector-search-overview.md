@@ -70,5 +70,5 @@ A recommendation engine is a system that proactively suggests content, products,
 
 To get started with TiDB Vector Search, see the following documents:
 
-- [Get started with vector search using Python](/ai/quickstart.md)
+- [Get started with vector search using Python](/ai/quickstart-via-python.md)
 - [Get started with vector search using SQL](/ai/quickstart-via-sql.md)
