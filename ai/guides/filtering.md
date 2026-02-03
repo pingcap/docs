@@ -9,7 +9,6 @@ As a relational database, TiDB supports a rich set of [SQL operators](https://do
 
 ## Overview
 
-You can not only apply filtering on scalar fields but also on JSON fields. Filtering on JSON fields is often used for [metadata filtering](/ai/guides/vector-search.md#metadata-filtering) in vector search.
 You can filter on both scalar fields and JSON fields. Filtering on JSON fields is often used for [metadata filtering](/ai/guides/vector-search/#metadata-filtering) in vector search.
 
 > **Note:**
@@ -37,6 +36,7 @@ The dictionary structure of **filters** is as follows:
 
 - `<key>`: The key can be a column name, a JSON path expression to access a JSON field (see [Metadata filtering](/ai/guides/vector-search.md#metadata-filtering)), or a [logical operator](#logical-operators).
 - `<operator>`: The operator can be a [compare operator](#compare-operators) or an [inclusion operator](#inclusion-operators).
+- `<value>`: The value can be a scalar value or an array, depending on the operator.
 
 **Example: Filter records where `created_at` is greater than 2024-01-01**
 

@@ -16,7 +16,6 @@ This two-stage retrieval approach significantly improves both document relevance
 
 ## Basic usage
 
-PyTiDB provides the `Reranker` class that allows you to use reranker models from multiple third-party providers.
 PyTiDB provides the `Reranker` class that lets you use reranker models from multiple third-party providers.
 
 1. Create a reranker instance:

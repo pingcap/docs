@@ -5,7 +5,7 @@ summary: Build an image search application using multimodal embeddings for both 
 
 # Image Search Example
 
-This example showcases how to build a powerful image search application by combining TiDB's vector search capabilities with multimodal embedding models.
+This example shows how to build an image search app by combining TiDB vector search capabilities with multimodal embedding models.
 
 With just a few lines of code, you can create a search system that understands both text and images.
 

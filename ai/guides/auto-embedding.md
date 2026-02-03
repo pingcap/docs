@@ -45,6 +45,7 @@ class Chunk(TableModel):
 table = client.create_table(schema=Chunk, if_exists="overwrite")
 ```
 
+You don't need to specify `dimensions`, because the embedding model automatically determines it.
 
 However, you can set `dimensions` to override the default.
 

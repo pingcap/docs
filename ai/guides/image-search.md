@@ -96,6 +96,7 @@ The client converts the PIL image object to a Base64 string before sending it to
 
 You can also search for similar images by providing keyword text.
 
+For example, if you are working on a pet image dataset, you can search by keywords such as "orange tabby cat" or "golden retriever puppy" to find similar images.
 
 ```python
 results = table.search("orange tabby cat").limit(3).to_list()

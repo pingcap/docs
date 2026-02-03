@@ -5,6 +5,7 @@ summary: Learn how to work with tables in TiDB.
 
 # Working with Tables
 
+TiDB uses tables to organize and store collections of related data. It provides flexible schema definition capabilities, so you can design tables to meet your specific requirements.
 
 A table can contain multiple columns of different data types. Supported data types include text, numbers, vectors, binary data (`BLOB`), JSON, and more.
 
@@ -16,7 +17,7 @@ A table can contain multiple columns of different data types. Supported data typ
 
 ### Using TableModel
 
-TiDB provides a `TableModel` class that represents the schema of a table. This class is compatible with the [Pydantic Model](https://docs.pydantic.dev/latest/concepts/models/) and allows you to define the table structure in a declarative way.
+PyTiDB provides a `TableModel` class that represents the schema of a table. The class is compatible with the [Pydantic model](https://docs.pydantic.dev/latest/concepts/models/) and enables you to define tables declaratively.
 
 In the following example, you create a table named `items` with these columns:
 

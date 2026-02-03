@@ -10,7 +10,6 @@ This demo shows how to build an AI-powered interface that converts natural-langu
 ## Prerequisites
 
 - **Python 3.10+**
-- **OpenAI API Key**: Get your API key at [OpenAI Platform ↗️](https://platform.openai.com/api-keys)
 - **A TiDB Cloud Starter cluster** (Go to <https://tidbcloud.com/> to create a free cluster for quick testing)
 - **OpenAI API key** (Get an API key from [OpenAI](https://platform.openai.com/api-keys))
 

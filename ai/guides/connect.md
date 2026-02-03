@@ -9,6 +9,7 @@ This guide explains how to connect to a TiDB database using the PyTiDB client.
 
 ## Install the dependencies
 
+[`pytidb`](https://github.com/pingcap/pytidb) is a Python client built on [SQLAlchemy](https://sqlalchemy.org/). It provides a series of high-level APIs to help you store and search vector embeddings without writing raw SQL.
 
 To install the Python client, run the following command:
 
@@ -23,6 +24,7 @@ Choose the steps based on your TiDB deployment type:
 <SimpleTab>
 <div label="TiDB Cloud Starter">
 
+You can [create a TiDB Cloud Starter cluster](https://tidbcloud.com/free-trial/), and then get the connection parameters from the web console as follows:
 
 1. Navigate to the [Clusters page](https://tidbcloud.com/clusters), and then click the name of your target cluster to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
@@ -97,7 +99,7 @@ db = TiDBClient.connect(
 
 > **Note:**
 >
-> For TiDB Cloud Starter, [TLS connection to the database](https://docs.pingcap.com/tidbcloud/secure-connections-to-starter-clusters/) is required when using Public Endpoint, so you need to set `ssl_verify_cert=true&ssl_verify_identity=true` in the connection string.
+> For TiDB Cloud Starter, [TLS connection to the database](https://docs.pingcap.com/tidbcloud/secure-connections-to-starter-clusters/) is required when using a public endpoint, so you need to set `ssl_verify_cert=true&ssl_verify_identity=true` in the connection string.
 
 </div>
 <div label="TiDB Self-Managed">
