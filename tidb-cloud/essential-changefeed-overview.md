@@ -12,14 +12,19 @@ TiDB Cloud changefeed は、TiDB Cloudから他のデータサービスへのデ
 > -   現在、 TiDB Cloud、 TiDB Cloud Essential クラスターごとに最大 10 個の変更フィードのみが許可されます。
 > -   [TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)クラスターでは、changefeed 機能は使用できません。
 
+## 制限 {#restrictions}
+
+-   Changefeed は、1 つの`RENAME TABLE`ステートメント（例: `RENAME TABLE t1 TO t3, t2 TO t4` ）で複数のテーブルの名前を変更する DDL ステートメントをサポートしていません。このステートメントを実行すると、Changefeed データのレプリケーションが永続的に中断されます。
+-   チェンジフィードのスループットは約20 MiB/秒です。増分データ量がこの制限を超える場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+
 ## サポートされている地域 {#supported-regions}
 
-changefeed 機能は次の地域で利用できます。
+changefeed 機能は次のリージョンで利用できます。
 
-| クラウドプロバイダー | サポートされている地域                                                                              |
-| ---------- | ---------------------------------------------------------------------------------------- |
-| AWS        | <li>`ap-southeast-1`</li><li>`eu-central-1`</li><li>`us-east-1`</li><li>`us-west-2`</li> |
-| アリババクラウド   | <li>`ap-southeast-1`</li><li>`ap-southeast-5`</li><li>`cn-hongkong`</li>                 |
+| クラウドプロバイダー | サポートされている地域                                                                                                                           |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| AWS        | <li>`ap-east-1`</li><li>`ap-northeast-1`</li><li>`ap-southeast-1`</li><li>`eu-central-1`</li><li>`us-east-1`</li><li>`us-west-2`</li> |
+| アリババクラウド   | <li>`ap-southeast-1`</li><li>`ap-southeast-5`</li><li>`cn-hongkong`</li>                                                              |
 
 今後、他の地域でもサポートされる予定です。特定の地域での緊急サポートについては、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 

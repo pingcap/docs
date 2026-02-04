@@ -23,7 +23,7 @@ TiCDC には次の主要な機能があります。
 -   秒レベルの RPO と分レベルの RTO を使用して、TiDB クラスター間で増分データをレプリケートします。
 -   TiDB クラスター間の双方向レプリケーションにより、TiCDC を使用したマルチアクティブ TiDB ソリューションの作成が可能になります。
 -   TiDB クラスターから MySQL データベースまたはその他の MySQL 互換データベースに低レイテンシーで増分データを複製します。
--   TiDBクラスターからKafkaクラスターへの増分データのレプリケーション。推奨されるデータ形式[デベジウム](/ticdc/ticdc-debezium.md) [運河-JSON](/ticdc/ticdc-canal-json.md) [アブロ](/ticdc/ticdc-avro-protocol.md)
+-   TiDBクラスターからKafkaクラスターへの増分データのレプリケーション。推奨されるデータ形式[アブロ](/ticdc/ticdc-avro-protocol.md) [運河-JSON](/ticdc/ticdc-canal-json.md) [デベジウム](/ticdc/ticdc-debezium.md)
 -   TiDB クラスターから Amazon S3、GCS、Azure Blob Storage、NFS などのstorageサービスに増分データを複製します。
 -   データベース、テーブル、DML、DDL をフィルターする機能を使用してテーブルを複製します。
 -   単一障害点のない高可用性、TiCDC ノードの動的な追加と削除をサポートします。
@@ -37,7 +37,7 @@ TiCDC には次の主要な機能があります。
     -   MySQLシンクはDDL文を繰り返し実行できます。1 `TRUNCATE TABLE`ように下流で繰り返し実行できるDDL文は正常に実行されます。3 `CREATE TABLE`ように繰り返し実行できないDDL文は実行に失敗し、TiCDCはエラーを無視してレプリケーションプロセスを続行します。
     -   Kafka シンクは、データ分散のためのさまざまな戦略を提供します。
         -   テーブル、主キー、またはタイムスタンプに基づいて、データを異なるKafkaパーティションに分散できます。これにより、行の更新データが順番に同じパーティションに送信されるようになります。
-        -   これらの分散戦略はすべて、すべてのトピックとパーティションに定期的に`Resolved TS`メッセージを送信します。これは、 `Resolved TS`より前のすべてのメッセージが既にトピックとパーティションに送信されていることを示します。Kafkaコンシューマーは`Resolved TS`使用して受信したメッセージをソートできます。
+        -   これらの分散戦略はすべて、すべてのトピックとパーティションに定期的に`Resolved TS`メッセージを送信します。これは、 `Resolved TS`より前のすべてのメッセージが既にトピックとパーティションに送信されていることを示します。Kafkaコンシューマーは`Resolved TS`を使用して受信したメッセージをソートできます。
         -   Kafkaシンクは重複したメッセージを送信することがありますが、これらの重複メッセージは`Resolved Ts`の制約には影響しません。例えば、チェンジフィードが一時停止されて再開された場合、Kafkaシンクは`msg1` 、 `msg2` 、 `msg3` 、 `msg2` 、 `msg3`の順に送信する可能性があります。Kafkaコンシューマーから重複メッセージをフィルタリングできます。
 
 ### レプリケーションの一貫性 {#replication-consistency}
@@ -89,12 +89,12 @@ TiCDC のアーキテクチャは次の図に示されています。
 
 ## ベストプラクティス {#best-practices}
 
--   TiCDC を使用して 2 つの TiDB クラスター間でデータをレプリケートする場合、2 つのクラスター間のネットワークレイテンシーが100 ミリ秒を超えると、次のようになります。
+-   TiCDC を使用して 2 つの TiDB クラスター間でデータをレプリケートする場合、2 つのクラスター間のネットワークレイテンシーが 100 ミリ秒を超えると、次のようになります。
 
     -   v6.5.2 より前のバージョンの TiCDC の場合、ダウンストリーム TiDB クラスターが配置されているリージョン (IDC) に TiCDC をデプロイすることをお勧めします。
     -   TiCDC v6.5.2 から導入された一連の改善により、アップストリーム TiDB クラスターが配置されているリージョン (IDC) に TiCDC を展開することが推奨されます。
 
--   TiCDC によって複製される各テーブルには、少なくとも 1 つの[有効なインデックス](#valid-index)あります。
+-   TiCDC によって複製される各テーブルには、少なくとも 1 つの[有効なインデックス](#valid-index)があります。
 
 -   TiCDC を災害復旧に使用する場合、最終的な一貫性を確保するには、 [再実行ログ](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)設定し、上流で災害が発生したときに、REDO ログが書き込まれるstorageシステムを正常に読み取ることができるようにする必要があります。
 
@@ -116,7 +116,7 @@ MySQLのbinlogは、上流で実行されたすべてのDML SQL文を直接記�
 
 2.  `INSERT`イベント: 変更後のデータが含まれる`PUT`種類のデータ変更メッセージに対応します。
 
-3.  `UPDATE`イベント: 変更前と変更後の両方のデータが含まれる`PUT`種類のデータ変更メッセージに対応します。
+3.  `UPDATE`のイベント: 変更前と変更後の両方のデータが含まれる`PUT`種類のデータ変更メッセージに対応します。
 
 TiCDCは、データ変更情報に基づいて、下流の様々なタイプに適した形式でデータを生成し、下流に送信します。例えば、Canal-JSONやAvroなどの形式でデータを生成し、Kafkaに書き込んだり、データをSQL文に変換して下流のMySQLやTiDBに送信したりします。
 
@@ -159,8 +159,8 @@ WHERE `A` = 1 OR `A` = 2;
 
 -   RawKV のみを使用する TiKV クラスター。
 -   TiDBの[`CREATE SEQUENCE` DDL操作](/sql-statements/sql-statement-create-sequence.md)と[`SEQUENCE`関数](/sql-statements/sql-statement-create-sequence.md#sequence-function) 。上流のTiDBが`SEQUENCE`使用する場合、TiCDCは上流で実行される`SEQUENCE` DDL操作/関数を無視します。ただし、 `SEQUENCE`関数を使用するDML操作は正しく複製されます。
--   現在、TiCDCによって複製されているテーブルおよびデータベースに対して[TiDB Lightning物理インポート](/tidb-lightning/tidb-lightning-physical-import-mode.md)実行することはサポートされていません。詳細については、 [TiDB LightningとBRを使用して上流からデータを復元した後、TiCDCを使用したレプリケーションが停止したり、停止したりする理由](/ticdc/ticdc-faq.md#why-does-replication-using-ticdc-stall-or-even-stop-after-data-restore-using-tidb-lightning-physical-import-mode-and-br-from-upstream)参照してください。
--   v8.2.0より前のバージョンでは、 BRはTiCDCレプリケーションタスクを含むクラスターに対して[データの復元](/br/backup-and-restore-overview.md)サポートしていません。詳細については、 [TiDB LightningとBRを使用して上流からデータを復元した後、TiCDCを使用したレプリケーションが停止したり、停止したりする理由](/ticdc/ticdc-faq.md#why-does-replication-using-ticdc-stall-or-even-stop-after-data-restore-using-tidb-lightning-physical-import-mode-and-br-from-upstream)参照してください。
--   v8.2.0以降、 BRはTiCDCのデータ復元に関する制限を緩和しました。復元対象データの`BackupTS` （バックアップ時刻）が変更フィード[`CheckpointTS`](/ticdc/ticdc-classic-architecture.md#checkpointts) （現在のレプリケーションの進行状況を示すタイムスタンプ）よりも前であれば、 BRは通常通りデータ復元を続行できます。5は通常`BackupTS`よりもずっと前であることを考慮すると、ほとんどのシナリオにおいて、 BRはTiCDCレプリケーションタスクを含むクラスターのデータ復元をサポートしていると推測できます。
+-   現在、TiCDCによって複製されているテーブルおよびデータベースに[TiDB Lightning物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)を使用してデータをインポートすることはサポートされていません。詳細については、 [TiDB Lightning物理インポート モードと TiCDC 間の互換性の制限は何ですか?](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-tidb-lightning-physical-import-mode-and-ticdc)参照してください。
+-   v8.2.0より前のバージョンでは、 BRはTiCDCレプリケーションタスクを含むクラスターに対して[データの復元](/br/backup-and-restore-overview.md)サポートしていません。詳細については、 [BR (バックアップと復元) と TiCDC 間の互換性の制限は何ですか?](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-br-and-ticdc)参照してください。
+-   v8.2.0以降、 BRはTiCDCのデータ復元に関する制限を緩和しました。復元対象データの`BackupTS` （バックアップ時刻）が変更フィード[`CheckpointTS`](/ticdc/ticdc-classic-architecture.md#checkpointts) （現在のレプリケーションの進行状況を示すタイムスタンプ）よりも前であれば、 BRは通常通りデータ復元を続行できます。5 `BackupTS`通常それよりもずっと前であることを考慮すると、ほとんどのシナリオにおいて、 BRはTiCDCレプリケーションタスクを含むクラスターのデータ復元をサポートしていると推測できます。
 
 TiCDCは、アップストリームにおける大規模トランザクションを含むシナリオを部分的にしかサポートしていません。詳細については、 [TiCDCFAQ](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk)を参照してください。TiCDCが大規模トランザクションの複製をサポートしているかどうか、および関連するリスクについて詳しく説明されています。

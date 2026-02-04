@@ -82,7 +82,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 | `required-acks`                      | `Produce`リクエストで使用されるパラメータ。ブローカーが応答するまでに受信する必要があるレプリカ確認応答の数を通知します。値のオプションは`0` ( `NoResponse` : 応答なし、 `TCP ACK`のみ提供)、 `1` ( `WaitForLocal` : ローカルコミットが正常に送信された後にのみ応答)、および`-1` ( `WaitForAll` : すべての複製レプリカが正常にコミットされた後に応答) です。複製レプリカの最小数は、ブローカーの[`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas)設定項目を使用して設定できます。(オプション、デフォルト値は`-1` )。 |
 | `compression`                        | メッセージを送信する際に使用する圧縮アルゴリズム（値の選択肢は`none` 、 `lz4` 、 `gzip` 、 `snappy` 、 `zstd` 。デフォルトは`none` ）。Snappy圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。その他のSnappy圧縮形式はサポートされていません。                                                                                                                                                                                            |
 | `auto-create-topic`                  | 渡された`topic-name` Kafka クラスターに存在しない場合に、TiCDC がトピックを自動的に作成するかどうかを決定します (オプション、デフォルトは`true` )。                                                                                                                                                                                                                                                                                                 |
-| `enable-tidb-extension`              | オプション。デフォルトは`false` 。出力プロトコルが`canal-json`場合、値が`true`であれば、TiCDC は[ウォーターマークイベント](/ticdc/ticdc-canal-json.md#watermark-event)送信し、Kafka メッセージに[TiDB拡張フィールド](/ticdc/ticdc-canal-json.md#tidb-extension-field)を追加します。v6.1.0 以降では、このパラメータは`avro`プロトコルにも適用されます。値が`true`の場合、TiCDC は Kafka メッセージに[3つのTiDB拡張フィールド](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields)追加します。                          |
+| `enable-tidb-extension`              | オプション。デフォルトは`false` 。出力プロトコルが`canal-json`場合、値が`true`であれば、TiCDC は[ウォーターマークイベント](/ticdc/ticdc-canal-json.md#watermark-event)送信し、Kafka メッセージに[TiDB拡張フィールド](/ticdc/ticdc-canal-json.md#tidb-extension-field)を追加します。v6.1.0 以降では、このパラメータは`avro`プロトコルにも適用されます。値が`true`であれば、TiCDC は Kafka メッセージに[3つのTiDB拡張フィールド](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields)追加します。                         |
 | `max-batch-size`                     | v4.0.9 の新機能。メッセージプロトコルが 1 つの Kafka メッセージに複数のデータ変更を出力することをサポートしている場合、このパラメータは 1 つの Kafka メッセージに含まれるデータ変更の最大数を指定します。現在、このパラメータは Kafka の`protocol`が`open-protocol` （オプション、デフォルトは`16` ）の場合にのみ有効です。                                                                                                                                                                                              |
 | `enable-tls`                         | ダウンストリーム Kafka インスタンスに接続するために TLS を使用するかどうか (オプション、デフォルトは`false` )。                                                                                                                                                                                                                                                                                                                         |
 | `ca`                                 | ダウンストリーム Kafka インスタンスに接続するために必要な CA 証明書ファイルのパス (オプション)。                                                                                                                                                                                                                                                                                                                                     |
@@ -102,7 +102,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 | `sasl-gssapi-disable-pafxfast`       | gssapi PA-FX-FAST を無効にするかどうか (オプション)。                                                                                                                                                                                                                                                                                                                                                       |
 | `dial-timeout`                       | 下流のKafkaとの接続を確立する際のタイムアウト。デフォルト値は`10s`です。                                                                                                                                                                                                                                                                                                                                                   |
 | `read-timeout`                       | 下流のKafkaから返されるレスポンスを取得する際のタイムアウト。デフォルト値は`10s`です。                                                                                                                                                                                                                                                                                                                                            |
-| `write-timeout`                      | 下流のKafkaへのリクエスト送信のタイムアウト。デフォルト値は`10s`です。                                                                                                                                                                                                                                                                                                                                                    |
+| `write-timeout`                      | 下流のKafkaにリクエストを送信する際のタイムアウト。デフォルト値は`10s`です。                                                                                                                                                                                                                                                                                                                                                 |
 | `avro-decimal-handling-mode`         | `avro`プロトコルでのみ有効です。Avro が DECIMAL フィールドを処理する方法を指定します。値は`string`または`precise`で、DECIMAL フィールドを文字列または正確な浮動小数点数にマッピングすることを示します。                                                                                                                                                                                                                                                                  |
 | `avro-bigint-unsigned-handling-mode` | `avro`プロトコルでのみ有効です。Avro が BIGINT UNSIGNED フィールドを処理する方法を指定します。値は`string`または`long`で、BIGINT UNSIGNED フィールドを 64 ビットの符号付き数値または文字列にマッピングすることを示します。                                                                                                                                                                                                                                                |
 
@@ -277,7 +277,7 @@ Topic 式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
 
 ### パーティションディスパッチャ {#partition-dispatchers}
 
-`partition = "xxx"`パーティションディスパッチャを指定するために使用できます。5つのディスパッチャ（ `default` 、 `index-value` 、 `columns` 、 `table` 、 `ts`をサポートします。ディスパッチャのルールは次のとおりです。
+`partition = "xxx"` `index-value`ディスパッチャ`columns`指定するために使用できます。3、5、7、9、11 `default` 5つ`ts`ディスパッチャをサポートします。ディスパッチャのルールは以下のとおり`table` 。
 
 -   `default` : デフォルトで`table`ディスパッチャルールを使用します。スキーマ名とテーブル名に基づいてパーティション番号を計算し、テーブルからのデータが必ず同じパーティションに送信されるようにします。その結果、1つのテーブルからのデータは1つのパーティションにのみ存在し、順序付けが保証されます。ただし、このディスパッチャルールは送信スループットを制限し、コンシューマーを追加しても消費速度を向上させることはできません。
 -   `index-value` : 主キー、一意のインデックス、または`index`で明示的に指定されたインデックスのいずれかを使用してパーティション番号を計算し、テーブルデータを複数のパーティションに分散します。単一のテーブルのデータは複数のパーティションに送信され、各パーティションのデータは順序付けされます。コンシューマーを追加することで、消費速度を向上させることができます。このディスパッチャは、同じ行への更新が同じパーティションに送信されるようにすることで、その行の順序付けされた処理を保証します。
@@ -349,7 +349,7 @@ column-selectors = [
 
 この機能は、単一の大規模テーブルのデータレプリケーション範囲を、データ量と1分あたりの変更行数に応じて複数の範囲に分割し、各範囲でレプリケーションされるデータ量と変更行数をほぼ同じにします。この機能は、これらの範囲を複数のTiCDCノードに分散してレプリケーションすることで、複数のTiCDCノードが同時に単一の大規模テーブルをレプリケーションできるようにします。この機能により、以下の2つの問題を解決できます。
 
--   単一の TiCDC ノードでは、大きな単一のテーブルを時間内に複製することはできません。
+-   単一の TiCDC ノードでは、単一の大きなテーブルを時間内に複製することはできません。
 -   TiCDC ノードによって消費されるリソース (CPU やメモリなど) は均等に分散されません。
 
 > **警告：**
@@ -362,8 +362,9 @@ column-selectors = [
 [scheduler]
 # The default value is "false". You can set it to "true" to enable this feature.
 enable-table-across-nodes = true
-# When you enable this feature, it only takes effect for tables with the number of regions greater than the `region-threshold` value.
-region-threshold = 100000
+# When you enable this feature, it only takes effect for tables with the number of regions greater than the `region-threshold` value. For the TiCDC new architecture, the default value is `10000`; for the TiCDC classic architecture, the default value is `100000`.
+
+region-threshold = 10000
 # When you enable this feature, it takes effect for tables with the number of rows modified per minute greater than the `write-key-threshold` value.
 # Note:
 # * The default value of `write-key-threshold` is 0, which means that the feature does not split the table replication range according to the number of rows modified in a table by default.

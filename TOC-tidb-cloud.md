@@ -44,8 +44,6 @@
         -   [MySQLワークベンチ](/develop/dev-guide-gui-mysql-workbench.md)
         -   [ナビキャット](/develop/dev-guide-gui-navicat.md)
     -   [DriverまたはORMを選択](/develop/dev-guide-choose-driver-or-orm.md)
-    -   BI
-        -   [ルッカースタジオ](/tidb-cloud/dev-guide-bi-looker-studio.md)
     -   Java
         -   [JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
         -   [マイバティス](/develop/dev-guide-sample-application-java-mybatis.md)
@@ -151,7 +149,7 @@
         -   [FastScanを使用する](/tiflash/use-fastscan.md)
         -   [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
         -   [TiFlashクエリ結果のマテリアライゼーション](/tiflash/tiflash-results-materialization.md)
-        -   [TiFlash遅延マテリアライゼーション](/tiflash/tiflash-late-materialization.md)
+        -   [TiFlash遅延実体化](/tiflash/tiflash-late-materialization.md)
         -   [互換性](/tiflash/tiflash-compatibility.md)
         -   [パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)
     -   監視と警告
@@ -325,7 +323,7 @@
         -   [アイデンティティアクセス管理](/tidb-cloud/manage-user-access.md)
         -   [OAuth 2.0](/tidb-cloud/oauth2.md)
     -   ネットワークアクセス制御
-        -   [IPアクセスリストを構成する](/tidb-cloud/configure-ip-access-list.md)
+        -   [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)
         -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md)
         -   [Azure のプライベート エンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
         -   [プライベートエンドポイント経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
@@ -696,14 +694,15 @@
         -   [MSP（非推奨）](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
     -   [v1ベータ](https://docs.pingcap.com/tidbcloud/api/v1beta)
 -   一般的な参考資料
-    -   TiDBクラスタアーキテクチャ
+    -   TiDB クラシックアーキテクチャ
         -   [概要](/tidb-architecture.md)
         -   [ストレージ](/tidb-storage.md)
         -   [コンピューティング](/tidb-computing.md)
         -   [スケジュール](/tidb-scheduling.md)
         -   [TSO](/tso.md)
+    -   [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)
     -   ストレージエンジン
-        -   TiKV
+        -   ティクブ
             -   [TiKVの概要](/tikv-overview.md)
             -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
         -   TiFlash

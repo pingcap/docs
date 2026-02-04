@@ -16,12 +16,12 @@ cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://ro
 ```shell
 Create changefeed successfully!
 ID: simple-replication-task
-Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2025-08-14T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v8.5.3"}
+Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2025-11-27T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v8.5.4"}
 ```
 
 -   `--changefeed-id` : レプリケーションタスクのID。形式は正規表現`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`に一致する必要があります。このIDが指定されていない場合、TiCDCは自動的にUUID（バージョン4形式）をIDとして生成します。
 
--   `--sink-uri` : レプリケーションタスクのダウンストリームアドレス`--sink-uri`以下の形式で設定してください。現在、このスキームは`mysql` 、 `tidb` 、 `kafka`をサポートしています。
+-   `--sink-uri` : レプリケーションタスクのダウンストリームアドレス`--sink-uri`以下の形式で設定してください。現在、このスキームは`mysql` 、 `tidb` 、 `kafka`サポートしています。
 
         [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
 
@@ -110,7 +110,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 #### <code>rules</code> {#code-rules-code}
 
--   フィルタルールを指定します。詳細については、 [構文](/table-filter.md#syntax)参照してください。
+-   フィルタルールを指定します。詳細については、 [構文](/table-filter.md#syntax)を参照してください。
 
 <!-- Example: `['*.*', '!test.*']` -->
 
@@ -120,32 +120,32 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 ##### <code>matcher</code> {#code-matcher-code}
 
--   `matcher`許可リストです。2 `matcher = ["test.worker"]`このルールが`test`データベース内の`worker`テーブルにのみ適用されることを意味します。
+-   `matcher`は許可リストです。2 `matcher = ["test.worker"]` 、このルールが`test`データベース内の`worker`テーブルにのみ適用されることを意味します。
 
 ##### <code>ignore-event</code> {#code-ignore-event-code}
 
--   `ignore-event = ["insert"]` `INSERT`イベントを無視します。
--   `ignore-event = ["drop table", "delete"]` 、 `DROP TABLE` DDL イベントと`DELETE` DML イベントを無視します。TiDB でクラスター化インデックス列の値が更新されると、TiCDC は`UPDATE`イベントを`DELETE`つと`INSERT`イベントに分割することに注意してください。TiCDC はこれらのイベントを`UPDATE`イベントとして識別できないため、正しくフィルタリングできません。
+-   `ignore-event = ["insert"]`は`INSERT`イベントを無視します。
+-   `ignore-event = ["drop table", "delete"]` 、 `DROP TABLE` DDL イベントと`DELETE` DML イベントを無視します。TiDB でクラスター化インデックス列の値が更新されると、TiCDC は`UPDATE`イベントを`DELETE` `INSERT`イベントに分割することに注意してください。TiCDC はこれらのイベントを`UPDATE`イベントとして識別できないため、正しくフィルタリングできません。
 
 ##### <code>ignore-sql</code> {#code-ignore-sql-code}
 
--   `ignore-sql = ["^drop", "add column"]` `DROP`で始まるか`ADD COLUMN`含む DDL を無視します。
+-   `ignore-sql = ["^drop", "add column"]` `DROP`で始まるか`ADD COLUMN`を含む DDL を無視します。
 
 ##### <code>ignore-delete-value-expr</code> {#code-ignore-delete-value-expr-code}
 
--   `ignore-delete-value-expr = "name = 'john'"`条件`name = 'john'`含む`DELETE` DML を無視します。
+-   `ignore-delete-value-expr = "name = 'john'"`条件`name = 'john'`を含む`DELETE` DML を無視します。
 
 ##### <code>ignore-insert-value-expr</code> {#code-ignore-insert-value-expr-code}
 
--   `ignore-insert-value-expr = "id >= 100"`条件`id >= 100`含む`INSERT` DMLを無視します
+-   `ignore-insert-value-expr = "id >= 100"`条件`id >= 100`を含む`INSERT` DMLを無視します
 
 ##### <code>ignore-update-old-value-expr</code> {#code-ignore-update-old-value-expr-code}
 
--   `ignore-update-old-value-expr = "age < 18"`古い値に`age < 18`含まれる`UPDATE` DMLを無視します。
+-   `ignore-update-old-value-expr = "age < 18"`古い値に`age < 18`が含まれる`UPDATE` DMLを無視します。
 
 ##### <code>ignore-update-new-value-expr</code> {#code-ignore-update-new-value-expr-code}
 
--   `ignore-update-new-value-expr = "gender = 'male'"`新しい値に`gender = 'male'`含まれる`UPDATE` DMLを無視します。
+-   `ignore-update-new-value-expr = "gender = 'male'"`新しい値に`gender = 'male'`が含まれる`UPDATE` DMLを無視します。
 
 ### スケジューラ {#scheduler}
 
@@ -153,11 +153,13 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 -   リージョンごとにレプリケーションを行うために、テーブルを複数の TiCDC ノードに割り当てます。
 
--   この構成項目は Kafka 変更フィードにのみ影響し、MySQL 変更フィードではサポートされません。
+-   [TiCDC クラシックアーキテクチャ](/ticdc/ticdc-classic-architecture.md)では、この構成項目は Kafka 変更フィードにのみ影響し、MySQL 変更フィードではサポートされません。
 
--   `enable-table-across-nodes`が有効な場合、割り当てモードは 2 つあります。
+-   [TiCDCの新しいアーキテクチャ](/ticdc/ticdc-architecture.md)では、この設定項目はあらゆる種類の下流変更フィードで機能します。詳細については、 [新機能](/ticdc/ticdc-architecture.md#new-features)参照してください。
 
-    1.  リージョン数に基づいてテーブルを割り当てます。これにより、各TiCDCノードはほぼ同数のリージョンを処理します。テーブルのリージョン数が[`region-threshold`](#region-threshold)を超える場合、テーブルはレプリケーションのために複数のノードに割り当てられます。デフォルト値は`region-threshold`ですが、現在は`100000`です。
+-   `enable-table-across-nodes`有効な場合、割り当てモードは 2 つあります。
+
+    1.  リージョン数に基づいてテーブルを割り当て、各TiCDCノードがほぼ同数のリージョンを処理するようにします。テーブルのリージョン数が[`region-threshold`](#region-threshold)を超える場合、テーブルはレプリケーションのために複数のノードに割り当てられます。
     2.  書き込みトラフィックに基づいてテーブルを割り当て、各TiCDCノードがほぼ同数の変更行を処理できるようにします。この割り当ては、テーブル内の1分あたりの変更行数が[`write-key-threshold`](#write-key-threshold)を超えた場合にのみ有効になります。
 
     2つのモードのうち1つだけを設定する必要があります。1と`region-threshold` `write-key-threshold`両方が設定されている場合、TiCDCはトラフィック割り当てモード（つまり`write-key-threshold`を優先します。
@@ -168,7 +170,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 #### <code>region-threshold</code> {#code-region-threshold-code}
 
--   デフォルト値: `100000`
+-   デフォルト値: [TiCDCの新しいアーキテクチャ](/ticdc/ticdc-architecture.md)の場合、デフォルト値は`10000` 、 [TiCDC クラシックアーキテクチャ](/ticdc/ticdc-classic-architecture.md)の場合、デフォルト値は`100000`です。
 
 #### <code>write-key-threshold</code> {#code-write-key-threshold-code}
 
@@ -184,7 +186,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 -   v6.1.0 以降、TiDB はパーティションとトピックの 2 種類のイベント ディスパッチャーをサポートしています。
 -   マッチャーの一致構文は、フィルター ルール構文と同じです。
 -   この構成項目は、ダウンストリームが MQ の場合にのみ有効になります。
--   下流のMQがPulsarの場合、 `partition`のルーティングルール`index-value` `ts` `default`いずれにも指定されていない場合、各Pulsarメッセージはキーとして設定した文字列を使用してルーティングされます。例えば、あるマッチャーのルーティングルールを文字列`code`に`table`すると、そのマッチャーに一致するすべてのPulsarメッセージは`code`をキーとしてルーティングされます。
+-   下流のMQがPulsarの場合、 `partition`のルーティングルール`index-value` `ts`いずれにも指定されていない場合、各Pulsarメッセージはキーとして設定した文字列を使用してルーティングされます。例えば、あるマッチャーのルーティングルール`code` `default`指定すると、そのマッチャー`table`一致するすべてのPulsarメッセージは`code`をキーとしてルーティングされます。
 
 #### <code>column-selectors</code> <span class="version-mark">v7.5.0 の新機能</span> {#code-column-selectors-code-span-class-version-mark-new-in-v7-5-0-span}
 
@@ -251,7 +253,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 -   ファイルディレクトリで使用する日付区切り文字の種類を指定します。詳細については、 [データ変更記録](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records)参照してください。
 -   この構成項目は、ダウンストリームがstorageサービスの場合にのみ有効になります。
 -   デフォルト値: `day` 、これはファイルを日ごとに分けることを意味します
--   `month` `year` `day` : `none`
+-   `day` `year` `month` : `none`
 
 #### <code>enable-partition-separator</code> {#code-enable-partition-separator-code}
 
@@ -305,7 +307,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 -   行データが変更される前に値を出力するかどうかを制御します。デフォルト値は false です。
 -   有効にすると ( `true`に設定)、 `UPDATE`イベントは 2 行のデータを出力します。最初の行は変更前のデータを出力する`DELETE`イベントで、2 番目の行は変更されたデータを出力する`INSERT`イベントです。
--   有効にすると、データ変更のある列の前に列`"is-update"`が追加されます。この追加された列は、現在の行のデータ変更が`UPDATE`番目のイベントによるものか、それとも元の`INSERT`または`DELETE`番目のイベントによるものかを識別するために使用されます。現在の行のデータ変更が`UPDATE`番目のイベントによるものかを判断するために、列`"is-update"`の値は`true`になります。それ以外の場合は、列`false`になります。
+-   有効にすると、データ変更のある列の前に列`"is-update"`が追加されます。この追加された列は、現在の行のデータ変更が`UPDATE`番目のイベントによるものか、それとも元の`INSERT`または`DELETE`番目のイベントによるものかを識別するために使用されます。現在の行のデータ変更が`UPDATE`番目のイベントによるものかを判断するために、列`"is-update"`の値は`true`なります。それ以外の場合は、列`false`になります。
 -   デフォルト値: `false`
 
 TiCDCはv8.0.0以降、シンプルメッセージエンコーディングプロトコルをサポートしています。シンプルプロトコルの設定パラメータは以下のとおりです。プロトコルの詳細については、 [TiCDCシンプルプロトコル](/ticdc/ticdc-simple-protocol.md)参照してください。
@@ -334,7 +336,7 @@ TiCDCはv8.0.0以降、シンプルメッセージエンコーディングプロ
 
 ##### <code>encoding-format</code> {#code-encoding-format-code}
 
--   シンプルプロトコルメッセージのエンコード形式を制御します。現在、シンプルプロトコルメッセージはエンコード形式`json`と`avro`サポートしています。
+-   シンプルプロトコルメッセージのエンコード形式を制御します。現在、シンプルプロトコルメッセージはエンコード形式`json`と`avro`をサポートしています。
 -   デフォルト値: `json`
 -   値`avro`オプション: `json`
 
@@ -360,7 +362,7 @@ REDOログを使用する場合の変更フィードのレプリケーション�
 
 #### <code>level</code> {#code-level-code}
 
--   データ整合性レベル`"none"`は、REDO ログが無効であることを意味します。
+-   データ整合性レベル。1 `"none"` 、REDO ログが無効であることを意味します。
 -   デフォルト値: `"none"`
 -   値`"eventual"`オプション: `"none"`
 
@@ -523,22 +525,22 @@ token="xxxx"
 #### <code>oauth2.oauth2-audience</code> {#code-oauth2-oauth2-audience-code}
 
 -   Pulsar oauth2 オーディエンス。
--   詳細については、 [パルサーのウェブサイト](https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication)参照してください。
+-   詳細については、 [パルサーのウェブサイト](https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication)を参照してください。
 
 #### <code>oauth2.oauth2-private-key</code> {#code-oauth2-oauth2-private-key-code}
 
 -   Pulsar oauth2 秘密鍵。
--   詳細については、 [パルサーのウェブサイト](https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication)参照してください。
+-   詳細については、 [パルサーのウェブサイト](https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication)を参照してください。
 
 #### <code>oauth2.oauth2-client-id</code> {#code-oauth2-oauth2-client-id-code}
 
 -   Pulsar oauth2 クライアントID
--   詳細については、 [パルサーのウェブサイト](https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication)参照してください。
+-   詳細については、 [パルサーのウェブサイト](https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication)を参照してください。
 
 #### <code>oauth2.oauth2-scope</code> {#code-oauth2-oauth2-scope-code}
 
 -   Pulsar oauth2 oauth2 スコープ。
--   詳細については、 [パルサーのウェブサイト](https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication)参照してください。
+-   詳細については、 [パルサーのウェブサイト](https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication)を参照してください。
 
 #### <code>pulsar-producer-cache-size</code> {#code-pulsar-producer-cache-size-code}
 
@@ -600,7 +602,7 @@ token="xxxx"
 
 #### <code>file-expiration-days</code> {#code-file-expiration-days-code}
 
--   ファイルを保持する期間`date-separator`が`day`に設定されている場合にのみ有効になります。
+-   ファイルを保持する期間。1 `date-separator` `day`に設定されている場合にのみ有効になります。
 -   デフォルト値: `0` 、ファイルのクリーンアップが無効であることを意味します
 -   `file-expiration-days = 1`と`file-cleanup-cron-spec = "0 0 0 * * *"`仮定すると、TiCDCは24時間を超えて保存されたファイルに対して毎日00:00:00にクリーンアップを実行します。例えば、2023年12月2日の00:00:00に、TiCDCは2023年12月1日より前に生成されたファイルをクリーンアップしますが、2023年12月1日に生成されたファイルは影響を受けません。
 

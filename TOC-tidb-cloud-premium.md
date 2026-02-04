@@ -41,8 +41,6 @@
         -   [MySQLワークベンチ](/develop/dev-guide-gui-mysql-workbench.md)
         -   [ナビキャット](/develop/dev-guide-gui-navicat.md)
     -   [DriverまたはORMを選択](/develop/dev-guide-choose-driver-or-orm.md)
-    -   BI
-        -   [ルッカースタジオ](/tidb-cloud/dev-guide-bi-looker-studio.md)
     -   Java
         -   [JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
         -   [マイバティス](/develop/dev-guide-sample-application-java-mybatis.md)
@@ -59,7 +57,7 @@
         -   [SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md)
         -   [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md)
         -   [ジャンゴ](/develop/dev-guide-sample-application-python-django.md)
-    -   Node.js
+    -   ノード.js
         -   [ノード-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
         -   [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
         -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
@@ -137,7 +135,7 @@
             -   [接続の概要](/tidb-cloud/premium/connect-to-tidb-instance.md)
             -   [パブリックエンドポイント経由で接続](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)
             -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
-            -   [Alibaba Cloud のプライベートエンドポイント経由で接続する](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
+            -   [プライベートエンドポイント経由でAlibaba Cloudに接続する](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
         -   [TiDB Cloudデータのバックアップと復元](/tidb-cloud/premium/backup-and-restore-premium.md)
     -   TiFlashでHTAPクラスタを使用する
         -   [TiFlashの概要](/tiflash/tiflash-overview.md)
@@ -238,9 +236,9 @@
         -   [アイデンティティアクセス管理](/tidb-cloud/premium/manage-user-access-premium.md)
         -   [OAuth 2.0](/tidb-cloud/oauth2.md)
     -   ネットワークアクセス制御
-        -   [IPアクセスリストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md)
+        -   [IPアクセスリストを構成する](/tidb-cloud/premium/configure-ip-access-list-premium.md)
         -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
-        -   [プライベートエンドポイント経由でAlibaba Cloudに接続する](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
+        -   [Alibaba Cloud のプライベートエンドポイント経由で接続する](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
         -   [パブリックエンドポイントのファイアウォールルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
         -   [TiDB CloudへのTLS接続](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md)
     -   データアクセス制御
@@ -551,7 +549,7 @@
     -   認証
         -   [ログイン](/tidb-cloud/ticloud-auth-login.md)
         -   [ログアウト](/tidb-cloud/ticloud-auth-logout.md)
-        -   [だれだ](/tidb-cloud/ticloud-auth-whoami.md)
+        -   [誰だ](/tidb-cloud/ticloud-auth-whoami.md)
     -   サーバーレス
         -   [容量](/tidb-cloud/ticloud-serverless-capacity.md)
         -   [作成する](/tidb-cloud/ticloud-cluster-create.md)
@@ -603,14 +601,15 @@
     -   [アップグレード](/tidb-cloud/ticloud-upgrade.md)
     -   [ヘルプ](/tidb-cloud/ticloud-help.md)
 -   一般的な参考資料
-    -   TiDBクラスタアーキテクチャ
+    -   TiDB クラシックアーキテクチャ
         -   [概要](/tidb-architecture.md)
         -   [ストレージ](/tidb-storage.md)
         -   [コンピューティング](/tidb-computing.md)
         -   [スケジュール](/tidb-scheduling.md)
         -   [TSO](/tso.md)
+    -   [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)
     -   ストレージエンジン
-        -   ティクブ
+        -   TiKV
             -   [TiKVの概要](/tikv-overview.md)
             -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
         -   TiFlash

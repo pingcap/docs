@@ -42,8 +42,6 @@
         -   [MySQLワークベンチ](/develop/dev-guide-gui-mysql-workbench.md)
         -   [ナビキャット](/develop/dev-guide-gui-navicat.md)
     -   [DriverまたはORMを選択](/develop/dev-guide-choose-driver-or-orm.md)
-    -   BI
-        -   [ルッカースタジオ](/tidb-cloud/dev-guide-bi-looker-studio.md)
     -   Java
         -   [JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
         -   [マイバティス](/develop/dev-guide-sample-application-java-mybatis.md)
@@ -60,7 +58,7 @@
         -   [SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md)
         -   [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md)
         -   [ジャンゴ](/develop/dev-guide-sample-application-python-django.md)
-    -   Node.js
+    -   ノード.js
         -   [ノード-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
         -   [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
         -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
@@ -656,12 +654,13 @@
     -   [アップグレード](/tidb-cloud/ticloud-upgrade.md)
     -   [ヘルプ](/tidb-cloud/ticloud-help.md)
 -   一般的な参考資料
-    -   TiDBクラスタアーキテクチャ
+    -   TiDB クラシックアーキテクチャ
         -   [概要](/tidb-architecture.md)
         -   [ストレージ](/tidb-storage.md)
         -   [コンピューティング](/tidb-computing.md)
         -   [スケジュール](/tidb-scheduling.md)
         -   [TSO](/tso.md)
+    -   [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)
     -   ストレージエンジン
         -   TiKV
             -   [TiKVの概要](/tikv-overview.md)

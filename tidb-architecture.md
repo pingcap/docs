@@ -5,6 +5,12 @@ summary: TiDBプラットフォームの主要なアーキテクチャコンポ�
 
 # TiDBアーキテクチャ {#tidb-architecture}
 
+<CustomContent platform="tidb-cloud">
+
+TiDB には、クラシック TiDBアーキテクチャと[TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)という 2 つのアーキテクチャがあります。このドキュメントでは、クラシック TiDBアーキテクチャについて説明します。
+
+</CustomContent>
+
 従来のスタンドアロン データベースと比較して、TiDB には次の利点があります。
 
 -   柔軟で弾力的なスケーラビリティを備えた分散アーキテクチャを備えています。
@@ -24,17 +30,17 @@ summary: TiDBプラットフォームの主要なアーキテクチャコンポ�
 
 ## TiDBサーバー {#tidb-server}
 
-[TiDBサーバー](/tidb-computing.md)ステートレスSQLレイヤーであり、MySQLプロトコルの接続エンドポイントを外部に公開します。TiDBサーバーはSQLリクエストを受け取り、SQL解析と最適化を実行し、最終的に分散実行プランを生成します。水平スケーラブルで、TiProxy、Linux Virtual Server（LVS）、HAProxy、ProxySQL、F5などの負荷分散コンポーネントを介して外部に統一されたインターフェースを提供します。TiDBサーバーはデータを保存せず、コンピューティングとSQL分析のみを行い、実際のデータ読み取りリクエストをTiKVノード（またはTiFlashノード）に送信します。
+[TiDBサーバー](/tidb-computing.md)はステートレスSQLレイヤーであり、MySQLプロトコルの接続エンドポイントを外部に公開します。TiDBサーバーはSQLリクエストを受け取り、SQL解析と最適化を実行し、最終的に分散実行プランを生成します。水平スケーラブルで、TiProxy、Linux Virtual Server（LVS）、HAProxy、ProxySQL、F5などの負荷分散コンポーネントを介して外部に統一されたインターフェースを提供します。データの保存は行わず、コンピューティングとSQL分析のみを行い、実際のデータ読み取りリクエストをTiKVノード（またはTiFlashノード）に送信します。
 
 ## 配置Driver（PD）サーバー {#placement-driver-pd-server}
 
-[PDサーバー](/tidb-scheduling.md)クラスタ全体のメタデータ管理コンポーネントです。各TiKVノードのリアルタイムデータ分布とTiDBクラスタ全体のトポロジ構造に関するメタデータを保存し、TiDBダッシュボード管理UIを提供し、分散トランザクションにトランザクションIDを割り当てます。PDサーバーは、クラスタのメタデータを保存するだけでなく、TiKVノードからリアルタイムに報告されるデータ分布状態に基づいて、特定のTiKVノードにデータスケジューリングコマンドを送信するため、TiDBクラスタ全体の「頭脳」と言えます。また、PDサーバーは少なくとも3ノードで構成され、高い可用性を備えています。奇数個のPDノードを配置することをお勧めします。
+[PDサーバー](/tidb-scheduling.md)はクラスタ全体のメタデータ管理コンポーネントです。各TiKVノードのリアルタイムデータ分布とTiDBクラスタ全体のトポロジ構造に関するメタデータを保存し、TiDBダッシュボード管理UIを提供し、分散トランザクションにトランザクションIDを割り当てます。PDサーバーは、クラスタのメタデータを保存するだけでなく、TiKVノードからリアルタイムに報告されるデータ分布状態に基づいて、特定のTiKVノードにデータスケジューリングコマンドを送信するため、TiDBクラスタ全体の「頭脳」と言えます。また、PDサーバーは少なくとも3ノードで構成され、高い可用性を備えています。奇数個のPDノードを配置することをお勧めします。
 
 ## ストレージサーバー {#storage-servers}
 
 ### TiKVサーバー {#tikv-server}
 
-[TiKVサーバー](/tidb-storage.md)データの保存を担当します。TiKVは分散トランザクションのキーバリューstorageエンジンです。
+[TiKVサーバー](/tidb-storage.md)はデータの保存を担当します。TiKVは分散トランザクションキーバリューstorageエンジンです。
 
 <CustomContent platform="tidb">
 
@@ -52,4 +58,4 @@ summary: TiDBプラットフォームの主要なアーキテクチャコンポ�
 
 ### TiFlashサーバー {#tiflash-server}
 
-[TiFlashサーバー](/tiflash/tiflash-overview.md)特殊なタイプのstorageサーバーです。通常のTiKVノードとは異なり、 TiFlashはデータを列単位で保存し、主に分析処理の高速化を目的として設計されています。
+[TiFlashサーバー](/tiflash/tiflash-overview.md)は特殊なタイプのstorageサーバーです。通常のTiKVノードとは異なり、 TiFlashはデータを列単位で保存し、主に分析処理の高速化を目的として設計されています。
