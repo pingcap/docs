@@ -34,6 +34,38 @@ It is a common practice that the connection pool size is well adjusted according
 
 The application needs to return the connection after finishing using it. It is recommended that the application uses the corresponding connection pool monitoring (such as **metricRegistry**) to locate connection pool issues in time.
 
+### Configure the lifetime of connections
+
+When a TiDB server shuts down, restarts for maintenance, or encounters unexpected issues such as hardware or network failures, your existing client connections might be reset, which can lead to application disruptions. To avoid such issues, it is recommended to close and recreate long-running database connections at least once a day.
+
+Most connection pool libraries provide a parameter to control the maximum lifetime of a connection:
+
+<SimpleTab>
+<div label="HikariCP">
+
+- **`maxLifetime`**: The maximum lifetime of a connection in the pool.
+
+</div>
+
+<div label="tomcat-jdbc">
+
+- **`maxAge`**: The maximum lifetime of a connection in the pool.
+
+</div>
+
+<div label="c3p0">
+
+- **`maxConnectionAge`**: The maximum lifetime of a connection in the pool.
+
+</div>
+
+<div label="dbcp">
+
+- **`maxConnLifetimeMillis`**: The maximum lifetime of a connection in the pool.
+
+</div>
+</SimpleTab>
+
 ### Probe configuration
 
 The connection pool maintains persistent connections from clients to TiDB as follows:
@@ -275,7 +307,7 @@ After it is configured, you can check the monitoring to see a decreased number o
 
 #### Timeout-related parameters
 
-TiDB provides two MySQL-compatible parameters to control the timeout: [`wait_timeout`](/system-variables.md#wait_timeout) and [`max_execution_time`](/system-variables.md#max_execution_time). These two parameters respectively control the connection idle timeout with the Java application and the timeout of the SQL execution in the connection; that is to say, these parameters control the longest idle time and the longest busy time for the connection between TiDB and the Java application. Since TiDB v5.4, the default value of `wait_timeout` is `28800` seconds, which is 8 hours. For TiDB versions earlier than v5.4, the default value is `0`, which means the timeout is unlimited. The default value of `max_execution_time` is `0`, which means the maximum execution time of a SQL statement is unlimited.
+TiDB provides two MySQL-compatible parameters to control the timeout: [`wait_timeout`](/system-variables.md#wait_timeout) and [`max_execution_time`](/system-variables.md#max_execution_time). These two parameters respectively control the connection idle timeout with the Java application and the timeout of the SQL execution in the connection; that is to say, these parameters control the longest idle time and the longest busy time for the connection between TiDB and the Java application. Since TiDB v5.4, the default value of `wait_timeout` is `28800` seconds, which is 8 hours. For TiDB versions earlier than v5.4, the default value is `0`, which means the timeout is unlimited. The default value of `max_execution_time` is `0`, which means the maximum execution time of a SQL statement is unlimited, and it applies to all `SELECT` statements (including `SELECT ... FOR UPDATE`).
 
 The default value of [`wait_timeout`](/system-variables.md#wait_timeout) is relatively large. In scenarios where a transaction starts but is neither committed nor rolled back, you might need a finer-grained control and a shorter timeout to prevent prolonged lock holding. In this case, you can use [`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) (introduced in TiDB v7.6.0) to control the idle timeout for transactions in a user session.
 

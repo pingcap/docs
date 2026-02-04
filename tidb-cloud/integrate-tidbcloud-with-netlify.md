@@ -230,19 +230,19 @@ The example app mentioned in the section above runs on the Netlify serverless fu
 
 To use the edge function, take the following steps:
 
-1. Create a directory named `netlify/edge-functions` in the root directory of your project. 
+1. Create a directory named `netlify/edge-functions` in the root directory of your project.
 
 2. Create a file named `hello.ts` in the directory and add the following code:
 
     ```typescript
     import { connect } from 'https://esm.sh/@tidbcloud/serverless'
-    
+
     export default async () => {
       const conn = connect({url: Netlify.env.get('DATABASE_URL')})
       const result = await conn.execute('show databases')
       return new Response(JSON.stringify(result));
     }
-   
+
     export const config = { path: "/api/hello" };
     ```
 

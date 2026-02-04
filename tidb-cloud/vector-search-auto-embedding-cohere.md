@@ -9,11 +9,7 @@ This document describes how to use Cohere embedding models with [Auto Embedding]
 
 > **Note:**
 >
-> Currently, [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} clusters in the following AWS regions:
->
-> - `Frankfurt (eu-central-1)`
-> - `Oregon (us-west-2)`
-> - `N. Virginia (us-east-1)`
+> [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} clusters hosted on AWS.
 
 ## Available models
 
@@ -76,7 +72,6 @@ CREATE TABLE sample (
 > **Note:**
 >
 > - For the Cohere embedding model, you must specify `input_type` in the `EMBED_TEXT()` function when defining the table. For example, `'{"input_type": "search_document", "input_type@search": "search_query"}'` means that `input_type` is set to `search_document` for data insertion and `search_query` is automatically applied during vector searches.
->
 > - The `@search` suffix indicates that the field takes effect only during vector search queries, so you do not need to specify `input_type` again when writing a query.
 
 Insert and query data:
@@ -117,6 +112,7 @@ Result:
 Both the **Embed v3** and **Multilingual Embed v3** models support the following options, which you can specify via the `additional_json_options` parameter of the `EMBED_TEXT()` function.
 
 - `input_type` (required): prepends special tokens to indicate the purpose of the embedding. You must use the same input type consistently when generating embeddings for the same task, otherwise embeddings will be mapped to different semantic spaces and become incompatible. The only exception is semantic search, where documents are embedded with `search_document` and queries are embedded with `search_query`.
+
     - `search_document`: generates embeddings from documents to store in a vector database.
     - `search_query`: generates embeddings from queries to search against stored embeddings in a vector database.
     - `classification`: generates embeddings to be used as input for a text classifier.

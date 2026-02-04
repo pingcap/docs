@@ -10,7 +10,7 @@ The cluster plan determines the throughput and performance of your cluster.
 
 TiDB Cloud provides the following options of cluster plans. Whether you are just getting started or scaling to meet the increasing application demands, these service plans provide the flexibility and capability you need. Before creating a cluster, you need to consider which option suits your need better.
 
-- [TiDB Cloud Serverless](#tidb-cloud-serverless) (now Starter)
+- [TiDB Cloud Starter](#starter)
 - [{{{ .essential }}}](#essential)
 - [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
 
@@ -18,15 +18,15 @@ TiDB Cloud provides the following options of cluster plans. Whether you are just
 >
 > Some of TiDB Cloud features are partially supported or not supported on {{{ .starter }}} and {{{ .essential }}}. See [{{{ .starter }}} and Essential Limitations](/tidb-cloud/serverless-limitations.md) for details.
 
-## TiDB Cloud Serverless
+## {{{ .starter }}} {#starter}
 
-TiDB Cloud Serverless (now Starter) is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free quota and consumption based billing once free limits are exceeded.
+TiDB Cloud Starter is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free quota and consumption based billing once free limits are exceeded.
 
 The free cluster plan is ideal for those who are getting started with {{{ .starter }}}. It provides developers and small teams with the following essential features:
 
 - **No cost**: This plan is completely free, with no credit card required to get started.
 - **Storage**: Provides an initial 5 GiB of row-based storage and 5 GiB of columnar storage.
-- **Request Units**: Includes 50 million [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) for database operations.
+- **Request Units**: Includes 50 million [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) for database operations.
 
 ### Usage quota
 

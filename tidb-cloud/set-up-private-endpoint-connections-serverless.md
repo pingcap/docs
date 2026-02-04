@@ -1,11 +1,11 @@
 ---
-title: Connect to {{{ .starter }}} via AWS PrivateLink
+title: Connect to {{{ .starter }}} or Essential via AWS PrivateLink
 summary: Learn how to connect to your TiDB Cloud cluster via private endpoint.
 ---
 
-# Connect to {{{ .starter }}} via AWS PrivateLink
+# Connect to {{{ .starter }}} or Essential via AWS PrivateLink
 
-This document describes how to connect to your {{{ .starter }}} cluster via AWS PrivateLink.
+This document describes how to connect to your {{{ .starter }}} or {{{ .essential }}} cluster via AWS PrivateLink.
 
 > **Tip:**
 >
@@ -28,7 +28,7 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 ## Restrictions
 
-- Currently, TiDB Cloud supports AWS PrivateLink connections to {{{ .starter }}} only when the endpoint service is hosted in AWS. If the service is hosted in other cloud providers, the AWS PrivateLink connection is not applicable.
+- Currently, TiDB Cloud supports AWS PrivateLink connections only when the endpoint service is hosted in AWS. If the service is hosted in other cloud providers, the AWS PrivateLink connection is not applicable.
 - Private endpoint connection across regions is not supported.
 - The private endpoint is shared among all {{{ .starter }}} clusters within the same region.
 
@@ -38,7 +38,7 @@ Make sure that DNS hostnames and DNS resolution are both enabled in your AWS VPC
 
 ## Set up a private endpoint with AWS
 
-To connect to your {{{ .starter }}} cluster via a private endpoint, follow these steps:
+To connect to your {{{ .starter }}} or {{{ .essential }}} cluster via a private endpoint, follow these steps:
 
 1. [Choose a TiDB cluster](#step-1-choose-a-tidb-cluster)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
@@ -46,14 +46,14 @@ To connect to your {{{ .starter }}} cluster via a private endpoint, follow these
 
 ### Step 1. Choose a TiDB cluster
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your target {{{ .starter }}} cluster to go to its overview page.
+1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page, click the name of your target {{{ .starter }}} or {{{ .essential }}} cluster to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. In the **Connection Type** drop-down list, select **Private Endpoint**.
 4. Take a note of **Service Name**, **Availability Zone ID**, and **Region ID**.
 
     > **Note:**
     >
-    > You only need to create one private endpoint per AWS region, which can be shared by all {{{ .starter }}} clusters located in the same region.
+    > You only need to create one private endpoint per AWS region, which can be shared by all {{{ .starter }}} or {{{ .essential }}} clusters located in the same region.
 
 ### Step 2. Create an AWS interface endpoint
 

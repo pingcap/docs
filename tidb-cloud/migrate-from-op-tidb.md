@@ -5,7 +5,7 @@ summary: Learn how to migrate data from TiDB Self-Managed to TiDB Cloud.
 
 # Migrate from TiDB Self-Managed to TiDB Cloud
 
-This document describes how to migrate data from your TiDB Self-Managed clusters to TiDB Cloud (AWS) through Dumpling and TiCDC.
+This document describes how to migrate data from your TiDB Self-Managed clusters to TiDB Cloud (on AWS) through Dumpling and TiCDC.
 
 The overall procedure is as follows:
 
@@ -13,7 +13,7 @@ The overall procedure is as follows:
 2. Migrate full data. The process is as follows:
    1. Export data from TiDB Self-Managed to Amazon S3 using Dumpling.
    2. Import data from Amazon S3 to TiDB Cloud.
-3. Replicate incremental data by using TiCDC.
+3. Replicate incremental data using TiCDC.
 4. Verify the migrated data.
 
 ## Prerequisites
@@ -204,7 +204,7 @@ After you export data from the TiDB Self-Managed cluster to Amazon S3, you need 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), get the Account ID and External ID of your target cluster according to the following documentation:
 
    - For TiDB Cloud Dedicated clusters, see [Configure Amazon S3 access using a Role ARN](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access-using-a-role-arn).
-   - For {{{ .starter }}} or {{{ .essential }}} clusters, see [Configure Amazon S3 access using a Role ARN](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access-using-a-role-arn).
+   - For {{{ .starter }}} or {{{ .essential }}} clusters, see [Configure Amazon S3 access using a Role ARN](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access-using-a-role-arn).
 
 2. Configure access permissions for Amazon S3. Usually you need the following read-only permissions:
 

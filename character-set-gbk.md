@@ -59,13 +59,13 @@ By default, TiDB Cloud enables the [new framework for collations](/character-set
 
 Additionally, because TiDB converts GBK to `utf8mb4` and then uses a binary collation, the `gbk_bin` collation in TiDB is not the same as the `gbk_bin` collation in MySQL.
 
-### Illegal character compatibility
+### Invalid character compatibility
 
-* If the system variables [`character_set_client`](/system-variables.md#character_set_client) and [`character_set_connection`](/system-variables.md#character_set_connection) are not set to `gbk` at the same time, TiDB handles illegal characters in the same way as MySQL.
-* If `character_set_client` and `character_set_connection` are both set to `gbk`, TiDB handles illegal characters differently than MySQL.
+* If the system variables [`character_set_client`](/system-variables.md#character_set_client) and [`character_set_connection`](/system-variables.md#character_set_connection) are not set to `gbk` at the same time, TiDB handles invalid characters in the same way as MySQL.
+* If `character_set_client` and `character_set_connection` are both set to `gbk`, TiDB handles invalid characters differently than MySQL.
 
-    - MySQL handles illegal GBK character sets in reading and writing operations differently.
-    - TiDB handles illegal GBK character sets in reading and writing operations in the same way. In the SQL strict mode, TiDB reports an error when either reading or writing illegal GBK characters. In the non-strict mode, TiDB replaces illegal GBK characters with `?` when either reading or writing illegal GBK characters.
+    - MySQL handles invalid GBK character sets in reading and writing operations differently.
+    - TiDB handles invalid GBK character sets in reading and writing operations in the same way. In the SQL strict mode, TiDB reports an error when either reading or writing invalid GBK characters. In the non-strict mode, TiDB replaces invalid GBK characters with `?` when either reading or writing invalid GBK characters.
 
 For example, after `SET NAMES gbk`, if you create a table using the `CREATE TABLE gbk_table(a VARCHAR(32) CHARACTER SET gbk)` statement in MySQL and TiDB respectively and then execute the SQL statements in the following table, you can see the detailed differences.
 

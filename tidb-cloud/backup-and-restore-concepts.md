@@ -39,5 +39,5 @@ Point-in-time Restore is a feature that enables you to restore data of any point
 If you want to perform Point-in-time Restore, note the following:
 
 - For {{{ .starter }}} clusters, Point-in-time Restore is not available.
-- For {{{ .essential }}} clusters, you can restore to any time within the last 14 days. For more information, see [Restore mode](/tidb-cloud/backup-and-restore-serverless.md#restore-mode).
+- For {{{ .essential }}} clusters, you can restore to any time within the last 30 days. For more information, see [Restore mode](/tidb-cloud/backup-and-restore-serverless.md#restore-mode).
 - For TiDB Cloud Dedicated clusters, you need to [enable PITR](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore) in advance.

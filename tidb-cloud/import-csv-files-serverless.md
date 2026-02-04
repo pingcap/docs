@@ -13,13 +13,13 @@ This document describes how to import CSV files from Amazon Simple Storage Servi
 
 ## Limitations
 
-- To ensure data consistency, TiDB Cloud allows to import CSV files into empty tables only. To import data into an existing table that already contains data, you can import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
+- To ensure data consistency, TiDB Cloud allows importing CSV files into empty tables only. To import data into an existing table that already contains data, you can import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
 
 ## Step 1. Prepare the CSV files
 
-1. If a CSV file is larger than 256 MB, consider splitting it into smaller files, each with a size around 256 MB.
+1. If a CSV file is larger than 256 MiB, consider splitting it into smaller files, each with a size around 256 MiB.
 
-    TiDB Cloud supports importing very large CSV files but performs best with multiple input files around 256 MB in size. This is because TiDB Cloud can process multiple files in parallel, which can greatly improve the import speed.
+    TiDB Cloud supports importing very large CSV files but performs best with multiple input files around 256 MiB in size. This is because TiDB Cloud can process multiple files in parallel, which can greatly improve the import speed.
 
 2. Name the CSV files as follows:
 
@@ -76,15 +76,15 @@ Because CSV files do not contain schema information, before importing data from 
 
 To allow TiDB Cloud to access the CSV files in the Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service bucket, do one of the following:
 
-- If your CSV files are located in Amazon S3, [configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access) for your cluster.
+- If your CSV files are located in Amazon S3, [configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access) for your cluster.
 
     You can use either an AWS access key or a Role ARN to access your bucket. Once finished, make a note of the access key (including the access key ID and secret access key) or the Role ARN value as you will need it in [Step 4](#step-4-import-csv-files).
 
-- If your CSV files are located in GCS, [configure GCS access](/tidb-cloud/serverless-external-storage.md#configure-gcs-access) for your cluster.
+- If your CSV files are located in GCS, [configure GCS access](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access) for your cluster.
 
-- If your CSV files are located in Azure Blob Storage, [configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access) for your cluster.
+- If your CSV files are located in Azure Blob Storage, [configure Azure Blob Storage access](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access) for your cluster.
 
-- If your CSV files are located in Alibaba Cloud Object Storage Service (OSS), [configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access) for your cluster.
+- If your CSV files are located in Alibaba Cloud Object Storage Service (OSS), [configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access) for your cluster.
 
 ## Step 4. Import CSV files
 
@@ -111,7 +111,7 @@ To import the CSV files to {{{ .starter }}} or {{{ .essential }}}, take the foll
     - **Source Files URI**:
         - When importing one file, enter the source file URI in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `s3://sampledata/ingest/TableName.01.csv`.
         - When importing multiple files, enter the source folder URI in the following format `s3://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
-    - **Credential**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+    - **Credential**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access).
         - **AWS Role ARN**: enter the AWS Role ARN value.
         - **AWS Access Key**: enter the AWS access key ID and AWS secret access key.
 
@@ -164,7 +164,7 @@ To import the CSV files to {{{ .starter }}} or {{{ .essential }}}, take the foll
     - **Source Files URI**:
         - When importing one file, enter the source file URI in the following format `[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `[gcs|gs]://sampledata/ingest/TableName.01.csv`.
         - When importing multiple files, enter the source folder URI in the following format `[gcs|gs]://[bucket_name]/[data_source_folder]/`. For example, `[gcs|gs]://sampledata/ingest/`.
-    - **Credential**: you can use a GCS IAM Role Service Account key to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
+    - **Credential**: you can use a GCS IAM Role Service Account key to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access).
 
 4. Click **Next**.
 
@@ -215,7 +215,7 @@ To import the CSV files to {{{ .starter }}} or {{{ .essential }}}, take the foll
     - **Source Files URI**:
         - When importing one file, enter the source file URI in the following format `[azure|https]://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `[azure|https]://sampledata/ingest/TableName.01.csv`.
         - When importing multiple files, enter the source folder URI in the following format `[azure|https]://[bucket_name]/[data_source_folder]/`. For example, `[azure|https]://sampledata/ingest/`.
-    - **Credential**: you can use a shared access signature (SAS) token to access your bucket. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+    - **Credential**: you can use a shared access signature (SAS) token to access your bucket. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access).
 
 4. Click **Next**.
 
@@ -266,7 +266,7 @@ To import the CSV files to {{{ .starter }}} or {{{ .essential }}}, take the foll
     - **Source Files URI**:
         - When importing one file, enter the source file URI in the following format `oss://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `oss://sampledata/ingest/TableName.01.csv`.
         - When importing multiple files, enter the source folder URI in the following format `oss://[bucket_name]/[data_source_folder]/`. For example, `oss://sampledata/ingest/`.
-    - **Credential**: you can use an AccessKey pair to access your bucket. For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
+    - **Credential**: you can use an AccessKey pair to access your bucket. For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access).
 
 4. Click **Next**.
 

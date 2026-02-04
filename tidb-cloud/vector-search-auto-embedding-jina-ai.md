@@ -9,11 +9,7 @@ This document describes how to use Jina AI embedding models with [Auto Embedding
 
 > **Note:**
 >
-> Currently, [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} clusters in the following AWS regions:
->
-> - `Frankfurt (eu-central-1)`
-> - `Oregon (us-west-2)`
-> - `N. Virginia (us-east-1)`
+> [Auto Embedding](/tidb-cloud/vector-search-auto-embedding-overview.md) is only available on {{{ .starter }}} clusters hosted on AWS.
 
 ## Available models
 
@@ -55,7 +51,7 @@ SET @@GLOBAL.TIDB_EXP_EMBED_JINA_AI_API_KEY = 'your-jina-ai-api-key-here';
 CREATE TABLE sample (
   `id`        INT,
   `content`   TEXT,
-  `embedding` VECTOR(1024) GENERATED ALWAYS AS (EMBED_TEXT(
+  `embedding` VECTOR(2048) GENERATED ALWAYS AS (EMBED_TEXT(
                 "jina_ai/jina-embeddings-v4",
                 `content`
               )) STORED

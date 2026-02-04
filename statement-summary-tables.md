@@ -17,7 +17,7 @@ Therefore, starting from v4.0.0-rc.1, TiDB provides system tables in `informatio
 
 > **Note:**
 >
-> The preceding tables are not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
+> The preceding tables are not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
 
 This document details these tables and introduces how to use them to troubleshoot SQL performance issues.
 
@@ -454,6 +454,11 @@ Fields related to Resource Control:
 - `AVG_QUEUED_RC_TIME`: the average waiting time for available RU when executing SQL statements.
 - `MAX_QUEUED_RC_TIME`: the maximum waiting time for available RU when executing SQL statements.
 - `RESOURCE_GROUP`: the resource group bound to SQL statements.
+
+Fields related to storage engines:
+
+- `STORAGE_KV`: introduced in v8.5.5, indicates whether the previous execution of SQL statements of this category read data from TiKV.
+- `STORAGE_MPP`: introduced in v8.5.5, indicates whether the previous execution of SQL statements of this category read data from TiFlash.
 
 ### `statements_summary_evicted` fields description
 
