@@ -14,8 +14,10 @@ This example demonstrates how to build an e-commerce product search app using Ti
 
 ## Prerequisites
 
-- **Python 3.10+**
-- **A TiDB Cloud Starter cluster** (Go to <https://tidbcloud.com/> to create a free cluster for quick testing)
+Before you begin, ensure you have the following:
+
+- **Python (>=3.10)**: Install [Python](https://www.python.org/downloads/) 3.10 or a later version.
+- **A TiDB Cloud Starter cluster**: You can create a free TiDB cluster on [TiDB Cloud](https://tidbcloud.com/free-trial).
 
 ## How to run
 

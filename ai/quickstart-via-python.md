@@ -10,7 +10,7 @@ In this guide, you will learn how to get started with [vector search](/ai/concep
 
 ## Prerequisites
 
-- Go to [tidbcloud.com](https://tidbcloud.com/) to create a TiDB Cloud Starter cluster for free or using [tiup playground](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb/#deploy-a-local-test-cluster) to a TiDB Self-Managed cluster for local testing.
+- Go to [tidbcloud.com](https://tidbcloud.com/) to create a TiDB Cloud Starter cluster for free or using [tiup playground](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb/#deploy-a-local-test-cluster) to deploy a TiDB Self-Managed cluster for local testing.
 
 ## Installation
 
